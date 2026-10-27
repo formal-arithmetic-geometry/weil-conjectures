@@ -17,9 +17,165 @@
   "def-per-prime-to-ell-alteration-topology",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Restrict to $a\\geq a_0$. Write $S_a=\\operatorname{Spec}R_a$ and $S=\\operatorname{Spec}R$, where $R=\\varinjlim R_a$. Every $R_a\\to R$ is flat: the later $R_b$ are flat $R_a$-modules and their ring colimit is their module colimit. Set $Q_a=Q(R_a)$ and $Q=Q(R)$. The ordinary etale total-fraction comparison gives $Q_b=Q_a\\otimes_{R_a}R_b$ for $b\\geq a$, and the ind-etale comparison gives $Q=Q_a\\otimes_{R_a}R$. Thus $Q=\\varinjlim Q_a$, and base changes of the given diagram to $\\operatorname{Spec}Q_a$ have limit the diagram over $Q$. The assertion about colimits follows directly from the tensor universal property (a compatible family of balanced bilinear maps is a balanced bilinear map on the colimit). These total rings are finite products of the residue fields of the component generic points. All the $V_{b,a}$ and $V_b$ are Noetherian, since they are finite type over Noetherian bases.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-filtered-colimit-flat-modules",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-sfb-etale-total-fraction-base-change",
+    "lem-per-ind-etale-total-fraction-comparison",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW/01YX; Algebra Tags 00U2, 05UT, 02LX; generic-base interpretation of ILO III 6.2"
+   }
+  },
+  {
+   "text": "Choose a finite affine open cover of each $V_{b,a_0}$, and write $C_a=C_0\\otimes_{R_{a_0}}R_a$ for one chart, $C=C_0\\otimes_{R_{a_0}}R$ for its limit. These charts cover every model. Let $N_0$ be the nilradical of $C_0$, finitely generated because $C_0$ is Noetherian. The map $\\operatorname{Spec}C_a\\to\\operatorname{Spec}C_0$ is etale. Its base change over $C_0/N_0$ is etale and has reduced source. Consequently $N_0C_a$ is exactly the nilradical of $C_a$: its elements are nilpotent, and its quotient is reduced. Every generator of $N_0$ maps to zero in $C$, since $V_b$ is reduced. The elementwise vanishing criterion in the ring colimit $C=\\varinjlim C_a$ kills all these finitely many generators at one stage. At that stage and every later stage $N_0C_a=0$, so every chart, hence every $V_{b,a}$, is reduced. This also treats a chart with empty limit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "etale-proposition-etale-reduced",
+    "def-weil-pbc-noetherian-ring",
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-weil-pbc-affine-scheme-reduced-iff"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U2, 00D6/00D7; Etale Tag 025O; Schemes Tag 01J2"
+   }
+  },
+  {
+   "text": "For each initial chart let $K_0=\\ker(C_0\\to C_0\\otimes_{R_{a_0}}Q_{a_0})$, a finitely generated ideal of the Noetherian ring $C_0$. Flat tensor exactness and Step 1 identify its extension to $C_a$ with $K_a=\\ker(C_a\\to C_a\\otimes_{R_a}Q_a)$, and its extension to $C$ with the analogous kernel $K$. The latter is zero: a nonzerodivisor of $R$ avoids every minimal prime of $R$, hence its image avoids every minimal prime of $C$, since $V_b/S$ is maximally dominant. As $C$ is reduced, that image is a nonzerodivisor. Localization therefore embeds $C$ into $C\\otimes_RQ$. Kill the finitely many fixed generators of $K_0$ at a common stage by the elementwise colimit vanishing criterion. Then $K_a=0$ at every later stage. Every minimal prime of $C_a$ lifts along the injection $C_a\\hookrightarrow C_a\\otimes_{R_a}Q_a$. Its contraction to $R_a$ is minimal, because $Q_a$ is the product of precisely the generic residue fields. Thus every component generic point of every $V_{b,a}$ maps to a component generic point of $S_a$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+    "def-weil-pbc-module-localization",
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-weil-pbc-injective-minimal-prime-lift",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00EW, 00FK, 02LX, 00D6/00D7; localization and flat tensor exactness"
+   }
+  },
+  {
+   "text": "By the generic-fibre finiteness criterion, $V_b\\times_S\\operatorname{Spec}Q$ is finite over $\\operatorname{Spec}Q$: on each of its finitely many field components this is the finite generic fibre of $V_b/S$. Apply finiteness descent to the system $\\operatorname{Spec}Q_a$ and the finite-presentation models $V_{b,a}\\times_{S_a}\\operatorname{Spec}Q_a$. After one common stage, every such model is finite over $Q_a$. All schemes here are qcqs: the bases are affine, and the models have finite presentation. Finiteness persists to every later stage, since a finite algebra remains a finite module after tensor base change. Combined with Steps 2 and 3, this proves that every $V_{b,a}/S_a$ is an object of $\\operatorname{alt}/S_a$: its generic points lie in these finite generic fibres, so their residue fields are finite over those of $S_a$.",
+   "uses": [
+    "lem-per-generic-fibre-finiteness-criterion",
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-weil-pbc-descend-finite",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01ZO (lemma-descend-finite-finite-presentation); ILO II 1.1.7 and 1.2.2"
+   }
+  },
+  {
+   "text": "Fix one specified maximally $\\ell'$-finite map. Over $Q$ write its target and source as $\\operatorname{Spec}E$ and $\\operatorname{Spec}D$. They are affine finite schemes by Step 4, reduced by the hypothesis, and thus finite products of finite field extensions of the field factors of $Q$. Indeed each field-factor algebra is finite-dimensional, hence Artinian, and reduced Artinian algebras are products of their residue fields. Write $1=\\sum_i e_i$ for the target primitive orthogonal idempotents, so $e_iE=L_i$ is a field. For each target factor in the image, choose a source field factor $h_iD=M_i$ above it with $d_i=[M_i:L_i]$ not divisible by $\\ell$, as the hypothesis permits. The corresponding idempotents satisfy $f^\\#(e_i)h_i=h_i$. If the target factor is outside the image, $f^\\#(e_i)=0$. These are actual idempotents of the finite generic algebras, not merely lifts modulo a nilradical. The field points here are precisely the component generic points: maximal dominance puts them over a generic point of the base and each resulting fibre is finite.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-sfb-reduced-artinian-residue-product",
+    "lem-weil-pbc-spec-finite-product-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.1.8, 1.1.10 and III 3.1(iii), generic finite-rank witnesses"
+   }
+  },
+  {
+   "text": "Let $E_a,D_a$ be the finite coordinate $Q_a$-algebras supplied by Step 4. They form scalar-base-change systems with colimits $E,D$. Lift the finitely many $e_i,h_i$ to one stage, imposing all equations $e_i^2=e_i$, $e_ie_j=0$ for $i\\ne j$, $\\sum e_i=1$, $h_i^2=h_i$, $f_a^\\#(e_i)h_i=h_i$, and $f_a^\\#(e_i)=0$ for the unhit factors, using finite-data descent, and then the elementwise vanishing criterion to impose the equations on the chosen lifts and the fixed map. They now define clopen target pieces $\\operatorname{Spec}(e_iE_a)$ and source pieces $\\operatorname{Spec}(h_iD_a)$ with the indicated maps. Apply fixed-degree finite-locally-free descent separately to each selected map. Its limit is $\\operatorname{Spec}M_i\\to\\operatorname{Spec}L_i$, finite locally free of degree $d_i$. The initial maps are locally of finite presentation: they are morphisms between finite algebras over the Noetherian ring $Q_a$. Their source and target are affine, hence qcqs. Thus after enlarging the stage all selected maps have degree $d_i$, while the unhit pieces still have empty inverse image. All these equations and ranks persist under further base change.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 06AC (lemma-descend-finite-locally-free), together with finite-data descent"
+   }
+  },
+  {
+   "text": "At any later stage let $t$ be a target component generic point in the image. It lies in one of the target pieces of Step 6; that piece cannot be an unhit one, since its entire inverse image is empty. The selected source piece has fibre over $t$ a reduced finite algebra of dimension $d_i$ over $\\kappa(t)$. Reducedness follows because this is a field factor restriction of the reduced finite generic algebra $D_a$: $E_a$ is a product of fields, so taking this fibre is selecting direct factors, without an additional field extension. Decompose that fibre into fields $F_j$ by the reduced Artinian product theorem. Then $d_i=\\sum_j[F_j:\\kappa(t)]$. Since the prime $\\ell$ does not divide $d_i$, it cannot divide every summand; choose one not divisible by $\\ell$. This gives the required source component generic point above $t$. Every source generic extension is finite: both source and target generic algebras are finite products of finite extensions of a common base field, and $\\kappa(t)$ is an intermediate field. This proves maximal $\\ell'$-finiteness at every later stage.",
+   "uses": [
+    "lem-sfb-reduced-artinian-residue-product",
+    "def-pc-finite-locally-free",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.1.8 and III 3.1(iii), prime-to-ell degree via a finite free generic witness"
+   }
+  },
+  {
+   "text": "There are finitely many initial charts, objects, specified maps, and selected generic factors. Directedness gives a single upper bound $a_1$ for their stages. Every construction above persists for $a\\geq a_1$, proving both assertions simultaneously. If $S$ is empty, the nonempty-limit lemma applied to the tail system shows that some $S_a$ is empty, and every later base and every model over it is empty; all assertions are then vacuous. If $S$ is nonempty but a source or target is empty, Step 4 and the finite equations in Step 6 allow zero algebras and empty factor lists, so the same argument applies. Quasi-excellence and invertibility of $\\ell$ are retained hypotheses; this finite-stage interface needs neither of them beyond the setting of the parent uniformization proof.",
+   "uses": [
+    "lem-weil-pbc-limit-nonempty"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01Z2 (lemma-limit-nonempty); finite directed upper bounds"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-sfb-etale-total-fraction-base-change",
+  "lem-per-ind-etale-total-fraction-comparison",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "etale-proposition-etale-reduced",
+  "def-weil-pbc-noetherian-ring",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-injective-minimal-prime-lift",
+  "lem-per-generic-fibre-finiteness-criterion",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-descend-finite",
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-limit-nonempty"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose III Proposition 6.2 first paragraph (pp.43-44), made explicit using the generic finite-rank method of III 3.1 (pp.37-38) and the cited Stacks limit lemmas; no close-section approximation is used."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +204,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: hits give ordinary morphism loci, scheme-limit maps, flatness or etale algebra descent; no marked regular-coordinate assertion or alteration-object/generic-degree descent assertion is stated, nor does one specialize in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "generically.?finite|maximally.*finite|alteration",
+   "results": "Hits:  (0 hits).",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale properties, local morphism loci and finite-presentation descent do not give the alteration-object and generic-degree assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduced generically finite schemes and residue extension degree descend at a finite stage of an ind etale limit",
+   "results": "Hits: AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsFinite.recOn, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, Algebra.IsGeometricallyReduced, AlgebraicGeometry.IsReduced.recOn, Algebra.QuasiFinite.instFiniteResidueField (8 hits).",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale properties, local morphism loci and finite-presentation descent do not give the alteration-object and generic-degree assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"IsReduced\"",
+   "results": "Hits:  (0 hits).",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale properties, local morphism loci and finite-presentation descent do not give the alteration-object and generic-degree assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Alteration objects and prime to ell generic degrees descend along affine etale inverse limits",
+   "results": "Hits: Algebra.etaleLocus, StandardEtalePair.HasMap.map, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.IsEtale.instFormallyUnramified (8 hits).",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale properties, local morphism loci and finite-presentation descent do not give the alteration-object and generic-degree assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite presentation descent along an inverse system with etale transition morphisms",
+   "results": "Hits: Algebra.Etale.finitePresentation, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.FormallyEtale.instForallOfFinite (8 hits).",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary etale properties, local morphism loci and finite-presentation descent do not give the alteration-object and generic-degree assertions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-henselian-regular-pair-spreading",
@@ -80,5 +271,103 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ind-etale-alteration-object-degree-descent",
+  "worker": "stage1",
+  "summary": "Proved finite-stage reducedness and maximal dominance on a fixed finite affine cover by killing finitely generated nilradical and generic-localization kernels. Descended finiteness over total quotient rings, then idempotents and selected finite-free generic witnesses of degree prime to ell. One new statement-only ind-etale total-fraction comparison; all other facts reuse existing nodes. Statement and hypotheses retained.",
+  "blueprint": "Ancestor Step 3 (duality/finiteness), through ILO III Proposition 6.2 first paragraph: alteration objects and generic degree in etale-neighborhood spreading. Steps 1-4 supply the object interface; Steps 5-7 the prime-to-ell interface; Step 8 finite synchronization and empty cases.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 1; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 1, 2, 3, 6; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-flat-modules",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 1; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-sfb-etale-total-fraction-base-change",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 1; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 1, 3; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "etale-proposition-etale-reduced",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 2; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 2, 3, 6; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 4, 5; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 4; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite-locally-free",
+    "why": "Generic commutative-algebra or affine-limit tool, used for 6; it supplies the precise statement quoted in citations.json, with no replacement for a step of the perverse unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "lem-sfb-etale-total-fraction-base-change",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "etale-proposition-etale-reduced",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-descend-finite",
+  "lem-weil-pbc-descend-finite-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-63cb8a67b",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-63cb8a67b (reviewer sub-agent of L); spot-checked: PASS: the delivery is correct and both mechanical findings are justified; no fixes. The item statement is unchanged, so the target is not weakened. I checked it against ILO II 1.1.7, II 1.1.8 (the good-degree point is required only over target points in the image), III 3.1 pp.37-38 and III 6.2 pp.43-44 ('passage à la limite'). Steps 1-8 are correct. Step 1: R_a→R is flat (05UT), Q_b=Q_a⊗R_b by the étale total-fraction node, Q=Q_a⊗R by the new node. Step 2: the nilradical N_0 is finitely generated; étale base change over C_0/N_0 has reduced source (02GO, 025O), and the generators die at one stage. Step 3: flat exactness gives K_a=K_0C_a; K=0 by 00EW plus maximal dominance; generic points then map to generic points by 00FK and 02LX. Step 4: the generic-fibre criterion, then 01ZO over the system Spec Q_a (qcqs and lft checked). Steps 5-7: idempotents carry their equations; 06AC degree d_i with lfp because finite algebras over Noetherian Q_a are finitely presented; fibres are reduced as direct factors, so some field factor has degree prime to ℓ. Step 8: 01Z2 handles empty S. New node lem-per-ind-etale-total-fraction-comparison is true by my own proof: T_A^{-1}B is a colimit of finite products of finite separable field extensions, hence reduced and zero-dimensional; its primes are exactly the minimal primes of B, so T_B is already invertible. I tested it on A=B, A→0, k[x]→k(x), an infinite separable algebraic extension and a killed factor. It is not a duplicate: the étale case is lem-sfb-etale-total-fraction-base-change and the domain case is lem-dl-a1-ind-etale-domain-generic-field. Batch-5 finding: lem-trf-finite-residue-point-closed-in-fibre is the generic fact that a point with finite residue extension is closed in its fibre, not a step of the trace formula or Poincaré duality proofs. BFS shows lem-per-generic-fibre-finiteness-criterion already lies in the nt-target-weil-conjectures closure without the item's edges (via lem-sfb-equivariant-projective-model-normalization … det-thm-sf-ctf-stability-direct-images), so the citation adds no new reach. Dropped-route finding: the item and the criterion are both on the 2026-10-19 drop list and both are now re-reached through the sfb ctf-stability Gabber chain, so nothing is revived. Neither is reached from lem-per-artin-gabber-affine-curve, whose finite-coefficient route lock is untouched. All ten split_report tool_uses are generic algebra or limit tools and are accepted. Maintainer note: blueprint.from.via on the item and the new node still lists lem-per-henselian-regular-pair-spreading and lem-per-qbar-arbitrary-field-duality, which are off the current path (metadata only)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleAlterationObjectDegreeDescent",
+  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.exists_alteration_object_degree_stage",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleAlterationObjectDegreeDescent.lean",
+  "statement": "theorem exists_alteration_object_degree_stage {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ a : Iᵒᵖ, IsAffine (D.obj a)] [∀ a : Iᵒᵖ, IsNoetherian (D.obj a)] [∀ a : Iᵒᵖ, IsReduced (D.obj a)] [∀ {a b : Iᵒᵖ} (g : a ⟶ b), IsAffineHom (D.map g)] [∀ {a b : Iᵒᵖ} (g : a ⟶ b), Etale (D.map g)] (c : Cone D) (_hc : IsLimit c) [IsReduced c.pt] [IsNoetherian c.pt] (_hqe : ∀ a : I, IsQuasiExcellent Γ(D.obj (op a), ⊤)) (a₀ : I) (ell : ℕ) [Fact ell.Prime] (_hell : IsUnit (ell : Γ(D.obj (op a₀), ⊤))) (n m : ℕ) (V : Fin n → Over (D.obj (op a₀))) [∀ b : Fin n, LocallyOfFinitePresentation (V b).hom] [∀ b : Fin n, QuasiCompact (V b).hom] [∀ b : Fin n, QuasiSeparated (V b).hom] (s t : Fin m → Fin n) (f : ∀ j : Fin m, V (s j) ⟶ V (t j)) (_hV : ∀ b : Fin n, ∃ T : Alt c.pt, T.obj = (Over.pullback (c.π.app (op a₀))).obj (V b)) : ∃ (a₁ : I) (_ha₁ : a₀ ≤ a₁), ∀ (a : I) (ha : a₁ ≤ a), (∀ b : Fin n, ∃ T : Alt (D.obj (op a)), T.obj = (Over.pullback (D.map (homOfLE (_ha₁.trans ha)).op)).obj (V b)) ∧ (∀ j : Fin m, IsMaximallyPrimeToEllFinite ell (((Over.pullback (c.π.app (op a₀))).map (f j)).left) → IsMaximallyPrimeToEllFinite ell (((Over.pullback (D.map (homOfLE (_ha₁.trans ha)).op)).map (f j)).left))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75c435eec",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, PrimeToEllAlterationTopology (Alt, IsMaximallyPrimeToEllFinite), ExcellentRing IsQuasiExcellent, Mathlib residueDegree. Clause by clause: directed nonempty I, D : Iᵒᵖ ⥤ Scheme with IsAffine/IsNoetherian/IsReduced stages and IsAffineHom+Etale transitions, limit cone with IsReduced/IsNoetherian point, quasi-excellence of Γ, ℓ prime with IsUnit on Γ(S_a₀), V_b finitely presented (lfp+qc+qs) in Over S_a₀, morphisms f j in Over, models via Over.pullback with correct op direction, Alt-membership via whole Over-object equality, ∃a₁≥a₀ ∀a≥a₁ object conjunct ∧ per-arrow maximally ℓ'-finite implication — all match, nothing stronger. Edge cases (n=m=0, empty objects/limit, a₁=a₀, residueDegree 0) covered. Node differs from live only in lean field; statement verbatim; docstrings with source/blueprint and 8 proof steps; single sorry; no new defs or dep changes; imports exist. No recompile (no file changed); worker compile clean. No findings."
+ }
 }

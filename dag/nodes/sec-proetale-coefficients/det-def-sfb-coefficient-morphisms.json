@@ -1,0 +1,178 @@
+{
+ "id": "det-def-sfb-coefficient-morphisms",
+ "kind": "definition",
+ "title": "The canonical coefficient morphisms $\\alpha_f$, $\\eta_f$",
+ "statement": "Let $\\Lambda$ be a condensed ring, let $f\\colon X\\to Y$ be a morphism of\nschemes, and let $\\Lambda_X$, $\\Lambda_Y$ be the pulled-back coefficient rings\nof [det-def-sfb-pulled-back-coefficients]. The pullback\n$f^*\\Lambda_Y$ and the pushforward $f_*\\Lambda_X$ are ring objects: $f^*$ is\nstrong monoidal ([def-sfb-finite-upper-star-monoidal]) and $f_*$ is lax monoidal\n([def-sfb-finite-lower-star-lax-monoidal]). Define\n$$\n\\alpha_f\\colon f^*\\Lambda_Y\\longrightarrow\\Lambda_X,\\qquad\n\\eta_f\\colon\\Lambda_Y\\longrightarrow f_*\\Lambda_X\n$$\nas follows.\n\n- $\\alpha_f$ is the component at $\\Lambda$ of the natural isomorphism\n  $f^*\\circ p_Y^*\\cong p_X^*$ of [det-def-sfb-pullback-from-point-comp].\n- $\\eta_f$ is the mate of $\\alpha_f$ under the adjunction $f^*\\dashv f_*$\n  ([def-sfb-finite-upper-lower-star-adjunction]): the\n  unit $\\Lambda_Y\\to f_*f^*\\Lambda_Y$ followed by $f_*\\alpha_f$.\n\nBoth are morphisms of ring objects. Moreover, $\\alpha_f$ underlies an\nisomorphism of ring objects $f^*\\Lambda_Y\\cong\\Lambda_X$.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/det-def-sfb-coefficient-morphisms.md",
+  "place": "node det-def-sfb-coefficient-morphisms, order 1256"
+ },
+ "stmt_deps": [
+  "det-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "det-def-sfb-pullback-from-point-comp",
+  "def-sfb-finite-upper-lower-star-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "By [det-def-sfb-pulled-back-coefficients], $\\Lambda_X=p_X^*\\Lambda$ with $p_X^*=\\pi_X^*\\circ p^*$ of [det-def-sfb-pullback-from-point], part 4, and $p^*=\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}$ of part 3. This is literally the functor $p_X^*$ of [def-sfb-upper-star-from-point], whose $p^*$ is the same composite ([def-sfb-point-upper-star]) and whose $\\pi_X^*$ is the same pullback of [def-sfb-finite-upper-star]. The ring structure of $\\Lambda_X$ in [det-def-sfb-pulled-back-coefficients] is the transport $\\mu_X=p_X^*(\\mu)\\circ\\mu^{p_X^*}_{\\Lambda,\\Lambda}$, $\\eta_X=p_X^*(\\eta)\\circ\\varepsilon^{p_X^*}$ of clause 1 of [det-def-sfb-ring-object-transport], word for word the ring object $\\Lambda_X$ of [sk-def-sfb-pulled-back-coefficients] used in the statements of the cited child nodes. Likewise the ring structures on $f^*\\Lambda_Y$ and $f_*\\Lambda_X$ named in the statement are those of clause 1 of [det-def-sfb-ring-object-transport] for $F=f^*$ with the strong structure of [def-sfb-finite-upper-star-monoidal] and $F=f_*$ with the lax structure of [def-sfb-finite-lower-star-lax-monoidal], specialized to $\\mathcal A=\\Ab$.",
+   "uses": [
+    "det-def-sfb-pulled-back-coefficients",
+    "det-def-sfb-pullback-from-point",
+    "def-sfb-upper-star-from-point",
+    "def-sfb-point-upper-star",
+    "def-sfb-finite-upper-star",
+    "det-def-sfb-ring-object-transport",
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-finite-lower-star-lax-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/det-def-sfb-coefficient-morphisms.proof.md",
+    "place": "complete proof paragraph"
+   }
+  },
+  {
+   "text": "The comparison $c_f\\colon f^*\\circ p_Y^*\\cong p_X^*$ of [det-def-sfb-pullback-from-point-comp] is, by its statement, $p^*$ composed with the inverse of the composition isomorphism $(\\pi_Y\\circ f)^*\\cong f^*\\circ\\pi_Y^*$ of [def-sfb-finite-upper-star-comp], followed by the identification $(\\pi_Y\\circ f)^*=\\pi_X^*$. By step 1 the functors $p^*$, $p_X^*$, $p_Y^*$ are those of [def-sfb-pullback-from-point-comp-iso], whose statement defines its natural isomorphism by exactly this composite. So $c_f$ is the isomorphism of [def-sfb-pullback-from-point-comp-iso], and [def-sfb-alpha] says that its component at $\\Lambda$ is $\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$. [lem-sfb-alpha-ring-hom] says that $\\alpha_f$ is a morphism of ring objects for the ring structure on $f^*\\Lambda_Y$ transported along $f^*$ fixed in step 1.",
+   "uses": [
+    "det-def-sfb-pullback-from-point-comp",
+    "def-sfb-finite-upper-star-comp",
+    "def-sfb-pullback-from-point-comp-iso",
+    "def-sfb-alpha",
+    "lem-sfb-alpha-ring-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/det-def-sfb-coefficient-morphisms.proof.md",
+    "place": "complete proof paragraph"
+   }
+  },
+  {
+   "text": "[def-sfb-alpha-bundled] gives an isomorphism of ring objects $f^*\\Lambda_Y\\cong\\Lambda_X$, the composite of the identification of $f^*$ applied to the ring object $p_Y^*\\Lambda$ with the ring object $(f^*\\circ p_Y^*)\\Lambda$, followed by the component $c_f(\\Lambda)$ of step 2. Write $F=p_Y^*$ and $G=f^*$. By the definition of the composite lax monoidal structure, both transported multiplications are $GF(\\mu)\\circ G(\\mu^F_{\\Lambda,\\Lambda})\\circ\\mu^G_{F\\Lambda,F\\Lambda}$ and both units are $GF(\\eta)\\circ G(\\varepsilon^F)\\circ\\varepsilon^G$, so the first identification has underlying map $\\mathrm{id}_{GF\\Lambda}$. Hence the underlying morphism of the bundled isomorphism is $c_f(\\Lambda)=\\alpha_f$: $\\alpha_f$ underlies an isomorphism of ring objects.",
+   "uses": [
+    "def-sfb-alpha-bundled"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/det-def-sfb-coefficient-morphisms.proof.md",
+    "place": "complete proof paragraph"
+   }
+  },
+  {
+   "text": "Let $u\\colon\\mathrm{id}\\to f_*f^*$ be the unit of the adjunction of [def-sfb-finite-upper-lower-star-adjunction] for $\\mathcal A=\\Ab$. [def-sfb-eta] defines $\\eta_f=f_*(\\alpha_f)\\circ u_{\\Lambda_Y}\\colon\\Lambda_Y\\to f_*\\Lambda_X$, the mate of $\\alpha_f$, with $\\alpha_f$ as in step 2; this is the map of the statement. [lem-sfb-eta-ring-hom] says that $\\eta_f$ is a morphism of ring objects for the ring structure on $f_*\\Lambda_X$ induced by the lax structure of $f_*$, which is the structure fixed in step 1.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "def-sfb-eta",
+    "lem-sfb-eta-ring-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/det-def-sfb-coefficient-morphisms.proof.md",
+    "place": "complete proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-pulled-back-coefficients",
+  "det-def-sfb-pullback-from-point",
+  "def-sfb-upper-star-from-point",
+  "def-sfb-point-upper-star",
+  "def-sfb-finite-upper-star",
+  "det-def-sfb-ring-object-transport",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "det-def-sfb-pullback-from-point-comp",
+  "def-sfb-finite-upper-star-comp",
+  "def-sfb-pullback-from-point-comp-iso",
+  "def-sfb-alpha",
+  "lem-sfb-alpha-ring-hom",
+  "def-sfb-alpha-bundled",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-eta",
+  "lem-sfb-eta-ring-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/det-def-sfb-coefficient-morphisms.proof.md",
+  "place": "complete proof paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'def mapMonCompIso\\|def mapMonNatIso\\|class IsMonHom' Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "results": "Mathlib.CategoryTheory.Monoidal.Mon: class IsMonHom (line 213), Functor.mapMonCompIso (line 898), Functor.mapMonNatIso (line 917)",
+   "date": "2026-10-26",
+   "verdict": "no match (generic monoid-object API only; no pro-étale coefficient morphisms)"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rln 'ProEt\\|proetale\\|ProEtale' Mathlib; then grep 'upperStar\\|MonObj\\|mapMon' in the hits",
+   "results": "Mathlib.AlgebraicGeometry.Sites.Proetale, Mathlib.AlgebraicGeometry.Sites.ElladicCohomology: site and topology only; no pullback functors or ring objects",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1256,
+ "blueprint_uses": [
+  "det-def-sfb-pullback-from-point-comp",
+  "det-def-sfb-pulled-back-coefficients",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-lower-star-lax-monoidal",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-alpha",
+  "lem-sfb-alpha-ring-hom",
+  "def-sfb-alpha-bundled",
+  "def-sfb-eta",
+  "lem-sfb-eta-ring-hom"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProEtale.condensedPullbackHom",
+  "AlgebraicGeometry.ProEtale.isMonHom_condensedPullbackHom",
+  "AlgebraicGeometry.ProEtale.coefficientPullbackIso",
+  "AlgebraicGeometry.ProEtale.condensedPushforwardHom",
+  "AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.ProEtale.condensedPullbackHom",
+  "AlgebraicGeometry.ProEtale.isMonHom_condensedPullbackHom",
+  "AlgebraicGeometry.ProEtale.coefficientPullbackIso",
+  "AlgebraicGeometry.ProEtale.condensedPushforwardHom",
+  "AlgebraicGeometry.ProEtale.isMonHom_condensedPushforwardHom"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-def-sfb-coefficient-morphisms",
+  "from": null,
+  "same_as": [
+   "sk-def-sfb-coefficient-morphisms"
+  ]
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "det-def-sfb-coefficient-morphisms",
+  "worker": "stage1",
+  "summary": "Rebuilt the imported coefficient-morphism definition as a one-step stage-1 split using the five existing child nodes from the current DAG. The definitions of alpha and eta, the bundled alpha isomorphism, and both ring-morphism assertions are each supplied by those existing statements; no new node is needed. The previous attachment proposal was not reused because its declarations were rejected by the assigned upstream checker. Maintainer review FIX (2026-10-26): the one-step proof was expanded into four steps that identify the det- coefficients and comparison with the def-/sk- nodes over which the child statements are written, check that the bundled isomorphism has underlying map alpha_f, and fix the transported ring structures; same_as set to sk-def-sfb-coefficient-morphisms; Mathlib grep searches recorded.",
+  "blueprint": "Steps 2-4 realize the complete proof paragraph of the main-20261023-1620 blueprint node (alpha = def-sfb-alpha, ring morphism by lem-sfb-alpha-ring-hom; bundled isomorphism def-sfb-alpha-bundled; eta = def-sfb-eta, ring morphism by lem-sfb-eta-ring-hom); step 1 makes explicit the statement's first sentence (transported ring structures and the identification of the det- coefficients with those of the cited nodes)."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NS-be3a8eb2d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-be3a8eb2d (reviewer sub-agent of L); spot-checked: I read the whole item and the five cited child nodes (def-sfb-alpha, lem-sfb-alpha-ring-hom, def-sfb-alpha-bundled, def-sfb-eta, lem-sfb-eta-ring-hom). The statement and stmt_deps match the main-20261023-1620 blueprint word for word (latest = main-20261026 is the same), and nothing is weakened. The mathematics is correct: alpha_f is the component at Λ of a monoidal natural isomorphism, so it is a ring isomorphism; eta_f is the mate of a ring morphism under a monoidal adjunction, so it is a ring morphism. The degenerate cases (identity f, empty X) are fine. There are no new nodes. I found three small repairable faults and fixed all three in fixes/dag/nodes/sec-proetale-coefficients/det-def-sfb-coefficient-morphisms.json. (1) The item has blueprint.same_as null, but sk-def-sfb-coefficient-morphisms states the same thing with sk- references; the sibling det- nodes all carry their sk- twin in same_as (B9). It is now [\"sk-def-sfb-coefficient-morphisms\"]. (2) The single proof step does not connect the item's own definitions to the nodes it cites. The item defines alpha through det-def-sfb-pullback-from-point-comp and det-def-sfb-pulled-back-coefficients, while the children are stated over def-sfb-pullback-from-point-comp-iso and sk-def-sfb-pulled-back-coefficients. Also, the statement of def-sfb-alpha-bundled is a composite 'identification then c_f(Λ)' and does not itself say that its underlying map is alpha_f. I rewrote the proof as four steps: (i) p_X^* of det-def-sfb-pullback-from-point is the same functor as in def-sfb-upper-star-from-point and def-sfb-point-upper-star, and every ring structure comes from clause 1 of det-def-sfb-ring-object-transport, so the item's Λ_X is the Λ_X of sk-def-sfb-pulled-back-coefficients; (ii) the statement of det-def-sfb-pullback-from-point-comp gives the same composite as def-sfb-pullback-from-point-comp-iso, so def-sfb-alpha and lem-sfb-alpha-ring-hom apply; (iii) def-sfb-alpha-bundled, plus a computation with the composite lax structure showing the first identification is the identity, so its underlying map is alpha_f; (iv) the unit of def-sfb-finite-upper-lower-star-adjunction, then def-sfb-eta and lem-sfb-eta-ring-hom. proof_deps is the union of these uses; all exist and no node depends on the item, so there is no cycle. (3) mathlib_searches was empty, and the citations.json/searches.jsonl named in the report are not in the commit. I recorded two greps I ran on the pinned Mathlib: Mon.lean (IsMonHom line 213, mapMonCompIso line 898, mapMonNatIso line 917) and Sites/Proetale.lean / ElladicCohomology.lean. They found only the general monoid-object API and the site itself: no match. The route stays in sec-proetale-coefficients, uses no SGA, and needs no tool_uses.; 1 file(s) fixed by the reviewer"
+ }
+}

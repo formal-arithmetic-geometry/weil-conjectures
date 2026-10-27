@@ -1,0 +1,249 @@
+{
+ "id": "lem-trf-finite-colength-completion-comparison",
+ "kind": "statement",
+ "title": "Canonical completion comparison for finite-colength algebra inclusions",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], meaning that $\\mathfrak m$ is its unique maximal ideal. Let $f:A\\hookrightarrow C$ be an injective homomorphism of commutative rings making $C$ a finite $A$-module [def-weil-finitely-generated-module]. Write $M=C/f(A)$ for the quotient as an $A$-module and assume it has a finite filtration of length $r\\ge0$ with simple successive quotients (nonzero modules with no proper nonzero submodule). Write the completions [def-weil-pbc-adic-completion] as\n$$\\widehat A=\\varprojlim_n A/\\mathfrak m^n,\\qquad\\widehat C=\\varprojlim_n C/\\mathfrak m^nC,\\qquad\\widehat M=\\varprojlim_n M/\\mathfrak m^nM.$$\nLet $\\iota_A,\\iota_C,\\iota_M$ be the natural completion maps and $\\widehat f:\\widehat A\\to\\widehat C$ the map induced by $f$. Then $\\mathfrak m^rM=0$, the tower defining $\\widehat M$ is constant with identity transition maps from stage $r$ onwards, and $\\iota_M:M\\to\\widehat M$ is an $A$-linear isomorphism. The map $\\widehat f$ is injective and the completed quotient map gives a short exact sequence of $A$-modules\n$$0\\longrightarrow\\widehat A\\xrightarrow{\\widehat f}\\widehat C\\longrightarrow\\widehat M\\longrightarrow0.$$\nThe canonical map\n$$M\\longrightarrow\\widehat C/\\widehat f(\\widehat A),\\qquad c+f(A)\\longmapsto\\iota_C(c)+\\widehat f(\\widehat A)$$\nis an $A$-linear isomorphism, whose composite with the quotient isomorphism $\\widehat C/\\widehat f(\\widehat A)\\to\\widehat M$ equals $\\iota_M$. Here both quotients are module quotients, not quotients by ideals. With tensor products denoting extension of scalars [def-weil-module-base-change], the canonical map\n$$\\widehat A\\otimes_A C\\longrightarrow\\widehat C,\\qquad a\\otimes c\\longmapsto\\widehat f(a)\\iota_C(c)$$\nis an isomorphism of $\\widehat A$-algebras; its composite with the tensor flip identifies $C\\otimes_A\\widehat A$ with the same algebra, and these maps respect the displayed structural inclusion of $\\widehat A$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (7) and (9), finite-module completion and finite-length quotient arguments in the proof; algebra.tex lemma-completion-tensor and lemma-completion-flat give the general finite-module completion inputs."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-adic-completion",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For any simple $A$-module $S$, choose $0\\ne s\\in S$. Simplicity gives $As=S$. The ideal $J=\\{a\\in A:as=0\\}$ is proper. If $a\\notin J$, then $as\\ne0$, so $A(as)=S$; hence $s=bas$ for some $b\\in A$ and $1-ba\\in J$. Thus every nonzero class in $A/J$ is invertible, $J$ is maximal, and locality forces $J=\\mathfrak m$. As $s$ generates $S$, $\\mathfrak mS=0$. This uses only the stated meaning of simplicity and locality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), part (9): elementary finite-length input made explicit"
+   }
+  },
+  {
+   "text": "Write the assumed filtration as $0=M_0\\subset M_1\\subset\\cdots\\subset M_r=M$. Step 1 applied to $M_i/M_{i-1}$ gives $\\mathfrak mM_i\\subseteq M_{i-1}$. Repeating these inclusions gives $\\mathfrak m^jM_r\\subseteq M_{r-j}$ for $0\\le j\\le r$, and in particular $\\mathfrak m^rM=0$. For $r=0$ the filtration already says $M=0$, and the same formula holds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), part (9): filtration argument for its finite-length quotient"
+   }
+  },
+  {
+   "text": "Consequently $\\mathfrak m^nM=0$ for $n\\ge r$, so the canonical identifications $M/\\mathfrak m^nM=M$ turn every transition in this tail into the identity. A compatible family is uniquely determined by its coordinate at $N=\\max(1,r)$: its later coordinates equal this element of $M$, and each earlier coordinate is its reduction. Conversely the reductions of any $x\\in M$ form this family. Evaluation at $N$ is therefore the $A$-linear inverse to $\\iota_M$. This also treats $r=0$, when all coordinates are zero. The compatible-family convention is that of [def-weil-pbc-adic-completion], extended to the displayed module quotients.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M9 (section-completion), definition by compatible families; finite-length application of Tag 0C1R (lemma-prepare-delta-invariant), part (9)"
+   }
+  },
+  {
+   "text": "Let $q:C\\to M$ be the module quotient map. The sequence $0\\to A\\xrightarrow{f}C\\xrightarrow{q}M\\to0$ is exact by injectivity of $f$ and the definition of $M$. All three modules are finite: $1$ generates $A$, the hypothesis gives generators of $C$, and their images generate $M$ [def-weil-finitely-generated-module]. Apply [lem-weil-pbc-completion-exact-finite-modules] with $I=\\mathfrak m$. Its Noetherian and finiteness hypotheses hold, and its coordinatewise maps are precisely $\\widehat f$ and $\\widehat q$. It gives injectivity of $\\widehat f$, surjectivity of $\\widehat q$, and $\\ker\\widehat q=\\widehat f(\\widehat A)$, hence the asserted short exact sequence.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), part (2); Tag 00MB (lemma-completion-flat), part (2)"
+   }
+  },
+  {
+   "text": "Put $H=\\widehat f(\\widehat A)$. Step 4 makes $\\beta:\\widehat C/H\\to\\widehat M$, $z+H\\mapsto\\widehat q(z)$, bijective: surjectivity follows from that of $\\widehat q$, and a zero value means exactly $z\\in H$. Define $\\alpha:M\\to\\widehat C/H$ by the formula in the statement. It is well-defined because replacing $c$ by $c+f(a)$ changes $\\iota_C(c)$ by $\\widehat f(\\iota_A(a))\\in H$. Both maps are $A$-linear, and at every coordinate $\\widehat q(\\iota_C(c))=\\iota_M(q(c))$. Thus $\\beta\\alpha=\\iota_M$; since $\\beta$ and $\\iota_M$ are bijective, $\\alpha$ is bijective. These are additive module quotients; no assertion that $f(A)$ or $H$ is an ideal is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), part (9), with canonical maps checked using the compatible-family definitions"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-completion-finite-module-tensor] to $I=\\mathfrak m$ and the finite $A$-module $P=C$. It gives the bijective $\\widehat A$-linear map $T:\\widehat A\\otimes_A C\\to\\widehat C$, $a\\otimes c\\mapsto a\\cdot\\iota_C(c)$. At coordinate $n$ the scalar action is multiplication by $f(a_n)$ in $C/\\mathfrak m^nC$, so $a\\cdot\\iota_C(c)=\\widehat f(a)\\iota_C(c)$. The tensor product here uses extension of scalars [def-weil-module-base-change].",
+   "uses": [
+    "lem-weil-pbc-completion-finite-module-tensor",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), part (3); Tag 0C3V (lemma-normalization-same-after-completion), completion paragraph"
+   }
+  },
+  {
+   "text": "Coordinatewise multiplication makes $\\widehat f$ and $\\iota_C$ ring maps. On pure tensors,\n$$T((a\\otimes c)(b\\otimes d))=\\widehat f(ab)\\iota_C(cd)=T(a\\otimes c)T(b\\otimes d).$$\nDistributing finite sums of pure tensors proves multiplicativity for arbitrary elements. Also $T(1\\otimes1)=1$ and $T(a\\otimes1)=\\widehat f(a)$, proving that the bijective map of step 6 is an isomorphism of $\\widehat A$-algebras with exactly the required structural map. The tensor flip sends $c\\otimes a$ to $a\\otimes c$; its inverse interchanges the factors again, and the pure-tensor product formula shows that both maps preserve multiplication and the $\\widehat A$-structure. Its composite with $T$ therefore gives the stated comparison for $C\\otimes_A\\widehat A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00MA (lemma-completion-tensor), part (3): elementary multiplicativity and tensor-flip check for finite algebras"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0C1R (lemma-prepare-delta-invariant), part (9), and 0C3V (lemma-normalization-same-after-completion), completion paragraph; expanded finite-length and canonical-map arguments, using algebra.tex Tags 00MA and 00MB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an injective finite algebra over a Noetherian local ring with finite length quotient completion preserves the quotient by the base ring and is canonically tensor base change as an algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] {f : M →ₗ[R] N} [Module.Finite R M]\\n  [Module.Finite R N],\\n  Function.Injective ⇑f → Function.Injective ⇑(\", \"doc\": \"Given an injective linear map $ f : M \\\\to N $, the induced linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{R}_I \\\\otimes_R N $ (where $ \\\\widehat{R}_I $ denotes the $ I $-adic completion of $ R $) i\"}\n  {\"name\": \"fg_of_fg_of_fg\", \"module\": \"Mathlib/RingTheory/Adjoin/Tower\", \"type\": \"∀ (A : Type w) (B : Type u₁) (C : Type u_1) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : CommRing C]\\n  [inst_3 : Algebra A B] [inst_4 : Algebra B C] [inst_5 : Algebra A C] [IsScalarTower A B C] [IsNoetherianRing A],\\n  ⊤.FG → ⊤.FG → Function.Injective ⇑(algebraMap B C) → ⊤.FG\", \"doc\": \"Let $ A $ be a Noetherian ring, and consider a tower of algebras $ A \\to B \\to C $. If the top subalgebra of $ A $ in $ C $ is finitely generated, the top submodule of $ B $ in $ C $ is finitely generat\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"algebra_finiteType_of_liesOver\", \"module\": \"Mathlib/RingTheory/Finiteness/Quotient\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] (P : Ideal B)\\n  (p : Ideal A) [inst_3 : P.LiesOver p] [Algebra.FiniteType A B], Algebra.FiniteType (A ⧸ p) (B ⧸ P)\", \"doc\": \"If $ B $ is a finitely generated $ A $-algebra and $ P $ is an ideal in $ B $ lying over an ideal $ p $ in $ A $, then the quotient ring $ B/P $ is a finitely generated algebra over the quotient ring \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N},\\n  Function.Injective ⇑f → Function.Injective ⇑(AdicCompletion.map I f\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"} Read Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:320-349 and Exactness.lean:92-94,180-187. The tensor equivalence is linear; map_exact and map_injective supply completion exactness. None states the canonical finite-colength quotient comparison or the finite-length nilpotence and constant-tail comparison; several additional arguments are required.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If A embeds in a finite A algebra C and C modulo A has finite length over the Noetherian local ring A then the natural map C modulo A to C completion modulo A completion is an isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofAlgEquiv_symm_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"(x : S) : (ofAlgEquiv I).symm (of I S x) = x\", \"doc\": \"For a commutative ring $ S $, an ideal $ I $, and assuming $ S $ is $ I $-adically complete, applying the inverse of the $ S $-algebra equivalence between $ S $ and its $ I $-adic completion $ \\\\varpro\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"(x : S) : ofAlgEquiv I x = of I S x\", \"doc\": \"For a commutative ring $ S $ and an ideal $ I $, if $ S $ is $ I $-adically complete, then the canonical $ S $-algebra homomorphism from $ S $ to its $ I $-adic completion $ \\\\varprojlim S/I^nS $ is an\"}\n  {\"name\": \"AdicCompletion.of_surjective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"[IsPrecomplete I M] : Function.Surjective (of I M)\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is surjective if $ M $ is precomplete with respect to the ideal $ I $.\"}\n  {\"name\": \"AdicCompletion.map_injective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Exactness\", \"type\": \"{f : M →ₗ[R] N} (hf : Function.Injective f) : Function.Injective (map I f)\", \"doc\": \"If $ f : M \\\\to N $ is an injective $ R $-linear map between $ R $-modules, then the induced map between the $ I $-adic completions of $ M $ and $ N $ is also injective, where $ R $ is a commutative ri\"}\n  {\"name\": \"AdicCompletion.of_injective_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Injective (of I M) ↔ IsHausdorff I M\", \"doc\": \"The canonical linear map from an $ R $-module $ M $ to its $ I $-adic completion is injective if and only if the Hausdorff condition holds for $ M $ with respect to the ideal $ I $, i.e., the intersec\"}\n  {\"name\": \"AdicCompletion.mkₐ\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion.AdicCauchySequence I R →ₐ[R] AdicCompletion I R\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, this constructs the canonical $ S $-algebra homomorphism from $ R $ to its $ I $-adic complet\"}\n  {\"name\": \"AdicCompletion.of_surjective_iff\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \": Function.Surjective (of I M) ↔ IsPrecomplete I M\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is surjective if and only if $ M $ is precomplete with respect to the ideal $ I $.\"}\n  {\"name\": \"AdicCompletion.map_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Functoriality\", \"type\": \"(f : M →ₗ[R] N) (x : M) : map I f (of I M x) = of I N (f x)\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $ and element $ x \\\\in M $, the image of $ x $ under the canonical linear map from $ M $ to its $ I $-adic completion, followed by the induced linear map between \"} Read Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:320-349 and Exactness.lean:92-94,180-187. The tensor equivalence is linear; map_exact and map_injective supply completion exactness. None states the canonical finite-colength quotient comparison or the finite-length nilpotence and constant-tail comparison; several additional arguments are required.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"quotient\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_3} [AddCommGroup M] [Module R M] : SMul (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"Scalar multiplication of `R ⧸ (I • ⊤)` on `M ⧸ (I • ⊤)`. This is used in order to have\\ngood definitional behaviour for the module instance on adic completions\"}\n  {\"name\": \"AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_3} [AddCommGroup M] [Module R M] : Module (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) {M : Type u_3} [AddCommGroup M] [Module R M] : IsScalarTower R (R ⧸ I • ⊤) (M ⧸ I • ⊤)\", \"doc\": \"\"} Read Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:320-349 and Exactness.lean:92-94,180-187. The tensor equivalence is linear; map_exact and map_injective supply completion exactness. None states the canonical finite-colength quotient comparison or the finite-length nilpotence and constant-tail comparison; several additional arguments are required.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(completion|AdicCompletion).*(quotient|finite.length)|(quotient|finite.length).*completion",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"line\": \"296\", \"text\": \"    (hx : degree x < n) : (Quotient.out (((toAdicCompletion σ R) p).val n)).coeff x =\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"71\", \"text\": \"    (Ideal.Quotient.factorₐ _ (Ideal.pow_le_pow_right hn)).comp (liftAdicCompletionAux I f n) =\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"67\", \"text\": \"  have mapeq : m.map (algebraMap R (AdicCompletion I R)) = (m.map (Ideal.Quotient.mk I)).comap\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Basic.lean\", \"line\": \"630\", \"text\": \"    let u : AdicCompletion I M := ⟨fun n ↦ Submodule.Quotient.mk (f n), fun c ↦ (hmn c).symm⟩\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Algebra.lean\", \"line\": \"150\", \"text\": \"The composition map `R →+* AdicCompletion I R →+* R ⧸ I ^ n` equals to the natural quotient map.\"} Read Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:320-349 and Exactness.lean:92-94,180-187. The tensor equivalence is linear; map_exact and map_injective supply completion exactness. None states the canonical finite-colength quotient comparison or the finite-length nilpotence and constant-tail comparison; several additional arguments are required.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a finite algebra is its tensor product with the completed base ring and an extension with finite length cokernel has unchanged cokernel after completion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [Module.Finite R M], Function.Surjective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"For a finite $ R $-module $ M $, the canonical linear map $ \\\\widehat{R}_I \\\\otimes_R M \\\\to \\\\widehat{M}_I $ from the tensor product of the $ I $-adic completion of $ R $ with $ M $ to the $ I $-adic com\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_eq_map\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] {N : Type u} [inst_4 : AddCommGroup N] [inst_5 : Module R N] (f : M →ₗ[R] N)\\n  [inst_6 : Module.Finite R M] [inst_7 : Module.Finite R N],\\n  TensorProduct.Alge\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is isomorphic to the $ I $-adi\"}\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"} Read Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean:320-349 and Exactness.lean:92-94,180-187. The tensor equivalence is linear; map_exact and map_injective supply completion exactness. None states the canonical finite-colength quotient comparison or the finite-length nilpotence and constant-tail comparison; several additional arguments are required.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(completion|AdicCompletion).*(finite.length|quotient)|(finite.length|quotient).*completion",
+   "results": "Actual search returned 16 hits: Mathlib/NumberTheory/NumberField/Completion/Ramification.lean, Mathlib/NumberTheory/NumberField/Completion/Ramification.lean, Mathlib/RingTheory/AdicCompletion/LocalRing.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/Analysis/InnerProductSpace/Reproducing.lean, Mathlib/Analysis/InnerProductSpace/Completion.lean, Mathlib/Topology/Algebra/Category/ProfiniteGrp/Completion.lean.  Read the completion candidates in Exactness.lean:72,92,184 and AsTensorProduct.lean:320-349: they supply existing leaves, not all the item's finite-length, quotient-map and algebra clauses in one-line specializations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite length module over a local ring is annihilated by a power of the maximal ideal and its canonical map to adic completion is an isomorphism",
+   "results": "Actual search returned 8 hits: IsAdicComplete, AdicCompletion, AdicCompletion.of_injective, AdicCompletion.of, AdicCompletion.of_bijective, IsAdicComplete.of_lift, AdicCompletion.of_apply, AdicCompletion.module.  Read the completion candidates in Exactness.lean:72,92,184 and AsTensorProduct.lean:320-349: they supply existing leaves, not all the item's finite-length, quotient-map and algebra clauses in one-line specializations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"quotient\"",
+   "results": "Actual search returned 3 hits: AdicCompletion.instSMulQuotientIdealHSMulTopSubmodule, AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule, AdicCompletion.instIsScalarTowerQuotientIdealHSMulTopSubmodule.  Read the completion candidates in Exactness.lean:72,92,184 and AsTensorProduct.lean:320-349: they supply existing leaves, not all the item's finite-length, quotient-map and algebra clauses in one-line specializations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective finite algebra over a Noetherian local ring with finite length quotient has the same quotient after adic completion, canonically, and completion is algebra tensor base change",
+   "results": "Actual search returned 8 hits: AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.map_injective, AdicCompletion.instAlgebra, AdicCompletion.mk_ofAlgEquiv_symm.  Read the completion candidates in Exactness.lean:72,92,184 and AsTensorProduct.lean:320-349: they supply existing leaves, not all the item's finite-length, quotient-map and algebra clauses in one-line specializations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison from a finite colength algebra inclusion to its completed inclusion induces an isomorphism of cokernels",
+   "results": "Actual search returned 8 hits: AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.of_ofAlgEquiv_symm, AdicCompletion.ofAlgEquiv_apply, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, localCohomology.isoSelfLERadical, AdicCompletion.congr_apply, AdicCompletion.ofAlgEquiv.  Read the completion candidates in Exactness.lean:72,92,184 and AsTensorProduct.lean:320-349: they supply existing leaves, not all the item's finite-length, quotient-map and algebra clauses in one-line specializations.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-normalization-singular-skyscraper",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normalization exact sequence in the numerical exceptional-fibre argument: canonical finite-module tensor and finite-length quotient completion comparisons (old steps 9--11).",
+   "via": [
+    "lem-trf-normalization-singular-skyscraper",
+    "lem-trf-nodal-normalization-quotient",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-colength-completion-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the finite-length annihilation and constant-tail argument, applied the two existing Mathlib completion leaves, and checked the canonical quotient, multiplication and tensor-flip formulas. No new node or statement change is needed.",
+  "blueprint": "lem-trf-local-term-locality: normalization exact sequence in the numerical exceptional-fibre argument, as located by the inherited blueprint.from.place; this split supplies its finite-colength completion comparison without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-dfb6f3759",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-dfb6f3759 (reviewer sub-agent of L); spot-checked: First split of an item that is still unsplit on live (no repair note, no supersession). The item's statement, stmt_deps and blueprint are unchanged; the delivery adds 7 steps and no new nodes. Source checks: Stacks varieties 0C1R (all of the proof, part (9) A'/A≅(A')^/A^) and 0C3V (A'⊗A^ completion paragraph); algebra 00MA/00MB enter only through the existing Mathlib leaves lem-weil-pbc-completion-exact-finite-modules (map_injective/map_exact/map_surjective, present at Exactness.lean:92/184/72) and lem-weil-pbc-completion-finite-module-tensor (ofTensorProduct bijective, AsTensorProduct.lean:320/328). Both are applied with I=m and their hypotheses hold (A Noetherian; A, C, M finite; 0→A→C→M→0 exact). Step checks: in steps 1-2, Ann(s) is maximal by an explicit inverse, so it equals m, and m^jM_r⊆M_{r-j} holds with the r=0 base. Step 3 inverts ι_M by evaluation at max(1,r), which avoids the zero stage n=0. Step 5 shows α is well defined via ι_C∘f=f̂∘ι_A and gets βα=ι_M; module quotients only. Step 6 has a·ι_C(c)=f̂(a)ι_C(c) coordinatewise. Step 7 checks multiplicativity, unit, structural map and flip; the product comes from β_A of def-weil-module-base-change. Small cases checked: C=A, a field base, k[[t²,t³]]⊂k[[t]], and the cusp localization. Duplicate search (rg -L for finite length/completion, 0C1R, A'/A): only the citers (curve-delta-completion-data step 7, normalization-singular-skyscraper step 4, ordinary-point-delta-branches) and the nodal-specific lem-sfb-nodal-completed-normalization-model; no duplicate. The citers use exactly the stated clauses. No tool_uses are needed. Cosmetic only: step 6 source.place puts 0C3V in algebra.tex (it is in varieties.tex; proof_origin is correct); not changed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteColengthCompletionComparison",
+  "declaration": "AdicCompletion.FiniteColength.comparison",
+  "declarations": [
+   "AdicCompletion.FiniteColength.Quotient",
+   "AdicCompletion.FiniteColength.AlgebraCompletion",
+   "AdicCompletion.FiniteColength.inclusion",
+   "AdicCompletion.FiniteColength.projection",
+   "AdicCompletion.FiniteColength.CompletedQuotient",
+   "AdicCompletion.FiniteColength.comparison"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteColengthCompletionComparison.lean",
+  "statement": "theorem comparison [IsNoetherianRing A] [IsLocalRing A] [Module.Finite A C] (hf : Function.Injective (algebraMap A C)) (r : ℕ) (s : CompositionSeries (Submodule A (Quotient A C))) (hs₀ : s.head = ⊥) (hsr : s.last = ⊤) (hlen : s.length = r) : ((IsLocalRing.maximalIdeal A) ^ r • ⊤ : Submodule A (Quotient A C)) = ⊥ ∧ (∀ n : ℕ, r ≤ n → ((IsLocalRing.maximalIdeal A) ^ n • ⊤ : Submodule A (Quotient A C)) = ⊥) ∧ (∃ ε : ∀ (n : ℕ), r ≤ n → ((Quotient A C) ⧸ ((IsLocalRing.maximalIdeal A) ^ n • ⊤ : Submodule A (Quotient A C))) ≃ₗ[A] Quotient A C, (∀ (n : ℕ) (hn : r ≤ n) (x : Quotient A C), ε n hn (Submodule.Quotient.mk x) = x) ∧ (∀ (n k : ℕ) (hn : r ≤ n) (hnk : n ≤ k) (x : (Quotient A C) ⧸ ((IsLocalRing.maximalIdeal A) ^ k • ⊤ : Submodule A (Quotient A C))), ε n hn (AdicCompletion.transitionMap (IsLocalRing.maximalIdeal A) (Quotient A C) hnk x) = ε k (hn.trans hnk) x)) ∧ Function.Bijective (AdicCompletion.of (IsLocalRing.maximalIdeal A) (Quotient A C)) ∧ Function.Injective (inclusion A C (IsLocalRing.maximalIdeal A)) ∧ Function.Exact (inclusion A C (IsLocalRing.maximalIdeal A)) (projection A C (IsLocalRing.maximalIdeal A)) ∧ Function.Surjective (projection A C (IsLocalRing.maximalIdeal A)) ∧ (∃ (α : Quotient A C ≃ₗ[A] CompletedQuotient A C (IsLocalRing.maximalIdeal A)) (β : CompletedQuotient A C (IsLocalRing.maximalIdeal A) ≃ₗ[A] AdicCompletion (IsLocalRing.maximalIdeal A) (Quotient A C)), (∀ c : C, α (Submodule.Quotient.mk c) = Submodule.Quotient.mk (AdicCompletion.of (IsLocalRing.maximalIdeal A) C c)) ∧ (∀ z : AdicCompletion (IsLocalRing.maximalIdeal A) C, β (Submodule.Quotient.mk z) = projection A C (IsLocalRing.maximalIdeal A) z) ∧ β.toLinearMap.comp α.toLinearMap = AdicCompletion.of (IsLocalRing.maximalIdeal A) (Quotient A C)) ∧ ∃ (e : AdicCompletion (IsLocalRing.maximalIdeal A) C ≃ₗ[A] AlgebraCompletion A C (IsLocalRing.maximalIdeal A)) (fhat : AdicCompletion (IsLocalRing.maximalIdeal A) A →ₐ[A] AlgebraCompletion A C (IsLocalRing.maximalIdeal A)), (∀ (z : AdicCompletion (IsLocalRing.maximalIdeal A) C) (n : ℕ) (c : C), AdicCompletion.eval (IsLocalRing.maximalIdeal A) C n z = Submodule.Quotient.mk c → AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal A).map (algebraMap A C)) n (e z) = Ideal.Quotient.mk _ c) ∧ (∀ a : AdicCompletion (IsLocalRing.maximalIdeal A) A, fhat a = e (inclusion A C (IsLocalRing.maximalIdeal A) a)) ∧ ∃ T : @AlgEquiv (AdicCompletion (IsLocalRing.maximalIdeal A) A) (AdicCompletion (IsLocalRing.maximalIdeal A) A ⊗[A] C) (AlgebraCompletion A C (IsLocalRing.maximalIdeal A)) _ _ _ _ fhat.toRingHom.toAlgebra, (∀ (a : AdicCompletion (IsLocalRing.maximalIdeal A) A) (c : C), T (a ⊗ₜ[A] c) = fhat a * algebraMap C (AlgebraCompletion A C (IsLocalRing.maximalIdeal A)) c) ∧ (∀ a : AdicCompletion (IsLocalRing.maximalIdeal A) A, T (a ⊗ₜ[A] (1 : C)) = fhat a) ∧ ∃ U : @AlgEquiv (AdicCompletion (IsLocalRing.maximalIdeal A) A) (C ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) (AlgebraCompletion A C (IsLocalRing.maximalIdeal A)) _ _ _ Algebra.TensorProduct.rightAlgebra fhat.toRingHom.toAlgebra, (∀ z : C ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A, U z = T (Algebra.TensorProduct.comm A C (AdicCompletion (IsLocalRing.maximalIdeal A) A) z)) ∧ (∀ a : AdicCompletion (IsLocalRing.maximalIdeal A) A, U ((1 : C) ⊗ₜ[A] a) = fhat a)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bce162e07",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement verbatim in file; universes u v independent. Hypotheses match exactly: Noetherian local A, algebraMap injective, Module.Finite, M = C ⧸ range(linearMap) as a submodule quotient, filtration as a CompositionSeries ⊥→⊤ of length r (covBy ⇔ simple quotient). All clauses present and canonical: m^r•⊤=⊥ and every n≥r; tail equivalences ε pinned by ε(mk x)=x and compatible with transitionMap; `of` bijective; completed inclusion injective, exact with the completed projection, projection surjective; α/β pinned on representatives with β∘α=ι_M; module/ring completion bridge e pinned coordinatewise; fhat=e∘inclusion; T an AlgEquiv over Â with fhat.toAlgebra and the pure-tensor formula; flip U=T∘comm with rightAlgebra. Edge cases r=0, C=A, field base fine. No H4 duplicate (rg side-live Sheaf/WeilConjectures). Abbrevs are transparent Mathlib specializations with source/blueprint docstrings; only sorry; 7-step proof docstring; report has Worker report and Second reading by Q07. No compile (no file changed). Cosmetic inherited: step 6 source.place puts 0C3V in algebra.tex."
+ }
+}

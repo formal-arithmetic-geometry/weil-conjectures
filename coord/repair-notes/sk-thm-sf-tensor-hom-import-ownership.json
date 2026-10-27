@@ -1,0 +1,54 @@
+{
+ "state": "resolved",
+ "stage": "2",
+ "item": "sk-thm-sf-tensor-hom",
+ "date": "2026-10-22",
+ "by": "L maintenance (Q01 repeated preflight rejection)",
+ "reason": "The 2026-10-19 artin-gabber dropped-node inventory included def-per-strict-etale-system-interfaces, an existing:true alias for ordinary strict-system definitions in Sheaf.Paper.EtaleCoefficientSystemAdjoint. Stage-2 route_pivot_fails derives forbidden modules from every dropped node, so that alias rejected the mandatory import of the active proof dependency lem-pur-etale-coefficient-system-adjoint. The exact server gate reproduced the rejection; the owning module compiled cleanly with tools/lean_file.sh in 36.6 s at the 60 s limit.",
+ "authority": "The artin-gabber inventory section explicitly excludes ordinary lemmas. SETUP.md, Tool lemmas and the unit route (human, 2026-10-09), permits accepted generic tools from another unit. The item already records lem-pur-etale-coefficient-system-adjoint in proof_deps and tool_uses; stages/2-statements.md section 3 rule 7 requires its import. This narrow shared-definition correction follows the inventory correction in 8a4da1b3061f2ed062902d6a2fc14a9953270468.",
+ "retained_tools": [
+  {
+   "node": "def-per-strict-etale-system-interfaces",
+   "module": "Sheaf.Paper.EtaleCoefficientSystemAdjoint",
+   "declarations": [
+    "AlgebraicGeometry.strictEtaleCoefficientSystem",
+    "AlgebraicGeometry.strictEtaleLevel",
+    "AlgebraicGeometry.strictEtaleSystemDerived",
+    "AlgebraicGeometry.strictEtaleLevelDerived",
+    "AlgebraicGeometry.StrictEtaleEvaluation",
+    "AlgebraicGeometry.StrictEtaleOrdinaryImage",
+    "AlgebraicGeometry.StrictEtaleCompactSupportData",
+    "AlgebraicGeometry.StrictEtaleCompactSupportCoherence",
+    "AlgebraicGeometry.StrictEtaleCompactSupport",
+    "AlgebraicGeometry.StrictEtaleCompactSupport.functor",
+    "AlgebraicGeometry.StrictEtaleCompactSupport.levelFunctor",
+    "AlgebraicGeometry.StrictEtaleCompactSupport.evaluation",
+    "AlgebraicGeometry.StrictEtaleScalarAction"
+   ],
+   "why": "These are the concrete coefficient-system categories, derived localizations, evaluation, compact-support data and coherence, and scalar actions used by the active ordinary etale adjoint theorem. Its conclusion explicitly quantifies StrictEtaleCompactSupport. No existence theorem, perverse t-structure, arbitrary-field duality or model-category route is added."
+  }
+ ],
+ "audit": {
+  "alias_closure_size_including_self": 839,
+  "alias_dropped_closure_before": [
+   "def-per-strict-etale-system-interfaces"
+  ],
+  "alias_dependencies_outside_active_theorem_closure": [],
+  "active_owning_theorem": "lem-pur-etale-coefficient-system-adjoint",
+  "active_theorem_closure_size": 10093,
+  "active_theorem_dropped_closure": [],
+  "item_closure_size": 16564,
+  "item_dropped_closure": [],
+  "alias_direct_citers": [
+   "lem-per-finite-exceptional-system-adjunction"
+  ],
+  "alias_direct_citers_stay_dropped": true,
+  "dropped_module_inventory_already_excludes_shared_module": true
+ },
+ "scope": "Remove exactly this one alias ID from coord/route-pivot-dropped.txt. Preserve its DAG record, all declarations, mathematical statements, proof plans, and every other dropped ID. The former perverse-route citer lem-per-finite-exceptional-system-adjunction stays dropped. No launcher code, review service, landing tools or Lean source changes.",
+ "backups": [
+  "coord/route-pivot-dropped.txt.bak-maint-Q01-1792655391",
+  "coord/repair-notes/sk-thm-sf-tensor-hom-import-ownership.json.bak-maint-Q01-1792655391 (empty: note did not exist)"
+ ],
+ "next_worker": "Retain the saved Q01 stage-2 packet and its import Sheaf.Paper.EtaleCoefficientSystemAdjoint. Rerun deliver2.py Q01 sk-thm-sf-tensor-hom --no-push against a base containing this correction, then deliver normally. Do not duplicate the adjoint module, remove required proof imports, or revive the dropped perverse route. The separate stage-1 re-split repair note remains in force and is not overwritten by this maintenance."
+}

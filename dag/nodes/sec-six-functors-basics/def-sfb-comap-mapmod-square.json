@@ -182,7 +182,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-53d3520f3 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item def-sfb-comap-mapmod-square and its report, and no new nodes. The statement is word for word the main-20261015 blueprint source (def-sfb-comap-mapmod-square.md, order 1727). F is lax monoidal, and the square orientation and the direction of the isomorphism match the source. stmt_deps equal the source's uses (sk-def-sfb-transport, sk-def-sfb-change-of-scalars). The source proof credits 'mapMod(F) commutes with Res' to sk-def-sfb-transport, but that node's statement does not say it. The delivery correctly replaces this with an explicit calculation, which repairs C3/C4/E5. Step 1: the transport action Fγ∘μ^F (def-sfb-modobj-transport) followed by restriction precomposition (def-sfb-modobj-restriction) gives a_L with (η_S∘φ_Y)⊗1, by bifunctoriality of the tensor. Step 2: uses naturality of μ^F in its first variable, F(φ_X⊗1)∘μ_{R_X,M} = μ_{S_X,M}∘(Fφ_X⊗1); I checked the domains and codomains. Then the square Fφ_X∘η_R = η_S∘φ_Y, in its stated orientation, gives a_R = a_L, with no strength or inverse tensorator. Step 3: the identity components are linear by sk-def-sfb-module-objects clause 2, mutually inverse, and natural because both sides send h to Fh. All three steps are genuinely elementary. proof_deps equal the union of the steps' uses; all are definitions, so there is no route or tool_use issue. There is no cycle: the item does not cite lem-sfb-comap-mapmod-square-underlying, and no SGA source is cited. Small cases tested: F = id, identity φ's, noncommutative monoids in (Set,×), the lax power set functor, and the zero module. None gives a counterexample. rg over dag/nodes found no duplicate of the square isomorphism or a separate Res-composition node. The Mathlib searches record all three kinds, and the Loogle error is recorded as an error, not as absence. No fixes were made."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Mod.comapMapModComapIso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.comapMapModComapIso",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+     "lines": [
+      81,
+      92
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
   "declaration": "CategoryTheory.Mod.comapMapModComapIso",
@@ -200,5 +225,24 @@
   "group": "Q46",
   "result": "pass",
   "note": "Existing-only delivery: only the item lean record and report differ from live. CategoryTheory.Mod.comapMapModComapIso (ChangeOfScalarsSquare l.71-92) matches every clause: lax monoidal F, four monoid objects and morphisms, sq φ_Y≫η_S=η_R≫F.map φ_X in the node's orientation, (F.mapMod S_X ⋙ comap η_S) ⋙ comap φ_Y ≅ comap φ_X ⋙ F.mapMod R_X ⋙ comap η_R. Body goes through comapComp/comapCongr sq/mapModComapIso (common composite, not hollow); components are the identity by the _hom_app_hom lemma. Independent universes, no extra hypotheses in the section. mapMod and comap are the declarations recorded by sk-def-sfb-transport and sk-def-sfb-change-of-scalars. No other node binds the declaration. Statement verbatim. nt_compile --json probe (#check, #print axioms with no sorryAx, 4-universe instantiation): EXIT 0, 22.5 s. Report sections present. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $F\\colon\\mathcal C\\to\\mathcal D$ be a lax monoidal functor between monoidal categories, and\nlet\n\n$$\n\\begin{array}{ccc}\nR_Y & \\xrightarrow{\\ \\varphi_Y\\ } & S_Y\\\\\n{\\scriptstyle\\eta_R}\\downarrow & & \\downarrow{\\scriptstyle\\eta_S}\\\\\nFR_X & \\xrightarrow{\\ F\\varphi_X\\ } & FS_X\n\\end{array}\n$$\n\nbe a commutative square of morphisms of monoid objects, with $\\varphi_X\\colon R_X\\to S_X$ in\n$\\mathcal C$ and $R_Y,S_Y$ monoid objects of $\\mathcal D$. With $\\mathrm{mapMod}(F)$ the\ntransport of module objects of [det-def-sfb-transport] and $\\operatorname{Res}$ the restriction of\nscalars of [det-def-sfb-change-of-scalars], the natural isomorphism\n\n$$\n\\operatorname{Res}_{\\varphi_Y}\\circ\\operatorname{Res}_{\\eta_S}\\circ\\mathrm{mapMod}(F)\n\\;\\cong\\;\n\\operatorname{Res}_{\\eta_R}\\circ\\mathrm{mapMod}(F)\\circ\\operatorname{Res}_{\\varphi_X}\n\\colon\\Mod_{S_X}(\\mathcal C)\\longrightarrow\\Mod_{R_Y}(\\mathcal D)\n$$\n\nis the one under which both sides are $\\mathrm{mapMod}(F)$ followed by the restriction of\nscalars along the common composite $\\eta_S\\circ\\varphi_Y=F\\varphi_X\\circ\\eta_R$.",
+  "proof": [
+   {
+    "text": "Restriction of scalars is strictly compatible with composition,\n$\\operatorname{Res}_{\\varphi_Y}\\circ\\operatorname{Res}_{\\eta_S}\\cong\n\\operatorname{Res}_{\\eta_S\\circ\\varphi_Y}$, and along equal morphisms; and\n$\\mathrm{mapMod}(F)$ commutes with restriction of scalars,\n$\\mathrm{mapMod}(F)\\circ\\operatorname{Res}_{\\varphi_X}\\cong\n\\operatorname{Res}_{F\\varphi_X}\\circ\\mathrm{mapMod}(F)$ ([det-def-sfb-transport]). Composing these\nisomorphisms with the commutativity of the square gives the asserted one; every step is the\nidentity on underlying objects.",
+    "uses": [
+     "det-def-sfb-transport"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

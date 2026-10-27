@@ -1,0 +1,139 @@
+{
+ "id": "def-sf-clopen-comparison-tensor-data",
+ "kind": "definition",
+ "title": "Normalized clopen tensor comparison data",
+ "statement": "For either Mode of [lem-sf-open-tensor-normalization], use the Cartesian proper/open geometry of [lem-cbc-strict-tower-proper-open-calculus] and the ringed-site derived module and tensor models of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define PullTensor by an ordinary tensor isomorphism satisfying the pure-unit formula, preservation of resolving complexes, and a derived tensor isomorphism satisfying the signed-total representative equation. Define OpenTensor by restriction on pure sections and its open-adjunction inverse transpose. For Operations o and an open s into its upper-left corner, Data consists of two PullTensor records, the two OpenTensor records, an exact extension of s with reverse adjunction whose counit is inverse to its open unit, and a composite tensor isomorphism normalized under the composite adjunction. Define rho as the localized reverse unit, alpha as beta followed by extension of rho, and Equations as the Cartesian, clopen, composite-open and pasted tensor equalities. The complete field formulas are the literal unchanged definitions in the attached Lean module. The sequence-site interpretation is [def-coef-semilinear-system-models]; no derived category, coefficient ring, or object condition is changed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0GL1 (lemma-j-shriek-and-tensor); clopen tensor refinement of Stacks 0F7B, original steps 1–7."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "These are the existing literal constructions and record types, moved without changing any binder, field, body or name. No existence witness is selected in a definition.",
+   "uses": [
+    "def-weil-scheme-morphism-properties",
+    "def-pc-fibre-product",
+    "def-weil-pbc-proetale-site",
+    "def-coef-semilinear-system-models",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-open-tensor-normalization",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-coef-semilinear-system-models",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-tensor-normalization",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0GL1 (lemma-j-shriek-and-tensor); agent open-unit and clopen tensor refinement",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClopenComparisonTensorSquare",
+  "date": "2026-10-24",
+  "group": "D6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof sentence: The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]; clopen comparison tensor compatibility, original seven-step refinement.",
+   "via": [
+    "lem-sf-clopen-comparison-tensor-square",
+    "lem-sf-proper-open-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClopenComparisonTensorSquareData",
+  "file": "lean/Sheaf/SixFunctors/ClopenComparisonTensorSquareData.lean",
+  "declaration": "SheafOfModules.ClopenComparisonTensorSquare.Data",
+  "statement": "structure Data {m : Mode} {d : Input.{u} m} {t : SiteSquare d}\n    (o : Operations d t) {A : Scheme.{u}} (s : A ⟶ d.U') [IsOpenImmersion s]",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-24",
+  "declarations": [
+   "SheafOfModules.ClopenComparisonTensorSquare.input",
+   "SheafOfModules.ClopenComparisonTensorSquare.PullTensor",
+   "SheafOfModules.ClopenComparisonTensorSquare.OpenTensor",
+   "SheafOfModules.ClopenComparisonTensorSquare.Data",
+   "SheafOfModules.ClopenComparisonTensorSquare.Data.rho",
+   "SheafOfModules.ClopenComparisonTensorSquare.alpha",
+   "SheafOfModules.ClopenComparisonTensorSquare.Equations"
+  ]
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived tensor pullback comparison and clopen restriction extension adjunction",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-24",
+   "verdict": "No exact match: ordinary pullback adjunctions and module formulas do not give normalized derived tensor compatibility or the clopen reverse module adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits; CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-24",
+   "verdict": "Useful formal adjunction API; no geometric tensor comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*[Aa]dj|tensor.*[Bb]ase[Cc]hange",
+   "results": "25 hits; Mathlib/Algebra/Lie/Nilpotent.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean, Mathlib/Algebra/Module/LinearMap/Polynomial.lean",
+   "date": "2026-10-24",
+   "verdict": "Ordinary scalar tensor calculations only; the required derived ringed-site statements remain separate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "clopen restriction adjunction tensor pullback comparison on derived sheaves",
+   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.pullback, TopCat.Sheaf.instIsLeftAdjointPullback, CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-24",
+   "verdict": "No match: ordinary adjunctions, no canonical derived tensor compatibility or reverse clopen adjunction on these ringed sites."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-2871b",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T214331-L-589450",
+  "kind": "interface",
+  "note": "independent cc review: item theorem, moved Data block and 3 new sorry leaves vs clone ClopenComparisonTensorSquare.lean, OpenTensorNormalizationData (Operations/Assertion/Pullback/OpenExtension) and node files"
+ }
+}

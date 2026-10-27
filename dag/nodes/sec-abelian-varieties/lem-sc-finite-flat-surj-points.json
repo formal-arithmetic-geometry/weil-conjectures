@@ -41,7 +41,32 @@
   "lem-sc-finite-nonempty-point"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.exists_comp_eq_of_isFinite_of_surjective"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.exists_comp_eq_of_isFinite_of_surjective",
+     "module": "WeilConjectures.Mathlib.AlgebraicGeometry.AlgClosed.Basic",
+     "lines": [
+      45,
+      57
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-divisible",
  "lean": {
@@ -54,5 +79,24 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be algebraically closed and $f:X\\to Y$ a finite surjective\nmorphism of schemes. Then every morphism $y:\\Spec k\\to Y$ lifts to a\nmorphism $x:\\Spec k\\to X$ with $f\\circ x=y$. In particular, if $f$ is\na morphism of $k$-schemes, then $f(X(k))=Y(k)$.",
+  "proof": [
+   {
+    "text": "Let $y:\\Spec k\\to Y$. The fibre $X_y=X\\times_{Y,y}\\Spec k$ is finite\nover $k$, being a base change of $f$, and nonempty, since $f$ is\nsurjective and a base change of a surjective morphism is surjective.\nSo it is a nonempty finite $k$-scheme, which has a $k$-point\n$s:\\Spec k\\to X_y$ by [lem-sc-finite-nonempty-point]. The composite\n$x$ of $s$ with the projection $X_y\\to X$ satisfies $f\\circ x=y$. If\n$f$ is a morphism of $k$-schemes and $y$ is a $k$-point, then $x$ is a\n$k$-point as well, because the structure morphism of $X$ is that of $Y$\ncomposed with $f$.",
+    "uses": [
+     "lem-sc-finite-nonempty-point"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

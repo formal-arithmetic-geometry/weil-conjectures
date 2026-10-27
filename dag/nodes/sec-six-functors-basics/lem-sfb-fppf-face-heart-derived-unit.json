@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-fppf-face-heart-derived-unit",
+ "kind": "statement",
+ "title": "Cohomological descent for a quasi-coherent module with face maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Z$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $u:U_\\bullet\\to Z$ be an augmented simplicial algebraic space such that $U_0\\to Z$ and every map from $U_n$ to its matching object are flat, locally finitely presented and surjective; the degree-$n$ matching object is the finite limit of the compatible proper faces over $Z$. Restrict to injective order-preserving maps $[m]\\hookrightarrow[n]$ and use the enlarged small etale ringed sites of algebraic-space objects [lem-trf-space-enlarged-etale-ringed-site-model], with fibre-product transition functors and their canonical ring maps. Let $\\mathscr M$ and $u$ be the resulting ringed total module category and augmentation [lem-sfb-semisimplicial-ringed-total-category]. A module in $\\mathscr M$ is in $\\mathcal A$ if all its components are quasi-coherent [def-trf-space-quasi-coherent-module] and all its transitions $h^*F_m\\to F_n$ are isomorphisms. For every quasi-coherent $\\mathcal O_Z$-module $G$, placed in degree zero, the canonical derived adjunction unit is an isomorphism\n$$G\\xrightarrow{\\sim}Ru_*(u^*G).$$\nHere $Ru_*$ is the right derived functor on unbounded module derived categories [def-weil-abstract-derived-category], computed by K-injective resolutions. There is no quasi-compactness or separatedness hypothesis on the spaces.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHE, lemma-cohomological-descent-qcoh-for-fppf-hypercovering: injective-order-map adaptation. The source proof uses the big-fppf comparison of Tags 0DGN (spaces-more-cohomology-lemma-review-quasi-coherent) and 0DGP (lemma-cohomological-descent-etale-fppf-modules); the face-only assertion is agent-supplied."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-abstract-derived-category",
+  "def-sfb-space-fppf-hypercover",
+  "def-sfb-space-face-ringed-total-site"
+ ],
+ "proof": [
+  {
+   "text": "Every augmentation and face map is flat, locally finitely presented and surjective by [lem-sfb-hypercover-augmentation-face-property]; in particular all the module pullbacks used here are exact. This remains true after base change by an etale $V\\to Z$. By [lem-sfb-semisimplicial-ringed-total-category], $u^*G$ has components $u_p^*G$ and $u^*$ is exact (exactness is tested on components). Thus the unit in the question is well-defined with this underived pullback. Fix an arbitrary such $V$ and write $V_p=U_p\\times_ZV$.",
+   "uses": [
+    "lem-sfb-hypercover-augmentation-face-property",
+    "lem-sfb-semisimplicial-ringed-total-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHE, lemma-cohomological-descent-qcoh-for-fppf-hypercovering, proof; face-only adaptation by the agent"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-flat-object-fppf-derived-sections] with $X=V$ and $F=G|_V$. Write $H=F^a$ on the big fppf site of spaces over $V$, and choose its nonnegative injective resolution $H\\to J^\\bullet$. All $V_p\\to V$ and all face maps are flat, so that node identifies $J^\\bullet(V)$ with $R\\Gamma(V_{\\mathrm{et}},G|_V)$ and the compatible diagram $J^\\bullet(V_p)$ with the diagram $R\\Gamma((V_p)_{\\mathrm{et}},u_p^*G|_{V_p})$. These are derived identifications with the augmented face maps, not only isomorphisms of the individual cohomology groups.",
+   "uses": [
+    "lem-sfb-flat-object-fppf-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-cohomology.tex",
+    "place": "Tags 0DGN, lemma-review-quasi-coherent (1), (3), (6), (7), and 0DGP, lemma-cohomological-descent-etale-fppf-modules. Derived-section and flat-diagram naturality formulation supplied by the agent; no hypercover is involved."
+   }
+  },
+  {
+   "text": "In this big fppf site the matching maps of $V_\\bullet\\to V$ are covering morphisms: they are base changes of the given flat locally finitely presented surjections. By [lem-sfb-space-fppf-covering-calculus] these coverings are stable under composition and base change. The site is subcanonical directly from [def-trf-algebraic-space]: a map into an algebraic space is a map of its fppf sheaves on schemes; compatible maps glue uniquely on scheme charts by the target sheaf condition, and their chartwise equalities agree on overlaps by the same uniqueness. Etale scheme charts are fppf covers by the covering-calculus node, so these chartwise gluings give the required map of spaces. Apply [lem-sc-ringed-hypercover-injective-augmentation-ring] to each injective $J^q$, with $W=V$ and $R=\\mathcal O$. It gives the exact augmented row\n$$0\\to J^q(V)\\to J^q(V_0)\\to J^q(V_1)\\to\\cdots.$$\nThe displayed maps are precisely restrictions with alternating faces. Hence they commute with the resolution differential. No degeneracy pullback, affineness, or injectivity of a pulled-back quasi-coherent module is being asserted.",
+   "uses": [
+    "lem-sfb-flat-object-fppf-derived-sections",
+    "lem-sfb-space-fppf-covering-calculus",
+    "def-trf-algebraic-space",
+    "lem-sc-ringed-hypercover-injective-augmentation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/hypercovering.tex",
+    "place": "Tags 01GE, lemma-acyclic-hypercover-sheaves, and 01GW, lemma-injective-trivial-cech, ringed-module formulation"
+   }
+  },
+  {
+   "text": "Put $B^{p,q}=J^q(V_p)$, with total differential $d_h+(-1)^pd_v$. The row spectral sequence of [thm-sp-double-complex-spectral-sequences] has horizontal cohomology $J^q(V)$ in degree $p=0$ and zero in every $p>0$, by the preceding exact rows. Its finite filtration therefore shows that the actual restriction augmentation\n$$J^\\bullet(V)\\longrightarrow\\operatorname{Tot}(B)$$\nis a quasi-isomorphism. In total degree $n$ only $0\\le p\\le n$ occurs; thus no bounded cohomological dimension or infinite-totalization convergence assertion is needed.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0132, lemma-first-quadrant-ss, applied to the row filtration"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-face-total-derived-sections] for $F=u^*G$. The compatible column replacements supplied in step 2 identify $\\operatorname{Tot}(B)$ with $R\\Gamma(V_{\\mathrm{et}},(Ru_*u^*G)|_V)$, and identify the augmentation of step 4 with $R\\Gamma(V,\\eta_G)$. That map is an isomorphism for every etale $V\\to Z$. Both sides of $\\eta_G$ are bounded below, since $G$ and $u^*G$ are modules in degree zero. The same node's detection assertion now proves that $\\eta_G$ itself is an isomorphism in the unbounded module derived category. This proves the stated canonical unit, with no quasi-compactness or separatedness restriction.",
+   "uses": [
+    "lem-sfb-face-total-derived-sections",
+    "lem-sfb-flat-object-fppf-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D7F, lemma-augmentation-spectral-sequence-modules, and its resolution proof (lemma-simplicial-resolution-augmentation-modules, lemma-augmentation-cech-complex-modules). Agent-supplied injective-order-map adaptation using the finite simplex on the vertices of each component; local derived-section and unit-compatible formulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hypercover-augmentation-face-property",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sfb-flat-object-fppf-derived-sections",
+  "lem-sfb-space-fppf-covering-calculus",
+  "def-trf-algebraic-space",
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-sfb-face-total-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHE proof, with agent-supplied face-only computation and compatible derived-section comparison; big-fppf injective rows retain the original hypercover argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on an algebraic space have cohomological descent along a flat hypercover restricted to injective order maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.compatiblePreservingOfFlat\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverPreserving\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} D]\\n  (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat G],\\n  CategoryTheory.CompatiblePreserving K G\", \"doc\": \"If a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then it preserves compatibility with any Grothendieck topology $ K $ on $ \\\\mathcal{D} $.\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk.inj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"If two quasicoherent sheaf data structures constructed via local presentations are equal, then their index types are equal, their covering families are isomorphic, and their local presentations are is\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherence constructors, representable flatness and isomorphisms of one-hypercovers do not prove the derived unit for an fppf hypercover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi coherent sheaf maps isomorphically to the derived direct image of its pullback to a flat hypercover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] : IsIso (Q.map f)\", \"doc\": \"In the derived category of an abelian category, the localization functor $ Q $ maps quasi-isomorphisms between cochain complexes to isomorphisms. Specifically, for any quasi-isomorphism $ f: K \\to L $ \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, a covering family $\\\\{X_i\\\\}_{i \\\\in I}$ in $J$, and for each $X_i$ a presentation of the\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheaf composition, weak sheafification, and local bijectivity \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherence constructors, representable flatness and isomorphisms of one-hypercovers do not prove the derived unit for an fppf hypercover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hypercover\", \"IsIso\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"CategoryTheory.PreZeroHypercover.instIsIsoH₀Hom\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {S : C} {E F : CategoryTheory.PreZeroHypercover S} (e : E ≅ F) (i : E.I₀) : CategoryTheory.IsIso (e.hom.h₀ i)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PreZeroHypercover.instIsIsoH₀Inv\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {S : C} {E F : CategoryTheory.PreZeroHypercover S} (e : E ≅ F) (i : F.I₀) : CategoryTheory.IsIso (e.inv.h₀ i)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.instIsIsoH₀Hom\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {S : C} {E F : CategoryTheory.PreOneHypercover S} (e : E ≅ F) (i : E.I₀) : CategoryTheory.IsIso (e.hom.h₀ i)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.instIsIsoH₀Inv\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {S : C} {E F : CategoryTheory.PreOneHypercover S} (e : E ≅ F) (i : F.I₀) : CategoryTheory.IsIso (e.inv.h₀ i)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.instIsIsoH₁Hom\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {S : C} {E F : CategoryTheory.PreOneHypercover S} (e : E ≅ F) {i j : E.I₀} (k : E.I₁ i j) : CategoryTheory.IsIso (e.hom.h₁ k)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.PreOneHypercover.instIsIsoH₁Inv\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.One\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {S : C} {E F : CategoryTheory.PreOneHypercover S} (e : E ≅ F) {i j : F.I₀} (k : F.I₁ i j) : CategoryTheory.IsIso (e.inv.h₁ k)\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherence constructors, representable flatness and isomorphisms of one-hypercovers do not prove the derived unit for an fppf hypercover"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.descent|[Hh]ypercover.*[Aa]cyclic|[Aa]cyclic.*[Hh]ypercover",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: quasicoherence constructors, representable flatness and isomorphisms of one-hypercovers do not prove the derived unit for an fppf hypercover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-face-total-qcoh-equivalence",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (3) in the unbounded descent argument: derived unit only for modules in degree zero",
+   "via": [
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-face-heart-derived-unit",
+  "worker": "stage1",
+  "summary": "Proved the face-only unit by local comparison of derived sections with a single big-fppf injective resolution. Hypercover exactness and first-quadrant assembly remain in the item. Two statement-only nodes isolate topology comparison and the face-total computation; the statement is unchanged.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images.proof.md, (3), along the inherited alteration/duality/hyperdescent prerequisite chain. The immediate source is 0DHE; steps 1-5 realize its flat augmentation, topology comparison, big-fppf descent and canonical-unit identification. blueprint_refs.py ancestor returns null for the inherited broken ancestry; its existing from.place and via are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-ringed-hypercover-injective-augmentation-ring",
+    "why": "Generic injective alternating-row exactness on a subcanonical ringed site; applies to the big fppf hypercover and is the descent input of 0DHE, not a change to the alteration route."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic first-quadrant row spectral sequence assembles those exact injective rows; no same-unit lemma supplies this purely homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-ringed-hypercover-injective-augmentation-ring",
+  "thm-sp-double-complex-spectral-sequences"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-d17d1fab1",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-d17d1fab1 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement (hypercover-augmentation-face-property, semisimplicial-ringed-total-category, space-fppf-covering-calculus, sc-ringed-hypercover-injective-augmentation-ring, sp-double-complex-spectral-sequences, trf-space-enlarged-etale-ringed-site-model, def-trf-algebraic-space), Stacks 0DHE with its proof, and 0DGN (1)-(7) with 0DGP. The item statement and stmt_deps are identical to Q82's base. There is no repair note, so this is not a re-split order. The proof is 0DHE made local at each étale V: one big-fppf injective resolution of (G|_V)^a computes every column (0DGN/0DGP); big-fppf hypercover exactness gives the rows; the row spectral sequence assembles them; the face-total computation identifies the result with RΓ(V,η_G); detection over all étale V finishes. All hypotheses of lem-sc-ringed-hypercover-injective-augmentation-ring hold. Subcanonicity follows from the covering calculus (1),(3),(4) plus V being an fppf sheaf. Local matching holds because V_p→M_p is a single fppf covering morphism. The degeneracies exist in the site and are dropped only in the total category. Both new nodes are true. Face-total: flat faces make ℓ_m exact, so e_p preserves injectives; the components of the free resolution are n-simplex chains on cartesian free modules. Flat-object: F^a restricted to Spaces/T is (h^*F)^a, R^iε_*=0 for i>0, and ε_* preserves injectives. Neither is a clause of the item, and neither duplicates existing nodes: the lem-trf total-site nodes are full simplicial with constant coefficients, and N5's sibling node is module descent, not cohomology. Batch-5 finding: every listed citation is a general definition or generic site/total-category foundation, not a step of the trace formula or of Poincaré duality, so all are accepted. Both declared tool_uses (injective hypercover rows, double-complex spectral sequence) are accepted as generic tools. No SGA. One fix, B3: added [def-weil-flat-morphism] to the face-total node, and [def-weil-flat-morphism] and [def-sbc-locally-finite-presentation] to the flat-object node (statement and stmt_deps). Advisory, not changed: the face-total node also contains a separate general fact (a map is an isomorphism if it is one on derived sections over every étale V).; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFaceHeartDerivedUnit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SpaceFace.fppf_face_heart_derived_unit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFace.IsCartesianQuasiCoherent",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFace.derivedUnit",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceFace.fppf_face_heart_derived_unit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFaceHeartDerivedUnit.lean",
+  "statement": "theorem fppf_face_heart_derived_unit (hU : IsSpaceFppfHypercover U) (A : Augmentation U) (G : Z.Modules) (hG : SheafOfModules.IsQuasicoherent G) : IsIso (derivedUnit U A G)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The actual canonical derived unit is Q of the ordinary augmentation unit followed by rightDerivedFunctorUnitQ, whose source is the underived pullback of the degree-zero complex. The equivalent scheme-chart basis of the enlarged etale total site retains the original ring/module universe. IsCartesianQuasiCoherent renders the explanatory heart predicate. All localization universes are independently quantified. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95bd90bca",
+  "group": "Q68",
+  "result": "fix",
+  "note": "Re-delivery after b231 H13 RETURN: Q137's lem-sfb-semisimplicial-ringed-total-category record is untouched (only the item and new node def-sfb-space-face-ringed-total-site differ from side-live); the new node owns SpaceFaceRingedTotalCategory and its H12 fields are ok; the second reading is real. Item checked clause by clause: IsSpaceFppfHypercover; injective-only diagram; scheme-chart basis keeps coefficients in u; Augmentation pinned by moduleTensorPullback components and 1⊗ + moduleTensorComposition restrictions (isomorphism directions checked, ∀ A sound, augmentation_exists); derivedUnit = Q(unit) ≫ rightDerivedFunctorUnitQ is the canonical unit; IsQuasicoherent; no qc/separatedness; free wZ/wT; sorry only; no hollow data; 7 true named obligations with proof docstrings. F1 (H12/H2) FIX: the new node's module uses moduleTensorPullback/ModuleChart/moduleTensorSection owned by def-trf-space-etale-module-functors, which was not a stmt_dep; the fixed node JSON adds it and cites it in the statement. Advisory: parallel unlanded face-total models NP SpaceFaceModuleSystem and NW FppfFaceTotalModel (no name clash). Nothing compiled (JSON-only fix)."
+ }
+}

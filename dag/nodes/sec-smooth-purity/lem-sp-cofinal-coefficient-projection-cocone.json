@@ -1,0 +1,372 @@
+{
+ "id": "lem-sp-cofinal-coefficient-projection-cocone",
+ "kind": "statement",
+ "title": "Cofinal coefficient quotient cocone with its completed projections",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$, a chosen uniformizer $\\pi$, a unit $u\\in O^\\times$ and an integer $e\\geq1$ such that $\\ell=u\\pi^e$ [def-weil-l-adic-coefficient-extension]. Let $T$ be any scheme and on its small pro-étale site put $R=\\mathcal O_{E,T}$, $B_N=(O/\\ell^N)_T$, $D_j=(O/\\pi^j)_T$ for positive integers $N,j$ [sk-def-sp-coefficient-towers]. Let $\\beta_N:R\\to B_N$ and $\\delta_j:R\\to D_j$ be the canonical projections under the completed coefficient inverse-limit identifications of [sk-def-sp-coefficient-towers, det-prop-sfb-qlbar-colimit-x-integral-limit]. Write $b_{N,M}:B_N\\to B_M$ and $d_{j,k}:D_j\\to D_k$ for reduction when $N\\geq M$ and $j\\geq k$.\n\nFor every $eN\\geq j$ the inclusion $(\\ell^N)\\subseteq(\\pi^j)$ induces a surjective ring-sheaf map $q_{N,j}:B_N\\to D_j$, induced by $x\\bmod\\ell^N\\mapsto x\\bmod\\pi^j$, satisfying\n$$q_{N,j}\\beta_N=\\delta_j.$$\nFor $N\\geq M$, $eM\\geq j$, and $j\\geq k\\geq1$, the following are equalities of the actual ring-sheaf maps:\n$$q_{M,j}b_{N,M}=q_{N,j},\\qquad d_{j,k}q_{N,j}=q_{N,k}.$$\nThus these maps, including the completed projections, form one commuting quotient diagram, with identity and composite reductions included. The source and target finite rings of $q_{N,j}$ are finite commutative rings annihilated by $\\ell^N$. These assertions hold for arbitrary ramification and arbitrary $T$, with no invertibility assumption on $\\ell$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Final integral-constructibility sentence, coefficient comparison of ell-power and uniformizer-power reductions; agent refinement of returned proof step 1 retaining the completed coefficient projections. See sk-def-sp-coefficient-towers and det-prop-sfb-qlbar-colimit-x-integral-limit, clause (3)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit"
+ ],
+ "proof": [
+  {
+   "text": "Since $u^N$ is a unit, $(\\ell^N)=(\\pi^{eN})\\subseteq(\\pi^j)$ when $eN\\geq j$. Thus $f_{N,j}:O/(\\ell^N)\\to O/(\\pi^j)$, $[x]\\mapsto[x]$, is well defined: changing $x$ by $\\ell^Na$ changes it by $\\pi^j(u^N\\pi^{eN-j}a)$. It preserves addition, multiplication and one, and every target class has a representative $x\\in O$, so it is surjective. Clause (4) of the coefficient-extension datum gives finiteness of $O/(\\pi^j)$ and of $O/(\\pi^{eN})=O/(\\ell^N)$, since $j,eN\\geq1$. Multiplication by $\\ell^N$ is zero on both quotients, because $\\ell^N$ belongs to both defining ideals.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Final integral-constructibility sentence: explicit coefficient comparison; agent argument using the coefficient-tower definition and the cited general sheafification and inverse-limit facts."
+   }
+  },
+  {
+   "text": "Apply ring-valued constant sheafification to $f_{N,j}$ to obtain the actual map $q_{N,j}:B_N\\to D_j$. The universal property of sheafification defines this functor on maps and preserves identities and composition by uniqueness. To check surjectivity, choose a section $s$ of the underlying surjective set map $f_{N,j}$, so $f_{N,j}s=\\mathrm{id}$. Sheafify these set maps. By [lem-pc-sites-sheafification-underlying-sets] the resulting source and target are the underlying sets of $B_N,D_j$; their map agrees with the underlying map of $q_{N,j}$ by the universal property, since both agree on constant labels. Consequently that underlying map has the sheafified $s$ as a right inverse. In particular $q_{N,j}$ is surjective on sections over every site object. The section is used only as a set map; no ring section is asserted. With independent site and coefficient universes, construct the forgetful-preserves-sheafification instance on a small model in the coefficient-sheaf universe, then transport it back along the equivalence of sites. This is Mathlib GrothendieckTopology.PreservesSheafification.transport and does not alter either universe.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; Section 00YR, section-sheaves-algebraic-structures, items (gamma) and (epsilon)."
+   }
+  },
+  {
+   "text": "The constant scalar quotient maps form cones over both quotient towers: consecutive compatibility follows by functorial sheafification and the representative rule. Naturality therefore proves compatibility with every tower transition. The map q composed with the constant ell quotient is the constant uniformizer quotient, since the two ring homomorphisms send x to its class. Every constant ell quotient is surjective on sections by step 2. Cancel this quotient to deduce both cross-tower commuting squares from scalar naturality. The identity and composite reduction equations follow from the functor laws of the two towers.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "sk-def-sp-coefficient-towers",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Final integral-constructibility sentence: explicit coefficient comparison; agent argument using the coefficient-tower definition and the cited general sheafification and inverse-limit facts."
+   }
+  },
+  {
+   "text": "Let c be the constant-to-completed map. The normalization in sp_completed_coefficient_limit gives c followed by beta_N equal to the constant ell-power quotient. Step 3 then gives c followed by beta_N and q_(N,j) equal to the constant uniformizer quotient. The limit lift defining c gives the same scalar normalization for delta_j. Apply lem-sp-completed-integral-finite-quotient-hom-ext with I equal to the (j+1)st uniformizer ideal; its positive-power hypothesis holds with k=j. This proves beta_N followed by q_(N,j) equals delta_j. The compatibility equations for both completed projection families are the limit cone naturality equations, precomposed by the recorded comparison for the ell tower. This uses no new construction of either completion and is valid for all ramification indices e>=1 and arbitrary T.",
+   "uses": [
+    "sk-def-sp-coefficient-towers",
+    "lem-sp-completed-integral-finite-quotient-hom-ext",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Final integral-constructibility sentence: explicit coefficient comparison; agent argument using the coefficient-tower definition and the cited general sheafification and inverse-limit facts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "sk-def-sp-coefficient-towers",
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "def-pur-sheaf-inverse-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D6",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Final integral-constructibility sentence; quotient arithmetic and sheafified set sections as in the original plan, with the completed projection identity shortened using the existing normalized finite-quotient extensionality theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotientToQuotient|Quotient.factor|constantSheaf.*map",
+   "results": {
+    "subdirectory": "RingTheory/Ideal",
+    "count": 11,
+    "hits": [
+     "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Operations.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Operations.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ideal.Quotient.factor and its composition lemmas cover ordinary quotient arithmetic only; AdicCompletion and perfectoid hits do not identify the completed pro-étale ring sheaf and both families of its projections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal quotient towers of ring sheaves identify the completed ring projections and commute with reduction in either index",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "AdicCompletion.liftRingHom.congr_simp",
+     "AdicCompletion.instCommRing",
+     "AlgebraicGeometry.LocallyRingedSpace.coproductCofan",
+     "SheafOfModules.freeCofan",
+     "Ideal.Quotient.tower_quotient_map_quotient",
+     "Ideal.Quotient.factorPow",
+     "UniformSpace.Completion.coeRingHom",
+     "Ideal.Quotient.factorPowSucc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ideal.Quotient.factor and its composition lemmas cover ordinary quotient arithmetic only; AdicCompletion and perfectoid hits do not identify the completed pro-étale ring sheaf and both families of its projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.Quotient.factor\"",
+   "results": {
+    "subdirectory": "",
+    "count": 12,
+    "hits": [
+     "Ideal.Quotient.factor",
+     "Ideal.Quotient.factor_eq",
+     "Ideal.Quotient.factor_comp_mk",
+     "Ideal.Quotient.factor_surjective",
+     "Ideal.Quotient.factor_comp",
+     "Ideal.Quotient.factor_mk",
+     "Ideal.Quotient.factor_comp_apply",
+     "Ideal.Quotient.factorₐ"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ideal.Quotient.factor and its composition lemmas cover ordinary quotient arithmetic only; AdicCompletion and perfectoid hits do not identify the completed pro-étale ring sheaf and both families of its projections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible quotient maps between ell power and uniformizer power coefficient sheaves and their projections from the completed valuation ring",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "PreTilt.mk_comp_untilt_eq_coeff_zero",
+     "AdicCompletion.factor_evalₐ_eq_eval",
+     "WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+     "AdicCompletion.factorₐ_evalₐ_one",
+     "AdicCompletion.factor_eval_eq_evalₐ",
+     "AdicCompletion.evalₐ_of",
+     "AdicCompletion.transitionMap_ideal_mk",
+     "AdicCompletion.evalₐ_mk"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ideal.Quotient.factor and its composition lemmas cover ordinary quotient arithmetic only; AdicCompletion and perfectoid hits do not identify the completed pro-étale ring sheaf and both families of its projections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed pro etale coefficient sheaf has compatible projections to ell power and uniformizer power quotients for a ramified local field",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "PreTilt.mk_comp_untilt_eq_coeff_zero",
+     "BDeRhamPlus",
+     "WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+     "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+     "BDeRham",
+     "PreTilt.mk_untilt_eq_coeff_zero",
+     "WittVector.factorPowSucc_fontaineThetaModPPow_eq",
+     "WittVector.mk_pow_fontaineTheta"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Ideal.Quotient.factor and its composition lemmas cover ordinary quotient arithmetic only; AdicCompletion and perfectoid hits do not identify the completed pro-étale ring sheaf and both families of its projections."
+  },
+  {
+   "tool": "grep",
+   "query": "factor_surjective|factor_comp_mk|factor_comp_apply|factor_comp ",
+   "results": {
+    "count": 5,
+    "hits": [
+     "Mathlib/RingTheory/Ideal/Quotient/PowTransition.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Defs.lean",
+     "Mathlib/RingTheory/Ideal/Quotient/Defs.lean"
+    ],
+    "subdirectory": "RingTheory/Ideal",
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quotient-factor lemmas cover the elementary ring arithmetic; completion searches concern ordinary adic rings, not this pro-etale coefficient sheaf with both normalized projection families."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cofinal inverse limits of constant quotient ring sheaves have compatible completed coefficient projections",
+   "results": {
+    "count": 8,
+    "hits": [
+     "InverseSystem.invLimEquiv_apply_coe",
+     "AdicCompletion.subring",
+     "Profinite.exists_locallyConstant",
+     "AdicCompletion.pi_apply_coe",
+     "ProfiniteGrp.isIso_toLimit",
+     "Profinite.asLimitCone",
+     "Profinite.lim",
+     "Profinite.asLimitConeIso"
+    ],
+    "subdirectory": "",
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quotient-factor lemmas cover the elementary ring arithmetic; completion searches concern ordinary adic rings, not this pro-etale coefficient sheaf with both normalized projection families."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.Quotient.factor\"",
+   "results": {
+    "count": 12,
+    "hits": [
+     "Ideal.Quotient.factor",
+     "Ideal.Quotient.factor_eq",
+     "Ideal.Quotient.factor_comp_mk",
+     "Ideal.Quotient.factor_surjective",
+     "Ideal.Quotient.factor_comp",
+     "Ideal.Quotient.factor_mk",
+     "Ideal.Quotient.factor_comp_apply",
+     "Ideal.Quotient.factorₐ"
+    ],
+    "subdirectory": "",
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quotient-factor lemmas cover the elementary ring arithmetic; completion searches concern ordinary adic rings, not this pro-etale coefficient sheaf with both normalized projection families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible quotient maps between ramified ell power and uniformizer power constant ring sheaves commute with projections from the completed coefficient inverse limit",
+   "results": {
+    "count": 8,
+    "hits": [
+     "PreTilt.mk_comp_untilt_eq_coeff_zero",
+     "WittVector.factorPowSucc_comp_fontaineThetaModPPow",
+     "Ideal.quotientToQuotientRangePowQuotSucc_mk",
+     "AdicCompletion.factor_evalₐ_eq_eval",
+     "IsAdicComplete.StrictMono.mk_comp_liftRingHom",
+     "AdicCompletion.factorₐ_evalₐ_one",
+     "IsAdicComplete.mk_comp_liftRingHom",
+     "AdicCompletion.factor_eval_eq_evalₐ"
+    ],
+    "subdirectory": "",
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quotient-factor lemmas cover the elementary ring arithmetic; completion searches concern ordinary adic rings, not this pro-etale coefficient sheaf with both normalized projection families."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring inverse limit along cofinal powers of two ideals identifies each finite quotient projection with the reduction from a sufficiently deep level",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AdicCompletion.Ideal.mk_eq_mk",
+     "AdicCompletion.transitionMap_ideal_mk",
+     "IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq'",
+     "AdicCompletion.factor_evalₐ_eq_eval",
+     "AdicCompletion.pi_apply_coe",
+     "AdicCompletion.evalₐ_of",
+     "AdicCompletion.factor_eval_eq_evalₐ",
+     "AdicCompletion.factor_eval_liftRingHom"
+    ],
+    "subdirectory": "",
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quotient-factor lemmas cover the elementary ring arithmetic; completion searches concern ordinary adic rings, not this pro-etale coefficient sheaf with both normalized projection families."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-cofinal-finite-reduction-constructibility",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof final integral-constructibility sentence: actual maps between ell-power and uniformizer-power coefficients and their completed projections (old item step 1).",
+   "via": [
+    "lem-sp-cofinal-finite-reduction-constructibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-cofinal-coefficient-projection-cocone",
+  "worker": "stage1",
+  "summary": "Constructed the quotient maps on representatives, sheafified them, proved even sectionwise surjectivity with a set-theoretic section and the existing underlying-set sheafification leaf, and wrote the cofinal inverse-limit coordinate comparison explicitly to fix the completed projections. Statement unchanged. No new nodes.",
+  "blueprint": "sk-lem-sp-tower proof final integral-constructibility sentence; the finite coefficient comparison implicit there is made explicit using sk-def-sp-coefficient-towers first paragraph and det-prop-sfb-qlbar-colimit-x-integral-limit clause (3).",
+  "tool_uses": [
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-integral-limit",
+    "why": "Its clause (3), already a statement dependency, identifies the pulled-back completed coefficient ring with the uniformizer-power limit for arbitrary finite E and any scheme. This is a coefficient comparison tool, not a replacement of the normalized-tower reconstruction route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-b9a1157e3",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-b9a1157e3 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, with no new nodes and the statement and stmt_deps unchanged, so the split is just the 4-step proof of the item. Sources checked: the final sentence of the main-20261015 sk-lem-sp-tower proof and the first paragraph of the sk-def-sp-coefficient-towers section; clause 4 of def-weil-l-adic-coefficient-extension (finite A_{E,n}, independent of the uniformizer); and clause 3 of det-prop-sfb-qlbar-colimit-x-integral-limit (canonical ring-sheaf isomorphism to the π-power limit for any finite E and any scheme). Step 1: (ℓ^N)=(π^{eN})⊆(π^j), well defined via the factor u^Nπ^{eN−j}a; finiteness of both rings and ℓ^N-torsion follow. Step 2: sheafifying a set section, together with the underlying-sets leaf and uniqueness of |q| as the set-sheafification of |f|, gives a right inverse, hence surjectivity on sections over every object. Step 3: equalities checked on representatives plus functoriality of sheafification; eN≥eM≥j makes every q defined. Step 4: the cofinal comparison y↦(a_N y_{eN}) and its inverse z↦(q_{N,j}z_N) re-checked: well-definedness, independence of N, compatibility in j, and both composites. Hence β_N=a_Nδ_{eN} and q_{N,j}β_N=δ_j, which is the canonical comparison, not a free isomorphism. Edge cases tested: e=1; Q_ℓ(√ℓ) with N=1 and j=1,2; a changed uniformizer; T empty. Duplicate search with rg -L over dag/nodes: the closest node, lem-sp-completed-coefficient-regular-quotients (kernels of the projections), is not a duplicate. No cycle: the only citer is the parent. I accept the tool use of det-prop-sfb-qlbar-colimit-x-integral-limit: it is already a stmt_dep and is the coefficient identification the definition relies on. No SGA source is used. Minor: the citations.json the report mentions is not in the commit; nothing depends on it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CofinalCoefficientProjectionCocone",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_cofinal_coefficient_projection_cocone",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spCofinalCoefficientMap",
+   "AlgebraicGeometry.ProEtale.sp_cofinal_coefficient_projection_cocone"
+  ],
+  "file": "lean/Sheaf/Paper/CofinalCoefficientProjectionCocone.lean",
+  "statement": "theorem sp_cofinal_coefficient_projection_cocone (e : ℕ) (_he : 1 ≤ e) (v : (Padic.coefficientExtensionIntegers l E)ˣ) (_hv : (l : Padic.coefficientExtensionIntegers l E) = v * Padic.coefficientExtensionUniformizer l E ^ e) : ∃ H : ∀ (n j : ℕ), j + 1 ≤ e * (n + 1) → spEllIdeal l E ^ (n + 1) ≤ Padic.coefficientExtensionIdeal l E (j + 1), (∀ (n j : ℕ) (h : j + 1 ≤ e * (n + 1)), (∀ x : Padic.coefficientExtensionIntegers l E, Ideal.Quotient.factor (H n j h) (Ideal.Quotient.mk (spEllIdeal l E ^ (n + 1)) x) = Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (j + 1)) x) ∧ Function.Surjective (Ideal.Quotient.factor (H n j h)) ∧ (∀ U : T.ProEtᵒᵖ, Function.Surjective ((spCofinalCoefficientMap l E T (H n j h)).hom.app U)) ∧ ((sp_completed_coefficient_limit l E T).choose.hom ≫ limit.π (spCoefficientRings l E T) (op n)) ≫ spCofinalCoefficientMap l E T (H n j h) = limit.π (integralCoefficientSheafSystem l E T) (op j) ∧ Finite (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)) ∧ Finite (Padic.coefficientExtensionRing l E (j + 1)) ∧ (l ^ (n + 1) : Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1)) = 0 ∧ (l ^ (n + 1) : Padic.coefficientExtensionRing l E (j + 1)) = 0) ∧ (∀ (n m j : ℕ) (hnm : m ≤ n) (hmj : j + 1 ≤ e * (m + 1)) (hnj : j + 1 ≤ e * (n + 1)), (spCoefficientRings l E T).map (homOfLE hnm).op ≫ spCofinalCoefficientMap l E T (H m j hmj) = spCofinalCoefficientMap l E T (H n j hnj)) ∧ (∀ (n j k : ℕ) (hjk : k ≤ j) (hnj : j + 1 ≤ e * (n + 1)) (hnk : k + 1 ≤ e * (n + 1)), spCofinalCoefficientMap l E T (H n j hnj) ≫ (integralCoefficientSheafSystem l E T).map (homOfLE hjk).op = spCofinalCoefficientMap l E T (H n k hnk)) ∧ (∀ (n m : ℕ) (h : m ≤ n), ((sp_completed_coefficient_limit l E T).choose.hom ≫ limit.π (spCoefficientRings l E T) (op n)) ≫ (spCoefficientRings l E T).map (homOfLE h).op = (sp_completed_coefficient_limit l E T).choose.hom ≫ limit.π (spCoefficientRings l E T) (op m)) ∧ (∀ (j k : ℕ) (h : k ≤ j), limit.π (integralCoefficientSheafSystem l E T) (op j) ≫ (integralCoefficientSheafSystem l E T).map (homOfLE h).op = limit.π (integralCoefficientSheafSystem l E T) (op k)) ∧ (∀ n : ℕ, (spCoefficientRings l E T).map (𝟙 (op n)) = 𝟙 _ ∧ (integralCoefficientSheafSystem l E T).map (𝟙 (op n)) = 𝟙 _) ∧ (∀ (n m k : ℕ) (h₁ : m ≤ n) (h₂ : k ≤ m), (spCoefficientRings l E T).map (homOfLE h₁).op ≫ (spCoefficientRings l E T).map (homOfLE h₂).op = (spCoefficientRings l E T).map (homOfLE (h₂.trans h₁)).op ∧ (integralCoefficientSheafSystem l E T).map (homOfLE h₁).op ≫ (integralCoefficientSheafSystem l E T).map (homOfLE h₂).op = (integralCoefficientSheafSystem l E T).map (homOfLE (h₂.trans h₁)).op)",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Indices n,j denote positive exponents n+1,j+1. Canonical quotient maps are constant sheafifications of Ideal.Quotient.factor, with no arbitrary map choice; the ell projection is expressed through the existing uniquely normalized sp_completed_coefficient_limit, and the uniformizer projection is the existing limit projection. Independent site and coefficient universes are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-675e4c458",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Every node clause rendered: l prime, finite E, O, recorded π, v unit, e≥1, l=vπ^e, arbitrary T with independent t,u universes. B_N=spCoefficientRing n, D_j=integralCoefficientSheaf j, R=completedIntegralCoefficientSheafUnrestricted (def= limit integralCoefficientSheafSystem). β_N = (sp_completed_coefficient_limit).choose.hom ≫ limit.π: choose of a uniquely normalized ∃!, canonical; δ_j = limit.π. q_{N,j}=spCofinalCoefficientMap is constant sheafification of Ideal.Quotient.factor (real data), with representative rule, ordinary and sectionwise surjectivity (proved in node step 2), q∘β=δ, both reduction squares, β/δ cone laws, identity/composite reductions, Finite and ℓ^N=0 for both quotients. Edge cases e=1, ramified, n=j=0, j+1=e(n+1), empty T: no extra assumption. No duplicate (no existing cross-tower map; spCompletedEllProjection is the ancestor unit's same-universe wrapper, citing it would cycle). Only the lean field changed vs side-live; statement verbatim; lines ≤100; docstrings with source/blueprint and steps 1-4; only the theorem is sorry. Notes: def-weil-completed-integral-coefficients objects used via cited det-prop/sk-def records (same as landed sk-def); second reading is an author self-reread but substantive. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261025T143023-L-914360",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

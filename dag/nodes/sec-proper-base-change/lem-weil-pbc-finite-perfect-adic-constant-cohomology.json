@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-finite-perfect-adic-constant-cohomology",
+ "kind": "statement",
+ "title": "Perfect constant levels have bounded finite lisse cohomology",
+ "statement": "For a scheme Y, an adic coefficient datum d on A, an algebraic tower T and n, if T.level n is perfect [def-pc-perfect-ring-complex], the explicit finitePerfectAdicEtaleConstant Y T n [def-weil-pbc-finite-perfect-adic-constant-normalization] has cohomology zero outside a finite integer interval and finite locally constant cohomology in every degree [def-constructible-finite-locally-constant]. This statement has no actual completed-coefficient object or marking.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-perfect-adic-constant-normalization",
+  "def-pc-perfect-ring-complex",
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Choose the algebraic cohomological bounds from IsPerfect.exists_homologyConcentratedIn. Exactness of universe lift, ring-equivalence scalar restriction and constants preserves the two vanishing inequalities.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The quotient ring is finite, hence Noetherian. IsPerfect.finite_homology makes each algebraic cohomology module finite; its lifted module has finite carrier and is finitely generated over the lifted quotient ring. The constant sheaf of this module is finite locally constant.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply mapDerivedCategoryHomologyFunctorIso for the universe lift and for constants. Transport finite local constancy through the resulting isomorphism with cohomology of the constant complex.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal arrows restriction of scalars induce a natural map on presheaves of local isomorphisms",
+   "results": "Eight hits: ModuleCat.restrictScalars, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars and ordinary restriction pseudofunctors; no derived local Isom normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing scalar restriction and universal-arrow APIs; no direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite perfect complexes from pro-etale to etale with compatible coefficient reduction normalization",
+   "results": "Eight hits about standard etale algebras, smoothness, and ring-theoretic descent; no derived finite quotient normalization presentation.",
+   "date": "2026-10-27",
+   "verdict": "No replacement for the project-specific finite coefficient interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StructuredArrow.IsUniversal\", \"IsIso\"",
+   "results": "No hits.",
+   "date": "2026-10-27",
+   "verdict": "Use desc, fac and hom_ext from StructuredArrow.IsUniversal."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Uu]niversal|finitePerfectAdic.*[Dd]escent; localIsomorphismPresheaf; IsPerfect.finite_homology",
+   "results": "Mathlib has StructuredArrow.IsUniversal and coefficient restriction. The project has NormalizedDerivedIsomorphismTransport universalIso and normalized_square_transport, finite-ring descent, exact constant cohomology comparison, and IsPerfect boundedness and finite_homology. No canonical constant normalization diagram or actual quotient package matching these statements exists. Blueprint search for universal normalization returned zero matches.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved generic tools and state only the remaining finite quotient steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePerfectAdicIsomorphismPresentation",
+  "date": "2026-10-27",
+  "group": "S7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Tag 09C6, finite quotient levels and the normalized algebraic diagram; Tags 06YY and 09BV.",
+   "via": [
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-presentation",
+    "lem-weil-pbc-finite-perfect-adic-isomorphism-sections",
+    "lem-weil-pbc-finite-perfect-adic-tower-extraction",
+    "lem-weil-pbc-finite-perfect-adic-realization",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePerfectAdicConstantCohomology",
+  "file": "lean/Sheaf/Paper/FinitePerfectAdicConstantCohomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finitePerfectAdicEtaleConstant_cohomology",
+  "statement": "theorem finitePerfectAdicEtaleConstant_cohomology (Y : Scheme.{t})\n    {A : Type t} [CommRing A] {d : AdicCoefficientDatum A}\n    (T : FinitePerfectAdicAlgebraTower d) (n : ℕ)\n    (hp : DerivedCategory.IsPerfect (T.level n)) :\n    (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero\n      ((DerivedCategory.homologyFunctor _ i).obj (finitePerfectAdicEtaleConstant Y T n))) ∧\n    (∀ i : ℤ, IsFiniteLocallyConstantSheaf\n      ((DerivedCategory.homologyFunctor _ i).obj (finitePerfectAdicEtaleConstant Y T n)))",
+  "branch": "sheaf-dag",
+  "by": "S7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261027T112432-L-1583335",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

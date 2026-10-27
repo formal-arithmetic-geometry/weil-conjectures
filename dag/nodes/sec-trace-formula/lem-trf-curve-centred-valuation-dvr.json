@@ -2,7 +2,7 @@
  "id": "lem-trf-curve-centred-valuation-dvr",
  "kind": "statement",
  "title": "A nontrivial centred valuation on a smooth curve and its etale coordinate",
- "statement": "Let $K$ be a field and $C$ a smooth integral finite-type $K$-scheme of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Identify the function field $k(C)$, the local ring at the generic point, with $L$. Let $A\\subsetneq L$ be a valuation ring [def-trf-valuation-ring] containing $K$ and suppose $\\operatorname{Spec}A\\to C$ [def-weil-affine-spectrum] induces this field identification at the generic point. The image $c$ of its closed point is a closed point of $C$, and $A=\\mathcal O_{C,c}$ as subrings of $L$; this is a discrete valuation ring [def-sc-discrete-valuation-ring]. There exist an affine neighbourhood $U$ of $c$ and an etale $K$-morphism $u:U\\to\\mathbf A^1_K$ [def-weil-etale-morphism]. If $x\\in A$ is its coordinate, $y=u(c)$ and $F=K(x)$, then $x$ is transcendental over $K$, $L/F$ is finite separable [def-weil-pbc-separable-algebraic-extension], $A\\cap F=\\mathcal O_{\\mathbf A^1_K,y}$, and $A$ is a localization at a prime ideal of an etale algebra over $A\\cap F$. The induced residue-field extension $\\kappa(c)/\\kappa(y)$ is finite separable. If $K$ is separably closed [def-kun-separably-closed], this residue-field extension is the identity under the given embeddings.",
+ "statement": "Let $K$ be a field and $C$ a smooth integral finite-type $K$-scheme of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-finite-type-morphism, def-kun-topological-krull-dimension]. Identify the function field $k(C)$, the local ring at the generic point, with $L$ [def-sc-function-field]. Let $A\\subsetneq L$ be a valuation ring [def-trf-valuation-ring] containing $K$ and suppose $\\operatorname{Spec}A\\to C$ [def-weil-affine-spectrum] induces this field identification at the generic point. The image $c$ of its closed point is a closed point of $C$, and $A=\\mathcal O_{C,c}$ as subrings of $L$; this is a discrete valuation ring [def-sc-discrete-valuation-ring]. There exist an affine neighbourhood $U$ of $c$ and an etale $K$-morphism $u:U\\to\\mathbf A^1_K$ [def-weil-etale-morphism, def-sbc-affine-space]. If $x\\in A$ is its coordinate, $y=u(c)$ and $F=K(x)$, then $x$ is transcendental over $K$, $L/F$ is finite separable [def-weil-pbc-separable-algebraic-extension], $A\\cap F=\\mathcal O_{\\mathbf A^1_K,y}$, and $A$ is a localization at a prime ideal of an etale algebra over $A\\cap F$. The induced residue-field extension $\\kappa(c)/\\kappa(y)$ is finite separable. If $K$ is separably closed [def-kun-separably-closed], this residue-field extension is the identity under the given embeddings.",
  "source": {
   "document": "literature/stacks-project/morphisms.tex",
   "place": "Tag 054L (lemma-smooth-etale-over-affine-space), dimension-one case; varieties.tex Tag 0B8Y (lemma-regular-point-on-curve) for the DVR; Temkin proof of Theorem 2.1.8, printed pp. 12--13, with an etale coordinate instead of its arbitrary-uniformizer assertion."
@@ -17,11 +17,192 @@
   "def-sc-discrete-valuation-ring",
   "def-weil-etale-morphism",
   "def-kun-separably-closed",
-  "def-weil-pbc-separable-algebraic-extension"
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-sc-function-field",
+  "def-sbc-affine-space"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\eta$ be the generic point of $C$, and let $a:\\operatorname{Spec}A\\to C$ be the given morphism. Its stalk map at the closed point is a local homomorphism $R=\\mathcal O_{C,c}\\to A$. All these rings map into $L$: on an affine open containing $c$, the germ embedding into the generic stalk identifies the fraction field with $L$, and the stalk is its localization at the prime representing $c$. Compatibility of stalk maps with generization and the prescribed identity on the generic field show that $R\\to A\\to L$ is this canonical inclusion. Thus $R\\subseteq A$ and $\\mathfrak m_A\\cap R=\\mathfrak m_R$. If $c=\\eta$, this inclusion would be $L\\subseteq A$, contradicting $A\\subsetneq L$. Hence $c\\ne\\eta$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, affine stalks; local maps and generization compatibility"
+   }
+  },
+  {
+   "text": "The point $c$ is closed. Otherwise choose a proper specialization $z$ of $c$. The chain $\\overline{\\{z\\}}\\subsetneq\\overline{\\{c\\}}\\subsetneq C$ of irreducible closed subsets would have length two, contradicting $\\dim C=1$. Strictness on the right follows from $c\\ne\\eta$, and strictness on the left from the $T_0$ property of schemes. Choose a finite-type affine chart $V=\\operatorname{Spec}D$ containing $c$ from the finite-type hypothesis. The prime $\\mathfrak q$ representing $c$ is maximal and nonzero: the zero prime represents $\\eta$. The stalk identification gives $R=D_{\\mathfrak q}$, a local domain with fraction field $L$. Its prime chains have length at most one, since the corresponding chains of irreducible closed subsets of $V$, and their closures in $C$, have length at most one. The chain $(0)\\subsetneq\\mathfrak qD_{\\mathfrak q}$ has length one. Thus $\\dim R=1$.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B8Y, lemma-regular-point-on-curve, opening local-dimension reduction; prime-chain argument written out without separatedness"
+   }
+  },
+  {
+   "text": "A field is Noetherian, so $C$, of finite type over $\\operatorname{Spec}K$, is Noetherian; in particular its stalk $R$ is Noetherian. Smoothness over the field implies that every local ring of $C$ is normal, by the geometrically-normal theorem applied with the identity field extension. Therefore $R$ is a one-dimensional Noetherian normal local domain, and the normal-local-domain DVR criterion makes $R$ a discrete valuation ring. This applies over an arbitrary, possibly imperfect, field.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 056T, lemma-smooth-geometrically-normal; algebra.tex Tag 00PD, lemma-characterize-dvr (5) implies (1)"
+   }
+  },
+  {
+   "text": "Choose a generator $t\\ne0$ of $\\mathfrak m_R$. Since $R\\to A$ is local, $t$ belongs to $\\mathfrak m_A$. For $z\\in L^\\times$, write $z=a/b$ with nonzero $a,b\\in R$. By the unit-times-uniformizer theorem write $a=ut^r$, $b=vt^s$ with $u,v\\in R^\\times$ and $r,s\\ge0$. If $r\\ge s$, then $z=(u/v)t^{r-s}\\in R$. If $r<s$ and $z\\in A$, put $h=s-r\\ge1$. Then $t^{-1}=(v/u)t^{h-1}z\\in A$, contradicting $t\\in\\mathfrak m_A$. Every nonzero element of $A$ is consequently in $R$, and $0\\in R$; together with $R\\subseteq A$ this proves $A=R$ inside $L$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, final assertion; elementary fraction calculation using its unit-power form"
+   }
+  },
+  {
+   "text": "The smooth local normal form supplies an affine neighbourhood $U=\\operatorname{Spec}B$ of $c$ and an etale $K$-morphism $u:U\\to\\mathbf A^d_K$ for some $d\\ge0$. Here $U$ is nonempty and integral. The projection of affine $d$-space is smooth of relative dimension $d$, and an etale map is smooth of relative dimension zero. Composition therefore makes $U\\to\\operatorname{Spec}K$ smooth of relative dimension $d$, so $\\dim U=d$. Moreover the etale ring map $K[T_1,\\ldots,T_d]\\to B$ is finitely presented, hence $B$ is finite type over $K$. Let $\\mathfrak q\\subset B$ represent the closed point $c$. The finite-type-domain dimension theorem gives $\\dim B=\\dim B_{\\mathfrak q}=\\dim R=1$. Thus $d=1$, giving the required coordinate $x=u^*(T)\\in B\\subseteq A$.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sbc-smooth-fixed-dimension-over-field",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 054L, lemma-smooth-etale-over-affine-space; relative dimension via Tag 02NL; algebra.tex Tag 00OS"
+   }
+  },
+  {
+   "text": "Put $P=K[T]$ and let $\\varphi:P\\to B$ send $T$ to $x$. Etaleness includes flatness, and the affine flatness criterion makes $B$ flat as a $P$-module. Since $P$ is a domain, flatness implies torsion-freeness. For $0\\ne f\\in P$, multiplication by $f$ on the nonzero ring $B$ is injective, so $\\varphi(f)\\ne0$ (otherwise it annihilates $1$). Hence $\\varphi$ is injective, and the embedding $B\\hookrightarrow L$ shows that $x$ is transcendental over $K$. Identify $\\operatorname{Frac}P$ with $F=K(x)$. Apply the etale-algebra residue-field theorem at $(0)\\subset B$, whose contraction in $P$ is $(0)$. The residue fields at these primes are respectively $L=\\operatorname{Frac}B$ and $F$. It follows that $L/F$ is finite separable, with exactly the embeddings just specified.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-etale-algebra-residue-field-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01U5, lemma-flat-characterize; Tag 02GL, lemma-etale-over-field, applied at the generic point"
+   }
+  },
+  {
+   "text": "Let $y=u(c)$, and let $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)\\subset P$. The closed-point affine dimension data give that $\\kappa(c)/K$ is finite. The image $\\alpha$ of $x$ in $\\kappa(c)$ is algebraic over $K$, and $P/\\mathfrak p=K[\\alpha]$ is a field (a finite-dimensional domain over $K$). Thus $\\mathfrak p$ is a nonzero maximal ideal, $y$ is closed, and $\\kappa(y)=K[\\alpha]$ is finite over $K$. Set $R_0=P_{\\mathfrak p}=\\mathcal O_{\\mathbf A^1_K,y}\\subset F$. The polynomial regularity theorem makes $R_0$ regular local, while the finite-type-domain dimension theorem and $\\dim K[T]=1$ give $\\dim R_0=1$. The regular-local DVR criterion makes $R_0$ a DVR, in particular a valuation ring of $F$.",
+   "uses": [
+    "lem-trf-closed-point-affine-dimension-data",
+    "lem-sc-p1-polynomial-regular",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "lem-sc-p1-polynomial-dimension-one",
+    "lem-sc-regular-dim1-dvr",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OQ, proposition-finite-gl-dim-polynomial-ring; Tag 00OS, lemma-dimension-spell-it-out; Tag 00PD, lemma-characterize-dvr"
+   }
+  },
+  {
+   "text": "The stalk map of $u$ at $c$ identifies $R_0\\to R=A$ with the inclusion induced by $P\\to B\\to L$. It is local, so $A$ dominates $R_0$. Apply the valuation-intersection theorem to the valuation ring $R_0$ of $F$, the extension $F\\hookrightarrow L$, and the dominating valuation ring $A$. It gives $A\\cap F=R_0=\\mathcal O_{\\mathbf A^1_K,y}$ as subrings of $L$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lemma-nagata-valuation-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves; local stalk map and the existing dominating-valuation intersection theorem"
+   }
+  },
+  {
+   "text": "Base change $P\\to B$ along $P\\to R_0$. The algebra $B_0=R_0\\otimes_PB=(P\\setminus\\mathfrak p)^{-1}B$ is etale over $R_0$. Since $\\varphi(P\\setminus\\mathfrak p)$ avoids $\\mathfrak q$, this localization has the prime $\\mathfrak q_0=(P\\setminus\\mathfrak p)^{-1}\\mathfrak q$. Its localization is $B_{\\mathfrak q}$: both rings invert exactly all the elements of $B\\setminus\\mathfrak q$, and the inverse maps send a fraction to the same fraction. The affine-stalk theorem identifies $B_{\\mathfrak q}$ with $R=A$ by the germ map. Consequently $A=(B_0)_{\\mathfrak q_0}$, a localization at a prime of an etale algebra over $R_0=A\\cap F$. The ring meaning of etale here agrees with the scheme meaning by the affine etale comparison.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2, lemma-etale, base change; schemes.tex Tag 01HV, lemma-spec-sheaves; iterated localization by its fractions"
+   }
+  },
+  {
+   "text": "Apply the etale-algebra residue-field theorem a second time, now to $P\\to B$ and $\\mathfrak q$ over $\\mathfrak p$. It says that the actual map $\\kappa(y)\\to\\kappa(c)$ is finite separable. If $K$ is separably closed, the already proved finite extension $\\kappa(y)/K$ is algebraic, and the separably-closed algebraic-extension theorem makes $\\kappa(y)$ separably closed. By the definition of separable closedness its finite separable extension $\\kappa(c)$ is trivial. Hence the displayed residue map is an isomorphism, or the identity after identifying the two fields through the given embeddings. This does not assert that either residue field is $K$ when $K$ is imperfect.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "lem-sfb-algebraic-sepclosed-purely-insep",
+    "def-kun-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field; fields.tex Tag 030K, lemma-separable-first, and separable closedness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-locally-ringed-space-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "sbc-thm-etale-local-normal-form",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-trf-closed-point-affine-dimension-data",
+  "lem-sc-p1-polynomial-regular",
+  "lem-sc-p1-polynomial-dimension-one",
+  "lem-sc-regular-dim1-dvr",
+  "lemma-nagata-valuation-intersection",
+  "lem-weil-pbc-etale-ring-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-sfb-algebraic-sepclosed-purely-insep",
+  "def-kun-separably-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 054L, lemma-smooth-etale-over-affine-space; varieties.tex Tags 056T and 0B8Y; algebra.tex Tags 00PD, 00OS, 00U2; elementary domination and fraction arguments written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +238,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} [inst : CommRing A] [inst_1 : IsDomain A] [inst_2 : IsDiscreteValuationRing A]\\n  [inst_3 : Field K] [inst_4 : Algebra A K] [inst_5 : IsFractionRing A K],\\n  Subring.map (algebraMap A K) ⊤ =\\n    (IsDedekindDomain.HeightOneSpectrum.valuation K (IsDiscreteValuationRing.ma\", \"doc\": \"The image of the canonical algebra map from a discrete valuation ring $ A $ to its fraction field $ K $ coincides with the valuation subring associated to the maximal ideal of $ A $. In other words, t\"}\n  {\"name\": \"of_isDiscreteValuationRing\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/Basic\", \"type\": \"∀ (A : Type u) [inst : CommRing A] [inst_1 : IsDomain A] [IsDiscreteValuationRing A], ValuationRing A\", \"doc\": \"Every discrete valuation ring is a valuation ring. That is, if $ A $ is a commutative ring satisfying the discrete valuation ring axioms (a domain with a valuation taking values in the integers), then\"}\n  {\"name\": \"IsDiscreteValuationRing.isRankOneDiscrete\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) [inst : CommRing A] [inst_1 : IsDomain A] [inst_2 : IsDiscreteValuationRing A]\\n  [inst_3 : Field K] [inst_4 : Algebra A K] [inst_5 : IsFractionRing A K],\\n  (IsDedekindDomain.HeightOneSpectrum.valuation K (IsDiscreteValuationRing.maximalIdeal A)).IsRankOneDiscrete\", \"doc\": \"For a discrete valuation ring $ A $ with fraction field $ K $, the valuation associated to the maximal ideal of $ A $ is a rank one discrete valuation. This means its value group is a linearly ordered\"}\n  {\"name\": \"ValuationRing.of_field\", \"module\": \"Mathlib/RingTheory/Valuation/ValuationRing\", \"type\": \"∀ (K : Type u) [inst : Field K], ValuationRing K\", \"doc\": \"Every field is a valuation ring. This follows because a field is an integral domain where every non-zero element is invertible, satisfying the condition that for any non-zero element $ x $ in its fiel\"}\n  {\"name\": \"Valuation.valuationSubring_isDiscreteValuationRing\", \"module\": \"Mathlib/RingTheory/Valuation/Discrete/Basic\", \"type\": \"∀ {Γ : Type u_1} [inst : LinearOrderedCommGroupWithZero Γ] {K : Type u_2} [inst_1 : Field K] (v : Valuation K Γ)\\n  [IsCyclic ↥(MonoidWithZeroHom.valueGroup v)] [Nontrivial ↥(MonoidWithZeroHom.valueGroup v)],\\n  IsDiscreteValuationRing ↥v.valuationSubring\", \"doc\": \"If the value group of a valuation is cyclic and nontrivial, then the corresponding valuation subring is a discrete valuation ring.\"}\n  {\"name\": \"Valuation.Integers.isFractionRing\", \"module\": \"Mathlib/RingTheory/Valuation/ValuationRing\", \"type\": \"∀ {𝒪 : Type u} {K : Type v} {Γ : Type w} [inst : CommRing 𝒪] [inst_1 : Field K] [inst_2 : Algebra 𝒪 K]\\n  [inst_3 : LinearOrderedCommGroupWithZero Γ] {v : Valuation K Γ}, v.Integers 𝒪 → IsFractionRing 𝒪 K\", \"doc\": \"If the valuation $ v $ is trivial on the subring $ \\\\mathcal{O} $ (i.e., $ v(o) = 1 $ for all $ o \\\\in \\\\mathcal{O} $), then $ K $ is the fraction field of $ \\\\mathcal{O} $.\"}\n  {\"name\": \"IsDiscreteValuationRing.TFAE\", \"module\": \"Mathlib/RingTheory/DiscreteValuationRing/TFAE\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [IsNoetherianRing R] [inst_2 : IsLocalRing R] [inst_3 : IsDomain R],\\n  ¬IsField R →\\n    [IsDiscreteValuationRing R, ValuationRing R, IsDedekindDomain R, IsIntegrallyClosed R ∧ ∃! P, P ≠ ⊥ ∧ P.IsPrime,\\n        Submodule.IsPrincipal (IsLocalRing.maximalIdeal R),\\n  \", \"doc\": \"For a commutative ring $ R $ that is Noetherian, local, an integral domain, and not a field, the following are equivalent: (1) $ R $ is a discrete valuation ring; (2) $ R $ is a valuation ring; (3) $ \"}\n  {\"name\": \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"module\": \"Mathlib/NumberTheory/NumberField/FinitePlaces\", \"type\": \"∀ (A : Type u_1) [inst : CommRing A] [inst_1 : IsDedekindDomain A] (K : Type u_2) [inst_2 : Field K]\\n  [inst_3 : Algebra A K] [inst_4 : IsFractionRing A K] (v : IsDedekindDomain.HeightOneSpectrum A),\\n  IsDiscreteValuationRing ↥(IsDedekindDomain.HeightOneSpectrum.valuation K v).integer\", \"doc\": \"For a Dedekind domain $ R $ and its fraction field $ K $, the valuation ring associated with a height one prime ideal $ v $ is a discrete valuation ring. This ring consists of elements of $ K $ with n\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nontrivial valuation ring of the function field of a smooth integral curve with a centre is its discrete valuation local ring and admits an etale coordinate over the affine line",
+   "results": "8 hits: WeierstrassCurve.IsMinimal, WeierstrassCurve.Affine.FunctionField, WeierstrassCurve.valuation_Δ_aux, WeierstrassCurve.IsGoodReduction, FunctionField.valuedFqtInfty, FunctionField.valuedFqtInfty.def, WeierstrassCurve.instIsMinimalMinimal, WeierstrassCurve.instIsIntegralOfIsMinimal",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual algebraic inputs or special curves, not the centred smooth-curve statement with all coordinate and residue clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, ValuationRing",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual algebraic inputs or special curves, not the centred smooth-curve statement with all coordinate and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "centred.*valuation|centered.*valuation|valuation.*etale.*curve",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual algebraic inputs or special curves, not the centred smooth-curve statement with all coordinate and residue clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale local coordinate on a smooth algebraic curve gives a finite separable extension of its rational function field",
+   "results": "8 hits: Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, WeierstrassCurve.Affine.FunctionField, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.IsStandardEtale, StandardEtalePresentation, Algebra.FormallyEtale.iff_exists_algEquiv_prod",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual algebraic inputs or special curves, not the centred smooth-curve statement with all coordinate and residue clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "smooth integral curve centred valuation ring etale coordinate finite separable function field",
+   "results": "8 hits: FunctionField.ringOfIntegers, FunctionField.ringOfIntegers.instIsDedekindDomainSubtypeMemSubalgebraPolynomialOfIsSeparableRatFunc, ValuationRing.iff_isInteger_or_isInteger, FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc, FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial, Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField, FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial, IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual algebraic inputs or special curves, not the centred smooth-curve statement with all coordinate and residue clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "isEtale.*[Ii]njective|[Ii]njective.*isEtale|eq_of_le_of_ne_top",
+   "results": "2 hits: Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern individual algebraic inputs or special curves, not the centred smooth-curve statement with all coordinate and residue clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -90,5 +313,140 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-curve-centred-valuation-dvr",
+  "worker": "stage1",
+  "summary": "Proved all clauses using existing general DAG tools, with explicit domination, uniformizer fractions, relative-dimension-one verification, generic residue field computation and pointed localization. No new nodes. No mathematical statement change; added definition references for function field and affine space. Separatedness and perfection are not assumed.",
+  "blueprint": "Supporting curve-coordinate input in the recorded Temkin/semistable branch descending from lem-trf-local-term-locality; realizes the affine smooth-coordinate and valuation-local-ring portion. Current latest locality blueprint is contracting-correspondence based, so this split changes no chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "General algebraic or scheme-local tool: Function field of an integral scheme is the fraction field of an affine open. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "General algebraic or scheme-local tool: Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General algebraic or scheme-local tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "General algebraic or scheme-local tool: One-dimensional normal local rings. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "General algebraic or scheme-local tool: In a DVR every nonzero element is a unit times a power of a uniformizer. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "The general smooth normal-form theorem gives the affine etale coordinate chart; it does not replace the trace-formula route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "General algebraic or scheme-local tool: Affine space is smooth. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "General algebraic or scheme-local tool: An etale morphism is smooth with zero-dimensional fibres. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "General algebraic or scheme-local tool: Base change and composition of smooth morphisms of fixed relative dimension. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "General algebraic or scheme-local tool: Dimension of a nonempty fixed-dimensional smooth scheme over a field. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "General algebraic or scheme-local tool: An etale algebra is finitely presented, and its principal localizations are etale. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+    "why": "General algebraic or scheme-local tool: A finite type domain over a field has the dimension of each of its local rings at maximal ideals. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "General algebraic or scheme-local tool: Spec of a ring map is flat iff the ring map is flat. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-residue-field-separable",
+    "why": "General algebraic or scheme-local tool: Residue field extensions of an etale algebra are finite separable. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-p1-polynomial-regular",
+    "why": "General algebraic or scheme-local tool: A one-variable polynomial ring over a field is regular. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-p1-polynomial-dimension-one",
+    "why": "General algebraic or scheme-local tool: A one-variable polynomial ring over a field has Krull dimension one. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "General algebraic or scheme-local tool: One-dimensional regular local rings. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lemma-nagata-valuation-intersection",
+    "why": "General domination/intersection theorem for valuation rings; the trace unit has no separate algebraic intersection theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "General algebraic or scheme-local tool: Base change of an etale ring map is etale. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "General algebraic or scheme-local tool: Spec of a ring map is etale iff the ring map is etale (finitely presented with H_1 = 0 and Omega = 0). Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   },
+   {
+    "node": "lem-sfb-algebraic-sepclosed-purely-insep",
+    "why": "General algebraic or scheme-local tool: Algebraic extensions of separably closed fields. Used only for the stated local geometric input, not to replace a step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "sbc-thm-etale-local-normal-form",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-etale-algebra-residue-field-separable",
+  "lem-sc-p1-polynomial-regular",
+  "lem-sc-p1-polynomial-dimension-one",
+  "lem-sc-regular-dim1-dvr",
+  "lemma-nagata-valuation-intersection",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-sfb-algebraic-sepclosed-purely-insep"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NV-9f969b020",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-9f969b020 (reviewer sub-agent of L); spot-checked: NV lem-trf-curve-centred-valuation-dvr 9f969b02, stage 1, one commit with the item and the report. No new nodes and no repairs needed. Statement: the same as the unsplit base (clones/live) except for two added definition references, def-sc-function-field and def-sbc-affine-space; nothing is weakened. Each step was read against its cited statements. (1) The local stalk map plus functoriality under generization give R=O_{C,c}⊆A, and c≠η because A⊊L. (2) c is closed by a length-two chain argument, and dim R=1 follows from a chart D_q; no separatedness is used. (3) Normality comes from smoothness over any field (056T with the identity extension), then the Noetherian dim-1 normal criterion gives a DVR; the 0B8Y perfect/separable clause is correctly avoided. (4) A=R by the unit·t^n fraction argument; I checked the t^{-1} contradiction. (5) The 054L normal form gives some d; relative-dimension permanence and dimension over a field give d=dim U, and 00OS with q maximal gives d=1. Stacks 054L itself only gives some d. (6) Flatness gives torsion-freeness, so K[T]→B is injective and x is transcendental; the étale residue node at (0) gives L/K(x) finite separable. (7) κ(c)/K is finite (closed-point node), so p is maximal and nonzero; P_p is regular of dimension 1, hence a DVR. (8) Domination plus the Nagata intersection node give A∩F=R_0. (9) R_0⊗_P B=S^{-1}B is étale (00U2), and localizing at S^{-1}q gives B_q=A. (10) The residue node at (q,p) gives κ(c)/κ(y) finite separable; κ(y) is separably closed when K is, so the extension is trivial, with no claim that κ(c)=K. Edge cases checked: K[T]_(T); a nonlinear closed point over a non-closed field; imperfect separably closed K at the point (T^p−a), where κ(c)≠K but κ(c)/κ(y) is trivial; a doubled-origin line. No cycle (341-node closure). The DAG search found no node already stating this item. The 21 declared generic tool_uses are accepted. Review in review.md."
+ }
 }

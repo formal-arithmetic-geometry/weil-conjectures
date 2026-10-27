@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-group-local-minimal-prime",
+ "kind": "statement",
+ "title": "Local irreducibility and the neutral irreducible component of a group scheme",
+ "statement": "Let $k$ be a field [def-weil-field] and let $G$ be a group scheme over $k$ [def-sc-group-scheme], with identity point $e$. For every point $g\\in G$, the local ring $\\mathcal O_{G,g}$ has a unique minimal prime ideal, meaning a unique prime ideal minimal under inclusion among all prime ideals of that local ring. There is exactly one irreducible component $Z$ of $|G|$ containing $e$ [def-weil-irreducible-components]. With its reduced induced closed subscheme structure (the unique reduced closed subscheme with underlying subset $Z$), $Z$ is geometrically irreducible over $k$ [def-pc-reduced-scheme, def-pc-geometrically-irreducible]. No finite-type or reducedness assumption on $G$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof": [
+  {
+   "text": "First suppose $k$ is algebraically closed. Any irreducible reduced closed subscheme $T$ of $G$ is geometrically irreducible: apply [lem-sbc-subset-geometric-irreducibility] with $X=T$, $A=|T|$ and the identity extension $\\Omega=k$. Its hypothesis is exactly irreducibility of $T$; algebraic closedness implies separable closedness since every polynomial splits. By [lem-weil-pbc-reduced-induced-closed-subscheme] we may give every irreducible component its reduced closed structure. Every point, in particular $e$, lies in a component by [lem-sc-irreducible-components-cover].",
+   "uses": [
+    "lem-sbc-subset-geometric-irreducibility",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-irreducible-components-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, second paragraph, preparation for the product argument"
+   }
+  },
+  {
+   "text": "Let $Z_1,Z_2$ be components containing $e$. By step 1 and [lem-sc-irreducible-product-over-field], $Z_1\\times_k Z_2$ is irreducible. Its image under the restriction of multiplication is irreducible by [lem-weil-pbc-irreducible-continuous-image] and lies in some component $W$ by [lem-sc-irreducible-components-cover]. It contains both $Z_i$: for $z\\in Z_1$, the pair $(z,e)$ is a point of the product mapping to $z$, and likewise $(e,z)$ for $z\\in Z_2$. These pairs exist as morphisms on $Z_i$ because the rational point $e$ factors through the reduced component: every function in its radical defining ideal vanishes in $\\kappa(e)=k$, so its pullback to $\\operatorname{Spec}k$ is zero. The unit identities of [def-sc-group-scheme] say that the composites with multiplication are the inclusions. Thus $Z_1,Z_2\\subseteq W$, and maximality of components forces $Z_1=W=Z_2$.",
+   "uses": [
+    "lem-sc-irreducible-product-over-field",
+    "lem-weil-pbc-irreducible-continuous-image",
+    "lem-sc-irreducible-components-cover",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, second paragraph, multiplication and maximality"
+   }
+  },
+  {
+   "text": "For arbitrary $k$, choose an algebraic closure $\\Omega/k$ [def-weil-algebraic-closure]. Base change the group diagrams to give $G_\\Omega$ its group structure; the universal property [def-pc-fibre-product] preserves every equation. Steps 1--2 give a unique component $C$ of $G_\\Omega$ through $e_\\Omega$. Write $p:G_\\Omega\\to G$. The fibre $p^{-1}(e)$ has exactly one point, $e_\\Omega$. Indeed the rational section $e$ gives field maps $k\\to\\kappa(e)\\to k$ with composite the identity, by [lem-weil-pbc-morphism-from-spec-field]. The second map is injective and contains all of $k$ in its image, so both maps are inverse isomorphisms. By [def-pc-scheme-fibre] and the fibre-product universal property, the fibre is $\\operatorname{Spec}(\\kappa(e)\\otimes_k\\Omega)=\\operatorname{Spec}\\Omega$, a one-point space [def-weil-affine-spectrum].",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-pc-scheme-fibre",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, second paragraph, details of descent at the rational identity"
+   }
+  },
+  {
+   "text": "Let $Z$ be any component of $G$ containing $e$, which exists by [lem-sc-irreducible-components-cover]. By [lem-sfb-field-extension-irreducible-components], $p^{-1}(Z)$ is a nonempty union of components $D$ of $G_\\Omega$. For each such $D$, its image $p(D)$ is a component contained in $Z$, hence equals $Z$ by maximality. Thus $D$ meets $p^{-1}(e)=\\{e_\\Omega\\}$ and contains $e_\\Omega$. Step 2 forces $D=C$. Consequently $p^{-1}(Z)=C$ and $p(C)=Z$. These equalities for every component through $e$ give uniqueness of $Z$. Apply [lem-sbc-subset-geometric-irreducibility] with $X=G$, $A=Z$, and $\\Omega/k$: the inverse image is the nonempty irreducible subset $C$. It follows that $Z$ has irreducible nonempty inverse image under every field extension $E/k$. The reduced closed subscheme on $Z$ exists by [lem-weil-pbc-reduced-induced-closed-subscheme]; its base change is a closed immersion by [lem-weil-pbc-closed-immersion-base-change], whose support is this inverse image by [def-pc-scheme-fibre] and the fibre-product universal property. Thus this reduced component scheme is geometrically irreducible.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sfb-field-extension-irreducible-components",
+    "lem-sbc-subset-geometric-irreducibility",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, second paragraph, descent of assertions (2) and (3)"
+   }
+  },
+  {
+   "text": "For any scheme $X$ and $x\\in X$, components containing $x$ correspond to minimal primes of $\\mathcal O_{X,x}$. To verify this without Noetherian hypotheses, choose an affine open $U=\\operatorname{Spec}R$ containing $x$. Intersection with $U$ and closure in $X$ give mutually inverse correspondences between components of $X$ meeting $U$ and components of $U$: a nonempty open subset of an irreducible set is dense, so maximality in either space gives the inverse identities. Restrict to components containing $x$. They correspond by [lem-weil-pbc-spec-irreducible-components-minimal-primes] to minimal primes of $R$ contained in $\\mathfrak p_x$. The inclusion-preserving prime bijection of [lem-weil-pbc-primes-of-localization] identifies these with the minimal primes of $R_{\\mathfrak p_x}$: every prime smaller than a prime below $\\mathfrak p_x$ is still below $\\mathfrak p_x$. Finally [lem-weil-pbc-affine-open-stalk-localization] identifies $R_{\\mathfrak p_x}$ with $\\mathcal O_{X,x}$. Applying this with $X=G$ and $x=e$ proves the unique-minimal-prime assertion at $e$.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-primes-of-localization",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, first paragraph, components and minimal primes"
+   }
+  },
+  {
+   "text": "Fix $g\\in G$ and put $K=\\kappa(g)$. The canonical point $\\operatorname{Spec}K\\to G$ of [lem-weil-pbc-morphism-from-spec-field] and the identity of $\\operatorname{Spec}K$ give a $K$-rational point $g'$ of $G_K$ over $g$ by [def-pc-fibre-product]. The structure map $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is flat by [lem-pc-field-extension-flat], so $G_K\\to G$ is flat by [lem-weil-pbc-flat-morphism-base-change]. By [def-weil-flat-morphism] the induced local ring map $A=\\mathcal O_{G,g}\\to B=\\mathcal O_{G_K,g'}$ is flat and local. By [lem-weil-pbc-flat-local-hom-faithfully-flat] it is faithfully flat and surjective on spectra. Translation by $g'$ is an isomorphism taking the identity to $g'$ [lem-sc-translation-automorphism], hence identifies $B$ with the local ring at the identity of $G_K$. Steps 3--5, applied over $K$, show that $B$ has a unique minimal prime $Q$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-pc-fibre-product",
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-sc-translation-automorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, first paragraph, rational lift, translation, and flat local map"
+   }
+  },
+  {
+   "text": "Every minimal prime $P$ of $A$ lifts to a prime $Q'$ of $B$ by the surjectivity in step 6. Choose a minimal prime $Q_0\\subseteq Q'$ using [lem-weil-pbc-prime-contains-minimal-prime] with ideal zero. Then $Q_0=Q$, and its contraction is a prime contained in $P$, hence equals $P$ by minimality. Thus every minimal prime of $A$ equals the contraction of $Q$. Such a prime exists: $A$ is a nonzero local ring, so its maximal ideal is prime, and [lem-weil-pbc-prime-contains-minimal-prime] supplies a minimal prime beneath it. This proves assertion (1) for every $g$, completing the proof. Neither the component argument nor the local-ring argument imposed finite type or reducedness on $G$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof, first paragraph, explicit faithful-flat descent of unique minimal primes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-irreducible-continuous-image",
+  "def-sc-group-scheme",
+  "def-weil-algebraic-closure",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "def-pc-scheme-fibre",
+  "def-weil-affine-spectrum",
+  "lem-sfb-field-extension-irreducible-components",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-sc-translation-automorphism",
+  "lem-weil-pbc-prime-contains-minimal-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 047M (lemma-group-scheme-field-geometrically-irreducible), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme over a field has one minimal prime in each local ring and a unique geometrically irreducible component through its identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"PrimeSpectrum.instUnique\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Basic\", \"type\": \"{R : Type u_1} → [inst : Field R] → Unique (PrimeSpectrum R)\", \"doc\": \"For any field $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ contains exactly one prime ideal, namely the zero ideal $ \\\\{0\\\\} $. This follows because fields have no nontrivial proper ideals, and \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → Unique ↥(AlgebraicGeometry.Spec (X.residueField x))\", \"doc\": \"For any point $ x $ in a scheme $ X $, the spectrum of the residue field at $ x $ has a unique underlying topological space. This follows because the residue field is a field, and the prime spectrum o\"}\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], IrreducibleSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is an irreducible topological space. This means $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local rings of group schemes are irreducible and the neutral irreducible component is geometrically irreducible",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsIntegral X], IrreducibleSpace ↥X\", \"doc\": \"Every integral scheme has an irreducible underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], IrreducibleSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is an integral domain, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is an irreducible topological space. This means $ \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.IsReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is reduced, i.e., that all its local rings have no nonzero nilpotent elements.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsIntegral X ↔ IrreducibleSpace ↥X ∧ AlgebraicGeometry.IsReduced X\", \"doc\": \"A scheme $X$ is integral if and only if it is irreducible as a topological space and reduced (i.e., all its local rings have no nonzero nilpotent elements).\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [∀ (x : ↥X), IsReduced ↑(X.presheaf.stalk x)], AlgebraicGeometry.IsReduced X\", \"doc\": \"If for every point $ x $ in a scheme $ X $, the stalk of the structure sheaf at $ x $ is a reduced ring (i.e., contains no nonzero nilpotent elements), then the scheme $ X $ is reduced.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every local ring of a group scheme over a field has a unique minimal prime",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"minimalPrimes\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Basic\", \"type\": \": Set (Ideal R)\", \"doc\": \"The set of prime ideals of the ring $ R $ that are minimal with respect to inclusion, i.e., there is no proper subset that is a prime ideal.\"}\n  {\"name\": \"Ideal.minimalPrimes_eq_subsingleton_self\", \"module\": \"Mathlib.RingTheory.Ideal.MinimalPrime.Basic\", \"type\": \"[I.IsPrime] : I.minimalPrimes = { I }\", \"doc\": \"If $ I $ is a prime ideal in a commutative semiring $ R $, then the set of minimal prime ideals containing $ I $ is the singleton set $ \\\\{I\\\\} $.\"}\n  {\"name\": \"Ring.KrullDimLE.existsUnique_isPrime\", \"module\": \"Mathlib.RingTheory.KrullDimension.Zero\", \"type\": \"[IsLocalRing R] : ∃! I : Ideal R, I.IsPrime\", \"doc\": \"In a local commutative semiring $ R $ with Krull dimension zero, there exists a unique prime ideal $ I $. This follows from the fact that in such rings, the unique maximal ideal is also the only prime\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"IsLocalization.subsingleton_primeSpectrum_of_mem_minimalPrimes\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"{R : Type*} [CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type*) [CommSemiring S] [Algebra R S]\\n  [IsLocalization.AtPrime S p (hp := hp.1.1)] : Subsingleton (PrimeSpectrum S)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the prime spectrum of $ S $ contains at most one element. In other words,\"}\n  {\"name\": \"Ring.KrullDimLE.subsingleton_primeSpectrum\", \"module\": \"Mathlib.RingTheory.KrullDimension.Zero\", \"type\": \"[IsLocalRing R] : Subsingleton (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a local ring, then its prime spectrum $ \\text{Spec}(R) $ contains at most one prime ideal, i.e., $ \\text{Spec}(R) $ is a subsingleton set.\"}\n  {\"name\": \"PrimeSpectrum.isMin_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"{x : PrimeSpectrum R} : IsMin x ↔ x.asIdeal ∈ minimalPrimes R\", \"doc\": \"For a commutative semiring $ R $ and a prime ideal $ x $ in its prime spectrum, $ x $ is a minimal element in the prime spectrum (under inclusion) if and only if the corresponding ideal $ x.asIdeal $ \"}\n  {\"name\": \"PrimeSpectrum.unique_of_ringKrullDimLE_zero\", \"module\": \"Mathlib.RingTheory.KrullDimension.Zero\", \"type\": \"[IsLocalRing R] : Unique (PrimeSpectrum R)\", \"doc\": \"Every commutative local semiring with Krull dimension zero has a unique prime ideal.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"minimalPrimes\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "minimalPrimes|irreducibleComponent|irreducibleComponents",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not give the stated group-scheme theorem; topological groups and general affine/quasi-compact scheme facts have different hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group schemes over fields have a unique geometrically irreducible component containing the identity and each local ring has one minimal prime",
+   "results": "Search returned 8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.mk.noConfusion, PrimeSpectrum.vanishingIdeal_irreducibleComponents, PrimeSpectrum.zeroLocus_minimalPrimes, PrimeSpectrum.zeroLocus_ideal_mem_irreducibleComponents, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, PrimeSpectrum.vanishingIdeal_mem_minimalPrimes. ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth group results assume locally finite type and reducedness; affine Hopf-algebra structures and general scheme component results do not state this unrestricted group theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"minimalPrimes\"",
+   "results": "Search returned 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth group results assume locally finite type and reducedness; affine Hopf-algebra structures and general scheme component results do not state this unrestricted group theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every local ring of any group scheme over a field has a unique minimal prime and the irreducible component of the identity is geometrically irreducible",
+   "results": "Search returned 8 hits: AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf, AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField, AlgebraicGeometry.IsReduced, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIrreducibleSpaceCarrierCarrierCommRingCatSpecOfIsDomainCarrier, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced. ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth group results assume locally finite type and reducedness; affine Hopf-algebra structures and general scheme component results do not state this unrestricted group theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "GrpObj|GroupScheme",
+   "results": "Search returned 17 hits: Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Pullbacks.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Smooth.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: smooth group results assume locally finite type and reducedness; affine Hopf-algebra structures and general scheme component results do not state this unrestricted group theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-algebraic-group-identity-component",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: The identity component and smooth reduction of a locally algebraic group. Input in the identity-component proof: local minimal primes and the neutral irreducible component, used before constructing the open identity subgroup",
+   "via": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-local-minimal-prime",
+  "worker": "stage1",
+  "summary": "Split Stacks 047M without finiteness assumptions. Wrote multiplication and singleton-fibre descent explicitly, reused existing generic geometry and local algebra, and created one statement-only field-extension component theorem (04KW/04KX). Checked the component/minimal-prime correspondence on affine neighbourhoods and descended unique minimal primes along the explicitly constructed flat local map.",
+  "blueprint": "The inherited ancestry traces to det-thm-sf-ctf-stability-direct-images proof (3), through the alteration/Picard prerequisites recorded in blueprint.from.place. This node is the 047M input to the locally algebraic identity-component lemma; it has no exact node in the current blueprint. The current latest blueprint direct-image proof and unit were read; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "Generic test of geometric irreducibility for arbitrary subsets; used for irreducible schemes over an algebraically closed field and descent of the neutral support. No group-theoretic conclusion is imported."
+   },
+   {
+    "node": "lem-sc-irreducible-product-over-field",
+    "why": "Generic product theorem over a field used solely for the two reduced component schemes in the multiplication argument."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction and uniqueness of reduced closed structure on a closed subset; the unit supplies no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-sc-irreducible-product-over-field",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-da07f48a4",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-da07f48a4 (reviewer sub-agent of L); spot-checked: Read Stacks 047M (statement and proof) and 04KW/04KX (Varieties) in full; the item's statement matches 047M clause by clause and is unchanged from live, where the item is still unsplit with no repair note. Steps 1-7 are each correct: (1) subset geometric-irreducibility test over the algebraically closed field itself; (2) product of the two neutral components, the unit sections exist because e factors through each reduced component, then maximality; (3) the fibre over e is one point because kappa(e)=k; (4) components of p^-1(Z) map onto Z and meet {e_Omega}, so p^-1(Z)=C, giving uniqueness of Z and geometric irreducibility of the reduced Z via the closed-immersion base change; (5) elementary component/minimal-prime correspondence through 00ES/00E3/01HV, with no Noetherian hypothesis; (6) K=kappa(g), the flat local map is faithfully flat (00HR), translation by g' in G_K, not circular; (7) uniqueness from surjectivity of Spec B -> Spec A plus 00E0. The new node lem-sfb-field-extension-irreducible-components states exactly 04KW+04KX (actual images are components; inverse images are nonempty unions of components) and is true. Tested on the empty scheme, Spec C over R, and k(t) tensor k(s). It has three kinds of Mathlib search; irreducibleComponentsEquiv needs geometric irreducibility, so it is not a leaf. No duplicate found by rg over dag/nodes for 04KW, 04KX, 038H, 00FK and related concepts; it is generic, not a restated clause. Accepted the three declared tool_uses; lem-sc-translation-automorphism is Lean-closed, so it is a tool. No SGA. Item edge cases checked: trivial group, alpha_p, constant Z/2, mu_3 over Q. Union of step uses equals proof_deps, no cycle, no merged ids."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupLocalMinimalPrime",
+  "declaration": "AlgebraicGeometry.GrpObj.localMinimalPrimes_neutralComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupLocalMinimalPrime.lean",
+  "statement": "theorem GrpObj.localMinimalPrimes_neutralComponent (k : Type u) [Field k] (G : Over (Spec (.of k))) [CategoryTheory.GrpObj G] : (∀ g : G.left, ∃! p : Ideal (G.left.presheaf.stalk g), p ∈ minimalPrimes (G.left.presheaf.stalk g)) ∧ ∃ Z : TopologicalSpace.Closeds G.left, (Z : Set G.left) ∈ irreducibleComponents G.left ∧ GrpObj.onePoint G ∈ (Z : Set G.left) ∧ (∀ Z' : Set G.left, Z' ∈ irreducibleComponents G.left → GrpObj.onePoint G ∈ Z' → Z' = (Z : Set G.left)) ∧ GeometricallyIrreducible ((Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≫ G.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f49df2cb",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Only change vs live: new lean record on the item plus new module Sheaf.AlgebraicGeometry.GroupLocalMinimalPrime (no clash; statement verbatim; one sorry, no defs). Checked against Stacks 047M (groupoids.tex:786): Field k; GrpObj on Over (Spec k) per def-sc-group-scheme record; e = canonical GrpObj.onePoint; ∀ g, ∃! minimal prime of the actual stalk (all points); ∃ Z : Closeds, Z component, e ∈ Z, uniqueness against all components through e; GeometricallyIrreducible (vanishingIdeal Z).subschemeι ≫ G.hom = canonical reduced induced structure over k, per def-pc-geometrically-irreducible record. No finite-type or reducedness hypotheses; universes bound. Edge cases alpha_p, constant Z/2, mu_3/Q, non-rational points, nonempty via unit. No duplicate in Mathlib Group/ or WeilConjectures GroupScheme/Basic (those have finite-type or alg-closed hypotheses). Docstrings give source and blueprint with the 7 proof steps; proof-dep modules exist live; report has Worker report and Second reading by Q98. No fixes, no compile run."
+ }
+}

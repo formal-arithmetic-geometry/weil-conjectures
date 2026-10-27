@@ -1,0 +1,163 @@
+{
+ "id": "lem-sp-etale-scalar-section-normalization",
+ "kind": "statement",
+ "title": "Local pure-tensor normalization of the canonical étale scalar comparisons",
+ "statement": "Let $e:U\\to V$ be an etale morphism of schemes [def-pc-scheme, def-weil-etale-morphism], and let $\\varphi:A\\to B$ be a unital map of commutative rings in $\\mathrm{Type}(u+1)$. Use ordinary constant-ring module sheaves on the small etale sites [def-weil-pbc-etale-sheaves]. Write $S_R$ for sheafified sum extension [def-weil-pbc-etale-sum-extension], $e_R^*$ for geometric inverse image and $c_R:e_R^*\\cong\\mathrm{Res}_{\\iota_e}$ for its restriction identification [lem-weil-pbc-etale-inverse-image-restriction], and $E_T\\dashv\\mathrm{Res}_{\\varphi,T}$ for scalar extension/restriction [def-sf-etale-sheaf-scalar-extension]. Let $r:\\mathrm{Res}_{\\varphi,V};e_A^*\\cong e_B^*;\\mathrm{Res}_{\\varphi,U}$ be the specified comparison from uniqueness of left adjoints to direct image/coextension [lem-sbc-canonical-restrict-scalars-functor-comparisons], and let $a:E_V;e_B^*\\cong e_A^*;E_U$ be the specified scalar/pullback comparison [def-pur-scalar-pullback-representative-data]. Define $q:S_A;E_V\\cong E_U;S_B$ by uniqueness of left adjoints for $(S_A\\dashv e_A^*);(E_V\\dashv\\mathrm{Res}_{\\varphi,V})$ and $(E_U\\dashv\\mathrm{Res}_{\\varphi,U});(S_B\\dashv e_B^*)$, transporting the latter right adjoint along $r^{-1}$. Use ordinary sheaf tensor [def-pur-sheaf-tensor-product] and the fixed sum sections $i_W$, lift sections $\\ell_W$, scalar pure sections $t_T$, and coefficient pullback $\\kappa:e_A^*B_V\\cong B_U$ [def-pur-etale-projection-data, def-sp-etale-scalar-section-data]. For every $A$-module sheaf $H$ on $U$, every etale test object $W$ over $U$, $x\\in H(W)$ and $b\\in B_V(eW)$,\n$$q_H(eW)\\bigl(t_V(i_W(x),b)\\bigr)=i_W\\bigl(t_U(x,\\kappa_W(\\ell_W(b)))\\bigr).$$\nFor every $A$-module sheaf $F$ on $V$, the same $W$, $x\\in F(eW)$ and $b\\in B_V(eW)$,\n$$a_F^{-1}(W)\\bigl(t_U(\\ell_W(x),\\kappa_W(\\ell_W(b)))\\bigr)=\\ell_W\\bigl(t_V(x,b)\\bigr).$$\nThese are only local normalization formulas for constructed canonical comparisons; no fold-counit or cochain identity is assumed. The coefficients are arbitrary local sections of the constant coefficient sheaf. No separation, quasi-compactness, finiteness, or flatness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, and Tag 0GMW, lemma-sheafification-tensor; etale-cohomology.tex Tag 03S3 equation-j-p-shriek and Tag 03S4 exercise-jshriek-direct, local pure-tensor consequences"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-sum-extension",
+  "def-sf-etale-sheaf-scalar-extension",
+  "def-pur-scalar-pullback-representative-data",
+  "def-pur-etale-projection-data",
+  "def-sp-etale-scalar-section-data",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Identify geometric inverse image along e with restriction of test objects by upperStarIsoLocalizationRestriction. Restriction of scalars commutes strictly with this restriction. Transporting that identity through the two inverse-image isomorphisms gives upperStarRestrictScalarsIsoSheaf: apply uniqueness of left adjoints to the restriction/coextension adjunction and geometric adjunction, and verify equality of their units using sectionwise unit naturality. The private helper localization_scalar_comparison proves this bridge in the attached module: equality of composite adjunctions follows from the coextension-unit naturality, and leftAdjointUniq_trans finishes the comparison.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 and 03S4, localization and explicit sum adjunction"
+   }
+  },
+  {
+   "text": "The unit equation for left-adjoint uniqueness gives q(η_V(i_W(m)))=i_W(η_U(m)). Write the scalar tensor map as η tensored with the coefficient sheaf, then the lax tensorator of restriction of scalars, then the right unitor. These operations commute with restriction and with the sum unit. Equivalently extend the summandwise pairing (i_W(m),b)↦i_W(m⊗b|W) through sheafification. Bilinear sheafification uniqueness identifies that extension with q. This proves its formula for arbitrary local coefficient sections, not just constant scalars.",
+   "uses": [
+    "def-weil-pbc-etale-sum-extension",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 and 03S4 with sites-modules.tex Tag 0GMW, extension of bilinear pairings through sheafification"
+   }
+  },
+  {
+   "text": "The scalar/pullback comparison is the inverse scalar mate of the same restriction identity. Its unit equation applied to the scalar tensor pairing gives the second formula. The coefficient factor is upperStarRestrictScalarsIsoSheaf at the unit object followed by the inverse monoidal unit comparison, hence is exactly compactificationCoefficientPullbackIso. The inverse-image tensor comparison preserves pure tensors, and naturality extends the equation through sheafification. Empty tests and zero rings obey the same linear identities.",
+   "uses": [
+    "def-pur-scalar-pullback-representative-data",
+    "def-sp-etale-scalar-section-data",
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, unit-normalized scalar specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+  "def-pur-scalar-pullback-representative-data",
+  "def-sp-etale-scalar-section-data",
+  "lem-pur-independent-inverse-image-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Local normalization portion of lem-sp-etale-sheaf-fold-scalar steps 4 and 5; canonical-adjunction reformulation of Tags 03EL and 0GMW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "unitProjection|scalarSheafTensorMap|sheafPushforwardContinuousCompSheafComposeIso",
+   "results": "0 hits; top: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No matching local sheaf tensor normalization theorem. Generic mate and monoidal lemmas are available in the source library."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unitProjection\"",
+   "results": "0 hits; top: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No matching local sheaf tensor normalization theorem. Generic mate and monoidal lemmas are available in the source library."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical extension of scalars comparisons for etale sum extension and inverse image preserve local pure tensor sections",
+   "results": "8 hits; top: Algebra.Etale.baseChange, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.instTensorProduct, Algebra.FormallyEtale.localization_map, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.exists_subalgebra_fg; digest 13beee243fc3ddd9",
+   "date": "2026-10-23",
+   "verdict": "No matching local sheaf tensor normalization theorem. Generic mate and monoidal lemmas are available in the source library."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical extension of scalars comparisons for etale sum extension and inverse image preserve local pure tensor sections",
+   "results": "8 hits; top: ModuleCat.ExtendScalars.obj', Algebra.Etale.baseChange, IsLocalizedModule.mapExtendScalars.congr_simp, Algebra.FormallyEtale.instTensorProduct, ModuleCat.ExtendScalars.map_tmul, IsLocalizedModule.mapExtendScalars_apply_apply, Algebra.FormallyEtale.of_restrictScalars, LinearMap.extendScalarsOfIsLocalization_apply; digest 3a41bdcda1f25ea6",
+   "date": "2026-10-23",
+   "verdict": "No matching sheaf-level local normalization theorem. The scalar extension tensor-map lemma is objectwise module algebra; it does not identify the canonical sheaf comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafFoldScalar",
+  "date": "2026-10-23",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts paragraph: \"Each of these commutes with extension of coefficients: summation over fibres is defined integrally\"; local pure-tensor normalization supporting the sum-fold scalar calculation in lem-sp-etale-sheaf-fold-scalar steps 4 and 5."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.EtaleCohomology.Purity.Smooth.EtaleScalarSectionNormalization",
+  "file": "lean/Sheaf/EtaleCohomology/Purity/Smooth/EtaleScalarSectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSumScalarIso_tensorSections",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSumScalarIso",
+   "AlgebraicGeometry.Etale.etaleSumScalarIso_tensorSections"
+  ],
+  "statement": "theorem etaleSumScalarIso_tensorSections\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] :\n      (∀ (H : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale)\n        (x : H.obj.obj (op W))\n        (b : (scalarCoefficientSheaf φ V).obj.obj\n          (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))),\n        ((etaleSumScalarIso φ e).hom.app H).hom.app\n            (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))\n            (compactificationScalarTensorSection φ _\n              ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)\n              (etaleSumSection A e H W x) b) =\n          etaleSumSection B e ((ProEtale.etaleSheafExtendScalars φ U).obj H) W\n            (compactificationScalarTensorSection φ H W x\n              ((compactificationCoefficientPullbackIso φ e).hom.hom.app (op W)\n                (etaleLiftSection A e (scalarCoefficientSheaf φ V) W b)))) ∧\n      (∀ (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (W : U.Etale)\n        (x : F.obj.obj\n          (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)))\n        (b : (scalarCoefficientSheaf φ V).obj.obj\n          (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W))),\n        ((scalarSheafPullbackIso φ e).inv.app F).hom.app (op W)\n            (compactificationScalarTensorSection φ _ W (etaleLiftSection A e F W x)\n              ((compactificationCoefficientPullbackIso φ e).hom.hom.app (op W)\n                (etaleLiftSection A e (scalarCoefficientSheaf φ V) W b))) =\n          etaleLiftSection B e ((ProEtale.etaleSheafExtendScalars φ V).obj F) W\n            (compactificationScalarTensorSection φ F\n              ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W) x b))",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-23",
+  "note": "etaleSumScalarIso is constructed solely from adjunction uniqueness. Private tensor_section_map, restrict_tensor_section and scalar_tensor_section prove the elementary local pairing calculus; localization_scalar_comparison proves that the geometric coefficient square is strict restriction in test-object coordinates. Only the two stated local tensor normalization identities remain sorry."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T020432-L-2603497",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261024T020432-L-2603497",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,386 @@
+{
+ "id": "lem-sf-affine-base-p1-trace-adjunction",
+ "kind": "statement",
+ "title": "Projection-normalized projective-line adjunction over any affine base",
+ "statement": "Let $A$ be a finite commutative ring, let $N\\geq1$ satisfy $NA=0$, and let $S$ be any affine scheme [def-weil-affine-spectrum, def-pc-scheme] on which $N$ is invertible in every local ring. Put $P=\\mathbf P^1_S$ in the standard-chart homogeneous coordinates $\\operatorname{Option}(\\operatorname{ULift}(\\operatorname{Fin}(1)))$, with projection $q:P\\to S$ [def-nagata-projective-space-base-change]. Work in the ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories]. Use exact inverse image $q^*$ [def-weil-pbc-inverse-image] and derived tensor [def-kun-derived-tensor]. Put $B=A_P(1)[2]$, where $A_P(1)=\\mu_{N,P}\\otimes_{(\\mathbf Z/N)_P}A_P$ with roots-of-unity action as in [lem-asd-finite-etale-twist-line]. For $F=Rq_*$ use the canonical projection isomorphisms $\\mathrm{PF}_{M,K}:FM\\otimes_A^LK\\xrightarrow{\\sim}F(M\\otimes_A^Lq^*K)$ of [lem-sf-etale-ambient-adjoint-projection] with factorization $(\\mathrm{id}_P,q)$. There exist a derived morphism $t:FB\\to A_S$ and an adjunction $F\\dashv H$, where $HK=B\\otimes_A^Lq^*K$, whose actual counit, for every unbounded $K\\in D(S_{\\mathrm{et}},A)$, is\n$$\\epsilon^H_K:F(B\\otimes_A^Lq^*K)\\xrightarrow{\\mathrm{PF}_{B,K}^{-1}}FB\\otimes_A^LK\\xrightarrow{t\\otimes1}A_S\\otimes_A^LK\\xrightarrow{\\lambda_K}K.$$\nNo Noetherian, constructibility, boundedness or Tor-amplitude assumption is imposed. At $K=A_S$ the formula identifies the counit with $t$, using the canonical unit identifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Diagonal-kernel construction of the unit and its two triangle identities, with the projection-formula counit of (G7) in the unit sk-prop-geo-p1-adjunction. This is the agent-stated arbitrary-affine-base version of that projective building block; the source standing range itself is narrower. Only existence of a projection-normalized trace is asserted, not additional base-change or Kummer normalization claims."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-inverse-image",
+  "def-kun-derived-tensor",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-kun-projection-formula-map",
+  "lem-kun-tensor-unit"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the standard-chart coefficient pullback, normalized trace-diagonal datum and its two constant-object integral identities.",
+   "uses": [
+    "lem-sf-p1-coordinate-integrals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit."
+   }
+  },
+  {
+   "text": "Apply the generic diagonal-kernel triangle theorem to the base Tate line and shift 2. Its canonical unit and inverse-projection trace counit satisfy both component triangles. Assemble an adjunction using the component-triangle Adjunction constructor, retaining exactly this counit.",
+   "uses": [
+    "lem-sf-diagonal-kernel-integral-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit."
+   }
+  },
+  {
+   "text": "Transport the adjunction along rightDerivedLowerShriekIso to the supplied identity/proper compactification. The canonical compactification comparison intertwines projection maps. Cancel inverse projection with projection and use tensor functoriality; the transported trace is E_B followed by the original trace.",
+   "uses": [
+    "lem-sf-compactification-kernel-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit."
+   }
+  },
+  {
+   "text": "At the coefficient unit, compactification projection right unitality identifies projection followed by the inverse source-unit map with the right unitor. Invert this equation, insert the already proved counit projection equation, and use unitor naturality and equality of unitors on the coefficient unit. This proves the specified unit normalization without a further geometric hypothesis.",
+   "uses": [
+    "lem-kun-tensor-unit",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-coordinate-integrals",
+  "lem-sf-diagonal-kernel-integral-triangles",
+  "lem-sf-compactification-kernel-transport",
+  "lem-kun-tensor-unit",
+  "def-kun-projection-formula-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "U8 reduction: standard-chart degree-zero coordinate integrals; generic kernel triangles; actual adjunction construction; compactification transport and proved unit normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectiveLineAdjunction|ordinaryFiniteP1Adjunction|projective.*[Tt]race|Poincare",
+   "results": "{\"t\": \"2026-10-22T06:26:17Z\", \"tool\": \"grep\", \"query\": \"projectiveLineAdjunction|ordinaryFiniteP1Adjunction|projective.*[Tt]race|Poincare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Conservative.lean\"], \"digest\": \"deb8f74aa2f0f529\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line etale derived pushforward is left adjoint to pullback tensor roots of unity shifted two",
+   "results": "{\"t\": \"2026-10-22T06:26:17Z\", \"tool\": \"leansearch\", \"query\": \"Projective line etale derived pushforward is left adjoint to pullback tensor roots of unity shifted two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"TopCat.Sheaf.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullback\"], \"digest\": \"5f13746624145eb1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-22T06:26:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the projective line over any affine scheme and finite torsion etale coefficients, derived pushforward is left adjoint to Tate twisted pullback shifted by two with trace projection formula counit",
+   "results": "{\"t\": \"2026-10-22T06:26:29Z\", \"tool\": \"leanfinder\", \"query\": \"For the projective line over any affine scheme and finite torsion etale coefficients, derived pushforward is left adjoint to Tate twisted pullback shifted by two with trace projection formula counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"7ddaa3b80266f2d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative Poincare duality for projective line on entire unbounded derived category of etale module sheaves without Noetherian hypotheses",
+   "results": "{\"t\": \"2026-10-22T06:26:30Z\", \"tool\": \"leanfinder\", \"query\": \"Relative Poincare duality for projective line on entire unbounded derived category of etale module sheaves without Noetherian hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"CochainComplex.isKProjective_of_op\", \"CochainComplex.isKProjective_of_projective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CochainComplex.IsKProjective\"], \"digest\": \"ce404975f77f8579\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, structure-sheaf pullback/pushforward, generic adjunctions, K-projective complexes or dynamical recurrence; none states torsion etale projective/affine-line duality with this counit"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*(trace|adjunction|duality)|diagonal.*integral|Poincare",
+   "results": "{\"t\": \"2026-10-22T07:57:53Z\", \"tool\": \"grep\", \"query\": \"projective.*(trace|adjunction|duality)|diagonal.*integral|Poincare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Conservative.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/RepresentationTheory/Coinduced.lean\"], \"digest\": \"20087450b0ecd15c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward of projective line is left adjoint to Tate twisted inverse image shifted two for finite torsion coefficients",
+   "results": "{\"t\": \"2026-10-22T07:57:53Z\", \"tool\": \"leansearch\", \"query\": \"Derived pushforward of projective line is left adjoint to Tate twisted inverse image shifted two for finite torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.instIsLeftAdjointPullback\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"TopCat.Presheaf.pushforwardToOfIso\"], \"digest\": \"8897f4b21340d73a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpectrum\", \"Adjunction\"",
+   "results": "{\"t\": \"2026-10-22T07:57:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpectrum\\\", \\\"Adjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torsion etale projective line integration and diagonal kernel construct a right adjoint to proper derived direct image",
+   "results": "{\"t\": \"2026-10-22T07:58:04Z\", \"tool\": \"leanfinder\", \"query\": \"Torsion etale projective line integration and diagonal kernel construct a right adjoint to proper derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"PresheafOfModules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\"], \"digest\": \"30e437983e43a41d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line relative Poincare duality on the unbounded etale derived category over an arbitrary affine base with projection formula trace counit",
+   "results": "{\"t\": \"2026-10-22T07:58:05Z\", \"tool\": \"leanfinder\", \"query\": \"Projective line relative Poincare duality on the unbounded etale derived category over an arbitrary affine base with projection formula trace counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget\"], \"digest\": \"0b2b966a775a10e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mates, structure-sheaf pullback composition, scheme fibre-product coordinates, or algebraic traces; none states these two trace-contraction equations on ordinary unbounded etale derived categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-affine-line-canonical-duality",
+  "date": "2026-10-22",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Unit sk-prop-sf-rf-shriek-preservation step 3, projective-line building block before affine open restriction; thm-amb-p1-adjunction.proof.md G3, G5, G6--G7 and both triangle calculations, over an arbitrary affine base. The ancestor command returns None for the inherited creation chain.",
+   "via": [
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-affine-base-p1-trace-adjunction",
+  "worker": "stage1",
+  "summary": "Took the arbitrary-base projective-line trace, its base-change equations for both projections and both supported diagonal integrals from lem-sp-tower-p1-arbitrary-base-integrals (reviewer repair: replaces a re-derivation by pullback from Spec Z[1/N]); built the natural diagonal-kernel unit on all complexes and verified its two triangles by a conditional coordinate-contraction comparison; transported factor order to prove the exact requested PF counit. One new statement-only generic comparison node, no Mathlib leaves. Statement unchanged.",
+  "blueprint": "Unit sk-prop-sf-rf-shriek-preservation step 3; current projective-line adjunction proof G6 unit, G7 counit, and the first/second coordinate integrals. Item and new-node same_as searches found no arbitrary-base or conditional-comparison duplicate. The inherited creation chain has no blueprint_kind ancestor (ancestor command prints None); its semantic unit ancestor is recorded in from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+    "why": "Arbitrary-base projective-line decomposition, trace with base change and both diagonal integrals (sk-prop-geo-p1-adjunction content, imported under sec-smooth-purity); this preservation unit supplies no version of it."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-amb-p1-diagonal-cartier",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Generic proper-exchange, Kummer, tensor, scheme, or adjunction tool in the prescribed projective-line diagonal-kernel route; this preservation unit supplies no version of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-p1-diagonal-cartier",
+  "lem-kun-0f0g",
+  "def-kun-projection-formula-map",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-372219a94",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-372219a94 (reviewer sub-agent of L); spot-checked: Read the item (8 steps), the new node lem-sfb-etale-coordinate-trace-contractions, every cited statement, unit sk-prop-sf-rf-shriek-preservation step 3, and the main-20261015 thm-amb-p1-adjunction and det-sp-p1-adjunction proofs. No SGA source is used. Item statement unchanged and true. The coefficient category is ordinary unbounded etale D(-,A) and the base-change maps are the canonical unbounded exchanges. The delivered steps 1-3 are correct: the trace and both diagonal integrals over Spec Z[1/N] are pulled back to S by horizontal exchange pasting and Cartier pullback of the Kummer class. But that re-derives the existing reviewed node lem-sp-tower-p1-arbitrary-base-integrals, which states over any scheme the trace t_T, its proper-exchange base change and t_P Rp_i*(delta) alpha_i = 1 for i = 1,2. The parent's PASS note asked the next splitter to cite it, and the report omits it (C5). FIX: steps 1-3 are replaced by one step citing it. t = t_S and t_i = t_P. Base change along v = q, with beta_1 from the square W -p2-> P over q and beta_2 from the swapped square, gives t_i beta_i = q^*t; the integral clause gives s_i = 1. Later steps renumbered; proof_deps, proof_origin, from.place, summary and tool_uses updated; no Noetherian hypothesis remains. The other steps check: the unit is built from Delta-PF and p2-PF; the two triangles use the new node, the section identity of lem-sfb-ringed-projection-tensor-composition and s_i = 1; the natural-bijection adjunction then gives counit e; the factor order is moved with the symmetry h_K; at K = A_S the counit is t. New node: conditional, statement-only, not a clause of the parent; it is the etale analogue of the condensed lem-sfb-trace-base-change-first/second, so not a duplicate. Tested: f = id; f a finite set of points (equation 2 differs only by the swap on L tensor L, which is the identity for rank one and sign (-1)^{(2d)^2} = 1); t = 0. Minor advisory: 'A_Y-module sheaf' cites no def node. Declared tool uses of the imported p1, Kummer, PF, exchange and tensor nodes are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfAffineBaseP1TraceAdjunction",
+  "declaration": "AlgebraicGeometry.Etale.sfAffineBaseP1TraceAdjunction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfAffineBaseP1TraceAdjunction.lean",
+  "statement": "theorem sfAffineBaseP1TraceAdjunction (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (_hN : 0 < N) (hA : (N : A) = 0) (S : Scheme.{u}) [IsAffine S] (_hInvertible : ∀ s : S, IsUnit (N : S.presheaf.stalk s)) : ∃ (t : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) (sfProjectiveLineCompactification S)).obj (((_root_.DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateLine (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S) N A hA))⟦(2 : ℤ)⟧) ⟶ constantComplex A S) (adj : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) (sfProjectiveLineCompactification S) ⊣ (upperStar (ModuleCat.{u + 1} A) (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S ↘ S)).leftDerivedFunctor ⋙ (derivedTensor (ModuleCat.{u + 1} A) (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S)).obj (((_root_.DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateLine (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S) N A hA))⟦(2 : ℤ)⟧)), (∀ K : DerivedCategoryModule A S, ((projectionMapOfCompactification (ModuleCat.{u + 1} A) (sfProjectiveLineCompactification S)).app (((_root_.DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateLine (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S) N A hA))⟦(2 : ℤ)⟧)).app K ≫ adj.counit.app K = ((derivedTensor (ModuleCat.{u + 1} A) S).map t).app K ≫ (derivedTensorLeftUnitor (ModuleCat.{u + 1} A) S K).hom) ∧ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) (sfProjectiveLineCompactification S)).map (sfTensorPullbackUnitIso A (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S ↘ S) (((_root_.DerivedCategory.singleFunctor _ 0).obj (Scheme.finiteEtaleTateLine (ProjectiveSpace (Option (ULift.{u} (Fin 1))) S) N A hA))⟦(2 : ℤ)⟧)).hom ≫ adj.counit.app (constantComplex A S) = t",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "R1 interface repair: represent the affine base by any IsAffine S, use Option (ULift (Fin 1)) as the two homogeneous coordinates, and realize Rq_* by the identity/proper compactification. Expose the canonical coefficient-unit counit equation already asserted in the node. The original geometric trace-adjunction hole remains; no new existence theorem or hole is added.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sfAffineBaseP1TraceAdjunction",
+   "AlgebraicGeometry.Etale.sfProjectiveLineCompactification",
+   "AlgebraicGeometry.Etale.sfTensorPullbackUnitIso"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9443d75fd",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Clause-by-clause match: A:Type(u+1) CommRing Finite (A=0 allowed), 0<N, (N:A)=0, R:CommRingCat.{u} with IsUnit (N:R), Spec R with no Noetherian assumption; ProjectiveLine (two homogeneous coordinates); DerivedCategoryModule; q^* = L(upperStar) by the recorded convention; B = single(finiteEtaleTateLine)⟦2⟧; H = Lq^* ⋙ (B ⊗ −), B first; ∃ t, ∃ adj : F ⊣ H, ∀ K, PF ≫ counit = (t⊗1) ≫ leftUnitor, equivalent to the node's PF⁻¹ formula since PF is invertible (lem-kun-0f0g); the proper rightDerivedLowerStarProjectionMap equals the identity-compactification PF of lem-sf-etale-ambient-adjoint-projection up to canonical identity comparisons (node step 6). Mechanical theorem stmt_dep lem-kun-tensor-unit: the statement uses derivedTensorLeftUnitor, that node's own existing:true upstream declaration and the canonical isomorphism it asserts, with no plain helper definition to move → PASS on this point (as lem-kun-tensor-sym/derivedTensorSymmetry). Added stmt_deps are landed proof_deps. lean.statement verbatim; only sorry is the item theorem, no defs; docstrings carry source and blueprint tag and a 6-step plan; all imports exist in side-live; the only near match, exists_ordinaryFiniteP1Adjunction, is Noetherian-only and not a duplicate; no pro-étale substitute; edge cases N=1, R=0, non-Noetherian R, unbounded K, shift +2. Not recompiled per instructions; the worker reports clean scompile 8.2 s; no files changed. Advisory: finiteEtaleTateLine is owned by def-asd-finite-etale-tate-twist, which the item reaches only through lem-asd-finite-etale-twist-line, already a stmt_dep before this delivery."
+ },
+ "statement_change": {
+  "date": "2026-10-23",
+  "by": "R1 stage 2",
+  "old_statement": "Let $A$ be a finite commutative ring, let $N\\geq1$ satisfy $NA=0$, and let $S=\\operatorname{Spec}R$ for any commutative ring $R$ [def-weil-affine-spectrum, def-pc-scheme] on which $N$ is invertible. Put $P=\\mathbf P^1_S$, with projection $q:P\\to S$ [def-nagata-projective-space-base-change]. Work in the ordinary unbounded small-etale module derived categories [def-weil-pbc-derived-categories]. Use exact inverse image $q^*$ [def-weil-pbc-inverse-image] and derived tensor [def-kun-derived-tensor]. Put $B=A_P(1)[2]$, where $A_P(1)=\\mu_{N,P}\\otimes_{(\\mathbf Z/N)_P}A_P$ with roots-of-unity action as in [lem-asd-finite-etale-twist-line]. For $F=Rq_*$ use the canonical projection isomorphisms $\\mathrm{PF}_{M,K}:FM\\otimes_A^LK\\xrightarrow{\\sim}F(M\\otimes_A^Lq^*K)$ of [lem-sf-etale-ambient-adjoint-projection] with factorization $(\\mathrm{id}_P,q)$. There exist a derived morphism $t:FB\\to A_S$ and an adjunction $F\\dashv H$, where $HK=B\\otimes_A^Lq^*K$, whose actual counit, for every unbounded $K\\in D(S_{\\mathrm{et}},A)$, is\n$$\\epsilon^H_K:F(B\\otimes_A^Lq^*K)\\xrightarrow{\\mathrm{PF}_{B,K}^{-1}}FB\\otimes_A^LK\\xrightarrow{t\\otimes1}A_S\\otimes_A^LK\\xrightarrow{\\lambda_K}K.$$\nNo Noetherian, constructibility, boundedness or Tor-amplitude assumption is imposed. At $K=A_S$ the formula identifies the counit with $t$, using the canonical unit identifications.",
+  "what": "Equivalent presentation and interface clarification for the assigned affine-line consumer: arbitrary affine S instead of its canonical Spec of global sections, two standard-chart homogeneous coordinates instead of ULift (Fin 2), Rq_* represented by the identity/proper compactification, and the already stated coefficient-unit normalization exposed as a separate equality. No new geometric assertion or assumption; no weakening; the one original projective-adjunction hole remains.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+   "place": "Diagonal-kernel construction of the unit and its two triangle identities, with the projection-formula counit of (G7) in the unit sk-prop-geo-p1-adjunction. This is the agent-stated arbitrary-affine-base version of that projective building block; the source standing range itself is narrower. Only existence of a projection-normalized trace is asserted, not additional base-change or Kummer normalization claims."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-affine-line-canonical-duality",
+    "holds": true,
+    "note": "The same projective-line trace adjunction with its actual projection and unit normalizations is applied in the exact coordinate model of the standard affine chart. The affine-line statement is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "Let $B_T=A_T(1)[2]$ for $T=S,P,W$, where $W=P\\times_SP$ with projections $p_1,p_2$ and diagonal $\\Delta:P\\to W$. Apply [lem-sp-tower-p1-arbitrary-base-integrals] to $N,A$ and the scheme $S$; no Noetherian hypothesis is required there. It gives the isomorphism $b_S$ and the trace $t:=t_S=\\operatorname{pr}_2b_S^{-1}:Rq_*B_P\\to A_S$, and, identifying each $p_i$ with $r_P:\\mathbf P^1_P\\to P$, the trace $t_i:=t_P:Rp_{i*}B_W\\to A_P$. Its base-change clause for $v=q:P\\to S$ carries $t_S$ to $t_P$ under the canonical proper exchange and the twist pullback identification [lem-asd-etale-finite-twist-pullback]. For $p_1$ the base-change square is $W\\xrightarrow{p_2}P$ over $q$, whose exchange is $\\beta_1:q^*Rq_*\\to Rp_{1*}p_2^*$; for $p_2$ it is the swapped square, with exchange $\\beta_2:q^*Rq_*\\to Rp_{2*}p_1^*$. Hence\\n$$t_i\\circ\\beta_{i,B_P}=q^*t\\quad(i=1,2),$$\\nunder $q^*B_S=B_P$, $p_{3-i}^*B_P=B_W$ and $q^*A_S=A_P$. The same node states that $\\Delta$ is an effective Cartier divisor, with supported Kummer morphism $\\delta:R\\Delta_*A_P\\to B_W$ of [lem-asd-ordinary-supported-kummer], and that, with $\\alpha_i:A_P\\xrightarrow{\\sim}Rp_{i*}R\\Delta_*A_P$ the derived-composition identification for $p_i\\Delta=1_P$,\\n$$s_i:=t_iRp_{i*}(\\delta)\\alpha_i=1_{A_P}\\quad(i=1,2).$$\\nThese are equations of derived morphisms over the given, possibly non-Noetherian, base.",
+    "uses": [
+     "lem-sp-tower-p1-arbitrary-base-integrals",
+     "lem-asd-etale-finite-twist-pullback",
+     "lem-asd-ordinary-supported-kummer"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+     "place": "G3 trace and its base-change normalization, the two coordinate traces, and G5 diagonal integrals, over an arbitrary base."
+    }
+   },
+   {
+    "text": "Write $F=Rq_*$ and temporarily $G(K)=q^*K\\otimes B_P$. The maps $q,p_i$ are proper projective lines by [lemma-nagata-projective-space-base-change-proper]. The Cartier diagonal is closed [lem-amb-p1-diagonal-cartier] and hence proper by [lem-weil-pbc-closed-immersion-proper]. Thus [lem-kun-0f0g] gives all the projection isomorphisms below, including those for $\\Delta$, on whole unbounded categories. With the normalized comparisons of [lem-sfb-ringed-derived-monoidal-comparisons], define\n$$v_M:R\\Delta_*M\\cong p_1^*M\\otimes R\\Delta_*A_P\\xrightarrow{1\\otimes\\delta}p_1^*M\\otimes B_W.$$\nThe first identification uses $\\Delta^*p_1^*M=M$. Put\n$$\\eta_M:M\\cong Rp_{2*}R\\Delta_*M\\xrightarrow{Rp_{2*}v_M}Rp_{2*}(p_1^*M\\otimes B_W)\\xrightarrow{C_M}GFM,$$\nwhere $C_M$ is inverse projection for $p_2$, followed by $\\beta_{2,M}^{-1}\\otimes1$. All arrows are natural in $M$. Define the natural transformation\n$$e_K:FGK\\xrightarrow{\\pi_{q,K,B_P}^{-1}}K\\otimes FB_P\\xrightarrow{1\\otimes t}K\\otimes A_S\\longrightarrow K.$$\nThe ordered map $\\pi$ is the symmetry-conjugate of the canonical PF of the item, exactly as in [def-kun-projection-formula-map].",
+    "uses": [
+     "lemma-nagata-projective-space-base-change-proper",
+     "lem-amb-p1-diagonal-cartier",
+     "lem-weil-pbc-closed-immersion-proper",
+     "lem-kun-0f0g",
+     "lem-sfb-ringed-derived-monoidal-comparisons",
+     "def-kun-projection-formula-map"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+     "place": "G6 diagonal-kernel unit and G7 inverse-projection counit."
+    }
+   },
+   {
+    "text": "Apply [lem-sfb-etale-coordinate-trace-contractions] with $f=q$, $J_S=A_S(1)$, and $d=1$. The line hypothesis is [lem-asd-finite-etale-twist-line]; step 1 supplies precisely both trace-exchange equations. It gives\n$$e_{FM}F(C_M)=F(1_M\\otimes t_1)F(\\pi_{p_1,M,B_W}^{-1}).$$\nPrecompose with $FRp_{2*}(v_M)$, identifying $FRp_{2*}=FRp_{1*}$. Naturality of projection in its inside factor, and its section identity for $p_1\\Delta=1$ in [lem-sfb-ringed-projection-tensor-composition], identify\n$$\\pi_{p_1,M,B_W}^{-1}Rp_{1*}(v_M)=(1_M\\otimes Rp_{1*}\\delta)\\,(1_M\\otimes\\alpha_1)$$\nunder $Rp_{1*}R\\Delta_*M=M$ and the tensor unit constraints. Consequently\n$$e_{FM}F(\\eta_M)=F(1_M\\otimes s_1)=1_{FM},$$\nby step 1. All these are equations of canonical derived arrows.",
+    "uses": [
+     "lem-sfb-etale-coordinate-trace-contractions",
+     "lem-asd-finite-etale-twist-line",
+     "lem-sfb-ringed-projection-tensor-composition"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+     "place": "First triangle: coordinate interchange followed by the first diagonal integral."
+    }
+   },
+   {
+    "text": "The second equation of [lem-sfb-etale-coordinate-trace-contractions] says\n$$G(e_K)C_{GK}=(1_{GK}\\otimes t_2)\\pi_{p_2,GK,B_W}^{-1}.$$\nHere $p_1^*GK=p_2^*GK$: both equal the pullback from $S$ of $K\\otimes B_S$. Precompose with $Rp_{2*}(v_{GK})$. The section identity and naturality of [lem-sfb-ringed-projection-tensor-composition], now for $p_2\\Delta=1$, give\n$$\\pi_{p_2,GK,B_W}^{-1}Rp_{2*}(v_{GK})=(1_{GK}\\otimes Rp_{2*}\\delta)(1_{GK}\\otimes\\alpha_2).$$\nThus $G(e_K)\\eta_{GK}=1_{GK}\\otimes s_2=1_{GK}$ by step 1. The line self-symmetry used in the coordinate comparison is identity: on a trivializing etale cover $ae\\otimes be\\mapsto be\\otimes ae=ab(e\\otimes e)$. Its shift is $2$, so swapping it past degree $j$ gives $(-1)^{2j}=1$. No truncation of $K$ or $M$ occurs.",
+    "uses": [
+     "lem-sfb-etale-coordinate-trace-contractions",
+     "lem-sfb-ringed-projection-tensor-composition"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+     "place": "Second triangle: common coefficient and the second diagonal integral."
+    }
+   },
+   {
+    "text": "For completeness construct the adjunction with this actual $e$. Send $u:FM\\to K$ to $G(u)\\eta_M$ and $v:M\\to GK$ to $e_KF(v)$. These operations are natural. Their first composite is $e_KFG(u)F\\eta_M=u\\,e_{FM}F\\eta_M=u$, by naturality of $e$ and step 3. Their second is $G(e_K)GF(v)\\eta_M=G(e_K)\\eta_{GK}v=v$, by naturality of $\\eta$ and step 4. Hence they are inverse natural Hom bijections and [lem-weil-pbc-adjunction-of-natural-bijection] gives $F\\dashv G$; the counit at $K$ is the image of $1_{GK}$ under the second bijection, namely $e_K$.",
+    "uses": [
+     "lem-weil-pbc-adjunction-of-natural-bijection"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+     "place": "The two triangles give Hom bijections with exactly the selected counit."
+    }
+   },
+   {
+    "text": "The symmetry isomorphism $h_K:B_P\\otimes q^*K\\xrightarrow{\\sim}q^*K\\otimes B_P$ identifies the functor $H$ in the item with $G$. Use the preceding Hom bijection followed by $h_K^{-1}$ to give $F\\dashv H$. Its actual counit is $e_KF(h_K)$. By the definition of the ordered projection map and the natural symmetry [lem-kun-tensor-sym], this is\n$$F(B_P\\otimes q^*K)\\xrightarrow{\\mathrm{PF}_{B_P,K}^{-1}}FB_P\\otimes K\\xrightarrow{t\\otimes1}A_S\\otimes K\\xrightarrow{\\lambda_K}K.$$\nThe canonical compactification PF with $(1_P,q)$ is this same proper counit-defined map by [lem-sf-etale-ambient-adjoint-projection]. At $K=A_S$, projection with the tensor unit is the canonical unit identification: its adjunct is the original pullback counit, by [def-kun-projection-formula-map]; the adjunction triangle therefore identifies its mate with the unit constraint. Naturality of the unitors and [lem-kun-tensor-unit] make the displayed counit exactly $t$. If $N=1$, then $A=0$ and every object and arrow is the unique one in its zero derived category; the formula still holds. The empty affine base is harmless. No Noetherian hypothesis was used anywhere; all exchange, projection and coordinate identities hold for arbitrary bases and unbounded complexes.",
+    "uses": [
+     "lem-kun-tensor-sym",
+     "lem-sf-etale-ambient-adjoint-projection",
+     "def-kun-projection-formula-map",
+     "lem-kun-tensor-unit"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+     "place": "G7 with the factor order of the dispatched item, and specialization to the tensor unit."
+    }
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261025T203401-L-2811201",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-nodal-two-connected-clifford",
+ "kind": "statement",
+ "title": "Clifford inequality on a nodal curve with no separating node",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-kun-topological-krull-dimension, def-weil-pure-dimension]. Assume $X$ is smooth except at ordinary nodes with completed local $k$-algebras $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Cohomology means Zariski module-sheaf cohomology [def-sc-ringed-space-module-cohomology], and $h^i(X,F)=\\dim_k H^i(X,F)$. Assume that for every decomposition $X=A\\cup B$ into two nonempty reduced unions of distinct irreducible components with no common component, the finite intersection $A\\times_XB$ has $k$-length at least two (the condition is vacuous if $X$ is irreducible). The fibre product and its length mean [def-pc-fibre-product] and $\\dim_k\\Gamma(A\\times_XB,\\mathcal O_{A\\times_XB})$. Let $M$ be an invertible module [def-sc-invertible-module], with a section nonzero at every component generic point, and suppose there exists a map $M\\to\\omega_X$ nonzero at every component generic point, where $\\omega_X$ is [lem-sfb-nodal-line-serre-riemann-roch]. Then\n$$h^0(X,M)\\leq \\tfrac12\\deg_k M+1,$$\nwith Euler-characteristic degree [def-pc-degree-line-bundle]. Irreducible components have the meaning of [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Local PDF WANTED; author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-pc-degree-line-bundle",
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "lem-sfb-nodal-line-serre-riemann-roch"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity gives properness; $X$ is Noetherian, and its invertible modules are coherent. Fix the given map $\\varphi:M\\to\\omega_X$. On an affine open trivializing both lines it is multiplication by $f$. Every minimal-prime image of $f$ is nonzero. If $fa=0$, its image in each corresponding domain gives $a=0$ there; reducedness says the intersection of the minimal primes is zero, hence $a=0$. Thus $\\varphi$ is injective and its local image ideal $(f)$ is Cartier. Write $T$ for the zero scheme: $M=I_T\\otimes\\omega_X$ inside $\\omega_X$. It contains no component, hence is zero-dimensional. The given section of $M$ shows $T$ is subcanonical. Set $\\ell=\\dim_k\\Gamma(T,\\mathcal O_T)$ and $r=r(T)$. The splitting-index definition applies to this actual subspace of canonical sections.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "def-sfb-subcanonical-splitting-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02OR (lemma-zero-scheme), 0AYL (lemma-regular-section-associated-points); elementary reduced-ring injectivity argument written explicitly"
+   }
+  },
+  {
+   "text": "Apply the base-ideal lemma to $L=M$ and its full section space $V$. It gives $\\mathcal B$, $b\\ge0$ and $\\bar T$ with $\\ell(\\bar T)=\\ell+b$ and the same canonical section subspace $V$. Thus $\\bar T$ is subcanonical and $r(\\bar T)=r$, since admissible partitions use only that subspace and its component supports. If $r=0$, then $b\\ge r$. If $r>0$, choose an admissible partition into $r+1$ blocks realizing $r$. Each block and its complement are nonempty. By the hypothesis each boundary contains at least two nodes. Each node between blocks is counted twice in the sum of the block boundaries, so $|E_{\\mathcal P}|\\ge r+1$. The base-ideal lemma gives $b\\ge |E_{\\mathcal P}|\\ge r+1\\ge r$. Self-nodes within a block are not counted.",
+   "uses": [
+    "lem-sfb-nodal-linear-series-base-colength",
+    "def-sfb-subcanonical-splitting-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.9 proof, printed p.247: base-locus correction; boundary count specialized to nodes"
+   }
+  },
+  {
+   "text": "Use the splitting-corrected inequality for $\\bar T$. With $p_a=1-\\chi(X,\\mathcal O_X)$, the preceding equalities and $b\\ge r$ give\n$$h^0(X,M)=h^0(X,I_{\\bar T}\\otimes\\omega_X)\\le p_a-\\frac{\\ell+b}{2}+\\frac r2\\le p_a-\\frac\\ell2.$$\nThis is the cancellation of the splitting correction; no Cartier assumption on $\\bar T$ is needed.",
+   "uses": [
+    "lem-sfb-subcanonical-splitting-clifford-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+    "place": "Theorem 3.9 proof, printed p.247, final inequality using Theorem 3.7"
+   }
+  },
+  {
+   "text": "The defining exact sequence is $0\\to M\\to\\omega_X\\to\\omega_X\\otimes\\mathcal O_T\\to0$. Euler additivity and the zero-dimensional-support tensor formula give $\\chi(X,M)=\\chi(X,\\omega_X)-\\ell$. Reduced-curve duality gives $\\chi(X,\\omega_X)=-\\chi(X,\\mathcal O_X)$, and the definition of Euler-characteristic degree gives\n$$\\deg_kM=-2\\chi(X,\\mathcal O_X)-\\ell=2p_a-2-\\ell.$$\nSubstitution into step 3 yields $h^0(X,M)\\le\\deg_kM/2+1$. This also covers $T=\\varnothing$ and irreducible $X$.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support",
+    "lem-sfb-reduced-curve-dualizing-module",
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08AA (lemma-euler-characteristic-additive), 0AYT (lemma-chi-tensor-finite); curves.tex Tag 0BS3 (lemma-duality-dim-1-CM)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-degree-line-bundle",
+  "def-sfb-subcanonical-splitting-index",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "lem-sfb-nodal-linear-series-base-colength",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-sfb-subcanonical-splitting-clifford-bound",
+  "lem-trf-proper-field-invertible-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/franciosi-tenni-clifford-singular-curves-2014.pdf",
+  "place": "Theorem 3.9 proof, printed p.247, with Cartier conversion and Euler-degree calculation; source read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subcanonical|Clifford.*theorem|clifford.*inequality",
+   "results": "{\"t\": \"2026-10-23T11:23:33Z\", \"tool\": \"grep\", \"query\": \"subcanonical|Clifford.*theorem|clifford.*inequality\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"0942ed80200be812\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Clifford algebras and elliptic coordinate formulas do not state the curve Clifford inequality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford theorem for line bundles on two connected reducible curves",
+   "results": "{\"t\": \"2026-10-23T11:23:34Z\", \"tool\": \"leansearch\", \"query\": \"Clifford theorem for line bundles on two connected reducible curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CliffordAlgebra.instAlgebra'\", \"instInhabitedCliffordAlgebra\", \"CliffordAlgebra\", \"CliffordAlgebra.EvenHom.ext_iff\", \"CliffordAlgebra.ofProd_comp_toProd\", \"CliffordAlgebra.instNontrivialOfInvertibleOfNat\", \"CliffordAlgebra.prodEquiv_symm_apply\", \"CliffordAlgebra.ofProd_ι_mk\"], \"digest\": \"1dfef9361e75b274\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Clifford algebras and elliptic coordinate formulas do not state the curve Clifford inequality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Clifford\"",
+   "results": "{\"t\": \"2026-10-23T11:23:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Clifford\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CliffordAlgebra\", \"instInhabitedCliffordAlgebra\", \"CliffordAlgebra.instRing\", \"CliffordAlgebra.Rel\", \"CliffordAlgebra.instAlgebra\", \"CliffordAlgebra.ringCon\", \"CliffordAlgebra.ι\", \"TensorAlgebra.toClifford\"], \"digest\": \"a65ba63fe40532e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Clifford algebras and elliptic coordinate formulas do not state the curve Clifford inequality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a two connected nodal projective curve a subcanonical effective Cartier divisor Z satisfies h0(omega(-Z)) at most arithmetic genus minus degree Z divided by two",
+   "results": "{\"t\": \"2026-10-23T11:23:36Z\", \"tool\": \"leanfinder\", \"query\": \"For a two connected nodal projective curve a subcanonical effective Cartier divisor Z satisfies h0(omega(-Z)) at most arithmetic genus minus degree Z divided by two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.natDegree_Φ_le\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\"], \"digest\": \"809b70af5f185fee\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Clifford algebras and elliptic coordinate formulas do not state the curve Clifford inequality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford inequality for effective divisors contained in a canonical divisor on a nodal curve without separating nodes",
+   "results": "{\"t\": \"2026-10-23T11:23:37Z\", \"tool\": \"leanfinder\", \"query\": \"Clifford inequality for effective divisors contained in a canonical divisor on a nodal curve without separating nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.natDegree_Φ_le\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\"], \"digest\": \"13c65cb893887ee3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Clifford algebras and elliptic coordinate formulas do not state the curve Clifford inequality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford inequality for sections of a line bundle and its canonical dual on a two connected nodal projective curve",
+   "results": "{\"t\": \"2026-10-23T13:10:54Z\", \"tool\": \"leanfinder\", \"query\": \"Clifford inequality for sections of a line bundle and its canonical dual on a two connected nodal projective curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\"], \"digest\": \"abf897a159d3c873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Clifford\"",
+   "results": "{\"t\": \"2026-10-23T13:13:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Clifford\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CliffordAlgebra\", \"instInhabitedCliffordAlgebra\", \"CliffordAlgebra.instRing\", \"CliffordAlgebra.Rel\", \"CliffordAlgebra.instAlgebra\", \"CliffordAlgebra.ringCon\", \"CliffordAlgebra.ι\", \"TensorAlgebra.toClifford\"], \"digest\": \"a65ba63fe40532e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "grep",
+   "query": "Clifford|subcanonical|splitting.index",
+   "results": "{\"t\": \"2026-10-23T13:18:09Z\", \"tool\": \"grep\", \"query\": \"Clifford|subcanonical|splitting.index\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"c70cc6188eacd9e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford inequality for line bundle sections on a two connected projective curve",
+   "results": "{\"t\": \"2026-10-23T13:18:09Z\", \"tool\": \"leansearch\", \"query\": \"Clifford inequality for line bundle sections on a two connected projective curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instInhabitedCliffordAlgebra\", \"CliffordAlgebra\", \"ContMDiffOn.clm_bundle_apply\", \"CliffordAlgebra.evenOdd\", \"CliffordAlgebra.range_ι_le_evenOdd_one\", \"CliffordAlgebra.instNontrivialOfInvertibleOfNat\", \"CliffordAlgebra.lift\", \"CliffordAlgebra.contractLeftAux_contractLeftAux\"], \"digest\": \"a24efa9c3df25e9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clifford inequality for sections of a line bundle and its canonical dual on a two connected nodal projective curve",
+   "results": "{\"t\": \"2026-10-23T13:10:54Z\", \"tool\": \"leanfinder\", \"query\": \"Clifford inequality for sections of a line bundle and its canonical dual on a two connected nodal projective curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial_slope\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\"], \"digest\": \"abf897a159d3c873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Clifford\"",
+   "results": "{\"t\": \"2026-10-23T13:13:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Clifford\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CliffordAlgebra\", \"instInhabitedCliffordAlgebra\", \"CliffordAlgebra.instRing\", \"CliffordAlgebra.Rel\", \"CliffordAlgebra.instAlgebra\", \"CliffordAlgebra.ringCon\", \"CliffordAlgebra.ι\", \"TensorAlgebra.toClifford\"], \"digest\": \"a65ba63fe40532e5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "grep",
+   "query": "Clifford|subcanonical|splitting.index",
+   "results": "{\"t\": \"2026-10-23T13:18:09Z\", \"tool\": \"grep\", \"query\": \"Clifford|subcanonical|splitting.index\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\"], \"digest\": \"c70cc6188eacd9e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clifford inequality for line bundle sections on a two connected projective curve",
+   "results": "{\"t\": \"2026-10-23T13:18:09Z\", \"tool\": \"leansearch\", \"query\": \"Clifford inequality for line bundle sections on a two connected projective curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instInhabitedCliffordAlgebra\", \"CliffordAlgebra\", \"ContMDiffOn.clm_bundle_apply\", \"CliffordAlgebra.evenOdd\", \"CliffordAlgebra.range_ι_le_evenOdd_one\", \"CliffordAlgebra.instNontrivialOfInvertibleOfNat\", \"CliffordAlgebra.lift\", \"CliffordAlgebra.contractLeftAux_contractLeftAux\"], \"digest\": \"a24efa9c3df25e9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: unrelated Clifford algebra and Weierstrass-curve declarations, and subcanonical topologies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-general-section-cluster-strict-bound",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch.",
+   "via": [
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-two-connected-clifford",
+  "worker": "stage1",
+  "summary": "Read the actual Cartier-case proof of Franciosi--Tenni Theorem 3.9 behind the imported Theorem 2.7 citation. Exposed the general cluster inequality with splitting correction and the independent base-ideal colength input, retained the correction cancellation and the Cartier/Euler calculation in the item. Statement unchanged. No matching project Lean proof or Mathlib statement found.",
+  "blueprint": "Latest direct-images proof (3), supporting nodal-curve linear-series prerequisite through the unchanged imported ancestor chain; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic properness/coherence or Euler-characteristic tool used for the Cartier zero-divisor calculation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Generic properness/coherence or Euler-characteristic tool used for the Cartier zero-divisor calculation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Generic properness/coherence or Euler-characteristic tool used for the Cartier zero-divisor calculation; it does not replace any step of the unit route."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic properness/coherence or Euler-characteristic tool used for the Cartier zero-divisor calculation; it does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "lem-trf-proper-field-invertible-coherent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-9940d33ec",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-9940d33ec (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes and every cited statement. The Franciosi–Tenni PLMS 2014 author PDF is not in literature/ (WANTED is correct); I fetched it and read it as text: §2.1 conventions (algebraically closed field, any characteristic), Def 2.9, Def 2.16, Prop 2.17, Thm 3.7 (9) with its proof, and the Thm 3.9 proof on p.247. The item statement is unchanged and equals the Cartier case of Thm 3.9. The 2-connected hypothesis written as A×_X B length ≥2 is the numerical A·B≥2 for reduced nodal curves. Step 1: the reduced-ring injectivity argument is correct; T is the zero-dimensional Cartier zero scheme and is subcanonical. Step 2 follows p.247: base cluster T̄ with I_T̄=I_T·B, same section space so r(T̄)=r, and double counting of cross-block nodes gives b≥|E|≥r+1. Step 3 applies Thm 3.7 and the correction cancels. Step 4: the Euler sequence, the zero-dimensional-support tensor formula and χ(ω)=−χ(O) give deg M=2p_a−2−ℓ; the identification of the two ω nodes is a one-line Yoneda step from their uniqueness clauses. New nodes: def-sfb-subcanonical-splitting-index takes the largest admissible partition, the intended reading of FT Def 2.16, whose literal 'minimal' is a misprint (Prop 2.17, Lemma 3.6). lem-sfb-subcanonical-splitting-clifford-bound is Thm 3.7 specialized to nodal curves: a genuine, more general source theorem, not a restatement of the item. lem-sfb-nodal-linear-series-base-colength: every clause checked true (B⊆I_E, reduced boundary intersection, ℓ(T̄)=ℓ+b via fO/fB≅O/B). Edge cases: T empty, irreducible X, two P1s meeting at two nodes, an n-cycle, self-nodes, P1 vacuous. No duplicates (rg over dag/nodes for Clifford, splitting index, subcanonical, base locus). No SGA. Accepted the 4 declared tool_uses as generic tools. Batch-5: the serre-RR, euler-additive, reduced-curve-dualizing and trf-proper-field-invertible-coherent citations reach only coherent curve degree, a general definition, field linear algebra and Noetherian/coherence facts, all outside the trace formula and Poincaré duality, so accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalTwoConnectedClifford",
+  "declaration": "AlgebraicGeometry.nodal_two_connected_clifford",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalTwoConnectedClifford.lean",
+  "statement": "theorem nodal_two_connected_clifford (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsHProjective (X ↘ Spec (.of k))] [ConnectedSpace X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, IsClosed ({x} : Set X) → x ∉ (X ↘ Spec (.of k)).smoothLocus → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ((X.presheaf.germ ⊤ x (Set.mem_univ _)) (scalarMap (X ↘ Spec (.of k)) ⊤ a))) = algebraMap k (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}) a) (htwo : ∀ (A B : Scheme.{u}) (a : A ⟶ X) (b : B ⟶ X), IsClosedImmersion a → IsClosedImmersion b → IsReduced A → IsReduced B → Nonempty A → Nonempty B → (∃ P Q : Set (Set X), P ⊆ irreducibleComponents X ∧ Q ⊆ irreducibleComponents X ∧ Disjoint P Q ∧ P ∪ Q = irreducibleComponents X ∧ Set.range a = ⋃₀ P ∧ Set.range b = ⋃₀ Q) → 2 ≤ @Module.finrank k Γ(pullback a b, ⊤) _ _ (Module.compHom _ (scalarMap (pullback.fst a b ≫ a ≫ X ↘ Spec (.of k)) ⊤))) (ω : X.Modules) [ω.IsInvertible] (e : ∀ (F : X.Modules), F.IsQuasiCoherentFiniteType → (F ⟶ ω) ≃ₗ[k] Module.Dual k (scalarCohomology (X ↘ Spec (.of k)) F 1)) (he : ∀ (F G : X.Modules) (hF : F.IsQuasiCoherentFiniteType) (hG : G.IsQuasiCoherentFiniteType) (a : F ⟶ G) (φ : G ⟶ ω) (z : scalarCohomology (X ↘ Spec (.of k)) F 1), e F hF (a ≫ φ) z = e G hG φ (scalarCohomologyMap (X ↘ Spec (.of k)) a 1 z)) (M : X.Modules) [M.IsInvertible] (hs : ∃ s : Γ(M, ⊤), ∀ C : irreducibleComponents X, TopCat.Presheaf.germ M.presheaf ⊤ (genericPoints.ofComponent C).val (Set.mem_univ _) s ≠ 0) (hφ : ∃ φ : M ⟶ ω, ∀ C : irreducibleComponents X, (RingedSpace.moduleStalkFunctor X.toRingedSpace (genericPoints.ofComponent C).val).map φ ≠ 0) : 2 * (Module.finrank k (scalarCohomology (X ↘ Spec (.of k)) M 0) : ℤ) ≤ Scheme.Modules.degree k M + 2",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fd1b21c3",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Read item node, all 15 stmt_dep records, the delivered module and report, and the side-live declarations scalarMap/scalarCohomology, Modules.degree (χ(M)−χ(O)), IsPureDimension, moduleStalkFunctor, exists_nodal_line_serre_riemann_roch. Every clause matches: alg. closed k; projective/connected(nonempty)/reduced/pure dim 1; closed singular points have completed local k-algebra ≅ k[[u,v]]/(uv) with scalar compatibility (node's k-algebra condition); htwo quantifies all reduced closed component-union splits with length = finrank_k Γ(A×_X B) ≥ 2; ω with the dependency's natural Serre-duality spec (unique by its uniqueness clause); single generically nonzero section and map; conclusion 2h0 ≤ deg+2 in ℤ is exactly equivalent. Universes match the dependency; no extra assumptions; sorry only; docstrings with source/blueprint/proof steps; lean.statement verbatim; node copy changes only lean; report has Worker report and Second reading sections. Edge cases (irreducible, M=ω, genus 1, separating node, P1, odd degree) fine. No findings; no compile needed."
+ }
+}

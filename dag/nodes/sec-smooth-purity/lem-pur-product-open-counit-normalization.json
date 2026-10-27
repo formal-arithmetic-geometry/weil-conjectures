@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-product-open-counit-normalization",
+ "kind": "statement",
+ "title": "Supported open counit tensor normalization",
+ "statement": "For a finite commutative ring A, an open immersion k:U to Y, Q in D(Y_proet,A) and N in D(U_proet,A), put J=k_!N and T=P_kQ tensor N, using [def-pur-product-open-tensor-projection-data]. The tensor eta=(epsilon_Q tensor 1_J) is invertible; eta followed by rho equals delta=gamma_(P_kQ,J) followed by k_!(1 tensor openUnit_N inverse). Pulling eta back and following by the tensor-pullback/unit comparison rnu equals reta, where reta uses both inverse open units. Pulling rho back and following by openUnit_T inverse equals rnu. Both supported tensor objects are canonically isomorphic to k_!T, with no properness, boundedness or origin hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+ },
+ "stmt_deps": [
+  "def-pur-product-open-tensor-projection-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply open tensor normalization to k. Gamma and the open unit identify k_!P_kQ tensor J with k_!T. Symmetry, gamma at (N,Q), and extended symmetry identify Q tensor J with that same extension. The normalized restriction equations and the adjunction triangle give the displayed restrictions of eta and rho; the two Koszul symmetries cancel. The two maps to k_!T therefore have the same restriction. Full faithfulness gives their equality. Both normalized maps are invertible; their quotient eta is invertible.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, proper reduction; explicit proof Steps 1--5 of lem-pur-product-open-tensor-projection.",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The tensor of an open adjunction counit with an object extended by zero is an isomorphism and restricts to the identity.",
+   "results": "Adjunction.counitAsIsoOfIso and isIso_counit_of_iso (Mathlib.CategoryTheory.Monad.Adjunction) concern an equivalence, not tensor-supported objects. Scheme.Modules.restrictFunctorId concerns ordinary scheme modules. None states the finite pro-etale derived comparisons.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open tensor product comparison on two product open immersions agrees with tensoring the open counit and restricts to the open unit.",
+   "results": "Scheme.Modules.restrictFunctorComp and restrictFunctorComp_hom_app_app concern ordinary scheme module restriction. Scheme.Pullback.tensorCongr_SpecTensorTo concerns affine scheme products, not derived open extension. No matching map identity.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg counit.*tensor|tensor.*counit Mathlib/CategoryTheory/Adjunction Mathlib/CategoryTheory/Monoidal; rg projectionMap lean/WeilConjectures/CategoryTheory/Adjunction; rg gamma.*natur|rho.*natur lean/Sheaf/Paper lean/WeilConjectures/SixFunctors; blueprint_refs.py search open counit tensor / supported product",
+   "results": "Mathlib Monoidal/Functor map_mu_comp_counit_app_tensor needs monoidal structures on the named functors. Existing source ProjectionMap supplies adjunct and invertibility APIs; ProperOpenProjectionMate supplies the derived-coordinate equation. The exact-pullback transport and the supported product restriction identities are not already stated. The only blueprint supported-product hit is the relative Kunneth unit, whose symmetry paragraph is the source here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProductOpenTensorProjection",
+  "date": "2026-10-26",
+  "group": "H5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Supported open counit tensor normalization in the product compactification proper-reduction calculation.",
+   "via": [
+    "lem-pur-product-open-tensor-projection",
+    "lem-pur-finite-product-compactification",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProductOpenCounitNormalization",
+  "file": "lean/Sheaf/Paper/ProductOpenCounitNormalization.lean",
+  "declaration": "WeilConjectures.ProductOpenTensorProjection.productOpenCounitNormalization",
+  "statement": "theorem productOpenCounitNormalization (A : Type (u + 1)) [CommRing A] [Finite A] {U Y : Scheme.{u}} (k : U ⟶ Y) [IsOpenImmersion k] (Q : FiniteD A Y) (N : FiniteD A U) : let J := (finiteShriek A k).obj N let T := tensor A U ((pull A k).obj Q) N let η := tensorMap A Y ((adj A k).counit.app Q) (𝟙 J) let δ := gamma A k ((pull A k).obj Q) J ≫ (finiteShriek A k).map (tensorMap A U (𝟙 _) (openUnit A k N).inv) let rν := tensorPullIso A k Q J ≪≫ tensorIsoMap A U (Iso.refl _) (openUnit A k N).symm let rη := tensorPullIso A k ((finiteShriek A k).obj ((pull A k).obj Q)) J ≪≫ tensorIsoMap A U (openUnit A k ((pull A k).obj Q)).symm (openUnit A k N).symm IsIso η ∧ η ≫ rho A k Q N = δ ∧ (pull A k).map η ≫ rν.hom = rη.hom ∧ (pull A k).map (rho A k Q N) ≫ (openUnit A k T).inv = rν.hom ∧ Nonempty (tensor A Y ((finiteShriek A k).obj ((pull A k).obj Q)) J ≅ (finiteShriek A k).obj T) ∧ Nonempty (tensor A Y Q J ≅ (finiteShriek A k).obj T)",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-pur-product-open-counit-normalization",
+  "worker": "stage3",
+  "summary": "Independent step of the original product-open tensor argument; the original item proves the assembly by naturality.",
+  "blueprint": "Symmetry paragraph of lem-sf-kunneth-coherence, in the existing proper-reduction route; no model-purity unit step bypassed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "The generic open normalization, open compositor, or proper/open tensor mate is used unchanged for this step of the fixed product-compactification argument."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b0ebe",
+  "group": "H5",
+  "result": "fix",
+  "landing": "20261025T204650-L-2991923",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/Data/3 split modules vs published ProductOpenTensorProjection.lean (verbatim def move, unchanged Assertion+theorem) and upstream properOpenProjectionMate/FiniteOpenProductSwap defs; nodes vs proof"
+ }
+}

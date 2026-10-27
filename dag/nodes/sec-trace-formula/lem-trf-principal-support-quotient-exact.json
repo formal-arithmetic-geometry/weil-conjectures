@@ -1,0 +1,301 @@
+{
+ "id": "lem-trf-principal-support-quotient-exact",
+ "kind": "statement",
+ "title": "Principal supported-section quotients of powerwise injective sequences",
+ "statement": "Let $R$ be a commutative ring, $a\\in R$, and let $0\\to N_1\\xrightarrow{i}N_2\\xrightarrow{j}N_3\\to0$ be a short exact sequence of $R$-modules [def-weil-pbc-exact-sequence]. Suppose $N_1/a^nN_1\\to N_2/a^nN_2$ is injective for every $n\\geq0$. Put $T_k=\\Gamma_{(a)}(N_k)=\\{x\\in N_k:\\exists n\\geq0,\\ a^nx=0\\}$ [def-nagata-power-torsion, lemma-nagata-power-torsion-submodule]. Write $Z=\\operatorname{Spec}R$ [def-weil-affine-spectrum], $h:D(a)\\hookrightarrow Z$ for the principal open immersion [def-weil-open-immersion], and $\\widetilde N_k$ for the associated module sheaves [lem-weil-pbc-spec-module-tilde-sections]. Define $K_k\\subseteq\\widetilde N_k$ on each open $W\\subseteq Z$ by $K_k(W)=\\ker(\\widetilde N_k(W)\\to\\widetilde N_k(W\\cap D(a)))$ and put $Q_k=\\widetilde N_k/K_k$, the quotient in module sheaves [def-weil-sheaf-of-modules-category]. Then:\n\n(1) On every principal open $D(s)\\subseteq Z$, the kernel $K_k(D(s))\\subseteq(N_k)_s$ is $\\Gamma_{(a/1)}((N_k)_s)$ and is precisely the image of the injective localization map $(T_k)_s\\to(N_k)_s$. These identifications commute with restriction and are natural for $R$-linear maps. In particular $K_k=\\widetilde T_k$ as submodules of $\\widetilde N_k$, and there are natural isomorphisms $Q_k\\cong\\widetilde{N_k/T_k}$, compatible with the maps from $\\widetilde N_k$ [def-weil-pbc-quotient-module].\n\n(2) The maps $i,j$ induce a short exact sequence $0\\to N_1/T_1\\xrightarrow{\\bar i}N_2/T_2\\xrightarrow{\\bar j}N_3/T_3\\to0$, with $\\bar i([y])=[i(y)]$ and $\\bar j([x])=[j(x)]$. Associated sheafification takes this sequence to a short exact sequence, and the isomorphisms in (1) identify it, including the maps induced from $\\widetilde i,\\widetilde j$, with $0\\to Q_1\\to Q_2\\to Q_3\\to0$. No non-zero-divisor condition on $a$ or finiteness hypothesis on the modules is required.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080W, lemma-strict-transform-universally-injective; Algebraic power-torsion quotient calculation and its supported-section interpretation (definition-strict-transform (1)); returned proof Steps 4--7 before global descent."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence",
+  "def-nagata-power-torsion",
+  "lemma-nagata-power-torsion-submodule",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-quotient-module"
+ ],
+ "proof": [
+  {
+   "text": "Use the associated-sheaf functor of [lem-weil-pbc-affine-tilde-gamma-adjunction]. Its component on $D(s)$ for an $R$-linear map $f:M\\to N$ is $m/s^r\\mapsto f(m)/s^r$: the global component sends $m$ to $f(m)$, restriction gives the same equality on constant sections, and $R_s$-linearity gives the formula on every fraction, using [lem-weil-pbc-spec-module-tilde-sections]. In particular the functor preserves zero maps and sums. By [lem-sc-tilde-preserves-finite-limits] it preserves the zero object and kernels; by clause (4) of [lem-weil-pbc-affine-tilde-gamma-adjunction] it preserves cokernels, which are finite colimits. Thus it carries a short exact module sequence to a short exact sequence of module sheaves: the first arrow remains the kernel of the second, and the second remains the cokernel of the first. Here kernels and cokernels are those of the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. This argument uses arbitrary modules over any commutative ring.",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-sc-tilde-preserves-finite-limits",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, final assertion; Tag 01I7, lemma-compare-constructions; Tag 01IB, lemma-equivalence-quasi-coherent"
+   }
+  },
+  {
+   "text": "Fix one $N=N_k$ and put $T=\\Gamma_{(a)}(N)$. On $D(s)$ the restriction defining $K$ is $N_s\\to N_{sa}$ by [lem-weil-pbc-spec-module-tilde-sections]. Inverting $a/1$ in $N_s$ gives $N_{sa}$: the maps are induced by $x/s^r\\mapsto x/s^r$ and satisfy the localization universal property, since inverting $sa$ makes both $s$ and $a$ invertible and conversely. Hence [lemma-nagata-power-torsion-kernel-localization], applied over $R_s$, identifies this kernel with $\\Gamma_{(a/1)}(N_s)$. By [lemma-nagata-power-torsion-localization] that submodule is the localized image of $T$. The map $T_s\\to N_s$ is injective by [lem-sc-p1-localization-short-exact] applied to $0\\to T\\to N\\to N/T\\to0$. Step 1 makes $\\widetilde T\\to\\widetilde N$ a monomorphism; its basis components are exactly these maps, so its image subsheaf and $K$ agree on every $D(s)$. Principal opens are a basis directly from the Zariski topology: the complement of $V(I)$ is $\\bigcup_{s\\in I}D(s)$. The sheaf property therefore gives equality on every open (equivalently apply [lem-weil-pbc-sheaf-morphism-on-basis]). All identifications respect restriction: they identify submodules using the same restriction map of $\\widetilde N$. They are natural for $f:N\\to N'$ because $a^nx=0$ implies $a^nf(x)=0$ and the fraction formula of Step 1 commutes with localization. This proves the kernel and naturality assertions of (1).",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lemma-nagata-power-torsion-kernel-localization",
+    "lemma-nagata-power-torsion-localization",
+    "lem-sc-p1-localization-short-exact",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "definition-strict-transform (1), supported sections; with Schemes Tag 01HV, lemma-spec-sheaves, and Algebra Tag 00CS, proposition-localization-exact"
+   }
+  },
+  {
+   "text": "Let $\\pi_N:N\\to N/T$ be the quotient map [def-weil-pbc-quotient-module]. Apply Step 1 to $0\\to T\\to N\\xrightarrow{\\pi_N}N/T\\to0$. By Step 2 its sheafified first term is the submodule $K$. Thus $\\widetilde{\\pi_N}$ has kernel $K$ and is its cokernel quotient. The definition of $Q=\\widetilde N/K$ in the module-sheaf category [def-weil-sheaf-of-modules-category] gives a unique isomorphism $\\theta_N:Q\\to\\widetilde{N/T}$ satisfying $\\theta_N\\circ q_N=\\widetilde{\\pi_N}$, where $q_N:\\widetilde N\\to Q$. For any linear $f:N\\to N'$ the induced maps preserve $T$ and $K$ by Step 2. Both composites in the naturality square for $\\theta$ become $\\widetilde{\\pi_{N'}f}$ after precomposition with the epimorphism $q_N$, so they agree. This proves the natural quotient isomorphisms and compatibility with the original maps in (1).",
+   "uses": [
+    "def-weil-pbc-quotient-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "definition-strict-transform (1); elementary cokernel assembly using Schemes Tag 01HV, lemma-spec-sheaves"
+   }
+  },
+  {
+   "text": "Every linear map sends power torsion into power torsion: if $a^nx=0$ then $a^nf(x)=0$ [def-nagata-power-torsion]. It therefore induces the displayed coset maps on the quotient modules [def-weil-pbc-quotient-module]. Their composite is zero since $ji=0$. If $\\bar i([y])=0$, then $a^ni(y)=0$ for some $n$, and injectivity of $i$ implies $a^ny=0$, hence $[y]=0$. Thus $\\bar i$ is injective. Given $[z]\\in N_3/T_3$, surjectivity of $j$ provides $x\\in N_2$ with $j(x)=z$, so $\\bar j([x])=[z]$. The endpoint hypotheses here are precisely those of the given short exact sequence [def-weil-pbc-exact-sequence]; no powerwise assumption has yet been used.",
+   "uses": [
+    "def-nagata-power-torsion",
+    "def-weil-pbc-quotient-module",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080W, lemma-strict-transform-universally-injective, algebra paragraph: endpoint injectivity and surjectivity"
+   }
+  },
+  {
+   "text": "For middle exactness take $[x]\\in N_2/T_2$ with $j(x)\\in T_3$. Choose $n\\geq0$ with $a^nj(x)=0$ [def-nagata-power-torsion]. Exactness of the original sequence gives $y\\in N_1$ with $i(y)=a^nx$ [def-weil-pbc-exact-sequence]. The class of $i(y)$ in $N_2/a^nN_2$ is zero. By the assumed injectivity of $N_1/a^nN_1\\to N_2/a^nN_2$, the class of $y$ is zero, so $y=a^nz$ for some $z\\in N_1$. Consequently $a^n(x-i(z))=a^nx-i(a^nz)=i(y)-i(y)=0$. Thus $x-i(z)\\in T_2$ and $[x]=[i(z)]=\\bar i([z])$ [def-weil-pbc-quotient-module]. Together with Step 4 this proves the short exact sequence in (2). This also covers $n=0$, for then $y=z$ and $x=i(z)$. In the last two sentences of the printed Stacks proof the element to subtract and map to $[x]$ is $z$, not $y$; the displayed calculation above corrects that variable error.",
+   "uses": [
+    "def-nagata-power-torsion",
+    "def-weil-pbc-exact-sequence",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080W, lemma-strict-transform-universally-injective, final algebra paragraph, with its final variable error corrected"
+   }
+  },
+  {
+   "text": "Apply the exact functor established in Step 1 to the short exact sequence of Steps 4--5; its exactness is supplied by [lem-sc-tilde-preserves-finite-limits] and clause (4) of [lem-weil-pbc-affine-tilde-gamma-adjunction]. Use the isomorphisms $\\theta_{N_k}$ of Step 3. Their naturality square for $i$ reads $\\theta_{N_2}\\circ Q(i)=\\widetilde{\\bar i}\\circ\\theta_{N_1}$, and the square for $j$ reads $\\theta_{N_3}\\circ Q(j)=\\widetilde{\\bar j}\\circ\\theta_{N_2}$. These are exactly the maps induced from $\\widetilde i,\\widetilde j$ because their composites with the respective quotient maps are $q_{N_2}\\widetilde i$ and $q_{N_3}\\widetilde j$. Hence the resulting short exact sequence is $0\\to Q_1\\to Q_2\\to Q_3\\to0$, with the requested maps. No step divided by $a$ inside $R$ or used any finiteness condition; localization and all quotient constructions also allow the zero ring.",
+   "uses": [
+    "lem-sc-tilde-preserves-finite-limits",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves, exactness; assembly of the algebra argument of Divisors Tag 080W, lemma-strict-transform-universally-injective"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-sc-tilde-preserves-finite-limits",
+  "def-weil-sheaf-of-modules-category",
+  "lemma-nagata-power-torsion-kernel-localization",
+  "lemma-nagata-power-torsion-localization",
+  "lem-sc-p1-localization-short-exact",
+  "lem-weil-pbc-sheaf-morphism-on-basis",
+  "def-weil-pbc-quotient-module",
+  "def-nagata-power-torsion",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080W, lemma-strict-transform-universally-injective, algebra argument; definition-strict-transform (1), supported sections; Schemes Tag 01HV, lemma-spec-sheaves, and Tag 01I7, lemma-compare-constructions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On Spec R the quotient of an associated module sheaf by sections supported on V a is the sheaf associated to the quotient by a power torsion and preserves sequences exact modulo a powers",
+   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; localCohomology; localCohomology.ringModIdeals; Module.support_quotient; localCohomology.ofSelfLERadical; ModuleCat.Tilde.exists_const; Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-finder1.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel of restriction of a quasi coherent module sheaf to a principal open is associated to power torsion and torsion quotients of universally injective module sequences are exact",
+   "results": "[leanfinder] OK 8 hit(s) AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι; AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal; AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop; AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp; AlgebraicGeometry.Scheme.Hom.iInf_ker_openCover_map_comp_apply; associatedPrimes.subset_union_of_exact; AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app; AlgebraicGeometry.Scheme.Hom.ker_apply The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-finder2.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "powTorsion|torsion.QuotientMap|torsion.*[Ee]xact|[Ee]xact.*torsion",
+   "results": "[grep] OK 9 hit(s) Mathlib/Algebra/Module/TransferInstance.lean:84; Mathlib/Algebra/Module/Torsion/Basic.lean:321; Mathlib/Algebra/Module/Torsion/Basic.lean:494; Mathlib/Algebra/Module/Torsion/Basic.lean:502; Mathlib/Algebra/Module/Torsion/Basic.lean:542; Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean:184; Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean:188; Mathlib/Algebra/Module/PID.lean:268; Mathlib/Algebra/CharP/LinearMaps.lean:51 The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-grep-algebra.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "powTorsion|torsion.QuotientMap|supported.*sections|sections.*supported",
+   "results": "[grep] OK 0 hit(s) No hits. The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-grep.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated sheaf modulo principal supported sections preserves exact sequences when the first map is injective modulo all powers",
+   "results": "[leansearch] OK 8 hit(s) Module.support_of_exact; CategoryTheory.Presheaf.isLocallyInjective_presheafToSheaf_map_iff; TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective; PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification; PresheafOfModules.sheafifyMap.congr_simp; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; IsAssociatedPrime.map_of_injective; PresheafOfModules.sheafification The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-leansearch.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsion\", Function.Exact",
+   "results": "[loogle] OK 0 hit(s) No hits. The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-loogle.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tilde\"",
+   "results": "[loogle] OK 12 hit(s) Lean.Meta.forallMetaTelescopeReducingUntilDefEq; AlgebraicGeometry.tilde; AlgebraicGeometry.tilde.functor; AlgebraicGeometry.tilde.fullyFaithfulFunctor; AlgebraicGeometry.tilde.adjunction; AlgebraicGeometry.tilde.functor_obj; AlgebraicGeometry.tilde.map; AlgebraicGeometry.tilde.map_id; AlgebraicGeometry.isLocalizing_tilde; AlgebraicGeometry.tilde.instModuleCarrierCarrierStalkAbPresheaf; AlgebraicGeometry.Scheme.Modules.fromTildeΓNatTrans; AlgebraicGeometry.tilde.map_id_assoc The hits concern ideals, module support, tilde itself, or generic sheafification; none gives both the principal-support identification and the torsion-quotient exact sequence. Full response: search-results/support-loogle2.txt.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient of an associated module sheaf by sections supported on a principal closed subset; exactness after quotient by power torsion for a sequence injective modulo every power",
+   "results": "8 hits; exact_of_isLocalized_span, exact_of_isLocalized_maximal, QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last, exact_of_localized_span, exact_of_localized_maximal, associatedPrimes.subset_union_of_exact, LinearMap.exact_smul_id_smul_top_mkQ, AdicCompletion.map_exact. Read the returned hits and relevant source: QuotSMulTop.map_exact concerns a single scalar quotient, AdicCompletion.map_exact needs noetherian finite modules, and tilde declarations concern construction or restriction, not both claims of this item. Grep subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsion\", Function.Exact",
+   "results": "0 hits; . Read the returned hits and relevant source: QuotSMulTop.map_exact concerns a single scalar quotient, AdicCompletion.map_exact needs noetherian finite modules, and tilde declarations concern construction or restriction, not both claims of this item. Grep subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "powTorsion|torsion.*[Ee]xact|[Ee]xact.*torsion",
+   "results": "9 hits; Mathlib/Algebra/Module/TransferInstance.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/Basic.lean, Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean, Mathlib/Algebra/Module/Torsion/PrimaryComponent.lean, Mathlib/Algebra/Module/PID.lean. Read the returned hits and relevant source: QuotSMulTop.map_exact concerns a single scalar quotient, AdicCompletion.map_exact needs noetherian finite modules, and tilde declarations concern construction or restriction, not both claims of this item. Grep subdirectory: Algebra.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of restriction of associated module sheaf to a principal open and exactness of quotients by power torsion",
+   "results": "8 hits; ModuleCat.Tilde.toOpen, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, ModuleCat.tildeInModuleCat, ModuleCat.Tilde.toOpen_res. Read the returned hits and relevant source: QuotSMulTop.map_exact concerns a single scalar quotient, AdicCompletion.map_exact needs noetherian finite modules, and tilde declarations concern construction or restriction, not both claims of this item. Grep subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a short exact sequence of modules is injective modulo every power of a ring element, the quotients by elements killed by some power form a short exact sequence",
+   "results": "8 hits; AdicCompletion.map_exact, QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last, IsSMulRegular.smulShortComplex_shortExact, LinearMap.injective_of_surjective_of_injective_of_right_exact, QuotSMulTop.map_exact, LinearMap.injective_range_liftQ_of_exact, RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last, LinearMap.injective_of_surjective_of_injective_of_injective. Read the returned hits and relevant source: QuotSMulTop.map_exact concerns a single scalar quotient, AdicCompletion.map_exact needs noetherian finite modules, and tilde declarations concern construction or restriction, not both claims of this item. Grep subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion.*quotient|quotient.*torsion|supported.*sections|sections.*supported",
+   "results": "0 hits; . Read the returned hits and relevant source: QuotSMulTop.map_exact concerns a single scalar quotient, AdicCompletion.map_exact needs noetherian finite modules, and tilde declarations concern construction or restriction, not both claims of this item. Grep subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-universal-exact",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument is applied to the finite-type module i_* O_X on an affine-space neighbourhood. Stacks 0815 proof paragraph 3: displayed strict-transform exact sequence after choosing alpha. Algebraic power-torsion quotient calculation and its supported-section interpretation (definition-strict-transform (1)); returned proof Steps 4--7 before global descent.",
+   "via": [
+    "lem-trf-strict-transform-universal-exact",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-principal-support-quotient-exact",
+  "worker": "stage1",
+  "summary": "Q124: checked Stacks 080W and 01HV, reused the existing power-torsion localization and tilde lemmas, proved all coset maps and the powerwise lift explicitly, and identified the supported-section quotient naturally with the associated quotient sheaf. No new nodes; corrected a final-variable typo in the source proof without changing the item statement.",
+  "blueprint": "Realizes the principal affine supported-section and power-torsion quotient argument required in the inherited flattening branch from lem-trf-local-term-locality proof (1)--(2); current blueprint source checked, inherited ancestry retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-tilde-preserves-finite-limits",
+    "why": "Generic finite-limit preservation of the associated-sheaf functor on any affine scheme; combined with its existing colimit preservation to sheafify these module sequences. The trace unit has no separate affine tilde exactness node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-tilde-preserves-finite-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-8cc3add31",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-8cc3add31 (reviewer sub-agent of L); spot-checked: Ordinary one-level split of a node that is unsplit in live and side-live. There is no repair note, and the statement and stmt_deps are byte-identical to live. No new nodes. proof_deps equals the union of the step uses, and all cited ids exist and are unmerged. All three kinds of Mathlib search are recorded, and no SGA is cited. Sources checked: Stacks divisors.tex 080W lemma-strict-transform-universally-injective, read in full, and definition-strict-transform (1). The report's source typo is confirmed: Stacks ends with a^n(x-y)=0 where it should be a^n(x-i(z))=0, and the counterexample Z, a=2, i=id, x=1 works. Step 5 uses z correctly. Step 1: tilde is exact because it preserves finite limits (lem-sc-tilde-preserves-finite-limits) and colimits (adjunction clause 4); the component formula comes from τ naturality and localization. Step 2: K(D(s)) is the kernel of N_s→N_{sa}=(N_s)_{a/1}. The Nagata kernel-localization lemma over R_s identifies it as Γ_(a/1)(N_s), and the localization lemma (blueprint_update form S^{-1}Γ) makes it the image of the injective T_s→N_s (localization exactness). Equality on the D(s) basis then gives equality of the two subsheaves everywhere. Step 3: θ is the cokernel comparison, natural via the epimorphism q_N. Steps 4–5: the element arguments are correct, and the powerwise hypothesis is used only in the middle-exactness lift. Step 6: assembly via the θ squares. Edge cases checked: zero ring, nilpotent a, unit a, s=0, n=0, and the counterexample 0→Z→Z→Z/2 (first map multiplication by 2, a=2), which shows the hypothesis is needed. Route: the Nagata and picard-duality units are in sk-i-curve-zero's transitive uses, and the Nagata lemmas are Lean-closed. The declared tool_use lem-sc-tilde-preserves-finite-limits is harmless and accepted. Not a duplicate of the sibling lem-trf-universal-exact-affine-power-reduction or of the parent, and there is no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrincipalSupportQuotientExact",
+  "declaration": "AlgebraicGeometry.principalSupportQuotient_exact",
+  "declarations": [
+   "AlgebraicGeometry.principalSupportRestriction",
+   "AlgebraicGeometry.principalSupportι",
+   "AlgebraicGeometry.principalSupportQuotient",
+   "AlgebraicGeometry.principalSupportπ",
+   "AlgebraicGeometry.principalSupportKernelMap",
+   "AlgebraicGeometry.principalSupportQuotientMap",
+   "AlgebraicGeometry.principalTorsionι",
+   "AlgebraicGeometry.principalTorsionQuotient",
+   "AlgebraicGeometry.principalTorsionQuotientMap",
+   "AlgebraicGeometry.principalTorsionMap",
+   "AlgebraicGeometry.principalSupport_section_kernel",
+   "AlgebraicGeometry.principalSupport_basicOpen",
+   "AlgebraicGeometry.principalSupport_comparison",
+   "AlgebraicGeometry.principalSupportQuotient_exact"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalSupportQuotientExact.lean",
+  "statement": "theorem principalSupportQuotient_exact (a : R) {N₁ N₂ N₃ : ModuleCat.{u} R} (i : N₁ ⟶ N₂) (j : N₂ ⟶ N₃) (hi : Function.Injective i) (hij : Function.Exact i j) (hj : Function.Surjective j) (hpow : ∀ n : ℕ, Function.Injective (QuotSMulTop.map (a ^ n) i.hom)) : Function.Injective (principalTorsionQuotientMap a i) ∧ Function.Exact (principalTorsionQuotientMap a i) (principalTorsionQuotientMap a j) ∧ Function.Surjective (principalTorsionQuotientMap a j) ∧ (∀ y : N₁, principalTorsionQuotientMap a i (Submodule.Quotient.mk y) = Submodule.Quotient.mk (i y)) ∧ (∀ x : N₂, principalTorsionQuotientMap a j (Submodule.Quotient.mk x) = Submodule.Quotient.mk (j x)) ∧ (∃ h : tilde.map (principalTorsionQuotientMap a i) ≫ tilde.map (principalTorsionQuotientMap a j) = 0, (ShortComplex.mk (tilde.map (principalTorsionQuotientMap a i)) (tilde.map (principalTorsionQuotientMap a j)) h).ShortExact) ∧ (∃ h : principalSupportQuotientMap a i ≫ principalSupportQuotientMap a j = 0, (ShortComplex.mk (principalSupportQuotientMap a i) (principalSupportQuotientMap a j) h).ShortExact)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The four theorems jointly state clauses (1) and (2). Auxiliary definitions give the canonical restriction kernel, cokernel, inclusions and induced maps; power torsion, module quotients and tilde use the recorded dependencies without replacement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa2dc1247",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Clause-by-clause match. Hypotheses: arbitrary R:CommRingCat.{u}, ModuleCat.{u} modules (forced by tilde), the Function.Injective/Exact/Surjective convention of def-weil-pbc-exact-sequence, and QuotSMulTop.map (a^n) injective for all n. K is the kernel of the restrictAdjunction unit for D(a); principalSupport_section_kernel states the node's sectionwise kernel for every open W (unit = restriction to W∩D(a)). Clause (1): every D(s), injective T_s→N_s, image = K(D(s)) = a-power torsion (R-action via scalar tower = (a/1)^n). principalSupport_comparison gives e.hom≫ι_K=ι_T, θ with π≫θ=tilde(mkQ), and naturality squares. Clause (2): coset maps via upstream torsion'QuotientMap with explicit formulas; tilde and Q sequences are ShortExact with Q-maps induced from tilde i, tilde j. Edge cases: zero ring, nilpotent or unit a, s=0, n=0; the Z-by-2 counterexample shows hpow is needed. No duplicate notion (Etale.supportedSections is in another category; ModuleStrictTransform needs blowup data). No hollow defs, docstrings with blueprint and steps, sorry-only theorems, statement verbatim, declaration list complete, dependency records unchanged, both report sections present. Not recompiled per instructions; the worker's dry run reports preflight and compile OK."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-tensor-exact",
+ "kind": "statement",
+ "title": "Exactness for the normalized shifts on a native fixed-factor tensor model",
+ "statement": "Let $C$ be a category with objects in universe $u+1$, morphisms in universe $u$, and $C$ essentially small in universe $u+1$. Let $J$ be a Grothendieck topology on $C$ and $R$ a sheaf of commutative rings in universe $u+1$. Use the standard unbounded derived category $D(R)$ [def-weil-abstract-derived-category]. Let $a$ be a ProjectionRestriction.TensorModel: its bifunctor $T:D(R)\\times D(R)\\to D(R)$ is naturally identified with signed total tensor on flat-term K-flat pairs, and precomposition with the pair of resolving inclusions is bijective on natural transformations. Let $s$ be TensorShifts for $a$, meaning coherent integer bifunctor shifts whose two representative equations are precisely the signed total-complex equations [lem-weil-pbc-ringed-projection-restriction]. For every $E\\in D(R)$, the functor $T(E,-)$, with the second-variable shift supplied by $s$, is triangulated. No bound on E or on the varying input is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor; Tag 07A4, lemma-pullback-tensor-product; more-algebra.tex, Tag 0FNH, item-shift-tensor."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-ringed-projection-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat resolution P of a complex representing E. Convert the termwise tensor-right exactness to IsFlatOnSite through siteSheafTensorRightIso. The fixed K-flat tensor theorem supplies a coherent shift structure on the published derived tensor, exactness at Q(P), and a shift-compatible computation isomorphism c whose resolving components are representativeIso.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved normalized tensor model isomorphism to a. It gives a natural bifunctor isomorphism e from the published tensor to a.functor, with representativeIso followed by e exactly equal to a.representative on every resolving pair.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-tensor-model-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The second normalization field of TensorShifts makes the fixed-factor representative comparison commute with every integer shift: postcompose its equation by the shifted forward representative and cancel the inverse. Shift stability of resolving complexes follows from the same field. Restrict c to resolving varying arguments. The restriction of the fixed-factor part of e equals the inverse of this restriction followed by the specified representative comparison, so it commutes with shifts. Resolving localization is essentially surjective, by the flat resolution above, and the shift-compatibility reflection lemma NatTrans.CommShift.of_whiskerLeft therefore proves that the fixed-factor part of e commutes with shifts on all derived objects. Functor.isTriangulated_of_iso transfers exactness at Q(P). Finally the resolving isomorphism Q(P) to E induces a shift-compatible isomorphism by sa.shifts.commShift_map, and the same lemma transfers exactness to E. These are proved categorical calculations in the item module; no pullback, slice comparison, or bound is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-ringed-projection-tensor-model-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and preceding exact localization construction), Tag 06YS (lemma-K-flat-resolution); more-algebra.tex Tag 0FNH (item-shift-tensor). The normalized comparison and shift reflection are proved explicitly from the existing cochain rigidity and fixed K-flat exactness statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor functor identified on flat K flat representatives is triangulated for its normalized total complex integer shift",
+   "results": "8 hits, including cochain tensor and shift instances and Functor.instIsHomologicalCompOfIsTriangulated; no normalized derived TensorModel result.",
+   "date": "2026-10-27",
+   "verdict": "Related generic categorical APIs; no theorem with the required normalized model interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits, including NatTrans.CommShift, its composition and whiskering instances, and Functor.CommShift.ofIso_compatibility.",
+   "date": "2026-10-27",
+   "verdict": "Formal shift transport tools, not this model normalization statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ringedProjectionTensorExact|matePublishedExact|kFlat_fixed_tensor_triangulated",
+   "results": "msearch returned 0 hits. Direct rg found kFlat_fixed_tensor_triangulated and private matePublishedExact in ProjectionMateExact; the latter requires a same-universe RingedTensorCorner.",
+   "date": "2026-10-27",
+   "verdict": "Use fixed K-flat tensor exactness and resolving normalization; no exact native TensorModel specialization is public."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleProjectionMateSlicePresentation",
+  "date": "2026-10-27",
+  "group": "T2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Proof, first paragraph: exact tensor and triangulated-thick closure; the item's ordinary-slice locality argument.",
+   "via": [
+    "lem-weil-pbc-proetale-projection-mate-slice-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorExact",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.ringedProjectionTensorExact",
+  "statement": "theorem ringedProjectionTensorExact\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u + 1}}\n    (a : TensorModel R) [sa : TensorShifts a] (E : Der R) :\n    ((Functor.curry.obj a.functor).obj E).IsTriangulated",
+  "branch": "sheaf-dag",
+  "by": "T2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261027T012940-L-2350938",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261027T034635-L-3668614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

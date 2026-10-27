@@ -1,0 +1,147 @@
+{
+ "id": "lem-sp-arithmetic-system-floor-extension",
+ "kind": "statement",
+ "title": "Ordinary exact floor extension with normalized Hom bijection",
+ "statement": "Let B be an inverse sequence of commutative ring sheaves on the site C, with strict semilinear systems as in [def-pur-system-level-left-extension-basic]. Let e≥1, r:ℕ↪oℕ satisfy r(n)=e(n+1)-1, and let hf assert r((k+1)/e-1)≤k whenever e≤k+1. Then there is an additive functor R from strict selected-B systems to strict B systems, preserving finite limits and finite colimits, together with ArithmeticSystemOrdinaryFloorData of [def-sp-arithmetic-system-adjunction-data]. Thus the positive-index floor extension and its ordinary adjunction, component and Hom formulas exist. This assertion makes no claim about derived limits or derived adjunction normalization.\n\nPrecise Lean statement (the cited definitions fix all notation):\n```lean\nuniverse u v w z\nopen CategoryTheory CategoryTheory.Limits Opposite\nnamespace SheafOfModules\nvariable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]\n  [EssentiallySmall.{w} C]\ntheorem arithmeticSystemFloorExtension (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})\n    (e : ℕ) (he : 1 ≤ e) (r : ℕ ↪o ℕ)\n    (hr : ∀ n : ℕ, r n = e * (n + 1) - 1)\n    (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k) :\n    ∃ (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B)\n      (_hadd : R.Additive) (_hlim : PreservesFiniteLimits R)\n      (_hcolim : PreservesFiniteColimits R),\n      Nonempty (ArithmeticSystemOrdinaryFloorData B e r hf R)\nend SheafOfModules\n```",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+ },
+ "stmt_deps": [
+  "def-sp-arithmetic-system-adjunction-data",
+  "def-pur-system-level-left-extension-basic"
+ ],
+ "proof": [
+  {
+   "text": "Write $t_{a,b}:D_b\\to\\operatorname{Res}_{B_b\\to B_a}D_a$ for the composite strict transition, for $b\\ge a$, with $t_{a,a}=1$. For $k\\ge e$, set $q(k)=\\lfloor k/e\\rfloor$. Give $(JC)_k=C_{q(k)}$ its $B_k$-action through $B_k\\to B_{eq(k)}$ as in [def-pc-sheaf-restrict-scalars]. For $k+1\\to k$ above the prefix, use the identity if $q(k+1)=q(k)$ and the corresponding transition of $C$ otherwise. The latter is semilinear for $B_{e q(k+1)}\\to B_{e q(k)}$, hence also for $B_{k+1}\\to B_k$ by compatibility of the ring maps. Across the prefix use the unique map to zero. Composition agrees with the composite transitions of $C$ because the ring maps compose. A system morphism $h:C\\to C\\prime$ acts at $k$ by $h_{q(k)}$ or zero; its transition squares are those of $h$ or identities. Thus this is an additive functor on the strict-system category of [def-pur-system-level-left-extension-basic].",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Adjunction: arithmetic restriction and its right adjoint"
+   }
+  },
+  {
+   "text": "Restriction of scalars along every sheaf-ring map is exact by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Thus each component of $J$ is exact: it is either zero or evaluation followed by restriction of scalars. By the stipulated componentwise exactness of the strict-system categories, $J$ is exact. The same componentwise criterion makes $U$ additive and exact. These assertions require no flatness of any ring transition.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-pur-system-level-left-extension-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Adjunction: arithmetic restriction and its right adjoint"
+   }
+  },
+  {
+   "text": "For $g:UD\\to C$, define $f_k=0$ for $k<e$ and $f_k=(\\operatorname{Res}g_{q(k)})t_{e q(k),k}$ otherwise. This is $B_k$-linear. Within a block the transition square is the composition equation for $t$; at a boundary it is the transition square for $g$ composed with $t$; in the prefix both sides vanish. Hence $f:D\\to JC$ is a system morphism. At $k=en$ this gives $f_{en}=g_n$. Conversely, the transition of $JC$ from $k$ to $e q(k)$ is the identity on $C_{q(k)}$. The system square for any $f:D\\to JC$ therefore forces $f_k=(\\operatorname{Res}f_{e q(k)})t_{e q(k),k}$, while maps to its zero prefix are unique. Consequently selection at $en$ and the displayed extension formula are inverse Hom bijections. Precomposing in $D$ or postcomposing in $C$ commutes with each formula by the system-morphism squares, proving naturality and $U\\dashv J$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Adjunction: arithmetic restriction and its right adjoint"
+   }
+  },
+  {
+   "text": "At a selected level, $q(en)=n$, the scalar map is the identity, and the composite transitions of $JC$ between selected levels are precisely those of $C$. Therefore $UJ$ identifies with the identity functor on objects and morphisms. In the Hom bijection, the identity of $JC$ selects to the identity of $C$, so the counit is identity. The identity of $UD$ extends to the unit $\\eta_D:D\\to JUD$ with components $t_{e q(k),k}$ above the prefix and zero below it; in particular $\\eta_{D,en}=1$. The first triangle is $U\\eta_D=1$, and the second is $\\eta_{JC}=1$, since its block transitions are identities and its prefix is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+    "place": "Adjunction: arithmetic restriction and its right adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-system-level-left-extension-basic",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.proof.md",
+  "place": "Adjunction paragraph; arithmetic-restriction expansion in lem-sp-arithmetic-system-right-adjoint, steps 1–6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact right adjoint floor extension of strict inverse systems of modules over varying sheaves of rings",
+   "results": "SheafOfModules.hasLimit (Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits), pullbackPushforwardAdjunction (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), FloorRing.ofFloor (Mathlib.Algebra.Order.Floor.Defs). Read the change-of-rings definitions and the generic adjunction interfaces: none constructs the normalized varying-ring floor extension or the scalar-forgetting limit comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact right adjoint to arithmetic subsequence restriction of varying-ring module sheaf systems",
+   "results": "LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, localCohomology.diagram, Profinite.NobelingProof.succ_exact. These concern constant-ring or unrelated categories, not StrictRingSystem or its normalized floor construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "floor.*extension|ArithmeticSystem|arithmetic.*restriction (Mathlib via msearch.py grep); StrictRingSystem and floor extension in lean/Sheaf, lean/WeilConjectures and dag/nodes",
+   "results": "No Mathlib hits. Project search finds only the parent ArithmeticSystemRightAdjoint definitions and theorem; the ordinary construction and common-coefficient comparison have no separate declaration. Existing arithmetic comparison concerns constant coefficients, with a larger coefficient universe.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ArithmeticSystemRightAdjoint",
+  "date": "2026-10-25",
+  "group": "B6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Adjunction: arithmetic restriction and its right adjoint, as expanded in the parent node",
+   "via": [
+    "lem-sp-arithmetic-system-right-adjoint",
+    "det-sp-normalized-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ArithmeticSystemFloorExtension",
+  "file": "lean/Sheaf/CategoryTheory/ArithmeticSystemFloorExtension.lean",
+  "declaration": "SheafOfModules.arithmeticSystemFloorExtension",
+  "declarations": [
+   "SheafOfModules.arithmeticSystemFloorExtension"
+  ],
+  "statement": "theorem arithmeticSystemFloorExtension (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (e : ℕ) (he : 1 ≤ e) (r : ℕ ↪o ℕ) (hr : ∀ n : ℕ, r n = e * (n + 1) - 1) (hf : ∀ k : ℕ, e ≤ k + 1 → r ((k + 1) / e - 1) ≤ k) : ∃ (R : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B) (_hadd : R.Additive) (_hlim : PreservesFiniteLimits R) (_hcolim : PreservesFiniteColimits R), Nonempty (ArithmeticSystemOrdinaryFloorData B e r hf R)",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e5624",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094857-L-3269256",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical); moved records vs old item lines 47-188 (verbatim); two new sorry statements vs the item and plan steps 1-4/6 (true, strictly smaller); sandbox compile + #print axioms (sorryAx only from the two split statements); node stmt_deps vs the declarations used in their statements"
+ }
+}

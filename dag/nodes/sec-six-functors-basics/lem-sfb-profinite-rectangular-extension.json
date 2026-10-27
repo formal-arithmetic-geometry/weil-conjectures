@@ -1,0 +1,430 @@
+{
+ "id": "lem-sfb-profinite-rectangular-extension",
+ "kind": "statement",
+ "title": "Finite clopen rectangular extension from a closed subspace of a profinite power",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $T$ be a compact Hausdorff totally disconnected topological space, let $k\\geq1$ be an integer, and give $T^k$ the finite product topology. Let $K\\subseteq T^k$ be closed with its subspace topology, let $M$ be a finite abelian group with the discrete topology, and let $c:K\\to M$ be continuous. A finite clopen partition means a finite collection of pairwise disjoint nonempty subsets, each open and closed, whose union is the whole space; the partition of the empty space is empty. There exist such a partition $\\alpha$ of $T$ and a continuous $h:T^k\\to M$ such that $h|_K=c$ and $h$ is constant on every product cell $A_0\\times\\cdots\\times A_{k-1}$ with $A_i\\in\\alpha$. On each cell disjoint from $K$, $h$ is identically $0$. Empty $T$ or $K$ and the zero group are allowed.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering), finite clopen partitions. Agent-formulated auxiliary assertion, not a standalone assertion of these tags; the rectangular-neighbourhood and atom-refinement argument of the returned proof of lem-sfb-finite-valued-cech-cocycle-descent, steps 2 and 3."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "If $T=\\varnothing$, then $T^k=K=\\varnothing$ since $k\\geq1$; take the empty partition and unique $h$. If $T\\ne\\varnothing$ but $K=\\varnothing$, take $\\alpha=\\{T\\}$ and $h=0$. Henceforth assume $K\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+   }
+  },
+  {
+   "text": "For each $x\\in K$, continuity into discrete $M$ makes $c^{-1}(\\{c(x)\\})$ open in $K$. By the subspace topology choose ambient open $O_x\\subseteq T^k$ with $K\\cap O_x=c^{-1}(\\{c(x)\\})$. The finite product topology gives opens $U_{x,i}$ with $x\\in\\prod_{i<k}U_{x,i}\\subseteq O_x$. Apply [lem-weil-pbc-profinite-clopen-basis] in each coordinate to obtain clopen $V_{x,i}$ with $x_i\\in V_{x,i}\\subseteq U_{x,i}$. Thus $R_x=\\prod_{i<k}V_{x,i}$ is open, contains $x$, and $c=c(x)$ on $K\\cap R_x$.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-tychonoff-product-quasi-compact], $T^k$ is compact. The opens $R_x$ for $x\\in K$, together with $T^k\\setminus K$, cover $T^k$ because $K$ is closed. Take a finite subcover and discard the complement of $K$: this leaves $R_{x_1},\\ldots,R_{x_N}$ covering $K$, since a point of $K$ never belonged to that complement. Thus $N\\geq1$ and each selected rectangle retains the value $c(x_j)$ on $K\\cap R_{x_j}$.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08ZU (theorem-tychonov), followed by the open-cover definition of compactness and the closedness hypothesis on K."
+   }
+  },
+  {
+   "text": "Let $\\mathcal F=\\{V_{x_j,i}:1\\leq j\\leq N,\\ i<k\\}$. For every $\\epsilon:\\mathcal F\\to\\{0,1\\}$ form $A_\\epsilon=\\bigcap_{V\\in\\mathcal F}W_{V,\\epsilon(V)}$, where $W_{V,1}=V$ and $W_{V,0}=T\\setminus V$. There are at most $2^{|\\mathcal F|}$ atoms; discard the empty ones. Using all coordinates in the same $\\mathcal F$ gives one finite clopen partition $\\alpha$ of $T$: every point has its unique membership pattern, different patterns give disjoint sets, and finite intersections of clopens are clopen.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+   }
+  },
+  {
+   "text": "For any cell $C=\\prod_{i<k}A_i$ with $A_i\\in\\alpha$ meeting $K$, choose $y\\in C\\cap K$ and a selected rectangle $R_{x_j}$ containing $y$. Since $A_i$ has constant membership in $V_{x_j,i}$ and contains $y_i\\in V_{x_j,i}$, we have $A_i\\subseteq V_{x_j,i}$ for every $i$. Hence $C\\subseteq R_{x_j}$, so $c$ is constant on $C\\cap K$. If another selected rectangle meets $C\\cap K$, both of its assigned values equal $c(y)$ at a point of $C\\cap K$; thus the value on that cell is unique.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+   }
+  },
+  {
+   "text": "The cells partition $T^k$, since each coordinate belongs to a unique $\\alpha$-block. Assign to a cell meeting $K$ the unique value of $c$ on its intersection with $K$, and assign $0\\in M$ to every other cell. Define $h(t)$ to be the assigned value of the cell containing $t$. Then $h|_K=c$, $h$ is constant on each cell, and it is zero on every cell disjoint from $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+   }
+  },
+  {
+   "text": "Every cell is open, being a finite intersection of coordinate inverse images of open blocks. For any open $B\\subseteq M$, $h^{-1}(B)$ is the union of cells whose assigned values lie in $B$, hence open. Thus $h$ is continuous. If $M=0$, every assigned value is $0$, so the same construction also covers the zero group.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); agent-written rectangular refinement argument using the clopen basis and finite Boolean atoms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*extend|exists.*[Ee]xtension|[Rr]ectang|[Pp]artition",
+   "results": {
+    "t": "2026-10-22T06:08:37Z",
+    "tool": "grep",
+    "query": "LocallyConstant.*extend|exists.*[Ee]xtension|[Rr]ectang|[Pp]artition",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give locally constant maps on a supplied limit, Boolean-coordinate factorization, or finite approximation on a whole domain; none extends a map from an arbitrary closed subset of a finite power and supplies one common coordinate partition and the specified zero extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"extend\"",
+   "results": {
+    "t": "2026-10-22T06:08:37Z",
+    "tool": "loogle",
+    "query": "\"LocallyConstant\", \"extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give locally constant maps on a supplied limit, Boolean-coordinate factorization, or finite approximation on a whole domain; none extends a map from an arbitrary closed subset of a finite power and supplies one common coordinate partition and the specified zero extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compact Hausdorff totally disconnected space T, a continuous finite discrete valued map on a closed subset K of T to a finite power extends to a continuous map on the whole power constant on products of blocks of one finite clopen partition of T",
+   "results": {
+    "t": "2026-10-22T06:08:47Z",
+    "tool": "leanfinder",
+    "query": "For a compact Hausdorff totally disconnected space T, a continuous finite discrete valued map on a closed subset K of T to a finite power extends to a continuous map on the whole power constant on products of blocks of one finite clopen partition of T",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_mulIndicator_approximation_of_mem_nhds_diagonal",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.NobelingProof.iso_map",
+     "Profinite.NobelingProof.factors",
+     "Profinite.NobelingProof.e"
+    ],
+    "digest": "5b26629abfd0b077"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give locally constant maps on a supplied limit, Boolean-coordinate factorization, or finite approximation on a whole domain; none extends a map from an arbitrary closed subset of a finite power and supplies one common coordinate partition and the specified zero extension."
+  },
+  {
+   "tool": "grep",
+   "query": "extend|[Cc]lopen|[Pp]artition",
+   "results": {
+    "t": "2026-10-22T06:09:33Z",
+    "tool": "grep",
+    "query": "extend|[Cc]lopen|[Pp]artition",
+    "sub": "Topology/LocallyConstant",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/LocallyConstant/Basic.lean",
+     "Mathlib/Topology/LocallyConstant/Basic.lean",
+     "Mathlib/Topology/LocallyConstant/Basic.lean",
+     "Mathlib/Topology/LocallyConstant/Basic.lean",
+     "Mathlib/Topology/LocallyConstant/Basic.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean",
+     "Mathlib/Topology/LocallyConstant/Algebra.lean"
+    ],
+    "digest": "639ca16dc9489f2b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give locally constant maps on a supplied limit, Boolean-coordinate factorization, or finite approximation on a whole domain; none extends a map from an arbitrary closed subset of a finite power and supplies one common coordinate partition and the specified zero extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally constant map on a closed subset of a finite power of a Stone space admits an extension constant on cells of one finite clopen partition in all coordinates",
+   "results": {
+    "t": "2026-10-22T06:09:33Z",
+    "tool": "leansearch",
+    "query": "A locally constant map on a closed subset of a finite power of a Stone space admits an extension constant on cells of one finite clopen partition in all coordinates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocallyConstant",
+     "LocallyConstant",
+     "LocallyConstant.ofIsClopen",
+     "IsLocallyConstant.of_constant_on_preconnected_clopens",
+     "LocallyConstant.isLocallyConstant",
+     "LocallyConstant.piecewise'_apply_left",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "IsLocallyConstant.of_constant_on_connected_clopens"
+    ],
+    "digest": "9b9a4e73028e71d1"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give locally constant maps on a supplied limit, Boolean-coordinate factorization, or finite approximation on a whole domain; none extends a map from an arbitrary closed subset of a finite power and supplies one common coordinate partition and the specified zero extension."
+  },
+  {
+   "tool": "grep",
+   "query": "extend|extension|[Rr]ectang",
+   "results": {
+    "t": "2026-10-22T11:00:42Z",
+    "tool": "grep",
+    "query": "extend|extension|[Rr]ectang",
+    "sub": "Topology/LocallyConstant",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the located names were read; no declaration combines closed-subspace extension and a common coordinate partition. Profinite/Extend concerns cones, Projective concerns ultrafilter maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"extend\"",
+   "results": {
+    "t": "2026-10-22T11:00:43Z",
+    "tool": "loogle",
+    "query": "\"LocallyConstant\", \"extend\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous map from a closed subset of a finite product of compact Hausdorff totally disconnected spaces to a finite discrete group extends and factors through one finite clopen partition of each coordinate",
+   "results": {
+    "t": "2026-10-22T11:00:44Z",
+    "tool": "leanfinder",
+    "query": "A continuous map from a closed subset of a finite product of compact Hausdorff totally disconnected spaces to a finite discrete group extends and factors through one finite clopen partition of each coordinate",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.NobelingProof.factors",
+     "Profinite.indexFunctor",
+     "exists_clopen_partition_of_clopen_cover",
+     "Profinite.NobelingProof.iso_map",
+     "Profinite.IndexFunctor.obj",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "Profinite.exists_locallyConstant_finite_aux"
+    ],
+    "digest": "adae2d5af47e36da"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling factorization treats integer-valued functions on Boolean-coordinate images; cofiltered-limit factorization assumes an already supplied limit diagram; clopen separation and piecewise maps do not supply the common coordinate partition. None is a one-line specialization giving this item."
+  },
+  {
+   "tool": "grep",
+   "query": "extend|extension|[Rr]ectang",
+   "results": {
+    "t": "2026-10-22T11:01:15Z",
+    "tool": "grep",
+    "query": "extend|extension|[Rr]ectang",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean",
+     "Mathlib/Topology/Category/Profinite/Projective.lean",
+     "Mathlib/Topology/Category/Profinite/Projective.lean",
+     "Mathlib/Topology/Category/Profinite/Projective.lean",
+     "Mathlib/Topology/Category/Profinite/Projective.lean",
+     "Mathlib/Topology/Category/Profinite/Extend.lean",
+     "Mathlib/Topology/Category/Profinite/Extend.lean",
+     "Mathlib/Topology/Category/Profinite/Extend.lean"
+    ],
+    "digest": "a2e751fe40303a5f"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the located names were read; no declaration combines closed-subspace extension and a common coordinate partition. Profinite/Extend concerns cones, Projective concerns ultrafilter maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a locally constant function from a closed subset of a Stone space to a finite rectangular partition of a finite power",
+   "results": {
+    "t": "2026-10-22T11:01:15Z",
+    "tool": "leansearch",
+    "query": "Extend a locally constant function from a closed subset of a Stone space to a finite rectangular partition of a finite power",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsLocallyConstant",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "LocallyConstant.piecewise",
+     "LocallyConstant.piecewise'_apply_left",
+     "LocallyConstant.piecewise'_apply_right",
+     "LocallyConstant",
+     "LocallyConstant.ofIsClopen",
+     "LocallyConstant.indicator"
+    ],
+    "digest": "d68b466a5810acaa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling factorization treats integer-valued functions on Boolean-coordinate images; cofiltered-limit factorization assumes an already supplied limit diagram; clopen separation and piecewise maps do not supply the common coordinate partition. None is a one-line specialization giving this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally constant function on a closed subset of a profinite space extends to the whole space with values in a finite discrete set",
+   "results": {
+    "t": "2026-10-22T11:01:16Z",
+    "tool": "leanfinder",
+    "query": "A locally constant function on a closed subset of a profinite space extends to the whole space with values in a finite discrete set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.exists_locallyConstant_fin_two",
+     "Profinite.NobelingProof.e",
+     "Profinite.exists_locallyConstant",
+     "Profinite.NobelingProof.πJ",
+     "Profinite.NobelingProof.spanFinBasis"
+    ],
+    "digest": "73eed95a4cbb9cf2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Nobeling factorization treats integer-valued functions on Boolean-coordinate images; cofiltered-limit factorization assumes an already supplied limit diagram; clopen separation and piecewise maps do not supply the common coordinate partition. None is a one-line specialization giving this item."
+  },
+  {
+   "tool": "grep",
+   "query": "fin_comap_jointlySurjective|exists_clopen_partition_of_clopen_cover|exists_locallyConstant_finite_aux",
+   "results": {
+    "t": "2026-10-22T11:01:37Z",
+    "tool": "grep",
+    "query": "fin_comap_jointlySurjective|exists_clopen_partition_of_clopen_cover|exists_locallyConstant_finite_aux",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Separation/Profinite.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean",
+     "Mathlib/Topology/Category/LightProfinite/Injective.lean"
+    ],
+    "digest": "019cd2d0519f7978"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the located names were read; no declaration combines closed-subspace extension and a common coordinate partition. Profinite/Extend concerns cones, Projective concerns ultrafilter maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-valued-cech-cocycle-descent",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), finite E open-direct-image branch: positive continuous-function Cech exactness underlying the profinite-parameter column; the paragraph itself delegates the open-coefficient theorem and does not state this agent-formulated analytic input; finite discrete coefficient reduction: descend a cocycle and its equation before contracting a finite surjection; rectangular extension of the finite-valued cochain (old steps 2–3)",
+   "via": [
+    "lem-sfb-finite-valued-cech-cocycle-descent",
+    "lem-sfb-normed-scalar-profinite-cech-exact",
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-profinite-rectangular-extension",
+  "worker": "stage1",
+  "summary": "Q03: proved the rectangular extension by clopen rectangles around points of K, a finite subcover, and the common Boolean atom partition of all selected coordinate clopens. Reused two existing Mathlib leaves; created no nodes. Verified empty spaces, zero coefficients, and the zero values on cells missing K. Statement and inherited metadata preserved. Repair of the returned side-completion delivery: reapplied the retained split-owned fields to the current shared DAG node, reread both current cited statements against the retained quotations, and made the complement-discard argument in step 3 explicit. No statement or dependency change was needed. Repair retry 2026-10-23: rebased retained split-owned fields onto the current shared item, reconfirmed both current cited statements and quotation matches, and explicitly counted Boolean atoms and explained why combining every coordinate gives one partition. Final server preflight is required before direct delivery.",
+  "blueprint": "Realizes the rectangular-neighbourhood and atom-refinement input of lem-sfb-finite-valued-cech-cocycle-descent, old steps 2–3, under paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md. The blueprint delegates the open-coefficient result; the present auxiliary argument is agent-written. The ancestor tool returns None, as in the inherited blueprint.from.node; same_as search found no blueprint assertion of this statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-fbaf51e43",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-fbaf51e43 (reviewer sub-agent of L); spot-checked: This is the third push of a side completion; earlier heads 62479f4d and 8008d41b passed review but were refused at landing. Compared with those heads the statement, stmt_deps and proof_deps are unchanged. The step changes are wording only: step 3 explicitly drops the complement of K from the finite subcover, step 4 bounds the atoms by 2^|F| and notes all coordinates share one family, step 5 explains why the cell value is unique. The statement is true; I checked k>=1, empty T, empty K, finite discrete T and M=0. Step 2 cites the Mathlib leaf lem-weil-pbc-profinite-clopen-basis (isTopologicalBasis_isClopen, compact Hausdorff totally disconnected hypotheses, which T meets). Step 3 cites the Mathlib leaf lem-weil-pbc-tychonoff-product-quasi-compact (Pi.compactSpace). The closed-subset finite-subcover argument is written out. Steps 4-7 (Boolean atoms, each meeting cell lies in one rectangle, definition of h, continuity) are elementary and correct. Stacks Tags 08ZY, 08ZZ and 08ZU were checked in topology.tex (lines 4134, 4207, 2446); no SGA is used. The citer lem-sfb-finite-valued-cech-cocycle-descent applies the item with K = P_k, which is closed. A duplicate search over dag/nodes for rectangular, clopen-partition and closed-extension statements found nothing. No new nodes, no tool_uses, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfiniteRectangularExtension",
+  "declaration": "Topology.profinite_rectangular_extension",
+  "file": "lean/Sheaf/Topology/ProfiniteRectangularExtension.lean",
+  "statement": "theorem profinite_rectangular_extension (T : Type u) [TopologicalSpace T] [CompactSpace T] [T2Space T] [TotallyDisconnectedSpace T] (k : ℕ) (hk : 1 ≤ k) (K : Set (Fin k → T)) (hK : IsClosed K) (M : Type v) [AddCommGroup M] [Finite M] [TopologicalSpace M] [DiscreteTopology M] (c : C(K, M)) : ∃ (α : DiscreteQuotient T) (h : C((Fin k → T), M)), (∀ x : K, h x.val = c x) ∧ (∀ x y : Fin k → T, (∀ i : Fin k, α.proj (x i) = α.proj (y i)) → h x = h y) ∧ (∀ a : Fin k → α, Disjoint {x : Fin k → T | ∀ i : Fin k, α.proj (x i) = a i} K → ∀ x : Fin k → T, (∀ i : Fin k, α.proj (x i) = a i) → h x = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f73619b6",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Lean-only delivery; the live node differs only in the lean field, with no prior record. Clause check: T compact T2 totally disconnected, k>=1, K closed in Fin k -> T, M finite discrete AddCommGroup, c : C(K,M); conclusion ∃ α : DiscreteQuotient T (equals a finite clopen partition with nonempty blocks on compact T), h continuous, h|K = c, constant on α-product cells, zero on cells disjoint from K; all match. Edge cases empty T/K, M=0, k=1 hold; universes u,v independent. lean.statement is verbatim; stmt_deps (size convention) correct; docstrings carry source, blueprint tag and 7 proof steps; only sorry; no hollow defs; no duplicate; consistent with citer finite_valued_cech_cocycle_descent. Report has both sections. No files changed, so no compile."
+ }
+}

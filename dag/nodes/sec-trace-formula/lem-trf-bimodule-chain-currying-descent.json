@@ -1,0 +1,389 @@
+{
+ "id": "lem-trf-bimodule-chain-currying-descent",
+ "kind": "statement",
+ "title": "Mixed-ring chain currying and descent naturality",
+ "statement": "Let $S\\to B$ be a homomorphism of commutative rings and $U$ restriction of scalars. Use integer-indexed cochain complexes and derived categories [def-weil-abstract-derived-category], product total Hom with differential $d(f)=d_Nf-(-1)^nf d$ [def-sc-module-total-hom-complex], and direct-sum total tensor with differential $d(a\\otimes t)=da\\otimes t+(-1)^pa\\otimes dt$ for $a\\in A^p$ [def-pc-tensor-complex-sheaves]. For arbitrary $B$-complexes $A,T$ and $S$-complex $N$, put $J(T,N)=\\operatorname{Hom}_S^\\bullet(UT,N)$ with $(bh)(t)=h(bt)$. There is a natural isomorphism of entire $S$-complexes\n$$\\theta_{A,T,N}:U\\operatorname{Hom}_B^\\bullet(A,J(T,N))\\xrightarrow{\\sim}\\operatorname{Hom}_S^\\bullet(U\\operatorname{Tot}(A\\otimes_B T),N),\\qquad \\theta(f)(a\\otimes t)=f(a)(t),$$\nwith inverse $g\\mapsto(a\\mapsto(t\\mapsto g(a\\otimes t)))$. These formulas are balanced and inverse for the products indexed by all degree pairs, without boundedness assumptions. In degree $n$, both $d(\\theta f)$ and $\\theta(df)$ evaluate at $a\\otimes t$, $a\\in A^p$, to\n$$d_Nf(a)(t)-(-1)^{p+n}f(a)(d_Tt)-(-1)^nf(d_Aa)(t).$$\nFor chain maps $\\alpha:A'\\to A$, $\\beta:T'\\to T$ and $\\gamma:N\\to N'$, the square with left vertical map $f\\mapsto(a'\\mapsto\\gamma\\circ f(\\alpha a')\\circ\\beta)$ and right vertical map $g\\mapsto\\gamma\\circ g\\circ U(\\alpha\\otimes\\beta)$ commutes. If $T,T'$ are K-flat over $B$ [def-pc-module-kflat-complex], $N,N'$ are K-injective over $S$ [def-pur-kinjective-complex], and $\\alpha,\\beta,\\gamma$ are quasi-isomorphisms, these vertical maps are quasi-isomorphisms. On these resolved models the localized squares commute for arbitrary chain maps and for inverses of quasi-isomorphisms. The localized family is independent of the chosen resolved representatives and natural for arbitrary morphisms of their represented derived objects, contravariantly in $[A],[T]$ and covariantly in $[N]$, under the canonical tensor and Hom model identifications. No assertion that restriction preserves K-injectives is made.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LN (lemma-tensor-hom-adjunction), differential graded clause and omitted-proof hint; naturality and localization on K-flat/K-injective models are the explicit mixed-ring adaptation."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-kflat-complex",
+  "def-pur-kinjective-complex",
+  "def-trf-derived-coinduction"
+ ],
+ "proof": [
+  {
+   "text": "Give $J(T,N)$ the stated $B$-action. Since $d_T(bt)=b\\,d_Tt$, the Hom differential satisfies $d(bh)(t)=d_Nh(bt)-(-1)^{|h|}h(bd_Tt)=(b\\,dh)(t)$. Also $b(ch)(t)=h(cb t)=((bc)h)(t)$ and $1h=h$. For fixed degrees $p,q,n$, a $B$-linear map $A^p\\to\\operatorname{Hom}_S(T^q,N^{p+q+n})$ gives the additive, $S$-bilinear pairing $\\psi(a,t)=f(a)(t)$ with $\\psi(ba,t)=f(a)(bt)=\\psi(a,bt)$. Hence it respects the additive and balancing relations defining $A^p\\otimes_B T^q$, and defines an $S$-linear map from that tensor product. Conversely an $S$-linear map from this tensor product gives $S$-linear maps in $t$ and is $B$-linear in $a$ for the precomposition action. Evaluation shows that these two operations are inverse.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, differential graded clause and bilinear-map hint; explicit commutative mixed-ring specialization."
+   }
+  },
+  {
+   "text": "A degree-$n$ cochain on the left is exactly a family $f_{p,q}:A^p\\to\\operatorname{Hom}_S(T^q,N^{p+q+n})$ for all $(p,q)\\in\\mathbf Z^2$: a map into a product is the family of its component maps. Apply Step 1 to every pair. A map from $\\bigoplus_{p+q=k}A^p\\otimes_B T^q$ to $N^{k+n}$ is precisely a family of maps on its summands. Finally $(k,p,q)$ with $p+q=k$ is reindexed by $(p,q)$. This identifies both degree-$n$ terms with the same product of $S$-modules, without commuting a product with a tensor product or imposing finite support on cochains. Only elements of the tensor direct sum have finite support. The componentwise inverse is the formula in the statement, and all maps are $S$-linear.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, differential graded clause and bilinear-map hint; explicit commutative mixed-ring specialization."
+   }
+  },
+  {
+   "text": "Let $|f|=n$, $|a|=p$, and $|t|=q$. Expanding the two Hom differentials gives $(df)(a)(t)=d_Nf(a)(t)-(-1)^{p+n}f(a)(d_Tt)-(-1)^nf(d_Aa)(t)$: the inner cochain $f(a)$ has degree $p+n$. On the other side, $d(\\theta f)(a\\otimes t)=d_Nf(a)(t)-(-1)^n\\{f(d_Aa)(t)+(-1)^pf(a)(d_Tt)\\}$. Since $(-1)^n(-1)^p=(-1)^{p+n}$, these agree. Equality on every pure tensor and every summand proves equality of the entire degree maps. Thus the inverse degreewise maps of Step 2 commute with differentials and form the asserted chain isomorphism.",
+   "uses": [
+    "def-sc-module-total-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, differential graded clause and bilinear-map hint; explicit commutative mixed-ring specialization."
+   }
+  },
+  {
+   "text": "For chain maps $\\alpha,\\beta,\\gamma$ as in the statement, both routes around the square evaluate on $a'\\otimes t'$ to $\\gamma(f(\\alpha a')(\\beta t'))$. This proves the square by the same summandwise equality test; no sign occurs because all three maps have degree zero. Precomposition and postcomposition respect identities and composition by associativity of composition, so these are the three-variable naturality squares, with the stated variances.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LN, lemma-tensor-hom-adjunction, differential graded clause and bilinear-map hint; explicit commutative mixed-ring specialization."
+   }
+  },
+  {
+   "text": "Assume now that $T,T'$ are K-flat and $\\alpha,\\beta$ are quasi-isomorphisms. Factor $\\alpha\\otimes\\beta$ as $A'\\otimes T'\\xrightarrow{\\alpha\\otimes1}A\\otimes T'\\xrightarrow{1\\otimes\\beta}A\\otimes T$. The first map is a quasi-isomorphism by the quasi-isomorphism-preservation clause of [def-pc-module-kflat-complex], with fixed K-flat factor $T'$. For the second use [lem-pc-kflat-tensor-quasi-iso] with $R=B$, $E=T'$, $E'=T$, and arbitrary $N=A$. Its order of factors is reversed by the signed flip $a\\otimes t\\mapsto(-1)^{pq}t\\otimes a$ in degrees $(p,q)$. This is an invertible chain map: the two differential terms have respective exponents $(p+1)q$ and $p+p(q+1)$, equal modulo $2$ to $pq+q$ and $pq$ on the flipped side. Thus the second map too is a quasi-isomorphism. Restriction $U$ preserves these quasi-isomorphisms: kernels and images of a $B$-linear differential, and their quotient, have the same underlying additive groups after restriction.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-kflat-tensor-quasi-iso",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064L, lemma-derived-tor-quasi-isomorphism-other-side; preceding lemma-K-flat-quasi-isomorphism."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-rhom-well-defined] on the small one-object site with ring $S$. Take its source quasi-isomorphism to be $U(\\alpha\\otimes\\beta)$ from Step 5 and its target quasi-isomorphism to be $\\gamma:N\\to N'$ between K-injective $S$-complexes. It gives exactly the right vertical quasi-isomorphism $g\\mapsto\\gamma gU(\\alpha\\otimes\\beta)$. The commuting square of Step 4 and the chain isomorphisms of Step 3 identify the left vertical map with the conjugate of this right vertical map, so it also induces isomorphisms on all cohomology groups. The hypothesis on K-injectivity is used only over $S$. Applying the same cited lemma to $U\\beta:UT'\\to UT$ and $\\gamma$ gives a quasi-isomorphism $J(T,N)\\to J(T',N')$. It is $B$-linear since $\\beta(bt')=b\\beta(t')$; restriction to $S$ detects quasi-isomorphisms by the same kernel/image calculation. These are the canonical $J$ comparisons on the left.",
+   "uses": [
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined, on the one-object ringed site."
+   }
+  },
+  {
+   "text": "For later identification of the left model, $J(T,N)$ is K-injective over $B$ when $T$ is K-flat over $B$ and $N$ is K-injective over $S$. Indeed, for an acyclic $B$-complex $F$, $F\\otimes_B T$ is acyclic by [def-pc-module-kflat-complex], and remains acyclic after $U$. Apply [lem-pur-rhom-well-defined] over $S$ to $0\\to U(F\\otimes_B T)$ and $1_N$: its Hom complex is acyclic. Step 3 identifies this with the underlying $S$-complex of $\\operatorname{Hom}_B^\\bullet(F,J(T,N))$. By [lem-pur-hom-complex-global-homotopy] on the one-object $B$-site, its $H^0$ is the group of $B$-linear chain maps $F\\to J(T,N)$ modulo $B$-linear homotopy. This group is zero. Thus every such map is null-homotopic, exactly [def-pur-kinjective-complex].",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pur-rhom-well-defined",
+    "lem-pur-hom-complex-global-homotopy",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95, lemma-RHom-well-defined, and Tag 0A8Z, equation-global-cohomology-hom-complex; combined with the chain currying calculation above."
+   }
+  },
+  {
+   "text": "The natural squares also pass to homotopy classes. Apply [lem-sfb-total-tensor-homotopy] to $\\operatorname{Mod}(B)$: it supplies tensor on the homotopy category; the tensor of modules is additive and preserves direct sums in both variables. Apply [lem-sf-equivariant-hom-resolution-calculus] to $H=\\operatorname{Hom}_S(-,-)$ on $S$-modules. Its source homotopy formula is $f\\mapsto(-1)^nfh$ on degree $n$, and its target formula is $f\\mapsto h'f$. These show that the right-hand Hom construction respects homotopies of all three maps. Restriction just forgets part of the scalar action and preserves the equations defining a homotopy. Step 4, conjugated by $\\theta$, gives the same conclusion for the left side, so $\\theta$ is a natural isomorphism already on the homotopy-category models.",
+   "uses": [
+    "lem-sfb-total-tensor-homotopy",
+    "lem-sf-equivariant-hom-resolution-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064I, lemma-derived-tor-homotopy, and Tag 0GWP, lemma-symmetric-monoidal-homotopy-category; Hom homotopies as in sites-cohomology.tex, Tag 0A8X."
+   }
+  },
+  {
+   "text": "Here are the resolving categories used for descent. The $A$ variable ranges over $K(B)$, whose quasi-isomorphism localization is $D(B)$. For $T$ first use the full homotopy subcategory $\\mathcal P$ of flat-term K-flat complexes: [lem-weil-pbc-site-derived-tensor-descent] on the one-object $B$-site says $W^{-1}\\mathcal P\\simeq D(B)$, where $W$ consists of its quasi-isomorphisms. For $N$ use the full homotopy subcategory $\\mathcal I$ of K-injective $S$-complexes: [lem-weil-pbc-kinjective-hom-derived] gives full faithfulness into $D(S)$ and [prop-pur-kinjective-resolutions-exist] gives essential surjectivity on the small one-object $S$-site, so $\\mathcal I\\simeq D(S)$. These statements have no boundedness requirement. Every K-flat $T$ lacking flat terms receives a quasi-isomorphism $P\\to T$ from a flat-term K-flat $P$ by [lem-pc-kflat-resolution].",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU, lemma-K-flat-resolution and definition-derived-tor with its preceding construction; Tag 07A5, section-unbounded. Also derived.tex, Tag 070I, lemma-K-injective."
+   }
+  },
+  {
+   "text": "Localize the values of the two functors of Step 8 in $D(S)$. By Step 6 they invert quasi-isomorphisms in each variable (take the other two maps to be identities). Apply the functor and natural-transformation clauses of [lem-weil-pbc-localization-universal-property] successively in $A^{\\mathrm{op}}$ and $T^{\\mathrm{op}}$, and use the equivalence $\\mathcal I\\simeq D(S)$ of Step 9 in $N$. Uniqueness in that universal property makes the successive descents compatible and gives one natural isomorphism on $D(B)^{\\mathrm{op}}\\times D(B)^{\\mathrm{op}}\\times D(S)$. For a quasi-isomorphism square $R\\theta=\\theta'L$, both vertical arrows become invertible by Step 6, and multiplication gives $R^{-1}\\theta'=\\theta L^{-1}$: this is the square for its inverse. Identity and composition then give the squares for every localized morphism. For an arbitrary K-flat $T$, use $P\\to T$ from Step 9 and Step 6 to identify its component with that on $P$. Naturality for this map and uniqueness of descent make that identification independent of $P$ and compatible with any third representative.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, and natural-transformation descent by the functor-category universal property; applied to the resolving localizations of Step 9."
+   }
+  },
+  {
+   "text": "These are the canonical model identifications in the statement. Choose a flat-term K-flat resolution $P\\to A$. Tensoring it with K-flat $T$ is a quasi-isomorphism by [def-pc-module-kflat-complex]. If also $Q\\to T$ is a flat-term K-flat resolution, [lem-pc-kflat-tensor-quasi-iso] identifies $P\\otimes_B Q$ with $P\\otimes_B T$. By [lem-weil-pbc-site-derived-tensor-descent], $P\\otimes_B Q$ is the two-resolved model of $[A]\\otimes_B^{\\mathbf L}[T]$ and its comparisons are natural and compatible with inversion. Thus $A\\otimes_B T$ is its one-resolved model. By [def-pur-derived-internal-hom], the right Hom is a model of $R\\operatorname{Hom}_S(U([A]\\otimes_B^{\\mathbf L}[T]),[N])$, since $N$ is K-injective. The same definition over $B$, together with Step 7, identifies the left Hom with $U R\\operatorname{Hom}_B([A],[J(T,N)])$. Step 10 and uniqueness of localization comparisons make these identifications independent of representatives and natural for arbitrary derived morphisms. Throughout, restriction has been used for exactness and homotopy equations, never to preserve K-injectivity.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "lem-pc-kflat-tensor-quasi-iso",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and its preceding construction; Tag 08J7, section-internal-hom, using Tag 0A95."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-module-kflat-complex",
+  "lem-pc-kflat-tensor-quasi-iso",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-complex-global-homotopy",
+  "def-pur-kinjective-complex",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sf-equivariant-hom-resolution-calculus",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LN, lemma-tensor-hom-adjunction: the omitted-proof hint is expanded, with explicit mixed-ring signs and resolving-category descent using the cited Stacks results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mixed ring total complexes tensor Hom currying is a natural chain isomorphism and commutes with quasi isomorphism comparison maps",
+   "results": "{\"t\": \"2026-10-22T06:45:15Z\", \"tool\": \"leanfinder\", \"query\": \"Mixed ring total complexes tensor Hom currying is a natural chain isomorphism and commutes with quasi isomorphism comparison maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ι_mapBifunctorFlipIso_hom\", \"HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc\", \"HomologicalComplex.mapBifunctorFlipIso_hom_naturality\", \"HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc\", \"HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc\", \"HomologicalComplex.mapBifunctorAssociator\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\"], \"digest\": \"d3f6d6b33bc38a74\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologicalComplex.tensorHom is only tensoring two chain maps (Monoidal.lean:60); bifunctor flip isomorphisms reindex total tensors, not total tensor-Hom currying. ModuleCat.monoidalClosedHomEquiv (Monoidal/Closed.lean:29) is an ordinary one-ring module equivalence. None specializes in one line to the mixed-ring unbounded chain and descent statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded complexes change of rings balanced evaluation identifies Hom B A Hom S T N with Hom S total tensor A T N including differential signs and localization naturality",
+   "results": "{\"t\": \"2026-10-22T06:46:10Z\", \"tool\": \"leanfinder\", \"query\": \"Unbounded complexes change of rings balanced evaluation identifies Hom B A Hom S T N with Hom S total tensor A T N including differential signs and localization naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.tensorHom\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.unit_tensor_d₁\", \"HomologicalComplex.mapBifunctor₁₂.ιOrZero_eq\"], \"digest\": \"5adcac8b31d59fba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologicalComplex.tensorHom is only tensoring two chain maps (Monoidal.lean:60); bifunctor flip isomorphisms reindex total tensors, not total tensor-Hom currying. ModuleCat.monoidalClosedHomEquiv (Monoidal/Closed.lean:29) is an ordinary one-ring module equivalence. None specializes in one line to the mixed-ring unbounded chain and descent statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural tensor Hom adjunction as chain isomorphism for mixed ring unbounded complexes",
+   "results": "{\"t\": \"2026-10-22T06:45:03Z\", \"tool\": \"leansearch\", \"query\": \"Natural tensor Hom adjunction as chain isomorphism for mixed ring unbounded complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHomEquivOfBasis\", \"ModuleCat.monoidalClosedHomEquiv\", \"lTensorHomEquivHomLTensor\", \"dualTensorHomEquiv\", \"HomologicalComplex.tensorHom\", \"Rep.torIso\", \"HomologicalComplex.rightUnitor'\", \"CategoryTheory.ShortComplex.rightHomologyIso_hom_naturality\"], \"digest\": \"d2b8a6145f672141\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologicalComplex.tensorHom is only tensoring two chain maps (Monoidal.lean:60); bifunctor flip isomorphisms reindex total tensors, not total tensor-Hom currying. ModuleCat.monoidalClosedHomEquiv (Monoidal/Closed.lean:29) is an ordinary one-ring module equivalence. None specializes in one line to the mixed-ring unbounded chain and descent statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorHom",
+   "results": "{\"t\": \"2026-10-22T06:45:02Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.tensorHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorHom\"], \"digest\": \"220a991ee337f458\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologicalComplex.tensorHom is only tensoring two chain maps (Monoidal.lean:60); bifunctor flip isomorphisms reindex total tensors, not total tensor-Hom currying. ModuleCat.monoidalClosedHomEquiv (Monoidal/Closed.lean:29) is an ordinary one-ring module equivalence. None specializes in one line to the mixed-ring unbounded chain and descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorHom|currying|curry",
+   "results": "{\"t\": \"2026-10-22T06:45:02Z\", \"tool\": \"grep\", \"query\": \"tensorHom|currying|curry\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\"], \"digest\": \"3a13c818cc313579\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologicalComplex.tensorHom is only tensoring two chain maps (Monoidal.lean:60); bifunctor flip isomorphisms reindex total tensors, not total tensor-Hom currying. ModuleCat.monoidalClosedHomEquiv (Monoidal/Closed.lean:29) is an ordinary one-ring module equivalence. None specializes in one line to the mixed-ring unbounded chain and descent statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]imodule|tensor.*[Hh]om.*[Aa]dj|[Hh]om.*[Kk].?[Ff]lat",
+   "results": "{\"t\": \"2026-10-22T06:46:00Z\", \"tool\": \"grep\", \"query\": \"[Bb]imodule|tensor.*[Hh]om.*[Aa]dj|[Hh]om.*[Kk].?[Ff]lat\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: HomologicalComplex.tensorHom is only tensoring two chain maps (Monoidal.lean:60); bifunctor flip isomorphisms reindex total tensors, not total tensor-Hom currying. ModuleCat.monoidalClosedHomEquiv (Monoidal/Closed.lean:29) is an ordinary one-ring module equivalence. None specializes in one line to the mixed-ring unbounded chain and descent statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed ring tensor Hom adjunction is a natural isomorphism of unbounded cochain complexes compatible with derived localization",
+   "results": "{\"t\": \"2026-10-23T09:55:50Z\", \"tool\": \"leanfinder\", \"query\": \"Mixed ring tensor Hom adjunction is a natural isomorphism of unbounded cochain complexes compatible with derived localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctorIsoCompQ\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Tor'_map_app\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_map\"], \"digest\": \"69b08fe10deebb7f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide ordinary one-ring module currying, total tensor maps, or generic derived-category maps, not this mixed-ring unbounded total Hom isomorphism and resolving descent."
+  },
+  {
+   "tool": "grep",
+   "query": "currying|curry|tensorHom",
+   "results": "{\"t\": \"2026-10-23T09:57:14Z\", \"tool\": \"grep\", \"query\": \"currying|curry|tensorHom\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\", \"Mathlib/Algebra/Homology/Monoidal.lean\"], \"digest\": \"3a13c818cc313579\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide ordinary one-ring module currying, total tensor maps, or generic derived-category maps, not this mixed-ring unbounded total Hom isomorphism and resolving descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded mixed ring cochain tensor Hom adjunction compatible with quasi isomorphisms and K flat K injective replacements",
+   "results": "{\"t\": \"2026-10-23T09:57:14Z\", \"tool\": \"leansearch\", \"query\": \"Unbounded mixed ring cochain tensor Hom adjunction compatible with quasi isomorphisms and K flat K injective replacements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.monoidalClosedHomEquiv\", \"CochainComplex.isKInjective_of_injective_aux\", \"CochainComplex.cm5b\", \"CochainComplex.HomComplex.Cochain.single\", \"CochainComplex.isKInjective_of_injective\", \"CochainComplex.HomComplex.Cochain.shift\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_iff_of_iso\"], \"digest\": \"31b4e3fc6ad4ad37\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide ordinary one-ring module currying, total tensor maps, or generic derived-category maps, not this mixed-ring unbounded total Hom isomorphism and resolving descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.monoidalClosedHomEquiv, HomologicalComplex",
+   "results": "{\"t\": \"2026-10-23T09:57:14Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.monoidalClosedHomEquiv, HomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide ordinary one-ring module currying, total tensor maps, or generic derived-category maps, not this mixed-ring unbounded total Hom isomorphism and resolving descent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total Hom complex from A to Hom of T N is isomorphic to Hom from the direct sum total tensor A T to N using evaluation without boundedness",
+   "results": "{\"t\": \"2026-10-23T09:59:07Z\", \"tool\": \"leanfinder\", \"query\": \"Total Hom complex from A to Hom of T N is isomorphic to Hom from the direct sum total tensor A T to N using evaluation without boundedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.tensorHom\", \"HomologicalComplex.ιTensorObj\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.tensorObj\", \"HomologicalComplex.rightUnitor\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex₂.ι_totalDesc\"], \"digest\": \"5518aa45668a4363\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits provide ordinary one-ring module currying, total tensor maps, or generic derived-category maps, not this mixed-ring unbounded total Hom isomorphism and resolving descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-bimodule-tensor-hom",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Mixed-ring tensor-Hom adjunction used to move the diagonal module past the perfect polynomial dual. Re-split component: old proof step 2 and all comparison-square and localization arguments of step 5.",
+   "via": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-bimodule-chain-currying-descent",
+  "worker": "stage1",
+  "summary": "Expanded mixed-ring balanced evaluation, all-degree product/direct-sum indexing, differential signs and the naturality square. Proved comparison quasi-isomorphisms by existing K-flat and K-injective invariance nodes, then descended via existing resolving localizations. No new nodes and no statement change.",
+  "blueprint": "Preserves the item ancestry: local-term-locality proof (1)--(2), relative-duality algebraic auxiliary chain through derived-bimodule-tensor-hom; realizes the parent old step 2 and comparison/localization parts of old step 5 recorded in blueprint.from.place. The current latest blueprint locality proof and unit were read; no higher-level route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-tensor-quasi-iso",
+    "why": "Generic ordinary-module tensor invariance with arbitrary other factor, required when changing T; the local-term unit contains no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic Hom-complex quasi-isomorphism invariance into K-injective targets; used on one-object sites over S."
+   },
+   {
+    "node": "lem-pur-hom-complex-global-homotopy",
+    "why": "Generic identification of degree-zero total Hom cohomology with homotopy classes; needed to verify the B-linear K-injective predicate."
+   },
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "Generic tensor descent to homotopy classes in a module category; supplies the homotopy functor used before derived localization."
+   },
+   {
+    "node": "lem-sf-equivariant-hom-resolution-calculus",
+    "why": "Generic signed product-Hom homotopy formulas; used for ordinary S-linear Hom, without equivariance assumptions."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic K-flat resolving localization and normalized tensor comparisons, specialized to the small one-object B-site."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of unbounded K-injective resolutions on the small one-object S-site."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic flat-term K-flat resolution existence on a one-object site; compares arbitrary K-flat T with the flat-term resolving subcategory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-tensor-quasi-iso",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-complex-global-homotopy",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sf-equivariant-hom-resolution-calculus",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-aee7a0b12",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-aee7a0b12 (reviewer sub-agent of L); spot-checked: I read the item and every cited node's statement. This is a no-new-node split; statement, stmt_deps, source and blueprint are identical to the base record. The source is dga.tex 09LN, whose proof is omitted with a hint pointing to more-algebra 0A5Y (l.17881). Steps 1-4 write out that omitted check for the mixed-ring case. I recomputed the B-action on J, the balancing f(ba)(t)=f(a)(bt), the indexing of products and direct sums over all (p,q), the differential sign -(-1)^{p+n} and the naturality value gamma(f(alpha a')(beta t')). Step 5: tensoring with K-flat T' preserves quasi-isomorphisms (def-pc-module-kflat-complex); 1⊗beta follows from lem-pc-kflat-tensor-quasi-iso (064L) with the signed flip, exponents checked. Step 6: lem-pur-rhom-well-defined (0A95) gives the right vertical map and the B-linear J comparison, using K-injectivity over S only. Step 7: J is K-injective over B, via acyclicity, theta and lem-pur-hom-complex-global-homotopy at H^0; it never claims restriction preserves K-injectives. Steps 8-11: the homotopy formulas, the resolving equivalences (pbc tensor descent, K-injective hom-derived plus resolutions exist, K-flat resolution), 04VG descent with natural-transformation uniqueness, and the tensor and internal-Hom model clauses all match the cited statements. No cycle: sibling lem-trf-bimodule-resolved-hom-tensor-models (Q132) cites this item, so proving J's K-injectivity and the tensor model locally is correct and not a duplicate. The 0A5Y/09LN nodes in the DAG are single-ring or sheaf-level, so there is no duplicate. No re-split note applies. proof_deps equals the union of step uses, no SGA, and the 8 tool_uses are generic and accepted. Edge cases S=B, Z→Z/2 with Q/Z, zero complexes and unbounded degrees all check out. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.BimoduleChainCurryingDescent",
+  "declaration": "ModuleCat.BimoduleChainCurrying.bimodule_chain_currying_descent",
+  "declarations": [
+   "ModuleCat.BimoduleChainCurrying.Complex",
+   "ModuleCat.BimoduleChainCurrying.U",
+   "ModuleCat.BimoduleChainCurrying.J",
+   "ModuleCat.BimoduleChainCurrying.left",
+   "ModuleCat.BimoduleChainCurrying.total",
+   "ModuleCat.BimoduleChainCurrying.right",
+   "ModuleCat.BimoduleChainCurrying.pure",
+   "ModuleCat.BimoduleChainCurrying.valueJ",
+   "ModuleCat.BimoduleChainCurrying.valueLeft",
+   "ModuleCat.BimoduleChainCurrying.valueRight",
+   "ModuleCat.BimoduleChainCurrying.kFlat",
+   "ModuleCat.BimoduleChainCurrying.DerivedTriple",
+   "ModuleCat.BimoduleChainCurrying.triple",
+   "ModuleCat.BimoduleChainCurrying.tripleMap",
+   "ModuleCat.BimoduleChainCurrying.bimodule_chain_currying_descent"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/BimoduleChainCurryingDescent.lean",
+  "statement": "theorem bimodule_chain_currying_descent (φ : S →+* B) : ∃ eJ : ∀ (T : Complex B) (N : Complex S), (U φ).obj (J φ T N) ≅ CochainComplex.moduleHomComplex ((U φ).obj T) N, ∃ θ : ∀ (A T : Complex B) (N : Complex S), left φ A T N ≅ right φ A T N, ∃ F G : DerivedTriple S B ⥤ DerivedCategory (ModuleCat.{u} S), ∃ η : F ≅ G, ∃ eL : ∀ (A T : Complex B) (N : Complex S), kFlat T → N.IsKInjective → (DerivedCategory.Q.obj (left φ A T N) ≅ F.obj (triple A T N)), ∃ eR : ∀ (A T : Complex B) (N : Complex S), kFlat T → N.IsKInjective → (DerivedCategory.Q.obj (right φ A T N) ≅ G.obj (triple A T N)), (∀ (T : Complex B) (N : Complex S) (n q r : ℤ) (h : q + n = r) (z : (J φ T N).X n) (t : T.X q), (((eJ T N).hom.f n z).v q r h) t = valueJ φ T N n q r h z t) ∧ (∀ (T : Complex B) (N : Complex S) (n q r : ℤ) (h : q + n = r) (z : (J φ T N).X n) (b : B) (t : T.X q), valueJ φ T N n q r h (b • z) t = valueJ φ T N n q r h z (b • t)) ∧ (∀ (A T : Complex B) (N : Complex S) (n p q r : ℤ) (h : p + q + n = r) (z : (left φ A T N).X n) (a : A.X p) (t : T.X q), valueRight φ A T N n p q r h ((θ A T N).hom.f n z) a t = valueLeft φ A T N n p q r h z a t) ∧ (∀ (A T : Complex B) (N : Complex S) (n p q r : ℤ) (h : p + q + n = r) (z : (right φ A T N).X n) (a : A.X p) (t : T.X q), valueLeft φ A T N n p q r h ((θ A T N).inv.f n z) a t = valueRight φ A T N n p q r h z a t) ∧ (∀ (A T : Complex B) (N : Complex S) (n p q : ℤ) (z : (left φ A T N).X n) (a : A.X p) (t : T.X q), valueRight φ A T N (n + 1) p q (p + q + (n + 1)) rfl ((right φ A T N).d n (n + 1) ((θ A T N).hom.f n z)) a t = N.d (p + q + n) (p + q + (n + 1)) (valueLeft φ A T N n p q (p + q + n) rfl z a t) - (p + n).negOnePow • valueLeft φ A T N n p (q + 1) (p + q + (n + 1)) (by omega) z a (T.d q (q + 1) t) - n.negOnePow • valueLeft φ A T N n (p + 1) q (p + q + (n + 1)) (by omega) z (A.d p (p + 1) a) t) ∧ (∀ (A T : Complex B) (N : Complex S) (n p q : ℤ) (z : (left φ A T N).X n) (a : A.X p) (t : T.X q), valueLeft φ A T N (n + 1) p q (p + q + (n + 1)) rfl ((left φ A T N).d n (n + 1) z) a t = N.d (p + q + n) (p + q + (n + 1)) (valueLeft φ A T N n p q (p + q + n) rfl z a t) - (p + n).negOnePow • valueLeft φ A T N n p (q + 1) (p + q + (n + 1)) (by omega) z a (T.d q (q + 1) t) - n.negOnePow • valueLeft φ A T N n (p + 1) q (p + q + (n + 1)) (by omega) z (A.d p (p + 1) a) t) ∧ (∀ (A A' T T' : Complex B) (N N' : Complex S) (α : A' ⟶ A) (β : T' ⟶ T) (γ : N ⟶ N'), ∃ (l : left φ A T N ⟶ left φ A' T' N') (r : right φ A T N ⟶ right φ A' T' N'), (∀ (n p q s : ℤ) (h : p + q + n = s) (z : (left φ A T N).X n) (a : A'.X p) (t : T'.X q), valueLeft φ A' T' N' n p q s h (l.f n z) a t = γ.f s (valueLeft φ A T N n p q s h z (α.f p a) (β.f q t))) ∧ (∀ (n p q s : ℤ) (h : p + q + n = s) (z : (right φ A T N).X n) (a : A'.X p) (t : T'.X q), valueRight φ A' T' N' n p q s h (r.f n z) a t = γ.f s (valueRight φ A T N n p q s h z (α.f p a) (β.f q t))) ∧ l ≫ (θ A' T' N').hom = (θ A T N).hom ≫ r ∧ (kFlat T → kFlat T' → N.IsKInjective → N'.IsKInjective → QuasiIso α → QuasiIso β → QuasiIso γ → QuasiIso l ∧ QuasiIso r) ∧ (∀ (hT : kFlat T) (hT' : kFlat T') (hN : N.IsKInjective) (hN' : N'.IsKInjective), DerivedCategory.Q.map l ≫ (eL A' T' N' hT' hN').hom = (eL A T N hT hN).hom ≫ F.map (tripleMap α β γ) ∧ DerivedCategory.Q.map r ≫ (eR A' T' N' hT' hN').hom = (eR A T N hT hN).hom ≫ G.map (tripleMap α β γ))) ∧ (∀ (A T : Complex B) (N : Complex S) (hT : kFlat T) (hN : N.IsKInjective), (eL A T N hT hN).hom ≫ η.hom.app (triple A T N) = DerivedCategory.Q.map (θ A T N).hom ≫ (eR A T N hT hN).hom) ∧ (∀ η' : F ≅ G, (∀ (A T : Complex B) (N : Complex S) (hT : kFlat T) (hN : N.IsKInjective), (eL A T N hT hN).hom ≫ η'.hom.app (triple A T N) = DerivedCategory.Q.map (θ A T N).hom ≫ (eR A T N hT hN).hom) → η' = η)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the coinduced presentation J=Hom_B(T,Coind(N)), with its evaluation-at-one chain isomorphism to Hom_S(UT,N) and precomposition action explicitly characterized in the theorem. Descent is specified by derived functors and natural model comparisons on every K-flat T and S-K-injective N; the unique extending natural isomorphism states naturality for all derived morphisms. Independent localization universes wS,wB are retained. The gained landed definition dependency supplies only the existing ordinary coinduction helpers, not any new tensor-Hom theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bba609d74",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Item lean + stmt_deps gains landed def-trf-derived-coinduction (allowed; owns coinductionComplexFunctor/coinductionEvaluation; no cycle). Statement verbatim. J=Hom_B(T,Coind N) pinned by eval-at-one eJ and B-action clause (verified (b•z)(t)(1)=z(bt)(1)); θ hom/inv pinned coordinatewise on pure tensors; differential formulas recomputed from Mathlib δ (z≫d+(-1)^{n+1}d≫z) and mapBifunctor ε₂=(-1)^p: −(-1)^{p+n}, −(-1)^n match node; naturality l,r determined by formulas with correct variances; quasi-iso clause K-flat T,T' only, S-K-injective N,N'; F,G existential but tied by eL/eR on all K-flat/K-injective models and natural for all chain maps, η normalized and unique → determined, not hollow. Same-universe S,B inherited from coinduction dep/parent; wS,wB independent. Helpers real with docstrings; one sorry; proof docstring 11 steps; report has Worker report and Second reading by Q19. Edge cases φ=id, zero, unbounded, negative degrees, nonflat φ OK. No compile (no change)."
+ }
+}

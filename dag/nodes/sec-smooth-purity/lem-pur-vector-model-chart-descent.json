@@ -1,0 +1,325 @@
+{
+ "id": "lem-pur-vector-model-chart-descent",
+ "kind": "statement",
+ "title": "Descent of a vector-bundle model comparison from normalized charts",
+ "statement": "Fix the finite purity datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k)$, a finite extension $F/\\mathbf Q_\\ell$ with uniformizer $\\varpi_F$, $n\\geq1$, and $A=\\mathcal O_F/\\varpi_F^n$. Let $Z$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], and let $\\pi:V\\to Z$ be a vector bundle of constant rank $d\\geq0$ [def-asd-vector-bundle-zero-section]. Work in the small pro-etale derived categories with the derived operations [def-weil-derived-pullback-tensor-hom], constructible exceptional inverse image [def-weil-exceptional-inverse-image], and coefficient twists [def-coefficient-twists-detailed]. Put $Q=A_V(d)[2d]$ and $\\omega_\\pi=R\\pi^!A_Z$.\nLet $c:Q\\xrightarrow{\\sim}\\omega_\\pi$ be a specified isomorphism. Suppose a set-indexed Zariski open cover $\\{u_i:U_i\\hookrightarrow Z\\}_{i\\in I}$ and linear trivializations $\\phi_i:V_i=V\\times_ZU_i\\xrightarrow{\\sim}\\mathbf A^d_{U_i}$ are given. Require that, under the canonical exceptional base-change and coordinate comparisons and the canonical Tate pullback identifications,\n$$c|_{V_i}=\\Gamma_{p_{d,i},A_{U_i}}\\quad\\text{for every }i,$$\nwhere $p_{d,i}:\\mathbf A^d_{U_i}\\to U_i$ [def-sbc-affine-space] and $\\Gamma$ is the ordered restricted-projective-line-trace comparison at every coefficient level explicitly specified in [lem-pur-projection-purity-agreement], with the associators of [def-pur-affine-space-comparison]. Then the specified diagonal smooth purity map [def-pur-smooth-purity-map] on the coefficient-unit object satisfies\n$$\\gamma_{\\pi,A_Z}=c:Q\\longrightarrow\\omega_\\pi.$$\nThe assertion includes rank zero, disconnected or empty $Z$, and every positive coefficient level; no field hypothesis on $A$ is imposed.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-thm-smooth-purity/_section.md",
+  "place": "Agreement on the model, final equality of the diagonal and integration orientations; local-to-global form of retained item Step 6, using the chart-normalized comparison as hypothesis."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-asd-vector-bundle-zero-section",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-coefficient-twists-detailed",
+  "lem-pur-projection-purity-agreement",
+  "def-sbc-affine-space",
+  "def-pur-affine-space-comparison",
+  "def-pur-smooth-purity-map",
+  "lem-pur-vector-bundle-finite-type-frames",
+  "def-pur-chart-unit-affine-comparison",
+  "def-amb-vector-integration-charts",
+  "def-pur-section-pullback-site-comparisons",
+  "def-pur-affine-diagonal-tate-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\Pi_\\pi:\\omega_\\pi\\xrightarrow{\\sim}Q$ for the specified diagonal orientation used in the definition of $\\gamma$. The tensor-unit clause of [lem-pur-dualizing-unit-composite] says that $\\theta_{\\pi,A_Z}:L\\pi^*A_Z\\otimes^L\\omega_\\pi\\to\\omega_\\pi$ is the canonical unitor. Substituting $K=A_Z$ into [def-pur-smooth-purity-map], the coefficient-unit pullback and twist reassociation therefore cancel the unitors and give $\\gamma_{\\pi,A_Z}=\\Pi_\\pi^{-1}$. This is an equality for the specified tensor transpose, not a choice of a new orientation. Put $a=\\Pi_\\pi\\circ c:Q\\to Q$. It suffices to prove $a=1_Q$, because composition with $\\Pi_\\pi^{-1}$ then gives $c=\\gamma_{\\pi,A_Z}$.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "lem-pur-dualizing-unit-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3–4: restriction of the diagonal orientation and agreement with the coordinate-adjunction orientation; local-to-global consequence for normalized bundle charts."
+   }
+  },
+  {
+   "text": "Refine the given cover by affine opens $B\\subseteq U_i$ that are finite type over $k$. Such opens cover: on a finite-type affine chart $\\operatorname{Spec}R$ of $Z$, principal opens contained in $U_i$ form a basis, and $R_f=R[t]/(ft-1)$ is still finitely generated over $k$ [def-weil-finite-type-morphism]. Let $T=V\\times_ZB$. The restricted trivialization identifies $T$ with $\\mathbf A^d_B=\\operatorname{Spec}(R[x_1,\\ldots,x_d])$, so $T$ is affine and finite type. These $T$ form a set-indexed open cover of $V$, by taking inverse images of the covering $B$. Vector-bundle projection is affine by its relative-spectrum construction [def-asd-vector-bundle-zero-section], hence separated by [lem-weil-pbc-affine-morphism-permanence]; its local polynomial descriptions make it finite type. It is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth] on these charts and the affine-local definition [def-sbc-smooth-morphisms]. Since $Z$ is separated over $k$, $V$ is separated over $k$ by composition [lem-weil-pbc-proper-fp-permanence]. Thus the finite-type, smooth and separated hypotheses of the chart-normalization theorem hold for $\\pi$ and for each restriction.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-asd-vector-bundle-zero-section",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3–4: restriction of the diagonal orientation and agreement with the coordinate-adjunction orientation; local-to-global consequence for normalized bundle charts."
+   }
+  },
+  {
+   "text": "Fix a member $B\\subseteq U_i$ of the refined cover, put $T=\\pi^{-1}B\\subseteq V_i$, let $u=\\phi_i|_T:T\\xrightarrow{\\sim}\\mathbf A^d_B$, and let $w:\\mathbf A^d_B\\hookrightarrow\\mathbf A^d_{U_i}$ be the open inclusion. (a) The diagonal orientation on the chart. Apply [lem-pur-diagonal-dnc-chart-normalization] with $f=\\pi$, affine target open $B$, affine source open $T$ and coordinate morphism the isomorphism (hence etale) $u$: under the specified open exceptional comparison, $\\Pi_\\pi|_T=Lu^*(\\Gamma_{p_d,A_B}^{-1})\\circ\\epsilon_u$; the theorem explicitly includes all finite extensions and every $n\\geq1$. (b) Restriction of $\\Gamma$ from $U_i$ to $B$. Here $U_i$ need not be affine, so the chart theorem does not apply over $U_i$ itself. $U_i$ is an open subscheme of the Noetherian scheme $Z$, hence Noetherian [lem-weil-pbc-noetherian-open-subscheme-noetherian], so $U_i\\hookrightarrow Z$ is a quasi-compact open immersion and of finite type [lem-weil-pbc-qc-open-immersion-finite-type]; $U_i$ is separated of finite type over $k$ by composition [lem-weil-pbc-proper-fp-permanence](e). By [lem-pur-projection-purity-agreement] with $Y=U_i$ and $K=A_{U_i}$, the smooth purity map of $p_{d,i}$ equals $\\Gamma_{p_{d,i},A_{U_i}}$. The computation of Step 1, with $p_{d,i}$ in place of $\\pi$ (unit clause of [lem-pur-dualizing-unit-composite]), identifies the same smooth purity map with $\\vartheta_{p_{d,i}}^{-1}$, so $\\Gamma_{p_{d,i},A_{U_i}}=\\vartheta_{p_{d,i}}^{-1}$. Now apply [lem-pur-diagonal-dnc-chart-normalization] to $f=p_{d,i}$, affine target open $B$, affine source open $\\mathbf A^d_B=p_{d,i}^{-1}B$ and coordinate morphism the identity of $\\mathbf A^d_B$: it gives $Lw^*\\vartheta_{p_{d,i}}=\\vartheta_{p_{d,B}}=\\Gamma_{p_d,A_B}^{-1}$, where $\\epsilon_{\\mathrm{id}}$ is the identity identification. Hence, under the open-restriction comparison $Lw^*\\omega_{p_{d,i}}\\cong\\omega_{p_d}$, $Lw^*\\Gamma_{p_{d,i},A_{U_i}}=\\Gamma_{p_d,A_B}$. (c) Restriction of the hypothesis. The open-restriction, exceptional base-change and coordinate identifications used in the hypothesis and in (a) are composites of the exceptional compositors of [pur9-def-upper-shriek-composition] for the commutative square $\\pi\\circ(T\\subseteq V)=(B\\subseteq Z)\\circ(\\pi|_T)$, the equality $\\phi_i\\circ(T\\subseteq V_i)=w\\circ u$ and $p_{d,i}\\circ w=(B\\subseteq U_i)\\circ p_d$, with the identification $Rv^!=Lv^*$ for open immersions and isomorphisms $v$. These compositors are conjugates of the compact-support compositors, so the associativity clause of [thm-sf-comp-composition] shows that the two ways of composing them from $Rj_T^!R\\pi^!$ to $Lu^*Rp_d^!$ agree. Therefore the restriction to $T$ of the hypothesis $c|_{V_i}=\\Gamma_{p_{d,i},A_{U_i}}$ reads $c|_T=\\epsilon_u^{-1}\\circ Lu^*(Lw^*\\Gamma_{p_{d,i},A_{U_i}})$, with the canonical twist identification, and by (b) $c|_T=\\epsilon_u^{-1}\\circ Lu^*\\Gamma_{p_d,A_B}$. (d) Compose (a) and (c): $\\epsilon_u$ cancels its inverse and $Lu^*(\\Gamma^{-1})Lu^*\\Gamma=1$. Consequently $a|_T=\\Pi_\\pi|_T\\circ c|_T=1_{Q|_T}$ for every member of the refined cover. No scalar, frame or orientation is selected in making this cancellation.",
+   "uses": [
+    "lem-pur-diagonal-dnc-chart-normalization",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-pur-projection-purity-agreement",
+    "lem-pur-dualizing-unit-composite",
+    "pur9-def-upper-shriek-composition",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3–4: restriction of the diagonal orientation and agreement with the coordinate-adjunction orientation; local-to-global consequence for normalized bundle charts."
+   }
+  },
+  {
+   "text": "The finite Tate object $L=A_V(d)$ of [def-coefficient-twists-detailed] is an ordinary module sheaf in degree zero, and $Q=L[2d]$. Apply the shift $[-2d]$ to $a$ and the identity and use the canonical inverse-shift identifications, obtaining two endomorphisms $b,1$ of $L[0]$. Exact open restriction commutes with shifts, so the preceding step gives $b|_T=1$ on the same open cover. Both source and target have cohomology only in degree zero. The injectivity clause of [lem-pur-degree-zero-derived-map-gluing], with $M=N=L[0]$, therefore gives $b=1$. Shifting back gives $a=1_Q$: shifts are inverse automorphisms in [def-weil-triangulated-category]. Step 1 now proves the required equality. For $d=0$ the Tate sheaf and shifts are the units, and the chart theorem uses its identity normalization. For empty $Z$ the total space and refined cover are empty and the cited gluing theorem explicitly includes that case. Disconnected bases need no connectedness argument. No use was made of $A$ being a field or of any divisibility condition on $n$.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-degree-zero-derived-map-gluing",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3–4: restriction of the diagonal orientation and agreement with the coordinate-adjunction orientation; local-to-global consequence for normalized bundle charts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "lem-pur-dualizing-unit-composite",
+  "def-weil-finite-type-morphism",
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sbc-lem-affine-space-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-pur-diagonal-dnc-chart-normalization",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-pur-projection-purity-agreement",
+  "pur9-def-upper-shriek-composition",
+  "thm-sf-comp-composition",
+  "def-coefficient-twists-detailed",
+  "lem-pur-degree-zero-derived-map-gluing",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Steps 3–4: restriction of the diagonal orientation and agreement with the coordinate-adjunction orientation; local-to-global consequence for normalized bundle charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|upperShriek|dualizingComplex|TateTwist",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of the canonical diagonal smooth purity orientation and a vector bundle comparison can be checked on trivializing opens by reducing their ratio to a scalar endomorphism of a shifted Tate line.",
+   "results": "8 hits: Trivialization.localFrame.congr_simp, Trivialization.ext', Trivialization.ext'_iff, MDifferentiableWithinAt.change_section_trivialization, Trivialization.linearMapAt.congr_simp, Trivialization.contMDiffWithinAt_snd_comp_iff₂, Pretrivialization.mk.congr_simp, mdifferentiableOn_coordChangeL; ordinary scheme or topological/manifold bundle comparisons, not the stated exceptional-pullback comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.comp\"",
+   "results": "12 hits: CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_map_bijective_iff, CategoryTheory.Adjunction.compCoyonedaIso, CategoryTheory.Adjunction.compUliftCoyonedaIso, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.compYonedaIso, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_unit_app; generic adjunction composition/counit only, not normalized geometric purity",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift the equality of a diagonal exceptional pullback orientation and a prescribed affine space comparison from bundle charts to the whole vector bundle by the endomorphism sheaf of its rank one Tate twist.",
+   "results": "8 hits: VectorBundleCore.inCoordinates_eq, VectorBundle.pullback, hom_trivializationAt, ContMDiffVectorBundle.pullback, hom_trivializationAt_baseSet, hom_trivializationAt_apply, Trivialization.pullback_linear, Bundle.Pullback.lift_mk; ordinary scheme or topological/manifold bundle comparisons, not the stated exceptional-pullback comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let a vector bundle have a specified derived isomorphism from the shifted Tate line to its exceptional dualizing object. If this map restricts on a trivializing Zariski cover to the ordered affine space purity comparisons, it equals the canonical diagonal smooth purity map.",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly, AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe, AlgebraicGeometry.AffineSpace.homOverEquiv, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop, AlgebraicGeometry.AffineSpace.homOfVector_over, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal; ordinary scheme or topological/manifold bundle comparisons, not the stated exceptional-pullback comparison",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, CategoryTheory.Functor.Faithful",
+   "results": "OK, 0 hits: ; loogle: unknown identifier 'CategoryTheory.DerivedCategory'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality of a specified shifted Tate line isomorphism with diagonal smooth purity can be checked on a Zariski trivializing cover of a vector bundle.",
+   "results": "OK, 8 hits: AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|upperShriek|dualizingComplex|TateTwist",
+   "results": "OK, 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two derived isomorphisms from the same shifted finite Tate sheaf to a dualizing object agree if their restrictions to a Zariski open cover agree.",
+   "results": "OK, 8 hits: AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage, CategoryTheory.Functor.IsCoverDense.Types.sheafIso, CategoryTheory.Functor.IsCoverDense.sheafIso_hom_val, CategoryTheory.Functor.IsCoverDense.Types.sheafIso_hom_val, CategoryTheory.Functor.IsCoverDense.Types.presheafIso, CategoryTheory.Sheaf.isLocallySurjective_of_iso, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between shifted sheaves in the derived category are ordinary sheaf homomorphisms and their equality is local on an open cover.",
+   "results": "OK, 8 hits: TopCat.Sheaf.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, CategoryTheory.Sheaf.hom_ext, CategoryTheory.sheafHom, PresheafOfModules.homEquivOfIsLocallyBijective, CategoryTheory.Sheaf.hom_ext_iff, SheafOfModules.hom_ext, CategoryTheory.Presheaf.IsSheaf.hom_ext",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"singleFunctor\"",
+   "results": "OK, 12 hits: DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctorIsoCompQ_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctor.*[Ff]ull|singleFunctor.*[Ff]aithful|hom_ext",
+   "results": "OK, 5 hits: Mathlib/CategoryTheory/Triangulated/SpectralObject.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"singleFunctor\"",
+   "results": "OK, 12 hits: DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.singleFunctorsPostcompQIso, DerivedCategory.singleFunctorIsoCompQh, DerivedCategory.singleFunctorsPostcompQhIso, DerivedCategory.singleFunctorIsoCompQ_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf, single-functor or scheme facts do not state this normalized diagonal-purity equality"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-finite-coefficient-smooth-purity",
+  "date": "2026-10-22",
+  "group": "Q83"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-finite-coefficient-smooth-purity",
+   "place": "Diagonal orientation factor; unit proof second paragraph, Agreement on the model; retained split Step 6: chart restrictions and shifted-Tate-line scalar uniqueness",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-vector-model-chart-descent",
+  "worker": "stage1",
+  "summary": "Proved the chart-normalized uniqueness assertion without new nodes: identify the coefficient-unit smooth map with the inverse diagonal orientation; compare the diagonal orientation and c on finite-type affine refinements using the existing all-level chart normalization; unshift their composite and use degree-zero derived-map gluing. Checked every cited statement, avoided the circular general base-change theorem, and retained the statement and all coefficient levels.",
+  "blueprint": "Realizes thm-pur-finite-coefficient-smooth-purity retained split Step 6, the Agreement on the model paragraph of the master unit, through the current main-20261015 diagonal chart normalization Steps 3–4 and degree-zero local-to-global uniqueness.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "def-asd-vector-bundle-zero-section",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "Generic scheme geometry, coefficient-sheaf or triangulated-category infrastructure used to verify chart domains and undo a common shift; does not replace the diagonal/DNC proof route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme fact (Mathlib leaf): the possibly non-affine trivializing open U_i is Noetherian, so the projection-purity agreement applies over it (reviewer repair of Step 3)."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic scheme fact (Mathlib leaf): U_i is of finite type over k (reviewer repair of Step 3)."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Associativity of the compact-support compositor, conjugated, to restrict the hypothesis on c from V_i to T; six-functor foundation already accepted on this unit route (reviewer repair of Step 3)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-finite-type-morphism",
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sbc-lem-affine-space-smooth",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-coefficient-twists-detailed",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "thm-sf-comp-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-e0c28a832",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-e0c28a832 (reviewer sub-agent of L); spot-checked: First split of lem-pur-vector-model-chart-descent (0 new nodes). The statement is unchanged and true. It is not on the 2026-10-18/19 dropped list, live still has it unsplit, it cites no SGA, and none of the cited nodes reaches the item (no cycle). I read the master sk-thm-smooth-purity 'Agreement on the model' paragraph (l.26-30, 74-94) and Steps 1-4 of the main-20261015 sk-prop-sp-orientation-charts proof.\n\nSteps 1, 2 and 4 hold.\n- Step 1: the unit clause of lem-pur-dualizing-unit-composite makes θ_{π,A} the unitor, so γ_{π,A} = Π^{-1}.\n- Step 2: finite-type affine refinement, T ≅ A^d_B, π affine hence separated, smooth chartwise, and (e) composition. These are the hypotheses of the chart theorem.\n- Step 4: after unshifting, both objects are degree-zero; injectivity in lem-pur-degree-zero-derived-map-gluing gives the result, including the empty cover.\n\nFault (C4/E5) in Step 3. The hypothesis on c is over Zariski opens U_i that need not be affine. The step restricts Γ_{p_{d,i}} to Γ_{p_d,B} citing the last clause of lem-pur-diagonal-dnc-chart-normalization, but that clause only covers affine V and U. No node states open base change of the all-n Γ.\n\nRepair: Step 3 is rewritten.\n- (b) U_i is Noetherian, of finite type and separated (two Mathlib leaves plus (e)). lem-pur-projection-purity-agreement on U_i together with the Step-1 unitor computation gives Γ_{p_{d,i}} = ϑ_{p_{d,i}}^{-1}. The chart theorem for p_{d,i} with u = id over affine B then gives Lw^*Γ_{p_{d,i}} = Γ_{p_d,B}.\n- (c) The restriction of the ε identifications to T follows from the exceptional compositors and the associativity clause of thm-sf-comp-composition.\n- proof_deps updated; three split_report.tool_uses added (two Mathlib leaves and comp-composition, already accepted as on-route for this unit).\n\nNot duplicates: det-sp-orientation-vector-bundle and det-sp-orientation-charts are E = Q_ℓ only; lem-pur-composition-model-orientation-descent is the composition analogue. Edge cases checked: d = 0, empty or disconnected Z, n = 1, ramified E, and a unit rescaling of c.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VectorModelChartDescent",
+  "declaration": "WeilConjectures.PurityFiniteSetting.vector_model_chart_descent",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.vectorModelDualizing",
+   "WeilConjectures.PurityFiniteSetting.vectorModelChartRestriction",
+   "WeilConjectures.PurityFiniteSetting.vectorModelTensorUnit",
+   "WeilConjectures.PurityFiniteSetting.vectorModelSmoothUnit",
+   "WeilConjectures.PurityFiniteSetting.VectorModelChartDescentConclusion",
+   "WeilConjectures.PurityFiniteSetting.vector_model_chart_descent"
+  ],
+  "file": "lean/Sheaf/Paper/VectorModelChartDescent.lean",
+  "statement": "theorem vector_model_chart_descent (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum) (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E] (n : ℕ) (Z : Scheme.{u}) (aZ : Z ⟶ Spec (.of F.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] [IsSeparated aZ] (d : ℕ) (M : Z.Modules) [M.IsFiniteLocallyFreeOfRank d] : VectorModelChartDescentConclusion.{u, w} F C E n Z aZ d M",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of immutable head 52033ad4eab2: canonical chart maps are owned by def-pur-chart-unit-affine-comparison; chart geometry, pullback site comparison and coefficient setting use their explicit definition owners. The reviewed theorem signature and all five concrete helper bodies are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f61309c81",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery of NL 52033ad4 RETURN H2; module body byte-identical (imports only), so the earlier full maths reading holds (all levels n+1, any finite E, Z sep. finite type, π=VectorBundleZeroSection.π, Q=diagonalTwist, ω=diagonalDualizing, c universal, I:Type w cover with recorded frames, canonical restriction vs chartGamma, non-vacuous HEq, γ_{π,A}=c.hom; edge cases d=0, empty/disconnected Z, non-affine U_i ok). All return points repaired: new existing:true def node def-pur-chart-unit-affine-comparison on DiagonalDncChartNormalization owns chartUnitPullback/chartProjectionUnitSource*/chartCoefficientUnit_finiteTor/chartGamma/chartOrdinaryBaseChange (real data, ∃!-pinned transport, theorem stmt_deps diagonal-dualizing-object/cohomological-smoothness genuine as in landed def-pur-chart-diagonal-assembly-data); lem-pur-diagonal-dnc-chart-normalization moved to proof_deps only; def-amb-vector-integration-charts, def-pur-section-pullback-site-comparisons, def-pur-affine-diagonal-tate-coordinates cited. Mechanical finding: lem-pur-vector-bundle-finite-type-frames stmt_dep is genuine (.choose_spec supplies the SmoothOfRelativeDimension instance needed to type the statement; no def owner) → PASS on that point. Advisories: chartOrdinaryBaseChange also re-exported by the assembly-data abbrev; Dnc.compactifiable/diagonalDualizing*/affineTraceTower/projectiveLineTraceTransport reached transitively. No file changed, nothing compiled; worker reports clean compiles."
+ }
+}

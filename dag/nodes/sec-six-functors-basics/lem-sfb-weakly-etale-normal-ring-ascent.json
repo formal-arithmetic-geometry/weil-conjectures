@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-weakly-etale-normal-ring-ascent",
+ "kind": "statement",
+ "title": "Normality ascends along arbitrary weakly etale ring maps",
+ "statement": "Let $A,B$ be commutative rings, possibly in different universes, and let $f:A\\to B$ be weakly etale [def-weil-pbc-ind-etale-algebra], meaning that $f$ and the multiplication map $B\\otimes_A B\\to B$ are flat. Suppose $A$ is a normal ring [def-weil-pbc-normal-ring]: for every prime $\\mathfrak p\\subset A$, the localization $A_{\\mathfrak p}$ is a domain integrally closed in its fraction field. Then $B$ is a normal ring: for every prime $\\mathfrak q\\subset B$, the localization $B_{\\mathfrak q}$ is a domain integrally closed in its fraction field. There is no Noetherian, domain, finite-presentation, locality or faithful-flatness assumption on $A$ or $B$. The zero target ring is permitted; if $A=0$, any unital $A$-algebra $B$ is also zero.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Agent extraction of the returned normal-chart proof, Steps 3 and 5: Tag 097Z (proetale-proposition-weakly-etale), combined with algebra.tex Tags 033C (algebra-lemma-normal-goes-up), 037D (algebra-lemma-colimit-normal-ring), and 033G (algebra-lemma-descent-normal). The combined ascent assertion is derived, not a verbatim assertion of 097Z."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Work in a universe containing both rings (replace either by its universe lift if required). The lift is a ring isomorphism: primes, their localizations, monic equations and their solutions correspond, so normality is unchanged; the tensor products and their modules correspond too, preserving the given flatness conditions. Apply [lem-weil-pbc-existing-weakly-etale-indetale-refinement] to the given weakly etale map. Obtain $g:B\\to C$ faithfully flat and ind-etale with $g\\circ f:A\\to C$ ind-etale. Faithful flatness is required only of this refinement, not of $f$.",
+   "uses": [
+    "lem-weil-pbc-existing-weakly-etale-indetale-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097Z, proetale-proposition-weakly-etale."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-ind-etale-algebra], present the composite algebra as $C\\cong\\varinjlim_{i\\in I}C_i$, for a small filtered diagram of finitely presented etale $A$-algebras. Each $A\\to C_i$ is an etale ring map, so $\\operatorname{Spec}C_i\\to\\operatorname{Spec}A$ is etale in the sense of Stacks 02GI. For every $i$, apply [lem-weil-pbc-etale-over-normal-ring-normal] to $A\\to C_i$ and the assumed normality of $A$. Thus every $C_i$ is normal. This uses normal rings, not the stronger assumption that $A$ is a domain.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033C, algebra-lemma-normal-goes-up, etale case."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-normal-ring] to the composite of this filtered diagram with the forgetful functor to commutative rings; the forgetful functor from $A$-algebras to rings preserves filtered colimits, as the ring colimit carries the induced $A$-algebra structure through any $\\iota_i$ (independent of $i$ since $I$ is connected) and has the universal property among $A$-algebra cocones. The node gives normality of its colimit, hence of $C$ under the displayed isomorphism. No injectivity of transition maps or Noetherian hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 037D, algebra-lemma-colimit-normal-ring."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-faithfully-flat-normal-ring-descent] to $g:B\\to C$, faithfully flat by step 1, with normal target by step 3. It gives exactly that every $B_{\\mathfrak q}$ is an integrally closed domain. Carry this back across a universe lift if one was used. If $B=0$ there are no primes and the conclusion is vacuous; if $A=0$, unitality gives $1_B=0_B$, so $B=0$.",
+   "uses": [
+    "lem-sfb-faithfully-flat-normal-ring-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 033G, algebra-lemma-descent-normal."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-sfb-faithfully-flat-normal-ring-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Combination of proetale.tex Tag 097Z with algebra.tex Tags 033C, 037D and 033G, following the extraction recorded in blueprint.from.place; the statement itself is More on Morphisms Tag 0950 (affine case), whose own proof goes through strict henselizations (Tags 094Z, 06DI) instead."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(WeaklyEtale|IndEtale).*(normal|IsIntegrallyClosed)|(normal|IsIntegrallyClosed).*(WeaklyEtale|IndEtale)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: etale/formally-etale interfaces and localization criteria do not assert normality ascent along an arbitrary weakly etale map"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.WeaklyEtale, IsIntegrallyClosed",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: etale/formally-etale interfaces and localization criteria do not assert normality ascent along an arbitrary weakly etale map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly etale algebra over a normal commutative ring is normal, without any Noetherian hypothesis",
+   "results": "8 hits: Algebra.instEtaleOfIsStandardEtale, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale, RingHom.Etale.toAlgebra, StandardEtalePair.instEtaleRing, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.IsStandardEtale, Algebra.Etale.formallyEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: etale/formally-etale interfaces and localization criteria do not assert normality ascent along an arbitrary weakly etale map"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality ascends along weakly etale ring homomorphisms: every prime localization of the target is an integrally closed domain",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: LeanSearch rate limit exceeded"
+  },
+  {
+   "tool": "grep",
+   "query": "normal|integrallyClosed",
+   "results": "0 hits: ; searched Mathlib/RingTheory/Etale",
+   "date": "2026-10-22",
+   "verdict": "no match: etale/formally-etale interfaces and localization criteria do not assert normality ascent along an arbitrary weakly etale map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every prime localization of A is an integrally closed domain and A to B and its multiplication map are flat, every prime localization of B is an integrally closed domain",
+   "results": "8 hits: IsIntegrallyClosed.of_localization, IsIntegrallyClosed.of_localization_maximal, IsLocalization.Away.integralClosure, IsIntegrallyClosed.of_isLocalization_maximal, isIntegrallyClosed_of_isLocalization, IsLocalization.integralClosure, instFlatAtPrime, IsIntegrallyClosed.of_localization_submonoid",
+   "date": "2026-10-22",
+   "verdict": "no match: etale/formally-etale interfaces and localization criteria do not assert normality ascent along an arbitrary weakly etale map"
+  },
+  {
+   "tool": "grep",
+   "query": "(WeaklyEtale|IndEtale).*(normal|IsIntegrallyClosed)|(normal|IsIntegrallyClosed).*(WeaklyEtale|IndEtale)",
+   "results": "{\"t\": \"2026-10-22T07:13:53Z\", \"tool\": \"grep\", \"query\": \"(WeaklyEtale|IndEtale).*(normal|IsIntegrallyClosed)|(normal|IsIntegrallyClosed).*(WeaklyEtale|IndEtale)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale or formally etale maps, flat localizations, or integral closure of localizations; none states normality ascent for arbitrary weakly etale maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normality ascends along weakly etale ring homomorphisms without Noetherian hypotheses",
+   "results": "{\"t\": \"2026-10-22T07:13:53Z\", \"tool\": \"leansearch\", \"query\": \"Normality ascends along weakly etale ring homomorphisms without Noetherian hypotheses\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.FormallyEtale\", \"Algebra.IsEtaleAt.comp\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.Etale.stableUnderComposition\", \"Algebra.FormallyEtale.instFormallySmooth\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"1c472aa37e0ff577\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale or formally etale maps, flat localizations, or integral closure of localizations; none states normality ascent for arbitrary weakly etale maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.WeaklyEtale, IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-22T07:13:53Z\", \"tool\": \"loogle\", \"query\": \"Algebra.WeaklyEtale, IsIntegrallyClosed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale or formally etale maps, flat localizations, or integral closure of localizations; none states normality ascent for arbitrary weakly etale maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A weakly etale algebra over an arbitrary normal commutative ring is normal at every prime",
+   "results": "{\"t\": \"2026-10-22T07:14:05Z\", \"tool\": \"leanfinder\", \"query\": \"A weakly etale algebra over an arbitrary normal commutative ring is normal at every prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePair.instFormallyEtaleRing\"], \"digest\": \"2f05a98afb445598\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale or formally etale maps, flat localizations, or integral closure of localizations; none states normality ascent for arbitrary weakly etale maps."
+  },
+  {
+   "tool": "grep",
+   "query": "normal|integrallyClosed",
+   "results": "{\"t\": \"2026-10-22T07:20:06Z\", \"tool\": \"grep\", \"query\": \"normal|integrallyClosed\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale or formally etale maps, flat localizations, or integral closure of localizations; none states normality ascent for arbitrary weakly etale maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every prime localization of A is an integrally closed domain and A to B has flat multiplication map and is flat, then every prime localization of B is integrally closed",
+   "results": "{\"t\": \"2026-10-22T07:20:17Z\", \"tool\": \"leanfinder\", \"query\": \"If every prime localization of A is an integrally closed domain and A to B has flat multiplication map and is flat, then every prime localization of B is integrally closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegrallyClosed.of_localization\", \"instFlatAtPrime\", \"IsLocalization.Away.integralClosure\", \"RingHom.Flat.ofLocalizationPrime\", \"IsLocalization.integralClosure\", \"isIntegrallyClosed_of_isLocalization\", \"IsIntegrallyClosed.of_localization_maximal\", \"IsIntegrallyClosed.of_isLocalization_maximal\"], \"digest\": \"f17f8bc09f4a2525\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern etale or formally etale maps, flat localizations, or integral closure of localizations; none states normality ascent for arbitrary weakly etale maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-root-limit-normal-charts",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: normality on weakly etale root-limit charts; extract the ind-etale refinement, normal etale stages, filtered-colimit normality and faithfully flat descent in returned Steps 3 and 5.",
+   "via": [
+    "lem-sfb-snc-root-limit-normal-charts",
+    "lem-sfb-root-tower-lisse-morphism-extension",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-weakly-etale-normal-ring-ascent",
+  "worker": "stage1",
+  "summary": "Reused the existing existential 097Z refinement, etale normality ascent, arbitrary filtered-colimit normality, and same-unit faithfully flat normality descent. The four-step assembly imposes no extra assumptions. Checked the partial project theorem, all cited node statements, source tags, universes, zero rings and non-domain normal bases. No new nodes.",
+  "blueprint": "Inherited Paragraph (3), open direct image: normality on weakly etale root-limit charts, through the recorded root-limit-normal-chart chain. Steps 1-4 supply exactly the ind-etale refinement, normal etale stages, filtered-colimit normality and faithfully flat descent identified in blueprint.from.place. Ancestor command returns None for the inherited chain; its null ancestor is retained. Whole-blueprint search found no statement of arbitrary weakly etale normality ascent.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+    "why": "Generic 097Z ring-theoretic refinement supplies a faithfully flat target with ind-etale composite; current unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic 033C etale-case ascent makes the finitely presented stages normal; no hypothesis of the current unit replaces this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-normal-ring",
+    "why": "Generic 037D arbitrary filtered-colimit normality passes from the etale stages to the refinement; no node of the current unit supplies that result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-existing-weakly-etale-indetale-refinement",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-filtered-colimit-normal-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-c55d21c2c",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-c55d21c2c (reviewer sub-agent of L); spot-checked: I read the item, all six cited statements and the Stacks sources at the cited places: 097Z proetale.tex:1585, 033C algebra.tex:46563, 037D algebra.tex:8312 and 033G algebra.tex:46684. The 4-step proof is correct. Step 1, the 097Z refinement lemma, gives g:B→C faithfully flat and ind-etale with A→C ind-etale; the universe lift is bookkeeping. Step 2, the ind-etale definition together with etale-over-normal-ring-normal (033C), works for an arbitrary normal base. Step 3, filtered-colimit-normal-ring (037D), needs no condition on the transition maps. Step 4, the faithfully flat descent node (033G), is applied to g. Edge cases checked: B=0, A=0, the projection k×k→k, Z→Z[1/2], Z→Q̄; Z[i] is excluded because it is ramified. There are no new nodes. The item is not a DAG duplicate: weak-etale-integral-closure, exc-weakly-etale-finite-residue-model and etale-colimit-normal-local-domain all assume more. The three off-unit generic algebra tool uses are accepted. Fault B5/C5: source and proof_origin say no single source states the result, but Stacks More on Morphisms Tag 0950 (more-morphisms-lemma-normal-goes-up, line 19151) is exactly the item in the affine case. Fix: source now cites 0950 and the 097Z/033C/037D/033G route stays recorded. Clarification C3: step 2 now says that an etale ring map gives an etale Spec map (02GI), and step 3 says that the forgetful functor from A-algebras to rings preserves filtered colimits, matching the cited node's colimit in rings. Statement, deps and uses are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeaklyEtaleNormalRing",
+  "declaration": "RingHom.WeaklyEtale.isNormalRing",
+  "file": "lean/Sheaf/RingTheory/WeaklyEtaleNormalRing.lean",
+  "statement": "theorem WeaklyEtale.isNormalRing {A : Type u} {B : Type v} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.WeaklyEtale) (hA : ∀ (p : Ideal A) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∀ (q : Ideal B) [q.IsPrime], IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6750a4285",
+  "group": "Q128",
+  "result": "pass",
+  "note": "RingHom.WeaklyEtale.isNormalRing matches the node clause by clause: independent universes u v, f.WeaklyEtale is toAlgebra over Mathlib Algebra.WeaklyEtale (flat plus lmul' flat), and hA and the conclusion use the inline normal-ring form of def-weil-pbc-normal-ring (IsDomain ∧ IsIntegrallyClosed of Localization.AtPrime at every prime). No extra hypotheses. Zero rings covered. lean.statement verbatim. Only the lean field differs from the live node. Proof-dep decls exist and match steps 1-4 (exists_indEtale_comp, Etale.isNormalRing, isNormal_of_filtered_colimit, normal_ring_of_faithfullyFlat). No existing match or name clash. Docstrings carry Tag 0950, the 097Z/033C/037D/033G route, the blueprint id and the 4 steps. Only sorry is the proof. Imports follow the public/plain rule. Not recompiled, per instruction; worker reports rc 0."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261023T131802-L-2151522",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "RingHom.WeaklyEtale.isNormalRing"
+  ],
+  "sorry_after": []
+ }
+}

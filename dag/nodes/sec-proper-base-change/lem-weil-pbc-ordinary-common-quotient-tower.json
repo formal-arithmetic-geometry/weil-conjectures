@@ -42,23 +42,28 @@
    }
   },
   {
-   "text": "Let T be the quotient sheaf B/(I B). The map R→T kills I. Since q:R→S is locally surjective with kernel I, local lifts define a unique ring map S→T, independent of lifts and compatible with gluing, addition and multiplication. The maps B→T and S→T agree on R, so the stipulated pushout gives a map from its last corner S to T. Conversely b kills I B and gives T→S. Both composites are identities by quotient and pushout uniqueness. Thus S=B/(I B). For a B-module M, (I B)M=IM because (φ(j)b)x=φ(j)(bx); the reverse inclusion uses b=1. The two sheaf tensor quotients give inverse S-linear maps sending the image of s tensor x to that same pure section. These formulas commute with module maps. Local scalar lifts show the two quotient S-actions agree. Transport along the prescribed ordinary object equalities to obtain the normalized natural isomorphism.",
+   "text": "Form the pushout P of the underlying ring presheaves. Evaluation identifies P(U) with B(U) tensor_R(U) S(U). Sheafify P as a ring presheaf; the sheafification adjunction and the stipulated ring-sheaf pushout show that its induced map to S is an isomorphism. Thus the presheaf multiplication map P→S is locally injective. The tensor-ring identification proves that the module-presheaf multiplication B tensor_R Res_b(S)→Res_b(S) is locally injective, and 1 tensor s gives pointwise surjectivity. Sheafification makes this multiplication an isomorphism. Identify it with the ordinary adjunction counit on Res_b(S) using the unit formula at 1 tensor s. Apply the proved ordinary flat coefficient comparison, whose only hypothesis is invertibility of that counit. A standard-universe normalization supplies its auxiliary presentation. Finally the object and map equalities of the prescribed cochain models give natural isomorphisms to that presentation; cancelling these transports proves the required pure-section formula. No flatness assumption, sectionwise surjectivity, or choice of local lifts is used in this comparison.",
    "uses": [
     "def-weil-pbc-common-quotient-tower-presentation",
     "def-pc-sheaf-restrict-scalars",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pbc-ordinary-flat-coefficient-comparison",
+    "lem-sfb-successive-derived-quotient-normalization"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
    }
   },
   {
-   "text": "For an adjacent scalar transition t:S_(n+1)→S_n, sheafify the balanced map s tensor x↦t(s) tensor x. Compatibility of q with t gives R-linearity, the presheaf restriction formula gives naturality on the site, and module maps give naturality in M. Define each unit by x↦1 tensor x. The transition of this section is again 1 tensor x, proving the natural-transformation equation. The quotient calculation in step 1 gives the epi and kernel assertions. The compatibility of units with transitions is proved in Lean from their formulas: a transition preserves the scalar 1, and morphisms are determined on sections. Epimorphy and kernels are already proved independently in steps 1 and 2; they are not retained as fields in the holed existence statement. The units are now explicitly constructed in Lean from the sectionwise extension unit composed with the module-sheafification adjunction unit; naturality is sheafification-unit naturality, transported along the prescribed object equalities using the prescribed map equalities. They are not chosen fields of the retained existence statement.",
+   "text": "For q:R→S and t:S→T, use the ordinary extension/restriction adjunction for q. Transpose the explicit unit for q followed by t (more precisely the unit for q≫t), using the canonical composition isomorphism for restrictions, to construct a natural S-linear map E_q→E_(q≫t) Res_t. Restrict to R and compose with the restriction-composition isomorphism. The adjunction equation gives the formula on 1 tensor x. S-linearity and the identity η(s tensor x)=s·η(1 tensor x) give the formula on every pure tensor. Transport to the prescribed cochain models by their object and map equalities. Naturality of the tower projections identifies q_(n+1)≫t_n with q_n. Choosing these proved maps and the comparisons of step 3 constructs OrdinaryCommonQuotientTower. Its explicitly constructed units, epimorphy, kernel and compatibility remain as independently proved above.",
    "uses": [
     "def-weil-pbc-common-quotient-tower-presentation",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-sfb-successive-derived-quotient-normalization"
    ],
    "elementary": true,
    "source": {
@@ -82,7 +87,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "T5 extracted the underived quotient calculation (original item proof steps 2–3 and the underived part of step 5); sources as above. T5 proved quotient-unit epimorphy, the full local ideal-product kernel calculation via local tensor bijectivity and quotient tensors, and transition compatibility. The retained existence theorem supplies normalized ordinary maps only. Uniqueness of every retained map is also formally proved by cancellation of the epic quotient units. The quotient units and their naturality are explicit constructions; only the ordinary comparison and coefficient transitions remain in the existence statement."
+  "place": "T5 extracted the underived quotient calculation (original item proof steps 2–3 and the underived part of step 5); sources as above. T5 proved quotient-unit epimorphy, the full local ideal-product kernel calculation via local tensor bijectivity and quotient tensors, and transition compatibility. The retained existence theorem supplies normalized ordinary maps only. Uniqueness of every retained map is also formally proved by cancellation of the epic quotient units. The quotient units and their naturality are explicit constructions; only the ordinary comparison and coefficient transitions remain in the existence statement. C3 completed the retained existence theorem: sheafified presheaf pushouts prove the multiplication counit invertible, the existing ordinary comparison gives the normalized isomorphism, and adjunction gives coefficient transitions. All auxiliary lemmas are proved privately in the same module; no new holes or nodes."
  },
  "mathlib_searches": [
   {
@@ -166,7 +171,10 @@
   "lem-weil-pbc-tensor-local-bijection-universes",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-pur-derived-change-of-rings",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pbc-ordinary-flat-coefficient-comparison",
+  "lem-sfb-successive-derived-quotient-normalization"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -179,13 +187,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T5",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261021T120555-L-3913330",
+  "landing": "20261022T113851-L-336679",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

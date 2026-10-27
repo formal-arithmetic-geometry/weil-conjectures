@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-neron-lft-weil-restriction-geometry",
+ "kind": "statement",
+ "title": "Scheme geometry of Weil restriction of a Néron lft-group",
+ "statement": "Let $D\\hookrightarrow D'$ be a finite faithfully flat map of Dedekind domains, $E=\\operatorname{Frac}D$, $E'=\\operatorname{Frac}D'$, $S=\\operatorname{Spec}D$ and $S'=\\operatorname{Spec}D'$ [def-weil-affine-spectrum]. Finite means finite as a module [def-weil-finitely-generated-module], and faithfully flat means [def-weil-pbc-faithfully-flat-ring-map]. Let $V'/E'$ be a smooth separated commutative finite-type group scheme and let $M'/S'$ be a Néron lft-model of $V'$ [def-pc-scheme, def-sbc-smooth-morphisms]. This means that $M'$ is a smooth separated $S'$-group scheme with a specified generic-fibre isomorphism $M'_{E'}\\simeq V'$ [def-pc-base-change], and for every smooth $S'$-scheme $Y$ restriction gives a bijection $\\operatorname{Hom}_{S'}(Y,M')\\simeq\\operatorname{Hom}_{E'}(Y_{E'},V')$. There exists a smooth separated commutative $S$-group scheme $W$, locally of finite type, with natural bijections\n$$\\operatorname{Hom}_S(X,W)\\simeq\\operatorname{Hom}_{S'}(X\\times_SS',M')$$\nfor all $S$-schemes $X$. These bijections identify the group operations with pointwise operations on the right. Formation of $W$ and this bijection commutes with arbitrary base change on $S$; in particular $W_E$ represents $T\\mapsto\\operatorname{Hom}_{E'}(T\\times_EE',V')$. The $E$-group $W_E$ is of finite type. The union $W^0$ of the connected components containing the identity in the geometric fibres of $W\\to S$ is an open subgroup scheme, and $W^0\\to S$ is of finite type. Here connected components are maximal connected subsets of the underlying fibre spaces [def-weil-connected-scheme], and a geometric fibre is a fibre after extension of its residue field to an algebraic closure [def-weil-geometric-fibre]. A Dedekind domain means a Noetherian integrally closed domain of Krull dimension one. A commutative group scheme over the indicated base has multiplication, identity and inverse morphisms satisfying the commutative group diagrams, as in the field case [def-sc-group-scheme]; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Locally of finite type means that affine coordinate algebras are locally finitely generated over those of the base [def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 7.6 Theorem 4 and Proposition 5, printed pp.194–197 (PDF pages 200–203); 10.1 following Definition 1 and proof of Proposition 4, printed pp.290–291 (PDF pages 296–297), affine neighbourhoods and finite-type identity component. Local PDF WANTED; primary-source scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-geometric-fibre",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $p:S'\\to S$. The finite-module hypothesis identifies $p$ as finite by [def-weil-finite-integral-morphism]; faithful flatness implies flatness, and [lem-weil-pbc-flat-ring-map-iff-flat-affine] makes $p$ flat. Since $D$ is Noetherian, $S$ is locally Noetherian by [pqf-def-locnoeth]. Apply [lem-sbc-finite-flat-affine-basis] and then [lem-weil-pbc-finite-free-algebra-spectrum] on its affine base cover: $p$ is finite locally free, since that property is local on the base in [def-pc-finite-locally-free]. By [lem-weil-pbc-localization-base-change], $D'\\otimes_DE$ is the localization $(D\\setminus\\{0\\})^{-1}D'$ and is finite-dimensional over $E$ by [lem-trf-localization-finite-ring-map]. It is a domain. Multiplication by a nonzero element on this finite-dimensional vector space is injective and therefore surjective, so this localization is a field. It contains $D'$ and is contained in $E'$, hence equals $E'$. Thus $S'\\times_S\\operatorname{Spec}E=\\operatorname{Spec}E'$ by [lem-weil-pbc-fibre-product-affine-spectra].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "pqf-def-locnoeth",
+    "lem-sbc-finite-flat-affine-basis",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "def-pc-finite-locally-free",
+    "lem-trf-localization-finite-ring-map",
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.6 Theorem 4, finite locally free hypothesis; elementary generic-base calculation for 10.1 Proposition 4."
+   }
+  },
+  {
+   "text": "By [lem-sfb-neron-lft-finite-set-affine], each finite set of points of $M'$ has an affine open neighbourhood. In particular this applies to the image of any finite set of points of $M'\\times_S\\operatorname{Spec}\\kappa(s)$, even when several points of $S'$ lie over $s$. With the finite locally free map from step 1, [lem-sfb-weil-restriction-affine-neighbourhood-criterion] supplies the scheme $W$ and its natural restriction bijections. Apply [lem-sfb-weil-restriction-geometric-properties] to $M'$: it is smooth and separated by the Néron hypothesis, hence $W$ is smooth and separated and locally of finite type.",
+   "uses": [
+    "lem-sfb-neron-lft-finite-set-affine",
+    "lem-sfb-weil-restriction-affine-neighbourhood-criterion",
+    "lem-sfb-weil-restriction-geometric-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 Proposition 4 proof, first sentence, with 7.6 Theorem 4 and Proposition 5."
+   }
+  },
+  {
+   "text": "For $u,v:X\\to W$, let $u',v':X\\times_SS'\\to M'$ correspond under the restriction bijection, and assign to $(u,v)$ the element corresponding to $m'\\circ(u',v')$. Assign inversion using $i'\\circ u'$ and the identity using the constant map through $e'$. These assignments are natural in $X$, so [lem-galois-yoneda-fully-faithful], in the category of $S$-schemes, gives morphisms $m:W\\times_SW\\to W$, $i:W\\to W$, and $e:S\\to W$. For every $X$, the restriction bijection sends the two sides of each associativity, unit, inverse and commutativity diagram to the corresponding equal maps into $M'$. Injectivity of the bijections, followed by Yoneda faithfulness, proves all the diagrams. The resulting commutative group law is exactly the pointwise law required.",
+   "uses": [
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.6, discussion preceding Proposition 2, printed p.192 (PDF p.198)."
+   }
+  },
+  {
+   "text": "For any $T\\to S$ and any $T$-scheme $X$, a $T$-map $X\\to W\\times_ST$ is exactly an $S$-map $X\\to W$, since the map $X\\to T$ is fixed. Similarly, writing $S'_T=S'\\times_ST$, an $S'_T$-map $X\\times_TS'_T\\to M'\\times_{S'}S'_T$ is exactly an $S'$-map $X\\times_SS'\\to M'$. The identifications follow by composing with projections; their inverses pair the given map with the fixed structural map. They commute with precomposition in $X$ and with further base change, so the bijections of step 2 prove arbitrary base-change compatibility. Take $T=\\operatorname{Spec}E$ and use step 1 and $M'_{E'}\\simeq V'$. This identifies $W_E$ with the stated generic restriction functor. Since $\\operatorname{Spec}E$ is locally Noetherian and $V'$ is of finite type, both local finite type and quasi-compactness pass to $W_E$ by [lem-sfb-weil-restriction-geometric-properties]. Their conjunction is finite type by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-sfb-weil-restriction-geometric-properties",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.6 base-change formula preceding Proposition 2 and Proposition 5(a),(c)."
+   }
+  },
+  {
+   "text": "We additionally verify that $W$ is a Néron lft-model of $W_E$, as needed for the neutral chart. Let $Y$ be smooth over $S$ and put $Y'=Y\\times_SS'$. On affine charts, [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] and [lem-weil-pbc-smooth-ring-map-base-change-composition] show that $Y'$ is smooth over $S'$. Restriction for $M'$ therefore gives\n$$\\operatorname{Hom}_S(Y,W)\\simeq\\operatorname{Hom}_{S'}(Y',M')\\simeq\\operatorname{Hom}_{E'}(Y'_{E'},V')\\simeq\\operatorname{Hom}_E(Y_E,W_E).$$\nThe first and last arrows are step 2 and its generic version from step 4. The middle arrow is precisely the assumed Néron bijection, and $Y'_{E'}=Y_E\\times_EE'$ by the fibre-product universal property and step 1. Every arrow is restriction/precomposition followed by the specified generic identification, so the composite is restriction to the generic fibre. It is bijective. Smoothness, separatedness and the group structure were proved in steps 2–3, and the generic fibre is of finite type by step 4, so all hypotheses of the neutral-chart input hold.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "7.6 Proposition 6 proof, printed p.198 (PDF p.204), and 10.1 Proposition 4 proof: adjunction and the Néron mapping property."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-neron-lft-neutral-affine-product-chart] to $W$ with generic group $W_E$. Its subset $C$ is defined using exactly the same geometric identity components as $W^0$ in the item. The lemma makes this subset an open subgroup with its open subscheme structure. For every $s\\in S$ it supplies an affine neighbourhood $B_s$ and affine $U_s\\subset W^0_{B_s}$ whose multiplication map $U_s\\times_{B_s}U_s\\to W^0_{B_s}$ is surjective.",
+   "uses": [
+    "lem-sfb-neron-lft-neutral-affine-product-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 paragraph after Definition 1, printed p.290 (PDF p.296)."
+   }
+  },
+  {
+   "text": "The source $U_s\\times_{B_s}U_s$ is affine by [lem-weil-pbc-fibre-product-affine-spectra], hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Its continuous surjection onto $W^0_{B_s}$ makes the latter quasi-compact by [lem-weil-pbc-continuous-image-quasi-compact]. The affine scheme $S$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so finitely many $B_s$ cover $S$. Their inverse images $W^0_{B_s}$ cover $W^0$, and any open cover restricts to each; the union of the finitely many resulting finite subcovers covers $W^0$. Thus $W^0$ is quasi-compact. Since $W^0$ is open in the locally finite-type $S$-scheme $W$, it is locally of finite type: restrict the affine charts of $W$ to basic affine subopens inside $W^0$. For completeness, quasi-compactness over the affine base follows by taking a finite affine cover of $W^0$: the inverse image of each basic base open is a finite union of principal affine opens, hence quasi-compact; a general affine base open has a finite cover by such basic opens. This and local finite type give finite type by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "10.1 paragraph after Definition 1: finite-type consequence of the surjective affine product chart, written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-finite-locally-free",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sbc-finite-flat-affine-basis",
+  "lem-sfb-neron-lft-finite-set-affine",
+  "lem-sfb-neron-lft-neutral-affine-product-chart",
+  "lem-sfb-weil-restriction-affine-neighbourhood-criterion",
+  "lem-sfb-weil-restriction-geometric-properties",
+  "lem-trf-localization-finite-ring-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Assembly following BLR 7.6 Theorem 4, Proposition 5, Proposition 6 proof and 10.1 Definition 1 discussion/Proposition 4 proof; source scan read online, local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilRestriction|restrictScalars.*[Ss]cheme|[Nn]eron",
+   "results": "{\"t\": \"2026-10-24T05:03:17Z\", \"tool\": \"grep\", \"query\": \"WeilRestriction|restrictScalars.*[Ss]cheme|[Nn]eron\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"ce6cf319771c83cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth base-change instances and restriction of scalars for modules, not representability of a Weil restriction as a scheme or finiteness of its identity component."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilRestriction\"",
+   "results": "{\"t\": \"2026-10-24T05:03:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"WeilRestriction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth base-change instances and restriction of scalars for modules, not representability of a Weil restriction as a scheme or finiteness of its identity component."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of a smooth separated group scheme along a finite flat map representable by a scheme",
+   "results": "{\"t\": \"2026-10-24T05:03:17Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars of a smooth separated group scheme along a finite flat map representable by a scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"RestrictScalars\", \"AlgHom.restrictScalars\", \"SheafOfModules.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.RestrictScalars.map'\"], \"digest\": \"eaad9b110748ffed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth base-change instances and restriction of scalars for modules, not representability of a Weil restriction as a scheme or finiteness of its identity component."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil restriction of a Neron locally finite type group model along a finite flat map is a smooth separated scheme with finite type identity component",
+   "results": "{\"t\": \"2026-10-24T05:03:20Z\", \"tool\": \"leanfinder\", \"query\": \"Weil restriction of a Neron locally finite type group model along a finite flat map is a smooth separated scheme with finite type identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme\"], \"digest\": \"53f9ce9682aaf464\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth base-change instances and restriction of scalars for modules, not representability of a Weil restriction as a scheme or finiteness of its identity component."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable Weil restriction commutes with base change and preserves smoothness and separatedness",
+   "results": "{\"t\": \"2026-10-24T05:03:21Z\", \"tool\": \"leanfinder\", \"query\": \"Representable Weil restriction commutes with base change and preserves smoothness and separatedness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\"], \"digest\": \"b638941351b6bbe3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned smooth base-change instances and restriction of scalars for modules, not representability of a Weil restriction as a scheme or finiteness of its identity component."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-flat-neron-lft-descent",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4).",
+   "via": [
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-lft-weil-restriction-geometry",
+  "worker": "stage1",
+  "summary": "Proved the assembly through affine-neighbourhood representability, preservation of geometric properties, explicit pointwise group operations and arbitrary base change; verified the Néron property before using an affine product chart to prove finite type of the neutral part. Four genuinely smaller/general-purpose statement-only inputs; no statement change.",
+  "blueprint": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-finite-flat-affine-basis",
+    "why": "Generic affine geometry, localization, topology, smooth base change, or Yoneda input used as stated; the unit has no replacement and the BLR Weil-restriction route is preserved."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic affine geometry, localization, topology, smooth base change, or Yoneda input used as stated; the unit has no replacement and the BLR Weil-restriction route is preserved."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine geometry, localization, topology, smooth base change, or Yoneda input used as stated; the unit has no replacement and the BLR Weil-restriction route is preserved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-finite-flat-affine-basis",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-59cd6705a",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-59cd6705a (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, all 4 new statement-only nodes, and the statement of every cited node. This is a first split: the base proof was empty and there is no re-split repair note. BLR is not in literature/ (the worker filed WANTED), so I could not read it at the cited places. I checked the new statements against BLR 7.6 Thm 4, 7.6 Prop 5, 10.1 Def 1/Prop 4 and 6.4 Thm 1 from memory and with my own direct arguments. FIX, one fault: step 4 wrote the base-changed target as M'×_S S'_T, which is the wrong object (E4); it should be M'×_{S'}S'_T. Corrected in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-neron-lft-weil-restriction-geometry.json; nothing else changed and no nodes are dropped. Steps: (1) p is finite locally free through the finite-flat affine basis and finite free spectrum nodes on the locally Noetherian S; D'⊗E=(D∖0)^{-1}D' is a finite domain over E, hence the field E'. (2) The criterion's hypotheses come from the finite-set-affine node over D', which also covers several primes of D' over one prime of D. (3) Group law by Yoneda. (4) Base change at functor level after the fix; W_E is lft and quasi-compact over the Noetherian Spec E, hence finite type. (5) Y' is smooth over S' and the Hom chain shows W is a Néron lft-model of W_E. (6) The neutral-chart hypotheses all hold. (7) Quasi-compactness and finite type of W^0 are elementary. New nodes: the criterion is BLR 7.6/4 and is distinct from the algebraic-space and affine-Hom nodes. In the geometric-properties node I checked the quasi-compact clause directly: field points lift piecewise through the affine ⊔U_i. The finite-set-affine node checks out on the G_m lft-model over a DVR: Spec R[t,u]/(tu−π) with the origin removed, and D(t+u) is affine. The neutral-chart node is true by the S-dense affine open argument (U·U = G on irreducible fibres; N^0 open by EGA IV 15.6.5). It is not lem-sfb-neron-neutral-local-properties, which needs a geometrically connected generic group, and it does not restate the item. Batch 5: lem-trf-localization-finite-ring-map is the Mathlib leaf RingHom.finite_localizationPreserves, generic algebra outside both assumed statements, so accepted. Accepted tool_uses: lem-sbc-finite-flat-affine-basis, lem-weil-pbc-finite-free-algebra-spectrum, lem-weil-pbc-smooth-ring-map-iff-smooth-affine.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NeronLftWeilRestrictionGeometry",
+  "declaration": "AlgebraicGeometry.exists_neronLft_weilRestriction_geometry",
+  "declarations": [
+   "AlgebraicGeometry.weilRestrictionEvaluationBaseChange",
+   "AlgebraicGeometry.weilRestrictionGenericEvaluation",
+   "AlgebraicGeometry.neronGeometricNeutralSet",
+   "AlgebraicGeometry.exists_neronLft_weilRestriction_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NeronLftWeilRestrictionGeometry.lean",
+  "statement": "theorem exists_neronLft_weilRestriction_geometry (D D' E E' : Type u) [CommRing D] [CommRing D'] [IsDedekindDomain D] [IsDedekindDomain D'] (_dimD : ringKrullDim D = 1) (_dimD' : ringKrullDim D' = 1) [Algebra D D'] [Module.Finite D D'] [Module.FaithfullyFlat D D'] [Field E] [Field E'] [Algebra D E] [IsFractionRing D E] [Algebra D' E'] [IsFractionRing D' E'] [Algebra E E'] [Algebra D E'] [IsScalarTower D D' E'] [IsScalarTower D E E'] (V : Grp (Over (Spec (.of E')))) [IsCommMonObj V.X] [Smooth V.X.hom] [IsSeparated V.X.hom] [LocallyOfFiniteType V.X.hom] [QuasiCompact V.X.hom] (M : Grp (Over (Spec (.of D')))) [Smooth M.X.hom] [IsSeparated M.X.hom] (e : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D' E')))).obj M.X ≅ V.X) [IsMonHom e.hom] (_neron : ∀ Y : Over (Spec (.of D')), Smooth Y.hom → Function.Bijective (fun f : Y ⟶ M.X => (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D' E')))).map f ≫ e.hom)) : ∃ W : Grp (Over (Spec (.of D))), IsCommMonObj W.X ∧ Smooth W.X.hom ∧ IsSeparated W.X.hom ∧ LocallyOfFiniteType W.X.hom ∧ ∃ ev : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D D')))).obj W.X ⟶ M.X, IsMonHom ev ∧ (∀ X : Over (Spec (.of D)), Function.Bijective (fun f : X ⟶ W.X => (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D D')))).map f ≫ ev)) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ Spec (.of D)) (X : Over T), Function.Bijective (fun f : X ⟶ (Over.pullback t).obj W.X => (Over.pullback (pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap D D'))) t)).map f ≫ weilRestrictionEvaluationBaseChange (Spec.map (CommRingCat.ofHom (algebraMap D D'))) t ev)) ∧ LocallyOfFiniteType ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj W.X).hom ∧ QuasiCompact ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj W.X).hom ∧ (∀ X : Over (Spec (.of E)), Function.Bijective (fun f : X ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D E)))).obj W.X => (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap E E')))).map f ≫ weilRestrictionGenericEvaluation D D' E E' ev e)) ∧ ∃ (W₀ : Grp (Over (Spec (.of D)))) (i : W₀.X ⟶ W.X), IsMonHom i ∧ IsOpenImmersion i.left ∧ Set.range i.left.base = neronGeometricNeutralSet W ∧ LocallyOfFiniteType W₀.X.hom ∧ QuasiCompact W₀.X.hom",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The three definitions are canonical evaluation maps and the geometric neutral subset used to state this node; all have actual data. The sole postponed proof is the main theorem. Dimension one is explicit because Mathlib IsDedekindDomain allows fields."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa4dff300",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_dep records, module and report. Every hypothesis matches the node: Dedekind of Krull dim 1, Module.Finite and FaithfullyFlat, fraction fields pinned by scalar towers, V' smooth/separated/commutative/finite type, M' smooth separated and not commutative, e a group iso, Neron bijection for smooth Y. Every conclusion matches: W smooth separated commutative lft; ev with IsMonHom and the Hom bijection for all X; base change over all T into M' x_{S'} (S' x_S T) via the canonical weilRestrictionEvaluationBaseChange; W_E lft and qc with the canonical generic evaluation from ev and e; W0 an open-immersion subgroup whose range is neronGeometricNeutralSet (union of pr1-images of the onePoint component in W x_S Spec of the algebraic closure of k(s)), lft and qc. Helpers carry real data and source/blueprint docstrings; the only sorry is the theorem's. Recorded statement is verbatim equal to the file signature. Imports exist on side-live. Grep of the Sheaf and WeilConjectures Lean trees found no duplicate Weil-restriction or neutral-set definition. Universes: one u, forced. No compile run (nothing changed); worker's compile was clean. The second reading was by the same worker and disclosed; this review is the independent reading."
+ }
+}

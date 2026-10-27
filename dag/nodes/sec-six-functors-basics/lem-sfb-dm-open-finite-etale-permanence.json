@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-dm-open-finite-etale-permanence",
+ "kind": "statement",
+ "title": "Open substacks and finite etale decorations of a smooth finite-diagonal stack",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathcal X$ be a Deligne--Mumford stack smooth and of finite type over $k$, with finite diagonal. Stack, 2-fibre product and Deligne--Mumford have the meanings in [def-sfb-stable-pointed-moduli-groupoids]. An open substack $\\mathcal U\\subset\\mathcal X$ means a full subcategory stable under pullback whose base change by every scheme $T\\to\\mathcal X$ is an open subscheme of $T$. Then $\\mathcal U$ is a smooth finite-type Deligne--Mumford stack with finite diagonal. Let $\\mathcal Y$ be a category fibred in groupoids over $k$-schemes, with a morphism $p:\\mathcal Y\\to\\mathcal U$. Suppose that for every scheme $T\\to\\mathcal U$ the 2-fibre product $T\\times_{\\mathcal U}\\mathcal Y$ is equivalent, naturally on $T$-schemes, to a scheme finite etale over $T$. Then $\\mathcal Y$ is a smooth finite-type Deligne--Mumford stack with finite diagonal, and $p$ is representable finite etale. In particular both $\\mathcal U$ and $\\mathcal Y$ are separated over $k$: separated for a stack means that its diagonal is proper. The empty open and an everywhere empty finite etale decoration are allowed; no surjectivity hypothesis on $p$ is imposed. Finite diagonal means that every scheme base change of the diagonal is finite. Scheme properties use [def-pc-scheme, def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-finite-type-morphism, def-sbc-smooth-morphisms, def-weil-proper-morphism]; smoothness and finite type on stacks are tested on smooth atlases, with quasi-compactness for finite type.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tags 0CIP (lemma-open-immersion-etale), 0CIM (lemma-composition-etale), 075V (lemma-composition-smooth), 06FT (lemma-composition-finite-type), 0CPM (lemma-locally-closed-in-noetherian), 050E (lemma-trivial-implications); algebraicity and effective stack descent: algebraic.tex Tag 05UN (lemma-open-fibred-category-is-algebraic) and Tag 05UM (lemma-representable-morphism-to-algebraic). Agent-formulated combination including the representable finite-etale chart criterion and finite-diagonal consequence."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-moduli-stack-properties",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "The full pullback-stable subcategory $\\mathcal U$ is fibred in groupoids: pullbacks of its objects stay in it, and fullness supplies exactly the same cartesian lifts as in $\\mathcal X$. The stipulated open-scheme pullbacks make $\\mathcal U\\to\\mathcal X$ representable by schemes. Apply the representable-fibred-category stack lemma, with base stack $\\mathcal X$, to obtain effective etale descent for $\\mathcal U$.",
+   "uses": [
+    "lem-sfb-representable-fibred-category-stack",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic), stack assertion"
+   }
+  },
+  {
+   "text": "For a scheme $T$ and two objects $u_1,u_2$ of $\\mathcal U(T)$, fullness gives $\\operatorname{Isom}_{\\mathcal U}(u_1,u_2)=\\operatorname{Isom}_{\\mathcal X}(u_1,u_2)$ on all $T$-schemes. The latter is a scheme finite over $T$ by the finite-diagonal hypothesis. Thus $\\mathcal U$ has representable finite diagonal. Choose the etale surjective atlas $D\\to\\mathcal X$ from the Deligne--Mumford hypothesis. Its pullback $D_{\\mathcal U}=D\\times_{\\mathcal X}\\mathcal U$ is an open subscheme of $D$. For every scheme $T\\to\\mathcal U$, its pullback is $D\\times_{\\mathcal X}T$, etale and surjective over $T$ by the defining property of the original atlas. Hence $D_{\\mathcal U}\\to\\mathcal U$ is an etale surjective scheme atlas. Together with step 1 this proves that $\\mathcal U$ is Deligne--Mumford.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Definitions of a scheme-representable open subcategory and an atlas; 2-fibre-product objects and arrows"
+   }
+  },
+  {
+   "text": "Apply the affine smooth atlas lemma to $\\mathcal X$, whose Deligne--Mumford atlas is smooth: its scheme base changes are etale, hence smooth by the etale-smoothness lemma, to choose $a:A\\to\\mathcal X$ with $A$ smooth, affine and finite type over $k$. The scheme $\\operatorname{Spec}k$ is Noetherian: it is a single point and its local ring has only the ideals $(0)$ and $(1)$. The finite-type-over-Noetherian lemma therefore makes $A$ Noetherian. Put $A_{\\mathcal U}=A\\times_{\\mathcal X}\\mathcal U$, an open subscheme of $A$. The Noetherian-open-subscheme lemma makes $A_{\\mathcal U}$ Noetherian, in particular quasi-compact.",
+   "uses": [
+    "lem-sfb-finite-type-stack-affine-smooth-atlas",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YC (lemma-quasi-compact-stack); morphisms.tex Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tags 01OW and 01OZ"
+   }
+  },
+  {
+   "text": "The open-immersion smooth-composition lemma makes $A_{\\mathcal U}$ smooth over $k$. It is also finite type over $k$: write $A=\\operatorname{Spec}R$ with $R$ a finitely generated $k$-algebra; quasi-compactness of its open $A_{\\mathcal U}$ selects finitely many basic opens $D(f_j)$ covering it. Their coordinate rings $R[1/f_j]$ are generated by the generators of $R$ and $1/f_j$. For any scheme $T\\to\\mathcal U$, the atlas pullback $A_{\\mathcal U}\\times_{\\mathcal U}T$ identifies with $A\\times_{\\mathcal X}T$, so it is smooth and surjective. Thus $A_{\\mathcal U}\\to\\mathcal U$ is a smooth atlas. The smoothness and local finite type of this chart prove those properties for $\\mathcal U$. Its quasi-compactness proves quasi-compactness of $\\mathcal U$: pull an open cover back to $A_{\\mathcal U}$, choose a finite subcover there, and use surjectivity to see it covers $\\mathcal U$. Hence $\\mathcal U$ is finite type over $k$.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "def-weil-finite-type-morphism",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VC (lemma-open-immersion-smooth), 01VA (lemma-composition-smooth); finite-type definition 01T0; explicit basic-open argument"
+   }
+  },
+  {
+   "text": "The hypothesis about $T\\times_{\\mathcal U}\\mathcal Y$, including its natural equivalence on all $T$-schemes, says exactly that $p$ is representable by schemes and finite etale after every scheme base change. This proves the asserted representable finite-etale property directly from its definition. Since $\\mathcal U$ is now a stack, the representable-fibred-category stack lemma applies to $p$ and makes $\\mathcal Y$ a stack. No surjectivity of the represented finite-etale schemes is needed.",
+   "uses": [
+    "lem-sfb-representable-fibred-category-stack",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UN (lemma-open-fibred-category-is-algebraic); scheme-test definition of representable finite etale"
+   }
+  },
+  {
+   "text": "We can now apply the existing representable-finite stack-properties lemma to $p:\\mathcal Y\\to\\mathcal U$ over $\\operatorname{Spec}k$. Its base is Deligne--Mumford by step 2, its source is a stack by step 5, and its morphism is representable finite by step 5. Its conclusion makes $\\mathcal Y$ Deligne--Mumford. Only that conclusion is used here.",
+   "uses": [
+    "lem-sfb-representable-finite-stack-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 05UM (lemma-representable-morphism-to-algebraic); Deligne--Mumford consequence of base-changing an etale atlas"
+   }
+  },
+  {
+   "text": "Fix $y_1,y_2\\in\\mathcal Y(T)$ for a scheme $T$, and put $u_i=p(y_i)$. By step 2, $I=\\operatorname{Isom}_{\\mathcal U}(u_1,u_2)$ is a finite $T$-scheme. Over $I$ its universal isomorphism $\\alpha:u_1\\simeq u_2$ makes $(y_1,\\alpha)$ and $(y_2,\\mathrm{id})$ sections of the scheme $E=I\\times_{u_2,\\mathcal U}\\mathcal Y$, finite etale over $I$ by hypothesis. Since $E\\to I$ is finite, the finite-proper lemma makes it proper and therefore separated; its diagonal is a closed immersion by the definition of properness. The equality locus $J$ of the two sections is consequently a closed subscheme of $I$: it is the inverse image of that diagonal under the pair of sections. Affine-locally the inverse image is cut out by the images of the defining ideal, so is a closed immersion. By the objects-and-arrows definition of the 2-fibre product, over a map to $I$ this equality says exactly that there is an arrow $y_1\\simeq y_2$ inducing $\\alpha$. Such an arrow, if it exists, is unique because the relative fibre is a discrete represented groupoid. Thus $J$ represents $\\operatorname{Isom}_{\\mathcal Y}(y_1,y_2)$. The closed-immersion-finite and finite-composition lemmas give $J\\to I\\to T$ finite. This proves finite diagonal for $\\mathcal Y$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WN (lemma-finite-proper), 035C (lemma-closed-immersion-finite), 01WK (lemma-composition-finite); explicit relative Isom equality-locus construction"
+   }
+  },
+  {
+   "text": "Set $B=A_{\\mathcal U}\\times_{\\mathcal U}\\mathcal Y$. It is a scheme finite etale over $A_{\\mathcal U}$. The etale-smoothness lemma makes the etale morphism $B\\to A_{\\mathcal U}$ smooth. The smooth-composition lemma, applied to $B\\to A_{\\mathcal U}\\to\\operatorname{Spec}k$, makes $B$ smooth over $k$. It is finite type over $k$ as well: use the finite basic-open cover $\\operatorname{Spec}R[1/f_j]$ of step 4; its inverse images in $B$ are affine by finiteness. Their coordinate algebras $C_j$ are finite modules over $R[1/f_j]$. Choose module generators $c_{j1},\\ldots,c_{jn_j}$. The generators of $R[1/f_j]$ as a $k$-algebra, together with these $c_{ji}$, generate $C_j$ as a $k$-algebra, since every element is already a linear combination of the $c_{ji}$. This is a finite affine cover by finitely generated $k$-algebras, exactly finite type.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-trf-smooth-composition",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VA (lemma-composition-smooth); elementary finite-algebra generator argument for finite type"
+   }
+  },
+  {
+   "text": "For any scheme $T\\to\\mathcal Y$, the defining 2-fibre products identify $B\\times_{\\mathcal Y}T$ with $A_{\\mathcal U}\\times_{\\mathcal U}T=A\\times_{\\mathcal X}T$. These identifications simply forget the intermediate object and its isomorphism, with inverse inserting its pullback; the compatibility equation on arrows is unchanged. Hence $B\\to\\mathcal Y$ is smooth and surjective by the original atlas test for $A\\to\\mathcal X$. Smoothness and local finite type of $B$ from step 8 therefore prove smoothness and local finite type of $\\mathcal Y$. An open cover of $\\mathcal Y$ pulls back to an open cover of the quasi-compact scheme $B$; a finite subcover descends by surjectivity. This proves quasi-compactness, hence finite type of $\\mathcal Y$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Scheme-test definition of a smooth atlas; explicit 2-fibre-product identity and finite-subcover argument"
+   }
+  },
+  {
+   "text": "The diagonals of $\\mathcal U$ and $\\mathcal Y$ have finite scheme base changes by steps 2 and 7. Each such finite scheme morphism is proper by the finite-proper lemma. Thus both stack diagonals are proper, which is precisely separatedness in the statement. If $\\mathcal U$ is empty, its charts $A_{\\mathcal U}$ and $B$ are empty; if the decoration is empty, $B$ and $\\mathcal Y$ are empty. All atlas tests, equality loci and finite-cover arguments above allow empty schemes and empty covers, and only the atlas maps, never $p$, have been assumed surjective.",
+   "uses": [
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (lemma-finite-proper); scheme-test definition of proper diagonal"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sfb-finite-type-stack-affine-smooth-atlas",
+  "lem-sfb-representable-fibred-category-stack",
+  "lem-sfb-representable-finite-stack-properties",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Combination of Tags 05UN and 04YC with the explicit chart and Isom calculations in the steps; scheme results cited separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks and representable finite etale morphisms preserve smooth separated finite type Deligne Mumford stacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every open immersion of schemes is a smooth morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A category fibred in groupoids representable finite etale over a Deligne Mumford stack is a Deligne Mumford stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.relativelyRepresentable\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \": MorphismProperty D\", \"doc\": \"A morphism $ f : X \\to Y $ in category $ \\\\mathcal{D} $ is relatively representable with respect to a functor $ F : \\\\mathcal{C} \\to \\\\mathcal{D} $ if for every object $ a $ in $ \\\\mathcal{C} $ and every mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Representability\", \"type\": \": F.1.IsRepresentable\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.relative.rep\", \"module\": \"Mathlib.CategoryTheory.MorphismProperty.Representable\", \"type\": \"{f : X ⟶ Y} (hf : P.relative F f) : F.relativelyRepresentable f\", \"doc\": \"If a morphism $ f : X \\\\to Y $ in category $ \\\\mathcal{D} $ satisfies the relative morphism property with respect to a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, then $ f $ is relatively representable\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"CategoryTheory.Functor.IsRepresentedBy.representableBy\", \"module\": \"Mathlib.CategoryTheory.RepresentedBy\", \"type\": \"(h : F.IsRepresentedBy x) : F.RepresentableBy X\", \"doc\": \"Given a contravariant functor $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}_v$ and an object $X \\\\in \\\\mathcal{C}$ such that $F$ is representable by $X$ (i.e., there exists a natural isomorphism between \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": (Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|Deligne.Mumford|OpenSubstack|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open substacks and representable finite etale morphisms preserve smooth finite type Deligne Mumford stacks with finite diagonal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open substack of a finite type Deligne Mumford stack over a field is finite type",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"[IsOpenImmersion f] : LocallyOfFiniteType f\", \"doc\": \"Any open immersion between schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFiniteType f] : LocallyOfFiniteType (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ is locally of finite type and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFinitePresentation f] :\\n  LocallyOfFinitePresentation (f.resLE V U e)\", \"doc\": \"If a morphism of schemes is locally of finite presentation, then its restriction to any open subsets is also locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"[IsOpenImmersion f] : LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"(f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e) [LocallyOfFiniteType f] : LocallyOfFiniteType (f.resLE V U e)\", \"doc\": \"If a morphism of schemes $f: X \\\\to Y$ is locally of finite type, then its restriction to any open subschemes $V \\\\subseteq X$ and $U \\\\subseteq Y$ (where the image of $V$ under $f$ is contained in $U$) \"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.Opens} [IsLocallyNoetherian X] : IsLocallyNoetherian U\", \"doc\": \"If $X$ is a locally Noetherian scheme and $U$ is an open subscheme of $X$, then $U$ is also a locally Noetherian scheme. This follows from the fact that any open subset of a scheme inherits the local \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(X : Scheme) : Type*\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Stack\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|Deligne.Mumford|OpenSubstack|AlgebraicStack",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale decoration of an algebraic stack has finite diagonal when the original stack does",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme morphism results and general pseudofunctor stack definitions do not give this theorem about categories fibred in groupoids or algebraic-stack atlases; no one-line specialization applies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-level-coarse-moduli",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Open substacks and finite etale decorations of a smooth finite-diagonal stack.",
+   "via": [
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dm-open-finite-etale-permanence",
+  "worker": "stage1",
+  "summary": "Retained every hypothesis and conclusion. Proved permanence using finite-type affine smooth charts, Noetherian open charts, effective representable descent, and a closed equality-locus construction of the decorated diagonal. Added only two general statement-only stack inputs; reused the existing representable-finite DM lemma and scheme results. Searched current DAG, blueprint and library and logged all new Mathlib searches.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Open substacks and finite etale decorations of a smooth finite-diagonal stack. Steps 1--4 handle the open smooth curve-moduli locus; steps 5--10 handle its finite etale level decorations and separatedness. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "steps 3 and 8 take from its statement that an etale scheme morphism in the sense of def-weil-etale-morphism (lfp, flat, unramified) is smooth in the sense of def-sbc-smooth-morphisms; no node of sk-thm-sf-ctf-stability reconciles the two definitions"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-370fbb1d7",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-370fbb1d7 (reviewer sub-agent of L); spot-checked: Read in full: the item (10 steps), both new statement-only nodes, the statements of every cited node, and Stacks algebraic.tex 05UN (l.1984-2012, relative-sheaf-over-stack proof) and stacks-properties.tex 04YC (l.1171-1205, finite affine subcover of a smooth atlas). The item's statement and stmt_deps are unchanged from base. The item is not in the dropped list and is unsplit in both live and side-live, so nothing supersedes it. The steps are correct: U is a stack by the new descent node over X, and Isom_U = Isom_X by fullness. D_U and A_U are atlases. A is Noetherian over Spec k, so the open A_U is quasi-compact. The finite basic-open cover gives finite type. Y is a stack by the descent node over U, and DM by lem-sfb-representable-finite-stack-properties (all its hypotheses checked). Finite diagonal of Y holds because the closed equality locus J in I = Isom_U is cut out by the diagonal of the finite E -> I, and J represents Isom_Y because the represented fibre is discrete. B = A_U x_U Y is smooth, of finite type, and an atlas. Finite diagonals give proper ones, hence separatedness. Small cases tested: BG with Spec k -> BG and BH -> BG, the empty U, the empty Y, and a non-surjective p. Both new nodes are true, generic and not clauses of the item (D1). There are no duplicates in the DAG or among the same-day side-live sfb stack nodes (finite-schemes-etale-stack-descent is different). Batch-5: lem-trf-smooth-composition is a Mathlib leaf for composing smooth scheme morphisms (01VA), def-trf-algebraic-space is a general definition, and the closure of def-sfb-stable-pointed-moduli-groupoids reaches only generic trf/pod definitions and lemmas (projective-bundle-proper and similar), no trace-formula or Poincare-duality step; all accepted. FIX (C4): steps 3 and 8 took 'etale => smooth' from the defining clause of def-sbc-smooth-morphisms, while the etale of the item and of def-sfb is def-weil-etale-morphism (lfp + flat + unramified). Both steps now cite the existing lem-weil-pbc-etale-smooth-zero-dimensional-fibres, which reconciles the two definitions; proof_deps is updated and the node is declared in split_report.tool_uses (unit sk-thm-p1).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DmOpenFiniteEtalePermanence",
+  "declaration": "CategoryTheory.dm_open_finite_etale_permanence",
+  "file": "lean/Sheaf/AlgebraicGeometry/DmOpenFiniteEtalePermanence.lean",
+  "statement": "theorem dm_open_finite_etale_permanence (k : Type u) [Field k] (X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (hX : IsDeligneMumfordModuliStack X) (hft : HasSmoothFiniteTypeModuliAtlas X) (hdiag : HasFiniteModuliDiagonal X) (U : OpenModuliSubstack X) : IsDeligneMumfordModuliStack U.category ∧ HasSmoothFiniteTypeModuliAtlas U.category ∧ HasFiniteModuliDiagonal U.category ∧ HasProperModuliDiagonal U.category ∧ ∀ (Y : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (p : BasedFunctor Y U.category), IsFibredInGroupoids Y → (∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) U.category), ∃ (E : Over (Spec (.of k))) (g : E ⟶ T) (e : BasedFunctor (discreteModuli (yoneda.obj E)) (moduliTwoFiberProduct t p)), IsFinite g.left ∧ Etale g.left ∧ IsSchemeModuliBaseChange e g) → IsDeligneMumfordModuliStack Y ∧ HasSmoothFiniteTypeModuliAtlas Y ∧ HasFiniteModuliDiagonal Y ∧ IsRepresentableFiniteModuliMap p ∧ IsEtaleModuliMap p ∧ HasProperModuliDiagonal Y",
+  "branch": "newtargets-dag",
+  "by": "Q145",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the landed open-substack, smooth finite-type atlas, finite/proper diagonal and representable-map scheme-test interfaces. The decoration hypothesis gives simultaneous finite and etale scheme presentations with their actual projection; the conclusion uses the existing representable finite and representable etale predicates. Open permanence is asserted independently of the subsequent universal quantification over decorations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cedb562d",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Compared each clause with the dependency declarations: field k / Spec k; X DM via IsDeligneMumfordModuliStack; smooth finite type via HasSmoothFiniteTypeModuliAtlas; finite diagonal via HasFiniteModuliDiagonal; open via OpenModuliSubstack. U conclusions (DM, smooth finite type, finite and proper diagonal) come before the quantifier over Y. Y assumed only fibred in groupoids; the decoration hypothesis (IsFinite ∧ Etale ∧ IsSchemeModuliBaseChange, i.e. an equivalence with the actual projection) holds for every scheme test. Conclusions: Y DM, smooth finite type, finite and proper diagonal, IsRepresentableFiniteModuliMap ∧ IsEtaleModuliMap. No extra hypotheses; empty U, empty Y/E and non-surjective p allowed; independent universes. Lean statement verbatim; stmt_deps only gained four landed definition nodes used in the signature (allowed); docstrings carry source, blueprint id and the 10 proof steps; sorry only; plain imports are proof dependencies; both report sections present; no competing stage-2 landing. No fixes, so no compile."
+ }
+}

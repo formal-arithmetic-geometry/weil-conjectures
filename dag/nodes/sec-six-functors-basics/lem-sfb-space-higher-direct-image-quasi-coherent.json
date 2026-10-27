@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-space-higher-direct-image-quasi-coherent",
+ "kind": "statement",
+ "title": "Higher direct images of quasi-coherent modules on qcqs algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and suppose $f$ is quasi-compact and quasi-separated: inverse images of quasi-compact spaces are quasi-compact and the diagonal of $f$ is quasi-compact. For every quasi-coherent $\\mathcal O_X$-module $F$ on the small etale ringed site [def-trf-space-quasi-coherent-module] and every $i\\geq0$, the module $R^if_*F$ is quasi-coherent on $Y_{\\mathrm{et}}$. Here $f_*$ is the canonical module direct image [def-trf-space-etale-module-functors], and $R^if_*$ is computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. No Noetherian, finite-type, coherence or separatedness assumption beyond the stated quasi-separatedness is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0720, lemma-higher-direct-image."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "It suffices to prove the assertion after every affine etale chart $V\\to Y$. Indeed quasi-coherence is a local-presentation condition: the presentations on a covering of each affine chart compose to covering presentations on each object of $Y_{\\mathrm{et}}$; arbitrary scheme charts have affine open covers. Restricting $F$ to $X_V=X\\times_YV$ preserves its local presentations. The higher-image restriction isomorphism identifies the desired restriction with $R^if_{V,*}(F|_{X_V})$. Quasi-compactness is stable under base change by the cited affine-test lemma; the relative diagonal of $f_V$ is the base change of that of $f$, so the same stability proves quasi-separatedness. Hence replace $Y$ by $V$.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-higher-image-etale-restriction",
+    "lem-sfb-space-quasicompact-affine-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0720, first paragraph; affine-chart localization and the alternative relative Cech proof announced before the lemma."
+   }
+  },
+  {
+   "text": "Now $Y$ is affine, hence quasi-compact and quasi-separated. Quasi-compactness of $f$ gives quasi-compactness of $X$, and the source clause of the qcqs-product lemma gives quasi-separatedness of $X$. For this absolute formulation regard spaces over $\\operatorname{Spec}\\mathbf Z$ by the cited change-of-base identification. The cited atlas/topology equivalence identifies this quasi-compactness with quasi-compactness of the point space, as required by the atlas and permanence statements. Choose an affine surjective etale scheme chart $U\\to X$. For $p\\geq0$ put $U_p=U^{\\times_X(p+1)}$. Inductively $U_p$ is a scheme: $U_0=U$, and $U_p\\times_XU$ is the base change of the representable etale map $U\\to X$ to the scheme $U_p$. It is qcqs by induction and the qcqs-product clause. The permanence lemma therefore says $a_p:U_p\\to Y$ is qcqs, and the affine-test equivalence identifies this with scheme quasi-compactness; its diagonal has the same scheme tests for quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 0720, affine atlas paragraph; relative Cech proof: all iterated atlas fibre products are qcqs schemes."
+   }
+  },
+  {
+   "text": "Let $F_p=F|_{U_p}$. Each $u_p:U_p\\to X$ is etale (successive base changes and compositions of the atlas), so restriction preserves the local free presentations defining quasi-coherence. Apply the relative Cech module spectral sequence to $f$ and this atlas. Its first page is $E_1^{p,q}=R^qa_{p,*}F_p$ and it converges to $R^{p+q}f_*F$ with the specified finite filtration. Every $a_p$ is a qcqs scheme morphism by step 2; the scheme small-etale higher-image comparison therefore makes every $E_1^{p,q}$ quasi-coherent. This uses structure-sheaf modules throughout.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-relative-cech-module-spectral-sequence",
+    "lem-sfb-scheme-etale-higher-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Relative Cech alternative preceding Tag 0720; Tag 071N for the scheme terms; Tag 072E for the spectral sequence."
+   }
+  },
+  {
+   "text": "Every later page is quasi-coherent, by induction on the page: at each bidegree the next page is the cokernel of the map from the incoming image to the outgoing kernel. These images and kernels, and then that cokernel, are quasi-coherent by the cited closure statement. At fixed $(p,q)$ first-quadrant differentials vanish for sufficiently large page (an incoming differential requires $r\\leq p$, an outgoing one requires $r\\leq q+1$). Thus the stable term $E_\\infty^{p,q}$ is quasi-coherent. No closure under arbitrary subobjects is used.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits",
+    "lem-sfb-space-relative-cech-module-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Relative Cech alternative to Tag 0720: page induction using Tag 03M1, clauses (2),(3)."
+   }
+  },
+  {
+   "text": "For fixed $i\\geq0$, convergence gives $F^0=R^if_*F$ and $F^{i+1}=0$ with $F^p/F^{p+1}=E_\\infty^{p,i-p}$. The zero module is quasi-coherent (its zero presentation). Descending finite induction on $p=i,\\ldots,0$ applies extension closure to $0\\to F^{p+1}\\to F^p\\to E_\\infty^{p,i-p}\\to0$. It gives quasi-coherence of $F^0$. Step 1 then gives the assertion on the original $Y$, including $i=0$.",
+   "uses": [
+    "lem-sfb-space-relative-cech-module-spectral-sequence",
+    "lem-sfb-space-qcoh-extension-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Relative Cech alternative to Tag 0720: finite abutment filtration and Tag 03M1(4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-higher-image-etale-restriction",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-relative-cech-module-spectral-sequence",
+  "lem-sfb-scheme-etale-higher-image-comparison",
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "lem-sfb-space-qcoh-extension-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 0720: the relative Cech alternative explicitly suggested in the paragraph before lemma-higher-direct-image; assembled using stacks-sheaves.tex Tag 072E and descent.tex Tag 071N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of quasi coherent modules by a quasi compact quasi separated morphism of algebraic spaces are quasi coherent",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.pushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this functor maps a sheaf $\\\\mathcal{F}$ on $\\\\ma\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only local quasi-coherence predicates, scheme pushforward functors and qcqs properties; no higher-image preservation theorem for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherence is preserved by derived pushforward along qcqs maps of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.QuasiCompact @AlgebraicGeometry.QuasiSeparated\", \"doc\": \"If a morphism of schemes is quasi-compact and it is post-composed with a quasi-separated morphism, then the resulting composition remains quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.QuasiCompact\", \"doc\": \"The property of being a quasi-compact morphism of schemes is stable under composition; that is, the composition of two quasi-compact morphisms is again quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.QuasiSeparated g],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is quasi-compact, and $ g $ is quasi-separated, then $ f $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.QuasiCompact g], AlgebraicGeometry.QuasiCompact (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Quasi-compact morphisms of schemes form a category, where composition of morphisms is defined by the composition in the category of schemes and inherits associativity and identity properties from the \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only local quasi-coherence predicates, scheme pushforward functors and qcqs properties; no higher-image preservation theorem for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"rightDerived\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only local quasi-coherence predicates, scheme pushforward functors and qcqs properties; no higher-image preservation theorem for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "quasicoherent.*rightDerived|rightDerived.*quasicoherent|algebraic.?space",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only local quasi-coherence predicates, scheme pushforward functors and qcqs properties; no higher-image preservation theorem for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of quasi coherent modules on algebraic spaces are quasi coherent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.rec\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure, which is established via sheaf composition, weak she\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.casesOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A case analysis principle for quasicoherence of a sheaf of modules over a ring sheaf, enabling definitions or proofs by recursion on the quasicoherence structure established via sheaf composition, wea\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: only local quasi-coherence predicates, scheme pushforward functors and qcqs properties; no higher-image preservation theorem for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-affine-base-higher-image-sections",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: affine-base global vanishing after repeating the relative argument for an arbitrary base-changed module. Supporting input for the affine-base Leray argument: Higher direct images of quasi-coherent modules on qcqs algebraic spaces.",
+   "via": [
+    "lem-sfb-space-affine-base-higher-image-sections",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "worker": "stage1",
+  "summary": "Kept the exact qcqs algebraic-space statement; replaced the empty proof by the relative Cech route explicitly suggested by Stacks 0720. Reused the existing atlas, qcqs permanence, scheme comparison, restriction and quasi-coherent closure nodes. Created only the relative Cech spectral-sequence input, statement-only, after whole-DAG, blueprint, project and logged Mathlib searches. Checked every cited statement and supplied verbatim quotations.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: affine-base global vanishing after repeating the relative argument for an arbitrary base-changed module. Supporting input for the affine-base Leray argument: Higher direct images of quasi-coherent modules on qcqs algebraic spaces. Current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) remains the ancestor purpose; this is the downstream auxiliary quasi-coherent space-cohomology input, not a change to the constructible six-functor route. The imported ancestry has from.node=null; ancestor command confirms this.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic geometric or ringed-site tool: Fibre products of algebraic spaces and pullback of etale coverings. Used only for its stated input to the auxiliary algebraic-space cohomology argument; it does not replace a step of the constructible six-functor unit."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic geometric or ringed-site tool: Chartwise etale permanence for algebraic spaces. Used only for its stated input to the auxiliary algebraic-space cohomology argument; it does not replace a step of the constructible six-functor unit."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "The explicit equivalence of point-space quasi-compactness and existence of a quasi-compact scheme atlas reconciles the conventions of the atlas and qcqs lemmas; the present unit has no substitute. This is a generic topology tool, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-0d2711b9a",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-0d2711b9a (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 15 cited statements and both sources in full. Stacks 0720 (spaces-cohomology lemma-higher-direct-image): the item's statement matches it exactly (qcqs f, every i >= 0, nothing added or weakened). The route is the relative Čech alternative the source suggests just before the lemma. The base item had no proof and there is no repair note. New node lem-sfb-space-relative-cech-module-spectral-sequence is the small-étale version of Stacks 072E (stacks-sheaves, lemma-cech-to-cohomology-relative-modules, line 3617). It is true for arbitrary O_X-modules: restriction to and pushforward from étale localizations preserve injectives, so the augmented Čech rows on injectives are split exact. It gives E_1 = R^q(f∘u_p)_* ⇒ R^{p+q}f_* with a finite filtration; tested on empty U, U=X, f=id and n=0. It is statement-only and self-contained, E_∞ and the filtration are spelled out, and it carries no quasi-coherence content, so it is strictly smaller than the item. It is not a duplicate: the existing Čech nodes (lem-sc-cech-spectral, sk-thm-picard-cech, lem-trf-finite-base-cech-hypercohomology) are absolute or constant-coefficient. Step 1: reduction to affine étale V via the local-presentation definition, the all-module étale restriction iso and qc base change; the relative diagonal is handled correctly. Step 2: X qcqs, affine atlas, and U_p a qcqs scheme by a proper induction (fibre-products scheme clause, qcqs-source-products with U_{p-1}, U, X); a_p qcqs by permanence, with conventions reconciled by the a1 open-image lemma and the representable clause of the affine-tests node. Step 3: the scheme étale/Zariski comparison plus the QCoh equivalence makes E_1 quasi-coherent, in the same Mod(O) category and the same direct image. Step 4: page induction uses only kernels, images and cokernels, and the d_r bounds (r <= p incoming, r <= q+1 outgoing) are right. Step 5: extension closure along the finite filtration. proof_deps equals the union of uses and there is no cycle. Batch 5: every listed trf/sfb/a1 citation is a generic algebraic-space or ringed-site foundation (a definition, fibre products, étale permanence, the localization model, module functors), reaching sec-trace-formula only through def-trf-algebraic-space or the quasi-coherent definition. None is a step of the trace formula or of Poincaré duality, so they are accepted. Tool uses accepted: lem-trf-space-fibre-products-etale-covers, lem-trf-space-chartwise-etale-permanence, lem-a1-space-etale-open-image. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceHigherDirectImageQuasiCoherent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isQuasicoherent_higherDirectImage_of_quasiCompact_quasiSeparated",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceHigherDirectImageQuasiCoherent.lean",
+  "statement": "theorem isQuasicoherent_higherDirectImage_of_quasiCompact_quasiSeparated {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hqs : IsQuasiCompactPresheafMap (diagonalPresheafMap f.hom.hom)) [HasDerivedCategory.{w} X.SmallModules] [HasDerivedCategory.{w} Y.SmallModules] (F : X.Modules) [F.IsQuasicoherent] (i : ℕ) : ((Y.smallModuleEquivalence.inverse).obj ((DerivedCategory.homologyFunctor Y.SmallModules (i : ℤ)).obj ((derivedDirectImage f).obj ((DerivedCategory.singleFunctor X.SmallModules 0).obj (X.smallModuleRestriction.obj F))))).IsQuasicoherent",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The cohomology of the recorded canonical derived direct image of a module in degree zero, transported through the specified small-ringed-model equivalence, is the ordinary higher direct image. The localization universe is arbitrary; no geometric hypothesis is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca425aaf3",
+  "group": "NU",
+  "result": "pass",
+  "note": "Re-delivery of returned head 34fa3057. H2 repaired: stmt_deps now cite def-sfb-space-quasi-compact-presheaf-map and def-sfb-presheaf-map-separated-diagonal, which own the statement's IsQuasiCompactPresheafMap and diagonalPresheafMap; lem-sfb-space-quasicompact-affine-tests moved to proof_deps only; SpaceQCSeparatedEtaleLocal is publicly imported and the affine-tests module is a plain import. H11 repaired: a real clause-by-clause 'Second reading by NU'; 'Worker report' present. Lean signature and docstrings unchanged from the returned head; lean.statement matches the file verbatim; the three def dependency records are byte-identical to live. Substance re-checked against Stacks 0720: diagonal of f quasi-compact (no separatedness), F quasi-coherent, i:ℕ cast with no sign flip, H^i of the K-injective derivedDirectImage of F in degree 0 (the canonical f_* conjugated by the restriction equivalence), conclusion on Y's original modules, w free, no extra hypotheses; empty spaces, zero module, i=0, f=id and non-separated cases covered; 5 proof steps in the docstring; only sorry; item not landed elsewhere and not duplicated. No fix, no compile; the worker's compile and dry run are reported OK."
+ }
+}

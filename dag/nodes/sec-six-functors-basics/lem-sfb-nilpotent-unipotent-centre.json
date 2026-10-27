@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-nilpotent-unipotent-centre",
+ "kind": "statement",
+ "title": "Connected nilpotent groups with unipotent centre are unipotent",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Unipotent means admitting a closed group immersion [def-weil-closed-immersion] into some $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$, $n\\geq1$ [def-sc-general-linear-group], where $\\mathcal U_{n,k}(A)$ consists of upper triangular matrices with diagonal entries $1$ for every commutative $k$-algebra $A$. The centre $Z(G)$ is the closed commutative subgroup of [lem-sfb-affine-group-centre-base-change]: its $A$-points commute with all $G(A^{\\prime})$ after every commutative $A$-algebra extension $A^{\\prime}$. Nilpotent means admitting a finite series $G=G_0\\supseteq\\cdots\\supseteq G_s=1$ of closed normal subgroup schemes with $[G(A),G_i(A)]\\subseteq G_{i+1}(A)$ for all commutative $k$-algebras $A$ and all $i<s$. Assume $G$ is connected [def-weil-connected-scheme] and nilpotent. If $Z(G)$ is unipotent, then $G$ is unipotent. No smoothness or perfectness is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.46, printed pp.340–341; Theorem 14.5 and Corollary 14.9, pp.281–282, for the closed unitriangular realization over k."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "lem-sfb-affine-group-centre-base-change",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-unipotence-field-extension] we may pass to an algebraic closure $K$ of $k$: the given central series remains a central series on all $K$-algebras, and [lem-sfb-affine-group-centre-base-change] identifies $Z(G_K)$ with $Z(G)_K$. Connectedness is preserved because the identity is a $k$-point, by [lem-sbc-connected-rational-point-geometrically-connected]. Hence assume $k$ algebraically closed. Induct on a bound $s$ for the length of the given central series, for all connected affine groups with unipotent centre. If $s=0$, $G=1$, and if $s=1$, $G=Z(G)$, so the assertion holds. The trivial group embeds in $\\mathcal U_1$.",
+   "uses": [
+    "lem-sfb-unipotence-field-extension",
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sbc-connected-rational-point-geometrically-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.46, first paragraph; Corollary 14.9, p.282. Agent repair: use central-series length instead of dimension."
+   }
+  },
+  {
+   "text": "For $s\\geq2$ put $Z=Z(G)$ and form $H=G/Z$ by [lem-sfb-affine-normal-quotient-geometry]. It is connected, since $G$ is geometrically connected and the quotient lemma preserves this property. It has a central series of length at most $s-1$: $G_{s-1}\\subseteq Z$, and the scheme-theoretic images of $G_i$ in $H$ satisfy the same commutator inclusions and end in $1$. These images exist by [lem-sfb-algebraic-group-homomorphism-factorization]; the identities descend because quotient elements lift fppf locally. Choose the largest multiplicative-type subgroup $D=Z(H)_s$ by [lem-sfb-commutative-multiplicative-part], and let $N$ be its inverse image in $G$. Since $D\\subseteq Z(H)$ is central, it is normal in $H$, so the quotient lemma gives $N/Z\\simeq D$ and normality of $N$ in $G$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-commutative-multiplicative-part"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.46, p.341: G prime and N. Central-series quotient is the agent-supplied induction bookkeeping."
+   }
+  },
+  {
+   "text": "The kernel $Z$ of $N\\to D$ is central and $D$ is commutative. Thus $[x,y]\\in Z$ and $[xx^{\\prime},y]=[x,y][x^{\\prime},y]$, $[x,yy^{\\prime}]=[x,y][x,y^{\\prime}]$. Changing either lift by an element of $Z$ does not change the commutator. The fppf quotient property therefore gives a morphism $b:D\\times D\\to Z$ which is a homomorphism separately in each variable. For a commutative $k$-algebra $A$ and $d\\in D(A)$, $b(d,-):D_A\\to Z_A$ is trivial by [lem-sfb-multiplicative-unipotent-base-algebra-vanishing]. Consequently $b=1$ on all algebra-valued points, and $N$ is commutative. Here descent uses precisely the sheaf quotient and local lifting of [lem-sfb-affine-normal-quotient-geometry], not surjectivity on $k$-points.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-multiplicative-unipotent-base-algebra-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent commutator argument using Proposition 15.18, p.312, in place of the nested dimension induction in Lemma 16.46(b)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-commutative-diagonalizable-unipotent-product] to $N$: write $N=U\\times T$ with $U$ unipotent and $T$ diagonalizable. The homomorphism $U\\to D$ is trivial by [lem-sfb-unipotent-to-multiplicative-trivial], so $T\\to D$ is fppf locally surjective: lift a section to $N$ and take its $T$-component. The inclusion $Z\\to N$ has trivial composite to $T$ by [lem-sfb-unipotent-to-multiplicative-trivial], so $Z\\subseteq U$ and $T\\cap Z=1$. Thus $T\\to D$ is an isomorphism of fppf sheaves; also $U\\subseteq\\ker(N\\to D)=Z$, so $U=Z$ and $N=T\\times Z$. Every automorphism of $N_A$ preserves $T_A$: its composite $T_A\\to N_A\\to Z_A$ is trivial by [lem-sfb-multiplicative-unipotent-base-algebra-vanishing], and applying this to the inverse gives equality. Conjugation by $G$ therefore normalizes $T$. Apply [lem-sfb-normal-multiplicative-layers-central] to the connected group $G$ with the normal subgroups $1\\subseteq T$ (the trivial group is of multiplicative type, and $\\mathrm{id}_T$ represents $T/1$): $T\\subseteq Z(G)=Z$. In $N=T\\times Z$ the intersection is trivial; hence $T=1$, $D=1$, and $N=Z$.",
+   "uses": [
+    "lem-sfb-commutative-diagonalizable-unipotent-product",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-multiplicative-unipotent-base-algebra-vanishing",
+    "lem-sfb-normal-multiplicative-layers-central"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.46(b), p.341, commutative splitting, characteristic multiplicative factor and centrality; Theorem 16.13(b), p.328, and Corollary 12.38, p.244, and Lemma 16.43, p.340."
+   }
+  },
+  {
+   "text": "Since $D=1$, [lem-sfb-commutative-multiplicative-part] applied to $Z(H)$ says $Z(H)/D=Z(H)$ is unipotent. The induction hypothesis applies to connected $H$ and its central series of length at most $s-1$, so $H$ is unipotent. The exact fppf quotient $1\\to Z\\to G\\to H\\to1$ from [lem-sfb-affine-normal-quotient-geometry] has unipotent kernel and quotient. By [lem-sfb-unipotent-extension-arbitrary], $G$ is unipotent. Finally [lem-sfb-unipotence-field-extension] descends this conclusion to the original field.",
+   "uses": [
+    "lem-sfb-commutative-multiplicative-part",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-unipotent-extension-arbitrary",
+    "lem-sfb-unipotence-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.46 conclusion, pp.340--341; Corollaries 14.7 and 14.9, p.282; central-series induction as above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unipotence-field-extension",
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-commutative-multiplicative-part",
+  "lem-sfb-multiplicative-unipotent-base-algebra-vanishing",
+  "lem-sfb-commutative-diagonalizable-unipotent-product",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-normal-multiplicative-layers-central",
+  "lem-sfb-unipotent-extension-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.46, pp.340--341, repaired using induction on central-series length and the commutator argument from Proposition 15.18, p.312."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Uu]nipotent|[Nn]ilpotent[Gg]roupScheme",
+   "results": "{\"t\": \"2026-10-24T07:04:06Z\", \"tool\": \"grep\", \"query\": \"[Uu]nipotent|[Nn]ilpotent[Gg]roupScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected nilpotent algebraic group is unipotent if its centre is unipotent",
+   "results": "{\"t\": \"2026-10-24T07:04:07Z\", \"tool\": \"leansearch\", \"query\": \"A connected nilpotent algebraic group is unipotent if its centre is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"of_quotient_center_nilpotent\", \"commGroupOfNilpotencyClass\", \"IsNilpotent.to_isSolvable\", \"Group.IsNilpotent\", \"Group.nilpotencyClass\", \"LieAlgebra.non_trivial_center_of_isNilpotent\", \"CommGroup.isNilpotent\", \"nilpotent_center_quotient_ind\"], \"digest\": \"06ee6aa3b092e981\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T07:04:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nilpotent algebraic group whose central subgroup scheme is upper unitriangular admits a unitriangular representation",
+   "results": "{\"t\": \"2026-10-24T07:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"Nilpotent algebraic group whose central subgroup scheme is upper unitriangular admits a unitriangular representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isNilpotent_f\", \"RootPairing.GeckConstruction.isNilpotent_e\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent.nilpotent'\", \"LieSubmodule.isNilpotent_iff_exists_self_le_ucs\", \"LieAlgebra.top_isCartanSubalgebra_of_nilpotent\", \"LieModule.IsTriangularizable\", \"LieModule.IsNilpotent.nilpotent\"], \"digest\": \"6e89c108e9da5b22\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected nilpotent affine group scheme with unipotent center is unipotent over any field",
+   "results": "{\"t\": \"2026-10-24T07:04:17Z\", \"tool\": \"leanfinder\", \"query\": \"A connected nilpotent affine group scheme with unipotent center is unipotent over any field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsNilpotent.isVirtuallyNilpotent\", \"IsNilpotent.to_isSolvable\", \"Group.IsNilpotent.nilpotent\", \"Group.IsNilpotent\", \"Group.IsNilpotent.nilpotent'\", \"CommGroup.isNilpotent\", \"Group.isNilpotent_top\", \"CommGroup.nilpotencyClass_le_one\"], \"digest\": \"71be17371a5928e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Galois groups, nilpotent operators or Lie algebras; none states this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|nilpotent.*cent",
+   "results": "{\"t\": \"2026-10-24T07:38:10Z\", \"tool\": \"grep\", \"query\": \"unipotent|nilpotent.*cent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent groups, not affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nilpotent algebraic group with unipotent center admits a closed upper unitriangular representation",
+   "results": "{\"t\": \"2026-10-24T07:38:11Z\", \"tool\": \"leansearch\", \"query\": \"A nilpotent algebraic group with unipotent center admits a closed upper unitriangular representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsNilpotent\", \"of_quotient_center_nilpotent\", \"nilpotencyClass_eq_quotient_center_plus_one\", \"LieAlgebra.nilpotent_ad_of_nilpotent_algebra\", \"commGroupOfNilpotencyClass\", \"Group.IsNilpotent.nilpotent\", \"nilpotent_center_quotient_ind\", \"Group.nilpotencyClass\"], \"digest\": \"def19dd4ab7d7ab5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent groups, not affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"unipotent\"",
+   "results": "{\"t\": \"2026-10-24T07:38:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsNilpotent\\\", \\\"unipotent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent groups, not affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected nilpotent affine group scheme with unipotent scheme theoretic centre is unipotent",
+   "results": "{\"t\": \"2026-10-24T07:38:13Z\", \"tool\": \"leanfinder\", \"query\": \"A connected nilpotent affine group scheme with unipotent scheme theoretic centre is unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsNilpotent.nilpotent\", \"of_quotient_center_nilpotent\", \"Group.IsNilpotent.nilpotent'\", \"Group.IsNilpotent.isVirtuallyNilpotent\", \"CommGroup.nilpotencyClass_le_one\", \"IsNilpotent.to_isSolvable\", \"Group.isNilpotent_top\", \"Group.isNilpotent_iff\"], \"digest\": \"723aed48dac685c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract nilpotent groups, not affine group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-central-torus-quotient",
+  "date": "2026-10-24",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Theorem 5.28, p.110). Supporting input for this split: Lemma 16.46, printed pp.340–341; Theorem 14.5 and Corollary 14.9, pp.281–282, for the closed unitriangular realization over k.",
+   "via": [
+    "lem-sfb-nilpotent-central-torus-quotient",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nilpotent-unipotent-centre",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-field nonsmooth statement. Replaced unsafe dimension induction by induction on central-series length; killed the commutator of the inverse image of the central multiplicative part using base-algebra vanishing. Created three strictly supporting statement-only nodes after recorded searches. All quotient and characteristic-subgroup arguments are explicit. Reviewer FIX: the normal multiplicative-type centrality input is the existing lem-sfb-normal-multiplicative-layers-central with N=1; the duplicate new node lem-sfb-normal-multiplicative-subgroup-central is dropped.",
+  "blueprint": "The inherited from.place chain serves det-thm-sf-ctf-stability-direct-images proof (3), alteration input, through the nilpotent central-torus quotient prerequisite. The nearest imported ancestor remains null as reported by blueprint_refs.py ancestor; no artificial blueprint ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic connectedness under field extension for the group identity section; the unit has no substitute for this field-extension fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-486e52c30",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-486e52c30 (reviewer sub-agent of L); spot-checked: I read the whole item, all four new nodes and every cited statement. Sources checked in Milne iAG: Lemmas 16.43-16.46 (pp.340-341), Theorem 14.5 and Corollaries 14.7/14.9 (pp.281-282), Proposition 15.18 and Remark 15.19 (p.312), Theorem 12.36 and Corollaries 12.37/12.38 (pp.243-244). The statement is unchanged and is not weakened. It is not a 2026-10-21 re-split: this is the first split of the item. Milne inducts on dimension, which fails when the centre is finite (e.g. infinitesimal); the delivery's induction on central-series length is a correct repair. Steps 1-5 are correct. Step 3 builds the commutator pairing D x D -> Z through the Z x Z-torsor N x N -> D x D and kills it by Milne 15.18 over a base algebra A. Step 4 shows T is characteristic in N via vanishing over A, so T is normal, central, hence T = 1. Three of the four new nodes are true and are not duplicates: field extension = Milne 14.9 (the existing nodes are smooth-only or algebraically-closed-only); extension of unipotents = Milne 14.7 (lem-sfb-smooth-unipotent-extension assumes smooth groups over an algebraically closed field); base-algebra vanishing = Milne 15.18, tested on mu_p -> alpha_p over k[eps]. Fault (C5): lem-sfb-normal-multiplicative-subgroup-central duplicates the existing base node lem-sfb-normal-multiplicative-layers-central taken with N=1. FIX: drop it, cite layers-central with N=1 in step 4, and update proof_deps and the summary. Also added in the fix: D is central hence normal in H (step 2), and U is in ker(N->D)=Z, so N = T x Z (step 4). Batch 5: the four flagged chains end in generic trace-formula-chapter foundations (the definition of fppf descent data, Stacks 021O(3) fppf base change, rank-nullity, flat tensor preserves injections). None is a step of the trace-formula or Poincare-duality proofs, so no RETURN. I accept the 04KV tool use (geometric connectedness from the identity point; the unit has no such node). There is no cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NilpotentUnipotentCentre",
+  "declaration": "AlgebraicGeometry.unipotent_of_nilpotent_of_unipotent_centre",
+  "file": "lean/Sheaf/AlgebraicGeometry/NilpotentUnipotentCentre.lean",
+  "statement": "theorem unipotent_of_nilpotent_of_unipotent_centre {k : Type u} [Field k] (G : Grp (Over (Spec (.of k)))) (hG : IsAffine G.X.left ∧ LocallyOfFiniteType G.X.hom ∧ QuasiCompact G.X.hom) (hconn : ConnectedSpace G.X.left) (hseries : ∃ (s : ℕ) (H : Fin (s + 1) → Grp (Over (Spec (.of k)))) (i : ∀ j : Fin (s + 1), H j ⟶ G), (∀ j : Fin (s + 1), IsClosedSubgroupScheme (i j).hom.hom ∧ IsNormalSubgroupScheme (i j).hom.hom) ∧ IsIso (i 0) ∧ Nonempty (H (Fin.last s) ≅ Grp.trivial _) ∧ (∀ j : Fin s, ∃ l : H j.succ ⟶ H j.castSucc, l ≫ i j.castSucc = i j.succ) ∧ ∀ (j : Fin s) (A : Type u) [CommRing A] [Algebra k A] (g : StandardGroupSchemes.affine k A ⟶ G.X) (h : StandardGroupSchemes.affine k A ⟶ (H j.castSucc).X), ∃ z : StandardGroupSchemes.affine k A ⟶ (H j.succ).X, z ≫ (i j.succ).hom.hom = g * (h ≫ (i j.castSucc).hom.hom) * g⁻¹ * (h ≫ (i j.castSucc).hom.hom)⁻¹) (Z : Grp (Over (Spec (.of k)))) (iZ : Z ⟶ G) (hiZ : IsClosedSubgroupScheme iZ.hom.hom) (hZ : ∀ (A : Type u) [CommRing A] [Algebra k A], ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A = Set.range (fun z : StandardGroupSchemes.affine k A ⟶ Z.X ↦ z ≫ iZ.hom.hom)) (hunitriangular : ∃ n : ℕ, 0 < n ∧ ∃ r : Z.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (z : (Spec (.of A)).asOver (Spec (.of k)) ⟶ Z.X), (∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (z ≫ r)).val (ULift.up a) (ULift.up a) = 1) ∧ ∀ a b : Fin n, b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (z ≫ r)).val (ULift.up a) (ULift.up b) = 0) : ∃ n : ℕ, 0 < n ∧ ∃ r : G.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (g : (Spec (.of A)).asOver (Spec (.of k)) ⟶ G.X), (∀ a : Fin n, (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (g ≫ r)).val (ULift.up a) (ULift.up a) = 1) ∧ ∀ a b : Fin n, b < a → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (g ≫ r)).val (ULift.up a) (ULift.up b) = 0",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62e3e056a",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read item node, all 8 stmt_deps, the centralizerPoints and IsSubgroupScheme/IsNormal/IsClosed definitions, and Milne iAG Lemma 16.46 / Thm 14.5 / Cor 14.9. Clauses match: affine finite type (LocallyOfFiniteType ∧ QuasiCompact, as the dependency record prescribes); ConnectedSpace; central series of closed normal subgroups with IsIso (i 0), trivial last term, chain inclusions and commutators over all k-algebras; centre pinned by the recorded centralizerPoints (𝟙 G) interface; unipotence as a closed subgroup hom into GL_n, n>0, unitriangular on all A-points (equivalent to a closed group immersion into U_n), on both Z and G; no smoothness, perfectness or characteristic hypothesis. Edge cases s=0/1, nonreduced groups, zero algebra OK. Only the lean field changed vs side-live; statement verbatim; sorry only; docstrings carry source, blueprint id and proof plan; no stmt_dep or new-node changes; no duplicate notion. Maintainer note: NW delivered the same item in parallel (0ca071ca0, GroupScheme/NilpotentUnipotentCentre.lean, nilpotent_unipotent_of_unipotent_centre; PASS WIN, unlanded). Only one may land; if NW lands first, this O4 delivery must not."
+ }
+}

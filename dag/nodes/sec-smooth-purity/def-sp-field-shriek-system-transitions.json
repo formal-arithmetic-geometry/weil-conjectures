@@ -1,0 +1,122 @@
+{
+ "id": "def-sp-field-shriek-system-transitions",
+ "kind": "definition",
+ "title": "Actual system reduction and comparison evaluation coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the model family $D$ of [def-sp-field-shriek-system-models] and the evaluation-law coordinates of [def-sp-field-shriek-system-finite-laws]. For every coefficient field $E$, scheme $T$, and $m\\le n$, a quotient restriction coordinate identifies restriction along the actual ell-power sequence ring map of [lem-coef-semilinear-derived-sections] with restriction along the constant sheaf map induced by the quotient map $\\mathcal O_E/\\ell^{n+1}\\to\\mathcal O_E/\\ell^{m+1}$ of [def-sp-coefficient-tower-shriek-interfaces] (the tower transitions of [det-sp-tower-gluing]), with identity maps on every section. Define $r^N_{n,m}$ by transposing the actual SemilinearSections derivedTransition of $N$ under the finite scalar adjunction of [det-sp-scalar-extension-functor] after exact localization of this section-identity coordinate. For a compactification and coefficient inclusion define the source and target evaluation isomorphisms of the already constructed system comparison using exactly its EvaluationLaw scalar and compact-support coordinates and the finite compact support of [def-sp-reduction-direct-image-comparison]. These are actual maps and normalization data, with no assertion of existence or of a transition law.",
+ "stmt_deps": [
+  "def-sp-field-shriek-system-models",
+  "def-sp-field-shriek-system-finite-laws",
+  "lem-coef-semilinear-derived-sections",
+  "det-sp-tower-gluing",
+  "def-sp-coefficient-tower-shriek-interfaces",
+  "det-sp-scalar-extension-functor",
+  "def-sp-reduction-direct-image-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), actual system reduction and comparison evaluation coordinates, expanded node proof step 8"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Transition square for derived compact support coefficient comparison on strict sheaf systems using actual derived reduction and input transition",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.TwoSquare; DerivedCategory.TStructure.t; CategoryTheory.Square.Hom.casesOn; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; TestFunction.coe_ofSupportedIn; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'_toSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc.",
+   "date": "2026-10-25",
+   "verdict": "No specialized system coefficient comparison transition interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans.naturality",
+   "results": "[loogle] OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No exact interface."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep derivedTransition|systemReduction|quotientAfterComparison CategoryTheory",
+   "results": "[grep] OK 0 hit(s).",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib specialized transition construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n QuotientRestriction|quotientAfterComparison|comparisonAfterQuotient|commonTransitionComparison|field-shriek-system-transitions|field-shriek-system-transition-words dag/nodes lean/Sheaf lean/WeilConjectures",
+   "results": "No comparison-word matches. Related WeilConjectures.FiniteAdjunctionDiagram.QuotientRestriction and transition in Sheaf.SixFunctors.FiniteAdjunctionSystemData concern normalized DVR completed-coefficient systems, not the ell-power SemilinearSections model here. SemilinearSections.derivedTransition is reused directly.",
+   "date": "2026-10-25",
+   "verdict": "Existing generic derivedTransition reused, no duplicate quotient transition on this model."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search transition compact support coefficient",
+   "results": "12 broad blueprint nodes matched; no interface for these two system-comparison transition words.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate helper notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-field-shriek-system-comparison",
+  "date": "2026-10-25",
+  "group": "O1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), actual system reduction and comparison evaluation coordinates, expanded node proof step 8",
+   "via": [
+    "lem-sp-field-shriek-system-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekSystemTransitions",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.systemReduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.QuotientRestriction",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.systemReduction",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.comparisonSource",
+   "AlgebraicGeometry.ProEtale.FieldShriekSystem.comparisonTarget"
+  ],
+  "file": "lean/Sheaf/Paper/FieldShriekSystemTransitions.lean",
+  "statement": "def systemReduction (E : Index P) (T : Scheme.{u}) {m n : ℕ} (v : m ≤ n) (q : QuotientRestriction P E T v) (N : SpTowerShriek.D P.coefficients.l E.val T) : (scalarExtensionFunctor (SpTowerCalculus.quotient P.coefficients.l E.val v) T).obj ((SpTowerShriek.Ev P.coefficients.l E.val T n).obj N) ⟶ (SpTowerShriek.Ev P.coefficients.l E.val T m).obj N",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair helper for H3: real definitions built from the actual derivedTransition, normalized scalar adjunction, and EvaluationLaw coordinates. No new theorem, arbitrary map or lift from finite evaluations."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b468cb0e5",
+  "group": "O1",
+  "result": "fix",
+  "note": "H3 repair checked: MixedLaw extends EvaluationLaw; quotientAfterComparison/comparisonAfterQuotient contain the actual comparison at n and m with systemReduction (transpose of SemilinearSections.derivedTransition, section-pinned QuotientRestriction); common word = reductionDirectImageComparison(R_n→S_m) then RΓc_{S_m}(assoc⁻¹ ≫ C_{a_m}(input reduction)), as in node step 8; HEq sources equal via coefficientSquare; system_square is the real transition square of b (follows from naturality, advisory). All other modules byte-identical to the accepted 8fa1 version: hypotheses, proper/open comparison, invertibility on N_A with ambient target, evaluation at every n, composition/identity on whole systems; ∃ Models follows the landed tower_shriek_levels pattern. Edge cases m=n, E=F, ramified, n=0, M=0/empty X, d=0, E⊂F⊂L. Gates OK (no hollow defs, only sorry is the theorem, docstrings, report sections). FIX (H12 field part): 7 new def nodes lacked stmt_deps on their def owners def-sp-coefficient-tower-shriek-interfaces (SpTowerCalculus.Coordinates/realization/quotient), def-sp-reduction-direct-image-comparison (reductionCompactSupport/reductionDirectImageComparison), det-sp-scalar-extension-functor (scalarExtensionFunctor/_composition); fixes/<id>.json add them to stmt_deps with bracketed cites in the statement; owners landed 10-16..10-20; no cycle. No Lean changed, so nothing compiled."
+ }
+}

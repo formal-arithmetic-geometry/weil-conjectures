@@ -1,0 +1,119 @@
+{
+ "id": "def-pur-supported-hom-pair",
+ "kind": "definition",
+ "title": "Supported-Hom pair and evaluation-normalized identification",
+ "status": "split",
+ "statement": "Use the small-site size convention of [def-weil-size-convention]. For a commutative ring $A$ in universe $u+1$, a supported-Hom pair consists of a site with object universe $u+1$ and morphism universe $u$, sheafification and a Grothendieck abelian category of $A$-module sheaves, a terminal object $T$, an object $W$ and arrow $W\\to T$, a sheaf $B$, and a restriction $A_T\\to B$ from the constant rank-one sheaf [def-weil-pbc-constant-sheaf]. Use the existing kernel-of-restriction sections and bounded-below right-derived supported groups of [def-pur-support-cohomology] in the ordinary derived categories [def-weil-pbc-derived-categories]. Its degree-$a$ derived-Hom model is $\\operatorname{Hom}(B[0],K[a])$. An Identification consists of additive equivalences from the actual supported groups to these Hom groups, natural in bounded-below $K$, satisfying the evaluation-at-one cocycle normalization of [def-pur-supported-hom-cocycle-data]: on each bounded-below degreewise injective $I$, a closed $f:B\\to I^a$ corresponds to the supported cycle whose kernel inclusion is the evaluation at one of $A_T\\to B\\xrightarrow f I^a$, and its cohomology class maps to the canonically localized single-complex cocycle of $f$. This is data with a specified normalization, not an existence assertion. For the finite datum $P$ of [def-pur-conventions] and a closed immersion $i:Z\\hookrightarrow X$ [def-weil-closed-immersion], define the etale and pro-etale pairs by their actual small sites, terminal $X$, complement $X\\setminus Z$, supported sheaf $i_*A_Z$, and canonical coefficient restriction; use comparison inverse image for pro-etale constants.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-support-cohomology",
+  "def-weil-pbc-derived-categories",
+  "def-pur-supported-hom-cocycle-data",
+  "def-pur-conventions",
+  "def-weil-closed-immersion"
+ ],
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Theorem 9.4 and its Ext proof on pp. 66–67, with Example 9.5: kernel of restriction, evaluation at one and closed-support Hom. The existing SupportHomPair interface in SupportedHomPullback spells out this normalization on injective representatives."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "SupportHomPair|proEtaleSupportHomPair|functorialCupOrdinaryCompare",
+   "results": "{\"t\": \"2026-10-23T07:50:28Z\", \"tool\": \"grep\", \"query\": \"SupportHomPair|proEtaleSupportHomPair|functorialCupOrdinaryCompare\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. The live project declarations are reused with existing:true; no construction is duplicated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported sheaf cohomology comparison with derived Hom normalized by evaluation at one",
+   "results": "{\"t\": \"2026-10-23T07:50:29Z\", \"tool\": \"leansearch\", \"query\": \"Supported sheaf cohomology comparison with derived Hom normalized by evaluation at one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheaf.evalHom\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CategoryTheory.Sheaf.H\", \"SheafOfModules.unitHomEquiv_apply_coe\", \"CategoryTheory.sheafHomSectionsEquiv\", \"CategoryTheory.sheafSectionsNatIsoEvaluation\", \"SheafOfModules.evaluation\", \"CategoryTheory.sheafHom\"], \"digest\": \"b5b1018e5d93531e\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. The live project declarations are reused with existing:true; no construction is duplicated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale to pro etale ordinary cohomology comparison via exact inverse image",
+   "results": "{\"t\": \"2026-10-23T07:50:30Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale to pro etale ordinary cohomology comparison via exact inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.comp\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.FormallyEtale.iff_of_equiv\", \"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.of_equiv\", \"Algebra.FormallyEtale.of_restrictScalars\"], \"digest\": \"9d762c25a8bd157d\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match. The live project declarations are reused with existing:true; no construction is duplicated."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n SupportHomPair|proEtaleSupportHomPair|functorialCupOrdinaryCompare dag/nodes lean/WeilConjectures lean/Sheaf; blueprint_refs.py search supported Hom; blueprint_refs.py search site comparison",
+   "results": "No upstream matches. Live SupportedHomPullback defines SupportHomPair, group and Identification, etaleSupportHomPair and proEtaleSupportHomPair; SupportedCupFunctoriality defines functorialCupOrdinaryCompare. Their only existing DAG owners are theorem nodes. def-pur-supported-hom-cocycle-data owns the generic normalization used inside Identification but not this pair/interface. def-pur-supported-hom-site-comparison owns only the supported comparison. Blueprint search: 0 supported Hom matches and 14 site comparison matches, none owning these definitions.",
+   "date": "2026-10-23",
+   "verdict": "Register the existing declarations on two definition nodes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-divisor-normalized-realization",
+  "date": "2026-10-23",
+  "group": "Q106"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "First sentence and final paragraph: integral framed extension, its scalar and supported pro-etale realizations.",
+   "via": [
+    "lem-pur-divisor-normalized-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.SupportedHomPullback",
+  "declaration": "AlgebraicGeometry.SupportHomPair",
+  "declarations": [
+   "AlgebraicGeometry.SupportHomPair",
+   "AlgebraicGeometry.SupportHomPair.sections",
+   "AlgebraicGeometry.SupportHomPair.group",
+   "AlgebraicGeometry.SupportHomPair.complex",
+   "AlgebraicGeometry.SupportHomPair.cycleClass",
+   "AlgebraicGeometry.SupportHomPair.derivedHom",
+   "AlgebraicGeometry.SupportHomPair.cocycleMorphism",
+   "AlgebraicGeometry.SupportHomPair.Identification",
+   "AlgebraicGeometry.etaleSupportHomPair",
+   "AlgebraicGeometry.proEtaleSupportHomPair"
+  ],
+  "statement": "structure SupportHomPair (A : Type (u + 1)) [CommRing A]",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Independent H2 return repair: definition-node ownership of existing canonical data. No Lean module or declaration is added or changed; the theorem establishing existence or compatibility remains separate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1329c6000",
+  "group": "Q106",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1329c6000",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Re-delivery of the f8b5 H2 return. Lean byte-identical to the previously reviewed head (15 modules). H2 repaired: six new def nodes now cite the landed def-pur-supported-class-operations (FunctorialCupH/OrdinaryH/Forget/Pullback/ChangeSupport) and def-pur-supported-hom-site-comparison (functorialCupCompare), whose records are identical to the live clone. New existing:true owners: def-pur-ordinary-hom-site-comparison (functorialCupOrdinaryCompare, statement verbatim SupportedCupFunctoriality:1714) and def-pur-supported-hom-pair (SupportHomPair with its fields, Identification and the etale/pro-etale pairs, verbatim line 53; node text matches the structure and the normalization). Neither duplicates a live def node. No theorem node remains a stmt_dep owner of plain data. stmt_deps equal the statement citations in all 16 new nodes. The item changes only in stmt_deps (adding landed and new nodes, permitted) and its lean.statement is verbatim. No module or node collisions with live. Mathematics re-read: β characterization with f(s)=0, positive Kummer splice with the root map, unique b_A in Ext^2, b^pro in the actual supported group with a normalized-Identification predicate, iso/pullback (canonical unit-pinned tensor-pullback comparison)/enlarge/additive/forget-support clauses all faithful. Edge cases and universes OK; all 8 theorems proved by sorry; no hollow definitions; no SGA. No compile (nothing changed). Advisories: item uniqueness is stated over all three equations (full uniqueness is in divisorScalarRealization_existsUnique); four nodes reach the Identification owner only through pro-predicate; upstream owners of kummerδ₁, classH1, etaleIsoTorsor, openSectionPullback and gmSheaf are not cited; the second reading is the worker's own check."
+ }
+}

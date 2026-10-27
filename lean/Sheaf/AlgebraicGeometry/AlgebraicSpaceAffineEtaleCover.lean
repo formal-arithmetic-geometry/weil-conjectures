@@ -8,9 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.AlgebraicSpacePointClasses
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.Topology.Defs.Induced
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint
-import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.SpaceAtlasOpenRefinementPullback
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAtlasPointComparison
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAtlasTestOpenSubsets
 
 /-!
 # Affine étale atlases and the topology of an algebraic space
@@ -71,6 +71,43 @@ theorem exists_affine_etale_cover_and_point_topology {S : Scheme.{u}}
           (IsEtale t →
             @IsOpenMap T.left (Point E.obj.obj) inferInstance τ (schemePointMap t) ∧
             @IsOpen (Point E.obj.obj) τ (Set.range (schemePointMap t)))) := by
-  sorry
+  classical
+  obtain ⟨V, p, hpEt, hpSurj⟩ := E.property.2
+  have hp : IsRepresentable p := by
+    intro T t
+    obtain ⟨P, q, a, h, _⟩ := hpEt T t
+    exact ⟨P, q, a, h, trivial⟩
+  obtain ⟨hrefine, I, U, j, hj, hcover, hAffine, hbase⟩ :=
+    space_atlas_open_refinement_pullback E V p hp hpEt hpSurj
+  obtain ⟨_, hwRep, hwSurj, hwEt, hwPoints⟩ := hrefine I U j hj hcover
+  let W : Over S := ∐ U
+  let w : yoneda.obj W ⟶ E.obj.obj := yoneda.map (Sigma.desc j) ≫ p
+  refine ⟨W, w, I, fun i ↦ (U i).left, fun i ↦ (Sigma.ι U i).left,
+    ⟨isColimitOfHasCoproductOfPreservesColimit (Over.forget S) U⟩,
+    hAffine, ?_, hwRep, hwSurj, hwEt, hwPoints, ?_⟩
+  · intro i
+    obtain ⟨B, hB, b, hb⟩ := hbase i
+    exact ⟨B, hB, b, hb.trans (Over.w (Sigma.ι U i)).symm⟩
+  · let τ := TopologicalSpace.coinduced (schemePointMap w) inferInstance
+    let : TopologicalSpace (Point E.obj.obj) := τ
+    refine ⟨τ, rfl, ?_, ?_⟩
+    · intro V' p' _ hpSurj' hpEt'
+      obtain ⟨Q, a, b, _, _, _, _, _, _, _, _, _, _, hsubsets⟩ :=
+        exists_atlas_point_comparison E W V' w p' hwEt hwSurj hpEt' hpSurj'
+      apply TopologicalSpace.ext
+      funext A
+      exact propext (hsubsets A).2.2
+    · intro T t
+      obtain ⟨Q, q, b, _, _, _, _, _, hpreimage, _, himage⟩ :=
+        exists_atlas_test_open_subsets E W T w t hwEt hwSurj
+      refine ⟨?_, ?_⟩
+      · apply continuous_def.mpr
+        intro A hA
+        exact (hpreimage A).2.2 hA
+      · intro ht
+        have hopen : IsOpenMap (schemePointMap t) := by
+          intro B hB
+          exact (himage ht).2 B hB
+        exact ⟨hopen, hopen.isOpen_range⟩
 
 end AlgebraicGeometry.AlgebraicSpace

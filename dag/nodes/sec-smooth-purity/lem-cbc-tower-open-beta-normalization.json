@@ -1,0 +1,366 @@
+{
+ "id": "lem-cbc-tower-open-beta-normalization",
+ "kind": "statement",
+ "title": "Open-unit-normalized base change on arbitrary constant strict towers",
+ "statement": "Let $B$ be a commutative ring. For every scheme $X$ use its small pro-etale site with the chosen small skeleton, its constant ring sheaf $\\underline B_X$, the abelian category of module sheaves, and $\\mathcal T_X=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline B_X))$ of strict inverse systems. Work in the ordinary unbounded derived categories $D(\\mathcal T_X)$. Use the termwise inverse image $G_u$, total derived termwise direct image $R_u$, and exact open extension $J_j$ with their specified adjunctions and compositors [def-cbc-strict-constant-tower-operations] [def-cbc-strict-tower-open-extension]. For a cartesian square with opens $j:U\\hookrightarrow X$, $j':U'\\hookrightarrow X'$ and maps $g:X'\\to X$, $g_U:U'\\to U$, the restriction/direct-image comparison $j^{-1}g_*\\cong(g_U)_*j'^{-1}$ on module sheaves is identity on the same pulled-back sections. Its left-adjoint comparison induces a canonical isomorphism $\\beta_{j,g}:G_gJ_j\\xrightarrow{\\sim}J_{j'}G_{g_U}$. Its inverse is exactly the $J_{j'}\\dashv G_{j'}$ transpose of $G_{g_U}\\eta_j$, followed by the canonical inverse-image square identification. This determines $\\beta$ naturally, on sheaves, strict towers, complexes and their unbounded derived categories. For $h:X''\\to X'$ and the corresponding opens, $\\beta_{j,gh}=(\\beta_{j',h}G_{g_U})\\circ(G_h\\beta_{j,g})$, inserting pullback compositors. For opens $j_1:U\\hookrightarrow V$, $j_2:V\\hookrightarrow X$, the comparison for $j_2j_1$ is $(J_{j_2'}\\beta_{j_1,g_V})\\circ(\\beta_{j_2,g}J_{j_1})$ under open-composition identifications. Identity base changes and identity opens give identities under the specified unit identifications. All equations hold before evaluation. Evaluating at any index for finite $B$ gives the specified finite open base-change comparison [lem-cbc-proetale-extension-zero-base-change].",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AE (definition-extension-zero); sites-modules.tex Tag 04J0 (lemma-localize-morphism-ringed-sites); unit-transpose normalization and coherence refinement, original parent proof steps 3-4"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "def-cbc-open-immersion-square",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-finite-constant-coefficient-transport",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-cbc-open-square-section-restriction-mate], proved in this module from [lem-cbc-tower-square-unit-sections], naturality and the triangle identity. The projection-preserving site-square identity relates the two restrictions along the site adjunction units. Invertibility follows independently from conjugation of the already constructed invertible open comparison of Step 2.",
+   "uses": [
+    "lem-cbc-open-square-section-restriction-mate",
+    "lem-cbc-tower-square-unit-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; proetale.tex Tag 09AE, definition-extension-zero"
+   }
+  },
+  {
+   "text": "On module sheaves the specified restriction comparison is already the exchange mate by definition. The fixed-coefficient open comparison transports the fully faithful ordinary open extension to moduleJ, so the chosen open adjunction has invertible unit. moduleOpenSquare identifies the pulled-back open extension with one in the essential image of the new open extension; its counit is therefore invertible there. The counit formula for the adjunction transpose proves singleBetaInv invertible, hence openBetaModule_isIso. The iterated-mate identity identifies the conjugate comparison with openBetaModule; applying the open Hom equivalence to its inverse gives exactly the pulled-back open unit, proving openBetaModule_normalized.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-trf-iterated-square-mates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; sites-modules.tex Tag 04J0, inverse-adjunct formula"
+   }
+  },
+  {
+   "text": "Prove inverse-image square pasting from the conjugate compositor coherence. Apply horizontal and vertical mate-pasting to obtain the two module open-composition laws. For identity arrows the section-normalized direct-image unit laws give the inverse-image unit laws; transposing those laws gives the open identity comparisons. The private helpers reproduce these elementary calculations without importing the calculus module, which now consumes this item.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, adjoint transformation; identity and conjugation laws for mates"
+   }
+  },
+  {
+   "text": "Apply the sheaf comparison and its inverse at every index of a strict tower. For a transition $a:M_{n+1}\\to M_n$, naturality says $L_2(a)\\beta_{M_{n+1}}=\\beta_{M_n}L_1(a)$; hence these components form a tower map, and the same equation for $b$ proves they are inverse tower maps. On a complex of towers, naturality with respect to each differential is the chain-map equation. All equations of Steps 3-6 hold at every tower index and cochain degree, hence hold as equations of tower and chain maps. This is justified in the ordinary functor and complex categories before localization; equality of their morphisms is componentwise equality. The adjunction units are termwise by [def-cbc-strict-constant-tower-operations] and [def-cbc-strict-tower-open-extension], so the chain maps retain the transpose normalization.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE, definition-extension-zero; explicit termwise tower and chain-map argument"
+   }
+  },
+  {
+   "text": "Use exact_mate_tower to descend the module inverse comparison and its unit equation before evaluation. The squareG_lift equation identifies the descended inverse-image square with the specified derived square. Injectivity of the chosen open adjunction Hom equivalence identifies this descended map with betaInv, proving openBetaNormalization. Apply evalD_square to the same termwise square and replace the evaluation comparisons by their specified aliases, proving openBetaEvaluation. The complex component equation follows directly from the termwise map definitions.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localization uniqueness on transformations"
+   }
+  },
+  {
+   "text": "The finite pullback comparison is the inverse mate of cDirect between equivalences, hence is invertible. The finite open comparison is the inverse mate of its inverse and is invertible for the same reason. Both chosen comparisons therefore retain the specified adjunction units.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE; sites-cohomology.tex Tag 0GL1, open normalization refinement and its finite specialization"
+   }
+  },
+  {
+   "text": "For composable scheme arrows, compare the two direct-image presentation maps on sections after applying cUnderlying. The specifications of cDirect and moduleRComp, together with naturality of cUnderlying for sheaf maps and site restrictions, identify both paths with restriction along Over.pullbackComp.hom. Conjugate by the composite adjunctions: moduleGComp and upperStarComp are the corresponding left-adjoint compositors. Mate pasting gives finitePull_compSquare; transport the natural-transformation square along the commutativity relation and then take its components to obtain finitePull_square with moduleSquareG.inv and upperStarCompIso.hom. Take open mates. The ordinary open base-change map has mate upperStarCompIso.hom, whereas singleBetaInv has mate moduleSquareG.inv. The converse mate-cube theorem proves the ordinary open cube; cancel the two base-change isomorphisms to obtain its forward orientation. Apply the exact-functor cube localization theorem to the six specified faces. Its derived ordinary face is exactly ordinaryOpenExtensionBaseChangeIso, by equality of the defining conjugate isomorphisms. Thus openBetaFiniteCompatibility compares the actual maps on the full unbounded derived category, without evaluation detecting equality.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-fix-site-open-exchange-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AE; categories.tex Tag 0B65, mates and their pasting; derived.tex Tags 05S7 and 014F, exact localization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-open-square-section-restriction-mate",
+  "lem-cbc-tower-square-unit-sections",
+  "def-cbc-strict-constant-tower-operations",
+  "def-cbc-strict-tower-open-extension",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-trf-iterated-square-mates",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-fix-site-open-exchange-localization"
+ ],
+ "proof_origin": {
+  "by": "R6",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AE; direct section-preserving coefficient comparisons, natural-transformation square transport, mate cubes and exact-cube descent. Previous sheaf, tower and evaluation proofs retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian base change for extension by zero on unbounded derived strict towers of pro-etale module sheaves over an arbitrary constant ring, normalized by the open adjunction unit, coherent for composition of base changes and open immersions.",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.FormallyEtale.of_restrictScalars, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*(baseChange|comp)|proetale.*(beta|extension)|betaInv",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian base change for extension by zero on unbounded derived strict towers of pro-etale module sheaves over an arbitrary constant ring, normalized by the open adjunction unit, coherent for composition of base changes and open immersions.",
+   "results": "8 hits: IsBaseChange.pi, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, IsBaseChange.of_comp, LinearMap.baseChange_zero, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, LinearMap.baseChange_baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, IsBaseChange.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of extension by zero is the unique isomorphism transposed from the unit of restriction, with identity and composition coherence",
+   "results": "8 hits: ModuleCat.homEquiv_extendScalarsId, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, topological gluing or algebraic etaleness, not the full specified comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*(baseChange|comp)|proetale.*(beta|extension)|betaInv",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition, condensed modules or geometric open-immersion facts do not give the specified pro-etale strict-tower comparison. CompositionIso.lean lines 72-85, 91-116 and 170-187 were read; this API supplies only generic categorical constituents."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback commutes with extension by zero for an open immersion in derived categories of towers of module sheaves",
+   "results": "8 hits: CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit, CategoryTheory.PreZeroHypercover.pullback₁, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeftIsLimit, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition, condensed modules or geometric open-immersion facts do not give the specified pro-etale strict-tower comparison. CompositionIso.lean lines 72-85, 91-116 and 170-187 were read; this API supplies only generic categorical constituents."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_comp_id, CategoryTheory.Adjunction.leftAdjointCompIso_id_comp, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv, CategoryTheory.Adjunction.leftAdjointCompIso_inv_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition, condensed modules or geometric open-immersion facts do not give the specified pro-etale strict-tower comparison. CompositionIso.lean lines 72-85, 91-116 and 170-187 were read; this API supplies only generic categorical constituents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for extension by zero on strict inverse systems of constant ring module sheaves on proetale sites, normalized by the adjunction unit and coherent for composition",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.functorToPresheaves, Condensed.lanSheafProfinite, LightCondMod.ofSheafLightProfinite, Condensed.profiniteSolidification, Condensed.profiniteFree, SheafOfModules.Presentation.map_π_eq",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition, condensed modules or geometric open-immersion facts do not give the specified pro-etale strict-tower comparison. CompositionIso.lean lines 72-85, 91-116 and 170-187 were read; this API supplies only generic categorical constituents."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse of the open extension base change map is the adjunct of pullback of the open adjunction unit; its identities hold on unbounded derived inverse systems before evaluation",
+   "results": "8 hits: Condensed.isoLocallyConstantOfIsColimit_inv, LightCondensed.isoLocallyConstantOfIsColimit_inv, AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app', AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, TopologicalSpace.Opens.mapComp_inv_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, LightCondensed.lanPresheafExt_inv, Condensed.lanPresheafExt_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: general adjunction composition, condensed modules or geometric open-immersion facts do not give the specified pro-etale strict-tower comparison. CompositionIso.lean lines 72-85, 91-116 and 170-187 were read; this API supplies only generic categorical constituents."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 3,4: Open-unit-normalized base change on arbitrary constant strict towers",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-tower-open-beta-normalization",
+  "worker": "Q159 stage1 direct",
+  "summary": "No new nodes: reuse localized module base change, adjoint uniqueness, mate transpose/pasting, and exact localization. Construct the sheaf comparison for arbitrary B, prove its unit formula and both pasting laws there, lift termwise to strict towers/complexes, then descend equations before evaluation. Check the finite canonical map using the existing finite normalization theorem. Statement unchanged.",
+  "blueprint": "thm-cbc-complete-proetale.proof.md (main-20261015), last sentence, compatibility of the comparisons with completed maps: the open factor and its normalization/coherence, as isolated by parent strict-tower proof Steps 3-4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the open pro-etale sites and restricted coefficient rings so the generic ringed-site localization theorem applies."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic ringed-site localization comparison with its section and inverse-adjunct normalization; supplies the sheaf-level input for arbitrary B."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "The explicit composite Hom bijections and units are needed to type and normalize the open comparison."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic uniqueness and invertibility of the left comparison induced by the isomorphism of right adjoints."
+   },
+   {
+    "node": "lem-pur-adjunction-mate-transpose",
+    "why": "Generic transpose formula applied to the identity morphism proves the actual open-unit equation."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic two-direction mate pasting, identity and adjunction-change formulas prove the required equations without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact functor descent from complexes, used only after constructing all ordinary tower maps."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization full faithfulness on transformations descends actual chain equations to the unbounded tower derived category."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Its explicit finite specialization identifies the unit-normalized ringed open map with the prescribed finite comparison; no compact-support step is replaced."
+   },
+   {
+    "node": "lem-cbc-open-square-section-restriction-mate",
+    "why": "Reviewer-added statement node of this unit: the section-identity localization comparison is the exchange mate of the compositor inverse-image square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-cbc-open-square-section-restriction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-fbbb33e77",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-fbbb33e77 (reviewer sub-agent of L); spot-checked: S1 split with no new nodes. Statement and stmt_deps are identical to the Q65-created copy, and no re-split note exists for this item. I read all nine steps against the full statements of every cited node, Stacks 04J0 (sites-modules.tex lines 2367-2410) and the last sentence of thm-cbc-complete-proetale.proof.md (main-20261015). Steps 1, 2 and 6-8 are correct. Step 1: Tag 04J0 localization for arbitrary B, with the cartesian identification made through the projections. Step 2: the conjugate beta formula type-checks. Step 6: the identity laws use mate pasting (3),(4). Step 7: termwise towers and complexes. Step 8: exact descent with localization UP (2),(3), no faithfulness of evaluation. There were three repairable faults. (1) C3/C4/E5: Step 3 attributed 't has inverse mate c' to lem-weil-pbc-localize-ringed-site-morphism. Only that node's Lean record says it, and nothing identifies its square with the compositor square c the statement means (squareG). (2) C1: the passage from 'b is the conjugate of t' to 'b is the open left mate of c' is the iterated-mate identity, which was not cited. (3) Steps 4-5 skipped the passage from t-pasting to c-pasting to b-pasting (Step 4 also needs clause (2)). FIX: a new reviewer statement-only node lem-cbc-open-square-section-restriction-mate (unsplit, unit sk-prop-sf-cbc). It states that the section-identity t is the exchange mate of the compositor square c, with the formula written out. It is true: by iterated mates its j-mate is the direct-image compositor chain, the identity on sections. No duplicate: the ringed-slice-pullback-mate node is derived and against sigma, the sfb restriction-mates node is a condensed definition, and the trf open-square-exchange node is finite. Step 3 is rewritten: c is defined by the compositors; lem-trf-iterated-square-mates (Mathlib iterated_mateEquiv_conjugateEquiv) gives t = conj(a); b satisfies the same unit equation, so the uniqueness in lem-weil-pbc-conjugate-iso-unit-equation gives a = b; mate-transpose at the identity of j_!F then gives the unit equation. Steps 4-5 now write out the pastings, each square type-checked. Step 9 gains a sentence identifying the evaluated c with theta^{-1}. proof_deps are recomputed and the new node is added to tool_uses; every step is under 1606 characters. The other tool_uses (generic categorical and site lemmas) are accepted. No SGA is cited.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TowerOpenBetaNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.openBetaNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleAdj",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaSection",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaSectionObjectMap",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaRestriction",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaRestriction_normalized",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModule_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModule",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModule_normalized",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaTower",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaComplex",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaSingle",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaNormalization",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaEvaluation",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleJComp",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleGId",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleJId",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleBaseChangeComp",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleOpenComp",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleBaseChangeId",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaModuleOpenId",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaOpenId",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaComplex_component",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFinitePresentation_additive",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFinitePresentation_finiteLimits",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFinitePresentation_finiteColimits",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFinitePullHom",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFinitePullHom_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFinitePull",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFiniteOpenHom",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFiniteOpenHom_isIso",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFiniteOpen",
+   "AlgebraicGeometry.ProEtale.StrictTower.openBetaFiniteCompatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TowerOpenBetaNormalization.lean",
+  "statement": "theorem openBetaNormalization {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j'] (w : a ≫ j = j' ≫ g) (sq : IsPullback a j' j g) : beta B a j' j g w sq = (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫ Functor.mapDerivedCategoryNatIso (openBetaTower B a j' j g w sq) ≪≫ Functor.mapDerivedCategoryCompIso _ _ ∧ (∀ M : Derived B U, (jAdj B j').homEquiv _ _ ((beta B a j' j g w sq).inv.app M) = (G B a).map ((jAdj B j).unit.app M) ≫ (squareG B a j' j g w).inv.app ((J B j).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Clause interfaces include the section-normalized right comparison, its conjugate/open-unit identification, explicit sheaf and derived pasting and unit equations, actual termwise tower and complex comparisons, and compatibility with the recorded ordinary finite map. Three already landed statement dependencies are added to use their actual canonical arrows and finite coefficient presentation; no existing node is repaired. Repair of the duplicate statements: base-change composition, open composition and identity base change reuse beta_comp, beta_open_comp and beta_id from StrictTowerProperOpenCalculus; the finite presentation equivalence reuses realization_equivalence from FiniteOpenBaseChangeNormalized (import all for this private proof helper). These four declarations are not redeclared here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84c9ec6f8",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery after the landing returned c9ad2e860f91 for four duplicate statements. The diff against c9ad removes exactly openBetaBaseChangeComp/openBetaBaseChangeId/openBetaOpenComp/openBetaFinitePresentation_isEquivalence and reuses the proved beta_comp/beta_open_comp/beta_id (public import StrictTowerProperOpenCalculus) and the proved private realization_equivalence (import all FiniteOpenBaseChangeNormalized); statement, proof, source and stmt_deps are unchanged from c9ad. Retained module re-read clause by clause: section-normalized t = mate of moduleSquareG.inv; conjugate/open-unit transpose on sheaves and Derived; termwise tower/complex comparisons; beta = exact descent; composition and identity laws on sheaves plus the imported derived laws; evaluation and finite compatibility with ordinaryOpenExtensionBaseChangeIso. The statement record matches the file verbatim and the declaration list equals the file's declarations. The 3 added stmt_deps are landed def nodes with no cycle. No hollow definitions, sorry-only proofs, docstrings present, no import cycle. Not recompiled per instructions. Advisories: openBetaOpenId restates the private beta_id_open (fix by making it public if the landing flags it); at stage 3 the parent's module must not import this item's module (cycle); moduleSquareG/singleBetaInv lack owning records; lem-cbc-open-square-section-restriction-mate has no Lean record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261026T002501-L-91800",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,9 +15,30 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
   "place": "Step 1: compact-support Kunneth and the product of localized Kummer classes; finite-ring refinement of cor-kun-compact-kunneth, using Stacks Tag 0F1P (etale-cohomology.tex, label lemma-kunneth) via lem-pur-ordinary-kunneth-finite-ring"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For compactProductGlobalSiteMap_isIso, apply isIso_finiteComparisonGlobalSections to the compactification middle scheme c.Z and the finite coefficient ring A. Unfold supportGlobalComparison into terminal evaluation, bounded-below/unbounded compatibility, the finite global comparison, and the inverse terminal evaluation. Each terminal-evaluation transformation is a natural isomorphism, and the right-derived natural-transformation construction preserves isomorphisms. Compatibility components are isomorphisms, and evaluation and the inclusion functor preserve them. Thus every factor of the global comparison on the zero-extended bounded-below complex is invertible.",
+   "uses": [
+    "lem-pur-support-site-comparison",
+    "lem-weil-pbc-comparison-global-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining factors of compactProductGlobalSiteMap are the image of the inverse open-extension inclusion compatibility and the image of the composite of the forward inclusion compatibility with compactProductOpenSiteIso. These are functor images and composites of isomorphisms. Closure of IsIso under composition proves the existing instance. All witness and exterior-product transports remain their existing explicit constructions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-support-site-comparison",
+  "lem-weil-pbc-comparison-global-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+  "place": "Step 1, finite site comparison: the existing instance docstring made into Lean using finiteComparisonGlobalSections and canonical isomorphism preservation."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -66,7 +87,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "lean": {
@@ -108,5 +140,15 @@
   "group": "Q73",
   "result": "fix",
   "note": "Substance correct: every node clause is rendered on the etale site and the specified pro-etale realizations. Covered: kappa_c invertible and natural for every compactification; u_Z = constant-section unit then counit image; supported classes for every a : Z; the u_{ZxW}.kappa^{Z,W} = kappa_c.(u_Z (x) u_W) square with the dependency's supportedExteriorProduct; excision for every D+ extension; signed-twist, even-degree, arbitrary-closed-support cup identity on both sites with the support identification; pro-etale square, unit/counit normalization and witness independence. Definitions are canonical: normalized Classical.choice/exists-unique data; the eqToHom equalities compactProductTensor_eq, compactProductExterior_eq, compactProductCoefficientUnit_eq and functorialCupComparisonTwist_eq all hold by rfl (checked). Advisory: proper_support_comparison only restates the dependency's IsIso; output_representative is an extra true conclusion. Mechanical faults, fixed: (1) the delivered SupportedCupFunctoriality is NE's stale text and reverts Q10's landed named-predicate refactor (22 record declarations dropped, no outside users). fixes/SupportedCupFunctoriality.lean is a clean diff3 merge of base->live and base->delivered: superset of both, statement unchanged. (2) The SupportedCup legacy-import change is unneeded, since the legacy TensorResolution path now re-exports the FiniteCoefficient one; fixes/SupportedCup.lean is the live text. nt_compile: all 15 new modules plus the merged dependency clean (dependency 26.6-49.7 s by load); live importers ClosedSupportedCupVanishing 13.9 s and PurityDivisorClass 16.3 s clean. Maintainer: --revert-nodes def-pur-supported-cup; re-add Q10's 22 names to the SupportedCupFunctoriality record if convenient; NE lem-pur-divisor-class must rebase or revert the same dependency."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261026T071028-L-3784707",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

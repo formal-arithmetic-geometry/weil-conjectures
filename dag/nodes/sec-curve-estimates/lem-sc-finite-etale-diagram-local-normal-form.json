@@ -1,0 +1,221 @@
+{
+ "id": "lem-sc-finite-etale-diagram-local-normal-form",
+ "kind": "statement",
+ "title": "Finite diagrams of finite etale covers have local finite-set normal forms",
+ "statement": "Let $Y$ be a scheme and let $D:\\mathcal I\\to\\mathsf{FEt}(Y)$ be a diagram of finite etale $Y$-schemes [def-weil-pbc-finite-etale-category], indexed by a finite category $\\mathcal I$ [def-galois-finite-limits-colimits]. There is a set-indexed family of etale maps $u_\\lambda:U_\\lambda\\to Y$ whose images cover $Y$, and for each $\\lambda$ a functor $S_\\lambda:\\mathcal I\\to\\mathbf{Set}$ with finite values, together with isomorphisms of $U_\\lambda$-schemes\n$$e_{\\lambda,i}:D(i)\\times_YU_\\lambda\\xrightarrow{\\sim}\\coprod_{s\\in S_\\lambda(i)}U_\\lambda$$\nfor every object $i$ (scheme coproducts as in [lem-weil-pbc-scheme-coproduct-family]), such that for every arrow $f:i\\to j$, the conjugate $e_{\\lambda,j}\\circ D(f)_{U_\\lambda}\\circ e_{\\lambda,i}^{-1}$ sends the summand indexed by $s$ identically to the summand indexed by $S_\\lambda(f)(s)$. The finite sets may depend on $\\lambda$; no constant degree over all of $Y$ is required.",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof: simultaneous splitting and further open refinement of index maps; finite-diagram generalization of the parallel-pair argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-galois-finite-limits-colimits",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "If $Y$ is empty, take the empty covering family. Otherwise enumerate the objects of the finite category as $i_1,\\ldots,i_n$. We construct, by induction on $k$, a set-indexed etale covering family of $Y$ on whose members the first $k$ objects are finite coproducts of the base. For $k=0$, use $\\mathrm{id}_Y$ and no trivializations. Base changes of $D(i)$ remain finite etale by the base change functor in [def-weil-pbc-finite-etale-category].",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof, simultaneous splitting and further open refinement; finite-diagram extension"
+   }
+  },
+  {
+   "text": "Suppose the family at stage $k$ is constructed, and let $W\\to Y$ be one member. At every $w\\in W$, apply [lem-weil-pbc-finite-etale-etale-local-split] to $D(i_{k+1})\\times_YW\\to W$. It gives $V_w\\to W$ etale, a point above $w$, and a finite disjoint union of pieces each isomorphic over $V_w$ to $V_w$. For each piece $Z_a$, let $q_a:Z_a\\xrightarrow{\\sim}V_w$ be its structural isomorphism. The coproduct universal property constructs $e:\\coprod_a Z_a\\to\\coprod_a V_w$ with components $\\iota_a\\circ q_a$ and its inverse with components $\\kappa_a\\circ q_a^{-1}$. Their composites restrict to the identity on every summand, so uniqueness proves they are inverse. Since each $q_a$ is the structural morphism, this is an isomorphism over $V_w$, giving the next trivialization. The maps $V_w\\to Y$ are etale by composition. Pull back the earlier trivializations; [lem-sc-etale-fibre-product-base-change-coproduct] identifies each pulled-back finite coproduct with copies of $V_w$, preserving its labels and projections. Iterated fibre products identify the pulled-back objects with $D(i)\\times_YV_w$: both have the same compatible-map universal property. The new members cover every $W$, because one lies above each $w$, hence still cover $Y$. Finite induction gives the desired objectwise trivializations $e_i$ over each member $W$, with finite index sets $S(i)$ that may depend on $W$.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof, simultaneous splitting and further open refinement; finite-diagram extension"
+   }
+  },
+  {
+   "text": "Fix such a member $W$. For every arrow $f:i\\to j$, conjugate its base change by $e_i,e_j$, obtaining $h_f:\\coprod_{s\\in S(i)}W\\to\\coprod_{t\\in S(j)}W$ over $W$. Restrict to a source summand $s$ and apply [lem-galois-coproduct-copies-morphisms-clopen](a). It gives a clopen decomposition $(W_{f,s,t})_{t\\in S(j)}$ of $W$, and on $W_{f,s,t}$ the restriction is precisely the inclusion of summand $t$ composed with the structural inclusion $W_{f,s,t}\\to W$. There are only finitely many pairs $(f,s)$, because there are finitely many arrows and each $S(i)$ is finite.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "def-galois-finite-limits-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03YW, example-constant-group, functor of points of a disjoint union of base copies; used for the open refinement in Tag 0BN9"
+   }
+  },
+  {
+   "text": "For each $w\\in W$ and pair $(f,s)$, let $t_w(f,s)$ be the unique label with $w\\in W_{f,s,t_w(f,s)}$. Put $V_w=\\bigcap_{(f,s)}W_{f,s,t_w(f,s)}$; the empty intersection is $W$. This is open, contains $w$, and the $V_w$ cover $W$. The composite $V_w\\to W\\to Y$ is etale since an open immersion is etale and etale maps compose. Restrict the $e_i$ to $V_w$, using finite-coproduct base change. By the restriction equations of [lem-galois-coproduct-copies-morphisms-clopen](a), $h_f$ now carries summand $s$ identically into summand $t_w(f,s)$. Define $S_w(f)(s)=t_w(f,s)$ and $S_w(i)=S(i)$. The functor laws hold: the conjugate of an identity is an identity, and $h_{g\\circ f}=h_g\\circ h_f$ by cancellation of $e_j^{-1}e_j$. Evaluate these equalities on the point $w$ of each source summand. Disjointness of target summands forces $S_w(\\mathrm{id})(s)=s$ and $S_w(g\\circ f)(s)=S_w(g)(S_w(f)(s))$. If the source index set is empty these equations are vacuous. A nonempty source cannot have empty target index set, since the corresponding clopen decomposition of the nonempty $V_w$ would have no pieces. Thus all functions and all functor laws, including the empty-index cases, are defined.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sc-etale-fibre-product-base-change-coproduct",
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof, simultaneous splitting and further open refinement; finite-diagram extension"
+   }
+  },
+  {
+   "text": "Index the final family by pairs consisting of a member $W$ at stage $n$ and a point $w\\in W$. All these indices form a set: each induction stage uses a set-indexed union of sets of points, and there are finitely many stages. The resulting $U_\\lambda=V_w$ cover $Y$, since the $W$ cover $Y$ and the $V_w$ cover each $W$. Take $S_\\lambda=S_w$ and the restricted trivializations as $e_{\\lambda,i}$. The displayed restriction equations are exactly the required clause for every arrow. When the diagram is empty the same construction has no object or arrow data and still yields a covering. No stage identifies sheet counts on different members.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof, simultaneous splitting and further open refinement; finite-diagram extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-finite-limits-colimits",
+  "def-weil-pbc-finite-etale-category",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-galois-coproduct-copies-morphisms-clopen"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits, finite colimits proof, simultaneous splitting and further open refinement; finite-diagram extension; explicit finite induction, clopen refinement and functor-law verification by Q34"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of finite etale schemes is etale locally a diagram of finite disjoint unions of copies of the base with all arrows induced by fixed maps of finite sets",
+   "results": "AlgebraicGeometry.IsFinite.instDescScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.instHasFiniteCoproductsScheme; AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty; Algebra.FormallyEtale.instForallOfFinite; Algebra.Etale.exists_subalgebra_fg; AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.FiniteEtale",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry.Scheme.FiniteEtale'",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle does not know the finite-etale category"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram|diagram.*finite|locally.*trivial",
+   "results": "Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Properties.lean; Mathlib/AlgebraicGeometry/Properties.lean (Mathlib/AlgebraicGeometry searched)",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite diagrams of finite etale covers admit simultaneous local trivializations with constant maps on sheet indices",
+   "results": "IsOpen.trivializationDiscrete; IsOpen.trivializationDiscrete_source; IsClosedMap.isCoveringMapOn_of_openPartialHomeomorph; IsCoveringMap.mk; IsEvenlyCovered.of_trivialization; IsEvenlyCovered.toTrivialization.congr_simp; CategoryTheory.GrothendieckTopology.diagramFunctor; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: topological coverings, scheme open gluing, finite/etale stability and locally ringed space colimits do not state this lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*diagram|diagram.*finite|locally.*trivial|FiniteEtale",
+   "results": "Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/ColimitsOver.lean; Mathlib/AlgebraicGeometry/Properties.lean; Mathlib/AlgebraicGeometry/Properties.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topology, etale stability and gluing declarations do not state simultaneous finite-diagram normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale covers and all morphisms in a finite diagram simultaneously trivialize on an etale covering",
+   "results": "AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; IsOpen.trivializationDiscrete; Algebra.FormallyEtale.instForallOfFinite; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topology, etale stability and gluing declarations do not state simultaneous finite-diagram normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Functor",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topology, etale stability and gluing declarations do not state simultaneous finite-diagram normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite diagram of finite etale schemes is etale locally a diagram of constant finite sets",
+   "results": "AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.instHasPullbacksEtale; Algebra.FormallyEtale.instForallOfFinite; AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topology, etale stability and gluing declarations do not state simultaneous finite-diagram normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale covering simultaneously makes finitely many finite locally constant sheaves and their morphisms constant",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology; CompHausLike.LocallyConstant.counit_app_val; Profinite.exists_locallyConstant_fin_two; Profinite.exists_locallyConstant_finite_aux; AlgebraicGeometry.Scheme.etaleTopology; CompHausLike.LocallyConstant.functor; CategoryTheory.coherentTopology.isLocallySurjective_iff; LightCondensed.isColimitLocallyConstantPresheaf",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned topology, etale stability and gluing declarations do not state simultaneous finite-diagram normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fet-finite-limits",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-h2",
+ "blueprint": {
+  "from": {
+   "node": "lem-fet-finite-limits",
+   "place": "Proof Step 2: 'By [lem-fet-locally-trivial] applied over the members of an etale cover' and 'after a further Zariski refinement': simultaneous finite-diagram form of this normalization",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sc-finite-etale-diagram-local-normal-form",
+  "worker": "stage1",
+  "summary": "Expanded the simultaneous finite-diagram normalization into finite induction on objects, clopen sheet partitions, a pointwise finite common open refinement and explicit functor laws. All non-elementary tools already have nodes; no new nodes are needed. Retained the statement and original searches. Repair of returned head 101b4e50129: rebased stage-1 fields over the current live node metadata, re-read all cited statements (unchanged), and made the summandwise construction and inverse of the trivialization explicit in step 2. Updated report records the landing pathspec failure and dependency audit.",
+  "blueprint": "lem-fet-finite-limits: historical Step 2 simultaneous splitting and further Zariski refinement; current latest proof Step 3 finite-group quotients uses the same finite-etale local algebra normalization. This auxiliary lemma retains its independent Stacks 0BN9 route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Pointwise trivialization from Stacks 04HN, valid for varying degrees. The local unit node lem-fet-locally-trivial has a stale global constant-degree statement; the closed generic 04HN node states exactly the pointwise version used here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-etale-etale-local-split"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-248c4f821",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-248c4f821 (reviewer sub-agent of L); spot-checked: I read the delivery in full against Stacks pione.tex 0BN9 (lemma-finite-etale-covers-limits-colimits, finite-colimits proof: reduction to copies of X by 04HN, then an open covering on which a,b become index maps). The item generalizes this from a parallel pair to a finite diagram, and proof_origin=agent is correct. The statement is unchanged; I checked it with Y empty, an empty diagram, a disconnected Y with degrees 1 and 2 on the components, and degree 0. Compared with returned head 101b4e501293, the only real change is in step 2: the coproduct isomorphism and its inverse are now built summand by summand, and the scheme-coproduct node is cited. This is a real repair, not a re-push (A6). Step 1: the induction is set up and base changes stay finite etale (FEt base change functor). Step 2: the 04HN node (Lean-closed) adds no hypotheses; composition clause (2), coproduct base change and the fibre-product universal property are used correctly, and coverage holds point by point. Step 3: h_f∘ι_s is a W-morphism, so clause (a) of lem-galois-coproduct-copies-morphisms-clopen gives the clopen decomposition and the restriction formula; there are finitely many pairs (f,s). Step 4: t_w exists because an empty target index set would force W to be empty; V_w is open, contains w and is etale over Y; the identity and composition laws follow by evaluating on the nonempty V_w with disjoint summands. Step 5: the family is indexed by a set and covers Y. The proof uses no connectedness, quasi-compactness or constant degree. There is no cycle, and the parent lem-fet-finite-limits uses the item only in its step 4, which is strictly smaller than the parent (not D1). I accept the declared tool_use of lem-weil-pbc-finite-etale-etale-local-split: it is Lean-closed, and the unit's own lem-fet-locally-trivial uses one global S, which fails for a disconnected Y with varying degree (its blueprint_update corrects this). An rg -L search of the DAG found no duplicate. The delivery has no new nodes, no SGA citation and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleDiagramLocalNormalForm",
+  "declaration": "AlgebraicGeometry.finiteEtaleDiagramLocalNormalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleDiagramLocalNormalForm.lean",
+  "statement": "theorem finiteEtaleDiagramLocalNormalForm (Y : Scheme.{u}) {I : Type v} [SmallCategory I] [FinCategory I] (D : I ⥤ (@IsFinite ⊓ @Etale : MorphismProperty Scheme.{u}).Over ⊤ Y) : ∃ (Λ : Type u) (U : Λ → Scheme.{u}) (a : ∀ l, U l ⟶ Y), (∀ l, Etale (a l)) ∧ (∀ y : Y, ∃ (l : Λ) (x : U l), (a l) x = y) ∧ ∀ l : Λ, ∃ S : I ⥤ Type u, (∀ i : I, Finite (S.obj i)) ∧ ∃ e : ∀ i : I, pullback (D.obj i).hom (a l) ≅ ∐ (fun _ : S.obj i ↦ U l), (∀ i : I, (e i).hom ≫ Sigma.desc (fun _ : S.obj i ↦ 𝟙 (U l)) = pullback.snd (D.obj i).hom (a l)) ∧ ∀ (i j : I) (f : i ⟶ j) (s : S.obj i), Sigma.ι (fun _ : S.obj i ↦ U l) s ≫ (e i).inv ≫ ((MorphismProperty.Over.pullback (@IsFinite ⊓ @Etale) ⊤ (a l)).map (D.map f)).left ≫ (e j).hom = Sigma.ι (fun _ : S.obj j ↦ U l) (S.map f s)",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ac3fbdf8",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_deps (FEt = (@IsFinite ⊓ @Etale).Over ⊤ Y with Over.pullback, FinCategory, scheme coproducts ∐/Sigma.ι/Sigma.desc, Etale) and Stacks 0BN9 (pione.tex l.967). The Lean statement matches every clause: étale, jointly surjective Type u family; per-member finite-valued S : I ⥤ Type u; e i : pullback (D.obj i).hom (a l) ≅ ∐ U l over U l via the Sigma.desc 𝟙 = pullback.snd equation; conjugated Over.pullback base change of D.map f sends ι s to ι (S.map f s). No extra hypotheses. Edge cases covered (empty Y, empty I, degree 0, varying degrees, empty members, free index universe v). lean.statement is verbatim the file signature. No definitions, proof only sorry, docstrings cite the source and blueprint tag and carry the 5 steps. Proof imports exist in live. No duplicate in the project. Report has a Worker report and a Second reading by N8 (an in-thread pass). Not recompiled because no file changed. No findings."
+ }
+}

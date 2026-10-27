@@ -1,0 +1,230 @@
+{
+ "id": "lem-trf-proj-generated-pullback-frames",
+ "kind": "statement",
+ "title": "Degree-generated opens and pulled-back homogeneous frames",
+ "statement": "Let $A=\\bigoplus_{n\\geq0}A_n$ be a nonnegatively graded commutative ring, $P=\\operatorname{Proj}(A)$ [def-pc-proj], $X$ a scheme [def-pc-scheme], $d\\geq1$, and $M$ an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. For every $a\\in A_d$ let $s_a\\in\\Gamma(X,M)$ be given, and assume these sections generate each stalk: every element of $M_x$ is a finite $\\mathcal O_{X,x}$-linear combination of the germs $(s_a)_x$. Let $g:X\\to P$ be any scheme morphism satisfying $g^{-1}D_+(a)=X_{s_a}$ for every $a\\in A_d$, where $X_{s_a}$ is the nonvanishing open [def-sc-section-generating-locus]. Then the opens $W_a=X_{s_a}$ cover $X$. On each $D_+(a)$, multiplication by the homogeneous section $a$ gives an isomorphism $\\mathcal O_{D_+(a)}\\xrightarrow{\\sim}\\mathcal O_P(d)|_{D_+(a)}$ [def-weil-pbc-proj-twisting-sheaf]. On every standard subopen $D_+(h)\\subseteq D_+(a)$ its inverse is multiplication by the degree-$-d$ element $a^{-1}\\in A_h$; for any homogeneous relation $h^N=ca$, it is the fraction $c/h^N$, and these inverses commute with localization restrictions. On $W_a$ there are isomorphisms\n$$\\mathcal O_{W_a}\\xrightarrow{\\sim}(g^*\\mathcal O_P(d))|_{W_a},\\quad u\\longmapsto u(1\\otimes a),\\qquad\n\\mathcal O_{W_a}\\xrightarrow{\\sim}M|_{W_a},\\quad u\\longmapsto u\\,s_a.$$\nHere $g^*$ is module pullback [def-pc-module-pullback, def-pur-sheaf-tensor-product], the first section is the tensor pullback of $a$, and both sections are free generators in the sense of [def-sc-local-free-generator], on every subopen of $W_a$. The index family may be infinite, and no quasi-compactness or finite subcover is required.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01NK (lemma-invertible-map-into-proj), proof: extension to the localized graded algebra; Tag 01N8 (lemma-converse-construction), local bases and gluing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-proj",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-section-generating-locus",
+  "def-sc-local-free-generator"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$ and trivialize $M$ near $x$, with basis germ $e$. By stalk generation, $e=\\sum_{i=1}^r u_i(s_{a_i})_x$. Write $(s_{a_i})_x=b_i e$; then $1=\\sum_i u_i b_i$ in the local ring $\\mathcal O_{X,x}$. Its maximal ideal cannot contain every $b_i$, so some $b_i$ is a unit. Represent its inverse by a local section and shrink until its product with the coefficient of $s_{a_i}$ is $1$. Multiplication by $s_{a_i}$ is then an isomorphism on this neighbourhood. Thus $x\\in X_{s_{a_i}}$ by [def-sc-section-generating-locus]. This proves that the $W_a$ cover. This argument selects only finitely many germs at each individual point, not a finite subfamily covering $X$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-sc-invertible-module",
+    "def-sc-section-generating-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CY (lemma-s-open), local basis argument; finite stalk-generation hypothesis of the item"
+   }
+  },
+  {
+   "text": "Fix $a\\in A_d$ and a standard open $D_+(h)\\subseteq D_+(a)$. By clause (1) of [lem-weil-pbc-proj-standard-open-inclusion], $a$ is a unit in $A_h$ and $h^N=ca$ for some $N\\geq1$ and homogeneous $c$. Hence $a^{-1}=c/h^N$, of degree $-d$. By [def-weil-pbc-proj-twisting-sheaf], the structure and twist sections on this open are $(A_h)_0$ and $(A_h)_d$. The mutually inverse linear maps are $u\\mapsto au$ and $v\\mapsto a^{-1}v$: they map $(A_h)_0$ to $(A_h)_d$ and $(A_h)_d$ to $(A_h)_0$, since $a$ has degree $d$ and $a^{-1}$ degree $-d$, and both composites are the identity because $aa^{-1}=1$. This includes $h=a$, when the inverse is $1/a$.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (lemma-standard-open) (1)(a)--(d); Tag 01N8 (lemma-converse-construction), the trivializing section f"
+   }
+  },
+  {
+   "text": "The restrictions in [def-weil-pbc-proj-twisting-sheaf] are localization homomorphisms. They send $a$ to $a$ and $a^{-1}$ to $a^{-1}$, since the image of an inverse is the inverse of the image. Thus the maps of Step 2 commute with restrictions. Standard opens inside $D_+(a)$ form a basis, and their intersections are standard opens by clause (0) of [lem-weil-pbc-proj-standard-open-inclusion]. For a twist section $v$ on any open $V\\subseteq D_+(a)$, form $a^{-1}v$ on each such basis open inside $V$. These sections agree on intersections by the restriction calculation, so the sheaf axiom glues them uniquely to a structure section on $V$. The identities $a(a^{-1}v)=v$ and $a^{-1}(au)=u$ hold on that basis and hence on $V$. This constructs the asserted sheaf isomorphism and proves that $a$ is a free generator in the sense of [def-sc-local-free-generator]. Different relations $h^N=ca$ give the same inverse, since each represents the unique inverse of $a$ in $A_h$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-weil-pbc-proj-standard-open-inclusion",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M4 (lemma-standard-open), localization formulas; Tag 01N8 (lemma-converse-construction), local trivialization"
+   }
+  },
+  {
+   "text": "Restrict $g$ to $g_a:W_a\\to D_+(a)$, possible because $g^{-1}D_+(a)=W_a$. Let $\\tau:\\mathcal O_{D_+(a)}\\to\\mathcal O_P(d)|_{D_+(a)}$ be Step 3 and let $\\lambda=\\tau^{-1}$. The tensor definition [def-pc-module-pullback, def-pur-sheaf-tensor-product] on this inverse-image open gives inverse maps\n$$u\\longmapsto u\\otimes a,\\qquad u\\otimes t\\longmapsto u\\,g_a^\\sharp(\\lambda(t)).$$\nThe second formula is balanced over $g_a^{-1}\\mathcal O_{D_+(a)}$ by linearity of $\\lambda$. It therefore defines a map of tensor presheaves and then their sheafifications. The first composite is $u\\mapsto u\\,g_a^\\sharp(1)=u$; the other sends $u\\otimes t$ to $u\\,g_a^\\sharp(\\lambda(t))\\otimes a=u\\otimes\\lambda(t)a=u\\otimes t$. These identities descend to sheafification. Inverse image and tensor sheafification restricted to $W_a$ use precisely the same local sections as $g_a$, so this tensor sheaf is $(g^*\\mathcal O_P(d))|_{W_a}$. The image of $1$ is $1\\otimes a$. The formulas commute with restriction, giving bijections on every subopen and thus the required free generator [def-sc-local-free-generator].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 0095 (definition-pushforward), pullback formula (2); explicit tensor inverse for the frame in Tag 01N8 (constructions, lemma-converse-construction)"
+   }
+  },
+  {
+   "text": "By [def-sc-section-generating-locus], $W_a=X_{s_a}$ is the union of the opens $U_i$ on which $s_a|_{U_i}$ is a free generator. It is a free generator on the whole union: for an open $V\\subseteq W_a$, if $rs_a|_V=0$ then each $r|_{V\\cap U_i}=0$, so $r=0$ by the sheaf axiom for $\\mathcal O_X$; for $m\\in\\Gamma(V,M)$ the unique $r_i$ with $r_is_a=m$ on $V\\cap U_i$ agree on overlaps by this injectivity and glue to $r$ with $rs_a|_V=m$. Hence $u\\mapsto u s_a$ gives $\\mathcal O_{W_a}\\simeq M|_{W_a}$, with bijective section maps on every subopen, as required by [def-sc-local-free-generator]. Together with Steps 1--4 this proves every clause. Empty $W_a$ require only the unique maps of sheaves on the empty open. No step has selected a finite subcover or assumed quasi-compactness.",
+   "uses": [
+    "def-sc-section-generating-locus",
+    "def-sc-local-free-generator"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CY (lemma-s-open); Tag 01N8 (constructions, lemma-converse-construction), first paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-sc-section-generating-locus",
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sc-local-free-generator",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01N8 (lemma-converse-construction), first paragraph, expanded using Tag 01M4 (lemma-standard-open), Modules Tag 01CY (lemma-s-open), and Sheaves Tag 0095 (definition-pushforward)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "twistRestrictIso|unitToTwist|isFreeGenerator",
+   "results": "{\"t\": \"2026-10-22T06:16:29Z\", \"tool\": \"grep\", \"query\": \"twistRestrictIso|unitToTwist|isFreeGenerator\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Proj/basic-open hits give charts and their inverse images, not modules O(d) or simultaneous source/target frames. IsBaseChange.basis and tensor-product basis results apply to ordinary modules, not this sheaf statement. No matching declaration; the Loogle unknown identifier is unavailable.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, IsIso",
+   "results": "{\"t\": \"2026-10-22T06:16:29Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Proj/basic-open hits give charts and their inverse images, not modules O(d) or simultaneous source/target frames. IsBaseChange.basis and tensor-product basis results apply to ordinary modules, not this sheaf statement. No matching declaration; the Loogle unknown identifier is unavailable.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a homogeneous element f of degree d freely generates the sheaf O d on the Proj standard open D f and its pullback",
+   "results": "{\"t\": \"2026-10-22T06:16:29Z\", \"tool\": \"leansearch\", \"query\": \"a homogeneous element f of degree d freely generates the sheaf O d on the Proj standard open D f and its pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafInCommRing\", \"AlgebraicGeometry.Proj.basicOpenToSpec_app_top\", \"AlgebraicGeometry.Proj.awayι_preimage_basicOpen\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf\", \"AlgebraicGeometry.Proj.basicOpenToSpec\"], \"digest\": \"ff9ccaac7cc466d5\"}; Proj/basic-open hits give charts and their inverse images, not modules O(d) or simultaneous source/target frames. IsBaseChange.basis and tensor-product basis results apply to ordinary modules, not this sheaf statement. No matching declaration; the Loogle unknown identifier is unavailable.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "the section a of O d on Proj is a free basis on D plus a and tensor pullback preserves this basis",
+   "results": "{\"t\": \"2026-10-22T06:16:30Z\", \"tool\": \"leanfinder\", \"query\": \"the section a of O d on Proj is a free basis on D plus a and tensor pullback preserves this basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.basis\", \"Module.Basis.localizationLocalization_apply\", \"Algebra.Generators.basisCotangentAway\", \"Module.exists_basis_of_basis_baseChange\", \"Algebra.TensorProduct.basis\", \"Algebra.FormallyUnramified.finite_of_free_aux\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.Generators.basisCotangentAway_apply\"], \"digest\": \"a907c1546b99197e\"}; Proj/basic-open hits give charts and their inverse images, not modules O(d) or simultaneous source/target frames. IsBaseChange.basis and tensor-product basis results apply to ordinary modules, not this sheaf statement. No matching declaration; the Loogle unknown identifier is unavailable.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A degree d generating family of sections of a line bundle covers by nonvanishing opens and gives bases for the pullback of the degree d Proj twist under a map with those basic open inverse images",
+   "results": "{\"t\": \"2026-10-22T06:16:32Z\", \"tool\": \"leanfinder\", \"query\": \"A degree d generating family of sections of a line bundle covers by nonvanishing opens and gives bases for the pullback of the degree d Proj twist under a map with those basic open inverse images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_preimage_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\"], \"digest\": \"012469356573167c\"}; Proj/basic-open hits give charts and their inverse images, not modules O(d) or simultaneous source/target frames. IsBaseChange.basis and tensor-product basis results apply to ordinary modules, not this sheaf statement. No matching declaration; the Loogle unknown identifier is unavailable.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFreeGenerator|twistRestrictIso|unitToTwist",
+   "results": "{\"t\": \"2026-10-23T04:17:49Z\", \"tool\": \"grep\", \"query\": \"IsFreeGenerator|twistRestrictIso|unitToTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Basic.lean lines 154-183 and 253-261: the hits identify schemes and degree-zero structure rings, not degree-d twist frames or their tensor pullback. HomogeneousLocalization hits describe degree-zero localization maps, not the complete sheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The twisting sheaf O(d) on Proj is free on D_+(a) when a is homogeneous of degree d",
+   "results": "{\"t\": \"2026-10-23T04:17:49Z\", \"tool\": \"leansearch\", \"query\": \"The twisting sheaf O(d) on Proj is free on D_+(a) when a is homogeneous of degree d\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.SectionSubring.add_mem'\", \"ProjectiveSpectrum.basicOpen_eq_union_of_projection\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.basicOpen_one\", \"AlgebraicGeometry.Proj.basicOpenIsoSpec\", \"AlgebraicGeometry.Proj.basicOpenIsoAway_hom\"], \"digest\": \"1c09b4a69d73c69e\"}; Read Basic.lean lines 154-183 and 253-261: the hits identify schemes and degree-zero structure rings, not degree-d twist frames or their tensor pullback. HomogeneousLocalization hits describe degree-zero localization maps, not the complete sheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsFreeGenerator",
+   "results": "{\"t\": \"2026-10-23T04:17:49Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.IsFreeGenerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SheafOfModules.IsFreeGenerator'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Basic.lean lines 154-183 and 253-261: the hits identify schemes and degree-zero structure rings, not degree-d twist frames or their tensor pullback. HomogeneousLocalization hits describe degree-zero localization maps, not the complete sheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous degree d element freely generates O(d) on D_+(a), and its tensor pullback is a free generator on the inverse image open",
+   "results": "{\"t\": \"2026-10-23T04:17:51Z\", \"tool\": \"leanfinder\", \"query\": \"A homogeneous degree d element freely generates O(d) on D_+(a), and its tensor pullback is a free generator on the inverse image open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.sectionInBasicOpen\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.Proj.awayToSection\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\"], \"digest\": \"af204feaa39b9db3\"}; Read Basic.lean lines 154-183 and 253-261: the hits identify schemes and degree-zero structure rings, not degree-d twist frames or their tensor pullback. HomogeneousLocalization hits describe degree-zero localization maps, not the complete sheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a homogeneous unit of degree d identifies degree zero and degree d components of a localized graded ring; pullback of a trivial line bundle has the tensor basis",
+   "results": "{\"t\": \"2026-10-23T04:19:56Z\", \"tool\": \"leanfinder\", \"query\": \"Multiplication by a homogeneous unit of degree d identifies degree zero and degree d components of a localized graded ring; pullback of a trivial line bundle has the tensor basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"HomogeneousLocalization.awayMap_mk\", \"HomogeneousLocalization.Away.isLocalization_mul\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\", \"AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection_apply\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.awayToSection\"], \"digest\": \"068dc7a5c3bff5ea\"}; Read Basic.lean lines 154-183 and 253-261: the hits identify schemes and degree-zero structure rings, not degree-d twist frames or their tensor pullback. HomogeneousLocalization hits describe degree-zero localization maps, not the complete sheaf assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-proj-invertible-map-twist-iso",
+  "date": "2026-10-22",
+  "group": "Q158"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra/Proj ampleness criterion below lem-trf-local-term-locality, via the canonical generated-open comparison: returned item Steps 2 and 3 and the pulled-back-basis part of Step 4.",
+   "via": [
+    "lem-trf-proj-invertible-map-twist-iso",
+    "lem-trf-proj-canonical-map-twist-comparison",
+    "lem-trf-scheme-ample-canonical-proj-criterion",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-proj-generated-pullback-frames",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Expanded the finite stalk identity proving the generating-open cover, computed the homogeneous inverse on every standard subopen, glued the compatible inverse maps, and wrote the two inverse tensor formulas for the pulled-back frame. Existing nodes suffice; no new nodes. Ran and recorded the required Mathlib searches with a second phrasing.",
+  "blueprint": "Realizes the generated-open and pulled-back-basis argument in the section-algebra/Proj ampleness subroute below lem-trf-local-term-locality, via lem-trf-proj-invertible-map-twist-iso; preserves the existing blueprint ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Generic Proj chart tool: clauses (0),(1) give the standard-open basis, homogeneous divisibility and localized unit, not a replacement of the unit route; no node of this unit supplies these basic Proj facts alone."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-standard-open-inclusion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-0c8239149",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-0c8239149 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 5 steps; every cited statement (def-pc-scheme, def-sc-invertible-module, def-pc-proj, def-weil-pbc-proj-twisting-sheaf (2)/(3), def-pc-module-pullback, def-pur-sheaf-tensor-product, def-sc-section-generating-locus, def-sc-local-free-generator, lem-weil-pbc-proj-standard-open-inclusion (0)/(1)); and Stacks 01N8 lemma-converse-construction (first paragraph of the proof) and 01CY lemma-s-open, with tags checked in tags/tags. The statement, stmt_deps and blueprint are byte-identical to clones/live, where the item is still unsplit. There are no new nodes and no re-split note. Step 1 (some b_i is a unit gives the cover) is valid without Nakayama or finiteness. Steps 2-3 (unit a in A_h, inverse c/h^N, localization preserves inverses, gluing over the standard-open basis) are correct. Step 4 (balanced inverse tensor maps, restriction of inverse image to g^{-1}D_+(a)) is correct and needs no flatness. Edge cases checked: empty X, A_d=0, nilpotent a, A_h=0, zero divisors, weighted grading, infinite family, P^1 with O(1). Overlap: lem-trf-proj-product-chart-twist-frame with b=1 covers the D_+(a) frame; this overlap is between existing nodes and is not the delivery's fault. The tool use of lem-weil-pbc-proj-standard-open-inclusion is accepted. FIX (E5/C2-level, item text only): Step 5 asserted without proof that s_a is a free generator on the whole union X_{s_a}, when the generating-locus definition is only a union of such opens; I added the local injectivity and gluing argument. Step 2's garbled sentence 'their degrees are respectively d and 0' now states which degree parts each map goes between. Fix file: fixes/dag/nodes/sec-trace-formula/lem-trf-proj-generated-pullback-frames.json; uses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ }
+}

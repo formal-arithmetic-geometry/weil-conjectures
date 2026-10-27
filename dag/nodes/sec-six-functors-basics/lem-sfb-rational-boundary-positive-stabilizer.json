@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-rational-boundary-positive-stabilizer",
+ "kind": "statement",
+ "title": "A boundary point with positive-dimensional partial stabilizer",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Group schemes and homomorphisms are as in [def-sc-group-scheme], closed subgroups as in [def-sc-group-scheme-subgroup], smoothness as in [def-sbc-smooth-morphisms], connectedness as in [def-weil-connected-scheme], and finite type as in [def-weil-finite-type-morphism]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Dimensions mean topological Krull dimensions [def-kun-topological-krull-dimension]. Let $G$ be a smooth connected separated finite-type $k$-group scheme, not proper over $k$. There exist a normal integral proper finite-type $k$-scheme $X$, a dense open immersion [def-weil-open-immersion] $j:G\\hookrightarrow X$, and a point $P\\in (X\\setminus j(G))(k)$ with the following properties. Integral means reduced and irreducible [def-pc-integral-scheme], and normal means that every local ring is an integrally closed domain. Write $\\alpha:G\\times_kX\\dashrightarrow X$ for the rational map extending $(g,j(h))\\mapsto j(gh)$, where a rational map is an equivalence class of morphisms on dense open subschemes and its domain is the largest such open. Products mean scheme fibre products [def-pc-fibre-product]. The map $\\alpha$ is defined at $(e,P)$. Put $V=\\{g\\in G:(g,P)\\in\\operatorname{Dom}(\\alpha)\\}$; this is an open neighbourhood of $e$. The reduced Zariski closure in $G$ of $\\{g\\in V(k):\\alpha(g,P)=P\\}$ is a closed subgroup scheme $S\\hookrightarrow G$ with $\\dim S\\geq1$. Reduced closure means the closed subscheme defined on each affine open by the radical ideal of functions vanishing on the indicated subset. No global regular extension of the $G$-action to $X$ is asserted, and $S$ is not asserted to be affine or normal in $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, rational-action paragraph (not the circular equivariant-completion sketch). Detailed referenced proof: Milne, A Proof of the Barsotti-Chevalley Theorem on Algebraic Groups (2013), Proposition 4.1 proof, pp.8--9, through the construction of the stabilizer H; Lemmas 4.3--4.4. Local copy of that article WANTED; read arXiv:1311.6060v2 online. No Stacks tag states this rational-boundary result."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-pc-integral-scheme",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-normal-divisorial-completion] to the underlying scheme of $G$. Obtain an integral $G$, a normal integral proper completion $X_0$ and a nonempty pure divisorial boundary. Put $d=\\dim G=\\dim X_0>0$. Left multiplication is a regular action on the dense open $G\\subseteq X_0$; its rational extension exists by [lem-sfb-rational-action-domain-laws]. Apply [lem-sfb-rational-boundary-divisor-model] with $Y=G$. Obtain $b:X\\to X_0$, unchanged over $G$, and an invariant integral boundary divisor $D\\subseteq X$ with $\\dim D=d-1$. Write $U$ for the maximal domain of the induced rational action $\\alpha$ and $W\\subseteq U\\cap(G\\times_kD)$ for the open set preserved by its involution.",
+   "uses": [
+    "lem-sfb-normal-divisorial-completion",
+    "lem-sfb-rational-action-domain-laws",
+    "lem-sfb-rational-boundary-divisor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, referenced rational-action proof of Milne (2013), Proposition 4.1, pp.8--9 (read online; local copy WANTED)."
+   }
+  },
+  {
+   "text": "The nonempty finite-type scheme $W$ has a closed point by [lem-sc-lft-over-field-jacobson-space], and that point is $k$-rational by [lem-weil-pbc-closed-point-residue-field-base]. Write it $(g_0,P)$. Since $\\tau(W)=W\\subseteq U$, both $g_0\\cdot P$ and $g_0^{-1}\\cdot(g_0\\cdot P)$ are defined. The composition identity of [lem-sfb-rational-action-domain-laws] gives that $e\\cdot P$ is defined; its unit identity gives $e\\cdot P=P$. The second coordinate lies in $D(k)$, hence outside $G$.",
+   "uses": [
+    "lem-sfb-rational-boundary-divisor-model",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sfb-rational-action-domain-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, referenced rational-action proof of Milne (2013), Proposition 4.1, pp.8--9 (read online; local copy WANTED)."
+   }
+  },
+  {
+   "text": "Pull $U$ back along $G\\to G\\times_kX$, $g\\mapsto(g,P)$. Its inverse image $V$ is open and contains $e$. Restricting $\\alpha$ gives a morphism $f:V\\to D$, by the factorization assertion of [lem-sfb-rational-boundary-divisor-model]. Let $F=f^{-1}(P)$ be its scheme-theoretic fibre and put $M=F(k)=\\{g\\in V(k):g\\cdot P=P\\}$. It contains $e$. If $g,h\\in M$, then $h\\cdot P=P$ and $g\\cdot(h\\cdot P)=P$ are defined. Thus [lem-sfb-rational-action-domain-laws] implies that $(gh)\\cdot P$ is defined and equals $P$; consequently $gh\\in M$.",
+   "uses": [
+    "lem-sfb-rational-boundary-divisor-model",
+    "lem-sfb-rational-action-domain-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, referenced rational-action proof of Milne (2013), Proposition 4.1, pp.8--9 (read online; local copy WANTED)."
+   }
+  },
+  {
+   "text": "Take the reduced Zariski closure $S$ of $M$ in $G$. The hypotheses just checked for $M$ allow [lem-sfb-closed-submonoid-group-subscheme] to apply, so $S\\hookrightarrow G$ is a closed subgroup scheme. This is exactly the reduced closure specified in the statement.",
+   "uses": [
+    "lem-sfb-closed-submonoid-group-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, referenced rational-action proof of Milne (2013), Proposition 4.1, pp.8--9 (read online; local copy WANTED)."
+   }
+  },
+  {
+   "text": "The nonempty open $V$ of integral $G$ is irreducible and has dimension $d$ by [lem-sc-integral-locally-algebraic-opens-dimension]. Apply [lem-zl-irreducible-fibre-dimension-lower-bound] to $f:V\\to D$. If $Z=\\overline{f(V)}\\subseteq D$, it gives an integer $r$ with $d=\\dim Z+r$ and $\\dim_e F\\geq r$. Since $\\dim Z\\leq\\dim D=d-1$, we have $r\\geq1$. Hence $\\dim_e F\\geq1$. The finite-type scheme $F$ has dense closed points by [lem-sc-lft-over-field-jacobson-space]; all of these are $k$-rational by [lem-weil-pbc-closed-point-residue-field-base]. Thus the closure in $G$ of $M=F(k)$ contains the whole underlying space of $F$. Chains of irreducible closed subsets in $F$ give such chains in that closure, so $\\dim S\\geq\\dim F\\geq\\dim_e F\\geq1$. Reduction does not change the underlying space. The $X,j,P,S$ constructed above therefore satisfy every assertion.",
+   "uses": [
+    "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-integral-locally-algebraic-opens-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.25, p.154, referenced rational-action proof of Milne (2013), Proposition 4.1, pp.8--9 (read online; local copy WANTED)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-divisorial-completion",
+  "lem-sfb-rational-action-domain-laws",
+  "lem-sfb-rational-boundary-divisor-model",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sfb-closed-submonoid-group-subscheme",
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lem-sc-integral-locally-algebraic-opens-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.25, p.154, referenced rational-action proof of Milne (2013), Proposition 4.1, pp.8--9 (read online; local copy WANTED)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonproper smooth connected algebraic group has a normal proper birational model with a boundary point whose rational stabilizer has positive dimension",
+   "results": "{\"t\": \"2026-10-24T08:56:10Z\", \"tool\": \"leanfinder\", \"query\": \"A nonproper smooth connected algebraic group has a normal proper birational model with a boundary point whose rational stabilizer has positive dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.exists_mem_SL2\", \"Subgroup.IsRegularAtInfty\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"ProperlyDiscontinuousVAdd.finite_stabilizer\"], \"digest\": \"2d53bc7ca7ddd4e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational algebraic group action on a compactification has a boundary stabilizer of positive dimension",
+   "results": "{\"t\": \"2026-10-24T08:56:09Z\", \"tool\": \"leansearch\", \"query\": \"Rational algebraic group action on a compactification has a boundary stabilizer of positive dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.stabilizer\", \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"MeasureTheory.addFundamentalFrontier\", \"cusps_subMulAction\", \"SubMulAction.ofStabilizer\", \"MulAction.orbitProdStabilizerEquivGroup\", \"MulAction.stabilizer_smul_eq_right\", \"instMulActionSubtypeMemSubgroupStabilizerSetElem\"], \"digest\": \"6bf1e303e140869f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"stabilizer\"",
+   "results": "{\"t\": \"2026-10-24T08:56:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"stabilizer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|boundary.*stabilizer|stabilizer.*dimension",
+   "results": "{\"t\": \"2026-10-24T08:56:09Z\", \"tool\": \"grep\", \"query\": \"rationalAction|rational_action|boundary.*stabilizer|stabilizer.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend left translations birationally to a proper model of an algebraic group and find a boundary point with positive dimensional partial stabilizer",
+   "results": "{\"t\": \"2026-10-24T09:04:30Z\", \"tool\": \"leanfinder\", \"query\": \"Extend left translations birationally to a proper model of an algebraic group and find a boundary point with positive dimensional partial stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"OnePoint.exists_mem_SL2\", \"MeasureTheory.fundamentalFrontier\", \"cusps_subMulAction\", \"cosetToCuspOrbit_apply_mk\", \"IsCusp\", \"MeasureTheory.mem_fundamentalFrontier\", \"MeasureTheory.fundamentalInterior\", \"exists_smul_notMem_of_subset_orbit_closure\"], \"digest\": \"cf40ea8efba87af6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; ordinary abstract or topological group actions, affine-scheme instances and Hopf algebras of already affine groups do not state this scheme-theoretic assertion for a possibly non-affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonproper algebraic group has a boundary point on a proper birational model with positive dimensional rational stabilizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"Subgroup.IsRegularAtInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"{R : Type u_1} → [inst : Ring R] → Subgroup (GL (Fin 2) R) → Prop\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\\\mathcal{G}.\\\\text{strictPeriods} = \\\\mathcal{G}.\\\\text{\"}\n  {\"name\": \"IsCusp\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"OnePoint ℝ → Subgroup (GL (Fin 2) ℝ) → Prop\", \"doc\": \"A point $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, \\\\mathbb{R} $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $ if there exists a parabolic element $ g \\\\in \"}\n  {\"name\": \"Subgroup.strictWidthInfty_pos_iff\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [DiscreteTopology ↥𝒢.strictPeriods] [𝒢.HasDetPlusMinusOne],\\n  0 < 𝒢.strictWidthInfty ↔ IsCusp OnePoint.infty 𝒢\", \"doc\": \"For a discrete subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ with determinant ±1, the strict width at infinity $\\\\mathcal{G}.\\\\text{strictWidthInfty}$ is positive if and only if the point a\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"CuspOrbits\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → Type\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this is the quotient of the set of cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by parabolic elements of $\\\\mathcal{G}$) by the eq\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"Subgroup.isCusp_of_mem_strictPeriods\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} {h : ℝ},\\n  0 < h → h ∈ 𝒢.strictPeriods → ∀ [DiscreteTopology ↥𝒢.strictPeriods] [𝒢.HasDetPlusMinusOne], IsCusp OnePoint.infty 𝒢\", \"doc\": \"Let $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ be a subgroup with determinant ±1. If $h \\\\in \\\\mathbb{R}_{>0}$ belongs to the additive subgroup $\\\\mathcal{G}.\\\\text{strictPeriods}$ (consisting of $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"stabilizer\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|boundary.*stabilizer|stabilizer.*dimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational action of an algebraic group on a compactification has a boundary point with positive dimensional stabilizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T] (x : T),\\n  {γ | γ +ᵥ x = x}.Finite\", \"doc\": \"For any properly discontinuous additive action of a group $\\\\Gamma$ on a topological space $T$, and for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is\"}\n  {\"name\": \"MulAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(a : α) : Subgroup G\", \"doc\": \"Given a group action of $G$ on a set $\\\\alpha$ and an element $a \\\\in \\\\alpha$, the stabilizer subgroup of $a$ is the subgroup of $G$ consisting of all elements $g$ satisfying $g \\\\bullet a = a$. This sub\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : AddGroup Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : AddAction Γ T]\\n  [ProperlyDiscontinuousVAdd Γ T] (x : T), (↑(AddAction.stabilizer Γ x)).Finite\", \"doc\": \"For any point $x$ in a topological space $T$ under a properly discontinuous additive action by an additive group $\\\\Gamma$, the stabilizer subgroup of $x$ is finite, i.e., $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\ga\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"[ProperlyDiscontinuousSMul Γ T] (x : T) : (MulAction.stabilizer Γ x : Set Γ).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) : SubMulAction 𝒢 (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"MulAction.mem_stabilizer_iff\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"{a : α} {g : G} : g ∈ stabilizer G a ↔ g • a = a\", \"doc\": \"For a group action of $G$ on a set $\\\\alpha$ and an element $a \\\\in \\\\alpha$, an element $g \\\\in G$ belongs to the stabilizer subgroup of $a$ if and only if the group action satisfies $g \\\\bullet a = a$.\"}\n  {\"name\": \"AddAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(G : Type u_1) → {α : Type u_2} → [inst : AddGroup G] → [AddAction G α] → α → AddSubgroup G\", \"doc\": \"For an additive group $G$ acting on a type $\\\\alpha$ and an element $a \\\\in \\\\alpha$, this constructs the additive subgroup of $G$ consisting of all elements $g \\\\in G$ satisfying $g \\\\cdot a = a$. This fo\"}\n  {\"name\": \"MulAction.mem_stabilizer_finset'\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"{s : Finset α} : a ∈ stabilizer G s ↔ ∀ ⦃b⦄, b ∈ s → a • b ∈ s\", \"doc\": \"An element $ a $ of the group $ G $ belongs to the stabilizer subgroup of a finite set $ s $ if and only if for every element $ b $ in $ s $, the action of $ a $ on $ b $, denoted $ a \\\\bullet b $, rem\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left translations on a group compactification and positive dimensional isotropy at infinity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) → SubMulAction (↥𝒢) (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"exists_disjoint_smul_of_isCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] [NoncompactSpace G] {K L : Set G},\\n  IsCompact K → IsCompact L → ∃ g, Disjoint K (g • L)\", \"doc\": \"Let $G$ be a non-compact topological group. For any two compact subsets $K$ and $L$ of $G$, there exists an element $g \\\\in G$ such that the translate $gL = \\\\{gl \\\\mid l \\\\in L\\\\}$ is disjoint from $K$. I\"}\n  {\"name\": \"MeasureTheory.Measure.haar.mul_left_index_le\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] {K : Set G},\\n  IsCompact K →\\n    ∀ {V : Set G},\\n      (interior V).Nonempty →\\n        ∀ (g : G), MeasureTheory.Measure.haar.index ((fun h => g * h) '' K) V ≤ MeasureTheory.Measure.haar.index K V\", \"doc\": \"For any compact set $K$ in a topological group $G$ and any open set $V$ with non-empty interior, the index of the left translate $gK$ in $V$ is less than or equal to the index of $K$ in $V$, i.e., $\\\\o\"}\n  {\"name\": \"MeasureTheory.Measure.haar.is_left_invariant_index\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] {K : Set G},\\n  IsCompact K →\\n    ∀ (g : G) {V : Set G},\\n      (interior V).Nonempty →\\n        MeasureTheory.Measure.haar.index ((fun h => g * h) '' K) V = MeasureTheory.Measure.haar.index K V\", \"doc\": \"In a topological group $ G $, for any compact set $ K $, group element $ g $, and set $ V $ with non-empty interior, the index of the left translate $ gK $ intersected with $ V $ equals the index of $\"}\n  {\"name\": \"IsCusp\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"OnePoint ℝ → Subgroup (GL (Fin 2) ℝ) → Prop\", \"doc\": \"A point $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, \\\\mathbb{R} $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $ if there exists a parabolic element $ g \\\\in \"}\n  {\"name\": \"Subgroup.properlyDiscontinuousSMul_opposite_of_tendsto_cofinite\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] (S : Subgroup G),\\n  Filter.Tendsto (⇑S.subtype) Filter.cofinite (Filter.cocompact G) → ProperlyDiscontinuousSMul (↥S.op) G\", \"doc\": \"For a subgroup $ S $ of a group $ G $, if the inclusion map $ S \\\\to G $ satisfies that the image of the cofinite filter on $ S $ is contained in the cocompact filter on $ G $, then the opposite action\"}\n  {\"name\": \"Subgroup.properlyDiscontinuousSMul_of_tendsto_cofinite\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] (S : Subgroup G),\\n  Filter.Tendsto (⇑S.subtype) Filter.cofinite (Filter.cocompact G) → ProperlyDiscontinuousSMul (↥S) G\", \"doc\": \"If the canonical inclusion homomorphism from a subgroup $ S $ of a topological group $ G $ satisfies $ \\\\mathsf{Tendsto}(S.\\\\mathsf{subtype}, \\\\mathsf{cofinite}, \\\\mathsf{cocompact} \\\\, G) $, then the acti\"}\n  {\"name\": \"exists_disjoint_vadd_of_isCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [IsTopologicalAddGroup G] [NoncompactSpace G]\\n  {K L : Set G}, IsCompact K → IsCompact L → ∃ g, Disjoint K (g +ᵥ L)\", \"doc\": \"Let $G$ be a non-compact topological additive group. For any two compact subsets $K, L \\\\subseteq G$, there exists an element $g \\\\in G$ such that the sets $K$ and the translate $g+L$ are disjoint, i.e.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonproper algebraic group has a boundary point on a proper birational model with positive dimensional rational stabilizer",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OnePoint.exists_mem_SL2\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : DecidableEq K] (A : Type u_2) [inst_2 : CommRing A] [IsDomain A]\\n  [inst_4 : Algebra A K] [IsFractionRing A K] [IsPrincipalIdealRing A] (c : OnePoint K),\\n  ∃ g, (Matrix.SpecialLinearGroup.mapGL K) g • OnePoint.infty = c\", \"doc\": \"For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, K $ can be represented as $ g \\\\cdot\"}\n  {\"name\": \"Subgroup.IsRegularAtInfty\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"{R : Type u_1} → [inst : Ring R] → Subgroup (GL (Fin 2) R) → Prop\", \"doc\": \"A subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,R)$ is regular at infinity if its strict periods subgroup equals its periods subgroup, i.e., when $\\\\mathcal{G}.\\\\text{strictPeriods} = \\\\mathcal{G}.\\\\text{\"}\n  {\"name\": \"IsCusp\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"OnePoint ℝ → Subgroup (GL (Fin 2) ℝ) → Prop\", \"doc\": \"A point $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, \\\\mathbb{R} $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $ if there exists a parabolic element $ g \\\\in \"}\n  {\"name\": \"Subgroup.strictWidthInfty_pos_iff\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [DiscreteTopology ↥𝒢.strictPeriods] [𝒢.HasDetPlusMinusOne],\\n  0 < 𝒢.strictWidthInfty ↔ IsCusp OnePoint.infty 𝒢\", \"doc\": \"For a discrete subgroup $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ with determinant ±1, the strict width at infinity $\\\\mathcal{G}.\\\\text{strictWidthInfty}$ is positive if and only if the point a\"}\n  {\"name\": \"MeasureTheory.mem_fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"∀ {G : Type u_1} {α : Type u_3} [inst : Group G] [inst_1 : MulAction G α] {s : Set α} {x : α},\\n  x ∈ MeasureTheory.fundamentalFrontier G s ↔ x ∈ s ∧ ∃ g, g ≠ 1 ∧ x ∈ g • s\", \"doc\": \"For a group $ G $ acting on a set $ s $, an element $ x $ belongs to the fundamental frontier $ \\\\text{fundamentalFrontier}(G, s) $ if and only if $ x \\\\in s $ and there exists a non-identity element $ \"}\n  {\"name\": \"CuspOrbits\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"Subgroup (GL (Fin 2) ℝ) → Type\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this is the quotient of the set of cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by parabolic elements of $\\\\mathcal{G}$) by the eq\"}\n  {\"name\": \"MeasureTheory.fundamentalFrontier\", \"module\": \"Mathlib/MeasureTheory/Group/FundamentalDomain\", \"type\": \"(G : Type u_1) → {α : Type u_3} → [inst : Group G] → [MulAction G α] → Set α → Set α\", \"doc\": \"The set $ s \\\\cap \\\\bigcup_{\\\\substack{g \\\\in G \\\\\\\\ g \\\\ne 1}} g \\\\cdot s $, representing the intersection of a set $ s $ with the union of its translates under non-identity elements of the group $ G $.\"}\n  {\"name\": \"Subgroup.isCusp_of_mem_strictPeriods\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} {h : ℝ},\\n  0 < h → h ∈ 𝒢.strictPeriods → ∀ [DiscreteTopology ↥𝒢.strictPeriods] [𝒢.HasDetPlusMinusOne], IsCusp OnePoint.infty 𝒢\", \"doc\": \"Let $\\\\mathcal{G} \\\\subseteq \\\\mathrm{GL}(2,\\\\mathbb{R})$ be a subgroup with determinant ±1. If $h \\\\in \\\\mathbb{R}_{>0}$ belongs to the additive subgroup $\\\\mathcal{G}.\\\\text{strictPeriods}$ (consisting of $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"stabilizer\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalAction|rational_action|boundary.*stabilizer|stabilizer.*dimension",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational action of an algebraic group on a compactification has a boundary point with positive dimensional stabilizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ (Γ : Type u_4) {T : Type u_5} [inst : TopologicalSpace T] [inst_1 : VAdd Γ T] [ProperlyDiscontinuousVAdd Γ T] (x : T),\\n  {γ | γ +ᵥ x = x}.Finite\", \"doc\": \"For any properly discontinuous additive action of a group $\\\\Gamma$ on a topological space $T$, and for every point $x \\\\in T$, the stabilizer subgroup $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\gamma \\\\cdot x = x\\\\}$ is\"}\n  {\"name\": \"MulAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(a : α) : Subgroup G\", \"doc\": \"Given a group action of $G$ on a set $\\\\alpha$ and an element $a \\\\in \\\\alpha$, the stabilizer subgroup of $a$ is the subgroup of $G$ consisting of all elements $g$ satisfying $g \\\\bullet a = a$. This sub\"}\n  {\"name\": \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : AddGroup Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : AddAction Γ T]\\n  [ProperlyDiscontinuousVAdd Γ T] (x : T), (↑(AddAction.stabilizer Γ x)).Finite\", \"doc\": \"For any point $x$ in a topological space $T$ under a properly discontinuous additive action by an additive group $\\\\Gamma$, the stabilizer subgroup of $x$ is finite, i.e., $\\\\{\\\\gamma \\\\in \\\\Gamma \\\\mid \\\\ga\"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib.Topology.Algebra.ConstMulAction\", \"type\": \"[ProperlyDiscontinuousSMul Γ T] (x : T) : (MulAction.stabilizer Γ x : Set Γ).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) : SubMulAction 𝒢 (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"MulAction.mem_stabilizer_iff\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"{a : α} {g : G} : g ∈ stabilizer G a ↔ g • a = a\", \"doc\": \"For a group action of $G$ on a set $\\\\alpha$ and an element $a \\\\in \\\\alpha$, an element $g \\\\in G$ belongs to the stabilizer subgroup of $a$ if and only if the group action satisfies $g \\\\bullet a = a$.\"}\n  {\"name\": \"AddAction.stabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \"(G : Type u_1) → {α : Type u_2} → [inst : AddGroup G] → [AddAction G α] → α → AddSubgroup G\", \"doc\": \"For an additive group $G$ acting on a type $\\\\alpha$ and an element $a \\\\in \\\\alpha$, this constructs the additive subgroup of $G$ consisting of all elements $g \\\\in G$ satisfying $g \\\\cdot a = a$. This fo\"}\n  {\"name\": \"MulAction.mem_stabilizer_finset'\", \"module\": \"Mathlib.Algebra.Pointwise.Stabilizer\", \"type\": \"{s : Finset α} : a ∈ stabilizer G s ↔ ∀ ⦃b⦄, b ∈ s → a • b ∈ s\", \"doc\": \"An element $ a $ of the group $ G $ belongs to the stabilizer subgroup of a finite set $ s $ if and only if for every element $ b $ in $ s $, the action of $ a $ on $ b $, denoted $ a \\\\bullet b $, rem\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left translations on a group compactification and positive dimensional isotropy at infinity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"cusps_subMulAction\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) → SubMulAction (↥𝒢) (OnePoint ℝ)\", \"doc\": \"For a subgroup $\\\\mathcal{G}$ of $\\\\mathrm{GL}(2, \\\\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\\\text{OnePoint}\\\\, \\\\mathbb{R}$ fixed by p\"}\n  {\"name\": \"exists_disjoint_smul_of_isCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] [NoncompactSpace G] {K L : Set G},\\n  IsCompact K → IsCompact L → ∃ g, Disjoint K (g • L)\", \"doc\": \"Let $G$ be a non-compact topological group. For any two compact subsets $K$ and $L$ of $G$, there exists an element $g \\\\in G$ such that the translate $gL = \\\\{gl \\\\mid l \\\\in L\\\\}$ is disjoint from $K$. I\"}\n  {\"name\": \"MeasureTheory.Measure.haar.mul_left_index_le\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] {K : Set G},\\n  IsCompact K →\\n    ∀ {V : Set G},\\n      (interior V).Nonempty →\\n        ∀ (g : G), MeasureTheory.Measure.haar.index ((fun h => g * h) '' K) V ≤ MeasureTheory.Measure.haar.index K V\", \"doc\": \"For any compact set $K$ in a topological group $G$ and any open set $V$ with non-empty interior, the index of the left translate $gK$ in $V$ is less than or equal to the index of $K$ in $V$, i.e., $\\\\o\"}\n  {\"name\": \"MeasureTheory.Measure.haar.is_left_invariant_index\", \"module\": \"Mathlib/MeasureTheory/Measure/Haar/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] {K : Set G},\\n  IsCompact K →\\n    ∀ (g : G) {V : Set G},\\n      (interior V).Nonempty →\\n        MeasureTheory.Measure.haar.index ((fun h => g * h) '' K) V = MeasureTheory.Measure.haar.index K V\", \"doc\": \"In a topological group $ G $, for any compact set $ K $, group element $ g $, and set $ V $ with non-empty interior, the index of the left translate $ gK $ intersected with $ V $ equals the index of $\"}\n  {\"name\": \"IsCusp\", \"module\": \"Mathlib/NumberTheory/ModularForms/Cusps\", \"type\": \"OnePoint ℝ → Subgroup (GL (Fin 2) ℝ) → Prop\", \"doc\": \"A point $ c $ in the one-point compactification $ \\\\text{OnePoint}\\\\, \\\\mathbb{R} $ is a cusp for a subgroup $ \\\\mathcal{G} $ of $ \\\\mathrm{GL}(2, \\\\mathbb{R}) $ if there exists a parabolic element $ g \\\\in \"}\n  {\"name\": \"Subgroup.properlyDiscontinuousSMul_opposite_of_tendsto_cofinite\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] (S : Subgroup G),\\n  Filter.Tendsto (⇑S.subtype) Filter.cofinite (Filter.cocompact G) → ProperlyDiscontinuousSMul (↥S.op) G\", \"doc\": \"For a subgroup $ S $ of a group $ G $, if the inclusion map $ S \\\\to G $ satisfies that the image of the cofinite filter on $ S $ is contained in the cocompact filter on $ G $, then the opposite action\"}\n  {\"name\": \"Subgroup.properlyDiscontinuousSMul_of_tendsto_cofinite\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : Group G] [IsTopologicalGroup G] (S : Subgroup G),\\n  Filter.Tendsto (⇑S.subtype) Filter.cofinite (Filter.cocompact G) → ProperlyDiscontinuousSMul (↥S) G\", \"doc\": \"If the canonical inclusion homomorphism from a subgroup $ S $ of a topological group $ G $ satisfies $ \\\\mathsf{Tendsto}(S.\\\\mathsf{subtype}, \\\\mathsf{cofinite}, \\\\mathsf{cocompact} \\\\, G) $, then the acti\"}\n  {\"name\": \"exists_disjoint_vadd_of_isCompact\", \"module\": \"Mathlib/Topology/Algebra/Group/Basic\", \"type\": \"∀ {G : Type w} [inst : TopologicalSpace G] [inst_1 : AddGroup G] [IsTopologicalAddGroup G] [NoncompactSpace G]\\n  {K L : Set G}, IsCompact K → IsCompact L → ∃ g, Disjoint K (g +ᵥ L)\", \"doc\": \"Let $G$ be a non-compact topological additive group. For any two compact subsets $K, L \\\\subseteq G$, there exists an element $g \\\\in G$ such that the sets $K$ and the translate $g+L$ are disjoint, i.e.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: The hits concern abstract stabilizers, modular cusps and properly discontinuous actions; none states a rational scheme action or its boundary stabilizer."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+  "date": "2026-10-24",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.25 rational-action proof: choose a boundary point and close its partial stabilizer before the dimension induction.",
+   "via": [
+    "lem-sfb-rosenlicht-nonproper-affine-subgroup",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-boundary-positive-stabilizer",
+  "worker": "stage1",
+  "summary": "Expanded the rational-action proof through a divisorial completion and a birational invariant-divisor model; selected a rational boundary point using the involution, proved its partial stabilizer is a monoid, and used a general fibre-dimension bound and dense rational points. Four genuine geometric/group lemmas are statement-only nodes. No Lean or builds.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs ancestor confirms this). This auxiliary algebraic-group branch serves the admissible-direct-image/stability route. The exact source place is Milne 8.25, rational-action paragraph, expanded by Milne 2013 Proposition 4.1 before the stabilizer case distinction; steps 1--2 realize completion and boundary-point selection, steps 3--5 the closure and dimension assertions.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-irreducible-fibre-dimension-lower-bound",
+    "why": "General finite-type fibre dimension bound, used for V to D; the unit has no rational-orbit dimension lemma and this does not replace its route."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "General existence and density of closed points of finite-type schemes, for W and the stabilizer fibre."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "General Nullstellensatz residue-field identification over an algebraically closed field, for closed points of W and F."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "General finite-type dimension invariance on a nonempty integral open, used for V inside G."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-irreducible-fibre-dimension-lower-bound",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-integral-locally-algebraic-opens-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-c00ae1561",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-c00ae1561 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 Prop 8.25, pp.153-154, and its footnote: the 8.44 equivariant-completion route would be circular, so the item rightly follows the rational-action route. I could not open Milne 2013 (the guard blocks network access), so I checked every new statement and step myself. All four new nodes are true, statement-only and unsplit. (1) normal-divisorial-completion: Nagata compactification, normalization, blow-up of the boundary ideal and normalization again; each is an isomorphism over smooth Y; the boundary is Cartier, hence pure codimension one by Krull, and nonempty because Y is not proper. (2) rational-action-domain-laws: compare α(gh,x) with α(g,α(h,x)) on G×G×X; the source is reduced and the target separated; then take a slice. (3) rational-boundary-divisor-model: v'=v_{G×D0}∘α^* is nontrivial by the domain laws; Abhyankar's inequality makes it divisorial; a normalized blow-up makes its centre a divisor D; the Gauss-extension uniqueness gives φ(η_{G×D})=η_{G×D}, which yields the factorization through D and the involution τ with W. (4) closed-submonoid-group-subscheme: true by Milne Aside 1.55, p.21, with a reduced product over an algebraically closed field. Steps 1-5: every hypothesis holds where it is used. In step 2, the closed point of W is k-rational, τ(W)=W puts (g0^{-1},g0·P) in U, and the composition and unit laws give e·P=P. In step 3, V×{P}⊆U_D and M is closed under products. In step 5, d=dim Z+r with dim Z≤d-1, so r≥1; F(k) is dense in F, so dim S≥1. The parent rosenlicht step 2 uses exactly X, P, V, α and S. No duplicates found: lem-wf-zariski-closure-subgroup is about a closure of a group in GL, and the smooth-section and fixed-point nodes state different things. No new node restates a clause of the item. Tool uses accepted: zl fibre-dimension bound, sc Jacobson, pbc residue field, sc opens-dimension. Small cases: Ga and Gm in P1, trivial actions, finite nonreduced G. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RationalBoundaryPositiveStabilizer",
+  "declaration": "AlgebraicGeometry.exists_rational_boundary_positive_stabilizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RationalBoundaryPositiveStabilizer.lean",
+  "statement": "theorem exists_rational_boundary_positive_stabilizer (k : Type u) [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hG : ¬ IsProper G.hom) : ∃ (X : Over (Spec (.of k))) (j : G ⟶ X), IsOpenImmersion j.left ∧ IsIntegral X.left ∧ IsProper X.hom ∧ (∀ x : X.left, IsDomain (X.left.presheaf.stalk x) ∧ IsIntegrallyClosed (X.left.presheaf.stalk x)) ∧ Dense (Set.range j.left) ∧ ∃ (P : 𝟙_ (Over (Spec (.of k))) ⟶ X) (a : (G ⊗ X).left.PartialMap X.left) (t : (G ⊗ G).left ⟶ a.domain.toScheme) (V : G.left.Opens) (S : Over (Spec (.of k))) (_ : GrpObj S) (i : S ⟶ G), (Set.range P.left ⊆ (Set.range j.left)ᶜ) ∧ a.domain = a.toRationalMap.domain ∧ t ≫ a.domain.ι = (𝟙 G ⊗ₘ j).left ∧ t ≫ a.hom = μ[G].left ≫ j.left ∧ V = (lift (𝟙 G) (toUnit G ≫ P)).left ⁻¹ᵁ a.domain ∧ (Set.range η[G].left ⊆ (V : Set G.left)) ∧ IsClosedSubgroupScheme i ∧ IsReduced S.left ∧ i.left.ker = Scheme.IdealSheafData.vanishingIdeal ⟨closure {x : G.left | ∃ (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) (q : (𝟙_ (Over (Spec (.of k)))).left ⟶ a.domain.toScheme), x ∈ Set.range g.left ∧ q ≫ a.domain.ι = (lift g P).left ∧ q ≫ a.hom = P.left}, isClosed_closure⟩ ∧ (1 : WithBot ℕ∞) ≤ topologicalKrullDim S.left",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0127a9852",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Checked every clause against the node: k alg closed; G GrpObj smooth/connected/separated/LFT+QC (= finite type per record), ¬IsProper; X integral proper with stalks integrally closed domains; j open immersion over k, dense range; P k-point outside range j; partial map a with domain = toRationalMap.domain (maximal) pinned on G×G by t (t≫ι=(𝟙⊗j), t≫a.hom=μ≫j), so the rational class is determined (X separated, G×X reduced); V = preimage under lift(𝟙,P), contains range η; S with IsClosedSubgroupScheme i (IsMonHom + R-point injective + closed immersion), IsReduced, ker = vanishingIdeal of the closure of the k-point partial stabilizer; 1 ≤ topologicalKrullDim S. lean.statement verbatim in file; sorry only; docstrings give source and blueprint, proof plan follows the 5 node steps; node differs from side-live only in lean; report has Worker report + Second reading. No existing declaration (H4); sibling nodes have no Lean. Note: normality inlined rather than IsNormalScheme — acceptable because the node does not cite def-sbc-normal-dominant-galois. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "def-sfb-bialgebra-distribution-algebra",
+ "kind": "definition",
+ "title": "Finite-order distribution algebra and tangent Lie algebra of a commutative bialgebra",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field] and $C$ a commutative unital $k$-algebra equipped with unital algebra maps $\\Delta:C\\to C\\otimes_k C$ and $\\varepsilon:C\\to k$ satisfying coassociativity and both counit identities, using the module tensor product [def-weil-pbc-module-tensor-product] and its algebra tensor-product structure [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Put $I=\\ker\\varepsilon$. In the full convolution algebra $C^*=\\operatorname{Hom}_k(C,k)$ [lem-sfb-convolution-linear-map-algebra], define $\\operatorname{HasDistributionOrder}(n,a)$ by $a(I^{n+1})=0$ for $n\\in\\mathbb N$, $F_n$ as this annihilator for nonnegative integral $n$, and $F_n=0$ for negative integral $n$. Define $\\operatorname{Dist}(C)=\\{a\\in C^*: \\exists n\\in\\mathbb N,\\ a(I^{n+1})=0\\}$ with the inherited unital $k$-subalgebra structure, product $(a*b)(c)=(a\\otimes b)(\\Delta c)$ and unit $\\varepsilon$. Define $L(C)=\\{v\\in C^*:v(xy)=\\varepsilon(x)v(y)+v(x)\\varepsilon(y)\\text{ for all }x,y\\in C\\}$ with the inherited Lie subalgebra structure [def-wf-lie-algebra] of the convolution commutator Lie algebra, $[v,w]=v*w-w*v$. The proof fields asserting closure of these carriers under the inherited operations are named auxiliary theorems; the carriers and every operation are the displayed real constructions. No antipode, finite generation, smoothness, cocommutativity or characteristic restriction is imposed.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-convolution-linear-map-algebra",
+  "def-wf-lie-algebra"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 10e and 10l, Propositions 10.28--10.29, printed pp.195--196 and 208: the counit derivations and finite-order convolution distribution algebra; the constructions use only the commutative bialgebra axioms."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "distributionAlgebra|tangentLieAlgebra|HasDistributionOrder|IsTangentFunctional|augmentationIdeal",
+   "results": "{\"t\": \"2026-10-24T11:26:58Z\", \"tool\": \"grep\", \"query\": \"distributionAlgebra|tangentLieAlgebra|HasDistributionOrder|IsTangentFunctional|augmentationIdeal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No general bialgebra distribution subalgebra or tangent Lie subalgebra. Full-dual convolution and ordinary Lie subalgebra constructors are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite order distributions of a commutative bialgebra form the subalgebra of its convolution dual annihilating some power of the augmentation ideal",
+   "results": "{\"t\": \"2026-10-24T11:26:58Z\", \"tool\": \"leansearch\", \"query\": \"The finite order distributions of a commutative bialgebra form the subalgebra of its convolution dual annihilating some power of the augmentation ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bialgebra.mk'\", \"Bialgebra.noConfusionType\", \"Bialgebra.toAlgebra\", \"CommBialgCat.bialgebra\", \"Bialgebra.mk\", \"Bialgebra.mk.noConfusion\", \"OrderDual.finite\", \"Bialgebra.comul_pow\"], \"digest\": \"42a32bfd6d7c5289\"}",
+   "date": "2026-10-24",
+   "verdict": "No general bialgebra distribution subalgebra or tangent Lie subalgebra. Full-dual convolution and ordinary Lie subalgebra constructors are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Lie algebra of counit derivations is the Lie subalgebra of the convolution dual with commutator bracket",
+   "results": "{\"t\": \"2026-10-24T11:26:59Z\", \"tool\": \"leanfinder\", \"query\": \"The Lie algebra of counit derivations is the Lie subalgebra of the convolution dual with commutator bracket\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LeftInvariantDerivation.instLieAlgebra\", \"LieDerivation.instLieAlgebra\", \"Derivation.instLieAlgebra\", \"LieDerivation.instBracket\", \"LieRinehartAlgebra.instDerivation\", \"LieDerivation.instLieRing\", \"LieRinehartAlgebra.instLieRinehartRingDerivation\", \"Derivation.instLieRing\"], \"digest\": \"76ce6473d8a12747\"}",
+   "date": "2026-10-24",
+   "verdict": "No general bialgebra distribution subalgebra or tangent Lie subalgebra. Full-dual convolution and ordinary Lie subalgebra constructors are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l distribution algebra|finite-order distributions|tangent functionals dag/nodes; blueprint_refs.py search distribution; rg -n distributionAlgebra|tangentLieAlgebra|HasDistributionOrder|IsTangentFunctional|convolutionLieRing lean/Sheaf lean/WeilConjectures; scompile.py --source Sheaf.AlgebraicGeometry.GroupScheme.AffineGroupDistributionCalculus",
+   "results": "Blueprint search: 0 nodes; ancestor: null. No matching declarations in the local project roots. Existing def-sfb-affine-group-distribution-calculus read in full from the server: finiteOrder and tangent are predicates for coordinate Hopf algebras of affine groups, not a general bialgebra subalgebra/Lie subalgebra. Existing calculus theorem node supplies results about these notions but no definition record; it is unchanged. The returned review explicitly requests this definition owner.",
+   "date": "2026-10-24",
+   "verdict": "The generic bialgebra construction, requiring no antipode or scheme realization, is absent. New definition node owns the structures and only their necessary closure helpers."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-characteristic-zero-distribution-enveloping",
+  "date": "2026-10-24",
+  "group": "Q149"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Rational comparison prerequisite: tangent distributions realize the rational enveloping algebra before integral restriction Definition ownership for the distribution algebra and tangent Lie subalgebra used in the rational comparison statement.",
+   "via": [
+    "lem-sfb-characteristic-zero-distribution-enveloping",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.Bialgebra.DistributionAlgebra",
+  "declaration": "Bialgebra.distributionAlgebra",
+  "declarations": [
+   "Bialgebra.augmentationIdeal",
+   "Bialgebra.HasDistributionOrder",
+   "Bialgebra.distributionFiltration",
+   "Bialgebra.IsDistribution",
+   "Bialgebra.distribution_closed",
+   "Bialgebra.distributionAlgebra",
+   "Bialgebra.IsTangentFunctional",
+   "Bialgebra.convolutionLieRing",
+   "Bialgebra.tangent_closed",
+   "Bialgebra.tangentLieAlgebra"
+  ],
+  "file": "lean/Sheaf/RingTheory/Bialgebra/DistributionAlgebra.lean",
+  "statement": "def distributionAlgebra : Subalgebra k (WithConv (C →ₗ[k] k))",
+  "branch": "sheaf-dag",
+  "by": "Q149",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9d42ce47",
+  "group": "Q149",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a9d42ce47",
+  "group": "Q149",
+  "result": "pass",
+  "note": "H2 repair of 0ce41f6e is correct: new definition node def-sfb-bialgebra-distribution-algebra (Bialgebra.distributionAlgebra Subalgebra and tangentLieAlgebra LieSubalgebra of WithConv(C→k), exact carriers, closure helpers sorried and true, real data, universes u v, no antipode/char assumption, fields and verbatim statement ok) replaces the theorem node in the item's stmt_deps; proof_deps unchanged; item JSON differs from live only in lean/stmt_deps; item Lean is identical to the reviewed version except the import. All item clauses match: char 0, smooth affine LFT+QC group, coordinateAlgebra/coordinateHopf, Dist as the I^{n+1}-annihilator union, ε-Leibniz tangent with convolution commutator (sign checked via ε(D_vD_w)=v*w), U as UniversalEnvelopingAlgebra, ≃ₐ with generator law, naturality with push/df/Udf each fixed by values via coordinateMap f, no connectedness. Edge cases C=k, finite étale, d=0. No compile (no change). Notes: Q148's landed calculus theorem module has parallel theorem-owned duplicates BialgebraDistribution.* (to be rebased on the new def node later); BorelDistributions predicates are group-specialised, not a duplicate; item docstring says 'imported calculus' though it is only a proof_dep."
+ }
+}

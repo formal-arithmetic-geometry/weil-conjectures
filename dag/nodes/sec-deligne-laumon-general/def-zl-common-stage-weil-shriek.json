@@ -16,9 +16,84 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
   "place": "First two paragraphs: proper image and compact support Weil structures from invertible automorphism-square exchanges; together with SGA 4 XVII §5–6 proper/open construction"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For zlPull_proper_isLeftAdjoint specialize the existing sfModelPull_isLeftAdjoint to the proper map. The existing result already holds without properness or separated structure morphisms, so no extra hypothesis is used.",
+   "uses": [
+    "def-weil-common-stage-derived-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each geometric fibre finite type gives Noetherianity, finite topological dimension and stalk invertibility of ell. Obtain the coherent coefficient comparison system and apply commonStageDerivedPullback_identity. The normalized pullback compositor applied to geometric Frobenius and its inverse gives both inverse-composition isomorphisms. Functor.IsEquivalence.mk' therefore proves that this actual common-stage Frobenius pullback is an equivalence.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-zl-weil-ind-sheaf-category",
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-sf-common-stage-pullback-identity",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply CategoryTheory.isIso_mateEquiv_of_isEquivalence to the inverse normalized Frobenius square and the two proper adjunctions. This proves invertibility of the specified proper mate, without changing its definition.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a normalized coefficient action for the open identity compactification using sfCompactSupportFiniteFieldIndependence. Apply openWeilUnitAndEmptyFibre to this action and take the adjunction field of its common-stage OpenData. This is a left adjoint of the literal zlPull, so its adjunction gives zlPull_open_isRightAdjoint. The open theorem works with independent scheme and coefficient universes; the unnecessary separated structure-morphism hypotheses are removed in the same delivery.",
+   "uses": [
+    "lem-weil-compact-support-finite-field-independence",
+    "lem-zl-open-weil-unit-and-empty-fibre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Given the recorded open adjunction, apply CategoryTheory.isIso_inverseMate_of_equivalences to the normalized Frobenius square, using the two Frobenius equivalences just constructed. This proves invertibility of the specified inverse open mate.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose normalized support actions Sj and Sp for the open and proper factors by finite-field independence. The generalized existing open-unit package gives Sj ⊣ Pj. For proper Sp, construct finite rational adjunctions from the identity-open tower comparison and normalize their counits with the prescribed coefficient maps. The proved stage-mate unit/counit construction descends this finite adjunction to Pp ⊣ Sp. Adjoint uniqueness identifies the parent chosen functors Jj and Rp with Sj and Sp. Apply the existing field shriek compositor for these three arbitrary compactifications, transporting the composite arrow along the geometric compactification equality. Whiskering the adjoint-uniqueness isomorphisms and composing with this compositor proves the recorded comparison. Retain the displayed ordered Frobenius paste.",
+   "uses": [
+    "lem-weil-compact-support-finite-field-independence",
+    "lem-zl-open-weil-unit-and-empty-fibre",
+    "lem-zl-proper-support-finite-adjunction",
+    "lem-zl-proper-support-coefficient-adjunction",
+    "lem-sf-rational-direct-image-adjunctions",
+    "def-weil-common-stage-derived-direct-image",
+    "lem-zl-field-shriek-composition-qcqs",
+    "def-zl-frobenius-compact-support-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-common-stage-derived-direct-image",
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-sf-common-stage-pullback-identity",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-compact-support-finite-field-independence",
+  "lem-zl-open-weil-unit-and-empty-fibre",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-zl-proper-support-finite-adjunction",
+  "lem-zl-proper-support-coefficient-adjunction",
+  "lem-sf-rational-direct-image-adjunctions",
+  "lem-zl-field-shriek-composition-qcqs",
+  "def-zl-frobenius-compact-support-comparison"
+ ],
+ "proof_origin": "C6 stage 3, 2026-10-25: reuse the normalized open-unit package and coefficient-action existence for the open adjoint. Identify the chosen proper/open adjoints with support actions using finite proper adjunctions and coherent stage descent; finish by the existing arbitrary-compactification field compositor. The proper coefficient-counit normalization is a separate finite-stage lemma. Preserve the proper adjoint and Frobenius mate proofs and the unit route.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -65,7 +140,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-l-dl-general-composition",
  "lean": {
@@ -112,5 +198,15 @@
   "group": "Q36",
   "result": "pass",
   "note": "Item zlWeilShriekComposition matches the node exactly: separated and finite-type hypotheses on X0, Y0, Z0, f0 and g0 with nothing stronger; independent universes u and v; compactifications are inputs it must hold for, not assumptions. The conclusion is a natural iso R(gf)! ≅ Rf! ⋙ Rg! on the full common-stage categories plus a Frobenius equation that is exactly the hypothesis of IsoAlgebra.mapOfNatIsoIsoOfIso, so it also gives the iso of functors on Weil pairs. The statement field is verbatim. The new node def-zl-common-stage-weil-shriek is genuinely missing (FieldShriekCompositionQcqs has no Frobenius, the finite-level and pbc versions are separate notions, lem-fix-weil-operations has no Lean). Adjoints are selected by their universal properties in the right directions; the mate types were checked against mateEquiv and match the source's exchange maps (lem-fix-weil-operations proof); the claim of agreement with the recorded normalized action is true. No hollow definitions, only sorry proofs, source and blueprint docstrings, dependency records consistent, no pro-etale substitute. nt_compile --json on both files, run twice: exit 0, no errors or warnings (CommonStageWeilShriek 10.6/13.9 s, WeilShriekComposition 3.4/3.3 s). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac105",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T122622-L-1790683",
+  "kind": "interface",
+  "note": "independent cc review: item proofs of zlPull_open_isRightAdjoint/zlCommonStageShriek_recorded against node def-zl-common-stage-weil-shriek; new sorry properSupportCoefficientAdjunction against its node and the pinned SfCompactSupportCoefficientAction beta; ZlOpenUnit generalization (Type v, no IsSeparated, finite-stage EmptyFibre clause) against change record and node statement; 7 direct importers compiled against the delivered set"
  }
 }

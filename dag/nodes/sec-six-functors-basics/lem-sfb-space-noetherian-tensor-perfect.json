@@ -1,0 +1,251 @@
+{
+ "id": "lem-sfb-space-noetherian-tensor-perfect",
+ "kind": "statement",
+ "title": "Perfect tensor direct image over a Noetherian algebraic space",
+ "statement": "Work with a scheme $S$ [def-pc-scheme], algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use module derived categories [def-weil-abstract-derived-category], quasi-coherent modules [def-trf-space-quasi-coherent-module], and the canonical module functors [def-trf-space-etale-module-functors]. Derived pullback and tensor are computed with K-flat resolutions with flat terms, and derived direct image with K-injective resolutions. Perfect means etale locally isomorphic in the derived category to a bounded complex of direct summands of finite free structure modules. Finite presentation of a morphism means quasi-compact, quasi-separated and locally finitely presented on etale scheme charts. A module is finitely presented when it locally has a presentation $\\mathcal O^m\\to\\mathcal O^n\\to M\\to0$ with $m,n$ finite. Flatness over a base is flatness of geometric stalks over its corresponding geometric local rings. Proper means separated, of finite type and universally closed; the scheme theoretic support of a finitely presented module is the closed subspace cut out by its annihilator. Let $B$ be a Noetherian algebraic space, meaning quasi-compact, quasi-separated and locally Noetherian on etale scheme charts. Let $f:X\\to B$ be locally of finite type and quasi-separated, with no properness hypothesis on $f$. Let $E\\in D(\\mathcal O_X)$ be perfect. Let $G^\\bullet$ be a bounded complex of coherent $\\mathcal O_X$-modules, where coherent means quasi-coherent and finitely generated on the Noetherian affine etale charts of $X$. Assume each term is flat over $B$ and its scheme theoretic support is proper over $B$. Then $Rf_*(E\\otimes^{\\mathbf L}_{\\mathcal O_X}G^\\bullet)$ is perfect in $D(\\mathcal O_B)$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Fix $c\\le d$ with $G^q=0$ for $q\\notin[c,d]$, also when $G=0$. First $X$ is locally Noetherian: on compatible affine etale source and target charts, the source ring is a finite-type algebra over a Noetherian ring, hence Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Such charts cover $X$ by the chartwise meaning of locally finite type. Let $T_q=\\operatorname{Supp}(G^q)$, the set of points with nonzero geometric stalk, and $T=\\bigcup_{q=c}^dT_q$. Each $T_q$ is closed by [lem-sfb-space-noetherian-coherent-support], applied to the coherent $G^q$ and its zero submodule. Let $Z_q$ be the assumed proper scheme theoretic support, cut out by $\\operatorname{Ann}(G^q)$. Then $T_q\\subseteq|Z_q|$: if a geometric point $\\bar x$ lies outside $|Z_q|$, choose an affine etale chart $\\operatorname{Spec}A$ through it, on which $Z_q$ is $\\operatorname{Spec}(A/I)$ with $I$ the annihilator ideal; the image prime $\\mathfrak p$ of $\\bar x$ does not contain $I$, so some $a\\in I$ is a unit of $A_{\\mathfrak p}$ and hence of the geometric local ring, while $a$ kills every local section of $G^q$ and so kills $G^q_{\\bar x}$; thus $G^q_{\\bar x}=0$. By [lem-sfb-space-proper-support-closed-operations], $|Z_q|$ is proper over $B$ (it carries the proper closed structure $Z_q$), hence so is its closed subset $T_q$, and the finite union $T$ is closed and proper over $B$. In particular $T$ is quasi-compact: its proper reduced subspace is quasi-compact over the quasi-compact $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ, local Noetherian and support hypotheses, expanded using 0CZH; local Noetherian calculation is spaces-morphisms.tex Tag 04ZK."
+   }
+  },
+  {
+   "text": "Put $H=E\\otimes^{\\mathbf L}G^\\bullet$. Apply [lem-sfb-ringed-strict-perfect-relative-tensor] on $X_{\\mathrm{et}}$ with $A=\\mathcal O_X$ and $R=f^{-1}\\mathcal O_B$; the geometric points are conservative by [lem-sfb-space-etale-conservative-geometric-points]. The assumed geometric-stalk flatness is exactly its flatness hypothesis. On each strict-perfect chart $U$ for $E$, with model interval $[a_U,b_U]$, it identifies $H|_U$ with the bounded total tensor $T_U^\\bullet$. A term is a finite sum of retracts of finite sums of $G^q|_U$. Finite sums are coherent by [lem-sfb-space-coherent-abelian]; a retract is the image of its idempotent, hence a kernel followed by a cokernel of coherent modules, so is coherent by that same node. Taking kernels and cokernels of the differentials shows that every $H^i(H)|_U$ is coherent. Each $H^i(H)$ is quasi-coherent, since quasi-coherence is local on the site and holds on every $U$. The strict-perfect charts $U$ are etale schemes covering $X$, so their disjoint union $p:\\coprod U\\to X$ is a surjective etale scheme atlas, and $p^*H^i(H)$ is coherent because it is so on each summand. By the last clause of [lem-sfb-space-qcoh-groupoid-equivalence] on the locally Noetherian $X$, every $H^i(H)$ is coherent.",
+   "uses": [
+    "lem-sfb-ringed-strict-perfect-relative-tensor",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-sfb-space-coherent-abelian",
+    "lem-sfb-space-qcoh-groupoid-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image)."
+   }
+  },
+  {
+   "text": "The chart images are open by [lem-a1-space-etale-open-image]. Their cover of the quasi-compact $T$ has a finite subcover $U_1,\\ldots,U_N$. Put $r=\\min_j(a_{U_j}+c)$ and $s=\\max_j(b_{U_j}+d)$, choosing $r=s=0$ if $T$ is empty. The tensor-model bounds give $H^i(H)=0$ on these charts for $i\\notin[r,s]$. On $X\\setminus T$ the complex $G$ is zero, and the same local tensor calculation gives $H=0$. For any $R$-module sheaf $F$, the final isomorphism of [lem-sfb-ringed-strict-perfect-relative-tensor] gives these same bounds for $H\\otimes_R^{\\mathbf L}F[0]$ on every $U_j$. On the complement it gives zero, using $M=0$ on each strict-perfect chart there. These are a jointly surjective family of etale charts together with the complement. Exact conservative stalks [lem-sfb-space-etale-conservative-geometric-points] detect both vanishing assertions globally. Thus $H$ is bounded and its scalar restriction has the single Tor interval $[r,s]$, independent of $F$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-ringed-strict-perfect-relative-tensor",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image)."
+   }
+  },
+  {
+   "text": "For each $i$, the coherent module $H^i(H)$ has closed geometric-stalk support by [lem-sfb-space-noetherian-coherent-support], applied to $F=H^i(H)$ and its zero quasi-coherent submodule. It is contained in $T$, since the local tensor models are zero on $X\\setminus T$. Therefore [lem-sfb-space-proper-support-closed-operations] makes this support proper over $B$. This does not infer properness of $f$.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-support",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-bounded-coherent-finite-tor-image-perfect] to $f:X\\to B$ and $H$. Its base is the given Noetherian algebraic space, and its morphism hypotheses are exactly the given local finite type and quasi-separatedness. Steps 2 and 3 give bounded coherent cohomology, step 4 gives proper cohomology supports, and step 3 gives finite Tor dimension over $f^{-1}\\mathcal O_B$. Its conclusion is that $Rf_*H=Rf_*(E\\otimes^{\\mathbf L}G^\\bullet)$ is perfect, as required.",
+   "uses": [
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-space-noetherian-coherent-support",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-ringed-strict-perfect-relative-tensor",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-coherent-abelian",
+  "lem-sfb-space-qcoh-groupoid-equivalence",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-space-bounded-coherent-finite-tor-image-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0DKJ (lemma-tensor-perfect), proof, with the uniform-bounds argument over quasi-compact proper support made explicit; Tag 08IS (lemma-perfect-direct-image)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*(directImage|pushforward)|properSupport.*perfect",
+   "results": "Read 0 hits: . These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image over a Noetherian algebraic space of perfect tensor bounded relatively flat coherent proper support complex is perfect",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.Modules.instFullPushforward, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.IsProper.isStableUnderBaseChange, RingHom.Flat, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, CategoryTheory.Functor.mapDerivedCategoryFactors. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"perfect\"",
+   "results": "Read 2 hits: AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField, AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian algebraic space B and a locally finite type quasi separated morphism X to B, the pushforward of a perfect complex tensored with a bounded coherent relatively flat complex of proper support is perfect",
+   "results": "Read 8 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Flat, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.iff_preservesFiniteLimits_tensorLeft. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect pushforward theorem for algebraic spaces: a perfect complex times relatively flat coherent proper support coefficients over a Noetherian base",
+   "results": "Read 8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instIsMultiplicativeScheme, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange. These concern scheme morphisms, flat modules, ring perfection or abstract bounded derived categories, not the stated algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|perfect.*(directImage|pushforward)|properSupport.*perfect",
+   "results": "Read 0 hits: . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme pushforward, flatness and truncation declarations do not state this algebraic-space perfect direct image theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect tensor a bounded coherent relatively flat complex of proper support has perfect pushforward over a Noetherian algebraic space",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom, Module.Flat.rTensor_shortComplex_exact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme pushforward, flatness and truncation declarations do not state this algebraic-space perfect direct image theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"perfect\"",
+   "results": "Read 2 hits: AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField, AlgebraicGeometry.Scheme.Hom.genericPoint_mem_smoothLocus_of_perfectField. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme pushforward, flatness and truncation declarations do not state this algebraic-space perfect direct image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On algebraic spaces a bounded coherent complex with proper cohomology supports and finite Tor dimension over a Noetherian base has perfect derived pushforward",
+   "results": "Read 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward_assoc, SheafOfModules.pushforward. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme pushforward, flatness and truncation declarations do not state this algebraic-space perfect direct image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex tensored with bounded coherent modules flat over a Noetherian algebraic space and with proper support has perfect derived direct image",
+   "results": "Read 8 hits: Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme pushforward, flatness and truncation declarations do not state this algebraic-space perfect direct image theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-support-tensor-perfect",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1P (lemma-base-change-tensor-perfect), perfectness assertion; perfect means sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input: Tag 0DKJ (lemma-tensor-perfect), based on Tag 08IS (lemma-perfect-direct-image).",
+   "via": [
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-noetherian-tensor-perfect",
+  "worker": "stage1",
+  "summary": "Followed 0DKJ, checked all three 08IS hypotheses on the tensor object, including a uniform interval from a finite chart cover of the proper coefficient support. Added only a general local tensor input, proper-support operations and the 08IS direct-image theorem. Reused coherent closure and closed support. Statement unchanged; no Lean writing or compilation.",
+  "blueprint": "Historical blueprint_refs.py ancestor is null. This realizes the 0DKJ/08IS supporting input below det-thm-sf-ctf-stability-direct-images proof (3), through the existing stable-curve and alteration chain recorded in blueprint.from.place. Read the latest 2026-10-23 blueprint; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic algebra, algebraic-space topology or coherent-module tool for the Stacks 0DKJ verification; the unit gives no replacement for this input."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebra, algebraic-space topology or coherent-module tool for the Stacks 0DKJ verification; the unit gives no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-space-etale-conservative-geometric-points",
+    "why": "Generic algebra, algebraic-space topology or coherent-module tool for the Stacks 0DKJ verification; the unit gives no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-space-coherent-abelian",
+    "why": "Generic algebra, algebraic-space topology or coherent-module tool for the Stacks 0DKJ verification; the unit gives no replacement for this input."
+   },
+   {
+    "node": "lem-sfb-space-noetherian-coherent-support",
+    "why": "Generic algebra, algebraic-space topology or coherent-module tool for the Stacks 0DKJ verification; the unit gives no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-sfb-space-coherent-abelian",
+  "lem-sfb-space-noetherian-coherent-support"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-289e06e32",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-289e06e32 (reviewer sub-agent of L); spot-checked: Read 0DKJ, 08IS, 0CZC, 0CZE, 0CZH and 0CZI in spaces-perfect.tex, and 07U0 in spaces-morphisms.tex. The item statement is unchanged and matches 0DKJ; it is still unsplit live, so no other group has superseded it. The three new nodes are true and are not duplicates. The 08IS node is the space version of the scheme node lem-pc-bounded-coherent-finite-tor-proper-pushforward-perfect (08EV). The proper-support node states 0CZC, 0CZE and 0CZH with the lft hypothesis kept. The tensor node is a site generalization of the scheme and Zariski models (via 0E8K, 06YQ and stalkwise flatness). None of them restates a clause of the item. Fixes: (1) C1, step 1: the claim that T_q equals the point set of the scheme-theoretic support (07U0(4)/0CZI) was uncited, and closedness of T_q was uncited. Now T_q is closed by lem-sfb-space-noetherian-coherent-support, the inclusion T_q ⊆ |Z_q| is written out (some a in Ann is a unit in the geometric local ring and kills the stalk), and the proper-support node then gives that T_q and T are proper. The unneeded annihilator-support claim in step 4 is removed. (2) C1, step 2: 'coherence is local by definition' was wrong, because coherence must hold on every étale chart. Now the step cites the last clause of lem-sfb-space-qcoh-groupoid-equivalence for the atlas ∐U→X; I checked there is no cycle. (3) B3: the 08IS node now defines 'reduced induced closed subspace' inline. Steps 3 and 5 are correct: a finite chart subcover of the quasi-compact T gives a uniform interval, and H=0 off T. Tool uses of lem-weil-pbc-finite-type-algebra-noetherian and lem-a1-space-etale-open-image are generic and accepted. Batch-5 flags are accepted: def-trf-* and def-a1-space-point-topology are definitions, and the flagged lemmas, including the newly cited groupoid node, reach sec-trace-formula only through space foundations, not through trace formula or Poincaré duality steps.; 2 file(s) fixed by the reviewer"
+ }
+}

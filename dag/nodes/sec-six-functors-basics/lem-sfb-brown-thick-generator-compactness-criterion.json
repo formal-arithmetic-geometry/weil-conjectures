@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-brown-thick-generator-compactness-criterion",
+ "kind": "statement",
+ "title": "Brown compactness tested on thick generators",
+ "statement": "Let X be a scheme and Λ a commutative condensed coefficient ring. Put S=Dctf(X,Λ), L=Loc(S) [sk-def-localizing-closure], and equip L with its canonical inherited triangulation. Let E be a family of objects of L, indexed in any universe, whose underlying objects lie in S. Suppose every object of L with underlying object in S belongs to the thick envelope of E together with all zero objects. Then BrownHypothesesFor Λ X [lem-sfb-brown-hypotheses-criterion] is equivalent to S being triangulated, isomorphism-closed, retract-closed and essentially small in the fixed universe, and to the existence of fixed-universe coproducts on L making every E_i compact [def-pc-compact-object]. The envelope is taken in L with its inherited shift. Compactness is a hypothesis in the reverse direction, not an arbitrary-field conclusion.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "def-pc-compact-object",
+  "lem-sfb-brown-hypotheses-criterion"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: compactness and generation, using Stacks Project Tag 09QH (derived.tex, lemma-compact-objects-subcategory)"
+ },
+ "proof": [
+  {
+   "text": "Apply the forward objectwise Brown criterion to obtain thickness, essential smallness and fixed-universe coproducts. Each supplied E_i has constructible finite-Tor underlying object, so the criterion makes it compact.",
+   "uses": [
+    "lem-sfb-brown-hypotheses-criterion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Conversely install the supplied coproduct structure. By the proved theorem compactObjects_isThick, the compact objects of the actual localizing full subcategory form a triangulated retract-closed property R. It contains each E_i by assumption and all zero objects. The universal property ObjectProperty.triangEnvelope_le_iff therefore places the thick envelope of ofObj(E) union IsZero inside R. The covering hypothesis gives compactness for every object whose underlying complex lies in S. Apply the reverse objectwise Brown criterion with the same thickness, essential smallness and coproduct witnesses. This introduces no assertion of geometric compactness.",
+   "uses": [
+    "lem-sc-compact-objects-thick",
+    "lem-sfb-brown-hypotheses-criterion"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-brown-hypotheses-criterion",
+  "lem-sc-compact-objects-thick"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses.proof.md",
+  "place": "paragraphs 1--2: compactness and generation, using Stacks Project Tag 09QH (derived.tex, lemma-compact-objects-subcategory)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact objects of a triangulated category are closed under shifts cones and retracts",
+   "results": "Eight hits for ObjectProperty.IsTriangulatedClosed classes and associated constructors; none states the Brown thick-generator criterion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compactness of thick generators implies compactness of their thick envelope in a triangulated category",
+   "results": "Eight hits concerning derived-category bounds and t-structures; none states the Brown criterion.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangEnvelope\"",
+   "results": "Twelve hits for the Mathlib thick-envelope construction and its properties. The universal property triangEnvelope_le_iff is reused.",
+   "date": "2026-10-25",
+   "verdict": "Mathlib infrastructure reused"
+  },
+  {
+   "tool": "grep",
+   "query": "compactObjects_isThick|triangEnvelope_le_iff; direct rg over Mathlib, WeilConjectures and Sheaf",
+   "results": "Mathlib provides triangEnvelope_le_iff; source library provides the proved compactObjects_isThick (lem-sc-compact-objects-thick). Existing Brown criteria cover objectwise compactness or representatives, not thick generators.",
+   "date": "2026-10-25",
+   "verdict": "existing infrastructure reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraphs 1--2: compactness on generators and formal Brown assembly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.brownHypothesesFor_iff_compact_thick_generators",
+  "statement": "theorem brownHypothesesFor_iff_compact_thick_generators\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})\n    [(localizingClosureProEtale Λ X).IsTriangulated]\n    {G : Type*} (E : G → (localizingClosureProEtale Λ X).FullSubcategory)\n    (hE : ∀ i, constantModelBoundedConstructible Λ X (E i).obj ∧\n      DerivedCategory.finiteTorAmplitude _ (E i).obj)\n    (hcover : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,\n      (constantModelBoundedConstructible Λ X K.obj ∧\n        DerivedCategory.finiteTorAmplitude _ K.obj) →\n      (ObjectProperty.ofObj E ⊔ IsZero).triangEnvelope K) :\n    BrownHypothesesFor Λ X ↔\n      let S := constantModelBoundedConstructible Λ X ⊓\n        fun K ↦ DerivedCategory.finiteTorAmplitude _ K\n      S.IsTriangulated ∧ S.IsClosedUnderIsomorphisms ∧ S.IsStableUnderRetracts ∧\n        ObjectProperty.EssentiallySmall.{u + 1} S ∧\n        ∃ hSums : HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory,\n          letI := hSums\n          ∀ i, IsCompactObject (E i)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T161838-L-127735",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

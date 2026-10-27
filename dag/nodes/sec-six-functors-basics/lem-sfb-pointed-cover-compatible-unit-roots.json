@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-pointed-cover-compatible-unit-roots",
+ "kind": "statement",
+ "title": "Compatible unit roots and roots of unity on a pointed universal cover",
+ "statement": "Let $p$ be a positive prime and $E$ a commutative ring of characteristic $p$ with nonempty connected affine spectrum. Fix a geometric point $s:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}E$ [def-weil-geometric-point] and let $\\operatorname{Spec}H\\to\\operatorname{Spec}E$ be its pointed universal finite-etale limit cover [lem-sfb-pointed-finite-etale-limit-cover]. Put $N_p=\\{n>0:(n,p)=1\\}$. There exist primitive $\\bar\\zeta_n\\in\\Omega$ with $\\bar\\zeta_m^{m/n}=\\bar\\zeta_n$ for $n\\mid m$ in $N_p$. For any such choice, there are unique sections of the split finite etale [def-weil-etale-morphism] root-of-unity schemes with those geometric-fibre labels. Their values $\\zeta_n\\in H$ satisfy $\\zeta_n^n=1$, $\\zeta_m^{m/n}=\\zeta_n$, and $\\zeta_n^a-\\zeta_n^b$ is a unit whenever $a,b$ are distinct modulo $n$. For any finite family $a_j\\in E^\\times$, one can choose compatible $\\bar b_{j,n}\\in\\Omega$ with $\\bar b_{j,n}^n=s(a_j)$ and $\\bar b_{j,m}^{m/n}=\\bar b_{j,n}$. The corresponding normalized split sections of $z^n=a_j$ give units $b_{j,n}\\in H$ satisfying these same equations. All these sections commute with pointed pullback of $E$ and $H$ and with power maps. Primitive means multiplicative order exactly $n$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00UB and 00UC (standard-etale monic derivative presentations); pointed splitting from Bhatt–Scholze Lemma 7.4.3/Construction 7.4.4 as expanded in the existing cover node; ILO IX Proposition 2.1, p.133. Agent compatible selection and normalization."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "lem-sfb-pointed-finite-etale-limit-cover",
+  "def-weil-etale-morphism",
+  "def-sfb-strict-local-kummer-tame-module"
+ ],
+ "proof": [
+  {
+   "text": "Order the private copy of the positive prime-to-p integers by divisibility, with product as common upper bound. At n take the finite subtype of primitive n-th roots in the geometric field. It is nonempty by HasEnoughRootsOfUnity.exists_primitiveRoot: invertibleOfCoprime makes n a unit in E, hence a nonzero element of Ω. For n dividing m the power m/n preserves primitivity by IsPrimitiveRoot.pow. The quotient-chain identity proves functoriality. Apply nonempty_sections_of_finite_inverse_system; no surjectivity hypothesis on transitions is required.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "lem-galois-inverse-limit-surjective",
+    "def-weil-geometric-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every scalar a in Ω, use the same inverse index with finite subtype {z : z^n=a}. Finiteness follows by injection into nthRootsFinset, and nonemptiness by IsAlgClosed.exists_pow_nat_eq. The power transitions and their composition are the elementary exponent identities. The finite inverse-limit theorem supplies compatible scalar roots, also for a=0. Apply this independently to each member of the finite unit family; the empty family is included.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-galois-inverse-limit-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a unit a and positive n, monic_X_pow_sub_C.finite_adjoinRoot gives finiteness of the root algebra. The proved source helper AdjoinRoot.etale_X_pow_sub_C (the standard-etale calculation audited under lem-sc-kummer-exact) gives etaleness directly, using invertibleOfCoprime for n and the given unit a. Transfer both algebraic properties to Spec with the ring-hom property equivalences.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-sc-kummer-exact",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A geometric root defines an AdjoinRoot.lift homomorphism to Ω, hence a marked point of the finite etale root cover. The existing UniversalCover.toObj section and its proved toObj_hom and pt_toObj equations give a homomorphism from the root algebra into Γ(cover s,top), by the affine correspondence. Its root value satisfies the required equation and evaluation. Its power is a unit, hence it is a unit.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-asd-polynomial-quotient-hom-equivalence",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness and invertible differences use the following explicit connected-ring calculation. If f(x)=f(y)=0 and f'(x) is a unit v, set q=f/(X-x). Polynomial differentiation gives q(x)=v, and polynomial division gives (y-x)q(y)=0. Write q(y)=v+(y-x)z using sub_dvd_eval_sub. Then e=v^(-1)q(y) is idempotent and e(y-x)=0. Connectedness forces e=0 or 1. If e=1 then y=x; if e=0 then (y-x)(-v^(-1)z)=1. Thus two simple roots are equal or have unit difference. Apply this to X^n-a; its derivative at a unit root is a unit. Equal marked values exclude the unit-difference case. Connectedness of the actual cover is the source connectedSpace_cover instance; connectedSpace_iff_isIdempotentElem supplies the idempotent criterion.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-pc-scheme-connected-iff-idempotents"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the uniquely normalized root for each label from step 4. AdjoinRoot.lift gives a homomorphism with that root value and prescribed restriction to E. Every candidate homomorphism sends the quotient root to another normalized root, so step 5 identifies its root value. AdjoinRoot.ringHom_ext identifies the entire homomorphism. This proves the asserted unique existence.",
+   "uses": [
+    "lem-asd-polynomial-quotient-hom-equivalence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For n dividing m, the (m/n)-th power of the normalized m-th root satisfies the n-th root equation because (m/n)n=m, and its evaluation is the prescribed powered label. Step 5 proves the order compatibility. The same calculation with the k-th power and a^k proves the second power identity. For primitive labels, equality of two root powers would imply equality of the geometric powers; reduce exponents modulo n and apply IsPrimitiveRoot.pow_inj. The roots are distinct, so step 5 proves their difference is a unit.",
+   "uses": [
+    "lem-sc-primitive-root"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given any pointed ring maps in the final clause, the base equation makes the image of the chosen root an n-th root of f(a); the point equation gives its transported label. Apply step 5 on the primed cover to compare this image with b. The already established power identities and the scalar families from step 2 supply all remaining clauses.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-primitive-root",
+  "lem-galois-inverse-limit-surjective",
+  "def-weil-geometric-point",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sc-kummer-exact",
+  "def-weil-affine-spectrum",
+  "lem-sfb-pointed-finite-etale-limit-cover",
+  "lem-asd-polynomial-quotient-hom-equivalence",
+  "lem-pc-scheme-connected-iff-idempotents"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence, finite standard-etale root algebra; Stacks categories.tex lemma-nonempty-limit (086J). D3 formalizes compatible labels without transition surjectivity, uses the existing UniversalCover.toObj construction, and proves uniqueness and unit differences by the explicit divided-polynomial idempotent calculation in step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Universal pointed finite etale cover carries compatible prime to characteristic roots of units and primitive roots of unity with invertible differences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"StandardEtalePair.HasMap\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → StandardEtalePair R → S → Prop\", \"doc\": \"For an element $ x $ in a ring $ S $, this condition asserts that $ x $ is a root of the polynomial $ f $ (i.e., $ f(x) = 0 $) and that $ g(x) $ is an invertible element (unit) in $ S $. This defines \"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"StandardEtalePresentation.hasMap\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), self.HasMap self.x\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation of $ S $ over $ R $, the element $ x $ in $ S $ corresponding to the polynomial va\"}\n  {\"name\": \"StandardEtalePresentation.lift_bijective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (self : StandardEtalePresentation R S), Function.Bijective ⇑(self.lift self.x ⋯)\", \"doc\": \"Given a standard étale presentation of an $ R $-algebra $ S $ over a commutative ring $ R $, the canonical algebra homomorphism from the standard étale ring extension to $ S $ is bijective.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual primitive roots and finite etale presentations do not supply normalized compatible unit roots on a universal pointed cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturally split finite etale root schemes on the universal cover give compatible Kummer roots prescribed in a geometric fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"adjoinRootXPowSubCEquiv_symm_eq_root\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) {L : Type u_1} [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] {α : L}\\n  (hα : α ^ n\", \"doc\": \"Given a field $K$ containing primitive $n$-th roots of unity, an irreducible polynomial $X^n - a$ over $K$, and a splitting field $L$ of $X^n - a$ containing an element $\\\\alpha$ with $\\\\alpha^n = a$, t\"}\n  {\"name\": \"adjoinRootXPowSubCEquiv_root\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) {L : Type u_1} [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] {α : L}\\n  (hα : α ^ n\", \"doc\": \"Given a field $ K $ containing primitive $ n $-th roots of unity, an irreducible polynomial $ X^n - a $ over $ K $, and a splitting field $ L $ of $ X^n - a $ containing an element $ \\\\alpha $ with $ \\\\\"}\n  {\"name\": \"autEquivRootsOfUnity_apply_rootOfSplit\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (hζ : (primitiveRoots n K).Nonempty) {a : K}\\n  (H : Irreducible (Polynomial.X ^ n - Polynomial.C a)) (L : Type u_1) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [inst_3 : Polynomial.IsSplittingField K L (Polynomial.X ^ n - Polynomial.C a)] [inst_4 : NeZero n] (\", \"doc\": \"For any nonzero natural number $n$, field extension $L/K$, and primitive $n$-th root of unity $\\\\zeta$, the action of a Galois automorphism $\\\\sigma \\\\in \\\\text{Gal}(L/K)$ on the root $\\\\alpha$ of the poly\"}\n  {\"name\": \"Polynomial.Gal.rootsEquivRoots\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    (p : Polynomial F) →\\n      (E : Type u_2) →\\n        [inst_1 : Field E] →\\n          [inst_2 : Algebra F E] →\\n            [Fact (Polynomial.map (algebraMap F E) p).Splits] → ↑(p.rootSet p.SplittingField) ≃ ↑(p.rootSet E)\", \"doc\": \"Given a polynomial $ p $ over a field $ F $, if the polynomial obtained by applying the canonical algebra homomorphism $ F \\\\to E $ to the coefficients of $ p $ splits in an extension field $ E $, then\"}\n  {\"name\": \"Polynomial.Gal.mapRoots\", \"module\": \"Mathlib/FieldTheory/PolynomialGaloisGroup\", \"type\": \"{F : Type u_1} →\\n  [inst : Field F] →\\n    (p : Polynomial F) →\\n      (E : Type u_2) →\\n        [inst_1 : Field E] →\\n          [inst_2 : Algebra F E] →\\n            [Fact (Polynomial.map (algebraMap F E) p).Splits] → ↑(p.rootSet p.SplittingField) → ↑(p.rootSet E)\", \"doc\": \"Given a polynomial $ p $ over a field $ F $, if the polynomial obtained by applying the canonical algebra homomorphism $ F \\\\to E $ to the coefficients of $ p $ splits in an extension field $ E $, then\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"autAdjoinRootXPowSubC_root\", \"module\": \"Mathlib/FieldTheory/KummerExtension\", \"type\": \"∀ {K : Type u} [inst : Field K] {n : ℕ} (a : K) (η : ↥(rootsOfUnity n K)),\\n  ((autAdjoinRootXPowSubC n a) η) (AdjoinRoot.root (Polynomial.X ^ n - Polynomial.C a)) =\\n    ↑↑η • AdjoinRoot.root (Polynomial.X ^ n - Polynomial.C a)\", \"doc\": \"For each n-th root of unity $\\\\eta \\\\in K$, the corresponding $K$-algebra automorphism of the field extension $K(\\\\sqrt[n]{a})$ sends the adjoined root $\\\\alpha$ (satisfying $\\\\alpha^n = a$) to $\\\\eta \\\\cdot\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual primitive roots and finite etale presentations do not supply normalized compatible unit roots on a universal pointed cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal pointed finite etale cover carries compatible prime to characteristic roots of units and primitive roots of unity with invertible differences",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"primitiveRoots\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots\", \"type\": \"(k : ℕ) (R : Type*) [CommRing R] [IsDomain R] : Finset R\", \"doc\": \"The finite set of primitive $ k $-th roots of unity in a commutative domain $ R $, consisting of all elements $ \\\\zeta $ such that $ \\\\zeta^k = 1 $ and $ \\\\zeta $ is a primitive root (i.e., no positive i\"}\n  {\"name\": \"mem_primitiveRoots\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots\", \"type\": \"{ζ : R} (h0 : 0 < k) : ζ ∈ primitiveRoots k R ↔ IsPrimitiveRoot ζ k\", \"doc\": \"An element $\\\\zeta$ in a commutative domain $R$ belongs to the finite set of primitive $k$-th roots of unity if and only if $\\\\zeta$ is a primitive $k$-th root, i.e., $\\\\zeta^k = 1$ and $\\\\zeta^m \\\\neq 1$ \"}\n  {\"name\": \"Polynomial.isRoot_cyclotomic_prime_pow_mul_iff_of_charP\", \"module\": \"Mathlib.RingTheory.Polynomial.Cyclotomic.Expand\", \"type\": \"{m k p : ℕ} {R : Type*} [CommRing R] [IsDomain R] [hp : Fact (Nat.Prime p)] [hchar : CharP R p] {μ : R}\\n  [NeZero (m : R)] : (Polynomial.cyclotomic (p ^ k * m) R).IsRoot μ ↔ IsPrimitiveRoot μ m\", \"doc\": \"Let $ R $ be a commutative ring with characteristic $ p $ (a prime), and let $ m, k $ be positive integers with $ m $ non-zero in $ R $. For any element $ \\\\mu \\\\in R $, the element $ \\\\mu $ is a root of\"}\n  {\"name\": \"card_rootsOfUnity_eq_iff_exists_isPrimitiveRoot\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots\", \"type\": \"{n : ℕ} [NeZero n] : Fintype.card (rootsOfUnity n R) = n ↔ ∃ ζ : R, IsPrimitiveRoot ζ n\", \"doc\": \"In a commutative domain ring $R$, the cardinality of the group of $n$-th roots of unity (invertible elements $\\\\zeta$ satisfying $\\\\zeta^n = 1$) is equal to $n$ if and only if there exists a primitive $\"}\n  {\"name\": \"Polynomial.cyclotomic.roots_to_finset_eq_primitiveRoots\", \"module\": \"Mathlib.RingTheory.Polynomial.Cyclotomic.Roots\", \"type\": \"[NeZero (n : R)] : (⟨(cyclotomic n R).roots, roots_cyclotomic_nodup⟩ : Finset _) = primitiveRoots n R\", \"doc\": \"For a natural number $n$ and an integral domain $R$ with $n \\neq 0$, the finite set of roots of the $n$-th cyclotomic polynomial $\\\\Phi_n(X)$ over $R$ coincides with the set of primitive $n$-th roots of\"}\n  {\"name\": \"IsPrimitiveRoot.nthRoots_one_eq_biUnion_primitiveRoots\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots\", \"type\": \"[DecidableEq R] {n : ℕ} : nthRootsFinset n (1 : R) = (Nat.divisors n).biUnion fun i ↦ primitiveRoots i R\", \"doc\": \"For a commutative domain $ R $ and natural number $ n $, the finite set of $ n $-th roots of unity in $ R $ is equal to the indexed union over all divisors $ i $ of $ n $ of the primitive $ i $-th roo\"}\n  {\"name\": \"IsPrimitiveRoot.card_nthRootsFinset\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots\", \"type\": \"{ζ : R} {n : ℕ} (h : IsPrimitiveRoot ζ n) : #(nthRootsFinset n (1 : R)) = n\", \"doc\": \"If $\\\\zeta$ is a primitive $n$-th root of unity in a commutative domain ring $R$, then the finite set of distinct $n$-th roots of $1$ in $R$ has cardinality $n$.\"}\n  {\"name\": \"IsPrimitiveRoot.ntRootsFinset_pairwise_associated_sub_one_sub_of_prime\", \"module\": \"Mathlib.RingTheory.RootsOfUnity.CyclotomicUnits\", \"type\": \"(hζ : IsPrimitiveRoot ζ p) (hp : p.Prime) :\\n  Set.Pairwise (nthRootsFinset p (1 : A)) (fun η₁ η₂ ↦ Associated (ζ - 1) (η₁ - η₂))\", \"doc\": \"For a prime number $ p $ and a commutative domain ring $ A $, if $ \\\\zeta $ is a primitive $ p $-th root of unity in $ A $, then the finite set of $ p $-th roots of 1 in $ A $ has the property that for\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual primitive roots and finite etale presentations do not supply normalized compatible unit roots on a universal pointed cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual primitive roots and finite etale presentations do not supply normalized compatible unit roots on a universal pointed cover"
+  },
+  {
+   "tool": "grep",
+   "query": "(universalCover|[Pp]ointed).*(root|[Rr]oot)|([Rr]oot).*(universalCover|[Pp]ointed)",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"line\": \"140\", \"text\": \"def _root_.ConvexCone.toPointedCone (C : ConvexCone R E) (hC : C.Pointed) : PointedCone R E where\"}\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"line\": \"155\", \"text\": \"lemma _root_.ConvexCone.mem_toPointedCone {C : ConvexCone R E} (hC : C.Pointed) (x : E) :\"}\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"line\": \"160\", \"text\": \"lemma _root_.ConvexCone.coe_toPointedCone (C : ConvexCone R E) (hC : C.Pointed) :\"}\n  {\"file\": \"Mathlib/Geometry/Convex/Cone/Pointed.lean\", \"line\": \"165\", \"text\": \"lemma _root_.ConvexCone.toPointedCone_top : (⊤ : ConvexCone R E).toPointedCone trivial = ⊤ := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Group/Submonoid/Support.lean\", \"line\": \"83\", \"text\": \"theorem _root_.isMulPointed_iff_mulSupport_eq_bot : M.IsMulPointed ↔ M.mulSupport = ⊥ where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Pointed.lean\", \"line\": \"48\", \"text\": \"alias _root_.Prod.Pointed := of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Pointed.lean\", \"line\": \"83\", \"text\": \"@[simp] lemma Hom.id_toFun' (X : Pointed.{u}) : (𝟙 X : X ⟶ X).toFun = _root_.id := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Bipointed.lean\", \"line\": \"45\", \"text\": \"alias _root_.Prod.Bipointed := of\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: individual primitive roots and finite etale presentations do not supply normalized compatible unit roots on a universal pointed cover"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-universal-residual-charts",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: geometric henselian SNC charts, pointed universal residual covers, and prime-to-characteristic parameter-root tower underlying the tame-boundary calculation. Extraction of returned proof steps 7, 8, 20: Compatible unit roots and roots of unity on a pointed universal cover.",
+   "via": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-pointed-cover-compatible-unit-roots",
+  "worker": "stage1",
+  "summary": "Nine steps prove the unchanged mathematical statement using existing root, inverse-limit, finite-cover and quotient nodes. One new Mathlib leaf for surjective reduction of residue-unit groups. Normalized labels are transported under pointed pullback; invertible differences are proved by a polynomial preimage of a split idempotent. Corrected doubled TeX escapes only.",
+  "blueprint": "The ancestor search returns None for this created chain. Realizes the recorded paragraph (3) of det-thm-sf-ctf-stability-direct-images, residual-cover and unit-coordinate normalization used in former parent steps 7, 8, 20. Whole-blueprint searches for primitive, compatible roots, unit roots, Kummer, and unit group found no duplicate of the item or the arithmetic leaf.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Generic cyclicity and cardinality of scalar roots in the geometric field; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sbc-root-split-away-cover-etale",
+    "why": "Generic etaleness of the explicit root polynomial on the unit locus."
+   },
+   {
+    "node": "lem-asd-polynomial-quotient-hom-equivalence",
+    "why": "Generic universal property identifies affine root labels, evaluation maps and polynomial substitutions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-primitive-root",
+  "lem-asd-polynomial-quotient-hom-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-f9f03a739",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-f9f03a739 (reviewer sub-agent of L); spot-checked: I read the item and its 9 steps in full, the statement of every cited node, and the new Mathlib leaf. The item statement matches the Q16 FIX version (runs/1/Q16…18afd61180ad) once doubled backslashes are normalized, and the stmt_deps are unchanged, so the target is not weakened. There is no SGA, and the proof_origin Stacks 03PL (etale-cohomology.tex:2842) checks. Step 1: char Ω = p from the unital map E→Ω, and lem-sc-primitive-root applies because n is prime to p. Step 2: generators correspond to unit exponents, the new leaf lifts c to a unit d mod m, and η^d maps to the prescribed root. Step 3: N_p is directed (nm), the sets are finite and nonempty with surjective transitions, exactly the hypotheses of lem-galois-inverse-limit-surjective. Step 4: Kummer root sets are nonempty, finite and nonzero, and transitions are surjective via a root of X^{m/n}−b. Step 5: un=1 from un+vp=1, monic-quotient finiteness, and D(a)=Spec A because a is a unit, so lem-sbc-root-split-away-cover-etale gives étaleness. Step 6: Spec E is qcqs, nonempty and connected, the fibre is identified with roots via the Hom bijection and the affine correspondence, uniqueness comes from the clopen partition of connected T, and the inverse is a^{-1}b^{n-1}. Step 7: naturality of the splitting for X↦X^{m/n} and X↦X^a, plus uniqueness. Step 8: the split algebra is ∏H, a polynomial lift of the idempotent and the difference identity give an explicit inverse; this holds without reducedness, checked on F_p[ε]/(ε²). Step 9: the pulled-back section has the transported label, so it is normalized by uniqueness. Small cases checked: n=1, n=m, p=2, empty family. The new leaf is exact: ZMod.unitsMap_surjective, Mathlib/Data/ZMod/Units.lean:46, with NeZero m from m>0; the DAG has no duplicate (rg -L unitsMap). Accepted tool_uses: lem-sc-primitive-root, lem-sbc-root-split-away-cover-etale, lem-asd-polynomial-quotient-hom-equivalence. Advisory: lem-exc-tame-roots-product (unit sk-prop-a1-kummer, split) already states existence of a compatible primitive family; steps 1–3 re-prove it locally, which is valid and not a fault. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.PointedCoverCompatibleUnitRoots",
+  "declaration": "AlgebraicGeometry.Scheme.UniversalCover.pointedCover_compatible_unit_roots",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.UniversalCover.pointedCoverRing",
+   "AlgebraicGeometry.Scheme.UniversalCover.pointedCoverBase",
+   "AlgebraicGeometry.Scheme.UniversalCover.pointedCoverEval",
+   "AlgebraicGeometry.Scheme.UniversalCover.pointedCover_compatible_unit_roots"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/PointedCoverCompatibleUnitRoots.lean",
+  "statement": "theorem pointedCover_compatible_unit_roots (p : ℕ) (hp : p.Prime) {E Ω : Type u} [CommRing E] [CharP E p] [ConnectedSpace (Spec (.of E))] [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of E)) : (∃ ζ : TameRootOrder p → Ω, (∀ n, IsPrimitiveRoot (ζ n) n.val) ∧ ∀ n m, n.val ∣ m.val → ζ m ^ (m.val / n.val) = ζ n) ∧ (∀ (a : Eˣ) (n : TameRootOrder p), IsFinite (Spec.map (CommRingCat.ofHom (AdjoinRoot.of ((Polynomial.X : Polynomial E) ^ n.val - Polynomial.C (a : E))))) ∧ Etale (Spec.map (CommRingCat.ofHom (AdjoinRoot.of ((Polynomial.X : Polynomial E) ^ n.val - Polynomial.C (a : E)))))) ∧ ∃ root : (a : Eˣ) → (n : TameRootOrder p) → {c : Ω // c ^ n.val = (Spec.homEquiv s).hom (a : E)} → pointedCoverRing s, (∀ (a : Eˣ) (n : TameRootOrder p) (c : {c : Ω // c ^ n.val = (Spec.homEquiv s).hom (a : E)}), root a n c ^ n.val = pointedCoverBase s (a : E) ∧ pointedCoverEval s (root a n c) = c.val ∧ IsUnit (root a n c) ∧ (∀ b : pointedCoverRing s, b ^ n.val = pointedCoverBase s (a : E) → pointedCoverEval s b = c.val → b = root a n c) ∧ ∃! f : AdjoinRoot ((Polynomial.X : Polynomial E) ^ n.val - Polynomial.C (a : E)) →+* pointedCoverRing s, (∀ e : E, f (AdjoinRoot.of _ e) = pointedCoverBase s e) ∧ pointedCoverEval s (f (AdjoinRoot.root _)) = c.val) ∧ (∀ (a : Eˣ) (n m : TameRootOrder p) (_h : n.val ∣ m.val) (c : {c : Ω // c ^ m.val = (Spec.homEquiv s).hom (a : E)}) (d : {d : Ω // d ^ n.val = (Spec.homEquiv s).hom (a : E)}), c.val ^ (m.val / n.val) = d.val → root a m c ^ (m.val / n.val) = root a n d) ∧ (∀ (a : Eˣ) (n : TameRootOrder p) (k : ℕ) (c : {c : Ω // c ^ n.val = (Spec.homEquiv s).hom (a : E)}) (d : {d : Ω // d ^ n.val = (Spec.homEquiv s).hom ((a ^ k : Eˣ) : E)}), c.val ^ k = d.val → root a n c ^ k = root (a ^ k) n d) ∧ (∀ (n : TameRootOrder p) (c : {c : Ω // c ^ n.val = (Spec.homEquiv s).hom ((1 : Eˣ) : E)}), IsPrimitiveRoot c.val n.val → ∀ a b : ℕ, a % n.val ≠ b % n.val → IsUnit (root 1 n c ^ a - root 1 n c ^ b)) ∧ (∀ (r : ℕ) (a : Fin r → Eˣ), ∃ b : Fin r → TameRootOrder p → Ω, (∀ j n, b j n ^ n.val = (Spec.homEquiv s).hom (a j : E)) ∧ ∀ j n m, n.val ∣ m.val → b j m ^ (m.val / n.val) = b j n) ∧ (∀ {E' Ω' : Type u} [CommRing E'] [CharP E' p] [ConnectedSpace (Spec (.of E'))] [Field Ω'] [IsAlgClosed Ω'] (s' : Spec (.of Ω') ⟶ Spec (.of E')) (f : E →+* E') (ι : Ω →+* Ω') (g : pointedCoverRing s →+* pointedCoverRing s') (_hbase : g.comp (pointedCoverBase s) = (pointedCoverBase s').comp f) (_hpoint : (pointedCoverEval s').comp g = ι.comp (pointedCoverEval s)) (a : Eˣ) (n : TameRootOrder p) (c : {c : Ω // c ^ n.val = (Spec.homEquiv s).hom (a : E)}) (b : pointedCoverRing s'), b ^ n.val = pointedCoverBase s' (f (a : E)) → pointedCoverEval s' b = ι c.val → g (root a n c) = b)",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the actual UniversalCover limit, its global section ring and marked point. Root-scheme sections are ring homomorphisms from the explicit AdjoinRoot algebra, with their base restriction and geometric label fixed; uniqueness includes the entire section. Universal normalized lifting renders every compatible primitive/unit-label choice. Pointed pullback is the induced map on the actual coordinate rings, characterized by the base and marked-point squares. TameRootOrder is reused from its landed owning node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01a030869",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Every clause of the node has its own conjunct in pointedCover_compatible_unit_roots, over the actual UniversalCover limit: Γ(cover s,⊤), with base map via proj and evaluation via pt. Hypotheses are exact: CharP E p, ConnectedSpace (includes Nonempty), IsAlgClosed Ω, s : Spec Ω ⟶ Spec E. The clauses: compatible primitive ζ̄; IsFinite and Etale of each AdjoinRoot root scheme; a root for every label, with its n-th power, value and unit property, uniqueness, and the ∃! section; m/n and k-th power compatibility; unit differences for a,b distinct mod n; finite families Fin r → Eˣ; pointed pullback for any g satisfying the base and point squares, true by uniqueness in H'. Edge cases n=1, n=m, k=0, p=2, r=0, zero ring and nonreduced E are fine. The statement field is verbatim. The stmt_dep added for def-sfb-strict-local-kummer-tame-module is a landed node owning TameRootOrder (N_p), which brief l.177 allows. Helpers are real data, the only proof is sorry, docstrings carry source and steps 1–9, and both report sections are present. Advisory: E' and Ω' stay in universe u, per the cover framework; heavy public import for TameRootOrder; proof-only plain imports. No change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261023T123426-L-1186742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

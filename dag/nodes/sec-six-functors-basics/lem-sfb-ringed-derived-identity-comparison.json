@@ -12,32 +12,57 @@
  ],
  "proof": [
   {
-   "text": "1. The identity geometric Hom bijection and the structural-map equation identify\nscalar insertion with the identity on underlying modules. Scalar multiplication\ncontracts the extension-of-scalars factor to give ordinary. The underlying Hom\nformula identifies ordinary_right with its mate to the identity adjunction.\n2. Localize ordinary on flat-term K-flat complexes. This gives pullback with its\ncomponentwise chain-map formula. The universal right-derived property localizes\nordinary_right and identifies pushforward on all complexes by its displayed eta\nformula; no ordinary preservation of K-injectives is required.\n3. On pure tensors the comparison is the identity tensor map and on the\ncoefficient unit it is the scalar action. The tensor and unit normalizations of\nthe lift therefore give the displayed tensor and unit equations on resolving\nrepresentatives. Naturality extends them to arbitrary derived objects.\n4. On K-flat/K-injective representatives, the lift's canonical transpose formula\nis the ordinary identity Hom bijection after the two comparisons. Fraction\nrepresentations and resolutions extend this equality to all sources and targets,\nidentifying the right-derived comparison with the adjunction mate and giving\npushforward_model.",
+   "text": "1. Use the geometric identity isomorphism to transport underlying module sections. The structural-ring-map equation makes this transport linear, so the module-linear Hom equivalence of the morphism lifts it to an ordinary direct-image isomorphism. Take its left adjunction mate using the normalized adjunction and identify scalar insertion through the geometric Hom equivalence.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-pc-right-fraction-representation",
+    "def-sfb-ringed-derived-comparison-data",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Map the ordinary right mate componentwise to complexes. Its composite with localization is naturally isomorphic to localization, hence the identity derived functor is right derived. Right-derived uniqueness gives the right comparison and its unit formula on every complex. Take its left adjunction mate. Extend the supplied canonical transpose equation from K-injective targets to arbitrary targets by a K-injective resolution and naturality; at the ordinary identity chain map this proves the asserted pullback formula on flat-term K-flat sources.",
+   "uses": [
+    "def-weil-pbc-localization-universal-property",
     "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-localization-universal-property"
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. The insertion normalization and the canonical ordinary tensor formula show on pure sections that ordinary tensor pullback followed by the comparison equals the tensor of the two ordinary comparisons. Apply total-complex extensionality and check every bidegree summand to obtain the corresponding chain-map identity.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "4. For two flat-term K-flat representatives their total tensor is again flat-term K-flat. Convert between site flatness and categorical tensor flatness using siteSheafTensorRightIso. Apply the canonical derived tensor representative equation, the chain-map identity in step 3, and naturality of the representative tensor isomorphism to identify the tensor equation after the derived comparison. Cancel the image of the representative isomorphism. Choose flat-term K-flat resolutions of arbitrary derived objects and transport the equation along their isomorphisms by naturality. The monoidal left-unit law and the faithfulness of tensoring by an object isomorphic to the unit imply the unit equation.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kflat-total-tensor-model",
+    "def-pur-site-sheaf-tensor-presentation-data",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-geometric-module-transport",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-pc-right-fraction-representation",
+  "def-sfb-ringed-derived-comparison-data",
   "def-weil-pbc-adjunction-conjugate",
-  "lem-weil-pbc-localization-universal-property"
+  "def-weil-pbc-localization-universal-property",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kflat-total-tensor-model",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Identity case of Tags 0D6D, 0D6E and 07A6; original comparison proof step 11; representative normalization extracted from lem-sfb-ringed-derived-monoidal-comparisons"
+  "place": "Identity cases of Tags 0D6D, 0D6E and 07A6; F4 formal proof by ordinary linear transport, right-derived uniqueness and adjunction mates, K-injective naturality, and K-flat tensor representatives."
  },
  "mathlib_searches": [
   {
@@ -164,14 +189,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "C-45343",
-  "group": "K4",
+  "reviewer": "COMPILER",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261020T233155-L-902653",
-  "kind": "interface",
-  "note": "independent cc review: files of 453430169b35 against the PASSed 545ebfab8248 (only change record + report differ); moved records vs clone item (all 133 constant type hashes identical, published vs delivered); change-record Users vs every live/side-live/published-olean module referring to RingedDerivedComparisons; 9 direct importers compiled against the delivery"
+  "landing": "20261022T032551-L-2038464",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

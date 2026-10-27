@@ -1,0 +1,94 @@
+{
+ "id": "def-finite-compact-scalar-coordinates",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5: the open and proper factors of the canonical compactification comparison, with their specified realization normalizations",
+   "via": [
+    "lem-finite-compact-support-scalar-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The open and proper coordinates of the intrinsic site comparison",
+ "statement": "Let $A$ be a finite commutative ring, let $C_T$ denote the canonical etale-to-intrinsic comparison and $E_T$ the fixed-scalar-to-intrinsic realization of [def-finite-compact-scalar-transport-data]. For any open immersion $j:X\\to Z$, define openRealizationIso from $E_X I_A$ to $J^{\\mathrm{proet}}_A E_Z$ as the derived composition comparisons and the realization equivalence unit. Define openSiteIso from $J^{\\mathrm{et}}_A C_Z$ to $C_X I_A$ by the intrinsic site factorization, the exact open site comparison, and the inverse of openRealizationIso. For any quasi-compact quasi-separated $g:Z\\to Y$ and any bounded-below etale $A$-complex $H$, define properSiteIso from $C_Y(Rg_*H)$ to $P_A(C_ZH)$ as follows: first apply intrinsicSiteFunctorIso at $Y$, then the derived functor's bounded-below inclusion comparison, then the inclusion of the specified invertible fixedComparisonDirectImageMatePlus, then the proper bounded-below inclusion comparison at the target. Follow these by the inverse normalized intrinsic proper-realization comparison and the inverse intrinsicSiteFunctorIso at $Z$. Here $I_A$ is intrinsic extension by zero and $P_A$ intrinsic derived direct image. Every component is an explicit composite of the recorded canonical isomorphisms of [lem-sf-class-compact-support-comparison] and [lem-sf-compact-support-restriction-of-scalars]; no new equality or arbitrary existence witness is used.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-finite-compact-support-constructibility.proof.md",
+  "place": "Step 5 (exactness and reduction); Stacks 09AF, 099R and 00YV"
+ },
+ "stmt_deps": [
+  "def-finite-compact-scalar-transport-data",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical comparison of extension by zero, proper direct image and scalar extension of sheaves is compatible with derived adjunction units and an equivalence of module categories",
+   "results": "Eight generic sheaf pullback/pushforward unit and scalar adjunction results, including SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app and ModuleCat.ExtendRestrictScalarsAdj.homEquiv. None constructs these scheme-specific normalized derived comparison coordinates.",
+   "date": "2026-10-27",
+   "verdict": "no exact match; reuse generic adjunction infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Twelve matches in Mathlib.CategoryTheory.Adjunction.Unique, including leftAdjointUniq, unit_leftAdjointUniq_hom and leftAdjointUniq_hom_counit. These supply the generic construction; no scheme-specific site/open/proper composite.",
+   "date": "2026-10-27",
+   "verdict": "generic construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|compactSupportSiteComparison|fixedComparisonDirectImageMatePlus",
+   "results": "Zero Mathlib hits. The project supplies these constructions, which are used directly.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCompactSupportScalarTransport",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCompactScalarCoordinates",
+  "file": "lean/Sheaf/Paper/FiniteCompactScalarCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteCompactScalar.properSiteIso",
+  "statement": "def properSiteIso (A : Type u) [CommRing A] [Finite A]\n    {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]\n    (H : DerivedCategory.Plus\n      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :\n    (ProEtale.finiteCoefficientIntrinsicDerivedComparison Y A).obj\n        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).rightDerivedFunctor.obj\n          H.obj) ≅\n      (proEtaleConstantDerivedDirectImage g A).obj\n        ((ProEtale.finiteCoefficientIntrinsicDerivedComparison Z A).obj H.obj)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-dfe8c",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261026T235932-L-1471754",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-dfe8c",
+  "group": "R4",
+  "result": "fix",
+  "landing": "20261026T235932-L-1471754",
+  "kind": "interface",
+  "note": "independent cc review: intrinsicCompactScalarIsoOfOrigin_hom proof + 9 defs moved verbatim to FiniteCompactSupportScalarTransportData (public re-export) against clone item module; 4 direct importers compiled in sandbox; axioms checked"
+ }
+}

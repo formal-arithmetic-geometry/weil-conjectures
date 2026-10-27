@@ -132,7 +132,43 @@
   "def-sc-abelian-variety"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.etale_npow_id",
+    "AlgebraicGeometry.etale_torsionSubgroupScheme"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.etale_npow_id",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+     "lines": [
+      81,
+      108
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.etale_torsionSubgroupScheme",
+     "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion",
+     "lines": [
+      61,
+      79
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-ntorsion-etale",
  "split_report": {
@@ -164,8 +200,13 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $A$ be an abelian variety of dimension $g$ over a field $k$\nand let $d\\geq1$ with $\\operatorname{char}k\\nmid d$. Then the\nkernel $A[d]$ of $[d]:A\\to A$ of [def-sc-mult-n] is a finite etale\ngroup scheme of order $d^{2g}$ over $k$, and $[d]$ is etale. Moreover,\nfor an algebraic closure $\\bar k$ of $k$, the base change\n$A[d]_{\\bar k}$ is the constant group scheme $(\\mathbf Z/d\\mathbf Z)^{2g}$:\nit is the disjoint union of its $d^{2g}$ points\n$\\Spec\\bar k$, and $A[d](\\bar k)\\cong(\\mathbf Z/d\\mathbf Z)^{2g}$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $A$ be an abelian variety of dimension $g$ over a field $k$\nand let $d\\geq1$ with $\\operatorname{char}k\\nmid d$. Then the\nkernel $A[d]$ of $[d]:A\\to A$ of [def-sc-mult-n] is a finite etale\ngroup scheme of order $d^{2g}$ over $k$, and $[d]$ is etale. Moreover,\nfor a separably closed field extension $k'\\supseteq k$, the base change\n$A[d]_{k'}$ is, as a $k'$-scheme, the disjoint union of $d^{2g}$ copies\nof $\\Spec k'$; and if $k'$ is algebraically closed, the group\n$A(k')[d]$ of $d$-torsion points of $A$ with values in $k'$ satisfies\n$A(k')[d]\\cong(\\mathbf Z/d\\mathbf Z)^{2g}$.",
   "proof": [
    {
     "text": "*Reference: Stacks Project, Groupoid Schemes, Lemma 39.9.9,\n[Tag 0BFH](https://stacks.math.columbia.edu/tag/0BFH).*",
@@ -173,9 +214,9 @@
     "elementary": null
    },
    {
-    "text": "**Step 1: $A[d]$ is finite etale.** By [lem-sc-mult-n-finite-flat],\n$[d]$ is finite, flat and locally free of rank $d^{2g}$, and its kernel\n$A[d]$ is a finite group scheme of order $d^{2g}$. Since\n$\\operatorname{char}k\\nmid d$, also $\\operatorname{char}k\\nmid d^{2g}$,\nso $A[d]$ is etale over $k$ by [lem-sc-fg-order-prime-etale].",
+    "text": "**Step 1: $A[d]$ is finite etale.** By [lem-sc-isogeny-facts],\n$[d]$ is finite, flat and locally free of rank $d^{2g}$, and its kernel\n$A[d]$ is a finite group scheme of order $d^{2g}$. Since\n$\\operatorname{char}k\\nmid d$, also $\\operatorname{char}k\\nmid d^{2g}$,\nso $A[d]$ is etale over $k$ by [lem-sc-fg-order-prime-etale].",
     "uses": [
-     "lem-sc-mult-n-finite-flat",
+     "lem-sc-isogeny-facts",
      "lem-sc-fg-order-prime-etale"
     ],
     "elementary": false
@@ -186,11 +227,11 @@
     "elementary": null
    },
    {
-    "text": "**Step 3: the base change to $\\bar k$.** The base change\n$A_{\\bar k}$ is an abelian variety of dimension $g$ over $\\bar k$ with\n$A_{\\bar k}[d]=A[d]_{\\bar k}$, and Steps 1 and 2 apply to it. A finite\netale scheme over the algebraically closed field $\\bar k$ is the\ndisjoint union of copies of $\\Spec\\bar k$, one for each $\\bar k$-point,\nand their number is the order. Hence $A[m]_{\\bar k}$ has exactly\n$m^{2g}$ points over $\\bar k$ for every $m\\geq1$ with\n$\\operatorname{char}k\\nmid m$, and $A[d]_{\\bar k}$ is the constant\ngroup scheme on the finite group $H:=A[d](\\bar k)=A(\\bar k)[d]$. The\ngroup $A(\\bar k)$ is commutative, since the group law of an abelian\nvariety is commutative, so $H$ is a finite abelian group of exponent\ndividing $d$ and of order $d^{2g}$. Let $\\ell$ be a prime dividing $d$,\nwith $\\ell^e$ the exact power of $\\ell$ in $d$. The $\\ell$-primary part\n$H_\\ell$ of $H$ has order $\\ell^{2ge}$ and exponent dividing $\\ell^e$,\nand its $\\ell$-torsion $H_\\ell[\\ell]=A(\\bar k)[\\ell]$ has $\\ell^{2g}$\nelements. Write $H_\\ell\\cong\\bigoplus_{i=1}^r\\mathbf Z/\\ell^{a_i}\\mathbf Z$\nwith $1\\le a_i\\le e$; then $|H_\\ell[\\ell]|=\\ell^r$ gives $r=2g$, and\n$\\sum_ia_i=2ge$ with all $a_i\\le e$ forces $a_i=e$. Hence\n$H_\\ell\\cong(\\mathbf Z/\\ell^e\\mathbf Z)^{2g}$, and by the Chinese\nremainder theorem $H=\\prod_\\ell H_\\ell\\cong(\\mathbf Z/d\\mathbf Z)^{2g}$.",
+    "text": "**Step 3: base change to $k'$.** Let $k'\\supseteq k$ be separably\nclosed. The base change $A[d]_{k'}$ is finite etale over $k'$ of order\n$d^{2g}$ (the order is the $k$-dimension of the coordinate ring, which\nis unchanged by $-\\otimes_kk'$). A finite etale $k'$-algebra is a\nproduct of finite separable field extensions of $k'$, each equal to\n$k'$ as $k'$ is separably closed; so $A[d]_{k'}$ is the disjoint union\nof $d^{2g}$ copies of $\\Spec k'$.\n\nNow let $k'$ be algebraically closed. The base change $A_{k'}$ is an\nabelian variety of dimension $g$ over $k'$ with $A_{k'}[m]=A[m]_{k'}$\nfor every $m\\ge1$, and $A(k')=A_{k'}(k')$ as groups. By the first part,\nfor every $m\\geq1$ with $\\operatorname{char}k\\nmid m$ the group\n$A(k')[m]=A[m](k')$ has exactly $m^{2g}$ elements. The group $A(k')$ is\ncommutative, since the group law of an abelian variety is commutative,\nso $H:=A(k')[d]$ is a finite abelian group of exponent dividing $d$ and\nof order $d^{2g}$. Let $\\ell$ be a prime dividing $d$, with $\\ell^e$ the\nexact power of $\\ell$ in $d$. The $\\ell$-primary part $H_\\ell$ of $H$ has\norder $\\ell^{2ge}$ and exponent dividing $\\ell^e$, and its $\\ell$-torsion\n$H_\\ell[\\ell]=A(k')[\\ell]$ has $\\ell^{2g}$ elements. Write\n$H_\\ell\\cong\\bigoplus_{i=1}^r\\mathbf Z/\\ell^{a_i}\\mathbf Z$ with\n$1\\le a_i\\le e$; then $|H_\\ell[\\ell]|=\\ell^r$ gives $r=2g$, and\n$\\sum_ia_i=2ge$ with all $a_i\\le e$ forces $a_i=e$. Hence\n$H_\\ell\\cong(\\mathbf Z/\\ell^e\\mathbf Z)^{2g}$, and by the Chinese\nremainder theorem $H=\\prod_\\ell H_\\ell\\cong(\\mathbf Z/d\\mathbf Z)^{2g}$.",
     "uses": [],
     "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

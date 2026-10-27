@@ -1,0 +1,219 @@
+{
+ "id": "lem-pur-ordinary-derived-product-leg-transposes",
+ "kind": "statement",
+ "title": "The two ordinary exchange/projection leg transposes",
+ "statement": "Fix the finite coefficient datum $k,A=A_{E,n}$ of [def-pur-conventions]. For a $k$-scheme $T$, put $D(T)=D(T_{\\mathrm{proet}},A)$, the ordinary unbounded derived category on its small pro-etale site. For a scheme map $u$ use $P_u=Lu^*$, $R_u=Ru_*$ and the canonical adjunction $P_u\\dashv R_u$ of [def-weil-pbc-proetale-operations], with unit $\\eta_u$ and counit $\\varepsilon_u$. Let $B,Y,Z$ be separated finite-type $k$-schemes, let $a:Y\\to B$, $b:Z\\to B$ be separated finite-type morphisms [def-weil-scheme-morphism-properties], and form $C=Y\\times_BZ$ with projections $r:C\\to Y$, $t:C\\to Z$ [def-pc-fibre-product]. All tensors and symmetries are the derived tensor and signed symmetry of [def-weil-derived-pullback-tensor-hom]. Use the canonical tensor comparisons $\\mu_u$ of [lem-pur-derived-pullback-tensor-iso] and the square comparison $\\theta:P_tP_b\\xrightarrow{\\sim}P_rP_a$ obtained from [lem-weil-pbc-proetale-derived-pullback-composition]. For arbitrary $H\\in D(Y)$ and $J\\in D(Z)$ put $F=R_aH$, $G=R_bJ$, $T=P_rH$, $Q=P_bF\\otimes_A^LJ$, and $E=T\\otimes_A^LP_tJ$. Let $x:P_bF\\to R_tT$ and $\\pi_{u;M,N}$ be exactly the counit-defined ordinary exchange and projection maps of [def-exchange-projection]. Define\n$$v=\\pi_{t;T,J}\\circ(x\\otimes1_J):Q\\to R_tE,$$\n$$w=R_b(\\sigma_{J,P_bF})\\circ\\pi_{b;J,F}\\circ\\sigma_{F,G}:F\\otimes_A^LG\\to R_bQ.$$\nFor an arrow $h:M\\to R_uN$, define $\\widehat h=\\varepsilon_{u,N}\\circ P_u(h)$. Then the two identities, with their actual source comparisons included, are\n$$\\widehat v=\\bigl((P_r\\varepsilon_{a,H}\\circ\\theta_F)\\otimes1_{P_tJ}\\bigr)\\circ\\mu_{t;P_bF,J}:P_tQ\\to E,$$\n$$\\widehat w=(1_{P_bF}\\otimes\\varepsilon_{b,J})\\circ\\mu_{b;F,G}:P_b(F\\otimes_A^LG)\\to Q.$$\nBoth hold for arbitrary unbounded $H,J$; properness and invertibility of exchange or projection are not assumptions.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; agent-formulated leg calculations expanding the proper two-counit paragraph of lem-sf-kunneth-coherence.proof.md; returned item's Steps 2--3."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-fibre-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\otimes=\\otimes_A^L$. The adjunction of [def-weil-pbc-proetale-operations] has inverse hom-bijection $d\\mapsto R_u(d)\\eta_u$. Its transpose is $h\\mapsto\\varepsilon_uP_u(h)$: naturality of $\\varepsilon_u$ gives $\\varepsilon_uP_uR_u(d)P_u\\eta_u=d\\varepsilon_uP_u\\eta_u=d$ by the triangle identity. Therefore [def-exchange-projection], which defines exchange and projection by precisely these adjunct formulas, gives\n$$\\widehat x=P_r(\\varepsilon_{a,H})\\theta_F,\\qquad \\widehat{\\pi_{u;M,N}}=(\\varepsilon_{u,M}\\otimes1_{P_uN})\\mu_{u;R_uM,N}.$$\nHere the comparison $\\mu_u$ inside the projection map of [def-exchange-projection] is the ambient ringed-topos tensor-pullback comparison, and [lem-pur-derived-pullback-tensor-iso] states that at finite level its $\\mu_u$ is exactly this canonical comparison for the morphism of ringed topoi induced by $u$; so the displayed $\\mu$ is the $\\mu$ of the statement. These formulas are in the ordinary unbounded categories; neither map is inverted.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Expand $v$ and its transpose using step 1. Naturality of $\\mu_t$ in [lem-pur-derived-pullback-tensor-iso], applied to $x:P_bF\\to R_tT$ and $1_J$, gives\n$$\\begin{aligned}\n\\widehat v&=(\\varepsilon_{t,T}\\otimes1)\\mu_{t;R_tT,J}P_t(x\\otimes1_J)\\\\\n&=(\\varepsilon_{t,T}\\otimes1)(P_t x\\otimes1)\\mu_{t;P_bF,J}\\\\\n&=((P_r\\varepsilon_{a,H}\\circ\\theta_F)\\otimes1_{P_tJ})\\mu_{t;P_bF,J}.\n\\end{aligned}$$\nThe first equality substitutes the projection transpose from step 1; the last uses $\\varepsilon_{t,T}P_t x=\\widehat x$. The comparison on the source is retained, so this is exactly the first asserted identity.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Put $s=\\sigma_{J,P_bF}$. Naturality of the counit gives $\\varepsilon_{b,Q}P_bR_b(s)=s\\varepsilon_{b,J\\otimes P_bF}$. Expanding $w$ and using step 1 yields\n$$\\widehat w=s(\\varepsilon_{b,J}\\otimes1_{P_bF})\\mu_{b;G,F}P_b(\\sigma_{F,G}).$$\nThe signed-symmetry compatibility of [lem-pur-derived-pullback-tensor-iso] replaces the final two factors by $\\sigma_{P_bF,P_bG}\\mu_{b;F,G}$. Naturality of tensor symmetry gives\n$$s(\\varepsilon_{b,J}\\otimes1_{P_bF})=(1_{P_bF}\\otimes\\varepsilon_{b,J})\\sigma_{P_bG,P_bF}.$$\nSince $\\sigma_{P_bG,P_bF}\\sigma_{P_bF,P_bG}=1$, this proves $\\widehat w=(1_{P_bF}\\otimes\\varepsilon_{b,J})\\mu_{b;F,G}$. Symmetry is the signed derived symmetry throughout; its involutivity cancels the two swaps for arbitrary complexes.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; explicit adjunction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-exchange-projection",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; explicit adjunction calculation; expansion of the proper two-counit paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian square of schemes with constant finite coefficients, compute the adjunction transposes of exchange followed by projection and of projection conjugated by the two signed tensor symmetries on unbounded derived sheaves",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc; CategoryTheory.ExponentiableMorphism.coev_ev; SheafOfModules.pullbackComp; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ExponentiableMorphism.coev_ev_assoc. No hit states both leg transposes for the specified ordinary unbounded constant-coefficient exchange and projection. Cartesian pullback adjunctions concern slice categories; tensor coalgebra counits are unrelated. Underived sheaf composition conjugacy does not state these derived tensor-mate calculations. The invalid first braiding identifier was corrected in the final Loogle query.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit transpose of the base change and projection composite is the pulled back counit tensor identity; the transpose of the symmetrized projection is identity tensor counit",
+   "results": "Actual hits: CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_fst_app; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app; TensorProduct.counit_def; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd_assoc; Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap; CategoryTheory.GlueData.t_fac_assoc. No hit states both leg transposes for the specified ordinary unbounded constant-coefficient exchange and projection. Cartesian pullback adjunctions concern slice categories; tensor coalgebra counits are unrelated. Underived sheaf composition conjugacy does not state these derived tensor-mate calculations. The invalid first braiding identifier was corrected in the final Loogle query.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.MonoidalCategory.braiding",
+   "results": "Actual hits: none. loogle: unknown identifier 'CategoryTheory.MonoidalCategory.braiding'. No hit states both leg transposes for the specified ordinary unbounded constant-coefficient exchange and projection. Cartesian pullback adjunctions concern slice categories; tensor coalgebra counits are unrelated. Underived sheaf composition conjugacy does not state these derived tensor-mate calculations. The invalid first braiding identifier was corrected in the final Loogle query.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|projection.*mate|externalProduct",
+   "results": "Actual hits: Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean:8; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean:28; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean:41; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean:46; Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean:147; Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean:45; Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:16; Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:32; Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:38; Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:40; Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean:43; Mathlib/CategoryTheory/Monoidal/DayConvolution/DayFunctor.lean:34; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:8; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:17; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:55; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:156; Mathlib/CategoryTheory/Monoidal/DayConvolution.lean:168; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean:32; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean:28; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean:140; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean:144; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean:157; Mathlib/CategoryTheory/Monoidal/DayConvolution/Braided.lean:179; Mathlib/CategoryTheory/Limits/Sifted.lean:9; Mathlib/CategoryTheory/Limits/Sifted.lean:161. No hit states both leg transposes for the specified ordinary unbounded constant-coefficient exchange and projection. Cartesian pullback adjunctions concern slice categories; tensor coalgebra counits are unrelated. Underived sheaf composition conjugacy does not state these derived tensor-mate calculations. The invalid first braiding identifier was corrected in the final Loogle query.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a strong symmetric monoidal derived pullback left adjoint, the exchange projection leg and the symmetry conjugate projection leg have counit tensor identity and identity tensor counit as their transposes",
+   "results": "Actual hits: CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.ExponentiableMorphism.ev_coev_assoc; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc; CategoryTheory.PullbackShift.adjunction_counit; CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryFst_mapPullbackAdj_counit_app; CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategorySnd_mapPullbackAdj_counit_app. No hit states both leg transposes for the specified ordinary unbounded constant-coefficient exchange and projection. Cartesian pullback adjunctions concern slice categories; tensor coalgebra counits are unrelated. Underived sheaf composition conjugacy does not state these derived tensor-mate calculations. The invalid first braiding identifier was corrected in the final Loogle query.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.BraidedCategory.braiding",
+   "results": "Actual hits: none. No hit states both leg transposes for the specified ordinary unbounded constant-coefficient exchange and projection. Cartesian pullback adjunctions concern slice categories; tensor coalgebra counits are unrelated. Underived sheaf composition conjugacy does not state these derived tensor-mate calculations. The invalid first braiding identifier was corrected in the final Loogle query.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(counit|mate)|counit.*tensor|tensor.*counit",
+   "results": "Logged 24 hits: Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean.  Read Monoidal/Functor.lean:1036 and Closed/Functor.lean:139. Generic monoidal adjunction and homEquiv naturality are ingredients, not a declaration of both identities for the specified ordinary pro-etale derived maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.BraidedCategory.braiding",
+   "results": "Logged 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula map for a symmetric monoidal left adjoint is adjoint to counit tensor identity",
+   "results": "Logged 8 hits: CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.map_η_comp_η, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.ihom.coev, CategoryTheory.frobeniusMorphism.  Read Monoidal/Functor.lean:1036: map_μ_comp_counit_app_tensor concerns the right-adjoint lax tensorator, not these two specified exchange/projection legs. Read Closed/Functor.lean:139: frobeniusMorphism_mate is a Cartesian closed comparison, not the two derived leg identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the composite of derived exchange and projection maps is the pulled back counit tensor identity; symmetry conjugating projection gives identity tensor counit",
+   "results": "Logged 8 hits: CategoryTheory.exp.ev_coev, contractLeft_assoc_coevaluation', CategoryTheory.ihom.ev_coev, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight, CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerLeft, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExactPairing.evaluation_coevaluation''.  Evaluation/coevaluation and tensor/internal-Hom transpose laws do not state these two ordinary exchange/projection leg identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusMorphism|homEquiv.*naturality|naturality.*homEquiv",
+   "results": "Logged 25 hits: Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean, Mathlib/CategoryTheory/RegularCategory/Basic.lean.  Read Monoidal/Functor.lean:1036 and Closed/Functor.lean:139. Generic monoidal adjunction and homEquiv naturality are ingredients, not a declaration of both identities for the specified ordinary pro-etale derived maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction transpose naturality under precomposition and postcomposition and tensor symmetry for the projection formula",
+   "results": "Logged 8 hits: CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.MonoidalClosed.compTranspose_eq, CategoryTheory.MonoidalClosed.coev_app_comp_pre_app, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.coev_app_comp_pre_app, CategoryTheory.MonoidalClosed.compTranspose, CategoryTheory.tensorRightHomEquiv_naturality.  Evaluation/coevaluation and tensor/internal-Hom transpose laws do not state these two ordinary exchange/projection leg identities.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-proper-product-transpose",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4: the passage from reassociation of the ordered tower to symmetry of the actual product morphism; the compact-support external-product interchange needed before evaluating any trace. Proper-product part: successive transposes of exchange and projection, compositor normalization, and the swapped tensor-of-counits identity (returned proof Steps 3--6). Extraction: Tag 0E48, label remark-compatible-with-diagram, and equation-projection-formula-map immediately preceding it; agent-formulated leg calculations expanding the proper two-counit paragraph of lem-sf-kunneth-coherence.proof.md; returned item's Steps 2--3.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordinary-derived-product-leg-transposes",
+  "worker": "stage1",
+  "summary": "Expanded both ordinary leg transposes directly from the specified adjunction, exchange, projection and symmetric tensor comparison. No new nodes, no statement change, and no invertibility or boundedness assumptions. Recorded actual searches and verbatim citation excerpts.",
+  "blueprint": "Realizes the leg calculation needed for prop-pur-affine-space-composition-law proof Steps 3--4 through the recorded via chain: the proper two-counit argument in lem-sf-kunneth-coherence, before composing the two adjunctions.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Uses only the finite-level naturality and signed-symmetry compatibility of the canonical tensor comparison, a generic monoidal pullback tool; it does not replace the affine-space route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-6ffb5235c",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-6ffb5235c (reviewer sub-agent of L); spot-checked: The delivery creates no new nodes and no re-split note applies. The item statement is unchanged. Statement check: it matches def-exchange-projection with S=B, f=a, g=b, f'=t, g'=r. Ex_* has transpose Lr^*ε_{a,H}∘θ, θ:P_tP_b≅P_rP_a, and π=R_u((ε⊗1)μ)∘η. Throughout it works in the ordinary unbounded D(T_proet,A_{E,n}), with no coefficient-category identification. Every source and target is typed correctly, and it is consistent with the parent lem-pur-finite-proper-product-transpose (its step 1), assuming less than the parent (separated finite type rather than proper). Step checks: Step 1, transpose ε∘P(h) via counit naturality and the triangle identity, is correct. Step 2, v̂ = (x̂⊗1)μ_{t;P_bF,J} by first-variable naturality of μ (lem-pur-derived-pullback-tensor-iso, arbitrary unbounded M,N), is correct. Step 3: counit naturality, π̂, μσ=σμ (the stated signed-commutativity compatibility), σ naturality and σσ=1 give ŵ=(1⊗ε_{b,J})μ_{b;F,G}, which is correct. I accept the symmetry axioms as elementary. Small cases: zero objects, identity maps (μ-unitality) and odd shifts (inverse Koszul swaps, σ^Ch_{F,E}=(σ^Ch_{E,F})^{-1}) all check, and nothing is inverted. Source: Stacks sites-cohomology.tex equation-projection-formula-map (l.13666) defines π as the adjoint of (ε⊗1)∘(pullback-tensor) with no hypotheses; Tag 0E48 remark-compatible-with-diagram (l.13715) gives no verification, so proof_origin=agent is right. No SGA source is used. Route: lem-pur-derived-pullback-tensor-iso belongs to sk-def-purity-conv, which sk-prop-an cites, so it is on route; I accept the declared tool_use. Duplicates: lem-amb-tensor-projection-adjunct is the analogous adjoint, but on étale sites with def-kun-projection-formula-map, so it is not a duplicate; lem-pur-product-exchange-counit-coordinates states something different; same_as [] stands. FIX (C4/C1): step 1 silently equated the μ inside def-exchange-projection's π (lem-weil-pbc-ringed-topoi-derived-tensor-pullback) with the statement's μ (lem-pur-derived-pullback-tensor-iso). Step 1 now cites lem-pur-derived-pullback-tensor-iso, whose statement says its finite-level μ is that canonical ringed-topos comparison, plus one identifying sentence. proof_deps is unchanged. The whole corrected item is in fixes/dag/nodes/sec-smooth-purity/lem-pur-ordinary-derived-product-leg-transposes.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryDerivedProductLegTransposes",
+  "declaration": "WeilConjectures.FiniteProperProduct.ordinaryDerivedProductLegTransposes",
+  "file": "lean/Sheaf/Paper/OrdinaryDerivedProductLegTransposes.lean",
+  "statement": "theorem ordinaryDerivedProductLegTransposes (P : PurityFiniteSetting.{u}) (B Y Z : Over (Spec (.of P.field.k))) (a : Y ⟶ B) (b : Z ⟶ B) [IsSeparated B.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated a.left] [LocallyOfFiniteType a.left] [QuasiCompact a.left] [IsSeparated b.left] [LocallyOfFiniteType b.left] [QuasiCompact b.left] (H : D P Y.left) (J : D P Z.left) : ((adj P (pullback.snd a.left b.left)).homEquiv _ _).symm (v P a.left b.left Z.hom H J) = (mu P (pullback.snd a.left b.left) (pullback.snd a.left b.left ≫ Z.hom) Z.hom _ J).hom ≫ (tensor P (pullback a.left b.left)).map (Prod.mkHom ((theta P a.left b.left).hom.app ((push P a.left).obj H) ≫ (pull P (pullback.fst a.left b.left)).map ((adj P a.left).counit.app H)) (𝟙 _)) ∧ ((adj P b.left).homEquiv _ _).symm (w P a.left b.left B.hom Z.hom H J) = (mu P b.left Z.hom B.hom _ _).hom ≫ (tensor P Z.left).map (Prod.mkHom (𝟙 _) ((adj P b.left).counit.app J))",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Reuses the already published FiniteProperProduct definitions of the ordinary unbounded operations, mu, theta, v and w. Those definitions have no properness assumptions. The new theorem states precisely the two leg identities under separated finite-type hypotheses, without using finiteProperProductTranspose or its stronger hypotheses. No split or statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cc99a278",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Statement = parent finiteProperProductTranspose's first two conjuncts verbatim with IsProper replaced by IsSeparated+LocallyOfFiniteType+QuasiCompact on a,b, as the node says; every clause checked (exchange = mateEquiv of theta with variance verified, projection = homEquiv(mu>>eps⊗1), v and w in the node's order with signed sigma, transpose = homEquiv.symm = P(h)>>eps, source mu retained, theta at F); H,J arbitrary unbounded; edge cases (zero, empty schemes, odd shifts, n=1, universe u) ok. Only the lean field changed vs side-live; statement verbatim; one sorry; docstrings with source, blueprint and proof steps; both report sections present. Not recompiled per the 2026-10-21 rule (worker: clean 14.1/13.5 s). Advisories: FiniteProperProduct.* helpers are owned by the PARENT theorem (item in its proof_deps), so the reverse proof import closes a cycle and must be left out; move the helpers to a def node before stage 3 (as Q85/Q111/Q128). theta uses sfIntrinsicDerivedPullbackComp rather than the recorded integralFiniteCanonicalPullbackComposition (same as the accepted parent). Second reading is the same worker's specific reread."
+ }
+}

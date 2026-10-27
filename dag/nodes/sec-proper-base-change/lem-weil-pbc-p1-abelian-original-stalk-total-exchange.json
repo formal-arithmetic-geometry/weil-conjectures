@@ -22,39 +22,32 @@
  ],
  "proof": [
   {
-   "text": "Keep the original small-colimit-model hypotheses. Compose eA and eB with Spec of the inverse smallStrictHenselizationColimitIso to obtain canonical strictLocalization presentations. The equation smallStrictHenselizationColimitIso_toBase proves that both composites to the base are exactly the original structural composites. Reassociate to transfer hphi, hrhoA, hrhoB and the first local pullback square; hrho is unchanged. No coefficients, geometric points or original conclusion are transported.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "The projective-line projection is qcqs by its properness instance. Apply ProjectiveSpace.isPullback_map first to jA=eA.hom followed by the strict-henselization structural map and then to g0=Spec(phi). These give the two cartesian local models required by the generic localization theorem.",
+   "text": "Use ProjectiveSpace.isPullback_map to form the two projective-line pullback squares over the source strict localization and the local homomorphism φ. The projective-line projection is qcqs by properness.",
    "uses": [
     "lemma-nagata-projective-space-base-change-pullback"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
-   "text": "Apply Etale.exists_addEquiv_strictHenselization_abelian_stalkExchange from WeilConjectures.AlgebraicGeometry.StrictHenselizationAbelianStalkExchangeLocalization to the original square, the transported canonical-model presentations and the same projective-line local models. Obtain c1,c2 identifying the original stalks with the closed-B-point stalks of the strict-local exchange, with c2(ex(x))=ex0(c1(x)). This is the adopted implementation of the existing localization dependency; its former Sheaf module has already been withdrawn.",
+   "text": "Apply exists_addEquiv_strictHenselization_abelian_stalkExchange to these two squares and the canonical strict-local presentations. Obtain c₁,c₂ identifying the original stalks with the two local closed-point stalks and the equation c₂ Ex = Ex_local c₁.",
    "uses": [
     "lem-weil-pbc-abelian-stalk-exchange-localization"
    ],
    "elementary": false
   },
   {
-   "text": "Apply exists_addEquiv_strictLocal_abelian_total_exchange to the local projective-line square and G0. Obtain b1,b2 and b2(ex0(y))=cohomologyMap(P1(g0),G0,q)(b1(y)). Set a1=c1.trans b1 and a2=c2.trans b2. Rewrite by the localization equation and apply the latter equation to y=c1(x).",
+   "text": "Apply exists_addEquiv_strictLocal_abelian_total_exchange to the local projective-line square and G₀, obtaining b₁,b₂ and b₂ Ex_local = cohomologyMap b₁. Compose c₁ with b₁ and c₂ with b₂. For x rewrite by the localization equation and apply the strict-local equation to c₁ x. This is precisely the complete existing proof in the adopted module; no closed-fibre or torsion comparison enters.",
    "uses": [
     "lem-weil-pbc-strict-local-abelian-total-exchange"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_origin": {
-  "by": "K1 stage-3 worker",
+  "by": "M9 stage-3 retirement worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q9, theorem-higher-direct-images, first assertion and restriction-complex construction; Tag 095T, theorem-proper-base-change, final stalk calculation (only the total-space restriction part)",
-  "note": "Preserve the proved small/full model transport, localization and strict-local assembly. Only the small-model declaration name changes; the canonical source-library theorem remains verbatim."
+  "place": "Tag 03Q9, theorem-higher-direct-images; Tag 095T, theorem-proper-base-change, final stalk calculation",
+  "note": "The proof is the unchanged adopted canonical-model assembly. The small/full presentation transport formerly in the wrapper moves into the sole small-model consumer. No node, unit step, mathematical hypothesis or cohomology conclusion is removed."
  },
  "mathlib_searches": [
   {
@@ -113,18 +106,17 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange",
-  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLineAbelianOriginalStalkTotalExchange.lean",
-  "declaration": "AlgebraicGeometry.Etale.projectiveLine_abelian_originalStalk_totalExchange_smallModel",
-  "statement": "theorem Etale.projectiveLine_abelian_originalStalk_totalExchange_smallModel\n    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}\n    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictHenselizationStructuralMap (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    (G : Sheaf (ProjectiveLine S).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let G₀ := (ProjectiveSpace.map _\n      (eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ)))^*[\n      AddCommGrpCat.{u + 1}].obj G\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let C₁ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((R+((ProjectiveLine S ↘ S)_*[AddCommGrpCat.{u + 1}]) ⋙\n        D+((g)^*[AddCommGrpCat.{u + 1}])).obj K)\n    let C₂ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n        R+((f')_*[AddCommGrpCat.{u + 1}])).obj K)\n    let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)\n    ∃ (a₁ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₁ ≃+ Sheaf.H G₀ q)\n      (a₂ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₂ ≃+\n        Sheaf.H ((ProjectiveSpace.map _ g₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q),\n      ∀ x, a₂ ((((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).map e).hom x) =\n        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x)",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveLineAbelianOriginalStalkTotalExchange",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveLineAbelianOriginalStalkTotalExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.projectiveLine_abelian_originalStalk_totalExchange",
+  "statement": "theorem Etale.projectiveLine_abelian_originalStalk_totalExchange\n    {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}\n    (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    {A B : Type u} [CommRing A] [HenselianLocalRing A]\n    [CommRing B] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)]\n    (eA : Spec (.of A) ≅ strictLocalization (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictLocalization (ν ≫ τ))\n    (φ : A →+* B) [IsLocalHom φ]\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hφ : Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n        strictLocalizationToBase (ν ≫ ι ≫ σ) =\n      eB.hom ≫ strictLocalizationToBase (ν ≫ τ) ≫ g)\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictLocalizationToBase (ν ≫ τ) = τ)\n    (hρ : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)) = ι ≫ ρA)\n    (G : Sheaf (ProjectiveLine S).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let G₀ := (ProjectiveSpace.map _\n      (eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ)))^*[\n      AddCommGrpCat.{u + 1}].obj G\n    let g₀ := Spec.map (CommRingCat.ofHom φ)\n    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G\n    let C₁ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((R+((ProjectiveLine S ↘ S)_*[AddCommGrpCat.{u + 1}]) ⋙\n        D+((g)^*[AddCommGrpCat.{u + 1}])).obj K)\n    let C₂ := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj\n      ((D+((g')^*[AddCommGrpCat.{u + 1}]) ⋙\n        R+((f')_*[AddCommGrpCat.{u + 1}])).obj K)\n    let e := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map\n      ((Etale.derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app K)\n    ∃ (a₁ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₁ ≃+ Sheaf.H G₀ q)\n      (a₂ : ((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).obj C₂ ≃+\n        Sheaf.H ((ProjectiveSpace.map _ g₀)^*[AddCommGrpCat.{u + 1}].obj G₀) q),\n      ∀ x, a₂ ((((pointSmallEtale τ).sheafFiber\n          (A := AddCommGrpCat.{u + 1})).map e).hom x) =\n        Etale.cohomologyMap (ProjectiveSpace.map _ g₀) G₀ q (a₁ x)",
   "branch": "sheaf-dag",
-  "by": "S2",
-  "date": "2026-10-12",
-  "note": "The proved small-colimit-model theorem retains its hypotheses and conclusion under the distinct smallModel suffix. The existing caller is adapted in the same delivery; the adopted canonical-model declaration stays unchanged."
+  "by": "M9",
+  "date": "2026-10-25",
+  "note": "Retire the small-model wrapper listed in coord/retire-items.tsv. The unchanged abstract node is realized by the adopted canonical-model theorem. The sole small-model caller now carries out the explicit presentation transport with smallStrictHenselizationColimitIso_toBase inside its proof; its full signature is unchanged."
  },
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
   "lemma-nagata-projective-space-base-change-pullback",
   "lem-weil-pbc-abelian-stalk-exchange-localization",
   "lem-weil-pbc-strict-local-abelian-total-exchange"
@@ -140,14 +132,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "C-f8d65",
-  "group": "K1",
+  "reviewer": "C-fc104",
+  "group": "M9",
   "result": "pass",
-  "landing": "20261022T022044-L-433026",
+  "landing": "20261025T060920-L-2385539",
   "kind": "interface",
-  "note": "independent cc review: delivered item/caller/nodes vs clones/live (one-token rename each); reader-gate compile of renamed item + adapted caller (exit 0, axioms clean) and of the original caller against the renamed item (fails at 112, as reported)"
+  "note": "independent cc review: withdrawn wrapper vs adopted WeilConjectures theorem (node lean.statement verbatim in source); adapted consumer diff vs clones/live (only private imports + inline transport); consumer compiled alone, axioms standard"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

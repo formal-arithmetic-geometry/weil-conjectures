@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-space-proper-base-change",
+ "kind": "statement",
+ "title": "Proper morphisms of algebraic spaces are preserved by base change",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of algebraic spaces over $B$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and point spaces have the atlas topology [def-a1-space-point-topology]. A morphism of algebraic spaces is quasi-compact if for every affine scheme $T$ mapping to its target its pullback to $T$ is a quasi-compact algebraic space, meaning that it admits a surjective etale atlas from a quasi-compact scheme [lem-trf-space-qc-separated-etale-local]. Separated means that the representable diagonal is a closed immersion: every scheme base change of that diagonal is a closed immersion of schemes [def-weil-closed-immersion]. Locally of finite type is tested on compatible etale scheme charts using [def-weil-finite-type-morphism], and finite type means locally of finite type and quasi-compact. Universally closed means that every algebraic-space base change is closed on point spaces. Proper means separated, of finite type and universally closed (the scheme convention is [def-weil-proper-morphism]). If $f$ is proper, then the projection $f':X\\times_Y Y'\\to Y'$ is proper. No Noetherian, finite-presentation, or representability hypothesis on $f$ or $g$ is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04WP, lemma-base-change-proper."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $X'=X\\times_Y Y'$, $H=X\\times_Y X$ and $H'=X'\\times_{Y'}X'$, using [lem-trf-space-fibre-products-etale-covers]. The projections $X'\\to X$ induce $H'\\to H$. For a scheme $T\\to H'$, write its coordinates as $(x_1,x_2,y')$, with $f(x_1)=f(x_2)=g(y')$. On every test scheme $U$, a section of $X\\times_H T$ is $(x,t)$ with $x=x_1(t)=x_2(t)$. Send it to $((x,y'(t)),t)$ in $X'\\times_{H'}T$. Conversely forget the $Y'$-coordinate. These formulas are inverse, natural in $U$, and over $T$, so they identify the two sheaf projections. The former is represented by a scheme closed immersion by separatedness of $f$; hence the latter is too. Every scheme test of the diagonal of $f'$ is therefore a closed immersion, proving separatedness.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03KL, lemma-base-change-separated, proof; scheme-test definition of closed immersion of a representable map"
+   }
+  },
+  {
+   "text": "Properness gives that $f$ is of finite type. In [lem-sfb-stack-finite-type-calculus], use both arbitrary-base-change preservation and the explicit agreement with ordinary algebraic-space notions. Algebraic spaces are the discrete-groupoid cases of the stack conventions in that statement, so it applies to $X,Y,Y'$ and arbitrary $g$. It yields finite type of $f'$, including both quasi-compactness and local finite type. The scheme-test quasi-compactness convention fixed in the statement is precisely the current convention of [lem-trf-space-qc-separated-etale-local]; its locality theorem is not needed.",
+   "uses": [
+    "lem-sfb-stack-finite-type-calculus",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XH, lemma-base-change-finite-type; the existing input also states the more general stack version (stacks-morphisms.tex Tag 06FU) and its algebraic-space compatibility"
+   }
+  },
+  {
+   "text": "For any algebraic space $T$ with a morphism $h:T\\to Y'$, the sheaf fibre-product universal property gives $(X\\times_Y Y')\\times_{Y'}T\\cong X\\times_Y T$, where $T\\to Y$ is $g\\circ h$: both sides classify a section $x$ of $X$ and a section $t$ of $T$ with $f(x)=g(h(t))$. The projections to $T$ agree. The right-hand projection is closed on point spaces because $f$ is universally closed. Consequently every base change of $f'$ is closed, as required. Write $a:A\\to C$ for the displayed isomorphism. For a subset $V\\subseteq|C|$ and any etale scheme chart $u:U\\to A$, the inverse image of $|a|^{-1}(V)$ under $|u|$ equals the inverse image of $V$ under $|a\\circ u|$. Composition with $a$ and with its inverse bijects these charts, so the final-topology definition [def-a1-space-point-topology] says $|a|^{-1}(V)$ is open exactly when $V$ is open. Thus $|a|$ is a homeomorphism and the closedness conclusion follows.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03IS, lemma-base-change-universally-closed, proof; definition-closed"
+   }
+  },
+  {
+   "text": "Steps 1, 2 and 3 give respectively separatedness, finite type and universal closedness of $f'$. Their conjunction is the stated definition of properness, proving the assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04WP, lemma-base-change-proper, using Tag 03ZM, definition-proper"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-stack-finite-type-calculus",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-a1-space-point-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 04WP (lemma-base-change-proper), with its three cited inputs as expanded in the proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change preserves proper morphisms of algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsFinite\", \"doc\": \"The property of being a finite morphism of schemes is stable under base change. That is, if $ f : X \\to Y $ is a finite morphism of schemes and $ Y' \\to Y $ is any morphism of schemes, then the base cha\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"The property of being a proper morphism of schemes is multiplicative, meaning that the composition of two proper morphisms is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pullback of a proper algebraic space morphism is proper",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper g],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.IsProper (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toUniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.UniversallyClosed f\", \"doc\": \"A proper morphism $ f: X \\to Y $ of schemes is universally closed, meaning that for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_fst\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hg : AlgebraicGeometry.UniversallyClosed g],\\n  AlgebraicGeometry.UniversallyClosed (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_snd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [hf : AlgebraicGeometry.UniversallyClosed f],\\n  AlgebraicGeometry.UniversallyClosed (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is universally closed if for every base change, the induced morphism is a closed map in the topological sense.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f],\\n  IsProperMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a morphism of schemes that is universally closed, then $ f $ is a proper map, meaning that the preimage of every compact subset of $ Y $ is compact in $ X $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isProperMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.UniversallyClosed f] : IsProperMap ⇑f\", \"doc\": \"[Stacks Tag 04XU](https://stacks.math.columbia.edu/tag/04XU)\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.IsProper\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" : CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsProper @AlgebraicGeometry.IsSeparated\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism is proper if it is separated, universally closed and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f] : AlgebraicGeometry.IsProper f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.IsSeparated f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper|base.change.proper|AlgebraicSpace",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"372\", \"text\": \"instance [Algebra.FiniteType (𝒜 0) A] : IsProper (Proj.toSpecZero 𝒜) where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"24\", \"text\": \"- `AlgebraicGeometry.IsProper.eq_valuativeCriterion`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"330\", \"text\": \"lemma IsProper.eq_valuativeCriterion :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"331\", \"text\": \"    @IsProper = ValuativeCriterion ⊓ @QuasiCompact ⊓ @QuasiSeparated ⊓ @LocallyOfFiniteType := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"332\", \"text\": \"  rw [isProper_eq, IsSeparated.eq_valuativeCriterion, ValuativeCriterion.eq,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"341\", \"text\": \"lemma IsProper.of_valuativeCriterion [QuasiCompact f] [QuasiSeparated f] [LocallyOfFiniteType f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"17\", \"text\": \"- `AlgebraicGeometry.isCommMonObj_of_isProper_of_geometricallyIntegral`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"40\", \"text\": \"theorem isCommMonObj_of_isProper_of_isIntegral_tensorObj_of_isAlgClosed [IsAlgClosed K]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"41\", \"text\": \"    (G : Over (Spec (.of K))) [IsProper G.hom] [IsIntegral (G ⊗ G).left] [GrpObj G] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"47\", \"text\": \"  have : IsProper (G ⊗ G).hom := by dsimp; infer_instance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"50\", \"text\": \"  have : IsProper (fst G G).left := by dsimp; infer_instance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"line\": \"445\", \"text\": \"  ⟨fun _ _ ↦ (Topology.IsClosedEmbedding.isProperMap\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Polynomial.lean\", \"line\": \"142\", \"text\": \"theorem isProperMap_eval [ProperSpace R] (p : R[X]) (h : 0 < degree p) : IsProperMap p.eval :=\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Polynomial.lean\", \"line\": \"143\", \"text\": \"  isProperMap_iff_tendsto_cocompact.mpr ⟨by fun_prop, by\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Polynomial.lean\", \"line\": \"150\", \"text\": \"  · exact (p.isProperMap_eval h).isClosedMap\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Lipschitz.lean\", \"line\": \"211\", \"text\": \"    [PseudoMetricSpace Y] [ProperSpace Y] {f : X → Y} (hf : IsProperMap f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"line\": \"17\", \"text\": \"This implies that `f` is topologically proper (`AlgebraicGeometry.Scheme.Hom.isProperMap`).\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"line\": \"160\", \"text\": \"lemma Scheme.Hom.isProperMap (f : X ⟶ Y) [UniversallyClosed f] : IsProperMap f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"line\": \"161\", \"text\": \"  rw [isProperMap_iff_isClosedMap_and_compact_fibers]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean\", \"line\": \"168\", \"text\": \"  isCompact_preimage _ _ := f.isProperMap.isCompact_preimage\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"42\", \"text\": \"class IsProper : Prop extends IsSeparated f, UniversallyClosed f, LocallyOfFiniteType f where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"44\", \"text\": \"lemma isProper_eq : @IsProper =\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"47\", \"text\": \"  rw [isProper_iff, ← and_assoc]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"50\", \"text\": \"namespace IsProper\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"line\": \"53\", \"text\": \"instance : MorphismProperty.RespectsIso @IsProper := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves proper morphisms of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsProper\", \"doc\": \"Properness of morphisms of schemes is stable under base change. That is, if $ f: X \\to Y $ is a proper morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ f': X \\times_Y Y' \\to Y'\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \": IsStableUnderBaseChange @UniversallyClosed\", \"doc\": \"The property of being a universally closed morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a universally closed morphism and $ Y' \\to Y $ is any morphism of schemes, then \"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern schemes, open gluing, ring pushouts, or different morphism properties; none states this assertion for the given objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isStableUnderBaseChange",
+   "results": "1 hits; top: 72.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are scheme morphisms or general categorical properties; not this result for algebraic spaces. Proper.lean:37 fixes the objects to Scheme. Single-file grep output lost its filename; directory grep and direct source reading verified the scope."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pullback of a proper algebraic space morphism is proper",
+   "results": "8 hits; top: AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.instOfIsFinite.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are scheme morphisms or general categorical properties; not this result for algebraic spaces. Proper.lean:37 fixes the objects to Scheme. Single-file grep output lost its filename; directory grep and direct source reading verified the scope."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\"",
+   "results": "12 hits; top: AlgebraicGeometry.Scheme.Hom.isProperMap, AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsProper.instRespectsIsoScheme, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.stableUnderComposition, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated, AlgebraicGeometry.IsProper.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are scheme morphisms or general categorical properties; not this result for algebraic spaces. Proper.lean:37 fixes the objects to Scheme. Single-file grep output lost its filename; directory grep and direct source reading verified the scope."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change preserves proper morphisms of algebraic spaces",
+   "results": "8 hits; top: AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.isProperMap.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are scheme morphisms or general categorical properties; not this result for algebraic spaces. Proper.lean:37 fixes the objects to Scheme. Single-file grep output lost its filename; directory grep and direct source reading verified the scope."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pullback of a proper algebraic space morphism is proper",
+   "results": "8 hits; top: AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsProper.instFstScheme, AlgebraicGeometry.IsProper.instIsMultiplicativeScheme, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_snd, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.IsProper.toUniversallyClosed.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are scheme morphisms or general categorical properties; not this result for algebraic spaces. Proper.lean:37 fixes the objects to Scheme. Single-file grep output lost its filename; directory grep and direct source reading verified the scope."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|isStableUnderBaseChange",
+   "results": "25 hits; top: Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits are scheme morphisms or general categorical properties; not this result for algebraic spaces. Proper.lean:37 fixes the objects to Scheme. Single-file grep output lost its filename; directory grep and direct source reading verified the scope."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-infinitesimal-pushout",
+  "date": "2026-10-22",
+  "group": "Q67"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Forward restriction to the two base changes in Tag 0D56, through properness base change in Tag 0D1J; Tag 04WP. Checked against main-20261015 sk-thm-sf-ctf-stability: supporting proper-base-change input on the inherited alteration/moduli route; the created.item chain has no machine-resolvable blueprint ancestor.",
+   "via": [
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-proper-base-change",
+  "worker": "stage1",
+  "summary": "Q68 follows Stacks 04WP: explicit cartesian diagonal scheme tests; finite type from the existing more general stack calculus with its algebraic-space compatibility; universal closedness by a written fibre-product identification. No new nodes. Replaced the imprecise topological quasi-compactness wording by the source-compatible scheme-test convention and repaired doubled TeX escapes. Repair after L returned the unpromoted side completion: rebuilt against the current live unsplit node, re-read all current cited statements (including the repaired fibre-product and quasi-compactness nodes), made the diagonal base map explicit and recorded the exact finite-type/space compatibility and quasi-compactness interfaces. The old side completion is not claimed as a live completion. Latest repair (2026-10-23), returned head a759e87f867: all ten current dependency statements match the retained hashes; the diagonal argument now gives explicit natural inverse maps on each scheme test, and the topology citation quotes its defining open-set criterion.",
+  "blueprint": "Inherited direct-image/alteration/moduli route, forward restrictions in Tag 0D56 via 0D1J, use properness base change 04WP. Main-20261015 sk-thm-sf-ctf-stability and the recorded DAG unit were read. No unit or chapter route is changed. blueprint_refs.py ancestor reports None because the inherited created.item chain is broken.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products, used for the diagonal square and iterated base changes; no result of this unit replaces that general construction."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Only its explicit affine scheme-test and quasi-compact-atlas definition is used to fix the convention; its etale-locality theorem does not replace any part of the unit route."
+   }
+  ],
+  "repair": {
+   "return": "L: side completion not promoted to the live DAG",
+   "action": "Rebased retained split through deliver.py onto current origin/sheaf-dag after the latest promotion return a759e87f867; re-read all ten dependency statements and confirmed their recorded hashes unchanged; replaced the diagonal argument with explicit natural inverse maps on each scheme test; strengthened the topology citation to quote its full defining criterion; refreshed this signed report.",
+   "initial_dry_run": "b73303681a9",
+   "returned_head": "a759e87f867"
+  }
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-8bcc6ed72",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-8bcc6ed72 (reviewer sub-agent of L); spot-checked: PASS with no changes; fixes/ is empty. This is the fourth delivery of the same split. Heads 761fdab9, be2aab7b and a759e87f were each PASSed in stage 1 and then returned because they never reached the live DAG. There is no repair note, and this is not a re-split. Compared with a759e87f, only step 1's text and the split_report metadata changed. The statement, stmt_deps, proof_deps and steps 2-4 are identical, and proof_deps equals the union of the steps' uses. New step 1: for T->H' with coordinates (x1,x2,y'), a section (x,t) of X x_H T with x=x1(t)=x2(t) goes to ((x,y'(t)),t). This lies in X' because f(x)=g(y'(t)), and it lies over T. The inverse forgets y'. So each scheme test of the new diagonal is the old diagonal's closed immersion. This is correct and uses only the fibre-product universal property. The route matches Stacks spaces-morphisms 04WP (l.7916), whose proof is 03KL + 03XH + 03IS, with definition 03ZM. The quasi-compactness convention is word for word the one in lem-trf-space-qc-separated-etale-local. Edge cases checked: X empty, Y' empty, g = id, Y' a scheme, g non-representable. No SGA citation. Batch-5 check: def-a1-space-point-topology is a general definition that reaches sec-trace-formula only through def-trf-algebraic-space, the definition of algebraic space. lem-trf-space-qc-separated-etale-local is a foundational algebraic-space locality lemma (03KG type, unit sk-i-curve-zero). Its trf closure is only fibre products, atlas tests, closed-immersion descent and finite qc atlases, and the item uses only its definition. Neither node is given by the trace-formula or Poincaré-duality assumption, and neither is a step of their proofs, so I accept both. I also accept the tool_uses (fibre-products node; qc-local node for its definition only). Maintainer: this needs promotion to the live DAG, not another review. lem-sfb-space-flat-proper-fp-locality should cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProperBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.proper_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProperBaseChange.lean",
+  "statement": "theorem proper_baseChange {B : Scheme.{u}} {X Y Y' : AlgebraicSpace B} (f : X ⟶ Y) (g : Y' ⟶ Y) (hf : MapIsProper f) : MapIsProper (ObjectProperty.homMk (Limits.pullback.snd f.hom g.hom) : enlargedFibreProduct f g ⟶ Y')",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing MapIsProper and the actual second sheaf-pullback projection bundled into enlargedFibreProduct f g. The atlas and topological quasi-compactness formulations agree by points_compactSpace_iff (Tag 03E4); no representability or finiteness restriction is added. Two already-landed definition nodes are added to stmt_deps for the predicates and the bundled sheaf pullback; the natural-language statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ed4deae6",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Diff vs side-live: only the item node (stmt_deps + lean) and the new SpaceProperBaseChange.lean (one sorry theorem). lean.statement verbatim. Clause check vs node and Stacks 04WP/03ZM: B : Scheme.{u}; X Y Y' : AlgebraicSpace B; arbitrary f, g; X×_Y Y' = enlargedFibreProduct (actual Limits.pullback f.hom g.hom); f' = homMk (pullback.snd), correct 2nd projection; MapIsProper = MapIsSeparated (diagonal representable by closed immersions) ∧ MapIsFiniteType (MapIsQuasiCompact affine tests, equivalent to a qc étale atlas by 03E4 points_compactSpace_iff, ∧ chartwise LocallyOfFiniteType) ∧ MapIsUniversallyClosed (closed point maps after every algebraic-space base change). Hypothesis and conclusion exact; no Noetherian, representability or finiteness hypothesis and no extra universe. Added stmt_deps def-sfb-space-morphism-properties and def-sfb-space-sheaf-fibre-product are the landed definition owners of MapIsProper* and enlargedFibreProduct; none dropped. No duplicate standalone theorem: flat_proper_fp_locality is broader; SpaceMapIsProper belongs to another node. Docstrings carry the source place, blueprint tag and 4 proof steps; sorry only; edge cases empty, identity and non-representable covered. No file changed, so no compile; worker compiled clean."
+ }
+}

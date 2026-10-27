@@ -15,9 +15,27 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
   "place": "(1) canonical inverse-image coefficient comparison and (3) scalar tower; normalized locally closed comparison of (2), used in rational proper-base-change proof paragraph (3)"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Expose forward and inverse additivity of the existing module equivalence by the corresponding projections of internal_module_operations_transport. The generic transport definitions are explicit whiskerings and composites of the original units and counits. The named clause predicates repeat exactly the former existential equations.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1), fixed exact internal/section-module equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1), fixed exact internal/section-module equivalence"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -68,20 +86,26 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sfb-proper-base-change",
  "lean": {
-  "module": "Sheaf.SixFunctors.ScalarSixPullback",
+  "module": "Sheaf.SixFunctors.ScalarSixDefinitions",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixPullbackData",
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixRing",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixAdjunctionLeft",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixEquivalenceAdditive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixEquivalenceInverseAdditive",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixChange",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixPull",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixPullHom",
@@ -101,12 +125,26 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixEquivalence",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixPullSection",
    "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixPullbackData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixTransportOpen",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixTransportRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixTransportComposition",
    "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixOpenComparison",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixOpenIso",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixRestriction",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixExtensionComp",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixClosedPush",
    "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixClosedIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixOpenScalarIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixImmersionComparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixImmersionIdentifiers",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixImmersionNormalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixImmersionComposition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixImmersionOpenValue",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixNormalizedImmersionData",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixClosedComparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixClosedNormalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixImmersionTower",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixExtensionComparisonData",
    "AlgebraicGeometry.ProEtale.CondensedRing.ScalarSixExtensionData"
   ],
   "statement": "structure ScalarSixPullbackData",
@@ -114,7 +152,8 @@
   "by": "Q09",
   "date": "2026-10-21",
   "existing": true,
-  "note": "All 28 interface declarations already exist in ScalarSixPullback with exactly the signatures and constructions specified here. This definition node records those existing definitions, independently of the scalarSixPullback existence theorem; no declaration is copied, moved, renamed or restated."
+  "note": "All 28 existing interfaces move to ScalarSixDefinitions and are publicly re-exported by ScalarSixPullback. Existing types and values are retained: four aliases become abbreviations, and the three transport formulas specialize generic equivalence cancellation. ScalarSixExtensionData is equivalently repackaged as Nonempty ScalarSixExtensionComparisonData, whose nested normalized single-arrow fields and closed/tower fields are exactly the original existential witnesses and equations, with all binders retained. The open-value field uses a typed alias for precisely derivedOpenImmersionShriekIso. Two proved instances expose the existing module equivalence additivity. See the complete old/new code blocks and consumer audit in the change record.",
+  "file": "lean/Sheaf/SixFunctors/ScalarSixDefinitions.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -131,5 +170,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "Re-delivery after landing Return L (28 name collisions from the copied ScalarSixCoefficientInterfaces module on ccd92d734587, which an earlier review had passed). The copied module and the replacement ScalarSixPullback module are withdrawn. def-sfb-scalar-six-coefficient-interfaces now records the published Sheaf.SixFunctors.ScalarSixPullback with existing:true; that module's 28 abbrev/def/structure/instance declarations (lines 55-425) equal lean.declarations name for name, and 'structure ScalarSixPullbackData' is verbatim at line 254. The live det-prop-scalar-six-pullback record (Q17) lists only its theorem, so there is no ownership overlap, no module change and no collision. Item Lean is byte-identical to the previous head apart from replacing the interface import with a public ScalarSixPullback import; the item JSON is identical. The scalar-six names it uses (ScalarSixRing, scalarSixChange/Pull/Tower/Extension/Restriction, ScalarSixGeometry, ScalarSixPullbackData) are all in the recorded list; the theorem is not used and stays in proof_deps. Mathematics re-checked: hypotheses equal to the node, common F before the per-i clauses, ordinary L_{i,F} lisse, K_{i,F} bounded constructible, iso pinned by latticeComparisonNormalized, finite-subextension Qbar model, edge cases and universes fine, docstrings and sorry fine. Advisories: inherited imports from nodes outside the definition node's stmt_deps; three proof-only plain imports. No compile run (no file changed); the worker reports a clean compile in about 23 s and a passing dry run including the existing-declaration probe."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-a1985",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261024T191254-L-290782",
+  "kind": "interface",
+  "note": "independent cc review: Old ScalarSixPullback interfaces vs new ScalarSixDefinitions: changed transports rfl-equal to old bodies; old ∃-form ScalarSixExtensionData ⇔ new Nonempty structure proved both ways; 9 direct importers compiled against delivered modules (rc 0); scalarSixPullback signature byte-identical; single sorry scalarSixNormalizedImmersion_exists checked as true strict part of clause (2)"
  }
 }

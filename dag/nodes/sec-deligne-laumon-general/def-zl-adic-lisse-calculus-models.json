@@ -73,16 +73,20 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-i-dl-general-real",
  "lean": {
-  "module": "Sheaf.Paper.AdicLisseCohomologyCalculus",
+  "module": "Sheaf.Paper.AdicLisseCalculusData",
   "declaration": "AlgebraicGeometry.Scheme.AdicLisseCalculusModels",
   "declarations": [
    "AlgebraicGeometry.Scheme.adicCalculusPrimeInvertible",
@@ -92,6 +96,7 @@
    "AlgebraicGeometry.Scheme.adicCalculusIntegralRealizationLift",
    "AlgebraicGeometry.Scheme.adicCalculusIntegralModel",
    "AlgebraicGeometry.Scheme.adicCalculusIntegralFiber",
+   "AlgebraicGeometry.Scheme.adicCalculusTensor",
    "AlgebraicGeometry.Scheme.AdicLisseCalculusModels"
   ],
   "statement": "structure AdicLisseCalculusModels",
@@ -99,7 +104,8 @@
   "by": "Q18",
   "date": "2026-10-21",
   "existing": true,
-  "note": "Definition ownership extracted from the unchanged theorem module. This records precisely the normalized model structure and the helper definitions used to state it; the cohomology-calculus theorem and its tensor conclusions are not used as statement dependencies."
+  "note": "Unchanged normalized model definitions (and the tensor transport adicCalculusTensor) moved from the theorem module into their shared data module; declaration names and types are unchanged. The calculus structure AdicLisseCohomologyCalculus stays with the theorem node lem-per-adic-lisse-cohomology-calculus.",
+  "file": "lean/Sheaf/Paper/AdicLisseCalculusData.lean"
  },
  "reviewed": {
   "date": "2026-10-21",
@@ -116,5 +122,15 @@
   "group": "Q18",
   "result": "fix",
   "note": "Re-delivery after 7824c88 RETURN. F1 repaired: ∀ R with per-E ZlClassicalPullbackStage pinning (Along/PullNormalized at geometric Frobenius, completed Operation with classical_units fixing etale unit+rawIntegral to the canonical reindexing unit, coefficient_values via Shrink.algEquiv, sections square, eqToHom endpoints); remaining free sheaf/stage isos only twist δ by a coboundary (isomorphic Weil realization, same eigenvalues); HEq/eqToHom endpoints satisfiable (sourceIndex id = m, literal reindexing object formula). F2 repaired: def-zl-adic-lisse-calculus-models existing:true on unchanged AdicLisseCohomologyCalculus, 8 decls verified. Item statement unchanged; clause table, edge cases (r=0, zero quotients, empty Y, permuted components) OK; gates OK. FIX (records only, no Lean change, no compile): def-zl-normalized-classical-weil-realization cited def-weil-pbc-qbar-category for the functor target but Lean targets generalAlgebraicallyClosedConstructibleCategory; statement corrected, stmt_deps += def-weil-algebraically-closed-coefficients, def-weil-constructible-heart, def-weil-weil-sheaf-complex; def-zl-adic-lisse-calculus-models now names the target of its comparison equivalence (+def-weil-algebraically-closed-coefficients). No cycles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-42474",
+  "group": "A6",
+  "result": "fix",
+  "landing": "20261025T003304-L-3225711",
+  "kind": "interface",
+  "note": "independent cc review: item Nonempty(AdicLisseCohomologyCalculus) vs normalized-models ∧ ∀M tensor ∧ ∀M dual assembly; moved data block diffed byte-identical to clone; def-node vs theorem-node lean ownership"
  }
 }

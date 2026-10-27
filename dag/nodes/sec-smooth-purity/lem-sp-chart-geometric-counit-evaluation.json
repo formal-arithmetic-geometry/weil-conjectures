@@ -1,0 +1,134 @@
+{
+ "id": "lem-sp-chart-geometric-counit-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the geometric chart counit on an etale representative",
+ "statement": "Let R be a finite commutative ring annihilated by N, U and Y Noetherian schemes, e:U→affineTraceTower(Y,d) a separated etale morphism of finite type, and cp,cg the specified compactifications. Fix a normalized chart adjunction datum C as in [lem-sp-chart-finite-ring-adjunction], with its exact site comparisons, quasi-inverse, etale and pro-etale counits, and geometric normalization. For every etale finite-Tor constructible input J, pro-etale input K and isomorphism a:ν_Y^*J≅K, let γ_J be chartGeometryComponent, H the ordered ordinary chart right functor and G the geometric pro-etale chart right functor. The actual counit satisfies F_pro(γ_J followed by G(a)) followed by F_pro(C.geometric_K inverse) followed by C.adjPro.counit_K = c_HJ followed by ν_Y^*(C.adjEt.counit_J) followed by a, where c is the canonical compact-support site comparison of [lem-sf-class-compact-support-comparison]. The finite-Tor full categories and inclusion into D+ are those of [det-sp-et-proet-adjunction-transfer]. This is a single-ring equation and uses no coefficient extension.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: transport of the actual counit through the normalized site and geometric comparisons"
+ },
+ "stmt_deps": [
+  "lem-sp-chart-finite-ring-adjunction",
+  "lem-sf-class-compact-support-comparison",
+  "det-sp-et-proet-adjunction-transfer"
+ ],
+ "proof": [
+  {
+   "text": "Assemble towerENormalForm, tensorEPullback and the inverse-image composition isomorphism to obtain an ordinary natural chart normalization. Compose its site inverse image with the shift comparison, the bifunctor tensor comparison, the single-sheaf comparison and the canonical pullback/site square. The resulting natural isomorphism has components chartGeometryComponent by the explicit definitions. Restrict it to the full constructible domains.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the comparison image of J, use naturality of the geometric comparison at the inverse equivalence unit and the equivalence triangle equation. Its component is eU(H(unit inverse)) followed by the geometric component at J. Substitute Datum.proCounit and cancel the inverse geometric component and the image of the unit. This leaves cf inverse followed by the comparison image of the actual etale counit.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction",
+    "det-sp-et-proet-adjunction-transfer"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Datum.fixedComparison to identify cf inverse with the exact open comparison and the fixed proper direct-image counit mate. Naturality of rightDerivedFunctorPlusCompatibility, together with restriction of exact functor composition and natural isomorphisms from D to D+, identifies fixedCompactSupportComparisonIso with compactSupportSiteComparison.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply naturality of the geometric counit to a after the identity just proved on ν_Y^*J. Full-subcategory inclusions retain the same underlying arrows, so the resulting equation is exactly the displayed ambient equation.",
+   "uses": [
+    "det-sp-et-proet-adjunction-transfer"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-chart-finite-ring-adjunction",
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-sf-class-compact-support-comparison"
+ ],
+ "proof_origin": {
+  "kind": "proof",
+  "by": "M9",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: normalized geometric counit transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction counit transported along equivalences and a geometric natural isomorphism evaluates on the comparison image as the original counit",
+   "date": "2026-10-25",
+   "verdict": "No matching site/geometric result; Equivalence.toAdjunction_counit and counit_app_functor supply only the generic triangle identities.",
+   "results": "8 hits, headed by Equivalence.toAdjunction_counit, Adjunction.toEquivalence_counitIso_hom_app and Adjunction.leftAdjointIdIso_hom_app; no chart/site evaluation result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.counit_app_functor",
+   "date": "2026-10-25",
+   "verdict": "One hit: the equivalence counit on a functor image is the functor image of the inverse unit; used in the proof, not the chart evaluation result.",
+   "results": "One hit: Equivalence.counit_app_functor, module Mathlib.CategoryTheory.Equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*counit|counit.*geometric",
+   "date": "2026-10-25",
+   "verdict": "No Mathlib hits. Local search found only definitions and unfinished chart scalar statements.",
+   "results": "Zero Mathlib hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ChartCounitScalarTransport",
+  "date": "2026-10-25",
+  "group": "M9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-chart-counit-scalar-transport",
+   "place": "Site and geometric conjugation of the specified counit, without coefficient change",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ChartGeometricCounitEvaluation",
+  "file": "lean/Sheaf/Paper/ChartGeometricCounitEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartGeometricCounitEvaluation",
+  "statement": "theorem chartGeometricCounitEvaluation\n    (R : Type (u + 1)) [CommRing R] [Finite R]\n    {U Y : Scheme.{u}} [IsNoetherian U] [IsNoetherian Y]\n    (N : ℕ) (hR : (N : R) = 0) (d : ℕ) (e : U ⟶ affineTraceTower Y d)\n    [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]\n    (cp : Compactification (affineTraceProjection Y d))\n    (cg : Compactification (e ≫ affineTraceProjection Y d))\n    (M : Etale.EtaleCompactSupportNormalization R)\n    (t : Etale.OrdinaryFiniteTwistTransport R N hR)\n    (P : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      Etale.OrdinaryFiniteP1Datum R N hR t T hT)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (C : Datum R N hR d e cp cg M t P hY)\n    (J : (etaleProperty R Y).FullSubcategory)\n    (K : (proEtaleProperty R Y).FullSubcategory)\n    (a : (comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategory.obj J.obj ≅\n      K.obj) :\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} R) cg).map\n        ((chartGeometryComponent R N C.positive hR C.flatTwist hY d e J.obj).hom ≫\n          (geometricRight R N hR d e).map a.hom) ≫\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} R) cg).map\n        (C.geometric.inv.app K).hom ≫ (C.adjPro.counit.app K).hom =\n    (compactSupportSiteComparison R cg).hom.app\n        ((etaleToPlus R U).obj ((etaleRight R N hR d e C.hRight).obj J)) ≫\n      (comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategory.map\n        (C.adjEt.counit.app J).hom ≫ a.hom",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261025T013223-L-3942225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261025T094836-L-3264265",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartGeometricCounitEvaluation"
+  ],
+  "sorry_after": []
+ }
+}

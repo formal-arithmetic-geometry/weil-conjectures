@@ -1,0 +1,165 @@
+{
+ "id": "def-pur-coordinate-product-presentations",
+ "kind": "definition",
+ "title": "Normalized coordinate product presentations",
+ "statement": "Let $P$ be finite purity data [def-pur-conventions], let $n\\geq0$ denote coefficient level $n+1$, and let $B\\to\\operatorname{Spec}k$ be a $k$-scheme. Write $X_c=\\mathbf A^c_B$ with coordinate divisors and zero section [def-pur-affine-space-coordinate-boundaries], and use the actual list-indexed supported product and target $W_d=A_{X_c}(d)[2d]$ [def-pur-affine-space-thom-map]. For a permutation $\\sigma$ of $\\{0,\\ldots,c-1\\}$, define the reordered class by applying this same product to the permuted coordinate list, transporting the total intersection to $B$ by the unique isomorphism over $X_c$ and using its length $c$ to normalize the target. This support isomorphism exists uniquely, including for $c=0$. For every $r\\geq0$ such that $\\ell^{r+1}$ annihilates the coefficient quotient, define the coordinate factor at exponent $r$ by the actual ordinary Cartier-Kummer family [lem-amb-cartier-kummer-map], realized through closed site exchange and followed by the two normalized comparisons through the common inverse-limit Tate line [def-pur-finite-site-coordinates]. Its target is the standard shifted line in the recorded coordinate boundaries. No invariance assertion is part of these definitions. The degree-one root comparison is the unique transport, fixed by heterogeneous equality, of the existing sheaf-level twist comparison. Its exact derived realization, including the shift by two, defines the exponent comparison through the common inverse-limit Tate line. The actual ordinary Cartier realization followed by this comparison is transported along the equality of its literal source and target type with the recorded coordinate-boundary type. No arbitrary isomorphism is selected.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-affine-space-thom-map",
+  "lem-amb-cartier-kummer-map",
+  "def-pur-finite-site-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "For any list of coordinates, prove by induction that a map factors through its successive scheme-theoretic intersection if and only if it factors through every listed coordinate divisor. The empty list is the identity; the induction step is precisely the universal property of the pullback.",
+   "uses": [
+    "def-pur-affine-space-thom-map"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The image of finRange under a permutation contains every coordinate, using the inverse permutation. The factorization criterion gives maps in both directions between the permuted intersection and the standard intersection. Their composites are identities after composing with the closed intersection immersions, hence are identities by monicity. Compose this isomorphism with supportIso_existsUnique for the standard intersection. Uniqueness follows by cancellation against the monomorphism zero. This argument also covers rank zero.",
+   "uses": [
+    "def-pur-affine-space-thom-map",
+    "def-pur-affine-space-coordinate-boundaries"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At degree one finiteEtaleTateTwist is definitionally finiteEtaleTateLine. The specified twistComparison is therefore itself a witness for coordinateRootComparison_existsUnique; heterogeneous reflexivity proves its property, and eq_of_heq proves uniqueness.",
+   "uses": [
+    "def-pur-finite-site-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The equality coordinateBoundaryType_eq is definitional: the positive-level setting has coefficient level n, constant is the comparison of the ordinary constant sheaf, cupSingle is the canonical degree-zero embedding, and shiftedLine is the displayed compared ordinary line shifted by two. Reflexivity closes the equality.",
+   "uses": [
+    "def-pur-conventions",
+    "def-pur-affine-space-coordinate-boundaries"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-thom-map",
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-finite-site-coordinates",
+  "def-pur-conventions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Ordered coordinate product and normalized root comparison; B9, 2026-10-25: intersection reordering follows from the pullback universal property and monicity, then the existing standard support identification. The root comparison and endpoint equality use their defining equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ordered supported Cartier Kummer coordinate product on affine space has recursive exceptional adjunct and commutes with arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.AffineSpace.map_appTop_coord; AlgebraicGeometry.AffineSpace.reindex; WeierstrassCurve.Affine.Point.map_map; AlgebraicGeometry.AffineSpace.reindex_appTop_coord; WeierstrassCurve.Affine.Point.map_some; AlgebraicGeometry.AffineSpace.map_toSpecMvPoly; AlgebraicGeometry.AffineSpace.homOverEquiv_apply; WeierstrassCurve.Affine.Point.map",
+   "date": "2026-10-22",
+   "verdict": "No exact match for these canonical coordinate-section constructions; returned generic affine-space or bundle declarations only."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*recursion|supportedClass.*(succ|baseChange)|thom.*recursion",
+   "results": "0 hits:  in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "No exact match for these canonical coordinate-section constructions; returned generic affine-space or bundle declarations only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical projection formula zero section affine space supported Cartier product exceptional adjunct recursion",
+   "results": "8 hits: Bundle.zeroSection_proj; Bundle.zeroSection; Algebra.Extension.Cotangent.val_zero; AffineMap.pi_zero; AlgebraicGeometry.AffineSpace.toSpecMvPoly; AffineMap.pi_eq_zero; AffineMap.coe_zero; AffineMap.proj_pi",
+   "date": "2026-10-22",
+   "verdict": "No exact match for these canonical coordinate-section constructions; returned generic affine-space or bundle declarations only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-coordinate-section-product-recursion",
+  "date": "2026-10-22",
+  "group": "Q138"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7.",
+   "via": [
+    "lem-pur-coordinate-section-product-recursion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoordinateProductPresentations",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineZeroPurity.permutedClass",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.permutedSupportIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.permutedClass",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateIsoThrough",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateArrowComparison",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateUniqueChoice",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateRootComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateRootComparison",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateRootDerived",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateTransport",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateRealizeRootBoundary",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.CoordinateBoundaryRawType",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateBoundaryRaw",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.CoordinateBoundaryType",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinateBoundaryType_eq",
+   "AlgebraicGeometry.ProEtale.AffineZeroPurity.boundaryAtExponent"
+  ],
+  "file": "lean/Sheaf/Paper/CoordinateProductPresentations.lean",
+  "statement": "def permutedClass (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) (c : ℕ) (σ : Equiv.Perm (Fin c)) : (cupSingle (setting P n) (iteratedAffineLine B c)).obj ((lowerStar (ModuleCat.{u + 1} (setting P n).Coefficient) (zero B c)).obj ((setting P n).constant B)) ⟶ target P n (iteratedAffineLine B c) c",
+  "branch": "sheaf-dag",
+  "by": "Q138",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-196a93fe9",
+  "group": "Q138",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-196a93fe9",
+  "group": "Q138",
+  "result": "fix",
+  "note": "Delta vs d0d1: zero_succ removed and replaced by NH's live CoordinateTowerNormalization.zero_successor (same binders and conclusion; landed owner node cited, no cycle); correct. F1 (H4/H12), missed by the f82c and d0d1 PASSes: def-pur-coordinate-zero-base-change's coordinateMap/coordinateSquare/coordinateChosenSquare duplicate the live AffineZeroPurity.spaceMap/zero_square/zeroSquare in the already-imported parent module AffineSpaceZeroSectionPurity (live 2026-10-22 09:24, before the first push). FIX: fixes/CoordinateZeroBaseChange.lean drops the three and uses the live ones; fixes/CoordinateSectionProductRecursion.lean renames coordinateMap to spaceMap in the two base-change theorems (item record unchanged); fixes/def-pur-coordinate-zero-base-change.json updates declarations, verbatim statement and note. One nt_compile --json run of all 5 modules: clean, 8.7/7.8/47.1/17.6/20.7 s. Advisories: lastSection and closedCompositionInverse also exist in NH's theorem module; earlier f82c/d0d1 advisories carry over."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-32fef",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T180454-L-3993997",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoordinateProductPresentations.lean and node def-pur-coordinate-product-presentations against the clone version, the change record, the upstream owners (supportIso_existsUnique, twistComparison) and the importer CoordinateSectionProductRecursion (compiled together: 49.0 s / 21.3 s, exit 0; #print axioms show sorryAx only through upstream stated theorems)"
+ }
+}

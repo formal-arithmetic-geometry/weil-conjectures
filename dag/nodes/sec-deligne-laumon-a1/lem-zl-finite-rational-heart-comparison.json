@@ -1,0 +1,344 @@
+{
+ "id": "lem-zl-finite-rational-heart-comparison",
+ "kind": "statement",
+ "title": "Raw rationalization and point-section interpretation of integral finite-fibre comparisons",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a finite morphism of separated finite-type $k$-schemes [def-weil-finite-integral-morphism, def-weil-scheme-morphism-properties]. For a scheme $W$, write $R_W=\\varprojlim_n(A_n)_W$ on the small pro-etale site $W_{\\mathrm{proet}}$ [def-weil-completed-integral-coefficients, def-weil-pbc-proetale-site]. Use $D^b_c(W,\\mathcal O_E)$ of [def-weil-derived-complete-integral-detailed], the strict derived reductions $K_n=K\\otimes^L_{R_W}(A_n)_W$, and exact restriction of scalars $\\operatorname{Res}_n$ [def-pur-integral-derived-operations]. Let $Rf_*$ be the tower direct image of [def-weil-derived-direct-image].\n\nFor a geometric point $y:s=\\operatorname{Spec}k\\to Y$ [def-weil-geometric-point], set $S=X\\times_Ys$ with projections $v:S\\to X$, $h:S\\to s$ [def-pc-base-change], and $P_y=\\{x:s\\to X\\mid fx=y\\}$. For $x\\in P_y$ let $i_x:s\\to S$ be the unique lift, so $vi_x=x$ and $hi_x=\\operatorname{id}_s$. This is a finite set; an empty sum indexed by $P_y$ is the zero object. Write $L(-)^*$ for the completed integral pullback of [def-pur-integral-derived-operations], and $(-)_n^*$ for its exact finite-coefficient inverse image.\n\nOn every one of $X,Y,S,s$, the category $D^b_c(W,\\mathcal O_E)$ agrees, with its completed ring sheaf and reduction functors, with the bounded constructible complete category [def-weil-pbc-bounded-constructible-complete]. Its rationalization [def-weil-rationalization-karoubi] is therefore the identical raw category of [def-weil-pbc-rational-category]: objects are integral objects and morphisms are $\\operatorname{Hom}(-,-)\\otimes_{\\mathcal O_E}E$, with no idempotents adjoined. The rational standard pair [def-weil-constructible-standard-tstructure] is the localized integral pair; localization is t-exact and every object of its heart has an integral heart representative.\n\nSuppose an $\\mathcal O_E$-linear exact integral functor $T:D^b_c(X,\\mathcal O_E)\\to D^b_c(Y,\\mathcal O_E)$ preserves both halves of the standard pair and is equipped with specified natural integral isomorphisms\n$$\\beta_K:Ly^*TK\\xrightarrow{\\sim}Rh_*Lv^*K,\\qquad\n\\rho_K:Rh_*Lv^*K\\xrightarrow{\\sim}\\bigoplus_{x\\in P_y}Lx^*K$$\nwhose strict reduction maps are, respectively, the exchange counit and the individual counit-germ restrictions. Assume $T$ is identified with the integral tower direct image by a comparison preserving every reduction projection. Its unique raw rational extension $T_E$ is the prescribed functor $Rf_*$ at $E$ [def-weil-derived-direct-image], and is t-exact. Its restriction $T_E^\\heartsuit$ to the constructible heart [def-weil-constructible-heart] is exact. The localized $\\beta,\\rho$ give isomorphisms of derived objects over $s$.\n\nFor every rational heart object $\\mathcal F$, applying termwise sections on $s_{\\mathrm{proet}}$, then taking degree zero, identifies precisely these two maps with the restriction arrows\n$$(T_E^\\heartsuit\\mathcal F)_y\\xrightarrow{\\sim}H^0(S,\\mathcal F_S)\\xrightarrow{\\sim}\\bigoplus_{x\\in P_y}\\mathcal F_x.$$\nHere $\\mathcal F_S=Lv^*\\mathcal F$ in the heart, the point-fibre and stalk conventions are [def-weil-finite-coefficient-point, def-weil-local-frobenius-trace], and ordinary cohomology is [def-weil-ordinary-compact-cohomology]. Point sections are exact and preserve the displayed finite biproduct; all three pullbacks have their heart interpretations. The identifications are natural in $\\mathcal F$ and $E$-linear.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt–Scholze Proposition 6.8.14(2) and Remark 6.8.15; identification of the raw rational categories and point-section interpretation of the two integral restrictions, returned steps 8–9."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-integral-morphism",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-direct-image",
+  "def-weil-geometric-point",
+  "def-pc-base-change",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-constructible-heart",
+  "def-weil-finite-coefficient-point",
+  "def-weil-local-frobenius-trace",
+  "def-weil-ordinary-compact-cohomology",
+  "def-a1-constructible-pullback-residue-units",
+  "def-trf-integral-pullback-composition-family",
+  "def-pur-proetale-global-section-maps"
+ ],
+ "proof": [
+  {
+   "text": "The schemes $X,Y,s$ are finite type over the field $k$. The fibre $S$ is finite over $s$: on an affine neighborhood $\\operatorname{Spec}B$ of $y$, with finite preimage $\\operatorname{Spec}C$, its algebra is $C\\otimes_Bk$, generated over $k$ by the images of finitely many $B$-module generators of $C$. Thus $S$ is finite type too. The $k$-algebra $C\\otimes_Bk$ is spanned as a $k$-vector space by those finitely many images, so it is finite-dimensional, hence Artinian with finitely many maximal ideals, each with residue field finite over the algebraically closed $k$, hence equal to $k$. By the universal property of $S=X\\times_Ys$, a point $x:s\\to X$ with $fx=y$ is the same as a $k$-morphism $i_x:s\\to S$ (a section of $h$), unique with $vi_x=x$; these correspond to the maximal ideals of $C\\otimes_Bk$, so $P_y$ is finite (empty when $y$ is not in the image of $f$). Apply [lem-weil-pbc-finite-type-over-noetherian] over the noetherian field $k$ and [lem-kun-dimension-finite-type] to all four schemes. The integer $\\ell$ is a unit on them since $\\ell\\ne p$. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] therefore applies: it explicitly says that the two integral categories in the statement select the same objects in the same ambient derived category, with the same completed ring sheaf and reductions. Both are full subcategories, so their morphisms, composition and integral standard cohomological classes agree as well.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11 and Proposition 6.8.11(3); project completed-category characterization, with its compatible witnesses and uniform bounds."
+   }
+  },
+  {
+   "text": "For each of the four schemes, [def-weil-rationalization-karoubi] and [def-weil-pbc-rational-category] now apply the same operation to this same full integral category: they keep its objects and replace every morphism module by $\\operatorname{Hom}(K,L)\\otimes_{\\mathcal O_E}E$. The identities, composition and shift are consequently identical. The distinguished triangles are images of integral triangles and their isomorphic copies in either presentation. No Karoubi operation occurs. By [prop-weil-localized-tstructure] the rational classes are the isomorphism closures of the integral classes, localization is t-exact, and every rational heart object is isomorphic to the image of an integral heart object. These are exactly the classes of [def-weil-constructible-standard-tstructure], under Step 1's identification.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "prop-weil-localized-tstructure",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); raw scalar localization and its localized standard t-structure."
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-rational-transport] to the supplied integral functor and its specified comparison with the tower direct image. Explicitly $T_E(K)=TK$ and $T_E(u\\otimes a)=T(u)\\otimes a$. Every morphism is a fraction $u/\\varpi^m$, so this is the unique $E$-linear extension. The comparison localizes with its actual components; by [def-weil-derived-direct-image], the rational direct image is this extension of the integral tower functor. Hence it identifies $T_E$ with the prescribed $Rf_*$. The same transport sends the given maps and their inverses to $\\beta_K\\otimes1$, $\\rho_K\\otimes1$ and their localized inverses. These are isomorphisms of derived objects before any sections or degree-zero operation. We retain the supplied maps themselves and their projection normalization; we do not choose new maps from separate finite-level equalities.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2) and Remark 6.8.15; transport of supplied exact integral functors and natural comparisons."
+   }
+  },
+  {
+   "text": "If $M$ belongs to either rational standard class, choose an integral representative in that class as in Step 2. Its image under $T$ is in the same integral class by hypothesis, so $T_E M$ is in the same rational class. Thus $T_E$ is t-exact. For a short exact sequence in the heart, [lem-weil-heart-short-exact-triangles](4) gives a distinguished triangle with its three terms in the heart. The exact functor $T_E$ carries it to a distinguished triangle, still with three heart terms; the converse assertion of that same lemma gives a short exact sequence. This proves exactness of $T_E^\\heartsuit$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Localized t-structure from Proposition 6.8.14(2); heart exactness via distinguished triangles."
+   }
+  },
+  {
+   "text": "For $g=y,v,x$, [lem-a1-integral-pullback-completed-comparison] identifies the actual integral pullback used here with the completed pullback, preserving every reduction projection and shifts. Under Step 1's category identification, [lem-per-integral-pullback-bounds] applies to these morphisms between noetherian finite-dimensional schemes with $\\ell$ invertible: the completed functor preserves constructibility and both integral standard classes. The argument of Step 4, applied to each pullback and its raw extension, gives rational t-exactness. Thus for an integral heart representative $F_0$ of $\\mathcal F$, the objects $Ly^*TF_0$, $Lv^*F_0$ and $Lx^*F_0$ have their indicated integral heart interpretations, and their images give the asserted rational heart interpretations.",
+   "uses": [
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-per-integral-pullback-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5), Proposition 6.6.11; the projection-normalized comparison of the two completed pullback models."
+   }
+  },
+  {
+   "text": "By [lem-weil-point-proetale-sections-exact], termwise $\\Gamma(s,-)$ is exact on modules over $R_s$ and satisfies $H^i\\Gamma(s,N)=\\Gamma(s,\\mathcal H^iN)$. Evaluation is additive, so it carries the finite biproduct's inclusions and projections to maps satisfying the same biproduct identities; for an empty index set it carries zero to zero. At $E$, [def-weil-finite-coefficient-point](3) prescribes $\\operatorname{Fib}_s(QN)=\\Gamma(s,N)\\otimes_{\\mathcal O_E}E$. By [lem-weil-l-adic-integers-localization-uniformizer] this tensor is localization at $\\varpi$. For any module map $d$, a fraction $z/\\varpi^m$ lies in the localized kernel precisely when $\\varpi^rdz=0$ for some $r$; it then has the cycle representative $\\varpi^rz/\\varpi^{m+r}$. Images are the fractions of images. This proves directly that localization commutes with kernels, images and cohomology. Point evaluation is consequently t-exact on the localized pair and preserves the same finite biproduct comparison.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-l-adic-integers-localization-uniformizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Stacks Tags 0982 and 098H (proetale.tex, lemma-w-local-strictly-henselian-extremally-disconnected and lemma-w-contractible-is-weakly-contractible); point coefficient convention and fraction calculation."
+   }
+  },
+  {
+   "text": "Apply $H^0\\operatorname{Fib}_s$ to exactly the localized $\\beta,\\rho$ of Step 3. By [def-weil-local-frobenius-trace] the first term is $(T_E^\\heartsuit\\mathcal F)_y$ and each final summand is $\\mathcal F_x$. By [def-weil-ordinary-compact-cohomology], since $h:S\\to s$ is the structure map, the middle term is precisely $H^0(S,Lv^*\\mathcal F)=H^0(S,\\mathcal F_S)$. Step 6 identifies the last term with $\\bigoplus_x\\mathcal F_x$, using its actual projections. Hence the displayed arrows are the sections and degree-zero images of the supplied exchange and individual counit-germ restrictions, rather than merely abstract isomorphisms between their endpoints. All constructions are functors. Naturality holds first for an integral morphism $u$ by the supplied naturality squares, and for $u/\\varpi^m$ by multiplying those same squares by $\\varpi^{-m}$. Choosing an isomorphism $QF_0\\cong\\mathcal F$ transports those squares to every rational heart object; naturality makes the result independent of the representative. The same formulas prove $E$-linearity. The zero complex and the empty fibre give the unique maps between zero objects.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Proof of lem-zl-finite-pushforward, first two sentences (finite direct image exact and the finite stalk formula), with the given integral exchange and counit-germ maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "prop-weil-localized-tstructure",
+  "def-weil-constructible-standard-tstructure",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-derived-direct-image",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-a1-integral-pullback-completed-comparison",
+  "lem-per-integral-pullback-bounds",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "def-weil-local-frobenius-trace",
+  "def-weil-ordinary-compact-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Propositions 6.6.11, 6.8.11(3), 6.8.14(2) and Remark 6.8.15, assembled using the existing DAG coefficient-category, pullback and point-section statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rational localization transports integral t exact direct image and derived fibre restriction isomorphisms to exact constructible hearts",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.map_distinguished_exact; ModuleCat.localizedModule_functor_map_exact; CategoryTheory.Functor.map_distinguished_op_exact; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.mapDerivedCategoryFactors. Exact functor localization and abstract triangulated Hom statements do not identify the two project coefficient categories or their actual point-fibre restriction maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tExact\", \"homology\"",
+   "results": "[loogle] OK 8 hit(s); CategoryTheory.ShortComplex.ShortExact.homology_exact₁; CategoryTheory.ShortComplex.ShortExact.homology_exact₃; CategoryTheory.ShortComplex.ShortExact.homology_exact₂; groupCohomology.map_cochainsFunctor_shortExact; groupCohomology.map_cochainsFunctor_eval_shortExact; groupHomology.map_chainsFunctor_shortExact; groupHomology.map_chainsFunctor_eval_shortExact; TateCohomology.map_tateComplexFunctor_shortExact. Exact functor localization and abstract triangulated Hom statements do not identify the two project coefficient categories or their actual point-fibre restriction maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tExact|t_exact|rationalization",
+   "results": "[grep] OK 25 hit(s); Mathlib/Topology/Sheaves/Flasque.lean:24; Mathlib/Topology/Sheaves/Flasque.lean:27; Mathlib/Topology/Sheaves/Flasque.lean:113; Mathlib/Topology/Sheaves/Flasque.lean:139; Mathlib/Topology/Sheaves/Flasque.lean:182; Mathlib/Topology/Sheaves/Abelian.lean:81; Mathlib/Topology/Sheaves/AddCommGrpCat.lean:39; Mathlib/Topology/Category/Profinite/Nobeling/Induction.lean:82; Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean:284; Mathlib/Topology/Category/Profinite/Nobeling/Successor.lean:565; Mathlib/Condensed/CartesianClosed.lean:11; Mathlib/Condensed/Module.lean:14; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:60; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:61; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:62; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:64; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:66; Mathlib/RingTheory/QuotSMulTop.lean:10; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:56; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:58; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:60; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:108; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:111; Mathlib/RingTheory/Artinian/Module.lean:231; Mathlib/LinearAlgebra/TensorProduct/Vanishing.lean:8. Exact functor localization and abstract triangulated Hom statements do not identify the two project coefficient categories or their actual point-fibre restriction maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational localization transports integral t exact direct image and derived fibre restriction isomorphisms to exact constructible hearts",
+   "results": "[leansearch] OK 8 hit(s); isIntegral_localization'; ModuleCat.localizedModule_functor_map_exact; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; instIsLocalizationIntPosRat; DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic. Exact functor localization and abstract triangulated Hom statements do not identify the two project coefficient categories or their actual point-fibre restriction maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invert uniformizer on integral constructible categories preserving exact hearts stalk and fibre cohomology comparisons",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.PresheafedSpace.stalkMap.isIso; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val; ModuleCat.Tilde.stalkIso_inv; CategoryTheory.GrothendieckTopology.Point.W_isInvertedBy_presheafFiber; CategoryTheory.Equivalence.sheafCongr_inverse; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; smoothSheafCommRing.forgetStalk; CategoryTheory.Localization.liftNatIso_inv. Exact functor localization and abstract triangulated Hom statements do not identify the two project coefficient categories or their actual point-fibre restriction maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw rationalization of integral constructible adic categories preserves t exact functors and interprets geometric fibre isomorphisms by exact point sections",
+   "results": "Actual logged search: 8 hits; Condensed.profiniteSolid, AdicCompletion.map_exact, Condensed.profiniteSolidification, Condensed.profiniteSolidCounit, localCohomology.diagram, Condensed.profiniteFree, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid. Hits concern abstract localization, algebraic adic completion or condensed modules; none compares these two project integral categories and the specified fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalization|[Ll]ocalized.*[Tt][Ss]tructure|[Pp]ro[Ee]tale.*[Ss]ections",
+   "results": "Actual logged search: 0 hits; none. Hits concern abstract localization, algebraic adic completion or condensed modules; none compares these two project integral categories and the specified fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invert a uniformizer in a constructible derived category and obtain an exact functor on its heart from an integral t exact functor",
+   "results": "Actual logged search: 8 hits; CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedInverse, CategoryTheory.Localization.lift, CategoryTheory.Functor.instIsLeftDerivedFunctorLiftHomFac, DerivedCategory.Q, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, CategoryTheory.Localization.liftingConstructionLift, CategoryTheory.Functor.instIsRightDerivedFunctorLiftInvFac, CategoryTheory.MorphismProperty.FunctorsInverting. Hits concern abstract localization, algebraic adic completion or condensed modules; none compares these two project integral categories and the specified fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"IsTriangulated\"",
+   "results": "Actual logged search: 0 hits; none. Hits concern abstract localization, algebraic adic completion or condensed modules; none compares these two project integral categories and the specified fibre maps.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-finite-adic-direct-image",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Proof of lem-zl-finite-pushforward, first sentence: “g_* is exact ...; hence H^j(Rg_*K)=g_*H^j(K)”, and the following finite stalk formula. This item supplies rationalization and point-section interpretation of the integral restrictions in parent lem-zl-finite-adic-direct-image steps 3–4.",
+   "via": [
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-finite-rational-heart-comparison",
+  "worker": "stage1",
+  "summary": "Reused the existing integral stratified-perfect characterization to identify the two full integral categories, then their literal raw rationalizations. Localized the supplied functor and actual comparison maps, proved t-exactness and exactness on hearts, verified completed pullback bounds and exact point sections, and identified both resulting arrows by the project cohomology and stalk definitions. No statement correction or new node is needed.",
+  "blueprint": "Realizes the rational-coefficient finite exactness and finite-stalk interpretation needed by the first two sentences of the blueprint proof of lem-zl-finite-pushforward; parent lem-zl-finite-adic-direct-image steps 3–4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic completed-coefficient category comparison, including compatible witnesses and the exact equality with the smooth-purity integral definition; the unit has no competing coefficient-category comparison."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic scalar-localization t-structure and integral heart representatives, not a replacement of the finite-morphism argument."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic extension of supplied linear exact functors and natural transformations to raw rational categories."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart criterion for short exact sequences, used to turn t-exactness into exactness."
+   },
+   {
+    "node": "lem-per-integral-pullback-bounds",
+    "why": "Generic completed-pullback bound preservation for arbitrary scheme morphisms; used only to interpret the three pullbacks on hearts."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact point-section functor on the pro-etale point, needed before taking degree zero."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Coefficient-ring identification E=O_E[1/varpi] used in the elementary fraction calculation."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finite-dimensionality of finite-type schemes over a field, verifying hypotheses of the coefficient tools."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-per-integral-pullback-bounds",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-O1-384b8216f",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-384b8216f (reviewer sub-agent of L); spot-checked: I read the whole delivery and judge the mathematics sound. Two small repairs are in the fixes/ file for lem-zl-finite-rational-heart-comparison. Shape: this is an ordinary one-level split with no new nodes. Statement and stmt_deps are unchanged. Live and side-live still have the item unsplit with the same statement, so it is not superseded. The re-split note belongs to the parent, not to this item. No SGA citation, no cycle (DFS from all dependencies never reaches the item), and proof_deps equals the union of uses. Sources: Bhatt–Scholze Prop 6.8.11(3), 6.8.14(2) and Rem 6.8.15 support the raw rationalization (no Karoubi completion). Blueprint main-20261015 lem-zl-finite-pushforward: the first two sentences of its proof are what the parent's step 3 takes from the item with T=F_{f,D}. The base-change morphism (exchange counit) and the counit-germ restrictions match. The coefficient category is identified through lem-weil-pbc-integral-stratified-perfect-characterization, whose last sentence covers def-weil-derived-complete-integral-detailed. Steps: Step 1's finite-type, noetherian, finite-dimension and ℓ-invertible hypotheses all check. Step 2: prop-weil-localized-tstructure's classes equal those of def-weil-constructible-standard-tstructure, because both use the ambient cohomology sheaves. Step 3: prop-weil-pbc-rational-transport localizes T and β, ρ correctly. Step 4: t-exactness plus lem-weil-heart-short-exact-triangles(4) gives exactness on the heart. Step 5: the projection-normalized pullback comparison plus lem-per-integral-pullback-bounds is applied to y, v and each x, including the empty case. Step 6: the hand-written proof that localization is exact is correct and elementary. Step 7: the stalk definition and H^0(S,−)=H^0 Fib_s(Ra_{S*}) give the three terms; S is separated and finite type. The eight tool_uses are accepted as generic tools. Faults fixed: (1) the statement claims P_y is finite with unique lifts, but no step proved it; step 1 now proves it (C⊗_B k finite-dimensional, so finitely many k-points, which are exactly the lifts through S). (2) Step 7's source.place said 'Remark 6.8.15' with the blueprint file as document; it now names the first two sentences of the lem-zl-finite-pushforward proof.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRationalHeartComparison",
+  "declaration": "WeilConjectures.FiniteRationalHeart.rational_heart_comparison",
+  "declarations": [
+   "WeilConjectures.FiniteRationalHeart.pull",
+   "WeilConjectures.FiniteRationalHeart.extension",
+   "WeilConjectures.FiniteRationalHeart.categories",
+   "WeilConjectures.FiniteRationalHeart.coefficients",
+   "WeilConjectures.FiniteRationalHeart.finiteAdj",
+   "WeilConjectures.FiniteRationalHeart.finiteExchange",
+   "WeilConjectures.FiniteRationalHeart.finiteGerm",
+   "WeilConjectures.FiniteRationalHeart.TowerComparison",
+   "WeilConjectures.FiniteRationalHeart.TowerComparison.reduction",
+   "WeilConjectures.FiniteRationalHeart.fibreOver",
+   "WeilConjectures.FiniteRationalHeart.fibreFiniteType",
+   "WeilConjectures.FiniteRationalHeart.fibreQuasiCompact",
+   "WeilConjectures.FiniteRationalHeart.fibreSeparated",
+   "WeilConjectures.FiniteRationalHeart.reduction",
+   "WeilConjectures.FiniteRationalHeart.Lifts",
+   "WeilConjectures.FiniteRationalHeart.lifts_finite",
+   "WeilConjectures.FiniteRationalHeart.lift",
+   "WeilConjectures.FiniteRationalHeart.lift_projections",
+   "WeilConjectures.FiniteRationalHeart.pointH0",
+   "WeilConjectures.FiniteRationalHeart.termMap",
+   "WeilConjectures.FiniteRationalHeart.Restrictions",
+   "WeilConjectures.FiniteRationalHeart.rpull",
+   "WeilConjectures.FiniteRationalHeart.pullIso",
+   "WeilConjectures.FiniteRationalHeart.ordinaryProjection",
+   "WeilConjectures.FiniteRationalHeart.OrdinaryComparison",
+   "WeilConjectures.FiniteRationalHeart.ordinaryIso",
+   "WeilConjectures.FiniteRationalHeart.ordinaryMap",
+   "WeilConjectures.FiniteRationalHeart.raw_extension",
+   "WeilConjectures.FiniteRationalHeart.point_sections",
+   "WeilConjectures.FiniteRationalHeart.rational_heart_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteRationalHeartComparison.lean",
+  "statement": "theorem rational_heart_comparison (T : sfIntegralConstructibleCategory l E X ⥤ sfIntegralConstructibleCategory l E Y) [T.Additive] [T.Linear (Padic.coefficientExtensionIntegers l E)] [T.CommShift ℤ] [T.IsTriangulated] (hT : ∀ (b : Bool) (n : ℤ) (K : sfIntegralConstructibleCategory l E X), sfIntegralStandardClass l E X b n K → sfIntegralStandardClass l E Y b n (T.obj K)) (H : sfIntegralConstructibleCategory l E (pullback f y) ⥤ sfIntegralConstructibleCategory l E (Spec (.of D.k))) [H.Additive] [H.Linear (Padic.coefficientExtensionIntegers l E)] (cT : ∀ K, TowerComparison l E f T K) (cH : ∀ K, TowerComparison l E (pullback.snd f y) H K) (R : Restrictions D l hl E f y T H cT cH) : (∀ (b : Bool) (n : ℤ) (K : sfRationalConstructibleCategory l E X), sfRationalStandardClass l E X b n K → sfRationalStandardClass l E Y b n ((extension l E T).obj K)) ∧ (rpull D l hl E y).IsTExact (sfRationalStandardTStructure l E Y D hl) (sfRationalStandardTStructure l E (Spec (.of D.k)) D hl) ∧ (rpull D l hl E (pullback.fst f y)).IsTExact (sfRationalStandardTStructure l E X D hl) (sfRationalStandardTStructure l E (pullback f y) D hl) ∧ (∀ x : Lifts D f y, (rpull D l hl E x.val).IsTExact (sfRationalStandardTStructure l E X D hl) (sfRationalStandardTStructure l E (Spec (.of D.k)) D hl)) ∧ (∃ Fh : sfRationalHeart l E X ⥤ sfRationalHeart l E Y, Fh ⋙ (sfRationalHeartProperty l E Y).ι = (sfRationalHeartProperty l E X).ι ⋙ extension l E T ∧ PreservesFiniteLimits Fh ∧ PreservesFiniteColimits Fh) ∧ ∃ c : ∀ K, OrdinaryComparison D l hl E f y H cH K, ∃ βE : extension l E T ⋙ rpull D l hl E y ≅ rpull D l hl E (pullback.fst f y) ⋙ extension l E H, ∃ ρE : ∀ K : sfRationalConstructibleCategory l E X, (extension l E H).obj ((rpull D l hl E (pullback.fst f y)).obj K) ≅ ⨁ fun x : Lifts D f y ↦ (rpull D l hl E x.val).obj K, (∀ K : sfRationalConstructibleCategory l E X, βE.app K = pullIso D l hl E y ((extension l E T).obj K) ≪≫ (sfRationalConstructibleLocalization l E (Spec (.of D.k))).mapIso (R.beta.app K.obj) ≪≫ ((extension l E H).mapIso (pullIso D l hl E (pullback.fst f y) K)).symm) ∧ (∀ (K : sfRationalConstructibleCategory l E X) (x : Lifts D f y), (ρE K).hom ≫ biproduct.π (fun z : Lifts D f y ↦ (rpull D l hl E z.val).obj K) x ≫ (pullIso D l hl E x.val K).hom = (extension l E H).map (pullIso D l hl E (pullback.fst f y) K).hom ≫ (sfRationalConstructibleLocalization l E (Spec (.of D.k))).map ((R.rho K.obj).hom ≫ biproduct.π (fun z : Lifts D f y ↦ (pull D l hl E z.val).obj K.obj) x)) ∧ (∀ (K L : sfRationalConstructibleCategory l E X) (a : K ⟶ L), (extension l E H).map ((rpull D l hl E (pullback.fst f y)).map a) ≫ (ρE L).hom = (ρE K).hom ≫ biproduct.map (fun x : Lifts D f y ↦ (rpull D l hl E x.val).map a)) ∧ ∃ a : ∀ F : sfRationalHeart l E X, (pointH0 D l hl E).obj ((rpull D l hl E y).obj ((extension l E T).obj F.obj)) ≅ rationalOrdinaryCohomology D l hl E (pullback f y) ((rpull D l hl E (pullback.fst f y)).obj F.obj) 0, ∃ b : ∀ F : sfRationalHeart l E X, rationalOrdinaryCohomology D l hl E (pullback f y) ((rpull D l hl E (pullback.fst f y)).obj F.obj) 0 ≅ ⨁ fun x : Lifts D f y ↦ (pointH0 D l hl E).obj ((rpull D l hl E x.val).obj F.obj), (∀ F : sfRationalHeart l E X, a F = (pointH0 D l hl E).mapIso (βE.app F.obj) ≪≫ (pointH0 D l hl E).mapIso (ordinaryIso D l hl E f y H cH c F.obj) ∧ (b F).hom = (pointH0 D l hl E).map (ordinaryIso D l hl E f y H cH c F.obj).inv ≫ (pointH0 D l hl E).map (ρE F.obj).hom ≫ Functor.biproductComparison (pointH0 D l hl E) (fun x : Lifts D f y ↦ (rpull D l hl E x.val).obj F.obj)) ∧ (∀ (F G : sfRationalHeart l E X) (r : F ⟶ G), ((extension l E T) ⋙ rpull D l hl E y ⋙ pointH0 D l hl E).map r.hom ≫ (a G).hom = (a F).hom ≫ ordinaryMap D l hl E f y H cH c r.hom) ∧ (∀ (F G : sfRationalHeart l E X) (r : F ⟶ G), ordinaryMap D l hl E f y H cH c r.hom ≫ (b G).hom = (b F).hom ≫ biproduct.map (fun x : Lifts D f y ↦ (rpull D l hl E x.val ⋙ pointH0 D l hl E).map r.hom)) ∧ (∀ (F G : sfRationalHeart l E X) (r : F ⟶ G) (z : E), ordinaryMap D l hl E f y H cH c ((sfRationalCoefficientEquiv l E).symm z • r.hom) = z • ordinaryMap D l hl E f y H cH c r.hom)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The node clauses are stated jointly by categories, coefficients, lifts_finite, lift_projections, raw_extension, point_sections, and rational_heart_comparison. Remaining declarations name the actual normalized maps and supplied comparison packages of this node. The integral coefficient comparison uses the existing projection-normalized transport between its two coefficient encodings. No statement correction. Reviewer fix: the strict pullback reduction is the def-owned integralSystemPullbackReductionIso (def-sf-integral-pullback-reduction-comparison) and the finite composition comparisons in finiteExchange/finiteGerm are proEtaleConstantRingPullbackComposition (pur713-def-pullback-comparison), replacing their definitional aliases integralPullbackReductionIso and integralFiniteCanonicalPullbackComposition from the theorem modules of lem-pod-integral-pullback-composition and lem-weil-pbc-proetale-derived-pullback-composition.",
+  "fixed_by": "NT-stage2-cc-46e1736fe"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46e1736fe",
+  "group": "NC",
+  "result": "fix",
+  "note": "Every hypothesis and clause matches the node: finite f, separated finite type over k; T exact, O_E-linear and preserving both standard halves; tower comparison keeping every projection; beta/rho reductions pinned to finiteExchange/finiteGerm (exchange orientation checked); unique t-exact raw extension; exact heart restriction Fh; t-exact y, v and x pullbacks; betaE/rhoE pinned to the localized R.beta/R.rho; the three H0 arrows given by formulas through pointH0 (the localDerivedStalk convention) and rationalOrdinaryCohomology 0; naturality and E-linearity; point sections exact with biproduct isos. Edge cases covered: empty fibre, zero objects, n=0, a y not over k; no universe restriction beyond the dependencies. No hollow definitions, all theorems sorry, docstrings present, statement verbatim, both report sections present. FIX: replaced the theorem-module aliases integralPullbackReductionIso and integralFiniteCanonicalPullbackComposition by the definition-owned integralSystemPullbackReductionIso (def-sf-integral-pullback-reduction-comparison) and proEtaleConstantRingPullbackComposition (pur713-def-pullback-comparison), equal by definition; owner modules imported; nt_compile clean in 21.4 s. Advisory, since a fix cannot change stmt_deps: the cited def-trf-integral-pullback-composition-family is unused; ScalarLocalization.transport is owned only by the proposition prop-weil-pbc-rational-transport (already a proof_dep); several definition owners are uncited (def-weil-derived-pullback-tensor-hom, def-weil-pbc-proetale-operations and others)."
+ }
+}

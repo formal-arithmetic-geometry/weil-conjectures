@@ -1,0 +1,464 @@
+{
+ "id": "lem-sfb-space-derived-chow-neighbourhood",
+ "kind": "statement",
+ "title": "Derived Chow etale neighbourhood with a pseudo-coherent kernel",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for objects with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived pullback and tensor use K-flat resolutions; derived direct image uses K-injective resolutions. Pseudo-coherent means etale locally represented by a bounded-above complex of finite free structure modules [def-sfb-space-pseudocoherent-complex]. Let $A$ be a commutative ring, let $X\\to\\operatorname{Spec}A$ be separated and of finite presentation, and let $x\\in|X|$. Separated means that the diagonal is a closed immersion; finite presentation means quasi-compact, quasi-separated and locally of finite presentation on etale scheme charts. There exist an integer $n\\geq0$, a finitely presented closed immersion $h:Z\\hookrightarrow T=X\\times_A P$, where $P=\\mathbf P^n_A$ [def-pc-projective-space-twist], a point $z\\in|Z|$, an open subscheme $V\\subset P$, and $E\\in D(\\mathcal O_T)$ with the following properties. Put $p:T\\to X$, $q:T\\to P$, $b=p\\circ h$, $c=q\\circ h$, and $W=c^{-1}(V)$. The restriction $j=c|_W:W\\hookrightarrow V$ is a finitely presented closed immersion (so $W$ is a scheme), $b|_W:W\\to X$ is etale, $z\\in W$ and $b(z)=x$. The object $E$ is pseudo-coherent and all its cohomology sheaves vanish off $h(Z)$, and there is an isomorphism $E|_{X\\times_A V}\\simeq(h_*\\mathcal O_Z)[0]|_{X\\times_A V}$ in $D(\\mathcal O_{X\\times_A V})$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTR, lemma-derived-chow, clauses (1)--(5); finite presentation of j as noted in Tag 0CTS, lemma-compute-Fourier-Mukai-for-derived-chow."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-pseudocoherent-complex",
+  "def-pc-projective-space-twist",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology",
+  "def-sfb-space-module-support",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-pullback",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-chow-projective-space-open"
+ ],
+ "proof": [
+  {
+   "text": "Order the finitely generated $\\mathbf Z$-subalgebras $A_0\\subset A$ by inclusion. The inverse-limit presentation [lemma-nagata-noetherian-inverse-system-affine], followed by the essential-surjectivity clause of [lem-sfb-fp-space-limit-category], gives a finitely presented algebraic space $X_0/A_0$ whose pullback is $X$. After enlarging $A_0$, [lem-sfb-space-descend-separated] makes $X_0/A_0$ separated. Let $x_0$ be the image of $x$. The scheme $S_0=\\operatorname{Spec}A_0$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to its finite-type map to $\\operatorname{Spec}\\mathbf Z$. We first construct the required data over $S_0$, then pull them back; the last steps verify every assertion under this arbitrary base change.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-space-descend-separated",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, first paragraph (07SK and 0851)."
+   }
+  },
+  {
+   "text": "The space $X_0$ is quasi-compact and quasi-separated by [lem-sfb-space-fp-qcqs-source]. Choose a surjective affine etale chart $U_0\\to X_0$ using [lem-sfb-qc-space-affine-etale-atlas], and choose $u_0\\in U_0$ above $x_0$. Since finite presentation is tested on etale scheme charts, $U_0\\to S_0$ is locally of finite presentation; between affine schemes this is finite type. Thus [lem-chow-affine-immersion] gives an immersion $e:U_0\\to P_0=\\mathbf P^n_{A_0}$ through a closed immersion into its standard affine chart. Let $Y_0\\hookrightarrow P_0$ be the scheme-theoretic image, which exists by [lemma-nagata-scheme-image-ideal-qc]. The scheme $P_0$ is proper over $S_0$ by [lemma-nagata-projective-space-base-change-proper], hence separated by [def-weil-proper-morphism] and quasi-separated. The immersion $e$ is quasi-compact: $U_0$ is affine and $P_0$ is quasi-separated, so [lem-sfb-space-qcqs-permanence] applies. By [lemma-nagata-immersion-open-in-scheme-image], identify $U_0$ with a quasi-compact open subscheme $O_0\\subset Y_0$. Choose an open $V_0\\subset P_0$ with $V_0\\cap Y_0=O_0$; this is precisely the subspace-topology characterization of an open in the closed subscheme $Y_0$.",
+   "uses": [
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-chow-affine-immersion",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sfb-space-qcqs-permanence",
+    "lemma-nagata-immersion-open-in-scheme-image",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, second paragraph: affine chart and its projective closure."
+   }
+  },
+  {
+   "text": "The projection $X_0\\times_{S_0}Y_0\\to Y_0$ is separated: its diagonal is the pullback of the closed diagonal of $X_0/S_0$ (on a scheme test this just pulls back the defining ideal). The pair consisting of $U_0\\to X_0$ and $U_0=O_0\\hookrightarrow Y_0$ is a section over $O_0$. Apply [lem-sfb-space-partial-section-schematic-image] to obtain its smallest closed image $Z_0\\subset X_0\\times_{S_0}Y_0$, isomorphic to $O_0$ over $O_0$. Compose its closed inclusion with $X_0\\times Y_0\\hookrightarrow T_0=X_0\\times P_0$ to obtain $h_0$. These are closed immersions on every scheme test: base change pulls back ideals and composition is the quotient by the inverse-image ideal. Consequently $W_0=c_0^{-1}(V_0)\\simeq O_0\\simeq U_0$, $j_0:W_0\\to V_0$ is the closed immersion $Y_0\\cap V_0\\hookrightarrow V_0$, and $b_0|_{W_0}$ is the chosen etale chart. The image of $u_0$ is a point of $W_0$ above $x_0$. The same smallest-image property also makes $Z_0$ the schematic closure of this graph in $T_0$, since any closed subspace of $T_0$ containing the graph intersects $X_0\\times Y_0$ in a closed subspace containing it.",
+   "uses": [
+    "lem-sfb-space-partial-section-schematic-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, second paragraph, application of 0CP3."
+   }
+  },
+  {
+   "text": "The scheme $P_0$ has a finite standard affine cover by polynomial algebras over $A_0$ [lem-weil-pbc-projective-space-standard-charts]; its charts are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The space $T_0$ is quasi-compact and quasi-separated by [lem-sfb-space-qcqs-source-products], since $X_0,P_0,S_0$ are so. The base changes of the chart $U_0\\to X_0$ to these projective charts are etale charts of $T_0$ represented by affine schemes of finite type over $A_0$, hence Noetherian by the same scheme theorem. Thus $T_0$ is Noetherian in the etale-chart sense. Both closed subspaces $Z_0\\subset T_0$ and $Y_0\\subset P_0$ are Noetherian by [lem-sfb-space-closed-coherent-modules]; $P_0$ is Noetherian, being covered by finitely many Noetherian affine charts and separated over the affine $S_0$.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-space-qcqs-source-products",
+    "lem-sfb-space-closed-coherent-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, second and third paragraphs: Noetherian ambient spaces."
+   }
+  },
+  {
+   "text": "The structure sheaf of a Noetherian space is coherent (on affine etale charts it is a Noetherian ring). By [lem-sfb-space-closed-coherent-modules], $F_0=h_{0,*}\\mathcal O_{Z_0}$ is coherent with support $h_0(Z_0)$. Take $E_0=F_0[0]$; restriction gives $E_0|_{X_0\\times V_0}=h_{0,*}\\mathcal O_{Z_0}[0]|_{X_0\\times V_0}$ literally. Pseudo-coherence in the sense of [def-sfb-space-pseudocoherent-complex]: for an object $V\\to T_0$ of the small etale model, the affine opens $\\operatorname{Spec}R$ of the schemes $V\\times_{T_0}U_k$, with $U_k$ the finite-type affine charts of step 4, generate a covering sieve; each $R$ is of finite type over the Noetherian ring of $U_k$, hence Noetherian [lem-weil-pbc-finite-type-over-noetherian]. On such a chart, [lem-sfb-affine-etale-derived-module-realization] (equivalence, cohomology comparison, faithfulness) gives $F_0|_{\\operatorname{Spec}R}\\simeq a_R(N)$ with $N=\\Gamma(\\operatorname{Spec}R,F_0)$, finitely generated by coherence on this etale chart. As $R$ is Noetherian, successive surjections $R^{r_0}\\to N$, $R^{r_1}\\to\\ker$, ... give a resolution $L^\\bullet\\to N$ by finite free modules, $L^n=0$ for $n>0$. Exactness of $a_R$ makes $a_R(L^\\bullet)\\to F_0|_{\\operatorname{Spec}R}$ a quasi-isomorphism with terms $a_R(R^{r})=\\mathcal O^{\\oplus r}$. So $E_0$ is pseudo-coherent. Coherent modules are finitely presented, so [lem-sfb-space-closed-structure-finite-presentation] makes $h_0$ and $Y_0\\hookrightarrow P_0$ (closed in the Noetherian $P_0$) finitely presented closed immersions; the ideal of $j_0:W_0=Y_0\\cap V_0\\hookrightarrow V_0$ is the restriction of that of $Y_0$, still of finite type, so the same theorem makes $j_0$ finitely presented. This verifies all required properties over $A_0$.",
+   "uses": [
+    "lem-sfb-space-closed-coherent-modules",
+    "def-sfb-space-pseudocoherent-complex",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-closed-structure-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, third paragraph (08IK); finite presentation as in Tag 0CTS."
+   }
+  },
+  {
+   "text": "Pull $P_0,V_0,Z_0$ back from $A_0$ to $A$ and retain the same integer $n$. Projective base change identifies $P_0\\times_{A_0}A$ with $P=\\mathbf P^n_A$ [lemma-nagata-projective-space-base-change-pullback]. The closed immersions $h_0,j_0$ pull back to closed immersions $h,j$; their finite presentation persists because, on any affine scheme test, a finite generating list for the defining ideal pulls back to a generating list for the inverse-image ideal, and closed immersions are affine and quasi-separated. Associativity of fibre products gives $W=c^{-1}(V)=W_0\\times_{X_0}X$. The map $W\\to X$ is etale: it is representable, and on every scheme test it is a scheme base change of the etale chart $W_0\\to X_0$; apply [lem-weil-pbc-etale-scheme-base-change]. To choose $z$, apply [lem-a1-space-fibre-product-point] with $E=X_0$, $C=\\operatorname{Spec}\\kappa(x)$ and $U=W_0$, to the point $x$ and the point corresponding to $u_0$. It supplies a point of $W_0\\times_{X_0}\\operatorname{Spec}\\kappa(x)$, hence a point $z\\in W$ above $x$. Existence, rather than uniqueness, is needed.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, first paragraph, pullback of geometric data (correcting the uniqueness slip)."
+   }
+  },
+  {
+   "text": "Write $a_T:T\\to T_0$ and define $E=La_T^*E_0$ using [def-sfb-space-derived-pullback]. The local finite-free characterization [def-sfb-space-pseudocoherent-complex] represents $E_0$ etale locally by a bounded-above finite free complex. Such a complex is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Termwise tensor pullback therefore computes $E$ there and remains bounded-above finite free, proving pseudo-coherence. For support, the complement of $h(Z)$ is the inverse image of the complement of $h_0(Z_0)$: on scheme tests this is the equality $V(I\\mathcal O_T)=a_T^{-1}V(I)$. On this open $E_0$ restricts to zero, so its derived pullback is zero. Restriction and pullback compose by the specified comparisons of [def-sfb-space-derived-pullback]. Thus every cohomology sheaf of $E$ vanishes off $h(Z)$.",
+   "uses": [
+    "def-sfb-space-derived-pullback",
+    "def-sfb-space-pseudocoherent-complex",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, first paragraph; pseudo-coherent pullback as in 08H4."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-relative-flat-closed-kernel-base-change] with $S_0=\\operatorname{Spec}A_0$, $S=\\operatorname{Spec}A$, $Y_0=V_0$, and the closed immersion $i_0:W_0\\hookrightarrow X_0\\times_{A_0}V_0$. Its relative flatness assumption holds because $W_0\\to X_0$ is etale and etale maps are flat by [def-weil-etale-morphism], tested on charts. The map $V_0\\to S_0$ is flat: standard projective charts are polynomial algebras [lem-weil-pbc-projective-space-standard-charts], whose projections are flat by [lem-nagata-polynomial-projection-flat]; restricting further to opens preserves flatness on local rings. Writing $a_V:X\\times V\\to X_0\\times V_0$ for the restricted projection, the comparison gives $La_V^*(i_{0,*}\\mathcal O_{W_0}[0])\\simeq i_*\\mathcal O_W[0]$. Restriction and derived composition [def-sfb-space-derived-pullback] identify the left object with $E|_{X\\times V}$. Ordinary direct image restricted to a target open is direct image of the restriction, as is seen from the defining chart limits [def-trf-space-etale-module-functors]; hence $i_*\\mathcal O_W[0]=(h_*\\mathcal O_Z)[0]|_{X\\times V}$. This proves the asserted derived isomorphism on the whole open $X\\times_A V$ and completes the construction.",
+   "uses": [
+    "lem-sfb-space-relative-flat-closed-kernel-base-change",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-nagata-polynomial-projection-flat",
+    "def-sfb-space-derived-pullback",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTR, lemma-derived-chow, first paragraph: Tor independence 0CTQ and derived base change 08IR (the required kernel clause is (4))."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-sfb-fp-space-limit-category",
+  "lem-sfb-space-descend-separated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-chow-affine-immersion",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-sfb-space-qcqs-permanence",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "lem-sfb-space-partial-section-schematic-image",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-sfb-space-qcqs-source-products",
+  "lem-sfb-space-closed-coherent-modules",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-closed-structure-finite-presentation",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-a1-space-fibre-product-point",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-pseudocoherent-complex",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-space-relative-flat-closed-kernel-base-change",
+  "def-weil-etale-morphism",
+  "lem-nagata-polynomial-projection-flat",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0CTR, lemma-derived-chow, proof; kernel finite presentation as in Tag 0CTS."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Chow lemma for separated finitely presented algebraic spaces with a pseudo coherent graph kernel and an etale neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic space local etale chart embedded in projective space and extended by a pseudo coherent kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Chow lemma for separated finitely presented algebraic spaces with a pseudo coherent graph kernel and an etale neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any quasi-separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every proper morphism of schemes is separated, i.e., if $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is separated.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace Y] : QuasiSeparated f ↔ QuasiSeparatedSpace X\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-separated if the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) [IsFinite (f ≫ g)] [IsSeparated g] : IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pseudo\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.mkPseudoArrayLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (elements : Array Lean.FVarId) (typ : Lean.Expr) (typLevel : Lean.Level) : Lean.Compiler.LCNF.Simp.ConstantFold.FolderM (Lean.Compiler.LCNF.LetValue Lean.Compiler.LCNF.Purity.pure)\", \"doc\": \"Turn an `#[a, b, c]` into:\\n```\\nlet _x.12 := 3\\nlet _x.8 := @Array.mkEmpty _ _x.12\\nlet _x.22 := @Array.push _ _x.8 x\\nlet _x.24 := @Array.push _ _x.22 y\\nlet _x.26 := @Array.push _ _x.24 z\\n_x.26\\n```\"}\n  {\"name\": \"Lean.Compiler.LCNF.Simp.ConstantFold.getPseudoListLiteral\", \"module\": \"Lean.Compiler.LCNF.Simp.ConstantFold\", \"type\": \" (fvarId : Lean.FVarId) : Lean.Compiler.LCNF.CompilerM (Option (List Lean.FVarId × Lean.Expr × Lean.Level))\", \"doc\": \"Turns an expression chain of the form\\n```\\nlet _x.1 := @List.nil _\\nlet _x.2 := @List.cons _ a _x.1\\nlet _x.3 := @List.cons _ b _x.2\\nlet _x.4 := @List.cons _ c _x.3\\nlet _x.5 := @List.cons _ d _x.4\\nlet _x\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.LaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on a lax functor that promotes a lax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfLax`.\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapIdIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).inv = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the lax unity constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mapCompIso_inv\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : (self.mapCompIso f g).inv = F.mapComp f g\", \"doc\": \"`mapCompIso` gives rise to the lax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.LaxFunctor.PseudoCore.mk\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Lax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.LaxFunctor B C} (mapIdIso : (a : B) → F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)) (mapCompIso : {a b c : B} → (f : a ⟶ b) → (g : b ⟶ c) → F.map (C\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] (F : CategoryTheory.OplaxFunctor B C) : Type (max (max u₁ v₁) w₂)\", \"doc\": \"A structure on an oplax functor that promotes an oplax functor to a pseudofunctor.\\n\\nSee `Pseudofunctor.mkOfOplax`.\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) (a : B) : F.map (CategoryTheory.CategoryStruct.id a) ≅ CategoryTheory.CategoryStruct.id (F.obj a)\", \"doc\": \"The isomorphism giving rise to the oplax unity constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapCompIso\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a b c : B} (f : a ⟶ b) (g : b ⟶ c) : F.map (CategoryTheory.CategoryStruct.comp f g) ≅ CategoryTheory.CategoryStruct.comp (F.map f) (F.map g)\", \"doc\": \"The isomorphism giving rise to the oplax functoriality constraint\"}\n  {\"name\": \"CategoryTheory.OplaxFunctor.PseudoCore.mapIdIso_hom\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Functor.Oplax\", \"type\": \" {B : Type u₁} [CategoryTheory.Bicategory B] {C : Type u₂} [CategoryTheory.Bicategory C] {F : CategoryTheory.OplaxFunctor B C} (self : F.PseudoCore) {a : B} : (self.mapIdIso a).hom = F.mapId a\", \"doc\": \"`mapIdIso` gives rise to the oplax unity constraint\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|Fourier.?Mukai|derived.?Chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; only ordinary scheme morphisms, underived sheaf functors, general derived-category existence, or pseudofunctors; none states this algebraic-space theorem or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Chow lemma for separated finitely presented algebraic spaces with pseudo coherent kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space affine etale neighbourhood and pseudo coherent extension in projective space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{P : MorphismProperty Scheme} {Q : AffineTargetMorphismProperty} :\\n  HasAffineProperty P Q ↔ IsZariskiLocalAtTarget P ∧ Q = of P\", \"doc\": \"A morphism property $ P $ has an affine property $ Q $ if and only if $ P $ is Zariski local at the target and $ Q $ is the restriction of $ P $ to morphisms with affine targets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chow\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.chow|chow.*pseudo|pseudo.*chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend structure sheaf of an etale chart to a pseudo coherent complex on product with projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.SheafedSpace CommRingCat\", \"doc\": \"The sheafed space constructed on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, where the underlying topological space is the projective spectrum equipped with the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Chow lemma for separated finitely presented algebraic spaces with pseudo coherent kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space affine etale neighbourhood and pseudo coherent extension in projective space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{P : MorphismProperty Scheme} {Q : AffineTargetMorphismProperty} :\\n  HasAffineProperty P Q ↔ IsZariskiLocalAtTarget P ∧ Q = of P\", \"doc\": \"A morphism property $ P $ has an affine property $ Q $ if and only if $ P $ is Zariski local at the target and $ Q $ is the restriction of $ P $ to morphisms with affine targets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chow\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.chow|chow.*pseudo|pseudo.*chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend structure sheaf of an etale chart to a pseudo coherent complex on product with projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.SheafedSpace CommRingCat\", \"doc\": \"The sheafed space constructed on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, where the underlying topological space is the projective spectrum equipped with the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Chow lemma for separated finitely presented algebraic spaces with pseudo coherent kernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsFinite (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsFinite f\", \"doc\": \"If the composition of morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ is a finite morphism, and $ g $ is separated, then $ f $ is a finite morphism.\"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsAffineHomIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsAffineHom @AlgebraicGeometry.IsSeparated\", \"doc\": \"If $ f: Y \\\\to Z $ is an affine morphism of schemes and $ g: X \\\\to Y $ is a separated morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsAffineHom (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.IsSeparated g],\\n  AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If the composition $ g \\\\circ f $ is an affine morphism and $ g $ is a separated morphism of schemes, then $ f $ is an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"@AlgebraicGeometry.IsProper =\\n  @AlgebraicGeometry.IsSeparated ⊓ @AlgebraicGeometry.UniversallyClosed ⊓ @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic space affine etale neighbourhood and pseudo coherent extension in projective space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": HasAffineProperty @QuasiSeparated (fun X _ _ _ ↦ QuasiSeparatedSpace X)\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.affineOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic\", \"type\": \": (Proj 𝒜).AffineOpenCover\", \"doc\": \"Given a graded commutative ring $\\\\mathcal{A}$, if the irrelevant ideal (elements with zero degree component) is contained in the ideal generated by homogeneous elements $\\\\{f_i\\\\}$ of positive degree, t\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"{P : MorphismProperty Scheme} {Q : AffineTargetMorphismProperty} :\\n  HasAffineProperty P Q ↔ IsZariskiLocalAtTarget P ∧ Q = of P\", \"doc\": \"A morphism property $ P $ has an affine property $ Q $ if and only if $ P $ is Zariski local at the target and $ Q $ is the restriction of $ P $ to morphisms with affine targets.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"{P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n  {S : AlgebraicGeometry.Scheme} → AlgebraicGeometry.Scheme.AffineCover P S → ℕ\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\\\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chow\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.chow|chow.*pseudo|pseudo.*chow",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend structure sheaf of an etale chart to a pseudo coherent complex on product with projective space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.toSheafedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.SheafedSpace CommRingCat\", \"doc\": \"The sheafed space constructed on the projective spectrum $\\\\text{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$, where the underlying topological space is the projective spectrum equipped with the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-pseudocoherent-tests-relative",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow.",
+   "via": [
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-derived-chow-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked 0CTR and 0CTS against their local Stacks sources, searched the live Lean library and full DAG/blueprint, retained the Noetherian-approximation and affine-etale-chart closure route. Reused approximation and coherent-module nodes; isolated only the space partial-section and relative-flat closed-kernel tools. Corrected the source proof's unjustified uniqueness of a lifted point and identified the kernel over the whole product open. All new nodes remain statement-only; all searches are actual logged commands.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. The eight steps supply the derived Chow input to 0CTT; latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the inherited higher route.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this noetherian approximation of an affine scheme."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6)."
+   },
+   {
+    "node": "lem-chow-affine-immersion",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this an affine scheme of finite type immerses into projective space."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this mathlib scheme-theoretic image interface."
+   },
+   {
+    "node": "lemma-nagata-immersion-open-in-scheme-image",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this [stacks-project]."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this projective space is proper over its base."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this standard charts and coordinate sections of projective space over a scheme."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this projective space commutes with base change."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this base change of an etale morphism of schemes is etale (stacks 02go)."
+   },
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this pointwise nonemptiness of a fibre product over an algebraic space."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this bounded-above flat complexes on a ringed site are k-flat."
+   },
+   {
+    "node": "lem-nagata-polynomial-projection-flat",
+    "why": "Generic auxiliary theorem used exactly as stated in the derived-Chow construction; no node of the unit supplies this flatness of an arbitrary polynomial projection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-chow-affine-immersion",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-a1-space-fibre-product-point",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-nagata-polynomial-projection-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-b4099ace3",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-b4099ace3 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 0CTR with its whole proof, 0CTS first paragraph, 0CTQ with footnote (spaces-more-morphisms.tex), 0CP3 (spaces-morphisms.tex) and 08IR (spaces-perfect.tex), plus the item, both new nodes and all 28 cited statements. The statement matches 0CTR (1)-(5). The finite presentation of j is proved in 0CTS, so nothing is weakened. Confirmed source error: 0CTR says 'the unique point' mapping to x, but A'=F_3, A=F_9, W'=Spec F_9 gives two points over x. The worker's step 6 uses only existence, via lem-a1-space-fibre-product-point. Both new nodes are true, statement-only tools and not duplicates. The partial-section node is the space form of 0CP3; the existing nagata node covers schemes only, and X_0×Y_0 is a space. The kernel node is the space form of the scheme node 0CTA, built from 0CTQ+08IR, and is needed because X_0 is a space. Fault C4/E6 in step 5: pseudo-coherence was taken from lem-sfb-space-noetherian-pseudocoherent-criterion, whose statement uses the m-wise strictly-perfect notion. The item and step 7 use def-sfb-space-pseudocoherent-complex, a local bounded-above finite-free model, and no cited node bridges the two. Step 4/5 also used, without a node, that the open V_0 of P_0 is Noetherian. FIX: step 5 now proves the def-sfb notion directly. It uses Noetherian affine charts Spec R of V×_{T_0}U_k, lem-sfb-affine-etale-derived-module-realization to get F_0≅a_R(N) with N finite, and a finite free resolution with exactness of a_R. j_0 is finitely presented as the restriction of the finite-type ideal of Y_0⊂P_0. The step-4 sentence was adjusted. In proof_deps the criterion is replaced by the realization node, which is in the same unit and already in the dropped criterion's closure, so no cycle appears. Batch-5: the trf citations are definitions and foundations (def-trf-algebraic-space, def-trf-space-etale-module-functors, lem-trf-space-fibre-products-etale-covers), not steps of the trace-formula or Poincaré proofs, so they are accepted. Off-unit generic tools are recorded in tool_uses and accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceDerivedChowNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_derivedChow_neighbourhood",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.exists_derivedChow_neighbourhood"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceDerivedChowNeighbourhood.lean",
+  "statement": "theorem exists_derivedChow_neighbourhood (A : CommRingCat.{u}) (X : AlgebraicSpace (Spec A)) [∀ Y : AlgebraicSpace (Spec A), HasDerivedCategory.{w} Y.SmallModules] (hsep : IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (hqc : CompactSpace (Point X.obj.obj)) (hqs : MapIsQuasiCompact (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) (hlfp : ∀ (U : Over (Spec A)) (a : yoneda.obj U ⟶ X.obj.obj), IsEtale a → LocallyOfFinitePresentation U.hom) (x : Point X.obj.obj) : ∃ (n : ℕ) (T Z Tᵥ : AlgebraicSpace (Spec A)) (p : T ⟶ X) (q : T ⟶ schemeSpace (chowProjectiveSpace A n)) (h : Z ⟶ T) (V : (chowProjectiveSpace A n).left.Opens) (r : Tᵥ ⟶ T) (qᵥ : Tᵥ ⟶ schemeSpace (chowProjectiveOpen A n V)) (W : Over (Spec A)) (k : schemeSpace W ⟶ Z) (j : W ⟶ chowProjectiveOpen A n V) (z : Point Z.obj.obj) (w₀ : W.left) (E : T.DerivedModules), Nonempty (IsLimit (BinaryFan.mk p.hom.hom q.hom.hom)) ∧ IsRepresentableWith (fun _ _ a ↦ IsClosedImmersion a.left ∧ LocallyOfFinitePresentation a.left) h.hom.hom ∧ IsPullback r.hom.hom qᵥ.hom.hom q.hom.hom (chowProjectiveOpenInclusion A n V).hom.hom ∧ IsPullback k.hom.hom (yoneda.map j) (h ≫ q).hom.hom (chowProjectiveOpenInclusion A n V).hom.hom ∧ IsClosedImmersion j.left ∧ LocallyOfFinitePresentation j.left ∧ IsEtale (k ≫ h ≫ p).hom.hom ∧ schemePointMap k.hom.hom w₀ = z ∧ mapPoint (h ≫ p).hom.hom z = x ∧ T.IsPseudoCoherent E ∧ (∀ i : ℤ, moduleSupport ((T.smallModuleEquivalence.inverse).obj ((DerivedCategory.homologyFunctor T.SmallModules i).obj E)) ⊆ pointImage h.hom.hom) ∧ Nonempty ((spaceDerivedPullback r).obj E ≅ (spaceDerivedPullback r).obj ((DerivedCategory.singleFunctor T.SmallModules 0).obj ((smallModuleDirectImage h).obj (SheafOfModules.unit Z.smallStructureRings))))",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the published small ringed model and existing pseudo-coherence predicate. Products and inverse images are specified by their universal properties; restriction uses the existing canonical derived pullback. Imports and reuses chowProjectiveSpace, chowProjectiveOpen and chowProjectiveOpenInclusion from Sheaf.AlgebraicGeometry.SpaceDerivedChowTransformRestriction; its algebraic-space inclusion is used through the underlying presheaf map .hom.hom. No local copy of these helpers remains."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c26e4b805",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after the 77ce RETURN (theorem stmt_dep used only for plain defs). Item Lean byte-identical (sha256 1dcb7045…), and the item node differs from 77ce only in stmt_deps: theorem lem-sfb-space-derived-chow-transform-restriction replaced by new def node def-sfb-chow-projective-space-open. The new node is existing:true on SpaceDerivedChowTransformRestriction and owns chowProjectiveSpace/chowProjectiveOpen/chowProjectiveOpenInclusion. These are real defs (Over.mk ProjectiveSpace (ULift (Fin (n+1))) ↘ Spec A, the open with composite structure map, yoneda.map of V.ι) that do not use the theorem. Its statement describes them, its stmt_deps are adequate and its signature is verbatim. No other def node owns the names. Theorem record co-listing has precedent (def-sfb-rational-localizing-twist). Re-verified every clause against 0CTR (1)-(5)/0CTS: relative diagonal closed, qc, qs, lfp on charts, BinaryFan product, closed fp h, both pullbacks over V, closed fp j, etale b|W, existence-only point, IsPseudoCoherent, all-degree support in pointImage h, iso after restriction over the whole X×V. No extra hypotheses; edge cases fine; proof sorry; docstrings and report sections present. No compile (no change). Advisory: helper docstrings tag the theorem's blueprint; ProjectiveSpace is owned by def-nagata-projective-space-base-change not def-pc-projective-space-twist; MapIsSeparated/MapIsLocallyOfFinitePresentation form optional."
+ }
+}

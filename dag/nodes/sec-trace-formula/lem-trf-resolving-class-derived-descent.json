@@ -1,0 +1,449 @@
+{
+ "id": "lem-trf-resolving-class-derived-descent",
+ "kind": "statement",
+ "title": "Derived descent through a bounded above resolving class",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], with integer-indexed cochain complexes, homotopy categories and localizations in a common larger universe [def-weil-abstract-derived-category, lem-weil-pbc-localization-universal-property]. Write $Q_A:K(\\mathcal A)\\to D(\\mathcal A)$ and $Q_B:K(\\mathcal B)\\to D(\\mathcal B)$ for localization. Let $\\mathcal P$ contain zero, be closed under isomorphisms and finite biproducts, and have every object of $\\mathcal A$ as an epimorphic image of an object in $\\mathcal P$. Let $\\mathcal C\\subset K(\\mathcal A)$ be the full subcategory of complexes $M$ for which some integer $b$ satisfies $H^j(M)=0$ for all $j>b$. Let $\\mathcal R\\subset\\mathcal C$ be the full subcategory of bounded above complexes with every term in $\\mathcal P$. Put $W_C=\\operatorname{Qis}\\cap\\operatorname{Arrows}(\\mathcal C)$ and $W_R=\\operatorname{Qis}\\cap\\operatorname{Arrows}(\\mathcal R)$. Let $D^-(\\mathcal A)$ denote the full subcategory of $D(\\mathcal A)$ on objects with cohomology vanishing above some integer. Then $W_C$ and $W_R$ admit right calculi of fractions, $\\mathcal C[W_C^{-1}]\\to D(\\mathcal A)$ is fully faithful with essential image $D^-(\\mathcal A)$, and the inclusion induces an equivalence $\\mathcal R[W_R^{-1}]\\xrightarrow{\\sim}\\mathcal C[W_C^{-1}]$. Every complex $M$ with $H^j(M)=0$ for $j>b$ admits a quasi-isomorphism $V\\to M$ with $V^j\\in\\mathcal P$ for all $j$ and $V^j=0$ for $j>b$.\nIf $F:\\mathcal A\\to\\mathcal B$ is additive and sends quasi-isomorphisms between objects of $\\mathcal R$ to quasi-isomorphisms, there exist a functor $\\widehat F:D^-(\\mathcal A)\\to D(\\mathcal B)$ and isomorphisms\n$$\\rho_M:\\widehat F(Q_A M)\\xrightarrow{\\sim}Q_B(F(M))\\quad(M\\in\\mathcal R),$$\nnatural for every chain map $f:M\\to N$ between objects of $\\mathcal R$:\n$$\\rho_N\\widehat F(Q_A(f))=Q_B(F(f))\\rho_M.$$\nHere $F$ acts termwise; no functorial choice of resolutions, exactness of $F$, or colimits are assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, first paragraph and replacement of the roof source by a bounded above resolving-class complex; supporting Tags 05RT (lemma-acyclic), 05T7 (lemma-subcategory-left-resolution), 0GSL (lemma-localization-subcategory), Categories 04VI/04VJ/04VK. Returned parent steps 1--3."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Fix $M$ with $H^j(M)=0$ for $j>b$. Form the complex $T$ with $T^j=M^j$ for $j<b$, $T^b=\\ker(d_M^b)$ and $T^j=0$ for $j>b$, using the induced differential into the kernel. The kernel inclusion gives a chain map $t:T\\to M$. The cohomology formula in [def-weil-abstract-derived-category] gives $H^j(t)$ equal to the canonical identity for $j<b$ and to $\\ker(d_M^b)/\\operatorname{im}(d_M^{b-1})\\to H^b(M)$ for $j=b$, also an isomorphism. For $j>b$ both cohomology objects are zero. Thus $t$ is a quasi-isomorphism and $T$ is strictly zero above $b$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, proof of part (2): good truncation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-subcategory-left-resolution] to $T$, the integer $b$ and the given class $\\mathcal P$. Its hypotheses use only that $\\mathcal A$ is abelian, $0\\in\\mathcal P$, every object is an epimorphic image from $\\mathcal P$, and $T^j=0$ for $j>b$. It supplies a quasi-isomorphism $v:V\\to T$ with $V^j\\in\\mathcal P$ and $V^j=0$ for $j>b$. Then $tv:V\\to M$ is a quasi-isomorphism since its cohomology maps are composites of isomorphisms. This proves the asserted bound, and gives an arrow in $W_C$ from an object of $\\mathcal R$ to every object of $\\mathcal C$.",
+   "uses": [
+    "lem-sfb-subcategory-left-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, lemma-subcategory-left-resolution, parts (1) and (2)."
+   }
+  },
+  {
+   "text": "By [lem-pc-quasi-isomorphisms-multiplicative-system], quasi-isomorphisms in $K(\\mathcal A)$ have a right calculus of fractions. Restrict its axioms to $\\mathcal C$. For an Ore problem $f:X\\to Z$, $s:Y\\to Z$ in $\\mathcal C$ with $s$ a quasi-isomorphism, the ambient calculus gives $t:L\\to X$ a quasi-isomorphism and $g:L\\to Y$ with $ft=sg$. Since $H^j(L)\\cong H^j(X)$, $L$ lies in $\\mathcal C$, so this is an Ore square there. If $sf=sg$ with $s$ a quasi-isomorphism, ambient cancellation gives a quasi-isomorphism $t:L\\to X$ with $ft=gt$; the same cohomology argument puts $L$ in $\\mathcal C$. Identities and composites are quasi-isomorphisms by their cohomology maps. Thus $W_C$ has a right calculus. All these equations are in the homotopy category.",
+   "uses": [
+    "lem-pc-quasi-isomorphisms-multiplicative-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT, lemma-acyclic; restriction of its right-fraction axioms to the cohomologically bounded above subcategory."
+   }
+  },
+  {
+   "text": "Let $q_C:\\mathcal C\\to\\mathcal C[W_C^{-1}]$ be localization. Since $Q_A$ inverts $W_C$, [lem-weil-pbc-localization-universal-property] gives an induced functor $J:\\mathcal C[W_C^{-1}]\\to D(\\mathcal A)$ with natural isomorphism $\\gamma:Jq_C\\xrightarrow{\\sim}Q_A|_{\\mathcal C}$. To prove fullness on $q_C(X),q_C(Y)$, conjugate a morphism between their $J$-images by $\\gamma$ and use [lem-pc-right-fraction-representation] in $K(\\mathcal A)$ to express it as $Q_A(f)Q_A(s)^{-1}$, where $s:L\\to X$ is a quasi-isomorphism and $f:L\\to Y$. The cohomology isomorphisms for $s$ put $L$ in $\\mathcal C$. This same roof is a morphism $q_C(X)\\to q_C(Y)$, and its $J$-image is the desired morphism, by naturality of $\\gamma$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pc-right-fraction-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VI, lemma-morphisms-right-localization, and 04VK, lemma-properties-right-localization."
+   }
+  },
+  {
+   "text": "For faithfulness on these objects, represent two morphisms by roofs in $\\mathcal C$ using [lem-pc-right-fraction-representation]. If their $J$-images agree, [lem-pc-right-fraction-common-refinement] in $K(\\mathcal A)$ gives $a_i:T\\to L_i$ with $s_1a_1=s_2a_2$ a quasi-isomorphism and $f_1a_1=f_2a_2$. The quasi-isomorphism $T\\to X$ implies $T\\in\\mathcal C$. Thus all refinement maps lie in the full subcategory $\\mathcal C$, and the reverse implication of that same cited statement, now for $W_C$, gives equality of the two localized morphisms. By [lem-trf-localization-essentially-surjective] every object of $\\mathcal C[W_C^{-1}]$ is isomorphic to some $q_C(X)$. Conjugating source and target by such isomorphisms extends the Hom bijections of Steps 4--5 to all objects. Therefore $J$ is fully faithful.",
+   "uses": [
+    "lem-pc-right-fraction-representation",
+    "lem-pc-right-fraction-common-refinement",
+    "lem-trf-localization-essentially-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VI and 04VJ, lemma-morphisms-right-localization and lemma-equality-morphisms-right-localization; fraction relation and essential surjectivity."
+   }
+  },
+  {
+   "text": "The essential image of $J$ lies in $D^-(\\mathcal A)$: every localized object is isomorphic to $q_C(M)$ by [lem-trf-localization-essentially-surjective], and the derived cohomology functors of [def-weil-abstract-derived-category] give $H^j(Q_AM)\\cong H^j(M)$. Conversely, for $Z\\in D^-(\\mathcal A)$, apply [lem-trf-localization-essentially-surjective] to $Q_A$ to obtain $Q_AM\\cong Z$. Derived cohomology shows $M\\in\\mathcal C$, so $Z$ is isomorphic to $Jq_C(M)$. Corestrict $J$ to $D^-(\\mathcal A)$. It is fully faithful by Steps 4--5 and essentially surjective by this argument, hence an equivalence by [lem-trf-fully-faithful-ess-surj-equivalence]. All categories are taken in the common larger universe stipulated in the statement.",
+   "uses": [
+    "lem-trf-localization-essentially-surjective",
+    "def-weil-abstract-derived-category",
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3, lemma-equivalence-categories; localization essential image via cohomology."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-right-fraction-dense-subcategory] with ambient category $\\mathcal C$, morphism class $W_C$, and full subcategory $\\mathcal R$. Step 3 supplies its right-fraction axioms, and Step 2 supplies for each $M\\in\\mathcal C$ an arrow $V\\to M$ in $W_C$ from $\\mathcal R$. Its conclusions give the right calculus for $W_R$ and an equivalence $I:\\mathcal R[W_R^{-1}]\\to\\mathcal C[W_C^{-1}]$ induced by inclusion. Composing with the corestriction of $J$ gives an equivalence $T:\\mathcal R[W_R^{-1}]\\to D^-(\\mathcal A)$ and a natural isomorphism $\\kappa:Tq_R\\xrightarrow{\\sim}Q_A|_{\\mathcal R}$, obtained by composing the two inclusion comparisons. Here $q_R$ denotes localization of $\\mathcal R$.",
+   "uses": [
+    "lem-trf-right-fraction-dense-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GSL, lemma-localization-subcategory, right-fraction density argument; categorical form stated in the cited node."
+   }
+  },
+  {
+   "text": "Now assume the hypotheses on $F$. By [lem-trf-additive-homotopy-triangulated], termwise application of the additive functor defines $K(F):K(\\mathcal A)\\to K(\\mathcal B)$. Restrict $H=Q_BK(F)$ to $\\mathcal R$. For $s\\in W_R$, the hypothesis says $F(s)$ is a quasi-isomorphism, so $H(s)$ is invertible by [def-weil-abstract-derived-category]. Consequently [lem-weil-pbc-localization-universal-property] supplies a functor $G:\\mathcal R[W_R^{-1}]\\to D(\\mathcal B)$ and a natural isomorphism $\\lambda:Gq_R\\xrightarrow{\\sim}H$. In particular, $\\lambda_NG(q_R(f))=Q_B(F(f))\\lambda_M$ for every chain map $f:M\\to N$ in $\\mathcal R$.",
+   "uses": [
+    "lem-trf-additive-homotopy-triangulated",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014X, lemma-additive-exact-homotopy-category; Categories Tag 04VK, lemma-properties-right-localization; Tag 0794, first paragraph."
+   }
+  },
+  {
+   "text": "Choose a quasi-inverse $U:D^-(\\mathcal A)\\to\\mathcal R[W_R^{-1}]$ to the equivalence $T$ of Step 7 and a natural isomorphism $\\nu:UT\\xrightarrow{\\sim}\\operatorname{id}$. Define $\\widehat F=GU$ and\n$$\\beta_M=\\nu_{q_RM}\\,U(\\kappa_M^{-1}):U(Q_AM)\\xrightarrow{\\sim}q_RM,\\qquad \\rho_M=\\lambda_MG(\\beta_M).$$\nThese are isomorphisms with the required source and target. Naturality of $\\kappa$ and $\\nu$ gives $\\beta_NU(Q_Af)=q_R(f)\\beta_M$. Substitution and Step 8 then give\n$$\\rho_N\\widehat F(Q_Af)=\\lambda_NG(\\beta_NU(Q_Af))=\\lambda_NG(q_Rf)G(\\beta_M)=Q_B(F(f))\\rho_M.$$\nThis uses the equivalence and natural isomorphisms already constructed, so no functorial resolution is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0794, proposition-left-derived-exists, first paragraph: explicit transport of the localized functor and its natural comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-subcategory-left-resolution",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-right-fraction-representation",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-trf-localization-essentially-surjective",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-trf-additive-homotopy-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0794, proposition-left-derived-exists, first paragraph, elaborated using Tag 05T7 and the right-fraction proof of Tag 0GSL; explicit restriction to bounded above cohomology and transport of natural comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "HasLeftResolutions|isLeftDerivabilityStructure|mapHomologicalComplexUpToQuasiIsoFactors",
+   "results": {
+    "t": "2026-10-22T06:45:43Z",
+    "tool": "grep",
+    "query": "HasLeftResolutions|isLeftDerivabilityStructure|mapHomologicalComplexUpToQuasiIsoFactors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/CategoryTheory/Localization/DerivabilityStructure/OfLocalizedEquivalences.lean"
+    ],
+    "digest": "a981cd2d0ef2d304"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.lean:340--389 assumes F.PreservesHomology globally, and ExactFunctor.lean:30--48 assumes finite-limit and finite-colimit preservation. Generic derivability structures require supplied resolutions; none constructs the bounded-cohomology resolving localization and descent from the stated epimorphic generating class."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLeftResolutions\", \"Localization\"",
+   "results": {
+    "t": "2026-10-22T06:45:43Z",
+    "tool": "loogle",
+    "query": "\"HasLeftResolutions\", \"Localization\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.lean:340--389 assumes F.PreservesHomology globally, and ExactFunctor.lean:30--48 assumes finite-limit and finite-colimit preservation. Generic derivability structures require supplied resolutions; none constructs the bounded-cohomology resolving localization and descent from the stated epimorphic generating class."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving quasi-isomorphisms between bounded above complexes in an epimorphically generating class descends to a functor on all complexes with bounded above cohomology",
+   "results": {
+    "t": "2026-10-22T06:45:54Z",
+    "tool": "leanfinder",
+    "query": "An additive functor preserving quasi-isomorphisms between bounded above complexes in an epimorphically generating class descends to a functor on all complexes with bounded above cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso"
+    ],
+    "digest": "b12d7c53827a2dd2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.lean:340--389 assumes F.PreservesHomology globally, and ExactFunctor.lean:30--48 assumes finite-limit and finite-colimit preservation. Generic derivability structures require supplied resolutions; none constructs the bounded-cohomology resolving localization and descent from the stated epimorphic generating class."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of bounded above resolving class complexes is equivalent to the derived subcategory with bounded above cohomology and any functor inverting their quasi-isomorphisms descends",
+   "results": {
+    "t": "2026-10-22T06:45:58Z",
+    "tool": "leansearch",
+    "query": "Localization of bounded above resolving class complexes is equivalent to the derived subcategory with bounded above cohomology and any functor inverting their quasi-isomorphisms descends",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory.standard",
+     "HasDerivedCategory",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+     "DerivedCategory.instCategory",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ"
+    ],
+    "digest": "ecc1c366d5d77591"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Localization.lean:340--389 assumes F.PreservesHomology globally, and ExactFunctor.lean:30--48 assumes finite-limit and finite-colimit preservation. Generic derivability structures require supplied resolutions; none constructs the bounded-cohomology resolving localization and descent from the stated epimorphic generating class."
+  },
+  {
+   "tool": "grep",
+   "query": "HasLeftResolutions|isLeftDerivabilityStructure|mapHomologicalComplexUpToQuasiIsoFactors",
+   "results": {
+    "t": "2026-10-23T21:17:21Z",
+    "tool": "grep",
+    "query": "HasLeftResolutions|isLeftDerivabilityStructure|mapHomologicalComplexUpToQuasiIsoFactors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/DerivabilityStructureCofibrant.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean"
+    ],
+    "digest": "d93caf5137f36604"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires resolving arbitrary bounded-above complexes by an epimorphically generating class and descent with preservation only on that class. Localization.lean:340-389 requires F.PreservesHomology globally; ExactFunctor.lean:30-44 requires exactness. DerivabilityStructure/Constructor.lean:127-131 requires supplied resolution structures and a localized equivalence. The second phrasing gives projective/injective resolutions with stronger hypotheses and t-structure membership, not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving quasi-isomorphisms on bounded above resolving complexes descends to the bounded above derived category",
+   "results": {
+    "t": "2026-10-23T21:17:22Z",
+    "tool": "leansearch",
+    "query": "An additive functor preserving quasi-isomorphisms on bounded above resolving complexes descends to the bounded above derived category",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "HasDerivedCategory.standard",
+     "HomologicalComplex.quasiIsoAt_map_of_preservesHomology",
+     "CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+     "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso",
+     "CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ"
+    ],
+    "digest": "758cfbe23a82277a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires resolving arbitrary bounded-above complexes by an epimorphically generating class and descent with preservation only on that class. Localization.lean:340-389 requires F.PreservesHomology globally; ExactFunctor.lean:30-44 requires exactness. DerivabilityStructure/Constructor.lean:127-131 requires supplied resolution structures and a localized equivalence. The second phrasing gives projective/injective resolutions with stronger hypotheses and t-structure membership, not this theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLeftResolutions\", \"IsLocalization\"",
+   "results": {
+    "t": "2026-10-23T21:17:22Z",
+    "tool": "loogle",
+    "query": "\"HasLeftResolutions\", \"IsLocalization\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires resolving arbitrary bounded-above complexes by an epimorphically generating class and descent with preservation only on that class. Localization.lean:340-389 requires F.PreservesHomology globally; ExactFunctor.lean:30-44 requires exactness. DerivabilityStructure/Constructor.lean:127-131 requires supplied resolution structures and a localized equivalence. The second phrasing gives projective/injective resolutions with stronger hypotheses and t-structure membership, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of bounded above complexes from an epimorphically generating additive class gives the bounded above derived category and descends additive functors",
+   "results": {
+    "t": "2026-10-23T21:17:32Z",
+    "tool": "leanfinder",
+    "query": "Localization of bounded above complexes from an epimorphically generating additive class gives the bounded above derived category and descends additive functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasDerivedCategory.standard",
+     "CategoryTheory.Functor.isHomological_of_localization",
+     "HasDerivedCategory",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+     "DerivedCategory",
+     "DerivedCategory.instEssSurjCochainComplexIntQ",
+     "DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso",
+     "DerivedCategory.Q"
+    ],
+    "digest": "8412cb9fd3aea0ba"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires resolving arbitrary bounded-above complexes by an epimorphically generating class and descent with preservation only on that class. Localization.lean:340-389 requires F.PreservesHomology globally; ExactFunctor.lean:30-44 requires exactness. DerivabilityStructure/Constructor.lean:127-131 requires supplied resolution structures and a localized equivalence. The second phrasing gives projective/injective resolutions with stronger hypotheses and t-structure membership, not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A class containing zero and covering every object by an epimorphism resolves every complex with bounded above cohomology with the same upper bound",
+   "results": {
+    "t": "2026-10-23T21:17:33Z",
+    "tool": "leanfinder",
+    "query": "A class containing zero and covering every object by an epimorphism resolves every complex with bounded above cohomology with the same upper bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt",
+     "CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+     "CochainComplex.IsKProjective",
+     "CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex",
+     "DerivedCategory.isLE_iff",
+     "CochainComplex.IsKInjective",
+     "DerivedCategory.isGE_iff",
+     "CategoryTheory.InjectiveResolution.ofCocomplex"
+    ],
+    "digest": "b06d7997aff46c9b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the item requires resolving arbitrary bounded-above complexes by an epimorphically generating class and descent with preservation only on that class. Localization.lean:340-389 requires F.PreservesHomology globally; ExactFunctor.lean:30-44 requires exactness. DerivabilityStructure/Constructor.lean:127-131 requires supplied resolution structures and a localized equivalence. The second phrasing gives projective/injective resolutions with stronger hypotheses and t-structure membership, not this theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-stage-roof-comparison",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Supporting input: Unbounded existence of the left derived lower shriek: the five hypotheses checked in the proof of sites-cohomology lemma-existence-derived-lower-shriek. Proof of Tag 0794: comparison of bounded-above stages by common roofs, including compatibility as the stage varies. Supporting re-split: Tag 0794, proposition-left-derived-exists, first paragraph and replacement of the roof source by a bounded above resolving-class complex; supporting Tags 05RT (lemma-acyclic), 05T7 (lemma-subcategory-left-resolution), 0GSL (lemma-localization-subcategory), Categories 04VI/04VJ/04VK. Returned parent steps 1--3.",
+   "via": [
+    "lem-trf-bounded-stage-roof-comparison",
+    "lem-trf-unbounded-left-derived-criterion",
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-resolving-class-derived-descent",
+  "worker": "stage1",
+  "summary": "Expanded the bounded-above resolving-class descent into nine steps, using existing generic resolution and right-fraction nodes. Proved restriction of the ambient fraction calculus, full faithfulness and the precise essential image, and wrote the normalization and its naturality explicitly. Statement unchanged; no new nodes and no Lean attachment.",
+  "blueprint": "Supports the existing from.place chain from lem-trf-local-term-locality through the Temkin/dualizing/cotangent/derived-colimit branch: the bounded-stage roof comparison uses the first paragraph of Tag 0794. Steps 1--2 realize its bounded resolving replacement, Steps 3--7 its localization comparison, and Steps 8--9 its additive descent and natural normalization. The current latest blueprint ancestor and unit were read; no unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-subcategory-left-resolution",
+    "why": "Generic bounded-above resolution by an epimorphically generating class, Tag 05T7(1); the current unit has no such homological-algebra construction."
+   },
+   {
+    "node": "lem-trf-right-fraction-dense-subcategory",
+    "why": "Generic categorical density theorem for right fractions, applied inside the cohomologically bounded above category; the current unit has no categorical localization comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-subcategory-left-resolution",
+  "lem-trf-right-fraction-dense-subcategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-a12ad4112",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-a12ad4112 (reviewer sub-agent of L); spot-checked: I read the whole item, all 9 steps. It has no new nodes, and the statement, stmt_deps and blueprint are byte-identical to live, where the item is unsplit with an empty proof and no repair note, so this is not a re-split order. I read every cited node's statement and Stacks 05T7 (1)-(2), 0GSL and 0794 first paragraph. Step 1: the good truncation is a quasi-isomorphism; I checked degrees b-1 and b. Step 2: the 05T7(1) node gives a cover with the same bound, so V is in R. Step 3: the right calculus restricts to C because the new sources are quasi-isomorphic to objects of C. Steps 4-5: J is full by an ambient roof whose source lies in C, and faithful by the common-refinement iff used in both directions; the refinement source lies in C. Step 6: the essential image is D^-, by derived cohomology and essential surjectivity of Q_A, and the ff+es node gives the equivalence. Step 7: Steps 2-3 supply every hypothesis of the dense-subcategory node, which gives the calculus for W_R and the equivalence. Step 8: Q_B K(F) inverts W_R by the hypothesis, and clause (1) gives G and lambda. Step 9: I recomputed the naturality of beta and rho. Edge cases: A=0; P = all objects; Ab with free P and F = -⊗Z/2 (a non-exact F); acyclic complexes; negative b. There are no duplicates, and the nearby nodes on truncation towers, colimit covers, projective computation and cycle acyclicity differ. The Mathlib searches are logged and not a leaf. I accept two tool_uses: lem-sfb-subcategory-left-resolution and lem-trf-right-fraction-dense-subcategory, both generic. No SGA is cited. Advisory: Step 7 could also list lem-weil-pbc-localization-universal-property, which is already in proof_deps, for kappa. The report mentions a citations.json that is not delivered."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.ResolvingClassDerivedDescent",
+  "declaration": "CategoryTheory.BoundedResolvingDescent.resolvingClassDerivedDescent",
+  "declarations": [
+   "CategoryTheory.BoundedResolvingDescent.homotopyProperty",
+   "CategoryTheory.BoundedResolvingDescent.complexProperty",
+   "CategoryTheory.BoundedResolvingDescent.resolvingProperty",
+   "CategoryTheory.BoundedResolvingDescent.inclusion",
+   "CategoryTheory.BoundedResolvingDescent.quasiIsoC",
+   "CategoryTheory.BoundedResolvingDescent.quasiIsoR",
+   "CategoryTheory.BoundedResolvingDescent.toMinus",
+   "CategoryTheory.BoundedResolvingDescent.resolvingClassDerivedDescent"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/ResolvingClassDerivedDescent.lean",
+  "statement": "theorem resolvingClassDerivedDescent (B : Type uB) [Category.{vB} B] [Abelian B] [HasDerivedCategory.{w} B] (P : ObjectProperty A) [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [P.IsClosedUnderFiniteCoproducts] (hcover : ∀ X : A, ∃ (Y : A) (p : Y ⟶ X), P Y ∧ Epi p) (LC : Type uC) [Category.{vC} LC] (qC : (homotopyProperty A).FullSubcategory ⥤ LC) [qC.IsLocalization (quasiIsoC A)] (LR : Type uR) [Category.{vR} LR] (qR : (resolvingProperty A P).FullSubcategory ⥤ LR) [qR.IsLocalization (quasiIsoR A P)] : (quasiIsoC A).HasRightCalculusOfFractions ∧ (quasiIsoR A P).HasRightCalculusOfFractions ∧ (∃ J : LC ⥤ DerivedCategory A, J.Full ∧ J.Faithful ∧ Nonempty (qC ⋙ J ≅ (homotopyProperty A).ι ⋙ DerivedCategory.Qh) ∧ J.essImage = DerivedCategory.TStructure.t.minus) ∧ (∃ I : LR ⥤ LC, I.IsEquivalence ∧ Nonempty (qR ⋙ I ≅ (resolvingProperty A P).ι ⋙ qC)) ∧ (∀ (M : CochainComplex A ℤ) (b : ℤ), (∀ j : ℤ, b < j → IsZero (M.homology j)) → ∃ (V : CochainComplex A ℤ) (v : V ⟶ M), QuasiIso v ∧ (∀ j : ℤ, P (V.X j)) ∧ (∀ j : ℤ, b < j → IsZero (V.X j))) ∧ (∀ (F : A ⥤ B) [F.Additive], (∀ (M N : CochainComplex A ℤ) (f : M ⟶ N), complexProperty A P M → complexProperty A P N → QuasiIso f → QuasiIso ((F.mapHomologicalComplex (ComplexShape.up ℤ)).map f)) → ∃ Fhat : DerivedCategory.Minus A ⥤ DerivedCategory B, Nonempty ((resolvingProperty A P).ι ⋙ toMinus A ⋙ Fhat ≅ inclusion A P ⋙ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh))",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cbcf9457",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Only the lean field changes against side-live. Every hypothesis matches the node and none is stronger: ContainsZero, iso-closed, finite coproducts, epi cover, one shared universe w. C = t.minus.inverseImage Qh is exact by isLE_iff and includes unbounded acyclic complexes. R = strictly bounded above P-term complexes. W_C/W_R = quasiIso pulled back along the inclusions. All conclusions are present: both HasRightCalculusOfFractions (Mathlib convention, as in proof step 3 and lem-trf-right-fraction-dense-subcategory); J full and faithful with qC⋙J≅ι⋙Qh and essImage = t.minus as an equality; I an equivalence with qR⋙I≅ι⋙qC; same-bound resolution with b kept; F-clause only on R and only for additive F, giving one natural iso whose components are rho_M, natural for every chain map. Edge cases checked: zero category, P = all objects, empty biproduct, unbounded acyclic complexes, any sign of b, non-exact F. Helper definitions have real data, docstrings have source and blueprint id, the main docstring has all 9 proof steps, the only proof is sorry, lean.statement is verbatim. No duplicate found. Not recompiled: no file changed. Advisory: D minus is Mathlib DerivedCategory.Minus, and def-sbc-standard-tstructure-derived-category has no lean record, so no clash."
+ }
+}

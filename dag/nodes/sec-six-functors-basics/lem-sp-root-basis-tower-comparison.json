@@ -1,0 +1,142 @@
+{
+ "id": "lem-sp-root-basis-tower-comparison",
+ "kind": "statement",
+ "title": "Compatible root bases compare the finite towers on the prescribed slice",
+ "statement": "Use [def-weil-size-convention], [def-weil-pbc-proetale-site], [def-pur-roots-of-unity-sheaf], and [def-pur-localized-ringed-site]. Fix a prime ell invertible in every residue field of a scheme X and a pro-etale object W. For every n>=0 let zeta_n be a section of mu_(ell^(n+1)) on W and let e_n be an isomorphism from the restricted constant Z/ell^(n+1) module unit to that root module. Assume the root power transition sends zeta_(n+1) to zeta_n and e_n sends every scalar on every V->W to its product with the restriction of zeta_n. For each finite intermediate coefficient field E, reconstruct section modules by [def-weil-pbc-internal-abelian-sheaf-module-equivalence] and retain the integral O_E,X action. The actual finite integral twist tower [sk-def-sp-tate-twist] is naturally isomorphic on W to the ell-power quotient coefficient tower constructed for [lem-sp-ell-coefficient-cone-limit]. This asserts only an isomorphism of finite-level diagrams, with their specified reductions and root power transitions, and no inverse-limit or rational basis.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sp-tate-twist",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sp-ell-coefficient-cone-limit"
+ ],
+ "proof": [
+  {
+   "text": "At each positive exponent, apply lem-sp-root-basis-level to the supplied single root section, basis isomorphism and normalization. Choose its coefficient-to-twist isomorphism i_n with the specified formula on every slice object. This theorem is only a single-level calculation: it has neither adjacent levels nor transition hypotheses.",
+   "uses": [
+    "lem-sp-root-basis-level"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+   }
+  },
+  {
+   "text": "For every slice object V -> W, naturality of the actual root transition identifies transition(zeta_(n+1)|V) with transition(zeta_(n+1))|V. The supplied h_zeta identifies the latter with zeta_n|V. Thus the root generator transition equation holds on every slice object, not just W.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+   }
+  },
+  {
+   "text": "The actual integral transition has underlying sheaf map equal to the tensor of coefficient reduction and root transition, by spIntegralLevelTransition_existsUnique. Evaluate lax monoidal tensor naturality at b tensor zeta_(n+1)|V, and use the preceding root identity and the normalized i_n formulas. This proves coefficientReduction followed by i_n equals i_(n+1) followed by twistTransition as morphisms of the reconstructed integral module sheaves. NatTrans.ofOpSequence extends these successor squares to all arrows. Every component is an isomorphism, so NatIso.isIso_of_isIso_app makes the natural transformation invertible; invert it for the requested twist-to-coefficient orientation.",
+   "uses": [
+    "sk-def-sp-tate-twist",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-root-basis-level",
+  "def-pur-roots-of-unity-sheaf",
+  "sk-def-sp-tate-twist",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "clause (3), compatible finite bases; explicit tensor naturality on every slice object and sequence assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible family of generators of roots of unity identifies the inverse system of finite Tate twists with its coefficient quotient system",
+   "results": "Cyclotomic characters, InverseSystem.limit and invLimEquiv, and rootsOfUnity lemmas; no module sheaf tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.HasLimit.isoOfNatIso",
+   "results": "Generic limit isomorphism found, but no finite-level coefficient/root tower natural isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spRootBasisTowerComparison|spIntegralTwistLevel_comparison",
+   "results": "Only the existing finite-level comparison; its conclusion is an abelian sheaf isomorphism, without linearity or normalized transition compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SpIntegralRationalRootBasis",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "via": [
+    "lem-sp-integral-rational-root-basis",
+    "lem-route-sp-twists-common-cover",
+    "lem-sfb-integral-tate-line-constructible"
+   ],
+   "place": "clause (3), compatible finite bases, integral inverse limit, and rational scalar extension"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SpRootBasisTowerComparison",
+  "file": "lean/Sheaf/Paper/SpRootBasisTowerComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spRootBasisTowerComparison",
+  "statement": "theorem spRootBasisTowerComparison\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]\n    [∀ x : X, Invertible (ℓ : X.residueField x)] (W : X.ProEt)\n    (ζ : ∀ n : ℕ, (Scheme.purTwistRootsModule X ℓ n).val.obj (op W))\n    (e : ∀ n : ℕ,\n      (SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n))).over W ≅\n        (Scheme.purTwistRootsModule X ℓ n).over W)\n    (hζ : ∀ n : ℕ,\n      (Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ (n + 1)) (ℓ ^ (n + 2))\n        (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)\n        (pow_dvd_pow ℓ (Nat.le_succ (n + 1)))).hom.app (op W) (ζ (n + 1)) = ζ n)\n    (he : ∀ (n : ℕ) (V : (Over W)ᵒᵖ)\n      (a : ((Scheme.purTwistRing X (Scheme.purTwistFiniteRing X ℓ n)).over W).obj.obj V),\n      (e n).hom.val.app V a =\n        a • (Scheme.purTwistRootsModule X ℓ n).val.map V.unop.hom.op (ζ n))\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) :\n    Nonempty (spIntegralTwistSystem X ℓ E ⋙ spRootBasisSliceSections X\n        (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) W ≅\n      spEllCoefficientSystem X ℓ E ⋙ spRootBasisSliceSections X\n        (condensedRingObj.{u} (Profinite.padicIntegersRingObj.{u} ℓ E.1) X) W)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T222555-L-669470",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T235907-L-1466489",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

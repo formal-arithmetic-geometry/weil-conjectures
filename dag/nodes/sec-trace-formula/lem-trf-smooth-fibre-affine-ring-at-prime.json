@@ -1,0 +1,271 @@
+{
+ "id": "lem-trf-smooth-fibre-affine-ring-at-prime",
+ "kind": "statement",
+ "title": "A smooth fibre neighbourhood gives smoothness of its affine fibre ring at the kernel prime",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $x\\in X$, and $s=f(x)$. Let $W=\\operatorname{Spec}A\\subseteq X$ and $V=\\operatorname{Spec}R\\subseteq S$ be affine open neighbourhoods of $x$ and $s$ [def-weil-affine-spectrum], with $f(W)\\subseteq V$, and let $\\varphi:R\\to A$ be the induced ring map. Let $\\mathfrak q\\subset A$ represent $x$ and put $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$. Set $k=\\kappa(\\mathfrak p)$ and $F=A\\otimes_R k$, with $k\\to F$ given by $\\lambda\\mapsto1\\otimes\\lambda$ [def-weil-pbc-localization-at-prime]. Let $\\rho:F\\to\\kappa(\\mathfrak q)$ send $a\\otimes\\lambda$ to $\\bar a\\bar\\lambda$, using the residue-field map induced by $\\varphi$, and put $\\mathfrak Q=\\ker\\rho$. Suppose the fibre morphism $X_s\\to\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre, def-weil-residue-field] is smooth on an open neighbourhood of its unique point above $x$ [def-sbc-smooth-morphisms]. Then $k\\to F$ is smooth at $\\mathfrak Q$ [def-weil-pbc-singular-ideal]: there exists $h\\in F\\setminus\\mathfrak Q$ for which $k\\to F_h$ is a smooth ring map [def-weil-pbc-smooth-ring-map].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9, lemma-smooth-at-point, proof of (2) implies (1): affine translation of the smooth-fibre hypothesis before applying Algebra lemma-flat-fibre-smooth."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-pc-scheme-fibre",
+  "def-weil-residue-field",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-singular-ideal",
+  "def-weil-pbc-smooth-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify $\\kappa(s)$ with $k=\\kappa(\\mathfrak p)$ and $\\kappa(x)$ with $\\kappa(\\mathfrak q)$. Indeed, [lem-weil-pbc-affine-open-stalk-localization] (b),(c) identifies the ambient stalks, including their germ maps from $R,A$, with the corresponding affine stalks and prime localizations; quotienting these local-ring isomorphisms by their maximal ideals gives the residue-field identifications. By [lem-weil-pbc-spec-field-point-residue-field] (2), the canonical map $\\operatorname{Spec}\\kappa(s)\\to S$ factors through $V$ and corresponds on $V\\cong\\operatorname{Spec}R$ to the residue map of $\\operatorname{Spec}R$ at $\\mathfrak p$; by [lem-weil-pbc-spec-residue-field-identification] this map is $\\operatorname{Spec}(R\\to k)$ after the identification $\\kappa(s)=k$. Hence the canonical map $\\operatorname{Spec}k\\to S$ is the composite of $\\operatorname{Spec}(R\\to k)$ with $V\\hookrightarrow S$. By [lem-weil-pbc-spec-map-residue-field-naturality] (2), the scheme residue-field map $\\kappa(s)\\to\\kappa(x)$ becomes exactly the field map $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ induced by $\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "lem-weil-pbc-spec-field-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV, lemma-spec-sheaves (6); Tag 01HY, lemma-morphism-into-affine-where-point-goes; affine residue-field comparison in the proof of Morphisms Tag 01V9."
+   }
+  },
+  {
+   "text": "Write $\\pi:X_s\\to X$ for the fibre projection [def-pc-scheme-fibre]. Apply [lem-weil-pbc-open-fibre-product] to $X\\to S$, $\\operatorname{Spec}k\\to S$, and the opens $W\\subset X$, $V\\subset S$, and all of $\\operatorname{Spec}k$. Its hypotheses hold because $f(W)\\subset V$ and the second map factors through $V$ by step 1. By [lem-weil-pbc-affine-opens-induced-ring-map-spec-square], $f\\circ\\iota_W=\\iota_V\\circ\\operatorname{Spec}\\varphi$ for the canonical open immersions $\\iota_W:\\operatorname{Spec}A\\to X$, $\\iota_V:\\operatorname{Spec}R\\to S$, so the restriction $W\\to V$ of $f$ is $\\operatorname{Spec}\\varphi$ under these identifications. It identifies $W\\times_V\\operatorname{Spec}k$ with the open subscheme $\\pi^{-1}(W)$ of $X_s$. By [lem-weil-pbc-fibre-product-affine-spectra] this gives an isomorphism $j:\\operatorname{Spec}F\\xrightarrow{\\sim}\\pi^{-1}(W)$, with projection to $W$ induced by $a\\mapsto a\\otimes1$ and structure morphism to $\\operatorname{Spec}k$ induced by $\\lambda\\mapsto1\\otimes\\lambda$. This computation needs no finite-presentation hypothesis on $A$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR, lemma-open-fibre-product; Tags 01I4, lemma-fibre-product-affine-schemes, and 01JQ, lemma-fibre-product-affines."
+   }
+  },
+  {
+   "text": "The formula for $\\rho$ respects the tensor relation: for $r\\in R$, the images of $\\varphi(r)a\\otimes\\lambda$ and $a\\otimes r\\lambda$ both equal $\\bar a\\,\\bar r\\,\\bar\\lambda$. It is multiplicative and unital, hence its kernel $\\mathfrak Q$ is prime because its codomain is a field. The unique point of $\\operatorname{Spec}\\kappa(\\mathfrak q)$ maps under $\\operatorname{Spec}\\rho$ to $\\mathfrak Q$, by [lem-weil-pbc-spec-map-residue-field-naturality] (1) (the prime in this field is $(0)$). Its composite with the projection to $\\operatorname{Spec}A$ is induced by $a\\mapsto\\bar a$ and therefore maps to $\\mathfrak q$. Equivalently, $a\\otimes1\\in\\mathfrak Q$ iff $a\\in\\mathfrak q$. Thus $j(\\mathfrak Q)$ lies above $x$. The fibre projection is a homeomorphism onto $f^{-1}(s)$ by [def-pc-scheme-fibre], so $j(\\mathfrak Q)$ is precisely the unique fibre point $\\xi$ above $x$.",
+   "uses": [
+    "lem-weil-pbc-spec-map-residue-field-naturality",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HY, lemma-morphism-into-affine-where-point-goes; Tag 01K1, lemma-fibre-topological; the tensor formula is checked directly."
+   }
+  },
+  {
+   "text": "Let $N\\subset X_s$ be the open neighbourhood of $\\xi$ on which the fibre structure morphism is smooth. Under $j$, the intersection $N\\cap\\pi^{-1}(W)$ is an open $O\\subset\\operatorname{Spec}F$ containing $\\mathfrak Q$. By [lem-weil-pbc-spec-localization-away-basic-open] (i), choose $h\\in F$ with $\\mathfrak Q\\in D(h)\\subset O$; thus $h\\notin\\mathfrak Q$. By [lem-weil-pbc-principal-localization-open-immersion], $\\operatorname{Spec}F_h\\to\\operatorname{Spec}F$ identifies its source with the open subscheme $D(h)$, with inclusion induced by $F\\to F_h$. Restrict the smooth map $N\\to\\operatorname{Spec}\\kappa(s)$ to this open subscheme and use the identifications of steps 1 and 2. Clauses (a) and (c) of [lem-weil-pbc-smooth-restrict-open-subschemes] give a smooth morphism $\\operatorname{Spec}F_h\\to\\operatorname{Spec}k$. Its ring map is explicitly $k\\to F\\to F_h$, $\\lambda\\mapsto(1\\otimes\\lambda)/1$, by the projection formula in step 2.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3, lemma-standard-open-affine; Algebra Tag 00E0, lemma-Zariski-topology (basic-open basis); Morphisms Tag 01V6, lemma-smooth-characterize (restriction); More on Morphisms Tag 02H6, lemma-smooth-formally-smooth."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] to the ring homomorphism $k\\to F_h$ from step 4: its spectrum morphism is smooth, so it is a smooth ring map. Together with $h\\notin\\mathfrak Q$, this is exactly smoothness of $k\\to F$ at $\\mathfrak Q$ as defined in [def-weil-pbc-singular-ideal].",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "def-weil-pbc-singular-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02H6, lemma-smooth-formally-smooth, affine case; Morphisms Tag 01V6, lemma-smooth-characterize; Algebra Tag 00TB, definition-smooth-at-prime."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-spec-map-residue-field-naturality",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "def-weil-pbc-singular-ideal",
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9, lemma-smooth-at-point, proof (2) implies (1), expanded affine-fibre translation using Schemes Tags 01HV, 01HY, 01I3, 01I4, 01JQ, 01JR, 01K1 and More on Morphisms Tag 02H6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiberToSpecResidueFieldIso|isSmoothAt.*[Ff]iber|smooth.*[Ff]iber",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean, Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean.  Read Mathlib/AlgebraicGeometry/Fiber.lean:79-95 and Morphisms/Smooth.lean:249-305,338-345, and RingTheory/Smooth/Locus.lean:46-51,150-157. These provide fibre isomorphisms, formally smooth stalk loci, or the reverse chart construction; none gives this complete pointwise comparison for arbitrary charts with the existential-localization notion of smoothness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth scheme fibre near a point gives a smooth residue field tensor product algebra at the corresponding kernel prime",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiber, Ideal.Fiber, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, Algebra.FormallySmooth.instTensorProduct, Algebra.QuasiFinite.finite_fiber, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Polynomial.fiberEquivQuotient, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply.  Read Mathlib/AlgebraicGeometry/Fiber.lean:79-95 and Morphisms/Smooth.lean:249-305,338-345, and RingTheory/Smooth/Locus.lean:46-51,150-157. These provide fibre isomorphisms, formally smooth stalk loci, or the reverse chart construction; none gives this complete pointwise comparison for arbitrary charts with the existential-localization notion of smoothness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt, PrimeSpectrum",
+   "results": "0 hits: .  Read Mathlib/AlgebraicGeometry/Fiber.lean:79-95 and Morphisms/Smooth.lean:249-305,338-345, and RingTheory/Smooth/Locus.lean:46-51,150-157. These provide fibre isomorphisms, formally smooth stalk loci, or the reverse chart construction; none gives this complete pointwise comparison for arbitrary charts with the existential-localization notion of smoothness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme fibre near a point gives a smooth residue field tensor product algebra at the corresponding kernel prime",
+   "results": "8 hits: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.Pullback.ofPointTensor, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr.  Read Mathlib/AlgebraicGeometry/Fiber.lean:79-95 and Morphisms/Smooth.lean:249-305,338-345, and RingTheory/Smooth/Locus.lean:46-51,150-157. These provide fibre isomorphisms, formally smooth stalk loci, or the reverse chart construction; none gives this complete pointwise comparison for arbitrary charts with the existential-localization notion of smoothness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "preimage_smoothLocus_eq|smoothLocus.*Spec|Spec.*smoothLocus",
+   "results": "6 hits: Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean.  Read Mathlib/AlgebraicGeometry/Fiber.lean:79-95 and Morphisms/Smooth.lean:249-305,338-345, and RingTheory/Smooth/Locus.lean:46-51,150-157. These provide fibre isomorphisms, formally smooth stalk loci, or the reverse chart construction; none gives this complete pointwise comparison for arbitrary charts with the existential-localization notion of smoothness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibre algebra A tensor_R kappa(p) is smooth at the prime ker(A tensor_R kappa(p) to kappa(q)) when the scheme fibre is smooth near q",
+   "results": "8 hits: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, Algebra.smoothLocus, Algebra.IsSmoothAt, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.isSmooth_iff, Algebra.Smooth.baseChange, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff.  Read Mathlib/AlgebraicGeometry/Fiber.lean:79-95 and Morphisms/Smooth.lean:249-305,338-345, and RingTheory/Smooth/Locus.lean:46-51,150-157. These provide fibre isomorphisms, formally smooth stalk loci, or the reverse chart construction; none gives this complete pointwise comparison for arbitrary charts with the existential-localization notion of smoothness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth scheme fibre near a point implies the affine tensor product fibre algebra is smooth after localization away from its kernel prime",
+   "results": "Actual msearch result: {\"t\": \"2026-10-23T04:08:38Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth scheme fibre near a point implies the affine tensor product fibre algebra is smooth after localization away from its kernel prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"RingHom.Smooth.holdsForLocalizationAway\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.Smooth.ofLocalizationSpanTarget\"], \"digest\": \"bb7176f9cc04ec59\"}. Read the returned signatures: fibre definitions, standard-smooth chart existence, and formally smooth localizations do not state the complete comparison at the specified kernel prime for arbitrary affine charts. IsSmoothAt.exists_notMem_smooth and basicOpen_subset_smoothLocus_iff_smooth require FinitePresentation k F, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberToSpecResidueFieldIso|exists_notMem_smooth|smooth_appLE",
+   "results": "Actual msearch result: {\"t\": \"2026-10-23T04:09:06Z\", \"tool\": \"grep\", \"query\": \"fiberToSpecResidueFieldIso|exists_notMem_smooth|smooth_appLE\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Locus.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"a56c9e03791b923f\"}. Read Fiber.lean:79-95, Morphisms/Smooth.lean:249-305, and RingTheory/Smooth/Locus.lean:40-51,150-157: fibre isomorphism, stalk loci, and an existential-localization theorem requiring finite presentation of the entire algebra, not assumed here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsSmoothAt, PrimeSpectrum",
+   "results": "Actual msearch result: {\"t\": \"2026-10-23T04:09:07Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsSmoothAt, PrimeSpectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smoothness of a scheme fibre at a point is smoothness at the corresponding prime of the residue field tensor product algebra",
+   "results": "Actual msearch result: {\"t\": \"2026-10-23T04:09:07Z\", \"tool\": \"leansearch\", \"query\": \"Smoothness of a scheme fibre at a point is smoothness at the corresponding prime of the residue field tensor product algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.instTensorProduct\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"Polynomial.fiberEquivQuotient\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"AlgebraicGeometry.IsSmooth.mk\"], \"digest\": \"a05081814d06c367\"}. Read the returned signatures: fibre definitions, standard-smooth chart existence, and formally smooth localizations do not state the complete comparison at the specified kernel prime for arbitrary affine charts. IsSmoothAt.exists_notMem_smooth and basicOpen_subset_smoothLocus_iff_smooth require FinitePresentation k F, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a morphism from Spec B to Spec k is smooth on an open neighbourhood of a prime q, there exists f outside q with k to B_f smooth",
+   "results": "Actual msearch result: {\"t\": \"2026-10-23T04:10:02Z\", \"tool\": \"leanfinder\", \"query\": \"If a morphism from Spec B to Spec k is smooth on an open neighbourhood of a prime q, there exists f outside q with k to B_f smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"RingHom.Smooth.holdsForLocalizationAway\", \"RingHom.Smooth.propertyIsLocal\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.basicOpen_subset_smoothLocus_iff_smooth\", \"Algebra.smoothLocus\"], \"digest\": \"3f5ffc018eaf3587\"}. Read the returned signatures: fibre definitions, standard-smooth chart existence, and formally smooth localizations do not state the complete comparison at the specified kernel prime for arbitrary affine charts. IsSmoothAt.exists_notMem_smooth and basicOpen_subset_smoothLocus_iff_smooth require FinitePresentation k F, absent here.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-at-point-fibre-criterion",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), inherited semistable-alteration/nearby-cycle branch, via the 01V9 input to lem-trf-generic-fibre-points-smooth: returned item step 3, scheme-fibre neighbourhood to affine-ring smoothness at its kernel prime.",
+   "via": [
+    "lem-trf-smooth-at-point-fibre-criterion",
+    "lem-trf-generic-fibre-points-smooth",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-trf-stable-modification-uniqueness-normal",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-fibre-affine-ring-at-prime",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies. Expanded the affine translation implicit in Stacks 01V9 into five steps: compatible residue fields, open affine fibre Spec(A tensor_R kappa(p)), explicit kernel prime, a principal open inside the given smooth fibre neighbourhood, and the affine smoothness comparison. All inputs already exist; no new nodes. Checked all cited statements, actual Mathlib search hits in two phrasings, and absence of an exact project attachment. In particular no finite presentation, flatness, or global smoothness of the original morphism is inserted.",
+  "blueprint": "Retains the inherited ancestry to lem-trf-local-term-locality proof (1)--(2), via the semistable-alteration/nearby-cycle branch and the 01V9 input of lem-trf-generic-fibre-points-smooth. This split supplies the affine-fibre comparison used in step 3 of lem-trf-smooth-at-point-fibre-criterion; the unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-map-residue-field-naturality",
+    "why": "Generic affine coordinate and residue-field compatibility for the chart map and Spec rho; not a replacement for a unit-level geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic affine equivalence between the scheme and ring notions of smoothness (02H6/01V6); the unit supplies no separate affine comparison."
+   },
+   {
+    "node": "lem-weil-pbc-spec-field-point-residue-field",
+    "why": "Generic factorization of the canonical point morphism Spec kappa(s) -> S through an affine open (clause 2), added by the reviewer for step 1; no node of sk-i-curve-zero gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-map-residue-field-naturality",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-spec-field-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-4aba41273",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-4aba41273 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 5 steps, all 11 cited statements plus the 2 I added, the stmt_deps definitions, Stacks morphisms.tex 01V9 (statement and the proof of (2)⇒(1)), and how the parent lem-trf-smooth-at-point-fibre-criterion uses the item in steps 3-4. The delivery is one commit with no new nodes. The statement and stmt_deps are byte-identical to the node Q02 created. Live and side-live still show the item as unsplit, and there is no repair note. No SGA source is used. The statement is true: I tested it on the identity, on R[t] at a non-closed point, on k[u,v]/(uv) at the node (hypothesis fails, conclusion fails), and on k×B with B not finitely presented (h=(1,0) works). It is not weakened. Steps 3-5 are correct as written: ρ is balanced because κ(φ)(r̄) equals the class of φ(r); Q=ker ρ contracts to q; the fibre-projection homeomorphism gives j(Q)=ξ; smooth-restrict (a) and (c) are applied to N→Spec κ(s) and a basic open D(h); the affine case of 02H6 then gives k→F_h smooth, and the 00TB clause finishes. There is no finite-presentation assumption and no circularity. Two citation faults (C1/C4), both repaired: (1) step 1 claims that the canonical map Spec κ(s)→S factors through V as Spec(R→k), but spec-residue-field-identification only covers Spec R; I now cite lem-weil-pbc-spec-field-point-residue-field (2). (2) Step 2 needs f|_W=Spec φ to identify W×_V Spec k with the affine fibre product, and no step cited it; I now cite the Mathlib leaf lem-weil-pbc-affine-opens-induced-ring-map-spec-square, as the parent does. The corrected item is in fixes/dag/nodes/sec-trace-formula/; proof_deps equals the union of the step uses. I accept the worker's tool_uses (spec-map-residue-field-naturality, smooth-ring-map-iff-smooth-affine) and added spec-field-point-residue-field, which is split in sk-thm-p1. Duplicate search: flat-smooth-fibre-smooth-at-prime, affine-smooth-prime-scheme-neighbourhood, smooth-fibre-localized-presentation-jacobian and affine-fibre-point-dimension are all different statements, and none states the item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFibreAffineRingAtPrime",
+  "declaration": "AlgebraicGeometry.smooth_fibre_affine_ring_at_prime",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFibreAffineRingAtPrime.lean",
+  "statement": "theorem smooth_fibre_affine_ring_at_prime {X S : Scheme.{u}} (f : X ⟶ S) (x : X) (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] (iA : Spec (CommRingCat.of A) ⟶ X) (iR : Spec (CommRingCat.of R) ⟶ S) [IsOpenImmersion iA] [IsOpenImmersion iR] (hsquare : iA ≫ f = Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ iR) (q : PrimeSpectrum A) (hx : iA q = x) (hsmooth : ∃ N : (f.fiber (f x)).Opens, f.asFiber x ∈ N ∧ Smooth (N.ι ≫ f.fiberToSpecResidueField (f x))) : Algebra.IsSmoothAtPrime (PrimeSpectrum.comap (algebraMap R A) q).asIdeal.ResidueField (PrimeSpectrum.preimageEquivFiber R A (PrimeSpectrum.comap (algebraMap R A) q) ⟨q, rfl⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Affine charts are open immersions iA and iR, with the induced ring map specified by hsquare. Uses the mandated Ideal.Fiber convention (STATE: FIBRE RING); preimageEquivFiber is definitionally the residue-tensor kernel prime. No finite-presentation or flatness hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-910e5e1f5",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, module, report, and Mathlib Fiber.lean:66/116/155 and SingularIdeal.lean:28. Charts are open immersions with hsquare fixing φ=algebraMap; p=comap q; k=p.ResidueField; F=Ideal.Fiber (κ(p)⊗A, left algebra, FIBRE RING convention, symmetric to the node's A⊗k); 𝔔=preimageEquivFiber, literally ker of λ⊗a↦κ(φ)λ·ā = ker ρ; fibre point f.asFiber x; hsmooth needs only an open N with Smooth(N.ι≫fiberToSpecResidueField); conclusion IsSmoothAtPrime = ∃h∉𝔔, Algebra.Smooth k F_h, exact. No FP/flat/Noetherian assumption, single universe u, statement field verbatim, docstrings with 01V9 + blueprint id and steps 1-5, proof sorry only, no new defs/nodes, not landed in live/side-live. No changes, no compile run."
+ }
+}

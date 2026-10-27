@@ -1,0 +1,308 @@
+{
+ "id": "lem-trf-relative-pair-localization-affine-realization",
+ "kind": "statement",
+ "title": "Open localization and affine realization of supplied dualizing pairs and their morphisms",
+ "statement": "Let $f:X\\to S$ be a separated flat locally finitely presented morphism of schemes with $S$ locally Noetherian [def-pc-scheme], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], [pqf-def-locnoeth]. Put $Y=X\\times_SX$ [def-pc-fibre-product], with first projection $p_1$ and closed diagonal $\\Delta$. Let $(K,\\xi)$ and $(L,\\eta)$ be supplied coherent relative dualizing pairs [def-trf-coherent-relative-dualizing-pair]: $K,L\\in D(\\mathcal O_X)$ [def-pc-derived-category] are pseudo-coherent [def-pur-pseudo-coherent-complex] and locally have finite Tor amplitude over $S$ [def-pc-finite-tor-dimension-over], and the classes from $\\Delta_*\\mathcal O_X$ to $Lp_1^*K,Lp_1^*L$ induce the multiplication isomorphisms to the corresponding derived internal Hom [def-pc-derived-pullback], [def-pur-derived-internal-hom]. For every open $j:W\\hookrightarrow X$, including the empty open, $f|_W$ is again separated, flat and locally finitely presented, and $(K|_W,\\xi|_{W\\times_SW})$ and $(L|_W,\\eta|_{W\\times_SW})$ are supplied pairs for $W/S$. In particular $(\\Delta_*\\mathcal O_X)|_{W\\times_SW}=\\Delta_{W*}\\mathcal O_W$, and the derived pullback, class multiplication and scalar maps restrict to those for $W/S$. Now take affine opens $U=\\operatorname{Spec}A\\subset X$, $V=\\operatorname{Spec}R\\subset S$ with $f(U)\\subset V$ and $R$ Noetherian, and put $B=A\\otimes_RA$. For $T=K,L$ set $M_T=R\\Gamma(U,T|_U)\\in D(A)$, using the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence]. The affine diagonal-class comparison [lem-trf-affine-relative-dualizing-comparison] gives pseudo-coherent $M_T$ of finite $R$-Tor amplitude and the actual classes $\\gamma_K,\\gamma_L:A\\to M_T\\otimes_{A,p_1}^{\\mathbf L}B$. There are natural isomorphisms in $D(\\mathcal O_U)$\n$$\\widetilde{R\\operatorname{Hom}_A(M_K,M_T)}\\cong R\\mathcal Hom_U(K|_U,T|_U),$$\nwhere tilde is termwise associated sheaf. For $T=K$ this identifies the algebraic scalar map with the restriction of $\\mathcal O_X\\to R\\mathcal Hom_X(K,K)$. For every integer $i$ it induces $\\operatorname{Hom}_{D(A)}(M_K,M_T[i])\\cong\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,T|_U[i])$. Isomorphisms $a:M_K\\to M_L$ correspond bijectively to isomorphisms $\\alpha_U:K|_U\\to L|_U$, and $(a\\otimes^{\\mathbf L}_{A,p_1}B)\\gamma_K=\\gamma_L$ if and only if $(Lp_{1,U}^*\\alpha_U)\\xi_U=\\eta_U$. These identifications respect scalar multiplication, composition and further open restrictions wherever the charts are defined.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E2U (lemma-relative-dualizing-complex-algebra), including its proof by affine internal-Hom comparison, and Tag 0E2X (lemma-existence-relative-dualizing), open-restriction observation; perfect.tex, lemma-quasi-coherence-internal-hom, and cohomology.tex, lemma-restriction-RHom-to-U."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-locnoeth",
+  "def-pc-derived-category",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-derived-pullback",
+  "def-pur-derived-internal-hom",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-pc-fibre-product",
+  "def-pc-finite-tor-dimension-over",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-trf-affine-relative-dualizing-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Write $Y_W=W\\times_S W\\subset Y$. The inverse image of this open under $\\Delta$ is $W$, and the restricted closed subscheme is exactly the diagonal of $W/S$ (restrict its defining ideal). Thus $f|_W$ is separated. Its stalk maps are the stalk maps of $f$, so it is flat. For local finite presentation choose, around any $w\\in W$, an affine neighbourhood $U\\subset W$ mapping into an affine $V\\subset S$; [lem-weil-pbc-lfp-affine-opens-finite-presentation] applies directly to these affine opens of $X,S$. For any open $H\\subset Y_W$, the definitions give $(\\Delta_*\\mathcal O_X)(H)=\\mathcal O_X(\\Delta^{-1}H)=\\mathcal O_W(\\Delta_W^{-1}H)$. This identifies the restricted diagonal algebras, including their multiplication and units. No quasi-compactness of $W$ is required.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2X, lemma-existence-relative-dualizing, open-restriction observation; affine local finite presentation by Morphisms Tag 01TQ"
+   }
+  },
+  {
+   "text": "Pseudo-coherence restricts by restricting the local bounded-above finite-free representatives in [def-pur-pseudo-coherent-complex]. Relative finite Tor amplitude also restricts: on an original amplitude neighbourhood, extend a test module on its intersection with $W$ by zero as a module over the restricted inverse-image base ring; the extension has the given stalks inside the open and zero stalks outside, hence restricts to that test module. Restriction of its derived tensor is the local derived tensor. Equivalently compute with a K-flat resolution; the amplitude vanishing restricts. Pullback and tensor restriction are [lem-pc-affine-derived-pullback-tensor-tilde](1). Let $R$ be restriction to $W$ and $m_0$ the canonical comparisons of (1): on a K-flat resolution $P$ and any complex $N$ they are induced by the termwise equality $\\operatorname{Tot}(P\\otimes N)|_W=\\operatorname{Tot}(P|_W\\otimes N|_W)$ and by $\\mathcal O_X|_W=\\mathcal O_W$, so they satisfy the associativity and unit laws (a strong monoidal structure on $R$) and carry the localization map $\\mu_X$ [def-pc-derived-pullback-tensor-comparison] to $\\mu_W$. Put $c=e_W^{-1}(\\mu_{m_0};R(e_X(1)))$; it is an isomorphism by [lem-pc-open-restriction-evaluation-mate-is-iso] for this $m_0$. Naturality of $e_X,e_W$ [def-pc-canonical-derived-tensor-hom-bijection] and of $\\mu_{m_0}$ give $e_W(R\\varphi;c)=\\mu_{m_0};R(e_X\\varphi)$ for every $\\varphi$. With $D=\\Delta_*\\mathcal O_X$ the class map is $e_X^{-1}$ of $D\\otimes^L D\\xrightarrow{m}D\\xrightarrow{\\xi}Lp_1^*K$ by [def-trf-coherent-relative-dualizing-pair]; by step 1 the chain multiplication restricts to that of $D_W$, so $\\mu_{m_0};R(m)=m_W$, and $R(\\text{class map});c$ is the class map of $(K|_W,\\xi_W)$. Hence it is an isomorphism. The same applies to $L,\\eta$; for the scalar map use $\\lambda_K$ and the unit law of $m_0$.",
+   "uses": [
+    "def-pur-pseudo-coherent-complex",
+    "def-pc-finite-tor-dimension-over",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-pc-derived-pullback-tensor-comparison",
+    "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "def-pc-canonical-derived-tensor-hom-bijection",
+    "def-trf-coherent-relative-dualizing-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2T and 0E2X, definition-relative-dualizing-complex and restriction observation; cohomology.tex Tags 08DJ, 08DL"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-affine-relative-dualizing-comparison] twice, to the supplied pairs $(K,\\xi)$ and $(L,\\eta)$ and the specified charts. All its assumptions are hypotheses of this item. It gives the flat finitely presented map $R\\to A$, pseudo-coherent module objects $M_K,M_L$, their finite $R$-Tor intervals, and the actual diagonal classes $\\gamma_K,\\gamma_L$ with the displayed multiplication comparisons. The objects can be taken to be $R\\Gamma(U,K|_U)$ and $R\\Gamma(U,L|_U)$ because [lem-pc-affine-qcoh-derived-equivalence] specifies this quasi-inverse. In each Tor interval take the test module $N=R$: $M_T\\otimes_R^L R\\cong M_T$, so $M_T$ is bounded below (indeed bounded). By [def-pc-ring-pseudo-coherent-complex], $M_K$ has a bounded-above finite-free representative. These are exactly the two hypotheses needed for the affine internal-Hom comparison; no absolute perfectness of $M_K$ is being asserted.",
+   "uses": [
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U, lemma-relative-dualizing-complex-algebra; perfect.tex Tag 0A6H(3)(a)"
+   }
+  },
+  {
+   "text": "For $T=K,L$, apply [lem-sc-affine-pseudo-coherent-rhom-qcoherent] with $P=M_K$ and second object $M_T$. Step 3 checks its bounded-above finite-projective source and bounded-below target hypotheses. It gives the requested isomorphism $\\widetilde{R\\operatorname{Hom}_A(M_K,M_T)}\\cong R\\mathcal Hom_U(K|_U,T|_U)$ in the derived category, not just cohomology isomorphisms. The canonical normalization is the evaluation comparison: if $E$ is the bounded-above finite-free representative and $F$ a bounded-below representative of $M_T$, [lem-sc-derived-hom-finite-free-model] computes the sheaf side by $\\mathcal Hom^\\bullet(\\widetilde E,\\widetilde F)$. Choose bounds $E^p=0$ for $p>b$ and $F^q=0$ for $q<c$. In Hom degree $n$ a nonzero factor requires $c-n\\le p\\le b$, a finite interval. Thus its degree $n$ consists of only finitely many nonzero factors $\\mathcal Hom(\\widetilde E^p,\\widetilde F^{p+n})$; each is the sheaf of $\\operatorname{Hom}_A(E^p,F^{p+n})$. The componentwise map sends a homomorphism to its associated sheaf map and respects $d(h)=d_Fh-(-1)^n h d_E$. Hence it is the evaluation-normalized comparison and is natural in derived morphisms (the comparison before choosing these representatives is the transpose of the sheafified evaluation, using the tensor comparison [lem-pc-affine-derived-pullback-tensor-tilde](3)).",
+   "uses": [
+    "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "lem-sc-derived-hom-finite-free-model",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0A6H, lemma-quasi-coherence-internal-hom, (3)(a) and its proof; cohomology.tex lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  },
+  {
+   "text": "The scalar morphism $A\\to R\\operatorname{Hom}_A(M_K,M_K)$ is the transpose of $A\\otimes_A^L M_K\\to M_K$. By the tensor comparison and the evaluation normalization in step 4 its associated sheaf map is the transpose of $\\mathcal O_U\\otimes^L K|_U\\to K|_U$. This is the scalar map of the restricted pair by [def-trf-coherent-relative-dualizing-pair]. By step 2 (the comparison $c$ built from $m_0$ via [lem-pc-open-restriction-evaluation-mate-is-iso] and the unit law of $m_0$) it is also the restriction of the scalar map on $X$. The internal-Hom object itself restricts by [lem-sc-derived-internal-hom-restrict-open]. This proves the assertion about the actual scalar map, rather than an arbitrary isomorphism of its target.",
+   "uses": [
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-trf-coherent-relative-dualizing-pair",
+    "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "lem-sc-derived-internal-hom-restrict-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2V, lemma-relative-dualizing-RHom, scalar-map normalization; cohomology.tex Tag 08DL"
+   }
+  },
+  {
+   "text": "The equivalence [lem-pc-affine-qcoh-derived-equivalence] is fully faithful and triangulated, and its target is the full subcategory of objects with quasi-coherent cohomology. It therefore gives, for every integer $i$, the asserted Hom bijection by applying it to $(M_K,M_T[i])$. It preserves and reflects isomorphisms: an inverse is taken to an inverse; conversely full faithfulness lifts an inverse and its two identity equations. Thus $a$ and $\\alpha_U$ correspond bijectively. On $\\operatorname{Spec}B=U\\times_VU=U\\times_SU$, [lem-pc-affine-derived-pullback-tensor-tilde](2) identifies the sheafification of $a\\otimes^L_{A,p_1}B$ with $Lp_{1,U}^*\\alpha_U$. The comparison for each supplied pair identifies $\\gamma_K,\\gamma_L$ with $\\xi_U,\\eta_U$ by [lem-trf-affine-relative-dualizing-comparison]. Applying the faithful affine functor over $B$ to the two sides of $(a\\otimes^L B)\\gamma_K=\\gamma_L$ gives exactly $(Lp_{1,U}^*\\alpha_U)\\xi_U=\\eta_U$. Faithfulness gives the converse.",
+   "uses": [
+    "lem-pc-affine-qcoh-derived-equivalence",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-trf-affine-relative-dualizing-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U and Tag 0E2W, lemma-uniqueness-relative-dualizing, first paragraph; perfect.tex Tags 06Z0, 08DW"
+   }
+  },
+  {
+   "text": "Finally all comparisons use associated sheaf maps, tensor maps, evaluation and the units. On Hom complexes the identities $\\widetilde{rh}=r\\widetilde h$ and $\\widetilde{g\\circ h}=\\widetilde g\\circ\\widetilde h$ prove scalar and composition compatibility. These componentwise identities descend to derived morphisms: associated sheaf is exact, so it sends the quasi-isomorphism in any roof to an isomorphism, and preserves composition with its inverse. Naturality of the evaluation transpose from step 4 then gives the same identities independently of representatives. Restricting further to an open simply restricts the same evaluation map, through the comparison $c$ of step 2 for the canonical $m_0$ [lem-pc-open-restriction-evaluation-mate-is-iso] and [lem-sc-derived-internal-hom-restrict-open]. On a smaller affine chart, pullback is scalar extension by [lem-pc-affine-derived-pullback-tensor-tilde](2), so the same transpose describes the affine comparison there; the class comparison restricts as expressly asserted in [lem-trf-affine-relative-dualizing-comparison]. This proves compatibility also when a smaller chart is not a principal open. For $W=\\varnothing$ the module category is the zero category, the diagonal algebra and both classes are zero, and every asserted pair condition is automatic. For an empty affine chart $A=0$, both derived categories are zero and the Hom and isomorphism correspondences are the unique bijections.",
+   "uses": [
+    "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "lem-trf-affine-relative-dualizing-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2U, 0E2X, restriction comparisons; cohomology.tex Tag 08DL; perfect.tex Tag 0A6H"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-pur-pseudo-coherent-complex",
+  "def-pc-finite-tor-dimension-over",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "def-pc-derived-pullback-tensor-comparison",
+  "lem-pc-open-restriction-evaluation-mate-is-iso",
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-trf-affine-relative-dualizing-comparison",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-internal-hom-restrict-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2U, 0E2W and 0E2X, affine comparison and open restriction, with perfect.tex Tag 0A6H(3)(a) and cohomology.tex Tag 08DL; evaluation and functoriality equations written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restrict a coherent relative dualizing pair to open subschemes and compare scalar derived endomorphisms and diagonal class preserving morphisms with affine module derived categories",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.restrictFunctorΓ', 'AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app', 'AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app', 'AlgebraicGeometry.Scheme.ofRestrict_app', 'ModuleCat.Tilde.toOpen_res', 'AlgebraicGeometry.Γ_map_morphismRestrict', 'AlgebraicGeometry.IsAffineOpen.fromSpec_app_of_le', 'AlgebraicGeometry.morphismRestrict_appTop']; note=; digest=f922c3f27e6f271c",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme pseudo coherent derived Hom comparison compatible with scalar actions and restriction of a relative dualizing pair",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.Hom.app_smul', 'CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux', \"AlgHom.coe_restrictScalars'\", 'AlgebraicGeometry.Scheme.Modules.map_smul', 'NonUnitalAlgHom.restrictScalars', 'RingCat.moduleCatRestrictScalarsPseudofunctor', 'PresheafOfModules.restrictScalarsObj', 'ModuleCat.restrictCoextendScalarsAdj']; note=; digest=a7d20b9c9127d662",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, DerivedCategory",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?dualiz|pseudo.?coherent.{0,30}(rhom|hom)|diagonal.{0,30}derived",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated sheaf realization of derived module morphisms between relatively perfect complexes, preserving diagonal generators and open restriction",
+   "results": "8 hits; top=['SheafOfModules.Presentation.map_π_eq', 'SheafOfModules.Presentation.mapGenerators', 'SheafOfModules.Presentation.mapRelations', 'PresheafOfModules.HasDifferentials', 'PresheafOfModules.DifferentialsConstruction.instHasDifferentials', 'SheafOfModules.Presentation.map_relations_I', \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", 'SheafOfModules.Presentation.map_generators_I']; note=; digest=bbaa1cf26b8f25fa",
+   "date": "2026-10-22",
+   "verdict": "no match: the results concern ordinary modules, flatness, ordinary sheaf gluing, or basic derived-category isomorphisms; none states this coherent diagonal-class comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coherent relative dualizing pairs and affine derived internal Hom comparison preserving scalar maps and diagonal classes",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.restrictAdjunction', 'LightCondensed.ihomPoints_symm_comp', 'AlgebraicGeometry.Scheme.restrictFunctorΓ_hom_app', 'AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback', 'AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor', 'AlgebraicGeometry.Scheme.restrictFunctorΓ', 'AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso']; note=; digest=dc4f73fda5b8fc76",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary restriction, sheafification and Ext results do not state coherent relative dualizing-pair localization and the affine derived-Hom/class comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pseudo coherent complex bounded below affine scheme derived Hom associated sheaf comparison",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Modules.Hom', 'CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat', 'SheafOfModules.isQuasicoherent', 'SheafOfModules.Hom', 'CategoryTheory.sheafHom', 'PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm', 'AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl', 'AlgebraicGeometry.Scheme.Modules.Hom.comp_app']; note=; digest=41e5f7f3afd5ff8e",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary restriction, sheafification and Ext results do not state coherent relative dualizing-pair localization and the affine derived-Hom/class comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules, DerivedCategory",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary restriction, sheafification and Ext results do not state coherent relative dualizing-pair localization and the affine derived-Hom/class comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?dualiz|pseudo.?coherent|derivedInternalHom",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary restriction, sheafification and Ext results do not state coherent relative dualizing-pair localization and the affine derived-Hom/class comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme sheafification commutes with derived Hom from a bounded above finite projective complex to a bounded below complex",
+   "results": "8 hits; top=['PresheafOfModules.sheafificationHomEquiv', 'PresheafOfModules.sheafifyHomEquiv', \"PresheafOfModules.sheafifyHomEquiv'\", 'Ext', 'PresheafOfModules.toPresheaf_map_sheafificationHomEquiv', 'PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm', \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", 'PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def']; note=; digest=22d0d0b519972fcc",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary restriction, sheafification and Ext results do not state coherent relative dualizing-pair localization and the affine derived-Hom/class comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-dualizing-pair-rigidity",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Re-split of supplied-pair rigidity: Old step 1, sheaf realization in 3 and 4, and all open-restriction assertions of 7.",
+   "via": [
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-relative-pair-localization-affine-realization",
+  "worker": "stage1",
+  "summary": "Q151 repaired the returned delivery b4589df7b19 against the current live DAG. Reread all fourteen proof-dependency statements and revalidated all twenty-five verbatim citation edges, retaining the unchanged statement and seven-step route. Clarified extension-by-zero stalks in step 2, wrote the finite Hom-degree index bounds in step 4, and explained descent of scalar/composition identities through quasi-isomorphism roofs in step 7. Existing searches, citations and provenance are retained. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the affine/localization part of the supplied-pair rigidity input to lem-trf-local-term-locality, at the exact ancestor place already recorded in blueprint.from: old rigidity step 1, affine realization in steps 3 and 4, and open restrictions in step 7. The semistable/coherent-duality route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic coherent-derived or affine-scheme comparison used exactly with its stated hypotheses; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic coherent-derived or affine-scheme comparison used exactly with its stated hypotheses; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic coherent-derived or affine-scheme comparison used exactly with its stated hypotheses; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+    "why": "Generic coherent-derived or affine-scheme comparison used exactly with its stated hypotheses; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-hom-finite-free-model",
+    "why": "Generic coherent-derived or affine-scheme comparison used exactly with its stated hypotheses; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic coherent-derived or affine-scheme comparison used exactly with its stated hypotheses; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   },
+   {
+    "node": "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "why": "Generic open-restriction internal-Hom comparison: invertibility of the evaluation mate for any strong monoidal structure on restriction, applied to the canonical restriction comparisons; the curve-local-term unit has no such tool and its coherent relative-duality route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-affine-pseudo-coherent-rhom-qcoherent",
+  "lem-sc-derived-hom-finite-free-model",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-pc-open-restriction-evaluation-mate-is-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-ac5e60cc2",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-ac5e60cc2 (reviewer sub-agent of L); spot-checked: This is a re-delivery of b4589df7b193, which the prior reader FIXed; that FIX was lost when landing was refused (side completion not in the live queue DAG). The new head ac5e60cc differs from b4589 only in wording: step 2 (stalks of the extension by zero), step 4 (explicit Hom-degree bounds c-n<=p<=b) and step 7 (descent through quasi-isomorphism roofs), plus the report summary. Statement, stmt_deps, source, proof_deps, tool_uses and steps 1, 3, 5 and 6 are byte-identical to b4589. All 18 cited statements are byte-identical across the two snapshots. The item is still unsplit with no proof on live and side-live. There is no repair note, no new node and no SGA. The fault remains (C3/C4). lem-pc-open-restriction-closed-monoidal (read in full) only says some strong monoidal m exists with an uncurrying identity. It never identifies m with the canonical comparison of tilde(1), or says it carries mu_X to mu_W. So the claims in steps 2, 5 and 7 that the restriction IS the class or scalar map of (K|_W, xi_W) do not follow. Re-applied FIX, merged onto the new wording: step 2 pins the canonical m_0 (termwise Tot equality on K-flat complexes, which carries mu_X to mu_W by def-pc-derived-pullback-tensor-comparison). It sets c=e_W^{-1}(mu_{m0};R(e_X(1))), an isomorphism by lem-pc-open-restriction-evaluation-mate-is-iso, which holds for every m. Naturality of e (def-pc-canonical-derived-tensor-hom-bijection) gives e_W(R phi;c)=mu_{m0};R(e_X phi). The scalar map then follows from the unit law. Steps 5 and 7 now cite through c; step 7 keeps the new roof argument. Step 1 adds the used def-sbc-locally-finite-presentation. proof_deps is recomputed as the union of the step uses, and tool_uses swaps closed-monoidal for evaluation-mate-is-iso. Every step is under 2000 characters. Own checks: restriction of separated, flat and lfp; Tor amplitude restricts by extension by zero; N=R makes M_T bounded, which gives the 0A6H(3)(a) hypotheses; the new Hom-degree bound is correct; the equivalence gives Hom bijections for all shifts and reflects isomorphisms; U x_V U = U x_S U; the class equation holds by faithfulness over B; the edge cases W empty, A=0, W=X and K=L hold. For the sources I relied on the prior reader's located checks, unchanged for this statement and route: Stacks duality.tex 0E2U/0E2V/0E2W/0E2X (7054-7162), perfect.tex 0A6H (2440), cohomology.tex restriction-RHom-to-U (10640).; 1 file(s) fixed by the reviewer"
+ }
+}

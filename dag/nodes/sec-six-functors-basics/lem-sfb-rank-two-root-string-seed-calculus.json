@@ -1,0 +1,294 @@
+{
+ "id": "lem-sfb-rank-two-root-string-seed-calculus",
+ "kind": "statement",
+ "title": "Rank-two root lists and simple-root interchange seeds",
+ "statement": "Let $A$ be a nonzero commutative ring and let $(G,T=D_A(M),\\Phi,\\Phi^\\vee,\\{a,b\\},(X_a,X_b))$ be a pinned split realization [def-sfb-pinned-split-root-realization] of semisimple rank two. Use the canonical root exponentials, linked opposite vectors and representatives $n_a,n_b$ of [lem-sfb-split-root-subgroup-weyl-calculus]. Thus for a root vector $Z\\in\\mathfrak g_r$, $\\exp_r(zZ)$ denotes the associated root-group point, and $\\operatorname{Ad}(n)$ is the differential of conjugation by $n$.\n\nAfter enumerating the simple roots with the short root first when their lengths differ, the positive-root coefficient vectors in the basis $(a,b)$ are exactly one of the following four lists:\n$$\\begin{array}{c|l}A_1\\times A_1&a,b\\\\ A_2&a,b,c=a+b\\\\ B_2&a,b,c=a+b,d=2a+b\\\\ G_2&a,b,c=a+b,d=2a+b,e=3a+b,f=3a+2b.\\end{array}$$\nIn type $A_2$ set $X_c=\\operatorname{Ad}(n_b)X_a$. In type $B_2$ set $X_c=\\operatorname{Ad}(n_b)X_a$ and $X_d=\\operatorname{Ad}(n_a)X_b$. In type $G_2$ set\n$$X_c=\\operatorname{Ad}(n_b)X_a,\\quad X_d=\\operatorname{Ad}(n_a)X_c,\\quad X_e=-\\operatorname{Ad}(n_a)X_b,\\quad X_f=\\operatorname{Ad}(n_b)X_e.$$\nThese are generators of their indicated root modules. Put $x_r(z)=\\exp_r(zX_r)$, including the given $X_a,X_b$ at the simple roots. The following two tangent identities hold in their specified types:\n$$A_2:\\ \\operatorname{Ad}(n_a)X_b=-X_c,\\qquad B_2:\\ \\operatorname{Ad}(n_a)X_c=-X_c.$$\n\nFor each type and each ordered pair $(r,s)$ in the following finite list there are integers $k_{i,j;r,s}$, fixed once for that type, such that the displayed interchange identity holds for every commutative $A$-algebra $R$ and all $x,y\\in R$:\n$$\\begin{array}{c|l} A_2&(a,b)\\\\ B_2&(a,b),(a,c)\\\\ G_2&(a,b),(a,c),(a,d),(b,e).\\end{array}$$\n$$x_s(y)x_r(x)=x_r(x)x_s(y)\\prod_{\\substack{i,j>0\\\\ ir+js\\in\\Phi}}x_{ir+js}(k_{i,j;r,s}x^iy^j).$$\nFix the product order by increasing $(i+j,i)$ in lexicographic order. The integers depend only on the type and this normalization; the assertion is simultaneous for all rings, character lattices and realizations, and is an identity of morphisms, stable under arbitrary base change. No integer is required to be invertible. This assertion concerns just the listed pairs and the two stated tangent identities; it asserts no relation for other root pairs or for words in $n_a,n_b$.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.2, Isogeny Theorem Step 2 (rank-two lists and signed root vectors), Step 3, Lemma 6.2.8 and Example 6.2.9, printed pp.205--209; restricted to the listed simple-root pairs. The two isolated signs are the A2 and B2 root-string computations with the displayed normalizations. Read online; local archival copy WANTED. This is an auxiliary formulation by the worker, not a quotation of a source with omitted calculations. No Stacks tag states this reductive-group calculation."
+ },
+ "stmt_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Work in $V=\\mathbf Q a+\\mathbf Q b$. The root-datum axioms give the reflection permutations of the finite spanning root set. Their generated linear group $W$ is finite, since a linear map fixing that set fixes $V$. Average any rational positive definite form over $W$ to obtain an invariant positive definite form $B$. Invariance under $s_r$, together with $s_r(r)=-r$, gives $\\langle v,r^\\vee\\rangle=2B(v,r)/B(r,r)$. Put $u=\\langle b,a^\\vee\\rangle$, $v=\\langle a,b^\\vee\\rangle$. These are integers, have the same sign, and $0\\leq uv<4$ by strict positive definiteness on the independent vectors $a,b$. If either were positive, one would be $1$ (their product is $1,2$ or $3$); the corresponding reflection would give the forbidden mixed-sign root $b-a$ or $a-b$. Thus $u=v=0$, or, after ordering the shorter root first, $(u,v)=(-m,-1)$ with $m=1,2,3$. Indeed $u/v=B(b,b)/B(a,a)$ when nonzero.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Step 2, printed pp.205--206; elementary finite-root-system argument spelling out the four possibilities."
+   }
+  },
+  {
+   "text": "Every root is in the orbit of a simple root. To see this without changing the given base, write a positive root $r=ia+jb$ with $i,j\\geq0$. If $ij=0$, reducedness gives $r=a$ or $b$. Otherwise $B(r,r)=iB(r,a)+jB(r,b)>0$, so some $\\alpha\\in\\{a,b\\}$ has $\\langle r,\\alpha^\\vee\\rangle>0$. The other coefficient of $s_\\alpha r$ is still positive, hence its two coefficients are nonnegative by the base axiom. Its height is smaller by the positive integer $\\langle r,\\alpha^\\vee\\rangle$. Induction ends at a simple root; negatives lie in the same orbits since $s_\\alpha\\alpha=-\\alpha$. For the orthogonal case the reflections are $(i,j)\\mapsto(-i,j),(i,-j)$. In the other cases they are $U(i,j)=(-i+mj,j)$ and $T(i,j)=(i,i-j)$. Direct substitution shows that the union of each displayed positive list in the statement and its negative is stable under both maps. Conversely $c=T(a)$, $d=U(b)$ in $B_2$; in $G_2$, $c=T(a)$, $d=U(c)$, $e=U(b)$, $f=T(e)$. These generate every displayed positive vector, and the negatives follow by reflecting a simple root before applying the same word. The orbit computation proves exactly the four lists for the original base.",
+   "uses": [
+    "def-sfb-pinned-split-root-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Step 2, printed pp.205--206; explicit height induction and four finite reflection computations."
+   }
+  },
+  {
+   "text": "Conjugation by $n_\\alpha$ identifies the root modules of $r$ and $s_\\alpha r$, since differentiating an invertible conjugation gives an invertible linear map and carries the torus character to its reflected character. The reflection formulas of step 2 therefore show that all displayed $X_r$ are generators of the indicated modules; a sign does not change this. Apply the integral positive-adjoint model. In $A_2$ its $(a,b)$ string has $q=1$, $V_0=X_b$, and $V_1=[X_a,X_b]=-X_c$, so $\\operatorname{Ad}(n_a)X_b=-X_c$. In $B_2$ the string has $q=2$ and $V_1=-X_c$; its Weyl formula is $\\operatorname{Ad}(n_a)V_1=-V_1$, which gives $\\operatorname{Ad}(n_a)X_c=-X_c$. No cancellation by $2$ was used.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-rank-two-integral-positive-adjoint-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Step 2 and Lemma 6.2.8, printed pp.205--208; the string signs are extracted from the separately stated linear-action input."
+   }
+  },
+  {
+   "text": "For a listed pair $(r,s)$ let $\\Psi=\\Phi\\cap(\\mathbf Z_{\\geq0}r+\\mathbf Z_{\\geq0}s)$. It is closed under root sums and contains no opposite roots. The root-product theorem gives $H=U_\\Psi$, with coordinates $x_t(z_t)=\\exp_t(z_tX_t)$ in any order. Put $F=x_s(y)x_r(x)$ and let $F'$ be the proposed right side, with the following explicit correction factors in order:\n$$\\begin{array}{c|c|l}A_2&(a,b)&c(xy)\\\\ B_2&(a,b)&c(xy),d(x^2y)\\\\ B_2&(a,c)&d(2xy)\\\\ G_2&(a,b)&c(xy),d(x^2y),e(x^3y),f(x^3y^2)\\\\ G_2&(a,c)&d(2xy),f(3xy^2),e(3x^2y)\\\\ G_2&(a,d)&e(3xy)\\\\ G_2&(b,e)&f(-xy).\\end{array}$$\nHere $t(z)$ abbreviates $x_t(z)$, and $F'$ starts with $x_r(x)x_s(y)$. Each row is in increasing $(i+j,i)$ for its pair; in particular the $(a,c)$ row puts $f$ before $e$. Each expression is a morphism into $H$, sends $(0,0)$ to $1$, and is $T$-equivariant for input characters $(r,s)$: a factor $x_{ir+js}(Kx^iy^j)$ transforms by exactly $ir+js$.",
+   "uses": [
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Step 3 and Example 6.2.9, printed pp.207--209; explicit candidates, with the product order specified in the item."
+   }
+  },
+  {
+   "text": "Use right logarithmic derivatives in the dual-number sense of the rigidity lemma. Multiplying $u(x+\\epsilon)$ by $v(x+\\epsilon)$ and then by $(uv)(x)^{-1}$ gives\n$$\\delta_t(uv)=\\delta_tu+\\operatorname{Ad}(u)\\delta_tv.$$\nIndeed write $u(t+\\epsilon)=(1+\\epsilon\\delta_tu)u(t)$ and similarly for $v$; multiply and discard $\\epsilon^2$. For $u=x_r(h(x,y))$, the homomorphism property and the differential normalization of the root exponential give $\\delta_tu=X_r\\partial_t h$. Thus for a word $x_{r_1}(h_1)\\cdots x_{r_l}(h_l)$ one successively adds\n$$P_{r_1}(h_1)\\cdots P_{r_{k-1}}(h_{k-1})X_{r_k}\\,\\partial_t h_k.$$\nThe matrices are the integer polynomials of the adjoint model; all inputs here lie in the positive tangent modules. These equations reduce the comparison to finite polynomial addition and multiplication over $\\mathbf Z[x,y]$.",
+   "uses": [
+    "lem-sfb-primitive-weight-logarithmic-rigidity",
+    "lem-sfb-split-root-subgroup-weyl-calculus",
+    "lem-sfb-rank-two-integral-positive-adjoint-model",
+    "def-weil-pbc-polynomial-partial-derivative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Auxiliary dual-number calculation in the coordinate setting of Step 3, printed p.207; written by Q90."
+   }
+  },
+  {
+   "text": "For $A_2$, $P_a(z)X_b=X_b-zX_c$ and $P_b(z)X_a=X_a+zX_c$. Applying step 5 to $F'$ with $c(xy)$ gives $\\delta_xF'=X_a+yX_c$ and $\\delta_yF'=X_b$: the $-xX_c$ from $x_b(y)$ cancels $xX_c$ from the last factor. These equal the derivatives of $F$. For $B_2$ use\n$$P_a(z)X_b=X_b-zX_c+z^2X_d,\\quad P_a(z)X_c=X_c-2zX_d,\\quad P_b(z)X_a=X_a+zX_c,\\quad P_c(z)X_a=X_a+2zX_d.$$\nFor $(a,b)$ the successive extra contributions to $\\delta_xF'$ are $y(X_c-2xX_d)$ and $2xyX_d$, giving $X_a+yX_c$. For $\\delta_yF'$ they are $x(X_c-2xX_d)$ and $x^2X_d$, which cancel the correction in $P_a(x)X_b$ and give $X_b$. For $(a,c)$ the single factor $d(2xy)$ gives $\\delta_xF'=X_a+2yX_d$ and $\\delta_yF'=X_c$. These are $\\operatorname{Ad}(x_s(y))X_r$ and $X_s$, respectively, as required.",
+   "uses": [
+    "lem-sfb-rank-two-integral-positive-adjoint-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Step 3 and Lemma 6.2.8, printed pp.207--208; explicit A2 and B2 polynomial checks."
+   }
+  },
+  {
+   "text": "For $G_2$ the nonidentity positive-basis columns of the adjoint matrices are\n$$\\begin{aligned}P_a(z)X_b&=X_b-zX_c+z^2X_d-z^3X_e,&P_a(z)X_c&=X_c-2zX_d+3z^2X_e,&P_a(z)X_d&=X_d-3zX_e,\\\\ P_b(z)X_a&=X_a+zX_c,&P_b(z)X_e&=X_e+zX_f,\\\\ P_c(z)X_a&=X_a+2zX_d-3z^2X_f,&P_c(z)X_d&=X_d-3zX_f,\\\\ P_d(z)X_a&=X_a+3zX_e,&P_d(z)X_c&=X_c+3zX_f,&P_e(z)X_b&=X_b-zX_f.\\end{aligned}$$\nAll unlisted columns are unchanged. For $(a,b)$, the $c,d,e,f$ factors contribute to $\\delta_xF'$ respectively\n$$y(X_c-2xX_d+3x^2X_e),\\quad 2xy(X_d-3xX_e-3xyX_f),\\quad3x^2y(X_e+yX_f),\\quad3x^2y^2X_f.$$\nTogether with the first $X_a$ these sum to $X_a+yX_c$. Their contributions to $\\delta_yF'$ are the same columns multiplied respectively by $x,x^2,x^3,2x^3y$ instead of $y,2xy,3x^2y,3x^2y^2$. Adding $P_a(x)X_b$ gives $X_b$. Hence both derivatives agree with those of $F$.",
+   "uses": [
+    "lem-sfb-rank-two-integral-positive-adjoint-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 6.2.9, printed pp.208--209, with the omitted (a,b) multiplication expanded using the separate linear-action input."
+   }
+  },
+  {
+   "text": "Continue with the same $G_2$ columns. For $(a,c)$ the proposed factor order is $d(2xy),f(3xy^2),e(3x^2y)$. Their contributions to $\\delta_xF'$ are\n$$2y(X_d-3xX_e-3yX_f),\\quad3y^2X_f,\\quad6xyX_e,$$\nso $\\delta_xF'=X_a+2yX_d-3y^2X_f$. Their contributions to $\\delta_yF'$ are $2x(X_d-3xX_e-3yX_f),6xyX_f,3x^2X_e$; adding $P_a(x)X_c$ gives $X_c$. For $(a,d)$ the single factor $e(3xy)$ yields $\\delta_xF'=X_a+3yX_e$ and $\\delta_yF'=X_d$. For $(b,e)$ the single factor $f(-xy)$ yields $\\delta_xF'=X_b-yX_f$ and $\\delta_yF'=X_e$. In each case these are precisely $P_s(y)X_r$ and $X_s$, the two derivatives of $F$. Thus all seven comparisons hold as polynomial identities over the integers.",
+   "uses": [
+    "lem-sfb-rank-two-integral-positive-adjoint-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 6.2.9, equations (6.2.9), printed pp.208--209; same finite matrix calculation for the item product order."
+   }
+  },
+  {
+   "text": "Apply primitive-weight logarithmic rigidity to each comparison in $H=U_\\Psi$. In the coordinates relative to $(r,s)$ the possible weights are the axes $(1,0),(0,1)$ and: for $(a,b)$, $(1,1)$ and where present $(2,1),(3,1),(3,2)$; for $(a,c)$ in $B_2$, $(1,1)$; for $(a,c)$ in $G_2$, $(1,1),(2,1),(1,2)$; for $(a,d)$ and $(b,e)$, just $(1,1)$. Every pair has gcd $1$, so the lemma applies even over rings of characteristic $2$ or $3$ or with nilpotents. Steps 6--8 give its two derivative hypotheses, and step 4 gives its morphism and equivariance hypotheses. Hence $F=F'$ as morphisms. The integer parameters in step 4 are fixed by the type and the specified normalization, so they give the required simultaneous constants for every lattice and realization. The canonical exponentials, conjugations and coordinate products commute with base change, and evaluation of integer polynomials commutes with every ring map. Thus all the asserted identities hold on every algebra and after arbitrary base change. In type $A_1\\times A_1$ the only positive roots are $a,b$ and there are no listed pairs or tangent identities to prove.",
+   "uses": [
+    "lem-sfb-primitive-weight-logarithmic-rigidity",
+    "lem-sfb-split-root-subgroup-weyl-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Step 3, Lemma 6.2.8 and Example 6.2.9, printed pp.207--209; agent primitive-weight argument for scheme-theoretic equality over arbitrary rings."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-pinned-split-root-realization",
+  "lem-sfb-split-root-subgroup-weyl-calculus",
+  "lem-sfb-rank-two-integral-positive-adjoint-model",
+  "lem-sfb-primitive-weight-logarithmic-rigidity",
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Section 6.2 Steps 2--3 and Example 6.2.9, printed pp.205--209, read online. Q90 supplies the finite polynomial assembly via a separately stated integral adjoint model and primitive-weight rigidity; the missing integral linear comparison remains a new unsplit obligation. No omitted source calculation is treated as proved."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "root.*commutat|Chevalley.*commutat|root.*string",
+   "results": "0 hits; ; Mathlib/AlgebraicGeometry. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simple root string commutator identities for pinned reductive group schemes",
+   "results": "8 hits; RootPairing.GeckConstruction.lie_e_f_mul_ω, RootPairing.GeckConstruction.lie_e_f_same, RootPairing.isOrthogonal_comm, commutatorElement_def, RootPairing.GeckConstruction.f_lie_v_same, commutatorElement, Derivation.commutator_apply, Commute.commutator_eq. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"commutator\"",
+   "results": "0 hits; . Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank two reductive group root string commutation formulas with integral constants over arbitrary rings",
+   "results": "8 hits; RootPairing.chainBotCoeff_mul_chainTopCoeff, RootPairing.GeckConstruction.e_lie_v_ne, RootPairing.GeckConstruction.f_lie_v_ne, RootPairing.EmbeddedG2.pairingIn_shortAddLong_right, RootPairing.GeckConstruction.isSl2Triple, RootPairing.GeckConstruction.lie_e_lie_f_apply, RootPairing.GeckConstruction.lie_e_f_mul_ω, RootPairing.EmbeddedG2.pairingIn_threeShortAddLong_right. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "root[ _-]subgroup|pinned|Chevalley.*commutator",
+   "results": "0 hits; ; Mathlib/GroupTheory. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal integer coefficients for interchanging a simple root unipotent and a positive root unipotent in rank two",
+   "results": "8 hits; RootPairing.GeckConstruction.isSl2Triple, RootPairing.GeckConstruction.e_lie_v_ne, RootPairing.chainBotCoeff_mul_chainTopCoeff, RootPairing.chainBotCoeff_if_one_zero, RootPairing.GeckConstruction.ω_mul_e, RootPairing.GeckConstruction.f_lie_v_ne, RootPairing.GeckConstruction.e, RootPairing.chainTopCoeff_if_one_zero. Full output read; Coxeter relations concern involutions in the quotient Weyl group; Geck constructions concern Lie matrices, not root subgroup morphisms.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*subgroup|Chevalley.*commutator|pinned.*reductive",
+   "results": "{\"t\": \"2026-10-24T12:01:00Z\", \"tool\": \"grep\", \"query\": \"root.*subgroup|Chevalley.*commutator|pinned.*reductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie matrices do not state scheme-theoretic commutation identities for every pinned reductive group over arbitrary rings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank two pinned root group commutators over arbitrary rings with integral constants",
+   "results": "{\"t\": \"2026-10-24T12:01:00Z\", \"tool\": \"leansearch\", \"query\": \"Rank two pinned root group commutators over arbitrary rings with integral constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"commutatorRepresentatives\", \"commutatorElement\", \"commutator\", \"CommutatorRing\", \"Ring.instBracket\", \"closureCommutatorRepresentatives\", \"LieAlgebra.instCommutatorRing\", \"LieAlgebra.instInhabitedCommutatorRing\"], \"digest\": \"a88fceaa30e99c31\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie matrices do not state scheme-theoretic commutation identities for every pinned reductive group over arbitrary rings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\", \"commutator\"",
+   "results": "{\"t\": \"2026-10-24T12:01:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"RootPairing\\\", \\\"commutator\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie matrices do not state scheme-theoretic commutation identities for every pinned reductive group over arbitrary rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank two pinned split reductive group schemes universal integral root subgroup interchange identities",
+   "results": "{\"t\": \"2026-10-24T12:01:02Z\", \"tool\": \"leanfinder\", \"query\": \"Rank two pinned split reductive group schemes universal integral root subgroup interchange identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"RootPairing.EmbeddedG2\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootPairing.EmbeddedG2.indexEquivAllRoots\", \"RootPairing.EmbeddedG2.indexEquivAllRoots_symm_apply\", \"RootPairing.EmbeddedG2.pairingIn_shortAddLong_left\", \"RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe\", \"RootPairing.IsG2\"], \"digest\": \"b5df94eb23f9f13f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie matrices do not state scheme-theoretic commutation identities for every pinned reductive group over arbitrary rings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal integer coefficients in simple root unipotent commutation formulas rank two",
+   "results": "{\"t\": \"2026-10-24T12:01:03Z\", \"tool\": \"leanfinder\", \"query\": \"Universal integer coefficients in simple root unipotent commutation formulas rank two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.isSl2Triple\", \"RootPairing.GeckConstruction.lie_e_lie_f_apply\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"CartanMatrix.Relations.HE\", \"CartanMatrix.Relations.HF\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.f_lie_v_ne\"], \"digest\": \"9ac50d3111433261\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract root pairings and Lie matrices do not state scheme-theoretic commutation identities for every pinned reductive group over arbitrary rings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-low-rank-universal-root-coordinates",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Normalized root homomorphisms in semisimple rank at most two. Supporting input: Theorem 4.1.4 (canonical root groups), Corollary 5.1.9 and Remark 5.1.10 (rank-one Weyl representatives), Proposition 5.1.16 (positive ordered products), and Lemma 6.2.8 with Steps 2--4 of the Isogeny Theorem, printed pp.205--209 (universal rank-two constants). The last Weyl-word formula is an agent-explicit formulation of the normalizer relator (6.2.3) required in Step 4, using the coroot word for the square of a longest Weyl representative; it is not asserted to be a quotation of Lemma 6.2.8; Section 6.2, Isogeny Theorem Step 2 (rank-two lists and signed root vectors), Step 3, Lemma 6.2.8 and Example 6.2.9, printed pp.205--209; restricted to the listed simple-root pairs. The two isolated signs are the A2 and B2 root-string computations with the displayed normalizations.",
+   "via": [
+    "lem-sfb-low-rank-universal-root-coordinates",
+    "lem-sfb-low-rank-pinned-root-hom",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rank-two-root-string-seed-calculus",
+  "worker": "stage1",
+  "summary": "Q90 established the finite based root lists by reflection descent, separated the genuine arbitrary-ring integral adjoint comparison and primitive-weight logarithmic rigidity as statement-only obligations, and explicitly computed all seven interchange laws. The two tangent signs follow from the integral string model without division. The item statement is unchanged; no project attachment was found.",
+  "blueprint": "Inherited ancestor has from.node=null; supporting input to det-thm-sf-ctf-stability-direct-images proof (3), through the existing chain in blueprint.from.via. Current latest blueprint read. This split realizes the root-list, signed-vector and simple-root interchange prerequisite of lem-sfb-low-rank-universal-root-coordinates, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-polynomial-partial-derivative",
+    "why": "Generic formal polynomial derivative notation in the explicit dual-number calculation; the unit has no separate definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-polynomial-partial-derivative"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-7da429467",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-7da429467 (reviewer sub-agent of L); spot-checked: I read the item, both new statement-only nodes and the cited weyl-calculus and pinned-realization statements in full. Steps 1-2: I re-derived the invariant form, u,v in {(0,0),(-m,-1)}, the height descent and the reflections U and T, and checked by hand that the A2/B2/G2 lists are stable under U and T and generated by their orbit words. Step 3: the A2/B2 signs follow from the model's string clause. I confirmed them in SL3 and Sp4 with n=exp(X)exp(-Y)exp(X). Steps 4-9: I recomputed every relative weight and the (i+j,i) order (f before e in G2 (a,c)). My own exact-arithmetic script confirms all 14 log-derivative comparisons over Z[x,y] and that every P_r is integral; a changed constant makes it fail. I also checked B2 (a,b) and (a,c) directly in Sp4. Rigidity lemma: I proved it via K=F0^{-1}F1, character comparison in A[M] and Bezout; coprimality is necessary (x^p in char p). Adjoint model: the bracket table is forced by the string clause and the item's X_r definitions, the coefficients match Chevalley's (p+1), Jacobi holds, and the SL2 sign (-1)^i V_{q-i} holds on Sym^q. Neither node is a duplicate: the existing Chevalley nodes are over Q or a field, and the parent depends on this item. Neither node restates the item; the item still does the group-level work. Batch-5: both flagged citations (pinned-realization def, split-root weyl calculus) were already stmt_deps of the item. They reach only generic trf algebra (fpqc base descent, f.g. torsion-free groups are free), which is outside both assumptions, so I accept them. tool_use of the partial-derivative definition accepted. Conrad has no local copy, so I checked the mathematics independently. No changes."
+ }
+}

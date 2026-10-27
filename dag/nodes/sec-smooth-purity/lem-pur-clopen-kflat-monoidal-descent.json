@@ -1,0 +1,238 @@
+{
+ "id": "lem-pur-clopen-kflat-monoidal-descent",
+ "kind": "statement",
+ "title": "Normalized K-flat monoidal descent for clopen restriction",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $I$ a finite set, and $j_i:X_i\\hookrightarrow X$ pairwise disjoint open and closed subschemes covering $X$ [def-weil-open-immersion, def-weil-closed-immersion]. Work on their small pro-etale sites in the fixed universes [def-weil-pbc-proetale-site]. Let $R$ be a sheaf of commutative rings, $R_i=R|_{X_i}$, and let $r_i$, $G$ and $e_i$ be the restriction, sectionwise product gluing, and zero insertion functors of [lem-pur-clopen-ringed-module-gluing] on module sheaves [def-weil-sheaf-of-modules-category].\n\nUse unbounded derived categories and their localizations $Q_R,Q_{R_i}$ [def-weil-abstract-derived-category], flat-term K-flat models [def-pc-flat-sheaf-modules, def-pc-kflat-complex], and the K-flat derived tensor of [lem-weil-pbc-site-derived-tensor-descent]. Write $r_D:D(R)\\simeq\\prod_iD(R_i)$ for the equivalence with specified degreewise localization comparisons of [lem-pur-clopen-unbounded-derived-localization]. Let $b_{i,P,Q}$ be the pure-tensor normalized total-complex comparison of [lem-pur-clopen-total-tensor-kflat-detection].\n\nThere is a unique natural isomorphism of bifunctors on the derived categories\n$$c_i:r_{D,i}(K\\otimes_R^{\\mathbf L}L)\\xrightarrow{\\sim}r_{D,i}K\\otimes_{R_i}^{\\mathbf L}r_{D,i}L$$\nwhose restriction to every pair of flat-term K-flat complexes $P,Q$ is $Q_{R_i}(b_{i,P,Q})$, under the canonical localization and K-flat computation comparisons on both sides. The isomorphisms and their inverses are independent of representatives and natural for arbitrary derived morphisms.\n\nEquip each derived category with its prescribed symmetric monoidal structure: the tensor is that K-flat derived tensor, the unit is its ring sheaf in degree zero, and the associator, both unitors and symmetry are induced from total tensors, with symmetry $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$ [lem-sf-ringed-derived-closed-symmetric-monoidal]. For these structures, $c_i$ and $r_{D,i}(R[0])\\cong R_i[0]$ satisfy the associativity, symmetry, and both unit compatibility diagrams. Consequently $r_D$, with the componentwise tensor on the product, is a symmetric monoidal equivalence. This includes the empty product of zero categories and zero coefficient sheaves.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; Tag 0G7D, sites-cohomology-lemma-factor-through-K-flat; Tag 06YU, sites-cohomology-definition-derived-tor; Tag 0FPT, sites-cohomology-lemma-symmetric-monoidal-derived. Agent normalized finite-clopen application: returned item steps 8-9."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-sf-ringed-derived-native-tensor",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the clopen unbounded localization equivalence for Fin(card I). Reindex the component product by Fintype.equivFin; its inverse composite with the tuple of the specified restrictions is the localization equivalence. Cancel the reindexing equivalence to obtain IsEquivalence for the original tuple functor, for every finite I including the empty type.",
+   "uses": [
+    "lem-pur-clopen-unbounded-derived-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply clopen total tensor detection to obtain the ordinary braided structures, natural total comparisons, pure-tensor equations, summand equations, preservation of K-flat complexes and coproducts. Evaluate the summand equation on a local pure tensor and use its ordinary normalization. By definition the resulting two terms are coefficientTensorGenerator, proving TotalNormalization.",
+   "uses": [
+    "lem-pur-clopen-total-tensor-kflat-detection",
+    "def-pur-clopen-monoidal-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the braided model-normalization lemma to each component with precisely the ordinary structure, total comparison and preservation data just obtained. Its conclusion gives the specified derived braided structure, the model normalization for its inverse tensorator, and the canonical unit equality.",
+   "uses": [
+    "lem-pur-clopen-braided-model-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness cancel the native K-flat computation isomorphism and the tensor of the canonical localization factors on a pair of flat-term K-flat complexes. Any two normalized comparisons then agree at that pair. The resolving localization theorem for site derived tensor makes precomposition by the product of the resolving inclusions injective on natural transformations. Transport the equality to homotopy-model representatives with quotientCompQhIso and naturality, and apply that injectivity. Hence the comparisons agree on all derived objects and morphisms. Tuple the component data; braidedComparison equals the selected comparison by reflexivity.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-ringed-derived-native-tensor",
+    "def-pur-clopen-monoidal-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-unbounded-derived-localization",
+  "lem-pur-clopen-total-tensor-kflat-detection",
+  "def-pur-clopen-monoidal-normalization",
+  "lem-pur-clopen-braided-model-normalization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7D, 06YU and 0FPT; P9 proves equivalence, generator normalization, resolving-model uniqueness, and finite-family assembly; coherent model/unit descent is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived functor of finite clopen restriction is symmetric monoidal for K-flat derived tensor normalized by restriction of pure tensors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}\n  {\"name\": \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R], (CategoryTheory.coherentTopology LightProfinite).W.IsMonoidal\", \"doc\": \"The coherent Grothendieck topology on the opposite category of light profinite spaces, when lifted to the category of modules over a commutative ring $ R $, satisfies the monoidal property. This means\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → (LightCondensed.free R).Monoidal\", \"doc\": \"For any commutative ring $ R $, the free module functor from the category of light condensed sets to the category of light condensed $ R $-modules is a monoidal functor. This means it preserves the te\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descend the tensor comparison of an exact monoidal sheaf equivalence from flat term K-flat models to unbounded derived categories preserving Koszul symmetry",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.lTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"For a commutative ring $ R $ and a flat $ R $-module $ M $, if $ C $ is an exact short complex in the category of $ R $-modules, then the tensor product of $ C $ with $ M $ (via left tensoring) result\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal, CategoryTheory.Equivalence",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Equivalence.inverseMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (e : C ≌ D) [e.functor.Monoidal] : e.inverse.Monoidal\", \"doc\": \"If a monoidal functor `F` is an equivalence of categories then its inverse is also monoidal.\"}\n  {\"name\": \"CategoryTheory.Equivalence.IsMonoidal\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (e : C ≌ D) [e.functor.Monoidal] [e.inverse.Monoidal] : Prop\", \"doc\": \"An equivalence of categories involving monoidal functors is monoidal if the underlying\\nadjunction satisfies certain compatibilities with respect to the monoidal functor data.\"}\n  {\"name\": \"CategoryTheory.Equivalence.instMonoidalFunctorSymmOfInverse\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (e : C ≌ D) [e.inverse.Monoidal] : e.symm.functor.Monoidal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.instMonoidalInverseSymmOfFunctor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (e : C ≌ D) [e.functor.Monoidal] : e.symm.inverse.Monoidal\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.instMonoidalFunctorTrans\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) [e.functor.Monoidal] (e' :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.instMonoidalInverseTrans\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) [e.inverse.Monoidal] (e' :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.isMonoidal_symm\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] (e : C ≌ D) [e.functor.Monoidal] [e.inverse.Monoidal] [e.IsMonoidal] : e.symm.IsMonoidal\", \"doc\": \"The inverse of a monoidal category equivalence is also a monoidal category equivalence.\"}\n  {\"name\": \"CategoryTheory.Equivalence.monoidalOfPostcompFunctor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) (F : CategoryTheory.Functo\", \"doc\": \"Given a functor `F` and an equivalence of categories `e` such that `e.inverse` and `F ⋙ e.functor`\\nare monoidal functors, `F` is monoidal as well.\"}\n  {\"name\": \"CategoryTheory.Equivalence.monoidalOfPostcompInverse\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) (F : CategoryTheory.Functo\", \"doc\": \"Given a functor `F` and an equivalence of categories `e` such that `e.functor` and `F ⋙ e.inverse`\\nare monoidal functors, `F` is monoidal as well.\"}\n  {\"name\": \"CategoryTheory.Equivalence.monoidalOfPrecompFunctor\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) (F : CategoryTheory.Functo\", \"doc\": \"Given a functor `F` and an equivalence of categories `e` such that `e.inverse` and `e.functor ⋙ F`\\nare monoidal functors, `F` is monoidal as well.\"}\n  {\"name\": \"CategoryTheory.Equivalence.monoidalOfPrecompInverse\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) (F : CategoryTheory.Functo\", \"doc\": \"Given a functor `F` and an equivalence of categories `e` such that `e.functor` and `e.inverse ⋙ F`\\nare monoidal functors, `F` is monoidal as well.\"}\n  {\"name\": \"CategoryTheory.Equivalence.isMonoidal_trans\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Functor\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.MonoidalCategory C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.MonoidalCategory D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.MonoidalCategory E] (e : C ≌ D) [e.functor.Monoidal] [e.in\", \"doc\": \"The composition of two monoidal category equivalences is monoidal.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk][ _-]?[Ff]lat|derived.*[Mm]onoidal|[Mm]onoidal.*derived",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat model localization descends a restriction tensor comparison to a symmetric monoidal derived equivalence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.localizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) : Flat (Localization S) (LocalizedModule S M)\", \"doc\": \"If $ M $ is a flat module over a commutative semiring $ R $, then for any submonoid $ S $ of $ R $, the localized module $ M_S $ is flat over the localization $ R_S $ of $ R $ at $ S $. This asserts t\"}\n  {\"name\": \"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"(N N') [AddCommMonoid N] [Module R N] [AddCommMonoid N'] [Module R N'] (g : N →ₗ[R] N') [IsLocalizedModule S f]\\n  [IsLocalizedModule S g] : IsLocalizedModule S (TensorProduct.map f g)\", \"doc\": \"Let $R$ be a commutative semiring, $S$ a submonoid of $R$, and $M, N$ be $R$-modules. This statement asserts that localization of modules at $S$ commutes with the tensor product. Specifically, if $f: \"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Basic\", \"type\": \": (L').IsLocalization W\", \"doc\": \"The localized category $ D $, obtained by localizing a monoidal category $ C $ with respect to a monoidal morphism property $ W $, is equipped with a canonical monoidal category structure. This struct\"}\n  {\"name\": \"CategoryTheory.LocalizedMonoidal\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Basic\", \"type\": \"(L : C ⥤ D) (W : MorphismProperty C) [W.IsMonoidal] [L.IsLocalization W] {unit : D} (_ : L.obj (𝟙_ C) ≅ unit)\", \"doc\": \"The category $ D $ obtained by localizing a monoidal category $ C $ with respect to a monoidal morphism property $ W $, via a functor $ L : C \\to D $ that inverts $ W $-morphisms and preserves the mono\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Basic\", \"type\": \": (L').EssSurj\", \"doc\": \"When localizing a monoidal category $\\\\mathcal{C}$ with respect to a monoidal morphism property $W$ via a functor $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the localized category $\\\\mathcal{D}$ is equipped wit\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory_1\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Braided\", \"type\": \": (L').IsLocalization W\", \"doc\": \"When a monoidal category $ \\\\mathcal{C} $ is localized with respect to a monoidal morphism property $ W $ via a functor $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the localized category $ \\\\mathcal{D} $ is eq\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.rightUnitor_hom_app\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Basic\", \"type\": \"(X : C) : (ρ_ ((L').obj X)).hom = (L').obj X ◁ (ε' L W ε).inv ≫ (μ _ _ _ _ _).hom ≫ (L').map (ρ_ X).hom\", \"doc\": \"For objects $X$ and $Y$ in a monoidal category $\\\\mathcal{C}$ localized to $\\\\mathcal{D}$ via a functor $L$ inverting $W$-morphisms, the natural isomorphism $\\\\mu_{X,Y}$ establishes an equivalence betwee\"}\n  {\"name\": \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"module\": \"Mathlib.CategoryTheory.Localization.Monoidal.Basic\", \"type\": \": MonoidalCategory (LocalizedMonoidal L W ε)\", \"doc\": \"The localized monoidal category $\\\\mathcal{D}$, obtained by inverting $W$-morphisms in a monoidal category $\\\\mathcal{C}$, is equipped with a canonical monoidal structure. This structure includes: (1) a\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: hits concern generic localization, ordinary ring modules or a different sheaf functor; none states this normalized finite-clopen assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|clopen.*[Mm]onoidal|[Mm]onoidal.*[Dd]erived",
+   "results": "; 0 hits (subdirectory CategoryTheory)",
+   "date": "2026-10-22",
+   "verdict": "No match: no hits for clopen/K-flat derived monoidal comparison in CategoryTheory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.Functor.Monoidal",
+   "results": "loogle: unknown identifier 'CategoryTheory.Localization'; 0 hits",
+   "date": "2026-10-22",
+   "verdict": "No match: query rejected for an unknown identifier; repeated below with the valid localization class name."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact restriction equivalence on sheaves is symmetric monoidal on unbounded derived categories with comparison uniquely determined on flat K-flat resolutions",
+   "results": "; CategoryTheory.Monoidal.Transported.instSymmetricCategory, CategoryTheory.Sheaf.monoidalCategory, CategoryTheory.Sheaf.symmetricCategory, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, PresheafOfModules.sheafificationHomEquiv, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj, PresheafOfModules.sheafifyHomEquiv'",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give generic exact-derived comparisons, sheafification or transported structures; none states the prescribed finite-clopen normalized K-flat assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a clopen partition of a ringed site descends to a symmetric monoidal equivalence of unbounded derived module categories using K-flat total tensors",
+   "results": "; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give generic exact-derived comparisons, sheafification or transported structures; none states the prescribed finite-clopen normalized K-flat assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLocalization, CategoryTheory.Functor.Monoidal",
+   "results": "; CategoryTheory.instMonoidalLocalizedMonoidalToMonoidalCategory, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp, CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost, CategoryTheory.Localization.Monoidal.lifting_isMonoidal, CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_ε, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_hom, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_inv",
+   "date": "2026-10-22",
+   "verdict": "No match: generic monoidal localization theorems require a monoidal model localization and do not alone identify clopen restriction or its normalized K-flat tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms on flat K-flat models descend uniquely through derived localization and preserve associators unitors and signed symmetry",
+   "results": "; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "No match: hits give generic exact-derived comparisons, sheafification or transported structures; none states the prescribed finite-clopen normalized K-flat assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-product-derived-tensor-calculus",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion, via finite-clopen derived decomposition: normalized finite-clopen application: returned item steps 8-9.",
+   "via": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-kflat-monoidal-descent",
+  "worker": "stage1",
+  "summary": "Construct the comparison on flat-term K-flat pairs from the specified localization comparisons and b; descend it and its inverse by the existing site-level universal property. Verify reassociation, Koszul symmetry and both action-unit diagrams on resolving representatives, then use essential surjectivity and naturality. All needed facts already have nodes; no new nodes. Statement unchanged, including empty and zero cases.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant, via lem-pur-finite-clopen-derived-decomposition and lem-pur-finite-product-derived-tensor-calculus: normalized clopen tensor descent and coherence (returned parent steps 8-9).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic site-level resolving localization and extension of bifunctor transformations; no purity-conventions node supplies this universal property."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Specifies the existing derived associator, unitors and signed symmetry whose compatibilities are being checked."
+   },
+   {
+    "node": "lem-sf-ringed-tensor-complex-constraints",
+    "why": "Generic actual total-complex constraint formulas, needed to verify rather than merely transport the prescribed monoidal structure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-1af045987",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-1af045987 (reviewer sub-agent of L); spot-checked: Read the item, its 7 steps and every cited statement in full. Cited: the clopen total-tensor detection, unbounded derived localization, site derived-tensor descent, K-flat total-tensor model, the derived closed symmetric monoidal node, the tensor-complex constraints, and the sheaf tensor, flat and K-flat definitions. Read Stacks 0G7D and 0FPT at their labels; 0FPT's proof is 'Omitted' and the split writes out the verifications. No SGA. No new nodes, statement unchanged, not a re-split (no repair note; Q125 created the item today for lem-pur-finite-product-derived-tensor-calculus). Step 1: restriction keeps flat-term K-flat models by the (=>) halves of the detection node. The composite t^{-1}, kappa, Q(b), t', kappa^{-1} is checked arrow by arrow and is natural on K(R). Step 2: the extension and uniqueness clause of the descent node gives c_i, its inverse and representative independence. Step 3: T(P,Q) is a model by the model lemma. Both routes send (x(x)y)(x)z to r_ix(x)(r_iy(x)r_iz) with no sign, using a_i on direct-sum terms (r_i preserves coproducts). Equality is tested on local pure tensors and on summands. Step 4: b's stated compatibility with signed symmetry gives one (-1)^{pq} on each route. Step 5: R[0] is a flat-term K-flat model by the unitors, and both unit routes give r_i(ax). Steps 6-7: essential surjectivity plus naturality; product coordinates; strong symmetric monoidal plus equivalence gives a monoidal equivalence. Checked: empty I (X empty), zero R and empty components (zero categories), odd degrees, unbounded complexes. Duplicate search: lem-weil-pbc-ringed-topoi-derived-tensor-pullback is unnormalized with no coherence; the sf-clopen and open-tensor nodes state other things; no existing node states the item. Accepted the three declared tool_uses (site derived-tensor descent, derived symmetric monoidal, tensor-complex constraints) as generic black boxes. Minor: the report names citations.json and searches.jsonl, which are not in the commit. review_split.py reported 'no such node' for every cited node because it does not follow the snapshot's symlinked chapter directories; I found each node with find -L."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenKFlatMonoidalDescent",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.clopen_kflat_monoidal_descent",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ClopenMonoidalDescent.clopen_kflat_monoidal_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClopenKFlatMonoidalDescent.lean",
+  "statement": "theorem clopen_kflat_monoidal_descent (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t}) (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)] (hdisjoint : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k)))) (hcover : ∀ x : X, ∃ i, x ∈ Set.range (j i)) (R : Sheaf (topology X) CommRingCat.{max u (t + 1)}) : (Functor.pi' (fun i ↦ derivedRestriction.{t, u} (j i) R)).IsEquivalence ∧ ∃ d : ∀ i, (derivedRestriction.{t, u} (j i) R).Braided, ∀ i, ∃ (h : (clopenTensorRestriction.{t, u} (j i) R).Braided) (b : coefficientTotalTensor.{u, t + 1, t} (topology X) R ⋙ clopenTensorComplexRestriction.{t, u} (j i) R ≅ ((clopenTensorComplexRestriction.{t, u} (j i) R).prod (clopenTensorComplexRestriction.{t, u} (j i) R)) ⋙ coefficientTotalTensor.{u, t + 1, t} (topology (Y i)) ((clopenTensorRings.{t, u} (j i)).obj R)) (c : Comparison.{t, u} (j i) R), TotalNormalization.{t, u} (j i) R h b ∧ ModelNormalization.{t, u} (j i) R b c ∧ (∀ c' : Comparison.{t, u} (j i) R, ModelNormalization.{t, u} (j i) R b c' → c' = c) ∧ braidedComparison.{t, u} (j i) R (d i) = c ∧ braidedUnit.{t, u} (j i) R (d i) = unitComparison.{t, u} (j i) R h",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the recorded exact clopen restriction and its canonical localization factors; Comparison is a genuine natural bifunctor isomorphism. TotalNormalization fixes b on actual local pure tensors and every total summand. ModelNormalization gives the canonical K-flat computation square on all flat-term K-flat pairs. The theorem asserts uniqueness among all natural isomorphisms satisfying it, ties that same c to the inverse tensorator of a Braided structure, and ties its unit to the localized degree-zero ring comparison. familyBraided tuples these component structures on the existing componentwise product tensor; the underlying tuple functor is an equivalence. Two already landed dependencies are added for the actual native tensor and coefficientTotalTensor constructors; neither closure reaches this item. No statement change, new nodes or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79678ee1f",
+  "group": "NH",
+  "result": "pass",
+  "note": "Single new module ProEtaleClopenKFlatMonoidalDescent; node changes only add stmt_deps native-tensor and def-coef-ringed-tensor-hom-model; statement verbatim, declarations complete. Clause check: b existential but fully pinned by TotalNormalization (h's mu on local pure tensors as in the detection dep, b on every coefficientTensorGenerator; h's epsilon determined by mu); c is a NatIso of the actual bifunctors with ModelNormalization r_D(t)≫c≫(κ⊗κ)=κ_Tot≫Q(b)≫t' on flat-term K-flat pairs (hiP follows from the detection dep) and uniqueness over all c'; d Braided with mu^-1=c and epsilon pinned to unitComparison (κ_{R[0]} then r_iR≅R_i, through native unitIso), so it encodes the associativity, Koszul symmetry and both unit diagrams; first conjunct pi' IsEquivalence = the localization dep's derivedFamily; factors = mapDerivedCategoryFactors as pinned by restrictionFactors_normalization; hasDerived universe max(u+1)(t+2) equals the dep's. Edge cases: empty I, empty components, zero R, unbounded complexes; index universe independent; the dep's module universe is used with its index parameter at 0, harmless for finite I. Mechanical finding: tensorIso/unitIso are asIso of the theorem node's isIso_mu/isIso_ε, so the statement depends on the theorem's conclusion; PASS on that point. finite_clopen_tensor_calculus is the parent split consumer, not a duplicate. No hollow defs, docstrings carry source/blueprint and the 7 steps, proof only sorry; no compile since nothing was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37cd4",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261025T123513-L-1875872",
+  "kind": "interface",
+  "note": "independent cc review: item proof vs node lem-pur-clopen-kflat-monoidal-descent and its deps; extracted interface module diffed verbatim against clone item file; new sorry lemma clopen_braided_model_normalization vs its node and normalized-braided-localization route"
+ }
+}

@@ -85,7 +85,54 @@
   "declaration": "CategoryTheory.Mod.isGrothendieckAbelian",
   "statement": "theorem isGrothendieckAbelian [IsGrothendieckAbelian.{w} C] :\n    IsGrothendieckAbelian.{w} (Mod C A)"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+     "lines": [
+      62,
+      65
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [
+    "CategoryTheory.Mod.instAbelian"
+   ],
+   "open": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Mod.isGrothendieckAbelian",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian",
+     "lines": [
+      231,
+      249
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Mod.instAbelian",
+     "module": "WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian",
+     "lines": [
+      210,
+      213
+     ],
+     "kind": "instance",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-16",
   "by": "L",
@@ -95,5 +142,39 @@
   "note": "Existing theorem correctly specializes to the source statement; independent-universe scompile probes passed with only permitted axioms. No delivery errors found."
  },
  "chapter": "sec-proetale-coefficients",
- "unit": "sk-prop-sfb-module-category"
+ "unit": "sk-prop-sfb-module-category",
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be a monoidal Grothendieck abelian category whose tensor product is\nadditive in each variable, such that $X\\otimes-$ preserves colimits for every object $X$.\nLet $\\mathcal R$ be a monoid object of $\\mathcal C$. Then $\\Mod_{\\mathcal R}(\\mathcal C)$ is\na Grothendieck abelian category.",
+  "proof": [
+   {
+    "text": "By assumption $\\mathcal R\\otimes-$ preserves colimits, in particular finite colimits, so\n$\\Mod_{\\mathcal R}(\\mathcal C)$ is abelian ([lem-sfb-modobj-abelian]).",
+    "uses": [
+     "lem-sfb-modobj-abelian"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Small colimits of module objects are computed in $\\mathcal C$. Let $L=\\colim M_i$ in\n$\\mathcal C$. Then $\\mathcal R\\otimes L=\\colim(\\mathcal R\\otimes M_i)$, and the actions\n$\\gamma_{M_i}$ induce an action on $L$. This makes $L$ a colimit in\n$\\Mod_{\\mathcal R}(\\mathcal C)$, by the argument of the cokernel case\n([lem-sfb-modobj-cokernels]). Finite limits are\ncomputed in $\\mathcal C$ by [lem-sfb-modobj-forget-left-exact]. Hence a filtered colimit of\nshort exact sequences of module objects is computed in $\\mathcal C$, where it is exact. The\nforgetful functor is faithful and exact ([lem-sfb-modobj-forget-faithful],\n[lem-sfb-modobj-forget-left-exact], [lem-sfb-modobj-forget-right-exact]), so it reflects\nexactness. Thus filtered colimits are exact in $\\Mod_{\\mathcal R}(\\mathcal C)$.",
+    "uses": [
+     "lem-sfb-modobj-cokernels",
+     "lem-sfb-modobj-forget-left-exact",
+     "lem-sfb-modobj-forget-faithful",
+     "lem-sfb-modobj-forget-right-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $G$ be a generator of $\\mathcal C$. The free module $\\mathcal R\\otimes G$, with action\n$(\\mu\\otimes G)\\alpha^{-1}$, satisfies\n$\\Hom_{\\Mod_{\\mathcal R}}(\\mathcal R\\otimes G,M)\\cong\\Hom_{\\mathcal C}(G,M)$. A linear map\n$f$ goes to $f(\\eta\\otimes G)\\lambda_G^{-1}$, and the inverse sends $g$ to\n$\\gamma_M(\\mathcal R\\otimes g)$. Hence $\\mathcal R\\otimes G$ is a generator of\n$\\Mod_{\\mathcal R}(\\mathcal C)$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

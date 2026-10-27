@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-completed-pullback-tensor-evaluation-cube-model",
+ "kind": "lemma",
+ "title": "Categorical evaluation tensor cube transport",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbb Q_\\ell$, a scheme morphism $f:X\\to Y$ with $\\ell$ invertible on both schemes, and a level $n\\geq0$ denoting the quotient $\\mathcal O_E/\\varpi_E^{n+1}$. Use the coherent sequence categories and their exact derived inverse image $F$ and tensor comparison $\\mu$ of [def-pur-completed-pullback-tower-realizations], the finite intrinsic derived pullback $G$ and canonical comparison $\\nu$ of [def-pur-finite-pullback-tensor-construction], and the evaluation functors $V_X,V_Y$ and their normalized tensor comparisons $\\tau_X,\\tau_Y$ of [lem-coef-derived-system-evaluation-calculus]. Let $c$ be an ordinary comparison from integralOperationsLevelPullback at n to the intrinsic constant-coefficient inverse image, preserving the actual adjunction-unit sections of [def-weil-proetale-inverse-image]: for every module A, object U and section x, c sends the first unit applied to x to the second unit applied to x. Let $e:F V_X\\simeq V_Y G$ be a derived comparison whose square on every cochain complex is the descent of pullbackTensorInverseEvaluationComplex.inv followed by the termwise image of c, with the specified exact-functor factorization isomorphisms. This square is exactly the binder he in the Lean statement below. For K-flat coherent cochain complexes P,Q in [def-coef-ringed-tensor-hom-model], put M=Q(P), N=Q(Q). Then, with composition written in traversal order,\n$$V_X(\\mu_{M,N})\\,\\tau^X_{FM,FN}\\,(e_M\\otimes e_N)=e_{M\\otimes N}\\,G(\\tau^Y_{M,N})\\,\\nu_{V_YM,V_YN}.$$\nOnly pairs of the displayed K-flat representatives are asserted; extension to arbitrary derived objects is a separate step. No boundedness, constructibility or termwise flatness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-finite-pullback-tensor-construction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, final ordinary total-complex comparison; Tags 0941 and 03D2 for sequence evaluation and the ordinary adjunction units."
+ },
+ "proof": [
+  {
+   "text": "Apply the representative normalization square for the evaluation tensor at Y and at X, the coherent pullback tensor comparison normalization, and the supplied exact-evaluation square he. Pasting these three squares and cancelling their invertible model comparisons gives the abstract cube equation with an arbitrary finite tensor comparison ν.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-pur-finite-pullback-tensor-construction",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-proetale-inverse-image",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-pur-finite-pullback-tensor-construction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-proetale-inverse-image",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B4",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0941 and 03D2; abstract categorical transport of the two K-flat evaluation normalization squares."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite evaluation of a sequence of module sheaves commutes with the derived pullback tensor comparison on K-flat cochain representatives",
+   "results": "Eight hits about ordinary free module pullback comparisons, including SheafOfModules.freeFunctorCompPullbackIso, pullbackObjFreeIso, pullback_map_ιFree_comp_pullbackObjFreeIso_hom and pullbackObjFreeIso_hom_naturality. None gives the coherent derived evaluation square.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of coherent coefficient systems preserves the canonical derived pullback tensor product comparison on K-flat representatives",
+   "results": "Eight hits: flat tensor exactness for ModuleCat, tensorProd preservation under flatness, and cartesian monoidal functor comparisons. None identifies the specified sequence comparison and its finite evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.ext",
+   "results": "CategoryTheory.NatTrans.ext in Mathlib.CategoryTheory.NatTrans. This supports equality of natural transformations after the representative calculation, not the calculation itself.",
+   "date": "2026-10-27",
+   "verdict": "Generic extensionality only."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*evaluation|evaluation.*tensor",
+   "results": "Mathlib hits concern evaluation of rigid tensor categories and linear algebra, not coefficient-sequence evaluation. The project has the parent obligation, evaluation-tensor normalizations and projection-formula consumers, but no representative evaluation theorem. The two blueprint search hits concern the adic projection formula and trace pairings, not this calculation.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate representative square."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTensorEvaluationRepresentatives",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-pullback-tensor-evaluation-representatives",
+   "place": "The categorical transport substep of the representative evaluation square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedPullbackTensorEvaluationCube",
+  "file": "lean/Sheaf/Paper/CompletedPullbackTensorEvaluationCube.lean",
+  "declaration": "WeilConjectures.completedPullbackTensor_evaluation_cube_model",
+  "declarations": [
+   "WeilConjectures.completedPullbackTensor_evaluation_cube_model"
+  ],
+  "statement": "theorem completedPullbackTensor_evaluation_cube_model {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) [hX : ∀ x : X, Invertible (l : X.residueField x)] [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (c : integralOperationsLevelPullback l E f n ≅ sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f) (hc : ∀ (A : normalizedDVRModules l E Y n) (U : Y.ProEt) (x : A.val.obj (op U)), (c.hom.app A).val.app (op ((proEtaleBaseChange f).obj U)) (((coefficientProEtaleModuleAdjunction.{u, u} f (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1))))).unit.app A).val.app (op U) x) = ((sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1))).unit.app A).val.app (op U) x) (e : pullbackTensorSequenceDerived l E f ⋙ coefficientSequenceDerivedEvaluation l E X n ≅ coefficientSequenceDerivedEvaluation l E Y n ⋙ finiteDerivedPullback l E n f) (he : ∀ A : CochainComplex (coefficientSequenceModules l E Y) ℤ, e.hom.app (DerivedCategory.Q.obj A) ≫ (finiteDerivedPullback l E n f).map ((coefficientSequenceEvaluation l E Y n).mapDerivedCategoryFactors.hom.app A) ≫ (sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) f).mapDerivedCategoryFactors.hom.app _ = (coefficientSequenceDerivedEvaluation l E X n).map ((pullbackTensorSequenceInverse l E f).mapDerivedCategoryFactors.hom.app A) ≫ (coefficientSequenceEvaluation l E X n).mapDerivedCategoryFactors.hom.app _ ≫ DerivedCategory.Q.map ((pullbackTensorInverseEvaluationComplex l E f n).inv.app A) ≫ DerivedCategory.Q.map ((NatIso.mapHomologicalComplex c (.up ℤ)).hom.app (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj A))) (ν : finiteIntrinsicDerivedTensor l E Y n ⋙ finiteDerivedPullback l E n f ≅ (finiteDerivedPullback l E n f).prod (finiteDerivedPullback l E n f) ⋙ finiteIntrinsicDerivedTensor l E X n) (hn : CoefficientEvaluationTensorNormalization l E Y (pullbackTensorCalculus l E Y).toCoefficientDerivedSystemReduction) (hx : CoefficientEvaluationTensorNormalization l E X (pullbackTensorCalculus l E X).toCoefficientDerivedSystemReduction) (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (J := coefficientSequenceTopology (ProEt.topology Y)) (R := coefficientSequenceCommRingSheaf l E Y) P) (hQ : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1} (J := coefficientSequenceTopology (ProEt.topology Y)) (R := coefficientSequenceCommRingSheaf l E Y) Q) : let M := DerivedCategory.Q.obj P let N := DerivedCategory.Q.obj Q (coefficientSequenceDerivedEvaluation l E X n).map ((pullbackTensorSystemComparison l E f).hom.app (M,N)) ≫ ((pullbackTensorCalculus l E X).evaluationTensor n).hom.app ((pullbackTensorSequenceDerived l E f).obj M, (pullbackTensorSequenceDerived l E f).obj N) ≫ (finiteIntrinsicDerivedTensor l E X n).map (Prod.mkHom (e.hom.app M) (e.hom.app N)) = e.hom.app ((pullbackTensorCalculus l E Y).systemClosed.tensor.obj (M,N)) ≫ (finiteDerivedPullback l E n f).map (((pullbackTensorCalculus l E Y).evaluationTensor n).hom.app (M,N)) ≫ ν.hom.app ((coefficientSequenceDerivedEvaluation l E Y n).obj M, (coefficientSequenceDerivedEvaluation l E Y n).obj N)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T134953-L-3650459",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T134953-L-3650459",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

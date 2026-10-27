@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-perfect-commutative-torus-unipotent-product",
+ "kind": "statement",
+ "title": "Torus and unipotent direct factors of a commutative group over a perfect field",
+ "statement": "Let $k$ be a perfect field [def-weil-field], meaning that either $\\operatorname{char}k=0$, or $\\operatorname{char}k=p>0$ and every element of $k$ is a $p$-th power. Let $G$ be a smooth geometrically connected commutative affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. There are smooth geometrically connected closed $k$-subgroups $U,T\\subseteq G$ [def-sc-group-scheme-subgroup] for which multiplication is an isomorphism of $k$-group schemes\n$$U\\times_kT\\xrightarrow{\\sim}G$$\n[def-pc-fibre-product]. The group $T$ is a torus: after extension to an algebraic closure $\\bar k$ [def-weil-algebraic-closure] it is isomorphic to $\\mathbf G_{m,\\bar k}^s$ for an integer $s\\geq0$, with $\\mathbf G_m$ as in [def-sc-gm-ga]. The group $U$ admits a closed group embedding over $k$ into $\\mathcal U_n$ for some $n\\geq1$, where $\\mathcal U_n(R)$ consists of upper triangular $n\\times n$ matrices with diagonal entries $1$, under matrix multiplication, for every commutative $k$-algebra $R$. Both factors may be trivial. The torus $T$ is not asserted to be split over $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.13(b) and its proof, printed p.328; Corollary 16.15 and the paragraph on smoothness and connectedness immediately before it, p.329; unitriangular realization by Theorem 14.5."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-fibre-product",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Fix an algebraic closure $L=\\bar k$ using [def-weil-algebraic-closure]. The extension $L/k$ is Galois: it is algebraic and normal because every polynomial splits in $L$, and it is separable as follows. For $a\\in L$, apply [lem-weil-pbc-perfect-field-separating-basis] to the finitely generated algebraic extension $k(a)/k$. Its transcendence basis must be empty, so $k(a)/k$ is separable. Apply [lem-sfb-commutative-diagonalizable-unipotent-product] to $G_L$ to obtain closed factors $V,D$ with $V\\times_L D\\simeq G_L$, with $V$ closed in an upper unitriangular group and $D\\simeq\\operatorname{Spec}L[M]$ for a finitely generated abelian group $M$. The quasi-inverse in [lem-sfb-multiplicative-character-antiduality], applied over $L$ with trivial Galois action, identifies this $D$ as a group of multiplicative type. No assertion of smoothness of the factors is needed at this point.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "lem-sfb-commutative-diagonalizable-unipotent-product",
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(b), proof: reduction to an algebraically closed field, printed p.328."
+   }
+  },
+  {
+   "text": "This pair of subgroup schemes is unique. Indeed, let $V',D'$ be another such pair. The projection $G_L\\to D$ restricts trivially to $V'$ by [lem-sfb-unipotent-to-multiplicative-trivial], so $V'\\subseteq V$ as subgroup schemes; reversing the pairs gives equality. The projection $G_L\\to V$ restricts trivially to $D'$ by [lem-sfb-diagonalizable-to-unipotent-trivial], so $D'\\subseteq D$, and reversal again gives equality. These factorizations hold on all algebra-valued points, not just on $L$-points.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-diagonalizable-to-unipotent-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(b), first paragraph of the proof, printed p.328."
+   }
+  },
+  {
+   "text": "For $\\sigma\\in\\operatorname{Gal}(L/k)$, the canonical semilinear action on $G_L$ takes $(V,D)$ to another pair of the same kind: twisting the unitriangular embedding preserves its equations with coefficients $0,1$, and twisting $L[M]$ gives $L[M]$ again. Twisting the product isomorphism gives a product isomorphism for the new pair. Uniqueness from step 2 gives $\\sigma V=V$ and $\\sigma D=D$. Thus their defining ideals are stable. By [lem-sfb-galois-descent-affine-subgroups], there are unique closed $k$-subgroups $U,T\\subseteq G$ whose scalar extensions are $V,D$. The infinite Galois extension allowed by that node applies to $L/k$.",
+   "uses": [
+    "lem-sfb-galois-descent-affine-subgroups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(b), Galois-descent sentence, p.328; Section 1.54(a)-(b), pp.21-22."
+   }
+  },
+  {
+   "text": "Since $G$ is commutative, multiplication $m:U\\times_kT\\to G$ is a group-scheme homomorphism. Its extension to $L$ is the isomorphism of step 1. The field-extension morphism $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is flat, surjective and quasi-compact by [lem-pc-field-extension-fpqc-cover]. Its base change $G_L\\to G$ is a singleton fpqc covering by [lem-galois-fpqc-covering-base-change]. The map $\\operatorname{Spec}L\\to\\operatorname{Spec}k$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. By [lem-weil-pbc-affine-morphism-permanence], its base change $G_L\\to G$ is affine and hence quasi-compact; the covering condition gives flatness and surjectivity. Thus [lem-weil-pbc-fpqc-descend-isomorphism] applies to $m$ over the target $G$, proving that $m$ is an isomorphism. Its inverse is a group homomorphism because $m$ is one.",
+   "uses": [
+    "lem-pc-field-extension-fpqc-cover",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 16.13(b), descent of the product isomorphism, p.328; affine fpqc detection made explicit."
+   }
+  },
+  {
+   "text": "Both $U$ and $T$ are normal, since $G$ is commutative. Under the product isomorphism, $G/T\\simeq U$ and $G/U\\simeq T$: the projection to $U$ has kernel $T$, and every pair $(u,t)$ has the same $T$-coset as $(u,1)$, functorially for every algebra; the other identification is identical with the factors exchanged. These identifications hold already for the quotient presheaves and hence for their fppf sheafifications. The quotient assertion of [lem-sfb-affine-normal-quotient-geometry] now shows that both factors are smooth and geometrically connected, because $G$ is. It also ensures that the represented quotients used here have the stated group-scheme meanings.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Paragraph immediately before Corollary 16.14, printed p.329."
+   }
+  },
+  {
+   "text": "The group $T$ is of multiplicative type: $T_L=D$ is of multiplicative type by step 1, and [lem-sfb-unipotent-to-multiplicative-trivial] states that multiplicative type can be tested after field extension. By [lem-sfb-multiplicative-type-largest-subtorus], a smooth connected group of multiplicative type is a torus. Apply this to $T$, which is smooth and geometrically connected by step 5. This gives $T_L\\simeq\\mathbf G_{m,L}^s$ with $s\\geq0$, without asserting such an isomorphism over $k$.",
+   "uses": [
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-multiplicative-type-largest-subtorus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.15, first sentence of its proof, p.329; Theorems 12.8-12.9, pp.233-234."
+   }
+  },
+  {
+   "text": "Choose a faithful closed representation $\\rho:U\\to\\operatorname{GL}_{m,k}$ with $m\\geq1$ by [lem-sfb-affine-group-faithful-linear-representation]. Over $L$, identify $U_L$ with $V$. The embedding $i:V\\hookrightarrow\\mathcal U_{r,L}\\subseteq\\operatorname{GL}_{r,L}$ from step 1 is faithful on all algebra points, and $(i(v)-I)^r=0$ for every $v\\in V(L)$, since a strictly upper triangular $r\\times r$ matrix has zero $r$-th power. Apply [lem-sfb-rational-representation-unipotent-point] with this $i$ and with $\\rho_L$ as the other representation. Every $\\rho_L(v)$ is therefore unipotent. Since $U$ is smooth by step 5, [lem-sfb-geometric-unipotence-unitriangular-embedding] gives a closed embedding $U\\hookrightarrow\\mathcal U_{n,k}$ over $k$ for some $n\\geq1$. This supplies the required embedding over the original field, rather than just its algebraic closure.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-rational-representation-unipotent-point",
+    "lem-sfb-geometric-unipotence-unitriangular-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 14.5(a)-(b), pp.281-282; Corollary 14.12, p.283; Corollary 16.15, p.329."
+   }
+  },
+  {
+   "text": "The constructed $U,T$ are closed subgroups, and step 4 gives precisely multiplication $U\\times_kT\\simeq G$. Steps 5-7 give all the remaining clauses. No positive dimension was assumed: if either factor is trivial it remains smooth and geometrically connected; for the trivial unipotent factor take $n=1$, and for the trivial torus take $s=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 16.15, p.329, including the zero-dimensional cases."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-sfb-commutative-diagonalizable-unipotent-product",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-diagonalizable-to-unipotent-trivial",
+  "lem-sfb-galois-descent-affine-subgroups",
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fpqc-descend-isomorphism",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-sfb-rational-representation-unipotent-point",
+  "lem-sfb-geometric-unipotence-unitriangular-embedding"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 16.13(b), proof on p.328; the smoothness and connectedness paragraph and Corollary 16.15, p.329; Theorem 14.5 and Corollary 14.12, pp.281-283."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth connected commutative affine algebraic group over a perfect field is a product of a torus and a smooth connected unipotent group",
+   "results": "{\"t\": \"2026-10-24T07:14:21Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth connected commutative affine algebraic group over a perfect field is a product of a torus and a smooth connected unipotent group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"Prod.instLieAddGroup\", \"Prod.instLieGroup\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieGroupOfTopWithTopENat\", \"instLieAddGroupOfTopWithTopENat\", \"instLieAddGroupOfNatWithTopENat\", \"Algebra.Etale.iff_exists_algEquiv_prod\"], \"digest\": \"53175ba7feb59dc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix Jordan-Chevalley decomposition is not a decomposition of group schemes over k. Formal-group commutativity, abstract products, PerfectField, affine-space constructors and etale-algebra product decompositions do not supply these closed group factors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Group\", \"IsComm\"",
+   "results": "{\"t\": \"2026-10-24T07:14:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Group\\\", \\\"IsComm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CommSemigroup.isCommJordan\", \"FormalGroup.IsComm\", \"FormalGroup.instIsComm𝔾ₐ\", \"FormalGroup.instIsComm𝔾ₘ\", \"FormalGroup.instAddCommMonoidPointOfIsComm\", \"FormalGroup.IsComm.comm\", \"FormalGroup.IsComm.mk\"], \"digest\": \"40b7a64393c0088e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix Jordan-Chevalley decomposition is not a decomposition of group schemes over k. Formal-group commutativity, abstract products, PerfectField, affine-space constructors and etale-algebra product decompositions do not supply these closed group factors."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|torus|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T07:14:22Z\", \"tool\": \"grep\", \"query\": \"unipotent|torus|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix Jordan-Chevalley decomposition is not a decomposition of group schemes over k. Formal-group commutativity, abstract products, PerfectField, affine-space constructors and etale-algebra product decompositions do not supply these closed group factors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect field commutative algebraic group torus unipotent direct product decomposition",
+   "results": "{\"t\": \"2026-10-24T07:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Perfect field commutative algebraic group torus unipotent direct product decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PerfectField\", \"PerfectField.mk\", \"perfectField_iff_splits_of_natSepDegree_eq_one\", \"perfectField_of_isSeparable_of_perfectField_top\", \"Module.End.exists_isNilpotent_isSemisimple\", \"PerfectField.ofCharZero\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"perfectField_iff_isSeparable_algebraicClosure\"], \"digest\": \"8a9a919a400e8aa9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix Jordan-Chevalley decomposition is not a decomposition of group schemes over k. Formal-group commutativity, abstract products, PerfectField, affine-space constructors and etale-algebra product decompositions do not supply these closed group factors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Jordan decomposition for smooth commutative affine group schemes over perfect fields gives a product of multiplicative and unipotent parts",
+   "results": "{\"t\": \"2026-10-24T07:14:25Z\", \"tool\": \"leanfinder\", \"query\": \"Jordan decomposition for smooth commutative affine group schemes over perfect fields gives a product of multiplicative and unipotent parts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"WeierstrassCurve.Jacobian.Point.toAffineAddEquiv\"], \"digest\": \"e3ae968dd3060e1c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: matrix Jordan-Chevalley decomposition is not a decomposition of group schemes over k. Formal-group commutativity, abstract products, PerfectField, affine-space constructors and etale-algebra product decompositions do not supply these closed group factors."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|torus|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T07:59:38Z\", \"tool\": \"grep\", \"query\": \"unipotent|torus|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Jordan-Chevalley is an additive matrix decomposition, while Lie-group products, formal groups, abstract solvability and affine-scheme definitions do not construct torus and unipotent subgroup schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commutative affine group scheme over a perfect field torus unipotent decomposition",
+   "results": "{\"t\": \"2026-10-24T07:59:39Z\", \"tool\": \"leansearch\", \"query\": \"Commutative affine group scheme over a perfect field torus unipotent decomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"AlgebraicGeometry.AffineScheme\", \"UnitAddTorus\", \"AlgebraicGeometry.isAffine_affineScheme\", \"ContinuousAffineMap.instAddCommGroup\", \"AffineMap.instAddCommGroup\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\"], \"digest\": \"0e0bb8249170ad4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Jordan-Chevalley is an additive matrix decomposition, while Lie-group products, formal groups, abstract solvability and affine-scheme definitions do not construct torus and unipotent subgroup schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Group\", \"IsComm\"",
+   "results": "{\"t\": \"2026-10-24T07:59:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Group\\\", \\\"IsComm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"CommSemigroup.isCommJordan\", \"FormalGroup.IsComm\", \"FormalGroup.instIsComm𝔾ₐ\", \"FormalGroup.instIsComm𝔾ₘ\", \"FormalGroup.instAddCommMonoidPointOfIsComm\", \"FormalGroup.IsComm.comm\", \"FormalGroup.IsComm.mk\"], \"digest\": \"40b7a64393c0088e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Jordan-Chevalley is an additive matrix decomposition, while Lie-group products, formal groups, abstract solvability and affine-scheme definitions do not construct torus and unipotent subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected commutative affine algebraic group over a perfect field is the direct product of a torus and a unipotent group",
+   "results": "{\"t\": \"2026-10-24T07:59:40Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected commutative affine algebraic group over a perfect field is the direct product of a torus and a unipotent group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.exists_isNilpotent_isSemisimple\", \"UnitAddTorus\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"Prod.instLieAddGroup\", \"Prod.instLieGroup\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"RootPairing.GeckConstruction.instHasTrivialRadical\"], \"digest\": \"e43cc6355e8ef544\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Jordan-Chevalley is an additive matrix decomposition, while Lie-group products, formal groups, abstract solvability and affine-scheme definitions do not construct torus and unipotent subgroup schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative linear algebraic group over a perfect field has canonical multiplicative type and unipotent closed subgroup factors",
+   "results": "{\"t\": \"2026-10-24T08:01:53Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative linear algebraic group over a perfect field has canonical multiplicative type and unipotent closed subgroup factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Group.IsVirtuallyNilpotent\", \"CommGroup.isSolvable\", \"IsSolvable\", \"CommGroup.isNilpotent\", \"isSolvable_def\", \"Field.absoluteGaloisGroup.commutator_closure_isNormal\", \"Group.IsNilpotent\", \"CommGroup.nilpotencyClass_le_one\"], \"digest\": \"572072fc9904593c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Jordan-Chevalley is an additive matrix decomposition, while Lie-group products, formal groups, abstract solvability and affine-scheme definitions do not construct torus and unipotent subgroup schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rosenlicht-split-solvable-criterion",
+  "date": "2026-10-24",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344. Present split of Rosenlicht 16.58: Theorem 16.13(b) and its proof, printed p.328; Corollary 16.15 and the paragraph on smoothness and connectedness immediately before it, p.329; unitriangular realization by Theorem 14.5.",
+   "via": [
+    "lem-sfb-rosenlicht-split-solvable-criterion",
+    "lem-sfb-split-torus-no-invariants-unipotence",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-commutative-torus-unipotent-product",
+  "worker": "stage1",
+  "summary": "Followed Milne 16.13(b): use the existing algebraically closed decomposition, prove uniqueness by both Hom-vanishing directions, descend both subgroups over the perfect field, descend multiplication, and obtain smoothness and geometric connectedness from the quotient theorem. Realize unipotence over k using a faithful representation and the existing geometric criterion. No new nodes and no statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 13.33(a)-(e), printed pp.265-266; Proposition 17.60, p.372 (split unipotent kernel); Theorem 25.1, p.544 (parabolic quotient), with Theorems 5.28 and 8.43-8.44, pp.105,161 (represented, quasi-projective quotient, hence projective when proper). Regular centralizer: proof of Proposition 21.29, pp.433-434. Smooth integral geometry: Corollary 5.26, Proposition 7.15 and Propositions 1.34-1.35. The field-extension clauses use the defining functors and quotient sheaf. Supporting proof input: Proposition 16.63, printed p.347; Proposition 16.62 and Theorem 16.58, printed pp.345,347; split-series convention in Section 16g. This general automorphism-action criterion is the input used in the proof of Proposition 17.60, printed p.372. Supporting input: Theorem 16.58 (Rosenlicht), printed p.345; split solvable convention in Section 16g, p.343; splitness of the unipotent subgroup in Proposition 16.54 and its proof, p.344. Present split of Rosenlicht 16.58: Theorem 16.13(b) and its proof, printed p.328; Corollary 16.15 and the paragraph on smoothness and connectedness immediately before it, p.329; unitriangular realization by Theorem 14.5. This split realizes the perfect-field descent and smooth connected factor refinement of the commutative algebraic-group structure input to Rosenlicht 16.58. Current latest blueprint direct-images proof (3) remains the ancestor route; ancestor tool returns None, so its inherited from.node and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-field-extension-fpqc-cover",
+    "why": "Generic flat, surjective, quasi-compact field-extension cover used to descend multiplication; the unit has no replacement."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic base-change stability of fpqc covers used on the target G."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affineness of a morphism between affine schemes, used before taking the base change of the field cover."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic quasi-compactness of affine morphisms for the scalar extension of G."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-isomorphism",
+    "why": "Generic fpqc detection of an isomorphism, applied to multiplication on the descended subgroups."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-field-extension-fpqc-cover",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fpqc-descend-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-58d834e11",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-58d834e11 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full; the delivery makes no new nodes and changes neither the statement nor the stmt_deps. The proof follows Milne iAG2017 Thm 16.13(b) (p.328: uniqueness by 14.18 in both directions, k^a Galois over perfect k, descent), the p.329 paragraph (factors are quotients, hence smooth and connected) and Cor 16.15 (smooth connected multiplicative type is a torus). Step 1: k̄/k is Galois by the separating-basis Mathlib leaf; the algebraically closed product comes from commutative-diagonalizable-unipotent-product, which assumes no smoothness; D has multiplicative type by antiduality. Step 2: uniqueness from unipotent-to-multiplicative-trivial and diagonalizable-to-unipotent-trivial; both hold on all algebra points and allow nonreduced and p-torsion groups. Step 3: σ-twists preserve U_n and L[M], since both are defined over the prime ring; galois-descent-affine-subgroups allows an infinite Galois extension. Step 4: G_L→G is flat, surjective and quasi-compact by the fpqc-cover, base-change and affine-permanence nodes, so fpqc-descend-isomorphism applies to m, and m_L is the step-1 isomorphism. Step 5: G/T ≅ U already as presheaves; the smooth and geometrically connected clauses of affine-normal-quotient-geometry then apply. Step 6: smooth connected multiplicative type gives a torus via largest-subtorus; the torus is not claimed to be split over k. Step 7: a faithful ρ, rational-representation-unipotent-point over L with i: V→U_r, then geometric-unipotence-unitriangular-embedding (U smooth) gives an embedding over k. Step 8 is elementary assembly. Edge cases: 1, G_a, G_m, the norm-one torus over R (not split), W_2 in char p; μ_p and α_p are excluded by smoothness, ℤ/p by geometric connectedness. No duplicate: perfect-solvable-unipotent-torus and commutative-multiplicative-part give no product splitting. No cycle. I accept the declared tool_uses: lem-pc-field-extension-fpqc-cover and four generic fpqc/affine Mathlib leaves. Batch-5: every reached sec-trace-formula node is a generic tool, not part of the trace formula or Poincaré duality or their proofs: vector-space-quotient-dimension (rank–nullity leaf), projective-exterior-scalar-comparisons (Stacks 0FJ9 base change), flat-tensor-preserves-injection (Mathlib leaf), scheme-cover-descent-datum (general definition), smooth-fpqc-base-descent (02VL leaf)."
+ }
+}

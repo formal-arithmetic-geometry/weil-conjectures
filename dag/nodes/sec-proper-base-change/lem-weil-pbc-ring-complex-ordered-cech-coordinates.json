@@ -1,0 +1,147 @@
+{
+ "id": "lem-weil-pbc-ring-complex-ordered-cech-coordinates",
+ "kind": "statement",
+ "title": "Localization coordinates of the fixed ordered Cech mapping fibre",
+ "statement": "Let $A$ be a commutative ring, $I\\subset A$ an ideal and $f:\\operatorname{Fin}(r)\\to A$ generate $I$. For the fixed augmented fibre $(C_f,a_f)$ of [def-weil-pbc-ring-complex-ordered-cech-construction], there are $A$-linear coordinates $e_0:C_f^0\\cong A$ and $e_q:C_f^{q+1}\\cong\\prod_{t:\\operatorname{Fin}(q+1)\\hookrightarrow_o\\operatorname{Fin}(r)}A_{\\prod_i f_{t(i)}}$ for $q\\geq0$, and face localization $A$-algebra maps $l_{q,t,j}$, such that $C_f^n=0$ for $n<0$, $e_0$ identifies $a_f^0$ with the identity, the first differential sends $x$ to its image in each localization, and $e_{q+1}(dx)_t=\\sum_j(-1)^j l_{q,t,j}((e_qx)_{t\\setminus j})$. Here each face deletes its indexed entry, as in [def-weil-pbc-ring-complex-cech-data]. No derived comparison with Godement is asserted. The empty list, repeated or zero generators and the zero ring are included.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the unaugmented ordered Cech section coordinates E_q and face algebra maps l. These identify the actual first restriction with the algebra map and its differential with the signed face sum.",
+   "uses": [
+    "lem-weil-pbc-ring-complex-ordered-cech-section-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The negative section terms vanish by extension by zero. The cone first projection is an isomorphism in degree -1, since its section summand vanishes, and its second projection is an isomorphism in nonnegative degrees, since the single-complex summand vanishes. Compose them with the inverse-shift term isomorphisms and evaluate on the one-object site. Both inverse identities follow from the mapping-cone id_X identity. Negative fibre terms vanish by mappingCone.isZero_X_iff.",
+   "uses": [
+    "def-weil-pbc-ring-complex-ordered-cech-construction",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The shifted differential is minus the cone differential. The d_snd_v formula gives minus the first restriction in fibre degree zero and minus the section differential in every positive degree. Multiply the q-th section coordinate by (-1)^(q+1), implemented by a power of the negation linear equivalence. Successive signs convert the first map to the algebra map and higher differentials to the signed face sum.",
+   "uses": [
+    "lem-weil-pbc-ring-complex-ordered-cech-section-coordinates",
+    "def-weil-pbc-ring-complex-ordered-cech-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expanding the inverse rotation in degree zero identifies its augmentation with the cone first projection. Its composition with the single-complex term isomorphism is exactly the chosen degree-zero coordinate, so the augmentation equation holds.",
+   "uses": [
+    "def-weil-pbc-ring-complex-ordered-cech-construction",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-complex-ordered-cech-section-coordinates",
+  "def-weil-pbc-ring-complex-ordered-cech-construction",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d), ordered Cech restriction calculation followed by the explicit inverse-rotated cone projections and signs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement resolution section augmentation on affine open intersection is quasi-isomorphism",
+   "results": "Affine-open spectrum isomorphisms and injective-resolution augmentation instances; no Godement section comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordered Cech complex mapping fibre coordinates ring localization alternating restriction differential",
+   "results": "AlternatingCofaceMapComplex.map, representation standard complex and Dold-Kan constructions; no localization fibre coordinates.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "alternatingCech|mappingCone|Localization.Away",
+   "results": "Restrict.lean principal-open localization isomorphisms, StructureSheaf and Tilde localization APIs. Local rg found the existing ordered Cech construction and finite flasque comparison, but no coordinate calculation or affine Godement evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "use existing Cech definitions and comparison; isolate the missing specializations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexGodementCech",
+  "date": "2026-10-25",
+  "group": "Y3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(d): principal-open ordered Cech computation of the augmented ring complex",
+   "via": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexOrderedCechCoordinates",
+  "file": "lean/Sheaf/Paper/RingComplexOrderedCechCoordinates.lean",
+  "declaration": "AlgebraicGeometry.ringComplexOrderedCech_coordinates",
+  "statement": "theorem ringComplexOrderedCech_coordinates (A : CommRingCat.{u}) (I : Ideal A)\n    (r : ℕ) (f : Fin r → A) (hf : Ideal.span (Set.range f) = I) :\n    let C := ringComplexOrderedCech A I f\n    let a := ringComplexOrderedCechAugmentation A I f\n    ∃ (e₀ : (C.X 0).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A] A)\n          (e : ∀ q : ℕ, (C.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩) ≃ₗ[A]\n            ((t : Fin (q + 1) ↪o Fin r) → Localization.Away (∏ i, f (t i))))\n          (l : ∀ (q : ℕ) (t : Fin (q + 2) ↪o Fin r) (j : Fin (q + 2)),\n            Localization.Away (∏ i, f (t (Fin.succAboveOrderEmb j i))) →ₐ[A]\n              Localization.Away (∏ i, f (t i))),\n          (∀ n : ℤ, n < 0 → IsZero (C.X n)) ∧\n          (∀ (x : (C.X 0).val.obj (op ⟨PUnit.unit⟩)) (t : Fin 1 ↪o Fin r),\n            e 0 ((C.d 0 1).val.app (op ⟨PUnit.unit⟩) x) t =\n              algebraMap A (Localization.Away (∏ i, f (t i))) (e₀ x)) ∧\n          (∀ (q : ℕ) (x : (C.X ((q : ℤ) + 1)).val.obj (op ⟨PUnit.unit⟩))\n            (t : Fin (q + 2) ↪o Fin r),\n            e (q + 1) ((C.d ((q : ℤ) + 1) ((q : ℤ) + 2)).val.app\n              (op ⟨PUnit.unit⟩) x) t =\n              ∑ j : Fin (q + 2), (-1 : ℤ) ^ j.val •\n                l q t j (e q x ((Fin.succAboveOrderEmb j).trans t))) ∧\n          (∀ x : (C.X 0).val.obj (op ⟨PUnit.unit⟩),\n            (a.f 0 ≫ (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0\n              (SheafOfModules.unit.{u, u, u} ((sheafCompose ⊥\n                (forget₂ CommRingCat.{u} RingCat.{u})).obj\n                  (CochainComplex.onePointRingSheaf.{u} A)))).hom).val.app\n                    (op ⟨PUnit.unit⟩) x = e₀ x)",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261025T144342-L-1231608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T070240-L-3495955",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

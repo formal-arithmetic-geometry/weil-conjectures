@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-conductor-modification-finite-complement",
+ "kind": "statement",
+ "title": "Finite exceptional sets descend through trait conductor pushouts",
+ "statement": "Let $R$ be a discrete valuation ring with fraction field $K$, residue field $k$, and $S=\\operatorname{Spec}R$ [def-sc-discrete-valuation-ring, def-pc-field-extension, def-weil-affine-spectrum]. Let $C,W\\to S$ be projective flat finitely presented families with nodal geometric curve fibres [def-kun-projective, def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Let $B,N$ be finite etale $S$-schemes, $B\\to N$ finite etale of constant degree two, and let $B\\hookrightarrow C$, $B\\hookrightarrow W$ be closed immersions into the relative smooth loci [def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-closed-immersion]. Empty $B,N$ are allowed. Write $X=C\\amalg_BN$ and $Y=W\\amalg_BN$ for the scheme pushouts of these diagrams [def-weil-pbc-category-colimit]; assume both pushout squares are cartesian, their curve-to-pushout maps are finite and surjective and their $N$-maps are closed immersions, and restriction to the inverse images of every open in either pushout is again a pushout. Assume also $X,Y\\to S$ are projective, flat and finitely presented with nodal geometric curve fibres. The complements are $C\\setminus B\\cong X\\setminus N$ and $W\\setminus B\\cong Y\\setminus N$ [def-weil-open-immersion]. Let $r:T\\to C$ be a finite composition of blowups of reduced closed special-fibre points, with $T$ regular, a finite disjoint union of integral surfaces of dimension two [def-nagata-global-blowup, def-weil-regular-scheme, def-pc-integral-scheme, def-kun-topological-krull-dimension]. Let $q:W\\to T$ be proper and birational on matched components, with $W$ reduced and $q_K$ an isomorphism [def-weil-proper-morphism, def-pc-reduced-scheme]; birational means it matches generic points and induces isomorphisms on their local rings [def-sc-generic-point, def-weil-locally-ringed-space-morphism]. Suppose $h=rq$ restricts on the supplied copy of $B$ to $B\\hookrightarrow C$. Let $U_q\\subseteq T$ be the maximal open over which $q$ is an isomorphism. Then $T\\setminus U_q$ is a finite set of closed special-fibre points. Let $D\\subset C$ be its image under $r$, together with the images in $C$ of all centres in the sequence defining $r$, and let $Z$ be the image of $D$ under $C\\to X$. Both $D$ and $Z$ are finite sets of closed special-fibre points. The induced pushout morphism $p:Y\\to X$ restricts to an isomorphism $p^{-1}(X\\setminus Z)\\cong X\\setminus Z$. This includes points on the image of $N$; no exclusion of persistent horizontal nodes is necessary. Here nodal geometric curve fibres are nonempty reduced geometric fibres of pure dimension one whose nonsmooth closed points over an algebraically closed field $\\Omega$ have completed local ring $\\Omega[[u,v]]/(uv)$; they may be disconnected [def-weil-geometric-fibre, def-weil-pure-dimension, def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Agent conductor descent of Tag 0BFP (lemma-modification-normal-iso-over-codimension-1), clauses (1),(2), and more-morphisms.tex Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), open-restriction construction: old common-model step 9."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-pc-field-extension",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-category-colimit",
+  "def-weil-open-immersion",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-ordinary-resolution-rule",
+  "def-trf-projective-nodal-tower",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "The DVR $R$ is Noetherian: each ideal is principal, hence finitely generated [def-sc-discrete-valuation-ring, def-weil-pbc-noetherian-ring]. Thus $S$ is locally Noetherian by its single affine chart [pqf-def-locnoeth], and is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Projectivity of $C/S$ implies properness [lem-kun-projective-implies-proper], hence finite type [pqf-lem-proper-basic]. Consequently $C$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian].",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-kun-projective-implies-proper",
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; preliminary Noetherian reduction for varieties.tex Tag 0BFP."
+   }
+  },
+  {
+   "text": "Induct along the finite blowup sequence. On a Noetherian scheme the ideal of a reduced closed point is of finite type, since on each affine open every ideal is finitely generated [pqf-lem-affine-open-locnoeth, def-weil-pbc-noetherian-ring]. The next blowup is proper by [lemma-nagata-blowup-proper], hence of finite type by [pqf-lem-proper-basic], so its source is again Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The zero-length sequence starts with $C$. Composition of proper maps [lem-weil-pbc-proper-composition] shows that $r$ and every prefix of the sequence are proper. In particular $T$ is Noetherian.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-pbc-noetherian-ring",
+    "lemma-nagata-blowup-proper",
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "lemma-blowing-up-projective; properness and Noetherianity of the finite sequence."
+   }
+  },
+  {
+   "text": "Write $E=T\\setminus U_q$, a closed subset. At each point of $T$ the local ring is regular by [def-weil-regular-scheme]. In local dimension one it is a DVR by [lem-sc-regular-dim1-dvr]. Apply clauses (1),(2) of [lem-sfb-normal-modification-codimension-one] to $q$: the target is Noetherian by Step 2, $q$ is proper and birational with exactly the generic-point and local-ring meaning required there, and $W$ is reduced. Every point of local dimension zero or one belongs to $U_q$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sfb-normal-modification-codimension-one"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, lemma-modification-normal-iso-over-codimension-1, clauses (1),(2)."
+   }
+  },
+  {
+   "text": "By [lem-sc-scheme-stalk-dimension-generalization-chains], any $t\\in E$ has a chain of two strict generalizations. If $t$ had a strict specialization $t'$, adjoining $t'$ would give a chain of three strict inclusions of irreducible closed subsets in its component, contradicting the assumed dimension two [def-kun-topological-krull-dimension]. Hence $t$ is closed. Now [lem-sc-noetherian-closed-points-finite] makes $E$ finite. Moreover $T_K$ is open (it is the inverse image of $D(\\pi)\\subset S$ for a uniformizer $\\pi$), and $q_K$ is an isomorphism; maximality gives $T_K\\subseteq U_q$. Thus every point of $E$ is in the special fibre.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension",
+    "lem-sc-noetherian-closed-points-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IZ, lemma-codimension-local-ring; Tag 0BA8, lemma-Noetherian-irreducible-components; dimension-two consequence of varieties.tex Tag 0BFP."
+   }
+  },
+  {
+   "text": "A proper map is closed by the universally closed assertion of [pqf-lem-proper-basic]. Therefore $r(E)$ and the image of every closed centre under its prefix map to $C$ consist of closed special-fibre points. There are finitely many of these points, so their union $D$ is finite and closed. Put $a:C\\to X$. Since $a$ is finite, it is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. Thus $Z=a(D)$ is likewise a finite closed set of special-fibre points.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, finite exceptional set and its proper images; morphisms.tex Tag 01WN, lemma-finite-proper."
+   }
+  },
+  {
+   "text": "Set $C^0=C\\setminus D$. At each stage the inverse image of $C^0$ misses the centre, since $D$ includes that centre's image in $C$. Applying [thm-nagata-global-blowup-complement] successively gives $r^{-1}(C^0)\\cong C^0$. Also $r^{-1}(C^0)$ misses $E$, since $D$ includes $r(E)$, so it lies in $U_q$. Restricting $q$ there and composing proves $h^{-1}(C^0)\\xrightarrow{\\sim}C^0$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-def-nagata-sketch-data/thm-nagata-global-blowup-complement.md",
+    "place": "Complement of the centre; finite iteration and restriction of the two isomorphisms."
+   }
+  },
+  {
+   "text": "The maps $a h:W\\to X$ and $N\\to X$ agree on $B$ by the hypothesis on $h|_B$, hence the pushout property [def-weil-pbc-category-colimit] supplies $p:Y\\to X$. Put $X^0=X\\setminus Z$, $Y^0=p^{-1}X^0$, $V=a^{-1}X^0$, and $N^0=N\\times_X X^0$. Then $V\\subseteq C^0$, so Step 6 restricts to $h^{-1}V\\xrightarrow{\\sim}V$. The inverse-image diagram for $Y^0$ has its $W$-term equal to $h^{-1}V$ and its $N$-term equal to $N^0$, by $p|_W=a h$ and $p|_N=(N\\to X)$. Its $B$-term is the same open $B^0$ of the supplied $B$ as in the inverse-image diagram for $X^0$, again by $h|_B=(B\\hookrightarrow C)$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, proposition-pushout-along-closed-immersion-and-integral, compatibility with open restriction; here this is an explicit hypothesis."
+   }
+  },
+  {
+   "text": "Both restricted squares are pushouts by hypothesis. The isomorphism $h^{-1}V\\to V$ is the identity on the supplied $B^0$, in the sense that its composite with $B^0\\hookrightarrow h^{-1}V$ is $B^0\\hookrightarrow V$. Thus its inverse and the identity on $N^0$ agree on $B^0$ and induce $s:X^0\\to Y^0$ by [def-weil-pbc-category-colimit]. Each of $p s$ and $s p$ agrees with the identity after precomposing with both terms of its pushout cocone, so uniqueness in that same universal property makes them identities. This proves $Y^0\\cong X^0$. No point of $N^0$ was removed in this argument: the whole $N^0$ term and both of its branches are present. Empty $B,N,E$ and a zero-length blowup sequence obey the same universal-property argument.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0E25, open-restriction construction; elementary uniqueness of pushouts for the resulting isomorphic diagrams."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-kun-projective-implies-proper",
+  "pqf-lem-proper-basic",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-affine-open-locnoeth",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-proper-composition",
+  "def-weil-regular-scheme",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sfb-normal-modification-codimension-one",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-noetherian-closed-points-finite",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "thm-nagata-global-blowup-complement",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP combined with the open-restriction argument of more-morphisms.tex Tag 0E25; the conductor descent is written out here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isomorphismLocus|isIsoLocus|pinching|conductor|codimension",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"grep\", \"query\": \"isomorphismLocus|isIsoLocus|pinching|conductor|codimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"birational\"",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"birational\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Birational\", \"AlgebraicGeometry.Scheme.Birational.refl\", \"AlgebraicGeometry.Scheme.Birational.partialIso\", \"AlgebraicGeometry.Scheme.Birational.symm\", \"AlgebraicGeometry.Scheme.Birational.trans\", \"AlgebraicGeometry.Scheme.BirationalOver.refl\", \"AlgebraicGeometry.Scheme.BirationalOver\", \"AlgebraicGeometry.Scheme.Hom.birational\"], \"digest\": \"b1297fdaf32f7b52\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite exceptional set of a proper birational modification of regular surfaces over a DVR and open restriction of pinching squares",
+   "results": "{\"t\": \"2026-10-22T07:28:01Z\", \"tool\": \"leansearch\", \"query\": \"Finite exceptional set of a proper birational modification of regular surfaces over a DVR and open restriction of pinching squares\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.instQuasiCompactMorphismRestrict\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.IsFinite.instMorphismRestrict\"], \"digest\": \"24f6534174f2c547\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two pinched curves with the same finite etale branch diagram are isomorphic away from the finite image of the exceptional locus of a normal surface modification",
+   "results": "{\"t\": \"2026-10-22T07:28:12Z\", \"tool\": \"leanfinder\", \"query\": \"Two pinched curves with the same finite etale branch diagram are isomorphic away from the finite image of the exceptional locus of a normal surface modification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\"], \"digest\": \"f10b02767ac4885f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational map to a regular surface is an isomorphism off finitely many closed points and this property descends through compatible conductor pushout diagrams",
+   "results": "{\"t\": \"2026-10-22T07:28:12Z\", \"tool\": \"leanfinder\", \"query\": \"A proper birational map to a regular surface is an isomorphism off finitely many closed points and this property descends through compatible conductor pushout diagrams\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.IsDominant.respectsIso\"], \"digest\": \"2455ec6b5ae2a1e1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations give generic algebraic-geometry or topology ingredients, not this componentwise trait or conductor-pushout assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper birational modification of a regular surface is an isomorphism outside finitely many closed points and an isomorphism of pinching diagrams induces an isomorphism of pushouts",
+   "results": "{\"t\": \"2026-10-23T04:17:09Z\", \"tool\": \"leanfinder\", \"query\": \"A proper birational modification of a regular surface is an isomorphism outside finitely many closed points and an isomorphism of pinching diagrams induces an isomorphism of pushouts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instRespectsIsoScheme\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.IsDominant.respectsIso\"], \"digest\": \"4395654f9deb3b53\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rational maps, normalization coproduct identities, or general properness; none states finite exceptional-set descent through these conductor pushouts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Birational, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-23T04:18:28Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Birational, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rational maps, normalization coproduct identities, or general properness; none states finite exceptional-set descent through these conductor pushouts."
+  },
+  {
+   "tool": "grep",
+   "query": "maximalIsomorphismOpen|conductor|pinching|codimension",
+   "results": "{\"t\": \"2026-10-23T04:18:29Z\", \"tool\": \"grep\", \"query\": \"maximalIsomorphismOpen|conductor|pinching|codimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"5464900d8a9bb1d6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rational maps, normalization coproduct identities, or general properness; none states finite exceptional-set descent through these conductor pushouts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper birational maps to a regular two dimensional scheme are isomorphisms away from finitely many closed points",
+   "results": "{\"t\": \"2026-10-23T04:25:06Z\", \"tool\": \"leansearch\", \"query\": \"Proper birational maps to a regular two dimensional scheme are isomorphisms away from finitely many closed points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.noConfusionType\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.isProper_eq\"], \"digest\": \"f8dc31f1329ffa22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rational maps, normalization coproduct identities, or general properness; none states finite exceptional-set descent through these conductor pushouts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper modification of a normal surface is an isomorphism at codimension one points",
+   "results": "{\"t\": \"2026-10-23T04:25:12Z\", \"tool\": \"leanfinder\", \"query\": \"A proper modification of a normal surface is an isomorphism at codimension one points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom\", \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\"], \"digest\": \"78f73d287e68b076\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rational maps, normalization coproduct identities, or general properness; none states finite exceptional-set descent through these conductor pushouts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-common-nodal-model",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Agent conductor descent of Tag 0BFP (lemma-modification-normal-iso-over-codimension-1), clauses (1),(2), and more-morphisms.tex Tag 0E25 (proposition-pushout-along-closed-immersion-and-integral), open-restriction construction: old common-model step 9.",
+   "via": [
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-conductor-modification-finite-complement",
+  "worker": "stage1",
+  "summary": "Eight-step split using existing nodes only. Establish Noetherianity along the blowup tower, apply the existing four-clause 0BFP node, prove the dimension-two closed-point argument, control proper images and the saturated good open, then explicitly construct the inverse on the conductor pushouts by their universal properties. Statement and imported fields unchanged. No new nodes or attachments.",
+  "blueprint": "Preserves the inherited direct-image alteration/common-nodal-model route. Realizes the old common-model step 9 recorded in blueprint.from.place: codimension-one isomorphisms on regular surfaces and finite exceptional-set descent through the conductor square. Whole-blueprint searches for finite exceptional, codimension, conductor and pushout find no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "General scheme-theoretic tool for the trait conductor descent: Projective morphisms are proper. This unit has no replacement for this generic geometric fact; the alteration route is unchanged."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "General scheme-theoretic tool for the trait conductor descent: Basic consequences of properness. This unit has no replacement for this generic geometric fact; the alteration route is unchanged."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "General scheme-theoretic tool for the trait conductor descent: Properness of a blow-up. This unit has no replacement for this generic geometric fact; the alteration route is unchanged."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "General scheme-theoretic tool for the trait conductor descent: One-dimensional regular local rings. This unit has no replacement for this generic geometric fact; the alteration route is unchanged."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-points-finite",
+    "why": "General scheme-theoretic tool for the trait conductor descent: A Noetherian scheme has only finitely many points in a closed-point closed subset. This unit has no replacement for this generic geometric fact; the alteration route is unchanged."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "General scheme-theoretic tool for the trait conductor descent: Complement of the center. This unit has no replacement for this generic geometric fact; the alteration route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "pqf-lem-proper-basic",
+  "lemma-nagata-blowup-proper",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-noetherian-closed-points-finite",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-96706a6bf",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-96706a6bf (reviewer sub-agent of L); spot-checked: I read the item in full, the statements of all 19 proof_deps, the parent lem-sfb-common-nodal-model step 5 and Stacks 0BFP (varieties.tex l.3298); tags 0E25, 01T6, 02IZ, 00PD and 0BA8 exist. The delivery is one commit with no new nodes. Statement and stmt_deps are unchanged, proof_deps equals the union of the step uses, there are no doubled backslashes and nothing cites SGA. Steps 1-2: S, C and every intermediate blowup model are Noetherian via finite type over a Noetherian base, and each blowup and prefix is proper by the cited nodes. Step 3: lem-sfb-normal-modification-codimension-one clauses (1),(2) apply to q (T Noetherian, q proper and birational, W reduced), with DVRs from T regular and lem-sc-regular-dim1-dvr. Step 4: I checked the dimension-two argument (chain of two generalizations plus a strict specialization gives length 3 in a component, contradiction), finiteness via lem-sc-noetherian-closed-points-finite, and T_K inside U_q via D(pi). Step 5: proper and finite maps are closed, so D and Z are finite closed special-fibre sets. Step 6: iterating and restricting the blowup-complement theorem is correctly marked elementary. Steps 7-8: I recomputed the restricted pushout terms (h^{-1}V, N^0, B^0 = i_C^{-1}V) and both composites p s and s p on each cocone leg; they are identities by uniqueness, using only the explicit open-restriction pushout hypothesis. Edge cases checked: E empty, zero-length tower, B and N empty, a node outside Z. I accept the six declared generic tool_uses. No duplicate found among the conductor/pushout nodes. Advisory: q_K presupposes that q is an S-morphism, which is implicit in the statement and holds at the citer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConductorModificationFiniteComplement",
+  "declaration": "AlgebraicGeometry.conductor_modification_finite_complement",
+  "declarations": [
+   "AlgebraicGeometry.conductorModificationMap",
+   "AlgebraicGeometry.conductor_modification_finite_complement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConductorModificationFiniteComplement.lean",
+  "statement": "theorem conductor_modification_finite_complement (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (C W B N X Y T : Over (Spec (.of R))) [IsHProjective C.hom] [Flat C.hom] [LocallyOfFinitePresentation C.hom] [IsHProjective W.hom] [Flat W.hom] [LocallyOfFinitePresentation W.hom] [IsHProjective X.hom] [Flat X.hom] [LocallyOfFinitePresentation X.hom] [IsHProjective Y.hom] [Flat Y.hom] [LocallyOfFinitePresentation Y.hom] [IsFinite B.hom] [Etale B.hom] [IsFinite N.hom] [Etale N.hom] (iC : B ⟶ C) (iW : B ⟶ W) (j : B ⟶ N) [IsClosedImmersion iC.left] [IsClosedImmersion iW.left] [Etale j.left] [j.left.IsFiniteLocallyFreeOfDegree 2] (hiC : ∀ z : B.left, iC.left z ∈ C.hom.smoothLocus) (hiW : ∀ z : B.left, iW.left z ∈ W.hom.smoothLocus) (hnodal : ∀ F : Over (Spec (.of R)), F ∈ [C, W, X, Y] → ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of R)), Nonempty ↥(pullback (C := Scheme.{u}) F.hom g) ∧ IsReduced (pullback (C := Scheme.{u}) F.hom g) ∧ (pullback (C := Scheme.{u}) F.hom g).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) F.hom g), IsClosed ({x} : Set ↥(pullback (C := Scheme.{u}) F.hom g)) → (¬ ∃ V : (pullback (C := Scheme.{u}) F.hom g).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd F.hom g)) → IsGeometricOrdinaryDoublePoint Ω (pullback (C := Scheme.{u}) F.hom g) x) (a : C ⟶ X) (b : N ⟶ X) (aW : W ⟶ Y) (bY : N ⟶ Y) [IsFinite a.left] [Surjective a.left] [IsClosedImmersion b.left] [IsFinite aW.left] [Surjective aW.left] [IsClosedImmersion bY.left] (hX : IsPushout iC.left j.left a.left b.left) (hY : IsPushout iW.left j.left aW.left bY.left) (hcartX : IsPullback iC.left j.left a.left b.left) (hcartY : IsPullback iW.left j.left aW.left bY.left) (hOpenX : ∀ V : X.left.Opens, IsPushout ((Over.pullback V.ι).map (Over.homMk iC.left rfl : Over.mk (iC.left ≫ a.left) ⟶ Over.mk a.left)).left ((Over.pullback V.ι).map (Over.homMk j.left hX.w.symm : Over.mk (iC.left ≫ a.left) ⟶ Over.mk b.left)).left (pullback.snd a.left V.ι) (pullback.snd b.left V.ι)) (hOpenY : ∀ V : Y.left.Opens, IsPushout ((Over.pullback V.ι).map (Over.homMk iW.left rfl : Over.mk (iW.left ≫ aW.left) ⟶ Over.mk aW.left)).left ((Over.pullback V.ι).map (Over.homMk j.left hY.w.symm : Over.mk (iW.left ≫ aW.left) ⟶ Over.mk bY.left)).left (pullback.snd aW.left V.ι) (pullback.snd bY.left V.ι)) (hcomplX : ∃ (V : C.left.Opens) (V' : X.left.Opens) (e : V.toScheme ≅ V'.toScheme), (V : Set C.left) = (Set.range iC.left)ᶜ ∧ (V' : Set X.left) = (Set.range b.left)ᶜ ∧ e.hom ≫ V'.ι = V.ι ≫ a.left) (hcomplY : ∃ (V : W.left.Opens) (V' : Y.left.Opens) (e : V.toScheme ≅ V'.toScheme), (V : Set W.left) = (Set.range iW.left)ᶜ ∧ (V' : Set Y.left) = (Set.range bY.left)ᶜ ∧ e.hom ≫ V'.ι = V.ι ≫ aW.left) (r : T ⟶ C) (A : OrdinaryBlowupTower C.left) (eT : T.left ≅ A.level (Fin.last A.length)) (heT : eT.hom ≫ A.toBase (Fin.last A.length) = r.left) (hcentres : ∀ i : Fin A.length, ∃ (z : A.level i.castSucc) (hz : IsClosed ({z} : Set (A.level i.castSucc))), A.center i = Scheme.IdealSheafData.vanishingIdeal ⟨{z}, hz⟩ ∧ (A.toBase i.castSucc ≫ C.hom) z = IsLocalRing.closedPoint R) (hregular : IsRegularScheme T.left) (hcomponents : ∃ (ι : Type u) (_ : Finite ι) (V : ι → T.left.Opens), (∀ i j : ι, i ≠ j → Disjoint (V i) (V j)) ∧ iSup V = ⊤ ∧ ∀ i : ι, IsIntegral (V i).toScheme ∧ topologicalKrullDim (V i) = 2) (q : W ⟶ T) [IsProper q.left] [IsReduced W.left] (hgeneric : Set.BijOn q.left {η : W.left | ∃ F ∈ irreducibleComponents W.left, IsGenericPoint η F} {η : T.left | ∃ F ∈ irreducibleComponents T.left, IsGenericPoint η F}) (hstalk : ∀ η : W.left, (∃ F ∈ irreducibleComponents W.left, IsGenericPoint η F) → IsIso (q.left.stalkMap η)) (hqK : IsIso (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))).map q).left)) (hB : iW.left ≫ q.left ≫ r.left = iC.left) (U : T.left.Opens) (hU : IsGreatest {V : T.left.Opens | IsIso (q.left ∣_ V)} U) : ((U : Set T.left)ᶜ).Finite ∧ (∀ z : T.left, z ∉ U → IsClosed ({z} : Set T.left) ∧ T.hom z = IsLocalRing.closedPoint R) ∧ ∃ (D : Set C.left) (Z : Set X.left), D = r.left '' (U : Set T.left)ᶜ ∪ ⋃ i : Fin A.length, (A.toBase i.castSucc) '' (A.center i).support ∧ Z = a.left '' D ∧ D.Finite ∧ Z.Finite ∧ (∀ z ∈ D, IsClosed ({z} : Set C.left) ∧ C.hom z = IsLocalRing.closedPoint R) ∧ (∀ z ∈ Z, IsClosed ({z} : Set X.left) ∧ X.hom z = IsLocalRing.closedPoint R) ∧ ∃ V : X.left.Opens, (V : Set X.left) = Zᶜ ∧ IsIso (conductorModificationMap iC.left iW.left j.left a.left b.left aW.left bY.left (q.left ≫ r.left) hB hX hY ∣_ V)",
+  "branch": "newtargets-dag",
+  "by": "Q158",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing OrdinaryBlowupTower and its exact reduced special-fibre point centres, IsGeometricOrdinaryDoublePoint, and IsFiniteLocallyFreeOfDegree; adds their already-landed definition nodes to stmt_deps. The helper conductorModificationMap is the actual IsPushout.desc construction. All structure-map compatibility is retained by Over (Spec R). No natural-language statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d873310f",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node: DVR and Spec R; the 12 instance hypotheses for C,W,X,Y projective, flat, finitely presented; B,N finite etale; B->N etale of degree 2 (IsFiniteLocallyFreeOfDegree 2, vacuous if N empty); closed immersions into smooth loci; pushouts in Scheme that are also cartesian, with finite surjective and closed-immersion legs; every open restriction a pushout via Over.pullback V.ι; nodal geometric fibres via the existing IsGeometricOrdinaryDoublePoint, disconnected allowed; plain OrdinaryBlowupTower (no extra regularity) with vanishingIdeal closed-singleton special-fibre centres; T regular as a finite open partition into integral dimension-2 pieces; q proper, birational with the exact NormalModificationCodimensionOne interface, q_K iso, h|_B = iC; U_q as IsGreatest. Conclusion: U_q complement, D and Z finite closed special-fibre points with exact D and Z formulas; p restricted to X∖Z iso, N locus kept (⋃ body precedence 60 checked). conductorModificationMap is IsPushout.desc, not hollow. hcomplX/hcomplY redundant but harmless. lean.statement verbatim; the 3 added stmt_deps own the declarations used; all imports exist; docstrings carry source, blueprint and the 8-step plan; only sorry. No compile run because no change was made."
+ }
+}

@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-homothety-evaluation-biduality",
+ "kind": "statement",
+ "title": "Homothety and unbounded evaluation give canonical coherent biduality",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and work in the ordinary module derived category $D(R)$ [def-weil-abstract-derived-category], using derived internal Hom [def-pur-derived-internal-hom] on the one-object ringed site and derived tensor computed by K-flat replacement [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. Let $L\\in D(R)$ be isomorphic to a bounded complex of injective $R$-modules [def-sp-injective-resolutions]. Suppose the scalar-action morphism $h:R[0]\\to R\\operatorname{Hom}_R(L,L)$, adjoint to the unit action on $L$, is an isomorphism. For every $K\\in D(R)$ whose cohomology modules are finitely generated [def-weil-finitely-generated-module] in every degree, without a boundedness assumption, the evaluation comparison\n$$e_{K,L,L}:R\\operatorname{Hom}_R(L,L)\\otimes_R^{\\mathbf L}K\\longrightarrow R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(K,L),L)$$\nis an isomorphism. Here $e$ is the transpose of the map that first evaluates the $R\\operatorname{Hom}_R(K,L)$ and $K$ factors into $L$ and then evaluates $R\\operatorname{Hom}_R(L,L)$ into $L$, using the graded symmetry to order the factors. The composite\n$$K\\cong R[0]\\otimes_R^{\\mathbf L}K\\xrightarrow{h\\otimes 1}R\\operatorname{Hom}_R(L,L)\\otimes_R^{\\mathbf L}K\\xrightarrow{e_{K,L,L}}R\\operatorname{Hom}_R(R\\operatorname{Hom}_R(K,L),L)$$\nis exactly the canonical biduality morphism $\\delta_K$ adjoint to evaluation $R\\operatorname{Hom}_R(K,L)\\otimes_R^{\\mathbf L}K\\to L$. Thus $\\delta_K$ is an isomorphism in $D(R)$, naturally in $K$. No finite-generation assumption on the cohomology of $L$ is required.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7C, lemma-dualizing, second proof paragraph, using more-algebra.tex Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical; Tag 0A67, lemma-internal-hom-evaluate, for the canonical map; Tag 066E, lemma-Noetherian-pseudo-coherent, for the truncation hypothesis. The displayed specialization does not need finite cohomology of L."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-sp-injective-resolutions",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "For each integer $n$, the good truncation $K_n=\\tau_{\\leq n}K$ has $H^j(K_n)=H^j(K)$ for $j\\leq n$ and zero for $j>n$: replace degree $n$ by the kernel of the outgoing differential and delete higher degrees. Thus $K_n$ is bounded above and all its cohomology modules are finitely generated. Applying [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] over the given Noetherian ring shows that every $K_n$ is pseudo-coherent. This does not impose a bound on $K$ itself.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E, lemma-Noetherian-pseudo-coherent, clause (2), applied separately to each good truncation"
+   }
+  },
+  {
+   "text": "Put $T=R\\operatorname{Hom}_R(L,L)$. Apply [lem-sf-ringed-derived-closed-symmetric-monoidal] on the small one-object site with trivial topology and coefficient ring $R$. Its tensor unit is $R[0]$. For every module $N$, the assumed isomorphism $h$ gives $T\\otimes_R^{\\mathbf L}N[0]\\cong R[0]\\otimes_R^{\\mathbf L}N[0]\\cong N[0]$. Consequently $T$ has Tor amplitude $[0,0]$. The bounded injective representative assumed for $L$ supplies finite injective dimension for both copies of $L$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7C, lemma-dualizing, proof, homothety specialization of the finite-Tor-dimension hypothesis of more-algebra.tex Tag 0A69"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-evaluation-finite-injective] with its $(K,L,M)$ equal to $(K,L,L)$. Step 1 supplies all pseudo-coherent truncations, and Step 2 supplies finite injective dimensions and finite Tor dimension. It follows that the specified canonical comparison $e_{K,L,L}$ is an isomorphism. No finiteness of the cohomology of $L$ was used.",
+   "uses": [
+    "lem-trf-derived-evaluation-finite-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical, all three hypotheses"
+   }
+  },
+  {
+   "text": "Write $B=R\\operatorname{Hom}_R(K,L)$, let $\\epsilon_{X,Y}:R\\operatorname{Hom}_R(X,Y)\\otimes_R^{\\mathbf L}X\\to Y$ denote evaluation, and let $\\lambda$ denote the left unitor. Set $b=e_{K,L,L}\\circ(h\\otimes1_K)\\circ\\lambda_K^{-1}$. By [lem-trf-derived-evaluation-canonical-map], uncurrying $b$ with $B$ on the left gives, with the specified graded symmetry and associators, $\\epsilon_{L,L}\\circ(h\\otimes\\epsilon_{K,L})\\circ\\lambda_{B\\otimes K}^{-1}$. Since $h$ is adjoint to the unit action, $\\epsilon_{L,L}\\circ(h\\otimes1_L)=\\lambda_L$. The uncurried map is therefore $\\lambda_L\\circ(1_{R[0]}\\otimes\\epsilon_{K,L})\\circ\\lambda_{B\\otimes K}^{-1}=\\epsilon_{K,L}$ by naturality of the unitor. The adjunction bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal], composed with symmetry, is injective, so $b=\\delta_K$. All three factors of $b$ are isomorphisms; hence so is $\\delta_K$. Naturality of $e$, of $\\lambda$, and of tensoring the fixed map $h$ makes $b=\\delta$ natural in $K$.",
+   "uses": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7C, lemma-dualizing, displayed evaluation composite in the proof; explicit adjunction/unit calculation using more-algebra.tex Tag 0A67 and sites-cohomology.tex Tags 0FPT, 08J9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-derived-evaluation-finite-injective",
+  "lem-trf-derived-evaluation-canonical-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7C, lemma-dualizing, proof; more-algebra.tex Tags 066E (lemma-Noetherian-pseudo-coherent, clause (2)), 0A69 (lemma-internal-hom-evaluate-isomorphism-technical), and 0A67 (lemma-internal-hom-evaluate). The scalar-action and unitor calculation is written out to identify the canonical morphism; no finite cohomology hypothesis on L is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring a bounded injective complex with homothety isomorphism gives canonical biduality for unbounded complexes with finitely generated cohomology",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.IsKInjective', 'CategoryTheory.hasInjectiveDimensionLT_iff', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CategoryTheory.HasInjectiveDimensionLT.mk', 'DerivedCategory.isLE_iff', 'HomologicalComplex.isGrothendieckAbelian']; subdirectory=; note=; digest=616dc351971ed999",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give K-injectivity, ordinary duals, or derived-category infrastructure, not the canonical unbounded homothety-evaluation biduality theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|[Hh]omothety|[Ss]emidualizing|[Dd]ualizing",
+   "results": "25 hits; top=['Mathlib/MeasureTheory/Measure/Hausdorff.lean', 'Mathlib/MeasureTheory/Measure/Hausdorff.lean', 'Mathlib/MeasureTheory/Measure/Hausdorff.lean', 'Mathlib/MeasureTheory/Measure/Hausdorff.lean', 'Mathlib/MeasureTheory/Measure/Hausdorff.lean', 'Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Topology/Algebra/Affine.lean', 'Mathlib/Topology/Algebra/Affine.lean']; subdirectory=; note=; digest=9132e727cbd5fffa",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give K-injectivity, ordinary duals, or derived-category infrastructure, not the canonical unbounded homothety-evaluation biduality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CochainComplex.IsKInjective",
+   "results": "2 hits; top=['CochainComplex.IsKInjective.Qh_map_bijective', 'DerivedCategory.Plus.Qh_map_bijective_of_isKInjective']; subdirectory=; note=; digest=51cba319f0c7f7ce",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give K-injectivity, ordinary duals, or derived-category infrastructure, not the canonical unbounded homothety-evaluation biduality theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semidualizing complex of finite injective dimension has natural evaluation biduality on complexes with finite cohomology",
+   "results": "0 hits; top=[]; subdirectory=; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical double derived dual evaluation is invertible for coherent complexes when the scalar action on a bounded injective complex is an isomorphism",
+   "results": "8 hits; top=['HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle', 'Module.Flat.iff_characterModule_injective', 'CategoryTheory.ProjectiveResolution.isoExt', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀', 'DerivedCategory.singleFunctorCompHomologyFunctorIso']; subdirectory=; note=; digest=c1d4c4b8310c38ec",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give K-injectivity, ordinary duals, or derived-category infrastructure, not the canonical unbounded homothety-evaluation biduality theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]idual|[Hh]omothety|[Ss]emidualizing|[Dd]ualizing",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; subdirectory=Algebra/Homology; note=; digest=064930e5919f47f9",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give K-injectivity, ordinary duals, or derived-category infrastructure, not the canonical unbounded homothety-evaluation biduality theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]idual|[Hh]omothety|[Ss]emidualizing|[Dd]ualizing",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; subdirectory=Algebra/Homology; note=; digest=064930e5919f47f9",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary reflexive module duals, K-injective infrastructure, representable homological-complex functors, or homotopy fibers; none states this unbounded derived evaluation and homothety result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semidualizing complex of finite injective dimension has natural evaluation biduality on complexes with finite cohomology",
+   "results": "8 hits; top=['Module.Dual.eval', 'Module.Dual.eval_naturality', \"Module.IsReflexive.bijective_dual_eval'\", 'Module.evalEquiv', 'LinearMap.IsPerfPair.dualEval', 'Module.eval_apply_injective', 'Module.bijective_dual_eval', 'Module.Dual.eval_comp_comp_evalEquiv_eq']; subdirectory=; note=; digest=167a72d7e742b5d5",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary reflexive module duals, K-injective infrastructure, representable homological-complex functors, or homotopy fibers; none states this unbounded derived evaluation and homothety result."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CochainComplex.IsKInjective",
+   "results": "2 hits; top=['CochainComplex.IsKInjective.Qh_map_bijective', 'DerivedCategory.Plus.Qh_map_bijective_of_isKInjective']; subdirectory=; note=; digest=51cba319f0c7f7ce",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary reflexive module duals, K-injective infrastructure, representable homological-complex functors, or homotopy fibers; none states this unbounded derived evaluation and homothety result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a Noetherian ring a bounded injective complex with homothety isomorphism gives canonical biduality for unbounded complexes with finitely generated cohomology",
+   "results": "8 hits; top=['DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective', 'CochainComplex.isKInjective_of_injective_aux', 'CochainComplex.IsKInjective', 'CochainComplex.cm5b.instInjectiveXIntI', 'CochainComplex.cm5b.instIsStrictlyGEI', 'CochainComplex.cm5b', 'CochainComplex.isKInjective_of_injective', 'CochainComplex.IsKInjective.rightOrthogonal']; subdirectory=; note=; digest=eb2711d6abb673bc",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary reflexive module duals, K-injective infrastructure, representable homological-complex functors, or homotopy fibers; none states this unbounded derived evaluation and homothety result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical double derived dual evaluation is invertible for coherent complexes when the scalar action on a bounded injective complex is an isomorphism",
+   "results": "8 hits; top=['HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply', 'CochainComplex.cm5b.instQuasiIsoIntP', 'HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply', 'HomologicalComplex.evalCompCoyonedaCorepresentableBySingle', 'Rep.standardComplex.quasiIso_forget₂_εToSingle₀']; subdirectory=; note=; digest=278fd7e5342fdaf5",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary reflexive module duals, K-injective infrastructure, representable homological-complex functors, or homotopy fibers; none states this unbounded derived evaluation and homothety result."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emidualizing|[Dd]ualizing|[Bb]idual",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; subdirectory=Algebra; note=; digest=064930e5919f47f9",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary reflexive module duals, K-injective infrastructure, representable homological-complex functors, or homotopy fibers; none states this unbounded derived evaluation and homothety result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-local-coherent-duality",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Old proof Steps 4--5: Noetherian pseudo-coherence of all good truncations; application of 0A69 with L=M, Tor amplitude [0,0] from homothety, and identification of the composite with canonical natural biduality.",
+   "via": [
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-homothety-evaluation-biduality",
+  "worker": "stage1",
+  "summary": "Reused the existing Noetherian pseudo-coherence criterion and unbounded finite-injective evaluation theorem; checked all hypotheses without bounding K or assuming finite cohomology of L, and identified the composite with canonical biduality by an explicit uncurrying/unit calculation. No new nodes. Project attachment and Mathlib searches find no exact proof.",
+  "blueprint": "The inherited chain to lem-trf-local-term-locality, proof (1)--(2), provides the coherent-duality auxiliary input in the semistable-alteration/nearby-cycle branch. This item realizes the homothety-evaluation component of lem-trf-complete-local-coherent-duality: all good truncations are pseudo-coherent; apply 0A69; identify the canonical biduality composite. The latest blueprint locality proof itself cites the contracting-correspondence theorem and does not separately state this algebraic auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian algebra criterion for pseudo-coherence of each truncation; the trace-formula unit has no replacement for this algebra input."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic unbounded ringed-site tensor unit, symmetry and adjunction, specialized to ordinary modules on a small one-object site; the trace-formula unit has no replacement for these structural operations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-0f2248652",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-0f2248652 (reviewer sub-agent of L); spot-checked: One-level split with no new nodes; statement and stmt_deps kept. Step 1: each good truncation tau<=n K is bounded above with finitely generated cohomology, so the cited Noetherian criterion (066E (2)) makes it pseudo-coherent; this is the same pseudo-coherence notion as condition (iii) of the 0A69 node. Step 2: the closed monoidal node on the one-object site gives T⊗N[0] ≅ R[0]⊗N[0] ≅ N[0] through h, so T has Tor amplitude [0,0]; the bounded injective L gives condition (i). Step 3: lem-trf-derived-evaluation-finite-injective applied to (K,L,L), matching Stacks 0A69's three hypotheses as checked in more-algebra.tex. Step 4: I redid the uncurrying. It uses the B-first composite of the canonical-map node, eps∘(h⊗1)=lambda (from the closed node's u <-> eps∘(u⊗1)) and naturality of the unitor, so the uncurried map is eps_{K,L} and b = delta_K, natural in K. This makes explicit the identification K = RHom(ω,ω)⊗K that the proof of 0A7C leaves implicit; 0A7C's finite cohomology of ω is needed only for D_Coh preservation, so dropping it is correct. Edge cases checked: Z with L=[Q→Q/Z] and K=Z/2; a field with unbounded K; K=0; L=0. No duplicate: finite-module-canonical-biduality is the special case K=M[0] and cites this item; sf-dualizing-complex-bounded-duality is narrower; derived-evaluation-pseudocoherent has different hypotheses. Tool uses accepted (Noetherian pseudo-coherence criterion, ringed closed symmetric monoidal), the same ones sibling nodes already carry. No SGA. Searches recorded."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.HomothetyEvaluationBiduality",
+  "declaration": "DerivedCategory.homothety_evaluation_biduality",
+  "declarations": [
+   "DerivedCategory.homothetyEvaluationComparison",
+   "DerivedCategory.homothetyCanonicalBidual",
+   "DerivedCategory.homothety_evaluation_biduality"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/HomothetyEvaluationBiduality.lean",
+  "statement": "theorem homothety_evaluation_biduality (R : Type u) [CommRing R] [IsNoetherianRing R] (L : DerivedCategory (ModuleCat.{u} R)) (hL : ∃ J : CochainComplex (ModuleCat.{u} R) ℤ, (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero (J.X i)) ∧ (∀ i : ℤ, Injective (J.X i)) ∧ Nonempty (Q.obj J ≅ L)) (hh : IsIso ((singleFunctorObjUnitIso (ModuleCat.{u} R)).hom ≫ MonoidalClosed.id L)) : (∀ K : DerivedCategory (ModuleCat.{u} R), (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj K)) → IsIso (homothetyEvaluationComparison R K L) ∧ (λ_ K).inv ≫ (singleFunctorObjUnitIso (ModuleCat.{u} R)).inv ▷ K ≫ (((singleFunctorObjUnitIso (ModuleCat.{u} R)).hom ≫ MonoidalClosed.id L) ▷ K) ≫ homothetyEvaluationComparison R K L = homothetyCanonicalBidual R K L ∧ IsIso (homothetyCanonicalBidual R K L)) ∧ (∀ (K K' : DerivedCategory (ModuleCat.{u} R)) (f : K ⟶ K'), (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj K)) → (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj K')) → f ≫ homothetyCanonicalBidual R K' L = homothetyCanonicalBidual R K L ≫ (ordinaryModuleDerivedInternalHom R).map (((ordinaryModuleDerivedInternalHom R).map (f.op, 𝟙 L)).op, 𝟙 L))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Stage-2 review FIX (H4): homothetyCanonicalBidual is an abbreviation of the existing upstream double-dual map MonoidalClosed.toIhomIhom L K (WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided) for the descended Koszul braiding; same body, no statement change.",
+  "fixed_by": "NT-stage2-cc-313c746ac"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-313c746ac",
+  "group": "Q68",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 0A7C/0A67/0A69/066E clause by clause: Noetherian R; ordinary D(ModuleCat R) with recorded ordinaryModuleDerivedInternalHom and K-flat derived tensor; hL bounded injective representative (3 clauses); hh = IsIso(singleFunctorObjUnitIso.hom ≫ MonoidalClosed.id L) (fixed scalar-action map); K unbounded with Module.Finite H^i; e = curry(β ≫ α ≫ T◁ev_K ≫ β ≫ ev_L) pairs B with K then T with L; composite with inverse left unitor, R[0]/unit iso and h▷K equals δ_K (checked by uncurrying); δ_K iso; naturality variance correct; no finiteness on L. Edge cases (zero ring, K=0, L=0, empty interval, two-sided unbounded K) fine; no hollow defs, theorem by sorry only, docstrings and statement verbatim OK. H4 FIX: homothetyCanonicalBidual duplicated upstream MonoidalClosed.toIhomIhom (WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided) → abbrev @toIhomIhom with the same braidedCategory' + public import; fixes/HomothetyEvaluationBiduality.lean compiled clean via nt_compile --json (exit 0, 30.3 s); fixes/lem-trf-homothety-evaluation-biduality.lean-record.json pins statement verbatim (+note), refit_record: no refusals, statement unchanged."
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-space-projective-twist",
+ "kind": "definition",
+ "title": "Projective space and the standard twist over an algebraic space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Y$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $n\\in\\mathbb N$. Let $P_S=\\mathbf P(\\{0,\\ldots,n\\};S)$ with structure map $p_S:P_S\\to S$ [def-nagata-projective-space-base-change], and regard $P_S$ as its representable algebraic space over $S$ [def-trf-scheme-algebraic-space]. Define $\\mathbf P^n_Y$ to be the product of the fppf sheaves $Y$ and $P_S$ on $\\mathit{Sch}/S$. This product is an algebraic space; it is the fibre product $Y\\times_S P_S$, hence canonically $Y\\times_{\\operatorname{Spec}\\mathbb Z}\\mathbf P^n_{\\mathbb Z}$ [lem-trf-space-fibre-products-etale-covers]. Retain its projections $\\pi:\\mathbf P^n_Y\\to Y$ and $\\rho:\\mathbf P^n_Y\\to P_S$. On small etale ringed sites use the canonical module tensor pullback [def-trf-space-etale-module-functors]. Let $\\mathcal O_{P_S}(1)$ be the standard scheme twist [def-pc-projective-space-twist]. Extend this Zariski module to the small etale site of the represented scheme by the canonical tensor left adjoint to restriction to Zariski opens; concretely use representedSchemeModuleExtension, the left adjoint of the existing schemeModule restriction [lem-sfb-affine-etale-naive-cotangent-presentation]. Transport its value from the equivalent small ringed model back to the original module category [def-sfb-space-small-ringed-model]. Define $\\mathcal O_{\\mathbf P^n_Y}(1)=\\rho^*(\\mathcal O_{P_S}(1)_{\\mathrm{et}})$. It is the standard twist pulled back from integral projective space, and the construction applies also when $Y$ is empty or $n=0$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-nagata-projective-space-base-change",
+  "def-trf-scheme-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-etale-module-functors",
+  "def-pc-projective-space-twist",
+  "lem-sfb-affine-etale-naive-cotangent-presentation",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 08AQ, lemma-kill-by-twisting, projective-space diagram and definition of its twisting module; standard base change and etale extension are as in Tags 04T9, 03DX and 03FH."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projective n space over an algebraic space and its standard twisting line module pulled back from integral projective space",
+   "results": "OK 8 hits: AlgebraicGeometry.AffineSpace, AffineSpace.over_over, LinearAlgebra.Projectivization.termℙ, Projectivization.Subspace, Projectivization, Projectivization.Subspace.noConfusionType, AffineSpace.over, AffineSpace.toSpecMvPoly.",
+   "date": "2026-10-24",
+   "verdict": "no match: no projective-space construction or standard twist over algebraic spaces; reuse existing scheme Proj/projective-space/twist and canonical module extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Define projective space over an algebraic space by the fibre product with integral projective space and pull back the standard O(1) twist",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj, Proj.toSheafedSpace, Proj.pullbackAwayιIso, Proj.fromOfGlobalSections, Proj.instIsSeparated, Proj.isSeparated, Proj.toSpecZero, ProjectiveSpectrum.Proj.toSpec.",
+   "date": "2026-10-24",
+   "verdict": "no match: no projective-space construction or standard twist over algebraic spaces; reuse existing scheme Proj/projective-space/twist and canonical module extension."
+  },
+  {
+   "tool": "grep",
+   "query": "serreProjective|spaceProjective|projectiveTwist|AlgebraicSpace",
+   "results": "msearch.py, Mathlib/AlgebraicGeometry: OK 0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: no projective-space construction or standard twist over algebraic spaces; reuse existing scheme Proj/projective-space/twist and canonical module extension."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-projective-serre-vanishing",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0R applied with Y=Spec(A) supplies coherent cohomology after proper direct image. Input of Tag 0D0R through the proof of Tag 08GK: coherence of the entries R^p f_* H^q(E), using the proper case Tag 08AR. Supporting input: Tag 08AR (lemma-proper-pushforward-coherent), construction for condition (3), from weak Chow to the full-support calculation; projective inputs Tags 089J (lemma-weak-chow) and 08AQ (lemma-kill-by-twisting); coherent.tex Tag 02O4 (lemma-locally-projective-pushforward). This is an existential projective-twist witness, not the universal proper direct-image theorem. Supporting projective input: Tag 08AQ, lemma-kill-by-twisting, used for both the Chow map and its affine-base composite. Definition of the projective-space and standard-twist objects in the statement of Tag 08AQ.",
+   "via": [
+    "lem-sfb-space-projective-serre-vanishing",
+    "lem-sfb-space-chow-acyclic-full-support-witness",
+    "lem-sfb-space-proper-coherent-higher-images",
+    "lem-sfb-proper-space-coherent-derived-image",
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceProjectiveTwist",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceOver",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceModel",
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceSheaf_isAlgebraicSpace",
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceOver",
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceProjection",
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceModelProjection",
+   "AlgebraicGeometry.AlgebraicSpace.projectiveSpaceTwistOne"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceProjectiveTwist.lean",
+  "statement": "def projectiveSpaceOver {S : Scheme.{u}} (Y : AlgebraicSpace S) (n : ℕ) : AlgebraicSpace S",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d9432b52",
+  "group": "NQ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d9432b52",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Statement matches Stacks 08AQ and the node clause by clause: hln/hqc/IsAbsolutelyQuasiSeparated (Noetherian Y), standard IsRepresentableWith closed immersion into projectiveSpaceOver Y n (product sheaf = Y x_S P^n_S), f = i ≫ projection, O(1) = pullback of the existing integral ProjectiveSpace.twist via the canonical representedSchemeModuleExtension, chartwise RingedSpace.IsCoherent plus quasi-coherent F, tensor powers with unit in degree 0, ∃ d₀ ∀ d ≥ d₀ ∀ q > 0 IsZero of the classical injective rightDerived of smallModuleDirectImage. Edge cases covered; no extra hypotheses. New def node def-sfb-space-projective-twist: fields OK, real data, algebraicity is a named sorry theorem, no existing owner. Mechanical theorem stmt_dep lem-weil-pbc-ring-sheaves-grothendieck: genuine, since its conclusion is needed for HasInjectiveResolutions to type rightDerived, so PASS on that point. FIX: the statement used upstream SheafOfModules.isGrothendieckAbelian, leaving the cited node's public import unused; replaced by the recorded isGrothendieckAbelianOfUniverses.{u,u,u,u} X.smallEtaleModelTopology X.smallStructureRings (same instance) in fixes/SpaceProjectiveSerreVanishing.lean plus <item>.lean-record.json statement verbatim; nt_compile --json rc=0, no errors or warnings. Advisories: def-sfb-space-small-ringed-model only reached through def-sfb-space-derived-module-calculus; new node cites two theorem nodes; inherited blueprint.from.node null."
+ }
+}

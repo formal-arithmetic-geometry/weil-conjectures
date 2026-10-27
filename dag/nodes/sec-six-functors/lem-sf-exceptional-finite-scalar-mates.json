@@ -1,0 +1,432 @@
+{
+ "id": "lem-sf-exceptional-finite-scalar-mates",
+ "kind": "statement",
+ "title": "Exceptional coefficient construction: finite scalar mates",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ with $k=\\overline{k_0}$, a prime $\\ell\\ne p$, and finite extensions $E/\\mathbf Q_\\ell$ with valuation rings $R_E$, uniformizers $\\varpi_E$, and $A_{E,n}=R_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Let $X,Y$ be finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism; neither $X$ nor $Y$ is assumed separated over $k$ [def-weil-scheme-morphism-properties]. Fix a compactification $c=(X\\xrightarrow j\\overline X\\xrightarrow{p_c}Y)$ [def-weil-compactifications-refinements]. Write $\\mathcal C_{T,A}=D^b_{ctf}(T_{\\mathrm{proet}},A)$ for the actual full category of bounded constructible constant-$A$ complexes with finite Tor amplitude, and $I_{T,A}$ for its full inclusion [def-weil-pbc-proetale-modules, def-weil-finite-tor-amplitude]. Put $F_A=Rp_{c,*}j_!$ and $G_A=\\nu_X^*f^\\times_{c,A}R\\nu_{Y,*}$, using the ordinary etale compact-support right adjoint [def-compact-support-direct-image-detailed, def-weil-exceptional-inverse-image]. Equip these functors with the transported adjunction and adjoint shift structures. For every unital finite coefficient map $a:A\\to B$ between the rings $A_{E,n}$ (including quotients and ramified maps $A_{E,n}\\to A_{L,en}$), the ambient derived extension $S_{a,T}=-\\otimes^L_{A_T}B_T$ preserves $\\mathcal C_{T,A}$ and its Tor interval. It admits the literal full-subcategory restriction $T_{a,T}$, so $I_{T,B}T_{a,T}=S_{a,T}I_{T,A}$ is an equality of functors and its realization is the equality isomorphism. There are invertible shift-compatible comparisons\n$$q_a:T_{a,Y}F_A\\xrightarrow{\\sim}F_BT_{a,X},\\qquad b_a:T_{a,X}G_A\\xrightarrow{\\sim}G_BT_{a,Y}.$$\nThe first is exactly the proper scalar-adjunction mate followed by the open tensor map, transported from etale to pro-etale by the canonical proper/open comparisons. The second is the $F_B\\dashv G_B$ transpose of $T_{a,Y}\\epsilon_A\\circ q_{a,G_A}^{-1}$, so\n$$\\epsilon_{B,T_{a,Y}L}\\circ F_B(b_{a,L})\\circ q_{a,G_AL}=T_{a,Y}(\\epsilon_{A,L}).$$\nThis assertion includes nonflat quotients. On restriction of scalars the right map is the constant-$B$ exceptional tensor comparison, through the canonical isomorphism $\\operatorname{Res}_XG_B\\cong G_A\\operatorname{Res}_Y$. All realizations use the same counits, site-comparison units and flat-model pullback/tensor identifications; the proper projection and open maps preserve their shifts.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29, 3.16; Section 5, especially Lemma 5.22 and Proposition 5.24; blueprint exceptional inverse-image construction. Specific obligation: returned construction steps 4–7, preserved verbatim in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-finite-tor-amplitude",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "First work on the ordinary etale categories. For $K\\in\\mathcal C_{T,A}$, constructible origin and Tor comparison give an etale object $K^e$ with the same Tor interval $[u,v]$. The constructible variant of the flat-model lemma applies because $T$ is finite type over $k$: choose a flat constructible model $P$ supported in $[u,v]$. A bounded complex of flat sheaves is K-flat, so derived change of rings computes $K^e\\otimes_A^LB$ by $P\\otimes_AB$, canonically on morphisms and independently of this model. Each term is flat over $B$: for an injection $M\\hookrightarrow N$ of $B$-module sheaves, $(P^i\\otimes_AB)\\otimes_BM=P^i\\otimes_A\\operatorname{Res}M$, and flatness of $P^i$ preserves this injection. On any stratum trivializing $P^i$, its tensor with the finite ring $B$ is finite locally constant. Take a common finite refinement for the finitely many terms. The constructible Serre theorem gives constructible kernels, images and cohomology. The same flat complex supported in $[u,v]$ therefore has Tor interval $[u,v]$ over $B$, including for nonflat $A\\to B$.",
+   "uses": [
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-flat-model",
+    "lem-pur-derived-change-of-rings",
+    "thm-constructible-serre",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Finite coefficient tensor; Proposition 2.29; flat-model argument made explicit."
+   }
+  },
+  {
+   "text": "Exact comparison inverse image and the canonical derived pullback/tensor identification identify $\\nu_T^*(P\\otimes_AB)$ with $S_{a,T}(\\nu_T^*P)$. The constructible-origin and Tor-comparison theorems carry the conclusion of step 1 back to the actual pro-etale category, with the unchanged interval. Define $T_{a,T}$ on objects by the ambient $S_{a,T}$ with this membership proof and on morphisms by $S_{a,T}$ itself. The subcategory is full, so identities and composition are literally those of the ambient functor: $I_{T,B}T_{a,T}=S_{a,T}I_{T,A}$, with equality realization. Exactness and its canonical shifts are inherited from derived change of rings. This construction applies separately to every actual finite ring map, including an identity or a composite.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK/09AL, lemma-compare-constructible and lemma-compare-constructible-derived; tensor pullback: sites-cohomology.tex Tag 07A4, lemma-pullback-tensor-product."
+   }
+  },
+  {
+   "text": "Write $F^e_R=Rp_{c,\\mathrm{et},R,*}j^e_{!,R}$ and $G^e_R=f^\\times_{c,R}$ on the entire etale derived categories. Use their ambient adjunctions, with counits $\\epsilon^e_R$. Let $q^e_a$ be exactly the proper coefficient comparison at $j^e_{!,A}(-)$ followed by $Rp_{c,B,*}$ of the open scalar tensor map. The proper comparison theorem specifies its transpose as scalar extension of the proper counit after the canonical pullback/tensor identification; the open map is scalar balancing on the open and zero off it. The compact scalar coherence theorem proves this specified composite invertible for any finite $A\\to B$, with no flatness assumption. Thus $q^e_a:S_YF^e_A\\cong F^e_BS_X$ is the required left map rather than an independently chosen isomorphism.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-pur-etale-compact-scalar-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; proper scalar map with its specified counit normalization."
+   }
+  },
+  {
+   "text": "Put $U_T=\\operatorname{Res}_{a,T}$. Derived ringed direct-image composition applied to the two factorizations of the same ringed-topos map gives $U_YRp_{c,B,*}\\cong Rp_{c,A,*}U_{\\overline X}$. Open extension by zero commutes with $U$ termwise: it changes only the ring action on the open and both sides are zero off the open. Consequently $h:U_YF^e_B\\cong F^e_AU_X$ is the canonical restriction comparison. For any $N\\in D(Y_{\\mathrm{et}},B)$ and $K\\in D(X_{\\mathrm{et}},A)$ the scalar adjunction, the two exceptional adjunctions and $q^e_a$ give natural bijections\n$$\\operatorname{Hom}_A(K,U_XG^e_BN)\\cong\\operatorname{Hom}_B(S_XK,G^e_BN)\\cong\\operatorname{Hom}_B(F^e_BS_XK,N)\\cong\\operatorname{Hom}_B(S_YF^e_AK,N)\\cong\\operatorname{Hom}_A(K,G^e_AU_YN).$$\nYoneda gives a canonical isomorphism $d_N:U_XG^e_BN\\cong G^e_AU_YN$. Explicitly $d_N$ is the transpose of $F^e_AU_XG^e_BN\\xrightarrow{h^{-1}}U_YF^e_BG^e_BN\\xrightarrow{U_Y\\epsilon^e_{B,N}}U_YN$. Indeed, following $\\mathrm{id}$ through the chain, its image is $U_Y(\\epsilon^e_{B,N}F^e_B(c)\\,q^e)\\circ\\eta$, with $\\eta:x\\mapsto x\\otimes1$ the scalar unit and $c:x\\otimes b\\mapsto b\\,x$ the scalar counit. By the proper coefficient theorem and the open balancing map, $h\\circ U_Yq^e_K$ is the projection map $P_K:B_Y\\otimes^L_AF^e_AK\\to F^e_A(B_X\\otimes^L_AK)$. Naturality of $h$ then rewrites the image as $U_Y\\epsilon^e_{B,N}\\,h^{-1}\\,F^e_A(U_Xc)\\,P\\,\\eta$. Since $P$ is natural in the constant factor and is the identity for the unit $A$, $F^e_A(U_Xc)\\,P\\,\\eta=\\mathrm{id}$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, restriction square; Zheng Proposition 2.23; normalized scalar adjunction."
+   }
+  },
+  {
+   "text": "For $L\\in D(Y_{\\mathrm{et}},A)$ define $b^e_{a,L}$ to be the $F^e_B\\dashv G^e_B$ transpose of\n$$F^e_BS_XG^e_AL\\xrightarrow{(q^e_{a,G^e_AL})^{-1}}S_YF^e_AG^e_AL\\xrightarrow{S_Y\\epsilon^e_{A,L}}S_YL.$$\nThe adjunction bijection gives naturality in $L$ and exactly\n$$\\epsilon^e_{B,S_YL}\\,F^e_B(b^e_{a,L})\\,q^e_{a,G^e_AL}=S_Y\\epsilon^e_{A,L}.$$\nUnder $d_{S_YL}$ and $U_TS_T(-)=B_T\\otimes_A^L(-)$, its restriction has $F^e_A$-transpose\n$$F^e_A(B_X\\otimes_A^LG^e_AL)\\xrightarrow{P^{-1}}B_Y\\otimes_A^LF^e_AG^e_AL\\xrightarrow{1\\otimes\\epsilon^e_{A,L}}B_Y\\otimes_A^LL.$$\nIndeed substitute the transpose formula for $d$ from step 4 into the preceding counit equation; $U_Yq^e$ is $P$, since its proper factor is precisely the ordered projection by the proper coefficient theorem and its open factor is the balancing map. Naturality of $h$ and the counit equation replace $U_Y\\epsilon^e_B\\,U_YF^e_B(b^e)$ by $U_YS_Y\\epsilon^e_A\\,(U_Yq^e)^{-1}$. This is the displayed formula. It is the defining transpose of the exceptional constant-$B$ tensor map. The constant-tensor theorem applies to $B\\in D(A\\text{-}\\mathrm{Mod})$ without requiring perfection or bounded projective dimension, so this restricted map is invertible. Restriction detects quasi-isomorphisms: the cohomology of a cone is unchanged as an abelian sheaf. Hence the $B$-linear map $b^e_a$ is invertible.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-pur-etale-exceptional-constant-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Construction 2.26, equation (2.26.1), and Proposition 2.29(2); scalar restriction calculation with the same counits."
+   }
+  },
+  {
+   "text": "The finite-operations theorem supplies the actual constructible restrictions of $F_R,G_R$, their adjunction and their adjoint shift structures, without absolute separatedness. Steps 1–2 apply both to its inputs and to $F_RK,G_RL$, so every endpoint of $q,b$ lies in the stated full categories. Use constructible origin and the invertible bounded-below site-comparison unit to transport $q^e,b^e$ through $\\nu^*$ and $R\\nu_*$. The compact-support comparison identifies $\\nu_Y^*F^e_R$ with $F_R\\nu_X^*$; the exceptional realization is $G_R=\\nu_X^*G^e_RR\\nu_{Y,*}$. Its unit and counit are precisely those of the transported adjunction. Applying the equivalence to the equation in step 5 therefore gives\n$$\\epsilon_{B,T_{a,Y}L}F_B(b_{a,L})q_{a,G_AL}=T_{a,Y}(\\epsilon_{A,L}).$$\nFullness identifies the transported arrows with natural transformations on the actual full subcategories, and full faithfulness makes this the unique transpose there.",
+   "uses": [
+    "lem-sf-exceptional-finite-operations",
+    "lem-sf-proetale-constructible-origin",
+    "thm-weil-pbc-site-comparison",
+    "lem-sf-class-compact-support-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AL, lemma-compare-constructible-derived, and 09B1, lemma-compare-derived; exceptional definition, finite-stage transported adjunction."
+   }
+  },
+  {
+   "text": "For the realization of $q$, expand the compact-support site comparison into its two factors. The proper factor is the counit-normalized direct-image mate, not an unspecified site isomorphism. The open factor is the termwise comparison $\\nu_{\\overline X}^*j^e_!\\cong j^p_!\\nu_X^*$. Substitute their defining counit and open-unit transposes into step 3. The adjacent site units cancel with the site counits, and the remaining proper transpose is the scalar extension of the same proper counit followed by the same open balancing map. The tensor/pullback comparison identifies the intervening tensors on K-flat models. Thus this transport is exactly the pro-etale proper scalar-adjunction mate followed by the open tensor map. The counit equation of step 6 then identifies $b$ with its required normalized transpose; no second choice of Hom bijections is introduced. The restriction description in step 5 transports to etale-origin objects using these same identifications and site units.",
+   "uses": [
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; proper site mate and termwise open comparison, normalized by their counits/units."
+   }
+  },
+  {
+   "text": "All shift equations use the chosen derived shifts. Derived change of rings is exact. The pullback/tensor comparison commutes with integer shifts; the proper projection map commutes with shifts in the direct-image input by the first-variable projection theorem (and in the tensor input by the ringed projection theorem). For the proper scalar map, transpose its proposed shift equation: its counit formula and the pullback/tensor shift equation give identical transposes, hence equal maps. This uses the scalar map itself and does not infer equality from restriction of scalars. The open map is induced by the degreewise balancing identity. On the total tensor complexes both paths shift the same summand and have the same tensor sign, so it commutes with shifts in either input. The site comparison is termwise on inverse images and its direct-image comparison is the mate using the adjoint shifts. Composition and whiskering preserve shift equations. Consequently $q$ has the required shift equation. Transpose the two sides of the proposed shift equation for $b$: by shift compatibility of the fixed counits, each transpose is $T_Y\\epsilon_A\\,(q_{G_A})^{-1}$ with the same shift identifications. Injectivity of the adjunction bijection makes the two arrows equal. This also proves compatibility for every integer, with the unique adjoint shift structure.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sfb-ringed-projection-first-shift",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; canonical total-complex shifts, proper projection in both variables, and adjoint shifts."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-etale-exceptional-constant-tensor",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-exceptional-finite-operations",
+  "lem-sf-flat-model",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-constructible-serre",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23, 2.29(2), Construction 2.26; explicit finite scalar mate and site/shift calculations, following returned parent steps 4–7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exceptional.*(scalar|coefficient)|compactSupport.*scalar|finiteScalar_normalized",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized exceptional inverse image scalar comparison from etale to pro etale even for nonflat coefficient quotient rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.homEquiv_symm_apply\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (x : { x // P.HasMap x }), P.homEquiv.symm x = P.lift ↑x ⋯\", \"doc\": \"For a commutative ring $ R $, a standard étale pair $ P $ over $ R $, and an $ R $-algebra $ S $, the inverse of the equivalence $ \\\\text{homEquiv} $ maps an element $ x \\\\in S $ satisfying $ P.\\\\text{Ha\"}\n  {\"name\": \"StandardEtalePair.homEquiv\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (P.Ring →ₐ[R] S) ≃ { x // P.HasMap x }\", \"doc\": \"For a commutative ring $R$, a standard étale pair $P=(f,g)$ over $R$, and a commutative $R$-algebra $S$, there is a natural equivalence:\\\\n$$ \\\\operatorname{Hom}_{R\\\\text{-alg}}(P.\\\\text{Ring}, S) \\\\cong \\\\\"}\n  {\"name\": \"StandardEtalePair.homEquiv_apply_coe\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (f : P.Ring →ₐ[R] S), ↑(P.homEquiv f) = f P.X\", \"doc\": \"For a standard étale pair $ P $ over a commutative ring $ R $, and an $ R $-algebra homomorphism $ f: P.\\\\text{Ring} \\\\to S $, the equivalence $ P.\\\\text{homEquiv} $ sends $ f $ to the element $ f(X) \\\\in\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"RingHom.etale_algebraMap\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  (algebraMap R S).Etale ↔ Algebra.Etale R S\", \"doc\": \"The canonical algebra map from a commutative ring $ R $ to an $ R $-algebra $ S $ is étale if and only if $ S $ is an étale algebra over $ R $. This equivalence holds because both conditions require $\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived finite coefficient extension preserves constructible finite Tor sheaves and the exceptional compact support scalar mates are invertible for nonflat quotients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}\n  {\"name\": \"Module.Flat.of_forall_exists_factorization\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  (∀ {l : ℕ} {f : Fin l →₀ R} {x : (Fin l →₀ R) →ₗ[R] M}, x f = 0 → ∃ k a y, x = y ∘ₗ a ∧ a f = 0) → Module.Flat R M\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every finite list $ f $ of elements in the free $ R $-module $ \\\\text{Fin}(l) \\\\to_0 R $, and for every $ R $-linear map $ x: \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived finite coefficient extension preserves constructible finite Tor sheaves and the exceptional compact support scalar mates are invertible for nonflat quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"module\": \"Mathlib.Algebra.Category.Ring.Under.Limits\", \"type\": \"[Module.Flat R S] : PreservesFiniteLimits (tensorProd R S)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the tensor product functor from the under category of $ R $ to the under category of $ S $ preserves finite limits.\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.Flat) : PreservesFiniteLimits (extendScalars.{_, _, u} f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"instFinitePresentationTensorProduct\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"{A} [CommRing A] [Algebra R A] [Module.FinitePresentation R M] : Module.FinitePresentation A (A ⊗[R] M)\", \"doc\": \"Let $R$ be a commutative semiring and let $A$ be a commutative ring that is also an $R$-algebra. If $M$ is a finitely presented $R$-module, then the tensor product $A \\\\otimes_R M$, viewed as an $A$-mo\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Module.Flat R M] : PreservesFiniteLimits <| tensorLeft M\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"comonadicExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \"(hf : f.FaithfullyFlat) : ComonadicLeftAdjoint (extendScalars f)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a faithfully flat ring homomorphism $ f : R → S $, the extension of scalars functor from the category of $ R $-modules to $ S $-modules is comonadic. This me\"}\n  {\"name\": \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"module\": \"Mathlib.Algebra.Module.FinitePresentation\", \"type\": \"(Rₛ) [CommRing Rₛ] [Algebra R Rₛ] [Module Rₛ M'] [Module Rₛ N'] [IsScalarTower R Rₛ M'] [IsScalarTower R Rₛ N']\\n  [IsLocalization S Rₛ] [Module.FinitePresentation R M] :\\n  IsLocalizedModule S (IsLocalizedModule.mapExtendScalars S f g Rₛ)\", \"doc\": \"If $ R_\\\\!_\\\\!s $ is the localization of a commutative ring $ R $ at a submonoid $ S $, and $ M $ is a finitely presented $ R $-module, then the scalar extension map from $ M $ to an $ R_\\\\!_\\\\!s $-module\"}\n  {\"name\": \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsFiniteType\", \"doc\": \"For any sheaf of modules $ \\\\mathcal{M} $ over a ring sheaf $ \\\\mathcal{R} $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, if $ \\\\mathcal{M} $ is of finite presentation (i.e., locally t\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$, under conditions ensuring sheaf composition, weak sheafification, and local bijectivity for additi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"Given a continuous functor between sites `F`, and a morphism of sheaves of rings\\n`S ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj R`, this is the adjunction\\nbetween the corresponding pullback a\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} (S : CategoryTheory.Sheaf J RingCat) : (CategoryTheory.conjugateEquiv CategoryTheory.Adjunction.id (SheafOfModules.pullbackPushforwardAdjunction (CategoryTheory.CategoryStruct.id S))) (SheafOfModules.pull\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {D' : Type u₃} [CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.She\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [F\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical, algebraic or module tools do not state these geometric coefficient constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.yoneda",
+   "results": "CategoryTheory.Adjunction.representableBy_homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: these general categorical or module declarations do not state the geometric finite scalar construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient extension commutes with exceptional inverse image on constructible sheaves",
+   "results": "CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_map; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app; CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv; CategoryTheory.Presheaf.coherentExtensiveEquivalence_inverse_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: these general categorical or module declarations do not state the geometric finite scalar construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image scalar extension is the counit transpose of compact support coefficient comparison for finite nonflat ring maps",
+   "results": "Condensed.profiniteSolidCounit; comonadicExtendScalars; ModuleCat.ExtendRestrictScalarsAdj.counit_app; ModuleCat.ExtendRestrictScalarsAdj.counit; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.RestrictionCoextensionAdj.counit'; ModuleCat.RestrictionCoextensionAdj.counit'_app; ModuleCat.ExtendRestrictScalarsAdj.Counit.map",
+   "date": "2026-10-22",
+   "verdict": "no match: these general categorical or module declarations do not state the geometric finite scalar construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived change of finite ring coefficients preserves constructible finite Tor complexes and proper open exceptional adjunction mates",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.mapDerivedCategory; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-22",
+   "verdict": "no match: these general categorical or module declarations do not state the geometric finite scalar construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-constructible-exceptional-coefficient-construction",
+  "date": "2026-10-22",
+  "group": "Q154"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-sf-tensor-hom, third Hom bijection and coefficient compatibility; exceptional inverse-image paragraph; returned construction steps 4–7.",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-finite-scalar-mates",
+  "worker": "NB stage1",
+  "summary": "Expanded the finite scalar construction into eight steps using existing DAG statements only. Checked nonflat scalar extension, literal restriction, normalized proper/open maps, ambient Hom-chain restriction comparison, constant-tensor invertibility, and canonical site/shift transport. No change to the statement or its dependencies; no new nodes.",
+  "blueprint": "Exceptional inverse-image paragraph and third Hom bijection/coefficient compatibility in sk-thm-sf-tensor-hom; parent returned construction steps 4–7. ancestor command returns None for the pre-existing maintenance chain, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-proper-finite-coefficient-extension",
+    "why": "Generic Canonical unbounded proper direct-image comparison for finite coefficient extension used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic Comparison of extension by zero with the site morphism used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic Yoneda evaluation for every presheaf of sets used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "Generic Ordinary etale compact-support scalar compatibility with projection and composition used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-pur-etale-exceptional-constant-tensor",
+    "why": "Generic Constant-coefficient tensor calculus for the finite etale exceptional adjoint used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic Open extension by zero and unbounded derived tensor on ordinary etale sites used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic Finite Tor amplitude under the site comparison used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic Bounded flat model of finite Tor amplitude used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-first-shift",
+    "why": "Generic The ringed projection mate commutes with shifts in its direct-image input used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic Shift isomorphisms compatible with an adjunction: counit from unit, and uniqueness on the right adjoint used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "why": "Generic Composites and whiskerings of shift-compatible natural transformations are shift-compatible used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic Constructible sheaves form a weak Serre subcategory used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison used for exactly its stated input in the finite scalar construction; the compatibility unit supplies no replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic: a bounded-above complex of flat module sheaves is K-flat; used in step 1 so that derived change of rings is computed termwise on the flat constructible model. The compatibility unit supplies no replacement theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-pur-etale-exceptional-constant-tensor",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-flat-model",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-ringed-projection-first-shift",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-constructible-serre",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-e471aa39f",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-e471aa39f (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps, no new nodes; statement and stmt_deps byte-identical to the base, where the node was unsplit with no proof) and the statements of all 23 cited nodes. Statement agrees with clauses (2)/(3) of the Q154 parent at finite targets: literal restriction with equality realization, q = proper scalar mate then open balancing, b = counit-normalized transpose, nonflat quotients included, no absolute separatedness; nothing weakened. Sources: Zheng (2.26.1) is inverse projection then counit, matching step 5; Zheng Prop. 2.29(2) is the constant-N isomorphism (lem-pur-etale-exceptional-constant-tensor with V=B in D(A-Mod)); Stacks remark-Rf-lower-shriek-change-of-rings supports h in step 4 and q in steps 3/5. No SGA. Hypotheses checked: ℓ invertible on finite-type k-schemes for Tor comparison and flat model; Noetherian middle scheme and proper finite-type p for asd-proper and compact-scalar-coherence; qcqs for the canonical mate; bounded-below inputs for the site unit and class comparison; finite-operations gives the endpoint bounds. Edge cases: a=id, Z/l^2->Z/l nonflat, ramified maps, empty schemes, nonseparated Y. Two repairs: (1) step 1 computed the derived change of rings on P⊗B without the K-flatness of the bounded flat model; cited lem-weil-pbc-independent-bounded-flat-kflat (step uses, proof_deps, tool_uses). (2) step 4 justified the formula for d only by 'units and counits cancel'; wrote out the computation via h∘U_Y q = P (asd-proper), naturality of h, and projection naturality/unitality (ringed-projection-mate-exact), and added both to the step's uses. Batch-5 flag: lem-pod-derived-exact-square-composition has a 9-node closure of abstract derived-category generalities (exact functors give coherently pasted derived squares). Poincaré duality does not give it and it is no step of the duality proof, so it is genuinely outside the assumption: accepted. The added citation has a 13-node closure with no trace-formula or Poincaré-duality chapter node. Closure with the fix is acyclic. Off-unit generic tool_uses accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalFiniteScalarMates",
+  "declaration": "WeilConjectures.ExceptionalFiniteScalar.exceptionalFiniteScalarMates",
+  "declarations": [
+   "WeilConjectures.ExceptionalFiniteScalar.finiteTriangulated",
+   "WeilConjectures.ExceptionalFiniteScalar.etaleAdjunction",
+   "WeilConjectures.ExceptionalFiniteScalar.etaleExceptional",
+   "WeilConjectures.ExceptionalFiniteScalar.exceptional",
+   "WeilConjectures.ExceptionalFiniteScalar.leftFixedIso",
+   "WeilConjectures.ExceptionalFiniteScalar.leftScalarMap",
+   "WeilConjectures.ExceptionalFiniteScalar.restrictScalar",
+   "WeilConjectures.ExceptionalFiniteScalar.compactShift",
+   "WeilConjectures.ExceptionalFiniteScalar.Operation",
+   "WeilConjectures.ExceptionalFiniteScalar.restrictionIso",
+   "WeilConjectures.ExceptionalFiniteScalar.etaleScalarShift",
+   "WeilConjectures.ExceptionalFiniteScalar.EtaleMates",
+   "WeilConjectures.ExceptionalFiniteScalar.Scalar",
+   "WeilConjectures.ExceptionalFiniteScalar.Scalar.functor",
+   "WeilConjectures.ExceptionalFiniteScalar.Scalar.functorShift",
+   "WeilConjectures.ExceptionalFiniteScalar.Construction",
+   "WeilConjectures.ExceptionalFiniteScalar.exceptionalFiniteScalarMates"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalFiniteScalarMates.lean",
+  "statement": "theorem exceptionalFiniteScalarMates (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L] [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) L] (n m : ℕ) (a : Padic.coefficientExtensionRing l E (n + 1) →+* Padic.coefficientExtensionRing l L (m + 1)) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : Nonempty (Construction l E L n m a c)",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite coefficient maps are arbitrary unital RingHom values. The full-subcategory restrictions, compactification, counit transpose, ordinary-etale constant-B calculation and adjoint shifts are retained explicitly. Helper declarations package this node’s canonical maps; definitions contain no postponed data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba54e54b9",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Read node, report, full module and all key dep decls in side-live (sfFiniteExceptionalAt, specifiedExceptionalHomEquiv, FixedEtaleOriginWitness, sfCompactSupportRestriction, intrinsicCompactScalarIsoOfOrigin_hom, compactScalarMap, scalarTensorIso, scalarCoefficientPullbackIso, projectionMapOfCompactification, ConstructibleExceptionalCoefficients Operation/Scalar/RingSystem). Node differs from side-live only in lean; statement verbatim; 8 proof steps in docstring; one sorry; helpers real, docstrings with source+blueprint. Clauses: D, l≠p, E/L finite over Q_l, n+1 levels, finite-type X,Y without absolute separatedness, separated f, fixed c, actual ctf full subcategories; Operation pins F/G realizations, Hom bijection = specifiedExceptionalHomEquiv (witness-independent), adjoint shifts; Scalar = literal ObjectProperty.lift with equality realization and same Tor interval (endpoints X,Y suffice via f=id); q pinned to mateEquiv of sfCompactSupportRestriction (= transported proper/open map by landed theorem); counit identity in node order pins b; EtaleMates pins etale q=compactScalarMap, b=mate, projection, restrictionIso=rightAdjointUniq and the step-5 constant-B restriction formula. Arbitrary RingHom covers nonflat/ramified/identity/composite. Edge cases and universes OK. Advisories: pro-etale b not explicitly linked to etale.b (all pinned, derivable, citers proof_dep only); local Operation/Scalar differ from the Ω/Change-indexed records of def-weil-exceptional-inverse-image (not reusable); duplicate defeq instances harmless; second reading is the author's own. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,309 @@
+{
+ "id": "lem-sfb-proper-space-square-zero-effectivity",
+ "kind": "statement",
+ "title": "Effectivity of proper-space families over square-zero inverse sequences",
+ "statement": "Let $(R_n)_{n\\geq1}$ be an inverse sequence of commutative rings with compatible transition maps $\\rho_{mn}:R_m\\to R_n$ for $m\\geq n$, all surjective and satisfying $(\\ker\\rho_{mn})^2=0$. Let $R=\\varprojlim_n R_n$, concretely the ring of compatible sequences with coordinatewise operations. For every $n$ let $X_n\\to\\operatorname{Spec}R_n$ be a flat proper finitely presented morphism of algebraic spaces. Suppose specified isomorphisms $X_m\\times_{\\operatorname{Spec}R_m}\\operatorname{Spec}R_n\\cong X_n$ for $m\\geq n$ satisfy the identity and cocycle compatibilities. Spectra and base changes use [def-pc-scheme, def-weil-affine-spectrum, def-pc-fibre-product]. Algebraic spaces are as in [def-trf-algebraic-space], with universes as in [def-weil-size-convention]. Flatness and local finite presentation of their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Finite presentation means quasi-compact, quasi-separated and locally of finite presentation; quasi-separated means that the diagonal is quasi-compact. Proper means separated, of finite type and universally closed: separated means the diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Then there exists a flat proper finitely presented morphism of algebraic spaces $X\\to\\operatorname{Spec}R$ and isomorphisms $X\\times_{\\operatorname{Spec}R}\\operatorname{Spec}R_n\\cong X_n$ compatible with every specified transition isomorphism. There is no Noetherian hypothesis on the rings, and no dimension or projectivity hypothesis on the spaces.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Put $I_n=\\ker(R_n\\to R_1)$ and $I=\\varprojlim I_n$. Each $I_n^2=0$. The maps $I_m\\to I_n$ are surjective: a lift in $R_m$ of an element of $I_n$ still maps to zero in $R_1$. Recursively lifting along the adjacent surjections shows that every projection $R\\to R_n$ and $I\\to I_n$ is surjective. The kernel of $R\\to R_1$ is exactly $I$, since this condition holds coordinatewise, and $I^2=0$ coordinatewise. Thus $0\\to I\\to R\\to R_1\\to0$ is a square-zero ring extension. No assertion that adjacent square-zero kernels alone imply $I_n^2=0$ is being used: the hypothesis applies to every $R_n\\to R_1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, paragraph Let I_n = Ker(R_n to R_1), base-ring calculation"
+   }
+  },
+  {
+   "text": "Use the specified cartesian identifications to regard $X_1\\hookrightarrow X_n$ as first order thickenings over $\\operatorname{Spec}R_1\\hookrightarrow\\operatorname{Spec}R_n$. Indeed, on an affine scheme chart the base change is the quotient of its coordinate ring $C$ by $I_n C$: this ideal has square zero, and every prime contains it. This verifies both the closed immersion and the full underlying closed subset directly. By [lem-sfb-space-first-order-ringed-description], all structure sheaves can be viewed on $X_{1,\\mathrm{et}}$. Put $\\mathcal E_n=\\mathcal O_{X_n}$ on this site and $\\mathcal F_n=\\mathcal O_{X_1}\\otimes_{R_1}I_n$. By the forward direction of [lem-sfb-space-square-zero-flatness-criterion], flatness of $X_n/R_n$ and the cartesian square identify the ideal of $X_1$ with $\\mathcal F_n$. Consequently $0\\to\\mathcal F_n\\to\\mathcal E_n\\to\\mathcal O_{X_1}\\to0$ is an extension of ring sheaves with square-zero kernel. The ideal identifications are canonical, so the transition maps on the kernels are $1\\otimes(I_m\\to I_n)$. The sheaf tensor definition [def-pur-sheaf-tensor-product] and the local-presentation definition [def-trf-space-quasi-coherent-module] show that these kernels are quasi-coherent: tensor a free-module presentation of $I_n$ with $\\mathcal O_{X_1}$ to obtain its local presentation. Transition maps are surjective since each local tensor sum $\\sum a_j\\otimes i_j$ lifts by lifting its finitely many $i_j$.",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "def-pur-sheaf-tensor-product",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, displayed structure-sheaf extension, using Tag 06BH"
+   }
+  },
+  {
+   "text": "Form the sectionwise limits $\\mathcal E=\\varprojlim\\mathcal E_n$ and $\\mathcal G=\\varprojlim\\mathcal F_n$; componentwise operations preserve the sheaf gluing axiom. Then $0\\to\\mathcal G\\to\\mathcal E\\to\\mathcal O_{X_1}\\to0$ is exact. Here is the local surjectivity argument, rather than an assumption that inverse limits preserve epimorphisms. On an affine etale object $U$ of $X_1$, [lem-sfb-space-surjective-qcoh-limit] gives $H^1(U,\\mathcal F_n)=0$ and surjections $\\mathcal F_{n+1}(U)\\to\\mathcal F_n(U)$. Hence each $\\mathcal E_n(U)\\to\\mathcal O_{X_1}(U)$ is onto. Starting with a lift $e_n$ of $s$, choose any lift $e_{n+1}^0$ of $s$. Its image minus $e_n$ lies in $\\mathcal F_n(U)$; lift that difference to $\\mathcal F_{n+1}(U)$ and subtract it from $e_{n+1}^0$. Recursion gives a compatible lift of $s$. Kernel exactness holds coordinatewise. Products of elements of $\\mathcal G$ vanish in every $\\mathcal E_n$, so $\\mathcal G$ is a square-zero ideal. The compatible base maps make this a ring-sheaf extension over $R\\to R_1$.",
+   "uses": [
+    "lem-sfb-space-surjective-qcoh-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, inverse-limit extension and vanishing of R^1 lim of the kernels"
+   }
+  },
+  {
+   "text": "Set $\\mathcal F=\\mathcal O_{X_1}\\otimes_{R_1}I$ and let $u:\\mathcal F\\to\\mathcal G$ be the canonical map with components $1\\otimes(I\\to I_n)$. As in step 2, a free presentation of the module $I$ gives a local presentation of $\\mathcal F$, so it is quasi-coherent. Apply [lem-sfb-proper-flat-space-pullback-limit] to $X_1\\to\\operatorname{Spec}R_1$ and the surjective tower $(I_n)$: the family is proper, flat and finitely presented by hypothesis. It gives, for every complex $K$ with quasi-coherent cohomology on $X_1$, a bijection $\\operatorname{Hom}(K,\\mathcal F[0])\\to\\operatorname{Hom}(K,\\mathcal G[0])$ in the derived category. We use this derived testing statement; we do not identify the two ordinary module sheaves.",
+   "uses": [
+    "lem-sfb-proper-flat-space-pullback-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, canonical tensor-to-limit map and Tag 0D3F"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-square-zero-extension-transfer] with $Z=X_1$, $B=\\operatorname{Spec}R_1$, $B\\prime=\\operatorname{Spec}R$, $\\mathcal F\\to\\mathcal G=u$, and base-ideal map $c:i\\mapsto1\\otimes i$. The space $X_1$ is quasi-compact and quasi-separated because it is finitely presented over an affine base. Step 4 supplies exactly the universal derived-Hom hypothesis. In the extension $\\mathcal E$ from step 3, the base ideal acts by $uc$: its nth component is the canonical ideal map $i_n\\mapsto1\\otimes i_n$. Essential surjectivity therefore supplies an extension $0\\to\\mathcal F\\to\\mathcal E\\prime\\to\\mathcal O_{X_1}\\to0$ over $R\\to R_1$, together with an isomorphism from its pushout along $u$ to $\\mathcal E$. In particular there is an $R$-algebra map $\\mathcal E\\prime\\to\\mathcal E$ inducing the identity on the quotient and $u$ on the kernels.",
+   "uses": [
+    "lem-sfb-space-square-zero-extension-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, unique extension via the equivalence of Tag 0D3Q"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-first-order-ringed-description], the extension $\\mathcal E\\prime$, whose ideal $\\mathcal F$ is quasi-coherent and square zero, is realized by a first order thickening $X_1\\hookrightarrow X$ over $\\operatorname{Spec}R$ with ring sheaf $\\mathcal E\\prime$. The induced base-ideal map $\\mathcal O_{X_1}\\otimes_{R_1}I\\to\\mathcal F$ is the identity by its prescribed value $c$. Apply the reverse direction of [lem-sfb-space-square-zero-flatness-criterion]: its reduced map $X_1\\to\\operatorname{Spec}R_1$ is flat. It follows that $X\\to\\operatorname{Spec}R$ is flat and that its reduction is cartesian, $X\\times_R R_1\\cong X_1$.",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-space-square-zero-flatness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, realization by Tag 05ZT and flatness by Tag 06BH"
+   }
+  },
+  {
+   "text": "For each $n$ the map $\\mathcal E\\prime\\to\\mathcal E\\to\\mathcal E_n$ induces, by the unique-morphism clause of [lem-sfb-space-first-order-ringed-description], a morphism $X_n\\to X$ over $R$ reducing to the identity on $X_1$. Together with $X_n\\to\\operatorname{Spec}R_n$ it gives $h_n:X_n\\to X\\times_R R_n$ by [lem-trf-space-fibre-products-etale-covers]. Its reduction over $R_n\\to R_1$ is the identity: the target reduces to $(X\\times_R R_n)\\times_{R_n}R_1\\cong X\\times_R R_1\\cong X_1$. The first identification is the unique one preserving the projections by the cited fibre-product universal property, and the second is step 6. The source reduces to $X_1$ by the specified cartesian data, and the reduced ring map is the identity on $\\mathcal O_{X_1}$. Both reductions are first order thickenings, by the square-zero quotient calculation of step 2 applied to $R_n\\to R_1$. Apply the isomorphism clause of [lem-sfb-space-flat-deformation-properties] over $\\operatorname{Spec}R_1\\hookrightarrow\\operatorname{Spec}R_n$. Its source $X_n$ is flat over $R_n$ by hypothesis; the lemma imposes no flatness condition on its target. Thus $h_n$ is an isomorphism. For $m\\ge n$, let $t_{nm}:X_n\\to X_m$ be the morphism determined by the specified cartesian identification. The maps $X_n\\to X$ and $X_n\\xrightarrow{t_{nm}}X_m\\to X$ induce the same ring map $\\mathcal E\\prime\\to\\mathcal E_n$, because the limit projections commute with the transition maps. The uniqueness clause gives equality of these morphisms. The fibre-product universal property now gives compatibility of all $h_n^{-1}:X\\times_R R_n\\cong X_n$ with every specified transition isomorphism.",
+   "uses": [
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-space-flat-deformation-properties",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, base-change identification, making compatibility with the prescribed family explicit"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sfb-space-flat-deformation-properties] to the structural morphism $X\\to\\operatorname{Spec}R$ with base thickening $\\operatorname{Spec}R_1\\hookrightarrow\\operatorname{Spec}R$ and target the base itself. Step 6 gives both flatness of the source over $R$ and its cartesian reduction $X_1$. Since $X_1\\to\\operatorname{Spec}R_1$ is proper and finitely presented, the properness and finite-presentation clauses imply that $X\\to\\operatorname{Spec}R$ has these properties. Together with steps 6 and 7, this is the required family and all its compatible isomorphisms.",
+   "uses": [
+    "lem-sfb-space-flat-deformation-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D3X (lemma-spaces-defo-thy), proof, final Tag 0CG6 deform-property argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-first-order-ringed-description",
+  "lem-sfb-space-square-zero-flatness-criterion",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-surjective-qcoh-limit",
+  "lem-sfb-proper-flat-space-pullback-limit",
+  "lem-sfb-space-square-zero-extension-transfer",
+  "lem-sfb-space-flat-deformation-properties",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D3X (lemma-spaces-defo-thy), strong-effectivity proof; the compatibility argument expands the implicit base-change conclusion using Tags 05ZN and 0CG6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible flat proper finitely presented algebraic spaces over a surjective inverse system of rings with square zero kernels are effective over the inverse limit ring",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"Profinite.effectiveEpiFamily_of_jointly_surjective\", \"module\": \"Mathlib/Topology/Category/Profinite/EffectiveEpi\", \"type\": \"∀ {α : Type} [Finite α] {B : Profinite} (X : α → Profinite) (π : (a : α) → X a ⟶ B),\\n  (∀ (b : ↑B.toTop), ∃ a x, (CategoryTheory.ConcreteCategory.hom (π a)) x = b) → CategoryTheory.EffectiveEpiFamily X π\", \"doc\": \"Given a finite indexing set $\\\\alpha$, a profinite space $B$, and a family of profinite spaces $X_a$ indexed by $\\\\alpha$, if the family of continuous maps $\\\\pi_a : X_a \\\\to B$ is jointly surjective (i.e\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern descent of maps to finite-type schemes along inverse limits, effective epimorphisms, ring derivations, or formal smoothness; none constructs the compatible proper algebraic-space family over the inverse-limit ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraize a compatible sequence of proper algebraic spaces over first order thickenings using inverse limits",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, the cone $ A.c' j $ constructed via the pullback along the affine open immersion $ \\\\mathcal{U}_D(j) \\\\to D\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgCat.limitAlgebra\", \"module\": \"Mathlib/Algebra/Category/AlgCat/Limits\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {J : Type v} →\\n      [inst_1 : CategoryTheory.Category.{t, v} J] →\\n        (F : CategoryTheory.Functor J (AlgCat R)) →\\n          [inst_2 : Small.{w, max v w} ↑(F.comp (CategoryTheory.forget (AlgCat R))).sections] →\\n            Algebra R (CategoryTheory.Limi\", \"doc\": \"For any diagram $ F : \\\\mathcal{J} \\\\to \\\\text{AlgCat}(R) $ of $ R $-algebras, the limit cone's apex (constructed as the subalgebra of compatible sections of $ F $) is equipped with a canonical $ R $-alg\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofilteredOrEmpty I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (Z \", \"doc\": \"Given a cofiltered diagram of schemes where each transition morphism is affine, and for each scheme in the diagram a closed, non-empty, compact subset $ Z_i $ that is compatible with the morphisms, th\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern descent of maps to finite-type schemes along inverse limits, effective epimorphisms, ring derivations, or formal smoothness; none constructs the compatible proper algebraic-space family over the inverse-limit ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"thickening\"",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern descent of maps to finite-type schemes along inverse limits, effective epimorphisms, ring derivations, or formal smoothness; none constructs the compatible proper algebraic-space family over the inverse-limit ring"
+  },
+  {
+   "tool": "grep",
+   "query": "effectiv|thickening|square.?zero",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 11 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Topology.Category.TopCat.EffectiveEpi\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.EffectiveEpi.Preserves\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"14\", \"text\": \"# Effective epimorphisms in the category of schemes\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"16\", \"text\": \"We collect results about effective epimorphisms in the category of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"24\", \"text\": \"  in the category of schemes. This implies `EffectiveEpi π` by `inferInstance`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EffectiveEpi\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"95\", \"text\": \"    exact .singleton_of_isRepresentable_of_effectiveEpi _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"113\", \"text\": \"/-- Any surjective, quasi-compact and flat morphism is an effective epimorphism. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"114\", \"text\": \"instance {X Y : Scheme} (f : X ⟶ Y) [QuasiCompact f] [Surjective f] [Flat f] : EffectiveEpi f := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern descent of maps to finite-type schemes along inverse limits, effective epimorphisms, ring derivations, or formal smoothness; none constructs the compatible proper algebraic-space family over the inverse-limit ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong effectivity of proper flat finitely presented algebraic spaces over square zero ring towers",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"derivationToSquareZeroEquivLift\", \"module\": \"Mathlib.RingTheory.Derivation.ToSquareZero\", \"type\": \"[IsScalarTower R A B] :\\n  Derivation R A I ≃ { f : A →ₐ[R] B // (Ideal.Quotient.mkₐ R I).comp f = IsScalarTower.toAlgHom R A (B ⧸ I) }\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib.RingTheory.Smooth.Flat\", \"type\": \"[IsNoetherianRing R] [Smooth R A] : Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_comp_injective_of_small\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Small.{w} A] :\\n  FormallyUnramified R A ↔\\n    ∀ ⦃B : Type w⦄ [CommRing B],\\n      ∀ [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n        Function.Injective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"For a small type $ A $, an $ R $-algebra $ A $ is formally unramified over $ R $ if and only if for every commutative $ R $-algebra $ B $ and every square-zero ideal $ I $ of $ B $, the induced map fr\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern descent of maps to finite-type schemes along inverse limits, effective epimorphisms, ring derivations, or formal smoothness; none constructs the compatible proper algebraic-space family over the inverse-limit ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible flat proper finitely presented algebraic spaces over a surjective inverse sequence of rings with square zero kernels are effective over the limit ring",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"(CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme).DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an isomorphism descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is su\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.Flat f ∧ AlgebraicGeometry.Surjective f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyInjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally injective descends along morphisms that are simultaneously surjective, flat, and quasi-compact. Specifically, if a morphism $ f: X \\to Y $ of schemes is surjective, fl\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent, finite-type map descent, smooth rings, and adic completions do not construct a compatible proper algebraic-space family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraize a family of proper flat algebraic spaces over first order thickenings",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are flat morphisms of schemes, then their composition $ g \\\\circ f : X \\\\to Z $ is als\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.Flat f]\\n  [hg : AlgebraicGeometry.Flat g], AlgebraicGeometry.Flat (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent, finite-type map descent, smooth rings, and adic completions do not construct a compatible proper algebraic-space family"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.Limits.IsLimit",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent, finite-type map descent, smooth rings, and adic completions do not construct a compatible proper algebraic-space family"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|square.?zero|effectiv",
+   "sub": "AlgebraicGeometry",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Topology.Category.TopCat.EffectiveEpi\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.EffectiveEpi.Preserves\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"14\", \"text\": \"# Effective epimorphisms in the category of schemes\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"16\", \"text\": \"We collect results about effective epimorphisms in the category of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EffectiveEpi.lean\", \"line\": \"24\", \"text\": \"  in the category of schemes. This implies `EffectiveEpi π` by `inferInstance`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.EffectiveEpi\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.CategoryTheory.Sites.EffectiveEpimorphic\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"95\", \"text\": \"    exact .singleton_of_isRepresentable_of_effectiveEpi _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"113\", \"text\": \"/-- Any surjective, quasi-compact and flat morphism is an effective epimorphism. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"line\": \"114\", \"text\": \"instance {X Y : Scheme} (f : X ⟶ Y) [QuasiCompact f] [Surjective f] [Flat f] : EffectiveEpi f := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent, finite-type map descent, smooth rings, and adic completions do not construct a compatible proper algebraic-space family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible flat proper finitely presented algebraic spaces over a surjective inverse sequence of rings with square zero kernels are effective over the limit ring",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \"(P : MorphismProperty Scheme) [P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @QuasiCompact)] [IsZariskiLocalAtTarget P] :\\n  P.DescendsAlong (@Surjective ⊓ @Flat ⊓ @LocallyOfFinitePresentation)\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"RingHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →+* B) : Prop\", \"doc\": \"Given a ring homomorphism $ f : A \\\\to B $ between commutative semirings, this proposition asserts that the algebra structure on $ B $ over $ A $ induced by $ f $ is finitely presented. An algebra is f\"}\n  {\"name\": \"Algebra.FormallySmooth.of_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(H :\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B) (_ : I ^ 2 = ⊥),\\n      Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)) :\\n  FormallySmooth R A\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra. If for every commutative $ R $-algebra $ B $ with a square-zero ideal $ I $ (i.e., $ I^2 = 0 $), the induced map $\\\\text{Hom}_{R\\\\text{-}\\\\text\"}\n  {\"name\": \"AlgHom.FinitePresentation\", \"module\": \"Mathlib.RingTheory.FinitePresentation\", \"type\": \"(f : A →ₐ[R] B) : Prop\", \"doc\": \"The proposition asserts that the algebra structure on $ B $ over $ A $ induced by the algebra homomorphism $ f : A →ₐ[R] B $ is finitely presented. An algebra is finitely presented over $ A $ if it is\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_comp_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \":\\n  FormallySmooth R A ↔\\n    ∀ ⦃B : Type max u v⦄ [CommRing B] [Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Surjective ((Ideal.Quotient.mkₐ R I).comp : (A →ₐ[R] B) → A →ₐ[R] B ⧸ I)\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally smooth if and only if for every commutative ring $ B $ equipped with an $ R $-algebra structure and every ideal $ I $ of $ B $ with $ I^2 = 0\"}\n  {\"name\": \"AdicCompletion.subalgebra\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subalgebra R ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subalgebra of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme flat descent, finite-type map descent, smooth rings, and adic completions do not construct a compatible proper algebraic-space family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-openness-versality",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument.",
+   "via": [
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-space-square-zero-effectivity",
+  "worker": "stage1",
+  "summary": "Expanded the square-zero effectivity construction of Stacks 0D3X into eight steps and six general statement-only inputs. Proved local exactness of the inverse-limit extension by recursive affine-section lifting; retained the derived, not ordinary, pullback-limit comparison; constructed every stage isomorphism and checked compatibility by uniqueness of morphisms of thickenings. Statement unchanged; no attachment or Mathlib match. Repair of return at 8167edd374f: re-read the current cited fibre-product node after its proof re-split; its statement is unchanged. Spell out the reduction of h_n by the fibre-product universal property in step 7; retain the six general inputs and the source route. On 2026-10-23 rechecked against the current live DAG and explicitly verified that both reductions used in step 7 are first order thickenings; all cited statements and six supporting statements remain unchanged.",
+  "blueprint": "Realizes the existing from.place chain ending in openness of versality: Tag 0D3X strong formal effectivity. Steps 1-3 construct the limit extension, steps 4-5 replace its kernel by the quasi-coherent tensor kernel, steps 6-8 realize the family, recover the specified transition data, and lift proper finite presentation. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports; the original chain is retained.",
+  "tool_uses": [
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "General sheaf tensor definition for the square-zero ideal modules, with no replacement of the unit route."
+   },
+   {
+    "node": "def-trf-space-quasi-coherent-module",
+    "why": "General local-presentation definition on the small etale site; needed to identify the constructed tensor ideals as quasi-coherent."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and universal property of algebraic-space fibre products; the scheme definition alone does not supply them."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-sheaf-tensor-product",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-79ddf4ad8",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-79ddf4ad8 (reviewer sub-agent of L); spot-checked: Fourth push of the item, after 8167edd374fd, 2e389000fb32 and 101f2073db36. All three were reviewed FIX and the FIX was lost each time. By cmp, all six new nodes are byte-identical to the 101f head. The only changes are one added sentence in item step 7 (both reductions over R_n to R_1 are first order thickenings; this is correct but not needed) and a new report paragraph. There is no repair note, so this is not a re-split. Source checked: Stacks quot.tex 0D3X (lemma-spaces-defo-thy), l.3646-3730. Its hypotheses match the item: square-zero kernels for every m>=n, no Noetherian, dimension or projectivity hypothesis. Steps 1-8 follow the source chain 06BH -> 0D3E -> 0D3F -> 0D3Q -> 05ZT -> 06BH reverse -> 0CG6, and all eight are correct. Step 1 (elementary): I_n^2=0 comes from the hypothesis on every R_n->R_1. Step 2: forward 06BH uses flatness of X_1/R_1 and of X_n/R_n, and I_n is an R_1-module since I_n^2=0. Step 3: the recursive lift uses the 0D3E proof on the affine etale basis, which I checked; the source statement says affine open, but its proof works on the basis of affine etale objects. Step 4: the Hom form of 0D3F is the first sentence of its proof. Step 5: 0D3Q with fixed c, where the DQ iso is equivalent to the Hom test, X_1 is qcqs, and the base-ideal map of the limit extension is u∘c. Step 6: 05ZT, then reverse 06BH with conormal map c = id. Step 7: 05ZN gives the maps X_n -> X; 0CG6(3) needs flatness only of the source (Spec k over k[ε] shows it is needed), so h_n is an isomorphism; compatibility follows from uniqueness. Step 8: 0CG6 (21) and (5)+(7)+(14), numbering checked in spaces-more-morphisms.tex. Each of the six new nodes matches its source. Duplicate search (tags, labels and concepts with rg -L over the snapshot) found nothing; 09ZY lem-sfb-space-thickening-topological-properties, 07W3 pushout-gluing, fppf flat-proper-fp-locality, 04AM, lem-pc-qcoh-truncation-derived-limit and flat-space-split-deformation-ext are different results. Batch-5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions, and lem-trf-space-fibre-products-etale-covers is the generic fibre-product lemma (first clause used). None is trace-formula or Poincaré-duality content, so all are accepted, and the tool_uses are accepted as generic. No SGA source is used. FIX, re-applied verbatim from the 101f run (the files under it are unchanged): (1) the uniqueness clause of lem-sfb-space-first-order-ringed-description said only 'algebra homomorphism'. 05ZN requires an O_B-algebra map and yields a morphism over B, so as written the clause is false over a general S. It now reads 'homomorphism of f^{-1}O_C-algebras … unique morphism of thickenings over C'. (2) B3: four thickening nodes (ringed-description, flatness-criterion, flat-deformation-properties, extension-transfer) used 'closed immersion' with no definition node; [def-weil-closed-immersion] is now in their statements and stmt_deps. No nodes are dropped. Maintainer: this FIX has been lost three times; please merge the four fixes/ files.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperSpaceSquareZeroEffectivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_properSpace_squareZero_effective",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.effectivitySpectrum",
+   "AlgebraicGeometry.AlgebraicSpace.effectivitySectionsCommRing",
+   "AlgebraicGeometry.AlgebraicSpace.effectivityRing",
+   "AlgebraicGeometry.AlgebraicSpace.effectivityRingProjection",
+   "AlgebraicGeometry.AlgebraicSpace.exists_properSpace_squareZero_effective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSpaceSquareZeroEffectivity.lean",
+  "statement": "theorem exists_properSpace_squareZero_effective (R : ℕᵒᵖ ⥤ CommRingCat.{u}) (hSurj : ∀ (i j : ℕᵒᵖ) (b : i ⟶ j), Function.Surjective (R.map b)) (hSq : ∀ (i j : ℕᵒᵖ) (b : i ⟶ j), RingHom.ker (R.map b).hom ^ 2 = ⊥) (X : ℕ ⥤ AlgebraicSpace (⊤_ Scheme.{u})) (f : ∀ n : ℕ, X.obj n ⟶ (R.rightOp ⋙ effectivitySpectrum).obj n) (hFlat : ∀ n : ℕ, MapIsFlat (f n)) (hProper : ∀ n : ℕ, MapIsProper (f n)) (hQC : ∀ n : ℕ, MapIsQuasiCompact (f n).hom.hom) (hQS : ∀ n : ℕ, MapIsQuasiCompact (pullback.diagonal (f n).hom.hom)) (hLFP : ∀ n : ℕ, MapIsLocallyOfFinitePresentation (f n)) (hCart : ∀ (n m : ℕ) (b : n ⟶ m), IsPullback (X.map b).hom (f n).hom (f m).hom ((R.rightOp ⋙ effectivitySpectrum).map b).hom) : ∃ (Y : AlgebraicSpace (⊤_ Scheme.{u})) (g : Y ⟶ effectivitySpectrum.obj (op (effectivityRing R))) (a : X ⟶ (Functor.const ℕ).obj Y), MapIsFlat g ∧ MapIsProper g ∧ MapIsQuasiCompact g.hom.hom ∧ MapIsQuasiCompact (pullback.diagonal g.hom.hom) ∧ MapIsLocallyOfFinitePresentation g ∧ ∀ n : ℕ, IsPullback (a.app n).hom (f n).hom g.hom (effectivitySpectrum.map (effectivityRingProjection R n).op).hom",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The cartesian transition functor encodes the specified base-change isomorphisms and their identity/cocycle conditions. The natural transformation to the effective space encodes compatibility with every transition. The limit ring is the existing compatible-sequence subring with coordinate projections. The only added statement dependencies are already landed definitions of space morphism properties and the representable scheme space."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45e02b8a8",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Node and Lean match Stacks quot.tex 0D3X strong effectivity, clause by clause: R : ℕᵒᵖ ⥤ CommRingCat.{u} with surjective, square-zero kernels for all arrows; concrete compatible-sequence ring (RingCat.sectionsSubring) with evaluation projections; X : ℕ ⥤ AlgebraicSpace(⊤_ Scheme) with hCart pullback squares encoding the specified isos and cocycles; flat/proper/qc/qs/lfp via landed MapIs* and MapIsQuasiCompact; conclusion has a natural a : X ⟶ const Y with pullback squares, so compatibility with every transition holds. lean.statement verbatim; only lean and two landed def stmt_deps changed; helpers package existing constructions (effectivitySpectrum is objectwise schemeSpace). No hollow defs, sorry-only proof, docstrings complete, universes all u, edge cases (identity arrows, zero ring, empty spaces, non-Noetherian) covered. Advisory: MapIsQuasiCompact owner def-sfb-proper-curve-moduli reached transitively via def-sfb-space-morphism-properties (landed precedent). No changes, no compile."
+ }
+}

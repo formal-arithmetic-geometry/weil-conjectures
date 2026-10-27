@@ -1,0 +1,485 @@
+{
+ "id": "lem-sfb-commuting-p-power-stable-image",
+ "kind": "statement",
+ "title": "Stable p-power image of a commuting matrix space",
+ "statement": "Let $k$ be a field [def-weil-field], with algebraic closure $\\bar k$ [def-weil-algebraic-closure]. Assume $\\operatorname{char}k=p>0$. Let $n\\geq1$, and let $W\\subseteq\\operatorname{Mat}_n(k)$ be a $k$-linear subspace of the matrix algebra [def-weil-matrix]. Assume $XY=YX$ for all $X,Y\\in W$ and $X^p\\in W$ for all $X\\in W$. Define $W_r=\\operatorname{span}_k\\{X^{p^r}:X\\in W\\}$ for integers $r\\geq0$. For every extension field $K/k$, identify $K\\otimes_kW$ with its image in $\\operatorname{Mat}_n(K)$. Then $$K\\otimes_kW_r=\\operatorname{span}_K\\{Y^{p^r}:Y\\in K\\otimes_kW\\}.$$ The descending sequence $(W_r)$ stabilizes at a subspace $W_\\infty$ closed under $p$th powers. This subspace is precisely the set of matrices in $W$ diagonalizable over $\\bar k$, and $\\bar k\\otimes_k W_\\infty$ is precisely the set of diagonalizable matrices in $\\bar k\\otimes_k W$. No perfectness of $k$ is assumed; the spans, rather than the set-theoretic images of the semilinear power maps, are part of the assertion. Here matrix multiplication is $(AB)_{ij}=\\sum_{h=1}^n A_{ih}B_{hj}$, a span consists of finite linear combinations, and diagonalizable means conjugate by an invertible matrix to a diagonal matrix. Scalar extension uses the tensor product of vector spaces [def-weil-module-base-change], with $(a\\otimes X)_{ij}=aX_{ij}$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 17.80 proof, printed p.378, subspace of semisimple vectors, with the restricted operation preceding 11.36 (p.223). Agent-supplied commuting-matrix stable-image formulation making explicit the imperfect-field descent omitted there; additive Jordan decomposition over the algebraic closure in 17.74 (p.377)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-weil-matrix",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "First fix the scalar-extension identifications. For any subspace $U\\subseteq\\operatorname{Mat}_n(k)$ choose a basis of $U$ and extend it to a basis of the matrix space. Tensoring this basis with $K$ identifies $K\\otimes_k U$ with the span of the first basis vectors inside $\\operatorname{Mat}_n(K)$. The coordinate functional of any remaining basis vector vanishes on this span. Consequently $X\\in\\operatorname{Mat}_n(k)$ lies in $K\\otimes_k U$ exactly when $X\\in U$. The same coordinates show that extension preserves dimensions and subspace inclusions. This also proves the asserted injectivity of the tensor-to-matrix map; no separability is involved.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied linear-algebra expansion of Proposition 17.80, printed p.378, semisimple subspace; additive Jordan preliminaries, p.376."
+   }
+  },
+  {
+   "text": "Put $F(X)=X^p$. For commuting matrices the binomial expansion gives $(X+Y)^p=X^p+Y^p$, since the intermediate binomial coefficients vanish in characteristic $p$, and $(aX)^p=a^pX^p$. Iterate to obtain $(\\sum_i a_iX_i)^{p^r}=\\sum_i a_i^{p^r}X_i^{p^r}$. Bilinearity of multiplication shows that all members of $K\\otimes W$ commute, so the same formula holds there. It gives the inclusion of the right-hand span in $K\\otimes W_r$; the reverse inclusion follows by taking $Y=1\\otimes X$ for each generator $X^{p^r}$ of $W_r$. Thus the scalar-extension identity holds for every $K/k$, without extracting roots in $K$. The case $r=0$ is the identity.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied linear-algebra expansion of Proposition 17.80, printed p.378, semisimple subspace; additive Jordan preliminaries, p.376."
+   }
+  },
+  {
+   "text": "Because $F(W)\\subseteq W$, each generator $X^{p^{r+1}}=(X^p)^{p^r}$ of $W_{r+1}$ lies in $W_r$. The formula of step 2 also proves $W_{r+1}=\\operatorname{span}_k F(W_r)$: the $p$th power of any finite linear combination of the generators of $W_r$ is a linear combination of the generators of $W_{r+1}$, and each such generator is the $p$th power of $X^{p^r}\\in W_r$. A strict inclusion lowers the dimension, a nonnegative integer at most $n^2$. Therefore an equality $W_R=W_{R+1}$ occurs, and the recurrence makes all later terms equal. Set $W_\\infty=W_R$; the recurrence gives $F(W_\\infty)\\subseteq W_\\infty$.",
+   "uses": [
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied linear-algebra expansion of Proposition 17.80, printed p.378, semisimple subspace; additive Jordan preliminaries, p.376."
+   }
+  },
+  {
+   "text": "Now work only over $L=\\bar k$ and write $U=L\\otimes_k W$. This field is algebraically closed [def-weil-algebraic-closure], so its only algebraic extension is $L$ itself; hence $L$ is perfect in the sense of the cited lemma, and an algebraic closure of $L$ is $L$, so geometrically semisimple endomorphisms of $L^n$ are exactly the diagonalizable ones. Take a finite basis $T_1,\\ldots,T_d$ of $U$. By [lem-sfb-additive-jordan-linear-compatibility], $T_i=S_i+N_i$ with commuting diagonalizable $S_i$ and nilpotent $N_i$. Choose $r_0$ with $p^{r_0}$ at least a nilpotence exponent for every $N_i$ (take $r_0=0$ when $d=0$). For $r\\geq r_0$, step 2 gives $T_i^{p^r}=S_i^{p^r}$, which is diagonalizable in an eigenbasis of $S_i$. These powers commute with each other because the $T_i$ commute. Step 2 identifies $L\\otimes W_r$ with their $L$-span. The following joint-eigenspace argument shows every element of that span is diagonalizable.",
+   "uses": [
+    "lem-sfb-additive-jordan-linear-compatibility",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Preliminaries to Proposition 17.74, printed p.376, additive Jordan decomposition; Proposition 17.80, p.378, agent-supplied large-power calculation."
+   }
+  },
+  {
+   "text": "For the finite family $A_i=T_i^{p^r}$ in step 4, diagonalizability implies that its generalized eigenspace for $\\lambda$ equals its eigenspace: in diagonal coordinates $(A_i-\\lambda)^m v=0$ says $(a_j-\\lambda)^m v_j=0$, hence $(a_j-\\lambda)v_j=0$, for every coordinate $j$. Its eigenspaces span $L^n$. Apply [lem-sfb-commuting-joint-generalized-eigenspaces-span] to this commuting family. The resulting intersections are ordinary joint eigenspaces and span $L^n$. Every linear combination of the $A_i$ acts as a scalar on each such intersection. Selecting a basis from the spanning set of joint eigenvectors therefore diagonalizes that linear combination. This covers the empty family as well, whose span is zero. In particular every element of $L\\otimes W_r$, for $r\\geq r_0$, is diagonalizable.",
+   "uses": [
+    "lem-sfb-commuting-joint-generalized-eigenspaces-span"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied specialization of the joint generalized-eigenspace spanning theorem to the commuting diagonalizable powers in Proposition 17.80, p.378; pinned Mathlib LinearAlgebra/Eigenspace/Pi.lean:194-201."
+   }
+  },
+  {
+   "text": "Conversely let $X\\in U$ be diagonalizable. Let $E$ be the span of $X,X^p,X^{p^2},\\ldots$. All these matrices are diagonal in one eigenbasis of $X$, so every element of $E$ is diagonal and $F$ is injective on $E$. The power formula of step 2, with $F(W)\\subseteq W$, gives $F(U)\\subseteq U$, hence $E\\subseteq U$, and gives $F(E)\\subseteq E$. Choose a basis $C_1,\\ldots,C_e$ of $E$. If $\\sum a_i C_i^p=0$, choose $b_i\\in L$ with $b_i^p=a_i$. Then $(\\sum b_i C_i)^p=0$, so injectivity forces every $b_i$, hence every $a_i$, to vanish. Thus the $e$ vectors $C_i^p$ form another basis of $E$. Taking $p$th roots of coefficients in this latter basis shows $F(E)=E$. Iterating, $X=Y^{p^r}$ for some $Y\\in E\\subseteq U$, for every $r$. By step 2, $X\\in L\\otimes W_r$ for every $r$, in particular for $r=R$. This uses perfectness only for $L$, never for $k$.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied linear-algebra expansion of Proposition 17.80, printed p.378, semisimple subspace; additive Jordan preliminaries, p.376."
+   }
+  },
+  {
+   "text": "Take $r\\geq\\max(R,r_0)$. Steps 4-5 show every element of $L\\otimes W_\\infty=L\\otimes W_r$ is diagonalizable; step 6 gives the converse inclusion among elements of $U$. Thus $L\\otimes W_\\infty$ is exactly the diagonalizable subset of $L\\otimes W$. For $X\\in W$, geometric diagonalizability means diagonalizability of $1\\otimes X$ in that subset, hence membership in $L\\otimes W_\\infty$. By the coordinate test of step 1 this is equivalent to $X\\in W_\\infty$. Together with steps 2-3 this proves every clause. When $W=0$ or $n=1$ the same formulas apply, with no nonzero-element or positive-dimension assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent-supplied linear-algebra expansion of Proposition 17.80, printed p.378, semisimple subspace; additive Jordan preliminaries, p.376."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-module-base-change",
+  "def-weil-vector-space-dimension",
+  "def-weil-field",
+  "def-weil-matrix",
+  "lem-sfb-additive-jordan-linear-compatibility",
+  "lem-sfb-commuting-joint-generalized-eigenspaces-span",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit stable-power-span proof supplying the imperfect-field descent in Proposition 17.80, printed p.378; additive Jordan input from preliminaries on p.376. The stable-image theorem itself is not claimed to be printed in Milne."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commuting matrix subspace closed under pth powers the semisimple matrices form the stable image of Frobenius and commute with field extension",
+   "results": "{\"t\": \"2026-10-24T07:51:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a commuting matrix subspace closed under pth powers the semisimple matrices form the stable image of Frobenius and commute with field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"Module.End.IsSemisimple.mul_of_commute\", \"Module.End.IsSemisimple.sub_of_commute\", \"Module.End.exists_isNilpotent_isSemisimple\", \"Module.End.exists_isNilpotent_isSemisimple_of_separable_of_dvd_pow\", \"IsSemisimpleRing.instMatrix\", \"Module.End.IsSemisimple.add_of_commute\", \"Module.End.IsSemisimple.pow\"], \"digest\": \"f6fa41a767d9f78d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has powers and sums of commuting semisimple operators and perfect-field Jordan decomposition, but no stable p-power image theorem identifying the geometric semisimple subspace over an imperfect base."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative restricted matrix Lie algebra decomposition into toral and nilpotent parts over imperfect fields",
+   "results": "{\"t\": \"2026-10-24T07:51:07Z\", \"tool\": \"leanfinder\", \"query\": \"Commutative restricted matrix Lie algebra decomposition into toral and nilpotent parts over imperfect fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.ωConj_mem_of_mem\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraCartanSubalgebra\", \"RootPairing.GeckConstruction.instIsLieAbelianSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'\", \"RootPairing.GeckConstruction.cartanSubalgebra\"], \"digest\": \"b64cf5c1b695aeaf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has powers and sums of commuting semisimple operators and perfect-field Jordan decomposition, but no stable p-power image theorem identifying the geometric semisimple subspace over an imperfect base."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"loogle\", \"query\": \"Module.End.IsSemisimple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple\", \"Module.End.isSemisimple_id\", \"Module.End.IsSemisimple.isFinitelySemisimple\", \"Module.End.isFinitelySemisimple_iff_isSemisimple\", \"Module.End.isSemisimple_neg\", \"Module.End.isSemisimple_zero\", \"Module.End.IsSemisimple.pow\", \"Module.End.IsSemisimple.mul_of_commute\"], \"digest\": \"1b5aa910bd439b02\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has powers and sums of commuting semisimple operators and perfect-field Jordan decomposition, but no stable p-power image theorem identifying the geometric semisimple subspace over an imperfect base."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSemisimple.*pow|pow.*IsSemisimple|semilinear.*stable|stable.*semilinear",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"grep\", \"query\": \"IsSemisimple.*pow|pow.*IsSemisimple|semilinear.*stable|stable.*semilinear\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"Mathlib/LinearAlgebra/JordanChevalley.lean\", \"Mathlib/LinearAlgebra/Semisimple.lean\"], \"digest\": \"e7de47520f39e3df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has powers and sums of commuting semisimple operators and perfect-field Jordan decomposition, but no stable p-power image theorem identifying the geometric semisimple subspace over an imperfect base."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commuting p closed matrix space semisimple subspace stable Frobenius image",
+   "results": "{\"t\": \"2026-10-24T07:51:01Z\", \"tool\": \"leansearch\", \"query\": \"Commuting p closed matrix space semisimple subspace stable Frobenius image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.frobenius\", \"Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute\", \"RingHom.frobenius_comm\", \"Module.End.IsSemisimple.mul_of_commute\", \"Module.End.IsFinitelySemisimple.restrict\", \"LinearMap.restrict_commute\", \"Module.End.IsSemisimple.add_of_commute\", \"Module.End.apply_eq_of_mem_of_comm_of_isFinitelySemisimple_of_isNil\"], \"digest\": \"de29a85a0b48b5fa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib has powers and sums of commuting semisimple operators and perfect-field Jordan decomposition, but no stable p-power image theorem identifying the geometric semisimple subspace over an imperfect base."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSemisimple.*(add_of_commute|pow)|isNilpotent.*pow|pow_finrank",
+   "results": {
+    "t": "2026-10-24T08:24:02Z",
+    "tool": "grep",
+    "query": "IsSemisimple.*(add_of_commute|pow)|isNilpotent.*pow|pow_finrank",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/RamificationInertia/Inertia.lean",
+     "Mathlib/LinearAlgebra/Semisimple.lean",
+     "Mathlib/LinearAlgebra/Semisimple.lean",
+     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Card.lean",
+     "Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Card.lean",
+     "Mathlib/Algebra/Exact/Sequence.lean",
+     "Mathlib/Algebra/Exact/Sequence.lean",
+     "Mathlib/Algebra/Exact/Sequence.lean"
+    ],
+    "digest": "59a81e8dd5251e76"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDiagonalizable|IsSemisimple.add_of_commute",
+   "results": {
+    "t": "2026-10-24T08:24:02Z",
+    "tool": "grep",
+    "query": "IsDiagonalizable|IsSemisimple.add_of_commute",
+    "sub": "LinearAlgebra",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Semisimple.lean"
+    ],
+    "digest": "8111144002037d28"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Frobenius stable image commuting p closed finite dimensional matrix subspace diagonalizable",
+   "results": {
+    "t": "2026-10-24T08:24:03Z",
+    "tool": "leansearch",
+    "query": "Frobenius stable image commuting p closed finite dimensional matrix subspace diagonalizable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.frobenius",
+     "AffineSubspace.closed_of_finiteDimensional",
+     "Submodule.closed_of_finiteDimensional",
+     "FiniteField.frobeniusAlgEquiv",
+     "pNilradical_eq_bot_of_frobenius_inj",
+     "FiniteDimensional.finiteDimensional_submodule",
+     "Submodule.ClosedComplemented.of_quotient_finiteDimensional",
+     "Module.End.invtSubmodule.map_subtype_mem_of_mem_invtSubmodule"
+    ],
+    "digest": "d99bb76c301ba462"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsDiagonalizable",
+   "results": {
+    "t": "2026-10-24T08:24:03Z",
+    "tool": "loogle",
+    "query": "Module.End.IsDiagonalizable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Module.End.IsDiagonalizable'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commuting diagonalizable operators have a common eigenvector basis",
+   "results": {
+    "t": "2026-10-24T08:24:03Z",
+    "tool": "leansearch",
+    "query": "Commuting diagonalizable operators have a common eigenvector basis",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LinearMap.IsSymmetric.iSup_iSup_eigenspace_inf_eigenspace_eq_top_of_commute",
+     "LinearMap.IsSymmetric.iSup_iInf_eq_top_of_commute",
+     "Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute",
+     "LinearMap.IsSymmetric.eigenvectorBasis.congr_simp",
+     "LinearMap.IsSymmetric.hasEigenvector_eigenvectorBasis",
+     "LinearMap.IsSymmetric.eigenvectorBasis_def",
+     "LinearMap.IsSymmetric.eigenvectorBasis",
+     "Module.End.apply_eq_of_mem_of_comm_of_isFinitelySemisimple_of_isNil"
+    ],
+    "digest": "957691bb2b992cf6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.End.IsSemisimple",
+   "results": {
+    "t": "2026-10-24T08:24:03Z",
+    "tool": "loogle",
+    "query": "Module.End.IsSemisimple",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Module.End.IsSemisimple",
+     "Module.End.isSemisimple_id",
+     "Module.End.IsSemisimple.isFinitelySemisimple",
+     "Module.End.isFinitelySemisimple_iff_isSemisimple",
+     "Module.End.isSemisimple_neg",
+     "Module.End.isSemisimple_zero",
+     "Module.End.IsSemisimple.pow",
+     "Module.End.IsSemisimple.mul_of_commute"
+    ],
+    "digest": "1b5aa910bd439b02"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable span of iterated pth powers of pairwise commuting matrices equals geometrically diagonalizable subspace over arbitrary fields",
+   "results": {
+    "t": "2026-10-24T08:24:04Z",
+    "tool": "leanfinder",
+    "query": "Stable span of iterated pth powers of pairwise commuting matrices equals geometrically diagonalizable subspace over arbitrary fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute",
+     "RootPairing.GeckConstruction.span_range_h_le_range_diagonal",
+     "Matrix.mem_range_scalar_of_commute_single",
+     "Module.End.IsSemisimple.of_mem_adjoin_pair",
+     "RootPairing.GeckConstruction.diagonal_elim_mem_span_h_iff",
+     "Matrix.maxGenEigenspace_toLin'_diagonal_eq_eigenspace",
+     "Matrix.maxGenEigenspace_toLin_diagonal_eq_eigenspace",
+     "Matrix.diag_eq_of_commute_single"
+    ],
+    "digest": "917a532a2f5b2f6a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary family of commuting diagonalizable endomorphisms is simultaneously diagonalizable",
+   "results": {
+    "t": "2026-10-24T08:24:05Z",
+    "tool": "leanfinder",
+    "query": "An arbitrary family of commuting diagonalizable endomorphisms is simultaneously diagonalizable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute",
+     "LinearMap.IsSymmetric.LinearMap.IsSymmetric.directSum_isInternal_of_pairwise_commute",
+     "LinearMap.IsSymmetric.iSup_iInf_eq_top_of_commute",
+     "Module.End.IsSemisimple.mul_of_commute",
+     "Module.End.IsSemisimple.add_of_commute",
+     "Module.End.map_add_of_iInf_genEigenspace_ne_bot_of_commute",
+     "LinearMap.IsSymmetric.iSup_iSup_eigenspace_inf_eigenspace_eq_top_of_commute",
+     "Module.End.IsSemisimple.of_mem_adjoin_pair"
+    ],
+    "digest": "0ebd79566e60f8a2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "grep",
+   "query": "iSup_iInf.*eigen|eigen.*[Bb]asis|[Ss]imultaneous",
+   "results": {
+    "t": "2026-10-24T08:26:28Z",
+    "tool": "grep",
+    "query": "iSup_iInf.*eigen|eigen.*[Bb]asis|[Ss]imultaneous",
+    "sub": "LinearAlgebra/Eigenspace",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Pi.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Matrix.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Matrix.lean",
+     "Mathlib/LinearAlgebra/Eigenspace/Matrix.lean"
+    ],
+    "digest": "2750f71ad206a10c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous eigenbasis for pairwise commuting split semisimple linear maps over any field",
+   "results": {
+    "t": "2026-10-24T08:26:30Z",
+    "tool": "leanfinder",
+    "query": "Simultaneous eigenbasis for pairwise commuting split semisimple linear maps over any field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_iSup_maxGenEigenspace_eq_top_of_commute",
+     "LinearMap.IsSymmetric.LinearMap.IsSymmetric.directSum_isInternal_of_pairwise_commute",
+     "Module.End.IsSemisimple.mul_of_commute",
+     "LinearMap.IsSymmetric.iSup_iInf_eq_top_of_commute",
+     "Module.End.IsSemisimple.sub_of_commute",
+     "Module.End.IsSemisimple.add_of_commute",
+     "Module.End.IsSemisimple.of_mem_adjoin_pair",
+     "Module.End.iSup_iInf_maxGenEigenspace_eq_top_of_forall_mapsTo"
+    ],
+    "digest": "465fc55bdfdaa5d1"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned joint generalized-eigenspace theorem is already lem-sfb-commuting-joint-generalized-eigenspaces-span and is used in step 5; commuting semisimple sums and Frobenius definitions do not state stable-span identification over imperfect fields. Loogle IsDiagonalizable is an unknown identifier, not a declaration match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-semisimple-restricted-subalgebra",
+  "date": "2026-10-24",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction. Supporting prerequisite: Proposition 17.80 proof, printed p.378, subspace of semisimple vectors, with the restricted operation preceding 11.36 (p.223). Agent-supplied commuting-matrix stable-image formulation making explicit the imperfect-field descent omitted there; additive Jordan decomposition over the algebraic closure in 17.74 (p.377).",
+   "via": [
+    "lem-sfb-central-semisimple-restricted-subalgebra",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-commuting-p-power-stable-image",
+  "worker": "Q148 stage1",
+  "summary": "Seven-step proof with no new nodes: coordinate scalar extension, binomial powers, finite-dimensional stabilization, Jordan decomposition over the algebraic closure, existing joint generalized-eigenspace spanning, Frobenius surjectivity on a diagonal cyclic span, and descent. Replaced the inappropriate GL-scheme definition pointer with the matrix definition and made tensor extension explicit; mathematical assertions and imperfect-field scope preserved.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), direct-image preservation through alteration prerequisites, via the recorded chain to Milne Proposition 17.80 semisimple restricted subspace. Steps 1-7 supply the stable commuting-matrix span prerequisite at the end of blueprint.from.place. blueprint_refs ancestor returns None for this created-node chain; inherited from.node and via retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-afd1f6cd7",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-afd1f6cd7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a first split with seven steps and no new nodes. The base node was unsplit, and there is no 2026-10-21 re-split note, so this is not a re-split. Statement: the only change from the base is that the matrix pointer def-sc-general-linear-group, which builds the GL group scheme and does not define matrices, became def-weil-matrix, plus written-out conventions. The mathematics of the statement is unchanged, and it is not weakened for arbitrary K/k or an imperfect k. I tested the statement on W=0, n=1, a square-zero nilpotent line, and the imperfect case k=F_2(t), M=[[0,t],[1,0]] with W=kI+kM, where W_inf=kI and aI+bM is diagonalizable over the algebraic closure only when b=0. All match. Source: Milne, Algebraic Groups, Prop. 17.80, printed p.378, gives the semisimple p-Lie subalgebra without proof, so proof_origin agent is right. Steps 1-3 (coordinate test, binomial expansion in both directions, stabilization by W_{r+1}=span F(W_r)) and steps 5 and 7 are correct, and each uses only what its cited node states. lem-sfb-commuting-joint-generalized-eigenspaces-span is a Mathlib leaf (Pi.lean:194) whose hypotheses I checked. Both cited lemmas are in the unit sk-thm-sf-ctf-stability, so no tool_uses are needed. FIX: (1) Step 4 argued that L is perfect because T^p-a has a root. That is the Frobenius criterion, an uncited theorem, while lem-sfb-additive-jordan-linear-compatibility defines perfect as every algebraic extension being separable. I rewrote it: L is algebraically closed, so L is its only algebraic extension and its own algebraic closure; hence L is perfect and geometrically semisimple means diagonalizable. I added def-weil-algebraic-closure to the step's uses. (2) Step 6 used that E lies in U without proof; I added that F(U) is contained in U by step 2 and F(W)⊆W. I found no duplicate in a rg -L search of dag/nodes; the only node citing this one is lem-sfb-central-semisimple-restricted-subalgebra, and its use still holds. Note for the maintainer: the blueprint.from.node is null with a long place text. That comes from the base node, not from this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CommutingPPowerStableImage",
+  "declaration": "Matrix.commuting_p_power_stable_image",
+  "declarations": [
+   "Matrix.pPowerSpan",
+   "Matrix.scalarExtensionMap",
+   "Matrix.commuting_p_power_stable_image"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/CommutingPPowerStableImage.lean",
+  "statement": "theorem commuting_p_power_stable_image (k : Type u) [Field k] (L : Type v) [Field L] [Algebra k L] [IsAlgClosure k L] (p : ℕ) [CharP k p] (hp : 0 < p) (n : ℕ) (hn : 1 ≤ n) (W : Submodule k (Matrix (Fin n) (Fin n) k)) (hcomm : ∀ X ∈ W, ∀ Y ∈ W, X * Y = Y * X) (hpow : ∀ X ∈ W, X ^ p ∈ W) : (∀ (K : Type (max u w)) [Field K] [Algebra k K], Function.Injective (scalarExtensionMap K W) ∧ ∀ r : ℕ, LinearMap.range (scalarExtensionMap K (pPowerSpan W p r)) = Submodule.span K ((fun Y : Matrix (Fin n) (Fin n) K ↦ Y ^ (p ^ r)) '' (LinearMap.range (scalarExtensionMap K W) : Set _))) ∧ Antitone (pPowerSpan W p) ∧ ∃ W_infty : Submodule k (Matrix (Fin n) (Fin n) k), W_infty ≤ W ∧ (∃ R : ℕ, ∀ r : ℕ, R ≤ r → pPowerSpan W p r = W_infty) ∧ (∀ X ∈ W_infty, X ^ p ∈ W_infty) ∧ (∀ X : Matrix (Fin n) (Fin n) k, X ∈ W_infty ↔ X ∈ W ∧ ∃ (P : (Matrix (Fin n) (Fin n) L)ˣ) (d : Fin n → L), (↑P⁻¹ : Matrix (Fin n) (Fin n) L) * X.map (algebraMap k L) * (↑P : Matrix (Fin n) (Fin n) L) = Matrix.diagonal d) ∧ (∀ Y : Matrix (Fin n) (Fin n) L, Y ∈ LinearMap.range (scalarExtensionMap L W_infty) ↔ Y ∈ LinearMap.range (scalarExtensionMap L W) ∧ ∃ (P : (Matrix (Fin n) (Fin n) L)ˣ) (d : Fin n → L), (↑P⁻¹ : Matrix (Fin n) (Fin n) L) * Y * (↑P : Matrix (Fin n) (Fin n) L) = Matrix.diagonal d)",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two real-data helpers express the iterated power span and the canonical tensor-to-matrix map belonging to this node. Scalar extension is constructed from LinearMap.baseChange and TensorProduct.piRight/piScalarRight, rather than supplied as an arbitrary map. No perfectness assumption is imposed on k."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c3082ce0",
+  "group": "Q129",
+  "result": "pass",
+  "note": "First S2 delivery (live node lean null; non-lean fields identical). All node clauses rendered: injectivity of canonical K⊗W→Mat_n(K) (baseChange+piRight+piScalarRight, entries X_ij•a), scalar-extension span identity ∀K ∀r, Antitone, stabilization ∃R, W_∞≤W p-closed, membership iff geometric diagonalizability (P⁻¹ X̄ P = diagonal) over k and over L via range. Hypotheses match node (CharP k p, 0<p, 1≤n, hcomm, hpow; no perfectness; K:Type (max u w) standard). Proof steps 1-7 checked; edge cases W=0, r=0, n=1, square-zero, F_2(t) example consistent. One sorry, real helper defs with source/blueprint docstrings, verbatim statement, no name clash, no Mathlib duplicate; citer central-semisimple-restricted-subalgebra uses delivered clauses. No compile (unchanged)."
+ }
+}

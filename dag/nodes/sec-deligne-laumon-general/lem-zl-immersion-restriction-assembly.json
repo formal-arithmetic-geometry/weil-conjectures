@@ -1,0 +1,137 @@
+{
+ "id": "lem-zl-immersion-restriction-assembly",
+ "kind": "statement",
+ "title": "Simultaneous normalized immersion restrictions",
+ "statement": "Fix a finite field datum and coefficient datum [def-weil-weil-sheaf-complex], and locally closed and open immersions h_0:W_0\\hookrightarrow X_0 and j_0:U_0\\hookrightarrow X_0 of separated finite-type schemes. There exist standard Frobenius comparison packages d_X,d_W,d_U and normalized natural local operators F_X,F_W,F_U of [def-zl-immersion-weil-local-data], and restriction packages R_h and R_j of that definition. The target data d_X and F_X are shared. Moreover the Frobenius comparison in R_j is the recorded zlFrobeniusSquare of [def-zl-weil-ind-sheaf-category]. This assertion contains no open extension operation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction paragraph and Part 2, extension-by-zero sentence"
+ },
+ "stmt_deps": [
+  "def-zl-immersion-weil-local-data",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual signed pullback shifts and their scalar descent. Apply the canonical t-exact comparison to Frobenius and each immersion. Lift the heart and canonical cohomology comparison to fixed pairs; identify the carrier equations by truncation uniqueness.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-zl-texact-fixed-pair-heart-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each scheme define local operators from the three-factor localQbarClosedFrobenius on every coefficient cohomology degree. Naturality follows factor by factor. The finite-stage scalar normalization identifies them with localClosedFrobenius. Apply the residue-compatible theorem and immersion_residue to each map; its inverse-compositor and cohomology equations give every stalk clause. Use this same construction on the common target.",
+   "uses": [
+    "lem-zl-residue-compatible-pullback-frobenius",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral normalization of zlPullComp agrees with the objectwise integral compositor defining the rational comparison, so scalar descent identifies the open pullback comparison with zlFrobeniusSquare, including all boundary equality maps.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-zl-texact-fixed-pair-heart-cohomology",
+  "lem-zl-residue-compatible-pullback-frobenius",
+  "def-weil-local-frobenius-trace",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pod-integral-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-prop-wgen-relative-line/lem-zl-morphism-open-closed-reduction.proof.md",
+  "place": "Restriction paragraph and Part 2, extension-by-zero sentence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback and open extension by zero of constructible Weil sheaves with Frobenius equivariant stalks",
+   "results": "Scheme.Modules.restrictFunctor and scheme-theoretic basic-open lemmas; no match for recorded ell-adic coefficient categories and normalized Frobenius",
+   "date": "2026-10-25",
+   "verdict": "No match: the normalization assertions concern this project’s recorded functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsoAlgebra\"",
+   "results": "algEquivIsoAlgebraIso in Mathlib.Algebra.Category.AlgCat.Basic only",
+   "date": "2026-10-25",
+   "verdict": "No match for the fixed-pair normalization and exact-operation packages."
+  },
+  {
+   "tool": "grep",
+   "query": "localQbarClosedFrobenius|ZlWeilExactOperation",
+   "results": "No Mathlib match; project uses occur in LocalFrobeniusTrace and the assigned item.",
+   "date": "2026-10-25",
+   "verdict": "No existing assembly theorem; reuse the stated four supporting nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t exact functor with a natural Frobenius comparison induces exact functors on fixed pair hearts and natural cohomology isomorphisms",
+   "results": "CategoryTheory.exactFunctor, ExactFunctor.of, Abelian.Ext.mapExactFunctor and monoidal Frobenius-morphism lemmas.",
+   "date": "2026-10-25",
+   "verdict": "No match for the constructible common-stage Weil packages and fixed normalized comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ZlImmersionWeilLocalBehavior",
+  "date": "2026-10-25",
+  "group": "P8"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-excision",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "Restriction paragraph and Part 2, extension-by-zero sentence",
+   "via": [
+    "lem-zl-immersion-weil-local-behavior"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ZlImmersionRestrictionAssembly",
+  "file": "lean/Sheaf/Paper/ZlImmersionRestrictionAssembly.lean",
+  "declaration": "WeilConjectures.zlImmersionRestrictionAssembly",
+  "declarations": [
+   "WeilConjectures.zlImmersionRestrictionAssembly"
+  ],
+  "statement": "theorem zlImmersionRestrictionAssembly (h₀ : W₀ ⟶ X₀) [IsImmersion h₀.left] (j₀ : U₀ ⟶ X₀) [IsOpenImmersion j₀.left] : ∃ (dX : ZlFrobeniusComparison D c X₀) (dW : ZlFrobeniusComparison D c W₀) (dU : ZlFrobeniusComparison D c U₀) (FX : ZlWeilLocalOperators D c X₀) (FW : ZlWeilLocalOperators D c W₀) (FU : ZlWeilLocalOperators D c U₀) (Rh : ZlImmersionPullback D c h₀ dX dW FX FW) (Rj : ZlImmersionPullback D c j₀ dX dU FX FU), Rj.equivariance = zlFrobeniusSquare D c.l c.different c.Qbar j₀",
+  "branch": "sheaf-dag",
+  "by": "P8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e9854",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261025T164053-L-944556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e9854",
+  "group": "P8",
+  "result": "fix",
+  "landing": "20261025T164053-L-944556",
+  "kind": "interface",
+  "note": "independent cc review: item zlImmersionWeilLocalBehavior (signature unchanged, proved from two new sorried nodes) and the 20 moved declarations against the change record's verbatim Old code; the two new statements against the original clause structures and the zlPullComp/localPullbackComposition normalizations; the 5 direct importers compiled against the delivered modules"
+ }
+}

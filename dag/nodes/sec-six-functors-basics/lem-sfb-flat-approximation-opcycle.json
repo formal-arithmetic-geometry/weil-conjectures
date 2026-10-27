@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-flat-approximation-opcycle",
+ "kind": "statement",
+ "title": "Flat lower opcycle of a bounded flat derived approximation",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small relative to the universe of its module sheaves, with $\\mathcal O$ a sheaf of commutative rings [def-weil-size-convention, def-weil-sheaf-of-modules-category]. Use $D(\\mathcal O)$ and its cohomology functors [def-weil-abstract-derived-category, def-weil-derived-cohomology-sheaves], and the derived tensor product computed by K-flat resolutions and total tensor complexes [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. Let $a\\le b$ be integers. Let $K\\in D(\\mathcal O)$ satisfy $H^j(K\\otimes^{\\mathbf L}_{\\mathcal O}N)=0$ for every module sheaf $N$ in degree zero and every $j\\notin[a,b]$. Let $P^\\bullet$ be a bounded cochain complex of module sheaves [def-pc-cochain-complex-modules], with flat terms [def-pc-flat-sheaf-modules] and $P^j=0$ for $j<a-1$. Suppose there is a morphism $f:P^\\bullet\\to K$ in $D(\\mathcal O)$ such that $H^j(f)$ is an isomorphism for every $j\\ge a$. Then the cokernel sheaf $Q=\\operatorname{coker}(d_P^{a-1}:P^{a-1}\\to P^a)$ is flat. No finiteness or local projectivity of the terms of $P^\\bullet$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G7 (lemma-perfect-precise), proof: cone construction through flatness of E′, before the finite-presentation/local-summand argument. The same argument only requires bounded flat approximation terms."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-cochain-complex-modules",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "First $H^j(K)=0$ outside $[a,b]$. Indeed choose a flat-term K-flat representative $L$ of $K$ by [lem-pc-kflat-resolution]. The comparison [lem-sf-ringed-kflat-single-tensor-comparison] for $M=\\mathcal O$ computes $K\\otimes^{\\mathbf L}\\mathcal O$ by $L\\otimes\\mathcal O$. The unit maps $x\\otimes r\\mapsto rx$ and $x\\mapsto x\\otimes1$ identify this complex with $L$, by the tensor unit in [lem-pc-sheaf-modules-tensor-closed]. Apply the hypothesis to $N=\\mathcal O$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7, lemma-perfect-precise: vanishing of cohomology of E; Tag 06YU, definition-derived-tor"
+   }
+  },
+  {
+   "text": "Put $Z=\\ker(d_P^{a-1})$. Apply [lem-pc-kflat-bounded-flat-replacement] to $Z[0]$ with upper bound zero. Obtain a flat complex $F$ with $F^i=0$ for $i>0$ and an epimorphic quasi-isomorphism $\\epsilon:F\\to Z[0]$. Thus $\\cdots\\to F^{-1}\\to F^0\\xrightarrow{\\epsilon^0}Z\\to0$ is exact. Form $E$ by setting $E^j=P^j$ for $j\\ge a-1$ and $E^j=F^{j-a+2}$ for $j\\le a-2$. The differential $E^{a-2}\\to E^{a-1}$ is $F^0\\xrightarrow{\\epsilon^0}Z\\hookrightarrow P^{a-1}$; all other differentials are those of $F$ or $P$. The two new adjacent composites vanish since $\\epsilon^0d_F^{-1}=0$ and $d_P^{a-1}|_Z=0$. Every term is flat and $E$ is bounded above. This explicitly resolves the kernel that occurs in the cone calculation of Tag 08G7.",
+   "uses": [
+    "lem-pc-kflat-bounded-flat-replacement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7, lemma-perfect-precise: kernel K in the cone; Tag 06YS, lemma-K-flat-resolution, bounded-above flat-resolution construction"
+   }
+  },
+  {
+   "text": "Let $T=\\tau_{\\ge a}P$ as in [def-kun-truncations]: $T^a=\\operatorname{coker}d_P^{a-1}$ and $T^j=P^j$ for $j>a$. Define $e:E\\to T$ by the quotient $P^a\\to T^a$ in degree $a$, identity above $a$, and zero below $a$. Its chain-map equation at $a-1$ is the cokernel identity $q d_P^{a-1}=0$. Exactness of the augmented resolution gives $H^j(E)=0$ for $j\\le a-2$; at $a-1$ the incoming image is $Z=\\ker d_P^{a-1}$, so this cohomology is also zero. In degree $a$, the kernel of the induced $Q\\to P^{a+1}$ is $(\\ker d_P^a)/\\operatorname{im}d_P^{a-1}$; above $a$ the cohomology is unchanged. Thus $e$ is a quasi-isomorphism and $Q(E)\\cong Q(T)$.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7, lemma-perfect-precise: resolve the single kernel in degree a-1; explicit cohomology computation"
+   }
+  },
+  {
+   "text": "Functorial truncation gives $\\tau_{\\ge a}f:Q(T)\\to\\tau_{\\ge a}K$. The truncation functors and their natural units are those of [lem-weil-heart-short-exact-triangles](1); [def-kun-truncations] gives their retained cohomology. For $j\\ge a$ this map induces $H^j(f)$ under the natural truncation identifications, hence an isomorphism; below $a$ both sides vanish. Also the unit $K\\to\\tau_{\\ge a}K$ is an isomorphism on all cohomology by step 1. All these objects lie in the strictly full $D^+$ of [def-weil-pbc-bounded-derived-subcategories]. Apply [lem-weil-pbc-derived-plus-iso-on-cohomology] to these two maps. Together with $Q(e)$ from step 3 this gives an isomorphism $g:Q(E)\\cong K$, without representing $f$ by a chain map.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-kun-truncations",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7, lemma-perfect-precise: removing the lone lower kernel; derived.tex Tag 05RU, bounded-below full subcategory and cohomology detection"
+   }
+  },
+  {
+   "text": "Since $E$ is bounded above with flat terms, [lem-weil-pbc-independent-bounded-flat-kflat] makes it K-flat. For every module sheaf $N$, [lem-sf-ringed-kflat-single-tensor-comparison] identifies $Q(E)\\otimes^{\\mathbf L}N$ with $Q(E\\otimes N)$. Tensoring the isomorphism $g$ identifies the former with $K\\otimes^{\\mathbf L}N$. Consequently $H^{a-1}(E\\otimes N)=0$ by the Tor-amplitude hypothesis. The symmetry of sheaf tensor in [lem-pc-sheaf-modules-tensor-closed] identifies this with $H^{a-1}(N\\otimes E)=0$; with $N$ in degree zero its total differential is $1_N\\otimes d_E$.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YU (definition-derived-tor), and 08G7 (lemma-perfect-precise), tensor-kernel calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-flat-opcycles-tor-criterion] to $E$ and $n=a$, using its flat terms and the universal exactness established in step 5. Its conclusion is that $\\operatorname{coker}(d_E^{a-1})$ is flat. But $E^{a-1}=P^{a-1}$, $E^a=P^a$, and $d_E^{a-1}=d_P^{a-1}$ by construction. Its cokernel is therefore exactly the sheaf $Q$ in the statement, giving the conclusion without any finite-generation assumption.",
+   "uses": [
+    "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G7 (lemma-perfect-precise), flatness of E′; Tag 08G0 (lemma-last-one-flat), universal-tensor criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-site-flat-opcycles-tor-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08G7 (lemma-perfect-precise), kernel/cone argument through flatness of E′, expanded by an explicit spliced flat resolution and Tag 08G0 universal tensor criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*(approximation|cokernel|opcycles)|(approximation|cokernel|opcycles).*flat",
+   "results": "{\"t\": \"2026-10-23T12:36:58Z\", \"tool\": \"grep\", \"query\": \"flat.*(approximation|cokernel|opcycles)|(approximation|cokernel|opcycles).*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction/support statements, ordinary-module flatness criteria or short-complex constructions do not state the arbitrary-ringed-site flat approximation opcycle assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat cokernel of the bottom differential of a finite flat approximation to a complex of finite Tor amplitude",
+   "results": "{\"t\": \"2026-10-23T12:36:58Z\", \"tool\": \"leansearch\", \"query\": \"Flat cokernel of the bottom differential of a finite flat approximation to a complex of finite Tor amplitude\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.HasRightHomology.of_hasCokernel_of_hasKernel\", \"CategoryTheory.ProjectiveResolution.cokernelCofork\", \"CategoryTheory.ShortComplex.HasRightHomology.hasCokernel\", \"HomologicalComplex.homologyIsCokernel\", \"CategoryTheory.ShortComplex.Exact.gIsCokernel\", \"CategoryTheory.ShortComplex.HasLeftHomology.of_hasCokernel\", \"CategoryTheory.ShortComplex.opcyclesIsoCokernel\", \"CategoryTheory.ShortComplex.HomologyData.ofHasCokernel\"], \"digest\": \"3a4f390ebb121511\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction/support statements, ordinary-module flatness criteria or short-complex constructions do not state the arbitrary-ringed-site flat approximation opcycle assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flat\", \"cokernel\"",
+   "results": "{\"t\": \"2026-10-23T12:36:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction/support statements, ordinary-module flatness criteria or short-complex constructions do not state the arbitrary-ringed-site flat approximation opcycle assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded complex of flat sheaves zero below a minus one mapping to a derived object of Tor amplitude a to b and inducing cohomology isomorphisms in degrees at least a, the cokernel of the differential into degree a is flat",
+   "results": "{\"t\": \"2026-10-23T12:36:59Z\", \"tool\": \"leanfinder\", \"query\": \"For a bounded complex of flat sheaves zero below a minus one mapping to a derived object of Tor amplitude a to b and inducing cohomology isomorphisms in degrees at least a, the cokernel of the differential into degree a is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CochainComplex.cm5b\"], \"digest\": \"b1e12d3f24671ffd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction/support statements, ordinary-module flatness criteria or short-complex constructions do not state the arbitrary-ringed-site flat approximation opcycle assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal tensor relations in the lowest degree of a flat complex approximation imply flatness of its opcycle sheaf",
+   "results": "{\"t\": \"2026-10-23T12:37:00Z\", \"tool\": \"leanfinder\", \"query\": \"Universal tensor relations in the lowest degree of a flat complex approximation imply flatness of its opcycle sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"baabea8fd72c025d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned fraction/support statements, ordinary-module flatness criteria or short-complex constructions do not state the arbitrary-ringed-site flat approximation opcycle assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a bounded flat complex approximating a complex of Tor amplitude a to b has flat cokernel in degree a",
+   "results": "{\"t\": \"2026-10-23T13:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed site a bounded flat complex approximating a complex of Tor amplitude a to b has flat cokernel in degree a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.of_forall_exists_factorization\", \"Module.Flat.iff_forall_exists_factorization\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\"], \"digest\": \"e005c7cbccf17800\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or general resolution/truncation constructions; no arbitrary-ringed-site flat approximation cokernel theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat approximation in degrees at least a to a finite Tor amplitude derived sheaf has flat degree a cokernel",
+   "results": "{\"t\": \"2026-10-23T13:37:36Z\", \"tool\": \"leansearch\", \"query\": \"A flat approximation in degrees at least a to a finite Tor amplitude derived sheaf has flat degree a cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.of_projective\", \"Module.Flat.ker_lTensor_eq\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.mk\"], \"digest\": \"d9c00c7d995da37f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or general resolution/truncation constructions; no arbitrary-ringed-site flat approximation cokernel theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flat\", \"opcycles\"",
+   "results": "{\"t\": \"2026-10-23T13:40:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"flat\\\", \\\"opcycles\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or general resolution/truncation constructions; no arbitrary-ringed-site flat approximation cokernel theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(opcycles|approximation)|(opcycles|approximation).*flat",
+   "results": "{\"t\": \"2026-10-23T13:40:49Z\", \"tool\": \"grep\", \"query\": \"flat.*(opcycles|approximation)|(opcycles|approximation).*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or general resolution/truncation constructions; no arbitrary-ringed-site flat approximation cokernel theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splicing a flat resolution of the kernel into a bounded flat complex gives a flat resolution of its good lower truncation",
+   "results": "{\"t\": \"2026-10-23T13:50:43Z\", \"tool\": \"leanfinder\", \"query\": \"Splicing a flat resolution of the kernel into a bounded flat complex gives a flat resolution of its good lower truncation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ\", \"CategoryTheory.Abelian.LeftResolution.chainComplexXIso\", \"CategoryTheory.Abelian.LeftResolution.chainComplex\", \"HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"CategoryTheory.Abelian.LeftResolution.chainComplexFunctor\", \"Module.Flat.of_forall_exists_factorization\", \"CochainComplex.shortComplexTruncLE_shortExact\"], \"digest\": \"a6dc748ee90d3ed8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or general resolution/truncation constructions; no arbitrary-ringed-site flat approximation cokernel theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "(torAmplitude|TorAmplitude).*coker|flat_opcycles|opcycles.*flat",
+   "results": "{\"t\": \"2026-10-23T13:54:33Z\", \"tool\": \"grep\", \"query\": \"(torAmplitude|TorAmplitude).*coker|flat_opcycles|opcycles.*flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary modules or general resolution/truncation constructions; no arbitrary-ringed-site flat approximation cokernel theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-perfect-criterion",
+  "date": "2026-10-23",
+  "group": "Q95"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting algebra for det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited stable-curve/derived-base-change prerequisites: Stacks 08G8, reverse implication, invokes 08G7; in 08G7 isolate only flatness of the lower opcycle of a bounded flat approximation.",
+   "via": [
+    "lem-sfb-ringed-site-perfect-criterion",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-approximation-opcycle",
+  "worker": "stage1",
+  "summary": "Resolved the lower kernel explicitly and compared the spliced flat complex to the good lower truncation of P, then to K by functorial truncation. All ingredients already have DAG nodes; no new nodes or hypotheses. Corrected a draft invalid map E to P: the actual chain map is E to tau_ge_a P.",
+  "blueprint": "Supporting algebra for det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited stable-curve/derived-base-change prerequisites: Stacks 08G8, reverse implication, invokes 08G7; in 08G7 isolate only flatness of the lower opcycle of a bounded flat approximation. Current latest blueprint det-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), through the inherited auxiliary chain; blueprint_refs ancestor prints None for this existing chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site replacement used only to evaluate tensor with the unit; no functor-stability claim is imported."
+   },
+   {
+    "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+    "why": "General ringed-site single-module tensor comparison for the unit and the spliced representative; no node in this unit supplies it."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "General module-sheaf tensor unit and symmetry; a structural tool valid on the arbitrary ringed site."
+   },
+   {
+    "node": "lem-pc-kflat-bounded-flat-replacement",
+    "why": "General bounded-above flat replacement of the kernel sheaf in degree zero, spelling out the source cone argument."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "General ringed-site bounded-above flat K-flatness, to compute the source derived tensor."
+   },
+   {
+    "node": "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+    "why": "General ringed-site flatness criterion from universal ordinary tensor exactness; used for the explicitly constructed complex, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic t-structure truncation functors and natural unit, used solely to truncate the supplied derived morphism; no unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-kflat-bounded-flat-replacement",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-site-flat-opcycles-tor-criterion",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-aeae045ae",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-aeae045ae (reviewer sub-agent of L); spot-checked: Zero-new-node split; statement and stmt_deps unchanged; no repair note. Checked against Stacks 08G7 (sites-cohomology.tex 12774-12815): the item isolates the cone C≅K[2-a] through flatness of E', before finite presentation. Step 1: tensor with O via lem-pc-kflat-resolution, the single-tensor comparison and the tensor unit gives H^j(K)=0 outside [a,b]. Step 2: flat resolution of Z=ker d^{a-1} (bounded-flat-replacement with N=0) spliced below P^{a-1}; both new composites vanish. Step 3: e:E→τ≥aP is a chain map (qd=0); H^{a-2}, H^{a-1} vanish by exactness and surjectivity of ε^0, and H^a matches. Step 4: τ≥a f and the unit K→τ≥aK are cohomology isos inside D^+, so the D^+ iso lemma gives g:Q(E)≅K without a chain representative. Step 5: E bounded-above flat, hence K-flat; the single-tensor comparison and Tor amplitude give H^{a-1}(E⊗N)=0, and symmetry adds no sign. Step 6: the site opcycles Tor criterion with n=a gives Q flat; the small-site hypothesis holds under def-weil-size-convention. Small cases: Z-2->Z gives no false certification; P^{a-1}=0, P=0 and a=b are fine. lem-sf-site-perfect-* nodes are strict-perfect special cases, not duplicates. Batch-5 flag: the closure of lem-sf-ringed-kflat-single-tensor-comparison (41 nodes) reaches only lem-trf-site-functorial-flat-resolution, a generic functorial flat resolution for module sheaves; it is not part of the trace-formula or Poincaré-duality assumptions or their proofs, so accepted. All split_report.tool_uses (general ringed-site K-flat and tensor tools) accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatApproximationOpcycle",
+  "declaration": "SheafOfModules.isFlatOnSite_cokernel_of_bounded_flat_approximation",
+  "file": "lean/Sheaf/Algebra/Homology/FlatApproximationOpcycle.lean",
+  "statement": "theorem isFlatOnSite_cokernel_of_bounded_flat_approximation {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r}) [HasDerivedCategory.{w} (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] (a b : ℤ) (_hab : a ≤ b) (K : DerivedCategory (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (_hTor : ∀ (N : ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (j : ℤ), j < a ∨ b < j → IsZero ((DerivedCategory.homologyFunctor _ j).obj ((siteDerivedTensorIndependentCoefficients J R).obj (K, (DerivedCategory.singleFunctor _ 0).obj N)))) (P : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (_hbounded : ∃ l n : ℤ, ∀ j : ℤ, j < l ∨ n < j → IsZero (P.X j)) (_hflat : ∀ j : ℤ, IsFlatOnSite (J := J) (R := R) (P.X j)) (_hzero : ∀ j : ℤ, j < a - 1 → IsZero (P.X j)) (f : DerivedCategory.Q.obj P ⟶ K) (_hf : ∀ j : ℤ, a ≤ j → IsIso ((DerivedCategory.homologyFunctor _ j).map f)) : IsFlatOnSite (J := J) (R := R) (cokernel (P.d (a - 1) a))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d83a2a5e",
+  "group": "NG",
+  "result": "pass",
+  "note": "Clause-by-clause match. Independent universes u,v,r,w with EssentiallySmall.{r}; R a sheaf of commutative rings; Tor hypothesis via siteDerivedTensorIndependentCoefficients on (K, single 0 N) for all N, j<a∨b<j; P bounded with IsFlatOnSite terms, zero below a-1; f : Q P ⟶ K in D(R) with H^j iso for j≥a; conclusion IsFlatOnSite (cokernel (P.d (a-1) a)), the actual differential. No extra assumptions; lean.statement verbatim; node changes only lean plus the added stmt_dep. Edge cases a=b, P=0, P^{a-1}=0, empty site, zero ring OK; Z-2->Z is excluded by the Tor hypothesis. Mechanical finding: siteDerivedTensorIndependentCoefficients is .choose of the theorem siteDerivedTensorExistsIndependentCoefficients (an object constructed by the theorem node's conclusion), and the dep record lists it, so PASS on that point. No defs, only sorry, docstrings carry source, blueprint and 6 proof steps; report has both sections. Stage-3 note: tor-criterion proof dep is SmallCategory/single-universe/IsFlat and needs a transport. No recompile, no fixes."
+ }
+}

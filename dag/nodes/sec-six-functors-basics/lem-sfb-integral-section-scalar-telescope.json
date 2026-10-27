@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-integral-section-scalar-telescope",
+ "kind": "statement",
+ "title": "Actual integral scalar telescope in section modules",
+ "statement": "Let $\\ell$ be prime, let $E\\subset\\overline{\\mathbf Q}_\\ell$ be finite over $\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], and let $X$ be any scheme. On $X_{\\mathrm{proet}}$ pull back the actual continuous condensed rings $\\underline{\\mathcal O_E}$ and $\\underline E$ [sk-def-sfb-condensed-ring]. Let $a:R\\to S$ be the reconstructed section-ring map of the actual inclusion, and fix any normalized scalar-derived pair $F\\dashv U$ for $a$ [def-sfb-scalar-hom-comparison-data], on the ordinary unbounded module-sheaf derived categories [def-weil-abstract-derived-category]. Then multiplication by $\\ell$ is invertible on every object of $D(S)$, $U$ is full, and for every complex $P$ of $R$-module sheaves there is an isomorphism $\\beta_P:Q(\\operatorname{colim}(P\\xrightarrow{\\ell}P\\xrightarrow{\\ell}\\cdots))\\simeq UF(QP)$ satisfying $Q(\\iota_{P,0})\\beta_P=\\eta_{QP}$, where $\\eta$ is the specified adjunction unit. The colimit is the ordinary termwise sheaf-module colimit. There is no boundedness, constructibility or completeness hypothesis on $P$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Lemma 6.8.12 and Proposition 6.8.14(2); agent extraction of the coefficient and exact-equivalence transport."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-abstract-derived-category",
+  "def-sfb-scalar-hom-comparison-data",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "The continuous coefficient extension unit is the repeated-ell telescope degreewise. Exactness computes its ordinary derived extension on every complex. The exact derived-unit comparison identifies the image of the termwise unit with the specified mixed derived adjunction unit. Compose the two normalized isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-integral-complex-telescope",
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-sfb-internal-hom-localization-comparison",
+    "lem-weil-pbc-integral-derived-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The invertible ordinary counit gives full and faithful restriction. The exact left adjoint implies restriction preserves K-injective complexes, hence the right-derived restriction is fully faithful. Invertibility of multiplication by ell on rational derived modules transports across the section equivalence; use the proved derived_nsmul_isIso helper in the continuous-constructible-integral-image module.",
+   "uses": [
+    "lem-weil-pbc-integral-localization-counit",
+    "lem-weil-pbc-continuous-constructible-integral-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the actual restriction through the section-module equivalences. The mate of the right square is an isomorphism and its unit equation transfers the normalized complex telescope to any specified scalar-derived adjunction.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-complex-telescope",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-sfb-internal-hom-localization-comparison",
+  "lem-weil-pbc-integral-derived-unit",
+  "lem-weil-pbc-integral-localization-counit",
+  "lem-weil-pbc-continuous-constructible-integral-image",
+  "lem-sfb-internal-section-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Normalized telescope proof and coefficient transport, pp. 58–62."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "colimit.*post.*pre|colimit.*pre.*post|mapDerivedCategory.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Limits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"post\", \"pre\"",
+   "results": "CategoryTheory.Limits.colimit.pre_post; CategoryTheory.preservesColimit_of_isIso_post; CategoryTheory.Limits.PreservesColimitsOfSize.underPost; CategoryTheory.Limits.PreservesFiniteColimits.underPost; CategoryTheory.Limits.PreservesColimitsOfShape.underPost",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on derived categories which preserves bounded below sequential colimits commutes with scalar localization telescopes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralGeneralLfpHomInversion",
+  "date": "2026-10-25",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md in literature/blueprint/latest: the finite-extension field case follows by inverting ell. This lemma supplies the actual-coefficient scalar telescope and adjunction-unit normalization. blueprint_refs.py ancestor reports no imported ancestor for the parent.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralSectionScalarTelescope",
+  "file": "lean/Sheaf/Paper/IntegralSectionScalarTelescope.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSectionScalarTelescope",
+  "statement": "theorem integralSectionScalarTelescope\n    (l : ℕ) [Fact l.Prime] (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u})\n    [(Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]\n    (s : ScalarDerivedPair.{u + 1, u, u + 1, u + 1}\n      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n        (padicIntegersToPadicSubfield.{u} X l E))) :\n    let a := sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology X)\n      (padicIntegersToPadicSubfield.{u} X l E)\n    (∀ T : DerivedCategory (scalarModules.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology X)\n        (ModuleObjectRingedComparison.ring (Profinite.continuousMapRingObj E.1) X)),\n      IsIso (l • 𝟙 T)) ∧\n    (scalarDerivedRestriction.{u + 1, u, u + 1, u + 1} a).Full ∧\n    ∃ β : ∀ P : CochainComplex (scalarModules.{u + 1, u, u + 1}\n        (Scheme.ProEt.topology X)\n        (ModuleObjectRingedComparison.ring (Profinite.padicIntegersRingObj l E.1) X)) ℤ,\n      DerivedCategory.Q.obj (colimit (Functor.ofSequence (fun _ : ℕ ↦ l • 𝟙 P))) ≅\n        (scalarDerivedRestriction a).obj (s.derived.obj (DerivedCategory.Q.obj P)),\n      ∀ P, DerivedCategory.Q.map\n          (colimit.ι (Functor.ofSequence (fun _ : ℕ ↦ l • 𝟙 P)) 0) ≫ (β P).hom =\n        s.adjunction.unit.app (DerivedCategory.Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralSectionScalarDerived",
+   "AlgebraicGeometry.ProEtale.integralSectionScalarTelescope"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-04f4f",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T001230-L-4177136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-04f4f",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T001230-L-4177136",
+  "kind": "interface",
+  "note": "independent cc review: item module vs clone d994cfa (theorem signature unchanged; ring abbrev→def same body and coefficientMap explicit type, both in change record); 3 new proved modules vs their node lean.statement (verbatim) and proof_deps (= union of uses); scratch compile of all 4 modules, #print axioms sorryAx traced only to published open upstream moduleObject_ringedSite_derived_comparison and finite_local_model_rhom_continuity"
+ }
+}

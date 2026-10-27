@@ -1,0 +1,65 @@
+# Worker report
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-nodal-two-connected-clifford.json: item, statement unchanged, four proof steps; no Mathlib match.
+- dag/nodes/sec-six-functors-basics/def-sfb-subcanonical-splitting-index.json: new definition, no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-subcanonical-splitting-clifford-bound.json: new statement-only lemma, no Mathlib match.
+- dag/nodes/sec-six-functors-basics/lem-sfb-nodal-linear-series-base-colength.json: new statement-only lemma, no Mathlib match.
+- citations.json: verbatim statement quotations for every step/node pair.
+
+## Attachments
+
+None. Searched lean/WeilConjectures for the item id and for Clifford, nodal Clifford, subcanonical clusters, splitting index and the curve concepts. The project's Clifford theorem is representation theory, and its uses of subcanonical concern sites. Neither it nor the Weierstrass division-polynomial results states this item or any proposed child.
+
+## Wanted sources
+
+WANTED: Franciosi--Tenni, The canonical ring of a 3-connected curve, Rend. Lincei Mat. Appl. 25 (2014), 37--51, Section 2 Theorem 2.7 and Proposition 4.1 proof, for lem-sfb-nodal-two-connected-clifford. Expected path literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf. Primary author-hosted text read at https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf .
+
+WANTED: Franciosi--Tenni, On Clifford's theorem for singular curves, Proc. London Math. Soc. 108 (2014), 225--252, Definitions 2.9 and 2.16, Proposition 2.17, Theorems 3.7 and 3.9, for the item and its three children. Expected path literature/franciosi-tenni-clifford-singular-curves-2014.pdf. Primary author-hosted text read at https://pagine.dm.unipi.it/franciosi/lavori/clifford.pdf . No document was downloaded or repository literature file changed. Accordingly the assembled proof is marked agent-origin.
+
+## Audit and corrections
+
+The imported item has no proof and is not Lean-finished. Its assertion agrees with the Cartier case of Theorem 2.7. That theorem is recalled from the earlier paper: its Theorem A derives the Cartier case from Theorem 3.9, whose proof uses the weaker general inequality with splitting correction (Theorem 3.7). I followed that argument rather than introducing a child restating the Cartier Clifford theorem. The original hypotheses and conclusion are retained verbatim. No statement dispute or source counterexample was found.
+
+The source's displayed definition of splitting index says “minimal” while the one-block decomposition always exists. Proposition 2.17's ensuing proof explicitly excludes further decomposition and counts the finest partition. The new definition writes this intended meaning unambiguously as the maximum number of admissible support blocks minus one. On a reduced curve the summands are determined uniquely by their generic restrictions, so this formulation agrees with that proposition and the index in Theorem 3.7. In particular it is not the minimum, which would always be zero and would make the general bound false for the non-Cartier clusters illustrated in Example 5.1 of the paper.
+
+The unit and chapter records, SETUP's three levels and the current blueprint direct-images proof (3) were read. This deep curve-linear-series prerequisite is below the unchanged unit route. The ancestor command reports blueprint.from.node = None for the inherited created-item chain; the new children retain precisely that result and prepend the item to via. No unit realization fields are due from this non-key node.
+
+## Search and duplicate audit
+
+Whole-DAG statement/title searches covered Clifford, subcanonical cluster, splitting index, base locus, evaluation images, regular sections, Cartier zero schemes and zero-dimensional Euler characteristics. Whole-blueprint searches ran for Clifford, subcanonical, cluster, splitting index, splitting, Cartier, base locus, evaluation and finite support. There is no blueprint node for any child. Broad searches also returned many irrelevant subcanonical site statements and categorical evaluation nodes; their statements were inspected by filtering the mathematical objects. Existing lem-pc-zero-scheme-divisor-iso assumes Cartier regularity, and lem-pc-nonzero-section-integral-cartier assumes integral X, so neither proves regularity on this reducible reduced curve; the item instead writes out the reduced-ring argument. Existing lem-pc-chi-zero-dim-support and lem-pc-euler-additive supply the finite-support and Euler calculation, so no new Euler/cohomology node was created.
+
+All three children have logged LeanSearch, Loogle, source grep and two semantic phrasings. The actual search log is searches.jsonl, and the corresponding records in the nodes quote it exactly. Hits concern submodule sums, simplicial splitting, general scheme zero loci, Clifford algebras and Weierstrass equations; none is an exact or one-line-specialization match for these nodal-curve facts. There are zero Mathlib leaves.
+
+## Not duplicates
+
+- lem-sfb-nodal-linear-series-base-colength vs lem-pc-chi-zero-dim-support: the former constructs a base ideal and proves boundary colength and canonical base-cluster length addition; the latter gives only cohomology and tensor invariance for an already supplied coherent finite-support sheaf.
+- lem-sfb-nodal-linear-series-base-colength vs lem-trf-finite-curve-quotient-stalk-euler: the latter treats the quotient of a finite modification of a curve, not an evaluation image or support partition.
+- def-sfb-subcanonical-splitting-index vs det-pe-topos-functoriality-site: subcanonical clusters on curves and subcanonical site topologies are distinct notions.
+- lem-sfb-subcanonical-splitting-clifford-bound vs lem-sfb-nodal-special-clifford-subcurve: the latter finds a Clifford support subcurve for a special very ample line; it does not bound arbitrary non-Cartier subcanonical clusters with their splitting correction.
+
+- lem-sfb-nodal-linear-series-base-colength vs lem-pc-finite-scheme-cohomology-tensor: the latter starts with a finite affine scheme and proves tensor/cohomology invariance; it supplies no evaluation ideal on a curve, boundary-node containment or modification of a Cartier cluster.
+- lem-sfb-nodal-linear-series-base-colength vs lem-pc-zero-support-finite-scheme: the latter realizes an already given coherent finite-support module on a finite scheme; it supplies no base ideal or support-partition colength estimate.
+- lem-sfb-nodal-linear-series-base-colength vs lem-sfb-projective-curve-normalization-section-defect: the latter gives asymptotic bounded defects of restrictions to normalized components for powers of a projective hyperplane line, not the base ideal of an arbitrary section subspace or a count of boundary nodes.
+- lem-sfb-nodal-linear-series-base-colength vs lem-trf-integral-filtration-euler-difference: the latter evaluates Euler differences along a supplied filtration on an integral curve, whereas the new node constructs the evaluation ideal on a possibly reducible nodal curve and measures its boundary colength.
+
+## Review by NE
+
+I read the 2014 canonical-ring paper's Section 2 (Theorem 2.7, Cartier alternative) and Section 4 proof of Proposition 4.1, then the cited earlier Clifford paper itself, especially Definition 2.9, Definition 2.16 with Proposition 2.17, Theorem 3.7 (inequality (9)) and the proof of Theorem 3.9 on printed p.247. Both papers work over algebraically closed fields in arbitrary characteristic. I read Stacks divisors.tex Tags 02OR (lemma-zero-scheme), 01X0 (lemma-characterize-OD), 0AYL (lemma-regular-section-associated-points), 0C6K (remark-ses-regular-section), and varieties.tex Tag 0AYT (lemma-chi-tensor-finite). The finite-support Euler and dualizing-module statements already in the DAG were opened, rather than inferred from their titles.
+
+For step 1 the properness and coherence nodes say exactly that projective implies proper and proper over a field is Noetherian with coherent invertible modules. The actual reduced-ring proof of injectivity is included: multiplication can be tested in the domains of all minimal-prime quotients and their intersection is zero. It applies to both reducible and irreducible X. It creates a Cartier ideal locally, and the image sheaf divided by the dualizing line is its ideal globally. Since the coefficient is nonzero on every component, its finite-type zero scheme has dimension zero. No integrality assumption is smuggled in. The definition child supplies the subcanonical notion and index, and M's given generically nonzero section supplies its required section. The dualizing line is invertible by the existing nodal duality node, already a statement dependency of the item.
+
+For step 2 the base-colength child's statement supplies an actual coherent evaluation ideal, finite b, preservation of the full canonical section subspace, and the length addition for a Cartier T. Its boundary clause explicitly identifies the scheme-theoretic intersection with reduced boundary nodes, so the item's boundary-length hypothesis applies to each chosen block. The splitting-index definition supplies a maximizing partition; after replacing T by its base cluster the subspace inside H0(omega) is exactly the same, so every support subspace and its index remain the same. For r>0 all blocks have nonempty complements; summing the assumed lower bound two counts each cross-block node twice. For r=0 there is no use of the hypothesis with an empty complement. The base-ideal result is independent of Clifford's inequality: in a frame at a cross-block node a section supported on one block vanishes on the other branch and therefore at the node; all its coefficients lie in the maximal ideal. Coherence and finite support follow from the finite-dimensional evaluation image and the generically nonzero section. For a Cartier local equation f, multiplication by f identifies O/B with (f)/(f B), giving the asserted extra length. These are the arguments the unsplit base-colength node will later formalize, not a restatement of the item. It treats any line and any finite section subspace, without two-connectedness.
+
+For step 3 the inequality child's statement explicitly allows non-Cartier T and uses the same splitting index. This matters: the newly imposed base cluster may not be Cartier at nodes. Its hypotheses require precisely our two-connected nodal X, algebraically closed k, and subcanonical cluster; these were all checked before applying it to bar T. The correction term cancels because b >= r. This is a genuinely weaker general inequality than the item's Cartier conclusion, with examples requiring its correction, and step 2 provides the missing argument rather than merely applying a restated Cartier theorem.
+
+For step 4 I read each cited statement: Euler additivity applies to the coherent exact sequence; lem-pc-chi-zero-dim-support identifies the Euler characteristic of O_T with its space of sections and preserves it under tensor with the invertible dualizing module; reduced-curve duality explicitly gives chi(omega)=-chi(O); the degree definition is chi(M)-chi(O). Thus deg M=2p_a-2-length(T), without assuming that an arbitrary component is smooth or that X is integral. These are generic tools of other units and are declared as split_report.tool_uses; no unit step is replaced by them.
+
+I checked empty T (M=omega), the canonical trivial cluster, irreducible X (r=0), two components joined by two nodes, a cycle of rational components and self-nodes within a block. In a cycle with a section space splitting across n blocks there are n boundary nodes, so the colength count is at least r+1=n, as needed. Self-nodes are correctly excluded from the cross-block count. On a genus-one nodal cycle M=O has one-dimensional sections and r=0, and the bound is equality. On P1 no M can simultaneously have a generically nonzero section and a generically nonzero map to omega=O(-2), so that case is vacuous, not an omitted hypothesis. Non-Cartier cluster ideals are admitted only in the general inequality child, not in the original Cartier conversion. The base-colength statement does not assert that its base ideal is principal or that the modified cluster is Cartier. No characteristic restriction, normality, or smooth-only Riemann--Roch was used.
+
+The B--E checklist was checked against the written files: children are self-contained with inline meanings and definition references; unsplit statements have no proof; sources and actual search outcomes are recorded; no circular reference to the item occurs in child dependencies; all item uses have verbatim citation entries. The assembly steps are each below 2000 characters. I corrected the ambiguous minimal/maximal index wording and made the boundary scheme's reducedness explicit before delivery. There is no second reader under this direct-delivery brief.
+
+## Unfinished work
+
+None in this stage-1 item. The two new statement nodes remain unsplit by design; the definition child is also left at the required unsplit state. No Lean was written, compiled or built.

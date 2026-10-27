@@ -1,0 +1,306 @@
+{
+ "id": "lem-sfb-semiabelian-invertible-multiplication",
+ "kind": "statement",
+ "title": "Invertible multiplication on a semiabelian group is finite etale surjective",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. A semiabelian $k$-group algebraic space means a smooth separated finite-type commutative group object $G$ in algebraic spaces [def-trf-algebraic-space] admitting an exact sequence $0\\to T\\to G\\to A\\to0$ of fppf sheaves [def-pc-fppf-site], where $T\\simeq\\mathbf G_m^t$ for some integer $t\\geq0$ and $A/k$ is an abelian variety [def-sc-abelian-variety]. Here $\\mathbf G_m(U)=\\Gamma(U,\\mathcal O_U)^\\times$, group-object operations induce functorial group operations on $U$-points, and exactness means that $T$ is the kernel and sections of $A$ locally lift to $G$ for fppf coverings. Smoothness and finite type are tested on etale scheme charts, and separated means that the diagonal is a closed immersion. Let $n\\geq1$ be invertible in $k$, and let $[n]_G:G\\to G$ denote the sum of $n$ copies of the identity under the group law. Then $[n]_G$ is representable, finite, etale and surjective. Explicitly, for every $k$-scheme $U$ and $y\\in G(U)$ the sheaf fibre product $V=U\\times_{y,G,[n]_G}G$ is represented by a scheme, and $V\\to U$ is finite etale and surjective. Finite means affine with coordinate algebra a finite module, and etale is [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 8.21, printed p.152, and Theorem 12.9(b), printed pp.233–234; semiabelian extension consequence, to be proved by local trivialization of the torus torsor and descent. Abelian multiplication inputs: Stacks groupoids.tex Tags 0BFG (lemma-degree-multiplication-by-d), 0BFH (lemma-abelian-variety-multiplication-by-d-etale) and 03RP (proposition-review-abelian-varieties). The split-torus map is given by the coordinate power maps."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sc-abelian-variety",
+  "def-weil-etale-morphism",
+  "def-sfb-smooth-integral-group-space",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "First record the coordinate calculation needed below. For any commutative $k$-algebra $B$ and units $u_1,\\ldots,u_t\\in B^\\times$, form $C_0=B$ and $C_j=C_{j-1}[z_j]/(z_j^n-u_j)$. By [lem-weil-pbc-monic-quotient-free], each $C_j$ is free over $C_{j-1}$ on $1,z_j,\\ldots,z_j^{n-1}$. Moreover $z_j$ is a unit, with inverse $u_j^{-1}z_j^{n-1}$; consequently the derivative $nz_j^{n-1}$ is a unit. The derivative-localized algebra of [lem-weil-pbc-standard-etale-monic-derivative] is therefore $C_j$ itself, and its spectrum is etale over $\\operatorname{Spec}C_{j-1}$. Finite and etale composition give $\\operatorname{Spec}C_t\\to\\operatorname{Spec}B$ finite etale. It is surjective: for each prime of $B$, in an algebraic closure of its residue field each polynomial $z_j^n-u_j$ has a nonzero root; choosing these roots gives a point of $\\operatorname{Spec}C_t$ above that prime. Here existence of the algebraic closure and its roots is [def-weil-algebraic-closure]. This scheme represents the functor of $t$ units $z_j$ satisfying $z_j^n=u_j$, since $z_j$ is already invertible in $C_t$. For $t=0$ take $C_t=B$, so the map is the identity.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-standard-etale-monic-derivative",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00UB (definition-standard-etale), 00UC (lemma-standard-etale); monic division; coordinate calculation for the split torus."
+   }
+  },
+  {
+   "text": "Write $q:G\\to A$ for the quotient in the given exact sequence. By [lem-sc-isogeny-facts], $[n]_A$ is finite flat surjective and an fppf covering. By [lem-sc-mult-n-etale-kernel], it is etale: invertibility of $n$ is precisely the required characteristic condition (in characteristic zero use $n>0$). These statements include the zero-dimensional abelian variety. Fix an arbitrary scheme $U/k$ and $y\\in G(U)$. Define the scheme $W=U\\times_{q(y),A,[n]_A}A$; it carries a section $a\\in A(W)$ satisfying $[n]_Aa=q(y)|_W$. Finite and etale base-change permanence make $W\\to U$ finite etale. Its surjectivity follows also because it is an fppf covering by [lem-trf-fppf-covering-base-change].",
+   "uses": [
+    "lem-sc-isogeny-facts",
+    "lem-sc-mult-n-etale-kernel",
+    "def-pc-fibre-product",
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0BFG (lemma-degree-multiplication-by-d), 0BFH (lemma-abelian-variety-multiplication-by-d-etale), 03RP (proposition-review-abelian-varieties); topologies.tex Tag 021O (lemma-fppf)."
+   }
+  },
+  {
+   "text": "The sheaf $V=U\\times_{y,G,[n]_G}G$ is an fppf sheaf: its sections are pairs consisting of a map to $U$ and an $x$ with $[n]_Gx=y$, and matching such pairs glue uniquely in the two sheaves. There is a map $V\\to W$ sending $x$ to $(u,q(x))$, since $q([n]_Gx)=[n]_Aq(x)$. Exactness in the hypothesis says that the section $a\\in A(W)$ lifts to sections $g_i\\in G(W_i)$ on an fppf covering of $W$. Refine by affine open covers and denote the resulting covering again by $\\{W_i\\to W\\}$, with $W_i=\\operatorname{Spec}B_i$. Composition and refinement of coverings are part of the site axioms. Put $d_i=y|_{W_i}-[n]_Gg_i$. Its image in $A(W_i)$ is zero, so the specified kernel identification gives a unique $d_i\\in T(W_i)=(B_i^\\times)^t$. This uses the hypothesis of exactness, not a claim that $q$ already has a scheme source.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 8.21, printed p.152, extension consequence: local lifting along the torus quotient; explicit fppf-sheaf argument."
+   }
+  },
+  {
+   "text": "On every scheme over $W_i$, a section of $V\\times_WW_i$ has $q(x)=a$, so $x-g_i$ lies in the kernel $T$ uniquely. Write $x=g_i+t$. The equation $[n]_Gx=y$ becomes $[n]_Tt=d_i$ because the group is commutative. Under $T\\simeq\\mathbf G_m^t$, this means $t_j^n=d_{ij}$ for all $j$. Thus $t\\mapsto g_i+t$ is a natural isomorphism from the root functor constructed in step 1 (with $B=B_i$, $u_j=d_{ij}$) to $V\\times_WW_i$; its inverse is $x\\mapsto x-g_i$. The local source $P_i=\\operatorname{Spec}C_{i,t}$ is consequently finite etale surjective over $W_i$. No restriction to field-valued points is made in these mutually inverse formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 8.21, printed p.152, agent-written extension argument: translation identifies the lifted-quotient fibre with a split-torus power fibre."
+   }
+  },
+  {
+   "text": "The local presentations of the fppf sheaf $V/W$ determine compatible scheme isomorphisms on $W_i\\times_WW_j$, by [lem-trf-fppf-local-representations-fully-faithful]. Both maps identify the same section $x$ of $V$, so their composites on triple overlaps agree. Apply [lem-sfb-finite-etale-fppf-descent] to these finite etale schemes $P_i/W_i$ and their overlap maps, obtaining a finite etale scheme $P\\to W$ with $P\\times_WW_i\\simeq P_i$. The same full-faithfulness statement glues the local identifications to an isomorphism of fppf sheaves $h_P\\simeq V$ over $W$. Surjectivity of $P\\to W$ follows directly: a point of $W$ lifts to some $W_i$ because the covering is jointly surjective, and then to $P_i$ by step 1; its image in $P$ lies over the original point.",
+   "uses": [
+    "lem-trf-fppf-local-representations-fully-faithful",
+    "lem-sfb-finite-etale-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0BLZ (lemma-finite-etale-stack); descent.tex Tag 02W5 (lemma-descent-data-sheaves), local comparisons."
+   }
+  },
+  {
+   "text": "The composite $P\\to W\\to U$ is finite by [lem-weil-pbc-finite-composition], etale by [lem-weil-pbc-etale-composition-cancellation], and surjective by the two surjections. The isomorphism $h_P\\simeq V$ preserves the maps to $W$, hence to $U$. Thus it represents exactly $U\\times_{y,G,[n]_G}G$ with its projection to $U$. Since $U$ and $y$ were arbitrary, this proves scheme representability of $[n]_G$ and the asserted finite etale surjective property on every scheme test, which is the meaning of all four conclusions in the statement. This includes empty $U$.",
+   "uses": [
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WK (lemma-composition-finite), 02GN (lemma-composition-etale); scheme-test interpretation of representability."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-standard-etale-monic-derivative",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-algebraic-closure",
+  "lem-sc-isogeny-facts",
+  "lem-sc-mult-n-etale-kernel",
+  "def-pc-fibre-product",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-trf-fppf-covering-base-change",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-local-representations-fully-faithful",
+  "lem-sfb-finite-etale-fppf-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 8.21, printed p.152, semiabelian extension argument supplied explicitly using Stacks 0BFG/0BFH/03RP, 00UC, 02W5 and 0BLZ. Milne does not itself state the algebraic-space extension consequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A semiabelian group over an algebraically closed field has finite etale surjective multiplication by any invertible positive integer",
+   "results": "OK 8 hits; ax_grothendieck_of_locally_finite, ax_grothendieck_univ, Algebra.Etale.iff_exists_algEquiv_prod, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime_or_zero, Algebra.IsStandardEtale.of_surjective, Algebra.FormallyEtale.iff_exists_algEquiv_prod. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torsion\"",
+   "results": "OK 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Ii]sogeny|multiplication.*[Ee]tale|torsion.*factor",
+   "results": "OK 0 hits; . Subdirectory: AlgebraicGeometry. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semi_abelian|[Ii]sogeny|AbelianVariety",
+   "results": "OK 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplication by a unit integer on an extension of an abelian variety by a split torus is a finite etale surjective morphism",
+   "results": "OK 8 hits; IsUnit.isQuotientMap_zsmul, AddCircle.isAddQuotientCoveringMap_zsmul, AddAut.mulRight, LinearEquiv.smulOfUnit, NumberField.mixedEmbedding.unitSMul_smul, AddAut.mulLeft, ZMod.smul_units_def, AffineEquiv.homothetyUnitsMulHom. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Isogeny\"",
+   "results": "OK 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of semiabelian varieties given by multiplication by n prime to the characteristic is finite etale and faithfully flat",
+   "results": "OK 8 hits; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.iff_exists_algEquiv_prod, RingHom.Etale, Algebra.Etale.iff_exists_algEquiv_prod, RingHom.Etale.of_bijective, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract-group, ring-etale, topological scalar and scheme-etale declarations do not state multiplication or factorization for semiabelian group algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An isogeny of an extension of an abelian variety by a split torus is finite etale when its degree is invertible",
+   "results": "8 hits: Algebra.instEtaleOfIsStandardEtale, AlgebraicGeometry.IsEtale, Algebra.FormallyEtale.of_isSeparable, Algebra.FormallyEtale.of_isSeparable_aux, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.Etale.iff_exists_algEquiv_prod, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instOfIsIsoScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring etaleness, scheme morphism permanence or unrelated affine-space/Galois results; no semiabelian multiplication theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by an invertible positive integer on a semiabelian algebraic group is finite etale and surjective",
+   "results": "8 hits: Algebra.IsStandardEtale.of_surjective, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.finitePresentation, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.lift_bijective, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring etaleness, scheme morphism permanence or unrelated affine-space/Galois results; no semiabelian multiplication theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"npow\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring etaleness, scheme morphism permanence or unrelated affine-space/Galois results; no semiabelian multiplication theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|[Ii]sogeny|AbelianVariety",
+   "results": "0 hits:  Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring etaleness, scheme morphism permanence or unrelated affine-space/Galois results; no semiabelian multiplication theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "semiabelian|semi_abelian|multiplication.*etale|npow.*IsFinite",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring etaleness, scheme morphism permanence or unrelated affine-space/Galois results; no semiabelian multiplication theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale surjective multiplication on a commutative group algebraic space that is an extension of an abelian variety by a torus",
+   "results": "8 hits: Algebra.IsStandardEtale.of_surjective, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.SubmersivePresentation.cotangentComplexAux_surjective, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, Algebra.Etale.iff_exists_algEquiv_prod, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, Algebra.Generators.Cotangent.surjective_map_ofComp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring etaleness, scheme morphism permanence or unrelated affine-space/Galois results; no semiabelian multiplication theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-torsion-kernel-divisibility",
+  "date": "2026-10-23",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: passing from identity on invertible level torsion to an endomorphism congruent to identity modulo n, on the semiabelian Picard object. Geometric prerequisite: invertible multiplication is a finite etale surjective cover, before descending the homomorphism.",
+   "via": [
+    "lem-sfb-semiabelian-torsion-kernel-divisibility",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-semiabelian-invertible-multiplication",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No exact project declaration or Mathlib match. Reused the abelian multiplication inputs, explicit monic power-basis and standard-etale leaves, and existing covering-family finite-etale descent. Wrote the root-fibre coordinates, local lifts, overlap comparisons and scheme-test conclusion explicitly. No new node is needed: the local torus calculation and translated-fibre identification are elementary applications of the cited inputs.",
+  "blueprint": "Inherited support of det-thm-sf-ctf-stability-direct-images proof (3), through the alteration/stable-Picard torsion chain. Read the current latest unit and direct-image proof. This created auxiliary has no blueprint equivalent; blueprint_refs ancestor returns None, retained, and the inherited detailed from.place is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-isogeny-facts",
+    "why": "Generic abelian multiplication cover used for the abelian quotient; supplies finite flat surjectivity and the fppf-cover assertion, not a replacement of the constructibility unit route."
+   },
+   {
+    "node": "lem-sc-mult-n-etale-kernel",
+    "why": "Generic abelian multiplication etaleness when n is invertible; no local-unit node states the abelian-quotient input."
+   },
+   {
+    "node": "lem-trf-fppf-local-representations-fully-faithful",
+    "why": "Generic passage between local sheaf representations and compatible scheme maps, needed to descend the fibre as a finite etale scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-isogeny-facts",
+  "lem-sc-mult-n-etale-kernel",
+  "lem-trf-fppf-local-representations-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-ccf17cc9d",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ccf17cc9d (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery creates no new nodes, and the statement and stmt_deps are unchanged. The repair note for a 2026-10-21 re-split does not apply, because the item was created today by Q96. Step 1: the monic-quotient-free node gives the free basis, so C_j is free over C_{j-1}. Because n is a unit in k, which lies in B, the derivative n z^{n-1} is a unit. The standard-etale node (1) then applies with S[T]_{Q'}/(Q)=C_j. Surjectivity comes from roots in an algebraic closure of κ(p): the image of u_j there is nonzero. Step 2: I checked the exact clauses of lem-sc-isogeny-facts (finite flat surjective, fppf covering) and lem-sc-mult-n-etale-kernel (char∤d gives étale). W=U×A comes from def-pc-fibre-product. Finite base change uses lem-trf-finite-radicial-basechange and étale base change uses 02GO. Surjectivity holds because, by 021O(3), {W→U} is an fppf covering. Step 3: the lifts come from the exactness hypothesis, and d_i lies in ker q, which is T(W_i)=(B_i^×)^t. Step 4: x=g_i+t, and [n]x=y if and only if t_j^n=d_ij. The mutually inverse maps also respect the map to W, so V×_W W_i is isomorphic to h_{P_i}. Step 5: R(V) is a descent datum, by lem-trf-fppf-local-representations-fully-faithful. 0BLZ (lem-sfb-finite-etale-fppf-descent) gives a finite étale P over W, and full faithfulness then gives h_P≅V over W. Surjectivity follows from the joint surjectivity of the covering and step 1. Step 6 uses the composition nodes. Small cases checked: t=0; A=0 (dim 0, Spec k); n=1; U empty; and char p | n, which is excluded by the hypothesis. Duplicate search with rg -L over semiabelian, root/Kummer and fppf-local-representability: none. Batch-5: all 5 flagged citations are generic and none is a step of the trace-formula or Poincaré-duality proofs. These are the abelian multiplication facts 0BFG and 0BFH (lem-sc-isogeny-facts, lem-sc-mult-n-etale-kernel), the covering lemma 021O, sheaf descent 02W5 and finite-étale descent 0BLZ; the last reaches trf only through a definition. I accept the split_report tool_uses (the two abelian multiplication nodes and the fppf full-faithfulness node) as generic off-unit tools. No SGA is cited. Cosmetic only: the letter t is used for both the rank and a section in step 4."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianInvertibleMultiplication",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.semiabelian_invertible_multiplication",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.commutativeGroupPresheafMultiplication",
+   "AlgebraicGeometry.AlgebraicSpace.semiabelian_invertible_multiplication"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianInvertibleMultiplication.lean",
+  "statement": "theorem semiabelian_invertible_multiplication {k : Type u} [Field k] [IsAlgClosed k] (G : AlgebraicSpace (Spec (.of k))) (F : (Over (Spec (.of k)))ᵒᵖ ⥤ CommGrpCat.{u}) (e : F ⋙ forget CommGrpCat ≅ G.obj.obj) (hsmooth : MapIsLocally (@Smooth) (groupSpaceProjection G)) (hsep : MapIsSeparated (groupSpaceProjection G)) (hfinite : MapIsFiniteType (groupSpaceProjection G)) (t : ℕ) (A : Grp (Over (Spec (.of k)))) [IsAbelianVariety A.X] (i : yonedaGrp.obj (MultiplicativeType.splitTorus k t) ⟶ F ⋙ forget₂ CommGrpCat GrpCat) (q : F ⋙ forget₂ CommGrpCat GrpCat ⟶ yonedaGrp.obj A) (hkernel : IsPullback (Functor.whiskerRight i (forget GrpCat)) (yoneda.map (toUnit (MultiplicativeType.splitTorus k t).X)) (Functor.whiskerRight q (forget GrpCat)) (yoneda.map η[A.X])) (hlift : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of k))) (Functor.whiskerRight q (forget GrpCat))) (n : ℕ) (hn : 0 < n) (hunit : IsUnit (n : k)) : IsRepresentableWith (fun _ _ p ↦ IsFinite p.left ∧ Etale p.left ∧ Surjective p.left) (e.inv ≫ commutativeGroupPresheafMultiplication F n ≫ e.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper is the actual pointwise power natural transformation. The theorem uses a group-valued functor identified with the algebraic space, the given split-torus kernel square and fppf local surjectivity. Its conclusion is scheme-test representability with finite, etale and surjective projections simultaneously."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-837d5eb23",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Read the item node, all 9 stmt_dep records and their Lean (AlgebraicSpace/IsRepresentableWith, MapIsLocally/MapIsSeparated/MapIsFiniteType, groupSpaceProjection/CommutativeSpaceGroup, splitTorus, IsAbelianVariety), the module and the report. Every clause matches: alg. closed k; commutative group law as F:(Over Spec k)^op⥤CommGrpCat with e:F⋙forget≅G.obj.obj (equivalent to CommutativeSpaceGroup, no new definition; noted); smooth/separated/finite type via the recorded chart predicates on groupSpaceProjection; T=splitTorus k t as GrpCat kernel via an IsPullback over the unit of A; quotient exactness = fppf IsLocallySurjective in the same Scheme.fppfTopology.over topology; 0<n and IsUnit (n:k); [n]_G = e.inv≫(x↦x^n)≫e.hom; conclusion IsRepresentableWith (IsFinite∧Etale∧Surjective) on one projection over all test U and points y. Edge cases t=0, dim A=0, n=1, n=0 and char|n excluded, empty U, single universe u: ok. Only lean+stmt_deps changed vs live; the added stmt_deps are landed nodes and used; statement verbatim; lines ≤100; proof imports plain; helper is real data with docstring; sorry only; docstrings carry source, blueprint and the 6 proof steps; both report sections present. No change, so no compile run (worker reported clean compiles). No findings."
+ }
+}

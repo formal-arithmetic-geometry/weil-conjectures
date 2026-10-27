@@ -1,0 +1,163 @@
+{
+ "id": "lem-sf-common-projection-proper-tensor-compatibility",
+ "kind": "statement",
+ "title": "One inclusion tensor comparison preserves compact-support and proper projection mates",
+ "statement": "Fix finite-field datum $D$, coefficient datum $C$, and $H:\\mathrm{SixFunctorCommonStages}(D,C)$ [def-sf-operation-stages], with their canonical tensor and pullback constructions [def-weil-derived-pullback-tensor-hom, def-pur-completed-pullback-tensor-comparison]. Fix a finite coefficient field $E$ and write $V_X$ for its inclusion [def-weil-algebraically-closed-coefficients]. Put $S=(H.\\mathrm{coefficientStages}(E)).\\mathrm{rational}$, $S'=H.\\mathrm{commonStage}$, $T=(H.\\mathrm{coefficientStages}(E)).\\mathrm{rationalTensor}$, $T'=H.\\mathrm{commonStageTensor}$, $A=(H.\\mathrm{coefficientStages}(E)).\\mathrm{rationalExchange}$, $A'=H.\\mathrm{commonStageExchange}$ and $C_E=H.\\mathrm{commonStageComparison}(E)$. There exists a family of natural tensor isomorphisms $t_X:\\operatorname{uncurry}(T_X);V_X\\cong(V_X\\times V_X);\\operatorname{uncurry}(T'_X)$ with the following two properties. For every $f:X\\to Y$, every compactification $c$ of $f$, and every $K\\in\\mathrm{Stage}_E(X)$, $L\\in\\mathrm{Stage}_E(Y)$, the individual compact-support projection [def-sf-constructible-projection-mates] satisfies $V_Y(\\pi^A_{f,c}(K,L));\\mathrm{target}(C_E,t,f,c,K,L)=\\mathrm{source}(C_E,t,f,c,K,L);\\pi^{A'}_{f,c}(V_XK,V_YL)$. For every proper $f$ and the same input types the proper counit projection satisfies $V_Y(\\pi^{A,\\mathrm{proper}}_f(K,L));\\mathrm{properTarget}(C_E,t,f,K,L)=\\mathrm{properSource}(C_E,t,f,K,L);\\pi^{A',\\mathrm{proper}}_f(V_XK,V_YL)$. Each endpoint is precisely the operation/tensor endpoint defined in [lem-sf-rational-projection-tensor-compatibility]: the source tensors the support or direct comparison; the target applies that comparison to the finite tensor and then the image of $t_X$ followed by the pullback comparison in the second input. No coherence equation, projection invertibility, or faithfulness is assumed. This strengthens the compact-support comparison of [lem-sf-common-projection-tensor-compatibility] by recording the proper counit square for the same constructed tensor comparison. The proper square is proved by adjunction transposition, not deduced from compact-support coherence.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility paragraph: coefficient comparisons respect units, counits and tensor; common finite coefficient-field paragraph"
+ },
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-weil-algebraically-closed-coefficients",
+  "def-sf-constructible-projection-mates",
+  "lem-sf-rational-projection-tensor-compatibility",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-sf-common-projection-tensor-compatibility"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing canonical commonProjectionTensorComparison H E as the shared family t. Its naturality and its construction from the finite-stage tensor models are already recorded by def-sf-common-projection-tensor-comparison. This fixes the same tensor comparison for both squares without choosing an arbitrary witness of an existential compatibility theorem.",
+   "uses": [
+    "def-sf-common-projection-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary f and compactification c, form compactSupportProjectionSquare f c. Apply projection_preserved_of_factors to the existing commonProjectionProperFactor and commonProjectionOpenFactor equations, both using exactly the tensorator chosen in step 1. The factorization theorem identifies their composite with compactSupportProjectionComponent. Its endpoints are definitionally the specified source and target. This is the same proper/open mate route as the source.",
+   "uses": [
+    "def-sf-projection-mate-factors",
+    "lem-sf-common-projection-proper-factor",
+    "lem-sf-common-projection-open-factor",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For proper f, specialize commonProjectionPullbackTensorCompatibility to compactSupportProperSquare f. Normalize each compactSupportProperProjection to the rightAdjointProjectionMap of the supplied pull/direct adjunction and projectionPullbackTensor, by substituting the recorded functor equalities and HEq of adjunctions. Apply map_rightAdjointProjectionMap_comp_mateEquiv to the supplied tensor square. The counit equation of SixFunctorCoefficientComparison identifies mateEquiv of the inverse left comparison with its right comparison: apply injectivity of the adjunction Hom equivalence, mateEquiv_counit, and the recorded coefficient counit equation. Expanding only the endpoint and currying definitions gives precisely properTarget and properSource. This proves the proper square for the same t as step 2 without using any compact-support coherence or proper projection equation.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-constructible-projection-mates",
+    "lem-sf-common-projection-pullback-tensor-compatibility",
+    "lem-sp-categorical-projection-mate-square",
+    "lem-sf-rational-projection-tensor-compatibility"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-common-projection-tensor-comparison",
+  "def-sf-projection-mate-factors",
+  "lem-sf-common-projection-proper-factor",
+  "lem-sf-common-projection-open-factor",
+  "def-sf-constructible-projection-mates",
+  "def-sf-operation-stages",
+  "lem-sf-common-projection-pullback-tensor-compatibility",
+  "lem-sp-categorical-projection-mate-square",
+  "lem-sf-rational-projection-tensor-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility paragraph; P9 combines the existing canonical tensorator and proper/open factor squares, and applies the existing categorical mate transport theorem to the proper square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient functor preserving adjunction and tensor comparisons transports the proper projection formula commutative square",
+   "results": "CategoryTheory.frobeniusMorphism, CategoryTheory.expComparison, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.CommSq.right_adjoint, CategoryTheory.ParametrizedAdjunction.liftStructEquiv, CategoryTheory.CommSq.left_adjoint, CategoryTheory.ParametrizedAdjunction.arrowHomEquiv_apply_right_snd_assoc",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tensor/adjunction results, not the canonical coefficient-inclusion projection comparison. Local source search found the rational analogue but no common-stage comparison theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.rightAdjointProjectionMap",
+   "results": "loogle: unknown identifier 'Adjunction.rightAdjointProjectionMap'",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tensor/adjunction results, not the canonical coefficient-inclusion projection comparison. Local source search found the rational analogue but no common-stage comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "commonProjectionProper|properIdentification.*projection|projection.*properIdentification",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tensor/adjunction results, not the canonical coefficient-inclusion projection comparison. Local source search found the rational analogue but no common-stage comparison theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving tensor product and adjunction units and counits preserves the right adjoint projection morphism",
+   "results": "CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Types.tensorProductAdjunction, CategoryTheory.FreeMonoidalCategory.instMonoidalProject, CategoryTheory.FunctorToTypes.adj, CategoryTheory.MonoidalCategory.tensorUnitRight, CategoryTheory.Functor.Monoidal.commTensorRight, CategoryTheory.Functor.LaxMonoidal.ofBifunctor.topMapᵣ, CategoryTheory.Functor.preservesMonomorphisms_of_adjunction",
+   "date": "2026-10-26",
+   "verdict": "Generic categorical tensor/adjunction results, not the canonical coefficient-inclusion projection comparison. Local source search found the rational analogue but no common-stage comparison theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "ComparisonCompatible and rightAdjointLaxMonoidal in Mathlib/CategoryTheory; commonProjectionTensorCompatibility, projection and inclusion in both project roots and quarantine",
+   "results": "Mathlib/CategoryTheory/Monoidal/Functor.lean rightAdjointLaxMonoidal is generic. No existing common projection compatibility declaration. WeilConjectures/CategoryTheory/Adjunction/ProjectionMapMate.lean provides generic mate transport under a supplied tensor square. RationalProjectionComparisonEquations provides generic endpoint cancellation, reproduced as private proved helpers.",
+   "date": "2026-10-26",
+   "verdict": "The comparison of the specified common-stage tensor/pullback representatives still needs its own calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionProperOnStage",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Coefficient compatibility for the proper projection equation: compare the two individual projection arrows before transporting the finite-stage equation",
+   "via": [
+    "lem-sf-common-projection-proper-on-stage",
+    "lem-sf-common-projection-comparison-equations",
+    "lem-sf-projection-field-stage-laws"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionProperTensorCompatibility",
+  "file": "lean/Sheaf/Paper/CommonProjectionProperTensorCompatibility.lean",
+  "declaration": "WeilConjectures.commonProjectionProperTensorCompatibility",
+  "statement": "theorem commonProjectionProperTensorCompatibility\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C)\n    (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar) :\n    ∃ t : ∀ X : SixFunctorSpace D,\n      Functor.uncurry.obj ((H.coefficientStages E₀).rationalTensor X) ⋙\n          GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀ ≅\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).prod\n          (GeneralAlgebraicallyClosedCoefficients.inclusion\n            (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀) ⋙\n          Functor.uncurry.obj (H.commonStageTensor X),\n      (∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y)\n        (c : Compactification f.hom.left)\n        (K : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar X.obj.left E₀)\n        (L : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar Y.obj.left E₀),\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).map\n            (compactSupportProjectionComponent\n              (H.coefficientStages E₀).rationalExchange f c K L) ≫\n          (target (H.commonStageComparison E₀) t f c K L).hom =\n        (source (H.commonStageComparison E₀) t f c K L).hom ≫\n          compactSupportProjectionComponent H.commonStageExchange f c\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).obj K)\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).obj L)) ∧\n      (∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsProper f.hom.left]\n        (K : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar X.obj.left E₀)\n        (L : GeneralAlgebraicallyClosedCoefficients.Stage C.l C.Qbar Y.obj.left E₀),\n        (GeneralAlgebraicallyClosedCoefficients.inclusion\n          (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).map\n            (compactSupportProperProjection (H.coefficientStages E₀).rationalExchange f K L) ≫\n          (properTarget (H.commonStageComparison E₀) t f K L).hom =\n        (properSource (H.commonStageComparison E₀) t f K L).hom ≫\n          compactSupportProperProjection H.commonStageExchange f\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E₀).obj K)\n            ((GeneralAlgebraicallyClosedCoefficients.inclusion\n              (l := C.l) (Ω := C.Qbar) (Y := Y.obj.left) E₀).obj L))",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261026T235908-L-1466635",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261027T021347-L-2761764",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,226 @@
+{
+ "id": "lem-per-graded-near-projective-hom-divisibility",
+ "kind": "statement",
+ "title": "Graded-uniform Hom divisibility for finite near-projective modules",
+ "statement": "Let $R_0$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring] and $K_0\\subseteq R_0$ an ideal. Write $\\operatorname{gr}_K(R)=\\bigoplus_{j\\geq0}K^j/K^{j+1}$ with graded multiplication [def-weil-pbc-associated-graded-ring]. There exist integers $D,q\\geq0$, depending only on the degree-preserving unital ring isomorphism class of $\\operatorname{gr}_{K_0}(R_0)$, with the following property. Let $R$ be any Noetherian commutative ring, $K\\subseteq R$ an ideal, and suppose $\\operatorname{gr}_K(R)\\cong\\operatorname{gr}_{K_0}(R_0)$ by a degree-preserving unital ring isomorphism. Let integers $n\\geq c\\geq0$ satisfy $n\\geq\\max(q+(D+1)c,(D+2)c)$ and, if $D=0$, also $n\\geq q+2c$. Put $A=R/K^n$, $t=n-(D+1)c$, and $w=n-(D+2)c$. Let $M$ be a finite $A$-module [def-weil-finitely-generated-module] such that for every $a\\in K^c$ there are an integer $r_a\\geq0$ and $A$-linear maps $f_a:M\\to A^{\\oplus r_a}$ and $g_a:A^{\\oplus r_a}\\to M$ with $g_af_a=\\bar a\\operatorname{id}_M$, where $\\bar a$ is the image of $a$ in $A$. For every $A$-linear map $u:M\\to K^n/K^{2n}$ there exist a finite set $J$, elements $a_j\\in K^c$, and $A$-linear maps $\\psi_j:M\\to K^w/K^{n+w}$ such that $p u=\\sum_{j\\in J}\\mu_{a_j}\\psi_j$. Here $p:K^n/K^{2n}\\to K^t/K^{n+t}$ sends $x\\bmod K^{2n}$ to $x\\bmod K^{n+t}$, and $\\mu_a:K^w/K^{n+w}\\to K^t/K^{n+t}$ sends $y\\bmod K^{n+w}$ to $ay\\bmod K^{n+t}$. All quotient modules have the $A$-action induced by multiplication in $R$. No completeness assumption on $R$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAC (lemma-factor-hom), with the graded-isomorphism invariance of its constants in Tag 0GA6 (section-uniform); the (A,n,c)-module condition is written as its finite-free factorization condition, more-algebra.tex Tags 0G92 (lemma-near-projective), 0G93 (definition-near-projective)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-blowup-uniform-tensor-section-bound] to the fixed graded ring and choose its $d\\geq1,q\\geq0$; set $D=d$. These constants work simultaneously for every $(R,K)$ in the statement. If $n=0$, then $A=R/R=0$, so $M=0$ and the assertion holds with $J=\\varnothing$. Hence assume $n\\geq1$ and use $Y_n,\\mathcal L_n,s_n,P_n$ of the cited node. The hypotheses give $w=n-(D+2)c\\geq0$, $t=w+c\\geq q$, and $n-2c\\geq q+(D-1)c$. $A$ is Noetherian: every ideal lifts to a finitely generated ideal of $R$. Put $N=\\operatorname{Hom}_A(M,A)$. By [lem-per-near-projective-dual-comparison], $N$ is finite and has the same scalar-factorization property. Apply its comparison on $Z=Y_n$ over $\\operatorname{Spec}A$: write $F=P_n(N)$, $P=P_n(M)$, $G=\\mathcal Hom(P,\\mathcal O_{Y_n})$, and $\\alpha:F\\to G$. Its kernel and cokernel are killed by $(K^c/K^n)\\mathcal O_{Y_n}=\\operatorname{im}(s_n^{\\otimes c})$.",
+   "uses": [
+    "lem-per-blowup-uniform-tensor-section-bound",
+    "lem-per-near-projective-dual-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "0GA6 and 0GAB; choice of invariant constants and dual module"
+   }
+  },
+  {
+   "text": "The annihilation hypotheses just verified permit [lem-per-line-twist-double-annihilator-reverse], with the invertible module $\\mathcal L_n$ and its map $s_n$. Obtain $\\beta_n:G(n)\\to F(n-2c)$ satisfying $\\alpha(n-2c)\\beta_n=\\delta_{2c}$. The given $u$ defines $\\chi:P\\to\\mathcal L_n^{\\otimes n}$ by pulling back $u$ and multiplying the ideal representatives. Equivalently it defines $\\sigma\\in\\Gamma(Y_n,G(n))$: locally trivialize the line module and regard $\\chi$ as a functional; changing trivializations multiplies the functional by the inverse change of basis, so these local tensors glue. Let $\\sigma'=\\Gamma(\\beta_n)(\\sigma)$. For each $z\\in M$, evaluation gives $e_z(\\sigma)=\\theta_{n,n}(u(z))$ and $e_z(\\alpha(n-2c)\\sigma')=\\delta_{2c}\\theta_{n,n}(u(z))$. Indeed the comparison formula in [lem-per-near-projective-dual-comparison] is $(b\\otimes\\lambda)(1\\otimes z)=b\\lambda(z)$, so comparison commutes with evaluation, including all twists.",
+   "uses": [
+    "lem-per-line-twist-double-annihilator-reverse",
+    "lem-per-near-projective-dual-comparison",
+    "lem-per-blowup-uniform-tensor-section-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "0GAC: sigma, sigma-prime, and the omitted factorization; 0GAB evaluation"
+   }
+  },
+  {
+   "text": "Apply the tensor-section bound of [lem-per-blowup-uniform-tensor-section-bound] to $N$ with starting twist $r=n-2c$. Its numerical hypothesis holds by Step 1, and $r-(D-1)c=t$. Thus the image of $\\sigma'$ in $\\Gamma(Y_n,F(t))$ is $\\eta_{N,t}(\\tau)$ for some $\\tau\\in K^t\\otimes_R N$. Since $t=w+c$, every coefficient of a finite tensor expression for $\\tau$ is a finite sum of products from $K^cK^w=K^t$. Expanding these sums writes $\\tau=\\sum_{j\\in J}a_j\\tau_j$ for a finite set $J$, $a_j\\in K^c$, and $\\tau_j\\in K^w\\otimes_R N$. For an expression $\\tau_j=\\sum_l b_{jl}\\otimes\\lambda_{jl}$ define\n$$\\psi_j(z)=\\sum_l b_{jl}\\widetilde{\\lambda_{jl}(z)}\\pmod {K^{n+w}},\\qquad z\\in M,$$\nwhere $\\widetilde{\\lambda_{jl}(z)}$ is any lift from $A$ to $R$. Changing a lift changes the answer by $K^wK^n$; bilinearity of this formula makes it independent of the tensor expression and $A$-linear. Its values lie in $K^w/K^{n+w}$. This is a concrete construction of all required maps.",
+   "uses": [
+    "lem-per-blowup-uniform-tensor-section-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "0GAA parts (4)-(5), followed by 0GAC: tensor coefficient decomposition and evaluation"
+   }
+  },
+  {
+   "text": "Fix $z\\in M$. Evaluate the equality $\\delta_{(D-1)c}(\\sigma')=\\eta_{N,t}(\\sum_j a_j\\tau_j)$ and then apply $\\alpha(t)$. Step 2 and the local formula for evaluation give\n$$\\delta_{(D+1)c}\\theta_{n,n}(u(z))=\\theta_{n,t}\\Bigl(\\sum_j\\mu_{a_j}\\psi_j(z)\\Bigr).$$\nOn the right, a tensor $a_jb_{jl}\\otimes\\lambda_{jl}$ evaluates to $a_jb_{jl}\\widetilde{\\lambda_{jl}(z)}$ modulo $K^{n+t}$. On the left, the compatibility of $\\theta$ with decreasing twists in [lem-per-blowup-uniform-tensor-section-bound] identifies the result with $\\theta_{n,t}(p u(z))$. Since $t\\geq q$, $\\theta_{n,t}$ is injective, so $p u(z)=\\sum_j\\mu_{a_j}\\psi_j(z)$. This holds for every $z$. Finally $t=w+c$ shows $a_jK^{n+w}\\subseteq K^{n+t}$, verifying the stated multiplication maps, and $0\\leq t\\leq n$ verifies the quotient map $p$. Thus the equality is exactly in the quotient modules in the statement, with their $A$-actions.",
+   "uses": [
+    "lem-per-blowup-uniform-tensor-section-bound",
+    "lem-per-near-projective-dual-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "0GAC: final evaluation diagram and equality of ideal quotient representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-blowup-uniform-tensor-section-bound",
+  "lem-per-near-projective-dual-comparison",
+  "lem-per-line-twist-double-annihilator-reverse"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0GAC (lemma-factor-hom), using 0GA6, 0GA7, 0GAA, 0GAB; replace ideal products of modules in the proof by tensor products, and choose D at least 1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "near.?projective|almost.?projective|factor_hom|hom.*divisib|divisib.*hom",
+   "results": "{\"t\": \"2026-10-24T08:07:38Z\", \"tool\": \"grep\", \"query\": \"near.?projective|almost.?projective|factor_hom|hom.*divisib|divisib.*hom\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean\"], \"digest\": \"e0c6171e7ec3c00e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform divisibility of Hom from an almost projective module into quotients of powers of an ideal controlled by the associated graded ring",
+   "results": "{\"t\": \"2026-10-24T08:07:38Z\", \"tool\": \"leansearch\", \"query\": \"Uniform divisibility of Hom from an almost projective module into quotients of powers of an ideal controlled by the associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomogeneousIdeal.ext\", \"HomogeneousSubmodule.ext_iff\", \"HomogeneousSubmodule.mk.injEq\", \"Ideal.IsHomogeneous.top\", \"Ideal.isHomogeneous_iff_forall_subset\", \"HomogeneousIdeal.isHomogeneous\", \"Ideal.homogeneousHull_eq_iSup\", \"HomogeneousSubmodule.isHomogeneous\"], \"digest\": \"d781adefe44dc6fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Projective\", \"LinearMap\"",
+   "results": "{\"t\": \"2026-10-24T08:07:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.Projective\\\", \\\"LinearMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Annihilation of higher cohomology for an almost projective finite module on a blowup gives ideal power divisibility of linear maps between adic quotients",
+   "results": "{\"t\": \"2026-10-24T08:07:41Z\", \"tool\": \"leanfinder\", \"query\": \"Annihilation of higher cohomology for an almost projective finite module on a blowup gives ideal power divisibility of linear maps between adic quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"Ideal.powQuotSuccInclusion\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"Ideal.quotientToQuotientRangePowQuotSucc\", \"Submodule.factorPowSucc\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.transitionMap\"], \"digest\": \"524bebc17bd04c05\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite module over R modulo I^n on which each scalar in I^c factors through a finite free module, maps into I^n modulo I^(2n) become finite sums of I^c multiples of Hom maps after a bounded shift of both ideal exponents",
+   "results": "{\"t\": \"2026-10-24T08:07:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite module over R modulo I^n on which each scalar in I^c factors through a finite free module, maps into I^n modulo I^(2n) become finite sums of I^c multiples of Hom maps after a bounded shift of both ideal exponents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.transitionMap\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"Submodule.factorPow\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.submodule\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\"], \"digest\": \"55b954a8c9fbbbf7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion transition/lifting maps, homogeneous-ideal identities, and ordinary projectivity do not assert finite-sum Hom divisibility with uniform exponent loss."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform divisibility of homomorphisms from finite almost projective modules into ideal-power quotients, with bounds depending only on the associated graded ring",
+   "results": "{\"t\": \"2026-10-24T08:38:17Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform divisibility of homomorphisms from finite almost projective modules into ideal-power quotients, with bounds depending only on the associated graded ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"IsAdicComplete.StrictMono.lift\", \"Ideal.quotientToQuotientRangePowQuotSucc\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\"], \"digest\": \"aa283b91867573af\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion maps and ordinary projectivity do not assert uniform Hom divisibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform divisibility of Hom from near projective modules modulo powers of ideals",
+   "results": "{\"t\": \"2026-10-24T08:38:16Z\", \"tool\": \"leansearch\", \"query\": \"Uniform divisibility of Hom from near projective modules modulo powers of ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.pow_dvd_nthHom_sub\", \"IsHausdorff.casesOn\", \"Hausdorffification\", \"Polynomial.homogenize_dvd\", \"ModuleCat.projective_of_categoryTheory_projective\", \"Submodule.factorPow\", \"Submodule.factorPowSucc\", \"Submodule.projective_of_isUnit\"], \"digest\": \"deac0e7308f73852\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion maps and ordinary projectivity do not assert uniform Hom divisibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"LinearMap\"",
+   "results": "{\"t\": \"2026-10-24T08:38:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"LinearMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion maps and ordinary projectivity do not assert uniform Hom divisibility."
+  },
+  {
+   "tool": "grep",
+   "query": "near.?projective|factor_hom|hom.*divisib|divisib.*hom",
+   "results": "{\"t\": \"2026-10-24T08:38:15Z\", \"tool\": \"grep\", \"query\": \"near.?projective|factor_hom|hom.*divisib|divisib.*hom\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean\"], \"digest\": \"e0c6171e7ec3c00e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion maps and ordinary projectivity do not assert uniform Hom divisibility.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every linear map from an almost projective module to I^n over I^(2n) is divisible by I^c after bounded exponent loss",
+   "results": "{\"t\": \"2026-10-24T08:40:23Z\", \"tool\": \"leanfinder\", \"query\": \"Every linear map from an almost projective module to I^n over I^(2n) is divisible by I^c after bounded exponent loss\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"IsAdicComplete.StrictMono.extend\", \"AdicCompletion.transitionMap\", \"Submodule.factorPow\", \"Submodule.factorPowSucc\"], \"digest\": \"b89769d8b3d964dd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: completion maps and ordinary projectivity do not assert uniform Hom divisibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-graded-power-split-linear-factorization",
+  "date": "2026-10-24",
+  "group": "Q94"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization dependency below ancestor Step 3, through the rig-smooth perturbation branch; precise analytic input to Stacks 0GAQ proof, the linear obstruction bound, here obtained from local-cohomology lemma-factor-hom with a harmless larger loss. The current latest ancestor Step 3 concerns Verdier exchange and does not itself assert this algebraization lemma. More precisely, the 0GAC finite-sum Hom-divisibility input before composing with the specified differential splittings.",
+   "via": [
+    "lem-per-graded-power-split-linear-factorization",
+    "lem-per-power-split-uniform-adic-map-lifting",
+    "lem-per-rig-smooth-presentation-perturbation",
+    "lem-per-g-ring-rig-smooth-algebraization",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-graded-near-projective-hom-divisibility",
+  "worker": "stage1",
+  "group": "Q125",
+  "summary": "Split 0GAC into the uniform tensor-section bound, dual pullback comparison, and double-annihilator reverse map. Explicitly construct quotient-valued maps and verify the evaluation identity. Retain the item statement unchanged; record the source ideal-product error with a counterexample in the report.",
+  "blueprint": "Inherited formal-algebraization dependency below ancestor Step 3, through the rig-smooth perturbation branch; precise analytic input to Stacks 0GAQ proof, the linear obstruction bound, here obtained from local-cohomology lemma-factor-hom with a harmless larger loss. The current latest ancestor Step 3 concerns Verdier exchange and does not itself assert this algebraization lemma. More precisely, the 0GAC finite-sum Hom-divisibility input before composing with the specified differential splittings. The latest ancestor Step 3 is Verdier exchange, not this algebraization lemma: retain the inherited branch without claiming the latest text asserts it. The four steps realize 0GAC along the inherited 0GAQ obstruction-bound dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-e24a9d20d",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e24a9d20d (reviewer sub-agent of L); spot-checked: Read Stacks local-cohomology 0GA6/0GA7/0GAA (all cases and proofs)/0GAB/0GAC (cases d>1, d=1, d=0) and more-algebra section-near-projective. Item statement is unchanged and matches 0GAC: t=n-(1+d)c, w=n-(2+d)c, same numerical hypotheses; the near-projective condition is written as finite-free factorization over R/K^n. Source error confirmed: 0GAA(4)/(5) with the product I^qM is false. Example: R=k[t], K=(t), M=R/(t^n), r>=n gives d=q_0=0 and H^0=t^rR/t^{r+n}R nonzero while K^rM=0. The source's own presentation argument proves the tensor form K^v⊗N, which is what the section-bound node states. Taking d=max(1,actual) is valid: it uses case (4) when the actual d is 0 or 1. Checked node 1 against 0GA7(2) (θ_{n,r} iso for r>=q, all n) and 0GAA, with edge cases K=R, K=0 (needs q>=1), nilpotent K and c=0. Node 2: N=Hom(M,A) is finite since A is Noetherian, and is near-projective by dualizing. Naturality of α plus iso on finite free modules kills the sectionwise kernel/cokernel on affines, hence the sheaf cokernel; no flatness is needed. Node 3 is the 'small detail omitted' (D5): locally β(y)=l^c x with α(x)=l^c y_0, independent of x; under basis change u (x'=u^{-c}x) it glues; αβ=δ_{2c} and βα(2c)=δ_{2c} hold. Steps: (1) J O_{Y_n}=im s_n^{⊗c}; inequalities give w>=0, t>=q, n-2c>=q+(D-1)c. (2) σ is built from χ via L invertible; evaluation commutes with α and δ. (3) τ is expanded through K^t=K^cK^w; ψ_j is well defined (lift changes by K^wK^n, bilinear). (4) Left side via θ/δ compatibility, right side via R-linearity of θ, then injectivity of θ_{n,t}. DAG duplicate search (rg -L over tags 0GA6–0GAC, 0G9x, near-projective, dual/𝓗om pullback, annihilator-reverse): only the citer and adic-map-lifting touch this source. lem-weil-pbc-kernel-cokernel-annihilated-mod-ideal is a one-ring version with no line module or gluing. No restated clauses, no SGA, no cycle; off-unit deps are definitions only, no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedNearProjectiveHomDivisibility",
+  "declaration": "Ideal.exists_graded_nearProjective_hom_divisibility",
+  "declarations": [
+   "Ideal.homDivisibilityQuotientMap",
+   "Ideal.homDivisibilityQuotientMul"
+  ],
+  "file": "lean/Sheaf/RingTheory/GradedNearProjectiveHomDivisibility.lean",
+  "statement": "theorem exists_graded_nearProjective_hom_divisibility (R₀ : Type u) [CommRing R₀] [IsNoetherianRing R₀] (K₀ : Ideal R₀) : ∃ D q : ℕ, ∀ (R : Type v) [CommRing R] [IsNoetherianRing R] (K : Ideal R) (e : K.associatedGraded ≃+* K₀.associatedGraded), (∀ j : ℕ, Set.range (fun x : K.associatedGradedPiece j => e (DirectSum.of _ j x)) = Set.range (DirectSum.of (fun k : ℕ => K₀.associatedGradedPiece k) j)) → ∀ (n c : ℕ) (hcn : c ≤ n) (hb : max (q + (D + 1) * c) ((D + 2) * c) ≤ n) (hzero : D = 0 → q + 2 * c ≤ n) (M : Type z) [AddCommGroup M] [Module (R ⧸ K ^ n) M] [Module.Finite (R ⧸ K ^ n) M], (∀ a : (K ^ c : Ideal R), ∃ (r : ℕ) (f : M →ₗ[R ⧸ K ^ n] (Fin r → R ⧸ K ^ n)) (g : (Fin r → R ⧸ K ^ n) →ₗ[R ⧸ K ^ n] M), ∀ x : M, g (f x) = Ideal.Quotient.mk (K ^ n) a.1 • x) → ∀ u : M →ₗ[R ⧸ K ^ n] ((K ^ n : Ideal R) ⧸ (K ^ n • ⊤ : Submodule R (K ^ n : Ideal R))), ∃ (m : ℕ) (a : Fin m → (K ^ c : Ideal R)) (ψ : Fin m → M →ₗ[R ⧸ K ^ n] ((K ^ (n - (D + 2) * c) : Ideal R) ⧸ (K ^ n • ⊤ : Submodule R (K ^ (n - (D + 2) * c) : Ideal R)))), (homDivisibilityQuotientMap K n n (n - (D + 1) * c) (Nat.sub_le _ _)).comp u = ∑ j : Fin m, (homDivisibilityQuotientMul K n c (n - (D + 2) * c) (n - (D + 1) * c) (by have hn := (le_max_right (q + (D + 1) * c) ((D + 2) * c)).trans hb simp only [Nat.add_mul, Nat.one_mul, Nat.two_mul] at * omega) (a j)).comp (ψ j)",
+  "branch": "sheaf-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-145c53e34",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Read node, Stacks 0GAC/section-uniform (local-cohomology.tex l.4727, 5114) and more-algebra 0G92/0G93, the 3 stmt_dep records and AssociatedGradedRing.lean. Only the item lean field changed (diffed vs side-live; no prior record); statement verbatim in file. Clause-by-clause: ∃ D q placed before all (R,K,e) data gives graded-iso invariance; degree-preserving iso = RingEquiv plus per-degree range equality; hb/hzero/hcn are the node and source bounds exactly; A=R⧸K^n; Module.Finite M; near-projective = ∀ a∈K^c ∃ r f g on Fin r→A with g∘f = mk a •; K^r/K^(n+r) = K^r ⧸ (K^n•⊤) with Mathlib's R⧸I action (Torsion/Basic:648); p = mapQ of inclusion and μ_a = mapQ of mult-by-a via extendScalarsOfSurjective (real canonical data); the inline omega only types t=c+w; conclusion over Fin m is an equality of A-linear maps. Edge cases n=0, c=0, D=0, n=(D+2)c (w=0), K=⊤/⊥, zero module all covered. Universes u v z independent; no extra assumptions; docstrings carry source place and blueprint id, and the theorem docstring follows the 4 proof steps; sorry only; no duplicate found (rg Sheaf/WeilConjectures, recorded Mathlib searches). No compile run (no changes). No findings."
+ }
+}

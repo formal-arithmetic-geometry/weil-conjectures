@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-finite-dominant-normal-base-universally-open",
+ "kind": "statement",
+ "title": "Finite dominant maps to a normal locally Noetherian base are universally open",
+ "statement": "Let $q:V\\to B$ be a finite dominant morphism of integral schemes [def-pc-integral-scheme, def-weil-finite-integral-morphism]. Dominant means that its image is dense. Suppose $B$ is locally Noetherian [pqf-def-locnoeth] and normal, meaning that every local ring of $B$ is an integrally closed domain. Then $q$ is universally open: for every scheme $B\\prime$ and every morphism $B\\prime\\to B$, the projection $V\\times_B B\\prime\\to B\\prime$ [def-pc-fibre-product] maps open subsets to open subsets.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0F32, lemma-quasi-finite-Noetherian-universally-open, finite integral dominant specialization; normal targets are geometrically unibranch by properties.tex Tag 0BQ3, lemma-normal-geometrically-unibranch"
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-pc-fibre-product",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-finite-dominant-normal-affine-chart-rings] to $q$. Choose its nonempty affine cover $B=\\bigcup_iU_i$, $U_i=\\operatorname{Spec}(A_i)$, with $q^{-1}(U_i)=\\operatorname{Spec}(C_i)$. The restricted maps are induced by inclusions $A_i\\subseteq C_i$ of domains, with $A_i$ Noetherian and normal and $C_i$ finite as an $A_i$-module.",
+   "uses": [
+    "lem-sfb-finite-dominant-normal-affine-chart-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030B, lemma-normality-is-local, (3) implies (1), applied to affine chart rings; finite affine inverse images: morphisms.tex Tag 01WH, definition-integral; affine stalks: schemes.tex Tag 01HV, lemma-spec-sheaves (6). This is the affine-chart preparation for more-morphisms.tex Tag 0F32, lemma-quasi-finite-Noetherian-universally-open, finite normal case."
+   }
+  },
+  {
+   "text": "For every $i$ choose finite module generators of $C_i$ over $A_i$. Apply [lem-sfb-finite-domain-polynomial-extension-data] to this inclusion and these generators. For every $n\\ge0$ it gives an inclusion of domains $A_n=A_i[t_1,\\ldots,t_n]\\subseteq C_n=C_i[t_1,\\ldots,t_n]$, where $A_n$ is normal and Noetherian and $C_n$ is integral and finitely presented over $A_n$, with the same constant module generators.",
+   "uses": [
+    "lem-sfb-finite-domain-polynomial-extension-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A, lemma-polynomial-domain-normal; Tag 00FN, lemma-Noetherian-permanence; Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation (3); Tag 00GK, lemma-finite-is-integral. The coefficientwise map and unchanged module generators are the elementary polynomial calculation in the finite affine specialization of more-morphisms.tex Tag 0F32, lemma-quasi-finite-Noetherian-universally-open."
+   }
+  },
+  {
+   "text": "We now have an inclusion of domains $A_n\\subseteq C_n$, with $A_n$ normal and $C_n$ integral over it. The going-down theorem supplies, for every prime chain $\\mathfrak p\\subseteq\\mathfrak p\\prime$ in $A_n$ and every prime $\\mathfrak q\\prime$ of $C_n$ above $\\mathfrak p\\prime$, a prime $\\mathfrak q\\subseteq\\mathfrak q\\prime$ above $\\mathfrak p$. Since $C_n$ is finitely presented over $A_n$, the finitely-presented going-down openness criterion shows that $\\operatorname{Spec}(C_n)\\to\\operatorname{Spec}(A_n)$ is open. This holds for every $n\\geq0$ and every chart $i$.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral",
+    "lem-sfb-going-down-finitely-presented-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00H8, proposition-going-down-normal-integral, then Tag 00I1, proposition-fppf-open, second assertion"
+   }
+  },
+  {
+   "text": "For each $i$, apply the polynomial test to $A_i\\to C_i$, using the openness established for every $n$ in step 3. It gives universal openness of $\\operatorname{Spec}(C_i)\\to\\operatorname{Spec}(A_i)$, so all its base changes by arbitrary schemes are open. In particular the auxiliary base schemes need not remain normal, reduced, or locally Noetherian.",
+   "uses": [
+    "lem-sfb-polynomial-test-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, (3) => (1), affine specialization"
+   }
+  },
+  {
+   "text": "Let $h:B\\prime\\to B$ be any scheme morphism and $p:V\\times_B B\\prime\\to B\\prime$ its projection. The inverse images $U_i\\prime=h^{-1}(U_i)$ form an open cover of $B\\prime$. The fibre-product universal property identifies $p^{-1}(U_i\\prime)\\to U_i\\prime$ with the base change of $\\operatorname{Spec}(C_i)\\to\\operatorname{Spec}(A_i)$ along $U_i\\prime\\to U_i$; the projections agree because both satisfy the same two projection equations. By step 4 this restricted map is open. For any open $O\\subseteq V\\times_B B\\prime$, the equality $p(O)\\cap U_i\\prime=p|_{p^{-1}(U_i\\prime)}(O\\cap p^{-1}(U_i\\prime))$ shows that $p(O)$ is open on every member of an open cover, hence open. This proves universal openness of $q$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0F31, lemma-test-universally-open, first affine-local reduction in its proof; elementary gluing on the target"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-dominant-normal-affine-chart-rings",
+  "lem-sfb-finite-domain-polynomial-extension-data",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-sfb-going-down-finitely-presented-open",
+  "lem-sfb-polynomial-test-universally-open",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0F32 and 0F31: polynomial test for universal openness; in the finite normal affine case lift generalizations directly by algebra.tex Tag 00H8 and use Tag 00I1, avoiding the etale finite-neighbourhood reduction needed for general quasi-finite maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsOpenMap\", \"IsFinite\"",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern relative normalization, flat openness, generalizing-map openness, or topological normality; none supplies universal openness for a finite dominant map to a normal base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dominant morphism of integral schemes to a normal locally noetherian scheme is universally open",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern relative normalization, flat openness, generalizing-map openness, or topological normality; none supplies universal openness for a finite dominant map to a normal base"
+  },
+  {
+   "tool": "grep",
+   "query": "(universallyOpen|UniversallyOpen|universally_open).*(normal|finite)|(normal|finite).*(universallyOpen|UniversallyOpen|universally_open)",
+   "results": "Actual search returned 1 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern relative normalization, flat openness, generalizing-map openness, or topological normality; none supplies universal openness for a finite dominant map to a normal base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally quasi finite morphism whose components dominate a normal noetherian target is universally open",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.mk, AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion, AlgebraicGeometry.universallyOpen_iff, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.UniversallyOpen.of_flat. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern relative normalization, flat openness, generalizing-map openness, or topological normality; none supplies universal openness for a finite dominant map to a normal base"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyOpen|universally_open",
+   "results": "Actual search returned 10 hits: Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern relative normalization, flat openness, generalizing-map openness, or topological normality; none supplies universal openness for a finite dominant map to a normal base"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normal\", \"open\"",
+   "results": "Actual search returned 12 hits: CompletelyNormalSpace.of_forall_isOpen_normalSpace, completelyNormalSpace_iff_forall_isOpen_normalSpace, OpenNormalAddSubgroup, OpenNormalSubgroup, OpenNormalAddSubgroup.instInfOpenNormalAddSubgroup, OpenNormalAddSubgroup.instPartialOrder, OpenNormalAddSubgroup.instPartialOrderOpenNormalAddSubgroup, OpenNormalAddSubgroup.instSemilatticeInfOpenNormalAddSubgroup. ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern relative normalization, flat openness, generalizing-map openness, or topological normality; none supplies universal openness for a finite dominant map to a normal base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dominant morphism of integral schemes is open after arbitrary base change when the target is normal noetherian",
+   "results": "Actual hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec. Generalizing-map openness and relative-normalization facts, no normal-target universal-openness theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: the generalizing-map criterion would require proving the universal going-down assertion; it does not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "UniversallyOpen|isOpenMap_of_generalizingMap|HasGoingDown",
+   "results": "Actual search: 23 hits; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean. Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization, finite-integral permanence and flat-openness results do not yield the item in one specialization; no universal normal-target going-down theorem found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral finite dominant map to a normal scheme is universally open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.UniversallyOpen.eq, AlgebraicGeometry.Scheme.Hom.isOpenMap, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.UniversallyOpen.universally_isOpenMap, AlgebraicGeometry.UniversallyOpen.mk, AlgebraicGeometry.isOpenMap_of_generalizingMap, AlgebraicGeometry.universallyOpen_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization, finite-integral permanence and flat-openness results do not yield the item in one specialization; no universal normal-target going-down theorem found"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.UniversallyOpen, AlgebraicGeometry.IsFinite",
+   "results": "Actual search: 0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization, finite-integral permanence and flat-openness results do not yield the item in one specialization; no universal normal-target going-down theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dominant morphisms of integral schemes with normal locally noetherian target are universally open",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.IsFinite.instIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.IsIntegralHom",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization, finite-integral permanence and flat-openness results do not yield the item in one specialization; no universal normal-target going-down theorem found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite integral dominant morphism to a normal scheme is open after every base change without flatness",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.IsIntegralHom",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization, finite-integral permanence and flat-openness results do not yield the item in one specialization; no universal normal-target going-down theorem found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-normal-relative-curve-model",
+  "date": "2026-10-22",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants",
+   "via": [
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-dominant-normal-base-universally-open",
+  "worker": "stage1",
+  "summary": "Rebased the retained Q37 two-node re-split for the 2026-10-22 16:27 UTC return of head d38f3d99e26 using the current server DAG. The required initial dry run passed at c45fda004f8 before edits. Current read-clone item is field-for-field equal to baseline.json; its statement, statement dependencies and maintainer-owned records are preserved. The concrete repair replaces old affine-chart and polynomial-extension arguments by two independently schedulable statement-only nodes, retaining their full arguments in report.md and a five-step assembly of 2381 characters. Re-read every assembly citation and supporting statement against the current DAG and the Stacks source; existing quote checks pass and no mathematical hypothesis or citation needs adjustment. Existing search results are reused without repeating unchanged searches.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3), through the finite normal relative curve model: universal openness ensures the full fibre product has a dense generic point after extending constants. The repository ancestor command returns None; retained null from.node and the explicit inherited via chain, with new nodes prepending this item. The direct-images blueprint proof and the chapter/unit records were read; no unit or chapter route is changed. Q37 repair keeps this route and its null nearest blueprint ancestor. New affine and polynomial nodes prepend the item to the inherited via chain and identify the exact old proof steps they serve."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-8a5e26cba",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-8a5e26cba (reviewer sub-agent of L); spot-checked: Fifth copy of the Q37 two-node re-split. The earlier copies d832631c, 69913ae67, 580eaead3 and d38f3d99e were all PASS. Each landing was refused as an unpromoted side completion ('completed in this project's DAG … not in the live DAG'; the last refusal was d38f at 2026-10-23 00:27), which is not a delivery fault. Compared field by field with the d38f snapshot, both new nodes are identical and only split_report changed on the item. The old DAG snapshot was cleaned, so I reread all 13 cited statements in this base: going-down-normal-integral, going-down-finitely-presented-open, polynomial-test-universally-open (arbitrary T, no hypotheses on A, C or T), def-pc-fibre-product, and the finite, integral-scheme, dominant, locally Noetherian, normal-ring and finite-presentation definitions. All uses are still valid. Live and side-live still have the item split with the old 6-step proof, neither new id exists there, and the batch5 re-split note is still released. Re-split rule: old step 1 (775 characters) became affine-chart-rings and old steps 2–3 (1149 characters) became polynomial-extension-data. Old steps 4–6 are kept verbatim, and the assembly is 2381 characters. Neither node restates the item. I read the mathematics in full. Chart node: finite implies affine; preimages are nonempty by density; the rings are domains by integrality; ker φ_i = 0 because V(ker) contains a dense image; A_i is normal by 01HV(6) and 030B (3)⇒(1) (algebra.tex l.8177). Polynomial node: coefficientwise injectivity; regrouping shows the constants generate C_n as a module and as an algebra; 030A, 00FN, 00FP(3) and 00GK give the remaining claims; C_n is never claimed normal. Assembly: 00H8 going down feeds the 00I1 criterion (l.9708–9712 allows going down in place of flatness); the 0F31 (3)⇒(1) polynomial test (more-morphisms l.21726) applies to arbitrary T; the final open-cover gluing is elementary. Edge cases: n=0; r=0 is vacuous; Z⊆Z[i]; a non-normal Z[√−3] is allowed; a closed point into A^1 shows dominance is needed. rg -L duplicate search: the only hits are the one-variable coefficientwise definitions, which are not duplicates. No SGA, no cycle, no new tool_uses, no fixes. Maintainer note: please promote or land this re-split instead of re-dispatching it a sixth time."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteDominantNormalUniversallyOpen",
+  "declaration": "AlgebraicGeometry.universallyOpen_of_finite_dominant_normal",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDominantNormalUniversallyOpen.lean",
+  "statement": "theorem universallyOpen_of_finite_dominant_normal {V B : Scheme.{u}} [IsIntegral V] [IsLocallyNoetherian B] (q : V ⟶ B) [IsFinite q] [IsDominant q] (hB : IsNormalScheme B) : UniversallyOpen q",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13aaf11c1",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Item diff vs live: only lean record + stmt_deps gains landed def-sbc-normal-dominant-galois (allowed: STMT_DEPS MAY GAIN LANDED NODES). Lean universallyOpen_of_finite_dominant_normal: {V B : Scheme.{u}} [IsIntegral V] [IsLocallyNoetherian B] (q) [IsFinite q] [IsDominant q] (hB : IsNormalScheme B) : UniversallyOpen q matches every clause; B integral via IsNormalScheme's IsIntegral conjunct, normality = IsDomain ∧ IsIntegrallyClosed stalks exactly; UniversallyOpen = universally IsOpenMap over all pullbacks (arbitrary B'). No extra hypotheses; edge cases (empty excluded by integrality as node requires, field extensions, identity, arbitrary B') fine; single universe u = Mathlib convention. True by Stacks 0F32+0BQ3; node route 00H8/00I1/0F31 sound. No Mathlib normal-scheme notion, no duplicate theorem in project/DAG. sorry-only, docstrings with source, blueprint id and 6 proof steps, lines ≤100, proof-dep plain imports exist (brief §3 rule 7), statement verbatim. Report has Worker report + Second reading sections. No compile rerun (no file changed)."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

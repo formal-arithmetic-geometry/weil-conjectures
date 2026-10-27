@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-nodal-ideal-scalar-gluing",
+ "kind": "statement",
+ "title": "Componentwise scalar gluing for a nodal cluster ideal",
+ "statement": "Let $k$ be algebraically closed [def-weil-algebraic-closure] and let $X$ be a nonempty projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-pure-dimension]. Assume $X$ is smooth except at nodes, meaning that every singular closed point has completed local $k$-algebra $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Let $C$ be its finite set of irreducible components with their reduced structures [def-weil-irreducible-components]. Let $L$ be an invertible module [def-sc-invertible-module], let $T\\subset X$ be a zero-dimensional closed subscheme, possibly empty, with ideal $I_T$ [def-sbc-closed-immersion-ideal-sheaf], and let $s\\in H^0(X,I_T\\otimes L)$ be nonzero at every component generic point [def-pur-sheaf-tensor-product, def-sc-ringed-space-module-cohomology]. Regard these sections as sections of $L$. Define $W_s$ to be the vector space of sections $t\\in H^0(X,I_T\\otimes L)$ such that $t|_\\Gamma=a_\\Gamma s|_\\Gamma$ for a scalar $a_\\Gamma\\in k$ on every $\\Gamma\\in C$.\nAt each node $x$ joining distinct components $\\Gamma,\\Delta$, choose a local frame of $L$ and an ordering of the completed branches. Write $R_x=k[[u,v]]/(uv)\\hookrightarrow k[[u]]\\times k[[v]]$, $J_x=I_{T,x}R_x$, and write the completed germ of $s$ as $(f_x,g_x)\\in J_x$. Call $x$ constrained if $(f_x,0)\\notin J_x$, where membership includes membership in the equal-constant subring $R_x$. Then the coefficient map\n$$W_s\\longrightarrow k^C,\\qquad t\\longmapsto(a_\\Gamma)_{\\Gamma\\in C}$$\nis injective and has image exactly\n$$\\{a\\in k^C:a_\\Gamma=a_\\Delta\\text{ at every constrained node joining }\\Gamma,\\Delta\\}.$$\nThe condition of being constrained is independent of the frame, branch ordering, and chosen nodal presentation. Self-nodes impose no condition on the single component coefficient. No reducedness, Cartier, or smooth-support condition on $T$, and no connectedness hypothesis on $X$, is required.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBW (lemma-split-node), together with varieties.tex Tag 0C3V (lemma-normalization-same-after-completion) and algebra.tex Tag 00MC (lemma-completion-faithfully-flat). Agent-written coefficient-space consequence for an arbitrary ideal twist; supports Franciosi--Tenni Lemma 3.6(i), printed p.241."
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-irreducible-components",
+  "def-sc-invertible-module",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-kun-projective",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-pbc-reduced-normalization",
+  "def-trf-marked-ideal-order",
+  "def-pc-module-stalk-functor",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-sc-scalar-global-sections-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Projectivity implies properness, so the nodal normalization model makes $X$ Noetherian, with finitely many components and nodes. Put $F=I_T\\otimes L$ and $E=\\prod_{\\Gamma\\in C}i_{\\Gamma,*}(L|_\\Gamma)$, where $i_\\Gamma:\\Gamma\\hookrightarrow X$. Restriction defines $F\\to L\\to E$. In a frame of $L$ at $x$, write $A=\\mathcal O_{X,x}$ and let $P_\\Gamma$ be the stalk ideal of a component through $x$. The component-stalk calculus gives $E_x=\\prod_{\\Gamma\\ni x}A/P_\\Gamma$ and $\\bigcap_{\\Gamma\\ni x}P_\\Gamma=0$, since their reduced union is $X$. Here the stalk of a finite product is the product of stalks: choose representatives on a common intersection of finitely many neighbourhoods. Thus $A\\to E_x$ is injective, and $F_x=I_{T,x}\\subset A$ injects too. Exactness detected on stalks proves $F\\hookrightarrow E$. All these identifications are in frames; changing frame multiplies every entry by the same unit.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-sfb-closed-component-stalk-calculus",
+    "def-sc-invertible-module",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBW (lemma-split-node), nodal setup; modules.tex Tag 01AG (lemma-abelian); morphisms.tex Tag 01WC (lemma-locally-projective-proper). Agent assembly using the cited component-stalk statements."
+   }
+  },
+  {
+   "text": "For each component $\\Gamma$, apply the nodal subcurve-boundary theorem with $Y=\\Gamma$, $Z$ the reduced union of the other components, and $N=X$. A point on two distinct components lies in $Y\\cap Z$ and is therefore a closed node. At a node the split-node component theorem gives exactly two possibilities: one minimal prime, equal to zero, or two minimal primes whose extended ideals in $R=\\widehat A$ are $(u),(v)$. In the first case the two formal branches belong to the same component. Consequently, whenever only one component $\\Gamma$ passes through $x$ (including a self-node), step 1 gives $E_x=A$. The coefficient tuple $q=(a_\\Gamma s|_\\Gamma)_\\Gamma\\in H^0(X,E)$ then has germ $a_\\Gamma s_x\\in I_{T,x}=F_x$ in a frame. No restriction on $a_\\Gamma$ occurs there.",
+   "uses": [
+    "lem-trf-nodal-subcurve-boundary",
+    "lem-trf-split-node-component-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E38 (lemma-closed-subscheme-nodal-curve), statement (2) and proof, the distinction between one and two irreducible components through the point; Tag 0CBW (lemma-split-node)."
+   }
+  },
+  {
+   "text": "Now let $x$ join distinct components, and put $I=I_{T,x}\\subset A$. By the completed normalization model $A$ is Noetherian local of dimension one. Its map to $R=\\widehat A$ is faithfully flat. Tensor the exact sequence $0\\to I\\to E_x\\to E_x/I\\to0$ with $R$; flat tensor exactness identifies the kernel of $E_x\\otimes_A R\\to(E_x/I)\\otimes_A R$ with the image of $I\\otimes_A R$. Faithful flat universal injectivity applied to the module $E_x/I$ shows that $q_x$ lies in $I$ if and only if $q_x\\otimes1$ lies in that image. The split-node component theorem identifies $E_x\\otimes_A R=(R/(v))\\times(R/(u))=k[[u]]\\times k[[v]]$, ordered according to the components. Under this identification the map $I\\otimes_A R\\to E_x\\otimes_A R$ has image precisely $IR=J_x$ in the equal-constant subring: its elements are sums of products of images of elements of $I$ with elements of $R$. The completed tuple is $(a_\\Gamma f_x,a_\\Delta g_x)$. Thus local liftability into the full ideal is equivalent to membership of this pair in $J_x$.",
+   "uses": [
+    "lem-sfb-nodal-completed-normalization-model",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-trf-split-node-component-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBW (lemma-split-node), with varieties.tex Tag 0C3V (lemma-normalization-same-after-completion); algebra.tex Tags 00MC (lemma-completion-faithfully-flat), 00HD (lemma-flat), 05CK (lemma-faithfully-flat-universally-injective)."
+   }
+  },
+  {
+   "text": "In the product of branch rings abbreviate $J=J_x$, $(f,g)=(f_x,g_x)$ and $a=a_\\Gamma$, $b=a_\\Delta$. Since $(f,g)\\in J$, the identity $(af,bg)=b(f,g)+(a-b)(f,0)$ gives $(af,bg)\\in J$ if and only if $(a-b)(f,0)\\in J$. If $(f,0)\\in J$, every pair of scalars works. Otherwise this happens exactly when $a=b$: for $a-b\\ne0$, multiplication by its inverse in $k$ would put $(f,0)$ in $J$. This calculation takes place in the product but tests membership in $J\\subset R$; it therefore includes the equal-constant requirement, even when $(f,0)$ is not in $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent linear-algebra calculation in the completed branch-ring model of Tag 0CBW (lemma-split-node), retaining an arbitrary ideal rather than just the structure ring."
+   }
+  },
+  {
+   "text": "For any tuple $a\\in k^C$ satisfying the constrained-node equalities, form the section $q$ of $E$ from step 2. Steps 2--4 show that $q_x$ belongs to the image of $F_x$ at every point $x$. Stalk exactness identifies this image with the stalk of the image subsheaf. More explicitly, choose a preimage germ at $x$, represent it by a section of $F$ on a neighbourhood, and shrink until its image equals $q$. These local lifts agree on overlaps by the injection $F\\hookrightarrow E$ in step 1, so the sheaf axiom glues them to a unique $t\\in H^0(X,F)$ mapping to $q$. Its restrictions are the prescribed scalar multiples, hence $t\\in W_s$. Conversely, if $t\\in W_s$, its image in $E$ is this tuple, so its germs lie in $F_x$; steps 3--4 force equality of its two coefficients at every constrained node. This proves the asserted image exactly.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent assembly by the sheaf axiom from modules.tex Tag 01AG (lemma-abelian), stalk images and exactness, and the preceding completed local calculation."
+   }
+  },
+  {
+   "text": "The coefficients of a section in $W_s$ are unique: evaluate $(a_\\Gamma-b_\\Gamma)s|_\\Gamma=0$ at the component generic point, where $s$ is nonzero; a nonzero scalar acts invertibly, so $a_\\Gamma=b_\\Gamma$. The coefficient assignment is linear by addition and scalar multiplication of these restrictions. If its value is zero, every component restriction is zero, and the injection into $E$ in step 1 makes the section zero. It is thus the claimed injective linear map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent linear-algebra consequence of generic nonvanishing and the restriction injection in step 1."
+   }
+  },
+  {
+   "text": "Finally, the constrained condition is intrinsic to the local data. A frame change multiplies $(f,g)$ and its one-branch part by a unit of $R$; an ideal is stable under this unit and its inverse, so membership is unchanged. Swapping branches replaces $(f,0)$ by $(0,g)$, and $(0,g)=(f,g)-(f,0)$ gives equivalent membership. The split-node component theorem identifies the two branch rings canonically as the two quotients of $R$ by its minimal primes. An isomorphism between nodal presentations permutes these primes, induces the corresponding quotient isomorphisms, sends $J$ to its presented ideal and sends the projected pair to the corresponding projected pair (possibly swapped). Hence it preserves the same membership test. Step 2 already treats self-nodes with their single component coefficient. The proof used no condition on the finite subscheme beyond its ideal and no connectedness assumption; it applies also to $T=\\varnothing$, to arbitrary nonreduced clusters, and component by component on a disconnected $X$.",
+   "uses": [
+    "lem-trf-split-node-component-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Agent invariance argument using the canonical component quotients in Tag 0E38 (lemma-closed-subscheme-nodal-curve) and Tag 0CBW (lemma-split-node)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "lem-kun-projective-implies-proper",
+  "lem-sfb-closed-component-stalk-calculus",
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-split-node-component-normalization",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent coefficient-space assembly from Tags 0CBW and 0E38; completion reflection uses algebra.tex Tags 00MC, 00HD and 05CK. This is a supporting argument for the cluster-ideal gluing input, not a theorem quoted verbatim from Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"normalization\"",
+   "results": "{\"t\": \"2026-10-23T18:01:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"normalization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general normalization, ordinary ideal/sheaf construction or scalar operations, morphism ranks, simplicial ranks, valuation ranks, or ramification; none states the nodal-ideal coefficient criterion or the canonical-cluster theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nodal curve ideal sheaf branchwise constant multiples of a regular section glue if and only if their germs lie in the completed ideal",
+   "results": "{\"t\": \"2026-10-23T18:01:40Z\", \"tool\": \"leanfinder\", \"query\": \"Nodal curve ideal sheaf branchwise constant multiples of a regular section glue if and only if their germs lie in the completed ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\", \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.StructureSheaf.const_ext\", \"AlgebraicGeometry.IsAffineOpen.mem_ideal_iff\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\"], \"digest\": \"f8a83cdb842a0ae0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general normalization, ordinary ideal/sheaf construction or scalar operations, morphism ranks, simplicial ranks, valuation ranks, or ramification; none states the nodal-ideal coefficient criterion or the canonical-cluster theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "branchwise|subcanonical|nodal.*ideal",
+   "results": "{\"t\": \"2026-10-23T18:02:26Z\", \"tool\": \"grep\", \"query\": \"branchwise|subcanonical|nodal.*ideal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Sites/BigZariski.lean\"], \"digest\": \"04b6434741a38dbf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general normalization, ordinary ideal/sheaf construction or scalar operations, morphism ranks, simplicial ranks, valuation ranks, or ramification; none states the nodal-ideal coefficient criterion or the canonical-cluster theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gluing componentwise scalar multiples of a section of an ideal sheaf on a nodal curve using completed local branches",
+   "results": "{\"t\": \"2026-10-23T18:02:26Z\", \"tool\": \"leansearch\", \"query\": \"Gluing componentwise scalar multiples of a section of an ideal sheaf on a nodal curve using completed local branches\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"ModuleCat.Tilde.smul_section_apply\", \"TopCat.Sheaf.interUnionPullbackConeLift\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"ModuleCat.Tilde.sections_smul_localizations_def\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\"], \"digest\": \"52057d40543fd038\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general normalization, ordinary ideal/sheaf construction or scalar operations, morphism ranks, simplicial ranks, valuation ranks, or ramification; none states the nodal-ideal coefficient criterion or the canonical-cluster theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular sections of a rank one sheaf on a nodal curve can be rescaled independently on components exactly when the rescaled pair belongs to its completed stalk",
+   "results": "{\"t\": \"2026-10-23T18:02:28Z\", \"tool\": \"leanfinder\", \"query\": \"Regular sections of a rank one sheaf on a nodal curve can be rescaled independently on components exactly when the rescaled pair belongs to its completed stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"ModuleCat.Tilde.smul_stalk_no_nonzero_divisor\", \"ModuleCat.Tilde.isUnit_toStalk\", \"AlgebraicGeometry.LocallyRingedSpace.notMem_prime_iff_unit_in_stalk\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"AlgebraicGeometry.Scheme.germToFunctionField\", \"ModuleCat.Tilde.exists_const\"], \"digest\": \"caf390051c21c7f8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern general normalization, ordinary ideal/sheaf construction or scalar operations, morphism ranks, simplicial ranks, valuation ranks, or ramification; none states the nodal-ideal coefficient criterion or the canonical-cluster theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an ideal on a nodal curve can be rescaled on its irreducible components with equality constraints at nodes",
+   "results": "{\"t\": \"2026-10-23T19:13:15Z\", \"tool\": \"leanfinder\", \"query\": \"A section of an ideal on a nodal curve can be rescaled on its irreducible components with equality constraints at nodes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\"], \"digest\": \"1d0b5ca4abf9682a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass coordinate ideals or general ideal sheaf gluing and fraction representations; none gives the nodal ideal scalar constraint criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal.*ideal|branchwise|scalar.*gluing",
+   "results": "{\"t\": \"2026-10-23T19:13:44Z\", \"tool\": \"grep\", \"query\": \"nodal.*ideal|branchwise|scalar.*gluing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no matches for the nodal ideal, branchwise or scalar gluing pattern in AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of an ideal on a nodal curve glue from scalar multiples on its components",
+   "results": "{\"t\": \"2026-10-23T19:13:44Z\", \"tool\": \"leansearch\", \"query\": \"Sections of an ideal on a nodal curve glue from scalar multiples on its components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"ModuleCat.Tilde.smul_section_apply\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.Scheme.coprodPresheafObjIso\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"ModuleCat.Tilde.sections_smul_localizations_def\"], \"digest\": \"9fed995563afe6ec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: general ideal-sheaf subscheme gluing and tilde scalar operations; no nodal componentwise ideal membership theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IdealSheafData\"",
+   "results": "{\"t\": \"2026-10-23T19:13:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"IdealSheafData\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData\", \"AlgebraicGeometry.Scheme.IdealSheafData.instAdd\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice\", \"AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring\", \"AlgebraicGeometry.Scheme.IdealSheafData.instMul\", \"AlgebraicGeometry.Scheme.IdealSheafData.instOne\", \"AlgebraicGeometry.Scheme.IdealSheafData.instPartialOrder\"], \"digest\": \"38455c629d39c947\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: IdealSheafData and its algebraic instances define general ideal data; no componentwise scalar gluing criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing sections on a reduced curve from its irreducible components by testing their image in the quotient module after faithfully flat completion",
+   "results": "{\"t\": \"2026-10-23T19:14:37Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing sections on a reduced curve from its irreducible components by testing their image in the quotient module after faithfully flat completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι_ι\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\"], \"digest\": \"d9d3a3fe6f848991\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Weierstrass coordinate ideals or general ideal sheaf gluing and fraction representations; none gives the nodal ideal scalar constraint criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-rank-one-cluster-dimension",
+  "date": "2026-10-24",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Theorem 2.7 (Cartier subcanonical case), printed pp.40--41, and Section 4 Proposition 4.1 proof, printed p.48, two-connected case; replace the injective map by its Cartier zero divisor and use Riemann--Roch. Supporting input: Theorem 3.7, inequality (9), printed pp.242--246, specialized to reduced nodal curves; numerical two-connectedness is boundary-node length; Lemma 3.6(i),(ii), pp.240--242, with B=X=X_red; only the first of its two degree lower bounds is needed. Supporting local input for Franciosi--Tenni Lemma 3.6(i), printed p.241: gluing scalar multiples of one section across the nodes, retaining membership in the full cluster ideal.",
+   "via": [
+    "lem-sfb-component-rank-one-cluster-dimension",
+    "lem-sfb-subcanonical-splitting-clifford-bound",
+    "lem-sfb-nodal-two-connected-clifford",
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nodal-ideal-scalar-gluing",
+  "worker": "stage1",
+  "summary": "Seven-step proof of the scalar coefficient criterion by embedding the full ideal twist in the product of component line bundles, reflecting local image membership through faithful flat completion, and calculating the two-branch scalar constraint. All inputs already have nodes; no new nodes. Corrected doubled TeX escaping only; mathematical statement unchanged.",
+  "blueprint": "The inherited provenance points to det-thm-sf-ctf-stability-direct-images (3), the plurinodal/stable-curve supporting chain and Franciosi--Tenni Lemma 3.6(i). Read the current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). This split realizes the local cluster-ideal scalar-gluing prerequisite, as specified by inherited blueprint.from.place, not a change to the unit route. blueprint_refs.py ancestor returns None for the inherited created.item chain; preserved its null ancestor and explicit place. Whole-blueprint searches componentwise scalar, split node, nodal found no equivalent blueprint assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-nodal-subcurve-boundary",
+    "why": "Locates intersections of distinct reduced components at closed nodes; a generic curve tool already used by the parent, with no same-unit statement giving this boundary fact."
+   },
+   {
+    "node": "lem-trf-split-node-component-normalization",
+    "why": "Identifies completed reduced component quotients with the two actual branch rings, distinguishing a self-node. The same-unit normalization model does not state these component ideal identifications."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Identifies stalk images and detects monomorphisms for ordinary module sheaves; this is a general sheaf tool, not an alternative geometric route."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Converts the projective hypothesis to the proper hypothesis of the same-unit nodal model; a general scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-nodal-subcurve-boundary",
+  "lem-trf-split-node-component-normalization",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-0d653a864",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-0d653a864 (reviewer sub-agent of L); spot-checked: Pass: the 7-step split adds no new nodes, the statement is mathematically unchanged (only TeX escaping fixed), and I made no fixes. The parent lem-sfb-component-rank-one-cluster-dimension uses the statement exactly as stated. The 12 stmt_deps equal the statement's bracket citations, the 11 proof_deps equal the union of the step uses, and no SGA is cited. Checks per step: step 1 gives F into the product of i_{Γ*}L|_Γ using the component-stalk calculus (components through x match minimal primes; their ideals meet in 0 because X is reduced) and detects the monomorphism on stalks. Step 2 uses subcurve-boundary with N=X (hypotheses hold) and the split-node dichotomy; with a single component through x the stalk is A, so self-nodes impose nothing. Step 3: faithfully flat completion, exactness and universal injectivity reduce membership of q_x in I to membership in IR=J inside R; E_x⊗R=R/(v)×R/(u) and R injects by flatness. Steps 4 to 6 (subtraction identity, gluing with converse, uniqueness of coefficients) and step 7 (frame, branch order and presentation independence) are correct. Small cases in k[[u,v]]/(uv): J=R with s=(1,1) is constrained; J=(u+v) with s=(u,v) is constrained although s vanishes at the node; J=(u,v) with s=(u,v) and J=(u,v)^2 with s=(u^2,v^2) are free. Advisory only: steps 2 and 3 do not restate that A is reduced and essentially of finite type, which is immediate because X is reduced and of finite type over k; the k-algebra isomorphism is an item hypothesis. Sources: I read Stacks 0CBW (curves.tex line 4368) and the full statements of every cited node. A dag search for componentwise scalar gluing, constrained node and cluster-ideal phrasing found no duplicate. Batch-5 flags accepted: lem-trf-nodal-subcurve-boundary (0E38), lem-trf-split-node-component-normalization (0CBW/0C3V) and the closure of lem-sfb-nodal-completed-normalization-model all stay inside the generic sk-i-curve-zero curve-algebra nodes. None of them reaches the trace formula, Poincaré duality or their proofs. Accepted tool_uses: subcurve-boundary, split-node normalization, module-stalk-exact and projective-implies-proper are general tools."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalIdealScalarGluing",
+  "declaration": "AlgebraicGeometry.NodalIdealScalarGluing.nodal_ideal_scalar_gluing",
+  "declarations": [
+   "AlgebraicGeometry.NodalIdealScalarGluing.componentι",
+   "AlgebraicGeometry.NodalIdealScalarGluing.twistι",
+   "AlgebraicGeometry.NodalIdealScalarGluing.ambientSection",
+   "AlgebraicGeometry.NodalIdealScalarGluing.completedIdeal",
+   "AlgebraicGeometry.NodalIdealScalarGluing.completedValue",
+   "AlgebraicGeometry.NodalIdealScalarGluing.Constrained",
+   "AlgebraicGeometry.NodalIdealScalarGluing.constrainedAt",
+   "AlgebraicGeometry.NodalIdealScalarGluing.nodal_ideal_scalar_gluing"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalIdealScalarGluing.lean",
+  "statement": "theorem nodal_ideal_scalar_gluing (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) [IsHProjective p] [Nonempty X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, IsClosed ({x} : Set X) → x ∉ p.smoothLocus → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}), ∀ a : k, e (algebraMap _ _ (X.presheaf.Γgerm x (Scheme.Modules.scalarMap p ⊤ a))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) (L : X.Modules) [L.IsInvertible] (T : Scheme.{u}) (i : T ⟶ X) [IsClosedImmersion i] (hdimT : topologicalKrullDim T ≤ 0) (s : Scheme.Modules.scalarObj p (i.ker.toModules ⊗ L) (op ⊤)) (hs : ∀ (C : irreducibleComponents X) (ξ : X), IsGenericPoint ξ C.val → L.presheaf.Γgerm ξ (ambientSection i.ker L s) ≠ 0) : (∃ W : Submodule k (Scheme.Modules.scalarObj p (i.ker.toModules ⊗ L) (op ⊤)), (∀ t, t ∈ W ↔ ∀ C : irreducibleComponents X, ∃ a : k, Scheme.Modules.tensorPullbackTopSection (componentι C) L (ambientSection i.ker L t) = (Scheme.Modules.scalarMap (componentι C ≫ p) ⊤ a) • Scheme.Modules.tensorPullbackTopSection (componentι C) L (ambientSection i.ker L s)) ∧ ∃ c : W →ₗ[k] (irreducibleComponents X → k), (∀ (t : W) (C : irreducibleComponents X), Scheme.Modules.tensorPullbackTopSection (componentι C) L (ambientSection i.ker L t.val) = (Scheme.Modules.scalarMap (componentι C ≫ p) ⊤ (c t C)) • Scheme.Modules.tensorPullbackTopSection (componentι C) L (ambientSection i.ker L s)) ∧ Function.Injective c ∧ (∀ a : irreducibleComponents X → k, a ∈ LinearMap.range c ↔ ∀ x : X, IsClosed ({x} : Set X) → x ∉ p.smoothLocus → ∀ C D : irreducibleComponents X, C ≠ D → x ∈ C.val → x ∈ D.val → ∀ e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj L ≃ₗ[X.presheaf.stalk x] X.presheaf.stalk x, constrainedAt i.ker L s x C D e → a C = a D)) ∧ (∀ x : X, IsClosed ({x} : Set X) → x ∉ p.smoothLocus → ∀ C D : irreducibleComponents X, C ≠ D → x ∈ C.val → x ∈ D.val → ∀ e e' : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj L ≃ₗ[X.presheaf.stalk x] X.presheaf.stalk x, (constrainedAt i.ker L s x C D e ↔ constrainedAt i.ker L s x D C e')) ∧ (∀ x : X, IsClosed ({x} : Set X) → x ∉ p.smoothLocus → ∀ C D : irreducibleComponents X, C ≠ D → x ∈ C.val → x ∈ D.val → ∀ (e : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj L ≃ₗ[X.presheaf.stalk x] X.presheaf.stalk x) (ρ : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1})), (∀ a : k, ρ (algebraMap _ _ (X.presheaf.Γgerm x (Scheme.Modules.scalarMap p ⊤ a))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) → (constrainedAt i.ker L s x C D e ↔ Constrained ((completedIdeal i.ker x).map ρ.toRingHom) (Ideal.span {Ideal.Quotient.mk (Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) (MvPowerSeries.X 1)}) (Ideal.span {Ideal.Quotient.mk (Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) (MvPowerSeries.X 0)}) (ρ (completedValue i.ker L s x e))))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Canonical completed component quotients express the two branch rings: (f,0) lies in J iff some r in J has r-s in the first component ideal and r in the second. The scalar subspace and map are characterized by their membership and restriction formulas. Added only already-landed statement dependencies for the reused component, stalk-ideal, stalk-module, scalar-section and pullback-section interfaces; accepted stage-1 split preserved.",
+  "fixed_by": "NT-stage2-cc-f4e52cf42"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4e52cf42",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Hypotheses, W_s, injective coefficient map, image criterion (intrinsic Constrained = (f,0)∈J in R⊂R/P×R/Q, equal-constant kept) and frame/branch-swap invariance are faithful; 5 added stmt_deps are landed def nodes (allowed). H3 hollow clause: the delivered presentation-invariance conjunct only transported Constrained along an arbitrary ring iso ρ (a tautology), never relating the intrinsic test to the node's coordinate test. FIX: conjunct 3 now states, for closed nonsmooth x on C≠D and every k-compatible ρ and frame e, constrainedAt C D e ↔ Constrained (J.map ρ) (span{mk X1}) (span{mk X0}) (ρ z), i.e. (f,0)∉J in k[[u]]×k[[v]] of any presentation (true by 0CBW minimal-prime identification + swap invariance); docstring step 7 updated; fixes/NodalIdealScalarGluing.lean compiles clean via nt_compile --json (3.1 s); record statement re-read by refit_record."
+ }
+}

@@ -24,37 +24,36 @@
  ],
  "proof": [
   {
-   "text": "Fix $v\\in V$ and a uniformizer $\\pi$ of the trait. Apply the monomial chart theorem to the given regular Noetherian fs log-smooth $V\\to S$. It gives an etale neighbourhood $a:U\\to V$, a point $u$ above $v$, and an etale $S$-map $b:U\\to T$, with $U$ regular affine Noetherian and $T=\\operatorname{Spec}(R[T_1,\\ldots,T_n]/(\\prod_iT_i^{e_i}-\\pi))$, $n\\geq1$, $e_i\\geq0$ not all zero. The trait and its canonical log structure are exactly the ones required by the chart theorem. No change of the trait or of the coefficients is made.",
+   "text": "Fix $v\\in V$ and a uniformizer $\\pi$ of $R$. Apply [lem-per-regular-log-smooth-monomial-chart] with $X=V$ and the given fs log-smooth morphism to the canonically logged trait. It gives a regular affine Noetherian $U$, an etale $a:U\\to V$, a point $u$ with $a(u)=v$, and an etale $S$-morphism $b:U\\to T$, where $T=\\operatorname{Spec}(R[T_1,\\ldots,T_n]/(\\prod_i T_i^{e_i}-\\pi))$, $n\\geq1$ and the nonnegative $e_i$ are not all zero.",
    "uses": [
     "lem-per-regular-log-smooth-monomial-chart"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proposition 3.6.5, printed p.253."
+    "place": "Expose XVI, Proposition 3.6.5, printed p.253, using Proposition 3.6.3, p.252."
    }
   },
   {
-   "text": "The monomial purity theorem makes $T$ regular Noetherian and punctually pure with coefficients $A=\\mathbf F_\\ell$: the uniformizer and the nonzero exponent tuple come from Step 1, and $\\ell$ is invertible in $R$. The same invertibility holds on $U$ and $T$ as $S$-schemes. For each $z\\in U$, apply etale locality to $b:U\\to T$ at $z$; punctual purity at $b(z)$ implies punctual purity at $z$. Hence $U$ is punctually pure. This uses the theorem with arbitrary exponent multiplicities, including zeros and factors of $\\ell$; it does not assume that $T\\to S$ is smooth.",
+   "text": "The same $R,\\pi,n$ and tuple $(e_i)$ satisfy [lem-per-monomial-trait-punctual-purity]: $R$ is a discrete valuation ring, $\\ell$ is invertible in it, and the exponents are nonnegative and not all zero. Thus this very $T$ is regular Noetherian and punctually pure. In particular it is punctually pure at $t=b(u)$.",
    "uses": [
-    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-monomial-trait-punctual-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Definition 3.5.11 and Proposition 3.5.12, printed p.250; concluding reduction on p.253."
+   }
+  },
+  {
+   "text": "Apply [lem-per-punctual-purity-etale-locality] to $b:U\\to T$ at $u$: its pointwise equivalence gives purity of $U$ at $u$ from purity of $T$ at $t$. Apply the same equivalence to $a:U\\to V$ at $u$: purity of $U$ at $u$ gives purity of $V$ at $v=a(u)$. Both applications are between regular Noetherian schemes: $U$ comes from step 1, $T$ from step 2, and $V$ from the hypothesis. The image of the unit $\\ell\\in R$ is a unit on each $S$-scheme, so the coefficient hypothesis holds throughout. Since $v$ was arbitrary, $V$ is punctually pure, including vacuously when $V$ is empty.",
+   "uses": [
     "lem-per-punctual-purity-etale-locality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Proposition 3.5.12, printed pp.250--251, and the concluding reduction of Theorem 3.6.2, printed p.253; Definitions 3.2.1--3.2.2, printed p.244."
-   }
-  },
-  {
-   "text": "Apply etale locality to $a:U\\to V$ at the chosen point $u$. Both schemes are regular Noetherian, $\\ell$ is invertible on them, and $a(u)=v$. The punctual purity of $U$ at $u$ obtained in Step 2 therefore implies punctual purity of $V$ at $v$, for the Kummer fundamental-class map in the statement. Since $v$ was arbitrary this proves punctual purity of $V$. If $V$ is empty, the condition at every point is vacuous.",
-   "uses": [
-    "lem-per-punctual-purity-etale-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "Theorem 3.6.2, final reduction from Proposition 3.6.5 on printed p.253; Definitions 3.2.1--3.2.2, printed p.244."
+    "place": "Expose XVI, Definitions 3.2.1--3.2.2 and strict-henselization invariance, printed p.244; final sentence deducing Theorem 3.6.2 on printed p.253."
    }
   }
  ],
@@ -66,7 +65,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expose XVI, proof of Theorem 3.6.2, final sentence following Proposition 3.6.5, printed p.253; monomial theorem on pp.250--251."
+  "place": "Expose XVI, Theorem 3.6.2, printed p.252, and its concluding proof on p.253 from Propositions 3.6.5 and 3.5.12; etale locality from Definitions 3.2.1--3.2.2, p.244."
  },
  "mathlib_searches": [
   {
@@ -103,6 +102,41 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"For any commutative ring $ R $ and an $ R $-algebra $ A $, $ A $ is formally étale over $ R $ if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: inspected signatures concern general derived-category exact triangles, scheme morphisms, local algebra, or unrelated names; none supplies the stated etale Gysin, punctual-purity, or logarithmic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "LogScheme|LogSmooth|log.smooth|punctual.*pur",
+   "results": "Retained search log: OK 0 hit(s). Returned declarations: none. Read together with the retained report assessments; no supported Kummer purity or log-smooth trait theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology with support at a point of a regular log smooth scheme over a trait is a Tate twist",
+   "results": "Retained search log: OK 8 hit(s). Returned declarations: Algebra.IsEtaleAt, Algebra.exists_etale_of_isEtaleAt, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.etaleTopology, Algebra.Etale.of_isLocalizationAway. Read together with the retained report assessments; no supported Kummer purity or log-smooth trait theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "Retained search log: OK 0 hit(s). Returned declarations: none. Read together with the retained report assessments; no supported Kummer purity or log-smooth trait theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular fine saturated log smooth schemes over a discrete valuation ring are punctually pure in etale cohomology with finite coefficients",
+   "results": "Retained search log: OK 8 hit(s). Returned declarations: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, Algebra.etaleLocus, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale.of_comp. Read together with the retained report assessments; no supported Kummer purity or log-smooth trait theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The extraordinary inverse image of the constant finite etale sheaf along a closed point of a regular logarithmically smooth scheme over a trait is the shifted Tate twist",
+   "results": "Retained search log: OK 8 hit(s). Returned declarations: AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Algebra.mem_etaleLocus_iff. Read together with the retained report assessments; no supported Kummer purity or log-smooth trait theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -131,42 +165,31 @@
   "same_as": [],
   "is": null
  },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-log-smooth-trait-punctual-purity",
   "worker": "stage1",
-  "summary": "Q29 checked ILO XVI 3.2 and 3.5--3.6 and supplies the etale monomial chart, monomial punctual-purity, and etale-locality inputs as three statement-only nodes. The complete item argument passes through both etale arrows. No hypothesis, coefficient category or statement was changed; no Lean was written or compiled.",
-  "blueprint": "Realizes the inherited regular finite-torsion local model input to lem-per-artin-gabber-affine-curve, proof Step 3. In ILO XVI Theorem 3.6.2 this is the final reduction via Proposition 3.6.5 and Proposition 3.5.12. This item is not the key statement of its unit."
+  "summary": "Reconstruct the finite-coefficient assembly from ILO XVI: take the existing etale monomial chart, apply the existing monomial purity statement, and use the existing pointwise etale-locality equivalence twice. The three inputs were admitted as unsplit work by the N0 maintenance decision of 2026-10-24. No new node or Lean attachment; statement, source, stmt_deps and blueprint provenance preserved. Literal citation quotes and retained actual Mathlib searches checked.",
+  "blueprint": "Preserves blueprint.from verbatim: lem-per-artin-gabber-affine-curve, proof Step 3, regular finite-torsion local model, through the recorded via chain. This delivery reconstructs only the admitted ILO XVI Theorem 3.6.2 interface: steps 1, 2, 3 realize its Proposition 3.6.5 chart, Proposition 3.5.12 model calculation, and the final etale-local assembly on p.253. The ancestor is provenance; no discarded Artin-Gabber or arbitrary-field adic-duality argument is reinstated."
  },
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q29-59abb52c8",
-  "group": "Q29",
+  "reviewer": "NT-cc-N0-9f4e71c3c",
+  "group": "N0",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-59abb52c8 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the cited statements against ILO XVI §3.2 (pp.243-245), §3.4.1-3.4.5, §3.5 from its opening (arbitrary trait, p.248) through 3.5.11-3.5.13 with footnotes viii/ix (pp.248-251), and §3.6.1-3.6.5 (pp.252-253). The item is Thm 3.6.2 with the statement unchanged. Its three steps (3.6.5 chart, then 3.5.12 purity of the monomial model, then purity passed back through both étale arrows) are exactly the source's final sentence on p.253, and each step uses only what the cited statements say. Chart node: true for any uniformizer. The source argument is 3.6.3 with Q=N, inverting the face P', P≅N^r⊕P' (log regular and regular means M̄_x free), and an étale map into an open of V(S,π,e,f); the exponent tuple is nonzero because N→P is injective. Spec K⊂S is consistent with it. Monomial node: 3.5.12 over an arbitrary trait, with all-zero e correctly excluded (it gives the empty scheme). I tested e=(1), (1,0), (1,1), (2) in residue char 2, and (p), (p,p) in equal char p. Étale-locality node: true. It follows from essentially-étale local maps with m_xO_{Y,y}=m_y and d_y=d_x, ind-étale j^! base change, class compatibility with flat base change, and conservative pullback along the finite separable extension κ(y)/κ(x). It is strictly smaller than the item, so not a D1 relabelling. No duplicates: lem-trf-log-regular-completed-chart, lem-trf-face-localization-fs, lem-trf-fs-chart-free-factorization, lem-trf-log-smooth-log-regular, the nodal chart, and the punctual-purity siblings (two-of-three, trait-test, proper-degree-descent) all state other things. No cycle: the new nodes cite neither the item nor the parent gabber-regular-pair-purity. No SGA is cited. Batch 5: (1) regular-immersion-class-calculus is cited by the monomial and locality nodes only as a stmt_dep naming the Kummer class, exactly as the item's own statement already does. The flagged path ends at lem-trf-bounded-below-derived-adjunction, generic homological algebra that is not part of either assumption: accepted. (2) def-trf-fs-log-blowup is a general log-structure definition already in the item's stmt_deps: accepted. FIX: removed the unused stmt_dep def-weil-pbc-krull-dimension-ring from lem-per-regular-log-smooth-monomial-chart (fixes/dag/nodes/sec-deligne-laumon-a1/). Advisory for later splits: the 3.5.12 proof's footnote ix and 3.4.4 cite SGA 4, so the monomial node's split must use the blueprint smooth-purity route instead.; 1 file(s) fixed by the reviewer"
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.LogSmoothTraitPunctualPurity",
-  "declaration": "AlgebraicGeometry.Etale.log_smooth_trait_punctual_purity",
-  "declarations": [
-   "AlgebraicGeometry.Etale.log_smooth_trait_punctual_purity"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothTraitPunctualPurity.lean",
-  "statement": "theorem log_smooth_trait_punctual_purity (ℓ : ℕ) (hℓ : ℓ.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (hR : IsUnit (ℓ : R)) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (M : EtaleLogStructure (Spec (.of R))) (hfs : M.IsFineSaturated) (hcanonical : ∃ e : M.monoidSheaf.obj ≅ divisorialLogPresheaf ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι, e.hom ≫ divisorialStructuralMap ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι = M.alpha) (V : FineSaturatedLogScheme.{u}) [IsNoetherian V.scheme] (hV : IsRegularScheme V.scheme) (f : EtaleLogHom V ⟨Spec (.of R), inferInstance, M, hfs⟩) (hf : f.IsLogSmooth) : IsPunctuallyPure ℓ hℓ V.scheme",
-  "branch": "newtargets-dag",
-  "by": "Q22",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.LogSmoothTraitPunctualPurity deleted (dead: no target reaches it); this node is not reached either."
- },
- "reviewed_lean": {
-  "date": "2026-10-19",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-07f60349f",
-  "group": "Q22",
-  "result": "pass",
-  "note": "Re-delivery after RETURN of 782ee80f: H3/H12/H4 repaired. The plain-map chart node is gone; the statement uses canonical M (hcanonical iso to divisorialLogPresheaf of D(π) with α-compatibility), f : EtaleLogHom V ⟨Spec R,_,M,hfs⟩ and f.IsLogSmooth, the same block as the landed regular_logSmooth_monomial_chart; def-per-fs-log-smooth-etale and def-trf-log-regular-pair added to stmt_deps. H2 repaired: no dependency modules; the regular-immersion-class-calculus record and the three added def nodes are identical to live. The old Kummer-purity node is replaced by Q03's landed IsPunctuallyPure (def-per-punctual-purity), avoiding a race duplicate. Clause check: DVR trait, IsUnit ℓ, uniformizer π (conclusion independent of it), regular Noetherian fs V, conclusion ∀ w punctual purity. Empty V vacuous; both characteristics; universes as in the landed proof dependency. Record statement verbatim, sorry-only proof, docstring with source and 3-step plan, imports per rule 7. nt_compile --json clean (8.3 s, rc 0). Advisory: the IsLogSmooth→uniformizer-chart refinement (XVI 3.6.3, lem-per-trait-log-smooth-uniformizer-chart) is not in proof_deps; for stage 3."
- },
- "lean_audit": {}
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-9f4e71c3c (reviewer sub-agent of L); spot-checked: PASS, no fixes. The delivery is one commit containing only the item and its report, which has a Review by N0 section. Against the side-live base, only proof, proof_deps, proof_origin, split_report, status and mathlib_searches change; the five old search records are kept and five new ones are added. Statement, source, stmt_deps and blueprint are byte-identical. The released Q84 repair note reopens the item. coord/changes/20261024-N0-log-smooth-purity-inputs.md admits exactly the three cited inputs as UNSPLIT interfaces; in the snapshot and side-live all three are unsplit with empty proofs, so no old proof graph comes back. Source checked: ILO XVI p.244 (Def 3.2.1-3.2.2), pp.250-251 (Def 3.5.11, Prop 3.5.12), p.252 (Def 3.6.1, Thm 3.6.2, Prop 3.6.3) and p.253 (Prop 3.6.5, whose last sentence derives Thm 3.6.2 from 3.6.5 and 3.5.12). The item's punctual-purity paragraph is word for word the first paragraph of the monomial and locality nodes, and its log-smooth paragraph is word for word the chart node's, so the coefficient category, Kummer map and dimension normalization are literally shared. Step 1: the chart node's hypotheses (fs log-smooth over the canonically logged trait, X regular Noetherian, a point and a uniformizer) all hold, and it gives U, an etale a, a point u, and an etale S-map b to T with n>=1 and exponents not all zero. Step 2: the monomial node's hypotheses (same R, pi and tuple, ell invertible in R, arbitrary trait) hold, and it gives T regular and pure at b(u). Step 3: the locality iff is applied backwards along b (U and T regular) and forwards along a (V regular); ell is a unit on every S-scheme. Edge cases checked: V empty, generic-fibre points, n=1 with e=(1) giving T=S, zero exponents and exponents divisible by ell or p. All inputs are in the same unit, so there are no tool_uses; there are no new nodes, no cycle, no SGA, and no duplicate of Thm 3.6.2 in the DAG. Advisory only: the stmt_deps inherited from the base include definition ids that the statement does not cite in brackets."
+ }
 }

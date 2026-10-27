@@ -222,7 +222,18 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-cor-pe-sections",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtale.SectionsConservative",
   "declaration": "AlgebraicGeometry.Scheme.ProEt.sections_conservative",
@@ -250,5 +261,40 @@
   "landing": "20261019T002524-L-2147073",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be a ring and let $\\mathcal W$ be the\nclass of affine weakly contractible objects of $X_{\\mathrm{proét}}$.\n\n1. A sequence $A\\xrightarrow{f}B\\xrightarrow{g}C$ of sheaves of $\\Lambda$-modules with $g\\circ f=0$\n   is exact at $B$ if and only if $A(W)\\to B(W)\\to C(W)$ is exact for every\n   $W\\in\\mathcal W$.\n2. A complex of sheaves of $\\Lambda$-modules is acyclic if and only if its evaluation at every\n   $W\\in\\mathcal W$ is acyclic.\n3. A morphism of sheaves of $\\Lambda$-modules is an isomorphism if and only if its evaluation at\n   every $W\\in\\mathcal W$ is bijective; a morphism of complexes is a quasi-isomorphism if and\n   only if its evaluation at every $W\\in\\mathcal W$ is a quasi-isomorphism.",
+  "proof": [
+   {
+    "text": "The objects $\\operatorname{Spec}D$ with $D$ w-contractible lie in $\\mathcal W$\n([det-pe-weak-contractible-equivalences]), and every object $V$ has a covering by them\n([det-pe-wcb-cover]). Every $W\\in\\mathcal W$ has exact sections (the proof of\n[det-pe-wc-sections-exact] only uses part 3 of [det-pe-weak-contractible-equivalences]).",
+    "uses": [
+     "det-pe-weak-contractible-equivalences",
+     "det-pe-wcb-cover",
+     "det-pe-wc-sections-exact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*1.* If the sequence is exact, it stays exact on $W$ by exactness of $\\Gamma(W,-)$.\nConversely, assume exactness on all $W\\in\\mathcal W$. Let $b\\in B(V)$ with $g(b)=0$. Choose\na covering $\\{W_k\\to V\\}$ with $W_k\\in\\mathcal W$. Then $b|_{W_k}\\in\\ker(g(W_k))=\n\\operatorname{im}(f(W_k))$, so $b$ is locally in the image of $f$, i.e. $b$ is a section of\nthe image sheaf $\\operatorname{im}(f)$ (the sheafification of the presheaf image). Thus\n$\\ker g\\subset\\operatorname{im}f$; the reverse inclusion is $g\\circ f=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*2.* A complex is acyclic iff it is exact at every term; apply 1 degreewise.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*3.* A morphism $\\varphi\\colon M\\to N$ is an isomorphism iff $0\\to M\\to N$ and\n$M\\to N\\to0$ are exact; apply 1 (bijectivity on $W$ is exactness of the evaluated\nsequences). A morphism of complexes is a quasi-isomorphism iff its cone is acyclic;\nevaluation at $W$ commutes with forming cones, so apply 2.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

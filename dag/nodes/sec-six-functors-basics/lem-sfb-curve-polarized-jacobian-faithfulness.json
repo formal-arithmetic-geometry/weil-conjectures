@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-curve-polarized-jacobian-faithfulness",
+ "kind": "statement",
+ "title": "Curve pullback is faithful on the canonically polarized Jacobian",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure], let $C/k$ be a smooth projective connected curve of genus $g\\geq2$ [def-sc-curves], [def-kun-projective], [def-sc-genus], and fix its degree-zero Picard variety $J=\\operatorname{Pic}^0_{C/k}$, with its representing isomorphism [sk-thm-picard-main], [def-sc-jacobian]. Then $J$ has a canonical principal polarization $\\lambda_C$, induced by the theta divisor (the image of effective divisors [def-sc-divisor] of degree $g-1$ after translating $\\operatorname{Pic}^{g-1}_{C/k}$ to $J$); the induced polarization does not depend on the translation. A polarization of an abelian variety $A$ over an algebraically closed field means a homomorphism $\\lambda:A\\to A^\\vee$ induced by an ample [def-sc-ample] invertible sheaf [def-sc-invertible-module] $L$, namely $x\\mapsto[t_x^*L\\otimes L^{-1}]$, where $t_x$ is translation by $x$ and $A^\\vee=\\operatorname{Pic}^0_{A/k}$ is the dual abelian variety representing algebraically trivial invertible sheaves, rigidified at the identity. A polarization is principal when $\\lambda$ is an isomorphism. For a group automorphism $a$ of $A$ (an automorphism of the $k$-group scheme $A$ [def-sc-group-scheme]), its dual $a^\\vee$ is pullback on $A^\\vee$; preserving $\\lambda$ means $a^\\vee\\lambda a=\\lambda$. Every $k$-automorphism $u$ of $C$ induces a $k$-group automorphism $a_u$ of $J$, whose action on the Picard functor is pullback of invertible sheaves along $u\\times\\mathrm{id}_T:C\\times_kT\\to C\\times_kT$ for every $k$-scheme $T$. It preserves $\\lambda_C$, and the assignment $u\\mapsto a_u$ is injective as a map of sets. In particular $a_u=\\mathrm{id}_J$ implies $u=\\mathrm{id}_C$.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter III §6 (canonical theta polarization, especially Theorem 6.6 and discussion 6.11), printed pp.105–108, and Theorem 12.1(b), printed p.120 (uniqueness for a fixed sign, including hyperelliptic curves). Pullback gives the inverse of the usual covariant Jacobian automorphism."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-kun-projective",
+  "def-sc-genus",
+  "sk-thm-picard-main",
+  "def-sc-jacobian",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-sc-group-scheme",
+  "def-sc-divisor"
+ ],
+ "proof": [
+  {
+   "text": "Choose $P\\in C(k)$ by [lem-pc-rational-points-dense]. Apply [lem-sfb-symmetric-abel-image-geometry] to the given representing Jacobian: write $f=f_P$, let $\\mathcal M_P$ be its normalized universal family, and set $\\Theta=W_{g-1}$. This constructs the theta divisor as the scheme-theoretic image of effective divisors, after tensoring with $\\mathcal O_C(-(g-1)P)$. In particular it is an effective Cartier divisor, so $\\mathcal O_J(\\Theta)$ is an actual invertible sheaf, not a choice from a mere existence assertion.",
+   "uses": [
+    "lem-pc-rational-points-dense",
+    "lem-sfb-symmetric-abel-image-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §§1–2, Theorem 5.1(a), and the paragraph before Theorem 6.6, pp.88–105"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-abelian-polarization-calculus] to form $J^\\vee$ and its normalized Poincare sheaf $\\mathcal P_J$. Pull this sheaf back along $f\\times1$. By [sk-thm-picard-main] it gives a map $J^\\vee\\to\\operatorname{Pic}_{C/k}$. Since $J^\\vee$ is connected and its identity maps to the trivial sheaf, the open degree decomposition in that node forces this map into $\\operatorname{Pic}^0_{C/k}$. Its normalized representing map $\\delta:J^\\vee\\to J$ exists by [lem-sfb-symmetric-abel-image-geometry]; it is a homomorphism because tensoring families represents addition. Put $\\lambda=\\phi_{\\mathcal O_J(\\Theta)}$. For $L=\\mathcal O_J(\\Theta^-)$, the polarization calculus gives $\\phi_L=\\lambda$, and $L_0\\cong(1\\times\\lambda)^*\\mathcal P_J$. The sheaf identity [lem-sfb-theta-poincare-pullback] therefore reads\n$$(1\\times(\\delta\\lambda[-1]))^*\\mathcal M_P\\cong\\mathcal M_P.$$\nThe representing universal property of $\\mathcal M_P$ gives $\\delta\\lambda[-1]=\\mathrm{id}_J$ as scheme morphisms. Since these are homomorphisms, $(-\\delta)\\lambda=\\mathrm{id}_J$. This is an identity of families, so it detects infinitesimal kernels as well as geometric points.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-sfb-theta-poincare-pullback",
+    "sk-thm-picard-main"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Lemmas 6.8(b) and 6.9, pp.106–107; I §8 universal family"
+   }
+  },
+  {
+   "text": "The dual dimension formula in [lem-sfb-abelian-polarization-calculus] gives $\\dim J^\\vee=\\dim J=g$. Apply [lem-sfb-equal-dimension-abelian-retract] to $s=\\lambda$ and $r=-\\delta$: $\\lambda$ is an isomorphism. Since $\\Theta$ is effective, the effective-divisor ampleness criterion of [lem-sfb-abelian-polarization-calculus] now shows that $\\mathcal O_J(\\Theta)$ is ample. Thus $\\lambda$ is a principal polarization, with precisely the convention $x\\mapsto[t_x^*L\\otimes L^{-1}]$ in the statement.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-equal-dimension-abelian-retract"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Theorem 6.6 and Lemma 6.9, pp.105–107; I Proposition 8.1 and Remark 8.2"
+   }
+  },
+  {
+   "text": "An identification of $\\operatorname{Pic}^{g-1}_{C/k}$ with $J$ by tensoring with the inverse of a degree-$(g-1)$ line bundle differs from the chosen one by a translation: the quotient of two such line bundles has degree zero and hence is a point of $J$. Therefore the effective image divisor is replaced by a translate of $\\Theta$. The equality $\\phi_{t_b^*L}=\\phi_L$ from [lem-sfb-abelian-polarization-calculus] proves that the induced polarization is independent of this identification (and in particular of $P$). Define $\\lambda_C=\\lambda$.",
+   "uses": [
+    "lem-sfb-abelian-polarization-calculus",
+    "def-sc-jacobian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III paragraph before Theorem 6.6, p.105, and Summary 6.11, p.108"
+   }
+  },
+  {
+   "text": "For every $k$-scheme $T$, pullback along $u\\times\\mathrm{id}_T$ sends a fibrewise degree-zero line bundle on $C\\times T$ to one of the same degree, commutes with tensor product and with all base changes in $T$, and preserves bundles pulled back from $T$. It thus gives a natural group automorphism of the fppf Picard functor and of its degree-zero part; the inverse is pullback along $u^{-1}\\times\\mathrm{id}_T$. Through the given representing isomorphism [def-sc-jacobian], Yoneda [lem-galois-yoneda-fully-faithful] produces the group-scheme automorphism $a_u$ and its inverse. This construction has the required effect on every $T$, including nonreduced $T$. Pullback reverses composition, so $a_{uv}=a_va_u$.",
+   "uses": [
+    "def-sc-jacobian",
+    "def-sc-picard-functor",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §1, Theorems 1.6–1.7, pp.88–89; pullback on represented functors"
+   }
+  },
+  {
+   "text": "Let $L_0=\\mathcal O_C((g-1)P)$ and $c=[u^*L_0\\otimes L_0^{-1}]\\in J(k)$. In the coordinates $\\operatorname{Pic}^{g-1}\\to J$, $N\\mapsto[N\\otimes L_0^{-1}]$, the pullback $u^*$ is $x\\mapsto a_u(x)+c$. Pullback by an isomorphism permutes effective divisors; hence it preserves their scheme-theoretic image. Using the construction of [lem-sfb-symmetric-abel-image-geometry], this gives $t_c a_u(\\Theta)=\\Theta$ as divisors. Consequently $a_u^{-1}(\\Theta)=t_{a_u^{-1}(c)}(\\Theta)$, a translate. The flat-pullback identity [lem-pc-divisor-line-bundle-flat-pullback] (an isomorphism is flat) identifies $a_u^*\\mathcal O_J(\\Theta)$ with the bundle of this divisor. Translation invariance and the pullback formula of [lem-sfb-abelian-polarization-calculus] now give\n$$a_u^\\vee\\lambda_Ca_u=\\phi_{a_u^*\\mathcal O_J(\\Theta)}=\\phi_{\\mathcal O_J(\\Theta)}=\\lambda_C.$$",
+   "uses": [
+    "lem-sfb-symmetric-abel-image-geometry",
+    "lem-pc-divisor-line-bundle-flat-pullback",
+    "lem-sfb-abelian-polarization-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §5, effective image description, p.100; I §§8–9, line-bundle homomorphisms and dual pullback"
+   }
+  },
+  {
+   "text": "Assume $a_u=\\mathrm{id}_J$ and write $w=u^{-1}$. The action just constructed and [lem-pc-divisor-line-bundle-flat-pullback], applied to the point divisors on $C$, give\n$$[\\mathcal O_C(w(Q)-w(R))]=u^*[\\mathcal O_C(Q-R)]=[\\mathcal O_C(Q-R)]$$\nfor all $Q,R\\in C(k)$. By the divisor-class isomorphism [lem-sc-divisor-class-curve],\n$$w(Q)+R\\sim Q+w(R).$$\nHere $\\sim$ denotes linear equivalence of divisors; this step uses the inverse $w$, rather than identifying pullback with the covariant Jacobian action.",
+   "uses": [
+    "lem-pc-divisor-line-bundle-flat-pullback",
+    "lem-sc-divisor-class-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III §2, divisor-class description on pp.91–92, and the proof of Theorem 12.1(b), p.120"
+   }
+  },
+  {
+   "text": "Suppose $w\\ne\\mathrm{id}_C$. There is a point $R\\in C(k)$ with $w(R)\\ne R$: otherwise the two morphisms agree on the dense rational points from [lem-pc-rational-points-dense], and hence on $C$. Indeed their equalizer is closed since $C$ is separated, and its ideal is zero: on any affine open a section vanishing at a dense set of points vanishes, since $C$ is integral and thus reduced by [lem-sc-smooth-connected-curve-local-rings]. This is also a direct justification of scheme equality, not just equality of underlying sets. Choose distinct $Q_1,Q_2\\in C(k)\\setminus\\{R\\}$. Such points exist by applying the same density theorem twice to the complements of the finitely many points already chosen: these are nonempty smooth opens because $C$ is integral of dimension one.",
+   "uses": [
+    "lem-pc-rational-points-dense",
+    "lem-sc-smooth-connected-curve-local-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III proof of Theorem 12.1(b), p.120, choosing distinct points; elementary reduced-scheme equalizer argument"
+   }
+  },
+  {
+   "text": "For $i=1,2$ put $D_i=w(Q_i)+R$ and $E_i=Q_i+w(R)$. They are effective divisors of degree two, and step 7 gives $D_i\\sim E_i$. They are distinct: if they were equal, the occurrence of $R$ on the right would force $R=Q_i$ or $R=w(R)$, both excluded. Thus $|D_i|$ has two distinct members. Apply [lem-sfb-degree-two-pencil-uniqueness] using $g\\geq2$. Both systems $|D_1|$ and $|D_2|$ must be the same basepoint-free degree-two pencil, and exactly one of its members contains $R$. Since both $D_i$ contain $R$, $D_1=D_2$. Cancel $R$ in the free abelian divisor group [def-sc-divisor] to obtain $w(Q_1)=w(Q_2)$, contrary to injectivity of $w$. Hence $w=\\mathrm{id}_C$ and $u=\\mathrm{id}_C$. This argument covers hyperelliptic curves and characteristic two.",
+   "uses": [
+    "lem-sfb-degree-two-pencil-uniqueness",
+    "def-sc-divisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III proof of Theorem 12.1(b), p.120, fixed-sign uniqueness argument with its varying-points contradiction made explicit"
+   }
+  },
+  {
+   "text": "Finally, if $a_u=a_v$, contravariance from step 5 gives $a_{u v^{-1}}=a_{v^{-1}}a_u=a_v^{-1}a_v=\\mathrm{id}_J$. Steps 7–9 imply $u v^{-1}=\\mathrm{id}_C$, hence $u=v$. This proves the asserted injectivity as a map of sets.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "III Theorem 12.1(b), fixed-sign uniqueness, p.120; elementary composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-rational-points-dense",
+  "lem-sfb-symmetric-abel-image-geometry",
+  "lem-sfb-abelian-polarization-calculus",
+  "lem-sfb-theta-poincare-pullback",
+  "sk-thm-picard-main",
+  "lem-sfb-equal-dimension-abelian-retract",
+  "def-sc-jacobian",
+  "def-sc-picard-functor",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-divisor-line-bundle-flat-pullback",
+  "lem-sc-divisor-class-curve",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sfb-degree-two-pencil-uniqueness",
+  "def-sc-divisor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "III §§1–2, 5–6 (construction, Lemmas 6.8–6.9), and proof of Theorem 12.1(b), p.120; functoriality written using the representing Picard functor."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Torelli|polariz.*[Aa]ut|[Aa]ut.*polariz|[Jj]acobian.*faithful|faithful.*[Jj]acobian",
+   "results": "1 hits; actual logged top results: Mathlib/RingTheory/Extension/Presentation/Core.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphisms of a genus at least two smooth projective curve act faithfully on its canonically polarized Jacobian",
+   "results": "8 hits; actual logged top results: LinearEquiv.apply_faithfulSMul, CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier, RingAut.apply_faithfulSMul, AddAut.apply_faithfulSMul, AlgEquiv.apply_faithfulSMul, CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.autMulFiber, WeierstrassCurve.Jacobian.map_add",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Torelli|[Pp]rincipal[Pp]olar|[Pp]olarization|[Aa]belian[Vv]ariety",
+   "results": "25 hits; actual logged top results: Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/BilinearForm/Properties.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean, Mathlib/LinearAlgebra/RootSystem/Finite/CanonicalBilinear.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Jacobian\"",
+   "results": "0 hits; actual logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Torelli theorem injectivity of curve automorphisms into automorphisms of the Jacobian with its canonical principal polarization",
+   "results": "8 hits; actual logged top results: WeierstrassCurve.Affine.Point.toClass_injective, WeierstrassCurve.Jacobian.Point.mk.inj, WeierstrassCurve.Jacobian.Point.ext, RootPairing.polarizationIn_Injective, WeierstrassCurve.Jacobian.Point.ext_iff, WeierstrassCurve.VariableChange.map_injective, WeierstrassCurve.map_injective, CategoryTheory.PreGaloisCategory.autEmbedding_injective",
+   "date": "2026-10-22",
+   "verdict": "no match: root-system polarization, elementary evaluation actions, elliptic-curve coordinates and Galois-category automorphisms do not state this algebraic-curve or polarized-abelian-variety theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth projective curve of genus at least two acts faithfully on its canonically polarized Jacobian",
+   "results": "8 hits; actual top results: WeierstrassCurve.Jacobian, WeierstrassCurve.Jacobian.Point.ext, WeierstrassCurve.Jacobian.instMulActionForallFinOfNatNat, WeierstrassCurve.Jacobian.Point.mk.inj, WeierstrassCurve.Jacobian.Point.ext_iff, WeierstrassCurve.Jacobian.NonsingularLift, WeierstrassCurve.Jacobian.Point.instAddCommGroup, WeierstrassCurve.Jacobian.PointClass",
+   "date": "2026-10-22",
+   "verdict": "no match: elementary faithful actions, Weierstrass-coordinate Jacobians, and root-system polarization do not state the genus-at-least-two curve theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Torelli|canonical.*polarization|Jacobian.*faithful",
+   "results": "2 hits; actual top results: Mathlib/LinearAlgebra/RootSystem/RootPositive.lean, Mathlib/RingTheory/Extension/Presentation/Core.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: elementary faithful actions, Weierstrass-coordinate Jacobians, and root-system polarization do not state the genus-at-least-two curve theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Automorphisms of a smooth projective curve act faithfully on the degree zero Picard variety",
+   "results": "8 hits; actual top results: LinearEquiv.apply_faithfulSMul, AddAut.apply_faithfulSMul, MulAut.apply_faithfulSMul, CategoryTheory.PreGaloisCategory.instSMulAutFintypeCatObjCarrier, Action.ρAut, RingAut.apply_faithfulSMul, FaithfulVAdd.mk, CategoryTheory.PreGaloisCategory.autMulFiber",
+   "date": "2026-10-22",
+   "verdict": "no match: elementary faithful actions, Weierstrass-coordinate Jacobians, and root-system polarization do not state the genus-at-least-two curve theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Jacobian\"",
+   "results": "0 hits; actual top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: elementary faithful actions, Weierstrass-coordinate Jacobians, and root-system polarization do not state the genus-at-least-two curve theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-geometric-curve-level-faithfulness",
+  "date": "2026-10-22",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian.",
+   "via": [
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-curve-polarized-jacobian-faithfulness",
+  "worker": "stage1",
+  "summary": "Constructed the principal theta polarization from the normalized Poincare pullback identity and an equal-dimension retraction, checked translation independence and Picard-functor pullback on every test scheme, and expanded Milne 12.1(b) into an explicit degree-two-divisor contradiction. Five smaller statement-only inputs are exposed; no Torelli or faithfulness restatement is introduced.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. The ten steps supply the geometric stabilizer input in the prime-to-characteristic full-level route, with no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-divisor-class-curve",
+    "why": "Generic Picard/divisor or smooth-curve tool used as a black box for the polarized-Jacobian stabilizer prerequisite; it does not replace the six-functor unit route, and no node of this unit states this tool."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Generic Picard/divisor or smooth-curve tool used as a black box for the polarized-Jacobian stabilizer prerequisite; it does not replace the six-functor unit route, and no node of this unit states this tool."
+   },
+   {
+    "node": "sk-thm-picard-main",
+    "why": "Generic representing Picard scheme with open degree components: used only to show the connected Poincare pullback family has degree zero; no six-functor route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-divisor-class-curve",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "sk-thm-picard-main"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-d889d42c2",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-d889d42c2 (reviewer sub-agent of L); spot-checked: PASS: I read the item's ten steps and all five new statement-only nodes in full, checked them against Milne's Abelian Varieties, and made no changes. Context: this is the first split (the base had no proof), the item is not dropped, it is still unsplit on live, and its citer geometric-curve-level-faithfulness uses exactly the stated clauses. Source matches: theta-poincare-pullback is exactly Milne III 6.8(b) on printed p.106, with Θ^- = [-1]^*Θ (the text extraction loses the minus sign). Step 2 then gives δλ[-1]=id, so (−δ)λ=id, agreeing with f^∨ = −φ^{-1} in III 6.11. I checked the rigidification along P×J^∨ (f(P)=0) and the degree-0 argument (connected J^∨ plus the open degree decomposition in sk-thm-picard-main). The equal-dimension retract statement is true (s is a closed immersion; equal dimension on the reduced irreducible B makes it surjective, hence an iso). It upgrades the one-sided inverse to principal. Step 3 uses the converse of I 8.1, effective D with finite K(L) ⇒ ample. Milne states it ('D ample iff φ_{L(D)} isogeny', III 6.5 and I 8.2) but leaves that direction unproved; it is true by Mumford §6 App. 1. This is noted for whoever splits the calculus node later. Step 6: I rechecked t_c a_u(Θ)=Θ ⇒ a_u^{-1}Θ = Θ + a_u^{-1}(c), which gives a_u^∨λa_u=λ by translation invariance. Steps 7–9 are Milne III 12.1(b) written out: pullback of point divisors uses w=u^{-1}; D_i ≠ E_i because R≠Q_i and R≠w(R); the unique basepoint-free g^1_2 with one member through R gives D_1=D_2 and a contradiction. This covers hyperelliptic curves and characteristic 2. The pencil node is true and needs g≥2, as Hartshorne IV 5.3 (recalled by Milne). Abel-image node: birationality for r≤g is III 5.1(a), M_P is III 1.7, and the closed immersion is III 2.3. W_{g-1} is Cartier because J is smooth. Edge cases g=1 and r=0 hold. No duplicates: rg -L for dual/Poincaré/theta/hyperelliptic/g^1_2/isogeny/polarization matched only these nodes, the item, its citer and odd-level-rigidity. No new node restates a clause of the item. Batch-5 findings: the def-sc-jacobian citations (×2) and the thm-pc-hilb-curves citation add 0 nodes to the item's base statement closure, since both are reached via the existing stmt_deps sk-thm-picard-main/def-sc-jacobian. The flagged endpoints, def-pod-ring-scalar-extension (a general scalar-extension definition) and lem-trf-proper-finite-fibre-finite-near (a general scheme fact), are not steps of the trace formula or Poincaré duality, so I accepted them. Accepted tool_uses: lem-sc-divisor-class-curve, lem-sc-smooth-connected-curve-local-rings, sk-thm-picard-main. No SGA is cited."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "def-sf-native-geometric-localizing-data",
+ "kind": "definition",
+ "title": "Native geometric localizing hull, compact-support functor and chosen compactification",
+ "statement": "Use the native coefficient categories, geometric fibers, bounded constructible predicate and ordinary derived operations of [def-sf-native-weil-derived-framework], in the universes of [def-weil-size-convention]. For a finite field $k_0$, a prime $\\ell$ and a $k_0$-scheme $T$, write $\\bar T=T\\times_{k_0}\\operatorname{AlgebraicClosure}(k_0)$, $\\mathcal A_T=\\operatorname{AdicSheaf}_\\ell(\\bar T)$ and $C_T\\subset D(\\mathcal A_T)$ for the full subcategory of bounded native constructible objects. Define $L_T=\\operatorname{Loc}(C_T)$: an object belongs to $L_T$ if it belongs to every full replete triangulated subcategory [def-weil-triangulated-subcategory] containing $C_T$ and closed under coproducts indexed in the Hom universe. This is Lean `AlgebraicGeometry.nativeWeilUnderlyingHull k₀ ℓ T`.\n\nFor $k_0$-schemes $X,Y$, a $k_0$-morphism $f:X\\to Y$ and any compactification $c=(j:X\\hookrightarrow Z,p:Z\\to Y)$ of $f$ [def-weil-compactifications-refinements], equip $Z$ with its $k_0$-structure through $p$. Define the ordinary geometric compact-support functor $F_c=D(\\bar j_!)\\,;\\,R\\bar p_*:D(\\mathcal A_X)\\to D(\\mathcal A_Y)$, where the first functor is termwise extension by zero and the second is the total right derived native module direct image; coefficient maps are the native precomposition maps on locally finite functions. This is Lean `AlgebraicGeometry.nativeWeilUnderlyingCompactSupport k₀ ℓ f c`.\n\nFor any field $k_0$, a $k_0$-scheme $Y$ with quasi-compact quasi-separated structure map, and a separated finite-type morphism $f:X\\to Y$, define $c_f$ to be exactly `HasCompactification.compactification f` with the witness `hasCompactification_of_over (k₀ := k₀) f`. This is Lean `AlgebraicGeometry.nativeWeilChosenCompactification k₀ f`. Thus the functor used for $f$ over a finite field is $F_{c_f}$, with this very compactification; no preservation or adjoint-existence assertion is part of these definitions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence, native geometric specialization used by lem-sf-native-geometric-brown-constructible-comparison; existing constructions in lean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean, nativeWeilUnderlyingHull, nativeWeilUnderlyingCompactSupport and nativeWeilChosenCompactification."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-size-convention",
+  "def-weil-triangulated-subcategory",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localizing closure of bounded constructible adic derived objects and compact support from a Nagata compactification",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasCompactSupport\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"{α : Type u_2} → {β : Type u_4} → [TopologicalSpace α] → [Zero β] → (α → β) → Prop\", \"doc\": \"A function $ f : X \\\\to \\\\alpha $ has compact support if the closure of the set $ \\\\{x \\\\in X \\\\mid f(x) \\\\neq 0\\\\} $ is a compact subset of $ X $.\"}\n  {\"name\": \"mem_compactlySupported\", \"module\": \"Mathlib.Topology.ContinuousMap.BoundedCompactlySupported\", \"type\": \"{f : α →ᵇ γ} : f ∈ C_cb(α, γ) ↔ HasCompactSupport f\", \"doc\": \"A bounded continuous function $ f : \\\\alpha \\\\to \\\\gamma $ belongs to the ideal of compactly supported bounded continuous functions if and only if the closure of the set $ \\\\{ x \\\\in \\\\alpha \\\\mid f(x) \\\\neq \"}\n  {\"name\": \"Topology.IsLocallyConstructible.isConstructible\", \"module\": \"Mathlib.Topology.Constructible\", \"type\": \"[PrespectralSpace X] [QuasiSeparatedSpace X] [CompactSpace X] (hs : IsLocallyConstructible s) : IsConstructible s\", \"doc\": \"In a compact quasi-separated prespectral space $X$, if a set $s$ is locally constructible (i.e., every point has an open neighborhood whose intersection with $s$ is constructible), then $s$ is constru\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], CompactSpace ↥X\", \"doc\": \"Every Noetherian scheme is a compact space, meaning its underlying topological space satisfies the finite subcover property for open covers.\"}\n  {\"name\": \"HasCompactMulSupport\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"(f : α → β) : Prop\", \"doc\": \"The closure of the multiplicative support of a function $ f $, which is the set of points $ x $ where $ f(x) \\neq 1 $, is compact in the topological space.\"}\n  {\"name\": \"HasCompactMulSupport.of_compactSpace\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"(f : α → γ) : HasCompactMulSupport f\", \"doc\": \"In a compact topological space, the closure of the multiplicative support of any function $ f $ (the set of points $ x $ where $ f(x) \\\\ne 1 $) is compact.\"}\n  {\"name\": \"compactlySupported\", \"module\": \"Mathlib.Topology.ContinuousMap.BoundedCompactlySupported\", \"type\": \"(α γ : Type*) [TopologicalSpace α] [NonUnitalNormedRing γ] : TwoSidedIdeal (α →ᵇ γ)\", \"doc\": \"The two-sided ideal in the non-unital ring of bounded continuous functions from a topological space $\\\\alpha$ to a non-unital normed ring $\\\\gamma$, consisting of functions whose support closures are co\"}\n  {\"name\": \"Bornology.IsBounded.isCompact_closure\", \"module\": \"Mathlib.Topology.MetricSpace.Bounded\", \"type\": \"[ProperSpace α] (h : IsBounded s) : IsCompact (closure s)\", \"doc\": \"In a proper pseudo-metric space $\\\\alpha$, if a subset $s$ is bounded, then the closure of $s$ is compact.\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for these three native geometric constructions; use the already published project abbreviations, without invoking their module's Brown-existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Native locally finite adic constructible localizing hull and compact support using a chosen Nagata compactification",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_basicOpen_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))), IsLocalization.Away f ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))\", \"doc\": \"For a scheme $X$, if $U$ is a compact and quasi-separated open subset of $X$ and $f$ is a section of the structure sheaf over $U$, then the ring of sections over the basic open set $D(f)$ (where the g\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f g s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n          ∃ n,\", \"doc\": \"Let $X$ be a scheme, and let $U$ be a quasi-compact and quasi-separated open subset of $X$. Let $f, g, s \\\\in \\\\mathcal{O}_X(U)$ be sections of the structure sheaf over $U$. Let $U_s$ be the basic open \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"PrimeSpectrum.isRetrocompact_zeroLocus_compl_of_fg\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {I : Ideal R}, I.FG → IsRetrocompact (PrimeSpectrum.zeroLocus ↑I)ᶜ\", \"doc\": \"For a finitely generated ideal $I$ in a commutative semiring $R$, the complement of the zero locus $V(I)$ in the prime spectrum $\\\\operatorname{Spec}(R)$ equipped with the Zariski topology is a retroco\"}",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for these three native geometric constructions; use the already published project abbreviations, without invoking their module's Brown-existence theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.localizingClosure",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.ObjectProperty.localizingClosure'",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for these three native geometric constructions; use the already published project abbreviations, without invoking their module's Brown-existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "nativeWeilUnderlyingHull|nativeWeilUnderlyingCompactSupport|nativeWeilChosenCompactification|localizingClosure (Mathlib/CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for these three native geometric constructions; use the already published project abbreviations, without invoking their module's Brown-existence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n nativeWeilUnderlyingHull|nativeWeilUnderlyingCompactSupport|nativeWeilChosenCompactification lean/WeilConjectures lean/Sheaf",
+   "results": "lean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:45:abbrev nativeWeilUnderlyingHull (k₀ : Type u) [Field k₀] [Finite k₀]\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:70:abbrev nativeWeilUnderlyingCompactSupport\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:89:abbrev nativeWeilChosenCompactification\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:153:      (nativeWeilUnderlyingHull k₀ l T).inverseImage\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:155:    (∀ A, nativeWeilUnderlyingHull k₀ l T A →\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:160:      nativeWeilUnderlyingHull k₀ l T\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:163:    IsIdempotentComplete (nativeWeilUnderlyingHull k₀ l T).FullSubcategory ∧\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:201:    ∃ (h : ∀ K, nativeWeilUnderlyingHull k₀ l X K →\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:202:        nativeWeilUnderlyingHull k₀ l Y\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:203:          ((nativeWeilUnderlyingCompactSupport k₀ l f\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:204:            (nativeWeilChosenCompactification k₀ f)).obj K))\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:208:            (nativeWeilChosenCompactification k₀ f)).obj K)),\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:209:      ((nativeWeilUnderlyingHull k₀ l X).liftFullSubcategory\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:210:        (nativeWeilUnderlyingHull k₀ l Y)\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:211:        (nativeWeilUnderlyingCompactSupport k₀ l f\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:212:          (nativeWeilChosenCompactification k₀ f)) h).IsTriangulated ∧\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:216:          (nativeWeilChosenCompactification k₀ f)) hW).IsTriangulated ∧\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:218:        ((nativeWeilUnderlyingHull k₀ l X).liftFullSubcategory\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:219:          (nativeWeilUnderlyingHull k₀ l Y)\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:220:          (nativeWeilUnderlyingCompactSupport k₀ l f\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:221:            (nativeWeilChosenCompactification k₀ f)) h)) ∧\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:226:            (nativeWeilChosenCompactification k₀ f)) hW)) ∧\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:228:        ((nativeWeilUnderlyingHull k₀ l X).liftFullSubcategory\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:229:          (nativeWeilUnderlyingHull k₀ l Y)\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:230:          (nativeWeilUnderlyingCompactSupport k₀ l f\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:231:            (nativeWeilChosenCompactification k₀ f)) h) ∧\nlean/Sheaf/Paper/NativeWeilLocalizingBrownAdjoints.lean:236:            (nativeWeilChosenCompactification k₀ f)) hW) := by",
+   "date": "2026-10-24",
+   "verdict": "The three exact real-data definitions are in Sheaf.Paper.NativeWeilLocalizingBrownAdjoints; re-export them with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n nativeWeilUnderlyingHull|nativeWeilUnderlyingCompactSupport|nativeWeilChosenCompactification dag/nodes",
+   "results": "dag/nodes/sec-six-functors/lem-sf-native-weil-localizing-brown-adjoints.json:400:   \"AlgebraicGeometry.nativeWeilUnderlyingHull\",\ndag/nodes/sec-six-functors/lem-sf-native-weil-localizing-brown-adjoints.json:402:   \"AlgebraicGeometry.nativeWeilUnderlyingCompactSupport\",\ndag/nodes/sec-six-functors/lem-sf-native-weil-localizing-brown-adjoints.json:403:   \"AlgebraicGeometry.nativeWeilChosenCompactification\",\ndag/nodes/sec-six-functors/lem-sf-native-weil-localizing-brown-adjoints.json:409:  \"statement\": \"theorem nativeWeil_localizing_brown_adjoints (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : ∃ (h : ∀ K, nativeWeilUnderlyingHull k₀ l X K → nativeWeilUnderlyingHull k₀ l Y ((nativeWeilUnderlyingCompactSupport k₀ l f (nativeWeilChosenCompactification k₀ f)).obj K)) (hW : ∀ K, nativeWeilLocalizingHull k₀ l X K → nativeWeilLocalizingHull k₀ l Y ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (nativeWeilChosenCompactification k₀ f)).obj K)), ((nativeWeilUnderlyingHull k₀ l X).liftFullSubcategory (nativeWeilUnderlyingHull k₀ l Y) (nativeWeilUnderlyingCompactSupport k₀ l f (nativeWeilChosenCompactification k₀ f)) h).IsTriangulated ∧ ((nativeWeilLocalizingHull k₀ l X).liftFullSubcategory (nativeWeilLocalizingHull k₀ l Y) (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (nativeWeilChosenCompactification k₀ f)) hW).IsTriangulated ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) ((nativeWeilUnderlyingHull k₀ l X).liftFullSubcategory (nativeWeilUnderlyingHull k₀ l Y) (nativeWeilUnderlyingCompactSupport k₀ l f (nativeWeilChosenCompactification k₀ f)) h)) ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) ((nativeWeilLocalizingHull k₀ l X).liftFullSubcategory (nativeWeilLocalizingHull k₀ l Y) (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (nativeWeilChosenCompactification k₀ f)) hW)) ∧ nativeWeilBrownAssertions ((nativeWeilUnderlyingHull k₀ l X).liftFullSubcategory (nativeWeilUnderlyingHull k₀ l Y) (nativeWeilUnderlyingCompactSupport k₀ l f (nativeWeilChosenCompactification k₀ f)) h) ∧ nativeWeilBrownAssertions ((nativeWeilLocalizingHull k₀ l X).liftFullSubcategory (nativeWeilLocalizingHull k₀ l Y) (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f (nativeWeilChosenCompactification k₀ f)) hW)\",\ndag/nodes/sec-six-functors/lem-sf-native-weil-localizing-brown-adjoints.json:422:  \"note\": \"Re-delivery after H2 RETURN at a3c1d133015b; snapshot diff shows only the requested repair: lem-sf-locally-finite-adic-compact-support-sums dropped from stmt_deps (kept in proof_deps; stmt_deps = the 5 base deps, live node identical except lean, which is unset live), sums module import made plain, nativeWeilUnderlyingHull inlined to (ProEtale.DerivedCategory.boundedAdicConstructible l (T ↘ Spec k₀).geometricFiber).localizingClosure, literally the dep abbrev's body (side NativeAdicCompactSupportSums.lean:50-52); inlined names publicly reachable via LocallyFiniteAdicConstructibleRealization (Truncation) and FreeDerivedWeilResolution (LocalizingClosure). lean.statement verbatim, all 7 declarations present. Substance re-checked: hypotheses on X/Y/f with no absolute separatedness, native chosen compactification, F/F_W, hull clauses incl. representative independence, inverse-image equality, inclusions, WeilComplex membership, split idempotents, IsTriangulated and Type (u+1) coproducts for both restrictions, Brown clauses (adjunction, homological H_M, products, solution family Z→B_i, representation by G M); edge cases covered; no hollow defs, sorry-only, docstrings present, no pro-etale substitute. No file changed, nothing compiled. Advisory: inherited null blueprint.from.node.\"",
+   "date": "2026-10-24",
+   "verdict": "Only the Brown theorem node carries these helper names in lean.declarations; no definition node owns this interface. The maintainer explicitly requested a separate definition node or existing:true re-export."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "python3 tools/blueprint_refs.py search native-geometric-localizing",
+   "results": "0 blueprint nodes match 'native-geometric-localizing'",
+   "date": "2026-10-24",
+   "verdict": "No existing blueprint node with this name."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-geometric-brown-constructible-comparison",
+  "date": "2026-10-24",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence: the native geometric hulls, actual compact-support composite and same chosen Nagata compactification used to compare the transported constructible adjoint with any supplied localizing adjoint.",
+   "via": [
+    "lem-sf-native-geometric-brown-constructible-comparison",
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.NativeWeilLocalizingBrownAdjoints",
+  "declaration": "AlgebraicGeometry.nativeWeilUnderlyingHull",
+  "declarations": [
+   "AlgebraicGeometry.nativeWeilUnderlyingHull",
+   "AlgebraicGeometry.nativeWeilUnderlyingCompactSupport",
+   "AlgebraicGeometry.nativeWeilChosenCompactification"
+  ],
+  "statement": "abbrev nativeWeilUnderlyingHull (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))]",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Explicit H2 repair requested by the maintainer: existing:true re-export of the three real-data definitions already published in the Brown module. This definition node owns their use as a statement interface; it invokes no Brown theorem conclusion and creates no duplicate Lean declaration."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6ffe5a4e",
+  "group": "NL",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f6ffe5a4e",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (2fcd). Lean module byte-identical to 2fcd; item statement/proof/proof_deps identical to side-live base; stmt_deps = base 7 + new existing:true def node def-sf-native-geometric-localizing-data owning AlgebraicGeometry.nativeWeilUnderlyingHull / nativeWeilUnderlyingCompactSupport / nativeWeilChosenCompactification (Sheaf.Paper.NativeWeilLocalizingBrownAdjoints, read lines 37-97: localizingClosure over Hom-universe coproducts, D(j_!);Rp_* on geometric fibres, Nagata choice with qcqs target + separated LFT qc f). TeX matches; defs non-hollow; node stmt_deps (framework, size, triangulated-subcategory, compactifications-refinements) all definitions in side-live; searches recorded; no competing owner node, item not landed (no NP land). Item maths re-checked: Hom transport alpha.hom≫a≫e_Y⁻¹ → J_Y preimage → stageAdj.homEquiv → J_X.map; counit alpha⁻¹≫J_Yε≫e_Y; ∀ ambient adj ∃ t natural iso with t_M = transpose of the counit, G(C_Y)⊆C_X, all n∈ℤ shift formula, cone vanishing for all B∈L_X. Edge cases ok; gates ok; report sections present. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T011035-L-3637322",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.nativeWeil_localizing_brown_adjoints",
+   "AlgebraicGeometry.nativeWeil_localizing_hulls"
+  ],
+  "sorry_after": []
+ }
+}

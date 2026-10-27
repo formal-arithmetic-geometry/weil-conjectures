@@ -1,0 +1,277 @@
+{
+ "id": "lem-pur-strict-local-constant-unit-criterion",
+ "kind": "statement",
+ "title": "Strict-local criterion for constant module direct-image units",
+ "statement": "Let $f:Y\\to X$ be a quasi-compact, quasi-separated morphism of schemes [def-weil-pbc-scheme-conventions]. Let $\\Lambda$ be a finite commutative ring and $B$ a finite $\\Lambda$-module; write $B_T$ for its constant sheaf on $T_{\\mathrm{et}}$ [def-weil-pbc-etale-site, def-weil-pbc-etale-sheaves, def-weil-pbc-constant-sheaf]. Use ordinary derived direct image [def-weil-pbc-direct-image], inverse image and its adjunction unit [def-weil-pbc-inverse-image], and bounded-below module and abelian derived categories [def-weil-pbc-derived-categories]. For each geometric point $\\bar x$ of $X$ [def-weil-pbc-geometric-stalks], put $S_{\\bar x}=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ [def-weil-pbc-strict-henselization-limit] and $Y_{\\bar x}^{\\mathrm{sh}}=Y\\times_XS_{\\bar x}$ [def-pc-fibre-product]. Assume that the constants map\n$$B[0]\\longrightarrow R\\Gamma((Y_{\\bar x}^{\\mathrm{sh}})_{\\mathrm{et}},B_{Y_{\\bar x}^{\\mathrm{sh}}})$$\nis an isomorphism in $D^+(\\mathrm{Ab})$ for every $\\bar x$, where ordinary sections are [def-weil-pbc-sites-and-cohomology]. Then the canonical unit $B_X[0]\\to Rf_*B_Y[0]$ is an isomorphism in both the abelian and the fixed-$\\Lambda$ module derived categories. Under the canonical restriction identification\n$$ (Rf_*B_Y)_{\\bar x}\\cong R\\Gamma((Y_{\\bar x}^{\\mathrm{sh}})_{\\mathrm{et}},B_{Y_{\\bar x}^{\\mathrm{sh}}}),$$\nthe stalk of the unit is exactly the constants map in the hypothesis. This criterion includes the empty scheme $X$ and imposes no quasi-compactness, separation or Noetherian hypothesis on $X$ itself.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, theorem-higher-direct-images, together with geometric-stalk detection; blueprint Reduction to a geometric fibre, agent unit-normalization and fixed-module refinement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Work first with the underlying abelian group of $B$. Fix $\\bar x$, put $Z=Y_{\\bar x}^{\\mathrm{sh}}$ and let $p:Z\\to Y$ be the projection. Since $\\Lambda$ is finite, two nonnegative multiples of $1$ agree; subtracting gives $n\\cdot1=0$ for some $n>0$. Thus $nB=0$, and the zero multiplication-by-$n$ map remains zero after forming the constant sheaf. Hence $B_Y[0]$ has torsion cohomology. Apply [prop-weil-pbc-strict-henselization-stalk-formula] to $f$ and $B_Y[0]$. Its hypotheses require only that $f$ is quasi-compact and quasi-separated, as assumed. Applying [lem-kun-pullback-constant] to $p$ identifies $p^{-1}B_Y$ with $B_Z$. This gives the canonical restriction isomorphism $c_{\\bar x}:(Rf_*B_Y)_{\\bar x}\\xrightarrow{\\sim}R\\Gamma(Z,B_Z)$ in the statement. By [lem-weil-pbc-constant-sheaf-geometric-stalk], $B\\to(B_X)_{\\bar x}$ is the specific isomorphism sending a coefficient to its constant germ.",
+   "uses": [
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-kun-pullback-constant",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images), canonical restriction in the last proof paragraph; Tag 03PT (lemma-stalk-exact)."
+   }
+  },
+  {
+   "text": "We check the map, not just its source and target. Compute $Rf_*$ by an injective resolution $j:B_Y[0]\\to I^\\bullet$ as in [def-weil-pbc-direct-image]. By the inverse-image adjunction [def-weil-pbc-inverse-image], the derived unit is represented by $B_X[0]\\to f_*B_Y[0]\\to f_*I^\\bullet$, where the first map sends a constant coefficient to that same constant on each $Y\\times_XV$. A coefficient $b\\in B$ represents its stalk class on the pointed neighbourhood $(X,\\bar x)$ by [lem-weil-pbc-constant-sheaf-geometric-stalk]. The canonical restriction of [prop-weil-pbc-strict-henselization-stalk-formula] is induced by restricting sections on $Y\\times_XV$ to $Z$, followed by the comparison to derived sections. For $V=X$, this sends $j(b)$ to its pullback on $Z$. The canonical comparison of [lem-kun-pullback-constant] sends the pulled-back constant $b$ to the constant $b$ in $B_Z$. Thus the composite $B[0]\\to(B_X[0])_{\\bar x}\\to(Rf_*B_Y)_{\\bar x}\\xrightarrow{c_{\\bar x}}R\\Gamma(Z,B_Z)$ is the constants map: before localization both constructions send $b$ to the same degree-zero cocycle and have zero components in all other degrees. This is equality of the derived morphisms themselves.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-kun-pullback-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images), canonical restriction in the last proof paragraph; Tag 03PT (lemma-stalk-exact)."
+   }
+  },
+  {
+   "text": "The hypothesis makes the composite in step 2 invertible. Its outer identifications are invertible by step 1, so the abelian unit is invertible at every geometric stalk. Exactness of the stalk functor [prop-weil-pbc-geometric-stalks-exact] identifies cohomology of its stalk with the stalks of its cohomology-sheaf maps. Consequently all these maps are invertible, and [lem-weil-pbc-derived-stalk-conservative] proves that $B_X[0]\\to Rf_*B_Y[0]$ is an isomorphism in the abelian derived category.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images), canonical restriction in the last proof paragraph; Tag 03PT (lemma-stalk-exact)."
+   }
+  },
+  {
+   "text": "For module coefficients let $U_T$ forget scalars. The constant-section comparison in [lem-weil-pbc-constant-module-section-coefficients], applied to the identity of $T$, identifies $U_T(B_T)$ with the abelian constant sheaf just used. By [lem-weil-pbc-module-abelian-derived-direct-image-comparison], $U_T$ is exact and its canonical derived direct-image comparison is invertible and unit-compatible. Therefore forgetting the module unit, and then applying this comparison, gives precisely the abelian unit of step 3. To reflect invertibility, note that exactness gives $U_X\\mathcal H^i=\\mathcal H^iD^+(U_X)$ by applying $U_X$ to kernels, images and their quotients. Each forgotten cohomology map is consequently invertible. The inverse of an invertible underlying additive sheaf map is linear: if $h$ is linear and bijective on sections, $h^{-1}(a n)=a h^{-1}(n)$ follows by applying $h$; its inverse also commutes with restrictions. Thus every module cohomology map is invertible. Apply [lem-weil-pbc-derived-plus-iso-on-cohomology] in the module abelian category to conclude that the module unit is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-constant-module-section-coefficients",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J (lemma-modules-abelian-unbounded), part (3); Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+   }
+  },
+  {
+   "text": "No argument imposed a condition on $X$ beyond being a scheme: the stalk formula only required the given conditions on $f$. If $X$ is empty, its family of geometric points is empty and the same derived-stalk conservativity criterion still applies, so the conclusion holds. Concretely a sheaf of abelian groups or modules on the empty etale site has zero sections by the empty covering, so both derived categories are zero. The constants calculation also holds when $B=0$ or $Z$ is empty; in the latter case the hypothesis forces $B=0$ if that geometric point occurs.",
+   "uses": [
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images), canonical restriction in the last proof paragraph; Tag 03PT (lemma-stalk-exact)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-constant-module-section-coefficients",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-derived-plus-iso-on-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9 restriction construction, assembled with Tags 03PT, 03FD and 0D6J; explicit constant-unit normalization and reflection of module isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs scheme morphism constant torsion coefficients have invertible adjunction unit if constants induce a derived cohomology isomorphism on every strict local base change",
+   "results": "{\"t\": \"2026-10-22T06:12:20Z\", \"tool\": \"leanfinder\", \"query\": \"For a qcqs scheme morphism constant torsion coefficients have invertible adjunction unit if constants induce a derived cohomology isomorphism on every strict local base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\"], \"digest\": \"86e1910d342d3cd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric stalk detection of an etale constant sheaf derived direct image unit from strict henselization fibre cohomology, also for module coefficients",
+   "results": "{\"t\": \"2026-10-22T06:12:52Z\", \"tool\": \"leanfinder\", \"query\": \"Geometric stalk detection of an etale constant sheaf derived direct image unit from strict henselization fibre cohomology, also for module coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.FormallyEtale.localization_base\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.localization_map\", \"Algebra.IsEtaleAt\", \"Algebra.FormallyEtale.of_isLocalization\"], \"digest\": \"2745bdcdf83cc2fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a qcqs scheme morphism constant torsion coefficients have invertible adjunction unit if constants induce a derived cohomology isomorphism on every strict local base change",
+   "results": "{\"t\": \"2026-10-22T06:12:52Z\", \"tool\": \"leansearch\", \"query\": \"For a qcqs scheme morphism constant torsion coefficients have invertible adjunction unit if constants induce a derived cohomology isomorphism on every strict local base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.constantSheafΓAdj\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CompHausLike.LocallyConstant.adjunction_unit\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CategoryTheory.constantPresheafAdj_unit_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\"], \"digest\": \"6f4ca54907fc9652\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsIso\"",
+   "results": "{\"t\": \"2026-10-22T06:12:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"IsIso\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Presheaf.instIsIsoFunctorOfIsLeftKanExtensionOppositeType\", \"CategoryTheory.Presheaf.isIso_of_isLeftKanExtension\", \"CategoryTheory.Presheaf.instIsIsoFunctorLeftKanExtensionUnitOppositeTypeUliftYoneda\", \"CategoryTheory.GrothendieckTopology.isIso_toPlus_of_isSheaf\", \"CategoryTheory.GrothendieckTopology.isIso_toSheafify\", \"CategoryTheory.isIso_toSheafify\", \"CategoryTheory.isIso_sheafificationAdjunction_counit\", \"CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction\"], \"digest\": \"7d7b95c76d4cd623\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*stalk|stalk.*rightDerived|unit.*geometric",
+   "results": "{\"t\": \"2026-10-22T06:12:53Z\", \"tool\": \"grep\", \"query\": \"strict.*hensel.*stalk|stalk.*rightDerived|unit.*geometric\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Ring/Units.lean\", \"Mathlib/Analysis/Normed/Ring/Units.lean\", \"Mathlib/Analysis/Normed/Ring/Units.lean\"], \"digest\": \"cecdbc59eb7750af\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this finite etale/pro-etale geometric and canonical-map assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism the adjunction unit for a constant sheaf is an isomorphism if derived sections on every strict henselian base change equal the coefficient group",
+   "results": "{\"t\": \"2026-10-22T11:21:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated scheme morphism the adjunction unit for a constant sheaf is an isomorphism if derived sections on every strict henselian base change equal the coefficient group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"AlgebraicGeometry.ΓSpec.isIso_locallyRingedSpaceAdjunction_counit\", \"AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine\", \"AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq\", \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv\"], \"digest\": \"d1981ca5f1a08872\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structure-sheaf stalks, constant-sheaf definitions/counits, or other adjunctions; none states the strict-local derived constant-unit criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*hensel.*stalk|stalk.*rightDerived|constantSheaf.*unit",
+   "results": "{\"t\": \"2026-10-22T11:21:33Z\", \"tool\": \"grep\", \"query\": \"strict.*hensel.*stalk|stalk.*rightDerived|constantSheaf.*unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Module.lean\", \"Mathlib/Condensed/Discrete/Basic.lean\", \"Mathlib/Condensed/Discrete/Basic.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"3b47130ac4c468c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structure-sheaf stalks, constant-sheaf definitions/counits, or other adjunctions; none states the strict-local derived constant-unit criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of a constant etale sheaf is constant when all strict local fibres have trivial cohomology and constants give H zero",
+   "results": "{\"t\": \"2026-10-22T11:21:33Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image of a constant etale sheaf is constant when all strict local fibres have trivial cohomology and constants give H zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isConstant_of_iso\", \"CategoryTheory.Sheaf.IsConstant.rec\", \"CategoryTheory.constantSheaf\", \"CategoryTheory.Sheaf.IsConstant.casesOn\", \"CategoryTheory.Sheaf.isConstant_congr\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"CategoryTheory.Sheaf.IsConstant.recOn\", \"CategoryTheory.Sheaf.IsConstant.mk\"], \"digest\": \"436a4f2b09f3a68a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structure-sheaf stalks, constant-sheaf definitions/counits, or other adjunctions; none states the strict-local derived constant-unit criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"unit\"",
+   "results": "{\"t\": \"2026-10-22T11:21:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"constantSheaf\\\", \\\"unit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant\", \"CategoryTheory.constantSheafAdj_counit_app\", \"CategoryTheory.constantSheafAdj_counit_w\"], \"digest\": \"9e2fb400cda100ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structure-sheaf stalks, constant-sheaf definitions/counits, or other adjunctions; none states the strict-local derived constant-unit criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of a derived etale pushforward is derived global sections after strict henselization, and the adjunction unit for constant coefficients becomes the constant sections map",
+   "results": "{\"t\": \"2026-10-22T11:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"The stalk of a derived etale pushforward is derived global sections after strict henselization, and the adjunction unit for constant coefficients becomes the constant sections map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc\", \"smoothSheafCommRing.ι_forgetStalk_hom\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"smoothSheafCommRing.ι_forgetStalk_hom_apply\", \"smoothSheafCommRing.ι_forgetStalk_inv\", \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom\"], \"digest\": \"d16913179439e4b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern structure-sheaf stalks, constant-sheaf definitions/counits, or other adjunctions; none states the strict-local derived constant-unit criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-affine-line-ordinary-invariance",
+  "date": "2026-10-22",
+  "group": "Q116"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Shear paragraph, ordinary affine-line input: Strict-local criterion for constant module direct-image units; retained ordinary-invariance proof steps 3 and 5 before twist conjugation.",
+   "via": [
+    "lem-pur-affine-line-ordinary-invariance",
+    "lem-pur-supported-affine-line-homotopy"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-strict-local-constant-unit-criterion",
+  "worker": "stage1",
+  "summary": "Q144 split using existing canonical derived strict-local stalk formula, constant pullback/stalk comparisons, exact conservative geometric stalks and the unit-compatible module/abelian direct-image comparison. Wrote the constant-coefficient cocycle calculation explicitly. No new nodes, no mathematical statement change, no Lean writing or compilation.",
+  "blueprint": "lem-pur-frame-independence shear paragraph via supported affine-line homotopy and ordinary invariance: realizes the strict-local detection part of the first Reduction to a geometric fibre step of sk-prop-a1-kummer.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic canonical qcqs strict-local derived stalk formula; the affine-line unit uses this foundational tool and has no replacement for it."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic inverse-image comparison for constant sheaves, required for the strict-local coefficient identification."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Identifies the constant coefficient germ with B and fixes its normalization, independently of affine-line invariance."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic criterion detecting a derived isomorphism on geometric cohomology stalks."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-coefficients",
+    "why": "The canonical constant-module/abelian coefficient comparison at the identity identifies the forgotten constant sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Generic unit-compatible comparison for arbitrary scheme morphisms; needed to pass the abelian criterion to fixed coefficients."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-constant-module-section-coefficients",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-826d40fc9",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-826d40fc9 (reviewer sub-agent of L); spot-checked: Read the item in full and the delivery is correct. No new nodes. Live and side-live both still have the item unsplit, so no other group's split supersedes it. The statement is unchanged mathematically: the delivery only adds the citations [def-weil-pbc-constant-sheaf] and [def-pc-fibre-product] and the matching stmt_deps. proof_deps equals the union of the step uses, all three kinds of Mathlib search are recorded, and no SGA source is cited. Sources checked: Stacks 03Q9 (theorem-higher-direct-images; its last proof paragraph builds the canonical restriction map that the item and step 2 use) and 0D6J(3) (module/abelian comparison of Rf_*). The route matches the 'Reduction to a geometric fibre' step of unit sk-prop-a1-kummer: strict-local stalk formula for qcqs maps, then conservativity of geometric stalks. Citer step 2 of lem-pur-affine-line-ordinary-invariance applies the item with A_{E,n} and the strict fibre A^1_S, which matches. Step 1: Λ finite gives n·1=0 for some n>0, so B_Y is torsion as the stalk-formula node requires; the constant-pullback and constant-stalk nodes need no hypotheses. Step 2: both composites send b to ι_Z(b), and they agree in D+(Ab) by naturality of Γ→RΓ; accepted as elementary. Step 3: exact stalks plus derived-stalk conservativity, valid for any scheme. Step 4: the forgetful functor U is exact and the comparison is an isomorphism; module isomorphisms are reflected through cohomology, and the plus-derived criterion holds in any abelian category. Step 5: the cases X empty, B=0 and empty strict fibre are all handled correctly. My extra tests: f=id gives a consistent result, and Y=X⊔X correctly fails the hypothesis. A DAG-wide search found no duplicate. All six declared tool_uses are generic foundations and are accepted. Advisory, not a fault of this item: lem-weil-pbc-module-abelian-derived-direct-image-comparison says 'unit-compatible' but never proves it; the compatibility this item needs follows in two lines from the defining property of rightDerivedFunctorPlusBaseChange."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalConstantUnitCriterion",
+  "declaration": "AlgebraicGeometry.Etale.strictLocal_constant_unit_criterion",
+  "declarations": [
+   "AlgebraicGeometry.Etale.constantSheafSingle",
+   "AlgebraicGeometry.Etale.constantDerivedDirectImageUnit",
+   "AlgebraicGeometry.Etale.constantDerivedSectionsMap",
+   "AlgebraicGeometry.Etale.constantUnitDerivedStalk",
+   "AlgebraicGeometry.Etale.constantDerivedGeometricGerm",
+   "AlgebraicGeometry.Etale.strictLocalConstantDerivedRestriction",
+   "AlgebraicGeometry.Etale.strictLocal_constant_unit_criterion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalConstantUnitCriterion.lean",
+  "statement": "theorem strictLocal_constant_unit_criterion {Y X : Scheme.{u}} (f : Y ⟶ X) [QuasiCompact f] [QuasiSeparated f] (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (B : ModuleCat.{u + 1} Λ) [Finite B] (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), IsIso (constantDerivedSectionsMap AddCommGrpCat.{u + 1} (pullback f (Scheme.strictLocalizationToBase x)) ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B))) : IsIso (constantDerivedDirectImageUnit AddCommGrpCat.{u + 1} f ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B)) ∧ IsIso (constantDerivedDirectImageUnit (ModuleCat.{u + 1} Λ) f B) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), ∃ r : (Scheme.pointSmallEtale x).sheafFiber (A := AddCommGrpCat.{u + 1}) ≅ upperStar AddCommGrpCat.{u + 1} (Scheme.strictLocalizationToBase x) ⋙ Sheaf.Γ (Scheme.strictLocalization x).smallEtaleTopology AddCommGrpCat.{u + 1}, (∀ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}, IsStrictHenselizationStalkRestriction x F (r.hom.app F)) ∧ IsIso (strictLocalConstantDerivedRestriction f x r ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B)) ∧ constantDerivedGeometricGerm ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B) x ≫ (constantUnitDerivedStalk x).map (constantDerivedDirectImageUnit AddCommGrpCat.{u + 1} f ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B)) ≫ strictLocalConstantDerivedRestriction f x r ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B) = constantDerivedSectionsMap AddCommGrpCat.{u + 1} (pullback f (Scheme.strictLocalizationToBase x)) ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj B)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The six helper declarations specialize recorded functors and canonical comparison maps. The restriction parameter is a natural isomorphism uniquely pinned on every representative germ by IsStrictHenselizationStalkRestriction, asserted to exist in the conclusion; it is not an arbitrary identification or an added hypothesis. The normalization is an equality in D+(Ab), not just an equality on cohomology. No statement correction or new mathematical notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1911dd0b5",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Clause-by-clause match: qc+qs f with nothing on X; Λ : Type (u+1), finite commutative ring (recorded DerivedCategoryModule convention); finite B; hypothesis = derived constantSheafΓAdj unit into ordinary RΓ on pullback f strictLocalizationToBase, for every geometric point; conclusions = abelian and ModuleCat Λ derived units (upperStarLowerStarAdjunction.derivedPlus + upperStarConstantSheafIso) invertible; restriction r pinned componentwise by IsStrictHenselizationStalkRestriction (existsUnique), derived restriction = r + derived base-change mate + exact Γ + Leray + constant pullback, as in strictHenselizationStalkFormula; normalization stated as an equality of morphisms in D⁺(Ab). Edge cases (X empty, B=0, empty fibre) covered. Helpers are real data with no duplicates; proof is sorry only; docstrings/proof steps present; lines ≤100; records verbatim; no compile needed (no change). Advisory: IsStrictHenselizationStalkRestriction belongs to def-weil-pbc-strict-henselization-restriction, which is not in stmt_deps (S2 cannot add it; maintainer should add the citation); the live stalk-formula record still names the withdrawn Sheaf module."
+ }
+}

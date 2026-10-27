@@ -1,0 +1,166 @@
+{
+ "id": "lem-sfb-integral-constant-section-projection",
+ "kind": "statement",
+ "title": "Uniquely normalized ordinary integral and residue section comparisons",
+ "statement": "Let l be prime, E a finite extension of Q_l and X a scheme. There is a unique pair of ring isomorphisms from the constant lifted integer ring and its first residue ring to the section rings of their discrete coefficient objects, normalized on constant sections by discreteCoefficientAbelianIso. The pair commutes with the quotient to the first residue; the integer comparison followed by the discrete-to-continuous scalar map and completedSectionIso inverse has every finite projection equal to the specified constant quotient map. This is the structure IntegralSectionComparisons; its data comprises only the two ordinary ring isomorphisms, and all other fields are their normalization and projection equations.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099L, section-derived-completion-noetherian: the completed constant algebra is flat and identifies quotients; Tag 099M, lemma-naive-completion; Cohomology on Sites Tag 06YY, lemma-derived-base-change. Integral-models proof (1)--(2), comparison of the first reductions."
+ },
+ "stmt_deps": [
+  "lem-sfb-discrete-coefficient-model",
+  "def-sfb-integral-models-completed-section-ring",
+  "def-sfb-integral-models-stacks-data"
+ ],
+ "proof": [
+  {
+   "text": "Construct the two ordinary ring isomorphisms from the existing discrete constant comparisons. Their normalization and naturality give the first residue square. These are ordinary coefficient sheaves, with no module or derived-category data.",
+   "uses": [
+    "lem-sfb-integral-models-flat-residue"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the specified pointComparison with the explicit change-of-topology isomorphism. Forgetting eqToIso commutes with its underlying monoid map, and the equality of the two induced integer topologies identifies the continuous-section maps. This also identifies the inverse comparison.",
+   "uses": [
+    "def-sfb-integral-constant-model-realization",
+    "lem-pe-integral-normalized-restriction-squares",
+    "det-prop-integral-criterion-reductions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove scalar naturality of the canonical constant-to-continuous additive map using the sheafification adjunction and constantSchemeIso naturality. The canonical ring maps agree on constant sections, so their normalization gives ring scalar naturality. Use the canonical integer ring comparison and the existing normalized finite discrete encoding.",
+   "uses": [
+    "lem-sfb-integral-models-flat-residue",
+    "lem-sf-finite-discrete-normalized-encoding"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized integral section projection theorem identifies the continuous quotient map with the integral section comparison followed by the finite completed-coefficient projection. The projection equations for purCoefficientIso and pbcCompletedComparison identify the same map with the projection of the constant quotient limit. Cancel the point-section and section-ring inverse isomorphisms.",
+   "uses": [
+    "lem-pe-integral-section-projection-normalization",
+    "def-sfb-integral-models-completed-section-ring",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Postcompose with the normalized finite coefficient isomorphism and its section-ring encoding. The preceding equations reduce the assertion to the representative equation for integralCoefficientULift. Cancel these monomorphisms. The proof uses no points of X and therefore also applies to the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preceding projection calculation supplies all projection fields. For uniqueness, normalization identifies each isomorphism after the constant-presheaf sheafification unit; the sheafification adjunction identifies their underlying sheaf maps and hence the isomorphisms. The remaining fields are propositions and agree by proof irrelevance. Zero rings and empty schemes require no exceptions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-constant-model-realization",
+  "lem-pe-integral-normalized-restriction-squares",
+  "det-prop-integral-criterion-reductions",
+  "lem-sfb-integral-models-flat-residue",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-pe-integral-section-projection-normalization",
+  "def-sfb-integral-models-completed-section-ring",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Integral-models proof (1)--(2), ordinary scalar coordinates before deriving."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized isomorphism from continuous integral coefficients to the limit of constant quotient sheaves commutes with reduction of constant sections",
+   "date": "2026-10-26",
+   "results": "Eight hits; global-section and quotient facts, no matching comparison of these project ring sheaves.",
+   "verdict": "Use the project normalized coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coefficient comparison for a completed constant ring sheaf sends constant sections to their classes under every finite quotient",
+   "date": "2026-10-26",
+   "results": "Eight hits about constants in the Zariski structure sheaf and module tilde sheaves.",
+   "verdict": "No match for the specified pro-etale coefficient completion comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|constantCommuteCompose|pushforwardContinuousSheafificationCompatibility",
+   "date": "2026-10-26",
+   "results": "Ten hits in ConstantSheaf and CoverLifting.",
+   "verdict": "Use the sheafification comparison and its unit equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralResidueModelComparison",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-models proof (1)--(2), normalized scalar coordinates for the first residue.",
+   "via": [
+    "lem-sfb-integral-residue-model-comparison",
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralConstantSectionProjection",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralConstantSectionProjection.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_constant_section_projection",
+  "statement": "theorem integral_constant_section_projection (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) : ∃! _comparisons : IntegralSectionComparisons l E X, True",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.DiscreteSectionRingNormalized",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.IntegralSectionComparisons",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_constant_section_projection",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.projectionCommRingSheafify",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.projectionAbSheafify",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.projectionAbLocallyBijective",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.projectionSiteSmall"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T024018-L-630468",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T024018-L-630468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

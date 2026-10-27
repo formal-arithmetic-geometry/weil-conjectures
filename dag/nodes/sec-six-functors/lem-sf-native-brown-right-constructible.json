@@ -1,0 +1,151 @@
+{
+ "id": "lem-sf-native-brown-right-constructible",
+ "kind": "statement",
+ "title": "Constructibility of a supplied native localizing exceptional adjoint",
+ "statement": "Let k₀ be a finite field and l a prime different from its characteristic. Let X and Y be finite-type k₀-schemes, with Y quasi-separated, and let f : X → Y be separated of finite type [def-sf-native-weil-derived-framework]. Use the chosen native Nagata compactification and nativeWeilLocalizingHull of [lem-sf-native-weil-localizing-brown-adjoints]. For any witness hW that the ambient native compact-support functor preserves these hulls, and any adjunction F_W ⊣ G_W on their full subcategories, G_W sends the inclusion of every native bounded constructible Weil complex M on Y to an object whose underlying ambient native derived object is a bounded constructible Weil complex on X. The inclusion uses the established containment WeilComplex.objectProperty ≤ nativeWeilLocalizingHull. This is only preservation by an already supplied hull adjoint; it neither asserts existence of that adjoint nor constructs the restricted adjunction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Final exceptional-adjunction sentence; native assembly step 3 of thm-sf-weil-compact-direct-image-right-adjoint"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-weil-localizing-brown-adjoints"
+ ],
+ "proof": [
+  {
+   "text": "Base change the chosen native compactification to the algebraic closure, without assuming absolute separatedness. Package the finite base field as a FiniteFieldDatum. Apply the existing coefficient construction and locally finite adic compact-support realization to obtain source and target realizations and its actual common-stage action. The stage-action adjunction lemma gives its right adjoint on the unlifted common-stage category. Apply native_geometric_brown_constructible_comparison with precisely that action, adjunction and realization comparison. Its preservation clause proves constructibility for any supplied geometric hull adjunction.",
+   "uses": [
+    "lem-sf-constructible-exceptional-coefficient-construction",
+    "lem-sf-locally-finite-adic-compact-support-realization",
+    "lem-sf-compact-support-stage-action-adjunction",
+    "lem-sf-native-geometric-brown-constructible-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; native assembly step 3 of thm-sf-weil-compact-direct-image-right-adjoint"
+   }
+  },
+  {
+   "text": "Restrict both specified derived free/forgetful adjunctions to the geometric and Weil localizing hulls using nativeWeil_localizing_hulls and Adjunction.restrictFullyFaithful. The normalized induction comparison is invertible on every geometric hull input, so it gives an isomorphism between the two composite left functors. Compose adjunctions and transport along this isomorphism. Adjunction.rightAdjointUniq identifies G_W followed by forgetting with forgetting followed by the geometric Brown right adjoint.",
+   "uses": [
+    "lem-sf-free-derived-weil-resolution",
+    "lem-sf-native-weil-derived-induction-comparison",
+    "lem-sf-native-weil-localizing-brown-adjoints"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; native assembly step 3 of thm-sf-weil-compact-direct-image-right-adjoint"
+   }
+  },
+  {
+   "text": "WeilComplex.objectProperty_iff identifies bounded constructible Weil objects with those whose derived forgetful images are bounded constructible. Apply its forward direction to M, step 1 to the geometric right adjoint, then repleteness along the underlying isomorphism of step 2. Apply the reverse direction of the same criterion to conclude the unchanged target.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-free-derived-weil-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Final exceptional-adjunction sentence; native assembly step 3 of thm-sf-weil-compact-direct-image-right-adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-constructible-exceptional-coefficient-construction",
+  "lem-sf-locally-finite-adic-compact-support-realization",
+  "lem-sf-compact-support-stage-action-adjunction",
+  "lem-sf-native-geometric-brown-constructible-comparison",
+  "lem-sf-free-derived-weil-resolution",
+  "lem-sf-native-weil-derived-induction-comparison",
+  "lem-sf-native-weil-localizing-brown-adjoints",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "H7 Lean reduction: common-stage adjunction assembly, geometric comparison, restriction and composition of free adjunctions, normalized induction and right-adjoint uniqueness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint to compact support on a localizing category sends bounded constructible Weil complexes to bounded constructible Weil complexes",
+   "results": "Adjunction.isLocalization_rightAdjoint, Adjunction.ofIsRightAdjoint, MorphismProperty.isRightAdjoint_ι_isLocal, right-adjoint limit preservation, IsRightAdjoint.mk, IsRightDerivedFunctor.mk and constantSheafΓAdj. These give generic adjunction, localization and limit assertions, not native Weil constructibility.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor with a right adjoint that preserves full subcategories restricts to an adjunction on those full subcategories",
+   "results": "Adjunction.restrictFullyFaithful supplies restriction after preservation, not constructibility of the hull adjoint.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "Generic fully faithful restriction and its unit/counit formulae; no constructibility assertion.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nativeWeil.*constructible|nativeWeil.*[Bb]rown",
+   "results": "msearch returned zero hits. Local rg found NativeWeilLocalizingBrownAdjoints and NativeGeometricBrownConstructibleComparison: the former gives hull adjoints; the latter treats the underlying geometric category. Neither states native right-adjoint preservation.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.VerdierDual",
+  "date": "2026-10-27",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final exceptional-adjunction sentence; native right-adjoint constructibility before restricting the adjunction",
+   "via": [
+    "thm-sf-weil-compact-direct-image-right-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.CompactSupportBrownConstructibility",
+  "file": "lean/Sheaf/WeilSheaf/CompactSupportBrownConstructibility.lean",
+  "declaration": "AlgebraicGeometry.nativeBrownRight_preserves_weilComplex",
+  "statement": "theorem nativeBrownRight_preserves_weilComplex\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)]\n    {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]\n    [Y.Over (Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]\n    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (hW : ∀ K, nativeWeilLocalizingHull k₀ l X K →\n      nativeWeilLocalizingHull k₀ l Y\n        ((ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f\n          (nativeWeilChosenCompactification k₀ f)).obj K))\n    (G : (nativeWeilLocalizingHull k₀ l Y).FullSubcategory ⥤\n      (nativeWeilLocalizingHull k₀ l X).FullSubcategory)\n    (_adj : (nativeWeilLocalizingHull k₀ l X).liftFullSubcategory\n      (nativeWeilLocalizingHull k₀ l Y)\n      (ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f\n        (nativeWeilChosenCompactification k₀ f)) hW ⊣ G)\n    (M : WeilComplex k₀ l Y) :\n    WeilComplex.objectProperty k₀ l X\n      (G.obj ⟨M.obj, (nativeWeil_localizing_hulls k₀ l Y).2.2.2.2.1 M.obj M.property⟩).obj",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T194901-L-2575338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261026T222714-L-684805",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

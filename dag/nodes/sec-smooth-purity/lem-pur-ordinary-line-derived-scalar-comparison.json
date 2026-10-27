@@ -1,0 +1,331 @@
+{
+ "id": "lem-pur-ordinary-line-derived-scalar-comparison",
+ "kind": "statement",
+ "title": "Ordinary unbounded derived scalar extension intertwines signed line tensor and evaluation",
+ "statement": "Let $X$ be a scheme, and work on its small pro-etale site [def-weil-pbc-proetale-site]. Let $R_0\\xrightarrow{r_{10}}R_1\\xrightarrow{r_{21}}R_2$ be sheaves of commutative rings, and put $r_{20}=r_{21}r_{10}$. Use module sheaves and their unbounded derived categories $D(R_i)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $L_i$ be $R_i$-module sheaves locally isomorphic to $R_i$, with isomorphisms $b_{ji}:L_i\\otimes_{R_i}R_j\\cong L_j$ satisfying $b_{20}=b_{21}(b_{10}\\otimes1)$ under reassociation. For identity coefficient maps use the multiplication datum $b_{ii}$. Define $M_{i,m}=L_i^{[m]}$ for $m\\in\\mathbf Z$ by $L_i^{[0]}=R_i$, $L_i^{[m]}=L_i^{\\otimes m}$ for $m>0$, and $L_i^{[-m]}=\\mathcal Hom_{R_i}(L_i^{[m]},R_i)$ for $m>0$ [def-pur-sheaf-tensor-product, def-pur-sheaf-hom]. Let $b_{ji,m}$ be the signed-power scalar comparisons normalized by tensor powers and dual evaluation [lem-pur-signed-line-scalar-tensor-tower]. Put $T_{i,m}(K)=K\\otimes^L_{R_i}M_{i,m}$ and $B_{ji}(K)=K\\otimes^L_{R_i}R_j$ using K-flat derived tensor [lem-weil-pbc-site-derived-tensor-descent, lem-pur-derived-change-of-rings].\n\nEvery $M_{i,m}$ is locally free of rank one; $T_{i,m}$ is induced by the exact additive termwise tensor functor on all unbounded complexes, with inverse $T_{i,-m}$ and evaluation $\\epsilon_{i,m}:T_{i,-m}T_{i,m}\\cong1$ given by actual sheaf evaluation. There are natural isomorphisms $\\bar\\beta_{ji,m}:B_{ji}T_{i,m}\\cong T_{j,m}B_{ji}$. On a flat-term K-flat representative $P$ [def-pc-kflat-complex], $P\\otimes M_{i,m}$ and $P\\otimes R_j$ are again flat-term K-flat, and $\\bar\\beta$ is represented by the sheafified balanced chain isomorphism\n$$((p\\otimes l)\\otimes s)\\longmapsto(p\\otimes s)\\otimes b_{ji,m}(l\\otimes1).$$\nIts inverse is tensor reassociation followed by $b_{ji,m}^{-1}$; its localization is independent of $P$, including naturality for arbitrary derived morphisms. Write $d_K:B_{21}B_{10}K\\cong B_{20}K$ for the ordinary associator with formula $(p\\otimes s)\\otimes t\\mapsto p\\otimes r_{21}(s)t$ [lem-sfb-successive-derived-quotient-normalization]. Then\n$$T_{2,m}(d_K)\\circ\\bar\\beta_{21,m,B_{10}K}\\circ B_{21}(\\bar\\beta_{10,m,K})=\\bar\\beta_{20,m,K}\\circ d_{T_{0,m}K},$$\n$$\\epsilon_{j,m,B_{ji}K}\\circ T_{j,-m}(\\bar\\beta_{ji,m,K})\\circ\\bar\\beta_{ji,-m,T_{i,m}K}=B_{ji}(\\epsilon_{i,m,K}).$$\nFor the multiplication unitor $\\lambda_i:B_{ii}\\cong1$, the multiplication line datum gives $T_{i,m}(\\lambda_{i,K})\\bar\\beta_{ii,m,K}=\\lambda_{i,T_{i,m}K}$. More generally, if the source and target coefficient rings coincide but the prescribed line comparison is an arbitrary isomorphism, the scalar-unitor-normalized component is the termwise tensor map induced by that signed-power line isomorphism; it is not required to be identity. All these assertions include $m=0$ and negative $m$, and require neither completeness nor boundedness nor flatness of the ring maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), specialized to change of coefficient rings on one topos; signed-line evaluation and tower identities are the agent extraction of blueprint Proof (3), not additional assertions of Tag 07A4.",
+  "also": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final sentence; ordinary part of the original parent proof, steps 1-3."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-line-unbounded-tensor-data",
+  "def-pur-ordinary-line-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply exists_lineData from the extracted proved prerequisite module. Its proof retains the original signed-power rank, exact line-tensor, actual evaluation and flat-model arguments (original steps 1--3).",
+   "uses": [
+    "lem-pur-ordinary-line-scalar-line-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use [lem-weil-pbc-ringed-topos-kflat-pullback] for the identity underlying topos and the ring map $r_{ji}$; its $u^*$ is exactly $-\\otimes_{R_i}R_j$. It gives K-flatness and flat terms for $P\\otimes R_j$, without assuming $R_j$ flat over $R_i$. In view of Step 3, both sides of the desired comparison can therefore be computed on $P$ by literal termwise tensors, using [lem-pur-derived-change-of-rings] for $B_{ji}$ and Step 2 for $T$. The smallness hypotheses are satisfied by the chosen skeleton in [def-weil-pbc-proetale-site].",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), identity underlying topos."
+   }
+  },
+  {
+   "text": "M1 implementation: ordinary_scalar_line_balanced constructs the ordinary natural isomorphism and verifies its forward and inverse balanced formulas.",
+   "uses": [
+    "lem-pur-ordinary-line-scalar-balanced-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), chain-level comparison; balanced formulas expanded using sites-modules.tex Tag 0GMW and its following universal-property display."
+   }
+  },
+  {
+   "text": "M1 implementation: ordinary_scalar_line_flat_descent descends the fixed ordinary comparison to a natural derived isomorphism with its representative square. The main theorem separately proves preservation of flat-term K-flat complexes using identity-topos K-flat pullback and assembles the Comparison record.",
+   "uses": [
+    "lem-pur-ordinary-line-scalar-flat-descent",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS/0G7D and 06YU, resolving-class localization; categories.tex Tags 04VG/04VK for localization, including fully faithful precomposition."
+   }
+  },
+  {
+   "text": "Use the explicit $d$ of [lem-sfb-successive-derived-quotient-normalization]. On $(((p\\otimes l)\\otimes s)\\otimes t)$ the left side of the tower equation is\n$$(p\\otimes r_{21}(s)t)\\otimes b_{21,m}(b_{10,m}(l\\otimes1)\\otimes1),$$\nwhereas the right side is $(p\\otimes r_{21}(s)t)\\otimes b_{20,m}(l\\otimes1)$. These are equal by the signed-power tower equation in [lem-pur-signed-line-scalar-tensor-tower]. Equality on generators gives equality of sheaf chain maps by [lem-pc-sites-sheaf-tensor-bilinear-universal], and Step 6 descends it. All intermediate representatives are flat-term K-flat by Steps 3--4, so this computation uses the specified $d$, without changing resolutions between the two paths. G5 implementation: ordinary_tower uses the composite ordinary adjunction to test the two maps on pure tensors. The supplied hom formulas, ordinary associator formula and signed-power tower equation identify these generators. Prolong this equality degreewise to cochain complexes. computation packages the canonical cochain computation maps as a natural transformation; compute_composition derives their tower square from Normalization.representative and the published quotientCompQhIso naturality. The proved categorical tower_on_representative pastes  these squares with the three Comparison.representative equations and cancels the invertible composite computation on a flat model. Finally natural_ext_on_good extends the equality to every derived object, using a flat-term K-flat resolution from lem-pc-kflat-resolution and naturality along its image isomorphism. This proves comparison_tower without using ordinary_line_derived_scalar_comparison or adding any unproved statements.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), normalized associator; blueprint Proof (3) signed evaluation combined with the existing signed-line tower."
+   }
+  },
+  {
+   "text": "M1 reduction: apply ordinary_scalar_line_evaluation for the evaluation square for the already constructed ordinary and derived comparisons, using their balanced and representative formulas. It is strictly the evaluation part of the argument and does not assert comparison existence.",
+   "uses": [
+    "lem-pur-ordinary-line-scalar-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), actual evaluation and inverse twist; coefficient compatibility is the signed-line evaluation formula, expanded on generators."
+   }
+  },
+  {
+   "text": "For $r_{ii}=1$, the multiplication unitor on complexes is $p\\otimes s\\mapsto sp$ with inverse $p\\mapsto p\\otimes1$. By [lem-pur-signed-line-scalar-tensor-tower], multiplication line data give $b_{ii,m}(l\\otimes1)=l$. Both sides of the required unit equation send $(p\\otimes l)\\otimes s$ to $sp\\otimes l$, so agree as sheaf chain maps by [lem-pc-sites-sheaf-tensor-bilinear-universal], hence after localization by [lem-weil-pbc-localization-universal-property]. More generally let $a_m:M_{i,m}\\cong M_{j,m}$ be the signed comparison over the identical ring. After inserting the inverse scalar unitor at the source and the scalar unitor at the target, the comparison sends $p\\otimes l$ to $p\\otimes a_m(l)$. Thus it is termwise tensor by $a_m$, not an imposed identity. The calculation uses no bound or completeness, and Steps 3--4 used no flatness of a coefficient map. The implemented exists_presentations obtains the scalar family from successive_derived_quotient_normalization. Adjoint uniqueness identifies identity scalar extension with the identity ordinary functor, using the normalized adjunction unit and scalar linearity. The universal derived counit and localization identify its derived functor with the identity; quotient comparison naturality gives the required computation formula. N1 implementation: comparison_identity specializes the arbitrary identity-ring comparison to A_m = identity, proves that the induced cochain map is identity degreewise, cancels the invertible factors and unitors, and applies Localization.natTrans_ext for the cochain quasi-isomorphism localization to get the equation on every derived object. J4 implementation: comparison_identity_arbitrary first proves the ordinary equation after multiplication normalization. Precompose with the inverse ordinary unitor; its value on a section x is the scalar section 1 tensor x. The prescribed comparison formula, the multiplication unitor formula, and the assumed equation for B_m reduce both sides to x tensor A_m(y). The existing sheaf tensor pure-generator extensionality proves the ordinary equation. Apply it degreewise to complexes. A generic categorical pasting calculation combines this equation with Comparison.representative, UnitData.computed and naturality of the two line factors and the derived unitor, proving the desired equality on flat-term K-flat complexes. For an arbitrary complex choose the quasi-isomorphism from a flat-term K-flat resolution supplied by [lem-pc-kflat-resolution]. Both sides are components of natural transformations on the cochain category. Naturality for this quasi-isomorphism and cancellation of its invertible derived image extend the equation to the original complex. This does not require the original complex itself to be K-flat, and does not add any line-comparison or coefficient hypotheses. The already proved presentation/unitor construction is re-exported from OrdinaryLineScalarPresentations.",
+   "uses": [
+    "lem-pur-signed-line-scalar-tensor-tower",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-pur-ordinary-line-scalar-presentations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), termwise line tensor; unit normalization from the signed-line multiplication datum, with arbitrary identity-ring line comparison kept distinct."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ordinary-line-scalar-line-data",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-ordinary-line-scalar-balanced-comparison",
+  "lem-pur-ordinary-line-scalar-flat-descent",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-ordinary-line-scalar-evaluation",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-ordinary-line-scalar-presentations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+  "place": "Proof (3), final two sentences; ordinary scalar-comparison extraction. The chain-level coherence calculations are written out by Q148 using Stacks 07A4, 0G7E, 0D6D and the cited existing nodes. U4, 2026-10-24: exists_presentations implemented by adjoint uniqueness and localization. The other theorem proofs retain their stated plans. N1, 2026-10-25: comparison_identity proved from comparison_identity_arbitrary and cochain localization extensionality; no new statement. V7, 2026-10-26: exists_lineData implemented from proved signed local basis charts, line_unbounded_derived_tensor, unique signed multiplication, exactness, total associativity and localization of cancellation. Other remaining theorem proofs retain their stated plans. J4, 2026-10-26: comparison_identity_arbitrary implemented by ordinary pure-tensor extensionality, degreewise prolongation, categorical pasting with the representative and scalar-unitor equations, and naturality along a flat-term K-flat resolution. No new statements or changed signatures. G5, 2026-10-26: comparison_tower implemented by ordinary pure-tensor extensionality, degreewise prolongation, categorical pasting of the normalized representative squares, and flat-term K-flat resolution extensionality. No new statements or changed signatures. M1, 2026-10-27: extract unchanged comparison data to its own module; separate ordinary balanced construction, representative descent and evaluation compatibility. The main theorem assembles these parts and proves flat-model preservation from identity-topos K-flat pullback.; M1: proved prerequisites moved unchanged into two acyclic modules after profiling."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived categories of sheaves of modules, signed tensor powers of compatible invertible sheaves commute with derived extension of scalars, with coherent composition and dual evaluation",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CategoryTheory.Functor.mapExactFunctor_smul; LightCondensed.instMonoidalClosedLightCondMod; CategoryTheory.Sheaf.symmetricCategory; LightCondensed.instMonoidalCategoryLightCondMod; CategoryTheory.Sheaf.monoidalCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module base change and dual evaluation or Tor functoriality do not give the unbounded sheaf-derived natural comparison with the two coherence equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars intertwines tensor by invertible modules and their duals, naturally in arbitrary complexes and compatibly with composition",
+   "results": "CategoryTheory.Tor'_map_app; ModuleCat.extendRestrictScalarsAdj_homEquiv_apply; CategoryTheory.Tor_map; CategoryTheory.Tor'_obj_map; CategoryTheory.Abelian.Ext.homLinearEquiv; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; CharacterModule.dual_rTensor_conj_homEquiv; CategoryTheory.Functor.mapExactFunctor_smul",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module base change and dual evaluation or Tor functoriality do not give the unbounded sheaf-derived natural comparison with the two coherence equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with compatible locally free rank one module sheaves commutes with scalar extension and dual evaluation",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange; contractLeft; IsBaseChange.toDualBaseChange; IsBaseChange.toDualBaseChange_tmul; IsBaseChange.toDual; IsLocalization.moduleTensorEquiv; Module.Dual.baseChange; dualTensorHomEquivOfBasis",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module base change and dual evaluation or Tor functoriality do not give the unbounded sheaf-derived natural comparison with the two coherence equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module base change and dual evaluation or Tor functoriality do not give the unbounded sheaf-derived natural comparison with the two coherence equations"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*[Tt]ensor|[Tt]ensor.*[Cc]hangeOfRings|[Dd]erived.*[Ii]nvertible",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module base change and dual evaluation or Tor functoriality do not give the unbounded sheaf-derived natural comparison with the two coherence equations"
+  },
+  {
+   "tool": "grep",
+   "query": "distribBaseChange|toDualBaseChange_tmul|extendScalars.*[Tt]ensor",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module base change and dual evaluation or Tor functoriality do not give the unbounded sheaf-derived natural comparison with the two coherence equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, Functor",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, free sheaves or exact derived functors; none gives the full unbounded sheaf scalar comparison with tower and signed evaluation equations"
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*[Tt]ensor|[Dd]erived.*[Ii]nvertible|[Ii]nvertible.*[Dd]erived",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, free sheaves or exact derived functors; none gives the full unbounded sheaf scalar comparison with tower and signed evaluation equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived scalar extension of module sheaves commutes with tensor by invertible sheaves and dual evaluation",
+   "results": "SheafOfModules.ιFree_mapFree_inv_assoc; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; LightCondensed.instMonoidalClosedLightCondMod; SheafOfModules.freeHomEquiv_symm_comp; SheafOfModules.freeHomEquiv_comp_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, free sheaves or exact derived functors; none gives the full unbounded sheaf scalar comparison with tower and signed evaluation equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor invertible module sheaf extension scalars natural isomorphism",
+   "results": "ModuleCat.extendScalarsId_inv_app_apply; ModuleCat.ExtendScalars.obj'; ModuleCat.ExtendScalars.map'; Module.Invertible.rTensorEquiv; ModuleCat.restrictScalarsId'App_inv_naturality; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalarsId_hom_app_one_tmul; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, free sheaves or exact derived functors; none gives the full unbounded sheaf scalar comparison with tower and signed evaluation equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor by a locally free rank one sheaf defines an exact equivalence on unbounded complexes compatible with derived change of rings",
+   "results": "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; LightCondensed.instMonoidalLightCondSetLightCondModFree; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, free sheaves or exact derived functors; none gives the full unbounded sheaf scalar comparison with tower and signed evaluation equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-line-tensor-coherence",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: termwise line twists and inverse evaluation; ordinary coefficient comparison underlying completion (parent old steps 1-3).",
+   "via": [
+    "lem-pur-completed-line-tensor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-ordinary-line-derived-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Retained the statement and reused existing signed-line, exact line tensor, resolving-class localization, K-flat pullback and scalar associator nodes. Wrote nine proof steps including explicit inverse, chain naturality, arbitrary-derived-morphism descent, tower, evaluation and unit calculations. No new nodes.",
+  "blueprint": "det-def-sp-tate-twist-locally-free Proof (3), final two sentences: tensor powers and duals, actual evaluation, flatness and termwise derived tensor; ordinary scalar-comparison part of the parent completion coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Restriction of ordinary sheaf tensor to a trivializing slice; a generic ringed-site tool, not a replacement for the purity route."
+   },
+   {
+    "node": "lem-pur-signed-line-scalar-tensor-tower",
+    "why": "Existing signed-power coefficient comparisons with their tower and evaluation normalizations, already required in the item statement."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Ordinary sheaf associativity and tensor left adjoint, used only to reassociate totalization and prove flatness."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Stacks 0G7E on the identity topos ensures scalar extension preserves flat-term K-flat models even for nonflat coefficient maps."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The existing ordinary K-flat derived scalar extension used in the statement; no same-unit substitute."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Universal property of ordinary sheaf tensor, used to construct and compare balanced chain maps."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Resolving-class localization equivalence needed to descend the comparison and its equations for arbitrary unbounded complexes."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "The normalized ordinary derived associator explicitly named in the statement; no new coefficient route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pur-signed-line-scalar-tensor-tower",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-5167bc23f",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-5167bc23f (reviewer sub-agent of L); spot-checked: I read the item in full and its nine steps against every cited statement. The delivery is one commit with no new nodes, and the item is still unsplit in live and side-live with a verbatim statement. The only stmt_deps change is the added def-pc-flat-sheaf-modules, which the statement's 'flat-term K-flat' needs. There is no SGA citation and no cycle (closure of 264 nodes). Sources: Stacks 0G7E (sites-cohomology l.3508) and 07A4 (l.3684). The item's beta-bar is the 07A4 chain isomorphism for the identity topos with ring map r_ji, followed by b_ji,m. Blueprint: sk-def-sp-tate-twist-locally-free proof (3) is consistent. Step 1: local bases come from restriction commuting with tensor and Hom on slices; the contraction's local adjoint identifies M_-m with the dual of M_m for every sign of m. Step 2: the hypotheses of lem-pur-line-unbounded-derived-tensor are met, and it gives the exact evaluation formula. Step 3: K-flatness of P tensor M holds because tensor by M is a left adjoint and exact; terms are flat as composites of exact functors. Step 4: the K-flat pullback node applies with the identity topos and c=r_ji, needs no flatness of the ring map, and smallness comes from the proetale skeleton. Step 5: I rechecked the balancing relations and the inverse; the degree-0 factors give chain and homotopy compatibility. Step 6: both composites invert quasi-isomorphisms on the flat-term K-flat category, so gamma descends by the descent equivalence and the localization lemma (2) and (3). Steps 7-9: I recomputed the generators. The tower equation follows from the signed-line identity b02,m ass = b12,m(b01,m tensor 1), with indices transposed. The evaluation equation needs only commutativity. The unit clause holds, and an arbitrary datum gives tensor by a_m, not the identity. Edge cases checked: m=0, m=+-1, a unit u giving u^m (non-identity for u=-1), the non-flat map Z to Z/2, the zero ring, and unbounded K. Not duplicates of lem-pur-signed-line-derived-base-change (ring isomorphism under a topos morphism), lem-pur-signed-line-scalar-pullback-square (underived), the transport lemma (abstract, takes these equations as input) or lem-pur-line-unbounded-derived-tensor (fixed ring). Accepted tool_uses: lem-sfb-localized-site-tensor-restriction, lem-pur-signed-line-scalar-tensor-tower, lem-pc-sheaf-modules-tensor-closed, lem-pur-derived-change-of-rings, lem-pc-sites-sheaf-tensor-bilinear-universal and lem-sfb-successive-derived-quotient-normalization; the two sk-thm-properbasechange nodes are already in route. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.OrdinaryLineDerivedScalarComparison",
+  "declaration": "SheafOfModules.OrdinaryLineScalar.ordinary_line_derived_scalar_comparison",
+  "declarations": [
+   "SheafOfModules.OrdinaryLineScalar.ordinary_line_derived_scalar_comparison",
+   "SheafOfModules.OrdinaryLineScalar.comparison_tower",
+   "SheafOfModules.OrdinaryLineScalar.comparison_identity",
+   "SheafOfModules.OrdinaryLineScalar.comparison_identity_arbitrary"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/OrdinaryLineDerivedScalarComparison.lean",
+  "statement": "theorem ordinary_line_derived_scalar_comparison {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}} (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w} (J := Scheme.ProEt.topology X) α) (L : Modules X R) (K : Modules X S) [L.IsFiniteLocallyFreeOfRank 1] [K.IsFiniteLocallyFreeOfRank 1] (l : LineData L) (k : LineData K) (b : changeOfRingsOfUniverses.{t, t + 1, max a (t + 1), max a (t + 1)} (J := Scheme.ProEt.topology X) α L ≅ K) (B : ∀ m : ℤ, changeOfRingsOfUniverses.{t, t + 1, max a (t + 1), max a (t + 1)} (J := Scheme.ProEt.topology X) α (power L m) ≅ power K m) (hB : SignedLineComparisonNormalized.{t + 1, t, a} α L K b B) : Nonempty (Comparison p L K l k B)",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The node is stated by six theorem clauses: canonical scalar presentations and multiplication unitors, exact signed-line tensor data, the representative-normalized scalar comparison and evaluation square, its tower equation, multiplication identity, and arbitrary identity-ring line isomorphism. Auxiliary structures package precisely these maps with their normalizations; all data use recorded sheaf tensors, signed powers and universal derived scalar extension. H2 repair: def-pur-line-unbounded-tensor-data owns the existing plain line-tensor definitions used in the statement; lem-pur-line-unbounded-derived-tensor remains a proof dependency only."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c2efe9d10",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Re-delivery of the fe1cdfa1 H2 RETURN. The Lean file is byte-identical. The item replaces theorem stmt_dep lem-pur-line-unbounded-derived-tensor with the new def-pur-line-unbounded-tensor-data (existing:true on the unchanged LineUnboundedDerivedTensor, 10 plain defs Modules..normalization); the theorem stays in proof_deps. The item uses 7 LineUnbounded names (Modules/tensor/derived/single/normalization/pureTensor/cancellation), all in the record, none a .choose of the theorem. The record's statement is verbatim with the source. check_existing and check_new_node report no failures. The new node's stmt_deps own its body decls (def-sf-ringed-kflat-tensor-representative-data, def-pur-sheaf-hom, def-pc-kflat-complex, def-pc-flat-sheaf-modules), and the closure has no cycle. Its TeX matches the normalization body. The dep records in the snapshot equal side-live, so no revert. The live item still has 11 stmt_deps and no lean record. Mathematics re-read: the evaluation and tower arrow orders match the node; ordinary/derived/factors/epsilon are pinned; the identity and arbitrary-A_m clauses are correct. Edge cases m=0/±1/negative, zero ring, non-flat ring map and unbounded complexes are covered, with no universe identification. Advisories: base-era owners of scalarExtensionSection/scalarExtensionTowerIso are outside stmt_deps. No compile run (no file changed); the worker reports 55.7 s / 41.7 s clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-2e1d4",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261027T131500-L-2942396",
+  "kind": "interface",
+  "note": "independent cc review: the deleted blocks of the original module against the new Data/Presentations/LineData modules (verbatim apart from blueprint tags), the item signature against the clone, the four direct importers and #print axioms compiled in sandbox /tmp/m1sb, the timing of the published original (106.6 s) against the delivered item (34 s), and the evaluation hole against its node and the Comparison.evaluation field"
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "id": "lem-sfb-conormal-surjection-unramified",
+ "kind": "statement",
+ "title": "A conormal surjection detects unramifiedness along a common closed subscheme",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes locally of finite type [def-pc-scheme, def-weil-finite-type-morphism]. Let $i:Z\\hookrightarrow X$ and $j:Z\\hookrightarrow Y$ be closed immersions with $f\\circ i=j$ [def-weil-closed-immersion]. Let $\\mathcal I_i$ and $\\mathcal I_j$ be their ideal sheaves [def-sbc-closed-immersion-ideal-sheaf], and put $\\mathcal C_{Z/X}=i^*\\mathcal I_i$ and $\\mathcal C_{Z/Y}=j^*\\mathcal I_j$ [def-pc-module-pullback]. Suppose that the canonical conormal morphism $\\mathcal C_{Z/Y}\\to\\mathcal C_{Z/X}$ of [lem-weil-pbc-closed-immersion-conormal-functorial], for the square with bottom map $f$ and top map $1_Z$, is surjective as a map of sheaves of modules. Then for every $z\\in Z$ there is an open neighbourhood $W\\subseteq X$ of $i(z)$ such that $f|_W:W\\to Y$ is unramified [def-weil-open-immersion, def-weil-unramified-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 067L (morphisms-lemma-two-immersions), its right-exact conormal sequence, and 02GF (morphisms-lemma-unramified-at-point), equivalence of unramifiedness and vanishing of the cotangent fibre; also 01R4 (morphisms-lemma-conormal-functorial) for the specified arrow."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-conormal-functorial",
+  "def-weil-open-immersion",
+  "def-weil-unramified-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-two-closed-immersions-conormal-exact] to the given $f,i,j$. Its hypotheses are precisely that both immersions are closed and $f\\circ i=j$, so they hold without extra finiteness assumptions. It supplies the right-exact sequence $\\mathcal C_{Z/Y}\\xrightarrow{u}\\mathcal C_{Z/X}\\xrightarrow{v}i^*\\Omega^1_{X/Y}\\to0$. The statement of that node specifies that $u$ is the very conormal morphism assumed surjective in this item, with top map $1_Z$ and bottom map $f$.",
+   "uses": [
+    "lem-sfb-two-closed-immersions-conormal-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 067L (morphisms-lemma-two-immersions), sequence and specified first arrow."
+   }
+  },
+  {
+   "text": "In the right-exact sequence from step 1, $vu=0$ and $u$ is surjective, so $v=0$: locally lift any section of $\\mathcal C_{Z/X}$ through $u$ and apply $v$. Since $v$ is also surjective, every section of $i^*\\Omega^1_{X/Y}$ is locally zero and hence is zero by the sheaf axiom. Therefore $i^*\\Omega^1_{X/Y}=0$. This is the elementary cokernel calculation; no exactness after a nonflat tensor product is being asserted.",
+   "uses": [
+    "lem-sfb-two-closed-immersions-conormal-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 067L (morphisms-lemma-two-immersions), elementary consequence of its right-exact sequence."
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$ and put $x=i(z)$, $A=\\mathcal O_{X,x}$, $B=\\mathcal O_{Z,z}$ and $M=\\Omega^1_{X/Y,x}$. The pullback-stalk isomorphism [lem-weil-pbc-module-stalk-pullback] identifies the zero stalk from step 2 with $M\\otimes_A B$. Tensoring this zero module with $\\kappa(z)$ over $B$ and associating tensors gives $M\\otimes_A\\kappa(z)=0$; on pure tensors the identification is $(m\\otimes b)\\otimes c\\mapsto m\\otimes bc$, with inverse $m\\otimes c\\mapsto(m\\otimes1)\\otimes c$. The closed-immersion definition [def-weil-closed-immersion] makes $A\\to B$ surjective: the homeomorphism onto its image identifies $(i_*\\mathcal O_Z)_x$ with $B$, and the structure-sheaf surjection lifts each germ. It is a local map because $i$ is a scheme morphism. Thus $B=A/K$ for a proper ideal $K\\subseteq\\mathfrak m_A$ and its unique maximal ideal is $\\mathfrak m_A/K$. The residue-field definition [def-weil-residue-field] identifies the induced map $\\kappa(x)=A/\\mathfrak m_A\\to\\kappa(z)\\cong(A/K)/(\\mathfrak m_A/K)$ with $[a]\\mapsto[[a]]$. This is an $A$-algebra isomorphism, with inverse $[[a]]\\mapsto[a]$; the quotient relations make both maps well defined. Tensoring its inverse with $M$ therefore gives $M\\otimes_A\\kappa(x)=0$. All tensors here are the scalar extensions of [def-weil-module-base-change].",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF (morphisms-lemma-unramified-at-point), cotangent fibre in (5); pullback stalk calculation: sheaves.tex Tag 0098 (lemma-stalk-pullback-modules)."
+   }
+  },
+  {
+   "text": "Apply (2)$\\Rightarrow$(1) of [lem-sfb-unramified-cotangent-fibre-criterion] to $f$ and $x=i(z)$. The assumed local finite type of $f$ is exactly its finiteness hypothesis, and step 3 gives its zero cotangent-fibre hypothesis. It produces an open $W\\subseteq X$ containing $i(z)$ with $f|_W$ unramified over the original target $Y$. Since $z$ was arbitrary, this proves the stated assertion at every point of $Z$. If $Z$ is empty there is no point to choose and the conclusion is vacuous.",
+   "uses": [
+    "lem-sfb-unramified-cotangent-fibre-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF (morphisms-lemma-unramified-at-point), equivalence (1) with (5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-two-closed-immersions-conormal-exact",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-weil-closed-immersion",
+  "def-weil-residue-field",
+  "def-weil-module-base-change",
+  "lem-sfb-unramified-cotangent-fibre-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 067L (morphisms-lemma-two-immersions) and 02GF (morphisms-lemma-unramified-at-point); the same combination is used in resolve.tex Tag 0C5R, lines 4957–4961."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally of finite type which identifies closed subschemes and surjects on their conormal sheaves is unramified along the closed subscheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of formal unramifiedness and facts for surjective ring maps do not give the conormal-surjection criterion along a closed subscheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjectivity of the conormal map for two closed immersions into source and target implies the ambient finite type morphism is unramified at the closed subscheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"(f : X ⟶ Y) (U : Y.Opens) (hU : IsAffineOpen U) [IsClosedImmersion f] : Function.Surjective (f.app U)\", \"doc\": \"Let $f: X \\\\to Y$ be a closed immersion of schemes, and let $U$ be an affine open subset of $Y$. Then the canonical ring homomorphism from the ring of sections of the structure sheaf of $Y$ over $U$ to\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"For any closed immersion $ f: X \\\\to Y $ of schemes, the induced maps on the stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.Unramified.mk\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {A : Type u_2} [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  autoParam (Algebra.FormallyUnramified R A) Algebra.Unramified.formallyUnramified._autoParam →\\n    autoParam (Algebra.FiniteType R A) Algebra.Unramified.finiteType._autoParam → Algebra.Unramified R A\", \"doc\": \"If $ A $ is formally unramified over $ R $ and of finite type over $ R $, then $ A $ is unramified over $ R $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_surjective\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (f : A →ₐ[R] B) (H : Function.Surjective f) : FormallyUnramified R B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ f : A \\\\to B $ is a surjective algebra homomorphism over $ R $, then $ B $ is also formally unramified over $ R $.\"}\n  {\"name\": \"RingHom.FormallyUnramified.of_surjective\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"{f : R →+* S} (hf : Function.Surjective f) : f.FormallyUnramified\", \"doc\": \"A surjective ring homomorphism between commutative semirings is formally unramified, meaning there are no nontrivial derivations from the codomain to modules over the domain.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"[IsClosedImmersion f] : IsAffine X ∧ Function.Surjective f.appTop\", \"doc\": \"If $ f: X \\\\to Y $ is a closed immersion of schemes, then $ X $ is an affine scheme and the induced morphism on global sections $ \\\\mathcal{O}_Y(Y) \\\\to \\\\mathcal{O}_X(X) $ is surjective.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of formal unramifiedness and facts for surjective ring maps do not give the conormal-surjection criterion along a closed subscheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"conormal\", \"unramified\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of formal unramifiedness and facts for surjective ring maps do not give the conormal-surjection criterion along a closed subscheme."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal.*unramified|unramified.*conormal|twoImmersions|two_immersions",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: definitions of formal unramifiedness and facts for surjective ring maps do not give the conormal-surjection criterion along a closed subscheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism locally of finite type is unramified near a closed subscheme if the induced map of conormal sheaves is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.FormallyUnramified f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"Let $f: X \\\\to Y$ be a formally unramified morphism of schemes. For any affine open subset $U$ of $Y$ and any affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the induced ring homomorph\"}\n  {\"name\": \"Algebra.isOpen_unramifiedLocus\", \"module\": \"Mathlib/RingTheory/Unramified/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.EssFiniteType R A], IsOpen (Algebra.unramifiedLocus R A)\", \"doc\": \"If $ A $ is a commutative ring of essential finite type over a commutative ring $ R $, then the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A) $ where $ A $ is unramified over $ R $ for\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, the ring unramified locus and surjective ring maps do not state the conormal-surjection criterion along a common closed subscheme."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal.*unramified|unramified.*conormal|twoImmersions|two_immersions",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, the ring unramified locus and surjective ring maps do not state the conormal-surjection criterion along a common closed subscheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective conormal map of a common closed subscheme implies an unramified morphism nearby",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"RingHom.FormallyUnramified.of_surjective\", \"module\": \"Mathlib.RingTheory.RingHom.Unramified\", \"type\": \"{f : R →+* S} (hf : Function.Surjective f) : f.FormallyUnramified\", \"doc\": \"A surjective ring homomorphism between commutative semirings is formally unramified, meaning there are no nontrivial derivations from the codomain to modules over the domain.\"}\n  {\"name\": \"Algebra.FormallyUnramified.of_surjective\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] (f : A →ₐ[R] B) (H : Function.Surjective f) : FormallyUnramified R B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ f : A \\\\to B $ is a surjective algebra homomorphism over $ R $, then $ B $ is also formally unramified over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and every affine open subset $ V $ of $ X $ contained in $ f^{-1}(U) $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(V) $ is formal\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsMultiplicative @FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": HasRingHomProperty (@FormallyUnramified) RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, the ring unramified locus and surjective ring maps do not state the conormal-surjection criterion along a common closed subscheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conormal\", \"unramified\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: formal unramifiedness, the ring unramified locus and surjective ring maps do not state the conormal-surjection criterion along a common closed subscheme."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited 0C5R exceptional-fibre argument (resolve-lemma-proper-birational-regular-surfaces, lines 4957–4961): apply the two-immersions sequence to show that relative differentials restrict to zero on the exceptional curve, then use the unramified-at-point criterion. Serves det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/regular-surface dependency chain.",
+   "via": [
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-conormal-surjection-unramified",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Applied the two-immersions right-exact conormal sequence, computed its cokernel explicitly, passed to the residue fibre using the existing module-pullback stalk theorem and the quotient local-ring description of a closed immersion, and applied the arbitrary-point cotangent-fibre unramifiedness criterion. Added just the two general source lemmas; all elementary cancellation and tensor/residue calculations remain in the proof. Searched project declarations, the entire DAG, blueprint and Mathlib; no exact attachment or Mathlib leaf was found. Returned-delivery repair (2026-10-22): rebased the retained approved split onto the current live unsplit node, preserving current maintainer metadata; reread every cited live statement and revalidated all seven citation quotations. The side-completion promotion return changes the delivery base, not the mathematical argument. Repair retry after the interrupted handoff: initial current-base dry run passed at 7296a1b9572; rebuilt the item from the current live record, checked every retained citation against the current statement, and made the pushforward-stalk identification in step 3 explicit. No statement or prerequisite changed. Current-base repair audit (2026-10-23): initial dry run passed at 14c59ea93b4; reconstructed from the current live unsplit record and reread every proof and statement dependency. Step 3 now writes the actual induced residue-field isomorphism and its inverse, including well-definedness, to make the final tensor transport explicit. All seven retained citation quotes still match current statements. The two prerequisite statements and the recorded mathematical search questions are unchanged.",
+  "blueprint": "Inherited 0C5R exceptional-fibre argument (resolve-lemma-proper-birational-regular-surfaces, lines 4957–4961): apply the two-immersions sequence to show that relative differentials restrict to zero on the exceptional curve, then use the unramified-at-point criterion. Serves det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited alteration/regular-surface dependency chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic stalk formula for a Zariski module pullback; needed to compute the fibre after restricting differentials to the closed subscheme, without changing the inherited alteration/regular-surface route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NP-0d972dcda",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-0d972dcda (reviewer sub-agent of L); spot-checked: This is the 4th delivery of the same split (earlier heads d430b874, f775c643, 28a26964, all PASS), re-sent after landing returns because the side completion was never promoted. A field-by-field diff shows that only item proof step 3 changed. It now writes out the residue map [a]↦[[a]] with its inverse and the pushforward-stalk identification; both are correct. I reread Stacks 067L (morphisms.tex l.6824) and 02GF (l.7875): the arrows and hypotheses match. The new node two-closed-immersions-conormal-exact is 067L for closed immersions and claims right exactness only (true; it makes no injectivity claim). The new node unramified-cotangent-fibre-criterion is 02GF (1)⇔(5) under local finite type at an arbitrary point. I tested it on the A¹ origin, a separable field extension and the dual numbers. Steps: (1) the exact sequence with u the conormal-functorial arrow (g=f, top map 1_Z); (2) vu=0 with u and v surjective gives i^*Ω=0, which is elementary; (3) the stalk-pullback theorem gives Ω_x⊗B=0, A→B is surjective and local, κ(x)≅κ(z), so Ω_x⊗κ(x)=0; (4) the criterion (2)⇒(1). I searched the DAG for duplicates (rational-cotangent, formally-unramified-stalk, geometric-tangent, trf field criteria, pur smooth conormal) and found none. Neither new node restates a clause of the item. There are no SGA citations and no repair note. The only tool use is lem-weil-pbc-module-stalk-pullback from another unit, which is acceptable. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConormalSurjectionUnramified",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isUnramified_near_of_conormal_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalSurjectionUnramified.lean",
+  "statement": "theorem isUnramified_near_of_conormal_surjective {X Y Z : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] (i : Z ⟶ X) (j : Z ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j] (h : i ≫ f = j) (hsurj : Epi ((tensorPullbackSectionId Z).inv.app ((tensorPullback j).obj j.ker.toModules) ≫ Classical.choose ((Classical.choose_spec (closedImmersion_conormal_functorial i j f (𝟙 Z) (h.trans (Category.id_comp j).symm)).2).2))) : ∀ z : Z, ∃ W : X.Opens, i z ∈ W ∧ IsUnramified (W.ι ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d693a203",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Clauses match the node: LocallyOfFiniteType f, two closed immersions, h : i≫f=j, Epi (surjective as sheaves of modules) of tensorPullbackSectionId.inv ≫ the conormal map c from closedImmersion_conormal_functorial i j f (𝟙 Z), conclusion ∀ z, ∃ W : X.Opens, i z ∈ W ∧ IsUnramified (W.ι ≫ f) with target Y. c is determined (γ unique since ι is mono and γ is fixed by its adjoint; c ∃! given γ); different adjunction choices and the identity comparison only compose it with isomorphisms, and Epi does not change under that, so the hypothesis says exactly that the canonical map is surjective. One universe; edge cases empty Z and j = id fine. lean.statement matches the file verbatim; only the lean field differs from live; no defs, sorry only, docstrings and both report sections present, imports exist, no name collision. Not recompiled (brief); worker compiled cleanly. No findings."
+ }
+}

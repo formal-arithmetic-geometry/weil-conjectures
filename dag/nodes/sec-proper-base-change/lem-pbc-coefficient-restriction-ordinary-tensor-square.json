@@ -1,0 +1,135 @@
+{
+ "id": "lem-pbc-coefficient-restriction-ordinary-tensor-square",
+ "kind": "statement",
+ "title": "The ordinary coefficient restriction tensor pullback square",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, let $R,S$ be commutative ring sheaves on their small pro-etale sites and let $c:f^{-1}R\\simeq S$ [def-weil-pbc-proetale-operations]. Write $A=f^{-1}R$, $C=f^*_c$, $I=f^*_{\\mathrm{id}_A}$ and $U=\\operatorname{Res}_c$. Let $\\beta:CU\\simeq I$ be the canonical ordinary pullback comparison with identity base restriction removed [lem-pbc-coefficient-pullback-factorization]. For any RingIsoTensorTransport $o$ for $c$ [lem-sfb-ring-isomorphism-tensor-transport], write $\\delta:U(M\\otimes_S N)\\to UM\\otimes_A UN$ for its normalized ordinary tensor map. Let $\\mu_c$ and $\\mu_i$ be the canonical ordinary tensor pullback isomorphisms [def-sp-proetale-ordinary-tensor-pullback-total]. For every two $R$-module sheaves $M,N$, one has $U(\\mu_c(M,N)^{-1});\\beta_{M\\otimes_R N}=\\delta_{CM,CN};(\\beta_M\\otimes_A\\beta_N);\\mu_i(M,N)^{-1}$. This is an equality of ordinary module-sheaf morphisms, with no complexes, totalization, localization or flatness assumptions.",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "status": "split",
+ "mathlib_match": null,
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-pbc-coefficient-pullback-factorization",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "def-sp-proetale-ordinary-tensor-pullback-total"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback, universal bilinear-map proof; compatibility of the two coefficient coordinates."
+ },
+ "proof": [
+  {
+   "text": "Apply the unit identity for the adjunction-mate correspondence to the existing ordinary restriction/pullback mate. Its right mate is the coefficient direct-image comparison, which is identity on every section. After removing base identity restriction, the inverse of ordinaryPullback therefore sends the identity-coefficient pullback unit of every section to its c-coefficient pullback unit. This is the private lemma ordinaryPullback_inv_unit.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the inverse-oriented ordinary module tensor square under the identity-coefficient module adjunction. Test the two resulting maps on pure tensors using the sheafification adjunction and the presheaf tensor universal property. The preceding unit formula, both ordinary tensor comparison unit normalizations, and o.pure_hom give the same tensor of c-coefficient pullback unit sections. Tensor naturality on pure sections completes ordinary_inverse_square. Invert the isomorphisms to obtain ordinary_square, with the orientation required by the total comparison.",
+   "uses": [
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "lem-sfb-ring-isomorphism-tensor-transport",
+    "def-sfb-sheaf-tensor-pure-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inverse-oriented equality with the coefficient and tensor isomorphisms and cancel their inverse pairs. TensorIso supplies the inverse of the tensor of the coefficient components. This gives the displayed orientation without changing any normalization.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-sfb-ring-isomorphism-tensor-transport",
+  "def-sfb-sheaf-tensor-pure-section"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL, lemma-tensor-product-pullback: adjunction and bilinear-map universal property."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along an isomorphism of ring sheaves commutes with the canonical tensor comparison for pullback of sheaves of modules",
+   "results": "8 hits including RestrictScalars, ModuleCat.restrictScalars and PresheafOfModules.restrictScalars. None states the normalized ordinary pullback tensor square.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module pullback along a morphism of ringed topoi commutes with tensor products and an isomorphism of coefficient rings",
+   "results": "8 hits on pullback of free sheaves, pullback composition and conjugate-equivalence normalization. None states this tensor square.",
+   "date": "2026-10-27",
+   "verdict": "generic pullback APIs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv",
+   "results": "One hit: CategoryTheory.unit_mateEquiv in Mathlib.CategoryTheory.Adjunction.Mates. Applied to the existing restrictionPullback_mate to prove the required unit-section identity.",
+   "date": "2026-10-27",
+   "verdict": "used generic mate-unit identity"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*tensor|tensor.*restrictScalars",
+   "results": "25 msearch hits on ordinary algebraic scalar restriction and tensor products. Direct project rg found the supplied coefficient tensor chain square and other derived scalar squares, but no separate ordinary module-level square for arbitrary ring-sheaf isomorphisms.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate of the ordinary square"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleCoefficientTensorChainData",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-direct-image-limits",
+   "place": "Coefficient-isomorphism identification of tensor pullback in the finite-level scalar projection comparison (current DAG proof, step 3), under the blueprint proof's linear pullback/direct-image argument. This node supplies the ordinary module square before totalization.",
+   "via": [
+    "lem-pbc-coefficient-restriction-tensor-chain-square",
+    "lem-pbc-coefficient-restriction-tensor-comparison-compatibility",
+    "lem-pbc-coefficient-restriction-tensor-comparison",
+    "lem-pbc-completed-tensor-projection-coefficient-transport",
+    "lem-pbc-completed-scalar-projection-tensor-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleCoefficientOrdinaryTensorSquare",
+  "file": "lean/Sheaf/Paper/ProEtaleCoefficientOrdinaryTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.CoefficientTensorChain.ordinary_square",
+  "statement": "theorem ordinary_square\n    (o : SheafOfModules.RingIsoTensorTransport\n      (J := ProEt.topology X)\n      (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)\n    (M N : proEtaleRingModules Y R) :\n    (pbcRestrict c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).inv ≫\n        (ordinaryPullback f R S c).hom.app\n          (((proEtaleOrdinaryTensor Y R).obj M).obj N) =\n      o.monoidal.toMonoidal.toOplaxMonoidal.δ\n          ((proEtaleRingModulePullback f R S c).obj M)\n          ((proEtaleRingModulePullback f R S c).obj N) ≫\n        (SheafOfModules.monoidalCategory\n          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)).tensorHom\n          ((ordinaryPullback f R S c).hom.app M)\n          ((ordinaryPullback f R S c).hom.app N) ≫\n        (proEtaleOrdinaryTensorPullback f R\n          ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)\n          (Iso.refl _) M N).inv",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-34357",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261027T123423-L-2295156",
+  "kind": "interface",
+  "note": "independent cc review: restriction_tensor_chain_square proof (ordinary_square + tensorTotalComparisonSquare + tensorIso_summand) against item node and RingIsoTensorTransport fields; relocated tensorIso/tensorIso_naturality diffed verbatim vs clone and publicly re-exported; adapted RepresentativeSquare proof-only (unclaimed); 3b importer Compatibility OK"
+ }
+}

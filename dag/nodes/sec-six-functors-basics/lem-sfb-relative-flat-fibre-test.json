@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-relative-flat-fibre-test",
+ "kind": "statement",
+ "title": "Fibrewise flatness test retained after arbitrary parameter base change",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme] and let $p:X\\to S$, $q:Y\\to S$, $f:X\\to Y$ satisfy $q\\circ f=p$. Assume $p$ is flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation], and $q$ is locally of finite type [def-weil-finite-type-morphism]. For $x\\in X$ and $s=p(x)$, write $f_s:X_s\\to Y_s$ for the induced map of scheme-theoretic fibres [def-pc-scheme-fibre, def-pc-fibre-product], and $\\widetilde x\\in X_s$ for the unique point mapping to $x$. Then $f$ is flat at $x$ if and only if $f_s$ is flat at $\\widetilde x$. Furthermore, for every scheme $T$ and morphism $h:T\\to S$, put $X_T=X\\times_ST$, $Y_T=Y\\times_ST$ and let $p_T:X_T\\to T$, $q_T:Y_T\\to T$ be the projections and $f_T:X_T\\to Y_T$ the induced map. The morphism $p_T$ is flat and locally of finite presentation, and $q_T$ is locally of finite type. For every $x'\\in X_T$, putting $t=p_T(x')$ and taking its unique point $\\widetilde{x'}\\in(X_T)_t$, one has $f_T\\text{ flat at }x'\\iff(f_T)_t\\text{ flat at }\\widetilde{x'}$. No finiteness or flatness assumption on $h$ or $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, proof from the fibrewise description of U through the sentence that the hypotheses remain in force after base change; Tag 039C, theorem-criterion-flatness-fibre, structure-sheaf specialization, together with pointwise flat ascent."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x$, set $y=f(x)$ and $s=p(x)$. Write $i_X:X_s\\to X$ and $i_Y:Y_s\\to Y$ for the fibre projections. The square with horizontal maps $i_X,i_Y$ and vertical maps $f_s,f$ is cartesian: maps from a scheme $Z$ to its upper-left corner are precisely pairs $a:Z\\to X$, $b:Z\\to\\operatorname{Spec}\\kappa(s)$ with $pa=sb$; adding the map to $Y$ forces it to be $fa$ since $qf=p$. This is also the universal property of $X\\times_Y Y_s$. The fibre homeomorphism gives the unique points $\\widetilde x,\\widetilde y$ over $x,y$, and commutativity and uniqueness give $f_s(\\widetilde x)=\\widetilde y$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K0, schemes-definition-fibre, and 01K1, schemes-lemma-fibre-topological; universal property of fibre products, Tag 001V."
+   }
+  },
+  {
+   "text": "If $f$ is flat at $x$, apply clause (1) of the pointwise base-change lemma to $f$, the map $i_Y:Y_s\\to Y$, and the point $\\widetilde x$ in the cartesian square of step 1. It gives flatness of $f_s$ at $\\widetilde x$. In particular this implication does not require $i_Y$ to be flat.",
+   "uses": [
+    "lem-sfb-pointwise-flatness-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 047C, more-morphisms-lemma-flat-locus-base-change (1), structure-sheaf case."
+   }
+  },
+  {
+   "text": "Conversely suppose $f_s$ is flat at $\\widetilde x$. Since $p$ is flat, its definition gives flatness at $x$. Apply the fibrewise-flatness criterion to $S,X,Y,p,q,f,x$: $p$ is locally of finite presentation, $q$ is locally of finite type, and its two pointwise flatness hypotheses have just been verified. It gives both flatness of $f$ at $x$ and flatness of $q$ at $y$; retain the first conclusion. Together with step 2 this proves the claimed equivalence.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-sfb-fibrewise-flatness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 039C, more-morphisms-theorem-criterion-flatness-fibre (1) implies (2), structure-sheaf case; fibrewise description in Tag 05VJ."
+   }
+  },
+  {
+   "text": "Let $h:T\\to S$ be arbitrary. Base-change stability of flat morphisms gives $p_T$ flat. Clause (3) of the qcqs-morphism-permanence lemma, specifically its locally-of-finite-presentation assertion, gives $p_T$ locally of finite presentation. Base-change stability of locally finite type morphisms gives $q_T$ locally of finite type. Each result permits every scheme morphism $h$, so no flatness, finiteness, quasi-compactness or Noetherian assumption on $h$ or $T$ has been introduced.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lft-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9, morphisms-lemma-base-change-flat; 01TS, morphisms-lemma-base-change-finite-presentation; 01T4, morphisms-lemma-base-change-finite-type."
+   }
+  },
+  {
+   "text": "The defining projection equations for $f_T$ give $q_Tf_T=p_T$. Fix $x\\prime\\in X_T$ and put $t=p_T(x\\prime)$. Repeat steps 1--3 with $(S,X,Y,p,q,f,x)$ replaced by $(T,X_T,Y_T,p_T,q_T,f_T,x\\prime)$. Step 4 verifies all their hypotheses. Thus $f_T$ is flat at $x\\prime$ if and only if $(f_T)_t$ is flat at its unique fibre point over $x\\prime$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05VJ, more-morphisms-lemma-base-change-criterion-flatness-fibre, sentence: the assumptions remain in force after base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "lem-sfb-pointwise-flatness-base-change",
+  "def-weil-flat-morphism",
+  "lem-sfb-fibrewise-flatness-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lft-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 05VJ and 039C, structure-sheaf fibrewise criterion; forward implication from Tag 047C (1); base-change stability from Morphisms Tags 01U9, 01TS and 01T4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flat.*fiber|fiber.*flat|flat.*fibre|fibre.*flat|criterion.*flat",
+   "results": "{\"t\": \"2026-10-23T09:44:49Z\", \"tool\": \"grep\", \"query\": \"flat.*fiber|fiber.*flat|flat.*fibre|fibre.*flat|criterion.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\"], \"digest\": \"37f8e2463273fefd\"}; no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version.",
+   "date": "2026-10-23",
+   "verdict": "no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise criterion for flatness of a morphism whose source is flat locally of finite presentation over a base and whose target is locally finite type over that base",
+   "results": "{\"t\": \"2026-10-23T09:44:49Z\", \"tool\": \"leansearch\", \"query\": \"A fibrewise criterion for flatness of a morphism whose source is flat locally of finite presentation over a base and whose target is locally finite type over that base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"Module.flat_of_isLocalized_span\", \"AlgebraicGeometry.Flat.mk\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.flat_iff\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"a0cdded55e290e65\"}; no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version.",
+   "date": "2026-10-23",
+   "verdict": "no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-23T09:44:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version.",
+   "date": "2026-10-23",
+   "verdict": "no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For X flat locally finitely presented over S and Y locally finite type over S, flatness of a map X to Y at a point is equivalent to flatness of the induced map on that fibre, and the same test holds after arbitrary base change on S",
+   "results": "{\"t\": \"2026-10-23T09:44:52Z\", \"tool\": \"leanfinder\", \"query\": \"For X flat locally finitely presented over S and Y locally finite type over S, flatness of a map X to Y at a point is equivalent to flatness of the induced map on that fibre, and the same test holds after arbitrary base change on S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\"], \"digest\": \"220f3daf7289bd5d\"}; no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version.",
+   "date": "2026-10-23",
+   "verdict": "no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map between families with source flat and finitely presented over a parameter base is stalk flat if and only if its residue fibre map is stalk flat; these hypotheses and the equivalence persist over any new parameter scheme",
+   "results": "{\"t\": \"2026-10-23T09:44:53Z\", \"tool\": \"leanfinder\", \"query\": \"A map between families with source flat and finitely presented over a parameter base is stalk flat if and only if its residue fibre map is stalk flat; these hypotheses and the equivalence persist over any new parameter scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"9bf72bb9cae0e449\"}; no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version.",
+   "date": "2026-10-23",
+   "verdict": "no match: Flat.iff_flat_stalkMap tests global flatness on all stalks, and Flat.isStableUnderBaseChange only preserves a flat map. Neither gives the pointwise fibre criterion in this relative finite-presentation setting or its universal parameter version."
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*fiber|fiber.*flat|flat.*fibre|fibre.*flat|criterion.*flat",
+   "results": "{\"t\": \"2026-10-23T11:20:24Z\", \"tool\": \"grep\", \"query\": \"flat.*fiber|fiber.*flat|flat.*fibre|fibre.*flat|criterion.*flat\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean\"], \"digest\": \"37f8e2463273fefd\"}; no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fibrewise criterion for flatness of a morphism between two schemes over a base with flat finitely presented source",
+   "results": "{\"t\": \"2026-10-23T11:20:24Z\", \"tool\": \"leansearch\", \"query\": \"Fibrewise criterion for flatness of a morphism between two schemes over a base with flat finitely presented source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"RingHom.Flat\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.casesOn\"], \"digest\": \"958dad58c59bad96\"}; no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"LocallyOfFinitePresentation\", \"fiber\"",
+   "results": "{\"t\": \"2026-10-23T11:20:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"LocallyOfFinitePresentation\\\", \\\"fiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between schemes over S with source flat locally of finite presentation and target locally of finite type is flat at a point if and only if its map on the fibre over S is flat there",
+   "results": "{\"t\": \"2026-10-23T11:20:26Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism between schemes over S with source flat locally of finite presentation and target locally of finite type is flat at a point if and only if its map on the fibre over S is flat there\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\"], \"digest\": \"8bd7ea2a3edff8ba\"}; no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a triangle of scheme morphisms X to Y to S with X flat finitely presented over S and Y finite type over S, a local ring map for X to Y is flat precisely when its reduction to the residue field of S is flat",
+   "results": "{\"t\": \"2026-10-23T11:21:52Z\", \"tool\": \"leanfinder\", \"query\": \"In a triangle of scheme morphisms X to Y to S with X flat finitely presented over S and Y finite type over S, a local ring map for X to Y is flat precisely when its reduction to the residue field of S is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"82c6f23736f22b6f\"}; no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness.",
+   "date": "2026-10-23",
+   "verdict": "no match: returned flatness definitions, stalk tests, localization or preservation of already flat maps; none is the relative pointwise fibre criterion. The grep hits instead assume flatness to deduce smoothness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-flat-locus-base-change",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; Tag 05XC reduction to the flat case, expanded via Tag 05XB: the source flat locus is open and commutes with arbitrary parameter base change (scheme form Tag 05VK).; repair extraction, old steps 3–4: fibrewise flatness equivalence over S and after every parameter base change",
+   "via": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-flat-fibre-test",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Assembled the existing pointwise base-change ascent and fibrewise-flatness criterion, after explicitly checking the cartesian fibre square and fibre points. Reused three existing Mathlib leaves to retain all hypotheses over an arbitrary parameter scheme. No new nodes; no Lean or compilation. Five steps, each below 2000 characters.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through de Jong morphism schemes, Tag 05XC and scheme flat-locus Tag 05VK. This item supplies the fibrewise test and its reapplication over an arbitrary parameter base in Tag 05VJ. The latest blueprint proof (3) was read; the item is not its unit key node. The inherited from.node is null because blueprint_refs.py ancestor reports None for the existing broken created.item chain; the explicit from.place and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-58c0326d3",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-58c0326d3 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full; I read only the review documents I needed, not the whole list. The delivery has no new nodes. The statement, stmt_deps and blueprint field are unchanged from live, which still shows the item unsplit, and there is no repair note. The statement is Stacks 05VJ with F=O_X; I checked it against more-morphisms.tex:4702-4747, and the O_X stalks are nonzero, so 039C's F_x≠0 exception does not arise. Step 1 (elementary) identifies X_s with X×_Y Y_s by the universal property and gets f_s(x̃)=ỹ from the fibre homeomorphism. Step 2 applies clause (1) of lem-sfb-pointwise-flatness-base-change (047C(1); reviewed PASS by NQ) to i_Y, which needs no flatness of i_Y. Step 3 applies lem-sfb-fibrewise-flatness-criterion (039C (1)⇒(2); reviewed PASS by Q61); its hypotheses p lfp, q lft, p flat at x and f_s flat at x̃ all hold. Step 4 uses three Mathlib leaves: flat base change, clause (3) of lem-weil-pbc-qcqs-morphism-permanence (lfp base change, which has no qcqs hypothesis) and lft base change. Step 5 re-instantiates steps 1-3 over T, following the 05VJ sentence that the assumptions remain in force. proof_deps equals the union of the uses. The route stays inside sk-thm-sf-ctf-stability apart from definitions and leaves, so no tool_uses entry is needed. The closest DAG nodes (fibre-flatness-compatible-stalk-data, flat-residue-fibre-square, trf flat-fibre-free-neighbourhood, and the parent relative-flat-locus-base-change) state different things, so the item is not a duplicate. Small cases (S a field, T empty, h=id, the non-flat map Spec k→Spec k[t]) are consistent. All sources are Stacks; there is no SGA. Advisories: from.node is null, inherited from the parent chain, while the sibling node carries det-thm-sf-ctf-stability-direct-images, so the maintainer may want to backfill it; mathlib_searches has duplicate records."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatFibreTest",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.relative_flat_fibre_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatFibreTest.lean",
+  "statement": "theorem Scheme.Hom.relative_flat_fibre_test {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hf : f ≫ q = p) [Flat p] [LocallyOfFinitePresentation p] [LocallyOfFiniteType q] : (∀ x : X, (f.stalkMap x).hom.Flat ↔ ((pullback.map p (S.fromSpecResidueField (p x)) q (S.fromSpecResidueField (p x)) f (𝟙 _) (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)).stalkMap (p.asFiber x)).hom.Flat) ∧ (∀ (T : Scheme.{u}) (h : T ⟶ S), Flat (pullback.snd p h) ∧ LocallyOfFinitePresentation (pullback.snd p h) ∧ LocallyOfFiniteType (pullback.snd q h) ∧ ∀ x' : ↥(pullback p h), ((pullback.map p h q h f (𝟙 T) (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)).stalkMap x').hom.Flat ↔ ((pullback.map (pullback.snd p h) (T.fromSpecResidueField ((pullback.snd p h) x')) (pullback.snd q h) (T.fromSpecResidueField ((pullback.snd p h) x')) (pullback.map p h q h f (𝟙 T) (𝟙 S) (by simpa only [Category.comp_id] using hf.symm) (by simp)) (𝟙 _) (𝟙 T) (by simp) (by simp)).stalkMap ((pullback.snd p h).asFiber x')).hom.Flat)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c596756d",
+  "group": "N5",
+  "result": "pass",
+  "note": "Every clause matches the node (Stacks 05VJ/039C, structure-sheaf case): hf : f ≫ q = p; [Flat p] [LocallyOfFinitePresentation p] [LocallyOfFiniteType q], nothing extra. Fibre map is the canonical pullback.map over fromSpecResidueField (p x) with identity components, and the fibre point is Mathlib's asFiber. Second conjunct: ∀ T h with no conditions; Flat/LFP of pullback.snd p h and LFT of pullback.snd q h; pointwise test at every x' with the fibre over T.fromSpecResidueField. Pointwise flatness, fibre map and fibre point are written exactly as in the landed proof-dep modules FibrewiseFlatnessCriterion:321 and PointwiseFlatnessBaseChange:58. Against live only the lean field changes; lean.statement matches the file signature word for word; all six stmt_deps are existing Mathlib records. No new definitions, body is sorry, docstrings carry source places, blueprint id and all 5 proof steps, no public duplicate found. Edge cases: empty X or T, h = id, one-universe pullback convention. I changed no files, so ran no compile; the worker reports a clean compile. Advisory only: inherited blueprint.from.node is null (stage-1 note)."
+ }
+}

@@ -1,0 +1,230 @@
+{
+ "id": "lem-trf-finite-module-canonical-biduality",
+ "kind": "statement",
+ "title": "Canonical biduality of a finite module into a bounded injective complex",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $M$ be a finitely generated $A$-module [def-weil-finitely-generated-module], and let $L\\in D(A)$ [def-weil-abstract-derived-category]. Use derived internal Hom on the one-object ringed site [def-pur-derived-internal-hom]. Suppose that $L$ is isomorphic to a bounded complex of injective $A$-modules [def-sp-injective-resolutions] and that the scalar-action morphism $h:A[0]\\to R\\operatorname{Hom}_A(L,L)$ is an isomorphism. Then the canonical biduality morphism\n$$\\delta_{M,L}:M[0]\\longrightarrow R\\operatorname{Hom}_A(R\\operatorname{Hom}_A(M[0],L),L)$$\nis an isomorphism in $D(A)$. Here $\\delta_{M,L}$ is the transpose of evaluation $R\\operatorname{Hom}_A(M[0],L)\\otimes_A^{\\mathbf L}M[0]\\to L$ under the derived tensor--Hom adjunction; equivalently, on compatible Hom representatives it sends $m$ to evaluation $\\varphi\\mapsto\\varphi(m)$. The assertion concerns this canonical morphism, not merely an unspecified isomorphism of its source and target. No projectivity of $M$, localness or completeness of $A$, or finite generation of the cohomology of $L$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7C, lemma-dualizing, canonical double-dual evaluation in its proof, specialized to a finite module; more-algebra.tex Tag 0A69, lemma-internal-hom-evaluate-isomorphism-technical, and Tag 066E, lemma-Noetherian-pseudo-coherent, clause (2). The argument only uses bounded injectives and the scalar-action isomorphism for L."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-sp-injective-resolutions",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=M[0]$. Its only possibly nonzero cohomology is $H^0(K)=M$; all its cohomology modules are therefore finite, and they vanish above degree zero. The Noetherian cohomology criterion [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] makes $K$ pseudo-coherent. Choose a bounded injective representative $I$ of $L$ as in the hypothesis. If $I^j=0$ for $j<a$, then $H^j(L)=H^j(I)=0$ for $j<a$. Thus $L\\in D^+(A)$ in [def-weil-pbc-bounded-derived-subcategories].",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E, lemma-Noetherian-pseudo-coherent, clause (2); bounded representative and the hypotheses of Tag 0A68 (2)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-evaluation-pseudocoherent] with its $(R,K,L,M)$ equal to $(A,M[0],L,L)$. Step 1 verifies pseudo-coherence and the bounded-below hypothesis; its last hypothesis is exactly the given bounded injective representative of $L$. Consequently, writing $T=R\\operatorname{Hom}_A(L,L)$ and $B=R\\operatorname{Hom}_A(K,L)$, the specified evaluation comparison $e:T\\otimes_A^{\\mathbf L}K\\to R\\operatorname{Hom}_A(B,L)$ is an isomorphism. This uses neither projectivity of $M$ nor finiteness of the cohomology of $L$.",
+   "uses": [
+    "lem-trf-derived-evaluation-pseudocoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A68, lemma-internal-hom-evaluate-isomorphism, case (2), the pseudo-coherent case underlying Tag 0A69"
+   }
+  },
+  {
+   "text": "On the small one-object ringed site with trivial topology, [lem-sf-ringed-derived-closed-symmetric-monoidal] supplies the derived tensor bifunctor, its unit $A[0]$, and the unitor $\\lambda_K:A[0]\\otimes_A^{\\mathbf L}K\\xrightarrow{\\sim}K$. Define $b=e\\circ(h\\otimes1_K)\\circ\\lambda_K^{-1}$. Since $h$ is invertible, $h^{-1}\\otimes1_K$ is inverse to $h\\otimes1_K$ by bifunctoriality. Thus $b$ is an isomorphism, with inverse $\\lambda_K\\circ(h^{-1}\\otimes1_K)\\circ e^{-1}$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A7C, lemma-dualizing, displayed composite in the proof"
+   }
+  },
+  {
+   "text": "It remains to identify this particular $b$. Write $\\epsilon_{X,Y}:R\\operatorname{Hom}_A(X,Y)\\otimes_A^{\\mathbf L}X\\to Y$ for evaluation. By the specified transpose of [lem-trf-derived-evaluation-canonical-map], uncurrying $b$ with $B$ on the left gives, after inserting the canonical associators, unitors and symmetry, the morphism $\\epsilon_{L,L}\\circ(h\\otimes\\epsilon_{K,L})\\circ\\lambda_{B\\otimes K}^{-1}:B\\otimes K\\to L$. The scalar-action morphism $h$ is adjoint to the unit action, so $\\epsilon_{L,L}\\circ(h\\otimes1_L)=\\lambda_L$. Hence this uncurrying equals $\\lambda_L\\circ(1_{A[0]}\\otimes\\epsilon_{K,L})\\circ\\lambda_{B\\otimes K}^{-1}=\\epsilon_{K,L}$ by naturality of the unitor. The natural adjunction bijection and symmetry in [lem-sf-ringed-derived-closed-symmetric-monoidal] are injective on morphisms, so $b$ is exactly the transpose of $\\epsilon_{K,L}$, namely $\\delta_{M,L}$. Step 3 therefore proves that the canonical biduality morphism is an isomorphism.",
+   "uses": [
+    "lem-trf-derived-evaluation-canonical-map",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A67, lemma-internal-hom-evaluate, the evaluation/composition transpose; dualizing.tex Tag 0A7C, proof, scalar-action specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-trf-derived-evaluation-pseudocoherent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-derived-evaluation-canonical-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0A7C, lemma-dualizing, canonical evaluation composite in the proof; its finite-module specialization uses more-algebra.tex Tag 066E (2) and the bounded pseudo-coherent evaluation case Tag 0A68 (2). The unit/adjunction calculation makes the canonical-map identification explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]emidualiz|[Dd]ualizing|bidual.*[Ii]njective|[Ii]njective.*bidual",
+   "results": "1 hits; top=['Mathlib/Algebra/Homology/HomotopyFiber.lean']; subdirectory=Algebra; note=; digest=064930e5919f47f9",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary reflexivity for finite projective modules or vector spaces does not prove canonical derived biduality for finite, possibly nonprojective modules against a bounded injective complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived double dual evaluation of a finite module with respect to a bounded injective semidualizing complex is an isomorphism",
+   "results": "8 hits; top=['Module.Dual.instIsReflecive', 'Module.evalEquiv_apply', \"Module.IsReflexive.bijective_dual_eval'\", 'Module.bijective_dual_eval', 'Module.IsReflexive.of_finite_of_free', 'Module.evalEquiv', 'Module.evalEquiv_toLinearMap', 'Module.apply_evalEquiv_symm_apply']; subdirectory=; note=; digest=9b9f882e0f5bb667",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary reflexivity for finite projective modules or vector spaces does not prove canonical derived biduality for finite, possibly nonprojective modules against a bounded injective complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"bidual\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary reflexivity for finite projective modules or vector spaces does not prove canonical derived biduality for finite, possibly nonprojective modules against a bounded injective complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If L has a bounded injective representative over a Noetherian ring A and A is isomorphic to RHom_A(L,L) by scalar action, every finite module M is canonically isomorphic to RHom_A(RHom_A(M,L),L)",
+   "results": "8 hits; top=['FGModuleCat.ihom_obj', 'FGModuleCat.rightDual', 'FGModuleCat.rightRigidCategory', 'FGModuleCat.FGModuleCatCoevaluation', 'FGModuleCat.FGModuleCatEvaluation', 'FGModuleCat.instIsMonoidalClosedModuleCatIsFG', 'FGModuleCat.exactPairing', 'FGModuleCat.instFiniteHomModuleCatObjIsFG']; subdirectory=; note=; digest=dc23885bf9f387cd",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary reflexivity for finite projective modules or vector spaces does not prove canonical derived biduality for finite, possibly nonprojective modules against a bounded injective complex."
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|IsReflexive",
+   "results": "10 hits; top=['Mathlib/LinearAlgebra/Dual/Lemmas.lean', 'Mathlib/LinearAlgebra/Dual/Lemmas.lean', 'Mathlib/LinearAlgebra/Dual/Lemmas.lean', 'Mathlib/LinearAlgebra/Dual/Lemmas.lean', 'Mathlib/LinearAlgebra/Dual/Lemmas.lean', 'Mathlib/LinearAlgebra/Dual/Defs.lean', 'Mathlib/LinearAlgebra/Dual/Defs.lean', 'Mathlib/LinearAlgebra/Dual/Defs.lean']; subdirectory=LinearAlgebra/Dual; note=; digest=674d8e64e73f0002",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary reflexivity for finite projective modules or vector spaces does not prove canonical derived biduality for finite, possibly nonprojective modules against a bounded injective complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite modules over a Noetherian ring satisfy derived biduality with respect to a finite injective dimension complex whose derived endomorphism ring is the base ring",
+   "results": "8 hits; top=['FGModuleCat.exactPairing', 'FGModuleCat.rightRigidCategory', 'FGModuleCat.rightDual', 'Module.dual_finite', 'Module.instIsReflexiveOfFiniteOfProjective', 'FGModuleCat.FGModuleCatDual_obj', 'Module.finite_dual_iff', 'FGModuleCat.FGModuleCatDual']; subdirectory=; note=; digest=eacda66d66270dd8",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary reflexivity for finite projective modules or vector spaces does not prove canonical derived biduality for finite, possibly nonprojective modules against a bounded injective complex."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emidualiz|[Dd]ualizing|bidual.*[Ii]njective|[Ii]njective.*bidual",
+   "results": "10 hits; top=['Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean', 'Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean', 'Mathlib/CategoryTheory/Category/Cat/Op.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean', 'Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean', 'Mathlib/Analysis/InnerProductSpace/Dual.lean', 'Mathlib/Algebra/Homology/HomotopyFiber.lean']; subdirectory=; note=; digest=040e8a5d503550ec",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary reflexivity of finite projective modules or finite-dimensional vector spaces, or unrelated uses of dualizing; none states derived biduality of an arbitrary finite module against a bounded injective complex."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite module over a Noetherian ring is canonically its derived double dual with respect to a bounded injective semidualizing complex",
+   "results": "8 hits; top=['Module.instIsReflexiveOfFiniteOfProjective', 'Module.Dual.eval_comp_comp_evalEquiv_eq', 'Module.bijective_dual_eval', 'Module.Dual.instIsReflecive', 'Module.evalEquiv', 'LinearEquiv.isReflexive_of_equiv_dual_of_isReflexive', 'Module.IsReflexive.of_finite_of_free', 'LinearMap.IsPerfPair.dualEval']; subdirectory=; note=; digest=7ff813ecba0b7cb4",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary reflexivity of finite projective modules or finite-dimensional vector spaces, or unrelated uses of dualizing; none states derived biduality of an arbitrary finite module against a bounded injective complex."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"bidual\"",
+   "results": "0 hits; top=[]; subdirectory=; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary reflexivity of finite projective modules or finite-dimensional vector spaces, or unrelated uses of dualizing; none states derived biduality of an arbitrary finite module against a bounded injective complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived biduality of a finitely generated module into a bounded injective complex whose scalar action is an isomorphism",
+   "results": "8 hits; top=['FGModuleCat.rightDual', 'FGModuleCat.FGModuleCatDual', 'FGModuleCat.exactPairing', 'FGModuleCat.rightRigidCategory', 'FGModuleCat.FGModuleCatDual_obj', 'Module.dual_finite', 'Module.IsReflexive', 'Module.IsReflexive.of_finite_of_free']; subdirectory=; note=; digest=287d723c873e670a",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary reflexivity of finite projective modules or finite-dimensional vector spaces, or unrelated uses of dualizing; none states derived biduality of an arbitrary finite module against a bounded injective complex."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation RHom(L,L) tensor M to RHom(RHom(M,L),L) is invertible for finite modules and bounded injective L",
+   "results": "8 hits; top=['FGModuleCat.rightRigidCategory', 'FGModuleCat.FGModuleCatEvaluation', 'Module.Invertible.linearEquiv', 'FGModuleCat.instIsMonoidalClosedModuleCatIsFG', 'FGModuleCat.exactPairing', \"FGModuleCat.FGModuleCatEvaluation_apply'\", 'LightCondensed.free_internallyProjective_iff_tensor_condition', 'FGModuleCat.FGModuleCatEvaluation_apply']; subdirectory=; note=; digest=f49d3d8e3c47ea41",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary reflexivity of finite projective modules or finite-dimensional vector spaces, or unrelated uses of dualizing; none states derived biduality of an arbitrary finite module against a bounded injective complex."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsReflexiveOfFiniteOfProjective|isReflexive_of_equiv_dual_of_isReflexive|of_finite_of_free",
+   "results": "7 hits; top=['Mathlib/LinearAlgebra/Dual/Lemmas.lean', 'Mathlib/LinearAlgebra/Dual/Defs.lean', 'Mathlib/LinearAlgebra/PerfectPairing/Basic.lean', 'Mathlib/LinearAlgebra/PerfectPairing/Basic.lean', 'Mathlib/LinearAlgebra/PerfectPairing/Basic.lean', 'Mathlib/LinearAlgebra/PerfectPairing/Basic.lean', 'Mathlib/LinearAlgebra/PerfectPairing/Basic.lean']; subdirectory=LinearAlgebra; note=; digest=5f3ac84a9de28743",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary reflexivity of finite projective modules or finite-dimensional vector spaces, or unrelated uses of dualizing; none states derived biduality of an arbitrary finite module against a bounded injective complex."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-map-dualizing-transfer",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: Finite-map transfer applied to the quotient of a regular local ring in dualizing.tex Tag 0BFR case (2). Extracted argument: Old Step 4: canonical biduality for the finite A-module B from the technical derived-evaluation theorem and scalar action.",
+   "via": [
+    "lem-trf-finite-map-dualizing-transfer",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-module-canonical-biduality",
+  "worker": "stage1",
+  "summary": "Four-step finite-module specialization of the existing pseudo-coherent evaluation isomorphism: finite cohomology criterion, evaluation, scalar-action/unit composite, and explicit adjunction calculation identifying the canonical biduality map. No new nodes, no statement changes, no Lean edits or compiles.",
+  "blueprint": "Inherited supporting algebraic input below lem-trf-local-term-locality, proof (1)--(2), through the recorded finite-map-dualizing-transfer chain. These four steps realize the finite-module biduality argument extracted from old Step 4 of lem-trf-finite-map-dualizing-transfer. Read the current latest blueprint locality proof and unit: neither separately states this algebraic helper; blueprint same_as remains empty.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian module-derived cohomology criterion (Stacks 066E (2)) supplies pseudo-coherence of M[0]; the trace-formula unit has no separate version of this algebraic criterion."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic closed symmetric monoidal structure of the module derived category, specialized to a small one-object ringed site, supplies tensor functoriality, the unit, and the adjunction identifying the canonical morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-7e080990f",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-7e080990f (reviewer sub-agent of L); spot-checked: Read in full: the item, its 4 steps, the statement of each of the 5 cited nodes, and Stacks 0A7C (dualizing.tex lemma-dualizing), 0A68(2) (more-algebra.tex:28562) and 066E(2). The delivery creates no new nodes and leaves the statement unchanged. In clones/live and clones/side-live the item is still unsplit, so it has not been superseded, and it is not a 2026-10-21 re-split. No SGA citations. Step 1: by 066E(2), M[0] is pseudo-coherent, and L is in D+ because its bounded injective representative has a lower bound. Step 2: lem-trf-derived-evaluation-pseudocoherent (0A68(2)) applied with (R,K,L,M)=(A,M[0],L,L); all its hypotheses are discharged. Step 3: b=e∘(h⊗1)∘λ^{-1} is invertible; I checked the explicit inverse. Step 4: I recomputed that b uncurries to ε_{L,L}(h⊗ε_{K,L})λ^{-1}=ε_{K,L}, using h = transpose of λ_L, naturality of the unitor, and the counit description in lem-sf-ringed-derived-closed-symmetric-monoidal. So b=δ, and the canonical-map clause is proved. The bookkeeping of associators and symmetry is compressed but routine. Small cases check out: Z with Z/n into Z (Z/n → Z/n[-1] → Z/n), a field with L=k[3], A=k[x]/x^2 with L=A, and M=0. Dropping finite cohomology of L is correct, since the 0A68/0A69 argument never uses it. A DFS over the snapshot finds no cycle. Accepted tool_uses: the generic Noetherian pseudo-coherence criterion (sk-thm-properbasechange) and the closed symmetric monoidal structure of D(O) (sk-prop-sf-biduality-general). Maintainer note: the unsplit lem-trf-homothety-evaluation-biduality (Q61, 2026-10-22) strictly generalizes this item, which Q85 created the same day. This split proves the bounded case directly from the smaller tool 0A68(2) and does not restate the generalization. Merging or relating the two nodes is a later DAG decision, not a fault of this delivery."
+ }
+}

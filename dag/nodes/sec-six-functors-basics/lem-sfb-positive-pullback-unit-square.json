@@ -1,0 +1,134 @@
+{
+ "id": "lem-sfb-positive-pullback-unit-square",
+ "kind": "statement",
+ "title": "The positive pullback square at the coefficient unit",
+ "statement": "Fix a prime l and a finite extension E/Q_l. Let f:X→Y have the normalized strict-system geometric adjunction of [def-sp-tower-shriek-data], coefficient pullback q of [def-sp-tower-class-diagonal], line pullback r of [def-sp-tower-class-pullback], and positive-twist pullback v of [def-sp-tower-class-twisting]. Write L for the derived pullback, T_Y,T_X for the positive twists, u_Y:T_Y(unit_Y)≅line_Y and u_X:T_X(unit_X)≅line_X for their normalized unit maps. Then L(u_Y.hom)≫r.hom = v.hom(unit_Y)≫T_X(q.hom)≫u_X.hom in the ordinary derived category of strict systems on X. No projective-line or trace hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), components of the twisted unit/chern splitting"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-diagonal",
+  "def-sp-tower-class-pullback",
+  "def-sp-tower-class-twisting"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the two ordinary arrows under g.ordinaryAdjunction. Twisting.unit_normalization sends the tensor 1 tensor y to y. Since unitIso is invertible, every section of the twisted coefficient unit equals such a tensor; hence these tensors suffice to test the adjoint arrows. Postcompose at level n with the invertible ordinaryPushEvaluation comparison. Naturality of the adjunction and of this evaluation comparison identifies the left path with the adjoint of the given line pullback applied to y. PositivePullback.normalization identifies the right path with the tensor of the adjunction unit at 1 and that same line section. Tensor functoriality, CoefficientPullback.normalization at 1, and Twisting.unit_normalization identify its image with the same line section. This proves the ordinary square without any root-restriction computation, and also covers the zero ring and empty chart. The computed sectionAdjoint wrapper records the actual target carrier; its proved naturality and equality-detection lemmas organize this calculation without repeated unfolding of direct-image data.",
+   "uses": [
+    "def-sp-tower-class-twisting",
+    "def-sp-tower-class-pullback",
+    "def-sp-tower-class-diagonal",
+    "lem-sfb-tower-class-section-adjoint-naturality",
+    "lem-sfb-tower-class-section-adjoint-faithful"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the existing source-library lemmas mapDerivedCategoryCompIso_hom_app_singleFunctor and mapDerivedCategoryNatIso_hom_app_singleFunctor for the canonical composition and natural-isomorphism comparisons. Expand positiveUnit and the three derived pullback isomorphisms, apply naturality of mapDerivedCategorySingleFunctor, and cancel the invertible composition comparison. The compatibility formulas reduce the desired equality to the image under the degree-zero embedding of the ordinary square already proved.",
+   "uses": [
+    "def-sp-tower-class-twisting",
+    "def-sp-tower-class-pullback",
+    "def-sp-tower-class-diagonal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-tower-class-twisting",
+  "def-sp-tower-class-pullback",
+  "def-sp-tower-class-diagonal",
+  "lem-sfb-tower-class-section-adjoint-naturality",
+  "lem-sfb-tower-class-section-adjoint-faithful"
+ ],
+ "proof_origin": {
+  "kind": "adapted",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), components of the twisted unit/chern splitting",
+  "by": "U4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the tensor pullback comparison commutes with the unit isomorphism",
+   "results": "Eight hits, including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal and generic monoidal unit constructions. None concerns the section-normalized strict Tate-line comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem; use the existing normalized pullbacks and exact localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The positive twist of a unit and Chern projective line decomposition has components the twisted unit and Chern adjoint",
+   "results": "Eight unrelated group-unit hits. A second query for tensor pullback and unitors found generic cartesian pullback formulas, not this strict coefficient-system comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteChernNormalization|IsIso.*bq|positivePullback_unit|retwist_shift in Mathlib, WeilConjectures and Sheaf; blueprint_refs search positive pullback unit and finite projective line splitting",
+   "results": "Only the existing Presentation fields, Model definitions, and the parent obligation. GeoP1Cohomology is the ordinary finite decomposition. Blueprint searches found no exact nodes.",
+   "date": "2026-10-27",
+   "verdict": "The two comparison steps need their own statements; the categorical assembly is proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceTwistedSplittingComponents",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1)",
+   "via": [
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassPositiveUnitSquare",
+  "file": "lean/Sheaf/Paper/TowerClassPositiveUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.positivePullback_unit_square",
+  "statement": "theorem positivePullback_unit_square\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {b : SpTowerShriek.Base l E} {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (g : SpTowerShriek.Geometry l E b f)\n    {cY : Chern l E Y} {cX : Chern l E X}\n    {tY : Twisting l E cY} {tX : Twisting l E cX}\n    (q : CoefficientPullback l E b f g) (r : LinePullback l E f g cY cX)\n    (v : PositivePullback l E f g tY tX r) :\n    (SpTowerShriek.pull l E b g).map (tY.positiveUnit l E).hom ≫\n        (r.derivedIso l E).hom =\n      (v.derivedIso l E).hom.app (unit Y (Arings l E Y)) ≫\n        (tX.T l E).map (q.derivedIso l E).hom ≫ (tX.positiveUnit l E).hom",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T222613-L-673599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261026T235946-L-1473743",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-relative-split-torus",
+ "kind": "definition",
+ "title": "The split torus over a scheme",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $r\\in\\mathbf N$. Put $A=\\Gamma(S,\\mathcal O_S)$. Let $A[\\mathbf Z^r]$ be the commutative group algebra consisting of finite sums $\\sum_m a_me_m$, with $e_me_n=e_{m+n}$. Give it the Hopf structure $e_m\\mapsto e_m\\otimes e_m$, $e_m\\mapsto1$, and $e_m\\mapsto e_{-m}$. Define the split torus $T_{S,r}=(\\mathbf G_{m,S})^r$ as the base change $S\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A[\\mathbf Z^r])$ [def-weil-affine-spectrum] [def-pc-fibre-product] along the canonical map $S\\to\\operatorname{Spec}A$, with the group law induced by this Hopf structure. The rank-zero case is the trivial group over $S$. No field, affineness, or nonemptiness hypothesis is imposed on $S$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 022U, example-multiplicative-group: base change of the multiplicative group to an arbitrary scheme; finite products of this construction, with Laurent coordinate Hopf algebra."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The split torus of rank r over an arbitrary scheme is the base change of the spectrum of the group algebra of the free abelian group of rank r",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsBaseChange.rank_eq\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Localization\", \"type\": \"{P : Type uM} [AddCommGroup P] [Module R P] [Module T P] [IsScalarTower R T P] {g : M →ₗ[R] P}\\n  (bc : IsBaseChange T g) : Module.rank T P = Module.rank R M\", \"doc\": \"If $ M $ is an $ R $-module and $ P $ is a $ T $-module obtained via base change from $ M $ (with compatible scalar actions of $ R $ and $ T $ on $ P $), then the rank of $ P $ as a $ T $-module equal\"}\n  {\"name\": \"Algebra.Extension.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{T} [CommRing T] [Algebra R T] (P : Extension R S) : Extension T (T ⊗[R] S)\", \"doc\": \"Let $R, S, T$ be commutative rings, such that $S$ and $T$ are $R$-algebras. Given an algebra extension $P$ of $S$ over $R$, which is represented by a surjective $R$-algebra homomorphism $\\\\pi : P_0 \\\\to\"}\n  {\"name\": \"Subalgebra.baseChange\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \"{R A : Type*} [CommSemiring R] [Semiring A] [Algebra R A] (B : Type*) [CommSemiring B] [Algebra R B]\\n  (C : Subalgebra R A) : Subalgebra B (B ⊗[R] A)\", \"doc\": \"Let $R$ be a commutative semiring, and let $A$ and $B$ be $R$-algebras with $B$ being a commutative semiring. Given a subalgebra $C$ of $A$ over $R$, its base change to $B$ is the $B$-subalgebra of th\"}\n  {\"name\": \"Algebra.Presentation.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Basic\", \"type\": \": Presentation T (T ⊗[R] S) ι σ\", \"doc\": \"Given an algebra $ S $ over a commutative ring $ R $ with presentation $ P $ specifying generators indexed by $ \\\\iota $ and relations indexed by $ \\\\sigma $, the base change of $ P $ to a commutative $\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"IsBaseChange.rank_eq_of_le_nonZeroDivisors\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Localization\", \"type\": \"{P : Type uM} [AddCommGroup P] [Module R P] [Module T P] [IsScalarTower R T P] {g : M →ₗ[R] P}\\n  (bc : IsBaseChange T g) : Module.rank T P = Module.rank R M\", \"doc\": \"If $ P $ is the base change of an $ R $-module $ M $ to a $ T $-module via the submonoid of non-zero divisors of $ R $, then the rank of $ P $ over $ T $ equals the rank of $ M $ over $ R $. That is, \"}\n  {\"name\": \"IsBaseChange.finrank_eq_of_le_nonZeroDivisors\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Localization\", \"type\": \": finrank T P = finrank R M\", \"doc\": \"If $ T $ is the localization of a commutative semiring $ R $ at a submonoid $ S $ consisting of non-zero divisors, and $ P $ is a $ T $-module obtained by base change from an $ R $-module $ M $, then \"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T] {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Spec { carrier := R, commRing := inst } ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpe\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$, induced by $R$-algebra structures on $S$ and $T$, is isomorph\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No existing relative split-torus definition. Mathlib supplies hopfSpec, which is used in the real construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "split torus over an arbitrary base scheme as Spec of the group algebra of Z to the power r",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme} (v : n → ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n).symm v =\\n    CategoryTheory.CategoryStruct.comp X.toSpecΓ\\n      (AlgebraicGeometry.Spec.map\\n        (CommRingCat.ofHom\\n          (MvPolynomial.eval₂Hom \", \"doc\": \"The inverse of the natural equivalence between morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and $ n \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.coord\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} → (S : AlgebraicGeometry.Scheme) → n → ↑((AlgebraicGeometry.AffineSpace n S).presheaf.obj (Opposite.op ⊤))\", \"doc\": \"For an index $i$ in the type $n$, the $i$-th coordinate function on the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, defined as the global section of the structure sheaf corresponding to the $i$-t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.AffineSpace n S ↘ S =\\n    CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.terminal.from S)\\n      (CategoryTheory.Limits.terminal.from\\n        (AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{max u v, 0}\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is canonically isomorphic to the pullback of the unique morphisms from $ S $ and the affine $ n $-space over $ \\\\mathbb{Z} $ to \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No existing relative split-torus definition. Mathlib supplies hopfSpec, which is used in the real construction."
+  },
+  {
+   "tool": "grep",
+   "query": "splitTorus|relativeSplitTorus|hopfSpec",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"178\", \"text\": \"abbrev hopfSpec : (CommHopfAlgCat R)ᵒᵖ ⥤ Grp (Over <| Spec R) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"182\", \"text\": \"instance hopfSpec.instFull : (hopfSpec R).Full := inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"185\", \"text\": \"instance hopfSpec.instFaithful : (hopfSpec R).Faithful := inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"188\", \"text\": \"def hopfSpec.fullyFaithful : (hopfSpec R).FullyFaithful :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"258\", \"text\": \"  __ := ((hopfSpec R).obj <| .op <| .of R A).grp\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No existing relative split-torus definition. Mathlib supplies hopfSpec, which is used in the real construction."
+  },
+  {
+   "tool": "grep",
+   "query": "splitTorus|relativeSplitTorus|torus.*[Aa]ction|[Ii]nvariant[Aa]ffine (lean/WeilConjectures and lean/Sheaf); blueprint_refs.py search split torus; DAG definition-node search",
+   "results": "WeilConjectures has no split torus. Sheaf.AlgebraicGeometry.ToriMultiplicativeType defines splitTorus over a field only; DiagonalizableGroup defines diagonalizableGroup over a field only. StandardGroupSchemes.multiplicative is also field-only. No relative split torus definition node or declaration. blueprint_refs.py: 0 blueprint nodes match split torus. The frame-model node defines frames, not the acting relative group.",
+   "date": "2026-10-24",
+   "verdict": "A new relative-base construction is needed; existing field definitions are not copied."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-split-torus-invariant-affines",
+  "date": "2026-10-24",
+  "group": "Q110"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The relative acting split torus T = (G_m,S)^r in the invariant affine chart lemma.",
+   "via": [
+    "lem-sfb-relative-split-torus-invariant-affines",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeSplitTorus",
+  "declaration": "AlgebraicGeometry.relativeSplitTorus",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeSplitTorus.lean",
+  "statement": "def relativeSplitTorus (S : Scheme.{u}) (r : ℕ) : Grp (Over S)",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d7bf91e0",
+  "group": "Q110",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d7bf91e0",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node: affine locally Noetherian S; separated + finite type (IsSeparated, LocallyOfFiniteType, QuasiCompact); normal-domain stalks in the recorded inline form; IsInvertible + absolute IsAmple L; split torus of any rank r : ℕ via the new relativeSplitTorus; action as Mod (Over S) T, whose product is the fibre product over S, with exactly the unit/assoc laws; conclusion an equivariant affine open immersion containing x, which is equivalent to an invariant affine open with the restricted action. Edge cases (empty X, empty S, r=0) covered; one universe, all binders explicit. New node def-sfb-relative-split-torus is real data (Over.pullback S.toSpecΓ).mapGrp of hopfSpec Γ(S)[Fin r→ℤ], matches Stacks 022U and the node text; record fields follow the H12 rule. Item record diff vs live: only lean and stmt_deps (+new node). lean.statement verbatim; docstrings carry source, blueprint id and the 5 proof steps; only sorry is the theorem proof. Same-day parallel def-sfb-relative-torus (functor of points) and def-sfb-ring-diagonalizable-group (over Spec R only) do not carry this group scheme over arbitrary S: advisory maintainer note, not H4. No files changed, no compile run."
+ }
+}

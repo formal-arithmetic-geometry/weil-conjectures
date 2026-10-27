@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-completed-constant-unbounded-finite-diagram-comparison",
+ "kind": "statement",
+ "title": "Unbounded finite-diagram comparison for completed constant realization",
+ "statement": "Let $g:Y\\to X$ be any scheme morphism and $d$ an adic coefficient datum on a commutative ring $A$ [def-weil-pbc-adic-coefficient-datum]. Choose phi and beta with the evaluation and projection equations in [def-weil-pbc-completed-constant-realization-data], and let $c$ be the actual relative completed realization followed by inverse-image coefficient comparison. Suppose $c$ is additive and preserves finite limits and colimits. For every $E\\in D(\\widehat A)$ there are quotient-linear isomorphisms from the finite reductions of $cE$ to the reductions of $a_gE$ along $r_n$ of [def-weil-pbc-constant-adic-finite-diagram-data]. They commute with pbcReductionTransition for every pair $n\\le m$, with the exact forward semilinear square in the Lean statement. There is no boundedness, finiteness, local-system hypothesis, normalized tower M or algebraic effectivity assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY (lemma-derived-base-change) and Tag 06YU (definition-derived-tor); sites-modules.tex Tags 093J (lemma-constant-exact) and 093M (lemma-completion-flat); relative finite tensor comparison in amplification (c)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-completed-constant-realization-data",
+  "def-weil-pbc-constant-adic-finite-diagram-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the single completed-coefficient scalar factorization to write c(E) as derived scalar extension of the constant algebraic realization along s_g. The limit lift defining s_g followed by each quotient projection is exactly constantAdicFiniteProjection, by limit.lift_π and functoriality.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-derived-scalar-factorization",
+    "def-weil-pbc-constant-adic-finite-diagram-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every n compose scalar extension of that isomorphism with pbcReductionNormalization for the factorization s_g followed by the nth quotient projection. This constructs each quotient-linear isomorphism without any boundedness assumption. Prove associativity of the canonical restriction comparisons by exact derivation of their identity-on-sections ordinary associativity. Apply Adjunction.leftAdjointCompIso_assoc, and the definition of pbcReductionNormalizationHom, to obtain associativity of these normalizations.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose normalization associativity along the last scalar-extension adjunction. This proves compatibility of normalization with the semilinear pbcReductionTransition for any four ring sheaves. Prove transition naturality by the adjunction Hom equivalences and naturality of the restriction comparison. Applying these two identities to the coefficient projections proves exactly the requested forward square for every n≤m, including n=m.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-constant-derived-scalar-factorization",
+  "def-weil-pbc-constant-adic-finite-diagram-data",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "06YY and 0D6D: factor the single completed scalar extension, then prove all finite quotient compatibility by adjunction associativity; Lean reduction by J5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor finite quotients commute with completed constant sheaf realization on an unbounded K-flat complex",
+   "results": "8 hits, led by AdicCompletion.tensor_map_id_left_eq_map, ofTensorProduct_naturality and finite Noetherian completion/tensor equivalences. None supplies the sheaf comparison for an unbounded complex.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion.evalₐ\"",
+   "results": "7 hits: evalₐ and its evaluation formulas on mk, of, and lifts. These supply the elementary completion evaluation calculation, but no local derived diagram.",
+   "date": "2026-10-27",
+   "verdict": "partial matches used for evaluation formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "constantAdicFinite|completed_constant_unbounded|lisse_tower_constant_algebraic",
+   "results": "0 Mathlib hits; repository searches found CompatibleFiniteDerivedTrivializations, finite-ring local constancy and the bounded finite-complex completed realization, but not these interfaces.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseTowerLocalAlgebraicReductionDiagram",
+  "date": "2026-10-27",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "Tags 06YY, 06YU and 093J--093M, unbounded K-flat finite tensor comparison in amplification (c)",
+   "via": [
+    "lem-weil-pbc-lisse-tower-local-algebraic-reduction-diagram",
+    "lem-weil-pbc-lisse-tower-algebraic-derived-presentation",
+    "lem-weil-pbc-lisse-normalized-tower-local-models",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantUnboundedFiniteDiagramComparison",
+  "file": "lean/Sheaf/Paper/CompletedConstantUnboundedFiniteDiagramComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completed_constant_unbounded_finite_diagram_comparison",
+  "statement": "theorem completed_constant_unbounded_finite_diagram_comparison\n    (X Y : Scheme.{u}) (g : Y ⟶ X)\n    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)\n    (φ : adicLisseConstantRing Y (AdicCompletion d.ideal A) ⟶\n      adicLisseCompletedRing Y d.ideal)\n    (hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem Y d.ideal) (op n) =\n      (constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (AdicCompletion.evalₐ d.ideal (n + 1)).toRingHom))\n    (β : (adicTowerInverseImage g).obj (adicLisseCompletedRing X d.ideal) ⟶\n      adicLisseCompletedRing Y d.ideal)\n    (hβ : ∀ n : ℕ, β ≫ limit.π (adicLisseRingSystem Y d.ideal) (op n) =\n      (adicTowerInverseImage g).map (limit.π (adicLisseRingSystem X d.ideal) (op n)) ≫\n        proEtaleConstantInverseImageMap g CommRingCat.{u + 1}\n          (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) :\n    let c := completedConstantRealization Y d.ideal φ ⋙ pbcRestrict β ⋙\n      pbcRestrict ((adicTowerInverseImage g).map (pbcCompletedComparison X d).inv)\n    ∀ (hc : c.Additive) (hlim : PreservesFiniteLimits c)\n      (hcolim : PreservesFiniteColimits c),\n      letI := hc\n      letI := hlim\n      letI := hcolim\n      ∀ E : DerivedCategory (ModuleCat.{u + 1} (AdicCompletion d.ideal A)),\n      ∃ e : ∀ n : ℕ,\n        (pbcDerivedExtend ((adicTowerInverseImage g).map (pbcAdicProjection X d n))).obj\n            (c.mapDerivedCategory.obj E) ≅\n          (pbcDerivedExtend (constantAdicFiniteProjection g d n)).obj\n            ((constantAdicFiniteRealization g d).obj E),\n        ∀ (m n : ℕ) (hnm : n ≤ m),\n          (e m).hom ≫ pbcReductionTransition\n              (constantAdicFiniteProjection g d m)\n              ((adicTowerInverseImage g).map (pbcAdicQuotient X d m n hnm))\n              (constantAdicFiniteProjection g d n)\n              (constantAdicFiniteProjection_comp g d m n hnm)\n              ((constantAdicFiniteRealization g d).obj E) =\n            pbcReductionTransition\n                ((adicTowerInverseImage g).map (pbcAdicProjection X d m))\n                ((adicTowerInverseImage g).map (pbcAdicQuotient X d m n hnm))\n                ((adicTowerInverseImage g).map (pbcAdicProjection X d n))\n                (((adicTowerInverseImage g).map_comp _ _).symm.trans\n                  (congrArg (adicTowerInverseImage g).map\n                    (pbcAdicProjection_comp X d m n hnm)))\n                (c.mapDerivedCategory.obj E) ≫\n              (pbcDerivedRestrict ((adicTowerInverseImage g).map\n                (pbcAdicQuotient X d m n hnm))).map (e n).hom",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T021358-L-2763455",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261027T050612-L-243263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

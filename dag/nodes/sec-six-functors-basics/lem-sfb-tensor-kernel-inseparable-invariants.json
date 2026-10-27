@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-tensor-kernel-inseparable-invariants",
+ "kind": "statement",
+ "title": "Purely inseparable invariants through a tensor compositum and two kernels",
+ "statement": "Let $K\\subseteq L$ and $K\\subseteq M$ be field extensions with $M/K$ finite, and suppose $T=L\\otimes_K M$ is a field. Let a finite group $N$ act on $L$ and $M$ by field automorphisms preserving $K$, with the same action on $K$, and hence act diagonally on $T$. Let $Q\\triangleleft N$ act trivially on $L$, and write $A=N/Q$ for its induced action on $L$. For a group $G$ acting on a field $E$, write $E^G=\\{x\\in E:g(x)=x\\ \\forall g\\in G\\}$. Suppose $M^Q/K$ is purely inseparable, and let $R\\subseteq L^A$ be a subfield with $L^A/R$ purely inseparable. Then, under the canonical embeddings,\n$$(L\\otimes_K M)^Q=L\\otimes_K M^Q,$$\nthis fixed field is purely inseparable over $L$, and $T^N/R$ is purely inseparable. The group actions need not be faithful. In particular, for finite extensions $k\\subseteq e\\subseteq F$ with compatible actions of finite groups $J\\xrightarrow{\\beta}G\\xrightarrow{\\alpha}H$, both arrows surjective, set $Q=\\ker\\beta$, $A=\\ker\\alpha$ and $N=\\ker(\\alpha\\beta)$. If $F^Q/e$ and $e^A/k$ are purely inseparable, then $F^N/k$ is purely inseparable.\n\nPurely inseparable means that every element has a $p$-power in the smaller field in characteristic $p>0$, and equality in characteristic zero. Field extensions, their finite degree and tensor products use [def-weil-field], [def-pc-field-extension], [def-pc-field-tower] and [def-weil-pbc-module-tensor-product]; the algebra tensor product has multiplication $(l\\otimes m)(l'\\otimes m')=ll'\\otimes mm'$.",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Remarks 2.3(iii)--(iv), printed p.602; Theorem 5.9(a) proof, printed p.617, final rectangle verification. Agent-formulated tensor and two-kernel calculation of old step 10. Local de Jong PDF WANTED.",
+  "url": "https://www.numdam.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=M^Q$. Fixed elements form a subfield: automorphisms preserve $0,1,+,-,\\cdot$ and send $x^{-1}$ to $g(x)^{-1}$. Since $Q$ fixes $L$, compatibility on $K$ implies that it fixes $K$, so $K\\subseteq E$ and each $q\\in Q$ acts $K$-linearly on $M$. The two factor maps to the field $T$ are injective: a unital map from a field has zero kernel, since a nonzero kernel element would give $1=0$ after multiplication by its inverse. We henceforth use these embeddings.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent argument from the field and fixed-element definitions; Definition Tag 09HE (definition-purely-inseparable) supplies the later convention."
+   }
+  },
+  {
+   "text": "Choose a $K$-basis $(b_i)_{i\\in I}$ of $L$ by applying the basis-extension statement to the empty independent set. Scalar extension gives an $M$-basis $(b_i\\otimes1)$ of $L\\otimes_K M$, and an $E$-basis with the same formula of $L\\otimes_K E$. Thus the respective tensors have unique expressions $\\sum_i b_i\\otimes m_i$ and $\\sum_i b_i\\otimes e_i$ with finitely supported coefficients. No finiteness of $L/K$ is required.",
+   "uses": [
+    "lem-weil-pbc-vector-space-basis-through-vector",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00CV (section-tensor-product); agent coordinate argument using the basis and scalar-extension statements."
+   }
+  },
+  {
+   "text": "The tensor universal property gives $j:L\\otimes_K E\\to L\\otimes_K M$, $l\\otimes e\\mapsto l\\otimes e$; the multiplication formula in the statement makes it a ring map. In the bases of step 2 it sends $(e_i)$ to the same family in $M$, so it is injective. For $q\\in Q$, the diagonal action on $z=\\sum_i b_i\\otimes m_i$ is $q(z)=\\sum_i b_i\\otimes q(m_i)$, since $q(b_i)=b_i$. Uniqueness of coordinates says that $z$ is fixed by every $q$ exactly when every $m_i\\in E$. This is exactly the image of $j$, proving the asserted equality under $j$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Tag 00CV (section-tensor-product); agent basis calculation, analogous to the invariant-coefficient calculation in Varieties Tag 038B."
+   }
+  },
+  {
+   "text": "The image just identified is a field: if $0\\ne z\\in T^Q$, then $q(z^{-1})=q(z)^{-1}=z^{-1}$ for every $q$. Consequently $j$ identifies $L\\otimes_K E$ with the fixed field $T^Q$, containing $L$ through $l\\mapsto l\\otimes1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent fixed-element and inverse calculation."
+   }
+  },
+  {
+   "text": "In characteristic $p>0$, write any $z\\in L\\otimes_K E$ as a finite sum $\\sum_{j=1}^r l_j\\otimes e_j$, using generation by pure tensors and absorbing $K$-scalars into $l_j$. For each $e_j$, choose $n_j$ with $e_j^{p^{n_j}}\\in K$, and choose $n\\ge n_j$ for all $j$ (take $n=0$ for the empty sum). Then $e_j^{p^n}\\in K$. The iterated Frobenius is a ring homomorphism, so $z^{p^n}=\\sum_j l_j^{p^n}\\otimes e_j^{p^n}=(\\sum_j l_j^{p^n}e_j^{p^n})\\otimes1\\in L$. Thus $T^Q/L$ is purely inseparable. In characteristic zero $E=K$ by the hypothesis, and bilinearity gives $\\sum_j l_j\\otimes e_j=(\\sum_j l_je_j)\\otimes1$; hence $T^Q=L$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Definition Tag 09HE (definition-purely-inseparable); the finite-sum calculation is the argument of Lemma Tag 09HH (lemma-purely-inseparable-elements); ring Frobenius as in Varieties Tag 03SM (definition-absolute-frobenius)."
+   }
+  },
+  {
+   "text": "Every element of $R\\subseteq L^A$ is fixed by $N$, so $R\\subseteq T^N$. Let $x\\in T^N$. In characteristic $p>0$, step 5 gives $x^{p^n}=l\\in L$. For every $g\\in N$, equivariance of the embedding and preservation of powers give $g(l)=g(x)^{p^n}=x^{p^n}=l$. Thus $l\\in L^{N/Q}=L^A$. By $L^A/R$ purely inseparable choose $m$ with $l^{p^m}\\in R$; then $x^{p^{n+m}}\\in R$. In characteristic zero step 5 puts $x$ in $L$, invariance puts it in $L^A$, and $L^A=R$. This proves $T^N/R$ purely inseparable.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Definition Tag 09HE (definition-purely-inseparable) and the explicit successive-power argument of Lemma Tag 09HG (lemma-purely-inseparable-permanence)."
+   }
+  },
+  {
+   "text": "For the final assertion, $Q\\subseteq N$ and $\\beta(N)=A$: if $a\\in\\ker\\alpha$, choose $j\\in J$ with $\\beta(j)=a$; then $\\alpha\\beta(j)=1$, so $j\\in N$. Compatibility of the field actions gives $k\\subseteq F^N$. For $x\\in F^N$ in characteristic $p>0$, the hypothesis $F^Q/e$ gives $x^{p^n}=y\\in e$. For every $a\\in A$, lift $a$ to $j\\in N$ as above; then $a(y)=j(x^{p^n})=x^{p^n}=y$. Hence $y\\in e^A$, and $e^A/k$ gives $y^{p^m}\\in k$, so $x^{p^{n+m}}\\in k$. In characteristic zero $F^Q=e$ and $e^A=k$; the same lift shows $F^N\\subseteq e^A=k$. Together with the reverse inclusion this gives equality. No injectivity of any group action was used.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Definition Tag 09HE (definition-purely-inseparable) and Lemma Tag 09HG (lemma-purely-inseparable-permanence); agent explicit lifting along the two group kernels."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-vector-space-basis-through-vector",
+  "def-weil-vector-space-scalar-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-ring-frobenius"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Definition Tag 09HE (definition-purely-inseparable), Lemmas Tags 09HG (lemma-purely-inseparable-permanence) and 09HH (lemma-purely-inseparable-elements); independent basis-coordinate tensor and kernel-lifting arguments. The de Jong source cited by the item is WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixedField.*[Tt]ensor|[Tt]ensor.*fixedField|[Ii]nvariant.*[Pp]urely",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No exact match: fixedField and IsPurelyInseparable.trans/tower_top give individual ingredients, not diagonal tensor invariants and the two-kernel conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernel of composite surjections of finite groups acting on fields preserves purely inseparable fixed field extensions under tensor product",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPurelyInseparable, IntermediateField.fixedField",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No exact match: fixedField and IsPurelyInseparable.trans/tower_top give individual ingredients, not diagonal tensor invariants and the two-kernel conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed fields of a tensor compositum with a normal subgroup and purely inseparable invariant fields",
+   "results": "8 hits: InfiniteGalois.restrict_fixedField, IsGalois.fixingSubgroup_normal_of_isGalois, IsGalois.of_fixedField_normal_subgroup, IsGaloisGroup.fixedPoints_fixingSubgroup, IntermediateField.fixedField.isScalarTower, IntermediateField.fixedField, IntermediateField.fixingSubgroup_fixedField, IntermediateField.map_fixingSubgroup",
+   "date": "2026-10-22",
+   "verdict": "No exact match: fixedField and IsPurelyInseparable.trans/tower_top give individual ingredients, not diagonal tensor invariants and the two-kernel conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If M fixed by Q is purely inseparable over K, invariants of L tensor K M under Q are purely inseparable over L; pass through a quotient group",
+   "results": "8 hits: IsPurelyInseparable.tower_top, IsPurelyInseparable.tower_bot, IntermediateField.fixedField.isScalarTower, perfectClosure.isPurelyInseparable, IntermediateField.fixedField.algebra, IsPurelyInseparable.trans, FixedPoints.isSeparable, IntermediateField.isPurelyInseparable_tower_top",
+   "date": "2026-10-22",
+   "verdict": "No exact match: fixedField and IsPurelyInseparable.trans/tower_top give individual ingredients, not diagonal tensor invariants and the two-kernel conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPurelyInseparable.trans|IsPurelyInseparable.tower_top",
+   "results": "5 hits: Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean, Mathlib/FieldTheory/PurelyInseparable/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "No exact match: fixedField and IsPurelyInseparable.trans/tower_top give individual ingredients, not diagonal tensor invariants and the two-kernel conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariants of L tensor K M when a normal subgroup fixes L, and purely inseparable fixed fields under composite surjective finite group actions",
+   "results": "8 hits: FixedPoints.instIsInvariantSubfieldSubfield, instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient, Rep.toInvariants, IsGalois.of_fixedField_normal_subgroup, IsGaloisGroup.of_isGalois, IntermediateField.fixingSubgroup, IsGalois.normalAutEquivQuotient_apply, IsGalois.normalAutEquivQuotient",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field definitions, field Galois correspondence and invariant quotient actions do not state the diagonal tensor and purely inseparable two-kernel assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed subfield of a tensor product under a finite normal subgroup acting trivially on one factor, followed by purely inseparable fixed fields for two kernels",
+   "results": "8 hits: FixedPoints.normal, IsGalois.of_fixedField_normal_subgroup, fixedByFinite, IsGalois.of_fixed_field, IntermediateField.fixedField, InfiniteGalois.restrict_fixedField, IsGaloisGroup.fixingSubgroup_fixedPoints, IsGaloisGroup.fixedPoints_fixingSubgroup",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field definitions, field Galois correspondence and invariant quotient actions do not state the diagonal tensor and purely inseparable two-kernel assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient|theorem normal|theorem of_fixed_field|def fixedField|def toInvariants",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/PythagoreanTriples.lean, Mathlib/NumberTheory/ModularForms/Derivative.lean, Mathlib/NumberTheory/ModularForms/Derivative.lean, Mathlib/NumberTheory/ModularForms/Derivative.lean, Mathlib/NumberTheory/ModularForms/Derivative.lean, Mathlib/NumberTheory/ModularForms/Derivative.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field definitions, field Galois correspondence and invariant quotient actions do not state the diagonal tensor and purely inseparable two-kernel assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with fixed vectors when a group acts on only one tensor factor; p power membership descends to invariant subfields through two group kernels",
+   "results": "8 hits: FixedPoints.intermediateField, FixedPoints.instIsInvariantSubfieldSubfield, FixedPoints.mem_intermediateField_iff, FixedBy.subfield, FixedPoints.normal, FixedPoints.subfield, IntermediateField.fixedField.smul, FixedPoints.isSeparable",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field definitions, field Galois correspondence and invariant quotient actions do not state the diagonal tensor and purely inseparable two-kernel assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "of_fixed_field|def fixedField|lemma normal\\b",
+   "results": "4 hits: Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field definitions, field Galois correspondence and invariant quotient actions do not state the diagonal tensor and purely inseparable two-kernel assertions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-plurinodal-field-alteration",
+  "date": "2026-10-22",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X 2.2--2.3: X Lemma 2.2 proof, printed pp.149--150: the application of Vidal 2004b Proposition 4.4.3, before the successive applications of 4.4.4; retain the generic Galois/radicial condition (iii), equivalently geometric N-orbits over a dense open. No smoothness of the total T_i is asserted. Vidal primary article is WANTED locally.; extraction: Remarks 2.3(iii)--(iv), printed p.602; Theorem 5.9(a) proof, printed p.617, final rectangle verification. Agent-formulated tensor and two-kernel calculation of old step 10. Local de Jong PDF WANTED.",
+   "via": [
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-tensor-kernel-inseparable-invariants",
+  "worker": "stage1",
+  "summary": "Seven-step proof with no new nodes: choose a basis of L and extend it to E=M^Q and M; compare coordinates to obtain the injective tensor inclusion and its fixed image; check inverses; compute a common characteristic power of a finite tensor sum; descend invariant powers through N/Q and explicitly lift through the two group kernels. Existing basis, scalar-extension and Frobenius leaves supply all non-elementary inputs. The statement is unchanged. No exact project attachment or Mathlib match found. Repair of the refused side completion: rebuilt on the current live DAG, re-read every current cited statement, retained the unchanged statement and seven-step argument, and refreshed the citation audit and repair report for promotion to the live DAG.",
+  "blueprint": "Realizes the inherited alteration-reduction place of det-thm-sf-ctf-stability-direct-images proof (3), specifically the tensor and two-kernel invariant calculation extracted from lem-sfb-equivariant-plurinodal-field-alteration old step 10. The ancestor command returns None; retained the inherited null from.node, exact from.place and via chain. Whole-blueprint searches for purely inseparable and tensor invariants found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-cbbc8659b",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-cbbc8659b (reviewer sub-agent of L); spot-checked: I read the whole item. It has a 7-step split, no new nodes and no Mathlib leaves. Against the prior head 94d7710bc0a1 only split_report differs (statement, proof, proof_deps, source and blueprint are identical), and the statement is the base statement. This re-delivery repairs the refused side-completion landing; promotion to the live DAG is the maintainer's action. The diagonal action is well defined because the actions agree on K. Q fixes K and acts as id⊗q. Steps 2-3: the basis-through-vector clause with S=∅ and the scalar-extension clause that keeps an arbitrary basis give unique coordinates, so (L⊗M)^Q=L⊗M^Q with no finiteness of L/K. Step 5 takes a common Frobenius power of a finite sum and handles characteristic 0 by E=K. Step 6 descends the power to L^A and then to R (Stacks 09HG, proof read in fields.tex). Step 7 lifts ker α into N=ker αβ through β and uses no faithfulness. Small cases checked: Q trivial, M=K, L=K, N trivial, characteristic 0, the zero sum, nonfaithful actions. Every cited statement supplies its use and proof_deps equals the union of uses. Stacks tags 09HE, 09HG, 09HH and 03SM are verified, and no SGA source is cited. The de Jong PDF is absent and recorded as WANTED; this is acceptable because the proof is independent and elementary. lem-weil-pbc-tensor-field-extension-galois-invariants (fixed field must equal the base) and lem-sfb-curve-field-kernel-invariant-tower (different hypotheses) are not duplicates. The citer, plurinodal-field-alteration step 4, uses clauses of the unchanged statement."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.TensorKernelInseparableInvariants",
+  "declaration": "Algebra.tensorKernelInseparableInvariants",
+  "declarations": [
+   "Algebra.tensorKernelInseparableInvariants",
+   "Algebra.purelyInseparable_compositeKernel"
+  ],
+  "file": "lean/Sheaf/FieldTheory/TensorKernelInseparableInvariants.lean",
+  "statement": "theorem tensorKernelInseparableInvariants (K : Type u) (L : Type v) (M : Type w) [Field K] [Field L] [Field M] [Algebra K L] [Algebra K M] [FiniteDimensional K M] (hT : IsField (L ⊗[K] M)) (N : Type g) [Group N] [Finite N] (σK : N →* (K ≃+* K)) (σL : N →* (L ≃+* L)) (σM : N →* (M ≃+* M)) (hL : ∀ n : N, (σL n).toRingHom.comp (algebraMap K L) = (algebraMap K L).comp (σK n).toRingHom) (hM : ∀ n : N, (σM n).toRingHom.comp (algebraMap K M) = (algebraMap K M).comp (σK n).toRingHom) (Q : Subgroup N) [Q.Normal] (hQ : ∀ q : Q, ∀ l : L, σL q l = l) (E : IntermediateField K M) (hE : ∀ m : M, m ∈ E ↔ ∀ q : Q, σM q m = m) (hEpi : IsPurelyInseparable K E) (R : Subfield L) (hR : ∀ r : R, ∀ n : N, σL n r = r) (hRpi : ∀ l : L, (∀ n : N, σL n l = l) → ∃ a : ℕ, l ^ (ringExpChar L ^ a) ∈ R) : Function.Injective (Algebra.TensorProduct.map (AlgHom.id K L) E.val) ∧ (∀ x : L ⊗[K] M, (∀ q : Q, Algebra.TensorProduct.mapRingHom (σK q).toRingHom (σL q).toRingHom (σM q).toRingHom (hL q) (hM q) x = x) ↔ x ∈ Set.range (Algebra.TensorProduct.map (AlgHom.id K L) E.val)) ∧ IsField (L ⊗[K] E) ∧ IsPurelyInseparable L (L ⊗[K] E) ∧ (∀ x : L ⊗[K] M, (∀ n : N, Algebra.TensorProduct.mapRingHom (σK n).toRingHom (σL n).toRingHom (σM n).toRingHom (hL n) (hM n) x = x) → ∃ a : ℕ, ∃ r : R, x ^ (ringExpChar L ^ a) = Algebra.TensorProduct.includeLeft (R := K) (S := L) (B := M) (r : L))",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-081f084cc",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Both theorems match the node clause by clause. Tensor assertion: canonical mapRingHom diagonal action; E pinned to M^Q by hE; L^A fixed points written as N-fixed (Q trivial on L); all five conclusion clauses (injective j, T^Q = range j, IsField and IsPurelyInseparable L (L⊗E), T^N/R power criterion via includeLeft) are present and follow from proof steps 2-6. Two-kernel assertion checked through the lifting argument. Characteristic 0 is covered by the ringExpChar power criteria; no faithfulness or universe restriction. lean.statement matches the file verbatim (script check); no new nodes or defs; proofs are sorry; source and blueprint docstrings present; neither name exists elsewhere in side-live. No compile run since no file changed. Minor: σK is redundant data, harmless."
+ }
+}

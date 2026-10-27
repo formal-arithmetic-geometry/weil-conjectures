@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-completed-reindexing-lifted-coefficients",
+ "kind": "statement",
+ "title": "Completed reindexing in the lifted integral coefficient presentation",
+ "statement": "Let ell be prime and E a finite extension of Q_ell in Type u, and put d = pbcIntegralDatum ell E from [def-weil-pbc-bounded-constructible-complete]. For every isomorphism g : T′ -> T of schemes of size u with ell invertible on the stalks of T, PurCompletedReindexingAt d g holds. For every supplied chosen Cartesian square [def-weil-pbc-cartesian-square] ChosenCartesianSquare v p′ p g of schemes of size u, with v and g isomorphisms and ell invertible on the target of g, PurCompletedReindexingSquare d sq holds. Both predicates, with every quotient-projection, tensor, transition, limit and mate normalization retained, are those of [def-pur-completed-reindexing-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent compatibility; extracted semilinear-exchange steps 9--11, completed reindexing specialized to the lifted coefficient presentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-pur-completed-reindexing-data",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-pur-completed-module-section-reindexing for the section-normalized ordinary module equivalence with the actual reverse pullback. Change its functor and inverse along its literal functor equalities. A generic proved helper using Mathlib Equivalence.congrRight applies it to strict diagrams. The ordinary exactness instances give finite limit and finite colimit preservation. A separate generic proved helper using Equivalence.mapDerivedCategory gives both derived equivalences, with precisely d.pull and d.towerPull and their reverse pullbacks.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-completed-reindexing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take beta and b from lem-pur-reindexing-limit-unit-normalization. For TowerComplete K the specified completionUnit(K) is invertible by definition. Compose b inverse on the strict reduction tower with the inverse of d.pull u applied to completionUnit(K). The lemma's augmentation equality identifies its inverse with ordinaryToCompleted. Cancelling the latter pulled unit proves the second normalization equation exactly. The inverse/cancellation calculation is checked generically before substituting the completed derived functors.",
+   "uses": [
+    "lem-pur-reindexing-limit-unit-normalization",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining existsUnique characterization of reductionTowerPullbackIso supplies IsCompletedReductionPullbackComparison. The existing proved pure-tensor formula levelPullIso_tensor gives the local tensor clause, and completedReductionLevelPullbackIso_transition gives every index-arrow equation. These are exactly the remaining reduction clauses, with no additional K-flat model construction required here.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every supplied chosen Cartesian square with v and g invertible, apply lem-pur-reindexing-ordinary-mate-sections for invertibility and the section formula. Whiskering that invertible natural transformation proves the ordinary tower mate invertible. Apply lem-pur-reindexing-derived-mate-localization for both derived invertibilities and both K-injective normalization equations. Assemble the conjunctions, specializing d to pbcIntegralDatum l E and retaining each supplied chosen Cartesian square.",
+   "uses": [
+    "lem-pur-reindexing-ordinary-mate-sections",
+    "lem-pur-reindexing-derived-mate-localization",
+    "def-pur-completed-reindexing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-module-section-reindexing",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-reindexing-limit-unit-normalization",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-pur-reindexing-ordinary-mate-sections",
+  "lem-pur-reindexing-derived-mate-localization",
+  "def-pur-completed-reindexing-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "The coefficient-independent proof helpers of lem-pur-isomorphism-completed-reduction-reindexing, reused at pbcIntegralDatum; Lean specialization by U2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compact support base change along scheme isomorphisms agrees with reindexing and respects composition",
+   "results": "AffineSpace.reindex_comp, Scheme.Modules.pushforwardCongr, Scheme.Modules.pullbackCongr, Scheme.Modules.pullbackComp",
+   "verdict": "No match for the completed ring, strict reduction and normalized mate statements.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "loogle",
+   "query": "ULift.ringEquiv",
+   "results": "ULift.ringEquiv; RingHom.comp_ulift_eq",
+   "verdict": "Ring equivalence is the coefficient transport tool; no complete normalized reindexing theorem.",
+   "date": "2026-10-25"
+  },
+  {
+   "tool": "grep",
+   "query": "PurCompletedReindexing|pbcPadicCoefficientDatum|pbcIntegralDatum",
+   "results": "PurCompletedReductionReindexing states the unlifted result; IntegralCompletedCoefficientTransport constructs quotient ULift and completed comparisons. No lifted instance of the full reindexing predicates.",
+   "verdict": "Need coefficient-presentation transport; no duplicate conclusion found.",
+   "date": "2026-10-25"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearExchangeReindexing",
+  "date": "2026-10-25",
+  "group": "U2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent compatibility: completed reindexing coefficient-size transport.",
+   "via": [
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurCompletedReductionReindexingLifted",
+  "file": "lean/Sheaf/Paper/PurCompletedReductionReindexingLifted.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purCompletedReductionReindexingLifted",
+  "statement": "theorem purCompletedReductionReindexingLifted (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    (∀ (T' T : Scheme.{u}) (g : T' ⟶ T) [IsIso g],\n      (∀ x : T, IsUnit (l : T.presheaf.stalk x)) →\n        PurCompletedReindexingAt (pbcIntegralDatum l E) g) ∧\n    (∀ (X' X Y' Y : Scheme.{u}) (v : X' ⟶ X) (p' : X' ⟶ Y')\n        (p : X ⟶ Y) (g : Y' ⟶ Y) [IsIso v] [IsIso g],\n      (∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) →\n      ∀ sq : ChosenCartesianSquare v p' p g,\n        PurCompletedReindexingSquare (pbcIntegralDatum l E) sq)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-75909",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261026T024112-L-638917",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-75909",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261026T024112-L-638917",
+  "kind": "interface",
+  "note": "independent cc review: SemilinearExchangeReindexing assembly + 4 modules vs clone: theorem stmt byte-identical; 6 moved predicates = originals mod zeta(let d) by script; FiniteCompositionLaw field = compositionIsIso type; scalar-descent import swap forced (cycle); reader-gate sandbox (5 delivered + 2 unchanged importers + probe) compiled exit 0; sorryAx only via upstream sorried leaves/scalar-descent"
+ }
+}

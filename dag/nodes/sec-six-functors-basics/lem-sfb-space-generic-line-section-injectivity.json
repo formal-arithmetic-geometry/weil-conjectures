@@ -1,0 +1,351 @@
+{
+ "id": "lem-sfb-space-generic-line-section-injectivity",
+ "kind": "statement",
+ "title": "Generic geometric germs detect line-module sections on integral spaces",
+ "statement": "Let $k$ be a field [def-weil-field] and $X$ a separated algebraic space of finite type over $\\operatorname{Spec}k$ [def-pc-scheme, def-trf-algebraic-space, def-sfb-space-morphism-properties]. Suppose $X$ is nonempty, reduced and irreducible: the rings of affine etale scheme charts are reduced, and the point space in the atlas topology [def-a1-space-point-topology] is not a union of two proper closed subsets. Then $|X|$ has a unique generic point $\\eta$. Fix any geometric point $\\bar\\eta:\\operatorname{Spec}\\Omega\\to X$ above $\\eta$, where $\\Omega$ is algebraically closed. The geometric stalk $F=\\mathcal O_{X,\\bar\\eta}$ is a field. For every line module $M$ on the small etale site [def-trf-algebraic-space], the geometric stalk $M_{\\bar\\eta}$ is one-dimensional over $F$, and the germ homomorphism $\\Gamma(X,M)\\to M_{\\bar\\eta}$ is injective. A geometric stalk here is the filtered colimit of the sections on pointed etale scheme neighbourhoods of $\\bar\\eta$, and the germ homomorphism is induced by restrictions. No properness or regularity assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral, first part of proof (generic nonvanishing and field local ring); decent-spaces.tex Tag 0ABV, lemma-decent-generic-points. The generic argument uses only separated finite type and integral, not proper."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-sfb-reduced-algebraic-space",
+  "def-sfb-space-geometric-stalk-models"
+ ],
+ "proof": [
+  {
+   "text": "The diagonal of $X$ is representable by closed immersions by [def-sfb-space-morphism-properties]. Each scheme test is a closed immersion, hence proper and of finite type by [lem-weil-pbc-closed-immersion-proper], and therefore quasi-compact by [def-weil-finite-type-morphism]. Thus the diagonal is quasi-compact on scheme tests. Apply [lem-sfb-quasiseparated-space-sober] to the nonempty irreducible closed subset $|X|$ itself. It has exactly one generic point $\\eta$, so $\\overline{\\{\\eta\\}}=|X|$.",
+   "uses": [
+    "def-sfb-space-morphism-properties",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-quasiseparated-space-sober",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 03JX (lemma-bounded-fibres), 03K6 (proposition-reasonable-sober); scheme closed immersions: morphisms.tex Tag 01W0 (lemma-closed-immersion-proper)."
+   }
+  },
+  {
+   "text": "Choose a pointed affine etale scheme neighbourhood $(T,\\bar t)$ of the fixed $\\bar\\eta$, using an atlas, an affine open around a lift, and [lem-sfb-etale-geometric-point-specified-lift]. Write $T=\\operatorname{Spec}A$ and $t$ for the image of $\\bar t$. The prime $\\mathfrak p$ of $t$ is minimal. Indeed, if $\\mathfrak q\\subseteq\\mathfrak p$ is prime, the Zariski closed sets $V(I)$ show that $\\mathfrak q\\leadsto t$: every $V(I)$ containing $\\mathfrak q$ also contains $\\mathfrak p$. Continuity in [lem-sfb-quasiseparated-space-etale-specializations] gives $a(\\mathfrak q)\\leadsto\\eta$. The closure of $\\{a(\\mathfrak q)\\}$ therefore contains $\\overline{\\{\\eta\\}}=|X|$, so $a(\\mathfrak q)=\\eta$ by uniqueness. The same node's no-specializations-in-a-fibre assertion gives $\\mathfrak q=t$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-affine-spectrum",
+    "lem-sfb-etale-geometric-point-specified-lift",
+    "lem-sfb-quasiseparated-space-etale-specializations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0ABV (lemma-decent-generic-points), implication (1) to (2), using Tag 03K5 (lemma-decent-no-specializations-map-to-same-point); geometric lift: spaces-properties.tex Tag 05VN."
+   }
+  },
+  {
+   "text": "The ring $A$ is reduced by the hypothesis on affine charts. Hence $A_{\\mathfrak p}$ is a field by [lem-weil-pbc-minimal-prime-reduced-localization-field]. The canonical germ map identifies $\\mathcal O_{T,t}$ with $A_{\\mathfrak p}$ by [lem-weil-pbc-affine-open-stalk-localization]. By [lem-sfb-space-strict-local-flatness], $F=\\mathcal O_{X,\\bar\\eta}\\cong\\mathcal O_{T,t}^{\\mathrm{sh}}$. Apply the strict-henselization description [lem-weil-pbc-strict-henselization-triples] to the field $R=\\mathcal O_{T,t}$ at its zero prime, with the separable closure inside $\\Omega$ selected by $\\bar t$. Its maximal ideal is $0\\cdot R^{\\mathrm{sh}}=0$, and its residue ring is that separable closure, a field. Thus $R^{\\mathrm{sh}}$, and hence $F$, is a field. This identifies the geometric stalk with a separable closure of a chart generic field; it does not identify it with all of $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-space-strict-local-flatness",
+    "lem-weil-pbc-strict-henselization-triples"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ (lemma-characterize-trivial-pic-integral), field-local-ring sentence; algebra.tex Tags 00EU (lemma-minimal-prime-reduced-ring), 04GP (lemma-strict-henselization)(4),(5), 04GW; spaces-properties.tex Tag 04KF."
+   }
+  },
+  {
+   "text": "Take an etale chart trivializing $M$ and lifting $\\bar\\eta$; such a chart and a lift exist by [def-trf-algebraic-space] and [lem-sfb-etale-geometric-point-specified-lift]. On its localized etale site the trivialization $M\\simeq\\mathcal O$ and its inverse induce inverse maps on pointed-neighbourhood colimits. These are the original stalks: for every pointed neighbourhood $V$ of $\\bar\\eta$, its fibre product with the chosen chart, with the pair of lifts, refines $V$ and lies over that chart, by [lem-trf-space-fibre-products-etale-covers]. Any two such refinements admit their pointed fibre product as a common refinement. The induced maps are $F$-linear because the trivialization commutes with the local structure-sheaf actions. Consequently $M_{\\bar\\eta}\\cong F$ as $F$-modules, and it has dimension one.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-geometric-point-specified-lift",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04KF (lemma-describe-etale-local-ring), first equality by localization at a pointed chart; line modules: sites-modules.tex Tags 0409 and 0B8Q."
+   }
+  },
+  {
+   "text": "Let $s\\in\\Gamma(X,M)$ have zero germ. Equality with zero in the stipulated filtered colimit means that on some pointed etale scheme neighbourhood $v:V\\to X$ one has $s|_V=0$: represent the germ and zero on a common neighbourhood and then equalize their representatives at a later stage. Let $W\\subseteq X$ be the open image of $V$, supplied by [lem-a1-etale-scheme-map-open-image]. The map $V\\to W$ is surjective etale, so the sheaf axiom gives $s|_W=0$. This statement can be tested on any scheme etale over $W$, where its pullback covering from $V$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. The image of the pointed lift shows $\\eta\\in|W|$; hence $W$ is nonempty and dense in the irreducible point space of $X$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-etale-scheme-map-open-image",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ (lemma-characterize-trivial-pic-integral), generic nonvanishing argument in contrapositive form; spaces-properties.tex Tag 06NF (lemma-etale-image-open)."
+   }
+  },
+  {
+   "text": "Choose affine etale charts $a:U\\to X$ trivializing $M$, covering the small etale site as in [def-trf-algebraic-space]. For each such chart put $U_W=U\\times_XW$. By [lem-a1-space-point-open-calculus], this is an open subscheme whose point set is $a^{-1}(|W|)$. It is dense in $U$: every nonempty open $B\\subseteq U$ has nonempty open image $a(B)$ in $|X|$, since the point map of $a$ is open. That image meets the dense open $|W|$, so $B$ meets $U_W$. Under the trivialization, $s|_U$ is a regular function $f\\in A=\\Gamma(U,\\mathcal O_U)$ and $f|_{U_W}=0$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ (lemma-characterize-trivial-pic-integral), affine trivializing chart; spaces-properties.tex Tags 03H4 and 03IR, pointwise pullback and openness."
+   }
+  },
+  {
+   "text": "The basic open $D(f)$ of [lem-weil-pbc-basic-open-function] is disjoint from $U_W$, because every germ there is zero. Density of $U_W$ and openness of $D(f)$ imply $D(f)=\\varnothing$. By [lem-weil-pbc-affine-open-section-vanishing-prime], every prime of $A$ therefore contains $f$. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq], $f\\in\\sqrt{(0)}$, so $f^n=0$ for some $n\\geq1$. Since the affine chart ring $A$ is reduced, $f=0$. Thus $s$ restricts to zero on every trivializing etale chart, and the sheaf axiom gives $s=0$. The germ homomorphism is additive; applying this zero-kernel argument to $s_1-s_2$ proves injectivity. None of these steps uses properness or regularity.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-over-fields.tex",
+    "place": "Tag 0DMZ (lemma-characterize-trivial-pic-integral), reduced-chart nonvanishing argument; schemes.tex Tag 01HZ (lemma-f-open); algebra.tex Tag 00E0 (lemma-Zariski-topology)(7),(12)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-space-morphism-properties",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-quasiseparated-space-sober",
+  "def-weil-finite-type-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "lem-sfb-quasiseparated-space-etale-specializations",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-over-fields.tex",
+  "place": "Tag 0DMZ, lemma-characterize-trivial-pic-integral, generic nonvanishing argument and field-local-ring sentence, with the cited chart and strict-henselization lemmas; the generic part requires no properness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]njective.*[Gg]eneric|[Gg]eneric.*[Ii]njective|[Ii]ntegral.*[Ss]talk|[Ss]talk.*[Ii]ntegral",
+   "results": "1 hits; top: Mathlib/AlgebraicGeometry/FunctionField.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"stalk\"",
+   "results": "1 hits; top: AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of line bundle sections on an integral algebraic space to a geometric generic point is injective",
+   "results": "8 hits; top: AlgebraicGeometry.instIsGermInjectiveOfIsIntegral, AlgebraicGeometry.germ_injective_of_isIntegral, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.IsAffineOpen.stalkMap_injective, AlgebraicGeometry.StructureSheaf.res_apply, AlgebraicGeometry.StructureSheaf.toBasicOpen_injective, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero section of an invertible module on an integral algebraic space has nonzero germ at a geometric generic point",
+   "results": "8 hits; top: AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ, AlgebraicGeometry.RingedSpace.exists_res_eq_zero_of_germ_eq_zero, AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, AlgebraicGeometry.LocallyRingedSpace.evaluation_ne_zero_iff_mem_basicOpen, AlgebraicGeometry.LocallyRingedSpace.notMem_prime_iff_unit_in_stalk",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced irreducible algebraic space a line bundle section vanishing at the geometric generic point vanishes everywhere",
+   "results": "8 hits; top: AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen, AlgebraicGeometry.IsReduced.component_reduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isReduced_stalk_of_isReduced, AlgebraicGeometry.basicOpen_eq_bot_iff, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned candidates; scheme global functions/germ results, ring Picard groups and topological bundles do not state this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a reduced irreducible algebraic space a line bundle section vanishing at the geometric generic point vanishes everywhere",
+   "results": "{\"t\": \"2026-10-23T20:59:48Z\", \"tool\": \"leanfinder\", \"query\": \"On a reduced irreducible algebraic space a line bundle section vanishing at the geometric generic point vanishes everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_eq_zero_iff_notMem_basicOpen\", \"AlgebraicGeometry.IsReduced.component_reduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.isReduced_stalk_of_isReduced\", \"AlgebraicGeometry.basicOpen_eq_bot_iff\", \"AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_iff_forall_evaluation_eq_zero\"], \"digest\": \"982f580feb91d73a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, stalk",
+   "results": "{\"t\": \"2026-10-23T21:00:18Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegral, stalk\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'stalk'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid query: loogle: unknown identifier 'stalk'; corrected quoted-name Loogle queries were run"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|germ_injective_of_isIntegral",
+   "results": "{\"t\": \"2026-10-23T21:00:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|germ_injective_of_isIntegral\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/FunctionField.lean\", \"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\"], \"digest\": \"586d0bdc7aaa089b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of a line module on an integral algebraic space to a geometric generic stalk is injective",
+   "results": "{\"t\": \"2026-10-23T21:00:19Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of a line module on an integral algebraic space to a geometric generic stalk is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.germ_injective_of_isIntegral\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.IsAffineOpen.stalkMap_injective\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso\"], \"digest\": \"355c38819596e1ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi separated algebraic space an etale chart point is generic in an irreducible component if and only if its image is generic in a component",
+   "results": "{\"t\": \"2026-10-23T21:02:25Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi separated algebraic space an etale chart point is generic in an irreducible component if and only if its image is generic in a component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"genericPoints.isGenericPoint_ofComponent\", \"genericPoints.component_ofComponent\", \"genericPoints.isGenericPoint\", \"genericPoints.ofComponent\", \"genericPoints.component_surjective\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"IsIrreducible.isGenericPoint_genericPoint\"], \"digest\": \"839f969256ce308f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, IsGenericPoint",
+   "results": "{\"t\": \"2026-10-23T21:02:25Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, IsGenericPoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid query: loogle: unknown identifier 'AlgebraicGeometry.IsEtale'; corrected quoted-name Loogle queries were run"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*[Ee]tale|[Ee]tale.*generic|IsGenericPoint.*irreducibleComponents",
+   "results": "{\"t\": \"2026-10-23T21:02:26Z\", \"tool\": \"grep\", \"query\": \"generic.*[Ee]tale|[Ee]tale.*generic|IsGenericPoint.*irreducibleComponents\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale maps to quasi separated algebraic spaces preserve and reflect generic points of irreducible components",
+   "results": "{\"t\": \"2026-10-23T21:02:26Z\", \"tool\": \"leansearch\", \"query\": \"Etale maps to quasi separated algebraic spaces preserve and reflect generic points of irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"genericPoints.ofComponent\", \"genericPoints.component\", \"genericPoints.isGenericPoint\", \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"genericPoint\", \"genericPoints.component_ofComponent\", \"genericPoints.isGenericPoint_ofComponent\"], \"digest\": \"54f6674974bae2e6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Points over generic points under an etale morphism of decent algebraic spaces are generic points of irreducible components",
+   "results": "{\"t\": \"2026-10-23T21:02:29Z\", \"tool\": \"leanfinder\", \"query\": \"Points over generic points under an etale morphism of decent algebraic spaces are generic points of irreducible components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceTopologicallyGeneralizingMap\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.IsDominant\"], \"digest\": \"4fdb5bc8985851e8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGenericPoint\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-23T21:04:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsGenericPoint\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-23T21:04:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegral\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral\"], \"digest\": \"adf59e7b1280ed7b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern schemes or topological generic points, not line modules on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-dual-effective-line-triviality",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Valuation-ring triviality used to establish uniqueness for two rigidified classes, before applying the valuative criterion. Field-fibre input: Two opposite effective line classes on a proper integral algebraic space. Tag 0DMZ proof before the use of proper global functions: detection of nonzero sections at the generic point and its field local ring.",
+   "via": [
+    "lem-sfb-space-dual-effective-line-triviality",
+    "lem-sfb-space-valuation-line-triviality",
+    "lem-sfb-rigidified-space-picard",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-generic-line-section-injectivity",
+  "worker": "stage1",
+  "summary": "The unchanged statement is proved in seven steps, reusing existing specialization, sobriety, geometric-lift, chart-stalk and commutative-algebra nodes. No new node is needed: generic minimality, rank one and dense-chart vanishing are written out. The distinction between the geometric stalk and the chosen algebraically closed field is retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Rigidified Picard representability for proper geometrically integral algebraic-space families. Supporting input: Valuation-ring triviality used to establish uniqueness for two rigidified classes, before applying the valuative criterion. Field-fibre input: Two opposite effective line classes on a proper integral algebraic space. Tag 0DMZ proof before the use of proper global functions: detection of nonzero sections at the generic point and its field local ring. Current latest blueprint: det-thm-sf-ctf-stability-direct-images proof (3), compactification/direct-image preservation. This auxiliary follows the live created.item branch through stable curves and Picard representability; the ancestry command computes null, so the existing null ancestor and via chain are retained. Whole-blueprint searches for generic geometric, line-module sections, generic-points, etale generic and 0ABV found no matching blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic local-algebra description of the maximal ideal and residue field of a strict henselization, used at the zero prime of a field. No node of this unit supplies this description."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space chart fibre products and pullback coverings, used for pointed refinements and sheaf descent. No node of this unit supplies this foundational statement."
+   },
+   {
+    "node": "lem-a1-etale-scheme-map-open-image",
+    "why": "Generic factorization of an etale scheme chart through a surjective etale covering of its open image, used to descend the zero section. No node of this unit supplies that factorization."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic openness and pointwise pullback calculation for etale charts, used to check density of the pulled-back open. No node of this unit supplies this point-topology calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-etale-scheme-map-open-image",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-b48458b5e",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-b48458b5e (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the item in full and all 18 cited statements. The statement is unchanged and there are no new nodes. Sources: Stacks 0DMZ (spaces-over-fields l.2508-2532) uses properness only for H^0 being a field, so dropping it is correct; 0ABV (decent-spaces l.4575) is the no-specialisations-in-a-fibre argument that step 2 reproduces from lem-sfb-quasiseparated-space-etale-specializations. Step 1: separated means the diagonal is representable by closed immersions, which are of finite type and so quasi-compact; this gives the hypothesis of the sober lemma. Step 2: minimality of p follows from continuity, uniqueness of η and the fibre clause. Step 3: A_p is a field (reduced and minimal), the stalk is (A_p)^sh, and the triples clause (2) at the zero prime gives m_C=0, so F is k(t)^sep inside Ω, not Ω. Step 4: the pointed fibre products are cofinal, so M_η̄≅F. Step 5: zero germ, then the open image W with V→W surjective étale, then the sheaf axiom; W is dense. Step 6: U_W is open in U and dense because étale point maps are open. Step 7: D(f)=∅, so f is nilpotent, so f=0 by reducedness, then sheaf axiom and additivity. Small cases: Spec k, a nodal curve, k[e]/e² (needs reducedness), two crossing lines (needs irreducibility). Not duplicates: the meromorphic-generic-chart and divisor-line-dictionary nodes need regular Noetherian; component-generic-chart-dimension and qcqs-space-spectral are topological. Batch-5 check: all 7 flagged citations reach sec-trace-formula only through def-trf-algebraic-space or generic algebraic-space foundations (fibre products, sheaf pullback, atlas tests). None of these is part of what the trace-formula or Poincaré-duality assumptions give, and none is a step of their proofs, so all 7 are allowed. I accept the 4 generic tool_uses: strict-henselization-triples, trf fibre products, a1 open image, a1 point-open calculus. Nit: the report's validation line still says 'pending'."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceGenericLineSectionInjectivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.generic_lineModule_section_injective",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceGenericLineSectionInjectivity.lean",
+  "statement": "theorem generic_lineModule_section_injective (k : Type u) [Field k] (X : AlgebraicSpace (Spec (CommRingCat.of k))) (f : X ⟶ schemeSpace (Over.mk (𝟙 (Spec (CommRingCat.of k))))) (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) (hred : X.IsReduced) [IrreducibleSpace (Point X.obj.obj)] : (∃! η : Point X.obj.obj, IsGenericPoint η Set.univ) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (CommRingCat.of Ω) ⟶ Spec (CommRingCat.of k)) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), IsGenericPoint (α := Point X.obj.obj) (Quot.mk _ (⟨Ω, b, yonedaEquiv x⟩ : PointRepresentative X.obj.obj)) Set.univ → IsField (SingleComplex.stalkRing b x) ∧ ∀ (M : X.Modules), X.IsLineModule M → Nonempty ((SingleComplex.stalkModel b x).modules.obj M ≃ₗ[ SingleComplex.stalkRing b x] SingleComplex.stalkRing b x) ∧ ∀ V : SingleComplex.Neighbourhood (Over.mk b) x, Function.Injective (fun σ : M.sections ↦ ((SingleComplex.stalkModel b x).germs M).app (op V) (σ.eval (op ((SingleComplex.neighbourhoodChart (x := x)).obj V))))",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1efe21d07",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read the item node (diff vs live: only the lean record and two added landed stmt_deps, def-sfb-reduced-algebraic-space and def-sfb-space-geometric-stalk-models; TeX unchanged), all 7 stmt_deps (identical to live), and the Lean sources of stalkModel/stalkRing/Neighbourhood/neighbourhoodChart, IsReduced, Point/pointTopologicalSpace, IsLineModule, MapIsSeparated/MapIsFiniteType and SheafOfModules.sections. Every clause matches: f is the unique map to the terminal base; IrreducibleSpace on the non-reducible Point uses the atlas topology and includes Nonempty; the unique generic point is a real conclusion; Ω is algebraically closed and its point class is assumed generic; IsField on the actual colimit ring; a linear equivalence with F gives dimension one; the germ map is injective for every pointed neighbourhood (one canonical map). No extra assumptions, everything in universe u, statement verbatim, docstrings carry source and blueprint id and the 7 proof steps, body is sorry, no H4 duplicate, private imports exist. No compile needed since nothing was changed."
+ }
+}

@@ -1,0 +1,143 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The adjoint transpose of a composite counit equals composition of the transposes under the right adjoint compositor",
+   "results": "Found Adjunction.comp_counit_app, comp_counit, mateEquiv_counit, conjugateEquiv_counit and related abstract adjunction identities. These do not compare the independently constructed affine coefficient evaluation with its ordered compact-support contraction.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the existing project composite_transpose for the adjunction part."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv_naturality_left\"",
+   "results": "Found homEquiv_naturality_left, its inverse and square versions. These provide source naturality, not the normalized affine-line or ordered integration identity.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the project restricted exceptional Hom equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "orderedEvaluation_contraction|lineComparison_counit|standingTranspose|affineTraceCounit",
+   "results": "Remote Mathlib grep returned zero hits. Local project searches found standingEvaluation and composite_transpose in AffineLineCompositeTranspose and the independent integration construction in AffineOrderedIntegrationData. No existing named coefficient contraction or standalone standing-line counit normalization was found.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOrderedIntegrationSuccessor",
+  "date": "2026-10-26",
+  "group": "K6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final paragraph: the independently normalized ordered affine integration and the ordered composite of its line transposes.",
+   "via": [
+    "lem-pur-affine-ordered-integration-transposes",
+    "lem-pur-affine-ordered-integration-successor"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-pur-affine-ordered-evaluation-contraction",
+ "title": "Compact-support contraction of ordered coefficient evaluations",
+ "statement": "Fix a finite purity setting P [def-pur-conventions], a scheme Y separated finite type over its base field through a_Y, and a bounded-below K with ordinary constructible finite-Tor representative K_e and realization e_K. Use the ordered integration data [def-pur-affine-ordered-integration-data] and source reassociations I_d [def-pur-affine-space-comparison]. Write G_d K for the ordered twisted source, F_d for standing compact support along p_d, and a_d for F_d(sourceComparison_d);augmentation_d, for d>0. Write b_q,M for standingEvaluation and alpha_d for compositor at M=G_dK, with the explicit sourceEtale and sourceRealization witness [lem-pur-affine-line-composite-transpose]. Then (i) a_1=F_1(I_0);j^{-1};b_q0,K, where j is the standing compact-support equality comparison from q_0 to q_0 followed by the identity, and (ii) for every d≥1, a_(d+1)=F_(d+1)(I_d);alpha_d^{-1};F_d(b_qd,G_dK);a_d. These are equalities before exceptional transposition, using the independently constructed ordered trace and projection augmentations. They assert no identity of exceptional transposes.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-ordered-integration-data",
+  "def-pur-affine-space-comparison",
+  "lem-pur-affine-line-composite-transpose"
+ ],
+ "proof": [
+  {
+   "text": "On the ordinary etale site compose the projective-line normalized adjunction with open extension. Proper projection naturality and the open tensor-counit identity express its counit as inverse coefficient projection followed by tensor of the restricted projective trace.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-pur-finite-projection-action-laws"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the ordered composite-adjunction counit at its last coordinate. Apply the two-coefficient projection action law and projection composition to combine inverse projections; the trace at the coefficient unit is precisely ordinaryTraceRaw at the next dimension. Canonical Tate pullback and tensor reassociation give the sourceComparison and sourceReassociation factors. At the first coordinate the previous adjunction is the identity, so its left comparison is equality transport along q=q followed by id.",
+   "uses": [
+    "lem-pur-composite-integration-counit",
+    "lem-amb-shriek-tensor-composition",
+    "lem-pur-finite-projection-action-laws",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-affine-space-top-trace",
+    "def-pur-affine-space-comparison",
+    "def-pur-affine-ordered-integration-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the coefficient identity by the compact-support composition square and finite-site projection/counit transport. The retained sourceEtale and sourceRealization give the necessary bounded inputs. The resulting maps are exactly augmentation and standingEvaluation, and the left composition comparison is compositor. All shifts are even; the same equations apply to the zero coefficient ring and the empty scheme.",
+   "uses": [
+    "lem-pur-compact-support-site-coherence",
+    "lem-pur-finite-site-counit-projection-transport",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-affine-line-composite-transpose"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-ordered-integration-data",
+  "def-pur-affine-space-comparison",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-shriek-tensor-composition",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pur-affine-line-composite-transpose",
+  "lem-pur-compact-support-site-coherence",
+  "lem-pur-composite-integration-counit",
+  "lem-pur-finite-projection-action-laws",
+  "lem-pur-finite-site-counit-projection-transport",
+  "lem-pur-vector-integration-site-comparison"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineOrderedEvaluationContraction",
+  "file": "lean/Sheaf/Paper/AffineOrderedEvaluationContraction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineOrderedIntegration.orderedEvaluation_contraction",
+  "statement": "theorem orderedEvaluation_contraction\n    (P : WeilConjectures.PurityFiniteSetting.{u})\n    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]\n    (K : Plus (AffineLinePurity.Ring P) Y)\n    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)\n    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)\n    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :\n    letI : IsNoetherian Y := tower_noetherian P Y aY 0\n    letI : HasCompactification (lastProjection Y 0 ≫ 𝟙 (iteratedAffineLine Y 0)) :=\n      HasCompactification.of_eq (f := lastProjection Y 0) (Category.comp_id _).symm\n    ((AffineLineEvaluation.support P aY (iteratedAffineLineProj Y 1)).map\n        (sourceComparison P Y K.obj 1).hom ≫ augmentation P Y aY K Ke hKe eK 1 =\n      (AffineLineEvaluation.support P aY (iteratedAffineLineProj Y 1)).map\n        (sourceReassociation P Y aY K.obj 0).hom ≫\n      (rightDerivedLowerShriekCongr (ModuleCat.{u + 1} (AffineLinePurity.Ring P))\n        (Category.comp_id (lastProjection Y 0)).symm).inv.app\n          ((lineSource P Y).obj K.obj) ≫\n      AffineLineEvaluation.standingEvaluation P Y aY K.obj Ke hKe eK) ∧\n    (∀ d : ℕ,\n      letI : LocallyOfFiniteType (towerBase aY (d + 1)) := (tower_geometry aY (d + 1)).1\n      letI : QuasiCompact (towerBase aY (d + 1)) := (tower_geometry aY (d + 1)).2.1\n      letI : IsSeparated (towerBase aY (d + 1)) := (tower_geometry aY (d + 1)).2.2\n      (AffineLineEvaluation.support P aY (iteratedAffineLineProj Y (d + 2))).map\n          (sourceComparison P Y K.obj (d + 2)).hom ≫\n        augmentation P Y aY K Ke hKe eK (d + 2) =\n      (AffineLineEvaluation.support P aY (iteratedAffineLineProj Y (d + 2))).map\n        (sourceReassociation P Y aY K.obj (d + 1)).hom ≫\n      (AffineLineEvaluation.compositor P aY (iteratedAffineLineProj Y (d + 1))\n        ((orderedSource P Y (d + 1)).obj K.obj) (sourceEtale P Y Ke (d + 1))\n        (source_applicability P Y aY K Ke hKe eK (d + 1)).2\n        (sourceRealization P Y K.obj Ke eK (d + 1))).inv ≫\n      (AffineLineEvaluation.support P aY (iteratedAffineLineProj Y (d + 1))).map\n        (AffineLineEvaluation.standingEvaluation P (iteratedAffineLine Y (d + 1))\n          (towerBase aY (d + 1)) ((orderedSource P Y (d + 1)).obj K.obj)\n          (sourceEtale P Y Ke (d + 1))\n          (source_applicability P Y aY K Ke hKe eK (d + 1)).2\n          (sourceRealization P Y K.obj Ke eK (d + 1))) ≫\n      (AffineLineEvaluation.support P aY (iteratedAffineLineProj Y (d + 1))).map\n        (sourceComparison P Y K.obj (d + 1)).hom ≫\n      augmentation P Y aY K Ke hKe eK (d + 1))",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T195816-L-3264799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261026T195816-L-3264799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "id": "lem-sfb-ordinary-scalar-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-generators",
+   "place": "Proof (3): ordinary action-preserving scalar comparison underlying the flat degree-zero derived comparison.",
+   "via": [
+    "lem-sfb-flat-single-scalar-conventions",
+    "lem-sfb-locally-free-derived-scalars"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary scalar comparison with its balancing projection",
+ "statement": "Let C be an essentially small site in the coefficient universe, with module sheafification, and let phi:R to B be a morphism of sheaves of commutative rings. The sheaves of B-modules are equivalent, preserving the specified R-module and B-action, to internal modules over the restricted algebra B in R-module sheaves. Modules over the tensor unit are R-module sheaves. Transport of the actual coequalizer extension along these equivalences is naturally isomorphic to sheafified sectionwise change of rings. On local pure tensors the isomorphism sends the actual balancing projection of b tensor m to the image of b tensor m under the sheafification unit. No flatness assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK, tensor product of sheaves of modules; blueprint change of scalars (2); original item proof steps 1 and 2."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "sk-def-sfb-change-of-scalars",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-sfb-flat-single-scalar-interface"
+ ],
+ "proof": [
+  {
+   "text": "Use the sheaf tensor universal property to extend the multiplication of B and each sectionwise B-module action. The unit is phi. Check the monoid and action laws on local pure triples, and commutativity on pure pairs. Conversely, evaluate an internal action on b tensor n: the internal unit and associative laws give a sectionwise B-module, and restrictions remain semilinear. These constructions preserve the underlying R-module and are mutually inverse, and preserve addition of maps. Modules over the tensor unit have precisely the left-unitor action.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In extension from the tensor unit the balancing arrows agree by the monoid right-unit law, the module unit law and the triangle identity. Consequently the coequalizer projection is invertible. Its action equation identifies the induced B-action with multiplication on the first factor.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restricted sectionwise changeOfRings is sheafification of the same presheaf B tensor over R M. Restriction commutes with module sheafification because their underlying abelian sheafifications agree. Thus the identity on the tensor presheaf gives an isomorphism. It is B-linear and natural by the tensor and sheafification universal properties, and carries local pure tensors to their sheafification-unit images. Use the object and morphism equalities of the supplied model s to identify its E with this functor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "sk-def-sfb-change-of-scalars",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK and the blueprint module-object balancing coequalizer. Explicit action and normalization argument by D7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat sheaf single degree zero complex K flat extension scalars module objects tensor unit equivalence",
+   "results": "{\"t\": \"2026-10-22T13:47:44Z\", \"tool\": \"leanfinder\", \"query\": \"Flat sheaf single degree zero complex K flat extension scalars module objects tensor unit equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.FaithfullyFlat.iff_flat_and_rTensor_reflects_triviality\", \"Module.FaithfullyFlat.iff_flat_and_lTensor_reflects_triviality\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.FaithfullyFlat.iff_zero_iff_rTensor_zero\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"9c2860eebbcce7e7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"single\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-22T13:48:41Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, \\\"single\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit.*Equivalence|kFlat_single_obj_iff_flat|leftDerivedNatIso",
+   "results": "{\"t\": \"2026-10-22T13:50:26Z\", \"tool\": \"grep\", \"query\": \"unit.*Equivalence|kFlat_single_obj_iff_flat|leftDerivedNatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/UnitaryGroup.lean\", \"Mathlib/LinearAlgebra/AffineSpace/AffineEquiv.lean\", \"Mathlib/Logic/Equiv/Prod.lean\", \"Mathlib/Logic/Equiv/Prod.lean\", \"Mathlib/Logic/Equiv/Prod.lean\", \"Mathlib/Algebra/Algebra/Unitization.lean\", \"Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean\", \"Mathlib/Topology/Convenient/Category.lean\"], \"digest\": \"742330b9376c9c43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat sheaf in degree zero is K flat and extension of scalars for internal module objects agrees with sheafified tensor product",
+   "results": "{\"t\": \"2026-10-22T14:43:20Z\", \"tool\": \"leanfinder\", \"query\": \"Flat sheaf in degree zero is K flat and extension of scalars for internal module objects agrees with sheafified tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.of_flat_tensorProduct\", \"Module.FaithfullyFlat.iff_zero_iff_rTensor_zero\", \"Module.FaithfullyFlat.iff_zero_iff_lTensor_zero\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap\\u209b\", \"Module.Flat\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\\u209b\"], \"digest\": \"71cc45f063845927\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-22T14:55:55Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over a sheaf of algebras are module objects over that algebra in sheaves of modules and scalar extension is the tensor product",
+   "results": "{\"t\": \"2026-10-23T06:26:57Z\", \"tool\": \"leansearch\", \"query\": \"Sheaves of modules over a sheaf of algebras are module objects over that algebra in sheaves of modules and scalar extension is the tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules\", \"ModuleCat.ExtendScalars.obj'\", \"SheafOfModules.mk\", \"SheafOfModules.noConfusionType\", \"SheafOfModules.hom_ext\", \"PresheafOfModules.Sheafify.module\", \"SheafOfModules.forgetToSheafModuleCat\"], \"digest\": \"c28da0185c4202d3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.extendScalars",
+   "results": "{\"t\": \"2026-10-23T06:33:09Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Mod.extendScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Mod.extendScalars'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatSingleScalarConventions",
+  "date": "2026-10-23",
+  "group": "D7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "module": "Sheaf.Paper.FlatSingleScalarOrdinaryComparison",
+  "file": "lean/Sheaf/Paper/FlatSingleScalarOrdinaryComparison.lean",
+  "declaration": "SheafOfModules.FlatSingleScalar.ordinary_scalar_comparison",
+  "statement": "theorem ordinary_scalar_comparison :\n    ∃ d : Identifications φ, ∀ s : DerivedChangeOfRingsCochainModel φ,\n      ∃ e : monExtension φ d ≅ s.E,\n        ∀ (M : Modules R) (U : Cᵒᵖ) (b : B.obj.obj U) (m : M.val.obj U),\n          ((eqToHom (s.obj_eq M)).val.app U)\n            ((e.hom.app M).val.app U\n              ((projection φ d M).val.app U\n                (tensorSection (scalarAlgebra φ) M U b m))) =\n          (toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U\n            (b ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9406b",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261023T104910-L-3455684",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9406b",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261023T104910-L-3455684",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/interface/ordinary-comparison modules and 3 node files against clones/live item module, node lem-sfb-flat-single-scalar-conventions, DerivedChangeOfRingsCochainModel and unit sk-lem-integral-models"
+ }
+}

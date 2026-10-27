@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-space-affine-source-qc-separated",
+ "kind": "statement",
+ "title": "Affine etale charts of a quasi-separated space are quasi-compact and separated",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $Y$ an algebraic space over $S$ [def-trf-algebraic-space]. Suppose $Y$ is quasi-separated, meaning that its absolute diagonal $Y\\to Y\\times_{\\operatorname{Spec}\\mathbf Z}Y$ is quasi-compact on scheme tests. Let $U$ be an affine scheme and $j:U\\to Y$ an etale morphism. Then $j$ is quasi-compact and separated, in the sense of [lem-trf-space-qc-separated-etale-local]: its base change along every affine scheme mapping to $Y$ is quasi-compact, and its relative diagonal is a closed immersion on every scheme test. No quasi-compactness of $Y$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IL, lemma-tor-qc-qs, first paragraph of proof: for an affine etale j:U to X with X quasi-separated, j is quasi-compact and separated."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-qc-separated-etale-local",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary affine scheme $V$ and a map $g:V\\to Y$. The sheaf product $R=U\\times_YV$ is a scheme by [lem-trf-space-fibre-products-etale-covers], since $j$ is representable etale. Put $P=U\\times_{\\operatorname{Spec}\\mathbf Z}V$. By [lem-weil-pbc-fibre-product-affine-spectra], $P$ is affine, and by [lem-weil-pbc-affine-scheme-qcqs] it is quasi-compact. The map $q:R\\to P$ is the scheme test of the absolute diagonal of $Y$ along $(j,g):P\\to Y\\times_{\\operatorname{Spec}\\mathbf Z}Y$: on a test scheme its points are precisely pairs $(u,v)$ with $j(u)=g(v)$. The hypothesis on that diagonal therefore says that $q$ is quasi-compact. Clause (2) of [lem-weil-pbc-qcqs-morphism-permanence], applied to $q$ with quasi-compact target $P$, gives that $R$ is quasi-compact. Its identity is a surjective etale atlas by a quasi-compact scheme. Since $V\\to Y$ was arbitrary, this proves quasi-compactness of $j$ in the affine-test sense of [lem-trf-space-qc-separated-etale-local].",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IL, lemma-tor-qc-qs, first proof paragraph; expansion using absolute diagonal tests and schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes), plus quasi-compact composition (lemma-composition-quasi-compact)."
+   }
+  },
+  {
+   "text": "Put $D=U\\times_YU$, again a scheme by [lem-trf-space-fibre-products-etale-covers]. Apply [lem-weil-pbc-affine-source-morphism-separated] to $U\\to\\operatorname{Spec}\\mathbf Z$. By the definition of separatedness [def-weil-proper-morphism], its absolute diagonal $\\delta:U\\to U\\times_{\\operatorname{Spec}\\mathbf Z}U$ is a closed immersion. The square with top arrow $1_U$, bottom arrow $(p_1,p_2):D\\to U\\times_{\\operatorname{Spec}\\mathbf Z}U$, and vertical arrows $\\Delta_j:U\\to D$ and $\\delta$ is cartesian: a section of its pullback is a pair $(u_1,u_2)$ satisfying $j(u_1)=j(u_2)$ and $u_1=u_2$, hence uniquely a section $u$ of $U$. Thus [lem-weil-pbc-closed-immersion-base-change] makes $\\Delta_j$ a closed immersion of schemes. For every scheme map $T\\to D$, the same lemma makes $U\\times_DT\\to T$ a closed immersion. This is exactly separatedness of $j$ as defined in [lem-trf-space-qc-separated-etale-local]. Together with step 1 it proves both assertions without quasi-compactness of $Y$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-qc-separated-etale-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KN (lemma-affine-separated), Tag 01JY (lemma-base-change-immersion); scheme-test diagonal expansion of spaces-perfect.tex Tag 08IL (lemma-tor-qc-qs), first proof paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-space-qc-separated-etale-local",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08IL, lemma-tor-qc-qs, first proof paragraph. Agent expansion of the geometric assertion using absolute diagonal tests, affine scheme products (01I4), affine separatedness (01KN), and closed-immersion base change (01JY)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "QuasiSeparated.*[Aa]ffine|[Aa]ffine.*QuasiSeparated|quasiCompact_of_comp|isSeparated_of_comp",
+   "results": "{\"t\": \"2026-10-23T18:46:38Z\", \"tool\": \"grep\", \"query\": \"QuasiSeparated.*[Aa]ffine|[Aa]ffine.*QuasiSeparated|quasiCompact_of_comp|isSeparated_of_comp\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\"], \"digest\": \"e00386a0ebcd2e8c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned quasi-compactness and separatedness declarations quantify over schemes, not algebraic-space targets. No algebraic-space theorem was found by either phrasing or the source searches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSeparated\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T18:46:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiSeparated\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"48404b7fbc560ce7\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned quasi-compactness and separatedness declarations quantify over schemes, not algebraic-space targets. No algebraic-space theorem was found by either phrasing or the source searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from an affine scheme to a quasi separated algebraic space is quasi compact and separated",
+   "results": "{\"t\": \"2026-10-23T18:46:39Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from an affine scheme to a quasi separated algebraic space is quasi compact and separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\"], \"digest\": \"1535d5ecc19508d1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned quasi-compactness and separatedness declarations quantify over schemes, not algebraic-space targets. No algebraic-space theorem was found by either phrasing or the source searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every etale morphism from an affine scheme to a quasi separated algebraic space is quasi compact and separated",
+   "results": "{\"t\": \"2026-10-23T18:46:41Z\", \"tool\": \"leanfinder\", \"query\": \"Every etale morphism from an affine scheme to a quasi separated algebraic space is quasi compact and separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\"], \"digest\": \"c076571f062573e5\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned quasi-compactness and separatedness declarations quantify over schemes, not algebraic-space targets. No algebraic-space theorem was found by either phrasing or the source searches."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|Algebraic.Space|Etale.*[Ss]plit|[Ss]plit.*Etale",
+   "results": "{\"t\": \"2026-10-23T18:47:19Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|Algebraic.Space|Etale.*[Ss]plit|[Ss]plit.*Etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned quasi-compactness and separatedness declarations quantify over schemes, not algebraic-space targets. No algebraic-space theorem was found by either phrasing or the source searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal of a quasi separated algebraic space ensures maps from affine schemes are quasi compact and separated",
+   "results": "{\"t\": \"2026-10-23T18:47:21Z\", \"tool\": \"leanfinder\", \"query\": \"The diagonal of a quasi separated algebraic space ensures maps from affine schemes are quasi compact and separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\"], \"digest\": \"675017d14c198311\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned quasi-compactness and separatedness declarations quantify over schemes, not algebraic-space targets. No algebraic-space theorem was found by either phrasing or the source searches."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|QuasiCompact.of_comp|IsSeparated.of_comp|isSeparated_of_isAffine",
+   "results": "{\"t\": \"2026-10-23T19:26:37Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|QuasiCompact.of_comp|IsSeparated.of_comp|isSeparated_of_isAffine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Separated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean\"], \"digest\": \"959bd80e5e3b8778\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits state scheme morphism results, not the algebraic-space-target assertion. Read QuasiSeparated.lean:250-257 and Separated.lean:354-362; their variables are schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from affine schemes into quasi separated algebraic spaces have quasi compact base changes and closed diagonal",
+   "results": "{\"t\": \"2026-10-23T19:26:38Z\", \"tool\": \"leansearch\", \"query\": \"Maps from affine schemes into quasi separated algebraic spaces have quasi compact base changes and closed diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiSeparated_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\"], \"digest\": \"ac045ad06cd0bda3\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits state scheme morphism results, not the algebraic-space-target assertion. Read QuasiSeparated.lean:250-257 and Separated.lean:354-362; their variables are schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiSeparated\", \"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T19:26:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiSeparated\\\", \\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"48404b7fbc560ce7\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits state scheme morphism results, not the algebraic-space-target assertion. Read QuasiSeparated.lean:250-257 and Separated.lean:354-362; their variables are schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism from an affine scheme to a quasi separated algebraic space is quasi compact and separated",
+   "results": "{\"t\": \"2026-10-23T19:26:38Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism from an affine scheme to a quasi separated algebraic space is quasi compact and separated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiSeparated_over_affine_iff\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"5cbbd8147da4c28c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits state scheme morphism results, not the algebraic-space-target assertion. Read QuasiSeparated.lean:250-257 and Separated.lean:354-362; their variables are schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi compact diagonal of an algebraic space makes fibre products of affine scheme charts quasi compact",
+   "results": "{\"t\": \"2026-10-23T19:29:37Z\", \"tool\": \"leanfinder\", \"query\": \"The quasi compact diagonal of an algebraic space makes fibre products of affine scheme charts quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\", \"AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.instQuasiCompactFstScheme\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"62337767552d9416\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits state scheme morphism results, not the algebraic-space-target assertion. Read QuasiSeparated.lean:250-257 and Separated.lean:354-362; their variables are schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-quasicoherent-tor-amplitude-test",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting geometric input in Tag 08IL, proof, first paragraph: affine etale j:U to X is quasi-compact and separated because X is quasi-separated.",
+   "via": [
+    "lem-sfb-space-quasicoherent-tor-amplitude-test",
+    "lem-sfb-space-bounded-coherent-finite-tor-image-perfect",
+    "lem-sfb-space-noetherian-tensor-perfect",
+    "lem-sfb-proper-support-tensor-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-affine-source-qc-separated",
+  "worker": "stage1",
+  "summary": "Expanded Tag 08IL geometric assertion into affine tests of the absolute diagonal and a cartesian closed-diagonal calculation. Reused existing DAG lemmas; no new nodes or statement changes. Preserved inherited searches and ancestry.",
+  "blueprint": "Supporting geometric assertion from Tag 08IL, first proof paragraph, in the existing ancestry through lem-sfb-space-quasicoherent-tor-amplitude-test; no imported blueprint ancestor is present (blueprint_refs ancestor returns None). Whole-blueprint searches found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product representability tool: with one etale scheme factor, the fibre product with a scheme is a scheme. No replacement of a unit proof step."
+   },
+   {
+    "node": "lem-trf-space-qc-separated-etale-local",
+    "why": "Uses only the affine-test quasi-compactness and scheme-test closed-diagonal definitions explicitly in its statement, not its locality theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-qc-separated-etale-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-c7828ff7c",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-c7828ff7c (reviewer sub-agent of L); spot-checked: Read the whole item at c7828ff7. The statement and stmt_deps are byte-identical to live, where the item is still unsplit with no proof. There is no repair note, there are no new nodes, and the only citer is tor-amplitude-test step 3. Source: Tag 08IL lemma-tor-qc-qs, first proof paragraph. The absolute quasi-separatedness convention matches spaces-properties definition-separated (over Spec Z). Step 1: R=U×_Y V is a scheme by the trf fibre-product lemma (its 'G×_H H_i is a scheme' clause; j étale, surjectivity not needed). P=U×_Z V is affine by 01I4 with R=Z and quasi-compact by the affine-qcqs leaf. R→P is the base change of Δ_Y along (j,g), which I checked on T-sections, including agreement of the S-structures. The hypothesis makes q quasi-compact, permanence (2) makes R quasi-compact, and id_R is the atlas in the trf definition. The absolute product is genuinely needed when S is not quasi-separated. Step 2: δ_U is a closed immersion by 01KN/01KV and def-weil-proper-morphism. The square Δ_j/δ over (p1,p2):D→U×_Z U is cartesian, checked on sections. Closed-immersion base change (01JY/01QR) applied twice to schemes gives the scheme-test definition. proof_deps equals the union of the uses. Tags 01I4/01KN/01JY/08IL were checked in tags/tags. No SGA. Edge cases: U or V empty; non-quasi-compact Y; a non-separated but quasi-separated Y (affine intersections never assumed affine); arbitrary S. Duplicates: etale-affine-pairs-test-quasiseparated covers only étale V; space-qcqs-permanence gives quasi-compactness only (point-space definition, no separatedness); citing it would be an optional alternative, advisory only. No node states the item. Tool uses accepted: trf fibre-products-etale-covers and qc-separated-etale-local (definitions only), both generic. Batch-5 flag on lem-trf-space-fibre-products-etale-covers accepted: it is a foundational sheaf/space fibre-product theorem whose closure is the fibre-product nodes, as accepted at Q119 on 2026-10-22, and it is not a step of the trace-formula or Poincaré-duality proof. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineSourceQCSeparated",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.quasiCompact_separated_of_affine_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineSourceQCSeparated.lean",
+  "statement": "theorem quasiCompact_separated_of_affine_etale {S : Scheme.{u}} (Y : AlgebraicSpace S) (hY : IsAbsolutelyQuasiSeparated Y) (U : Over S) [IsAffine U.left] (j : yoneda.obj U ⟶ Y.obj.obj) (hj : IsEtale j) : IsQuasiCompactPresheafMap j ∧ IsSeparatedPresheafMap j",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9336d97f2",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: arbitrary S:Scheme.{u}, Y:AlgebraicSpace S, hY:IsAbsolutelyQuasiSeparated Y (landed def-sfb-space-absolute-quasi-separated, 0AHR(3)), U:Over S [IsAffine U.left], j:yoneda U ⟶ Y with IsEtale (no surjectivity), conclusion IsQuasiCompactPresheafMap j ∧ IsSeparatedPresheafMap j per lem-trf-space-qc-separated-etale-local defs (read in live SpaceQCSeparatedEtaleLocal.lean). No qc of Y, no extra universe/instance. Item diff vs live = lean + landed stmt_dep only; statement verbatim; docstrings carry source 08IL + blueprint + both proof steps; sorry only; no defs; no duplicate in live lean/Sheaf or Mathlib; imports exist. Edge cases: empty U/V/Y, non-qc Y, non-qs S, non-separated Y. Advisory: report's second-reading section is a placeholder. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,251 @@
+{
+ "id": "lem-trf-basis-cone-group-localization",
+ "kind": "statement",
+ "title": "Localizing a basis-cone algebra recovers the lattice group algebra",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an abelian group written additively, and $u_1,\\ldots,u_r$ a finite integral basis, meaning that every $g\\in G$ has unique coordinates $g=\\sum_i n_i u_i$, $n_i\\in\\mathbf Z$. Put $H=\\{\\sum_i a_i u_i:a_i\\in\\mathbf N\\}$ and define $k[T]=\\bigoplus_{t\\in T}ke^t$ with $e^te^{t'}=e^{t+t'}$ for $T=H,G$. Regard $C=k[H]$ as a subalgebra of $k[G]$. Let $S=\\{\\prod_i(e^{u_i})^{b_i}:b_i\\in\\mathbf N\\}\\subset C$; it is multiplicatively closed and $0\\notin S$. Write $S^{-1}C$ for the ring of fractions $a/s$, with $a/s=a'/s'$ if $t(as'-a's)=0$ for some $t\\in S$. The inclusion $C\\hookrightarrow k[G]$ extends uniquely to a $k$-algebra isomorphism $\\theta:S^{-1}C\\xrightarrow{\\sim}k[G]$, with $\\theta(a/s)=a\\,s^{-1}$ in $k[G]$. Its inverse is the $k$-linear map determined on the monomial basis by\n$$e^{\\sum_i n_i u_i}\\longmapsto \\frac{\\prod_i(e^{u_i})^{n_i^+}}{\\prod_i(e^{u_i})^{n_i^-}},\\qquad n_i^+=\\max(n_i,0),\\quad n_i^-=\\max(-n_i,0).$$\nThis inverse is a ring homomorphism. The assertions include $r=0$, when $S=\\{1\\}$ and both algebras are $k$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104, k[P^gp] identified with k[Z^n]; agent-written explicit localization and positive/negative-coordinate inverse, expanding returned affine-normalization proof Step 5. No Stacks tag states this lattice-specific isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-basis-cone-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $D=k[G]$ and $x_i=e^{u_i}$. The inclusion $H\\subseteq G$ sends distinct monomial basis vectors to distinct basis vectors, so its coefficientwise extension $C\\to D$ is injective; it preserves multiplication because both products add exponents. For $b\\in\\mathbf N^r$ put $x^b=e^{\\sum_i b_i u_i}$. Then $x^0=1$ and $x^b x^c=x^{b+c}$, proving multiplicative closure of $S$. Each $x^b$ has coefficient $1\\ne0$ at its exponent, so $0\\notin S$. Its image in $D$ has inverse $e^{-\\sum_i b_i u_i}$, since their product is $e^0=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104 (PDF p.110): the identification k[P^gp] with k[Z^n]; agent-written explicit coordinate verification."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ring-localization-universal-property] with $A=C$, $U=S$, target $D$, and $f$ the inclusion from Step 1. Both rings are commutative because $G$ is abelian, and Step 1 verifies that every denominator maps to a unit. This gives a unique ring homomorphism $\\theta:S^{-1}C\\to D$ extending the inclusion, with $\\theta(a/s)=a\\,s^{-1}$. The scalar map on $S^{-1}C$ is $c\\mapsto (ce^0)/1$; the fraction formula sends this to $ce^0$ in $D$. Thus $\\theta$ is a $k$-algebra homomorphism.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization, statement and proof"
+   }
+  },
+  {
+   "text": "The map $\\theta$ is injective. Indeed, if $\\theta(a/s)=\\theta(a\\prime/s\\prime)$, multiply in $D$ by the units $s$ and $s\\prime$ to obtain $as\\prime=a\\prime s$. Both sides belong to the embedded copy of $C$, so this equality holds in $C$. The defining fraction relation, with multiplier $t=1\\in S$, gives $a/s=a\\prime/s\\prime$. This argument uses neither a domain theorem nor a cancellation assertion for arbitrary elements of $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104 (PDF p.110): the identification k[P^gp] with k[Z^n]; agent-written explicit coordinate verification."
+   }
+  },
+  {
+   "text": "For $g=\\sum_i n_i u_i$ define $p(g)=\\sum_i\\max(n_i,0)u_i$ and $q(g)=\\sum_i\\max(-n_i,0)u_i$, both in $H$. Unique coordinates make these assignments unambiguous. For each $i$, $\\max(n_i,0)-\\max(-n_i,0)=n_i$ (check $n_i\\geq0$ and $n_i<0$ separately), so $p(g)-q(g)=g$. Define $\\psi(\\sum_g c_g e^g)=\\sum_g c_g(e^{p(g)}/e^{q(g)})$; each denominator is a product of the $x_i$ with nonnegative exponents, hence belongs to $S$. These are finite sums. For two coefficient families $c,d$, sum over the union of their finite supports and use $(c_g+d_g)z=c_gz+d_gz$ with $z=e^{p(g)}/e^{q(g)}$ to obtain $\\psi(v+w)=\\psi(v)+\\psi(w)$; likewise $(ac_g)z=a(c_gz)$ proves $k$-linearity. Step 2 gives $\\theta(e^{p(g)}/e^{q(g)})=e^{p(g)-q(g)}=e^g$. Applying this to each term yields $\\theta\\psi(\\sum_g c_g e^g)=\\sum_g c_g e^g$. Thus $\\theta\\psi=\\mathrm{id}_D$, proving surjectivity and the required monomial formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104 (PDF p.110): the identification k[P^gp] with k[Z^n]; agent-written explicit coordinate verification."
+   }
+  },
+  {
+   "text": "For any fraction $z\\in S^{-1}C$, the equality $\\theta\\psi=\\mathrm{id}_D$ gives $\\theta(\\psi(\\theta(z)))=\\theta(z)$, and injectivity from Step 3 gives $\\psi(\\theta(z))=z$. Thus $\\psi\\theta=\\mathrm{id}$. For $v,w\\in D$, $\\theta(\\psi(vw))=vw=\\theta(\\psi(v)\\psi(w))$; hence $\\psi(vw)=\\psi(v)\\psi(w)$ by injectivity. Similarly $\\theta(\\psi(1))=1=\\theta(1)$ gives $\\psi(1)=1$. Together with the linearity in Step 4 this proves that $\\psi$ is a ring homomorphism and that $\\theta$ is the asserted $k$-algebra isomorphism. Any other extension is the same ring map by the uniqueness in Step 2. Explicitly, write $s=e^b$ and $h\\in H$ with nonnegative coordinates $b_i,h_i$. For $n_i=h_i-b_i$, the identity $n_i^+-n_i^-=n_i$ gives $n_i^++b_i=h_i+n_i^-$. Summing against $u_i$ yields $p(h-b)+b=h+q(h-b)$. Therefore the fraction relation with multiplier $1$ gives $e^{p(h-b)}/e^{q(h-b)}=e^h/e^b$. For $a=\\sum_h a_he^h$ and $s=e^b$, linearity gives $\\psi(\\theta(a/s))=\\sum_h a_h(e^h/e^b)=(\\sum_h a_he^h)/e^b=a/s$: every term has the same denominator, so the last equality is the defining addition and scalar multiplication of fractions. This checks the inverse directly for every denominator, including mixed-sign exponents.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104 (PDF p.110): the identification k[P^gp] with k[Z^n]; agent-written explicit coordinate verification."
+   }
+  },
+  {
+   "text": "If $r=0$, the unique-coordinate hypothesis says that every $g\\in G$ is the empty sum $0$. Hence $G=H=\\{0\\}$, both monoid algebras consist of constants and identify with $k$, and $S=\\{1\\}$. The displayed formulas reduce to $\\theta(a/1)=a$ and $\\psi(a)=a/1$, so all assertions include this case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104 (PDF p.110): the identification k[P^gp] with k[Z^n]; agent-written explicit coordinate verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.12 proof, printed p.104; explicit basis-cone localization verification using Stacks Tag 00CP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(localiz|IsLocalization)|localiz.*(MonoidAlgebra|AddMonoidAlgebra)",
+   "results": "0 hits; actual returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned free-abelian-group and localized-module basis declarations do not identify this monoid algebra localization or provide the signed-exponent inverse; both Loogle localization searches and both monoid-algebra localization greps returned no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, IsLocalization",
+   "results": "0 hits; actual returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned free-abelian-group and localized-module basis declarations do not identify this monoid algebra localization or provide the signed-exponent inverse; both Loogle localization searches and both monoid-algebra localization greps returned no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the monoid algebra of the nonnegative cone of an integral basis at its basis monomials gives the group algebra, with inverse sending signed exponents to positive over negative monomials.",
+   "results": "8 hits; actual returned names/files: Module.Basis.localizationLocalization_repr_algebraMap, Module.Basis.localizationLocalization_apply, NumberField.Units.fundSystem_mk, Module.Basis.ofIsLocalizedModule_apply, NumberField.Units.basisModTorsion, Module.Basis.ofIsLocalizedModule_repr_apply, NumberField.basisOfFractionalIdeal, Set.unitEquivUnitsInteger_symm_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned free-abelian-group and localized-module basis declarations do not identify this monoid algebra localization or provide the signed-exponent inverse; both Loogle localization searches and both monoid-algebra localization greps returned no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization|[Ll]ocalization|[Ll]ocalize",
+   "results": "0 hits; actual returned names/files: ; directory Mathlib/Algebra/MonoidAlgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned free-abelian-group and localized-module basis declarations do not identify this monoid algebra localization or provide the signed-exponent inverse; both Loogle localization searches and both monoid-algebra localization greps returned no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Group algebra of a lattice is the localization of the algebra of its positive basis cone, with the inverse given by positive and negative coordinates.",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, Localization",
+   "results": "0 hits; actual returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned free-abelian-group and localized-module basis declarations do not identify this monoid algebra localization or provide the signed-exponent inverse; both Loogle localization searches and both monoid-algebra localization greps returned no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a free abelian group with a finite basis and the submonoid generated by that basis, the group ring is the localization of the submonoid ring at all basis monomials. Construct both inverse homomorphisms.",
+   "results": "8 hits; actual returned names/files: FreeAbelianGroup.ring, FreeAbelianGroup.liftMonoid, Module.Basis.localizationLocalization_apply, FreeAbelianGroup.toFinsupp, FreeAbelianGroup.basis, Module.Basis.localizationLocalization_repr_algebraMap, FreeAbelianGroup.toFinsupp_of, FreeAbelianGroup.instCommRingOfCommMonoid",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned free-abelian-group and localized-module basis declarations do not identify this monoid algebra localization or provide the signed-exponent inverse; both Loogle localization searches and both monoid-algebra localization greps returned no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "(MonoidAlgebra|AddMonoidAlgebra).*(localiz|IsLocalization)|localiz.*(MonoidAlgebra|AddMonoidAlgebra)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lattice group algebra is the localization of its nonnegative basis monoid algebra at all basis monomials.",
+   "results": "8 hits: Algebra.Extension.localization, AddLocalization, IsLocalization, IsLocalization'.mk, instIsLocalizationAlgebraMapSubmonoid, Localization, isLocalizedModule_iff_isLocalization', Localization.subalgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidAlgebra, IsLocalization",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the monoid algebra of a finite positive basis cone at the basis monomials gives the full lattice group algebra, with signed exponent inverse.",
+   "results": "8 hits: Module.Basis.localizationLocalization_repr_algebraMap, Module.Basis.localizationLocalization_apply, Module.Basis.localizationLocalization_span, Module.Basis.localizationLocalization, IsLocalization.integerMultiple, Module.Basis.ofIsLocalizedModule, Algebra.Generators.localizationAway, Algebra.SubmersivePresentation.basisCotangent_localizationAway_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization|[Ll]ocalization|[Ll]ocalize",
+   "results": "0 hits:  (directory Mathlib/Algebra/MonoidAlgebra)",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidAlgebra, Localization",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The group ring of a free abelian group is a Laurent polynomial ring obtained by inverting the variables in its polynomial ring.",
+   "results": "8 hits: Polynomial.toLaurent_apply, LaurentPolynomial.algebraPolynomial, Polynomial.coe_toLaurentAlg, LaurentPolynomial, Polynomial.toLaurent, Polynomial.toLaurentAlg_apply, Polynomial.toLaurentAlg, LaurentPolynomial.isLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: module-basis localization and abstract localization declarations do not identify this cone algebra with the lattice group algebra; LaurentPolynomial.isLocalization covers one variable, not the arbitrary finite integral basis and signed-coordinate inverse."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-monoid-algebra-normalization",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical affine toric-normalization input, ILO VIII Lemma 3.2.9 and Lemma 3.2.12, p.104; returned affine-normalization proof Steps 4--5: choose a finite integral basis, identify its nonnegative monoid algebra with an iterated polynomial ring, and identify the full group algebra by inverting basis monomials.",
+   "via": [
+    "lem-trf-affine-monoid-algebra-normalization",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-basis-cone-group-localization",
+  "worker": "stage1",
+  "summary": "Q92 repair of returned head 8a9d622fc1f (return 2026-10-23 09:31 UTC). Retained the delivered split, citations and actual searches, compared all fields with the current unsplit DAG item, and reread both current dependency statements and the current blueprint, ILO VIII p.104 and Stacks 00CP. The statement and dependency statements agree with the retained work. Expanded Steps 4 and 5 to prove the signed-coordinate identity by its two integer cases and derive the fraction equality coordinate by coordinate. All six steps remain below 2000 characters; the sole node quotation is still verbatim. Initial dry run 97cbf8f1e8f passed. The delivery tool rebases onto freshly fetched origin/sheaf-dag; the live-DAG promotion mentioned in the return is L's landing operation. No new nodes or Mathlib leaves.",
+  "blueprint": "Historical affine toric-normalization subargument below lem-trf-local-term-locality: the ancestor route recorded in blueprint.from, through lem-trf-affine-monoid-algebra-normalization, Steps 4--5. These six steps realize only the basis-cone group-localization calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-09719b1c5",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-09719b1c5 (reviewer sub-agent of L); spot-checked: This is the fifth delivery of the same split. The four earlier heads (c499, 11cf, 91d9, 8a9d) were all PASSed and refused at landing only because the side completion had not been promoted to the live DAG (return of 2026-10-23 09:31 UTC). Live and side-live still have the item unsplit, and there is no repair note. Compared with 8a9d622fc1fd, every field except proof and split_report is identical. The only changes are an explicit case check that max(n,0)-max(-n,0)=n in Step 4, and in Step 5 the coordinatewise derivation of p(h-b)+b=h+q(h-b). Both are correct. I re-read the whole proof. Step 1: the inclusion is coefficientwise, S is closed under products, 0 is not in S because 1 is not 0, and the inverses are e^{-b}. Step 2: lem-weil-pbc-ring-localization-universal-property (Mathlib leaf) uses the same fraction relation; I checked it against Stacks algebra.tex:1084 (00CP), and its commutative-ring and unit hypotheses hold. Step 3: injectivity follows by clearing denominators with multiplier t=1, with no domain assumption. Step 4: p and q lie in H, e^q is in S, psi is k-linear, and theta psi = id. Step 5: psi theta = id and multiplicativity follow from injectivity, and the direct fraction check e^p e^b = e^h e^q also holds. Step 6: r=0. I tested r=0, r=1 (k[x,x^{-1}]) and the mixed exponent (2,-3), which gives x1^2/x2^3. ILO VIII 3.2.12 (PDF p.110) only says k[P] ⊆ k[P^gp] -> k[Z^n], so the proof is correctly marked agent-written. There is no SGA citation. The only citer, lem-trf-affine-monoid-algebra-normalization Step 4, uses theta, 0 not in S and the explicit inverse exactly as stated. There are no new nodes and no tool_uses, and the statement is not weakened. No fixes. Maintainer: what remains is promoting the side completion."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BasisConeGroupLocalization",
+  "declaration": "AddMonoidAlgebra.basisCone_group_localization",
+  "declarations": [
+   "AddMonoidAlgebra.basisConeDenominators",
+   "AddMonoidAlgebra.basisConeDenominator",
+   "AddMonoidAlgebra.basisCone_group_localization"
+  ],
+  "file": "lean/Sheaf/RingTheory/BasisConeGroupLocalization.lean",
+  "statement": "theorem basisCone_group_localization (b : Module.Basis (Fin r) ℤ G) : Function.Injective (basisConeInclusion (k := k) b) ∧ (0 : AddMonoidAlgebra k (basisCone b)) ∉ basisConeDenominators (k := k) b ∧ (∀ s : AddMonoidAlgebra k (basisCone b), s ∈ basisConeDenominators (k := k) b ↔ ∃ a : Fin r → ℕ, (basisConeDenominator (k := k) b a).val = s) ∧ ∃ θ : Localization (basisConeDenominators (k := k) b) ≃ₐ[k] AddMonoidAlgebra k G, (∀ a : AddMonoidAlgebra k (basisCone b), θ (algebraMap (AddMonoidAlgebra k (basisCone b)) (Localization (basisConeDenominators (k := k) b)) a) = basisConeInclusion (k := k) b a) ∧ (∀ φ : Localization (basisConeDenominators (k := k) b) →ₐ[k] AddMonoidAlgebra k G, (∀ a : AddMonoidAlgebra k (basisCone b), φ (algebraMap (AddMonoidAlgebra k (basisCone b)) (Localization (basisConeDenominators (k := k) b)) a) = basisConeInclusion (k := k) b a) → φ = θ.toAlgHom) ∧ (∀ (a : AddMonoidAlgebra k (basisCone b)) (s : basisConeDenominators (k := k) b), θ (Localization.mk a s) = basisConeInclusion (k := k) b a * Ring.inverse (basisConeInclusion (k := k) b s.val)) ∧ (∀ n : Fin r → ℤ, θ.symm (single (∑ i, n i • b i) 1) = Localization.mk (basisConeDenominator (k := k) b (fun i ↦ (n i).toNat)).val (basisConeDenominator (k := k) b (fun i ↦ (-n i).toNat)))",
+  "branch": "sheaf-dag",
+  "by": "Q143",
+  "date": "2026-10-23",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-7341b6967",
+  "note": "Maintenance Q17: the cone definitions now belong to def-trf-basis-cone-algebra in Sheaf.RingTheory.BasisConeAlgebra, publicly imported here. Their declaration names, signatures and bodies and the full localization theorem and proof plan are unchanged. The matching stmt_deps edge records this actual definition dependency. See coord/changes/Q17-basis-cone-definition-ownership.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7341b6967",
+  "group": "Q143",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: Field k; Module.Basis (Fin r) ℤ G; H=AddSubmonoid.closure(range b); S=Submonoid.closure of basis monomials, characterized as products ∏x_i^{a_i}, 0∉S; injective inclusion via mapDomainAlgHom; θ : Localization ≃ₐ[k] k[G] extending the inclusion, unique among k-alg maps, θ(mk a s)=a·Ring.inverse(s); θ.symm on monomials = mk(∏x^{n.toNat})(∏x^{(-n).toNat}). Edge cases r=0, r=1, mixed sign and any characteristic covered; independent universes; helpers real, docstrings ok, sorry-only, statement verbatim, only the lean field differs from side-live, no duplicate notion found. FIX: removed the unused plain import Mathlib.Algebra.Group.Submonoid.Finsupp (not reached through other imports, not a proof-dep module; brief-stage2 import rule/H9). Complete file fixes/BasisConeGroupLocalization.lean compiles clean (nt_compile --json, 1.1 s); lean record unchanged."
+ }
+}

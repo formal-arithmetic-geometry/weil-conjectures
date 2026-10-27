@@ -70,7 +70,32 @@
   "def-sc-effective-cartier-divisor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.isRelativeEffectiveCartier_universal_hilbertPresheaf"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isRelativeEffectiveCartier_universal_hilbertPresheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.Hilbert.Curve",
+     "lines": [
+      831,
+      859
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-hilb-curves",
  "lean": {
@@ -85,22 +110,39 @@
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $X$ be as\nin [thm-pc-hilb-curves] and let $d\\geq0$. There is a relative\neffective Cartier divisor\n\n$$\nD_{\\mathrm{univ}}\\subset \\underline{\\operatorname{Hilb}}^{d+1}_{X/k}\\times_kX\n$$\n\nover $\\underline{\\operatorname{Hilb}}^{d+1}_{X/k}$ (a universal closed object, which is\nan effective Cartier divisor via [lem-pc-cartier-criterion]), and\n$\\mathcal{O}(D_{\\mathrm{univ}})$ is the associated invertible module; for a\n$k$-rational point $[D]\\in\\underline{\\operatorname{Hilb}}^{d+1}_{X/k}$ corresponding to\nan effective Cartier divisor $D\\subset X$ of degree $d+1$, the restriction\nof $\\mathcal{O}(D_{\\mathrm{univ}})$ to the fibre $[D]\\times X\\cong X$ is\n$\\mathcal{O}_X(D)$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X\\to S$ be a smooth morphism of relative dimension $1$, let\n$d\\geq0$ and let $H$ be an $S$-scheme representing\n$\\operatorname{Hilb}^d_{X/S}$ ([def-pc-hilb-functor]), with universal closed\nsubscheme\n\n$$\nD_{\\mathrm{univ}}\\subset H\\times_SX .\n$$\n\nThen $D_{\\mathrm{univ}}$ is a relative effective Cartier divisor on\n$H\\times_SX$ over $H$ ([def-pc-relative-effective-cartier]), with associated\ninvertible module $\\mathcal{O}(D_{\\mathrm{univ}})$; and for every $S$-scheme $T$\nand every $h:T\\to H$, with $D_h\\subset X_T$ the closed subscheme classified by\n$h$, one has\n$\\mathcal{O}_{X_T}(D_h)\\cong(h\\times\\mathrm{id}_X)^*\\mathcal{O}(D_{\\mathrm{univ}})$.\nIn particular, for $X$ as in [thm-pc-hilb-curves] over $S=\\operatorname{Spec}(k)$\nand a $k$-rational point $[D]\\in\\underline{\\operatorname{Hilb}}^{d}_{X/k}$\ncorresponding to an effective Cartier divisor $D\\subset X$ of degree $d$, the\nrestriction of $\\mathcal{O}(D_{\\mathrm{univ}})$ to the fibre $[D]\\times X\\cong X$\nis $\\mathcal{O}_X(D)$.",
   "proof": [
    {
-    "text": "By [thm-pc-hilb-curves](1) the functor $\\operatorname{Hilb}^{d+1}_{X/k}$ is\nrepresentable by\n$H:=\\underline{\\operatorname{Hilb}}^{d+1}_{X/k}$; by the definition of\nrepresentability ([def-pc-hilb-functor]) there is a universal\nelement\n\n$$\nZ_{\\mathrm{univ}}\\in\\operatorname{Hilb}^{d+1}_{X/k}(H),\n$$\n\ni.e. a closed subscheme $Z_{\\mathrm{univ}}\\subset X_H=H\\times_kX$\nfinite locally free of degree $d+1$ over $H$. Apply\n[lem-pc-cartier-criterion] ((1)$\\Rightarrow$(2)) to the smooth\nmorphism of relative dimension $1$\n$H\\times_kX\\to H$ (the base change of $X\\to k$ along $H\\to k$: base\nchanges of smooth morphisms are smooth, the standard statement) and\nthe closed subscheme $Z_{\\mathrm{univ}}$: it is a relative effective\nCartier divisor $D_{\\mathrm{univ}}$ on $H\\times_kX/H$\n([def-pc-relative-effective-cartier]). Its associated invertible\nmodule is $\\mathcal{O}(D_{\\mathrm{univ}})$\n([def-pc-divisor-line-bundle]). For a $k$-rational point\n$[D]\\in H$ corresponding to an effective Cartier divisor $D\\subset X$\nof degree $d+1$: the fibre of the universal element over $[D]$ is, by\nthe universality of $Z_{\\mathrm{univ}}$, exactly the closed subscheme\n$D$ of the fibre\n$X_{[D]}=X$ (the point $[D]$ of $H$ corresponds, via the\nidentification of [thm-pc-hilb-curves](2), to the element $D$ of\n$\\operatorname{Hilb}^{d+1}_{X/k}(k)$: the fibre of the universal object over $[D]$\nis that element, by the very definition of universality); hence the\nrestriction of $D_{\\mathrm{univ}}$ to the fibre\n$\\{[D]\\}\\times X\\cong X$ is the effective Cartier divisor $D$ and, by\nthe base change property of the divisor module\n([lem-pc-recd-pullback], or directly:\n$\\mathcal{O}(D_{\\mathrm{univ}})|_{\\{[D]\\}\\times X} =\\mathcal{O}_X(D)$), the restriction of\n$\\mathcal{O}(D_{\\mathrm{univ}})$ is $\\mathcal{O}_X(D)$.",
+    "text": "By the definition of representability ([def-pc-hilb-functor]) the\nuniversal element is a closed subscheme\n$D_{\\mathrm{univ}}\\subset X_H=H\\times_SX$ which is finite locally free of\ndegree $d$ over $H$. The projection $H\\times_SX\\to H$ is the base change of\n$X\\to S$, hence smooth of relative dimension $1$. Applying\n[lem-pc-cartier-criterion] ((1)$\\Rightarrow$(2)) to it and to\n$D_{\\mathrm{univ}}$ shows that $D_{\\mathrm{univ}}$ is a relative effective\nCartier divisor on $H\\times_SX$ over $H$\n([def-pc-relative-effective-cartier]). Its associated invertible module is\n$\\mathcal{O}(D_{\\mathrm{univ}})$ ([def-pc-divisor-line-bundle]).",
     "uses": [
-     "thm-pc-hilb-curves",
      "def-pc-hilb-functor",
      "lem-pc-cartier-criterion",
      "def-pc-relative-effective-cartier",
-     "def-pc-divisor-line-bundle",
+     "def-pc-divisor-line-bundle"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $h:T\\to H$ be a morphism of $S$-schemes. By universality, the closed\nsubscheme $D_h\\subset X_T$ classified by $h$ is the pullback of\n$D_{\\mathrm{univ}}$ along $h\\times\\mathrm{id}_X:X_T\\to H\\times_SX$, i.e. its base\nchange along $h$. Since $H\\times_SX\\to H$ is flat and locally of finite\npresentation (being smooth), [lem-pc-recd-pullback] gives\n$\\mathcal{O}_{X_T}(D_h)\\cong(h\\times\\mathrm{id}_X)^*\\mathcal{O}(D_{\\mathrm{univ}})$.",
+    "uses": [
      "lem-pc-recd-pullback"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the last assertion take $S=\\operatorname{Spec}(k)$, $X$ as in\n[thm-pc-hilb-curves] and $h=[D]:\\operatorname{Spec}(k)\\to H$ a $k$-rational\npoint. By [thm-pc-hilb-curves](2) it corresponds to the element $D$ of\n$\\operatorname{Hilb}^{d}_{X/k}(k)$, so $D_h=D\\subset X$, and the restriction of\n$\\mathcal{O}(D_{\\mathrm{univ}})$ to $[D]\\times X\\cong X$ is $\\mathcal{O}_X(D)$.",
+    "uses": [
+     "thm-pc-hilb-curves"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

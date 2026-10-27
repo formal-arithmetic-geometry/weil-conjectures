@@ -123,7 +123,80 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.stupidFiltrationExactCouple",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration",
+     "lines": [
+      420,
+      433
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.stupidFiltrationSpectralSequence",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration",
+     "lines": [
+      435,
+      443
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.stupidFiltrationE₁Iso",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration",
+     "lines": [
+      492,
+      500
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.isZero_stupidFiltrationExactCouple_E",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration",
+     "lines": [
+      502,
+      510
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.stupidFiltrationE₁Iso_inv_comp_d_comp_hom",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration",
+     "lines": [
+      543,
+      566
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Functor.stupidFiltrationExactCouple_convergesTo",
+     "module": "WeilConjectures.Algebra.Homology.ExactCouple.StupidFiltration",
+     "lines": [
+      601,
+      619
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "split_report": {
@@ -251,27 +324,48 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $v$ be as in [def-sp-truncation-couple] and let $A^{\\bullet,\\bullet}$ be\na Cartan--Eilenberg resolution of a bounded-below complex $K^\\bullet$: the\nrow $A^{\\bullet,s}$ is an injective resolution\n[def-sp-injective-resolutions] of $K^s$, and the column cohomologies are the\n$\\mathcal H^s(K^\\bullet)$. Then the filtration of the total complex by the\n*second* degree gives the spectral sequence\n\n$$\n E_1^{r,s}=R^rv(K^s)\\Longrightarrow\n \\mathcal H^{r+s}(RvK^\\bullet),\n$$\n\n$d_1:E_1^{r,s}\\to E_1^{r,s+1}$, induced by the differential of $K^\\bullet$,\nand the abutment is the cohomology of the derived functor of $K^\\bullet$,\nindependent of the resolution.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $v:\\mathcal A\\to\\mathcal B$ be as in [def-sp-truncation-couple] and let\n$K^\\bullet$ be a bounded-below complex in $\\mathcal A$, with derived functor\n$RvK^\\bullet$ as in [def-sp-kinjective-bridge]. The stupid truncations\n$\\sigma_{\\geq s}K^\\bullet=K^{\\geq s}$ give degreewise split short exact\nsequences of complexes\n\n$$\n 0\\to\\sigma_{\\geq s+1}K^\\bullet\\to\\sigma_{\\geq s}K^\\bullet\\to\n K^s[-s]\\to0,\n$$\n\nhence distinguished triangles, and applying $Rv$ and taking cohomology gives\nan exact couple [def-sp-exact-couple], indexed by $s$ and the total degree\n$n$, with\n\n$$\n D^{s,n}=\\mathcal H^n\\bigl(Rv\\,\\sigma_{\\geq s}K^\\bullet\\bigr),\\qquad\n E^{s,n}=\\mathcal H^n\\bigl(Rv(K^s[-s])\\bigr)\\cong R^{n-s}v(K^s).\n$$\n\nIts spectral sequence, started at the first page and written with $r=n-s$,\nis\n\n$$\n E_1^{r,s}=R^rv(K^s)\\Longrightarrow\n \\mathcal H^{r+s}(RvK^\\bullet),\n$$\n\nwith $d_1:E_1^{r,s}\\to E_1^{r,s+1}$ equal to $R^rv(d_K)$, induced by the\ndifferential of $K^\\bullet$. It converges [def-sp-convergence] to\n$\\mathcal H^n(RvK^\\bullet)$ filtered by the images of the maps\n$\\mathcal H^n(Rv\\,\\sigma_{\\geq s}K^\\bullet)\\to\\mathcal H^n(RvK^\\bullet)$, and\nthe abutment depends only on $K^\\bullet$, not on any choice of resolution.",
   "proof": [
    {
-    "text": "Each row $A^{\\bullet,s}$ is an injective resolution of $K^s$, so the entries\n$R^rv(K^s)$ are the $r$-th cohomology of $v(A^{\\bullet,s})$ by\n[def-sp-injective-resolutions]. Apply [thm-sp-spectral-object-yields] to the\ntotal complex\n$K^\\bullet:=\\operatorname{Tot}\\bigl(v(A^{\\bullet,\\bullet})\\bigr)$ with its\ndecreasing filtration by the second degree,\n$F^sK^\\bullet:=\\bigoplus_{s'\\geq s}v(A^{\\bullet,s'})$. This is a filtration\nby subcomplexes: the total differential preserves the second degree in its\nfirst summand and raises it in its second, so $\\bigoplus_{s'\\geq s}$ is\nstable. It is bounded in each degree, because a total degree receives only\nfinitely many rows, the complex $K^\\bullet$ being bounded below. The graded\npieces are $\\operatorname{gr}^sK^\\bullet=\\operatorname{Tot}\n\\bigl(v(A^{\\bullet,s})\\bigr)$, so item (a) of that theorem gives\n\n$$\n E_1^{r,s}=H^{r+s}\\bigl(\\operatorname{Tot}(v(A^{\\bullet,s}))\\bigr)\n =H^r\\bigl(v(A^{\\bullet,s})\\bigr)=R^rv(K^s),\n$$\n\nthe middle identification being the standard one for a complex concentrated\nin a single degree of the second index, and the differential $d_1$ being the\nboundary homomorphism of the filtration, which is induced by the differential\nof $K^\\bullet$ because the rows are resolutions of the $K^s$ and the maps\nbetween them come from $K^\\bullet$. Item (b) of the same theorem identifies\nthe abutment with the cohomology of the total complex, $\\mathcal\nH^{r+s}(\\operatorname{Tot}(v(A^{\\bullet,\\bullet})))$.",
+    "text": "*The couple.* The sequences\n$0\\to\\sigma_{\\geq s+1}K^\\bullet\\to\\sigma_{\\geq s}K^\\bullet\\to K^s[-s]\\to0$\nare split in each degree, so they give distinguished triangles\n$\\sigma_{\\geq s+1}K^\\bullet\\to\\sigma_{\\geq s}K^\\bullet\\to K^s[-s]\\to\n\\sigma_{\\geq s+1}K^\\bullet[1]$. The derived functor $Rv$ of\n[def-sp-kinjective-bridge], computed by K-injective resolutions, is\nwell defined, functorial and compatible with shifts\n([lem-sp-kinjective-computes]), and it carries these triangles to\ndistinguished triangles. Cohomology is a homological functor, so\n[lem-sp-long-exact-of-triangle] gives the long exact sequences\n\n$$\n \\cdots\\to\\mathcal H^n(Rv\\,\\sigma_{\\geq s+1}K^\\bullet)\\xrightarrow{\\ \\alpha\\ }\n \\mathcal H^n(Rv\\,\\sigma_{\\geq s}K^\\bullet)\\xrightarrow{\\ g\\ }\n \\mathcal H^n(Rv(K^s[-s]))\\xrightarrow{\\ f\\ }\n \\mathcal H^{n+1}(Rv\\,\\sigma_{\\geq s+1}K^\\bullet)\\to\\cdots,\n$$\n\nwhich form an exact couple [def-sp-exact-couple] in the indices $(s,n)$, with\n$\\alpha$, $g$, $f$ of degrees $(-1,0)$, $(0,0)$, $(1,1)$.",
     "uses": [
-     "def-sp-injective-resolutions",
-     "thm-sp-spectral-object-yields"
+     "def-sp-kinjective-bridge",
+     "lem-sp-kinjective-computes",
+     "lem-sp-long-exact-of-triangle",
+     "def-sp-exact-couple"
     ],
     "elementary": false
    },
    {
-    "text": "It remains to identify that with $\\mathcal H^{r+s}(RvK^\\bullet)$, for the\nderived functor on $\\operatorname{Ch}^+$ of [def-sp-kinjective-bridge]. In\ntotal degree $n$,\n\n$$\n \\operatorname{Tot}(A^{\\bullet,\\bullet})^n=\n \\bigoplus_{r+s=n}A^{r,s},\n$$\n\na *finite* direct sum: the rows are resolutions, so $A^{r,s}=0$ for $r<0$, and\n$K^\\bullet$ is bounded below, so $A^{r,s}=0$ for $s$ below some $s_0$. A\nfinite direct sum of injectives is injective, so\n$\\operatorname{Tot}(A^{\\bullet,\\bullet})$ is a bounded-below complex of\ninjectives, hence K-injective by part (2) of [lem-sp-kinjective-computes]. The\naugmentation $K^\\bullet\\to\\operatorname{Tot}(A^{\\bullet,\\bullet})$ of a\nCartan--Eilenberg resolution of a bounded-below complex is a\nquasi-isomorphism, so it is a K-injective resolution of $K^\\bullet$ and\n\n$$\n RvK^\\bullet\\cong v\\bigl(\\operatorname{Tot}(A^{\\bullet,\\bullet})\\bigr)\n =\\operatorname{Tot}\\bigl(v(A^{\\bullet,\\bullet})\\bigr),\n$$\n\nthe second equality because $v$ is additive\n[def-sp-left-exact-additive] and the total complex is a finite direct sum in\neach degree. Independence of the chosen Cartan--Eilenberg resolution is part\n(1) of [lem-sp-kinjective-computes]: any two K-injective resolutions of\n$K^\\bullet$ give canonically isomorphic values.",
+    "text": "*The first page.* By the shift compatibility (3) of\n[lem-sp-kinjective-computes],\n$\\mathcal H^n(Rv(K^s[-s]))\\cong\\mathcal H^{n-s}(Rv(K^s[0]))$, which is\n$R^{n-s}v(K^s)$ by part (2) of the same lemma, the derived functor of\n[def-sp-left-exact-additive]. The differential $d_1=g\\circ f$ is induced by\nthe composite of the boundary $K^s[-s]\\to\\sigma_{\\geq s+1}K^\\bullet[1]$ of the\nsplit sequence with the projection\n$\\sigma_{\\geq s+1}K^\\bullet[1]\\to K^{s+1}[-s]$; this composite is the map of\ncomplexes concentrated in one degree given by $d_K:K^s\\to K^{s+1}$, so\n$d_1=R^rv(d_K)$.",
     "uses": [
-     "def-sp-kinjective-bridge",
      "lem-sp-kinjective-computes",
      "def-sp-left-exact-additive"
     ],
     "elementary": false
+   },
+   {
+    "text": "*Convergence.* Let $K^m=0$ for $m<m_0$. For $s\\leq m_0$ one has\n$\\sigma_{\\geq s}K^\\bullet=K^\\bullet$, so the maps\n$\\iota:D^{s,n}\\to\\mathcal H^n(RvK^\\bullet)$ induced by\n$\\sigma_{\\geq s}K^\\bullet\\to K^\\bullet$ are isomorphisms. For $s>n$, the\ncomplex $\\sigma_{\\geq s}K^\\bullet$ has a K-injective resolution by a complex\nof injectives concentrated in degrees $\\geq s$ ([def-sp-kinjective-bridge]),\nso $D^{s,n}=0$. Thus in each total degree the couple is bounded, and the\ncomputation of the stable terms is the one for a bounded filtered complex: at\na fixed $(s,n)$, for $r$ large the source of $\\alpha^{r-1}$ into\n$D^{s+1,n+1}$ vanishes and $\\ker\\bigl(\\alpha^{r-1}\\text{ on }D^{s,n}\\bigr)=\n\\ker\\iota$, so the differentials at $(s,n)$ vanish and the stable term is\n$g(D^{s,n})/g(\\ker\\iota)\\cong\\operatorname{im}\\iota/\\iota(\\operatorname{im}\n\\alpha)$, the graded piece of the image filtration, compatibly with $g$ and\n$\\iota$. This is the convergence of [def-sp-convergence].",
+    "uses": [
+     "def-sp-kinjective-bridge",
+     "def-sp-convergence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Independence.* By part (1) of [lem-sp-kinjective-computes], $RvK^\\bullet$\nand hence $\\mathcal H^n(RvK^\\bullet)$ do not depend, up to canonical\nisomorphism, on the chosen K-injective resolution.",
+    "uses": [
+     "lem-sp-kinjective-computes"
+    ],
+    "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

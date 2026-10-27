@@ -1,0 +1,203 @@
+{
+ "id": "lem-trf-lifted-generator-quasiseparated-test",
+ "kind": "statement",
+ "title": "Finite lifted generator covers and a test for quasi-separated objects",
+ "statement": "Let $\\mathcal E$ be a coherent Grothendieck topos [def-trf-coherent-topos] in the universes of [def-weil-size-convention], and fix a small full generating subcategory $\\mathcal G$ of coherent objects closed under finite limits. Generating means that every object admits an epimorphism from a coproduct of members of $\\mathcal G$; a family is jointly epimorphic if its coproduct map is an epimorphism, and epimorphism means right cancellation. Then:\n(1) For every epimorphism $e:E\\to X$ with $X$ quasi-compact there are a finite set $I$, objects $G_i\\in\\mathcal G$, and maps $u_i:G_i\\to X$, $v_i:G_i\\to E$ such that $e v_i=u_i$ and $(u_i)_i$ is jointly epimorphic. In particular every quasi-compact object has a finite jointly epimorphic family from $\\mathcal G$. The set $I$ may be empty.\n(2) Let $p:P\\to A$ be any epimorphism. Then $A$ is quasi-separated if and only if, for every $K,L\\in\\mathcal G$ and every $k:K\\to P$, $l:L\\to P$, the object $K\\times_A L$, formed with the maps $pk$ and $pl$, is quasi-compact. Here quasi-separated means that $B\\times_A C$ is quasi-compact for every quasi-compact $B,C$ with maps to $A$, as in [def-trf-coherent-topos]. There is no quasi-compactness or quasi-separatedness assumption on $P$ or $A$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Agent auxiliary extracting returned proof steps 3–5 and 7 of lem-trf-coherent-epimorphic-quotient: finite generator covers retaining lifts, and the two-stage generator test for quasi-separatedness. Quasi-compact descent uses Tag 0GMP (lemma-image-of-quasi-compact) and Tag 0GMQ (lemma-coproduct-quasi-compact); these tags are ingredients rather than a verbatim statement of the test. Context: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, proof of Lemma 2.5, printed pp. 178–179."
+ },
+ "stmt_deps": [
+  "def-trf-coherent-topos",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "For (1), choose a small jointly epimorphic family $(w_j:G_j\\to E)_{j\\in J}$ from $\\mathcal G$, using the generating hypothesis. Its composite family $(e w_j:G_j\\to X)_j$ is jointly epimorphic: if $a,b:X\\to T$ agree after every $e w_j$, the coproduct universal property and epimorphy of $\\coprod_jG_j\\to E$ give $ae=be$, and epimorphy of $e$ gives $a=b$. Quasi-compactness of $X$, by [def-trf-coherent-topos], selects a finite subset $I\\subseteq J$ whose composite family is still jointly epimorphic. Set $v_i=w_i$ and $u_i=e w_i$. Restriction does not change these equalities, so the selected maps retain their lifts. Applying this construction with $e=\\operatorname{id}_X$ proves the particular assertion. No nonemptiness was used: $I=\\varnothing$ is allowed by the same quasi-compactness definition.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0D07 (definition-quasi-compact-topos); finite-subfamily selection from a generating epimorphism. Agent argument for this auxiliary."
+   }
+  },
+  {
+   "text": "For the forward implication of (2), suppose $A$ is quasi-separated. Each $K,L\\in\\mathcal G$ is coherent and hence quasi-compact by [def-trf-coherent-topos]. Apply the definition of quasi-separatedness to these two quasi-compact objects and the maps $pk:K\\to A$, $pl:L\\to A$. It gives quasi-compactness of $K\\times_A L$. This direction does not require epimorphy of $p$.",
+   "uses": [
+    "def-trf-coherent-topos"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent specialization of def-trf-coherent-topos to two members of the coherent generating subcategory."
+   }
+  },
+  {
+   "text": "For the reverse implication, assume the stated test for all $K,L,k,l$. Fix arbitrary quasi-compact objects $B,C$ with maps $b:B\\to A$, $c:C\\to A$. By clause (1) of [lem-trf-topos-finite-cover-calculus], pulling back the epimorphism $p$ gives epimorphisms $q_B:B\\times_A P\\to B$ and $q_C:C\\times_A P\\to C$. Apply the finite lifted-cover construction of step 1 to each of $q_B,q_C$. Obtain finite jointly epimorphic families $s_i:K_i\\to B$ and $t_j:L_j\\to C$ from $\\mathcal G$, with lifts $\\widetilde s_i:K_i\\to B\\times_A P$ and $\\widetilde t_j:L_j\\to C\\times_A P$. Their second projections $k_i:K_i\\to P$ and $l_j:L_j\\to P$ satisfy $pk_i=bs_i$ and $pl_j=ct_j$ by the defining pullback equations. Quasi-compactness is needed only for $B,C$, not for either pullback or for $P$.",
+   "uses": [
+    "lem-trf-topos-finite-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent pullback argument using clause (1) of lem-trf-topos-finite-cover-calculus (sheaf epimorphism/local-lifting calculus, Tags 00WN and 00W2), followed by step 1."
+   }
+  },
+  {
+   "text": "The assumed test applied to $k_i,l_j$ says that every $K_i\\times_A L_j$ is quasi-compact; its maps to $A$ are precisely $bs_i,ct_j$ by step 3. The product-family assertion in clause (1) of [lem-trf-topos-finite-cover-calculus] makes $(K_i\\times_A L_j\\to B\\times_A C)_{(i,j)\\in I\\times J}$ jointly epimorphic. Its index set is finite, so clause (3) of that node makes $B\\times_A C$ quasi-compact. Clause (3) explicitly includes an empty finite family, so the conclusion still holds if either cover is empty. Since $B,C,b,c$ were arbitrary, [def-trf-coherent-topos] now says that $A$ is quasi-separated. No finiteness property of $A$ or $P$ has been assumed.",
+   "uses": [
+    "lem-trf-topos-finite-cover-calculus",
+    "def-trf-coherent-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Agent two-cover argument from lem-trf-topos-finite-cover-calculus clauses (1) and (3); quasi-compact descent and finite coproduct ingredients are Tags 0GMP (lemma-image-of-quasi-compact) and 0GMQ (lemma-coproduct-quasi-compact)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-coherent-topos",
+  "lem-trf-topos-finite-cover-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Finite lifted generator covers by the generating hypothesis and Tag 0D07 (definition-quasi-compact-topos); the quasi-separatedness test follows by pullback covers and finite quasi-compact descent, supplied by lem-trf-topos-finite-cover-calculus. Context only: ILO, Exposé XI, proof of Lemma 2.5, printed pp. 178–179."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a coherent topos quasi separatedness can be tested on pairs of coherent generators lifting through a fixed epimorphism and every epimorphism onto a quasi compact object admits finite generator lifts",
+   "results": "{\"t\": \"2026-10-22T06:44:57Z\", \"tool\": \"leanfinder\", \"query\": \"In a coherent topos quasi separatedness can be tested on pairs of coherent generators lifting through a fixed epimorphism and every epimorphism onto a quasi compact object admits finite generator lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.precoherent\", \"CategoryTheory.Presheaf.isSheaf_coherent_iff_regular_and_extensive\", \"CategoryTheory.isSheaf_coherent\", \"CategoryTheory.Presheaf.isSheaf_iff_extensiveSheaf_of_projective\", \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"TopCat.toSheafCompHausLike\", \"CategoryTheory.instPrecoherentOfFinitaryPreExtensiveOfPreregular\", \"CategoryTheory.coherentTopology.subcanonical\"], \"digest\": \"20d3711562adee43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isSeparator_iff_epi concerns an arbitrary coproduct generator without a finite subfamily or a quasi-separatedness test; finite generated subpresheaves, scheme covers and coherent-topology sheaf conditions do not state either clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparator\", \"Epi\"",
+   "results": "{\"t\": \"2026-10-22T06:44:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparator\\\", \\\"Epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.isSeparator_iff_epi\"], \"digest\": \"adf7288679fe3938\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isSeparator_iff_epi concerns an arbitrary coproduct generator without a finite subfamily or a quasi-separatedness test; finite generated subpresheaves, scheme covers and coherent-topology sheaf conditions do not state either clause."
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.{0,30}(generat|object)|quasi.?separated|finite.{0,30}generat",
+   "results": "{\"t\": \"2026-10-22T06:44:44Z\", \"tool\": \"grep\", \"query\": \"coherent.{0,30}(generat|object)|quasi.?separated|finite.{0,30}generat\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\"], \"digest\": \"74179290038fa6fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isSeparator_iff_epi concerns an arbitrary coproduct generator without a finite subfamily or a quasi-separatedness test; finite generated subpresheaves, scheme covers and coherent-topology sheaf conditions do not state either clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Test quasi separated objects on a small generating family after local lifts through an epimorphism in a coherent topos",
+   "results": "{\"t\": \"2026-10-22T06:45:23Z\", \"tool\": \"leansearch\", \"query\": \"Test quasi separated objects on a small generating family after local lifts through an epimorphism in a coherent topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"isQuasiSeparated_univ_iff\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\"], \"digest\": \"fe8e0b01cf826447\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isSeparator_iff_epi concerns an arbitrary coproduct generator without a finite subfamily or a quasi-separatedness test; finite generated subpresheaves, scheme covers and coherent-topology sheaf conditions do not state either clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compact object has a finite cover by generators with lifts through a surjection and quasi separatedness is detected on generator fibre products",
+   "results": "{\"t\": \"2026-10-22T06:45:41Z\", \"tool\": \"leanfinder\", \"query\": \"A compact object has a finite cover by generators with lifts through a surjection and quasi separatedness is detected on generator fibre products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact\", \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"AlgebraicGeometry.quasiCompactCover_iff\", \"AlgebraicGeometry.QuasiCompactCover.of_isOpenMap\", \"AlgebraicGeometry.Scheme.quasiCompactCover\"], \"digest\": \"9919bb1ce5b7e5f4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: isSeparator_iff_epi concerns an arbitrary coproduct generator without a finite subfamily or a quasi-separatedness test; finite generated subpresheaves, scheme covers and coherent-topology sheaf conditions do not state either clause."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoherentObject|quasi.?separated|finite.{0,30}generat",
+   "results": "{\"t\": \"2026-10-23T11:09:06Z\", \"tool\": \"grep\", \"query\": \"IsCoherentObject|quasi.?separated|finite.{0,30}generat\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\", \"Mathlib/CategoryTheory/Subfunctor/Finite.lean\"], \"digest\": \"74179290038fa6fa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the separator criterion at Generator/Basic.lean:660 has no compactness hypothesis or finite selection; Subfunctor/Finite.lean:73 and :154 concern finite presheaf generation, coherent-topology hits concern site sheaf conditions, and the quasi-separated/finite-cover hits concern spaces or schemes rather than arbitrary topos objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi separated objects of a coherent topos can be tested on pairs of coherent generators lifting through a fixed epimorphism",
+   "results": "{\"t\": \"2026-10-23T11:09:06Z\", \"tool\": \"leansearch\", \"query\": \"Quasi separated objects of a coherent topos can be tested on pairs of coherent generators lifting through a fixed epimorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"AlgebraicGeometry.QuasiSeparated\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact\"], \"digest\": \"c3cafb1ba14cb063\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the separator criterion at Generator/Basic.lean:660 has no compactness hypothesis or finite selection; Subfunctor/Finite.lean:73 and :154 concern finite presheaf generation, coherent-topology hits concern site sheaf conditions, and the quasi-separated/finite-cover hits concern spaces or schemes rather than arbitrary topos objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSeparator\", \"Epi\"",
+   "results": "{\"t\": \"2026-10-23T11:09:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSeparator\\\", \\\"Epi\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.isSeparator_iff_epi\"], \"digest\": \"adf7288679fe3938\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the separator criterion at Generator/Basic.lean:660 has no compactness hypothesis or finite selection; Subfunctor/Finite.lean:73 and :154 concern finite presheaf generation, coherent-topology hits concern site sheaf conditions, and the quasi-separated/finite-cover hits concern spaces or schemes rather than arbitrary topos objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a coherent Grothendieck topos an epimorphism onto a quasi compact object has a finite jointly epimorphic generator family with lifts and quasi separatedness is tested on lifted generators",
+   "results": "{\"t\": \"2026-10-23T11:09:08Z\", \"tool\": \"leanfinder\", \"query\": \"In a coherent Grothendieck topos an epimorphism onto a quasi compact object has a finite jointly epimorphic generator family with lifts and quasi separatedness is tested on lifted generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"CategoryTheory.presheafIsFinite_of_epi\", \"Condensed.epi_iff_locallySurjective_on_compHaus\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"SheafOfModules.GeneratingSections.ofEpi\", \"CategoryTheory.isSheaf_coherent\", \"CategoryTheory.PresheafIsGeneratedBy.of_epi\", \"LightProfinite.instWEqualsLocallyBijectiveCoherentTopology\"], \"digest\": \"5edd381699d3d978\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the separator criterion at Generator/Basic.lean:660 has no compactness hypothesis or finite selection; Subfunctor/Finite.lean:73 and :154 concern finite presheaf generation, coherent-topology hits concern site sheaf conditions, and the quasi-separated/finite-cover hits concern spaces or schemes rather than arbitrary topos objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every covering family of a compact object admits a finite subcover; pullback covers from compact generators detect quasi separated objects of a topos",
+   "results": "{\"t\": \"2026-10-23T11:10:06Z\", \"tool\": \"leanfinder\", \"query\": \"Every covering family of a compact object admits a finite subcover; pullback covers from compact generators detect quasi separated objects of a topos\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuasiSeparatedSpace.of_isOpenCover\", \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isCompact\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"to_compactlyCoherentSpace\"], \"digest\": \"458b218dc5198d72\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the separator criterion at Generator/Basic.lean:660 has no compactness hypothesis or finite selection; Subfunctor/Finite.lean:73 and :154 concern finite presheaf generation, coherent-topology hits concern site sheaf conditions, and the quasi-separated/finite-cover hits concern spaces or schemes rather than arbitrary topos objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-coherent-epimorphic-quotient",
+  "date": "2026-10-22",
+  "group": "Q12"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input of lem-trf-local-term-locality, through the nearby-cycle constructibility descent chain: finite-cover-site coherence and coherent base-change in Orgogozo §8.1 and Lemma 9.1.5, as used in lem-trf-proper-base-change-coherent-conservative. The last step turning the transported finite epimorphic presentation into a coherent object. Extracted subargument: Agent auxiliary extracting returned proof steps 3–5 and 7 of lem-trf-coherent-epimorphic-quotient: finite generator covers retaining lifts, and the two-stage generator test for quasi-separatedness. Quasi-compact descent uses Tag 0GMP (lemma-image-of-quasi-compact) and Tag 0GMQ (lemma-coproduct-quasi-compact); these tags are ingredients rather than a verbatim statement of the test. Context: literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf, Exposé XI, proof of Lemma 2.5, printed pp. 178–179.",
+   "via": [
+    "lem-trf-coherent-epimorphic-quotient",
+    "lem-trf-finitary-site-coherent-generators",
+    "lem-trf-proper-base-change-coherent-conservative",
+    "lem-trf-psi-constructibility-descent",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lifted-generator-quasiseparated-test",
+  "worker": "stage1",
+  "summary": "Proved finite generator covers retaining lifts by applying quasi-compactness to the composite generating epimorphism. Proved the generator test by pulling back the arbitrary fixed epimorphism over two quasi-compact test objects, choosing finite lifted covers, then applying the existing product-cover and finite quasi-compact descent calculus. Reused existing nodes; no new nodes, no statement changes, no Lean attachment. Empty covers and the absence of finiteness hypotheses on P or A are preserved.",
+  "blueprint": "Auxiliary below the recorded ancestor lem-trf-local-term-locality through the coherent-epimorphic-quotient/finitary-site-coherent-generators constructibility chain in blueprint.from. Realizes the finite-generator-cover and two-stage quasi-separatedness subargument identified in the imported source.place; not an additional local-term theorem. Read the current latest ancestor and unit; no standalone blueprint duplicate was found. No chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-7e5a01d06",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-7e5a01d06 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 4 steps in full, together with the statements of def-trf-coherent-topos and lem-trf-topos-finite-cover-calculus. Checked Stacks 0D07 (sites.tex l.3368), 0GMP (l.3383) and 0GMQ (l.3403); the empty case of 0GMQ is supplied by the cited node's clause (3). The tags 00WN and 00W2 cited in step 3 exist. Step 1 is elementary: composing the generating epimorphism with e gives an epimorphism, quasi-compactness of X selects a finite subfamily, the lifts are kept, and I=∅ is allowed. Step 2 is elementary: members of 𝒢 are quasi-compact, so quasi-separatedness of A applies. Step 3: clause (1) makes the pullbacks of p epimorphisms, step 1 applies over the quasi-compact B and C, and the second projections satisfy pk_i=bs_i and pl_j=ct_j. Step 4: K_i×_A L_j is literally the product-family object of clause (1); clause (3) and the definition then give quasi-separatedness. Nothing about P or A beyond the stated hypotheses is used. Edge cases checked: empty covers, and Set with infinite A and P. No duplicate among the nodes citing def-trf-coherent-topos (coherent-object-approximation, sheaf-quasicompact-coproduct-calculus, coherent-generator-subobject-closure, kernel-pair-restriction-quasicompact). No cycle: the cover calculus has only definition deps. proof_deps equals the union of the step uses, the statement and stmt_deps are unchanged, there is no SGA, and this is not a re-split delivery. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.LiftedGeneratorQuasiseparatedTest",
+  "declaration": "CategoryTheory.finite_lifted_generator_covers_and_quasiSeparated_test",
+  "file": "lean/Sheaf/CategoryTheory/Sites/LiftedGeneratorQuasiseparatedTest.lean",
+  "statement": "theorem finite_lifted_generator_covers_and_quasiSeparated_test {E : Type u} [Category.{v} E] [HasCoproducts.{w} E] [HasFiniteLimits E] (_hE : CoherentToposRepair.IsCoherentTopos.{w} E) (G : Type w) (obj : G → E) (_hcoherent : ∀ i : G, IsCoherentObject.{w} (obj i)) (_hgenerating : ∀ X : E, ∃ (I : Type w) (ι : I → G) (f : ∀ i, obj (ι i) ⟶ X), Epi (Sigma.desc f)) (_hlimits : ∀ (J : Type) [SmallCategory J] [FinCategory J], ObjectProperty.IsClosedUnderLimitsOfShape ((fun X : E ↦ ∃ i : G, Nonempty (X ≅ obj i)) : ObjectProperty E) J) : (∀ (Y X : E) (e : Y ⟶ X), Epi e → IsQuasiCompactObject.{w} X → ∃ (I : Type w) (_ : Finite I) (ι : I → G) (u : ∀ i, obj (ι i) ⟶ X) (v : ∀ i, obj (ι i) ⟶ Y), (∀ i, v i ≫ e = u i) ∧ Epi (Sigma.desc u)) ∧ (∀ X : E, IsQuasiCompactObject.{w} X → ∃ (I : Type w) (_ : Finite I) (ι : I → G) (u : ∀ i, obj (ι i) ⟶ X), Epi (Sigma.desc u)) ∧ (∀ (P A : E) (p : P ⟶ A), Epi p → (IsQuasiSeparatedObject.{w} A ↔ ∀ (i j : G) (k : obj i ⟶ P) (l : obj j ⟶ P), IsQuasiCompactObject.{w} (pullback (k ≫ p) (l ≫ p))))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27d962569",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: G/obj generator family with coherent, generating (Epi Sigma.desc, Type w) and finite-limit-closure hypotheses, verbatim the def-trf-coherent-topos encoding; ambient HasCoproducts.{w}/HasFiniteLimits are Prop instances implied by the CoherentToposRepair.IsCoherentTopos hypothesis. Conjunct 1 = clause (1) with v≫e=u and Finite I (empty allowed); conjunct 2 = particular assertion; conjunct 3 = QS iff over pullback (k≫p)(l≫p), no hypothesis on P or A. Mathematics checked (pullback epi, finite lifted covers, finite-cover QC descent, empty cases). Universes w,u,v bound and independent. Sorry-only proof, no defs, source and blueprint docstrings plus 4-step proof docstring, lean.statement verbatim, node otherwise unchanged, both report sections present, no duplicate in side-live Sheaf. No findings."
+ }
+}

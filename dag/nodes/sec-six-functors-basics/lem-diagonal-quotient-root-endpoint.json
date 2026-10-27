@@ -1,0 +1,128 @@
+{
+ "id": "lem-diagonal-quotient-root-endpoint",
+ "kind": "statement",
+ "title": "The single-scheme quotient root endpoint",
+ "statement": "Let l be prime, X a Noetherian scheme with l invertible in its global sections, E a finite intermediate field of the fixed algebraic closure of Q_l, and pi a generator of the maximal ideal of its integers. Let n be natural, B=O_E/(pi)^(n+1), A=ULift B finite, and assume l^(n+1)=0 in A. Fix a FiniteRealization e of the continuous-function condensed ring of B as ordinary A-module sheaves [def-sfb-diagonal-coefficient-finite-realization] and a kernel-normalized FiniteRoots X (l^(n+1)) [def-sfb-diagonal-coefficient-diagrams]. There exists a QuotientLineRealization l E pi n n hA X e [def-sfb-diagonal-coefficient-quotient-line]: construct the projection-normalized integral root map and identify e.F of quotientLine with the finite Cartier line, with its exact root projection equation. This assertion only concerns the positive coefficient line on one scheme; it contains no coefficient-realization existence, pushforward square, supported source comparison, class or trace.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-coefficient-quotient-line"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), expected finite coefficient reductions"
+ },
+ "proof": [
+  {
+   "text": "Take diagonalIntegralRoots_exists. The annihilation equation implies that the ell-power ideal is contained in the uniformizer-power ideal. Factor the actual continuous coefficient quotient through the n-th ell-power quotient. Tensor this factor with the identity on the finite roots and compose with the integral limit projection. Transpose under the extension/restriction adjunction. Naturality of the free-module unit and the integral projection equation give exactly the normalized root equation.",
+   "uses": [
+    "lem-diagonal-integral-root-map",
+    "def-sfb-diagonal-coefficient-diagrams"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the quotient root projection isomorphism theorem to this explicit normalized map. Its proof uses the epic root-tower projection and local rank-one bases, with no flatness.",
+   "uses": [
+    "lem-diagonal-quotient-root-projection-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the free-module adjunction through e.F and its underlying-sheaf natural isomorphism. On the etale site the finite Cartier line represents additive maps out of the root sheaf; the comparison adjunction and the supplied finite-root isomorphism give the same universal property on the pro-etale site. The two representing maps yield inverse module morphisms, whose composites are identities by the two bijective universal properties. Compose the resulting normalized finite free-line isomorphism with e.F of the quotient projection. Naturality of e.underlying.inv gives the required endpoint equation. Package it with the integral map and supplied finite roots.",
+   "uses": [
+    "lem-asd-finite-etale-tate-line-comparison",
+    "def-sfb-diagonal-coefficient-finite-realization",
+    "def-sfb-diagonal-coefficient-diagrams"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-integral-root-map",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "lem-diagonal-quotient-root-projection-iso",
+  "lem-asd-finite-etale-tate-line-comparison",
+  "def-sfb-diagonal-coefficient-finite-realization"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), expected finite coefficient reductions",
+  "by": "U1",
+  "note": "Construct the coefficient-factor projection explicitly, prove its invertibility by epimorphy and local rank-one bases, and transport the free-root universal property through the supplied realization and comparison adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of an integral Tate module over completed coefficients is the finite roots of unity tensored with the residue ring, with root projection normalization",
+   "date": "2026-10-27",
+   "results": "8 hits, including BDeRhamPlus, Ideal.rootsOfUnityMapQuot, and AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of. None states the sheaf-line comparison.",
+   "verdict": "No direct Mathlib result. Local inspection of AmbTateRootProjectionReduction found its root-projection isomorphism in a different coefficient and module presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod.regular",
+   "date": "2026-10-27",
+   "results": "3 hits: Mod.regular, Mod.regular_X, Mod.regular_mod_smul.",
+   "verdict": "These describe the local free rank-one module but do not supply descent or the root endpoint."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientLine|ambTateRootProjectionReduction|purTwistFiniteOne",
+   "date": "2026-10-27",
+   "results": "2 Mathlib hits for Factors.piQuotientLinearEquiv, not relevant to Tate sheaves. Local rg found the existing quotientLine definitions and AmbTateRootProjectionReduction.",
+   "verdict": "The existing general projection theorem uses SheafOfModules over constant coefficient ring sheaves, not quotientLine over the completed condensed coefficient."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalUniformizerFiniteModels",
+  "date": "2026-10-27",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), expected finite reductions of the coefficient objects and positive Tate lines",
+   "via": [
+    "lem-diagonal-uniformizer-finite-models"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalQuotientRootEndpoint",
+  "file": "lean/Sheaf/Paper/DiagonalQuotientRootEndpoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalQuotientRootEndpoint",
+  "statement": "theorem diagonalQuotientRootEndpoint\n    (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]\n    (hX : IsUnit (l : Γ(X, ⊤)))\n    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)\n    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) (n : ℕ)\n    [Finite (ULift.{u + 1} (completedResidue l E π n))]\n    (hA : ((l ^ (n + 1) : ℕ) : ULift.{u + 1} (completedResidue l E π n)) = 0)\n    (e : FiniteRealization\n      (Profinite.continuousMapRingObj.{u} (completedResidue l E π n))\n      (ULift.{u + 1} (completedResidue l E π n)) X)\n    (finiteRoots : FiniteRoots X (l ^ (n + 1))) :\n    Nonempty (QuotientLineRealization l E π n n hA X e)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261027T012932-L-2349583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261027T034751-L-3684319",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

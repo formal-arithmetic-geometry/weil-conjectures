@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-algebraic-stack-change-base-to-integers",
+ "kind": "statement",
+ "title": "Algebraic stacks over a scheme viewed over the integers",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention], with structure morphism $S\\to\\operatorname{Spec}\\mathbf Z$ [def-weil-affine-spectrum]. Use algebraic stacks [def-sfb-algebraic-moduli-stack], categories fibred in groupoids, their morphisms, $2$-morphisms and $2$-fibre products [def-sfb-stable-pointed-moduli-groupoids], algebraic spaces [def-trf-algebraic-space], and quasi-compactness and quasi-separatedness of stacks and of their morphisms [def-sfb-stack-qcqs-morphism]. For a category fibred in groupoids $p:\\mathcal X\\to\\mathit{Sch}/S$ let $j_!\\mathcal X$ be the same category regarded over $\\mathit{Sch}/\\operatorname{Spec}\\mathbf Z$ through the functor sending an $S$-scheme $T\\to S$ to the scheme $T$; it carries the morphism $j_!\\mathcal X\\to S$ sending an object over $T\\to S$ to that structure map. Then: (1) if $\\mathcal X$ is an algebraic stack over $S$, then $j_!\\mathcal X$ is an algebraic stack over $\\operatorname{Spec}\\mathbf Z$, and a smooth surjective scheme atlas $U\\to\\mathcal X$ remains a smooth surjective scheme atlas of $j_!\\mathcal X$ with $U$ regarded as a scheme; (2) $\\mathcal X\\mapsto(j_!\\mathcal X,\\,j_!\\mathcal X\\to S)$ is an equivalence of $2$-categories from algebraic stacks over $S$ to pairs consisting of an algebraic stack over $\\operatorname{Spec}\\mathbf Z$ and a morphism from it to $S$, and $j_!$ carries $2$-fibre products of algebraic stacks over $S$ to $2$-fibre products over $\\operatorname{Spec}\\mathbf Z$; (3) an algebraic stack $\\mathcal X$ over $S$ is quasi-compact if and only if $j_!\\mathcal X$ is, and a morphism $f:\\mathcal X\\to\\mathcal Y$ of algebraic stacks over $S$ is quasi-compact, respectively quasi-separated, over $S$ if and only if $j_!f$ is so over $\\operatorname{Spec}\\mathbf Z$. For algebraic stacks $\\mathcal X,\\mathcal Y$ over $S$, the product $\\mathcal X\\times_{\\operatorname{Spec}\\mathbf Z}\\mathcal Y$ means $j_!\\mathcal X\\times_{\\operatorname{Spec}\\mathbf Z}j_!\\mathcal Y$, and the absolute diagonal of $\\mathcal X$ is the diagonal of the structure morphism $j_!\\mathcal X\\to\\operatorname{Spec}\\mathbf Z$. No hypothesis on $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Section section-change-base-scheme: Tag 04X5 (lemma-category-of-spaces-over-smaller-base-scheme) and Tag 04X6 (definition-viewed-as), with $S'=\\operatorname{Spec}\\mathbf Z$; its use in stacks-morphisms.tex Tag 050M (lemma-compose-after-separated), proof of (5)-(8), 'think of X and Y as algebraic stacks over Spec(Z)'."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-affine-spectrum",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}\\mathbf Z$. Apply [lem-sfb-etale-stack-localization] with $S'=B$. This identifies etale stacks over $S$ with etale stacks over $B$ equipped with a map to $h_S$, by the very same total category and projection specified in the statement. It also identifies functors and natural isomorphisms compatible with that map. It remains to check algebraicity and the geometric predicates; the localization lemma alone asserts none of those.",
+   "uses": [
+    "lem-sfb-etale-stack-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X5, first paragraph of proof, applying stacks.tex Tag 04WV"
+   }
+  },
+  {
+   "text": "For the forward diagonal test, let $T\\to j_!\\mathcal X\\times_B j_!\\mathcal X$ specify objects $x,y$ with possibly different structure maps $a,b:T\\to S$. Form the scheme $E=T\\times_{S\\times_B S}S$ using $(a,b)$ and the diagonal of $S$ [def-pc-fibre-product]. A map $V\\to T$ factors through $E$ exactly when $a|_V=b|_V$. An isomorphism $x|_V\\cong y|_V$ in the absolute fibre groupoid forces this equality, since its image in $h_S(V)$ is an identity. Thus the absolute Isom functor over $T$ is the relative Isom functor of $x|_E,y|_E$, composed with $E\\to T$. By the representable-diagonal clause of [def-sfb-algebraic-moduli-stack], the latter is equivalent over $E$ to an algebraic space $Z$ over $S$ with a map $Z\\to h_E$. Apply clause (1) of [lem-sfb-space-change-base-to-integers] to $S\\to B$: $j_!Z$ is an algebraic space over $B$, and $j_!Z\\to h_E\\to h_T$ gives its map to $T$. Its points over a $B$-scheme $V\\to T$ are the $S$-structures on $V$ together with points of $Z$, which is the absolute Isom functor just described. This proves the absolute diagonal is representable. The functor-of-points description gives the identification on arrows as well. The equalizer scheme $E$ need not be open or closed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X5, algebraicity check; direct diagonal verification using spaces.tex Tags 03I4 and 04SG"
+   }
+  },
+  {
+   "text": "For any map $h_T\\to j_!\\mathcal X$, the map to $h_S$ equips $T$ with its unique indicated $S$-structure. For a scheme map $U\\to\\mathcal X$, the fibre groupoid of $T\\times_{j_!\\mathcal X}U$ consists of the same triples and arrows as $T\\times_{\\mathcal X}U$ over that $S$-structure [def-sfb-stable-pointed-moduli-groupoids]. If it is represented by an algebraic space $Z$, [lem-sfb-space-change-base-to-integers] regards $Z$ over either base. Its etale scheme charts and their maps to $T$ are the same: forgetting the $S$-map changes no scheme morphism, and conversely a chart over $Z$ inherits that map. Hence smoothness and surjectivity of $Z\\to T$ in [def-sfb-algebraic-moduli-stack] are identical tests. This proves that a smooth surjective scheme atlas over $S$ remains one over $B$. Conversely any such atlas $U\\to\\mathcal G$ for a stack with a map $\\mathcal G\\to h_S$ equips $U$ with an $S$-map, and the same reasoning regards it as an atlas over $S$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-space-change-base-to-integers",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X5, preservation of presentations in both constructions; spaces.tex Tag 04SG"
+   }
+  },
+  {
+   "text": "For the converse diagonal test, start with an algebraic stack $\\mathcal G$ over $B$ equipped with $q:\\mathcal G\\to h_S$. If $x,y$ are objects over the same $S$-scheme $T$, every isomorphism between them over $T$ is automatically over $S$, because $h_S(T)$ has only identity arrows. The absolute diagonal supplies their Isom algebraic space with its map to $T$. Use [lem-sfb-space-change-base-to-integers] for $S\\to B$ to regard that space, with its composite map to $S$, over $S$; it is exactly the relative Isom space over $T$. Together with the converse atlas check and the stack property from step 1, this proves algebraicity over $S$ by [def-sfb-algebraic-moduli-stack]. The equivalence in step 1 consequently restricts to the full $2$-categories of algebraic stacks, proving clause (2)'s equivalence and completing clause (1).",
+   "uses": [
+    "def-sfb-algebraic-moduli-stack",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-etale-stack-localization",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X5, converse construction and restriction to algebraic stacks"
+   }
+  },
+  {
+   "text": "Consider a diagram $\\mathcal X\\xrightarrow{f}\\mathcal Z\\xleftarrow{g}\\mathcal Y$ over $S$. Over a $B$-scheme $T$, an object of the absolute pullback is a triple $(x,y,\\alpha:f(x)\\xrightarrow{\\sim}g(y))$ [def-sfb-stable-pointed-moduli-groupoids]. Its isomorphism $\\alpha$ forces the two $S$-structures of $T$ to agree. Hence this is precisely an object of the relative pullback for that common $S$-structure, and the compatibility equation on arrows is unchanged. This gives the canonical equivalence of the two $2$-fibre products, with both projections. This claim concerns pullbacks over $\\mathcal Z$; it does not assert preservation of a terminal object or replacement of a product over $S$ by a product over $B$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04X5 and constructions A/B; explicit fibre-product computation"
+   }
+  },
+  {
+   "text": "By step 3 the very same scheme atlases are allowed over the two bases. Their source schemes have the same underlying spaces, so a quasi-compact source is quasi-compact over either base. The stack quasi-compactness predicate of [def-sfb-stack-qcqs-morphism] is therefore invariant. For a map $f:\\mathcal X\\to\\mathcal Y$, every absolute quasi-compact algebraic test stack $\\mathcal V\\to j_!\\mathcal Y$ inherits a map to $S$ by composition, and step 4 regards it as an algebraic stack over $S$. Conversely every relative test gives an absolute one. Step 5 identifies their pullbacks, whose quasi-compactness has just been identified. The universal test in the definition of a quasi-compact morphism is thus the same in both directions.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050U (definition-quasi-compact), with the atlas convention of stacks-properties.tex Tag 04YC(3)"
+   }
+  },
+  {
+   "text": "The corresponding assertion for algebraic spaces follows directly from [lem-sfb-space-change-base-to-integers]: its equivalence carries etale scheme charts to the same charts in both directions, so the existence of a quasi-compact scheme chart is unchanged. For a morphism $A\\to C$ of spaces, every quasi-compact absolute test space mapping to $j_!C$ inherits its $S$-map and corresponds to a relative test. The fibre-product comparison identifies the tests for quasi-compactness in [def-sfb-stack-qcqs-morphism]. Thus quasi-compactness of space morphisms is invariant. Their relative diagonal is $a\\mapsto(a,a)$, and its target fibre product is identified by that same comparison. Applying the quasi-compactness assertion to this diagonal proves invariance of quasi-separatedness of space morphisms.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "def-sfb-stack-qcqs-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tags 03I4 and 04SG; spaces-morphisms.tex Tags 03HE and 03HL(3) as recorded in def-sfb-stack-qcqs-morphism"
+   }
+  },
+  {
+   "text": "For $f:\\mathcal X\\to\\mathcal Y$, step 5 identifies the target of $\\Delta_f$ and its map $x\\mapsto(x,x,\\mathrm{id})$ in both bases [def-sfb-stack-qcqs-morphism]. Every absolute scheme test of this target inherits its $S$-structure. Its $2$-base change of $\\Delta_f$ is the identical relative fibre groupoid by step 5. Being an algebraic space over that test scheme is independent of the description of the base; the space equivalence of [lem-sfb-space-change-base-to-integers] also gives this identification. Step 7 identifies quasi-compactness and quasi-separatedness of the resulting space projection. The representability and both properties in the definition of a quasi-separated stack morphism therefore hold in exactly the same cases. This proves the remaining assertion of clause (3). The final product and absolute-diagonal sentences of the statement now denote the ordinary constructions on $j_!\\mathcal X$; they impose no separation condition on $S$.",
+   "uses": [
+    "def-sfb-stack-qcqs-morphism",
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YW (definition-separated), clause (4), using the explicit fibre-product comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-etale-stack-localization",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-sfb-space-change-base-to-integers",
+  "def-sfb-stack-qcqs-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04X5 and stacks.tex Tag 04WV; direct diagonal/atlas verification in place of the quotient-presentation shorthand, with qcqs checked from the project definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraicStack (Mathlib, recursive)",
+   "results": "[grep] 0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match: Mathlib has no algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "^(theorem|lemma|def|structure|class).*IsStack (Mathlib)",
+   "results": "[grep] Mathlib/CategoryTheory/Sites/Descent/IsStack.lean:49 class IsStack (F : LocallyDiscrete Cᵒᵖ ⥤ᵖ Cat) (J : GrothendieckTopology C); lines 57, 66, 70, 77 isStackFor', isStackFor, isEquivalence_toDescentData, IsStack.of_isStackFor",
+   "date": "2026-10-23",
+   "verdict": "no match: descent-theoretic stacks on a site, no algebraic stacks and no change of base scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "Over\\.forget.*(IsStack|Stack)|(IsStack|Stack).*Over\\.forget (Mathlib)",
+   "results": "[grep] 0 hits",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|algebraicStack|changeBase.*Stack|Stack.*changeBase",
+   "results": "{\"t\": \"2026-10-23T13:05:26Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|algebraicStack|changeBase.*Stack|Stack.*changeBase\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are schemes, scheme smoothness or the terminal scheme Spec Z, not algebraic stacks or their change-of-base equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stacks over S equivalence with algebraic stacks over Spec Z equipped with a morphism to S",
+   "results": "{\"t\": \"2026-10-23T13:05:26Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic stacks over S equivalence with algebraic stacks over Spec Z equipped with a morphism to S\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specZIsTerminal\", \"AlgebraicGeometry.AffineScheme.Spec_essSurj\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Spec.full\", \"AlgebraicGeometry.Spec.homEquiv_apply\", \"AlgebraicGeometry.AffineSpace.over_over\", \"AlgebraicGeometry.Scheme.asOver\"], \"digest\": \"f3fed28813f0d5fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are schemes, scheme smoothness or the terminal scheme Spec Z, not algebraic stacks or their change-of-base equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsStack, CategoryTheory.Over.forget",
+   "results": "{\"t\": \"2026-10-23T13:05:26Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.IsStack, CategoryTheory.Over.forget\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.IsStack'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are schemes, scheme smoothness or the terminal scheme Spec Z, not algebraic stacks or their change-of-base equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Viewing an algebraic stack over a scheme S as a stack over Spec integers preserves smooth atlases and quasi compact quasi separated morphisms",
+   "results": "{\"t\": \"2026-10-23T13:05:28Z\", \"tool\": \"leanfinder\", \"query\": \"Viewing an algebraic stack over a scheme S as a stack over Spec integers preserves smooth atlases and quasi compact quasi separated morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.AffineScheme.forgetToScheme\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.instCategoryAffineScheme\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"80e04726ecf2a261\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits are schemes, scheme smoothness or the terminal scheme Spec Z, not algebraic stacks or their change-of-base equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-sfb-algebraic-stack-qcqs-permanence",
+  "date": "2026-10-23",
+  "group": "Q114"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Deduce qcqs of the descended invariant morphism from qcqs of its source and the affine target without a finite-generation hypothesis on invariants. Supporting input: Algebraic stacks over a scheme viewed over the integers. This supports paragraph (3), the open-direct-image alteration input in the current blueprint proof.",
+   "via": [
+    "lem-sfb-algebraic-stack-qcqs-permanence",
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-algebraic-stack-change-base-to-integers",
+  "worker": "stage1",
+  "summary": "Split the base-forgetting argument into underlying etale-stack localization, representable-diagonal tests allowing unequal S-structures, identical atlases, the inverse algebraicity check, explicit 2-pullback triples, and the qcqs tests. Reused the existing space change-of-base theorem; created only the non-algebraic etale-stack localization input. Corrected an inherited source-label mismatch and documented the inherited null blueprint ancestor; no statement or unit route changed.",
+  "blueprint": "Supports paragraph (3) of det-thm-sf-ctf-stability-direct-images in the current blueprint, through the inherited open-direct-image alteration, stable-moduli and invariant-quotient chain. The ancestor helper returns None because created.item eventually names a Lean module rather than a DAG node; the null from.node is retained as required by preflight, while from.place names the current blueprint proof and paragraph explicitly. The unit and inherited via chain are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-17722a47f",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-17722a47f (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-etale-stack-localization and every cited statement in full: space-change-base, the algebraic-stack definition, the moduli-groupoids definition, the stack qcqs definition and def-pc-fibre-product. I checked them against Stacks 04X5/04X6, 04WT/04WU/04WV and 050L/050M. The statement is unchanged. The 8 steps are correct: they cover the absolute diagonal through the equalizer scheme E (a monomorphism), identical atlases, the converse algebraicity check, triple 2-fibre products where the isomorphism forces equal S-structures, and qc/qs for stacks and spaces. The new node is 04WV specialized to the étale site Sch/S' and the object S. Its hypothesis that h_S is a sheaf is part of its statement, and it asserts no algebraicity, so it is not a clause of the item. I tested it on S=S', on empty S, on two points and on BG. No duplicate exists: an rg -L search for 04WV, lemma-localize-stacks and 04X5 finds only the delivery and its citer, and I also checked the closest stack nodes (046N, 05UN, 04T2). Batch-5 findings: the space-change-base lemma reaches only the general definition def-trf-algebraic-space, and def-sfb-stable-pointed-moduli-groupoids reaches only the definition def-trf-projective-bundle-morphism. Both are general definitions outside the assumed trace formula and Poincaré duality, so both are accepted. FIX 1: source.place still named 050M (lemma-compose-after-separated) despite the report; the phrase 'think of X and Y over Spec(Z)' is in 050L (lemma-separated-over-separated), so I corrected it. FIX 2: step 2 applied the space lemma to E→T, but the relative Isom space is a space over S with a map to h_E. I rewrote the step to apply clause (1) for S→B, giving j_!Z with j_!Z→h_E→h_T. No dependency changed and no node is dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackChangeBaseToIntegers",
+  "declaration": "CategoryTheory.algebraicStack_changeBase_toIntegers",
+  "declarations": [
+   "CategoryTheory.moduliChangeBase",
+   "CategoryTheory.moduliChangeBaseMap",
+   "CategoryTheory.moduliChangeBaseScheme",
+   "CategoryTheory.moduliChangeBasePairHom",
+   "CategoryTheory.moduliProductOverIntegers",
+   "CategoryTheory.moduliChangeBaseProjection",
+   "CategoryTheory.moduliDiagonalOverIntegers",
+   "CategoryTheory.algebraicStack_changeBase_toIntegers"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackChangeBaseToIntegers.lean",
+  "statement": "theorem algebraicStack_changeBase_toIntegers (S : AlgebraicGeometry.Scheme.{u}) : (∀ (F : BasedCategory.{v₁, w₁} (Over S)), IsAlgebraicModuliStack F → IsAlgebraicModuliStack (moduliChangeBase (AlgebraicGeometry.specULiftZIsTerminal.from S) F) ∧ (∀ (U : Over S) (a : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U a → ∃ b : BasedFunctor (discreteModuli (yoneda.obj ((Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S)).obj U))) (moduliChangeBase (AlgebraicGeometry.specULiftZIsTerminal.from S) F), IsSmoothModuliAtlas _ _ b ∧ Nonempty (ModuliTwoIso (moduliChangeBaseMap (AlgebraicGeometry.specULiftZIsTerminal.from S) a) ((moduliChangeBaseScheme (AlgebraicGeometry.specULiftZIsTerminal.from S) U).comp b)))) ∧ (∀ (G : BasedCategory.{v₁, w₁} (Over (AlgebraicGeometry.Spec (.of (ULift.{u} ℤ))))) (q : G.obj ⥤ Over S), q ⋙ Over.map (AlgebraicGeometry.specULiftZIsTerminal.from S) = G.p → (IsAlgebraicModuliStack G ↔ IsAlgebraicModuliStack (BasedCategory.ofFunctor q))) ∧ (∀ (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)), IsAlgebraicModuliStack F → IsAlgebraicModuliStack G → ∃ E : BasedFunctor F G ≌ moduliChangeBasePairHom (AlgebraicGeometry.specULiftZIsTerminal.from S) F G, (∀ f : BasedFunctor F G, (E.functor.obj f).obj.toFunctor = f.toFunctor) ∧ (∀ (f h : BasedFunctor F G) (α : f ⟶ h), HEq ((E.functor.map α).hom).toNatTrans α.toNatTrans)) ∧ (∀ (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (H : BasedCategory.{v₃, w₃} (Over S)) (f : BasedFunctor F H) (g : BasedFunctor G H), IsAlgebraicModuliStack F → IsAlgebraicModuliStack G → IsAlgebraicModuliStack H → ∃ e : BasedFunctor (moduliChangeBase (AlgebraicGeometry.specULiftZIsTerminal.from S) (moduliTwoFiberProduct f g)) (moduliTwoFiberProduct (moduliChangeBaseMap (AlgebraicGeometry.specULiftZIsTerminal.from S) f) (moduliChangeBaseMap (AlgebraicGeometry.specULiftZIsTerminal.from S) g)), e.toFunctor.IsEquivalence ∧ (∀ x, (e.obj x).obj = x.obj) ∧ (∀ (x y) (a : x ⟶ y), HEq (e.map a).hom a.hom)) ∧ (∀ (F : BasedCategory.{v₁, w₁} (Over S)), IsAlgebraicModuliStack F → (IsQuasiCompactModuli F ↔ IsQuasiCompactModuli (moduliChangeBase (AlgebraicGeometry.specULiftZIsTerminal.from S) F))) ∧ (∀ (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (f : BasedFunctor F G), IsAlgebraicModuliStack F → IsAlgebraicModuliStack G → (IsQuasiCompactAlgebraicModuliMap.{u, v₁, w₁, v₂, w₂, v₄, w₄} f ↔ IsQuasiCompactAlgebraicModuliMap.{u, v₁, w₁, v₂, w₂, v₄, w₄} (moduliChangeBaseMap (AlgebraicGeometry.specULiftZIsTerminal.from S) f)) ∧ (IsQuasiSeparatedAlgebraicModuliMap f ↔ IsQuasiSeparatedAlgebraicModuliMap (moduliChangeBaseMap (AlgebraicGeometry.specULiftZIsTerminal.from S) f)))",
+  "branch": "sheaf-dag",
+  "by": "Q141",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical total-category change of base, map and projection; scheme-atlas identification; categories of morphisms of pairs; absolute product and diagonal, which are the existing moduliTwoFiberProduct of the structure maps to the base category and moduliRelativeDiagonal of the structure map (second reading FIX). The theorem gives algebraicity and atlas preservation, the inverse algebraicity test on stacks mapping to S, normalized equivalences of Hom categories, canonical pullback comparison and invariance of stack quasi-compactness and qcqs morphisms. Spec(ULift Z) is the universe-polymorphic integer spectrum.",
+  "fixed_by": "NT-stage2-cc-908e8cc3e"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-908e8cc3e",
+  "group": "Q141",
+  "result": "fix",
+  "note": "Every clause of the theorem matches the node and Stacks 04X5/04X6, and it is unchanged by the fix. Clause (1): algebraicity, and a given atlas is carried over through a canonical comparison. Clause (2): algebraicity iff for pairs (G, q with q⋙Over.map g = G.p), equivalence of morphism categories normalized on functors and natural transformations, and a canonical comparison of 2-fibre products. Clause (3): qc of stacks, qc and qs of morphisms, same test universes. No hypothesis on S, no hollow definitions, nothing proved beyond sorry. FIX: (H4) moduliProductOverIntegers and moduliDiagonalOverIntegers were a new iso-comma and a hand-made diagonal; replaced by the existing moduliTwoFiberProduct over ofFunctor (𝟭 (Over Spec Z)) (the moduliSelfProduct/moduliBaseStructure convention) and moduliRelativeDiagonal, which the qs predicate itself uses; names and signatures unchanged. Docstrings corrected from 050M to 050L, where the 'think of X, Y over Spec Z' proof of (5)-(8) is. Maintainer note: the node source.place still says 050M (the Q62 stage-1 FIX of this did not land). Accepted: the slice model ofFunctor (Over.map g) of h_S, canonically isomorphic to the representable. Fixed file compiled once with nt_compile --json in 11.4 s, clean; the record file keeps the verbatim statement and passes the refit_record and check_record checks."
+ }
+}

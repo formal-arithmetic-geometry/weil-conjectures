@@ -1,0 +1,239 @@
+{
+ "id": "lem-per-bounded-hom-localization-embedding",
+ "kind": "statement",
+ "title": "Conditional raw localization embedding of a bounded Hom-continuous subcategory",
+ "statement": "Let $\\mathcal S$ be a small site [def-weil-pbc-sites-and-cohomology], $A$ a commutative ring, $t\\in A$, and $R$ a sheaf of commutative $A$-algebras. Use module sheaves and their unbounded derived categories with integer shifts and cohomology [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-derived-cohomology-sheaves]. Put $R_t=R[1/t]$, the sheafified section localization [def-weil-pbc-ringed-section-localization], and let $F:D(R)\\to D(R_t)$ be exact scalar localization $R_t\\otimes_R^L-$, with sheaf tensor [def-pur-sheaf-tensor-product] and its termwise induced triangulated shift comparisons [lem-weil-pbc-exact-functor-derived-functor]. Let $\\mathcal C\\subset D(R)$ be a full $A$-linear subcategory [def-weil-linear-category] stable under all integer shifts, whose objects are bounded below. Suppose each $K\\in\\mathcal C$ has the property that for every small countable family $(M_i)$ in $D(R)$ with a common cohomological lower bound and every $q\\in\\mathbf Z$, the shifted-coprojection map $\\bigoplus_i\\operatorname{Hom}(K,M_i[q])\\to\\operatorname{Hom}(K,(\\bigoplus_iM_i)[q])$ is an isomorphism. Let $Q:\\mathcal C\\to\\mathcal C[1/t]$ be raw scalar localization, with unchanged objects and localized Hom modules, without idempotent completion [def-weil-linear-scalar-localization]. For $K,L\\in\\mathcal C$ and $q\\in\\mathbf Z$, the actual scalar-extension map\n$$\\Phi^q_{K,L}:\\operatorname{Hom}_{D(R)}(K,L[q])[1/t]\\xrightarrow{\\sim}\\operatorname{Hom}_{D(R_t)}(FK,FL[q]),\\qquad f/t^n\\longmapsto t^{-n}F(f)$$\nis an isomorphism of $A[1/t]$-modules, where the target uses the stated shift comparison. These maps are natural in both variables and commute with simultaneous integer shifts. In degree zero they define a fully faithful $A[1/t]$-linear functor [def-weil-linear-functor] $J:\\mathcal C[1/t]\\to D(R_t)$ with $J(QK)=FK$ and $J(f/t^n)=t^{-n}F(f)$. Explicitly, precomposition by an integral arrow $a$ sends $\\Phi(f/t^n)$ to $t^{-n}F(f)F(a)$, postcomposition by $b$ sends it to $F(b)t^{-n}F(f)$, and simultaneous shift by $r$ sends it to $t^{-n}F(f)[r]$ under the canonical identifications. Identities and composable fractions satisfy $J(1/1)=1$ and\n$$J((g/t^m)\\circ(f/t^n))=t^{-(m+n)}F(gf)=(t^{-m}F(g))(t^{-n}F(f)).$$\nThese formulas apply to every localized morphism; no essential-surjectivity assertion is included.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), full-faithfulness implication from Lemma 6.8.12, pp. 61-62; abstract conditional formulation of retained proof steps 3-4 of lem-per-constructible-rational-hom-comparison (human re-split order, 2026-10-22)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-ringed-section-localization",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-linear-scalar-localization",
+  "def-weil-linear-category",
+  "def-weil-linear-functor"
+ ],
+ "proof": [
+  {
+   "text": "Fix $K,L\\in\\mathcal C$ and $q\\in\\mathbf Z$. Apply [lem-weil-pbc-scalar-localization-derived-hom] on the given small site with the same $A,t,R,R_t,F$. Its countable common-lower-bound Hom hypothesis is exactly the assumption on $K$, and its bounded-below target hypothesis holds for $L$. Its termwise exact scalar-localization functor is the stipulated $F$, including its shift comparisons. It therefore gives the required $A[1/t]$-linear isomorphism $\\Phi^q_{K,L}$ with $f/t^n\\mapsto t^{-n}F(f)$, natural in both variables and compatible with shifts.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), full-faithfulness sentence, pp. 61-62; explicit abstract conditional assembly"
+   }
+  },
+  {
+   "text": "Write $H=\\operatorname{Hom}_{\\mathcal C}(K,L)=\\operatorname{Hom}_{D(R)}(K,L)$, using fullness. Identify the raw Hom $H\\otimes_AA[1/t]$ of [def-weil-linear-scalar-localization] with $H[1/t]$: the maps are $h\\otimes(a/t^n)\\mapsto ah/t^n$ and $h/t^n\\mapsto h\\otimes t^{-n}$. The first respects tensor balancing by [def-weil-module-base-change]. For the second, the fraction relation of [def-weil-pbc-module-localization-away] gives $t^k(t^mh-t^nh\\prime)=0$; multiplying its tensor by $t^{-(k+n+m)}$ gives $h\\otimes t^{-n}=h\\prime\\otimes t^{-m}$. The two maps are inverse on generators and fractions. Thus every raw morphism is a fraction (a finite sum uses one common power denominator).",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 07JZ (definition-localization-module), 07K0 (lemma-universal-property-localization-module), 00CX (lemma-tensor-product): explicit tensor/fraction formulas"
+   }
+  },
+  {
+   "text": "The naturality and shift clauses of [lem-weil-pbc-scalar-localization-derived-hom] apply to the maps in Step 1. More explicitly, for integral arrows $a:K\\prime\\to K$ and $b:L\\to L\\prime$, $\\Phi^q((fa)/t^n)=t^{-n}F(f)F(a)$ and $\\Phi^q((b[q]f)/t^n)=F(b)[q]t^{-n}F(f)$. Under the stipulated shift identifications $\\Phi^q_{K[r],L[r]}(f[r]/t^n)=t^{-n}F(f)[r]$. Here the shifted objects remain in $\\mathcal C$ by shift stability. The displayed formulas are obtained by functoriality and linearity from the fraction formula, so also give the asserted equations in every degree.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-derived-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), full-faithfulness sentence, pp. 61-62; explicit abstract conditional assembly"
+   }
+  },
+  {
+   "text": "Set $J(QK)=FK$ and let its Hom map be $\\Phi^0_{K,L}$ through Step 2. It is well-defined and $A[1/t]$-linear by Step 1. The composition and identity formulas of [def-weil-linear-scalar-localization], together with functoriality of $F$, give $J(1/1)=F(1)=1$ and $J((g/t^m)\\circ(f/t^n))=t^{-(m+n)}F(gf)=(t^{-m}F(g))(t^{-n}F(f))$. Every morphism has such a fraction representative by Step 2. These equations define a functor, linear in the sense of [def-weil-linear-functor]. Every Hom map is bijective by Step 1 at $q=0$, hence $J$ is fully faithful. Its codomain is the ambient $D(R_t)$.",
+   "uses": [
+    "def-weil-linear-scalar-localization",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), full-faithfulness sentence, pp. 61-62; explicit abstract conditional assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-functor",
+  "def-weil-linear-scalar-localization",
+  "def-weil-module-base-change",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-scalar-localization-derived-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), pp. 61-62, full faithfulness via Lemma 6.8.12; abstract conditional specialization of the existing scalar-localization-derived-hom theorem, with explicit tensor/fraction and category-law calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localization.*[Ff]ully[Ff]aithful|[Ff]ully[Ff]aithful.*localization|scalar.*localization",
+   "results": "4 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean. Generic localization and linear functor results do not derive the ringed-site comparison from common-lower-bound Hom continuity or give this raw-subcategory embedding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Linear",
+   "results": "4 hits: CategoryTheory.Functor.linear_of_full_essSurj_comp, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj, CategoryTheory.full_linearCoyoneda, CategoryTheory.full_linearYoneda. Generic localization and linear functor results do not derive the ringed-site comparison from common-lower-bound Hom continuity or give this raw-subcategory embedding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a full shift stable subcategory of bounded below ringed site derived objects whose Hom commutes with countable uniformly bounded below sums, exact scalar localization is fully faithful after raw scalar rationalization with coherent fraction maps",
+   "results": "8 hits: CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CondensedMod.LocallyConstant.instFullModuleCatFunctor, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.Shift.linear_of_localization, DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.Localization.functor_linear_iff. Generic localization and linear functor results do not derive the ringed-site comparison from common-lower-bound Hom continuity or give this raw-subcategory embedding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization of a full shift closed subcategory of bounded below derived sheaf modules with countable Hom continuity yields fully faithful raw rational realization with natural shifted fraction comparison",
+   "results": "8 hits: DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt, CategoryTheory.Localization.instLinearLocalizationQ, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, CategoryTheory.HasShift.localized, CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ, CategoryTheory.HasShift.localization', CategoryTheory.HasShift.localization. Generic localization and linear functor results do not derive the ringed-site comparison from common-lower-bound Hom continuity or give this raw-subcategory embedding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical maps u divided by t to a power sent to t inverse times F u identify localized shifted Hom and commute with composition and shifts for a full bounded subcategory on a ringed site",
+   "results": "8 hits: CategoryTheory.Localization.SmallShiftedHom.shift, CategoryTheory.Localization.SmallShiftedHom.comp_assoc, CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.SmallShiftedHom.comp, CategoryTheory.LocalizerMorphism.smallShiftedHomMap_mk, CategoryTheory.Localization.SmallHom.shift, CategoryTheory.Localization.SmallShiftedHom.postcompEquiv_apply, CategoryTheory.Localization.SmallShiftedHom.mk₀Inv_comp_mk₀. Generic localization and linear functor results do not derive the ringed-site comparison from common-lower-bound Hom continuity or give this raw-subcategory embedding.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*localization|localization.*fullyFaithful",
+   "results": "2 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Localization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic localization, exact-functor linearity or forgetful/locally-constant functors, not the stated derived sheaf Hom-continuity embedding"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Linear",
+   "results": "4 hits: CategoryTheory.Functor.linear_of_full_essSurj_comp, CategoryTheory.Functor.linear_comp_iff_of_full_of_essSurj, CategoryTheory.full_linearCoyoneda, CategoryTheory.full_linearYoneda",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic localization, exact-functor linearity or forgetful/locally-constant functors, not the stated derived sheaf Hom-continuity embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension on a ringed site gives a fully faithful functor from the raw scalar localization of a bounded below Hom continuous full derived subcategory",
+   "results": "8 hits: CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules, SheafOfModules.fullyFaithfulForget, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CondensedMod.LocallyConstant.instFullModuleCatFunctor, DerivedCategory.instFullSingleFunctor, LightCondMod.LocallyConstant.instFullModuleCatFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic localization, exact-functor linearity or forgetful/locally-constant functors, not the stated derived sheaf Hom-continuity embedding"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of derived Hom for sheaves with countable bounded below coproduct continuity gives a fully faithful rational realization",
+   "results": "8 hits: HasDerivedCategory.standard, CategoryTheory.hasExt_of_hasDerivedCategory, LightCondSet.LocallyConstant.functorFullyFaithful, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CondensedSet.LocallyConstant.functorFullyFaithful, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic localization, exact-functor linearity or forgetful/locally-constant functors, not the stated derived sheaf Hom-continuity embedding"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom modules localized at a central scalar are isomorphic to Hom after extending sheaf coefficients if the source commutes with countable uniformly bounded below direct sums",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply, ModuleCat.Tilde.toOpen, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern generic localization, exact-functor linearity or forgetful/locally-constant functors, not the stated derived sheaf Hom-continuity embedding"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-constructible-rational-hom-comparison",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Compactness verifies the rational derived Hom comparison. Retained item proof steps 4. Retained proof steps 3-4: abstract localization specialization, normalized fraction equations and ambient full faithfulness.",
+   "via": [
+    "lem-per-constructible-rational-hom-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-bounded-hom-localization-embedding",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Reused the existing arbitrary-ringed-site scalar-localization-derived-Hom theorem; checked its actual map, boundedness and continuity hypotheses. Wrote the tensor-to-fraction identification, pre/postcomposition and simultaneous-shift formulas, and the raw category functor laws explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "lem-per-smooth-pullback-t-exact, first proof paragraph, cohomology of smooth pullback: continuous-coefficient realization needed before the ordinary degree calculation. This item realizes the retained localization and fraction-assembly steps 3-4 of lem-per-constructible-rational-hom-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scalar-localization-derived-hom",
+    "why": "Generic scalar-localization comparison for arbitrary small ringed sites with countable bounded-below Hom continuity; this is the existing source of the abstract comparison used by the constructible realization, with no proper-base-change conclusion or replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scalar-localization-derived-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-529a1601a",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-529a1601a (reviewer sub-agent of L); spot-checked: I read all four steps, the cited statements and the source in full. Source: Bhatt–Scholze Lemma 6.8.12 (p.61), and the proof of Prop 6.8.14(2) (pp.61-62), which says full faithfulness follows from 6.8.12. The item is the abstract conditional form of that implication, so proof_origin=agent is right. No SGA is used. The delivery has 0 new nodes and touches only the item node and the report. Step 1 applies lem-weil-pbc-scalar-localization-derived-hom with identical S, A, t, R, R_t and F (termwise exact R_t⊗−, ordinary unbounded D(R)→D(R_t), no change of coefficient category). Its countable common-lower-bound continuity hypothesis is assumed for K, and L is bounded below by membership in C. Step 2 identifies Hom⊗_A A[1/t] with Hom[1/t]. I rechecked balancing, the A[1/t] fraction relation, and inverse well-definedness: t^k(t^m h−t^n h')=0 gives h⊗t^{-n}=h'⊗t^{-m} through the denominator t^{k+n+m}; additivity holds with the common denominator. Step 3's pre/postcomposition and shift formulas follow from F's functoriality and commShift naturality, and shift-stability keeps the objects in C. Step 4: J(1/1)=1 and composition t^{-(m+n)}F(gf) by A[1/t]-bilinearity in D(R_t); full faithfulness is Φ^0 bijective, with no essential surjectivity claimed. Edge cases checked: t=1, t nilpotent (both sides zero), t a zero-divisor, empty C or zero objects, unequal lower bounds. The item is not a duplicate: the cited theorem gives only the pairwise Hom isomorphisms, and the item additionally builds the functor on the raw localized category; its only citer is the parent lem-per-constructible-rational-hom-comparison, step 2. Accepted tool_use: lem-weil-pbc-scalar-localization-derived-hom (unit sk-thm-properbasechange), a generic black-box ringed-site comparison already in the parent's tool_uses and requested in split_report.tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BoundedHomLocalizationEmbedding",
+  "declaration": "CategoryTheory.boundedHomLocalizationEmbedding",
+  "declarations": [
+   "CategoryTheory.RawScalarLocalizationEmbedding",
+   "CategoryTheory.boundedHomLocalizationEmbedding"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/BoundedHomLocalizationEmbedding.lean",
+  "statement": "theorem boundedHomLocalizationEmbedding (A : Type v) [CommRing A] (R : Sheaf J CommRingCat.{u}) (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t))))] (E : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤ ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t)))) (hE : ∀ M, E.obj M = SheafOfModules.changeOfRings (ringedLocalizationRingUnit R (a t)) M) (hmap : ∀ {M N} (f : M ⟶ N), E.map f = eqToHom (hE M) ≫ SheafOfModules.changeOfRingsHom (ringedLocalizationRingUnit R (a t)) M f ≫ eqToHom (hE N).symm) [E.Additive] [PreservesFiniteLimits E] [PreservesFiniteColimits E] (P : ObjectProperty (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))) (hshift : ∀ (K : DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))), P K → ∀ r : ℤ, P (K⟦r⟧)) (hbounded : ∀ K, P K → ∃ b : ℤ, K.IsGE b) (hcontinuous : ∀ K, P K → DerivedCategory.CountableBoundedBelowHomContinuous K) : (fun [_iA : Linear A (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))] [_iT : Linear (Localization.Away t) (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRing R (a t)))))] ↦ scalarLocalizationHomComparison A t E.mapDerivedCategory P P ∧ RawScalarLocalizationEmbedding A t E.mapDerivedCategory P) (_iA := scalarLocalizationDerivedLinear A R a) (_iT := scalarLocalizationDerivedLinear (Localization.Away t) (ringedLocalizationRing R (a t)) (scalarLocalizationCoefficientMap A R a t))",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37d53a9e2",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Only the item's lean field changed; the ten stmt_dep records are byte-identical to live and lean.statement matches the file verbatim. All clauses match the node. Hypotheses: R as an A-algebra via a : A →+* sections; R_t = ringedLocalizationRing; E fixed to changeOfRings on objects and maps (exactness instances as in the landed dependency theorem); P full, closed under every integer shift, each object with its own lower bound; CountableBoundedBelowHomContinuous read (ℕ-indexed families, finite and empty families via zero padding). First conjunct is the landed scalarLocalizationHomComparison restricted to P×P (fraction formula with commShiftIso, naturality, identity, graded composition, simultaneous shift). Second conjunct: ∃ J out of ScalarLocalization with hobj, Additive, Linear, Full, Faithful, the fraction formula, every arrow a single fraction (so J is fully determined), J(1/1)=1, and composition with exponent m+n in Lean's left-to-right order. No essential surjectivity and no extra hypotheses. Edge cases checked: t=0, nilpotent, unit, zero divisor; empty P; any q, r. No duplicate generic functor out of ScalarLocalization exists. Docstrings carry the source place, the blueprint id and the four proof steps; the only proof is sorry; the helper is a Prop with no data. Advisory: the statement uses declarations owned by nodes outside stmt_deps (scalarLocalizationHomComparison from the theorem lem-weil-pbc-scalar-localization-derived-hom; def-weil-pbc-countable-bounded-below-hom-continuity; def-weil-pbc-scalar-localization-coefficient-actions); stmt_deps are unchanged from stage 1 and S2 cannot add them. Advisory: the second reading was written by the author. No compile run, since no file was changed; the worker reports clean compiles (20.3 s and 16.3 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261024T204553-L-3796296",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.boundedHomLocalizationEmbedding"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "lem-coef-weil-left-exchange-compatibility",
+ "kind": "statement",
+ "title": "Normalized compact-support exchanges commute with coefficient passage",
+ "statement": "Fix $D,\\ell,\\Omega,X_0,Y_0,f_0,c_0$ as in [def-coef-verdier-weil-data]. Given an actual duality $B_X$ with its internal-Hom and exceptional-unit dualizing identifications [def-sf-common-stage-verdier-data], one can choose $B_Y$ with the same identifications, a coefficient Weil-duality record $W_Y$ on $B_Y$ satisfying DualizingNormalization, and an actual exceptional system $A$ with its exceptional-duality formula. For every coefficient Weil-duality records $W_X,W_Y$ on these dualities there are left Frobenius exchange isomorphisms with the finite and common canonical realization normalizations, and their finite-scalar and stage-inclusion squares commute on all underlying objects. The statement is existential in the exceptional system: its realization isomorphisms and coefficient comparisons are chosen together from the normalized construction. It asserts no right Frobenius exchange or Weil unit/counit equation.",
+ "stmt_deps": [
+  "def-coef-verdier-weil-data",
+  "def-sf-common-stage-verdier-data",
+  "def-weil-frobenius-square-exchange"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Proof paragraphs 1–3; Normalized compact-support exchanges commute with coefficient passage"
+ },
+ "proof": [
+  {
+   "text": "Use the normalized construction of [thm-coef-qbar-verdier] and [thm-coef-rational-verdier] to choose the relative exceptional system and its exceptional-duality formula from the same coefficient models. Keep its coherent finite compact-support realizations. Conjugate the canonical rational exchange by these realizations. Its inverse exists by [lem-coef-frobenius-exchange-equivalence], and conjugating back gives the finite normalization.",
+   "uses": [
+    "lem-coef-frobenius-exchange-equivalence",
+    "def-sf-common-stage-verdier-data",
+    "thm-coef-qbar-verdier",
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose $B_Y$ by the same normalized construction, with the natural Koszul signed symmetry at every finite field. The one-scheme argument of [lem-coef-weil-normalized-duality] applies to this $B_Y$: the inverse-Frobenius pullbacks are equivalences [lem-pod-isomorphism-field-transport], the structure-morphism mate [lem-weil-mate-iso-along-equivalences] on the coefficient unit gives the dualizing structure, and the evaluation-normalized internal-Hom comparison [lem-pod-geometric-frobenius-internal-hom-comparison] with the injective transpose [lem-coef-completed-tensor-hom-transpose] gives $W_Y$ with its dualizing normalization.",
+   "uses": [
+    "lem-coef-weil-normalized-duality",
+    "lem-pod-isomorphism-field-transport",
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-pod-geometric-frobenius-internal-hom-comparison",
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The whole-system scalar/exchange square of [def-weil-operation-exchange-coefficient-descent] commutes before taking inverse limit and localization. Conjugate this square by the scalar-normalized realizations of A to obtain the displayed finite scalar equation, including identity inclusions.",
+   "uses": [
+    "def-weil-operation-exchange-coefficient-descent",
+    "def-sf-common-stage-verdier-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the exchanges and their inverses through the prescribed left-inclusion comparisons of A. A common-stage arrow is represented at a common finite field [def-weil-algebraically-closed-coefficients]; the scalar equation proves independence and naturality. Their component formula agrees with the canonical commonStageExchange. Substituting the stageNormalized components of W_X and W_Y gives the stage square.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-operation-exchange-coefficient-descent",
+    "def-coef-verdier-weil-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-frobenius-exchange-equivalence",
+  "def-sf-common-stage-verdier-data",
+  "thm-coef-qbar-verdier",
+  "thm-coef-rational-verdier",
+  "def-weil-operation-exchange-coefficient-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "def-coef-verdier-weil-data",
+  "lem-coef-weil-normalized-duality",
+  "lem-pod-isomorphism-field-transport",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-pod-geometric-frobenius-internal-hom-comparison",
+  "lem-coef-completed-tensor-hom-transpose"
+ ],
+ "proof_origin": {
+  "by": "V3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Normalized compact-support exchanges commute with coefficient passage"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural compact support Frobenius exchange commutes with extension of coefficient fields and descends to the common coefficient category",
+   "results": "8 hits, including ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp, comonadicExtendScalars, and field Frobenius identities. No constructible-sheaf compact-support normalization result.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; the project geometric exchange interface is needed"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits in Mathlib.CategoryTheory.Adjunction.Mates, including mateEquiv, unit_mateEquiv, mateEquiv_counit and mateEquiv_vcomp. These supply the generic mate calculus, not the geometric or coefficient normalizations.",
+   "date": "2026-10-25",
+   "verdict": "generic mate calculus reused; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|Verdier|mateEquiv|IsoAlgebra",
+   "results": "Search restricted to Mathlib/CategoryTheory/Adjunction: 5 hits in Mathlib/CategoryTheory/Adjunction/Mates.lean, lines 53, 84, 123, 124, 128. Direct project rg searches also read the coefficient duality, exchange, and IsoAlgebra interfaces.",
+   "date": "2026-10-25",
+   "verdict": "no exact geometric statement; reuse the project definitions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefVerdierWeilEquivariance",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Proof paragraphs 1–3; Normalized compact-support exchanges commute with coefficient passage",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefWeilLeftExchangeCompatibility",
+  "file": "lean/Sheaf/SixFunctors/CoefWeilLeftExchangeCompatibility.lean",
+  "declaration": "WeilConjectures.CoefVerdierWeil.coef_weil_left_exchange_compatibility",
+  "declarations": [
+   "WeilConjectures.CoefVerdierWeil.CompatibleLeftExchanges",
+   "WeilConjectures.CoefVerdierWeil.LeftExchanges",
+   "WeilConjectures.CoefVerdierWeil.coef_weil_left_exchange_compatibility",
+   "WeilConjectures.CoefVerdierWeil.scalarLeftExchangeLaw",
+   "WeilConjectures.CoefVerdierWeil.stageLeftExchangeLaw"
+  ],
+  "statement": "theorem coef_weil_left_exchange_compatibility\n    (c₀ : Compactification f₀.left) (BX : FiberDuality D l hl Ω X₀)\n    (hIX : Nonempty (FiberInternalHom D l hl Ω X₀ BX))\n    (hωX : FiberDualizing D l hl Ω X₀ BX) :\n    ∃ (BY : FiberDuality D l hl Ω Y₀)\n      (A : FiberExceptional D l hl Ω X₀ f₀\n        (FrobeniusExchange.geometricCompactification D f₀ c₀)),\n      Nonempty (FiberInternalHom D l hl Ω Y₀ BY) ∧\n      FiberDualizing D l hl Ω Y₀ BY ∧\n      Nonempty (FiberExceptionalFormula D l hl Ω X₀ f₀\n        (FrobeniusExchange.geometricCompactification D f₀ c₀) BX BY A) ∧\n      (∃ WY : Coefficients D l hl Ω Y₀ BY, DualizingNormalization D l hl Ω Y₀ BY WY) ∧\n      ∀ (WX : Coefficients D l hl Ω X₀ BX) (WY : Coefficients D l hl Ω Y₀ BY),\n        Nonempty (LeftExchanges D l hl Ω X₀ f₀ c₀ A WX WY)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery c479 Lean/JSON byte-identical to 4fd08 (whose FIX never landed: report fix name refused); holes vs IntegralVerdier.SignedSymmetry (still unpinned in clone 03f3c71); 5 modules + 3 direct importers compiled"
+ }
+}

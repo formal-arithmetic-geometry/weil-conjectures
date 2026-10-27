@@ -185,7 +185,56 @@
   "def-weil-pbc-qbar-category"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.HasDirectImageWeightBound.isMixedOfWeightsAtMost_derivedLowerShriek",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.FormalSteps",
+     "lines": [
+      167,
+      181
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.map_of_forall_toComplex",
+     "module": "WeilConjectures.DeligneLaumon.Reduction.Weights",
+     "lines": [
+      498,
+      587
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
+     "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
+     "lines": [
+      405,
+      415
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sf-adic-affine-direct-image-finiteness"
+     ],
+     "below": false
+    }
+   ]
+  }
+ },
  "chapter": "sec-deligne-laumon-general",
  "unit": "sk-thm-dl-general-sheaf",
  "lean": {
@@ -262,5 +311,32 @@
   "group": "Q155",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-f9e5daf30 (reviewer sub-agent of L); spot-checked: Read the full mathematics of the item and checked the cited statements against the main-20261015 blueprint proof. The statement is verbatim the blueprint's. The finite truncation-tower induction correctly realizes the bounded spectral-sequence argument. The removed blueprint citations (torsion Rf_* hypercohomology filtrations; vector-space bounds) really did not apply. Step 1 checks the quasi-separated finite-type domains (via the Noetherian lemmas) for lem-zl-field-shriek-lower-bound and the shift lemma. The coefficients are Qlb common-stage and f_k = f_0 x k. In step 3 the index arithmetic (w+b)+(n-b) holds, the n-b<0 case is the lower-bound clause and the zero sheaf gets the empty filtration. Steps 4-5 use clause (5) of the heart lemma, the images of Weil maps, and clauses (1) and (2) of lem-a1-mixed-direct-summand. Edge cases tested: K=0, a single shifted sheaf, non-integral w. There are no new nodes and no duplicates (cor-zl-rfshriek-sheaf, lem-zl-complex-extension and lem-zl-complex-retract are different statements). Batch-5 check: sk-d-dl-general-weights (a general definition), lem-zl-weil-shriek-shift-compatibility (general pullback composition), lem-a1-mixed-direct-summand (local Frobenius well-definedness, already reached through def-weil-punctual-weights) and prop-constructible-truncations are accepted. prop-weil-operations is NOT accepted. Its duality and purity clauses add 1418 nodes to the closure, including the smooth-purity theorem chain, the PD pairing route (thm-pod-equivariance-of-the-twisted-pairing, prop-pod-degree-of-the-pairing) and thm-trf-frobenius-fixed-points, while the item uses only the Rf_! and truncation lifts. Fixed: steps 1 and 4 now cite lem-fix-weil-operations (canonical structure Rf_!(theta) composed with Ex_!, with naturality of Ex_! written out). Step 2 derives the truncation lifts from prop-constructible-truncations and the uniqueness in clause (1) of lem-weil-heart-short-exact-triangles. proof_deps and tool_uses are updated. After the fix the closure contains no PD, trace-formula or purity theorem and no nt-assume leaf; none is needed, because the item uses neither assumption. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Suppose that, for a separated finite-type map $f:X_0\\to Y_0$, every\nmixed constructible $\\Qlb$-Weil sheaf $\\mathcal F$ ([sk-lem-coefficient-heart],\n[def-weil-weil-sheaf-complex]) of weights at most $v$ has\n$R^af_!\\mathcal F$ mixed of weights at most $v+a$, for every $a$.\nThen $Rf_!$ carries $D_{\\le w}(X_0)$ into $D_{\\le w}(Y_0)$; here\n$D_{\\le w}$ consists of Weil complexes $K\\in\\Dbc(-,\\Qlb)$\n([det-def-sfb-bounded-constructible], [sk-def-sf-weil-complexes]).",
+  "proof": [
+   {
+    "text": "Apply the hypercohomology spectral sequence provided by the truncation\nconstruction of [thm-sp-truncation-e2] and the\nexact triangulated functor $Rf_!$ of [prop-functor-package]:\n\n$$\nE_2^{a,b}=R^af_!\\bigl(\\mathcal H^b(K)\\bigr)\n\\quad\\Longrightarrow\\quad \\mathcal H^{a+b}\\bigl(Rf_!K\\bigr),\n$$\n\nwith the finite image filtration of\n[lemma-weil-pbc-hypercohomology-convergence]. Its terms are\nconstructible $\\Qlb$-sheaves ([sk-lem-coefficient-heart]); the Weil\nstructure of $K$ induces Weil structures on them, and the differentials\nand filtration are Frobenius-compatible, because the truncation\ntriangles are functorial and $Rf_!$ commutes with the Frobenius base\nchange isomorphisms ([sk-def-sf-weil-complexes]). By\n[def-weil-complex-weights], each $\\mathcal H^b(K)$ is\n$\\iota$-mixed of weights at most $w+b$; by the hypothesis of the\nlemma every $E_2^{a,b}$ is mixed of weights at most $w+a+b$. Every\nlater page $E_{r+1}^{a,b}$ is a subquotient of $E_r^{a,b}$, and the\nabutment $\\mathcal H^n(Rf_!K)$ is filtered with graded pieces\n$E_\\infty^{a,b}$, $a+b=n$; the subquotient and extension bounds of\n[lem-a1-subquotient-extension-bounds], [lem-a1-extension-bounds]\n(stalkwise, with the\npunctual weight convention of\n[def-weil-punctual-weights]) show that $\\mathcal H^n(Rf_!K)$ is\n$\\iota$-mixed of weights at most $w+n$, i.e. $Rf_!K\\in D_{\\le w}(Y_0)$\nby [def-weil-complex-weights].",
+    "uses": [
+     "thm-sp-truncation-e2",
+     "prop-functor-package",
+     "lemma-weil-pbc-hypercohomology-convergence",
+     "sk-lem-coefficient-heart",
+     "sk-def-sf-weil-complexes",
+     "def-weil-complex-weights",
+     "lem-a1-subquotient-extension-bounds",
+     "lem-a1-extension-bounds",
+     "def-weil-punctual-weights"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

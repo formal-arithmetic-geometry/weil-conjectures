@@ -1,0 +1,29 @@
+# Worker report
+
+1. Files written: `dag/nodes/sec-trace-formula/lem-trf-space-enlarged-cover-module-kernel.json` (statement, split; no whole-item Mathlib match) and `citations.json`. No new nodes, no Mathlib leaves.
+2. Attachments: none. Searched `lean/WeilConjectures/` for the blueprint tag and enlarged-cover/module-kernel terminology; no project declaration states this item.
+3. WANTED: none.
+4. The item was statement-only and needed its argument. The statement is unchanged. The three evaluation presheaves being sheaves is an explicit hypothesis, never inferred from arbitrary functors. No surjectivity onto the overlap term is claimed. The singleton equalizer and sectionwise module-kernel ingredients already exist in the DAG and are reused, rather than manufactured as new nodes.
+5. Nothing unfinished in this one-level split.
+
+## Sources and searches
+
+Read Stacks `spaces-morphisms.tex`, Tag 03M8, label `lemma-compute-pushforward`, including its entire proof. This is exactly the sectionwise singleton-cover argument and its final functoriality sentence. Read `sites.tex`, Tags 00VM and 00VN, labels `definition-sheaf-sets` and `equation-sheaf-condition`, and `sites-modules.tex`, Tag 03CV, label `definition-sheaf-modules`, and Tag 03DA, label `lemma-abelian`. The module linearity and unique-antecedent checks spell out the final sentence of 03M8.
+
+Read the chapter and unit records and current `literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.md`. The present item is a generic descent tool extracted along its existing ancestor chain, not a replacement of the unit's contracting-correspondence proof. Whole-blueprint searches for `singleton cover`, `equalizer`, `module kernel`, and `matching sections`, and a whole-DAG statement search for singleton covers, sheaf equalizers, and pointwise kernels found the existing covering-family sheaf criterion and module-category node. No new node is needed; no duplicate pairs to justify.
+
+All new Mathlib searches were run through msearch.py and preserved verbatim from searches.jsonl in the item. Both natural-language phrasings were tried. Read `CategoryTheory.Presieve.isSheafFor_singleton` at Mathlib/CategoryTheory/Sites/IsSheafFor.lean:984: it is the set-valued singleton matching condition, not the whole module-sheaf family statement. Read the module presentation definitions and constructions in Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:40 and 74, and the compatible-scalar-family lemmas in Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean:78 and 95. These concern presentations or module sheafification, not this item. The reported Mayer-Vietoris name was not present in the pinned source, so it was not accepted as a match. No search result is claimed as a whole-item attachment.
+
+## Review by NQ
+
+I checked the split against delivery-errors B through E with the source and the cited node statements open. There are no new statement-only nodes to audit. All notation and hypotheses are introduced by the original item, including size, compatible ring maps, functorial covers and the sheaf assumptions. The proof stays on the 03M8 route.
+
+Step 1 uses exactly the semilinear-restriction and componentwise-linear-morphism clauses of `def-weil-sheaf-of-modules-category`. The scalar on Q is independent of which projection is used because their composites with c are equal. Naturality of c and the projections supplies the restriction squares. This is a direct substitution into the module-sheaf definition.
+
+Step 2 uses the same definition to pass to the underlying abelian sheaf and `lem-weil-pbc-pretopology-sheaf-condition`, whose statement explicitly gives the covering-family equalizer in abelian groups. The singleton cover and its overlap Q are hypotheses here. I checked that its site and pullback hypotheses are available in the stipulated enlarged etale site; no atlas scheme assumption or continuous-functor hypothesis is introduced. Initially the proof also cited the enlarged-site model for fibre-product existence; I removed that unnecessary citation, since the covering and its pullback are already specified in the item and the generic site criterion is sufficient.
+
+Step 3 uses only injectivity, the unique antecedent from step 2, and the linearity from step 1. Its displayed additions and scalar calculation prove linearity of the inverse rather than assuming that a bijection is linear. Step 4 writes the two naturality equations explicitly, first for a morphism of base-site objects, then for a coefficient-module morphism. In the second equation the target module is required to satisfy the same evaluation-sheaf assumptions, precisely the domain on which the asserted construction is defined. No base-change theorem is hidden here.
+
+Step 5 uses the explicit sectionwise-kernel clause of `def-weil-sheaf-of-modules-category` and its abelian-category clause, not merely its definition of an object. These identify K(V), and the preceding inverse maps assemble directly to a sheaf isomorphism. The kernel property is the exactness assertion at the first two nonzero terms. All four citation uses have verbatim statement quotes in citations.json. Every step is below 2000 characters and the complete assembly argument is below 3000 characters.
+
+I tested the identity cover (both overlap maps agree and K=H_Z=H_W), the zero module (all maps zero between zero sheaves), the empty object with its sheaf-forced zero module sections, and a nontrivial covering (uniqueness is required and supplied by the sheaf axiom). The overlap difference generally need not be surjective; the proof makes no such inference. No hypotheses have been added, removed or weakened, and there is no statement dispute. The arguments in steps 1, 3 and 4 are elementary calculations from cited definitions and the established equalizer; steps 2 and 5 explicitly cite the non-elementary facts.

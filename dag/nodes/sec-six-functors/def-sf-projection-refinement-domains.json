@@ -1,0 +1,115 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectionRefinementDescent",
+  "date": "2026-10-26",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Refinement and compactification independence; lem-sf-projection-refinement-descent",
+   "via": [
+    "lem-sf-projection-refinement-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]efinement|[Rr]efinement.*projection",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of these fixed-scalar constructions; the original constructions are relocated verbatim."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula compatibility with compactification refinement and descent by a common refinement cocycle",
+   "results": "8 hits: Profinite.NobelingProof.projRestricts_eq_comp, Profinite.NobelingProof.proj_comp_of_subset, Profinite.NobelingProof.proj_eq_of_subset, Profinite.IndexFunctor.map_comp_π_app, Profinite.NobelingProof.projRestricts_comp_projRestrict, LightProfinite.proj_comp_transitionMapLE', Profinite.NobelingProof.ProjRestricts, LightProfinite.proj_comp_transitionMap",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of these fixed-scalar constructions; the original constructions are relocated verbatim."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.essImage.liftFunctorCompIso",
+   "results": "3 hits: CategoryTheory.Functor.essImage.liftFunctorCompIso, CategoryTheory.Functor.essImage.liftFunctorCompIso_hom_app, CategoryTheory.Functor.essImage.liftFunctorCompIso_inv_app",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of these fixed-scalar constructions; the original constructions are relocated verbatim."
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Refinement sentence and existing detailed proof of lem-sf-projection-refinement-descent"
+ },
+ "id": "def-sf-projection-refinement-domains",
+ "kind": "definition",
+ "title": "Fixed-scalar coefficient inputs and witnessed refinement maps",
+ "statement": "At positive coefficient level n+1, put A=ULift(O_E/(t^(n+1))). On the fixed-scalar pro-etale derived category define boundedConstructible and finiteTor by pulling back the intrinsic predicates through sfIntrinsicDerivedEquivalence. For f:X→Y let tensorInput(K,L)=K tensor Lf*L and image(c)=Rp_*j_!. For an origin O and an actual isomorphism e:fixed(O)≅K, theta(r,K,O,e) is image(c).mapIso(e.symm), followed by the specified refinementComparisonAtWitness, followed by image(d).mapIso(e). The source and target bifunctors restrict the two sides of the actual projection transformation to the full bounded-constructible/finite-Tor input category. refinementLaw asserts PF_c followed by theta on the tensor equals the tensor of theta on K with identity_L followed by PF_d, for every pair of retained witnesses. The coefficientImage, coefficientProjectionSource and coefficientProjectionTarget abbreviations are exactly the native functors at a generic commutative ring. The displayed projection is the existing finiteProjection, definitionally the native projectionMapOfCompactification; generic packaging fixes the categorical instances before substituting ULift(O_E/(t^(n+1))). coefficientProjectionComponent is the evaluation of that same finiteProjection at K,L, with the tensor-image source and image-tensor target declared explicitly before coefficient specialization; it defines no different map.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-exchange-projection",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-refinement-comparison-isomorphism",
+  "lem-sf-proper-open-projection-mate",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Definitions and proof steps preceding finite_descent"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectionRefinementData",
+  "file": "lean/Sheaf/SixFunctors/ProjectionRefinementData.lean",
+  "declaration": "WeilConjectures.ProjectionRefinementDescent.refinementLaw",
+  "statement": "def refinementLaw {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c d : Compactification f) (r : c.Refinement d)\n    (K : (boundedConstructible l E n X).FullSubcategory)\n    (L : (finiteTor l E n Y).FullSubcategory) : Prop",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.ProjectionRefinementDescent.coefficientFinite",
+   "WeilConjectures.ProjectionRefinementDescent.Coefficient",
+   "WeilConjectures.ProjectionRefinementDescent.boundedConstructible",
+   "WeilConjectures.ProjectionRefinementDescent.finiteTor",
+   "WeilConjectures.ProjectionRefinementDescent.tensorInput",
+   "WeilConjectures.ProjectionRefinementDescent.image",
+   "WeilConjectures.ProjectionRefinementDescent.theta",
+   "WeilConjectures.ProjectionRefinementDescent.source",
+   "WeilConjectures.ProjectionRefinementDescent.target",
+   "WeilConjectures.ProjectionRefinementDescent.refinementLaw",
+   "WeilConjectures.ProjectionRefinementDescent.coefficientImage",
+   "WeilConjectures.ProjectionRefinementDescent.coefficientProjectionSource",
+   "WeilConjectures.ProjectionRefinementDescent.coefficientProjectionTarget",
+   "WeilConjectures.ProjectionRefinementDescent.coefficientProjectionComponent"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-72eab",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261027T021410-L-2765186",
+  "kind": "interface",
+  "note": "independent cc review: finite_descent proof, the moved ProjectionRefinementData declarations (spellings that unfold to the old ones) and the new hole normalized_refinement_inverse, against node lem-sf-projection-refinement-descent, the change record, the 5 new nodes and the published clone; importers FiniteProjectionFromDescent and FiniteProjectionCompactificationSquare compiled OK against the delivered modules"
+ }
+}

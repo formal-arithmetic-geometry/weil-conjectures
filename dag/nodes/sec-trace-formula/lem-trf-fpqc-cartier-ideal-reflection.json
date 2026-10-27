@@ -1,0 +1,248 @@
+{
+ "id": "lem-trf-fpqc-cartier-ideal-reflection",
+ "kind": "statement",
+ "title": "Fpqc reflection of the effective Cartier condition for a specified ideal",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $i:T\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion], and let $\\mathcal I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_T)$ be its quasi-coherent ideal sheaf with its specified inclusion into $\\mathcal O_X$ [def-sbc-closed-immersion-ideal-sheaf]. Let $\\{g_a:Y_a\\to X\\}_{a\\in A}$ be an fpqc covering [def-weil-pbc-fpqc-covering]. Put $T_a=T\\times_XY_a$ and let $q_a:T_a\\to Y_a$ be the projection [def-pc-fibre-product]. Suppose that every ideal $\\mathcal J_a=\\ker(\\mathcal O_{Y_a}\\to(q_a)_*\\mathcal O_{T_a})$ is an effective Cartier ideal [def-nagata-effective-cartier-ideal]. Then the canonical maps $g_a^*\\mathcal I\\to\\mathcal O_{Y_a}$ [def-pc-module-pullback] identify $g_a^*\\mathcal I$ with $\\mathcal J_a$, and $\\mathcal I$ is locally free of rank one as an $\\mathcal O_X$-module, hence an invertible ideal [def-nagata-invertible-ideal] and an effective Cartier ideal. The conclusion allows the unit ideal and requires no reducedness, local Noetherianity or etaleness.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05B2 (lemma-finite-locally-free-descends), with Tag 023T (proposition-fpqc-descent-quasi-coherent) and literature/stacks-project/divisors.tex Tag 01WS (lemma-characterize-effective-Cartier-divisor); the ideal inclusion is retained when applying rank-one descent. Extracted from item proof step 3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-module-pullback",
+  "def-nagata-invertible-ideal",
+  "def-sfb-tensor-pullback-structure-sheaf-map",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Each g_a is flat by [def-weil-pbc-fpqc-covering]. The Mathlib kernel base-change identity Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, transported by pullback symmetry, gives ker(q_a) = I.comap(g_a), with I the specified kernel ideal [def-sbc-closed-immersion-ideal-sheaf]. Apply [lem-pur-ideal-tensor-pullback-comparison] to this ideal. Its canonical factor d is an isomorphism by flatness, and its defining equality is exactly the required equality after composition with the specified inclusion. Taking asIso d supplies the isomorphism in the first conclusion.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-pur-ideal-tensor-pullback-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JU, lemma-fibre-product-immersion (1); modules.tex Tag 01AJ, lemma-exactness-pushforward-pullback"
+   }
+  },
+  {
+   "text": "For each covering ideal J_a, apply the already proved IdealSheafData.IsInvertible.isInvertible_toModules in WeilConjectures.AlgebraicGeometry.EffectiveCartier to its nonzerodivisor local generators [def-nagata-effective-cartier-ideal]. This is the multiplication-by-a-generator construction of Stacks 01WS. Pass from scheme-module invertibility to sheaf-module invertibility by [lem-pc-invertible-sheaf-instance], then use the rank-one equivalence for [def-amb-finite-locally-free-module]. Transport finite local freeness of rank one across the isomorphism from step 1 and the left-adjoint uniqueness isomorphism between tensorPullback(g_a) and pullback(g_a).",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "lem-pc-invertible-sheaf-instance",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01WS, lemma-characterize-effective-Cartier-divisor, proof of (2) implies (1)"
+   }
+  },
+  {
+   "text": "Apply fixed-rank fpqc descent [lem-pc-fpqc-descent] to M=I.toModules and its own canonical descent datum (modulesPseudofunctor.toDescentData g).obj M, with the identity as the comparison isomorphism. The precoverage membership gives covering-sieve membership by Precoverage.generate_mem_toGrothendieck. Step 2 supplies the rank-one condition on each component. Thus the original specified module is finite locally free of rank one. The general descent declaration used here also derives quasi-coherence from the finite locally free covering components; no independent quasi-coherence lemma or compatible choice of bases is required.",
+   "uses": [
+    "lem-pc-fpqc-descent",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 05B2, lemma-finite-locally-free-descends; Tag 023T, proposition-fpqc-descent-quasi-coherent; fixed-rank form in lem-pc-fpqc-descent (2)"
+   }
+  },
+  {
+   "text": "Use the rank-one equivalence [def-amb-finite-locally-free-module] to regard I.toModules as an invertible sheaf-module. At each point choose an affine neighbourhood U and a free generator s [def-sc-local-free-generator], using the proved exists_isFreeGenerator. Set t = I.toModulesι.app U s. If a*t=0, linearity of the ideal inclusion and its injectivity on sections imply a*s=0; freeness of s implies a=0. Hence t is a nonzerodivisor. Every element of I.ideal U lifts to a module section by range_toModulesι_app, and every such section is r*s. Thus I.ideal U is contained in (t). Conversely t lies in I.ideal U, so (t) is contained in it. This proves local regular principality, namely [def-nagata-invertible-ideal] and [def-nagata-effective-cartier-ideal]. This argument includes t=1 and is vacuous on the empty scheme.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-sc-local-free-generator",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-nagata-invertible-ideal",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01WS, lemma-characterize-effective-Cartier-divisor, proof of (1) implies (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-fpqc-covering",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pur-ideal-tensor-pullback-comparison",
+  "def-nagata-effective-cartier-ideal",
+  "lem-pc-invertible-sheaf-instance",
+  "def-amb-finite-locally-free-module",
+  "lem-pc-fpqc-descent",
+  "def-sc-local-free-generator",
+  "def-nagata-invertible-ideal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 05B2, using the existing fixed-rank descent theorem; Divisors 01WS in literature/stacks-project/divisors.tex for the regular-generator and rank-one equivalence. The kernel recognition uses Mathlib ker_fst_of_isClosedImmersion and pullback symmetry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cartier|cartier|IsInvertible.*[Dd]escen|[Dd]escen.*IsInvertible",
+   "results": "0 hits; . Subdirectory: AlgebraicGeometry. These give ring/module flatness, regular-sequence ascent or unrelated ideal data, not fpqc reflection of effective Cartier ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat descent of effective Cartier ideals by descent of finite locally free modules of rank one.",
+   "results": "8 hits; Module.Flat.of_flat_tensorProduct, RingHom.FaithfullyFlat, Module.FaithfullyFlat.toFlat, Module.FaithfullyFlat, Module.Flat.iff_flat_tensorProduct, Module.FaithfullyFlat.of_flat_of_isLocalHom, Module.FaithfullyFlat.recOn, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine. These give ring/module flatness, regular-sequence ascent or unrelated ideal data, not fpqc reflection of effective Cartier ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"IsPrincipal\"",
+   "results": "0 hits; . These give ring/module flatness, regular-sequence ascent or unrelated ideal data, not fpqc reflection of effective Cartier ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal sheaf whose extended ideals define effective Cartier divisors on an fpqc covering is itself locally generated by a nonzerodivisor.",
+   "results": "8 hits; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.IsAffineOpen.mem_ideal_iff, AlgebraicGeometry.exists_of_res_zero_of_qcqs. These give ring/module flatness, regular-sequence ascent or unrelated ideal data, not fpqc reflection of effective Cartier ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a jointly faithfully flat covering, regular locally principal ideal sheaves descend: an ideal is an invertible module if all its pulled back ideals are invertible modules.",
+   "results": "8 hits; Module.flat_of_localized_span, RingTheory.Sequence.IsRegular.of_faithfullyFlat, Module.freeLocus_eq_univ, Module.flat_of_isLocalized_span, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top, Module.flat_of_localized_maximal, RingTheory.Sequence.IsWeaklyRegular.of_flat. These give ring/module flatness, regular-sequence ascent or unrelated ideal data, not fpqc reflection of effective Cartier ideals.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal sheaf is invertible if its pullbacks to an fpqc covering are effective Cartier ideals",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff, AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_isAffine. These concern ideal data or module flatness/freeness, not the complete scheme ideal reflection statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cartier|cartier|[Ii]nvertible.*[Dd]escen|[Dd]escen.*[Ii]nvertible",
+   "results": "0 hits: . Subdirectory: AlgebraicGeometry. These concern ideal data or module flatness/freeness, not the complete scheme ideal reflection statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat descent of locally free rank one ideal sheaves on schemes",
+   "results": "8 hits: Module.Flat.of_flat_tensorProduct, RingHom.FaithfullyFlat, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, Module.FaithfullyFlat.toFlat, Module.FaithfullyFlat, RingHom.FaithfullyFlat.flat, Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top, Module.FaithfullyFlat.instOfNontrivialOfFree. These concern ideal data or module flatness/freeness, not the complete scheme ideal reflection statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"Projective\"",
+   "results": "0 hits: . These concern ideal data or module flatness/freeness, not the complete scheme ideal reflection statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free modules of constant rank descend under faithfully flat base change and an invertible submodule ideal is locally generated by a nonzerodivisor",
+   "results": "8 hits: Module.free_of_flat_of_isLocalRing, Module.free_of_flat_of_finrank_eq, Module.freeLocus_eq_univ, Module.flat_of_isLocalized_span, Module.nonempty_basis_of_flat_of_finrank_eq, Module.flat_of_isLocalized_maximal, Module.Finite.of_localizationSpan', Module.FinitePresentation.exists_free_localizedModule_powers. These concern ideal data or module flatness/freeness, not the complete scheme ideal reflection statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-reduced-cartier-descent",
+  "date": "2026-10-22",
+  "group": "Q153"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof of lem-trf-free-characteristic-regular-boundary, step 10: descent of the effective Cartier property; item proof step 3, from flat pullback of the specified ideal through finite locally free rank-one descent back to regular local generators.",
+   "via": [
+    "lem-trf-etale-reduced-cartier-descent",
+    "lem-trf-free-characteristic-regular-boundary"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-fpqc-cartier-ideal-reflection",
+  "worker": "stage1",
+  "summary": "Four steps: canonical flat tensor-to-ideal identification; local nonzerodivisor generators give rank-one modules; apply existing fpqc fixed-rank descent to the specified quasi-coherent ideal; retain its inclusion to recover nonzerodivisor generators. All needed general results already have nodes; no new nodes. No exact project attachment or Mathlib match. Statement unchanged.",
+  "blueprint": "Serves the effective-Cartier descent subargument of lem-trf-free-characteristic-regular-boundary step 10, extracted through lem-trf-etale-reduced-cartier-descent step 3, under the existing ancestor lem-trf-local-term-locality. The current ancestor proof is the contracting-correspondence route, not the invalid stalk computation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-subscheme-base-change-ideal-image",
+    "why": "General closed-immersion ideal-image computation under arbitrary base change; used only to recognize the specified kernel ideal."
+   },
+   {
+    "node": "lem-pur-ideal-tensor-pullback-comparison",
+    "why": "General tensor-to-extended-ideal comparison and its flat isomorphism clause; does not replace any trace-formula argument."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "General reflection of finite local freeness at fixed rank, clause (2), applied to the specified quasi-coherent ideal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ideal-tensor-pullback-comparison",
+  "lem-pc-fpqc-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-f1e14159a",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-f1e14159a (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and the statement is unchanged. Step 1: Stacks 01JU (schemes.tex:3330) gives that ideal image, matching lem-pc-closed-subscheme-base-change-ideal-image. Together with the flat-isomorphism clause of lem-pur-ideal-tensor-pullback-comparison, the canonical map g_a^*I→O_{Y_a} is injective with image J_a. Step 3: lem-pc-fpqc-descent (2) reflects finite local freeness of a fixed rank for the quasi-coherent kernel ideal I (Stacks 05B2, descent.tex:2005). Step 4: the composite ι∘θ is multiplication by f, so f is a nonzerodivisor generator; this is Stacks 01WS (1)⇒(2), divisors.tex:2403, and it satisfies both the old (locally free rank one) and the current (blueprint_update) definitions of an invertible ideal. If the covering index set is empty, the covering definition forces X empty. FIX: step 2 used 'an open of the cover' with t a nonzerodivisor in O(U), which does not give O_U≅J|_U when U is not affine. It now uses the affine neighbourhoods of the blueprint_update of def-nagata-effective-cartier-ideal and quasi-coherence (it now also cites def-sbc-closed-immersion-ideal-sheaf, already in proof_deps). Edge cases checked: unit ideal, i=id (zero ideal is not Cartier), nonreduced A[t]/(t), and the necessity of flatness. No duplicate in the DAG: lem-pc-flat-pullback-effective-cartier-ideal is ascent only and 062Y concerns relative Cartier divisors. The parent etale-reduced-cartier-descent step 3 uses the item correctly. No SGA source. Accepted tool_uses: the three general picard-framework/purity nodes for ideal image, tensor comparison and fpqc descent.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcCartierIdealReflection",
+  "declaration": "AlgebraicGeometry.fpqc_cartier_ideal_reflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcCartierIdealReflection.lean",
+  "statement": "theorem fpqc_cartier_ideal_reflection {X T : Scheme.{u}} (i : T ⟶ X) [IsClosedImmersion i] {A : Type w} (Y : A → Scheme.{u}) (g : ∀ a : A, Y a ⟶ X) (hg : Presieve.ofArrows Y g ∈ Scheme.fpqcPrecoverage X) (hJ : ∀ a : A, (pullback.snd i (g a)).ker.IsInvertible) : (∀ a : A, ∃ e : (Scheme.Modules.tensorPullback (g a)).obj i.ker.toModules ≅ (pullback.snd i (g a)).ker.toModules, e.hom ≫ (pullback.snd i (g a)).ker.toModulesι = (Scheme.Modules.tensorPullback (g a)).map i.ker.toModulesι ≫ Scheme.Modules.tensorPullbackObjUnitToUnit (g a)) ∧ i.ker.toModules.IsFiniteLocallyFreeOfRank 1 ∧ i.ker.IsInvertible",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05b2c0d5f",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Node diff vs main is only lean + stmt_deps (def-sfb-tensor-pullback-structure-sheaf-map, def-amb-finite-locally-free-module: H2 repairs requested by returns 617f/d792); TeX/proof/proof_deps unchanged; lean.statement verbatim. Clauses match: X,T Scheme.{u}, IsClosedImmersion i, I = i.ker.toModules with toModulesι, fpqc via ofArrows ∈ fpqcPrecoverage with independent index universe w, J_a = (pullback.snd i (g a)).ker, hyp IsInvertible (= affine-local regular principal = effective Cartier); conclusion ∃ iso e with e≫ι_J = tensorPullback.map ι_I ≫ tensorPullbackObjUnitToUnit (independent of the chosen adjunction by naturality), IsFiniteLocallyFreeOfRank 1 (u₁ = Opens universe, determined), IsInvertible. No extra assumptions; empty A, unit ideal, zero ideal, nonreduced cases OK. Docstrings carry the source place and proof steps; sorry only; no definitions. Advisory: toModulesι is covered by the def-sbc owner, no dedicated node. No change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261026T082126-L-2139133",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

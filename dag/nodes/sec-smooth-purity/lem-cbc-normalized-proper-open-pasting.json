@@ -17,43 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Write $h=ir=pk$. Proper maps are separated and of finite type by [def-weil-proper-morphism], hence locally of finite type by [def-weil-finite-type-morphism]. An open immersion identifies its source with an open subscheme [def-weil-open-immersion]; its diagonal is an isomorphism, hence a closed immersion, and locally on that open subscheme its ring map is the identity, a finite-type map. Thus the separated and locally finite-type hypotheses of [lem-cbc-proper-support-sheaf-composition] hold. That node gives, for every module sheaf $F$ on $A$, the canonical identification\n$$\\delta_Q(F):i_!r_*F=i_!^{\\mathrm{supp}}r_!^{\\mathrm{supp}}F=h_!^{\\mathrm{supp}}F=p_!^{\\mathrm{supp}}k_!^{\\mathrm{supp}}F=p_*k_!F.$$\nAll the equalities mean the same subsheaf of $h_*F$: a section is carried to the same section, rather than to an arbitrary abstract isomorphism. Thus $\\delta_Q$ is natural and $\\Lambda$-linear, and extends degreewise to complexes. For horizontally adjacent squares, all identifications of the underlying sheaves are identities on these common sections. Hence the ordinary horizontal composition equation holds. The proper-support composition result applies without Cartesian or quasi-compact-open assumptions.",
+   "text": "Apply the proved ordinary_horizontal lemma from EtaleProperOpenHorizontalNormalization to the two squares and the outside square, using the three instances of hδ. This gives delta_outer followed by q_* of the open-extension compositor equal to the lower compositor followed by j_!(delta_1) and delta_2. Cancel q_* of the invertible top compositor to express the pasted natural transformation as the outside transformation transported along the inverse top and bottom compositors.",
    "uses": [
-    "lem-cbc-proper-support-sheaf-composition",
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-open-immersion"
+    "lem-pur-etale-proper-open-horizontal-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F50 and 0F51; Tag 0F7B, first paragraph of proof"
+    "place": "Tag 0F7D, horizontal composition; ordinary support-normalized calculation already proved in ordinary_horizontal"
    }
   },
   {
-   "text": "For horizontal composition choose bounded-below injective $J$ on the left, $t:k_!J\\to I$ in the middle, and $v:l_!I\\to L$ on the right. By [lem-weil-pbc-extension-by-zero-exact], $w=v\\circ l_!t:l_!k_!J\\to L$ is a quasi-isomorphism. The two-square comparison is represented by\n$$j_!i_!r_*J\\xrightarrow{j_!(p_*t\\circ\\delta_{Q_1})}j_!p_*I\\xrightarrow{q_*v\\circ\\delta_{Q_2}}q_*L.$$\nNaturality of the sheaf identification $\\delta_{Q_2}$ moves $t$ through it. The sheaf composition equality in step 1 then makes this map $q_*w\\circ\\delta_{Q_2Q_1}$, the representative for the outer rectangle. The identification $j_!i_!\\cong(ji)_!$ is the sheaf support-composition equality in [lem-cbc-proper-support-sheaf-composition], applied degreewise; its exactness just cited lets it descend to $D^+$. This proves the stated horizontal equation.",
+   "text": "Use the existing source-library rightDerivedFunctorPlusBaseChange_naturality on the preceding transported ordinary equation, and rightDerivedFunctorPlusBaseChange_paste on the two adjacent deltas. Substitute hγ for the three given gamma maps. Unfold only extensionZeroCompDerivedPlusIso, compose the naturality equation with the exact derived composition isomorphisms, cancel their hom/inv pairs, and apply the derived pasting equation. The remaining hom/inv pair cancels, giving the displayed equality at each K. These generic APIs are completely proved in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeNaturality; no new derived-functor statement is assumed.",
    "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-cbc-proper-support-sheaf-composition"
+    "def-weil-pbc-derived-categories",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7D, label lemma-shriek-proper-and-open-compose-horizontal; identity specializations"
+    "place": "Tag 0F7D, derived horizontal composition; implemented via canonical right-derived transformation pasting and naturality"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "def-weil-open-immersion",
-  "def-weil-proper-morphism",
-  "lem-cbc-proper-support-sheaf-composition",
+  "cor-cbc-derived-extension-zero-base-change",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-etale-proper-open-horizontal-normalization",
   "lem-weil-pbc-extension-by-zero-exact"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker X8",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F, open-immersion bounded-below finite-ring specialization; resolution comparisons and refinement normalization expanded"
+  "place": "Tag 0F7D; reuse the ordinary horizontal calculation and the proved source-library bounded-below base-change naturality/pasting API"
  },
  "mathlib_searches": [
   {
@@ -125,14 +122,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "X8",
   "result": "pass",
-  "landing": "20261018T112414-L-631734",
+  "landing": "20261025T101859-L-3746990",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

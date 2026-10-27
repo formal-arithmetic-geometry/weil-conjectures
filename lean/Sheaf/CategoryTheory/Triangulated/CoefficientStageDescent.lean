@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.SpectralObject
 import Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison
-import Mathlib.LinearAlgebra.TensorProduct.Tower
-import Mathlib.Algebra.Colimit.Module
+import Sheaf.CategoryTheory.Triangulated.CohomologyComparisonPasting
 
 /-! # Descent of t-exact coefficient families
 
@@ -37,7 +36,7 @@ universe r w u v u' v' u'' v'' u''' v'''
 
 namespace CategoryTheory.CoefficientStageDescent
 
-open Limits Pretriangulated Triangulated TensorProduct
+open Limits Pretriangulated Triangulated TensorProduct TStructure
 
 section Comparisons
 
@@ -118,6 +117,79 @@ def TruncationsComputedAt (tC : TStructure C) (tD : TStructure D) (J : C ⥤ D) 
     (∀ X : C, J.map ((tC.truncGEπ m).app X) ≫ b.hom.app X =
       (tD.truncGEπ m).app (J.obj X))
 
+
+omit [IsTriangulated C] [IsTriangulated D] in
+private theorem preservesHeart (tC : TStructure C) (tD : TStructure D)
+    (F : C ⥤ D) [F.IsTExact tC tD] (X : C) (hX : tC.heart X) :
+    tD.heart (F.obj X) := by
+  obtain ⟨hLE, hGE⟩ := (tC.mem_heart_iff X).1 hX
+  exact (tD.mem_heart_iff _).2
+    ⟨Functor.IsTExact.isLE_obj tC tD F X 0, Functor.IsTExact.isGE_obj tC tD F X 0⟩
+
+private instance restrictionAdditive (tC : TStructure C) (tD : TStructure D)
+    (F : C ⥤ D) [F.Additive] (h : ∀ X, tC.heart X → tD.heart (F.obj X)) :
+    (heartRestriction tC tD F h).Additive where
+  map_add := by
+    intro X Y f g
+    apply (tD.heart.ι).map_injective
+    exact F.map_add
+
+private theorem restrictionExact (tC : TStructure C) (tD : TStructure D)
+    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact tC tD]
+    (S : ShortComplex tC.heart.FullSubcategory) (hS : S.ShortExact) :
+    (S.map (heartRestriction tC tD F (preservesHeart tC tD F))).ShortExact := by
+  let := tC.hasHeartFullSubcategory
+  let := tD.hasHeartFullSubcategory
+  obtain ⟨δ, hδ⟩ := (tC.shortExact_iff_exists_distTriang S).1 hS
+  apply (tD.shortExact_iff_exists_distTriang _).2
+  exact ⟨F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app _, F.map_distinguished _ hδ⟩
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private def canonicalComparisons (tC : TStructure C) (tD : TStructure D)
+    (hC : tC.bounded = ⊤) (hD : tD.bounded = ⊤)
+    (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact tC tD] :
+    Comparisons tC tD F where
+  exact := inferInstance
+  tExact := inferInstance
+  heart := preservesHeart tC tD F
+  heartAdditive := inferInstance
+  heartExact := restrictionExact tC tD F
+  le m := F.eTruncLTIso tC tD (m + 1 : ℤ)
+  ge m := F.eTruncGEIso tC tD m
+  le_counit m X := F.eTruncLTIsoApp_hom_eTruncLTι_app tC tD (m + 1 : ℤ) X
+  ge_unit m X := F.eTruncGEπ_app_eTruncGEIsoApp_hom tC tD m X
+  le_unique m := (texact_truncation_comparison.{u, v, u', v', u', v'} tC tD hC hD F m).2.1
+  ge_unique m := (texact_truncation_comparison.{u, v, u', v', u', v'} tC tD hC hD F m).2.2.1
+  q j := truncationCohomologyComparison tC tD F j
+  q_formula j X := by
+    simpa only [Functor.map_comp, TStructure.truncLE, Category.assoc,
+      TStructure.truncGELE, Functor.comp_obj, cohomology] using
+      (cohomology_comparison_pasting tC tD F hC hD j X).2.2.2
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+omit [IsTriangulated C] [IsTriangulated D] in
+private theorem tExactOfZero (tC : TStructure C) (tD : TStructure D)
+    (F : C ⥤ D) [F.CommShift ℤ]
+    (hLE : ∀ X, tC.le 0 X → tD.le 0 (F.obj X))
+    (hGE : ∀ X, tC.ge 0 X → tD.ge 0 (F.obj X)) : F.IsTExact tC tD := by
+  constructor
+  · intro X n hX
+    have : tD.IsLE (F.obj (X⟦n⟧)) 0 :=
+      ⟨hLE _ (tC.le_shift n n 0 (add_zero n) X (tC.le_of_isLE X n))⟩
+    have : tD.IsLE ((F.obj X)⟦n⟧) 0 :=
+      tD.isLE_of_iso
+        (show F.obj (X⟦n⟧) ≅ (F.obj X)⟦n⟧ from (F.commShiftIso n).app X) 0
+    exact tD.isLE_of_shift (F.obj X) n n 0
+  · intro X n hX
+    have : tD.IsGE (F.obj (X⟦n⟧)) 0 :=
+      ⟨hGE _ (tC.ge_shift n n 0 (add_zero n) X (tC.ge_of_isGE X n))⟩
+    have : tD.IsGE ((F.obj X)⟦n⟧) 0 :=
+      tD.isGE_of_iso
+        (show F.obj (X⟦n⟧) ≅ (F.obj X)⟦n⟧ from (F.commShiftIso n).app X) 0
+    exact tD.isGE_of_shift (F.obj X) n n 0
+
 end Comparisons
 
 section Localization
@@ -173,6 +245,52 @@ structure FractionExtension (F₀ : C ⥤ D) [F₀.Additive] [F₀.Linear R] [F�
     HEq (factor.hom.app X) (𝟙 (ScalarLocalization.mk (R := R) (p := p) (F₀.obj X)))
   /-- This states precisely that the supplied rational shift comparison is the localized one. -/
   factor_shift : NatTrans.CommShift factor.hom ℤ
+
+omit [IsTriangulated C] [IsTriangulated D]
+  [IsTriangulated (ScalarLocalization R C p)]
+  [IsTriangulated (ScalarLocalization R D p)] in
+private theorem localizedExact (t₀ : TStructure C)
+    (t : TStructure (ScalarLocalization R C p))
+    (s₀ : TStructure D) (s : TStructure (ScalarLocalization R D p))
+    (hC : IsLocalizedTStructure R C p t₀ t)
+    (hD : IsLocalizedTStructure R D p s₀ s)
+    (F₀ : C ⥤ D) [F₀.Additive] [F₀.Linear R] [F₀.CommShift ℤ] [F₀.IsTriangulated]
+    (F : ScalarLocalization R C p ⥤ ScalarLocalization R D p) [F.CommShift ℤ]
+    (hF : FractionExtension F₀ F) : F.IsTriangulated := by
+  let Q := ScalarLocalization.localization R C p
+  let P := ScalarLocalization.localization R D p
+  have : P.IsTriangulated := ⟨fun T hT ↦ (hD.1 _).2 ⟨T, hT, ⟨Iso.refl _⟩⟩⟩
+  have := hF.factor_shift
+  have : (Q ⋙ F).IsTriangulated :=
+    (Functor.isTriangulated_iff_of_iso hF.factor).2 inferInstance
+  constructor
+  intro T hT
+  obtain ⟨T₀, hT₀, ⟨e⟩⟩ := (hC.1 T).1 hT
+  exact isomorphic_distinguished _ ((Q ⋙ F).map_distinguished T₀ hT₀) _
+    (F.mapTriangle.mapIso e ≪≫ (Functor.mapTriangleCompIso Q F).symm.app T₀)
+
+omit [IsTriangulated C] [IsTriangulated D] in
+omit [IsTriangulated (ScalarLocalization R C p)]
+  [IsTriangulated (ScalarLocalization R D p)] in
+private theorem localizedTExact (t₀ : TStructure C)
+    (t : TStructure (ScalarLocalization R C p))
+    (s₀ : TStructure D) (s : TStructure (ScalarLocalization R D p))
+    (hC : IsLocalizedTStructure R C p t₀ t)
+    (hD : IsLocalizedTStructure R D p s₀ s)
+    (F₀ : C ⥤ D) [F₀.Additive] [F₀.Linear R] [F₀.CommShift ℤ]
+    (F : ScalarLocalization R C p ⥤ ScalarLocalization R D p) [F.CommShift ℤ]
+    (hF : FractionExtension F₀ F)
+    (hLE : ∀ X, t₀.le 0 X → s₀.le 0 (F₀.obj X))
+    (hGE : ∀ X, t₀.ge 0 X → s₀.ge 0 (F₀.obj X)) : F.IsTExact t s := by
+  apply tExactOfZero
+  · intro X hX
+    obtain ⟨X₀, hX₀, ⟨e⟩⟩ := (hC.2.1 X).1 hX
+    exact (hD.2.1 _).2 ⟨F₀.obj X₀, hLE X₀ hX₀,
+      ⟨F.mapIso e ≪≫ hF.factor.app X₀⟩⟩
+  · intro X hX
+    obtain ⟨X₀, hX₀, ⟨e⟩⟩ := (hC.2.2 X).1 hX
+    exact (hD.2.2 _).2 ⟨F₀.obj X₀, hGE X₀ hX₀,
+      ⟨F.mapIso e ≪≫ hF.factor.app X₀⟩⟩
 
 end Localization
 
@@ -240,7 +358,326 @@ def SquareCompatible {tC : TStructure C} {tD : TStructure D}
       V.map ((cF.q j).hom.app X) ≫ (cV.q j).hom.app (F.obj X) ≫
         (cohomology tA j).map (η.hom.app X))
 
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem canonicalSquare
+    (tC : TStructure C) (tD : TStructure D) (tB : TStructure B) (tA : TStructure A)
+    (hC : tC.bounded = ⊤) (hD : tD.bounded = ⊤)
+    (hB : tB.bounded = ⊤) (hA : tA.bounded = ⊤)
+    (F : C ⥤ D) (G : B ⥤ A) (U : C ⥤ B) (V : D ⥤ A)
+    [F.CommShift ℤ] [G.CommShift ℤ] [U.CommShift ℤ] [V.CommShift ℤ]
+    [F.IsTriangulated] [G.IsTriangulated] [U.IsTriangulated] [V.IsTriangulated]
+    [F.IsTExact tC tD] [G.IsTExact tB tA] [U.IsTExact tC tB] [V.IsTExact tD tA]
+    (η : F ⋙ V ≅ U ⋙ G) [NatTrans.CommShift η.hom ℤ] :
+    SquareCompatible (canonicalComparisons tC tD hC hD F)
+      (canonicalComparisons tB tA hB hA G) (canonicalComparisons tC tB hC hB U)
+      (canonicalComparisons tD tA hD hA V) η := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro m X
+    exact (truncationCohomologyComparison_square tC tD F hC hD tB tA
+      hB hA U V G η m m X).1
+  · intro m X
+    exact (truncationCohomologyComparison_square tC tD F hC hD tB tA
+      hB hA U V G η m m X).2.1
+  · intro j X
+    exact (truncationCohomologyComparison_square tC tD F hC hD tB tA
+      hB hA U V G η j j X).2.2
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem canonicalComposite
+    (tC : TStructure C) (tD : TStructure D) (tB : TStructure B)
+    (hC : tC.bounded = ⊤) (hD : tD.bounded = ⊤) (hB : tB.bounded = ⊤)
+    (F : C ⥤ D) (G : D ⥤ B) (H : C ⥤ B)
+    [F.CommShift ℤ] [G.CommShift ℤ] [H.CommShift ℤ]
+    [F.IsTriangulated] [G.IsTriangulated] [H.IsTriangulated]
+    [F.IsTExact tC tD] [G.IsTExact tD tB] [H.IsTExact tC tB]
+    (η : F ⋙ G ≅ H) [NatTrans.CommShift η.hom ℤ] :
+    CompositeCompatible (canonicalComparisons tC tD hC hD F)
+      (canonicalComparisons tD tB hD hB G) (canonicalComparisons tC tB hC hB H) η := by
+  let := cohomologyComparison_compTExact tC tD tB F G
+  have hc (m : ℤ) (X : C) :=
+    (texact_truncation_comparison tC tD hC hD F m).2.2.2.2.2 B tB hB G
+      ((F ⋙ G).eTruncLTIso tC tB (m + 1 : ℤ))
+      ((F ⋙ G).eTruncGEIso tC tB m)
+      (fun Y ↦ (F ⋙ G).eTruncLTIsoApp_hom_eTruncLTι_app tC tB (m + 1 : ℤ) Y)
+      (fun Y ↦ (F ⋙ G).eTruncGEπ_app_eTruncGEIsoApp_hom tC tB m Y) X
+  refine ⟨?_, ?_, ?_⟩
+  · intro m X
+    have hn := (texact_truncation_comparison.{u, v, u'', v'', u'', v''}
+      tC tB hC hB (F ⋙ G) m).2.2.2.1
+      H η.hom X
+    simpa only [(hc m X).1, Category.assoc, canonicalComparisons] using hn.1
+  · intro m X
+    have hn := (texact_truncation_comparison.{u, v, u'', v'', u'', v''}
+      tC tB hC hB (F ⋙ G) m).2.2.2.1
+      H η.hom X
+    simpa only [(hc m X).2, Category.assoc, canonicalComparisons] using hn.2
+  · intro j X
+    simpa only [truncationCohomologyComparison_comp tC tD F hC hD tB hB G,
+      Category.assoc, canonicalComparisons, cohomology, TStructure.truncGELE,
+      TStructure.truncLE, Functor.comp_obj, Functor.comp_map] using
+      truncationCohomologyComparison_naturality tC tB (F ⋙ G) hC hB H η.hom j X
+
 end Coherence
+
+
+open StageSystem StageSystem.Morphism
+
+section
+variable {I : Type w} [Preorder I] [IsDirectedOrder I]
+  {C : I → Type u} [∀ i, Category.{v} (C i)]
+  {D : I → Type u'} [∀ i, Category.{v'} (D i)]
+  {S : StageSystem C} {S' : StageSystem D}
+
+section StageShift
+variable [∀ i, HasShift (C i) ℤ] [∀ i, HasShift (D i) ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S'.T h).CommShift ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S.assoc h h').hom ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S'.assoc h h').hom ℤ]
+  (F : StageSystem.Morphism S S') [∀ i, (F.Φ i).CommShift ℤ]
+  (hβ : ∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (F.β h).hom ℤ)
+
+private def shiftHom (n : ℤ) : Hom
+    ((S.shiftMorphism ℤ n).comp F) (F.comp (S'.shiftMorphism ℤ n)) where
+  τ i := ((F.Φ i).commShiftIso n).hom
+  comm {i j} h K := by
+    have := hβ h
+    simpa [Morphism.comp, StageSystem.shiftMorphism, Functor.commShiftIso_comp_hom_app,
+      Category.assoc] using (NatTrans.shift_app_comm (F.β h).hom n K)
+
+private def shiftIso (n : ℤ) :
+    (shiftFunctor S.PairCategory n) ⋙ F.functor ≅ F.functor ⋙ (shiftFunctor S'.PairCategory n) :=
+  (functorCompIso (S.shiftMorphism ℤ n) F).symm ≪≫
+    NatIso.ofComponents
+      (F := ((S.shiftMorphism ℤ n).comp F).functor)
+      (G := (F.comp (S'.shiftMorphism ℤ n)).functor)
+      (fun K ↦ (S'.ι K.stage).mapIso (((F.Φ K.stage).commShiftIso n).app K.obj))
+      (fun f ↦ (descNatTrans (shiftHom F hβ n)).naturality f) ≪≫
+    functorCompIso F (S'.shiftMorphism ℤ n)
+
+end StageShift
+
+section ExactShift
+variable {I : Type w} [Preorder I] [IsDirectedOrder I]
+  {C : I → Type u} [∀ i, Category.{v} (C i)]
+  {D : I → Type u'} [∀ i, Category.{v'} (D i)]
+  {S : StageSystem C} {S' : StageSystem D}
+  [∀ i, HasShift (C i) ℤ] [∀ i, HasShift (D i) ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ {i j : I} (h : i ≤ j), (S'.T h).CommShift ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S.assoc h h').hom ℤ]
+  [∀ {i j k : I} (h : i ≤ j) (h' : j ≤ k),
+    NatTrans.CommShift (S'.assoc h h').hom ℤ]
+  (F : StageSystem.Morphism S S') [∀ i, (F.Φ i).CommShift ℤ]
+  (hβ : ∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (F.β h).hom ℤ)
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem shiftIso_hom_app (n : ℤ) (K : S.PairCategory) :
+    (shiftIso F hβ n).hom.app K =
+      (S'.ι K.stage).map (((F.Φ K.stage).commShiftIso n).hom.app K.obj) := by
+  simp only [shiftIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Morphism.functorCompIso_inv_app, Morphism.functorCompIso_hom_app,
+    NatIso.ofComponents_hom_app, Functor.mapIso_hom, Iso.app_hom,
+    Category.comp_id]
+  erw [Category.id_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+@[instance_reducible] private def descendedCommShift : F.functor.CommShift ℤ where
+  commShiftIso := shiftIso F hβ
+  commShiftIso_zero := by
+    ext K
+    simp only [shiftIso_hom_app, Functor.CommShift.isoZero_hom_app]
+    change (S'.ι K.stage).map (((F.Φ K.stage).commShiftIso (0 : ℤ)).hom.app K.obj) =
+      F.functor.map ((S.ι K.stage).map
+        ((shiftFunctorZero (C K.stage) ℤ).hom.app K.obj)) ≫
+      (S'.ι K.stage).map
+        ((shiftFunctorZero (D K.stage) ℤ).inv.app ((F.Φ K.stage).obj K.obj))
+    erw [Morphism.functor_map_ι]
+    simpa only [Functor.CommShift.isoZero_hom_app, Functor.map_comp] using
+      congrArg ((S'.ι K.stage).map)
+      (congr_app (congrArg Iso.hom ((F.Φ K.stage).commShiftIso_zero ℤ)) K.obj)
+  commShiftIso_add n m := by
+    ext K
+    simp only [Functor.CommShift.isoAdd_hom_app, shiftIso_hom_app]
+    change (S'.ι K.stage).map
+        (((F.Φ K.stage).commShiftIso (n + m)).hom.app K.obj) =
+      F.functor.map ((S.ι K.stage).map
+        ((shiftFunctorAdd (C K.stage) n m).hom.app K.obj)) ≫
+      (S'.ι K.stage).map
+        (((F.Φ K.stage).commShiftIso m).hom.app ((shiftFunctor (C K.stage) n).obj K.obj)) ≫
+      (shiftFunctor S'.PairCategory m).map ((S'.ι K.stage).map
+        (((F.Φ K.stage).commShiftIso n).hom.app K.obj)) ≫
+      (S'.ι K.stage).map
+        ((shiftFunctorAdd (D K.stage) n m).inv.app ((F.Φ K.stage).obj K.obj))
+    erw [Morphism.functor_map_ι]
+    erw [(S'.shiftMorphism ℤ m).functor_map_ι]
+    simpa only [Functor.CommShift.isoAdd_hom_app, Functor.map_comp, StageSystem.shiftMorphism] using
+      congrArg ((S'.ι K.stage).map)
+      (congr_app (congrArg Iso.hom ((F.Φ K.stage).commShiftIso_add n m)) K.obj)
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+private theorem inclusionComp_commShift (i : I) :
+    letI := descendedCommShift F hβ
+    NatTrans.CommShift (F.ιCompFunctorIso i).hom ℤ := by
+  let _ := descendedCommShift F hβ
+  constructor
+  intro n
+  ext K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.commShiftIso_comp_hom_app, Category.assoc]
+  change F.functor.map (𝟙 _) ≫ (shiftIso F hβ n).hom.app ((S.ι i).obj K) ≫
+      (shiftFunctor S'.PairCategory n).map (𝟙 _) =
+    𝟙 _ ≫ ((S'.ι i).map (((F.Φ i).commShiftIso n).hom.app K) ≫ 𝟙 _)
+  simp only [shiftIso_hom_app, Functor.map_id, Category.id_comp]
+  erw [Category.comp_id]
+
+end ExactShift
+end
+
+section GenericDescent
+
+variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
+  {C : I → Type u} [∀ i, Category.{v} (C i)]
+  [∀ i, Preadditive (C i)] [∀ i, HasZeroObject (C i)]
+  [∀ i, HasShift (C i) ℤ] [∀ i (n : ℤ), (shiftFunctor (C i) n).Additive]
+  [∀ i, Pretriangulated (C i)] [∀ i, IsTriangulated (C i)]
+  {D : I → Type u'} [∀ i, Category.{v'} (D i)]
+  [∀ i, Preadditive (D i)] [∀ i, HasZeroObject (D i)]
+  [∀ i, HasShift (D i) ℤ] [∀ i (n : ℤ), (shiftFunctor (D i) n).Additive]
+  [∀ i, Pretriangulated (D i)] [∀ i, IsTriangulated (D i)]
+  (SC : StageSystem C) (SD : StageSystem D)
+  [∀ i j (h : i ≤ j), (SC.T h).CommShift ℤ]
+  [∀ i j (h : i ≤ j), (SC.T h).IsTriangulated]
+  [∀ i j k (h : i ≤ j) (k' : j ≤ k), NatTrans.CommShift (SC.assoc h k').hom ℤ]
+  [∀ i j (h : i ≤ j), (SD.T h).CommShift ℤ]
+  [∀ i j (h : i ≤ j), (SD.T h).IsTriangulated]
+  [∀ i j k (h : i ≤ j) (k' : j ≤ k), NatTrans.CommShift (SD.assoc h k').hom ℤ]
+  (tC : ∀ i, TStructure (C i)) (tD : ∀ i, TStructure (D i))
+  (tCΩ : TStructure SC.PairCategory) (tDΩ : TStructure SD.PairCategory)
+  (M : SC.Morphism SD) [∀ i, (M.Φ i).Additive] [∀ i, (M.Φ i).CommShift ℤ]
+  [∀ i j (h : i ≤ j), NatTrans.CommShift (M.β h).hom ℤ]
+
+omit [∀ i, (M.Φ i).Additive] in
+private theorem stageDescent
+    (hC : ∀ i, (tC i).bounded = ⊤) (hD : ∀ i, (tD i).bounded = ⊤)
+    (hCΩ : tCΩ.bounded = ⊤) (hDΩ : tDΩ.bounded = ⊤)
+    (hFE : ∀ i, (M.Φ i).IsTriangulated)
+    (hTE : ∀ i, (M.Φ i).IsTExact (tC i) (tD i))
+    (hTC : ∀ i j (h : i ≤ j), (SC.T h).IsTExact (tC i) (tC j))
+    (hTD : ∀ i j (h : i ≤ j), (SD.T h).IsTExact (tD i) (tD j))
+    (hCΩle : ∀ (n : ℤ) (X : SC.PairCategory), tCΩ.le n X ↔
+      ∃ (E : I) (Y : C E),
+        (tC E).le n Y ∧ Nonempty (X ≅ (SC.ι E).obj Y))
+    (hCΩge : ∀ (n : ℤ) (X : SC.PairCategory), tCΩ.ge n X ↔
+      ∃ (E : I) (Y : C E),
+        (tC E).ge n Y ∧ Nonempty (X ≅ (SC.ι E).obj Y))
+    (hDΩle : ∀ (n : ℤ) (X : SD.PairCategory), tDΩ.le n X ↔
+      ∃ (E : I) (Y : D E),
+        (tD E).le n Y ∧ Nonempty (X ≅ (SD.ι E).obj Y))
+    (hDΩge : ∀ (n : ℤ) (X : SD.PairCategory), tDΩ.ge n X ↔
+      ∃ (E : I) (Y : D E),
+        (tD E).ge n Y ∧ Nonempty (X ≅ (SD.ι E).obj Y)) :
+    ∃ cΩ : M.functor.CommShift ℤ,
+      (∀ E (X : C E) (n : ℤ),
+        HEq ((cΩ.commShiftIso n).hom.app ((SC.ι E).obj X))
+          ((SD.ι E).map (((M.Φ E).commShiftIso n).hom.app X))) ∧
+      ∃ (cE : ∀ E, Comparisons (tC E) (tD E) (M.Φ E))
+        (cO : Comparisons tCΩ tDΩ M.functor)
+        (cTC : ∀ E L (h : E ≤ L), Comparisons (tC E) (tC L) (SC.T h))
+        (cTD : ∀ E L (h : E ≤ L), Comparisons (tD E) (tD L) (SD.T h))
+        (cJC : ∀ E, Comparisons (tC E) tCΩ (SC.ι E))
+        (cJD : ∀ E, Comparisons (tD E) tDΩ (SD.ι E)),
+        (∀ E L (h : E ≤ L),
+          SquareCompatible (cE E) (cE L) (cTC E L h) (cTD E L h) (M.β h)) ∧
+        (∀ E L N (h : E ≤ L) (k : L ≤ N),
+          CompositeCompatible (cTC E L h) (cTC L N k) (cTC E N (h.trans k))
+            (SC.assoc h k) ∧
+          CompositeCompatible (cTD E L h) (cTD L N k) (cTD E N (h.trans k))
+            (SD.assoc h k)) ∧
+        (∀ E, SquareCompatible (cJC E) (cJD E) (cE E) cO (M.ιCompFunctorIso E)) ∧
+        (∀ E L (h : E ≤ L),
+          CompositeCompatible (cTC E L h) (cJC L) (cJC E) (SC.transIso h) ∧
+          CompositeCompatible (cTD E L h) (cJD L) (cJD E) (SD.transIso h)) := by
+  classical
+  let cΩ := descendedCommShift M (fun h ↦ inferInstance)
+  let := cΩ
+  have hιM : ∀ E, NatTrans.CommShift (M.ιCompFunctorIso E).hom ℤ :=
+    fun E ↦ inclusionComp_commShift M (fun h ↦ inferInstance) E
+  have hFO : M.functor.IsTriangulated := by
+    constructor
+    intro T hT
+    obtain ⟨E, T₀, hT₀, ⟨e⟩⟩ := hT
+    exact isomorphic_distinguished _ (((M.Φ E) ⋙ SD.ι E).map_distinguished T₀ hT₀) _
+      (M.functor.mapTriangle.mapIso e ≪≫
+        (Functor.mapTriangleCompIso (SC.ι E) M.functor).symm.app T₀ ≪≫
+        (Functor.mapTriangleIso (M.ιCompFunctorIso E)).app T₀)
+  have hJC : ∀ E, (SC.ι E).IsTExact (tC E) tCΩ := by
+    intro E
+    constructor
+    · intro X n hX
+      exact ⟨(hCΩle n _).2 ⟨E, X, (tC E).le_of_isLE X n, ⟨Iso.refl _⟩⟩⟩
+    · intro X n hX
+      exact ⟨(hCΩge n _).2 ⟨E, X, (tC E).ge_of_isGE X n, ⟨Iso.refl _⟩⟩⟩
+  have hJD : ∀ E, (SD.ι E).IsTExact (tD E) tDΩ := by
+    intro E
+    constructor
+    · intro X n hX
+      exact ⟨(hDΩle n _).2 ⟨E, X, (tD E).le_of_isLE X n, ⟨Iso.refl _⟩⟩⟩
+    · intro X n hX
+      exact ⟨(hDΩge n _).2 ⟨E, X, (tD E).ge_of_isGE X n, ⟨Iso.refl _⟩⟩⟩
+  have hTO : M.functor.IsTExact tCΩ tDΩ := by
+    constructor
+    · intro X n hX
+      obtain ⟨E, Y, hY, ⟨e⟩⟩ := (hCΩle n X).1 (tCΩ.le_of_isLE X n)
+      have : (tC E).IsLE Y n := ⟨hY⟩
+      have := Functor.IsTExact.isLE_obj (tC E) (tD E) (M.Φ E) Y n
+      exact ⟨(hDΩle n _).2 ⟨E, (M.Φ E).obj Y, (tD E).le_of_isLE _ n,
+        ⟨M.functor.mapIso e ≪≫ (M.ιCompFunctorIso E).app Y⟩⟩⟩
+    · intro X n hX
+      obtain ⟨E, Y, hY, ⟨e⟩⟩ := (hCΩge n X).1 (tCΩ.ge_of_isGE X n)
+      have : (tC E).IsGE Y n := ⟨hY⟩
+      have := Functor.IsTExact.isGE_obj (tC E) (tD E) (M.Φ E) Y n
+      exact ⟨(hDΩge n _).2 ⟨E, (M.Φ E).obj Y, (tD E).ge_of_isGE _ n,
+        ⟨M.functor.mapIso e ≪≫ (M.ιCompFunctorIso E).app Y⟩⟩⟩
+  refine ⟨cΩ, ?_, ?_⟩
+  · intro E X n
+    exact heq_of_eq (shiftIso_hom_app M (fun h ↦ inferInstance) n ((SC.ι E).obj X))
+  · refine ⟨(fun E ↦ canonicalComparisons (tC E) (tD E) (hC E) (hD E) (M.Φ E)),
+      canonicalComparisons tCΩ tDΩ hCΩ hDΩ M.functor,
+      (fun E L h ↦ canonicalComparisons (tC E) (tC L) (hC E) (hC L) (SC.T h)),
+      (fun E L h ↦ canonicalComparisons (tD E) (tD L) (hD E) (hD L) (SD.T h)),
+      (fun E ↦ canonicalComparisons (tC E) tCΩ (hC E) hCΩ (SC.ι E)),
+      (fun E ↦ canonicalComparisons (tD E) tDΩ (hD E) hDΩ (SD.ι E)),
+      ?_, ?_, ?_, ?_⟩
+    · intro E L h
+      exact canonicalSquare (tC E) (tD E) (tC L) (tD L)
+        (hC E) (hD E) (hC L) (hD L) _ _ _ _ (M.β h)
+    · intro E L N h k
+      exact ⟨canonicalComposite (tC E) (tC L) (tC N) (hC E) (hC L) (hC N)
+        _ _ _ (SC.assoc h k),
+        canonicalComposite (tD E) (tD L) (tD N) (hD E) (hD L) (hD N)
+        _ _ _ (SD.assoc h k)⟩
+    · intro E
+      exact canonicalSquare (tC E) tCΩ (tD E) tDΩ
+        (hC E) hCΩ (hD E) hDΩ _ _ _ _ (M.ιCompFunctorIso E)
+    · intro E L h
+      exact ⟨canonicalComposite (tC E) (tC L) tCΩ (hC E) (hC L) hCΩ
+        _ _ _ (SC.transIso h),
+        canonicalComposite (tD E) (tD L) tDΩ (hD E) (hD L) hDΩ
+        _ _ _ (SD.transIso h)⟩
+
+end GenericDescent
+
+attribute [local irreducible] Padic.coefficientExtensionIntegers
+  Padic.coefficientExtensionAbsoluteValue Padic.coefficientExtensionUniformizer
 
 section CoefficientFamily
 
@@ -305,6 +742,9 @@ variable (tCΩ : TStructure SC.PairCategory) (tDΩ : TStructure SD.PairCategory)
   (M : SC.Morphism SD) [∀ E, (M.Φ E).Additive] [∀ E, (M.Φ E).CommShift ℤ]
   [∀ E L (h : E ≤ L), NatTrans.CommShift (M.β h).hom ℤ]
 
+set_option backward.isDefEq.respectTransparency true in
+set_option linter.unusedVariables false in
+set_option linter.unusedSectionVars false in
 /-- Descent through raw localization and the common-stage quotient, with canonical
 truncation comparisons, exact heart restrictions, and every coefficient coherence square.
 
@@ -312,32 +752,23 @@ Source: the abstract lemma extracted from the coefficient argument in
 Bhatt--Scholze 6.8.14(1)--(2), Remark 6.8.15; BBD 1.3.3, 1.3.6, 1.3.17
 (blueprint: lem-a1-texact-coefficient-stage-descent).
 
-Proof (the ten steps of the node):
-1. Extend each integral linear Hom map by tensor base change. Pure tensors show
-   identity and composition preservation; localize the specified linear shift comparison.
-2. A rational distinguished triangle comes from an integral one, including its shifted
-   third arrow. Exactness of F₀ proves exactness after localization. The isomorphism
-   closures of the halves and shift compatibility prove preservation at every cutoff.
-3. At a common field L conjugate F_L(u) by beta. Its tower equation and naturality
-   show compatibility with further extension. The directed Hom-colimit universal property
-   descends these maps, without assuming faithfulness of coefficient transitions.
-4. The middle betas cancel in a composite. Thus the descended maps preserve composition
-   and identity. This is precisely the existing M.functor and its stage-inclusion square.
-5. Represent its shift comparison at a stage. Shift compatibility of beta makes it
-   natural and independent of the stage. Finite-stage triangles and halves then prove
-   exactness and t-exactness on the pair category. The same argument applies to inclusions.
-6. The heart is the intersection of the halves. Use the short-exact/triangle criterion
-   of lem-weil-heart-short-exact-triangles to obtain exactness of the actual restriction.
-7. Apply lem-pod-texact-truncation-comparison to obtain the two uniquely normalized
-   natural isomorphisms, with the displayed canonical counit and unit equations.
-8. Its natural-transformation and composition clauses give SquareCompatible for beta
-   and CompositeCompatible for the tower associators and the identity identifications.
-9. Compose the two truncation comparisons and the integer shift comparison. This is
-   q_formula. Shift-compatible beta squares and tower squares persist under this composition.
-10. Uniqueness identifies each inclusion comparison with finite-stage computation of
-   truncations and their canonical maps. The square for the inclusion identifies the
-   Omega comparison with its finite-stage representative. The transIso composite square
-   gives independence after any further enlargement; the same formulas apply to q.
+Proof:
+1. Use the supplied shift-compatible localization factorization. The triangle
+   presentation proves exactness; the isomorphism closures of the integral halves
+   prove preservation at zero, and shifts give every cutoff.
+2. Descend the finite-stage shift comparisons using StageSystem.descNatTrans.
+   Beta compatibility gives naturality; the stagewise zero and addition equations
+   give the CommShift laws. Represent pair triangles and halves at a finite stage
+   to prove exactness and t-exactness of the descended functor and inclusions.
+3. Preserve the intersection of the halves, and map the distinguished triangle
+   characterizing each short exact sequence in the actual heart restriction.
+4. Use the canonical truncation comparison isomorphisms and their normalized
+   uniqueness. Compose these with the specified shift comparison for cohomology.
+5. Apply naturality and composition of these canonical comparisons to beta,
+   tower associators, inclusion squares and transition identifications.
+6. Uniqueness identifies the inclusion comparisons with any supplied finite-stage
+   truncation computation; the inclusion and transition squares express the
+   finite-stage representation and its independence of further enlargement.
 -/
 theorem texact_coefficient_stage_descent
     [∀ E (n : ℤ), (shiftFunctor (C₀ E) n).Linear (integralRing l Ω E)]
@@ -405,7 +836,15 @@ theorem texact_coefficient_stage_descent
         (∀ E L (h : E ≤ L),
           CompositeCompatible (cTC E L h) (cJC L) (cJC E) (SC.transIso h) ∧
           CompositeCompatible (cTD E L h) (cJD L) (cJD E) (SD.transIso h)) := by
-  sorry
+  classical
+  have hFE : ∀ E, (M.Φ E).IsTriangulated := fun E ↦
+    localizedExact (tC₀ E) (tC E) (tD₀ E) (tD E) (hLC E) (hLD E)
+      (F₀ E) (M.Φ E) (hF E)
+  have hTE : ∀ E, (M.Φ E).IsTExact (tC E) (tD E) := fun E ↦
+    localizedTExact (tC₀ E) (tC E) (tD₀ E) (tD E) (hLC E) (hLD E)
+      (F₀ E) (M.Φ E) (hF E) (fun X ↦ (hF₀ E X).1) (fun X ↦ (hF₀ E X).2)
+  exact stageDescent SC SD tC tD tCΩ tDΩ M hC hD hCΩ hDΩ hFE hTE hTC hTD
+    hCΩle hCΩge hDΩle hDΩge
 
 end CoefficientFamily
 

@@ -1,0 +1,262 @@
+{
+ "id": "lem-sfb-quasiprojective-point-closure-projectivity",
+ "kind": "statement",
+ "title": "DVR extension in a quasi-projective ambient gives a projective birational closure",
+ "statement": "Let $S$ be a Noetherian integral scheme with function field $K$ and generic point $\\eta$. Let $H\\to S$ be H-projective and of finite type, let $M\\subset H$ be an open subscheme, and let $m:\\operatorname{Spec}K\\to M$ lie over $\\eta$. Let $i:R\\hookrightarrow M$ be the reduced closure of $m$, and write $f:R\\to S$ for its structure map. Assume $R$ is integral, $f$ is separated, of finite type and locally of finite presentation, and $R_\\eta=\\operatorname{Spec}K$ with the identification induced by $m$. Suppose that for every discrete valuation subring $A\\subset K$ with fraction field $K$ and every $b:\\operatorname{Spec}A\\to S$ whose generic restriction is the generic inclusion of $S$, there is an $S$-morphism $v:\\operatorname{Spec}A\\to M$ restricting to $m$. Then each such $v$ factors uniquely through $i$; $f$ is proper; the composite $R\\hookrightarrow M\\hookrightarrow H$ is a closed immersion; and $f$ is H-projective and is an isomorphism over a dense open subscheme of $S$. This statement has no curve, normality, Hom-representability or rational-curve hypothesis.\n\nNoetherian means quasi-compact and locally Noetherian [pqf-def-locnoeth]. Integrality, function fields, H-projectivity, finite type, finite presentation, properness and separatedness, open and closed immersions, discrete valuation rings, spectra and reduction are [def-pc-integral-scheme], [def-sc-function-field], [def-kun-projective], [def-weil-finite-type-morphism], [def-sbc-locally-finite-presentation], [def-weil-proper-morphism], [def-weil-open-immersion], [def-weil-closed-immersion], [def-sc-discrete-valuation-ring], [def-weil-affine-spectrum] and [def-weil-pbc-scheme-reduction]. Reduced closure means the closure of the image point endowed with reduced induced closed subscheme structure. Dense means that the topological closure is all of $S$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), equivalence (1) and (4); de Jong Claim 3.10 and sections 3.11--3.12, printed p.609. Agent-formulated closure criterion, including scheme-theoretic factorization of lifts and the dense-base-open conclusion. The spreading input is the existing lem-sbc-generic-fibre-iso-spread-base-open."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-kun-projective",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-scheme-reduction"
+ ],
+ "proof": [
+  {
+   "text": "Write $a:\\operatorname{Spec}K\\to R$ for the factor of $m$ supplied by the assumed identification $R_\\eta=\\operatorname{Spec}K$. Its image $\\xi$ is the generic point of $R$: under the closed embedding $i$, its closure is all of $R$ by the definition of reduced closure. On affine neighbourhoods $\\operatorname{Spec}B\\subset R$ and $\\operatorname{Spec}C\\subset S$ of $\\xi,\\eta$, integrality makes $B,C$ domains. The generic-fibre identification says $(C\\setminus\\{0\\})^{-1}B=K$, compatibly with $\\operatorname{Frac}C=K$. Thus $B\\subset K$ and $\\operatorname{Frac}B=K$; the induced generic local-ring map is the identity $K\\to K$. Consequently $a$ is the canonical generic-point morphism, and $f$ is birational.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sc-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), identification of the canonical generic point; elementary localization using the assumed generic fibre"
+   }
+  },
+  {
+   "text": "Fix a pair $(A,b)$ in the hypothesis and its lift $v:\\operatorname{Spec}A\\to M$. A DVR is a valuation domain with fraction field $K$ [def-sc-discrete-valuation-ring]. Apply [lemma-nagata-valuation-factor-closed] to $i:R\\hookrightarrow M$, $v$ and its generic factor $a$ to obtain $w:\\operatorname{Spec}A\\to R$ with $iw=v$. This factorization is unique: on each affine open of $M$, maps through the quotient ring defining $i$ are uniquely determined by their composite with the quotient map [def-weil-closed-immersion]; these unique maps agree on overlaps. The equality $fw=b$ follows because $v$ is over $S$. Also $w|_{\\operatorname{Spec}K}=a$ by the same uniqueness.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lemma-nagata-valuation-factor-closed",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), condition (4); scheme-theoretic factorization through a closed subscheme over a domain"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-generic-dvr-properness-criterion] to $f:R\\to S$. The base is locally Noetherian, $R$ is integral, and $f$ is separated and finite type by assumption. Step 1 identifies its function field and canonical generic map with $K,a$, so the DVR subrings and base maps required by that criterion are exactly those in the hypothesis. Step 2 supplies all the required extensions. Therefore $f$ is proper.",
+   "uses": [
+    "lem-sfb-generic-dvr-properness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0208 (lemma-Noetherian-dvr-valuative-proper), (4) implies (1)"
+   }
+  },
+  {
+   "text": "Put $j:R\\hookrightarrow M\\hookrightarrow H$ and $q:H\\to S$. The given factorization makes $j$ an immersion [def-weil-closed-immersion]. Since $q$ is H-projective, [lem-kun-projective-implies-proper] makes it proper, hence separated. As $qj=f$ is proper, [lem-weil-pbc-proper-over-separated] gives properness of $j$. Applying [lem-weil-pbc-proper-immersion-closed] now makes $j$ a closed immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-weil-pbc-proper-immersion-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC (lemma-locally-projective-proper); Tag 01W6 (lemma-image-proper-scheme-closed); Schemes Tag 01IQ (lemma-immersion-when-closed)"
+   }
+  },
+  {
+   "text": "Choose the closed embedding $e:H\\hookrightarrow\\mathbf P^N_S$ from H-projectivity [def-kun-projective]. The composite $ej:R\\hookrightarrow\\mathbf P^N_S$ is closed by [lem-weil-pbc-closed-immersion-comp], and its structural composite is $f$. This is precisely H-projectivity of $f$.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W8 (definition-projective), H-projective clause; Tag 01QS (lemma-composition-closed-immersion)"
+   }
+  },
+  {
+   "text": "Both $R$ and $S$ are integral, so each has just one irreducible component. Step 1 identifies the generic points and their local rings compatibly with $f$. The separated and locally-finite-presentation hypotheses on $f$ are given. Thus [lem-sfb-birational-isomorphism-dense-open] supplies a dense open $U\\subseteq S$ with $f^{-1}(U)\\to U$ an isomorphism. This proves the last clause without assuming that $R$ is affine.",
+   "uses": [
+    "lem-sfb-birational-isomorphism-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ (lemma-birational-isomorphism-over-dense-open), separated and locally finitely presented alternatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-sc-discrete-valuation-ring",
+  "lemma-nagata-valuation-factor-closed",
+  "def-weil-closed-immersion",
+  "lem-sfb-generic-dvr-properness-criterion",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-proper-immersion-closed",
+  "def-kun-projective",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-sfb-birational-isomorphism-dense-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Assembly of Tag 0208 (lemma-Noetherian-dvr-valuative-proper), condition (4), with morphisms.tex Tags 01WC, 01W6, 01QS and 0BAJ; closed-immersion factorization through the existing valuation-factor-closed node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closure of a rational generic point of a quasi projective scheme over a noetherian integral base is projective and isomorphic over a dense open if the point extends along every discrete valuation subring of the function field",
+   "results": "{\"t\": \"2026-10-22T06:12:04Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced closure of a rational generic point of a quasi projective scheme over a noetherian integral base is projective and isomorphic over a dense open if the point extends along every discrete valuation subring of the function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\"], \"digest\": \"f56277e148d9e673\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give general valuation-ring criteria, properness of Proj and partial rational maps. The source ValuativeCriterion.lean explicitly lists the Noetherian DVR criterion as future work; none supplies the generic-point DVR criterion plus projectivity and an isomorphism over a dense base open."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProper\", \"IsProjective\"",
+   "results": "{\"t\": \"2026-10-22T06:11:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsProper\\\", \\\"IsProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give general valuation-ring criteria, properness of Proj and partial rational maps. The source ValuativeCriterion.lean explicitly lists the Noetherian DVR criterion as future work; none supplies the generic-point DVR criterion plus projectivity and an isomorphism over a dense base open."
+  },
+  {
+   "tool": "grep",
+   "query": "valuative|[Pp]roper.*[Pp]rojective|[Bb]irational",
+   "results": "{\"t\": \"2026-10-22T06:11:35Z\", \"tool\": \"grep\", \"query\": \"valuative|[Pp]roper.*[Pp]rojective|[Bb]irational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"f0693610f031dbb9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give general valuation-ring criteria, properness of Proj and partial rational maps. The source ValuativeCriterion.lean explicitly lists the Noetherian DVR criterion as future work; none supplies the generic-point DVR criterion plus projectivity and an isomorphism over a dense base open."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closure inside an open subscheme of a projective scheme is projective birational when it has the generic DVR extension property",
+   "results": "{\"t\": \"2026-10-22T06:11:36Z\", \"tool\": \"leansearch\", \"query\": \"A closure inside an open subscheme of a projective scheme is projective birational when it has the generic DVR extension property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.ZariskisMainProperty\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"IsDedekindDomainDvr.isIntegrallyClosed\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"ProjectiveSpectrum.isClosed_iff_zeroLocus\"], \"digest\": \"7c3d6971a3c6288d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give general valuation-ring criteria, properness of Proj and partial rational maps. The source ValuativeCriterion.lean explicitly lists the Noetherian DVR criterion as future work; none supplies the generic-point DVR criterion plus projectivity and an isomorphism over a dense base open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi projective integral scheme birational over a noetherian base is projective if all discrete valuation rings centered on its generic point lift",
+   "results": "{\"t\": \"2026-10-22T06:12:05Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi projective integral scheme birational over a noetherian base is projective if all discrete valuation rings centered on its generic point lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d2252c6bd046b7d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: The hits give general valuation-ring criteria, properness of Proj and partial rational maps. The source ValuativeCriterion.lean explicitly lists the Noetherian DVR criterion as future work; none supplies the generic-point DVR criterion plus projectivity and an isomorphism over a dense base open."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closure of a generic rational point in a quasi projective scheme is projective over a noetherian integral base if every discrete valuation subring of the function field admits a lift",
+   "results": "{\"t\": \"2026-10-23T04:28:43Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced closure of a generic rational point in a quasi projective scheme is projective over a noetherian integral base if every discrete valuation subring of the function field admits a lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\"], \"digest\": \"1aa2bc028c33f880\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give properness from the full valuation-ring criterion, properness of Proj, or unrelated function-field algebra; none gives this generic-DVR closure criterion and all its conclusions. ValuativeCriterion.lean lines 28-29 explicitly leave the Noetherian DVR criterion as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsImmersion\"",
+   "results": "{\"t\": \"2026-10-23T04:29:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"IsImmersion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give properness from the full valuation-ring criterion, properness of Proj, or unrelated function-field algebra; none gives this generic-DVR closure criterion and all its conclusions. ValuativeCriterion.lean lines 28-29 explicitly leave the Noetherian DVR criterion as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "valuative|[Pp]roper.*[Pp]rojective|[Bb]irational",
+   "results": "{\"t\": \"2026-10-23T04:31:46Z\", \"tool\": \"grep\", \"query\": \"valuative|[Pp]roper.*[Pp]rojective|[Bb]irational\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\"], \"digest\": \"c2801b8b715e61f2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give properness from the full valuation-ring criterion, properness of Proj, or unrelated function-field algebra; none gives this generic-DVR closure criterion and all its conclusions. ValuativeCriterion.lean lines 28-29 explicitly leave the Noetherian DVR criterion as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closure of a generic rational point is projective and birational if it extends over all discrete valuation subrings of the function field",
+   "results": "{\"t\": \"2026-10-23T04:31:46Z\", \"tool\": \"leansearch\", \"query\": \"A closure of a generic rational point is projective and birational if it extends over all discrete valuation subrings of the function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.ringOfIntegers\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"instIsIntegrallyClosedSubtypeMemSubring\", \"FunctionField.ringOfIntegers.instIsNoetherianPolynomialSubtypeMemSubalgebraOfIsSeparableRatFunc\", \"Algebra.ZariskisMainProperty\", \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\", \"FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial\"], \"digest\": \"42accf380f0896f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give properness from the full valuation-ring criterion, properness of Proj, or unrelated function-field algebra; none gives this generic-DVR closure criterion and all its conclusions. ValuativeCriterion.lean lines 28-29 explicitly leave the Noetherian DVR criterion as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type morphism from an integral scheme to a locally noetherian scheme is proper if its generic point extends over every discrete valuation subring of its function field",
+   "results": "{\"t\": \"2026-10-23T04:34:43Z\", \"tool\": \"leanfinder\", \"query\": \"A separated finite type morphism from an integral scheme to a locally noetherian scheme is proper if its generic point extends over every discrete valuation subring of its function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\"], \"digest\": \"f0296f02b20011af\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give properness from the full valuation-ring criterion, properness of Proj, or unrelated function-field algebra; none gives this generic-DVR closure criterion and all its conclusions. ValuativeCriterion.lean lines 28-29 explicitly leave the Noetherian DVR criterion as future work."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-hom-closure",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source. Re-split task: returned steps 7--8: factorization of the DVR lift, properness, closed Hilbert immersion and dense-base-open spreading; this split: canonical generic-point identification, closed-subscheme factorization, 0208(4), proper immersion, composition of closed embeddings, and 0BAJ for the full inverse image of a dense base open",
+   "via": [
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiprojective-point-closure-projectivity",
+  "worker": "stage1",
+  "summary": "Q34 assembled existing generic DVR, closed-factorization, projectivity and birational-open nodes without creating duplicates. All clauses and original hypotheses are retained. The affine-only spreading node mentioned in the old source field is not applied to nonaffine R; the existing general birational-open theorem supplies the conclusion.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction; de Jong closure prerequisite, returned high-genus-Hom-closure steps 7-8. Steps 1-3 realize generic identification, factorization and properness; steps 4-5 the closed Hilbert immersion and projectivity; step 6 the dense-base-open conclusion. The ancestor tool returns None, retained as inherited rather than inventing a blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "General H-projective implies proper theorem supplies separatedness of the ambient H/S; no same-unit node supplies this standard permanence fact. Other off-unit theorem citations are Mathlib leaves or Lean-closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-4dd9843d7",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-4dd9843d7 (reviewer sub-agent of L); spot-checked: Read the item's six steps and every cited statement in full. The item's statement, stmt_deps and source are identical to the base copies in the Q128 snapshots, so no target was weakened. No new nodes. Step 1: since Spec B contains ξ, (C∖0)^{-1}B = K, which forces C→B injective and B ⊂ K = Frac B; so O_{R,ξ} = K, the map O_{S,η} → O_{R,ξ} is the identity of K, and f∘a is the canonical generic morphism. Step 2: lemma-nagata-valuation-factor-closed (a DVR is a valuation ring) gives w with iw = v; uniqueness, fw = b and w|_K = a follow because a closed immersion is a monomorphism. Step 3: the hypotheses of lem-sfb-generic-dvr-properness-criterion (Stacks limits.tex 0208(4), read) match exactly after step 1. Step 4: H→S projective, so proper and separated; 01W6(2) makes j proper, and a proper immersion is closed. Step 5: composing with the embedding from def-kun-projective and 01QS gives H-projectivity. Step 6: 0BAJ applies to the full f^{-1}(V) with R not affine; separated and lfp hold, there is one component each, and the generic-point/local-ring conditions come from step 1. Edge cases: S = Spec K is trivial, and no normality is used. Searches for reduced closure, 0208, 0BAJ and projective⇒proper found no duplicate. tool_use lem-kun-projective-implies-proper accepted: a generic fact already cited by 32 nodes of this unit. Maintainer note: the source field still names lem-sbc-generic-fibre-iso-spread-base-open (unchanged base annotation), but the proof correctly uses lem-sfb-birational-isomorphism-dense-open. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.QuasiprojectivePointClosureProjectivity",
+  "declaration": "AlgebraicGeometry.quasiprojective_point_closure_projectivity",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/QuasiprojectivePointClosureProjectivity.lean",
+  "statement": "theorem quasiprojective_point_closure_projectivity {S H M R : Scheme.{u}} [IsIntegral S] [IsLocallyNoetherian S] [CompactSpace S] (q : H ⟶ S) [IsHProjective q] [LocallyOfFiniteType q] [QuasiCompact q] (j : M ⟶ H) [IsOpenImmersion j] (m : Spec S.functionField ⟶ M) (hm : m ≫ j ≫ q = S.fromSpecStalk (genericPoint S)) (i : R ⟶ M) [IsClosedImmersion i] [IsIntegral R] (hclosure : Set.range i = closure (Set.range m)) (f : R ⟶ S) (hf : i ≫ j ≫ q = f) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [LocallyOfFinitePresentation f] (hgeneric : ∃ a : Spec S.functionField ⟶ R, a ≫ i = m ∧ IsPullback a (𝟙 (Spec S.functionField)) f (S.fromSpecStalk (genericPoint S))) (hext : ∀ (A : Subring S.functionField) [IsDiscreteValuationRing A] [IsFractionRing A S.functionField] (b : Spec (.of A) ⟶ S), Spec.map (CommRingCat.ofHom A.subtype) ≫ b = S.fromSpecStalk (genericPoint S) → ∃ v : Spec (.of A) ⟶ M, v ≫ j ≫ q = b ∧ Spec.map (CommRingCat.ofHom A.subtype) ≫ v = m) : (∀ (A : Subring S.functionField) [IsDiscreteValuationRing A] [IsFractionRing A S.functionField] (b : Spec (.of A) ⟶ S), Spec.map (CommRingCat.ofHom A.subtype) ≫ b = S.fromSpecStalk (genericPoint S) → ∀ v : Spec (.of A) ⟶ M, v ≫ j ≫ q = b → Spec.map (CommRingCat.ofHom A.subtype) ≫ v = m → ∃! w : Spec (.of A) ⟶ R, w ≫ i = v) ∧ IsProper f ∧ IsClosedImmersion (i ≫ j) ∧ IsHProjective f ∧ ∃ U : S.Opens, Dense (U : Set S) ∧ IsIso (f ∣_ U)",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba60e775e",
+  "group": "NS",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: Noetherian = IsLocallyNoetherian+CompactSpace; K = S.functionField with fromSpecStalk generic inclusion; H-projective via upstream IsHProjective (def-kun-projective record); reduced closure = IsClosedImmersion i + IsIntegral R + range i = closure(range m), which is unique for reduced structure; R_η = Spec K as IsPullback a 𝟙 f η with a≫i=m; DVR hypothesis over Subring K with IsDVR/IsFractionRing; conclusions ∃! factorization, IsProper f, IsClosedImmersion (i≫j), IsHProjective f, dense U with IsIso (f ∣_ U). hm, finite type of q and lfp of f are redundant (hm follows from the pullback commutativity) but are node hypotheses, not stronger. Edge cases: S = Spec K vacuous DVR clause; H=M=R=S satisfiable. Statement field verbatim; only the lean field changed vs side-live; docstrings carry the source and blueprint; no defs; sorry only; private proof-dep imports exist in side-live; no duplicate found. No compile (no file changed); worker compile clean."
+ }
+}

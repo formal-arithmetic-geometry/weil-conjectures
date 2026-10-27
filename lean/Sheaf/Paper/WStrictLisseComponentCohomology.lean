@@ -14,19 +14,9 @@ public import Sheaf.Paper.CondensedQcqsPushforwardContinuity
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
-import Sheaf.Topology.StoneanCover
-import Sheaf.RingTheory.StoneanCoverSecondStage
-import Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences
-import Sheaf.AlgebraicGeometry.CondensedModulePullbackExact
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteProjectiveDualizable
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import Sheaf.Paper.ProfinitePointPullback
-import Sheaf.Algebra.Homology.LocallyFreeDerivedHom
-import Sheaf.CategoryTheory.SiteFiniteBasisHypercoverExistence
-import Sheaf.Paper.ComponentRelativeProfiniteSite
-import Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation
-import Sheaf.CategoryTheory.Sites.ContractibleDerivedSectionsTensor
+import Sheaf.Paper.ComponentHypercoverUnitCriterion
+import Sheaf.Paper.WStrictCommonComponentHypercovers
+import Sheaf.AlgebraicGeometry.LisseModuleInverseImage
 
 /-!
 # Lisse condensed cohomology on w-strictly local affines
@@ -48,7 +38,7 @@ set_option relaxedAutoImplicit false
 universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
-open scoped CategoryTheory.Obj
+open scoped CategoryTheory.Obj Simplicial
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -186,6 +176,31 @@ theorem wstrict_lisse_component_cohomology
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y))
     (hM : IsLisseCoefficientModule Λ.X M) :
     IsIso ((componentLisseSectionsPullback Λ f).app M) := by
-  sorry
+  classical
+  let e := hcomponents.homeomorph
+  obtain ⟨S, U, V, p, q, g, hS, hU, hV, hg, hpq, hnat⟩ :=
+    wstrict_common_component_hypercovers Y X f e (fun x ↦ rfl)
+  have hbij (n : ℕ) : Function.Bijective
+      (componentLiftSectionPullback Λ (g n) ((upperStar Λ.X (U _⦋n⦌).hom).obj M)) := by
+    have := (hU.2.1 n).1
+    have := (hV.2.1 n).1
+    have := (hU.2.1 n).2.1
+    have := (hV.2.1 n).2.1
+    obtain ⟨_, _, _, _, _, _, hED, _⟩ := hS
+    have := hED n
+    obtain ⟨eU, heU⟩ := (hU.2.2.2.1 n).2.2.1
+    obtain ⟨eV, heV⟩ := (hV.2.2.2.1 n).2.2.1
+    have hgn : IsComponentLiftMap eU eV (g n) := by
+      intro v
+      exact (heU (g n v)).trans ((hpq n v).trans (heV v).symm)
+    obtain ⟨d, m, c, hc, _⟩ :=
+      component_lift_lisse_section_comparison Λ (S _⦋n⦌).left
+    exact ((hc _ _ eU eV (g n) hgn).2.2.2.2.2 _
+      (isLisseCoefficientModule_upperStar Λ (U _⦋n⦌).hom M hM)).2.2.2.1
+  have := componentHypercoverUnitCriterion Λ f U V g hU.1 hV.1
+    (fun n ↦ (hU.2.1 n).2.2) (fun n ↦ (hV.2.1 n).2.2) hg hnat M hbij
+  dsimp only [componentLisseSectionsPullback, componentDerivedSectionsPullback,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  infer_instance
 
 end AlgebraicGeometry.ProEtale.CondensedRing

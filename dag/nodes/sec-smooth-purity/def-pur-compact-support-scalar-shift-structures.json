@@ -1,0 +1,135 @@
+{
+ "id": "def-pur-compact-support-scalar-shift-structures",
+ "kind": "definition",
+ "title": "Canonical shift structures of scalar support functors",
+ "statement": "Equip the exact tensor, restriction, open-extension, reduction and separately right-derived proper-image and limit functors of [lem-pur-compact-support-strict-scalar-mate] and [def-pur-compact-support-scalar-limit-maps] with their canonical integer shifts. Define OriginalMateShift(a,c) as the conjunction of CommShift for the actual proper comparison, open comparison, inverse scalar/pullback comparison, and geometric adjunction counit. These are precisely the constructions formerly at the beginning of lem-pur-compact-support-scalar-shift-normalization; no comparison map or shift structure is changed. The functors and maps are those of [def-sp-coefficient-mate-comparisons], [def-pur-constant-scalar-tower-mates], [def-pur-compact-support-scalar-limit-maps], [lem-pur-derived-change-of-rings].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 05SU, 06YU, 07A6, 0B56, 0941, 099I, 099L; retained canonical scalar-shift argument of lem-pur-compact-support-scalar-shift-normalization."
+ },
+ "stmt_deps": [
+  "def-sp-coefficient-mate-comparisons",
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-compact-support-scalar-limit-maps",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Expanded retained comparison Steps 12--13; detailed proof in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of derived scalar extension commute with shifts, uniquely normalized by the localization counit",
+   "results": "Functor.commShiftOfLocalization; mapDerivedCategoryFactors CommShift; useful for the proved tensor uniqueness clause.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a flat completion map is fully faithful on derived complete modules",
+   "results": "ModuleCat.instFaithfulRestrictScalars and ordinary sheaf restriction; does not apply directly to derived morphisms.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"unique\"",
+   "results": "Adjunction.CommShift.compatibilityUnit_unique_left/right; no combined proper/open or Roos constraint lemma.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarCommShift_existsUnique|scalarLimitArrow|originalScalarMateShift|completeScalarRestrictionFaithful",
+   "results": "Existing scalarCommShift_existsUnique is reused; original-site and diagram-site factor equations and complete Hom injectivity are not separately stated. Blueprint scalar shift and complete restriction searches found no exact match.",
+   "date": "2026-10-25",
+   "verdict": "Component results only; no statement for the specified canonical maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarShiftNormalization",
+  "date": "2026-10-25",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary Canonical shifts of scalar proper/open mates and scalar limit maps (returned comparison Steps 12, 13); substep: Canonical shift structures of scalar support functors",
+   "via": [
+    "lem-pur-compact-support-scalar-shift-normalization",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarShiftStructures",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarShiftStructures.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.OriginalMateShift",
+  "statement": "def OriginalMateShift {R₀ S₀ : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R₀ S₀) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurStrictScalar.tensorCommShift",
+   "WeilConjectures.PurStrictScalar.properCommShift",
+   "WeilConjectures.PurStrictScalar.openCommShift",
+   "WeilConjectures.PurStrictScalar.sequenceLimitCommShift",
+   "WeilConjectures.PurStrictScalar.systemRestrictionCommShift",
+   "WeilConjectures.PurStrictScalar.nativeOpenCommShift",
+   "WeilConjectures.PurStrictScalar.nativeProperCommShift",
+   "WeilConjectures.PurStrictScalar.reductionCommShift",
+   "WeilConjectures.PurStrictScalar.supportCommShift",
+   "WeilConjectures.PurStrictScalar.nativeSupportCommShift",
+   "WeilConjectures.PurStrictScalar.scalarSupportCommShift",
+   "WeilConjectures.PurStrictScalar.baseTensorCommShift",
+   "WeilConjectures.PurStrictScalar.constantRestrictionCommShift",
+   "WeilConjectures.PurStrictScalar.subsequenceCommShift",
+   "WeilConjectures.PurStrictScalar.completedExtensionCommShift",
+   "WeilConjectures.PurStrictScalar.scalarCompletionTargetCommShift",
+   "WeilConjectures.PurStrictScalar.pullCommShift",
+   "WeilConjectures.PurStrictScalar.OriginalMateShift"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb474",
+  "group": "Q2",
+  "result": "fix",
+  "landing": "20261025T164128-L-956705",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs published (identical); moved instance block vs clone (identical but one docstring line); split lemmas vs item conjuncts; witness clauses vs strictScalarMateShift/scalarLimitConstraintShift conclusions; attachment nodes vs scalarCommShift_existsUnique/integralTriangulated"
+ }
+}

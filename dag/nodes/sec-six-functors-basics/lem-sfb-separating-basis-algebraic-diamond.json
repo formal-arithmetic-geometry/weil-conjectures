@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-separating-basis-algebraic-diamond",
+ "kind": "statement",
+ "title": "Separating basis construction and transfer in an algebraic field diamond",
+ "statement": "Let $k_0\\subseteq k\\subseteq E$ and $k_0\\subseteq F\\subseteq E$ be inclusions of fields [def-weil-field, def-pc-field-extension]; $k$ and $F$ need not contain one another. Assume that $k/k_0$ is algebraic, that $E/F$ is separable algebraic [def-weil-pbc-separable-algebraic-extension], that both $E/k_0$ and $F/k_0$ are finitely generated as fields, and that for every extension field $L/k_0$ the ring $F\\otimes_{k_0}L$ is reduced. Algebraic means that every element satisfies a nonzero polynomial over the base; finitely generated means generated as a field by finitely many elements; reduced means having no nonzero nilpotents. The tensor product is the commutative algebra tensor product, with $(f\\otimes l)(f'\\otimes l')=ff'\\otimes ll'$. Let $d\\in\\mathbf N$ satisfy $\\operatorname{trdeg}_{k_0}F=d$ [def-kun-transcendence-degree]. There are $t_1,\\ldots,t_d\\in F$ forming a transcendence basis of $F/k_0$ [def-weil-pbc-transcendence-basis] such that $F/k_0(t_1,\\ldots,t_d)$ is separable algebraic, the family is algebraically independent over $k$, and $E/k(t_1,\\ldots,t_d)$ is finite separable. Finite separable means finite-dimensional and separable algebraic; the generated subfields are taken inside $E$. The empty family is allowed when $d=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent extraction of former steps 7-9 of lem-sfb-invariant-separating-parameters: Tag 030W (lemma-characterize-separable-field-extensions), Tag 030Z (lemma-perfect), fields.tex Tag 09HB (lemma-separable-permanence) and Tag 09GH (lemma-algebraic-finitely-generated), algebraic-base independence, and the explicit minimal-polynomial Bezout identity after enlarging the parameter base. Serves de Jong Lemma 5.2 proof, printed p.613."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-transcendence-basis"
+ ],
+ "proof": [
+  {
+   "text": "Choose a separating transcendence basis of $F/k_0$. In characteristic zero apply [lem-weil-pbc-perfect-field-separating-basis]. In characteristic $p>0$, reducedness of every $F\\otimes_{k_0}L$ gives [lem-weil-pbc-geometrically-reduced-extension-separable]; since $F/k_0$ is finitely generated, apply its conclusion to $F$ itself and unfold [def-weil-pbc-separable-field-extension](1)-(2). In both cases [def-kun-transcendence-degree] identifies the cardinality of this basis with $d$, so enumerate it as $t_1,\\ldots,t_d$. Set $A=k_0(t_1,\\ldots,t_d)\\subseteq F$ and $B=k(t_1,\\ldots,t_d)\\subseteq E$. We have $F/A$ separable algebraic.",
+   "uses": [
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "def-weil-pbc-separable-field-extension",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030Z (lemma-perfect) and 030W (lemma-characterize-separable-field-extensions), implication (4) to (1); Definition 030O (definition-separable-field-extension)."
+   }
+  },
+  {
+   "text": "The family $t_1,\\ldots,t_d$, viewed in $E$, is algebraically independent over $k_0$: a polynomial relation in $E$ is the identical relation in the subfield $F$. Apply [lem-zl-independence-algebraic-base] to the tower $k_0\\subseteq k\\subseteq E$ and the assumed algebraicity of $k/k_0$. The family is therefore algebraically independent over $k$.",
+   "uses": [
+    "lem-zl-independence-algebraic-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Algebraic-base independence as recorded by lem-zl-independence-algebraic-base; Mathlib/RingTheory/AlgebraicIndependent/AlgebraicClosure.lean:96-98."
+   }
+  },
+  {
+   "text": "In the tower $A\\subseteq F\\subseteq E$, both successive extensions are separable algebraic: $F/A$ by step 1 and $E/F$ by hypothesis. Thus [lem-zl-separable-permanence] gives $E/A$ separable algebraic.",
+   "uses": [
+    "lem-zl-separable-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HB, label lemma-separable-permanence."
+   }
+  },
+  {
+   "text": "Since $k_0\\subseteq k$ and every $t_i$ lies in $B$, the defining minimality of a generated subfield gives $A\\subseteq B\\subseteq E$. Every element of $B$ is algebraic over $A$, because it lies in $E$ and step 3 makes $E/A$ algebraic; likewise each polynomial over $A$ witnessing algebraicity of an element of $E$ remains nonzero over $B$. Thus this is a tower of algebraic field extensions, as required by the Stacks source. Apply [lem-sfb-separable-algebraic-intermediate-base] to this tower and step 3: $E/B$ is separable algebraic. This application requires no inclusion between $k$ and $F$.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "lem-sfb-separable-algebraic-intermediate-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09H2, label lemma-separable-goes-up, part (2)."
+   }
+  },
+  {
+   "text": "Write $E=k_0(a_1,\\ldots,a_n)$ using finite generation over $k_0$. Because $k_0\\subseteq B\\subseteq E$, generated-subfield minimality gives $E=B(a_1,\\ldots,a_n)$. Step 4 makes each $a_i$ algebraic over $B$. Applying [lem-weil-pbc-algebraic-generators-finite-extension] over $B$ proves $[E:B]<\\infty$. Together with steps 1, 2 and 4 this is every asserted clause. For $d=0$ the generated fields are $A=k_0$ and $B=k$, and the same argument uses the empty family without any change.",
+   "uses": [
+    "def-weil-pbc-transcendence-basis",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GH, label lemma-algebraic-finitely-generated."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-weil-pbc-geometrically-reduced-extension-separable",
+  "def-weil-pbc-separable-field-extension",
+  "def-kun-transcendence-degree",
+  "lem-zl-independence-algebraic-base",
+  "lem-zl-separable-permanence",
+  "def-weil-pbc-transcendence-basis",
+  "lem-sfb-separable-algebraic-intermediate-base",
+  "lem-weil-pbc-algebraic-generators-finite-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent assembly of Tags 030W and 030Z with fields.tex Tags 09HB, 09H2 and 09GH, and algebraic-base independence; realizes the item extracted from steps 7-9 of lem-sfb-invariant-separating-parameters."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists_isTranscendenceBasis_and_isSeparable|isSeparable_tower|isSeparable_of_tower|algebraicIndependent_iff",
+   "results": "{\"t\": \"2026-10-22T06:11:57Z\", \"tool\": \"grep\", \"query\": \"exists_isTranscendenceBasis_and_isSeparable|isSeparable_tower|isSeparable_of_tower|algebraicIndependent_iff\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/CardinalEmb.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\"], \"digest\": \"2e4f2e11e4307a51\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply a separating basis under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base. None constructs a separating basis inside the specified subfield and transfers all conclusions across this algebraic diamond in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separating transcendence basis of a finitely generated geometrically reduced field F over k0 also separates a finitely generated separable algebraic extension E over an algebraic intermediate base k",
+   "results": "{\"t\": \"2026-10-22T06:11:57Z\", \"tool\": \"leansearch\", \"query\": \"A separating transcendence basis of a finitely generated geometrically reduced field F over k0 also separates a finitely generated separable algebraic extension E over an algebraic intermediate base k\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTranscendenceBasis\", \"IsSeparable\"",
+   "results": "{\"t\": \"2026-10-22T06:11:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTranscendenceBasis\\\", \\\"IsSeparable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\"], \"digest\": \"468cd3d1e8016e1c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply a separating basis under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base. None constructs a separating basis inside the specified subfield and transfers all conclusions across this algebraic diamond in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an algebraic diamond of fields k0 k F E with k over k0 algebraic and E over F separable algebraic, a finitely generated geometrically reduced F over k0 has a separating transcendence basis still separating for E over k",
+   "results": "{\"t\": \"2026-10-22T06:12:25Z\", \"tool\": \"leanfinder\", \"query\": \"In an algebraic diamond of fields k0 k F E with k over k0 algebraic and E over F separable algebraic, a finitely generated geometrically reduced F over k0 has a separating transcendence basis still separating for E over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\"], \"digest\": \"4fe9b69730734ffa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply a separating basis under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base. None constructs a separating basis inside the specified subfield and transfers all conclusions across this algebraic diamond in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transfer a separating transcendence basis across a separable algebraic extension of the top field and an algebraic extension of the base field",
+   "results": "{\"t\": \"2026-10-22T06:12:26Z\", \"tool\": \"leanfinder\", \"query\": \"Transfer a separating transcendence basis across a separable algebraic extension of the top field and an algebraic extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"Algebra.IsAlgebraic.isTranscendenceBasis_iff\"], \"digest\": \"2b3170fcb61873b6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply a separating basis under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base. None constructs a separating basis inside the specified subfield and transfers all conclusions across this algebraic diamond in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separating transcendence basis of a finitely generated geometrically reduced field remains a separating transcendence basis across a separable algebraic top extension and an algebraic base extension",
+   "results": "{\"t\": \"2026-10-22T11:03:31Z\", \"tool\": \"leanfinder\", \"query\": \"A separating transcendence basis of a finitely generated geometrically reduced field remains a separating transcendence basis across a separable algebraic top extension and an algebraic base extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow'\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow\", \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField\", \"IntermediateField.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"IntermediateField.FG.exists_finset_maximalFor_isTranscendenceBasis_separableClosure\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"Algebra.IsAlgebraic.isTranscendenceBasis_iff\"], \"digest\": \"47bcabc7dc0d495e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole diamond: hits give basis existence under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base; combining these and finite generation is a multi-step proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTranscendenceBasis\", \"IsAlgebraic\"",
+   "results": "{\"t\": \"2026-10-22T11:03:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsTranscendenceBasis\\\", \\\"IsAlgebraic\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsTranscendenceBasis.isEmpty_iff_isAlgebraic\", \"IsTranscendenceBasis.isAlgebraic_iff\", \"IsTranscendenceBasis.isAlgebraic\", \"AlgebraicIndependent.isTranscendenceBasis_iff_isAlgebraic\", \"IsTranscendenceBasis.isAlgebraic_field\", \"isTranscendenceBasis_iff_algebraicIndependent_isAlgebraic\", \"isAlgebraic_iff_exists_isTranscendenceBasis_subset\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg_of_finite\"], \"digest\": \"9930292cc2d9b4b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole diamond: hits give basis existence under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base; combining these and finite generation is a multi-step proof."
+  },
+  {
+   "tool": "grep",
+   "query": "isTranscendenceBasis_iff|algebraicIndependent_iff|isSeparable_tower|isSeparable_of_tower",
+   "results": "{\"t\": \"2026-10-22T11:03:32Z\", \"tool\": \"grep\", \"query\": \"isTranscendenceBasis_iff|algebraicIndependent_iff|isSeparable_tower|isSeparable_of_tower\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/Separable.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"3c9e6ce4945f8234\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole diamond: hits give basis existence under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base; combining these and finite generation is a multi-step proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separating transcendence basis transfers over an algebraic base field extension and a separable algebraic extension of the top field",
+   "results": "{\"t\": \"2026-10-22T11:03:32Z\", \"tool\": \"leansearch\", \"query\": \"A separating transcendence basis transfers over an algebraic base field extension and a separable algebraic extension of the top field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsAlgebraic.isTranscendenceBasis_iff\", \"IsTranscendenceBasis.to_subtype_range'\", \"IsTranscendenceBasis.of_comp\", \"IsTranscendenceBasis\", \"exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_adjoin_eq_top\", \"AlgEquiv.isTranscendenceBasis\", \"exists_isTranscendenceBasis_superset\", \"Algebra.IsAlgebraic.isTranscendenceBasis_of_le_trdeg\"], \"digest\": \"1ea456abd3985fec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole diamond: hits give basis existence under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base; combining these and finite generation is a multi-step proof."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isTranscendenceBasis_and_isSeparable_of_perfectField|exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType",
+   "results": "{\"t\": \"2026-10-22T11:06:09Z\", \"tool\": \"grep\", \"query\": \"exists_isTranscendenceBasis_and_isSeparable_of_perfectField|exists_isTranscendenceBasis_and_isSeparable_of_linearIndepOn_pow_of_essFiniteType\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"Mathlib/FieldTheory/SeparablyGenerated.lean\", \"Mathlib/FieldTheory/SeparablyGenerated.lean\"], \"digest\": \"090bfa0ec8745b63\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole diamond: hits give basis existence under perfectness or p-power independence, algebraic-base basis transport, or separability over an intermediate base; combining these and finite generation is a multi-step proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-separating-parameters",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; equivariant curve pencil, de Jong Lemma 5.2; de Jong Lemma 5.2 proof, p.613, invariant functions x_1,...,x_{d-1}; supplies the separating basis before taking its first d-1 entries; Agent extraction of former steps 7-9 of lem-sfb-invariant-separating-parameters: Tag 030W (lemma-characterize-separable-field-extensions), Tag 030Z (lemma-perfect), fields.tex Tag 09HB (lemma-separable-permanence) and Tag 09GH (lemma-algebraic-finitely-generated), algebraic-base independence, and the explicit minimal-polynomial Bezout identity after enlarging the parameter base. Serves de Jong Lemma 5.2 proof, printed p.613.",
+   "via": [
+    "lem-sfb-invariant-separating-parameters",
+    "lem-sfb-equivariant-curve-pencil",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-separating-basis-algebraic-diamond",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split into separating basis existence by characteristic, algebraic-base independence, separability transitivity, separability after enlarging the parameter base, and finiteness from algebraic generators. Reused existing DAG nodes; created only the exact Mathlib leaf for intermediate-base separability. Checked empty basis and nonnested k,F. Repair of return L: compared the retained delivery with the current unsplit live item and re-read every cited statement; the statement and dependency ids remain valid. Expanded step 4 to check both algebraic-tower hypotheses explicitly, preserving the approved route and existing searches. The delivery tool rebuilds the commit on current origin/sheaf-dag.",
+  "blueprint": "Realizes the algebraic field-diamond portion extracted from former steps 7-9 of lem-sfb-invariant-separating-parameters, serving det-thm-sf-ctf-stability-direct-images proof (3), alteration reduction through ILO X Lemma 2.2 and de Jong Lemma 5.2 invariant functions. The ancestor tool returns None; the inherited null ancestor and via chain are retained. Whole-blueprint searches for separating transcendence, algebraic independence, transcentenden/separab concepts, separability over, and 09H2 found no identical statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "why": "Generic positive-characteristic field separability criterion applied to F/k_0, with exactly the universal tensor-reducedness hypothesis. It supplies a tool below the invariant-parameter construction; the unit has no substitute for this field-theoretic criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-geometrically-reduced-extension-separable"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-ef683a9d2",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-ef683a9d2 (reviewer sub-agent of L); spot-checked: All five steps hold, so the split is a valid proof of the item; no fixes written. The item's statement and stmt_deps match the live unsplit node; only the split fields differ. Against the previous head 45921f77, the only changes are a more explicit step 4 and a longer split_report summary, so this is not a byte-identical re-push. Step checks: step 1 cites the perfect-field separating-basis node for characteristic 0, and in characteristic p the geometric-reducedness criterion plus separable-extension definition clauses (1)-(2), applied with K'=F since F is finitely generated; trdeg gives cardinality d. Step 2 applies lem-zl-independence-algebraic-base to k_0⊆k⊆E, which needs no nesting of k and F. Step 3 uses separable permanence for A⊆F⊆E. Step 4 gets A⊆B from generated-subfield minimality and then applies the new leaf. Step 5 gets E=B(a_i) with each a_i algebraic over B, so the algebraic-generators node makes E/B finite. New node lem-sfb-separable-algebraic-intermediate-base: it agrees with Stacks fields.tex 1186-1206 (Tag 09H2(2)) and with Mathlib Separable.lean:632, Algebra.isSeparable_tower_top_of_isSeparable (field specialization, section variables 617-619). DAG grep for 09H2, tower_top and the item id finds only the separable-closure case and the Galois analogue, so it is not a duplicate; it is also not a clause of the item. Edge cases checked: d=0; k=k_0; F=E; Q⊆Q(√2) with F=Q(t), E=Q(√2,t); and the imperfect base F_p(s). The declared off-unit tool lem-weil-pbc-geometrically-reduced-extension-separable is accepted. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparatingBasisAlgebraicDiamond",
+  "declaration": "Algebra.exists_separating_basis_algebraic_diamond",
+  "file": "lean/Sheaf/FieldTheory/SeparatingBasisAlgebraicDiamond.lean",
+  "statement": "theorem exists_separating_basis_algebraic_diamond (k₀ : Type u) (k : Type v) (F : Type w) (E : Type z) [Field k₀] [Field k] [Field F] [Field E] [Algebra k₀ k] [Algebra k₀ F] [Algebra k₀ E] [Algebra k E] [Algebra F E] [IsScalarTower k₀ k E] [IsScalarTower k₀ F E] [Algebra.IsAlgebraic k₀ k] [Algebra.IsSeparable F E] (hEfg : (⊤ : IntermediateField k₀ E).FG) (hFfg : (⊤ : IntermediateField k₀ F).FG) (hred : ∀ (L : Type (max u v w z q)) [Field L] [Algebra k₀ L], IsReduced (F ⊗[k₀] L)) (d : ℕ) (hd : Algebra.trdeg k₀ F = (d : Cardinal)) : ∃ t : Fin d → F, IsTranscendenceBasis k₀ t ∧ Algebra.IsSeparable (IntermediateField.adjoin k₀ (Set.range t)) F ∧ AlgebraicIndependent k (fun i ↦ algebraMap F E (t i)) ∧ FiniteDimensional (IntermediateField.adjoin k (Set.range (fun i ↦ algebraMap F E (t i)))) E ∧ Algebra.IsSeparable (IntermediateField.adjoin k (Set.range (fun i ↦ algebraMap F E (t i)))) E",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0efaf62f6",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause match of node vs Lean: four fields with five Algebra instances + two IsScalarTower (no k/F relation), IsAlgebraic k₀ k, IsSeparable F E, both IntermediateField ⊤.FG, universal tensor reducedness over Type (max u v w z q) (weaker hypothesis, still sufficient), trdeg = (d:Cardinal); conclusion ∃ t : Fin d → F with IsTranscendenceBasis, F/k₀(t) separable, independence over k in E, E/k(t) FiniteDimensional + IsSeparable. lean.statement verbatim; stmt_dep records Field/Algebra/Algebra.IsSeparable/Algebra.trdeg/IsTranscendenceBasis correct; node unchanged vs live except lean record; no H4 duplicate (parent invariant-parameters and finite-subextension theorems differ); d=0, k=k₀, F=E edge cases fine; mathematics true via Stacks 030W/030Z/09HB/09H2/09GH; no defs, sorry only, docstrings with source and blueprint, report sections present. No findings."
+ }
+}

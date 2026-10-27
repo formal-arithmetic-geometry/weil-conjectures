@@ -1,0 +1,150 @@
+{
+ "id": "def-per-normalized-tower-recovery-tests",
+ "kind": "definition",
+ "title": "Uncontracted centered normalized tower recovery comparisons and canonical local tests",
+ "status": "split",
+ "statement": "Let $T=(T_i,J_i,b_i)_{0\\le i\\le n}$ be a centered normalized blowup tower with Noetherian stages [def-trf-monoscheme-toric-realization], with the stage composites $t_i:T_i\\to T_0$, center-preserving maps and center-preserving isomorphisms of [def-per-normalized-tower-descent-data]. Define $\\operatorname{Ass}(T)=\\bigcup_{i<n}(t_i\\circ V(J_i)\\hookrightarrow T_i)(\\operatorname{Ass}(V(J_i)))$, using associated points [def-sc-associated-points]. The closed center has structure sheaf $\\mathcal O_{T_i}/J_i$.\n\nFor towers T,S of lengths n,m and base maps $b_T:T_0\\to X$, $b_S:S_0\\to X$, define $\\operatorname{SameOver}(T,S,b_T,b_S)$ to mean $n=m$ together with a center-preserving stage isomorphism $E:T\\simeq S$ satisfying $b_SE_0=b_T$; only transport of the finite index type is allowed, with no contraction. For $f:Y\\to X$, a scheme-theoretic uncontracted pullback of $(T,b_T)$ is a length-n normalized tower R, an isomorphism $e:R_0\\simeq Y$, and a cartesian center-preserving map $c:R\\to T$, with $b_Tc_0=fe$. This is comparison data; existence is not asserted for arbitrary f.\n\nFor a geometric point $s:\\operatorname{Spec}\\Omega\\to X$, let $H_s$ be the recorded geometric strict local ring [def-weil-pbc-strict-henselization-limit], with canonical evaluation $\\epsilon_s:H_s\\to\\Omega$ [def-weil-pbc-strict-henselization-point-evaluation]. Put $C_s=\\operatorname{AdicCompletion}_{\\ker\\epsilon_s}(H_s)$ [def-weil-pbc-adic-completion]; the kernel is the strict local maximal ideal. Define its structural morphism as $\\operatorname{Spec}C_s\\to\\operatorname{Spec}H_s\\to X$, using the actual completion map and [def-weil-pbc-strict-henselization-structural-map]. Finally define $X_{\\mathbf Q}\\to X$ to be the first projection of $X\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}\\mathbf Q$, using the canonical structural ring maps. No openness is part of this definition.",
+ "stmt_deps": [
+  "def-trf-monoscheme-toric-realization",
+  "def-per-normalized-tower-descent-data",
+  "def-sc-associated-points",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.18--2.1.20, 2.2.3--2.2.12, printed pp.89--91; canonical rational and completed strict local tests in proof of 3.4.15, printed p.114; Stacks Tag 04HX for the evaluation maximal ideal"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uncontracted normalized blowup towers retaining original lengths and ordered ideal centers; completed strict local tests",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.map_under_le_under_map\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \"{C D : Type*} [CommSemiring C] [Semiring D] [Algebra A C] [Algebra C D] [Algebra A D] [Algebra B D]\\n  [IsScalarTower A C D] [IsScalarTower A B D] : map (algebraMap A C) (under A P) ≤ under C (map (algebraMap B D) P)\", \"doc\": \"Given compatible algebra homomorphisms between commutative semirings $A \\\\to C$, $A \\\\to B$, and $B \\\\to D$, and an ideal $P$ in $B$, the image of the contraction of $P$ under $A \\\\to B$ via $A \\\\to C$ is \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization ≫ f.fromNormalization = f\", \"doc\": \"The composition of the canonical morphism from a scheme $ X $ to the normalization of a morphism $ f: X \\\\to Y $ and the canonical morphism from the normalization to $ Y $ equals the original morphism \"}\n  {\"name\": \"IsLocalization.orderEmbedding\", \"module\": \"Mathlib.RingTheory.Localization.Ideal\", \"type\": \": Ideal S ↪o Ideal R\", \"doc\": \"For a commutative semiring $ R $ localized at a submonoid $ M $, the function mapping each ideal $ J $ of the localization $ S $ to the preimage $ \\\\varphi^{-1}(J) $ under the canonical homomorphism $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"Ideal.under_under\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": (𝔓.under B).under A = 𝔓.under A\", \"doc\": \"For an ideal $\\\\mathfrak{P}$ in a ring $C$, the contraction of $\\\\mathfrak{P}$ to a ring $B$ via an algebra homomorphism $B \\\\to C$, followed by contraction to a ring $A$ via an algebra homomorphism $A \\\\\"}\n  {\"name\": \"Ideal.exists_ltSeries_length_eq_height\", \"module\": \"Mathlib.RingTheory.Ideal.Height\", \"type\": \"(p : Ideal R) [p.IsPrime] [p.FiniteHeight] :\\n  ∃ (l : LTSeries (PrimeSpectrum R)), RelSeries.last l = ⟨p, inferInstance⟩ ∧ l.length = p.height\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in a commutative ring with finite height, there exists a strictly increasing chain of prime ideals in the prime spectrum ending at $\\\\mathfrak{p}$ such that the lengt\"}\n  {\"name\": \"Localization.AtPrime.instIsScalarTower_1\", \"module\": \"Mathlib.RingTheory.Localization.AtPrime.Basic\", \"type\": \"(p : Ideal A) [p.IsPrime] (P : Ideal B) [P.IsPrime] [P.LiesOver p] (Q : Ideal C) [Q.IsPrime] [Q.LiesOver P]\\n  [Q.LiesOver p] : IsScalarTower (Localization.AtPrime p) (Localization.AtPrime P) (Localization.AtPrime Q)\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq A$, $\\\\mathfrak{P} \\\\subseteq B$ lying over $\\\\mathfrak{p}$, and $\\\\mathfrak{Q} \\\\subseteq C$ lying over $\\\\mathfrak{P}$ (and hence over $\\\\mathfrak{p}$), the local\"}\n  {\"name\": \"Ideal.over_under\", \"module\": \"Mathlib.RingTheory.Ideal.Over\", \"type\": \": P.LiesOver (P.under A)\", \"doc\": \"For any ideal $ P $ in a semiring $ B $ that is an algebra over a commutative semiring $ A $, the contraction of $ P $ to $ A $ (defined as the preimage of $ P $ under the algebra homomorphism $ A \\to \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact tower-recovery comparison or completed strict local test interface; reuse the recorded tower, CenterIso, cartesian CenterMap, scheme associatedPoints, strict local colimit/evaluation/structural map and Mathlib adic completion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Union of images of associated points of centers of a normalized blowup tower",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  (TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.fromNormalization f).base).obj ↑U =\\n    AlgebraicGeometry.Scheme.Hom.opensRange (\", \"doc\": \"For any affine open subset $U$ of the target scheme $Y$, the preimage of $U$ under the normalization morphism $f.\\text{fromNormalization}$ is equal to the open subset of the normalization scheme obtain\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\", \"doc\": \"For a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, the composition of the open cover morphism of the normalization with the normalization morphism to $ Y $ and an arbitrary mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {U V : AlgebraicGeometry.Scheme} →\\n          {iU : U ⟶ X} →\\n            {iV : V ⟶ X} →\\n              CategoryTheory.Limits.IsColimit (Categ\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and quasi-separated morphism of schemes. Suppose $X$ is the coproduct of two schemes $U$ and $V$ via open immersions $i_U: U \\\\to X$ and $i_V: V \\\\to X$, which are al\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"For quasi-compact and quasi-separated morphisms of schemes, composing the right inclusion into a coproduct with the normalization coproduct isomorphism and normalization morphism is associative with r\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"For quasi-compact and quasi-separated morphisms of schemes, the composition of the inverse normalization coproduct isomorphism with the coproduct description from normalization is associative with res\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"For quasi-compact and quasi-separated morphisms of schemes, the composition of the left inclusion into a binary coproduct, the normalization coproduct isomorphism, the normalization morphism to the ta\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Scheme.Hom.normalizationOpenCover f).f U)\\n      (AlgebraicGeometry.Scheme.Hom.fromNo\", \"doc\": \"For an affine open subset $U$ of $Y$, the composition of the open cover morphism $f.\\\\text{normalizationOpenCover}.f(U)$ with the normalization morphism $f.\\\\text{fromNormalization}$ equals the composit\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact tower-recovery comparison or completed strict local test interface; reuse the recorded tower, CenterIso, cartesian CenterMap, scheme associatedPoints, strict local colimit/evaluation/structural map and Mathlib adic completion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedCenterImages\", \"PullbackOver\", \"SameOver\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact tower-recovery comparison or completed strict local test interface; reuse the recorded tower, CenterIso, cartesian CenterMap, scheme associatedPoints, strict local colimit/evaluation/structural map and Mathlib adic completion."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedCenterImages|towerTestCompletedStrict|\\bPullbackOver\\b|\\bSameOver\\b",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact tower-recovery comparison or completed strict local test interface; reuse the recorded tower, CenterIso, cartesian CenterMap, scheme associatedPoints, strict local colimit/evaluation/structural map and Mathlib adic completion."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"\\b(associatedCenterImages|towerTestCompletedStrictRing|towerTestCompletedStrictMap|PullbackOver|SameOver)\\b\" lean/WeilConjectures",
+   "results": "(no matches)",
+   "date": "2026-10-24",
+   "verdict": "No existing definition of the recovery comparison interface; general CenterIso and CenterMap are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"\\b(associatedCenterImages|towerTestCompletedStrictRing|towerTestCompletedStrictMap|PullbackOver|SameOver)\\b\" lean/Sheaf",
+   "results": "(no matches)",
+   "date": "2026-10-24",
+   "verdict": "No existing definition of the recovery comparison interface; general CenterIso and CenterMap are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"\\b(associatedCenterImages|towerTestCompletedStrictRing|towerTestCompletedStrictMap|PullbackOver|SameOver)\\b\" dag/nodes",
+   "results": "(no matches)",
+   "date": "2026-10-24",
+   "verdict": "No existing definition of the recovery comparison interface; general CenterIso and CenterMap are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-normalized-tower-support-recovery",
+  "date": "2026-10-24",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Uncontracted normalized tower recovery by ideal-center closure and the canonical rational and completed strict local tests (ILO VIII 2.2.12 and proof of 3.4.15).",
+   "via": [
+    "lem-per-normalized-tower-support-recovery",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedTowerRecoveryTests",
+  "declaration": "AlgebraicGeometry.Monoscheme.NormalizedTower.associatedCenterImages",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.associatedCenterImages",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.SameOver",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.PullbackOver",
+   "AlgebraicGeometry.Scheme.towerTestCompletedStrictRing",
+   "AlgebraicGeometry.Scheme.towerTestCompletedStrictRingCommRing",
+   "AlgebraicGeometry.Scheme.towerTestCompletedStrictMap",
+   "AlgebraicGeometry.Scheme.towerTestIntegerMap",
+   "AlgebraicGeometry.Scheme.towerTestRationalMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedTowerRecoveryTests.lean",
+  "statement": "def associatedCenterImages {n : ℕ} (T : NormalizedTower.{u} n) : Set (T.level 0)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-666bc92e1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-666bc92e1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item changed only lean+stmt_deps (+def-per-normalized-tower-recovery-tests); statements verbatim; no live supersession. Clause check: reduced/Noetherian stages via NormalizedTower+hNoeth; Ass(B)=associatedCenterImages over def-sc-associated-points; qc flat mono j with Ass⊆range j; recovery = Nonempty PullbackOver + ((J_i).comap p).map p = J_i, map=(subschemeι≫p).ker = node's ker(O→j_*O_Z); uniqueness via SameOver (n=m, CenterIso equal ideals, over base); X_Q as genuine pullback over Spec ℤ, no openness; fpqc iff with given pullback data; completed strict local ring = AdicCompletion of recorded H_s at ker ε, map via recorded structural map; local/ff clause ∃! harmless (fromSpecStalk mono pins φ); empty-base length condition present; all-Ω test equivalent to one per point. New node fields ok, no existing scheme-level completed strict local ring/X_Q/tower comparison found. No hollow defs, 7 sorry theorems, docstrings with source+proof steps, lines ≤100. Advisory: owner decls of NormalizedTower/toFirst reached via new node's stmt_deps; FlatMonomorphismLocalStructure now live for a stage-3 proof import."
+ }
+}

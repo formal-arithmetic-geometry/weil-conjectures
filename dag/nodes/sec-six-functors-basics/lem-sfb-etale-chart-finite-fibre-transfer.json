@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-etale-chart-finite-fibre-transfer",
+ "kind": "statement",
+ "title": "Finiteness over a space point passes from an etale covering to affine etale charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $X$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $x\\in|X|$ be a field-valued point class [def-a1-space-point-topology]. Let $(a_i:U_i\\to X)_{i\\in I}$ be a set-indexed jointly surjective family of representable etale morphisms from schemes [def-weil-etale-morphism]: the union of the images of $|U_i|\\to|X|$ is $|X|$. Suppose each set $|a_i|^{-1}(\\{x\\})$ is finite. Then for every affine scheme $V$ [def-weil-affine-spectrum] and every representable etale morphism $v:V\\to X$, the set $|v|^{-1}(\\{x\\})$ is finite. The schemes $U_i$ need not be affine or quasi-compact, and their fibres at $x$ may be empty. No assumption on the fibres of $U_i\\times_XU_i$ is made.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JS (lemma-U-finite-above-x), implication (1) to (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine etale chart $v:V\\to X$. Form the schemes $P_i=V\\times_XU_i$, with projections $q_i:P_i\\to V$ and $p_i:P_i\\to U_i$. Representability makes $p_i$, the base change of $v$, etale. Base change of the given covering makes the $q_i$ etale and jointly surjective. Thus every point of $V$ lifts to some $P_i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JS, first fibre-product diagrams; spaces.tex Tags 02X2/04T9 and spaces-topologies.tex Tag 041F(3)."
+   }
+  },
+  {
+   "text": "Cover each $P_i$ by its affine open subschemes $W$. Each image $q_i(W)$ is open, because $q_i$ is etale and hence an open map. These images cover $V$. Since an affine scheme is quasi-compact, choose finitely many such pairs $(i_j,W_j)$, $1\\leq j\\leq n$, whose images cover $V$. Each $W_j$ is quasi-compact by the same spectrum compactness theorem. This does not require any $P_i$ or $U_i$ to be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JS, finite quasi-compact open refinement; schemes.tex Tag 01IT; morphisms.tex Tag 03WT; algebra.tex Tag 00E8."
+   }
+  },
+  {
+   "text": "For each chosen pair set $r_j=p_{i_j}|_{W_j}:W_j\\to U_{i_j}$. Since etale maps are unramified, $p_{i_j}$ is locally quasi-finite; restriction to an open preserves this. Apply the quasi-compact-source bounded-fibre theorem to $r_j$. For every $u\\in U_{i_j}$ its scheme fibre is finite over $\\kappa(u)$, so has finitely many points: apply finite-morphism finite fibres to its projection to the one-point scheme $\\operatorname{Spec}\\kappa(u)$. The scheme fibre projects homeomorphically onto $r_j^{-1}(u)$. Hence each set $r_j^{-1}(u)$ is finite.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JS, application of Tag 03JA; morphisms.tex Tags 02V5 and 01TH(4); finite fibres Tag 02NH; schemes.tex Tag 01K1."
+   }
+  },
+  {
+   "text": "Put $F_i=|a_i|^{-1}(\\{x\\})$. It is finite by hypothesis, and $B_j=r_j^{-1}(F_{i_j})=\\bigcup_{u\\in F_{i_j}}r_j^{-1}(u)$ is finite by step 3. Its image in $V$ lies above $x$, since $v q_{i_j}=a_{i_j}p_{i_j}$. Conversely, if $t\\in|V|$ maps to $x$, the covering in step 2 gives $j$ and $w\\in W_j$ with $q_{i_j}(w)=t$. The same equality puts $r_j(w)$ in $F_{i_j}$, so $w\\in B_j$. Therefore $|v|^{-1}(\\{x\\})=\\bigcup_{j=1}^n q_{i_j}(B_j)$ is a finite union of finite images. Empty $F_i$ contribute empty sets; if $V$ is empty the conclusion is immediate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JS, last sentence: finite unions and images, with the point-surjectivity already supplied in steps 1 and 2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JS (lemma-U-finite-above-x), proof of (1) implies (2), with the finite-union argument expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite fibre in a jointly surjective etale scheme covering of an algebraic space implies finite fibres of every affine etale chart",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.Scheme.JointlySurjective, AlgebraicGeometry.IsFinite.casesOn, AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage",
+   "date": "2026-10-23",
+   "verdict": "no match: the finite_preimage lemmas apply to a single quasi-compact scheme morphism; they do not transfer finite point fibres between algebraic-space etale charts. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, lines 181-184"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space finite point fibres in an etale covering imply finite point fibres in every affine etale chart",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.locallyOfFiniteType_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the finite_preimage lemmas apply to a single quasi-compact scheme morphism; they do not transfer finite point fibres between algebraic-space etale charts. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, lines 181-184"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness of fibres of an etale covering at a point is equivalent to finiteness of fibres of all affine etale maps to that algebraic space",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsFinite.finite_preimage_singleton, Algebra.Etale.finitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: the finite_preimage lemmas apply to a single quasi-compact scheme morphism; they do not transfer finite point fibres between algebraic-space etale charts. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, lines 181-184"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"finite_preimage\"",
+   "results": "5 hits: AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.LocallyQuasiFinite.of_finite_preimage_singleton, AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton, AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton, AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton",
+   "date": "2026-10-23",
+   "verdict": "no match: the finite_preimage lemmas apply to a single quasi-compact scheme morphism; they do not transfer finite point fibres between algebraic-space etale charts. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, lines 181-184"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_preimage|locallyQuasiFinite.*[Cc]ompact|[Mm]ono.*[Ii]njective",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/SpreadingOut.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/LimitsOver.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the finite_preimage lemmas apply to a single quasi-compact scheme morphism; they do not transfer finite point fibres between algebraic-space etale charts. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, lines 181-184"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_preimage|finite_fiber|finite_fibre",
+   "results": "10 hits: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean; directory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-finite/finite morphism results only; none transfers finite point fibres between algebraic-space etale presentations. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:163-184, especially finite_preimage_singleton:174, requiring a quasi-compact scheme morphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces finiteness of point fibres is independent of the etale presentation",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, Algebra.Etale.finitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-finite/finite morphism results only; none transfers finite point fibres between algebraic-space etale presentations. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:163-184, especially finite_preimage_singleton:174, requiring a quasi-compact scheme morphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.QuasiCompact",
+   "results": "9 hits: AlgebraicGeometry.IsFinite.of_locallyQuasiFinite, AlgebraicGeometry.instIsArtinianSchemeFiberOfLocallyQuasiFiniteOfQuasiCompact, AlgebraicGeometry.instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact, AlgebraicGeometry.locallyQuasiFinite_iff_isFinite_fiber, AlgebraicGeometry.Scheme.Hom.tendsto_cofinite_cofinite, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.Scheme.Hom.finite_preimage_singleton, AlgebraicGeometry.locallyQuasiFinite_iff_finite_preimage_singleton",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-finite/finite morphism results only; none transfers finite point fibres between algebraic-space etale presentations. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:163-184, especially finite_preimage_singleton:174, requiring a quasi-compact scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space finite point fibres in a jointly surjective etale scheme covering imply finite point fibres in every affine etale chart",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.isFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-finite/finite morphism results only; none transfers finite point fibres between algebraic-space etale presentations. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:163-184, especially finite_preimage_singleton:174, requiring a quasi-compact scheme morphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finiteness above a point can be checked on one etale covering of an algebraic space and implies finiteness for all affine etale schemes over it",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Hom.finiteType_appLE, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.isFinite_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-finite/finite morphism results only; none transfers finite point fibres between algebraic-space etale presentations. Read Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean:163-184, especially finite_preimage_singleton:174, requiring a quasi-compact scheme morphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-chart-fibres-field-quasicompact",
+  "date": "2026-10-24",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Theorem 5.3.1(3),(5), printed pp.29--30; these supply conditions (a),(b) used in Proposition 7.1.1. Supporting input for Theorem 5.3.1(3),(5): Topology of rational points of quasi-separated algebraic spaces. Supporting input: Field monomorphisms representing points of a quasi-separated space. Pointwise finiteness criterion: Stacks 03JV, condition (2) implies (6), used after refining the atlas over affine opens of S. Supporting input: Tag 03JS (lemma-U-finite-above-x), implication (1) to (2).",
+   "via": [
+    "lem-sfb-finite-chart-fibres-field-quasicompact",
+    "lem-sfb-qs-space-field-monomorphism",
+    "lem-sfb-qs-space-rational-point-topology",
+    "lem-sfb-adequate-geometric-fibres-submersion",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-etale-chart-finite-fibre-transfer",
+  "worker": "stage1",
+  "summary": "Q30 checked Stacks 03JS and its inputs, preserved the statement, and supplied four steps using existing nodes only. The finite affine refinement uses compactness of V, not compactness of the covering schemes. Tag 03JA is applied to W_j -> U_i with quasi-compact source, never assumed quasi-compact as a morphism. The final equality of point sets is proved explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "The inherited ancestry has from.node=null; its recorded place is the direct-image alteration prerequisite, through pointwise finiteness. This split realizes precisely the supporting Stacks 03JS implication recorded there. Searched all imported blueprint nodes for 03JS, 03JA, 03H4, chart fibre and finite fibres etale: no duplicate. The current latest blueprint thm-sf-ctf-stability proof, clause (iii), retains the direct-image route; no chapter/unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "General base-change and representability of etale covers, needed for the Stacks 03JS fibre-product diagram."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "General scheme theorem taking the etale projection to a locally quasi-finite map; the unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "General restriction theorem for the selected affine opens in the Stacks 03JS proof."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "why": "Exactly Stacks 03JA cited by 03JS, used for each selected quasi-compact affine source."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-ac5d53ffa",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-ac5d53ffa (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks 03JS (decent-spaces.tex:268-311) and 03JA (morphisms.tex:15495), and read every cited node's statement. The statement is unchanged from base and matches the source's (1)=>(2) exactly. There are no new nodes, and live/side-live still have the item unsplit with no repair note. Step 1: def-trf-algebraic-space makes p_i and q_i étale, and lem-trf-space-fibre-products-etale-covers makes the q_i jointly surjective. Step 2: 01IT, 03WT (images of all opens are open) and 00E8 (V is quasi-compact) give finitely many affine W_j covering V; no quasi-compactness of U_i or P_i is used. Step 3: étale=>unramified=>locally quasi-finite (02V5), restricted to W_j (01TH(4)); 03JA with quasi-compact source gives fibres finite over κ(u); finite fibres (02NH) plus the fibre homeomorphism (01K1) make each r_j^{-1}(u) finite. Step 4 is genuinely elementary: the finite union and the two inclusions follow from v q = a p on point sets, so 03H4 is not needed. Edge cases checked: empty V, empty F_i, repeated charts, and the ⊔_ℕ Spec k non-example showing affineness of V is needed. No duplicate: the only 03JS-mentioning nodes are the parent (which applies the item as stated) and two different results. All four tool_uses are accepted as generic 02X2/02V5/01TH/03JA inputs. Batch-5 flag: lem-trf-space-fibre-products-etale-covers is a generic algebraic-space fibre-product lemma; its closure contains only trf space and sheaf-pullback foundations, with no trace-formula or Poincaré-duality step. It lies outside the assumptions, so the flag is accepted. No SGA is cited and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartFiniteFibreTransfer",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finite_preimage_singleton_of_etaleCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartFiniteFibreTransfer.lean",
+  "statement": "theorem finite_preimage_singleton_of_etaleCover {S : Scheme.{u}} (X : AlgebraicSpace S) (x : Point X.obj.obj) {I : Type w} (U : I → Over S) (a : ∀ i : I, yoneda.obj (U i) ⟶ X.obj.obj) (ha : ∀ i : I, IsEtale (a i)) (hcover : ∀ y : Point X.obj.obj, ∃ (i : I) (t : (U i).left), schemePointMap (a i) t = y) (hfinite : ∀ i : I, (schemePointMap (a i) ⁻¹' {x}).Finite) (V : Over S) [IsAffine V.left] (v : yoneda.obj V ⟶ X.obj.obj) (hv : IsEtale v) : (schemePointMap v ⁻¹' {x}).Finite",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c52ad5e06",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Snapshot differs from side-live only by the item node lean field and the new module (fresh delivery, no rebind). Statement checked clause by clause against Stacks 03JS (1)=>(2), decent-spaces.tex l.267-311: X : AlgebraicSpace S, x : Point X.obj.obj, {I : Type w}, U : I → Over S, a_i with IsEtale (representable étale via IsRepresentableWith), hcover = union of point images is |X|, hfinite on schemePointMap fibres, ∀ V [IsAffine V.left] v IsEtale ⇒ fibre finite. No extra assumptions; u and w bound. Empty I gives inconsistent hypotheses as in the node; empty U_i, fibres and V allowed. lean.statement verbatim; proof only sorry; source and blueprint docstrings with the 4 proof steps; proof-dep imports exist live; no duplicate found (rg schemePointMap/Finite, 03JS). Report has Worker report and Second reading sections. No changes, so no compile."
+ }
+}

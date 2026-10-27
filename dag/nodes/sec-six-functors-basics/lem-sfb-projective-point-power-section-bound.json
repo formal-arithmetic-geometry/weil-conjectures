@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-projective-point-power-section-bound",
+ "kind": "statement",
+ "title": "Uniform linear loss of sections from powers of a point ideal on a projective curve",
+ "statement": "Let $k$ be algebraically closed [def-weil-field], let $C\\subset\\mathbf P^{r-1}_k$ be a closed subscheme of dimension at most one [def-kun-topological-krull-dimension], and let $P\\in C$ be a closed point lying on a one-dimensional irreducible component. Suppose its homogeneous-coordinate Hilbert polynomial is $\\delta m+c$, $\\delta>0$ [def-sfb-projective-coordinate-hilbert-polynomial]. Put $L=\\mathcal O_C(1)$ and let $\\mathcal I_P=\\ker(\\mathcal O_C\\to k(P))$ be the ideal sheaf of the reduced point [def-sbc-closed-immersion-ideal-sheaf], with powers [def-sbc-ideal-sheaf-powers]. There exist integers $m_0,K\\ge1$, depending on $C$, its embedding and $P$, such that, for every $m\\ge m_0$ and every integer $0\\le t\\le m$,\n$$\\dim_k H^0(C,\\mathcal I_P^t\\otimes L^{\\otimes m})\\le\\delta m-t+K.$$\nThe estimate allows nilpotents, embedded points and disconnected $C$; it requires no nodality or smoothness at $P$.",
+ "source": {
+  "document": "literature/gieseker-lectures-on-moduli-of-curves.pdf",
+  "place": "Proposition 1.0.3, printed pp.33--34, point-ideal estimates (i)--(iv); agent formulation absorbing the finitely many small-weight exceptions into one constant Local PDF WANTED; agent-formulated geometric prerequisite, read the online book transcription.",
+  "url": "https://doczz.net/doc/7664568/lectures-on-moduli-of-curves---school-of-mathematics--tifr"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist",
+  "def-sc-ringed-space-module-cohomology",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "def-weil-algebraic-closure",
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-projective-closed-subscheme-homogeneous-ideal] to the given embedding and write $C=\\operatorname{Proj}(B/J)$, $B=k[x_0,\\ldots,x_{r-1}]$, with its actual homogeneous vanishing ideal $J$. The vanishing polynomials in each degree already form a vector subspace, so taking their span in [def-sfb-projective-coordinate-hilbert-polynomial] does not change them: the coordinate piece in the hypothesis is $(B/J)_m$. By [lem-sfb-coordinate-quotient-section-polynomial-tail], its canonical section map is an isomorphism for all sufficiently large $m$. The chart formula there identifies its twist with the restriction of the ambient twist, which is $L^{\\otimes m}$ by the transition rule of [def-pc-projective-space-twist]. Enlarge one integer $m_0\\ge1$ so that for every $m\\ge m_0$ the given coordinate polynomial also agrees with the coordinate dimension. Thus $H_m=H^0(C,L^{\\otimes m})$ is finite-dimensional and $\\dim_k H_m=\\delta m+c$. This choice is independent of $t$.",
+   "uses": [
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+    "def-sfb-projective-coordinate-hilbert-polynomial",
+    "lem-sfb-coordinate-quotient-section-polynomial-tail",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+   }
+  },
+  {
+   "text": "Choose a standard chart $x_i\\ne0$ containing $P$. By [lem-weil-pbc-projective-space-standard-charts] and the affine characterization in [def-weil-closed-immersion], its intersection with $C$ is $U=\\operatorname{Spec}A$ for a quotient $A$ of $k[u_j:j\\ne i]$, $u_j=x_j/x_i$. It is locally of finite type over $k$. The closed-point residue-field statement [lem-weil-pbc-closed-point-residue-field-base] gives $k(P)=k$. Write $a_j=u_j(P)\\in k$, $y_j=u_j-a_j$, and $\\mathfrak n=\\ker(A\\to k)$. Then $\\mathfrak n=(y_j)$: subtracting the constant term from a polynomial in the $y_j$ expresses it as a sum of multiples of the $y_j$. Put $R=A_{\\mathfrak n}$ and $\\mathfrak m=\\mathfrak nR$, using [def-weil-pbc-localization-at-prime]. The local trivialization of $L$ is $x_i$, and the point ideal and its powers have stalks $\\mathfrak m$ and $\\mathfrak m^t$, respectively, by [def-sbc-closed-immersion-ideal-sheaf] and [def-sbc-ideal-sheaf-powers].",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-weil-pbc-localization-at-prime",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+   }
+  },
+  {
+   "text": "Fix $1\\le t\\le m$. Every class in $R/\\mathfrak m^t$ is represented by a polynomial in the $y_j$ of total degree less than $t$. Indeed, if $s\\in A\\setminus\\mathfrak n$, write $s=b+h$ with $b=s(P)\\in k^\\times$ and $h\\in\\mathfrak n$. Modulo $\\mathfrak n^t$ its inverse is $b^{-1}\\sum_{q=0}^{t-1}(-h/b)^q$, because multiplying gives $1-(-h/b)^t$. Thus localization introduces no additional classes modulo $\\mathfrak n^t$; subsequently discard all monomials of degree at least $t$. For a remaining monomial $y^\\alpha$, with $|\\alpha|<t\\le m$, the homogeneous polynomial $x_i^{m-|\\alpha|}\\prod_{j\\ne i}(x_j-a_jx_i)^{\\alpha_j}$ has degree $m$ and restricts, after division by the basis $x_i^m$, to $y^\\alpha$. Its restrictions on all standard charts glue to a section by [def-pc-projective-space-twist]. Consequently the $k$-linear evaluation map $e_{m,t}:H_m\\to R/\\mathfrak m^t$, defined by taking the germ at $P$ and dividing by $x_i^m$, is surjective. The same monomials show that $R/\\mathfrak m^t$ is finite-dimensional.",
+   "uses": [
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+   }
+  },
+  {
+   "text": "Let $Z$ be a one-dimensional irreducible component through $P$. By [lem-sc-scheme-sober] it has a generic point $\\xi\\ne P$; it belongs to $U$, since every open neighbourhood of a specialization contains its generizations. In $\\operatorname{Spec}A$ it gives a prime $\\mathfrak q\\subsetneq\\mathfrak n$. Pick $a\\in\\mathfrak n\\setminus\\mathfrak q$. For every $j\\ge0$, $a^j/1\\ne0$ in $R$: an equation $sa^j=0$ with $s\\notin\\mathfrak n$ contradicts primality of $\\mathfrak q$ (also for $j=0$). Hence $\\mathfrak m^j\\ne0$. Each $\\mathfrak m^j$ is finitely generated by degree-$j$ products of the finite family $y_j$, including $1$ for $j=0$. If $\\mathfrak m^j=\\mathfrak m^{j+1}$, [lem-weil-pbc-nakayama-jacobson] applied to this module over the local ring $R$ forces it to be zero, a contradiction. Thus all $t$ successive factors $\\mathfrak m^j/\\mathfrak m^{j+1}$, $0\\le j<t$, are nonzero. They are finite-dimensional subquotients of $R/\\mathfrak m^t$. Adding their dimensions along its filtration gives $\\dim_k R/\\mathfrak m^t\\ge t$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-nakayama-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+   }
+  },
+  {
+   "text": "The kernel of $e_{m,t}$ is precisely $H^0(C,\\mathcal I_P^t\\otimes L^{\\otimes m})$, viewed as a subspace of $H_m$. To see this directly, on a trivializing open tensoring the ideal inclusion with $L^{\\otimes m}$ is just the ideal inclusion times a free basis. At $P$ its image consists of germs in $\\mathfrak m^t$; away from $P$ the ideal of the point is the whole structure sheaf. A section in the kernel therefore belongs locally to the indicated ideal submodule at every point, so its unique local lifts glue. The reverse containment follows on germs. The ideal and power descriptions used here are exactly [def-sbc-closed-immersion-ideal-sheaf] and [def-sbc-ideal-sheaf-powers]. Surjectivity from step 3, finite-dimensionality from step 1, and the bound in step 4 now give, for $1\\le t\\le m$ and $m\\ge m_0$, $\\dim_k H^0(C,\\mathcal I_P^t\\otimes L^{\\otimes m})=\\delta m+c-\\dim_k(R/\\mathfrak m^t)\\le\\delta m-t+c$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+   }
+  },
+  {
+   "text": "Choose an integer $K\\ge1$ with $K\\ge c$. Step 5 proves the desired inequality for $1\\le t\\le m$. For $t=0$, $\\mathcal I_P^0=\\mathcal O_C$, so step 1 gives the same inequality. The constants are fixed before $t$ is chosen. Only the existence of a positive-dimensional component through $P$ entered step 4; none of the steps imposed reducedness, connectedness, nodality or smoothness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "def-sfb-projective-coordinate-hilbert-polynomial",
+  "lem-sfb-coordinate-quotient-section-polynomial-tail",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "def-weil-pbc-localization-at-prime",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-nakayama-jacobson"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex; literature/stacks-project/algebra.tex; literature/stacks-project/schemes.tex",
+  "place": "Tag 0AG7 (lemma-recover-tail-graded-module); Tag 00DV (lemma-NAK); Tags 01IN (lemma-closed-subspace-scheme), 01IS (lemma-scheme-sober). Agent explicit chart and jet argument for the estimate in Gieseker Proposition 1.0.3, printed pp.33--34, observations (i)--(iv)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a projective curve and a point P the dimension of sections of O(m) vanishing to order t at P is at most degree times m minus t plus a constant for t at most m",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.natDegree_Φ_le\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"ChevalleyThm.MvPolynomialC.degBound_succ\"], \"digest\": \"6464fae5b6c2bef6\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits are polynomial degrees, orders of analytic functions and vanishing of structure sections on basic opens, not a dimension estimate for twisted point-ideal powers on an arbitrary projective curve."
+  },
+  {
+   "tool": "grep",
+   "query": "vanish.*order|ideal.*pow.*finrank|point.*power|power.*point",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits are polynomial degrees, orders of analytic functions and vanishing of structure sections on basic opens, not a dimension estimate for twisted point-ideal powers on an arbitrary projective curve."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a very ample line bundle power on a curve vanishing to order t at a point have codimension at least t minus a constant",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"analyticOrderAt\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.Proj.sub_apply\", \"ProjectiveSpectrum.mem_vanishingIdeal\"], \"digest\": \"f7dede0246b19dda\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits are polynomial degrees, orders of analytic functions and vanishing of structure sections on basic opens, not a dimension estimate for twisted point-ideal powers on an arbitrary projective curve."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ideal\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.instAtPrimeCarrierStalkCommRingCatStructurePresheafInCommRingCatAsIdeal\", \"AlgebraicGeometry.StructureSheaf.instIsLocalizedModuleCarrierStalkAbPresheafOpensCarrierTopModuleStructurePresheafPrimeComplAsIdealToStalkₗ\", \"AlgebraicGeometry.Spec.coe_toTop_map_hom_apply_asIdeal\", \"AlgebraicGeometry.Scheme.default_asIdeal\", \"AlgebraicGeometry.LocallyRingedSpace.coe_toΓSpecSheafedSpace_hom_base_hom_apply_asIdeal\", \"AlgebraicGeometry.specTargetImageIdeal\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf\", \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_isMaximal_of_isClosed\"], \"digest\": \"ed3b15af9042ddcc\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: The hits are polynomial degrees, orders of analytic functions and vanishing of structure sections on basic opens, not a dimension estimate for twisted point-ideal powers on an arbitrary projective curve."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a projective curve powers of the ideal of a rational point impose at least t independent conditions on sections of O(m) when t is at most m",
+   "results": "{\"t\": \"2026-10-23T11:11:32Z\", \"tool\": \"leanfinder\", \"query\": \"On a projective curve powers of the ideal of a rational point impose at least t independent conditions on sections of O(m) when t is at most m\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_mul_XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₂\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_eq₁\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal_neg_mul\"], \"digest\": \"c13cd75106f8d372\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "jet|HilbertPolynomial|hilbertPoly|ideal.*pow",
+   "results": "{\"t\": \"2026-10-23T11:14:51Z\", \"tool\": \"grep\", \"query\": \"jet|HilbertPolynomial|hilbertPoly|ideal.*pow\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"0aa661fb5f2e35bb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bound dimension of sections of a projective curve vanishing to order t at a closed point by degree times m minus t plus a constant",
+   "results": "{\"t\": \"2026-10-23T11:14:51Z\", \"tool\": \"leansearch\", \"query\": \"Bound dimension of sections of a projective curve vanishing to order t at a closed point by degree times m minus t plus a constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.sub_apply\", \"ProjectiveSpectrum.vanishingIdeal_anti_mono\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.add_apply\", \"IsLocalFrameOn.coeff_apply_zero_at\", \"ProjectiveSpectrum.mem_vanishingIdeal\", \"ChevalleyThm.MvPolynomialC.degBound\"], \"digest\": \"8ef80aed2467c4c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"jet\"",
+   "results": "{\"t\": \"2026-10-23T11:14:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"jet\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of sections of a twist of the t-th power of a point ideal on a projective curve is at most its Hilbert polynomial minus t",
+   "results": "{\"t\": \"2026-10-23T11:16:15Z\", \"tool\": \"leanfinder\", \"query\": \"The dimension of sections of a twist of the t-th power of a point ideal on a projective curve is at most its Hilbert polynomial minus t\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_preΨ_le\", \"WeierstrassCurve.natDegree_preΨ'_le\", \"WeierstrassCurve.natDegree_ΨSq_le\", \"WeierstrassCurve.natDegree_Φ_le\", \"WeierstrassCurve.natDegree_preΨ₄_le\", \"WeierstrassCurve.natDegree_Ψ₂Sq_le\", \"WeierstrassCurve.natDegree_preΨ\", \"WeierstrassCurve.natDegree_preΨ'\"], \"digest\": \"87867d96bdfc7923\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  },
+  {
+   "tool": "grep",
+   "query": "jet|vanish.*order|finrank.*ideal|point.*power",
+   "results": "{\"t\": \"2026-10-23T11:31:33Z\", \"tool\": \"grep\", \"query\": \"jet|vanish.*order|finrank.*ideal|point.*power\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"section\"",
+   "results": "{\"t\": \"2026-10-23T11:31:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"section\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"AlgebraicGeometry.StructureSheaf.sectionsSubalgebra\", \"AlgebraicGeometry.StructureSheaf.sectionsSubmodule\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom\", \"AlgebraicGeometry.StructureSheaf.sectionsSubalgebraSubmodule\", \"AlgebraicGeometry.StructureSheaf.globalSectionsIso_inv\", \"AlgebraicGeometry.Scheme.algebra_section_section_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine\"], \"digest\": \"810e3f7fff040f51\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern Weierstrass ideals or division polynomials, projective structure-sheaf operations, or ideal powers; no jet-condition section-dimension estimate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-component-projection-weight-bounds",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 3.2 proof of Theorem 8, steps (2)--(3), printed p.14; agent explicit leading-coefficient version of the component-projection estimates. The multiple-component estimate is the coefficient 2e+1/2 in Gieseker, Lectures on Moduli of Curves, Proposition 1.0.3, printed pp.30--36. Local PDFs WANTED. Supporting prerequisite: Proposition 1.0.3, printed pp.33--34, point-ideal estimates (i)--(iv); agent formulation absorbing the finitely many small-weight exceptions into one constant",
+   "via": [
+    "lem-sfb-component-projection-weight-bounds",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-point-power-section-bound",
+  "worker": "stage1",
+  "summary": "Retained the statement. Proved the estimate by explicit projective-coordinate jet evaluation, its kernel, and Nakayama applied to the nonzero powers of the maximal ideal; reused existing coordinate-tail and local-algebra nodes. No new nodes. All citation statements opened and quotes checked.",
+  "blueprint": "Serves the inherited from.place: Gieseker Proposition 1.0.3 point-ideal estimates, under the alteration/moduli prerequisite chain of det-thm-sf-ctf-stability-direct-images proof (3). Steps 1--6 supply the supporting local estimate. The current latest blueprint direct-image proof and unit were read; no unit or chapter route is changed. Ancestor command returns None because of the inherited broken created.item chain; preserve from.node=null and via unchanged. Whole-blueprint jet, point ideal, linear series and Hilbert polynomial searches found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic projective charts and coordinate trivializations, used only for the local explicit jet calculation; no replacement statement in the item unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-bf78493ac",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-bf78493ac (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item keeps its statement and gets a complete 6-step proof with no new nodes. The statement is true: small cases P^1 (h^0=m-t+1), double line, embedded point, node/cusp and the isolated-point counterexample to the dropped hypothesis all check out. Step 1: the vanishing ideal from lem-sfb-projective-closed-subscheme-homogeneous-ideal is the same J as in def-sfb-projective-coordinate-hilbert-polynomial, and lem-sfb-coordinate-quotient-section-polynomial-tail gives A_m≅H^0(L^m) for large m, with transitions matching def-pc-projective-space-twist; m0 is chosen before t. Step 2: standard charts (c) plus the affine characterization of closed immersions give the chart ring, k(P)=k from the closed-point residue-field lemma, n=(y_j), and stalks m, m^t from the affine clauses of the ideal-sheaf and power definitions. Step 3: the geometric-series inverse mod n^t is correct and the homogenized monomials have degree m because |α|<t≤m, so evaluation is surjective. Step 4: by sobriety the generic point ξ≠P lies in U, giving q⊊n; a^j/1≠0 by primality, and Nakayama gives m^j≠m^{j+1}, so dim R/m^t≥t, even with nilpotents. Step 5: the kernel is H^0(I_P^t⊗L^m) because L is invertible and subsheaf membership is checked on stalks; rank–nullity gives the bound. Step 6: K=max(1,c), and t=0 follows from step 1. Stacks tags 0AG7 (coherent.tex:3862), 00DV, 01IS, 01IN all verified in tags/tags. No duplicate found: lem-zl-prescribed-point-eventual-jet-system and def-trf-point-power-restriction-data were read and are different. Batch 5: lem-sfb-coordinate-quotient-section-polynomial-tail reaches lem-trf-standard-graded-hilbert-function, which is generic Hilbert-function polynomiality for graded modules (Stacks 00K8). It is not given by, and is not a step of, the trace formula or Poincaré duality, and an existing sfb node already cites it, so it is outside the assumptions and not a RETURN. The declared tool use lem-weil-pbc-projective-space-standard-charts (generic charts) is accepted. from.node=null is inherited from the base node's created.item chain; note for the maintainer. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectivePointPowerSectionBound",
+  "declaration": "AlgebraicGeometry.exists_projective_point_power_section_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectivePointPowerSectionBound.lean",
+  "statement": "theorem exists_projective_point_power_section_bound (k : Type u) [Field k] [IsAlgClosed k] (n : ℕ) (C : Scheme.{u}) (i : C ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) [IsClosedImmersion i] (hC : topologicalKrullDim C ≤ 1) (P : C) (hP : IsClosed ({P} : Set C)) (hcomp : ∃ Z : Set C, Z ∈ irreducibleComponents C ∧ P ∈ Z ∧ topologicalKrullDim Z = 1) (δ c : ℚ) (hδ : 0 < δ) (hpoly : ProjectiveHilbertPolynomial.IsCoordinatePolynomial k n i (Polynomial.C δ * Polynomial.X + Polynomial.C c)) : ∃ m₀ K : ℕ, 1 ≤ m₀ ∧ 1 ≤ K ∧ ∀ m : ℕ, m₀ ≤ m → ∀ t : ℕ, t ≤ m → (Module.finrank k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ (i ≫ (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k)) ↘ _)).appTop).hom).obj ((RingedSpace.moduleCohomology C.toRingedSpace 0).obj ((((C.fromSpecResidueField P).ker ^ t).toModules ⊗ ((Scheme.Modules.tensorPullback i).obj (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1)).tensorPow m : C.Modules)))) : ℚ) ≤ δ * m - t + K",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-343b33ce5",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause check of exists_projective_point_power_section_bound against the node: alg. closed k; closed immersion into ℙ(ULift(Fin(n+1));Spec k); topologicalKrullDim C ≤ 1; closed P on a component of dim 1 (subspace topology); IsCoordinatePolynomial(Cδ·X+Cc), δ>0 (definition read: span of chartwise-vanishing equations, eventual dimension); L = tensorPullback i of twist 1; I_P = (fromSpecResidueField P).ker (a closed immersion since {P} is closed), IdealSheafData powers with ^0=⊤; toModules ⊗ tensorPow m; H^0 = moduleCohomology 0 restricted to k via the structure map, finrank; ∃ m0,K≥1 before ∀m≥m0 ∀t≤m; bound in ℚ. No extra hypotheses, universes forced by the recorded predicate. Edge cases t=0, t=m, empty/0-dim C, isolated point all OK. Statement verbatim; only the item's lean field changed; all 11 stmt_dep nodes byte-identical to live; imports per §3 rule 7; docstrings with all six proof steps; no lines >100 characters; no duplicate found. Advisory: tensorPullback/tensorPow/⊗/toModules owners are not stmt_deps, but the node text does not cite them. No compile (no file changed)."
+ }
+}

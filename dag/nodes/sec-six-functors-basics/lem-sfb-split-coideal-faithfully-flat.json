@@ -1,0 +1,401 @@
+{
+ "id": "lem-sfb-split-coideal-faithfully-flat",
+ "kind": "statement",
+ "title": "A split commutative coideal inclusion is faithfully flat",
+ "statement": "Let $k$ be a field [def-weil-field]. A commutative Hopf $k$-algebra here means a unital commutative $k$-algebra $A$ with $k$-algebra maps $\\Delta_A:A\\to A\\otimes_k A$, $\\epsilon_A:A\\to k$, $S_A:A\\to A$ such that $(\\Delta_A\\otimes1)\\Delta_A=(1\\otimes\\Delta_A)\\Delta_A$, $(\\epsilon_A\\otimes1)\\Delta_A=(1\\otimes\\epsilon_A)\\Delta_A=1_A$, and $\\mu_A(S_A\\otimes1)\\Delta_A=\\mu_A(1\\otimes S_A)\\Delta_A=\\eta_A\\epsilon_A$, under the usual tensor unit and associativity identifications; $\\mu_A$ and $\\eta_A$ are multiplication and unit. Tensor products are those of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Let $B$ be such a commutative Hopf $k$-algebra, let $A$ be a unital commutative $k$-algebra, and let $i:A\\to B$ be an injective $k$-algebra homomorphism. Suppose that for every $a\\in A$, $\\Delta_B(i(a))$ belongs to the image of $i\\otimes1_B:A\\otimes_k B\\to B\\otimes_k B$ (the right coideal condition). Regard $B$ as an $A$-module through $i$. Assume there exists an $A$-linear map $r:B\\to A$ with $r\\circ i=1_A$. Then $B$ is a faithfully flat $A$-module [def-weil-pbc-faithfully-flat-ring-map]. Neither $A$ nor $B$ is required to be finite-dimensional or finitely generated; no Hopf structure on $A$ is assumed.",
+ "source": {
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Bichon, arXiv:2301.05480v2, Theorem 1.1 and the bimodule conditional-expectation convention preceding section 2, specialized to commutative algebras. Read online at https://arxiv.org/html/2301.05480v2; local document WANTED in report.md. Commutativity turns the stated A-linear retraction into the required A-bimodule retraction."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify $A$ with its image in $B$ using the injective algebra map $i$, and write $H=B$, $E=r$. This identification carries the given tensor-image condition to $\\Delta_H(A)\\subseteq A\\otimes_kH$: tensoring an injective map of vector spaces with $H$ is injective (extend a basis). Commutativity and $A$-linearity give $E(ah a\\prime)=aa\\prime E(h)=aE(h)a\\prime$ for $a,a\\prime\\in A$, $h\\in H$. Also $E(1)=1$. Thus $E$ is a bimodule retraction. All constructions below use module tensors [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Theorem 1.1 and conditional-expectation convention; elementary identification of the injected algebra with its image."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-hopf-module-kernels] to obtain $C=H/HA^+$, $L(M)=H\\otimes_AM$ and its coaction, for every $A$-module $M$. Write $R(X)$ for its coinvariants. For $X=L(M)$ the isomorphism [lem-sfb-coideal-canonical-tensor-isomorphism] gives $\\kappa_X:H\\otimes_A(H\\otimes_AM)\\simeq C\\otimes_k(H\\otimes_AM)$. If $z=\\sum h_t\\otimes m_t$ is coinvariant, its coaction formula says $\\kappa_X(\\sum h_t\\otimes1\\otimes m_t)=\\pi(1)\\otimes z=\\kappa_X(1\\otimes z)$. Injectivity of $\\kappa_X$ gives $\\sum h_t\\otimes1\\otimes m_t=\\sum1\\otimes h_t\\otimes m_t$. Apply the balanced map $h\\otimes h\\prime\\otimes m\\mapsto E(h)h\\prime\\otimes m$. The two sides become $1\\otimes\\sum E(h_t)m_t$ and $z$, respectively. Hence every coinvariant is $1\\otimes m$. The map $e_M:H\\otimes_AM\\to M$, $h\\otimes m\\mapsto E(h)m$, is well-defined by $A$-linearity and satisfies $e_M(1\\otimes m)=m$. Thus $\\eta_M:M\\to R(L(M))$, $m\\mapsto1\\otimes m$, is bijective, with inverse $e_M|_{R(L(M))}$.",
+   "uses": [
+    "lem-sfb-relative-hopf-module-kernels",
+    "lem-sfb-coideal-canonical-tensor-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Propositions 2.3 (split case) and 2.4, with the two tensor maps written explicitly."
+   }
+  },
+  {
+   "text": "For every relative Hopf module $X$, [lem-sfb-coideal-coinvariant-projection] supplies an $A$-linear retraction of $j_X:R(X)\\hookrightarrow X$ and makes $1_H\\otimes_Aj_X$ injective. Its hypotheses hold by step 1, with no finite-dimensionality assumption. By [lem-sfb-relative-hopf-counit-criterion] (1) this injectivity makes $\\mu_X:H\\otimes_AR(X)\\to X$ injective, and by its part (2), applied with the retraction $E$ of step 1, $\\mu_X$ is surjective. In particular, every $x\\in X$ is a finite sum $\\sum h_t x_t$ with $x_t\\in R(X)$.",
+   "uses": [
+    "lem-sfb-coideal-coinvariant-projection",
+    "lem-sfb-relative-hopf-counit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Lemma 2.6 and Proposition 2.7 (a) iff (b), with surjectivity of the counit under the conditional expectation."
+   }
+  },
+  {
+   "text": "Let $f:M\\hookrightarrow N$ be any injective $A$-linear map. By [lem-sfb-relative-hopf-module-kernels], $K=\\ker L(f)$ is a relative Hopf module and $R(K)=K\\cap R(L(M))$. A coinvariant of $K$, viewed in $L(M)$, is $1\\otimes m$ by step 2. Its image in $L(N)$ is $1\\otimes f(m)=0$; applying $e_N$ gives $f(m)=0$, so $m=0$. Hence $R(K)=0$. Step 3 applied to $X=K$ says $K$ is generated as an $H$-module by $R(K)$, and therefore $K=0$. Thus $1_H\\otimes f$ is injective for every such $f$. Swapping tensor factors gives the convention in [def-weil-pbc-flat-ring-map], so $H$ is flat over $A$.",
+   "uses": [
+    "lem-sfb-relative-hopf-module-kernels",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Theorem 2.1 (1) implies (2), expanded as the underlying-kernel argument using the unit and counit."
+   }
+  },
+  {
+   "text": "Consider a complex $M_1\\xrightarrow{f}M_2\\xrightarrow{g}M_3$. If it is exact, put $Z=\\ker g=\\operatorname{im}f$. The sequence $M_1\\to M_2\\to M_2/Z\\to0$ remains exact after tensoring with $H$ by [lem-weil-pbc-tensor-right-exact]. The injection $M_2/Z\\hookrightarrow M_3$ remains injective by step 4; its composite with the quotient map is $g$. This proves exactness of the tensored complex. Conversely, suppose the tensored complex is exact and $y\\in\\ker g$. Then $1\\otimes y$ is in its middle kernel, so $1\\otimes y=\\sum h_t\\otimes f(x_t)$. Applying $e_{M_2}$ from step 2 gives $y=\\sum E(h_t)f(x_t)=f(\\sum E(h_t)x_t)$. Thus $\\ker g\\subseteq\\operatorname{im}f$; the reverse inclusion follows from $gf=0$. Tensoring therefore preserves and reflects exactness of every complex, exactly [def-weil-pbc-faithfully-flat-ring-map]. This proves the assertion for $B=H$ with its specified $A$-module structure.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+    "place": "Theorem 1.1 conclusion; faithful exactness checked on elements. Right exactness: Stacks algebra.tex, Tag 00DF, lemma-tensor-product-exact."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-relative-hopf-module-kernels",
+  "lem-sfb-coideal-canonical-tensor-isomorphism",
+  "lem-sfb-coideal-coinvariant-projection",
+  "lem-sfb-relative-hopf-counit-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-tensor-right-exact",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bichon-faithful-flatness_arXiv-2301.05480.pdf",
+  "place": "Theorem 1.1, sections 2.1--2.4 read online; local PDF wanted. The last two steps expand the faithful-exactness conclusion by kernels and the retraction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A Hopf algebra is faithfully flat over a right coideal subalgebra with an algebra bimodule retraction",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:19:40Z",
+    "tool": "leansearch",
+    "query": "A Hopf algebra is faithfully flat over a right coideal subalgebra with an algebra bimodule retraction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat",
+     "Module.Flat.of_retract",
+     "HopfAlgebra.mul_antipode_lTensor_comul",
+     "Module.FaithfullyFlat",
+     "HopfAlgebra.casesOn",
+     "HopfAlgCat.of_comul",
+     "HopfAlgCat.Hom.toBialgHom'",
+     "HopfAlgebra.counit_comp_antipode"
+    ],
+    "digest": "a43b3bfc16bf294e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: RingHom.FaithfullyFlat, Module.Flat.of_retract, HopfAlgebra.mul_antipode_lTensor_comul, Module.FaithfullyFlat, HopfAlgebra.casesOn, HopfAlgCat.of_comul, HopfAlgCat.Hom.toBialgHom', HopfAlgebra.counit_comp_antipode. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative Hopf algebra is faithfully flat over a coideal subalgebra that is a direct summand as a module",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:19:43Z",
+    "tool": "leanfinder",
+    "query": "A commutative Hopf algebra is faithfully flat over a coideal subalgebra that is a direct summand as a module",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra",
+     "Module.FaithfullyFlat.self",
+     "Module.FaithfullyFlat.faithfulSMul",
+     "RingHom.faithfullyFlat_algebraMap_iff",
+     "Module.FaithfullyFlat.bijective_of_tensorProduct",
+     "Module.Flat.toAlgebra_injective",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "Module.Flat.submoduleAlgebraEquiv"
+    ],
+    "digest": "8761217d77ea0728"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra, Module.FaithfullyFlat.self, Module.FaithfullyFlat.faithfulSMul, RingHom.faithfullyFlat_algebraMap_iff, Module.FaithfullyFlat.bijective_of_tensorProduct, Module.Flat.toAlgebra_injective, Module.FaithfullyFlat.injective_of_tensorProduct, Module.Flat.submoduleAlgebraEquiv. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conditional expectation onto a Hopf subalgebra implies faithful flatness",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:19:44Z",
+    "tool": "leanfinder",
+    "query": "Conditional expectation onto a Hopf subalgebra implies faithful flatness",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.FaithfullyFlat.self",
+     "RingHom.faithfullyFlat_algebraMap_iff",
+     "Module.FaithfullyFlat.faithfulSMul",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "RingHom.FaithfullyFlat",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "RingHom.FaithfullyFlat.flat",
+     "Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra"
+    ],
+    "digest": "d795eda0228b85ed"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: Module.FaithfullyFlat.self, RingHom.faithfullyFlat_algebraMap_iff, Module.FaithfullyFlat.faithfulSMul, RingHom.FaithfullyFlat.codescendsAlong_injective, RingHom.FaithfullyFlat, Module.FaithfullyFlat.of_comap_surjective, RingHom.FaithfullyFlat.flat, Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.FaithfullyFlat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T19:20:03Z",
+    "tool": "loogle",
+    "query": "HopfAlgebra, Module.FaithfullyFlat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no hits. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oideal|[Cc]onditional[Ee]xpectation|Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T19:19:40Z",
+    "tool": "grep",
+    "query": "[Cc]oideal|[Cc]onditional[Ee]xpectation|Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean",
+     "Mathlib/RingTheory/HopfAlgebra/Quotient.lean"
+    ],
+    "digest": "8d664190ea7af461"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned declarations: Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/Bialgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean, Mathlib/RingTheory/HopfAlgebra/Quotient.lean. None states the asserted Hopf-module extension or coideal flatness theorem; flatness of a retract assumes flatness of the larger module and cannot supply it here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative Hopf algebra is faithfully flat over a right coideal subalgebra admitting a module retraction",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:58Z",
+    "tool": "leanfinder",
+    "query": "A commutative Hopf algebra is faithfully flat over a right coideal subalgebra admitting a module retraction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Module.FaithfullyFlat.self",
+     "Module.FaithfullyFlat.faithfulSMul",
+     "Module.Flat.instSubtypeMemSubmoduleSubmoduleAlgebra",
+     "RingHom.faithfullyFlat_algebraMap_iff",
+     "Module.FaithfullyFlat.injective_of_tensorProduct",
+     "Module.FaithfullyFlat.bijective_of_tensorProduct",
+     "RingHom.FaithfullyFlat.codescendsAlong_injective",
+     "RingHom.FaithfullyFlat"
+    ],
+    "digest": "9121e79d283ca159"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give faithful-flatness definitions, tensor descent assuming faithful flatness, and coideal quotient structures. They do not prove flatness from a coideal module retraction."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAlgebra, Module.Flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "loogle",
+    "query": "HopfAlgebra, Module.Flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give faithful-flatness definitions, tensor descent assuming faithful flatness, and coideal quotient structures. They do not prove flatness from a coideal module retraction."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oideal|Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+   "sub": "RingTheory",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "grep",
+    "query": "[Cc]oideal|Hopf.*[Ff]lat|[Ff]lat.*Hopf",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 13,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Bialgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean",
+     "Mathlib/RingTheory/Coalgebra/Quotient.lean"
+    ],
+    "digest": "f040fabff5a33c25"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give faithful-flatness definitions, tensor descent assuming faithful flatness, and coideal quotient structures. They do not prove flatness from a coideal module retraction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split right coideal subalgebra of a commutative Hopf algebra is faithfully flat",
+   "sub": "",
+   "results": {
+    "t": "2026-10-23T21:09:55Z",
+    "tool": "leansearch",
+    "query": "A split right coideal subalgebra of a commutative Hopf algebra is faithfully flat",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "RingHom.FaithfullyFlat",
+     "Module.FaithfullyFlat",
+     "Module.FaithfullyFlat.iff_flat_and_ideal_smul_eq_top",
+     "RingHom.Flat",
+     "Module.FaithfullyFlat.of_comap_surjective",
+     "Module.FaithfullyFlat.self",
+     "RingHom.faithfullyFlat_algebraMap_iff",
+     "Module.FaithfullyFlat.faithfulSMul"
+    ],
+    "digest": "14e68c05f35672ee"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give faithful-flatness definitions, tensor descent assuming faithful flatness, and coideal quotient structures. They do not prove flatness from a coideal module retraction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-hopf-basis-lifting",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: Faithfully flat factorization of an affine group homomorphism. Theorem 3.31, printed pp.73--74; Definition 3.3, printed pp.65--66, and Definition 3.8, printed p.67, for the commutative Hopf algebra convention. Supporting argument: Theorem 3.31, printed pp.73--74, nilpotent-augmentation case: the explicitly asserted isomorphism A^(J) to B. The printed proof of injectivity has a gap: see report.md, Source error; this new node records the true statement only, not that argument. Repair input: faithful flatness from a supplied coideal retraction, replacing the invalid augmentation-ideal summand claim.",
+   "via": [
+    "lem-sfb-nilpotent-hopf-basis-lifting",
+    "lem-sfb-hopf-subalgebra-faithfully-flat",
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-coideal-faithfully-flat",
+  "worker": "stage1",
+  "summary": "Read Bichon v2 online and separated the quotient-relative-module kernel construction, canonical tensor isomorphism, coinvariant projector and counit criterion. Proved the unit isomorphism by the explicit equalizer calculation and proved faithful exactness by a kernel argument and the given retraction. No change to the item statement.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) through the existing marked-plurinodal/stable-curve/PGL/Hopf-algebra dependency chain; specifically the coideal-retraction repair in lem-sfb-nilpotent-hopf-basis-lifting. Latest blueprint proof (3) was read. The existing created.item ancestry has no blueprint ancestor (blueprint_refs.py ancestor returns None); preserve its null node and extend its via list rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Step 5 needs tensor right exactness for arbitrary modules; this algebra tool supplies it, while the unit-specific Hopf inputs do not."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-1d031f2cb",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-1d031f2cb (reviewer sub-agent of L); spot-checked: Read in full: the item, the four new nodes, the six cited mathlib-leaf statements, and Bichon arXiv:2301.05480v2 (Thm 1.1, §2.1, Thm 2.1, Props 2.2–2.4, Lemma 2.6, Prop 2.7 with proof). The item statement is the commutative case of Thm 1.1: an A-linear retraction is a bimodule map because H is commutative, and the coideal condition becomes Δ(A)⊆A⊗H since i⊗1 is injective over a field. Faithful flatness matches def-weil-pbc-faithfully-flat-ring-map. Steps 1, 2, 4 and 5 check by hand: the balanced map h⊗h'⊗m↦E(h)h'⊗m, e_M well-defined, the kernel argument, and preservation plus reflection through right exactness and e_{M2}. The kernels, canonical-tensor and projection nodes are true and not duplicates; checks include J=HA⁺ being a coideal, κ well-defined exactly because Δ(A)⊆A⊗H, and the inverse killing HA⁺. Fault (E2/E5): lem-sfb-relative-hopf-counit-criterion stated 1⊗j_X injective ⇒ μ_X bijective with no retraction. Bichon's proof of (a)⇒(c) only asserts that the tensored row is exact. Under κ that exactness is equivalent to μ_X being surjective, so the step is circular. With E, q=(E⊗1)κ⁻¹ is A-linear and satisfies qδ=p−1, which splits the row. FIX: the node now states (1) μ_X injective ⇔ 1⊗j_X injective, and (2) μ_X surjective given an A-linear E with E|_A=1. Item step 3 is re-worded to cite (1) and (2); its uses are unchanged. Clarity fix (B2) on canonical-tensor: H⊗_A X = L(X) for X restricted to A. Accepted tool_use: lem-weil-pbc-tensor-right-exact, a generic leaf. Maintainer notes: the null blueprint.from.node is inherited from the Hopf repair chain; the Bichon PDF is WANTED.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SplitCoidealFaithfullyFlat",
+  "declaration": "RelativeHopf.splitCoidealFaithfullyFlat",
+  "file": "lean/Sheaf/RingTheory/SplitCoidealFaithfullyFlat.lean",
+  "statement": "theorem splitCoidealFaithfullyFlat (k : Type u) [Field k] (A : Type v) [CommRing A] [Algebra k A] (B : Type w) [CommRing B] [Bialgebra k B] [Algebra A B] [IsScalarTower k A B] (S : B →ₐ[k] B) (hSleft : LinearMap.mul' k B ∘ₗ S.toLinearMap.rTensor B ∘ₗ Coalgebra.comul = Algebra.linearMap k B ∘ₗ Coalgebra.counit) (hSright : LinearMap.mul' k B ∘ₗ S.toLinearMap.lTensor B ∘ₗ Coalgebra.comul = Algebra.linearMap k B ∘ₗ Coalgebra.counit) (hi : Function.Injective (algebraMap A B)) (hcoideal : ∀ a : A, Coalgebra.comul (R := k) (algebraMap A B a) ∈ LinearMap.range (TensorProduct.map (IsScalarTower.toAlgHom k A B).toLinearMap (LinearMap.id : B →ₗ[k] B))) (hsplit : ∃ r : B →ₗ[A] A, ∀ a : A, r (algebraMap A B a) = a) : Module.FaithfullyFlat A B",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The given k-algebra map i is encoded by Algebra A B and IsScalarTower k A B, so i = algebraMap A B. The coideal image condition and existential A-linear retraction use exactly this map. Bialgebra supplies the algebra-valued comultiplication and counit and their identities; the specified algebra-valued antipode with both identities is explicit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c019d165",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read the item node, its 3 stmt_deps (Field, Mathlib algebra tensor, Module.FaithfullyFlat existing:true), the delivered module SplitCoidealFaithfullyFlat.lean and report.md (both required sections present), and the sibling RelativeHopf modules. Every clause matches: Bialgebra plus an AlgHom antipode with both identities (same encoding as CoidealCanonicalTensorIsomorphism); i = algebraMap A B with IsScalarTower, an equivalent encoding; injectivity; right coideal range condition with i on the first factor; existential A-linear retraction; Module.FaithfullyFlat conclusion. No extra or finiteness assumptions; universes u v w independent. lean.statement verbatim; node unchanged apart from lean/reviewed; source and blueprint docstrings and the 5-step proof plan present; sorry-only; no defs. Note: the coideal condition is inline for i rather than IsRightCoideal (def-sfb-relative-hopf-module-data, stated for a Subalgebra and not cited by the node); it is equivalent, so no change. Not recompiled; worker dry run OK."
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "id": "lem-sfb-invariant-average-cochain-identity",
+ "kind": "statement",
+ "title": "Algebraic last-variable contraction by an invariant average",
+ "statement": "Let $V$ be a field, $G$ a group, $P$ any set, and $E$ a $V$-vector space. Let $e:E\\to(G\\to V)$ be an injective $V$-linear map, $A:E\\to V$ a linear map, and $u\\in E$ with $e(u)(h)=1$ for all $h\\in G$ and $A(u)=1$. Assume that for each $a\\in G$ and $f\\in E$ there is $f'\\in E$ with $e(f')(h)=e(f)(ah)$ for every $h$ and $A(f')=A(f)$. Fix $n\\geq0$, a function $c:P\\times G^{n+1}\\to V$, and a family $t:P\\times G^n\\to E$ representing its last-variable slices, namely $e(t(s,g))(h)=c(s;g,h)$. Suppose $c$ is a trivial-action cocycle: for all $s$ and $(g_0,\\ldots,g_{n+1})$, the sum of $c(s;g_1,\\ldots,g_{n+1})$, the merged faces $(-1)^{j+1}c(s;g_0,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})$ for $0\\leq j\\leq n$, and the final face $(-1)^{n+2}c(s;g_0,\\ldots,g_n)$ is zero. Put $b(s;g)=(-1)^{n+1}A(t(s,g))$. Then the analogous differential of $b$ is $c$, including $n=0$ where the two differential terms cancel. There are no topological or norm hypotheses or conclusions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is geometric motivation only. Agent-written analytic expansion of lem-sfb-scalar-cochain-averaging-primitives, proof steps 3 and 4: signed last-variable averaging calculation; exact analytic reference remains WANTED."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Append a variable h to a fixed tuple g of length n+1. The leading face is the last-variable slice over the tail of g. The first n merged faces are the slices over the merged tuples. The penultimate face is the left translate by the last entry of g of the slice over the initial tuple; the final face is constant in h. These are direct identities of finite tuples, including n=0.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Lift the resulting cocycle equation to E. Injectivity of e identifies the sum of the slice vectors, the translated slice vector, and the constant vector with zero. Apply A. Its linearity, translation invariance and A(u)=1 give d(Tc)+(-1)^(n+2)c=0, where Tc=A(t).",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Multiply by (-1)^(n+1). Its square is one and (-1)^(n+2)=-(-1)^(n+1), so d((-1)^(n+1)Tc)=c. The same computation at n=0 forces c=0 and proves the zero-degree differential identity. Empty P is vacuous.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is geometric motivation only. Agent-written analytic expansion of lem-sfb-scalar-cochain-averaging-primitives, proof steps 3 and 4: signed last-variable averaging calculation; exact analytic reference remains WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Contracting homotopy for trivial group cocycles by averaging last variable",
+   "results": {
+    "t": "2026-10-26T06:36:35Z",
+    "tool": "leanfinder",
+    "query": "Contracting homotopy for trivial group cocycles by averaging last variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cocycles₁_map_mul_of_isTrivial",
+     "groupCohomology.cocycles₂_map_one_fst",
+     "groupCohomology.cocycles₁_map_one",
+     "groupCohomology.cocycles₂_map_one_snd",
+     "groupCohomology.map_one_fst_of_isCocycle₂",
+     "groupCohomology.mapCocycles₁_one",
+     "groupCohomology.cocycles₂_ρ_map_inv_sub_map_inv",
+     "groupCohomology.mem_cocycles₁_of_addMonoidHom"
+    ],
+    "digest": "1c4656e1f3b5dfcb"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: related cohomology differential and averaging definitions do not state this contraction identity for a faithfully represented averaging domain."
+  },
+  {
+   "tool": "grep",
+   "query": "contractNth.*snoc|snoc.*contractNth|averag.*cochain",
+   "results": {
+    "t": "2026-10-26T06:37:17Z",
+    "tool": "grep",
+    "query": "contractNth.*snoc|snoc.*contractNth|averag.*cochain",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: related cohomology differential and averaging definitions do not state this contraction identity for a faithfully represented averaging domain."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant normalized linear averaging functional on a subspace of group functions contracts the inhomogeneous trivial action cochain differential",
+   "results": {
+    "t": "2026-10-26T06:41:43Z",
+    "tool": "leansearch",
+    "query": "An invariant normalized linear averaging functional on a subspace of group functions contracts the inhomogeneous trivial action cochain differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "inhomogeneousCochains.d_hom_apply",
+     "groupHomology.d₁₀",
+     "groupCohomology.cocycles₁",
+     "inhomogeneousCochains.d",
+     "groupCohomology.d₀₁_ker_eq_invariants",
+     "Representation.averageMap",
+     "ContinuousCohomology.invariants",
+     "groupCohomology.inhomogeneousCochains.d_def"
+    ],
+    "digest": "e86281017ebd3cf2"
+   },
+   "date": "2026-10-26",
+   "verdict": "No match: related cohomology differential and averaging definitions do not state this contraction identity for a faithfully represented averaging domain."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Analysis.ScalarCochainAveragingPrimitives",
+  "date": "2026-10-26",
+  "group": "D4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), scalar tame-kernel input: algebraic calculation in steps 3 and 4 of lem-sfb-scalar-cochain-averaging-primitives.",
+   "via": [
+    "lem-sfb-scalar-cochain-averaging-primitives",
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Analysis.InvariantAverageCochainIdentity",
+  "file": "lean/Sheaf/Analysis/InvariantAverageCochainIdentity.lean",
+  "declaration": "WeilConjectures.invariant_average_cochain_identity",
+  "statement": "theorem invariant_average_cochain_identity\n    {V : Type v} [Field V] {G : Type u} [Group G] {P : Type w}\n    {E : Type z} [AddCommGroup E] [Module V E]\n    (ev : E →ₗ[V] (G → V)) (hev : Function.Injective ev)\n    (A : E →ₗ[V] V) (oneE : E) (hone : ev oneE = 1) (hAone : A oneE = 1)\n    (hleft : ∀ (a : G) (f : E), ∃ f' : E,\n      ev f' = (fun h ↦ ev f (a * h)) ∧ A f' = A f)\n    (n : ℕ) (c : P × (Fin (n + 1) → G) → V)\n    (t : P → (Fin n → G) → E)\n    (ht : ∀ s g h, ev (t s g) h = c (s, Fin.snoc g h))\n    (hc : ∀ s (g : Fin (n + 2) → G),\n      c (s, fun j ↦ g j.succ) +\n        ∑ j : Fin (n + 2), (-1 : V) ^ (j.val + 1) *\n          c (s, Fin.contractNth j (· * ·) g) = 0) :\n    ∀ s (g : Fin (n + 1) → G),\n      (-1 : V) ^ (n + 1) * A (t s (fun j ↦ g j.succ)) +\n        ∑ j : Fin (n + 1), (-1 : V) ^ (j.val + 1) *\n          ((-1 : V) ^ (n + 1) * A (t s (Fin.contractNth j (· * ·) g))) =\n        c (s, g)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T081418-L-1951781",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T081418-L-1951781",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-tower-ordinary-localization",
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "Operations proof (2), last sentence: ordinary short exact open-closed tower sequence, with the closed direct image exact by Stacks 09BM.",
+   "via": [
+    "lem-sp-tower-localization-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "title": "Ordinary open-closed localization in the fixed constant coefficient coordinates",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell, Base b and Operations o as in def-sp-tower-shriek-data. Let i:Z -> T be a closed immersion and a:U -> T a complementary quasi-compact open immersion. On the ordinary abelian category S(ell,E,T) of strict coefficient systems, the closed functor (o.geometry i).push preserves finite colimits. For every system M, the actual counit of (o.openOp a).ordinaryAdjunction followed by the actual unit of (o.geometry i).ordinaryAdjunction is short exact: the counit is monic, the unit epic, their composite is zero, and their image and kernel agree. There are no derived objects, representative choices, or boundary morphisms in this conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2), ordinary counit-unit exact sequence before passage to complexes"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved source-library shortExact_openClosedShortComplex over the constant finite ring R_n. Transport the sequence through sfIntrinsicModuleEquivalence using exactness of equivalences. Uniqueness of left adjoints and their unit/counit equations identify the conjugated sequence with the finiteOpenAdjunction counit and canonical constant-ring closed unit. Only the normalized ordinary pullback comparison from lem-trf-open-square-exchange is used, not its square-exchange or derived assertions.",
+   "uses": [
+    "det-sf-open-closed-sequence-ring-sheaf",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the proved finite-colimit preservation of closed lowerStar. The ordinary pullback comparison identifies its left adjoint with the canonical constant-ring pullback; uniqueness of right adjoints therefore identifies the conjugated direct image with the canonical constant-ring pushforward.",
+   "uses": [
+    "lem-exc-proetale-closed-exact",
+    "lem-trf-open-square-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each index n, Open.counit_evaluation identifies the evaluated open counit up to the specified evaluation isomorphisms. geometry_unit_evaluation identifies the evaluated closed unit. Transport the finite short exact sequence through these isomorphisms.",
+   "uses": [
+    "lem-sp-tower-ordinary-unit-evaluation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluation functors are exact and jointly faithful: equality of each evaluated map is equality on every pair (n,V), hence equality of system morphisms. Thus they jointly reflect isomorphisms. The jointly conservative exact-functor criteria reflect the zero composite, short exactness and finite-colimit preservation. This proves the stated ordinary result, including zero systems and empty complementary pieces.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sf-open-closed-sequence-ring-sheaf",
+  "lem-exc-proetale-closed-exact",
+  "lem-sp-tower-ordinary-unit-evaluation",
+  "lem-trf-open-square-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F4",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "Operations proof (2): ordinary level sequences reflected by exact jointly conservative evaluation; direct source-library finite-coefficient route, without complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "open closed decomposition strict systems of module sheaves ordinary counit unit short exact sequence",
+   "results": "Eight hits: module pushforward counit formulas, scheme module restriction counit formulas, generic ShortExact.exact and moduleCat_exact_iff_function_exact. None identifies the normalized strict system sequence.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary open closed localization exact sequence of module sheaves over constant ring coefficients with normalized unit counit",
+   "results": "Eight module localization and affine Tilde results; no strict inverse-system localization statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ComposableArrows.Exact",
+   "results": "Generic exact sequence API, including Exact.toIsComplex and Exact.exact, reused in the parent derived proof. No geometric localization.",
+   "date": "2026-10-26",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*unit.*Exact|unit.*counit.*Exact",
+   "results": "No Mathlib hit. Local library search found the generic inverse-ring SequenceData and semilinearOrdinaryLocalization. They use the inverse-ring and slice coordinates rather than the fixed constant-coefficient Geometry and Open interfaces. Their transport is the remaining step. Blueprint search for open closed found no identical node.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerLocalization",
+  "date": "2026-10-26",
+  "group": "H9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerOrdinaryLocalization",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerOrdinaryLocalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.tower_ordinary_localization",
+  "statement": "theorem tower_ordinary_localization (b : Base l E) (o : Operations l E b)\n    {Z U T : Scheme.{u}} (i : Z ⟶ T) (a : U ⟶ T)\n    [IsClosedImmersion i] [IsOpenImmersion a] [QuasiCompact a]\n    (complement : Set.range a = (Set.range i)ᶜ) :\n    PreservesFiniteColimits (o.geometry i).push ∧\n      ∀ M : S l E T,\n        Mono ((o.openOp a).ordinaryAdjunction.counit.app M) ∧\n        Epi ((o.geometry i).ordinaryAdjunction.unit.app M) ∧\n        (ComposableArrows.mk₂ ((o.openOp a).ordinaryAdjunction.counit.app M)\n          ((o.geometry i).ordinaryAdjunction.unit.app M)).Exact",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T001822-L-33093",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T023134-L-523346",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

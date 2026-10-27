@@ -14,9 +14,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Localization.Predicate
 
@@ -39,17 +36,27 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-universe u wS wV
+universe u wS wV v₁ v₂ u₁ u₂
 
 open CategoryTheory CategoryTheory.Limits Opposite
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 namespace CondensedLocalization
 
 open InternalModuleOperations
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {S : Scheme.{u}} (V : S.ProEt)
+
+set_option warn.classDefReducibility false in
+private noncomputable def coefficientModulesAbelian (T : Scheme.{u}) :
+    Abelian (SheafOfModules.{u + 1} (ring Λ T)) := inferInstance
+
+set_option warn.classDefReducibility false in
+attribute [local instance] coefficientModulesAbelian
 
 /-- The existing sectionwise ringed-topos pullback, with its source and target made
 explicit at the chosen site object. No new pullback construction is chosen.
@@ -93,7 +100,12 @@ this retains the same additive map. Restriction is sectionwise, so both preserve
 @[instance]
 theorem localizedPullback_additive (e : restrictedRing Λ V ≅ ring Λ V.left) :
     (localizedPullback Λ V e).Additive := by
-  sorry
+  have : (restriction Λ V).Additive := by
+    constructor
+    intro M N f g
+    ext W m
+    rfl
+  infer_instance
 
 /-- The actual ringed-topos pullback is additive.
 Source: Stacks 03EK, 04IX (blueprint: lem-sfb-condensed-localization-exact-cohomology).
@@ -102,7 +114,12 @@ rings, and identify tensor extension with action transport by b tensor m mapping
 alpha inverse of b times m. This is natural in module maps and preserves their sums. -/
 @[instance]
 theorem pullback_additive : (pullback Λ V).Additive := by
-  sorry
+  have : (InternalModuleOperations.lowerStar Λ V.hom).Additive := by
+    constructor
+    intro M N f g
+    ext W m
+    rfl
+  exact (adjunction Λ V.hom).left_adjoint_additive
 
 /-- The actual ringed-topos pullback preserves finite limits.
 Source: Stacks 04IX, 03EK (blueprint: lem-sfb-condensed-localization-exact-cohomology).
@@ -113,7 +130,8 @@ lem-sfb-finite-exactness-nat-iso to the comparison with actual pullback. -/
 @[instance]
 theorem pullback_preservesFiniteLimits :
     PreservesFiniteLimits (pullback Λ V) := by
-  sorry
+  exact ((internal_module_operations_transport Λ).2.2.2.1 V.hom).1.mp
+    inferInstance
 
 /-- The actual ringed-topos pullback preserves finite colimits.
 Source: Stacks 04IX, 03EK (blueprint: lem-sfb-condensed-localization-exact-cohomology).
@@ -125,7 +143,9 @@ sheafified sectionwise cokernels, so this does not assert sectionwise surjectivi
 @[instance]
 theorem pullback_preservesFiniteColimits :
     PreservesFiniteColimits (pullback Λ V) := by
-  sorry
+  have : PreservesColimitsOfSize.{0, 0} (pullback Λ V) :=
+    (adjunction Λ V.hom).leftAdjoint_preservesColimits
+  infer_instance
 
 /-- Localization, coefficient identification, action equivalence and the canonically
 normalized sectionwise comparison for the actual ringed-topos pullback.
@@ -194,7 +214,64 @@ theorem localized_complex_represents
     Nonempty ((pullback Λ V).mapDerivedCategory.{wS, wV}.obj Q ≅
       DerivedCategory.Q.{wV}.obj (((localizedPullback Λ V e).mapHomologicalComplex (.up ℤ)).obj
         K)) := by
-  sorry
+  exact ⟨(pullback Λ V).mapDerivedCategory.mapIso a.symm ≪≫
+    (pullback Λ V).mapDerivedCategoryFactors.app K ≪≫
+    DerivedCategory.Q.mapIso
+      ((NatIso.mapHomologicalComplex rho (.up ℤ)).app K)⟩
+
+private theorem exactFunctor_cohomologyComparison
+    {A : Type u₁} [Category.{v₁} A] [Abelian A] [HasDerivedCategory.{wS} A]
+    {B : Type u₂} [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{wV} B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (q : ℤ) :
+    ∃ c : DerivedCategory.homologyFunctor.{wS} A q ⋙
+        F ≅
+      F.mapDerivedCategory.{wS, wV} ⋙
+        DerivedCategory.homologyFunctor.{wV} B q,
+      ∀ K : CochainComplex A ℤ,
+        c.hom.app (DerivedCategory.Q.{wS}.obj K) ≫
+          (DerivedCategory.homologyFunctor.{wV} _ q).map
+            (F.mapDerivedCategoryFactors.{wS, wV}.hom.app
+              K) ≫
+          (DerivedCategory.homologyFunctorFactors.{wV} _ q).hom.app
+            ((F.mapHomologicalComplex
+              (.up ℤ)).obj K) =
+        F.map
+            ((DerivedCategory.homologyFunctorFactors.{wS} _ q).hom.app K) ≫
+          ((K.sc q).mapHomologyIso F).inv := by
+  let H := HomologicalComplex.homologyFunctor A (.up ℤ) q
+  let H' := HomologicalComplex.homologyFunctor B (.up ℤ) q
+  let h : F.mapHomologicalComplex (.up ℤ) ⋙ H' ≅ H ⋙ F :=
+    Functor.isoWhiskerLeft (HomologicalComplex.shortComplexFunctor A (.up ℤ) q)
+      (ShortComplex.homologyFunctorIso F)
+  let a : DerivedCategory.Q.{wS} ⋙
+      (DerivedCategory.homologyFunctor.{wS} A q ⋙ F) ≅ H ⋙ F :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (DerivedCategory.homologyFunctorFactors.{wS} A q) F
+  let b : DerivedCategory.Q.{wS} ⋙
+      (F.mapDerivedCategory.{wS, wV} ⋙ DerivedCategory.homologyFunctor.{wV} B q) ≅
+      F.mapHomologicalComplex (.up ℤ) ⋙ H' :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight F.mapDerivedCategoryFactors _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.homologyFunctorFactors.{wV} B q)
+  let c := (Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q.{wS}
+    (HomologicalComplex.quasiIso A (.up ℤ)) _).preimageIso (a ≪≫ h.symm ≪≫ b.symm)
+  refine ⟨c, ?_⟩
+  intro K
+  have hc := congrArg (fun t ↦ t.app K)
+    ((Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q.{wS}
+      (HomologicalComplex.quasiIso A (.up ℤ)) _).map_preimage
+        (a ≪≫ h.symm ≪≫ b.symm).hom)
+  dsimp only [Functor.whiskeringLeft_obj_map, Functor.whiskerLeft_app] at hc
+  change c.hom.app (DerivedCategory.Q.obj K) = _ at hc
+  have he : c.hom.app (DerivedCategory.Q.obj K) ≫ b.hom.app K =
+      a.hom.app K ≫ h.inv.app K := by
+    rw [hc]
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  simpa [a, b, h, Functor.associator, ShortComplex.homologyFunctorIso] using he
+
 
 /-- The natural unbounded cohomology comparison, normalized on every complex by the
 canonical kernel/image quotient comparison. The displayed equation says that the path
@@ -224,7 +301,7 @@ theorem cohomology_comparison (q : ℤ) :
         (pullback Λ V).map
             ((DerivedCategory.homologyFunctorFactors.{wS} _ q).hom.app K) ≫
           ((K.sc q).mapHomologyIso (pullback Λ V)).inv := by
-  sorry
+  exact exactFunctor_cohomologyComparison (pullback Λ V) q
 
 end CondensedLocalization
 end AlgebraicGeometry.ProEtale

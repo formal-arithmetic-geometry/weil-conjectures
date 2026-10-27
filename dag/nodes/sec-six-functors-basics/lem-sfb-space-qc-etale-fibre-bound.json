@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-space-qc-etale-fibre-bound",
+ "kind": "statement",
+ "title": "Uniform geometric fibre bound for an etale scheme chart",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with atlas topology on field-valued point classes [def-a1-space-point-topology] and sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A geometric point is a map $\\operatorname{Spec}\\Omega\\to X$ from an algebraically closed field [def-weil-geometric-point], and its geometric fibre is the sheaf fibre product with this map. Quasi-compact means quasi-compact on scheme tests, or, for a space, that every open cover has a finite subcover. Quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact. Separated for a morphism means that its diagonal is representable by closed immersions [def-weil-closed-immersion]. Etale means representable etale on scheme tests [def-trf-algebraic-space, def-weil-etale-morphism]. Integral means representable and integral on scheme tests [def-weil-finite-integral-morphism]; in particular its pullback to an affine scheme is affine. Open immersions are representable by open immersions on scheme tests [def-weil-open-immersion]. Let $X$ be quasi-separated, let $U$ be a quasi-compact scheme, and let $a:U\\to X$ be etale. There is an integer $d\\geq0$ such that for every geometric point $\\bar x$ of $X$ the geometric fibre $U_{\\bar x}$ is a finite discrete scheme with at most $d$ points.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 03JX (lemma-bounded-fibres), (eta) implies (delta), and 03JT (lemma-U-universally-bounded), finite affine covering of U."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-open-immersion",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $U=\\bigcup_{j\\in J}V_j$ using [lem-weil-pbc-affine-opens-basis] and quasi-compactness; allow $J=\\varnothing$ when $U=\\varnothing$. By [lem-sfb-space-qcqs-permanence](1), $a:U\\to X$ is a quasi-compact morphism: its source is quasi-compact and its target is quasi-separated. Consequently, for each affine scheme test $V_j\\to U\\to X$, the pullback $R_j=U\\times_XV_j$ is quasi-compact. This uses only affine tests, so no quasi-separatedness of $U$ is being assumed.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), part (1); schemes.tex Tag 01IT (lemma-basis-affine-opens)."
+   }
+  },
+  {
+   "text": "The projection $p_j:R_j\\to V_j$ is a morphism of schemes and is etale: it is precisely a scheme test of the representable etale map $a$, by [def-trf-algebraic-space] and [lem-trf-space-fibre-products-etale-covers]. By [def-weil-etale-morphism], $p_j$ is unramified. Apply [lem-weil-pbc-unramified-quasi-finite-at-points] to conclude that $p_j$ is locally quasi-finite. Thus each $p_j$ has a quasi-compact source and is locally quasi-finite, without any separatedness assumption.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02V5 (lemma-unramified-quasi-finite) and 02GK (lemma-etale-smooth-unramified), as in Tag 03WS (lemma-etale-locally-quasi-finite); spaces.tex Tag 02X2 (lemma-fibre-product-spaces)."
+   }
+  },
+  {
+   "text": "For each $j\\in J$, apply [lem-weil-pbc-lqf-qc-source-bounded-fibres] to $p_j$ and choose a nonnegative integer $d_j$ bounding its finite fibre degrees. By [lem-weil-pbc-fibre-degree-bound-field-points], for every field $K$ and every map $v:\\operatorname{Spec}K\\to V_j$, the scheme $R_j\\times_{V_j,v}\\operatorname{Spec}K$ is finite over $K$ and its ring of global sections has $K$-dimension at most $d_j$. Put $d=\\sum_{j\\in J}d_j$. The same finite sum works for all field-valued tests, and is zero for an empty cover.",
+   "uses": [
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-fibre-degree-bound-field-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 03JA (lemma-locally-quasi-finite-qc-source-universally-bounded) and 03J5 (lemma-characterize-universally-bounded)."
+   }
+  },
+  {
+   "text": "Fix $\\bar x:\\operatorname{Spec}\\Omega\\to X$, with $\\Omega$ algebraically closed. The fibre $F=U\\times_X\\operatorname{Spec}\\Omega$ is a scheme etale over $\\Omega$, directly by the scheme-test definition in [def-trf-algebraic-space]. Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $F\\to\\operatorname{Spec}\\Omega$ at the unique base point; its residue-field fibre is $F$ itself. Hence $F$ is a disjoint union of spectra of finite separable extensions of $\\Omega$. Every such extension is $\\Omega$: the minimal polynomial of any element is irreducible and has a root in $\\Omega$, so is linear. In particular $F$ is discrete and every point of a nonempty $F$ gives an $\\Omega$-morphism $t:\\operatorname{Spec}\\Omega\\to F$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), part (2), applied over an algebraically closed field; decent-spaces.tex remark-recall."
+   }
+  },
+  {
+   "text": "If $F$ is nonempty, choose such $t$, and let $u:\\operatorname{Spec}\\Omega\\to U$ be its first projection. Choose $j$ whose open $V_j$ contains its image; $u$ then factors through $v:\\operatorname{Spec}\\Omega\\to V_j$. The fibre-product universal property [lem-trf-space-fibre-products-etale-covers] identifies $F$ over $\\Omega$ with $R_j\\times_{V_j,v}\\operatorname{Spec}\\Omega$. Explicitly, on a test $T\\to\\operatorname{Spec}\\Omega$, both functors consist of maps $z:T\\to U$ satisfying $a\\circ z=\\bar x|_T$: the extra $V_j$ component on the right is forced to be $v|_T$. These mutually inverse identifications are natural in $T$ and preserve the structure maps. Step 3 therefore makes $F$ finite over $\\Omega$ with $\\dim_\\Omega\\Gamma(F,\\mathcal O_F)\\leq d_j\\leq d$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JT (lemma-U-universally-bounded), comparison through scheme fibre products; the explicit pullback reassociation is the universal property of Tag 02X2 (spaces.tex)."
+   }
+  },
+  {
+   "text": "For nonempty $F$, finiteness over $\\Omega$ gives quasi-compactness; the cover by its open point components from step 4 thus has finitely many components, say $r$. Each is $\\operatorname{Spec}\\Omega$. Sections on this finite disjoint union form $\\Omega^r$ by the sheaf gluing axiom, and the coordinate vectors give $\\dim_\\Omega\\Omega^r=r$. Hence $\\#|F|=r\\leq d$. If $F$ is empty, it is the empty finite discrete scheme and has zero points, also at most $d$. This covers every geometric point and proves the assertion, including $U=\\varnothing$ with $d=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03J5 (lemma-characterize-universally-bounded), final cardinality consequence, and Tag 02GL (lemma-etale-over-field); elementary split-field calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-algebraic-closure",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-fibre-degree-bound-field-points",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tags 03JX and 03JT, using their scheme bounded-fibre input 03JA. Direct finite-affine-cover argument: apply spaces-morphisms.tex Tag 073B(1) to the chosen chart, then 03JA and 03J5 to U times_X V_j, and compare each nonempty geometric fibre using an Omega-valued lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism from a quasi compact scheme to a quasi separated algebraic space has uniformly bounded geometric fibre cardinalities",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] (y : ↥Y),\\n  CompactSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a quasi-compact morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ is a compact space.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally bounded degree of etale charts on quasi separated algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.etaleLocus_eq_univ_iff_etale\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], Algebra.etaleLocus R A = Set.univ ↔ Algebra.Etale R A\", \"doc\": \"The étale locus of an algebra $ A $ over a commutative ring $ R $ is equal to the universal set (i.e., the entire prime spectrum $ \\\\operatorname{Spec}(A) $) if and only if $ A $ is étale over $ R $.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, Etale",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicSpace'",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|universallyBounded|bounded.*[Ff]iber",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Topology/Connected/CardComponents.lean\", \"line\": \"20\", \"text\": \"  the number of connected components of `X` is bounded by the cardinality of the fiber\"}\n  {\"file\": \"Mathlib/Topology/Connected/CardComponents.lean\", \"line\": \"40\", \"text\": \"components of `X` is bounded by the cardinality of the fiber of any point. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniform bound on geometric fibers of an etale chart of an algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) [IsFinite f] (y : Y) : (f ⁻¹' { y }).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a finite morphism of schemes. For any point $y \\\\in Y$, the fiber $f^{-1}(\\\\{y\\\\})$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : DiscreteTopology (f.fiber y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-space assertion; hits are scheme-only or unrelated and do not specialize in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, Finite",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, Finite",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern schemes, not algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|universallyBounded|bounded.*[Ff]ib(re|er)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras, not uniform geometric fibre bounds for algebraic spaces; no one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniform bound on the cardinalities of geometric fibres of an etale chart of an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras, not uniform geometric fibre bounds for algebraic spaces; no one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Finite\"",
+   "results": "12 hits: Algebra.Etale.finitePresentation, Algebra.FormallyEtale.instEtaleForallOfFinite, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.instIsSeparableQuotientIdealOfEssFiniteTypeOfIsPrime, AlgebraicGeometry.Scheme.instHasFiniteLimitsEtale, AlgebraicGeometry.Scheme.instPreservesFiniteLimitsEtaleOverForget, AlgebraicGeometry.Etale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras, not uniform geometric fibre bounds for algebraic spaces; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale map from a quasi compact scheme to a quasi separated algebraic space has a uniform bound on geometric fibre cardinalities",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras, not uniform geometric fibre bounds for algebraic spaces; no one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally bounded degree of representable etale charts on quasi separated algebraic spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms or ring algebras, not uniform geometric fibre bounds for algebraic spaces; no one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "date": "2026-10-23",
+  "group": "N7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: initial finite bound for the chosen etale scheme atlas.",
+   "via": [
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qc-etale-fibre-bound",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused existing 073B, 03JA, 03J5 and 02GL nodes to bound the scheme tests U times_X V_j and identify every nonempty geometric fibre with such a test fibre. Wrote the field lift, pullback identification, dimension/cardinality calculation, and empty cases explicitly. No new nodes; no exact project or Mathlib attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: initial finite bound for the chosen etale scheme atlas. The six steps supply precisely the initial uniform geometric fibre bound; no alteration or direct-image theorem is invoked. Current latest blueprint direct-images proof (3) read; historical helper chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "A generic scheme basis fact selects a finite affine cover of the quasi-compact chart; the constructible-functor unit has no replacement for this topological tool."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Only scheme representability and the sheaf-fibre-product universal property are used, as already in the statement; no trace-formula argument is used."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "The scheme theorem supplies local quasi-finiteness for etale projections; this is a geometric tool, not a different route for constructibility."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "why": "Tag 03JA is explicitly the scheme bounded-fibre input of the assigned Stacks 03JT/03JX route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-degree-bound-field-points",
+    "why": "Tag 03J5 interprets the same degree bound on arbitrary field tests, needed for the geometric-fibre comparison."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Tag 02GL is the field-fibre classification recalled in decent-spaces.tex and gives the geometric lift and discreteness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-fibre-degree-bound-field-points",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-8214665b0",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-8214665b0 (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and every cited statement in full, plus Stacks 03JT (decent-spaces l.630) and 03JX (l.735, (eta)=>(delta), and the 03JA use in its (epsilon)=>(delta) proof). There are no new nodes. The statement is unchanged against side-live and is true: tested with U empty, a finite separable field, and the non-quasi-separated A^1/Z counterexample. The item is still unsplit in live and side-live, so no other group superseded it. Step 1: the finite affine cover plus lem-sfb-space-qcqs-permanence(1) (qc source, qs target, so f is qc on affine tests) make R_j=U x_X V_j quasi-compact. Step 2: representable etale gives an etale scheme map p_j; the unramified conjunct and 02V5 give locally quasi-finite. Step 3: 03JA's hypotheses hold exactly; 03J5 (1)=>(2) holds for every field-valued map. Step 4: 02GL(2) at the point of Spec Omega with fibre F; separable extensions of an algebraically closed field are trivial, which gives an Omega-point. Step 5: I checked it on T-points. The V_j coordinate is forced to v|_T, z is not required to land in V_j, and a(u)=xbar makes the identification hold over Omega. Step 6: finite over Omega means affine, so a discrete F has r points with dim Gamma=r<=d. proof_deps equal the union of uses, there is no cycle, and rg -L over the tags found no duplicate (lem-sfb-space-etale-maximum-degree has different hypotheses and conclusions). Batch-5 flag: lem-sfb-space-qcqs-permanence reaches def-trf-algebraic-space, which is the general definition of an algebraic space and already a stmt_dep of the item; neither node is a statement or proof step of the trace-formula or Poincare assumption, so the citation is outside the assumed statements. I accept the tool_uses (01IT, 02X2, 02V5, 03JA, 03J5, 02GL scheme facts on the 03JT/03JX route). No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQcEtaleFibreBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_uniform_geometricFibre_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQcEtaleFibreBound.lean",
+  "statement": "theorem exists_uniform_geometricFibre_bound {S : Scheme.{u}} (X : AlgebraicSpace S) (hX : IsAbsolutelyQuasiSeparated X) (U : Over S) [CompactSpace U.left] (a : yoneda.obj U ⟶ X.obj.obj) (ha : IsEtale a) : ∃ d : ℕ, ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ S) (x : yoneda.obj (Over.mk s) ⟶ X.obj.obj), ∃ (F : Over S) (p : F ⟶ Over.mk s) (q : yoneda.obj F ⟶ yoneda.obj U), IsPullback q (yoneda.map p) a x ∧ IsFinite p.left ∧ DiscreteTopology F.left ∧ Nat.card F.left ≤ d",
+  "branch": "sheaf-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The geometric fibre is a scheme representing the presheaf pullback, with its projection finite over the geometric field, discrete underlying topology and uniformly bounded point cardinality. Absolute quasi-separatedness is the existing affine-test criterion of def-sfb-space-absolute-quasi-separated; that landed definition node is added to stmt_deps. No change to the informal statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a7069721",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Item diff vs side-live: only the new lean record and an added stmt_dep def-sfb-space-absolute-quasi-separated (landed Q09 2026-10-23, so on base, used directly as hX, no copy, acyclic). lean.statement verbatim in file. Clause check: S:Scheme.{u}, X:AlgebraicSpace S, hX:IsAbsolutelyQuasiSeparated, U:Over S with only [CompactSpace U.left], ha:IsEtale a (representable etale); single ∃ d:ℕ before ∀ Ω:Type u algebraically closed field, s, x; fibre as ∃ F p q with IsPullback q (yoneda.map p) a x (the IsRepresentableWith pattern, unique up to iso, so ∃ not weaker than ∀); IsFinite p.left ∧ DiscreteTopology ∧ Nat.card ≤ d (a real bound since F is finite over a field). Edge cases U empty (d=0), points outside the image, X empty, universe of Ω all correct. Matches Stacks 03JT/03JX and the node's 6-step proof. No new defs, body sorry only, source and blueprint docstrings with proof steps, report has Worker report and Second reading by Q37 sections, no pro-etale substitute, no existing algebraic-space declaration found (H4). No recompile, no fixes."
+ }
+}

@@ -16,22 +16,9 @@
  ],
  "proof": [
   {
-   "text": "We will use the following elementary finite-generation argument over the given Noetherian ring $A$. By [lem-weil-pbc-noetherian-submodule-finite], a submodule of a finite $A$-module is finite. A quotient is finite because the images of any finite generating set generate it [def-weil-finitely-generated-module]. Thus subquotients are finite. If $0\\to B\\to C\\to D\\to0$ is exact with $B,D$ finite, choose generators of $B$ and lifts in $C$ of generators of $D$; their union generates $C$, since subtracting a linear combination of the lifts leaves an element of $B$. Induction on the number of successive quotients now shows that a module with a finite filtration and finite successive quotients is finite.",
+   "text": "Fix bounds $u,v$ as in the hypothesis. For every integer $q$, apply [lem-trf-finite-module-target-rhom] to $K$ and $N=H^q(L)$. Its hypotheses hold because $A$ is Noetherian, the cohomology of $K$ is finite and vanishes above $u$, and $H^q(L)$ is finite. Thus every $H^p(R\\operatorname{Hom}_A(K,H^q(L)[0]))$ is finite.",
    "uses": [
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "def-weil-finitely-generated-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00IK, lemma-Noetherian-basic, with the elementary generator argument used in its proof."
-   }
-  },
-  {
-   "text": "Fix the integers $u,v$ in the hypothesis and first let $N$ be any finite $A$-module placed in degree zero. Apply [lem-trf-source-hyperext-module-target] to $K,N,u$. Its $E_2$ terms are $\\operatorname{Ext}^i_A(H^{-j}(K),N)$ for $i\\geq0$, and are zero outside $i\\geq0$, $j\\geq-u$. The two module arguments are finite by the hypothesis on $K$ and our choice of $N$, and $A$ is Noetherian, so [lem-sc-ext-noetherian-finite] makes every such $E_2$ term finite. The negative $i$ terms are zero by the source-sequence statement.",
-   "uses": [
-    "lem-trf-source-hyperext-module-target",
-    "lem-sc-ext-noetherian-finite"
+    "lem-trf-finite-module-target-rhom"
    ],
    "elementary": false,
    "source": {
@@ -40,19 +27,7 @@
    }
   },
   {
-   "text": "In this spectral sequence every $E_{s+1}^{i,j}$ is a quotient of a submodule of $E_s^{i,j}$. Step 1 therefore proves by induction on $s\\geq2$ that all pages have finite terms. A fixed bidegree eventually stabilizes by [lem-trf-source-hyperext-module-target], so its $E_\\infty$ term is finite too; this uses eventual stabilization, not finiteness of an infinite intersection. In total degree $p$ the same node gives a finite filtration of $H^p(R\\operatorname{Hom}_A(K,N[0]))$ with graded terms indexed by $-u\\leq j\\leq p$. Step 1 makes the abutment finite. This proves finite generation for every $p\\in\\mathbf Z$ and every finite module $N$, including the zero abutments for $p<-u$.",
-   "uses": [
-    "lem-trf-source-hyperext-module-target",
-    "lem-weil-pbc-noetherian-submodule-finite"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof: the algebra problem and the two displayed Ext spectral sequences."
-   }
-  },
-  {
-   "text": "Now apply [lem-per-bounded-above-rhom-hyperext] on the one-object site with only the identity covering, with coefficient ring $A$, and with its parameters $r=u$, $c=v$. Sheaves on this site are precisely modules, so its derived category and cohomology are the ordinary ones. Its internal Hom is exactly the $R\\operatorname{Hom}_A$ in the statement: the Hom-complex/K-injective formula in [def-pur-derived-internal-hom] is unchanged on this site. The bounds required by that node are exactly the assumed upper bound on $K$ and lower bound on $L$. We obtain an $A$-module spectral sequence\n$$E_2^{p,q}=H^p(R\\operatorname{Hom}_A(K,H^q(L)[0]))\\quad\\Longrightarrow\\quad H^{p+q}(R\\operatorname{Hom}_A(K,L)),$$\nzero outside $p\\geq-u$, $q\\geq v$, with a finite exhaustive separated abutment filtration in each total degree.",
+   "text": "Apply [lem-per-bounded-above-rhom-hyperext] on the one-object identity-covering site with coefficient ring $A$, taking $r=u$ and $c=v$. On this site sheaves of modules are ordinary $A$-modules, with the same cochain complexes, differentials and quasi-isomorphisms. The Hom-complex/K-injective formula of [def-pur-derived-internal-hom] is therefore precisely the derived Hom used here. The two bounds are exactly the hypotheses on $K,L$. We obtain the $A$-linear spectral sequence $$E_2^{p,q}=H^p(R\\operatorname{Hom}_A(K,H^q(L)[0]))\\ \\Longrightarrow\\ H^{p+q}(R\\operatorname{Hom}_A(K,L)),$$ supported in $p\\geq-u$, $q\\geq v$, with finite exhaustive separated abutment filtrations and graded pieces $E_\\infty^{p,n-p}$.",
    "uses": [
     "lem-per-bounded-above-rhom-hyperext",
     "def-pur-derived-internal-hom"
@@ -64,12 +39,11 @@
    }
   },
   {
-   "text": "Each $H^q(L)$ is finite by hypothesis, so Step 3, with $N=H^q(L)$, makes every $E_2^{p,q}$ of Step 4 finite. As before, kernels are finite by [lem-weil-pbc-noetherian-submodule-finite], quotients are generated by images of generators, and induction on pages makes every term of every finite page finite. For fixed $(p,q)$ the incoming differential is zero when $s>p+u$, while the outgoing differential is zero when $s>q-v+1$, by the support bounds of [lem-per-bounded-above-rhom-hyperext]; hence $E_\\infty^{p,q}$ is a finite-page term and is finite. In total degree $n$, that node supplies a finite filtration with graded pieces $E_\\infty^{p,n-p}$ and only $v\\leq n-p\\leq n+u$ contributing. Step 1 gives finite generation of $H^n(R\\operatorname{Hom}_A(K,L))$. If $n<v-u$ the interval is empty, so every graded piece is zero; a finite exhaustive separated filtration with zero graded pieces has zero abutment. This is the required vanishing and completes both conclusions.",
+   "text": "Apply [lem-trf-noetherian-quadrant-abutment] to this sequence with $a=-u$, $b=v$ and $T^n=H^n(R\\operatorname{Hom}_A(K,L))$. Step 1 supplies finite generation of every second-page term; Step 2 supplies the support, differential and filtered-abutment hypotheses. The cited lemma gives finite generation of each $T^n$ and $T^n=0$ for $n<a+b=v-u$, proving both assertions.",
    "uses": [
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-per-bounded-above-rhom-hyperext"
+    "lem-trf-noetherian-quadrant-abutment"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/perfect.tex",
     "place": "Tag 0D0C, lemma-coherent-internal-hom, proof: the algebra problem and the two displayed Ext spectral sequences."
@@ -77,12 +51,10 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "def-weil-finitely-generated-module",
-  "lem-trf-source-hyperext-module-target",
-  "lem-sc-ext-noetherian-finite",
+  "lem-trf-finite-module-target-rhom",
   "lem-per-bounded-above-rhom-hyperext",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-trf-noetherian-quadrant-abutment"
  ],
  "proof_origin": {
   "by": "document",
@@ -199,11 +171,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "item": "lem-trf-bounded-above-coherent-rhom",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Expanded the two spectral-sequence proof of Stacks 0D0C, reusing module Ext finiteness, finite submodules, and the existing second-argument hyper-Ext theorem. Added only the statement-only first-argument spectral-sequence input 0G20. Wrote the finite-generation, finite-filtration and stabilization arguments explicitly and checked the lower-bound signs.",
-  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Expanded input: Tag 0G4H proof, final application of perfect.tex lemma-coherent-internal-hom (Tag 0D0C); the algebra assertion explicitly stated in the proof of that lemma. This split expands exactly the supporting algebra problem from 0D0C by its source and target hyper-Ext sequences; it does not change the ancestor unit or its realization.",
+  "summary": "Repair of batch5 re-split return. Statement unchanged. Separated the finite-module-target derived-Hom argument (old steps 2--3) and the generic Noetherian shifted-quadrant page/stable-term/filtered-abutment argument (old steps 1 and 5) into two statement-only unsplit nodes. The item now assembles these with the existing target-variable hyper-Ext sequence (old step 4). The report preserves every original argument verbatim and maps its future proof location.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Expanded input: Tag 0G4H proof, final application of perfect.tex lemma-coherent-internal-hom (Tag 0D0C); the algebra assertion explicitly stated in the proof of that lemma. This split expands exactly the supporting algebra problem from 0D0C by its source and target hyper-Ext sequences; it does not change the ancestor unit or its realization. Re-split: first Ext sequence is the finite-module-target node, pagewise/filtration finiteness is the quadrant node, and the second Ext sequence remains the assembly step.",
   "tool_uses": [
    {
     "node": "lem-per-bounded-above-rhom-hyperext",
@@ -215,12 +187,12 @@
   "lem-per-bounded-above-rhom-hyperext"
  ],
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q109-97711e5af",
-  "group": "Q109",
+  "reviewer": "NT-cc-NX-ef901d267",
+  "group": "NX",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-97711e5af (reviewer sub-agent of L); spot-checked: I read the item and new node in full, plus Stacks 0D0C (perfect.tex lemma-coherent-internal-hom) and 0G1Y/0G20 (injectives.tex l.2356-2380). The item statement is the 0D0C algebra problem with explicit bounds u,v on ordinary A-modules: R Hom is def-pur-derived-internal-hom on the one-object identity-cover site, where module sheaves are A-modules. Its vanishing for r<v-u is sharp (k[-u], k[-v]), and an unbounded-below K is handled. Step 1 (subquotient/extension finite generation) is elementary over 00IK. Step 2 uses the new node's E2 = Ext^i(H^{-j}K,N) with lem-sc-ext-noetherian-finite; its hypotheses (Noetherian, two finite modules, i>=0) hold. Step 3 uses page induction, stabilization from the node and the finite filtration -u<=j<=t. Step 4 specializes lem-per-bounded-above-rhom-hyperext with r=u, c=v; its E2 equals the new node's abutment with N=H^q L, on the same derived-internal-hom. Step 5: I re-derived the differential bounds (incoming zero for s>p+u, outgoing zero for s>q-v+1) and the range v<=q<=n+u, which is empty for n<v-u. New node lem-trf-source-hyperext-module-target is a faithful specialization of 0G20 (M=K in D^-, second argument N[0]). The zero abutment for t<-u holds by t-structure orthogonality. It is statement-only and self-contained, with blueprint from/via checked by script, four kinds of search logged, and no duplicate in the DAG (searched 0G20/0G1Y, Ext(H^{-j}...) and spectral-sequence/Ext statements). It is a general tool, not a clause of the item. I accept the declared tool_use lem-per-bounded-above-rhom-hyperext: it is a generic second-variable hyper-Ext tool, used by 0D0C itself. There is no SGA citation and no cycle. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-ef901d267 (reviewer sub-agent of L); spot-checked: PASS, no fixes; this is a correct answer to the batch-5 re-split note of 2026-10-22. I read the base item on live (5 steps, 3692 chars, Q109-reviewed), the delivered item, both new nodes and every cited statement. Only proof, proof_deps and split_report differ from live; the statement, stmt_deps, lean, reviews and tool_uses are unchanged. Source: Stacks 0D0C (perfect.tex lemma-coherent-internal-hom), read at the place. It uses two Ext spectral sequences plus Ext finiteness (08YR); the route and the coefficient category (ordinary A-modules on the one-object identity-covering site) are unchanged, and there is no SGA citation. Where each old step went: old 1 (finite generation through subquotients, extensions and filtrations) and the generic part of old 5 (page finiteness, differentials zero for s>p-a and s>q-b+1, stable E_inf, finite filtration, empty interval n<a+b) became the new generic node lem-trf-noetherian-quadrant-abutment. I re-derived its bounds, and with a=-u, b=v it gives exactly the vanishing below v-u. Old 2-3 (the source hyper-Ext sequence, lem-sc-ext-noetherian-finite, page induction and the range -u<=j<=t) became lem-trf-finite-module-target-rhom. Its future proof can apply the quadrant node with a=0, b=-u; I checked the indices against lem-trf-source-hyperext-module-target. Old 4 stays as item step 2: the specialization of lem-per-bounded-above-rhom-hyperext with r=u, c=v, whose statement gives E2=H^p RHom(K,H^qL[0]), d_s of bidegree (s,1-s), the support and finite exhaustive separated filtrations. The previously accepted tool_use for that node is retained, and I accept it. The assembly is 1400 chars, the two nodes carry comparable work (about 1.7k vs 1.2k chars of the old argument), and nothing was summarised away. Both new nodes are statement-only and self-contained, with 3 kinds of search (LeanSearch recorded as unavailable) and correct blueprint fields; neither has a duplicate in the DAG, and neither restates a clause of its parent. The finite-module-target node is Stacks' own intermediate case L=N[0], not a restated clause. Edge cases tested: K=k[-u] (the bound t<-u is sharp); K unbounded below, e.g. the sum of k[-j] over j<=u; A=0; a single E2 term at (a,b), which shows the bound a+b is sharp. There is no cycle. Maintainer note: lem-trf-source-hyperext-module-target and lem-sc-ext-noetherian-finite lose their citer from this branch until lem-trf-finite-module-target-rhom is split, the expected transient of a statement-only re-split."
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.BoundedAboveCoherentRHom",
@@ -241,5 +213,16 @@
   "result": "pass",
   "note": "Clause-by-clause match with node and Stacks 0D0C algebra problem: Noetherian CommRing A; K,L in D(RingSiteModules A) (one-object bottom-topology site = A-modules, same presentation as landed consumer coherent_rhom_finite_injective_dimension); hK/hL finite cohomology in all degrees; explicit bounds a<j / j<b; RHom = recorded derivedInternalHomOfUniverses.{u,u,u,w} on onePointRingSheaf A with op K first; conclusions finite H^r for all r and IsZero for r<b-a (sharp, checked with A[-a],A[-b]). No extra hypotheses, universes u/w as in consumer, consumer's use matches signature. Node changes only lean + stmt_dep def-pc-ring-hom-extension-shared-definitions (precedent); 5 dep records identical to live; statement verbatim; docstrings carry source, blueprint and 5 steps; sorry only; plain imports = proof_deps' Mathlib matches. No duplicate in side Sheaf/WeilConjectures or Mathlib. nt_compile --json rc 0, 6.7 s, clean. Advisory: onePointRingSheaf owned by theorem node lem-pc-kflat-tensor-quasi-iso, reached via RingSiteModules as in precedents."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

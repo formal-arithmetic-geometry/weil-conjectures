@@ -1,0 +1,153 @@
+{
+ "id": "def-sfb-relative-birational-law",
+ "kind": "definition",
+ "title": "Fibrewise dense relative rational charts and strict birational laws",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X,Y$ be schemes over $S$. Products and fibres are scheme-theoretic fibre products [def-pc-base-change]. An open $U\\subset X$ is fibrewise dense over $S$ if for every $s\\in S$, the inverse image of $U$ in $X_s$ is dense. A relative rational chart from $X$ to $Y$ consists of an $S$-scheme $D$ and $S$-morphisms $i:D\\to X$, $h:D\\to Y$; it is a rational representative when $i$ is an open immersion [def-weil-open-immersion] and its image is fibrewise dense over $S$. Two representatives agree if on an $S$-dense open of $X$ contained in both domains their maps coincide. An $S$-rational map is an equivalence class of these representatives; a representative is $S$-birational if $h$ is also an open immersion with $S$-dense image. For a chart $m:D\\to Y$ with inclusion $i:D\\hookrightarrow Y\\times_SY$, the universal translations are $\\Phi=(\\operatorname{pr}_1i,m)$ and $\\Psi=(m,\\operatorname{pr}_2i)$. Associativity as an $S$-rational map means that on an $S$-dense open $A\\subset(Y\\times_SY)\\times_SY$, both pairs $(x,y),(y,z)$ and both outer pairs $(xy,z),(x,yz)$ lift to $D$, and the resulting morphisms $A\\to Y$ are equal. The chart is strict if it is rational and associative, the translations are open immersions, and the images of $i,\\Phi,\\Psi$ are dense in every fibre of each of the two projections $Y\\times_SY\\to Y$. Thus $D\\simeq V=\\Phi(D)$ and $D\\simeq W=\\Psi(D)$ are the strictness charts. This predicate is used on smooth separated finite-type $S$-schemes with nonempty fibres. Base change of raw charts along $g:T\\to S$ is the actual pullback of $D,i,h$ via $\\mathrm{Over.pullback}(g)$. For a law its inclusion is followed by the canonical product comparison $(Y\\times_SY)_T\\simeq Y_T\\times_TY_T$; its domain remains $D_T$ and its multiplication morphism is $m_T$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-base-change",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "2.5 p.55, 5.1 Definition 1 pp.112-113, 5.2 Definition 1 p.115; primary scan https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strict.*birational|birational.*law|fiberwiseDense|fibrewiseDense",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense rational-map or strict-law interface. Mathlib Scheme.PartialMap and RationalMap use absolute dense opens; RationalMap.IsOver only imposes base compatibility, not fibrewise density."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RationalMap\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense rational-map or strict-law interface. Mathlib Scheme.PartialMap and RationalMap use absolute dense opens; RationalMap.IsOver only imposes base compatibility, not fibrewise density."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative rational maps on fibrewise dense open subschemes and strict birational group laws",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.Scheme.RationalMap\nAlgebraicGeometry.Scheme.PartialMap.mk\nAlgebraicGeometry.Scheme.RationalMap.dense_domain\nAlgebraicGeometry.Scheme.PartialMap.restrict\nAlgebraicGeometry.Scheme.PartialMap.noConfusionType\nAlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\nAlgebraicGeometry.Scheme.RationalMap.isOver_iff\nAlgebraicGeometry.Scheme.RationalMap.IsOver",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense rational-map or strict-law interface. Mathlib Scheme.PartialMap and RationalMap use absolute dense opens; RationalMap.IsOver only imposes base compatibility, not fibrewise density."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibrewise dense open subsets relative rational maps strict birational laws",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.Scheme.RationalMap.dense_domain\nAlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\nAlgebraicGeometry.Scheme.PartialMap.restrict_toRationalMap\nAlgebraicGeometry.Scheme.RationalMap.domain\nAlgebraicGeometry.Scheme.PartialMap.dense_domain\nAlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\nAlgebraicGeometry.Scheme.RationalMap.exists_rep\nAlgebraicGeometry.Scheme.RationalMap.mem_domain",
+   "date": "2026-10-24",
+   "verdict": "No relative fibrewise-dense rational-map or strict-law interface. Mathlib Scheme.PartialMap and RationalMap use absolute dense opens; RationalMap.IsOver only imposes base compatibility, not fibrewise density."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i strict.{0,15}birational|birational.{0,15}law|fibrewise.?dense|fiberwise.?dense|relative.?rational lean/WeilConjectures lean/Sheaf; rg -l ... dag/nodes --glob def-*.json; tools/blueprint_refs.py search strict birational law",
+   "results": "Project: only unrelated fibre-density statements and rational-algebra modules; no relative rational-chart or strict-law definition. DAG: no definition node. blueprint_refs: 0 blueprint nodes match strict birational law; 0 blueprint nodes match relative rational.",
+   "date": "2026-10-24",
+   "verdict": "No duplicate; this delivery supplies the missing definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-base-change",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "BLR 1.1 Definition 2 (printed pp.8-9) and 1.3 Theorem 1, if direction (printed p.16, PDF p.22); local-existence input of 1.4 Theorem 3; supporting construction: BLR 4.3 Theorem 6, printed p.108 (PDF p.114), equivalently 5.1 Theorem 5 including the no-shrinking clause, printed p.114 (PDF p.120). Supporting sublemma: BLR 5.2 Theorem 3 and the explicit translate construction of 5.3, printed pp.117-128 (PDF pp.123-134); descent to an arbitrary field or DVR in 6.5 Corollary 2, printed pp.157-158 (PDF pp.163-164); uniqueness in 5.1 Proposition 3; base-change preparation for 6.5 Corollary 2, including the double and triple overlap bases; explicit relative notions for BLR 2.5 and 5.2 Definition 1",
+   "via": [
+    "lem-sfb-strict-law-base-change",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeBirationalLaw",
+  "declaration": "AlgebraicGeometry.RelativeRationalChart.IsStrictLaw",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.IsFiberwiseDenseOpen",
+   "AlgebraicGeometry.Scheme.Hom.IsFiberwiseDenseRange",
+   "AlgebraicGeometry.RelativeRationalChart",
+   "AlgebraicGeometry.RelativeRationalChart.IsRational",
+   "AlgebraicGeometry.RelativeRationalChart.Agrees",
+   "AlgebraicGeometry.RelativeRationalMap",
+   "AlgebraicGeometry.RelativeRationalChart.IsBirational",
+   "AlgebraicGeometry.RelativeRationalChart.baseChange",
+   "AlgebraicGeometry.RelativeRationalChart.leftTranslation",
+   "AlgebraicGeometry.RelativeRationalChart.rightTranslation",
+   "AlgebraicGeometry.RelativeRationalChart.IsAssociative",
+   "AlgebraicGeometry.RelativeRationalChart.IsStrictLaw",
+   "AlgebraicGeometry.RelativeRationalChart.lawBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeBirationalLaw.lean",
+  "statement": "def RelativeRationalChart.IsStrictLaw {Y : Over S} (m : RelativeRationalChart (Y ⨯ Y) Y) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff40f2aa",
+  "group": "Q08",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff40f2aa",
+  "group": "Q08",
+  "result": "fix",
+  "note": "Read item, all stmt_deps, new def node def-sfb-relative-birational-law, both modules, report. Item JSON differs from live only in lean+stmt_deps (adds new def node); lean.statement verbatim. Clause match OK: IsFiberwiseDenseOpen via Mathlib fiberι; IsRational/Agrees/Quot RelativeRationalMap/IsBirational; translations prod.lift (i≫fst) m and (m, i≫snd); IsAssociative lifts (x,y),(y,z),(xy,z),(x,yz) checked; IsStrictLaw six projection densities + open-immersion translations; ambient Smooth/IsSeparated/LocallyOfFiniteType+QuasiCompact/Surjective(=nonempty fibres); three clauses as three theorems plus representative-independence; lawBaseChange domain D_T, translation identities via prodComparison verified true. Edge cases T/S empty, residue extensions, nonreduced T, g=id, group scheme OK; single universe u. No duplicate in Mathlib/project/DAG. No hollow defs, all theorems sorry, docstrings with BLR places and proof steps, no line >100. FIX (H12): new node used open immersions without citing def-weil-open-immersion -> fixes/def-sfb-relative-birational-law.json adds stmt_dep and [def-weil-open-immersion] citation in statement. No Lean change, no compile needed."
+ }
+}

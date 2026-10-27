@@ -1,0 +1,450 @@
+{
+ "id": "lem-sfb-free-representable-slice-evaluation",
+ "kind": "statement",
+ "title": "Free-representable internal Hom evaluated on product slices",
+ "statement": "Let $\\mathcal C$ be a small site in the common sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with finite products and subcanonical topology (every representable is a sheaf). Let $R$ be a sheaf of commutative rings, and let $\\operatorname{Mod}(R)$ denote ordinary module sheaves [def-weil-sheaf-of-modules-category]. Write $U$ for the underlying abelian sheaf functor, $\\iota$ for inclusion of abelian sheaves into presheaves, and $a$ for abelian sheafification [def-weil-pbc-sheafification]. For $P\\in\\mathcal C$ put $F_P(W)=\\bigoplus_{b:W\\to P}R(W)$ with restriction $e_b\\mapsto e_{b\\circ d}$ along $d:W'\\to W$, and $R[P]=F_P^\\#$, using module sheafification [def-weil-presheaf-modules-sheafification]. For $V\\in\\mathcal C$ restriction is to the site $\\mathcal C/V$ of arrows to $V$, with underlying coverings [def-pur-localized-ringed-site]. Then $R[P]|_V$ is canonically the module sheafification of the free $R|_V$-module presheaf on $(V\\times P\\to V)$; at $(W\\xrightarrow{b_0}V)$ its generator indexed by $b:W\\to P$ corresponds to $e_{(b_0,b)}$.\nPut $H_P(M)=\\mathcal Hom_R(R[P],M)$ [def-pur-sheaf-hom] and $(t_PA)(V)=A(V\\times P)$ for abelian presheaves $A$. There is an additive isomorphism of abelian presheaves\n$$\\theta_{P,M}:\\iota UH_P(M)\\xrightarrow{\\sim}t_P\\iota UM.$$\nIts value at $V$ sends $\\varphi:R[P]|_V\\to M|_V$ to $\\varphi_{(V\\times P\\to V)}(e_{\\operatorname{pr}_P})$; the inverse sends $s\\in M(V\\times P)$ to the map taking $e_b$ over $(W\\xrightarrow{b_0}V)$ to $s|_{(b_0,b)}$. It commutes with restriction along $c:V'\\to V$ via $c\\times1_P$, with a coefficient map $f:M\\to N$ via $f_{V\\times P}$, and with $u:P'\\to P$ via restriction along $1_V\\times u$ (the Hom map is precomposition by $R[u]$). The additive functor $H_P$ is left exact. Applying $a$ and the counit $a\\iota\\cong\\mathrm{id}$ yields $\\bar\\theta_{P,M}:UH_P(M)\\cong a t_P\\iota UM$ with the same naturalities. For every cochain complex $L^\\bullet$ [def-weil-abstract-derived-category] these maps give an isomorphism of complexes $UH_P(L^\\bullet)\\cong a t_P\\iota UL^\\bullet$, natural for chain maps and for $u$. If $L^n=0$ for $n<0$ and $r:M[0]\\to L^\\bullet$ identifies $M$ with $\\ker d_L^0$, its restriction to the degree-zero kernels is precisely $\\bar\\theta_{P,M}$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EM (lemma-internal-hom), its localized-Hom definition and free-generator specialization; module sheafification and localization in lemma-sheafification-presheaf-modules and definition-localize-ringed-site. Agent formulation with explicit inverse and naturality."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $Q=(UF_P)|_{\\mathcal C/V}$ and $S=a_VQ$. The site and its slice are small in the common sheaf universe, so [lem-cbc-sieve-slice-sheafification], with abelian-group values, gives $\\alpha:S\\cong U(R[P]|_V)$ with $\\alpha\\eta_Q=(\\eta_{F_P})|_V$. Transport the restricted module action by $r\\cdot_Sx=\\alpha^{-1}(r\\cdot\\alpha(x))$. The unit identity gives $r\\cdot_S\\eta_Q(q)=\\alpha^{-1}(r\\cdot\\alpha\\eta_Q(q))=\\alpha^{-1}(\\alpha\\eta_Q(rq))=\\eta_Q(rq)$ on each object, because the original module sheafification unit is linear. Thus this action extends the presheaf action, and uniqueness in [def-weil-presheaf-modules-sheafification] identifies it with the slice module-sheafification action. For each $(W\\xrightarrow{b_0}V)$, the product universal property gives the bijection $b\\mapsto(b_0,b)$ from $\\operatorname{Hom}_{\\mathcal C}(W,P)$ to $\\operatorname{Hom}_{\\mathcal C/V}((W,b_0),(V\\times P,\\operatorname{pr}_V))$. Extend it linearly; precomposition by $d$ sends both generators to the one indexed by $(b_0d,bd)$. This is an isomorphism of free module presheaves. Sheafifying and composing with $\\alpha$ proves the asserted slice identification with its specified generators. The coefficient ring and restrictions here are exactly those of [def-pur-localized-ringed-site].",
+   "uses": [
+    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 04IX (definition-localize-ringed-site); slice compatibility as stated in lem-cbc-sieve-slice-sheafification"
+   }
+  },
+  {
+   "text": "Fix $s\\in M(V\\times P)$. On the free presheaf of step 1 define $\\psi_s(\\sum_b r_be_b)=\\sum_b r_b\\,s|_{(b_0,b)}$ over $(W,b_0)$. The sums are finite and the formula is $R(W)$-linear. Along $d:W'\\to W$ both restriction of this formula and application of the formula after restriction give $\\sum_b r_b|_{W'}\\,s|_{(b_0d,bd)}$. Thus it is a morphism of module presheaves. The module sheafification universal property extends it uniquely to $\\varphi_s:R[P]|_V\\to M|_V$. Uniqueness also shows $\\varphi_{s+t}=\\varphi_s+\\varphi_t$ and $\\varphi_0=0$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, factorization through module sheafification; explicit free-generator specialization of Section 04TT"
+   }
+  },
+  {
+   "text": "By [def-pur-sheaf-hom], a section of $H_P(M)$ at $V$ is precisely a map $\\varphi:R[P]|_V\\to M|_V$. Set $s=\\varphi_{(V\\times P,\\operatorname{pr}_V)}(e_{\\operatorname{pr}_P})$. Naturality of $\\varphi$ along the slice arrow $(b_0,b):(W,b_0)\\to(V\\times P,\\operatorname{pr}_V)$ says $\\varphi_{(W,b_0)}(e_b)=s|_{(b_0,b)}$. Linearity and uniqueness of factorization through sheafification imply $\\varphi=\\varphi_s$. Conversely, evaluating $\\varphi_s$ on $e_{\\operatorname{pr}_P}$ gives $s|_{(\\operatorname{pr}_V,\\operatorname{pr}_P)}=s$. Evaluation is additive because addition of maps is sectionwise. Hence these constructions are mutually inverse additive bijections at every $V$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT and Tag 03EM (lemma-internal-hom), with the explicit free-generator inverse"
+   }
+  },
+  {
+   "text": "For $c:V'\\to V$ and $s\\in M(V\\times P)$, restricting $\\varphi_s$ to $\\mathcal C/V'$ sends a generator $e_b$ over $(W,b_0':W\\to V')$ to $s|_{(cb_0',b)}=(s|_{c\\times1_P})|_{(b_0',b)}$. Uniqueness of sheafification extension therefore identifies it with $\\varphi_{s|_{c\\times1_P}}$. For $f:M\\to N$, the composite $f\\varphi_s$ sends $e_b$ to $f_W(s|_{(b_0,b)})=f_{V\\times P}(s)|_{(b_0,b)}$. Finally define $R[u]:R[P']\\to R[P]$ by sheafifying $e_{b'}\\mapsto e_{ub'}$. The composite $\\varphi_s R[u]|_V$ sends $e_{b'}$ to $s|_{(b_0,ub')}=(s|_{1_V\\times u})|_{(b_0,b')}$. These three identities prove all three naturalities and show that the bijections of step 3 constitute the asserted presheaf isomorphism $\\theta_{P,M}$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 04TT, restriction by relocalization; Tag 03CY for equality after extension"
+   }
+  },
+  {
+   "text": "Kernels of module-sheaf morphisms are computed sectionwise by [def-weil-sheaf-of-modules-category]. If $K=\\ker(f:M\\to N)$, then $K(V\\times P)=\\ker(f_{V\\times P})$. Under $\\theta$, the map $H_P(f)(V)$ is $f_{V\\times P}$ by step 4. Thus $H_P(K)\\to H_P(M)$ is its kernel, sectionwise at every $V$. Also $H_P(0)=0$, and $H_P$ is additive by composition of module maps. It preserves binary sums since pairs of maps to $M\\oplus N$ are precisely a map to $M$ and a map to $N$, componentwise on every slice. Consequently $H_P$ preserves zero objects, binary products and kernels, hence finite limits, and is left exact.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), sectionwise kernels; compare Tag 0GMY (lemma-internal-hom-exact), clause (2)"
+   }
+  },
+  {
+   "text": "Sheafify $\\theta$ as an abelian-presheaf isomorphism. Since $UH_P(M)$ is already an abelian sheaf, its sheafification unit is invertible: the identity factors through the unit by the universal property, and uniqueness makes the two composites identities. Let $\\epsilon:a\\iota\\cong\\mathrm{id}$ be this counit. Define $\\bar\\theta_{P,M}=a(\\theta_{P,M})\\circ\\epsilon_{UH_P(M)}^{-1}$. Naturality of sheafification and of this counit gives all three naturalities already proved in step 4. Sheafification is additive here: it preserves finite products by [lem-weil-pbc-sheafification-exact], so it preserves the addition maps induced by those products. Thus these are natural additive isomorphisms.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-exact",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WH (proposition-sheafification-adjoint) and Tag 00WJ (lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "Apply $\\bar\\theta$ in each degree to $L^\\bullet$. Naturality for the coefficient morphism $d_L^n:L^n\\to L^{n+1}$ gives $\\bar\\theta_{P,L^{n+1}}\\circ UH_P(d_L^n)=a(t_P\\iota U(d_L^n))\\circ\\bar\\theta_{P,L^n}$, so these maps form a cochain map. Their degreewise inverses give its inverse cochain map by the same equality. For a chain map $g:L^\\bullet\\to T^\\bullet$, apply coefficient naturality to every $g^n$; for $u:P'\\to P$, apply the parameter identity of step 4 in every degree. These are exactly the required naturalities of the complex isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Explicit degreewise consequence of the coefficient and parameter naturalities proved above"
+   }
+  },
+  {
+   "text": "Let $r^0:M\\to L^0$ identify $M$ with $\\ker d_L^0$. Step 5 identifies $UH_P(r^0)$ with the degree-zero kernel inclusion on the left. On abelian presheaves, $t_P\\iota U(r^0)$ is the kernel inclusion of $t_P\\iota U(d_L^0)$, since its value at $V$ is the kernel inclusion at $V\\times P$. Exactness of $a$ in [lem-weil-pbc-sheafification-exact] identifies $a t_P\\iota U(r^0)$ with the degree-zero kernel inclusion on the right. Coefficient naturality for $r^0$ reads $\\bar\\theta_{P,L^0}\\,UH_P(r^0)=a t_P\\iota U(r^0)\\,\\bar\\theta_{P,M}$. Since the latter inclusion is monic, the map induced on the two kernels is exactly $\\bar\\theta_{P,M}$. The vanishing in negative degrees ensures these are also the degree-zero cohomology objects, with no boundaries to quotient out.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian) and Tag 00WJ (sites-lemma-sheafification-exact), specialized to the kernel of the degree-zero differential"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-sieve-slice-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 04TT, Tag 03EM, together with Tags 03CY and 04IX; explicit product-generator calculation and degree-zero normalization written by Q35."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "freeYoneda|homObj|homFunctor",
+   "results": {
+    "t": "2026-10-22T06:08:34Z",
+    "tool": "grep",
+    "query": "freeYoneda|homObj|homFunctor",
+    "sub": "Algebra/Category/ModuleCat/Sheaf",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv is a presheaf adjunction; freeHomEquiv is free on a fixed set; ihomPoints is for constant coefficients on LightProfinite. None states module sheafification on slices, the arbitrary-ring-sheaf product evaluation and its normalized complex comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom of a sheafified free representable module is evaluation on products on a ringed site",
+   "results": {
+    "t": "2026-10-22T06:08:35Z",
+    "tool": "leansearch",
+    "query": "Internal Hom of a sheafified free representable module is evaluation on products on a ringed site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.Hom",
+     "PresheafOfModules.evaluation_obj",
+     "PresheafOfModules.sections.eval",
+     "SheafOfModules.freeHomEquiv",
+     "SheafOfModules.ιFree",
+     "AlgebraicGeometry.Scheme.Modules.Hom",
+     "SheafOfModules.free",
+     "PresheafOfModules.evaluation"
+    ],
+    "digest": "328427dc16caef10"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv is a presheaf adjunction; freeHomEquiv is free on a fixed set; ihomPoints is for constant coefficients on LightProfinite. None states module sheafification on slices, the arbitrary-ring-sheaf product evaluation and its normalized complex comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"freeYoneda\"",
+   "results": {
+    "t": "2026-10-22T06:08:35Z",
+    "tool": "loogle",
+    "query": "\"freeYoneda\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.freeYonedaCoproduct",
+     "PresheafOfModules.Elements.freeYoneda",
+     "PresheafOfModules.freeYoneda.instSmall",
+     "PresheafOfModules.freeYoneda.isDetecting",
+     "PresheafOfModules.freeYoneda.isSeparating",
+     "PresheafOfModules.freeYoneda",
+     "PresheafOfModules.instEpiFromFreeYonedaCoproduct",
+     "PresheafOfModules.fromFreeYonedaCoproduct"
+    ],
+    "digest": "2040c10b459b96da"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv is a presheaf adjunction; freeHomEquiv is free on a fixed set; ihomPoints is for constant coefficients on LightProfinite. None states module sheafification on slices, the arbitrary-ring-sheaf product evaluation and its normalized complex comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "homObj|freeYonedaEquiv|ihomPoints",
+   "results": {
+    "t": "2026-10-22T06:09:32Z",
+    "tool": "grep",
+    "query": "homObj|freeYonedaEquiv|ihomPoints",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean"
+    ],
+    "digest": "9840d63048d5f7ad"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv is a presheaf adjunction; freeHomEquiv is free on a fixed set; ihomPoints is for constant coefficients on LightProfinite. None states module sheafification on slices, the arbitrary-ring-sheaf product evaluation and its normalized complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf internal Hom from a free representable is naturally the presheaf obtained by product precomposition, using module sheafification on slice sites",
+   "results": {
+    "t": "2026-10-22T06:09:42Z",
+    "tool": "leanfinder",
+    "query": "Sheaf internal Hom from a free representable is naturally the presheaf obtained by product precomposition, using module sheafification on slice sites",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints",
+     "SheafOfModules.freeHomEquiv",
+     "PresheafOfModules.freeHomEquiv",
+     "LightCondensed.ihomPoints_apply",
+     "PresheafOfModules.freeYonedaEquiv",
+     "SheafOfModules.unitHomEquiv",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv"
+    ],
+    "digest": "80444d8da3cbb404"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv is a presheaf adjunction; freeHomEquiv is free on a fixed set; ihomPoints is for constant coefficients on LightProfinite. None states module sheafification on slices, the arbitrary-ring-sheaf product evaluation and its normalized complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the sheaf Hom from the free module sheaf on a representable P has sections over V equal to module sections over V times P, natural in both variables",
+   "results": {
+    "t": "2026-10-22T06:08:46Z",
+    "tool": "leanfinder",
+    "query": "On a ringed site the sheaf Hom from the free module sheaf on a representable P has sections over V equal to module sections over V times P, natural in both variables",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.freeHomEquiv",
+     "SheafOfModules.unitHomEquiv",
+     "PresheafOfModules.unitHomEquiv",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "SheafOfModules.freeMap",
+     "PresheafOfModules.Elements.freeYoneda",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "PresheafOfModules.freeYonedaEquiv"
+    ],
+    "digest": "975992edf2bcc433"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: freeYonedaEquiv is a presheaf adjunction; freeHomEquiv is free on a fixed set; ihomPoints is for constant coefficients on LightProfinite. None states module sheafification on slices, the arbitrary-ring-sheaf product evaluation and its normalized complex comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the sheaf Hom from a sheafified free representable module is evaluation on products, naturally in the module and representable",
+   "results": {
+    "t": "2026-10-22T11:18:40Z",
+    "tool": "leanfinder",
+    "query": "On a ringed site the sheaf Hom from a sheafified free representable module is evaluation on products, naturally in the module and representable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.freeHomEquiv",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "SheafOfModules.ιFree",
+     "PresheafOfModules.freeYoneda",
+     "PresheafOfModules.Elements.fromFreeYoneda_app_apply",
+     "PresheafOfModules.freeYonedaEquiv",
+     "SheafOfModules.Presentation.mapGenerators",
+     "SheafOfModules.freeFunctor"
+    ],
+    "digest": "0952e071caa9b26b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Generator.lean:58-73 gives the module-presheaf free Yoneda equivalence; Sheaf/Free.lean:61-67 concerns a fixed set of global generators; Light/InternallyProjective.lean:53-56 assumes constant coefficients on LightProfinite. None states the full arbitrary ring-sheaf slice/product comparison with complex and kernel normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"freeYonedaEquiv\"",
+   "results": {
+    "t": "2026-10-22T11:19:07Z",
+    "tool": "loogle",
+    "query": "\"freeYonedaEquiv\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "PresheafOfModules.freeYonedaEquiv",
+     "PresheafOfModules.freeYonedaEquiv_symm_app",
+     "PresheafOfModules.freeYonedaEquiv_comp"
+    ],
+    "digest": "f8cab323650fec35"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Generator.lean:58-73 gives the module-presheaf free Yoneda equivalence; Sheaf/Free.lean:61-67 concerns a fixed set of global generators; Light/InternallyProjective.lean:53-56 assumes constant coefficients on LightProfinite. None states the full arbitrary ring-sheaf slice/product comparison with complex and kernel normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYonedaEquiv|freeHomEquiv|ihomPoints",
+   "results": {
+    "t": "2026-10-22T11:19:07Z",
+    "tool": "grep",
+    "query": "freeYonedaEquiv|freeHomEquiv|ihomPoints",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean"
+    ],
+    "digest": "fe7dd6f61d92204a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Generator.lean:58-73 gives the module-presheaf free Yoneda equivalence; Sheaf/Free.lean:61-67 concerns a fixed set of global generators; Light/InternallyProjective.lean:53-56 assumes constant coefficients on LightProfinite. None states the full arbitrary ring-sheaf slice/product comparison with complex and kernel normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf of module homomorphisms from a sheafified free representable on P to M has sections M(V times P)",
+   "results": {
+    "t": "2026-10-22T11:19:39Z",
+    "tool": "leansearch",
+    "query": "The sheaf of module homomorphisms from a sheafified free representable on P to M has sections M(V times P)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.sheafHom",
+     "SheafOfModules.sections",
+     "SheafOfModules.ιFree",
+     "PresheafOfModules.sheafifyHomEquiv",
+     "PresheafOfModules.sections",
+     "SheafOfModules.freeSection",
+     "SheafOfModules.freeHomEquiv",
+     "AlgebraicGeometry.Scheme.Modules.Hom"
+    ],
+    "digest": "cfe0c48f38978b01"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Generator.lean:58-73 gives the module-presheaf free Yoneda equivalence; Sheaf/Free.lean:61-67 concerns a fixed set of global generators; Light/InternallyProjective.lean:53-56 assumes constant coefficients on LightProfinite. None states the full arbitrary ring-sheaf slice/product comparison with complex and kernel normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of free representable module sheaves is precomposition by the product functor on a site, compatible with complexes and degree zero kernels",
+   "results": {
+    "t": "2026-10-22T11:19:40Z",
+    "tool": "leanfinder",
+    "query": "Internal Hom of free representable module sheaves is precomposition by the product functor on a site, compatible with complexes and degree zero kernels",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.freeHomEquiv_comp_apply",
+     "SheafOfModules.map_ιFree_mapFree_hom",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "SheafOfModules.freeMap",
+     "SheafOfModules.freeHomEquiv_symm_comp",
+     "LightCondensed.ihomPoints",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "LightCondensed.ihomPoints_apply"
+    ],
+    "digest": "941e4e88de02c179"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Generator.lean:58-73 gives the module-presheaf free Yoneda equivalence; Sheaf/Free.lean:61-67 concerns a fixed set of global generators; Light/InternallyProjective.lean:53-56 assumes constant coefficients on LightProfinite. None states the full arbitrary ring-sheaf slice/product comparison with complex and kernel normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-representable-derived-functions-model",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image and arithmetic coefficient comparison, via the finite-stage coefficient-topology comparison: continuity of derived functions on profinite parameters. The derived-sections model needed before applying finite-cover cohomological continuity. Returned proof steps 2-3, the left-exactness part of step 4, and the underived parameter/kernel part of step 9.",
+   "via": [
+    "lem-sfb-free-representable-derived-functions-model",
+    "lem-sfb-profinite-derived-functions-filtered-colimit",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-free-representable-slice-evaluation",
+  "worker": "stage1",
+  "summary": "Repair of returned delivery 89455c6f1f8: rebased the retained split-owned fields onto the current live unsplit item and re-read every current statement/proof dependency. The statement and its statement dependencies agree exactly with live. Made the slice comparison action and its unit-linearity calculation explicit, including the common-universe and abelian-value hypotheses. Revalidated all citations and retained the complete inverse, naturality, left-exactness, complex and kernel arguments and all recorded searches. No new nodes.",
+  "blueprint": "Paragraph (3), open direct image and arithmetic coefficient comparison, via the finite-stage coefficient-topology comparison: continuity of derived functions on profinite parameters. The derived-sections model needed before applying finite-cover cohomological continuity. Returned proof steps 2-3, the left-exactness part of step 4, and the underived parameter/kernel part of step 9.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-84296f3b9",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-84296f3b9 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full. This is a re-delivery after a landing return: head 89455c6f was approved by the reader, then landing refused it because the side completion had never been promoted to the live DAG (live returns/Q35.md, line 29). Live and side-live still have the item unsplit, with the same statement and stmt_deps. This item has no repair note. The 2026-10-22 re-split note belongs to the parent lem-sfb-free-representable-derived-functions-model. Compared with 89455c6f, only the text of step 1 changed: it now names the slice comparison alpha, writes the transported action r._S x = alpha^-1(r.alpha(x)) and spells out the unit-linearity calculation. uses and proof_deps are unchanged. All ten cited statements have the same hash in both snapshots and in live. proof_deps equals the union of the step uses. Every step is under 2000 characters. tool_uses is empty, which is correct because every non-definition citation is a Mathlib leaf. No SGA source is used. Sources checked: Stacks sites-modules 03EM (l.3757, proof omitted), lemma-internal-hom-restriction, 0GMY (l.3918, part 2 = step 5), 04IX (l.2019), 03CY (l.815), sites 00WJ (l.2134), and Mathlib Sites/Over.lean:279-291. Step checks: (1) the abelian case of the slice leaf; its unit clause plus the uniqueness of the extended action in def-weil-presheaf-modules-sheafification give the module identification, and b->(b0,b) is the product bijection. (2) psi_s is semilinear; termwise application handles indices that collapse under restriction. (3) e_{pr_P} restricts along (b0,b) to e_b, so phi = phi_s. (4) c-naturality uses the sectionwise-identity relocalization of def-pur-localized-ringed-site; f and u naturality hold with R[u]: R[P'] -> R[P]. (5) kernels are sectionwise at V x P, so H_P is left exact. (6) theta-bar = a(theta) composed with eps^-1 has the correct direction and is additive. (7) degreewise, so a chain map. (8) kernels via lem-weil-pbc-sheafification-exact (1)+(2), naturality of r^0 and monicity. Small cases: P terminal, M=0, R=0, empty Hom(W,P), identity maps, L=M[0]. Not duplicates: lem-weil-pbc-free-yoneda-presheaf-module, lem-trf-site-free-sheaf-sections, lem-pc-open-free-restriction-hom, lem-sfb-free-parameter-evaluation-coherence. Advisory, not faults: steps 2-3 re-prove the presheaf Yoneda bijection by hand, and the inherited subcanonicity hypothesis is not used. No fixes."
+ }
+}

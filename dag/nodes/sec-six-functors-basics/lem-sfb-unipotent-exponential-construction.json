@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-unipotent-exponential-construction",
+ "kind": "statement",
+ "title": "Construction and functoriality of the unipotent exponential",
+ "statement": "Let $k$ be a field [def-weil-field] of characteristic zero. Let $G$ be an affine $k$-group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] admitting a closed group-scheme immersion $i:G\\hookrightarrow U_n$ for some $n\\geq1$ [def-weil-closed-immersion, def-sc-group-scheme-subgroup]. Here $U_n(R)$ is the upper unitriangular subgroup of $\\mathrm{GL}_n(R)$ [def-sc-general-linear-group] for each commutative $k$-algebra $R$. Put $\\mathfrak g=T_{G/k,e}$ [def-sc-scheme-tangent-space, def-sc-dual-numbers]. Its image under $\\mathrm di$ is the vector space of strictly upper triangular matrices $X$ such that $I+\\epsilon X\\in G(k[\\epsilon]/\\epsilon^2)$. For any $R$, the same linear equations identify $R\\otimes_k\\mathfrak g$ with the matrices $X$ such that $I+\\epsilon X\\in G(R[\\epsilon]/\\epsilon^2)$ [def-weil-pbc-module-tensor-product]. The space $\\mathfrak g$ is finite-dimensional over $k$. Write $\\mathfrak g_a$ for its additive vector scheme: after a basis of size $d$ is chosen it is $\\operatorname{Spec}k[t_1,\\ldots,t_d]$ with coordinatewise addition [def-weil-affine-spectrum, def-weil-pbc-mv-polynomial-ring, def-sc-gm-ga], representing $R\\mapsto R\\otimes_k\\mathfrak g$. There exists a $k$-scheme morphism $\\exp_G:\\mathfrak g_a\\to G$, natural on $R$-points, characterized by\n$$i_R(\\exp_G(X))=\\sum_{r=0}^{n-1}\\frac{(\\mathrm di_R(X))^r}{r!}.$$\nIt is independent of the unitriangular embedding. For another such group $H$ and any group-scheme homomorphism $f:G\\to H$, its tangent map satisfies\n$$f_R(\\exp_G(X))=\\exp_H((1\\otimes\\mathrm df)(X)).$$\nIf $X,Y\\in R\\otimes_k\\mathfrak g$ have commuting matrix images, then\n$$\\exp_G(X+Y)=\\exp_G(X)\\exp_G(Y).$$\nNo invertibility of $\\exp_G$ is asserted.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "14.28 and 14.31, printed pp.287--289: finite exponential, construction using Theorem 9.2, formula (93), and the naturality square immediately before Proposition 14.32. Tangent coordinates are as in 10.8 and 10.14."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-sc-gm-ga",
+  "def-sfb-additive-vector-scheme",
+  "def-wf-lie-algebra-derivation",
+  "lem-ag-lie-identity-tangent-equiv"
+ ],
+ "proof": [
+  {
+   "text": "Write the coordinates of $U_n$ as $z_{ij}=u_{ij}$ for $i<j$, so its identity is $z=0$. By the affine description of a closed immersion, $G=\\operatorname{Spec}(k[z_{ij}]/J)$, with $p(0)=0$ for $p\\in J$. Substitution $z_{ij}=\\epsilon x_{ij}$ gives $p(\\epsilon x)=\\epsilon\\ell_p(x)$, where $\\ell_p$ is the linear part of $p$. Thus the dual-number description of the tangent space is exactly the common kernel of these $k$-linear forms on $k^{n(n-1)/2}$. Choose a basis of their span (a subspace of a finite-dimensional dual space) and row-reduce its finite coefficient matrix over $k$. Its nonzero pivots remain units in every $k$-algebra $R$, and the same free-variable basis describes its kernel over $R$. This identifies the kernel with $R\\otimes_k\\mathfrak g$, including the zero algebra. In particular $\\mathfrak g$ has finite dimension $d$. In strictly upper triangular matrices, every summand of an entry of a product of $n$ factors needs a strictly increasing chain of $n+1$ indices in $\\{1,\\ldots,n\\}$, so the product is zero.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "def-sc-scheme-tangent-space",
+    "def-sc-dual-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.7--10.8, printed pp.188--189, dual-number matrix calculation; linear equations and coefficient-algebra version written out."
+   }
+  },
+  {
+   "text": "Every finite-dimensional rational representation $V$ of $G$ has a flag with one-dimensional trivial quotients. Here is the dimension induction: it is empty for $V=0$; for $V\\ne0$, choose a basis and apply [lem-sfb-unitriangular-subgroup-rational-fixed-vector] to obtain a fixed nonzero vector $v$. The line $kv$ is a rational submodule. In the coaction description [lem-sfb-rational-representation-comodule-dictionary], its coaction is $v\\mapsto v\\otimes1$, so the coaction descends to $V/kv$; the two coaction identities descend as well. Apply the induction hypothesis to this space of dimension $\\dim(V)-1$ and take inverse images of its flag, starting with $kv$. A basis adapted to the resulting flag makes every $r_{V,A}(g)$ upper unitriangular for every coefficient algebra $A$. Evaluate it on the tangent point $I+\\epsilon\\,\\mathrm di_R(X)\\in G(R[\\epsilon]/\\epsilon^2)$ from step 1. Its action is $1+\\epsilon D_V(X)$ with $D_V(X)=(1\\otimes\\mathrm dr_V)(X)$. Indeed, by [def-weil-affine-spectrum] the matrix entries of $r_V-1$ are elements of $k[z_{ij}]/J$ vanishing at $z=0$; substituting $z=\\epsilon\\,\\mathrm di_R(X)$ as in step 1 leaves $\\epsilon$ times their linear parts evaluated at $\\mathrm di_R(X)$. This is $R$-linear in $X$, compatible with every $k$-algebra map $R\\to S$, and for $R=k$ it is $\\mathrm dr_V$ by the composition definition of the tangent map. Moreover $D_V(X)$ is strictly upper triangular in that basis. Consequently $D_V(X)^{\\dim V}=0$ when $V\\ne0$; on the zero space use the bound $1$.",
+   "uses": [
+    "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-sc-scheme-tangent-space",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.3 and 14.5, printed pp.280--281; 14.31, printed p.288, nilpotence of every differential representation."
+   }
+  },
+  {
+   "text": "Set $\\lambda_V(X)=E_{\\operatorname{End}_R(V_R)}(D_V(X))$, using [lem-sfb-nilpotent-exponential-identities] and the bounds in step 2. The dual-number definition of the differential and the tensor representation formula give\n$$D_{V\\otimes W}(X)=D_V(X)\\otimes1+1\\otimes D_W(X).$$\nIndeed, expand $(1+\\epsilon D_V)\\otimes(1+\\epsilon D_W)$ and discard $\\epsilon^2$. On the trivial representation $k$, the differential is zero. For an equivariant map $u:V\\to W$, evaluating equivariance on the same tangent point gives $D_W(X)u_R=u_RD_V(X)$. Multiplying repeatedly gives $D_W(X)^ju_R=u_RD_V(X)^j$ for all $j$. Taking any common nilpotence bound in the finite sums therefore gives $\\lambda_W(X)u_R=u_R\\lambda_V(X)$, and $\\lambda_k(X)=1$.",
+   "uses": [
+    "lem-sfb-nilpotent-exponential-identities",
+    "lem-sfb-rational-representation-comodule-dictionary",
+    "def-sc-dual-numbers",
+    "def-sc-scheme-tangent-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.31 (b),(c), printed p.288, with the differential tensor formula obtained by expansion over dual numbers."
+   }
+  },
+  {
+   "text": "Put $P=D_V(X)\\otimes1$ and $Q=1\\otimes D_W(X)$ on $V_R\\otimes_RW_R$. These commute: on $v\\otimes w$, both composites give $D_V(X)v\\otimes D_W(X)w$. If $D_V^a=0$ and $D_W^b=0$, then $P^a=Q^b=0$ and the binomial expansion of $(P+Q)^{a+b}$ is zero, since every term has either at least $a$ factors $P$ or at least $b$ factors $Q$. The commuting-sum and ring-homomorphism clauses of [lem-sfb-nilpotent-exponential-identities], applied also to $T\\mapsto T\\otimes1$ and $S\\mapsto1\\otimes S$, give\n$$\\lambda_{V\\otimes W}(X)=E(P+Q)=E(P)E(Q)=(\\lambda_V(X)\\otimes1)(1\\otimes\\lambda_W(X))=\\lambda_V(X)\\otimes\\lambda_W(X).$$\nThe last equality holds on pure tensors, which generate. Thus all three hypotheses of [lem-sfb-affine-group-tensor-reconstruction] have been verified, and it gives a unique $g_X\\in G(R)$ acting as $\\lambda_V(X)$ in every representation. Applying this to the given representation $i$ gives $i_R(g_X)=\\sum_{j=0}^{n-1}(\\mathrm di_R(X))^j/j!$.",
+   "uses": [
+    "lem-sfb-nilpotent-exponential-identities",
+    "lem-sfb-affine-group-tensor-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.31 (a) and application of Theorem 9.2, printed p.288."
+   }
+  },
+  {
+   "text": "For a $k$-algebra map $\\alpha:R\\to S$, the matrix of $D_V(X)$ changes coefficientwise to that of $D_V((\\alpha\\otimes1)X)$. The ring-homomorphism identity of [lem-sfb-nilpotent-exponential-identities] makes the same true of $\\lambda_V(X)$. By uniqueness in [lem-sfb-affine-group-tensor-reconstruction], $G(\\alpha)(g_X)=g_{(\\alpha\\otimes1)X}$. To construct an actual morphism, choose a basis $e_1,\\ldots,e_d$ of $\\mathfrak g$, put $B=k[t_1,\\ldots,t_d]$, and take $X_{\\mathrm{univ}}=\\sum t_je_j$. The point $g_{X_{\\mathrm{univ}}}\\in G(B)$ is a $k$-algebra map $k[G]\\to B$, hence defines $\\exp_G:\\operatorname{Spec}B\\to G$ by [def-weil-affine-spectrum]. Every $X=\\sum x_je_j$ is obtained by $t_j\\mapsto x_j$, so coefficient naturality shows that this morphism has exactly the points $g_X$. Since $i_R$ is injective (a point is an algebra map from the quotient coordinate ring), the displayed matrix formula characterizes it. For $d=0$ the same construction uses $B=k$ and the zero vector.",
+   "uses": [
+    "lem-sfb-nilpotent-exponential-identities",
+    "lem-sfb-affine-group-tensor-reconstruction",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.31, printed p.288, naturality in R and passage to a scheme morphism; universal-point construction spelling out the affine Yoneda argument."
+   }
+  },
+  {
+   "text": "The defining equality in every representation, $r_{V,R}(g_X)=E(D_V(X))$, refers only to $G$ and its tangent vector. Repeating the construction using any other closed unitriangular embedding therefore gives the same family and hence the same point by [lem-sfb-affine-group-tensor-reconstruction]; using the universal point gives equality of the morphisms. For a homomorphism $f:G\\to H$ and a representation $s$ of $H$, composition on dual-number points gives $\\mathrm d(s\\circ f)=\\mathrm ds\\circ\\mathrm df$. Thus\n$$s_R(f_R(g_X))=E(\\mathrm d(s\\circ f)_R(X))=E(\\mathrm ds_R((1\\otimes\\mathrm df)(X)))=s_R(\\exp_H((1\\otimes\\mathrm df)(X))).$$\nTake $s$ to be the fixed closed unitriangular embedding of $H$ and use its injectivity on $R$-points. This proves the required functoriality for every $R$.",
+   "uses": [
+    "lem-sfb-affine-group-tensor-reconstruction",
+    "def-sc-scheme-tangent-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.31, naturality square immediately before Proposition 14.32, printed p.289."
+   }
+  },
+  {
+   "text": "Let $A=\\mathrm di_R(X)$ and $B=\\mathrm di_R(Y)$ commute. Their sum is $\\mathrm di_R(X+Y)$ by linearity of the tangent map; all three are strictly upper triangular and hence nilpotent by step 1. The commuting-sum identity in [lem-sfb-nilpotent-exponential-identities] gives\n$$i_R(\\exp_G(X+Y))=E(A+B)=E(A)E(B)=i_R(\\exp_G(X)\\exp_G(Y)).$$\nInjectivity of $i_R$ gives the stated equality. This proves only the commuting-sum clause; no inverse to $\\exp_G$ is used or constructed. When $n=1$, all tangent matrices are zero and the construction is the identity point.",
+   "uses": [
+    "lem-sfb-nilpotent-exponential-identities",
+    "def-sc-scheme-tangent-space",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "14.31, formula (93), printed p.288."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "def-sc-scheme-tangent-space",
+  "def-sc-dual-numbers",
+  "lem-sfb-unitriangular-subgroup-rational-fixed-vector",
+  "lem-sfb-rational-representation-comodule-dictionary",
+  "lem-sfb-nilpotent-exponential-identities",
+  "lem-sfb-affine-group-tensor-reconstruction",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "14.31, printed pp.288--289, using Theorem 9.2 and 14.3/14.5; coefficient-algebra, flag-induction and tensor checks expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a unipotent algebraic group over a characteristic zero field the finite matrix exponential defines a natural morphism from its Lie algebra to the group, compatible with homomorphisms and additive on commuting tangent vectors",
+   "results": "8 hits; LieDerivation.exp_map_apply, LieDerivation.exp_apply, NumberField.mixedEmbedding.fundamentalCone.expMap_add, LieDerivation.exp, Matrix.GeneralLinearGroup.upperRightHom, Circle.expHom_apply, IsNilpotent.map_exp, Module.End.commute_exp_left_of_commute",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsNilpotent\", \"exp\"",
+   "results": "11 hits; IsNilpotent.exp, IsNilpotent.exp_zero, IsNilpotent.isUnit_exp, IsNilpotent.isNilpotent_exp_sub_one, IsNilpotent.exp_mul_exp_neg_self, IsNilpotent.exp_neg_mul_exp_self, IsNilpotent.map_exp, IsNilpotent.exp_add_of_commute",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|exponential|LieAlgebra",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebraic exponential of a tangent vector of a unipotent group scheme is a group valued point and is functorial",
+   "results": "8 hits; IsNilpotent.exp_smul, LieDerivation.exp, Module.End.exp_mul_of_derivation, TrivSqZeroExt.exp_def, Real.expMonoidHom, instAddCommGroupTangentSpace, TrivSqZeroExt.exp_inl, LieDerivation.exp_map_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If G is a closed subgroup of upper unitriangular matrices over a field of characteristic zero, exponentiating any element of its Lie algebra gives a point of G over every algebra",
+   "results": "8 hits; RootPairing.GeckConstruction.e_mem_lieAlgebra, RootPairing.GeckConstruction.h_mem_cartanSubalgebra', RootPairing.GeckConstruction.f_mem_lieAlgebra, LieDerivation.exp_map_apply, LieDerivation.exp_apply, RootPairing.GeckConstruction.h_mem_lieAlgebra, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall, LieDerivation.exp",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem (exp_add_of_commute|exp_eq_sum)|def exp|theorem map_exp",
+   "results": "4 hits; Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean, Mathlib/RingTheory/Nilpotent/Exp.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned finite matrix exponentials, Lie derivation exponentials, abstract groups and affine-space descriptions do not assert a group-scheme-valued exponential or the vector-group classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite matrix exponential of a Lie algebra vector of an affine unipotent group scheme gives a group point over every commutative algebra and commutes with group scheme homomorphisms",
+   "results": "8 hits; RootPairing.GeckConstruction.f_mem_lieAlgebra, LieAlgebra.SpecialLinear.val_single, RootPairing.GeckConstruction.e_mem_lieAlgebra, LieAlgebra.SpecialLinear.singleSubSingle, RootPairing.GeckConstruction.h_mem_lieAlgebra, IsNilpotent.map_exp, LieDerivation.exp_map_apply, Matrix.GeneralLinearGroup.upperRightHom",
+   "date": "2026-10-23",
+   "verdict": "no match: nilpotent ring exponentials do not establish membership in a closed group scheme or compatibility with arbitrary group-scheme homomorphisms; no matching declaration in Mathlib algebraic geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|unitriangular|LieAlgebra.*exp",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: nilpotent ring exponentials do not establish membership in a closed group scheme or compatibility with arbitrary group-scheme homomorphisms; no matching declaration in Mathlib algebraic geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed subgroup scheme of the unitriangular group in characteristic zero, finite matrix exponentiation defines a natural morphism of schemes from its tangent vector space into the subgroup",
+   "results": "8 hits; IsNilpotent.exp_smul, SubgroupClass.coe_pow, LieDerivation.exp, Subgroup.npow, LieDerivation.exp_map_apply, Subgroup.pow_mem, Matrix.SpecialLinearGroup.instPowNat, LieDerivation.exp_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: nilpotent ring exponentials do not establish membership in a closed group scheme or compatibility with arbitrary group-scheme homomorphisms; no matching declaration in Mathlib algebraic geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite matrix exponential of a Lie algebra vector of an affine unipotent group scheme gives a group point over every commutative algebra and commutes with group scheme homomorphisms",
+   "results": "8 hits; RootPairing.GeckConstruction.f_mem_lieAlgebra, LieAlgebra.SpecialLinear.val_single, RootPairing.GeckConstruction.e_mem_lieAlgebra, LieAlgebra.SpecialLinear.singleSubSingle, RootPairing.GeckConstruction.h_mem_lieAlgebra, IsNilpotent.map_exp, LieDerivation.exp_map_apply, Matrix.GeneralLinearGroup.upperRightHom",
+   "date": "2026-10-23",
+   "verdict": "no match: nilpotent ring exponentials do not establish membership in a closed group scheme or compatibility with arbitrary group-scheme homomorphisms; no matching declaration in Mathlib algebraic geometry."
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|unitriangular|LieAlgebra.*exp",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: nilpotent ring exponentials do not establish membership in a closed group scheme or compatibility with arbitrary group-scheme homomorphisms; no matching declaration in Mathlib algebraic geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed subgroup scheme of the unitriangular group in characteristic zero, finite matrix exponentiation defines a natural morphism of schemes from its tangent vector space into the subgroup",
+   "results": "8 hits; IsNilpotent.exp_smul, SubgroupClass.coe_pow, LieDerivation.exp, Subgroup.npow, LieDerivation.exp_map_apply, Subgroup.pow_mem, Matrix.SpecialLinearGroup.instPowNat, LieDerivation.exp_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: nilpotent ring exponentials do not establish membership in a closed group scheme or compatibility with arbitrary group-scheme homomorphisms; no matching declaration in Mathlib algebraic geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "mathlib_candidate": {
+  "declarations": [
+   "IsNilpotent.exp",
+   "IsNilpotent.exp_eq_sum",
+   "IsNilpotent.exp_add_of_commute",
+   "IsNilpotent.map_exp"
+  ],
+  "note": "Mathlib/RingTheory/Nilpotent/Exp.lean:55,58,81,190 supplies the ring-valued finite exponential and identities. These do not show membership in an arbitrary closed subgroup, nor naturality for arbitrary algebraic-group homomorphisms (which are not ring homomorphisms on matrices)."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-char-zero-commutative-unipotent-vector-group",
+  "date": "2026-10-24",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Semisimple algebraic groups are perfect. Root-subgroup structure and the torus conjugation formula used to realize the rank-one commutator calculation in Milne Corollary 21.50. Supporting lemma: A one-dimensional smooth connected unipotent group is additive. Supporting structural ingredient for the one-dimensional classification: Milne Corollary 14.55 (positive characteristic) and the central-series argument preceding the induction in Proposition 14.32 (characteristic zero). Supporting lemma: Commutative unipotent groups in characteristic zero are vector groups. Exponential input: Milne 14.31, construction before Proposition 14.32; existence and functoriality only.",
+   "via": [
+    "lem-sfb-char-zero-commutative-unipotent-vector-group",
+    "lem-sfb-unipotent-central-additive-subgroup",
+    "lem-sfb-one-dimensional-unipotent-additive",
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-semisimple-group-perfect",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-unipotent-exponential-construction",
+  "worker": "stage1",
+  "summary": "Followed Milne 14.31 via all rational representations. Reused the unitriangular subgroup fixed-vector theorem and representation/comodule dictionary; wrote the flag induction, dual-number tensor identities, tensor exponential compatibility, universal affine point and homomorphism naturality. Added the general reconstruction theorem as one unsplit prerequisite and the finite ring exponential identities as one Mathlib leaf. No statement change; corrected the secondary tangent-source locator from 10.14 to 10.7--10.8.",
+  "blueprint": "The recorded ancestor chain serves det-thm-sf-ctf-stability-direct-images proof (3), the dimension-induction/plurinodal input. Below the existing characteristic-zero vector-group prerequisite, this split supplies precisely Milne 14.31 existence, functoriality and commuting addition; it does not invoke Proposition 14.32 or change a chapter/unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-b453fb6ed",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-b453fb6ed (reviewer sub-agent of L); spot-checked: Read Milne Thm 9.2 with its proof (pp.164-166), 10.7-10.8 (pp.188-189) and 14.28-14.31 with (93) and the naturality square (pp.287-289). The item was unsplit with no proof on base and on live/side-live, so this is a first split, not a 2026-10-21 re-split. The statement is unchanged, there is no SGA and no cycle (I checked the closure of every cited node), and the only citer is the parent vector-group node. The 7 steps realize Milne 14.31. Step 1 is correct: the tangent space is the kernel of the linear parts, it base-changes to R by row reduction over k, and strictly triangular matrices satisfy N^n=0. Step 2 meets the fixed-vector node's hypotheses (arbitrary field, closed in U_n, rho to GL_d with d>=1); the fixed vector has coaction v->v(x)1 by the dictionary, so the flag induction works. Steps 3-4 check Milne's (a), (b), (c) and the commuting binomial bound. Step 5 builds the universal point over k[t_1..t_d] and shows naturality through uniqueness. Step 6 shows independence of the embedding and functoriality (chain rule on dual-number points, injectivity of the embedding of H). Step 7 is (93). New node lem-sfb-affine-group-tensor-reconstruction is Milne 9.2 for arbitrary R; no invertibility is needed, matching the proof via Lemma 9.1. It generalizes the landed NN node lem-sfb-tannaka-rational-point-reconstruction (R=K algebraically closed, invertible maps), which the item cannot use because it needs R[eps] and the universal ring; so it is not a duplicate, and the report's omission of that node is a reporting gap only. I tested it on G=e and R=0. New leaf lem-sfb-nilpotent-exponential-identities matches Mathlib Nilpotent/Exp.lean exp:55, exp_eq_sum:58, exp_add_of_commute:81, exp_mul_exp_neg_self:177, exp_neg_mul_exp_self:181, map_exp:190; every clause is a one-line specialization. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-unipotent-exponential-construction.json: (1) step 2 asserted that r_V(I+eps di_R X)=1+eps(1(x)dr_V)(X) over R without saying why; I added the linear-part argument (entries of r_V-1 in k[z]/J vanish at 0; substitution gives an expression that is R-linear, natural in R, and equals dr_V over k), which step 5 also needs, and added def-weil-affine-spectrum to the step's uses. (2) The report claimed source.place had been corrected but the JSON still said '10.8 and 10.14'; Milne 10.14 is finite limits of Lie algebras, so it now reads '10.7--10.8, printed pp.188--189'. Edge cases checked: n=1, d=0, V=0, R=0, G_a in U_2, and the non-commuting pair E12, E23 in U_3. No tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnipotentExponentialConstruction",
+  "declaration": "AlgebraicGeometry.UnipotentExponential.construction",
+  "declarations": [
+   "AlgebraicGeometry.UnipotentExponential.IsUnitriangular",
+   "AlgebraicGeometry.UnipotentExponential.matrixDifferential",
+   "AlgebraicGeometry.UnipotentExponential.IsExponential",
+   "AlgebraicGeometry.UnipotentExponential.tangent_description",
+   "AlgebraicGeometry.UnipotentExponential.construction",
+   "AlgebraicGeometry.UnipotentExponential.coefficients_natural",
+   "AlgebraicGeometry.UnipotentExponential.embedding_independent",
+   "AlgebraicGeometry.UnipotentExponential.hom_natural",
+   "AlgebraicGeometry.UnipotentExponential.commuting_add"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnipotentExponentialConstruction.lean",
+  "statement": "theorem construction [CharZero k] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] {n : ℕ} (hn : 0 < n) (i : G ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k) [IsClosedSubgroupScheme i] (hi : IsUnitriangular i) {d : ℕ} (b : Module.Basis (Fin d) k (GrpObj.Lie G)) : ∃! E : FiniteVectorGroup.scheme k d ⟶ G, IsExponential i b E",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly render all clauses. GrpObj.Lie is the canonical identity tangent module, with the existing lieIdentityTangentEquiv to the recorded schemeTangentSpace. A closed GL embedding with unitriangular matrices on every algebra has exactly the stated closed U_n embedding. The finite vector group uses arbitrary basis coordinates. No smoothness, connectedness, algebraic closedness, reducedness or invertibility hypothesis is added; no exponential inverse is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-78b4d5d98",
+  "group": "ND",
+  "result": "pass",
+  "note": "Clause-by-clause match with Milne 14.31: hypotheses (char 0, affine, finite type, closed subgroup embedding into GL_n with unitriangular points, n≥1); tangent_description (finite-dimensional, R⊗g ≅ strictly upper triangular matrices with I+εM ∈ G(R[ε]), all R incl. 0); construction ∃! E characterized by the finite factorial sum; coefficients_natural, embedding_independent, hom_natural (baseChange of GrpObj.differential), commuting_add; no invertibility. Matrix convention checked against upstream differential_eq_map_snd/dualUnit/homMulEquiv. New def-sfb-additive-vector-scheme: real data (Spec MvPolynomial, coordinate comul/counit/antipode, ∃!-pinned group like landed additiveGroup, point by baseChange coefficients); no duplicate found. Item JSON differs from live only in lean and allowed stmt_deps additions. Mechanical finding: lem-ag-lie-identity-tangent-equiv module holds only its constructed equivalence lieIdentityTangentEquiv; statement uses GrpObj.Lie from def-wf-lie-algebra-derivation and relies on that constructed equivalence → PASS on that point (Q38 precedent). Universes, verbatim statement, docstrings, sorry-only proofs OK; edge cases n=1, d=0, R=0, G_a⊂U_2, noncommuting E12/E23 checked. No files changed, no compile run."
+ }
+}

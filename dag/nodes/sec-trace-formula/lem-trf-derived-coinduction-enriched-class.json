@@ -1,0 +1,154 @@
+{
+ "id": "lem-trf-derived-coinduction-enriched-class",
+ "kind": "statement",
+ "title": "The enriched coinduction comparison sends the identity class to its counit",
+ "statement": "Let $f:S\\to B$ be a homomorphism of commutative rings and let $U:D(B)\\to D(S)$ be restriction on their ordinary unbounded module derived categories. Let $C:D(S)\\to D(B)$ and $\\epsilon:UC\\to\\operatorname{id}$ be the canonical derived coinduction and the counit of its actual restriction/coinduction adjunction [def-trf-derived-coinduction]. Let $\\theta_{X,V}:U\\operatorname{RHom}_B(X,CV)\\xrightarrow{\\sim}\\operatorname{RHom}_S(UX,V)$ be the specific natural comparison selected from [lem-trf-algebraic-shriek-derived-hom-adjunction], with its prescribed localization formula on K-injective models. Let $\\eta_f:S[0]\\to U(B[0])$ be the map induced by $f$, using the native derived unit and single-functor comparisons. For a derived morphism $h:A\\to D$, write $c_R(h):R[0]\\to\\operatorname{RHom}_R(A,D)$ for $\\operatorname{curry}'(h)$ in the native closed structure [def-pur-derived-internal-hom]. Then, for every $V\\in D(S)$, the following maps from $S[0]$ to $\\operatorname{RHom}_S(UCV,V)$ are equal: $\\eta_f\\,;\\,U(c_B(\\operatorname{id}_{CV}))\\,;\\,\\theta_{CV,V}=c_S(\\epsilon_V)$. No boundedness or flatness hypotheses are imposed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), restriction/coinduction adjunction computed on a K-injective complex; evaluation at one applied to the identity. Coordinate normalization is that of lem-trf-algebraic-shriek-derived-hom-adjunction."
+ },
+ "stmt_deps": [
+  "def-trf-derived-coinduction",
+  "def-pur-derived-internal-hom",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Choose an S-K-injective complex I representing V. By [lem-trf-algebraic-shriek-derived-hom-adjunction], J=coinductionComplexFunctor(f)(I) is B-K-injective. Transport C(V) and its identity to Q(J) and the identity chain map of J using the canonical derivedCoinductionModel. The same theorem identifies the chosen enriched comparison on these representatives with localization of its coordinate map T, sandwiched between the canonical Hom-model comparisons.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), restriction/coinduction adjunction computed on a K-injective complex; evaluation at one applied to the identity. Coordinate normalization is that of lem-trf-algebraic-shriek-derived-hom-adjunction."
+   }
+  },
+  {
+   "text": "The coordinate formula for T sends the degree-zero identity cocycle of Hom_B(J,J) to the cocycle x ↦ x(1) of Hom_S(UJ,I). The global class of a degree-zero cocycle is its map from the single free rank-one module. Restriction followed by the scalar map S→B preserves that class, because 1 maps to 1. The Hom-model comparisons are transposes of signed evaluation; on a degree-zero cocycle the sign is one. Hence the left side of the claimed equality is the curry-prime class of the localized evaluation-at-one chain map, transported by the canonical coinduction model. More explicitly, construct the class as mkHomFromSingle of r ↦ r·ofHom(id_J). The coordinate evaluation formula of [lem-pod-projective-hom-evaluation-model] gives ρ_J⁻¹ ; (J tensor class) ; ev = id_J because the Hom degree is zero. Uncurrying after Q, tensorator naturality and the lax monoidal right-unit law identify its localized class with curry-prime(id_QJ). The identical calculation over S applies to evaluation-at-one.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "lem-pod-projective-hom-evaluation-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), restriction/coinduction adjunction computed on a K-injective complex; evaluation at one applied to the identity. Coordinate normalization is that of lem-trf-algebraic-shriek-derived-hom-adjunction."
+   }
+  },
+  {
+   "text": "The counit-model clause of [lem-trf-derived-coinduction-adjunction] identifies precisely this transported evaluation-at-one map with the counit of the actual derived restriction/coinduction adjunction. Naturality of the enriched comparison and the counit transports the resulting equality along the K-injective representation isomorphism back to V. This uses no flatness of B over S and no boundedness assumption.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), restriction/coinduction adjunction computed on a K-injective complex; evaluation at one applied to the identity. Coordinate normalization is that of lem-trf-algebraic-shriek-derived-hom-adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-trf-derived-coinduction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), restriction/coinduction adjunction computed on a K-injective complex; evaluation at one applied to the identity. Coordinate normalization is that of lem-trf-algebraic-shriek-derived-hom-adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction enriched internal Hom comparison sends global section class to restriction coinduction adjunction by evaluation at one",
+   "results": "{\"t\": \"2026-10-23T17:19:05Z\", \"tool\": \"leanfinder\", \"query\": \"Derived coinduction enriched internal Hom comparison sends global section class to restriction coinduction adjunction by evaluation at one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihom_map_val_app\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv\", \"LightCondensed.ihomPoints\", \"Rep.resCoindAdjunction_counit_app_hom_hom\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply\", \"LightCondensed.ihomPoints_symm_apply\", \"CategoryTheory.Presheaf.functorEnrichedHomCoyonedaObjEquiv_naturality\"], \"digest\": \"0561428566a45634\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension counit formulas and generic closed-category classes do not identify this specified derived enriched comparison with the actual derived counit; the project algebraic-shriek theorem supplies its model formula but no global-class equation."
+  },
+  {
+   "tool": "grep",
+   "query": "coinduction|curryHomEquiv",
+   "results": "{\"t\": \"2026-10-23T17:19:04Z\", \"tool\": \"grep\", \"query\": \"coinduction|curryHomEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean\", \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean\", \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Corecursion.lean\", \"Mathlib/Tactic/ComputeAsymptotics/Multiseries/Defs.lean\", \"Mathlib/Data/Seq/Basic.lean\", \"Mathlib/Data/Seq/Basic.lean\", \"Mathlib/Data/Seq/Basic.lean\", \"Mathlib/Data/Seq/Defs.lean\"], \"digest\": \"370c6a65a6fa1f06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension counit formulas and generic closed-category classes do not identify this specified derived enriched comparison with the actual derived counit; the project algebraic-shriek theorem supplies its model formula but no global-class equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The enriched derived restriction coinduction Hom comparison induces on H zero the ordinary derived adjunction evaluation at one",
+   "results": "{\"t\": \"2026-10-23T17:21:27Z\", \"tool\": \"leansearch\", \"query\": \"The enriched derived restriction coinduction Hom comparison induces on H zero the ordinary derived adjunction evaluation at one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homAddEquiv_zero\", \"CochainComplex.toSingle₀Equiv\", \"Rep.resCoindAdjunction\", \"CochainComplex.mkHom_f_0\", \"ComplexShape.Embedding.instPreservesZeroMorphismsHomologicalComplexRestrictionFunctor\", \"HomologicalComplex.instPreservesZeroMorphismsEval\", \"CategoryTheory.ShortComplex.leftRightHomologyComparison\", \"Rep.resCoindAdjunction_counit_app_hom_hom\"], \"digest\": \"9ca148eaf2c61fbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary coextension counit formulas and generic closed-category classes do not identify this specified derived enriched comparison with the actual derived counit; the project algebraic-shriek theorem supplies its model formula but no global-class equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.DerivedBimoduleTensorHom",
+  "date": "2026-10-23",
+  "group": "H7"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Mixed-ring tensor-Hom adjunction used to move the diagonal module past the perfect polynomial dual. Coinduction-only identity-class normalization used to derive the H0 square by naturality.",
+   "via": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedCoinductionEnrichedClass",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedCoinductionEnrichedClass.lean",
+  "declaration": "ModuleCat.derived_coinduction_enriched_class",
+  "statement": "theorem derived_coinduction_enriched_class (f : S →+* B) :\n    ∀ V : DerivedCategory (ModuleCat.{u} S),\n      coinductionScalarUnit f ≫ (restrictScalars f).mapDerivedCategory.map\n          (MonoidalClosed.curry' (𝟙 ((derivedCoinduction f).obj V))) ≫\n        (coinductionEnrichedHomIso f).hom.app (op ((derivedCoinduction f).obj V), V) =\n      MonoidalClosed.curry' ((derivedCoinductionAdjunction f).counit.app V)",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-23",
+  "declarations": [
+   "ModuleCat.coinductionEnrichedHomIso",
+   "ModuleCat.coinductionScalarUnit",
+   "ModuleCat.derived_coinduction_enriched_class"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-586f3",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T015002-L-2308078",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-586f3",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261024T015002-L-2308078",
+  "kind": "interface",
+  "note": "independent cc review: item derived_bimodule_tensor_hom proof + new sorry lemma derived_coinduction_enriched_class against node lem-trf-derived-bimodule-tensor-hom, new node lem-trf-derived-coinduction-enriched-class, algebraicShriek_derivedHom_adjunction / derivedCoinductionAdjunction_spec clauses, and change record h7-coinduction-normalization-api; reader gate: new module + item + importer LciKoszulDualityDeterminantComparison compiled clean"
+ }
+}

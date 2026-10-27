@@ -1,0 +1,141 @@
+{
+ "id": "def-sfb-relative-multiplicative-group",
+ "kind": "definition",
+ "title": "The canonical relative multiplicative group on the punctured affine line",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. The relative multiplicative group $\\mathbf G_{m,S}$ is the existing punctured affine line $D(t)\\subset\\mathbf A^1_S$ [def-sbc-affine-space], with projection to $S$. Its multiplication, identity and inverse are the group-scheme operations [def-sc-group-scheme] locally given by $t\\mapsto t\\otimes t$, $t\\mapsto1$ and $t\\mapsto t^{-1}$. Equivalently put $R=\\Gamma(S,\\mathcal O_S)$, let $R[t,t^{-1}]$ be finite formal Laurent sums with coefficients in $R$, with convolution multiplication, and pull the Laurent Hopf spectrum $\\operatorname{Spec}R[t,t^{-1}]\\to\\operatorname{Spec}R$ [def-weil-affine-spectrum] back along the canonical map $S\\to\\operatorname{Spec}R$ using fibre products [def-pc-fibre-product]. There is a unique isomorphism of this model with $D(t)$ over $S$ pulling the existing unit coordinate back to the Laurent coordinate. Transporting the displayed Hopf group law through that uniquely specified isomorphism equips the existing punctured line with its canonical group law. For a generalized point $a:T\\to\\mathbf G_{m,S}$, its scalar is the pullback of this unit coordinate in $\\Gamma(T,\\mathcal O_T)$. No field or nonempty-base assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 022U, Example example-multiplicative-group: the Laurent Hopf spectrum, its relative base change and the units functor. The comparison to the existing punctured affine line is fixed by its coordinate."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative multiplicative group scheme over any scheme as Laurent polynomial spectrum",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LaurentPolynomial.mk'_eq\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \"(p : R[X]) (n : ℕ) :\\n  IsLocalization.mk' R[T;T⁻¹] p (⟨X ^ n, n, rfl⟩ : Submonoid.powers (X : R[X])) = toLaurent p * T (-n)\", \"doc\": \"For any commutative semiring $ R $, the Laurent polynomial ring $ R[T; T^{-1}] $ is the localization of the polynomial ring $ R[X] $ at the indeterminate $ X $. This means that $ R[T; T^{-1}] $ is con\"}\n  {\"name\": \"LaurentPolynomial.mk'_one_X_pow\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \"(n : ℕ) : IsLocalization.mk' R[T;T⁻¹] 1 (⟨X ^ n, n, rfl⟩ : Submonoid.powers (X : R[X])) = T (-n)\", \"doc\": \"For any commutative semiring $ R $, the Laurent polynomial ring $ R[T; T^{-1}] $ is the localization of the polynomial ring $ R[X] $ at the indeterminate $ X $. This construction inverts all positive \"}\n  {\"name\": \"LaurentPolynomial.mk'_one_X\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \": IsLocalization.mk' R[T;T⁻¹] 1 (⟨X, 1, pow_one X⟩ : Submonoid.powers (X : R[X])) = T (-1)\", \"doc\": \"For any commutative semiring $ R $, the ring of Laurent polynomials $ R[T; T^{-1}] $ is constructed as the localization of the polynomial ring $ R[X] $ at the indeterminate $ X $. This localization in\"}\n  {\"name\": \"LaurentSeries\", \"module\": \"Mathlib.RingTheory.LaurentSeries\", \"type\": \"(R : Type u) [Zero R]\", \"doc\": \"Laurent series over a ring $ R $ are Hahn series with exponents in the integers $ \\\\mathbb{Z} $ and coefficients in $ R $.\"}\n  {\"name\": \"LaurentPolynomial.isLocalization\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \": IsLocalization.Away (X : R[X]) R[T;T⁻¹]\", \"doc\": \"For any commutative semiring $ R $, the Laurent polynomial ring $ R[T; T^{-1}] $ is the localization of the polynomial ring $ R[X] $ at the indeterminate $ X $. This means that $ R[T; T^{-1}] $ is con\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"LaurentPolynomial\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \"(R : Type*) [Semiring R]\", \"doc\": \"The ring of Laurent polynomials with coefficients in $ R $, consisting of finite $ R $-linear combinations of integer exponents. This is constructed as the additive monoid algebra of $ \\\\mathbb{Z} $ ov\"}\n  {\"name\": \"Polynomial.toLaurent_one\", \"module\": \"Mathlib.Algebra.Polynomial.Laurent\", \"type\": \": (Polynomial.toLaurent : R[X] → R[T;T⁻¹]) 1 = 1\", \"doc\": \"The canonical ring homomorphism from the polynomial ring $ R[X] $ to the Laurent polynomial ring $ R[T; T^{-1}] $ maps the multiplicative identity $ 1 $ to itself.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact group interface. Reuse the upstream punctured-line scheme; supply its canonical Laurent Hopf group structure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative multiplicative group scheme Spec of Laurent polynomials over a scheme arbitrary base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  (S : AlgebraicGeometry.Scheme) →\\n    AlgebraicGeometry.AffineSpace n S ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{max u v, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }\", \"doc\": \"The morphism from the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ to the affine $n$-space over the integers $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\\\\dots,x_n])$, defined as the second projection in th\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.term𝔸(_;_)\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Lean.ParserDescr\", \"doc\": \"A parser for the notation $\\\\mathbb{A}(R; n)$ representing the affine space over a base ring $R$ with dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) →\\n  {X : AlgebraicGeometry.Scheme} →\\n    (X ⟶\\n        AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial }) ≃\\n      (n → ↑(X.presheaf.obj (Opposite.op ⊤)))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over_over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.AffineSpace n S ↘ S =\\n    CategoryTheory.Limits.pullback.fst (CategoryTheory.Limits.terminal.from S)\\n      (CategoryTheory.Limits.terminal.from\\n        (AlgebraicGeometry.Spec\\n          { carrier := MvPolynomial n (ULift.{max u v, 0}\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is canonically isomorphic to the pullback of the unique morphisms from $ S $ and the affine $ n $-space over $ \\\\mathbb{Z} $ to \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact group interface. Reuse the upstream punctured-line scheme; supply its canonical Laurent Hopf group structure."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicativeGroup|multiplicative.*[Ss]cheme|LaurentPolynomial AlgebraicGeometry",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/Pretopology.lean\", \"line\": \"38\", \"text\": \"    [P.IsMultiplicative] : Pretopology Scheme.{u} :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"36\", \"text\": \"nonrec lemma isSheaf_type_propQCTopology_iff [P.IsMultiplicative] (F : Scheme.{u}ᵒᵖ ⥤ Type*)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SheafQuasiCompact.lean\", \"line\": \"100\", \"text\": \"nonrec lemma isSheaf_propQCTopology_iff [P.IsMultiplicative] (F : Scheme.{u}ᵒᵖ ⥤ A)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Cover/Sigma.lean\", \"line\": \"49\", \"text\": \"variable [P.IsMultiplicative] {𝒰 𝒱 : Scheme.Cover.{v} (precoverage P) S}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean\", \"line\": \"57\", \"text\": \"instance : IsMultiplicative @IsSchemeTheoreticallyDominant where\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact group interface. Reuse the upstream punctured-line scheme; supply its canonical Laurent Hopf group structure."
+  },
+  {
+   "tool": "rg",
+   "query": "multiplicativeGroup|LaurentPolynomial in lean/WeilConjectures, lean/Sheaf, and relative multiplicative group in dag/nodes; tools/blueprint_refs.py search multiplicative group",
+   "results": "Found Etale.multiplicativeGroup and Etale.multiplicativeGroupCoord in WeilConjectures.EtaleCohomology.TateTwist.AffineLineDatum. Reused verbatim as the underlying scheme and coordinate. StandardGroupSchemes.multiplicative has a field hypothesis. def-sfb-relative-torus defines a functor of units and its local forms, not the relative group scheme or its operations. No existing relative group structure on Etale.multiplicativeGroup found.",
+   "date": "2026-10-24",
+   "verdict": "Reuse underlying object, add the missing group-structure interface with a uniquely coordinate-normalized comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cubical-antisymmetric-frame-extension",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: One affine section chart at the strict-local identity. NM supporting input: Agent-formulated norm-reflection input to the cubical ampleness argument; the normal-base relative version is a separate unsplit theorem, not claimed as a numbered assertion of Raynaud. Original ampleness chapters WANTED. Supporting input: construct the Gm-extension attached to the antisymmetric part, with its actual group law and geometric hypotheses; the relative multiplicative kernel and its scaling coordinate",
+   "via": [
+    "lem-sfb-cubical-antisymmetric-frame-extension",
+    "lem-sfb-cubical-ample-norm-reflection",
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeMultiplicativeGroup",
+  "declaration": "AlgebraicGeometry.RelativeMultiplicativeGroup.multiplicative",
+  "statement": "abbrev multiplicative (S : Scheme.{u}) : Over S",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-24",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeMultiplicativeGroup.lean",
+  "declarations": [
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.affineMultiplicative",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.laurentModel",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.laurentModelGroup",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.multiplicative",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.laurentCoordinate",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.comparison_existsUnique",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.comparison",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.multiplicativeGroup",
+   "AlgebraicGeometry.RelativeMultiplicativeGroup.scalar"
+  ]
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0fd001be",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0fd001be",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read item, 18 stmt_dep records, both delivered modules, and CubicalRigidifiedLine/FrameModel/HasSemiabelianGeometricFibres/AffineLineDatum sources. H3: S affine/integral/IsNoetherian plus stalkwise normal; H CommGrpObj smooth/separated/LFP/QC; semiabelian; CubicalRigidifiedLine; D = L ⊗ dual(ι*L) literal; E = FrameModel (actual frame functor). Group law pinned by frame_product and identity_frame (evaluation frame = r-induced, independent of scale; global valid b exists). μ pinned by cube_formula, direction checked: μ = inverse of the a*τ Hom frame; Framed covers all frames used; consistent with unit normalization. Kernel IsPullback plus fppf local surjectivity; scaling with positive coordinate pins j; smooth/sep/fp of E→S; q affine/faithfully flat/fp; tautological frame. HEq types propositionally equal, not vacuous. μ assoc/comm/unit identities implied via group law on E plus faithfully flat q³ (advisory). New node def-sfb-relative-multiplicative-group: Stacks 022U; reuses Etale.multiplicativeGroup; ∃! coordinate comparison true; GrpObj.ofIso; no relative Gm group object exists (def-sc-gm-ga field-only; Q74 split-torus-over-ring over Spec R only; advisory reuse possible). stmt_deps cite def-sfb-split-torus-frame-model, on base (Q90's H2 fault absent). Statements verbatim; only sorry; docstrings with source, blueprint and 10 steps; Worker report and Second reading present. Edge cases: empty S excluded by integral; H=S, trivial L, rank 0, char p, nonreduced T. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,304 @@
+{
+ "id": "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+ "kind": "statement",
+ "title": "A nonzero first cohomology group forces a low-degree subcurve",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X$ be a proper reduced connected $k$-scheme of dimension one [def-weil-proper-morphism, def-pc-reduced-scheme, def-weil-connected-scheme, def-kun-topological-krull-dimension]. Let $L$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module], and let $Z\\subseteq X$ be a zero-dimensional closed subscheme, possibly empty, with ideal sheaf $I_Z$ [def-sbc-closed-immersion-ideal-sheaf]. If $H^1(X,I_Z\\otimes L)\\ne0$ [def-sc-ringed-space-module-cohomology, def-pur-sheaf-tensor-product], there is a nonempty reduced connected closed subcurve $B\\subseteq X$ of dimension one such that\n$$\\deg_k(L|_B)\\leq -2\\chi(B,\\mathcal O_B)+\\dim_k\\Gamma(Z\\times_XB,\\mathcal O_{Z\\times_XB}).$$\nHere restriction is module pullback [def-pc-module-pullback], the intersection is the scheme-theoretic fibre product [def-pc-fibre-product], degree is the Euler-characteristic degree [def-pc-degree-line-bundle], and $\\chi$ is [def-pc-euler-characteristic].",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E3E, lemma-vanishing-on-gorenstein, statement; the intersection degree is its finite k-scheme length."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-pc-reduced-scheme",
+  "def-weil-connected-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-ringed-space-module-cohomology",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-proper-field-invertible-coherent], $X$ is Noetherian and $L$ and $\\mathcal O_X$ are coherent. In a Noetherian affine chart every ideal is finitely generated; its associated ideal sheaf is quasi-coherent, so [pqf-lem-coherent-ft-locnoeth] makes all the closed-subscheme ideals below coherent. Tensoring with an invertible module is locally tensoring with the free module of rank one, hence preserves injections, quotients and coherence. A Noetherian space has finitely many irreducible components (otherwise Noetherian induction on closed subsets splits a minimal counterexample into two smaller counterexamples). Any zero-dimensional component would be a closed point disjoint from all other components, hence open as well as closed. Connectedness and $\\dim X=1$ exclude it. Thus $X$ has pure dimension one.",
+   "uses": [
+    "lem-trf-proper-field-invertible-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), preparation for application of duality"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-curve-dualizing-module] to $X$ and $\\mathcal F=I_Z\\otimes L$. A nonzero finite-dimensional vector space has a nonzero linear functional, by extending any nonzero vector to a basis and taking a coordinate. Hence the assumed nonzero $H^1$ gives a nonzero map $\\varphi:I_ZL\\to\\omega_X$. Let $Y$ be the reduced union of precisely the irreducible components where its generic stalk map is nonzero. This is a finite union of closed components, of pure dimension one. It is nonempty: otherwise the generic-detection assertion of the cited node would give $\\varphi=0$. Write $\\mathcal J$ for its ideal.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), first two sentences: choose the nonzero dualizing map and its component support"
+   }
+  },
+  {
+   "text": "The restriction of $\\varphi$ to $\\mathcal JI_ZL$ vanishes at every component generic point: on $Y$ the stalk of $\\mathcal J$ is zero, since $X$ is reduced, and outside $Y$ the stalk of $\\varphi$ is zero by construction. Its image is therefore zero by [lem-sfb-reduced-curve-dualizing-module]. For local sections $j\\in\\mathcal J$ and $t\\in I_ZL$, $j\\varphi(t)=\\varphi(jt)=0$. Thus $\\varphi$ factors through $I_ZL/\\mathcal JI_ZL$ with image in the annihilator of $\\mathcal J$. The closed subscheme $Y$ is proper by [lem-weil-pbc-closed-immersion-proper]. Identify this annihilator with $i_*\\omega_Y$ using [lem-sfb-closed-subcurve-dualizing-adjunction]. On $Y$ this gives $\\psi:(I_ZL)|_Y\\to\\omega_Y$, nonzero at every component generic point.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-closed-subcurve-dualizing-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), factor through the subcurve and identify its dualizing module"
+   }
+  },
+  {
+   "text": "Put $T=Z\\times_XY$, $L_Y=L|_Y$ and $I'=\\ker(\\mathcal O_Y\\to\\mathcal O_T)$. On a local trivialization of $L$, with $I=I_Z$ and $J=\\mathcal J$, the natural map $(I/JI)\\otimes L_Y\\twoheadrightarrow((I+J)/J)\\otimes L_Y=I'L_Y$ is surjective. Its kernel $K$ is zero at every generic point of $Y$, since $Z$ has dimension zero and there $I=\\mathcal O_X$. Kernels and cokernels here are coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum]. The image of $K$ in $\\omega_Y$ is zero by [lem-sfb-reduced-curve-dualizing-module]. Consequently $\\psi$ descends to $\\alpha:I'L_Y\\to\\omega_Y$; its generic stalk maps are still nonzero. Both generic stalks have dimension one, so these maps are isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), replace the pulled-back ideal by the ideal of the scheme-theoretic intersection"
+   }
+  },
+  {
+   "text": "The map $\\alpha$ is injective. Indeed its kernel is a submodule of the invertible module $L_Y$ and has zero stalk at every component generic point. On any affine open trivializing $L_Y$, a section in this kernel is an element of a reduced ring that becomes zero at every minimal prime localization. It lies in every minimal prime, hence in the nilradical, and is zero. Its cokernel $Q$ is coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum] and is generically zero. A proper closed subset of a Noetherian pure one-dimensional scheme containing no component generic point is a finite set of closed points: intersect each of the finitely many irreducible components and use dimension one. Thus $Q$ has zero-dimensional support, and $0\\to I'L_Y\\to\\omega_Y\\to Q\\to0$ is exact.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), injectivity after removal of the closed-point kernel, and support of the cokernel"
+   }
+  },
+  {
+   "text": "Choose any connected component $B$ of the nonempty $Y$. The finite component decomposition is open and closed, so restriction of the preceding exact sequence is exact and the restricted dualizing module represents the same $H^1$-dual functor on $B$ (extend a coherent module by zero to the other open-and-closed components). Hence it is $\\omega_B$ by the uniqueness in [lem-sfb-reduced-curve-dualizing-module]. The reduced scheme $B$ has dimension one; it is closed in $X$ and proper by [lem-weil-pbc-closed-immersion-proper]. Set $T_B=T\\times_YB=Z\\times_XB$, $L_B=L|_B$, $I_B=\\ker(\\mathcal O_B\\to\\mathcal O_{T_B})$, and $Q_B=Q|_B$. We have $0\\to I_BL_B\\to\\omega_B\\to Q_B\\to0$, with $Q_B$ of zero-dimensional support.",
+   "uses": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), last sentence: work on a connected component before the Euler calculation"
+   }
+  },
+  {
+   "text": "The quotient $\\mathcal O_B/I_B$ is supported on $T_B$ and its global sections are $\\Gamma(T_B,\\mathcal O_{T_B})$, directly by the closed-pushforward definition. Apply [lem-pc-chi-zero-dim-support] to this quotient and to $Q_B$: its tensor with $L_B$ has Euler characteristic $\\dim_k\\Gamma(T_B,\\mathcal O_{T_B})$, and $\\chi(Q_B)\\ge0$. Additivity [lem-pc-euler-additive] for $0\\to I_BL_B\\to L_B\\to L_B\\otimes(\\mathcal O_B/I_B)\\to0$ gives\n$\\chi(I_BL_B)=\\deg_k(L_B)+\\chi(\\mathcal O_B)-\\dim_k\\Gamma(T_B,\\mathcal O_{T_B})$\nby [def-pc-degree-line-bundle]. Additivity for the exact sequence of step 6 and [lem-sfb-reduced-curve-dualizing-module] now give\n$$0\\le\\chi(Q_B)=-2\\chi(\\mathcal O_B)-\\deg_k(L_B)+\\dim_k\\Gamma(T_B,\\mathcal O_{T_B}).$$\nRearranging is the required inequality for this $B$.",
+   "uses": [
+    "lem-pc-chi-zero-dim-support",
+    "lem-pc-euler-additive",
+    "def-pc-degree-line-bundle",
+    "lem-sfb-reduced-curve-dualizing-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), Euler-characteristic calculation on the chosen connected component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-proper-field-invertible-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sfb-reduced-curve-dualizing-module",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-closed-subcurve-dualizing-adjunction",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "def-pc-reduced-scheme",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E3E (lemma-vanishing-on-gorenstein), proof; connected-component restriction taken before the Euler calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If H1 of a line bundle times an ideal of a finite subscheme on a proper reduced connected curve is nonzero, a connected subcurve has degree at most minus twice its Euler characteristic plus the intersection length",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"Submodule.LinearDisjoint.rank_inf_le_one_of_flat_right\", \"module\": \"Mathlib.LinearAlgebra.LinearDisjoint\", \"type\": \"[Module.Flat R N] : Module.rank R ↥(M ⊓ N) ≤ 1\", \"doc\": \"If $ N $ is a flat $ R $-module, then the rank of the intersection of submodules $ M $ and $ N $ is at most 1, i.e., $ \\\\operatorname{rank}_R(M \\\\cap N) \\\\leq 1 $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \"(U V : X.affineOpens) : I.ideal V ≤ RingHom.ker (U.1.ι.app V.1 ≫ (I.glueDataObjι U).app _).hom\", \"doc\": \"For a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$ and affine open subsets $U,V \\\\subseteq X$, the ideal $\\\\mathcal{I}(V)$ is contained in the kernel of the ring homomorphism obtained by composing the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.radical_inf\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"{I J : IdealSheafData X} : radical (I ⊓ J) = (radical I ⊓ radical J)\", \"doc\": \"For any scheme $X$ and ideal sheaves $\\\\mathcal{I}$ and $\\\\mathcal{J}$ on $X$, the radical of the intersection $\\\\mathcal{I} \\\\cap \\\\mathcal{J}$ is equal to the intersection of the radicals $\\\\sqrt{\\\\mathcal\"}\n  {\"name\": \"Submodule.LinearDisjoint.rank_inf_le_one_of_flat_left\", \"module\": \"Mathlib.LinearAlgebra.LinearDisjoint\", \"type\": \"[Module.Flat R M] : Module.rank R ↥(M ⊓ N) ≤ 1\", \"doc\": \"If $ M $ is a flat $ R $-module and $ N $ is another submodule of the $ R $-algebra $ S $, then the rank of the intersection $ M \\\\cap N $ is less than or equal to 1.\"}\n  {\"name\": \"Ideal.height_le_spanFinrank\", \"module\": \"Mathlib.RingTheory.Ideal.KrullsHeightTheorem\", \"type\": \"(I : Ideal R) (hI : I ≠ ⊤) : I.height ≤ I.spanFinrank\", \"doc\": \"For any proper ideal $ I $ in a commutative ring $ R $, the height of $ I $ (defined as the infimum of the heights of all minimal prime ideals containing $ I $) is less than or equal to the finite ran\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subscheme\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme\", \"type\": \": Scheme\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I}$ on $X$, the closed subscheme associated to $\\\\mathcal{I}$ is constructed by gluing local affine models $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of first coherent cohomology of a line bundle on a reducible curve from degree bounds on every connected subcurve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s = 0) → s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\", \"degree\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "subcurve|vanishing.on.gorenstein|dualizing|Serre.duality",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero morphism to the dualizing sheaf is supported on a subcurve and bounds the degree of an invertible sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (S : ↑X.affineOpens) (U₁ U₂ : X.Opens) {n₁ n₂ : ℕ}\\n  {y₁ : ↑(X.presheaf.obj (Opposite.op U₁))} {y₂ : ↑(X.presheaf.obj (Opposite.op U₂))}\\n  {f : ↑(X.presheaf.obj (Opposite.op (U₁ ⊔ U₂)))} {x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))} (h₁ : ↑S ≤ U₁)\\n  (h₂ : ↑S \", \"doc\": \"For a scheme $X$ and open subsets $U_1, U_2 \\\\subseteq X$, given a section $f$ over $U_1 \\\\cup U_2$, the basic open set defined by the restriction of $f$ to $U_1$ is contained in $U_1$, i.e., $\\\\text{bas\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits do not state the curve subcurve-degree or multiplication criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Nonzero first cohomology of an ideal sheaf times a line bundle on a proper reduced curve forces a subcurve with small degree",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Set X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \": Closeds X\", \"doc\": \"The closed subset of a scheme $X$ consisting of points where the stalk of the ideal sheaf is non-zero, constructed by pairing the support set with its closedness proof.\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"groupCohomology.coboundaries₁_le_cocycles₁\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree\", \"type\": \": coboundaries₁ A ≤ cocycles₁ A\", \"doc\": \"In group cohomology, the submodule of 1-coboundaries (the image of the coboundary map $ d_{0,1} $) is contained within the submodule of 1-cocycles (the kernel of the coboundary operator $ d_{12} $).\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.support_eq_top_iff\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"[IsReduced X] {I : X.IdealSheafData} : I.support = ⊤ ↔ I = ⊥\", \"doc\": \"For a reduced scheme $X$ and an ideal sheaf data $I$ on $X$, the support of $I$ is the entire topological space of $X$ if and only if $I$ is the trivial ideal sheaf (the canonical bottom element of th\"}\n  {\"name\": \"Algebra.Extension.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(P : Extension R S) : Subsingleton P.H1Cotangent ↔ Function.Injective P.cotangentComplex\", \"doc\": \"For an $ R $-algebra extension $ S $, the first cohomology group $ H^1 $ of the cotangent complex is trivial (i.e., all elements are equal) if and only if the canonical cotangent complex map $ \\\\ker(\\\\p\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : Ideal ↑(X.presheaf.obj (Opposite.op ⊤))),\\n  ↑(AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop I).support = X.zeroLocus ↑I\", \"doc\": \"For a scheme $X$ and an ideal $I$ in the global sections of its structure sheaf, the support of the ideal sheaf constructed from $I$ coincides with the zero locus of $I$, i.e., the set of points in $X\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cohomology vanishing for line bundles on reduced reducible curves using bounds on degrees on connected subcurves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  (f : Gal(L/K) → Lˣ), groupCohomology.IsMulCocycle₁ f → groupCohomology.IsMulCoboundary₁ f\", \"doc\": \"In the context of Galois cohomology, if $ f : \\\\text{Gal}(L/K) \\\\to L^\\\\times $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) \\\\cdot f(g) $ for all $ g, h \\\\in \\\\text{Gal}(L/K) $), then $ f $ is a 1-cob\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (s : ↑(X.presheaf.obj (Opposite.op U))) (𝒰 : X.OpenCover),\\n  (∀ (i : 𝒰.I₀), (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app (𝒰.f i) U)) s = 0) → s = 0\", \"doc\": \"Let $ X $ be a scheme, $ U $ an open subset of $ X $, and $ s $ a section of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $. If $ \\\\mathcal{U} $ is an open cover of $ X $ consisting of open immersion\"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"cohomology\", \"degree\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "grep",
+   "query": "subcurve|vanishing.on.gorenstein|dualizing|Serre.duality",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean\", \"line\": \"20\", \"text\": \"This file was obtained by dualizing the definitions in\"}\n  {\"file\": \"Mathlib/Data/Set/Defs.lean\", \"line\": \"60\", \"text\": \"Additionally, dualizing the order on sets would mean that a set is dual to its complement.\"}\n  {\"file\": \"Mathlib/Tactic/Translate/ToDual.lean\", \"line\": \"27\", \"text\": \"  We may also want this feature for dualizing results about bicategories.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/Dual.lean\", \"line\": \"190\", \"text\": \"and dualizing the result using `toDual`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean\", \"line\": \"32\", \"text\": \"* consider dualizing the results to right adjoints\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"22\", \"text\": \"by dualizing this file. These two files should be kept in sync.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"21\", \"text\": \"Note: this file was obtained by dualizing the definitions in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean\", \"line\": \"27\", \"text\": \"(This file was obtained by dualizing the results in the file\"}\n  {\"file\": \"Mathlib/CategoryTheory/Category/Cat/Op.lean\", \"line\": \"12\", \"text\": \"# The dualizing functor on `Cat`\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"line\": \"82\", \"text\": \"/-- The path object of a homological complex is defined here by dualizing\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero map from the ideal of a finite subscheme tensored with a line bundle to a dualizing sheaf bounds the degree on its support",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, when constructing ideal sheaf data via the specified method using a family of ideals on affine open subsets, compatibility conditions under restriction to basic open subsets, and a s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (ideal : (U : ↑X.affineOpens) → Ideal ↑(X.presheaf.obj (Opposite.op ↑U)))\\n  (map_ideal_basicOpen :\\n    ∀ (U : ↑X.affineOpens) (f : ↑(X.presheaf.obj (Opposite.op ↑U))),\\n      Ideal.map (CommRingCat.Hom.hom (X.presheaf.map (CategoryTheory.homOfLE ⋯).op)) (ideal U) =\\n  \", \"doc\": \"For a scheme $X$, given compatible ideals $\\\\mathfrak{a}_U$ on affine open subsets $U \\\\subseteq X$ and a support set defined as the intersection $\\\\bigcap_U V(\\\\mathfrak{a}_U)$ of their zero loci, the su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.supportSet_subset_zeroLocus\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens), I.supportSet ⊆ X.zeroLocus ↑(I.ideal U)\", \"doc\": \"For a scheme $X$ with an ideal sheaf data $I$ and an affine open subset $U$ of $X$, the support set of $I$ is a subset of the zero locus of the ideal $I(U)$ on $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  X.zeroLocus ↑(I.ideal U) ∩ ↑↑U ⊆ I.supportSet\", \"doc\": \"For any ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and any affine open subset $U \\\\subseteq X$, the intersection of the zero locus of the ideal $\\\\mathcal{I}(U)$ with $U$ is contained within the support \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData) (U : ↑X.affineOpens),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (CategoryTheory.CategoryStruct.comp (I.glueDataObjι U) (↑U).ι).base) =\\n    ↑I.support ∩ ↑↑U\", \"doc\": \"For a scheme $X$ with an ideal sheaf $\\\\mathcal{I}$ and an affine open subset $U \\\\subseteq X$, the image of the composition of the gluing morphism $\\\\mathcal{I}.\\\\text{glueDataObj}\\\\iota(U)$ with the incl\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I : X.IdealSheafData} {x : ↥X},\\n  x ∈ I.support ↔ ∀ (U : ↑X.affineOpens), x ∈ X.zeroLocus ↑(I.ideal U)\", \"doc\": \"A point $x$ lies in the support of an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ if and only if, for every affine open subset $U \\\\subseteq X$ containing $x$, the point $x$ is contained in the zero locu\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ideal-sheaf constructions, smooth cotangent complexes, linear duals or unrelated adjunctions; none states coherent duality for singular reduced curves or its subcurve obstruction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-field-linear-series",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E",
+   "via": [
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0E3E against the statement, including arbitrary ground field and empty Z. Kept its support-of-dualizing-map argument and expanded both quotient factorizations. Added two statement-only coherent curve-duality inputs, reused the existing coherence and Euler tools, and restricted to a connected component before making the numerical estimate. No statement correction.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; this split supplies the quoted 0E3E obstruction prerequisite on the marked stable-curve linear-series branch of direct-image stability.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Noetherianity and coherence of an invertible module on a proper scheme over a field, used as a generic coherent-geometry tool. The assigned unit supplies no alternative statement for this generic tool."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherence of finite-type quasi-coherent ideals on a locally Noetherian scheme. The assigned unit supplies no alternative statement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "A closed subcurve of a proper curve is proper, so the curve duality and Euler tools apply. The assigned unit supplies no alternative statement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Coherence of kernels, images and cokernels in the support factorization argument. The assigned unit supplies no alternative statement for this generic tool."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Euler characteristic is nonnegative on zero-dimensional support and is unchanged by tensoring with a line bundle. The assigned unit supplies no alternative statement for this generic tool."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Additivity in the two coherent short exact sequences gives the numerical degree bound. The assigned unit supplies no alternative statement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proper-field-invertible-coherent",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-euler-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-69b7e44a0",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-69b7e44a0 (reviewer sub-agent of L); spot-checked: I read Stacks curves.tex 0E3E (statement and full proof), 0BS2(2,5), 0BS3(1-4), 0BS5 and 0E33(2). The item's statement agrees with 0E3E hypothesis by hypothesis and is not weakened. Both new nodes are statement-only and true, and neither is a clause of the item. reduced-curve-dualizing-module: reduced and pure 1-dimensional implies CM, so 0BS3(4) gives Hom(F,ω)=H^1(F)^∨; Yoneda gives uniqueness; the generic stalk is the dualizing module of a field, so it has rank 1; Ass(ω) is the set of generic points, so a submodule with zero generic stalks is 0; 0BS5 gives χ(ω)=-χ(O). closed-subcurve-dualizing-adjunction is 0E33(2) in the reduced CM case, with the annihilator read off by evaluation at 1. rg -L over dag/nodes found no duplicate: the existing dualizing-module nodes are for nodal or Gorenstein curves, or smooth ones. Steps 1-7 check: coherence and pure dimension 1; nonzero φ via duality; J kills φ because J_η=0 on Y and φ_η=0 off Y, so φ factors through i_*ω_Y; the step keeps I/JI apart from (I+J)/J and kills the finite-support kernel by generic detection; injectivity uses the reduced-ring minimal-prime argument; restriction to a clopen connected component B identifies ω_Y|_B with ω_B; the χ arithmetic is correct. Small cases: P^1 with O(d), and the node k[x,y]/(xy). Advisory only: step 2 calls H^1 finite-dimensional without a citation, but nothing depends on it. Batch 5: lem-trf-proper-field-invertible-coherent is Stacks 01XZ coherence on proper k-schemes, a generic tool. lem-pc-euler-additive (08AA) reaches sec-trace-formula only through a Nagata/Chow finiteness chain. Neither is the trace formula, Poincaré duality or a step of their proofs, so both are accepted. I accept the six generic tool_uses; the unit route is unchanged. No SGA is cited and no repair note exists. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveIdealH1SubcurveObstruction",
+  "declaration": "AlgebraicGeometry.exists_subcurve_degree_le_of_ideal_h1_nonzero",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveIdealH1SubcurveObstruction.lean",
+  "statement": "theorem exists_subcurve_degree_le_of_ideal_h1_nonzero (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] [IsReduced X] [ConnectedSpace X] (hdim : topologicalKrullDim X = 1) (L : X.Modules) [L.IsInvertible] (Z : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i] (hZ : topologicalKrullDim Z ≤ 0) (hH : ¬ Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj (i.ker.toModules ⊗ L : X.Modules))) : ∃ (B : Scheme.{u}) (b : B ⟶ X), IsClosedImmersion b ∧ IsReduced B ∧ ConnectedSpace B ∧ topologicalKrullDim B = 1 ∧ @Scheme.Modules.degree k _ B ⟨b ≫ X ↘ Spec (.of k)⟩ ((Scheme.Modules.tensorPullback b).obj L) ≤ -2 * @Scheme.Modules.eulerChar k _ B ⟨b ≫ X ↘ Spec (.of k)⟩ (SheafOfModules.unit B.ringCatSheaf) + (@Module.finrank k Γ(pullback i b, ⊤) _ _ (Module.compHom Γ(pullback i b, ⊤) (((Scheme.ΓSpecIso (.of k)).inv ≫ (pullback.fst i b ≫ i ≫ X ↘ Spec (.of k)).appTop).hom)) : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The dimension-at-most-zero hypothesis includes empty Z. ConnectedSpace B includes nonemptiness. Degree and Euler characteristic use the induced structure map b followed by that of X; the intersection term uses actual global sections of pullback i b, with scalar restriction along its composite structure map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-28d251296",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Read Stacks 0E3E statement and proof, the item node, all 13 stmt_dep records and the exact declarations (Hom.ker/toModules, RingedSpace.moduleCohomology, tensorPullback, degree = χ(M)−χ(O), eulerChar, globalSectionsRingHom, Scheme.Modules monoidal instance = SheafOfModules.monoidalCategory, the same localization tensor as the recorded cochainModulesMonoidal). Clause-by-clause match: arbitrary field; proper, reduced, connected, dim 1; invertible L; closed immersion with dim Z ≤ 0 (allows empty Z); H^1 ≠ 0 via ¬Subsingleton of moduleCohomology 1 of i.ker.toModules ⊗ L; ∃ B closed immersion, reduced, ConnectedSpace (nonempty), dim 1; deg_k(tensorPullback b L) ≤ −2χ(O_B) + finrank_k Γ(Z×_X B) with the k-action induced by the structure map. No extra hypotheses; single universe u as the degree/χ interfaces require. Edge cases: empty Z or intersection, nonreduced Z, k' ⊋ k, P^1 with O(d). Only change versus live: the item's lean field; statement verbatim; no name collision; only proof is sorry; docstrings carry source, blueprint tag and seven-step proof; report has Worker report and Second reading by Q56. No recompile (no file changed); worker's scompile clean."
+ }
+}

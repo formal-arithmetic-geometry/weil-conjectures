@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-strict-proper-composition-restriction",
+ "kind": "statement",
+ "title": "Restriction of the normalized proper compositor",
+ "statement": "Let $\\ell$ be prime, let $E,F$ be finite extensions of $\\mathbf Q_\\ell$, and let $i:E\\to F$ be a $\\mathbf Q_\\ell$-algebra homomorphism [def-weil-l-adic-coefficient-extension]. Put $A=\\operatorname{ULift}(\\mathcal O_E)$ and $B=\\operatorname{ULift}(\\mathcal O_F)$, and use $D_H(Z)=D(\\operatorname{Fun}(\\mathbf N^{\\mathrm{op}},\\operatorname{Mod}(\\underline H_Z)))$ and its normalized operations $J_H,R_H$ [def-cbc-strict-constant-tower-operations]. Write $U_Z:D_B(Z)\\to D_A(Z)$ for coefficient restriction and $o_j:U_ZJ_{A,j}\\to J_{B,j}U_W$, $d_p:R_{B,p}U_T\\to U_WR_{A,p}$ for openRestriction and properRestriction [def-pur-constant-scalar-tower-mates]. Write $P_Z^{(e)}$ for positive arithmetic selection of levels $e(n+1)$, $a_p:R_{B,p}P_T^{(e)}\\to P_W^{(e)}R_{B,p}$ for reindexProper, and $b_j:J_{B,j}P_W^{(e)}\\to P_Z^{(e)}J_{B,j}$ for reindexOpen [def-pur-strict-scalar-mate-evaluation-data]. Compositions of functors in these formulas are in execution order, as in Lean. Let $p:W\\to T$, $g:T\\to Y$ and $q:W\\to Y$ be arbitrary scheme morphisms with $h:pg=q$. Let\n$$t_H=\\operatorname{rComp}_{H,p,g};\\operatorname{eqToIso}(R_H(h)):R_{H,p}R_{H,g}\\to R_{H,q}$$\nbe the normalized proper compositor followed by equality transport [def-cbc-strict-constant-tower-operations]. Then for every $M\\in D_B(W)$,\n$$R_{A,g}(d_p^{-1}(M));d_g^{-1}(R_{B,p}M);U_Y(t_B(M))=t_A(U_WM);d_q^{-1}(M).$$\nFor every $e\\ge1$ and $M\\in D_B(W)$,\n$$P_Y^{(e)}(t_B(M));a_q(M)=a_g(R_{B,p}M);R_{B,g}(a_p(M));t_B(P_W^{(e)}M).$$\nHere semicolon denotes arrows followed from left to right. These are identities of proper composition alone; there are no open immersions, compactifications or proper/open refinement arrows.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E (lemma-derived-pushforward-composition); 03DA and 0940; whole-strict-diagram normalization refinement of the parent proper-composition step."
+ },
+ "stmt_deps": [
+  "def-pur-constant-scalar-tower-mates",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "On ordinary modules, the proper compositor restricts sections along the canonical iterated fibre-product isomorphism. Coefficient restriction keeps those sections and arithmetic selection keeps their indices. Hence both ordinary restriction squares commute with composition and transport along h.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite-free tensor is an exact left adjoint to coefficient restriction. Positive selection has the exact left adjoint supplied by arithmetic restriction resolution. Thus both preserve K-injectives. Derive the ordinary commuting squares on simultaneous whole-tower K-injective representatives. The normalized derived units identify them with properRestriction and reindexProper.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates",
+    "lem-sp-strict-tower-arithmetic-restriction-resolution",
+    "def-pur-strict-scalar-mate-evaluation-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical proper composition is normalized by the composite geometric adjunction. Its canonical derived-unit description agrees with that conjugate by uniqueness, so the derived ordinary compositor is exactly rComp. Naturality of normalized derived squares gives the two equations, retaining equality transport h.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-pur-derived-square-normalization-naturality",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "def-pur-constant-scalar-tower-mates",
+  "lem-sp-strict-tower-arithmetic-restriction-resolution",
+  "def-pur-strict-scalar-mate-evaluation-data",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "proof_origin": {
+  "by": "J8",
+  "kind": "agent auxiliary refinement of the existing proof",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 0D6E (lemma-derived-pushforward-composition); 03DA and 0940; whole-strict-diagram normalization refinement of the parent proper-composition step."
+  },
+  "note": "A genuine component before the final proper/open refinement comparison, with its own full proof in words."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived direct image composition compatible with exact restriction of scalars and adjunction mate",
+   "results": "PresheafOfModules.pushforward_obj_map_apply', ModuleCat.restrictScalarsComp'App_hom_naturality, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.restrictScalars, CategoryTheory.Adjunction.derivedε, SheafOfModules.pushforwardComp, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc.",
+   "date": "2026-10-26",
+   "verdict": "Generic module and adjunction constructions; no normalized strict-tower restriction identity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality and eight other generic naturality lemmas.",
+   "date": "2026-10-26",
+   "verdict": "Naturality pastes the component identities; does not give either geometric identity."
+  },
+  {
+   "tool": "grep",
+   "query": "properRestriction.*composition|reindexProper.*composition|strictRefinementSeed",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "No existing named proper-composition or refinement-seed restriction identity."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StrictRefinementRestrictionSquares",
+  "date": "2026-10-26",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient change for compact support: auxiliary comparison Step 7, preservation of the normalized refinement under coefficient restriction and restriction to ramified indices. Local seed and proper-composition components.",
+   "via": [
+    "lem-pur-strict-refinement-restriction-squares",
+    "lem-pur-compact-support-strict-scalar-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictProperCompositionRestriction",
+  "file": "lean/Sheaf/Paper/StrictProperCompositionRestriction.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.strictProperCompositionRestriction",
+  "statement": "theorem strictProperCompositionRestriction\n    {W T Y : Scheme.{u}} (p : W ⟶ T) (g : T ⟶ Y) (q : W ⟶ Y)\n    (h : p ≫ g = q) :\n    let A := ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)\n    let B := ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)\n    let tA := (rComp A p g).hom ≫ (eqToIso (congrArg (R A) h)).hom\n    let tB := (rComp B p g).hom ≫ (eqToIso (congrArg (R B) h)).hom\n    (∀ M : Derived B W,\n      (R A g).map ((properRestriction l E F i p).inv.app M) ≫\n          (properRestriction l E F i g).inv.app ((R B p).obj M) ≫\n          (U l E F i Y).map (tB.app M) =\n        tA.app ((U l E F i W).obj M) ≫ (properRestriction l E F i q).inv.app M) ∧\n    ∀ (e : ℕ) (he : 1 ≤ e) (M : Derived B W),\n      (subsequence l F Y e).map (tB.app M) ≫\n          (reindexProper l F q e he).hom.app M =\n        (reindexProper l F g e he).hom.app ((R B p).obj M) ≫\n          (R B g).map ((reindexProper l F p e he).hom.app M) ≫\n          tB.app ((subsequence l F W e).obj M)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261026T195641-L-3151598",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261026T195641-L-3151598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-domain-product-action-fixed-ring",
+ "kind": "statement",
+ "title": "Automorphisms of domain products and stabilizer fixed rings",
+ "statement": "Let $I$ be a finite set and let $B_i$ for $i\\in I$ be commutative integral domains, meaning nonzero commutative unital rings without zero divisors. Put $B=\\prod_{i\\in I}B_i$, and let a group $H$ act on $B$ by unital ring automorphisms $\\alpha_h$, with $\\alpha_{gh}=\\alpha_g\\alpha_h$. For $i\\in I$, let $e_i\\in B$ be the coordinate idempotent ($e_i^2=e_i$, the convention in [lem-weil-pbc-spec-clopen-idempotent]) with coordinate $1$ at $i$ and $0$ elsewhere. There is a unique action of $H$ on $I$ satisfying $\\alpha_h(e_i)=e_{hi}$. There are unique ring isomorphisms $h_i:B_i\\xrightarrow{\\sim}B_{hi}$ satisfying $(\\alpha_h(x))_{hi}=h_i(x_i)$ for all $x\\in B$; these satisfy $(gh)_i=g_{hi}\\circ h_i$. Choose a subset $R\\subseteq I$ containing one representative of every orbit. Write $H_i=\\{h\\in H:hi=i\\}$, $C_i=\\{c\\in B_i:h_i(c)=c\\text{ for all }h\\in H_i\\}$, and $B^H=\\{x\\in B:\\alpha_h(x)=x\\text{ for all }h\\in H\\}$, with their inherited ring structures. Projection to the representative coordinates is a ring isomorphism $B^H\\xrightarrow{\\sim}\\prod_{i\\in R}C_i$. Its inverse sends $(c_i)_{i\\in R}$ to the tuple specified by $x_{hi}=h_i(c_i)$. These assertions include $I=\\varnothing$, when both product rings are the zero ring; no faithfulness or finiteness of $H$ is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EE, lemma-disjoint-decomposition, for the idempotent context; the stated group-action and varying-factor fixed-ring comparison is agent-formulated from the component/stabilizer calculation of ILO X 2.3 Step 3, printed pp.151--152, and retained item proof steps 4--5. Tag 00EE alone does not assert this comparison."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof": [
+  {
+   "text": "If $I=\\varnothing$, then $R=\\varnothing$ and $B$ has one element. Every action on it and on the empty set is unique, the factor assertions have no instances, and projection is the unique isomorphism between the two one-element rings. Hence assume $I\\ne\\varnothing$ below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 1."
+   }
+  },
+  {
+   "text": "An idempotent $u\\in B$ has $u_j(u_j-1)=0$ in each domain $B_j$, so every $u_j$ is $0$ or $1$. For idempotents define $v\\le u$ to mean $vu=v$. Coordinatewise, this says that every coordinate where $v$ is $1$ is also a coordinate where $u$ is $1$. Thus the minimal nonzero idempotents are exactly the $e_i$: each singleton support is minimal, while any nonzero $u$ has a coordinate $i$ equal to $1$, and then $0\\ne e_i\\le u$; minimality forces $u=e_i$. Distinct indices give distinct $e_i$, since $0\\ne1$ in each $B_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 2."
+   }
+  },
+  {
+   "text": "A ring automorphism preserves idempotency, nonzeroness and the relation $vu=v$, in both directions by applying its inverse. It therefore permutes the minimal nonzero idempotents of step 2. Define $hi$ by the unique equality $\\alpha_h(e_i)=e_{hi}$. The inverse permutation is the one for $h^{-1}$. Since $\\alpha_1=\\mathrm{id}$ and $\\alpha_{gh}=\\alpha_g\\alpha_h$, these equalities give $1i=i$ and $(gh)i=g(hi)$. They also prove uniqueness of the action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 3."
+   }
+  },
+  {
+   "text": "For $a\\in B_i$ let $\\delta_i(a)$ be the tuple supported at $i$ with value $a$, and define $h_i(a)=(\\alpha_h(\\delta_i(a)))_{hi}$. The identities $e_i\\delta_i(a)=\\delta_i(a)$ and $\\alpha_h(e_i)=e_{hi}$ show that $\\alpha_h(\\delta_i(a))=\\delta_{hi}(h_i(a))$. Additivity and multiplicativity follow by applying $\\alpha_h$ and evaluation to the corresponding identities for $\\delta_i$; also $h_i(1)=1$ because $\\delta_i(1)=e_i$. Applying $\\alpha_{h^{-1}}$ proves that $(h^{-1})_{hi}$ is its inverse. For arbitrary $x$, use $e_ix=\\delta_i(x_i)$ and apply $\\alpha_h$ to obtain $(\\alpha_h(x))_{hi}=h_i(x_i)$. This formula on $x=\\delta_i(a)$ proves uniqueness. Applying $\\alpha_g\\alpha_h$ to $\\delta_i(a)$ gives $(gh)_i(a)=g_{hi}(h_i(a))$; similarly $1_i=\\mathrm{id}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 4."
+   }
+  },
+  {
+   "text": "For $h\\in H_i$ the maps $h_i$ are automorphisms of $B_i$ and satisfy the action laws by step 4. Their common fixed elements form a subring: every such map preserves $0,1$, sums, products and negatives, so these operations preserve the fixed-element equations. The same observation gives the subring $B^H$. If $x\\in B^H$ and $h\\in H_i$, the coordinate formula gives $h_i(x_i)=x_i$. Thus evaluation defines a unital ring homomorphism $E:B^H\\to\\prod_{i\\in R}C_i$, using coordinatewise operations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 5."
+   }
+  },
+  {
+   "text": "Given $c=(c_i)_{i\\in R}$, define $x_j=h_i(c_i)$ whenever $j=hi$ with $i\\in R$. Such $i,h$ exist by the representative property. The representative $i$ is unique. If $hi=h'i$, put $k=h^{-1}h'\\in H_i$, so $h'=hk$. Then step 4 gives $h'_i(c_i)=h_{ki}(k_i(c_i))=h_i(c_i)$, since $ki=i$ and $c_i\\in C_i$. This proves independence of every choice and defines the tuple $x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 6."
+   }
+  },
+  {
+   "text": "For $g\\in H$ and $j=hi$ as in step 6, the coordinate formula and the cocycle identity give $(\\alpha_g(x))_{gj}=g_j(x_j)=g_{hi}(h_i(c_i))=(gh)_i(c_i)=x_{gj}$. The permutation $j\\mapsto gj$ is surjective, hence $\\alpha_g(x)=x$. Thus extension gives a map $T:\\prod_{i\\in R}C_i\\to B^H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 7."
+   }
+  },
+  {
+   "text": "Taking $h=1$ at a representative gives $(E(T(c)))_i=1_i(c_i)=c_i$. Conversely, if $x\\in B^H$ and $j=hi$ with $i\\in R$, then $(T(E(x)))_j=h_i(x_i)=(\\alpha_h(x))_{hi}=x_j$. Hence $E$ is bijective with inverse $T$. As $E$ is a unital ring homomorphism, it is the asserted ring isomorphism, with precisely the displayed inverse formula. The proof used neither faithfulness nor finiteness of $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem. Coordinate argument, step 8."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent coordinate proof of the component/stabilizer calculation: ILO X 2.3 Step 3, printed pp.151--152 (PDF pp.157--158); Stacks Tag 00EE (lemma-disjoint-decomposition) supplies only the idempotent convention, not this theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A group acting by automorphisms on a finite product of integral domains permutes its factors and the invariant ring is the product of stabilizer fixed subrings",
+   "results": "8 hit(s); top recorded results: FixedPoints.normal, IsGaloisGroup.isInvariant, prodXSubSMul.smul, FixedPoints.toAlgAut_bijective, FixedPoints.toAlgHomEquiv, FixedPoints.toAlgHom_bijective, FixedPoints.isSeparable, FixedPoints.isIntegral",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "loogle",
+   "query": "FixedPoints.subring, RingEquiv",
+   "results": "0 hit(s); top recorded results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariant|fixedPoints|FixedPoints).*(prod|orbit|stabilizer)|(prod|orbit|stabilizer).*(invariant|fixedPoints|FixedPoints)",
+   "results": "25 hit(s); top recorded results: Mathlib/NumberTheory/ModularForms/SlashInvariantForms.lean, Mathlib/Algebra/Lie/Weights/IsSimple.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/ModularForms/Basic.lean, Mathlib/NumberTheory/ModularForms/Basic.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean, Mathlib/NumberTheory/RamificationInertia/Galois.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fixed elements of a ring automorphism action on a finite product of domains form the product over component orbits of stabilizer invariant rings",
+   "results": "8 hit(s); top recorded results: MulAction.fixedPoints, MulAction.fixedBy, FixedPoints.subring, MulAction.sigmaFixedByEquivOrbitsProdGroup, FixedPoints.subalgebra, FixedBy.subfield, AddAction.sigmaFixedByEquivOrbitsProdAddGroup, FixedPoints.toAlgAut_bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a product of integral domains permute primitive idempotents; projection to orbit representatives gives an isomorphism of invariant rings with stabilizer fixed rings",
+   "results": "8 hit(s); top recorded results: CompleteOrthogonalIdempotents.ringEquivOfComm, CompleteOrthogonalIdempotents.ringEquivOfIsMulCentral, AlgEquiv.prodQuotientOfIsIdempotentElem_apply, AlgEquiv.prodQuotientOfIsIdempotentElem, CompleteOrthogonalIdempotents.bijective_pi, CompleteOrthogonalIdempotents.bijective_pi', AlgEquiv.prodQuotientOfIsIdempotentElem_apply_fst, FixedPoints.toAlgHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "grep",
+   "query": "(fixedPoints|FixedPoints|invariant).*(orbit|stabiliz|[Pp]rod|[Pp]i)|(orbit|stabiliz).*(fixedPoints|FixedPoints|invariant)",
+   "results": "9 hit(s); top recorded results: Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean; Mathlib/RingTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "grep",
+   "query": "ringEquivOfComm|FixedPoints.subring|isIntegrallyClosed.*[Ss]ubring|IsIntegrallyClosed.*[Ss]ubring|isIntegrallyClosed.*[Ff]ixed|[Ff]ixed.*[Ii]ntegrally",
+   "results": "11 hit(s); top recorded results: Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/Algebra/Algebra/Subalgebra/Operations.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean, Mathlib/RingTheory/Valuation/LocalSubring.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: FixedPoints.subring defines invariants; complete orthogonal idempotents give a product decomposition without an action, and field fixed-point theorems do not identify varying domain factors or their stabilizer invariant product."
+  },
+  {
+   "tool": "grep",
+   "query": "(idempotent|fixedPoints|FixedPoints).*(perm|orbit|stabiliz|[Pp]rod)|(perm|orbit|stabiliz).*(idempotent|fixedPoints|FixedPoints)",
+   "results": "25 hit(s); Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean, Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean, Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean, Mathlib/LinearAlgebra/Matrix/Permutation.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/Algebra/Ring/Idempotent.lean, Mathlib/GroupTheory/Perm/Centralizer.lean, Mathlib/GroupTheory/Perm/Centralizer.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The invariant ring of a group action by automorphisms on a finite product of domains is the product over orbits of stabilizer invariant subrings",
+   "results": "8 hit(s); MulAction.orbitProdStabilizerEquivGroup, IsInvariantSubring, FixedPoints.subring, prodXSubSMul.smul, FixedPoints.subalgebra, IsInvariantSubring.mk, IsInvariantSubring.recOn, FixedPoints.instIsInvariantSubfieldSubfield",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIdempotentElem, RingEquiv",
+   "results": "0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Automorphisms of a finite product of integral domains permute the coordinate idempotents and transport factors; its fixed ring is the product of the stabilizer fixed rings",
+   "results": "8 hit(s); CompleteOrthogonalIdempotents.ringEquivOfComm, CompleteOrthogonalIdempotents.ringEquivOfIsMulCentral, CompleteOrthogonalIdempotents.bijective_pi', CompleteOrthogonalIdempotents.bijective_pi, RingHom.pi_bijective_of_isIdempotentElem, AlgEquiv.prodQuotientOfIsIdempotentElem_apply, AlgEquiv.prodQuotientOfIsIdempotentElem_apply_fst, AlgEquiv.prodQuotientOfIsIdempotentElem",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring automorphism of a product of connected nonzero commutative rings permutes the primitive idempotents; invariant dependent tuples are determined by stabilizer fixed coordinates",
+   "results": "8 hit(s); CompleteOrthogonalIdempotents.ringEquivOfComm, CompleteOrthogonalIdempotents.single, CompleteOrthogonalIdempotents.ringEquivOfIsMulCentral, CompleteOrthogonalIdempotents.bijective_pi', CompleteOrthogonalIdempotents.bijective_pi, RingHom.pi_bijective_of_isIdempotentElem, CompleteOrthogonalIdempotents.of_prod_one_sub, CompleteOrthogonalIdempotents.map",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(fixedPoints|FixedPoints|invariant).*(orbit|stabiliz|[Pp]rod|[Pp]i)|(orbit|stabiliz).*(fixedPoints|FixedPoints|invariant)",
+   "results": "9 hit(s); Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Profinite.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/Invariant/Basic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean, Mathlib/RingTheory/SimpleModule/Isotypic.lean; Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "ringEquivOfComm|theorem single|lemma single|(perm|[Aa]ut|[Ee]quiv).*(primitive|[Ii]dempotent)|(primitive|[Ii]dempotent).*(perm|[Aa]ut)",
+   "results": "2 hit(s); 475, 619; Mathlib/RingTheory/Idempotents.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "ringEquivOfComm|theorem single|lemma single|def subring|sigmaFixedByEquivOrbitsProdGroup|IsIdempotentElem.*eq_zero_or_eq_one",
+   "results": "25 hit(s); Mathlib/Algebra/Algebra/Spectrum/Basic.lean, Mathlib/Algebra/Algebra/Spectrum/Basic.lean, Mathlib/Algebra/Algebra/Operations.lean, Mathlib/Algebra/Field/Subfield/Defs.lean, Mathlib/Algebra/Module/Submodule/Pointwise.lean, Mathlib/Algebra/Category/ModuleCat/Adjunctions.lean, Mathlib/Algebra/Ring/Subring/Basic.lean, Mathlib/Algebra/Ring/Subring/Basic.lean; Mathlib/Algebra",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "def subring|namespace FixedPoints|IsIdempotentElem.*eq_zero_or_eq_one|eq_zero_or_one.*[Ii]dempotent",
+   "results": "1 hit(s); Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean; Mathlib/Algebra/Algebra/Subalgebra",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(perm|[Aa]utomorphism|[Ee]quiv).*(primitive|[Ii]dempotent)|(primitive|[Ii]dempotent).*(perm|[Aa]utomorphism)",
+   "results": "15 hit(s); Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Spectrum/Prime/Topology.lean, Mathlib/RingTheory/Morita/Basic.lean, Mathlib/RingTheory/Morita/Basic.lean, Mathlib/RingTheory/Ideal/Pure.lean; Mathlib/RingTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "FixedPoints|fixedPoints|namespace",
+   "results": "5 hit(s); 25, 34, 90, 91, 92; Mathlib/Algebra/Algebra/Subalgebra/Operations.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: read CompleteOrthogonalIdempotents.ringEquivOfComm (Idempotents.lean:619) and FixedPoints.subring (Operations.lean:100); these decompose a ring for given idempotents or define invariants, not the intrinsic factor permutation and varying-factor invariant comparison. Invariant/Basic.lean:145--172 and 354--359 concern integral invariant extensions and prime stabilizers, not this assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-quotient-normal-proper",
+  "date": "2026-10-22",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "ILO X 2.3 Step 3, printed pp.151--152, connected-component stabilizers and extension over component orbits; retained lem-sfb-finite-quotient-normal-proper proof steps 4--5: intrinsic idempotent permutation, factor transport and the evaluation/extension isomorphism.",
+   "via": [
+    "lem-sfb-finite-quotient-normal-proper",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-domain-product-action-fixed-ring",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against ILO X 2.3 Step 3, the current blueprint route and all eight explicit elementary coordinate steps. No complete Lean attachment or Mathlib leaf was found. No new nodes: domain idempotents, factor transport, and evaluation/extension are proved directly with the equations written out. Checked the empty product, one factor, several orbits, nonfaithful and infinite groups, and twisting inside a factor. Retained prior search history and added actual Q108 searches.",
+  "blueprint": "Retains computed from.node=null and the inherited ancestry. Realizes the component/stabilizer auxiliary calculation in lem-sfb-finite-quotient-normal-proper, step 2, originally retained steps 4--5; this supports det-thm-sf-ctf-stability-direct-images (3), the alteration/tame-boundary direct-image route. Latest blueprint direct-images proof (3) was read; no unit route is replaced. Whole-blueprint searches for idempotent, invariant and stabilizer fixed found no equivalent node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-7d4291966",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-7d4291966 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and no changes. The statement, stmt_deps, source and created fields are unchanged; proof_deps is empty and equals the union of the step uses; the split_report has a blueprint entry; the searches cover all three kinds. No re-split note applies: the item was statement-only on the base. I checked all eight elementary steps. Step 2: idempotents in a product of domains have coordinates 0 or 1, the minimal nonzero idempotents are exactly the e_i, and they are distinct because each factor is nonzero. Step 3: the automorphisms permute the e_i, which gives a unique action. Step 4: h_i(a)=(alpha_h delta_i(a))_{hi} satisfies the support identity, is unital, has inverse (h^{-1})_{hi}, satisfies the coordinate formula and the cocycle identity, and is unique. Steps 5-8: E lands in the stabilizer fixed rings; the extension is independent of choices via k=h^{-1}h' in H_i; it is invariant because j->gj is surjective; and both inverse identities hold coordinatewise. Finiteness and faithfulness of H are never used. Cases tested: I empty; ZxZ with the swap (diagonal); C with conjugation (fixed ring R); infinite and non-faithful H; characteristic 2. Sources: Stacks 00EE (algebra.tex:3858, lemma-disjoint-decomposition) is used only for the idempotent convention via lem-weil-pbc-spec-clopen-idempotent; ILO X 2.3 Step 3 (PDF pp.157-158) gives the component/stabilizer/orbit pattern, and proof_origin is correctly marked agent. The use in step 2 of parent lem-sfb-finite-quotient-normal-proper matches the item. Duplicate checks: lem-sfb-transitive-domain-product-invariants needs finite H, a transitive action and a supplied cocycle; lem-sbc-affine-torsor-equivariant-orbit-product has a common ring and a supplied permutation; lem-dl-a1-transitive-product-inertia-component is transitive with finite G. None of them is the same statement or a generalization of it. No off-unit citations, no tool_uses, no SGA."
+ }
+}

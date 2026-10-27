@@ -1,0 +1,206 @@
+{
+ "id": "lem-trf-free-normalized-homology-surjectivity-transfer",
+ "kind": "statement",
+ "title": "Normalized homology surjectivity descends through free abelian evaluation",
+ "statement": "Let $X,Y$ be simplicial abelian groups and $f:X\\to Y$ an additive simplicial morphism [def-weil-pbc-simplicial-object]. For a simplicial set $S$, let $F(S)_m=\\mathbb Z[S_m]$, the free abelian group with basis vectors $[s]$ indexed by $s\\in S_m$; every simplicial operator acts by $[s]\\mapsto[S(\\varphi)(s)]$. For a simplicial-set map $a:S\\to T$ put $F(a)_m([s])=[a_m(s)]$. Write $UZ$ for the underlying simplicial set of a simplicial abelian group $Z$ [def-weil-pbc-simplicial-set]. Let $\\epsilon_Z:F(UZ)\\to Z$ be evaluation, given degreewise by $\\sum_j a_j[z_j]\\mapsto\\sum_j a_jz_j$. For a simplicial abelian group $Z$ [def-weil-pbc-simplicial-object], set $N(Z)_0=Z_0$ and $N(Z)_m=\\bigcap_{i=1}^m\\ker(d_i:Z_m\\to Z_{m-1})$ for $m>0$, with differential $\\partial_m=d_0$ for $m>0$ and $\\partial_0=0$. Write $H_m(N(Z))=\\ker\\partial_m/\\operatorname{im}\\partial_{m+1}$; a simplicial morphism $a$ induces the chain map $N(a)$ by restriction in every degree. The evaluation maps are simplicial morphisms and satisfy $f\\circ\\epsilon_X=\\epsilon_Y\\circ F(Uf)$. For every $n\\geq0$ and cycle $y\\in N(Y)_n$, the element $\\widetilde y=[y]-[0_n]\\in F(UY)_n$ is a cycle of $N(F(UY))$ evaluating to $y$; here $0_m$ denotes the zero simplex in degree $m$. Consequently, for every fixed $n\\geq0$, if $H_n(N(F(Uf)))$ is surjective then $H_n(N(f))$ is surjective.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P2 (lemma-homotopy-equivalence), evaluation square and second proof paragraph, lines 5895-5932: normalized cycle lifting and surjectivity transfer, using differential d_0 rather than the source's opposite-face convention."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof": [
+  {
+   "text": "For every simplicial operator $\\varphi$, the formula $[s]\\mapsto[S(\\varphi)(s)]$ respects identity and composition on each generator, hence on every finite integral sum. The same calculation shows that $F(a)$ commutes with the operators for a simplicial-set map $a$. For an abelian simplicial object $Z$, additivity gives $Z(\\varphi)(\\sum_j a_jz_j)=\\sum_j a_jZ(\\varphi)(z_j)$, which is exactly $Z(\\varphi)\\epsilon_Z=\\epsilon_ZF(UZ)(\\varphi)$. Thus evaluation is simplicial. On a generator $[x]$, both $f\\epsilon_X$ and $\\epsilon_YF(Uf)$ equal $f(x)$; additivity proves the displayed square on all elements.",
+   "uses": [
+    "def-weil-pbc-simplicial-object",
+    "def-weil-pbc-simplicial-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, evaluation square and surjectivity paragraph (lines 5895–5932); with the explicitly stated d_0 normalization."
+   }
+  },
+  {
+   "text": "The normalization is a complex: for $z\\in N(Z)_m$ and $m\\geq2$, the simplicial identities give $d_i d_0z=d_0d_{i+1}z=0$ for $1\\leq i\\leq m-1$, and $d_0d_0z=d_0d_1z=0$. For $m=1$, the target is $N(Z)_0=Z_0$ and the next differential is zero. If $a$ is simplicial and additive, $d_i a_m(z)=a_{m-1}(d_i z)$ shows that $a$ preserves each normalized subgroup and commutes with its differential (also in degree zero). Consequently it takes cycles to cycles and boundaries to boundaries, so restriction defines the indicated maps on the quotient groups $H_n$. These observations apply in particular to the three maps of the evaluation square.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, evaluation square and surjectivity paragraph (lines 5895–5932); with the explicitly stated d_0 normalization."
+   }
+  },
+  {
+   "text": "Let $y\\in N(Y)_n$ be a cycle. For $n>0$, normalization gives $d_i y=0$ for $1\\leq i\\leq n$ and the cycle condition gives $d_0y=0$. Since each face is additive, $d_i0_n=0_{n-1}$; thus every face of $\\widetilde y=[y]-[0_n]$ is $[0_{n-1}]-[0_{n-1}]=0$. This proves both normalization and the cycle condition for $\\widetilde y$. For $n=0$, normalization imposes no condition and the differential is zero, so the same conclusion holds without mentioning a degree $-1$ face. In every degree, $\\epsilon_Y(\\widetilde y)=y-0_n=y$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, evaluation square and surjectivity paragraph (lines 5895–5932); with the explicitly stated d_0 normalization."
+   }
+  },
+  {
+   "text": "Fix $n$ and assume $H_n(N(F(Uf)))$ is surjective. Represent any class of $H_n(N(Y))$ by a cycle $y$, and lift it to the cycle $\\widetilde y$ of the preceding step. Surjectivity supplies a cycle $u\\in N(F(UX))_n$ whose homology class maps to that of $\\widetilde y$. By the definition of equality modulo boundaries there is $v\\in N(F(UY))_{n+1}$ with $F(Uf)_n(u)-\\widetilde y=\\partial_{n+1}v$. Set $x=\\epsilon_X(u)$; it is a normalized cycle by step 2. Evaluating the last equality and using the square of step 1 gives $f_n(x)-y=\\partial_{n+1}\\epsilon_Y(v)$, with $\\epsilon_Y(v)\\in N(Y)_{n+1}$. Hence the class of $x$ maps to the prescribed class of $y$. This works also for $n=0$, proving the required surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08P2, lemma-homotopy-equivalence, evaluation square and surjectivity paragraph (lines 5895–5932); with the explicitly stated d_0 normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-simplicial-object",
+  "def-weil-pbc-simplicial-set"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 08P2, lemma-homotopy-equivalence, evaluation square and surjectivity paragraph (lines 5895–5932); with the explicitly stated d_0 normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity on homology after degreewise free abelianization of a simplicial abelian group morphism implies surjectivity on normalized homology of the original morphism",
+   "results": "{\"t\": \"2026-10-22T06:41:33Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity on homology after degreewise free abelianization of a simplicial abelian group morphism implies surjectivity on normalized homology of the original morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.chainsMap_f_map_epi\", \"groupHomology.chains₁ToCoinvariantsKer_surjective\", \"groupHomology.chainsMap_id_f_map_epi\", \"groupHomology.instEpiModuleCatH0π\", \"CategoryTheory.ShortComplex.ShortExact.surjective_g\", \"HomologicalComplex.instEpiHomologyπ\", \"groupHomology.instEpiModuleCatH1π\", \"groupHomology.epi_map_0_of_epi\"], \"digest\": \"8beb95070dc06142\"}; full output retained in search-5.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give normalized-complex maps, generic cycle-kernel lifts, and epimorphisms of group-homology chains or homology projections. None constructs the nonlinear cycle lift [y]-[0] through evaluation or transfers surjectivity from F(Uf) to f. Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:105-110; these do not assert the transfer."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalizedMooreComplex\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"NormalizedMooreComplex\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; full output retained in search-6.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give normalized-complex maps, generic cycle-kernel lifts, and epimorphisms of group-homology chains or homology projections. None constructs the nonlinear cycle lift [y]-[0] through evaluation or transfers surjectivity from F(Uf) to f. Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:105-110; these do not assert the transfer."
+  },
+  {
+   "tool": "grep",
+   "query": "(free|FreeAbelianGroup).*(surject|homology)|(surject|homology).*(free|FreeAbelianGroup)",
+   "results": "{\"t\": \"2026-10-22T06:41:26Z\", \"tool\": \"grep\", \"query\": \"(free|FreeAbelianGroup).*(surject|homology)|(surject|homology).*(free|FreeAbelianGroup)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; full output retained in search-7.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give normalized-complex maps, generic cycle-kernel lifts, and epimorphisms of group-homology chains or homology projections. None constructs the nonlinear cycle lift [y]-[0] through evaluation or transfers surjectivity from F(Uf) to f. Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:105-110; these do not assert the transfer."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift normalized cycles by subtracting the zero generator in a free simplicial abelian group to descend surjectivity of homology",
+   "results": "{\"t\": \"2026-10-22T06:41:27Z\", \"tool\": \"leansearch\", \"query\": \"Lift normalized cycles by subtracting the zero generator in a free simplicial abelian group to descend surjectivity of homology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.liftCycles\", \"CategoryTheory.ShortComplex.liftCycles\", \"CategoryTheory.ShortComplex.liftCycles_leftHomologyπ_eq_zero_of_boundary\", \"CategoryTheory.ShortComplex.LeftHomologyData.liftH\", \"CategoryTheory.ShortComplex.liftCycles_homologyπ_eq_zero_of_boundary\", \"CategoryTheory.ShortComplex.LeftHomologyData.liftK_π_eq_zero_of_boundary\", \"HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary\", \"HomologicalComplex.cycles\"], \"digest\": \"52a4ebbb24cba642\"}; full output retained in search-8.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give normalized-complex maps, generic cycle-kernel lifts, and epimorphisms of group-homology chains or homology projections. None constructs the nonlinear cycle lift [y]-[0] through evaluation or transfers surjectivity from F(Uf) to f. Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:105-110; these do not assert the transfer."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation from free abelian groups on simplices lifts normalized cycles and descends surjectivity of a homology map",
+   "results": "{\"t\": \"2026-10-22T06:41:36Z\", \"tool\": \"leanfinder\", \"query\": \"Evaluation from free abelian groups on simplices lifts normalized cycles and descends surjectivity of a homology map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"groupHomology.iCycles_mk\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_comp_inclusionOfMooreComplexMap\", \"AlgebraicTopology.NormalizedMooreComplex.map\", \"AlgebraicTopology.inclusionOfMooreComplex\", \"AlgebraicTopology.DoldKan.PInfty_comp_PInftyToNormalizedMooreComplex\"], \"digest\": \"75feec956c24399d\"}; full output retained in search-9.txt and read.",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give normalized-complex maps, generic cycle-kernel lifts, and epimorphisms of group-homology chains or homology projections. None constructs the nonlinear cycle lift [y]-[0] through evaluation or transfers surjectivity from F(Uf) to f. Read MooreComplex.lean:64-136 and ShortComplex/HomologicalComplex.lean:105-110; these do not assert the transfer."
+  },
+  {
+   "tool": "grep",
+   "query": "(free|FreeAbelianGroup).*(surject|homology)|(surject|homology).*(free|FreeAbelianGroup)",
+   "results": "{\"t\": \"2026-10-23T12:17:43Z\", \"tool\": \"grep\", \"query\": \"(free|FreeAbelianGroup).*(surject|homology)|(surject|homology).*(free|FreeAbelianGroup)\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; full results read in search-1.txt through search-5.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: groupHomology epimorphism results concern group representations, not the evaluation square of arbitrary simplicial abelian groups; normalizedMooreComplex and its map construct the complex and induced chain map but do not assert this cycle lift or surjectivity transfer; FreeAbelianGroup.lift_apply_of is only the generator evaluation formula. Read MooreComplex.lean:64–136 and FreeAbelianGroup.lean:124–126."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift normalized cycles by subtracting the zero basis generator under free abelian evaluation",
+   "results": "{\"t\": \"2026-10-23T12:17:43Z\", \"tool\": \"leansearch\", \"query\": \"Lift normalized cycles by subtracting the zero basis generator under free abelian evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FreeAbelianGroup.liftAddGroupHom\", \"FreeAbelianGroup.lift_neg_apply\", \"FreeAbelianGroup.lift_neg\", \"FreeAbelianGroup.lift_apply_of\", \"FreeAbelianGroup.liftMonoid_coe\", \"Mathlib.Tactic.Module.NF.zero_sub_eq_eval\", \"FreeAddGroup.zero_ne_of\", \"FreeAddGroup.lift_of_apply\"], \"digest\": \"2e99764f62eaeda9\"}; full results read in search-1.txt through search-5.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: groupHomology epimorphism results concern group representations, not the evaluation square of arbitrary simplicial abelian groups; normalizedMooreComplex and its map construct the complex and induced chain map but do not assert this cycle lift or surjectivity transfer; FreeAbelianGroup.lift_apply_of is only the generator evaluation formula. Read MooreComplex.lean:64–136 and FreeAbelianGroup.lean:124–126."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalizedMooreComplex\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-23T12:17:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"NormalizedMooreComplex\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; full results read in search-1.txt through search-5.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: groupHomology epimorphism results concern group representations, not the evaluation square of arbitrary simplicial abelian groups; normalizedMooreComplex and its map construct the complex and induced chain map but do not assert this cycle lift or surjectivity transfer; FreeAbelianGroup.lift_apply_of is only the generator evaluation formula. Read MooreComplex.lean:64–136 and FreeAbelianGroup.lean:124–126."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized cycles of a simplicial abelian group lift through evaluation from the free abelian group on the underlying simplicial set",
+   "results": "{\"t\": \"2026-10-23T12:17:54Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized cycles of a simplicial abelian group lift through evaluation from the free abelian group on the underlying simplicial set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.normalizedMooreComplex\", \"AlgebraicTopology.NormalizedMooreComplex.map\", \"AlgebraicTopology.inclusionOfMooreComplex\", \"AlgebraicTopology.normalizedMooreComplex_obj\", \"AlgebraicTopology.normalizedMooreComplex_map\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_f\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex\", \"CategoryTheory.Abelian.DoldKan.N\"], \"digest\": \"272b0bc75ae0f015\"}; full results read in search-1.txt through search-5.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: groupHomology epimorphism results concern group representations, not the evaluation square of arbitrary simplicial abelian groups; normalizedMooreComplex and its map construct the complex and induced chain map but do not assert this cycle lift or surjectivity transfer; FreeAbelianGroup.lift_apply_of is only the generator evaluation formula. Read MooreComplex.lean:64–136 and FreeAbelianGroup.lean:124–126."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Surjectivity on homology of the free abelian simplicial map implies surjectivity on homology of the original simplicial abelian group map",
+   "results": "{\"t\": \"2026-10-23T12:17:55Z\", \"tool\": \"leanfinder\", \"query\": \"Surjectivity on homology of the free abelian simplicial map implies surjectivity on homology of the original simplicial abelian group map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupHomology.chainsMap_f_map_epi\", \"groupHomology.chainsMap_id_f_map_epi\", \"groupHomology.chains₁ToCoinvariantsKer_surjective\", \"groupHomology.instEpiModuleCatH0π\", \"groupHomology.epi_map_0_of_epi\", \"groupHomology.instEpiModuleCatH1π\", \"groupHomology.instEpiModuleCatH2π\", \"groupHomology.mapCycles₁_quotientGroupMk'_epi\"], \"digest\": \"346135cf71a1553f\"}; full results read in search-1.txt through search-5.txt.",
+   "date": "2026-10-23",
+   "verdict": "no match: groupHomology epimorphism results concern group representations, not the evaluation square of arbitrary simplicial abelian groups; normalizedMooreComplex and its map construct the complex and induced chain map but do not assert this cycle lift or surjectivity transfer; FreeAbelianGroup.lift_apply_of is only the generator evaluation formula. Read MooreComplex.lean:64–136 and FreeAbelianGroup.lean:124–126."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: direct simplicial abelian-group input, namely the Tag 08P2 statement that an underlying simplicial-set homotopy equivalence induces a quasi-isomorphism on associated alternating-face complexes. Subargument of Stacks 08P2: Tag 08P2 (lemma-homotopy-equivalence), evaluation square and second proof paragraph, lines 5895-5932: normalized cycle lifting and surjectivity transfer, using differential d_0 rather than the source's opposite-face convention.",
+   "via": [
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-free-normalized-homology-surjectivity-transfer",
+  "worker": "stage1",
+  "summary": "Verified Tag 08P2 directly with the item’s d_0 convention. Expanded evaluation naturality, normalization, the zero-generator cycle lift including n=0, and the boundary-representative chase. All four steps are elementary calculations from the inline definitions and the existing simplicial-object/set definitions; no new nodes or unsupported homology comparison are needed. Statement unchanged.",
+  "blueprint": "Retains the inherited path from lem-trf-local-term-locality, proof (1)–(2), through lem-trf-simplicial-abelian-set-homotopy-quasi-iso. This item supplies only the Tag 08P2 evaluation-square/surjectivity subargument in that existing branch; no chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-d5c707db9",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-d5c707db9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the unchanged item statement and all four proof steps, against Stacks simplicial.tex Tag 08P2 lemma-homotopy-equivalence (label at line 5885, ỹ=[y]-[0_n] at line 5919, surjectivity paragraph through about line 5932). The item uses the d_0 normalization (⋂_{i≥1} ker d_i). The source's argument works directly because every face of a normalized cycle vanishes, and no claim is made that the two conventions agree. Step 1: F(S) and F(a) are simplicial, ε is simplicial, and the evaluation square holds, all checked on generators and extended by additivity. Step 2: the simplicial identities d_i d_0 = d_0 d_{i+1} and d_0 d_0 = d_0 d_1 make N a complex, and additive simplicial maps induce maps on H_n. Step 3: every face of ỹ is [0]-[0]=0; n=0 and y=0 are handled correctly, and y↦ỹ is never treated as additive. Step 4: from F(Uf)(u)-ỹ=∂v, applying ε gives f(ε_X u)-y=∂ε_Y(v) with ε_Y(v) normalized; it uses only the stated hypothesis, including at n=0. The two cited definition nodes (def-weil-pbc-simplicial-object, def-weil-pbc-simplicial-set) define exactly what is used, and every step is genuinely elementary. No new nodes. There is no repair note, so the re-split rules do not apply. Statement and blueprint route are unchanged, there is no SGA citation, and no tool_uses are needed. The DAG has no duplicate: the injectivity sibling, the free-homotopy node and the parent are all distinct. Small case X=0, Y constant ℤ: the hypothesis fails, which is consistent. Advisory: the report lists citations.json and search-*.txt files that are not in the commit. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.FreeNormalizedHomologySurjectivityTransfer",
+  "declaration": "AlgebraicTopology.free_normalized_homology_surjectivity_transfer",
+  "file": "lean/Sheaf/AlgebraicTopology/FreeNormalizedHomologySurjectivityTransfer.lean",
+  "statement": "theorem free_normalized_homology_surjectivity_transfer {X Y : SimplicialObject AddCommGrpCat.{u}} (f : X ⟶ Y) : (whiskerLeft X AddCommGrpCat.adj.counit ≫ f = whiskerRight (whiskerRight f (forget AddCommGrpCat)) AddCommGrpCat.free ≫ whiskerLeft Y AddCommGrpCat.adj.counit) ∧ (∀ (n : ℕ) (y : ((normalizedMooreComplex AddCommGrpCat).obj Y).cycles n), ∃ z : ((normalizedMooreComplex AddCommGrpCat).obj ((Y ⋙ forget AddCommGrpCat) ⋙ AddCommGrpCat.free)).cycles n, (Subobject.arrow (NormalizedMooreComplex.objX ((Y ⋙ forget AddCommGrpCat) ⋙ AddCommGrpCat.free) n)) (((normalizedMooreComplex AddCommGrpCat).obj ((Y ⋙ forget AddCommGrpCat) ⋙ AddCommGrpCat.free)).iCycles n z) = FreeAbelianGroup.of ((Subobject.arrow (NormalizedMooreComplex.objX Y n)) (((normalizedMooreComplex AddCommGrpCat).obj Y).iCycles n y)) - FreeAbelianGroup.of (0 : Y _⦋n⦌) ∧ (((normalizedMooreComplex AddCommGrpCat).map (whiskerLeft Y AddCommGrpCat.adj.counit)).f n) (((normalizedMooreComplex AddCommGrpCat).obj ((Y ⋙ forget AddCommGrpCat) ⋙ AddCommGrpCat.free)).iCycles n z) = ((normalizedMooreComplex AddCommGrpCat).obj Y).iCycles n y) ∧ (∀ n : ℕ, Function.Surjective (HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat).map (whiskerRight (whiskerRight f (forget AddCommGrpCat)) AddCommGrpCat.free)) n) → Function.Surjective (HomologicalComplex.homologyMap ((normalizedMooreComplex AddCommGrpCat).map f) n))",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31019ab7f",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Read node, Stacks 08P2 place, Mathlib MooreComplex (objX ⊤/positive-face kernels, objD = δ0 restriction, ChainComplex.of so ∂0=0), Grp/Adjunctions free/adj counit. Lean: X Y : SimplicialObject AddCommGrpCat.{u}, f arbitrary; conj1 = evaluation square f∘ε_X = ε_Y∘F(Uf) in correct diagrammatic order; conj2 ∀ n, ∀ normalized cycle y, ∃ cycle z of N(F(UY)) whose ambient image is exactly of y - of 0 (pinned via monic inclusions) and N(ε_Y) z = y; conj3 same-degree surjectivity implication on homologyMap. Edge cases n=0, y=0, X=0/Y=ℤ, id OK. Node unchanged vs side-live except lean record; lean.statement verbatim in file; stmt_deps (simplicial-object, simplicial-set Mathlib nodes) exact; no new defs, no duplicate, docstrings with source place/blueprint and 4 proof steps; sorry only; report has both sections. No compile rerun (per instruction), no fixes."
+ }
+}

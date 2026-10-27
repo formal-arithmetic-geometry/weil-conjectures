@@ -1,0 +1,227 @@
+{
+ "id": "lem-pur-intrinsic-associator-shift-square",
+ "kind": "statement",
+ "title": "Intrinsic normalized scalar associators commute with integer shifts",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and an arbitrary scheme $Y$, with the universes of $Y$ and $\\Omega$ independent. Let $I$ be the directed poset of finite coefficient subfields of $\\Omega$ [def-weil-finite-subextension-directed-set]. Use the specified small coefficient models, the intrinsic raw rational categories $C_E=D^b_c(Y,E)$ [def-weil-rationalization-karoubi], and the datum-free stage system of [lem-general-algebraically-closed-coefficient-stages]. For $E\\le L$ write $T_{EL}:C_E\\to C_L$ for its actual scalar transition and $\\sigma_{EL,n,K}:T_{EL}(K[n])\\xrightarrow{\\sim}(T_{EL}K)[n]$ for its uniquely integral-image-normalized coherent integer-shift comparison. For $E\\le L\\le M$ let $a_{ELM}:T_{LM}T_{EL}\\xrightarrow{\\sim}T_{EM}$ be the specified tensor associator. Then for every $n\\in\\mathbf Z$ and $K\\in C_E$,\n$$\\sigma_{EM,n,K}\\circ a_{ELM,K[n]}=a_{ELM,K}[n]\\circ\\sigma_{LM,n,T_{EL}K}\\circ T_{LM}(\\sigma_{EL,n,K}).$$\nThe equality is in $C_M$ and uses these precise associators and comparisons, including when indices repeat. Equivalently the hom natural transformation of $a_{ELM}$ commutes with integer shifts, with the composite comparison on $T_{LM}T_{EL}$ and the specified comparison on $T_{EM}$. No finite-field datum, base-field structure on $Y$, noetherian hypothesis, or Karoubi completion is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "Retained order-1462 common-stage shift clause, scalar associator compatibility required to shift a representative independently of its common stage; live GeneralAlgebraicallyClosedCoefficients.lean:525-527 and GeneralAlgebraicallyClosedCoefficientStages.lean:538-586 (specified intrinsic associator)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages"
+ ],
+ "proof": [
+  {
+   "text": "For arbitrary finite coefficient fields and maps i,j, the ordinary derived compositor is the inverse of Functor.mapDerivedCategoryCompIso followed by Functor.mapDerivedCategoryNatIso of the ordinary tensor compositor. The proved compatibility instances in WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor and closure under composition and inverse give its integer-shift square. This uses the already exact ordinary scalar extensions; no separate tensor-generator calculation is needed.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Retained order-1462 common-stage shift clause, scalar associator compatibility required to shift a representative independently of its common stage; live GeneralAlgebraicallyClosedCoefficients.lean:525-527 and GeneralAlgebraicallyClosedCoefficientStages.lean:538-586 (specified intrinsic associator)."
+   }
+  },
+  {
+   "text": "Use integralScalarCommShift_existsUnique at arbitrary coefficient maps. Its component normalization, multiplied by the ordinary-to-completed comparison, says that this comparison commutes with integer shifts. The image of sfIntegralScalarComp under the full target inclusion is the conjugated ordinary compositor, by sfIntegralScalarComp_existsUnique. Whiskering, composition and inverse preserve CommShift; faithfulness of the inclusion reflects it. Equality induction on a variable endpoint coefficient map gives the same square after the actual composition-equality transport.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Retained order-1462 common-stage shift clause, scalar associator compatibility required to shift a representative independently of its common stage; live GeneralAlgebraicallyClosedCoefficients.lean:525-527 and GeneralAlgebraicallyClosedCoefficientStages.lean:538-586 (specified intrinsic associator)."
+   }
+  },
+  {
+   "text": "The specified rational associator is the raw localization image of this corrected integral compositor: use intrinsicRationalScalarAssociator_image from the stated normalization interface, retaining the actual coefficient-map equality transport. At shift one use the exact object equation and pure-tensor arrow equation of sfRationalScalarExtension and the defining degree-one normalization of transitionCommShift. The raw rational shift is the induced integral shift. Keep the heterogeneous endpoint equalities when composing these formulas. Both sides of the rational square become the localization of the respective integral paths, which agree by the previous step and functoriality. Every rational object has an underlying integral object, so this proves the degree-one square everywhere.",
+   "uses": [
+    "lem-pur-intrinsic-scalar-normalization-formulas",
+    "lem-general-algebraically-closed-coefficient-stages",
+    "lem-weil-scalar-extension-composition",
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Retained order-1462 common-stage shift clause, scalar associator compatibility required to shift a representative independently of its common stage; live GeneralAlgebraicallyClosedCoefficients.lean:525-527 and GeneralAlgebraicallyClosedCoefficientStages.lean:538-586 (specified intrinsic associator)."
+   }
+  },
+  {
+   "text": "For any natural transformation between coherent integer-shift functors, CommShiftCore holds at zero and is closed under addition. Compatibility at n implies compatibility at -n: apply the faithful shift by n, expand the addition equations at -n+n=0, use naturality of the shift-addition comparison, and cancel the invertible comparisons. Integer induction using the degree-one and degree-minus-one squares gives CommShiftCore at every integer; apply NatTrans.CommShift.of_core.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+    "place": "Retained order-1462 common-stage shift clause, scalar associator compatibility required to shift a representative independently of its common stage; live GeneralAlgebraicallyClosedCoefficients.lean:525-527 and GeneralAlgebraicallyClosedCoefficientStages.lean:538-586 (specified intrinsic associator)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-intrinsic-scalar-normalization-formulas",
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
+  "place": "K3: ordinary exact-derived compositor, faithful reflection of the normalized intrinsic integral compositor, localization of its degree-one square using the stated rational associator image, and coherent integer induction. No new unproved lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sfRationalScalarComp|rationalConstructibleScalarComp|scalarAssociator",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: the raw intrinsic completed coefficient categories and their chosen normalized comparisons are project-specific; ModuleCat.extendScalars_assoc is an ordinary module associativity equation, not this shift square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized completed integral scalar extension associators descend through raw rationalization to natural transformations commuting with all integer shifts",
+   "results": "8 hits: ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', CategoryTheory.NatTrans.CommShift₂Int, Algebra.normalizedTrace_trans, Algebra.normalizedTrace, Polynomial.natDegree_integralNormalization, Polynomial.integralNormalization_map, normalize_associated",
+   "date": "2026-10-27",
+   "verdict": "no match: the raw intrinsic completed coefficient categories and their chosen normalized comparisons are project-specific; ModuleCat.extendScalars_assoc is an ordinary module associativity equation, not this shift square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.commShiftIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.commShiftIso'",
+   "date": "2026-10-27",
+   "verdict": "no match: the raw intrinsic completed coefficient categories and their chosen normalized comparisons are project-specific; ModuleCat.extendScalars_assoc is an ordinary module associativity equation, not this shift square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scalar extension tensor compositor is compatible with uniquely normalized shifts on intrinsic bounded constructible derived complete categories",
+   "results": "8 hits: CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Functor.commShiftOfLocalization, CategoryTheory.Shift.linear_of_localization, CategoryTheory.LocalizerMorphism.commShift",
+   "date": "2026-10-27",
+   "verdict": "no match: the raw intrinsic completed coefficient categories and their chosen normalized comparisons are project-specific; ModuleCat.extendScalars_assoc is an ordinary module associativity equation, not this shift square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor associator for intrinsic rational constructible scalar extension on any scheme commutes with the integral image normalized coherent integer shift comparisons",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc",
+   "date": "2026-10-27",
+   "verdict": "no match: the raw intrinsic completed coefficient categories and their chosen normalized comparisons are project-specific; ModuleCat.extendScalars_assoc is an ordinary module associativity equation, not this shift square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The intrinsic rational constructible scalar tensor associator on an arbitrary scheme commutes with its integral image normalized integer shifts",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom",
+   "date": "2026-10-27",
+   "verdict": "no match: generic functor associators, shift comparisons and monoidal sheaf categories do not give the fixed intrinsic scalar associator or its integral-image normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sfRationalScalarComp\"",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic functor associators, shift comparisons and monoidal sheaf categories do not give the fixed intrinsic scalar associator or its integral-image normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "sfRationalScalarComp|sfIntegralScalarComp|integralOrdinaryDerivedScalarComp",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic functor associators, shift comparisons and monoidal sheaf categories do not give the fixed intrinsic scalar associator or its integral-image normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intrinsic completed rational constructible coefficient extension associators commute with normalized shifts",
+   "results": "8 hits: CategoryTheory.NatTrans.CommShift.associator, CategoryTheory.Quotient.LiftCommShift.iso, CategoryTheory.NatTrans.CommShiftCore.shift_comm_assoc, CategoryTheory.Functor.commShiftOfLocalization.iso, CochainComplex.shiftFunctorComm_hom_app_f, CategoryTheory.shiftFunctorComm, CategoryTheory.shiftComm_hom_comp_assoc, CategoryTheory.NatTrans.shift_app_comm_assoc",
+   "date": "2026-10-27",
+   "verdict": "no match: generic functor associators, shift comparisons and monoidal sheaf categories do not give the fixed intrinsic scalar associator or its integral-image normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The natural tensor compositor on raw rational derived complete sheaves is a morphism of coherent integer shift functors",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CategoryTheory.Sheaf.monoidalCategory, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategoryLightCondMod, CategoryTheory.Tor, CategoryTheory.sheafToPresheaf_μ",
+   "date": "2026-10-27",
+   "verdict": "no match: generic functor associators, shift comparisons and monoidal sheaf categories do not give the fixed intrinsic scalar associator or its integral-image normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-general-pair-shift-normalization",
+  "date": "2026-10-27",
+  "group": "NR"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 common-stage shift clause, scalar associator compatibility required to shift a representative independently of its common stage; live GeneralAlgebraicallyClosedCoefficients.lean:525-527 and GeneralAlgebraicallyClosedCoefficientStages.lean:538-586 (specified intrinsic associator).",
+   "via": [
+    "lem-pur-general-pair-shift-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-intrinsic-associator-shift-square",
+  "worker": "stage1",
+  "summary": "Kept the statement and fixed intrinsic stages. One new statement-only node records the actual ordinary/integral/rational component normalization formulas; the item proves the shift square by a termwise ordinary calculation, faithful inclusion, and localization with normalization uniqueness. No finite-field presentation bridge or geometric hypothesis is used.",
+  "blueprint": "Retained order-1462 common-stage shift clause: compatibility of shifting a representative with scalar associator transport. Steps 1-3 realize exact ordinary tensor composition in def-sfb-derived-extend-comp-iso.proof.md on the intrinsic integral categories; steps 4-5 realize its normalized raw rational image for the specified associators."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NC-481ccaf42",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-481ccaf42 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the blueprint def-sfb-derived-extend-comp-iso proof and the Lean specifications the new node puts into words. The new node's three formulas are exactly these specifications. Formula 1 is sfIntegralScalarComp_existsUnique (SfScalarExtensionComposition.lean:818-850): χ_LM⁻¹;C(χ_EL⁻¹);α;χ_EM. Formula 2 is integralScalarCommShift_existsUnique with p=0 (Stages:255-300). Formula 3, a=Q_M(b) with the equality cast, is sfRationalScalarComp_existsUnique (:977-1017) together with associator/scalarAssociator (Stages:538-575). The directions of χ and the right-to-left composition order were checked. The node never mentions an associator shift square, so it does not restate the item (D1/D2 OK). The item's proof checks. Step 2: the termwise associator at P[n] is the one at P^{r+n}, with the same (-1)^n sign on both sides; the factorization lemma (2) and localization lemma (3) give the derived equality; ordinary extension is exact because R_L≅R_E^d. Step 3: the commshift whiskering lemma applied to [n], then cancel β_M and use faithfulness of I_M. Step 4: the types of σ̂ check, the zero and add equations hold by q cancellation, the degree-1 component is Q_L(τ_1), and the uniqueness in the stages lemma gives σ̂=σ. Step 5: I did the computation in full; both paths reduce to q_M∘Q_M(…) and agree by step 3. Repeated indices keep their eqToIso casts, and no hypothesis on Y is used. Duplicate search (rg -L over the snapshot): lem-route-integral-transition-comm-shift-exists-unique is only for a finite-field datum, and the fd-* nodes need a Noetherian base with ℓ invertible, so there is no duplicate. Off-unit proof tools are Mathlib leaves only. FIX (B3): the new node used ordinary extension M⊗_{R_F}R_L and its termwise derived functor without citations. I added [def-pur-sheaf-tensor-product] and [lem-weil-pbc-exact-functor-derived-factorization] to the statement and stmt_deps; this creates no cycle and changes no mathematics.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntrinsicAssociatorShiftSquare",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.associator_commShift",
+  "file": "lean/Sheaf/Paper/IntrinsicAssociatorShiftSquare.lean",
+  "statement": "theorem associator_commShift (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Y : AlgebraicGeometry.Scheme.{u}) (E L M : Padic.FiniteCoefficientFields l Ω) (h : E ≤ L) (k : L ≤ M) : NatTrans.CommShift (associator l Ω Y E L M h k).hom ℤ",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f42e22db2",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read the node, the snapshot module and report, the live GeneralAlgebraicallyClosedCoefficientStages (Stage, transition, transitionCommShift and its exists-unique spec, scalarAssociator, associator, stageSystem) and Mathlib Functor.CommShift.comp / NatTrans.CommShift. NatTrans.CommShift (associator l Ω Y E L M h k).hom ℤ unfolds to T_LM(σ_EL)≫σ_LM≫a_K[n] = a_{K[n]}≫σ_EM for all n and K, which is the node's displayed equation in the form the node itself names as equivalent. The shifts are the uniquely integral-image-normalized transitionCommShift, the composite uses Mathlib comp, and the associator keeps its coefficient-law eqToIso. Universes u and v are independent; ≤ is non-strict, so repeated indices are covered; there is no finite-field, noetherian or Karoubi hypothesis. The node differs from live only in lean, and lean.statement is verbatim in the file. Docstrings carry the source and blueprint tags and the five proof steps; the only proof is sorry and there are no definitions. Both report sections are present. No duplicate: the private AlgebraicallyClosedCoefficients.associator_commShift is on the older datum category and transitionIso_commShift is a different map. Compile not repeated, per policy. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261027T123501-L-2305977",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

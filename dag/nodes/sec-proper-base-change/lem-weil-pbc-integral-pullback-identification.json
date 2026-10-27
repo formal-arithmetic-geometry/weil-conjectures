@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-integral-pullback-identification",
+ "kind": "statement",
+ "title": "Normalized ordinary integral pullback identification",
+ "statement": "Let l be prime, E/Q_l finite, and h:U→T an arbitrary morphism of schemes. For the published quotient-normalized coefficient restriction and the ordinary module and derived pullbacks [def-weil-pbc-proper-integral-ordinary-data, def-sf-ordinary-integral-pullback-construction, def-sf-ordinary-integral-derived-pullback], there exists a PbcProperIntegralPullbackIdentification l E h. Its module isomorphism preserves the actual adjunction-unit sections and its derived isomorphism satisfies the specified universal computation-counit equation on every flat-term K-flat representative. This asserts only the ordinary pullback identification; it contains no completed pullback isomorphism and no completion-map equation.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4), Remark 6.8.15; Stacks sites-cohomology.tex lemma-derived-limit-is-ok (Tag 0941), proetale.tex Tag 099N(5)"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-pbc-proper-integral-ordinary-data",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-sf-ordinary-integral-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Lift the published coefficient comparison to commutative ring sheaves without changing its normalization. Project the completed direct-image coefficient map to every finite quotient. The inverse-image adjunction reduces each projection to the constant-section direct-image map, and naturality of that map under the normalized ULift quotient isomorphism gives the square. Uniqueness of the completed direct-image map identifies the conjugate with the recorded ordinary coefficient map. Forget commutativity to get the actual ring-sheaf square.",
+   "uses": [
+    "def-sfb-integral-completed-coefficient-transport",
+    "lem-weil-pbc-integral-coefficient-completeness-transport",
+    "def-sf-ordinary-integral-pullback-construction",
+    "lem-pur-normalized-integral-pullback-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ring square gives an identity-on-sections isomorphism between the composites of module direct image and coefficient restriction. Construct inverse coefficient restriction equivalences using the sectionwise identity round trips. Apply the existing adjunction-square isomorphism lemma to the specified ordinary and actual module adjunctions, then invert its left comparison. Evaluate the adjunction-square unit identity on sections and cancel the comparison with its inverse to prove module_unit.",
+   "uses": [
+    "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-sf-ordinary-integral-pullback-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Actual module pullback is exact, and coefficient restriction is an exact equivalence. The module comparison therefore makes the ordinary module pullback exact as well, by reflection of finite limits and finite colimits through that equivalence. Identify each specified universal left-derived pullback with the derived functor of its exact module functor. Derive the module square using the exact-functor composition isomorphisms and conjugate by these universal comparisons. Naturality and the two universal computation-counit equations give the required derived_counit equation on every complex, hence on the required flat-term K-flat complexes. Package all four fields.",
+   "uses": [
+    "def-sf-ordinary-integral-derived-pullback",
+    "def-weil-pbc-four-corners",
+    "def-sfb-integral-completed-coefficient-transport",
+    "def-weil-pbc-proper-integral-ordinary-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-completed-coefficient-transport",
+  "lem-weil-pbc-integral-coefficient-completeness-transport",
+  "def-sf-ordinary-integral-pullback-construction",
+  "lem-pur-normalized-integral-pullback-tower",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-sf-ordinary-integral-derived-pullback",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-proper-integral-ordinary-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Bhatt--Scholze Lemma 6.5.9(4), Remark 6.8.15; Stacks 03D2 and 06YY. K9 proves the quotient-normalized coefficient square and the adjunction-unit equation, then uses exactness to derive the comparison and its counit equation on all complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a ring sheaf isomorphism restriction of scalars identifies the derived pullback and transports the strict quotient tower Roos cone and completion augmentation",
+   "results": "msearch returned 8 results: ordinary ModuleCat, SheafOfModules and PresheafOfModules restriction of scalars, restriction objects, reflection of isomorphisms and the scalar pseudofunctor. None provides the normalized comparison.",
+   "date": "2026-10-27",
+   "verdict": "Basic scalar restriction only; does not state this coefficient-normalized assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 results including leftAdjointUniq and its unit and counit equations.",
+   "date": "2026-10-27",
+   "verdict": "Useful tool for the module isomorphism; does not give the coefficient square, derived counit or normalized tower comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a ring sheaf isomorphism commutes with derived pullback and the strict inverse limit completion unit",
+   "results": "8 results about pullback of free modules, pullbackObjUnitToUnit and the composite adjunction conjugate.",
+   "date": "2026-10-27",
+   "verdict": "No matching derived or strict tower comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|strictRoos|completion.*[Aa]ugmentation; restrictScalars.*[Ii]so|leftDerivedNatIso|rightDerivedNatIso",
+   "results": "No Mathlib hits for Roos/strict completion augmentation. The second search finds abstract derived-functor comparison isomorphisms and basic scalar-restriction isomorphisms. Local library search finds the existing interfaces and the parent obligation but no theorem for this individual normalization step. Blueprint searches for integral pullback identification, strict model comparison and completion matching each return zero matches.",
+   "date": "2026-10-27",
+   "verdict": "The existing general tools do not directly state this assertion; no duplicate node found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an abelian category with exact countable products the shifted mapping cone of one minus transition computes the derived inverse limit of a strict tower with its zero-coordinate augmentation",
+   "results": "Eight general cochain mapping-cone and complex-limit formulas; no normalized strict Roos or derived-limit comparison.",
+   "date": "2026-10-27",
+   "verdict": "These component formulas do not supply the required strict normalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProperIntegralStrictModelComparison",
+  "date": "2026-10-27",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Integral-lattice proof paragraph: identification of ordinary integral pullback and the actual quotient-tower completion comparison; original ordinary-input proof steps 5–7. Parent comparison step(s) 1.",
+   "via": [
+    "lem-weil-pbc-proper-integral-strict-model-comparison",
+    "lem-weil-pbc-proper-integral-ordinary-inputs",
+    "lem-weil-pbc-realization-completed-mate",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPullbackIdentificationExists",
+  "file": "lean/Sheaf/Paper/IntegralPullbackIdentificationExists.lean",
+  "declaration": "WeilConjectures.pbc_integral_pullback_identification_exists",
+  "statement": "theorem pbc_integral_pullback_identification_exists\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :\n    Nonempty (PbcProperIntegralPullbackIdentification l E h)",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T222752-L-693452",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261027T012901-L-2343798",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

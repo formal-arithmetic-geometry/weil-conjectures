@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-algebraic-stack-total-equalizers",
+ "kind": "statement",
+ "title": "Equalizers in the total category of an algebraic stack",
+ "statement": "Fix the universes and small-skeleton convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], and let $\\mathcal Z$ be an algebraic stack over $S$ [def-sfb-algebraic-moduli-stack], viewed as its total category fibred in groupoids over $\\mathit{Sch}/S$ [def-sfb-stable-pointed-moduli-groupoids]. For every pair of parallel arrows $a,b:z\\to z'$ in this total category, including arrows with different underlying scheme maps, there is an arrow $e:w\\to z$ such that $ae=be$ and every arrow $t\\to z$ equalizing $a,b$ factors uniquely through $e$. Thus the total category $\\mathcal Z$ has equalizers. No separatedness or finiteness hypothesis on the diagonal is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WY, lemma-fibre-products, (2) and (3): representable Isom presheaves imply equalizers; in particular algebraic stacks have equalizers."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids"
+ ],
+ "proof": [
+  {
+   "text": "Write $U=p(z)$, $V=p(z\\prime)$, $f=p(a)$ and $g=p(b)$. Construct the scheme equalizer using [def-pc-fibre-product]: put $P=V\\times_S V$ and $W=U\\times_{(f,g),P,\\Delta_V}V$. Let $j:W\\to U$ be the first projection. The pullback equation gives $fj=gj$. If $r:T\\to U$ satisfies $fr=gr$, the pair $(r,fr)$ gives a unique map $T\\to W$ above $r$; the second component of any such map must equal $fr$. Thus $j$ is the equalizer of $f,g$ among $S$-schemes, with no separatedness assumption.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, proof of (2), first reduction: equalizer of the underlying scheme maps; scheme construction from Tag 01JO."
+   }
+  },
+  {
+   "text": "Choose a lift $c:x\\to z$ of $j:W\\to U$ using the lifting axiom of [def-sfb-stable-pointed-moduli-groupoids]. Put $A=ac$, $B=bc$, so $p(A)=p(B)=fj$. If $h:t\\to z$ satisfies $ah=bh$, its base map factors uniquely as $p(h)=jr$ by step 1. The unique-factorization axiom of the same definition gives a unique $d:t\\to x$ over $r$ with $cd=h$, and then $Ad=Bd$. Conversely $Ad=Bd$ implies $a(cd)=b(cd)$. Therefore composing with $c$ identifies equalizing arrows for $A,B$ with equalizing arrows for the original $a,b$, preserving uniqueness.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, proof of (2), restriction to W and reduction to equal underlying maps."
+   }
+  },
+  {
+   "text": "The unique-factorization axiom of [def-sfb-stable-pointed-moduli-groupoids], applied to $A,B$ over the same base map, gives $i:x\\to x$ over $1_W$ with $Ai=B$. Applying it in reverse gives $k$ with $Bk=A$. Uniqueness applied to $Aik=A$ and $Bki=B$ gives $ik=ki=1_x$, so $i$ is an automorphism in the fibre over $W$. For every $d:t\\to x$, the equality $Ad=Bd$ is $Ad=Aid$. Both $d$ and $id$ lie over the same map to $W$, so the same unique-factorization axiom applied to $A$ implies $d=id$. The converse follows by composition. This reduces the problem to identity versus $i$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, proof of (2), unique automorphism i with a i=b."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-stack-isom-space-locally-finite-type] with $\\mathcal X=\\mathcal Z$, $T=W$ and both objects equal to $x$. It gives an algebraic space $q:G=\\operatorname{Aut}_{\\mathcal Z,W}(x)\\to W$ representing the presheaf $T\\mapsto\\operatorname{Aut}(x|_T)$. We use only its representability conclusion. Under this natural representation, $1_x$ and $i$ give sections $e,\\sigma:W\\to G$. For a map $r:T\\to W$, $er$ and $\\sigma r$ represent $1_{x|_T}$ and $i|_T$ respectively. All hypotheses hold because $x$ is an object of the given algebraic stack over the scheme $W$. No separatedness or finite-diagonal hypothesis is introduced.",
+   "uses": [
+    "lem-sfb-stack-isom-space-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, proof of (3): representable Isom presheaves, proved there using bootstrap.tex Tag 04TB (lemma-quotient-stack-isom) and algebraic.tex Tag 04T5 (lemma-stack-presentation). Existing stronger node: stacks-morphisms.tex Tag 04XR."
+   }
+  },
+  {
+   "text": "By step 4, $G$ is an algebraic space over $W$, so by [def-trf-algebraic-space] its diagonal $G\\to G\\times_WG$ (product of sheaves on $W$-schemes) is representable: its pullback along any map $h_D\\to G\\times_WG$ from a $W$-scheme $D$ is represented by a scheme. Take $D=W$ and the map $(e,\\sigma):h_W\\to G\\times_WG$; the pullback is a scheme $M$ with structure map $m:M\\to W$. For a $W$-scheme $r:T\\to W$ the $T$-points of this pullback are the $g\\in G(T)$ with $(g,g)=(er,\\sigma r)$, a single point if $er=\\sigma r$ and none otherwise. Thus $M$ represents $W\\times_{e,G,\\sigma}W$: a $T$-point of the latter is a pair $r_1,r_2:T\\to W$ with $er_1=\\sigma r_2$, and applying $q$ (with $qe=q\\sigma=1_W$) gives $r_1=r_2$. Since $er$ and $\\sigma r$ represent $1_{x|_T}$ and $i|_T$ (step 4), $l\\mapsto ml$ is a bijection from maps $T\\to M$ to maps $r:T\\to W$ with $i|_T=1_{x|_T}$; in particular $m$ is a monomorphism. This is the scheme-base case of Tag 03KP (lemma-section-immersion), proved directly from the representable diagonal, with no immersion or separatedness assertion.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, proof of (2), M=U times_G U; spaces-morphisms.tex Tag 03KP (lemma-section-immersion), (1). Its needed special case is proved here from the representable diagonal."
+   }
+  },
+  {
+   "text": "Choose a lift $v:x_M\\to x$ of $m$. By step 5, $i|_M=1_{x_M}$, which means $iv=v$ under the cartesian pullback identification. Thus $Av=Bv$ by step 3, and $E=cv:x_M\\to z$ satisfies $aE=bE$. For any $h:t\\to z$ with $ah=bh$, step 2 supplies the unique $d:t\\to x$ over $r:p(t)\\to W$ with $cd=h$. Step 3 gives $id=d$. Factor $d$ through a chosen pullback lift $u:x|_{p(t)}\\to x$ over $r$: its comparison $t\\to x|_{p(t)}$ is an isomorphism, since both objects lie over $p(t)$ and the unique-factorization axiom gives its inverse. The identity $id=d$ therefore says $i|_{p(t)}=1$. Step 5 yields a unique $l:p(t)\\to M$ with $ml=r$. The same axiom applied to $v$ gives a unique $k:t\\to x_M$ over $l$ with $vk=d$, and $Ek=h$. For uniqueness, any $k\\prime$ with $Ek\\prime=h$ has $m p(k\\prime)=r$: the base factor through $j$ is unique by step 1. Uniqueness of factorization through $c$ gives $vk\\prime=d$, and uniqueness of $l$ then gives $p(k\\prime)=l$; uniqueness through $v$ yields $k\\prime=k$. Hence $E$ is the required equalizer in the total category.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY, proof of (2), final assertion that x restricted to M is the equalizer; explicit existence and uniqueness, then undoing both reductions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-isom-space-locally-finite-type",
+  "def-trf-algebraic-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06WY, lemma-fibre-products (2)/(3), complete scheme-equalizer, automorphism and equality-locus construction; final universal property expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A category fibred in groupoids with representable Isom sheaves over schemes has equalizers in its total category",
+   "results": "{\"t\": \"2026-10-23T22:11:10Z\", \"tool\": \"leanfinder\", \"query\": \"A category fibred in groupoids with representable Isom sheaves over schemes has equalizers in its total category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instHasEqualizers\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv\", \"AlgebraicGeometry.IsOpenImmersion.hasLimit_cospan_forget_of_left'\", \"AlgebraicGeometry.IsOpenImmersion.hasLimit_cospan_forget_of_right'\", \"CategoryTheory.regularTopology.SingleEqualizerCondition\", \"CategoryTheory.regularTopology.EqualizerCondition\"], \"digest\": \"c0d1a22b6a5c4154\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned HasEqualizers lemmas assume an existing category with suitable limits, an abelian category, or a pre-Galois category; none constructs equalizers in the total category of an algebraic stack. FiberedCategory grep found no equalizer or pullback theorem. Read the generic equalizer-from-products construction; the required binary products of this total category are not given."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total category of an algebraic stack has equalizers of arbitrary parallel arrows",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"leansearch\", \"query\": \"The total category of an algebraic stack has equalizers of arbitrary parallel arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.hasEqualizers_of_hasLimit_parallelPair\", \"CategoryTheory.Limits.HasWideEqualizers\", \"CategoryTheory.Limits.HasEqualizers\", \"CategoryTheory.NormalMonoCategory.hasLimit_parallelPair\", \"CategoryTheory.PreGaloisCategory.instHasEqualizers\", \"CategoryTheory.Limits.hasWideEqualizers_of_hasLimit_parallelFamily\", \"CategoryTheory.Limits.hasEqualizers_of_hasPullbacks_and_binary_products\", \"CategoryTheory.Abelian.hasEqualizers\"], \"digest\": \"578743676a60d467\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned HasEqualizers lemmas assume an existing category with suitable limits, an abelian category, or a pre-Galois category; none constructs equalizers in the total category of an algebraic stack. FiberedCategory grep found no equalizer or pullback theorem. Read the generic equalizer-from-products construction; the required binary products of this total category are not given."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasEqualizers\", \"Fibered\"",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasEqualizers\\\", \\\"Fibered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned HasEqualizers lemmas assume an existing category with suitable limits, an abelian category, or a pre-Galois category; none constructs equalizers in the total category of an algebraic stack. FiberedCategory grep found no equalizer or pullback theorem. Read the generic equalizer-from-products construction; the required binary products of this total category are not given."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer.*stack|stack.*equalizer|fibred|fibered",
+   "results": "{\"t\": \"2026-10-23T22:11:08Z\", \"tool\": \"grep\", \"query\": \"equalizer.*stack|stack.*equalizer|fibred|fibered\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/Fibered.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\", \"Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean\"], \"digest\": \"3ecdb86467e0115a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned HasEqualizers lemmas assume an existing category with suitable limits, an abelian category, or a pre-Galois category; none constructs equalizers in the total category of an algebraic stack. FiberedCategory grep found no equalizer or pullback theorem. Read the generic equalizer-from-products construction; the required binary products of this total category are not given."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|HasEqualizers|HasPullbacks",
+   "results": "{\"t\": \"2026-10-23T22:11:42Z\", \"tool\": \"grep\", \"query\": \"equalizer|HasEqualizers|HasPullbacks\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned HasEqualizers lemmas assume an existing category with suitable limits, an abelian category, or a pre-Galois category; none constructs equalizers in the total category of an algebraic stack. FiberedCategory grep found no equalizer or pullback theorem. Read the generic equalizer-from-products construction; the required binary products of this total category are not given."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizers in the total category of a stack with algebraic space diagonal are represented by the locus where two isomorphisms agree",
+   "results": "{\"t\": \"2026-10-23T22:11:46Z\", \"tool\": \"leanfinder\", \"query\": \"Equalizers in the total category of a stack with algebraic space diagonal are represented by the locus where two isomorphisms agree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.regularTopology.MapToEqualizer\", \"CategoryTheory.regularTopology.mapToEqualizer\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"CategoryTheory.Equalizer.firstObjEqFamily\", \"CategoryTheory.Equalizer.Presieve.compatible_iff\", \"CategoryTheory.regularTopology.mapToEqualizer_eq_comp\", \"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv\", \"AlgebraicGeometry.PresheafedSpace.GlueData.vPullbackConeIsLimit\"], \"digest\": \"f3bf80486b670b44\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned HasEqualizers lemmas assume an existing category with suitable limits, an abelian category, or a pre-Galois category; none constructs equalizers in the total category of an algebraic stack. FiberedCategory grep found no equalizer or pullback theorem. Read the generic equalizer-from-products construction; the required binary products of this total category are not given."
+  },
+  {
+   "tool": "grep",
+   "query": "equalizer|HasEqualizers|HasPullbacks",
+   "results": "{\"t\": \"2026-10-23T22:38:53Z\", \"tool\": \"grep\", \"query\": \"equalizer|HasEqualizers|HasPullbacks\", \"sub\": \"CategoryTheory/FiberedCategory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general equalizer existence or scheme-level limits do not construct equalizers in the total category of an algebraic stack; no algebraic-stack theorem is returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A groupoid fibration over schemes with algebraic space representable diagonal has equalizers",
+   "results": "{\"t\": \"2026-10-23T22:38:53Z\", \"tool\": \"leansearch\", \"query\": \"A groupoid fibration over schemes with algebraic space representable diagonal has equalizers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instHasEqualizers\", \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\", \"CategoryTheory.Abelian.hasEqualizers\", \"CategoryTheory.Limits.HasEqualizer\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"AlgebraicGeometry.LocallyRingedSpace.instHasCoequalizers\", \"AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"HasFibers.Fib.hom_ext_iff\"], \"digest\": \"c8f1b0badc722dba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general equalizer existence or scheme-level limits do not construct equalizers in the total category of an algebraic stack; no algebraic-stack theorem is returned."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasEqualizers\", \"Fibered\"",
+   "results": "{\"t\": \"2026-10-23T22:38:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasEqualizers\\\", \\\"Fibered\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general equalizer existence or scheme-level limits do not construct equalizers in the total category of an algebraic stack; no algebraic-stack theorem is returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total category of an algebraic stack has equalizers of arbitrary parallel morphisms",
+   "results": "{\"t\": \"2026-10-23T22:38:54Z\", \"tool\": \"leanfinder\", \"query\": \"The total category of an algebraic stack has equalizers of arbitrary parallel morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instHasEqualizers\", \"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.instHasFiniteLimitsScheme\", \"CategoryTheory.Limits.HasEqualizers\", \"LightProfinite.instPreregular\", \"CategoryTheory.Limits.hasEqualizers_of_hasLimit_parallelPair\", \"CategoryTheory.Over.instHasEqualizers\", \"Profinite.instPreregular\"], \"digest\": \"932a5fad3b85919f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general equalizer existence or scheme-level limits do not construct equalizers in the total category of an algebraic stack; no algebraic-stack theorem is returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizers for a category fibred in groupoids with representable isomorphism sheaves",
+   "results": "{\"t\": \"2026-10-23T22:39:39Z\", \"tool\": \"leanfinder\", \"query\": \"Equalizers for a category fibred in groupoids with representable isomorphism sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv\", \"CategoryTheory.PreGaloisCategory.fiberEqualizerEquiv_symm_ι_apply\", \"CategoryTheory.regularTopology.SingleEqualizerCondition\", \"CategoryTheory.regularTopology.EqualizerCondition\", \"CategoryTheory.regularTopology.mapToEqualizer\", \"CategoryTheory.regularTopology.MapToEqualizer\", \"CategoryTheory.regularTopology.EqualizerCondition.mk'\", \"CategoryTheory.Equalizer.Presieve.Arrows.sheaf_condition\"], \"digest\": \"b2b9dd14c1b3a4ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general equalizer existence or scheme-level limits do not construct equalizers in the total category of an algebraic stack; no algebraic-stack theorem is returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every section of a morphism of algebraic spaces is representable by schemes",
+   "results": "{\"t\": \"2026-10-23T22:55:18Z\", \"tool\": \"leanfinder\", \"query\": \"Every section of a morphism of algebraic spaces is representable by schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.IsSeparated\", \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.Scheme.Over\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated\"], \"digest\": \"6186469a908a8e73\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme pullbacks or Zariski-local representability using an open cover; none states representability of a section of an arbitrary algebraic space. The needed special case is instead an elementary diagonal pullback in step 5."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsSection\"",
+   "results": "{\"t\": \"2026-10-23T22:55:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsSection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme pullbacks or Zariski-local representability using an open cover; none states representability of a section of an arbitrary algebraic space. The needed special case is instead an elementary diagonal pullback in step 5."
+  },
+  {
+   "tool": "grep",
+   "query": "section|IsSection|Representable",
+   "results": "{\"t\": \"2026-10-23T22:55:45Z\", \"tool\": \"grep\", \"query\": \"section|IsSection|Representable\", \"sub\": \"AlgebraicGeometry/AlgebraicSpace\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme pullbacks or Zariski-local representability using an open cover; none states representability of a section of an arbitrary algebraic space. The needed special case is instead an elementary diagonal pullback in step 5."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of morphisms between algebraic spaces are representable by schemes",
+   "results": "{\"t\": \"2026-10-23T22:55:46Z\", \"tool\": \"leansearch\", \"query\": \"Sections of morphisms between algebraic spaces are representable by schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.QuasiSeparated.mk\"], \"digest\": \"4d635aa955be522c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme pullbacks or Zariski-local representability using an open cover; none states representability of a section of an arbitrary algebraic space. The needed special case is instead an elementary diagonal pullback in step 5."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space|section.*representable|representable.*section",
+   "results": "{\"t\": \"2026-10-23T22:56:09Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|algebraic space|section.*representable|representable.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme pullbacks or Zariski-local representability using an open cover; none states representability of a section of an arbitrary algebraic space. The needed special case is instead an elementary diagonal pullback in step 5."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of any algebraic space over a scheme has scheme-representable base changes, so two sections have a scheme fibre product",
+   "results": "{\"t\": \"2026-10-23T22:56:10Z\", \"tool\": \"leanfinder\", \"query\": \"A section of any algebraic space over a scheme has scheme-representable base changes, so two sections have a scheme fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.instHasPullbacks\", \"AlgebraicGeometry.Scheme.Pullback.instHasPullback\", \"AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback\", \"AlgebraicGeometry.Scheme.Pullback.base_affine_hasPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.mk'\", \"AlgebraicGeometry.Scheme.canonicallyOverPullback\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint\", \"AlgebraicGeometry.Scheme.Pullback.affine_hasPullback\"], \"digest\": \"a384487737e83eac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme pullbacks or Zariski-local representability using an open cover; none states representability of a section of an arbitrary algebraic space. The needed special case is instead an elementary diagonal pullback in step 5."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-test-fibre-restriction-injectives",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison. Injective-resolution input: restriction to a test-scheme fibre preserves injectives. Geometric prerequisite for the test-fibre injective restriction: equalizers in the total category of the algebraic source stack.",
+   "via": [
+    "lem-sfb-stack-test-fibre-restriction-injectives",
+    "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-algebraic-stack-total-equalizers",
+  "worker": "stage1",
+  "summary": "Repair of D1/D2/D3: removed the dependence on the larger conjunction lem-sfb-fibred-limit-calculus, which now correctly cites this item. Wrote all five ingredients of 06WY explicitly: scheme equalizer, both reductions, Isom representability via an existing stronger node, scheme representability of the section fibre product by the algebraic-space diagonal, and the total-category universal property. No new nodes; elementary constructions are steps, not children. Statement unchanged.",
+  "blueprint": "Supporting geometric input to the test-fibre injective restriction in the inherited direct-image route: equalizers in the total category, as in blueprint.from.place. Read the current latest six-functors-basics/sk-thm-sf-ctf-stability direct-images proof (3); this reuses an existing lower-level tool and changes no unit step. Whole-blueprint searches for total category, equalizers, fibred groupoids and 06WY found no equivalent imported node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-6b0b3c566",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-6b0b3c566 (reviewer sub-agent of L); spot-checked: FIX: one fault, in step 5. I read Stacks 06WY (stacks-sheaves.tex 2647-2694) and 03KP in full, with all cited statements. The statement is unchanged and matches 06WY(3). Small cases checked: a scheme as a discrete fibred groupoid, a=b, and BG with id against a nontrivial automorphism (M=∅). Steps 1-3 and 6 are correct elementary uses of the fibred-groupoid axiom of def-sfb-stable-pointed-moduli-groupoids: scheme equalizer, the reduction to id against i, and existence and uniqueness checked in order (j monic, factor through c, m monic, factor through v). Step 4 cites the statement of lem-sfb-stack-isom-space-locally-finite-type (same unit, arbitrary algebraic stack, Aut clause). This repairs the earlier D1/D2/D3 return: the 06WY argument is now written out and no longer comes from the conjunction, which now cites the item. Fault E4: step 5 pulled back the diagonal along (e·pr1, σ·pr2) from W×_S W. Since G is an algebraic space over W, that map does not land in G×_W G, and def-trf-algebraic-space does not give the diagonal over S. I rewrote step 5 to pull back Δ_{G/W} along (e,σ): h_W→G×_W G, which yields the scheme M with points {r: er=σr}; it also states m monic. Its uses are now [def-trf-algebraic-space] and proof_deps is unchanged. No cycle: the closure of the Isom node excludes the item. rg -L found no duplicate node. No SGA, no tool_uses. Batch 5: def-trf-algebraic-space is a general definition, and the Isom node is a general stack lemma whose flagged path only reaches that definition. Both lie outside the assumed trace-formula and Poincaré statements, so I accept them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicStackTotalEqualizers",
+  "declaration": "CategoryTheory.hasEqualizers_of_isAlgebraicModuliStack",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicStackTotalEqualizers.lean",
+  "statement": "theorem hasEqualizers_of_isAlgebraicModuliStack {S : AlgebraicGeometry.Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) : HasEqualizers F.obj",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c5ab6d7e",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement hasEqualizers_of_isAlgebraicModuliStack {S : Scheme.{u}} (F : BasedCategory.{v,w} (Over S)) (hF : IsAlgebraicModuliStack F) : HasEqualizers F.obj matches node and Stacks 06WY(3): general recorded algebraic-stack predicate (IsModuliStack incl. IsFibredInGroupoids, algebraic-space diagonal, smooth atlas), no separatedness/finiteness, independent universes, arbitrary parallel arrows including different base maps. Edge cases a=b, empty equalizer locus (BG), empty S, discrete scheme checked. lean.statement verbatim; only the item lean field changed vs side-live; stmt_dep copies identical; proof docstring = node steps 1-6 incl. stage-1 step-5 fix; source/blueprint docstrings present; sorry only; plain imports = proof_dep modules; Isom node has no lean record. Only related decl is the downstream fibred_limit_calculus conjunct (citer). Advisory: redundant public import of StablePointedModuliGroupoids. No compile (no change)."
+ }
+}

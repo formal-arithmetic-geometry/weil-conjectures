@@ -17,7 +17,8 @@
    "text": "Write $F_f=f^*_{\\bullet}$ and $T_f=f_{*,\\bullet}$ for the ordinary functors of [def-sp-varying-ring-operations], and $q_{g,f}:T_gT_f\\cong T_{gf}$ for their section-normalized comparison. For three maps $f:X\\to Y$, $g:Y\\to Z$, $h:Z\\to W$, both pastings defining $T_hT_gT_f\\to T_{hgf}$ are restrictions along the same map between the iterated fibre products over a test object $H\\to W$: its projections to $H$ and $X$ are the original projections. Uniqueness in [def-pc-fibre-product] makes the two maps equal. Applying each $M_n$ gives equality on every section, hence equality of system morphisms and natural transformations. For an identity map, the same projection check identifies $q$ with the appropriate whiskering of $i_X:T_{1_X}\\cong\\mathrm{id}$, the normalized pullback-graph comparison. Thus the $q$ satisfy associativity and both unit laws on the actual semilinear systems.",
    "uses": [
     "def-sp-varying-ring-operations",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "lem-cbc-strict-tower-direct-image-coherence"
    ],
    "elementary": true,
    "source": {
@@ -85,7 +86,9 @@
     "def-sp-varying-ring-operations",
     "lem-trf-adjoint-composition-coherence",
     "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sp-varying-ring-proper-open-pasting"
    ],
    "elementary": false,
    "source": {
@@ -126,7 +129,10 @@
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-mate-pasting"
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-sp-varying-ring-proper-open-pasting"
  ],
  "proof_origin": {
   "by": "agent",
@@ -243,7 +249,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-37dbb6790 (reviewer sub-agent of L); spot-checked: I read all 8 steps against the statements of every cited node and the delivery holds up. It is a first split (no re-split note), creates no new nodes, and leaves the item statement byte-identical to the Q49-created version. Step 1: the section-normalized direct-image comparisons are associative and unital because both pastings restrict along maps with the same projections, so fibre-product uniqueness makes them equal. Step 2: I instantiated the Mathlib leaf lem-trf-adjoint-composition-coherence (Adjunction.leftAdjointCompIso_assoc) myself with C0..C3=S_W,S_Z,S_Y,S_X and d=q^{-1}; its hypothesis is the inverse of step 1 and its conclusion is exactly u_{hg,f}(F_f u_{h,g})=u_{h,gf}(u_{g,f}F_h). Step 3: I redid both unit-equation computations by naturality of eta and i; they reduce to q_{1,f}=iT_f and q_{f,1}=T_f i from step 1. Steps 4 and 7: the exact-factorization chase cancels the intermediate factorization maps and localization part (3) promotes the equality, with no boundedness or K-flatness needed. Step 5: c is the conjugate of d^{-1}, the only direction that types; composition reversal plus mate-pasting (2) and (4) give c_{hg,f}(c_{h,g}S_f)=c_{h,gf}(S_h c_{g,f}) and the units. Step 6: same leaf with C0..C3=S_U,S_V,S_X,S_Y and d=u^{-1}; indices checked. Step 8: equality elimination. Sources: Stacks 0D6D (sites-cohomology.tex l.3658) and 0D6E (l.4011) give only existence of the composition isomorphisms, so proof_origin agent is correct; the item serves blueprint main-20261015 fix-prop-coherence composition coherence and unit sk-thm-sf-compatibility clause (1). Every off-unit citation is a Mathlib leaf or a definition, so tool_uses [] is correct, and no SGA source is cited. Batch-5 flag: lem-trf-adjoint-composition-coherence is a generic adjunction Mathlib leaf with empty proof_deps and only Mathlib-leaf categorical stmt_deps. It is neither given by the trace formula or Poincare duality nor a step of their proofs, so I accept the citation. Edge cases: identity maps, empty opens, zero ring, non-flat Z/4->Z/2 transitions, unbounded complexes. No fixes were needed."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SemilinearCompositorCoherence",
   "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.semilinear_compositor_coherence",
@@ -262,5 +279,15 @@
   "group": "Q04",
   "result": "pass",
   "note": "Nine clauses checked against the node and VaryingRingOperations: (1) associativity of gComp.inv (node's d, with the node's P = API G), (2) pComp.hom (node's c), (3) jComp.hom (node's e), each with arbitrary named composites k,l,m and four equalities; (4-9) left/right unit laws against gId/pId/jId, all oriented correctly. Universes and arbitrary rings/transition maps match the dependency; no extra hypotheses (IsOpenImmersion on k,l,m is a Prop forced by the equalities). Recorded statement verbatim; dependency records unchanged from live; only the item's lean field differs. No definitions, single sorry, source/blueprint docstrings with the 8 proof steps. Not a duplicate of SemilinearProperOpen.compositor_associativity (different interface, no unit laws). nt_compile --json: 33.2 s, exit 0, no errors or warnings. Advisory only: redundant transitive imports; the second reading is the worker's own self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261024T191529-L-421432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

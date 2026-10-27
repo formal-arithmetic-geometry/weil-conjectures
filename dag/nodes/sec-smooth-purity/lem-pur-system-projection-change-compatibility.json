@@ -1,0 +1,124 @@
+{
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemProjectionFormulaCoherence",
+  "date": "2026-10-26",
+  "group": "U6"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Projection formula maps commute with changes of compactification and with compatible triangles of compactifications on derived semilinear coefficient systems",
+   "results": "Eight hits about homology, projective resolutions and profinite projections; no compact-support or semilinear-system projection result.",
+   "date": "2026-10-26",
+   "verdict": "No matching geometric projection transport theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "CategoryTheory.mateEquiv_hcomp in Mathlib.CategoryTheory.Adjunction.Mates, a generic mate-pasting identity.",
+   "date": "2026-10-26",
+   "verdict": "Useful categorical tool; does not state the geometric compact-support equation."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*evaluation|evaluation.*projection",
+   "results": "One hit, Mathlib/Topology/LocallyConstant/Basic.lean:278, locally constant evaluation.",
+   "date": "2026-10-26",
+   "verdict": "No matching strict-system compactification projection theorem."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "projection",
+   "results": "418 blueprint nodes match; includes general projection definitions and coherence statements, but none states either concrete-word specialization in the actual Operations realization.",
+   "date": "2026-10-26",
+   "verdict": "No exact blueprint duplicate for these concrete-word steps. Nearest blueprint ancestor: prop-pur-adic-reconstruction-trace-coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "id": "lem-pur-system-projection-change-compatibility",
+ "kind": "statement",
+ "title": "System projection transport through graph refinements",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$ and its algebraic closure $k$ [def-weil-finite-field-fiber]. Let $\\ell$ be prime and $E$ a finite extension of $\\mathbf Q_\\ell$. Fix simultaneous system operations $o$ [def-sf-integral-system-operations] and a realization $z$ over this field datum [def-sf-integral-system-realization-data]. Write $\\mathscr S_W$ for the derived category of strict semilinear systems of $\\mathcal O_E/\\varpi_E^{n+1}$-module sheaves on the pro-etale site of $W$. Use precisely support, change, projection and triangleWord as constructed in [def-pur-system-projection-formula-maps]. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a separated finite-type $k$-morphism. For any compactifications $d,e$ of $f$, $M\\in\\mathscr S_X$ and $N\\in\\mathscr S_Y$, one has $\\operatorname{projection}_d(M,N);\\operatorname{change}_{d,e}(M\\otimes f^*N)=(\\operatorname{change}_{d,e}(M)\\otimes1_N);\\operatorname{projection}_e(M,N)$. Here semicolon denotes composition in written order, and change is through the canonical graph common refinement, with the actual inverse of its second comparison. The equality holds in $\\mathscr S_Y$ before evaluation, without normalized, constructible or finite-Tor assumptions on the inputs.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, refinement substitution and independence of compactification; Tag 0F7B proper/open comparison; sites-cohomology.tex Tag 0B56, counit projection."
+ },
+ "stmt_deps": [
+  "def-pur-system-projection-formula-maps",
+  "def-weil-finite-field-fiber",
+  "def-sf-integral-system-realization-data",
+  "def-sf-integral-system-operations",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "By lem-sf-system-proper-open-support, the gamma in each refinement and hence the entire reverse refinement natural transformation is invertible, on all system inputs. Expand its component and the forward projectionSystemRefinement; cancel the direct-image compositor, equality casts, gamma and identity-push comparison to identify the latter with inverseOnDomain of the former.",
+   "uses": [
+    "lem-sf-system-proper-open-support"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the refinement clause of lem-sf-projection-system-generating-equations to a refinement r:d->e. Substitute the inverse identification from the first step; this gives the forward projection square. Apply it to infFst d e and infSnd d e. Precompose the desired common-refinement square by tensor of the inverse of the first reverse refinement. Substitute the two forward squares, expand change, and cancel adjacent inverse pairs using tensor functoriality. This is exactly projection_change with its original statement.",
+   "uses": [
+    "lem-sf-projection-system-generating-equations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-proper-open-support",
+  "lem-sf-projection-system-generating-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Independence of compactification paragraph; use the already stated intrinsic single-refinement equation and paste its two specializations to the canonical graph common refinement."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-adic-reconstruction-trace-coherence",
+   "place": "projection/refinement substitution in the strict-system composition calculation before inverse limit",
+   "via": [
+    "lem-pur-system-level-projection-formula-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemProjectionChangeCompatibility",
+  "file": "lean/Sheaf/Paper/SystemProjectionChangeCompatibility.lean",
+  "declaration": "WeilConjectures.SystemProjectionFormula.projection_change",
+  "statement": "theorem projection_change (d e : Compactification f)\n    (M : System l E X) (N : System l E Y) :\n    projection l E o z.compositors z.openComparisons d M N ≫\n      change l E o z.compositors z.openComparisons z.canonicalBridge z.properOpen d e\n        ((calculus l E X).systemClosed.tensor.obj (M, (pull l E f).obj N)) =\n    (calculus l E Y).systemClosed.tensor.map\n      (Prod.mkHom\n        (change l E o z.compositors z.openComparisons z.canonicalBridge z.properOpen\n          d e M) (𝟙 N)) ≫\n      projection l E o z.compositors z.openComparisons e M N",
+  "branch": "sheaf-dag",
+  "by": "U6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1d96e",
+  "group": "U6",
+  "result": "fix",
+  "landing": "20261025T213040-L-278775",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a6f5c",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T003232-L-155711",
+  "kind": "interface",
+  "note": "independent cc review: projection_change proof vs node lem-pur-system-projection-change-compatibility; removal of unused _hl : l ≠ D.p from sorried projectionSystemGeneratingEquations vs Realizations/Operations (no D.p dependence), change record, node statement_change and the single adapted caller; sandbox compile of delivered + adapted modules with #print axioms"
+ }
+}

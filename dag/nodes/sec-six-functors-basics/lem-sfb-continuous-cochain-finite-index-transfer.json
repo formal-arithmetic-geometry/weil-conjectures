@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-topological-homogeneous-cochain-coordinates] for $J=G$ and $J=H$ with the restricted coefficient action. Denote its homogeneous complexes by $B_G,B_H$ and its coordinate maps by $\\Phi_J,\\Psi_J$. Their differentials are alternating deletion, and restriction of functions $R:B_G\\to B_H$ corresponds exactly to the restriction in the item, by the stated restriction compatibility. It suffices to construct transfer $T:B_H\\to B_G$ and a homotopy $K$ with $\\delta K+K\\delta=TR-[G:H]\\,\\mathrm{id}$: conjugation by the stated cochain isomorphisms then gives the required maps on the specified inhomogeneous complexes.",
+   "text": "Use [lem-sfb-topological-homogeneous-cochain-coordinates] for $J=G,H$, with the subspace topology and restricted action on $H$. Its derived isomorphism is represented by actual mutually inverse cochain maps $\\Phi_J,\\Psi_J$ between the homogeneous complex $B_J$ and the specified inhomogeneous complex. Use these actual maps. Its restriction identity is $R\\Psi_G=\\Psi_H\\mathrm{res}$ for homogeneous restriction $R:B_G\\to B_H$. The restricted action is jointly continuous by composition with the subgroup inclusion.",
    "uses": [
     "lem-sfb-topological-homogeneous-cochain-coordinates"
    ],
@@ -23,76 +23,36 @@
    }
   },
   {
-   "text": "The open right cosets $Hx$ cover compact $G$ and are disjoint, so a finite subcover contains all of them. Fix a finite transversal $S$ for $H\\backslash G$, containing $1$ for $H$, so $|S|=[G:H]$. Every coset is clopen because its complement is a union of the other open cosets. Write $x=r(x)s(x)$ uniquely with $r(x)\\in H$, $s(x)\\in S$. On $Hs$ the map $r$ is $x\\mapsto xs^{-1}$, continuous as an $H$-valued map with the subspace topology. Gluing on the open cosets makes $r:G\\to H$ continuous. Uniqueness gives $r(hx)=h r(x)$ for $h\\in H$, and $r|_H=\\mathrm{id}$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent arithmetic expansion: finite-coset transfer and restriction-index homotopy on continuous cochains. Exact non-discrete-coefficient source WANTED; the finite-discrete degree-two transfer node does not state this."
-   }
-  },
-  {
-   "text": "For $f\\in B_H^n$ put $\\widetilde f(x_0,\\ldots,x_n)=f(r(x_0),\\ldots,r(x_n))$. This is continuous and $H$-equivariant by the preceding identities. Define\n$$(T_nf)(x_0,\\ldots,x_n)=\\sum_{s\\in S}s^{-1}\\widetilde f(sx_0,\\ldots,sx_n).$$\nThe finite sum is continuous and $E$-linear in $f$. To check $G$-equivariance, fix $a\\in G$. For each $s$, write $sa=h u$ with $h\\in H$, $u\\in S$. Right multiplication by $a$ permutes $H\\backslash G$, so $s\\mapsto u$ is a permutation of $S$. The summand evaluated on $a x$ equals $s^{-1}h\\widetilde f(ux)=a u^{-1}\\widetilde f(ux)$. Summing gives $(T_nf)(a x)=a(T_nf)(x)$, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent arithmetic expansion: finite-coset transfer and restriction-index homotopy on continuous cochains. Exact non-discrete-coefficient source WANTED; the finite-discrete degree-two transfer node does not state this."
-   }
-  },
-  {
-   "text": "Each substitution $(x_j)\\mapsto(r(sx_j))$ commutes with deleting any coordinate. Since the fixed action of $s^{-1}$ on $V$ is linear, the displayed finite sum therefore gives $\\delta T_n=T_{n+1}\\delta$. Thus $T$ is a cochain map. For $F\\in B_G^n$ define continuous maps $a_s:G\\to G$ by $a_s(x)=s^{-1}r(sx)$, with $H\\subseteq G$ understood. $G$-equivariance of $F$ rewrites the composite as\n$$(T_nR_nF)(x_0,\\ldots,x_n)=\\sum_{s\\in S}F(a_s(x_0),\\ldots,a_s(x_n)).$$\nIf $sa=h u$ as above, then $a_s(ax)=s^{-1}h r(ux)=a a_u(x)$. This identity will also make the summed homotopy equivariant.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent arithmetic expansion: finite-coset transfer and restriction-index homotopy on continuous cochains. Exact non-discrete-coefficient source WANTED; the finite-discrete degree-two transfer node does not state this."
-   }
-  },
-  {
-   "text": "Set $K_0=0$ and, for $n\\geq1$, define\n$$(K_nF)(x_0,\\ldots,x_{n-1})=\\sum_{s\\in S}\\sum_{i=0}^{n-1}(-1)^iF(x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_{n-1})).$$\nEvery tuple substitution is continuous; composition with $F$ and finite sums are continuous. The formula is $E$-linear in $F$. To check equivariance, replace every $x_j$ by $a x_j$ and use $a_s(ax_j)=a a_u(x_j)$ from step 4. Each argument of $F$ has a common left factor $a$, which comes outside by equivariance; the same permutation $s\\mapsto u$ applies to every $i$. Hence $K_nF$ is $G$-equivariant and lies in $B_G^{n-1}$. No topology on the cochain vector spaces or closure operation has been used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent arithmetic expansion: finite-coset transfer and restriction-index homotopy on continuous cochains. Exact non-discrete-coefficient source WANTED; the finite-discrete degree-two transfer node does not state this."
-   }
-  },
-  {
-   "text": "Fix $s$ and a tuple $x=(x_0,\\ldots,x_n)$. To expand $(\\delta K_n+K_{n+1}\\delta)F(x)$, let $P_i(x)=(x_0,\\ldots,x_i,a_s(x_i),\\ldots,a_s(x_n))$ for $0\\leq i\\leq n$, and let $\\partial_j$ delete the $j$-th entry. The contribution from $K_{n+1}\\delta$ is $\\sum_{i,j}(-1)^{i+j}F(\\partial_jP_i(x))$. If $j<i$, its tuple is $P_{i-1}(\\partial_jx)$, whose term from $\\delta K_n$ has sign $(-1)^{i-1+j}$, so they cancel. If $j>i+1$, its tuple is $P_i(\\partial_{j-1}x)$, with opposite sign $(-1)^{i+j-1}$ in $\\delta K_n$. These account for all the latter terms: one indexed by prism position $r$ and deleted original position $k$ pairs with $(i,j)=(r+1,k)$ if $k\\leq r$, and $(i,j)=(r,k+1)$ if $k>r$. This is an explicit cancellation of finite sums, for this very homotopy.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Explicit agent adaptation to the finite coset family of tuple substitutions; signs chosen to give cor res minus index."
-   }
-  },
-  {
-   "text": "The remaining faces in step 6 are $j=i$ and $j=i+1$. Put $A_i=(x_0,\\ldots,x_{i-1},a_s(x_i),\\ldots,a_s(x_n))$ for $0\\leq i\\leq n+1$, allowing empty end blocks. They contribute $F(A_i)-F(A_{i+1})$, since their signs are $(-1)^{2i}=1$ and $(-1)^{2i+1}=-1$. Summing over $i$ telescopes to $F(a_s(x_0),\\ldots,a_s(x_n))-F(x_0,\\ldots,x_n)$. Summing over $s$ and using step 4 proves $\\delta K_n+K_{n+1}\\delta=T_nR_n-|S|\\,\\mathrm{id}$ for $n\\geq1$. For $n=0$, $K_0=0$ and directly $K_1\\delta F(x_0)=\\sum_s(\\delta F)(x_0,a_s(x_0))=\\sum_s(F(a_s(x_0))-F(x_0))$, the same identity. Thus the bottom degree is included, and the maps vanish in negative degrees.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Explicit agent adaptation to the finite coset family of tuple substitutions; signs chosen to give cor res minus index."
-   }
-  },
-  {
-   "text": "On the complexes in the item take $\\mathrm{cor}=\\Phi_G T\\Psi_H$ and $k_n=\\Phi_{G,n-1}K_n\\Psi_{G,n}$ for $n\\geq1$, with $k_0=0$. The cochain identities and restriction compatibility in [lem-sfb-topological-homogeneous-cochain-coordinates] give $d k+k d=\\mathrm{cor}\\,\\mathrm{res}-[G:H]\\,\\mathrm{id}$ by substituting the identity of step 7. All maps are linear and have values in continuous functions by that node and steps 3 and 5. This is an actual cochain homotopy in abstract vector spaces, before taking any cohomology.",
+   "text": "Apply [lem-sfb-finite-coset-homogeneous-averaging] to compact $G$ and open $H$. Choose its finite transversal $S$ once, independently of the coefficient space. It supplies $r$, the continuous maps $a_s(x)=s^{-1}r(sx)$ and the natural cochain map $T:B_H\\to B_G$. Its composite formula identifies $TR$ with $L_nF=\\sum_s F(a_s(x_0),\\ldots,a_s(x_n))$, and $|S|=[G:H]$.",
    "uses": [
-    "lem-sfb-topological-homogeneous-cochain-coordinates"
+    "lem-sfb-finite-coset-homogeneous-averaging"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, section-continuous-group-cohomology, lines 9007–9040: continuous inhomogeneous cochains for arbitrary topological abelian coefficients. Agent-formulated homogeneous change of coordinates, not a theorem asserted verbatim there."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), arithmetic expansion below the coefficient comparison: compactness, finite right-coset retraction, homogeneous averaging, equivariance, differential compatibility, composite with restriction and coefficient naturality. Agent-written auxiliary lemma from old transfer proof steps 2–4 and 9, not stated verbatim in the blueprint."
    }
   },
   {
-   "text": "Let $b:V\\to W$ be continuous, $E$-linear and $G$-equivariant. It commutes with the group actions, the finite sums and the tuple substitutions in $T$ and $K$, hence $bT_V=T_W b$ and $bK_V=K_W b$. The coordinate isomorphisms commute with $b$ by [lem-sfb-topological-homogeneous-cochain-coordinates], so the same equalities hold for $\\mathrm{cor}$ and $k$. For a $G$-stable coefficient subspace $U\\subseteq V$ with its subspace topology, apply the same formulas to $U$: the restricted action is continuous since the ambient action is continuous and has values in $U$, and its inclusion is continuous and equivariant. The inclusion equalities prove the asserted preservation, in particular when $U$ is closed. Only finite sums and compositions of continuous maps occurred, so none of completeness, local compactness or discreteness of $V$ is required.",
+   "text": "The permutations and covariance $a_s(ax)=a a_{\\pi_a(s)}(x)$ supplied by [lem-sfb-finite-coset-homogeneous-averaging] satisfy exactly the hypotheses of [lem-sfb-equivariant-continuous-cochain-prism]. Apply it to obtain continuous-valued, $E$-linear, $G$-equivariant $K_n$ with $\\delta K+K\\delta=L-|S|\\,\\mathrm{id}=TR-[G:H]\\,\\mathrm{id}$, including degree zero. Its coefficient naturality holds for this same family $(a_s)$.",
    "uses": [
-    "lem-sfb-topological-homogeneous-cochain-coordinates"
+    "lem-sfb-finite-coset-homogeneous-averaging",
+    "lem-sfb-equivariant-continuous-cochain-prism"
    ],
-   "elementary": true,
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 019S, lemma-homotopy-s-N, equation-homotopy-to-homotopy and its calculation, lines 4739–4846. Agent cochain adaptation for a permuted finite family of continuous maps: old transfer proof steps 5–7 and its coefficient naturality in step 9."
+   }
+  },
+  {
+   "text": "Set $\\mathrm{cor}=\\Phi_G T\\Psi_H$ and $k_n=\\Phi_{G,n-1}K_n\\Psi_{G,n}$ for $n\\geq1$, with $k_0=0$. The actual cochain identities of [lem-sfb-topological-homogeneous-cochain-coordinates] give, in degree $n\\geq0$, $$d_{n-1}k_n+k_{n+1}d_n=\\Phi_{G,n}(\\delta_{n-1}K_n+K_{n+1}\\delta_n)\\Psi_{G,n}=\\Phi_{G,n}T_nR_n\\Psi_{G,n}-[G:H]\\,\\mathrm{id}=\\mathrm{cor}_n\\mathrm{res}_n-[G:H]\\,\\mathrm{id}.$$ Here degree $-1$ is zero, $R_n\\Psi_{G,n}=\\Psi_{H,n}\\mathrm{res}_n$, and $\\Phi_{G,n}\\Psi_{G,n}=\\mathrm{id}$. Composition of cochain maps also makes $\\mathrm{cor}$ a cochain map. Every factor is linear with values in continuous functions. For a continuous equivariant linear coefficient map $b$, the coordinate naturality and the naturalities of [lem-sfb-finite-coset-homogeneous-averaging] and [lem-sfb-equivariant-continuous-cochain-prism] commute $b$ through every factor of $\\mathrm{cor}$ and $k$. Choose the same $S,r,(a_s)$ for all coefficients. A stable subspace $U\\subseteq V$ has a continuous restricted action by its subspace topology; its inclusion gives preservation, in particular for closed $U$. No additional coefficient-topology hypothesis is used.",
+   "uses": [
+    "lem-sfb-topological-homogeneous-cochain-coordinates",
+    "lem-sfb-finite-coset-homogeneous-averaging",
+    "lem-sfb-equivariant-continuous-cochain-prism"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Tag 0DVG, section-continuous-group-cohomology, lines 9007–9040: continuous inhomogeneous cochains for arbitrary topological abelian coefficients. Agent-formulated homogeneous change of coordinates, not a theorem asserted verbatim there."
@@ -100,12 +60,14 @@
   }
  ],
  "proof_deps": [
-  "lem-sfb-topological-homogeneous-cochain-coordinates"
+  "lem-sfb-topological-homogeneous-cochain-coordinates",
+  "lem-sfb-finite-coset-homogeneous-averaging",
+  "lem-sfb-equivariant-continuous-cochain-prism"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/simplicial.tex",
-  "place": "Finite-coset construction written explicitly by Q01; the signed cancellation is adapted from Tag 019S (lemma-homotopy-s-N), with the continuous cochain convention of Tag 0DVG. The blueprint only motivates the arithmetic transfer requirement."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic finite-index transfer expansion. Short assembly through homogeneous coordinates, finite-coset averaging, and the equivariant continuous prism lemma adapted from Stacks Tag 019S."
  },
  "mathlib_searches": [
   {
@@ -492,16 +454,17 @@
   "date": "2026-10-22",
   "item": "lem-sfb-continuous-cochain-finite-index-transfer",
   "worker": "stage1",
-  "summary": "Constructed finite-coset averaging on homogeneous continuous cochains and an explicit natural restriction-index homotopy; checked all signs, the nonnormal-subgroup reindexing, bottom degree, and continuity without discrete coefficients. One statement-only auxiliary comparison node; no Lean attachment or Mathlib transfer match. Statement unchanged.",
-  "blueprint": "Paragraph (3) of the current direct-images proof, arithmetic expansion requiring transfer with non-discrete coefficients. This is below the unit route. The ancestor tool returns None; the inherited null blueprint.from.node and via provenance are retained."
+  "group": "Q77",
+  "summary": "Repair after the 2026-10-22 landing refusal at returned head 785505635a9: compared the retained delivery with the current read-clone DAG, reread all cited statements and the released stage-1 repair order, retained both independent unsplit tasks and the complete old proof handoff, and made the actual cochain representatives and degreewise conjugation explicit against the current coordinate statement. The delivery tool rebuilds on current origin/sheaf-dag. Item statement, statement dependencies, sources, searches and Lean metadata are unchanged; all citation quotes remain verbatim.",
+  "blueprint": "Current direct-images paragraph (3), arithmetic expansion beneath coefficient comparison; old steps 1 and 8 remain coordinate assembly, old steps 2–4 belong to finite-coset averaging, old steps 5–7 to the equivariant prism, and old step 9 is distributed between both naturalities and assembly with subspace inclusions. Ancestor command returns None for the inherited broken created.item chain; null from.node and full inherited via are retained in accord with the tool, with exact motivating source places."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q01-25e50ca38",
-  "group": "Q01",
+  "reviewer": "NT-cc-Q77-371a09ded",
+  "group": "Q77",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-25e50ca38 (reviewer sub-agent of L); spot-checked: I read the item and the new node lem-sfb-topological-homogeneous-cochain-coordinates in full, along with the sources: Stacks 0DVG (etale-cohomology.tex 9007-9040), Stacks 019S (simplicial.tex 4739ff) and blueprint main-20261015 direct-images paragraph (3). This is not a re-split delivery: the item had no proof on base. Item steps: (2) the coset retraction r is continuous and r(hx)=h r(x). (3) T is G-equivariant via sa=hu, s^{-1}h=a u^{-1}, and s->u permutes S; the order of multiplication is right for non-normal H. (4) a_s(ax)=a a_u(x). (5) K has the right arity and is equivariant. (6)-(7) I redid the prism cancellation: the j<i and j>i+1 terms pair bijectively with the delta K terms with opposite signs, and the j=i, i+1 terms telescope to TR-|S| id. Degree 0 gives K_1 delta F=sum_s (F(a_s x)-F(x)). (8) cor=Phi_G T Psi_H and cor res=Phi_G T R Psi_G by the restriction clause. (9) Coefficient naturality and subspace preservation hold as stated and match the parent's use with V_F into V_Omega. New node: I checked continuity of Phi and Psi (joint continuity of the action is needed), both inverse identities, compatibility with the differentials including degree 0, and naturality in coefficients and group homomorphisms. It is true, stated in derived form, statement-only, self-contained, and not a restatement of the item (it knows nothing about subgroups or transfer). Duplicate search over the DAG found nothing that states it: the sc-homogeneous nodes use discrete integer coefficients, the sfb bar/condensed nodes use internal Hom, and the sc h2-transfer nodes are finite discrete H^2 only. Mathlib searches of all three kinds are recorded. Route: only a same-unit new node is cited; there are no tool_uses and no SGA. Advisory: def-weil-field defines only a field, while 'topological field/vector space' is left uncited, following the DAG-wide convention. The null blueprint.from.node is inherited from base. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-371a09ded (reviewer sub-agent of L); spot-checked: The re-split meets the 2026-10-21 note, and both new statements are true. Every old step has an owner: old step 1 is item step 1, old steps 2-4 are lem-sfb-finite-coset-homogeneous-averaging, old steps 5-7 are lem-sfb-equivariant-continuous-cochain-prism, old step 8 is item step 4, and old step 9 is the naturality clauses plus the subspace part of step 4. The two nodes are comparable (statements of 1872 and 1847 characters) and independent: the prism node has no subgroup or coset. Neither restates the item, which works on the inhomogeneous complex C(J^n,V) and needs the coordinate isomorphism. The assembly has 4 steps and 2447 characters. The live node still has the old 9-step proof, and neither new id exists live, so no other group has superseded this split. Checks: the coordinate node's statement gives actual cochain isomorphisms Phi and Psi and the restriction identity R Psi_G = Psi_H res. I recomputed step 4: dk+kd = Phi(delta K + K delta)Psi = cor res - [G:H] id, with k_0 = 0, which matches the reviewed Lean Homotopy direction. For averaging: r is continuous on the clopen right cosets, r(hx) = h r(x), and equivariance follows from sa = hu without normality of H. I checked a_s(ax) = a a_u(x) and TR F = sum over s of F(a_s x). For the prism: L and K are equivariant by reindexing, degree 0 holds, and I expanded the n=1 case by hand to get the sign L - |S| id. Stacks 019S (simplicial.tex lines 4739ff) and blueprint main-20261015 direct-images paragraph (3) were read. Edge cases H=G, empty S, characteristic dividing the index and non-Hausdorff V all hold. No duplicates: the sc h2-transfer nodes are discrete, cohomology-level special cases of the item; the rectangle primitive operator, the simplicial and adjunction homotopies, and the condensed coset nodes are different statements. The route stays in unit sk-thm-sf-ctf-stability, there are no tool_uses and no SGA. Fault (B3, a stage-2 trap): both new nodes list the theorem node lem-sfb-topological-homogeneous-cochain-coordinates in stmt_deps, only through an 'as in [...]' pointer, although they define B^n and delta fully inline. The previous review of this split (785505635a91) fixed exactly this, and the fix was lost when that landing was refused. I re-applied it in fixes/dag/nodes/sec-six-functors-basics/ for both nodes: stmt_deps is now [def-weil-field] and the pointer reads '..., and it is extended by zero in negative degrees.' All other fields are copied from this head.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.RepresentationTheory.ContinuousCochainFiniteIndexTransfer",
@@ -530,5 +493,17 @@
   "group": "NC",
   "result": "pass",
   "note": "Item lean-only change (stmt_deps unchanged); statement verbatim. Checked every clause: Field+IsTopologicalDivisionRing, profinite G as compact T2 totally disconnected topological group, OpenSubgroup H, TopRep plus explicit joint-continuity hA (TopRep alone only makes each ρ g continuous). Inhomogeneous d via Fin.contractNth has the node's signs including the last face and n=0 (gv−v). Abstract CochainComplex (ModuleCat.{max v w} E) ℕ, so no closure. Canonical restriction via compCLM. ∃cor ∃homotopy (res≫cor ≃ index•𝟙, f−g=dh+hd direction) ∀A B b, naturality of every cor.f n and homotopy.hom i j, so one choice for all coefficients; closed-subspace preservation follows from the inclusion. Edge cases (n=0, H=G, non-normal H, char | index, zero/indiscrete coefficients, independent universes) covered. Not hollow: real defs, three named sorry theorems with proof docstrings; statement true by the fixed-transversal construction. H4: Mathlib ContCohomology is iterated homogeneous (n-ary form a TODO); side-live ccD is private and discrete-only; no name clashes. Docstrings, lines, imports ok. No compile (no change). Advisory: the NF coordinates node should reuse continuousInhomogeneousComplex at stage 2."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

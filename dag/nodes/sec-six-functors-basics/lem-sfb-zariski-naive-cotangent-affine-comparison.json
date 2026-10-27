@@ -1,0 +1,336 @@
+{
+ "id": "lem-sfb-zariski-naive-cotangent-affine-comparison",
+ "kind": "statement",
+ "title": "Affine Zariski comparison with the standard ring naive cotangent complex",
+ "statement": "Let $R\\to B$ be a homomorphism of commutative rings, let $U=\\operatorname{Spec}B$ and $V=\\operatorname{Spec}R$, and let $f:U\\to V$ be its induced morphism of schemes [def-weil-affine-spectrum, def-pc-scheme]. Put $P_0=R[x_b\\mid b\\in B]$ [def-weil-pbc-mv-polynomial-ring], let $\\alpha_0:P_0\\twoheadrightarrow B$ send $x_b$ to $b$, and set $J=\\ker\\alpha_0$. Define the standard ring naive cotangent complex\n$$C_{B/R}=[J/J^2\\xrightarrow{[h]\\mapsto1\\otimes\\mathrm dh}B\\otimes_{P_0}\\Omega_{P_0/R}]$$\nin degrees $-1,0$, zero elsewhere, using [def-weil-pbc-kahler-differentials, def-weil-pbc-module-tensor-product]. On the Zariski site of $U$, let $\\mathrm{NL}^{\\mathrm{Zar}}_{U/V}=\\mathrm{NL}_{\\mathcal O_U/f^{-1}\\mathcal O_V}$ be the sheaf naive complex $K_{\\mathcal O_U}$ of [lem-sfb-sheaf-polynomial-cotangent-comparison], with inverse image [def-weil-pbc-topological-inverse-image]. For a $B$-module use its associated Zariski module sheaf [lem-weil-pbc-spec-module-tilde-sections], functorially as in [lem-weil-pbc-affine-tilde-gamma-adjunction], and apply this functor termwise to $C_{B/R}$. There is a canonical map of complexes\n$$\\widetilde{C_{B/R}}\\longrightarrow\\mathrm{NL}^{\\mathrm{Zar}}_{U/V}$$\nwhich is a quasi-isomorphism, hence an isomorphism in $D(\\mathcal O_U)$ [def-weil-abstract-derived-category]. No finiteness, Noetherian or flatness hypothesis on $R\\to B$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D0I, lemma-NL-affine, specialized to X = Spec B and Y = Spec R; definition-netherlander and algebra.tex section-netherlander for the explicitly written standard presentation."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "def-weil-abstract-derived-category",
+  "def-trf-naive-cotangent-comparison-data",
+  "def-pc-module-pullback",
+  "def-sfb-sheaf-polynomial-cotangent-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=f^{-1}\\mathcal O_V$, $\\mathcal B=\\mathcal O_U$ and $K=\\mathrm{NL}^{\\mathrm{Zar}}_{U/V}$. The inverse-image adjunction unit gives $R\\to\\mathcal A(U)$. Restricting coefficients and sending $x_b$ to the variable indexed by the global section $b\\in\\mathcal B(U)=B$ gives $R[B]\\to\\mathcal A[\\mathcal B](U)$, compatible with evaluation to $B$. Thus $J$ maps into the kernel sheaf; products in $J^2$ map into its square. It gives $J/J^2\\to K^{-1}(U)$ and, by universal differentials, $B\\otimes_{R[B]}\\Omega_{R[B]/R}\\to K^0(U)$, sending $b\\otimes\\mathrm dh$ to $b\\,\\mathrm d(h')$. Since both differentials send $[h]$ to $\\mathrm dh$, this is a chain map. Apply the tilde/global-sections adjunction termwise. Naturality of its Hom bijection carries the chain identity to a chain identity, giving the claimed canonical map $\\eta:\\widetilde{C_{B/R}}\\to K$.",
+   "uses": [
+    "def-weil-pbc-topological-inverse-image",
+    "lem-sfb-sheaf-polynomial-cotangent-comparison",
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine), construction from sections and Schemes Tag 01I7 (lemma-compare-constructions); modules.tex section-netherlander"
+   }
+  },
+  {
+   "text": "Fix a point $p\\in\\operatorname{Spec}B$ and put $q=\\varphi^{-1}(p)$ for $\\varphi:R\\to B$. The affine stalk-localization statement identifies $\\mathcal B_p=B_p$ and $(\\mathcal O_V)_q=R_q$ through the germ maps. The inverse-image stalk statement identifies $\\mathcal A_p$ with $R_q$ and carries the germ of the adjunction-unit image of $r\\in R$ to $r/1$. The tilde-stalk localization statement identifies $(\\widetilde{C_{B/R}})_p$ with the termwise localization $(C_{B/R})_p$, carrying a global element $c$ to $c/1$. Functoriality makes this an identification of complexes. The map $R\\to B_p$ extends to $R_q\\to B_p$: if $r\\notin q$ then $\\varphi(r)\\notin p$, so it is a unit in $B_p$. No assertion about $\\mathcal A(U)$ being a localization is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine), stalk descriptions: Tags 01HV (lemma-spec-sheaves) and 008H (lemma-stalk-pullback)"
+   }
+  },
+  {
+   "text": "The polynomial differential basis identifies the displayed tensor-differential models with the standard free-module models used by the following two homology nodes, and its formula for $\\mathrm dh$ identifies the differentials. Consider the canonical chain map $a:(C_{B/R})_p\\to C_{B_p/R}$ induced by $b\\mapsto b/1$. Exactness of module localization identifies its degree $-1$ cohomology with the map $(H_1(L_{B/R}))_p\\to H_1(L_{B_p/R})$, which is an isomorphism by the existing $H_1$-localization node, with multiplicative subset $B\\setminus p$. In degree $0$, the cokernel/differentials node identifies the source and target cohomology with $(\\Omega_{B/R})_p$ and $\\Omega_{B_p/R}$; the induced map sends $\\mathrm db/s$ to $s^{-1}\\mathrm d(b/1)$, so differential localization makes it an isomorphism. All other cohomology groups vanish because both complexes have only degrees $-1,0$. Thus $a$ is a quasi-isomorphism. This obtains the full quasi-isomorphism from the two existing cohomology clauses of Tag 00S7 rather than creating another localization node.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-h1-cotangent-localization",
+    "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine), target-localization part of the stalk argument, algebra.tex Tag 00S7 (lemma-localize-NL)"
+   }
+  },
+  {
+   "text": "Apply base localization to $A=R$, $S=R\\setminus q$ and the map $R_q\\to B_p$ just constructed. It gives the canonical quasi-isomorphism $b:C_{B_p/R}\\to C_{B_p/R_q}$. Apply the sheaf-naive stalk comparison to $\\mathcal A\\to\\mathcal B$ at $p$: it identifies $K_p$ with $C_{B_p/R_q}$ in $D(B_p)$. Under this comparison and the tilde-stalk identification, $\\eta_p$ is $ba$. Indeed a polynomial $h\\in R[B]$ goes to the polynomial obtained by $r\\mapsto r/1$ and $x_c\\mapsto x_{c/1}$; its conormal class goes to the class of that polynomial and $c\\otimes\\mathrm dh$ goes to $(c/1)\\otimes\\mathrm d(h')$. These are exactly the sectionwise germ formulas in the stalk-comparison statement. The equalities hold first for global generators and then for fractions $z/s$ by $B_p$-linearity. Therefore $\\eta_p$ induces isomorphisms on cohomology.",
+   "uses": [
+    "lem-sfb-naive-cotangent-localize-base",
+    "lem-sfb-naive-cotangent-stalk-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine), base-localization and stalk-comparison parts: algebra.tex Tag 07BS and modules.tex Tag 0D09"
+   }
+  },
+  {
+   "text": "Stalk exactness commutes with the kernels, images and cokernels defining cohomology, so $H^i(\\eta)_p=H^i(\\eta_p)$ for every $i$ and $p$. These maps are isomorphisms by the preceding steps. The kernels and cokernels of $H^i(\\eta)$ therefore have zero stalks; the exactness-detection clause applied to $0\\to\\ker H^i(\\eta)\\to0$ and $0\\to\\operatorname{coker}H^i(\\eta)\\to0$ makes them zero sheaves. Hence $H^i(\\eta)$ is an isomorphism, so $\\eta$ is a quasi-isomorphism and becomes an isomorphism in the derived category. If $B$ is the zero ring, $U$ is empty and the same stalk-detection argument applies vacuously. None of the inputs required finite presentation, Noetherianity or flatness of $B$ over $R$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D0I (lemma-NL-affine), conclusion by stalkwise cohomology detection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-topological-inverse-image",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-h1-cotangent-localization",
+  "lem-weil-pbc-naive-cotangent-complex-cokernel-kahler",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-sfb-naive-cotangent-localize-base",
+  "lem-sfb-naive-cotangent-stalk-comparison",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D0I (lemma-NL-affine), construction by adjunction and stalkwise localization proof; the target-localization quasi-isomorphism is assembled from existing H_1 and differential localization nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The naive cotangent complex of Spec B over Spec R on the Zariski site is the associated sheaf of the standard ring naive cotangent complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Type w\", \"doc\": \"The cotangent module of the kernel ideal $\\\\ker(\\\\phi)$ of the canonical ring homomorphism $\\\\phi: R \\\\to S$ in an $R$-algebra extension, defined as the quotient $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$. This generalize\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (S' ⟶ R) → PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))\", \"doc\": \"A presheaf of modules constructed by assigning to each object $X$ in the opposite category the module of Kähler differentials $\\\\Omega_{\\\\phi'(X)/R(X)}$, and to each morphism $f: X \\\\to Y$ the $R(Y)$-lin\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_mk\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (x : ↥P.ker), P.cotangentComplex (Algebra.Extension.Cotangent.mk x) = 1 ⊗ₜ[P.Ring] (KaehlerDifferential.D R P.Ring) ↑x\", \"doc\": \"The module of Kähler differentials $\\\\Omega_{S/R}$ for an $R$-algebra $S$ inherits the structure of an additive commutative group from its module structure over $S$. This group operation is induced by \"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R) (X : Dᵒᵖ),\\n  (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').obj X =\\n    CommRingCat.KaehlerDifferential (φ'.app X)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{D}^{\\\\text{op}}$, the presheaf of relative Kähler differentials assigns to $X$ the module of Kähler differentials $\\\\Omega_{S'(X)/R(X)}$, where $S'(\"}\n  {\"name\": \"CommRingCat.KaehlerDifferential\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic\", \"type\": \"{A B : CommRingCat} → (A ⟶ B) → ModuleCat ↑B\", \"doc\": \"For a homomorphism $ f : A \\\\to B $ of commutative rings, this constructs the module of Kähler differentials $ \\\\Omega_{B/A} $ as an object in the category of $ B $-modules. It is the universal $ B $-mo\"}\n  {\"name\": \"instR\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Module R ↥(KaehlerDifferential.ideal R S).cotangentIdeal\", \"doc\": \"For commutative rings $ R $ and $ S $ with $ S $ as an $ R $-algebra, the cotangent ideal $ \\\\mathfrak{I}/\\\\mathfrak{I}^2 $ (where $ \\\\mathfrak{I} $ is the Kähler differential ideal in $ S \\\\otimes_R S $)\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine localization identifies the sheaf naive cotangent complex with the tilde of the canonical polynomial presentation conormal differential",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n  {\"name\": \"Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n  {\"name\": \"Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures and scalar tower $ R \\\\to S \\\\to T $, if $ T $ is the localization of $ S $ at an element $ g $, then the composition of \"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, if $ T $ is the localization of $ S $ at an element $ g $, then the inverse of the cotangent module equivalence applie\"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures and scalar tower $ R \\\\to S \\\\to T $, where $ T $ is the localization of $ S $ at an element $ g $, applying the invers\"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"For commutative rings $ R $, $ S $, and $ T $ with compatible algebra structures, when $ T $ is the localization of $ S $ at element $ g $, the composition of the inverse cotangent equivalence $ (\\\\tex\"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (r : R) → [inst_3 : IsLocalization.Away r S] → (Algebra.Generators.localizationAway S r).toExtension.Cotangent\", \"doc\": \"The element in the cotangent module of the algebra extension obtained by localizing at $ r $, represented by the polynomial $ C(r)X - 1 $ where $ C(r) $ is the constant polynomial embedding of $ r $ a\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\", \"sheaf\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"41\", \"text\": \"  apply (Ideal.cotangent_subsingleton_iff _).mp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"107\", \"text\": \"  refine (Ideal.toCotangent_eq_zero _ _).mpr ?_\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On affine schemes sheafification of the standard ring naive cotangent complex is quasi isomorphic to the Zariski naive cotangent complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.sheafify\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \": SheafOfModules.{v} R\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs the sheafification of $M_0$ as a sheaf of modules over the \"}\n  {\"name\": \"PresheafOfModules.sheafification\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \": PresheafOfModules.{v} R₀ ⥤ SheafOfModules.{v} R\", \"doc\": \"The functor that maps each presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ to its sheafification as a sheaf of modules over \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"PresheafOfModules.sheafifyMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \"(fac : (toPresheaf R₀).map τ₀ ≫ φ' = φ ≫ τ.val) : sheafify α φ ⟶ sheafify α φ'\", \"doc\": \"Given a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, this constructs a morphism between the sheafifications of $ M_0 $ t\"}\n  {\"name\": \"AlgebraicGeometry.Spec_sheaf\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"(R : CommRingCat.{u}) : (Spec R).sheaf = Spec.structureSheaf R\", \"doc\": \"For any commutative ring $ R $, the sheaf of the scheme $ \\\\operatorname{Spec}(R) $ is equal to the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)} $ defined on its prime spectrum.\"}\n  {\"name\": \"AlgebraicGeometry.Spec.sheafedSpaceObj\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \"(R : CommRingCat.{u}) : SheafedSpace CommRingCat\", \"doc\": \"For a commutative ring $ R $, the sheafed space constructed by equipping the prime spectrum $ \\\\operatorname{Spec}(R) $ with the structure sheaf of commutative rings $ \\\\mathcal{O}_{\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": CommRingCat.of R ≅ (structureSheaf R).1.obj (op ⊤)\", \"doc\": \"For a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphis\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf of the standard ring naive cotangent complex on Spec B is quasi isomorphic to the Zariski sheaf naive cotangent complex over Spec R",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.H1Cotangent",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.SubmersivePresentation.cotangentEquiv_apply",
+     "Algebra.Extension.cotangentComplex_mk",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Extension.cotangentComplex"
+    ],
+    "digest": "e57beb3061e0e3f5",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules and principal localization do not state the Zariski affine sheaf comparison; no exact upstream WeilConjectures declaration found"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"sheaf\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules and principal localization do not state the Zariski affine sheaf comparison; no exact upstream WeilConjectures declaration found"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Etale.lean"
+    ],
+    "digest": "8994a99b1a46ef64",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules and principal localization do not state the Zariski affine sheaf comparison; no exact upstream WeilConjectures declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine scheme naive cotangent complex equals sheafification of the ring conormal differential complex",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Ideal.instModuleQuotientCotangent",
+     "AlgebraicGeometry.IsAffine.recOn",
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "Algebra.PreSubmersivePresentation.cotangentComplexAux",
+     "Algebra.Extension.H1Cotangent",
+     "Algebra.Extension.cotangentComplex",
+     "IsLocalRing.CotangentSpace",
+     "Algebra.Extension.exact_cotangentComplex_toKaehler"
+    ],
+    "digest": "c9c217a95d5f4a42",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules and principal localization do not state the Zariski affine sheaf comparison; no exact upstream WeilConjectures declaration found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine localization identifies the sheaf naive cotangent complex with the tilde of the canonical polynomial presentation conormal differential",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.snd_comp_cotangentCompLocalizationAwayEquiv",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inl",
+     "Algebra.Generators.cotangentCompAwaySec",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_inr",
+     "Algebra.Generators.cotangentCompLocalizationAwayEquiv_symm_comp_inl",
+     "Algebra.Generators.cMulXSubOneCotangent"
+    ],
+    "digest": "d92c6322cb4a1491",
+    "subdirectory": ""
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules and principal localization do not state the Zariski affine sheaf comparison; no exact upstream WeilConjectures declaration found"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-etale-naive-cotangent-presentation",
+  "date": "2026-10-23",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Finite two-term etale local models of the naive cotangent complex. Supporting input: affine polynomial-presentation comparison, Tags 0D0X and 0D0I, with arbitrary presentations by Tag 00S1; no finite-model conclusion. Affine prerequisite: Tag 0D0I, standard ring presentation on the Zariski site; arbitrary polynomial presentations are handled separately by the existing Tag 00S1 node.",
+   "via": [
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-zariski-naive-cotangent-affine-comparison",
+  "worker": "stage1",
+  "summary": "Read Tag 0D0I and its named Stacks inputs; construct the canonical map by adjunction and prove it a quasi-isomorphism on stalks. Reuse existing target-localization H_1, cokernel and Kähler localization leaves, affine stalk and inverse-image stalk statements. Add only the generic sheaf-naive stalk comparison (0D09) and base-localization homotopy equivalence (07BS), as statement-only nodes. Preserve the statement and original searches; retain the documented null ancestry for the broken created.item chain while recording the inherited named blueprint place.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), along the inherited alteration/nodal-curve route: the Tag 0D0I prerequisite of affine-etale-naive-cotangent-presentation. Steps 1--5 realize construction by adjunction, affine and inverse-image stalk coordinates, target localization, base localization and stalk comparison, and stalkwise detection. The current latest blueprint proof (3) is unchanged by this subordinate input."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-3cb6eeb42",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-3cb6eeb42 (reviewer sub-agent of L); spot-checked: I read Stacks 0D0I (lemma-NL-affine) and its proof, plus 07BS, 00S7 and 0D09 (via lemma-pullback-NL). The item statement, stmt_deps and source are identical to the Q137 creation, so no target is weakened. Step 1 is a genuinely elementary construction: the inverse-image unit R->A(U), the sheaf polynomial map with J->J_B(U), and the tilde/Gamma adjunction, which holds for all O_X-modules. Step 2 uses 01HV(c), 008H (c(s_q)=(eta s)_p) and the tilde-stalk localization correctly, and R_q->B_p is checked. Step 3 gets 00S7 from existing leaves: the polynomial Kaehler basis, exact localization, H_1 localization with T=B\\p, the cokernel=Omega node and Omega localization; this is valid because both complexes have only two terms. Step 4: the germ normalization of the 0D09 node, applied at W=U, identifies eta_p with b∘a in D(B_p); B_p⊗_B- is exact, so no derived subtlety. Step 5 is stalkwise detection by module-stalk-exact (2)-(5). New node 07BS is true, in fact a chain isomorphism (S^{-1}I/(S^{-1}I)^2=I/I^2 since S acts invertibly on B-modules); tested on S={1}, Z->Z[1/2], Z/6->Z/3 and 0∈S. New node 0D09 is true at chain level (stalk of the sheafified A[B] is A_t[B_t], stalks exact, Omega and ⊗ commute with filtered colimits). It is a special case of the existing lem-sfb-topos-naive-cotangent-pullback (Q71, Tag 08TZ) but adds the point-site/stalk identification and the germ normalization that step 4 needs, so it is accepted as a separate node; note for the maintainer: split it through that node. Neither new node restates the item, and there is no cycle and no SGA. Batch-5 finding: lem-sfb-sheaf-polynomial-cotangent-comparison reaches lem-trf-sheafified-module-differentials-cokernel, which is Stacks 08TP (differentials of a sheafified ring map), a generic sheaf-algebra fact and no part of the trace formula or Poincare duality. The item already cites it in its base statement, so this is not a RETURN. Maintainer note: blueprint from.node is null because of the inherited broken created.item chain (lem-sfb-admissible-direct-image). Advisory: the new nodes do not cite def-weil-pbc-mv-polynomial-ring, but def-weil-pbc-smooth-ring-map defines R[S]. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiNaiveCotangentAffineComparison",
+  "declaration": "AlgebraicGeometry.ZariskiNaiveCotangent.zariski_naive_cotangent_affine_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ZariskiNaiveCotangent.presentation",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.associatedComplex",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.sheafPresentation",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.coefficientSection",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.functionSection",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.polynomialSection",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.Comparison",
+   "AlgebraicGeometry.ZariskiNaiveCotangent.zariski_naive_cotangent_affine_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiNaiveCotangentAffineComparison.lean",
+  "statement": "theorem zariski_naive_cotangent_affine_comparison (K : SheafPolynomialCotangent.Model (sheafPresentation φ)) : Nonempty (Comparison φ K)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing sheaf Model is quantified as the representative of K_B, with no choice of unknown data. The comparison is normalized on conormal classes and universal tensors on every open and includes its actual localized derived isomorphism. The added definition-node statement dependencies own the existing ring complex, structural inverse-image map and sheaf polynomial presentation; no notion is copied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4193a83e3",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 3f5d. The Lean is byte-identical to 3f5d. stmt_deps now has def-trf-naive-cotangent-comparison-data in place of lem-trf-lci-naive-cotangent-model, exactly as asked, plus def-sfb-sheaf-polynomial-cotangent-presentation. Only stmt_deps and lean.note changed. Maths reread against Tag 0D0I: arbitrary φ, standard presentation R[B]→B, termwise tilde, canonical sheaf presentation via tensorPullbackRingMap, map fixed on every open by its conormal and b⊗dh formulas, QuasiIso plus derived isomorphism equal to the image of the map. lean.statement is verbatim and the report has all required sections. Edge cases B=0, φ=id, non-flat, single universe u are fine. Not compiled; no fix files. Advisory: Model and localization are recorded only under the stage-1 theorem stmt_dep lem-sfb-sheaf-polynomial-cotangent-comparison."
+ }
+}

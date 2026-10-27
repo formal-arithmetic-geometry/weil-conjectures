@@ -24,17 +24,7 @@
  ],
  "proof": [
   {
-   "text": "For the separate-universe tensor localization infrastructure, construct the presheaf tensor-Hom equivalence sectionwise: curry on each over-category and uncurry by evaluation at its identity object. Naturality and both inverse identities follow on pure tensors. The internal Hom universe max u v (max u v) equals max u v.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "Use the sheafification adjunction and coyoneda to characterize localized morphisms by bijective precomposition into all module sheaves. Transport this bijectivity along the tensor-Hom equivalence; the internal Hom into a sheaf is a sheaf. This proves stability under left tensoring, and symmetry gives right tensoring.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "For preservation of zero morphisms, the underlying presheaf of the zero module sheaf is zero. Sectionwise tensoring preserves zero morphisms and therefore zero objects. Sheafification preserves zero objects, so its tensor comparison identifies the tensor of the zero sheaf with a zero object. Factor any zero morphism through the zero sheaf and whisker. Symmetry gives preservation in the second variable. The existing K-flat and K-flat resolution definitions are unchanged.",
+   "text": "Reuse the complete tensor-Hom, tensor localization and zero-morphism proofs in WeilConjectures.Algebra.Homology.KFlat. Retain the two legacy predicate names as semireducible definitions of its identical predicates. The original site and coefficient universes, expanded propositions, public API and canonical independent-coefficient attachment are unchanged.",
    "uses": [],
    "elementary": true
   }
@@ -42,9 +32,9 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "group": "B3",
-  "date": "2026-10-12",
-  "source": "The sectionwise tensor-Hom and localization arguments of WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom (TensorHom) and WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal (IsMonoidal), generalized to separate site universes; zero-object argument using Mathlib functor preservation lemmas."
+  "group": "B4",
+  "date": "2026-10-24",
+  "source": "The identical adopted implementation in WeilConjectures.Algebra.Homology.KFlat, Stacks 06YN and 06YS."
  },
  "mathlib_searches": [
   {
@@ -112,7 +102,18 @@
   "item": "def-weil-derived-tensor",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-pc-kflat-complex",
@@ -134,7 +135,7 @@
   "by": "Q28",
   "date": "2026-10-15",
   "existing": false,
-  "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved. | 2026-10-19 retirement of ~/weil-newtargets: the side override of KFlat (sorried) is dropped; the independent-coefficient interface is the one live proves in Sheaf.Algebra.Homology.KFlatIndependentCoefficients. | Q58 stage-2 H13 repair (2026-10-21): preserve the complete landed Q28 interface and all six recorded declarations; additionally expose CategoryTheory.MorphismProperty.kFlat through a public import of WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat in this recorded module. Specialized to quasi-isomorphisms, this supplies the same K-flat notion for ordinary ModuleCat-valued sheaf complexes, to which the ringed-site-only IsKFlatIndependentCoefficients interface cannot apply. No existing definition or statement is changed.",
+  "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved. | 2026-10-19 retirement of ~/weil-newtargets: the side override of KFlat (sorried) is dropped; the independent-coefficient interface is the one live proves in Sheaf.Algebra.Homology.KFlatIndependentCoefficients. | Q58 stage-2 H13 repair (2026-10-21): preserve the complete landed Q28 interface and all six recorded declarations; additionally expose CategoryTheory.MorphismProperty.kFlat through a public import of WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat in this recorded module. Specialized to quasi-isomorphisms, this supplies the same K-flat notion for ordinary ModuleCat-valued sheaf complexes, to which the ringed-site-only IsKFlatIndependentCoefficients interface cannot apply. No existing definition or statement is changed. | B4 consolidation (2026-10-24): Sheaf.Algebra.Homology.KFlat now publicly imports the adopted source implementation and retains its two legacy names as semireducible aliases. This removes the copied tensor localization and zero-morphism proofs and duplicate predicate bodies while preserving the existing consumer import path. The canonical independent-coefficient attachment and mathematical dependencies are unchanged.",
   "declarations": [
    "CochainComplex.IsKFlatIndependentCoefficients",
    "SheafOfModules.preservesZeroMorphisms_curriedTensor",
@@ -155,13 +156,13 @@
   "note": "Reviewed node, source, dependencies, Lean declarations, edge cases, docstrings, searches, and all nine scompile.py checks; no findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "X-16c76",
-  "group": "B3",
+  "reviewer": "C-bc9ad",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261012T085214-L-3321",
+  "landing": "20261023T230420-L-3424609",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with the existing signatures and definitions, node proof metadata, upstream tensor–Hom construction, change record, and report; compilation is clean and all 22 declarations use only the three permitted axioms."
+  "note": "independent cc review: Delivered Sheaf.Algebra.Homology.KFlat (public import of WeilConjectures.Algebra.Homology.KFlat plus 2 alias defs) against the live copy and the source module (identical apart from 3 docstring lines); node def-pc-kflat-complex diff; change record; all 183 direct importers compiled against the delivered module"
  }
 }

@@ -1,0 +1,133 @@
+{
+ "id": "lem-coef-semilinear-geometric-derived-evaluation",
+ "kind": "statement",
+ "title": "Derived evaluation and scalar comparisons for fixed ordinary geometric operations",
+ "statement": "Let the sites, coefficient tower, set-sheaf geometric adjunction and, when specified, source/target derived calculi have the following parameters. The exact fields defining the conclusion are displayed, so all ordinary carrier and transition normalizations and all representative equations are part of the statement.\n\nvariable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n  [EssentiallySmall.{max c v r} C]\n  (B : ℕ → Sheaf J CommRingCat.{max c v r})\n  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)\n  {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']\n  (J' : GrothendieckTopology C')\n  (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))\n  (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))\n  (adjSet : uInv ⊣ uPush)\n\nvariable (A : Data.{c, v, r} J B τ)\n  (O : GeometryOrdinary.{c, v, r} J B τ J' uInv uPush adjSet)\n  (target : Data.{c, v, r} J' O.coefficients O.coefficientTransition)\n  [∀ n : ℕ, Abelian.HasKInjectiveResolutions (Mod.{c, v, max c v r} J' (O.coefficients n))]\n  [Abelian.HasKInjectiveResolutions\n    (Systems.{c, v, max c v r} J' O.coefficients O.coefficientTransition)]\n\nstructure GeometryEvaluation where\n  /-- Derived direct-image evaluation; no K-injective evaluation assumption is made. -/\n  pushEvaluation : ∀ n : ℕ,\n    O.push.rightDerivedFunctor ⋙ e.{c, v, max c v r} J B τ n ≅\n      e.{c, v, max c v r} J' O.coefficients O.coefficientTransition n ⋙ (O.levelPush\n        n).rightDerivedFunctor\n  /-- The evaluation identifications respect the actual adjunction units. -/\n  unit_evaluation : ∀ (n : ℕ) (M : DS.{c, v, max c v r} J B τ),\n    (e.{c, v, max c v r} J B τ n).map\n      (O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction.unit.app M) ≫\n        (pushEvaluation n).hom.app (O.pull.mapDerivedCategory.obj M) ≫\n        (O.levelPush n).rightDerivedFunctor.map (((geometryPullEvaluation J B τ J' uInv uPush adjSet\n          O) n).hom.app M) =\n      (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction.unit.app ((e.{c, v, max c v r}\n        J B τ n).obj M)\n  /-- The evaluation identifications respect the actual adjunction counits. -/\n  counit_evaluation : ∀ (n : ℕ)\n    (N : DS.{c, v, max c v r} J' O.coefficients O.coefficientTransition),\n    (derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules).map ((pushEvaluation n).hom.app N) ≫\n        (O.levelAdjunction n).mapDerivedCategoryRightDerivedAdjunction.counit.app\n          ((e.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).obj N) =\n      ((geometryPullEvaluation J B τ J' uInv uPush adjSet O) n).inv.app\n        (O.push.rightDerivedFunctor.obj N) ≫\n        (e.{c, v, max c v r} J' O.coefficients O.coefficientTransition n).map\n          (O.ordinaryAdjunction.mapDerivedCategoryRightDerivedAdjunction.counit.app N)\n  /-- The coefficient tensor/inverse-image comparison whose mate is b. -/\n  coefficientPullback : ∀ {m n : ℕ} (h : n ≤ m),\n    (Data.scalar.{c, v, r} A h).T ⋙\n        ((derivedExact.{c, v, max c v r, c, v} J J' (B n)\n          (O.coefficients n) (O.inverseImage n).modules) :\n          D.{c, v, max c v r} J (B n) ⥤ D.{c, v, max c v r} J' (O.coefficients n)) ≅\n      ((derivedExact.{c, v, max c v r, c, v} J J' (B m)\n          (O.coefficients m) (O.inverseImage m).modules) :\n        D.{c, v, max c v r} J (B m) ⥤ D.{c, v, max c v r} J' (O.coefficients m)) ⋙\n          (Data.scalar.{c, v, r} target h).T\n  /-- Coefficient pullback is the scalar-adjunction transpose of the localized\n  identity-on-underlying-sheaves restriction comparison. -/\n  coefficientPullback_transpose : ∀ {m n : ℕ} (h : n ≤ m)\n    (P : D.{c, v, max c v r} J (B m)),\n    ((target.scalar h).adjunction.homEquiv _ _) ((coefficientPullback h).inv.app P) =\n      (derivedExact.{c, v, max c v r, c, v} J J' (B m) (O.coefficients m) (O.inverseImage\n        m).modules).map\n        ((A.scalar h).adjunction.unit.app P) ≫\n      (((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n        Functor.mapDerivedCategoryNatIso (O.restrictionPullback h) ≪≫\n          Functor.mapDerivedCategoryCompIso _ _).hom.app ((A.scalar h).T.obj P))\n\ntheorem semilinearGeometryEvaluation [PreservesFiniteLimits uInv] :\n    Nonempty (GeometryEvaluation.{c, v, r} J B τ J' uInv uPush adjSet A O target)",
+ "stmt_deps": [
+  "lem-coef-semilinear-ordinary-geometric-realization",
+  "def-coef-semilinear-derived-calculus"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1, printed p. 21; paragraph before Lemma 4.10, printed p. 23. F4: use the existing ordinary push-evaluation unit normalization to establish singleton mate invertibility, then normalized K-flat derivation and formal mate identities."
+ },
+ "proof": [
+  {
+   "text": "Use the proved evaluation-mate invertibility theorem and define pushEvaluation as asIso of the canonical right mate of geometryPullEvaluation.inv. This constructs the actual canonical comparison.",
+   "uses": [
+    "lem-coef-geometric-evaluation-mate-invertible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Mathlib unit_mateEquiv identity, followed by cancellation of the pull-evaluation inverse and hom, is exactly unit_evaluation. The mateEquiv_counit identity is exactly counit_evaluation. No equality of derived maps is inferred from level evaluation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define coefficientPullback as the inverse of asIso of the inverse derived scalar mate. Its invertibility is the proved coefficient mate theorem. Apply unit_mateEquiv_symm and the adjunction homEquiv_unit formula to obtain coefficientPullback_transpose.",
+   "uses": [
+    "lem-coef-geometric-coefficient-pullback-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-geometric-coefficient-pullback-mate",
+  "lem-coef-geometric-evaluation-mate-invertible"
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GeometricOperationsBaseExistence",
+  "date": "2026-10-26",
+  "group": "Q6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Proof paragraph 2: the finite coefficient-level derived adjunctions before R lim; geometric inverse image and direct image on the normalized ordinary semilinear system calculus. Derived evaluation and scalar comparisons for fixed ordinary geometric operations.",
+   "via": [
+    "lem-coef-semilinear-geometric-operations-base-existence",
+    "lem-coef-semilinear-geometric-operations",
+    "lem-coef-semilinear-operations-existence",
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived direct image of module systems commutes with evaluation using finite left singleton extensions and conjugate adjunctions",
+   "results": "{\"t\": \"2026-10-26T02:51:37Z\", \"tool\": \"leanfinder\", \"query\": \"derived direct image of module systems commutes with evaluation using finite left singleton extensions and conjugate adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.RestrictionCoextensionAdj.unit'\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.unit'_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\"], \"digest\": \"d5c0611da61f7195\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|prodComparison|pullbackPushforwardAdjunction",
+   "results": "{\"t\": \"2026-10-26T02:56:00Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryNatIso|prodComparison|pullbackPushforwardAdjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\", \"Mathlib/Topology/Sheaves/Presheaf.lean\"], \"digest\": \"03cf201ccb2bbcac\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateIsoEquiv\"",
+   "results": "{\"t\": \"2026-10-26T02:56:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugateIsoEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateIsoEquiv\", \"CategoryTheory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_apply_inv\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_hom\", \"CategoryTheory.conjugateIsoEquiv_symm_apply_inv\", \"CategoryTheory.Bicategory.conjugateIsoEquiv\", \"CategoryTheory.Bicategory.conjugateIsoEquiv_apply_hom\", \"CategoryTheory.Bicategory.conjugateIsoEquiv_apply_inv\"], \"digest\": \"98a2463c6f1dc6d0\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived direct image of sheaves of modules commutes with evaluation on inverse systems using an adjunction of singleton extensions",
+   "results": "{\"t\": \"2026-10-26T02:56:31Z\", \"tool\": \"leansearch\", \"query\": \"derived direct image of sheaves of modules commutes with evaluation on inverse systems using an adjunction of singleton extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"TopCat.Sheaf.pullbackPushforwardAdjunction\"], \"digest\": \"c8bec672f51aebae\"}",
+   "date": "2026-10-26",
+   "verdict": "The results give ordinary adjunctions, categorical mates, or tensor infrastructure, but not this normalized strict-system statement. The ordinary and derived fields in this interface must still be constructed."
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GeometricDerivedEvaluation",
+  "file": "lean/Sheaf/Paper/GeometricDerivedEvaluation.lean",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearGeometryEvaluation",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.GeometryEvaluation",
+   "WeilConjectures.SemilinearSections.semilinearGeometryEvaluation"
+  ],
+  "statement": "theorem semilinearGeometryEvaluation [PreservesFiniteLimits uInv] :\n    Nonempty (GeometryEvaluation.{c, v, r} J B τ J' uInv uPush adjSet A O target)",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261026T070639-L-3636090",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261026T100250-L-4166390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

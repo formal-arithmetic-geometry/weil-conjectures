@@ -1,0 +1,114 @@
+{
+ "id": "def-weil-pbc-coherent-etale-pullback-data",
+ "kind": "definition",
+ "title": "Structural section formula and coherent etale pullback map",
+ "statement": "For a scheme morphism g:Y→X and quasi-coherent modules F on X and G on Y, use their lifted associated etale sheaves [def-pbc-canonical-coherent-etale-comparison]. For a module morphism psi:g*F→G and a sheaf morphism theta:F_et→g_*G_et, HasQcoherentPullbackSectionFormula is exactly the assertion that every section ULift.up s on every etale U maps to ULift.up of qcoherentPullbackSection(g,F,G,psi,U,U×_X Y,pr,condition,s) [lem-weil-pbc-qcoherent-pullback-sections-map]. Construct coherentEtalePullbackMap on degree-q cohomology as cohomologyMap(g) [def-weil-pbc-cohomology-pullback] followed by H.map of the adjunct of theta. Prove an equivalence exposing the full section formula and an equation evaluating the constructed map. No choice, compactness, affine, separatedness or vanishing assumption is used. Equality of module coefficient morphisms preserves the section-formula proposition by substitution.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/descent.tex",
+  "place": "Tags 03Q8 and 03DR, structural pullback on sections; Tag 03FD, the induced map on cohomology."
+ },
+ "stmt_deps": [
+  "def-pbc-canonical-coherent-etale-comparison",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Define a proposition structure whose sole field is the stated universal equation on sections. Projection and construction prove the equivalence exposing that equation. Define the cohomology function by the prescribed composite through the upper-star/lower-star adjunction. Its evaluation equation is reflexivity after unfolding. The constructions cover empty etale objects, zero modules, identity arrows, and q=0; the equations impose exactly the displayed original formula. Equality substitution in the named proposition proves coefficient congruence without rewriting its full quantified equation.",
+   "uses": [
+    "def-pbc-canonical-coherent-etale-comparison",
+    "lem-weil-pbc-qcoherent-pullback-sections-map",
+    "def-weil-pbc-cohomology-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-canonical-coherent-etale-comparison",
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/cohomology.tex; literature/stacks-project/descent.tex",
+  "place": "Tags 03Q8 and 03DR, structural pullback on sections; Tag 03FD, the induced map on cohomology."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The etale cohomology map induced by a scheme morphism followed by a coefficient morphism adjunct, and its structural tensor section formula",
+   "results": "8 scheme section-composition and appLE hits; none is this coherent etale composite.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing etale pullback and coefficient H.map directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "12 hits, including H.map and its functorial equations. These supply the coefficient-cohomology map, but no combined project-specific construction.",
+   "date": "2026-10-26",
+   "verdict": "H.map is the existing coefficient factor."
+  },
+  {
+   "tool": "grep",
+   "query": "coherentEtalePullbackMap|HasQcoherentPullbackSectionFormula",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No named interface for this exact composite and formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineComparisonPullback",
+  "date": "2026-10-26",
+  "group": "A4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-comparison-pullback",
+   "place": "The structural section formula and the left-hand cohomology composite in the normalized pullback square."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentEtalePullbackData",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentEtalePullbackData.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.HasQcoherentPullbackSectionFormula",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.HasQcoherentPullbackSectionFormula",
+   "AlgebraicGeometry.Scheme.Modules.hasQcoherentPullbackSectionFormula_iff",
+   "AlgebraicGeometry.Scheme.Modules.hasQcoherentPullbackSectionFormula_congr",
+   "AlgebraicGeometry.Scheme.Modules.coherentEtalePullbackMap",
+   "AlgebraicGeometry.Scheme.Modules.coherentEtalePullbackMap_apply"
+  ],
+  "statement": "structure HasQcoherentPullbackSectionFormula {X Y : Scheme.{u}}\n    (g : Y ⟶ X) (F : X.Modules) (G : Y.Modules)\n    [F.IsQuasicoherent] [G.IsQuasicoherent] (ψ : (tensorPullback g).obj F ⟶ G)\n    (θ : liftedCoherentEtaleSheaf F ⟶\n      (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj (liftedCoherentEtaleSheaf G)) : Prop",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-1544d",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T152140-L-1081818",
+  "kind": "interface",
+  "note": "independent cc review: typed affineRealizationComparison_pullback vs old expanded statement (chart map/coef map/section formula/pullback map equal by defn + proved eqs); adapted AffineCohomologyRawRestriction signatures vs clone; 6 new nodes vs Lean; scratch compile of all 8 files + #print axioms (sorryAx only via upstream qcoherentNormalizedComparison_pullback_square)"
+ }
+}

@@ -1,0 +1,61 @@
+# Stage-1 delivery by Q56
+
+## Files written
+
+- dag/nodes/sec-deligne-laumon-a1/lem-per-g-ring-alteration-closed-fibre-neighbourhood.json: item, statement, split in eight steps; no Mathlib match. The statement and statement dependencies are unchanged.
+- citations.json: twenty entries, one for each cited node in each numbered proof step; each quote is the complete verbatim statement opened for that use.
+- searches.jsonl: five actual msearch.py calls for this item, including two different LeanFinder phrasings, Loogle, LeanSearch and Mathlib grep. Existing searches by the item's creator are retained in the node.
+
+No new nodes, no Mathlib leaves, no Lean files, no unit edits. write_split.py is a sandbox-only preparation script, not a delivery file.
+
+## Attachments
+
+None. I searched lean/WeilConjectures for the exact blueprint tag, the item id, alteration, uniformization, G-ring, IsGRing and IsJ2Ring. The G-ring infrastructure does not state this covering existence theorem. The source library's completion and G-ring declarations do not justify attaching an alteration assertion. No compiler, Lake or build tool was run.
+
+## WANTED
+
+WANTED: Kurano–Shimomoto, Ideal-adic completion of quasi-excellent rings (after Gabber), https://www.isc.meiji.ac.jp/~kurano/ronbun/kurano40.pdf, Definition 3.2, Theorem 3.3, and Lemma 4.4, printed pp.3,5–6, for this item. I read the online PDF, which is absent from literature/. The proof is consequently marked proof_origin.by = agent, and bibliographic integration is requested. No document was downloaded into the read-only repository.
+
+## Findings
+
+The item is correct as stated. Source Lemma 4.4 assumes only that B_q is a G-ring and B/J is J-2. The global G-ring hypothesis of this item implies the former by localizing the same prime-local completion maps; I give the argument rather than add an excellence hypothesis. No universal catenarity, characteristic, dimension, Jacobson-radical or nonempty-closed-fibre assumption is used. The earlier empty proof needed a genuine split.
+
+The existing lem-per-qe-alteration-regular-neighbourhood is a stronger-hypothesis version of the same source argument, already split and reviewed. It assumes excellent B_q and quasi-excellent B/J, so its statement cannot prove this item. Its independently useful inputs already exist. I reuse them directly and retain the constructible bad-locus argument in the item's steps. I did not create another covering-existence node or silently use the proof of the stronger-hypothesis lemma.
+
+The latest blueprint snapshot is ef6f9619fdbffa59e88528fb56483d76c70258c8. I read the chapter and unit records and the latest ancestor lem-per-artin-gabber-affine-curve proof. Its current Step 3 is Verdier exchange, with no explicit formal-completion sentence. The item belongs to the inherited commutative-algebra branch below that ancestor. Its blueprint.from.place and split_report.blueprint say this explicitly; no chapter or unit route was changed. Searches of the whole blueprint for alteration, G-ring and closed fibre found no equivalent imported statement, so same_as remains empty.
+
+## Not duplicates
+
+There are no new nodes and hence no new/existing pairs to justify. I checked the existing G-ring, J-2, alteration-neighbourhood, diagram-spreading, weak-uniformization, constructible-image and spectral-specialization statements across dag/nodes before deciding that all inputs could be reused.
+
+lem-per-g-ring-alteration-closed-fibre-neighbourhood vs lem-per-qe-alteration-regular-neighbourhood: the latter assumes excellent B_q and quasi-excellent B/J; this item assumes a global G-ring and only a J-2 quotient. The proof therefore verifies quasi-excellence of B_q without claiming excellence, then assembles the existing independent inputs.
+
+## Review by Q56
+
+I read the online Kurano–Shimomoto PDF, Section 2 on printed p.2, Definition 3.2 and Theorem 3.3 on p.3, Lemma 4.2 and Claim 4.3 on pp.4–5, and all of Lemma 4.4 on pp.5–6. The source's (4.2) is regularity of the ambient local rings, exactly as the item's statement requires. The proper witness with its indexed open cover and maps is part of Definition 3.2, and the existing weak-uniformization node explicitly supplies an integral witness. All eight steps follow the source's route. No SGA source is used. There are no new-node statements to check against further literature.
+
+Step 1 uses lem-weil-pbc-localization-noetherian for Noetherianity, lem-weil-pbc-primes-of-localization for contraction of a prime Q of B_q, and lem-weil-pbc-localize-localization-at-prime for (B_q)_Q = B_r. I opened these three statements and Stacks 00E3 (algebra-lemma-spec-localization). The fraction isomorphism identifies maximal ideals and each power quotient, so its inverse-limit completion identifies the canonical completion map itself. Thus the G-ring clause of def-weil-pbc-g-ring, read with Stacks 07GH (more-algebra-definition-G-ring), applies to the same maps already assumed regular for B. This is a verification of the definition, not a regularity-ascent theorem. B_q is a nonzero local domain and hence semilocal; I wrote the numerator/unit argument. The exact statement of lem-per-semilocal-g-ring-j2 then gives quasi-excellence. Its hypotheses are Noetherian, G-ring and finitely many maximal ideals, all verified here. I did not replace quasi-excellence by excellence.
+
+Step 2 uses only lem-per-qe-weak-uniformization-cover. I read its complete statement: it asks for a nonempty integral Noetherian scheme with a quasi-excellent affine cover, and gives finite integral regular charts with dominant generically finite finite-type maps plus an integral proper-surjective generically finite witness, indexed opens and maps. S = Spec B_q has the one affine chart from Step 1, so all hypotheses hold. The ordinary, unrestricted-degree theorem is the one used, with no invertibility condition added.
+
+Step 3 uses the complete statement of lem-per-local-alteration-diagram-spreading. I checked that the local charts are nonempty integral Noetherian and that every datum it requests was explicitly obtained in Step 2. It supplies integrality, finite type, dominance, generic finiteness, the witness, its entire indexed open cover, and base-change isomorphisms. Its final sentence gives permanence under further principal shrinking around q. I use only these statement clauses; I do not need to repeat its Chow/limit proof or cite it merely for properness.
+
+Step 4 uses the full fraction/localization clause (c) of lem-weil-pbc-affine-open-stalk-localization. The image prime r is contained in q, so every element of B outside q is outside the chart prime p. The successive localizations therefore consist of precisely the same fractions as C_p. This proves the equality of the two ambient stalks in a few lines; regularity comes from the actual regular T_i of Step 2. The step is elementary with that explicit fraction argument. It does not assume smoothness of the model or openness of its global regular locus.
+
+Step 5 applies lem-per-j2-closed-fibre-regular-locus over B, with I = J. This node says exactly that the nonregular ambient locus over V(J) is closed in X. Its hypotheses are B Noetherian, B/J J-2 and the composite finite type. The map Spec B[1/a] to Spec B is finite type by its one-generator presentation, and lem-sfb-finite-type-composition-base-change gives composition; I opened that node and checked Stacks 01T3 (morphisms-lemma-composition-finite-type). Thus the relative openness statement applies with the original quotient, without needing a separate localization theorem for J-2. The Noetherian clause of def-weil-constructible-subset, Stacks 005L, makes this closed W_i constructible. I read that clause; regularity refers to T_{a,i}, not its possibly singular or nonreduced closed subscheme.
+
+Step 6 invokes lem-weil-pbc-localization-noetherian for the base B[1/a], and lem-weil-pbc-finite-type-noetherian-finite-presentation on each affine finite-type presentation. I read Stacks 00FP (algebra-lemma-Noetherian-finite-type-is-finite-presentation). This gives local finite presentation, and finite type includes quasi-compactness. lem-weil-pbc-affine-scheme-qcqs gives both target hypotheses of lem-weil-pbc-chevalley-constructible-image. I opened both node statements and Stacks 054J (morphisms-lemma-chevalley): the image of the constructible W_i is constructible when the morphism is qc and locally finitely presented and its target qcqs. These are exactly the four hypotheses established here. No separatedness of the charts is assumed.
+
+Step 7 uses lem-weil-pbc-qcqs-scheme-spectral after Step 6 has verified qcqs; I read Stacks 094L (properties-lemma-quasi-compact-quasi-separated-spectral). It uses lem-weil-pbc-spectral-proconstructible-closure-specialization with a one-element index family, so its intersection is E_i itself. I read Stacks 0903(1) (topology-lemma-constructible-stable-specialization-closed): a closure point specializes from the constructible set, in this direction. The basic-open homeomorphism in lem-weil-pbc-spec-localization-away-basic-open identifies the generalizing point with a prime r contained in q. A point t of W_i over it would have regular ambient stalk by Step 4, the required contradiction. There are only finitely many E_i, so the complement of the union of their closed closures is an open neighbourhood of q. I checked the direction of both inclusions of primes.
+
+Step 8 uses exactly the basic-open-basis and localization-homeomorphism clauses of lem-weil-pbc-spec-localization-away-basic-open, read with Stacks 00E0 (algebra-lemma-Zariski-topology) and 00E4 (algebra-lemma-standard-open). The chosen c and a both avoid q, so b = ac avoids q. This produces an actual principal neighbourhood in Spec B contained in D(a), not merely a neighbourhood in an unrelated space. The permanence clause of lem-per-local-alteration-diagram-spreading retains the entire witness diagram and integrality after restriction. Open restriction leaves stalks unchanged; a bad point would map into the empty intersection E_i with D(b). This is elementary assembly from the stated permanence clause, and it checks all output clauses including the indexed open-cover maps.
+
+I tested the argument on B a field (q = 0), q = 0 in a general domain (local ring a fraction field), J = 0 (the conclusion gives genuinely regular charts), J = B (all W_i empty, so the regularity condition is vacuous), and q not containing J (one may shrink off the closed fibre). No step requires a point in that fibre or a positive dimension, and all a,b avoid a prime and so are nonzero. A nonreduced B/J is permitted because ambient regularity, not regularity of that quotient, is used. The integral-domain hypothesis excludes the zero ring; the item has no zero-ring case to prove.
+
+For delivery-errors B–E: all node uses were read as statements, not mined from their proofs; twenty verbatim citations are recorded. No elementary lemma was turned into a node, no theorem clause was relabelled, and no non-elementary source fact is left as a bare tag. The longest proof step is 925 characters, so no long step hides an independent lemma. All searches were performed with msearch.py and their exact queries and logged results are retained. LeanFinder returned quasi-finite algebras and smooth/etale loci, LeanSearch returned ordinary localization constructions, and grep and Loogle returned no hits; none states the item or specializes to it in one line. The second LeanFinder phrasing was read as well. No service was unavailable. I verified each proof input's dependency closure does not reach this item, avoiding a circular use of quasi-excellence.
+
+The eleven split_report.tool_uses are generic localization, stalk, finite-type, constructible-image and spectral-topology tools. Their node statements give exactly the uses detailed above; no node of the perverse unit replaces these generic tools, and none replaces a step of the unit's Fourier/perverse proof. I do not set the maintainer-owned top-level tool_uses field.
+
+## Unfinished work
+
+None in the item's assembly proof. No new statement-only nodes are needed. The cited existing nodes retain their own proof status; their future formalization is not claimed here. The missing archival source is reported above for the maintainer.

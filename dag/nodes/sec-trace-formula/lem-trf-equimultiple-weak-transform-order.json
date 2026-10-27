@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-equimultiple-weak-transform-order",
+ "kind": "statement",
+ "title": "Equimultiple weak transforms: order bound and exceptional nondivisibility",
+ "statement": "Let $N\\hookrightarrow Z$ be a smooth closed pair of finite-type $\\mathbf Q$-schemes and let $E$ be a finite ordered simple normal crossings boundary transverse to $N$ (its local equations restrict to distinct coordinate parameters on $N$). Let $I\\subset\\mathcal O_N$ be coherent and $d\\ge1$. Write $\\operatorname{ord}_x I=\\sup\\{q\\ge0:I_x\\subseteq\\mathfrak m_x^q\\}$, with value $\\infty$ for zero, and $\\operatorname{cosupp}(I,d)=\\{x:\\operatorname{ord}_xI\\ge d\\}$. A test transformation is an open restriction, a smooth-center blowup in cosupport with normal crossings with $E$, a product with a line adjoining its zero section to $E$, or a blowup of the intersection of two boundary hypersurfaces. For a cosupport blowup use the strict transform of $N$ and the ideal $e^{-d}\\sigma^*I$, where $e$ is the exceptional equation; for the last two operations use ordinary pullback. Assume $I$ is nonzero on every component, $\\operatorname{ord}_x I\\le d$ everywhere, and the smooth center $T\\subseteq\\operatorname{cosupp}(I,d)$ has normal crossings with $E$. For its blowup $\\sigma$, the weak transform $I^{\\mathrm w}=e^{-d}\\sigma^*I$ is coherent, has order at most $d$ at every point, and is not divisible by the ideal of any component of the new exceptional divisor. If $I$ has no factor from any component of $E$, then $I^{\\mathrm w}$ has no factor from any surviving strict transform of those components either. More explicitly, in coordinates $(u_1,\\ldots,u_r,w)$ with $T=V(u_1,\\ldots,u_r)$, each generator has expansion $f=\\sum_{|\\alpha|\\ge d}f_\\alpha(w)u^\\alpha$ in the completion along $T$; in the $i$-chart its weak transform is $\\sum f_\\alpha(w)e^{|\\alpha|-d}(u/e)^\\alpha$. At every point of $T$ some degree-$d$ coefficient of some generator is a unit. The degree-$d$ polynomial on the normal fibre is nonzero, and its dehomogenization has degree at most $d$. The assertions commute with smooth pullback. [def-sbc-smooth-morphisms] [def-weil-closed-immersion] [def-weil-finite-type-morphism] [pqf-def-coherent] [def-nagata-global-blowup] [def-nagata-strict-transform] [def-trf-strict-normal-crossings-boundary]",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "BM, Functoriality in resolution of singularities, Section 5 Step II.B, Remark 5.2, pp.628--630; the equimultiple chart calculation underlying residual-factor transforms. Local copy WANTED; agent formulation under ILO VIII 2.3.11--2.3.13."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform",
+  "def-trf-strict-normal-crossings-boundary"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-marked-controlled-blowup-charts] with $J=I$, $c=d$, and $C=T$. Its hypotheses are exactly the smooth pair, the normal crossings condition, and the inclusion of the center in cosupport. It gives $I\\subseteq P^d$, where $P=\\mathcal I_{T,N}$, the identification $N'=\\operatorname{Bl}_T N$, smooth coordinate charts, and a regular coherent ideal $I^{\\mathrm w}=e^{-d}\\sigma^*I$. It also gives the unchanged complement, the new normal crossings boundary, and smooth-base-change compatibility of these constructions. No component of $N$ can lie in $T$: at its generic point the nonzero ideal is the unit ideal and has order zero. Thus the charts used below cover all of $N'$. The empty center requires no exceptional calculation.",
+   "uses": [
+    "lem-trf-marked-controlled-blowup-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0FUE (lemma-etale-local-structure), 0FUT (lemma-blowup), and divisors.tex Tag 0804 (lemma-blowing-up-affine); application of the existing chart lemma."
+   }
+  },
+  {
+   "text": "Work locally in one of those coordinate charts, with coordinates $(w,u)$ and $T=V(u_1,\\ldots,u_r)$. The formal completion along $T$ is $\\mathcal O_T[[u_1,\\ldots,u_r]]$, locally on $T$. Here is the identification, including its coefficients. Both this chart and $T\\times\\mathbf A^r$ are etale over the coordinate affine space and are identified on $u=0$. An etale map is flat and unramified [def-weil-etale-morphism], so [lem-weil-pbc-flat-unramified-formally-etale] extends this identification uniquely across each successive square-zero thickening $(u)^{n+1}/(u)^{n+2}$. The thickening kernel squares to zero since $2(n+1)\\ge n+2$ for $n\\ge0$; choose affine coordinate neighbourhoods throughout, as required by the cited lifting statement. Apply the lifting statement in both directions; uniqueness makes their composites identities and makes the lifts compatible as $n$ increases. Taking the inverse limit gives the claimed identification. Consequently every local generator has a unique expansion $f=\\sum_\\alpha f_\\alpha(w)u^\\alpha$, with coefficients regular on $T$. Since $I\\subseteq P^d$ by Step 1, all coefficients with $|\\alpha|<d$ vanish. This is an expansion in the formal completion, not a claim that the series converges in the original coordinate ring.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-unramified-formally-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 04FF (lemma-unramified-flat-formally-etale), with Definition 02HG (definition-formally-etale); agent construction of compatible coordinate thickenings after Tag 0FUE (lemma-etale-local-structure)."
+   }
+  },
+  {
+   "text": "Fix $t\\in T$. If every coefficient $f_\\alpha(t)$ with $|\\alpha|=d$ were zero for every generator, the expansion modulo $P^{d+1}$ would express each generator as a sum of degree-$d$ monomials in the $u_j$ with coefficients in $\\mathfrak m_t$, plus an element of $P_t^{d+1}$. This is an identity in the actual finite quotient $\\mathcal O_{N,t}/P_t^{d+1}$, supplied by the compatible thickening isomorphisms of Step 2. Lift the finitely many degree-$d$ coefficients to $\\mathcal O_{N,t}$; coefficients vanishing in $\\kappa(t)$ lift into $\\mathfrak m_t$, and the discrepancy is in $P_t^{d+1}$. Thus $I_t\\subseteq\\mathfrak m_t^{d+1}$, contradicting $\\operatorname{ord}_t I\\le d$. Hence one degree-$d$ coefficient is a unit in $\\mathcal O_{T,t}$. Equivalently some generator has a nonzero homogeneous degree-$d$ polynomial $H_t(U)=\\sum_{|\\alpha|=d}f_\\alpha(t)U^\\alpha$ over $\\kappa(t)$. This argument uses stalks and therefore includes nonclosed points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Agent finite-jet argument after Tag 0FUE; uses the containment and expansion proved in Steps 1--2."
+   }
+  },
+  {
+   "text": "In the $i$-chart put $e=u_i$ and $v_j=u_j/u_i$ for $j\\ne i$, with $v_i=1$. Substitution of $u_j=ev_j$ into the expansion gives $e^{-d}\\sigma^*f=\\sum_{|\\alpha|\\ge d}f_\\alpha(w)e^{|\\alpha|-d}v^\\alpha$. All exponents of $e$ are nonnegative. This identity is an exceptional-adic identity: substitution sends $P^q$ into $(e)^q$, so it extends to the completions of Step 2. For any $n\\ge0$, terms of normal degree at least $d+n+1$ contribute only to $(e)^{n+1}$ after division by $e^d$. Thus each quotient modulo $e^{n+1}$ is determined by the finitely many normal degrees $d,\\ldots,d+n$, which justifies the displayed series without any convergence assertion in the chart ring. Modulo $e$, and then over $t$, this is $Q_t(v)=H_t(v_1,\\ldots,1,\\ldots,v_r)$. For fixed homogeneous degree $d$, different multi-indices $\\alpha$ give different monomials in the variables $v_j$, $j\\ne i$, since $\\alpha_i=d-\\sum_{j\\ne i}\\alpha_j$. Thus dehomogenization is injective on degree-$d$ forms. For the generator selected in Step 3, $Q_t\\ne0$ and its total degree is at most $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent substitution in Tag 0804 (lemma-blowing-up-affine) coordinate charts, using Steps 1--3."
+   }
+  },
+  {
+   "text": "Let $y\\in N'$ lie over $t\\in T$, in an $i$-chart. Apply [lem-trf-implicit-taylor-coordinate-calculus] with $B$ this smooth chart, empty $h$-family ($r=0$ in that lemma), and all chart coordinates in its $w$-list. Its centered local Taylor map is therefore available at $y$, with residue field $L=\\kappa(y)$. This local map is continuous for maximal-ideal powers: it sends every product of $n$ elements of $\\mathfrak m_y$ to the $n$-th power of the Taylor maximal ideal. Hence the finite-jet identity of Step 4 remains valid after Taylor expansion. Set its exceptional variable to zero and its base-coordinate increments to zero. The Taylor series of the transformed generator from Step 4 then becomes the polynomial $Q_t(v(y)+V)$ in the ratio-coordinate increments. Extension $\\kappa(t)\\to L$ is injective and translation is an invertible polynomial substitution, so this polynomial is nonzero and has degree at most $d$. Some Taylor term of total degree at most $d$ therefore survives. Since a local homomorphism to the Taylor ring sends $\\mathfrak m_y^{d+1}$ into the power-series maximal ideal to power $d+1$, the generator is not in $\\mathfrak m_y^{d+1}$. Hence $\\operatorname{ord}_y I^{\\mathrm w}\\le d$. The same nonzero polynomial shows that this generator is not divisible by $e$ in $\\mathcal O_{N',y}$: divisibility would force its Taylor series to vanish after setting the exceptional variable to zero. Thus the ideal has no new exceptional component as a factor, even locally at any point of that divisor. Outside the exceptional divisor the blowup is an isomorphism by Step 1, so the original order bound applies.",
+   "uses": [
+    "lem-trf-implicit-taylor-coordinate-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Agent Taylor calculation in the smooth coordinate charts of Tags 0FUE and 0FUT; the cited Taylor lemma provides the regular centered Taylor map at arbitrary points."
+   }
+  },
+  {
+   "text": "Work locally on $N$ and let $D$ be an integral component of its induced old boundary with nonempty strict transform $D'$. The integral-component convention is [def-trf-strict-normal-crossings-boundary]; a restricted ambient component may have several such branches, which are treated separately. The generic point of $D'$ lies in the inverse image of $D\\setminus T$, and there the chart identification of Step 1 gives the original ideal, multiplied only by a unit. Since $I$ has no $D$ factor, its restriction to the integral scheme $D$ is nonzero at the generic point; the same is true for $I^{\\mathrm w}$ on $D'$. Therefore $I^{\\mathrm w}$ is not contained in $\\mathcal I_{D'}$. Explicitly, divisibility by the prime local equation of an integral Cartier divisor is detected at its generic point: if a local element lies in $(h)A_{(h)}$, then $sf\\in(h)$ for some $s\\notin(h)$, and primality gives $f\\in(h)$. This also shows that no local boundary factor has appeared. Components whose strict transform is empty require no assertion.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Agent generic-point calculation for integral boundary Cartier divisors; blowup complement from Step 1."
+   }
+  },
+  {
+   "text": "Finally, the geometric charts and the controlled-transform ideal commute with smooth pullback by [lem-trf-marked-controlled-blowup-charts]. The statement “Orders and $D_E^j$ commute with smooth pullback” in [lem-trf-logarithmic-differential-transform] gives equality of point orders at every point above a given point, including changes of relative dimension. Hence the hypotheses and the order bound persist. The formulas in Step 4 pull back coefficient by coefficient. On every new normal fibre the nonzero degree-$d$ form remains nonzero after the residue-field extension, so Steps 4--5 still exclude exceptional factors. For an old boundary branch $D$, apply that same order equality to the image ideal in $\\mathcal O_D$ and the induced smooth map on boundary schemes. This ideal is nonzero in every stalk when there is no boundary factor. Its finite orders stay finite after pullback, so its pullback image cannot be zero; hence no old boundary factor appears. The coordinate boundary equations also pull back to the corresponding coordinate boundary. This proves all the claimed smooth compatibility.",
+   "uses": [
+    "lem-trf-marked-controlled-blowup-charts",
+    "lem-trf-logarithmic-differential-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Agent compatibility argument using the smooth-pullback clauses of the two cited lemmas; ILO VIII 2.3.11--2.3.13 supplies only the resolution-route context."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-marked-controlled-blowup-charts",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-unramified-formally-etale",
+  "lem-trf-implicit-taylor-coordinate-calculus",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-trf-logarithmic-differential-transform"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0FUE, 0FUT and divisors.tex Tag 0804 for coordinate geometry; agent finite-jet and normal-fibre polynomial argument. BM Functoriality Section 5 Step II.B, Remark 5.2 is WANTED, not read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The multiplicity of an ideal cannot increase under blowing up a smooth equimultiple center",
+   "results": "{\"t\": \"2026-10-22T05:22:20Z\", \"tool\": \"leansearch\", \"query\": \"The multiplicity of an ideal cannot increase under blowing up a smooth equimultiple center\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.le_rootMultiplicity_map\", \"multiplicity_map_eq\", \"emultiplicity_eq_emultiplicity_span\", \"multiplicity_lt_of_emultiplicity_lt\", \"count_span_normalizedFactors_eq\", \"Ideal.count_normalizedFactors_eq\", \"Ideal.IsDedekindDomain.ramificationIdx_eq_multiplicity\", \"multiplicity_eq_of_emultiplicity_eq\"], \"digest\": \"1725a1831bc45c7b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary smoothness, scalar logarithmic derivatives, Dedekind factorization, or one-variable Weierstrass division, not this marked-ideal statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-equimultiple-weak-transform-order: weak transform of an ideal of maximum order a under blowup of a smooth equimultiple center has order at most a and no exceptional factor",
+   "results": "{\"t\": \"2026-10-22T05:22:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-equimultiple-weak-transform-order: weak transform of an ideal of maximum order a under blowup of a smooth equimultiple center has order at most a and no exceptional factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"Ideal.ramificationIdx\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\"], \"digest\": \"b1c4171bb7188bc2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary smoothness, scalar logarithmic derivatives, Dedekind factorization, or one-variable Weierstrass division, not this marked-ideal statement"
+  },
+  {
+   "tool": "grep",
+   "query": "equimultiple|weak.?transform|controlled.?transform",
+   "results": "{\"t\": \"2026-10-22T05:22:29Z\", \"tool\": \"grep\", \"query\": \"equimultiple|weak.?transform|controlled.?transform\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary smoothness, scalar logarithmic derivatives, Dedekind factorization, or one-variable Weierstrass division, not this marked-ideal statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BlowUp\", Ideal",
+   "results": "{\"t\": \"2026-10-22T05:22:30Z\", \"tool\": \"loogle\", \"query\": \"\\\"BlowUp\\\", Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary smoothness, scalar logarithmic derivatives, Dedekind factorization, or one-variable Weierstrass division, not this marked-ideal statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-equimultiple-weak-transform-order: strict transform of an ideal after dividing by its maximal equimultiple order is not divisible by the new exceptional equation",
+   "results": "{\"t\": \"2026-10-22T05:22:32Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-equimultiple-weak-transform-order: strict transform of an ideal after dividing by its maximal equimultiple order is not divisible by the new exceptional equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.div_coe_eq_zero\", \"Ideal.finprod_not_dvd\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt\", \"Ideal.ramificationIdx_lt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_seq_mem\", \"PowerSeries.IsWeierstrassDivisionAt.degree_lt\", \"pow_sub_one_dvd_differentIdeal\", \"not_dvd_differentIdeal_of_intTrace_not_mem\"], \"digest\": \"06fb09e793cb2074\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary smoothness, scalar logarithmic derivatives, Dedekind factorization, or one-variable Weierstrass division, not this marked-ideal statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The controlled transform of an ideal of maximal order d under blowing up a smooth equimultiple center has order at most d and no exceptional divisor factor",
+   "results": "{\"t\": \"2026-10-22T06:43:40Z\", \"tool\": \"leanfinder\", \"query\": \"The controlled transform of an ideal of maximal order d under blowing up a smooth equimultiple center has order at most d and no exceptional divisor factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassFactorizationAt.natDegree_eq_toNat_order_map_of_ne_top\", \"PowerSeries.IsWeierstrassFactorizationAt.degree_eq_coe_lift_order_map_of_ne_top\", \"Ideal.ramificationIdx_spec\", \"Polynomial.IsDistinguishedAt.degree_eq_coe_lift_order_map\", \"Polynomial.IsDistinguishedAt.coe_natDegree_eq_order_map\", \"Ideal.ramificationIdx_eq_find\", \"Ideal.ramificationIdx_lt\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\"], \"digest\": \"7aeab139754180c8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ramification indices, Dedekind multiplicities, analytic order or ordinary power-series substitution; none states the coherent-ideal blowup theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "equimultiple|weak.?transform|controlled.?transform",
+   "results": "{\"t\": \"2026-10-22T06:43:47Z\", \"tool\": \"grep\", \"query\": \"equimultiple|weak.?transform|controlled.?transform\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ramification indices, Dedekind multiplicities, analytic order or ordinary power-series substitution; none states the coherent-ideal blowup theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a smooth center where an ideal has constant maximum order does not increase its order",
+   "results": "{\"t\": \"2026-10-22T06:43:47Z\", \"tool\": \"leansearch\", \"query\": \"Blowing up a smooth center where an ideal has constant maximum order does not increase its order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"meromorphicOrderAt_smul_of_ne_zero\", \"analyticOrderAt_smul_eq_top_of_left\", \"PowerSeries.le_order_subst_right\", \"MvPowerSeries.le_order_pow\", \"MvPowerSeries.order_expand\", \"Ring.ord\", \"meromorphicOrderAt_zpow\", \"meromorphicOrderAt_toMeromorphicNFOn\"], \"digest\": \"0f93267dc040d5b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ramification indices, Dedekind multiplicities, analytic order or ordinary power-series substitution; none states the coherent-ideal blowup theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BlowUp\", Ideal",
+   "results": "{\"t\": \"2026-10-22T06:43:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"BlowUp\\\", Ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ramification indices, Dedekind multiplicities, analytic order or ordinary power-series substitution; none states the coherent-ideal blowup theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In characteristic zero the multiplicity of a coherent ideal is nonincreasing under a blowup with smooth equimultiple center",
+   "results": "{\"t\": \"2026-10-22T06:44:07Z\", \"tool\": \"leanfinder\", \"query\": \"In characteristic zero the multiplicity of a coherent ideal is nonincreasing under a blowup with smooth equimultiple center\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ramificationIdx_spec\", \"Ideal.ramificationIdx_lt\", \"Ideal.ramificationIdx_eq_find\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"Ideal.ramificationIdx\", \"Ideal.count_normalizedFactors_eq\", \"irreducible_pow_sup_of_ge\", \"FractionalIdeal.count_mono\"], \"digest\": \"a3a031c7e398264b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ramification indices, Dedekind multiplicities, analytic order or ordinary power-series substitution; none states the coherent-ideal blowup theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-residual-companion-boundary-reduction",
+  "date": "2026-10-22",
+  "group": "Q73"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical alteration/desingularization input of lem-trf-local-term-locality, through ILO VIII 2.3.11--2.3.13: BM, Functoriality in resolution of singularities, Section 5 Step II.B, Remark 5.2, pp.628--630; the equimultiple chart calculation underlying residual-factor transforms. Local copy WANTED; agent formulation under ILO VIII 2.3.11--2.3.13.",
+   "via": [
+    "lem-trf-residual-companion-boundary-reduction",
+    "lem-trf-marked-ideal-numerical-resolution-engine",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-equimultiple-weak-transform-order",
+  "worker": "stage1",
+  "summary": "Seven-step chart proof using existing controlled-blowup, unique formal-etale lifting, centered Taylor, integral-boundary and smooth-order statements; no new nodes. The nonzero degree-d normal polynomial proves both the order bound and exceptional nondivisibility, and generic-point contraction handles old boundary factors. For the refused live promotion, reread all six current dependencies and revalidated all seven verbatim quotes against the current unsplit live item. The finite-thickening construction, finite-quotient coefficient lifts, exceptional-adic substitution and empty-equation Taylor specialization are explicit. Mathematical statement and route retained; actual search records preserved.",
+  "blueprint": "Historical desingularization input beneath lem-trf-local-term-locality (main-20261015 proof of contracting local terms); realizes the equimultiple transform calculation in the residual companion block. It does not replace the current contracting-correspondence route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-unramified-formally-etale",
+    "why": "Generic unique infinitesimal lifting constructs the coordinate formal completion along a smooth center; it does not replace a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-unramified-formally-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-63a3e39b8",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-63a3e39b8 (reviewer sub-agent of L); spot-checked: Fourth delivery of this item. The earlier heads d5bcef94, 5607c010 and 05f1c85f all got PASS; landing was then refused as 'not in the live DAG', which needs L's live promotion. This head has 0 new nodes. Diff against 05f1: the statement, proof_deps, tool_uses, unit, blueprint and Steps 1, 2, 5, 6 and 7 are byte-identical. Only Steps 3 and 4 and the split_report summary changed. Step 3 adds that the expansion is an identity in O_{N,t}/P_t^{d+1} by Step 2's thickening isomorphisms. Since O_N→O_T→κ(t) is local, a coefficient vanishing in κ(t) lifts into m_t; the u-monomials lie in m_t^d and the error in P^{d+1}, so I_t ⊆ m_t^{d+1}, contradicting ord ≤ d. This is correct. Step 4 adds that σ*P^q ⊆ (e)^q, so after division by e^d (a nonzerodivisor) the terms of degree ≥ d+n+1 lie in (e)^{n+1}; no convergence is claimed. This is correct and elementary. Live and side-live: the item is still unsplit with an empty proof, no review and no repair note. Its statement equals the delivered one minus the added def-trf-strict-normal-crossings-boundary reference, which is correct. I reread all six cited statements: the chart lemma (J ⊆ I_C^c, charts, regular controlled transform, complement, smooth base change); étale = lfp+flat+unramified; unique lifting across affine first-order thickenings (2(n+1) ≥ n+2); the Taylor lemma with r=0 and empty h, with τ_b at nonclosed points; the boundary definition with integral regular components; and 'Orders commute with smooth pullback'. All are unchanged, none cites the item, and proof_deps equals the union of the step uses. Steps reread: S1 generic order 0 keeps components out of T; S4 dehomogenization is injective in fixed degree; S5 Q_t(v(y)+V) ≠ 0 of degree ≤ d gives ord ≤ d and no division by e; S6 generic-point prime contraction; S7 smooth pullback, including boundary image ideals. Edge cases: empty T; codimension one; (u^2,v^2); (u^2+v^2) over Q(i); (u^d w, u^{d+1}) excluded by the hypothesis. No SGA citation. Bierstone-Milman is WANTED, so the proof is agent-written. Accepted tool_use: lem-weil-pbc-flat-unramified-formally-etale. Maintainer notes: L's live promotion is still needed; add Bierstone-Milman Functoriality to LIST.md; the split of lem-trf-logarithmic-differential-transform must not cite this item."
+ }
+}

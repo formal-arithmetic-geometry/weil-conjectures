@@ -1,0 +1,289 @@
+{
+ "id": "lem-sfb-noetherian-affine-atlas-relation",
+ "kind": "statement",
+ "title": "Noetherian relation schemes of affine etale atlases",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Locally Noetherian means that every etale scheme chart is locally Noetherian [pqf-def-locnoeth]; Noetherian means locally Noetherian, quasi-compact and quasi-separated, with quasi-separated meaning that the diagonal is quasi-compact on scheme tests. Assume $X$ is Noetherian and let $p:U\\to X$ be a representable surjective etale map with $U$ affine. Here affine means a spectrum of a commutative ring. Put $R=U\\times_XU$ [def-pc-fibre-product], with projections $s,t:R\\to U$ and the usual identity, inverse and composition maps. Then these maps form a groupoid scheme [def-a1-scheme-groupoid-laws]; $U$ and $R$ are Noetherian schemes, and $s,t$ are etale, flat, quasi-compact and quasi-separated. Etale is [def-weil-etale-morphism], flat is [def-weil-flat-morphism], quasi-compact means quasi-compact inverse images of affine opens, and quasi-separated means a quasi-compact diagonal. No separatedness of $X$ over $S$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03EA (definition-noetherian), Tag 03H6 (lemma-quasi-compact-affine-cover); properties of the chosen presentation in the proof of spaces-cohomology.tex Tag 07UV (lemma-directed-colimit-coherent); spaces-morphisms.tex Tag 0467 (lemma-etale-flat)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-pc-fibre-product",
+  "def-a1-scheme-groupoid-laws",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "By representability of $p$, its pullback along $U\\to X$ is a scheme $R$, and both projections $s,t:R\\to U$ are etale scheme morphisms: each is a scheme test of $p$ (the two are exchanged by the swap $(a,b)\\mapsto(b,a)$). In particular they are flat by the definition of etale. As $U\\to X$ is an etale scheme chart, $U$ is locally Noetherian by the hypothesis on $X$. The chartwise etale permanence lemma identifies representable etale maps with chartwise etale maps when the source is a scheme, makes base changes of chartwise etale maps chartwise etale, and makes their composites chartwise etale. Hence $p$ is chartwise etale, its base change $s:R=U\\times_XU\\to U$ along $p$ is chartwise etale, and so $p\\circ s:R\\to X$ is chartwise etale; its source is a scheme, so it is representable etale. Consequently $R$ is also an etale scheme chart of $X$ and is locally Noetherian. Neither this argument nor the definition of a chart requires the chart to be surjective.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-etale-morphism",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03FR (definition-etale), 03FT (lemma-composition-etale); locally Noetherian is an etale-local scheme property, section-types-properties; spaces-cohomology.tex Tag 07UV (lemma-directed-colimit-coherent), chosen presentation."
+   }
+  },
+  {
+   "text": "Choose the convention $t(a,b)=a$, $s(a,b)=b$ on $R(T)=\\{(a,b)\\in U(T)^2:p(a)=p(b)\\}$. Define $e(a)=(a,a)$, $i(a,b)=(b,a)$ and $c((a,b),(b,d))=(a,d)$. The fibre-product universal property gives these scheme morphisms: for composition the first and last components have the same image in $X$, since their images both equal that of the middle component. Source and target of a composite are its last and first components. Identities and inverse identities reduce respectively to deleting a repeated component and to $(a,a)$ or $(b,b)$. Both parenthesizations of a composable triple give the pair of its first and last components, proving associativity. These operations commute with precomposition on $T$; hence they give all the groupoid laws in the cited definition.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fibre-product",
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0231 (definition-groupoid), groupoid axioms preceding the definition; Tag 0233 (lemma-equivalence-groupoid), with the elementary verification written here."
+   }
+  },
+  {
+   "text": "For a scheme $T$ the point space $|h_T|$ of [def-a1-space-point-topology] is $|T|$ with its Zariski topology: a point $x$ gives the class of $\\operatorname{Spec}\\kappa(x)\\to T$, every field-valued point of $T$ is equivalent to exactly one of these (its image point), the identity of $T$ is one of the test maps, so open sets of $|h_T|$ are Zariski open, and conversely every representable etale $h_{T'}\\to h_T$ is a scheme morphism $T'\\to T$, hence continuous. Thus quasi-compactness of $T$ as a scheme and as an algebraic space agree. The affine-scheme lemma makes $U$ quasi-compact; it is also quasi-separated as an algebraic space, since for affine schemes $T,T'$ mapping to the affine scheme $U$ the product $T\\times_UT'$ is affine by the affine fibre-product lemma, hence quasi-compact. The hypothesis that $X$ is Noetherian makes $X$ quasi-compact and quasi-separated (the diagonal over $\\operatorname{Spec}\\mathbf Z$, which is the quasi-separatedness used by the two qcqs lemmas). Apply the qcqs fibre-product lemma with $A=B=U$, $C=X$ and both structure maps equal to $p$. It gives that $R=U\\times_XU$ is quasi-compact and quasi-separated as an algebraic space, in particular a quasi-compact scheme. Combining quasi-compactness of $U$ and $R$ with their local Noetherianity proved in step 1 shows that both are Noetherian schemes (for schemes this means locally Noetherian and quasi-compact). The fibre-product lemma explicitly imposes no compactness or separation hypothesis on the ambient scheme $S$.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-qcqs-space-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), clause (3); spaces-properties.tex Tag 03EA (definition-noetherian) and following paragraph."
+   }
+  },
+  {
+   "text": "Apply qcqs permanence separately to $s:R\\to U$ and $t:R\\to U$, viewed as morphisms of algebraic spaces: the source $R$ is quasi-compact and quasi-separated by step 3, and the target $U$ is quasi-separated by the same step. Each projection is therefore quasi-compact and quasi-separated in the sense of that lemma. These give the scheme meanings in the item: for an affine open $V\\subseteq U$, the base change $V\\times_UR$ is the open subscheme $s^{-1}(V)$, whose point space is quasi-compact, so $s^{-1}(V)$ is quasi-compact by the identification of step 3; likewise the relative diagonal $R\\to R\\times_UR$ (a scheme fibre product, as $R\\to U$ is a scheme map) has quasi-compact base change along every affine open of $R\\times_UR$, i.e. it is a quasi-compact morphism of schemes. Together with the etale and flat conclusions of step 1 and the groupoid structure of step 2, this proves every assertion.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "def-a1-space-point-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B (lemma-quasi-compact-quasi-separated-permanence), clauses (1)-(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-trf-space-chartwise-etale-permanence",
+  "def-pc-fibre-product",
+  "def-a1-scheme-groupoid-laws",
+  "def-a1-space-point-topology",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sfb-qcqs-space-fibre-product",
+  "lem-sfb-space-qcqs-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UV (lemma-directed-colimit-coherent), second paragraph: properties of the presentation, expanded using spaces-properties.tex Tags 03EA, 03FT and spaces-morphisms.tex Tag 073B; groupoid laws checked directly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Aa]lgebraic[Ss]pace|[Nn]oetherian.*[Ee]tale|[Ee]tale.*[Nn]oetherian",
+   "results": {
+    "t": "2026-10-23T12:04:28Z",
+    "tool": "grep",
+    "query": "[Aa]lgebraic[Ss]pace|[Nn]oetherian.*[Ee]tale|[Ee]tale.*[Nn]oetherian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: no source hit for algebraic spaces or the atlas statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relation scheme of an affine etale atlas of a Noetherian algebraic space is Noetherian and its projections are flat quasi compact quasi separated",
+   "results": {
+    "t": "2026-10-23T12:04:28Z",
+    "tool": "leansearch",
+    "query": "The relation scheme of an affine etale atlas of a Noetherian algebraic space is Noetherian and its projections are flat quasi compact quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+     "AlgebraicGeometry.noetherianSpace_of_isAffineOpen",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.noetherianSpace_of_isAffine",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+     "AlgebraicGeometry.IsNoetherian.noetherianSpace",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat"
+    ],
+    "digest": "bfd65068c0c96c3a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Noetherianity and etale infrastructure only; no declaration states the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Etale",
+   "results": {
+    "t": "2026-10-23T12:04:28Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.Etale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Noetherianity and etale infrastructure only; no declaration states the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relation scheme of an affine etale atlas of a Noetherian algebraic space is Noetherian and its projections are flat quasi compact quasi separated",
+   "results": {
+    "t": "2026-10-23T12:04:30Z",
+    "tool": "leanfinder",
+    "query": "The relation scheme of an affine etale atlas of a Noetherian algebraic space is Noetherian and its projections are flat quasi compact quasi separated",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsNoetherian",
+     "AlgebraicGeometry.IsLocallyNoetherian",
+     "AlgebraicGeometry.noetherianSpace_of_isAffine",
+     "AlgebraicGeometry.isLocallyNoetherian_of_affine_cover",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsNoetherian.noetherianSpace",
+     "AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover",
+     "AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier"
+    ],
+    "digest": "8309661ea856147b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Noetherianity and etale infrastructure only; no declaration states the algebraic-space atlas assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine U etale over a quasi separated locally Noetherian algebraic space X the scheme U times X U is Noetherian",
+   "results": {
+    "t": "2026-10-23T12:04:31Z",
+    "tool": "leanfinder",
+    "query": "For affine U etale over a quasi separated locally Noetherian algebraic space X the scheme U times X U is Noetherian",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.IsNoetherian",
+     "AlgebraicGeometry.IsLocallyNoetherian",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.noetherianSpace_of_isAffineOpen",
+     "AlgebraicGeometry.noetherianSpace_of_isAffine",
+     "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian"
+    ],
+    "digest": "5eb5033922672439"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme Noetherianity and etale infrastructure only; no declaration states the algebraic-space atlas assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-filtered-union",
+  "date": "2026-10-23",
+  "group": "Q50"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the affine presentation U and its Noetherian flat qcqs relation R in the second paragraph of lemma-directed-colimit-coherent.",
+   "via": [
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-affine-atlas-relation",
+  "worker": "stage1",
+  "summary": "Expanded the Noetherian affine presentation prerequisite using existing etale permanence and qcqs fibre-product/permanence nodes; wrote the relation groupoid operations and checked the laws. No new nodes, statement change, or separatedness assumption. Checked both Mathlib semantic phrasings and project source for attachments.",
+  "blueprint": "Supporting prerequisite of the alteration/moduli branch recorded in blueprint.from.place; concretely the presentation U, R in Tag 07UV, used by lem-sfb-space-coherent-filtered-union. The current latest blueprint direct-images proof does not itself state this atlas lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic composition of representable etale maps with scheme source, to recognize R as an etale chart of X; no in-unit chartwise composition statement gives this."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic compactness and quasi-separatedness of an affine scheme used for U; an underlying scheme tool, not a replacement for a unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-0b446a0bc",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-0b446a0bc (reviewer sub-agent of L); spot-checked: The statement is unchanged against live and side-live, which still have the item unsplit; it agrees with Stacks 03EA and the 07UV presentation, reading quasi-separatedness as absolute (spaces-properties definition-separated, lines 75-100). There are no new nodes and no repair note. Small cases checked: empty X; Spec k with a two-point U; the doubled affine line, where R is non-affine but Noetherian; and A^1/Z, which shows the quasi-separated hypothesis is needed. Step 2: I checked the groupoid laws by hand against def-a1-scheme-groupoid-laws, with t=pr0 and s=pr1 as in the sibling node. One fault class, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-noetherian-affine-atlas-relation.json: the proof passed silently between scheme and algebraic-space notions. (1) Step 1 used only the composition clause of lem-trf-space-chartwise-etale-permanence; it now also uses that lemma's base-change clause, so that s is chartwise etale. (2) Step 3 fed the scheme qcqs of affine U into lem-sfb-qcqs-space-fibre-product, which works with point-space qc and absolute-diagonal qs, and read R's point-space qc as scheme qc. It now proves that |h_T| is |T| with its Zariski topology (citing def-a1-space-point-topology) and that affine U is qs as a space via lem-weil-pbc-fibre-product-affine-spectra (a Mathlib leaf). (3) Step 4 now writes out how the space-sense qc/qs conclusions of lem-sfb-space-qcqs-permanence give the scheme meanings. proof_deps equals the union of the uses; the statement, stmt_deps and split_report are unchanged. Accepted tool_uses: lem-trf-space-chartwise-etale-permanence (generic etale calculus) and lem-weil-pbc-affine-scheme-qcqs (a Mathlib leaf). Batch 5: the closures of the chartwise permanence lemma, the qcqs fibre-product lemma and the qcqs permanence lemma reach sec-trace-formula only through algebraic-space foundations (def-trf-algebraic-space, fibre products and etale covers, representable etale tests, surjective composition, sheaf-pullback diagonal). None is part of the trace formula or Poincare duality, none reaches nt-assume, sk-thm-trace-transport or sec-poincare-duality, and there is no cycle. No duplicate: lem-a1-etale-atlas-presentation lacks the Noetherian and qcqs content, and the blueprint search returned nothing. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianAffineAtlasRelation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.noetherian_affine_atlas_relation",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianAffineAtlasRelation.lean",
+  "statement": "theorem noetherian_affine_atlas_relation {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : ∀ (V W : Over S) (a : yoneda.obj V ⟶ X.obj.obj) (b : yoneda.obj W ⟶ X.obj.obj), IsAffine V.left → IsAffine W.left → CompactSpace (Point (Limits.pullback a b))) (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj) (hp : IsEtale p) (hsurj : IsSurjective p) (haff : IsAffine U.left) : IsNoetherian U.left ∧ ∃ (R : Over S) (t s : R ⟶ U), IsPullback (yoneda.map t) (yoneda.map s) p p ∧ IsNoetherian R.left ∧ Etale s.left ∧ Etale t.left ∧ Flat s.left ∧ Flat t.left ∧ QuasiCompact s.left ∧ QuasiCompact t.left ∧ QuasiSeparated s.left ∧ QuasiSeparated t.left ∧ ∃ (e : U.left ⟶ R.left) (i : R.left ⟶ R.left) (c : Limits.pullback s.left t.left ⟶ R.left), Scheme.IsGroupoid s.left t.left e i c",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The three Noetherian hypotheses are spelled out using the existing chart and point topology interfaces, as in coherentSubobjects_filtered_colimit. The relation is specified by its representing pullback square, not by an arbitrary scheme or map; the groupoid laws with the jointly monic projections force the usual operations. The added statement dependency def-a1-space-point-topology already has a landed declaration and was a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3474a491",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 03EA/07UV clause by clause: hln all etale charts locally Noetherian; hqc CompactSpace |X|; hqs affine-pair |V x_X W| compact = absolute qs (not over S); atlas IsEtale/IsSurjective/IsAffine; R pinned by yoneda IsPullback square with t=fst, s=snd; IsNoetherian U,R; Etale/Flat/QC/QS on both projections; IsGroupoid with c on pullback s t, operations forced by joint monicity (not hollow). Hypotheses identical to the landed citer coherentSubobjects_filtered_colimit. Only change vs side-live is lean plus added landed stmt_dep def-a1-space-point-topology (allowed, brief-stage2 line 177). lean.statement verbatim, docstrings with source/blueprint/4-step proof, sorry only, lines <=100, imports per brief. No H4 duplicate. Edge cases: empty X/U, doubled affine line allowed; A^1/Z excluded. Advisory: Point (def-a1-algebraic-space-point-classes) enters only through the cited point-topology instance. No file changed, so no compile; worker reports clean scompile."
+ }
+}

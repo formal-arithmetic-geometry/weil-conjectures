@@ -1,0 +1,209 @@
+{
+ "id": "lem-weil-pbc-completed-localized-adjunction-square",
+ "kind": "statement",
+ "title": "Completion-isomorphism and raw-localization transport of a compatible adjunction square",
+ "statement": "Let $A$ be a commutative ring, $t\\in A$, and $B=A[1/t]$. Let $\\mathcal C,\\mathcal D$ be $A$-linear categories and $\\mathcal C',\\mathcal D'$ be $B$-linear categories, meaning that their Hom groups are modules over the indicated ring and composition is bilinear. A linear functor is one that is linear on every Hom module [def-weil-linear-functor]. Let $P:\\mathcal C\\rightleftarrows\\mathcal D:Q$ be adjoint $A$-linear functors, with unit $\\eta$ and counit $\\epsilon$, and let $P':\\mathcal C'\\rightleftarrows\\mathcal D':Q'$ be adjoint $B$-linear functors, with unit $\\eta'$ and counit $\\epsilon'$. Let $F_C:\\mathcal C\\to\\mathcal C'$ and $F_D:\\mathcal D\\to\\mathcal D'$ be $A$-linear functors, using $A\\to B$ on the targets. Specify natural isomorphisms $\\alpha:F_DP\\cong P'F_C$ and $\\beta:F_CQ\\cong Q'F_D$ satisfying\n$$Q'(\\alpha_N)\\beta_{PN}F_C(\\eta_N)=\\eta'_{F_CN},\\qquad F_D(\\epsilon_M)=\\epsilon'_{F_DM}P'(\\beta_M)\\alpha_{QM}.$$\nLet $\\widetilde P:\\mathcal C\\to\\mathcal D$ be $A$-linear and $\\gamma:P\\xrightarrow{\\sim}\\widetilde P$ a specified natural isomorphism. Then $\\widetilde P\\dashv Q$ has the transported adjunction characterized by\n$$\\operatorname{adj}_{\\widetilde P,Q}(f)=\\operatorname{adj}_{P,Q}(f\\gamma_N),\\qquad \\widetilde\\eta_N=Q(\\gamma_N)\\eta_N,\\qquad\\widetilde\\epsilon_M=\\epsilon_M\\gamma_{QM}^{-1}.$$\nWith $\\widetilde\\alpha_N=\\alpha_NF_D(\\gamma_N^{-1})$ the comparison square still satisfies both displayed adjunction equations, with $P,\\alpha,\\eta,\\epsilon$ replaced by $\\widetilde P,\\widetilde\\alpha,\\widetilde\\eta,\\widetilde\\epsilon$.\nUse the raw scalar localizations [def-weil-linear-scalar-localization], whose objects are unchanged and whose Hom modules are tensored with $B$, with no idempotent completion. The transported functors extend to $\\widetilde P_B\\dashv Q_B$ with unit $\\widetilde\\eta_N\\otimes1$ and counit $\\widetilde\\epsilon_M\\otimes1$. The functors $F_C,F_D$ extend to $B$-linear functors $\\overline F_C,\\overline F_D$ by $\\overline F_W(u/t^n)=t^{-n}F_W(u)$. There are natural comparison isomorphisms $\\overline\\alpha:\\overline F_D\\widetilde P_B\\cong P'\\overline F_C$ and $\\overline\\beta:\\overline F_CQ_B\\cong Q'\\overline F_D$ whose components at each unchanged object are respectively $\\widetilde\\alpha_N$ and $\\beta_M$. They satisfy both adjunction equations for the localized unit and counit and the unchanged primed adjunction. These assertions also apply to adjunctions restricted from ambient categories to stable full subcategories. Composition is right to left.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15 (ambient adjunction setting); agent extraction from the seven-step scalar-adjunction calculation of lem-weil-pbc-realization-adjoint-comparisons"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-weil-linear-functor",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [
+  {
+   "text": "Transport the given adjunction along gamma with Adjunction.ofNatIsoLeft. Its homEquiv formula is homEquiv_ofNatIsoLeft_apply, and its unit and counit formulas hold by definition. Define alpha-tilde as isoWhiskerRight gamma.symm FD composed with alpha. Naturality of beta at gamma.hom, inverse cancellation and the original unit equation give the transported unit equation. Functoriality and the original counit equation give the transported counit equation.",
+   "uses": [
+    "lem-sfb-adjunction-transport-left-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend each A-linear functor Ptilde and Q on tensor Hom modules by LinearMap.baseChange. The pure-tensor formula is b tensor f mapped to b tensor F(f). Identity preservation is immediate. For composition, induction on each tensor reduces to the pure-tensor composition formula of the raw scalar localization and F.map_comp. The Hom maps are localized-ring linear, hence additive.",
+   "uses": [
+    "def-weil-linear-functor",
+    "def-weil-linear-scalar-localization",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each semilinear functor FC or FD into a category already linear over B, use TensorProduct.liftAddHom directly on the pairing (b,f) mapped to b smul F.map f. Balancing is the given scalar equation together with commutativity in B and associativity of scalar multiplication. Tensor induction proves B-linearity and composition preservation; identities follow from 1 smul F.map(id)=id. This directly constructs FCbar and FDbar, without localizing the primed categories at 1.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For B-linear additive functors on a raw scalar localization, a family of components natural on 1 tensor f is natural on all morphisms. Indeed b tensor f equals b smul (1 tensor f), so linearity and bilinearity reduce its naturality square to the given square; tensor induction handles zero and sums. Apply this to the tensor-with-one unit and counit. Their triangles reduce by the pure-tensor composition formula to the original triangles, constructing the localized adjunction with exactly its prescribed components.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the same naturality argument to the original components of alpha-tilde and beta, using B-linearity of the primed functors. NatIso.ofComponents supplies the two localized comparison isomorphisms. Each component and each object map is definitionally the specified one. Finally FCbar(1 tensor unit)=FC(unit), and FDbar(1 tensor counit)=FD(counit), so the two localized compatibility equations are exactly the transported equations proved in the first step. Full-subcategory data are already instances of the theorem, with their actual Hom modules; the construction uses no faithful-localization or nonempty-object assumptions.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adjunction-transport-left-iso",
+  "def-weil-linear-functor",
+  "def-weil-linear-scalar-localization",
+  "def-weil-module-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-finite-extension.proof.md",
+  "place": "Rationalization and inherited coherence paragraph; direct tensor-Hom construction and componentwise verification by G2, 2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport a unit and counit compatible adjunction square along a natural isomorphism of the left adjoint and then through raw linear scalar localization",
+   "results": "8 hits: CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.derivedε_fac_app",
+   "date": "2026-10-22",
+   "verdict": "no match: localization supplies an adjunction, and ofNatIsoLeft transports one, but no single declaration or one-line specialization also transports the given comparison square through the specified left isomorphism and extends its comparisons into scalar-localized target categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"localization\"",
+   "results": "12 hits: CategoryTheory.Adjunction.isLocalization, CategoryTheory.Adjunction.isLocalization', CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match: localization supplies an adjunction, and ofNatIsoLeft transports one, but no single declaration or one-line specialization also transports the given comparison square through the specified left isomorphism and extends its comparisons into scalar-localized target categories."
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|localization_counit_app|ofNatIsoLeft|ofNatIsoRight",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: localization supplies an adjunction, and ofNatIsoLeft transports one, but no single declaration or one-line specialization also transports the given comparison square through the specified left isomorphism and extends its comparisons into scalar-localized target categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw scalar localization of linear adjunctions preserves specified comparison maps to a category where the scalar is invertible",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.derived, LinearMap.extendScalarsOfIsLocalization_apply', CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization_unit_app, LinearMap.extendScalarsOfIsLocalizationEquiv, LinearMap.IsAdjointPair.smul, Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-22",
+   "verdict": "no match: localization supplies an adjunction, and ofNatIsoLeft transports one, but no single declaration or one-line specialization also transports the given comparison square through the specified left isomorphism and extends its comparisons into scalar-localized target categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of linear functors and natural transformations to fraction morphisms transports adjunction triangles and commutative unit counit comparison diagrams",
+   "results": "8 hits: CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.hasLeftCalculusOfFractions, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.hasRightCalculusOfFractions",
+   "date": "2026-10-22",
+   "verdict": "no match: localization supplies an adjunction, and ofNatIsoLeft transports one, but no single declaration or one-line specialization also transports the given comparison square through the specified left isomorphism and extends its comparisons into scalar-localized target categories."
+  },
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|localization_unit_app|localization_counit_app",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: ofNatIsoLeft covers the left-isomorphism construction (already lem-sfb-adjunction-transport-left-iso); categorical localization assumes localization functors and does not directly identify raw Hom tensors or the specified compatible square. LinearMap and LinearEquiv hits concern module maps, not the asserted category square. The remaining comparison calculations are given explicitly in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending linear functors natural transformations and compatible adjunction squares to scalar localization of Hom modules",
+   "results": "8 hits: LinearEquiv.extendScalarsOfIsLocalization, LinearMap.extendScalarsOfIsLocalizationEquiv, CategoryTheory.functorCategoryLinear, IsLocalizedModule.mapExtendScalars, LinearMap.extendScalarsOfIsLocalization, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, CategoryTheory.Localization.instLinearLocalization', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: ofNatIsoLeft covers the left-isomorphism construction (already lem-sfb-adjunction-transport-left-iso); categorical localization assumes localization functors and does not directly identify raw Hom tensors or the specified compatible square. LinearMap and LinearEquiv hits concern module maps, not the asserted category square. The remaining comparison calculations are given explicitly in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"ofNatIsoLeft\"",
+   "results": "5 hits: CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply, CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: ofNatIsoLeft covers the left-isomorphism construction (already lem-sfb-adjunction-transport-left-iso); categorical localization assumes localization functors and does not directly identify raw Hom tensors or the specified compatible square. LinearMap and LinearEquiv hits concern module maps, not the asserted category square. The remaining comparison calculations are given explicitly in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a linear adjunction and a unit counit compatible comparison square across a left adjoint natural isomorphism and raw scalar localization",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.isLocalization_leftAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: ofNatIsoLeft covers the left-isomorphism construction (already lem-sfb-adjunction-transport-left-iso); categorical localization assumes localization functors and does not directly identify raw Hom tensors or the specified compatible square. LinearMap and LinearEquiv hits concern module maps, not the asserted category square. The remaining comparison calculations are given explicitly in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of scalar localized comparison maps preserves adjunction unit and counit after changing a left adjoint by a natural isomorphism",
+   "results": "8 hits: CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.isLocalization_leftAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match for the whole item: ofNatIsoLeft covers the left-isomorphism construction (already lem-sfb-adjunction-transport-left-iso); categorical localization assumes localization functors and does not directly identify raw Hom tensors or the specified compatible square. LinearMap and LinearEquiv hits concern module maps, not the asserted category square. The remaining comparison calculations are given explicitly in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-realization-adjoint-comparisons",
+  "date": "2026-10-22",
+  "group": "Q108"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof paragraph: choose an integral lattice and rationalize; realization adjunction subargument, old steps 1 and 7: specified completion-unit transport on full subcategories and persistence on raw scalar fractions",
+   "via": [
+    "lem-weil-pbc-realization-adjoint-comparisons",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-weil-pbc-completed-localized-adjunction-square",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the Mathlib left-isomorphism adjunction leaf and the existing general semilinear localization lemma. Supplied explicit gamma cancellations, scalar-target identification, triangle verification, localized comparison naturality and both compatibility equations, and full-subcategory restriction. No new nodes or Lean edits.",
+  "blueprint": "thm-weil-pbc-finite-extension proof: rationalization and inheritance of independence/coherence, through the realization-adjunction comparison subargument; implements the specified completion isomorphism and scalar localization without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic semilinear extension of functors, natural transformations, and equations through raw Hom localization; the proper-base-change unit does not supply this categorical scalar construction. Only its unconditional non-triangulated assertions are used."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-71f3ef42d",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-71f3ef42d (reviewer sub-agent of L); spot-checked: Ordinary split of a statement node (no re-split note): 7 steps, no new nodes, statement and stmt_deps unchanged. I type-checked every map in the statement and in the transport formulas; they agree with how the parent realization-adjoint-comparisons uses the item (alpha~ = alpha^o F_T(gamma^-1)). Step 1: lem-sfb-adjunction-transport-left-iso (ofNatIsoLeft) gives exactly a~(f)=a(f gamma); the unit and counit formulas follow and I re-derived them. Step 2 (elementary): naturality of beta at gamma_N cancels in the unit equation; right-multiplying the original counit equation by F_D(gamma^-1) gives the new one. Both recomputed. Step 3: the semilinear-localization lemma with R=S=A, phi=id, t=u=t (hypothesis holds) extends the unit and counit and preserves the triangle identities through whiskering and composition. Step 4: the identification E[1/1]=E is checked by tensor balancing; the lemma with A->B, t and u=1 gives F-bar with the stated fraction formula and the identity coefficient map, so F-bar is B-linear. Step 5: extends alpha~, beta and their inverses; I checked naturality on fractions. Step 6: same components, so Step 2 gives the localized equations on all objects, which are unchanged. Step 7: restriction to stable full subcategories is fine. Edge cases checked: gamma=id, t a unit, t nilpotent (B=0), t-torsion Homs, empty subcategories. The off-unit lem-pur-semilinear-scalar-localization is declared in tool_uses and accepted: the in-unit prop-weil-pbc-rational-transport only handles same-ring exact functors on the O_E categories. There is no cycle: neither reused theorem depends on the item. The main-20261015 finite-extension proof sentence was read; the proof is honestly marked agent-written. No SGA. proof_deps equals the union of the step uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompletedLocalizedAdjunctionSquare",
+  "declaration": "CategoryTheory.completed_localized_adjunction_square",
+  "file": "lean/Sheaf/CategoryTheory/CompletedLocalizedAdjunctionSquare.lean",
+  "statement": "theorem completed_localized_adjunction_square (A : Type r) [CommRing A] (t : A) {C : Type uC} [Category.{vC} C] [Preadditive C] [Linear A C] {D : Type uD} [Category.{vD} D] [Preadditive D] [Linear A D] {C' : Type uC'} [Category.{vC'} C'] [Preadditive C'] [Linear (Localization.Away t) C'] {D' : Type uD'} [Category.{vD'} D'] [Preadditive D'] [Linear (Localization.Away t) D'] (P : C ⥤ D) (Q : D ⥤ C) [P.Additive] [Q.Additive] [P.Linear A] [Q.Linear A] (a : P ⊣ Q) (P' : C' ⥤ D') (Q' : D' ⥤ C') [P'.Additive] [Q'.Additive] [P'.Linear (Localization.Away t)] [Q'.Linear (Localization.Away t)] (a' : P' ⊣ Q') (FC : C ⥤ C') (FD : D ⥤ D') [FC.Additive] [FD.Additive] (hFC : ∀ (N N' : C) (s : A) (f : N ⟶ N'), FC.map (s • f) = algebraMap A (Localization.Away t) s • FC.map f) (hFD : ∀ (M M' : D) (s : A) (f : M ⟶ M'), FD.map (s • f) = algebraMap A (Localization.Away t) s • FD.map f) (α : P ⋙ FD ≅ FC ⋙ P') (β : Q ⋙ FC ≅ FD ⋙ Q') (hη : ∀ N : C, FC.map (a.unit.app N) ≫ β.hom.app (P.obj N) ≫ Q'.map (α.hom.app N) = a'.unit.app (FC.obj N)) (hε : ∀ M : D, FD.map (a.counit.app M) = α.hom.app (Q.obj M) ≫ P'.map (β.hom.app M) ≫ a'.counit.app (FD.obj M)) (Ptilde : C ⥤ D) [Ptilde.Additive] [Ptilde.Linear A] (γ : P ≅ Ptilde) : (∀ (N : C) (M : D) (f : Ptilde.obj N ⟶ M), (a.ofNatIsoLeft γ).homEquiv N M f = a.homEquiv N M (γ.hom.app N ≫ f)) ∧ (∀ N : C, (a.ofNatIsoLeft γ).unit.app N = a.unit.app N ≫ Q.map (γ.hom.app N)) ∧ (∀ M : D, (a.ofNatIsoLeft γ).counit.app M = γ.inv.app (Q.obj M) ≫ a.counit.app M) ∧ ∃ αtilde : Ptilde ⋙ FD ≅ FC ⋙ P', (∀ N : C, αtilde.hom.app N = FD.map (γ.inv.app N) ≫ α.hom.app N) ∧ (∀ N : C, FC.map ((a.ofNatIsoLeft γ).unit.app N) ≫ β.hom.app (Ptilde.obj N) ≫ Q'.map (αtilde.hom.app N) = a'.unit.app (FC.obj N)) ∧ (∀ M : D, FD.map ((a.ofNatIsoLeft γ).counit.app M) = αtilde.hom.app (Q.obj M) ≫ P'.map (β.hom.app M) ≫ a'.counit.app (FD.obj M)) ∧ ∃ (PB : ScalarLocalization A C t ⥤ ScalarLocalization A D t) (QB : ScalarLocalization A D t ⥤ ScalarLocalization A C t) (FCbar : ScalarLocalization A C t ⥤ C') (FDbar : ScalarLocalization A D t ⥤ D'), PB.Additive ∧ PB.Linear (Localization.Away t) ∧ QB.Additive ∧ QB.Linear (Localization.Away t) ∧ FCbar.Additive ∧ FCbar.Linear (Localization.Away t) ∧ FDbar.Additive ∧ FDbar.Linear (Localization.Away t) ∧ (∀ N : C, PB.obj ⟨N⟩ = ⟨Ptilde.obj N⟩) ∧ (∀ M : D, QB.obj ⟨M⟩ = ⟨Q.obj M⟩) ∧ (∀ N : C, FCbar.obj ⟨N⟩ = FC.obj N) ∧ (∀ M : D, FDbar.obj ⟨M⟩ = FD.obj M) ∧ (∀ (N N' : C) (f : N ⟶ N') (b : Localization.Away t), HEq (PB.map (b ⊗ₜ[A] f : (⟨N⟩ : ScalarLocalization A C t) ⟶ ⟨N'⟩)) (b ⊗ₜ[A] Ptilde.map f)) ∧ (∀ (M M' : D) (f : M ⟶ M') (b : Localization.Away t), HEq (QB.map (b ⊗ₜ[A] f : (⟨M⟩ : ScalarLocalization A D t) ⟶ ⟨M'⟩)) (b ⊗ₜ[A] Q.map f)) ∧ (∀ (N N' : C) (f : N ⟶ N') (b : Localization.Away t), HEq (FCbar.map (b ⊗ₜ[A] f : (⟨N⟩ : ScalarLocalization A C t) ⟶ ⟨N'⟩)) (b • FC.map f)) ∧ (∀ (M M' : D) (f : M ⟶ M') (b : Localization.Away t), HEq (FDbar.map (b ⊗ₜ[A] f : (⟨M⟩ : ScalarLocalization A D t) ⟶ ⟨M'⟩)) (b • FD.map f)) ∧ ∃ (aB : PB ⊣ QB) (αbar : PB ⋙ FDbar ≅ FCbar ⋙ P') (βbar : QB ⋙ FCbar ≅ FDbar ⋙ Q'), (∀ N : C, HEq (aB.unit.app ⟨N⟩) ((1 : Localization.Away t) ⊗ₜ[A] (a.ofNatIsoLeft γ).unit.app N)) ∧ (∀ M : D, HEq (aB.counit.app ⟨M⟩) ((1 : Localization.Away t) ⊗ₜ[A] (a.ofNatIsoLeft γ).counit.app M)) ∧ (∀ N : C, HEq (αbar.hom.app ⟨N⟩) (αtilde.hom.app N)) ∧ (∀ M : D, HEq (βbar.hom.app ⟨M⟩) (β.hom.app M)) ∧ (∀ N : ScalarLocalization A C t, FCbar.map (aB.unit.app N) ≫ βbar.hom.app (PB.obj N) ≫ Q'.map (αbar.hom.app N) = a'.unit.app (FCbar.obj N)) ∧ (∀ M : ScalarLocalization A D t, FDbar.map (aB.counit.app M) = αbar.hom.app (QB.obj M) ≫ P'.map (βbar.hom.app M) ≫ a'.counit.app (FDbar.obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34c6f9eec",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean, with no stronger assumptions and independent universes. The transported-adjunction formulas are stated on Mathlib's Adjunction.ofNatIsoLeft and agree with its definition. αtilde = FD(γ⁻¹) ≫ α with both transported equations. The four extended functors on the raw ScalarLocalization are pinned by object equalities, pure-tensor formulas and additivity. The localized adjunction's unit and counit are HEq to 1⊗η̃ and 1⊗ε̃, the comparison components are HEq to αtilde and β, and both localized equations hold on all objects with the same a'. The subcategory clause is covered by generality. Edge cases (γ=id, t a unit, B=0, empty categories, n=0) need no extra assumptions. The lean.statement occurs verbatim in the file; there is one sorry and no definitions; docstrings carry the source place, blueprint tag and seven proof steps; no dependency record is touched. No compile was run because no file was changed. Advisory: the 'Second reading by Q112' section is a short self-audit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261023T102744-L-2967542",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

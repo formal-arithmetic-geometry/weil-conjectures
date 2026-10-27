@@ -1,0 +1,214 @@
+{
+ "id": "lem-sfb-chevalley-root-normalization",
+ "kind": "statement",
+ "title": "Normalization of a prescribed rational simple-root pinning",
+ "statement": "Let $\\mathfrak g$ be a finite-dimensional split semisimple rational Lie algebra [def-wf-lie-algebra], [def-wf-semisimple-lie-algebra]. Fix a maximal abelian subalgebra $\\mathfrak h$ acting diagonally, and its reduced root system $R\\subset\\mathfrak h^\\vee$: $\\mathfrak g=\\mathfrak h\\oplus\\bigoplus_{\\alpha\\in R}\\mathfrak g_\\alpha$ with one-dimensional root spaces $\\mathfrak g_\\alpha=\\{x:[h,x]=\\alpha(h)x\\text{ for all }h\\}$. Let $h_\\alpha\\in\\mathfrak h$ be the coroot, characterized by $h_\\alpha\\in[\\mathfrak g_\\alpha,\\mathfrak g_{-\\alpha}]$ and $\\alpha(h_\\alpha)=2$. Fix a simple-root base $\\Delta$ (a basis of $\\mathfrak h^\\vee$ with sign-coherent integer coordinates for all roots) and arbitrary nonzero rational $x_\\delta\\in\\mathfrak g_\\delta$ for $\\delta\\in\\Delta$. These prescribed vectors extend to nonzero rational $e_\\alpha\\in\\mathfrak g_\\alpha$ for all roots, with $e_\\delta=x_\\delta$, such that $[e_\\alpha,e_{-\\alpha}]=h_\\alpha$. If $\\alpha+\\beta\\in R$, then $$[e_\\alpha,e_\\beta]=\\varepsilon_{\\alpha,\\beta}(p_{\\alpha,\\beta}+1)e_{\\alpha+\\beta},\\qquad \\varepsilon_{\\alpha,\\beta}\\in\\{1,-1\\},$$ where $p_{\\alpha,\\beta}=\\max\\{p\\in\\mathbf Z_{\\ge0}:\\beta-p\\alpha\\in R\\}$. If $\\alpha+\\beta\\notin R\\cup\\{0\\}$ the bracket is zero. Thus the $h_\\delta,e_\\alpha$ form a rational basis, called a Chevalley basis, with integer structure constants. The empty base is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, Chevalley bases, printed pp.508--509, especially Theorem 23.71; extending the prescribed simple-root pinning, with rationality from bracket construction over the split rational form."
+ },
+ "stmt_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-root-base-rational-integral-spans] to the evaluation pairing $\\mathfrak h^\\vee\\times\\mathfrak h\\to\\mathbf Q$ and the given root-coroot system. It gives a basis $(h_\\delta)_{\\delta\\in\\Delta}$ of $\\mathfrak h$, integral expressions for every coroot in that basis, and the nonnegative-coroot clause required to package $\\Delta$ as a Mathlib root-pairing base. The root-side base hypotheses are exactly those of the item. Apply [lem-sfb-rational-opposition-involution] to obtain a rational involution $\\theta$ with $\\theta|_{\\mathfrak h}=-1$ and $[x_\\delta,-\\theta(x_\\delta)]=h_\\delta$.",
+   "uses": [
+    "lem-sfb-root-base-rational-integral-spans",
+    "lem-sfb-rational-opposition-involution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.21--C.26, pp.612--613; Section 23h, p.508, normalized simple-root triples and opposition."
+   }
+  },
+  {
+   "text": "For a root $\\alpha$, let $Q(\\alpha)$ mean that there exists a rational $z\\in\\mathfrak g_\\alpha$ with $[z,-\\theta(z)]=h_\\alpha$. This implies $z\\ne0$ since $\\alpha(h_\\alpha)=2$. The simple-root case is $z=x_\\delta$. If $Q(\\alpha)$ holds, take $-\\theta(z)$ for $-\\alpha$: its bracket with its negative $\\theta$-image is $[-\\theta(z),z]=-h_\\alpha=h_{-\\alpha}$. Here $h_{-\\alpha}=-h_\\alpha$ follows from the defining coroot characterization. For the additive step, suppose $\\gamma=\\alpha+\\delta\\in R$ and $\\delta\\in\\Delta$, and choose $z$ witnessing $Q(\\alpha)$. Put $p=\\max\\{n\\geq0:\\delta-n\\alpha\\in R\\}$. By [lem-sfb-opposition-root-bracket-norm], $w=[z,x_\\delta]$ satisfies $[w,-\\theta(w)]=(p+1)^2h_\\gamma$. Thus $w/(p+1)$ witnesses $Q(\\gamma)$; $p+1\\ne0$ in $\\mathbf Q$. The bracket has weight $\\gamma$ by Jacobi. The base, negative and additive clauses of [lem-sfb-root-base-additive-induction] now prove $Q$ for every root.",
+   "uses": [
+    "lem-sfb-opposition-root-bracket-norm",
+    "lem-sfb-root-base-additive-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, pp.508--509, opposition and Theorem 23.71; agent rational induction replacing complex normalizations."
+   }
+  },
+  {
+   "text": "For each positive root choose a witness to $Q$, retaining $e_\\delta=x_\\delta$ at the simple roots, and define $e_{-\\alpha}=-\\theta(e_\\alpha)$. The sign-coherent base coordinates partition the roots into positive and negative ones, so these choices assign exactly one vector to every root. They are nonzero and rational, and satisfy $[e_\\alpha,e_{-\\alpha}]=h_\\alpha$ in both signs and $e_{-\\alpha}=-\\theta(e_\\alpha)$. This is just the preceding existence claim and skew-symmetry.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, p.508, extending the simple-root pinning; agent rational choice of the normalized vectors."
+   }
+  },
+  {
+   "text": "If $\\gamma=\\alpha+\\beta\\in R$, Jacobi gives $[h,[e_\\alpha,e_\\beta]]=\\gamma(h)[e_\\alpha,e_\\beta]$ for all $h\\in\\mathfrak h$. The one-dimensional rational root space therefore gives $[e_\\alpha,e_\\beta]=N e_\\gamma$ with $N\\in\\mathbf Q$. Apply [lem-sfb-opposition-root-bracket-norm] to $e_\\alpha,e_\\beta$. Rational linearity of $\\theta$ and normalization give $N^2h_\\gamma=(p_{\\alpha,\\beta}+1)^2h_\\gamma$. Since $\\gamma(h_\\gamma)=2$, cancellation yields $N^2=(p_{\\alpha,\\beta}+1)^2$. Factoring over $\\mathbf Q$ gives $N=\\pm(p_{\\alpha,\\beta}+1)$.",
+   "uses": [
+    "lem-sfb-opposition-root-bracket-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, Theorem 23.71, pp.508--509; squared-norm cancellation."
+   }
+  },
+  {
+   "text": "If $\\alpha+\\beta\\notin R\\cup\\{0\\}$, the same Jacobi identity makes the bracket a vector of the nonexistent nonzero weight $\\alpha+\\beta$, hence it is zero by the stated root decomposition. The vectors $e_\\alpha$ are bases of their individual root spaces, so together with the simple coroot basis from [lem-sfb-root-base-rational-integral-spans] they form a rational basis of $\\mathfrak g$. The remaining products are $[h_\\delta,h_\\epsilon]=0$ and $[h_\\delta,e_\\alpha]=\\alpha(h_\\delta)e_\\alpha$ with integral coefficient by crystallographicity. Opposite-root products are coroots, whose simple-coroot coordinates are integral by that same cited node. Thus every structure constant is integral. If $\\Delta=\\varnothing$, its being a basis gives $\\mathfrak h=0$, whence $R=\\varnothing$ and the given decomposition gives $\\mathfrak g=0$; the empty basis proves the assertion.",
+   "uses": [
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, pp.508--509, bracket table and integral Lie lattice; Appendix C.26, p.613."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-opposition-root-bracket-norm",
+  "lem-sfb-rational-opposition-involution",
+  "lem-sfb-root-base-additive-induction",
+  "lem-sfb-root-base-rational-integral-spans"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, pp.508--509: rational construction by additive root induction using opposition and the local squared bracket identity; Appendix C.21--C.26 for bases."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split semisimple Lie algebra over a field of characteristic zero has normalized root vectors with integral Chevalley structure constants plus or minus root string length",
+   "results": "{\"t\": \"2026-10-23T21:31:49Z\", \"tool\": \"leanfinder\", \"query\": \"A split semisimple Lie algebra over a field of characteristic zero has normalized root vectors with integral Chevalley structure constants plus or minus root string length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.chainBotCoeff_add_chainTopCoeff\", \"LieAlgebra.IsKilling.chainTopCoeff_add_chainBotCoeff\", \"LieAlgebra.IsKilling.chainLength\", \"LieAlgebra.IsKilling.chainBotCoeff_le_chainLength\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff_mem\", \"LieAlgebra.IsKilling.le_chainBotCoeff_of_rootSpace_ne_top\", \"LieAlgebra.IsKilling.chainLength_of_eq_zsmul_add\", \"LieAlgebra.IsKilling.rootSpace_zsmul_add_ne_bot_iff\"], \"digest\": \"668c6901a0370a52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.Basis in Mathlib/Algebra/Lie/Basis/Basic.lean:13--37,59--81 (read) records simple-root generators only and explicitly lists Chevalley bases as TODO. The root-string chain lemmas and Geck simple-root matrix identities do not normalize root vectors of an arbitrary split semisimple rational Lie algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley basis exists and brackets of normalized root vectors have integral structure constants",
+   "results": "{\"t\": \"2026-10-23T21:33:38Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley basis exists and brackets of normalized root vectors have integral structure constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.e_mem_lieAlgebra\", \"RootPairing.GeckConstruction.lie_h_e\", \"RootPairing.GeckConstruction.e_lie_u\", \"RootPairing.GeckConstruction.f_mem_lieAlgebra\", \"RootPairing.GeckConstruction.lie_h_f\", \"RootPairing.GeckConstruction.e_lie_v_ne\", \"RootPairing.GeckConstruction.f_lie_v_ne\", \"RootPairing.GeckConstruction.h'\"], \"digest\": \"51bde1edf3122ad8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.Basis in Mathlib/Algebra/Lie/Basis/Basic.lean:13--37,59--81 (read) records simple-root generators only and explicitly lists Chevalley bases as TODO. The root-string chain lemmas and Geck simple-root matrix identities do not normalize root vectors of an arbitrary split semisimple rational Lie algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.Basis",
+   "results": "{\"t\": \"2026-10-23T21:33:34Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.Basis\", \"LieAlgebra.Basis.e\", \"LieAlgebra.Basis.f\", \"LieAlgebra.Basis.h\", \"LieAlgebra.Basis.A\", \"LieAlgebra.Basis.symm\", \"LieAlgebra.Basis.nondegen\", \"LieAlgebra.Basis.cartan_eq_lieSpan\"], \"digest\": \"01cba2159de84219\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.Basis in Mathlib/Algebra/Lie/Basis/Basic.lean:13--37,59--81 (read) records simple-root generators only and explicitly lists Chevalley bases as TODO. The root-string chain lemmas and Geck simple-root matrix identities do not normalize root vectors of an arbitrary split semisimple rational Lie algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of normalized Chevalley bases with integral root string structure constants",
+   "results": "{\"t\": \"2026-10-23T21:33:34Z\", \"tool\": \"leansearch\", \"query\": \"Existence of normalized Chevalley bases with integral root string structure constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.mk'\", \"RootPairing.Base.toWeightBasis\", \"RootPairing.Base.exists_root_eq_sum_int\", \"RootPairing.Base.toWeightBasis.congr_simp\", \"LieAlgebra.IsKilling.rootSystem\", \"RootPairing.Base.toWeightBasis_apply\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.Base.toCoweightBasis_apply\"], \"digest\": \"6b2c243137a4e2cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.Basis in Mathlib/Algebra/Lie/Basis/Basic.lean:13--37,59--81 (read) records simple-root generators only and explicitly lists Chevalley bases as TODO. The root-string chain lemmas and Geck simple-root matrix identities do not normalize root vectors of an arbitrary split semisimple rational Lie algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|admissible.lattice|Serre.relation|Kostant|highest.weight|PBW",
+   "results": "{\"t\": \"2026-10-23T21:33:33Z\", \"tool\": \"grep\", \"query\": \"Chevalley|admissible.lattice|Serre.relation|Kostant|highest.weight|PBW\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/SerreConstruction.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Algebra/Lie/Extension.lean\"], \"digest\": \"9bd1481bfb0c1f10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieAlgebra.Basis in Mathlib/Algebra/Lie/Basis/Basic.lean:13--37,59--81 (read) records simple-root generators only and explicitly lists Chevalley bases as TODO. The root-string chain lemmas and Geck simple-root matrix identities do not normalize root vectors of an arbitrary split semisimple rational Lie algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley basis of a split semisimple Lie algebra with prescribed simple root vectors and integral structure constants",
+   "results": "{\"t\": \"2026-10-23T22:15:48Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley basis of a split semisimple Lie algebra with prescribed simple root vectors and integral structure constants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Base.toWeightBasis\", \"CartanMatrix.Generators.E\", \"RootPairing.Base.toWeightBasis_apply\", \"LieAlgebra.IsSemisimple\", \"CartanMatrix.Generators\", \"CartanMatrix.Generators.F\", \"LieAlgebra.IsKilling.instSemisimple\", \"RootPairing.Base.toCoweightBasis\"], \"digest\": \"f1caf8c94e9aeb2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.IsKilling",
+   "results": "{\"t\": \"2026-10-23T22:15:47Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.IsKilling\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling\", \"LieAlgebra.isKilling_of_equiv\", \"LieEquiv.isKilling\", \"LieAlgebra.IsKilling.killingForm_nondegenerate\", \"LieAlgebra.IsKilling.instSemisimple\", \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"LieAlgebra.IsKilling.killingCompl_top_eq_bot\", \"LieAlgebra.IsKilling.mk\"], \"digest\": \"9c492c7cced40149\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|opposition|rootString|chainBotCoeff",
+   "results": "{\"t\": \"2026-10-23T22:15:48Z\", \"tool\": \"grep\", \"query\": \"Chevalley|opposition|rootString|chainBotCoeff\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Algebra/Lie/Extension.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/Cochain.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"62254d8fffc2abd3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Basis.symm at Mathlib/Algebra/Lie/Basis/Basic.lean:98--117 exchanges generator data; it is not a Lie automorphism of the given algebra. Weight negation and Geck matrix operators likewise do not give this rational involution. Basis/Basic.lean:34--37 lists existence and Chevalley bases as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-chevalley-admissible-representation",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, Theorem 23.63 and its rational-field extension, pp.503--508; Chevalley bases and Theorem 23.71, pp.508--509; admissible lattice and equation (152), p.510; full-weight choice in Corollary 23.73, p.511. Supporting input: Section 23h, Chevalley bases, printed pp.508--509, especially Theorem 23.71; extending the prescribed simple-root pinning, with rationality from bracket construction over the split rational form.",
+   "via": [
+    "lem-sfb-chevalley-admissible-representation",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-chevalley-root-normalization",
+  "worker": "stage1",
+  "summary": "Kept the statement; built the rational root vectors by explicit induction and division by the integer root-string coefficient. Reused the simple-coroot basis and lattice node; separated rational opposition and the conditional local squared bracket identity as two unsplit prerequisites; added the exact Mathlib root-addition induction leaf. Checked zero rank, arbitrary rational simple scalings and root-string coefficients 1, 2 and 3.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/moduli/root-datum-realization chain recorded in blueprint.from.via; realizes the Chevalley-normalization input of lem-sfb-chevalley-admissible-representation. Latest blueprint proof (3) is the direct-image/compactification paragraph; this split changes only its existing supporting Lie-algebra branch."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-4228c9331",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-4228c9331 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, its 5 steps, the 3 new nodes, the cited nodes (lem-sfb-root-base-rational-integral-spans, def-wf-lie-algebra, def-wf-semisimple-lie-algebra, def-weil-field) and Milne iAG Section 23h pp.508-509 (Theorem 23.71). There is no repair note, so this is an ordinary one-level split. Live is still unsplit, and the statement, stmt_deps, source and unit are byte-identical to live. All nodes are in unit sk-thm-sf-ctf-stability; no tool_uses and no SGA. Delivery convention: theta is an automorphism with theta|h=-1 and e_{-a}=-theta(e_a), so [e_a,e_{-a}]=h_a. This corrects Milne's loose opposition paragraph (his sl2 transpose example is an anti-automorphism), and integrality is never inferred from theta-compatibility alone. Step 2 matches Mathlib RootPairing.Base.induction_add (Base.lean:628; hypotheses checked at 549 and 586-639, IsReduced omitted). The norm lemma is applied with (alpha,beta)=(alpha,delta) and division by p+1 gives the witness; negation via -theta(z) and h_{-a}=-h_a checked. Steps 3-5 checked, including theta^2=1 for negative roots, N^2=(p+1)^2 => N=+-(p+1), coroot integrality via the span leaf, and rank 0. The opposition-involution node is true by the characteristic-0 split isomorphism theorem applied to generators x_d, y_d; it is not lem-sfb-serre-rational-presentation, which only builds a model. The bracket-norm node is true via Carter's identity N_{a,b}N_{-a,-b}=-(p+1)^2 after extending scalars to Qbar. Exact sp4 tests with theta=-transpose gave h_{e1+e2} for p=0 and 4h_{2e1} for p=1. The bracket-norm node does not restate the item. Advisory only: the coroot-family reflection permutation and the injectivity of alpha -> h_alpha are taken from the item's root-system hypothesis (Bourbaki VI.1.1). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.ChevalleyRootNormalization",
+  "declaration": "LieAlgebra.exists_chevalley_basis_of_pinning",
+  "file": "lean/Sheaf/Algebra/Lie/ChevalleyRootNormalization.lean",
+  "statement": "theorem exists_chevalley_basis_of_pinning (L : Type u) [LieRing L] [LieAlgebra ℚ L] [FiniteDimensional ℚ L] [HasTrivialRadical ℚ L] (H : LieSubalgebra ℚ L) [IsLieAbelian H] (hmax : ∀ K : LieSubalgebra ℚ L, H ≤ K → IsLieAbelian K → K = H) (I : Type v) [Finite I] (P : RootPairing I ℚ (Dual ℚ H) H) [P.IsRootSystem] [P.IsCrystallographic] [P.IsReduced] (heval : ∀ (f : Dual ℚ H) (h : H), P.toLinearMap f h = f h) (hdecomp : DirectSum.IsInternal (Sum.elim (fun _ : Unit ↦ H.toSubmodule) (fun i : I ↦ (LieModule.weightSpace L (P.root i)).toSubmodule))) (hdim : ∀ i : I, Module.finrank ℚ (LieModule.weightSpace L (P.root i)) = 1) (hcoroot : ∀ i : I, (P.coroot i : L) ∈ Submodule.span ℚ {z : L | ∃ a ∈ LieModule.weightSpace L (P.root i), ∃ b ∈ LieModule.weightSpace L (-P.root i), ⁅a, b⁆ = z}) (Δ : Set I) (b : Module.Basis Δ ℚ (Dual ℚ H)) (hb : ∀ i : Δ, b i = P.root i) (hsign : ∀ i : I, P.root i ∈ AddSubmonoid.closure (P.root '' Δ) ∨ -P.root i ∈ AddSubmonoid.closure (P.root '' Δ)) (x : Δ → L) (hx : ∀ i : Δ, x i ∈ LieModule.weightSpace L (P.root i)) (hxne : ∀ i : Δ, x i ≠ 0) : ∃ e : I → L, (∀ i : I, e i ∈ LieModule.weightSpace L (P.root i) ∧ e i ≠ 0) ∧ (∀ i : Δ, e i = x i) ∧ (∀ i : I, ⁅e i, e (P.reflectionPerm i i)⁆ = (P.coroot i : L)) ∧ (∀ i j k : I, P.root i + P.root j = P.root k → ∃ ε : ℤ, (ε = 1 ∨ ε = -1) ∧ ⁅e i, e j⁆ = ((ε : ℚ) * (P.chainBotCoeff i j + 1)) • e k) ∧ (∀ i j : I, P.root i + P.root j ∉ Set.range P.root → P.root i + P.root j ≠ 0 → ⁅e i, e j⁆ = 0) ∧ ∃ B : Module.Basis (Δ ⊕ I) ℚ L, (∀ i : Δ, B (Sum.inl i) = (P.coroot i : L)) ∧ (∀ i : I, B (Sum.inr i) = e i) ∧ ∀ i j k : Δ ⊕ I, ∃ n : ℤ, B.repr ⁅B i, B j⁆ k = (n : ℚ)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44f8dec34",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Every clause checked against the node and Milne §23h Theorem 23.71: semisimple via HasTrivialRadical (the recorded predicate), maximal abelian H, reduced crystallographic root system with evaluation pairing, ordinary eigenspace decomposition with 1-dim root spaces, coroot pinned by hcoroot and heval, plain basis plus sign coherence (no extra coroot-base conditions), arbitrary nonzero x. Conclusions: e_δ=x_δ, [e_α,e_-α]=h_α via reflectionPerm, ±(chainBotCoeff i j + 1) with the node's argument order (fallback value unreachable when the sum is a root), vanishing clause, full integral basis table. Empty base covered. Statement verbatim, proof only sorry, docstrings give source and blueprint, universes u and v independent, live node unchanged apart from lean, no duplicate notion. Advisory: unused BaseExists import. No fixes, no compile."
+ }
+}

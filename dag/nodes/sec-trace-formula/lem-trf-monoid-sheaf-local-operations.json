@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-monoid-sheaf-local-operations",
+ "kind": "statement",
+ "title": "Natural multiplication and identity before the global monoid laws",
+ "statement": "Let C be a category with pullbacks, J a Grothendieck topology, and {f_a:X_a→U} a covering family [def-weil-pbc-sites-and-cohomology], in a containing universe [def-weil-size-convention]. Let A_a be sheaves of commutative monoids on C/X_a with isomorphisms phi_ab between their restrictions to C/(X_a×_U X_b). Let F be a set sheaf on C/U and let e_a:F|_{X_a}≅|A_a| be natural isomorphisms, satisfying e_b=phi_ab e_a on overlaps with the canonical comparison of the two composites to U, including a=b [def-pur-localized-ringed-site]. There exist binary functions mul_V:F(V)×F(V)→F(V) and elements one_V∈F(V), natural in V, such that e_a carries mul to local multiplication and one to the local identity. No associativity, commutativity, unit laws, structure uniqueness, or structural map is asserted.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps, proof at lines 5660–5707; gluing operations and the structural map on covering slice sites."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Form P=F×F and the singleton sheaf T sectionwise. Mathlib Sheaf.tensorProd_isSheaf and tensorUnit_isSheaf implement the product and empty limits of lem-weil-pbc-site-sheaf-sets-limits-sectionwise.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define m_a(x,y)=e_a^{-1}(e_a(x)e_a(y)) and j_a(*)=e_a^{-1}(1). Naturality of e_a and its inverse, and multiplicativity and identity preservation of every A_a restriction, prove that these are natural transformations on each slice. Apply the injective phi_ab after e_a to the two overlap values. The equation for e and multiplicativity of phi_ab identify the two m_a; preservation of 1 gives the same identity for j_a.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply lem-trf-over-sheaf-map-gluing to (P,F,m_a) and (T,F,j_a). Define mul_V(x,y)=m_V(x,y) and one_V=j_V(*). Naturality of the glued transformations gives both restriction equations. The restriction formulas and e_a e_a^{-1}=id give their prescribed local multiplication and identity. The proof is complete in Lean from the one map-gluing theorem.",
+   "uses": [
+    "lem-trf-over-sheaf-map-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "lem-trf-over-sheaf-map-gluing",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TQ, lemma-glue-maps, proof at lines 5660–5707; gluing operations and the structural map on covering slice sites."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of sets with compatible local commutative monoid operations on a cover has unique global commutative monoid operations",
+   "results": {
+    "t": "2026-10-26T08:16:26Z",
+    "tool": "leanfinder",
+    "query": "A sheaf of sets with compatible local commutative monoid operations on a cover has unique global commutative monoid operations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing_types",
+     "TopCat.Sheaf.existsUnique_gluing'",
+     "TopCat.Sheaf.existsUnique_gluing",
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing",
+     "TopCat.Presheaf.isSheaf_iff_isSheafUniqueGluing_types",
+     "TopCat.Presheaf.isSheaf_of_isSheafUniqueGluing_types",
+     "TopCat.Presheaf.IsSheaf.section_ext",
+     "CategoryTheory.Sheaf.tensorUnit_isSheaf"
+    ],
+    "digest": "c6f0bf57af7d461a"
+   },
+   "date": "2026-10-26",
+   "verdict": "No direct monoid-operation descent declaration was found. Read the CartesianMonoidal sheaf product/unit declarations and used them, then explicitly transport the operations and apply map gluing. The checked Lean proof realizes this argument."
+  },
+  {
+   "tool": "grep",
+   "query": "presheafHom_isSheafFor|existsUnique_amalgamation_ofArrows",
+   "results": {
+    "t": "2026-10-26T08:28:16Z",
+    "tool": "grep",
+    "query": "presheafHom_isSheafFor|existsUnique_amalgamation_ofArrows",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+     "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+     "Mathlib/CategoryTheory/Sites/SheafHom.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean",
+     "Mathlib/CategoryTheory/Sites/Sheaf.lean"
+    ],
+    "digest": "237149f12d360045"
+   },
+   "date": "2026-10-26",
+   "verdict": "No direct monoid-operation descent declaration was found. Read the CartesianMonoidal sheaf product/unit declarations and used them, then explicitly transport the operations and apply map gluing. The checked Lean proof realizes this argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural multiplication and identity operations on a sheaf of sets glue from compatible operations on covering slice sites",
+   "results": {
+    "t": "2026-10-26T08:28:17Z",
+    "tool": "leansearch",
+    "query": "Natural multiplication and identity operations on a sheaf of sets glue from compatible operations on covering slice sites",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.instCategorySheaf",
+     "CategoryTheory.Sheaf.instInhabitedHom",
+     "CategoryTheory.Sheaf.monoidalCategory",
+     "CategoryTheory.typesGlue",
+     "TopCat.Presheaf.IsSheafUniqueGluing",
+     "CategoryTheory.Sheaf.cartesianMonoidalCategory",
+     "TopCat.Sheaf.forget",
+     "CategoryTheory.Sheaf.instHasFiniteProducts"
+    ],
+    "digest": "06be6bbb3e7cccde"
+   },
+   "date": "2026-10-26",
+   "verdict": "No direct monoid-operation descent declaration was found. Read the CartesianMonoidal sheaf product/unit declarations and used them, then explicitly transport the operations and apply map gluing. The checked Lean proof realizes this argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"presheafHom\", \"IsSheaf\"",
+   "results": {
+    "t": "2026-10-26T08:28:17Z",
+    "tool": "loogle",
+    "query": "\"presheafHom\", \"IsSheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "CategoryTheory.presheafHom_isSheafFor",
+     "CategoryTheory.PresheafHom.IsSheafFor.app",
+     "CategoryTheory.PresheafHom.IsSheafFor.app_cond",
+     "CategoryTheory.PresheafHom.IsSheafFor.exists_app"
+    ],
+    "digest": "b5325ea936690d09"
+   },
+   "date": "2026-10-26",
+   "verdict": "No direct monoid-operation descent declaration was found. Read the CartesianMonoidal sheaf product/unit declarations and used them, then explicitly transport the operations and apply map gluing. The checked Lean proof realizes this argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps between sheaves on a slice site glue uniquely from compatible natural transformations on covering slices in any containing universe",
+   "results": {
+    "t": "2026-10-26T08:28:19Z",
+    "tool": "leanfinder",
+    "query": "Maps between sheaves on a slice site glue uniquely from compatible natural transformations on covering slices in any containing universe",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Sheaf.existsUnique_gluing'",
+     "TopCat.Sheaf.existsUnique_gluing",
+     "CategoryTheory.GrothendieckTopology.plus_hom_ext",
+     "TopCat.Presheaf.IsSheaf.isSheafUniqueGluing",
+     "CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext",
+     "CategoryTheory.GrothendieckTopology.plusLift_unique",
+     "CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows",
+     "CategoryTheory.Presheaf.IsSheaf.hom_ext"
+    ],
+    "digest": "53283ca90f69de98"
+   },
+   "date": "2026-10-26",
+   "verdict": "No direct monoid-operation descent declaration was found. Read the CartesianMonoidal sheaf product/unit declarations and used them, then explicitly transport the operations and apply map gluing. The checked Lean proof realizes this argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.MonoidSheafStructureGluing",
+  "date": "2026-10-26",
+  "group": "H4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Expose VIII 3.3.8 final sentence: fine logarithmic structures and morphisms descend from strict etale charts as sheaves of monoids. Old proof step 3: reconstruct monoid operations and the structural map after set-sheaf descent. Auxiliary natural multiplication and identity before the global monoid laws.",
+   "via": [
+    "lem-trf-monoid-sheaf-structure-gluing",
+    "lem-trf-fine-log-structure-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.MonoidSheafLocalOperations",
+  "file": "lean/Sheaf/CategoryTheory/MonoidSheafLocalOperations.lean",
+  "declaration": "CategoryTheory.monoidSheafLocalOperations",
+  "statement": "theorem monoidSheafLocalOperations\n    {C : Type u} [Category.{v} C] [HasPullbacks C]\n    (J : GrothendieckTopology C) {I : Type (max u v w)}\n    (U : C) (X : I → C) (f : ∀ a, X a ⟶ U)\n    (hcov : Sieve.ofArrows X f ∈ J U)\n    (A : ∀ a, Sheaf (J.over (X a)) CommMonCat.{max u v w})\n    (phi : ∀ a b,\n      (J.overMapPullback CommMonCat (pullback.fst (f a) (f b))).obj (A a) ≅\n        (J.overMapPullback CommMonCat (pullback.snd (f a) (f b))).obj (A b))\n    (F : Sheaf (J.over U) (Type (max u v w)))\n    (e : ∀ a, (Over.map (f a)).op ⋙ F.obj ≅ (A a).obj ⋙ forget CommMonCat)\n    (he : ∀ (a b : I) (V : Over (pullback (f a) (f b)))\n      (x : F.obj.obj (op ((Over.map (pullback.snd (f a) (f b)) ⋙\n        Over.map (f b)).obj V))),\n      (e b).hom.app _ x = (phi a b).hom.hom.app (op V)\n        ((e a).hom.app _\n          (F.obj.map (((Over.mapComp _ _).symm ≪≫\n          Over.mapCongr _ _ (pullback.condition (f := f a) (g := f b)) ≪≫\n          Over.mapComp _ _).hom.app V).op x))) :\n    ∃ (mul : ∀ V : (Over U)ᵒᵖ, F.obj.obj V → F.obj.obj V → F.obj.obj V)\n      (one : ∀ V : (Over U)ᵒᵖ, F.obj.obj V),\n      ((∀ (V W : (Over U)ᵒᵖ) (k : V ⟶ W) (x y : F.obj.obj V),\n          F.obj.map k (mul V x y) = mul W (F.obj.map k x) (F.obj.map k y)) ∧\n        (∀ (V W : (Over U)ᵒᵖ) (k : V ⟶ W), F.obj.map k (one V) = one W)) ∧\n      ((∀ (a : I) (V : (Over (X a))ᵒᵖ)\n          (x y : F.obj.obj ((Over.map (f a)).op.obj V)),\n          (e a).hom.app V (mul _ x y) = (e a).hom.app V x * (e a).hom.app V y) ∧\n        (∀ (a : I) (V : (Over (X a))ᵒᵖ), (e a).hom.app V (one _) = 1))",
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T091723-L-3368614",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261026T091723-L-3368614",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

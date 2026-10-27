@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-neutral-action-finite-type-saturation",
+ "kind": "statement",
+ "title": "Finite-type saturation under a fibrewise neutral open subgroup",
+ "statement": "Let $S$ be an affine Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] and let $G\\to S$ be a smooth separated group scheme, locally of finite type [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. A group scheme has multiplication, inverse and identity morphisms satisfying the group diagrams (the relative form of [def-sc-group-scheme]); separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Let $H\\subseteq G$ be an open subgroup scheme of finite type over $S$ [def-weil-open-immersion]. Assume that for every geometric point $\\bar s$ of $S$, $H_{\\bar s}$ is the connected component containing the identity in $G_{\\bar s}$ [def-pc-base-change, def-weil-connected-scheme]. Let $W\\subseteq G$ be a quasi-compact open subscheme (its underlying space is quasi-compact). Define $|X|$ to be the image on underlying points of the multiplication morphism $H\\times_SW\\to G$. Then $|X|$ is open, contains $|W|$, and its open subscheme $X\\subseteq G$ is smooth, separated and of finite type over $S$. Multiplication restricts to an action $H\\times_SX\\to X$. For every geometric point $\\bar s$, $X_{\\bar s}$ is a union of connected components of $G_{\\bar s}$, and each nonempty such component is a single orbit of $H_{\\bar s}$: for any algebraically closed extension $\\Omega$ of its residue field and $x,y\\in X_{\\bar s}(\\Omega)$ in that component there is $h\\in H_{\\bar s}(\\Omega)$ with $hx=y$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.6 Theorem 2, introductory image construction and proof of (a), printed pp.164–165 (PDF pp.170–171); 6.4 discussion of the identity component before Lemma 3, printed pp.154–155; 10.1 discussion after Definition 1, printed p.290. Scheme-only saturation lemma extracted from these arguments; no Néron mapping property assumed. Local PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "Restrict $G\\to S$ to $H$; this is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. Thus $p_2:H\\times_SG\\to G$ is smooth by [lem-pc-proper-base-change]. The morphism $\\alpha(h,g)=(h,hg)$ is an automorphism of $H\\times_SG$, with inverse $(h,g)\\mapsto(h,h^{-1}g)$: these identities are precisely the group inverse and associativity diagrams. The action $a(h,g)=hg$ equals $p_2\\alpha$, so is smooth by the isomorphism clause of [lem-weil-pbc-smooth-restrict-open-subschemes]. Its restriction $b:H\\times_SW\\to G$ is smooth by the open-restriction clause of the same node. By [lem-pc-smooth-flat] and [lem-weil-pbc-flat-lfp-open], $b$ is open. In particular its image $|X|$ is open.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V6 (lemma-smooth-characterize), 01VB (lemma-base-change-smooth), 01UA (lemma-fppf-open); BLR 6.6 Theorem 2 proof, printed p.164, action as an automorphism followed by a projection"
+   }
+  },
+  {
+   "text": "The finite-type hypothesis on $H\\to S$ implies that it is quasi-compact. By [lem-pc-quasi-compact-base-change], $H\\times_SW\\to W$ is quasi-compact. Its inverse image of the quasi-compact open $W$ is the whole source, so [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open] makes $H\\times_SW$ quasi-compact. The continuous-image assertion [lem-weil-pbc-continuous-image-quasi-compact] makes $|X|$ quasi-compact. Give it its open-subscheme structure [def-weil-open-immersion].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-pc-quasi-compact-base-change",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-continuous-image-quasi-compact",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K5 (lemma-quasi-compact-preserved-base-change), 01K4 (lemma-quasi-compact-affine); topology.tex Tag 04Z9 (lemma-image-quasi-compact); BLR 6.6 Theorem 2(a), printed p.165, quasi-compact multiplication source"
+   }
+  },
+  {
+   "text": "The open subscheme $X$ is smooth over $S$ by [lem-weil-pbc-smooth-restrict-open-subschemes], and separated over $S$ by [lem-trf-immersion-over-separated-base]. Smoothness gives local finite presentation by [lem-pc-smooth-flat]. In an affine presentation $A=R[t_1,\\ldots,t_n]/(f_1,\\ldots,f_m)$ of [def-sbc-locally-finite-presentation], the classes of the $t_i$ generate $A$ as an $R$-algebra, so the morphism is locally of finite type. Finally $S$ is affine and hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Since $X$ is quasi-compact by step 2, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $X\\to S$ quasi-compact. Together these give finite type by [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-trf-immersion-over-separated-base",
+    "lem-pc-smooth-flat",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01V6 (lemma-smooth-characterize); schemes.tex Tag 01L8 (lemma-subscheme-of-separated-scheme), Tag 01K4 (lemma-quasi-compact-affine); definition of finite type, Tag 01T0"
+   }
+  },
+  {
+   "text": "The section $w\\mapsto(e,w)$ of $H\\times_SW\\to W$ has composite $w\\mapsto w$ in $G$, so $W\\subseteq X$. We check the image of $H\\times_SX\\to G$ lies in $X$. Take any point $z$ of $H\\times_SX$, and use its residue field $K$ to obtain $h\\in H(K)$ and $x\\in X(K)$. By [lem-weil-pbc-base-change-image], the fibre of $b$ over this $K$-point $x$ is nonempty. Choose a point of that fibre, with residue field $L$; it gives $a\\in H(L)$ and $w\\in W(L)$ with $x_L=aw$. The group law gives $h_Lx_L=(h_La)w$, which is in the image of $b$. Its underlying point is the image of $z$, so this image lies in $X$. By [lem-weil-pbc-morphism-factors-through-open-subscheme] the multiplication therefore factors uniquely through $X$. Associativity and the unit identity hold after the inclusion $X\\hookrightarrow G$, and uniqueness in that same node makes them hold in $X$. This is the claimed action.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S1 (lemma-base-change-surjective), subset-image formula from Tag 0495; schemes.tex Tag 01HI (lemma-restrict-map-to-opens); group diagrams"
+   }
+  },
+  {
+   "text": "Fix a geometric point with algebraically closed field $k$, and put $F=G_k$, $C=H_k$. By smooth base change [lem-pc-proper-base-change], $F$ is smooth and locally of finite type. By hypothesis $C=F^0$. The node [lem-sfb-locally-algebraic-group-identity-component] says that $C$ is open and closed, connected and geometrically irreducible, and that this identity component commutes with field extension. Every connected component $D$ of $F$ is closed. By [lem-sc-lft-over-field-jacobson-space], it contains a closed point of $F$, rational over $k$ by [lem-weil-pbc-closed-point-residue-field-base]; call it $g$. Right translation $r_g$ is an automorphism with inverse $r_{g^{-1}}$, by the group diagrams. Hence $r_g(C)$ is connected, open and closed, and contains $g$. It is contained in $D$ by maximal connectedness, and equals $D$ since a nonempty clopen subset of a connected space is the whole space. Thus $r_g:C\\xrightarrow{\\sim}D$ is an isomorphism of open subschemes. This uses no finiteness of the number of components of $F$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R (proposition-connected-component); varieties.tex Tag 0478 (lemma-locally-finite-type-Jacobson); morphisms.tex Tag 01TB (lemma-jacobson-finite-type-points). Translation argument written out; BLR 6.4 discussion before Lemma 3, printed pp.154–155"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-base-change-image], $X_k$ is exactly the image of $H_k\\times_kW_k\\to G_k$; in particular it is the base change of the open constructed above. If a component $D$ of $F$ meets $X_k$, then $D\\cap X_k$ is a nonempty open subscheme of the smooth $k$-scheme $F$, by step 5. It is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes], so [lem-pc-rational-points-dense] supplies $w\\in(D\\cap X_k)(k)$. Repeating the translation argument of step 5 with this $w$ gives $D=Cw$. The action of step 4 shows $Cw\\subseteq X_k$ (base-change the factorization using [def-pc-base-change]). Consequently every component meeting $X_k$ is wholly contained in it: $X_k$ is a union of connected components of $F$.",
+   "uses": [
+    "lem-weil-pbc-base-change-image",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-rational-points-dense",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R and translation by a rational point; BLR 6.4 discussion before Lemma 3, printed pp.154–155, identity-component orbits on geometric fibres"
+   }
+  },
+  {
+   "text": "For a component $D\\subseteq X_k$, choose $w\\in D(k)$ as in step 6. The isomorphism $C\\xrightarrow{h\\mapsto hw}D$ base changes to an isomorphism $C_\\Omega\\xrightarrow{\\sim}D_\\Omega$ for every algebraically closed extension $\\Omega/k$, by the fibre-product definition [def-pc-base-change]. The field-extension clause of [lem-sfb-locally-algebraic-group-identity-component] identifies $C_\\Omega$ with the identity component of $F_\\Omega$, so $D_\\Omega$ is connected as well. Given $x,y\\in D(\\Omega)$, write uniquely $x=aw$, $y=bw$ with $a,b\\in C(\\Omega)$. Then $h=ba^{-1}\\in C(\\Omega)=H_k(\\Omega)$ satisfies $hx=ba^{-1}aw=bw=y$. This is the asserted orbit statement, including its extension-field quantifier. If $W$ is empty, all constructions yield the empty $X$ and there is no component to consider.",
+   "uses": [
+    "def-pc-base-change",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, geometric irreducibility of the identity component; base change of translation and the group inverse identity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-finite-type-morphism",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "def-weil-open-immersion",
+  "lem-trf-immersion-over-separated-base",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-pc-rational-points-dense",
+  "def-pc-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R, with the explicit group-action and translation argument of the split; BLR 6.6 Theorem 2 image-construction route read online, local PDF missing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The saturation of a quasi compact open in a smooth separated group scheme by its finite type neutral component is a smooth finite type open with transitive action on fibre components",
+   "results": "{\"t\": \"2026-10-24T08:00:13Z\", \"tool\": \"leanfinder\", \"query\": \"The saturation of a quasi compact open in a smooth separated group scheme by its finite type neutral component is a smooth finite type open with transitive action on fibre components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_smoothLocus\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen\", \"AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact\", \"AlgebraicGeometry.IsAffineOpen.isCompactOpenCovered\", \"AlgebraicGeometry.quasiCompactCover_iff\"], \"digest\": \"8583f318cf1f1afc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T08:00:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "grep",
+   "query": "saturat|neutralComponent|identityComponent",
+   "results": "{\"t\": \"2026-10-24T08:00:09Z\", \"tool\": \"grep\", \"query\": \"saturat|neutralComponent|identityComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a smooth locally finite type group scheme the identity component acting on a quasi compact open gives a finite type saturated open",
+   "results": "{\"t\": \"2026-10-24T08:00:09Z\", \"tool\": \"leansearch\", \"query\": \"In a smooth locally finite type group scheme the identity component acting on a quasi compact open gives a finite type saturated open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion\", \"Subgroup.connectedComponentOfOne\", \"OpenNormalSubgroup.pathComponentOne_carrier\", \"OpenNormalSubgroup.pathComponentOne\", \"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"AlgebraicGeometry.instIsLocallyNoetherianToScheme\"], \"digest\": \"8f7324c0192a7cb1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type connected open subgroup acts on a smooth group scheme and its orbits are connected components of the geometric fibres",
+   "results": "{\"t\": \"2026-10-24T08:00:14Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type connected open subgroup acts on a smooth group scheme and its orbits are connected components of the geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.FintypeCat.Action.pretransitive_of_isConnected\", \"CategoryTheory.FintypeCat.Action.isConnected_of_transitive\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.FintypeCat.Action.isConnected_iff_transitive\", \"CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\"], \"digest\": \"7cbb2968ea1f0174\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: actual hits concern affine covers, single-point affine neighbourhoods, general scheme local properties, or topological groups; none states the scheme group-action or fibrewise assertion searched."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open finite type identity subgroup of a smooth group scheme saturates quasi compact opens to finite type opens with geometric fibre components as orbits",
+   "results": "{\"t\": \"2026-10-24T08:31:28Z\", \"tool\": \"leanfinder\", \"query\": \"An open finite type identity subgroup of a smooth group scheme saturates quasi compact opens to finite type opens with geometric fibre components as orbits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.quotient_finite_of_isOpen\", \"Subgroup.quotient_finite_of_isOpen'\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AddSubgroup.quotient_finite_of_isOpen\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AddSubgroup.quotient_finite_of_isOpen'\"], \"digest\": \"23f3fa73c8d6ccba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological groups or affine-open compactness, not relative scheme-group saturation and geometric component orbits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The saturation of a quasi compact open by an open connected subgroup scheme is open finite type",
+   "results": "{\"t\": \"2026-10-24T08:32:10Z\", \"tool\": \"leansearch\", \"query\": \"The saturation of a quasi compact open by an open connected subgroup scheme is open finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens\", \"AddSubgroup.instFiniteQuotientOfContinuousAddOfCompactSpace\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_affineOpens\", \"AddSubgroup.quotient_finite_of_isOpen\", \"AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union\", \"AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen\", \"Subgroup.quotient_finite_of_isOpen\"], \"digest\": \"5121211cd0aadd83\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological groups or affine-open compactness, not relative scheme-group saturation and geometric component orbits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of multiplication from an open subgroup times an open subset of a smooth algebraic group scheme is open and quasi compact",
+   "results": "{\"t\": \"2026-10-24T08:33:12Z\", \"tool\": \"leanfinder\", \"query\": \"The image of multiplication from an open subgroup times an open subset of a smooth algebraic group scheme is open and quasi compact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"compact_open_separated_mul_right\", \"compact_open_separated_mul_left\", \"IsOpen.mul_right\", \"IsOpen.mul_left\", \"OpenSubgroup.coe_prod\", \"IsOpen.leftCoset\", \"isOpenMap_mul_right\", \"IsOpen.smul_left\"], \"digest\": \"72faa7d2f1d8d850\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are topological groups or affine-open compactness, not relative scheme-group saturation and geometric component orbits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-neron-lft-finite-set-affine",
+  "date": "2026-10-24",
+  "group": "Q64"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), open direct image preservation through sk-prop-open-coefficients; in the DAG refinement of admissible direct image, trait-extension input and finite-flat Néron lft descent (BLR 10.1 Proposition 4). BLR 10.1, proof of Proposition 4, printed p.291 (PDF p.297), first sentence; preceding discussion printed p.290 and 6.4 Theorem 1 for the affine-neighbourhood input. Finite-type saturation before applying the affine-neighbourhood argument; this node does not assert existence of ample lines or finite-set affine opens.",
+   "via": [
+    "lem-sfb-neron-lft-finite-set-affine",
+    "lem-sfb-neron-lft-weil-restriction-geometry",
+    "lem-sfb-finite-flat-neron-lft-descent",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neutral-action-finite-type-saturation",
+  "worker": "stage1",
+  "summary": "Seven-step saturation proof using existing general scheme and locally algebraic group nodes; no new nodes. Multiplication is a smooth projection conjugated by an explicit automorphism. Quasi-compactness uses finite type of H, not G. Image base change handles residue-field lifts, and explicit translations give the geometric component and extension-field orbit assertions. Statement unchanged; local BLR PDF remains wanted.",
+  "blueprint": "Newest blueprint literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, proper/open direct image paragraph through sk-prop-open-coefficients; same finite-flat Neron lft descent refinement as the inherited blueprint.from.place. tools/blueprint_refs.py ancestor prints None, retained without changing the maintainer-owned ancestry. Searches for group scheme, connected component and saturation found no blueprint duplicate.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-5f37e52ee",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-5f37e52ee (reviewer sub-agent of L); spot-checked: Shape: one commit (item + report), 0 new nodes. The statement, stmt_deps, source, blueprint and unit are byte-identical to the live base. The item was unsplit with no proof, so the re-split rule does not apply. I read all 7 steps against the statements of the 20 cited nodes and they hold. (1) a(h,g)=hg equals p2∘α, with α(h,g)=(h,hg) an automorphism. Smoothness comes from restrict-open (a)/(b)/(c) and smooth base change. Flat + lfp makes b open. (2) Quasi-compactness uses only H of finite type, through qc base change and the image of a qc space. (3) Smooth, separated (immersion followed by separated) and finite type, using S affine ⇒ qs and permanence (1); the lfp⇒lft step is standard locality (a Mathlib instance), accepted as elementary. (4) Stability uses the base-change-image node to get an L-point x_L=aw, then h_L·a·w, the open factorization, and the action identities by uniqueness. (5) A component D has a closed, k-rational point g (Jacobson + closed-point residue field), and r_g(C)=D by the clopen argument, with no assumption of finitely many components. (6) A rational w ∈ D∩X_k comes from lem-pc-rational-points-dense (alg. closed ⇒ separably closed), and Cw ⊆ X_k comes from the base-changed action. (7) x=aw, y=bw, h=ba⁻¹, keeping the Ω quantifier. Edge cases checked: W empty; H=G with connected fibres; constant infinite discrete G with H trivial; noncommutative G. No cycle: the item is not in the 260-node closure of its proof_deps. Off-unit statements lem-pc-proper-base-change and lem-pc-rational-points-dense are both Lean-closed in slopmaster2, so they are tools by themselves and no tool_uses are needed. Batch-5 check: lem-trf-immersion-over-separated-base is a Mathlib leaf (IsSeparated.instCompScheme, Separated.lean:75), a general separatedness fact. Neither the trace-formula nor the Poincaré-duality assumption gives it, it is no step of their proofs, and it is the only trace-formula node in the closure, so it is outside the assumed statements. Stacks 0B7R (groupoids.tex l.1012) matches the use of the identity-component node. The BLR PDF is not in literature/ (listed WANTED in the report), so I could not read it; proof_origin is correctly marked agent and I checked the proof directly. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NeutralActionFiniteTypeSaturation",
+  "declaration": "AlgebraicGeometry.neutralAction_finiteType_saturation",
+  "file": "lean/Sheaf/AlgebraicGeometry/NeutralActionFiniteTypeSaturation.lean",
+  "statement": "theorem neutralAction_finiteType_saturation (S : Scheme.{u}) [IsAffine S] [IsLocallyNoetherian S] (G H : Over S) [GrpObj G] [GrpObj H] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] (i : H ⟶ G) [IsMonHom i] [IsOpenImmersion i.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (hH : ∀ (k : Type u) [Field k] [IsAlgClosed k] (s : Spec (.of k) ⟶ S), Set.range ((Over.pullback s).map i).left = connectedComponent (GrpObj.onePoint ((Over.pullback s).obj G))) (W : G.left.Opens) (hW : IsCompact (W : Set G.left)) : ∃ X : G.left.Opens, (X : Set G.left) = Set.range ((lift (fst H (Over.mk (W.ι ≫ G.hom)) ≫ i) (snd H (Over.mk (W.ι ≫ G.hom)) ≫ Over.homMk (V := G) W.ι) ≫ μ[G]).left) ∧ W ≤ X ∧ Smooth (X.ι ≫ G.hom) ∧ IsSeparated (X.ι ≫ G.hom) ∧ LocallyOfFiniteType (X.ι ≫ G.hom) ∧ QuasiCompact (X.ι ≫ G.hom) ∧ (∃ a : ModObj H (Over.mk (X.ι ≫ G.hom)), a.smul ≫ Over.homMk (V := G) X.ι = lift (fst H (Over.mk (X.ι ≫ G.hom)) ≫ i) (snd H (Over.mk (X.ι ≫ G.hom)) ≫ Over.homMk (V := G) X.ι) ≫ μ[G]) ∧ ∀ (k : Type u) [Field k] [IsAlgClosed k] (s : Spec (.of k) ⟶ S), (∀ z : ((Over.pullback s).obj G).left, (pullback.fst G.hom s) z ∈ X → connectedComponent z ⊆ (pullback.fst G.hom s) ⁻¹' (X : Set G.left)) ∧ ∀ (Ω : Type u) [Field Ω] [Algebra k Ω] [IsAlgClosed Ω] (x y : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ⟶ (Over.pullback s).obj G), Set.range x.left ⊆ (pullback.fst G.hom s) ⁻¹' (X : Set G.left) → Set.range y.left ⊆ (pullback.fst G.hom s) ⁻¹' (X : Set G.left) → y.left (IsLocalRing.closedPoint Ω) ∈ connectedComponent (x.left (IsLocalRing.closedPoint Ω)) → ∃ h : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω))) ⟶ (Over.pullback s).obj H, (h ≫ (Over.pullback s).map i) * x = y",
+  "branch": "sheaf-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dab24fa37",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Node unchanged apart from the added lean record; no new nodes or dep records; lean.statement verbatim equal to the file signature. Hypotheses match one for one: affine + IsLocallyNoetherian (= Noetherian), GrpObj G/H over S, Smooth/IsSeparated/LocallyOfFiniteType on G, i an IsMonHom open immersion, H lft+qc, hH = range of base-changed i equals connectedComponent(onePoint) at every geometric point, W compact open. Conclusions: X pinned to the scheme-point image of H×_S W→G, W≤X, smooth/separated/lft/qc, ModObj action pinned to μ[G], fibre union-of-components clause, orbit clause for all alg. closed Ω/k with (h≫i)*x=y as a morphism equality (hx). No extra hypotheses; only the standard single universe u. Edge cases (empty W or S, H=G, infinitely many components, noncommutative G, Ω=k) covered. Docstrings carry source, blueprint and all 7 steps; proof is sorry only; report has Worker report and Second reading by Q38. No duplicate found; onePoint is the shared upstream definition. No file changed, so no recompile."
+ }
+}

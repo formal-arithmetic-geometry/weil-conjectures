@@ -1,0 +1,162 @@
+{
+ "id": "lem-trf-line-quotient-recovered-charts",
+ "kind": "statement",
+ "title": "Fraction coefficients of a pulled tautological quotient",
+ "statement": "Let $h:T\\to S$ be a morphism of schemes [def-pc-scheme], $\\mathcal E$ a quasi-coherent module [pqf-def-coherent], and $D$ any normalized tautological quotient on $P=\\operatorname{Proj}_S\\operatorname{Sym}(\\mathcal E)$ [def-per-projective-bundle-quotient-data]. Let $a:T\\to P$ satisfy $a;p=h$, and let $\\psi$ be any graded extension [lem-trf-line-quotient-homogeneous-fraction-map] of its normalized pulled quotient $q_a$ [def-trf-line-quotient-chart-inverse-data]. Then $\\psi$ satisfies $\\mathrm{HasQuotientFractionCharts}$ at $a$. Moreover $\\mathrm{RecoveredFractionCoefficients}$ holds [def-trf-line-quotient-chart-inverse-data]: on each affine $W$ factoring through the chart $D_+(\\iota(m))$, the coefficient of every degree-$d$ element $c$ in the pulled $\\iota(m)$ frame equals the pullback of $c/\\iota(m)^d$, including degree zero.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "def-trf-line-quotient-chart-inverse-data"
+ ],
+ "proof": [
+  {
+   "text": "On an affine W factoring through a standard generator chart for a, apply [lem-trf-line-quotient-pulled-chart-normalization]. This gives a free pulled generator frame, the scalar ring map of k, and the degree-one images of the pulled quotient. The coefficient ring homomorphism from [lem-trf-graded-line-homogeneous-fraction-atlas], applied to the existing quotientFramePower and quotientCoefficient equations of [lem-trf-line-quotient-homogeneous-fraction-map], sends scalars and generators to these values. Induct on membership in the dth power of the symmetric generator submodule [def-trf-canonical-symmetric-graded-algebra]: the base case is a scalar, the additive case uses equal-denominator addition, and the product case multiplies x/e^i by v/e. This proves every coefficient equals k^*(c/e^d), including degree zero. In particular the denominator generator has coefficient one.",
+   "uses": [
+    "lem-trf-line-quotient-pulled-chart-normalization",
+    "lem-trf-graded-line-homogeneous-fraction-atlas",
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "def-trf-canonical-symmetric-graded-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any fraction-chart morphism F supplied by [lem-trf-line-quotient-homogeneous-fraction-map], its chart ring map on this W sends c/e^d to the localization of the recovered coefficient, since the denominator coefficient is one. Every degree-zero homogeneous fraction has this form. Thus this map equals the scalar extension of k ring map. Contravariant functoriality and the affine-spectrum adjunction [def-weil-affine-spectrum] identify the corresponding scheme maps, proving F and a agree on the generator fraction source above W.",
+   "uses": [
+    "lem-trf-line-quotient-homogeneous-fraction-map",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degree-one generators cover every affine symmetric Proj, by [prop-nagata-proj-standard-open] and the symmetric-algebra generation property [def-trf-canonical-symmetric-graded-algebra]. The relative-Proj affine embeddings [def-nagata-relative-proj] and open-immersion lifting therefore give a chart factorization k on an affine neighbourhood W of every source point. Its generator fraction source has opensRange W because its coefficient is one. Apply [lem-weil-pbc-scheme-morphism-gluing] to the local equalities to conclude F=a.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "def-nagata-relative-proj",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pulled line is invertible by [lem-weil-pbc-invertible-pullback-tensor]. The section-normalized tensor pullback is a left adjoint and preserves epimorphisms, so pulledQuotient is epi. Obtain an extension and its chart morphism F from [lem-trf-line-quotient-homogeneous-fraction-map]; uniqueness of the extension identifies it with the given psi. Substitute F=a into its full fraction-chart predicate. Together with the all-degree identity proved in Step 1, this gives both required conclusions without changing their statements.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-module-pullback-epi-direct-sum",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-relative-proj",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-weil-affine-spectrum",
+  "lem-trf-graded-line-homogeneous-fraction-atlas",
+  "lem-trf-line-quotient-homogeneous-fraction-map",
+  "lem-trf-line-quotient-pulled-chart-normalization",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-pullback-epi-direct-sum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "prop-nagata-proj-standard-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01O4: explicit all-degree induction, normalized fraction chart comparison and local scheme equality; only the local degree-one tautological normalization is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pulling back the tautological projective bundle quotient recovers the scheme morphism on all homogeneous fraction coordinates",
+   "results": "{\"t\": \"2026-10-23T11:29:42Z\", \"tool\": \"leansearch\", \"query\": \"Pulling back the tautological projective bundle quotient recovers the scheme morphism on all homogeneous fraction coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"Bundle.Pullback.lift\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso.congr_simp\", \"AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1\"], \"digest\": \"c192ea0ad67b7059\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back the tautological projective bundle quotient recovers the scheme morphism on all homogeneous fraction coordinates",
+   "results": "{\"t\": \"2026-10-23T11:29:48Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back the tautological projective bundle quotient recovers the scheme morphism on all homogeneous fraction coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\"], \"digest\": \"cbb3d6356a9f760e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator",
+   "results": "{\"t\": \"2026-10-23T12:24:25Z\", \"tool\": \"grep\", \"query\": \"HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero occurrences in Mathlib; these fraction-chart predicates are project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LineQuotientChartInversePullback",
+  "date": "2026-10-23",
+  "group": "G3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 7--8 and arbitrary-pullback part of step 9. Intermediate Fraction coefficients of a pulled tautological quotient.",
+   "via": [
+    "lem-trf-line-quotient-chart-inverse-pullback",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineQuotientRecoveredCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/LineQuotientRecoveredCharts.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.lineQuotient_recovered_charts",
+  "statement": "theorem lineQuotient_recovered_charts {S T : Scheme.{u}} (h : T ⟶ S) (E : S.Modules) [E.IsQuasicoherent] (D : TautologicalQuotient E) (a : T ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj) (ha : a ≫ (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom = h) (ψ : RelativeGradedLineMap h (SymmetricAlgebraSheaf.gradedAlgebraData E) ((tensorPullback a).obj D.line)) (hψ : ψ.ExtendsLineQuotient h E _ (pulledQuotient D h a ha)) : ψ.HasQuotientFractionCharts h E _ (pulledQuotient D h a ha) a ∧ RecoveredFractionCoefficients D h a ψ",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261027T112422-L-1582131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

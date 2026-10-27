@@ -1,0 +1,226 @@
+{
+ "id": "lem-trf-quasi-finite-kernel-quotient-dimension-comparison",
+ "kind": "statement",
+ "title": "Quasi-finite kernel quotient factor and local-to-global dimension comparison",
+ "statement": "Let $A,T$ be commutative rings and let $\\varphi:A\\to T$ be a finite type ring homomorphism [def-weil-pbc-finite-type-algebra] which is quasi-finite at every prime of $T$ [def-weil-pbc-ring-map-quasi-finite-at-prime]. Put $I=\\ker\\varphi$, $R=A/I$, and let $\\pi:A\\to R$ be the quotient map [def-weil-pbc-algebra-hom-quotient]. The formula $\\psi(a+I)=\\varphi(a)$ defines a ring homomorphism $\\psi:R\\to T$ satisfying $\\psi\\pi=\\varphi$; this map is finite type and quasi-finite at every prime of $T$. For every prime $\\mathfrak q$ of $T$, put $\\mathfrak r=\\psi^{-1}(\\mathfrak q)$. Then\n$$\\dim T_{\\mathfrak q}\\le\\dim R_{\\mathfrak r}\\le\\dim R,\\qquad \\dim T\\le\\dim R,$$\nwhere the localizations are those of [def-weil-pbc-localization-at-prime] and dimensions are ring Krull dimensions [def-weil-pbc-krull-dimension-ring]. Zero rings are permitted, with dimension $-\\infty$; infinite dimensions are permitted. No Noetherian, domain, or injectivity hypothesis on $A\\to T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00PN (lemma-four-rings), kernel-quotient square with identity on the target; Tag 00QF (lemma-dimension-inequality-quasi-finite), local inequality for that quotient factor; Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra), proof, local-to-global comparison pattern. These supply old item steps 3, 5 and the ring-dimension part of 6."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-ring-map-quasi-finite-at-prime",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "If $a+I=b+I$, then $a-b\\in I=\\ker\\varphi$, hence $\\varphi(a)=\\varphi(b)$. Thus $\\psi(a+I)=\\varphi(a)$ is well defined. The quotient operations give $\\psi((a+I)+(b+I))=\\varphi(a)+\\varphi(b)$, $\\psi((a+I)(b+I))=\\varphi(a)\\varphi(b)$ and $\\psi(1+I)=1$. This is a ring homomorphism and $\\psi\\pi=\\varphi$ on each $a\\in A$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PN (lemma-four-rings), specialization to the kernel-quotient square; elementary quotient construction"
+   }
+  },
+  {
+   "text": "Apply the four-rings lemma to the commutative square $A\\to T$, $A\\xrightarrow{\\pi}R$, $R\\xrightarrow{\\psi}T$, $T\\xrightarrow{1_T}T$. Its finite-type hypothesis is the given one for $\\varphi$. Its generation hypothesis holds since every $t\\in T$ is the one-term product $1_T(t)\\psi(1_R)=t$. The lemma gives finite type of $\\psi$. For any prime $\\mathfrak q$ of the lower-right $T$, contraction along $1_T$ is $\\mathfrak q$, where $\\varphi$ is quasi-finite by hypothesis. The same lemma gives quasi-finiteness of $\\psi$ at $\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-quasi-finite-four-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PN (lemma-four-rings), with source base A, new base R=A/I, both targets T and target map identity"
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak q\\subset T$ and set $\\mathfrak r=\\psi^{-1}(\\mathfrak q)$. The finite type and quasi-finiteness proved in step 2 meet the hypotheses of the local dimension inequality, so $\\dim T_{\\mathfrak q}\\le\\dim R_{\\mathfrak r}$. By the localization chain formula, $\\dim R_{\\mathfrak r}$ is the supremum of lengths of chains in $R$ ending below $\\mathfrak r$. Each is a chain in $R$, so the definition of $\\dim R$ bounds every such length and gives $\\dim R_{\\mathfrak r}\\le\\dim R$.",
+   "uses": [
+    "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QF (lemma-dimension-inequality-quasi-finite); Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra), proof, local-to-global pattern; definition-Krull and lemma-spec-localization"
+   }
+  },
+  {
+   "text": "For any prime chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_n$ in $T$, the localization chain formula at $\\mathfrak q_n$ gives $n\\le\\dim T_{\\mathfrak q_n}\\le\\dim R$ by step 3. Taking the supremum over all chain lengths gives $\\dim T\\le\\dim R$. If there are no prime chains the supremum is $-\\infty$, so this also proves the zero-ring case. The supremum argument allows unbounded chain lengths and uses no finiteness of either dimension.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra), proof, expanded using definition-Krull and lemma-spec-localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-dimension-inequality-quasi-finite",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tag 00PN, Tag 00QF, and the local-to-global argument of Tag 00QG; elementary quotient and prime-chain details supplied explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi finite ring homomorphism factors through its kernel quotient and the target Krull dimension is bounded by the quotient dimension",
+   "results": "{\"t\": \"2026-10-22T06:47:29Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type quasi finite ring homomorphism factors through its kernel quotient and the target Krull dimension is bounded by the quotient dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\", \"ringKrullDim_quotient_le\", \"ringKrullDim_le_ringKrullDim_quotient_add_encard\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_quotient\", \"ringKrullDim_succ_le_of_surjective\"], \"digest\": \"71e8efc90f285d58\"}; Read the returned quasi-finite definitions, fibre-finiteness equivalences, and quotient permanence results; none states the kernel-quotient factor together with its local and global dimension comparison. Mathlib uses a different quasi-finite-at notion; its comparison with the isolated-fibre-point definition is not a one-line specialization. The local inequality is provided by the existing project node for 00QF, not by a returned Mathlib declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFinite, ringKrullDim",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"loogle\", \"query\": \"Algebra.QuasiFinite, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned quasi-finite definitions, fibre-finiteness equivalences, and quotient permanence results; none states the kernel-quotient factor together with its local and global dimension comparison. Mathlib uses a different quasi-finite-at notion; its comparison with the isolated-fibre-point definition is not a one-line specialization. The local inequality is provided by the existing project node for 00QF, not by a returned Mathlib declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFinite.*(quotient|ker|[Dd]im)|ringKrullDim.*[Qq]uasi",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"grep\", \"query\": \"QuasiFinite.*(quotient|ker|[Dd]im)|ringKrullDim.*[Qq]uasi\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\"], \"digest\": \"48f51bd7554b190f\"}; Read the returned quasi-finite definitions, fibre-finiteness equivalences, and quotient permanence results; none states the kernel-quotient factor together with its local and global dimension comparison. Mathlib uses a different quasi-finite-at notion; its comparison with the isolated-fibre-point definition is not a one-line specialization. The local inequality is provided by the existing project node for 00QF, not by a returned Mathlib declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi finite finite type algebra dimension is at most dimension of the source modulo the kernel",
+   "results": "{\"t\": \"2026-10-22T06:47:19Z\", \"tool\": \"leansearch\", \"query\": \"Quasi finite finite type algebra dimension is at most dimension of the source modulo the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.QuasiFinite\", \"Algebra.QuasiFinite.recOn\", \"Algebra.QuasiFinite\", \"Algebra.QuasiFinite.casesOn\", \"Algebra.QuasiFinite.iff_finite_primesOver\", \"Algebra.quasiFinite_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"RingHom.QuasiFinite.toAlgebra\"], \"digest\": \"29b6ffa8512cd871\"}; Read the returned quasi-finite definitions, fibre-finiteness equivalences, and quotient permanence results; none states the kernel-quotient factor together with its local and global dimension comparison. Mathlib uses a different quasi-finite-at notion; its comparison with the isolated-fibre-point definition is not a one-line specialization. The local inequality is provided by the existing project node for 00QF, not by a returned Mathlib declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi finite map of commutative rings, every target local ring dimension is at most the contracted local dimension after factoring by the kernel",
+   "results": "{\"t\": \"2026-10-22T06:47:30Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi finite map of commutative rings, every target local ring dimension is at most the contracted local dimension after factoring by the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt\", \"Algebra.QuasiFiniteAt.of_le\", \"Algebra.QuasiFinite.iff_finite_comap_preimage_singleton\", \"Algebra.quasiFinite_iff\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver\", \"Polynomial.map_under_lt_comap_of_quasiFiniteAt\", \"Polynomial.not_quasiFiniteAt\", \"Algebra.QuasiFiniteAt.of_surjectiveOnStalks\"], \"digest\": \"2e65c637a10f3ab2\"}; Read the returned quasi-finite definitions, fibre-finiteness equivalences, and quotient permanence results; none states the kernel-quotient factor together with its local and global dimension comparison. Mathlib uses a different quasi-finite-at notion; its comparison with the isolated-fibre-point definition is not a one-line specialization. The local inequality is provided by the existing project node for 00QF, not by a returned Mathlib declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFiniteAt.*(of_isScalarTower|quotient)|QuasiFinite.*[Dd]im|ringKrullDim.*[Qq]uasi",
+   "results": "{\"t\": \"2026-10-22T06:48:51Z\", \"tool\": \"grep\", \"query\": \"QuasiFiniteAt.*(of_isScalarTower|quotient)|QuasiFinite.*[Dd]im|ringKrullDim.*[Qq]uasi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\"], \"digest\": \"93921576e85291df\"}; Read the returned quasi-finite definitions, fibre-finiteness equivalences, and quotient permanence results; none states the kernel-quotient factor together with its local and global dimension comparison. Mathlib uses a different quasi-finite-at notion; its comparison with the isolated-fibre-point definition is not a one-line specialization. The local inequality is provided by the existing project node for 00QF, not by a returned Mathlib declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFinite.*(quotient|ker|[Dd]im)|ringKrullDim.*[Qq]uasi",
+   "results": "{\"t\": \"2026-10-23T12:35:25Z\", \"tool\": \"grep\", \"query\": \"QuasiFinite.*(quotient|ker|[Dd]im)|ringKrullDim.*[Qq]uasi\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\", \"Mathlib/RingTheory/ZariskisMainTheorem.lean\"], \"digest\": \"602b2e221121d00a\"}; Read the hits: quotient-dimension inequalities compare R/I with R, not T with R/I; quasi-finite definitions and permanence results do not give the dimension comparison in this statement. The local inequality is the existing project node for Tag 00QF. No exact or one-line Mathlib match for the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension of a quasi finite finite type algebra is bounded by the dimension of the base ring modulo the kernel",
+   "results": "{\"t\": \"2026-10-23T12:35:25Z\", \"tool\": \"leansearch\", \"query\": \"The dimension of a quasi finite finite type algebra is bounded by the dimension of the base ring modulo the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_quotient_le\", \"Algebra.QuasiFinite.recOn\", \"RingHom.QuasiFinite\", \"Algebra.QuasiFinite.casesOn\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Algebra.QuasiFinite.mk\", \"ringKrullDim_le_ringKrullDim_add_card\"], \"digest\": \"68a77d4df061d115\"}; Read the hits: quotient-dimension inequalities compare R/I with R, not T with R/I; quasi-finite definitions and permanence results do not give the dimension comparison in this statement. The local inequality is the existing project node for Tag 00QF. No exact or one-line Mathlib match for the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.QuasiFinite, ringKrullDim",
+   "results": "{\"t\": \"2026-10-23T12:35:25Z\", \"tool\": \"loogle\", \"query\": \"Algebra.QuasiFinite, ringKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: quotient-dimension inequalities compare R/I with R, not T with R/I; quasi-finite definitions and permanence results do not give the dimension comparison in this statement. The local inequality is the existing project node for Tag 00QF. No exact or one-line Mathlib match for the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type quasi finite ring map factors through the quotient by its kernel and the target local and global Krull dimensions are bounded by those of the quotient",
+   "results": "{\"t\": \"2026-10-23T12:35:26Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type quasi finite ring map factors through the quotient by its kernel and the target local and global Krull dimensions are bounded by those of the quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_card\", \"Algebra.QuasiFinite.finite_primeSpectrum\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotient_le\", \"ringKrullDim_le_ringKrullDim_quotient_add_card\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"ringKrullDim_quotient\", \"ringKrullDim_le_ringKrullDim_quotient_add_encard\"], \"digest\": \"35539a772bcd0860\"}; Read the hits: quotient-dimension inequalities compare R/I with R, not T with R/I; quasi-finite definitions and permanence results do not give the dimension comparison in this statement. The local inequality is the existing project node for Tag 00QF. No exact or one-line Mathlib match for the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringKrullDim.*(quasiFinite|QuasiFinite)|[Qq]uasiFinite.*ringKrullDim|[Qq]uasiFinite.*of_surjective",
+   "results": "{\"t\": \"2026-10-23T12:35:51Z\", \"tool\": \"grep\", \"query\": \"ringKrullDim.*(quasiFinite|QuasiFinite)|[Qq]uasiFinite.*ringKrullDim|[Qq]uasiFinite.*of_surjective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\"], \"digest\": \"049ce9b2fa181dd8\"}; Read the hits: quotient-dimension inequalities compare R/I with R, not T with R/I; quasi-finite definitions and permanence results do not give the dimension comparison in this statement. The local inequality is the existing project node for Tag 00QF. No exact or one-line Mathlib match for the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite algebra has Krull dimension at most its base ring; local dimension decreases under a quasi finite ring homomorphism",
+   "results": "{\"t\": \"2026-10-23T12:35:54Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi finite algebra has Krull dimension at most its base ring; local dimension decreases under a quasi finite ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteRingKrullDim\", \"Algebra.QuasiFinite.finite_primeSpectrum\", \"Algebra.QuasiFiniteAt.of_le\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Algebra.QuasiFiniteAt\", \"Algebra.quasiFinite_iff\", \"ringKrullDim_quotient_le\", \"Algebra.QuasiFinite.iff_finite_primesOver\"], \"digest\": \"a07e96df67d59655\"}; Read the hits: quotient-dimension inequalities compare R/I with R, not T with R/I; quasi-finite definitions and permanence results do not give the dimension comparison in this statement. The local inequality is the existing project node for Tag 00QF. No exact or one-line Mathlib match for the whole item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
+  "date": "2026-10-22",
+  "group": "Q132"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: the flat-family dimension argument for the curve and horizontal boundary, through the component-closure input. Pointwise specialization input to Stacks 0GSJ. In the proof of 0GSI: first paragraph: equality of generic and special component dimensions over the valuation base. Auxiliary used in Tag 00QK, final sentence: a nonzero polynomial kernel in a quasi-finite polynomial chart forces dimension less than the number of variables. Tag 00PN (lemma-four-rings), kernel-quotient square with identity on the target; Tag 00QF (lemma-dimension-inequality-quasi-finite), local inequality for that quotient factor; Tag 00QG (lemma-dimension-quasi-finite-over-polynomial-algebra), proof, local-to-global comparison pattern. These supply old item steps 3, 5 and the ring-dimension part of 6.",
+   "via": [
+    "lem-trf-quasi-finite-polynomial-kernel-dimension-drop",
+    "lem-trf-valuation-domain-fibre-dimensions",
+    "lem-trf-flat-relative-associated-specialization",
+    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-fibre-component-closure-dimension",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-quasi-finite-kernel-quotient-dimension-comparison",
+  "worker": "stage1",
+  "summary": "Q42: retained the statement; constructed the quotient factor explicitly, applied existing 00PN and 00QF nodes, and used the existing localization chain formula for the two dimension comparisons. No new nodes. Checked zero rings, infinite dimensions, all cited statements, upstream attachment candidates and Mathlib searches.",
+  "blueprint": "Auxiliary kernel-quotient and dimension-comparison input along the inherited chain from lem-trf-local-term-locality, proof (1)--(2), via the semistable component-dimension branch. Steps 1--2 realize the 00PN quotient square, step 3 the 00QF local bound, step 4 the 00QG local-to-global pattern. The latest blueprint does not state this auxiliary separately.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-four-rings",
+    "why": "Generic ring-theoretic permanence under a generated commutative square, specialized to A -> A/ker(phi) and identity on T; no statement of sk-i-curve-zero provides it."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-inequality-quasi-finite",
+    "why": "Generic local Krull-dimension inequality for a finite-type map quasi-finite at a prime, needed for the quotient factor; no statement of sk-i-curve-zero provides it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-four-rings",
+  "lem-weil-pbc-dimension-inequality-quasi-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-25ba1435d",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-25ba1435d (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. Its statement is identical to the live copy, where the item is still unsplit; no other group split it and there is no re-split note. Source checks: Stacks algebra.tex 00PN (l.30293), 00QF (l.31267) and 00QG (l.31291), labels confirmed in tags/tags. 00QG is used only for its local-to-global pattern, not as a theorem. Step 1: the quotient factor ψ is built elementarily and is correct. Step 2: lem-weil-pbc-quasi-finite-four-rings applies to the square A→T, A→A/I, ψ, 1_T. The square commutes by step 1, φ is of finite type by hypothesis, and generation holds since t=1_T(t)ψ(1). The node statement itself includes finite type of R'→S' (Stacks 00PN does not), and contracting q along 1_T gives q, so ψ is of finite type and quasi-finite everywhere. Step 3: the 00QF node gives dim T_q ≤ dim R_r; the localization chain formula (Mathlib leaf) plus the definition give dim R_r ≤ dim R. Step 4: the supremum over chains ending in q_n gives dim T ≤ dim R; marking it elementary is justified. Edge cases tested: identity; surjections; T=0; A=0, and R=0 forcing T=0; Z→Z[1/2]; k[x]→k, which shows R rather than A is the right comparison ring; infinite dimensions. Duplicate search with rg -L over 00QF/00QG and keywords found none. The two generic sk-thm-p1 tool_uses are accepted. No SGA source is used. The only citer uses just dim T ≤ dim R, which the statement gives. No fixes."
+ }
+}

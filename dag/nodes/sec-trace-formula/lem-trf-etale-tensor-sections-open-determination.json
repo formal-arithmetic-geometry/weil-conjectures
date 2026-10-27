@@ -1,0 +1,236 @@
+{
+ "id": "lem-trf-etale-tensor-sections-open-determination",
+ "kind": "statement",
+ "title": "Maps out of tensor sections are determined on Zariski opens",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $T_{\\mathrm{et}}$ its small etale site [def-weil-pbc-etale-site], and $\\mathcal O_{\\mathrm{et}}(u:V\\to T)=\\Gamma(V,\\mathcal O_V)$ its structure-ring sheaf. Use the Zariski site [def-sc-zariski-site] and presheaves of modules [def-weil-presheaf-modules-sheafification]. Let $M$ be any Zariski $\\mathcal O_T$-module and $G$ any sheaf of $\\mathcal O_{\\mathrm{et}}$-modules [def-weil-sheaf-of-modules-category]. Let $P_M$ be the module presheaf $P_M(u)=\\Gamma(V,u^*M)$ with the unit-normalized restrictions [lem-sc-etale-qcoherent-presheaf-functorial] and pullback [def-pc-module-pullback]. Write $G_u(A)=G(A\\hookrightarrow V\\xrightarrow{u}T)$ for the Zariski module on $V$, for $A\\subseteq V$ open, and $G_T(W)=G(W\\hookrightarrow T)$. For $i_W:W\\hookrightarrow T$, write $\\kappa_W:M|_W\\xrightarrow{\\sim}i_W^*M$ for the unit-compatible comparison [lem-weil-pbc-open-immersion-module-pullback-restriction]. For morphisms of module presheaves $\\theta,\\theta':P_M\\to G$, if\n$$\\theta_{i_W}\\circ\\Gamma(W,\\kappa_W)=\\theta'_{i_W}\\circ\\Gamma(W,\\kappa_W):M(W)\\to G_T(W)$$\nfor every Zariski open $W\\subseteq T$, then $\\theta=\\theta'$ on every object and arrow of $T_{\\mathrm{et}}$. In other words, restriction to open subschemes is injective on the set of module-presheaf maps out of this specified $P_M$. No quasi-coherence, separation or nonemptiness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 070S, lemma-compare-sites, omitted proof of (2): injectivity of restriction on maps from tensor sections, old tensor-sections split step 7 (agent-supplied intermediate lemma; the source omits the small-site proof)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-open-immersion-module-pullback-restriction",
+  "def-sc-zariski-site",
+  "def-weil-presheaf-modules-sheafification",
+  "new-etale-tensor-open-section-iso"
+ ],
+ "proof": [
+  {
+   "text": "For each etale object U, let B_U consist of all normalized restrictions rho_f(e_W^{-1}(m)), with W a base open, m a section of M on W, and f:U to i_W. Naturality of theta and theta-prime gives theta_U(rho_f(e_W^{-1}(m)))=G(f)(theta_iW(e_W^{-1}(m))) and the corresponding equality for theta-prime. The open hypothesis makes these equal. Thus the two linear maps agree on B_U, and LinearMap.eqOn_span makes them agree on its span.",
+   "uses": [
+    "lem-sc-etale-qcoherent-presheaf-functorial",
+    "new-etale-tensor-open-section-iso"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix V and s in P_M(V). Apply lem-trf-etale-tensor-sections-local-span to get a covering sieve S such that rho_g(s) belongs to the span of B_U for every g:U to V in S. The first step and naturality show G(g)(theta_V(s))=theta_U(rho_g(s))=theta-prime_U(rho_g(s))=G(g)(theta-prime_V(s)) on every arrow in S.",
+   "uses": [
+    "lem-trf-etale-tensor-sections-local-span"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use sheaf separatedness to conclude theta_V(s)=theta-prime_V(s). In Lean, the free abelian group ULift Z corepresents the forgetful functor on AddCommGrpCat in the independent target universe. Whiskering its coyoneda isomorphism with G transfers hG evaluated at that free group to the sheaf condition for the underlying presheaf of types. Presieve.IsSheafFor.isSeparatedFor.ext now applies to the covering sieve S. Extensionality of linear maps and dependent functions gives theta=theta-prime. The argument uses no comparison of the target universe with the scheme universe.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "new-etale-tensor-open-section-iso",
+  "lem-trf-etale-tensor-sections-local-span",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 070S (2), explicitly omitted small-site proof: section-level local generation from the tensor construction (Sheaves 0095, 0096), followed by linearity, naturality, and sheaf separatedness. Stage-3 reduction by X3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two natural module maps from the presheaf Gamma V u pullback M to an etale module sheaf G are equal if their components on all Zariski open subschemes agree",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, PresheafOfModules.sections_ext, PresheafOfModules.hom_ext_iff, AlgebraicGeometry.Scheme.OpenCover.ext_elem, PresheafOfModules.sections_ext_iff, PresheafOfModules.Sheafify.SMulCandidate.mk.inj, PresheafOfModules.hom_ext. Read Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:95-115 and AlgebraicGeometry/Modules/Sheaf.lean:170-190. Presheaf hom_ext requires equality on all etale objects; scheme hom_ext is about ordinary Zariski modules. Neither proves equality at non-open etale objects from equality only on opens. Abstract pullback uniqueness cannot apply before identifying P_M with that pullback.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules\", \"ext\"",
+   "results": "11 hits: PresheafOfModules.Hom.ext, PresheafOfModules.Hom.ext_iff, PresheafOfModules.hom_ext, PresheafOfModules.hom_ext_iff, PresheafOfModules.sections_ext, PresheafOfModules.sections_ext_iff, PresheafOfModules.free_hom_ext, PresheafOfModulesOfCommRing.Derivation.ext. Read Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:95-115 and AlgebraicGeometry/Modules/Sheaf.lean:170-190. Presheaf hom_ext requires equality on all etale objects; scheme hom_ext is about ordinary Zariski modules. Neither proves equality at non-open etale objects from equality only on opens. Abstract pullback uniqueness cannot apply before identifying P_M with that pullback.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|homEquiv_injective|Faithful",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Subobject.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean, Mathlib/Algebra/Category/ModuleCat/Descent.lean. Read Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:95-115 and AlgebraicGeometry/Modules/Sheaf.lean:170-190. Presheaf hom_ext requires equality on all etale objects; scheme hom_ext is about ordinary Zariski modules. Neither proves equality at non-open etale objects from equality only on opens. Abstract pullback uniqueness cannot apply before identifying P_M with that pullback.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from tensor pullback section presheaves to etale modules are determined on Zariski opens by the unit and adjunction",
+   "results": "8 hits: TopCat.Presheaf.pullback_obj_obj_ext_iff, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.PullbackConstruction.adjunction, TopCat.Presheaf.pullback_obj_obj_ext, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit. Read Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:95-115 and AlgebraicGeometry/Modules/Sheaf.lean:170-190. Presheaf hom_ext requires equality on all etale objects; scheme hom_ext is about ordinary Zariski modules. Neither proves equality at non-open etale objects from equality only on opens. Abstract pullback uniqueness cannot apply before identifying P_M with that pullback.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of restriction on natural transformations out of the scheme pullback sections presheaf from all etale objects to open immersions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.Cover.fromGlued_injective, AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.Scheme.Hom.image_injective, AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit. Read Mathlib/Algebra/Category/ModuleCat/Presheaf.lean:95-115 and AlgebraicGeometry/Modules/Sheaf.lean:170-190. Presheaf hom_ext requires equality on all etale objects; scheme hom_ext is about ordinary Zariski modules. Neither proves equality at non-open etale objects from equality only on opens. Abstract pullback uniqueness cannot apply before identifying P_M with that pullback.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|homEquiv_injective|pullbackPushforwardAdjunction",
+   "results": "25 hits; top results: Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/Restrict.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean, Mathlib/AlgebraicGeometry/Cover/Directed.lean. Read Presheaf.lean:95-115 (hom_ext requires all objects), Scheme Modules/Sheaf.lean:170-195 (ordinary scheme adjunction), Sheaf/PullbackContinuous.lean:79-110 (abstract site pullback). These do not identify the specified tensor-sections presheaf with a site pullback, nor prove determination from base opens directly. Topological presheaf pullback ext applies to a different construction and is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules\", \"ext\"",
+   "results": "11 hits; top results: PresheafOfModules.Hom.ext, PresheafOfModules.Hom.ext_iff, PresheafOfModules.hom_ext, PresheafOfModules.hom_ext_iff, PresheafOfModules.sections_ext, PresheafOfModules.sections_ext_iff, PresheafOfModules.free_hom_ext, PresheafOfModulesOfCommRing.Derivation.ext. Read Presheaf.lean:95-115 (hom_ext requires all objects), Scheme Modules/Sheaf.lean:170-195 (ordinary scheme adjunction), Sheaf/PullbackContinuous.lean:79-110 (abstract site pullback). These do not identify the specified tensor-sections presheaf with a site pullback, nor prove determination from base opens directly. Topological presheaf pullback ext applies to a different construction and is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural module maps from pullback sections on the small etale site are determined by their components on Zariski opens",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, AlgebraicGeometry.Scheme.Hom.ext, PresheafOfModules.sections_ext, PresheafOfModules.sections_ext_iff, AlgebraicGeometry.Spec.basicOpen_hom_ext, SheafOfModules.hom_ext_iff, SheafOfModules.hom_ext. Read Presheaf.lean:95-115 (hom_ext requires all objects), Scheme Modules/Sheaf.lean:170-195 (ordinary scheme adjunction), Sheaf/PullbackContinuous.lean:79-110 (abstract site pullback). These do not identify the specified tensor-sections presheaf with a site pullback, nor prove determination from base opens directly. Topological presheaf pullback ext applies to a different construction and is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|pullbackPushforwardAdjunction",
+   "results": "25 hits; top results: Mathlib/Algebra/Category/ModuleCat/Subobject.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/Abelian.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. Read Presheaf.lean:95-115 (hom_ext requires all objects), Scheme Modules/Sheaf.lean:170-195 (ordinary scheme adjunction), Sheaf/PullbackContinuous.lean:79-110 (abstract site pullback). These do not identify the specified tensor-sections presheaf with a site pullback, nor prove determination from base opens directly. Topological presheaf pullback ext applies to a different construction and is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps from tensor pullback section presheaves to etale modules are determined on Zariski opens by adjunction units",
+   "results": "8 hits; top results: TopCat.Presheaf.pullback_obj_obj_ext_iff, SheafOfModules.PullbackConstruction.adjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, TopCat.Presheaf.pullback_obj_obj_ext. Read Presheaf.lean:95-115 (hom_ext requires all objects), Scheme Modules/Sheaf.lean:170-195 (ordinary scheme adjunction), Sheaf/PullbackContinuous.lean:79-110 (abstract site pullback). These do not identify the specified tensor-sections presheaf with a site pullback, nor prove determination from base opens directly. Topological presheaf pullback ext applies to a different construction and is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of restriction of natural transformations from scheme pullback section presheaves to Zariski open subschemes using the pullback pushforward adjunction",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Hom.toImage_app_injective, AlgebraicGeometry.Scheme.Cover.fromGlued_injective, AlgebraicGeometry.specTargetImageFactorization_app_injective, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Hom.image_injective, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf, TopCat.Presheaf.pullback_obj_obj_ext. Read Presheaf.lean:95-115 (hom_ext requires all objects), Scheme Modules/Sheaf.lean:170-195 (ordinary scheme adjunction), Sheaf/PullbackContinuous.lean:79-110 (abstract site pullback). These do not identify the specified tensor-sections presheaf with a site pullback, nor prove determination from base opens directly. Topological presheaf pullback ext applies to a different construction and is not a one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-zariski-etale-tensor-sections",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C) in the specialization chain below lem-trf-local-term-locality: Zariski and small etale quasi-coherent modules agree functorially. Historical imported ancestry retained. More precisely: the change-of-topology tensor pullback used in the section-algebra comparison; Stacks 070S(2). Auxiliary omitted proof of (2): injectivity of restriction on maps from tensor sections, old tensor-sections split step 7.",
+   "via": [
+    "lem-trf-zariski-etale-tensor-sections",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-tensor-sections-open-determination",
+  "worker": "stage1",
+  "summary": "Supplied the omitted uniqueness argument of Stacks 070S(2) using existing pullback adjunction, unit-normalized composition, and canonical open-section naturality nodes. For each etale u, a presheaf map induces a Zariski map u^*M to G_u; its adjunct is computed explicitly from its values on base opens. The proof has no new nodes, no quasi-coherence assumption, and no appeal to the parent tensor-sections identification. Checked exact citation statements, canonical normalizations, arbitrary and empty schemes, and the whole-open identification.",
+  "blueprint": "Retains the recorded ancestry below lem-trf-local-term-locality: the change-of-topology tensor-sections comparison used in the section-algebra descent input. The current latest locality node has no tensor-sections paragraph; this is the explicitly recorded historical auxiliary input, realized here by the uniqueness part of the omitted proof of Stacks 070S(2), not a change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-qcoherent-presheaf-functorial",
+    "why": "Normalized pullback composition units and semilinear tensor restrictions, a generic module-pullback tool; the trace unit supplies no such interface."
+   },
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "The ordinary scheme-module pullback/pushforward Hom bijection, applied on V; no trace-unit node gives this general adjunction."
+   },
+   {
+    "node": "new-etale-tensor-open-section-iso",
+    "why": "The canonical identification of tensor pullback sections on an open with ordinary sections, applied to N=u^*M on V."
+   },
+   {
+    "node": "new-etale-tensor-open-section-naturality",
+    "why": "Naturality on inclusions of opens for that fixed canonical comparison, needed before forming a Zariski sheaf morphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "new-etale-tensor-open-section-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-8dc8b9af0",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-8dc8b9af0 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and the statement of every cited node; there are no new nodes. The statement, stmt_deps and source match clones/live, where the item is still unsplit, so no parallel group has split it. There is no repair note for this item, and on the base the node had no proof. Stacks descent.tex:2300-2366 (070S) says 'We omit the proof of (2)', so the agent proof_origin is honest; 0096 (sheaves.tex:3157) and 00A0 (sheaves.tex:4453) fit the uses. Step 2: the iso node's comparison equals Γ(κ)^{-1}, since both are unit-compatible; the naturality node, inverted, gives Γ(κ_B)res=ρ^N_kΓ(κ_A); the associativity node with L=u^*,j_A^*,k^* gives exactly c_{k,u_A}k^*(c_{j_A,u})=c_{j_B,u}c_{k,j_A}, and the right adjoints compose strictly. Step 4: the κ unit equation and the c normalization give η^{u_A}(m) on both sides, since u_A^{-1}W=A and u_A=i_W∘v. Step 5: b_W(m)=G(v)ξ_{i_W}κ_W(m), so the hypothesis gives equal adjuncts and injectivity of the adjunction gives a^θ=a^θ'. Step 6: cancelling the isomorphism e_V gives θ_u=θ'_u. Empty schemes and M=0 are fine, and no quasi-coherence is used. The parent cites the item, not the other way round, so there is no circularity. No duplicate among the 070S-citing nodes (adjunction-extension is the existence half). proof_deps equals the union of the uses, there are no SGA citations, and I accept the four generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsOpenDetermination",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorSections_open_determination",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsOpenDetermination.lean",
+  "statement": "theorem etaleTensorSections_open_determination (T : Scheme.{u}) (M : T.Modules) (G : _root_.PresheafOfModules.{v} ((Scheme.Etale.forget T ⋙ Over.forget T).op ⋙ Scheme.Γ ⋙ forget₂ CommRingCat.{u} RingCat.{u})) (hG : Presheaf.IsSheaf T.smallEtaleTopology G.presheaf) (θ θ' : ∀ V : T.Etale, Γ((tensorPullback V.hom).obj M, ⊤) →ₗ[Γ(V.left, ⊤)] G.obj (op V)) (hθ : ∀ (U V : T.Etale) (g : V ⟶ U) (s : Γ((tensorPullback U.hom).obj M, ⊤)), θ V (etaleTensorSectionsRestriction M g s) = G.map g.op (θ U s)) (hθ' : ∀ (U V : T.Etale) (g : V ⟶ U) (s : Γ((tensorPullback U.hom).obj M, ⊤)), θ' V (etaleTensorSectionsRestriction M g s) = G.map g.op (θ' U s)) (h_open : ∀ (W : T.Opens) (m : Γ(M, W)), θ (Scheme.Etale.mk W.ι) ((tensorOpenSectionIso T M W).inv m) = θ' (Scheme.Etale.mk W.ι) ((tensorOpenSectionIso T M W).inv m)) : θ = θ'",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b83bb3b21",
+  "group": "Q148",
+  "result": "pass",
+  "note": "Item lean vs node: T:Scheme.{u}; M:T.Modules arbitrary (no qcoh); G = PresheafOfModules.{v} over the étale structure ring (definitionally (smallEtaleModuleRing T).obj) + hG IsSheaf = SheafOfModules fields, v free; θ,θ' = Γ(V,⊤)-linear families with naturality over all arrows/sections via etaleTensorSectionsRestriction (lem-sc-etale-qcoherent-presheaf-functorial, unit-pinned adjunction); h_open over all opens W and m using (tensorOpenSectionIso T M W).inv = unit-compatible κ_W (leftAdjointUniq), a bijection so the hypothesis cannot be hollow; conclusion θ=θ' is family equality = presheaf-morphism equality. Source 070S(2) arbitrary module, proof omitted, agent origin accurate; 6-step proof sound (hG needed). Edge cases (empty T/V/W, M=0, non-open V) fine. Node differs from live only in lean + stmt_deps gaining landed new-etale-tensor-open-section-iso (owns tensorOpenSectionIso; allowed by brief l.177). lean.statement verbatim; only the item changed vs live; item not landed elsewhere, no repair note. One sorry theorem, no defs, docstrings with source and blueprint. Advisory: could use T.etaleStructurePresheaf (definitionally the same). Not recompiled; relied on worker's reported compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261026T083508-L-2370724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

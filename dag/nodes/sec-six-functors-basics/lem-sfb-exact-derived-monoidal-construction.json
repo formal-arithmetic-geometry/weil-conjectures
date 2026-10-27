@@ -1,0 +1,160 @@
+{
+ "id": "lem-sfb-exact-derived-monoidal-construction",
+ "kind": "statement",
+ "title": "Constructing an exact derived strong monoidal structure with representative normalization",
+ "statement": "Let B and E be Grothendieck abelian closed braided monoidal categories, with additive tensor, small colimits, functorial flat resolutions and arbitrary chosen derived-category localization universes [def-weil-abstract-derived-category, lem-sfb-derived-monoidal, lem-sfb-abstract-kflat-resolution]. Let G:B→E be additive, exact, preserve small colimits and preserve flat objects. For any strong monoidal structure m on G there exists a strong monoidal structure n on its exact derived functor mapDerivedCategory, satisfying TensorNormalization B E G m n [def-sfb-derived-projection-comparison-squares]. Thus n is normalized by the exact-functor localization factors and the signed total of m on K-flat source pairs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-abstract-kflat-resolution",
+  "def-sfb-derived-projection-comparison-squares"
+ ],
+ "proof": [
+  {
+   "text": "Use the subcategory of source K-flat complexes whose G-images are K-flat. The source functorial flat resolution maps into it: the resolution is a countable colimit of bounded-above flat complexes, and G preserves flats and those colimits. The inclusion is fully faithful and has functorial quasi-isomorphism resolutions, so it is a left derivability structure.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Derive the two tensor bifunctors using the identity derivability structure in the first variable and the preceding subcategory in the second. Both counits are invertible on these models by the native localization tensorator criterion. Their canonical left-derived isomorphism supplies an everywhere invertible tensor transformation with the specified factor equation.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "Apply ofLaxSquare to this transformation and the exact-functor factorization isomorphism. Every derived object admits a model in the chosen subcategory, so all oplax coherence laws transfer. The unit is also invertible, since both localization unit maps and the ordinary functor unit are invertible; obtain a strong monoidal structure.",
+   "uses": [
+    "lem-sfb-oplax-monoidal-of-lax-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  },
+  {
+   "text": "On cochain complexes the ordinary strong monoidal structure is the standard signed-total comparison. The counit factor equation rewrites as TensorNormalization, in fact before restricting the two source complexes to K-flat ones.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "def-sfb-derived-projection-comparison-squares"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-derived-monoidal",
+  "lem-sfb-oplax-monoidal-of-lax-square",
+  "lem-sfb-termwise-strong-monoidal",
+  "def-sfb-derived-projection-comparison-squares"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Project, sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product), derived.tex Tags 0FPQ and 0FPT, resolving localization of the signed tensor total; parent proof steps 4 and 5. Original tensor-square descent proof steps 2 and 3, compatibility only after structures have been constructed. Construction part of original proof step 2, proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact monoidal square between categories of sheaves of modules descends to the unbounded derived categories with its tensor maps normalized on K-flat resolutions",
+   "results": "8 hits; ordinary flat-module exactness and sheaf monoidal structures, no representative-normalized derived square.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mate between geometric inverse image of sheaves of modules over a constant ring and scalar restriction preserves the canonical tensor comparison",
+   "results": "Pullback and free-adjunction results; no constant-scalar tensor square.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMonoidal\", \"mapHomologicalComplex\"",
+   "results": "0 hits",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorSquare|normalized_exact_tensor_square|constant_module_ordinary_tensor_square",
+   "results": "0 Mathlib hits",
+   "date": "2026-10-27",
+   "verdict": "The comparison predicates and their representative equations are project-specific."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.ConstantModuleTensorSquareDescent",
+  "date": "2026-10-27",
+  "group": "Y3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-finite",
+   "place": "Proof paragraph (3), canonical projection map: transport the etale projection formula through the constant-module realization, retaining its ordinary inverse-image tensor map and derived counit transpose. Substep: Original tensor-square descent proof steps 2 and 3, compatibility only after structures have been constructed. Construction part of original proof step 2, proved in Lean.",
+   "via": [
+    "lem-sfb-constant-module-tensor-square-descent",
+    "lem-sfb-constant-module-derived-projection-identification",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactDerivedMonoidalConstruction",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedMonoidalConstruction.lean",
+  "declaration": "CategoryTheory.ConstantModuleDerivedProjection.exact_monoidal_normalization",
+  "statement": "theorem exact_monoidal_normalization\n    (G : B ⥤ E) [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]\n    [PreservesColimitsOfSize.{0, 0} G] [G.PreservesFlat] (m : G.Monoidal) :\n    ∃ n : G.mapDerivedCategory.Monoidal, TensorNormalization B E G m n",
+  "branch": "sheaf-dag",
+  "by": "Y3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T222811-L-698133",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

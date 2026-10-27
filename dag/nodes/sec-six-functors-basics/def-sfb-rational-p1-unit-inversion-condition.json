@@ -1,0 +1,117 @@
+{
+ "id": "def-sfb-rational-p1-unit-inversion-condition",
+ "kind": "definition",
+ "title": "Cached unit inversion condition",
+ "status": "split",
+ "statement": "For a commutative condensed coefficient Λ, scheme Y, module-object family L, shifted second-projection line comparison e, and object M on the projective line, UnitInversionCondition(Λ,Y,L,e,M) means exactly that the canonical ambient exchange at M and the twisted projection at the first pullback of M are both invertible. The fixed maps and categories are those of [def-sfb-projective-ambient-unit-counit-composites], [def-sfb-projective-diagonal-pullback], [def-sfb-tate-twisted-projection-comparison].",
+ "stmt_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "unit/counit well-definedness, clauses (2)--(3), inversion witnesses"
+ },
+ "proof": [
+  {
+   "text": "Define the condition to be the conjunction of IsIso for the fixed exchange and for the fixed twisted projection, with exactly the arguments in unitInversions. This only names an existing proposition; no invertibility fact is assumed or proved. The generic definition caches all category-instance expressions before concrete specialization. Unfolding it recovers the original condition verbatim.",
+   "uses": [
+    "def-sfb-projective-ambient-unit-counit-composites",
+    "def-sfb-projective-diagonal-pullback",
+    "def-sfb-tate-twisted-projection-comparison",
+    "def-sfb-internal-diagonal-tensor-comparison",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "sk-def-sfb-module-derived-pushpull"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-projective-ambient-unit-counit-composites",
+  "def-sfb-projective-diagonal-pullback",
+  "def-sfb-tate-twisted-projection-comparison",
+  "def-sfb-internal-diagonal-tensor-comparison",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-p1-adjunction-rational/sk-prop-p1-adjunction-rational-unit-counit.proof.md",
+  "place": "C1 definitional naming of the existing inversion condition for kernel-efficient specialization"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism conditions on the rational projective line exchange and projection maps",
+   "results": "8 hits about projectivizations and Proj maps; none is the present derived exchange/projection condition.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing fixed comparison maps and name their IsIso predicates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIso",
+   "results": "12 hits, including IsIso, asIso, and the isomorphism inverse instances in Mathlib.CategoryTheory.Iso.",
+   "date": "2026-10-27",
+   "verdict": "IsIso is the intended invertibility predicate; no new invertibility assertion is added."
+  },
+  {
+   "tool": "grep",
+   "query": "UnitInversionCondition|CounitInversionCondition",
+   "results": "0 Mathlib hits. The expanded conditions are already the two inversion clauses of RationalP1UnitCounit.",
+   "date": "2026-10-27",
+   "verdict": "These are definitionally identical names for the existing conditions, introduced to cache instance data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RationalP1UnitCounit",
+  "date": "2026-10-27",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-p1-adjunction-rational-unit-counit",
+   "place": "the fixed inversion witnesses of the unit/counit formulas",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalP1UnitInversionCondition",
+  "file": "lean/Sheaf/Paper/RationalP1UnitInversionCondition.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalP1.UnitInversionCondition",
+  "statement": "def UnitInversionCondition (Y : Scheme.{u}) (L : ∀ X : Scheme.{u}, Modules Λ X)\n    (e : (moduleObjectDerivedPullback Λ (secondProjection Y)).obj\n      (((DerivedCategory.singleFunctor (Modules Λ (ProjectiveLine Y)) 0).obj\n        (L (ProjectiveLine Y))) ⟦(2 : ℤ)⟧) ≅\n      ((DerivedCategory.singleFunctor (Modules Λ (diagonalSurface Y)) 0).obj\n        (L (diagonalSurface Y))) ⟦(2 : ℤ)⟧)\n    (M : DerivedCategory (Modules Λ (ProjectiveLine Y))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-12803",
+  "group": "C1",
+  "result": "fix",
+  "landing": "20261026T235837-L-1460279",
+  "kind": "interface",
+  "note": "independent cc review: UnitInversionCondition/CounitInversionCondition bodies vs the old unitInversions/counitInversion conclusions (verbatim); Assembly signature vs the clone (identical); new node stmt_deps vs the owners of the declarations their statements use; unit realized (empty) vs the dropped CartesianCoefficients import"
+ }
+}

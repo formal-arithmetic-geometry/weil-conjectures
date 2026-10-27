@@ -1,0 +1,157 @@
+{
+ "id": "lem-sf-open-tensor-projection-descent",
+ "kind": "lemma",
+ "title": "Descent of the ordinary open tensor projection",
+ "statement": "Fix the ringed sites, exact additive functors $F,G$, adjunction, site functor and section maps of [def-sf-open-tensor-cochain-data], and ordinary/cochain data $D$ for them. Fix closed derived tensor structures $A,A'$ and simultaneous K-flat models $T,T'$ in the conventions of [def-sf-open-tensor-representative-data]. Fix a representative-normalized restriction tensor isomorphism $\\mu:A\\otimes G\\cong(G\\times G)\\otimes A'$ whose ordinary comparison is $D.\\mathrm{pullTensor}$. Fix ambient and open one-flat-factor comparison families agreeing with $T,T'$ when both inputs are K-flat and natural on every pair of allowed chain maps. There is a natural derived projection isomorphism $\\gamma:A(FM,N)\\xrightarrow{\\sim}F A'(M,GN)$ such that its inverse has adjunct $A'(\\eta_M,1)\\,;\\,\\mu^{-1}_{FM,N}$. For every arbitrary complex $C$ on the open site and every flat-term K-flat complex $P$ on the ambient site, the ambient comparison on $(FC,P)$, the inverse exact-$F$ factorization on $C$, and $\\gamma_{Q C,Q P}$ compose to $Q(D.\\mathrm{chain}_{C,P})$, followed by the inverse exact-$F$ factorization on $\\operatorname{Tot}(C\\otimes GP)$, $F$ of the open comparison on $(C,GP)$, and $F A'$ of the inverse exact-$G$ factorization on $P$. These are precisely the inverse-unit and representative equations of [def-sf-open-tensor-representative-data]. All other model data are inputs, not conclusions.",
+ "stmt_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-sf-open-tensor-representative-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, expanding its omitted totalization/descent; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 07A4 and 0G7E."
+ },
+ "proof": [
+  {
+   "text": "F preserves flat modules: its tensor with any module is, by the ordinary comparison, the composite of exact G, tensor with a flat module, and exact F. It preserves K-flat complexes: for an acyclic P, exactness makes G P acyclic and F tensor(C,G P) acyclic for K-flat C; D.chain and tensor symmetry transfer this acyclicity to tensor(P,F C). Thus the restriction representative equation also applies to F of flat-term K-flat inputs.",
+   "uses": [
+    "def-sf-open-tensor-cochain-data",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use flat-term K-flat representatives of both variables. The natural one-flat ambient comparison, the localization of the given chain projection, the exact-extension factorization, and the open one-flat comparison define the comparison on representative pairs. Its inverse is the reverse composite.",
+   "uses": [
+    "def-sf-open-tensor-cochain-data",
+    "lem-sfb-ringed-tensor-comparison-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend this natural isomorphism using the fully faithful restriction of functors to resolving pairs (one localization in each variable). Naturality and the quasi-isomorphism invariance of the comparisons make the resulting gamma a natural isomorphism of the displayed functors.",
+   "uses": [
+    "lem-sf-cochain-tensor-model-rigidity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve only the first complex and use naturality of the two one-flat comparisons and of the given chain projection. Cancellation of the localized resolution maps proves the representative identity with arbitrary first complex and flat-term K-flat second complex.",
+   "uses": [
+    "def-sf-open-tensor-cochain-data",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On flat-term K-flat pairs the ordinary inverse-unit equation and the two chain summand equations identify the chain adjunct. Localize the chain adjunction; exact-functor factorization and the both-model identities give precisely unit tensor identity followed by inverse restriction comparison. Naturality and localization extend this equation to all derived inputs.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "def-sf-open-tensor-representative-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-tensor-cochain-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-sf-cochain-tensor-model-rigidity",
+  "lem-pc-kflat-resolution",
+  "def-weil-exact-derived-adjunction",
+  "def-sf-open-tensor-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, expanding its omitted totalization/descent; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tags 07A4 and 0G7E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero open immersion derived tensor normalized K flat chain model",
+   "results": "Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul; AlgebraicGeometry.Flat.instOfIsOpenImmersion; AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono; AlgebraicGeometry.instIsOpenImmersionMapOfHomForallEvalRingHom; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.Scheme.Hom.flat_appLE; PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary native open data or normalized projection descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary native open data or normalized projection descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "OpenTensorModel|TensorComparisonModel|jShriek.*tensor",
+   "results": "No hits",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary native open data or normalized projection descent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural tensor projection formula on ordinary sheaf complexes descends to the derived category with its adjunction unit normalization",
+   "results": "CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε; CategoryTheory.Sheaf.adjunction_unit_app_val; CategoryTheory.sheafificationAdjunction_unit_app; CategoryTheory.toSheafify_naturality; CategoryTheory.toSheafification_app; CategoryTheory.toSheafification; HomologicalComplex.ιTensorObj",
+   "date": "2026-10-27",
+   "verdict": "No matching ordinary native open data or normalized projection descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefNativeOpenTensorModelsDataExistence",
+  "date": "2026-10-27",
+  "group": "H6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, mapping-complex adjunction and specified natural maps before limits; returned expansion lem-coef-tower-evaluation-pairing, steps 4-5: Compact-support reduction realization with normalized open tensor comparison. Native interface specialization: steps 5--6. Ordinary and cochain construction followed by normalized projection descent (support-open-tensor steps 5--6).",
+   "via": [
+    "lem-coef-native-open-tensor-models-data-existence",
+    "lem-coef-native-open-tensor-models-existence",
+    "lem-coef-support-open-tensor-model",
+    "lem-coef-tower-evaluation-pairing"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorProjectionDescent",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorProjectionDescent.lean",
+  "declaration": "WeilConjectures.CoefSupportOpenTensor.openTensorProjection_descent",
+  "statement": "theorem openTensorProjection_descent\n    (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)\n    (restriction : A.tensor ⋙ G.mapDerivedCategory ≅\n      (G.mapDerivedCategory.prod G.mapDerivedCategory) ⋙ A'.tensor)\n    (restrictionModel : TensorComparisonModel.{c, v, r} J J' R R' G A A' T T' restriction)\n    (hordinary : restrictionModel.ordinary = D.pullTensor)\n    (ambientModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J R A)\n    (ambientBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1} J R A T ambientModel)\n    (ambientNaturality : RingedDerivedTensorNaturality.{c, v, r, (max c v r) + 1}\n      J R A ambientModel)\n    (openModel : RingedDerivedTensorComparison.{c, v, r, (max c v r) + 1} J' R' A')\n    (openBoth : RingedDerivedTensorBothModel.{c, v, r, (max c v r) + 1} J' R' A' T' openModel)\n    (openNaturality : RingedDerivedTensorNaturality.{c, v, r, (max c v r) + 1}\n      J' R' A' openModel) :\n    ∃ gamma : (F.mapDerivedCategory.prod (𝟭 _)) ⋙ A.tensor ≅\n    (𝟭 _).prod G.mapDerivedCategory ⋙ A'.tensor ⋙ F.mapDerivedCategory,\n      (∀ M N,\n    (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).homEquiv _ _\n        (gamma.inv.app (M, N)) =\n      A'.tensor.map (Prod.mkHom\n          ((SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj).unit.app M)\n          (𝟙 (G.mapDerivedCategory.obj N))) ≫\n        restriction.inv.app (F.mapDerivedCategory.obj M, N)) ∧\n      (∀ (C : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J' R') ℤ)\n    (P : CochainComplex (SemilinearSections.Mod.{c, v, max c v r} J R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P)\n    (flatP : flatTerms.{c, v, r} J R P),\n    (ambientModel ((F.mapHomologicalComplex (.up ℤ)).obj C) P (Or.inr hP)).hom ≫\n        A.tensor.map (Prod.mkHom (F.mapDerivedCategoryFactors.inv.app C) (𝟙 _)) ≫\n        gamma.hom.app (DerivedCategory.Q.obj C, DerivedCategory.Q.obj P) =\n      DerivedCategory.Q.map (D.chain C P).hom ≫\n        F.mapDerivedCategoryFactors.inv.app ((totalTensor.{c, v, r} J' R').obj\n          (C, (G.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n        F.mapDerivedCategory.map ((openModel C ((G.mapHomologicalComplex (.up ℤ)).obj P)\n          (Or.inr (restrictionModel.kflat P hP flatP))).hom) ≫\n        F.mapDerivedCategory.map (A'.tensor.map\n          (Prod.mkHom (𝟙 _) (G.mapDerivedCategoryFactors.inv.app P))))",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T123449-L-2302018",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261027T123449-L-2302018",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Extension by zero commutes with coefficient tensor; comparisons are fixed by the same evaluations and adjunction counits, with successive coefficient changes."
+ },
+ "id": "lem-coef-etale-open-extension-normalization",
+ "kind": "statement",
+ "title": "The canonical open/scalar adjoint comparison has the prescribed cochain normalization.",
+ "statement": "For arbitrary commutative rings A and B, a ring homomorphism φ:A→B and an open immersion j:U→X, use the canonical comparisons of [lem-coef-etale-open-comparison-data] and [lem-coef-etale-hom-thick-locus]. The canonical q satisfies exactly OpenScalarExtensionNormalization φ j (openScalarExtension φ j), with no additional hypotheses.",
+ "stmt_deps": [
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-hom-thick-locus"
+ ],
+ "proof": [
+  {
+   "text": "Regard the exact open localization factors as squares between the ordinary cochain adjunctions and the published derived open adjunctions. The unit formula for mapDerivedCategoryAdjunction on homotopy representatives, followed by the quotient factor identifications, shows that their right mates are precisely the inverse restriction localization factors. The scalar representative is the inverse mate of the corresponding scalar restriction localization factor, by its defining unit transpose. These are calculations for arbitrary complexes and require no K-flatness.",
+   "uses": [
+    "lem-coef-etale-open-localization-mate",
+    "lem-coef-etale-scalar-representative-mate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the two composite comparison squares, one through open extension then scalar extension and the other through scalar extension then open extension. Mathlib mateEquiv_hcomp identifies their right mates with the successive inverse exact restriction localization factors. The ordinary q-zero comparison is conjugate to the ordinary restriction/scalar square, degree by degree, using the unit-preserving uniqueness of left adjoints. The canonical derived q has the analogous conjugate by its definition.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data",
+    "lem-coef-etale-open-cochain-conjugate",
+    "lem-coef-etale-open-derived-conjugate"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right restriction square commutes with localization factors: expand mapDerivedCategorySquareIso, apply the exact-functor composition and natural-isomorphism factorization equations, and cancel the factorization isomorphisms. Apply injectivity of mateEquiv, together with its two conjugation/whiskering laws, to obtain equality of the original composite left squares. Evaluating at any complex and identifying the scalar-square components with scalarExtensionRepresentative gives the required normalization equation. Restrict to the K-flat complexes in the original predicate.",
+   "uses": [
+    "lem-coef-etale-open-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-etale-open-localization-mate",
+  "lem-coef-etale-scalar-representative-mate",
+  "lem-coef-etale-open-comparison-data",
+  "lem-coef-etale-open-cochain-conjugate",
+  "lem-coef-etale-open-derived-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Extension by zero commutes with coefficient tensor; its canonical adjunction comparison on cochain representatives. Formal categorical mate computation using Stacks 0E8I, 03DI and 06YY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion preserves K-flat complexes and commutes with derived scalar extension with tensor coherence",
+   "results": "ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.rTensor_exact; CategoryTheory.lan_flat_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction.leftAdjointCompIso",
+   "results": "loogle: unknown identifier 'Adjunction.leftAdjointCompIso'",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersion.*(KFlat|Scalar)|scalar.*(normaliz|coher)",
+   "results": "Mathlib/RingTheory/Localization/Integral.lean; Mathlib/Tactic/Module.lean; Mathlib/Tactic/Module.lean",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension commutes with extension by zero along an open immersion, normalized on K-flat complexes",
+   "results": "Eight hits including ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.baseChange and RingHom.Flat; no exact derived open normalization or mixed tensor theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleOpenScalarCoherence",
+  "date": "2026-10-25",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-etale-open-scalar-coherence",
+   "place": "Proof step 1",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleOpenExtensionNormalization",
+  "file": "lean/Sheaf/SixFunctors/EtaleOpenExtensionNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenExtensionNormalization",
+  "statement": "theorem etaleOpenExtensionNormalization\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :\n    OpenScalarExtensionNormalization φ j (openScalarExtension φ j)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261025T164420-L-1010894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T112258-L-1567490",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

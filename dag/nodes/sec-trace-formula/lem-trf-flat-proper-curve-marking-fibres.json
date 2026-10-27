@@ -1,0 +1,258 @@
+{
+ "id": "lem-trf-flat-proper-curve-marking-fibres",
+ "kind": "statement",
+ "title": "Pure curve fibres and finiteness of a flat horizontal marking",
+ "statement": "Let $T$ be an integral scheme [def-pc-integral-scheme] with generic point $\\eta$ [def-sc-generic-point]. Let $f:X\\to T$ be proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] and finitely presented (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated). Let $i:Z\\hookrightarrow X$ be a closed immersion [def-weil-closed-immersion] such that $Z\\to T$ is flat and finitely presented. Suppose $X_\\eta$ and $Z_\\eta$ are dense in $X$ and $Z$, respectively [def-pc-scheme-fibre], $X_\\eta$ is nonempty and irreducible of Krull dimension one [def-kun-topological-krull-dimension], and $Z_\\eta\\to\\operatorname{Spec}\\kappa(\\eta)$ is finite etale [def-weil-finite-integral-morphism, def-weil-etale-morphism, def-weil-residue-field], possibly empty. Then $f$ is surjective, every geometric fibre of $f$ is nonempty and pure of dimension one, and $Z\\to T$ is finite, flat and finitely presented with every nonempty geometric fibre pure of dimension zero. Pure dimension $d$ means that every irreducible component [def-weil-irreducible-components] has Krull dimension $d$; a geometric fibre is a fibre followed by extension of its residue field to an algebraically closed field [def-weil-geometric-fibre]. If $Z_\\eta$ is empty, then $Z$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0GSJ and 0GSK, lemma-flat-associated-equidimensional and remark-flat-equidimensional (second list, with F=O); Tag 02LS, lemma-characterize-finite. Morphisms Tags 02NK and 0397, lemma-base-change-relative-dimension-d and lemma-locally-quasi-finite-rel-dimension-0. Retained parent proof Steps 7--8."
+ },
+ "stmt_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-integral-scheme",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-generic-point",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "def-weil-pure-dimension",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $g=f\\circ i:Z\\to T$. A closed immersion is proper, and proper morphisms compose, by [lem-weil-pbc-proper-fp-permanence](c),(a); thus $g$ is proper. By [def-weil-proper-morphism] and [def-weil-finite-type-morphism], both $f$ and $g$ are locally of finite type. Flatness of both and finite presentation of $g$ are hypotheses.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W3 and 01W5, lemma-composition-proper and lemma-closed-immersion-proper."
+   }
+  },
+  {
+   "text": "Properness makes $f(X)$ closed by [def-weil-proper-morphism]. The nonempty generic fibre gives $\\eta\\in f(X)$ by the fibre homeomorphism in [def-pc-scheme-fibre]. Since $\\overline{\\{\\eta\\}}=T$ by [def-sc-generic-point], $f(X)=T$. For every geometric point $\\operatorname{Spec}\\Omega\\to T$, [lem-weil-pbc-surjective-base-change] makes $X\\times_T\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\Omega$ surjective. The target has a point, hence this geometric fibre is nonempty.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-pc-scheme-fibre",
+    "def-sc-generic-point",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W1, definition-proper; Tag 01S1, lemma-base-change-surjective. The closed-image argument is the definition of a generic point."
+   }
+  },
+  {
+   "text": "The nonempty irreducible space $X_\\eta$ has itself as its unique irreducible component by [def-weil-irreducible-components], so its components all have dimension $1$. Apply [lem-trf-flat-dense-generic-fibre-pure-dimension] to $f$ with $d=1$: the base $T$ is integral, $f$ is flat and locally of finite type by Step 1, and $X_\\eta$ is dense by hypothesis. Every nonempty geometric fibre is pure of dimension $1$. Step 2 gives its nonemptiness.",
+   "uses": [
+    "def-weil-irreducible-components",
+    "lem-trf-flat-dense-generic-fibre-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0GSJ and 0GSK, lemma-flat-associated-equidimensional and remark-flat-equidimensional, second list with F=O_X; geometric clause from Morphisms Tag 02NK."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-fibre-discrete-separable-points] to $Z_\\eta\\to\\operatorname{Spec}\\kappa(\\eta)$. The residue field of the unique base point is $\\kappa(\\eta)$ by [def-weil-residue-field], so its fibre is $Z_\\eta$ itself by [def-pc-scheme-fibre]. Thus $|Z_\\eta|$ is discrete. By [def-weil-irreducible-components], an irreducible subset is nonempty; it cannot contain distinct points $a,b$, since its intersections with $\\{a\\}$ and the complement of $\\{a\\}$ would be two proper closed subsets covering it. Its maximal irreducible subsets are therefore singletons. In a singleton the only nonempty irreducible closed subset is the whole space, so the chain supremum of [def-kun-topological-krull-dimension] is $0$. If $Z_\\eta$ is empty, there are no components and the same universal assertion holds.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-residue-field",
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL, lemma-etale-over-field (2), applied over the field kappa(eta). Component dimension is the elementary discrete-space calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-dense-generic-fibre-pure-dimension] again, now to $g$ with $d=0$. The base is the same integral $T$; $g$ is flat by hypothesis, locally of finite type by Step 1, and its generic fibre is dense by hypothesis. Step 4 supplies the component dimensions. It follows that every nonempty ordinary fibre $Z_t$ and every nonempty geometric fibre of $g$ is pure of dimension $0$.",
+   "uses": [
+    "lem-trf-flat-dense-generic-fibre-pure-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0GSJ and 0GSK, lemma-flat-associated-equidimensional and remark-flat-equidimensional, second list with F=O_Z; Morphisms Tag 02NK for geometric fibres."
+   }
+  },
+  {
+   "text": "For each $z\\in Z$ put $t=g(z)$. The fibre homeomorphism of [def-pc-scheme-fibre] gives a unique point $\\widetilde z\\in Z_t$ mapping to $z$; in particular $Z_t$ is nonempty. By [lem-weil-pbc-lft-base-change], $Z_t\\to\\operatorname{Spec}\\kappa(t)$ is locally of finite type. Step 5 gives dimension $0$ for every component of this fibre. Thus [lem-sbc-equidimensional-open-local-dimension], with $Y=O=Z_t$ and $n=0$, gives local topological dimension $0$ at $\\widetilde z$. This holds for every $z\\in Z$, so the reverse implication of [lem-trf-locally-quasi-finite-relative-dimension-zero] makes $g$ locally quasi-finite. Since $g$ is proper by Step 1, [pqf-lem-proper-lqf-finite] makes $g$ finite. Its flatness and finite presentation are hypotheses, and Step 5 supplies the geometric-fibre assertion. If $Z$ is empty, the pointwise criterion is vacuous and the same implication still applies.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-lft-base-change",
+    "lem-sbc-equidimensional-open-local-dimension",
+    "lem-trf-locally-quasi-finite-relative-dimension-zero",
+    "pqf-lem-proper-lqf-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Morphisms Tags 01T4 and 0397, lemma-base-change-finite-type and lemma-locally-quasi-finite-rel-dimension-0; Varieties Tag 0A21 (5), lemma-dimension-locally-algebraic; More on Morphisms Tag 02LS, lemma-characterize-finite (3) implies (1)."
+   }
+  },
+  {
+   "text": "Finally, if $Z_\\eta=\\varnothing$, its image in $Z$ is empty. The assumed density says that the closure of this image is all of $Z$, whereas the closure of the empty subset is empty. Therefore $Z=\\varnothing$. This also checks the empty marking case of Steps 4--6: component and pointwise conditions are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0GSK, remark-flat-equidimensional, density hypothesis; elementary closure of the empty subset."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field",
+  "lem-sbc-equidimensional-open-local-dimension",
+  "lem-trf-flat-dense-generic-fibre-pure-dimension",
+  "lem-trf-locally-quasi-finite-relative-dimension-zero",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-lft-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GSK, remark-flat-equidimensional, second list with F=O, as stated in lem-trf-flat-dense-generic-fibre-pure-dimension; Tag 02LS, lemma-characterize-finite. The auxiliary Stacks tags and elementary arguments are identified in each step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relativeDimension|relative_dimension|pure.*dimension|isFinite.*quasiFinite",
+   "results": "17 hits; top=['Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean', 'Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean']; ; digest=45e39fc35e4bab3c. Read the returned types and the relevant source: proper/quasi-finite finiteness is present, but no hit gives generic-to-special pure dimension for flat families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat schemes with dense zero dimensional generic fibre are finite and flat proper curves have pure one dimensional geometric fibres",
+   "results": "8 hits; top=['AlgebraicGeometry.IsProper', 'AlgebraicGeometry.isProper_eq', 'AlgebraicGeometry.IsProper.instOfIsFinite', 'AlgebraicGeometry.IsProper.toLocallyOfFiniteType', 'AlgebraicGeometry.isProper_iff', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom', 'AlgebraicGeometry.IsFinite']; ; digest=5f4b65328c7bf3ca. Read the returned types and the relevant source: proper/quasi-finite finiteness is present, but no hit gives generic-to-special pure dimension for flat families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat",
+   "results": "0 hits; top=[]; ; digest=4f53cda18c2baa0c. Read the returned types and the relevant source: proper/quasi-finite finiteness is present, but no hit gives generic-to-special pure dimension for flat families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper flat family with dense pure one dimensional generic fibre and a flat closed marking with finite etale generic fibre has pure curve fibres and finite flat marking",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat', 'AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Scheme.Etale', 'AlgebraicGeometry.IsEtale', 'AlgebraicGeometry.UniversallyOpen.of_flat', 'AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth', 'AlgebraicGeometry.Flat.instFstScheme']; ; digest=cf96f48c928036b2. Read the returned types and the relevant source: proper/quasi-finite finiteness is present, but no hit gives generic-to-special pure dimension for flat families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equidimensional|topologicalKrullDim.*fiber|fiber.*topologicalKrullDim|generic.*[Dd]im",
+   "results": "1 hits; top=['Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean']; ; digest=2b027e3be165cb00. Read the returned types and the relevant source: proper/quasi-finite finiteness is present, but no hit gives generic-to-special pure dimension for flat families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finite type scheme over an integral base with dense equidimensional generic fibre has all fibres of the same pure dimension",
+   "results": "8 hits; top=['AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.IsSmoothOfRelativeDimension', 'AlgebraicGeometry.UniversallyOpen.of_flat', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'Algebra.IsStandardSmoothOfRelativeDimension.out', 'AlgebraicGeometry.isField_of_universallyClosed']; ; digest=d87542c573f41591. Read the returned types and the relevant source: proper/quasi-finite finiteness is present, but no hit gives generic-to-special pure dimension for flat families.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flatification-horizontal-curve-pair",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO X Theorem 3.4 Step 2, flatification of the curve and horizontal boundary before the stable modification theorem. Parent retained proof Steps 7--8: Pure curve fibres and finiteness of a flat horizontal marking.",
+   "via": [
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-proper-curve-marking-fibres",
+  "worker": "stage1",
+  "summary": "Q28 repaired the returned delivery against the current DAG: retained the unchanged statement, seven-step route, source citations and logged Mathlib searches; reread all current cited statements and verified the 17 retained full-statement quotes. Made the singleton component dimension argument explicitly use the existing definitions and made the fibre-point/nonemptiness justification explicit before applying the dimension-zero criterion. Rebuilt proof_deps and all step/node quotes. No new nodes, attachments or changed hypotheses.",
+  "blueprint": "Realizes the inherited semistable-alteration supporting argument of lem-trf-local-term-locality, via the recorded chain, specifically retained parent Steps 7--8 of lem-trf-flatification-horizontal-curve-pair: dense generic dimensions 1 and 0 after flatification and proper-plus-locally-quasifinite finiteness of the horizontal boundary. This node is not a unit key node; no chapter or unit route is changed. Whole-blueprint searches for equidimensional, marking, flat.*generic and proper.*curve found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic scheme-theoretic tool: the etale generic marking has discrete fibres, hence singleton components. No node of this unit states this description; it replaces no unit proof step."
+   },
+   {
+    "node": "lem-sbc-equidimensional-open-local-dimension",
+    "why": "Generic dimension-theoretic tool: on the locally finite type kappa(t)-scheme Z_t, pure dimension zero implies local topological dimension zero. This unit has no such comparison, and the unit route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-sbc-equidimensional-open-local-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-8db816412",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-8db816412 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is one commit with only the item and its report and no new nodes. It re-delivers the returned head 1e0e47c4b24, which was approved earlier but its side completion was not promoted. Against the 1e0e47c4b249 snapshot, the statement, stmt_deps, source and steps 1, 2, 3, 5 and 7 are unchanged. Step 4 now cites the irreducible-components and topological-Krull-dimension definitions for the singleton dimension-0 argument. Step 6 now cites def-pc-scheme-fibre for the point over z and the nonemptiness of Z_t, and uses the reverse direction of 0397. proof_deps equals the union of the step uses. This is a genuine repair, not an A6 re-push. The statement holds by Stacks 0GSK second list (F=O, irreducible base, dense generic fibre, local finite type) and 02LS (3)=>(1), with no Noetherian hypothesis. I read 0GSK at line 5326, 0A21(5) at line 3804 and 02LS at line 12544. Small cases tested: T a field, Z empty, non-Noetherian T, the xy=t degeneration, a ramified finite flat marking, transcendental Omega. Step checks: Step 1, proper-fp-permanence (c),(a) gives g proper. Step 2, closed image plus the generic point gives surjectivity, and 01S1 gives nonempty geometric fibres. Step 3, the dense-generic-fibre node with d=1. Step 4, 02GL(2) makes Z_eta discrete, so its components are singletons of dimension 0. Step 5, the same node with d=0. Step 6, 01T4, then 0A21 with n=0, then the 0397 reverse direction gives locally quasi-finite, then 02LS gives finite; the 0A21 and 0397 nodes use the same local-dimension notion. Step 7, empty closure, correctly marked elementary. The parent flatification-horizontal-curve-pair uses exactly these conclusions. No cycle, no SGA. The tool_uses (etale-fibre-discrete, equidimensional-open-local-dimension) are generic and accepted. Advisory: 'surjective' has no stmt_dep; this text is inherited and unchanged here."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProperCurveMarkingFibres",
+  "declaration": "AlgebraicGeometry.flat_proper_curve_marking_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatProperCurveMarkingFibres.lean",
+  "statement": "theorem flat_proper_curve_marking_fibres {T X Z : Scheme.{u}} [IsIntegral T] (η : T) (hη : IsGenericPoint η (Set.univ : Set T)) (f : X ⟶ T) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (i : Z ⟶ X) [IsClosedImmersion i] [Flat (i ≫ f)] [LocallyOfFinitePresentation (i ≫ f)] [QuasiCompact (i ≫ f)] [QuasiSeparated (i ≫ f)] (hXdense : Dense (Set.range (f.fiberι η))) (hZdense : Dense (Set.range ((i ≫ f).fiberι η))) [IrreducibleSpace (f.fiber η)] (hXdim : topologicalKrullDim (f.fiber η) = (1 : WithBot ℕ∞)) [IsFinite ((i ≫ f).fiberToSpecResidueField η)] [Etale ((i ≫ f).fiberToSpecResidueField η)] : Surjective f ∧ (∀ t : T, ∀ (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] [IsAlgClosed Ω], Nonempty (pullback (C := Scheme.{u}) (f.fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)))) ∧ (pullback (C := Scheme.{u}) (f.fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)))).IsPureDimension 1) ∧ IsFinite (i ≫ f) ∧ Flat (i ≫ f) ∧ LocallyOfFinitePresentation (i ≫ f) ∧ QuasiCompact (i ≫ f) ∧ QuasiSeparated (i ≫ f) ∧ (∀ t : T, ∀ (Ω : Type u) [Field Ω] [Algebra (T.residueField t) Ω] [IsAlgClosed Ω], Nonempty (pullback (C := Scheme.{u}) ((i ≫ f).fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)))) → (pullback (C := Scheme.{u}) ((i ≫ f).fiberToSpecResidueField t) (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) Ω)))).IsPureDimension 0) ∧ (IsEmpty ((i ≫ f).fiber η) → IsEmpty Z)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a7d3c879",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Node diff vs base: only lean and stmt_deps; added def-weil-pure-dimension and def-weil-surjective-morphism are existing nodes with lean records (brief-stage2 §5). Every hypothesis matches the node with nothing stronger: IsIntegral T and IsGenericPoint η; f proper, flat, LFP, QC and QS; i a closed immersion and marking map i≫f flat, LFP, QC and QS; both generic fibres dense via fiberι; X_η an IrreducibleSpace (nonempty) of topologicalKrullDim 1; Z_η IsFinite and Etale over κ(η), possibly empty. Conclusions all present: Surjective f; nonempty IsPureDimension 1 geometric fibres for any algebraically closed Ω over κ(t); i≫f finite, flat and finitely presented; nonempty geometric fibres of Z of pure dimension 0; empty Z_η implies empty Z; precedence is correct. Geometric-fibre form and universe u match the published flat_dense_generic_fibre_pure_dimension. Scheme.IsPureDimension is the node's notion and vacuous on the empty scheme. Edge cases (empty Z, field base, non-Noetherian base) are covered. No definitions, proof is sorry, docstrings carry source, blueprint tag and proof steps, lean.statement is verbatim, name is unique, first S2 delivery. No compile run since no file was changed."
+ }
+}

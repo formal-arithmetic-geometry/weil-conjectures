@@ -1,0 +1,123 @@
+{
+ "id": "lem-sp-picard-cohomology-arbitrary-pullback",
+ "kind": "statement",
+ "title": "The Picard cohomology class commutes with arbitrary scheme pullback",
+ "statement": "Let f:X→Y be any morphism of schemes [def-pc-scheme] and let L∈Pic(Y) [lem-sc-h1-gm-pic]. Under the canonical identification of Pic with H¹ of G_m, the cohomology pullback followed by the canonical G_m comparison sends the class of L to the class of f*L [def-weil-pbc-cohomology-pullback], [def-pc-module-pullback]. No curve, field, finiteness or Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "Proof: Both defining components commute with base change, so the isomorphism does too; the Kummer description by the class of O(1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sc-h1-gm-pic",
+  "def-weil-pbc-cohomology-pullback",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Represent the Picard class by its invertible module and use its torsor Isom(O,L) of trivializations. Pull a trivialization over an etale Y-scheme V back along V×_Y X→V, and use f*O_Y≅O_X. The resulting maps to the trivialization torsor of f*L are natural in V and equivariant for the pullback of units.",
+   "uses": [
+    "lem-sc-h1-gm-pic",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pullback-and-coefficient-change naturality of torsor H¹ classes identifies the image of the first torsor class with the second. Rewriting both classes using Pic.toCohomologicalPicardGroup gives the equality. This is the complete existing proof of Scheme.gmCohomologyMap_toCohomologicalPicardGroup for arbitrary schemes.",
+   "uses": [
+    "lem-sc-etale-torsor-h1-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-sc-h1-gm-pic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "based_on": {
+   "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+   "place": "Proof: Both defining components commute with base change, so the isomorphism does too; the Kummer description by the class of O(1)."
+  },
+  "why": "Record the general, already proved source theorem used by the shorter Chern base-change proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kummer|gmCohomologyMap|pullbackMapTwistIso",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Reuse the already proved source-library declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first Chern class from the Kummer boundary is natural under pullback of line bundles",
+   "results": "8 hits: VectorBundle.pullback, exteriorPower.oneEquiv_naturality, ModuleCat.exteriorPower.iso₁_hom_naturality",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Reuse the already proved source-library declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Picard H1 Gm identification under arbitrary scheme morphism and pullback of projective twisting sheaf",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib theorem. Reuse the already proved source-library declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteP1ChernMapBaseChange",
+  "date": "2026-10-26",
+  "group": "X7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Finite projective-line classes used by the levelwise diagonal check; base change of the positive Kummer Chern component.",
+   "via": [
+    "lem-sp-finite-p1-chern-map-base-change",
+    "lem-sp-finite-p1-chern-adjunct-base-change",
+    "lem-sp-finite-p1-kummer-naturality",
+    "lem-sp-tower-p1-arbitrary-base-integrals"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback",
+  "declaration": "AlgebraicGeometry.Scheme.gmCohomologyMap_toCohomologicalPicardGroup",
+  "statement": "theorem gmCohomologyMap_toCohomologicalPicardGroup (L : Y.Pic) :\n    gmCohomologyMap g 1 (Pic.toCohomologicalPicardGroup Y L) =\n      Pic.toCohomologicalPicardGroup X (Pic.map g L)",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-26",
+  "note": "Already proved in the adopted source library; no new Lean declaration, no new sorry. The scheme morphism and (for Kummer) N are section variables in the source file."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-2cc84",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261026T142458-L-330646",
+  "kind": "interface",
+  "note": "independent cc review: item proof and 9 adapted unclaimed modules vs published clone, DAG nodes, change record; 10 delivered files + 43 direct importers compiled in sandbox (all OK, max 50.8 s), axioms clean"
+ }
+}

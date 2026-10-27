@@ -26,156 +26,35 @@
  ],
  "proof": [
   {
-   "text": "Write $\\mathcal C_E(W)=D^b_c(W,E)$ for the rationalized stages used in the statement and $T_{M/E}$ for their scalar extension. Form the pair category from these stages exactly as in [def-weil-algebraically-closed-coefficients]. We construct the contravariant functor directly on its representatives. By [thm-coef-rational-verdier], $D_E=D_{W,E}$ is a contravariant exact $E$-linear equivalence, with coherent isomorphisms $b_{M/E,K}:T_{M/E}D_EK\\to D_M(T_{M/E}K)$. Define $D(E,K)=(E,D_EK)$ and, for $u:T_{M/E}K\\to T_{M/F}L$, put\n$$d_M(u)=b_{M/E,K}^{-1}\\circ D_M(u)\\circ b_{M/F,L}:\nT_{M/F}D_FL\\longrightarrow T_{M/E}D_EK.$$\nThis has exactly the source and target required for a representative of $D(F,L)\\to D(E,K)$.",
+   "text": "Apply core descent for X. Complete it to the unchanged Duality record: evaluation naturality and biduality naturality prove its three retract equations. Apply internal-Hom descent and the dualizing-object identification to this same duality.",
    "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "thm-coef-rational-verdier"
+    "lem-coef-qbar-verdier-core-descent",
+    "lem-coef-qbar-verdier-internal-hom",
+    "lem-coef-qbar-verdier-dualizing-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, first paragraph: opposite categories and displayed morphism formula"
-   }
+   "elementary": false
   },
   {
-   "text": "For $M\\subseteq N$, denote the scalar associator $T_{N/M}T_{M/H}A\\to T_{N/H}A$ by $a_A$. Transport is $u_N=a_L\\circ T_{N/M}(u)\\circ a_K^{-1}$, where $a_K$ uses $H=E$ and $a_L$ uses $H=F$. The full coherence equation is\n$$b_{N/H,A}=D_N(a_A^{-1})\\circ b_{N/M,T_{M/H}A}\\circ T_{N/M}(b_{M/H,A})\\circ a_{D_HA}^{-1}.$$\nHere $a_A:T_{N/M}T_{M/H}A\\to T_{N/H}A$ and $D_N(a_A^{-1})$ has target $D_N(T_{N/H}A)$. After identifying the iterated extensions through these associators, this reads $b_{N/H}=b_{N/M}\\circ T_{N/M}(b_{M/H})$. Contravariant naturality at $u$ is\n$$D_N(T_{N/M}u)\\circ b_{N/M,T_{M/F}L}\n =b_{N/M,T_{M/E}K}\\circ T_{N/M}(D_Mu).$$\nInsert these equations into $d_N(u_N)$; the two $b_{N/M}$ factors cancel, leaving\n$$d_N(u_N)=a_{D_EK}\\circ T_{N/M}(d_M(u))\\circ a_{D_FL}^{-1}.$$\nThus this is exactly transport of the dual representative. If two representatives agree at a further field $P$, so do their dual representatives at $P$, which proves representative independence. At one common stage the adjacent inverse comparisons cancel to give $d(vu)=d(u)d(v)$ and $d(1)=1$; additivity follows from additivity of $D_M$. These computations establish the functor laws. For a finite diagram choose representatives for its finitely many objects and arrows, then take the compositum of their fields. For each asserted equality, the representative relation of [def-weil-algebraically-closed-coefficients] supplies a further finite field where it holds. Taking the compositum of these finitely many witness fields realizes the entire diagram and all its equations at once. No faithfulness of scalar extension is required.",
+   "text": "For any separated finite-type morphism f:X to Y and compactification c, repeat core descent and completion on Y. Apply exceptional descent to the two fixed dualities to obtain A and its normalized exceptional formula. Internal-Hom descent and dualizing descent on Y give the remaining clauses. Package these witnesses in CoefQbarVerdierConclusion. The quantified target dualities and exceptional system are those used in all comparisons.",
    "uses": [
-    "thm-coef-rational-verdier",
-    "def-weil-algebraically-closed-coefficients"
+    "lem-coef-qbar-verdier-core-descent",
+    "lem-coef-qbar-verdier-internal-hom",
+    "lem-coef-qbar-verdier-dualizing-descent",
+    "lem-coef-qbar-verdier-exceptional-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, second paragraph: independence of the common field and of representatives"
-   }
-  },
-  {
-   "text": "The $\\Qlb$-action on a morphism class is computed by choosing a finite stage containing its representative field and the scalar $\\alpha$, and multiplying its representative by $\\alpha$ there. Such a stage exists because $\\alpha$ is algebraic over $\\Ql$; changing it does not change the class by the transport computation in step 2. Since $D_M$ is $M$-linear, $d_M(\\alpha u)=\\alpha d_M(u)$ at that stage, proving $\\Qlb$-linearity (there is no conjugation of coefficients). A distinguished triangle is, by [def-weil-algebraically-closed-coefficients], isomorphic to a finite-stage distinguished triangle. Applying the exact contravariant functor $D_E$ gives a distinguished dual triangle at that field. The image of each arrow is its dual under the formula in step 1, with the scalar comparisons giving the vertex identifications. For the shift comparison use the class of the canonical finite-stage $D_E(K[1])\\cong(D_EK)[-1]$. For this check use the tensor and internal-Hom interpretation in [lem-coef-rational-operations]. Write $c:(D_EK)[-1]\\otimes K[1]\\xrightarrow{\\sim}D_EK\\otimes K$ for the canonical tensor-shift isomorphism. The inverse shift comparison is the adjoint transpose of $\\operatorname{ev}_{E,K}\\circ c$. Both ways of comparing its scalar extension with the corresponding map at $M$ transpose to the scalar extension of this displayed composite: the tensor comparisons commute with shifts, and $b$ preserves evaluation by [thm-coef-rational-verdier]. Injectivity of the tensor–Hom adjunction therefore gives equality of the two comparisons, with the signs already specified by $c$. Hence these shift comparisons are natural on common-stage classes. The image of every distinguished triangle is therefore the finite-stage distinguished dual triangle under the specified shift comparison, proving exactness.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "thm-coef-rational-verdier",
-    "lem-coef-rational-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, second paragraph: exactness and linearity"
-   }
-  },
-  {
-   "text": "Represent evaluation for $(E,K)$ by $\\operatorname{ev}_{E,K}$, and represent the bidual map by $\\delta_{E,K}:K\\to D_E^2K$. Compatibility with scalar extension is part of [thm-coef-rational-verdier]. Explicitly the compatibility identity for the latter is\n$$D_M(b_{M/E,K})\\circ\\delta_{M,T_{M/E}K}\n=b_{M/E,D_EK}\\circ T_{M/E}(\\delta_{E,K}).$$\nThe sources of both sides are $T_{M/E}K$ and the targets are $D_M(T_{M/E}D_EK)$. This identity and naturality of $\\delta_M$ prove naturality of the represented bidual map for $[M,u]$; the analogous evaluation identity proves naturality of evaluation. Define its inverse by $[E,\\delta_{E,K}^{-1}]$. The two compositions are identity representatives already at $E$, so the bidual map is an isomorphism. The functor $D^{\\mathrm{op}}$ is a quasi-inverse of $D:\\mathcal C_W^{\\mathrm{op}}\\to\\mathcal C_W$: the two composites are double duality on $\\mathcal C_W$ and on its opposite, and the isomorphism just constructed (and its opposite/inverse as needed) identifies both composites with the corresponding identity functor. This proves the asserted anti-equivalence without adjoining any new objects.",
-   "uses": [
-    "thm-coef-rational-verdier",
-    "def-weil-algebraically-closed-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: evaluation, delta and the finite-stage inverse"
-   }
-  },
-  {
-   "text": "Choose the object $\\Omega_W=(\\Ql,\\omega_{W,\\Ql})$. The dualizing-object comparisons of [lem-coef-integral-finite-extension], rationalized in [def-weil-rationalization-karoubi], identify its representative at every finite stage $E$ with $\\omega_{W,E}$; their unit and composition equations make the identification independent of the stage. By [lem-coef-rational-operations], $D_EK=R\\mathcal Hom_E(K,\\omega_{W,E})$. Consequently the common-stage internal Hom of [def-weil-derived-pullback-tensor-hom] sends $((E,K),\\Omega_W)$ to an object canonically isomorphic to $(E,D_EK)$. The map on a representative is exactly $d_M(u)$: its two coefficient comparisons are the internal-Hom comparisons from the same integral finite-extension lemma. Thus this is an identification of functors and evaluations. For completeness its internal-Hom property can be read on Hom sets: represent $P,K$ at a common field $M$ and use the finite-stage internal-Hom adjunction supplied by the internal Hom in [lem-coef-rational-operations],\n$$\\operatorname{Hom}_M(P_M\\otimes_M^L K_M,\\omega_{W,M})\n\\cong\\operatorname{Hom}_M(P_M,D_MK_M).$$\nIts evaluation and transpose respect coefficient extension. Taking representatives gives a map between the two filtered Hom colimits; its inverse is represented by the inverse finite-stage adjunction. Both composites are identities at the representative field, so these are inverse natural bijections on common-stage Hom sets. This proves internal Hom into $\\Omega_W$, rather than only an objectwise coincidence.",
-   "uses": [
-    "lem-coef-integral-finite-extension",
-    "def-weil-rationalization-karoubi",
-    "lem-coef-rational-operations",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-algebraically-closed-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: tensor–Hom adjunction and identification of internal Hom"
-   }
-  },
-  {
-   "text": "To apply the strict identity convention of [lem-sbc-coherent-pair-functor-descent], normalize the scalar diagram using the canonical tensor unit $T_{E/E}\\cong1$ and the identity-compatible tensor associators of [lem-weil-scalar-extension-composition]. Set the self-transitions and repeated-field associators equal to identities, leaving the strict-inclusion transitions unchanged; transport the functor comparisons through these unit isomorphisms. The unit equations give the repeated-field tower equations, and the remaining tower equations are unchanged. This normalized pair category identifies canonically with the original one: conjugate a representative by the unit isomorphism at either endpoint where its common field equals its field of definition. Naturality of the unit isomorphism makes these conjugations commute with transport, and the adjacent inverse unit isomorphisms cancel in composition. Thus this normalization changes neither the common-stage category nor the descended operation. For each of the covariant families $Rf_{!,E}$ and $Rf_E^!$, the scalar-comparison isomorphisms satisfy the unit, associator, and naturality equations required by [lem-coef-rational-operations]. The coherent pair-functor descent statement [lem-sbc-coherent-pair-functor-descent] therefore gives well-defined functors on common-stage objects and morphisms, and gives the descended compatible natural transformations. On objects the left functor is $(E,K)\\mapsto(E,Rf_{!,E}K)$, exactly the common-stage compact-support operation of [def-weil-integral-rational-qbar-compact-support].",
-   "uses": [
-    "lem-coef-rational-operations",
-    "lem-sbc-coherent-pair-functor-descent",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-weil-scalar-extension-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: exceptional adjunction and its units and counits"
-   }
-  },
-  {
-   "text": "For $K=(E,K_E)$ and $L=(F,L_F)$, index by the finite fields $M\\supseteq E,F$. Set\n$$A_M=\\operatorname{Hom}_{Y,M}(Rf_{!,M}T_{M/E}K_E,T_{M/F}L_F),\\quad B_M=\\operatorname{Hom}_{X,M}(T_{M/E}K_E,Rf_M^!T_{M/F}L_F).$$\nUse the scalar comparisons from step 6 in their transition maps. The representative prescription of [def-weil-algebraically-closed-coefficients] identifies their direct limits with $\\operatorname{Hom}(Rf_!K,L)$ and $\\operatorname{Hom}(K,Rf^!L)$ respectively. The adjunction in [lem-coef-rational-operations] gives $e_M:A_M\\cong B_M$. Its formulas are $e_M(u)=Rf_M^!(u)\\circ\\eta$ and $e_M^{-1}(v)=\\epsilon\\circ Rf_{!,M}(v)$ by [lem-weil-pbc-adjunction-of-natural-bijection]. These are additive, since the functors are additive. Preservation of unit and counit under coefficient extension gives precisely $e_Nu_{MN}=v_{MN}e_M$. Apply [lem-coef-qbar-adjunction-hom-descent] to obtain inverse bijections of the two common-stage Hom groups. Naturality in $K,L$ is checked on representatives: put a precomposition or postcomposition and the argument over one finite field, where it is the naturality identity of the finite-stage adjunction. Thus the bijections are natural in both variables.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "lem-coef-rational-operations",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-coef-qbar-adjunction-hom-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: exceptional adjunction and its units and counits"
-   }
-  },
-  {
-   "text": "The descended Hom bijections are natural in both variables. Applying the natural-bijection adjunction construction [lem-weil-pbc-adjunction-of-natural-bijection] supplies the unit and counit and proves both triangle identities; their finite-stage components are the given units and counits. Hence the descended functors form the constructible adjunction.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: exceptional adjunction and its units and counits"
-   }
-  },
-  {
-   "text": "The natural finite-stage isomorphism $Rf_E^!\\cong D_{X,E}f_E^*D_{Y,E}$ of [lem-coef-rational-operations] preserves evaluations, units and counits under finite scalar extension. Pullback has its coherent scalar comparisons from [lem-pur-integral-operations-scalar-extension], rationalized by [def-weil-rationalization-karoubi]; duality has those of [thm-coef-rational-verdier]. Hence the composite on the right is the descended $D_Xf^*D_Y$, and the finite-stage isomorphism and its inverse define inverse natural transformations to it from the right adjoint of step 6. This is precisely the common-stage exceptional operation of [def-weil-exceptional-inverse-image], since it has the same coefficient-passage representatives and the same adjunction maps. Taking $f=a_X$ and applying [lem-coef-rational-operations] to the coefficient unit gives $Ra_X^!\\Qlb=(\\Ql,Ra_{X,\\Ql}^!\\Ql)=(\\Ql,\\omega_{X,\\Ql})=\\Omega_X$ under the canonical identifications. This identifies the object used in step 5 with the dualizing object asserted in the statement. All finite scalar-extension compatibilities hold as represented equations; their unit and composition equations therefore remain true in the common-stage category.",
-   "uses": [
-    "lem-coef-rational-operations",
-    "lem-pur-integral-operations-scalar-extension",
-    "def-weil-rationalization-karoubi",
-    "thm-coef-rational-verdier",
-    "def-weil-exceptional-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: identification of omega and Rf^!, and coefficient compatibility"
-   }
-  },
-  {
-   "text": "Let $i:P\\to K$, $p:K\\to P$ be a retract, so $pi=1_P$. By the finite-field and equality-witness construction in step 2, applied to [def-weil-algebraically-closed-coefficients], enlarge to a finite stage representing $P,K,i,p$ and this equality. There $D(p):DP\\to DK$ and $D(i):DK\\to DP$ satisfy $D(i)D(p)=1_{DP}$, and the restricted evaluation is\n$$DP\\otimes P\\xrightarrow{D(p)\\otimes i}DK\\otimes K\\xrightarrow{\\operatorname{ev}_K}\\omega.$$\nNaturality of evaluation identifies this composite with $\\operatorname{ev}_P\\circ(1_{DP}\\otimes pi)=\\operatorname{ev}_P$. Naturality of biduality gives\n$$D^2(p)\\circ\\delta_K\\circ i=\\delta_P\\circ pi=\\delta_P,$$\nand its inverse is $p\\circ\\delta_K^{-1}\\circ D^2(i)$, by naturality of $\\delta^{-1}$ and $pi=1$. The evaluation and biduality compatibility with split idempotents and with finite scalar extension is also stated in [lem-coef-rational-retract-evaluation]; its pairing clause applies to the adjoint idempotents $ip$ on $K$ and $D(ip)$ on $DK$. For the other descended natural maps, restriction is simply naturality: if $\\eta:F\\to G$, then $G(p)\\eta_KF(i)=\\eta_PF(p)F(i)=\\eta_P$. For contravariant $F,G$, the restriction equation is instead\n$$G(i)\\circ\\eta_K\\circ F(p)=\\eta_P\\circ F(i)\\circ F(p)=\\eta_P\\circ F(pi)=\\eta_P.$$\nFor a transformation of several variables apply the respective displayed equation to each variable, holding the others fixed. An inverse natural isomorphism restricts too, and its two inverse equations remain identities of the summand. Apply these equations to the adjunction identifications, evaluations and biduality already constructed. They hold at the common finite stage and hence on classes. This proves every asserted retract compatibility; it makes no identification with an ambient derived category obtained by tensoring with an infinite topological coefficient extension.",
-   "uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "lem-coef-rational-retract-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-    "place": "## Proof, third paragraph: restriction to retracts"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-algebraically-closed-coefficients",
-  "thm-coef-rational-verdier",
-  "lem-coef-rational-operations",
-  "lem-coef-integral-finite-extension",
-  "def-weil-rationalization-karoubi",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-sbc-coherent-pair-functor-descent",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "lem-coef-qbar-adjunction-hom-descent",
-  "lem-pur-integral-operations-scalar-extension",
-  "def-weil-exceptional-inverse-image",
-  "lem-coef-rational-retract-evaluation",
-  "lem-weil-scalar-extension-composition"
+  "lem-coef-qbar-verdier-core-descent",
+  "lem-coef-qbar-verdier-internal-hom",
+  "lem-coef-qbar-verdier-dualizing-descent",
+  "lem-coef-qbar-verdier-exceptional-descent"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-qbar-verdier.md",
-  "place": "## Proof paragraphs 1–3, expanded by representative calculations; original source and the matching main-20261015 thm-coef-qbar-verdier.proof.md read locally"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/sk-prop-sf-biduality-general.proof.md",
+  "place": "Retained ten-step proof decomposed into four separate source results; the assembly and three retract equations are written in Lean. Exceptional adjunction uses descent of compatible units and counits, avoiding a second construction through Hom-colimit bijections."
  },
  "mathlib_searches": [
   {
@@ -250,7 +129,18 @@
   "thm-coef-rational-verdier"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -286,31 +176,6 @@
   "module": "Sheaf.SixFunctors.CoefQbarVerdier",
   "declaration": "WeilConjectures.coef_qbar_verdier",
   "declarations": [
-   "WeilConjectures.CoefQbarTensor",
-   "WeilConjectures.CoefQbarPullback",
-   "WeilConjectures.CoefQbarVerdier.AuxiliaryClosure",
-   "WeilConjectures.CoefQbarVerdier.fieldStage",
-   "WeilConjectures.CoefQbarVerdier.inclusionTransition",
-   "WeilConjectures.CoefQbarVerdier.tensorInclusion",
-   "WeilConjectures.CoefQbarVerdier.pullbackInclusion",
-   "WeilConjectures.CoefQbarVerdier.Finite",
-   "WeilConjectures.CoefQbarVerdier.FiniteCoherent",
-   "WeilConjectures.CoefQbarVerdier.DualityData",
-   "WeilConjectures.CoefQbarVerdier.DualityProperties",
-   "WeilConjectures.CoefQbarVerdier.Duality",
-   "WeilConjectures.CoefQbarVerdier.homDual",
-   "WeilConjectures.CoefQbarVerdier.InternalHom",
-   "WeilConjectures.CoefQbarVerdier.finiteLeft",
-   "WeilConjectures.CoefQbarVerdier.finiteRight",
-   "WeilConjectures.CoefQbarVerdier.finiteAdjunction",
-   "WeilConjectures.CoefQbarVerdier.finiteLeftScalar",
-   "WeilConjectures.CoefQbarVerdier.finiteRightScalar",
-   "WeilConjectures.CoefQbarVerdier.ExceptionalData",
-   "WeilConjectures.CoefQbarVerdier.ExceptionalProperties",
-   "WeilConjectures.CoefQbarVerdier.Exceptional",
-   "WeilConjectures.CoefQbarVerdier.ExceptionalFormula",
-   "WeilConjectures.CoefQbarVerdier.coefficientUnit",
-   "WeilConjectures.CoefQbarVerdier.Dualizing",
    "WeilConjectures.CoefQbarVerdierConclusion",
    "WeilConjectures.coef_qbar_verdier"
   ],
@@ -320,7 +185,7 @@
   "by": "NO",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Repair of 662026aead2e: one finite-origin SfClassDuality, normalized coefficient action, canonical evaluation and biduality descent, actual exceptional image of the coefficient unit, descended System functors/adjunction, corrected contravariant formula and its finite comparison square. Scheme and closure universes remain independent; only the rational stages of an auxiliary small-closure System are used. All helper data are constructed or existential conclusions of this theorem; its proof alone is postponed.",
+  "note": "V1 stage 3: existing data declarations move with their signatures to CoefQbarVerdierData and remain publicly re-exported. The theorem is assembled from core duality descent, internal-Hom descent, the dualizing identification and exceptional descent. Its three retract formulas are derived from naturality in core_complete. Four separate source results remain as named holes; no claim of net hole closure.",
   "fixed_by": "NT-stage2-cc-fda9c3bdd"
  },
  "reviewed_lean": {
@@ -330,5 +195,15 @@
   "group": "NO",
   "result": "fix",
   "note": "Statement correct in substance; repairs all F1-F10 of the 662026aead2e return: Rf^! ≅ BY.dual.rightOp ⋙ (f^*).op ⋙ BX.dual normalized to RationalOperations.ExceptionalIdentification; one SfClassDuality tied to each RationalVerdier.Datum (object formula, identity comparisons, beta scalar square, SfClassEvaluationCompatible); omega pinned by omegaComparison and Dualizing (Ra_X^! of coefficientUnit, DualizingIdentification); InternalHom via commonStageDerivedInternalHom with a bijective evaluation transpose; Exceptional descended from one ConstructibleExceptionalCoefficients.System with unit/counit/scalar normalization; Ω-linear structure pinned on finite representatives (a test module confirmed the clauses use B.linearCategory); retract clauses on evaluation and delta. Universes u and v independent; no hollow defs; only sorry is the theorem; imports and lean.statement verbatim OK. nt_compile clean 42.1 s and 39.2 s (fix 41.0 s). FIX (H8, docstrings only): the node has 10 proof steps but the theorem docstring said nine and merged steps 7-8; renumbered to ten steps with matching module/declaration step citations, report line corrected. Note: the SfBidualityClass reverse import is omitted per §3(7) (cycle), as listed in the report."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-07b3e",
+  "group": "V1",
+  "result": "fix",
+  "landing": "20261025T203436-L-2817454",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefQbarVerdier/Data/Core/InternalHom/Exceptional/Dualizing + StageSystemOpposite/Adjunction and 8 node files against the published CoefQbarVerdier.lean (diff: data block verbatim except subtype wrappers and 4 dropped private imports), the RationalOperations identification theorems, and the six direct importers compiled against the delivered oleans"
  }
 }

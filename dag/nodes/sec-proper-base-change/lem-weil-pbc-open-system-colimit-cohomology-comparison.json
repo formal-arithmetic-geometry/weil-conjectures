@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-open-system-colimit-cohomology-comparison",
+ "kind": "statement",
+ "title": "Cohomology transport through the constant restriction colimit",
+ "statement": "For a nonempty directed preorder I, a family of opens V_i in T, a common subspace E, and an ambient abelian sheaf A, use the explicitly constant diagram with value A restricted to E and the inverse-image composition identifications at every stage. Under the canonical constant-colimit isomorphism, every canonical spectral-limit cohomology map is the ordinary projection pullback followed by cohomology of the inverse-image composition isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 01F8, 03F3 and 0A37; restriction-system setup for Tag 0A3D(2)"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-open-system-restriction-presentation",
+  "def-sc-topological-abelian-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "A nonempty directed preorder is connected. Its constant diagram has the constant value as a colimit, with identity legs. Colimit uniqueness defines the coefficient isomorphism, and the coprojection followed by that isomorphism is the identity.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The inverse adjunction Hom bijection cancels the transpose in the definition of the cohomology f-map. Naturality of the cohomology presheaf moves a coefficient map through restriction; functoriality combines coefficient arrows. The coprojection identity then makes this composite precisely the inverse-image composition isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-system-restriction-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-open-system-restriction-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J8",
+  "date": "2026-10-25",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 01F8, 03F3 and 0A37; restriction-system setup for Tag 0A3D(2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a sheaf on an open subspace; inverse image adjunction composition constant diagram colimit",
+   "results": "Scheme restriction and section isomorphisms; sheafAdjunctionContinuous and colimConstAdj. No normalized open-subspace cohomology comparison.",
+   "date": "2026-10-25",
+   "verdict": "reuse adjunction and colimit API; no complete match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf cohomology on an intersection of compact open subspaces of a spectral space is the directed colimit",
+   "results": "Condensed locally constant diagram colimits, no sheaf cohomology match. Loogle coconePointUniqueUpToIso finds colimit uniqueness component equations.",
+   "date": "2026-10-25",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(restrict|open)|IsOpenEmbedding.*cohomology; spectralSpace; leftAdjointUniq",
+   "results": "Found Mathlib open-embedding spectralSpace and adjunction uniqueness; project general spectral-limit lifting and object localization AddEquiv, but not the required comparison square.",
+   "date": "2026-10-25",
+   "verdict": "reuse existing general dependencies"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift",
+  "date": "2026-10-25",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Punctured-neighborhood class-lifting proof: explicit geometry, restriction coefficients, and canonical map comparison in steps 1 through 5",
+   "via": [
+    "Sheaf.Topology.PuncturedNeighborhoodCohomologyClassLift"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.OpenSystemColimitCohomologyComparison",
+  "file": "lean/Sheaf/Topology/OpenSystemColimitCohomologyComparison.lean",
+  "declaration": "TopCat.OpenSystem.coefficientColimit_cohomology_comparison",
+  "statement": "theorem coefficientColimit_cohomology_comparison (V : I → Opens T) (E : Set T) (hE : ∀ i, E ⊆ V i) (A : CategoryTheory.Sheaf (Opens.grothendieckTopology T) AddCommGrpCat.{u}) (q : ℕ) (i : I) : TopCat.Sheaf.spectralLimitCohomologyMap (inclusionOfLE (hE i)) (objectCohomologyPullback (inclusionOfLE (hE i))) ((adjunction (inclusionOfLE (hE i))).homEquiv _ _ ((coefficientIso V E hE A i).inv ≫ colimit.ι (coefficients E A) i)) q ≫ (coefficientCohomologyColimitIso (I := I) E A q).hom = TopCat.Sheaf.spectralLimitCohomologyMap (inclusionOfLE (hE i)) (objectCohomologyPullback (inclusionOfLE (hE i))) ((adjunction (inclusionOfLE (hE i))).homEquiv _ _ (restrictionIso (hE i) A).hom) q",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-25",
+  "declarations": [
+   "TopCat.OpenSystem.coefficientColimitIso",
+   "TopCat.OpenSystem.coefficientCohomologyColimitIso",
+   "TopCat.OpenSystem.coefficientColimit_cohomology_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261025T163802-L-834892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

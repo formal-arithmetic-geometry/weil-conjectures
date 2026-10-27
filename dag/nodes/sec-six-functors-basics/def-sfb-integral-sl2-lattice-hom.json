@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-integral-sl2-lattice-hom",
+ "kind": "definition",
+ "title": "Regular natural SL2 actions on an integral lattice over a commutative base ring",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $B$ be a commutative ring and $L$ a finite-rank free abelian group [def-weil-pbc-free-module]. A homomorphism $\\mathrm{SL}_{2,B}\\to\\mathrm{GL}(L\\otimes_{\\mathbf Z}B)$ is a family $\\rho_A:\\mathrm{SL}_2(A)\\to\\operatorname{Aut}_A(A\\otimes_{\\mathbf Z}L)$ of group homomorphisms for every commutative $B$-algebra $A$, natural with respect to all $B$-algebra homomorphisms. Here $\\mathrm{SL}_2(A)$ is the group of determinant-one two-by-two matrices, with matrix multiplication. The family is regular: in some finite integral basis of $L$, every matrix entry of $\\rho_A(g)$ is given, uniformly for all $A,g$, by evaluating a polynomial over $B$ in the four entries of $g$. This is the coordinate-ring description using $B[a,b,c,d]/(ad-bc-1)$; polynomial representatives are not part of the data of a homomorphism. The zero lattice and nonreduced or zero test algebras are allowed. The diagonal point attached to $s\\in A^\\times$ is $\\operatorname{diag}(s,s^{-1})$, equivalently $w(s)w(1)^{-1}$ with $w(s)=x_+(s)x_-(-s^{-1})x_+(s)$.",
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 23h, equations (152)--(153), pp.509--510; agent explicit affine functor-of-points interface for the integral rank-one integration input."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural representations of the affine group scheme SL2 over arbitrary commutative base rings on a finite free integral lattice",
+   "results": "{\"t\": \"2026-10-24T09:02:20Z\", \"tool\": \"leansearch\", \"query\": \"Natural representations of the affine group scheme SL2 over arbitrary commutative base rings on a finite free integral lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup\", \"SpecialLinearGroup.instCoeFunForall\", \"SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instCoeFun\", \"Matrix.SpecialLinearGroup.toLin'\", \"Matrix.SpecialLinearGroup.instGroup\", \"MatrixGroups.term𝒮ℒ\", \"Matrix.SpecialLinearGroup.fin_two_induction\"], \"digest\": \"83dbcf937b08c624\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: matrix SL and scalar-extension maps do not define regular natural actions on a general integral lattice. The grep lattice-hom hits concern order lattices."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural families of group homomorphisms from SL2 matrices over all algebras to automorphisms of a scalar extended integral module",
+   "results": "{\"t\": \"2026-10-24T09:02:21Z\", \"tool\": \"leanfinder\", \"query\": \"Natural families of group homomorphisms from SL2 matrices over all algebras to automorphisms of a scalar extended integral module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.mapGL\", \"Matrix.SpecialLinearGroup.mapGL_coe_matrix\", \"UpperHalfPlane.SLAction\", \"Matrix.SpecialLinearGroup.map_mapGL\", \"ModularGroup.coeHom\", \"ModularGroup.SLOnGLPos\", \"SpecialLinearGroup.baseChange\", \"Matrix.SpecialLinearGroup.toLin'\"], \"digest\": \"5bc742d49585b571\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: matrix SL and scalar-extension maps do not define regular natural actions on a general integral lattice. The grep lattice-hom hits concern order lattices."
+  },
+  {
+   "tool": "grep",
+   "query": "SL2Hom|LatticeHom|SpecialLinearGroup.*TensorProduct|SL2.*Representation",
+   "results": "{\"t\": \"2026-10-24T09:02:21Z\", \"tool\": \"grep\", \"query\": \"SL2Hom|LatticeHom|SpecialLinearGroup.*TensorProduct|SL2.*Representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Order/BooleanSubalgebra.lean\", \"Mathlib/Order/BooleanSubalgebra.lean\", \"Mathlib/Order/BooleanSubalgebra.lean\", \"Mathlib/Order/BooleanSubalgebra.lean\", \"Mathlib/Order/BooleanSubalgebra.lean\", \"Mathlib/Topology/Sets/Opens.lean\", \"Mathlib/Topology/Sets/Opens.lean\", \"Mathlib/Order/Heyting/Hom.lean\"], \"digest\": \"0b83e7ba87103979\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: matrix SL and scalar-extension maps do not define regular natural actions on a general integral lattice. The grep lattice-hom hits concern order lattices."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-lattice-integration",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, equation (153), pp.509--510, and characteristic-zero integration Theorem 23.70, pp.507--508. Agent-formulated integral sl2 input filling the omitted rank-one verification in Theorem 23.72; the lattice integration assertion is not explicitly proved in Milne. Definition of the regular natural integral SL2 homomorphism, used in the conclusion.",
+   "via": [
+    "lem-sfb-sl2-lattice-integration",
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.IntegralSl2LatticeHom",
+  "declaration": "RepresentationTheory.IntegralSl2LatticeHom",
+  "declarations": [
+   "RepresentationTheory.IntegralSl2LatticeHom",
+   "RepresentationTheory.integralSl2Diagonal"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/IntegralSl2LatticeHom.lean",
+  "statement": "structure IntegralSl2LatticeHom (B : Type v) [CommRing B] (L : Type u) [AddCommGroup L] [Module ℤ L] [Module.Free ℤ L] [Module.Finite ℤ L]",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8899d3163",
+  "group": "Q39",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8899d3163",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Node diff vs live: only lean record + stmt_dep def-sfb-integral-sl2-lattice-hom. All clauses match: Module.Free/Finite lattice, Q⊗L, three commutators, nilpotence, integer eigenbasis (implied by hL, harmless), hL IsInternal of kernel weight spaces = L∩W_j, divided-power preservation as unique integral lifts, X± finite sums over every nilpotence bound/lift family (nonempty domain), D(s) on pure weight tensors with unit zpow, integralSl2Diagonal = w(s)w(1)^-1 = diag(s,s^-1) checked by hand, ∃! over every CommRing B with A in universe max u v. New IntegralSl2LatticeHom (natural group-hom family + polynomial-entry Prop) is equivalent to an affine group-scheme hom, not hollow; no ring-general duplicate (RankOneRoots.SL2Hom and LinearGroupSchemes.specialLinear are field-only; RingGroupSchemes only Gm/torus). Uniqueness true via D(a)/D(c) factorizations + naturality. Records verbatim, imports per brief, docstrings with source/blueprint/six steps, sorry only. No changes, no compile."
+ }
+}

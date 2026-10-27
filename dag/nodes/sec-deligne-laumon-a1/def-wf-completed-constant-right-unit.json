@@ -1,0 +1,139 @@
+{
+ "id": "def-wf-completed-constant-right-unit",
+ "kind": "definition",
+ "title": "Completed coefficient right-unit maps with integral normalization",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field and coefficient datum and a separated finite-type $k_0$-scheme $X_0$, with $X=X_0\\times_{k_0}k$, as in [def-wf-weil-category]. Let $E$ be a finite coefficient field and let $R=\\widehat{\\mathcal O}_{E,X}$. Use the actual ordinary derived tensor underlying [def-wf-tensor-product], and let $C$ and $u$ be its Koszul completion and unit of [lem-weil-pbc-ringed-koszul-completion-reflector]. For the finite coefficient comparison $J_E$ of [lem-fd-rational-coefficient-category-comparison], transported to the actual Weil categories by [def-wf-weil-coefficient-comparison-interface], identify the image of the constant integral object of [def-weil-constant-weil-structure] with $R[0]$ by the coefficient-section map and the single-complex derived transport. Define the ordinary right unitor $r_M:M\\otimes_R^LR\\to M$ by the map $x\\otimes a\\mapsto ax$ on every flat K-flat representative, natural in all derived arrows. For each complete integral constructible representative $K$, define its completed right unitor $\\widehat r_K:C(K\\otimes_R^LR)\\to K$ as the unique extension of $r_K$ through the reflector unit; equivalently it is $u_K^{-1}C(r_K)$. Rationalize these maps on the unchanged objects and localized arrows. This defines the completed rational right-unit map with the actual constant coefficient object, retaining the prescribed integral and ordinary representative normalizations.",
+ "stmt_deps": [
+  "def-wf-weil-category",
+  "def-wf-tensor-product",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-wf-weil-coefficient-comparison-interface",
+  "def-weil-constant-weil-structure"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-wf-constant-twist-weight.proof.md",
+  "place": "First sentence; coefficient multiplication underlying the constant-line tensor comparison; expanded in comparison node proof steps 2, 4 and 5"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Completed right unit for the derived tensor of adic constructible sheaves with the completed coefficient ring, fixed by ordinary coefficient multiplication and the Koszul completion unit",
+   "results": [
+    "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp",
+    "AdicCompletion.tensor_map_id_left_eq_map",
+    "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+    "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+    "AdicCompletion.module",
+    "AdicCompletion.ofTensorProduct_tmul",
+    "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+    "AdicCompletion.ofTensorProduct_surjective_of_finite"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Algebraic module completion only; no completed sheaf-derived right unitor."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical completed derived right unit map for sheaf complexes over an adic completed coefficient ring",
+   "results": [
+    "CategoryTheory.Adjunction.derivedε",
+    "localCohomology.diagram",
+    "CategoryTheory.Functor.toRightDerivedZero",
+    "InjectiveResolution.toRightDerivedZero'",
+    "DerivedCategory.right_fac",
+    "DerivedCategory.right_fac_of_isStrictlyLE",
+    "InjectiveResolution.rightDerived_app_eq",
+    "Functor.mapDerivedCategoryFactorsh_hom_app"
+   ],
+   "date": "2026-10-24",
+   "verdict": "Generic derived-functor comparisons, not the required unit-normalized map."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*[Rr]ight[Uu]nit|[Rr]ight[Uu]nit.*completed|wf.*[Uu]nitor; Mathlib, lean/WeilConjectures, lean/Sheaf; DAG search completed right unit",
+   "results": [
+    "Mathlib: no match",
+    "WeilConjectures: no match",
+    "Sheaf: CompletedShriekCompositionLaws functor unitor, CompletedQuotientUnitNormalization derivedCochainRightUnit, CompactSupportProjectionFormula ordinary Frobenius rightUnitor; none defines this completed PBC map",
+    "DAG: item, constant-twist definition and weight theorem mention the map; no definition node",
+    "tools/blueprint_refs.py search completed right unit: no match"
+   ],
+   "date": "2026-10-24",
+   "verdict": "The ordinary categorical unit exists; the prescribed completion and J-normalization require this helper notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-constant-twist-coefficient-comparison",
+  "date": "2026-10-24",
+  "group": "O3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-wf-constant-twist-weight",
+   "place": "First sentence: completed right-unit multiplication underlying constant-line tensor",
+   "via": [
+    "lem-wf-constant-twist-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-energy",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedConstantRightUnit",
+  "declaration": "WeilConjectures.constantTwistRationalRightUnit",
+  "declarations": [
+   "WeilConjectures.constantTwistUnitComplex",
+   "WeilConjectures.constantTwistUnitComplex_flat",
+   "WeilConjectures.constantTwistOrdinaryRightUnit_existsUnique",
+   "WeilConjectures.constantTwistOrdinaryRightUnit",
+   "WeilConjectures.constantTwistAmbientInclusion",
+   "WeilConjectures.constantTwistSingleSection",
+   "WeilConjectures.constantTwistIntegralUnit_existsUnique",
+   "WeilConjectures.constantTwistIntegralUnit",
+   "WeilConjectures.constantTwistIntegralCarrier",
+   "WeilConjectures.constantTwistCompletedRightUnit_existsUnique",
+   "WeilConjectures.constantTwistCompletedRightUnit",
+   "WeilConjectures.constantTwistRationalRightUnit_existsUnique",
+   "WeilConjectures.constantTwistRationalRightUnit"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedConstantRightUnit.lean",
+  "statement": "def constantTwistRationalRightUnit (E : Padic.FiniteCoefficientFields c.l c.Qbar)",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8919d0f4a",
+  "group": "O3",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8919d0f4a",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after the 8da7a3dc RETURN; all three points repaired: (1) H2 stmt_dep now def-per-lisse-completed-system-data with the LisseCompletedSystemData import; (2) lem-fd record unchanged, the interface owned by new def node def-wf-weil-coefficient-comparison-interface (fields per H12), ConstantTwistWeilComparison.stage_transition pins the stage isos to the SF transition, normalized finite scalar and PBC transIso; (3) citer audit of the def-wf-constant-weil-twist rebind lists 16 citers (spot-checked d-real-cohom docstring-only, lem-wf-constant-twist-weight). Mechanical theorem stmt_dep lem-weil-constant-weil-structure-stage-independence: the item uses constantWeilStageScalar = .choose of that module's ∃! Weil iso over alpha (clause 1 of the theorem), i.e. an object the theorem's conclusion constructs -> PASS on that point; the rebuilt dependency module states both clauses, finite type only. Clause by clause: J_E with unit-normalized transport; B = J(E_X,b theta) as pbcConstantWeilLine; integral rep R[0], section-normalized; rank one, vacuous on empty X; E-independence plus associator; eta ∃!-pinned to the completed right unit (wfCompletionExtend of rightUnitor) with naturality, scalar square, common descent keeping b, J^-1 transport; local conjugacy at extension and closed points with recorded localQbar operators; connected clause with rho = b^deg via a pinned etale theta and a fully faithful realization; universes lifted via ULift. No hollow defs, all sorry, docstrings OK, lines <=100. Advisory: lem-fd and koszul-reflector theorem modules own FdCoefficientComparisonSystem/wfCompletionExtend uses; the stage-independence module imports the new interface without a stmt_dep (dependency nodes change lean only); H11 self second reading. No compile (no change)."
+ }
+}

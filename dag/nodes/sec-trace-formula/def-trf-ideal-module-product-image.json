@@ -1,0 +1,119 @@
+{
+ "id": "def-trf-ideal-module-product-image",
+ "kind": "definition",
+ "title": "Ideal-module multiplication image and its inclusion",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $J,F$ be sheaves of $\\mathcal O_X$-modules [def-weil-sheaf-of-modules-category], and let $i:J\\to\\mathcal O_X$ be a morphism of modules; $i$ is not required to be injective. Using the sheaf tensor product and its unit [def-pur-sheaf-tensor-product], form $\\mu_{i,F}:J\\otimes_{\\mathcal O_X}F\\xrightarrow{i\\otimes1}\\mathcal O_X\\otimes_{\\mathcal O_X}F\\xrightarrow{\\lambda_F}F$. Define the ideal-module product $JF=\\operatorname{im}(\\mu_{i,F})$ and its inclusion $JF\\hookrightarrow F$ to be the image object and image inclusion in the abelian category of module sheaves. When $i$ is an ideal inclusion, this is the usual ideal multiple; the same definition applies to the pulled-back ideal map even when that map is not injective.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 01YP, lemma-affine-morphism-projection-ideal, first proof paragraph defining the ideal multiple as the image of multiplication; also the ideal-product paragraph in the proof of Tag 0B5V and the existing construction documented at Tag 0CYV."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Image of ideal multiplication on a sheaf of modules and its inclusion",
+   "results": "[leansearch] OK 8 hit(s). Returned Submodule.map_le_smul_top, CategoryTheory.Sheaf.imageι, FractionalIdeal.instPosMulReflectLEIdealOfIsDedekindDomain, Ideal.instCovariantClassHSMulLe, FractionalIdeal.instMulRightMono, AlgebraicGeometry.Scheme.IdealSheafData.inclusion, AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le, Ideal.map_includeLeft_eq.",
+   "date": "2026-10-24",
+   "verdict": "Generic images and ring-ideal facts; use the exact existing project definitions instead of duplicating them."
+  },
+  {
+   "tool": "loogle",
+   "query": "idealModuleProduct",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'idealModuleProduct'",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; exact project definitions exist."
+  },
+  {
+   "tool": "grep",
+   "query": "idealModuleProduct|idealModuleProductι",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib declaration; use the project definitions."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "idealModuleProduct|idealModuleProductι in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search ideal-module-product",
+   "results": "No definition node owns these declarations (scan of every def-*.json lean record). Existing exact plain definitions in lean/WeilConjectures/AlgebraicGeometry/IdealModuleProductStalk.lean:42 and :50; many theorem nodes and consumers mention them. No duplicate implementation in lean/Sheaf. blueprint_refs.py: 0 blueprint nodes match ideal-module-product.",
+   "date": "2026-10-24",
+   "verdict": "Register existing:true ownership of both real-data definitions as requested by H2; no new Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-finite-ideal-twist-cohomology-comparison",
+  "date": "2026-10-24",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: finite-surjective descent and ascent of absolute ampleness (0B5V). Subargument: Stacks 0B5V ideal-product/projection/cohomology calculation, returned Steps 4 (coherence and identity), 5, and first part of 6. Definition ownership for the image of ideal multiplication and its inclusion used to define H and JG.",
+   "via": [
+    "lem-trf-finite-ideal-twist-cohomology-comparison",
+    "lem-trf-finite-surjective-ample-reflection",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk",
+  "declaration": "AlgebraicGeometry.Scheme.idealModuleProduct",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.idealModuleProduct",
+   "AlgebraicGeometry.Scheme.idealModuleProductι"
+  ],
+  "statement": "def idealModuleProduct {X : Scheme.{u}} {J : X.Modules}\n    (ι : J ⟶ SheafOfModules.unit X.ringCatSheaf) (F : X.Modules) : X.Modules",
+  "branch": "slopmaster2",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2 ownership repair for returned delivery 00121a19e253. Both declarations are existing plain image definitions in IdealModuleProductStalk, not choices from the stalk theorem. The data is image (i tensor F followed by the left unitor) and image.ι of that same map. Neither definition assumes Mono i, which is essential for a pulled-back ideal map. No Lean declaration is added or copied."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35f0d8ae1",
+  "group": "Q65",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35f0d8ae1",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery of 00121a19 RETURN H2. Lean byte-identical to the accepted text except 3 docstring lines naming owners; lean.statement verbatim. stmt_deps: lem-sc-square-zero-ideal-tensor-unit replaced by def-sc-tensor-pullback-power-comparison (owns boundaryPullbackPowIso), def-sfb-tensor-pullback-structure-sheaf-map added (tensorPullbackObjUnitToUnit), new def-trf-ideal-module-product-image existing:true on idealModuleProduct/ι (IdealModuleProductStalk:42-55: real image data, no Mono, signature verbatim, no rival def owner in side-live). statement_change is citation-only (two inserted clauses, diff checked); old_statement/old_stmt_deps equal side-live base; proof/proof_deps unchanged; citers finite-surjective-ample-reflection and dominant-flag-line-kempf-vanishing hold. Mathematics as previously accepted (finite f, X and Y locally Noetherian, coherent F, IdealSheafData J, invertible L; clauses 1-3; edge cases n=0, p=0). Theorems sorry-only, docstrings and report sections present. Not recompiled because no file changed."
+ }
+}

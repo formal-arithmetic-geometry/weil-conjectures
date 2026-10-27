@@ -24,73 +24,60 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-affine-chart-exceptional-identification] to each chosen chart. With $g:V\\hookrightarrow Y$, $u:U\\hookrightarrow X$ and $N=Lg^*L$, it gives $Lu^*Rf^!L\\cong Ri_U^!R\\pi_U^!N$ on the bounded-below etale-origin domain, before any preservation assertion. By [prop-exc-open-adjoint] and [thm-exc-explicit-preservation], $N$ retains the cohomological interval of $L$; for a finite-Tor input $K$, $Lg^*K$ retains its Tor interval and bounded constructibility.",
+   "text": "Index all charts by the finite dependent sum J of their indices. The base cover and chart covers show that their opens cover X, including the empty case. For any chart, Finset.le_sup gives d≤D and c_U+1+2(D-d)≤c. Cast to integers using d≤D to remove natural subtraction. Integer arithmetic gives containment of [a-2d,b-2d+c_U+1] in [a-2D,b-2D+c]. Tor and cohomological support bounds enlarge under this containment.",
    "uses": [
-    "lem-pur-affine-chart-exceptional-identification",
-    "prop-exc-open-adjoint",
-    "thm-exc-explicit-preservation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Steps 1 and 3: witnessed chart comparison and base-open restriction."
-   }
-  },
-  {
-   "text": "Write $d=d_U$. The projection $\\pi_U$ is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth]. It is separated: over $V=\\operatorname{Spec}R$, its diagonal is cut out by $x_j-y_j$ in $\\operatorname{Spec}R[x_1,\\ldots,x_d,y_1,\\ldots,y_d]$. Thus [cor-pur-smooth-admissibility] sends a constructible interval $[a,b]$ to $[a-2d,b-2d]$, and separately sends a bounded constructible Tor input of interval $[a,b]$ to that Tor interval with bounded constructibility. Apply [lem-pur-closed-etale-transport-bounds] to $i_U$, its stipulated etale complement condition and $c_U$. In both applications the chart interval becomes $[a-2d_U,b-2d_U+c_U+1]$; the first application needs no finite-Tor assumption.",
-   "uses": [
-    "sbc-lem-affine-space-smooth",
-    "cor-pur-smooth-admissibility",
-    "lem-pur-closed-etale-transport-bounds"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 2: smooth projection followed by the transported closed-support bounds."
-   }
-  },
-  {
-   "text": "For a nonempty chart family put $I=[a-2D,b-2D+c]$. Since $d_U\\leq D$ and $c\\geq c_U+1+2(D-d_U)$, one has $a-2D\\leq a-2d_U$ and $b-2d_U+c_U+1\\leq b-2D+c$. Hence each chart interval lies in $I$; the defining cohomology and tensor-test vanishings persist under this enlargement. If there are no charts, use the empty-cover clause of [lem-pur-finite-open-interval-descent]: every object on $X=\\varnothing$ is zero, and the assertions hold with $D=c=0$.",
-   "uses": [
+    "def-pur-affine-chart-cover",
     "def-weil-constructible-intervals",
-    "def-weil-finite-tor-amplitude",
-    "lem-pur-finite-open-interval-descent"
+    "def-weil-finite-tor-amplitude"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 2: uniform maximum and the empty chart family."
-   }
+   "elementary": true
   },
   {
-   "text": "The chart opens form a finite cover of $X$. Apply [lem-pur-finite-open-interval-descent] to $Rf^!L$ and the interval $I$ to prove conclusion 1. For bounded constructible $K$, choose a cohomological interval containing its finitely many nonzero degrees (use $[0,0]$ for $K=0$); conclusion 1 already makes $Rf^!K$ bounded constructible. For a Tor input of interval $[a,b]$, every $Lu^*Rf^!K$ has Tor amplitude in $I$ by Steps 2–3. The chart open immersions form a pro-etale covering family of $X$ and $Lu^*$ is the module inverse image, so [lem-sfb-tor-interval-local-detection](i), for the constant ring sheaf $A$, gives Tor amplitude in $I$ for $Rf^!K$. Its tests range over every degree-zero pro-etale module sheaf, also those not of etale origin. Hence the bounded constructible $Rf^!K$ has the claimed Tor interval and belongs to $D^b_{ctf}(X,A)$.",
+   "text": "Apply chart_local_bounds to each chart and enlarge its cohomological interval by the preceding inequalities. purityFiniteOpenIntervalDescent glues these bounds and constructibility. The finiteTorsionConstructibleIn predicate is equivalent to constructibleInterval: outside-interval zero cohomology is equivalent to containment of the nonzero cohomological support. This proves clause 1.",
+   "uses": [
+    "lem-pur-chart-local-bounds",
+    "lem-pur-finite-open-interval-descent",
+    "def-weil-constructible-intervals"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a Tor input apply the chart Tor clause and enlarge to the uniform interval. For every global representative, K-flat resolution, arbitrary module sheaf and outside degree, purityOpenTensorTestVanishing makes its tensor-test cohomology vanish after restriction to each chart. Restriction to constant scalars is an additive faithful equivalence and commutes with pullback; the proved source open-cover zero detection therefore detects zero intrinsic sheaves. This gives the intrinsic Tor predicate globally, including for the empty cover.",
+   "uses": [
+    "lem-pur-chart-local-bounds",
+    "lem-pur-open-tensor-test-vanishing",
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "lem-pur-proetale-open-cover-comparison-descent",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose lower and upper integer bounds p,q for the finite cohomological support of the bounded constructible input. Its support lies in [min p q,q], an ordered interval even for empty support. Apply the already proved cohomological preservation argument to this interval. Its output is bounded constructible; pair this with the global Tor interval and its finite-amplitude witness. This proves clause 2.",
    "uses": [
     "lem-pur-finite-open-interval-descent",
-    "lem-sfb-tor-interval-local-detection"
+    "def-weil-finite-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-    "place": "Step 4: cohomological descent (new node) and arbitrary-sheaf Tor descent (existing local-detection lemma)."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-affine-chart-exceptional-identification",
-  "prop-exc-open-adjoint",
-  "thm-exc-explicit-preservation",
-  "sbc-lem-affine-space-smooth",
-  "cor-pur-smooth-admissibility",
-  "lem-pur-closed-etale-transport-bounds",
+  "def-pur-affine-chart-cover",
   "def-weil-constructible-intervals",
   "def-weil-finite-tor-amplitude",
+  "lem-pur-chart-local-bounds",
   "lem-pur-finite-open-interval-descent",
-  "lem-sfb-tor-interval-local-detection"
+  "lem-pur-open-tensor-test-vanishing",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "lem-pur-proetale-open-cover-comparison-descent",
+  "def-weil-proetale-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
-  "place": "Steps 1–4, preserving the repaired domain, site-transfer and descent arguments of the previous nine-step DAG proof in three independent statement-only subproblems."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Steps 1--3 isolated as lem-pur-chart-local-bounds; Step 4 proved by finite-open constructible descent, exact tensor-test restriction and open-cover zero detection. The maximum arithmetic is proved directly."
  },
  "mathlib_searches": [
   {
@@ -187,7 +174,18 @@
   "def-weil-scheme-morphism-properties"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
@@ -258,25 +256,39 @@
   "note": "Wrote review.md and complete replacements under fixes/. Statements, dependencies, sources, universes and edge cases checked. Reused the published intrinsic exceptional functor through transparent aliases; preservation statement unchanged. All four original and corrected modules passed scompile.py without diagnostics. Branch head unchanged."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be a\nseparated finite-type\nmorphism. The ambient exceptional right adjoint datum of\n[def-weil-ambient-exceptional-adjoint] is not assumed: the right adjoints\n$Rf^{\\times}$, $R(\\pi_U)^{\\times}$, $R(i_U)^{\\times}$ that the proof forms\nexist on the bounded constructible and finite-Tor coefficients of the two\nclauses below by [cor-sf-ambient-adjoint-discharge]. Cover $Y$ by finitely\nmany affine opens $V\\subseteq Y$; for each $V$, $f^{-1}(V)$ is\ncovered by finitely many affine opens $U\\subseteq f^{-1}(V)$, and each\n$U\\to V$ is affine of finite type, hence a closed subscheme of\n$\\mathbf A^{d_U}_V$ for some $d_U\\in\\mathbf Z_{\\geq0}$, with open\ncomplement $W_U=\\mathbf A^{d_U}_V\\setminus U$ in the\n[def-sbc-affine-space] affine space. Assume the open-complement\ncondition of [def-exc-open-complement-bound] for every pair\n$(W_U,\\mathbf A^{d_U}_V)$ over the finitely many charts, with constants\n$c_U$, and put $D=\\max_U d_U$ and\n$c=\\max_U\\bigl(c_U+1+2(D-d_U)\\bigr)$. Then $f$\nsatisfies the two preservation clauses of\n[def-weil-exceptional-adjoint-admissibility]:\n\n1. for all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2D,b-2D+c]}(X,A);\n$$\n1. if $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2D,b-2D+c]$; in particular $Rf^!$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.",
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $f:X\\to Y$ be a\nseparated finite-type\nmorphism. The ambient exceptional right adjoint datum of\n[def-weil-ambient-exceptional-adjoint] is not assumed (it is false in\ngeneral): the right adjoints $Rf^{\\times}$, $R(\\pi_U)^{\\times}$,\n$R(i_U)^{\\times}$ that the proof forms are the right adjoints relative to the\nbounded-below objects of étale origin of [thm-sf-ambient-adjoint-class], and\non bounded constructible coefficients they are the finite-stage exceptional\ninverse images $Rf^!$, $R\\pi_U^!$, $Ri_U^!$ of\n[def-weil-exceptional-inverse-image]. Cover $Y$ by finitely\nmany affine opens $V\\subseteq Y$; for each $V$, $f^{-1}(V)$ is\ncovered by finitely many affine opens $U\\subseteq f^{-1}(V)$, and each\n$U\\to V$ is affine of finite type, hence a closed subscheme of\n$\\mathbf A^{d_U}_V$ for some $d_U\\in\\mathbf Z_{\\geq0}$, with open\ncomplement $W_U=\\mathbf A^{d_U}_V\\setminus U$ in the\n[def-sbc-affine-space] affine space. Assume the open-complement\ncondition of [def-exc-open-complement-bound] for every pair\n$(W_U,\\mathbf A^{d_U}_V)$ over the finitely many charts, with constants\n$c_U$, and put $D=\\max_U d_U$ and\n$c=\\max_U\\bigl(c_U+1+2(D-d_U)\\bigr)$. Then $Rf^!$\nsatisfies the analogues of the two preservation clauses of\n[def-weil-exceptional-adjoint-admissibility]:\n\n1. for all integers $a\\leq b$,\n$$\nL\\in D_c^{[a,b]}(Y,A)\\quad\\Longrightarrow\\quad\nRf^!L\\in D_c^{[a-2D,b-2D+c]}(X,A);\n$$\n1. if $K\\in D^b_{ctf}(Y,A)$ has\nfinite Tor amplitude in\n$[a,b]$, then $Rf^!K$ has finite Tor amplitude in\n$[a-2D,b-2D+c]$; in particular $Rf^!$ carries\n$D^b_{ctf}(Y,A)$ into $D^b_{ctf}(X,A)$.",
   "proof": [
    {
-    "text": "On a chart $U\\subseteq f^{-1}(V)$ with $V$ affine the morphism\n$U\\to V$ is affine of finite type, so the presentation of its\ncoordinate ring as a quotient of a polynomial algebra over\n$\\mathcal O_V(V)$ exhibits it as a closed subscheme\n$i_U:U\\hookrightarrow\\mathbf A^{d_U}_V$ ([def-sbc-affine-space]);\nwrite $\\pi_U:\\mathbf A^{d_U}_V\\to V$ for the projection and\n$u_U:U\\hookrightarrow X$ for the open immersion (an open immersion, since\n$U\\subseteq f^{-1}(V)\\subseteq X$), so that $fu_U=\\pi_Ui_U$.\nStep 1: the right adjoint of the chart. The compact-support direct image\nof a composite is the composite of the compact-support direct images, and\nthe right adjoint of a composite of functors is the composite of their\nright adjoints, so\n\n$$\nR(fu_U)^{\\times}\\;\\cong\\;R(i_U)^{\\times}\\circ R(\\pi_U)^{\\times},\n\\qquad\nLu_U^*\\circ Rf^{\\times}\\;\\cong\\;R(fu_U)^{\\times},\n$$\n\nthe second because $R(u_U)_!=u_{U!}$ has right adjoint $Lu_U^*$ by\n[prop-exc-open-adjoint]. Hence it suffices to bound\n$R(i_U)^{\\times}R(\\pi_U)^{\\times}$.\nStep 2: the chartwise bounds. Fix $V$ and a chart $U\\subseteq f^{-1}(V)$, and write $d=d_U$, $c'=c_U$. The projection $\\pi_U$ is\nsmooth of pure relative dimension $d$, so\n[cor-pur-smooth-admissibility] gives, for\n$L\\in D_c^{[a,b]}(V,A)$,\n\n$$\nR(\\pi_U)^{\\times}L\\in D_c^{[a-2d,b-2d]}(\\mathbf A^{d}_V,A),\n$$\n\nand for $K$ with finite Tor amplitude in $[a,b]$, finite Tor amplitude\nin $[a-2d,b-2d]$; the closed immersion $i_U$ has ambient right\nadjoint $R(i_U)^{\\times}$ by [lem-exc-closed-ambient], and the\nclosed-support computations [lem-exc-closed-amplitude] and\n[prop-exc-closed-tor], applied to the pair $(i_U,W_U)$ under the\nassumed open-complement condition, move the interval to\n$[a-2d,b-2d+c'+1]$. The exact restriction $Lu_U^*$ preserves both\nkinds of bound ([thm-exc-explicit-preservation] for the open immersion $u_U$), so each chart carries the interval\n$[a-2d_U,b-2d_U+c_U+1]$, which is contained in\n$[a-2D,b-2D+c]$ by the choice of $D$ and $c$.\nStep 3: passage from the affine opens of the base to the base. For an\naffine open $V\\subseteq Y$ with open immersion $g_V:V\\hookrightarrow Y$\nand $f_V:f^{-1}(V)\\to V$, the base-change comparison for the open\nimmersion $g_V$ is an isomorphism by\n[cor-exc-base-change-open-immersion-general], i.e.\n$Rf_V^{\\times}\\cong Lg_V^*\\circ Rf^{\\times}$; that statement is read on the\ncoefficients of the present theorem, where the ambient datum it displays as a\nhypothesis is the theorem [cor-sf-ambient-adjoint-discharge], so that\nthe comparison used here is unconditional, and both sides are applied only to\nthe bounded constructible complexes $Lg_V^*K$ with\n$K\\in D_c^{[a,b]}(Y,A)$. Applying Step 2 to the\nseparated finite-type morphism $f_V$ over the affine scheme $V$\ntherefore bounds $Lg_V^*(Rf^{\\times}K)\\cong Rf_V^{\\times}(Lg_V^*K)$ on\n$f^{-1}(V)$, hence on each chart $U\\subseteq f^{-1}(V)$.\nStep 4: conclusion. Vanishing of a cohomology sheaf, and vanishing of the\ncohomology of a complex tensored with a coefficient sheaf, are local on the\nsite, and the charts $U$ cover $X$; hence the chartwise bounds of\nSteps 2–3 give the two displayed assertions for the global object\n$Rf^{\\times}K$.",
+    "text": "On a chart $U\\subseteq f^{-1}(V)$ with $V$ affine the morphism\n$U\\to V$ is affine of finite type, so the presentation of its\ncoordinate ring as a quotient of a polynomial algebra over\n$\\mathcal O_V(V)$ exhibits it as a closed subscheme\n$i_U:U\\hookrightarrow\\mathbf A^{d_U}_V$ ([def-sbc-affine-space]);\nwrite $\\pi_U:\\mathbf A^{d_U}_V\\to V$ for the projection and\n$u_U:U\\hookrightarrow X$ for the open immersion (an open immersion, since\n$U\\subseteq f^{-1}(V)\\subseteq X$), so that $fu_U=\\pi_Ui_U$.\nAll right adjoints below are the right adjoints relative to the\nbounded-below objects of étale origin of [thm-sf-ambient-adjoint-class]\n(for open immersions, the inverse image, which is right adjoint to extension\nby zero on the whole derived category, [prop-exc-open-adjoint]). The exact\nfunctors $u_{U!}$, $i_{U*}=R(i_U)_!$ and extension by zero along an open\nimmersion carry bounded-below objects of étale origin to such objects, and\nthe values of these right adjoints on bounded-below objects of étale origin\nare again bounded below of étale origin; so relative adjunctions compose, and\nthe Yoneda lemma inside the full subcategory of bounded-below objects of étale\norigin identifies two such right adjoints of the same functor.\nStep 1: the right adjoint of the chart. The compact-support direct image\nof a composite is the composite of the compact-support direct images, and\nthe right adjoint of a composite of functors is the composite of their\nright adjoints, so\n\n$$\nR(fu_U)^{\\times}\\;\\cong\\;R(i_U)^{\\times}\\circ R(\\pi_U)^{\\times},\n\\qquad\nLu_U^*\\circ Rf^{\\times}\\;\\cong\\;R(fu_U)^{\\times},\n$$\n\nthe second because $R(u_U)_!=u_{U!}$ has right adjoint $Lu_U^*$ by\n[prop-exc-open-adjoint]. Hence it suffices to bound\n$R(i_U)^{\\times}R(\\pi_U)^{\\times}$.\nStep 2: the chartwise bounds. Fix $V$ and a chart $U\\subseteq f^{-1}(V)$, and write $d=d_U$, $c'=c_U$. The projection $\\pi_U$ is\nsmooth of pure relative dimension $d$, so\n[cor-pur-smooth-admissibility] gives, for\n$L\\in D_c^{[a,b]}(V,A)$,\n\n$$\nR(\\pi_U)^{\\times}L\\in D_c^{[a-2d,b-2d]}(\\mathbf A^{d}_V,A),\n$$\n\nand for $K$ with finite Tor amplitude in $[a,b]$, finite Tor amplitude\nin $[a-2d,b-2d]$; for the closed immersion $i_U$ the étale right\nadjoint entering $R(i_U)^{\\times}=\\nu^*i_U^{\\times}R\\nu_*$ is the\nclosed-support functor of [lem-exc-closed-ambient], and the\nclosed-support computations [lem-exc-closed-amplitude] and\n[prop-exc-closed-tor], applied to the pair $(i_U,W_U)$ under the\nassumed open-complement condition, move the interval to\n$[a-2d,b-2d+c'+1]$. The exact restriction $Lu_U^*$ preserves both\nkinds of bound ([thm-exc-explicit-preservation] for the open immersion $u_U$), so each chart carries the interval\n$[a-2d_U,b-2d_U+c_U+1]$, which is contained in\n$[a-2D,b-2D+c]$ by the choice of $D$ and $c$.\nStep 3: passage from the affine opens of the base to the base. For an\naffine open $V\\subseteq Y$ with open immersion $g_V:V\\hookrightarrow Y$\nand $f_V:f^{-1}(V)\\to V$, with $g'_V:f^{-1}(V)\\hookrightarrow X$ the\nbase-changed open immersion, one has $g_{V!}Rf_{V!}\\cong Rf_!g'_{V!}$, and\n$Lg_V^*$, $Lg_V'^*$ are right adjoint to $g_{V!}$, $g'_{V!}$\n([prop-exc-open-adjoint]). Passing to right adjoints relative to the\nbounded-below objects of étale origin as above gives\n$Lg_V'^*\\circ Rf^{\\times}\\cong Rf_V^{\\times}\\circ Lg_V^*$ on bounded-below\nobjects of étale origin, in particular on the bounded constructible\ncomplexes $K\\in D_c^{[a,b]}(Y,A)$; no base-change theorem and no ambient\ndatum is used. Applying Step 2 to the\nseparated finite-type morphism $f_V$ over the affine scheme $V$\ntherefore bounds $Lg_V'^*(Rf^{\\times}K)\\cong Rf_V^{\\times}(Lg_V^*K)$ on\n$f^{-1}(V)$, hence on each chart $U\\subseteq f^{-1}(V)$.\nStep 4: conclusion. Vanishing of a cohomology sheaf, and vanishing of the\ncohomology of a complex tensored with a coefficient sheaf, are local on the\nsite, and the charts $U$ cover $X$; hence the chartwise bounds of\nSteps 2–3 give the two displayed assertions for the global object\n$Rf^{\\times}K$.",
     "uses": [
      "def-sbc-affine-space",
+     "thm-sf-ambient-adjoint-class",
      "prop-exc-open-adjoint",
      "cor-pur-smooth-admissibility",
      "lem-exc-closed-ambient",
      "lem-exc-closed-amplitude",
      "prop-exc-closed-tor",
-     "thm-exc-explicit-preservation",
-     "cor-exc-base-change-open-immersion-general",
-     "cor-sf-ambient-adjoint-discharge"
+     "thm-exc-explicit-preservation"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f8fb8",
+  "group": "Q4",
+  "result": "fix",
+  "landing": "20261025T101313-L-3681333",
+  "kind": "interface",
+  "note": "independent cc review: general_admissibility proof + new chart_local_bounds/purityOpenTensorTestVanishing vs node thm-pur-general-admissibility, unit sk-prop-sf-rf-shriek-preservation realized modules, clone signatures; set compile + #print axioms in /tmp/q4rev"
  }
 }

@@ -1,0 +1,526 @@
+{
+ "id": "lem-pur-composition-tensor-mate",
+ "kind": "statement",
+ "title": "Composite exceptional adjunction and tensor-map mate identity",
+ "statement": "Fix the finite purity datum [def-pur-conventions]: $p$ prime, $a\\geq1$, $q=p^a$, $k_0=\\mathbf F_q$, $k=\\overline{k_0}$, $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with uniformizer $\\varpi_E$, $n\\geq1$, and $\\Lambda=\\mathcal O_E/\\varpi_E^n$. Let $f:X\\to Y$ and $g:Y\\to Z$ be smooth separated finite-type morphisms of pure relative dimensions $d,e\\geq0$ between finite-type $k$-schemes [def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-proper-morphism]. Use the small pro-etale derived operations [def-weil-derived-pullback-tensor-hom] and $D^b_{ctf}$ [def-weil-finite-tor-amplitude]. For $h=f,g,gf$, put $\\omega_h=Rh^!\\Lambda$ and let $\\varepsilon_h$ be the standing exceptional-adjunction counit [def-weil-exceptional-inverse-image]. Let $\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\sim}R(gf)_!$ be compact-support composition [thm-sf-comp-composition] on bounded-below etale-origin inputs [def-sf-etale-origin-subcategory]. Define $c_{g,f}:R(gf)^!\\to Rf^!Rg^!$ to be its specified counit mate [pur9-def-upper-shriek-composition], and $\\theta_{h,M}:Lh^*M\\otimes^L\\omega_h\\to Rh^!M$ to be the inverse-projection/counit transpose [def-pur-co-smoothness], with projection map [def-exchange-projection]. Write\n$$\\sigma=c_{g,f,\\Lambda}^{-1}\\circ\\theta_{f,\\omega_g}\\circ\\mathrm{sym}:\\omega_f\\otimes^LLf^*\\omega_g\\longrightarrow\\omega_{gf}.$$\nThen $gf$ is smooth separated finite type of relative dimension $d+e$, $Rg^!$ preserves $D^b_{ctf}$, and $\\omega_g\\in D^b_{ctf}(Y,\\Lambda)$. Every bounded constructible source object used in these adjunctions has an etale-origin witness; its compact-support image is again bounded below of etale origin. The composite adjunction $Rg_!Rf_!\\dashv Rf^!Rg^!$ [def-weil-pbc-composite-adjunction] has counit $\\varepsilon_g\\circ Rg_!(\\varepsilon_f Rg^!)$; $c$ is an isomorphism with transpose $\\varepsilon_{gf}\\circ\\alpha_{g,f}$. The maps $\\theta_{h,M}$ on the displayed finite-Tor domains and $\\sigma$ are isomorphisms.\n\nPut $T_h=\\varepsilon_{h,\\Lambda}$ and $W=\\omega_f\\otimes^LLf^*\\omega_g$. The transpose of $c_{g,f,\\Lambda}\\sigma:W\\to Rf^!Rg^!\\Lambda$ under that composite adjunction is\n$$t: Rg_!Rf_!W\\xrightarrow{Rg_!\\mathrm{PF}_f^{-1}}Rg_!(Rf_!\\omega_f\\otimes^L\\omega_g)\\xrightarrow{Rg_!(T_f\\otimes1)}Rg_!\\omega_g\\xrightarrow{T_g}\\Lambda_Z.$$\nFor $K\\in D^b_{ctf}(Z,\\Lambda)$ let $r_K$ be the canonical tensor reassociation\n$$L(gf)^*K\\otimes^LW\\xrightarrow{\\sim}Lf^*(Lg^*K\\otimes^L\\omega_g)\\otimes^L\\omega_f,$$\nusing the derived pullback compositor [lem-weil-pbc-proetale-derived-pullback-composition]. The following identity holds naturally in $K$:\n$$(*)\\qquad c_{g,f,K}\\theta_{gf,K}(1\\otimes\\sigma)=\\theta_{f,Rg^!K}(Lf^*\\theta_{g,K}\\otimes1)r_K.$$\nMore precisely both sides have composite-adjunction transpose equal to the inverse composite projection map $Rg_!Rf_!(L(gf)^*K\\otimes^LW)\\to Rg_!Rf_!W\\otimes^LK$, followed by $t\\otimes1_K$ and the coefficient-unit map $\\Lambda_Z\\otimes^LK\\to K$. The composite inverse projection here is the successive inverse projection for $f$ and $g$, including the same tensor symmetries and pullback associators.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Proof Steps 1–2: orientation-free dualizing tensor comparison and projection-formula transposition; returned proof Steps 1–3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "thm-sf-comp-composition",
+  "def-sf-etale-origin-subcategory",
+  "pur9-def-upper-shriek-composition",
+  "def-pur-co-smoothness",
+  "def-exchange-projection",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-pur-localized-derived-tensor-braiding"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sbc-smooth-relative-dimension-permanence](2) to $f,g$: $h=gf$ is smooth of pure relative dimension $d+e$. Separatedness follows from [lem-weil-pbc-proper-fp-permanence](e), and finite type from [lem-sfb-finite-type-composition-base-change](1). Thus all three morphisms satisfy the hypotheses of the finite-coefficient operations and smooth tensor theorem. None of these assertions requires $X,Y,Z$ to be separated over $k$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "The coefficient unit $\\Lambda_T$ is a constant finite free rank-one sheaf in degree zero, hence is bounded constructible with Tor interval $[0,0]$ by [def-weil-finite-tor-amplitude]. Apply [cor-pur-general-admissibility-datum](2) to each of $f,g,h$: its hypotheses are exactly separated finite type between finite-type $k$-schemes, so each $Rh^!$ preserves $D^b_{ctf}$. In particular $\\omega_f,\\omega_g,\\omega_h$ and $Rg^!K$ are in their stated finite-Tor categories. The first clause of [thm-pur-cohomological-smoothness], applied separately to $f,g,h$, gives invertibility of the specified $\\theta_{a,M}$ for finite-Tor $M$. We do not use that theorem's composition clause to prove the present identity.",
+   "uses": [
+    "def-weil-finite-tor-amplitude",
+    "cor-pur-general-admissibility-datum",
+    "thm-pur-cohomological-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "By [lem-sf-pullback-tor-amplitude] and [lem-sf-tensor-ctf](ii), $W$, $Lh^*K\\otimes^LW$ and $Lf^*(Lg^*K\\otimes^L\\omega_g)\\otimes^L\\omega_f$ are bounded constructible of finite Tor amplitude. The same applies to the sources formed with $Rg^!K$ and $Rf^!Rg^!K$. Every bounded constructible source has an etale-origin witness by [lem-sf-proetale-constructible-origin](ii). Its compact-support image is bounded constructible by [prop-finite-compact-support-constructibility], and bounded below of etale origin by [thm-sf-comp-composition]. Consequently all successive Hom bijections in [def-weil-exceptional-inverse-image] apply to the displayed objects, including the intermediate $Rf_!$-images; no unrestricted ambient pro-etale adjunction is needed.",
+   "uses": [
+    "lem-sf-pullback-tor-amplitude",
+    "lem-sf-tensor-ctf",
+    "lem-sf-proetale-constructible-origin",
+    "prop-finite-compact-support-constructibility",
+    "thm-sf-comp-composition",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "Use the two Hom bijections and [def-weil-pbc-composite-adjunction]. Their composite has counit $\\epsilon^c_M=\\varepsilon_{g,M}\\circ Rg_!(\\varepsilon_{f,Rg^!M})$. By [pur9-def-upper-shriek-composition], $c_M$ is exactly the transpose of $\\varepsilon_{h,M}\\circ\\alpha_{R h^!M}$, so\n$$\\epsilon^c_M\\circ Rg_!Rf_!(c_M)=\\varepsilon_{h,M}\\circ\\alpha_{Rh^!M}.$$\nThe isomorphism $\\alpha$ identifies the left functors. Apply [det-sp-unique-right-adjoint] on the bounded constructible categories (compact support preserves them by Step 3). It makes this specified, counit-compatible $c$ a natural isomorphism, rather than an arbitrary comparison of the same objects.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "pur9-def-upper-shriek-composition",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "Step 2 applies to $M=\\omega_g$ and to $M=Rg^!K$ for $f$, as well as to $K$ for $g,h$. Thus every tensor map in the assertion is an isomorphism. Since $c_\\Lambda$ and tensor symmetry are isomorphisms, their composite $\\sigma=c_\\Lambda^{-1}\\theta_{f,\\omega_g}\\mathrm{sym}$ is an isomorphism. This proves the isomorphism assertions without choosing any purity orientation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "Write $q=\\theta_{f,\\omega_g}\\mathrm{sym}:W\\to Rf^!\\omega_g$. Then $c_\\Lambda\\sigma=q$. Its transpose through $f$ is exactly $\\mathrm{unitor}\\circ(T_f\\otimes1)\\circ\\operatorname{PF}_{f,\\omega_f,\\omega_g}^{-1}$ by [def-pur-co-smoothness]; the two source symmetries cancel. Transposing once more through $g$ composes $Rg_!$ of that map with $\\varepsilon_{g,\\Lambda}=T_g$, by [def-weil-pbc-composite-adjunction]. This is the displayed map $t$, including its unit constraint. In particular $\\epsilon^c_\\Lambda\\,Rg_!Rf_!(q)=t$.",
+   "uses": [
+    "def-pur-co-smoothness",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "Put $P_a=Ra_!$, $S_a=La^*$ and $G_a=Ra^!$. Use the canonical symmetric monoidal derived tensors of [lem-sf-ringed-derived-closed-symmetric-monoidal] and the strong monoidal pullbacks of [lem-pur-derived-pullback-tensor-iso]; their pullback compositor is [lem-weil-pbc-proetale-derived-pullback-composition]. On the bounded constructible source and finite-Tor coefficient domains set\n$$\\pi^a_{B,M}=\\mathrm{sym}\\circ\\operatorname{PF}_{a,M,B}^{-1}\\circ P_a(\\mathrm{sym}).$$\nThese inverses exist by [lem-weil-finite-compact-projection-formula]. To apply its pro-etale clause, take the witnesses from Step 3; [lem-sf-comparison-tor-amplitude](ii) gives exactly the finite Tor hypothesis for their etale representatives. The unit and coefficient associativity equations for these very $\\pi$ are [lem-pur-projection-formula-coefficient-coherence]; their naturality follows from the naturality of the specified projection transformations [def-exchange-projection]. Thus these are projection formulas on the full domains needed by the restricted-domain clause of [lem-pur-composite-tensor-transpose].",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-sf-comparison-tor-amplitude",
+    "lem-pur-projection-formula-coefficient-coherence",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "The schemes $X,Y,Z$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied over the Noetherian field spectrum, hence quasi-compact and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Choose a compactification of $g$ by [thm-nagata-compactification] and a compatible triangle by [lem-weil-pbc-compatible-compactification-triangle]. Apply [lem-sf-composition-projection-mate] on this triangle. Its finite-level identity applies to our specified pro-etale projection maps, including arbitrary ambient inputs before restricting to Step 3's domains. Inverting its projection components gives\n$$(1_K\\otimes\\alpha_{M})\\pi^c_{K,M}=\\pi^h_{K,M}\\;\\alpha_{S_hK\\otimes M},\\qquad\n\\pi^c_{K,M}=\\pi^g_{K,P_fM}\\,P_g(\\pi^f_{S_gK,M}),$$\nwith tensor symmetries and the pullback compositor inserted. This identifies the inverse composite projection with the successive inverses for $f,g$, for the actual compact-support compositor. Its independence of the chosen triangle is part of the cited normalized composition identity.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-compatible-compactification-triangle",
+    "lem-sf-composition-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "Apply the restricted-domain clause of [lem-pur-composite-tensor-transpose] to $S_f,S_g,P_f,P_g,G_f,G_g$ and the projection formulas of Step 7. Step 3 checks every Hom-bijection domain, including each compact-support image; Steps 7–8 supply the tensor and projection coherence equations. Its maps $\\tau^f_B,\\tau^g_B$ are exactly $\\theta_{f,B},\\theta_{g,B}$ by [def-pur-co-smoothness]: the coefficient-left convention for $\\pi$ simply writes the same counit transpose using symmetry. Set $V=\\omega_g$, $U=S_fV\\otimes\\omega_f$ and $q'=\\theta_{f,V}:U\\to G_fV$. The lemma gives\n$$\\theta_{f,G_gK}(S_f\\theta_{g,K}\\otimes1)=\\tau^c_K(1\\otimes q')$$\nand identifies both inverse transposes as\n$$P_gP_fN\\xrightarrow{P_g\\pi^f_{S_gK\\otimes V,\\omega_f}}P_g((S_gK\\otimes V)\\otimes P_f\\omega_f)\\xrightarrow{P_g(1\\otimes T_f)}P_g(S_gK\\otimes V)\\xrightarrow{\\pi^g_{K,V}}K\\otimes P_gV\\xrightarrow{1\\otimes T_g}K,$$\nwhere $N=S_f(S_gK\\otimes V)\\otimes\\omega_f$ and unitors are understood. Here $\\tau^c$ is formed from $G_fG_g\\Lambda$ and the composite counit, not from an independently chosen dualizing comparison.",
+   "uses": [
+    "lem-pur-composite-tensor-transpose",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "Identify $S_h=S_fS_g$ by the pullback compositor, and put $W_c=G_fG_g\\Lambda$. Steps 4 and 8 show directly that\n$$c_K\\theta_{h,K}(1\\otimes c_\\Lambda^{-1})=\\tau^c_K:S_hK\\otimes W_c\\longrightarrow G_fG_gK.$$\nIndeed transpose the left side through the composite Hom bijection: Step 4 replaces the final $c_K$ by $\\varepsilon_{h,K}\\alpha$, naturality of $\\alpha$ moves $1\\otimes c_\\Lambda^{-1}$ to its source, and Step 8 replaces the projection by $\\pi^c$. Naturality of $\\pi^c$ in its source factor then leaves $\\varepsilon_{h,\\Lambda}\\alpha P_gP_f(c_\\Lambda^{-1})=\\epsilon^c_\\Lambda$, which is precisely the defining transpose of $\\tau^c$. This is an equality by the injectivity of the Hom bijection. Finally $c_\\Lambda\\sigma=q'\\mathrm{sym}$. Precomposing Step 9 with $r_K$ therefore gives exactly $(*)$, with the displayed order of all three factors.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-pur-co-smoothness"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "To identify the more precise transpose in the statement, use the source order $N\\cong S_hK\\otimes U$ and define\n$$b=(1_V\\otimes T_f)\\pi^f_{V,\\omega_f}:P_fU\\longrightarrow V.$$\nCoefficient associativity of $\\pi^f$ in [lem-pur-projection-formula-coefficient-coherence], at $(S_gK,V,\\omega_f)$, rewrites Step 9's first two arrows as $P_g(1_{S_gK}\\otimes b)P_g\\pi^f_{S_gK,U}$. Naturality of $\\pi^g$ in its source factor moves $P_g(b)$ past $\\pi^g_{K,-}$, giving\n$$(1_K\\otimes T_gP_gb)\\,\\pi^g_{K,P_fU}\\,P_g\\pi^f_{S_gK,U}=(1_K\\otimes T_gP_gb)\\pi^c_{K,U}.$$\nThrough $U\\cong W$ the morphism $T_gP_gb$ is $t$ by Step 6. Tensor symmetry and the unit constraints of [lem-sf-ringed-derived-closed-symmetric-monoidal] change coefficient-left order to $P_gP_fW\\otimes K$ and $t\\otimes1_K$. Step 8 says that this $\\pi^c$ is precisely the successive inverse projections specified in the assertion. This proves the claimed common transpose, without any assertion that compact support preserves finite Tor amplitude.",
+   "uses": [
+    "lem-pur-projection-formula-coefficient-coherence",
+    "def-exchange-projection",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  },
+  {
+   "text": "All constituent projections, pullback compositors, tensor constraints and counits are natural. The defining Hom bijections are natural as well, so Steps 9–11 give the identity and the stated common transpose naturally in $K$. For $K=\\Lambda$ the unit equation reduces the calculation to Step 6. Identities and relative dimension zero require no change; for empty schemes all source objects and arrows in the calculation are zero. Thus no positive-dimension, nonemptiness or absolute separatedness assumption has entered the proof.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2, orientation-free tensor comparison and its projection/counit transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-finite-tor-amplitude",
+  "cor-pur-general-admissibility-datum",
+  "thm-pur-cohomological-smoothness",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "prop-finite-compact-support-constructibility",
+  "thm-sf-comp-composition",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "pur9-def-upper-shriek-composition",
+  "det-sp-unique-right-adjoint",
+  "def-pur-co-smoothness",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-pur-projection-formula-coefficient-coherence",
+  "def-exchange-projection",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-sf-composition-projection-mate",
+  "lem-pur-composite-tensor-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2, expanded counit/projection calculation using the existing restricted-domain composite-transpose lemma; Stacks Tags 0037 and 0F7J fix adjunction and compact-support composition conventions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "projection formula mate tensor description of exceptional inverse image compatible with composition of smooth morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t', AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι, AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst, AlgebraicGeometry.Scheme.Cover.gluedCoverT'_snd_fst",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.corepresentableBy, CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.representableBy, CategoryTheory.Adjunction.ext, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ext_iff",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*inverse|dualizingComplex|cohomologicallySmooth",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dualizing objects tensor comparison and exceptional pullback composition from composite adjunction counits",
+   "results": "8 hits: CategoryTheory.Adjunction.comp_counit, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.Adjunction.comp, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit, CategoryTheory.Bicategory.Adjunction.comp_counit, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "transitivity of the canonical tensor map for right adjoints to compact support direct image",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom_assoc, CategoryTheory.ExponentiableMorphism.comp, CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula.*comp|projection_formula.*comp|tensor.*mate",
+   "results": "6 hits: Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; scope Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionTensorMap|dualizingComplexTensorMap|exceptional.*inverse",
+   "results": "0 hits: . Scope Mathlib/CategoryTheory. Read returned results: generic adjunction/counit or unrelated algebraic geometry facts; none states the entire geometric tensor-mate identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.counit",
+   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.Adjunction.comp_counit_app_assoc, CategoryTheory.Adjunction.comp_counit. Read returned results: generic adjunction/counit or unrelated algebraic geometry facts; none states the entire geometric tensor-mate identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of right adjoints to compact support direct images and tensor counit mate coherence",
+   "results": "8 hits: CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.mateEquiv_counit, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.rightAdjointMate_comp, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit, CategoryTheory.Adjunction.comp, CategoryTheory.mateEquiv. Read returned results: generic adjunction/counit or unrelated algebraic geometry facts; none states the entire geometric tensor-mate identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image dualizing tensor maps and their composite adjunction transpose for smooth morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, KaehlerDifferential.tensorKaehlerEquiv_left_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatCompScheme, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd. Read returned results: generic adjunction/counit or unrelated algebraic geometry facts; none states the entire geometric tensor-mate identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula transpose compatibility with composition of two adjunctions",
+   "results": "8 hits: CategoryTheory.Adjunction.leftAdjointCompNatTrans_app, CategoryTheory.Adjunction.leftAdjointCompIso_hom, CategoryTheory.Adjunction.leftAdjointCompIso_hom_app, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.toCat_comp_toCat, CategoryTheory.Adjunction.leftAdjointCompIso, CategoryTheory.conjugateEquiv_comp, CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm. Read returned results: generic adjunction/counit or unrelated algebraic geometry facts; none states the entire geometric tensor-mate identity.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-composition-coherence",
+  "date": "2026-10-22",
+  "group": "Q91"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Steps 1–2: orientation-free dualizing tensor comparison and projection-formula transposition; returned proof Steps 1–3",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-composition-tensor-mate",
+  "worker": "stage1",
+  "summary": "Split the orientation-free tensor composition mate identity into explicit geometry/domain checks, composite-adjunction and right-adjoint-uniqueness normalization, the unit transpose t, projection coherence on the finite witnessed domain, application of the existing restricted-domain tensor-transpose calculation, and explicit transport/common-transpose computations. Every supporting fact already has a DAG node. No new nodes, no statement change, no Lean or compilation.",
+  "blueprint": "Realizes thm-pur-composition-coherence.proof.md Step 1, the orientation-free dualizing tensor comparison before orientation, and Step 2, the tensor-formula mate calculation. The diagonal/DNC orientation comparison is a different clause of the parent and is not used here.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Geometric permanence tool checks the relative dimension of gf; it does not replace the purity route."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic permanence of proper, separated, finite type, finitely presented morphisms and of immersions tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type morphisms are stable under composition and base change tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "cor-pur-general-admissibility-datum",
+    "why": "Finite-coefficient exceptional finite-Tor preservation checks the domains before taking any mate."
+   },
+   {
+    "node": "thm-pur-cohomological-smoothness",
+    "why": "Only the separate smooth tensor-isomorphism clause is used, never its composition clause."
+   },
+   {
+    "node": "lem-sf-pullback-tor-amplitude",
+    "why": "Generic pullback preserves finite tor amplitude tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-sf-tensor-ctf",
+    "why": "Generic the derived tensor product on the finite-tor subcategories tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic constructible pro-étale coefficients are of étale origin tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "prop-finite-compact-support-constructibility",
+    "why": "Generic finite-level bounded constructibility for proper support tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic the composition law for $rf_!$ tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic right adjoints are unique up to a unique counit-compatible isomorphism tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic the derived category of a ringed site is closed symmetric monoidal tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic derived pullback commutes with derived tensor product on the constructible categories tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic composition of derived pro-etale module pullbacks tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic finite-coefficient compact-support projection formula tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-sf-comparison-tor-amplitude",
+    "why": "Generic finite tor amplitude under the site comparison tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-pur-projection-formula-coefficient-coherence",
+    "why": "Generic unit and coefficient associativity of compact-support projection maps tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic a scheme of finite type over a noetherian scheme is noetherian (stacks 01t6) tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic a locally noetherian scheme is quasi-separated (stacks 01oy) tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic nagata compactification, [stacks-project] tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Generic compatible geometric compactifications of a composable pair tool, used only for the explicitly cited domain or canonical-map coherence property; it supplies no replacement for a step of the smooth-purity unit."
+   },
+   {
+    "node": "lem-sf-composition-projection-mate",
+    "why": "Normalized proper/open projection identity checks the actual compact-support compositor; the smooth-purity unit supplies no alternative definition of that compositor."
+   },
+   {
+    "node": "lem-pur-composite-tensor-transpose",
+    "why": "Generic restricted-domain projection/counit double-transpose calculation; no smooth purity or orientation is contained in it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "cor-pur-general-admissibility-datum",
+  "thm-pur-cohomological-smoothness",
+  "lem-sf-pullback-tor-amplitude",
+  "lem-sf-tensor-ctf",
+  "lem-sf-proetale-constructible-origin",
+  "prop-finite-compact-support-constructibility",
+  "thm-sf-comp-composition",
+  "det-sp-unique-right-adjoint",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-sf-comparison-tor-amplitude",
+  "lem-pur-projection-formula-coefficient-coherence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-sf-composition-projection-mate",
+  "lem-pur-composite-tensor-transpose"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-6dc5bd0cc",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-6dc5bd0cc (reviewer sub-agent of L); spot-checked: PASS with one maintainer note. I read in full the item, its 12 steps and all 29 cited statements. The statement and stmt_deps are byte-identical to the Q91 base, there are no new nodes, no SGA citations and no cycle. The route follows thm-pur-composition-coherence.proof.md (main-20261015) Steps 1-2 (orientation-free comparison and projection-formula mate); the DNC orientation half belongs to lem-pur-composition-model-orientation-descent. Step checks: (1) smooth relative-dimension permanence (2), separated composition by proper-fp-permanence (e), finite-type composition (1). (2) Lambda has Tor amplitude [0,0]; cor-pur-general-admissibility-datum (2) gives that R^! preserves D^b_ctf; only clause 1 of thm-pur-cohomological-smoothness is used, and that theorem reaches composition through lem-pur-co-smooth-composition, not through this item. (3) Domains: pullback/tensor ctf, constructible-origin (ii), compact-support constructibility, thm-sf-comp-composition preserving bounded-below etale origin; it never claims that R_! preserves finite Tor. (4) I checked by hand that c is the gamma of det-sp-unique-right-adjoint once the composite adjunction is transported along alpha (counit eps^c alpha^-1). (6) I recomputed that the transpose of q is t; the two signed symmetries cancel. (7) The pi normalization matches lem-pur-projection-formula-coefficient-coherence; invertibility comes from the pro-etale clause of lem-weil-finite-compact-projection-formula with comparison-tor-amplitude (ii); every pi has a ctf coefficient and a D^b_c source. (8) The Nagata and compatible-triangle data match the hypotheses of lem-sf-composition-projection-mate exactly; inverting the identity gives (1 tensor alpha) pi^c = pi^h alpha. (9) tau^f = theta_f via the restricted-domain clause of lem-pur-composite-tensor-transpose. (10) I recomputed the transpose of c theta_h (1 tensor c^-1) as rho(1 tensor eps^c) pi^c, which is tau^c. (11-12) Checked. Edge cases f = id, K = Lambda, d or e = 0 and empty X are all consistent. Batch-5: the finite-compact-projection-formula path ends at lem-pod-lisse-module-sheaves-as-module-objects, which is generic sheaf algebra (lisse sheaves = module objects in FLC), not a step of Poincare duality; the composition-projection-mate path ends at lem-trf-adjoint-composition-coherence, a Mathlib leaf (leftAdjointCompIso_assoc), not part of the trace formula. Both accepted. All tool_uses are generic domain or coherence inputs and are accepted. MAINTAINER NOTE: the existing unsplit node lem-pur-constructible-tensor-composition (Q118, same day, unit sk-prop-cohsm) states, under the assumption that theta_f and theta_g are invertible, the identity that becomes (*) here for smooth morphisms (sigma = a because theta_{g,Lambda} is the unitor). This is an overlap between two pre-existing sibling nodes, not a fault of this delivery. Its future split must not cite this item (that would form a cycle through thm-pur-cohomological-smoothness); it should reuse composite-tensor-transpose plus composition-projection-mate directly. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompositionTensorMate",
+  "declaration": "AlgebraicGeometry.ProEtale.CompositionTensorMate.composition_tensor_mate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.D",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.inverseOnDomain",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericPi",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericTensorTranspose",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericTheta",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericTensor",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericSigma",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericR",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericTrace",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericCompositePi",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericLeft",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericRight",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericCommon",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericTensorClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericUnit",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericProjectionDomain",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericTensorInput",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericSource",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericDomains",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericSigmaIso",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.genericUnitTranspose",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.routeEquations",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.comparisonNaturality",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.mateEquation",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.S",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.F",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.G",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.unit",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.omega",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.epsilon",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.alpha",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.c",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.pi",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.theta",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.W",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.sigma",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.r",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.compositeEpsilon",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.t",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.lhs",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.rhs",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.compositePi",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.commonTranspose",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.OriginClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.TensorClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.restrictedAdjunction",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.AdjunctionClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.TensorInputClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.InputClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.MateClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.SigmaIsoClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.UnitTransposeClause",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.Package",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.Assertion",
+   "AlgebraicGeometry.ProEtale.CompositionTensorMate.composition_tensor_mate"
+  ],
+  "file": "lean/Sheaf/Paper/CompositionTensorMate.lean",
+  "statement": "theorem composition_tensor_mate (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (d e : ℕ) [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] : Assertion P f g d e",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4b72e852",
+  "group": "Q01",
+  "result": "pass",
+  "note": "R1 repaired exactly: the item's stmt_deps swap the theorem lem-pur-projection-formula-coefficient-coherence for the new definition node def-pur-localized-derived-tensor-braiding; the theorem stays in proof_deps as a plain import, and none of its 10 names is used. Module diff vs ad0a1310: only 4 helper renames plus the imports; derivedTensorKoszulSymmetry has the same binders and body as the old projectionCoherenceSymmetry (DerivedMonoidal.braiding' at Qh and quasiIso), so theta, sigma, r and compositePi are definitionally unchanged and every previously checked clause still holds. New node checked: real data, independent universes v and w, Stacks lemma-symmetric-monoidal-derived exists, deps def-weil-abstract-derived-category and def-sfb-monoidal-category exist, docstrings carry source and blueprint, no sorry, no name collision; no other definition node owns this braiding. Both lean.statement fields verbatim; the only sorry is the main theorem; the report has both sections. Base drift in def-sf-etale-origin-subcategory (new module publicly imports the old one, declarations a superset) is harmless. No file changed, so no compile; worker reports 23.1 s and 54.3 s. Advisory: canonicalBraidingNatIso of theorem node lem-kun-tensor-sym packages the same braiding."
+ }
+}

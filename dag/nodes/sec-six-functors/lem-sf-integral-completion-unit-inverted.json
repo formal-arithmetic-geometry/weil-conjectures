@@ -1,0 +1,135 @@
+{
+ "id": "lem-sf-integral-completion-unit-inverted",
+ "kind": "statement",
+ "title": "Integral quotient completion inverts its unit",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and any scheme X, with unrelated scheme and coefficient universes. In the ambient derived category D of completed integral coefficient sheaves on X_proet, let F be IntegralOnSlice.completion and eta its prescribed quotient/Roos completion unit [def-pur-integral-derived-operations]. For every M in D the morphism F(eta_M):F(M) -> F(F(M)) is an isomorphism. There is no boundedness, constructibility or completeness condition on M.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, completion-unit mapping property; algebraization.tex Tags 099B and 0A0E"
+ },
+ "stmt_deps": [
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Use a small model of the essentially small pro-etale site in coefficient universe max(u,t+1). The principal uniformizer datum is Noetherian and its powers have the specified two-term free resolutions. These resolve the actual quotient maps, with their quotient augmentations and compatible successor maps.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, completion-unit mapping property; algebraization.tex Tags 099B and 0A0E"
+   }
+  },
+  {
+   "text": "Apply the completed-coefficient quotient/Koszul comparison on the small site. The free-resolution augmentations identify the two strict quotient towers. Exact countable products identify their total right limits with the Roos cone defining IntegralOnSlice.completion. The degree-zero components are the actual quotient units x to 1 tensor x and the zero cone component, so the comparison identifies the specified natural units, not only the completion objects.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, completion-unit mapping property; algebraization.tex Tags 099B and 0A0E"
+   }
+  },
+  {
+   "text": "Koszul completion is a reflector onto locally derived complete objects. A reflector sends its own unit to an isomorphism: its adjunction triangular identities and invertible counit supply the inverse. Conjugate this isomorphism by the unit-preserving comparison from the preceding step, and transport along the small-site equivalence. The resulting morphism is exactly F(eta_M).",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, completion-unit mapping property; algebraization.tex Tags 099B and 0A0E"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-pur-integral-derived-operations",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M (lemma-naive-completion); returned detailed step 2, completion-unit mapping property; algebraization.tex Tags 099B and 0A0E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of sheaf complexes inverts the completion unit and is an idempotent reflector",
+   "results": "8 hits about sheafification and idempotent completeness; no derived quotient completion.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded sheaf complexes with the specified quotient tower and unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion functor on sheaves inverts its own completion unit and is idempotent",
+   "results": "8 hits about plusPlusFunctorIsoSheafification and sheafification composition; no quotient completion.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded sheaf complexes with the specified quotient tower and unit."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]omplet|[Cc]omplet.*derived",
+   "results": "0 Mathlib hits. Project rg found constant-coefficient koszul_quotient_reflector and complete-target unit criteria in RoosIntrinsicUnitComparison and RoosIntrinsicCompletenessEquivalence, but no inversion of the actual integral completion unit by completion.",
+   "date": "2026-10-25",
+   "verdict": "No match for unbounded sheaf complexes with the specified quotient tower and unit."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientCompletedTensorAdjunction",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof Step 1, tensor/internal-Hom transposes at the integral stage: returned detailed step 2, completion-unit mapping property; algebraization.tex Tags 099B and 0A0E",
+   "via": [
+    "lem-sf-ambient-completed-tensor-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCompletionUnitInverted",
+  "file": "lean/Sheaf/Paper/IntegralCompletionUnitInverted.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.integralCompletion_unit_inverted",
+  "statement": "theorem integralCompletion_unit_inverted\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (X : AlgebraicGeometry.Scheme.{t}) (M : D.{t, u} l E X none) :\n    IsIso ((completion.{t, u} l E X none).map\n      ((completionUnit.{t, u} l E X none).app M))",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T162059-L-258577",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T162059-L-258577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

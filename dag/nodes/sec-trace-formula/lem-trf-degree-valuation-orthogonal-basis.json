@@ -1,0 +1,237 @@
+{
+ "id": "lem-trf-degree-valuation-orthogonal-basis",
+ "kind": "statement",
+ "title": "Orthogonal spectral bases for the total-degree valuation",
+ "statement": "Let $F$ be a field [def-weil-field], $n\\ge1$, $A=F[X_1,\\ldots,X_n]$ [def-weil-pbc-mv-polynomial-ring], and $Q=\\operatorname{Frac}(A)$. The formula $|0|_t=0$, $|f/g|_t=\\exp(\\deg f-\\deg g)$ for nonzero $f,g\\in A$, with total degree, defines a multiplicative nonarchimedean real absolute value on $Q$. Let $L/Q$ be any finite field extension and let $s=s_{L/Q}$ be the minimal-polynomial spectral norm [lem-trf-incomplete-spectral-algebra-norm]. Put $r=[L:Q]$. There exists a $Q$-basis $u_1,\\ldots,u_r$ of $L$ such that $$s\\left(\\sum_{i=1}^r c_i u_i\\right)=\\max_{1\\le i\\le r}|c_i|_t s(u_i)\\qquad(c_i\\in Q).$$ Neither separability of $L/Q$ nor perfection of $F$ is assumed.",
+ "source": {
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Proposition 5.3.3/1, printed p.214 (scan PDF p.220), and its application in the proof of Lemma 5.3.3/4, printed p.217 (scan PDF p.223): total-degree stability gives an orthogonal basis. Primary scan read 2026-10-25; archival literature copy WANTED.",
+  "url": "https://math.arizona.edu/~cais/scans/BGR-Non_Archimedean_Analysis.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof": [
+  {
+   "text": "Write $D(f)=\\deg f$ for nonzero polynomials. By [lem-sfb-mvpolynomial-total-degree-product], $D(fg)=D(f)+D(g)$. If $f/g=f\\prime/g\\prime\\ne0$, cross multiplication and degree additivity give $D(f)-D(g)=D(f\\prime)-D(g\\prime)$, so the formula is well-defined and multiplicative. In the monomial description [def-weil-pbc-mv-polynomial-ring], addition introduces no new monomials; thus the degree of a nonzero sum is at most the maximum of the degrees of its summands. Apply this to the numerator $fg\\prime+f\\prime g$ over the common denominator $gg\\prime$ to get the ultrametric inequality, treating a zero numerator separately. Exponentials are positive and the separately defined value at zero is zero. Constants have degree zero; replacing a polynomial by its negative does not change its support. Hence $|1|_t=1$ and $|-q|_t=|q|_t$. Every nonzero value lies in $\\exp(\\mathbf Z)$, and every $\\exp(m)$ occurs, using $X_1^m$ for $m\\ge0$ and $1/X_1^{-m}$ for $m<0$. In particular the valuation is nontrivial and discrete, with $\\rho=\\exp(1)>1$.",
+   "uses": [
+    "lem-sfb-mvpolynomial-total-degree-product",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Section 5.3.3, total-degree formula and Proposition 1, printed p.214 (scan PDF p.220); explicit verification of the formula."
+   }
+  },
+  {
+   "text": "Fix the given finite extension $L/Q$ and any $Q$-basis $w_1,\\ldots,w_r$. Apply [lem-trf-degree-valuation-weak-stability] to obtain real $c,C>0$ and $c\\max_i|a_i|_t\\le s(\\sum_i a_iw_i)\\le C\\max_i|a_i|_t$ for all coefficients. Step 1 supplies the absolute value required by this lemma. Its statement permits arbitrary $F$ and finite extensions, so the inseparable case is included.",
+   "uses": [
+    "lem-trf-degree-valuation-weak-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/1, proof citing Proposition 3.5.3/3; printed p.214 (scan PDF p.220), and printed p.155 (scan PDF p.163)."
+   }
+  },
+  {
+   "text": "The norm axioms, definiteness and scalar homogeneity for $s$ follow from [lem-trf-incomplete-spectral-algebra-norm], without completeness. Apply [lem-trf-discrete-weak-cartesian-basis] to the $Q$-vector space $V=L$, the norm $N=s$, the basis and bounds of step 2, and the value group $\\exp(\\mathbf Z)$ established in step 1. It gives a basis $u_1,\\ldots,u_r$ with $s(\\sum_i c_iu_i)=\\max_i|c_i|_t s(u_i)$ for every coefficient family, as required.",
+   "uses": [
+    "lem-trf-incomplete-spectral-algebra-norm",
+    "lem-trf-discrete-weak-cartesian-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+    "place": "Proposition 5.3.3/1, proof citing Proposition 3.6.2/1, printed p.214 (scan PDF p.220); the latter invokes Corollary 2.4.3/11, printed pp.157 and 102 (scan PDF pp.165 and 110)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-sfb-mvpolynomial-total-degree-product",
+  "lem-trf-degree-valuation-weak-stability",
+  "lem-trf-discrete-weak-cartesian-basis",
+  "lem-trf-incomplete-spectral-algebra-norm"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf",
+  "place": "Explicit assembly of the proof of Proposition 5.3.3/1 from Proposition 3.5.3/3 and Corollary 2.4.3/11, as used by Proposition 3.6.2/1. Primary scan read; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite extensions of the rational function field with the total degree valuation have orthogonal bases for the minimal polynomial spectral norm",
+   "results": {
+    "t": "2026-10-24T16:33:21Z",
+    "tool": "leanfinder",
+    "query": "Finite extensions of the rational function field with the total degree valuation have orthogonal bases for the minimal polynomial spectral norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots",
+     "isNonarchimedean_spectralNorm_of_finiteDimensional_normal",
+     "spectralNorm_extends_of_finiteDimensional",
+     "IntermediateField.powerBasisAux",
+     "spectralAlgNorm_of_finiteDimensional_normal",
+     "FiniteDimensional.exists_is_basis_integral",
+     "spectralNorm_eq_iSup_of_finiteDimensional_normal",
+     "spectralAlgNorm_of_finiteDimensional_normal_def"
+    ],
+    "digest": "d229caadd4e902b2"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralNorm and spectralAlgNorm give norm axioms; the complete-base norm and finite normal extension theorems do not supply orthogonal bases over this incomplete rational function field. FunctionField.inftyValuation is only a valuation, not the finite-extension orthogonal-basis assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"spectralNorm\", \"Basis\"",
+   "results": {
+    "t": "2026-10-24T16:33:22Z",
+    "tool": "loogle",
+    "query": "\"spectralNorm\", \"Basis\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralNorm and spectralAlgNorm give norm axioms; the complete-base norm and finite normal extension theorems do not supply orthogonal bases over this incomplete rational function field. FunctionField.inftyValuation is only a valuation, not the finite-extension orthogonal-basis assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "orthogonal.*spectral|spectral.*orthogonal|totalDegree.*stable",
+   "results": {
+    "t": "2026-10-24T16:33:22Z",
+    "tool": "grep",
+    "query": "orthogonal.*spectral|spectral.*orthogonal|totalDegree.*stable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralNorm and spectralAlgNorm give norm axioms; the complete-base norm and finite normal extension theorems do not supply orthogonal bases over this incomplete rational function field. FunctionField.inftyValuation is only a valuation, not the finite-extension orthogonal-basis assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total degree valuation on a multivariable rational function field is stable and finite extensions have orthogonal spectral bases",
+   "results": {
+    "t": "2026-10-24T16:33:22Z",
+    "tool": "leansearch",
+    "query": "The total degree valuation on a multivariable rational function field is stable and finite extensions have orthogonal spectral bases",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MvPolynomial.totalDegree",
+     "MvPolynomial.degreeOf",
+     "FunctionField.inftyValuation_of_nonzero",
+     "Polynomial.valuation_of_mk",
+     "FunctionField.inftyValuation.polynomial",
+     "FunctionField.inftyValuation_apply",
+     "FunctionField.inftyValuation",
+     "RatFunc.valuation_eq_LaurentSeries_valuation"
+    ],
+    "digest": "26c27f9890d9a84b"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralNorm and spectralAlgNorm give norm axioms; the complete-base norm and finite normal extension theorems do not supply orthogonal bases over this incomplete rational function field. FunctionField.inftyValuation is only a valuation, not the finite-extension orthogonal-basis assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite extension of F(X1,...,Xn) for exp total degree absolute value admits a Cartesian basis with norm of a sum equal to the maximum coordinate norm",
+   "results": {
+    "t": "2026-10-24T16:33:24Z",
+    "tool": "leanfinder",
+    "query": "A finite extension of F(X1,...,Xn) for exp total degree absolute value admits a Cartesian basis with norm of a sum equal to the maximum coordinate norm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ClassGroup.normBound",
+     "NumberField.mixedEmbedding.fundamentalCone.expMap_basis_of_ne",
+     "ClassGroup.norm_le",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_ne",
+     "ClassGroup.norm_lt",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis_apply_of_eq",
+     "NumberField.mixedEmbedding.fundamentalCone.completeBasis",
+     "NumberField.house.basis_repr_norm_le_const_mul_house"
+    ],
+    "digest": "d1df4900cd7052ef"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: spectralNorm and spectralAlgNorm give norm axioms; the complete-base norm and finite normal extension theorems do not supply orthogonal bases over this incomplete rational function field. FunctionField.inftyValuation is only a valuation, not the finite-extension orthogonal-basis assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-degree-filtration-rank-asymptotic",
+  "date": "2026-10-25",
+  "group": "N8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical analytic input supporting the normalization chain from lem-trf-local-term-locality, through Temkin Theorem 3.5.5 Step 2: Distinguished presentations of reduced affinoids over an algebraically closed field. This is below the node level, not a replacement of the current contracting-correspondence unit proof. Supporting analytic lemma in the presentation construction: Norm-preserving lifts for a Tate epimorphism surjective on canonical reductions. Independent analytic input: Finite affinoid maps are finite on spectral unit balls over an algebraically closed field. Proof input: Orthogonal spectral norm on the fraction field of a finite affinoid domain. Supporting input: Stability of the Gauss fraction field of a Tate algebra. BGR stability proof input: Sections 5.3.3–5.3.4, especially Proposition 5.3.3/3 and the conclusion of Section 5.3.4, printed pp.215 and 218–220 (scan PDF pp.221 and 224–226); Section 5.3.4 removes the divisible-value-group restriction. Supporting input for the present split: Lemma 5.3.3/4 and its proof, printed pp.216–218 (scan PDF pp.222–224). Proposition 5.3.3/1, printed p.214 (scan PDF p.220), and its application in the proof of Lemma 5.3.3/4, printed p.217 (scan PDF p.223): total-degree stability gives an orthogonal basis. Primary scan read 2026-10-25; archival literature copy WANTED.",
+   "via": [
+    "lem-trf-degree-filtration-rank-asymptotic",
+    "lem-trf-gauss-rational-function-stability",
+    "lem-trf-tate-gauss-fraction-stability",
+    "lem-trf-tate-fraction-orthogonal-spectral-norm",
+    "lem-trf-finite-affinoid-unit-ball-finiteness",
+    "lem-trf-tate-reduction-norm-lifting",
+    "lem-trf-affinoid-distinguished-presentation",
+    "lem-trf-valuation-grauert-remmert-powerbounded",
+    "lem-trf-valuation-reduced-fibre-normalization",
+    "lem-trf-reduced-fibre-modification",
+    "lem-trf-valuation-curve-finite-normalization",
+    "lem-trf-modification-fibre-centre-finite",
+    "lem-trf-finite-fibre-valuation-domination",
+    "lem-trf-valuation-strict-semistable-cofinality",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-trf-degree-valuation-orthogonal-basis",
+  "worker": "stage1",
+  "summary": "Verified BGR primary scan; checked no finished project declaration matches. Preserved the statement, proved the absolute-value formula and discreteness using the existing total-degree Mathlib leaf, and separated weak stability from the general discrete normed-space orthogonal-basis criterion. No separability, perfection or completeness added.",
+  "blueprint": "Retains the historical analytic chain in blueprint.from.place below lem-trf-local-term-locality. Realizes BGR 5.3.3/1 (total-degree stability), the orthogonal-basis input in 5.3.3/4, p.217; does not replace the current contracting-correspondence unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NL-d25ad46c0",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-d25ad46c0 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full; the item statement is unchanged. BGR is not in literature/ (it is WANTED) and the scan has no text layer, so I checked every step mathematically myself; the cited places are BGR 5.3.3/1, 3.5.3/3, 3.6.2/1 and 2.4.3/11. Step 1 is elementary and correct: degree additivity comes from the Mathlib leaf lem-sfb-mvpolynomial-total-degree-product, deg of a sum is at most the max by the monomial description, this gives the ultrametric inequality over a common denominator, and the value group is exp(Z) via X_1^{±m}, so rho=e. Step 2 cites lem-trf-degree-valuation-weak-stability, which states exactly the bounds used. That node is true: |.|_t=exp(-ord_H) for the hyperplane at infinity in P^n, its DVR is excellent, so L⊗Q^ is a reduced product of fields and the spectral norm is equivalent to the max norm. It covers imperfect F and inseparable L. Step 3 takes the norm axioms from the statement of the leaf lem-trf-incomplete-spectral-algebra-norm and applies lem-trf-discrete-weak-cartesian-basis. That node is true: the completion is spherically complete with the full dimension r because of the lower bound, and approximating an orthogonal basis of the completion keeps it orthogonal. Edge cases V=0 and r=1 hold, and the lower bound is necessary. Neither new node restates the item: one is strictly weaker, the other is general linear algebra. Both are statement only and self-contained, with created.item set to this item, correct blueprint.from/via, and grep, LeanSearch, Loogle and LeanFinder searches with real results. I searched dag/nodes with rg -L; no duplicate (closest: tate-fraction-weak-stability, frobenius-root-coordinate-test, char-zero-spectral-coordinate-topology, finite-ultrametric-almost-orthogonal-basis, norming-maps/cartesian-subspace, dense-weak-stability-transfer). All nodes are in unit sk-i-curve-zero; the only off-unit citation is a Mathlib leaf, so no tool_uses are needed. No cycle, no SGA. No changes."
+ }
+}

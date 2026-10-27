@@ -1,0 +1,218 @@
+{
+ "id": "lem-trf-analytic-disc-translation-embedding",
+ "kind": "statement",
+ "title": "Isometric translation of a type four coordinate into a disc algebra",
+ "statement": "Let $k\\subseteq K$ be fields [def-weil-field], complete for compatible nontrivial real-valued nonarchimedean absolute values, and suppose $k$ is algebraically closed. Let $z\\in K\\setminus k$ and suppose $K$ is the closure of the subfield $k(z)$. Put $r=\\inf_{c\\in k}|z-c|$ and assume $r>0$ and $|z-c|>r$ for every $c\\in k$. Define $D_r(K)$ to be the ring of formal series $\\sum_{n\\geq0}a_nW^n$ with $a_n\\in K$ and $|a_n|r^n\\to0$, with coefficientwise addition and Cauchy multiplication, and put $\\|\\sum a_nW^n\\|_r=\\sup_{n\\geq0}|a_n|r^n$. Regard $K$ as the constant series in $D_r(K)$. There exists a unital $k$-algebra homomorphism $j:K\\to D_r(K)$ such that $j(z)=z+W$ and $\\|j(a)\\|_r=|a|$ for every $a\\in K$.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Section 6.2, printed p. 45, the two paragraphs immediately before Lemma 6.2.8: the disc description of completed scalar extension, specialized to l=K with the identity embedding.",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-weighted-disc-banach] with $F=K$ and $s=r$. Write $B=D_r(K)$ and $\\epsilon:B\\to K$ for constant coefficient. Thus $B$ is a complete normed $k$-vector space and commutative normed ring, with submultiplicative norm, $\\|W\\|=r$, $\\|a\\|=|a|$ for constants, and $|\\epsilon(f)|\\le\\|f\\|$. These are exactly the positive-radius series and norm in the statement; restriction of the constant $K$-scalar action along $k\\subset K$ gives the indicated $k$-action.",
+   "uses": [
+    "lem-trf-weighted-disc-banach"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Printed p.45, disc algebra paragraph; explicit Banach input for the agent construction."
+   }
+  },
+  {
+   "text": "For a nonzero $P\\in k[T]$, [lem-weil-alg-closed-linear-factorization] writes $P(T)=a\\prod_{i=1}^d(T-c_i)$ with $a\\ne0$ and $c_i\\in k$, allowing $d=0$. Since $z\\notin k$, all $z-c_i$ are nonzero, so $P(z)\\ne0$. This also proves that $z$ is transcendental and identifies the field $k(z)$ with fractions $P(z)/Q(z)$, $Q\\ne0$. Put $d_i=z-c_i$. Polynomial evaluation $T\\mapsto z+W$ gives $P(z+W)=a\\prod_i(d_i+W)$. Submultiplicativity and $\\|d_i+W\\|=\\max(|d_i|,r)=|d_i|$ give $\\|P(z+W)\\|\\le |a|\\prod_i|d_i|=|P(z)|$. The reverse bound follows by applying constant coefficient $\\epsilon$, so equality holds. For $P=0$ equality holds directly.",
+   "uses": [
+    "lem-weil-alg-closed-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Printed p.45, first-factor polynomial map; agent factorization verification of its isometry."
+   }
+  },
+  {
+   "text": "For every $c\\in k$, put $d=z-c$ and $h=-W/d$. The hypothesis gives $\\|h\\|=r/|d|<1$. By [lem-trf-complete-normed-ring-geometric-inverse], $S=\\sum_{n\\ge0}h^n$ converges in $B$ and satisfies $(1-h)S=1$. Hence $(d+W)^{-1}=d^{-1}S$. Every finite geometric sum has norm at most $1$, by the ultrametric inequality and $\\|h^n\\|\\le\\|h\\|^n$; passage to its norm limit gives $\\|S\\|\\le1$. Thus $\\|(d+W)^{-1}\\|\\le |d|^{-1}$. Factoring any nonzero $Q$ as in step 2 and multiplying these inverses proves $Q(z+W)$ is a unit and $\\|Q(z+W)^{-1}\\|\\le |Q(z)|^{-1}$. Constant nonzero $Q$ is the empty-product case.",
+   "uses": [
+    "lem-trf-complete-normed-ring-geometric-inverse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Printed p.45, polynomial-to-field passage in the first-factor map; geometric inverse argument made explicit."
+   }
+  },
+  {
+   "text": "Define $j_0(P(z)/Q(z))=P(z+W)Q(z+W)^{-1}$. If two fractions agree, then $(PQ'-P'Q)(z)=0$; injectivity of evaluation at $z$, proved in step 2, gives $PQ'=P'Q$. Evaluate this polynomial equality at $z+W$ and multiply by the two denominator inverses to see that $j_0$ is independent of the presentation. The fraction addition and multiplication formulas now show that $j_0$ is a unital $k$-algebra map, fixes constants, and sends $z$ to $z+W$. Steps 2--3 give $\\|j_0(x)\\|\\le|x|$. Applying $\\epsilon$ to the inverse identities yields $\\epsilon(j_0(x))=x$, so $|x|\\le\\|j_0(x)\\|$. Consequently $\\|j_0(x)\\|=|x|$, and applying this to $x-y$ proves that $j_0$ is an isometry.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Printed p.45, first-factor map; elementary fraction construction from steps 2--3."
+   }
+  },
+  {
+   "text": "The subfield $D=k(z)$ is a $k$-linear subspace dense in $K$ by hypothesis. The $k$-linear map $j_0:D\\to B$ is contractive by step 4 and $B$ is complete by step 1. Apply [lem-sfb-dense-subspace-contractive-extension] to obtain a continuous $k$-linear extension $j:K\\to B$ with $j|_D=j_0$ and $\\|j(a)\\|\\le|a|$. In particular $j(1)=1$ and $j(z)=z+W$.",
+   "uses": [
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Printed p.45, completion of the first-factor polynomial map; dense linear extension input."
+   }
+  },
+  {
+   "text": "Fix $a,b\\in K$ and choose $x_n,y_n\\in D$ with $|x_n-a|<1/(n+1)$ and $|y_n-b|<1/(n+1)$, using density. Then $x_n,y_n$ are bounded and $|x_ny_n-ab|\\le\\max(|x_n||y_n-b|,|x_n-a||b|)\\to0$. The same submultiplicative estimate in $B$ shows $j(x_n)j(y_n)\\to j(a)j(b)$. Continuity and $j_0(x_ny_n)=j_0(x_n)j_0(y_n)$ therefore give $j(ab)=j(a)j(b)$ by uniqueness of metric limits. Together with the linearity and $j(1)=1$ this makes $j$ a unital $k$-algebra homomorphism. Finally $|\\|j(a)\\|-\\|j_0(x_n)\\||\\le\\|j(a)-j_0(x_n)\\|\\to0$ and $||a|-|x_n||\\le|a-x_n|\\to0$. Since $\\|j_0(x_n)\\|=|x_n|$, it follows that $\\|j(a)\\|=|a|$ for every $a$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Printed p.45, completion passage; elementary continuity estimates for multiplication and norm."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-weighted-disc-banach",
+  "lem-weil-alg-closed-linear-factorization",
+  "lem-trf-complete-normed-ring-geometric-inverse",
+  "lem-sfb-dense-subspace-contractive-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Temkin, Section 6.2, printed p.45, disc algebra paragraph immediately before Lemma 6.2.8. Agent expansion of its analytic input; primary PDF read online at https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf; local archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a type four completed rational function field K over k with radius r there is an isometric k algebra embedding K into the radius r power series disc algebra over K sending z to z plus W",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → Algebra K (LaurentSeries.RatFuncAdicCompl K)\", \"doc\": \"For any field $ K $, the $ X $-adic completion of the rational function field $ K(X) $, which is the field of formal Laurent series $ K((X)) $, inherits a canonical algebra structure over $ K $. This \"}\n  {\"name\": \"LaurentSeries.extensionAsRingHom\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    Continuous ⇑(algebraMap (RatFunc K) (LaurentSeries K)) →\\n      [CompleteSpace (LaurentSeries K)] →\\n        [T0Space (LaurentSeries K)] → UniformSpace.Completion (RatFunc K) →+* LaurentSeries K\", \"doc\": \"For any field $ K $, the continuous algebra map from rational functions $ \\\\text{RatFunc}(K) $ to Laurent series $ K((X)) $ extends uniquely to a ring homomorphism from the uniform completion of $ \\\\tex\"}\n  {\"name\": \"LaurentSeries.ratfuncAdicComplPkg\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"{K : Type u_2} → [inst : Field K] → AbstractCompletion.{u_2, u_2} (RatFunc K)\", \"doc\": \"The abstract completion of the field of rational functions $\\\\text{RatFunc}(K)$, constructed using its completion space equipped with the canonical embedding $\\\\text{RatFunc}(K) \\\\to \\\\text{Completion}(\\\\t\"}\n  {\"name\": \"LaurentSeries.comparePkg_eq_extension\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (x : UniformSpace.Completion (RatFunc K)),\\n  (LaurentSeries.comparePkg K).toFun x = (↑↑(LaurentSeries.extensionAsRingHom K ⋯)).toFun x\", \"doc\": \"The adic completion of the rational function field $\\\\text{RatFunc}(K)$ with respect to the $X$-adic valuation is uniformly equivalent to the ring of Laurent series $K((X))$.\"}\n  {\"name\": \"LaurentSeries.RatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [Field K] → Type u_2\", \"doc\": \"For a field $ K $, this is the adic completion of the rational function field $ \\\\text{RatFunc}(K) $ with respect to the ideal generated by $ X $ in the polynomial ring $ K[X] $. It corresponds to comp\"}\n  {\"name\": \"NumberField.InfinitePlace.Completion.isometry_extensionEmbedding\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Completion\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (v : NumberField.InfinitePlace K),\\n  Isometry ⇑(NumberField.InfinitePlace.Completion.extensionEmbedding v)\", \"doc\": \"The unique ring homomorphism extending the isometric embedding of a number field $ K $ into $ \\\\mathbb{C} $ to the completion $ \\\\widehat{K}_v $ at an infinite place $ v $ is an isometry, preserving the\"}\n  {\"name\": \"LaurentSeries.LaurentSeriesPkg\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → AbstractCompletion.{u_2, u_2} (RatFunc K)\", \"doc\": \"The Laurent series over a field $ K $ form the abstract completion of the field of rational functions $ \\\\text{RatFunc}(K) $ under the $ X $-adic valuation. This completion is constructed by embedding \"}\n  {\"name\": \"LaurentSeries.comparePkg\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → LaurentSeries.RatFuncAdicCompl K ≃ᵤ LaurentSeries K\", \"doc\": \"The uniform equivalence between the adic completion of the rational function field $\\\\text{RatFunc}(K)$ with respect to the $X$-adic valuation and the ring of Laurent series $K((X))$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct the norm-preserving translation of a completed immediate rational field into a positive-radius disc algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "TateAlgebra",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'TateAlgebra'",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct the norm-preserving translation of a completed immediate rational field into a positive-radius disc algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|gaussNorm|gauss.*norm|IsNonarchimedean.*PowerSeries",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Multivariate.lean\", \"line\": \"64\", \"text\": \"basis, see `stdGaussian_eq_map_pi_orthonormalBasis`. -/\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Multivariate.lean\", \"line\": \"90\", \"text\": \"    simp_rw [variance_const_mul, variance_id_gaussianReal, (stdOrthonormalBasis ℝ E).norm_dual]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Multivariate.lean\", \"line\": \"128\", \"text\": \"lemma stdGaussian_map {F : Type*} [NormedAddCommGroup F] [InnerProductSpace ℝ F] [MeasurableSpace F]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Multivariate.lean\", \"line\": \"135\", \"text\": \"    charFunDual_stdGaussian, L.opNorm_comp_linearIsometryEquiv]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Multivariate.lean\", \"line\": \"146\", \"text\": \"lemma stdGaussian_eq_map_pi_orthonormalBasis (b : OrthonormalBasis ι ℝ E) :\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/HasGaussianLaw/Independence.lean\", \"line\": \"281\", \"text\": \"lemma IndepFun.hasGaussianLaw [NormedSpace ℝ E] [NormedSpace ℝ F] {X : Ω → E} {Y : Ω → F}\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/HasGaussianLaw/Independence.lean\", \"line\": \"310\", \"text\": \"lemma HasGaussianLaw.indepFun_of_covariance_strongDual [NormedSpace ℝ E] [NormedSpace ℝ F]\"}\n  {\"file\": \"Mathlib/Probability/Distributions/Gaussian/Real.lean\", \"line\": \"275\", \"text\": \"lemma integral_gaussianReal_eq_integral_smul {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\"}\n  {\"file\": \"Mathlib/Analysis/Polynomial/Norm.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Polynomial.GaussNorm\"}\n  {\"file\": \"Mathlib/Analysis/Polynomial/Norm.lean\", \"line\": \"52\", \"text\": \"This is defined in terms of `Polynomial.gaussNorm`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Polynomial/Norm.lean\", \"line\": \"53\", \"text\": \"noncomputable def supNorm : ℝ := p.gaussNorm (SeminormedRing.toRingSeminorm A) 1\"}\n  {\"file\": \"Mathlib/Analysis/Polynomial/Norm.lean\", \"line\": \"59\", \"text\": \"  · simp only [supNorm, gaussNorm, h, ↓reduceDIte, one_pow, mul_one, Function.comp_apply]\"}\n  {\"file\": \"Mathlib/Analysis/Polynomial/Norm.lean\", \"line\": \"61\", \"text\": \"  · simp [supNorm, gaussNorm, h]\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/Inversion.lean\", \"line\": \"98\", \"text\": \"      GaussianFourier.integrable_cexp_neg_mul_sq_norm_add (by simpa) _ _\"}\n  {\"file\": \"Mathlib/Analysis/Fourier/Inversion.lean\", \"line\": \"118\", \"text\": \"    · rw [integral_const_mul, GaussianFourier.integral_rexp_neg_mul_sq_norm (by positivity)]\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"13\", \"text\": \"# Gauss norm for multivariate power series\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"15\", \"text\": \"This file defines the Gauss norm for power series. Given a multivariate power series `f`, a\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"16\", \"text\": \"function `v : R → ℝ` and a tuple `c` of real numbers, the Gauss norm is defined as the supremum of\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"21\", \"text\": \"* `MvPowerSeries.gaussNorm` is the supremum of the set of all values of\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/GaussNorm.lean\", \"line\": \"25\", \"text\": \"* `MvPowerSeries.gaussNorm_nonneg`: if `v` is a non-negative function, then the Gauss norm is\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Polynomial.GaussNorm\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"line\": \"16\", \"text\": \"polynomial is the whole ring if and only if the `v`-adic Gauss norms of the polynomial are equal to\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"line\": \"28\", \"text\": \"theorem gaussNorm_intAdicAbv_le_one : p.gaussNorm (v.intAdicAbv hb) 1 ≤ 1 := by\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"line\": \"31\", \"text\": \"  simp [gaussNorm, hp0, intAdicAbv_le_one]\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/GaussLemma.lean\", \"line\": \"33\", \"text\": \"/-- Given a polynomial `p` in `R[X]`, the `v`-adic Gauss norm of `p` is smaller than 1 if and only\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct the norm-preserving translation of a completed immediate rational field into a positive-radius disc algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed tensor product of a type four nonarchimedean field with itself is a closed disc algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"UniformSpace.Completion.instNormedAlgebra\", \"module\": \"Mathlib.Analysis.Normed.Module.Completion\", \"type\": \"[NormedField 𝕜] [SeminormedCommRing A] [NormedAlgebra 𝕜 A] : NormedAlgebra 𝕜 (Completion A)\", \"doc\": \"For any normed field $\\\\mathbb{K}$ and seminormed commutative ring $A$ equipped with a normed algebra structure over $\\\\mathbb{K}$, the completion $\\\\widehat{A}$ of $A$ inherits a normed algebra structur\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u) →\\n        [inst_1 : AddCommGroup M] →\\n          [inst_2 : Module R M] →\\n            [IsNoetherianRing R] →\\n              [Module.Finite R M] → TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I \", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}\n  {\"name\": \"TensorProduct.instNormedAddCommGroup\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TensorProduct\", \"type\": \": NormedAddCommGroup (E ⊗[𝕜] F)\", \"doc\": \"For any real closed-like field $\\\\mathbb{K}$ and inner product spaces $E$ and $F$ over $\\\\mathbb{K}$, the tensor product $E \\\\otimes_{\\\\mathbb{K}} F$ is equipped with a normed additive commutative group s\"}\n  {\"name\": \"instNonarchimedeanAddGroupCompletion\", \"module\": \"Mathlib.Topology.Algebra.Nonarchimedean.Completion\", \"type\": \"{G : Type*} [AddGroup G] [UniformSpace G] [IsUniformAddGroup G] [NonarchimedeanAddGroup G] :\\n  NonarchimedeanAddGroup (Completion G)\", \"doc\": \"If $ G $ is a non-Archimedean additive group equipped with a compatible uniform space structure (where addition and negation are uniformly continuous), then its completion as a uniform space inherits \"}\n  {\"name\": \"Algebra.FormallyUnramified.base_change\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] : FormallyUnramified B (B ⊗[R] A)\", \"doc\": \"The tensor product $ A \\\\otimes_R B $ of two commutative $ R $-algebras $ A $ and $ B $ over a commutative semiring $ R $ is equipped with a commutative ring structure, where the multiplication operati\"}\n  {\"name\": \"UniformSpace.Completion.instNormedRing\", \"module\": \"Mathlib.Analysis.Normed.Module.Completion\", \"type\": \"[SeminormedRing A] : NormedRing (Completion A)\", \"doc\": \"For any seminormed ring $ A $, its completion $ \\\\widehat{A} $ with respect to the uniform structure induced by the seminorm is a normed ring. This means $ \\\\widehat{A} $ inherits both a ring structure \"}\n  {\"name\": \"NonUnitalStarAlgebra.elemental.instCompleteSpaceSubtypeMemNonUnitalStarSubalgebra\", \"module\": \"Mathlib.Topology.Algebra.NonUnitalStarAlgebra\", \"type\": \"{A : Type*} [UniformSpace A] [CompleteSpace A] [NonUnitalSemiring A] [StarRing A] [IsTopologicalSemiring A]\\n  [ContinuousStar A] [Module R A] [IsScalarTower R A A] [SMulCommClass R A A] [StarModule R A] [ContinuousConstSMul R A]\\n  (x : A) : CompleteSpace (elemental R x)\", \"doc\": \"For any element $x$ in a complete topological non-unital star algebra $A$ over a commutative semiring $R$, the topological closure of the non-unital star subalgebra generated by $x$ and its star opera\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct the norm-preserving translation of a completed immediate rational field into a positive-radius disc algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonarchimedean field generated topologically by a transcendental element with unattained distance to constants becomes a Gauss norm power series algebra after scalar extension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.gaussNorm_coe_powerSeries\", \"module\": \"Mathlib/RingTheory/Polynomial/GaussNorm\", \"type\": \"∀ {R : Type u_1} {F : Type u_2} [inst : Semiring R] [inst_1 : FunLike F R ℝ] (v : F) {c : ℝ} (p : Polynomial R)\\n  [ZeroHomClass F R ℝ] [NonnegHomClass F R ℝ], 0 ≤ c → PowerSeries.gaussNorm v c ↑p = Polynomial.gaussNorm v c p\", \"doc\": \"For any polynomial $ p $ over a semiring $ R $, valuation $ v $, and non-negative real number $ c $, the Gauss norm of the power series obtained by embedding $ p $ into $ R[[X]] $ is equal to the Gaus\"}\n  {\"name\": \"PowerSeries.gaussNorm\", \"module\": \"Mathlib/RingTheory/PowerSeries/GaussNorm\", \"type\": \"{R : Type u_1} → {F : Type u_2} → [Semiring R] → [FunLike F R ℝ] → F → ℝ → PowerSeries R → ℝ\", \"doc\": \"The Gauss norm of a power series $ f $ is defined as the supremum over all natural numbers $ i $ of the product of the valuation $ v $ applied to the coefficient of $ f $ at $ i $ and $ c $ raised to \"}\n  {\"name\": \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → Algebra K (LaurentSeries.RatFuncAdicCompl K)\", \"doc\": \"For any field $ K $, the $ X $-adic completion of the rational function field $ K(X) $, which is the field of formal Laurent series $ K((X)) $, inherits a canonical algebra structure over $ K $. This \"}\n  {\"name\": \"spectralNorm.nontriviallyNormedField\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"(K : Type u) →\\n  [inst : NontriviallyNormedField K] →\\n    (L : Type v) →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] →\\n          [Algebra.IsAlgebraic K L] → [hu : IsUltrametricDist K] → [CompleteSpace K] → NontriviallyNormedField L\", \"doc\": \"Given a complete ultrametric nontrivially normed field $ K $ and a field $ L $ that is an algebraic algebra over $ K $, the spectral norm equips $ L $ with the structure of a nontrivially normed field\"}\n  {\"name\": \"PowerSeries.gaussNorm_monomial\", \"module\": \"Mathlib/RingTheory/Polynomial/GaussNorm\", \"type\": \"∀ {R : Type u_1} {F : Type u_2} [inst : Semiring R] [inst_1 : FunLike F R ℝ] (v : F) {c : ℝ} (r : R)\\n  [ZeroHomClass F R ℝ] [NonnegHomClass F R ℝ],\\n  0 ≤ c → ∀ (n : ℕ), PowerSeries.gaussNorm v c ((PowerSeries.monomial n) r) = v r * c ^ n\", \"doc\": \"For a monomial $ rX^n $ in the ring of power series over a semiring $ R $, the Gauss norm $ \\\\|rX^n\\\\|_{v,c} $ with respect to a valuation $ v $ and a non-negative real number $ c $ is equal to $ v(r) \\\\\"}\n  {\"name\": \"spectralNorm.normedField\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"(K : Type u) →\\n  [inst : NontriviallyNormedField K] →\\n    (L : Type v) →\\n      [inst_1 : Field L] →\\n        [inst_2 : Algebra K L] →\\n          [Algebra.IsAlgebraic K L] → [hu : IsUltrametricDist K] → [CompleteSpace K] → NormedField L\", \"doc\": \"The normed field structure on an algebraic extension $ L $ over a nontrivially normed field $ K $, where the norm of an element $ x $ is defined as the spectral norm of $ x $ (derived from its minimal\"}\n  {\"name\": \"PowerSeries.le_gaussNorm\", \"module\": \"Mathlib/RingTheory/PowerSeries/GaussNorm\", \"type\": \"∀ {R : Type u_1} {F : Type u_2} [inst : Semiring R] [inst_1 : FunLike F R ℝ] (v : F) (c : ℝ) (f : PowerSeries R),\\n  BddAbove {x | ∃ i, v ((PowerSeries.coeff i) f) * c ^ i = x} →\\n    ∀ (i : ℕ), v ((PowerSeries.coeff i) f) * c ^ i ≤ PowerSeries.gaussNorm v c f\", \"doc\": \"For any power series $ f $, valuation $ v $, and real number $ c $, if the set $ \\\\{ v(f_i) \\\\cdot c^i \\\\mid i \\\\in \\\\mathbb{N} \\\\} $ is bounded above, then for every natural number $ i $, the product $ v(f\"}\n  {\"name\": \"LaurentSeries.RatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [Field K] → Type u_2\", \"doc\": \"For a field $ K $, this is the adic completion of the rational function field $ \\\\text{RatFunc}(K) $ with respect to the ideal generated by $ X $ in the polynomial ring $ K[X] $. It corresponds to comp\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct the norm-preserving translation of a completed immediate rational field into a positive-radius disc algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|gaussNorm|disc.*algebra|type.?four",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.MvPowerSeries.GaussNorm\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"line\": \"15\", \"text\": \"This file defines the Gauss norm for power series using the gaussNorm for multivariate power series.\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"line\": \"20\", \"text\": \"`f.gaussNorm v c` reduces to the Gauss norm defined in\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"line\": \"21\", \"text\": \"`Mathlib/RingTheory/Polynomial/GaussNorm.lean`, see `Polynomial.gaussNorm_coe_powerSeries`.\"}\n  {\"file\": \"Mathlib/RingTheory/PowerSeries/GaussNorm.lean\", \"line\": \"24\", \"text\": \"* Using `PowerSeries.gaussNorm_eq`, `PowerSeries.gaussNorm` is the supremum of the set of all values\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not construct the norm-preserving translation of a completed immediate rational field into a positive-radius disc algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|disc.*algebra|type.?four",
+   "results": "Mathlib/NumberTheory/Cyclotomic/Discriminant.lean; Mathlib/Topology/Algebra/Algebra.lean; Mathlib/NumberTheory/NumberField/Cyclotomic/Basic.lean; Mathlib/NumberTheory/NumberField/Discriminant/Different.lean; Mathlib/NumberTheory/NumberField/Discriminant/Different.lean; Mathlib/NumberTheory/NumberField/Discriminant/Different.lean; Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean; Mathlib/NumberTheory/NumberField/Discriminant/Defs.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentSeries results use an adic valuation, and completion embeddings do not construct the translation into a disc algebra. No hit states the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A type four completed rational field embeds isometrically into a positive radius disc power series algebra by translation",
+   "results": "AbsoluteValue.Completion.extensionEmbedding_of_comp; NumberField.InfinitePlace.Completion.isometry_extensionEmbedding_of_isReal; NumberField.InfinitePlace.Completion.isometry_extensionEmbeddingOfIsReal; NumberField.InfinitePlace.Completion.isometry_extensionEmbedding; NumberField.InfinitePlace.Completion.isometryEquivComplexOfIsComplex; NumberField.InfinitePlace.Completion.extensionEmbeddingOfIsReal; NumberField.InfinitePlace.isometry_embedding; AbsoluteValue.Completion.instCoe",
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentSeries results use an adic valuation, and completion embeddings do not construct the translation into a disc algebra. No hit states the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "TateAlgebra",
+   "results": "; loogle: unknown identifier 'TateAlgebra'",
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentSeries results use an adic valuation, and completion embeddings do not construct the translation into a disc algebra. No hit states the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isometric homomorphism of a completed rational function field into a closed disc algebra sending its generator z to z plus W when all roots over the base field lie strictly outside the disc",
+   "results": "LaurentSeries.ratfuncAdicComplPkg; LaurentSeries.comparePkg_eq_extension; LaurentSeries.extensionAsRingHom; NumberField.InfinitePlace.Completion.isometry_extensionEmbedding; LaurentSeries.RatFuncAdicCompl; NumberField.InfinitePlace.Completion.extensionEmbedding; LaurentSeries.LaurentSeriesPkg; FunctionField.FqtInfty",
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentSeries results use an adic valuation, and completion embeddings do not construct the translation into a disc algebra. No hit states the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete nonarchimedean rational function field of type four has an isometric translation into its power series disc algebra",
+   "results": "LaurentSeries.comparePkg; LaurentSeries.ratfuncAdicComplPkg; LaurentSeries.RatFuncAdicCompl; LaurentSeries.comparePkg_eq_extension; LaurentSeries.instAlgebraRatFuncAdicCompl; LaurentSeries.extensionAsRingHom; LaurentSeries.LaurentSeriesPkg; LaurentSeries.ratfuncAdicComplRingEquiv_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: LaurentSeries results use an adic valuation, and completion embeddings do not construct the translation into a disc algebra. No hit states the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-analytic-pth-root-obstruction",
+  "group": "Q159",
+  "date": "2026-10-24"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Proof of Theorem 6.3.1(i), type 4 argument, printed p. 50, specialized to algebraically closed k: every finite extension is immediate, and the proof constructs a topological generator. Supporting fact: Lemma 6.2.8, printed p. 45, specialized to algebraically closed k; the preceding completed tensor product disc description supplies its notation. Supporting input: the norm-preserving first-factor map into the disc algebra in the paragraphs preceding Lemma 6.2.8, specialized to l=K.",
+   "via": [
+    "lem-trf-analytic-pth-root-obstruction",
+    "lem-trf-analytic-immediate-rationality",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-analytic-disc-translation-embedding",
+  "worker": "stage1",
+  "summary": "Constructed translation on rational functions by linear factorization and geometric inverses, proved its norm equality using constant coefficient, and extended the map from the dense rational subfield. One new analytic input gives the complete Gauss-norm algebra for arbitrary positive real radius. The statement is unchanged. No project Lean attachment was found.",
+  "blueprint": "The inherited ancestor lem-trf-local-term-locality, proof (1)--(2), nearby-cycle semistable-alteration input, through the recorded Temkin analytic-uniformization chain: printed p.45 disc description before Lemma 6.2.8. This split expands only that existing supporting analytic input and does not replace the unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-5631d0be0",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-5631d0be0 (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and the new node in full; no fixes. The Temkin PDF (§6.2, p.45) is not in the local literature (cited by 728 nodes), so I could not read the source at the cited place. The proof is self-contained (proof_origin agent), so I checked the statement and every step directly. The item's statement and stmt_deps are byte-identical to Q159's creating version, and it is not a re-split item. The statement is true. The map on k(z) is forced: P/Q goes to P(z+W)/Q(z+W). ||z-c+W|| = |z-c| holds only because the distance r is never attained; at an attained distance 1+W/(z-c) would not be invertible, so the hypothesis is the needed one. Step 1: the new node with F=K, s=r; restricting scalars to k is fine. Step 2: the linear-factorization leaf; z not in k makes evaluation injective; upper bound by ultrametric and submultiplicative norms, lower bound through epsilon(P(z+W))=P(z). Step 3: the geometric-inverse leaf applied to h=-W/d with ||h||=r/|d|<1; the bound ||S||<=1 is proved in the step from partial sums. Step 4: well-defined by cross-multiplication, and an isometry because epsilon is a left inverse. Step 5: the dense-subspace extension leaf (extendOfNorm), with B complete, D=k(z) dense and j_0 contractive. Step 6: multiplicativity and the norm identity by density, with bounded approximants. New node lem-trf-weighted-disc-banach: statement-only, self-contained, true. I tested s=1, s<1, s>1, s outside the value group, a trivially valued F, f=0, constants and W. It is strictly smaller than the item and is not a restatement. Duplicate search over the DAG: lem-trf-restricted-series-gauss-completion, lem-trf-tate-gauss-multiplicative and lem-per-tate-banach-substitution are radius 1 only. lem-wf-nonarchimedean-series-substitution has no norm or completeness. d-real-series only defines the radius. None states the new node, and no Mathlib match. Blueprint and created fields are correct. No tool_uses."
+ }
+}

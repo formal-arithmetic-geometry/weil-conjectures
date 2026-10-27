@@ -25,6 +25,7 @@ import Sheaf.Paper.SquareZeroPeriodicTensor
 import Mathlib.RingTheory.Nilpotent.Basic
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Constructible finite Tor objects and bounded constructible objects

@@ -28,6 +28,9 @@ import Mathlib.CategoryTheory.Preadditive.LeftExact
 import Sheaf.Paper.IndHeartCanonicalPresentation
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.AlgebraicGeometry.QuasiAffine
+import Mathlib.RingTheory.DedekindDomain.Basic
+import Mathlib.RingTheory.DedekindDomain.Dvr
 
 /-! Integral compactness: an intermediate argument from blueprint main-20261015,
 sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.proof.md. -/

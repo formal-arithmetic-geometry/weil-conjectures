@@ -1,0 +1,309 @@
+{
+ "id": "lem-trf-separable-smooth-cotangent-germ",
+ "kind": "statement",
+ "title": "A fibre-regular germ with nonzero differential at a separable smooth point",
+ "statement": "Let $f:X\\to S$ be a smooth morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms], let $x\\in X$, put $s=f(x)$, $k=\\kappa(s)$ and $L=\\kappa(x)$ [def-weil-residue-field], and let $x_s$ be the point over $x$ in $X_s=X\\times_S\\operatorname{Spec}k$ [def-pc-scheme-fibre]. Assume $x_s$ is closed, $L/k$ is finite-dimensional and separable algebraic [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension], and $\\dim_{x_s}X_s=d\\geq1$ [def-kun-topological-dimension-at-point]. Then there are affine open neighbourhoods $W=\\operatorname{Spec}A$ of $x$ and $V=\\operatorname{Spec}B$ of $s$, with $f(W)\\subseteq V$ [def-weil-open-immersion, def-weil-affine-spectrum], such that $B\\to A$ is smooth [def-weil-pbc-smooth-ring-map] and $\\Omega_{A/B}$ is free of rank $d$ [def-weil-pbc-kahler-differentials]. Put $C=k\\otimes_B A$, with multiplication $(\\lambda\\otimes a)(\\mu\\otimes b)=\\lambda\\mu\\otimes ab$, and let $\\mathfrak q\\subset C$ correspond to $x_s$ under $W_s=\\operatorname{Spec}C$. Then $C$ is a smooth finite-type $k$-algebra, and $R=C_{\\mathfrak q}$ is canonically $\\mathcal O_{X_s,x_s}$, with residue field $L$. It is a regular local ring and an integral domain [def-weil-regular-scheme, def-weil-pbc-localization-at-prime]. Writing $\\mathfrak m$ for its maximal ideal, after choosing a basis of $\\Omega_{A/B}$ there are induced $L$-linear identifications\n$$E:=\\Omega_{R/k}\\otimes_R L\\cong\\Omega_{A/B}\\otimes_A L\\cong L^d\\cong\\Omega^1_{X/S,x}\\otimes_{\\mathcal O_{X,x}}L$$\n[def-weil-pbc-module-tensor-product, def-sc-relative-differential-sheaf], compatible with the universal derivations. The map $\\mathfrak m/\\mathfrak m^2\\to E$, $b\\bmod\\mathfrak m^2\\mapsto db\\otimes1$, is surjective. There exists a germ $h\\in\\mathfrak m_x\\subset\\mathcal O_{X,x}$ whose fibre image $\\bar h\\in\\mathfrak m$ has $d\\bar h\\otimes1\\ne0$ in $E$; under these identifications this is the image of $dh$ in the relative differential fibre at $x$. Multiplication by $\\bar h$ on $R$ is injective. Here stalks are as in [def-weil-pbc-module-stalk], and regular local includes Noetherian as in [def-weil-pbc-noetherian-ring].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 057D, lemma-slice-smooth-once, proof: fibre local ring, conormal sequence and lifting the germ; Tag 057G, lemma-slice-smooth, positive-dimensional case: finite separable residue differentials vanish.",
+  "external": [
+   {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, lemma-smooth-omega-finite-locally-free, differential rank formula."
+   },
+   {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TT, lemma-characterize-smooth-over-field, final regular-local assertion."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-residue-field",
+  "def-pc-scheme-fibre",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension] to $f,x$ to obtain $W=\\operatorname{Spec}A$, $V=\\operatorname{Spec}B$ with $x\\in W$, $f(W)\\subset V$, and $\\Omega_{A/B}$ free of rank $d$. Its dimension is the dimension of the same fibre at $x_s$, namely the assumed $d$. The restriction $W\\to V$ is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes](a); [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] therefore makes $B\\to A$ a smooth ring map. Fix a basis of $\\Omega_{A/B}$.",
+   "uses": [
+    "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, lemma-smooth-omega-finite-locally-free; Tag 01V6, lemma-smooth-characterize, affine restriction and ring criterion; agreement with formal smoothness: more-morphisms.tex, Tag 02H6."
+   }
+  },
+  {
+   "text": "The finite presentation furnished by smoothness allows [lem-trf-affine-fibre-point-dimension] to identify the inverse image $W_s$ with $\\operatorname{Spec}C$, $C=k\\otimes_B A$, and $x_s$ with the prime $\\mathfrak q$. Its tensor algebra is precisely the one with the multiplication in the statement; the chart lemma also gives that $C$ is finite type over $k$. By [lem-weil-pbc-affine-open-stalk-localization], $C_{\\mathfrak q}\\cong\\mathcal O_{X_s,x_s}$. Put $T=\\mathcal O_{X,x}$. By [lem-sbc-scheme-fibre-stalk-quotient], the structural map $T\\to R=C_{\\mathfrak q}$ is the surjection $T\\to T/J$, where $J=\\mathfrak m_sT$. The stalk map $\\mathcal O_{S,s}\\to T$ is local, so $J\\subseteq\\mathfrak m_x$. Thus $R$ has maximal ideal $\\mathfrak m=\\mathfrak m_x/J$, and $R/\\mathfrak m=T/\\mathfrak m_x=L$, with the structural residue maps.",
+   "uses": [
+    "lem-trf-affine-fibre-point-dimension",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JQ and 01JR, lemma-fibre-product-affines and lemma-open-fibre-product; Tag 01HV, lemma-spec-sheaves (6); Tag 0HA1, lemma-local-ring-fibre."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-smooth-ring-map-base-change-composition](1) to $B\\to A$ and $B\\to k$. It gives that $k\\to C=k\\otimes_B A$ is smooth. By [lem-weil-pbc-smooth-over-field-regular-local], the localization $R=C_{\\mathfrak q}$ is regular local (in particular Noetherian). By [lem-sc-regular-local-domain], $R$ is an integral domain. None of these applications requires $S$ to be Noetherian or $k$ to be perfect.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T4, lemma-base-change-smooth; Tag 00TT, lemma-characterize-smooth-over-field, final assertion; Tag 00NP, lemma-regular-domain."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kahler-differentials-base-change] and [lem-weil-pbc-kahler-differentials-localization], successively,\n$\\Omega_{C/k}\\cong C\\otimes_A\\Omega_{A/B}$ and $\\Omega_{R/k}\\cong R\\otimes_C\\Omega_{C/k}$. Tensor with $L$ to obtain $E\\cong L\\otimes_A\\Omega_{A/B}\\cong L^d$, using the chosen basis. The first two isomorphisms send $1\\otimes da$ to $d(1\\otimes a)$ and $dc/u$ to $u^{-1}d(c/1)$. For the other end of the claimed chain, [def-sc-relative-differential-sheaf] identifies the differential sheaf on $W$ with the sheaf associated to $\\Omega_{A/B}$, and [lem-weil-pbc-spec-tilde-stalk-localization] identifies its stalk at $x$ with $(\\Omega_{A/B})_{\\mathfrak p}$, where $\\mathfrak p\\subset A$ represents $x$. Tensoring this stalk with $L$ again gives $\\Omega_{A/B}\\otimes_A L$. Reorder the tensors using $l\\otimes\\omega\\mapsto\\omega\\otimes l$. All maps respect derivations: for a germ $h=a/t$ ($t\\notin\\mathfrak p$), both routes send its differential to $t^{-1}da-a t^{-2}dt$ evaluated in $L$. This follows by differentiating $t t^{-1}=1$ and then $a t^{-1}$; it also proves compatibility for every germ, rather than just for sections of $A$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-kahler-differentials-localization",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RV and 00RT, lemma-differentials-base-change and lemma-differentials-localize; morphisms.tex Tag 01UT, lemma-differentials-affine; schemes.tex Tag 01HV, lemma-spec-sheaves (7)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $k\\to R$ and the ideal $\\mathfrak m$, with quotient $L$. It gives the exact sequence $\\mathfrak m/\\mathfrak m^2\\xrightarrow{\\delta} E\\to\\Omega_{L/k}\\to0$, where $\\delta(b\\bmod\\mathfrak m^2)=db\\otimes1$. The finite separable hypothesis on $L/k$ gives $\\Omega_{L/k}=0$ by [lem-trf-separable-field-differentials-vanish]. Exactness therefore makes $\\delta$ surjective. Since $d\\geq1$, the vector $(1,0,\\ldots,0)\\in L^d$ is nonzero. Pull it back through the isomorphism of Step 4 to a nonzero $v\\in E$, choose a class in $\\mathfrak m/\\mathfrak m^2$ mapping to $v$, and choose its representative $\\bar h\\in\\mathfrak m$. Then $d\\bar h\\otimes1=v\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-trf-separable-field-differentials-vanish"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057D, lemma-slice-smooth-once, proof, conormal sequence and choice of the germ; Tag 057G, lemma-slice-smooth, positive-dimensional case; algebra.tex Tags 00RU and 090W."
+   }
+  },
+  {
+   "text": "Use the surjection of [lem-sbc-scheme-fibre-stalk-quotient] to lift $\\bar h$ to $h\\in T$. The equality $\\mathfrak m=\\mathfrak m_x/J$ from Step 2 implies $h\\in\\mathfrak m_x$. The compatibility computed in Step 4 says that the image of $dh$ in the relative differential fibre is $d\\bar h\\otimes1$, hence is nonzero. In particular $\\bar h\\ne0$, since the differential of zero is zero. Finally, in the domain $R$ established in Step 3, $\\bar h r=\\bar h r'$ implies $\\bar h(r-r')=0$, and therefore $r=r'$. Thus multiplication by $\\bar h$ is injective, completing all assertions.",
+   "uses": [
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 057D, lemma-slice-smooth-once, proof, last sentence (lifting); algebra.tex Tag 00NP, lemma-regular-domain, used in Step 3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-affine-fibre-point-dimension",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-trf-separable-field-differentials-vanish"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 057D and 057G, conormal exact sequence, finite separable differential vanishing, and lifting; affine rank and regularity supplied by Tags 02G1 and 00TT."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(cotangent|conormal|separab).*(surject|nonzero)|(surject|nonzero).*(cotangent|conormal)",
+   "results": "{\"t\": \"2026-10-22T06:16:39Z\", \"tool\": \"grep\", \"query\": \"(cotangent|conormal|separab).*(surject|nonzero)|(surject|nonzero).*(cotangent|conormal)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\"], \"digest\": \"ebbdd39404e3ba54\"}; The hits concern algebra presentations, smooth charts, cotangent quotient maps or unramifiedness; none constructs the specified scheme-stalk germ with its fibre and differential identifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth morphism at a separable closed point of positive fibre dimension has a local function vanishing at that point with nonzero relative differential",
+   "results": "{\"t\": \"2026-10-22T06:16:40Z\", \"tool\": \"leansearch\", \"query\": \"A smooth morphism at a separable closed point of positive fibre dimension has a local function vanishing at that point with nonzero relative differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential\"], \"digest\": \"77b947874ef74128\"}; The hits concern algebra presentations, smooth charts, cotangent quotient maps or unramifiedness; none constructs the specified scheme-stalk germ with its fibre and differential identifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-22T06:16:40Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The hits concern algebra presentations, smooth charts, cotangent quotient maps or unramifiedness; none constructs the specified scheme-stalk germ with its fibre and differential identifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The conormal map onto the relative cotangent space at a separable closed point of a smooth fibre is surjective and has positive rank",
+   "results": "{\"t\": \"2026-10-22T06:16:42Z\", \"tool\": \"leanfinder\", \"query\": \"The conormal map onto the relative cotangent space at a separable closed point of a smooth fibre is surjective and has positive rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.Cotangent.mk_surjective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_surjective\", \"Algebra.Extension.toKaehler_surjective\", \"Ideal.toCotangent_surjective\", \"Algebra.Generators.CotangentSpace.map_ofComp_surjective\", \"Algebra.Generators.Cotangent.surjective_map_ofComp\", \"KaehlerDifferential.map_surjective\", \"Algebra.Extension.CotangentSpace.map_toInfinitesimal_bijective\"], \"digest\": \"8ee5ba199ca02038\"}; The hits concern algebra presentations, smooth charts, cotangent quotient maps or unramifiedness; none constructs the specified scheme-stalk germ with its fibre and differential identifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth scheme morphism at a closed fibre point with finite separable residue field and positive fibre dimension, there is a maximal ideal germ with nonzero relative differential and nonzerodivisor image in the fibre local ring",
+   "results": "{\"t\": \"2026-10-22T06:16:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth scheme morphism at a closed fibre point with finite separable residue field and positive fibre dimension, there is a maximal ideal germ with nonzero relative differential and nonzerodivisor image in the fibre local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.smoothLocus\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.IsEtaleAt\", \"Algebra.IsUnramifiedAt\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.etaleLocus\"], \"digest\": \"d87ee81b6dc933e6\"}; The hits concern algebra presentations, smooth charts, cotangent quotient maps or unramifiedness; none constructs the specified scheme-stalk germ with its fibre and differential identifications.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(cotangent|conormal|separab).*(surject|nonzero)|(surject|nonzero).*(cotangent|conormal)",
+   "results": "{\"t\": \"2026-10-23T09:44:35Z\", \"tool\": \"grep\", \"query\": \"(cotangent|conormal|separab).*(surject|nonzero)|(surject|nonzero).*(cotangent|conormal)\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\"], \"digest\": \"fe170e952e23d441\"}; Read the returned hits: chart existence, smooth loci, unramifiedness or cotangent quotient maps do not state the full scheme-germ package and its fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-23T09:44:35Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits: chart existence, smooth loci, unramifiedness or cotangent quotient maps do not state the full scheme-germ package and its fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism at a closed fibre point with finite separable residue extension admits a germ vanishing at the point with nonzero relative differential",
+   "results": "{\"t\": \"2026-10-23T09:44:36Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism at a closed fibre point with finite separable residue extension admits a germ vanishing at the point with nonzero relative differential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsSmoothAt\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.smoothLocus\", \"Algebra.etaleLocus\"], \"digest\": \"81db02fd461e3137\"}; Read the returned hits: chart existence, smooth loci, unramifiedness or cotangent quotient maps do not state the full scheme-germ package and its fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth scheme over a field has a function in the maximal ideal with nonzero differential at a separable closed point of positive dimension",
+   "results": "{\"t\": \"2026-10-23T09:46:46Z\", \"tool\": \"leansearch\", \"query\": \"A smooth scheme over a field has a function in the maximal ideal with nonzero differential at a separable closed point of positive dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"ebc93cf31cd21af4\"}; Read the returned hits: chart existence, smooth loci, unramifiedness or cotangent quotient maps do not state the full scheme-germ package and its fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism affine chart free differentials of rank fibre dimension lift a nonzero conormal vector from the fibre local ring to the scheme local ring",
+   "results": "{\"t\": \"2026-10-23T09:46:47Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth morphism affine chart free differentials of rank fibre dimension lift a nonzero conormal vector from the fibre local ring to the scheme local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\"], \"digest\": \"febaa1a0ec34bf1c\"}; Read the returned hits: chart existence, smooth loci, unramifiedness or cotangent quotient maps do not state the full scheme-germ package and its fibre comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-separable-hypersurface-slice",
+  "date": "2026-10-22",
+  "group": "Q48"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical auxiliary branch through lem-trf-relative-completion-etale-approximation: the application of the smooth immersion slice (Stacks 057G) after pointed finite-stage descent; its positive-dimensional induction step, choosing one smooth Cartier hypersurface before iterating. Specifically: old hypersurface-slice Steps 1--3 and the regular-local-domain argument at the start of Step 4: selecting and lifting a nonzero conormal differential.",
+   "via": [
+    "lem-trf-smooth-separable-hypersurface-slice",
+    "lem-trf-smooth-point-etale-immersion",
+    "lem-trf-relative-completion-etale-approximation",
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-trf-nodal-etale-chart",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-separable-smooth-cotangent-germ",
+  "worker": "stage1",
+  "summary": "Checked the conormal argument in Stacks 057D/057G and its rank, regularity, affine fibre and localization inputs against existing DAG statements. Retained the full statement and all statement dependencies, split into six explicit steps, including the residue-field and quotient descriptions, differential compatibility on a/t, and cancellation. No new nodes: the existing DAG already states every non-elementary input. Searches found no exact project attachment or Mathlib theorem for the entire package.",
+  "blueprint": "This remains the historical auxiliary 057G branch already recorded in blueprint.from.place, specifically selection and lifting of a nonzero conormal differential for the positive-dimensional smooth hypersurface induction. The current latest ancestor lem-trf-local-term-locality uses contracting correspondences; this generic historical auxiliary lemma makes no change to that updated route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+    "why": "Generic smooth differential rank and affine trivialization, used to choose the chart; the unit has no such commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic comparison of affine scheme smoothness and smooth ring maps, used on the chosen chart; it replaces no unit step."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic fibre stalk quotient, used to identify the residue field and lift a maximal-ideal element; no node of the unit gives this quotient."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic regularity of smooth algebras over a field, used only on the affine fibre; no trace-formula route is replaced."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic regular-local domain theorem, used for cancellation of the nonzero germ; the unit supplies no ring-domain theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-differentials-free-rank-fibre-dimension",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-local-domain"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-db2214c30",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-db2214c30 (reviewer sub-agent of L); spot-checked: Six steps, no new nodes; statement, stmt_deps and the other non-proof fields match clones/live and side-live exactly, so the target is not weakened. No repair note exists for this item, so the re-split rule does not apply. Checked against Stacks more-morphisms 057D (line 10661): the fibre local ring, localization of differentials, the conormal sequence and lifting the germ; 057G adds Omega_{L/k}=0 for finite separable L/k. Step 1: the free-rank lemma's def-kun-dimension dim_x is the same notion as the item's topological dim_x, so the rank is d; B->A smooth via restrict-open(a) plus the affine smooth iff. Step 2: fibre-point-dimension (finite presentation from smoothness), affine-open-stalk-localization and fibre-stalk-quotient give J=m_sT inside m_x and R/m=L. Step 3: base-change(1) with R=B, R'=k, S=A, then smooth-over-field regular local, then regular-local-domain. Step 4: base-change and localization isomorphisms plus spec-tilde stalk; the d(a/t) Leibniz check is correct; the match T->R = A_p->C_q is implicit but elementary. Step 5: Jacobi-Zariski with A=k, B=R, ideal m matches exactly, so delta is onto and h-bar exists since d>=1. Step 6: correctly marked elementary. Edge cases checked: A=k[t] with d=1 works; d=0 fails as it should; the Stacks inseparable example shows separability is needed; the closed-point hypothesis is redundant but harmless. No duplicate found (zl-hypersurface-nonzero-relative-differential and prescribed-germ-smooth-cartier-cut state different things). The 5 generic algebra tool_uses are accepted, though the worker rather than L recorded them. The report names citations.json and searches.jsonl, which are not in the commit; cosmetic only. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparableSmoothCotangentGerm",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_separableSmoothCotangentGermChart",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.SeparableSmoothCotangentGermChart",
+   "AlgebraicGeometry.Scheme.Hom.exists_separableSmoothCotangentGermChart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparableSmoothCotangentGerm.lean",
+  "statement": "theorem exists_separableSmoothCotangentGermChart {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] (x : X) (hclosed : IsClosed ({f.asFiber x} : Set (f.fiber (f x)))) (hfinite : (f.residueFieldMap x).hom.Finite) (hsep : @Algebra.IsSeparable (S.residueField (f x)) (X.residueField x) _ _ (f.residueFieldMap x).hom.toAlgebra) (d : ℕ) (hd : 1 ≤ d) (hdim : topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞)) : ∃ (V : S.Opens) (W : X.Opens) (hWV : W ≤ f ⁻¹ᵁ V) (hx : x ∈ W) (hs : f x ∈ V) (hW : IsAffineOpen W), IsAffineOpen V ∧ f.SeparableSmoothCotangentGermChart x d V W hWV hx hs hW",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The transparent helper predicate packages this very conclusion, with canonical scalar actions and comparison formulas on generators and all germs; it introduces no independent mathematical notion. Tensor factors are in extension-of-scalars order, equivalent by tensor commutation to the node display."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-71dc68925",
+  "group": "Q39",
+  "result": "pass",
+  "note": "All node hypotheses (smooth f, closed fibre point, finite and separable residue extension, dim_x of the fibre = d ≥ 1) are present with no extra assumptions. Every conclusion clause is stated: affine W and V with f(W) ⊆ V, B→A smooth, Ω free of rank d, C = k⊗_B A smooth and finite type, chart j and prime q, eR and eL pinned canonically, R regular local and a domain, eA/eCoord/eSheaf pinned on generators and on all germs, δ: m/m² → E surjective, and the germ h with its nonzero differential and injective multiplication. Statement matches verbatim; only the lean field changed versus side-live; no duplicate; docstrings and both report sections present; only the main theorem is sorry. Advisory only: fiberStalkMap (owner def-trf-fibre-stalk-map) and RingedSpace.moduleStalkFunctor (owner def-pc-module-stalk-functor) are used without their owner nodes in stmt_deps; both owners exist, so a stage-2 fix cannot add them. No compile run because nothing changed."
+ }
+}

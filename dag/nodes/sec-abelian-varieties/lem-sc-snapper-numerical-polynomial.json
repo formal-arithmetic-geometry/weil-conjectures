@@ -28,78 +28,72 @@
  ],
  "proof": [
   {
-   "text": "Set d = dim Supp(F) and induct on d. If d = 0, every tensor product by an invertible module has the same Euler characteristic by [lem-pc-chi-zero-dim-support], so the function is constant and has degree zero.",
+   "text": "For empty support, the stalk criterion [pqf-lem-sheaf-zero-stalks] makes F zero. Tensoring by every invertible signed power preserves zero, and the Euler characteristic vanishes. Choose the zero polynomial, retaining the original separate zero disjunct.",
+   "uses": [
+    "pqf-lem-sheaf-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
+   }
+  },
+  {
+   "text": "First prove the bounded assertion: if dim Supp(F)≤d for natural d, the Euler function is a polynomial of total degree≤d. Induct on d. In the zero case, apply [lem-pc-chi-zero-dim-support] successively to the list of signed powers. Coherence, support and Euler characteristic are preserved at each fold step, so the constant polynomial works.",
    "uses": [
     "lem-pc-chi-zero-dim-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BEM proof, first paragraph"
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
    }
   },
   {
-   "text": "For d > 0, note that X is of finite type over k, hence Noetherian and finite-dimensional, as the cited nodes require. Apply [lem-sc-hilbert-embedded-points] to obtain 0 \\to K \\to F \\to F' \\to 0, with equal support, no embedded associated points for F', and dim Supp(K) < d. Tensoring by every product of powers of the L_i is exact, and [lem-pc-euler-additive] reduces the assertion for F to the induction assertions for K and F'. For F', let i: Z \\hookrightarrow X be the scheme-theoretic support from [lem-weil-pbc-scheme-theoretic-support]; Z is closed in X, hence proper over k. Since its annihilator kills F', [lem-weil-pbc-closed-immersion-coherent-equivalence] gives F' \\cong i_*G with G coherent and support Z; [lem-pc-closed-immersion-coherent-cohomology] identifies the Euler characteristics after tensoring with the restrictions i^*L_j. Since G is faithful on Z (the ideal of Z is the annihilator), locally O_Z embeds in a finite direct sum of copies of G, so Ass(O_Z) \\subseteq Ass(G); as G has no embedded associated points and Supp(G) = Z, the scheme Z has no embedded points. Thus we may replace X,F' by Z,G: X has no embedded points, and G has no embedded associated points and support the whole scheme, of dimension d.",
+   "text": "In the successor case, use [lem-sc-euler-twist-coordinate-difference] for each j. Apply the induction hypothesis to its coherent modules G_a, all supported in dimension≤d. The polynomial sum of c_a P_a has degree≤d and evaluates to the coordinate difference, including negative exponents.",
    "uses": [
-    "lem-sc-hilbert-embedded-points",
-    "lem-pc-euler-additive",
-    "lem-weil-pbc-scheme-theoretic-support",
-    "lem-weil-pbc-closed-immersion-coherent-equivalence",
-    "lem-pc-closed-immersion-coherent-cohomology"
+    "lem-sc-euler-twist-coordinate-difference"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BEM proof, embedded-point and scheme-theoretic-support reductions"
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
    }
   },
   {
-   "text": "For the reduced situation and each index j, [lem-sc-regular-meromorphic-section-exists] (X proper, Noetherian, finite-dimensional, without embedded points) supplies a regular meromorphic section of L_j. Apply [lem-sc-hilbert-difference] to it and to the coherent module F' tensored by the other invertible powers L_i^{n_i} (i \\ne j); that module still has support X and no embedded associated points, being locally isomorphic to F'. It expresses the forward difference in n_j as the difference of two Euler-characteristic functions, twisted by the same products of powers, of coherent sheaves Q, Q' with support dimension < d, to which the induction hypothesis applies.",
+   "text": "Apply [lem-sc-coordinate-differences-polynomial] with degree parameter d+1 to integrate these coordinate differences. It gives the desired polynomial of degree≤d+1 on the whole integer lattice.",
    "uses": [
-    "lem-sc-regular-meromorphic-section-exists",
-    "lem-sc-hilbert-difference"
+    "lem-sc-coordinate-differences-polynomial"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BEM proof, regular-meromorphic-section argument"
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
    }
   },
   {
-   "text": "By induction, every first difference in every coordinate is a numerical polynomial of total degree at most d - 1. The elementary arithmetic argument in Tag 0BEM integrates one coordinate difference and fixes the integration constant on the corresponding zero slice; repeating this and applying the same argument to the remaining slice gives a numerical polynomial of total degree at most d.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BEM proof, final arithmetic argument"
-   }
-  },
-  {
-   "text": "The induction assertion for F' together with the lower-degree assertion for K and [lem-pc-euler-additive] proves the claim for F, with total degree at most dim Supp(F).",
+   "text": "Properness bounds dim X by a natural number; the dimension of the support subspace is at most dim X. Its dimension is therefore bottom or a natural number. The bottom case was handled above; in the natural case take the exact support dimension as d in the bounded assertion. This proves the unchanged bound in WithBot ENat, using the existing proved HilbertPolynomial helper topologicalKrullDim_le_unbotD_toNat.",
    "uses": [
-    "lem-pc-euler-additive"
+    "def-weil-proper-morphism"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BEM proof, conclusion"
+    "place": "Tag 0BEM, proof of Lemma 33.45.1"
    }
   }
  ],
  "proof_deps": [
+  "pqf-lem-sheaf-zero-stalks",
   "lem-pc-chi-zero-dim-support",
-  "lem-sc-hilbert-embedded-points",
-  "lem-pc-euler-additive",
-  "lem-weil-pbc-scheme-theoretic-support",
-  "lem-weil-pbc-closed-immersion-coherent-equivalence",
-  "lem-pc-closed-immersion-coherent-cohomology",
-  "lem-sc-hilbert-difference",
-  "lem-sc-regular-meromorphic-section-exists"
+  "lem-sc-euler-twist-coordinate-difference",
+  "lem-sc-coordinate-differences-polynomial",
+  "def-weil-proper-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BEM (Lemma 33.45.1) proof"
+  "place": "Tag 0BEM proof, implemented by support-bound induction and a proved integer-lattice integration lemma"
  },
  "mathlib_searches": [
   {
@@ -210,5 +204,26 @@
   "result": "pass",
   "note": "k Field; X.Over Spec k + IsProper (X ↘ Spec k); F X.Modules with RingedSpace.IsCoherent; r, L : Fin r → X.Modules [IsInvertible]; ∀ n : Fin r → ℤ with tensorPow / dual.tensorPow for negatives folded from F in order; eulerChar k cast to ℚ = MvPolynomial.eval; totalDegree ≤ topologicalKrullDim of nonzero-stalk support (P=0 for -∞); #check dual/tensorPow/eulerChar/IsCoherent; support defeq (rfl) to J1's landed F.presheaf.stalk form"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261023T132407-L-2265406",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

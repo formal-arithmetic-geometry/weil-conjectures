@@ -1,0 +1,134 @@
+{
+ "id": "lem-sf-system-finite-refinement-mate-coordinates",
+ "kind": "statement",
+ "title": "Finite evaluation of the identity-normalized refinement mate",
+ "statement": "Fix finite-field data D, a prime l, a finite extension E/Q_l, system Operations o and Realizations z of [def-sf-integral-system-operations] and [def-sf-integral-system-canonical-bridge], and m≥0. For a quasi-compact finite-field-space arrow f:X→Y, compactifications c,d and a refinement r:c→d, and arbitrary system M on X, take only the refinement proper/open factor: open_d of the inverse bridge-normalized identity direct image, followed by z.properOpen.gamma(c.i,1_X,r.hom,d.i). Its mth evaluation followed by the direct r.hom coordinate and the realized direct image of fixedShriek(c.i,M) equals shriek(d.i,M) followed by the realized finite inverse identity direct image and finite proper/open mate. Coordinates are those of [def-sf-system-finite-evaluation-coordinates]. The outer proper image to Y and its compositor are absent.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "stmt_deps": [
+  "def-sf-system-finite-evaluation-coordinates",
+  "def-sf-integral-system-canonical-bridge",
+  "lem-sf-refinement-projection-counit"
+ ],
+ "proof": [
+  {
+   "text": "Use ProperOpenCoherence.canonical to transport the actual whole-system gamma across the specified bridge and apply semilinear gamma_evaluation. Adjoint uniqueness, the o evaluation unit/counit equations, the inverse-image evaluation normalization and the bridge section identity identify the evaluation factors with the given o evaluations.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+   }
+  },
+  {
+   "text": "The canonical intrinsic coefficient equivalence transports open extension by its fixed adjunction and direct image by its section/K-injective normalization. The identity case transports the inverse system identity to the finite inverse identity. Naturality and unit-counit cancellation give precisely the proper/open-factor square. No gamma is inverted and no faithfulness of derived evaluations is used.",
+   "uses": [
+    "def-sf-integral-system-canonical-bridge",
+    "def-sf-integral-system-operations",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-canonical-bridge",
+  "def-sf-integral-system-operations",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence: compatibility of individual refinement maps with counits and j_!, before the projection square is deduced. Integral-system realization steps 1 and 3 of lem-sf-integral-projection-refinement-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluating right adjoint conjugate compositors commutes with adjunction preserving squares",
+   "results": "CategoryTheory.conjugateEquiv_comp and general adjunction-square lifting results; no coefficient-system geometric comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match; abstract mate algebra does not identify the prescribed geometric comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of an adjunction mate commutes with functors preserving the unit and counit",
+   "results": "CategoryTheory.mateEquiv, unit_mateEquiv, mateEquiv_counit, iterated_mateEquiv_conjugateEquiv in Mathlib.CategoryTheory.Adjunction.Mates.",
+   "date": "2026-10-27",
+   "verdict": "Generic algebra only; the actual normalized derived operation comparisons are project-specific."
+  },
+  {
+   "tool": "grep",
+   "query": "rg conjugate.*comp|mate.*comp in Mathlib/CategoryTheory/Adjunction; rg evaluation, canonicalBridge and pushComp in lean/Sheaf/SixFunctors and lean/WeilConjectures",
+   "results": "Mathlib conjugateEquiv_comp, mateEquiv_conjugateEquiv_vcomp; existing system unit/counit evaluations and semilinear gamma_evaluation. No declaration already compares the recorded fixed-scalar coordinates. Blueprint search for finite evaluation has no matching node.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate; use existing evaluation and geometric model normalization declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SystemRefinementFiniteCoordinates",
+  "date": "2026-10-27",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"the projection transformation of [def-exchange-projection] is a composite of precisely these tensor and counit maps, hence is equivariant as well\": the Frobenius-transported compactification differs from the chosen one, so the two projection composites must be compared through the refinement comparison. Individual-arrow integral system realization of these tensor and counit maps, before their compactification comparison square is deduced. The one-input support/refinement part of the individual-arrow normalization, independent of tensor and projection. Finite scalar coordinates of the one-input support/refinement argument. Operation-level finite-evaluation factor, before the two factors are pasted.",
+   "via": [
+    "lem-sf-system-refinement-finite-coordinates",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison",
+    "lem-sf-integral-support-reduction-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SystemFiniteRefinementMateCoordinates",
+  "file": "lean/Sheaf/Paper/SystemFiniteRefinementMateCoordinates.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.FiniteCoordinates.refinementMate",
+  "statement": "theorem refinementMate (D : FiniteFieldDatum.{u}) (o : Operations l E)\n    (z : Realizations l E D o) (m : ℕ)\n    {X Y : Spaces D} {f : X ⟶ Y} [QuasiCompact f.hom.left]\n    (c d : Compactification f.hom.left) (r : c.Refinement d)\n    (M : System l E X.obj.left) :\n    let A := ULift.{u + 1} (Padic.coefficientExtensionRing l E (m + 1))\n    let RW := sfIntrinsicDerivedEquivalence d.Z (Padic.coefficientExtensionRing l E (m + 1))\n    haveI := c.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left)\n    haveI := d.quasiCompact_openImmersion (inferInstance : QuasiCompact f.hom.left)\n    (coefficientSequenceDerivedEvaluation l E d.Z m).map\n        ((Operations.shriek l E o d.i).map\n          ((z.canonicalBridge.push l E (𝟙 X.obj.left) ≪≫\n            SemilinearProperOpen.sId (scalarRings l E) (scalarTransitions l E)\n              X.obj.left).inv.app M) ≫\n          (z.properOpen.gamma c.i (𝟙 X.obj.left) r.hom d.i\n            (r.i_hom.trans (Category.id_comp _).symm)).app M) ≫\n      (push l E o m r.hom ((Operations.shriek l E o c.i).obj M)).hom ≫\n      RW.functor.map ((ProperOpenPush A r.hom).map (fixedShriek l E o m c.i M).hom) =\n    (shriek l E o m d.i M).hom ≫\n      RW.functor.map\n        ((ProperOpenShriek A d.i).map\n          (((ordinary D A).sId X).inv.app (input l E m X.obj.left M)) ≫\n          (properOpenMate A c.i (𝟙 X.obj.left) r.hom d.i\n            (r.i_hom.trans (Category.id_comp _).symm)).app\n              (input l E m X.obj.left M))",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T103520-L-1095809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261027T103520-L-1095809",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

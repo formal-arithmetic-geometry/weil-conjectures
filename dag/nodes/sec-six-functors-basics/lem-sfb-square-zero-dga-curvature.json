@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-square-zero-dga-curvature",
+ "kind": "statement",
+ "title": "Curvature derivation from a lifted differential across a cyclic square-zero extension",
+ "statement": "Let $q:R'\\twoheadrightarrow R$ be a surjection of commutative rings with kernel $(f)$ and $f^2=0$. Regard $(f)$ as an $R$-module by lifts and put $I=\\operatorname{Ann}_R(f)$. Let $(A,d,\\gamma)$ be a divided-power differential graded $R$-algebra [def-sfb-divided-power-dga] whose underlying graded divided-power algebra is polynomial, with finitely many variables in each degree. There exist a graded divided-power polynomial $R'$-algebra $A'$ with the same generators and a reduction $\\rho:A'\\twoheadrightarrow A$, identifying $A'\\otimes_{R'}R$ with $A$, and an $R'$-linear operator $D:A'_i\\to A'_{i-1}$ reducing to $d$, satisfying the signed Leibniz rule and $D(\\gamma_n(x))=D(x)\\gamma_{n-1}(x)$ for positive even-degree $x$ and $n\\geq1$; $D^2=0$ is not required. For every such choice, $B=A/IA$ with the induced differential and divided powers is a divided-power differential graded $R/I$-algebra. Multiplication by $f$ identifies the $R$-module $B$ with $fA'$: explicitly, $\\iota:B\\xrightarrow{\\sim}fA'$ sends the class of $\\rho(a')$ to $fa'$. There is a unique $R/I$-linear map $\\theta:B_i\\to B_{i-2}$ with $D^2(a')=\\iota(\\theta(\\overline{\\rho(a')}))$ for every $a'\\in A'$. It satisfies $\\theta(xy)=\\theta(x)y+x\\theta(y)$, $\\theta d=d\\theta$, and $\\theta(\\gamma_n(x))=\\theta(x)\\gamma_{n-1}(x)$ for positive even-degree homogeneous $x\\in B$ and $n\\geq1$.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PS (lemma-get-derivation), statement and proof, including the lifting and curvature formula; Tag 09PL (lemma-base-change-div) for the quotient divided powers"
+ },
+ "stmt_deps": [
+  "def-sfb-divided-power-dga"
+ ],
+ "proof": [
+  {
+   "text": "Starting with the degree-zero polynomial $R'$-algebra, use [lem-sfb-divided-power-variable-adjunction] successively in positive degrees, with the specified generators of $A$, and take the union. This gives a graded divided-power polynomial algebra $A'$. The free left-module descriptions at each adjunction give the ordered monomial $R'$-basis, with ordinary degree-zero powers, odd exponents zero or one and even divided-power symbols. Reducing its coefficients gives the same construction over $R$, hence $\\rho:A'\\twoheadrightarrow A$ with kernel $fA'$ and $A'\\otimes_{R'}R\\cong A$. The multiplication has the same integer binomial coefficients and signs before and after reduction, and the unique divided powers at each adjunction also agree.",
+   "uses": [
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), first sentence; the free polynomial construction in Tags 09PH/09PI."
+   }
+  },
+  {
+   "text": "For each positive-degree generator $j$, choose a homogeneous lift $v_j\\in A'_{\\deg j-1}$ of $d(j)$; set $v_j=0$ for the degree-zero generators. The odd-derivation assertion of [lem-sfb-free-graded-pd-odd-derivations] supplies $D$ with these values and both required rules. Since $D(fa')=fD(a')$, it descends to $A$. The descended operator and $d$ agree on generators and satisfy the same rules, so the uniqueness assertion over $R$ makes them equal. The construction never requires $D(v_j)=0$, and therefore does not assert $D^2=0$.",
+   "uses": [
+    "lem-sfb-free-graded-pd-odd-derivations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), first paragraph, lifting properties (1),(2) and the one-variable hint."
+   }
+  },
+  {
+   "text": "For any such lift, $d(IA)\\subset IA$ by $R$-linearity. The divided powers also descend: if $u=\\sum_k r_k u_k\\in IA$ is of positive even degree with $r_k\\in I$, then every summand in the divided-power addition formula for $\\gamma_n(u)$, $n>0$, contains a positive power of some $r_k$, by $\\gamma_b(r_ku_k)=r_k^b\\gamma_b(u_k)$. Thus it lies in $IA$. Applying the same addition formula to $x+u$ proves independence of the representative. All axioms and the differential compatibility in [def-sfb-divided-power-dga] descend along the quotient. Hence $B=A/IA$ is the claimed divided-power DGA, without needing flatness of $R/I$.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PL (lemma-base-change-div), quotient case, written directly using Tag 09PG (definition-divided-powers-graded)."
+   }
+  },
+  {
+   "text": "The $R$-module map $R\\to(f)$ sending $r$ to $f\\widetilde r$ is well defined because $f^2=0$; its kernel is exactly $I$ and its image is $(f)$. Thus $R/I\\cong(f)$. Apply this coefficientwise in the monomial bases supplied by the free-module descriptions of [lem-sfb-divided-power-variable-adjunction] and step 1: $\\iota:B\\to fA'$ is a degree-preserving $R$-linear bijection, $\\iota(\\overline{\\rho(a')})=fa'$. For $b\\in B$ one also has $a'\\iota(b)=\\iota(\\overline{\\rho(a')}b)$ and $D\\iota(b)=\\iota(db)$, directly from multiplication and $R'$-linearity of $D$. These identities hold for every graded polynomial lift with the same generators.",
+   "uses": [
+    "lem-sfb-divided-power-variable-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof: the identification $fA'\\cong A/IA$."
+   }
+  },
+  {
+   "text": "Reduction gives $\\rho D^2=d^2\\rho=0$, so $D^2(A')\\subset fA'$. Also $D^2(fa')=fD^2(a')=0$, since $f^2=0$. Therefore $D^2$ induces an $R$-linear degree $-2$ map $A\\to fA'$. Every $r\\in I$ annihilates the latter module, so this map kills $IA$ and factors through $B$. Composing with $\\iota^{-1}$ defines the unique $R/I$-linear $\\theta$ with the required formula; uniqueness follows because $A'\\to B$ is surjective and $\\iota$ is injective.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), proof: factorization of the squared operator."
+   }
+  },
+  {
+   "text": "For homogeneous $a',b'$ with $\\deg a'=i$, expanding the signed Leibniz rule twice gives $D^2(a'b')=D^2(a')b'+a'D^2(b')$: the two terms $D(a')D(b')$ have coefficients $(-1)^{i-1}$ and $(-1)^i$ and cancel. If $i=0$, $D(a')=0$ and the same identity holds. Substitute the defining formula for $D^2$ and use $a'\\iota(b)=\\iota(\\overline{\\rho(a')}b)$ from step 4. Injectivity of $\\iota$ gives $\\theta(xy)=\\theta(x)y+x\\theta(y)$ on $B$; additivity handles nonhomogeneous elements.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), verification of derivation property (2)."
+   }
+  },
+  {
+   "text": "Composition of operators is associative, so $D^2D=DD^2$. For $x=\\overline{\\rho(a')}$ this equality and step 4 give $\\iota(\\theta(dx))=D^2(Da')=D(D^2a')=D\\iota(\\theta x)=\\iota(d\\theta x)$. Injectivity of $\\iota$ yields $\\theta d=d\\theta$.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), verification of derivation property (3)."
+   }
+  },
+  {
+   "text": "Let $x\\in B$ be homogeneous of positive even degree and choose a homogeneous lift $a'\\in A'$. For $n\\geq2$, the divided-power rule and signed Leibniz rule give $D^2\\gamma_n(a')=D^2(a')\\gamma_{n-1}(a')-(D(a'))^2\\gamma_{n-2}(a')$. The last term is zero: $D(a')$ has odd degree and strict graded commutativity in [def-sfb-divided-power-dga] gives its square zero, even in characteristic two. For $n=1$ the same result follows from $\\gamma_1(a')=a'$ and $\\gamma_0(a')=1$. Substituting the defining formula for $D^2$, the quotient compatibility of divided powers, and step 4, then cancelling $\\iota$, gives $\\theta(\\gamma_n(x))=\\theta(x)\\gamma_{n-1}(x)$.",
+   "uses": [
+    "def-sfb-divided-power-dga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PS (lemma-get-derivation), verification of derivation property (4); Tag 09PG (definition-divided-powers-graded), odd squares."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-divided-power-variable-adjunction",
+  "lem-sfb-free-graded-pd-odd-derivations",
+  "def-sfb-divided-power-dga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PS (lemma-get-derivation), with its omitted free-generator operator construction isolated and its immediate derivation checks expanded; Tag 09PL quotient case."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A square zero cyclic ring extension gives a degree minus two divided power derivation by squaring a lifted differential",
+   "results": {
+    "t": "2026-10-23T22:42:55Z",
+    "tool": "leanfinder",
+    "query": "A square zero cyclic ring extension gives a degree minus two divided power derivation by squaring a lifted differential",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "derivationToSquareZeroOfLift",
+     "liftOfDerivationToSquareZero",
+     "derivationToSquareZeroOfLift_apply",
+     "derivationToSquareZeroEquivLift",
+     "derivationToSquareZeroEquivLift_apply_coe_apply",
+     "DividedPowers.OfSquareZero.dividedPowers",
+     "liftOfDerivationToSquareZero_apply",
+     "liftOfDerivationToSquareZero_mk_apply"
+    ],
+    "digest": "c9a77fded560ddcf"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroOfLift (Derivation/ToSquareZero.lean:48, read) concerns the difference of ordinary algebra maps and a degree-zero derivation into an ideal. It neither lifts a DGA differential nor divides its square by a kernel generator."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Derivation\", \"DividedPowers\"",
+   "results": {
+    "t": "2026-10-23T22:42:52Z",
+    "tool": "loogle",
+    "query": "\"Derivation\", \"DividedPowers\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroOfLift (Derivation/ToSquareZero.lean:48, read) concerns the difference of ordinary algebra maps and a degree-zero derivation into an ideal. It neither lifts a DGA differential nor divides its square by a kernel generator."
+  },
+  {
+   "tool": "grep",
+   "query": "curvature|lift.*differential.*square|square.*differential.*lift",
+   "results": {
+    "t": "2026-10-23T22:42:51Z",
+    "tool": "grep",
+    "query": "curvature|lift.*differential.*square|square.*differential.*lift",
+    "sub": "Algebra/Homology",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroOfLift (Derivation/ToSquareZero.lean:48, read) concerns the difference of ordinary algebra maps and a degree-zero derivation into an ideal. It neither lifts a DGA differential nor divides its square by a kernel generator."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Curvature derivation obtained by lifting a differential across a square zero ring extension",
+   "results": {
+    "t": "2026-10-23T22:42:52Z",
+    "tool": "leansearch",
+    "query": "Curvature derivation obtained by lifting a differential across a square zero ring extension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "liftOfDerivationToSquareZero",
+     "derivationToSquareZeroOfLift",
+     "liftOfDerivationToSquareZero_apply",
+     "derivationToSquareZeroOfLift_apply",
+     "derivationOfSectionOfKerSqZero_apply_coe",
+     "derivationToSquareZeroEquivLift_apply_coe_apply",
+     "derivationToSquareZeroEquivLift",
+     "derivationOfSectionOfKerSqZero"
+    ],
+    "digest": "60202f51e5244fc9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroOfLift (Derivation/ToSquareZero.lean:48, read) concerns the difference of ordinary algebra maps and a degree-zero derivation into an ideal. It neither lifts a DGA differential nor divides its square by a kernel generator."
+  },
+  {
+   "tool": "grep",
+   "query": "derivationToSquareZeroOfLift",
+   "results": {
+    "t": "2026-10-23T22:44:00Z",
+    "tool": "grep",
+    "query": "derivationToSquareZeroOfLift",
+    "sub": "RingTheory/Derivation",
+    "ok": true,
+    "n_hits": 5,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Derivation/ToSquareZero.lean",
+     "Mathlib/RingTheory/Derivation/ToSquareZero.lean",
+     "Mathlib/RingTheory/Derivation/ToSquareZero.lean",
+     "Mathlib/RingTheory/Derivation/ToSquareZero.lean",
+     "Mathlib/RingTheory/Derivation/ToSquareZero.lean"
+    ],
+    "digest": "8943cda592905b64"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: derivationToSquareZeroOfLift (Derivation/ToSquareZero.lean:48, read) concerns the difference of ordinary algebra maps and a degree-zero derivation into an ideal. It neither lifts a DGA differential nor divides its square by a kernel generator."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-square-zero-relation-tor-obstruction",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the local-ring comparison below the etale-chart comparison on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; specifically dpa.tex Tag 09PS proof, first paragraph: constructing the polynomial lift and proceeding one variable at a time to lift the operator. The remaining steps realize the identification $fA'\\cong A/IA$, factorization of $D^2$, and the four derivation properties of 09PS.",
+   "via": [
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-square-zero-dga-curvature",
+  "worker": "stage1",
+  "summary": "Checked Stacks 09PS and 09PL; reused the newly live variable-adjunction lemma for free polynomial lifts and isolated only the omitted arbitrary odd-operator extension as one generic statement-only node. Wrote the coefficient annihilator calculation, quotient divided powers, and all curvature identities explicitly. Item statement unchanged.",
+  "blueprint": "Auxiliary commutative algebra below paragraph (3) of det-thm-sf-ctf-stability-direct-images, via the inherited local complete-intersection comparison chain. Steps 1-2 realize the one-variable lift in 09PS; steps 3-5 give its quotient and factorization; steps 6-8 expand its final immediate checks. No imported blueprint node states this auxiliary algebra lemma; ancestor command returns null."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-285c8ae32",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-285c8ae32 (reviewer sub-agent of L); spot-checked: I read the item, its eight steps and the new node lem-sfb-free-graded-pd-odd-derivations in full, against dpa.tex 09PG/09PH/09PI/09PJ/09PL/09PM/09PS/09PT and the full statements of the cited nodes def-sfb-divided-power-dga and lem-sfb-divided-power-variable-adjunction (1)-(4). The item statement and stmt_deps are unchanged; the item is still unsplit on live and side-live and has no repair note. Every step checks. Step 1: iterated adjunction gives the monomial basis; ker ρ = fA', and ρ commutes with γ. Step 2: D descends, and the new node's uniqueness over S=R gives D mod f = d. Step 3: γ_n(IA) ⊂ IA via γ_b(r u) = r^b γ_b(u) and the sum formula (the quotient case of 09PL). Step 4: R/Ann_R(f) ≅ (f) by r ↦ f r̃, applied coefficientwise, plus the two ι identities. Step 5: D² factors through B, and I kills fA'. Step 6: the cross terms cancel. Step 7: D²D = DD². Step 8: (Da')² = 0 by strict commutativity, with n=1 handled separately. Edge cases f=0, degree-0 A, and Z/4→F_2 with θ(t)=1 behave correctly. The new node (Γ-derivation extension from arbitrary generator values, no δ²=0) is true: I checked the binomial compatibility of δ(T^[a]) = vT^[a-1], the scalar rule, and odd-product cases. It is self-contained, statement-only, strictly smaller than the item, and not a duplicate: a DAG grep for 09PM/09PS/09PL and odd/divided-power derivations found nothing stating it, and 09PM needs a closed value. Mathlib searches cover all three kinds. The worker's 09PI coefficient source error is genuine and is already corrected in the adjunction node. There is no SGA, every cited node is in the item's unit (no tool_uses), and proof_deps equals the union of the uses. No changes were made."
+ }
+}

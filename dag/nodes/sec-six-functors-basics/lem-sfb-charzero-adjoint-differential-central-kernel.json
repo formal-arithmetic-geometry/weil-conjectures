@@ -1,0 +1,322 @@
+{
+ "id": "lem-sfb-charzero-adjoint-differential-central-kernel",
+ "kind": "statement",
+ "title": "Adjoint differential and centrality of the adjoint kernel in characteristic zero",
+ "statement": "Let $k$ be a field of characteristic zero [def-weil-field], and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. The tangent space $\\mathfrak g=T_{G/k,e}$ [def-sc-scheme-tangent-space], with the bracket induced by group commutators, is a finite-dimensional $k$-Lie algebra [def-wf-lie-algebra]. Let $\\operatorname{Ad}:G\\to\\operatorname{GL}(\\mathfrak g)$ be the representation given by differentiating conjugation, where $\\operatorname{GL}(\\mathfrak g)(A)=\\operatorname{Aut}_A(\\mathfrak g\\otimes_k A)$ for a commutative $k$-algebra $A$. Identifying the tangent space of this general linear group with $\\operatorname{End}_k(\\mathfrak g)$, one has $d\\operatorname{Ad}_e(X)(Y)=[X,Y]$. The scheme-theoretic kernel $N=\\ker\\operatorname{Ad}$ is the centre $Z(G)$ [lem-sfb-affine-group-centre-base-change]. In particular, for every commutative $k$-algebra $A$, every $n\\in N(A)$ and every $g\\in G(A)$, one has $ng=gn$. The assertion includes nonreduced $A$ and the case $\\mathfrak g=0$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 10.23 and Remark 10.24, printed pp.193-194 (Lie bracket and differential of Ad); Proposition 10.15, pp.190-191, Proposition 10.31, p.196, and Cartier Theorem 3.23, p.71, applied over an algebraic closure to centralizers of elements in ker Ad. Proposition 1.92, pp.33-34, and the subsequent base-change paragraph give the scheme centre. The characteristic-zero kernel equality is an agent-stated corollary, not Proposition 10.33 alone."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-scheme-tangent-space",
+  "def-wf-lie-algebra",
+  "lem-sfb-affine-group-centre-base-change",
+  "def-wf-lie-algebra-derivation",
+  "def-sc-general-linear-group",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=k[G]$, with comultiplication $\\Delta$, counit $\\varepsilon$ and antipode $S$ supplied by [lem-sfb-affine-group-coordinate-hopf], and $I=\\ker\\varepsilon$. By [lem-pc-affine-finite-type-algebra], choose algebra generators $c_1,\\ldots,c_r$ of $C$. Polynomial expansion modulo $I^2$ shows that the classes of $c_i-\\varepsilon(c_i)$ span $I/I^2$. The derivation identification in [lem-sfb-bialgebra-distribution-tangent-calculus] identifies $\\mathfrak g$ with $(I/I^2)^\\vee$; the Lie structure and finite dimensionality are also stated in [lem-sfb-affine-group-lie-tangent-calculus]. For any commutative $k$-algebra $A$, an infinitesimal point is a map $C\\to A[t]/t^2$, $c\\mapsto\\varepsilon(c)+tD(c)$. Multiplicativity is precisely $D(cd)=\\varepsilon(c)D(d)+D(c)\\varepsilon(d)$, equivalently $D$ factors linearly through $I/I^2$. A finite basis of $I/I^2$ therefore identifies these points with $\\operatorname{Hom}_k(I/I^2,A)=\\mathfrak g\\otimes_k A$, naturally in $A$. The product corresponds to addition: evaluating $\\Delta$ gives $\\varepsilon(c)+t(D(c)+E(c))$, by its two counit identities. Indeed, multiplying $(\\varepsilon+uX)*(\\varepsilon+vY)*(\\varepsilon-uX)*(\\varepsilon-vY)$ with $u^2=v^2=0$ gives $\\varepsilon+uv(X*Y-Y*X)$. Thus the bracket of mixed commutators is the convolution bracket in the cited distribution lemma.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-pc-affine-finite-type-algebra",
+    "lem-sfb-bialgebra-distribution-tangent-calculus",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.6, 10.18--10.19, printed pp.187--192; 10.28--10.29, pp.195--196"
+   }
+  },
+  {
+   "text": "Conjugation by $a\\in G(A)$ acts on the infinitesimal points of step 1. On the corresponding derivations its formula is\n$$(\\operatorname{Ad}(a)X)(c)=\\sum a(c_{(1)})X(c_{(2)})a(S(c_{(3)})),$$\nwhere the triple tensor is $(\\Delta\\otimes1)\\Delta(c)$ [lem-sfb-affine-group-coordinate-hopf]. Conjugation fixes the identity, so the formula preserves the counit derivation rule, and it is $A$-linear in $X$. Conjugation by $a^{-1}$ is its inverse. In a finite basis of $\\mathfrak g$, apply this formula to the universal point $C\\to C$: its matrix entries belong to $C$, and the inverse matrix also has entries in $C$. Their determinant is thus a unit. The affine morphism correspondence [lem-weil-pbc-morphism-into-affine-scheme] gives a morphism $G\\to\\operatorname{GL}(\\mathfrak g)$. Composition of conjugations gives its group law on every algebra, so it is the claimed representation. For $a=\\varepsilon+tX$, its convolution inverse is $\\varepsilon-tX$; hence its action on $Y$ is\n$$(\\varepsilon+tX)*Y*(\\varepsilon-tX)=Y+t(X*Y-Y*X)=Y+t[X,Y].$$\nThe last equality is exactly the bracket formula of [lem-sfb-bialgebra-distribution-tangent-calculus]. The characterization of the tangent map to a general linear group in [lem-sfb-affine-group-lie-tangent-calculus] now gives $d\\operatorname{Ad}_e(X)(Y)=[X,Y]$.",
+   "uses": [
+    "lem-sfb-affine-group-coordinate-hopf",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-sfb-bialgebra-distribution-tangent-calculus",
+    "lem-sfb-affine-group-lie-tangent-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.20--10.23 and Remark 10.24, printed pp.192--194; 10.29, p.196"
+   }
+  },
+  {
+   "text": "The kernel $N$ is a closed subgroup by [lem-sc-kernel-subgroup]. Explicitly its ideal in $C$ is generated by the entries of the universal matrix $\\operatorname{Ad}-1$; thus its coordinate algebra is finitely generated, being a quotient of $C$. This description gives $N(A)=\\ker\\operatorname{Ad}(A)$ for every $A$, and after any field extension the same equations define the corresponding kernel. Let $Z=Z(G)$ be the closed subgroup of [lem-sfb-affine-group-centre-base-change]. If $z\\in Z(A)$, its image commutes with every point of $G(A[t]/t^2)$, by that node's universal centre condition. In particular it fixes every infinitesimal point in step 1; hence $\\operatorname{Ad}(z)=1$ on $\\mathfrak g\\otimes_k A$. This proves $Z\\subseteq N$ on all algebras. The ideal description of a closed immersion [def-weil-closed-immersion] makes these inclusions inclusions of closed subgroup schemes.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-affine-group-centre-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "10.33, displayed inclusion (64), printed p.197; Proposition 1.92, pp.33--34"
+   }
+  },
+  {
+   "text": "Fix any field extension $K/k$ and any $n\\in N(K)$. The identity section and [lem-sbc-connected-rational-point-geometrically-connected] show that $G_K$ is connected. Its coordinate algebra is finitely generated by the images of the generators of $C$. It is smooth by [lem-sfb-char-zero-affine-group-smooth]. By the natural tangent identification of [lem-sfb-affine-group-lie-tangent-calculus] and the formula of step 2, the differential of conjugation $c_n$ on $G_K$ is $\\operatorname{Ad}(n)=1$. Form its fixed subscheme $H\\subseteq G_K$: in $B=K[G_K]$ it is cut out by $c_n^*(b)-b$ for all $b\\in B$ [def-weil-closed-immersion]. On every $K$-algebra its points are exactly the elements commuting with $n$, so they form a subgroup [def-sc-group-scheme-subgroup]. The quotient of $B$ is finitely generated. A tangent point $t_X$ belongs to $H$ exactly when $c_n(t_X)=t_X$, equivalently $\\operatorname{Ad}(n)X=X$. Thus $\\operatorname{Lie}(H)=\\operatorname{Lie}(G_K)$. Apply [lem-sfb-charzero-lie-detects-factorization] to $f=\\mathrm{id}_{G_K}$ and $H\\hookrightarrow G_K$. All its hypotheses hold; it imposes no smoothness condition on $H$. The identity factors through $H$, so $H=G_K$. In particular $n$ commutes with every element of $G(K)$. This argument works for every extension field, not just an algebraic closure.",
+   "uses": [
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-char-zero-affine-group-smooth",
+    "lem-sfb-affine-group-lie-tangent-calculus",
+    "def-weil-closed-immersion",
+    "def-sc-group-scheme-subgroup",
+    "lem-sfb-charzero-lie-detects-factorization",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 10.15, pp.190--191 and Cartier Theorem 3.23, p.71; centre argument following 1.92, pp.33--34"
+   }
+  },
+  {
+   "text": "Consider the group scheme $P=N\\times_kG$, whose coordinate algebra is the tensor product of two finitely generated $k$-algebras, hence is finitely generated by their two finite sets of generators. It is an affine finite-type group under componentwise multiplication [def-sc-group-scheme]. By [lem-sfb-char-zero-affine-group-smooth] it is smooth, and [sbc-lem-smooth-geometrically-reduced] makes $P$ reduced (the unique fibre over $\\operatorname{Spec}k$ is $P$). Let $q:P\\to G$ be $q(n,g)=ngn^{-1}g^{-1}$. For each scheme point $p$ of $P$, its canonical residue-field point is a pair $(n,g)$ over $K=\\kappa(p)$; step 4 says $q(n,g)=e$. Therefore the set-theoretic image of $q$ is contained in the identity section $e:\\operatorname{Spec}k\\hookrightarrow G$, which is closed: on $C$ it is the quotient $C\\twoheadrightarrow C/I=k$ [def-weil-closed-immersion]. Apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] to $q$, this closed immersion and the reduced source $P$. It yields $q=e\\circ(P\\to\\operatorname{Spec}k)$ as morphisms. Thus for every algebra $A$, $n\\in N(A)$ and $g\\in G(A)$ commute, and the same holds after every $A$-algebra extension. The universal centre condition of [lem-sfb-affine-group-centre-base-change] gives $N\\subseteq Z(G)$. Together with step 3 this proves the scheme-theoretic equality. No argument required $A$ reduced or $\\dim\\mathfrak g>0$: in dimension zero the matrices in step 2 are empty with determinant $1$, and the rest of the argument is unchanged.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sfb-char-zero-affine-group-smooth",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-field-valued-points",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 1.92 and its base-change paragraph, pp.33--34; Cartier Theorem 3.23, p.71; agent residue-field argument for scheme-theoretic centrality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-group-coordinate-hopf",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-sfb-bialgebra-distribution-tangent-calculus",
+  "lem-sfb-affine-group-lie-tangent-calculus",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-affine-group-centre-base-change",
+  "def-weil-closed-immersion",
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sfb-char-zero-affine-group-smooth",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-charzero-lie-detects-factorization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sc-group-scheme",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-field-valued-points",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "10.18--10.24, pp.191--194 and 10.29, p.196 for Ad; 10.15, pp.190--191 and 3.23, p.71 for centralizer rigidity; agent reduced-source argument upgrading field centrality to scheme centrality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of the adjoint representation of a connected algebraic group in characteristic zero equals its centre",
+   "results": "{\"t\": \"2026-10-24T08:32:20Z\", \"tool\": \"leanfinder\", \"query\": \"The kernel of the adjoint representation of a connected algebraic group in characteristic zero equals its centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieAlgebra.self_module_ker_eq_center\", \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.isFaithful_self_iff\", \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"LieDerivation.injective_ad_of_center_eq_bot\", \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"LieAlgebra.center_eq_bot\"], \"digest\": \"f66fc01e19f27f3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center is a Lie-algebra kernel, not the kernel of the group-scheme representation Ad. The AlgebraicGeometry grep finds only categorical adjunctions, no group-scheme theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential of conjugation adjoint representation is Lie bracket and group adjoint kernel is central",
+   "results": "{\"t\": \"2026-10-24T08:32:21Z\", \"tool\": \"leanfinder\", \"query\": \"Differential of conjugation adjoint representation is Lie bracket and group adjoint kernel is central\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieAlgebra.self_module_ker_eq_center\", \"LieAlgebra.ad_ker_eq_self_module_ker\", \"LieAlgebra.conj_ad_apply\", \"LieDerivation.ad_apply_apply\", \"LieAlgebra.ad_apply\", \"LieDerivation.IsKilling.ad_mem_ker_killingForm_ad_range_of_mem_orthogonal\", \"LieDerivation.mem_ad_idealRange_iff\"], \"digest\": \"5a32bf136f8c4e5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center is a Lie-algebra kernel, not the kernel of the group-scheme representation Ad. The AlgebraicGeometry grep finds only categorical adjunctions, no group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.ad",
+   "results": "{\"t\": \"2026-10-24T08:32:17Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.ad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.ad\", \"LieAlgebra.ad_apply\", \"LieAlgebra.ad_eq_lmul_left_sub_lmul_right\", \"LieModule.toEnd_lie\", \"LieAlgebra.ad_lie\", \"LieModule.toEnd_pow_lie\", \"LieAlgebra.ad_pow_lie\", \"LieAlgebra.conj_ad_apply\"], \"digest\": \"e21ad1d959ff768c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center is a Lie-algebra kernel, not the kernel of the group-scheme representation Ad. The AlgebraicGeometry grep finds only categorical adjunctions, no group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint|conjugation|Lie.*center",
+   "results": "{\"t\": \"2026-10-24T08:32:58Z\", \"tool\": \"grep\", \"query\": \"adjoint|conjugation|Lie.*center\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\", \"Mathlib/AlgebraicGeometry/Modules/Sheaf.lean\"], \"digest\": \"7dd10c28c5f30d87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center is a Lie-algebra kernel, not the kernel of the group-scheme representation Ad. The AlgebraicGeometry grep finds only categorical adjunctions, no group-scheme theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Characteristic zero algebraic group adjoint kernel centre",
+   "results": "{\"t\": \"2026-10-24T08:32:17Z\", \"tool\": \"leansearch\", \"query\": \"Characteristic zero algebraic group adjoint kernel centre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"AddSubgroup.centerCharacteristic\", \"Subgroup.centerCharacteristic\", \"LieAlgebra.ad_ker_eq_self_module_ker\", \"Set.center_units_subset\", \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"LieAlgebra.self_module_ker_eq_center\", \"LieDerivation.injective_ad_of_center_eq_bot\"], \"digest\": \"5a67d88d96d94c7c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: LieDerivation.ad_ker_eq_center is a Lie-algebra kernel, not the kernel of the group-scheme representation Ad. The AlgebraicGeometry grep finds only categorical adjunctions, no group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "adjoint.*representation|ker.*Ad|conjugation",
+   "results": "{\"t\": \"2026-10-24T09:15:50Z\", \"tool\": \"grep\", \"query\": \"adjoint.*representation|ker.*Ad|conjugation\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra ad, abstract conjugation actions, or analytic derivatives; none states the scheme adjoint differential together with its scheme kernel."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Differential of conjugation representation and central kernel of algebraic groups",
+   "results": "{\"t\": \"2026-10-24T09:15:50Z\", \"tool\": \"leansearch\", \"query\": \"Differential of conjugation representation and central kernel of algebraic groups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ConjAct.instGroup\", \"LinearMap.conjugate\", \"ConjAct.instMulDistribMulAction\", \"DifferentiableAt.conj_conj\", \"HasDerivAt.conj_conj\", \"RCLike.conjAe\", \"LieAlgebra.conj_ad_apply\", \"ConjAct.fixedPoints_eq_center\"], \"digest\": \"68950f9aa4dc2ef6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra ad, abstract conjugation actions, or analytic derivatives; none states the scheme adjoint differential together with its scheme kernel."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.ad",
+   "results": "{\"t\": \"2026-10-24T09:15:50Z\", \"tool\": \"loogle\", \"query\": \"LieAlgebra.ad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.ad\", \"LieAlgebra.ad_apply\", \"LieAlgebra.ad_eq_lmul_left_sub_lmul_right\", \"LieModule.toEnd_lie\", \"LieAlgebra.ad_lie\", \"LieModule.toEnd_pow_lie\", \"LieAlgebra.ad_pow_lie\", \"LieAlgebra.conj_ad_apply\"], \"digest\": \"e21ad1d959ff768c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra ad, abstract conjugation actions, or analytic derivatives; none states the scheme adjoint differential together with its scheme kernel."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Differential of the adjoint representation of a connected algebraic group is the Lie bracket and its kernel equals its center in characteristic zero",
+   "results": "{\"t\": \"2026-10-24T09:15:54Z\", \"tool\": \"leanfinder\", \"query\": \"Differential of the adjoint representation of a connected algebraic group is the Lie bracket and its kernel equals its center in characteristic zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieDerivation.ad_ker_eq_center\", \"LieAlgebra.self_module_ker_eq_center\", \"LieAlgebra.ad_ker_eq_self_module_ker\", \"LieDerivation.injective_ad_of_center_eq_bot\", \"LieAlgebra.ad_ker_eq_bot_of_hasTrivialRadical\", \"LieModule.lowerCentralSeries_one_inf_center_le_ker_traceForm\", \"LieDerivation.IsKilling.ad_apply_eq_zero_iff\", \"LieDerivation.IsKilling.instIsKilling_range_ad\"], \"digest\": \"6f937e80efa49ce7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie-algebra ad, abstract conjugation actions, or analytic derivatives; none states the scheme adjoint differential together with its scheme kernel."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-charzero-ad-nilpotence-group-criterion",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Proposition 17.80(a),(b) and its proof, printed p.378: iterate the infinitesimal isogenies supplied by Theorem 11.38 (printed p.223); the resulting isogeny is finite faithfully flat and radicial. Isogenies have equal source and target dimensions. This is the reduction used in Proposition 17.81, p.379. Supporting input in Q77 split: Proposition 17.80 proof, printed p.378, first reduction paragraph; Corollary 17.77, p.377 (central semisimple vectors are fixed by the group). The scalar-extension formulation makes explicit the geometric subspace needed in that reduction. Supporting prerequisite: Proposition 17.80 proof, printed p.378, characteristic-zero exclusion, read with additive Jordan decomposition (17.74, p.377), Proposition 10.15 (p.190), and descending central series (6.38, p.133). This is an agent-stated intermediate criterion implicit in the exclusion, not a separately numbered assertion in Milne. Springer 1998, 13.3.5, cited there for details, is WANTED. Supporting step: Characteristic-zero exclusion in Milne 17.80: differential of Ad and its central kernel, using 10.23 and characteristic-zero centralizer rigidity.",
+   "via": [
+    "lem-sfb-charzero-ad-nilpotence-group-criterion",
+    "lem-sfb-central-semisimple-restricted-subalgebra",
+    "lem-sfb-infinitesimal-isogeny-lie-reduction",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-charzero-adjoint-differential-central-kernel",
+  "worker": "stage1",
+  "summary": "Constructed Ad on every commutative coefficient algebra, computed its differential by convolution, and proved its kernel is the scheme centre using centralizer rigidity over every extension field followed by reduced-source closed-factorization on N times G. Reused all substantive inputs; no new nodes and no statement correction.",
+  "blueprint": "Supporting characteristic-zero exclusion in Milne 17.80, within the inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain. The current latest blueprint was read; no unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Applies the generic connected pointed-scheme field-extension theorem to the identity section; this unit has no replacement general connectedness theorem."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic representability and closed-subgroup description of a group homomorphism kernel."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic reducedness of the single fibre of a smooth group over a field."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic closed-factorization theorem for a reduced source upgrades residue-field commutation to a scheme identity."
+   },
+   {
+    "node": "lem-pc-affine-finite-type-algebra",
+    "why": "Generic passage from an affine finite-type scheme to its finitely generated coordinate algebra."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine tensor-product formula for scalar extension and N times G."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected",
+  "lem-sc-kernel-subgroup",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-pc-affine-finite-type-algebra",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-45f82b104",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-45f82b104 (reviewer sub-agent of L); spot-checked: Read the item, all five steps and every cited statement. There are no new nodes, and the statement and stmt_deps are unchanged from live, where the item is still unsplit. Milne iAG p.197, 10.33 (64) gives only Ker Ad ⊇ Z, so the equality is an agent-written corollary, honestly marked proof_origin=agent. Milne 10.15 (Lie(H)=Lie(G) gives H=G), 1.92 (the centre via all R-algebras, compatible with base change) and Cartier 3.23 support the route. Step 1: from finitely many generators, I/I² is finite-dimensional, and I re-did the 4-factor commutator: it gives uv(X*Y−Y*X), the convolution bracket of the distribution node. Step 2: Ad(ε+tX)Y = Y+t[X,Y] with the correct sign; with r(t_X)=I+ε dr(X) from the tangent-calculus node this gives dAd=ad, and the matrix is regular via the universal point and the morphism-into-affine node. Step 3: a point z of Z(A) commutes with G(A[t]/t²), so Z⊆N. Step 4: I checked every hypothesis of lie-detects-factorization over any K (char 0; affine of finite type; connected via 04KV; smooth via Cartier; the centralizer H is a closed subgroup with Lie(H)=Lie(G_K); f=id), so H=G_K. Step 5: P=N×G is reduced (Cartier and the smooth-geometrically-reduced node), residue-field points give q(P)⊆e, and the reduced-source factorization (0356) gives q=e as morphisms, which is the universal centre condition for all A, including nonreduced A. Edge cases checked: g=0, Ga, Gm, GL2, SL_n with central μ_n, A=0. No duplicate: lem-ag-lie-centre covers only Q̄_ℓ matrix groups, and adjoint-kernel-central-quotient-unipotent is a different statement. No cycle. The six declared tool_uses (04KV, kernel-subgroup, smooth-geometrically-reduced, 0356, 01T2, affine fibre product) are accepted as generic. Mathlib searches cover all three kinds. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharZeroAdjointDifferentialCentralKernel",
+  "declaration": "AlgebraicGeometry.exists_charZero_adjoint_differential_central_kernel",
+  "declarations": [
+   "AlgebraicGeometry.adjointBasisTangentPoint",
+   "AlgebraicGeometry.exists_charZero_adjoint_differential_central_kernel"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CharZeroAdjointDifferentialCentralKernel.lean",
+  "statement": "theorem exists_charZero_adjoint_differential_central_kernel {k : Type u} [Field k] [CharZero k] (G : Grp (Over (Spec (.of k)))) (hG : SolvableGroupStructure.IsAlgebraic G) (hsm : Smooth G.X.hom) (hc : ConnectedSpace G.X.left) : ∃ (n : ℕ) (b : Module.Basis (ULift.{u} (Fin n)) k (GrpObj.Lie G.X)) (r : G ⟶ Grp.mk (GeneralLinearGroup (ULift.{u} (Fin n)) k)), (∀ (A : Type u) [CommRing A] [Algebra k A] (g : points G.X A) (v : ULift.{u} (Fin n) → A), adjointBasisTangentPoint G.X b A ((GeneralLinearGroup.RationalHom.points r.hom.hom A g).val.mulVec v) = points.map G.X (TrivSqZeroExt.inlAlgHom k A A) g * adjointBasisTangentPoint G.X b A v * (points.map G.X (TrivSqZeroExt.inlAlgHom k A A) g)⁻¹) ∧ (∀ X Y : GrpObj.Lie G.X, (GeneralLinearGroup.RationalHom.differential r.hom.hom X).mulVec (b.equivFun Y) = b.equivFun ⁅X, Y⁆) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A], Set.range (fun x : StandardGroupSchemes.affine k A ⟶ GrpObj.ker r.hom.hom ↦ x ≫ GrpObj.kerι r.hom.hom) = ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A) ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (x : StandardGroupSchemes.affine k A ⟶ GrpObj.ker r.hom.hom) (g : StandardGroupSchemes.affine k A ⟶ G.X), Commute (x ≫ GrpObj.kerι r.hom.hom) g",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The finite basis identifies GL(Lie G) with the upstream matrix group. Its action is fixed on every algebra by actual dual-number conjugation, using an explicit finite product of scaled basis tangent points. The differential is the upstream Lie differential in matrix coordinates. Equality of kernel and centre is equality of represented image subfunctors on every commutative algebra, hence scheme-theoretic, including nilpotents. Added already-landed definition dependencies for GL, affine test schemes, and the affine finite-type predicate; no statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6108db97b",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Resubmission of 02741c02 (returned H2 for missing stmt_dep def-wf-lie-algebra-derivation). Diff: only that stmt_dep added; Lean module byte-identical; dep record unchanged from live; statement text unchanged; item not yet landed. Re-checked independently: hypotheses exact (IsAlgebraic = affine LFT QC); conjunct 1 pins Ad by conjugating dual-number tangent points on every A; conjunct 2 uses the same matrix convention (differential = snd of r.points on tangentPoint) and the bracket sign is correct (upstream commutator v_ε w_δ v_ε⁻¹ w_δ⁻¹ = [v,w]^{εδ}); N = Z(G) is a subfunctor equality with centralizerPoints (𝟙 G) over all A. No duplicate: adjointKernelPoints is a points set, adjointMap is T×G→G. Edge cases g=0, A=0, nonreduced A, SL_n μ_n OK. Statement verbatim, one sorry, docstrings present. Minor: second reading is again the worker's own rereading (disclosed, not blocking)."
+ }
+}

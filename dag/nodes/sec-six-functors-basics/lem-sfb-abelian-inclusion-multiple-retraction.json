@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-abelian-inclusion-multiple-retraction",
+ "kind": "statement",
+ "title": "An abelian inclusion retracts up to a positive integer",
+ "statement": "Let $k$ be a field [def-weil-field], let $A/k$ and $B/k$ be abelian varieties [def-sc-abelian-variety], and let $i:B\\hookrightarrow A$ be a closed immersion of $k$-group schemes [def-sc-group-scheme]. There exist an integer $n>0$ and a $k$-group-scheme homomorphism $r:A\\to B$ such that $r\\circ i=[n]_B$, with multiplication as in [def-sc-mult-n].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.23, printed pp.152–153, with G=A and its abelian subvariety B; normalize by translation and use 8.19, as in the proof of Theorem 8.24. This is the multiple-retraction input, not the complement conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-abelian-variety",
+  "def-sc-group-scheme",
+  "def-sc-mult-n"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-abelian-variety-characterization], $A$ and $B$ are geometrically integral; they are smooth, proper (hence separated and of finite type) and connected by [def-sc-abelian-variety]. They are commutative by [lem-sc-av-commutative]. Thus [lem-sfb-smooth-commutative-subgroup-quotient] applies to $i$ and gives $p:A\\to Q$ with the stated torsor identity. Choose a nonempty affine open $S=\\operatorname{Spec}R\\subseteq Q$. Write $K=\\operatorname{Frac}(R)$, the field of fractions of the domain $R$. Its spectrum is the generic point of $S$. The pullback $V=A\\times_Q\\operatorname{Spec}K$ is a torsor under $B_K$.",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "def-sc-abelian-variety",
+    "lem-sc-av-commutative",
+    "lem-sfb-smooth-commutative-subgroup-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, first three sentences of proof, p.153; Theorem 5.14 and Corollary 5.27."
+   }
+  },
+  {
+   "text": "The group scheme $B_K$ is an abelian variety by [lem-sfb-abelian-field-extension], hence smooth, separated and of finite type and geometrically integral by [def-sc-abelian-variety, lem-sc-abelian-variety-characterization], and commutative by [lem-sc-av-commutative]. Apply [lem-sfb-commutative-torsor-positive-weight] over $K$ to obtain $n>0$ and $\\phi_\\eta:V\\to B_K$ with $\\phi_\\eta(v+b)=\\phi_\\eta(v)+[n]b$ as morphisms. Positivity is part of this input: no inversion of $n$ in $k$ is needed.",
+   "uses": [
+    "lem-sfb-abelian-field-extension",
+    "lem-sc-abelian-variety-characterization",
+    "def-sc-abelian-variety",
+    "lem-sc-av-commutative",
+    "lem-sfb-commutative-torsor-positive-weight"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 8.22 and its use in Proposition 8.23, pp.152–153."
+   }
+  },
+  {
+   "text": "Index the principal opens $D(f)\\subseteq S$ by nonzero $f\\in R$, ordered by reverse inclusion; intersections $D(fg)$ make this a directed system with affine transitions and limit $\\operatorname{Spec}K$ (on rings the union of the localizations $R_f$ is $K$). The models $A\\times_QS$ and $B\\times_kS$ are of finite presentation over $S$: the first is a base change of $p$, and for the second smoothness gives local finite presentation and properness gives quasi-compactness and separatedness. Apply [thm-pd-spreading-out](2) and [lem-weil-pbc-qcqs-morphism-permanence](3) to spread $\\phi_\\eta$ to $\\phi_U:A\\times_QU\\to B\\times_kU$ for some nonempty principal open $U\\subseteq S$. The two equivariance composites from $(A\\times_QU)\\times_kB$ to $B\\times_kU$ are morphisms of finite-presentation $U$-schemes and agree over $K$. Clause (3) of the same spreading theorem, shrinking $U$ once more, makes them equal over $U$. Since $p$ is surjective and $A$ integral, $p^{-1}(U)$ is a nonempty dense open of $A$. Projecting $\\phi_U$ to $B$ gives an equivariant morphism $\\psi:p^{-1}(U)\\to B$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, extension of the generic-fibre map to a rational map; expanded using Stacks limits.tex, Tag 01ZM (lemma-descend-finite-presentation), clauses (2),(3)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-weil-extension-to-abelian-variety] to extend $\\psi$ to $\\phi:A\\to B$. Compare on $A\\times_kB$ the morphisms $(a,b)\\mapsto\\phi(a+i(b))$ and $(a,b)\\mapsto\\phi(a)+[n]b$. They agree on $p^{-1}(U)\\times_kB$, since $p(a+i(b))=p(a)$. The product is an abelian variety by [lem-sfb-abelian-finite-product], hence integral by [lem-sc-abelian-variety-characterization]. The open is nonempty (it contains the image of $p^{-1}(U)$ under $a\\mapsto(a,0)$), hence dense. It is scheme-theoretically dense: restriction from any affine-domain coordinate ring to a nonempty open is injective, since restriction further to a principal open $D(f)$ is the injective localization $R\\to R_f$. Thus [lem-chow-agree-on-dense-open], with separated target $B$, gives $\\phi(a+i(b))=\\phi(a)+[n]b$ globally as morphisms.",
+   "uses": [
+    "lem-sfb-weil-extension-to-abelian-variety",
+    "lem-sfb-abelian-finite-product",
+    "lem-sc-abelian-variety-characterization",
+    "lem-chow-agree-on-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.23, last two sentences, p.153; extension by 8.18, and the dense-open equality argument."
+   }
+  },
+  {
+   "text": "Put $c=\\phi(0_A)\\in B(k)$ and define the regular $k$-map $r(a)=\\phi(a)-c$, using the group inverse, addition and the constant map with value $c$ from [def-sc-group-scheme]. Then $r(0_A)=0_B$, and substituting $(0_A,b)$ into the preceding morphism identity gives $r(i(b))=[n]_B(b)$. This substitution is a pullback along the morphism $B\\to A\\times_kB$, $b\\mapsto(0_A,b)$, so the result is an equality of scheme morphisms, not merely on $k$-points.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-mult-n"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Theorem 8.24, first paragraph: translation of the map of Proposition 8.23, p.153."
+   }
+  },
+  {
+   "text": "To check the homomorphism condition, form the morphism $d:A\\times_kA\\to B$ defined by $d(x,y)=r(x+y)-r(x)-r(y)$, using the group operations of [def-sc-group-scheme] and commutativity [lem-sc-av-commutative]. It is identically zero on $A\\times\\{0_A\\}$. The first factor $A$ is proper, geometrically connected and geometrically reduced by [lem-sc-abelian-variety-characterization]; the second is connected, and $B$ is separated and of finite type by [def-sc-abelian-variety]. Therefore [lem-sc-rigidity] gives $d=g\\circ\\operatorname{pr}_2$. Pullback along $y\\mapsto(0_A,y)$ gives $g(y)=r(y)-r(0_A)-r(y)=0$. Hence $d=0$, so $r$ preserves addition. Together with $r(0_A)=0_B$ this makes $r$ a $k$-group-scheme homomorphism, with $r\\circ i=[n]_B$ as already proved.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-sc-av-commutative",
+    "lem-sc-abelian-variety-characterization",
+    "def-sc-abelian-variety",
+    "lem-sc-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "8.19 and its application in Theorem 8.24; explicit rigidity proof for the abelian source A, pp.152–153."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-variety-characterization",
+  "def-sc-abelian-variety",
+  "lem-sc-av-commutative",
+  "lem-sfb-smooth-commutative-subgroup-quotient",
+  "lem-sfb-abelian-field-extension",
+  "lem-sfb-commutative-torsor-positive-weight",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-weil-extension-to-abelian-variety",
+  "lem-sfb-abelian-finite-product",
+  "lem-chow-agree-on-dense-open",
+  "def-sc-group-scheme",
+  "def-sc-mult-n",
+  "lem-sc-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.23, Lemma 8.22, 8.18 and the normalization in Theorem 8.24, printed pp.152–153. Generic spreading and morphism equalities expanded explicitly; 8.19 proved here for the abelian source by the existing rigidity lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|isogen|retract",
+   "results": "0 hits; ; logged results: ; Mathlib/AlgebraicGeometry/Group",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract retracts and root-system polarizations do not supply an algebraic homomorphism retracting an abelian inclusion up to multiplication"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An abelian subvariety has a rational retraction over its ground field",
+   "results": "8 hits; ; logged results: CategoryTheory.retraction, CategoryTheory.Retract.r, CategoryTheory.Retract.ctorIdx, CategoryTheory.Retract.recOn, Module.Flat.of_retract, CategoryTheory.Retract.i, CategoryTheory.Idempotents.Karoubi.retract, CategoryTheory.Retract",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract retracts and root-system polarizations do not supply an algebraic homomorphism retracting an abelian inclusion up to multiplication"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"retraction\"",
+   "results": "0 hits; ; logged results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract retracts and root-system polarizations do not supply an algebraic homomorphism retracting an abelian inclusion up to multiplication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian subvariety B of A over any field there is a homomorphism A to B restricting to multiplication by a positive integer",
+   "results": "8 hits; ; logged results: IsDedekindDomain.selmerGroup.fromUnit_ker, WeierstrassCurve.Affine.Point.toClass, CharacterModule.ofSpanSingleton, IsDedekindDomain.selmerGroup.fromUnitLift, addMonoidHomOfForallMemZMultiples, IsDedekindDomain.selmerGroup.fromUnit, addMonoidHomOfForallMemZMultiples_apply_gen, NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract retracts and root-system polarizations do not supply an algebraic homomorphism retracting an abelian inclusion up to multiplication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polarization supplies an integer multiple splitting of the inclusion of an abelian subvariety",
+   "results": "8 hits; ; logged results: RootPairing.PolarizationIn, RootPairing.PolarizationIn_eq, RootPairing.range_polarizationIn, RootPairing.PolarizationIn_apply, RootPairing.range_polarizationIn_le_span_coroot, RootPairing.polarizationEquiv_apply, RootPairing.CoPolarizationIn, RootPairing.polarizationEquiv_toLinearMap",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract retracts and root-system polarizations do not supply an algebraic homomorphism retracting an abelian inclusion up to multiplication"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian subvariety B of A there exists a group homomorphism A to B restricting to multiplication by a positive integer",
+   "results": "8 hits; ; logged top results: CharacterModule.ofSpanSingleton, addMonoidHomOfForallMemZMultiples, CommGroup.exists_apply_ne_one_of_hasEnoughRootsOfUnity, addMonoidHomOfForallMemZMultiples_apply_gen, IsDedekindDomain.selmerGroup.fromUnit_ker, WeierstrassCurve.Affine.Point.toClass, IsDedekindDomain.selmerGroup.fromUnitLift, QuotientGroup.homQuotientZPowOfHom",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical retracts, module splittings and abstract homomorphisms do not give the required algebraic group-scheme morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An inclusion of abelian varieties has a retraction up to multiplication by a nonzero integer",
+   "results": "8 hits; ; logged top results: CategoryTheory.Idempotents.Karoubi.retract, CategoryTheory.Retract.ctorIdx, Submodule.isIdempotentElemEquiv_apply_coe, CategoryTheory.Retract.r, CategoryTheory.Limits.biprod.inl_mono, CategoryTheory.Retract.mk, CategoryTheory.Retract.instIsSplitEpiR, CategoryTheory.Retract.i",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical retracts, module splittings and abstract homomorphisms do not give the required algebraic group-scheme morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"retraction\"",
+   "results": "0 hits; ; logged top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical retracts, module splittings and abstract homomorphisms do not give the required algebraic group-scheme morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|abelian.variety|isogen",
+   "results": "0 hits; ; logged top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical retracts, module splittings and abstract homomorphisms do not give the required algebraic group-scheme morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare complete reducibility of abelian varieties gives a splitting after multiplication by an integer",
+   "results": "8 hits; ; logged top results: lequivProdOfRightSplitExact, lequivProdOfLeftSplitExact, Module.End.exists_isNilpotent_isSemisimple, ClassGroup.exists_mk0_eq_mk0, Module.torsion_by_prime_power_decomposition, Module.Basis.ofSplitExact_apply, LinearMap.splittingOfFunOnFintypeSurjective_splits, Function.Exact.splitSurjectiveEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: categorical retracts, module splittings and abstract homomorphisms do not give the required algebraic group-scheme morphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-simple-isogeny-decomposition",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: An abelian inclusion retracts up to a positive integer.",
+   "via": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-inclusion-multiple-retraction",
+  "worker": "stage1",
+  "summary": "Split Milne 8.23 through its quotient torsor, positive-degree torsor averaging, generic spreading and Weil extension; normalized by translation and derived homomorphy explicitly from the existing rigidity lemma. Three strictly smaller reusable inputs are stated, searched, and left unsplit; all existing cited statements were read.",
+  "blueprint": "Auxiliary abelian-variety input along the existing det-thm-sf-ctf-stability-direct-images proof (3), alteration/level-rigidity route recorded in blueprint.from.place; realizes the multiple-retraction input to simple isogeny decomposition. The ancestor tool returns None for this preexisting imported-created chain; retained that provenance and its via list.",
+  "tool_uses": [
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic finite-presentation spreading and eventual equality (Stacks 01ZM); the unit supplies no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Base change of finite-presentation models, needed to apply 01ZM; generic scheme tool."
+   },
+   {
+    "node": "lem-chow-agree-on-dense-open",
+    "why": "Equality of morphisms from scheme-theoretically dense opens into separated targets; generic scheme tool for the Milne equivariance calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-chow-agree-on-dense-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-20c0c550c",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-20c0c550c (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes and every cited statement in full. I checked them against Milne, Algebraic Groups (iAG2017): 8.16-8.19, Lemma 8.22 with its proof, Prop 8.23 with its proof and Thm 8.24's proof (pp.152-153), plus 5.14, 5.27 and 1.63. The six steps follow 8.23 in order (quotient, generic-fibre torsor, 8.22 averaging, spreading by 01ZM clauses (2)/(3), extension by 8.18, equality on a scheme-theoretically dense open), then add the 8.24 normalization and 8.19 homomorphy via lem-sc-rigidity with y0=0. n>0 is correct: 8.22's proof uses n=1 or the degree of a separable residue field. The statement is unchanged and the item is still unsplit in live and side-live. No repair note exists, so the re-split rule does not apply. The new nodes are all true, statement-only, self-contained and smaller than the item. Torsor averaging holds because V is smooth by fpqc descent and the Galois-invariant sum descends; it allows p|n and has no rational point. The smooth commutative quotient holds by reducedness descent, the smooth kernel and geometric irreducibility; edge cases H=0 and H=G are fine. The Weil extension to an abelian target holds for any field, with uniqueness from a separated target and a reduced source. I searched for duplicates with rg -L over the snapshot, live and side-live and found none; the new ids do not collide. Accepted tool uses: thm-pd-spreading-out, lem-weil-pbc-qcqs-morphism-permanence and lem-chow-agree-on-dense-open. lem-sc-rigidity is Lean-closed per lean_audit and used as a black box; it is not declared in tool_uses, and the maintainer may record it. review_split.py gave 'no such node' for every citation inside the snapshot because of symlinked chapter directories; I verified by hand that every id exists. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.MultipleRetraction",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.exists_multiple_retraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/MultipleRetraction.lean",
+  "statement": "theorem IsAbelianVariety.exists_multiple_retraction {k : Type u} [Field k] (A B : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] [GrpObj B] [IsAbelianVariety B] (i : B ⟶ A) [IsMonHom i] [IsClosedImmersion i.left] : ∃ (n : ℕ), 0 < n ∧ ∃ (r : A ⟶ B), IsMonHom r ∧ i ≫ r = 𝟙 B ^ n",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76c9b22f4",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Lean theorem IsAbelianVariety.exists_multiple_retraction matches every node clause: field k:Type u; A B : Over (Spec k) with GrpObj+IsAbelianVariety (recorded convention); i with IsMonHom and IsClosedImmersion i.left; ∃ n>0, ∃ r with IsMonHom r and i ≫ r = 𝟙 B ^ n, the pointwise MonObj power that is also the recorded def-sc-mult-n torsionSubgroupScheme expression. Milne iAG2017 L8.22/P8.23/T8.24 proof read: n>0 over any field, statement true. Node copy differs from side-live only in lean; statement verbatim; not superseded. Public imports = stmt_dep modules; plain imports = recorded proof-dep modules. Source/blueprint docstrings and six-step plan present; sorry only, no defs. No recompile (no FIX); worker reports clean compiles. No findings."
+ }
+}

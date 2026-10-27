@@ -1,0 +1,203 @@
+{
+ "id": "lem-sfb-stonean-continuous-field-diagonalization",
+ "kind": "statement",
+ "title": "Continuous field matrices on Stonean bases admit diagonalization with varying entries",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be a finite extension with its valuation topology, and let $O=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $P$ be an extremally disconnected profinite space, meaning compact Hausdorff, totally disconnected, and with open closure of every open subset. For every entrywise continuous matrix $F:P\\to\\operatorname{Mat}_{n\\times m}(E)$, with $m,n\\ge0$, there are entrywise continuous maps $L:P\\to\\operatorname{GL}_n(O)$ and $U:P\\to\\operatorname{GL}_m(O)$, with entrywise continuous inverses, and continuous functions $d_1,\\ldots,d_{\\min(m,n)}:P\\to E$ such that $L(p)F(p)U(p)$ has entry $d_i(p)$ in position $(i,i)$ and zero elsewhere. No nonvanishing, constant-rank, locally constant valuation, or locally constant elementary-divisor hypothesis is imposed. The functions $d_i$ may vanish on arbitrary closed subsets. Empty dimensions, empty $P$ and the zero matrix are included. All spaces and indices obey [def-weil-size-convention].",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.12(2), bounded continuous division and clopen separation; agent rectangular matrix variant with variable diagonal, not the local constant-type Smith theorem."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Induct on the number $n$ of rows, simultaneously for every number $m$ of columns and every continuous matrix $F$. If $n=0$ or $m=0$, take identity factors; all off-diagonal equations are vacuous. In the successor-successor case apply [lem-sfb-stonean-continuous-pivot-isolation] to get continuous integral factors $S,T$ for which $A=SFT$ has zero first row and column away from $(0,0)$. Write $B_{ij}=A_{i+1,j+1}$; its entries are continuous as finite sums of products.",
+   "uses": [
+    "lem-sfb-stonean-continuous-pivot-isolation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the induction hypothesis to the $n\\times m$ matrix $B$, obtaining factors $L,U$ with off-diagonal entries zero. Border each factor by a leading identity scalar: $\\widetilde L=\\operatorname{diag}(1,L)$, $\\widetilde U=\\operatorname{diag}(1,U)$. Extend their inverses the same way. Direct matrix multiplication, splitting the finite summation into the zero and successor indices, gives $\\operatorname{diag}(a,A)\\operatorname{diag}(b,B)=\\operatorname{diag}(ab,AB)$ for rectangular blocks. In particular the bordered factors are invertible and preserve entrywise continuity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take final factors $\\widetilde L S$ and $T\\widetilde U$. The block multiplication identity gives their product with $F$ as $\\operatorname{diag}(A_{00},LBU)$, so the off-diagonal entries vanish by a case split on zero and successor row and column indices. Finite sums of products prove entrywise continuity of each factor and its inverse, using reverse order for inverses. Finally define the $k$th diagonal function as the $(k,k)$ entry of this product, with the canonical inclusions from $\\operatorname{Fin}(\\min(n,m))$. Its continuity follows from the same matrix-product calculation, and the diagonal equation is reflexive.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stonean-continuous-pivot-isolation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Theorem 6.12(2), printed p. 19; full rectangular dimension induction from one-pivot isolation, with explicit border multiplication and entrywise continuity. The pivot maximum is selected by compact projectivity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(Stonean|[Ee]xtremally[Dd]isconnected).*(diagonal|[Ss]mith)|([Ss]mith|diagonal).*(Stonean|[Ee]xtremally[Dd]isconnected)",
+   "results": "{\"t\": \"2026-10-25T10:33:07Z\", \"tool\": \"grep\", \"query\": \"(Stonean|[Ee]xtremally[Dd]isconnected).*(diagonal|[Ss]mith)|([Ss]mith|diagonal).*(Stonean|[Ee]xtremally[Dd]isconnected)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: scalar Smith forms, scalar transvections and continuity of matrix constructors do not give continuous Stonean diagonal factors with varying zero loci"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Smith diagonalization over an extremally disconnected compact space without locally constant rank or invariant factors",
+   "results": "{\"t\": \"2026-10-25T10:33:07Z\", \"tool\": \"leansearch\", \"query\": \"Continuous Smith diagonalization over an extremally disconnected compact space without locally constant rank or invariant factors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuous_matrix_diag\", \"Ideal.smithNormalForm\", \"Submodule.exists_smith_normal_form_of_rank_eq\", \"Continuous.matrix_blockDiag\", \"Continuous.matrix_blockDiagonal'\", \"Continuous.matrix_diagonal\", \"Module.Basis.SmithNormalForm.a\", \"Submodule.smithNormalFormCoeffs_ne_zero\"], \"digest\": \"f3cc458567eb9c3d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: scalar Smith forms, scalar transvections and continuity of matrix constructors do not give continuous Stonean diagonal factors with varying zero loci"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"diagonal\", \"Continuous\"",
+   "results": "{\"t\": \"2026-10-25T10:33:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"diagonal\\\", \\\"Continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Continuous.matrix_diagonal\", \"Continuous.matrix_blockDiagonal\", \"Continuous.matrix_blockDiagonal'\"], \"digest\": \"dcfc743f241489b9\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: scalar Smith forms, scalar transvections and continuity of matrix constructors do not give continuous Stonean diagonal factors with varying zero loci"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous p-adic matrices on Stonean spaces can be diagonalized using bounded division into the compact valuation ring, allowing arbitrary zero sets",
+   "results": "{\"t\": \"2026-10-25T10:33:09Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous p-adic matrices on Stonean spaces can be diagonalized using bounded division into the compact valuation ring, allowing arbitrary zero sets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuous_matrix_diag\", \"Continuous.matrix_diagonal\", \"Continuous.matrix_diag\", \"mahler\", \"PadicInt.mahlerEquiv\", \"HasSum.matrix_diag\", \"Matrix.GeneralLinearGroup.continuous_upperRightHom\", \"HasSum.matrix_diagonal\"], \"digest\": \"f9f1d49fc744e96e\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: scalar Smith forms, scalar transvections and continuity of matrix constructors do not give continuous Stonean diagonal factors with varying zero loci"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Matrix\", \"diagonal\", \"Continuous\"",
+   "results": "{\"t\": \"2026-10-25T11:41:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"Matrix\\\", \\\"diagonal\\\", \\\"Continuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Continuous.matrix_diagonal\", \"Continuous.matrix_blockDiagonal\", \"Continuous.matrix_blockDiagonal'\"], \"digest\": \"dcfc743f241489b9\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: continuity of matrix constructors and scalar field transvection diagonalization do not provide continuous integral invertible factors for a varying matrix on a Stonean base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous matrices over a finite extension of the p-adic numbers on an extremally disconnected compact space admit diagonalization by continuous invertible integral matrices, with varying diagonal and rank",
+   "results": "{\"t\": \"2026-10-25T11:41:11Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous matrices over a finite extension of the p-adic numbers on an extremally disconnected compact space admit diagonalization by continuous invertible integral matrices, with varying diagonal and rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuous_matrix_diag\", \"Continuous.matrix_diagonal\", \"Continuous.matrix_diag\", \"Matrix.Pivot.reindex_exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_induction\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal_aux\", \"Matrix.Pivot.exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\"], \"digest\": \"f3bee288c82f741d\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: continuity of matrix constructors and scalar field transvection diagonalization do not provide continuous integral invertible factors for a varying matrix on a Stonean base"
+  },
+  {
+   "tool": "grep",
+   "query": "(Stonean|[Ee]xtremally[Dd]isconnected).*(diagonal|[Ss]mith)|([Ss]mith|diagonal).*(Stonean|[Ee]xtremally[Dd]isconnected)",
+   "results": "{\"t\": \"2026-10-25T11:41:11Z\", \"tool\": \"grep\", \"query\": \"(Stonean|[Ee]xtremally[Dd]isconnected).*(diagonal|[Ss]mith)|([Ss]mith|diagonal).*(Stonean|[Ee]xtremally[Dd]isconnected)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: continuity of matrix constructors and scalar field transvection diagonalization do not provide continuous integral invertible factors for a varying matrix on a Stonean base"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rectangular continuous p-adic matrix on a Stonean space can be diagonalized with continuous integral row and column operations without constant rank",
+   "results": "{\"t\": \"2026-10-25T11:41:12Z\", \"tool\": \"leansearch\", \"query\": \"A rectangular continuous p-adic matrix on a Stonean space can be diagonalized with continuous integral row and column operations without constant rank\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuous_matrix_diag\", \"Continuous.matrix_adjugate\", \"Continuous.matrix_diagonal\", \"Continuous.matrix_blockDiag\", \"Continuous.matrix_reindex\", \"Matrix.Pivot.reindex_exists_list_transvec_mul_mul_list_transvec_eq_diagonal\", \"Continuous.matrix_diag\", \"Continuous.matrix_blockDiagonal'\"], \"digest\": \"92e718b4a70921f0\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: continuity of matrix constructors and scalar field transvection diagonalization do not provide continuous integral invertible factors for a varying matrix on a Stonean base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smith normal form for matrices whose entries are continuous functions on a projective compact Hausdorff space over a locally compact nonarchimedean field, with row operations in its ring of integers",
+   "results": "{\"t\": \"2026-10-25T11:42:34Z\", \"tool\": \"leanfinder\", \"query\": \"Smith normal form for matrices whose entries are continuous functions on a projective compact Hausdorff space over a locally compact nonarchimedean field, with row operations in its ring of integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.SmithNormalForm\", \"Module.Basis.SmithNormalForm.snf\", \"Module.Basis.SmithNormalForm.a\", \"Submodule.smithNormalForm\", \"Submodule.smithNormalFormCoeffs\", \"Module.Basis.SmithNormalForm.bM\", \"Submodule.smithNormalFormTopBasis\", \"Submodule.smithNormalFormBotBasis_def\"], \"digest\": \"8cdf51225985b82b\"}",
+   "date": "2026-10-25",
+   "verdict": "no match: continuity of matrix constructors and scalar field transvection diagonalization do not provide continuous integral invertible factors for a varying matrix on a Stonean base"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-constant-model-relation-hull",
+  "date": "2026-10-25",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction. Auxiliary Continuous field matrices on Stonean bases admit diagonalization with varying entries.",
+   "via": [
+    "lem-sfb-profinite-constant-model-relation-hull",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-stonean-continuous-field-diagonalization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Gave the bounded-division equation-space argument from existing compactness and Gleason nodes, an explicit finite clopen maximum selection, and rectangular row/column elimination with inverses and induction. No new nodes: all substantial topological results already have nodes, and the remaining computations are written out. No attachment was found in project Lean.",
+  "blueprint": "Auxiliary scalar calculation below det-sf-comp-coherence-cocycle, refinement-isomorphism paragraph, via det-sf-comp-coherence-refinement (2), closed-fibre heart comparison. Retains the relation-hull parent route; no unit or chapter change.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Supplies compact Hausdorffness of O_E for the bounded-division equation space; the compactification unit has no local-field compactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "why": "Two-factor compactness of P times O_E is a generic topology tool; no compactification-unit statement gives it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-in-quasi-compact",
+    "why": "Closed equation spaces in compact spaces are compact; this generic topology fact is not supplied by the unit."
+   },
+   {
+    "node": "det-pe-stonean-projective",
+    "why": "Condition (3) provides a continuous section of the compact equation-space projection onto the Stonean base; this generic topology theorem is not replaced by the compactification route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "det-pe-stonean-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NH-eae3f204b",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-eae3f204b (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery creates no new nodes. Source: HRS Thm 6.12(2), statement p.18 and proof p.19; the clopen comparison h=e_Ū f+(1-e_Ū)g matches step 2. Step 1 replaces HRS's external Vechtomov quotient with its own argument: the equation space Z={a=bt} is a closed subset of P×O_E. It is compact by lem-sfb-integers-profinite-tower clause 2, Tychonoff and closed-in-quasi-compact, and Hausdorff. Its projection to P is surjective because b=0 forces a=0. Condition (3) of det-pe-stonean-projective then gives a continuous q:P→O with a=bq everywhere, with no extension by zero. I rechecked the remaining steps. Step 2: closure of W={|h|<|g|} is clopen, the maximum holds on C and off it, and ties are covered. Step 3: the induction on min(m,n) has the r=0 base and constant permutations on a finite clopen partition. Step 4: the shears square to zero, and the entries of RAC are h, 0, 0 and A_ij-q_iA_1j, with no division at zeros of h. Step 5: diag(1,L')RS·F·TC·diag(1,U')=diag(h,L'BU'), and the inverse orders are correct. Edge cases tested: 1×1 with a non-clopen zero set, 1×m and n×1, the zero matrix, empty P, diag(ℓ,1). Searched rg -L over dag/nodes: local-smith, pivot-splitting, uniformizer-division, diagonal-rank-locus, unit-pivot-schur and two-sided-division have stronger hypotheses (locally constant cokernel type, pinned valuation, unit pivot or rank bound) and are not duplicates. The four declared tool_uses are generic topology black boxes (two are Mathlib leaves) and are acceptable. Statement unchanged and not weakened, no SGA source. review_split's 'no such node' messages are a symlink artifact; I opened all cited files. Minor, no action: the statement does not cite def-weil-matrix, but the statement is unchanged from the base."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.StoneanContinuousFieldDiagonalization",
+  "declaration": "Padic.exists_continuous_integral_diagonalization_of_extremallyDisconnected",
+  "file": "lean/Sheaf/NumberTheory/Padics/StoneanContinuousFieldDiagonalization.lean",
+  "statement": "theorem exists_continuous_integral_diagonalization_of_extremallyDisconnected (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (P : Type v) [TopologicalSpace P] [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] [ExtremallyDisconnected P] (n m : ℕ) (F : P → Matrix (Fin n) (Fin m) E) (hF : ∀ (i : Fin n) (j : Fin m), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ F p i j)) : ∃ (L : P → Matrix.GeneralLinearGroup (Fin n) (coefficientExtensionIntegers l E)) (U : P → Matrix.GeneralLinearGroup (Fin m) (coefficientExtensionIntegers l E)) (d : Fin (min n m) → P → E), (∀ (i j : Fin n), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ ((L p).val i j : E))) ∧ (∀ (i j : Fin n), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ (((L p)⁻¹).val i j : E))) ∧ (∀ (i j : Fin m), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ ((U p).val i j : E))) ∧ (∀ (i j : Fin m), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (fun p ↦ (((U p)⁻¹).val i j : E))) ∧ (∀ k : Fin (min n m), @Continuous P E _ (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace (d k)) ∧ (∀ (p : P) (i : Fin n) (j : Fin m), i.val ≠ j.val → ((L p).val.map (fun x ↦ (x : E)) * F p * (U p).val.map (fun x ↦ (x : E))) i j = 0) ∧ (∀ (p : P) (k : Fin (min n m)), ((L p).val.map (fun x ↦ (x : E)) * F p * (U p).val.map (fun x ↦ (x : E))) (k.castLE (Nat.min_le_left n m)) (k.castLE (Nat.min_le_right n m)) = d k p)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-677501aea",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node and Lean agree clause by clause: l prime; E finite over Q_l with the topology of spectralNorm.normedField (same norm as the recorded coefficientExtensionAbsoluteValue; the project's coefficientExtensionIntegersTopology is induced from it, so O-entry continuity via O->E is the subspace topology); O=coefficientExtensionIntegers; P compact T2 totally disconnected extremally disconnected; arbitrary n m; entrywise continuity of L, L^-1, U, U^-1, d; zero off-diagonal (i.val≠j.val) and diagonal at castLE cover every entry. No extra hypotheses; universes u v independent. Edge cases n=0/m=0, empty P, F=0, non-clopen zero sets OK; five-step proof rechecked, statement true. Not a duplicate of continuous_integral_matrix_local_smith or _diagonal_rank_locus (stronger hypotheses). Only lean field changed; lean.statement verbatim in file; stmt_deps adequate; docstrings carry source, blueprint and proof; sorry only; report has Worker report + Second reading by NI. No compile run (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261025T164224-L-974336",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

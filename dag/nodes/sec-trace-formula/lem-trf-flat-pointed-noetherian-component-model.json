@@ -1,0 +1,344 @@
+{
+ "id": "lem-trf-flat-pointed-noetherian-component-model",
+ "kind": "statement",
+ "title": "Flat Noetherian pointed model retaining the distinguished reduced fibre and section components",
+ "statement": "Let $g:P\\to T$ be a flat morphism [def-weil-flat-morphism] of finite presentation (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]), with a section $\\sigma:T\\to P$, $g\\circ\\sigma=\\mathrm{id}_T$, and a point $q\\in P$. Schemes and sections are as in [def-pc-scheme, def-pc-section]. Assume the fibre $P_{g(q)}$ [def-pc-scheme-fibre] is geometrically reduced [def-pc-geometrically-irreducible]. For any morphism $h:Y\\to B$ with section $e$, write $C(h,e)=\\{y\\in Y\\mid y\\text{ belongs to the connected component of }e(h(y))\\text{ in }h^{-1}(\\{h(y)\\})\\}$ [def-weil-connected-scheme]. There exist an affine open $V\\subseteq T$ containing $g(q)$, Noetherian schemes $P_0,T_0$ (locally Noetherian [pqf-def-locnoeth] and quasi-compact), with $T_0$ affine, a flat morphism $g_0:P_0\\to T_0$ of finite presentation, a section $\\sigma_0:T_0\\to P_0$, and maps $b:V\\to T_0$, $\\rho:P_V\\to P_0$, where $P_V=P\\times_TV$ [def-pc-base-change]. Writing $g_V:P_V\\to V$ and $\\sigma_V:V\\to P_V$ for the induced morphism and section, the square $(\\rho,g_V;g_0,b)$ is cartesian [def-pc-fibre-product], $g_0\\circ\\sigma_0=\\mathrm{id}_{T_0}$, and $\\rho\\circ\\sigma_V=\\sigma_0\\circ b$. Put $q_0=\\rho(q)$ and $t_0=g_0(q_0)$, identifying $P_V$ with $g^{-1}(V)$. The geometric fibre $(P_0)_{\\bar t_0}$ [def-weil-geometric-fibre] is reduced [def-pc-reduced-scheme], and $\\rho^{-1}C(g_0,\\sigma_0)=C(g,\\sigma)\\cap P_V$. No condition is asserted on the other fibres of $g_0$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, first paragraph: affine restriction, descent of family and section, eventual flatness, and the distinguished fibre"
+ },
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-scheme",
+  "def-pc-section",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $t=g(q)$. Choose an affine open $V=\\operatorname{Spec}A\\subseteq T$ containing $t$, using the affine-open basis. The restriction $P_V=P\\times_TV\\to V$ is flat by flat base change and is of finite presentation by finite-presentation base change. Define $\\sigma_V=(\\sigma|_V,\\mathrm{id}_V)$ by the fibre-product universal property; its second projection is the identity, so it is a section. The open base change identifies $P_V$ with $g^{-1}(V)$ and retains $q$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, first sentence; Tags 01IT (affine-open basis), 01U9 (flat base change), 01TS (finite-presentation base change)"
+   }
+  },
+  {
+   "text": "Index the finitely generated integer subalgebras $A_i\\subseteq A$ by inclusion. They form a set (each is a subset of $A$), are nonempty (the image of $\\mathbf Z$ is one), and are directed: adjoining the union of two finite generating sets gives a common upper bound. Put $T_i=\\operatorname{Spec}A_i$. The affine approximation lemma gives $V=\\varprojlim_iT_i$ with affine transitions and every $T_i$ of finite type over $\\mathbf Z$. Each $T_i$ is Noetherian by the finite-type Noetherian theorem. The affine-base qcqs lemma, applied to the identity of $T_i$, gives that $T_i$ is quasi-compact and quasi-separated. Thus this directed system satisfies the hypotheses of finite-presentation descent.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, first paragraph: write A as a directed colimit of finite-type integer algebras; Tag 01T6"
+   }
+  },
+  {
+   "text": "Apply finite-presentation descent (Tag 01ZM(1), Scheme.exists_isPullback_of_finitePresentation) to the affine Noetherian approximation N of V. This gives a stage i, a finitely presented p:Y→N_i and a cartesian square recovering P_V→V. All stages are Noetherian and qcqs; since p is quasi-compact and quasi-separated, Y is qcqs. The underlying index of N is the directed partial order of finitely generated integer subalgebras, with the arrows reversed.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, first paragraph: descend the family; Tag 01ZM(1), lemma-descend-finite-presentation"
+   }
+  },
+  {
+   "text": "Advance first to a flat stage, before descending the section. Regard p:Y→N_i as the morphism Over.mk p→Over.mk(id_N_i). Its pullback over V is flat: composition with the isomorphism N_i×_{N_i}V→V identifies it with P_V→V through the cartesian comparison isomorphism. Apply exists_flat_stage_of_limit to this morphism. At the returned larger subalgebra j, composition with the analogous identity-pullback isomorphism gives Flat(p_j). Pullback pasting and cancellation give a cartesian comparison P_V→Y_j over V→N_j. Finite presentation, quasi-compactness and quasi-separatedness persist by base change.",
+   "uses": [
+    "lem-weil-pbc-descend-flat-finite-presentation",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q first paragraph; eventual flatness is Tag 04AI. The independent descent of the section can be performed after this stage increase."
+   }
+  },
+  {
+   "text": "Restrict the affine approximation to Over j; this forgetful functor is initial, so its whiskered cone still has limit V. Compose the given section with P_V→Y_j. This is a map over N_j, since the original section identity and the cartesian square imply the required composite equality. Apply the over-base morphism clause of Tag 01ZM, in its source-equal-to-the-base form Scheme.exists_π_app_comp_eq_of_locallyOfFinitePresentation. Obtain a later stage k and τ:N_k→Y_j with τ≫p_j=N(k→j) and b_k≫τ equal to the composite of the original section with P_V→Y_j. Set P₀=Y_j×_{N_j}N_k, T₀=N_k, g₀=pr₂, and σ₀=(τ,id). Then σ₀≫g₀=id by the second projection. Lift the comparison to ρ:P_V→P₀ using its maps to Y_j and N_k. Pullback cancellation proves that (ρ,g_V;g₀,b_k) is cartesian. Checking its two projections proves σ_V≫ρ=b_k≫σ₀. Flatness and finite presentation persist by base change. Mathlib gives LocallyOfFiniteType directly from LocallyOfFinitePresentation (finite-presentation ring maps are finite type). Thus the finite-type Noetherian theorem and quasi-compactness give IsNoetherian P₀. The stage T₀ is affine and Noetherian. These constructions work for empty sources and do not assume the section component contains q.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q first paragraph; Tag 01ZM morphism descent, Tag 01T6 for the Noetherian source."
+   }
+  },
+  {
+   "text": "Put v=⟨g(q),hq⟩ in V and t₀=b(v). The residue-field fibre square induced by the restriction P_V→P shows by base-change stability that the fibre of g_V at v is geometrically reduced, using the assumed geometrically reduced fibre of g at g(q). For every algebraic closure Ω of κ(v), pullback pasting identifies the geometric fibre with the scalar extension of this scheme-theoretic fibre, hence it is reduced. The model square supplies the comparison isomorphism P_V≅P₀×_{T₀}V over V. Its base change along Spec Ω→V is an isomorphism of geometric fibres, so the canonical pullback family P₀×_{T₀}V also has reduced geometric fibre at v. Apply geometricReduced_fibre_locus_baseChange to (g₀,b). Membership in its left-hand locus at v implies membership in the right-hand inverse-image locus, hence reducedness for every algebraic closure over b(v). Specialize to AlgebraicClosure(κ(b(v))). No assertion on other fibres or surjectivity of b is used.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-pc-geometrically-irreducible",
+    "def-weil-geometric-fibre",
+    "lem-trf-geometric-reduced-fibre-locus-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, first paragraph: X_y is the base change of X_{i,y_i}; Tag 0576, lemma-base-change-fibres-geometrically-reduced, using Tag 0384, lemma-geometrically-reduced-upstairs"
+   }
+  },
+  {
+   "text": "Both g₀ and g are locally of finite type by the Mathlib instance from local finite presentation. Apply section_component_preimage_of_isPullback to the model square (ρ,g_V;g₀,b) with its compatible sections. This identifies ρ⁻¹C(g₀,σ₀) with C(g_V,σ_V). Apply the same lemma to the canonical restriction square (pr₁,g_V;g,V.ι); sectionBaseChange has the required section identity and first projection. This identifies pr₁⁻¹C(g,σ) with the same locus C(g_V,σ_V). Rewriting both equalities gives the required displayed equality, completing all clauses.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sbc-section-component-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055Q, first paragraph: base-change compatibility of the section component; Tag 055M, lemma-base-change-connected-along-section"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-fibre",
+  "lem-sbc-section-component-cartesian",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055Q, lemma-connected-along-section-open-neighbourhood, first paragraph, with the independent section descent performed after advancing to a flat stage; Tags 01ZA, 01ZM and 04AI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented morphism of schemes with a section has a flat Noetherian model preserving the section and a distinguished geometrically reduced fibre",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.Smooth.flat_of_isNoetherianRing, AlgebraicGeometry.Flat.instOfIsOpenImmersion. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "bcb1ba7515ac87d0"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend a flat finitely presented family of schemes with section to a Noetherian ring preserving reducedness of one geometric fibre",
+   "results": "8 hits: AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.IsReduced.recOn, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsReduced, AlgebraicGeometry.Flat.casesOn. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "7f34bdbe5f2e9fec"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsNoetherian",
+   "results": "0 hits: . No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "noetherian.*section.*flat|flat.*section.*noetherian",
+   "results": "0 hits: . No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian approximation of a pointed flat scheme of finite presentation with cartesian model and a reduced geometric fibre at the chosen point",
+   "results": "8 hits: AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "3c90518c67577ffa"
+  },
+  {
+   "tool": "grep",
+   "query": "descend.*[fF]lat|[fF]lat.*descend|[nN]oetherian.*[mM]odel",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. No exact result or one-line specialization; reviewed the returned types and relevant source.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "bee5574314c373bd"
+  },
+  {
+   "tool": "grep",
+   "query": "noetherian.*[Mm]odel|[Mm]odel.*[Ss]ection|descend.*[Ff]lat",
+   "results": "11 hits: Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Descent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean. Read the returned types and Mathlib AlgebraicGeometry/Morphisms/Flat.lean, Morphisms/LocalFlatDescent.lean, Geometrically/Reduced.lean and RingTheory/Smooth/NoetherianDescent.lean as relevant. Flatness and reducedness definitions/base-change instances do not give a finite-stage model; Smooth.exists_finiteType requires smoothness and is affine algebra only. No exact statement or one-line specialization. Subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "bee5574314c373bd"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Noetherian approximation of a flat finitely presented scheme with section preserving one reduced geometric fibre",
+   "results": "8 hits: AlgebraicGeometry.flat_iff, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover. Read the returned types and Mathlib AlgebraicGeometry/Morphisms/Flat.lean, Morphisms/LocalFlatDescent.lean, Geometrically/Reduced.lean and RingTheory/Smooth/NoetherianDescent.lean as relevant. Flatness and reducedness definitions/base-change instances do not give a finite-stage model; Smooth.exists_finiteType requires smoothness and is affine algebra only. No exact statement or one-line specialization. Subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "8cd065aad1858dcb"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsNoetherian",
+   "results": "0 hits: none. Read the returned types and Mathlib AlgebraicGeometry/Morphisms/Flat.lean, Morphisms/LocalFlatDescent.lean, Geometrically/Reduced.lean and RingTheory/Smooth/NoetherianDescent.lean as relevant. Flatness and reducedness definitions/base-change instances do not give a finite-stage model; Smooth.exists_finiteType requires smoothness and is affine algebra only. No exact statement or one-line specialization. Subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat finitely presented scheme morphism with a section descends to a flat noetherian model preserving a reduced geometric fibre and section components",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AlgebraicGeometry.flat_iff, Algebra.Smooth.flat_of_isNoetherianRing. Read the returned types and Mathlib AlgebraicGeometry/Morphisms/Flat.lean, Morphisms/LocalFlatDescent.lean, Geometrically/Reduced.lean and RingTheory/Smooth/NoetherianDescent.lean as relevant. Flatness and reducedness definitions/base-change instances do not give a finite-stage model; Smooth.exists_finiteType requires smoothness and is affine algebra only. No exact statement or one-line specialization. Subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "9751e08d8a28a01a"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|NoetherianApproximation|exists.*[Nn]oetherian",
+   "results": "14 hits: Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean. Read the returned types and Mathlib AlgebraicGeometry/Morphisms/Flat.lean, Morphisms/LocalFlatDescent.lean, Geometrically/Reduced.lean and RingTheory/Smooth/NoetherianDescent.lean as relevant. Flatness and reducedness definitions/base-change instances do not give a finite-stage model; Smooth.exists_finiteType requires smoothness and is affine algebra only. No exact statement or one-line specialization. Subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "2f57847ae71825e2"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists a finite type integer subring and a flat model of a finitely presented morphism together with its section and a reduced geometric fibre",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmooth.out, AlgebraicGeometry.UniversallyOpen.of_flat, Algebra.Smooth.exists_subalgebra_finiteType, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.Smooth.exists_subalgebra_fg, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation. Read the returned types and Mathlib AlgebraicGeometry/Morphisms/Flat.lean, Morphisms/LocalFlatDescent.lean, Geometrically/Reduced.lean and RingTheory/Smooth/NoetherianDescent.lean as relevant. Flatness and reducedness definitions/base-change instances do not give a finite-stage model; Smooth.exists_finiteType requires smoothness and is affine algebra only. No exact statement or one-line specialization. Subdirectory: .",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "919370effe49143c"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-reduced-section-component-generalization",
+  "date": "2026-10-22",
+  "group": "Q52"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 055Q generalization argument used in Tag 055R: the section-component openness needed for the flat slicing and alteration route beneath lem-trf-local-term-locality (the nearby-cycle/specialization proof). Auxiliary 055Q argument: Tag 055Q, lemma-connected-along-section-open-neighbourhood, first paragraph: affine restriction, descent of family and section, eventual flatness, and the distinguished fibre.",
+   "via": [
+    "lem-trf-flat-reduced-section-component-generalization",
+    "lem-trf-flat-reduced-section-component-open",
+    "lem-trf-finite-locally-free-multisection-connected-open",
+    "lem-trf-geometrically-connected-fibre-open-spreading",
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-flat-pointed-noetherian-component-model",
+  "worker": "stage1",
+  "summary": "Rebased the retained approved split onto the current live unsplit record after the required initial dry run 55eae607b62. Reread all sixteen proof-dependency statements and the remaining definitions; all 24 citation quotes remain verbatim. Added explicit inverse fibre-product comparison maps in step 5 to verify that the square stays cartesian after increasing to the flat stage. Preserved the exact statement, ancestry and all current maintainer fields, and retained the previous report and search records. Zero new nodes or Mathlib leaves; stage 1 only.",
+  "blueprint": "Realizes the first-paragraph Noetherian reduction of Stacks Tag 055Q identified in blueprint.from.place beneath lem-trf-local-term-locality. Read the current chapter and unit and the current ancestor statement (its latest file has no proof). The current spreading-out blueprint explicitly identifies the two equivalent over-base morphism formulations used in step 4. This retains the inherited auxiliary geometric route without changing any chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic finiteness under base change and qcqs source permanence for the approximation models; the present unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-descend-flat-finite-presentation",
+    "why": "Generic eventual-flatness theorem for the already chosen affine inverse system, exactly the Tag 04AI input used by Tag 055Q; no corresponding theorem in this unit."
+   },
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "Generic section-component base-change equality, exactly Tag 055M in the first-paragraph reduction; no corresponding theorem of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-descend-flat-finite-presentation",
+  "lem-sbc-section-component-cartesian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-22ef69df6",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-22ef69df6 (reviewer sub-agent of L); spot-checked: I read all seven steps in full against Stacks Tag 055Q (more-morphisms.tex, lemma-connected-along-section-open-neighbourhood, first paragraph of the proof) and against the current statements of the 16 cited nodes. The delivery has no new nodes and no repair note, and the statement and stmt_deps are unchanged. Compared with the 812c head, only step 5 and split_report changed. The new comparison maps in step 5, ((p,u),v)↦(p,v) and (p,v)↦((p,b v),v), are well defined because g_i p = b_i v = u b v, and both composites are the identity, so the step is correct and kept. Steps 1-3 and 6 are correct: the affine V; the directed set of finitely generated Z-subalgebras, nonempty and Noetherian qcqs; 01ZM (1) with permanence (2),(3) and the tail-limit argument; and the reduced-fibre locus lemma applied to (g_0,b), used in the right direction. Step 4 needs the descended map of 01ZM (2) to be over T_j. I accept this reading because Tag 01ZM is stated in the category of schemes over the base. Step 5 applies 04AI with S_0=Y_0=T_i and X_0=P_i. FIX (C1): steps 5 and 7 again pass from pointwise local finite presentation (def-sbc-locally-finite-presentation) to local finite type over every affine (def-weil-finite-type-morphism, and the hypothesis of lem-sbc-section-component-cartesian) without citing Tag 01T2. That is the existing Mathlib leaf lem-weil-pbc-lft-pointwise-criterion. My fix keeps this head's step 5, replaces its finite-type sentence with the pointwise-criterion clause, puts in the 812c fix text of step 7, and adds the leaf to proof_deps. proof_deps now equals the union of the step uses, there is no cycle, and the longest step has 1729 characters. Edge cases checked: the identity family, T⊔T with q off the section component, inseparable residue fields, and a non-Noetherian T. Not a duplicate: the lem-sbc-smooth-* nodes assume smoothness, and the sbc Noetherian-model nodes lack flatness and the reduced fibre. Accepted tool_uses: 04AI and 055M; declaring qcqs permanence is harmless because it is a Mathlib leaf. No SGA source. Maintainer: this fix has now been lost 15 times; the worker sandbox must take steps 5 and 7 and proof_deps from fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatPointedNoetherianComponentModel",
+  "declaration": "AlgebraicGeometry.exists_flat_pointed_noetherian_component_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatPointedNoetherianComponentModel.lean",
+  "statement": "theorem exists_flat_pointed_noetherian_component_model {P T : Scheme.{u}} (g : P ⟶ T) [Flat g] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (q : P) (hred : GeometricallyReduced (g.fiberToSpecResidueField (g q))) : ∃ (V : T.Opens) (hq : g q ∈ V) (P₀ T₀ : Scheme.{u}) (g₀ : P₀ ⟶ T₀) (σ₀ : T₀ ⟶ P₀) (b : V.toScheme ⟶ T₀) (ρ : pullback g V.ι ⟶ P₀), IsAffineOpen V ∧ IsNoetherian P₀ ∧ IsNoetherian T₀ ∧ IsAffine T₀ ∧ Flat g₀ ∧ LocallyOfFinitePresentation g₀ ∧ QuasiCompact g₀ ∧ QuasiSeparated g₀ ∧ IsPullback ρ (pullback.snd g V.ι) g₀ b ∧ σ₀ ≫ g₀ = 𝟙 T₀ ∧ sectionBaseChange g σ hσ (Over.mk V.ι) ≫ ρ = b ≫ σ₀ ∧ IsReduced (pullback g₀ (Spec.map (CommRingCat.ofHom (algebraMap (T₀.residueField (b ⟨g q, hq⟩)) (AlgebraicClosure (T₀.residueField (b ⟨g q, hq⟩))))) ≫ T₀.fromSpecResidueField (b ⟨g q, hq⟩))) ∧ ρ ⁻¹' {p : P₀ | p ∈ connectedComponentIn (g₀ ⁻¹' {g₀ p}) (σ₀ (g₀ p))} = (pullback.fst g V.ι) ⁻¹' {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))}",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5409eab80",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read node, Stacks 055Q first paragraph, all 13 stmt_dep records, module and report. Every clause matches: Flat+LFP+QC+QS for g and g0; σ≫g=𝟙; hred = GeometricallyReduced on fiberToSpecResidueField (universe-u field test is equivalent); ∃ V affine open ∋ g q; IsNoetherian P0,T0; IsAffine T0; IsPullback ρ (pullback.snd g V.ι) g0 b; σ0≫g0=𝟙; canonical sectionBaseChange ≫ ρ = b ≫ σ0; geometric fibre at b⟨g q,hq⟩ (=g0ρ(q_V) by the square) uses the def-weil-geometric-fibre formula; locus equality ρ⁻¹C0 = fst⁻¹C as subsets of P_V = C∩P_V. Inline connectedComponentIn locus matches the cited 055M declaration; no duplicate in Mathlib or project. Edge cases (empty P/T, q off the section component, imperfect residue fields, non-Noetherian T, universes) fine. No defs, proof sorry only, docstrings carry source and blueprint tag plus 7 proof steps, lean.statement verbatim, node differs from live only in lean. Not compiled since nothing changed; worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261026T092523-L-3439270",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

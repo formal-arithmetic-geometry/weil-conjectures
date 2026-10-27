@@ -1,0 +1,269 @@
+{
+ "id": "lem-pur-supported-root-scalar-site-comparison",
+ "kind": "statement",
+ "title": "Supported root-class scalar extension and site comparison with normalized units",
+ "statement": "Fix the finite datum $k,\\ell,E,n\\geq1,A=A_{E,n}$ of [def-pur-conventions] and the prescribed twist [def-coefficient-twists-detailed]. Let $T$ be a separated finite-type $k$-scheme, $i:Z\\hookrightarrow T$ any closed immersion and $W=T\\setminus Z$. Put $N=\\ell^n$, $R=\\mathbf Z/N\\mathbf Z$ and $M=\\mu^{\\mathrm{et}}_{N,T}$, the etale root sheaf with its $R_T$-module action [lem-asd-finite-etale-twist-line]. Work in the ordinary module derived categories [def-weil-pbc-derived-categories]. Write\n$$\\chi_R:H_Z^2(T_{\\mathrm{et}},M)\\xrightarrow{\\sim}\\operatorname{Hom}(i_*R_Z,M[2])$$\nfor the signed support-Hom identification of [lem-amb-closed-support-hom] and [lem-pur-divisor-relative-cone]. For any $\\beta\\in H_Z^2(T_{\\mathrm{et}},M)$ let $b=\\chi_R(\\beta)$. Let $L_A=-\\otimes_R^L A$ be [lem-pur-derived-change-of-rings], with its normalized adjunction unit $\\eta$ of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Use the canonical supported-source comparison adjoint to $R_Z\\to A_Z$ [lem-geo-cartier-coeff-extension]. Then $Ri_*A_Z=i_*A_Z$, $L_A(i_*R_Z)\\cong i_*A_Z$, and $L_A M\\cong B=M\\otimes_R A$ in degree zero. Denote the resulting arrow $L_A b$ by $b_A:i_*A_Z\\to B[2]$, and set $u:M\\to\\operatorname{Res}B$, $v\\mapsto v\\otimes1$.\nUnder these canonical identifications the unit at the supported source is induced by $1_R\\mapsto1_A$, the unit at $M$ is $u$, and\n$$\\operatorname{Res}(b_A)\\circ\\eta_{i_*R_Z}=\\eta_M[2]\\circ b.$$\nThe signed $A$-module support-Hom realization of the underlying coefficient image $u_*\\beta$ is exactly $b_A$; here coefficient forgetting is compared canonically with abelian supported cohomology, so the assertion includes the full relative lift.\nLet $\\nu:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ be [def-weil-pbc-site-comparison-morphism], $a_T:\\nu^{-1}i_*^{\\mathrm{et}}A_Z\\xrightarrow{\\sim}i_*^{\\mathrm{proet}}A_Z$ the canonical supported-constant comparison of [lem-pur-supported-hom-pullback], and $q:\\nu^{-1}B\\xrightarrow{\\sim}A(1)_T$ the projection-induced root identification of [def-pur-frame-class]. In particular $q(v\\otimes a)=a\\sigma_T\\rho_T(v)$ on local root tensors. Put $t=\\sigma_T\\rho_T$, so $q\\nu^{-1}u=t$. With $\\chi_A$ the pro-etale supported-Hom identification of [lem-pur-supported-hom],\n$$\\chi_A(t_*\\nu^*\\beta)=q[2]\\circ\\nu^{-1}b_A\\circ a_T^{-1}.$$\nAll site-comparison assertions here use the bounded-below etale witness $B[0]$. No flatness of $A$ over $R$, Cartier condition on $Z$, or purity isomorphism is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Parent Step 4 (L1), rank-one Kummer construction; Cartier-map proof final scalar-extension paragraph; extracted agreement proof steps 4-5"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "lem-asd-finite-etale-twist-line",
+  "def-weil-pbc-derived-categories",
+  "lem-amb-closed-support-hom",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-geo-cartier-coeff-extension",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-supported-hom-pullback",
+  "def-pur-frame-class",
+  "lem-pur-supported-hom",
+  "def-geo-exact-degree-zero-interface",
+  "def-pc-sheaf-restrict-scalars",
+  "def-asd-finite-etale-tate-twist",
+  "def-pur-supported-hom-cocycle-data",
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof": [
+  {
+   "text": "Use normalized coefficient-Hom naturality for the lifted residue ring, A, the canonical scalar map and the closed immersion. This provides the three signed identifications, the four derived-kernel isomorphisms and the compatible site transport.",
+   "uses": [
+    "lem-pur-supported-coefficient-hom-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the normalized root scalar endpoints for theta, c and c2. The residue finite-root map is invertible. Closed direct image is exact for the finite closed immersion, so its total right-derived unit at the single complex is invertible.",
+   "uses": [
+    "lem-pur-supported-root-scalar-endpoints",
+    "lem-sp-residue-finite-root-map-iso",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supported coefficient comparison is invertible by coefficient extension. Define alpha as its canonical asIso and compute its adjunct by the adjunction inverse law. The hom-equivalence naturality gives w followed by Res(alpha inverse L(b) c2) equals b followed by the shifted root unit. Adjunction and cancellation by alpha prove injectivity of precomposition by w.",
+   "uses": [
+    "lem-geo-cartier-coeff-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine this unit equation with coefficient-Hom naturality. The coefficient-image condition is equivalent to the realized class equalling the scalar arrow. The supported-Hom equivalence gives existence and uniqueness of that class. Compatible site transport then gives the final site formula. Linearity of the root generator and of the inverse-image unit proves the local tensor formula.",
+   "uses": [
+    "lem-pur-supported-coefficient-hom-naturality"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-geo-cartier-coeff-extension",
+  "lem-pur-supported-coefficient-hom-naturality",
+  "lem-pur-supported-root-scalar-endpoints",
+  "lem-sp-residue-finite-root-map-iso",
+  "lemma-weil-pbc-finite-direct-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Scalar-extension paragraph; A7 Lean reduction by normalized root endpoints, coefficient naturality, adjunction injectivity and the supported-Hom equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supported.*(scalar|coefficient)|proetale|Kummer",
+   "results": "Hits read: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar adjunction or sheaf cohomology results do not state the supported derived root and site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported cohomology scalar extension normalized derived tensor adjunction and change from etale to proetale site",
+   "results": "Hits read: ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, PresheafOfModules.sheafificationAdjunction, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, PresheafOfModules.pullbackPushforwardAdjunction. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar adjunction or sheaf cohomology results do not state the supported derived root and site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "Hits read: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyFunctor, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar adjunction or sheaf cohomology results do not state the supported derived root and site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars on root sheaves carries supported cohomology classes to coefficient images by the tensor unit and commutes with etale proetale comparison",
+   "results": "Hits read: Algebra.Extension.H1Cotangent.map, Algebra.Extension.tensorH1Cotangent, SheafOfModules.Presentation.map_π_eq, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Generators.H1Cotangent.δ_eq, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar adjunction or sheaf cohomology results do not state the supported derived root and site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the derived tensor restriction adjunction unit identifies scalar extension of morphisms from a closed supported constant sheaf with change of coefficients",
+   "results": "Hits read: ModuleCat.RestrictionCoextensionAdj.unit', LightCondensed.ihomPoints_symm_comp, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.ExtendRestrictScalarsAdj.unit. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary scalar adjunction or sheaf cohomology results do not state the supported derived root and site comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-cartier-class-agreement",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-localized-top-chern",
+   "place": "Parent Step 4 (L1), rank-one Kummer construction; Cartier-map proof final scalar-extension paragraph; extracted agreement proof steps 4-5",
+   "via": [
+    "lem-pur-cartier-class-agreement"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-supported-root-scalar-site-comparison",
+  "worker": "stage1",
+  "summary": "Q02: supplied a seven-step proof using existing DAG nodes only. Verified flatness belongs to the root and supported-source sheaves, not to the coefficient ring; computed both normalized units; identified coefficient change on full supported classes by evaluation at one and retained the signed relative lift; applied site comparison only to B[0]. No statement correction or new nodes.",
+  "blueprint": "thm-pur-localized-top-chern proof Step 4 (L1), rank-one Kummer construction, through lem-pur-cartier-class-agreement; expands the final scalar-extension paragraph of lem-amb-cartier-kummer-map and opening site-transport paragraph of sk-lem-geo-cartier.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-geo-cartier-coeff-extension",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-divisor-relative-cone",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-etale-closed-constant-tensor",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-supported-hom",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-supported-hom-cocycle-normalization",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-pur-supported-hom-pullback",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic ordinary module/derived comparison used for its stated normalization or exactness; supports the fixed rank-one Kummer route rather than replacing a purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-closed-support-hom",
+  "lem-asd-finite-etale-twist-line",
+  "lem-geo-cartier-coeff-extension",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-divisor-relative-cone",
+  "lem-pur-etale-closed-constant-tensor",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-supported-hom",
+  "lem-pur-supported-hom-cocycle-normalization",
+  "lem-pur-supported-hom-pullback",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-independent-bounded-flat-kflat"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-c1a37ab42",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-c1a37ab42 (reviewer sub-agent of L); spot-checked: I read the item and all 21 cited statements in full. The statement is byte-identical to base; the item is not dropped, not a re-split, has no cycle and cites no SGA source. It faithfully expands the final scalar-extension paragraph of main-20261015 lem-amb-cartier-kummer-map.proof.md (via thm-pur-localized-top-chern / lem-pur-cartier-class-agreement). Step 1: NA=0 from ell^n in (pi^{en}); N is invertible since ell != p; M is flat by lem-asd-finite-etale-twist-line with A:=R; P_R is flat by lem-pur-etale-closed-constant-tensor; i_* is exact by lem-pur-etale-supported-kernel-adjunction. Step 2: the bounded-flat K-flat node, derived-change-of-rings (2), geo-cartier-coeff-extension (alpha is the adjunct of w) and coefficient-adjunction (1)/(2) give the units u and 1_R->1_A. Step 3 (unit naturality, elementary) is correct. Step 4: by cocycle normalization (applied to R with E=Q_ell), the restriction-kernel comparison and the K-injective comparison Res J->H, Res(g)w=u[2]b; adjunction bijectivity then gives g=b_A. Step 5: the signed relative cone is natural in coefficients. Step 6: the site clause of lem-pur-supported-hom-pullback with witness B[0]. Step 7: finite-root c=rho and sigma=c(x)1, so q=theta^{-1}sigma_{m,T}, q(v(x)a)=a sigma rho(v), and lem-pur-supported-hom naturality gives the displayed formula. Edge cases checked: Z empty, Z=T, E=Q_ell, ramified non-flat A (ell=3, e=2, n=2), F_4. Batch-5 flag on Step 7 -> lem-amb-finite-root-site-comparison accepted: lem-pod-etale-stalk-tensor-scalar and every pod/trf node in its closure are already reached by the other cites (def-pur-frame-class, lem-pur-supported-hom) on base, so the cite adds nothing new; that node is a generic stalk-tensor fact, outside both assumptions; and finite-root is in the item's own unit sk-prop-an. The worker-written tool_uses (15 generic homological/coefficient tools, C8 form point) are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedRootScalarSiteComparison",
+  "declaration": "AlgebraicGeometry.SupportedRootScalar.supported_root_scalar_site_comparison",
+  "declarations": [
+   "AlgebraicGeometry.SupportedRootScalar.Residue",
+   "AlgebraicGeometry.SupportedRootScalar.rootModule",
+   "AlgebraicGeometry.SupportedRootScalar.scalar",
+   "AlgebraicGeometry.SupportedRootScalar.unitPlus",
+   "AlgebraicGeometry.SupportedRootScalar.shiftedRootUnit",
+   "AlgebraicGeometry.SupportedRootScalar.scalarArrow",
+   "AlgebraicGeometry.SupportedRootScalar.CoefficientImage",
+   "AlgebraicGeometry.SupportedRootScalar.siteClass",
+   "AlgebraicGeometry.SupportedRootScalar.rootTwistIso",
+   "AlgebraicGeometry.SupportedRootScalar.siteTensor",
+   "AlgebraicGeometry.SupportedRootScalar.supported_root_scalar_site_comparison",
+   "AlgebraicGeometry.SupportedRootScalar.rootScalarEndpointData"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedRootScalarSiteComparison.lean",
+  "statement": "theorem supported_root_scalar_site_comparison (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) [T.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (.of P.field.k))] [QuasiCompact (T ↘ Spec (.of P.field.k))] [IsSeparated (T ↘ Spec (.of P.field.k))] {Z : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] : ∃ chiR : (rootScalarSupportPair (Residue P) i).Identification, ∃ chiA : (etaleSupportHomPair P i).Identification, ∃ chiP : (proEtaleSupportHomPair P i).Identification, ∃ theta : rootModule P T ⟶ (Sheaf.restrictScalars T.smallEtaleTopology (scalar P)).obj (P.frameTwistEtale T 1), ∃ alpha : (Etale.scalarExtension (scalar P) T).obj (Etale.supportedConstantDerived (A := Residue P) i) ≅ Etale.supportedConstantDerived (A := P.Coefficient) i, ∃ c : (Etale.scalarExtension (scalar P) T).obj (SheafExactDegreeZero.obj _ (rootModule P T)) ≅ SheafExactDegreeZero.obj _ (P.frameTwistEtale T 1), ∃ c2 : (Etale.scalarExtension (scalar P) T).obj ((SheafExactDegreeZero.obj _ (rootModule P T))⟦(2 : ℤ)⟧) ≅ (SheafExactDegreeZero.obj _ (P.frameTwistEtale T 1))⟦(2 : ℤ)⟧, ∃ v : siteSupportHomTransport P i, SignedIdentification (rootScalarSupportPair (Residue P) i) chiR ∧ SignedIdentification (etaleSupportHomPair P i) chiA ∧ SignedIdentification (proEtaleSupportHomPair P i) chiP ∧ IsIso (Etale.ordinaryFiniteRootMap (Residue P) P.diagonalExponent (congrArg ULift.up (ZMod.natCast_self P.diagonalExponent)) T) ∧ IsIso ((Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj ((CochainComplex.singleFunctor _ 0).obj (P.constantEtale Z)))) ∧ alpha.hom = Etale.supportedCoefficientComparison (scalar P) i ∧ ((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology (scalar P))).homEquiv _ _) alpha.hom = Etale.coefficientUnitDerived (scalar P) i ∧ (∀ (U : T.Etaleᵒᵖ) (r : Residue P) (z : (T.rootsOfUnitySheaf P.diagonalExponent).obj.obj U), theta.hom.app U (Scheme.finiteEtaleTateOneGenerator (Residue P) P.diagonalExponent T (congrArg ULift.up (ZMod.natCast_self P.diagonalExponent)) U r z) = Scheme.finiteEtaleTateOneGenerator P.Coefficient P.diagonalExponent T P.diagonalExponent_annihilates U (scalar P r) z) ∧ ((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology (scalar P))).homEquiv _ _) c.hom = SheafExactDegreeZero.scalarUnit T.smallEtaleTopology (scalar P) (rootModule P T) (P.frameTwistEtale T 1) theta ∧ ((Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology (scalar P))).homEquiv _ _) c2.hom = shiftedRootUnit P T theta ∧ IsIso ((derivedCoefficientComparison (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} (Residue P))) (dB := HasDerivedCategory.ofIsGrothendieckAbelian AddCommGrpCat.{u + 1}) T.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (Residue P)) AddCommGrpCat.{u + 1}) (Etale.supportRestrictionArrow i)).app (singlePlus (rootModule P T))) ∧ IsIso ((derivedCoefficientComparison (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient)) (dB := HasDerivedCategory.ofIsGrothendieckAbelian AddCommGrpCat.{u + 1}) T.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}) (Etale.supportRestrictionArrow i)).app (singlePlus (P.frameTwistEtale T 1))) ∧ IsIso ((derivedCoefficientComparison (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient)) (dB := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} (Residue P))) T.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} (scalar P)) (Etale.supportRestrictionArrow i)).app (singlePlus (P.frameTwistEtale T 1))) ∧ (∀ (U : T.Etaleᵒᵖ) (W : T.ProEtᵒᵖ) (f : W.unop ⟶ (Scheme.toProEt T).obj U.unop) (a : P.Coefficient) (z : (T.rootsOfUnitySheaf P.diagonalExponent).obj.obj U), (rootTwistIso P T).hom.hom.app W (siteTensor P T U W f a z) = a • (rootTwistIso P T).hom.hom.app W (siteTensor P T U W f 1 z)) ∧ IsIso ((derivedCoefficientComparison (dA := HasDerivedCategory.ofIsGrothendieckAbelian (ModuleCat.{u + 1} P.Coefficient)) (dB := HasDerivedCategory.ofIsGrothendieckAbelian AddCommGrpCat.{u + 1}) (Scheme.ProEt.topology T) (forget₂ (ModuleCat.{u + 1} P.Coefficient) AddCommGrpCat.{u + 1}) (ProEtale.supportRestrictionArrow i)).app ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategoryPlus.obj (singlePlus (P.frameTwistEtale T 1)))) ∧ v.Compatible (hB := Scheme.isContinuous_toProEt T) chiA chiP (singlePlus (P.frameTwistEtale T 1)) 2 ∧ (∀ beta : (rootScalarSupportPair (Residue P) i).group (singlePlus (rootModule P T)) 2, ∃! gamma : (etaleSupportHomPair P i).group (singlePlus (P.frameTwistEtale T 1)) 2, CoefficientImage P i theta beta gamma) ∧ ∀ (beta : (rootScalarSupportPair (Residue P) i).group (singlePlus (rootModule P T)) 2) (gamma : (etaleSupportHomPair P i).group (singlePlus (P.frameTwistEtale T 1)) 2), CoefficientImage P i theta beta gamma → realize (etaleSupportHomPair P i) chiA (P.frameTwistEtale T 1) gamma = scalarArrow P i alpha c2 (realize (rootScalarSupportPair (Residue P) i) chiR (rootModule P T) beta) ∧ Etale.coefficientUnitDerived (scalar P) i ≫ (Sheaf.derivedRestrictScalars T.smallEtaleTopology (scalar P)).map (scalarArrow P i alpha c2 (realize (rootScalarSupportPair (Residue P) i) chiR (rootModule P T) beta)) = realize (rootScalarSupportPair (Residue P) i) chiR (rootModule P T) beta ≫ shiftedRootUnit P T theta ∧ chiP.chi _ 2 (siteClass P i v gamma) = v.homMap (singlePlus (P.frameTwistEtale T 1)) 2 (homFromZero (etaleSupportHomPair P i) (P.frameTwistEtale T 1) (scalarArrow P i alpha c2 (realize (rootScalarSupportPair (Residue P) i) chiR (rootModule P T) beta)))",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "All comparisons are normalized by actual units, kernel maps and evaluation at one. The fixed finite root-tensor presentation of frameTwist makes q the identity in that presentation. The only site witness is B[0]; the shifted scalar comparison is fixed by its normalized adjunct, without a global CommShift assumption on the chosen left adjoint. Repair of d94d28c82975: the closed pushforward clause is IsIso of its canonical rightDerivedFunctorUnit at the single complex of P.constantEtale Z; scalar is the finiteEtaleTwistScalar composite with ULift.ringEquiv; plain cocycle normalization data are cited through def-pur-supported-hom-cocycle-data rather than the normalization theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7b41a89e",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Re-delivery of d94d28c82975 fixes both returned faults. H2: the theorem stmt_deps lem-asd-supported-kummer-scalar-source and lem-pur-supported-hom-cocycle-normalization are dropped. scalar P is now the inline finiteEtaleTwistScalar.comp ULift.ringEquiv, the same body as the old supportedScalarMap, citing def-asd-finite-etale-tate-twist. The new existing:true def-pur-supported-hom-cocycle-data registers the unchanged SupportedHomCocycleNormalization structure, ConeAgreement and supportedHomConstantRestriction; its statement is faithful to the module (md5-identical live and side-live), its 13 stmt_deps exist and its lean.statement is verbatim. ordinaryFiniteRootMap is owned through def-asd-ordinary-finite-p1-kummer-class. H3: Nonempty(Ri_*A_Z ≅ i_*A_Z) is replaced by IsIso of the canonical rightDerivedFunctorUnit at the single complex of A_Z. The fromSingle/toSingle helpers are the same eqToHom composites (compile-time only). The rest of the statement is unchanged and was accepted before. lean.statement is verbatim, the only sorry is the main theorem, docstrings and report sections are present. Advisory: finiteEtaleTateOneGenerator owner def-asd-finite-etale-tate-sheaf is not in stmt_deps (used the same way before); the new node and the normalization theorem node list the same declarations. No fixes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e7e4c",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T163537-L-692667",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; new sorry supportedCoefficientHomNaturality read vs node and judged true (normalized χ, Stacks 03FD/093X comparisons, evaluation-at-one iff), not a restatement; moved defs re-exported via public import, 0 importers; node lean records match; #print axioms clean (sorryAx only via new lemma + upstream p1KummerScalarEndpointExistence); adapted P1 module + importer P1KummerDerivedScalar + new module compile"
+ }
+}

@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-affine-conormal-jacobian-realization",
+ "kind": "statement",
+ "title": "Affine conormal realization and augmented Jacobian cofactor formula",
+ "statement": "Let $R$ be a commutative ring, $c\\geq0$, $P=R[x_0,\\ldots,x_c]$, and $I=(f_1,\\ldots,f_c)$ for an ordered regular sequence [def-weil-pbc-regular-sequence]. Put $B=P/I$, $C=I/I^2$, $V=\\bigoplus_{j=0}^c B\\,dx_j$ and $u:C\\to V$, $u(\\bar f_i)=\\sum_j\\overline{\\partial f_i/\\partial x_j}dx_j$. Differentials mean [def-weil-pbc-kahler-differentials], and exterior powers mean [def-weil-pbc-exterior-algebra]. Write $E=[C\\xrightarrow{u}V]$ in degrees $-1,0$ and $D(E)=(\\bigwedge^c C)^\\vee\\otimes_B\\bigwedge^{c+1}V$, with $M^\\vee=\\operatorname{Hom}_B(M,B)$. Then $C$ has the indicated conormal basis $\\bar f_1,\\ldots,\\bar f_c$ and $V$ has basis $dx_0,\\ldots,dx_c$. The canonical conormal comparison $E\\simeq L_{B/R}$ for the intrinsic cotangent complex of [lem-trf-lci-cotangent-presentation] is an isomorphism in the derived category, with $D(E)\\simeq\\det L_{B/R}$ for [lem-trf-two-term-perfect-determinant]. Its degree-zero identification is the canonical isomorphism $\\operatorname{coker}u\\simeq\\Omega^1_{B/R}$ sending the class of $dx_j$ to $d\\bar x_j$. There is a unique $B$-linear map $w:\\Omega^1_{B/R}\\to D(E)$ with\n$$w(\\bar v)=(\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes\\bigl(u(\\bar f_1)\\wedge\\cdots\\wedge u(\\bar f_c)\\wedge v\\bigr)$$\nfor every $v\\in V$, where $\\bar v$ is its image in the cokernel. This value is independent of the lift $v$ and of the basis used for $C$; it is the cofactor map of [lem-sfb-two-term-cofactor-naturality]. Let $e_0:D(E)\\xrightarrow{\\sim}B$ send $(\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes(dx_0\\wedge\\cdots\\wedge dx_c)$ to $1$. For every $a\\in P$ one has\n$$e_0(w(d\\bar a))=\\overline{\\det\\!\\left(\\frac{\\partial(f_1,\\ldots,f_c,a)}{\\partial(x_0,\\ldots,x_c)}\\right)}.$$\nThese identifications and formulas commute with restriction to open affine subschemes of $\\operatorname{Spec}B$ and transport by isomorphisms of the presented $R$-algebras. The orientation is relation-first, as in the kernel-first determinant normalization of the cited cofactor lemma; changing to the corresponding shifted Koszul convention changes the scalar trivialization by a sign depending only on $c$. The assertions include $c=0$, when $C=0$ and $w(dx_0)=dx_0$.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula and omitted well-definedness check; cotangent.tex Tags 08SJ, 08SL, conormal model. Extracts old proof steps 1-3 and local transport in step 7; agent-formulated combined local realization."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-regular-sequence",
+  "lem-sfb-two-term-cofactor-naturality",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "def-sc-koszul-conormal-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-regular-sequence-koszul-regular] with ambient ring $P$ and module $P$. Thus the given sequence is Koszul-regular, and [lem-sc-koszul-conormal-basis] gives the basis $p_i=\\bar f_i$ of $C=I/I^2$, including the empty basis when $c=0$. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], $B\\otimes_P\\Omega^1_{P/R}$ is the displayed free module $V$ on $dx_0,\\ldots,dx_c$. In these coordinates the conormal differential is $u(p_i)=\\sum_j\\overline{\\partial f_i/\\partial x_j}dx_j$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-koszul-regular",
+    "lem-sc-koszul-conormal-basis",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 062F (lemma-regular-koszul-regular), 0CEM (lemma-koszul-regular-H1-regular), 062I (lemma-H1-regular-quasi-regular), first paragraph; algebra.tex Tag 00RX (lemma-differentials-polynomial-ring)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jacobi-zariski-differential-maps] to $R\\to P\\twoheadrightarrow B$, with ideal $I$. It gives an exact sequence $C\\xrightarrow{u}V\\to\\Omega^1_{B/R}\\to0$, whose last map sends $dx_j$ to $d\\bar x_j$. Hence its induced map $\\operatorname{coker}u\\to\\Omega^1_{B/R}$ is the required canonical isomorphism. For $a\\in P$ the polynomial differential formula of [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] gives the lift $v_a=\\sum_j\\overline{\\partial a/\\partial x_j}dx_j$ of $d\\bar a$. No injectivity of $u$ is claimed or needed.",
+   "uses": [
+    "lem-weil-pbc-jacobi-zariski-differential-maps",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00RU (lemma-differential-seq), explicit maps and exactness; 00RX (lemma-differentials-polynomial-ring)."
+   }
+  },
+  {
+   "text": "The immersion $\\operatorname{Spec}B\\hookrightarrow\\operatorname{Spec}P=\\mathbf A_R^{c+1}$ has its ideal generated by the Koszul-regular sequence established in step 1. Apply [lem-trf-lci-cotangent-presentation] to this factorization: its canonical conormal comparison identifies $E=[C\\to V]$ with the intrinsic $L_{B/R}$ in the derived category, and is compatible with restriction. Its terms are finite free of ranks $c,c+1$. Thus [lem-trf-two-term-perfect-determinant] identifies its determinant with $D(E)$ and transports it to $\\det L_{B/R}$. The degree-zero comparison is the cokernel map of step 2: the conormal model sends the differential of each polynomial generator to its universal differential, as specified by the natural presentation comparison in [lem-trf-lci-naive-cotangent-model].",
+   "uses": [
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-lci-naive-cotangent-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SJ (lemma-mod-regular-sequence), 08SL (proposition-cotangent-complex-local-complete-intersection), 08RB (lemma-relation-with-naive-cotangent-complex); perfect.tex Tags 0FJX and 0FJY."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-two-term-cofactor-naturality] to the finite free two-term complex $E$ with ranks $c,c+1$, using the cokernel identification of step 2. Its stated existence and basis/lift independence give exactly $w:\\Omega^1_{B/R}\\to D(E)$ and the formula in the statement. Uniqueness holds because every element of the cokernel has a lift in $V$. Concretely, replacing a lift by $v+\\sum_i b_i u(p_i)$ adds a sum of wedges with a repeated factor, hence zero; replacing $p$ by $pA$ multiplies its top wedge by $\\det A$ and its dual by $(\\det A)^{-1}$, which cancel. This also shows directly why no smoothness hypothesis is needed.",
+   "uses": [
+    "lem-sfb-two-term-cofactor-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed relation-first wedge formula; well-definedness supplied by the cited cofactor lemma, without applying a left-injectivity hypothesis."
+   }
+  },
+  {
+   "text": "Put $p=p_1\\wedge\\cdots\\wedge p_c$ and $q=dx_0\\wedge\\cdots\\wedge dx_c$. These are bases of the top exterior powers: multilinear expansion gives the permutation determinant as the coefficient of the ordered wedge, and the alternating coordinate determinant evaluates that wedge to $1$. Thus $p^\\vee\\otimes q$ is a basis of $D(E)$ and defines $e_0$. For $v_a$ from step 2, expand $u(p_1)\\wedge\\cdots\\wedge u(p_c)\\wedge v_a$. If $M$ has rows $(\\overline{\\partial f_i/\\partial x_j})_j$ followed by $(\\overline{\\partial a/\\partial x_j})_j$, terms with repeated column indices vanish and the remaining coefficient of $q$ is $\\sum_{\\sigma\\in S_{c+1}}\\operatorname{sgn}(\\sigma)\\prod_{i=1}^{c+1}M_{i,\\sigma(i)}=\\det M$. Reduction $P\\to B$ preserves this finite sum and products. Applying $e_0$ proves the augmented Jacobian formula with the stated row and column order.",
+   "uses": [
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula, expanded by multilinearity and alternation."
+   }
+  },
+  {
+   "text": "For a principal open $D(b)$, [lem-weil-pbc-kahler-differentials-localization] identifies the localized cokernel with $\\Omega^1_{B_b/R}$. The formula and localization comparisons in [lem-sfb-cofactor-local-descent] say that $w\\otimes_B B_b$ is precisely the cofactor map for $E\\otimes_B B_b$. The conormal-to-intrinsic comparison restricts canonically by [lem-trf-lci-cotangent-presentation], and [lem-trf-two-term-perfect-determinant] identifies its determinant with the restriction of $D(E)$. On generators the wedge formula localizes coefficient by coefficient, so the same is true of $e_0$ and the determinant equality. Every open affine is covered by principal opens contained in it; the resulting equalities agree on their principal-open intersections and therefore give equality of the restricted sheaf maps. The intrinsic affine comparisons in the cotangent-presentation lemma identify these with the complexes on that affine. This proves restriction compatibility without assuming every affine open is itself principal.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-localization",
+    "lem-sfb-cofactor-local-descent",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-two-term-perfect-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08T3 (lemma-morphism-affine-schemes); algebra.tex Tag 00RT (lemma-differentials-localize); perfect.tex Tag 0FJY; duality.tex Tag 0E9Y wedge formula."
+   }
+  },
+  {
+   "text": "Let $\\varphi:B\\xrightarrow{\\sim}B\\prime$ be an isomorphism of the presented $R$-algebras. Transport scalars along $\\varphi$; this is an equivalence, so it transports the displayed free modules and cokernel. By [lem-trf-cotangent-resolution-coherence], the standard intrinsic cotangent complex is functorial in this ring square and the inverse square, hence these maps are inverse derived isomorphisms. Compare any transported conormal model with a chosen model for $B\\prime$ through these intrinsic isomorphisms and step 3. In degree zero the comparison is $d\\bar a\\mapsto d\\varphi(\\bar a)$. Indeed, write $B\\prime=P\\prime/I\\prime$ with $P\\prime$ polynomial over $R$; since $P$ is polynomial and $P\\prime\\to B\\prime$ is surjective, choose $g_j\\in P\\prime$ lifting $\\varphi(\\bar x_j)$ and let $\\psi:P\\to P\\prime$, $x_j\\mapsto g_j$, a map of presentations over $\\mathrm{id}_R$ and $\\varphi$. By [lem-trf-lci-naive-cotangent-model] the chain map $C(P)\\to C(P\\prime)$ sends $dx_j\\otimes1$ to $dg_j\\otimes1$ and commutes in $D$ with the standard functoriality map on $L$; under the cokernel maps of step 2 this is $d\\bar x_j\\mapsto d\\varphi(\\bar x_j)$, hence by $B$-linearity and the derivation rules of [def-weil-pbc-kahler-differentials] it is the map $\\Omega^1(\\varphi)$, $d\\bar a\\mapsto d\\varphi(\\bar a)$, and $H^0(a)$ is this map. The equality $D(a)w_E=w_{E\\prime}H^0(a)$ of [lem-sfb-two-term-cofactor-naturality] now gives precisely transport compatibility. For literally transported ordered bases $e_0$ also transports, since its basis vector still maps to $1$; for different presentations the determinant comparison is the stipulated comparison of lines. Thus each augmented Jacobian expression represents the same intrinsic map, without asserting equality of unrelated scalar trivializations.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-naive-cotangent-model",
+    "def-weil-pbc-kahler-differentials",
+    "lem-sfb-two-term-cofactor-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), standard-resolution maps; duality.tex Tag 0E9Y and more-algebra.tex Tag 0FJM, via the cited intrinsic cofactor naturality."
+   }
+  },
+  {
+   "text": "The ordered wedge throughout puts the $c$ relation differentials before the lifted differential, so it is relation-first, with the kernel-first normalization stipulated in [lem-sfb-two-term-cofactor-naturality]. Passing to the corresponding shifted Koszul ordering only permutes these fixed-rank blocks and introduces the suspension signs fixed by their degrees. These signs depend on $c$ alone, not on coefficients, equations or $a$; hence the scalar trivialization changes only by such a sign. When $c=0$, the empty relation wedge and its dual are $1$, $C=0$, and the formula is $w(v)=v$. In particular $w(dx_0)=dx_0$, while the one-by-one augmented Jacobian is $\\partial a/\\partial x_0$, exactly the coefficient of $d\\bar a$.",
+   "uses": [
+    "lem-sfb-two-term-cofactor-naturality",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), ordered wedge formula and its empty-rank case; relation-first ordering as fixed in the cited cofactor statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-kahler-differentials",
+  "lem-sc-koszul-conormal-basis",
+  "lem-sfb-cofactor-local-descent",
+  "lem-sfb-two-term-cofactor-naturality",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-weil-pbc-jacobi-zariski-differential-maps",
+  "lem-weil-pbc-kahler-differentials-localization",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0E9Y (lemma-determinant), expanded in the given polynomial presentation using cotangent.tex Tags 08SJ/08SL and existing DAG tools. The combined naturality assertion is agent-formulated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quotient of a polynomial algebra by a regular sequence with one more variable than relations, the conormal complex has cokernel the Kahler differentials and its cofactor map is the augmented Jacobian determinant",
+   "results": "{\"t\": \"2026-10-22T07:26:45Z\", \"tool\": \"leanfinder\", \"query\": \"For a quotient of a polynomial algebra by a regular sequence with one more variable than relations, the conormal complex has cokernel the Kahler differentials and its cofactor map is the augmented Jacobian determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.differentialsSolution\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.Extension.toKaehler\", \"Algebra.Presentation.differentials.comm₂₃\", \"Algebra.Extension.cotangentComplex_mk\", \"Algebra.Presentation.differentials.comm₂₃'\", \"Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\"], \"digest\": \"5cc6a2c627f296d1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Algebra/Module/Presentation/Differentials.lean:47-130, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:110-158. They give a differential presentation, an auxiliary conormal map or a square Jacobian, not the determinant-valued derivation on a regular quotient together with its intrinsic derived model and augmented Jacobian formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"det\"",
+   "results": "{\"t\": \"2026-10-22T07:26:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"det\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Algebra/Module/Presentation/Differentials.lean:47-130, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:110-158. They give a differential presentation, an auxiliary conormal map or a square Jacobian, not the determinant-valued derivation on a regular quotient together with its intrinsic derived model and augmented Jacobian formula."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal.*(cofactor|determinant)|cofactor.*(differential|conormal)|fundamentalClass",
+   "results": "{\"t\": \"2026-10-22T07:26:45Z\", \"tool\": \"grep\", \"query\": \"conormal.*(cofactor|determinant)|cofactor.*(differential|conormal)|fundamentalClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Algebra/Module/Presentation/Differentials.lean:47-130, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:110-158. They give a differential presentation, an auxiliary conormal map or a square Jacobian, not the determinant-valued derivation on a regular quotient together with its intrinsic derived model and augmented Jacobian formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular sequence polynomial quotient conormal determinant map on differentials equals augmented Jacobian",
+   "results": "{\"t\": \"2026-10-22T07:26:46Z\", \"tool\": \"leansearch\", \"query\": \"Regular sequence polynomial quotient conormal determinant map on differentials equals augmented Jacobian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"RingTheory.Sequence.IsWeaklyRegular.mk\", \"RingTheory.Sequence.isRegular_cons_iff\", \"RingTheory.Sequence.isRegular_cons_iff'\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobian\"], \"digest\": \"0385c3c2f385a117\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Algebra/Module/Presentation/Differentials.lean:47-130, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:110-158. They give a differential presentation, an auxiliary conormal map or a square Jacobian, not the determinant-valued derivation on a regular quotient together with its intrinsic derived model and augmented Jacobian formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identify the two term cotangent complex of a complete intersection curve and compute its determinant valued derivation by wedging the differentials of the equations",
+   "results": "{\"t\": \"2026-10-22T07:26:57Z\", \"tool\": \"leanfinder\", \"query\": \"Identify the two term cotangent complex of a complete intersection curve and compute its determinant valued derivation by wedging the differentials of the equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff\", \"Algebra.Generators.cotangentSpaceBasis_repr_one_tmul\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.differential\", \"Algebra.Generators.cotangentSpaceBasis_repr_tmul\", \"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.Presentation.differentialsSolution\"], \"digest\": \"35a8aa1895294323\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Algebra/Module/Presentation/Differentials.lean:47-130, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:110-158. They give a differential presentation, an auxiliary conormal map or a square Jacobian, not the determinant-valued derivation on a regular quotient together with its intrinsic derived model and augmented Jacobian formula."
+  },
+  {
+   "tool": "grep",
+   "query": "jacobian_eq|conormal|cotangentComplex",
+   "results": "{\"t\": \"2026-10-22T07:26:57Z\", \"tool\": \"grep\", \"query\": \"jacobian_eq|conormal|cotangentComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/RingTheory/Extension/ExtendScalars.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\"], \"digest\": \"9ba63c7614eb1695\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read Mathlib/Algebra/Module/Presentation/Differentials.lean:47-130, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:110-158. They give a differential presentation, an auxiliary conormal map or a square Jacobian, not the determinant-valued derivation on a regular quotient together with its intrinsic derived model and augmented Jacobian formula."
+  },
+  {
+   "tool": "grep",
+   "query": "cofactor.*(conormal|differential)|conormal.*(determinant|cofactor)|augmented.*[Jj]acobian",
+   "results": "{\"t\": \"2026-10-23T11:01:55Z\", \"tool\": \"grep\", \"query\": \"cofactor.*(conormal|differential)|conormal.*(determinant|cofactor)|augmented.*[Jj]acobian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/Algebra/Module/Presentation/Differentials.lean:47-169, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:112-158. They give presentations or selected square Jacobians, not the full intrinsic determinant-valued map and its augmented Jacobian formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The wedge of the differentials of a regular sequence defines a map from Kahler differentials of the quotient to the determinant of its cotangent complex",
+   "results": "{\"t\": \"2026-10-23T11:01:55Z\", \"tool\": \"leansearch\", \"query\": \"The wedge of the differentials of a regular sequence defines a map from Kahler differentials of the quotient to the determinant of its cotangent complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.KaehlerDifferential.map\", \"CommRingCat.KaehlerDifferential.d\", \"KaehlerDifferential.map\", \"Algebra.Presentation.differentials.hom₁\", \"ModuleCat.Derivation.desc\", \"CommRingCat.KaehlerDifferential\", \"KaehlerDifferential.kerCotangentToTensor\", \"KaehlerDifferential.D_tensorProductTo\"], \"digest\": \"28696df140be385e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/Algebra/Module/Presentation/Differentials.lean:47-169, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:112-158. They give presentations or selected square Jacobians, not the full intrinsic determinant-valued map and its augmented Jacobian formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"det\"",
+   "results": "{\"t\": \"2026-10-23T11:01:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"det\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/Algebra/Module/Presentation/Differentials.lean:47-169, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:112-158. They give presentations or selected square Jacobians, not the full intrinsic determinant-valued map and its augmented Jacobian formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quotient of a polynomial algebra by a regular sequence, identify the conormal two term cotangent complex and compute its determinant valued differential by the augmented Jacobian determinant",
+   "results": "{\"t\": \"2026-10-23T11:02:01Z\", \"tool\": \"leanfinder\", \"query\": \"For a quotient of a polynomial algebra by a regular sequence, identify the conormal two term cotangent complex and compute its determinant valued differential by the augmented Jacobian determinant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.SubmersivePresentation.sectionCotangent\", \"Algebra.Generators.H1Cotangent.δ_eq_δAux\", \"Algebra.Generators.H1Cotangent.δAux\", \"Algebra.Generators.cotangentCompAwaySec\", \"Algebra.Presentation.differentials.hom₁\", \"Algebra.Generators.cotangentRestrict_mk\"], \"digest\": \"ace1f8ba50b9279e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/Algebra/Module/Presentation/Differentials.lean:47-169, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:112-158. They give presentations or selected square Jacobians, not the full intrinsic determinant-valued map and its augmented Jacobian formula."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplexAux|differentialsSolution|jacobian_eq_det_aevalDifferential",
+   "results": "{\"t\": \"2026-10-23T11:02:32Z\", \"tool\": \"grep\", \"query\": \"cotangentComplexAux|differentialsSolution|jacobian_eq_det_aevalDifferential\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/Algebra/Module/Presentation/Differentials.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean\"], \"digest\": \"53a34b8d94341358\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/Algebra/Module/Presentation/Differentials.lean:47-169, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:112-158. They give presentations or selected square Jacobians, not the full intrinsic determinant-valued map and its augmented Jacobian formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exterior product of the rows of a rectangular Jacobian defines a map on the cokernel of the conormal differential of a complete intersection",
+   "results": "{\"t\": \"2026-10-23T11:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"Exterior product of the rows of a rectangular Jacobian defines a map on the cokernel of the conormal differential of a complete intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.PreSubmersivePresentation.differential\", \"Algebra.SubmersivePresentation.sectionCotangent\", \"Algebra.PreSubmersivePresentation.cotangentComplexAux_apply\", \"Algebra.Presentation.differentials.hom₁\", \"Algebra.Presentation.differentialsSolution\"], \"digest\": \"1a4a179c6f181bb5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/Algebra/Module/Presentation/Differentials.lean:47-169, RingTheory/Smooth/StandardSmoothCotangent.lean:43-75 and RingTheory/Extension/Presentation/Submersive.lean:112-158. They give presentations or selected square Jacobians, not the full intrinsic determinant-valued map and its augmented Jacobian formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lci-curve-fundamental-class",
+  "date": "2026-10-22",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; Tag 0E9Y (lemma-determinant), displayed wedge formula and omitted well-definedness check; cotangent.tex Tags 08SJ, 08SL, conormal model. Extracts old proof steps 1-3 and local transport in step 7; agent-formulated combined local realization.",
+   "via": [
+    "lem-sfb-lci-curve-fundamental-class",
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-conormal-jacobian-realization",
+  "worker": "stage1",
+  "summary": "Realized the regular conormal model using existing Koszul-basis, differential and cotangent nodes; constructed its cofactor via the existing naturality node and wrote out the augmented Jacobian expansion. Checked restriction, intrinsic isomorphism transport, orientation and c=0. No new nodes or statement changes.",
+  "blueprint": "The inherited provenance points to det-thm-sf-ctf-stability-direct-images proof (3), marked-curve alteration and local adjunction prerequisite; the current latest direct-image proof (3) instead states the proper/open compactification assembly. This item refines the already-present lci-curve-fundamental-class steps 1 and 4: local realization and its restriction/isomorphism transport. No unit or chapter route is changed. blueprint_refs.py ancestor returns None for the inherited chain; retained its supplied null ancestor and explicit place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Converts the actual regular sequence to the Koszul-regular hypothesis of the conormal and cotangent tools. These are generic algebraic tools; the six-functor unit has no alternative algebraic construction."
+   },
+   {
+    "node": "lem-sc-koszul-conormal-basis",
+    "why": "Supplies the conormal basis for this regular polynomial quotient. These are generic algebraic tools; the six-functor unit has no alternative algebraic construction."
+   },
+   {
+    "node": "lem-trf-lci-cotangent-presentation",
+    "why": "Identifies this affine conormal model with the intrinsic cotangent complex, with affine restriction compatibility. These are generic algebraic tools; the six-functor unit has no alternative algebraic construction."
+   },
+   {
+    "node": "lem-trf-two-term-perfect-determinant",
+    "why": "Supplies the determinant functor and its restriction compatibility for this two-term model. These are generic algebraic tools; the six-functor unit has no alternative algebraic construction."
+   },
+   {
+    "node": "lem-trf-lci-naive-cotangent-model",
+    "why": "Supplies the generator-level canonical conormal comparison needed to verify its H0 identification. These are generic algebraic tools; the six-functor unit has no alternative algebraic construction."
+   },
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Supplies intrinsic functoriality under an isomorphism of the R-algebras, independent of a chosen presentation. These are generic algebraic tools; the six-functor unit has no alternative algebraic construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-sc-koszul-conormal-basis",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-trf-lci-naive-cotangent-model",
+  "lem-trf-cotangent-resolution-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-552599ba7",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-552599ba7 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full. The statement and stmt_deps are unchanged from live, which is still unsplit. There are no new nodes, and the source is Stacks 0E9Y duality.tex l.7510, whose formula is relation-first and whose well-definedness check is omitted. Steps 1-6 and 8 hold. Step 1: regular⇒Koszul-regular, then the conormal basis and the polynomial Kähler basis. Step 2: Jacobi-Zariski gives exactness and coker u≅Ω with no injectivity needed. Step 3: lci-cotangent-presentation, the two-term determinant and the naive model fix the H^0 map. Step 4: cofactor naturality. Step 5: the Leibniz expansion is correct, relation rows first. Step 6: localization via cofactor-local-descent and Kähler localization, with a principal cover of any affine open. Step 8: the sign depends only on c, and the c=0 case checks. Small cases: c=1, f=x_0, a=x_1 gives det 1, and f=x_1, a=x_0 gives −1; f=x_0^p in characteristic p gives w=0. FIX (E5) in step 7: it attributed H^0 of the transport comparison to the Kähler universal property alone. The repair lifts φ to ψ:P→P' (P is polynomial) and cites the naturality of lem-trf-lci-naive-cotangent-model, already in proof_deps, to get dx̄_j↦dφ(x̄_j)=Ω(φ). The new step text is 1796 characters. Batch-5 flags are accepted as generic algebra outside the trace formula and Poincaré duality: cofactor-local-descent, which reaches the trf exterior scalar comparisons; trf cotangent-resolution-coherence, the construction of the standard cotangent complex; and trf lci-naive-cotangent-model, the τ≥−1 L≅[J/J²→Ω] comparison. No duplicate in the DAG: I checked determinant-descent-smooth, adjunction-cotangent-determinant-normalization, formal-jacobian-minor-invariance and the cofactor nodes. The citers curve-cofactor-smooth-criterion and lci-curve-fundamental-class use only clauses the item states.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AffineConormalJacobianRealization",
+  "declaration": "Algebra.AffineConormal.exists_affineConormalJacobianRealization",
+  "declarations": [
+   "Algebra.AffineConormal.PolynomialRing",
+   "Algebra.AffineConormal.ideal",
+   "Algebra.AffineConormal.QuotientRing",
+   "Algebra.AffineConormal.arrow",
+   "Algebra.AffineConormal.presentation",
+   "Algebra.AffineConormal.complex",
+   "Algebra.AffineConormal.chartComplex",
+   "Algebra.AffineConormal.relation",
+   "Algebra.AffineConormal.dx",
+   "Algebra.AffineConormal.unit",
+   "Algebra.AffineConormal.topDual",
+   "Algebra.AffineConormal.augmentedJacobian",
+   "Algebra.AffineConormal.chartSquare",
+   "Algebra.AffineConormal.intrinsic",
+   "Algebra.AffineConormal.Chart",
+   "Algebra.AffineConormal.Chart.w",
+   "Algebra.AffineConormal.sheafModel",
+   "Algebra.AffineConormal.DeterminantChart",
+   "Algebra.AffineConormal.DeterminantChart.comparison",
+   "Algebra.AffineConormal.Chart.Formula",
+   "Algebra.AffineConormal.Chart.Transport",
+   "Algebra.AffineConormal.algebraSquare",
+   "Algebra.AffineConormal.Chart.Restriction",
+   "Algebra.AffineConormal.DeterminantChart.pullbackComparison",
+   "Algebra.AffineConormal.DeterminantChart.Restriction",
+   "Algebra.AffineConormal.KoszulOrientation",
+   "Algebra.AffineConormal.Realization",
+   "Algebra.AffineConormal.exists_affineConormalJacobianRealization"
+  ],
+  "file": "lean/Sheaf/RingTheory/AffineConormalJacobianRealization.lean",
+  "statement": "theorem exists_affineConormalJacobianRealization (R : Type u) [CommRing R] (C : Coherence.{u}) (κ : Naive.Comparison C) : Nonempty (Realization.{u, w} R C κ)",
+  "branch": "sheaf-dag",
+  "by": "Q53",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The universal realization record contains the actual regular polynomial quotient, canonical naive/standard-resolution comparison, cofactor and determinant comparisons on every affine open chart, compatible restrictions and intrinsic transport between different presentations. The added landed definition dependency fixes the shifted Koszul orientation convention; no original dependency or node statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf2e28dd9",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Read item, all 7 stmt_deps, the dependency interfaces (TwoTermCofactorPresentation, Naive.Comparison projection_zero/lift_exists, IsKoszulConormalComparison, determinant data) and the 636-line module. Records: only lean+stmt_deps changed; the added def-sc-koszul-conormal-comparison is landed with a record (brief-stage2 l.177 allows it); statement verbatim; dependency files byte-identical to side-live; no new nodes or (B) repairs. Every clause is rendered and every data field pinned: conormal and ambient bases on f̄_i/dx_j; the Jacobian of u; cotangentIso pinned via cotangent_normalization to the extended κ.projection (Q.map standardChange is invertible for an open immersion, PresentationMap nonempty); the determinant chart's iso, generators and line pinned, comparison = actual lineIso/modelIso/twoTermDeterminantIso composite; omega coker≅Ω with dx_j↦dx̄_j; w = dependency cofactor map, relation-first wedge formula for every basis and lift, plus uniqueness; e₀ pinned on topDual⊗top wedge; augmented Jacobian Fin.snoc rows, hand-checked; restriction for every affine open chart, chain pinned on frames, cotangentMap square, K-flat-counit determinant restriction; transport across presentations with c≠c' via good diagrams with H⁰ = id on Ω; Koszul sign (−1)^{c(c−1)/2}; c=0 case. Edge cases c=0, R=0, empty affine, c=1 signs ±1, char p f=x₀^p, universes u/w OK. Docstrings, 8-step proof, lines ≤100, only one sorry, no duplicate found (grep Sheaf/WeilConjectures/Mathlib). No compile (no file changed). Advisories: the single-presentation degree-zero equation between cotangentIso and omega is not stated separately (derivable from the pins; Transport states the relative form); cotangent framework declarations come from transitive dependency nodes; KoszulOrientation is close to the cited definition."
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "id": "lem-sfb-representable-stack-fppf-locality",
+ "kind": "statement",
+ "title": "Fppf target tests for representable stack morphisms",
+ "statement": "Let $k$ be a field [def-weil-field], $\\mathcal Z,\\mathcal Y$ algebraic stacks [def-sfb-algebraic-moduli-stack], and $f:\\mathcal Z\\to\\mathcal Y$ a morphism representable by algebraic spaces [def-trf-algebraic-space], meaning that its base change by any scheme is an algebraic space. Let $q:W\\to\\mathcal Y$ be a surjective flat locally finitely presented morphism from an algebraic space, with these properties tested after scheme base change on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. Set $Z_W=W\\times_{\\mathcal Y}\\mathcal Z$, using the 2-fibre product of objects with an isomorphism between their images. Each of the properties affine, finite type, quasi-finite, and separated is preserved by arbitrary base change and satisfies $P(f)\\Longleftrightarrow P(Z_W\\to W)$, separately for each $P$. A representable stack morphism has $P$ when every scheme base change has $P$. For algebraic spaces, affine means every affine scheme base change has affine scheme source [pqf-def-affine-morphism]; finite type means quasi-compact and locally of finite type on etale scheme charts [def-weil-finite-type-morphism]; quasi-finite means finite type with finite geometric fibres, where a geometric fibre is base change to the spectrum of an algebraically closed field [def-weil-algebraic-closure]; separated means the diagonal is a closed immersion, tested by scheme base change [def-weil-closed-immersion].",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD (lemma-check-property-covering), Section 04XB (section-properties-morphisms), for affine, finite type, quasi-finite and separated. Algebraic-space locality: spaces-descent.tex Tags 041Z (lemma-descending-property-affine), 041U (lemma-descending-property-finite-type), 0427 (lemma-descending-property-quasi-finite), 0421 (lemma-descending-property-separated); scheme-representability of affine algebraic-space maps: spaces-morphisms.tex Tag 03WG (lemma-affine-local)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-sfb-representable-space-property-test",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix one of the four properties $P$. The space-level lemma supplies arbitrary base-change stability and fppf descent for this $P$. The representable-pullback-over-space lemma makes $V=W\\times_{\\mathcal Y}\\mathcal Z$ an algebraic space. For every scheme $T\\to\\mathcal Y$, put $A=T\\times_{\\mathcal Y}\\mathcal Z$ and $B=T\\times_{\\mathcal Y}W$. Representability of $f$ makes $A$ a space. To see that $B$ is a space, form the algebraic space $T\\times W$ by the space fibre-product lemma, over the common base scheme. The diagonal $\\mathcal Y\\to\\mathcal Y\\times\\mathcal Y$ is representable by the algebraic-stack definition. Its base change to the space $T\\times W$ is a space by the representable-pullback-over-space lemma, and is exactly $B$: its objects are a $T$ coordinate and a $W$ coordinate with an isomorphism between their images in $\\mathcal Y$. The algebraicity of the stack product used here follows from the algebraic-stack fibre-product lemma. By the scheme-test meaning of the hypotheses on $q$, $B\\to T$ is surjective, flat and locally finitely presented, hence is a singleton fppf cover of spaces. No quasi-compactness of $q$ is needed.",
+   "uses": [
+    "lem-sfb-space-four-property-fppf-descent",
+    "lem-sfb-representable-pullback-over-space",
+    "def-sfb-algebraic-moduli-stack",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD (lemma-check-property-covering), with Tag 04XC (lemma-property-spaces-too) and Section 04XB (section-properties-morphisms)."
+   }
+  },
+  {
+   "text": "Arbitrary stack base change preserves $P(f)$. For $\\mathcal Y'\\to\\mathcal Y$, the 2-fibre product is algebraic by the algebraic-stack fibre-product lemma and the projection is representable: each scheme test of it is, by reassociation, a scheme test of $f$ and hence a space. A scheme test $T\\to\\mathcal Y'$ of that projection identifies with $T\\times_{\\mathcal Y}\\mathcal Z\\to T$, which has $P$ by the definition of $P(f)$. For a fixed $T$ coordinate, an object on the iterated fibre product is a $\\mathcal Z$ coordinate, a $\\mathcal Y'$ coordinate and isomorphisms identifying their images with that fixed coordinate in $\\mathcal Y$ and $\\mathcal Y'$. Composing these isomorphisms forgets the redundant $\\mathcal Y'$ coordinate. Inserting its prescribed image and the identity isomorphism gives an inverse, up to the displayed isomorphisms. These operations also preserve all compatible arrows and the projection to $T$.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD (lemma-check-property-covering), with Tag 04XC (lemma-property-spaces-too) and Section 04XB (section-properties-morphisms)."
+   }
+  },
+  {
+   "text": "Assume $P(f)$. Choose a representable surjective etale scheme atlas $U\\to W$, available by the definition of algebraic space. The map $U\\times_{\\mathcal Y}\\mathcal Z\\to U$ has $P$ by the scheme-test definition of $P(f)$. It is the base change of $V\\to W$ along $U\\to W$: both 2-fibre products have the same $U$ coordinate, $\\mathcal Z$ coordinate and isomorphism of their images in $\\mathcal Y$; forgetting the redundant $W$ coordinate gives the comparison and inserting its specified image gives its inverse. The atlas is an fppf cover (etale maps are flat and locally finitely presented, and the atlas is surjective), by the chartwise calculus. Fppf descent of $P$ for spaces now gives $P(V\\to W)$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD (lemma-check-property-covering), with Tag 04XC (lemma-property-spaces-too) and Section 04XB (section-properties-morphisms)."
+   }
+  },
+  {
+   "text": "Conversely assume $P(V\\to W)$ and take any scheme $T\\to\\mathcal Y$. Use $A,B$ from step 1. There is an isomorphism over $B$,\n$$A\\times_T B\\simeq V\\times_W B.$$\nOn objects this is the reassociation of a $T$ object, a $W$ object and a $\\mathcal Z$ object with their two isomorphisms to the same image in $\\mathcal Y$; composing one isomorphism with the inverse of the other gives the $W$--$\\mathcal Z$ comparison. Reversing that composition is the inverse functor, also on compatible arrows. The right side over $B$ has $P$, since it is the algebraic-space base change of $V\\to W$. Since $B\\to T$ is the fppf cover of step 1, the space-level descent lemma gives $P(A\\to T)$. This holds for every scheme test, so $P(f)$. The argument applies separately to each of the four $P$, without assuming any of the other three.",
+   "uses": [
+    "lem-sfb-space-four-property-fppf-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD (lemma-check-property-covering), with Tag 04XC (lemma-property-spaces-too) and Section 04XB (section-properties-morphisms)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-four-property-fppf-descent",
+  "lem-sfb-representable-pullback-over-space",
+  "def-sfb-algebraic-moduli-stack",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XD (lemma-check-property-covering), with Tag 04XC (lemma-property-spaces-too) and Section 04XB (section-properties-morphisms)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affineness finite type and quasi finiteness of algebraic space morphisms descend along fppf covers",
+   "results": "8 hits; AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.isFinite_iff, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.locallyOfFiniteType_iff, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.Scheme.Hom.finite_app",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the algebraic-stack or algebraic-space theorem; scheme-only locality and abstract descent do not supply representability or the quotient construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine finite type and quasi finite morphisms of algebraic spaces are local on the target for faithfully flat covers",
+   "results": "8 hits; AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine, AlgebraicGeometry.flat_iff, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.flat_and_surjective_SpecMap_iff, AlgebraicGeometry.UniversallyOpen.of_flat, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the algebraic-stack or algebraic-space theorem; scheme-only locality and abstract descent do not supply representability or the quotient construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic stacks representable by algebraic spaces is affine finite type quasi finite or separated if this holds after an fppf cover of its target",
+   "results": "8 hits; AlgebraicGeometry.AffineTargetMorphismProperty, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.HasAffineProperty, AlgebraicGeometry.AffineTargetMorphismProperty.of, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.AffineTargetMorphismProperty.toProperty, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyQuasiFinite",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the algebraic-stack or algebraic-space theorem; scheme-only locality and abstract descent do not supply representability or the quotient construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsAffine\"",
+   "results": "0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the algebraic-stack or algebraic-space theorem; scheme-only locality and abstract descent do not supply representability or the quotient construction"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|fpqc.*(affine|finite)|fppf.*(affine|finite)",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the algebraic-stack or algebraic-space theorem; scheme-only locality and abstract descent do not supply representability or the quotient construction"
+  },
+  {
+   "tool": "grep",
+   "query": "representable.*(stack|space)|check.*property.*cover|stack.*(affine|finite)",
+   "results": "2 hits; Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean, Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state the algebraic-stack or algebraic-space theorem; scheme-only locality and abstract descent do not supply representability or the quotient construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affineness finite type and quasi finiteness of algebraic space morphisms descend along fppf covers",
+   "results": "Service unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-action-stack-presentation",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack. Supporting general input: descent of properties of the diagonal from the smooth presentation, independent of quotient stacks and group actions.",
+   "via": [
+    "lem-sfb-affine-action-stack-presentation",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-representable-stack-fppf-locality",
+  "worker": "stage1",
+  "summary": "Q05: proved the four target tests by the two cartesian squares of Stacks 04XD, expanding 04XC and arbitrary stack base change. Added space-level descent as a statement-only node and reused the existing representable-pullback-over-space lemma. Kept the statement. Corrected the covering-object typo in the source proof.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Presentation and diagonal of an affine action quotient stack. Supporting general input: descent of properties of the diagonal from the smooth presentation, independent of quotient stacks and group actions. This split supplies the fppf target test used to descend diagonal properties in the affine action-stack presentation; steps 1 and 4 realize the two-square argument, step 3 expands 04XC, and step 2 gives the stated arbitrary-base-change clause.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic closure of algebraic spaces under fibre products, needed for the diagonal base change; the unit has no replacement for this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-6a576deb6",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-6a576deb6 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps, the new node and every cited statement in full, against Stacks 04XB (l.161-430), 04XC (l.433), 04XD (l.466) and spaces-descent 041U/041Z/0421/0427 with definition-property-morphisms-local. The item statement is unchanged. Source typo confirmed: at 04XD l.493 the fppf covering should be T×_Y W → T, not T×_Y V → T; the worker's counterexample is correct (Y=W=Spec k, Z empty). The item uses B = T×_Y W correctly. Step 1: B is a space as the pullback of the representable diagonal (def-sfb-algebraic-moduli-stack) along T×_S W (02X2 node), via representable-pullback-over-space; B → T is a one-member fppf covering by the scheme-test hypotheses on q, with no quasi-compactness needed. Step 2: stack base change by written-out reassociation. Step 3 is 04XC: an étale atlas is an fppf covering by the chartwise calculus, then descent. Step 4: A×_T B ≅ V×_W B over B, base change, then descent along B → T. All cited statements say what each step uses; there is no cycle and no proof-internal use. New node lem-sfb-space-four-property-fppf-descent: statement only, self-contained, true (fpqc locality restricted to fppf, plus base-change tags 03WI/03XH/03XL/03KL). It is not a restatement of the item. The duplicate search found only nodes for qc, lft, flat/proper/fp, the qc+separated étale conjunction, separated+valuative and unramified, so it is not a duplicate. Advisory: when this node is split later, its finite-type clause should cite lem-sfb-space-quasicompact-fppf-local and lem-sfb-space-lft-smooth-fpqc-locality. Batch-5: lem-trf-space-fibre-products-etale-covers (fibre products of spaces) and def-trf-algebraic-space, including the closure of lem-sfb-stack-chartwise-smooth-etale-calculus, are general foundations, not parts of the trace formula or Poincaré duality, so they are accepted. Accepted tool_uses entry: lem-trf-space-fibre-products-etale-covers, because the unit has no fibre-product construction for spaces."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RepresentableStackFppfLocality",
+  "declaration": "CategoryTheory.representable_stack_fppf_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RepresentableStackFppfLocality.lean",
+  "statement": "theorem representable_stack_fppf_locality (k : Type u) [Field k] (Z : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (Y : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (hZ : IsAlgebraicModuliStack Z) (hY : IsAlgebraicModuliStack Y) (f : BasedFunctor Z Y) (hf : IsRepresentableByAlgebraicSpaces f) (P : MorphismProperty (AlgebraicSpace (Spec (.of k)))) (hP : P = @MapIsAffine (Spec (.of k)) ∨ P = @MapIsFiniteType (Spec (.of k)) ∨ P = @MapIsQuasiFinite (Spec (.of k)) ∨ P = @MapIsSeparated (Spec (.of k))) (W : AlgebraicSpace (Spec (.of k))) (q : BasedFunctor (discreteModuli W.obj.obj) Y) (hq : ∀ (T : Over (Spec (.of k))) (t : BasedFunctor (discreteModuli (yoneda.obj T)) Y), ∃ (B : AlgebraicSpace (Spec (.of k))) (b : B.obj.obj ⟶ yoneda.obj T), HasSpaceBaseChange q T t B b ∧ SpaceMapIsSurjective B T b ∧ ∀ (U : Over (Spec (.of k))) (a : yoneda.obj U ⟶ B.obj.obj), IsEtale a → Flat (yoneda.preimage (a ≫ b)).left ∧ LocallyOfFinitePresentation (yoneda.preimage (a ≫ b)).left) : (∀ (Y' : BasedCategory.{v₃, w₃} (Over (Spec (.of k)))) (_ : IsAlgebraicModuliStack Y') (g : BasedFunctor Y' Y), IsRepresentableByAlgebraicSpaces (moduliTwoFiberFst g f) ∧ (ModuliAlgebraicSpaceTest P f → ModuliAlgebraicSpaceTest P (moduliTwoFiberFst g f))) ∧ (∃ (V : AlgebraicSpace (Spec (.of k))) (p : V ⟶ W), HasSpaceTargetBaseChange f W q V p ∧ (ModuliAlgebraicSpaceTest P f ↔ P p))",
+  "branch": "sheaf-dag",
+  "by": "Q159",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fd6d59e4",
+  "group": "Q159",
+  "result": "fix",
+  "note": "Item Lean checked clause by clause against the node and Stacks 04XC/04XD: field k; algebraic stacks Z and Y in independent universes; f representable; cover q surjective, flat and lfp on étale charts with no quasi-compactness; P one of affine/finite type/quasi-finite/separated as a disjunction; base change along any algebraic stack Y' -> Y; P(f) iff P(V->W), with V pinned to the actual 2-fibre product by an equivalence and ModuliTwoIso. The exists-V form equals the for-all form by iso-invariance (four_property_fppf_descent clause 1); advisory only. No duplicate (only ModuliSpaceTest and IsRepresentableFiniteModuliMap exist), no hollow definitions, only sorry, docstrings correct, statements verbatim. F1 (H2): new node def-sfb-representable-space-property-test cited theorem lem-trf-space-enlarged-etale-ringed-site-model only for plain def schemeSpace, whose owner is def-trf-scheme-algebraic-space (existing:true, Q87, 2026-10-18). Fixed in fixes/def-sfb-representable-space-property-test.json: stmt_deps and statement bracket swapped, bracket citations equal stmt_deps. No Lean changed, no compile run."
+ }
+}

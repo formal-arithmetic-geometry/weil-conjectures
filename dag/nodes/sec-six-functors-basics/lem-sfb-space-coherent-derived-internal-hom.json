@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-space-coherent-derived-internal-hom",
+ "kind": "statement",
+ "title": "Coherence and lower boundedness of derived internal Hom on a locally Noetherian algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is locally Noetherian, meaning that it admits a surjective etale atlas by schemes having affine open covers with Noetherian coordinate rings [pqf-def-locnoeth, def-weil-pbc-noetherian-ring]. Use module sheaves on the small etale site with its structure sheaf $\\mathcal O_X$ [def-weil-sheaf-of-modules-category] and their unbounded derived category $D(\\mathcal O_X)$ [def-weil-abstract-derived-category]. A module sheaf is coherent if on each Noetherian affine etale chart $\\operatorname{Spec}R\\to X$ it is associated to a finitely generated $R$-module $N$ [def-weil-finitely-generated-module]; the associated etale sheaf has value $B\\otimes_RN$ on each affine etale chart $\\operatorname{Spec}B\\to\\operatorname{Spec}R$. Let $K,L\\in D(\\mathcal O_X)$ have coherent cohomology, with $\\mathcal H^i(K)=0$ for all sufficiently large $i$ and $\\mathcal H^i(L)=0$ for all sufficiently negative $i$. Then $R\\mathcal Hom_{\\mathcal O_X}(K,L)$ [def-pur-derived-internal-hom] has coherent cohomology and its cohomology vanishes in all sufficiently negative degrees.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0S (lemma-coherent-internal-hom); coherence convention: spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module",
+  "def-pur-derived-internal-hom",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Choose global bounds $u,v$ with $\\mathcal H^i(K)=0$ for $i>u$ and $\\mathcal H^i(L)=0$ for $i<v$. Fix any Noetherian affine etale chart $j:U=\\operatorname{Spec}A\\to X$. By [def-trf-algebraic-space] its localized ringed site is $U_{\\mathrm{et}}$ with its structure sheaf. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], so $K|_U,L|_U$ retain these cohomological bounds and have coherent, hence quasi-coherent, cohomology. By [lem-sfb-affine-etale-derived-module-realization] write them as $a_A(E),a_A(F)$ for $E,F\\in D(A)$. The cohomology and section identifications there show that $H^i(E),H^i(F)$ are finite $A$-modules and vanish respectively for $i>u$ and $i<v$: the coherence convention on this affine chart identifies each cohomology sheaf with $a_A$ of a finite module, recovered by sections.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-affine-etale-derived-module-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0S (lemma-coherent-internal-hom); coherence convention: spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+   }
+  },
+  {
+   "text": "Put $T=R\\mathcal Hom_{\\mathcal O_X}(K,L)$. The slice comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction] and the affine comparison of [lem-sfb-affine-etale-derived-hom-realization] give, in the derived category of $U_{\\mathrm{et}}$,\n$$T|_U\\cong R\\mathcal Hom_{\\mathcal O_U}(a_A(E),a_A(F))\\cong a_A(R\\operatorname{Hom}_A(E,F)).$$\nThe latter applies because $A$ is Noetherian, $E$ has finite cohomology and is bounded above, and $F$ is bounded below.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-affine-etale-derived-hom-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0S (lemma-coherent-internal-hom); coherence convention: spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-bounded-above-coherent-rhom] to $A,E,F$ with these same integers $u,v$. Every $H^r(R\\operatorname{Hom}_A(E,F))$ is finite and is zero for $r<v-u$. Exact restriction and the cohomology comparison of [lem-sfb-affine-etale-derived-module-realization] therefore identify $\\mathcal H^r(T)|_U$ with its associated etale sheaf. Since $U$ was any Noetherian affine etale chart, this proves coherence in exactly the convention of the statement.",
+   "uses": [
+    "lem-trf-bounded-above-coherent-rhom",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0S (lemma-coherent-internal-hom); coherence convention: spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+   }
+  },
+  {
+   "text": "The same bound $v-u$ works on all the charts. They cover $X$ by local Noetherianness. For $r<v-u$ a section of $\\mathcal H^r(T)$ on any etale object restricts to zero on the covering obtained by pulling back an affine etale atlas and refining by affine opens. The separatedness axiom for a sheaf makes that section zero. Thus $\\mathcal H^r(T)=0$ globally, proving the required lower boundedness. This also covers the empty space, where every sheaf is zero.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0S (lemma-coherent-internal-hom); coherence convention: spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-affine-etale-derived-hom-realization",
+  "lem-trf-bounded-above-coherent-rhom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0D0S (lemma-coherent-internal-hom), proof by etale-local reduction to the affine scheme case; explicit common lower bound from perfect.tex lemma-coherent-internal-hom."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coherent.*(internalHom|internal_hom|rhom)|((internalHom|internal_hom|rhom).*coherent)",
+   "results": "{\"t\": \"2026-10-22T06:27:50Z\", \"tool\": \"grep\", \"query\": \"coherent.*(internalHom|internal_hom|rhom)|((internalHom|internal_hom|rhom).*coherent)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic sheaf cohomology, abelian module-sheaf categories and coherent topologies, not coherence of derived internal Hom on a locally Noetherian algebraic space. The grep and Loogle searches had no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a locally Noetherian algebraic space the derived sheaf Hom of D minus coherent and D plus coherent complexes lies in D plus coherent",
+   "results": "{\"t\": \"2026-10-22T06:27:50Z\", \"tool\": \"leansearch\", \"query\": \"On a locally Noetherian algebraic space the derived sheaf Hom of D minus coherent and D plus coherent complexes lies in D plus coherent\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"Coherent\"",
+   "results": "{\"t\": \"2026-10-22T06:27:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"Coherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic sheaf cohomology, abelian module-sheaf categories and coherent topologies, not coherence of derived internal Hom on a locally Noetherian algebraic space. The grep and Loogle searches had no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from bounded above coherent cohomology to bounded below coherent cohomology on a locally Noetherian algebraic space is bounded below coherent",
+   "results": "{\"t\": \"2026-10-22T06:28:01Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom from bounded above coherent cohomology to bounded below coherent cohomology on a locally Noetherian algebraic space is bounded below coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"instAbelianLightCondMod\"], \"digest\": \"a599c972cd6c3989\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic sheaf cohomology, abelian module-sheaf categories and coherent topologies, not coherence of derived internal Hom on a locally Noetherian algebraic space. The grep and Loogle searches had no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cohomology sheaves of derived sheaf Hom of coherent complexes are coherent on Noetherian ringed algebraic spaces",
+   "results": "{\"t\": \"2026-10-22T06:28:39Z\", \"tool\": \"leanfinder\", \"query\": \"The cohomology sheaves of derived sheaf Hom of coherent complexes are coherent on Noetherian ringed algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"instAbelianLightCondMod\", \"SheafOfModules.instAbelian\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"4542f9a7208dbea5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned generic sheaf cohomology, abelian module-sheaf categories and coherent topologies, not coherence of derived internal Hom on a locally Noetherian algebraic space. The grep and Loogle searches had no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]oherent.*([Rr]Hom|[Ii]nternalHom|internal_hom)|([Rr]Hom|[Ii]nternalHom|internal_hom).*[Cc]oherent",
+   "results": "{\"t\": \"2026-10-23T09:34:58Z\", \"tool\": \"grep\", \"query\": \"[Cc]oherent.*([Rr]Hom|[Ii]nternalHom|internal_hom)|([Rr]Hom|[Ii]nternalHom|internal_hom).*[Cc]oherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic t-structure bounds, small Ext or ordinary sheaf Hom, not coherent derived internal Hom on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherence and lower boundedness of derived internal sheaf Hom on locally Noetherian algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T09:34:59Z\", \"tool\": \"leansearch\", \"query\": \"Coherence and lower boundedness of derived internal sheaf Hom on locally Noetherian algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafHom'\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"CategoryTheory.Pseudofunctor.sheafHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.sheafHom\", \"SheafOfModules.Hom\", \"CategoryTheory.Sheaf.instInhabitedHom\", \"CategoryTheory.Sheaf.Hom.casesOn\"], \"digest\": \"d10b6487e8764141\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic t-structure bounds, small Ext or ordinary sheaf Hom, not coherent derived internal Hom on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RHom\", \"Coherent\"",
+   "results": "{\"t\": \"2026-10-23T09:34:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"RHom\\\", \\\"Coherent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic t-structure bounds, small Ext or ordinary sheaf Hom, not coherent derived internal Hom on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom on a locally Noetherian algebraic space of a bounded above coherent complex into a bounded below coherent complex has bounded below coherent cohomology",
+   "results": "{\"t\": \"2026-10-23T09:35:05Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom on a locally Noetherian algebraic space of a bounded above coherent complex into a bounded below coherent complex has bounded below coherent cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.IsGE\", \"CategoryTheory.Sheaf.H\"], \"digest\": \"79a2c84993fbd486\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic t-structure bounds, small Ext or ordinary sheaf Hom, not coherent derived internal Hom on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian ringed algebraic space Ext sheaves of bounded above and bounded below coherent complexes are coherent",
+   "results": "{\"t\": \"2026-10-23T09:35:06Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherian ringed algebraic space Ext sheaves of bounded above and bounded below coherent complexes are coherent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"11e0e7731532655b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern generic t-structure bounds, small Ext or ordinary sheaf Hom, not coherent derived internal Hom on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-coherent-ext-finite",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0S supplies coherence and lower boundedness of the internal Hom.",
+   "via": [
+    "lem-sfb-proper-space-coherent-ext-finite",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-derived-internal-hom",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the etale-local scheme reduction of Tag 0D0S. Reused ring derived-Hom finiteness and arbitrary ringed-site Hom restriction. Added only the affine etale derived-module equivalence and the affine etale derived-Hom comparison. Proved coherence on every chart and obtained a common global lower bound v-u, without quasi-compactness.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D0T (lemma-ext-finite), for K in D^-_Coh and L in D^+_Coh. Supporting input of Tag 0D0T: Tag 0D0S supplies coherence and lower boundedness of the internal Hom. The supporting internal-Hom input is realized by affine etale realization, ring finiteness and common-bound zero detection. Latest blueprint direct-images proof (3) remains the parent route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-bounded-above-coherent-rhom",
+    "why": "Generic ring-theoretic finiteness and explicit lower bound v-u, the algebra problem in the source scheme proof; no such theorem in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic slice restriction of derived Hom on arbitrary ringed sites, needed for the source etale-local reduction."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of module restriction on any ringed site; preserves cohomology and input bounds on affine etale charts."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-bounded-above-coherent-rhom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-6c90284af",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-6c90284af (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full, every cited statement, and Stacks 0D0S, 0D0C, 071Q (with its 08H8 setup), 08JP, 0A6H(3)(a), 08E8 and 06Z0. The statement is unchanged and matches 0D0S. Step 1: the def-trf-algebraic-space convention identifies X_et/U with U_et; restriction is exact (lem-pur); the module realization gives E,F, and its cohomology and section formulas transfer finiteness and the bounds u,v. Step 2: the slice RHom restriction (lem-weil-pbc) and the new Hom realization apply (A Noetherian, E finite and bounded above, F bounded below). Step 3: every hypothesis of lem-trf-bounded-above-coherent-rhom holds (finite H of E and F, bounds u,v); this gives coherence on each chart in the item's own convention. Step 4: an elementary sheaf-separatedness argument on the covering V x_X Spec R_i, with the chart-independent bound v-u. New nodes: the module realization is 06Z0 composed with 071Q, unbounded, correct (tested on the zero ring and on a field); the Hom realization is 0A6H(3)(a) followed by 08JP(1), correct (a non-finite target is allowed; both boundedness hypotheses are needed). Neither duplicates an existing node: lem-pc-affine-qcoh-derived-equivalence, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence and lem-sc-affine-pseudo-coherent-rhom-qcoherent are Zariski-only or underived. Neither restates a clause of the item. No SGA citations. Batch 5: def-trf-algebraic-space and def-trf-space-quasi-coherent-module are general definitions; lem-trf-bounded-above-coherent-rhom is generic Noetherian Ext finiteness with generic algebra deps, and neither assumption gives it. All accepted. The three declared tool_uses are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentDerivedInternalHom",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherent_derivedInternalHom",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentDerivedInternalHom.lean",
+  "statement": "theorem coherent_derivedInternalHom {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) [HasDerivedCategory.{w} X.SmallModules] (K L : X.DerivedModules) (hK : ∀ i : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules i).obj K).IsFinitePresentation) (hL : ∀ i : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules i).obj L).IsFinitePresentation) (hKbounded : ∃ a : ℤ, ∀ i : ℤ, a < i → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj K)) (hLbounded : ∃ b : ℤ, ∀ i : ℤ, i < b → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj L)) : (∀ i : ℤ, ((DerivedCategory.homologyFunctor X.SmallModules i).obj (X.derivedHom.obj (op K, L))).IsFinitePresentation) ∧ (∃ c : ℤ, ∀ i : ℤ, i < c → IsZero ((DerivedCategory.homologyFunctor X.SmallModules i).obj (X.derivedHom.obj (op K, L))))",
+  "branch": "sheaf-dag",
+  "by": "Q153",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing equivalent small affine ringed model, in section universe u and arbitrary localization universe w. Coherence is Mathlib IsFinitePresentation, equivalent to the node’s finite-module affine chart convention by Stacks 07UB. The all-etale-chart local Noetherianness hypothesis is equivalent to the existence of a locally Noetherian surjective etale atlas. No new definitions or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a4f8d933b",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Only the item node changed vs side-live: added lean record + def stmt_deps def-sfb-space-small-ringed-model/def-sfb-space-derived-module-calculus (landed Q115 owners of SmallModules/DerivedModules/derivedHom); other 10 dep records byte-identical; statement verbatim in file. Clause check vs 0D0S/07UB: S, X; every-chart IsLocallyNoetherian = atlas form (landed convention); D(O_X)=X.DerivedModules on the small model; coherence = IsFinitePresentation (07UB; landed convention; QuasicoherentData index universe fixed to the site universe, no free universe); global upper bound on K, lower bound on L; RHom = derivedInternalHomOfUniverses on smallStructureSheaf, op K; conclusion = finitely presented cohomology ∧ ∃ lower bound, no more. Edge cases (0, empty space, non-qc, universes u/w) fine. No defs, single sorry, docstrings with source/blueprint/proof steps, proof imports exist, report sections present. No change, no compile."
+ }
+}

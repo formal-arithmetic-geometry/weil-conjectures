@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-rational-density-field-extension",
+ "kind": "statement",
+ "title": "Density of a specified set of rational points survives field extension",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be a scheme over $k$ [def-pc-scheme], and let $D\\subseteq X(k)$ be a set of $k$-rational points [def-pc-rational-point] whose images are Zariski dense in $X$, meaning that every nonempty open subset of $|X|$ contains the image of some $d\\in D$. For every field extension $L/k$ [def-pc-field-extension], put $X_L=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}L$ [def-pc-base-change, def-weil-affine-spectrum]. The images of the induced points $d_L:\\operatorname{Spec}L\\to X_L$, for $d\\in D$, are Zariski dense in $X_L$. There is no finite type, reducedness, irreducibility, separatedness or separability hypothesis. The empty scheme and the empty family are allowed.",
+ "source": {
+  "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+  "place": "Corollaire (11.10.7), printed p.172, applied to the family Spec(k) → X; its reduced-closure conclusion gives the assertion also for nonreduced X. Compare BLR 5.3 proof of Lemma 6, printed pp.125–126 (PDF pp.131–132)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-pc-rational-point",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Fix an affine open $U=\\operatorname{Spec}A\\subseteq X$, and let $E=\\{d\\in D:d(\\operatorname{Spec}k)\\in U\\}$. This family is dense in $U$: a nonempty open in $U$ is also a nonempty open in $X$. Each $d\\in E$ factors through $U$, and the affine spectrum correspondence gives a $k$-algebra map $u_d:A\\to k$. The inverse image $U_L\\subseteq X_L$ is affine by [lem-weil-pbc-affine-chart-base-change-iso], with coordinate ring $B=L\\otimes_k A$. Equivalently use $B=A\\otimes_k L$, via the isomorphism $\\lambda\\otimes a\\mapsto a\\otimes\\lambda$, whose inverse reverses the factors. On this chart $d_L$ corresponds to $u_{d,L}:B\\to L$, $a\\otimes\\lambda\\mapsto u_d(a)\\lambda$: the tensor algebra universal property gives this map and its two restrictions are exactly the two maps defining the induced point. Its underlying point is the prime $\\ker u_{d,L}$; likewise the point $d$ of $U$ is $\\ker u_d$.",
+   "uses": [
+    "def-pc-rational-point",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JR (lemma-open-fibre-product); affine evaluation description of the family in EGA IV_3 11.10.7."
+   }
+  },
+  {
+   "text": "Put $K=\\{a\\in A:u_d(a)=0\\text{ for every }d\\in E\\}$. If $a\\in K$, the basic open $D(a)$ contains none of the points of $E$, by [lem-weil-pbc-basic-open-function]. It is open, so density of $E$ makes it empty. Consequently $a$ is in every prime ideal of $A$, and [lem-weil-pbc-zero-locus-eq-iff-radical-eq], with $I=(0)$, implies $a^n=0$ for some $n\\ge1$. Conversely a nilpotent has zero image under every $u_d$, because a field has no nonzero nilpotents. Thus $K$ consists precisely of the nilpotent elements of $A$; in particular this argument does not assume $U$ reduced.",
+   "uses": [
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), radical as intersection of primes; openness and evaluation from schemes.tex Tag 01HZ (lemma-f-open)."
+   }
+  },
+  {
+   "text": "Regard the maps $u_d$ as $k$-linear maps on the vector space $A$. Apply [lem-sfb-common-linear-kernel-field-extension] with $F=k$, $V=A$ and index set $E$. Its hypotheses allow arbitrary $A$, $E$ and $L/k$, including the empty family. It says that every $f\\in B$ with $u_{d,L}(f)=0$ for all $d\\in E$ can be written $f=\\sum_{i=1}^r a_i\\otimes\\lambda_i$ with $a_i\\in K$ and $\\lambda_i\\in L$. Here a term $\\lambda_i(a_i\\otimes1)$ is $a_i\\otimes\\lambda_i$.",
+   "uses": [
+    "lem-sfb-common-linear-kernel-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+    "place": "11.10.6–11.10.7, printed p.172; agent affine coefficient implementation using the existing common-linear-kernel lemma."
+   }
+  },
+  {
+   "text": "For each $a_i$ in step 3 choose $n_i\\ge1$ with $a_i^{n_i}=0$, by step 2. The multiplication formula of [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $(a_i\\otimes\\lambda_i)^{n_i}=0$. If $r>0$, set $N=1+\\sum_{i=1}^r(n_i-1)$. On expanding $f^N$ by distributivity, each summand is a product of $N$ of these $r$ commuting terms. At least one term occurs $n_i$ times, since otherwise the total number of factors is at most $N-1$. Every summand is therefore zero, and $f^N=0$. If $r=0$, then $f=0$, so exponent $1$ suffices. Thus every function vanishing at all the induced points is nilpotent; no uniform bound on the nilpotents of $A$ is needed.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+    "place": "11.10.7, printed p.172; agent elementary finite-sum nilpotence calculation spelling out the nonreduced case."
+   }
+  },
+  {
+   "text": "Let $C\\subseteq\\operatorname{Spec}B$ be closed and contain all the points $d_L$ with $d\\in E$. By the definition of the Zariski topology write $C=V(J)$ for an ideal $J\\subseteq B$. For every $f\\in J$ and every $d\\in E$, inclusion of $\\ker u_{d,L}$ in $C$ means $f\\in\\ker u_{d,L}$. Steps 3–4 make $f$ nilpotent, so $f$ belongs to every prime of $B$ (if $f^N=0$ is in a prime, repeated primality gives $f$ in that prime). Hence $J$ is contained in every prime, and $C=\\operatorname{Spec}B$. The induced points are dense in $U_L$. The inverse images of the affine opens $U$ cover $X_L$. Given any nonempty open $W\\subseteq X_L$, choose a chart meeting $W$; density on that chart gives $d_L\\in W\\cap U_L$ for some $d\\in E\\subseteq D$. This is the required density. If $X$ is empty the conclusion is vacuous. If $D$ is empty, density forces $X$ empty by taking the open $X$ itself. All tensor sums and the affine argument also allow the zero ring.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DZ (definition-spectrum) and Tag 00E0 (lemma-Zariski-topology); elementary closed-set test and open-cover assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-rational-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lem-sfb-common-linear-kernel-field-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega/EGA-IV-3_PMIHES-28-1966.pdf",
+  "place": "Corollaire 11.10.7, printed p.172; affine coefficient proof using the existing common-linear-kernel-field-extension lemma and explicit nilpotence calculation, rather than importing universal schematic dominance as a new node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Zariski dense subset of rational points of a finite type scheme over a field remains dense after any extension of the ground field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.dominant_eq_topologically\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"@AlgebraicGeometry.IsDominant =\\n  AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => DenseRange\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ is dominant if and only if the underlying continuous map between their topological spaces has dense image in $ Y $. This establishes the equivalence between the al\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Dense\", \"field\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.dense_smoothLocus_of_perfectField\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \" {X : AlgebraicGeometry.Scheme} {K : Type u} [Field K] [PerfectField K] [AlgebraicGeometry.IsReduced X] (f : X ⟶ AlgebraicGeometry.Spec ↧K) [AlgebraicGeometry.LocallyOfFinitePresentation f] : Dense ↑(AlgebraicGeometry.Scheme.Hom.smoothLocus f)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*dens|dens.*rational|schematicallyDominant|schematically_dominant|dense.*field.*extension",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"line\": \"108\", \"text\": \"* Prove that the orbits of the irrational rotation are dense in the circle. Deduce that a\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"256\", \"text\": \"/-- A dense open set `U : Opens X` is birational to `X`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"257\", \"text\": \"lemma Opens.birational_of_dense (hU : Dense (U : Set X)) : Birational U X :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"261\", \"text\": \"/-- A dense open set `U : Opens X` of a scheme `X` over `S` is `S`-birational to `X`. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"262\", \"text\": \"lemma Opens.birationalOver_of_dense (hU : Dense (U : Set X)) : BirationalOver (U.ι ≫ sX) sX :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"265\", \"text\": \"/-- A dense open set `U : Opens X` of a `S`-rational scheme `X` is `S`-rational. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"581\", \"text\": \"lemma RationalMap.dense_domain (f : X ⤏ Y) : Dense (X := X) f.domain :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"582\", \"text\": \"  f.inductionOn (fun g ↦ g.dense_domain.mono g.le_domain_toRationalMap)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"621\", \"text\": \"    (f : X.PartialMap Y) : (f.toRationalMap.toPartialMap.restrict _ f.dense_domain\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/RationalMap.lean\", \"line\": \"637\", \"text\": \"    f.dense_domain f.le_domain_toRationalMap).toRationalMap\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Order/Archimedean.lean\", \"line\": \"32\", \"text\": \"/-- Rational numbers are dense in a linear ordered archimedean field. -/\"}\n  {\"file\": \"Mathlib/Topology/Instances/Irrational.lean\", \"line\": \"18\", \"text\": \"* `IsGδ.setOfPred_irrational`, `dense_irrational`, `eventually_residual_irrational`: irrational\"}\n  {\"file\": \"Mathlib/Topology/Instances/Irrational.lean\", \"line\": \"47\", \"text\": \"theorem dense_irrational : Dense { x : ℝ | Irrational x } := by\"}\n  {\"file\": \"Mathlib/Topology/Instances/Irrational.lean\", \"line\": \"55\", \"text\": \"  residual_of_dense_Gδ .setOfPred_irrational dense_irrational\"}\n  {\"file\": \"Mathlib/Topology/Instances/Irrational.lean\", \"line\": \"72\", \"text\": \"instance : DenselyOrdered { x // Irrational x } :=\"}\n  {\"file\": \"Mathlib/Topology/Instances/RatLemmas.lean\", \"line\": \"46\", \"text\": \"  isDenseEmbedding_coe_real.isDenseInducing.interior_compact_eq_empty dense_irrational hs\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/DenseSubgroup.lean\", \"line\": \"15\", \"text\": \"In this file we prove that the multiples of an irrational element of an `AddCircle` are dense.\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/DenseSubgroup.lean\", \"line\": \"31\", \"text\": \"    Dense (AddSubgroup.closure {a, b} : Set ℝ) ↔ Irrational (a / b) := by\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/DenseSubgroup.lean\", \"line\": \"54\", \"text\": \"/-- The multiples of a number `a` are dense on a circle of length `p` iff `a / p` is irrational. -/\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/DenseSubgroup.lean\", \"line\": \"56\", \"text\": \"    DenseRange (· • a : ℤ → AddCircle p) ↔ Irrational (a / p) := by\"}\n  {\"file\": \"Mathlib/Topology/Instances/AddCircle/DenseSubgroup.lean\", \"line\": \"68\", \"text\": \"  simp [denseRange_zsmul_coe_iff, isOfFinAddOrder_iff_exists_rat_eq_div, Irrational]\"}\n  {\"file\": \"Mathlib/Tactic/Linarith/Frontend.lean\", \"line\": \"422\", \"text\": \"the rationals. While there is some special handling for non-dense orders like `Nat` and `Int`,\"}\n  {\"file\": \"Mathlib/RingTheory/LaurentSeries.lean\", \"line\": \"55\", \"text\": \"* The field of rational functions is dense in `LaurentSeries`: this is the declaration\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/OpenPos.lean\", \"line\": \"267\", \"text\": \"rational numbers are countable (thus have measure zero), but are dense (hence not nowhere dense).)\"}\n  {\"file\": \"Mathlib/Data/Finset/Density.lean\", \"line\": \"21\", \"text\": \"* `Finset.dens s`: Density of `s : Finset α` in `α` as a nonnegative rational number.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If D is a dense set of k rational points in X then the corresponding L rational points are dense in X base changed to any field extension L of k",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Dense\", \"module\": \"Mathlib.Topology.Defs.Basic\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A set $ s $ in a topological space $ X $ is dense if every point $ x \\\\in X $ belongs to the closure of $ s $.\"}\n  {\"name\": \"Dense.denseRange_val\", \"module\": \"Mathlib.Topology.Continuous\", \"type\": \"(h : Dense s) : DenseRange ((↑) : s → X)\", \"doc\": \"If a set $ s $ is dense in a topological space $ X $, then the canonical inclusion map from $ s $ to $ X $ has dense range, meaning the closure of the image of this inclusion is equal to $ X $.\"}\n  {\"name\": \"Dense.mono\", \"module\": \"Mathlib.Topology.Closure\", \"type\": \"(h : s₁ ⊆ s₂) (hd : Dense s₁) : Dense s₂\", \"doc\": \"If $ s_1 \\\\subseteq s_2 $ and $ s_1 $ is dense in the topological space $ X $, then $ s_2 $ is also dense in $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"(f : X ⟶ Y) [IsDominant f] : DenseRange f\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"Dense.isDenseInducing_val\", \"module\": \"Mathlib.Topology.DenseEmbedding\", \"type\": \"{s : Set α} (hs : Dense s) : IsDenseInducing (@Subtype.val α s)\", \"doc\": \"If $ s $ is a dense set in a topological space $ \\\\alpha $, then the canonical inclusion map from the subtype $ s $ to $ \\\\alpha $ is a dense embedding, meaning it is injective and its image is dense in\"}\n  {\"name\": \"Dense.closure\", \"module\": \"Mathlib.Topology.Closure\", \"type\": \"∀ {X : Type u} [inst : TopologicalSpace X] {s : Set X}, Dense s → Dense (closure s)\", \"doc\": \"If a set $ s $ is dense in a topological space $ X $, then its closure is also dense in $ X $.\"}\n  {\"name\": \"Dense.isDenseEmbedding_val\", \"module\": \"Mathlib.Topology.DenseEmbedding\", \"type\": \"[TopologicalSpace α] {s : Set α} (hs : Dense s) : IsDenseEmbedding ((↑) : s → α)\", \"doc\": \"If a set $ s $ is dense in a topological space $ \\\\alpha $, then the inclusion map $ s \\\\hookrightarrow \\\\alpha $ is a dense embedding, meaning it is a homeomorphism onto its image and the image is dense\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal schematic dominance of a family of rational points under scalar extension from a field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism of schemes is multiplicative: the composition of two dominant morphisms is again a dominant morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (S : AlgebraicGeometry.Scheme) → [X.Over S] → [Y.Over S] → X.RationalMap Y → Prop\", \"doc\": \"A rational map between schemes $X$ and $Y$ is over a scheme $S$ if it is compatible with the morphisms from $X$ and $Y$ to $S$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern ordinary specialization, Noetherianity, dominance, or smooth loci; none states this assertion or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "rational.*dens|dens.*rational|dense.*baseChange",
+   "results": "Search succeeded; 9 hits: Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: none states density of the specified base-changed family, or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The base changes of a Zariski dense family of rational points on a scheme over a field remain dense after scalar extension",
+   "results": "Search succeeded; 8 hits: WeierstrassCurve.Affine.Point.map_baseChange, Algebra.ZariskisMainProperty.restrictScalars, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, Algebra.IsAlgebraic.isBaseChange_of_isFractionRing, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, WeierstrassCurve.Affine.Point.baseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: none states density of the specified base-changed family, or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Dense\", \"baseChange\"",
+   "results": "Search succeeded; 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: none states density of the specified base-changed family, or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense specified set of k rational points remains Zariski dense after every field extension for an arbitrary scheme over k",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.isDominant_iff, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.IsDominant",
+   "date": "2026-10-24",
+   "verdict": "no match: none states density of the specified base-changed family, or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal schematic dominance of rational point evaluation maps under arbitrary extension of the coefficient field",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.IsDominant, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.RationalMap.dense_domain, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField",
+   "date": "2026-10-24",
+   "verdict": "no match: none states density of the specified base-changed family, or a one-line generalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+  "date": "2026-10-24",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 5.3 proof of Lemma 6, field-extension paragraph immediately before Lemma 7: extension of the closure of rational section values, citing EGA IV_3 11.10.7.",
+   "via": [
+    "lem-sfb-strict-local-sections-meet-dense-fibre-opens",
+    "lem-sfb-strict-law-finite-translate-envelope",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-rational-density-field-extension",
+  "worker": "stage1",
+  "summary": "Checked EGA IV_3 11.10.7 for arbitrary schemes. Preserve statement and all hypotheses. Affine evaluation kernels are nilradicals; the existing arbitrary-family common-kernel scalar-extension lemma and a finite-sum nilpotence expansion prove affine density. Assemble on an affine open cover. No new nodes, no Lean writing or compilation.",
+  "blueprint": "The item has no imported blueprint ancestor (blueprint_refs.py ancestor returns None). The existing from.place identifies the BLR 5.3 Lemma 6 field-extension paragraph. Steps 1–5 establish precisely the density input there; the latest blueprint density corollary concerns only smooth schemes over separably closed fields and is not the same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-chart-base-change-iso",
+    "why": "Generic affine chart identification for a scheme fibre product, used only to express scalar extension as a tensor algebra; the unit provides no alternative chart lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-chart-base-change-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-662f7d38e",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-662f7d38e (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item only, with no new nodes. The statement is unchanged and is true. It is EGA IV_3 (11.10.7), printed p.172, applied to the family Spec k -> X: with Y_red = X_red the conclusion is Y' = Y⊗k', so |Y'| = |X_L|. EGA makes no finiteness assumption. I tested small cases: k[ε]/(ε²) with one point (the evaluation kernel is (ε), not 0, and the proof keeps that kernel); A^1 over an infinite field; and D = ∅, which forces X = ∅. Steps: (1) The chart lemma, with W = Spec k, V = U = Spec A and t^{-1}(W) = Spec L, gives Spec(L⊗A) with the right projections. The ring map of d_L follows from the tensor universal property (2)+(3) and the affine spectrum node. (2) basic-open-function (a),(b) plus zero-locus with I = 0 show the common evaluation kernel is exactly the nilradical. (3) common-linear-kernel-field-extension, with F = k, V = A and the index set E, matches B and u_{d,L} exactly. Its hypotheses allow arbitrary V, E and L/k. (4) The nilpotence argument of the finite sum is correct with N = 1+Σ(n_i−1), and it is genuinely elementary. (5) V(J) closed and containing the points makes J nilpotent, so C = Spec B. The affine cover then gives density on X_L. No qc or separatedness is needed. Duplicate check: separable-point-closure-universal-density, dense-rational-closed-subscheme-descent, nagata reduced-dense-image-schematic and dense-flat-pullback need extra hypotheses or state other things. None is a duplicate. The tool_use lem-weil-pbc-affine-chart-base-change-iso (unit sk-thm-p1) is accepted as a generic black-box chart lemma. The ten recorded searches cover all required kinds. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalDensityFieldExtension",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.denseRange_baseChangeFieldPoint_of_dense",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalDensityFieldExtension.lean",
+  "statement": "theorem Hom.denseRange_baseChangeFieldPoint_of_dense {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k)) (D : Set (f.fieldPoints k)) (hD : DenseRange (fun d : D ↦ d.1.1.base default)) (L : Type u) [Field L] [Algebra k L] : DenseRange (fun d : D ↦ (f.baseChangeFieldPoint L d.1).1.base default)",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-805443e2b",
+  "group": "Q116",
+  "result": "fix",
+  "note": "Lean statement exact vs node (EGA IV3 11.10.7): D : Set (f.fieldPoints k) = sections of f; hD DenseRange of images = 'every nonempty open contains some d'; X_L = pullback f (Spec.map algebraMap k L); d_L = recorded canonical baseChangeFieldPoint (pullback.lift (Spec.map ≫ d) 𝟙); conclusion DenseRange over the same D. No extra hypotheses (no finite type/reduced/separated/IsSepClosed/Smooth). Edge cases: X=∅ vacuous, D=∅ allowed (forces X=∅), nonreduced, finite k, inseparable/transcendental L all covered. Shared universe u is the project API convention (advisory). Not a duplicate of Hom.denseRange_baseChangeFieldPoint (that one needs IsSepClosed+Smooth and uses all points). lean.statement verbatim, sorry-only, docstrings carry source+blueprint+5 proof steps, imports exist live, no other files changed. Sole fault H11: the 'Second reading by Q116' section is a self-check saying no second reading was done -> fixes/lem-sfb-rational-density-field-extension.report.md (worker report verbatim + independent clause-by-clause second reading). No Lean file changed, so no compile run."
+ }
+}

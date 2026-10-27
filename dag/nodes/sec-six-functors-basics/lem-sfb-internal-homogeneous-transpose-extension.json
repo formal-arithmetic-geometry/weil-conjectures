@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-internal-homogeneous-transpose-extension",
+ "kind": "statement",
+ "title": "Extending the identity-coordinate transpose across an equivariant monomorphism",
+ "statement": "Let $A$ be a commutative condensed ring on the small coherent profinite site [sk-def-sfb-condensed-ring, def-weil-size-convention], and let $G$ be a profinite group, with $\\underline G(S)=C(S,G)$. Use internal $A$-modules, internal $G$-actions, their forgetful functor $U$, and section modules [sk-def-sfb-module-objects, def-sfb-condensed-action-module, def-weil-pbc-internal-abelian-sheaf-module-equivalence]. For a profinite parameter $X$, let $A[\\underline X]$ be the free internal module, left adjoint to forgetting to condensed sets, with canonical local generators $[t]$ [def-sfb-condensed-equivariant-bar-data, def-sfb-condensed-free-module-generators]. Use internal tensor and its right-adjoint internal Hom [lem-pc-sheaf-modules-tensor-closed], whose sections are maps on the entire slice [def-pur-sheaf-hom]. Fix $n\\geq0$ and an equivariant module $J$. Put $P_n=A[\\underline G^n]$, with $G^0=*$, and $\\mathcal H_n(J)=\\underline{\\operatorname{Hom}}_A(A[\\underline G^{n+1}],UJ)$. A normalized homogeneous-function model means an equivariant module identified underneath with $\\mathcal H_n(J)$ and having action $(k\\cdot f)(g_0,\\ldots,g_n)=k\\cdot_J f(k^{-1}g_0,\\ldots,k^{-1}g_n)$ on every profinite slice [def-sfb-condensed-homogeneous-functions].\nAssume that $UJ$ is injective [def-sp-injective-resolutions], and let $H$ be any normalized homogeneous-function model. Let $i:N\\hookrightarrow M$ be a monomorphism in the internal equivariant module category and $h:N\\to H$ an equivariant $A$-linear map. Then $P_n\\otimes_A Ui$ is a monomorphism of internal modules. There is a unique internal $A$-linear map $\\alpha:P_n\\otimes_A UN\\to UJ$ such that, for every profinite $S$, tuple $\\mathbf t\\in C(S,G)^n$, and $x\\in N(S)$,\n$$\\alpha_S([\\mathbf t]\\otimes x)=h_S(x)(1,\\mathbf t).$$\nThere exists an internal $A$-linear map $\\beta:P_n\\otimes_A UM\\to UJ$ with $\\beta\\circ(P_n\\otimes_A Ui)=\\alpha$. Consequently, on every profinite test and after every base change,\n$$\\beta_S([\\mathbf t]\\otimes i_S(x))=h_S(x)(1,\\mathbf t).$$\nHere each tensor of local sections denotes its canonical image in the sheaf tensor, and each evaluation is the evaluation of the appropriate slice morphism. No injectivity of $J(S)$, projectivity of $P_n$, discreteness of $J$, or finiteness of $G$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: internal homogeneous-function helper, old steps 1-5 (section-module transport, representable free-module flatness, invariant kernel, slice transpose and injective extension). Agent-formulated specialization of Stacks Tag 03EV (sites-modules.tex, lemma-j-shriek-flat (2)), Tag 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor (2)), and Tag 015Z (homology.tex, lemma-adjoint-preserve-injectives, proof of (a) implies (c)); exact condensed reference WANTED."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-objects",
+  "def-sfb-condensed-action-module",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-free-module-generators",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-hom",
+  "def-sfb-condensed-homogeneous-functions",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the unique-transpose construction to obtain monicity and alpha with its normalization and uniqueness.",
+   "uses": [
+    "lem-sfb-internal-homogeneous-transpose-alpha"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the injective extension of alpha to obtain beta and its base-change evaluation formula. Combine the resulting conjunctions.",
+   "uses": [
+    "lem-sfb-internal-homogeneous-transpose-extension-of-alpha"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-homogeneous-transpose-alpha",
+  "lem-sfb-internal-homogeneous-transpose-extension-of-alpha"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "The existing five-step plan is decomposed into the transpose construction (steps 1-3) and injective extension with evaluation (steps 4-5); Lean combines these two strict subarguments."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The free module sheaf on a representable object is flat and forgetting internal group actions preserves monomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:11:40Z\", \"tool\": \"leansearch\", \"query\": \"The free module sheaf on a representable object is flat and forgetting internal group actions preserves monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.forget_preservesMonomorphisms\", \"SheafOfModules.ιFree\", \"SheafOfModules.free\", \"Module.Flat.of_free\", \"PresheafOfModules.freeHomEquiv\", \"PresheafOfModules.toPresheaf\", \"SheafOfModules.toSheaf\", \"PresheafOfModules.toPresheaf_preservesFiniteLimits\"], \"digest\": \"2c4293be11d77457\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring the underlying internal module of a condensed group action with the free module on a profinite parameter preserves monomorphisms",
+   "results": "{\"t\": \"2026-10-22T06:12:07Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring the underlying internal module of a condensed group action with the free module on a profinite parameter preserves monomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\"], \"digest\": \"2c8bfc8095386ace\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "flat|PreservesMonomorphisms|jShriek",
+   "results": "{\"t\": \"2026-10-22T06:12:09Z\", \"tool\": \"grep\", \"query\": \"flat|PreservesMonomorphisms|jShriek\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed profinite site the functor M maps to A[X] tensor the module underlying an internal profinite group action carries monomorphisms to monomorphisms because the representable free module is flat",
+   "results": "{\"t\": \"2026-10-22T06:12:40Z\", \"tool\": \"leanfinder\", \"query\": \"On a small ringed profinite site the functor M maps to A[X] tensor the module underlying an internal profinite group action carries monomorphisms to monomorphisms because the representable free module is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\"], \"digest\": \"31305f7b1ada6275\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "factorThru|preservesInjectiveObjects_of_adjunction",
+   "results": "{\"t\": \"2026-10-22T06:13:36Z\", \"tool\": \"grep\", \"query\": \"factorThru|preservesInjectiveObjects_of_adjunction\", \"sub\": \"CategoryTheory/Preadditive/Injective\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Injective/InjectiveObject.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean\"], \"digest\": \"5f2dd7635d661296\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"factorThru\"",
+   "results": "{\"t\": \"2026-10-22T06:13:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Injective\\\", \\\"factorThru\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Injective.factorThru\", \"CategoryTheory.Injective.comp_factorThru\", \"CategoryTheory.Injective.comp_factorThru_assoc\"], \"digest\": \"62fb206774ed376b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat representable free module tensor an equivariant monomorphism admits an extension into an injective internal module on a ringed site",
+   "results": "{\"t\": \"2026-10-22T06:13:37Z\", \"tool\": \"leansearch\", \"query\": \"Flat representable free module tensor an equivariant monomorphism admits an extension into an injective internal module on a ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Baer.ExtensionOf.inhabited\", \"Module.Injective.recOn\", \"Module.Flat.out\", \"Module.flat_iff\", \"ModuleCat.enoughInjectives\", \"instEnoughInjectivesModuleCatOfSmall\", \"Module.Flat.lTensor_preserves_injective_linearMap\", \"Module.Flat.iff_lTensor_preserves_injective_linearMap\"], \"digest\": \"a33def33821cec98\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a monomorphism of internal G equivariant modules and a map to homogeneous functions with injective underlying coefficients, evaluation at first coordinate one extends from A[G^n] tensor N to A[G^n] tensor M",
+   "results": "{\"t\": \"2026-10-22T06:13:50Z\", \"tool\": \"leanfinder\", \"query\": \"Given a monomorphism of internal G equivariant modules and a map to homogeneous functions with injective underlying coefficients, evaluation at first coordinate one extends from A[G^n] tensor N to A[G^n] tensor M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.coinvariantsTensor_hom_ext\", \"Rep.coinvariantsTensor_hom_ext_iff\", \"Rep.instMonoModuleCatHom\", \"Rep.mono_iff_injective\", \"Representation.IndV.hom_ext\", \"Rep.finsuppToCoinvariantsTensorFree\", \"Representation.IndV.hom_ext_iff\", \"Rep.finsuppToCoinvariantsTensorFree_single\"], \"digest\": \"88e67ce364f985d0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek.*[Ff]lat|free.*[Ff]lat|forget.*[Mm]ono",
+   "results": "{\"t\": \"2026-10-22T06:11:39Z\", \"tool\": \"grep\", \"query\": \"jShriek.*[Ff]lat|free.*[Ff]lat|forget.*[Mm]ono\", \"sub\": \"Algebra/Category\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/Grp/Limits.lean\", \"Mathlib/Algebra/Category/Grp/Limits.lean\", \"Mathlib/Algebra/Category/Grp/Limits.lean\", \"Mathlib/Algebra/Category/Grp/Limits.lean\", \"Mathlib/Algebra/Category/Grp/Basic.lean\", \"Mathlib/Algebra/Category/Grp/Basic.lean\", \"Mathlib/Algebra/Category/Grp/Basic.lean\", \"Mathlib/Algebra/Category/Grp/EpiMono.lean\"], \"digest\": \"70dd391edd2cdb84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"PreservesMonomorphisms\"",
+   "results": "{\"t\": \"2026-10-22T06:11:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"PreservesMonomorphisms\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Injective.factorThru/comp_factorThru only extend an already constructed map along an already proved monomorphism. They do not construct the slice-evaluation transpose or establish flatness and underlying monicity for internal group actions over an arbitrary condensed ring. Constant-ring light condensed modules and ordinary Rep do not specialize in one line to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "factorThru|comp_factorThru",
+   "results": "{\"t\": \"2026-10-23T10:35:28Z\", \"tool\": \"grep\", \"query\": \"factorThru|comp_factorThru\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Preadditive/Projective/Preserves.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Basic.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/LiftingProperties.lean\", \"Mathlib/CategoryTheory/ExtremalEpi.lean\"], \"digest\": \"a65d49085608b15d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: factorThru and comp_factorThru (Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean:78,82) only extend a map along a monomorphism already supplied; they do not establish free-condensed-module flatness or construct the slice transpose."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective.factorThru, CategoryTheory.Mono",
+   "results": "{\"t\": \"2026-10-23T10:35:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Injective.factorThru, CategoryTheory.Mono\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Injective.factorThru\", \"CategoryTheory.Injective.comp_factorThru\", \"CategoryTheory.Injective.comp_factorThru_assoc\"], \"digest\": \"62fb206774ed376b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Injective.factorThru and comp_factorThru give only the final extension clause, conditional on monicity and an existing transpose."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In internal modules over a condensed ring, transpose evaluation at the identity of homogeneous functions and extend across an equivariant monomorphism using injectivity and flatness of the free module on a profinite set",
+   "results": "{\"t\": \"2026-10-23T10:35:30Z\", \"tool\": \"leanfinder\", \"query\": \"In internal modules over a condensed ring, transpose evaluation at the identity of homogeneous functions and extend across an equivariant monomorphism using injectivity and flatness of the free module on a profinite set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\"], \"digest\": \"c4547f84c7839fdd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LightCondensed.ihomPoints concerns light condensed modules over a type-valued constant ring; SheafOfModules.freeFunctor concerns coproducts indexed by a type, not free modules on representable condensed sets. Neither is a one-line specialization to the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat free condensed modules tensor monomorphism identity evaluation internal Hom injective extension",
+   "results": "{\"t\": \"2026-10-23T10:36:18Z\", \"tool\": \"leansearch\", \"query\": \"Flat free condensed modules tensor monomorphism identity evaluation internal Hom injective extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsTensorProduct.map_id_injective_of_flat_left\", \"IsTensorProduct.map_id_injective_of_flat_right\", \"IsTensorProduct.map_injective_of_flat_left_right\", \"IsTensorProduct.map_injective_of_flat_right_left\", \"TensorProduct.map_injective_of_flat_flat'\", \"TensorProduct.map_injective_of_flat_flat\", \"Module.Flat.mk\", \"Module.Flat.lTensor_preserves_injective_linearMap\"], \"digest\": \"5a850577b33d3a1d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern ordinary modules over a type-valued commutative ring, not internal modules over an arbitrary condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free sheaf module on a representable object is flat and tensor Hom adjunction constructs maps out of its tensor product by evaluation",
+   "results": "{\"t\": \"2026-10-23T10:36:19Z\", \"tool\": \"leanfinder\", \"query\": \"Free sheaf module on a representable object is flat and tensor Hom adjunction constructs maps out of its tensor product by evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeMap\", \"SheafOfModules.mapFree\", \"SheafOfModules.freeFunctor\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"SheafOfModules.freeHomEquiv_comp_apply\", \"SheafOfModules.freeHomEquiv_freeMap\"], \"digest\": \"6fb31daf5826ea67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LightCondensed.ihomPoints concerns light condensed modules over a type-valued constant ring; SheafOfModules.freeFunctor concerns coproducts indexed by a type, not free modules on representable condensed sets. Neither is a one-line specialization to the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-homogeneous-functions-injective",
+  "date": "2026-10-22",
+  "group": "Q131"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Paragraph (3), open direct image: internal homogeneous-function helper, old steps 1-5 (section-module transport, representable free-module flatness, invariant kernel, slice transpose and injective extension). Agent-formulated specialization of Stacks Tag 03EV (sites-modules.tex, lemma-j-shriek-flat (2)), Tag 03EO (sites-modules.tex, lemma-internal-hom-adjoint-tensor (2)), and Tag 015Z (homology.tex, lemma-adjoint-preserve-injectives, proof of (a) implies (c)); exact condensed reference WANTED.",
+   "via": [
+    "lem-sfb-internal-homogeneous-functions-injective",
+    "lem-sfb-equivariant-resolution-bar-normalization",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-internal-homogeneous-transpose-extension",
+  "worker": "stage1",
+  "summary": "Constructed the identity-coordinate slice map, transposed it with the tensor--Hom adjunction, proved uniqueness on all generalized free generators, and extended the resulting internal map by injectivity along the flat-tensored underlying monomorphism. Reused existing nodes throughout; no new nodes. Repaired the null blueprint ancestor while retaining the inherited via chain. Statement unchanged.",
+  "blueprint": "Paragraph (3), open direct image of det-thm-sf-ctf-stability-direct-images: internal homogeneous-function injectivity input reached through the inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Transfers internal relative tensor to the sheaf tensor appearing in the generic tensor--Hom adjunction; no local unit node supplies that comparison."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Uses the natural tensor--Hom bijection on sheaves of modules to transpose the explicitly constructed slice map; generic closedness is a tool, not a replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-58e59a349",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-58e59a349 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The one commit changes only the item and its report, with no new nodes; the statement is byte-identical to live, where the item is still unsplit with no other group's split. blueprint.from.node was null and is now det-thm-sf-ctf-stability-direct-images; that matches the from.node of lem-sfb-admissible-direct-image, and paragraph (3) of the main-20261015 proof is the place named. There is no re-split note and no SGA citation. Stacks 03EO (sites-modules.tex l.3949) and 03EV (l.4389) were read. Step 1: lem-sfb-product-action-exact-forgetting says U_0 is exact and, applied to the group G^n with J=1, that R[G^n] is flat with an exact tensor functor, so P_n⊗Ui is a monomorphism; its free module is the same composite as def-sfb-condensed-free-module-generators/adjunction, and G=1 is allowed. Step 2: the evaluation in def-sfb-condensed-homogeneous-functions, the slice Hom of def-pur-sheaf-hom, and the natural-assignment uniqueness and generator detection of free-linearization give b with naturality and A-linearity; it is correctly marked elementary. Step 3: lem-pe gives the pure-tensor comparison and lem-pc-sheaf-modules-tensor-closed gives Hom(P_n⊗UN,UJ)≅Hom(UN,Hom(P_n,UJ)) in the right order. The formula is read through the canonical Stacks 03EO bijection, which is the same node the item's statement uses to define internal Hom, so I accept it. Uniqueness follows from generator detection on every T→S. Step 4 uses only injectivity of UJ (def-sp leaf, Injective). Step 5 is evaluation plus naturality of ⊗ and gives the base-change clause. Small cases checked: n=0 (P_0≅A), trivial G, zero ring, i=identity, infinite G. Tool uses accepted as generic: lem-pe-internal-section-tensor-comparison and lem-pc-sheaf-modules-tensor-closed. There is no cycle: the closure of 347 nodes does not contain the item. Batch 5: free-linearization reaches lem-trf-free-module-sheaf-universal-property. That is the universal property of the sheafified free module B[E] on an arbitrary small site; neither assumption states it and it is not a step specific to the trace formula or Poincaré duality proofs, so it is generic and not a reason to return. It is the only sec-trace-formula or sec-poincare-duality node in the closure."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedHomogeneousTransposeExtension",
+  "declaration": "Profinite.CondensedAction.homogeneous_transpose_extension",
+  "file": "lean/Sheaf/CategoryTheory/CondensedHomogeneousTransposeExtension.lean",
+  "statement": "theorem homogeneous_transpose_extension (J : ActionModule R G) [Injective J.module] (n : ℕ) (H : HomogeneousFunctions R G J n) (N M : ActionModule R G) (i : N ⟶ M) [Mono i] (h : N ⟶ H.object) : Mono ((InternalBar.freePower R G n) ◁ i.val) ∧ ∃ α : InternalBar.freePower R G n ⊗ N.module ⟶ J.module, (∀ (S : Profinite.{u}) (t : Fin n → C(S, G)) (x : sectionModule R N.module S), InternalBar.onSections R α S (InternalBar.pureTensor R _ _ S (InternalBar.generator R G n S t) x) = homogeneousEvaluate R G J n S ((H.internalHom.hom.val.app (op S)).hom (InternalBar.onSections R h.val S x)) S (𝟙 S) (Fin.cons 1 t)) ∧ (∀ α' : InternalBar.freePower R G n ⊗ N.module ⟶ J.module, (∀ (S : Profinite.{u}) (t : Fin n → C(S, G)) (x : sectionModule R N.module S), InternalBar.onSections R α' S (InternalBar.pureTensor R _ _ S (InternalBar.generator R G n S t) x) = homogeneousEvaluate R G J n S ((H.internalHom.hom.val.app (op S)).hom (InternalBar.onSections R h.val S x)) S (𝟙 S) (Fin.cons 1 t)) → α' = α) ∧ ∃ β : InternalBar.freePower R G n ⊗ M.module ⟶ J.module, (InternalBar.freePower R G n) ◁ i.val ≫ β = α ∧ ∀ (S T : Profinite.{u}) (f : T ⟶ S) (t : Fin n → C(T, G)) (x : sectionModule R N.module S), InternalBar.onSections R β T (InternalBar.pureTensor R _ _ T (InternalBar.generator R G n T t) (InternalBar.onSections R i.val T ((N.module.X.obj.map f.op).hom x))) = homogeneousEvaluate R G J n S ((H.internalHom.hom.val.app (op S)).hom (InternalBar.onSections R h.val S x)) T f (Fin.cons 1 t)",
+  "branch": "sheaf-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acfe1e3d5",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Field diff: node differs from side-live only in lean; lean.statement verbatim in file. Every clause matches the recorded declarations: Profinite.CondensedRing+IsCommMonObj, ActionModule/actionCategory/forgetAction, InternalBar.freePower/generator/pureTensor/onSections, HomogeneousFunctions (arbitrary model, internalHom to SheafOfModules.homObj) with homogeneousEvaluate at (𝟙 S, Fin.cons 1 t), [Injective J.module] internal, [Mono i] equivariant. Conclusions: Mono(P◁i.val); ∃α with formula and uniqueness for the formula alone; ∃β with (P◁i)≫β=α and the formula after every base change f:T⟶S (T=S, f=𝟙 gives the displayed one; implied mathematically). No extra assumptions; edge cases n=0, empty test, trivial G, zero ring covered. No duplicate in side-live or Mathlib (factorThru gives only the last clause). Docstrings carry source, blueprint id and 5-step proof; sorry only; report has Worker report and Second reading by Q74. No compile rerun, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T091937-L-3388344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

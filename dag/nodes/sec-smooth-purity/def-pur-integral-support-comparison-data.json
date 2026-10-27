@@ -1,0 +1,107 @@
+{
+ "id": "def-pur-integral-support-comparison-data",
+ "kind": "definition",
+ "title": "Ordinary and derived normalization records for integral support",
+ "status": "split",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a compactification c of f:X→Y, and the strict étale support, Brown adjunction, finite evaluation and transport data S,G,H,D of [lem-pur-brown-tower-finite-site-comparison]. Use the quotient-coordinate equivalence of [def-pur-adic-exceptional-system-realization] and systemSupport of [def-pur-semilinear-compact-support-coefficient-transport]. Define coordinates to be its ordinary derived equivalence. Define PushNormalized by identity on every underlying section after rightEvaluation and rightUnderlying. An Ordinary record consists of open and proper direct-image comparison isomorphisms satisfying PushNormalized, the open inverse-image comparison satisfying its ordinary Hom-transpose equation, and the extension-by-zero comparison satisfying its Hom-transpose equation. Given an Ordinary record B, a Derived record consists of its termwise open-extension and proper-push chain maps with the prescribed components, the open derived comparison satisfying the exact localization representative equation, and the proper derived comparison satisfying the universal right-derived-unit equation. A Normalized record is an Ordinary record B together with a Derived record over B. These are records of specified comparisons and their equations; this definition asserts no existence.",
+ "stmt_deps": [
+  "def-pur-adic-exceptional-system-realization",
+  "def-weil-compactifications-refinements",
+  "lem-pur-brown-tower-finite-site-comparison",
+  "def-pur-semilinear-compact-support-coefficient-transport",
+  "lem-pur-coefficient-system-derived-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Outer Hom comparisons and final unit/counit paragraph; canonical comparison specified by Zheng Constructions 4.1 and 5.15, Lemma 4.10, and the universal-unit characterization in integralExceptionalComparison_characterization."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalences transport adjunctions and uniquely identify left adjoints from an isomorphism of right adjoints",
+   "results": "Adjunction.leftAdjointUniq_trans, leftAdjointUniq_trans_assoc; rightAdjointUniq and unit normalization lemmas.",
+   "date": "2026-10-25",
+   "verdict": "General adjoint uniqueness tools, not the section-normalized geometric comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of natural isomorphisms of right derived functors determined by the universal unit",
+   "results": "CategoryTheory.Functor.rightDerivedUnique; rightDerived_ext; rightDerivedNatIso; isRightDerivedFunctor_iff_of_iso; rightDerivedNatTrans_fac.",
+   "date": "2026-10-25",
+   "verdict": "No complete ordinary or derived geometric package; use universal-derived APIs in the derived step."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived_ext|natTrans_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:94; Mathlib/CategoryTheory/Localization/Predicate.lean:286. Local source search: no separate owner of Ordinary or Derived.",
+   "date": "2026-10-25",
+   "verdict": "Extensionality tools exist; the geometric section and unit comparison is not a Mathlib leaf."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralSupportComparison",
+  "date": "2026-10-25",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Outer Hom display, comparison of compact support through strict quotient coordinates: Ordinary and derived normalization records for integral support",
+   "via": [
+    "def-pur-integral-support-coordinate-comparison",
+    "lem-pur-integral-reconstructed-representing-pair",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurIntegralSupportComparisonData",
+  "file": "lean/Sheaf/Paper/PurIntegralSupportComparisonData.lean",
+  "declaration": "WeilConjectures.PurIntegralSupportComparison.Normalized",
+  "statement": "structure Normalized",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.PurIntegralSupportComparison.coordinates",
+   "WeilConjectures.PurIntegralSupportComparison.PushNormalized",
+   "WeilConjectures.PurIntegralSupportComparison.Ordinary",
+   "WeilConjectures.PurIntegralSupportComparison.Derived",
+   "WeilConjectures.PurIntegralSupportComparison.Normalized"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1a67",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261025T101306-L-3680017",
+  "kind": "interface",
+  "note": "independent cc review: published PurIntegralSupportComparison records vs delivered Data module (byte-identical but for blueprint tags); new ordinary/derived ∃! statements vs their nodes and the published normalized_existsUnique; item node vs sheaf-dag (only lean/proof fields); importer PurIntegralRepresentingPair compiled on delivered modules"
+ }
+}

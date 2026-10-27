@@ -1,0 +1,166 @@
+{
+ "id": "lem-sf-cbc-extension-model",
+ "kind": "statement",
+ "title": "Exact extension and resolving models on the pro-etale model site",
+ "statement": "The canonically normalized constant-ring and AsSmall site equivalences identify ordinary extension by zero with the localized module extension. They preserve exactness and flat-term K-flat complexes, and the prescribed termwise extension with its derived-factorization realization is the unique specified extension model.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Steps 1–2: completed open-factor comparison and its naturality. Agent-written supporting model/convention lemmas, with the unchanged original Lean proofs; Stacks 05S7, 03DI, 00VC, 06YY and 015F supply their standard constructions."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-pc-kflat-complex",
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-sp-completion-mate-comparison",
+  "lemma-weil-pbc-adic-completion-reduction",
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-weil-pbc-completion-map"
+ ],
+ "proof": [
+  {
+   "text": "Identify $U_{\\mathrm{proet}}=X_{\\mathrm{proet}}/U$ and both constant coefficient rings by [lem-weil-proetale-weakly-etale-localization]. Choose a flat-term K-flat $P\\to K$ [lem-pc-kflat-resolution]. By [lem-cbc-ringed-open-flat-resolution], $J_jP\\to J_jK$ is again a flat-term K-flat resolution. This proves the preservation assertion without a bound or completeness hypothesis. The constant-ring comparison is constructed from the sheafification/continuous-pushforward compatibility isomorphisms and fixed by their unit equations. Uniqueness is injectivity of the sheafification adjunction. The slice equivalence and exact localized extension give ordinary extension exactness. On the AsSmall model the same sheafification compatibility constructs the coefficient isomorphism; precomposition by AsSmall.down and restriction along that ring isomorphism are additive equivalences of module sheaves. For each module-sheaf equivalence use the ordinary binary tensor comparison [lem-sf-ringed-site-equivalence-tensor]. The total-bifunctor comparison transports tensor products of arbitrary unbounded complexes, since an equivalence preserves the coproducts defining their total tensor. Exactness transports and reflects acyclicity. Given an acyclic target test complex, pull it back by the quasi-inverse, apply source K-flatness, and transport the resulting acyclic tensor forward. The counit identifies the test complex, giving K-flatness in the target. For flatness, conjugate tensorRight by the equivalence and use the ordinary tensor comparison; the conjugate preserves finite limits and finite colimits. Convert between site tensor and monoidal tensor via siteSheafTensorRightIso. Apply ringedOpen_preserves_flat_resolution after transport to the slice. The termwise extended complex with the standard derived-factorization realization is the required model, unique because its complex and realization are prescribed; all remaining fields are propositions. The total-complex comparison is obtained directly from the upstream total-bifunctor comparison by currying the ordinary tensor isomorphism; it uses only explicit zero-morphism preservation, additivity, and preservation of the coproducts in totalization.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pc-kflat-resolution",
+    "lem-cbc-ringed-open-flat-resolution",
+    "lem-sf-ringed-site-equivalence-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Supporting construction for the integral open factor in Steps 1–2; unchanged previously formalized argument. Integral open factor; old Step 1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-kflat-resolution",
+  "lem-cbc-ringed-open-flat-resolution",
+  "lem-sf-ringed-site-equivalence-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Integral open-factor construction and naturality; completion-reflector specialization via lem-weil-pbc-constant-completion-equivalence. Stage-3 S3 closes the final assembly and exact-functor consequences while retaining the existing specialized comparison obligations. Stage-3 B6 proves the four constant-ring/site-module transport obligations and the finite completed comparison inverse using the existing completion-reduction theorem. All other comparison obligations remain unchanged. Stage-3 K5 proves the strict reduced completion unit by the existing generic small-site reduced-unit theorem and equivalence transport, and finite completed comparison naturality by reduction-unit cancellation. No new statement or hole is added. The standard derived factorization isomorphisms are named with the exact public endpoints to avoid repeated conversions; their maps are unchanged. The finite model factorization exposes the original-coefficient endpoint. The normalization uses HEq of the same composites, equivalent to the old Eq by heq_iff_eq, to avoid repeating their endpoint conversion. Stage-3 F4 supplies the complete exact-equivalence/total-tensor argument and the actual termwise extension model construction with uniqueness. The ordinary binary sheaf tensor comparison is the single remaining new substep; it is used for both slice and AsSmall transport. Existing mathematical statements and maps are unchanged. Three public definitions receive judgmentally equal elaboration refactors, documented in the delivery change records; private generic categorical identities and local reducibility and instance caches reduce repeated conversion checking.",
+  "note": "Existing proved declarations and their proof bodies relocated verbatim to keep each module within the compile limit. Original proof and sources retained. Relocated by J4, 2026-10-27, from lem-sf-cbc-extension-zero-completion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Existing normalized adic/extension model declarations in the source module",
+   "results": "Reuse the existing complete proofs without changing any statement or proof body.",
+   "date": "2026-10-27",
+   "verdict": "This is only a module split, with no new mathematical obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalBaseData",
+  "group": "J4",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Construction and naturality of the completed open factor, Steps 1–2; the normalized model construction is agent-written supporting work, not a new blueprint assertion.",
+   "via": [
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfCbcExtensionModel",
+  "file": "lean/Sheaf/Paper/SfCbcExtensionModel.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfCbcExtensionModel_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfCbcConstantSliceMap_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcConstantSliceMap",
+   "AlgebraicGeometry.Scheme.sfCbcConstantModuleToSlice",
+   "AlgebraicGeometry.Scheme.sfCbcOpenExtension",
+   "AlgebraicGeometry.Scheme.sfCbcOpenExtension_exact",
+   "AlgebraicGeometry.Scheme.sfCbcOpenExtension_additive",
+   "AlgebraicGeometry.Scheme.sfCbcOpenExtension_limits",
+   "AlgebraicGeometry.Scheme.sfCbcOpenExtension_colimits",
+   "AlgebraicGeometry.Scheme.sfCbcDerivedExtension",
+   "AlgebraicGeometry.Scheme.sfCbcModelRing",
+   "AlgebraicGeometry.Scheme.sfCbcModelRingMap_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcModelRingMap",
+   "AlgebraicGeometry.Scheme.sfCbcModelModules",
+   "AlgebraicGeometry.Scheme.sfCbcModelModules_properties",
+   "AlgebraicGeometry.Scheme.sfCbcModelModules_isEquivalence",
+   "AlgebraicGeometry.Scheme.sfCbcModelModules_additive",
+   "AlgebraicGeometry.Scheme.sfCbcModelEquivalence_additive",
+   "AlgebraicGeometry.Scheme.sfCbcModelModules_derived",
+   "AlgebraicGeometry.Scheme.sfCbcModelTowers_derived",
+   "AlgebraicGeometry.Scheme.sfCbcModelDerived",
+   "AlgebraicGeometry.Scheme.sfCbcModelIdeal",
+   "AlgebraicGeometry.Scheme.sfCbcTowerDerived",
+   "AlgebraicGeometry.Scheme.sfCbcReduction",
+   "AlgebraicGeometry.Scheme.sfCbcCompletion",
+   "AlgebraicGeometry.Scheme.sfCbcCompletionUnit",
+   "AlgebraicGeometry.Scheme.sfCbcIsComplete",
+   "AlgebraicGeometry.Scheme.sfCbcExtensionModel_existsUnique",
+   "AlgebraicGeometry.Scheme.sfCbcExtensionModel",
+   "AlgebraicGeometry.Scheme.sfCbcModelExtension",
+   "AlgebraicGeometry.Scheme.sfCbcModelExtension_additive",
+   "AlgebraicGeometry.Scheme.sfCbcModelExtension_limits",
+   "AlgebraicGeometry.Scheme.sfCbcModelExtension_colimits",
+   "AlgebraicGeometry.Scheme.sfCbcModelDerivedExtension",
+   "AlgebraicGeometry.Scheme.sfCbcTowerExtension",
+   "AlgebraicGeometry.Scheme.sfCbcTowerExtension_exact",
+   "AlgebraicGeometry.Scheme.sfCbcTowerExtension_additive",
+   "AlgebraicGeometry.Scheme.sfCbcTowerExtension_limits",
+   "AlgebraicGeometry.Scheme.sfCbcTowerExtension_colimits",
+   "AlgebraicGeometry.Scheme.sfCbcDerivedTowerExtension",
+   "AlgebraicGeometry.Scheme.sfCbcQuotientPresentation",
+   "AlgebraicGeometry.Scheme.sfCbcModelDerivedFactors",
+   "AlgebraicGeometry.Scheme.sfCbcModelExtensionFactors",
+   "AlgebraicGeometry.Scheme.sfCbcTowerExtensionFactors"
+  ],
+  "statement": "theorem sfCbcExtensionModel_existsUnique {U X : Scheme.{t}} (j : U ⟶ X)\n    [IsOpenImmersion j] (A : Type t) [CommRing A]\n    {K : proEtaleDerivedCategory U A} (M : AdicKFlatModel U A K) :\n    ∃! N : AdicKFlatModel X A ((sfCbcDerivedExtension j A).obj K),\n      N.complex = ((sfCbcOpenExtension j A).mapHomologicalComplex (.up ℤ)).obj M.complex ∧\n      HEq N.realization\n        (((sfCbcOpenExtension j A).mapDerivedCategoryFactors.app M.complex).symm ≪≫\n          (sfCbcDerivedExtension j A).mapIso M.realization)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-a20e6",
+  "group": "J4",
+  "result": "fix",
+  "landing": "20261027T131459-L-2941620",
+  "kind": "interface",
+  "note": "independent cc review: item localBaseData_exists + new hole localOrdinaryResolving_exists against LocalBaseData/Local fields and node; Models+Transport and Model+ZeroCompletion concatenations vs published originals (verbatim); public decl type hashes published vs sandbox (identical); 12 delivered modules + 30 direct importers compiled in sandbox (all OK)"
+ }
+}

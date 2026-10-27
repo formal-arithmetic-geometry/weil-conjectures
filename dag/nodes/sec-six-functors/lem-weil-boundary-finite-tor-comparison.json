@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-boundary-finite-tor-comparison",
+ "kind": "statement",
+ "title": "Finite-Tor restriction of ordinary site comparison",
+ "statement": "Fix a finite-field datum $D$ [def-weil-finite-field-fiber], a prime $\\ell\\ne D.p$, a finite extension $E/\\mathbf Q_\\ell$ and a positive integer $n$, and let $A=\\mathcal O_E/\\varpi_E^n$ [def-weil-l-adic-coefficient-extension]. For any scheme $T$, let $P_e,P_p$ be the published finite-Tor constructible object predicates in the ordinary small etale and fixed-scalar pro-etale derived categories [def-weil-finite-tor-amplitude]. Let $F=\\nu_T^*$ be the actual comparison. There is an equivalence $P_e\\simeq P_p$ whose functor commutes with the full inclusions via $F$. For each bounded-below etale $K$ in $P_e$ and integers $a\\le b$, its ordinary etale Tor amplitude is in $[a,b]$ if and only if $FK$ has ordinary pro-etale Tor amplitude in that same interval. Every $K$ in $P_p$ admits an etale $H$ in $P_e$ with $FH\\cong K$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph: adjointing through tensor-Hom and the exceptional adjunction; evaluation and double-dual compatibility."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-tor-amplitude",
+  "def-sf-comparison-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Apply finiteRing_constructibleDerived_origin to the intrinsic realization of a fixed-scalar pro-etale object. Convert finite support of its homology to an ordered integer interval, using lower and upper bounds and min/max; this includes empty support. Full faithfulness of the derived realization cancels the realization and yields a fixed-scalar etale representative.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing unbounded fixed-scalar Tor-interval comparison and intrinsic Tor transport identify every ordered interval. Comparison therefore sends finite-Tor etale objects into the intrinsic finite-Tor predicate and reflects the interval of each etale representative.",
+   "uses": [
+    "lem-exc-comparison-tor-interval",
+    "lem-exc-intrinsic-tor-amplitude-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the comparison to the full finite-Tor subcategories. Its Hom maps are bijective by bounded-below full faithfulness of the fixed-module derived comparison (bijective_comparisonUpperStar_mapDerivedCategory_map); representatives make it essentially surjective. Turn this functor into its equivalence; its square with the full inclusions is the identity natural isomorphism.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-comparison-tor-interval",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Second paragraph: adjointing through tensor-Hom and the exceptional adjunction; evaluation and double-dual compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An equivalence restricts to full subcategories of objects satisfying an isomorphism invariant property",
+   "results": "CategoryTheory.Equivalence.congrFullSubcategory and ObjectProperty.fullSubcategoryCongr. These are formal restriction tools, not the site-specific finite-Tor statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty, CategoryTheory.Equivalence",
+   "results": "12 hits including CategoryTheory.Equivalence.congrFullSubcategory. Read full-subcategory definitions; actual comparison must first be restricted.",
+   "date": "2026-10-25",
+   "verdict": "general categorical tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTorConstructible|BoundaryFiniteSite|ConstructibleOriginComparison",
+   "results": "msearch returned zero hits. Local rg found the item and ProEtaleConstructibleOrigin; a further local search found Scheme.finiteRing_constructibleDerived_origin in Sheaf.Paper.FiniteRingConstructibleDerivedOrigin, used in the proof.",
+   "date": "2026-10-25",
+   "verdict": "existing origin theorem plus Tor transport suffice for the new restricted equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BoundaryFiniteSiteRealization",
+  "date": "2026-10-25",
+  "group": "C8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Second paragraph: adjointing through tensor-Hom and the exceptional adjunction; evaluation and double-dual compatibility.",
+   "via": [
+    "lem-weil-boundary-finite-site-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BoundaryFiniteTorComparison",
+  "file": "lean/Sheaf/Paper/BoundaryFiniteTorComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryFiniteSite.boundary_finite_tor_comparison",
+  "statement": "theorem boundary_finite_tor_comparison (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u}) : letI : Finite (Padic.coefficientExtensionRing l E n) := Padic.finite_coefficientExtensionRing l E n hn let C := coefficients (Padic.coefficientExtensionRing l E n) let Pe := WeilConjectures.finiteTorConstructibleEtale l E n hn T let Pp := WeilConjectures.finiteTorConstructibleProEtaleModule l E n hn T let F := comparison C T (∃ e : Pe.FullSubcategory ≌ Pp.FullSubcategory, Nonempty (e.functor ⋙ Pp.ι ≅ Pe.ι ⋙ F)) ∧ (∀ (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology C)), Pe K.obj → ∀ (a b : ℤ), a ≤ b → (Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T a b K.obj ↔ ProEtale.DerivedCategory.torAmplitudeIn C T a b (F.obj K.obj))) ∧ (∀ K, Pp K → ∃ H, Pe H ∧ Nonempty (F.obj H ≅ K))",
+  "branch": "sheaf-dag",
+  "by": "C8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7ef3",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261025T122649-L-1794345",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f7ef3",
+  "group": "C8",
+  "result": "fix",
+  "landing": "20261025T122649-L-1794345",
+  "kind": "interface",
+  "note": "independent cc review: delivered BoundaryFiniteSiteData vs clone BoundaryFiniteSiteRealization (9 bodies verbatim, BasicRemainder/EvaluationAt definitional factoring, signatures unchanged); sorry statement = item conclusion minus the six proved finite-Tor clauses; tor-comparison axioms clean; node proof_deps vs Lean declarations used"
+ }
+}

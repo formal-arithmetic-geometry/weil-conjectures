@@ -1,0 +1,136 @@
+{
+ "id": "lem-pod-reindexing-tensor-compositor",
+ "kind": "statement",
+ "title": "Canonical reindexing compositor and its tensor equation",
+ "statement": "Let $\\ell$ be prime and let $E/\\mathbf Q_\\ell$ be a finite extension in universe $u$. For each scheme $W$ in universe $u$, use either the positive finite coefficient sheaf $(\\mathcal O_E/\\varpi_E^{n+1})_W$ at $s=\\mathrm{some}(n)$ or the ordinary completed ring sheaf $\\varprojlim_n(\\mathcal O_E/\\varpi_E^{n+1})_W$ at $s=\\mathrm{none}$ [lem-pod-reindexing-hom-resolution-model]. Write $D_W$ for its ordinary unbounded module derived category, $F_g$ for the recorded exact reindexing functor, and $H_W$ for the recorded derived Hom. Fix on every scheme in question a closed structure $S_W$ for $H_W$ and its normalized K-flat tensor model $T_W$ [def-coef-ringed-tensor-hom-model]. Assume $\\ell$ is invertible in every residue field of every such scheme, and each pro-etale site is essentially small in universe $u+1$ (its object universe is $u+1$, its arrow universe is $u$, the module universe is $u+1$, and the localization universe is $u+2$). Let $g:X\\xrightarrow{\\sim}Y$ and $h:Z\\xrightarrow{\\sim}X$ be scheme isomorphisms and let $c_g,c_h,c_{gh}$ be any normalized Comparisons [def-pod-reindexing-coherence-data]. There exists the sectionwise and localization-normalized Compositor $k:F_{gh}\\cong F_hF_g$ with $c_{gh}^{\\otimes}(M,N);(k_M\\otimes k_N)=k_{M\\otimes N};F_h(c_g^{\\otimes}(M,N));c_h^{\\otimes}(F_gM,F_gN)$ for every $M,N\\in D_Y$. No Hom equation is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1, 2 and 4; representative details in the parent node lem-pod-reindexing-evaluation-shift-composition."
+ },
+ "stmt_deps": [
+  "def-pod-reindexing-coherence-data",
+  "lem-pod-reindexing-hom-resolution-model",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Proof: For a module M and a pro-etale object U of Z, define the ordinary comparison by the restriction of M along (siteComp g h).inv.app U. Define its inverse using siteComp.hom. The two composites are identities by functoriality of restriction and the site isomorphism identities. These section maps commute with restriction by naturality of siteComp. They are linear: the coefficient restriction along this site map is the identity on the finite-stage constant coefficients; at the completed stage the same assertion holds after every quotient projection, which jointly detect equality. Thus these maps assemble to the ordinary natural module isomorphism and give the required sections field.",
+   "uses": [
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each cochain complex P use this ordinary comparison in degree i. Naturality with respect to P.d proves commutation with the differential. The degree field is then the defining equation, and naturality in chain maps is inherited degreewise. Both exact reindexing functors invert quasi- isomorphisms. Descend this natural chain isomorphism through the localization functor. Whiskering with the localization is fully faithful, so the descended isomorphism has exactly the model equation with the three recorded podReindexingDerivedFactors. This constructs every field of Compositor, without choosing an arbitrary natural isomorphism.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "First prove the tensor square on the actual total complexes. In the summand of bidegree (p,q), both routes send a pure section x tensor y over U to the tensor of their restrictions along siteComp.inv.app U. This uses the tensorChain_pure fields of cg, ch and cgh; there is no interchange of degrees and hence no sign. The sheafified pure generators and total-summand inclusions detect equality, so the chain square follows. Reindexing along a scheme isomorphism preserves K-flat complexes: use the inverse exact reindexing equivalence to transport an acyclic tensor test, and the normalized tensorChain isomorphism to identify its tensor. Apply the three tensor_model equations to independently K-flat representatives P,Q. Substitute the chain square and the compositor model equation, and cancel the comparison isomorphisms. This proves the displayed derived tensor square on Q(P),Q(Q). Finally take independent K-flat resolutions of arbitrary M,N; naturality of the tensor comparisons and compositor transports that square across their invertible augmentations. No Hom equation is assumed or asserted here.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-coefficient-tensor-curry-normalization",
+    "lem-pc-kflat-resolution",
+    "lem-pod-reindexing-hom-resolution-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-reindexing-hom-resolution-model",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-coefficient-tensor-curry-normalization",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-pod-dual-tate-data-compatibility.proof.md",
+  "place": "Steps 1, 2 and 4; representative details in the parent node lem-pod-reindexing-evaluation-shift-composition."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived tensor comparison for reindexing sheaf modules along scheme isomorphisms respects composition and the identity",
+   "results": "SheafOfModules.pullbackComp, Scheme.Modules.pullbackComp, pushforward_id_comp and five PiTensorProduct reindexing lemmas.",
+   "date": "2026-10-27",
+   "verdict": "No match for the specified coefficient-normalized sectionwise module functor with its total-tensor, derived-model and signed Hom comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom comparison for composite monoidal functors is characterized by evaluation",
+   "results": "expComparison_ev, MonoidalClosedFunctor.comparison_iso, expComparison, coev_expComparison, uncurry_expComparison and three related lemmas.",
+   "date": "2026-10-27",
+   "verdict": "The Cartesian comparison results do not construct the specified reindexing tensor comparison or signed chain shifts. The abstract evaluation argument is proved directly in the parent."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*(Comp|Id)|ihomComparison_comp_app",
+   "results": "Mathlib DerivedCategory.ExactFunctor provides factorization naturality; source ihomComparison_comp_app is an abstract composition law. The presentation structures already live in the parent; they are moved without duplication. No concrete compositor or signed Hom-shift square found.",
+   "date": "2026-10-27",
+   "verdict": "The new definition node records relocated existing presentation data. The four new theorem nodes are the remaining construction and shift steps, not duplicates of the abstract Hom comparison law."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PodReindexingEvaluationShiftComposition",
+  "date": "2026-10-27",
+  "group": "K8"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pod-dual-tate-data-compatibility",
+   "place": "Steps 1, 2 and 4; representative details in the parent node lem-pod-reindexing-evaluation-shift-composition.",
+   "via": [
+    "lem-pod-reindexing-evaluation-shift-composition",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PodReindexingTensorCompositor",
+  "file": "lean/Sheaf/Paper/PodReindexingTensorCompositor.lean",
+  "declaration": "WeilConjectures.PodReindexingCoherence.tensor_compositor_exists",
+  "statement": "theorem tensor_compositor_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] [∀ z : Z, Invertible (l : Z.residueField z)] [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] [EssentiallySmall.{u + 1} Z.ProEt] (s : Option ℕ) (SX : Closed l E X s) (SY : Closed l E Y s) (SZ : Closed l E Z s) (TX : Models l E X s SX) (TY : Models l E Y s SY) (TZ : Models l E Z s SZ) (cg : Comparison l E g s SX SY TX TY) (ch : Comparison l E h s SZ SX TZ TX) (cgh : Comparison l E (h ≫ g) s SZ SY TZ TY) : ∃ k : Compositor l E g h s, (∀ M N : podReindexingDerived l E Y s, cgh.tensor.hom.app (M, N) ≫ SZ.tensor.map (Prod.mkHom (k.derived.hom.app M) (k.derived.hom.app N)) = k.derived.hom.app (SY.tensor.obj (M, N)) ≫ (podReindexingDerivedFunctor l E h s).map (cg.tensor.hom.app (M, N)) ≫ ch.tensor.hom.app ((podReindexingDerivedFunctor l E g s).obj M, (podReindexingDerivedFunctor l E g s).obj N))",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-54610",
+  "group": "K8",
+  "result": "fix",
+  "landing": "20261027T135435-L-3707416",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-54610",
+  "group": "K8",
+  "result": "fix",
+  "landing": "20261027T135435-L-3707416",
+  "kind": "interface",
+  "note": "independent cc review: item + 5 new modules vs clone item (verbatim forced data split, statements unchanged), 4 leaves vs parent clauses, nodes vs Lean; reader gate: both direct importers compiled OK against delivered files"
+ }
+}

@@ -1,0 +1,56 @@
+# global build 2026-10-27T05:20:34Z of 775a71b5fc: Sheaf.Paper.CompletionUnitFiniteMateComparison failed
+error: Sheaf/Paper/CompletionUnitFiniteMateComparison.lean:109:57: unsolved goals
+l : ℕ
+inst✝³ : Fact (Nat.Prime l)
+E : Type u
+inst✝² : Field E
+inst✝¹ : Algebra ℚ_[l] E
+inst✝ : FiniteDimensional ℚ_[l] E
+W : Scheme
+Q : CochainComplex (scalarReductionSource l E W) ℤ
+hQ : Q.IsKFlatIndependentCoefficients
+n : ℕ
+h :
+  ⋯.choose.unit.app
+        (DerivedCategory.Qh.obj ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q)) ≫
+      (scalarReductionDerivedRestriction l E W n).map
+          ((scalarReductionCounit l E W n).app
+            ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q)) ≫
+        (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh.hom.app
+          (((scalarReductionExtension l E W n).mapHomotopyCategory (ComplexShape.up ℤ)).obj
+            ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q)) =
+    DerivedCategory.Qh.map
+      ((Adjunction.mapHomotopyCategory (ComplexShape.up ℤ) (Classical.choose ⋯)).unit.app
+        ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q))
+hfac :
+  (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh.hom.app
+      ((HomotopyCategory.quotient (scalarReductionTarget l E W n) (ComplexShape.up ℤ)).obj
+        (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)) =
+    (scalarReductionRestriction l E W n).mapDerivedCategory.map
+        ((DerivedCategory.quotientCompQhIso (scalarReductionTarget l E W n)).hom.app
+          (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)) ≫
+      (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
+          (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q) ≫
+        (DerivedCategory.quotientCompQhIso (scalarReductionSource l E W)).inv.app
+            (((scalarReductionRestriction l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj
+              (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)) ≫
+          DerivedCategory.Qh.map
+            (((scalarReductionRestriction l E W n).mapHomotopyCategoryFactors (ComplexShape.up ℤ)).inv.app
+              (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q))
+hfac' :
+  (scalarReductionRestriction l E W n).mapDerivedCategoryFactorsh.hom.app
+      (((scalarReductionExtension l E W n).mapHomotopyCategory (ComplexShape.up ℤ)).obj
+        ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q)) =
+    (scalarReductionRestriction l E W n).mapDerivedCategoryFactors.hom.app
+      (((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj Q)
+hunit :
+  DerivedCategory.Qh.map
+      ((Adjunction.mapHomotopyCategory (ComplexShape.up ℤ) ⋯.choose).unit.app
+        ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q)) =
+    DerivedCategory.Q.map ((Adjunction.mapHomologicalComplex (ComplexShape.up ℤ) ⋯.choose).unit.app Q)
+⊢ (asIso
+        ((scalarReductionCounit l E W n).app
+          ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q))).hom =
+    (scalarReductionCounit l E W n).app
+      ((HomotopyCategory.quotient (scalarReductionSource l E W) (ComplexShape.up ℤ)).obj Q)
+error: Lean exited with code 1

@@ -3,7 +3,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group H2 -/
 module
 
-public import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
+public import Sheaf.Paper.FiniteDiscreteCoefficientEncodingData
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 import Sheaf.Paper.FiniteDiscreteConstructibleLocalPiece
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal

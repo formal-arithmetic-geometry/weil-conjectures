@@ -1,0 +1,164 @@
+{
+ "id": "lem-sf-rational-cover-reflects-iso",
+ "kind": "statement",
+ "title": "Detect rational constructible isomorphisms on a covering",
+ "statement": "Fix a finite-field datum D, coefficient datum C, finite extension E of Q_l, and a separated finite-type D-space X. Let g:K→M be a morphism in its intrinsic rational constructible category. Suppose for every pro-etale object V there is a covering sieve R such that, for every arrow U→V in R, the image of g under the constructible-to-ambient rational inclusion and subsequent restriction to the actual slice over U is invertible. Then g is invertible. The intrinsic categories and inclusion are those of [def-sf-datum, lem-sf-coefficient-dual-model-transport].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md",
+  "place": "Global rational detection, steps 11--13: cone, finite covering, uniform power torsion and boundedness."
+ },
+ "stmt_deps": [
+  "def-sf-datum",
+  "lem-sf-coefficient-dual-model-transport"
+ ],
+ "proof": [
+  {
+   "text": "clear the denominator of f and take the integral constructible cone of\nits numerator. Exactness identifies the local cones with its localized slice\nrestrictions, so the hypothesis makes them zero. Since X is separated and of\nfinite type, choose a finite affine refinement of this covering. Apply\nsfRationalLocalGlobalPowerTorsion to get one power annihilating every cohomology\nsheaf of the cone. Its integral constructibility supplies a uniform interval\nfor the finite reductions. Derived completeness and the Roos long exact\nsequence give a finite cohomological interval for the cone itself (with at\nmost one extra degree). Apply sfRationalBoundedConeTorsion to kill its identity\nby a uniformizer power. Its rationalization is zero, so the numerator and f\nare invertible. The empty scheme and zero cone are included in the argument;\nno infinite supremum of torsion exponents is taken.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-sf-rational-local-global-power-torsion",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-rational-bounded-cone-torsion",
+    "lem-sf-coefficient-dual-model-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sf-rational-local-global-power-torsion",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sf-rational-bounded-cone-torsion",
+  "lem-sf-coefficient-dual-model-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, applied to the coefficient-stage argument at Global rational detection, steps 11--13: cone, finite covering, uniform power torsion and boundedness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fully faithful closed functor reflects dualizability and perfect tensor Hom evaluation",
+   "results": "8 hits including Functor.FullyFaithful.reflectsIsomorphisms, fullyFaithfulOfCoreflective, reflectsIsomorphisms_of_full_and_faithful",
+   "date": "2026-10-25",
+   "verdict": "Only categorical reflection tools; none states normalized closed evaluation transport, ambient rational slice detection, local bounded rational evaluation, or filtered coefficient descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Full, CategoryTheory.Functor.Faithful",
+   "results": "12 hits including Functor.preimageIso and isIso_of_fully_faithful",
+   "date": "2026-10-25",
+   "verdict": "These reflect isomorphisms after a fully faithful functor, but do not identify the evaluation maps or establish local rational invertibility."
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_iff.*cone|isIso_of_reflects_iso",
+   "results": "25 hits in Mathlib, including Functor.ReflectsIso and sheaf stalk applications",
+   "date": "2026-10-25",
+   "verdict": "No matching statement for normalized coefficient closed structures or rational constructibles on actual slice sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between triangulated categories sends a morphism to an isomorphism if and only if its cone becomes zero",
+   "results": "8 hits including Functor.distTriang_iff, map_distinguished_iff and IsHomological.exact",
+   "date": "2026-10-25",
+   "verdict": "General triangulated tools only; the specialized comparison, bounded rational local calculation and torsion detection remain additional arguments."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SitePerfectDualizableHom",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Global rational detection, steps 11--13: cone, finite covering, uniform power torsion and boundedness.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalCoverReflectsIso",
+  "file": "lean/Sheaf/Paper/RationalCoverReflectsIso.lean",
+  "declaration": "WeilConjectures.rationalCover_reflectsIso",
+  "statement": "theorem rationalCover_reflectsIso\n    (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (X : SixFunctorSpace D)\n    [IsSeparated X.obj.hom]\n    {K M : sfRationalConstructibleCategory C.l E X.obj.left} (g : K ⟶ M)\n    (h : ∀ V : X.obj.left.ProEt, ∃ R : Sieve V,\n      R ∈ Scheme.ProEt.topology X.obj.left V ∧\n      ∀ (U : X.obj.left.ProEt) (f : U ⟶ V), R f →\n        IsIso ((IntegralOnSlice.restrictionRational C.l E X.obj.left\n          (U := none) (V := some U) PUnit.unit).map\n          ((CoefficientDualModels.stageInclusion C.l E X.obj.left).map g))) :\n    IsIso g",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sf-rational-cover-reflects-iso",
+  "worker": "E4",
+  "summary": "Stage-3 reduction; see Lean proof and report.",
+  "blueprint": {
+   "node": "prop-sf-dualizable-hom",
+   "place": "Global rational detection, steps 11--13: cone, finite covering, uniform power torsion and boundedness.",
+   "via": []
+  },
+  "tool_uses": [
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic Bounded constructible derived-complete integral complexes form a triangulated subcategory is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Generic Bounded constructible derived-complete integral coefficients is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact is used for the formal coefficient-site argument; the unit retains its own finite-projective and bounded-complex route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T100943-L-3642728",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

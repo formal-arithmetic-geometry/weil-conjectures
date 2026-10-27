@@ -1,0 +1,142 @@
+{
+ "id": "def-sf-common-stage-inclusion-tensor-comparison",
+ "kind": "definition",
+ "title": "Canonical finite-stage inclusion tensor comparison",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, and a scheme $X$ on which $\\ell$ is invertible. Use the raw rational finite stages and their common-stage pair category $\\mathcal C_X$ of [def-weil-algebraically-closed-coefficients] and [def-weil-rationalization-karoubi], with tensor and scalar comparisons of [def-weil-derived-pullback-tensor-hom]. For a finite coefficient subfield $E$ and $K,L$ in its rational constructible stage, let $i_E$ denote the recorded inclusion into $\\mathcal C_X$. Define the canonical inclusion tensorator $\\alpha_{E;K,L}:i_E(K\\otimes L)\\xrightarrow{\\sim}i_EK\\otimes i_EL$ as follows. Put $P=i_EK$, $Q=i_EL$ and $Z=E\\vee E\\le E$. Start from the common-stage tensor object, use its literal-object identification, its canonical isomorphism to stage $E$, and the recorded common-stage tensor comparison there; apply the rational tensor of the normalized reflexive scalar unit on $K,L$. The inverse of this composite is $\\alpha_{E;K,L}$. Equivalently, it is the unique isomorphism heterogeneously equal to that composite inverse, retaining the literal pair-object transports. This specifies the entire isomorphism, including the identity coefficient-extension case.",
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; raw common-stage tensor convention of def-weil-derived-pullback-tensor-hom; normalization needed in lem-sf-adic-qbar-constructible-realization."
+ },
+ "proof": [
+  {
+   "text": "Unfold stageTensorFormula and take as witness the inverse of its displayed composite: the literal common-stage tensor-object isomorphism, isoToStage at E, and inclusion of commonStageTensorComparison followed by the rational tensor of the normalized reflexive scalar unit. Its endpoints are definitionally the required included tensor and common-stage tensor. The normalization holds by HEq.rfl.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For any other candidate, its normalization is heterogeneous equality to that same witness. Since both have the required isomorphism type, eq_of_heq gives equality to the witness. This proves uniqueness without any additional coherence lemma, also for reflexive coefficient extensions.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.8.15; raw common-stage tensor convention of def-weil-derived-pullback-tensor-hom; normalization needed in lem-sf-adic-qbar-constructible-realization.",
+  "note": "F6: direct Lean construction from the existing stageTensorFormula; existence by its displayed composite and HEq.rfl, uniqueness by eq_of_heq. No mathematical statement or definition changed."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inclusion of a finite coefficient field stage into a filtered common-stage constructible category preserves the derived tensor product with the normalized scalar unit",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; IsFiltered.SmallFilteredIntermediate.inclusion and its faithful instance; ModuleCat.FilteredColimits.colimit and M.mk; CommRingCat.Under finite tensor product/limit preservation. None constructs this inclusion comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"MonoidalCategory\", \"IsFiltered\"",
+   "results": "0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]tage.*[Tt]ensor|[Tt]ensor.*[Ss]tage",
+   "results": "msearch grep Mathlib: 0 hits.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"tensorInclusion|inclusionTensor|stageTensor\" lean/WeilConjectures lean/Sheaf; rg -l \"inclusion.*tensor.*comparison|tensor.*inclusion.*comparison\" dag/nodes/sec-six-functors; tools/blueprint_refs.py search \"common-stage inclusion tensor\"",
+   "results": "Upstream: no match. Sheaf: private total-tensor summand cast, external Hom complex summand inclusion, and abstract CommonTensorComparisonDescent.stageTensor data; none is this raw finite-stage inclusion map. DAG hits are unrelated operadic/duality/system data; no definition of this comparison. Blueprint search: 0 matching nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-adic-qbar-constructible-realization",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical inclusion tensorator used to state the finite integral normalization of the native common-stage realization. The parent is a maintainer-created native obligation, with no blueprint ancestor.",
+   "via": [
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageInclusionTensorComparison",
+  "declaration": "WeilConjectures.AdicQbarRealization.stageTensor",
+  "declarations": [
+   "WeilConjectures.AdicQbarRealization.stageTensorFormula",
+   "WeilConjectures.AdicQbarRealization.stageTensor_existsUnique",
+   "WeilConjectures.AdicQbarRealization.stageTensor"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageInclusionTensorComparison.lean",
+  "statement": "def stageTensor (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] [∀ x : X, Invertible (l : X.residueField x)] (E : AlgebraicallyClosedCoefficients.Index l Ω) (K L : sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X) : (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) E).obj ((rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X).obj (K, L)) ≅ (commonStageDerivedTensor l Ω X).obj ((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) E).obj K, (GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := X) E).obj L)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The existence/uniqueness theorem specifies the entire isomorphism by HEq to the recorded finite-stage composite, so choosing it does not introduce arbitrary data. The HEq avoids expanding literal dependent pair transports while retaining the actual canonical formula."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-25a6777c9",
+  "group": "NL",
+  "result": "fix",
+  "note": "Re-delivery of RETURNed 0705. H3 repaired: Family.sourceId_unit (pullbackTensorCommonComposition 𝟙 𝟙 M ≫ sourceId at F M = 𝟙, HEq along id_comp) is the pseudofunctor left-unit law; it fixes sourceId through essential surjectivity and naturality, so identity is no longer vacuous. H2 repaired: theorem stmt_deps replaced by def-zl-ringed-...-data plus four existing:true owners; each statement is verbatim in its unchanged module and all declarations exist; the other five Lean files are byte-identical to 0705. FIX: def-sf-adic-closed-reindexing-maps re-owned PodPartialClosed, .evaluation and podPairPullback, already owned by the on-base def-pod-partial-closed-interfaces (Q69, landed 15:55Z 10-22); fixes/def-sf-adic-closed-reindexing-maps.json removes them, cites the owner and rewrites the TeX. Advisory: def-sf-proetale-sectionwise-module-inverse-image duplicates Q15 def-weil-proetale-iso-sectionwise-inverse-image, landed 05:13Z after base 04:33Z; it cannot be cited by a FIX, so the maintainer should merge the nodes. No Lean changed and no compile was run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261027T123437-L-2298909",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

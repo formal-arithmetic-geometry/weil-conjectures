@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-integral-support-strict-tower-comparison",
+ "kind": "statement",
+ "title": "Strict support-system comparison before total limit",
+ "statement": "Fix a prime l and a finite extension E/Q_l, a field K₀ with IsUnit(l:K₀), finite-type quasi-compact K₀-schemes X,Y, a separated finite-type quasi-compact K₀-morphism f:X→Y and a compactification c of f. Fix Operations o on strict coefficient systems [def-sf-integral-system-operations]. Let T and e be exactly the functor and evaluation comparisons chosen by exists_compactSupportReductionTower [lem-weil-compact-support-reduction-tower-functor]. There is a natural isomorphism from calculus(X).reduction followed by o.shriek(c.i), o.push(c.g) and strict completed scalar restriction to T on the entire integral derived category. For each integral input K and finite exponent n+1, its evaluation followed by e_n equals coefficientRestrictedEvaluationIso followed by restricted supportEvaluation and compact support applied to reductionEvaluation at K. No constructibility or reconstruction-unit assumption is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Primitive tensor reassociation, evaluation and adjunction unit/counit comparisons; agent-formulated component of lem-sf-integral-basic-realization."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "lem-weil-compact-support-reduction-tower-functor"
+ ],
+ "proof": [
+  {
+   "text": "Construct the explicit native open and direct isomorphisms, and obtain their finite evaluation identities from integralNativeOpenComparison and integralNativeDirectComparison. Whisker and compose these two whole-system isomorphisms to b. Naturality of the given proper evaluation moves the evaluated open comparison past the proper evaluation; the two primitive identities then identify evaluated b followed by compactSupportSystemEvaluation with supportEvaluation.",
+   "uses": [
+    "def-sf-integral-system-operations",
+    "lem-sf-integral-native-open-comparison",
+    "lem-sf-integral-native-direct-comparison",
+    "def-weil-compact-support-native-system-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use qcqsCompactSupport_nativeTowerComparison with calculus(X), so that its reduction functor and reductionEvaluation are exactly the fixed ones. Eliminate hT and he to retain the original chosen tower and original chosen evaluations. Whisker b by fixed input reduction and completed scalar restriction and compose with the inverse native-tower comparison. Its evaluated identity follows by cancellation of that comparison, naturality of coefficientRestrictedEvaluationIso, functoriality of restriction, and the previously proved evaluation identity for b. This constructs a map of whole derived strict towers before any evaluation and uses no faithfulness of finite derived evaluation.",
+   "uses": [
+    "lem-qcqs-compact-support-native-tower-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-weil-compact-support-reduction-tower-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-system-operations",
+  "lem-sf-integral-native-open-comparison",
+  "lem-sf-integral-native-direct-comparison",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-qcqs-compact-support-native-tower-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-compact-support-reduction-tower-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient comparisons preserve evaluation and adjunction units/counits; primitive whole-system operation comparison in Step 1 of lem-sf-integral-support-strict-tower-comparison. Stacks 03DI, 0941, 0D6E; Zheng Construction 4.1 and Lemma 4.10."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ower|[Tt]ower.*[Cc]ompactSupport",
+   "results": "{\"t\": \"2026-10-26T22:44:42Z\", \"tool\": \"grep\", \"query\": \"compactSupport.*[Tt]ower|[Tt]ower.*[Cc]ompactSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching geometric normalization theorem. Only generic categorical assembly lemmas are relevant."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isoWhiskerRight\"",
+   "results": "{\"t\": \"2026-10-26T22:44:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"isoWhiskerRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isoWhiskerRight\", \"CategoryTheory.Functor.isoWhiskerRight_refl\", \"CategoryTheory.Functor.isoWhiskerRight_symm\", \"CategoryTheory.Functor.isoWhiskerRight_hom\", \"CategoryTheory.Functor.isoWhiskerRight_inv\", \"CategoryTheory.Functor.isoWhiskerRight_trans\", \"CategoryTheory.Functor.isoWhiskerLeft_trans_isoWhiskerRight\", \"CategoryTheory.Functor.isoWhiskerRight_trans_assoc\"], \"digest\": \"a8247cbc740f285a\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching geometric normalization theorem. Only generic categorical assembly lemmas are relevant."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural comparison between compact support derived coefficient towers and their integral limit with projection identities",
+   "results": "{\"t\": \"2026-10-26T22:44:46Z\", \"tool\": \"leanfinder\", \"query\": \"Natural comparison between compact support derived coefficient towers and their integral limit with projection identities\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.integralLinearMap_apply\", \"MeasureTheory.integral_integral_swap_of_hasCompactSupport\", \"NNRealRMK.integral_rieszMeasure\", \"NNRealRMK.lintegral_rieszMeasure\", \"CompactlySupportedContinuousMap.integralPositiveLinearMap_toFun\", \"CompactlySupportedContinuousMap.integralLinearMap\", \"NNRealRMK.integralLinearMap_rieszMeasure\", \"tendsto_setIntegral_pow_smul_of_unique_maximum_of_isCompact_of_measure_nhdsWithin_pos\"], \"digest\": \"79047f53a83ebfd5\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching geometric normalization theorem. Only generic categorical assembly lemmas are relevant."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support strict coefficient tower comparison preserving scalar adjunction projections",
+   "results": "{\"t\": \"2026-10-26T22:47:18Z\", \"tool\": \"leansearch\", \"query\": \"Derived compact support strict coefficient tower comparison preserving scalar adjunction projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"CompactlySupportedContinuousMap.instIsScalarTower\", \"CondensedSet.compactlyGeneratedAdjunction\", \"CompHausLike.LocallyConstant.adjunction\", \"stalkSkyscraperSheafAdjunction\", \"ContDiffMapSupportedIn.coe_smul\", \"Condensed.discreteUnderlyingAdj\"], \"digest\": \"5eb5f1f8925890cf\"}",
+   "date": "2026-10-27",
+   "verdict": "No matching geometric normalization theorem. Only generic categorical assembly lemmas are relevant."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSupportTowerNormalization",
+  "date": "2026-10-27",
+  "group": "J8"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Preservation of coefficient comparisons for evaluation and adjunction units/counits; primitive support realization Step 1",
+   "via": [
+    "lem-sf-integral-support-tower-normalization",
+    "lem-sf-integral-basic-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralSupportStrictTowerComparison",
+  "file": "lean/Sheaf/SixFunctors/IntegralSupportStrictTowerComparison.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSupportStrictTowerComparison",
+  "statement": "theorem integralSupportStrictTowerComparison (K₀ : Type u) [Field K₀]\n    (o : Operations l E)\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]\n    [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (hl : IsUnit (l : K₀)) (c : Compactification f)\n    (T : Integral l E X ⥤ coefficientSequenceRestrictedDerived l E Y)\n    (e : ∀ n : ℕ,\n      T ⋙ coefficientConstantTowerEvaluation l E Y n ≅ compactSupportRestrictedLevel l E c n)\n    (hT : T = Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (exists_compactSupportReductionTower l E K₀ X Y f hl c))).2.2)\n    (he : HEq e (Classical.choose (Classical.choose_spec\n      (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec\n        (exists_compactSupportReductionTower l E K₀ X Y f hl c))).2.2).2).2)) :\n    ∃ tower : (calculus l E X).reduction ⋙\n        Operations.shriek l E o c.i ⋙ Operations.push l E o c.g ⋙\n          coefficientSequenceDerivedRestriction l E Y ≅ T,\n      ∀ (K : Integral l E X) (n : ℕ),\n        (coefficientConstantTowerEvaluation l E Y n).map (tower.hom.app K) ≫\n            (e n).hom.app K =\n          (coefficientRestrictedEvaluationIso l E Y n).hom.app\n              ((Operations.push l E o c.g).obj\n                ((Operations.shriek l E o c.i).obj ((calculus l E X).reduction.obj K))) ≫\n            (scalarReductionDerivedRestriction l E Y n).map\n              ((supportEvaluation l E o c n).hom.app ((calculus l E X).reduction.obj K) ≫\n                (sfAmbientCompactSupportCandidate\n                  (Padic.coefficientExtensionRing l E (n + 1)) c).map\n                  (((calculus l E X).reductionEvaluation n).hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-27",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261026T235912-L-1467252",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261027T094541-L-241332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

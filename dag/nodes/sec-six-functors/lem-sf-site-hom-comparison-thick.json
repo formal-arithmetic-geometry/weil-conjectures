@@ -1,0 +1,307 @@
+{
+ "id": "lem-sf-site-hom-comparison-thick",
+ "kind": "statement",
+ "title": "Exactness and thick isomorphism locus of the specified site Hom comparison",
+ "statement": "Let $T$ be a scheme and $A$ a finite commutative ring. Use the ordinary unbounded derived categories $D_e=D(T_{\\mathrm{et}},A)$ and $D_p=D(T_{\\mathrm{proet}},A)$ [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], with derived internal Hom $H_e,H_p$ [def-pur-derived-internal-hom] and their closed symmetric derived tensor structures [lem-sf-ringed-derived-closed-symmetric-monoidal]. Let $F=\\nu_T^*:D_e\\to D_p$ be the exact comparison inverse image with its canonical tensor and constant-unit identifications [def-weil-pbc-site-comparison-morphism, lem-sf-comparison-pullback-exact, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $\\beta_{K,M}:FH_e(K,M)\\to H_p(FK,FM)$ be the evaluation transpose specified in [def-sf-evaluation-hom-site-comparison].\n\nFor each fixed $M\\in D_e$, $FH_e(-,M)$ and $H_p(F(-),FM)$ are exact contravariant functors. The natural transformation $\\beta_{-,M}$ commutes with their canonical shift identifications and gives a morphism of the reversed distinguished triangles, including the connecting morphism, for every distinguished triangle of first arguments. Consequently $\\{K\\in D_e:\\beta_{K,M}\\text{ is invertible}\\}$ is thick: it contains zero and is closed under isomorphisms, shifts, finite sums, cones and retracts [def-weil-triangulated-category]. These assertions concern the specified evaluation transpose, not an arbitrary choice of isomorphisms. Under restriction to any etale object $U\\to T$, the comparison agrees with $\\beta$ formed on the localized sites and with restricted evaluation, using the canonical inverse-image comparisons and the internal-Hom restriction isomorphisms [lem-weil-pbc-ringed-internal-hom-exact-restriction].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-finite-duality-site-comparison.md",
+  "place": "Proof, second paragraph: the comparison maps form morphisms of triangles; first paragraph: comparison commutes with open restrictions"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-pur-derived-internal-hom",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sf-evaluation-hom-site-comparison",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the native closed derived internal Hom signed-exact theorem on both the etale and proetale sheaf coefficient categories. It supplies coherent opposite shifts and exactness with the all-degree quadratic normalization. Compose with the exact comparison pullback and its opposite. The standard composition shift equation gives exactly the source and target normalizations displayed in siteHomExactThickAssertion.",
+   "uses": [
+    "lem-sf-native-derived-hom-signed-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; categorical assembly of the specified evaluation comparison."
+   }
+  },
+  {
+   "text": "Define beta with the specified siteComparisonEvaluationHom components. Ordinary closed-comparison precomposition naturality proves its naturality. Identify the chosen site monoidal structure with the transported exact derived structure using equality of its canonical tensor components. Apply the evaluation-comparison shift lemma to these normalized Hom shifts.",
+   "uses": [
+    "lem-sf-exact-derived-hom-comparison-shift",
+    "def-sf-evaluation-hom-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; categorical assembly of the specified evaluation comparison."
+   }
+  },
+  {
+   "text": "The shift-compatible natural transformation induces a triangle morphism on the reversed triangle with exactly the required three components. Apply the contravariant isomorphism-locus theorem, whose proof uses triangle two-of-three and retracts in the arrow category, to obtain triangulatedness and retract closure.",
+   "uses": [
+    "lem-sf-contravariant-comparison-iso-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; categorical assembly of the specified evaluation comparison."
+   }
+  },
+  {
+   "text": "For etale restriction on either site, use its ordinary closed comparison and its exact extension-by-zero left adjoint. [lem-sf-exact-closed-derived-hom] makes the canonical unbounded derived internal-Hom restriction map invertible. The ordinary comparison pullback square is monoidal: its right-adjoint square is restriction of the same sections, and conjugation preserves monoidality. [lem-sf-exact-derived-tensor-square] derives this actual ordinary square with the canonical transported tensor structures. The chosen comparison tensor structure has those same tensor components; invertible tensor components determine the unit by left unitality, hence determine the whole monoidal structure. Therefore the derived square in the statement is monoidal for exactly the recorded structures. Apply naturality and composition of the canonical internal-Hom comparison to the inverse square, then compose with the square in the source and target. The inverse-isomorphism identities give exactly the displayed restriction equation. This uses the actual etale object morphism, with no open-immersion or boundedness assumption.",
+   "uses": [
+    "lem-sf-exact-closed-derived-hom",
+    "lem-sf-exact-derived-tensor-square",
+    "def-sf-evaluation-hom-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JB and 07A4; restriction of Hom and tensor-Hom transposition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-derived-hom-signed-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-exact-derived-hom-comparison-shift",
+  "def-sf-evaluation-hom-site-comparison",
+  "lem-sf-contravariant-comparison-iso-locus",
+  "lem-sf-exact-closed-derived-hom",
+  "lem-sf-exact-derived-tensor-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-25",
+  "note": "The remaining exact-thick assertion is reduced to native Hom signed exactness and the shift square of the evaluation comparison. Naturality, opposite/composition shifts, all triangle components and thick closure are combined in Lean. The previously proved restriction clause is preserved verbatim."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation induced internal Hom comparison for etale to proetale inverse image is a morphism of reversed distinguished triangles in its first variable",
+   "results": "8 hits; CochainComplex.mappingCone.mapTrianglehIso; CategoryTheory.Triangulated.TStructure.truncGEδLT; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; CochainComplex.mappingCone.mapTriangleIso; CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; DerivedCategory.triangleOfSESIso; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso. The hits supply generic cone, exact-functor and shift APIs, not the evaluation comparison for these two derived sheaf sites or its reversed exactness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact strong monoidal derived sheaf inverse image gives a natural derived Hom comparison compatible with shifts and mapping cones",
+   "results": "8 hits; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactorsh; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; CategoryTheory.Functor.mapDerivedCategoryFactors. The hits supply generic cone, exact-functor and shift APIs, not the evaluation comparison for these two derived sheaf sites or its reversed exactness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.ihomComparison",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Functor.LaxMonoidal.ihomComparison'. The hits supply generic cone, exact-functor and shift APIs, not the evaluation comparison for these two derived sheaf sites or its reversed exactness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|[Hh]om.*[Tt]riangulat|[Tt]riangulat.*[Hh]om",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Localization/Triangulated.lean; Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/Functor.lean; Mathlib/CategoryTheory/Triangulated/SpectralObject.lean; Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean. The hits supply generic cone, exact-functor and shift APIs, not the evaluation comparison for these two derived sheaf sites or its reversed exactness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale proetale derived internal Hom comparison is exact and its isomorphism locus is thick",
+   "results": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact derived pullback between ringed sites has an evaluation internal Hom comparison compatible with contravariant shifts",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.freeFunctorCompPullbackIso.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "0 hits: .  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|internalHom.*[Tt]riangulat|[Tt]riangulat.*internalHom",
+   "results": "0 hits: .  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation of exact contravariant functors compatible with shift has a thick isomorphism locus",
+   "results": "8 hits: CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.LocalizerMorphism.instCommShiftLocalizationHomFunctorIsoFunctorQLocalizedFunctor, CategoryTheory.NatTrans.commShift_iso_hom_of_localization, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.LocalizerMorphism.commShift, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom comparison for etale proetale pullback commutes with shifts and restriction",
+   "results": "8 hits: CategoryTheory.pullbackShiftFunctorZero'_hom_app, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.NatTrans.commShiftPullback, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.hom', CategoryTheory.Abelian.Ext.homEquiv, CategoryTheory.Abelian.Ext.hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit.  Read HomComplex.lean:904-949: cochains of global morphisms, not a map of sheaf Hom complexes on different sites. Closed/Basic.lean:292-310 gives internal Hom inside one closed category. PullbackContinuous and PullbackFree give ordinary module adjunctions, not the signed Hom-complex comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-finite-duality-site-comparison",
+  "date": "2026-10-22",
+  "group": "Q02"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "lem-weil-finite-duality-site-comparison",
+   "place": "Proof, second paragraph: the comparison maps form morphisms of triangles; first paragraph: comparison commutes with open restrictions",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-site-hom-comparison-thick",
+  "worker": "stage1",
+  "summary": "Verified the evaluation-defined map on Hom/K-injective models, supplied signed shift and boundary naturality, proved thick closure, and checked slice restriction using normalized evaluation. One new ordinary chain-level lemma; no derived isomorphism claim is moved into it.",
+  "blueprint": "lem-weil-finite-duality-site-comparison, proof paragraph 2: comparison maps form morphisms of triangles (steps 1-4), stratum-generator devissage (steps 5-6); first paragraph and locality in paragraph 2: restriction compatibility (step 7).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-coef-signed-derived-internal-hom-exact",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-pullback-mate-normalization",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic ringed-site, resolution, exact-functor, or triangle tool used in the explicitly cited step; the unit has no alternative statement supplying this construction. This keeps the blueprint Hom-complex and evaluation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-coef-signed-derived-internal-hom-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-501212606",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-501212606 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is not superseded (the item and the new id are still unsplit or absent in live and side-live), it answers no repair note, and the statement and stmt_deps are unchanged against live. Route: it realizes paragraph 2 of the main-20261015 lem-weil-finite-duality-site-comparison proof, i.e. triangle morphism, thick dévissage and locality. It uses the arbitrary-ringed-site internal-Hom exactness in place of the étale-only lem-sf-hom-triangulated, which is the blueprint's own remark that the same argument works on the pro-étale site. I accept the generic tool_uses. No SGA citation and no cycle. Steps: (1) exactness from lem-sf-comparison-pullback-exact, the exact-functor leaf, lem-weil-pbc-ringed-internal-hom-exact-restriction and lem-coef-signed-derived-internal-hom-exact. (2) b_E = Hom(1,q)∘c with q:FI→J a K-injective resolution, so FI is never assumed K-injective; it descends by lem-pur-rhom-well-defined. (3) On K-flat models with P→Hom(E,I), the uncurried b is q∘F(ev)∘(tensor comparison)^{-1}; the closed-monoidal counit is the evaluation, so b equals β of def-sf-evaluation-hom-site-comparison. (4) The new node's shift square plus postcomposition give compatibility with the projection-normalized source shift, the same convention on both sites; the connecting square comes from naturality at w[-1]. (5) lem-sf-triangle-morphism-iso, zero, shifts and finite sums. (6) Retract inverse h=B(i)a^{-1}C(p), recomputed by hand. (7) The localize-ringed-site, slice mate-normalization and slice-evaluation-transpose nodes give agreement for every étale U. New node lem-sf-ringed-hom-complex-pullback-shift: statement only, self-contained, source Stacks 0GMX remark-pullback-internal-hom (read). I checked by hand that s:H(E[m],I)→H(E,I)[-m] with (-1)^{mn} is a chain map, and the cases E=O[0], I=N[0] and m=0. It strictly generalizes lem-sf-etale-hom-complex-pullback (scheme morphisms only; ν_T is not one), so it is not a duplicate or a restated clause. Searches recorded with all three kinds. Maintainer notes: the étale node is now a special case of the new one; the projection normalization of the source shift sits in the proof, not the statement, of lem-weil-pbc-ringed-internal-hom-exact-restriction, as other citers already assume."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SiteHomComparisonThick",
+  "declaration": "AlgebraicGeometry.ProEtale.siteHomComparison_exact_thick",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.siteHomEtaleObjectHom",
+   "AlgebraicGeometry.ProEtale.siteHomExactDerivedMonoidal",
+   "AlgebraicGeometry.ProEtale.siteHomEtaleRestrictionEvaluation",
+   "AlgebraicGeometry.ProEtale.siteHomProEtaleRestrictionEvaluation",
+   "AlgebraicGeometry.ProEtale.siteHomExactThickAssertion",
+   "AlgebraicGeometry.ProEtale.siteHomSiteExactThick",
+   "AlgebraicGeometry.ProEtale.siteHomRestrictionSquareFor",
+   "AlgebraicGeometry.ProEtale.siteHomRestrictionSquareAssertion",
+   "AlgebraicGeometry.ProEtale.siteHomRestrictionAssertion",
+   "AlgebraicGeometry.ProEtale.siteHomComparisonSource",
+   "AlgebraicGeometry.ProEtale.siteHomComparisonTarget",
+   "AlgebraicGeometry.ProEtale.siteHomComparisonLocus",
+   "AlgebraicGeometry.ProEtale.siteHomEtaleRestriction",
+   "AlgebraicGeometry.ProEtale.siteHomProEtaleRestriction",
+   "AlgebraicGeometry.ProEtale.siteHomRestrictionSquare",
+   "AlgebraicGeometry.ProEtale.siteHomEtaleRestrictionMonoidal",
+   "AlgebraicGeometry.ProEtale.siteHomProEtaleRestrictionMonoidal",
+   "AlgebraicGeometry.ProEtale.siteHomEtaleRestrictionHom",
+   "AlgebraicGeometry.ProEtale.siteHomProEtaleRestrictionHom",
+   "AlgebraicGeometry.ProEtale.siteHomComparison_exact_thick",
+   "AlgebraicGeometry.ProEtale.siteHomComparison_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SiteHomComparisonThick.lean",
+  "statement": "theorem siteHomComparison_exact_thick (M : Etale.DerivedCategoryModule A X) : siteHomSiteExactThick (ModuleCat.{u + 1} A) X M",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two theorem declarations jointly render the node: exactness, canonical signed shifts, specified triangle components and thick closure; and the evaluation-normalized equation on every etale slice. Supporting definitions construct only the canonical functors and maps. The additional landed statement dependency owns the ordinary comparison-square construction. Definition implementation sharing: {'AlgebraicGeometry.ProEtale.siteHomExactDerivedMonoidal': 'unchanged signature; shares its old transported monoidal body through the fully constructed helper exactClosedDerivedMonoidal, a definitionally equal construction.'}"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0dc89c72a",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause. beta is pinned to siteComparisonEvaluationHom for every K. Both rows' CommShift structures are pinned componentwise with (-1)^{n(n+1)/2} times the adjunction-mate source shift; a hand check under Mathlib Tot/HomComplex conventions gives mate sign (-1)^{nb}, equal to the project rawSourceIso, and the normalization agrees with the proved signedDerivedInternalHom_exact at n=±1. The reversed Triangle morphism includes the connecting square. Thick = ObjectProperty.IsTriangulated plus IsStableUnderRetracts. Restriction covers every U : X.Etale using the landed adjunction mate supportSiteComparisonCoefficientPullbackIso and ihomComparison restriction maps asserted invertible; the square was type-checked by hand. The added stmt_dep def-per-site-comparison-pullback-data is a landed def node (allowed). lean.statement is verbatim; the A : Type (u+1) finite-ring convention is the same as the deps; no hollow definitions; only sorry; docstrings and report sections present. Advisory: unused abbrevs, proof-only imports, residueDerivedMonoidal not owned by a stmt_dep (same as the landed evaluation-hom node). No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50959",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T164119-L-953435",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 3 new nodes/modules against lem-sf-site-hom-comparison-thick, change record site-hom-native-shifts, existing nativeInternalHom_contravariant_exact (sign convention), unit sk-prop-sf-rf-shriek-preservation realized; importer LisseFlatHomSiteComparison compiled against delivery"
+ }
+}

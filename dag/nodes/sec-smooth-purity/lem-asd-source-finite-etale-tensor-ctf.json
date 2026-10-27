@@ -1,0 +1,110 @@
+{
+ "id": "lem-asd-source-finite-etale-tensor-ctf",
+ "kind": "statement",
+ "title": "Finite-coefficient etale tensor stability",
+ "statement": "Let Lambda be a finite commutative ring and X any scheme. In the ordinary etale derived category [def-weil-pbc-derived-categories], the derived tensor [def-kun-derived-tensor] of two bounded constructible finite-Tor complexes [def-weil-pbc-constructible-complexes] is again bounded constructible finite-Tor. If the input Tor intervals are [a,b] and [c,d], the output interval is [a+c,b+d].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/OpenImmersion.lean",
+  "place": "Existing complete source proof; no Lean edit or new hole."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof": [
+  {
+   "text": "A finite ring is Noetherian. Tensor Tor sheaves of constructible sheaves are constructible, as seen on a finite local-constant stratification with finite module presentations. Truncation devissage gives constructible cohomology for the derived tensor of bounded constructible inputs. Finite Tor amplitude of either factor bounds this tensor above and below, and tensor associativity with a degree-zero sheaf adds the two Tor intervals. Combining these observations is exactly boundedConstructible_tensor followed by torAmplitudeIn_tensor in the existing source proof of constructibleFiniteTor_tensor.",
+   "uses": [
+    "lem-sc-source-tor-amplitude-lower-tensor-bound",
+    "lem-sc-source-tor-amplitude-upper-tensor-bound"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-source-tor-amplitude-lower-tensor-bound",
+  "lem-sc-source-tor-amplitude-upper-tensor-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Stability/OpenImmersion.lean",
+  "place": "Recorded from the existing proved source declaration."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of bounded constructible finite Tor etale complexes is bounded constructible finite Tor",
+   "results": "Eight generic Tor and cochain-complex tensor results; no etale constructible finite-Tor stability theorem.",
+   "date": "2026-10-26",
+   "verdict": "existing source match; no exact Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of bounded constructible finite Tor etale complexes is bounded constructible finite Tor",
+   "results": "Eight generic Tor and homological-complex tensor results; no etale constructible finite-Tor stability theorem.",
+   "date": "2026-10-26",
+   "verdict": "existing source match; no exact Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructibleFiniteTor_tensor",
+   "results": "No Mathlib hits. Read the exact existing source declarations and their complete proofs.",
+   "date": "2026-10-26",
+   "verdict": "existing source match; no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-compact-dual-model",
+   "place": "Actual lower-level source ingredient used by the finite-lisse relative dual.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion",
+  "declaration": "AlgebraicGeometry.Etale.constructibleFiniteTor_tensor",
+  "declarations": [
+   "AlgebraicGeometry.Etale.boundedConstructible_tensor",
+   "AlgebraicGeometry.Etale.constructibleFiniteTor_tensor"
+  ],
+  "statement": "theorem constructibleFiniteTor_tensor (X : Scheme.{u})\n    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}\n    (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)\n    (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :\n    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X\n      (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26",
+  "note": "Section parameters Lambda : Type (u+1), [CommRing Lambda], [Finite Lambda]. Both declarations are proved. This records the ordinary etale generic finite-ring source interface, rather than the pro-etale coefficientExtensionRing interface attached to lem-sf-tensor-ctf."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "independent cc review: item SmoothCompactDualModel + 4 modules and 8 nodes against the packet, the clone (signatures, SmoothBaseChange import cycle, canonical-map definitions) and a sandbox compile of all delivered modules with the unchanged importer SmoothGenericDirectImage (exit 0) and #print axioms"
+ }
+}

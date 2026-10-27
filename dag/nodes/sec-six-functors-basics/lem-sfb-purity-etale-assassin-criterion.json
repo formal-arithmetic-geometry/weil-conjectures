@@ -1,0 +1,340 @@
+{
+ "id": "lem-sfb-purity-etale-assassin-criterion",
+ "kind": "statement",
+ "title": "Purity criterion using a pure etale chart and the relative assassin",
+ "statement": "Let $f:X\\to S$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], $F$ a finite type quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent, def-weil-pbc-module-finite-type-presentation], and $s\\in S$. Let $e:(S^{\\prime},s^{\\prime})\\to(S,s)$ be an elementary etale neighbourhood [def-sfb-scheme-relative-purity]. Let $g:X^{\\prime}\\to X$ and $p:X^{\\prime}\\to S^{\\prime}$ satisfy $fg=ep$. Assume: $F$ is flat over $S$ at every point of $X_s$ [def-pc-scheme-module-flat-over, def-pc-scheme-fibre]; $p$ is of finite type; $g^*F$ [def-pc-module-pullback] is pure along $X^{\\prime}_{s^{\\prime}}$ [def-sfb-scheme-relative-purity]; $g$ is etale [def-weil-etale-morphism]; and $g(X^{\\prime}_{s^{\\prime}})$ contains $\\operatorname{Ass}_{X_s}(F_s)$ [def-trf-relative-assassin]. Put $Y=X\\times_SS^{\\prime}$ [def-pc-fibre-product], $F_Y=\\operatorname{pr}_X^*F$, and $h=(g,p):X^{\\prime}\\to Y$. Then $F$ is pure along $X_s$ if and only if $h(X^{\\prime})$ contains every point of $\\operatorname{Ass}_{Y/S^{\\prime}}(F_Y)$ lying over a generalization of $s^{\\prime}$. A generalization $t$ of $s^{\\prime}$ means $s^{\\prime}\\in\\overline{\\{t\\}}$.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05L4 (lemma-criterion), statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-sfb-scheme-relative-purity",
+  "def-pc-scheme-module-flat-over",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-weil-etale-morphism",
+  "def-trf-relative-assassin",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $q:Y\\to S^{\\prime}$ and $G=g^*F$. Base change preserves finite type, so $q$ is finite type. Pullback preserves quasi-coherence and finite type, so $F_Y$ and $G$ have these properties. The pullback-composition isomorphism gives $h^*F_Y\\cong G$, since $\\operatorname{pr}_Xh=g$. The projection $Y\\to X$ is etale by base change of $e$; cancellation with its etale composite $g$ makes $h$ etale. Thus $W=h(X^{\\prime})$ is open in $Y$. The residue-field isomorphism $\\kappa(s)\\cong\\kappa(s^{\\prime})$ identifies $Y_{s^{\\prime}}$ with $X_s$ and their sheaves. Under this identification $h$ on $X^{\\prime}_{s^{\\prime}}$ is $g$, so the corrected coverage hypothesis implies $\\operatorname{Ass}_{Y_{s^{\\prime}}}((F_Y)_{s^{\\prime}})\\subset W$.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "def-sfb-scheme-relative-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), first paragraph; fibre coverage corrected as documented in report.md."
+   }
+  },
+  {
+   "text": "The sheaf $F_Y$ is flat over $S^{\\prime}$ at every $y\\in Y_{s^{\\prime}}$: its image $x$ is in $X_s$, so $F_x$ is flat over $\\mathcal O_{S,s}$ by hypothesis; the pullback-stalk formula identifies $(F_Y)_y$ with $\\mathcal O_{Y,y}\\otimes_{\\mathcal O_{X,x}}F_x$, and the pointwise relative-flat-extension lemma makes this flat over $\\mathcal O_{S^{\\prime},s^{\\prime}}$. This uses flatness only on the specified fibre.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-pc-pullback-stalk-relative-flat-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), base change in the first paragraph; morphisms.tex lemma-base-change-module-flat."
+   }
+  },
+  {
+   "text": "Purity of $F$ along $X_s$ implies purity of $F_Y$ along $Y_{s^{\\prime}}$ directly from the definition. Indeed, for any elementary etale neighbourhood $(T,t)\\to(S^{\\prime},s^{\\prime})$, its composite with $e$ is etale by composition and induces the composite of two residue-field isomorphisms, hence is elementary over $(S,s)$. The iterated fibre product is $X_T$ and its sheaf is the same tensor pullback of $F$, by pullback composition. An impurity for $F_Y$ on this neighbourhood would therefore be an impurity for $F$. Conversely, if $F_Y$ is pure along $Y_{s^{\\prime}}$, flat-point descent proves purity of $F$ along $X_s$, since the etale map $e$ is flat at $s^{\\prime}$.",
+   "uses": [
+    "def-sfb-scheme-relative-purity",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sfb-purity-flat-point-descent",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), first paragraph; elementary-neighbourhood case of purity ascent, and Tag 05J9 (lemma-flat-descend-pure)."
+   }
+  },
+  {
+   "text": "Assume $F$ is pure. By step 3, $F_Y$ is pure along $Y_{s^{\\prime}}$. Let $a\\in\\operatorname{Ass}_{Y/S^{\\prime}}(F_Y)$ lie above a generalization of $s^{\\prime}$. The identity of $S^{\\prime}$ is an elementary neighbourhood; the definition of purity therefore gives $z\\in\\overline{\\{a\\}}\\cap Y_{s^{\\prime}}$. Give $Z=\\overline{\\{a\\}}$ its reduced induced closed-subscheme structure. Its underlying space is irreducible: if two closed subsets cover it, one contains $a$ and hence its closure. Thus $Z$ is integral. The fibre $Z_{s^{\\prime}}$ is nonempty because it contains $z$. Choose a component $C$ containing $z$ by irreducible-component coverage, and its generic point $b$ by sobriety of the scheme $Z_{s^{\\prime}}$. Apply the flat relative-associated specialization lemma to $q,F_Y,a,C,b$: finite type and finite type quasi-coherence hold by step 1, and flatness at $b$ holds by step 2. It gives $b\\in\\operatorname{Ass}_{Y/S^{\\prime}}(F_Y)$, hence $b\\in\\operatorname{Ass}_{Y_{s^{\\prime}}}((F_Y)_{s^{\\prime}})$. Step 1 gives $b\\in W$. Since $b\\in Z$, $a$ specializes to $b$; an open containing $b$ contains $a$. Consequently $a\\in W$, proving the required containment.",
+   "uses": [
+    "def-sfb-scheme-relative-purity",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-scheme-sober",
+    "lem-trf-flat-relative-associated-specialization",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), second paragraph; expansion of Tag 05L3 (lemma-associated-point-specializes) using more-morphisms.tex Tag 0GSI (lemma-associated-point-specializes)."
+   }
+  },
+  {
+   "text": "Conversely assume the asserted containment in $W$. Take any elementary etale neighbourhood $v:(T,t)\\to(S^{\\prime},s^{\\prime})$. Write $Y_T=Y\\times_{S^{\\prime}}T$, $X^{\\prime}_T=X^{\\prime}\\times_{S^{\\prime}}T$, and $h_T:X^{\\prime}_T\\to Y_T$. For any $a\\in\\operatorname{Ass}_{Y_T/T}((F_Y)_T)$ lying over $u\\leadsto t$, relative-assassin base change implies that its image $a_0\\in Y$ is in $\\operatorname{Ass}_{Y/S^{\\prime}}(F_Y)$. Continuity gives $v(u)\\leadsto s^{\\prime}$, so the containment assumption gives $a_0\\in W$. The base-change image equality gives a point $b\\in X^{\\prime}_T$ with $h_T(b)=a$; necessarily $b$ lies over $u$. No equality of the entire inverse image with the relative assassin is needed here, only the implication from upstairs associated points to downstairs ones.",
+   "uses": [
+    "lem-trf-relative-assassin-base-change",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), converse paragraph; divisors.tex Tag 05DC (lemma-base-change-relative-assassin)."
+   }
+  },
+  {
+   "text": "The fibre map $(h_T)_u:(X^{\\prime}_T)_u\\to(Y_T)_u$ is etale by base change of $h$. Both fibre schemes are finite type over $\\kappa(u)$, by finite-type base change applied to $p$ and $q$; they are locally Noetherian by the finite-type-over-locally-Noetherian lemma (a field is Noetherian since its only ideals are zero and the unit ideal). The pullbacks of $F_Y$ and $G$ are quasi-coherent. Pullback composition identifies the pullback of $((F_Y)_T)_u$ by $(h_T)_u$ with $(G_T)_u$. Etale associated-point invariance on these locally Noetherian fibres therefore makes $b$ a point of $\\operatorname{Ass}_{X^{\\prime}_T/T}(G_T)$. This checks the Noetherian hypotheses on the fibres only; neither $S^{\\prime}$ nor $T$ is assumed Noetherian.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-pc-module-pullback-identity-composition",
+    "lem-sfb-scheme-etale-assassin-invariance",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), final paragraph; fibrewise use of Tag 05FP (lemma-etale-weak-assassin-up-down), in its existing locally-Noetherian associated-point form."
+   }
+  },
+  {
+   "text": "By the assumed purity of $G$ along $X^{\\prime}_{s^{\\prime}}$, the elementary neighbourhood $(T,t)$ and the relative associated point $b$ over $u\\leadsto t$ admit a specialization $b\\leadsto c$ with $c\\in(X^{\\prime}_T)_t$. Its image gives $a=h_T(b)\\leadsto h_T(c)\\in(Y_T)_t$. Thus every relative associated point above a generalization of $t$ has a specialization in this fibre. Since $(T,t)$ was arbitrary, the definition says that $F_Y$ is pure along $Y_{s^{\\prime}}$. Step 3 then descends this purity to $F$ along $X_s$. This proves the reverse implication.",
+   "uses": [
+    "def-sfb-scheme-relative-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05L4 (lemma-criterion), final specialization argument, performed on every elementary neighbourhood rather than on the henselization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sfb-scheme-relative-purity",
+  "def-trf-relative-assassin",
+  "def-weil-etale-morphism",
+  "lem-pc-module-pullback-identity-composition",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "lem-sc-irreducible-components-cover",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-purity-flat-point-descent",
+  "lem-sfb-scheme-etale-assassin-invariance",
+  "lem-trf-flat-relative-associated-specialization",
+  "lem-trf-relative-assassin-base-change",
+  "lem-weil-pbc-base-change-image",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-sober",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05L4 (lemma-criterion), corrected fibre-coverage hypothesis; source argument expanded directly on elementary etale neighbourhoods, without the henselization reduction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "purity|relativeAssassin|assassin",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence and flat generalizing maps do not give the relative-assassin criterion for sheaf purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Purity of a relatively flat sheaf along a fiber is equivalent to an etale pure chart containing the relative associated points over all generalizations of the base point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔ ∀ (x : ↥X), (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is flat if and only if for every point $ x \\\\in X $, the induced ring homomorphism on the stalks at $ x $ is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence and flat generalizing maps do not give the relative-assassin criterion for sheaf purity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points specializing to a fiber criterion for purity after an elementary etale neighborhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence and flat generalizing maps do not give the relative-assassin criterion for sheaf purity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Criterion for relative purity using an etale chart and containment of the relative assassin",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [IsEtale (f ≫ g)] [LocallyOfFiniteType g] [FormallyUnramified g] : IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence and flat generalizing maps do not give the relative-assassin criterion for sheaf purity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Associated\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: etale permanence and flat generalizing maps do not give the relative-assassin criterion for sheaf purity."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeAssassin|relative_assassin|pureAlong|pure_along|assassin",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale permanence, flat generalizing maps, and stalk-specialization formulas, not relative purity or the relative-assassin criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative purity along a fibre using a pure etale chart which covers associated points in the distinguished fibre",
+   "results": "8 hits: Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.propertyIsLocal, Algebra.IsEtaleAt.comp, Algebra.Etale.of_isLocalizationAway, Algebra.isOpen_etaleLocus, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.Etale.formallyEtale, AlgebraicGeometry.FormallyUnramified.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale permanence, flat generalizing maps, and stalk-specialization formulas, not relative purity or the relative-assassin criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Associated\", \"Etale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale permanence, flat generalizing maps, and stalk-specialization formulas, not relative purity or the relative-assassin criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated points specialize to associated points in a flat special fiber and detect purity",
+   "results": "8 hits: Algebra.HasGoingDown.of_flat, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_assoc, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale permanence, flat generalizing maps, and stalk-specialization formulas, not relative purity or the relative-assassin criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative purity of a finite type quasicoherent sheaf is equivalent to an etale pure chart covering relative associated points over generalizations",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.etaleLocus, Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.etaleTopology, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.spread_out_of_isGermInjective', AlgebraicGeometry.exists_lift_of_germInjective_aux",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern etale permanence, flat generalizing maps, and stalk-specialization formulas, not relative purity or the relative-assassin criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-fp-purity-open",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 0AT4 (lemma-upstairs-finite-type-injective-into-flat-mod-m). Subinput: Tag 05U7 (lemma-flat-finite-type-local-colimit-free), first assertion, omitting the additional Mittag-Leffler conclusion. Supporting geometric input: Tag 05MF (lemma-flat-finite-type-affine-neighbourhood-projective), over a henselian local base, used in the free-neighbourhood paragraph of Tag 05U7. Supporting input for Tag 05MF: Tag 05ME (lemma-flat-finite-presentation-affine-neighbourhood-projective), applied after the affine-space and finite-presentation reductions. Tag 05ME proof, second paragraph: purity along U_s spreads after shrinking S by lemma-flat-finite-presentation-purity-open. Supporting input in Tag 05MC: 05L4 (lemma-criterion).",
+   "via": [
+    "lem-sfb-flat-fp-purity-open",
+    "lem-sfb-finitely-presented-flat-point-projective-etale-neighbourhood",
+    "lem-sfb-henselian-flat-point-free-affine-neighbourhood",
+    "lem-sfb-henselian-flat-finite-module-residue-free-colimit",
+    "lem-sfb-finite-source-fibre-injective-flat-target",
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-purity-etale-assassin-criterion",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the source and imported coverage hypothesis g(X prime) contains Ass(X_s,F_s) is insufficient when other points of S prime lie over s. Corrected it to coverage by the distinguished fibre g(X prime_s prime). Gave the explicit two-copy field counterexample in report.md and audited the sole citer. Seven proof steps use existing nodes only; the relative-associated specialization input is the existing more general Tag 0GSI node, not a new Tag 05L3 duplicate. Every citation has a verbatim quotation in citations.json.",
+  "blueprint": "Latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability.proof.md, paragraph 3: compactification and direct-image preservation, through the inherited stable-moduli/flattening prerequisite chain recorded in blueprint.from.place. This supporting purity criterion follows Tag 05L4, corrected as reported. The inherited blueprint ancestor lookup returns None; its existing from record is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-flat-relative-associated-specialization",
+    "why": "Step 4 uses only the associated-point conclusion at a generic point of a special-fibre component. This is exactly the more general existing input behind Tag 05L3; no node of the item unit states it."
+   },
+   {
+    "node": "lem-trf-relative-assassin-base-change",
+    "why": "Step 5 uses only image containment of relative associated points under arbitrary base change; the existing Tag 05DC statement gives it. This is the source criterion's own algebraic tool, not another route."
+   },
+   {
+    "node": "lem-pc-pullback-stalk-relative-flat-extension",
+    "why": "Step 2 uses the pointwise stalk flatness conclusion to retain flatness on the special fibre under base change; a global flatness lemma would have insufficient hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Step 2 uses the actual pullback stalk tensor isomorphism to apply pointwise relative-flat extension."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Step 4 gives the closure of the relative associated point its reduced induced closed scheme structure for the existing specialization lemma."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-sober",
+    "why": "Step 4 obtains a generic point of a component of the nonempty special fibre of that closure."
+   },
+   {
+    "node": "lem-sc-irreducible-components-cover",
+    "why": "Step 4 obtains a component through a known point of the special fibre."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Step 6 verifies local Noetherianity of both fibre schemes before applying etale associated-point invariance."
+   },
+   {
+    "node": "lem-weil-pbc-base-change-image",
+    "why": "Step 5 lifts a point of the inverse image of the chart image along the base-changed chart; this is an equality of point images, not a cartesian assertion about underlying sets."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-flat-relative-associated-specialization",
+  "lem-trf-relative-assassin-base-change",
+  "lem-pc-pullback-stalk-relative-flat-extension",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-scheme-sober",
+  "lem-sc-irreducible-components-cover",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-7213d56fc",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-7213d56fc (reviewer sub-agent of L); spot-checked: Read Stacks flat.tex 05L4 (lemma-criterion) and its proof, 05L3, every cited node and the item's 7 steps; there are no new nodes. The source is wrong. I checked the worker's counterexample myself: S=X=Spec k, S'=Spec k⊔Spec k with the fold map, X' mapped into the second copy, g=id. Hypotheses (1)-(5) hold, F is pure, but s' is not in h(X'). The fix replaces (5) by g(X'_{s'}) ⊇ Ass_{X_s}(F_s), which is exactly what the source's step 'replace S by S'' needs. Every other hypothesis and both directions are kept, and the error is reported under ## Source error. Step checks: (1) base change, cancellation and openness give W=h(X') open and the corrected hypothesis gives Ass_{Y_{s'}} ⊆ W; (2) flatness on the special fibre via the pointwise stalk lemma; (3) ascent by composing elementary neighbourhoods, descent by 05J9; (4) identity neighbourhood, reduced closure, a component and its generic point, then 0GSI with flatness only at that point, and the open W is stable under generalization; (5) only the 'only if' half of 05DC, then the base-change image node; (6) the fibres are locally Noetherian because they are of finite type over a field, and 05FP fibrewise invariance applies; (7) purity of G pushed forward by h_T. proof_deps equals the union of the uses. Batch 5: I accept lem-sfb-scheme-etale-assassin-invariance, lem-trf-flat-relative-associated-specialization (0GSI) and lem-trf-relative-assassin-base-change (05DC) as generic commutative algebra about relative assassins. Their closures contain no trace-formula, Poincaré or nt-* theorem, neither assumption gives them, and none is a step of either proof. No SGA is cited and no duplicate of 05L4 exists. MAINTAINER NOTE for HUMAN.md: the only citer, lem-sfb-flat-fp-purity-open, has a broken step 4. It uses only X_s ⊆ g(X') from 05KW, and the counterexample meets that chart data, so the step was already deriving a false conclusion. The citer needs a chart covering X_s by X'_{s'} or another argument; its step 6 stays valid."
+ }
+}

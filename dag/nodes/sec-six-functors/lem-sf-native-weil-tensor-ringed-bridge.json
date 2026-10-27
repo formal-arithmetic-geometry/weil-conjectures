@@ -1,0 +1,171 @@
+{
+ "id": "lem-sf-native-weil-tensor-ringed-bridge",
+ "kind": "statement",
+ "title": "Present native forgetting before deriving tensor",
+ "statement": "Let k0 be a finite field, l a prime different from its characteristic, and X a finite-type, quasi-compact, separated scheme over k0. There exists a NativeWeilTensorRingedBridge(k0,l,X) [def-sf-native-weil-tensor-ringed-bridge]. This only asserts the underived module square and its flat-resolution conditions, and contains no native derived tensor.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-tensor-ringed-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Choose the ordinary Frobenius model A and its specified twisted action presentation P. Lift A.E through fixed pairs using A.comparison, obtaining the equivalence K from action-site modules to native Weil sheaves. Define native as K.inverse, ordinary as A.E.inverse, and restriction U as P.modules.functor followed by forgetPairs.",
+   "uses": [
+    "lem-sf-native-frobenius-ringed-model",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-action-site-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "Apply the proved normalized inverse-Hom-square lemma to the same K. It supplies square, nativeHom and ordinaryHom, with their square using exactly P.hom. Rewrite the ordinary restriction Hom comparison by its component normalization to obtain hom_square. The helper constructs the square from the ordinary unit and native counit and proves the equation by forward-Hom naturality and counit cancellation.",
+   "uses": [
+    "lem-sf-native-inverse-hom-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "The ordinary action-site coherence lemma supplies Underived with the specified tensor and Hom comparisons. Native Hom from adicConstant is naturally the identity by ihomAdicConstantIso. Transport this identity through the native equivalence and apply uniqueness of left adjoints to tensor-Hom: tensoring by its image is the identity, so evaluation at the tensor unit gives nativeUnit.",
+   "uses": [
+    "lem-sf-twisted-action-underived-restriction",
+    "lem-sf-sheaf-hom-identity-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  },
+  {
+   "text": "P creates limits and colimits and is exact. Its additive exact orbit induction, composed with the inverse module equivalence, is left adjoint to U, so U preserves K-injective complexes. Obtain the K-flat-preserving ringed pullback of P.geometric and identify it with U by uniqueness of left adjoints using P.modulePullback. Transport K-flatness and termwise flatness along that natural isomorphism, using the independent-coefficients and flat-on-site comparison APIs.",
+   "uses": [
+    "lem-sf-twisted-action-ringed-site",
+    "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+    "lem-sf-weil-frobenius-action-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, geometric tensor part of steps 1 and 3; Stacks 06YS, 06YU, 0FPT"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-frobenius-ringed-model",
+  "lem-sf-twisted-action-ringed-site",
+  "lem-sf-native-weil-ringed-presentation",
+  "lem-sf-native-action-site-hom-comparison",
+  "lem-sf-twisted-action-underived-restriction",
+  "lem-weil-pbc-supplied-ringed-topos-kflat-pullback",
+  "lem-sf-weil-frobenius-action-resolutions",
+  "lem-sf-sheaf-hom-identity-unit",
+  "lem-sf-native-inverse-hom-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Specified ordinary/action-site construction and normalized inverse Hom transport; generic action-site coherence isolated from all native equivalences and resolutions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive equivalence of module sheaf categories for an action site intertwines forgetting the group action and preserves internal Hom and tensor unit",
+   "results": "Eight hits including Equivalence.sheafCongr, Action.resEquiv and sheafification adjunction formulas.",
+   "date": "2026-10-27",
+   "verdict": "No normalized square for actual native Frobenius modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Monoidal.transport\"",
+   "results": "Twelve hits including CategoryTheory.Monoidal.transport, transportStruct, Transported and Functor.Monoidal.transport.",
+   "date": "2026-10-27",
+   "verdict": "Transport of structures is available, but not the native coefficient and representative formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "transportStruct|instSymmetricCategory|IsoAlgebra.*tensor",
+   "results": "Nine hits including Monoidal/Transport.lean:138 and Monoidal/Braided/Transport.lean:81; no IsoAlgebra tensor presentation.",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib for transport; no exact native statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorGeometry",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom/evaluation paragraph of cor-coef-verdier-weil-equivariance; native tensor geometry steps 1--3; Stacks 06YS, 06YU, 0FPT. The blueprint ancestor tool returns None for the parent.",
+   "via": [
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorRingedBridge",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorRingedBridge.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_ringed_bridge",
+  "statement": "theorem native_weil_tensor_ringed_bridge\n    (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]\n    [Fact (ringChar k₀ ≠ l)] (X : Scheme.{u})\n    [X.Over (Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))] :\n    Nonempty (NativeWeilTensorRingedBridge k₀ l X)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261027T094352-L-218480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+ }
+}

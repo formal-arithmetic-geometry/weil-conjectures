@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-nodal-completed-residue-denominators",
+ "kind": "statement",
+ "title": "Regular denominators and residue coefficients descend from a completed series algebra",
+ "statement": "Let $(A,\\mathfrak m,F)$ be a Noetherian local ring [def-weil-pbc-noetherian-ring], with $F=A/\\mathfrak m$, and put $R=\\widehat A$ [def-weil-pbc-adic-completion]. Let $A\\hookrightarrow B$ be an injective homomorphism of commutative rings [def-weil-pbc-algebra-hom-quotient]. Let $L$ be a nonzero commutative $F$-algebra, and suppose given an $R$-algebra isomorphism\n$$\\psi:B\\otimes_A R\\xrightarrow{\\sim}L[[t]]$$\n[def-weil-pbc-module-tensor-product, def-weil-pbc-multivariate-power-series], such that $\\mathfrak m(B\\otimes_A R)$ corresponds to $tL[[t]]$ and the constant term of $a\\in A$ is its residue $\\bar a\\in F\\subseteq L$. Then the canonical maps identify\n$$B/\\mathfrak mB\\xrightarrow{\\sim}(B\\otimes_A R)/\\mathfrak m(B\\otimes_A R)\\xrightarrow{\\sim}L$$\nas $F$-algebras; the composite sends the class of $b$ to the constant term of $\\psi(b\\otimes1)$. The first identification is the canonical tensor/quotient comparison with $R/\\mathfrak mR=F$.\nFor every $f\\in\\mathfrak m$ whose image is $ut+t^2h$ with $u\\in L^\\times$ (an invertible element) and $h\\in L[[t]]$, multiplication by $f$ is injective on both $A$ and $B$, and\n$$\\mathfrak mB=fB,\\qquad\\mathfrak m^nB=f^nB\\quad(n\\ge0).$$\nConsequently, for $d\\in\\mathfrak m^n$ there is a unique $b\\in B$ with $f^nb=d$, denoted $d/f^n$. If the image of $d$ has the form $rt^n+t^{n+1}h_d$ with $r\\in L$, its residue satisfies\n$$[d/f^n]\\longmapsto r/u^n\\quad\\text{in }L.$$\nFor two such elements $f,g$, the elements $g/f$ and $f/g$ belong to $B$ and are mutually inverse. These conclusions require a unit leading coefficient; a merely nonzero coefficient is not sufficient.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), omitted comparison of constructions (2) and (3): descent of denominators and the canonical residue comparison from the completed normalization model."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $C=B\\otimes_A R$ and $j(b)=b\\otimes1$. By [lem-weil-pbc-local-completion-faithfully-flat], $A\\to R$ is faithfully flat, since $A$ is Noetherian local. Its base change $j:B\\to C$ is faithfully flat by [lem-weil-pbc-faithfully-flat-base-change]. Applying [lem-weil-pbc-faithfully-flat-ideal-contraction] to $j$ gives $j^{-1}(IC)=I$ for every ideal $I\\subseteq B$, and in particular $j$ is injective. Thus $A\\to B\\to C\\xrightarrow{\\psi}L[[t]]$ is injective as well.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat), 00HI (lemma-flat-base-change), 05CK (lemma-faithfully-flat-universally-injective)"
+   }
+  },
+  {
+   "text": "The residue-field identification in [lem-weil-pbc-local-completion-local-ring] gives $R/\\mathfrak mR=F$ through the canonical map from $A$. Apply [lem-weil-pbc-tensor-over-quotient-ring] to obtain $C/\\mathfrak mC\\cong B\\otimes_A(R/\\mathfrak mR)\\cong B\\otimes_A F\\cong B/\\mathfrak mB$. These comparisons are multiplicative: on pure tensors their composite sends $b\\otimes r$ to $\\bar b\\,\\bar r$, with $\\bar r\\in F$ acting on $B/\\mathfrak mB$; its inverse sends $\\bar b$ to the class of $b\\otimes1$. The formulas respect the bilinear relations and annihilate the extended ideals, so are inverse ring maps. Under $\\psi$, evaluation at $t=0$ has kernel $tL[[t]]=\\psi(\\mathfrak mC)$: a series with constant coefficient zero is $t$ times the series whose coefficients are shifted by one. Constants give a section of evaluation. It therefore identifies $C/\\mathfrak mC$ with $L$. The composite on $B/\\mathfrak mB$ sends $\\bar b$ to the constant coefficient of $\\psi(j(b))$; the hypothesis on constants from $A$ makes it an $F$-algebra isomorphism.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-tensor-over-quotient-ring",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion), 00DF (lemma-tensor-product-exact); explicit tensor/quotient and constant-term maps for 0CBT"
+   }
+  },
+  {
+   "text": "Fix $f$ as in the statement and write $\\psi(j(f))=tU$ with $U=u+th$. By [lem-weil-power-series-unit-constant-coefficient], $U$ is a unit because $u$ is a unit of $L$. Multiplication by $t$ is injective on $L[[t]]$: the coefficient of $t^{i+1}$ in $tH$ equals the coefficient of $t^i$ in $H$. Thus multiplication by $tU$ is injective, even when $L$ has zero divisors. Since the maps $B\\to L[[t]]$ and $A\\to L[[t]]$ in step 1 are injective, an equality $fx=0$ in either ring implies $x=0$. This proves regularity on both $A$ and $B$.",
+   "uses": [
+    "lem-weil-power-series-unit-constant-coefficient",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted completed-model calculation; unit criterion and coefficient-shift calculation"
+   }
+  },
+  {
+   "text": "In $C$, the ideals $fC$ and $\\mathfrak mC$ agree: $\\psi(fC)=tUL[[t]]=tL[[t]]=\\psi(\\mathfrak mC)$, using the unit $U$ from step 3 and the hypothesis on $\\mathfrak mC$. Contract these equal ideals to $B$ using [lem-weil-pbc-faithfully-flat-ideal-contraction] for $j$ to get $fB=\\mathfrak mB$. Extension of an ideal commutes with products by their definition: both $(IB)(JB)$ and $(IJ)B$ are generated by the same products of images of generators. Taking powers now gives $\\mathfrak m^nB=(\\mathfrak mB)^n=(fB)^n=f^nB$ for every $n\\ge0$, with both sides $B$ when $n=0$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CK (lemma-faithfully-flat-universally-injective); ideal products and powers as in 00AR (section-rings-basic)"
+   }
+  },
+  {
+   "text": "For $d\\in\\mathfrak m^n$, step 4 puts its image in $f^nB$, hence $f^nb=d$ for some $b\\in B$. Repeated injectivity of multiplication by $f$ from step 3 gives injectivity of multiplication by $f^n$ and uniqueness of $b$ (also for $n=0$, where $b=d$). Suppose $\\psi(j(d))=rt^n+t^{n+1}h_d$ and put $H=\\psi(j(b))$. The equality $f^nb=d$ becomes $t^nU^nH=rt^n+t^{n+1}h_d$. Comparing coefficients of $t^n$ gives $u^nH(0)=r$: multiplication by $t^n$ shifts coefficients and the constant coefficient of $U^nH$ is $u^nH(0)$ by the Cauchy product. Multiply by $u^{-n}$ to obtain $H(0)=r/u^n$. Step 2 identifies this constant coefficient with the residue class of $b=d/f^n$ in $L$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted comparison (2)/(3): explicit division and leading-coefficient residue calculation"
+   }
+  },
+  {
+   "text": "If $g$ is another element with unit leading coefficient, step 4 applied separately to $f$ and $g$ gives $g=fb$ and $f=gc$ with $b,c\\in B$. These elements are the unique $g/f$ and $f/g$ of step 5. Substitution yields $f=fbc$, so regularity of $f$ on $B$ from step 3 gives $bc=1$ by cancelling $f$ in $f(bc-1)=0$. Since $B$ is commutative, also $cb=1$. Thus the ratios belong to $B$ and are mutually inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CBT (remark-quadratic-extension), omitted comparison (2)/(3): explicit cancellation for the two denominator choices"
+   }
+  },
+  {
+   "text": "The unit hypothesis cannot be weakened to $u\\neq0$. Let $F$ be a field, $B=F[[x]]\\times F[[y]]$, $A=\\{(p,q)\\in B:p(0)=q(0)\\}\\subseteq B$ and $\\mathfrak m=\\{(p,q)\\in A:p(0)=0\\}$. $A$ is the image of $F[[x,y]]$ under $a\\mapsto(a(x,0),a(0,y))$ (lift $(p,q)$ by $p(x)+q(y)-p(0)$), so it is Noetherian by [lem-weil-pbc-power-series-noetherian]: an ideal is generated by the images of generators of its preimage. If $(p,q)\\in A\\setminus\\mathfrak m$, then $p,q$ are units by [lem-weil-power-series-unit-constant-coefficient] and $(p^{-1},q^{-1})\\in A$; so $A$ is local with residue field $F$ via $(p,q)\\mapsto p(0)$. For $(p,q)\\in\\mathfrak m$, $(p,q)=(x,0)(p/x,p_1)+(0,y)(q_1,q/y)$ with the shifted series $p/x,q/y$ and both factors in $A$, so $\\mathfrak m$ is generated by $(x,0),(0,y)$, whose product is $0$; hence $\\mathfrak m^n=x^nF[[x]]\\times y^nF[[y]]$ for $n\\ge1$. A compatible family in $\\varprojlim_nA/\\mathfrak m^n$ has stable coefficients of each degree, which define its unique preimage, so $A$ is $\\mathfrak m$-adically complete [def-weil-pbc-adically-complete-ring] and $A\\to R$ is bijective. Thus $B\\otimes_AR\\cong B$, and for the nonzero $F$-algebra $L=F\\times F$ ($F$ diagonal) the map $\\psi(p,q)=\\sum_i(p_i,q_i)t^i$ is a ring isomorphism $B\\to L[[t]]$ (an $R$-algebra isomorphism for the transported structure), carrying $\\mathfrak mB=xF[[x]]\\times yF[[y]]$ onto $tL[[t]]$ and $(p,q)\\in A$ to constant term $(p(0),p(0))$. All hypotheses hold. Now $f=(x,0)\\in\\mathfrak m$ has image $(1,0)t$ with $u=(1,0)\\neq0$ not a unit, yet $f\\cdot(0,y)=0$ with $(0,y)\\neq0$ in $A$, and $fB=xF[[x]]\\times0\\neq\\mathfrak mB$. So regularity and $\\mathfrak mB=fB$ fail.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-power-series-unit-constant-coefficient",
+    "def-weil-pbc-adically-complete-ring",
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-power-series-unit-constant-coefficient",
+  "lem-weil-pbc-power-series-noetherian",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CBT (remark-quadratic-extension), omitted comparison of constructions (2) and (3); explicit faithful-flat descent and coefficient calculation supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a local ring with normalization completed to L power series and graded ring F plus t L polynomial ring, a unit initial coefficient gives a regular generator of the extended maximal ideal, and the residue comparison is constant term",
+   "results": "{\"t\": \"2026-10-23T09:43:21Z\", \"tool\": \"leanfinder\", \"query\": \"In a local ring with normalization completed to L power series and graded ring F plus t L polynomial ring, a unit initial coefficient gives a regular generator of the extended maximal ideal, and the residue comparison is constant term\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.isUnit_weierstrassUnit\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.weierstrassDistinguished_smul\", \"PowerSeries.weierstrassUnit_smul\"], \"digest\": \"2bf04c7bf21a80fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: faithfully-flat injection and power-series coefficient lemmas are ingredients, not the combined regular-denominator and residue formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the completed algebra is L power series and maximal ideal extends to t then a lift with leading coefficient u invertible generates the ideal before completion and dividing a by f to the n has residue r divided by u to the n",
+   "results": "{\"t\": \"2026-10-23T09:43:32Z\", \"tool\": \"leanfinder\", \"query\": \"If the completed algebra is L power series and maximal ideal extends to t then a lift with leading coefficient u invertible generates the ideal before completion and dividing a by f to the n has residue r divided by u to the n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.div\"], \"digest\": \"fc3a8df45805b94a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: faithfully-flat injection and power-series coefficient lemmas are ingredients, not the combined regular-denominator and residue formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FaithfullyFlat\", \"injective\"",
+   "results": "{\"t\": \"2026-10-23T09:43:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"FaithfullyFlat\\\", \\\"injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.lTensor_injective_iff_injective\", \"Ideal.map_injective_of_faithfullyFlat\", \"Module.FaithfullyFlat.tensorProduct_mk_injective\", \"RingHom.FaithfullyFlat.injective\", \"RingHom.FaithfullyFlat.codescendsAlong_injective\", \"Module.FaithfullyFlat.injective_of_tensorProduct\"], \"digest\": \"8594117184686847\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: faithfully-flat injection and power-series coefficient lemmas are ingredients, not the combined regular-denominator and residue formula"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]aithfully[Ff]lat.*(quotient|regular)|[Cc]onstantCoeff.*div",
+   "results": "{\"t\": \"2026-10-23T09:43:32Z\", \"tool\": \"grep\", \"query\": \"[Ff]aithfully[Ff]lat.*(quotient|regular)|[Cc]onstantCoeff.*div\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Order.lean\"], \"digest\": \"55d8335b0ffd0e63\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: faithfully-flat injection and power-series coefficient lemmas are ingredients, not the combined regular-denominator and residue formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of regular denominators from completed normalization and their leading coefficient residue formula",
+   "results": "{\"t\": \"2026-10-23T09:43:33Z\", \"tool\": \"leansearch\", \"query\": \"Descent of regular denominators from completed normalization and their leading coefficient residue formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RatFunc.monic_denom\", \"Polynomial.coe_normUnit\", \"Polynomial.integralNormalization_coeff_degree\", \"Polynomial.leadingCoeff_normalize\", \"Polynomial.integralNormalization_coeff_natDegree\", \"RatFunc.denom_div\", \"RatFunc.denom\", \"Polynomial.integralNormalization_coeff\"], \"digest\": \"f9b7a502b50b20c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: faithfully-flat injection and power-series coefficient lemmas are ingredients, not the combined regular-denominator and residue formula"
+  },
+  {
+   "tool": "grep",
+   "query": "constantCoeff.*(div|unit)|comap_map.*faithfullyFlat|FaithfullyFlat.*AdicCompletion",
+   "results": "{\"t\": \"2026-10-23T10:44:56Z\", \"tool\": \"grep\", \"query\": \"constantCoeff.*(div|unit)|comap_map.*faithfullyFlat|FaithfullyFlat.*AdicCompletion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/NoZeroDivisors.lean\", \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\", \"Mathlib/RingTheory/MvPowerSeries/Inverse.lean\"], \"digest\": \"57a78d82e1046f43\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ingredients or Weierstrass division under different hypotheses, not the combined descent and residue assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebra becomes formal power series after faithfully flat completion, and a uniformizer with invertible first coefficient generates the extended maximal ideal before completion",
+   "results": "{\"t\": \"2026-10-23T10:44:56Z\", \"tool\": \"leansearch\", \"query\": \"An algebra becomes formal power series after faithfully flat completion, and a uniformizer with invertible first coefficient generates the extended maximal ideal before completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UniformSpace.Completion.algebra\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"PowerSeries.instIsDiscreteValuationRing\", \"LaurentSeries.powerSeriesAlgEquiv\", \"PowerSeries.maximalIdeal_eq_span_X\", \"PowerSeries.instIsLocalRing\", \"LaurentSeries.powerSeriesRingEquiv\", \"UniformSpace.Completion.algebraMap_def\"], \"digest\": \"d70fb6b4f97f460a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ingredients or Weierstrass division under different hypotheses, not the combined descent and residue assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.isUnit_iff_constantCoeff, Ideal.comap_map_of_faithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T10:44:56Z\", \"tool\": \"loogle\", \"query\": \"PowerSeries.isUnit_iff_constantCoeff, Ideal.comap_map_of_faithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Ideal.comap_map_of_faithfullyFlat'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: query used a nonexistent identifier; corrected query was run separately"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat completion descent of principal maximal ideal generator with unit leading coefficient and residue of division in a power series algebra",
+   "results": "{\"t\": \"2026-10-23T10:44:58Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat completion descent of principal maximal ideal generator with unit leading coefficient and residue of division in a power series algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.IsWeierstrassFactorization.unique\"], \"digest\": \"7110b5ecf18f6839\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ingredients or Weierstrass division under different hypotheses, not the combined descent and residue assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.comap_map_eq_self_of_faithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T10:45:33Z\", \"tool\": \"loogle\", \"query\": \"Ideal.comap_map_eq_self_of_faithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Ideal.comap_map_eq_self_of_faithfullyFlat\"], \"digest\": \"787d757e4161be1b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ingredients or Weierstrass division under different hypotheses, not the combined descent and residue assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue of d divided by f power n is leading coefficient of d divided by nth power of unit leading coefficient of f after faithfully flat scalar extension to L formal power series",
+   "results": "{\"t\": \"2026-10-23T10:45:34Z\", \"tool\": \"leanfinder\", \"query\": \"Residue of d divided by f power n is leading coefficient of d divided by nth power of unit leading coefficient of f after faithfully flat scalar extension to L formal power series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorization.isWeierstrassDivision\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\", \"PowerSeries.IsWeierstrassFactorization.map_ne_zero\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassDiv\"], \"digest\": \"cee449adb027daba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give ingredients or Weierstrass division under different hypotheses, not the combined descent and residue assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-local-tangent-normalization",
+  "date": "2026-10-23",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 5 and 7, regular-generator part of 8: Regular denominators and residue coefficients descend from a completed series algebra.",
+   "via": [
+    "lem-sfb-nodal-local-tangent-normalization",
+    "lem-sfb-nodal-branch-double-cover",
+    "lem-sfb-nodal-finite-quasi-splitting",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-completed-residue-denominators",
+  "worker": "stage1",
+  "summary": "Q12 supplied the explicit faithful-flat descent, tensor/quotient comparison, regularity, ideal-power equality, coefficient residue formula and inverse-ratio calculation. Reused existing Mathlib leaves; no new nodes and no statement change. The argument is valid for any nonzero coefficient algebra L, including zero divisors. Reviewer FIX: step 7 proves the final clause (a nonzero, non-unit leading coefficient is insufficient) by the split-node counterexample A={(p,q):p(0)=q(0)} in F[[x]]xF[[y]], L=FxF, f=(x,0).",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), ILO X Lemma 2.2 alteration reduction; de Jong Lemma 5.7 proof, first paragraph: the inverse image of the singular points under fibrewise normalization; also the quasi-splitting preservation used on printed p.617. Local tangent-cone construction for the two branch choices. Re-split of returned local tangent proof, steps 5 and 7, regular-generator part of 8: Regular denominators and residue coefficients descend from a completed series algebra. Current latest blueprint direct-images proof (3) retains the compactification/direct-image route; this is a local algebra ingredient below the inherited alteration branch, not a change to a unit statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-03194fe2b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-03194fe2b (reviewer sub-agent of L); spot-checked: Read Stacks curves.tex 0CBT: it omits the comparison with (3), which this item supplies. The statement and stmt_deps match clones/live, where the item is still unsplit; there is no repair note and no new node. I read every cited statement; the steps were checked against them and against the definitions. Step 1 is checked against 00MC faithful flatness, base change to j:B->B(x)R, and 05CK contraction plus injectivity. For step 2 I checked the explicit inverse maps myself; r-iota(a) in mR comes from the residue-field clause of local-completion-local-ring. Evaluation at t=0 has kernel tL[[t]]. Steps 3-6 are correct for any commutative L, including zero divisors: tU with U a unit; fC=mC contracted gives fB=mB, and m^nB=f^nB with n=0 included; comparing t^n coefficients gives H(0)=r/u^n; f(bc-1)=0 gives bc=1. I checked edge cases n=0, d=0, g=f, r=0, L=FxF and nilpotent L. Sibling lem-sfb-graded-normalization-fraction-map consumes mB=fB as a hypothesis and is not a duplicate. Fault (D5): the statement's final clause, that a merely nonzero leading coefficient is not sufficient, was proved only in the report. FIX: I added step 7 with a self-contained counterexample. A={(p,q) in F[[x]]xF[[y]] : p(0)=q(0)} is Noetherian as an image of F[[x,y]] (Mathlib leaf lem-weil-pbc-power-series-noetherian). It is local by the unit-constant-coefficient leaf. Its maximal ideal m=((x,0),(0,y)) has m^n=x^nF[[x]]xy^nF[[y]], and coefficientwise stabilization shows A is m-adically complete, so B(x)_A R=B. With L=FxF and psi coefficientwise, all hypotheses hold. f=(x,0) has image (1,0)t, yet f(0,y)=0 in A and fB is not mB. Added proof_deps power-series-noetherian, adically-complete-ring and adic-completion (all sk-thm-p1 Mathlib/def nodes). I removed the remark sentence at the end of step 6 and kept the statement unchanged. The whole node is at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-nodal-completed-residue-denominators.json. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NodalCompletedResidueDenominators",
+  "declaration": "RingTheory.nodal_completed_residue_denominators",
+  "declarations": [
+   "RingTheory.nodal_completed_residue_denominators",
+   "RingTheory.nodal_completed_residue_denominators_nonunit_counterexample"
+  ],
+  "file": "lean/Sheaf/RingTheory/NodalCompletedResidueDenominators.lean",
+  "statement": "theorem nodal_completed_residue_denominators (A : Type u) (B : Type v) (L : Type w) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [CommRing B] [Algebra A B] [CommRing L] [Nontrivial L] [Algebra (A ⧸ IsLocalRing.maximalIdeal A) L] [Algebra (AdicCompletion (IsLocalRing.maximalIdeal A) A) (PowerSeries L)] (hinj : Function.Injective (algebraMap A B)) (psi : (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ≃+* PowerSeries L) (hscalar : ∀ r : AdicCompletion (IsLocalRing.maximalIdeal A) A, psi (1 ⊗ₜ[A] r) = algebraMap (AdicCompletion (IsLocalRing.maximalIdeal A) A) (PowerSeries L) r) (hideal : ((IsLocalRing.maximalIdeal A).map (algebraMap A (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A))).map psi.toRingHom = Ideal.span {PowerSeries.X}) (hconstant : ∀ a : A, PowerSeries.constantCoeff (psi (algebraMap A B a ⊗ₜ[A] 1)) = algebraMap (A ⧸ IsLocalRing.maximalIdeal A) L (Ideal.Quotient.mk (IsLocalRing.maximalIdeal A) a)) : ∃ (e₁ : (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B)) ≃+* ((B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A)))) (e₂ : ((B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A (B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A))) ≃+* L), (∀ b : B, e₁ (Ideal.Quotient.mk _ b) = Ideal.Quotient.mk _ (b ⊗ₜ[A] 1)) ∧ (∀ z : B ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) A, e₂ (Ideal.Quotient.mk _ z) = PowerSeries.constantCoeff (psi z)) ∧ (∀ (f : A) (u₀ : Lˣ) (h : PowerSeries L), f ∈ IsLocalRing.maximalIdeal A → psi (algebraMap A B f ⊗ₜ[A] 1) = PowerSeries.C (u₀ : L) * PowerSeries.X + PowerSeries.X ^ 2 * h → Function.Injective (fun a : A ↦ f * a) ∧ Function.Injective (fun b : B ↦ algebraMap A B f * b) ∧ (IsLocalRing.maximalIdeal A).map (algebraMap A B) = Ideal.span {algebraMap A B f} ∧ (∀ n : ℕ, ((IsLocalRing.maximalIdeal A) ^ n).map (algebraMap A B) = Ideal.span {(algebraMap A B f) ^ n}) ∧ (∀ (n : ℕ) (d : A), d ∈ (IsLocalRing.maximalIdeal A) ^ n → (∃! b : B, (algebraMap A B f) ^ n * b = algebraMap A B d) ∧ (∀ (b : B), (algebraMap A B f) ^ n * b = algebraMap A B d → ∀ (r : L) (h_d : PowerSeries L), psi (algebraMap A B d ⊗ₜ[A] 1) = PowerSeries.C r * PowerSeries.X ^ n + PowerSeries.X ^ (n + 1) * h_d → e₂ (e₁ (Ideal.Quotient.mk _ b)) = r * ((↑(u₀⁻¹) : L) ^ n))) ∧ (∀ (g : A) (v₀ : Lˣ) (h_g : PowerSeries L), g ∈ IsLocalRing.maximalIdeal A → psi (algebraMap A B g ⊗ₜ[A] 1) = PowerSeries.C (v₀ : L) * PowerSeries.X + PowerSeries.X ^ 2 * h_g → ∃ b c : B, algebraMap A B f * b = algebraMap A B g ∧ algebraMap A B g * c = algebraMap A B f ∧ b * c = 1 ∧ c * b = 1))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem states the two canonical residue comparisons and all unit-denominator conclusions. The second theorem states the final nonunit warning as the explicit equal-constant-pair counterexample from proof step 7. Ring equivalences with their representative formulas encode the canonical residue-field algebra equivalences; hscalar is exactly the completion-algebra compatibility of psi."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-266e26ff5",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Main theorem matches every clause of the node with no stronger assumptions. The residue comparisons are tied to explicit formulas, not arbitrary maps; compatibility with the residue field follows from those formulas and the constant-term hypothesis; L only needs to be nonzero; universes A,B,L are independent; the n=0 and zero-divisor cases are covered. The second theorem gives the node's step-7 counterexample over Q, which is fully pinned and true. Only the node's lean record changed; the stored statement matches the module verbatim; the report has both sections; docstrings give the source (0CBT) and blueprint id; both proofs are sorry. Advisory only: plain imports used only for the future proof, and IsAdicComplete in the counterexample is a proof dependency rather than a statement dependency. No recompile, as instructed; the worker recorded a clean scompile and a passing dry run."
+ }
+}

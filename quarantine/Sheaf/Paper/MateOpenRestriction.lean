@@ -5,6 +5,7 @@ Authors: SHEAF group NA
 -/
 module
 
+public import Sheaf.Paper.MateOpenRestrictionMaps
 public import Sheaf.Paper.BrownExceptionalAdjoint
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
@@ -22,9 +23,9 @@ import Sheaf.Compactification.BoundaryRefinement
 import Mathlib.CategoryTheory.Adjunction.Restrict
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.CondensedModuleDerivedPushpull
-import Sheaf.Paper.LocalizingLowerShriekComposition
-import Sheaf.Paper.NonrationalLocalizingLowerShriekComposition
-import Sheaf.SixFunctorsBasics.BrownHypotheses
+import Sheaf.Paper.MateOpenCompactSupportExchange
+import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.Paper.CompactificationRefinementLocalizing
 
 /-!
 # Open restriction of the Brown exceptional inverse image
@@ -54,139 +55,41 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Restriction of the existing exact termwise inverse image to the recorded localizing
-closures. The witness certifies membership only; no functor is chosen.
-Source: blueprint det-sf-mate-open-restriction (1)
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenPullback {U X : Scheme.{u}} (j : U ⟶ X)
-    (h : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
-      localizingClosureProEtale Λ U ((upperStar Λ j).mapDerivedCategory.obj K.obj)) :
-    (localizingClosureProEtale Λ X).FullSubcategory ⥤
-      (localizingClosureProEtale Λ U).FullSubcategory :=
-  (localizingClosureProEtale Λ U).lift
-    ((localizingClosureProEtale Λ X).ι ⋙ (upperStar Λ j).mapDerivedCategory) h
+private theorem conjugate_hom
+    {C D : Type*} [Category C] [Category D]
+    {L₁ L₂ : C ⥤ D} {R₁ R₂ : D ⥤ C}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (e : L₂ ≅ L₁)
+    (T : C) (B : D) (f : T ⟶ R₁.obj B) :
+    f ≫ ((conjugateIsoEquiv a₁ a₂ e).hom.app B) =
+      a₂.homEquiv T B (e.hom.app T ≫ (a₁.homEquiv T B).symm f) := by
+  apply (a₂.homEquiv T B).symm.injective
+  simp only [Equiv.symm_apply_apply, Adjunction.homEquiv_counit, Functor.map_comp,
+    Category.assoc]
+  rw [conjugateIsoEquiv_apply_hom, conjugateEquiv_counit]
+  rw [← e.hom.naturality_assoc]
 
-/-- Restriction of actual levelwise extension by zero to the localizing closures.
-Source: blueprint det-sf-mate-open-restriction (1)
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (h : ∀ K : (localizingClosureProEtale Λ U).FullSubcategory,
-      localizingClosureProEtale Λ X
-        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj)) :
-    (localizingClosureProEtale Λ U).FullSubcategory ⥤
-      (localizingClosureProEtale Λ X).FullSubcategory :=
-  (localizingClosureProEtale Λ X).lift
-    ((localizingClosureProEtale Λ U).ι ⋙
-      (openImmersionLowerShriek Λ j).mapDerivedCategory) h
-
-/-- Canonical composition of open extensions: the left-adjoint comparison of the exact
-open adjunctions and the coefficient-compatible inverse-image compositor.
-Source: blueprint det-sf-mate-open-restriction (2), composite adjunction calculation
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
-    [IsOpenImmersion j] [IsOpenImmersion i] :
-    (openImmersionLowerShriek Λ j).mapDerivedCategory ⋙
-        (openImmersionLowerShriek Λ i).mapDerivedCategory ≅
-      (openImmersionLowerShriek Λ (j ≫ i)).mapDerivedCategory :=
-  Adjunction.leftAdjointUniq
-    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).comp
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i))
-    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (j ≫ i)).ofNatIsoRight
-      (Functor.mapDerivedCategoryNatIso (upperStarComp Λ j i) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)))
-
-/-- The lower-shriek compositor when the first morphism is open, computed in the
-compactification with the same proper map. This fixes the source comparison's normalization.
-Source: blueprint det-sf-mate-open-restriction (2)
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenSourceLowerShriek {U X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c : Compactification f) (j : U ⟶ X) [IsOpenImmersion j] :
-    (openImmersionLowerShriek Λ j).mapDerivedCategory ⋙
-        rightDerivedLowerShriekOfCompactification Λ c ≅
-      rightDerivedLowerShriekOfCompactification Λ (c.precomp j) :=
-  (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (mateOpenExtensionComp Λ j c.i)
-      (lowerStar Λ c.g).rightDerivedFunctor
-
-/-- The ordinary restriction mate for a commutative proper/open square. It is defined
-using only the coefficient-compatible pullback compositor and the direct-image counit.
-Source: blueprint det-sf-mate-open-restriction (2), canonical comparison in the open square
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenProperRestriction {Z Z' Y V : Scheme.{u}}
-    {a : Z' ⟶ Z} {q : Z' ⟶ V} {p : Z ⟶ Y} {v : V ⟶ Y}
-    (sq : CommSq a q p v)
-    (B : DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
-    (upperStar Λ v).mapDerivedCategory.obj ((lowerStar Λ p).rightDerivedFunctor.obj B) ⟶
-      (lowerStar Λ q).rightDerivedFunctor.obj ((upperStar Λ a).mapDerivedCategory.obj B) :=
-  ((derivedUpperStarLowerStarAdjunction Λ q).ofNatIsoLeft
-    (leftDerivedUpperStarIsoMapDerivedCategory Λ q)).homEquiv _ _
-      (((Functor.mapDerivedCategoryCompIso (upperStar Λ v) (upperStar Λ q)).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          ((upperStarComp Λ q v).symm ≪≫
-            eqToIso (congrArg (upperStar Λ) sq.w.symm) ≪≫ upperStarComp Λ a p) ≪≫
-        Functor.mapDerivedCategoryCompIso (upperStar Λ p) (upperStar Λ a)).hom.app
-          ((lowerStar Λ p).rightDerivedFunctor.obj B) ≫
-        (upperStar Λ a).mapDerivedCategory.map
-          (((derivedUpperStarLowerStarAdjunction Λ p).ofNatIsoLeft
-            (leftDerivedUpperStarIsoMapDerivedCategory Λ p)).counit.app B))
-
-/-- The open square identifies the two composites of extensions by zero. Its components
-are fixed by the units of the open adjunctions, including the coefficient actions.
-Source: blueprint det-sf-mate-open-restriction (2)
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenSquareExtension {U X V Y : Scheme.{u}}
-    {a : U ⟶ X} {q : U ⟶ V} {f : X ⟶ Y} {v : V ⟶ Y}
-    [IsOpenImmersion a] [IsOpenImmersion v]
-    (sq : IsPullback a q f v) (c : Compactification f) :
-    (openImmersionLowerShriek Λ a).mapDerivedCategory ⋙
-        (openImmersionLowerShriek Λ c.i).mapDerivedCategory ≅
-      (openImmersionLowerShriek Λ (c.ofIsPullback sq).i).mapDerivedCategory ⋙
-        (openImmersionLowerShriek Λ (pullback.fst c.g v)).mapDerivedCategory :=
-  mateOpenExtensionComp Λ a c.i ≪≫
-    Functor.mapDerivedCategoryNatIso
-      (eqToIso (by
-        congr 1
-        exact (c.ofIsPullback_i_fst sq).symm)) ≪≫
-    (mateOpenExtensionComp Λ (c.ofIsPullback sq).i (pullback.fst c.g v)).symm
-
-/-- The specified component `v* Rf! u! M → Rf_V! M`: first identify the composite open
-extensions, then apply the proper/open restriction mate, and undo the open unit on the
-base-changed compactification. Thus this is a real map before invertibility is asserted.
-Source: blueprint det-sf-mate-open-restriction (2), Cartesian open square
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenTargetLowerShriek {U X V Y : Scheme.{u}}
-    {a : U ⟶ X} {q : U ⟶ V} {f : X ⟶ Y} {v : V ⟶ Y}
-    [IsOpenImmersion a] [IsOpenImmersion v]
-    (sq : IsPullback a q f v) (c : Compactification f)
-    (M : DerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U))) :
-    (upperStar Λ v).mapDerivedCategory.obj
-        ((rightDerivedLowerShriekOfCompactification Λ c).obj
-          ((openImmersionLowerShriek Λ a).mapDerivedCategory.obj M)) ⟶
-      (rightDerivedLowerShriekOfCompactification Λ (c.ofIsPullback sq)).obj M :=
-  (upperStar Λ v).mapDerivedCategory.map
-      ((lowerStar Λ c.g).rightDerivedFunctor.map
-        ((mateOpenSquareExtension Λ sq c).hom.app M)) ≫
-    mateOpenProperRestriction Λ (IsPullback.of_hasPullback c.g v).toCommSq
-      ((openImmersionLowerShriek Λ (pullback.fst c.g v)).mapDerivedCategory.obj
-        ((openImmersionLowerShriek Λ (c.ofIsPullback sq).i).mapDerivedCategory.obj M)) ≫
-    (lowerStar Λ (pullback.snd c.g v)).rightDerivedFunctor.map
-      (inv ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ
-        (pullback.fst c.g v)).unit.app
-          ((openImmersionLowerShriek Λ (c.ofIsPullback sq).i).mapDerivedCategory.obj M)))
-
-/-- The canonical identification of compact-support image for the trivial open
-compactification (j,id) with levelwise extension by zero. The identity direct-image
-identification is the derived one normalized on ordinary module sheaves.
-Source: blueprint det-sf-mate-open-restriction (1), trivial compactification
-(blueprint: det-sf-mate-open-restriction). -/
-def mateOpenTrivialLowerShriek {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
-    rightDerivedLowerShriekOfCompactification Λ (Compactification.ofIsOpenImmersion j) ≅
-      (openImmersionLowerShriek Λ j).mapDerivedCategory :=
-  Functor.isoWhiskerLeft (openImmersionLowerShriek Λ j).mapDerivedCategory
-      (refinementDerivedLowerStarId Λ X) ≪≫
-    Functor.rightUnitor _
+private theorem normalized_conjugate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {E : A ⥤ B} {R : B ⥤ A} {F : B ⥤ D} {G : D ⥤ B}
+    {Q : A ⥤ C} {J : C ⥤ A} {V : C ⥤ D} {W : D ⥤ C}
+    (ae : E ⊣ R) (af : F ⊣ G) (aq : Q ⊣ J) (av : V ⊣ W)
+    (β : Q ⋙ V ≅ E ⋙ F)
+    (T : ∀ M, W.obj (F.obj (E.obj M)) ⟶ Q.obj M)
+    (hβ : ∀ M, T M ≫ av.unit.app (Q.obj M) ≫ W.map (β.hom.app M) = 𝟙 _)
+    (M : A) (N : D) (b : M ⟶ R.obj (G.obj N)) :
+    T M ≫ (aq.homEquiv M (W.obj N)).symm
+        (b ≫ (conjugateIsoEquiv (ae.comp af) (aq.comp av) β).hom.app N) =
+      W.map ((af.homEquiv (E.obj M) N).symm ((ae.homEquiv M (G.obj N)).symm b)) := by
+  rw [conjugate_hom (ae.comp af) (aq.comp av)]
+  simp only [Adjunction.comp_homEquiv, Equiv.symm_trans_apply]
+  change T M ≫ (aq.homEquiv M (W.obj N)).symm
+    ((aq.homEquiv M (W.obj N)) ((av.homEquiv (Q.obj M) N)
+      (β.hom.app M ≫ (af.homEquiv (E.obj M) N).symm
+        ((ae.homEquiv M (G.obj N)).symm b)))) = _
+  rw [Equiv.symm_apply_apply, Adjunction.homEquiv_unit, W.map_comp]
+  have hb := hβ M
+  rw [← Category.assoc] at hb
+  rw [← Category.assoc, ← Category.assoc, hb, Category.id_comp]
 
 /-- Open extension is left adjoint to exact restriction on precisely Loc(Dctf). The Hom
 bijection is the restriction of the existing termwise open adjunction. Every Brown right
@@ -393,6 +296,10 @@ theorem mateOpenSourceRestriction
     apply (adjJ.homEquiv _ N).symm.injective
     exact (heq N).trans (adjS.homEquiv_symm_rightAdjointUniq_hom_app adjJ N).symm
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option maxHeartbeats 800000 in
+-- Elaborating the restricted composite adjunctions requires additional heartbeats.
 /-- Target-open restriction u* f! = f_V! v*, with its precise mate normalization.
 The inverse-image scheme U is expressed by an arbitrary Cartesian open square, including
 its identity and empty cases. The base-changed compactification is the recorded upstream
@@ -401,23 +308,17 @@ thus, by fullness, also in its localizing subcategory. It fixes e uniquely.
 Source: blueprint det-sf-mate-open-restriction (2), target-open comparison
 (blueprint: det-sf-mate-open-restriction).
 
-Proof (DAG steps 4--7): openImmersionLowerShriek_localizing and
-unboundedLocalizingPullback give he, hs and hv. Separated finite type is stable under
-base change, so all four schemes and maps remain in the standing setting. Brown hypotheses
-and det-sf-existence-brown applied to the base-changed compactification give hq and a right
-adjoint. The open comparisons of clause (1) and the composition of exceptional inverse
-images give u* f! = u! f! = (fu)! = (vf_V)! = f_V! v! = f_V! v*.
-Composition comes from lem-sfb-localizing-lower-shriek-composition for rational coefficients
-and lem-sfb-nonrational-localizing-lower-shriek-composition for the other cases. Their Hom
-bijections are the composite adjunction; Yoneda supplies naturality. On the common
-base-changed compactification, transpose these same bijections. The open compositors give
-mateOpenSquareExtension, the direct-image counit gives mateOpenProperRestriction, and the
-inverse open unit gives mateOpenTargetLowerShriek. Thus the transposed comparison satisfies
-the displayed equation. Open restriction of proper direct image identifies that map with
-the ordinary open restriction, so it is invertible (termwise on K-injectives, which remain
-K-injective because open extension is exact). Its Hom bijections give uniqueness of e.
-Brown's adjunction-compatible compactification comparisons identify this with the same
-comparison for any chosen compactifications. -/
+Proof: Restrict the open extension/restriction adjunctions to the localizing categories.
+Finite type over the field makes the targets Noetherian, so the open immersions are
+quasi-compact. Brown representability on the base-changed compactification supplies hq
+and a right adjoint. The normalized compact-support comparison
+mateOpenCompactSupportExchange identifies the two composite left adjoints. Conjugating
+this isomorphism under the composite adjunctions gives the asserted right-adjoint
+comparison. Its normalization follows from the open unit equation of that comparison
+and the component formula for conjugation. The specified target lower-shriek mate is
+invertible, so cancellation and injectivity of the adjunction Hom equivalence prove
+uniqueness. This uses proper/open interchange on the given Cartesian compactification,
+without invoking general lower-shriek composition. -/
 theorem mateOpenTargetRestriction
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ)
@@ -463,7 +364,138 @@ theorem mateOpenTargetRestriction
                 (((adjF.homEquiv ((mateOpenExtension Λ a he).obj M) N).symm
                   ⟨((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ a).homEquiv
                     M.obj (G.obj N).obj).symm b.hom⟩).hom) := by
-  sorry
+  classical
+  have hchar : ringChar k = p := ringChar.eq k p
+  have : Fact (ringChar k).Prime := ⟨by
+    rw [hchar]
+    exact (CharP.char_is_prime_or_zero k p).resolve_right (Nat.ne_of_gt _hp)⟩
+  have : Fact (ringChar k ≠ ℓ) := ⟨by simpa only [hchar] using _hpℓ⟩
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : IsNoetherian Y := ⟨⟩
+  have : QuasiCompact a := inferInstance
+  have : QuasiCompact v := inferInstance
+  let : U.Over (Spec (.of k)) := ⟨a ≫ (X ↘ Spec (.of k))⟩
+  let : V.Over (Spec (.of k)) := ⟨v ≫ (Y ↘ Spec (.of k))⟩
+  have : a.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : v.IsOver (Spec (.of k)) := ⟨rfl⟩
+  have : q.IsOver (Spec (.of k)) := ⟨by
+    change q ≫ v ≫ (Y ↘ Spec (.of k)) = a ≫ (X ↘ Spec (.of k))
+    rw [← Category.assoc, ← sq.w, Category.assoc, comp_over]⟩
+  have : LocallyOfFiniteType (U ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (a ≫ (X ↘ Spec (.of k))))
+  have : QuasiCompact (U ↘ Spec (.of k)) :=
+    inferInstanceAs (QuasiCompact (a ≫ (X ↘ Spec (.of k))))
+  have : IsSeparated (U ↘ Spec (.of k)) :=
+    inferInstanceAs (IsSeparated (a ≫ (X ↘ Spec (.of k))))
+  have : LocallyOfFiniteType (V ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType (v ≫ (Y ↘ Spec (.of k))))
+  have : QuasiCompact (V ↘ Spec (.of k)) :=
+    inferInstanceAs (QuasiCompact (v ≫ (Y ↘ Spec (.of k))))
+  have : IsSeparated (V ↘ Spec (.of k)) :=
+    inferInstanceAs (IsSeparated (v ≫ (Y ↘ Spec (.of k))))
+  have : LocallyOfFiniteType q := MorphismProperty.of_isPullback sq inferInstance
+  have : QuasiCompact q := MorphismProperty.of_isPullback sq inferInstance
+  have : IsSeparated q := MorphismProperty.of_isPullback sq inferInstance
+  obtain ⟨he, hs, _, adjA, hadjA, _⟩ := mateOpenImmersion Λ ℓ k p _hp _hpℓ _hΛ a
+  obtain ⟨hev, hv, _, adjV, hadjV, _⟩ := mateOpenImmersion Λ ℓ k p _hp _hpℓ _hΛ v
+  let d := c.ofIsPullback sq
+  have : IsLocallyNoetherian V :=
+    LocallyOfFiniteType.isLocallyNoetherian (V ↘ Spec (.of k))
+  have : IsLocallyNoetherian d.Z := LocallyOfFiniteType.isLocallyNoetherian d.g
+  have : QuasiCompact d.i := inferInstance
+  let bd : Compactification.BoundaryCompactification q := ⟨⟨d, inferInstance⟩⟩
+  obtain ⟨hq, hU, hV, hQ⟩ := exists_localizingExceptionalAdjoint Λ ℓ k q bd _hΛ
+  let := hU
+  let := hV
+  obtain ⟨J₀, sJ, hJ⟩ := hQ.2.2.2.2
+  let := sJ
+  obtain ⟨_, _, adjJ₀, _⟩ := hJ
+  refine ⟨he, hs, hv, hq, ⟨J₀, ⟨adjJ₀⟩⟩, ?_⟩
+  intro J adjJ
+  obtain ⟨β, hβ⟩ := mateOpenCompactSupportExchange Λ ℓ k p _hp _hpℓ _hΛ f c a q v sq
+  let βL : localizingLowerShriek Λ d hq ⋙ mateOpenExtension Λ v hev ≅
+      mateOpenExtension Λ a he ⋙ localizingLowerShriek Λ c hf := NatIso.ofComponents
+    (fun M ↦ (localizingClosureProEtale Λ Y).isoMk (β.app M))
+    (by intro M N b; ext; exact β.hom.naturality b)
+  let e := conjugateIsoEquiv (adjA.comp adjF) (adjJ.comp adjV) βL
+  have heq : ∀ M N b,
+      mateOpenTargetLowerShriek Λ sq c M.obj ≫
+          ((adjJ.homEquiv M ((mateOpenPullback Λ v hv).obj N)).symm
+            (b ≫ e.hom.app N)).hom =
+        (upperStar Λ v).mapDerivedCategory.map
+          (((adjF.homEquiv ((mateOpenExtension Λ a he).obj M) N).symm
+            ⟨((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ a).homEquiv
+              M.obj (G.obj N).obj).symm b.hom⟩).hom) := by
+    intro M N b
+    have hnorm : ∀ M,
+        (⟨mateOpenTargetLowerShriek Λ sq c M.obj⟩ :
+          (mateOpenPullback Λ v hv).obj
+              ((localizingLowerShriek Λ c hf).obj ((mateOpenExtension Λ a he).obj M)) ⟶
+            (localizingLowerShriek Λ d hq).obj M) ≫
+          adjV.unit.app ((localizingLowerShriek Λ d hq).obj M) ≫
+          (mateOpenPullback Λ v hv).map (βL.hom.app M) = 𝟙 _ := by
+      intro M
+      ext
+      change mateOpenTargetLowerShriek Λ sq c M.obj ≫
+        (adjV.unit.app ((localizingLowerShriek Λ d hq).obj M)).hom ≫
+        (upperStar Λ v).mapDerivedCategory.map (β.hom.app M) = 𝟙 _
+      have hunit := hadjV ((localizingLowerShriek Λ d hq).obj M)
+        ((mateOpenExtension Λ v hev).obj ((localizingLowerShriek Λ d hq).obj M)) (𝟙 _)
+      rw [Adjunction.homEquiv_id] at hunit
+      change (adjV.unit.app _).hom =
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ v).homEquiv _ _ (𝟙 _) at hunit
+      rw [Adjunction.homEquiv_id] at hunit
+      rw [hunit]
+      exact hβ M
+    have hh := normalized_conjugate adjA adjF adjJ adjV βL
+      (fun M ↦ ⟨mateOpenTargetLowerShriek Λ sq c M.obj⟩) hnorm M N b
+    have ha : (((adjA.homEquiv M (G.obj N)).symm b).hom) =
+        ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ a).homEquiv
+          M.obj (G.obj N).obj).symm b.hom := by
+      have h := hadjA M (G.obj N) ((adjA.homEquiv M (G.obj N)).symm b)
+      simp only [Equiv.apply_symm_apply] at h
+      exact (((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ a).homEquiv
+        M.obj (G.obj N).obj).symm_apply_eq.mpr h).symm
+    have ha' : (adjA.homEquiv M (G.obj N)).symm b =
+        ⟨((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ a).homEquiv
+          M.obj (G.obj N).obj).symm b.hom⟩ := by
+      ext
+      exact ha
+    rw [ha'] at hh
+    exact congrArg (fun z ↦ z.hom) hh
+  refine ⟨e, heq, ?_⟩
+  intro e' heq'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  have hT (M : (localizingClosureProEtale Λ U).FullSubcategory) :
+      IsIso (mateOpenTargetLowerShriek Λ sq c M.obj) := by
+    have : IsIso (mateOpenTargetLowerShriek Λ sq c M.obj ≫
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ v).unit.app
+          ((rightDerivedLowerShriekOfCompactification Λ d).obj M.obj) ≫
+        (upperStar Λ v).mapDerivedCategory.map (β.hom.app M)) := by
+      rw [hβ M]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ v).unit.app
+          ((rightDerivedLowerShriekOfCompactification Λ d).obj M.obj) ≫
+        (upperStar Λ v).mapDerivedCategory.map (β.hom.app M))
+  have H := heq' ((G ⋙ mateOpenPullback Λ a hs).obj N) N (𝟙 _)
+  have H' := heq ((G ⋙ mateOpenPullback Λ a hs).obj N) N (𝟙 _)
+  have := hT ((G ⋙ mateOpenPullback Λ a hs).obj N)
+  apply (adjJ.homEquiv _ _).symm.injective
+  apply ObjectProperty.hom_ext
+  apply (cancel_epi (mateOpenTargetLowerShriek Λ sq c
+    ((G ⋙ mateOpenPullback Λ a hs).obj N).obj)).mp
+  simpa only [Category.id_comp] using H.trans H'.symm
 
 /-- Open restrictions jointly detect isomorphisms on the whole localizing closure, for
 arbitrary open covers and arbitrary (unbounded) objects. Applying the preceding two

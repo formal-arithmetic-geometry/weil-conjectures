@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-formally-smooth-completed-local-tensor-square",
+ "kind": "statement",
+ "title": "Completed local tensor square of an adically formally smooth complete local algebra",
+ "statement": "Let $A\\to R$ be a local homomorphism of commutative complete Noetherian local rings [def-weil-pbc-noetherian-ring, def-weil-pbc-adically-complete-ring], with maximal ideals $\\mathfrak m_A,\\mathfrak m_R$, residue fields $k=A/\\mathfrak m_A$ and $l=R/\\mathfrak m_R$, and finite residue extension $l/k$. Suppose $R$ is formally smooth over $A$ for the $\\mathfrak m_R$-adic topology [def-weil-pbc-formally-smooth-adic]. Form $P=R\\otimes_A R$ [def-weil-module-base-change] and the maximal ideal $\\mathfrak q=\\ker(P\\to l)$, where $r\\otimes s\\mapsto\\bar r\\bar s$. Put $E=\\varprojlim_{n\\geq1}P_{\\mathfrak q}/(\\mathfrak qP_{\\mathfrak q})^n$ [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion]. Then $E$ is a complete Noetherian local ring with residue field $l$. The canonical maps $j_1,j_2:R\\to E$ are local, induce the identity on $l$, are faithfully flat [def-weil-pbc-faithfully-flat-ring-map], and make $E$ formally smooth over $R$ for its maximal-ideal-adic topology. Multiplication $P\\to R$, $r\\otimes s\\mapsto rs$, extends to a continuous local homomorphism $\\mu:E\\to R$ with $\\mu j_1=\\mu j_2=\\mathrm{id}_R$. Here continuity is for maximal-ideal-adic topologies and local means inverse image of the maximal ideal equals the maximal ideal. Finally, with $J=j_2(\\mathfrak m_R)E$, the map induced by $j_1$,\n$$R/\\mathfrak m_AR\\longrightarrow E/J,$$\nis faithfully flat. More precisely, if $F=(R/\\mathfrak m_AR)\\otimes_k l$ and $\\mathfrak r=\\ker(F\\to l)$ for $\\bar r\\otimes a\\mapsto\\overline r a$, then $E/J$ is canonically isomorphic, compatibly with this map, to the maximal-ideal-adic completion of $F_{\\mathfrak r}$.",
+ "source": {
+  "document": "literature/ega-i.pdf",
+  "place": "EGA 0_I 7.7.1--7.7.7 (completed tensor products and their universal property); EGA 0_IV 19.3.5(iii)--(v), 19.3.6 (base change, localization and completion of formal smoothness). Local diagonal factor and closed-fibre comparison formulated by Q102; no single Stacks tag states this combined completed-local-tensor lemma. Read online English EGA; local EGA I and IV PDFs WANTED.",
+  "url": "https://jcreinhold.github.io/ega/i/00-07-adic-rings.html"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-module-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=P_{\\mathfrak q}$ and $\\mathfrak n=\\mathfrak qS$. The ideal $H=(\\mathfrak m_R\\otimes1,1\\otimes\\mathfrak m_R)P$ is finitely generated: take generators of $\\mathfrak m_R$ in each factor. Applying tensor-quotient base change to each factor gives $P/H\\cong l\\otimes_k l$. If $b_1,\\ldots,b_d$ is a $k$-basis of $l$, then $1\\otimes b_1,\\ldots,1\\otimes b_d$ span this ring over its first $l$. A field is Noetherian (its only ideals are zero and the whole field), so the finite-algebra Noetherian lemma makes $P/H$ Noetherian. Since $H\\subset\\mathfrak q$, choose finite ideal generators of $\\mathfrak q/H$ and lift them to $\\mathfrak q$. Together with the generators of $H$ they generate $\\mathfrak q$: subtract the appropriate lifted combination from any element of $\\mathfrak q$ to obtain an element of $H$. Thus $\\mathfrak n$ is finitely generated. By the fraction description of localization, $S$ is local with maximal ideal $\\mathfrak n$ and $S/\\mathfrak n=l$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DF (lemma-tensor-product-exact), 00FN (lemma-Noetherian-permanence), 00CO (definition-localization), 07BH (local rings); explicit finite-generator argument for the diagonal ideal."
+   }
+  },
+  {
+   "text": "Apply the completion theorem for a finitely generated ideal with Noetherian quotient to $(S,\\mathfrak n)$: its hypotheses hold because $S/\\mathfrak n=l$ is a field. It gives that $E$ is Noetherian and complete for $\\mathfrak m=\\mathfrak nE$. The completion-mod-power lemma gives, for every $N\\ge1$, the canonical compatible surjections $\\pi_N:E\\to S/\\mathfrak n^N$ with kernel $\\mathfrak m^N$. In particular $E/\\mathfrak m=l$. This application does not assume that $S$ is Noetherian.",
+   "uses": [
+    "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GH (lemma-completion-Noetherian) and 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "The ideal $\\mathfrak m$ is the unique maximal ideal of $E$. Indeed, an element $x\\notin\\mathfrak m$ has nonzero residue in $l$; each $x_N=\\pi_N(x)$ is a unit in the local ring $S/\\mathfrak n^N$. Explicitly a representative of $x_N$ in $S$ lies outside $\\mathfrak n$ and hence has an inverse in $S$. The inverses $x_N^{-1}$ are compatible, since a homomorphism takes an inverse to an inverse. They form an inverse for $x$ in $E$. Conversely no element of $\\mathfrak m$ is a unit, since its residue is zero. Thus $E$ is complete Noetherian local with residue $l$. Under this residue identification, each composite $R\\to P\\to S\\to E\\to l$ is the residue map of $R$; consequently $j_i^{-1}(\\mathfrak m)=\\mathfrak m_R$ and $j_i(\\mathfrak m_R^N)\\subset\\mathfrak m^N$, proving locality, continuity and the identity residue maps.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 07BH (local rings) and 00M9 (section-completion); units and residue maps computed in compatible sequences."
+   }
+  },
+  {
+   "text": "For the first $R$-algebra structure on $P$, adic formal smoothness is preserved by base change from $A\\to R$ in the second factor. It holds for the ideal $I=(1\\otimes\\mathfrak m_R)P$. To verify it on $S$ for $\\mathfrak n$, take a square-zero ideal $L\\subset D$, an $R$-algebra map $g:S\\to D/L$, and $N\\ge1$ with $g(\\mathfrak n^N)=0$. The restriction to $P$ kills $I^N$, so base-change formal smoothness gives an $R$-algebra lift $f:P\\to D$. For $t\\in P\\setminus\\mathfrak q$, $f(t)$ is invertible modulo $L$. Choose $b$ lifting its inverse, so $f(t)b=1+u$ with $u\\in L$; then $b(1-u)$ is an inverse since $u^2=0$. Hence the formula $p/t\\mapsto f(p)f(t)^{-1}$ defines a lift $S\\to D$, reducing to $g$. It kills $\\mathfrak n^{2N}$ because the image of $\\mathfrak n^N$ lies in $L$. This verifies exactly the defining adic lifting property. Interchanging the two factors repeats the argument with $I=(\\mathfrak m_R\\otimes1)P$ and proves it for the second $R$-structure as well.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-base-change",
+    "def-weil-pbc-formally-smooth-adic",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EG (lemma-base-change-fs), Definition 07EB/07NI (formal smoothness); localization lift written using fractions and square-zero inverses."
+   }
+  },
+  {
+   "text": "Since $\\mathfrak n$ is finitely generated, preservation of adic formal smoothness by completion applies to each of the two maps $R\\to S$. It makes $E$ formally smooth over $R$ for the $\\mathfrak nE=\\mathfrak m$-adic topology. Both $R$ and $E$ are Noetherian local rings and both $j_i$ are local, as already proved, so the adic-formally-smooth local flatness lemma shows that each $j_i$ is flat. The flat-local-homomorphism lemma then makes each $j_i$ faithfully flat.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-completion",
+    "lem-weil-pbc-fs-adic-local-flat",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07ED (lemma-formally-smooth-completion), 07NP (lemma-formally-smooth-flat); Algebra Tag 00HR (lemma-local-flat-ff)."
+   }
+  },
+  {
+   "text": "The tensor-pushout property gives multiplication $P\\to R$, $r\\otimes s\\mapsto rs$. For $t\\notin\\mathfrak q$ its product has nonzero residue in $l$, hence is a unit of $R$. Multiplication therefore defines $h:S\\to R$ by the fraction formula. It sends $\\mathfrak n$ into $\\mathfrak m_R$, giving compatible ring maps $S/\\mathfrak n^N\\to R/\\mathfrak m_R^N$. For $x=(x_N)_N\\in E$ their values form a compatible sequence in $\\varprojlim_N R/\\mathfrak m_R^N$. Completeness of $R$ identifies that sequence with a unique element $\\mu(x)\\in R$. Coordinatewise operations prove that $\\mu$ is a ring map, and $\\ker\\pi_N=\\mathfrak m^N$ shows $\\mu(\\mathfrak m^N)\\subset\\mathfrak m_R^N$, so it is continuous. Its residue map is the identity of $l$, hence $\\mu^{-1}(\\mathfrak m_R)=\\mathfrak m$. On either copy of $R$ its $N$th coordinate is the original element modulo $\\mathfrak m_R^N$; separation of $R$ therefore gives $\\mu j_1=\\mu j_2=\\mathrm{id}_R$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0317 (definition-complete), 00CO (definition-localization), 05GG (lemma-hathat-finitely-generated); tensor universal property used in More on Algebra Tag 07EG."
+   }
+  },
+  {
+   "text": "Put $B=R/\\mathfrak m_AR$ and $K=(1\\otimes\\mathfrak m_R)S$. Tensor-quotient base change identifies $P/(1\\otimes\\mathfrak m_R)P=R\\otimes_A l$. This is $F=B\\otimes_k l$: the forward map is $r\\otimes a\\mapsto[r]\\otimes a$, and the inverse is $[r]\\otimes a\\mapsto r\\otimes a$; the latter is independent of the lift because $\\mathfrak m_A$ annihilates $l$. Both maps respect the balancing relations and are inverse on pure tensors. The map $P\\to l$ becomes $F\\to l$, $[r]\\otimes a\\mapsto\\bar r a$, so $\\mathfrak q$ is the inverse image of $\\mathfrak r$. The map $S\\to F_{\\mathfrak r}$ sends $p/t$ to $\\bar p/\\bar t$ and kills $K$. Conversely $\\bar p/\\bar t\\mapsto(p/t)\\bmod K$ defines its inverse from $F_{\\mathfrak r}$ to $S/K$: a lift $t$ of $\\bar t\\notin\\mathfrak r$ lies outside $\\mathfrak q$, and changing either lift by the quotient ideal changes the fraction by $K$. Thus $S/K\\cong F_{\\mathfrak r}$, taking $(\\mathfrak n+K)/K$ to its maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact) and Tag 00CO (definition-localization); explicit tensor and fraction identifications."
+   }
+  },
+  {
+   "text": "For $N\\ge1$ write $K_N=(K+\\mathfrak n^N)/\\mathfrak n^N$. There are compatible short exact sequences of $S$-modules $0\\to K_N\\to S/\\mathfrak n^N\\to S/(K+\\mathfrak n^N)\\to0$. The maps $K_{N+1}\\to K_N$ are surjective: represent an element by $k\\in K$ and use that same $k$ at level $N+1$. Inverse-limit exactness for towers with surjective kernel transitions therefore gives a surjective ring map $\\theta:E\\to\\varprojlim_N S/(K+\\mathfrak n^N)$. By the quotient identification in the previous step, the target is precisely the maximal-ideal-adic completion of $F_{\\mathfrak r}$.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 03CA (lemma-Mittag-Leffler), applied to quotient towers indexed by the positive integers; Tag 00M9 (section-completion)."
+   }
+  },
+  {
+   "text": "The ideal $J$ of the statement is $KE$. Under $E/\\mathfrak m^N\\cong S/\\mathfrak n^N$, its image is exactly $K_N$: a sum of products of generators from $K$ and coefficients of $E$ reduces to one from $S$ because $E\\to S/\\mathfrak n^N$ is surjective; conversely every $k\\in K$ is an image from $J$. Hence $\\ker\\theta=\\bigcap_{N\\ge1}(J+\\mathfrak m^N)$. Apply Krull intersection to the Noetherian ring $E$, the ideal $\\mathfrak m$ contained in its Jacobson radical, and the cyclic $E$-module $E/J$. It gives $\\bigcap_N\\mathfrak m^N(E/J)=0$, so $\\ker\\theta=J$. The resulting ring isomorphism $E/J\\cong\\widehat{F_{\\mathfrak r}}$ sends the class of $j_1(r)$ at level $N$ to the class of $[r]\\otimes1$ modulo the $N$th power of the maximal ideal. It is therefore canonical and compatible with the map from $B$ claimed in the statement.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG (lemma-hathat-finitely-generated) and 00IQ (lemma-intersection-powers-ideal-module), part (2), applied to E/J."
+   }
+  },
+  {
+   "text": "The quotient $B$ of $R$ is Noetherian by the surjective-image lemma; it is local with maximal ideal $\\mathfrak m_B=\\mathfrak m_R/\\mathfrak m_AR$ (units lift from the local ring $R$) and residue $l$. The basis $b_1,\\ldots,b_d$ of $l/k$ makes $1\\otimes b_1,\\ldots,1\\otimes b_d$ a finite spanning set for $F=B\\otimes_k l$ over $B$. Thus $F$ is Noetherian by the finite-algebra lemma and $F_{\\mathfrak r}$ is Noetherian by the localization lemma. Moreover the composite $B\\to F\\to l$ is the residue map of $B$, so the inverse image of $\\mathfrak r$ in $B$ is exactly $\\mathfrak m_B$.",
+   "uses": [
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence); the finite spanning set and the contracted prime are computed explicitly."
+   }
+  },
+  {
+   "text": "The field-extension-base-change lemma makes $B\\to F=B\\otimes_k l$ faithfully flat, in particular flat. Localizing at $\\mathfrak r$, whose contraction is $\\mathfrak m_B$, gives a flat local map $B=B_{\\mathfrak m_B}\\to F_{\\mathfrak r}$. Since $F_{\\mathfrak r}$ is Noetherian local, its completion map is faithfully flat, in particular flat. Composition of flat ring maps therefore makes $B\\to\\widehat{F_{\\mathfrak r}}$ flat. This composite is local: its residue map is $B\\to l$ by the explicit finite-quotient maps above. Equivalently, via $\\theta$, the target is $E/J$, which is local because $J\\subset\\mathfrak m$, and its maximal ideal contracts to $\\mathfrak m_B$. The flat-local-homomorphism lemma proves faithful flatness. The compatible isomorphism of step 9 identifies this map with the map $R/\\mathfrak m_AR\\to E/J$ induced by $j_1$, completing all clauses.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flat-local-ring-maps",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-ring-map-comp",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HI (lemma-flat-base-change), 00HP (lemma-ff), 00HT (lemma-flat-localization), 00MC (lemma-completion-faithfully-flat), 00HC (lemma-composition-flat), 00HR (lemma-local-flat-ff)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-fs-adic-base-change",
+  "def-weil-pbc-formally-smooth-adic",
+  "lem-weil-pbc-fs-adic-completion",
+  "lem-weil-pbc-fs-adic-local-flat",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flat-local-ring-maps",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-flat-ring-map-comp"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Completed local tensor-square argument assembled from Tags 00DF, 00FN, 05GG, 05GH, 03CA, 00IQ and 00MC, and More on Algebra Tags 07EG, 07ED, 07NP; fraction lifts and compatible-quotient comparison supplied explicitly by Q94."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedTensor|completed_tensor|tensor.*formallySmooth|formallySmooth.*tensor",
+   "results": "Hits: Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Basic.lean Read the hits: ordinary algebraic formal smoothness under tensor products and completion of finite modules do not give the completed local tensor square, its adic lifting properties, or the closed-fibre faithful flatness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed local tensor product of formally smooth Noetherian local algebras with finite residue extensions",
+   "results": "Hits: Algebra.FormallySmooth.instTensorProduct, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.pi_iff, Algebra.Smooth.baseChange, AdicCompletion.tensor_map_id_left_eq_map, IsLocalRing.subsingleton_tensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, IsLocalization.tensorProduct_tensorProduct Read the hits: ordinary algebraic formal smoothness under tensor products and completion of finite modules do not give the completed local tensor square, its adic lifting properties, or the closed-fibre faithful flatness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"TensorProduct\"",
+   "results": "Hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul Read the hits: ordinary algebraic formal smoothness under tensor products and completion of finite modules do not give the completed local tensor square, its adic lifting properties, or the closed-fibre faithful flatness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A completed tensor product of adically formally smooth Noetherian local rings with finite residue field extensions is Noetherian and formally smooth over either factor",
+   "results": "Hits: AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, Algebra.FormallySmooth.instTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_surjective_of_finite Read the hits: ordinary algebraic formal smoothness under tensor products and completion of finite modules do not give the completed local tensor square, its adic lifting properties, or the closed-fibre faithful flatness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completed local tensor square of a formally smooth complete Noetherian local algebra has two faithfully flat formally smooth local maps and a multiplication retraction",
+   "results": "Hits: Algebra.FormallySmooth.instTensorProduct, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.Smooth.exists_finiteType, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.Smooth.flat, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.localization_base Read the hits: ordinary algebraic formal smoothness under tensor products and completion of finite modules do not give the completed local tensor square, its adic lifting properties, or the closed-fibre faithful flatness.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local tensor square of a formally smooth complete Noetherian local algebra with finite residue extension",
+   "results": "Hits: Algebra.FormallySmooth.instTensorProduct, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.Smooth.exists_finiteType, Algebra.FormallyEtale.instTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian.  Read relevant sources: Mathlib/RingTheory/Smooth/Basic.lean (ordinary tensor-base-change formal smoothness), Smooth/AdicCompletion.lean:94 (ordinary formal smoothness lifting), AdicCompletion/AsTensorProduct.lean:328 (completion of finite modules). These do not state the adic completed local tensor-square lemma or all its clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion TensorProduct FormallySmooth",
+   "results": "Hits: . loogle: Unknown identifier `FormallySmooth` Query was rejected for an unknown identifier; no mathematical absence inferred. The subsequent quoted-name Loogle query succeeded.",
+   "date": "2026-10-24",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "completedTensor|completed_tensor|tensor.*formallySmooth|formallySmooth.*tensor",
+   "results": "Hits: Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Local.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean.  Read relevant sources: Mathlib/RingTheory/Smooth/Basic.lean (ordinary tensor-base-change formal smoothness), Smooth/AdicCompletion.lean:94 (ordinary formal smoothness lifting), AdicCompletion/AsTensorProduct.lean:328 (completion of finite modules). These do not state the adic completed local tensor-square lemma or all its clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed local tensor product of formally smooth Noetherian local algebras with finite residue extension",
+   "results": "Hits: Algebra.FormallySmooth.instTensorProduct, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Smooth.baseChange, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.tensor_map_id_left_eq_map, IsLocalRing.subsingleton_tensorProduct, IsLocalization.tensorProduct_tensorProduct.  Read relevant sources: Mathlib/RingTheory/Smooth/Basic.lean (ordinary tensor-base-change formal smoothness), Smooth/AdicCompletion.lean:94 (ordinary formal smoothness lifting), AdicCompletion/AsTensorProduct.lean:328 (completion of finite modules). These do not state the adic completed local tensor-square lemma or all its clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two local maps into the completion of a tensor product are adically formally smooth and its closed fibre is a faithfully flat completed residue base change",
+   "results": "Hits: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.instTensorProduct, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.localization_map, RingHom.FormallySmooth.holdsForLocalizationAway, Algebra.FormallySmooth.localization_base, RingHom.FormallySmooth.isStableUnderBaseChange, Algebra.FormallySmooth.iff_injective_lTensor_residueField.  Read relevant sources: Mathlib/RingTheory/Smooth/Basic.lean (ordinary tensor-base-change formal smoothness), Smooth/AdicCompletion.lean:94 (ordinary formal smoothness lifting), AdicCompletion/AsTensorProduct.lean:328 (completion of finite modules). These do not state the adic completed local tensor-square lemma or all its clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"TensorProduct\"",
+   "results": "Hits: AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul.  Read relevant sources: Mathlib/RingTheory/Smooth/Basic.lean (ordinary tensor-base-change formal smoothness), Smooth/AdicCompletion.lean:94 (ordinary formal smoothness lifting), AdicCompletion/AsTensorProduct.lean:328 (completion of finite modules). These do not state the adic completed local tensor-square lemma or all its clauses.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-formally-smooth-normal-power-series-cover",
+  "date": "2026-10-24",
+  "group": "Q102"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "EGA IV4 21.14.3(i), first assertion, used to verify the parafactoriality hypothesis in the proof of the second assertion; lower input to the inherited affine-boundary construction. Supporting input: EGA IV4 Theorem 21.14.1 and Corollary 21.14.2, with the explicit meaning of local parafactoriality in 21.13.8. No Stacks tag states this Ramanujam--Samuel theorem. Lower argument: EGA IV4 proof of Theorem 21.14.1, first paragraph: completion, finite flat coefficient extension, a local factor D_0 and its power-series presentation; EGA 0_IV 19.3.6, 19.6.4, 19.7.1.5 and IV 7.5.1, 7.5.3, 6.5.4(ii). No Stacks tag asserts this combined cover. EGA IV4 is WANTED locally; read the online English translation. Repair of the coefficient-extension paragraph: replace the finite coefficient lift by the completed local tensor square at the multiplication residue point; this supplies a split formally smooth complete local algebra before the power-series argument.",
+   "via": [
+    "lem-sfb-formally-smooth-normal-power-series-cover",
+    "lem-sfb-formally-smooth-ramanujam-samuel-localization",
+    "lem-sfb-smooth-nongeneric-punctured-line-triviality",
+    "lem-sfb-ramanujam-samuel-prime-divisor",
+    "lem-sfb-smooth-normal-affine-boundary-cartier",
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-formally-smooth-completed-local-tensor-square",
+  "worker": "stage1",
+  "summary": "Q94 retains the complete statement and its statement dependencies, and supplies eleven proof steps using only existing general algebra nodes. Finite residue degree makes the diagonal ideal finitely generated; 05GH applies without assuming that the uncompleted localized tensor square is Noetherian. Explicit square-zero fraction lifts prove adic formal smoothness after localization, compatible sequences construct the multiplication retraction, and tower exactness plus Krull intersection give the canonical completed closed-fibre quotient and its faithful flatness. No new nodes or Mathlib leaves; no source or statement dispute.",
+  "blueprint": "Supporting completed-local-tensor-square construction in the inherited from.place: repair of the coefficient-extension paragraph of the EGA IV4 21.14.1 argument beneath 21.14.3(i), via the recorded normal-power-series-cover chain. The current sk-thm-sf-ctf-stability blueprint unit states six-functor stability; this is a lower algebra input, not another blueprint statement. Whole-blueprint searches found no same_as; the ancestor tool returns null, retained with the existing precise from.place and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+    "why": "Step 2 uses its general finitely-generated-ideal/Noetherian-quotient completion criterion; the tensor square before completion need not be Noetherian and the unit has no replacement criterion."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-base-change",
+    "why": "Step 4 uses the general adic formal-smoothness base-change theorem on the two tensor factors; this is a commutative-algebra tool, not a replacement for the six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-completion",
+    "why": "Step 5 uses preservation of adic formal smoothness under completion of a finitely generated ideal, a generic ring theorem not furnished by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-local-flat",
+    "why": "Step 5 uses flatness of an adically formally smooth local map of Noetherian local rings; the unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "why": "Step 8 uses exactness of an inverse limit of short exact module towers when the kernel transition maps are surjective; this generic algebra tool is needed for the closed-fibre quotient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-completion-noetherian-quotient-noetherian",
+  "lem-weil-pbc-fs-adic-base-change",
+  "lem-weil-pbc-fs-adic-completion",
+  "lem-weil-pbc-fs-adic-local-flat",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-6ca0cd3dd",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-6ca0cd3dd (reviewer sub-agent of L); spot-checked: I read all eleven steps in full against the statement of every cited node. The delivery has no new nodes and no fixes. The item's statement and stmt_deps are unchanged. Steps 1-3: the diagonal ideal q is finitely generated through P/H ≅ l⊗_k l, a finite l-algebra (Stacks 00DF, 00FN). Stacks 05GH (algebra.tex line 23011) needs only a Noetherian quotient and a finitely generated ideal, so E is Noetherian and complete without assuming S Noetherian. 05GG gives the surjections E→S/n^N with kernel m^N. Units lift, so E is local with residue l and j_1, j_2 are local and act as the identity on l. Step 4: 07EG (base change) applies to the other tensor factor. The localization lift works because each denominator maps to a unit: if f(t)b = 1+u with u^2 = 0, then b(1-u) inverts f(t). Step 5: 07ED (completion, line 9224) and 07NP (flatness, line 9981) apply to Noetherian local rings with local maps, and 00HR then gives faithful flatness. Step 6: μ is built from compatible sequences using completeness and separatedness of R. Steps 7-9: S/K ≅ F_r is shown with explicit fractions. The tower lemma with surjective kernel transitions gives θ surjective, and Krull intersection (00IQ) gives ker θ = J. Also j_1(m_A R) ⊂ J, so the map factors through R/m_A R. Steps 10-11: field-extension base change, then 00HT, 00MC, 00HC and 00HR give the closed-fibre faithful flatness. I tested the statement on A=k, R=k[[x]] (E = k[[x,y]]), on A=Z_p, R=W(F_{p^2}), and on A=R. The parent normal-power-series-cover (steps 3 and 7) uses exactly the clauses stated. The five declared tool_uses (05GH, 07EG, 07ED, 07NP, tower exactness) are generic sk-thm-p1 algebra results used only through their statements; accepted. rg -L found no duplicate node. blueprint.from.node is null, inherited from Q102's chain; this is a base-node fault for a maintainer note, not a fault of this delivery. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormallySmoothCompletedLocalTensorSquare",
+  "declaration": "RingTheory.formallySmoothAdic_completedLocalTensorSquare",
+  "declarations": [
+   "RingTheory.LocalCompletionAtResidue",
+   "RingTheory.toLocalCompletionAtResidue",
+   "RingTheory.tensorSquareResidue",
+   "RingTheory.CompletedLocalTensorSquare",
+   "RingTheory.completedTensorLeft",
+   "RingTheory.completedTensorRight",
+   "RingTheory.LocalClosedFiber",
+   "RingTheory.localClosedFiberResidueAlgebra",
+   "RingTheory.LocalClosedFiberTensor",
+   "RingTheory.completedTensorSecondIdeal",
+   "RingTheory.formallySmoothAdic_completedLocalTensorSquare"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormallySmoothCompletedLocalTensorSquare.lean",
+  "statement": "theorem formallySmoothAdic_completedLocalTensorSquare (A : Type u) (R : Type v) [CommRing A] [CommRing R] [Algebra A R] [IsNoetherianRing A] [IsNoetherianRing R] [IsLocalRing A] [IsLocalRing R] [IsLocalHom (algebraMap A R)] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [Module.Finite (IsLocalRing.ResidueField A) (IsLocalRing.ResidueField R)] (hfs : Algebra.FormallySmoothAdic A R (IsLocalRing.maximalIdeal R)) : IsNoetherianRing (CompletedLocalTensorSquare A R) ∧ ∃ (_ : IsLocalRing (CompletedLocalTensorSquare A R)), IsAdicComplete (IsLocalRing.maximalIdeal (CompletedLocalTensorSquare A R)) (CompletedLocalTensorSquare A R) ∧ ∃ ρ : CompletedLocalTensorSquare A R →+* IsLocalRing.ResidueField R, Function.Surjective ρ ∧ RingHom.ker ρ = IsLocalRing.maximalIdeal (CompletedLocalTensorSquare A R) ∧ (∀ j : R →+* CompletedLocalTensorSquare A R, (j = completedTensorLeft A R ∨ j = completedTensorRight A R) → IsLocalHom j ∧ ρ.comp j = IsLocalRing.residue R ∧ j.FaithfullyFlat ∧ @Algebra.FormallySmoothAdic R (CompletedLocalTensorSquare A R) _ _ j.toAlgebra (IsLocalRing.maximalIdeal (CompletedLocalTensorSquare A R))) ∧ (∃ μ : CompletedLocalTensorSquare A R →+* R, @Continuous _ _ (IsLocalRing.maximalIdeal (CompletedLocalTensorSquare A R)).adicTopology (IsLocalRing.maximalIdeal R).adicTopology μ ∧ IsLocalHom μ ∧ μ.comp (toLocalCompletionAtResidue (tensorSquareResidue A R)) = (Algebra.TensorProduct.lmul' A).toRingHom ∧ μ.comp (completedTensorLeft A R) = RingHom.id R ∧ μ.comp (completedTensorRight A R) = RingHom.id R) ∧ ∃ β : LocalClosedFiber A R →+* CompletedLocalTensorSquare A R ⧸ completedTensorSecondIdeal A R, (∀ r : R, β (Ideal.Quotient.mk _ r) = Ideal.Quotient.mk _ (completedTensorLeft A R r)) ∧ β.FaithfullyFlat ∧ ∃ ε : LocalClosedFiberTensor A R →+* IsLocalRing.ResidueField R, (∀ (r : R) (a : IsLocalRing.ResidueField R), ε (TensorProduct.tmul (IsLocalRing.ResidueField A) (Ideal.Quotient.mk _ r) a) = IsLocalRing.residue R r * a) ∧ ∃ e : (CompletedLocalTensorSquare A R ⧸ completedTensorSecondIdeal A R) ≃+* LocalCompletionAtResidue ε, ∀ r s : R, e (Ideal.Quotient.mk _ (completedTensorLeft A R r * completedTensorRight A R s)) = toLocalCompletionAtResidue ε (TensorProduct.tmul (IsLocalRing.ResidueField A) (Ideal.Quotient.mk _ r) (IsLocalRing.residue R s))",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad04f3810",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Statement field verbatim in file. Every node clause matched: local complete Noetherian A→R (IsLocalHom algebraMap, IsAdicComplete on maximal ideals), finite residue extension via Module.Finite on the canonical residue algebra, FormallySmoothAdic hypothesis = recorded upstream def. E = AdicCompletion of Localization.AtPrime (ker of residue∘lmul'); Noetherian, local, complete, residue l via surjective ρ with ker = max. j1/j2: IsLocalHom, identity on l, FaithfullyFlat, FormallySmoothAdic with j.toAlgebra. μ continuous for adicTopology, local, extends lmul', retracts both j. J = map of m_R by j2; β pinned as [r]↦[j1 r], faithfully flat; ε pinned on pure tensors; e : E/J ≃+* completed F_r pinned on the dense image of P (a local iso is continuous, so e is unique and canonical). Helpers are real Mathlib compositions with source/blueprint docstrings; localClosedFiberResidueAlgebra has the same body as Mathlib algebraQuotientMapQuotient (needed since ResidueField is a def; no conflict). No duplicates in Sheaf/WeilConjectures/side-live/Mathlib; imported proof-dep modules exist. Only sorry is the item theorem, whose docstring has all 11 steps. Edge cases A=R, k[[x]], degree one hold. No recompile (no file changed). Maintainer note: inherited null blueprint.from.node."
+ }
+}

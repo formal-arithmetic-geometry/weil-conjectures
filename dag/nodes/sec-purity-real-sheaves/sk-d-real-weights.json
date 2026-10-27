@@ -183,7 +183,76 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-weights",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilGroup.IsPunctuallyPure",
+    "AlgebraicGeometry.WeilGroup.frobeniusWeight",
+    "AlgebraicGeometry.WeilGroup.localPolynomial",
+    "AlgebraicGeometry.WeilGroup.HasWeightsAtMost",
+    "AlgebraicGeometry.WeilGroup.IsReal"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilGroup.IsPunctuallyPure",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights",
+     "lines": [
+      90,
+      96
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilGroup.frobeniusWeight",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights",
+     "lines": [
+      56,
+      61
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilGroup.localPolynomial",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights",
+     "lines": [
+      73,
+      78
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilGroup.HasWeightsAtMost",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights",
+     "lines": [
+      98,
+      104
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilGroup.IsReal",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights",
+     "lines": [
+      106,
+      112
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "sk-d-real-weights",
@@ -238,5 +307,15 @@
   "group": "Q10",
   "result": "pass",
   "note": "Re-delivery after ded644f6 H13+H2 RETURN: dep module AdicLocalCharacteristicFactor and def-wf-iota-real record/edge removed; stmt_deps = live; RealWeights.lean byte-identical to returned head; only item lean record delivered (live lean null). Restored live AdicLocalCharacteristicFactor (Q106 record, not in rework.tsv) matches item's sfLocalCharacteristicFactor/SfIsReal usage. Clauses: charpolyRev P_x, charpoly.roots eigenvalues with multiplicity, reused upstream frobeniusWeight 2log|ια|/log q_x, ∀x∀α purity and ≤ bound, coefficientwise reality, multiset conjugation equivalence, inverse-root spectral data, constructible purity via existing SfIsPunctuallyPureOfWeight (log equivalence true: invertible stalk Frobenius, q_y≥2), new HasConstructibleWeightsAtMost over SfPunctualEigenvalue, SfIsReal reality equivalence. Edge cases rank 0/zero stalk/e_x>1/empty Y₀/universes u,v,w OK. Statement field verbatim; docstrings/blueprint tags/sorry proofs OK; no hollow defs. Advisories: def-wf-iota-real decls used without stmt_dep (edge dropped per return, acyclic); constructible clauses on sfCommonStageWeilSheaf not RealSheaves.ConstructibleWeilSheaf (node prescribes punctual-weights convention; no users of the latter); inherited [IsSeparated] on two decls harmless; unused plain imports. No compile run (no file changed)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "A Frobenius module over $\\overline{\\mathbf Q}_\\ell$ is a finite-dimensional\nspace with an invertible operator. At a point of degree $d$, an eigenvalue\n$\\alpha$ has $\\iota$-weight $w$ if\n\n$$\n |\\iota(\\alpha)|=q^{dw/2}.\n$$\n\nA constructible Weil sheaf is punctually $\\iota$-pure of weight $w$ if\nthis holds for every eigenvalue at every closed point. It is\n$\\iota$-mixed if it has a finite filtration by Weil subsheaves whose\nnonzero quotients are punctually pure, of possibly different real weights.\nIt has weights at most $w$ if such a filtration has quotient weights at\nmost $w$. We say that a constructible Weil sheaf has a\n*punctual bound at most $w$* if $|\\iota(\\alpha)|\\le q_x^{w/2}$ for\nevery eigenvalue $\\alpha$ at every closed point $x$; this is weaker\nthan having weights at most $w$, since no filtration is required.\nEvery mixed sheaf of weights at most $w$ has a punctual bound at most\n$w$. For a bounded Weil complex $K$, the derived convention is\n\n$$\n K\\text{ has weights at most }w\n \\quad\\Longleftrightarrow\\quad\n \\mathcal H^i(K)\\text{ has weights at most }w+i\\text{ for all }i.\n$$\n\nPurity of a complex means that each nonzero $\\mathcal H^i(K)$ is pure of\nweight $w+i$. Zero objects satisfy every bound.\n\nWeights only depend on the characteristic polynomials of Frobenius;\nfor instance, a Jordan block and its semisimplification have the same\nweights. At a point over $k_m=\\mathbf F_{q^m}$ lying above $x$, with\n$d(x)\\mid m$, the operator is $F_x^{m/d(x)}$ and a weight-$w$ eigenvalue\nhas modulus $q^{mw/2}$.\n\n*Complement.* For a Weil sheaf $\\mathcal F$ and a closed point $x$, with\nlocal Frobenius $F_x$ of [sk-d-real-weil] acting on the stalk\n$\\mathcal F_{\\bar x}$ (for a lisse sheaf, on the generic fibre $V$ through\n$\\rho(F_x)$), the local characteristic polynomial and the weight of a local\neigenvalue are\n\n$$\nP_x(\\mathcal F,T)=\\det(1-TF_x\\mid\\mathcal F_{\\bar x}),\\qquad\n\\wt_{\\iota,q_x}(\\alpha)=\\frac{2\\log|\\iota(\\alpha)|}{\\log q_x}.\n$$\n\nFor a Frobenius module the same notions are [def-weil-frobenius-module-weights].",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,573 @@
+{
+ "id": "lem-sfb-space-etale-sum-pullback",
+ "kind": "statement",
+ "title": "Etale sum extension and arbitrary tensor pullback",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $j:Z\\to X$ be a representable etale morphism of algebraic spaces over $S$, and let $h:X_1\\to X$ be any morphism. Put $Z_1=Z\\times_XX_1$, with $j_1:Z_1\\to X_1$ and $h_Z:Z_1\\to Z$. Use small etale structure sheaves [def-trf-algebraic-space], their module categories [def-weil-sheaf-of-modules-category], canonical module tensor pullback and direct image [def-trf-space-etale-module-functors], and unbounded derived categories [def-weil-abstract-derived-category]. Write $j_!$ for the exact left adjoint to exact slice restriction $j^*$: it is module sheafification of the presheaf $W\\mapsto\\bigoplus_{a:W\\to Z\\text{ over }X}M(W,a)$; its counit $j_!j^*N\\to N$ evaluates each summand by restriction. Use the analogous definitions for $j_1$ and for etale composites.\nThere is a canonical natural isomorphism\n$$h^*j_!M\\simeq j_{1!}h_Z^*M.$$\nIt agrees with the geometric-fibre direct-sum identification after tensoring the structure rings, preserves the evaluation counits after the canonical comparison $h_Z^*j^*\\simeq j_1^*h^*$, and is compatible with composition of etale restrictions and their extension-by-zero counits. Both $j^*$ and $j_!$ preserve K-flat complexes with flat terms [def-pc-kflat-complex, def-pc-flat-sheaf-modules]; they act termwise on complexes. Consequently the specified ordinary comparison induces\n$$Lh^*j_!\\simeq j_{1!}Lh_Z^*$$\non unbounded derived categories, computed by that same summand formula on flat-term K-flat resolutions. These comparisons preserve finite sums, the counits for nested etale slices, and the canonical shift maps. No flatness of $h$, boundedness of the complexes, quasi-compactness, or finiteness of geometric fibres is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 0710 (lemma-stalk-j-shriek); algebraic-space stalk formula: spaces-perfect.tex Tag 08GU (equation-stalk-j-shriek); derived pullback: sites-cohomology.tex Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat). Arbitrary structural-ring tensor and sum-extension compatibility is the agent-written consequence of these formulas."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-etale-module-functors",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-sfb-space-derived-pullback-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the enlarged etale ringed-site model, so $Z$ is an object of $\\mathcal C_X$ and $\\mathcal C_Z=\\mathcal C_X/Z$ with the restricted structure ring; do the same for $Z_1\\to X_1$. The localized module adjunction gives the exact functors $j_!\\dashv j^*$ and $j_{1!}\\dashv j_1^*$ with the specified sheafified sum formula. Its counit sends a section in the lift-$a$ summand to that section of $N(W)$: this is the map corresponding to $\\mathrm{id}_{j^*N}$ in the adjunction. Its unit inserts a section into the identity-lift summand on the localized site, since this map followed by evaluation is the identity on each summand. The chart tensor realization identifies these restrictions with the canonical module pullbacks in the statement.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact); spaces-properties.tex Tags 03G1, 03LP, 04LZ"
+   }
+  },
+  {
+   "text": "Let $u:\\mathrm{id}\\to j^*j_!$ be the preceding unit and $v_1:j_{1!}j_1^*\\to\\mathrm{id}$ the primed counit. Ringed pullback composition for $jh_Z=hj_1$ gives $\\chi:h_Z^*j^*\\simeq j_1^*h^*$; on local tensors it is the associative map multiplying the structural scalars. Define\n$$\\beta_M:j_{1!}h_Z^*M\\xrightarrow{j_{1!}h_Z^*u_M}j_{1!}h_Z^*j^*j_!M\\xrightarrow{j_{1!}\\chi_{j_!M}}j_{1!}j_1^*h^*j_!M\\xrightarrow{v_{1,h^*j_!M}}h^*j_!M.$$\nEvery arrow is a specified natural module map; thus this defines a natural transformation before any stalk test. The composition and structural-ring identifications here are those fixed by the enlarged ringed model and the chart-unit tensor formula, so no arbitrary pullback isomorphism has been substituted.",
+   "uses": [
+    "lem-trf-space-enlarged-ringed-composition-localization",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 (lemma-push-pull-composition-modules); spaces-properties.tex Tags 03G8 and 04LZ"
+   }
+  },
+  {
+   "text": "Fix $\\bar x_1:\\operatorname{Spec}\\Omega\\to X_1$ and put $\\bar x=h\\bar x_1$, $R=\\mathcal O_{X,\\bar x}$, $B=\\mathcal O_{X_1,\\bar x_1}$. By the fibre-product universal property, lifts $\\bar z_1$ of $\\bar x_1$ to $Z_1$ correspond bijectively to lifts $\\bar z$ of $\\bar x$ to $Z$, all with the same field $\\Omega$. The sum-stalk formula and the pullback-stalk formula identify the stalks of the source and target of $\\beta_M$ with\n$$\\bigoplus_{\\bar z}(M_{\\bar z}\\otimes_R B),\\qquad (\\bigoplus_{\\bar z}M_{\\bar z})\\otimes_R B.$$\nThe etale stalk-ring isomorphisms identify the scalar map for $h_Z$ with $R\\to B$. The identity-summand unit and evaluation counit from step 1 show that $\\beta$ sends $m\\otimes b$ in the $\\bar z$-summand to $\\iota_{\\bar z}(m)\\otimes b$. Its inverse sends $(\\sum\\iota_{\\bar z}m_{\\bar z})\\otimes b$ to $\\sum\\iota_{\\bar z}(m_{\\bar z}\\otimes b)$; the sums have finite support, and balancing over $R$ proves this is well defined. The formulas are inverse on generators. Conservative geometric stalks now show $\\beta$ is an isomorphism; define the required comparison to be $\\beta^{-1}$.",
+   "uses": [
+    "lem-sfb-space-sum-extension-geometric-stalk",
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-sfb-space-geometric-points-conservative",
+    "lem-sfb-space-etale-conservative-geometric-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GU (equation-stalk-j-shriek); sites-modules.tex Tag 05V5 (lemma-pullback-stalk); spaces-properties.tex Tags 04K2, 04K5"
+   }
+  },
+  {
+   "text": "For a module $N$ on $X$, put $M=j^*N$. At a geometric stalk the counit $j_!j^*N\\to N$ is the fold map: the germ in every lift summand is evaluated to that same germ of $N$. Both composites in the base-change counit square therefore send $m\\otimes b$ in each lift summand to $m\\otimes b$. This proves the required square, using stalk detection of equality. For $T\\xrightarrow{k}Z\\xrightarrow{j}X$ etale, the canonical adjunction-composition isomorphism $j_!k_!\\simeq(jk)_!$ flattens the two sum labels: a lift to $Z$ followed by a lift to $T$ is a lift to $T$. Evaluation in two stages and evaluation after flattening both send a germ to itself. Base change relabels the same pair of lifts, so its comparison commutes with flattening and these nested counits. On a tensor with iterated scalars, both paths give $m\\otimes bc$ under the associative structural-ring maps. Thus these are the canonical composition comparisons, not just objectwise isomorphisms.",
+   "uses": [
+    "lem-sfb-space-sum-extension-geometric-stalk",
+    "lem-sfb-space-etale-conservative-geometric-points",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), explicit summand maps; sites-modules.tex Tag 0710 (lemma-stalk-j-shriek), normalization of germs"
+   }
+  },
+  {
+   "text": "On the enlarged localized site use the natural projection isomorphism\n$$ (j_!F)\\otimes H\\simeq j_!(F\\otimes j^*H).$$\nIf $F$ is flat, applying this to a short exact sequence in $H$ proves $j_!F$ flat: $j^*$ is exact, tensoring with $F$ is exact, and $j_!$ is exact. The functor $j_!$ preserves small sums since it is a left adjoint. Hence for complexes its projection isomorphisms sum, in total degree $n$, over all $p+q=n$ to\n$$(j_!P)\\otimes H\\simeq j_!(P\\otimes j^*H).$$\nNaturality in $P^p$ and $H^q$ makes this an isomorphism of complexes: it commutes separately with $d_P\\otimes1$ and $1\\otimes d_H$, and additivity preserves the factor $(-1)^p$. If $H$ is acyclic, exact restriction makes $j^*H$ acyclic; K-flatness of $P$ makes $P\\otimes j^*H$ acyclic; exactness of $j_!$ makes its extension acyclic. Thus $j_!$ preserves K-flat complexes, and the flatness argument gives preservation of flat terms. This argument uses direct sums in every degree, never products or boundedness.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), with Tags 03DI, 03DJ; total tensor and K-flat test: sites-cohomology.tex Section 06YL"
+   }
+  },
+  {
+   "text": "Restriction to the localized ringed site preserves K-flatness by the ringed-site restriction theorem. For a K-flat complex with flat terms it also preserves flat terms, by the ringed-topos pullback theorem applied to the localization morphism, whose structural ring map is the identity on the restricted ring. These assertions apply to $j,j_1$ and their etale composites. For $h,h_Z$, the same pullback theorem gives preservation of flat-term K-flat complexes despite their possibly nonflat structural-ring maps.",
+   "uses": [
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K (lemma-restriction-K-flat); Tag 0G7E (lemma-pullback-K-flat)"
+   }
+  },
+  {
+   "text": "For any complex $K$ on $Z$, choose a flat-term K-flat quasi-isomorphism $P\\to K$. Step 5 makes $j_!P\\to j_!K$ such a resolution. The ringed-topos derived-pullback theorem and exact-functor factorization therefore compute $Lh^*j_!K$ by $h^*j_!P$ and $j_{1!}Lh_Z^*K$ by $j_{1!}h_Z^*P$. Apply step 3 degreewise to $P$; naturality makes it a chain isomorphism. To descend it naturally, take the two derived composite functors precomposed with $Q:K(\\mathcal O_Z)\\to D(\\mathcal O_Z)$. On flat-term K-flat objects their comparison is the displayed chain isomorphism conjugated by the canonical resolution-computation maps, natural in all maps between such objects. The resolving-class natural-transformation lemma extends it to all of $K(\\mathcal O_Z)$: replacements exist by the resolution theorem, and quasi-isomorphisms have a right calculus of fractions. The localization universal property then descends it uniquely to $D(\\mathcal O_Z)$. Applying this also to the inverse gives inverse transformations, since on a quasi-isomorphism $P\\to K$ naturality conjugates the composite at $K$ to the identity composite at $P$. This produces the stated derived natural isomorphism computed by the specified ordinary comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change); derived.tex Tag 05RT and categories.tex Tag 04VK for the localization step"
+   }
+  },
+  {
+   "text": "Each ordinary comparison is additive and is defined degreewise, so it commutes with finite sums. It commutes with the shift by $n$: both complexes in degree $r$ use the comparison on $P^{r+n}$ and both differentials acquire the same factor $(-1)^n$. The same assertion holds for the evaluation counits, which are degreewise maps. Flat-term K-flat complexes remain such after finite sums, shifts and the etale functors from steps 5--6; for shifts the K-flat test is the shifted acyclic tensor test, and for finite sums it is the direct sum of finitely many acyclic tests. For the derived evaluation square resolve $N$ on $X$ by such a $P$; its restriction and the successive etale extensions are adapted models by steps 5--6. Step 4 is therefore literally the required counit and composition equality on these models. Step 7's descent and its inverse are fixed on all these models, so naturality with a resolution quasi-isomorphism proves the equalities for all derived objects, including the specified shift and finite-sum comparisons. Empty fibres give the zero sum, and arbitrarily many lifts cause no difficulty because every sum element has finite support.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pc-kflat-resolution",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YY; derived.tex Tag 014X (lemma-additive-exact-homotopy-category); the normalization follows degreewise from steps 3--4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-sfb-space-sum-extension-geometric-stalk",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "lem-sfb-space-geometric-points-conservative",
+  "lem-sfb-space-etale-conservative-geometric-points",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sc-nattrans-from-resolving-class",
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GU and Modules on Sites Tags 03DI, 03DJ, 0710, 0E8I; agent-written arbitrary structural-ring base-change and normalized unbounded assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on localized ringed sites commutes with arbitrary derived tensor pullback by base change using the canonical sum over fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-sheaf pullback isomorphisms and etale stability do not give arbitrary slice-module sum extension with evaluation/composition normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change of etale extension by zero for structure sheaf modules on algebraic spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallyEtale R Sₘ], Algebra.Formal\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {Rₘ : Type u_4} {Sₘ : Type u_5} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R S] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra S Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-sheaf pullback isomorphisms and etale stability do not give arbitrary slice-module sum extension with evaluation/composition normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ringed site extension by zero tensor pullback base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.baseChange_zero\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": baseChange A (0 : M →ₗ[R] N) = 0\", \"doc\": \"The base change of the zero linear map $ 0 : M \\\\to N $ induces the zero linear map $ 0 : A \\\\otimes_R M \\\\to A \\\\otimes_R N $, where $ A $ is an $ R $-algebra and $ M, N $ are $ R $-modules.\"}\n  {\"name\": \"TrivSqZeroExt.inl\", \"module\": \"Mathlib.Algebra.TrivSqZeroExt\", \"type\": \"[Zero M] (r : R) : tsze R M\", \"doc\": \"The function maps each element $ r $ of a ring $ R $ to the pair $ (r, 0) $ in the trivial square-zero extension $ R \\times M $, where $ M $ is an $ R $-module. This extension forms a ring structure wi\"}\n  {\"name\": \"KaehlerDifferential.mulActionBaseChange_smul_zero\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"(a : A) : a • (0 : S ⊗[R] Ω[A⁄R]) = 0\", \"doc\": \"For any element $a \\\\in A$, the scalar multiplication of $a$ with the zero element in the tensor product module $S \\\\otimes_R \\\\Omega_{A/R}$ yields zero, i.e., $a \\\\cdot 0 = 0$ in $S \\\\otimes_R \\\\Omega_{A/R\"}\n  {\"name\": \"Algebra.Extension.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{T} [CommRing T] [Algebra R T] (P : Extension R S) : Extension T (T ⊗[R] S)\", \"doc\": \"Let $R, S, T$ be commutative rings, such that $S$ and $T$ are $R$-algebras. Given an algebra extension $P$ of $S$ over $R$, which is represented by a surjective $R$-algebra homomorphism $\\\\pi : P_0 \\\\to\"}\n  {\"name\": \"Function.ExtendByZero.linearMap\", \"module\": \"Mathlib.LinearAlgebra.Pi\", \"type\": \": (ι → R) →ₗ[R] η → R\", \"doc\": \"The linear map from the space of functions $\\\\iota \\\\to R$ to $\\\\eta \\\\to R$, defined by extending each function $f : \\\\iota \\\\to R$ via the mapping $s : \\\\iota \\\\to \\\\eta$ with zero as the default value for e\"}\n  {\"name\": \"CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.Precoverage C} {S T : C}\\n  [inst_1 : J.IsStableUnderBaseChange] (f : S ⟶ T) (E : J.ZeroHypercover T)\\n  [inst_2 : ∀ (i : E.I₀), CategoryTheory.Limits.HasPullback (E.f i) f],\\n  (CategoryTheory.Precoverage.ZeroHypercover.pullb\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a precoverage $J$ stable under base change, for any morphism $f : S \\\\to T$ and zero hypercover $E$ of $T$, the pullback of $E$ along $f$ converted to a pre-zero hyp\"}\n  {\"name\": \"CategoryTheory.Precoverage.ZeroHypercover.pullbackCoverOfRight_toPreZeroHypercover\", \"module\": \"Mathlib.CategoryTheory.Sites.Hypercover.Zero\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.Precoverage C}\\n  [inst_1 : J.IsStableUnderBaseChange] {Y : C} (E : J.ZeroHypercover Y) {X Z : C} (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst_2 : CategoryTheory.Limits.HasPullback f g]\\n  [inst_3 : ∀ (i : E.I₀), CategoryTheory.Limits.Has\", \"doc\": \"In a category equipped with a precoverage stable under base change, given a zero hypercover of an object $Y$ and morphisms $f : X \\to Z$ and $g : Y \\to Z$, the pullback of the zero hypercover via $g$ (u\"}\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: free-sheaf pullback isomorphisms and etale stability do not give arbitrary slice-module sum extension with evaluation/composition normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: free-sheaf pullback isomorphisms and etale stability do not give arbitrary slice-module sum extension with evaluation/composition normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|shriek.*[Bb]ase|[Bb]ase.*shriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: free-sheaf pullback isomorphisms and etale stability do not give arbitrary slice-module sum extension with evaluation/composition normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|shriek.*[Bb]ase|[Bb]ase.*shriek",
+   "results": {
+    "t": "2026-10-23T16:06:40Z",
+    "tool": "grep",
+    "query": "extensionByZero|extension_by_zero|shriek.*[Bb]ase|[Bb]ase.*shriek",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules commutes with tensor pullback in a Cartesian etale square",
+   "results": {
+    "t": "2026-10-23T16:06:41Z",
+    "tool": "leansearch",
+    "query": "Extension by zero of sheaves of modules commutes with tensor pullback in a Cartesian etale square",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pullbackObjFreeIso",
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "TensorProduct.zero_tmul",
+     "SheafOfModules.pullbackIso",
+     "CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover",
+     "KaehlerDifferential.mulActionBaseChange_smul_zero"
+    ],
+    "digest": "50aaba03e47d3215"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": {
+    "t": "2026-10-23T16:06:41Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"extensionByZero\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sum extension of structure sheaf modules on algebraic spaces commutes with arbitrary tensor pullback and its unbounded derived functor",
+   "results": {
+    "t": "2026-10-23T16:06:42Z",
+    "tool": "leanfinder",
+    "query": "Etale sum extension of structure sheaf modules on algebraic spaces commutes with arbitrary tensor pullback and its unbounded derived functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+     "Algebra.FormallyEtale.localization_map"
+    ],
+    "digest": "853b1ba02ccdbcf1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|shriek.*[Bb]ase|[Bb]ase.*shriek",
+   "results": {
+    "t": "2026-10-23T16:06:40Z",
+    "tool": "grep",
+    "query": "extensionByZero|extension_by_zero|shriek.*[Bb]ase|[Bb]ase.*shriek",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules commutes with tensor pullback in a Cartesian etale square",
+   "results": {
+    "t": "2026-10-23T16:06:41Z",
+    "tool": "leansearch",
+    "query": "Extension by zero of sheaves of modules commutes with tensor pullback in a Cartesian etale square",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.sheafificationCompPullback",
+     "SheafOfModules.pullbackObjFreeIso",
+     "AlgebraicGeometry.Scheme.Modules.instAdditivePullback",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "TensorProduct.zero_tmul",
+     "SheafOfModules.pullbackIso",
+     "CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover",
+     "KaehlerDifferential.mulActionBaseChange_smul_zero"
+    ],
+    "digest": "50aaba03e47d3215"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extensionByZero\"",
+   "results": {
+    "t": "2026-10-23T16:06:41Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"extensionByZero\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale sum extension of structure sheaf modules on algebraic spaces commutes with arbitrary tensor pullback and its unbounded derived functor",
+   "results": {
+    "t": "2026-10-23T16:06:42Z",
+    "tool": "leanfinder",
+    "query": "Etale sum extension of structure sheaf modules on algebraic spaces commutes with arbitrary tensor pullback and its unbounded derived functor",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply",
+     "Algebra.FormallyEtale.instTensorProduct",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+     "KaehlerDifferential.isBaseChange_of_formallyEtale",
+     "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale",
+     "AlgebraicGeometry.IsEtale.of_comp",
+     "PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map",
+     "Algebra.FormallyEtale.localization_map"
+    ],
+    "digest": "853b1ba02ccdbcf1"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: free module pullback and sheafification comparisons are not etale sum extension for varying structure rings"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-relative-mv-exchange-triangles",
+  "date": "2026-10-23",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH induction step: canonical commutative relative Mayer–Vietoris triangle diagram, before applying third-isomorphism-triangle. Supporting input: Base-changed elementary-square left resolution used to identify the fixed canonical arrows in the Tag 0DKH triangle diagram.",
+   "via": [
+    "lem-sfb-space-relative-mv-exchange-triangles",
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-etale-sum-pullback",
+  "worker": "stage1",
+  "summary": "Q70 constructs the specified sheaf comparison by the slice unit and evaluation counit, proves it invertible by normalized structure-module stalk sums and tensor distribution, proves preservation of flat/K-flat models from the ringed-site projection formula, and descends that same comparison with its counit, composition, finite-sum and shift normalizations. One new statement-only stalk-formula input; no Lean written or compiled.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images proof (3) support: the Tag 0DKH elementary-square left-resolution base-change comparison used in relative Mayer–Vietoris. Current latest unit sk-thm-sf-ctf-stability was read; no alteration, coefficient or purity route is changed. The ancestry command returns None, retained as inherited.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-trf-space-enlarged-ringed-composition-localization",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site localization, tensor or stalk tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic categorical localization/derivation tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   },
+   {
+    "node": "lem-sc-nattrans-from-resolving-class",
+    "why": "Generic categorical localization/derivation tool used with its stated hypotheses; this unit has no substitute for this general input. The algebraic-space etale sum and arbitrary structural-ring route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-enlarged-ringed-composition-localization",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sc-nattrans-from-resolving-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-d23974f81",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-d23974f81 (reviewer sub-agent of L); spot-checked: Read all of it: the item, the new node lem-sfb-space-sum-extension-geometric-stalk, the statement of every cited node, Stacks 0710 and its proof, 0E8I, and spaces-perfect 1568-1601 (08GU). The item's statement and stmt_deps match live exactly; live is unsplit, there is no competing split and no repair note. Steps: (1) the enlarged model makes j the localization; exact j_! is left adjoint to j^* with the sum formula; unit and counit are explicit. (2) beta = counit . chi . unit, oriented correctly. (3) Stalks: lifts of x1 correspond to lifts of x; the new node, the pullback-stalk node and the point-image node give the sum of (M_z tensor_R B) against (sum of M_z) tensor_R B. Tracing germs shows beta is tensor distribution, so it is an isomorphism with no flatness assumed (checked for k[eps] -> k). (4) The counit square and nested-slice compatibility hold by stalk detection. (5) The 0E8I projection node gives flat and K-flat preservation by j_!, with sums, signs and no boundedness. (6) Restriction K-flat node, plus the pullback node with no flatness condition on c. (7) Unbounded flat-term K-flat resolution, the derived pullback computation, termwise j_!, the resolving-class extension and localization descent; valid. (8) Finite sums, shifts and counits hold degreewise. proof_deps equals the union of uses. New node: correct (0710 specialized to geometric points; tested on empty, identity, infinitely many sheets and non-separated Z); statement only; B1-B9 OK; searches logged. The source error is real: 08GU writes O_X-module for an O_U-module. Not a duplicate: lem-amb-etale-sum-stalks is for schemes with constant coefficients, not algebraic spaces; the open-immersion, ringed-space and topos-complement nodes differ. It is strictly smaller than the item. Batch 5: the three trf space-model nodes, pullback-stalk (via def-trf-geometric-morphism), geometric-points-conservative (via def-trf-algebraic-space) and def-trf-algebraic-space in the new node all reach only algebraic-space, etale-site and topos infrastructure (units sk-i-curve-zero and sk-d-weil). None is a trace-formula or Poincare-duality statement or proof step, so they are accepted. The declared tool_uses are generic tools, accepted. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleSumPullback",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison_existsUnique",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.restriction_isRightAdjoint",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.extension",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.adjunction",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.summand",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.SumSheafification",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exact_sum_evaluation",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.baseChange_etale",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.RestrictionFormula",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.restrictionComparison_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.restrictionComparison",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchangeApp",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchange_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchange",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchange_isIso",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.comparison",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchange_summand",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchange_counit",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.extension_additive",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.extension_limits",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.extension_colimits",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExtension",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.small_exact",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExtension_additive",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExtension_limits",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExtension_colimits",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedExtension",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestriction_additive",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.preserves_flatKFlat",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExchangeApp",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExchange_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExchange",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallExchange_isIso",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.complexExchange",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.restriction_comp",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.restrictionComposition",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.composition",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.composition_counit",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.exchange_composition",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallAdjunction",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestriction_limits",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestriction_colimits",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.DerivedComputation",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.tensorComplexShift",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.extensionShift",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.PullbackShiftFormula",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.pullbackShift_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.pullbackShift",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.complexExchange_shift",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison_shift",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.comparison_finiteSums",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison_finiteSums",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedCounit_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedCounit",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestrictionComparisonApp",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestrictionComparison_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallRestrictionComparison",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedRestrictionComparison_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedRestrictionComparison",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison_counit",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallCompositionApp",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallComposition_naturality",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.smallComposition",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComposition_existsUnique",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComposition",
+   "AlgebraicGeometry.AlgebraicSpace.EtaleSum.derivedComparison_composition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleSumPullback.lean",
+  "statement": "theorem derivedComparison_existsUnique (j : Z ⟶ X) (h : X₁ ⟶ X) (j₁ : Z₁ ⟶ X₁) (hZ : Z₁ ⟶ Z) (hj : IsEtale j.hom.hom) (sq : IsPullback hZ j₁ j h) : ∃! δ : derivedTensorPullback hZ ⋙ derivedExtension j₁ (baseChange_etale j h j₁ hZ hj sq) ≅ derivedExtension j hj ⋙ derivedTensorPullback h, DerivedComputation j h j₁ hZ hj sq δ",
+  "branch": "sheaf-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly state the ordinary canonical mate, its local summand tensor normalization (hence geometric-fibre normalization), evaluation and nested-slice coherence, exactness and flat-term K-flat preservation, and the uniquely representative-normalized derived comparison with evaluation, composition, finite-sum and canonical-shift compatibility. Construction helpers belong to this node and use actual functor data or uniquely specified adjoint/localization universal properties. The existing small affine ringed model preserves the structure-ring and module universes. Only lean and added landed statement dependencies change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-96b9927b5",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Read full module (69 decls, 37 sorried theorems, real defs) against every node clause. IsEtale = recorded representable-étale; h arbitrary; IsPullback hZ j₁ j h correct orientation; extension = leftAdjoint of literal pullback, summand = unit, SumSheafification = 03DI universal property, counit evaluation stated; restrictionComparison uniquely pinned by chart-tensor RestrictionFormula (non-vacuous); exchange = explicit unit-comparison-counit mate, comparison = inverse in node orientation; exchange_summand fixes the stalk formula; exchange_counit, composition_counit, exchange_composition (paste_vert ok); preserves_flatKFlat both directions; derivedComparison ∃! pinned by DerivedComputation on every FlatKFlat P via canonical counits/factors; finite sums incl. empty; CommShift with unique counit-normalized pullbackShift. No flatness/bounds/qc/finite-fibre binders. Node diff vs live: only lean + 4 landed def stmt_deps (on base). lean.statement verbatim; declarations list = file. Notes: common localization universe w for all four derived categories (acceptable); live etaleModuleShriek (theorem-node owner, landed after base) is definitionally the same Functor.leftAdjoint, no name clash. Not recompiled (no changes); report records clean scompile and OK dry run."
+ }
+}

@@ -28,6 +28,7 @@ import all Sheaf.Paper.CompletionFiniteReduction
 import all Sheaf.Paper.CompletedConstantCoefficientEquivalence
 import all Sheaf.Paper.CompletedKoszulConstantTransport
 import all Sheaf.Paper.ConstantCompletionEquivalence
+import all Sheaf.Paper.ConstantCompletionCore
 import all Sheaf.Paper.FlatRingedIdealCompleteEquivalence
 import all Sheaf.Paper.FiniteReductionPullbackSquare
 import all Sheaf.CategoryTheory.ExchangeMateCube

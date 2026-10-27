@@ -1,0 +1,120 @@
+{
+ "id": "lem-pur-completed-unit-scalar-naturality",
+ "kind": "statement",
+ "title": "Coefficient transport of the completed geometric regular-unit map",
+ "statement": "For a purity setting P as in [def-pur-conventions], a scheme morphism f:X to Y over its base field, and Core data over P.extension and its canonical small coefficient model as in [def-pur-completed-unit-pullback-data], scalar extension of the rationalized Core.unit map followed by the normalized scalar-unit identification equals the rational pullback/scalar comparison followed by pullback of the normalized scalar-unit identification and the model Core.unit map. Rationalization and comparison arrows are precisely those in [def-weil-derived-pullback-tensor-hom] and [lem-weil-constant-coefficient-objects-constructible].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 3.5 and 6.5, Lemmas 6.5.9 and 6.8.2; regular-module calculation in lem-pur-completed-unit-pullback-tower"
+ },
+ "stmt_deps": [
+  "def-pur-completed-unit-pullback-data",
+  "def-pur-conventions",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Use regular flat-term K-flat complexes. At each finite quotient the scalar/pullback comparison is the balanced tensor associator, so both routes multiply the structural images of the same three generators. This equality respects all quotient transitions and is a strict system equality. The scalar-unit inverse has actual quotient projections and zero shifted Roos coordinate. Normalized Roos realization preserves the strict equation. Core.unit_formula and the adjunction triangles identify the realized arrows with the supplied Core units. Raw rationalization maps each integral arrow v to v tensor 1. Substitute the specified object-equality transports and the normalized rational scalar and pullback/scalar comparison formulas to obtain the displayed square, including ramified extensions and identity maps.",
+   "uses": [
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-weil-constant-coefficient-objects-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Explicit normalized regular-module argument, refined from the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient system of scalar extension of a regular ring module is isomorphic to the regular quotient ring system",
+   "results": "8 hits concerning ordinary quotient modules and regular sequences",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unit",
+   "results": "12 hits including unit, unitHomEquiv, unit_val and freeCofan; useful ordinary interface only",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*unit|unit.*reduction|system.*regular",
+   "results": "6 unrelated hits; direct project search finds the supplied calculus and strict regular tensor calculations",
+   "date": "2026-10-24",
+   "verdict": "no match: the required normalized completed-system compatibility is not supplied by this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of the regular coefficient unit commutes with scalar extension and the canonical multiplication isomorphisms",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; ordinary scalar adjunction unit; unrelated vector-field pullback results",
+   "date": "2026-10-25",
+   "verdict": "no exact match: ordinary units and limits do not supply normalized derived whole-system comparison or completed scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "unitToPushforwardObjUnit|pullbackObjUnitToUnit in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "results": "Read lines 60-111: explicit ring-section map, its adjoint, and invertibility under finality. Used for the ordinary multiplication; no completed quotient-system or scalar-natural comparison.",
+   "date": "2026-10-25",
+   "verdict": "useful ordinary ingredient only; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedUnitPullbackTower",
+  "date": "2026-10-24",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-completed-unit-pullback-tower",
+   "place": "Regular coefficient calculation and coefficient transport in proof steps 1–6"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedUnitScalarNaturality",
+  "file": "lean/Sheaf/Paper/CompletedUnitScalarNaturality.lean",
+  "declaration": "WeilConjectures.CompletedUnitPullback.completedUnitScalarNaturality",
+  "statement": "theorem completedUnitScalarNaturality (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]\n    (core : Core P.coefficients.l P.extension f)\n    (model : Core P.coefficients.l (coefficientModel P) f) :\n    (modelScalar P X).map (rationalMap P.coefficients.l P.extension f\n        core.admissibleX.1.1 core.admissibleY.1.1 core.unit.hom) ≫\n        (modelUnit P X core.admissibleX.1.1 model.admissibleX.1.1).hom =\n      (rationalPullbackScalarComparison P.coefficients.l P.extension (coefficientModel P)\n        (modelEmbedding P) f).hom.app\n          (rationalObject P.coefficients.l P.extension Y core.admissibleY.1.1) ≫\n        (rationalDerivedPullback P.coefficients.l (coefficientModel P) f).map\n          (modelUnit P Y core.admissibleY.1.1 model.admissibleY.1.1).hom ≫\n        rationalMap P.coefficients.l (coefficientModel P) f\n          model.admissibleX.1.1 model.admissibleY.1.1 model.unit.hom",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item modules vs clone item (moved block identical, target signature identical); 5 new nodes' lean.statement vs files; sorry lemmas vs CoefficientReductionModels/PullModel pinning; importer AdicUnitTraceReductionData compiled against delivered set"
+ }
+}

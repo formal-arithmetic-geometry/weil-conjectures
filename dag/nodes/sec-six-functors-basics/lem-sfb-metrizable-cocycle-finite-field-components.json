@@ -1,0 +1,411 @@
+{
+ "id": "lem-sfb-metrizable-cocycle-finite-field-components",
+ "kind": "statement",
+ "title": "Metrizable descent and finite-field components of continuous scalar cocycles",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended nonarchimedean norm topology [def-weil-algebraic-closure], [def-weil-l-adic-numbers], and a finite intermediate field $E$ [def-weil-l-adic-coefficient-extension]. Let $S$ be a profinite space (compact Hausdorff with a clopen basis), $K$ a profinite group (compact Hausdorff with an open normal subgroup basis), and $n\\geq1$. All spaces use [def-weil-size-convention]. Write $C^r(P,G;V)=C(P\\times G^r,V)$ for all continuous maps, with trivial group action, $d^0=0$, and for $r\\geq1$\n$$(dc)(s;g_1,\\ldots,g_{r+1})=c(s;g_2,\\ldots,g_{r+1})+\\sum_{a=1}^r(-1)^a c(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{r+1})+(-1)^{r+1}c(s;g_1,\\ldots,g_r).$$\nFor every cocycle $z\\in C^n(S,K;\\Omega)$ there are a metrizable profinite space $S_0$, a metrizable profinite group $G$, continuous surjections $p:S\\to S_0$ and $q:K\\to G$ with $q$ a homomorphism, and a cocycle $z_0\\in C^n(S_0,G;\\Omega)$ with $z=z_0\\circ(p\\times q^n)$. Every finite continuous quotient of $G$ is a finite continuous quotient of $K$.\nThere are increasing closed intermediate fields $E\\subseteq F_i\\subseteq\\Omega$ finite over $\\mathbf Q_\\ell$, with $\\bigcup_{i\\geq0}F_i=\\Omega$, and $F_i$-linear continuous maps $p_i:\\Omega\\to F_i$ fixing $F_i$ and satisfying $|p_i(x)|\\leq |x|$. Set $p_{-1}=0$. The maps\n$$e_i=(p_i-p_{i-1})\\circ z_0\\quad(i\\geq0)$$\nare continuous $F_i$-valued cocycles; at every fixed $(s,y)\\in S_0\\times G^n$ they are zero for all sufficiently large $i$. Moreover $p_i\\circ z_0\\to z_0$ uniformly, $\\|e_i\\|_\\infty\\to0$, and $\\sum_{i=0}^N e_i=p_N\\circ z_0$. The $p_i$ are not required to commute. Empty $S$ is allowed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is motivation only; agent-formulated analytic lemma extracted from old proof steps 4–5: metrizable quotient descent and pointwise finite, uniformly small scalar components. WANTED: exact norm-topological reference."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-size-convention",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-profinite-metric-function-quotients] to $z$, $r=n\\geq1$, and the metric space $\\Omega$ with $d(x,y)=|x-y|$. Its profiniteness hypotheses are exactly ours, and it does not require completeness of the target. Obtain $S_0,G,p,q,z_0$ and $z=z_0\\circ(p\\times q^n)$, with all the asserted continuity, metrizability and surjectivity properties, including empty $S$.",
+   "uses": [
+    "lem-sfb-profinite-metric-function-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: metrizable factorization"
+   }
+  },
+  {
+   "text": "For $(s_0;g_1,\\ldots,g_{n+1})$, choose $s\\in S$ and $k_a\\in K$ lifting its coordinates. Since $q(k_ak_{a+1})=g_ag_{a+1}$, substitution in every displayed term of the differential gives $(dz_0)(s_0;g_1,\\ldots,g_{n+1})=(dz)(s;k_1,\\ldots,k_{n+1})=0$. This also proves the assertion when $n=1$; empty parameter spaces give no points to check. If $h:G\\twoheadrightarrow H$ is any finite continuous quotient homomorphism, $h\\circ q:K\\twoheadrightarrow H$ is continuous, a homomorphism and surjective. Thus every finite continuous quotient of $G$ is one of $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: cocycle descent and finite quotients"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algcl-countable-closed-finite-cover] with the given $\\ell,\\Omega,E$ to obtain increasing closed finite intermediate fields $F_i\\supseteq E$ exhausting $\\Omega$. For each $i$, apply [lem-sfb-norm-one-finite-subfield-projection] with $F=F_i$ and the same absolute value. Choose its continuous $F_i$-linear contraction $p_i:\\Omega\\to F_i$, fixing $F_i$, and put $p_{-1}=0$. Both input statements allow the incomplete field $\\Omega$; no completion or compatibility between the chosen maps is imposed.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-norm-one-finite-subfield-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: exhaustion and norm-one projections"
+   }
+  },
+  {
+   "text": "For $i\\geq1$, regard $p_{i-1}$ as a map to $F_i$ by the inclusion $F_{i-1}\\subseteq F_i$, which is isometric for the restricted absolute values. The differences $p_i-p_{i-1}:\\Omega\\to F_i$ are continuous and additive, as is $p_0$. Applying any such additive map to the finite alternating sum defining $d$ commutes with every summand and its sign. Consequently $d e_i=(p_i-p_{i-1})(dz_0)=0$, and $e_i$ is a continuous $F_i$-valued cocycle. For a fixed input $t$, exhaustion gives $z_0(t)\\in F_j$ for some $j$; for $i\\geq j+1$, both maps fix this value, so $e_i(t)=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: finite-field components and pointwise eventual vanishing"
+   }
+  },
+  {
+   "text": "The domain D = S₀ × Gⁿ is compact by Pi.compactSpace and compactness of products [lem-weil-pbc-tychonoff-product-quasi-compact]. For ε > 0, the open sets Uₐ = {t : ‖z₀(t) − z₀(a)‖ < ε/3} cover D. IsCompact.elim_finite_subcover chooses finitely many centres, including when D is empty. Exhaustion, monotonicity and the fixing property imply that each scalar is eventually fixed by Pᵢ, the composite Ω → Fᵢ → Ω. Thus eventually all those finitely many centre values are fixed simultaneously. For t in Uₐ, Pᵢ(z₀(t)) − z₀(t) = Pᵢ(z₀(t) − z₀(a)) − (z₀(t) − z₀(a)). The ordinary triangle inequality and contractivity bound its norm by 2‖z₀(t) − z₀(a)‖ < 2ε/3 < ε. Metric.tendstoUniformly_iff gives uniform convergence. No nonemptiness or completeness is used.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: compact finite-cover uniform estimate"
+   }
+  },
+  {
+   "text": "Define cᵢ : C(D, Ω) by cᵢ(t) = Pᵢ(z₀(t)). By ContinuousMap.tendsto_iff_tendstoUniformly, uniform convergence gives cᵢ → z₀ in the compact-open (sup-norm) topology. Since i − 1 → ∞, cᵢ − cᵢ₋₁ → 0, and continuity of the norm gives ‖cᵢ − cᵢ₋₁‖ → 0. For i ≠ 0, ContinuousMap.norm_eq_iSup_norm and the restricted norm on Fᵢ identify this norm with ‖eᵢ‖, proving the required norm limit. For each fixed t, both Pᵢ and Pᵢ₋₁ eventually fix z₀(t), so eᵢ(t) = 0 eventually. Induction on N, Finset.sum_range_succ and cancellation give ∑ᵢ₌₀ᴺ eᵢ(t) = P_N(z₀(t)). Only contractivity and the individual fixing properties are used, with no commutativity hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent analytic expansion: telescoping and vanishing component norms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algcl-countable-closed-finite-cover",
+  "lem-sfb-norm-one-finite-subfield-projection",
+  "lem-sfb-profinite-metric-function-quotients",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) is motivation only. P4 implements the stated factorization, field-exhaustion and projection route. The finite-cover estimate uses radius ε/3 and the ordinary triangle inequality. Sup-norm convergence is obtained from the compact-open topology on continuous maps and convergence of consecutive differences."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Continuous algebraic p adic group cocycle descends to metrizable profinite quotients and decomposes into pointwise finite finite subfield cocycles converging uniformly",
+   "results": {
+    "t": "2026-10-22T06:03:53Z",
+    "tool": "leanfinder",
+    "query": "Continuous algebraic p adic group cocycle descends to metrizable profinite quotients and decomposes into pointwise finite finite subfield cocycles converging uniformly",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "cyclotomicCharacter.continuous",
+     "PadicInt.continuousAddCharEquiv",
+     "PadicInt.continuousAddCharEquiv_of_norm_mul",
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "PadicInt.limNthHom_spec",
+     "PadicInt.continuous_addChar_of_value_at_one",
+     "PadicInt.limNthHom",
+     "ProfiniteGrp.toLimit_fun"
+    ],
+    "digest": "6abc6573d12369a8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Padic characters, Hilbert 90, continuous-map norms and Banach projections do not give the metrizable cocycle descent and pointwise finite scalar decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"IntermediateField\"",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"IntermediateField\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Padic characters, Hilbert 90, continuous-map norms and Banach projections do not give the metrizable cocycle descent and pointwise finite scalar decomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "(projection|intermediateField).*(cocycle|uniform)|(cocycle|uniform).*(projection|intermediateField)",
+   "results": {
+    "t": "2026-10-22T06:03:42Z",
+    "tool": "grep",
+    "query": "(projection|intermediateField).*(cocycle|uniform)|(cocycle|uniform).*(projection|intermediateField)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/UniformSpace/CompactConvergence.lean",
+     "Mathlib/Topology/UniformSpace/Equiv.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Bases.lean",
+     "Mathlib/Analysis/Normed/Module/Multilinear/Basic.lean"
+    ],
+    "digest": "5ab5b1870bf47b2b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Padic characters, Hilbert 90, continuous-map norms and Banach projections do not give the metrizable cocycle descent and pointwise finite scalar decomposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Norm one projections onto increasing finite subfields give uniformly small pointwise eventually zero components of a compact continuous function",
+   "results": {
+    "t": "2026-10-22T06:03:43Z",
+    "tool": "leansearch",
+    "query": "Norm one projections onto increasing finite subfields give uniformly small pointwise eventually zero components of a compact continuous function",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMapZero.instNormedSpaceOfNormedAlgebra",
+     "ZeroAtInftyContinuousMap.zeroAtInftyContinuousMapClass.ofCompact",
+     "ZeroAtInftyContinuousMap.instNormedSpace",
+     "Submodule.orthogonalProjection_norm_le",
+     "ContinuousMapZero.instNonUnitalNormedCommRing",
+     "ContinuousMap.instNorm",
+     "Submodule.linearProjOfClosedCompl",
+     "ContinuousLinearMap.norm_snd_le"
+    ],
+    "digest": "5dff924ed686813d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Padic characters, Hilbert 90, continuous-map norms and Banach projections do not give the metrizable cocycle descent and pointwise finite scalar decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact image in union of increasing subfields approximated uniformly by contractive retractions with telescoping differences",
+   "results": {
+    "t": "2026-10-22T06:03:54Z",
+    "tool": "leanfinder",
+    "query": "Compact image in union of increasing subfields approximated uniformly by contractive retractions with telescoping differences",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "NumberField.mixedEmbedding.fundamentalCone.compactSet_eq_union_aux₁",
+     "NumberField.mixedEmbedding.fundamentalCone.compactSet_eq_union_aux₂",
+     "NumberField.mixedEmbedding.fundamentalCone.compactSet_eq_union",
+     "CantorScheme.VanishingDiam.dist_lt",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "CantorScheme.ClosureAntitone.map_of_vanishingDiam",
+     "ContinuousMap.exists_finite_sum_const_indicator_approximation_of_mem_nhds_diagonal"
+    ],
+    "digest": "5a03702e0fa1659b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Padic characters, Hilbert 90, continuous-map norms and Banach projections do not give the metrizable cocycle descent and pointwise finite scalar decomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "(cocycle|cochain).*(metrizable|projection)|(metrizable|projection).*(cocycle|cochain)",
+   "results": {
+    "t": "2026-10-23T04:20:01Z",
+    "tool": "grep",
+    "query": "(cocycle|cochain).*(metrizable|projection)|(metrizable|projection).*(cocycle|cochain)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+     "Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean"
+    ],
+    "digest": "fe19cd4a86a5a8cc"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Padic characters, finite locally constant approximations, compact-convergence topology or general operator topology, not all clauses of the cocycle factorization and finite-field decomposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contractive retractions onto an increasing exhaustive sequence of finite p adic subfields approximate continuous maps from compact spaces uniformly",
+   "results": {
+    "t": "2026-10-23T04:20:01Z",
+    "tool": "leansearch",
+    "query": "Contractive retractions onto an increasing exhaustive sequence of finite p adic subfields approximate continuous maps from compact spaces uniformly",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.tendsto_iff_forall_isCompact_tendstoUniformlyOn",
+     "ContractingWith.toLipschitzWith",
+     "CompactExhaustion.hasBasis_compactConvergenceUniformity",
+     "ContractingWith.tendsto_iterate_efixedPoint'",
+     "UniformFun.isometry_ofFun_continuousMap",
+     "ContractingWith.efixedPoint'",
+     "PadicInt.mahlerEquiv",
+     "TopologicalSpace.Compacts.uniformContinuous_coe"
+    ],
+    "digest": "9e1b6b5d07da4170"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Padic characters, finite locally constant approximations, compact-convergence topology or general operator topology, not all clauses of the cocycle factorization and finite-field decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"IntermediateField\"",
+   "results": {
+    "t": "2026-10-23T04:20:02Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"IntermediateField\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Padic characters, finite locally constant approximations, compact-convergence topology or general operator topology, not all clauses of the cocycle factorization and finite-field decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous cocycle on profinite products descends to metrizable space and group quotients and has pointwise finite uniformly vanishing components in finite extensions of the p adic field",
+   "results": {
+    "t": "2026-10-23T04:20:03Z",
+    "tool": "leanfinder",
+    "query": "Continuous cocycle on profinite products descends to metrizable space and group quotients and has pointwise finite uniformly vanishing components in finite extensions of the p adic field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "mahler",
+     "PadicInt.continuous_addChar_of_value_at_one",
+     "ContinuousMap.exists_finite_sum_smul_approximation_of_mem_uniformity",
+     "ContinuousMap.exists_finite_sum_mul_approximation_of_mem_uniformity",
+     "PadicInt.continuousAddCharEquiv",
+     "PadicInt.continuousAddCharEquiv_of_norm_mul",
+     "cyclotomicCharacter.continuous",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective"
+    ],
+    "digest": "09b088ff9a633054"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Padic characters, finite locally constant approximations, compact-convergence topology or general operator topology, not all clauses of the cocycle factorization and finite-field decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform convergence of equicontinuous linear contractions fixing increasing subspaces whose union is the entire normed vector space",
+   "results": {
+    "t": "2026-10-23T04:20:04Z",
+    "tool": "leanfinder",
+    "query": "Uniform convergence of equicontinuous linear contractions fixing increasing subspaces whose union is the entire normed vector space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "UniformConvergenceCLM.completeSpace",
+     "UniformConvergenceCLM.tendsto_iff_tendstoUniformlyOn",
+     "UniformConvergenceCLM.isVonNBounded_iff",
+     "WithSeminorms.uniformEquicontinuous_iff_bddAbove_and_continuous_iSup",
+     "continuousLinearMapOfTendsto",
+     "WithSeminorms.banach_steinhaus",
+     "PolynormableSpace.banach_steinhaus",
+     "isCompactOperator_of_tendsto"
+    ],
+    "digest": "47e8494abbe1582c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern Padic characters, finite locally constant approximations, compact-convergence topology or general operator topology, not all clauses of the cocycle factorization and finite-field decomposition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+  "date": "2026-10-22",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open-direct-image scalar input; agent analytic expansion, old proof steps 4–5: metrizable quotient descent and pointwise finite, uniformly small scalar components",
+   "via": [
+    "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-metrizable-cocycle-finite-field-components",
+  "worker": "stage1",
+  "group": "Q132",
+  "summary": "Statement unchanged. Six-step assembly uses the existing metrizable factorization, closed finite-field exhaustion and norm-one projection nodes, with an explicit finite-cover estimate for uniform convergence and termwise differential calculations. Empty parameter spaces, n=1, finite quotient inheritance and lack of commuting projections are checked. No new nodes.",
+  "blueprint": "The inherited blueprint.from.node is null (confirmed by blueprint_refs ancestor). The cited main-20261015 direct-images proof paragraph (3) motivates this analytic auxiliary only; steps realize the inherited old-proof steps 4–5, metrizable quotient descent and pointwise finite uniformly small scalar components. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "why": "Generic compact-product theorem applied only to the finite product S_0 times G^n; it does not replace any step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-047282152",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-047282152 (reviewer sub-agent of L); spot-checked: Six steps, no new nodes. Statement, stmt_deps, source, created and blueprint are identical to the live unsplit node (field diff); there is no repair note for this item. Step 1: the metric-function-quotients statement gives exactly S_0, G, p, q (homomorphism) and continuous z_0, with an arbitrary metric target and empty S allowed. Step 2: lifting through the surjections gives dz_0=0; h∘q settles the finite-quotient clause. Step 3: the countable closed finite cover and the norm-one projection for each F_i match the item's clauses verbatim; no commutation of the p_i is used. Step 4: p_i-p_{i-1}:Ω→F_i is additive and continuous, so d e_i=0; for i≥j+1 both maps fix z_0(t)∈F_j. Step 5: Tychonoff plus a finite ε/2 cover, centres in F_J, and |p_i(w)-w|≤|w|<ε/2 by the ultrametric inequality; I checked this. Step 6: telescoping and the max-of-two-errors bound. Edge cases tested: empty S, n=1, trivial K, E=Q_ℓ, compact image not in one field. Duplicate search: lem-sfb-accelerated-finite-field-cochain-differences (Q49) is a different statement (completion B, primitives, no metrizable descent). Sources: blueprint direct-images ¶(3) is motivation only, as the item says; L19 Prop 1.1.9, first bullet, supports the countable exhaustion. tool_uses: Tychonoff, accepted. Batch-5 flag: algcl-countable-closed-finite-cover → padic-rational-algebraic-generator → padic-minpoly-normed-separation → lem-trf-spectral-norm-algebraic-extension. That endpoint is a Mathlib leaf (SpectralNorm.lean), general valued-field algebra that is neither part of the trace formula nor of Poincaré duality, so accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.MetrizableCocycleFiniteFieldComponents",
+  "declaration": "Profinite.exists_metrizable_cocycle_finite_field_components",
+  "file": "lean/Sheaf/Topology/MetrizableCocycleFiniteFieldComponents.lean",
+  "statement": "theorem exists_metrizable_cocycle_finite_field_components (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] [IsUltrametricDist Ω] (E : IntermediateField (Padic l) Ω) [FiniteDimensional (Padic l) E] (S : Profinite.{v}) (K : ProfiniteGrp.{v}) (n : ℕ) (hn : 1 ≤ n) (z : C(S × (Fin n → K), Ω)) (hz : ∀ (s : S) (g : Fin (n + 1) → K), z (s, fun j ↦ g j.succ) + (∑ a : Fin n, (-1 : ℤ) ^ (a.val + 1) • z (s, Fin.contractNth a.castSucc (· * ·) g)) + (-1 : ℤ) ^ (n + 1) • z (s, fun j ↦ g j.castSucc) = 0) : ∃ (S₀ : Profinite.{v}) (G : ProfiniteGrp.{v}), TopologicalSpace.MetrizableSpace S₀ ∧ TopologicalSpace.MetrizableSpace G ∧ ∃ (p : C(S, S₀)) (q : K →ₜ* G) (z₀ : C(S₀ × (Fin n → G), Ω)), Function.Surjective p ∧ Function.Surjective q ∧ (∀ (s : S) (g : Fin n → K), z (s, g) = z₀ (p s, fun j ↦ q (g j))) ∧ (∀ (H : ProfiniteGrp.{v}) [Finite H] (h : G →ₜ* H), Function.Surjective h → Function.Surjective (h.comp q)) ∧ (∀ (s : S₀) (g : Fin (n + 1) → G), z₀ (s, fun j ↦ g j.succ) + (∑ a : Fin n, (-1 : ℤ) ^ (a.val + 1) • z₀ (s, Fin.contractNth a.castSucc (· * ·) g)) + (-1 : ℤ) ^ (n + 1) • z₀ (s, fun j ↦ g j.castSucc) = 0) ∧ ∃ (F : ℕ → IntermediateField (Padic l) Ω) (pᵢ : ∀ i : ℕ, Ω →L[F i] F i) (e : ∀ i : ℕ, C(S₀ × (Fin n → G), F i)), Monotone F ∧ (∀ i : ℕ, E ≤ F i ∧ FiniteDimensional (Padic l) (F i) ∧ IsClosed (F i : Set Ω)) ∧ (⋃ i : ℕ, (F i : Set Ω)) = Set.univ ∧ (∀ (i : ℕ) (a : F i), pᵢ i (a : Ω) = a) ∧ (∀ (i : ℕ) (x : Ω), ‖pᵢ i x‖ ≤ ‖x‖) ∧ (∀ (i : ℕ) (s : S₀) (g : Fin (n + 1) → G), e i (s, fun j ↦ g j.succ) + (∑ a : Fin n, (-1 : ℤ) ^ (a.val + 1) • e i (s, Fin.contractNth a.castSucc (· * ·) g)) + (-1 : ℤ) ^ (n + 1) • e i (s, fun j ↦ g j.castSucc) = 0) ∧ (∀ (i : ℕ) (t : S₀ × (Fin n → G)), ((e i) t : Ω) = (pᵢ i (z₀ t) : Ω) - if i = 0 then 0 else (pᵢ (i - 1) (z₀ t) : Ω)) ∧ TendstoUniformly (fun i t ↦ ((pᵢ i (z₀ t) : F i) : Ω)) z₀ atTop ∧ Tendsto (fun i ↦ ‖e i‖) atTop (𝓝 0) ∧ (∀ (t : S₀ × (Fin n → G)), ∀ᶠ i : ℕ in atTop, e i t = 0) ∧ (∀ (N : ℕ) (t : S₀ × (Fin n → G)), ∑ k ∈ Finset.range (N + 1), ((e k t : F k) : Ω) = (pᵢ N (z₀ t) : Ω))",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57fdb0afb",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Hypotheses are the same instance hypotheses as the cover and projection deps (IsUltrametricDist is implied, not stronger); the differential matches the source (Fin.contractNth a.castSucc gives a=1..n with sign (-1)^a; first and last faces correct, sum parenthesized). Conclusion complete: metrizable S0/G, surjective p and q (q a homomorphism), z = z0∘(p×q^n), z0 cocycle, finite-quotient clause, monotone closed finite F_i ⊇ E exhausting Ω, fixing contractive p_i, e_i pinned pointwise with p_{-1}=0 and cocycles in F_i, pointwise eventual zero, TendstoUniformly, sup norms → 0, telescoping over range (N+1). Edge cases empty S, n=1, i=0, E=Q_ℓ covered; no commutativity assumed. Universes: spaces share v as in the factorization dep, Ω has independent u. lean.statement verbatim; node differs from live only in lean; first delivery, not a rebind. sorry only, docstrings with source and blueprint, both report sections present. Minor: docstring merges node steps 1-2 and cites Pi.compactSpace. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T082710-L-2211334",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

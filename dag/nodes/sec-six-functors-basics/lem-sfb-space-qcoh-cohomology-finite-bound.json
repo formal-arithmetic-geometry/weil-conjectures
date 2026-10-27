@@ -1,0 +1,376 @@
+{
+ "id": "lem-sfb-space-qcoh-cohomology-finite-bound",
+ "kind": "statement",
+ "title": "Finite uniform cohomology bound for quasi-coherent sheaves on a qcqs algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with its small etale structure sheaf $\\mathcal O_X$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated: every open cover of $|X|$ has a finite subcover and its absolute diagonal is quasi-compact. There exists an integer $C\\geq1$, depending only on $X$, such that for every quasi-coherent $\\mathcal O_X$-module $M$ [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module] and every integer $q\\geq C$, one has $H^q(X_{\\mathrm{et}},M_{ab})=0$. Here $M_{ab}$ is the underlying abelian sheaf, and $H^q(X_{\\mathrm{et}},-)$ is the right derived functor of abelian-sheaf global sections [def-sp-left-exact-additive], computed on injective resolutions [def-sp-injective-resolutions]; global sections are families of sections compatible with every restriction on the small etale site, whether or not that site has a final object. No dimension bound, Noetherian assumption or finite-generation condition on $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 072C, label lemma-vanishing-quasi-separated, existence of the finite atlas data and the final vanishing assertion; enlarge its bound max(d_p+p) to at least 1."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine surjective etale atlas $f:U\\to X$ by [lem-sfb-qc-space-affine-etale-atlas]. Apply [lem-sfb-space-qc-etale-fibre-bound] and enlarge its bound to an integer $d\\geq1$. Thus every geometric fibre of $f$ has at most $d$ points. These choices depend on $X$, not on a module.",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-qc-etale-fibre-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072C, first paragraph: affine atlas and universally bounded fibres."
+   }
+  },
+  {
+   "text": "For $p\\geq0$ form the ordered distinct-tuple scheme $W_p$ with $p+1$ factors. By [lem-sfb-etale-atlas-distinct-tuple-geometry] it is quasi-compact and separated. The same result for two factors identifies the diagonal of $f$ with the closed pairwise equality locus, so $f$ is separated. A geometric point of $W_p$ over $\\bar x$ is a tuple of $p+1$ distinct points of $U_{\\bar x}$; consequently $W_p=\\varnothing$ for $p\\geq d$. Indeed any point of a nonempty scheme has a geometric representative, which would contradict $p+1>d$.",
+   "uses": [
+    "lem-sfb-etale-atlas-distinct-tuple-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072C, first paragraph and the vanishing of configurations for p at least d; use p+1 in the existing tuple-geometry indexing."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-alternating-sign-cohomology-spectral] to $f$. It supplies $Q_p=W_p/\\mathfrak S_{p+1}$, the surjective etale quotient atlas, and $g_p:Q_p\\to X$. By [lem-sfb-free-finite-space-quotient-separated], applied over the base $S$ with $W=W_p$ (absolutely separated by step 2) and $G=\\mathfrak S_{p+1}$ acting over $X$, hence over $S$, $Q_p$ is separated in the absolute sense. Freeness on scheme tests holds: a $T$-point of $W_p$ fixed by $\\sigma\\neq1$ on a nonempty open and closed part of $T$ would have two equal coordinates there, so that part would map into an equality locus, which $W_p$ avoids. It is quasi-compact: the inverse images of an open cover under the continuous surjection $|W_p|\\to|Q_p|$ cover the quasi-compact $W_p$, hence a finite subfamily covers $Q_p$; continuity is the atlas-topology definition [def-a1-space-point-topology]. For each of the finitely many $0\\leq p<d$, choose an affine surjective etale $V_p\\to Q_p$ and a geometric fibre bound $d_p\\geq1$ by [lem-sfb-qc-space-affine-etale-atlas, lem-sfb-space-qc-etale-fibre-bound]. The second lemma applies since the diagonal is quasi-compact: on any scheme test its inverse image of an affine is a closed affine subscheme by [def-weil-closed-immersion]; a finite affine cover gives quasi-compact inverse images of quasi-compact opens. If $W_p$ is empty, its surjective quotient is empty too. All these choices are independent of the module.",
+   "uses": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral",
+    "lem-sfb-free-finite-space-quotient-separated",
+    "def-a1-space-point-topology",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-qc-etale-fibre-bound",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072C, first paragraph: separated unordered configurations and affine atlases; correct the printed V_p to W_p typo to V_p to U_p (our Q_p)."
+   }
+  },
+  {
+   "text": "Fix a quasi-coherent $M$. In the spectral sequence the coefficient on $Q_p$ is $N_p=g_p^*M\\otimes_{\\mathbf Z}L_p$, whose underlying abelian sheaf is $g_p^{-1}M_{ab}\\otimes_{\\mathbf Z}L_p$. This is quasi-coherent by the local presentation definition [def-trf-space-quasi-coherent-module]: etale restriction preserves its local presentation, and on the etale cover trivializing $L_p$ the tensor is simply the restricted module itself. The local trivialization comes from [lem-sfb-space-alternating-sign-cohomology-spectral]. This is the elementary argument of Tag 072A, not a further lemma. Apply [lem-sfb-separated-space-atlas-cohomology-bound] to the quasi-compact separated $Q_p$, its affine atlas $V_p$ and its bound $d_p$. For $p<d$ it gives $E_1^{p,q}=0$ whenever $q\\geq d_p$. For $p\\geq d$, $Q_p$ is empty and its sheaf cohomology is zero in every degree: the empty covering forces every abelian sheaf to be zero.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-alternating-sign-cohomology-spectral",
+    "lem-sfb-separated-space-atlas-cohomology-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tags 072C, last paragraph, 072A (local triviality argument), and 072B (separated-space vanishing)."
+   }
+  },
+  {
+   "text": "Set $C=\\max(1,\\max_{0\\leq p<d}(p+d_p))$, a finite integer independent of $M$. For $n\\geq C$ and $p+q=n$ in the first quadrant, either $p\\geq d$ or $q=n-p\\geq C-p\\geq d_p$. Thus every $E_1$ entry on total degree $n$ is zero. Zero entries remain zero on all later pages since the next entry is a subquotient of the previous one. The finite abutment filtration supplied by [lem-sfb-space-alternating-sign-cohomology-spectral] therefore has zero successive quotients. Starting with $F^{n+1}=0$ and proceeding down to $F^0$ gives $H^n(X_{\\mathrm{et}},M_{ab})=0$. Since $C\\geq1$, this covers every integer degree in the statement.",
+   "uses": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072C, final sentence: the finite diagonal and finite-filtration argument, with the bound enlarged to at least 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "lem-sfb-etale-atlas-distinct-tuple-geometry",
+  "lem-sfb-space-alternating-sign-cohomology-spectral",
+  "lem-sfb-free-finite-space-quotient-separated",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-separated-space-atlas-cohomology-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 072C, lemma-vanishing-quasi-separated, proof using Tags 0728, 072A, 072B and 02Z4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space has a uniform finite bound on cohomology of all quasi coherent modules",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.quasiCompact_of_compactSpace",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|quasi.?coherent.*(vanish|bound)|cohomolog.*dimension",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"QuasiCompact\"",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on a quasi compact quasi separated algebraic space have uniformly bounded higher cohomology",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.isQuasicoherent",
+     "SheafOfModules.IsQuasicoherent.casesOn",
+     "SheafOfModules.QuasicoherentData.I",
+     "SheafOfModules.IsQuasicoherent",
+     "SheafOfModules.QuasicoherentData.mk",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.QuasicoherentData.ctorIdx"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher etale cohomology of quasi coherent structure modules on one quasi compact quasi separated algebraic space vanishes above one integer independent of the module",
+   "results": {
+    "hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.Modules.instAbelian",
+     "Algebra.etaleLocus_eq_compl_support",
+     "DerivedCategory.isZero_of_isGE"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern section restriction, quasi-coherence data, individual truncations or the universal property of derivation; none states the algebraic-space cohomology bound or the unbounded global-sections assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space admits one finite uniform bound for all quasi coherent sheaf etale cohomology",
+   "results": {
+    "t": "2026-10-23T21:11:56Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact quasi separated algebraic space admits one finite uniform bound for all quasi coherent sheaf etale cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine"
+    ],
+    "digest": "87632d70e3a7975b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher etale cohomology of every quasi coherent module on one qcqs algebraic space vanishes above a fixed integer",
+   "results": {
+    "t": "2026-10-23T21:12:42Z",
+    "tool": "leanfinder",
+    "query": "Higher etale cohomology of every quasi coherent module on one qcqs algebraic space vanishes above a fixed integer",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "DerivedCategory.isZero_of_isGE",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "DerivedCategory.isLE_iff",
+     "Algebra.etaleLocus_eq_compl_support",
+     "DerivedCategory.isGE_iff"
+    ],
+    "digest": "b31e5b4166d36378"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T21:11:52Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|alternating.*spectral|quasi.?coherent.*vanish",
+   "results": {
+    "t": "2026-10-23T21:11:52Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|alternating.*spectral|quasi.?coherent.*vanish",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated algebraic space has uniformly finite cohomological dimension for quasi coherent modules",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "leansearch",
+    "query": "A quasi compact quasi separated algebraic space has uniformly finite cohomological dimension for quasi coherent modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.quasiCompact_over_affine_iff",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated",
+     "AlgebraicGeometry.quasiCompact_iff_compactSpace",
+     "AlgebraicGeometry.IsSeparated.instQuasiSeparated"
+    ],
+    "digest": "fafd82646ffc2931"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-global-sections-amplitude",
+  "date": "2026-10-24",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module.",
+   "via": [
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qcoh-cohomology-finite-bound",
+  "worker": "stage1",
+  "summary": "Follow Stacks 072C through a bounded affine atlas, distinct-tuple geometry, separated configuration quotients, sign-twisted quasi-coherent coefficients, and the finite-diagonal spectral-sequence argument. Reuse the three existing atlas/fibre/tuple results, create three statement-only non-elementary inputs. Statement unchanged; correct the source proof target typo V_p to W_p to V_p to U_p. No dimension or Noetherian bound introduced.",
+  "blueprint": "Realizes the ordinary-sheaf input to Tag 09MB under det-thm-sf-ctf-stability-direct-images paragraph (3), following the inherited place and via chain. Read the current unit in literature/blueprint/latest; no unit route change. blueprint_refs.py ancestor returns None, matching the inherited null ancestor through the Lean-created node lem-sfb-admissible-direct-image."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NO-b02f7aaf6",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-b02f7aaf6 (reviewer sub-agent of L); spot-checked: Read in full: the item, the three new statement-only nodes, all cited statements, and Stacks 0727, 0728, 072A, 072B, 072C, 02Z2 and 02Z4(2) with their proofs. Item statement and stmt_deps are identical to live, where the item is still unsplit. No repair note, no cycle (the item does not cite the affine-chart or global-sections-amplitude nodes that depend on it), every cited statement is in the unit or is a definition, no SGA. Steps check: (1) the affine atlas and the qs fibre bound apply, with d enlarged to at least 1. (2) The distinct-tuple node gives W_p quasi-compact and absolutely separated; the 2-factor equality locus makes f separated, and W_p is empty for p >= d via geometric points. (3) Q_p is quasi-compact (continuous surjection from |W_p|) and quasi-separated (closed immersion is affine), so the fibre-bound node applies to V_p -> Q_p. (4) The 072A twist is elementary from the local quasi-coherence definition plus L_p trivialized by pi_p; the 072B node applies, and Q_p empty for p >= d. (5) C = max(1, max(p+d_p)); boundary n = C checked; finite filtration gives H^n = 0. New nodes are true: 0728/0727 hypotheses match; the 072B geometric bound implies Stacks' |U|->|X| bound; 02Z4(2). Small cases tested: p=0, X empty, affine X, P^1, trivial G, W empty. No duplicates: rg over tags/labels; relative-cech 072E, 0A4R, 01XI, admissible-free-finite-quotient, per-admissible-quotient and free-flat-group-quotient are all different. Batch-5 flags all accepted: the trf citations are definitions or generic 02X2 fibre products; the item closure's 70 trf members are all algebraic-space and fppf-descent foundations; no assume leaf, Poincare or trace-transport node. FIX (E4): the new 02Z4 node formed its orbit sheaf on (Sch/Z)_fppf but step 3 applies it to Q_p over S. Restated over an arbitrary base S, with absolute separatedness written inline (the Z-sheaf coproduct over maps T->S), and step 3 now gives the application data and the freeness check on distinct tuples. Files: fixes/dag/nodes/sec-six-functors-basics/{lem-sfb-free-finite-space-quotient-separated,lem-sfb-space-qcoh-cohomology-finite-bound}.json.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQCohCohomologyFiniteBound",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_qcoh_cohomology_finite_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQCohCohomologyFiniteBound.lean",
+  "statement": "theorem exists_qcoh_cohomology_finite_bound {S : Scheme.{u}} (X : AlgebraicSpace S) [CompactSpace (Point X.obj.obj)] (hqs : X.IsAbsolutelyQuasiSeparated) : ∃ C : ℤ, 1 ≤ C ∧ ∀ (M : X.QCoh) (q : ℤ), C ≤ q → IsZero (((Sheaf.Γ X.smallEtaleModelTopology AddCommGrpCat.{u}).rightDerived q.toNat).obj ((SheafOfModules.toSheaf X.smallStructureRings).obj (X.smallModuleRestriction.obj M.obj)))",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16af37f77",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 072C: qc |X| as CompactSpace on Point, absolute qs via recorded IsAbsolutelyQuasiSeparated (0AHR(3)), nothing on S; ∃ C ≥ 1 before ∀ M : X.QCoh and ∀ q : ℤ ≥ C (toNat exact since C ≥ 1); Sheaf.Γ AddCommGrpCat.{u} rightDerived (injective resolutions in abelian sheaves) of toSheaf of the small-model restriction; IsZero. The small affine model (def-sfb-space-small-ringed-model, dense subsite 039Z) gives the same cohomology and is consistent with the landed citer globalSections_finiteAmplitude. All 9 stmt_dep records byte-identical to side-live; item diff is only lean plus two used landed def stmt_deps; lean.statement verbatim. No definitions, sorry-only theorem, docstrings with source, blueprint and 5 proof steps. No duplicate found. Edge cases checked: empty X, affine X, q=C, zero module, infinitely generated modules. No compile (no file changed). Advisory: unused ClosedImmersion import."
+ }
+}

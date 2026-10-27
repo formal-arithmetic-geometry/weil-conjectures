@@ -1,0 +1,45 @@
+{
+ "id": "sk-thm-tf-sp-zero-section",
+ "kind": "unit",
+ "chapter": "sec-trace-formula",
+ "title": "Verdier's zero-section specialization theorem",
+ "lean": [],
+ "uses": [
+  "sk-lem-tf-sp-dnc-functorial",
+  "sk-lem-tf-sp-constant-family",
+  "sk-thm-pe-constructible-comparison",
+  "sk-cor-pe-finite-tor-comparison",
+  "sk-lem-tf-sp-defect-exchanges",
+  "sk-lem-tf-sp-generic-divisor"
+ ],
+ "statement": "For a separated finite-type $k$-scheme $X$ and a closed subscheme $i\\colon Z\\hookrightarrow X$, let\n$\\mathcal D_ZX$ be the deformation to the normal cone of [sk-lem-tf-sp-dnc-functorial], with\nspecial fibre $N_ZX$ and zero section $e\\colon Z\\hookrightarrow N_ZX$, the special fibre of the\nclosed immersion $\\widetilde e\\colon Z\\times S\\hookrightarrow\\mathcal D_ZX$. The specialization\nfunctor is $\\operatorname{Sp}_{X,Z}(L)=R\\Psi_{\\mathcal D_ZX}(L_\\eta)$, with the nearby cycles of\n[sk-lem-tf-sp-constant-family], and pullback exchange along $\\widetilde e$ followed by the inverse\nof [sk-lem-tf-sp-constant-family] gives the natural map\n\n$$\n\\epsilon_{X,Z}(L):e^*\\operatorname{Sp}_{X,Z}(L)\n\\longrightarrow R\\Psi_{Z\\times S}((i^*L)_\\eta)\\xrightarrow{\\sim}i^*L.\n\\tag{1}\n$$\n\nOn $\\Dctf(X,A)$, the functor $\\operatorname{Sp}_{X,Z}$ and the map (1) are the transports of these\nétale constructions along the finite-coefficient constructible comparison\n([sk-thm-pe-constructible-comparison], [sk-cor-pe-finite-tor-comparison]).\n\nFor every separated finite-type $k$-scheme $X$, every closed subscheme $Z\\subset X$, and\n$K\\in\\Dctf(X,A)$, the map (1)\n\n$$\ne^*\\operatorname{Sp}_{X,Z}(K)\\xrightarrow{\\sim}i^*K\n$$\n\nis an isomorphism in $\\Dctf(Z,A)$. In particular, $i^*K=0$ implies\n$e^*\\operatorname{Sp}_{X,Z}(K)=0$.",
+ "steps": [
+  {
+   "text": "Let $C_{X,Z}(L)$ be the cofibre of $\\epsilon_{X,Z}(L)$, as in [sk-lem-tf-sp-defect-exchanges]. The\nmain step is the vanishing $C_{X,Z}(L)=0$ for every $L\\in D^b_c(X_{\\mathrm{\\acute et}},A)$; the last\nparagraph transports it to $\\Dctf$. The vanishing is proved for all bounded constructible complexes\nbecause the cokernels $j_!G'$ in the dimension shifting of [sk-lem-tf-sp-generic-divisor] may have\ninfinite Tor dimension."
+  },
+  {
+   "text": "By [sk-lem-tf-sp-defect-exchanges], replace $L$ by $j_!j^*L$, so that $i^*L=0$. Let\n$b:X'=\\operatorname{Bl}_ZX\\to X$. The unit $L\\to Rb_*b^*L$ is an isomorphism: it is so away from\n$Z$ because $b$ is an isomorphism there, and on $Z$ proper base change identifies its target with\nthe cohomology of a fibre with zero coefficients. Proper exchange then gives\n$C_{X,Z}(L)\\simeq C_{X,Z}(Rb_*b^*L)\\simeq Rb_{Z*}C_{X',b^{-1}Z}(b^*L)$, which reduces the\nassertion to the inverse-image pair $(X',b^{-1}Z)$. The pullback ideal is invertible on the\nblow-up (empty components cause no problem), so we have reduced to a Cartier divisor."
+  },
+  {
+   "text": "The assertion is local. Take $X$ affine with $Z=V(h)$ for a function $h$. Choose algebra\ngenerators for $\\mathcal O(X)$ and append $h$ as the last coordinate. This gives a closed immersion\n\n$$\na:X\\hookrightarrow\\mathbf A^n,\\qquad Z=a^{-1}(\\mathbf A^{n-1}\\times\\{0\\})\n$$\n\nschematically. Proper exchange and the faithfulness of the closed direct image reduce the\nassertion to $(\\mathbf A^n,\\mathbf A^{n-1}\\times\\{0\\})$."
+  },
+  {
+   "text": "Induct on $n\\geq1$. We may again assume $L|_Z=0$. [sk-lem-tf-sp-generic-divisor] shows that the\nclosure $Y$ of the support of $C_{X,Z}(L)$ is a proper closed subset of the hyperplane $Z$. For\n$n=1$ it is empty and the assertion follows. For $n>1$, choose a line $\\lambda$ in the vector space\n$Z$ such that the linear projection\n\n$$\nq:X\\longrightarrow X'=X/\\lambda\\simeq\\mathbf A^{n-1}\n$$\n\nis finite on $Y$. To see existence, choose the projective point $\\mathbf P(\\lambda)$ outside the\npart at infinity of the projective closure of $Y$ in $\\mathbf P(Z\\oplus k)$. The projection is then\nfinite on $Y$ by the usual proof of linear Noether normalization. Set $Z'=Z/\\lambda$, a coordinate\nhyperplane in $X'$, and compactify the $\\lambda$-direction:\n\n$$\n\\bar q:\\bar X=\\mathbf P^1\\times X'\\longrightarrow X',\\qquad\n\\bar Z=\\bar q^{-1}(Z'),\\qquad\nv:X\\hookrightarrow\\bar X,\\qquad \\bar L=v_!L.\n$$\n\nLet $\\bar q_Z\\colon\\bar Z\\to Z'$ be the restriction of $\\bar q$. Proper exchange and the induction\nhypothesis yield\n\n$$\nR\\bar q_{Z*}C_{\\bar X,\\bar Z}(\\bar L)\\simeq C_{X',Z'}(R\\bar q_*\\bar L)=0.\n$$\n\nBy locality, $C_{\\bar X,\\bar Z}(\\bar L)$ is supported on $Y\\cup(\\bar Z\\setminus Z)$. This is a\nclosed subset finite over $Z'$: $Y$ is finite and therefore remains closed in $\\bar Z$, and\n$\\bar Z\\setminus Z$ is the infinity section of $\\bar Z\\to Z'$. As in\n[sk-lem-tf-sp-constant-family], finite direct image is conservative on complexes with this support.\nThus $C_{\\bar X,\\bar Z}(\\bar L)=0$, and restriction gives $C_{X,Z}(L)=0$, which proves the\nvanishing on the étale site."
+  },
+  {
+   "text": "Finally, by the finite-coefficient comparison ([sk-thm-pe-constructible-comparison],\n[sk-cor-pe-finite-tor-comparison]) $K$ and its maps descend to the classical étale constructible\ncategory, where the vanishing of $C_{X,Z}$ has just been proved. The comparison is exact and fully\nfaithful, and it identifies pullback, proper direct image and their adjunction units. It therefore\ncarries the étale map (1) to the map in the statement, which is an isomorphism."
+  }
+ ],
+ "source": "literature/blueprint/main-20261023/blueprint/sec-trace-formula/sk-thm-tf-sp-zero-section/_section.md",
+ "realized": {
+  "statement": [],
+  "steps": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ]
+ },
+ "realized_by": null
+}

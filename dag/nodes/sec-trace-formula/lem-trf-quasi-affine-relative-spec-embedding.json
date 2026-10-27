@@ -17,72 +17,37 @@
  ],
  "proof": [
   {
-   "text": "Assume $f$ is quasi-affine. For every affine open $U\\subseteq S$, put $X_U=f^{-1}(U)$. By [lem-trf-quasi-affine-canonical-affine-embedding], $X_U$ is quasi-compact and quasi-separated. Thus $f$ is quasi-compact by [def-weil-finite-type-morphism]. It is also quasi-separated: [lem-weil-pbc-qcqs-morphism-permanence](1) makes $f_U:X_U\\to U$ quasi-separated since its source is quasi-separated. The open subschemes $V_U=X_U\\times_U X_U$ cover $X\\times_S X$: a pair over a point $s$ belongs to $V_U$ whenever $s\\in U$. The inverse image of $V_U$ under $\\Delta_f$ is $X_U$, and the restricted diagonal is $\\Delta_{f_U}$, because both components are the identity on $X_U$. These restricted diagonals are quasi-compact by [def-weil-quasi-separated-morphism]. Apply [lem-pc-quasi-compact-local-on-target] to the cover $(V_U)_U$ and $\\Delta_f$. It follows that $\\Delta_f$ is quasi-compact, which is precisely quasi-separatedness of $f$.",
+   "text": "Assume $f$ is quasi-affine. For each affine open $U\\subseteq S$, the scheme $X_U=f^{-1}(U)$ is quasi-affine by the meaning specified in the statement. By [lem-trf-quasi-affine-canonical-affine-embedding], every $X_U$ is quasi-compact and quasi-separated. Applying [lem-trf-qcqs-affine-preimage-criterion] gives that $f$ is quasi-compact and quasi-separated.",
    "uses": [
     "lem-trf-quasi-affine-canonical-affine-embedding",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-quasi-separated-morphism",
-    "lem-pc-quasi-compact-local-on-target"
+    "lem-trf-qcqs-affine-preimage-criterion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01SM, lemma-characterize-quasi-affine, (2) implies (4): quasi-compactness and quasi-separatedness; Schemes Tags 01K4 and 01KO"
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), initial qcqs verification"
    }
   },
   {
-   "text": "Set $\\mathcal A=f_*\\mathcal O_X$. The structure sheaf is quasi-coherent: on an affine chart $\\operatorname{Spec}R$ it is the associated sheaf $\\widetilde R$, as in [pqf-def-coherent]. Step 1 supplies both hypotheses of [pqf-lem-pushforward-qcoh], so the underlying module of $\\mathcal A$ is quasi-coherent. Its ring multiplication and its $\\mathcal O_S$-algebra structure are those of the direct-image structure sheaf. Apply [lem-weil-pbc-affine-morphism-relative-spec](2). Obtain the affine morphism $\\pi:Y=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$ and an algebra isomorphism $a:\\mathcal A\\xrightarrow{\\sim}\\pi_*\\mathcal O_Y$. For every affine open $U\\subseteq S$, put $Y_U=\\pi^{-1}(U)$; the chart $h_U:Y_U\\xrightarrow{\\sim}\\operatorname{Spec}\\mathcal A(U)$ has section map $a_U$.",
+   "text": "Apply [lem-trf-qcqs-relative-affinization-map] to $f$. It gives the quasi-coherent algebra $\\mathcal A=f_*\\mathcal O_X$, its relative spectrum $\\pi:Y\\to S$, and $c:X\\to Y$ with $\\pi\\circ c=f$. For every affine open $U$, it also gives the isomorphism $h_U:Y_U\\xrightarrow{\\sim}\\operatorname{Spec}\\Gamma(X_U,\\mathcal O_{X_U})$ and the equation $h_Uc_U=j_{X_U}$.",
    "uses": [
-    "pqf-def-coherent",
-    "pqf-lem-pushforward-qcoh",
-    "lem-weil-pbc-affine-morphism-relative-spec"
+    "lem-trf-qcqs-relative-affinization-map"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01SM, lemma-characterize-quasi-affine, (2) implies (4): construction of the algebra and relative spectrum; Schemes Tag 01LC and Constructions Tag 01LX"
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LY, lemma-canonical-morphism; old item steps 2 and 3"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-affine-algebra-local-maps] with $g=\\pi$ and the algebra map $a^{-1}:\\pi_*\\mathcal O_Y\\to f_*\\mathcal O_X$. This is allowed because $\\pi$ is affine; no affineness of $X$ or of an overlap is required. It gives maps $k_U:X_U\\to Y$ over $S$ agreeing on every overlap. By [lem-weil-pbc-scheme-morphism-gluing], they glue to $c:X\\to Y$. Their composites with $\\pi$ agree with $f$ on every $X_U$, so uniqueness in that same gluing theorem gives $\\pi c=f$. Each $k_U$ factors through the open $Y_U$, since its composite to $S$ has image in $U$; denote the resulting map by $c_U:X_U\\to Y_U$. This factorization simply restricts the continuous map and the sheaf map to the indicated open subscheme. The section formula in the local-maps node says that $c_U$ induces $a_U^{-1}:\\Gamma(Y_U,\\mathcal O_Y)\\to\\mathcal A(U)=\\Gamma(X_U,\\mathcal O_X)$. Hence $h_Uc_U:X_U\\to\\operatorname{Spec}\\Gamma(X_U,\\mathcal O_X)$ induces $a_U^{-1}a_U=\\mathrm{id}$. Injectivity of the correspondence [lem-weil-pbc-morphism-into-affine-scheme] identifies this composite with the canonical map defined by the identity on global sections. This is the affine-restriction description of the canonical map in Constructions Tag 01LY, now constructed from existing DAG statements.",
+   "text": "The morphism $\\pi$ is affine, the maps $h_U$ have the required canonical-map identities, and each $X_U$ is quasi-affine. Thus [lem-trf-canonical-affine-charts-qc-open-immersion] applies to $(f,\\pi,c)$ and makes $c$ a quasi-compact open immersion. Take $i=c$, with the algebra and relative spectrum just constructed. This proves the forward implication.",
    "uses": [
-    "lem-weil-pbc-affine-algebra-local-maps",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-morphism-into-affine-scheme"
+    "lem-trf-canonical-affine-charts-qc-open-immersion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01SM, lemma-characterize-quasi-affine, (2) implies (4): canonical morphism; Constructions Tag 01LY, lemma-canonical-morphism, with Tag 01LT"
-   }
-  },
-  {
-   "text": "Every $X_U$ is quasi-affine, so [lem-trf-quasi-affine-canonical-affine-embedding] makes its canonical map to $\\operatorname{Spec}\\Gamma(X_U,\\mathcal O_X)$ an open immersion. Step 3 identifies this with $h_Uc_U$; since $h_U$ is an isomorphism, $c_U$ is an open immersion. By [def-weil-open-immersion], composing with the inclusion of $Y_U$ into $Y$ is again an open immersion: the composite identifies $X_U$ with an open subset of the open subset $Y_U$ and its sheaf map is a composite of isomorphisms. Also $c$ is injective on points: if $c(x)=c(x')=y$, choose an affine open $U$ containing $\\pi(y)$. Then $x,x'\\in X_U$, and injectivity of $c_U$ gives $x=x'$. The opens $X_U$ cover $X$, and their maps into $Y$ are the just-checked open immersions. Therefore [lem-weil-pbc-open-immersion-injective-local-source] applies and makes $c$ an open immersion.",
-   "uses": [
-    "lem-trf-quasi-affine-canonical-affine-embedding",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-open-immersion-injective-local-source"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01SM, lemma-characterize-quasi-affine, (2) implies (4): canonical map is an open immersion, using Properties Tag 01P9"
-   }
-  },
-  {
-   "text": "The open immersion $c$ is quasi-compact as a morphism, even when $S$ itself is not quasi-compact. Indeed the affine opens $U\\subseteq S$ give an open cover $(Y_U)_U$ of $Y$, and $c^{-1}(Y_U)=X_U$ by $\\pi c=f$. The scheme $X_U$ is quasi-compact by step 1 and $Y_U$ is affine by [lem-weil-pbc-affine-morphism-relative-spec](2), hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-weil-pbc-qcqs-morphism-permanence](1) to obtain quasi-compactness of $c_U:X_U\\to Y_U$. Then [lem-pc-quasi-compact-local-on-target] makes $c$ quasi-compact. Taking $i=c$ proves the required factorization in the forward direction.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-relative-spec",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-pc-quasi-compact-local-on-target"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01SM, lemma-characterize-quasi-affine, end of (2) implies (4): quasi-compactness of the canonical open immersion"
+    "place": "Tag 01SM, lemma-characterize-quasi-affine, proof (2) implies (4), last two sentences; old item steps 4 and 5"
    }
   },
   {
@@ -102,19 +67,12 @@
  ],
  "proof_deps": [
   "lem-trf-quasi-affine-canonical-affine-embedding",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-quasi-separated-morphism",
-  "lem-pc-quasi-compact-local-on-target",
-  "pqf-def-coherent",
-  "pqf-lem-pushforward-qcoh",
+  "lem-trf-qcqs-affine-preimage-criterion",
+  "lem-trf-qcqs-relative-affinization-map",
+  "lem-trf-canonical-affine-charts-qc-open-immersion",
   "lem-weil-pbc-affine-morphism-relative-spec",
-  "lem-weil-pbc-affine-algebra-local-maps",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lem-weil-pbc-morphism-into-affine-scheme",
   "def-weil-open-immersion",
-  "lem-weil-pbc-open-immersion-injective-local-source",
-  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-weil-finite-type-morphism",
   "def-nagata-quasi-affine-morphism"
  ],
  "proof_origin": {
@@ -230,23 +188,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-quasi-affine-relative-spec-embedding",
   "worker": "stage1",
-  "summary": "Kept the arbitrary-base equivalence exactly as stated. Expanded Tag 01SM into qcqs verification, quasi-coherent pushforward and relative spectrum, construction and affine-chart identification of the canonical map, open immersion, separate relative quasi-compactness, and the converse. Every supporting fact is already a DAG node: the existing affine-algebra-local-maps statement allows an arbitrary source, so no new canonical-map node is needed. No finite-type or Noetherian hypothesis is added.",
-  "blueprint": "Support for the geometric quotient presentation in lem-trf-local-term-locality, through its Tag 0247 quasi-affine descent lemma: Tag 01SO, lemma-base-change-quasi-affine; the relative-spectrum characterization Tag 01SM used in the first and last sentences of the Tag 01SO proof; realizes the forward and reverse uses of this characterization in the split of lem-trf-quasi-affine-base-change.",
+  "summary": "Repair of the 5229-character proof with unchanged statement. Old step 1 is a Mathlib-leaf qcqs affine-preimage criterion; old steps 2-3 become the statement-only general qcqs relative-affinization lemma; old steps 4-5 become the statement-only canonical-chart qc open-immersion lemma. The elementary converse remains verbatim. The two unsplit tasks are independent and strictly smaller than the equivalence, with comparable proof sizes. Every original step is retained in the report with its new owner.",
+  "blueprint": "Support for the geometric quotient presentation in lem-trf-local-term-locality, through its Tag 0247 quasi-affine descent lemma: Tag 01SO, lemma-base-change-quasi-affine; the relative-spectrum characterization Tag 01SM used in the first and last sentences of the Tag 01SO proof; realizes the forward and reverse uses of this characterization in the split of lem-trf-quasi-affine-base-change.; re-split the supporting Tag 01SM proof into qcqs criterion, canonical relative affinization (01LY), and canonical-chart open immersion; no unit route change.",
   "tool_uses": [
    {
-    "node": "pqf-lem-pushforward-qcoh",
-    "why": "Generic qcqs direct-image theorem used only to form the quasi-coherent algebra in Tag 01SM; this unit has no replacement for that algebraic geometry tool."
-   },
-   {
     "node": "lem-weil-pbc-affine-morphism-relative-spec",
-    "why": "Generic relative-spectrum construction and affine-chart description used by Tag 01SM; not a substitute for any trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-affine-algebra-local-maps",
-    "why": "Generic compatible local scheme maps from an algebra-sheaf map, with arbitrary source; used to realize the canonical morphism invoked by Tag 01SM."
+    "why": "Generic relative-spectrum construction and affine-chart property in the elementary converse; no unit step is replaced."
    }
   ]
  },
@@ -256,12 +206,12 @@
   "lem-weil-pbc-affine-algebra-local-maps"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q73-fba8c02d7",
-  "group": "Q73",
+  "reviewer": "NT-cc-NU-32cd6a032",
+  "group": "NU",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-fba8c02d7 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, the statements of the 16 cited nodes, and Stacks morphisms.tex Tag 01SM (lemma-characterize-quasi-affine, whole proof), constructions.tex Tag 01LY (lemma-canonical-morphism, with proof) and properties.tex Tag 01P9 (lemma-quasi-affine). The item's statement is exactly 01SM (1)<=>(3) for any base S and is not weakened (01SM writes O_X-algebras for f_*O_X; the item's O_S is correct). Step 1: X_U is quasi-compact and separated by the canonical-embedding node, and qcqs permanence (1) makes f_U quasi-separated. The opens X_U x_U X_U cover X x_S X, so the diagonal is quasi-compact by quasi-compactness local on the target. The one uncited fact, that a fibre product of opens is open (01JR), is a few lines and accepted. Step 2: f_*O_X is quasi-coherent by the qcqs pushforward lemma, and relative-spec (2) gives charts h_U whose section maps are a_U. Step 3: local-maps (any source) with alpha=a^{-1}, then gluing; uniqueness gives pi c = f. Checked (h_U c_U)^# = a_U^{-1} a_U = id, so h_U c_U is the canonical map j of X_U. Step 4: c is an open immersion via the injective-local-source lemma; injectivity is checked inside one affine U. Step 5: c is quasi-compact because X_U is quasi-compact and Y_U affine, then local on target; no quasi-compactness of S used. Step 6: the converse is elementary from relative-spec (2) and the definitions. Edge cases checked: empty X or S, identity, punctured A^2, non-quasi-compact S. No new nodes and no duplicate (only the item and its citer lem-trf-quasi-affine-base-change carry 01SM). The three declared tool_uses (pqf-lem-pushforward-qcoh, lem-weil-pbc-affine-morphism-relative-spec, lem-weil-pbc-affine-algebra-local-maps) are accepted as generic tools. No SGA, no fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-32cd6a032 (reviewer sub-agent of L); spot-checked: Re-split note checked (released 2026-10-22: 5229 chars, at least 2 new nodes). Live and side-live still hold the reviewed 6-step proof; this is the only delivery of the item. Statement, stmt_deps and the lean/reviewed_lean records are byte-identical to live. The item proof is now 1842 chars. Every old step is carried. Old step 1 (qc+qs of f by the diagonal cover) becomes the Mathlib leaf lem-trf-qcqs-affine-preimage-criterion. Its leaf form is valid: quasiCompact_iff_forall_isAffineOpen at QuasiCompact.lean:97-98, and HasAffineProperty.eq_targetAffineLocally at Basic.lean:497 with the QuasiSeparated/QuasiSeparatedSpace instance at QuasiSeparated.lean:107-110 and the scheme conversion at :133-135. All lines were read. Old steps 2-3 (2051 chars) become the unsplit lem-trf-qcqs-relative-affinization-map, which is exactly Stacks 01LY (constructions.tex l.693-718, statement and proof read). Old steps 4-5 (1477 chars) become the unsplit lem-trf-canonical-affine-charts-qc-open-immersion, the end of 01SM (2)=>(4) (morphisms.tex l.2245-2262). That node is true: c_U = h_U^{-1} j is a qc open immersion, the Y_U = pi^{-1}U cover Y with c^{-1}Y_U = X_U, and both properties are local on the target. The quasi-affine hypothesis is necessary; pi affine is redundant but harmless. Old step 6 stays verbatim as the elementary converse (01SM (3)=>(1)). Neither new node restates the item or one of its clauses, and the two have comparable size. Each item step uses only the cited statements and all their hypotheses are supplied: canonical-embedding gives X_U qcqs, the affinization node gives pi affine, h_U and h_U c_U = j. Small cases tested: X empty, f affine, punctured A^2, and a non-qc S as an infinite disjoint union of affines. Duplicate search: rg -L for 01LY, 01SM, 01K4, 01KO, affinization, and qcoh f_*O_X with qs; the candidates (a1 target-locality, relative normalization, affine-structure fully-faithful and local-maps, qs affine-cover criterion, qc-local-on-target) are distinct. No orphaned nodes, no cycle, no SGA, unit route unchanged. FIX, B3: the affinization node lacked [pqf-def-affine-morphism] and [def-weil-affine-spectrum], and the chart node lacked [def-weil-affine-spectrum]; I added both inline and to stmt_deps. Accepted tool_use: lem-weil-pbc-affine-morphism-relative-spec, the generic relative Spec used in the converse. Maintainer note: the item's existing top-level tool_uses still list pqf-lem-pushforward-qcoh and lem-weil-pbc-affine-algebra-local-maps, which the item no longer cites.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.QuasiAffineRelativeSpecEmbedding",
@@ -281,5 +231,30 @@
   "result": "pass",
   "note": "Item states Stacks 01SM (1)<=>(3) for any S with no extra hypotheses. IsQuasiAffineHom matches the node's quasi-affine definition (Mathlib IsQuasiAffine = qc open subscheme of an affine scheme); A : S.CommAlgebraSheaf with A.toModule.IsQuasicoherent; relative spectrum given as affine pi with an O_S-algebra iso A ≅ Under.mk ⟨pi.c⟩, which is the upstream 𝒪⁎ notation, equivalent up to S-isomorphism by affine_morphism_relative_spec (3); i is an open immersion, QuasiCompact as a morphism, and i ≫ pi = f; one universe u, nothing unbound. Edge cases (empty X or S, identity, punctured A^2, non-qc S) covered. No definitions, sorry only, docstrings carry the source, blueprint id and all six proof steps; lean.statement verbatim; only the node's lean field changed; report has both sections (the second reading admits it is a self-check). nt_compile --json on the snapshot is clean in 2.1 s; #check binders as expected; axioms show only sorryAx beyond the standard ones. Informational: the CoherentFiniteType import is not needed but harmless (182 live modules import it)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261023T123347-L-1174344",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.isQuasiAffineHom_iff_exists_relativeSpec_embedding"
+  ],
+  "sorry_after": []
+ }
 }

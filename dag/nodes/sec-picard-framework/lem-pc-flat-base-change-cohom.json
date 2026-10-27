@@ -158,7 +158,42 @@
   "lem-pc-affine-morphism-hi"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.Modules.finrankH_pullback"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.finrankH_pullback",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+     "lines": [
+      228,
+      241
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.Modules.nonempty_H_baseChange_linearEquiv",
+     "module": "WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChange",
+     "lines": [
+      404,
+      428
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "split_report": {
@@ -264,5 +299,41 @@
    "AlgebraicGeometry.Scheme.Modules.nonempty_H_pullback_linearEquiv"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{g'} & X\\\\[-2pt]\n\\downarrow{\\scriptstyle f'} & & \\downarrow{\\scriptstyle f}\\\\[-2pt]\nS' & \\xrightarrow{g} & S\n\\end{array}\n$$\n\nbe a cartesian diagram of schemes with $S=\\operatorname{Spec}(A)$ and\n$S'=\\operatorname{Spec}(B)$ affine, let $\\mathcal{F}$ be a quasi-coherent\n$\\mathcal{O}_X$-module with $\\mathcal{F}'=(g')^*\\mathcal{F}$, and assume $g$ is flat and $f$\nis quasi-compact and quasi-separated. Regard $R\\Gamma(X,\\mathcal F)$ as an\nobject of $D(A)$ through $f$ and $R\\Gamma(X',\\mathcal F')$ as an object of\n$D(B)$ through $f'$. Then\n\n$$\nR\\Gamma(X,\\mathcal{F})\\otimes_AB\\;\\cong\\;R\\Gamma(X',\\mathcal{F}')\\qquad\\text{in }D(B),\n$$\n\nwhere, $B$ being flat over $A$, the derived tensor product $-\\otimes^{L}_AB$ is\nthe functor induced by the exact functor $-\\otimes_AB$. Taking cohomology,\n\n$$\nH^i(X,\\mathcal{F})\\otimes_AB\\;\\cong\\;H^i(X',\\mathcal{F}')\\qquad\\text{for all }i\\ge0\n$$\n\nas $B$-modules. In particular, for a quasi-compact quasi-separated scheme $X$\nover a field $k$, a field extension $K/k$ and $X_K=X\\times_{\\operatorname{Spec} k}\\operatorname{Spec} K$,\n\n$$\n\\dim_KH^i(X_K,\\mathcal F_K)=\\dim_kH^i(X,\\mathcal F)\\qquad\\text{for all }i\\ge0 .\n$$",
+  "proof": [
+   {
+    "text": "*The comparison map and the reduction to cohomology.* The unit\n$\\mathcal F\\to g'_*g'^*\\mathcal F=g'_*\\mathcal F'$ induces\n$R\\Gamma(X,\\mathcal F)\\to R\\Gamma(X,g'_*\\mathcal F')=R\\Gamma(X',\\mathcal F')$\n(the morphism $g'$ is affine, so $g'_*$ is exact on quasi-coherent modules), an\n$A$-linear map into a complex of $B$-modules; by adjunction it gives a\n$B$-linear map $R\\Gamma(X,\\mathcal F)\\otimes_AB\\to R\\Gamma(X',\\mathcal F')$ in\n$D(B)$. Since $B$ is flat over $A$, $H^i(K\\otimes_AB)=H^i(K)\\otimes_AB$ for\nevery complex $K$ of $A$-modules (see below). So the map is an isomorphism in\n$D(B)$ as soon as the induced maps\n$H^i(X,\\mathcal F)\\otimes_AB\\to H^i(X',\\mathcal F')$ are bijective for all $i$,\nwhich is what the following two steps show; conversely, taking $H^i$ of the\nderived isomorphism gives the degreewise statement.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*The case $X$ separated.* Let $A\\to B$ be flat and let\n$X$ be quasi-compact and separated over $A$; choose a finite affine\nopen covering $\\mathcal U:X=U_1\\cup\\dots\\cup U_t$. The base changes\n$(U_i)_B$ are affine and form a cover $\\mathcal U_B$ of\n$X_B=X\\times_{\\operatorname{Spec} A}\\operatorname{Spec} B$ (open affine subschemes of the base\nchange; separability of $X_B$ follows from that of $X$), and the\nintersections are affine. By [lem-pc-cech-computes],\n\n$$\nH^p(X,\\mathcal{F})=\\check H^p(\\mathcal U,\\mathcal{F}),\\qquad\nH^p(X_B,\\mathcal{F}_B)=\\check H^p(\\mathcal U_B,\\mathcal{F}_B).\n$$\n\nFor a multi-index $J$ with $U_J=\\operatorname{Spec}(C)$ and $\\mathcal{F}|_{U_J}=\\widetilde M$,\nthe base change $(U_J)_B=\\operatorname{Spec}(C\\otimes_AB)$ carries\n$\\mathcal{F}_B|=\\widetilde{M\\otimes_AB}$ and the localization\nidentifications give\n$\\mathcal{F}(U_J)\\otimes_AB=\\mathcal{F}_B((U_J)_B)$; consequently\n\n$$\n\\check C^\\bullet(\\mathcal U_B,\\mathcal{F}_B)\n=\\check C^\\bullet(\\mathcal U,\\mathcal{F})\\otimes_AB .\n$$\n\nFor a flat ring map $A\\to B$ and any complex $C^\\bullet$ of\n$A$-modules,\n\n$$\nH^i(C^\\bullet\\otimes_AB)=H^i(C^\\bullet)\\otimes_AB:\n$$\n\nthe proof is by induction on the number of terms (via the\ntruncations $0\\to C^{\\ge n+1}\\to C^{\\ge n}\\to C^n[-n]\\to0$ and the\nfive-lemma applied to the long exact sequences of the short exact\nsequences, both for $C^\\bullet$ and for $C^\\bullet\\otimes_AB$ – the\nbase changed sequences are exact because $A\\to B$ is flat, so no\n$\\mathrm{Tor}_1$-terms occur). Combining gives the claim for separated $X$.",
+    "uses": [
+     "lem-pc-cech-computes"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The case $X$ quasi-separated.* Take a finite affine\nopen covering $\\mathcal U$ of $X$ (quasi-compactness) and use the\nCech-to-cohomology spectral sequence\n([lem-sc-cech-spectral]): with\n$\\underline H^q=\\underline H^q(\\mathcal{F})$,\n\n$$\nE_2^{p,q}=\\check H^p(\\mathcal U,\\underline H^q(\\mathcal{F}))\n\\Longrightarrow H^{p+q}(X,\\mathcal{F}).\n$$\n\nThe intersections $U_{i_0\\dots i_p}$ are quasi-compact and separated,\nso by the separated case\n\n$$\n\\check H^p(\\mathcal U_B,\\underline H^q(\\mathcal{F}_B))\n=\\check H^p(\\mathcal U,\\underline H^q(\\mathcal{F}))\\otimes_AB .\n$$\n\nThe abutment follows from $A\\to B$ flat (the spectral sequences and\ntheir base changes are compatible in the sense that the filtration\npieces of $H^n$ base-change and are the base changes of the filtration\npieces of $H^n(X,\\mathcal{F})$; the two filtrations have the same lengths and\nthe identification of the graded pieces gives the identification of\nthe filtered objects at each degree). This proves the claim in general.",
+    "uses": [
+     "lem-sc-cech-spectral"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The dimension formula.* Apply the above to $A=k$, $B=K$ (a field\nextension is flat): $H^i(X_K,\\mathcal F_K)\\cong H^i(X,\\mathcal F)\\otimes_kK$,\nand $\\dim_K(V\\otimes_kK)=\\dim_kV$ for every $k$-vector space $V$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

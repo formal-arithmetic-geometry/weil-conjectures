@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-projective-bundle-pullback-line-reflection",
+ "kind": "statement",
+ "title": "Projective-bundle pullback reflects isomorphism classes of base lines",
+ "statement": "Let S be a scheme [def-pc-scheme] and E a quasi-coherent finite locally free module of constant positive rank r [def-amb-finite-locally-free-module]. Let p:P=Proj_S(Sym E)->S be the canonical projective bundle [def-trf-canonical-symmetric-graded-algebra]. For invertible O_S-modules N and Nprime [def-sc-invertible-module], if their pullbacks p^*N and p^*Nprime [def-pc-module-pullback] are isomorphic, then N and Nprime are isomorphic. This asserts reflection of isomorphism classes, with no degree or existence assertion for arbitrary modules on P.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75; Stacks sheaves.tex, lemmas glue-maps, glue-sheaves, glue-sheaves-structures (Tags 04TN, 00AL, 00AM), and coherent.tex, lemma-cohomology-projective-space-over-ring (Tag 01XS)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Take a common base open covering trivializing both coefficient lines. On the inverse image of each covering open the given isomorphism is multiplication by a unit. The canonical map on rings of functions is an isomorphism by the constant-monomial projective-space calculation on affine frames of E, followed by sheaf gluing on arbitrary opens.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-pc-projective-space-twist-cohomology",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "Remark 4.2.7, printed p.75; Stacks sheaves.tex, lemmas glue-maps, glue-sheaves, glue-sheaves-structures (Tags 04TN, 00AL, 00AM), and coherent.tex, lemma-cohomology-projective-space-over-ring (Tag 01XS)."
+   }
+  },
+  {
+   "text": "Descend each scalar unit through this canonical ring isomorphism. On overlaps the compatibility equation with the transition functions holds after pullback and therefore before pullback by injectivity. Glue the scalar maps and inverse maps to obtain N isomorphic to Nprime. No section of p is assumed, and an empty base is handled by the same gluing statement.",
+   "uses": [
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+    "place": "Remark 4.2.7, printed p.75; Stacks sheaves.tex, lemmas glue-maps, glue-sheaves, glue-sheaves-structures (Tags 04TN, 00AL, 00AM), and coherent.tex, lemma-cohomology-projective-space-over-ring (Tag 01XS)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-pc-projective-space-twist-cohomology",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75; Stacks sheaves.tex, lemmas glue-maps, glue-sheaves, glue-sheaves-structures (Tags 04TN, 00AL, 00AM), and coherent.tex, lemma-cohomology-projective-space-over-ring (Tag 01XS)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two invertible sheaves on the base of a projective bundle are isomorphic whenever their pullbacks to that projective bundle are isomorphic",
+   "results": "msearch 8 hits: AlgebraicGeometry.Scheme.Modules.pullbackCongr, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Proj.pullbackAwayιIso, CategoryTheory.Sheaf.isLocallySurjective_of_iso, AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso, AlgebraicGeometry.Scheme.Modules.inv_app. ",
+   "date": "2026-10-27",
+   "verdict": "No theorem of projective-bundle degree separation or coefficient-line descent/reflection; the pullback and free-module comparisons are only general ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"Invertible\"",
+   "results": "msearch 2 hits: VectorField.pullback_eq_of_not_isInvertible, VectorField.pullbackWithin_eq_of_not_isInvertible. ",
+   "date": "2026-10-27",
+   "verdict": "No theorem of projective-bundle degree separation or coefficient-line descent/reflection; the pullback and free-module comparisons are only general ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*[Pp]icard|[Pp]icard.*projective|LocallyConstant.*[Gg]lu",
+   "results": "msearch 0 hits: . ",
+   "date": "2026-10-27",
+   "verdict": "No theorem of projective-bundle degree separation or coefficient-line descent/reflection; the pullback and free-module comparisons are only general ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleLocalTwistDescent",
+  "date": "2026-10-27",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Local twist descent: Projective-bundle pullback reflects isomorphism classes of base lines",
+   "via": [
+    "lem-sfb-projective-bundle-local-twist-descent",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundlePullbackLineReflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundlePullbackLineReflection.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_pullback_line_reflection",
+  "statement": "theorem projective_bundle_pullback_line_reflection (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 0 < r)\n    (N N' : S.Modules) (hN : N.IsInvertible) (hN' : N'.IsInvertible)\n    (e : Nonempty ((tensorPullback\n      (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).obj N ≅\n        (tensorPullback (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).obj N')) :\n    Nonempty (N ≅ N')",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T123425-L-2295567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T123425-L-2295567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

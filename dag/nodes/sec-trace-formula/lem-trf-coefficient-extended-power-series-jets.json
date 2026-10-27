@@ -1,0 +1,339 @@
+{
+ "id": "lem-trf-coefficient-extended-power-series-jets",
+ "kind": "statement",
+ "title": "Finite jets and graded algebra of a coefficient-extended power-series quotient",
+ "statement": "Let $K\\subseteq L$ be fields, $e,s\\geq0$, $R=K[[X_1,\\ldots,X_e]]$, and $I\\subseteq(X_1,\\ldots,X_e)R$ an ideal. Put $C=R/I$, $D=L[[X_1,\\ldots,X_e,T_1,\\ldots,T_s]]/I L[[X,T]]$, $\\mathfrak a=(X_1,\\ldots,X_e)C$, and $\\mathfrak b=(X_1,\\ldots,X_e,T_1,\\ldots,T_s)D$ [def-weil-pbc-multivariate-power-series]. The map $j:C\\to D$ is induced by the specified coefficient inclusion and the $X$ variables. For $\\beta\\in\\mathbf N^s$ write $|\\beta|=\\sum_i\\beta_i$. For every $N\\geq1$ the coefficient map gives an $L$-linear isomorphism\n$$D/\\mathfrak b^N\\simeq\\bigoplus_{|\\beta|<N}\\left(L\\otimes_K(C/\\mathfrak a^{N-|\\beta|})\\right)T^\\beta$$\n[def-weil-pbc-module-tensor-product, def-weil-pbc-direct-sum-modules]. On truncated representatives it takes the coefficient of $T^\\beta$ modulo $(X)^{N-|\\beta|}+I$. Under these identifications reduction from $N+1$ to $N$ reduces every coefficient to the indicated smaller quotient and deletes the terms with $|\\beta|=N$; products modulo $\\mathfrak b^N$ are the coefficient-convolution products, with terms of $T$-degree at least $N$ discarded. In particular the homomorphism\n$$\\left(L\\otimes_K\\operatorname{gr}_{\\mathfrak a}C\\right)[T_1,\\ldots,T_s]\\longrightarrow\\operatorname{gr}_{\\mathfrak b}D$$\n[def-weil-pbc-associated-graded-ring, def-weil-pbc-mv-polynomial-ring] sending $(\\lambda\\otimes[c])T^\\beta$, for $c\\in\\mathfrak a^d$, to $[\\lambda j(c)T^\\beta]\\in\\mathfrak b^{d+|\\beta|}/\\mathfrak b^{d+|\\beta|+1}$ is a graded $L$-algebra isomorphism. It uses the actual map $j$ on the constant-polynomial part. No finiteness assumption on $L/K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent finite-jet and multiplication argument, formerly steps 3 and the completed-ring portion of step 4 of lem-trf-smooth-local-tangent-cone-extension; exact coefficient extension uses Tag 00HD (lemma-flat). This is not asserted to be the statement of that tag."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write $S=L[[X,T]]$, $\\mathfrak q=(X)R$, $\\mathfrak v=(X,T)S$, and $E=IS$, the ideal of finite sums $\\sum h_i f_i$ with $h_i\\in S$, $f_i\\in I$. The quotient maps give $C/\\mathfrak a^m=R/(I+\\mathfrak q^m)$ and $D/\\mathfrak b^N=S/(E+\\mathfrak v^N)$: products of image ideal generators generate the image ideal powers. Apply the cited coefficient criterion with base ideal zero. For positive $m,N$, $\\mathfrak q^m$ and $\\mathfrak v^N$ consist precisely of series with zero coefficients below the respective total-degree bounds. Thus their quotients have unique representatives supported below those bounds.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent application of lem-weil-pbc-power-series-combined-ideal-coefficients at base ideal zero; variable-power proof also read in literature/blueprint/latest/blueprint/sec-proper-base-change/sk-thm-p1/lem-weil-pbc-power-series-complete-over-complete-base.proof.md, paragraphs 1--3. No Stacks tag states this coefficient criterion."
+   }
+  },
+  {
+   "text": "Let $W_m(K)$ be the space of polynomials in $X$ supported on $|\\alpha|<m$, with multiplication followed by deletion of higher-degree terms; put $W_0(K)=0$, and similarly over $L$. Step 1 identifies $R/\\mathfrak q^m=W_m(K)$. The coefficient map $L\\otimes_K W_m(K)\\to W_m(L)$ has inverse $\\sum a_\\alpha X^\\alpha\\mapsto\\sum a_\\alpha\\otimes X^\\alpha$. Tensor bilinearity proves that both composites are identities: on a pure tensor $\\lambda\\otimes\\sum c_\\alpha X^\\alpha$, the inverse composite is $\\sum\\lambda c_\\alpha\\otimes X^\\alpha=\\lambda\\otimes\\sum c_\\alpha X^\\alpha$. The finite Cauchy product proves preservation of truncated multiplication. All these sums are finite, regardless of $[L:K]$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite monomial coordinate calculation from the tensor universal property (Tag 00CX, lemma-tensor-product) and the power-series definition; no infinite tensor-product interchange."
+   }
+  },
+  {
+   "text": "Let $U_m\\subset W_m(K)$ be the image of $I$, with $U_0=0$. Grouping monomials of total degree below $N$ by their $T$ exponent gives $S/\\mathfrak v^N=\\bigoplus_{|\\beta|<N}W_{N-|\\beta|}(L)T^\\beta$. The image of $E$ is exactly $\\bigoplus_{|\\beta|<N}\\operatorname{im}(L\\otimes_K U_{N-|\\beta|})T^\\beta$. Indeed, truncate a defining finite sum $\\sum h_i f_i$ of $E$. Its $T^\\beta$ coefficient modulo $(X)^{N-|\\beta|}$ is a finite sum of terms $\\lambda X^\\alpha f_i$, with $\\lambda\\in L$ and $X^\\alpha f_i\\in I$, and hence lies in the indicated image. Conversely, each generator $\\lambda\\otimes u$ of this image has $u$ represented by some $f\\in I$; the truncation of $\\lambda fT^\\beta\\in E$ realizes that vector in just that summand. Finite sums prove the reverse inclusion.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite relation calculation for the algebraically extended ideal, using the finite Cauchy product and finite-sum definition of ideal extension."
+   }
+  },
+  {
+   "text": "Reduction gives the exact sequence $U_m\\to W_m(K)\\to R/(I+\\mathfrak q^m)\\to0$. Tensor right exactness and step 2 identify $W_m(L)/\\operatorname{im}(L\\otimes_K U_m)$ with $L\\otimes_K(C/\\mathfrak a^m)$. Quotient the finite direct sum of step 3 componentwise: a tuple belongs to the relation subspace exactly when each component does. With step 1 this is the required $L$-linear finite-jet isomorphism. Its inverse sends $(\\lambda\\otimes[c])T^\\beta$ to the class of $\\lambda j(c)T^\\beta$, choosing any lift of $c$ to $R$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DF (lemma-tensor-product-exact), applied to the displayed relation-space sequence; explicit finite direct-sum quotient."
+   }
+  },
+  {
+   "text": "Reduction from total cutoff $N+1$ to $N$ deletes exactly the monomials of degree $N$. In the $T^\\beta$ component for $|\\beta|<N$ it reduces the $X$ cutoff from $N+1-|\\beta|$ to $N-|\\beta|$; components with $|\\beta|=N$ disappear. The images of $I$ reduce to the images of the same series of $I$. All maps in steps 2--4 use unchanged coefficients followed by these reductions, proving the asserted compatibility after quotienting by $E$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coefficient calculation comparing total cutoffs N+1 and N."
+   }
+  },
+  {
+   "text": "For representatives $F=\\sum_\\beta f_\\beta T^\\beta$ and $G=\\sum_\\gamma g_\\gamma T^\\gamma$, the coefficient of $T^\\delta$ in $FG$ is $\\sum_{\\beta+\\gamma=\\delta}f_\\beta g_\\gamma$ modulo $I+(X)^{N-|\\delta|}$; terms with $|\\delta|\\ge N$ vanish. This is the defining Cauchy product. A change of $f_\\beta$ by $I$ changes a product by $IS$. A change by $(X)^{N-|\\beta|}$ changes its product with $g_\\gamma T^\\gamma$ by terms of total degree at least $N+|\\gamma|\\ge N$. Thus the formula descends to the tensor quotients. On pure tensors the coefficient product is $(\\lambda\\otimes[c])(\\mu\\otimes[d])=\\lambda\\mu\\otimes[cd]$ at the required cutoff. This proves the product clause.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent Cauchy-product calculation; the product convention is the one in def-weil-pbc-multivariate-power-series."
+   }
+  },
+  {
+   "text": "Fix $n\\ge0$ and take the kernel of reduction from jet $n+1$ to jet $n$, with zeroth jet zero. On $D$ this kernel is $\\mathfrak b^n/\\mathfrak b^{n+1}$. The $K$-module $L$ is flat by the field-module lemma. Apply flat tensor exactness and tensor right exactness to $0\\to\\mathfrak a^d/\\mathfrak a^{d+1}\\to C/\\mathfrak a^{d+1}\\to C/\\mathfrak a^d\\to0$. In the $\\beta$ component for $|\\beta|\\le n$, set $d=n-|\\beta|$. Its kernel is $L\\otimes_K(\\mathfrak a^d/\\mathfrak a^{d+1})$. This also covers $|\\beta|=n$: then $d=0$ and $C/\\mathfrak a^0=0$. Step 5 gives a bijection $\\bigoplus_{|\\beta|\\le n}\\left(L\\otimes_K(\\mathfrak a^{n-|\\beta|}/\\mathfrak a^{n+1-|\\beta|})\\right)T^\\beta\\simeq\\mathfrak b^n/\\mathfrak b^{n+1}$, sending $\\lambda\\otimes[c]$ to $[\\lambda j(c)T^\\beta]$.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-right-exact",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat) and Tag 00DF (lemma-tensor-product-exact), applied to the displayed successive-power short exact sequence; field flatness from the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "The degree-$n$ part of $(L\\otimes_K\\operatorname{gr}_{\\mathfrak a}C)[T]$ is the direct sum in step 7. To check this directly, expand each polynomial into its finitely many $T$ monomials and each tensor coefficient into its finitely many graded components. The maps $\\lambda\\otimes\\sum_d c_d\\mapsto\\sum_d\\lambda\\otimes c_d$ and insertion of components are inverse by bilinearity and finite support. Reindex the finite pairs $(d,\\beta)$ by $n=d+|\\beta|$. Taking the direct sum of step 7 therefore gives a bijective graded $L$-linear map with precisely the formula in the statement.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-associated-graded-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent explicit finite-support reindexing of tensor, graded and polynomial components."
+   }
+  },
+  {
+   "text": "For $c\\in\\mathfrak a^d$ and $c'\\in\\mathfrak a^{d'}$, the product of their images is $[\\lambda j(c)T^\\beta][\\mu j(c')T^\\gamma]=[\\lambda\\mu j(cc')T^{\\beta+\\gamma}]$ in degree $d+d'+|\\beta|+|\\gamma|$. The cited associated-graded structure gives exactly this representative product rule. It is the image of the product of the homogeneous pure tensors, so finite additivity proves multiplicativity everywhere. Unit and $L$-scalars go to their own degree-zero classes. Thus the bijection is a graded $L$-algebra isomorphism. For $\\beta=0$ its formula is $\\lambda\\otimes[c]\\mapsto[\\lambda j(c)]$, verifying the actual map $j$ on the constant-polynomial part.",
+   "uses": [
+    "lem-weil-pbc-associated-graded-ring-structure",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent generator calculation using lem-weil-pbc-associated-graded-ring-structure, whose source is Tag 05GH (lemma-completion-Noetherian) and Section 00JL (section-graded)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-associated-graded-ring",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-associated-graded-ring-structure",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit finite coefficient argument extending the parent tangent-cone split; exactness inputs: Tags 00DF (lemma-tensor-product-exact) and 00HD (lemma-flat). Neither tag states the jet comparison itself."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coefficient-extended-power-series-jets: associated graded of L[[X,T]] modulo an ideal extended from K[[X]] is polynomial over L tensor the associated graded of K[[X]] modulo I, with compatible finite truncations",
+   "results": "{\"t\": \"2026-10-22T06:41:39Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coefficient-extended-power-series-jets: associated graded of L[[X,T]] modulo an ideal extended from K[[X]] is polynomial over L tensor the associated graded of K[[X]] modulo I, with compatible finite truncations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient\", \"PowerSeries.IsWeierstrassFactorizationAt\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_symm_apply\"], \"digest\": \"5af7ca5245b8f00e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division, homogeneous components, maps of series, and total truncation modulo the variable ideal do not compare an arbitrary extended ideal quotient or its graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "associatedGraded|[Tt]runc.*[Qq]uotient|[Qq]uotient.*[Tt]runc",
+   "results": "{\"t\": \"2026-10-22T06:42:02Z\", \"tool\": \"grep\", \"query\": \"associatedGraded|[Tt]runc.*[Qq]uotient|[Qq]uotient.*[Tt]runc\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/WittVector/Truncated.lean\", \"Mathlib/RingTheory/WittVector/Truncated.lean\"], \"digest\": \"f3a92c124f5eb867\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division, homogeneous components, maps of series, and total truncation modulo the variable ideal do not compare an arbitrary extended ideal quotient or its graded algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-coefficient-extended-power-series-jets: associated graded ring of a formal power series quotient after extension of coefficient field and adjoining formal variables",
+   "results": "{\"t\": \"2026-10-22T06:42:02Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-coefficient-extended-power-series-jets: associated graded ring of a formal power series quotient after extension of coefficient field and adjoining formal variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.map\", \"PowerSeries.toSubring\", \"PowerSeries.spanFinrank_le_spanFinrank_map_constantCoeff_add_one_of_X_mem\", \"Polynomial.coeToPowerSeries.algHom\", \"PowerSeries.instIsDiscreteValuationRing\", \"PowerSeries.instCommRing\", \"MvPowerSeries.toSubring\", \"PowerSeries.algebraPowerSeries\"], \"digest\": \"9088ba86b70abcd2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division, homogeneous components, maps of series, and total truncation modulo the variable ideal do not compare an arbitrary extended ideal quotient or its graded algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"AssociatedGraded\"",
+   "results": "{\"t\": \"2026-10-22T06:42:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"AssociatedGraded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division, homogeneous components, maps of series, and total truncation modulo the variable ideal do not compare an arbitrary extended ideal quotient or its graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-coefficient-extended-power-series-jets: finite jets of a multivariable formal power series quotient commute with field extension and adjoining variables; graded pieces are direct sums indexed by monomials",
+   "results": "{\"t\": \"2026-10-22T06:42:09Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-coefficient-extended-power-series-jets: finite jets of a multivariable formal power series quotient commute with field extension and adjoining variables; graded pieces are direct sums indexed by monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.coeff_subst_finite\", \"MvPowerSeries.homogeneousComponent\", \"PowerSeries.HasSubst\", \"MvPowerSeries.inv.aux\", \"MvPowerSeries.IsHomogeneous\", \"MvPowerSeries.HasSubst\", \"MvPowerSeries.coeff_inv\", \"MvPowerSeries.coeff_inv_aux\"], \"digest\": \"2920f133dddf6db9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division, homogeneous components, maps of series, and total truncation modulo the variable ideal do not compare an arbitrary extended ideal quotient or its graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "equiv.*[Qq]uotient|[Qq]uotient.*equiv|truncTotal|trunc.*[Kk]er",
+   "results": "{\"t\": \"2026-10-22T06:42:59Z\", \"tool\": \"grep\", \"query\": \"equiv.*[Qq]uotient|[Qq]uotient.*equiv|truncTotal|trunc.*[Kk]er\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\"], \"digest\": \"b7a42b54aa942a7e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Weierstrass division, homogeneous components, maps of series, and total truncation modulo the variable ideal do not compare an arbitrary extended ideal quotient or its graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "truncTotal|associatedGraded|tensor.*quotient",
+   "results": "{\"t\": \"2026-10-23T11:29:38Z\", \"tool\": \"grep\", \"query\": \"truncTotal|associatedGraded|tensor.*quotient\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Equiv.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\"], \"digest\": \"44da3d4805b1ec48\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and tensor quotient primitives do not state the arbitrary extended-ideal finite-jet and graded-algebra comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated graded ring of a multivariable formal power series quotient under field extension and extra formal variables",
+   "results": "{\"t\": \"2026-10-23T11:29:38Z\", \"tool\": \"leansearch\", \"query\": \"Associated graded ring of a multivariable formal power series quotient under field extension and extra formal variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedRing.ctorIdx\", \"GradedRing\", \"GradedRing.toGradedMonoid\", \"GradedAlgebra\", \"MvPowerSeries.toSubring\", \"PowerSeries.instCommRing\", \"MvPolynomial.coeToMvPowerSeries.algHom\", \"MvPowerSeries.instRing\"], \"digest\": \"ed9a34a80dfa73c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and tensor quotient primitives do not state the arbitrary extended-ideal finite-jet and graded-algebra comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, AssociatedGraded",
+   "results": "{\"t\": \"2026-10-23T11:29:38Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, AssociatedGraded\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AssociatedGraded'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match from this pattern: Loogle reported unknown identifier AssociatedGraded; repaired with a valid quoted MvPowerSeries/trunc search, which returned truncation primitives only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite jets of a formal power series quotient after arbitrary coefficient field extension and adjoining variables, compatible with multiplication and the associated graded algebra",
+   "results": "{\"t\": \"2026-10-23T11:29:44Z\", \"tool\": \"leanfinder\", \"query\": \"Finite jets of a formal power series quotient after arbitrary coefficient field extension and adjoining variables, compatible with multiplication and the associated graded algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.HasSubst.ideal\", \"PowerSeries.IsWeierstrassDivisorAt.mod'\", \"PowerSeries.IsWeierstrassFactorizationAt.algEquivQuotient_apply\", \"MvPowerSeries.hasSubstIdeal\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.isWeierstrassDivisionAt_iff\"], \"digest\": \"503cd8224803d119\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and tensor quotient primitives do not state the arbitrary extended-ideal finite-jet and graded-algebra comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "quotientEquiv|truncTotal|ker.*trunc",
+   "results": "{\"t\": \"2026-10-23T11:33:12Z\", \"tool\": \"grep\", \"query\": \"quotientEquiv|truncTotal|ker.*trunc\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\", \"Mathlib/RingTheory/MvPowerSeries/Trunc.lean\"], \"digest\": \"b7a42b54aa942a7e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and tensor quotient primitives do not state the arbitrary extended-ideal finite-jet and graded-algebra comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of finite truncated power series rings commutes with quotient by an arbitrary ideal and yields tensor product of the truncated quotient",
+   "results": "{\"t\": \"2026-10-23T11:33:14Z\", \"tool\": \"leanfinder\", \"query\": \"Scalar extension of finite truncated power series rings commutes with quotient by an arbitrary ideal and yields tensor product of the truncated quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.qoutMapEquivTensorQout\", \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot\", \"Algebra.TensorProduct.quotIdealMapEquivTensorQuot_mk\", \"TensorProduct.tensorQuotMapSMulEquivTensorQuot\", \"TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ\", \"TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ\", \"TensorProduct.quotTensorEquivQuotSMul_comp_mk\", \"TensorProduct.tensorQuotEquivQuotSMul_comp_mk\"], \"digest\": \"857b511171a24a6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and tensor quotient primitives do not state the arbitrary extended-ideal finite-jet and graded-algebra comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"trunc\"",
+   "results": "{\"t\": \"2026-10-23T11:35:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"trunc\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.truncTotal\", \"MvPowerSeries.truncFinset\", \"MvPowerSeries.trunc\", \"MvPowerSeries.trunc'\", \"MvPowerSeries.totalDegree_truncTotal_lt\", \"MvPowerSeries.truncTotal_coe_eq_self_iff\", \"MvPowerSeries.support_truncFinset_subset\", \"MvPowerSeries.trunc'_one\"], \"digest\": \"ff1d7a2a7ccd75a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: truncation and tensor quotient primitives do not state the arbitrary extended-ideal finite-jet and graded-algebra comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-local-tangent-cone-extension",
+  "date": "2026-10-22",
+  "group": "NI"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Tangent cone and minimal-prime dimensions of an essentially smooth local extension. Re-split of lem-trf-smooth-local-tangent-cone-extension: Agent finite-jet and multiplication argument, formerly steps 3 and the completed-ring portion of step 4 of lem-trf-smooth-local-tangent-cone-extension; exact coefficient extension uses Tag 00HD (lemma-flat). This is not asserted to be the statement of that tag.",
+   "via": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coefficient-extended-power-series-jets",
+  "worker": "stage1",
+  "summary": "Proved finite jets by truncation, an explicit coefficient tensor isomorphism, and the image of the extended ideal. Verified transition maps, convolution, exact graded kernels, and the actual coefficient inclusion; reused existing inputs, creating no nodes. Statement unchanged.",
+  "blueprint": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality (1)--(2), through parent lem-trf-smooth-local-tangent-cone-extension: finite-jet and graded-algebra subargument. The latest blueprint proves locality via contracting correspondences; this retained auxiliary algebra item does not occur verbatim there.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Generic coefficient test for powers of finitely many formal variables, specialized to zero base ideal; no same-unit node states this general test."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-combined-ideal-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-f6a8863c7",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f6a8863c7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a first split of the 0-new-node item, created by the re-split of its parent lem-trf-smooth-local-tangent-cone-extension. The statement, stmt_deps, blueprint and unit are unchanged against the live clone, and the item is still unsplit in live and side-live. I recomputed the statement: D/b^N = S/(IS+v^N) splits by T-exponent into finite truncated spaces W_{N-|β|}(L), and the image of IS in each is L·im(I). So the claim holds for any L/K, with no infinite tensor interchange. I tested e=0, s=0, N=1, I=(X^2) with N=3, and I=(X^2+X^3), which has the same truncations as (X^2). Steps: (1) combined-ideal criterion at J=0. (2) An explicit L⊗W_m(K)≅W_m(L). (3) Both inclusions of the relation subspace, using (h_i f_i)_β = h_{iβ} f_i. (4) Right exactness (Stacks 00DF) on U_m→W_m(K)→R/(I+q^m)→0; inverse λ⊗[c] ↦ λ j(c)T^β. (5) Transitions. (6) Cauchy product, checked well defined with degree ≥ N+|γ|. (7) Field flatness, flat exactness and right exactness give kernels L⊗a^d/a^{d+1}, including the d=0 case. (8) Finite-support reindexing. (9) Multiplicativity from clauses (1)-(2) of the associated-graded ring structure node. All ten cited statements say what the steps take. Stacks tags 00DF, 00HD and 00CX were checked in tags/tags and algebra.tex. No SGA. I accept the tool use of lem-weil-pbc-power-series-combined-ideal-coefficients (sk-thm-p1) as a generic coefficient test. A duplicate search over the trf/pur power-series and graded nodes found nothing. Advisories: step 7 says 'step 5' where steps 4 and 5 are meant; the K-algebra structure on L⊗_K gr_a C, used in the unchanged statement, has no stmt_dep."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoefficientExtendedPowerSeriesJets",
+  "declaration": "MvPowerSeries.CoefficientExtendedJets.coefficient_extended_power_series_jets",
+  "declarations": [
+   "MvPowerSeries.CoefficientExtendedJets.coefficientMap",
+   "MvPowerSeries.CoefficientExtendedJets.sourceRing",
+   "MvPowerSeries.CoefficientExtendedJets.targetRing",
+   "MvPowerSeries.CoefficientExtendedJets.quotientMap",
+   "MvPowerSeries.CoefficientExtendedJets.sourceIdeal",
+   "MvPowerSeries.CoefficientExtendedJets.targetIdeal",
+   "MvPowerSeries.CoefficientExtendedJets.sourceJet",
+   "MvPowerSeries.CoefficientExtendedJets.targetJet",
+   "MvPowerSeries.CoefficientExtendedJets.coefficients",
+   "MvPowerSeries.CoefficientExtendedJets.coefficientTerm",
+   "MvPowerSeries.CoefficientExtendedJets.tMonomial",
+   "MvPowerSeries.CoefficientExtendedJets.xExponent",
+   "MvPowerSeries.CoefficientExtendedJets.tExponent",
+   "MvPowerSeries.CoefficientExtendedJets.coefficientVector",
+   "MvPowerSeries.CoefficientExtendedJets.reduction",
+   "MvPowerSeries.CoefficientExtendedJets.gradedCoefficients",
+   "MvPowerSeries.CoefficientExtendedJets.gradedTensor",
+   "MvPowerSeries.CoefficientExtendedJets.coefficient_extended_power_series_jets"
+  ],
+  "file": "lean/Sheaf/RingTheory/CoefficientExtendedPowerSeriesJets.lean",
+  "statement": "theorem coefficient_extended_power_series_jets (hI : I ≤ Ideal.span (Set.range (MvPowerSeries.X : Fin e → MvPowerSeries (Fin e) K))) : ∃ φ : ∀ (N : ℕ), 0 < N → targetJet K L e s I N ≃ₗ[L] coefficients K L e s I N, (∀ (N : ℕ) (hN : 0 < N) (F : MvPowerSeries (Fin e ⊕ Fin s) L), φ N hN (Ideal.Quotient.mk (targetIdeal K L e s I ^ N) (Ideal.Quotient.mk (I.map (coefficientMap K L e s)) F)) = coefficientVector K L e s I N F) ∧ (∀ (N : ℕ) (hN : 0 < N) (β : Fin s →₀ ℕ) (hβ : β.degree < N) (l : L) (c : sourceRing K e I), (φ N hN).symm (coefficientTerm K L e s I N β hβ l c) = Ideal.Quotient.mk (targetIdeal K L e s I ^ N) (l • (quotientMap K L e s I c * tMonomial K L e s I β))) ∧ (∀ (N : ℕ) (hN : 0 < N) (β : Fin s →₀ ℕ) (hβ : β.degree < N + 1) (l : L) (c : sourceRing K e I), φ N hN (reduction K L e s I N ((φ (N + 1) (Nat.zero_lt_succ N)).symm (coefficientTerm K L e s I (N + 1) β hβ l c))) = if h : β.degree < N then coefficientTerm K L e s I N β h l c else 0) ∧ (∀ (N : ℕ) (hN : 0 < N) (β γ : Fin s →₀ ℕ) (hβ : β.degree < N) (hγ : γ.degree < N) (l m : L) (c d : sourceRing K e I), φ N hN ((φ N hN).symm (coefficientTerm K L e s I N β hβ l c) * (φ N hN).symm (coefficientTerm K L e s I N γ hγ m d)) = if h : (β + γ).degree < N then coefficientTerm K L e s I N (β + γ) h (l * m) (c * d) else 0) ∧ ∃ ψ : MvPolynomial (Fin s) (gradedCoefficients K L e I) ≃ₐ[L] Ideal.associatedGraded (targetIdeal K L e s I), ∀ (d : ℕ) (c : (sourceIdeal K e I ^ d : Ideal (sourceRing K e I))) (β : Fin s →₀ ℕ) (l : L), ∃ y : (targetIdeal K L e s I ^ (d + β.degree) : Ideal (targetRing K L e s I)), y.val = l • (quotientMap K L e s I c.val * tMonomial K L e s I β) ∧ ψ (MvPolynomial.monomial β (gradedTensor K L e I l (DirectSum.of (Ideal.associatedGradedPiece (sourceIdeal K e I)) d (Submodule.Quotient.mk c)))) = DirectSum.of (Ideal.associatedGradedPiece (targetIdeal K L e s I)) (d + β.degree) (Submodule.Quotient.mk y)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-6431d04c3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6431d04c3",
+  "group": "Q50",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: C=K[[X]]/I, D=L[[X⊕T]]/I.map(coefficientMap), j=Ideal.quotientMap, 𝔞/𝔟 images of variable ideals, hI: I ≤ span X, φ_N (0<N) L-linear iso to ⊕_{|β|<N} L⊗C/𝔞^{N-|β|} pinned by coefficientVector over truncTotal support (degree<N) and inverse l⊗[c]↦[l j(c) T^β], reduction N+1→N (deletes |β|=N), convolution product, ψ graded L-algebra iso pinned on spanning monomials with β=0 giving actual j. Edge cases e=0,s=0,N=1,d=0,I=0, infinite L/K, independent universes OK; statement verbatim; no hollow data; only proof is sorry. FIX (H9): gradedBaseAlgebra was a global instance Algebra k (associatedGraded J) for all [Algebra k A]; Algebra.toModule (prio 200) would make Module A/ℕ/ℤ gr in every importer non-defeq to the componentwise DirectSum module → made `scoped instance` (statement unchanged); fixes/CoefficientExtendedPowerSeriesJets.lean compiled clean via nt_compile --json (6.3 s, exit 0); lean-record.json pins verbatim statement."
+ }
+}

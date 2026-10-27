@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-maximal-parabolic-reflections",
+ "kind": "statement",
+ "title": "Proper standard parabolics contain all but one simple reflection",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a semisimple $F$-group scheme [def-sc-group-scheme], meaning smooth, connected, affine and of finite type with no nontrivial smooth connected solvable normal subgroup; solvable means that successive scheme-theoretic commutator subgroups become trivial. Fix a split maximal torus $T\\subseteq G$ and a Borel subgroup $B\\supseteq T$, with simple roots $\\Delta=\\{\\alpha_1,\\ldots,\\alpha_r\\}$ and coroots as in [lem-sfb-reductive-borel-pair-structure]. Put $W=N_G(T)(F)/T(F)$, where $N_G(T)$ is the subgroup normalizing $T$, and write $s_j$ for the simple reflection acting on $X^*(T)$ by $s_j(\\chi)=\\chi-\\langle\\chi,\\alpha_j^\\vee\\rangle\\alpha_j$. For every $1\\leq i\\leq r$ there exists a smooth connected closed subgroup scheme $P_i\\subseteq G$ [def-sc-group-scheme-subgroup] such that $B\\subseteq P_i$, $P_i\\ne G$, and every $n\\in N_G(T)(F)$ representing $s_j$ with $j\\ne i$ belongs to $P_i(F)$. The inequality $P_i\\ne G$ means a strict subgroup inclusion, not properness of a morphism. No characteristic restriction or simply connectedness assumption is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.88 and its proof, printed p.452; applied at the start of the proof of Lemma 22.24, p.469. The proper standard parabolic contains B and the normalizer representatives of every other simple reflection."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-rank-one-root-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i$. By [lem-sfb-reductive-borel-pair-structure], $G$ is reductive and the character/cocharacter pairing is perfect. By [lem-sfb-semisimple-roots-span], the roots and coroots span their rational character spaces. Apply [lem-sfb-root-base-rational-integral-spans] to the simple-root base $\\Delta$ to obtain a rational basis of $X^*(T)\\otimes\\mathbf Q$. Its $i$th dual basis vector is $\\eta_i\\in X_*(T)\\otimes\\mathbf Q$ with $\\langle\\alpha_j,\\eta_i\\rangle=\\delta_{ij}$. Choose coordinates $T\\simeq\\mathbf G_m^m$; clearing the finitely many denominators of the coordinates of $\\eta_i$ gives an integer $d>0$ and an actual cocharacter $\\lambda=d\\eta_i\\in X_*(T)$, so $\\langle\\alpha_j,\\lambda\\rangle=d\\delta_{ij}$. If $\\beta=\\sum_j c_j\\alpha_j$ is positive, the nonnegative integer coefficients supplied by the Borel-pair node give $\\langle\\beta,\\lambda\\rangle=dc_i\\geq0$.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-semisimple-roots-span",
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.88, preceding paragraph (fundamental rational cocharacters), printed p.452"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-cocharacter-limit-smooth-structure] to the smooth connected affine group $G$ and the composite $\\lambda:\\mathbf G_m\\to T\\hookrightarrow G$. It represents the limit functor by a smooth connected closed subgroup scheme $P_i=P_\\lambda\\subseteq G$. In particular, for every commutative $F$-algebra $A$, an element $g\\in G(A)$ lies in $P_i(A)$ exactly when $t\\mapsto\\lambda(t)g\\lambda(t)^{-1}$ extends over $t=0$.",
+   "uses": [
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(a),(e), printed pp.265--266; definition recalled before Proposition 21.88, p.452"
+   }
+  },
+  {
+   "text": "For every commutative $F$-algebra $A$, the conjugation orbit of an element of $T(A)$ under $\\lambda$ is constant, so $T\\subseteq P_i$. For a positive root $\\beta$, choose $u_\\beta:\\mathbf G_a\\simeq U_\\beta$ from [lem-sfb-reductive-root-subgroup-parametrizations]. That node's identity on all test algebras gives $\\lambda(t)u_\\beta(a)\\lambda(t)^{-1}=u_\\beta(t^{\\langle\\beta,\\lambda\\rangle}a)$. The exponent is nonnegative by step 1, so this formula itself defines an extension over $\\mathbf A^1_A$. The defining functor in [lem-sfb-cocharacter-limit-smooth-structure] therefore gives $U_\\beta\\subseteq P_i$ as subgroup schemes. By [lem-sfb-borel-root-product-coordinates], multiplication of the positive root groups is an isomorphism onto $U=R_u(B)$, so $U\\subseteq P_i$. The decomposition $B=U\\rtimes T$ in [lem-sfb-reductive-borel-pair-structure] now implies $B\\subseteq P_i$. All factorizations were established on arbitrary test algebras, not inferred merely from inclusion of geometric point sets.",
+   "uses": [
+    "lem-sfb-reductive-root-subgroup-parametrizations",
+    "lem-sfb-cocharacter-limit-smooth-structure",
+    "lem-sfb-borel-root-product-coordinates",
+    "lem-sfb-reductive-borel-pair-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.88, formula (138) and first proof paragraph, p.452; Theorem 21.68(a),(b), p.445"
+   }
+  },
+  {
+   "text": "By [lem-sfb-reductive-rank-one-reflections], $-\\alpha_i$ is a root and its tangent weight space $\\mathfrak g_{-\\alpha_i}$ is one-dimensional. Under $\\lambda$ this is the integer-character weight space of weight $\\langle-\\alpha_i,\\lambda\\rangle=-d<0$. The direct weight decomposition and tangent-space formula of [lem-sfb-cocharacter-limit-smooth-structure] give $\\operatorname{Lie}(P_i)=\\bigoplus_{n\\geq0}\\mathfrak g_n$, which has zero intersection with this nonzero negative weight space. Thus $\\operatorname{Lie}(P_i)\\ne\\operatorname{Lie}(G)$, and consequently $P_i\\ne G$: equality of subgroup schemes would give equality of their tangent subspaces. This proves strictness in arbitrary characteristic, since the weights here are characters of $\\mathbf G_m$, not their differentials modulo the characteristic.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.88, strictness after (138), p.452, using Theorem 13.33(c), p.265 and Theorem 21.11(b), p.428"
+   }
+  },
+  {
+   "text": "Let $j\\ne i$ and let $n\\in N_G(T)(F)$ represent $s_j$. The pairing-preserving Weyl actions of [lem-sfb-reductive-rank-one-reflections] give, for every $\\chi\\in X^*(T)$,\n$$\\langle\\chi,s_j\\lambda\\rangle=\\langle s_j^{-1}\\chi,\\lambda\\rangle=\\langle\\chi,\\lambda\\rangle-\\langle\\chi,\\alpha_j^\\vee\\rangle\\langle\\alpha_j,\\lambda\\rangle=\\langle\\chi,\\lambda\\rangle.$$\nHere $s_j^{-1}=s_j$ follows by squaring its displayed reflection formula using $\\langle\\alpha_j,\\alpha_j^\\vee\\rangle=2$, and the last equality uses step 1. Perfection of the character pairing gives $s_j\\lambda=\\lambda$. Thus conjugation by $n$ fixes the cocharacter as a morphism $\\mathbf G_m\\to T$. The orbit $t\\mapsto\\lambda(t)n\\lambda(t)^{-1}$ is the constant $n$, and extends to $\\mathbf A^1_F$. By the functor defining $P_i$ in [lem-sfb-cocharacter-limit-smooth-structure], $n\\in P_i(F)$. This applies to every representative, since the Weyl action depends only on its class. Steps 2--4 and this conclusion prove the item. For $r=0$ there is no index $i$ and the assertion is vacuous.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-cocharacter-limit-smooth-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.88, second proof paragraph, p.452"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-semisimple-roots-span",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-cocharacter-limit-smooth-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-borel-root-product-coordinates",
+  "lem-sfb-reductive-rank-one-reflections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.88 and proof, printed p.452, with integral multiple of the rational fundamental cocharacter made explicit; strictness via the negative tangent weight of Theorem 13.33(c)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For each simple root of a semisimple algebraic group there is a proper parabolic subgroup containing the Borel and normalizer representatives of all other simple reflections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.h'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the element $ h'(i) $ is the matrix $ h(i) $ constructed from $ P $, which belongs to the Cartan subalg\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"For a root pairing $ P $ with finite support indexed by $ \\\\iota $ over a commutative ring $ R $, the matrix $ h(i) $ constructed from the Geck construction lies in the Cartan subalgebra $ \\\\mathfrak{h}\"}\n  {\"name\": \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {P : RootPairing\", \"doc\": \"The Lie subalgebra over $ R $ obtained as the preimage of the Cartan subalgebra under the canonical inclusion map from the Geck-constructed Lie algebra into the ambient matrix algebra $ \\\\text{Mat}_{(S\"}\n  {\"name\": \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Fintype ι] [inst_7 : DecidableEq ι] (\", \"doc\": \"For any index $i$ in the finite support of a root pairing $b$ over a commutative ring $R$, the Geck construction matrix $h(i)$ associated to $i$ is an element of the Cartan subalgebra generated by all\"}\n  {\"name\": \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N}\\n  [inst_5 : P.IsCrystallographic] {b : P.Base} [inst_6 : Finite ι] [inst_7 : IsDomain R] [inst\", \"doc\": \"In the Geck construction for a root pairing, the ω-conjugated Lie submodule $\\\\omega\\\\text{-ConjLieSubmodule}(N)$ equals the entire Lie module (denoted $\\\\top$) if and only if the original Lie submodule \"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L]\\n  [inst_3 : FiniteDimensional K L] {H : LieSubalgebra K L} [inst_4 : H.IsCartanSubalgebra]\\n  [inst_5 : LieAlgebra.IsKilling K L] [inst_6 : LieModule.IsTriangularizable K (↥H) L] [inst_7 : CharZero K]\\n  {α\", \"doc\": \"An element $ x $ belongs to the $ \\\\mathfrak{sl}_2 $-subalgebra generated by an $ \\\\mathfrak{sl}_2 $-triple $ (h,e,f) $ corresponding to a non-zero root $ \\\\alpha $ if and only if $ x $ can be expressed \"}\n  {\"name\": \"LieAlgebra.IsKilling.sl2SubalgebraOfRoot\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"{K : Type u_2} →\\n  {L : Type u_3} →\\n    [inst : LieRing L] →\\n      [inst_1 : Field K] →\\n        [inst_2 : LieAlgebra K L] →\\n          [FiniteDimensional K L] →\\n            {H : LieSubalgebra K L} →\\n              [inst_4 : H.IsCartanSubalgebra] →\\n                [LieAlgebra.IsKilling K L] →\\n         \", \"doc\": \"Given a Lie algebra $\\\\mathfrak{g}$ over a field $K$ with a non-degenerate Killing form and a non-zero weight $\\\\alpha$, this constructs the $\\\\mathfrak{sl}_2$-subalgebra of $\\\\mathfrak{g}$ generated by e\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix parabolicity, Coxeter groups, abstract root pairings and characteristic-zero Lie-algebra constructions do not assert the existence of a subgroup scheme containing a prescribed Borel and normalizer representatives"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A standard maximal parabolic subgroup contains the simple root reflection representatives except for one simple root",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CoxeterSystem.subgroup_closure_range_simple\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Subgroup.closure (range cs.simple) = ⊤\", \"doc\": \"In a Coxeter system $(W, B)$, the subgroup generated by the set of simple reflections corresponding to $B$ is equal to the entire Coxeter group $W$.\"}\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Subgroup (Aut P)\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"RootPairing.reflection_mem_weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Equiv.reflection P i ∈ P.weylGroup\", \"doc\": \"The reflection automorphism associated with index $i$ in the root pairing $P$ is an element of the Weyl group of $P$.\"}\n  {\"name\": \"RootPairing.weylGroup_toSubmonoid\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": P.weylGroup.toSubmonoid = Submonoid.closure (range (Equiv.reflection P))\", \"doc\": \"The submonoid generated by the reflection automorphisms of a root pairing $ P $ is equal to the submonoid underlying its Weyl group, i.e., $ \\\\text{WeylGroup}(P) $ viewed as a submonoid coincides with \"}\n  {\"name\": \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.Irreducible\", \"type\": \"[Nontrivial M] :\\n  IsSimpleModule R[P.weylGroup] P.weylGroupRootRep.asModule ↔\\n    ∀ (q : Submodule R M), (∀ i, q ∈ invtSubmodule (P.reflection i)) → q ≠ ⊥ → q = ⊤\", \"doc\": \"Let $ R $ be a commutative ring and $ P $ a root pairing over $ R $ with underlying $ R $-module $ M $. Assume $ M $ is nontrivial. The $ R[P.\\\\text{WeylGroup}] $-module structure on $ M $ induced by t\"}\n  {\"name\": \"RootPairing.range_weylGroup_weightHom\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": MonoidHom.range ((Equiv.weightHom P).restrict P.weylGroup) = Subgroup.closure (range P.reflection)\", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the weight homomorphism is equal to the subgroup generated by the reflections of $ P $. This means that every element in the image can be expr\"}\n  {\"name\": \"CoxeterSystem.submonoid_closure_range_simple\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Submonoid.closure (range cs.simple) = ⊤\", \"doc\": \"The submonoid generated by the simple reflections in a Coxeter system is equal to the entire Coxeter group, i.e., $\\\\mathrm{Submonoid.closure}(\\\\mathrm{range}(\\\\mathrm{simple})) = W$.\"}\n  {\"name\": \"RootPairing.range_weylGroupToPerm\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": P.weylGroupToPerm.range = Subgroup.closure (range P.reflectionPerm)\", \"doc\": \"The image of the Weyl group permutation homomorphism $ P.\\text{weylGroupToPerm} $ for a root pairing $ P $ is equal to the subgroup generated by the permutations $ P.\\text{reflectionPerm} $ associated w\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix parabolicity, Coxeter groups, abstract root pairings and characteristic-zero Lie-algebra constructions do not assert the existence of a subgroup scheme containing a prescribed Borel and normalizer representatives"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Matrix.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] (m : Matrix (Fin 2) (Fin 2) R) : Prop\", \"doc\": \"A `2 × 2` matrix is *parabolic* if it is non-scalar and its discriminant is 0.\"}\n  {\"name\": \"Matrix.parabolicEigenvalue\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {K : Type u_1} [Field K] (m : Matrix (Fin 2) (Fin 2) K) : K\", \"doc\": \"The unique eigenvalue of a parabolic matrix (junk if `m` is not parabolic).\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] (g : GL (Fin 2) R) : Prop\", \"doc\": \"Synonym of `Matrix.IsParabolic`, for dot-notation.\"}\n  {\"name\": \"Matrix.IsParabolic.neg\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (h : m.IsParabolic) : (-m).IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.IsParabolic.of_neg\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (h : (-m).IsParabolic) : m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.isParabolic_neg_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} : (-m).IsParabolic ↔ m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {K : Type u_2} [Field K] {g : GL (Fin 2) K} [NeZero 2] (hg : g.IsParabolic) : (↑g).parabolicEigenvalue ≠ 0\", \"doc\": \"\"}\n  {\"name\": \"Matrix.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} [IsReduced R] (hm : m 1 0 = 0) : m.IsParabolic ↔ m 0 0 = m 1 1 ∧ m 0 1 ≠ 0\", \"doc\": \"\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic.pow\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {K : Type u_2} [Field K] {g : GL (Fin 2) K} (hg : g.IsParabolic) [CharZero K] {n : ℕ} (hn : n ≠ 0) : (g ^ n).IsParabolic\", \"doc\": \"A non-zero power of a parabolic element is parabolic.\"}\n  {\"name\": \"Matrix.isParabolic_conj'_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (g : GL (Fin 2) R) : ((↑g)⁻¹ * m * ↑g).IsParabolic ↔ m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.isParabolic_conj_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] {m : Matrix (Fin 2) (Fin 2) R} (g : GL (Fin 2) R) : (↑g * m * (↑g)⁻¹).IsParabolic ↔ m.IsParabolic\", \"doc\": \"\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.isParabolic_conj_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \" {R : Type u_1} [CommRing R] (g h : GL (Fin 2) R) : (g * h * g⁻¹).IsParabolic ↔ h.IsParabolic\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix parabolicity, Coxeter groups, abstract root pairings and characteristic-zero Lie-algebra constructions do not assert the existence of a subgroup scheme containing a prescribed Borel and normalizer representatives"
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic|Parabolic|simpleReflection.*Borel|Borel.*reflection",
+   "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"18\", \"text\": \"We define the cusps of a subgroup of `GL(2, ℝ)` as the fixed points of parabolic elements.\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"49\", \"text\": \"lemma isParabolic_iff_of_upperTriangular {g} (hg : g ∈ 𝒢) (hg10 : g 1 0 = 0) :\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"50\", \"text\": \"    g.IsParabolic ↔ (∃ x ≠ 0, g = upperRightHom x) ∨ (∃ x ≠ (0 : K), g = -upperRightHom x) :=\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"51\", \"text\": \"  isParabolic_iff_of_upperTriangular_of_det (HasDetPlusMinusOne.det_eq hg) hg10\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"line\": \"57\", \"text\": \"/-- The *cusps* of a subgroup of `GL(2, ℝ)` are the fixed points of parabolic elements of `g`. -/\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"187\", \"text\": \"/-- If `g` is parabolic, this is the unique fixed point of `g` in `OnePoint K`. -/\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"188\", \"text\": \"def parabolicFixedPoint (g : GL (Fin 2) K) : OnePoint K :=\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"191\", \"text\": \"lemma IsParabolic.smul_eq_self_iff {g : GL (Fin 2) K} (hg : g.IsParabolic) [NeZero (2 : K)]\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"192\", \"text\": \"    {c : OnePoint K} : g • c = c ↔ c = parabolicFixedPoint g := by\"}\n  {\"file\": \"Mathlib/Topology/Compactification/OnePoint/ProjectiveLine.lean\", \"line\": \"196\", \"text\": \"  | infty => by_cases h : g 1 0 = 0 <;> simp [parabolicFixedPoint, smul_infty_eq_ite, h]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"19\", \"text\": \"* parabolic elements (`Matrix.IsParabolic`) - one eigenvalue with non-semisimple generalized\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"39\", \"text\": \"/-- A `2 × 2` matrix is *parabolic* if it is non-scalar and its discriminant is 0. -/\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"40\", \"text\": \"def IsParabolic : Prop := m ∉ Set.range (scalar _) ∧ m.discr = 0\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"46\", \"text\": \"@[simp] lemma isParabolic_conj_iff : (g.val * m * g.val⁻¹).IsParabolic ↔ IsParabolic m := by\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean\", \"line\": \"47\", \"text\": \"  simp_rw [IsParabolic, discr_conj, Set.mem_range, ← Matrix.coe_units_inv,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/UpperHalfPlane/FixedPoints.lean\", \"line\": \"22\", \"text\": \"- if `g` preserves orientation, and is a parabolic or a hyperbolic matrix,\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: matrix parabolicity, Coxeter groups, abstract root pairings and characteristic-zero Lie-algebra constructions do not assert the existence of a subgroup scheme containing a prescribed Borel and normalizer representatives"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple algebraic group has a proper subgroup containing a Borel and representatives of all simple reflections except one",
+   "results": "8 hits; top results: LieAlgebra.IsSemisimple.booleanGenerators, MulAction.IwasawaStructure.is_generator, RootPairing.GeckConstruction.instHasTrivialRadical, RootPairing.weylGroup.induction', RootPairing.weylGroup.induction, CoxeterSystem.subgroup_closure_range_simple, RootPairing.range_weylGroupToPerm, Subgroup.widthInfty. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract Weyl/Coxeter groups, semisimple Lie algebras or parabolic 2-by-2 matrices; none constructs a subgroup scheme with the required Borel and normalizer containment. Matrix.IsParabolic was read at Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean:40; it means non-scalar with discriminant zero."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\"",
+   "results": "12 hits; top results: Matrix.IsParabolic, Matrix.parabolicEigenvalue, Matrix.GeneralLinearGroup.IsParabolic, Matrix.IsParabolic.neg, Matrix.IsParabolic.of_neg, Matrix.isParabolic_neg_iff, Matrix.GeneralLinearGroup.parabolicEigenvalue_ne_zero, Matrix.isParabolic_iff_of_upperTriangular. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract Weyl/Coxeter groups, semisimple Lie algebras or parabolic 2-by-2 matrices; none constructs a subgroup scheme with the required Borel and normalizer containment. Matrix.IsParabolic was read at Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean:40; it means non-scalar with discriminant zero."
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic|Parabolic|BorelSubgroup",
+   "results": "16 hits; top results: Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/NumberTheory/ModularForms/Cusps.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean, Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract Weyl/Coxeter groups, semisimple Lie algebras or parabolic 2-by-2 matrices; none constructs a subgroup scheme with the required Borel and normalizer containment. Matrix.IsParabolic was read at Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean:40; it means non-scalar with discriminant zero."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The subgroup defined by a fundamental cocharacter in a semisimple algebraic group contains the Borel and all other simple reflection representatives",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CoxeterSystem.subgroup_closure_range_simple\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Subgroup.closure (range cs.simple) = ⊤\", \"doc\": \"In a Coxeter system $(W, B)$, the subgroup generated by the set of simple reflections corresponding to $B$ is equal to the entire Coxeter group $W$.\"}\n  {\"name\": \"CoxeterSystem.simple\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \"(i : B) : W\", \"doc\": \"The function maps each generator $i$ in the set $B$ to its corresponding simple reflection in the Coxeter group $W$, defined as the image of the canonical generator under the inverse of the isomorphis\"}\n  {\"name\": \"RootPairing.range_weylGroup_weightHom\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": MonoidHom.range ((Equiv.weightHom P).restrict P.weylGroup) = Subgroup.closure (range P.reflection)\", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the weight homomorphism is equal to the subgroup generated by the reflections of $ P $. This means that every element in the image can be expr\"}\n  {\"name\": \"RootPairing.range_weylGroup_coweightHom\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \":\\n  MonoidHom.range ((Equiv.coweightHom P).restrict P.weylGroup) =\\n    Subgroup.closure (range (MulOpposite.op ∘ P.coreflection))\", \"doc\": \"The image of the Weyl group of a root pairing $ P $ under the restricted coweight homomorphism is equal to the subgroup generated by the coreflections composed with the opposite monoid operation. Spec\"}\n  {\"name\": \"RootPairing.weylGroup\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": Subgroup (Aut P)\", \"doc\": \"The Weyl group of a root pairing $ P $ is the subgroup of the automorphism group $ \\\\text{Aut}(P) $ generated by the image of the reflection automorphisms. It consists of all automorphisms that can be \"}\n  {\"name\": \"Subgroup\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \"(G : Type u_3) → [Group G] → Type u_3\", \"doc\": \"A subgroup of a group $G$ is a subset $H \\\\subseteq G$ containing the identity element of $G$, closed under the group multiplication and taking inverses, such that $H$ itself forms a group under the in\"}\n  {\"name\": \"RootPairing.weylGroup_toSubmonoid\", \"module\": \"Mathlib.LinearAlgebra.RootSystem.WeylGroup\", \"type\": \": P.weylGroup.toSubmonoid = Submonoid.closure (range (Equiv.reflection P))\", \"doc\": \"The submonoid generated by the reflection automorphisms of a root pairing $ P $ is equal to the submonoid underlying its Weyl group, i.e., $ \\\\text{WeylGroup}(P) $ viewed as a submonoid coincides with \"}\n  {\"name\": \"CoxeterSystem.submonoid_closure_range_simple\", \"module\": \"Mathlib.GroupTheory.Coxeter.Basic\", \"type\": \": Submonoid.closure (range cs.simple) = ⊤\", \"doc\": \"The submonoid generated by the simple reflections in a Coxeter system is equal to the entire Coxeter group, i.e., $\\\\mathrm{Submonoid.closure}(\\\\mathrm{range}(\\\\mathrm{simple})) = W$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the results concern abstract Weyl/Coxeter groups, semisimple Lie algebras or parabolic 2-by-2 matrices; none constructs a subgroup scheme with the required Borel and normalizer containment. Matrix.IsParabolic was read at Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/FinTwo.lean:40; it means non-scalar with discriminant zero."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fundamental-ray-regular-power",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Nonvanishing of rho section modules by a highest-weight matrix coefficient in the Steinberg endomorphism detection input. Milne 22.20 proof: Lemma 22.24 and proof, printed p.469, followed by the first three sentences of the proof of Lemma 22.25 (the regular function for a positive multiple). Definition 22.21 and Proposition 22.22 fix the normalization on U n_0 B. Supporting input: Milne Proposition 21.88, the proper standard parabolic used in the first sentence of Lemma 22.24.",
+   "via": [
+    "lem-sfb-fundamental-ray-regular-power",
+    "lem-sfb-dominant-character-highest-line",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-maximal-parabolic-reflections",
+  "worker": "stage1",
+  "summary": "Q48 follows Milne 21.88 using an integral multiple of the rational fundamental cocharacter. Existing nodes supply the semisimple root span, rational root base, limit subgroup scheme, root-group parametrizations, positive-root product and Weyl pairing action. No new nodes or Mathlib leaves are needed. Checked arbitrary test algebras for the Borel inclusion and integer-character weights for strictness in every characteristic. The statement is unchanged.",
+  "blueprint": "The inherited from.place traces the direct-image alteration prerequisite to Milne 22.24: its initial proper subgroup containing the Borel and the other simple reflections is proved here by Milne 21.88. The current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), retains the direct-image route. blueprint_refs.py ancestor returns None for this Lean-origin chain; the existing from.node=null and precise from.place/via are retained. Whole-blueprint searches for parabolic, cocharacter and simple reflection found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-c41efde0b",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-c41efde0b (reviewer sub-agent of L); spot-checked: I read the item, its five steps and the statements of all seven cited nodes. Milne iAG2017 Prop. 21.88 (p.452, formula (138)) and Lemma 22.24 (p.469) match the item. The statement and stmt_deps are byte-identical to the version Q132 created. The item is still unsplit in live and side-live, there is no re-split note, there are 0 new nodes and no SGA is cited. Step 1: the Borel-pair and semisimple-roots-span nodes supply the hypotheses of root-base-rational-integral-spans, so Δ is a Q-basis. The dual vector η_i is multiplied by d to give an actual cocharacter λ with <α_j,λ>=dδ_ij and nonnegative pairing with the positive roots. Step 2: the cocharacter-limit node gives P_λ as a smooth connected closed subgroup with its functor on all algebras. Step 3: the root-subgroup formula u_β(s^{<β,λ>}a) extends over A^1, the positive-root product is U, and B=U⋊T, so B⊂P on all test algebras. Step 4: -α_i is a root with a 1-dimensional weight space of weight -d. Since Lie(P)=⊕_{n≥0}g_n, Lie(P)≠Lie(G), which gives strictness in every characteristic. Step 5: the pairing-preserving W action gives s_jλ=λ for j≠i, so the conjugation orbit of n is constant and n∈P(F). Small cases checked: r=0, SL2/PGL2, SL3 with (2,-1,-1), and characteristic dividing d. The proof_dep closure contains neither the item nor its citer. Batch 5: the four flagged citations reach sec-trace-formula only through the generic Stacks leaves lem-trf-fppf-covering-base-change (021O) and lem-trf-smooth-fpqc-base-descent (02VL). These are neither the trace formula, Poincaré duality nor steps of their proofs, so the citations are accepted. No fixes; no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MaximalParabolicReflections",
+  "declaration": "AlgebraicGeometry.maximal_parabolic_reflections",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MaximalParabolicReflections.lean",
+  "statement": "theorem maximal_parabolic_reflections {F : Type u} [Field F] [IsAlgClosed F] (G T B : Grp (Over (Spec (.of F)))) (hG : IsSemisimpleGroupScheme G.X) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplit : ∃ m : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F m)) (iB : B ⟶ G) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (aB : ModObj T.X B.X) (haG : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (haB : aB.smul = (j.hom.hom ⊗ₘ 𝟙 B.X) ≫ GrpObj.conj B.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (b : P.Base) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hΦ : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (hpos : ∀ α : Φ, b.IsPos α ↔ @TorusCharacterTangent.weightSpace F _ T B aB α.val.toMul ≠ ⊥) : ∀ i : b.support, ∃ (H : Grp (Over (Spec (.of F)))) (k : H ⟶ G), IsClosedSubgroupScheme k.hom.hom ∧ Smooth H.X.hom ∧ ConnectedSpace H.X.left ∧ (∃ f : B ⟶ H, f ≫ k = iB) ∧ ¬ IsIso k ∧ ∀ (l : b.support), l ≠ i → ∀ n : RankOneRoots.normalizer iT, (∃ e : T ≅ T, e.hom.hom.hom ≫ iT.hom.hom = (toUnit T.X ≫ n.val) * iT.hom.hom * (toUnit T.X ≫ n.val)⁻¹ ∧ ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), e.hom.hom.hom ≫ χ.toMul.hom.hom = (χ - (P.toLinearMap χ (P.coroot l.val)) • P.root l.val).toMul.hom.hom) → n.val ∈ RankOneRoots.pointImage k (𝟙_ (Over (Spec (.of F))))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded Borel-pair root datum with actual character/cocharacter Hom groups. Simple roots are b.support; normalizer representatives are characterized by conjugation on T and its prescribed reflection on every character. Strict subgroup inclusion is expressed by not IsIso."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4430d04ef",
+  "group": "NM",
+  "result": "pass",
+  "note": "Snapshot item differs from live only in lean (verbatim statement) and stmt_deps + landed def-sfb-rank-one-root-interfaces (normalizer/pointImage used). Hypotheses = Borel-pair node's universal clause and root-datum conjuncts verbatim (actions=conj, pairing=composition, Φ=nonzero Lie(G) weights, IsPos=Lie(B)); coroots pinned since semisimple roots span; omitted Module.Finite/IsReduced are consequences. Conclusion: ∀ i ∈ b.support, ∃ closed smooth connected H ↪ G with B factoring, ¬IsIso k (strict), and every normalizer F-point whose conjugation induces s_l (l≠i) on characters lies in pointImage k 𝟙_; Ad(n) vs Ad(n)⁻¹ convention vs rank-one node equivalent as s_l²=1. r=0 vacuous; no char/sc assumptions; single universe u. No defs, sorry only, docstrings/blueprint/proof steps present, no duplicate in live lean, report sections present. Not recompiled (no change)."
+ }
+}

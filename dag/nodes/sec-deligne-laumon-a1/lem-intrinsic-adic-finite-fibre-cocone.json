@@ -1,0 +1,145 @@
+{
+ "id": "lem-intrinsic-adic-finite-fibre-cocone",
+ "kind": "statement",
+ "title": "Finite scalar coherence of normalized intrinsic adic fibres",
+ "statement": "For any scheme W, geometric point x over an algebraically closed field [def-weil-geometric-point], and algebraic closure Qbar of Q_l, let G_L be rational fibre functors on the rational constructible category [def-weil-rationalization-karoubi] at each finite coefficient field L [def-weil-finite-subextension-directed-set] whose restriction to integral constructible objects [def-weil-derived-complete-integral-detailed] is completed pullback followed by H^0, point sections and inversion of the uniformizer [def-pur-completed-coefficient-presentation-transport]. Extend G_L to Qbar along the actual transported field inclusion. These functors admit natural transition isomorphisms satisfying the cocycle for the normalized stage associator [def-weil-algebraically-closed-coefficients]. This is finite scalar compatibility only; it does not assert existence of a functor on the common-stage category.",
+ "stmt_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-geometric-point"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15; scalar compatibility before common-stage descent"
+ },
+ "proof": [
+  {
+   "text": "Compare the normalized coefficient model with the ordinary completed module model. At the point, evaluation of the constant-to-completion map is the actual integer coefficient inclusion.",
+   "uses": [
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15; scalar compatibility before common-stage descent"
+   }
+  },
+  {
+   "text": "Finite free scalar tensor commutes with completed pullback, homology in degree zero and point sections. On K-flat representatives the normalized maps take a pure tensor to its point section.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-isomorphism-comparison-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15; scalar compatibility before common-stage descent"
+   }
+  },
+  {
+   "text": "Balanced tensor associativity proves the comparison cocycle on pure tensors. Naturality and localization extend it to rational fractions. The coefficient embeddings compose, so extension to the closure field gives the stated cocone for the recorded stage system.",
+   "uses": [
+    "lem-weil-scalar-extension-composition",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15; scalar compatibility before common-stage descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-isomorphism-comparison-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), Proposition 6.8.14 and Remark 6.8.15; scalar compatibility before common-stage descent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed geometric adic point sections commute coherently with finite extension of coefficient fields before descent to the common stage category",
+   "results": "Eight hits about adic completion evaluation; no fibre cocone comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"associator\"",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfAdicFiniteFiberCocone|sfAdicRationalFiber.*[Cc]oherence",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicHeartIntrinsicFibres",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph: pullback cohomology sheaves are pullbacks of sheaves; finite-coefficient scalar compatibility of the geometric fibres used in the intrinsic common-stage presentation.",
+   "via": [
+    "lem-per-adic-heart-pullback-fibres"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicFiniteFiberCocone",
+  "file": "lean/Sheaf/Paper/AdicFiniteFiberCocone.lean",
+  "declaration": "WeilConjectures.sfAdicFiniteFiberCocone",
+  "statement": "theorem sfAdicFiniteFiberCocone\n    (l : ℕ) [Fact l.Prime] (W : Scheme.{u})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ W)\n    (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar]\n    [IsAlgClosure (Padic l) Qbar]\n    (G : ∀ L : Padic.FiniteCoefficientFields l Qbar,\n      sfRationalConstructibleCategory l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) W ⥤\n          ModuleCat.{u + 1} (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L))\n    (hG : ∀ L, sfRationalConstructibleLocalization l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) W ⋙ G L =\n      (sfIntegralConstructible l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) W).ι ⋙\n        (purCoefficientModel l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) W).inverse ⋙\n        pbcActualCompletedPull x (pbcIntegralDatum l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L)) ⋙\n        DerivedCategory.homologyFunctor _ 0 ⋙\n        PerAdic.pointSections l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L) Ω ⋙\n        ModuleCat.extendScalars (PerAdic.integerToField l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Qbar L))) :\n    let Φ := fun L : Padic.FiniteCoefficientFields l Qbar ↦ G L ⋙\n      ModuleCat.extendScalars\n        (L.val.subtype.comp (Shrink.algEquiv (Padic l) L.val).toRingHom)\n    let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l Qbar W\n    ∃ β : ∀ {L M : Padic.FiniteCoefficientFields l Qbar} (h : L ≤ M),\n        S.T h ⋙ Φ M ≅ Φ L,\n      ∀ {L M N : Padic.FiniteCoefficientFields l Qbar} (h : L ≤ M) (k : M ≤ N)\n        (K : GeneralAlgebraicallyClosedCoefficients.Stage l Qbar W L),\n        (Φ N).map ((S.assoc h k).hom.app K) ≫ (β (h.trans k)).hom.app K =\n          (β k).hom.app ((S.T h).obj K) ≫ (β h).hom.app K",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60ab6",
+  "group": "X2",
+  "result": "fix",
+  "landing": "20261025T164720-L-1059828",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60ab6",
+  "group": "X2",
+  "result": "fix",
+  "landing": "20261025T164720-L-1059828",
+  "kind": "interface",
+  "note": "independent cc review: item proof of sfAdicCommonFiber_exists vs stageSystem descFunctor + new sfAdicFiniteFiberCocone vs its node and stageSystem_existsUnique/associator; removed imports vs AdicHeartPullbackFibres transitive route and unit sk-p-dl-a1-perverse realized; 14 direct importers compiled (13 ok, DlLocalHeartCoverDefects pre-existing missing olean)"
+ }
+}

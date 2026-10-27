@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-differential-presheaf-relation-cokernel",
+ "kind": "statement",
+ "title": "Presheaf differential relations and their sheafified cokernel",
+ "statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology], small in the universe of its presheaf values, and let $\\varphi:\\mathcal A\\to\\mathcal B$ be a morphism of presheaves of commutative rings. A presheaf of $\\mathcal B$-modules means a presheaf of abelian groups with a $\\mathcal B(U)$-module structure on each value and semilinear restriction maps. For a presheaf of sets $T$, define the free module presheaf $\\mathcal B[T](U)=\\bigoplus_{t\\in T(U)}\\mathcal B(U)[t]$ [def-weil-pbc-free-module], with restrictions $b[t]\\mapsto b|_V[t|_V]$. Put\n$$F=\\mathcal B[\\mathcal B],\\qquad E=\\mathcal B[\\mathcal B\\times\\mathcal B]\\oplus\\mathcal B[\\mathcal B\\times\\mathcal B]\\oplus\\mathcal B[\\mathcal A].$$\nThe sectionwise linear maps with generator values\n$$r_1[(a,b)]=[a+b]-[a]-[b],\\quad r_2[(f,g)]=[fg]-g[f]-f[g],\\quad r_3[h]=[\\varphi(h)]$$\nform a morphism $r:E\\to F$ of module presheaves. Let $P(U)=\\Omega_{\\mathcal B(U)/\\mathcal A(U)}$ [def-weil-pbc-kahler-differentials], with restrictions characterized by $d_Ub\\mapsto d_V(b|_V)$. These restrictions make $P$ a module presheaf, and the maps $p_U:F(U)\\to P(U)$, $[b]\\mapsto d_Ub$, form a morphism $p:F\\to P$ which is the cokernel of $r$, computed sectionwise. For every module presheaf $M$, its abelian sheafification $M^\\#$ [def-weil-pbc-sheafification] has the canonical $\\mathcal B^\\#$-module structure extending the original action. In the category of $\\mathcal B^\\#$-module sheaves [def-weil-sheaf-of-modules-category], $p^\\#:F^\\#\\to P^\\#$ is a cokernel of $r^\\#:E^\\#\\to F^\\#$, and for every $U$ and $b\\in\\mathcal B(U)$ it satisfies\n$$p^\\#_U(\\eta_F([b]))=\\eta_P(d_Ub),$$\nwhere $\\eta_M:M\\to M^\\#$ denotes the sheafification unit.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TP, lemma-differentials-sheafify, proof: the displayed presheaf relation map, its sectionwise differential cokernel, and the final exact-sheafification sentence."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-free-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof": [
+  {
+   "text": "For an arrow $v:V\\to U$, extend $b[t]\\mapsto b|_V[t|_V]$ additively on finite sums. The basis description in [def-weil-pbc-free-module] makes this a semilinear map; identity and composite restrictions agree on every $b[t]$, hence on every sum. This constructs the free module presheaves in the statement. Restricting the three relation generators gives respectively $[a|_V+b|_V]-[a|_V]-[b|_V]$, $[f|_Vg|_V]-g|_V[f|_V]-f|_V[g|_V]$, and $[\\varphi_V(h|_V)]$. These are exactly $r_V$ of the restricted generators, since ring restrictions preserve sums and products and $\\varphi$ is natural. Thus $r$ is a morphism.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, proof: presheaf relation map and its sectionwise cokernel"
+   }
+  },
+  {
+   "text": "For $v:V\\to U$, regard $P(V)$ as a $\\mathcal B(U)$-module through restriction. The map $b\\mapsto d_V(b|_V)$ is a $\\mathcal A(U)$-derivation: additivity and Leibniz hold in $P(V)$, and $d_V(\\varphi_U(h)|_V)=d_V(\\varphi_V(h|_V))=0$. The universal property of [def-weil-pbc-kahler-differentials] therefore gives a unique semilinear restriction $P(U)\\to P(V)$ carrying $d_Ub$ to $d_V(b|_V)$. Identity and composite restrictions have that same value on every $d_Ub$, so uniqueness proves the presheaf laws. Also $p_V([b|_V])=d_V(b|_V)=p_U([b])|_V$; linearity on the free generators proves that $p$ is natural.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, proof: presheaf relation map and its sectionwise cokernel"
+   }
+  },
+  {
+   "text": "At each U, a linear map g from the free symbol module killing r_U defines the function b ↦ g([b]). Evaluating g r_U = 0 on the three kinds of free generators gives additivity, Leibniz and vanishing on the image of A(U). Thus it is a derivation relative to φ_U. The universal property of [def-weil-pbc-kahler-differentials] gives a unique linear map from Ω_{B(U)/A(U)} to the target, whose composite with p_U agrees with g on each free generator and hence everywhere. Uniqueness follows because differential generators determine a map from Ω. This proves the sectionwise cokernel property without identifying a separate relation span. The joint reflection of colimits by evaluation in [lem-weil-pbc-presheaf-modules-colimits-sectionwise] then proves the presheaf cokernel property.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, proof: presheaf relation map and its sectionwise cokernel"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-interface] with $\\mathcal O=\\mathcal B$. It equips the abelian sheafification of every module presheaf $M$ with the canonical compatible $\\mathcal B^\\#$-module action and gives functorial $\\mathcal B^\\#$-linear sheafifications $r^\\#$ and $p^\\#$. Its factorization property states that precomposition with $\\eta_M$ is a bijection from module-sheaf maps $M^\\#\\to N$ to module-presheaf maps $M\\to N$, where scalars on $N$ are restricted along $\\mathcal B\\to\\mathcal B^\\#$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules and following adjunction formula"
+   }
+  },
+  {
+   "text": "The adjunction of [lem-pc-sites-module-sheafification-interface] makes associatedModules a left adjoint. Hence it preserves zero morphisms and colimits, in particular the cokernel cofork from step 3. Applying the standard mapped-cokernel-cofork construction therefore gives the cokernel universal property of p^# for r^#, including r^# ≫ p^# = 0. This is the categorical form of descending a map through the presheaf cokernel and then uniquely extending it across the sheafification unit.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, proof: presheaf relation map and its sectionwise cokernel"
+   }
+  },
+  {
+   "text": "The morphism $p^\\#$ is characterized by $p^\\#\\eta_F=\\eta_Pp$, by the functorial factorization in [lem-pc-sites-module-sheafification-interface]. Evaluating at $U$ on $[b]$ and using $p_U([b])=d_Ub$ from step 3 gives $p^\\#_U(\\eta_F([b]))=\\eta_P(d_Ub)$, as required.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08TP, lemma-differentials-sheafify, proof: presheaf relation map and its sectionwise cokernel"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 08TP, lemma-differentials-sheafify, proof; Tag 03CY, lemma-sheafification-presheaf-modules; algebra.tex Tag 07BK, definition-differentials and Tag 00RO, lemma-universal-omega"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a map of presheaves of commutative rings the three additivity Leibniz and base ring relations give a natural free module presentation of sectionwise Kahler differentials whose sheafification is still a cokernel",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; SheafOfModules.Presentation.mapRelations; PresheafOfModules.DifferentialsConstruction.instHasDifferentials; PresheafOfModules.HasDifferentials.exists_universal_derivation; SheafOfModules.presentationOfIsCokernelFree_relations; SheafOfModules.Presentation.relations; PresheafOfModules.DifferentialsConstruction.isUniversal'; digest=f9b510265cb457a2. Presheaf differentials and generic constant-index free presentations are ingredients, not the specified three-relation presheaf map and its sheafified cokernel. Read Differentials/Presheaf.lean:185-242 and Sheaf/Quasicoherent.lean:38-130,150-180.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The presheaf of relative differentials is the cokernel of the free presheaf map on differential relations and this presentation remains exact after module sheafification",
+   "results": "8 hits; SheafOfModules.presentationOfIsCokernelFree_relations; SheafOfModules.relationsOfIsCokernelFree; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.presentationOfIsCokernelFree_generators; PresheafOfModules.HasDifferentials.exists_universal_derivation; PresheafOfModules.DifferentialsConstruction.instHasDifferentials; SheafOfModules.presentationOfIsCokernelFree; digest=c655c16c5aaffb13. Presheaf differentials and generic constant-index free presentations are ingredients, not the specified three-relation presheaf map and its sheafified cokernel. Read Differentials/Presheaf.lean:185-242 and Sheaf/Quasicoherent.lean:38-130,150-180.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialsConstruction\"",
+   "results": "7 hits; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'; PresheafOfModulesOfCommRing.DifferentialsConstruction.instHasDifferentials; PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation'; PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal'; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map_d; digest=1ad6a35401e35c19. Presheaf differentials and generic constant-index free presentations are ingredients, not the specified three-relation presheaf map and its sheafified cokernel. Read Differentials/Presheaf.lean:185-242 and Sheaf/Quasicoherent.lean:38-130,150-180.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relation|cokernel|relativeDifferentials|isUniversal [sub=Algebra/Category/ModuleCat/Differentials]",
+   "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:193; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:202; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:205; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:208; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:214; digest=25db6ed86ef33974. Presheaf differentials and generic constant-index free presentations are ingredients, not the specified three-relation presheaf map and its sheafified cokernel. Read Differentials/Presheaf.lean:185-242 and Sheaf/Quasicoherent.lean:38-130,150-180.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural free presheaf presentation of Kahler differentials and preservation of its cokernel by sheafification",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; SheafOfModules.presentationOfIsCokernelFree_generators; SheafOfModules.isFinitePresentation; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.Presentation.mk; TopCat.Presheaf.toSheafify; PresheafOfModules.freeYonedaCoproductsCokernelCofork; SheafOfModules.presentationOfIsCokernelFree_relations; digest=aa5b362f4c551f72. Presheaf differentials and generic constant-index free presentations are ingredients, not the specified three-relation presheaf map and its sheafified cokernel. Read Differentials/Presheaf.lean:185-242 and Sheaf/Quasicoherent.lean:38-130,150-180.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relation|cokernel|relativeDifferentials|isUniversal [sub=Algebra/Category/ModuleCat/Differentials]",
+   "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean; digest=25db6ed86ef33974. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242 and Presheaf/Sheafification.lean:54-74,125-157. Differential presheaves and generic free presentations occur, but none states this particular three-relation map and its sheafified cokernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DifferentialsConstruction\"",
+   "results": "7 hits; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'; PresheafOfModulesOfCommRing.DifferentialsConstruction.instHasDifferentials; PresheafOfModulesOfCommRing.DifferentialsConstruction.derivation'; PresheafOfModulesOfCommRing.DifferentialsConstruction.isUniversal'; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_obj; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map; PresheafOfModulesOfCommRing.DifferentialsConstruction.relativeDifferentials'_map_d; digest=1ad6a35401e35c19. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242 and Presheaf/Sheafification.lean:54-74,125-157. Differential presheaves and generic free presentations occur, but none states this particular three-relation map and its sheafified cokernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free module presheaf on differential relations presents the presheaf of Kahler differentials and its sheafification as cokernels",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; SheafOfModules.presentationOfIsCokernelFree; SheafOfModules.presentationOfIsCokernelFree_relations; PresheafOfModules.freeObj; SheafOfModules.Presentation.isColimit; SheafOfModules.relationsOfIsCokernelFree; SheafOfModules.relationsOfIsCokernelFree_s; PresheafOfModules.HasDifferentials.mk; digest=27db0bdae69cef8f. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242 and Presheaf/Sheafification.lean:54-74,125-157. Differential presheaves and generic free presentations occur, but none states this particular three-relation map and its sheafified cokernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of presheaves of commutative rings, the natural free module map encoding additivity Leibniz and constants has sectionwise Kahler differentials as cokernel, also after sheafification",
+   "results": "8 hits; PresheafOfModules.DifferentialsConstruction.instHasDifferentials; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map; PresheafOfModules.DifferentialsConstruction.isUniversal'; PresheafOfModules.HasDifferentials; SheafOfModules.Presentation.mapRelations; PresheafOfModules.HasDifferentials.exists_universal_derivation; digest=114ceaaae2245f17. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242 and Presheaf/Sheafification.lean:54-74,125-157. Differential presheaves and generic free presentations occur, but none states this particular three-relation map and its sheafified cokernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler differential relation module cokernel presentation by free modules is natural under restriction of presheaves and sheafification preserves this presentation",
+   "results": "8 hits; SheafOfModules.relationsOfIsCokernelFree; SheafOfModules.presentationOfIsCokernelFree_relations; SheafOfModules.Presentation.mapRelations; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'; SheafOfModules.relationsOfIsCokernelFree_I; SheafOfModules.relationsOfIsCokernelFree_s; SheafOfModules.Presentation.map_relations_I; PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map; digest=e7dcb0c347a65e29. Read Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf.lean:185-242 and Presheaf/Sheafification.lean:54-74,125-157. Differential presheaves and generic free presentations occur, but none states this particular three-relation map and its sheafified cokernel.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-sheafified-module-differentials-cokernel",
+  "date": "2026-10-22",
+  "group": "Q44"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting ring/sheaf input: sheaf cotangent stalks, section maps and ring localization; the underived inverse-image differential comparison uses the sheafified free-module relation-map presentation. Re-split: old steps (1, 2) of lem-trf-sheafified-module-differentials-cokernel: Presheaf differential relations and their sheafified cokernel.",
+   "via": [
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-trf-topos-inverse-image-differentials",
+    "lem-trf-affine-cotangent-comparison",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-differential-presheaf-relation-cokernel",
+  "worker": "stage1",
+  "summary": "Checked Stacks 08TP against its ring-level construction 07BK/00RO and the general-site, presheaf-ring module sheafification interface 03CY. Wrote the restriction and naturality calculations and the cokernel universal property after sheafification. Reused existing Mathlib leaves; no new nodes or statement changes.",
+  "blueprint": "Supporting ring/sheaf input inherited from lem-trf-local-term-locality, through lem-trf-sheafified-module-differentials-cokernel: the presheaf relation-map and sectionwise cokernel steps. Read the latest blueprint contracting-local-term proof; this algebraic input changes no chapter or unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-550017672",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-550017672 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited nodes, Stacks sites-modules 08TP (lemma-differentials-sheafify, its proof and equation-define-module-differentials) and 03CY (lemma-sheafification-presheaf-modules), and checked the tags 08TP, 03CY, 07BK and 00RO in tags/tags. The statement is faithful to 08TP: same three relations, a general site, a morphism of presheaves of rings. It is unchanged and supplies both uses in the parent lem-trf-sheafified-module-differentials-cokernel: the cokernel of r^# in step 1 and the unit formula in step 3. Steps 1 and 6 are elementary and I recomputed them: the restriction of each relation uses naturality of phi, and the unit formula follows from p^# eta_F = eta_P p. Step 2 is correct: b -> d_V(b|_V) is an A(U)-derivation into P(V), and the universal property of the Kaehler-differentials leaf gives the restriction, with the presheaf laws from uniqueness. Step 3 is correct: im r_U is the relation submodule, and the sectionwise-colimit leaf (presheaf ring, finite walking pair) gives the presheaf cokernel; its induced restrictions agree with step 2 on the generators d_U b. Step 5 is correct: it proves the cokernel property of p^# through the 03CY factorization (lem-pc-sites-module-sheafification-interface, presheaf ring O = B) and its two uniqueness statements, including p^# r^# = 0 via 0^# = 0, so no unstated exactness lemma is used. The inline module-presheaf definition is correct, since def-weil-presheaf-modules-sheafification needs a sheaf of rings. Edge cases tested: A = B gives P = 0; B = 0; one point with k -> k[x]; empty coverings (injectivity of eta is never used); non-separated B. Every proof dep is a Mathlib leaf, so the unit route is kept and no tool_uses are needed. There are no new nodes, and the item is unsplit in live and side-live, so it is not superseded. The rg -L duplicate search found nothing that states this presentation. The ten recorded searches cover all three kinds; Mathlib's DifferentialsConstruction gives only the presheaf Omega. No SGA source is used. No faults, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.DifferentialPresheafRelationCokernel",
+  "declaration": "CategoryTheory.DifferentialPresheafRelations.differential_presheaf_relation_cokernel",
+  "file": "lean/Sheaf/CategoryTheory/Sites/DifferentialPresheafRelationCokernel.lean",
+  "statement": "theorem differential_presheaf_relation_cokernel {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) {A B : Cᵒᵖ ⥤ CommRingCat.{max u v}} (φ : A ⟶ B) : ∃ (r : relations A B ⟶ symbols B) (p : symbols B ⟶ relativeDifferentials' φ), (∀ (U : Cᵒᵖ) (a b : B.obj U), r.app U (ModuleCat.freeMk (Sum.inl (a, b))) = ModuleCat.freeMk (a + b) - ModuleCat.freeMk a - ModuleCat.freeMk b) ∧ (∀ (U : Cᵒᵖ) (f g : B.obj U), r.app U (ModuleCat.freeMk (Sum.inr (Sum.inl (f, g)))) = ModuleCat.freeMk (f * g) - g • ModuleCat.freeMk f - f • ModuleCat.freeMk g) ∧ (∀ (U : Cᵒᵖ) (h : A.obj U), r.app U (ModuleCat.freeMk (Sum.inr (Sum.inr h))) = ModuleCat.freeMk (φ.app U h)) ∧ (∀ (U : Cᵒᵖ) (b : B.obj U), p.app U (ModuleCat.freeMk b) = (derivation' φ).d b) ∧ (∃ h : r ≫ p = 0, Nonempty (IsColimit (CokernelCofork.ofπ p h))) ∧ (∀ U : Cᵒᵖ, ∃ h : r.app U ≫ p.app U = 0, Nonempty (IsColimit (CokernelCofork.ofπ (p.app U) h))) ∧ (∃ h : (associatedModules J B).map r ≫ (associatedModules J B).map p = 0, Nonempty (IsColimit (CokernelCofork.ofπ ((associatedModules J B).map p) h))) ∧ (∀ (U : Cᵒᵖ) (b : B.obj U), ((associatedModules J B).map p).val.app U ((CategoryTheory.toSheafify J (symbols B).presheaf).app U (ModuleCat.freeMk b)) = (CategoryTheory.toSheafify J (relativeDifferentials' φ).presheaf).app U ((derivation' φ).d b))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The item owns the presheaf-level helpers relationLabels, symbols (F = B[B]), relations (E, the free module on the three label sets, i.e. the direct sum of the three free modules), associatedRing and associatedModules (Mathlib PresheafOfModules.freeObj and PresheafOfModules.sheafification along the ring sheafification unit), in namespace CategoryTheory.DifferentialPresheafRelations. They are definitionally the helpers of the same names in SheafifiedDifferentialsCokernel; that module belongs to the citer lem-trf-sheafified-module-differentials-cokernel, whose proof uses this item, so importing it would close a stage-3 import cycle (stage-2 review FIX). The existential arrows are fully determined by their values on every free basis generator. States the presheaf and sectionwise cokernel properties, the sheaf-module cokernel, and the sheafification-unit formula.",
+  "declarations": [
+   "CategoryTheory.DifferentialPresheafRelations.relationLabels",
+   "CategoryTheory.DifferentialPresheafRelations.symbols",
+   "CategoryTheory.DifferentialPresheafRelations.relations",
+   "CategoryTheory.DifferentialPresheafRelations.associatedRing",
+   "CategoryTheory.DifferentialPresheafRelations.associatedModules",
+   "CategoryTheory.DifferentialPresheafRelations.differential_presheaf_relation_cokernel"
+  ],
+  "fixed_by": "NT-stage2-cc-9e84a9cf3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e84a9cf3",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Maths faithful to 08TP/03CY: the three relations (signs and coefficients), p[b]=d b, cokernels in presheaves, at each U and in B#-module sheaves (associatedModules = Mathlib PresheafOfModules.sheafification), and the unit formula. No extra hypotheses or universe limits; edge cases fine; stmt_dep records identical to live and imported; docstrings and proof plan OK; only proof is sorry. Fault: the module imported SheafifiedDifferentialsCokernel, the module of the parent theorem lem-trf-sheafified-module-differentials-cokernel whose proof_deps contain this item, for relationLabels/symbols/relations/associatedRing/associatedModules, creating a stage-3 import cycle. FIX: item-owned verbatim copies of those helpers in namespace CategoryTheory.DifferentialPresheafRelations with source/blueprint docstrings; parent import dropped; theorem text unchanged; lean-record.json gives the new declaration, declarations list, verbatim statement and note (refit_record: no refusals). nt_compile --json: 6.8 s, clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261026T082308-L-2159823",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

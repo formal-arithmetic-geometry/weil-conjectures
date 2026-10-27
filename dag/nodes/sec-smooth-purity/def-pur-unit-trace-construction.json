@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-unit-trace-construction",
+ "kind": "definition",
+ "title": "AdicUnitTraceConstruction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $D$ be a finite-field datum and $C$ its coefficient datum with prime $\\ell\\ne p$ and fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$. Let $E/\\mathbf Q_\\ell$ be finite inside this closure. Let $f:X\\to Y$ be a smooth separated morphism of pure relative dimension $d\\in\\mathbf N$ between separated finite-type $D.k$-schemes, and let $S$ be the specified coefficient-compatible compact-support/exceptional adjunction system on the uniform finite-Tor constructible categories. Construction is the normalized data of the unit trace, completed projection and exceptional-adjunction assembly from a fixed base trace. It includes the canonical finite right realization, coefficient-unit constraint, twist/tensor comparison and inverse actual projection. It contains a natural transformation whose components equal the displayed adjoint transposes, their coefficient linearity including the Hom bijection, equality of all positive reductions with prescribed finite smooth purity, invertibility of every component, all normalized finite trace reductions and the finite scalar-trace equation at cofinal levels. Uses [def-pur-unit-trace-scalar-data], [def-pur-adic-projection-trace-data], [def-pur-adic-scalar-trace-data], [def-pur-completed-unit-pullback-data], [def-pur-adic-purity-objects], [def-pur-adic-source-reduction], [def-coef-ringed-tensor-hom-model], [def-sf-integral-system-canonical-bridge], [def-pur-site-sheaf-tensor-presentation-data], [def-pur-finite-compact-support-scalar-data], [def-pur-finite-trace-presentation-data].",
+ "stmt_deps": [
+  "def-pur-unit-trace-scalar-data",
+  "def-pur-adic-projection-trace-data",
+  "def-pur-adic-scalar-trace-data",
+  "def-pur-completed-unit-pullback-data",
+  "def-pur-adic-purity-objects",
+  "def-pur-adic-source-reduction",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sf-integral-system-canonical-bridge",
+  "def-pur-site-sheaf-tensor-presentation-data",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-pur-finite-trace-presentation-data"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-3, explicit unit trace assembly"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite reductions, K-flat twist tensor coordinates, scalar extended unit trace and exceptional projection transpose for integral smooth purity",
+   "results": "OK 8 hits: IsReduced.tensorProduct_of_flat_of_forall_fg, Algebra.Smooth.flat, Module.Flat.tfae_equational_criterion, LinearMap.tensorKerEquiv_apply, Algebra.FormallySmooth.instTensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.flat_iff, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier. None defines this assembly.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical finite reductions, K-flat twist tensor coordinates, scalar extended unit trace and exceptional projection transpose for integral smooth purity",
+   "results": "OK 8 hits, Algebra.Smooth/IsStandardSmooth declarations and Algebra.Extension.tensorH1Cotangent; none supplies this package.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapBifunctorShift₂Iso, CategoryTheory.Adjunction.homEquiv",
+   "results": "OK 0 hits. Earlier individual homEquiv search found abstract adjunction API, which is reused.",
+   "date": "2026-10-24",
+   "verdict": "no package"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteRightNormalization|IsJNormalized|HasTraceReductions|PurUnitTrace",
+   "results": "msearch Mathlib: OK 0 hits. rg in lean/WeilConjectures lean/Sheaf dag/nodes: no matches. blueprint_refs search unit trace: 62 related blueprint nodes, none giving this normalized data package; existing individual operations are reused.",
+   "date": "2026-10-24",
+   "verdict": "new normalized assembly package"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-adic-unit-trace-transpose-reductions",
+  "date": "2026-10-24",
+  "group": "Q21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence under finite coefficient extensions; transport unit Steps 2-3; former scalar-naturality proof Steps 6-9",
+   "via": [
+    "lem-pur-adic-unit-trace-transpose-reductions",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.AdicUnitTraceConstruction",
+  "declaration": "WeilConjectures.PurUnitTrace.Construction",
+  "declarations": [
+   "WeilConjectures.PurUnitTrace.Construction"
+  ],
+  "file": "lean/Sheaf/Paper/AdicUnitTraceConstruction.lean",
+  "statement": "structure Construction (t0 : (PurCompactSupport.image (PurCompactSupport.completed C.l (baseField D C)) (integralExceptionalCompactification D f)).obj (tateUnit D C (baseField D C) d X) ⟶ coefficientUnit D C (baseField D C) Y)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32e3e541a",
+  "group": "Q21",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32e3e541a",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery of fb7dfb40 (RETURN H2+H11). Lean byte-identical except AdicUnitTraceReductionData import LineUnboundedDerivedTensor -> BifunctorSingle (exists in side-live; no LineUnbounded decl used). H2 fixed: item adds only definition stmt_deps (theorem_stmt_dep_notes gives no finding); new existing:true owners def-pur-adic-projection-trace-data, def-pur-adic-scalar-trace-data, def-pur-completed-unit-pullback-data, def-pur-finite-trace-presentation-data: modules exist, statements verbatim in files, all listed decls are def/abbrev/structure, descriptions match bodies (adicProjection/adicTraceTensor/adicTranspose checked); not on live main (no race); old theorem citations, line-unbounded and sheaf-tensor-colimits citations removed. H11 fixed: real 13-point second reading present. Maths re-checked: T_E/H_E/P,G,eps via S.operation, exists+forall g0, unitTrace=eps P(g0), scalarTrace via pinned CoefficientComparison, formula = j then adicTranspose(adicTraceMap), NatTrans+linearity, reductions/invertible/traceReductions; existential data pinned (FiniteRightNormalization by counit, Core.unit, j/unit normalized). HEq types agree (purAdicSource unfolds to sourceFunctor.obj; HasCompactification is a Prop class so both sides use the same compactification). Edge cases d=0, K=0, empty schemes, E=bot, m=1, ramified OK. lean.statement verbatim; single sorry. Advisories: owner nodes cite lemma nodes that list the used defs; cofinalTrace restates the finite equation."
+ }
+}

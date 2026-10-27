@@ -1,0 +1,393 @@
+{
+ "id": "lem-a1-finite-geometric-sections-and-point-orbits",
+ "kind": "statement",
+ "title": "Finite geometric sections indexed by closed-point Frobenius orbits",
+ "statement": "Fix the finite-field datum $p,a,q,k_0=\\mathbf F_q,k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ in a fixed algebraic closure $\\Qlb$, and $\\Lambda\\in\\{E,\\Qlb\\}$. Use the rationalized/common-stage constructible heart [def-weil-constructible-heart]. Let $Z_0\\to\\operatorname{Spec}k_0$ be finite [def-weil-finite-integral-morphism], put $Z=Z_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and let $M$ be a constructible $\\Lambda$-sheaf on $Z$, with no Weil structure assumed. Compact cohomology is [def-weil-ordinary-compact-cohomology]; its evaluation $e_z:H_c^0(Z,M)\\to M_z$ is degree zero of the canonical compact rational counit germ [def-a1-proper-sections-germ-and-moving-point], with $M_z=\\mathrm H^0(\\operatorname{Fib}_s(Lz^*M))$ [def-weil-derived-pullback-tensor-hom, def-weil-finite-coefficient-point, def-weil-derived-cohomology-sheaves].\n\nFor a closed point $x\\in|Z_0|$ [def-weil-closed-points], write $d_x=[\\kappa(x):k_0]$ using the residue field [def-weil-residue-field], and let $P_x$ consist of $k$-points $z:s\\to Z$ projecting to $x$. Then $Z(k)$ and $|Z_0|$ are finite, the projection $Z(k)\\to|Z_0|$ is surjective, and $P_x$ is naturally the set of $k_0$-embeddings $\\kappa(x)\\hookrightarrow k$. In particular $|P_x|=d_x\\geq1$.\n\nPut $h=\\operatorname{Spec}(\\gamma)$ and $g=\\operatorname{id}_{Z_0}\\times h$, where $\\gamma=(c\\mapsto c^q)^{-1}$ [def-weil-frobenius-detailed]. The permutation $T(z)=gzh^{-1}$ of $Z(k)$ preserves every $P_x$, corresponds on embeddings to postcomposition with $\\gamma^{-1}$, and is one cycle of length $d_x$ there. Thus $g^{d_x}z=zh^{d_x}$ for $z\\in P_x$.\n\nThe canonical germ evaluations give a natural $\\Lambda$-linear isomorphism\n$$e_M:H_c^0(Z,M)\\xrightarrow{\\sim}\\bigoplus_{x\\in|Z_0|}\\ \\bigoplus_{z\\in P_x}M_z.$$\nEvery $M_z$ and $H_c^0(Z,M)$ is finite-dimensional. Naturality holds for all morphisms of constructible sheaves, without requiring a Weil structure. At $\\Qlb$ these maps and spaces are scalar extensions from any common finite coefficient-field stage. These assertions allow nonreduced $Z_0$ and the empty scheme.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03QP, proposition-finite-higher-direct-image-zero (1), geometric restriction-map formula; agent extraction of the finite-scheme evaluation and finite-field point-orbit argument from steps 1-3 of lem-a1-finite-weil-sections-decomposition. Rational/common-stage coefficients as Deligne Weil II (1.1.3); Frobenius convention (1.1.7).",
+  "external": [
+   {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), p.150; (1.1.7), pp.150-151. The explicit orbit indexing and compact counit normalization are the agent formulation of the corrected blueprint evaluation display."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-constructible-heart",
+  "def-weil-finite-integral-morphism",
+  "def-weil-ordinary-compact-cohomology",
+  "def-a1-proper-sections-germ-and-moving-point",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-closed-points",
+  "def-weil-residue-field",
+  "def-weil-frobenius-detailed"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-over-field-affine-finite-dim], write $Z_0=\\operatorname{Spec}B_0$ over $k_0$, with $B_0$ finite-dimensional. Apply [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] with $R=k_0$: its unique prime is $(0)$, so $Z_0$ has finitely many points, all closed. At its maximal ideal $\\mathfrak m_x$, the residue field is $B_0/\\mathfrak m_x$: localizing this quotient field changes nothing. It is a nonzero finite-dimensional quotient of $B_0$. Thus $1\\le d_x<\\infty$, and $\\kappa(x)$ is a finite field (a finite basis identifies its underlying set with $k_0^{d_x}$). A finite morphism is proper by [lem-weil-pbc-finite-proper], so the proper germ construction in the statement applies.",
+   "uses": [
+    "lem-weil-pbc-finite-over-field-affine-finite-dim",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "def-weil-residue-field",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06RS, lemma-local-dimension-zero-henselian, first paragraph of proof; finite-algebra specialization"
+   }
+  },
+  {
+   "text": "The fibre-product universal property [def-pc-fibre-product] identifies $Z(k)$ with $k_0$-morphisms $s\\to Z_0$. By [lem-weil-pbc-morphism-from-spec-field], those with image $x$ correspond exactly to $k_0$-embeddings $\\kappa(x)\\hookrightarrow k$. An embedding exists by [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed], since a finite-dimensional field extension is algebraic. Fix one, $\\iota_x$. By [lem-sfb-finite-field-galois-frobenius], $\\kappa(x)/k_0$ is normal and its automorphisms are exactly the $d_x$ distinct powers of $F_x:c\\mapsto c^q$. By [lem-sfb-normal-embeddings-automorphism-transitive], all its embeddings into $k$ are exactly $\\iota_xF_x^j$ for $0\\le j<d_x$. These are distinct because $\\iota_x$ is injective. Hence $|P_x|=d_x$, the projection is surjective, and its domain is finite as a finite union of these finite sets.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-sfb-normal-embeddings-automorphism-transitive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HY, section-finite; Tag 0BR4, lemma-normal-embeddings-differ-by-aut"
+   }
+  },
+  {
+   "text": "Use the affine formula for $g$ in [def-weil-frobenius-detailed]. The point corresponding to an embedding $\\iota_x$ is the algebra map $B_0\\otimes_{k_0}k\\to k$, $b\\otimes c\\mapsto\\iota_x(\\bar b)c$. Since $(h^{-1})^*=\\gamma^{-1}$, the composite $T(z)=gzh^{-1}$ sends $b\\otimes c$ to $\\gamma^{-1}(\\iota_x(\\bar b)\\gamma(c))=\\gamma^{-1}(\\iota_x(\\bar b))c$. It is again a $k$-point over $x$ and its embedding is $\\gamma^{-1}\\iota_x=\\iota_xF_x$. On the list in step 2, $T$ is therefore $j\\mapsto j+1$ modulo $d_x$. This proves the permutation and single-cycle assertions with the claimed sign. Iterating the defining composite gives $T^r(z)=g^rzh^{-r}$ by cancellation; $T^{d_x}(z)=z$ implies $g^{d_x}z=zh^{d_x}$.",
+   "uses": [
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+    "place": "Corrected geometric evaluation indexing; explicit semilinear coordinate calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fibre-product-affine-spectra], $Z=\\operatorname{Spec}B$ for $B=B_0\\otimes_{k_0}k$. The tensors of a $k_0$-basis of $B_0$ with $1$ span $B$ over $k$, so $B$ is module-finite. Applying [lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum] over $k$ gives a finite set $J$ of maximal ideals and their intersection $N=\\sqrt{0}$. Each $B/\\mathfrak m$ is finite-dimensional over $k$, hence its structural map from $k$ is an isomorphism by [lem-weil-pbc-alg-closed-finite-extension-trivial]. Distinct maximal ideals are comaximal: otherwise their sum would lie in a maximal ideal containing both. Thus [lem-pc-crt-ideal-quotient-product] gives the canonical quotient-map isomorphism $B/N\\simeq\\prod_{\\mathfrak m\\in J}B/\\mathfrak m\\simeq\\prod_{\\mathfrak m\\in J}k$. By [lem-weil-pbc-morphism-from-spec-field], each such point has exactly one $k$-rational lift, so $J$ identifies canonically with $Z(k)$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+    "lem-weil-pbc-alg-closed-finite-extension-trivial",
+    "lem-pc-crt-ideal-quotient-product",
+    "lem-weil-pbc-morphism-from-spec-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 06RS, lemma-local-dimension-zero-henselian; Tag 00DT, lemma-chinese-remainder (the existing CRT node has a miscited source tag)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-affine-coproduct-spectrum], $R=\\operatorname{Spec}(B/N)$ is canonically $\\coprod_{z\\in Z(k)}s$. The inclusion of its $z$-component followed by $i:R\\to Z$ is the given point $z$, because on rings it is the corresponding residue quotient and its canonical identification with $k$. The quotient map makes $i$ a closed immersion, surjective since $N$ lies in every prime. Apply [lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism] to conclude that $i$ is a universal homeomorphism. No reducedness of $Z$ is being assumed. Also $Z$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian] (a field has just two ideals), and has dimension zero when nonempty since all primes are maximal. The same assertions hold for $R$ and $s$. These are the finiteness hypotheses needed for the continuous rational realization below.",
+   "uses": [
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DT, lemma-chinese-remainder; geometric realization of the quotient by the nilradical"
+   }
+  },
+  {
+   "text": "First take $\\Lambda=E$. Since $Z$ is separated of finite type over $k$, [lem-zl-sf-pbc-normalized-heart-model] applies: the identity-induced equivalence from the sf raw category of the statement to the PBC raw category, followed by the continuous realization of [lem-per-continuous-rational-derived-realization], sends the heart object $M$ to a constructible continuous $E_Z$-module sheaf $\\mathcal F$ in degree zero. Write $J_Z$ for this composite. The same node identifies the sf pullbacks $Li^*$ and $Lz^*$ of [def-weil-derived-pullback-tensor-hom] with the PBC completed pullbacks, and these are carried, along the closed immersion $i$ and along each closed point $z$, to exact ordinary inverse image, with $i^{-1}E_Z\\cong E_R$ and $z^{-1}E_Z\\cong E_s$. By [lem-trf-proetale-lower-star-universal-homeomorphism-equivalence] for abelian groups, $i_*$ is an equivalence. Its left adjoint is the $i^{-1}$ of [def-weil-proetale-inverse-image], so its unit $\\mathcal F\\to i_*i^{-1}\\mathcal F$ is invertible. This unit is also module-linear: its action is obtained by applying inverse image to the original scalar-action map and using the displayed coefficient identification. Evaluating at the final object $Z$ therefore gives an $E$-linear natural isomorphism $\\mathcal F(Z)\\simeq(i^{-1}\\mathcal F)(R)$, whose map is restriction along $i$.",
+   "uses": [
+    "lem-zl-sf-pbc-normalized-heart-model",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15; formal application of pro-etale topological invariance to continuous coefficient modules"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-finite-coproduct-evaluation] on $R$ to its component open-and-closed immersions $c_z:s\\to R$. These are qcqs pro-etale objects, and their coproduct is $R$ itself. It gives $(i^{-1}\\mathcal F)(R)\\simeq\\prod_{z\\in Z(k)}(i^{-1}\\mathcal F)(s,c_z)$, with component the restriction to the $z$-th component. By the site-object clause of [lem-per-continuous-rational-derived-realization], $(i^{-1}\\mathcal F)(s,c_z)$ is the space of sections over the final object of the exact site restriction $c_z^{-1}i^{-1}\\mathcal F$, with $c_z^{-1}E_R=E_s$; since $ic_z=z$ by step 5, its composition comparison identifies this with $(z^{-1}\\mathcal F)(s)$. The underlying bijection is a linear isomorphism because restrictions preserve addition and the coefficient action. In combination with step 6 this is a natural linear isomorphism from $\\mathcal F(Z)$ to the finite product of its point sections, with its actual restriction components.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; finite disjoint-cover sheaf axiom, with the canonical evaluation components"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-adic-compactification-section-realization] with $T=U=Z$ and $j=\\mathrm{id}$, and separately with $T=U=s$. These proper schemes satisfy its hypotheses by steps 1 and 4. Its normalized degree-zero formulas, followed by the fully faithful realization $J$ of [lem-per-continuous-rational-derived-realization], identify $H_c^0(Z,M)$ with $\\operatorname{Hom}(E_Z,\\mathcal F)=\\mathcal F(Z)$ and, by [def-weil-finite-coefficient-point], $M_z=H^0(s,Lz^*M)$ with $\\operatorname{Hom}(E_s,z^{-1}\\mathcal F)=(z^{-1}\\mathcal F)(s)$. The elementary Hom-to-sections identifications send a module map to the image of $1$, with inverse $t\\mapsto(a\\mapsto at)$ on each site object. By [lem-zl-sf-pbc-normalized-heart-model] and step 6, $J_s(Lz^*M)\\cong z^{-1}\\mathcal F$ is a sheaf in degree zero; as that node identifies the sf and PBC standard halves, $Lz^*M$ lies in the heart of $s$. Thus the source and factors of step 7 are exactly the spaces in the question.",
+   "uses": [
+    "lem-a1-adic-compactification-section-realization",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-zl-sf-pbc-normalized-heart-model",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15; degree-zero unit-Hom formulas at the identity compactifications"
+   }
+  },
+  {
+   "text": "Check the maps, not only the objects. By [def-a1-proper-sections-germ-and-moving-point], $e_z$ is proper coincidence followed by $Lz^*$ of the specified counit and the inverse comparison for $a_Zz=\\mathrm{id}_s$. The system realization [def-weil-system-operation-exchange-realization] retains the normalized ordinary units and counits. Its pullbacks are the sf pullbacks, which [lem-zl-sf-pbc-normalized-heart-model] identifies with the PBC completed pullbacks with the identity integral normalization on the whole finite-reduction diagram, compatibly with identities and composition. By [lem-a1-rational-direct-image-realization], $J$ carries this adjunction, with its actual counit, to the ambient module adjunction. In that adjunction the counit takes a section pulled back from $a_{Z*}\\mathcal F$ to its restriction in $\\mathcal F$; pulling it to $z$ sends $t$ to $t|_z$. The identity and composition comparisons in [lem-per-continuous-rational-derived-realization] identify the source with the same section $t$, with no scalar change. The proper comparison is the identity-compactification comparison fixed in [def-a1-proper-sections-germ-and-moving-point]. Consequently the composite of steps 6-8 has component exactly $e_z$. Reindex its finite product by the partition $Z(k)=\\coprod_x P_x$ of step 2 and use the finite product/direct sum identification. This proves the asserted $e_M$.",
+   "uses": [
+    "def-a1-proper-sections-germ-and-moving-point",
+    "def-weil-system-operation-exchange-realization",
+    "lem-zl-sf-pbc-normalized-heart-model",
+    "lem-a1-rational-direct-image-realization",
+    "lem-per-continuous-rational-derived-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15: ambient adjunction; normalized whole-system and rational comparisons, evaluated on a section"
+   }
+  },
+  {
+   "text": "Each $M_z=H^0(\\operatorname{Fib}_s(Lz^*M))$ is finite-dimensional, since $\\operatorname{Fib}_s$ takes values in complexes with finite-dimensional cohomology by [def-weil-finite-coefficient-point]; so is $H_c^0(Z,M)$ by the finite direct sum just proved. Restriction of sections commutes with every module-sheaf map, and all comparisons in steps 6-9 are natural, so $e$ is natural for every morphism of constructible sheaves. For a finite coefficient-field extension the section comparisons of [lem-a1-adic-compactification-section-realization] and the point-realization comparisons $\\operatorname{Fib}_s(\\mathcal H^0-)\\cong H^0\\operatorname{Fib}_s(-)$ of [lem-a1-point-realization-standard-cohomology] commute with scalar extension; the actual adjunction comparisons commute with it by [lem-a1-rational-direct-image-realization]. Hence the entire evaluation map, with its specified germ components, extends by scalars. In the common-stage category of [def-weil-constructible-heart], choose any stage representing the object and any common stage representing a morphism. Tensoring the finite-stage isomorphism with $\\Qlb$ proves the assertion there and its naturality, independently of the chosen stage. No Weil map has entered the construction. For the empty scheme, the empty-cover sheaf axiom in step 7 makes sections zero and the product/direct sum empty, so the conclusion remains valid.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
+    "lem-a1-point-realization-standard-cohomology",
+    "lem-a1-adic-compactification-section-realization",
+    "lem-a1-rational-direct-image-realization",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.3), printed p.150; common-stage extension of the normalized continuous-coefficient construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-proper-sections-germ-and-moving-point",
+  "def-pc-fibre-product",
+  "def-weil-constructible-heart",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-detailed",
+  "def-weil-proetale-inverse-image",
+  "def-weil-residue-field",
+  "def-weil-system-operation-exchange-realization",
+  "lem-a1-adic-compactification-section-realization",
+  "lem-a1-point-realization-standard-cohomology",
+  "lem-a1-rational-direct-image-realization",
+  "lem-pc-crt-ideal-quotient-product",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-sfb-normal-embeddings-automorphism-transitive",
+  "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+  "lem-weil-pbc-alg-closed-finite-extension-trivial",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-over-field-affine-finite-dim",
+  "lem-weil-pbc-finite-over-zero-dim-local-discrete-spectrum",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-morphism-from-spec-field",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-zl-sf-pbc-normalized-heart-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-finite-boundary-weights.proof.md",
+  "place": "Corrected first evaluation display: residue-field embeddings, reduction invariance, continuous-coefficient sections and actual counit germs; finite-level model is Stacks Tag 03QP"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*stalk|stalk.*finite|Frobenius.*orbit",
+   "results": "Actual logged hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean. The structure-sheaf, ring-stalk and arithmetic-Frobenius hits do not give this constructible rational-sheaf germ decomposition and its closed-point orbit indexing. SpecToEquivOfField supplies only the residue-field description of points, and finite-fibre instances supply only finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported sections of a constructible sheaf on a finite scheme over an algebraically closed field are the sum of its stalks",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.instFieldCarrierResidueField, SheafOfModules.sections, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.Scheme.zeroLocus_eq_univ_iff_subset_nilradical_of_isCompact, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val. The structure-sheaf, ring-stalk and arithmetic-Frobenius hits do not give this constructible rational-sheaf germ decomposition and its closed-point orbit indexing. SpecToEquivOfField supplies only the residue-field description of points, and finite-fibre instances supply only finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"finite\"",
+   "results": "Actual logged hits: Module.rankAtStalk_eq_of_le_of_finite_of_flat, Module.rankAtStalk_eq_of_le_of_finite_of_flat', Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFiniteAt.of_surjectiveOnStalks, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, Algebra.WeaklyQuasiFiniteAt.of_surjectiveOnStalks, Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant, TopCat.Sheaf.instPreservesFiniteLimitsCompPresheafForgetStalkFunctor. The structure-sheaf, ring-stalk and arithmetic-Frobenius hits do not give this constructible rational-sheaf germ decomposition and its closed-point orbit indexing. SpecToEquivOfField supplies only the residue-field description of points, and finite-fibre instances supply only finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric lifts of closed points of a finite scheme over a finite field form cyclic Frobenius orbits; evaluation of sheaf sections is an isomorphism",
+   "results": "Actual logged hits: IsArithFrobAt.arithFrobAt, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, IsArithFrobAt.exists_of_isInvariant, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.Γevaluation_naturality. The structure-sheaf, ring-stalk and arithmetic-Frobenius hits do not give this constructible rational-sheaf germ decomposition and its closed-point orbit indexing. SpecToEquivOfField supplies only the residue-field description of points, and finite-fibre instances supply only finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible rational adic sheaf on a finite scheme over a finite field has compact sections equal to its geometric stalk sum and Frobenius orbits of points have residue degree",
+   "results": "Actual logged hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, IsArithFrobAt.arithFrobAt, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top. The structure-sheaf, ring-stalk and arithmetic-Frobenius hits do not give this constructible rational-sheaf germ decomposition and its closed-point orbit indexing. SpecToEquivOfField supplies only the residue-field description of points, and finite-fibre instances supply only finiteness.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact cohomology of a constructible rational adic sheaf on a finite scheme equals its geometric fibres, with finite field Frobenius point orbits",
+   "results": "Actual logged hits: Condensed.finFree, AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated. The returned ring-stalk, Artinian-scheme, or condensed-module declarations do not state the constructible rational-sheaf germ isomorphism with finite-field point-orbit indexing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*stalk|stalk.*finite|Frobenius.*orbit",
+   "results": "Actual logged hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean. The returned ring-stalk, Artinian-scheme, or condensed-module declarations do not state the constructible rational-sheaf germ isomorphism with finite-field point-orbit indexing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sections of a constructible rational adic sheaf over a finite scheme over an algebraically closed field equal the direct sum of geometric fibres",
+   "results": "Actual logged hits: SheafOfModules.sections, AlgebraicGeometry.StructureSheaf.const, AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction, AlgebraicGeometry.structureSheafInType, AlgebraicGeometry.Proj.add_apply, AlgebraicGeometry.commRingStructureSheafInTypeObj, AlgebraicGeometry.Scheme.coprodPresheafObjIso. The returned ring-stalk, Artinian-scheme, or condensed-module declarations do not state the constructible rational-sheaf germ isomorphism with finite-field point-orbit indexing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"finite\"",
+   "results": "Actual logged hits: Module.rankAtStalk_eq_of_le_of_finite_of_flat, Module.rankAtStalk_eq_of_le_of_finite_of_flat', Algebra.QuasiFiniteAt.of_surjectiveOnStalks_of_liesOver, Algebra.QuasiFiniteAt.of_surjectiveOnStalks, AlgebraicGeometry.LocallyOfFiniteType.stalkMap, Algebra.WeaklyQuasiFiniteAt.of_surjectiveOnStalks, Module.Free.away_of_finite_of_flat_of_rankAtStalk_constant, TopCat.Sheaf.instPreservesFiniteLimitsCompPresheafForgetStalkFunctor. The returned ring-stalk, Artinian-scheme, or condensed-module declarations do not state the constructible rational-sheaf germ isomorphism with finite-field point-orbit indexing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an Artinian geometric scheme every continuous constructible sheaf is a tuple of finite dimensional vector spaces, global sections evaluate to that tuple",
+   "results": "Actual logged hits: AlgebraicGeometry.IsArtinianScheme.finite, AlgebraicGeometry.IsArtinianScheme, AlgebraicGeometry.IsArtinianScheme.isNoetherianScheme, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian, AlgebraicGeometry.isArtinianScheme_iff, AlgebraicGeometry.IsArtinianScheme.toCompactSpace, AlgebraicGeometry.instIsArtinianSchemeSpecOfIsArtinianRingCarrier. The returned ring-stalk, Artinian-scheme, or condensed-module declarations do not state the constructible rational-sheaf germ isomorphism with finite-field point-orbit indexing.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-weil-sections-decomposition",
+  "date": "2026-10-22",
+  "group": "NY"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "Proof, first sentence and displayed evaluation formula: geometric stalk evaluation, indexed by the closed-point Frobenius orbits; no arithmetic invariants.",
+   "via": [
+    "lem-a1-finite-weil-sections-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-finite-geometric-sections-and-point-orbits",
+  "worker": "stage1",
+  "summary": "Checked the live source and literature; no exact proved project attachment. Gave a complete proof using existing algebra, finite-field, pro-etale invariance and normalized rational realization nodes. No new nodes or statement changes. Verified the semilinear sign, actual counit evaluation, arbitrary sheaf-map naturality, common coefficient stages, nonreduced and empty cases.",
+  "blueprint": "Realizes the first sentence and corrected geometric evaluation display of lem-a1-finite-boundary-weights through the intermediate lem-a1-finite-weil-sections-decomposition. The imported arithmetic-invariants display is not used.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-adic-compactification-section-realization",
+    "why": "Normalized compact and ordinary degree-zero unit-Hom formulas, natural in coefficients. No node of the affine-line estimate unit supplies this generic tool; it does not replace its weight-estimate route."
+   },
+   {
+    "node": "lem-a1-rational-direct-image-realization",
+    "why": "Identification of the actual rational counit with the ambient continuous-module counit, including coefficient compatibility. No node of the affine-line estimate unit supplies this generic tool; it does not replace its weight-estimate route."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Actual rational hearts and pullbacks are continuous module sheaves, including their composition comparisons. No node of the affine-line estimate unit supplies this generic tool; it does not replace its weight-estimate route."
+   },
+   {
+    "node": "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+    "why": "Underlying abelian sheaf topological invariance, applied to the nilradical quotient. No node of the affine-line estimate unit supplies this generic tool; it does not replace its weight-estimate route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+    "why": "Canonical sections-to-component restriction for a finite disjoint cover. No node of the affine-line estimate unit supplies this generic tool; it does not replace its weight-estimate route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "why": "The nilradical quotient is a universal homeomorphism. No node of the affine-line estimate unit supplies this generic tool; it does not replace its weight-estimate route."
+   },
+   {
+    "node": "lem-zl-sf-pbc-normalized-heart-model",
+    "why": "Identifies the sf raw heart and sf pullbacks of the statement with the PBC raw heart and completed pullbacks realized by the continuous realization. No node of the affine-line estimate unit supplies this generic coefficient bridge; it does not replace its weight-estimate route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-adic-compactification-section-realization",
+  "lem-a1-rational-direct-image-realization",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-trf-proetale-lower-star-universal-homeomorphism-equivalence",
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lem-zl-sf-pbc-normalized-heart-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-2a7b11544",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-2a7b11544 (reviewer sub-agent of L); spot-checked: I read all 10 steps of the item and every cited statement; the delivery has no new nodes and no repair note, so the re-split rule does not apply. Steps 1-5 (algebra) are correct. Steps 1-2 use the finite-dimension and discrete-spectrum lemmas, residue fields, maps from Spec of a field, Frobenius as the Galois group of a finite field, and transitivity of embeddings of a normal extension. Step 3 (Frobenius orbit): the ring map of T(z)=g z h^{-1} sends b⊗c to γ^{-1}(ι(b̄))c, so the embedding is ι∘F_x and T is one d_x-cycle; the sign in the statement is right. Steps 4-5: finite algebra B, Chinese remainder for B/N ≅ ∏k, Spec of a finite product, nilradical quotient is a universal homeomorphism, Noetherian. Steps 6-9: invertible unit of the pro-étale topological-invariance equivalence, finite-coproduct evaluation, the unit-Hom formulas of adic-compactification-section-realization at j=id, and the counit identification through rational-direct-image-realization; all correct. Small cases tested: empty Z_0, Spec F_{q^d}, Spec k_0[ε]/ε², and different ranks at different points. Stacks 03QP is the finite-level model. The blueprint lem-a1-finite-boundary-weights display uses Galois invariants, which is the arithmetic formula; the item's geometric form is the correct one. Three citation faults, repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-finite-geometric-sections-and-point-orbits.json. (1) C1/C4: steps 6, 8 and 9 apply J_Z and the PBC pullback clauses of lem-per-continuous-rational-derived-realization to sf-family objects (the M, Lz^* and e_z of the statement) with no bridge; they now cite lem-zl-sf-pbc-normalized-heart-model, which identifies the sf and PBC standard halves, sends an sf heart object to a degree-zero sheaf, and gives J Lh^{*,sf} ≅ Lh^{*,pbc} J. It is added as a tool use; there is no cycle. (2) C4: step 10 took finiteness and scalar compatibility of M_z=H^0 Fib_s(Lz^*M) from the adic geometric fibres of lem-per-adic-heart-pullback-fibres. It now uses def-weil-finite-coefficient-point (Fib_s lands in D^b_fd) and lem-a1-point-realization-standard-cohomology (same unit, PASS). Step 8 now gets heart membership from the bridge. lem-per-adic-heart-pullback-fibres is removed from proof_deps and tool_uses. (3) C1: step 7 identified sections over (s,c_z) with (z^{-1}F)(s) without a citation; it now cites the site-restriction and composition clauses of lem-per-continuous, with i c_z=z. After the fix proof_deps equals the union of the uses and every step is at most 1392 characters. Batch 5, each accepted as generic: def-pod-lisse-l-adic-sheaves is a definition; lem-trf-geometric-inverse-image-exact is Stacks 04JC, exactness of inverse image; lem-trf-proetale-lower-star-universal-homeomorphism-equivalence is topological invariance of the pro-étale topos; the bridge reaches the same generic coefficient infrastructure. None of these is given by either assumption or is a step of their proofs. I accept the other declared tool uses as generic. Maintainer notes: lem-pc-crt-ideal-quotient-product cites 00U3, which is algebra-lemma-etale-over-field; the right tag is 00DT. lem-a1-adic-compactification-section-realization makes the same sf/PBC identification and should cite the bridge when next touched.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteGeometricSectionsPointOrbits",
+  "declaration": "WeilConjectures.finiteGeometricSectionsAndPointOrbits",
+  "declarations": [
+   "WeilConjectures.FiniteGeometricSections.Points",
+   "WeilConjectures.FiniteGeometricSections.projection",
+   "WeilConjectures.FiniteGeometricSections.PointsOver",
+   "WeilConjectures.FiniteGeometricSections.Embeddings",
+   "WeilConjectures.FiniteGeometricSections.embeddingPoint",
+   "WeilConjectures.FiniteGeometricSections.arithmeticFrobenius",
+   "WeilConjectures.FiniteGeometricSections.PointOrbits",
+   "WeilConjectures.FiniteGeometricSections.sections",
+   "WeilConjectures.FiniteGeometricSections.fibre",
+   "WeilConjectures.FiniteGeometricSections.evaluation",
+   "WeilConjectures.FiniteGeometricSections.StalkSum",
+   "WeilConjectures.FiniteGeometricSections.RationalEvaluation",
+   "WeilConjectures.FiniteGeometricSections.realizedH0",
+   "WeilConjectures.FiniteGeometricSections.realizedSections",
+   "WeilConjectures.FiniteGeometricSections.realizedFibre",
+   "WeilConjectures.FiniteGeometricSections.realizedEvaluation",
+   "WeilConjectures.FiniteGeometricSections.fibreStageComparison",
+   "WeilConjectures.FiniteGeometricSections.sectionsStageComparison",
+   "WeilConjectures.FiniteGeometricSections.CommonEvaluation",
+   "WeilConjectures.finiteGeometricSectionsAndPointOrbits"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteGeometricSectionsPointOrbits.lean",
+  "statement": "theorem finiteGeometricSectionsAndPointOrbits (D : FiniteFieldDatum.{u}) (Z₀ : Over (Spec (.of D.k₀))) [IsFinite Z₀.hom] (l : ℕ) [Fact l.Prime] [Fact (l ≠ D.p)] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] : Nonempty (FiniteGeometricSections.PointOrbits D Z₀) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], Nonempty (FiniteGeometricSections.RationalEvaluation D Z₀ l E)) ∧ Nonempty (FiniteGeometricSections.CommonEvaluation D Z₀ l Ω)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Helpers unpack the point-orbit and canonical evaluation clauses of this node. The common-stage form uses the recorded realized source and point scalar comparisons at every larger stage and every common-stage arrow, with independent scheme and coefficient universes. No dependency interfaces or mathematical statements changed.",
+  "fixed_by": "NT-stage2-cc-516b51ec0"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-516b51ec0",
+  "group": "Q26",
+  "result": "fix",
+  "note": "Mathematics correct and complete. Clause by clause: finiteness of Z(k) and |Z0|, surjectivity, the P_x ≃ k0-embeddings bijection fixed by embeddings_spec through SpecToEquivOfField, |P_x| = d_x ≥ 1. T = h⁻¹≫z≫g, with the sign checked against geometricFrobenius = id×Spec γ and frobeniusPointIso = Spec γ: the embedding becomes (x↦x^q)∘ι. Single cycle via ∃! j : Fin d_x; period_square is z≫g^d = h^d≫z. The linear iso has components fixed to H0 of rationalGerm; naturality for all heart arrows; both finiteness clauses; the common-stage iso, changeStage and common_naturality are consistent. Edge cases (empty, nonreduced, degree d) are covered, and there is no Weil structure. E : Type u is forced by the dependency. The statement is verbatim and the report sections are present. Fault (mechanical): plain import Sheaf.Paper.PointRealizationStandardCohomology has no source in the live tree (dropped by red-build commit d34b31cc566; only a stale olean remains), so the global build would fail. It is unused. FIX: fixes/FiniteGeometricSectionsPointOrbits.lean with that one import removed; nt_compile --json clean in 26.0 s. Maintainer note: the lem-a1-point-realization-standard-cohomology lean record names a dropped module."
+ }
+}

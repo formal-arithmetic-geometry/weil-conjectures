@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-space-inverse-module-tower-tests",
+ "kind": "definition",
+ "title": "Canonical spectrum test objects of an inverse module tower",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work over $S=\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme], affine spectra and their contravariant morphisms [def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and the universes of [def-weil-size-convention]. Use inverse sequences [def-weil-inverse-system] and the category of scheme test objects $\\operatorname{ProperQuotTest}(B)$ over an algebraic space $B$ [def-sfb-space-proper-quot-functor]. For every commutative ring $R$, let $\\operatorname{inverseModuleSpec}(R)$ be $\\operatorname{Spec}R$ equipped with its unique structural map to $S$; for a ring map $a:R\\to R'$, let $\\operatorname{inverseModuleSpecMap}(a)$ be $\\operatorname{Spec}(a):\\operatorname{Spec}R'\\to\\operatorname{Spec}R$, as a morphism over $S$. Given rings $A_n$ indexed by $n\\in\\mathbf N$, maps $r_n:A_{n+1}\\to A_n$, and a cone $c$ on this inverse sequence, write $L$ for its vertex and $\\pi_n:L\\to A_n$ for its components. Define $\\operatorname{inverseModuleTest}(c,n)$ to be the scheme test object $\\operatorname{Spec}A_n\\to\\operatorname{Spec}L$ given by $\\operatorname{Spec}(\\pi_n)$, viewed by Yoneda as a test object over the algebraic space represented by $\\operatorname{Spec}L$. The cone equation $r_n\\circ\\pi_{n+1}=\\pi_n$ gives the commuting triangle $\\operatorname{Spec}(r_n):\\operatorname{inverseModuleTest}(c,n)\\to\\operatorname{inverseModuleTest}(c,n+1)$ over $\\operatorname{Spec}L$; this is $\\operatorname{inverseModuleTestMap}(c,n)$, with triangle equality $\\operatorname{inverseModuleTestMap\\_w}$. These definitions apply to every cone, without assuming it is limiting or that transition maps are surjective. In Situation 0CX4, $c$ is the specified limit cone and Lean index $n$ denotes paper level $n+1$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-inverse-system",
+  "def-sfb-space-proper-quot-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CX4, situation-existence: A = lim A_n, X_n = X times_Spec(A) Spec(A_n), and their canonical adjacent reduction maps; canonical projection maps used in Tag 0CX9, lemma-finitely-presented."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical spectrum test schemes and transition morphisms of an inverse sequence of commutative rings with a limit cone",
+   "results": "[leansearch] OK 8 hit(s): AlgebraicGeometry.Scheme.Spec; CommRingCat.limitConeIsLimit; AlgebraicGeometry.AffineScheme.Spec; AlgebraicGeometry.Spec.fullyFaithful; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.Scheme.isoSpec_Spec_inv; AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec; AdicCompletion.subring. These supply general spectra or limits, not the project-specific tower tests.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match for the tower-test packaging; exact existing project declarations found by local rg."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical spectrum test schemes and transition morphisms of an inverse sequence of commutative rings with a limit cone",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.pointsPi; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'; AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.ExistsHomHomCompEqCompAux.g. No tower-test construction.",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; reuse the exact project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseModuleSpec|inverseModuleTest|ofOpSequence",
+   "results": "[grep] OK 0 hit(s) in Mathlib/AlgebraicGeometry. Local rg -n inverseModuleSpec|inverseModuleTest lean/WeilConjectures lean/Sheaf found no upstream hits and exactly the five declarations in Sheaf.AlgebraicGeometry.SpaceInverseModuleDerivedLimit at lines 50, 56, 63, 74, 83 (plus their uses). DAG rg -l inverseModuleSpec|inverseModuleTest|inverse-module-tower-tests found only the theorem node lem-sfb-space-inverse-module-derived-limit; there was no definition node owning them. tools/blueprint_refs.py search inverse module tower returned 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "Exact existing project match: record the five declarations; define nothing twice."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-modules-near-special-fibre",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CX4 (situation-existence), 0CX5 (lemma-compute-what-it-should-be) through 0CX9 (lemma-finitely-presented); existence consequence of 0CX9, with its canonical projection maps. Canonical spectrum tests Spec A_n over Spec(lim A_n) used to type the reduction isomorphisms and their compatibility in the existence consequence of 0CX9.",
+   "via": [
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceInverseModuleDerivedLimit",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.inverseModuleTest",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSpec",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleSpecMap",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTest",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTestMap_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseModuleTestMap"
+  ],
+  "statement": "def inverseModuleTest {A : ℕ → CommRingCat.{u}} {r : ∀ n : ℕ, A (n + 1) ⟶ A n}\n    (c : Cone (Functor.ofOpSequence r)) (n : ℕ) :\n    ProperQuotTest (schemeSpace (inverseModuleSpec c.pt))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by the independent review of returned head e0ab53609e92 (H2/B3). Reuses the five unchanged published declarations with their actual spectrum maps and cone triangle. No derived-limit conclusion or nilpotence/surjectivity assumption is needed to form these test objects. No module or duplicate declaration is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2deb2f8",
+  "group": "Q77",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e2deb2f8",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Re-delivery of 3c06 H7 return. Lean module and both def-node records byte-identical to the reviewed 3c06/e0ab delivery; item proof_deps now equals the live base list exactly (flat-direct-image-base-change removed). node_fields.correction_fields/check_statement_change(base, head) = [], so merge refusal resolved; only lean + two def stmt_deps (tower-tests existing:true owner of inverseModuleSpec/SpecMap/Test/TestMap_w/TestMap, landed module-tensor-composition) differ from base. Live has no competing owner or lean record. Statement clauses re-read vs Stacks 0CX4/0CX9 (index shift, hnil elementwise, limit cone, real Spec(π_n) fibres, hflat/hsupp, open W via factorizations k, F fp/qc, α, compatibility square with the given e via moduleTensorComposition); edge cases fine; gates hold; report sections present; no compile needed (no file changed)."
+ }
+}

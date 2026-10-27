@@ -1,0 +1,221 @@
+{
+ "id": "lem-sfb-ringed-site-strict-perfect-local-lift",
+ "kind": "statement",
+ "title": "Local homotopy lifting through a ringed-site cohomology approximation",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a site with a sheaf of commutative rings, with module sheaves and their cochain complexes and cohomology [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $U$ be a site object and restrict to $(\\mathcal C/U,\\mathcal O_U)$ [def-pur-localized-ringed-site]. Let $a\\in\\mathbf Z$, and let $E^\\bullet,F^\\bullet,G^\\bullet$ be complexes of $\\mathcal O_U$-modules with chain maps $u:E^\\bullet\\to F^\\bullet$ and $v:G^\\bullet\\to F^\\bullet$. Assume $E^\\bullet$ is zero outside finitely many degrees, every $E^j$ is a direct summand of a finite free $\\mathcal O_U$-module, and $E^j=0$ for $j<a$. Suppose $H^j(v)$ is an isomorphism for $j>a$ and is surjective for $j=a$. There is a covering $\\{U_i\\to U\\}$ and chain maps $t_i:E^\\bullet|_{U_i}\\to G^\\bullet|_{U_i}$ such that $v|_{U_i}\\circ t_i$ is chain homotopic to $u|_{U_i}$. Explicitly there are maps $s_i^j:E^j|_{U_i}\\to F^{j-1}|_{U_i}$ with $u^j|_{U_i}-v^j|_{U_i}t_i^j=d_F^{j-1}s_i^j+s_i^{j+1}d_E^j$ for every $j$. There is no boundedness assumption on $F^\\bullet$ or $G^\\bullet$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FQ, lemma-lift-through-quasi-isomorphism"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof": [
+  {
+   "text": "Form $C=C(v)$ with $C^j=F^j\\oplus G^{j+1}$ and $d_C(f,g)=(d_F f+v g,-d_G g)$, and let $i:F\\to C$ be inclusion. Its cone triangle in $D(\\mathcal O_U)$ is distinguished by the definition of the derived triangulated structure. The cited long exact sequence gives $H^j(G)\\xrightarrow{H^j(v)}H^j(F)\\to H^j(C)\\to H^{j+1}(G)\\xrightarrow{H^{j+1}(v)}H^{j+1}(F)$. For $j\\geq a$ the first arrow is surjective and the last is injective. Exactness makes the map into $H^j(C)$ zero, the next map injective, and its image zero. Thus $H^j(C)=0$ for every $j\\geq a$. This argument uses no bounds on $F$ or $G$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FQ, lemma-lift-through-quasi-isomorphism, proof."
+   }
+  },
+  {
+   "text": "Apply the local null-homotopy lemma to $w=i\\circ u:E\\to C$ on $(\\mathcal C/U,\\mathcal O_U)$, with the same $a$. All its source hypotheses are exactly the finite-support, finite-free-retract and lower-bound hypotheses on $E$; Step 1 supplies its target cohomology vanishing. Obtain a covering $\\{U_i\\to U\\}$ and homotopies $h_i^j:E^j|_{U_i}\\to C^{j-1}|_{U_i}$ satisfying $(i u)^j=d_C^{j-1}h_i^j+h_i^{j+1}d_E^j$. A covering of the terminal object $U/U$ of the slice is a covering of $U$ in the original site.",
+   "uses": [
+    "lem-sfb-ringed-site-strict-perfect-local-null-homotopy",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FQ, lemma-lift-through-quasi-isomorphism, proof."
+   }
+  },
+  {
+   "text": "On each covering member decompose $h_i^j=(s_i^j,t_i^j)$ using $C^{j-1}=F^{j-1}\\oplus G^j$. Restriction is sectionwise, so the cone formula and its two projections restrict to the same formulas on the slice. The $G^j$-component of the homotopy equation is $0=-d_G^j t_i^j+t_i^{j+1}d_E^j$, so the $t_i^j$ form a chain map $t_i:E|_{U_i}\\to G|_{U_i}$. The $F^j$-component is $u^j=d_F^{j-1}s_i^j+v^j t_i^j+s_i^{j+1}d_E^j$. Rearranging gives precisely $u^j-v^j t_i^j=d_F^{j-1}s_i^j+s_i^{j+1}d_E^j$. These identities hold in every degree, including the zero source terms, and give the required homotopy.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FQ, lemma-lift-through-quasi-isomorphism, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-ringed-site-strict-perfect-local-null-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FQ, lemma-lift-through-quasi-isomorphism, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site a map from a strictly perfect complex supported in degrees at least a lifts locally up to homotopy through a chain map inducing cohomology isomorphisms above a and a surjection at a",
+   "results": "OK: 8 hits; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CochainComplex.cm5b, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-23",
+   "verdict": "no match: global projective-resolution lifting, complex factorization, and localization lifting do not assert local homotopy lifting through a partial cohomology approximation on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite free retract module sheaves admits local homotopy lifting along a cohomology approximation",
+   "results": "OK: 8 hits; ComplexShape.QFactorsThroughHomotopy, CochainComplex.IsKProjective.homotopyZero_def, instQFactorsThroughHomotopyDown, CochainComplex.cm5b, ComplexShape.QFactorsThroughHomotopy_of_exists_prev, CochainComplex.IsKProjective.nonempty_homotopy_zero, CochainComplex.IsKInjective.homotopyZero_def, CochainComplex.IsKProjective.homotopyZero",
+   "date": "2026-10-23",
+   "verdict": "no match: global projective-resolution lifting, complex factorization, and localization lifting do not assert local homotopy lifting through a partial cohomology approximation on arbitrary ringed sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Homotopy\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: global projective-resolution lifting, complex factorization, and localization lifting do not assert local homotopy lifting through a partial cohomology approximation on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*(homotopy|lift)|[Ss]trictly[Pp]erfect",
+   "results": "OK: 21 hits; Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: global projective-resolution lifting, complex factorization, and localization lifting do not assert local homotopy lifting through a partial cohomology approximation on arbitrary ringed sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local lifting up to homotopy of strictly perfect sheaf complexes through a cohomology approximation",
+   "results": "OK: 8 hits; CategoryTheory.ProjectiveResolution.liftHomotopy, CochainComplex.mappingCone.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroSucc, IsCoveringMap.liftHomotopy, CategoryTheory.ProjectiveResolution.liftHomotopyZeroOne, CochainComplex.HomComplex.CohomologyClass.toHom, CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors",
+   "date": "2026-10-23",
+   "verdict": "no match: global projective-resolution lifting, complex factorization, and localization lifting do not assert local homotopy lifting through a partial cohomology approximation on arbitrary ringed sites"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*(nullHomotop|homotopyZero)|strictlyPerfect.*homotopy|IsStrictlyPerfect",
+   "results": "{\"t\": \"2026-10-23T14:41:08Z\", \"tool\": \"grep\", \"query\": \"local.*(nullHomotop|homotopyZero)|strictlyPerfect.*homotopy|IsStrictlyPerfect\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map from a strictly perfect complex to a complex of sheaves with vanishing cohomology above a bound is locally chain homotopic to zero",
+   "results": "{\"t\": \"2026-10-23T14:41:08Z\", \"tool\": \"leansearch\", \"query\": \"A map from a strictly perfect complex to a complex of sheaves with vanishing cohomology above a bound is locally chain homotopic to zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"Homotopy.nullHomotopicMap'\", \"Homotopy.nullHomotopicMap\", \"CochainComplex.IsKInjective.homotopyZero\", \"Homotopy.nullHomotopy\", \"Homotopy.nullHomotopy'\"], \"digest\": \"74ff818980781e49\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Homotopy\"",
+   "results": "{\"t\": \"2026-10-23T14:41:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"Homotopy\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On any ringed site a chain map from a bounded complex of finite free retract module sheaves to a complex with vanishing cohomology in degrees at least a is locally null homotopic when the source vanishes below a",
+   "results": "{\"t\": \"2026-10-23T14:41:09Z\", \"tool\": \"leanfinder\", \"query\": \"On any ringed site a chain map from a bounded complex of finite free retract module sheaves to a complex with vanishing cohomology in degrees at least a is locally null homotopic when the source vanishes below a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero_def\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\"], \"digest\": \"fc4d401d35be9df9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local null homotopy of maps from bounded finite projective sheaf complexes into complexes whose cohomology vanishes in all source degrees",
+   "results": "{\"t\": \"2026-10-23T14:43:42Z\", \"tool\": \"leanfinder\", \"query\": \"Local null homotopy of maps from bounded finite projective sheaf complexes into complexes whose cohomology vanishes in all source degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKInjective.homotopyZero_def\"], \"digest\": \"b7c8d0a60a9b162d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "grep",
+   "query": "local.*(homotopy|lift)|[Ss]trictly[Pp]erfect",
+   "results": "{\"t\": \"2026-10-23T14:44:32Z\", \"tool\": \"grep\", \"query\": \"local.*(homotopy|lift)|[Ss]trictly[Pp]erfect\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/Localization.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Linear.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/HomologySequence.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\"], \"digest\": \"a77a5ad94dcd31d7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a strictly perfect complex of module sheaves lifts locally up to homotopy along a morphism inducing cohomology isomorphisms above a and a surjection at a",
+   "results": "{\"t\": \"2026-10-23T14:44:34Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a strictly perfect complex of module sheaves lifts locally up to homotopy along a morphism inducing cohomology isomorphisms above a and a surjection at a\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.right_fac_of_isStrictlyLE\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CochainComplex.cm5b\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CochainComplex.isKInjective_of_injective_aux\", \"DerivedCategory.right_fac\", \"CochainComplex.IsKProjective\"], \"digest\": \"565f75250ec6cf86\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: K-projective null-homotopy requires global projectivity and an acyclic target; derived fraction factorizations do not assert local lifting or local null-homotopy for finite free retract sheaves and a partial cohomology bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+  "by": "worker",
+  "date": "2026-10-23",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 08HG (lemma-descend-perfect), with the ringed-site perfectness convention of sites-cohomology.tex Tag 08G5 (definition-perfect). Supporting input for 08HG: Tag 08HE (lemma-descend-pseudo-coherent), with the convention of sites-cohomology.tex Tag 08FT (definition-pseudo-coherent) and its lemma-pseudo-coherent-independent-representative. Supporting input to 08HE: lemma-descend-pseudo-coherent, final paragraph: the two applications of sites-cohomology lemma-cone-pseudo-coherent. Supporting input to Tag 08FV, proof (1): Tag 08FQ, lemma-lift-through-quasi-isomorphism.",
+   "via": [
+    "lem-sfb-ringed-site-m-pseudocoherent-triangle",
+    "lem-sfb-etale-pseudocoherence-descent",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-strict-perfect-local-lift",
+  "worker": "stage1",
+  "summary": "Q155 checked Tag 08FQ against the item, retained its statement, used the existing cone long exact sequence, isolated Tag 08FP(2) as one statement-only auxiliary node, and extracted the desired chain lift and signed homotopy directly from the two cone components. No boundedness of either target complex is assumed.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) support chain through 08HG, 08HE and 08FV(1), ending at its explicit 08FQ input; steps 1, 2 and 3 realize respectively 08FQ proof sentences 1, 2, and the final cone-triangle lifting conclusion. Current latest blueprint direct-images.proof.md paragraph (3) was read; this is a supporting algebraic input below that route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-60ff8fcfe",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-60ff8fcfe (reviewer sub-agent of L); spot-checked: I read the item and the new node in full against Stacks sites-cohomology.tex Tag 08FQ (lemma-lift-through-quasi-isomorphism) and Tag 08FP(2) (lemma-local-homotopy), including both proofs. The hypotheses match one by one: E strictly perfect, E^j=0 for j<a, H^j(v) an isomorphism for j>a and surjective at j=a, and no bounds on F, G or K. Step 1: the cone convention of def-weil-abstract-derived-category, C^r=L^r⊕K^{r+1} with matrix [[d_L,f],[0,-d_K]], is exactly the item's d_C; the long exact sequence from lem-sf-derived-homology-long-exact gives surjective H^j(v) and injective H^{j+1}(v), hence H^j(C)=0 for j≥a. Step 2: applies the new node to i∘u; coverings of U/U in the slice are coverings of U by def-pur-localized-ringed-site. Step 3: I recomputed both components. The G-part gives that t is a chain map and the F-part gives u-vt=d_F s+s d_E, so the elementary mark is right. The new node is unsplit and statement-only, and the statement is true: I tested a single degree-a source, nonzero cohomology of K below a, and the Stacks induction on length. A duplicate search over the snapshot (08FP/08FQ/08FN, null-homotopy) found only constant-ring, acyclic-target or étale specializations, so there is no duplicate. The node is smaller than the item, not a restatement. No SGA is used. The item is still unsplit on live and has no repair note. Advisory: the smallness needed for Mod(O_U) to be abelian is left implicit, as in the sibling nodes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteStrictPerfectLocalLift",
+  "declaration": "SheafOfModules.exists_strictPerfect_local_lift",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteStrictPerfectLocalLift.lean",
+  "statement": "theorem exists_strictPerfect_local_lift {C : Type c} [Category.{v} C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max c v r}) (U : C) (a : ℤ) [HasSheafify (J.over U) AddCommGrpCat.{max c v r}] [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (E F G : CochainComplex (ringedSiteModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ) (u : E ⟶ F) (v : G ⟶ F) (hbounded : ∃ b d : ℤ, ∀ j : ℤ, j < b ∨ d < j → IsZero (E.X j)) (hfinite : ∀ j : ℤ, ∃ n : ℕ, ∃ i : E.X j ⟶ ∏ᶜ fun _ : Fin n ↦ unit (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U), ∃ p : (∏ᶜ fun _ : Fin n ↦ unit (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ⟶ E.X j, i ≫ p = 𝟙 (E.X j)) (hbelow : ∀ j : ℤ, j < a → IsZero (E.X j)) (hiso : ∀ j : ℤ, a < j → IsIso (HomologicalComplex.homologyMap v j)) (hepi : Epi (HomologicalComplex.homologyMap v a)) : ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (f : V ⟶ U), S f → ∃ t : ((overFunctor (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U) (Over.mk f)).mapHomologicalComplex (.up ℤ)).obj E ⟶ ((overFunctor (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U) (Over.mk f)).mapHomologicalComplex (.up ℤ)).obj G, Nonempty (Homotopy (((overFunctor (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U) (Over.mk f)).mapHomologicalComplex (.up ℤ)).map u) (t ≫ ((overFunctor (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U) (Over.mk f)).mapHomologicalComplex (.up ℤ)).map v))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d1fd2b7a",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Read the item against Stacks 08FQ clause by clause. Ringed site with commutative R, slice J.over U; E,F,G and u, v match. hbounded (empty interval allowed), hfinite (degreewise retract of a Fin n product of unit, n=0 allowed) and hbelow give strictly perfect with E^j=0 below a. hiso above a and hepi at a use homologyMap. The conclusion is a covering sieve S ∈ J U with, on (C/U)/(Over.mk f), a chain map t and Nonempty Homotopy (res u) (t ≫ res v); Homotopy.comm gives u−vt = d_F s + s d_E, the node's sign. No bounds on F or G. Universe max c v r: module universe = ring universe is forced by unit, and ≥ max c v by HasSheafCompose of forget₂ (Whiskering:161); this is the standard convention, c and v are not equated, pro-étale fits with r=u+1, and all citers are proof-only. Duplicate search (rg local_lift/strictPerfect/08FQ): exists_perfect_constant_local_lift is a constant-ring/epi special case and the StrictPerfect packages are different notions; the name is new. lean record complete, statement verbatim, item changed only in lean, stmt_deps unchanged. Proof is sorry only, no defs, docstrings carry source, blueprint and the 3 steps, lines ≤100, imports OK. The global instance attribute for module_overFunctor_preservesZero (a Prop proved by rfl) has landed precedent. Both report sections present; the second reading is by the same worker but clause-specific. Nothing compiled (no changes)."
+ }
+}

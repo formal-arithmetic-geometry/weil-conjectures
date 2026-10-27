@@ -1,0 +1,203 @@
+{
+ "id": "lem-sfb-controlled-exponent-sequence-length",
+ "kind": "statement",
+ "title": "Uniform length bound for controlled bad exponent sequences",
+ "statement": "For every integer $r\\geq0$ and every function $h:\\mathbf N\\to\\mathbf N$, there is $L=L(r,h)\\in\\mathbf N$ such that the following holds. If $n\\in\\mathbf N$ and $\\alpha_0,\\ldots,\\alpha_{n-1}\\in\\mathbf N^r$ satisfy $\\sum_{a=1}^r\\alpha_{i,a}\\leq h(i)$ for every $i<n$, and for every $i<j<n$ there is a coordinate $a$ with $\\alpha_{i,a}>\\alpha_{j,a}$, then $n\\leq L$. Thus no earlier tuple is coordinatewise at most any later tuple. The cases $r=0$, $n=0$, and functions $h$ taking the value zero are included; no monotonicity of $h$ is required. Here finite index sets have the meaning of [def-sfb-finite-infinite-set]; the sequence is indexed by the finite set $\\{0,\\ldots,n-1\\}$.",
+ "source": {
+  "document": "literature/dube-structure-polynomial-ideals-groebner-bases-1990.pdf",
+  "place": "Theorem 8.2, printed p.773, is the surrounding uniform-bound result, not this combinatorial lemma. Agent-supplied controlled-Dickson argument for an alternative existence-only proof; local PDF WANTED; no Stacks tag asserted.",
+  "url": "https://cs.uwaterloo.ca/~r5olivei/courses/2025-spring-cs860/D90.pdf"
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [
+  {
+   "text": "Fix $r,h$. Let $E_m$ be the set of tuples $(\\alpha_0,\\ldots,\\alpha_{m-1})$ satisfying the two conditions in the statement. Each coordinate of $\\alpha_i$ lies in $\\{0,\\ldots,h(i)\\}$, since it is nonnegative and at most the coordinate sum. Thus $E_m$ embeds into the product, over $i<m$ and $a=1,\\ldots,r$, of these finite intervals, and has at most $\\prod_{i<m}(h(i)+1)^r$ elements. This proves finiteness in the sense of [def-sfb-finite-infinite-set]; it does not require $h$ to be monotone. $E_0$ consists of the empty tuple.",
+   "uses": [
+    "def-sfb-finite-infinite-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 086J, lemma-nonempty-limit; agent controlled-prefix application, combined with Mathlib/Order/WellQuasiOrder.lean, Pi.wellQuasiOrderedLE, lines 215--217."
+   }
+  },
+  {
+   "text": "Suppose, for contradiction, that the possible lengths have no bound. For every $m$ choose a permitted sequence of length $n>m$ and restrict it to its first $m$ terms; this shows $E_m\\ne\\varnothing$. For $m\\leq n$, restriction to the first $m$ terms maps $E_n$ to $E_m$: all retained inequalities have the same indices and the same bounds $h(i)$. Restriction to the same length is the identity, and restricting twice equals restricting once. Consequently the $E_m$ form a functor from the small category $\\mathbf N^{\\mathrm{op}}$ to sets. This category is cofiltered: it is nonempty, $\\max(m,n)$ maps to $m,n$, and parallel arrows are equal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 086J, lemma-nonempty-limit; agent controlled-prefix application, combined with Mathlib/Order/WellQuasiOrder.lean, Pi.wellQuasiOrderedLE, lines 215--217."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-cofiltered-finite-sets-section] to this diagram: its index category is small and cofiltered by Step 2, and its values are finite and nonempty by Steps 1--2. Obtain $s_m\\in E_m$ with every prefix restriction of $s_n$ equal to $s_m$ for $m\\leq n$. Define $\\beta_i$ to be entry $i$ of $s_{i+1}$. If $m>i$, compatibility with $s_{i+1}$ shows that entry $i$ of $s_m$ is $\\beta_i$. In particular, for $i<j$, both $\\beta_i,\\beta_j$ are the corresponding entries of $s_{j+1}$, so $\\beta_i\\not\\leq\\beta_j$ coordinatewise. No surjectivity of restriction maps is assumed.",
+   "uses": [
+    "lem-trf-cofiltered-finite-sets-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 086J, lemma-nonempty-limit; agent controlled-prefix application, combined with Mathlib/Order/WellQuasiOrder.lean, Pi.wellQuasiOrderedLE, lines 215--217."
+   }
+  },
+  {
+   "text": "By [lem-trf-dickson-exponent-sequences], the sequence $(\\beta_i)_{i\\in\\mathbf N}$ in $\\mathbf N^r$ has $i<j$ with $\\beta_i\\leq\\beta_j$, contradicting Step 3. Hence the lengths are bounded; choose such a natural-number bound as $L(r,h)$. The construction involved only $r,h$. For $r=0$ there is only one empty exponent tuple, and two terms cannot satisfy the required strict-coordinate condition, so $L=1$ works. If $h(0)=0$, the first tuple must be zero, and again length at most one is possible; zeros at later indices cause no difficulty in the same proof. The empty sequence always satisfies the conditions and $0\\leq L$.",
+   "uses": [
+    "lem-trf-dickson-exponent-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 086J, lemma-nonempty-limit; agent controlled-prefix application, combined with Mathlib/Order/WellQuasiOrder.lean, Pi.wellQuasiOrderedLE, lines 215--217."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-finite-infinite-set",
+  "lem-trf-cofiltered-finite-sets-section",
+  "lem-trf-dickson-exponent-sequences"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 086J, lemma-nonempty-limit; agent controlled-prefix application, combined with Mathlib/Order/WellQuasiOrder.lean, Pi.wellQuasiOrderedLE, lines 215--217."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Uniform upper bound for lengths of bad sequences in natural number tuples with controlled coordinate growth",
+   "results": "{\"t\": \"2026-10-23T11:11:06Z\", \"tool\": \"leansearch\", \"query\": \"Uniform upper bound for lengths of bad sequences in natural number tuples with controlled coordinate growth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.PartiallyWellOrderedOn.IsBadSeq\", \"Behrend.map_le_of_mem_box\", \"SuccDiffBounded\", \"lt_geom\", \"Set.PartiallyWellOrderedOn.IsMinBadSeq\", \"ExpGrowth.expGrowthSup_le_iff\", \"LinearGrowth.eventually_le_mul\", \"AkraBazziRecurrence.GrowsPolynomially.eventually_atTop_le_nat\"], \"digest\": \"8bb1910ce9258e9f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: bad-sequence definitions and finite-dimensional relation-series bounds do not supply a bound for controlled finite sequences; the required finite-dimensionality of the prefix tree is itself the missing argument. Chevalley complexity bounds concern polynomial images, not controlled sequences."
+  },
+  {
+   "tool": "grep",
+   "query": "controlled|badSeq|IsBadSeq|length.*bound",
+   "results": "{\"t\": \"2026-10-23T11:32:31Z\", \"tool\": \"grep\", \"query\": \"controlled|badSeq|IsBadSeq|length.*bound\", \"sub\": \"Order\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Order/KrullDimension.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\"], \"digest\": \"421352545b07ed94\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: bad-sequence definitions and finite-dimensional relation-series bounds do not supply a bound for controlled finite sequences; the required finite-dimensionality of the prefix tree is itself the missing argument. Chevalley complexity bounds concern polynomial images, not controlled sequences."
+  },
+  {
+   "tool": "loogle",
+   "query": "WellQuasiOrdered, List",
+   "results": "{\"t\": \"2026-10-23T11:32:31Z\", \"tool\": \"loogle\", \"query\": \"WellQuasiOrdered, List\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: bad-sequence definitions and finite-dimensional relation-series bounds do not supply a bound for controlled finite sequences; the required finite-dimensionality of the prefix tree is itself the missing argument. Chevalley complexity bounds concern polynomial images, not controlled sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every function h from natural numbers to natural numbers and fixed r, the lengths of finite bad sequences in N^r with coordinate sums at index i bounded by h i have a uniform finite bound",
+   "results": "{\"t\": \"2026-10-23T11:32:35Z\", \"tool\": \"leanfinder\", \"query\": \"For every function h from natural numbers to natural numbers and fixed r, the lengths of finite bad sequences in N^r with coordinate sums at index i bounded by h i have a uniform finite bound\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SetRel.FiniteDimensional.exists_longest_relSeries\", \"Set.PartiallyWellOrderedOn.IsMinBadSeq\", \"rothNumberNat_def\", \"RelSeries.longestOf\", \"RelSeries.length_le_length_longestOf\", \"Fin.addRothNumber_le_rothNumberNat\", \"SetRel.finiteDimensional_iff\", \"RelSeries.withLength\"], \"digest\": \"697efed38b09bbc9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: bad-sequence definitions and finite-dimensional relation-series bounds do not supply a bound for controlled finite sequences; the required finite-dimensionality of the prefix tree is itself the missing argument. Chevalley complexity bounds concern polynomial images, not controlled sequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Controlled Dickson lemma bounded lengths of bad sequences of exponent vectors with prescribed growth",
+   "results": "{\"t\": \"2026-10-23T11:32:37Z\", \"tool\": \"leanfinder\", \"query\": \"Controlled Dickson lemma bounded lengths of bad sequences of exponent vectors with prescribed growth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.MvPolynomialC.degBound\", \"ChevalleyThm.MvPolynomialC.numBound\", \"ChevalleyThm.degBound\", \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"ChevalleyThm.MvPolynomialC.degBound_pos\", \"ChevalleyThm.MvPolynomialC.degBound_casesOn_succ\", \"ChevalleyThm.MvPolynomialC.numBound_mono\", \"ChevalleyThm.numBound\"], \"digest\": \"e52a6c7494312e16\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: bad-sequence definitions and finite-dimensional relation-series bounds do not supply a bound for controlled finite sequences; the required finite-dimensionality of the prefix tree is itself the missing argument. Chevalley complexity bounds concern polynomial images, not controlled sequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform bound on lengths of finite bad sequences of natural number vectors with coordinate sum at index i bounded by h i",
+   "results": "{\"t\": \"2026-10-23T12:54:57Z\", \"tool\": \"leansearch\", \"query\": \"Uniform bound on lengths of finite bad sequences of natural number vectors with coordinate sum at index i bounded by h i\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.PartiallyWellOrderedOn.IsBadSeq\", \"Set.PartiallyWellOrderedOn.IsMinBadSeq\", \"Set.PartiallyWellOrderedOn.minBadSeqOfBadSeq\", \"Set.PartiallyWellOrderedOn.exists_min_bad_of_exists_bad\", \"FormalMultilinearSeries.mem_compPartialSumTarget_iff\", \"IsUltrametricDist.norm_sum_le_of_forall_le_of_nonempty\", \"Stream'.Seq.length\", \"eVariationOn.sum_le\"], \"digest\": \"e5d9747d0ad243db\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected bad-sequence definitions, bounded relation-series results requiring a separate finite-dimensionality hypothesis, and Chevalley polynomial-complexity bounds. None states the controlled finite-sequence length bound. The existing Dickson and finite-cofiltered-section leaves supply its two substantive inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "WellQuasiOrdered, List",
+   "results": "{\"t\": \"2026-10-23T12:55:55Z\", \"tool\": \"loogle\", \"query\": \"WellQuasiOrdered, List\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected bad-sequence definitions, bounded relation-series results requiring a separate finite-dimensionality hypothesis, and Chevalley polynomial-complexity bounds. None states the controlled finite-sequence length bound. The existing Dickson and finite-cofiltered-section leaves supply its two substantive inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Controlled Dickson lemma uniform length bound for finite bad sequences with position dependent coordinate bounds",
+   "results": "{\"t\": \"2026-10-23T12:55:57Z\", \"tool\": \"leanfinder\", \"query\": \"Controlled Dickson lemma uniform length bound for finite bad sequences with position dependent coordinate bounds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.PartiallyWellOrderedOn.minBadSeqOfBadSeq\", \"SetRel.FiniteDimensional.exists_longest_relSeries\", \"SimplexCategoryGenRel.IsAdmissible.le\", \"ChevalleyThm.MvPolynomialC.degBound_le_degBound\", \"Profinite.NobelingProof.GoodProducts\", \"ChevalleyThm.MvPolynomialC.numBound_mono\", \"Profinite.NobelingProof.GoodProducts.MaxProducts\", \"RelSeries.length_le_length_longestOf\"], \"digest\": \"d1bf8dfb63ae16a3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected bad-sequence definitions, bounded relation-series results requiring a separate finite-dimensionality hypothesis, and Chevalley polynomial-complexity bounds. None states the controlled finite-sequence length bound. The existing Dickson and finite-cofiltered-section leaves supply its two substantive inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "IsBadSeq|controlled|length.*bound",
+   "results": "{\"t\": \"2026-10-23T12:57:40Z\", \"tool\": \"grep\", \"query\": \"IsBadSeq|controlled|length.*bound\", \"sub\": \"Order\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Order/KrullDimension.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\", \"Mathlib/Order/WellFoundedSet.lean\"], \"digest\": \"c3ff92cb0f90df5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected bad-sequence definitions, bounded relation-series results requiring a separate finite-dimensionality hypothesis, and Chevalley polynomial-complexity bounds. None states the controlled finite-sequence length bound. The existing Dickson and finite-cofiltered-section leaves supply its two substantive inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bounded-homogeneous-groebner-degree",
+  "date": "2026-10-23",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 2.1 Proposition 1 and Lemma 2(1), printed pp.6--8. Agent bounded-weight formulation: the bound depends on B; a bound independent of rescaling all weights would be false. Dimension is the degree-of-Hilbert-polynomial fact in the same Hilbert setup. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input for the bounded-weight split: Uniform degree bound for homogeneous initial ideals. Further input: Uniform length bound for controlled bad exponent sequences.",
+   "via": [
+    "lem-sfb-bounded-homogeneous-groebner-degree",
+    "lem-sfb-bounded-hilbert-weight-polynomials",
+    "lem-sfb-gieseker-potential-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-controlled-exponent-sequence-length",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Explicit finite controlled-prefix sets and their restriction diagram reduce the uniform bound to the existing finite-cofiltered-section and Dickson Mathlib leaves. All finiteness, smallness, compatibility and empty-dimension cases are checked; no new nodes, no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 3.2, Definition 7 and Theorem 8, printed pp.13--15, and equation (6) in Section 3.3. Local PDF WANTED; read online. Supporting estimate: Section 2.1 Proposition 1 and Lemma 2(1), printed pp.6--8. Agent bounded-weight formulation: the bound depends on B; a bound independent of rescaling all weights would be false. Dimension is the degree-of-Hilbert-polynomial fact in the same Hilbert setup. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting input for the bounded-weight split: Uniform degree bound for homogeneous initial ideals. Further input: Uniform length bound for controlled bad exponent sequences. The inherited historical alteration/Groebner chain is retained; the current latest direct-images proof (3) is context only. The controlled-Dickson argument supplies the parent Groebner degree-bound termination step. blueprint_refs.py ancestor returns None; no unit route or unit record changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-946cb58f5",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-946cb58f5 (reviewer sub-agent of L); spot-checked: Read the item and all three cited nodes in full; the delivery has no new nodes. The statement (uniform length bound L(r,h) for bad sequences in N^r with |alpha_i|<=h(i)) and its stmt_deps are unchanged. It is true; I checked r=0 and h(0)=0 (both give n<=1), r=1 with h=(1,0) (length 2 allowed), and n=0. The parent groebner-degree steps 1 and 4 use it in exactly this form. Proof: Step 1 shows each prefix set E_m is finite (it embeds into a product of intervals), elementary. Step 2 shows unbounded lengths make every E_m nonempty and that truncation is a functor from N^op, which is cofiltered; elementary. Step 3 applies lem-trf-cofiltered-finite-sets-section with every hypothesis checked, and beta_i = (s_{i+1})_i gives an infinite bad sequence. Step 4 applies the sequence clause of lem-trf-dickson-exponent-sequences for the contradiction. Mathlib read: CofilteredSystem.lean 75-81 (nonempty_sections_of_finite_cofiltered_system); WellQuasiOrder.lean 42-43, 130-131, 208-209, 215-217. Batch 5: both trf citations are status-mathlib leaves with no proof_deps and state generic facts (a cofiltered limit of finite nonempty sets is nonempty; Dickson's lemma). Neither is given by the trace-formula or Poincare-duality assumptions or used in their proofs, so both are acceptable. No route departure, since Mathlib leaves are tools and need no tool_uses. Snapshot search found no duplicate statement. Minor issue, not fixed: steps 1-2 name Stacks 086J as their source although they are elementary. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Order.ControlledExponentSequenceLength",
+  "declaration": "Order.exists_bound_length_of_controlled_bad_exponent_sequence",
+  "file": "lean/Sheaf/Order/ControlledExponentSequenceLength.lean",
+  "statement": "theorem exists_bound_length_of_controlled_bad_exponent_sequence (r : ℕ) (h : ℕ → ℕ) : ∃ L : ℕ, ∀ (n : ℕ) (α : Fin n → Fin r → ℕ), (∀ i : Fin n, (∑ a : Fin r, α i a) ≤ h i.val) → (∀ i j : Fin n, i < j → ∃ a : Fin r, α j a < α i a) → n ≤ L",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e5a5345a",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Only the lean record is added; the node is otherwise unchanged against side-live. lean.statement appears verbatim in the file and the name does not clash. Clause by clause: ∃ L comes before ∀ n α; α : Fin n → Fin r → ℕ; the sum bound is ≤ h i.val; the strict coordinate condition α j a < α i a matches the node's α_{i,a} > α_{j,a}; the conclusion is n ≤ L; there are no extra hypotheses or universes. Edge cases: r=0, n=0 and h(0)=0 are covered, and non-monotone h is allowed (h=(1,0) admits length 2). Imports: the statement dependency is public, the proof dependencies (Mathlib leaves) are plain. No definitions; the proof is sorry; both docstrings give the source place and (blueprint: …), and the theorem docstring follows the four proof steps. The report has both required sections. The citer groebner-degree uses this exact form. Not recompiled because no file was changed. Advisory only: no copyright header."
+ }
+}

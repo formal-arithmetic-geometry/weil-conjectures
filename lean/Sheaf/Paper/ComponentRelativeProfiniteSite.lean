@@ -92,7 +92,16 @@ noncomputable def componentFiniteScheme (T : Scheme.{u}) [IsAffine T]
   ∐ fun a : A => Over.mk (componentFiniteOpen T A C q f a).ι
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem component_mapping_property (T : Scheme.{u}) [IsAffine T]
+/-- The pullback topology and stalkwise isomorphisms give the relative universal
+mapping property, including maps from arbitrary schemes over the base.
+
+Source: Bhatt--Scholze, the more precise statement following Lemma 2.2.8
+(blueprint: lem-zl-component-relative-profinite-site).
+
+Proof: pair the given coordinate with the map to the base, apply the inverse pullback
+homeomorphism, and lift the resulting continuous map by stalk-isomorphism lifting.
+Equality of both coordinates gives uniqueness. -/
+theorem component_mapping_property (T : Scheme.{u}) [IsAffine T]
     (F : Over (affineComponentSpace T) ⥤ T.ProEt)
     (p : ∀ E : Over (affineComponentSpace T), C((F.obj E).left, E.left))
     (hF : ∀ E : Over (affineComponentSpace T),

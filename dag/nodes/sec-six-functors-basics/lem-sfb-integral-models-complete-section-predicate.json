@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-integral-models-complete-section-predicate",
+ "kind": "statement",
+ "title": "Completed realization identifies local completeness for the extended residue ideal",
+ "statement": "For a prime l, a finite extension E of Q_l, a Noetherian scheme X and any unbounded internal continuous integral coefficient complex K, let I be the kernel ideal of the reconstructed discrete first residue map [def-sfb-integral-models-stacks-data] and let IB be its extension along the reconstructed constant-to-continuous scalar map. The completed realization [def-sfb-integral-constant-model-realization] of K satisfies IsSfbAdicComplete [def-sfb-adic-stratified-perfect-data] if and only if the section-and-small-site realization of K is locally derived IB-complete [def-weil-pbc-locally-derived-ringed-ideal-complete]. No restriction functor or equivalence of derived complete subcategories is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Proof (1): flatness and quotient identification (Stacks 099L), and coefficient-presentation comparison"
+ },
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-adic-stratified-perfect-data",
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete"
+ ],
+ "proof": [
+  {
+   "text": "The section-module scalar restriction comparison and the composition comparisons combine the four specified ordinary realization factors into restriction along completedSectionIso. Whisker with the small-site module transport.",
+   "uses": [
+    "def-sfb-integral-models-completed-section-ring",
+    "def-sfb-integral-constant-model-realization",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Localize the ordinary comparison termwise. Factorization isomorphisms for the exact functors compare both chosen complex representatives with the same derived object. Local derived completeness is invariant under these isomorphisms because each defining internal Hom functor preserves isomorphisms.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-locally-derived-ringed-ideal-complete"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply preservation and reflection of local derived ideal completeness under scalar restriction along the small-site coefficient isomorphism. Replace its extended first completed kernel by the discrete extended residue kernel using completedSectionIdeal. This proves the requested equivalence for every unbounded complex.",
+   "uses": [
+    "lem-sfb-integral-models-completed-section-ideal",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integral-models-completed-section-ring",
+  "def-sfb-integral-constant-model-realization",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-sfb-integral-models-stacks-data",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "lem-sfb-integral-models-completed-section-ideal",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Lemma restriction-derived-complete; normalized first ideal comparison split as lem-sfb-integral-models-completed-section-ideal, from Stacks sites-modules lemma-completion-flat and proetale section-derived-completion-noetherian."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of internal abelian module sheaves and ordinary module sheaves preserves derived local ideal completeness",
+   "results": "SheafOfModules.instAbelian, PresheafOfModules.instAbelian, and generic sheafification and forgetful instances; no local completeness comparison.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local derived completeness is invariant under an equivalence of ringed topoi",
+   "results": "CategoryTheory.Equivalence.sheafCongr and sheafCongrPrecoherent transport sheaves, but do not identify the displayed derived ideal-completeness predicates.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyDerivedRingedIdealComplete\"",
+   "results": "0 hits.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyDerivedRingedIdealComplete|IsSfbAdicComplete",
+   "results": "0 hits in Mathlib; project grep finds IsSfbAdicComplete only in its definition, triangulated API and upper transport obligations.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; the coefficient-presentation identification is still needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralModelsCompletionTransport",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof (1): Completed realization identifies local completeness for the extended residue ideal",
+   "via": [
+    "lem-sfb-integral-models-completion-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsCompleteSectionPredicate",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsCompleteSectionPredicate.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integralModels_complete_section_predicate",
+  "statement": "theorem integralModels_complete_section_predicate (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integersObj l E) X))) :\n    let I := ConstantCompletion.kernelIdeal (smallMap X (residueMap l E X))\n    let IB := I.extension (smallMap X (scalarMap l E X))\n    Scheme.IsSfbAdicComplete X (IntegralConstantCompletion.ideal l E)\n        ((IntegralConstantModel.derived l E X).functor.obj K) ↔\n      IsLocallyDerivedRingedIdealComplete _ IB.module IB.inclusion\n        (smallDerivedObject X _ K)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T122450-L-1774752",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T181144-L-4082858",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

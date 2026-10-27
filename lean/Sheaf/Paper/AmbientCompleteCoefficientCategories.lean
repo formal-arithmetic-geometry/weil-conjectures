@@ -750,7 +750,7 @@ private theorem coefficientPairFunctor_additive
     (coefficientPairFunctor S T φ b hb).Additive := by
   let M : S.Morphism T := ⟨φ, b, hb⟩
   have heq : coefficientPairFunctor S T φ b hb = M.functor := by
-    delta coefficientPairFunctor
+    rw [coefficientPairFunctor_eq_chosen]
     exact (coefficientPairFunctor_exists S T φ b hb).unique
       (coefficientPairFunctor_exists S T φ b hb).exists.choose_spec
       ⟨fun _ ↦ rfl, fun _ _ _ _ ↦ HEq.rfl⟩
@@ -823,7 +823,7 @@ variable {E F G : Padic.FiniteCoefficientFields l Ω}
 /-- Extend the actual ambient rational tensor to every finite-stage projector.
 Source: sketch32, lines 1291--1311
 (blueprint: def-sbc-ambient-complete-coefficient-categories). -/
-abbrev pbcAmbientCompleteKaroubiTransition (h : E ≤ F) :
+def pbcAmbientCompleteKaroubiTransition (h : E ≤ F) :
     pbcAmbientCompleteKaroubiStage l Ω W E ⥤ pbcAmbientCompleteKaroubiStage l Ω W F :=
   (Idempotents.functorExtension₂
     (pbcAmbientCompleteStage l Ω W E) (pbcAmbientCompleteStage l Ω W F)).obj
@@ -832,7 +832,7 @@ abbrev pbcAmbientCompleteKaroubiTransition (h : E ≤ F) :
 /-- Extend the existing constructible rational tensor to every finite-stage projector.
 Source: sketch32, lines 1291--1311
 (blueprint: def-sbc-ambient-complete-coefficient-categories). -/
-abbrev pbcConstructibleCompleteKaroubiTransition (h : E ≤ F) :
+def pbcConstructibleCompleteKaroubiTransition (h : E ≤ F) :
     pbcConstructibleCompleteKaroubiStage l Ω W E ⥤
       pbcConstructibleCompleteKaroubiStage l Ω W F :=
   (Idempotents.functorExtension₂

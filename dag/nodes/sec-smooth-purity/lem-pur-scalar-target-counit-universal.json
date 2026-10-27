@@ -1,0 +1,150 @@
+{
+ "id": "lem-pur-scalar-target-counit-universal",
+ "kind": "statement",
+ "title": "Universal target whole-cochain scalar reduction counit",
+ "statement": "Fix a prime ell, finite extensions E and F of Q_ell, a Q_ell-algebra map i:E→F, and a scheme W. Use the canonical constant coefficient tensor T and ordinary tensor from [def-pur-constant-scalar-tensor-data], and native ordinary reduction, exact restriction to constant coefficients, the reduction functor D_E, and its whole-system counit from [def-pur-native-reduction-counit-data]. For any recorded derived-system calculus S over F and any natural number e, let r_e select the levels e(n+1)-1 and R_e its exact derived functor. Put C=ordinary completed scalar extension and LC=its canonical total left derived functor, using [lem-pur-derived-change-of-rings]. There exists a natural transformation alpha:Q(LC D_F R_e)→(C O_F r_e)Q whose component is R_e D_F applied to the completed scalar-extension counit, then R_e applied to the F constant reduction counit on C(P), then the exact arithmetic-restriction localization factor. The pair (LC D_F R_e,alpha) is a right Kan extension of the ordinary composite followed by Q along Q. This makes no comparison with E reduction and assumes no ramification equality. The completed coefficient map is the actual map fixed by its finite reductions in [lem-weil-finite-free-completed-scalar-comparison].",
+ "stmt_deps": [
+  "def-pur-constant-scalar-tensor-data",
+  "def-pur-native-reduction-counit-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Lemma derived-base-change (Tag 06YY), lemma-derived-pullback-composition, section-derived-limits (0940), lemma-derived-limit-is-ok (0941); derived.tex, lemma-derived-adjoint-functors. Specialization of the original balancing theorem docstring to its target composite."
+ },
+ "proof": [
+  {
+   "text": "Build the whole-cochain counit natural transformation by transporting systemReductionCounit through quotientCompQhIso and mapHomotopyCategoryFactors, whiskering with exact systemRestriction and arithmetic restriction, and precomposing the scalar-extension counit. Functor associators have identity components, so its component is exactly the displayed formula.",
+   "uses": [
+    "def-pur-native-reduction-counit-data",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose a K-flat resolution P of each E-complex. The specified completed extension C preserves K-flatness. Its canonical counit is invertible on P, and the native F counit is invertible on C(P) by the native K-flat computation. Exact restriction functors have invertible localization factors and preserve isomorphisms. Thus the composite cochain counit is invertible on all K-flat P.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-native-reduction-counit-kflat",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-pur-native-reduction-counit-data",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the universal property on the homotopy category. For any V and eta:Q V→F, define eta times the inverse of the computing counit on K-flat representatives. The resolving-class natural-transformation theorem extends these components uniquely over the homotopy category. Fully faithful localization whiskering descends that transformation to V→D. Resolve an arbitrary object and cancel its inverted resolution map to prove the factorization and uniqueness equations. This makes (D,alpha) terminal in the right-extension category. Finally full and faithful whiskering with the homotopy quotient and the canonical quotient/localization isomorphisms transfer this right Kan extension to the cochain category.",
+   "uses": [
+    "lem-sc-nattrans-from-resolving-class",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-native-reduction-counit-data",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-native-reduction-counit-kflat",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sc-nattrans-from-resolving-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and lemma-derived-pullback-composition; resolving-class universal-property argument written by Q6, with the native computation isolated before scalar extension and exact restrictions."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact coefficient restriction preserves the universal counit for total left derived tensor extension on a sequence site",
+   "results": "8 hits including Functor.totalLeftDerivedCounit, the generic IsLeftDerivedFunctor instance, Adjunction.derivedε and ordinary module scalar counits. None proves this native composite preserves its specified cochain counit.",
+   "date": "2026-10-25",
+   "verdict": "No exact statement for the recorded native reduction composite."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between tensor extension of quotient module towers and ramified subsequence, determined by pure tensors",
+   "results": "8 hits: quotient tensor equivalences and QuotSMulTop tensor equivalences. These concern individual algebraic modules.",
+   "date": "2026-10-25",
+   "verdict": "No whole-sequence native derived universal property."
+  },
+  {
+   "tool": "grep",
+   "query": "rightKanExtensionUniqueOfIso|systemReductionCounit|sourceCounit|targetCounit in Mathlib, WeilConjectures, Sheaf and DAG; blueprint_refs search reduction counit, scalar balancing, derived counit",
+   "results": "Generic Mathlib Kan uniqueness is available (lem-sfb-right-kan-extension-unique-iso); the concrete counits are defined in NativeConstantSupportModel and ScalarReductionTowerBalancing. Other matches use different ringed pullback data or theorems. No declared universal property for either composite. Blueprint searches found no matching node.",
+   "date": "2026-10-25",
+   "verdict": "New one-sided universal property required, not duplicate balancing existence."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarReductionTowerBalancing",
+  "date": "2026-10-25",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Finite coefficient extension comparison: derived balancing docstring, universal counit on the target composite before whole-diagram uniqueness.",
+   "via": [
+    "def-pur-strict-scalar-reduction-balancing",
+    "lem-pur-compact-support-strict-scalar-mate",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarTargetCounitUniversal",
+  "file": "lean/Sheaf/Paper/ScalarTargetCounitUniversal.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.scalarTargetCounit_universal",
+  "statement": "theorem scalarTargetCounit_universal (W : Scheme.{u})\n    (S : CoefficientDerivedSystemCalculus.{u, u} l F W) (e : ℕ) :\n    letI := ordinaryReduction_additive l F W\n    letI := systemRestriction_additive l F W\n    let O := ordinaryReduction l F W ⋙ systemRestriction l F W\n    letI : O.Additive := inferInstanceAs\n      ((ordinaryReduction l F W ⋙ systemRestriction l F W).Additive)\n    let γ (P : CochainComplex (scalarReductionSource l F W) ℤ) :=\n      S.reduction.map ((DerivedCategory.quotientCompQhIso _).inv.app P) ≫\n        (systemReductionCounit l F W S).app ((HomotopyCategory.quotient _ _).obj P) ≫\n        DerivedCategory.Qh.map\n          (((ordinaryReduction l F W).mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫\n        (DerivedCategory.quotientCompQhIso _).hom.app\n          (((ordinaryReduction l F W).mapHomologicalComplex (.up ℤ)).obj P)\n    let δ (P : CochainComplex (scalarReductionSource l F W) ℤ) :\n        (reduction l F W S).obj (DerivedCategory.Q.obj P) ⟶\n          DerivedCategory.Q.obj ((O.mapHomologicalComplex (.up ℤ)).obj P) :=\n      (systemU l F W).map (γ P) ≫\n        (systemRestriction l F W).mapDerivedCategoryFactors.hom.app\n          (((ordinaryReduction l F W).mapHomologicalComplex (.up ℤ)).obj P)\n    let r := CategoryTheory.StrictTowerArithmetic.restriction\n      (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) e\n    let R := CategoryTheory.StrictTowerArithmetic.derivedRestriction\n      (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W) e\n    let C := pbcExtend (completedCoefficientMap l E F i W)\n    letI : (C ⋙ O ⋙ r).Additive := inferInstance\n    let D := pbcDerivedExtend (completedCoefficientMap l E F i W) ⋙ reduction l F W S ⋙ R\n    ∃ α : DerivedCategory.Q ⋙ D ⟶\n        ((C ⋙ O ⋙ r).mapHomologicalComplex (.up ℤ)) ⋙ DerivedCategory.Q,\n      (∀ P : CochainComplex (scalarReductionSource l E W) ℤ,\n        α.app P = R.map\n            ((reduction l F W S).map (pbcComplexCounit (completedCoefficientMap l E F i W) P)) ≫\n          R.map (δ ((C.mapHomologicalComplex (.up ℤ)).obj P)) ≫\n          r.mapDerivedCategoryFactors.hom.app\n            ((O.mapHomologicalComplex (.up ℤ)).obj\n              ((C.mapHomologicalComplex (.up ℤ)).obj P))) ∧\n      D.IsRightKanExtension α",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T163558-L-701181",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261025T205931-L-3412043",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

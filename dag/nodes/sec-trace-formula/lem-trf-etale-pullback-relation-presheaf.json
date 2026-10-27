@@ -1,0 +1,234 @@
+{
+ "id": "lem-trf-etale-pullback-relation-presheaf",
+ "kind": "statement",
+ "title": "Etale pullback relation and its injective quotient presheaf",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $U,R,U'$ be schemes over $S$, and let $s,t:R\\to U$ induce a monomorphism $(s,t):R\\to U\\times_SU$ [def-pc-fibre-product]. Assume that for every $S$-scheme $T$ the relation $x\\sim_T y$ defined by $\\exists r:T\\to R,\\ s r=x,\\ t r=y$ is an equivalence relation on $U(T)$. Suppose $s,t$ and $g:U'\\to U$ are etale [def-weil-etale-morphism]. Set $A=U'\\times_{g,U,s}R$ and $R'=A\\times_{t\\operatorname{pr}_R,U,g}U'$, and write $s',t':R'\\to U'$ for its first and last projections. For every $T$, maps $T\\to R'$ identify naturally with triples $(a,r,b)$ satisfying $s r=g a$ and $t r=g b$; the arrow $r$ is unique for given $(a,b)$. The morphism $(s',t'):R'\\to U'\\times_SU'$ is a monomorphism and identifies $R'(T)$ with the equivalence relation $a\\sim'_T b\\Longleftrightarrow g a\\sim_T g b$. Both $s'$ and $t'$ are etale. Let $P(T)=U(T)/{\\sim_T}$ and $P'(T)=U'(T)/{\\sim'_T}$, with restrictions induced by precomposition, and let $h_U(T)=U(T)$ and $h_{U'}(T)=U'(T)$. The quotient maps $q:h_U\\to P$ and $q':h_{U'}\\to P'$ are surjective on sections over every $T$. There is a natural transformation $v:P'\\to P$ with $v_T([a])=[g a]$, and it is injective over every $T$. It satisfies $v q'=q h_g$, where $h_g:h_{U'}\\to h_U$ is postcomposition by $g$.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WT (lemma-pullback-etale-equivalence-relation); Groupoids Tags 02V8 (lemma-restrict-relation), 02V9 (definition-restrict-relation), and the presheaf relation calculation in the proof of Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout over $S$, so $U(T)=\\operatorname{Hom}_S(T,U)$. By the universal property in [def-pc-fibre-product], a map $T\\to A$ is a pair $(a,r)$ with $g a=s r$, and a map $T\\to R'$ is such a pair together with $b:T\\to U'$ with $t r=g b$. Thus these are precisely the triples $(a,r,b)$ in the statement. Precomposition by $c:T_1\\to T$ sends this triple to $(a c,r c,b c)$, proving the claimed natural identification. If $r_1,r_2$ have the same endpoints $g a,g b$, their composites with $(s,t)$ agree, so $r_1=r_2$ by its assumed monomorphism.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 02V8 (lemma-restrict-relation), 02V9 (definition-restrict-relation), explicit universal-property calculation"
+   }
+  },
+  {
+   "text": "For fixed $T$ and $a,b\\in U'(T)$, a triple exists exactly when $g a\\sim_T g b$. Consequently $R'(T)$ identifies with this inverse-image relation. It is reflexive because $g a\\sim_T g a$, symmetric because $g a\\sim_T g b$ implies $g b\\sim_T g a$, and transitive because $g a\\sim_T g b\\sim_T g c$ implies $g a\\sim_T g c$. To check the monomorphism directly, take any $z_1,z_2:T\\to R'$ with the same image in $U'\\times_S U'$. Their first and last coordinates agree; the uniqueness of $r$ from Step 1 makes the middle coordinates agree too, and the two successive pullback universal properties give $z_1=z_2$. This holds for every test scheme and proves that $(s',t')$ is a monomorphism.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02V8 (lemma-restrict-relation), filling the omitted proof on test schemes"
+   }
+  },
+  {
+   "text": "The projection R′→A is a base change of g, and A→U′ is a base change of s; their composite s′ is etale. For t′ no reassociation is needed: A→R is a base change of g, hence etale, and its composite A→R→U with t is etale. The projection t′ is the base change of that composite along g, hence etale. These four base-change applications use clause (1) of [lem-weil-pbc-etale-base-change-finite-limits]; the two composition applications use clause (2) of [lem-weil-pbc-etale-composition-cancellation]. The forgetful functor Over S→Scheme preserves these pullback squares, so the Mathlib Etale base-change property applies to the underlying scheme morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WT (lemma-pullback-etale-equivalence-relation), proof; morphisms.tex Tags 02GO (lemma-base-change-etale) and 02GN (lemma-composition-etale)"
+   }
+  },
+  {
+   "text": "If $x\\sim_T y$ is witnessed by $r:T\\to R$, then $x c\\sim_{T_1}y c$ is witnessed by $r c$ for every $c:T_1\\to T$. The triple description gives the identical assertion for $\\sim'$. Thus the rules $P(c)([x])=[x c]$ and $P'(c)([a])=[a c]$ are well-defined; their identity and composition laws follow from those for precomposition. The maps $q_T(x)=[x]$ and $q'_T(a)=[a]$ commute with these restrictions. They are surjective since every class of a set quotient has a representative, including when the underlying set is empty. In Lean, evaluation preserves coequalizers. Compose its coequalizer comparison isomorphism with Types.coequalizerIso to identify each evaluated coequalizer with Function.Coequalizer. Its generating relation consists of the endpoint pairs of arrows to R. The assumed equivalence relation already contains these generators and, conversely, every relation witness is a generator. Thus Quot.eqvGen_exact and Equivalence.eqvGen_iff prove the equality-of-classes characterization; the evaluated projection is epi in Type and therefore surjective. The same argument applies to R′.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict), presheaf calculation; preceding lemma-quotient-pre-equivalence proof and equation-quotient-presheaf"
+   }
+  },
+  {
+   "text": "Define $v_T([a])=[g a]$. If $a\\sim'_T b$, Step 2 gives $g a\\sim_T g b$, so this is well-defined. Conversely $v_T([a])=v_T([b])$ means $g a\\sim_T g b$, since $\\sim_T$ already is an equivalence relation, and Step 2 gives $a\\sim'_T b$, hence $[a]=[b]$. This proves injectivity, with no injectivity or surjectivity assumption on $g$. For $c:T_1\\to T$, both $P(c)v_T([a])$ and $v_{T_1}P'(c)([a])$ equal $[g a c]$, proving naturality. Finally $(v_Tq'_T)(a)=[g a]=(q_T(h_g)_T)(a)$ for every $a$, proving $v q'=q h_g$. Construct v by coequalizer.desc from yoneda.map g followed by q: the projection identities and coequalizer.condition supply its equalizing equation. The descent equation gives the formula on representatives. Sectionwise surjectivity reduces injectivity to those representatives and the two equality-of-classes characterizations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 045Z (lemma-quotient-pre-equivalence-relation-restrict), injectivity argument before sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tag 02WT proof, with Groupoids Tags 02V8/02V9 and the quotient-representative argument of Tag 045Z before sheafification; omitted universal-property and set-quotient details expanded. Lean proof K4, 2026-10-23: second projection is directly a base change of the etale composite A→R→U; evaluation-preserved coequalizers and their Type quotient model implement the sectionwise calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An etale equivalence relation pulled back along an etale scheme morphism remains etale and induces an injection on presheaf quotients on every test scheme",
+   "results": "{\"t\": \"2026-10-22T06:13:37Z\", \"tool\": \"leanfinder\", \"query\": \"An etale equivalence relation pulled back along an etale scheme morphism remains etale and induces an injection on presheaf quotients on every test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"a3866d8379ad68e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale composition and scheme gluing hits do not give the inverse-image relation or its quotient presheaf injection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T06:14:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale composition and scheme gluing hits do not give the inverse-image relation or its quotient presheaf injection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback an etale scheme equivalence relation and embed the resulting quotient presheaf into the original quotient presheaf",
+   "results": "{\"t\": \"2026-10-22T06:14:15Z\", \"tool\": \"leansearch\", \"query\": \"Pullback an etale scheme equivalence relation and embed the resulting quotient presheaf into the original quotient presheaf\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*equivalence.*relation|quotient.*relation|relation.*quotient",
+   "results": "{\"t\": \"2026-10-22T06:14:14Z\", \"tool\": \"grep\", \"query\": \"etale.*equivalence.*relation|quotient.*relation|relation.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale composition and scheme gluing hits do not give the inverse-image relation or its quotient presheaf injection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme equivalence relations are stable under inverse image and an etale refinement yields an injective natural map of quotient presheaves",
+   "results": "{\"t\": \"2026-10-22T06:14:25Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme equivalence relations are stable under inverse image and an etale refinement yields an injective natural map of quotient presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.fromGlued_injective\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"5a611c1de1df4752\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: etale composition and scheme gluing hits do not give the inverse-image relation or its quotient presheaf injection"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.*relation|quotient.*presheaf|presheaf.*quotient",
+   "results": "{\"t\": \"2026-10-23T04:05:42Z\", \"tool\": \"grep\", \"query\": \"equivalence.*relation|quotient.*presheaf|presheaf.*quotient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Gluing.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"83400535837ca9c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: pullback stability, setoid inverse images and quotient maps supply ingredients only; no result gives every scheme, relation, etale-projection and naturality clause"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback.fst",
+   "results": "{\"t\": \"2026-10-23T04:05:42Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, CategoryTheory.Limits.pullback.fst\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Etale.instFstScheme\", \"AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt\"], \"digest\": \"68102dc0d1ad583e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: pullback stability, setoid inverse images and quotient maps supply ingredients only; no result gives every scheme, relation, etale-projection and naturality clause"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of an equivalence relation of schemes along an etale morphism induces a pointwise injective quotient presheaf map",
+   "results": "{\"t\": \"2026-10-23T04:05:43Z\", \"tool\": \"leansearch\", \"query\": \"Inverse image of an equivalence relation of schemes along an etale morphism induces a pointwise injective quotient presheaf map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Setoid.comap\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"Order.Preimage.instIsEquiv\", \"AlgebraicGeometry.Scheme.Hom.inv_image\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.Scheme.Opens.topIso_inv\"], \"digest\": \"5d1f6c616e5a5c32\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: pullback stability, setoid inverse images and quotient maps supply ingredients only; no result gives every scheme, relation, etale-projection and naturality clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pulling back an etale equivalence relation along an etale map of schemes gives an etale equivalence relation and an injective map of quotient presheaves",
+   "results": "{\"t\": \"2026-10-23T04:05:43Z\", \"tool\": \"leanfinder\", \"query\": \"Pulling back an etale equivalence relation along an etale map of schemes gives an etale equivalence relation and an injective map of quotient presheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"22bbc340562c1a30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: pullback stability, setoid inverse images and quotient maps supply ingredients only; no result gives every scheme, relation, etale-projection and naturality clause"
+  },
+  {
+   "tool": "grep",
+   "query": "map_injective|comap|def map",
+   "results": "{\"t\": \"2026-10-23T04:06:01Z\", \"tool\": \"grep\", \"query\": \"map_injective|comap|def map\", \"sub\": \"Data/Setoid\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Data/Setoid/Basic.lean\", \"Mathlib/Data/Setoid/Basic.lean\", \"Mathlib/Data/Setoid/Basic.lean\", \"Mathlib/Data/Setoid/Basic.lean\", \"Mathlib/Data/Setoid/Basic.lean\"], \"digest\": \"149fb05c50e6207e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: pullback stability, setoid inverse images and quotient maps supply ingredients only; no result gives every scheme, relation, etale-projection and naturality clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a function and a setoid on its codomain, the quotient by the inverse image setoid embeds into the codomain quotient",
+   "results": "{\"t\": \"2026-10-23T04:06:03Z\", \"tool\": \"leanfinder\", \"query\": \"Given a function and a setoid on its codomain, the quotient by the inverse image setoid embeds into the codomain quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Setoid.comapQuotientEquiv\", \"Quotient.map'_mk\", \"Quotient.map'_mk''\", \"Setoid.kerLift\", \"Function.Embedding.quotientOut\", \"Quotient.outRelEmbedding\", \"Quotient.map_mk\", \"Quot.map\"], \"digest\": \"b177f1e128ebcce8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole item: pullback stability, setoid inverse images and quotient maps supply ingredients only; no result gives every scheme, relation, etale-projection and naturality clause"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-etale-relation-restriction-quotient",
+  "date": "2026-10-22",
+  "group": "Q155"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the quotient-by-etale-relation proof of lem-trf-etale-relation-quotient: Tags 02WT (pullback-etale-equivalence-relation), 02VH (quotient-groupoid-restrict), and the quotient-sheaf definition. Returned proof Steps 1-2 and Step 3 before sheafification: test-scheme triples, etale projections, and injective presheaf quotient.",
+   "via": [
+    "lem-trf-etale-relation-restriction-quotient",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-etale-pullback-relation-presheaf",
+  "worker": "stage1",
+  "summary": "Expanded the test-scheme triples and the monomorphism/equivalence checks; proved both etale projection factorizations using existing Mathlib leaf nodes, and constructed the quotient presheaves and their injective natural map explicitly. No statement change, no new nodes, no attachment. Searched the live project and Mathlib; no declaration proves the whole item.",
+  "blueprint": "Realizes blueprint.from.place through lem-trf-etale-relation-restriction-quotient: the test-scheme and presheaf portions of its original Steps 1-3, supporting the quotient-relation descent input to lem-trf-local-term-locality. Retains the prescribed Spaces 02WT and Groupoids 045Z route below that ancestor. No unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-91eb69278",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-91eb69278 (reviewer sub-agent of L); spot-checked: First split of a statement-only node that Q155 created. Statement, stmt_deps and blueprint record are identical to the node as created; 5 steps, no new nodes, and proof_deps equals the union of the steps' uses. Sources read: Stacks 02WT (spaces l.1284; proof = compositions of base changes via 02GO/02GN), 02V8/02V9 (restriction = triples, which agrees with the item's iterated fibre product), and 045Z (injectivity through representatives r_i, here before sheafification). Steps 1-2 use the universal property of def-pc-fibre-product and the assumed monomorphism (s,t) to get the triples, uniqueness of r, the inverse-image equivalence relation and the monomorphism (s',t'). All correct and elementary. Step 3: I checked R'->A as the base change of g along t·pr_R and A->U' as the base change of s along g. I also checked the second leg through B=U'×_{g,U,t}R: the square over s·pr_R and g is cartesian, since a map to B×_U U' is exactly a triple. This uses clause (1) of lem-weil-pbc-etale-base-change-finite-limits and clause (2) of lem-weil-pbc-etale-composition-cancellation, both Mathlib leaves. R' is only isomorphic to the chosen fibre product, but the cited composition node covers transport along that isomorphism, so this is no gap. Steps 4-5 (presheaf quotients, surjective q and q', injective natural v with v q'=q h_g) are elementary set-quotient checks. Edge cases tested: g=id, U' empty, the total relation on two points with g the inclusion of one copy (v injective, not surjective), and a two-point étale cover with the diagonal relation (g not injective, v injective). Duplicate search over the DAG (02WT/02V8/045Z/restrict-relation): only the parent (whose Step 1 cites this item for exactly these clauses) and sheaf-level siblings; no duplicate. No SGA cited. Advisory: the report mentions citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtalePullbackRelationPresheaf",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_pullback_relation_presheaf",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtalePullbackRelationPresheaf.lean",
+  "statement": "theorem etale_pullback_relation_presheaf {S : Scheme.{u}} {R U U' : Over S} (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) (g : U' ⟶ U) [Etale s.left] [Etale t.left] [Etale g.left] : ∃ (s' t' : pullback (pullback.snd g s ≫ t) g ⟶ U') (r' : pullback (pullback.snd g s ≫ t) g ⟶ R), s' = pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.fst g s ∧ t' = pullback.snd (pullback.snd g s ≫ t) g ∧ r' = pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.snd g s ∧ (∀ (T : Over S) (a : T ⟶ U') (r : T ⟶ R) (b : T ⟶ U'), (r ≫ s = a ≫ g ∧ r ≫ t = b ≫ g) ↔ ∃! z : T ⟶ pullback (pullback.snd g s ≫ t) g, z ≫ s' = a ∧ z ≫ r' = r ∧ z ≫ t' = b) ∧ (∀ (T : Over S) (a b : T ⟶ U') (r₁ r₂ : T ⟶ R), r₁ ≫ s = a ≫ g → r₁ ≫ t = b ≫ g → r₂ ≫ s = a ≫ g → r₂ ≫ t = b ≫ g → r₁ = r₂) ∧ Mono (prod.lift s' t') ∧ (∀ (T : Over S) (a b : T ⟶ U'), (∃ z : T ⟶ pullback (pullback.snd g s ≫ t) g, z ≫ s' = a ∧ z ≫ t' = b) ↔ ∃ r : T ⟶ R, r ≫ s = a ≫ g ∧ r ≫ t = b ≫ g) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ U' ↦ ∃ z : T ⟶ pullback (pullback.snd g s ≫ t) g, z ≫ s' = a ∧ z ≫ t' = b)) ∧ Etale s'.left ∧ Etale t'.left ∧ (∀ T : Over S, Function.Surjective ((coequalizer.π (yoneda.map s) (yoneda.map t)).app (op T))) ∧ (∀ T : Over S, Function.Surjective ((coequalizer.π (yoneda.map s') (yoneda.map t')).app (op T))) ∧ (∀ (T : Over S) (a b : T ⟶ U), (coequalizer.π (yoneda.map s) (yoneda.map t)).app (op T) a = (coequalizer.π (yoneda.map s) (yoneda.map t)).app (op T) b ↔ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b) ∧ (∀ (T : Over S) (a b : T ⟶ U'), (coequalizer.π (yoneda.map s') (yoneda.map t')).app (op T) a = (coequalizer.π (yoneda.map s') (yoneda.map t')).app (op T) b ↔ ∃ z : T ⟶ pullback (pullback.snd g s ≫ t) g, z ≫ s' = a ∧ z ≫ t' = b) ∧ ∃ v : coequalizer (yoneda.map s') (yoneda.map t') ⟶ coequalizer (yoneda.map s) (yoneda.map t), (∀ (T : Over S) (a : T ⟶ U'), v.app (op T) ((coequalizer.π (yoneda.map s') (yoneda.map t')).app (op T) a) = (coequalizer.π (yoneda.map s) (yoneda.map t)).app (op T) (a ≫ g)) ∧ (∀ T : Over S, Function.Injective (v.app (op T))) ∧ coequalizer.π (yoneda.map s') (yoneda.map t') ≫ v = yoneda.map g ≫ coequalizer.π (yoneda.map s) (yoneda.map t)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38f464085",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Every node hypothesis and clause matches the Lean exactly: S, U, R, U' and test schemes T are schemes over S; Mono(prod.lift s t); the relation is an equivalence on every T; s, t, g are etale; A = pullback g s and R' = pullback (pullback.snd g s ≫ t) g, with s', t', r' tied by equations to the canonical projections; maps into R' correspond uniquely to triples (a,r,b); r is unique for given endpoints; Mono(prod.lift s' t'); R'(T) is the pulled-back relation and an equivalence; s', t' etale; P and P' are Yoneda coequalizers pinned as the quotient sets by sectionwise surjectivity and the equal-class iff witness clauses; v with v[a] = [g a], injective, v q' = q h_g. No extra hypotheses, single universe u, empty cases covered. The three stmt_deps match the declarations used (Mathlib Scheme, pullback, Etale). lean.statement is verbatim. Docstrings give the source place, the blueprint tag and the 5 proof steps; the only proof is sorry; no new definitions. No existing duplicate: the related live modules EtaleRelationRestrictionQuotient and EtaleRelationQuotient state later sheafified results. The live node has lean null, so no supersession. The report has the Worker report and Second reading by Q45 sections. Not recompiled (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261023T123816-L-1256524",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

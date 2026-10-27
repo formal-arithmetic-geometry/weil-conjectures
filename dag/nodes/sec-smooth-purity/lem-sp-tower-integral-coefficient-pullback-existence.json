@@ -1,0 +1,164 @@
+{
+ "id": "lem-sp-tower-integral-coefficient-pullback-existence",
+ "kind": "statement",
+ "title": "Integral geometric inverse image preserving flat-term K-flat complexes",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, schemes $X,Y$, a morphism $f:X\\to Y$ with $\\ell$ invertible on both schemes, and Chern data $c_Y,c_X$ [def-sp-tower-class-chern]. There exists $d:\\operatorname{IntegralCoefficientPullback}(\\ell,E,f,c_Y,c_X)$ [def-sp-tower-chern-pullback-intermediate] whose middle Kummer component at every positive level is the component of $\\operatorname{unitsPull}(f)$ [lem-sp-tower-integral-class-pullback]. Moreover, if $P$ is a K-flat complex of $R_Y$-systems [def-pc-kflat-complex], all of whose terms are flat sheaves on the vertical sequence site [def-pc-flat-sheaf-modules], then the termwise inverse image $d^*P$ is K-flat over $R_X$. Here $R_T=(\\mathbf Z/\\ell^{n+1})_n$ with its actual quotient transitions. The two integral forgetful, coefficient-unit and root comparisons and all their equations are those in the definition of $d$. No scalar comparison for the $A$-coefficient tower is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "stmt_deps": [
+  "def-sp-tower-class-chern",
+  "def-sp-tower-chern-pullback-intermediate",
+  "lem-sp-tower-integral-class-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "Realize module systems on the vertical sequence site. Apply the exact geometric inverse image to their underlying abelian sheaves and actions. The algebraic inverse-image presentation and the constant-ring comparison transport the actions to the actual integral quotient rings. Naturality of the constant comparison makes the quotient transitions commute and gives the forgetful square. Use ordinaryInverseSystem_exists on the transported finite inverse images to assemble the exact whole-system functor, retaining its component and transition equations. The sectionwise identities of Forget, with forget_evaluation_iso, identify the underlying abelian evaluation comparisons; their transition equations assemble the required forgetful square.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "def-coef-semilinear-system-models",
+    "lem-coef-ordinary-inverse-system",
+    "lem-sp-tower-forget-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Multiplication gives the coefficient-unit identification; constant integers map to themselves, proving unit_normalization. Pull back both full-units terms by unitsPull. Kernel exactness and the cartesian comparison for roots of unity give the R-linear root isomorphism, through the specified rootForget maps. These arrows form the required Kummer morphism. Its middle and last components are the actual units pullback.",
+   "uses": [
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-sp-tower-chern-pullback-intermediate",
+    "lem-sp-tower-integral-class-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  },
+  {
+   "text": "Present this geometric inverse image as ringed-topos pullback on the same sequence site (or its small model). Apply pullback_resolving from the algebra-diagram derived-comparison node, and transport its K-flat conclusion back to the specified system categories. This needs flat terms, and imposes no flatness of f or the coefficient extension.",
+   "uses": [
+    "lem-pur-algebra-diagram-derived-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+    "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-coef-semilinear-system-models",
+  "lem-coef-ordinary-inverse-system",
+  "lem-sp-tower-forget-evaluation",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-sp-tower-chern-pullback-intermediate",
+  "lem-sp-tower-integral-class-pullback",
+  "lem-pur-algebra-diagram-derived-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "P2",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-classes.proof.md",
+  "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules commutes with extension of scalars",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, PresheafOfModules.pullback, SheafOfModules.pullback, ModuleCat.extendScalarsId_inv_app_apply, SheafOfModules.pullbackPushforwardAdjunction, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, LinearEquiv.extendScalarsOfSurjective_symm",
+   "date": "2026-10-27",
+   "verdict": "General module adjunction and change-of-rings tools; no specialized integral tower pullback or normalized scalar comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-27",
+   "verdict": "General module adjunction and change-of-rings tools; no specialized integral tower pullback or normalized scalar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings",
+   "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean",
+   "date": "2026-10-27",
+   "verdict": "General module adjunction and change-of-rings tools; no specialized integral tower pullback or normalized scalar comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerChernOrdinaryScalarPullback",
+  "group": "P2",
+  "date": "2026-10-27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-p1-adjunction",
+   "place": "Paragraph (2): integral reduction to (Z/ell^(n+1))_n, followed by extension to (O_E/ell^(n+1))_n; agent expansion of geometric naturality in realization steps 1--5. Integral geometric inverse image preserving flat-term K-flat complexes",
+   "via": [
+    "lem-sp-tower-chern-ordinary-scalar-pullback",
+    "lem-sp-tower-chern-scalar-pullback",
+    "lem-sp-tower-chern-realization-pullback",
+    "lem-sp-tower-chern-pullback",
+    "lem-sp-tower-p1-kernel-scalar-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerIntegralCoefficientPullbackExistence",
+  "file": "lean/Sheaf/Paper/TowerIntegralCoefficientPullbackExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.integralCoefficientPullback_exists",
+  "statement": "theorem integralCoefficientPullback_exists\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))\n    (cY : Chern l E Y) (cX : Chern l E X) :\n    ∃ d : IntegralCoefficientPullback l E f cY cX,\n      (∀ n : ℕ, d.kummer.τ₂.app (Opposite.op n) =\n        (unitsPull f).app (Opposite.op n)) ∧\n      (∀ (P : CochainComplex (Systems Y (Rrings l Y)) ℤ),\n          CochainComplex.IsKFlatIndependentCoefficients\n            (R := WeilConjectures.SemilinearSections.systemRing\n              (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n))\n                (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op)) P →\n          (∀ i : ℤ, SheafOfModules.IsFlatOnSite\n            (J := WeilConjectures.coefficientSequenceTopology (Scheme.ProEt.topology Y))\n            (R := WeilConjectures.SemilinearSections.systemRing\n              (Scheme.ProEt.topology Y) (fun n ↦ (Rrings l Y).obj (Opposite.op n))\n                (fun n ↦ (Rrings l Y).map (homOfLE (Nat.le_succ n)).op)) (P.X i)) →\n          CochainComplex.IsKFlatIndependentCoefficients\n            (R := WeilConjectures.SemilinearSections.systemRing\n              (Scheme.ProEt.topology X) (fun n ↦ (Rrings l X).obj (Opposite.op n))\n                (fun n ↦ (Rrings l X).map (homOfLE (Nat.le_succ n)).op))\n            ((d.pull.mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T123510-L-2311676",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261027T123510-L-2311676",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

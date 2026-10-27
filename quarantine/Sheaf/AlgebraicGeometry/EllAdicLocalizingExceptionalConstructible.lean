@@ -75,4 +75,22 @@ theorem ellAdic_localizing_rightAdjoint_obj_boundedConstructible
   exact ⟨ellAdic_localizing_rightAdjoint_obj_isBounded Λ ℓ g hΛ G adj K,
     ellAdic_localizing_rightAdjoint_obj_homology_constructible Λ ℓ g hΛ G adj K⟩
 
+/-- `ellAdic_localizing_rightAdjoint_obj_boundedConstructible` for the coefficients `E` and
+`Q̄_ℓ`, through the rational restriction theorem only (blueprint: sk-thm-restriction).
+(blueprint: lem-sfb-adic-localizing-exceptional-constructible)
+-/
+theorem ellAdic_localizing_rightAdjoint_obj_boundedConstructible_rational
+    (hr : ((∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))))
+    (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
+      (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
+    (adj : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    boundedConstructible (condensedRingObj Λ Z.left)
+      ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj) := by
+  rw [mem_boundedConstructible_iff]
+  exact ⟨ellAdic_localizing_rightAdjoint_obj_isBounded_rational Λ ℓ g hΛ hr G adj K,
+    ellAdic_localizing_rightAdjoint_obj_homology_constructible_rational Λ ℓ g hΛ hr G adj K⟩
+
 end AlgebraicGeometry.ProEtale.CondensedRing

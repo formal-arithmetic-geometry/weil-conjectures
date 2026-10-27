@@ -7,8 +7,6 @@ module
 
 public import Mathlib.Topology.Sheaves.Module
 public import Sheaf.Paper.DerivedHomMayerVietoris
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # The sectionwise open-restriction adjunction for module sheaves
@@ -75,6 +73,11 @@ theorem exists_openRestrictionAdjunction (X : RingedSpace.{u}) (U : Opens X) :
         ((adj.homEquiv M G).symm β).val.app (op W) s =
           G.val.map ((Over.forgetAdjStar U).unit.app W).op
             (β.val.app (op W.left) s)) := by
-  sorry
+  -- The slice-site adjunction has exactly the specified section maps.
+  refine ⟨SheafOfModules.overPushforwardOverAdj U, ?_, ?_⟩
+  · intro M G α V s
+    rfl
+  · intro M G β W s
+    rfl
 
 end TopologicalSpace.Opens

@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-compact-support-ordinary-direct-left-sections",
+ "kind": "statement",
+ "title": "Section formula for the left ordinary direct-evaluation composite",
+ "statement": "Let $l$ be prime, $E/\\mathbf Q_l$ a finite extension, $A_k=\\mathcal O_E/\\mathfrak m_E^{k+1}$, $g:Z\\to Y$, and $n\\le m$. Let $P_g$ be native sequence-site module pushforward [def-sp-varying-ring-operations], $e_k$ coefficient evaluation, $c_k:P_g;e_k^Y\\cong e_k^Z;g_*^{A_k}$ the composite of moduleEvalP and compactSupportDirectModel [lem-weil-compact-support-ordinary-direct-evaluation-sections], and $\\tau^W_{m,n}$ the horizontal coefficient transition [lem-weil-compact-support-coefficient-transition]. For any sequence module $M$, object $V$ of $Y_{proet}$, and section $x$ of $e_m^Y(P_gM)$ over $V$, put $W=g^{-1}V$. Let $a_q$ be the identity-on-sections direct-image scalar comparison [lem-weil-proetale-direct-image-restriction-of-scalars], where $q:A_m\\to A_n$ is the specified quotient. Then the section $a_q(\\operatorname{Res}_q(c_n)(\\tau^Y_{m,n,P_gM}(x)))$ is heterogeneously equal to $M((n,W)\\to(m,W))(x)$. No cartesianness, flatness, or properness assumption is needed; equal coefficient levels are included.",
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-compact-support-ordinary-direct-evaluation-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI and 0D6E; left half of the ordinary section calculation."
+ },
+ "proof": [
+  {
+   "text": "The ordinary scalar direct-image comparison is identity on section carriers by its unique normalization. Restriction of scalars preserves underlying maps. Ordinary direct evaluation is identity on sections by [lem-weil-compact-support-ordinary-direct-evaluation-sections]. The remaining horizontal coefficient transformation is restriction along the horizontal product arrow by [lem-weil-compact-support-coefficient-transition]. The native pushforward applies the product base-change functor to this arrow, preserving its coefficient index and its identity second component. The section is therefore the asserted horizontal restriction of M. Compose these heterogeneous section identities.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-weil-compact-support-native-system-evaluation",
+    "lem-weil-compact-support-coefficient-transition",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-weil-compact-support-ordinary-direct-evaluation-sections"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "def-weil-compact-support-native-system-evaluation",
+  "lem-weil-compact-support-coefficient-transition",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-compact-support-ordinary-direct-evaluation-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DI and 0D6E; left half of the ordinary section calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image evaluation of inverse systems commutes with coefficient restriction transitions",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval, Module.DirectLimit.of_f and InverseSystem.limit; none concerns derived module-sheaf direct image.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a derived system commutes with coefficient transitions under extension by zero and direct image",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval and InverseSystem.globalEquiv_compatibility; none treats module-sheaf derived evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits, including CategoryTheory.NatTrans.naturality. It supplies the categorical naturality used to paste squares but not either geometric square.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalP.*[Tt]ransition|evalJ.*[Tt]ransition|[Tt]ransition.*eval[JP]",
+   "results": "0 hits in Mathlib. Local project search finds SystemPushforwardRestrictionTransition in different Geometry coordinates, and the assigned compact-support theorem.",
+   "date": "2026-10-27",
+   "verdict": "No native single-operation statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Heterogeneously equal functions take heterogeneously equal arguments to equal values",
+   "results": "8 hits; congr_heq gives exactly the application of the heterogeneous section formulas, without equality of function-domain presentations.",
+   "date": "2026-10-27",
+   "verdict": "Use Mathlib.Logic.Basic congr_heq for the pointwise section calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "congr_heq",
+   "results": "1 hit: congr_heq.",
+   "date": "2026-10-27",
+   "verdict": "Use to apply the two horizontal section formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "congr_heq",
+   "results": "3 hits, including Mathlib/Logic/Basic.lean:114 (congr_heq) and :122 (dcongr_heq).",
+   "date": "2026-10-27",
+   "verdict": "The nondependent congr_heq suffices."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNativeDirectTransition",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-ordinary-direct-transition",
+   "place": "Left side of the section square.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportOrdinaryDirectLeftSections",
+  "file": "lean/Sheaf/Paper/CompactSupportOrdinaryDirectLeftSections.lean",
+  "declaration": "WeilConjectures.compactSupportOrdinaryDirectLeftSections",
+  "declarations": [
+   "WeilConjectures.compactSupportOrdinaryDirectLeftSections"
+  ],
+  "statement": "theorem compactSupportOrdinaryDirectLeftSections\n    {Z Y : Scheme.{u}} (g : Z ⟶ Y) {m n : ℕ} (h : n ≤ m)\n    (M : coefficientSequenceModules.{u, u} l E Z) (V : Y.ProEtᵒᵖ)\n    (x : ((coefficientSequenceEvaluation l E Y m).obj\n      ((ProEtale.VaryingRing.push (compactSupportSystemLevel l E)\n        (compactSupportSystemQuotient l E) g).obj M)).val.obj V) :\n    HEq (((proEtaleCoefficientDirectImageComparison g\n        (compactSupportLevelQuotient l E m n h)).hom.app\n          ((coefficientSequenceEvaluation l E Z n).obj M)).val.app V\n      (((proEtaleCoefficientRestrictScalars Y (compactSupportLevelQuotient l E m n h)).map\n        ((compactSupportOrdinaryDirectEvaluation l E g n).hom.app M)).val.app V\n          (((compactSupportOrdinaryCoefficientTransition l E Y h).app\n            ((ProEtale.VaryingRing.push (compactSupportSystemLevel l E)\n              (compactSupportSystemQuotient l E) g).obj M)).val.app V x)))\n      (M.val.map (Prod.mkHom (homOfLE h)\n        (𝟙 ((proEtaleBaseChange g).op.obj V).unop)).op x)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

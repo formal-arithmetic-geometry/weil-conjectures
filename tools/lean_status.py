@@ -146,7 +146,7 @@ def main():
             seen, todo = set(), [i]
             while todo:
                 x = todo.pop()
-                for y in nodes[x]["stmt_deps"] + nodes[x]["proof_deps"]:
+                for y in (nodes[x].get("stmt_deps") or []) + (nodes[x].get("proof_deps") or []):
                     if y in nodes and y not in seen:
                         seen.add(y); todo.append(y)
             below[i] = seen

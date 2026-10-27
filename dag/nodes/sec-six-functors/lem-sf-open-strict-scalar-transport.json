@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-open-strict-scalar-transport",
+ "kind": "statement",
+ "title": "Strict scalar transport for supplied ordinary reductions",
+ "statement": "Use the actual coefficient and open interfaces of [def-sf-open-semilinear-tensor-model-data]. Given Operations o and quotient-compatible OrdinaryReductions AX and AU, assume the o.openSystems restrictionEvaluation maps are identity on underlying sections. There exists one natural isomorphism a:extension⋙AX.functor ≅ AU.functor⋙systemExtension of strict systems. Define its level comparison by evaluating a and conjugating by AX.evaluation, extensionEvaluation and AU.evaluation. On every original extension summand, this level comparison carries the completed scalar-unit section of [x] to the finite extension summand of the scalar-unit section of x. There is no assertion of existence of o, AX or AU and no ordinary two-module tensor projection formula.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03DJ, 03EK and 0E8I; strict generator normalization of the open projection formula."
+ },
+ "stmt_deps": [
+  "def-sf-open-semilinear-tensor-model-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the uniquely normalized finite scalar comparisons. Conjugate each by AX.evaluation, AU.evaluation and extensionEvaluation to obtain natural isomorphisms between evaluations of the two supplied strict-system functors.",
+   "uses": [
+    "lem-sf-open-finite-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply quotient compatibility to each module and every n≤m. Assemble the compatible finite isomorphisms by the existing sequence-site assembly theorem. Joint faithfulness of evaluation and finite naturality prove naturality in the original module, yielding one strict-system natural isomorphism a.",
+   "uses": [
+    "lem-sf-open-scalar-transition-compatibility",
+    "lem-coef-system-iso-assembly"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Its evaluated components are the prescribed conjugates. In ordinaryScalarEvaluationComparison cancel AX.evaluation with its inverse, extensionEvaluation with its inverse, and finite extension of AU.evaluation with its inverse. The remaining map is tc.ordinary n, so tc.generators proves the required section identity.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-finite-scalar-comparison",
+  "lem-sf-open-scalar-transition-compatibility",
+  "lem-coef-system-iso-assembly"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03EK, 0941 and 0E8I; G6 separates finite transport and quotient compatibility, and uses the existing proved system assembly theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with scalar extension on strict inverse systems of coefficient module sheaves",
+   "results": "8 hits: IsAdicComplete.StrictMono.extend, IsAdicComplete.StrictMono.factorPow_comp_extend, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.extend_eq, localCohomology.diagram, IsAdicComplete.StrictMono.of_lift, ModuleCat.homEquiv_extendScalarsComp, Condensed.profiniteSolid",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\", \"extensionByZero\"",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinearSliceScalarGenerators|strictReduction",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with quotient scalar extension for strict semilinear systems of module sheaves",
+   "results": "8 hits: Function.ExtendByZero.linearMap, SMulCon.instSMulZeroClassQuotient, Function.ExtendByZero.linearMap_apply, ContinuousLinearMap.restrictScalars_zero, DFinsupp.lmk, ContinuousLinearMap.extend_zero, ModuleCon.instSMulWithZeroQuotient, TrivSqZeroExt.inr_smul",
+   "date": "2026-10-26",
+   "verdict": "no exact match; elementary API only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenSemilinearOrdinaryComparison",
+  "date": "2026-10-27",
+  "group": "V4"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-open-semilinear-ordinary-comparison",
+   "place": "Ordinary open comparison: Strict scalar transport for supplied ordinary reductions.",
+   "via": [
+    "lem-sf-open-semilinear-ordinary-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenStrictScalarTransport",
+  "file": "lean/Sheaf/SixFunctors/OpenStrictScalarTransport.lean",
+  "declaration": "WeilConjectures.OpenSemilinearTensor.openStrictScalarTransport",
+  "statement": "theorem openStrictScalarTransport\n    (hrestriction : ∀ (n : ℕ) N V x,\n      HEq ((((o.openSystems.restrictionEvaluation n).hom.app N).val.app V) x) x) :\n    ∃ a : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅\n        AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o,\n      ∀ (n : ℕ) (M : scalarReductionSource l E U) (V : X.ProEt)\n        (b : V ⟶ IntegralOpenReduction.openObject j)\n        (x : M.val.obj (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk b)))),\n        ((ordinaryScalarEvaluationComparison l E j o AX AU a n).hom.app M).val.app (op V)\n          (coefficientIntegralScalarUnitSection l E X n\n            ((IntegralOpenReduction.extension l E j o).obj M) (op V)\n            (IntegralOpenReduction.extensionSection l E j o M V b x)) =\n          IntegralOpenReduction.finiteExtensionSection l E j o n\n            ((scalarReductionExtension l E U n).obj M) V b\n            (coefficientIntegralScalarUnitSection l E U n M\n              (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk b))) x)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T222804-L-696166",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261027T012838-L-2338725",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-unit-trace-counit-reductions",
+ "kind": "statement",
+ "title": "Normalized finite reductions of the exceptional unit trace",
+ "statement": "Fix D,C,E,f,d,S as in def-pur-unit-trace-scalar-data, a counit-normalized finite right realization normal, a completed unit pullback core and finite-Tor membership hT for the shifted Tate unit T. Let g:T≅S.G(1_Y) be any isomorphism such that sourceUnitIso.hom followed by g.hom has the prescribed finite smooth-purity reductions. Then the actual unitTrace(S,core,hT,g), obtained by compact support of g followed by the specified exceptional counit, satisfies HasTraceReductions at every positive exponent. No existence or uniqueness of such a g is claimed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8"
+ },
+ "stmt_deps": [
+  "def-pur-unit-trace-scalar-data",
+  "def-pur-unit-trace-reduction-data",
+  "def-pur-completed-unit-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "For $A=\\mathbf Z/\\ell^r\\mathbf Z$ let $b_r:(P_0M)_r\\xrightarrow{\\sim}P_AM_r$ and $v_r:(G_0N)_r\\xrightarrow{\\sim}G_AN_r$ be the canonical integral reduction comparisons. Compact-support reduction and the integral exceptional-adjoint theorem give these maps and the counit identity $\\epsilon_{A,N_r}P_A(v_r)=(\\epsilon_{0,N})_r b_r^{-1}$. Naturality of $b_r$ therefore gives, for $t_0=\\epsilon_{0,\\mathbf1}P_0(g_0)$,\n$$(t_0)_r b_{r,T_0}^{-1}=\\epsilon_{A,\\mathbf1}P_A\\bigl(v_r(g_0)_r\\bigr)=\\epsilon_{A,\\mathbf1}P_A(\\gamma_{f,A_Y}).$$\nThe last equality uses exactly the prescribed reduction of $g_0$; the right side is the normalized finite smooth trace by its definition. This calculation works for any of the permitted choices of $g_0$.",
+   "uses": [
+    "lem-coef-integral-compact-support",
+    "prop-coef-integral-exceptional-adjoint",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+    "place": "Steps 1-4, integral reconstruction and coefficient normalization; explicit unit-trace assembly by Q34"
+   }
+  },
+  {
+   "text": "In the preceding counit calculation expand HasPrescribedReductions and HasTraceReductions. Naturality of reduction and support allows cancelling reduction of sourceUnitIso.hom against its inverse. The remaining composite is coefficientValuedSmoothTrace by its definition, giving exactly the heterogeneous equality of HasTraceReductions. The calculation is valid at every positive exponent for any permitted g.",
+   "uses": [
+    "def-pur-unit-trace-reduction-data",
+    "def-pur-unit-trace-scalar-data",
+    "def-pur-smooth-trace"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-compact-support",
+  "prop-coef-integral-exceptional-adjoint",
+  "def-pur-smooth-trace",
+  "def-pur-unit-trace-reduction-data",
+  "def-pur-unit-trace-scalar-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An integral smooth trace obtained from purity on the coefficient unit extended to coefficient fields gives natural purity by projection and exceptional adjunction",
+   "results": "8 hits on algebraic field traces only; no sheaf-theoretic trace or exceptional adjunction compatibility.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 ordinary adjunction interface hits; homEquiv, homEquiv_symm_apply and their naturality are useful categorical ingredients.",
+   "date": "2026-10-25",
+   "verdict": "no exact match for normalized coefficient reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A counit preserving isomorphism between right adjoints is compatible with derived coefficient reduction",
+   "results": "8 hits, including rightAdjointUniq_hom_app_counit; none supplies integral/finite coefficient realizations.",
+   "date": "2026-10-25",
+   "verdict": "ordinary uniqueness is an ingredient, not the required coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "purAdicTarget|finiteRight; unitTrace|HasTraceReductions|Construction; Mathlib CategoryTheory/Adjunction",
+   "results": "Project search finds the existing data and reconstruction declarations, but no theorem proving the required compatibility. Mathlib has ordinary adjunction uniqueness only. Blueprint search for unit trace finds two unrelated affine integration nodes. Direct Mathlib searches for trace/reduction and exceptional/coefficient in Adjunction and ModuleCat/Sheaf returned no matching interface.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicUnitTraceTransposeReductions",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Steps 2-4; explicit unit-trace assembly, parent proof Steps 1-8",
+   "via": [
+    "lem-pur-adic-unit-trace-transpose-reductions"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicUnitTraceCounitReductions",
+  "file": "lean/Sheaf/Paper/AdicUnitTraceCounitReductions.lean",
+  "declaration": "WeilConjectures.PurUnitTrace.unit_trace_counit_reductions",
+  "statement": "theorem unit_trace_counit_reductions\n    (normal : FiniteRightNormalization D C E f S)\n    (core : CompletedUnitPullback.Core C.l E f)\n    (hT : finiteTorConstructibleIntegral C.l E X (tateUnit D C E d X))\n    (g : tateUnit D C E d X ≅\n      ((operation D C E f S).G.obj ⟨_, core.admissibleY.1⟩).obj)\n    (hg : HasPrescribedReductions D C E f d S normal ⟨_, core.admissibleY.1⟩\n      ((sourceUnitIso D C E f d core).hom ≫ g.hom)) :\n    HasTraceReductions D C E f d core (unitTrace D C E f d S core hT g)",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fb3b",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T094910-L-3270971",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8fb3b",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T094910-L-3270971",
+  "kind": "interface",
+  "note": "independent cc review: item proof (core, target normalization, reconstruction, finite-Tor transport, counit lemma, assembly) against node lem-pur-adic-unit-trace-transpose-reductions; three new sorry statements against RingSystem/Comparison/QNormalized/FiniteRightNormalization/Core/coefficientValuedSmoothTrace/Construction defs; unit sk-thm-sf-compatibility realized empty"
+ }
+}

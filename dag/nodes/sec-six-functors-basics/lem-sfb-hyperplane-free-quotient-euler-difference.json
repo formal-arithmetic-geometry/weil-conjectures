@@ -1,0 +1,319 @@
+{
+ "id": "lem-sfb-hyperplane-free-quotient-euler-difference",
+ "kind": "statement",
+ "title": "Regular hyperplane restriction of a free quotient and its Euler difference",
+ "statement": "Let $k$ be a field [def-weil-field], let $n\\geq1$ and $r\\geq1$, put $X=\\mathbf P^n_k$, and let\n$$0\\longrightarrow K\\longrightarrow\\mathcal O_X^{\\oplus r}\\longrightarrow F\\longrightarrow0$$\nbe a short exact sequence of coherent modules [pqf-def-coherent]. Use twists $E(d)=E\\otimes\\mathcal O_X(d)$ [def-pc-projective-space-twist], module sheaf cohomology [pqf-def-cohomology] and Euler characteristics [def-pc-euler-characteristic]. Let $s\\in H^0(X,\\mathcal O_X(1))$ be a nonzero linear form such that multiplication $s:F(d-1)\\to F(d)$ is injective for every integer $d$. Let $i:H=V(s)\\hookrightarrow X$ be its hyperplane closed immersion [def-weil-closed-immersion], and fix an identification $H\\cong\\mathbf P^{n-1}_k$ taking $i^*\\mathcal O_X(d)$ to $\\mathcal O_H(d)$ for every $d$. Put $K_H=i^*K$ and $F_H=i^*F$, using module pullback [def-pc-module-pullback]. These modules are coherent and the canonical restricted sequence is short exact:\n$$0\\longrightarrow K_H\\longrightarrow\\mathcal O_H^{\\oplus r}\\longrightarrow F_H\\longrightarrow0.$$\nFor every integer $d$,\n$$\\chi(H,F_H(d))=\\chi(X,F(d))-\\chi(X,F(d-1)).$$\nIn particular, if $P\\in\\mathbf Q[t]$ satisfies $\\chi(X,F(d))=P(d)$ for all integers $d$, then $\\chi(H,F_H(d))=P(d)-P(d-1)$ for all integers $d$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AG (lemma-bound-quotients-free), first paragraph and its exact diagram through the application of induction on H; Tags 08A0 (lemma-exact-sequence-induction), 089Z (lemma-hyperplane) and 0EGK (remark-exact-sequence-induction-cohomology) for the supplied hyperplane sequences and cohomology comparison."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "pqf-def-coherent",
+  "def-pc-projective-space-twist",
+  "pqf-def-cohomology",
+  "def-pc-euler-characteristic",
+  "def-weil-closed-immersion",
+  "def-pc-module-pullback",
+  "def-sfb-regular-hyperplane-restriction-maps",
+  "def-pc-zero-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The standard affine charts of $X$ and of the given $H\\cong\\mathbf P^{n-1}_k$ have coordinate rings polynomial in finitely many variables over $k$. A field is Noetherian (its only ideals are $0$ and $k$), so [lem-weil-pbc-finite-type-algebra-noetherian] makes these rings Noetherian. Thus both schemes are locally Noetherian. By [pqf-lem-coherent-ft-locnoeth], $K,F$ are quasi-coherent of finite type. Pullback preserves these two properties by [lem-weil-pbc-module-pullback-quasi-coherent] and [lem-weil-pbc-module-pullback-finite-type]; applying the same coherent criterion on $H$ proves that $K_H,F_H$ are coherent.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, first paragraph: coherence of the restricted modules; supporting Tags 00FN, 01XZ, 01BG and 01B6."
+   }
+  },
+  {
+   "text": "Write $J$ for the ideal of $H$. On an open trivializing $\\mathcal O_X(1)$ write $s=a e$; by [lem-pc-zero-scheme-properties], $J=(a)$ there. The natural quotient formula [lem-weil-pbc-closed-immersion-unit-quotient] identifies $i_*i^*E$ with $E/JE$ for every module $E$. Consequently the restriction maps for $E=K,\\mathcal O_X^{\\oplus r},F$ are locally reduction modulo $a$, functorially in $E$. For the middle term this identifies the pullback with $\\mathcal O_H^{\\oplus r}$: on each component $b\\otimes c\\mapsto bc$, with inverse $c\\mapsto1\\otimes c$, and these maps glue.",
+   "uses": [
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-closed-immersion-unit-quotient",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08AG and 08A0, local quotient description of the three vertical cokernels; supporting closed-immersion quotient formula 04CJ/08KS."
+   }
+  },
+  {
+   "text": "At a stalk on such an open, [lem-weil-pbc-module-stalk-exact] gives $0\\to A\\to B\\xrightarrow{p} C\\to0$, with $A=K_x$, $B=\\mathcal O_{X,x}^{\\oplus r}$ and $C=F_x$. The hypothesis at $d=1$ is the monomorphism $s:F\\to F(1)$; the chosen trivialization of $\\mathcal O_X(1)$ identifies its stalk map with multiplication by $a$ on $C$, which is injective by the same stalk theorem. Identify $A$ with its image in $B$ via the injective stalk map. If $u\\in A\\cap aB$, write $u=ab$. Then $0=p(u)=a p(b)$ implies $p(b)=0$, hence $b\\in A$; thus $A\\cap aB=aA$. If $p(b)=ac$, lift $c$ to $b'$ and note $b-ab'\\in A$. Together with surjectivity of $p$, these two computations prove $0\\to A/aA\\to B/aB\\to C/aC\\to0$. The maps in this quotient row are induced by the original stalk maps. The same stalk theorem identifies the stalk of each sheaf quotient $E/aE$ with $E_x/aE_x$. Hence the natural quotient identifications of step 2 identify this quotient row with the stalk row of the canonical restricted maps. For $x=i(h)$ the opens $i^{-1}U$, $U$ a neighbourhood of $x$, are cofinal among neighbourhoods of $h$, so $(i_*E)_x=E_h$. Applying the cited stalkwise criterion on $H$ proves the required short exact sequence.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, exact bottom row of the displayed diagram: explicit argument replacing the snake lemma."
+   }
+  },
+  {
+   "text": "For every integer $d$, [def-pc-projective-space-twist] trivializes each twist locally, so tensoring by it preserves exactness and coherence: locally it is the identity functor on modules, and the tensor identifications glue. In particular $F(d-1),F(d)$ and $F_H(d)$ are coherent. The quotient formula in step 2 applied to $F$ gives $\\operatorname{Coker}(s:F(-1)\\to F)=i_*F_H$: locally both are $F/aF$. Tensor by $\\mathcal O_X(d)$. The projection formula in [lem-pc-closed-immersion-coherent-cohomology] identifies the last term with $i_*(F_H\\otimes i^*\\mathcal O_X(d))=i_*F_H(d)$, using the twist identification assumed in the statement. Thus the assumed injectivity gives\n$$0\\to F(d-1)\\xrightarrow{s}F(d)\\to i_*F_H(d)\\to0.$$\nThe transitions of the twists identify $\\mathcal O(d-1)\\otimes\\mathcal O(1)$ with $\\mathcal O(d)$, so the first map is the stated multiplication by $s$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-pc-closed-immersion-coherent-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0EGK (remark-exact-sequence-induction-cohomology), twisting the hyperplane sequence and its projection-formula identification."
+   }
+  },
+  {
+   "text": "The schemes $X=\\operatorname{Proj}(k[x_0,\\ldots,x_n])$ and $\\mathbf P^{n-1}_k=\\operatorname{Proj}(k[y_0,\\ldots,y_{n-1}])$ of [def-pc-projective-space-twist] are Proj of polynomial rings that are finite-type algebras over their degree-zero part $k$, so their structure morphisms to $\\operatorname{Spec}k$ are proper by [lem-per-finite-type-graded-proj-proper]; hence $H$ is proper over $k$ through the fixed identification $H\\cong\\mathbf P^{n-1}_k$. The closed-immersion lemma [lem-pc-closed-immersion-coherent-cohomology], applied to the coherent $F_H(d)$ and the locally Noetherian schemes of step 1, makes $i_*F_H(d)$ coherent and identifies its cohomology with that on $H$. Apply [lem-pc-euler-additive] to the sequence of step 4 on the proper $X$:\n$$\\chi(X,F(d))=\\chi(X,F(d-1))+\\chi(X,i_*F_H(d)).$$\nThe cohomology identification and [def-pc-euler-characteristic] identify the last summand with $\\chi(H,F_H(d))$. Subtracting $\\chi(X,F(d-1))$ gives the asserted equality for every integer $d$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-per-finite-type-graded-proj-proper",
+    "lem-pc-closed-immersion-coherent-cohomology",
+    "lem-pc-euler-additive",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 08AG and 0EGK: hyperplane Euler difference; Euler additivity is Tag 08AA (lemma-euler-characteristic-additive)."
+   }
+  },
+  {
+   "text": "If $\\chi(X,F(t))=P(t)$ for every integer $t$, substitute $t=d$ and $t=d-1$ into the equality of step 5. This gives $\\chi(H,F_H(d))=P(d)-P(d-1)$, with no restriction on the sign of $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 08AG, first paragraph: $P\\prime(t)=P(t)-P(t-1)$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-module-stalk-exact",
+  "def-pc-projective-space-twist",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-per-finite-type-graded-proj-proper",
+  "lem-pc-euler-additive",
+  "def-pc-euler-characteristic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 08AG, 08A0 and 0EGK, the hyperplane quotient diagram and Euler difference; the snake-lemma row is written out as the elementary local intersection calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restricting a coherent quotient of a free sheaf to a hyperplane regular on its quotient preserves the kernel exact sequence and differences its Euler Hilbert polynomial",
+   "results": "{\"t\": \"2026-10-22T08:06:07Z\", \"tool\": \"leanfinder\", \"query\": \"Restricting a coherent quotient of a free sheaf to a hyperplane regular on its quotient preserves the kernel exact sequence and differences its Euler Hilbert polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.generatorsOfIsCokernelFree_π\", \"QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last\", \"Profinite.NobelingProof.succ_exact\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegular\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι\"], \"digest\": \"a26f16ca33362b02\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Exact\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-22T08:06:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Exact\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.exact_shortComplex'\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\"], \"digest\": \"361fb57f1e4b5bab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|hilbertPolynomial|eulerChar",
+   "results": "{\"t\": \"2026-10-22T08:06:08Z\", \"tool\": \"grep\", \"query\": \"hyperplane|hilbertPolynomial|eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzerodivisor hyperplane section of a coherent quotient of O power r has exact restricted quotient and Hilbert polynomial P(t) minus P(t-1)",
+   "results": "{\"t\": \"2026-10-22T08:06:08Z\", \"tool\": \"leansearch\", \"query\": \"A nonzerodivisor hyperplane section of a coherent quotient of O power r has exact restricted quotient and Hilbert polynomial P(t) minus P(t-1)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_mul_one_sub_succ\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"ringKrullDim_quotient_succ_le_of_nonZeroDivisor\", \"Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.hilbertPoly_zero_left\", \"Polynomial.existsUnique_hilbertPoly\"], \"digest\": \"4cea25a1f660319c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact coherent sheaf sequence on projective space reduction modulo a regular linear form is exact and Euler characteristics of restriction are finite differences",
+   "results": "{\"t\": \"2026-10-22T08:06:16Z\", \"tool\": \"leanfinder\", \"query\": \"For an exact coherent sheaf sequence on projective space reduction modulo a regular linear form is exact and Euler characteristics of restriction are finite differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Algebra.H1Cotangent.exact_map_δ\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"CategoryTheory.exact_d_f\", \"RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\", \"CategoryTheory.ProjectiveResolution.ofComplex_exactAt_succ\", \"CategoryTheory.ProjectiveResolution.complex_exactAt_succ\", \"CategoryTheory.ProjectiveResolution.exact_succ\"], \"digest\": \"2c37efe31bdcd26e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "map_first_exact_on_four_term_exact_of_isSMulRegular_last|map_first_exact_on_four_term_right_exact_of_isSMulRegular_last",
+   "results": "{\"t\": \"2026-10-22T08:13:22Z\", \"tool\": \"grep\", \"query\": \"map_first_exact_on_four_term_exact_of_isSMulRegular_last|map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/IsSMulRegular.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"2566e53e897a12e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPoly_mul_one_sub_succ|def hilbertPoly",
+   "results": "{\"t\": \"2026-10-22T08:13:22Z\", \"tool\": \"grep\", \"query\": \"hilbertPoly_mul_one_sub_succ|def hilbertPoly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\", \"Mathlib/RingTheory/Polynomial/HilbertPoly.lean\"], \"digest\": \"ce33bda9fe124549\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last (Mathlib/RingTheory/Regular/IsSMulRegular.lean:173) is the module-level exactness ingredient only. Polynomial.hilbertPoly_mul_one_sub_succ (Mathlib/RingTheory/Polynomial/HilbertPoly.lean:220) concerns a polynomial encoding a rational power series. Neither states coherent hyperplane restriction and its Euler characteristic, and no single-line specialization gives both geometric clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting a coherent free sheaf quotient to a hyperplane regular on the quotient preserves short exactness and gives the Euler characteristic difference",
+   "results": "{\"t\": \"2026-10-23T04:28:03Z\", \"tool\": \"leanfinder\", \"query\": \"Restricting a coherent free sheaf quotient to a hyperplane regular on the quotient preserves short exactness and gives the Euler characteristic difference\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last\", \"Profinite.NobelingProof.CC_exact\", \"IsSMulRegular.smulShortComplex_shortExact\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\"], \"digest\": \"bcb8ed8b98ef2a6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last in RingTheory/Regular/IsSMulRegular.lean:173 and Polynomial.hilbertPoly_mul_one_sub_succ in RingTheory/Polynomial/HilbertPoly.lean:220. The former gives only module reduction exactness; the latter concerns polynomial rational-series encoding. Neither states both sheaf-restriction and Euler clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "hyperplane|hilbertPolynomial|eulerChar",
+   "results": "{\"t\": \"2026-10-23T04:29:09Z\", \"tool\": \"grep\", \"query\": \"hyperplane|hilbertPolynomial|eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last in RingTheory/Regular/IsSMulRegular.lean:173 and Polynomial.hilbertPoly_mul_one_sub_succ in RingTheory/Polynomial/HilbertPoly.lean:220. The former gives only module reduction exactness; the latter concerns polynomial rational-series encoding. Neither states both sheaf-restriction and Euler clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of restriction of a coherent sheaf to a regular hyperplane is chi F d minus chi F d minus one",
+   "results": "{\"t\": \"2026-10-23T04:29:09Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristic of restriction of a coherent sheaf to a regular hyperplane is chi F d minus chi F d minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_mul_one_sub_succ\", \"CategoryTheory.Sheaf.ΓRes\", \"IncidenceAlgebra.eulerChar\", \"AlgebraicGeometry.term_∣__\", \"AlgebraicGeometry.StructureSheaf.res_const\", \"Polynomial.hilbertPoly_mul_one_sub_pow_add\", \"AlgebraicGeometry.Proj.res_apply\"], \"digest\": \"05f4288efeea34c0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last in RingTheory/Regular/IsSMulRegular.lean:173 and Polynomial.hilbertPoly_mul_one_sub_succ in RingTheory/Polynomial/HilbertPoly.lean:220. The former gives only module reduction exactness; the latter concerns polynomial rational-series encoding. Neither states both sheaf-restriction and Euler clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Exact\", \"pullback\"",
+   "results": "{\"t\": \"2026-10-23T04:29:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Exact\\\", \\\"pullback\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.IsPullback.exact_shortComplex'\", \"CategoryTheory.Limits.IsColimit.pullbackOfHasExactColimitsOfShape\"], \"digest\": \"361fb57f1e4b5bab\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last in RingTheory/Regular/IsSMulRegular.lean:173 and Polynomial.hilbertPoly_mul_one_sub_succ in RingTheory/Polynomial/HilbertPoly.lean:220. The former gives only module reduction exactness; the latter concerns polynomial rational-series encoding. Neither states both sheaf-restriction and Euler clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a short exact sequence A B C reduction modulo a scalar regular on C is exact and a hyperplane restriction has Euler polynomial finite difference",
+   "results": "{\"t\": \"2026-10-23T04:29:12Z\", \"tool\": \"leanfinder\", \"query\": \"For a short exact sequence A B C reduction modulo a scalar regular on C is exact and a hyperplane restriction has Euler polynomial finite difference\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last\", \"Profinite.NobelingProof.succ_exact\", \"RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last\", \"IsSMulRegular.smulShortComplex_shortExact\", \"Profinite.NobelingProof.CC_exact\", \"QuotSMulTop.map_exact\", \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"Algebra.Generators.H1Cotangent.exact_map_δ\"], \"digest\": \"a74ceff4a43eb1a7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last in RingTheory/Regular/IsSMulRegular.lean:173 and Polynomial.hilbertPoly_mul_one_sub_succ in RingTheory/Polynomial/HilbertPoly.lean:220. The former gives only module reduction exactness; the latter concerns polynomial rational-series encoding. Neither states both sheaf-restriction and Euler clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-quotient-kernel-regularity-bound",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Tag 08AG (lemma-bound-quotients-free), first paragraph and its exact diagram through the application of induction on H; Tags 08A0 (lemma-exact-sequence-induction), 089Z (lemma-hyperplane) and 0EGK (remark-exact-sequence-induction-cohomology) for the supplied hyperplane sequences and cohomology comparison.",
+   "via": [
+    "lem-sfb-free-quotient-kernel-regularity-bound",
+    "lem-sfb-hilbert-uniform-section-bound",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-hyperplane-free-quotient-euler-difference",
+  "worker": "stage1",
+  "summary": "Unchanged statement, six-step proof following the regular-hyperplane diagram of Stacks 08AG and the twisted sequence of 0EGK. Reuses existing nodes only: coherent pullback, the closed-immersion unit quotient, stalk exactness, projection/cohomology and Euler additivity. The local A-intersect-aB=aA computation proves the restriction exactness explicitly, without an extra hypothesis on the field or a duplicate node. Project Lean and logged Mathlib searches give no exact attachment. Repair of return L: rebased the retained split onto the current origin/sheaf-dag using deliver.py, re-read every current cited statement and revalidated all fourteen citation quotes. Made the canonical identification of the quotient row with the restricted stalk maps explicit in step 3. The supplied-hyperplane statement, source route and dependencies are unchanged; the current main copy is still unsplit, so this delivery supplies the retained completion for maintainer promotion. Current-return revalidation: explicitly apply the given regularity hypothesis at d=1 before trivializing F(1), and use stalk exactness for the sheaf-quotient/stalk-quotient identification. This fills both identifications in the existing argument without changing its route or adding dependencies.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Uniform generation and section bounds for projective ideals with fixed Hilbert polynomial; Hilbert construction prerequisite, field boundedness input: Stacks 08AG before passage to families; Tag 08AG (lemma-bound-quotients-free), first paragraph and its exact diagram through the application of induction on H; Tags 08A0 (lemma-exact-sequence-induction), 089Z (lemma-hyperplane) and 0EGK (remark-exact-sequence-induction-cohomology) for the supplied hyperplane sequences and cohomology comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Hilbert basis theorem for the affine charts; a generic ring tool. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Coherence criterion on the Noetherian projective spaces. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Quasi-coherence of the specified restrictions. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-finite-type",
+    "why": "Finite type of the specified restrictions. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-pc-zero-scheme-properties",
+    "why": "The ideal of the given zero scheme is locally generated by the section. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-unit-quotient",
+    "why": "Natural quotient description of closed-immersion tensor restriction. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Exactness and injectivity are tested on module stalks. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-pc-closed-immersion-coherent-cohomology",
+    "why": "Projection formula, coherence and cohomology for the closed immersion. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Euler additivity in the supplied coherent short exact sequence. No node of this unit supplies this general tool; it does not replace the inherited hyperplane route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-finite-type",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-closed-immersion-unit-quotient",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-pc-closed-immersion-coherent-cohomology",
+  "lem-pc-euler-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-82a0113ec",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-82a0113ec (reviewer sub-agent of L); spot-checked: S1 completion re-push (return L) with 0 new nodes. The statement is byte-identical to clones/live, and live and side-live are still unsplit, so no other group has superseded this delivery. Compared with the earlier heads dcc3/ada3, the only change is step-3 wording: the d=1 injectivity is applied explicitly and stalk-exact (3) identifies sheaf quotients with stalk quotients. I re-did the stalk algebra and it is correct: A∩aB=aA follows from regularity on C=F_x alone, and the middle-exactness lift works. Steps 1, 2, 4 and 6 are correct against the cited statements: the finite-type Noetherian node, coherent-ft-locnoeth (01XZ), pullback qcoh/finite type, zero-scheme (1), unit quotient F/JF≅i_*i^*F, and the projection formula of lem-pc-closed-immersion-coherent-cohomology. The route is Stacks varieties.tex 08AG diagram plus 0EGK, with regularity of s supplied, so no infinite-field step is needed and no SGA source is used. One fault (C3/C4) is fixed, and it is a re-application of the dcc3 FIX that was lost: step 5 cited lemma-nagata-projective-space-base-change-proper, which is about P(n;S)=S×Proj Z[T], while the item's X is Proj k[x_0..x_n] from def-pc-projective-space-twist. The fix cites lem-per-finite-type-graded-proj-proper (Proj A→Spec A_0 proper) for X and P^{n-1}_k, adds def-pc-projective-space-twist to step-5 uses, updates proof_deps and drops the Nagata tool_use. The other generic tool_uses are accepted. Edge cases checked: F=0, F=O^r, n=1, negative d, a skyscraper on or off H (the injectivity hypothesis is needed), and finite k. No duplicates and no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HyperplaneFreeQuotientEulerDifference",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.hyperplane_free_quotient_euler_difference",
+  "file": "lean/Sheaf/AlgebraicGeometry/HyperplaneFreeQuotientEulerDifference.lean",
+  "statement": "theorem hyperplane_free_quotient_euler_difference (k : Type u) [Field k] (n r : ℕ) (hn : 1 ≤ n) (hr : 1 ≤ r) (K F : (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).Modules) (hK : RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace K) (hF : RingedSpace.IsCoherent (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).toRingedSpace F) (a : K ⟶ SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).ringCatSheaf) (ULift.{u} (Fin r))) (b : SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).ringCatSheaf) (ULift.{u} (Fin r)) ⟶ F) (w : a ≫ b = 0) (hS : (ShortComplex.mk a b w).ShortExact) (s : Γ(twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) 1, ⊤)) (hs : s ≠ 0) (hinj : ∀ d : ℤ, Mono (regularHyperplaneMultiplication k n F d s)) (H : Scheme.{u}) [H.Over (Spec (.of k))] (i : H ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (hH : i.ker = Scheme.Modules.Hom.zeroLocus (Scheme.Modules.homOfGlobalSection _ s)) (e : H ≅ ℙ(ULift.{u} (Fin ((n - 1) + 1)); Spec (.of k))) [e.hom.IsOver (Spec (.of k))] (htwist : ∀ d : ℤ, Nonempty ((Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) ≅ (Scheme.Modules.tensorPullback e.hom).obj (twist (ULift.{u} (Fin ((n - 1) + 1))) (Spec (.of k)) d))) : RingedSpace.IsCoherent H.toRingedSpace ((Scheme.Modules.tensorPullback i).obj K) ∧ RingedSpace.IsCoherent H.toRingedSpace ((Scheme.Modules.tensorPullback i).obj F) ∧ (∃ wH : (Scheme.Modules.tensorPullback i).map a ≫ (Scheme.Modules.tensorPullback i).map b = 0, (ShortComplex.mk ((Scheme.Modules.tensorPullback i).map a) ((Scheme.Modules.tensorPullback i).map b) wH).ShortExact) ∧ Nonempty ((Scheme.Modules.tensorPullback i).obj (SheafOfModules.free (R := (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of k))).ringCatSheaf) (ULift.{u} (Fin r))) ≅ SheafOfModules.free (R := H.ringCatSheaf) (ULift.{u} (Fin r))) ∧ (∀ d : ℤ, Scheme.Modules.eulerChar k ((Scheme.Modules.tensorPullback i).obj F ⊗ (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) = Scheme.Modules.eulerChar k (F ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) - Scheme.Modules.eulerChar k (F ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) (d - 1))) ∧ (∀ P : Polynomial ℚ, (∀ d : ℤ, (Scheme.Modules.eulerChar k (F ⊗ twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d) : ℚ) = P.eval (d : ℚ)) → ∀ d : ℤ, (Scheme.Modules.eulerChar k ((Scheme.Modules.tensorPullback i).obj F ⊗ (Scheme.Modules.tensorPullback i).obj (twist (ULift.{u} (Fin (n + 1))) (Spec (.of k)) d)) : ℚ) = P.eval (d : ℚ) - P.eval ((d : ℚ) - 1))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed canonical hyperplane multiplication and zero-scheme definitions; adds their existing definition nodes to stmt_deps. Short exactness is asserted for the actual tensor-pullback maps, and a free-middle-object isomorphism identifies the row with O_H^r. The twists on H are i^*O_X(d), as identified with standard twists by the given e and htwist."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc99c6cd3",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and Stacks 08AG passes. Hypotheses: any field; n,r≥1; SES with K,F coherent (IsCoherent); s≠0 in Γ(O(1)); Mono of the landed regularHyperplaneMultiplication for all d:ℤ (d,1+d reindexing is bijective); i.ker = zeroLocus(homOfGlobalSection s); over-k e and Nonempty htwist, which is weaker than a fixed identification and matches what exists_coherent_regular_hyperplane provides. Conclusions: coherence of i^*K, i^*F; short exactness of the actual i^*a, i^*b; Euler difference for all d with F_H(d)=i^*F⊗i^*O(d) (regularHyperplaneRestriction convention); polynomial clause over ℚ. Edge cases n=1, r=1, F=0, F free, negative d, finite k and universes are fine. lean.statement is verbatim in the file; one sorry; no defs; only lean and stmt_deps (two landed def nodes added) differ from side-live. Docstrings carry the source places and six proof steps; report sections are present. Notes: the middle iso i^*O^r≅O_H^r is only Nonempty, harmless since exactness is stated for the canonical arrows and picardTensorFreeIso gives the canonical iso; homOfGlobalSection has no owning node but is the section map of def-pc-zero-scheme, used the same way by the landed sibling. No compile run (no changes)."
+ }
+}

@@ -1,0 +1,84 @@
+# Q18: lem-sfb-exact-fibre-coalgebra-reconstruction
+
+## Files written
+
+All paths below are relative to the item sandbox. No repository, launcher, literature, Lean, or unit file was written.
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-exact-fibre-coalgebra-reconstruction.json`: item, statement; split, unchanged statement and statement dependencies, ten proof steps.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-single-generator-fibre-representability.json`: new statement, unsplit; no Mathlib match. Milne 9.33–9.34(a), including the dimension bound and the representing pair.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-projective-generator-module-equivalence.json`: new statement, unsplit; no Mathlib match. Milne 9.35, stated independently for a finite projective generator.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-finite-algebra-comodule-duality.json`: new statement, unsplit; no Mathlib match. Finite, possibly noncommutative, algebra/module and dual coalgebra/comodule correspondence with the right-comodule convention.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-directed-coalgebra-comodule-descent.json`: new statement, unsplit; no Mathlib match. Coalgebra structure on a directed vector-space limit, finite coaction descent, and eventual colinearity, without injective transitions.
+- `citations.json`: a literal quotation from the statement of every node used in every numbered proof step. Each quotation has been checked as a substring of that statement.
+- `searches.jsonl`: actual msearch.py log, retained without alteration. Queries assigned to each node are exactly queries in this log. The item's previous search records have also been retained.
+- `report.md`: this report. `write_split.py` is a sandbox-only working script, not a delivery node.
+
+There are four new nodes and zero Mathlib leaves. Each new node is statement-only with `proof: []`, `proof_deps: []`, and `proof_origin: null`.
+
+## Attachments
+
+None. I searched the project library `lean/WeilConjectures/` for the item id, coalgebra/comodule reconstruction, the notion of a fibre functor, projective generators, monogenic objects, and the concepts of the new nodes. The hits concern other algebraic geometry or categorical coalgebras. No project declaration states this item or one of these new inputs exactly. No Lean was written or compiled.
+
+## WANTED
+
+None. The source used here is available locally: `literature/milne-algebraic-groups_iAG2017.pdf`.
+
+## What was wrong or implicit
+
+The item was genuinely unsplit, with no proof. Its statement is correct and has not been changed. Its source already identifies the coefficient quotient as an agent formulation of Milne's reconstruction, rather than a verbatim theorem in that book. I therefore mark the proof honestly as agent-written: it follows Milne's route, but supplies the quotient comparison and the finite-stage details that the book leaves implicit.
+
+The current `literature/blueprint/latest/` contains `sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md`. I read paragraph (3) and the current unit statement, together with the DAG chapter and unit records. This is the inherited long prerequisite chain recorded in the item's `blueprint.from.place`; the present calculation is the abelian-reconstruction prerequisite of `lem-sfb-neutral-tensor-envelope`, not a replacement of the six-functor unit route. `tools/blueprint_refs.py ancestor` explicitly returns `None` for this existing chain. I retain the inherited null ancestor, inherit its place, and prepend the item to `via` for each new node. Searches of all imported blueprint nodes for coalgebra, comodule, Morita, projective generator, and representability found no blueprint statement of a new input; the unrelated representability hits concern schemes or sheaves. Thus `same_as` is empty.
+
+Milne calls the relation on object isomorphism classes defined by inclusion of generated subcategories a partial ordering. It can only be a preorder: for example, a nonzero vector space and its double generate the same full category of finite vector spaces but are not isomorphic. Step 8 explicitly uses a directed preorder, which is all the limit requires. This does not change the item or any hypothesis. The proof never assumes that restriction of natural endomorphisms is surjective or that the dual transition maps are injective.
+
+## What could not be finished
+
+No part of the requested one-level split is left unfinished. The four supporting statements join stage 1 as unsplit nodes, as required. No assertion is made that they are already formalized.
+
+## Not duplicates
+
+lem-sfb-single-generator-fibre-representability vs lem-sfb-exact-fibre-coalgebra-reconstruction: the new statement gives a representing pair under the stronger single-object generation hypothesis, with a finite dimension bound; it asserts no coalgebra or comodule equivalence and is the local input to the proof, not a clause of the item.
+
+lem-sfb-finite-projective-generator-module-equivalence vs lem-sfb-exact-fibre-coalgebra-reconstruction: the new statement starts with an actual projective generator, finite Hom spaces and finite epimorphic presentations, and concludes an equivalence with modules over its endomorphism algebra; it assumes no fibre functor and constructs no coefficient coalgebra.
+
+lem-sfb-finite-algebra-comodule-duality vs lem-sfb-finite-coalgebra-dual-base-change: the existing node starts with a coalgebra and proves its dual algebra, biduality, group-like/character correspondence and field-base-change formula. It does not state the inverse algebra-to-coalgebra construction or the equivalence between modules and comodules that is needed here. I read its whole statement before creating the new node.
+
+lem-sfb-finite-algebra-comodule-duality vs lem-sfb-finite-comodule-coefficient-coalgebra: the existing node takes one comodule and constructs its coefficient subcoalgebra, with matrix identities. It does not identify all modules over a finite algebra with comodules of its dual.
+
+lem-sfb-directed-coalgebra-comodule-descent vs lem-sfb-coalgebra-finite-subcoalgebra: the existing node puts a finite set in a finite subcoalgebra of one coalgebra. The new node concerns an arbitrary directed diagram, including noninjective maps, with descent on a prescribed underlying space and eventual colinearity of a prescribed map.
+
+lem-sfb-directed-coalgebra-comodule-descent vs lem-sfb-comodule-finite-subcomodule: local finiteness inside one comodule is different from descending a coaction through an arbitrary coalgebra colimit.
+
+lem-sfb-exact-fibre-coalgebra-reconstruction vs lem-sfb-affine-group-tensor-reconstruction: the latter starts with a given finite-type affine group and reconstructs group elements from tensor-compatible natural automorphisms; it does not recover an arbitrary exact fibre functor's abelian category or its non-monoidal coefficient coalgebra.
+
+No new node cites a Stacks tag, since the source is Milne's elementary algebraic reconstruction, not a Stacks theorem. Whole-DAG statement searches also checked projective generators, monogenic objects, coalgebra, comodule and the cited Milne lemma numbers. None of the four new statements was found. I reused the existing vector-space basis, tensor-dual and colimit-definition nodes where their statements actually suffice.
+
+## Arguments retained for the supporting nodes
+
+These are guidance for their later workers, not proofs inserted in the unsplit statements.
+
+For single-generator representability, I read pp.175–176, including footnotes 6 and 7 and both Lemmas 9.33 and 9.34. Exact faithfulness identifies the order on subobjects with inclusion of their fibre subspaces: intersections are kernels of differences of inclusions, and inclusion can be tested by the pullback and reflection of isomorphisms. A smallest subobject whose fibre contains a chosen vector exists: among the finite intersections take one with minimal fibre dimension, which then lies in every other such subobject. For a monogenic subobject of X^m, a linear dependence among its generator's m coordinates places it in a kernel isomorphic to X^(m-1); this reduces to m <= dim F(X) and gives the bound (dim F(X))^2. For a quotient, lift the generator and take its generated subobject first. Choose a monogenic P of maximal fibre dimension and generator p. For y in F(Y), the subobject of P direct-sum Y generated by (p,y) surjects to P and is monogenic, so maximality and exact faithfulness make this projection an isomorphism. Its other projection gives the unique h with F(h)p=y. Equalizers give uniqueness and hence naturality and linearity. This proves precisely the new statement, including the case dim F(X)=0.
+
+For the finite projective-generator equivalence, I read the full proof of Lemma 9.35 on p.177. R is finite dimensional by the stated Hom hypothesis. Every finite-dimensional right R-module has a finite free presentation: a k-basis supplies finite R-generators, and the kernel in R^n is a finite-dimensional k-space, hence also finitely generated over R. Realize its presentation matrix as a morphism P^m -> P^n and take the cokernel. Exactness of Hom(P,-) realizes the desired module. For every object the assumed finite epimorphism and a finite epimorphism to its kernel give a presentation by P. For an R-linear map on Hom(P,-), its values on the coordinates of P^n define a map P^n -> Y, and annihilating the presentation relations descends it uniquely to X. This is fullness; faithfulness is the separator hypothesis. No infinite coproduct or Grothendieck category is required.
+
+For finite algebra/comodule duality, I read §9(d) pp.174–175, the paragraph after Lemma 9.35, Example 9.36, and 9.41–9.42 pp.179–180. Dualize multiplication and unit using the finite tensor-dual isomorphism. Pair the coassociativity equation with a tensor b tensor c: both sides are d(abc). Pair the coaction equation with a tensor b: both sides are a(bm)=(ab)m with the displayed order. The action and coaction formulas are inverse by expanding in any basis of E. A map commutes with all evaluations if and only if it is colinear, since evaluation against a finite dual basis separates the tensor coefficients. These checks work for E=M_2(k), so commutativity has not slipped in, and for the zero algebra.
+
+For directed coaction descent, I read the passage to the limit on p.178 and wrote its needed finite-stage meaning explicitly. Construct the vector-space limit as the direct sum modulo transition relations; a class is represented at one stage, and equality of two such representatives is equality at a common later stage. The same description for finite tensors shows D tensor D is the directed limit of D_i tensor D_i (a finite collection of tensor factors can be represented at a common index; finitely many bilinear relations become true at a later index). Thus the compatible comultiplications and counits induce the unique structure on D and their axioms hold on all representatives. Choose a finite basis of M. Lift its finitely many coaction matrix coefficients to one D_i. The finitely many equations Delta(c_ab)=sum c_ar tensor c_rb and epsilon(c_ab)=delta_ab hold in the limit, hence at one later index, giving a coaction on the same M. The finitely many coefficients of rho_N a - (a tensor 1)rho_M vanish at some later stage exactly the same way. This argument uses neither a finite-dimensional D_i nor injectivity.
+
+## Review by Q18
+
+I read the standing worker brief, stage-1 contract, the three blueprint levels in SETUP.md, GOAL.md, the worker role, the chapter/unit records, and delivery-errors B–E in full. I reviewed the actual node statements and Milne PDF with the sandbox files open. The four smaller inputs are mathematical lemmas with independent hypotheses: representing a functor, a module-category equivalence, finite-dual algebra/comodule duality, and finite descent in a variable coalgebra diagram. None simply repeats a clause of the item. The basis changes, matrix identities, quotient inverse and final assembly remain in the parent proof.
+
+For steps 1–3, I checked that `def-sp-abelian` really supplies kernels, cokernels and biproducts, not an unmentioned reconstruction theorem. Step 1 gives the finite-subquotient closure and reflection arguments itself. In step 2 the representing-pair statement gives exactly the maps h_i used to cover Y by P^n, and exact faithfulness proves they are epi. In step 3 the projective-generator lemma's exactness, separator, finite Hom and finite epimorphism hypotheses have all been established; its conclusion is a module equivalence, while the identification E=End(P)^op is proved explicitly by evaluating naturality at p. In particular I verified that composing h->hr reverses r's multiplication order; a noncommutative matrix algebra test catches the opposite error.
+
+For steps 4–5, I read the existing tensor-product, free-vector-space and finite-free-tensor-dual statements. These supply the universal bilinear tensor and the finite tensor-functional identification, not the desired coalgebra identities. The proof itself writes out the defining relation after Delta, using the two independent naturality relations on the two tensor factors, and then both coassociativity and counits. The coaction check and morphism naturality are also explicit. They are finite basis calculations, not a hidden reconstruction lemma. An empty basis produces zero sums; the formulas still work. There are no non-elementary steps over 2000 characters (the longest is step 4, 1294 characters).
+
+For steps 6–7, the new finite-dual statement gives exactly the coalgebra E_X^*, its evaluation pairing and the module/comodule dictionary. I checked that the representing-pair statement gives h_v and the relation needed for beta's inverse. The proof does not assume B_X is finite-dimensional: surjectivity from F(P)^* and the explicitly invertible composite prove the claimed isomorphism first. Pairing Delta with t tensor s gives phi(t s v), in the correct order, so beta preserves the coalgebra. The step-3 module equivalence and this precise dictionary identify K_X; mere linear biduality, such as the existing finite-coalgebra-dual-base-change node, would not suffice.
+
+For steps 8–10, `def-weil-pbc-category-colimit` really states the universal cocone property; step 8 verifies it for B by putting each generator and each relation in a single generated full subcategory. The index is a set in the fixed universe, nonempty and directed by finite direct sums. The descent node states both object descent on the same finite vector space and eventual colinearity for a specified linear map; those are exactly the two separate facts steps 9 and 10 use. Fullness at the later stage uses the already justified K_Y equivalence, not an assumption of fullness of F to vector spaces. I tested a non-full forgetful functor from modules over k[epsilon]/(epsilon^2): only the comodule-linear maps are recovered, as required. The nonskeletal transport is along the actual chosen isomorphisms and the displayed naturality relation. No tensor structure, dual objects in the category, unit object, or monoidal compatibility is assumed.
+
+I tested all new statements on the zero category, X=0, P=0, n=0 and the zero algebra; on finite vector spaces generated by k and by k direct-sum k; on a noncommutative algebra M_2(k); and on diagrams with noninjective coalgebra maps. For the last case a genuine example of a noninjective coalgebra map is the counit E^* -> k dual to k -> E, followed by a constant k diagram: its counit is preserved, unlike an invalid map from a nonzero coalgebra to zero. The finite-stage descent statement accommodates this. The zero limit itself can occur only when all stage counits vanish (hence the coalgebras are zero), which is consistent with the zero-comodule conclusion.
+
+I ran every new-node Mathlib search through msearch.py in the brief, read the returned types and candidate source files, and tried a second formulation before recording no match. Morita/Basic's TODO explicitly confirms that the general projective-generator characterization is not supplied there. The comonEquivalence hit is an equivalence with comonoid objects, not a category of comodules; Monad/Limits handles a fixed comonad, not descent under changing coalgebras. The finite-group Tannaka and Freyd–Mitchell hits have different hypotheses and conclusions. Searches and no-match verdicts are recorded exactly, with no invented query or unavailable service treated as absence. All cited quotations are literal statement text. I checked dependency union, fresh ids and the absence of a back edge; no source route uses SGA.
+
+Initial server `review_split` returned PASS. The final delivery dry run and push are performed with the unmodified required launcher tool, polling each invocation to exit.

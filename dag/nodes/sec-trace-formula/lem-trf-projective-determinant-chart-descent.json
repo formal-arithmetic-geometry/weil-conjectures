@@ -1,0 +1,333 @@
+{
+ "id": "lem-trf-projective-determinant-chart-descent",
+ "kind": "statement",
+ "title": "Local top-wedge determinant modules and descent of supplied tensor comparisons",
+ "statement": "Let $R$ be a commutative ring. A finite projective module means a direct summand of a finite free $R$-module [def-weil-pbc-projective-module]. Exterior powers and their pure wedges are those of [def-weil-pbc-exterior-algebra], and tensor products are those of [def-weil-pbc-module-tensor-product]. For every finite projective $E$, let $D_R(E)$ be its exterior-algebra annihilator of $E$ [def-trf-projective-determinant-module]. Fix finitely many $f_a\\in R$ generating the unit ideal such that $E_{f_a}$ is free [def-weil-pbc-free-module] with a basis of length $n_a$; localizations are as in [def-weil-pbc-module-localization-away]. Put $L_a=\\bigwedge^{n_a}_{R_{f_a}}E_{f_a}$. On any nonzero overlap $R_{f_af_b}$ the two ranks agree, and the exterior powers of the identity of $E_{f_af_b}$ identify $(L_a)_{f_b}$ with $(L_b)_{f_a}$; on a zero overlap the identification is the unique map. These identifications satisfy the cocycle equations. The modules $L_a$ with these transitions descend to a finite projective module $D$, locally free of rank one, canonically isomorphic to $D_R(E)$. Its chart identifications are induced by the exterior-algebra localization maps and the inclusion of the top exterior power. They are independent of the finite free cover and its refinements and commute with every further localization [def-weil-pbc-module-localization] $R\\to S^{-1}R$, including localization at a multiplicative subset containing zero. For $E=0$ they give the canonical identification $D_R(0)=R$ taking the empty wedge to $1$.\nMore generally, let $E_1,E_2,E_3$ be finite projective $R$-modules and choose such a simultaneous finite free cover, with ranks $n_{k,a}$ and $L_{k,a}=\\bigwedge^{n_{k,a}}(E_k)_{f_a}$. Suppose given $R_{f_a}$-linear isomorphisms $\\lambda_a:L_{1,a}\\otimes_{R_{f_a}}L_{2,a}\\xrightarrow{\\sim}L_{3,a}$ that agree on every overlap under the preceding transitions and tensor localization. There is a unique $R$-linear isomorphism $\\lambda:D_R(E_1)\\otimes_R D_R(E_2)\\xrightarrow{\\sim}D_R(E_3)$ whose localizations are the $\\lambda_a$. Its inverse descends the $\\lambda_a^{-1}$. Refinement leaves this isomorphism unchanged, and its localization at any multiplicative subset is the unique isomorphism obtained by descending the localized family.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJ9 (section-determinants), Tag 0FJA (remark-determinant-as-socle), and the descent portion of Tag 0FJB (lemma-det-ses), first proof. Auxiliary descent: Algebra Tag 00EK (lemma-cover-module)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-exterior-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-projective-determinant-module",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Write $A=\\bigwedge_R E$. The canonical map $A\\to\\bigwedge_{S^{-1}R}(S^{-1}E)$ is a module localization: on each graded piece this is [new-v2-generic-exterior-power-localization], and the direct-sum grading of [def-weil-pbc-exterior-algebra] gives the assertion for $A$. Explicitly every element has finitely many homogeneous components, so their fraction representatives admit a common denominator; if an element maps to zero, finitely many annihilating denominators for its components have a product annihilating it. Multiplication of fractions agrees with wedge multiplication because this holds on pure wedges and extends by linearity. The maps for successive localizations agree on every pure wedge and on scalars, hence on the whole algebra.",
+   "uses": [
+    "new-v2-generic-exterior-power-localization",
+    "def-weil-pbc-exterior-algebra",
+    "def-trf-projective-determinant-module",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C6F, lemma-tensor-algebra-localization; degreewise localization and finite-support direct-sum assembly"
+   }
+  },
+  {
+   "text": "Choose generators $e_1,\\ldots,e_t$ of $E$: the images under the given retraction of a finite free basis generate it. By bilinearity, $x\\in D_R(E)$ means exactly $x\\wedge e_i=0$ for every $i$. The map of step 1 therefore restricts to a localization $D_R(E)\\to D_{S^{-1}R}(S^{-1}E)$. Indeed, write a target element as $x/s$. Each $x\\wedge e_i$ vanishes after localization, so choose $u_i\\in S$ annihilating it and put $u=\\prod_i u_i$. Then $ux\\in D_R(E)$ and $x/s=(ux)/(us)$. If an element of $D_R(E)$ maps to zero, a denominator annihilates it in $A$ and hence in the submodule $D_R(E)$. Denominators act invertibly in the target. These are precisely the fraction and equality properties of localization. This argument also applies when $t=0$ or $0\\in S$.",
+   "uses": [
+    "def-trf-projective-determinant-module",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJA, remark-determinant-as-socle: localization verification by finitely many annihilator equations"
+   }
+  },
+  {
+   "text": "For a free module $F$ with basis $v_1,\\ldots,v_n$, expand an element of its exterior algebra uniquely as $x=\\sum_{I\\subseteq\\{1,\\ldots,n\\}}c_Iv_I$, using the graded decomposition and [lem-weil-pbc-exterior-power-free-basis]. For a fixed $j$, the terms of $x\\wedge v_j$ with $j\\notin I$ have distinct basis indices $I\\cup\\{j\\}$ and coefficient $\\pm c_I$. Thus $x\\wedge v_j=0$ forces $c_I=0$ for every $I$ omitting $j$. Annihilation by all $v_j$ leaves exactly the full-index term; conversely its wedge with every generator is zero. Consequently the inclusion identifies $\\bigwedge^n F$ with $D(F)$, free on the top wedge. This uses only units $\\pm1$, so holds in characteristic two and over the zero ring. For $n=0$ it identifies the empty wedge with $1\\in R$.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra",
+    "def-trf-projective-determinant-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DM, section-tensor-algebra, finite free exterior basis; socle calculation of Tag 0FJA"
+   }
+  },
+  {
+   "text": "Apply steps 2 and 3 to each chart to obtain canonical isomorphisms $\\alpha_a:D_R(E)_{f_a}\\xrightarrow{\\sim}L_a$, characterized by equality of their images in the localized exterior algebra. On a nonzero overlap the two localized bases of $E$ have equal lengths by [lem-sfb-commutative-ring-invariant-basis-number]. Here localization of a basis remains a basis: extend the coordinate maps and their inverse by the fraction formula. The degreewise comparison of step 1 therefore identifies both localized $L_a,L_b$ with the same top exterior submodule. Their transition is $\\alpha_b\\alpha_a^{-1}$ after restriction. On a zero overlap all modules are zero and there is exactly one map. These descriptions give identity transitions and the cocycle equation by cancellation of consecutive $\\alpha$'s.",
+   "uses": [
+    "lem-sfb-commutative-ring-invariant-basis-number",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0FJ9 and 0FJA, local top exterior descriptions; Algebra rank uniqueness on nonzero rings"
+   }
+  },
+  {
+   "text": "Take $D=D_R(E)$ with the chart maps $\\alpha_a$. This realizes the prescribed descent datum, and each localization is free of rank one. The finite principal-cover criterion [lem-sc-affine-standard-cover-finite-projective] implies that $D$ is finite projective. To see the canonical character of descent, any other module $D'$ with these charts has a unique map to $D$: for $x\\in D'$, its local images in $D_{f_a}$ agree, so [lem-weil-pbc-cover-module-exact] supplies a unique image in $D$. Uniqueness makes this assignment linear. Interchanging $D,D'$ supplies its inverse, since both composites are locally the identity and the same cover lemma detects equality. Thus this choice of $D$ gives the canonical isomorphism claimed.",
+   "uses": [
+    "lem-sc-affine-standard-cover-finite-projective",
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJA, identification with determinant; Algebra Tags 00NX (lemma-finite-projective) and 00EK (lemma-cover-module)"
+   }
+  },
+  {
+   "text": "The chart comparison is independent of all basis choices because step 3 identifies the top exterior submodule by its inclusion, not by a chosen generator. For two covers, their pairwise intersections form a common principal refinement: if $\\sum r_af_a=\\sum s_bg_b=1$, then $\\sum_{a,b}r_as_bf_ag_b=1$. On that refinement both chart systems are the restriction of the same exterior localization map, by steps 1 and 2. The injectivity assertion of [lem-weil-pbc-cover-module-exact] then makes their descended identifications equal. For any multiplicative subset $S$, step 2 identifies $S^{-1}D_R(E)$ with $D_{S^{-1}R}(S^{-1}E)$; step 1 shows on pure wedges that this identification commutes with every chart and successive localization. If $0\\in S$ all modules are zero. If $E=0$, step 3 globally gives $D_R(0)=R$, with the required empty-wedge normalization.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJA, intrinsic socle model; cover independence expanded using Algebra Tag 00EK"
+   }
+  },
+  {
+   "text": "Put $P=D_R(E_1)\\otimes_R D_R(E_2)$ and $Q=D_R(E_3)$. The chart maps already established and [lem-weil-pbc-localization-tensor-product] identify $P_{f_a}$ with $L_{1,a}\\otimes L_{2,a}$ and $Q_{f_a}$ with $L_{3,a}$. For $p\\in P$, form $q_a=\\alpha_{3,a}^{-1}\\lambda_a((\\alpha_{1,a}\\otimes\\alpha_{2,a})(p/1))$. The assumed overlap agreement says exactly that the $q_a\\in Q_{f_a}$ form a compatible family. By [lem-weil-pbc-cover-module-exact] they glue to a unique $q\\in Q$; define $\\lambda(p)=q$. Local linearity and uniqueness of gluing prove additivity and $R$-linearity. The localized map equals $\\lambda_a$ on all fractions $p/f_a^k$, since it does on $p/1$ and both maps are $R_{f_a}$-linear. The injectivity clause of the cover lemma proves uniqueness of $\\lambda$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DL, lemma-tensor-product-localization, and Tag 00EK, lemma-cover-module: elementwise descent of the supplied tensor map"
+   }
+  },
+  {
+   "text": "The inverses $\\lambda_a^{-1}$ agree on overlaps, since the compatibility equation for $\\lambda_a$ can be multiplied on both sides by the corresponding inverses. For each $q\\in Q$, apply [lem-weil-pbc-cover-module-exact] to the compatible local preimages in $P_{f_a}$ to obtain a linear map $\\mu:Q\\to P$. The localizations of $\\mu\\lambda$ and $\\lambda\\mu$ are identities. Injectivity in that lemma gives $\\mu\\lambda=1_P$ and $\\lambda\\mu=1_Q$. Thus $\\lambda$ is an isomorphism with precisely the asserted descended inverse.",
+   "uses": [
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EK, lemma-cover-module: descent of inverse maps and local detection of equality"
+   }
+  },
+  {
+   "text": "If the given family is restricted to any finite principal refinement, the constructed $\\lambda$ still has those localizations; the uniqueness argument of step 7 over the refinement leaves it unchanged. For $R\\to S^{-1}R$, the images of the $f_a$ still generate the unit ideal. By [lem-weil-pbc-localization-tensor-product] and steps 1, 2 and 6, the localization of $\\lambda$ has as its chart maps exactly the localized $\\lambda_a$: on pure tensors this is the equality $(x/s)\\otimes(y/t)\\mapsto\\lambda(x\\otimes y)/(st)$ under the tensor comparison, and linearity gives it on all elements. Apply [lem-weil-pbc-cover-module-exact] over $S^{-1}R$ to obtain uniqueness of the descended map. Its inverse is the localization of $\\mu$. This includes $0\\in S$ and proves all asserted refinement and localization compatibilities.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-product",
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DL and 00EK: tensor fraction comparison and uniqueness after localization or refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-v2-generic-exterior-power-localization",
+  "def-weil-pbc-exterior-algebra",
+  "def-trf-projective-determinant-module",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-sfb-commutative-ring-invariant-basis-number",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-cover-module-exact",
+  "lem-weil-pbc-localization-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJA (remark-determinant-as-socle), expanded localization/socle verification; descent by Algebra Tags 00EK and 00DL. The source suggests localization but leaves these verifications unwritten."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The exterior socle determinant of a finite projective module is an invertible module obtained by gluing its local top exterior powers",
+   "results": "8 hits; top=['exteriorPower.oneEquiv', 'ModuleCat.exteriorPower', 'ModuleCat.exteriorPower.iso₀', 'Module.Invertible.instFinite', 'ModuleCat.exteriorPower.functor', 'Module.Invertible.instProjective', 'ModuleCat.exteriorPower.iso₁', 'exteriorPower.presentation']; note=; digest=6381daf0e88e82a7. The hits supply exterior powers, tensor localization and invertible-module instances, not the exterior-socle chart realization with its canonical overlap and descent assertions. LinearMap.det_eq_det_mul_det (Mathlib/LinearAlgebra/Determinant.lean:811) concerns scalar determinants of endomorphisms. Read exteriorPower.linearMap_ext and map (ExteriorPower/Basic.lean:206,263); these do not identify the socle or construct the determinant line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The determinant of a finite projective module defined as the annihilator in the exterior algebra localizes to the top exterior power and is a rank one finite projective module",
+   "results": "8 hits; top=['LinearMap.det_eq_one_of_not_module_finite', 'Module.Free.of_det_ne_one', 'LinearMap.free_of_det_ne_one', 'LinearMap.det_def', 'LinearMap.finite_of_det_ne_one', 'LinearMap.coe_det', 'LinearMap.detAux_def', 'LinearMap.det_eq_det_mul_det']; note=; digest=3958c018df5b521b. The hits supply exterior powers, tensor localization and invertible-module instances, not the exterior-socle chart realization with its canonical overlap and descent assertions. LinearMap.det_eq_det_mul_det (Mathlib/LinearAlgebra/Determinant.lean:811) concerns scalar determinants of endomorphisms. Read exteriorPower.linearMap_ext and map (ExteriorPower/Basic.lean:206,263); these do not identify the socle or construct the determinant line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExteriorAlgebra, Module.Projective",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The hits supply exterior powers, tensor localization and invertible-module instances, not the exterior-socle chart realization with its canonical overlap and descent assertions. LinearMap.det_eq_det_mul_det (Mathlib/LinearAlgebra/Determinant.lean:811) concerns scalar determinants of endomorphisms. Read exteriorPower.linearMap_ext and map (ExteriorPower/Basic.lean:206,263); these do not identify the socle or construct the determinant line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(determinant|socle).*(localiz|projective)|annihilator.*[Ee]xterior",
+   "results": "1 hits; top=['Mathlib/LinearAlgebra/Vandermonde.lean']; note=; digest=799ce675699ba38c. The hits supply exterior powers, tensor localization and invertible-module instances, not the exterior-socle chart realization with its canonical overlap and descent assertions. LinearMap.det_eq_det_mul_det (Mathlib/LinearAlgebra/Determinant.lean:811) concerns scalar determinants of endomorphisms. Read exteriorPower.linearMap_ext and map (ExteriorPower/Basic.lean:206,263); these do not identify the socle or construct the determinant line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local top exterior powers of finite projective modules glue to invertible determinant modules and compatible local tensor pairings descend uniquely",
+   "results": "8 hits; top=['ExteriorAlgebra.exteriorPower', 'ModuleCat.exteriorPower.iso₀', 'ModuleCat.exteriorPower', 'exteriorPower.presentation', 'exteriorPower.linearMap_ext', 'IsLocalization.tensorProduct_isLocalizedModule', 'exteriorPower.presentation.isPresentationCore', 'exteriorPower.toTensorPower']; note=; digest=eb7561a1a39ea71a. The hits supply exterior powers, tensor localization and invertible-module instances, not the exterior-socle chart realization with its canonical overlap and descent assertions. LinearMap.det_eq_det_mul_det (Mathlib/LinearAlgebra/Determinant.lean:811) concerns scalar determinants of endomorphisms. Read exteriorPower.linearMap_ext and map (ExteriorPower/Basic.lean:206,263); these do not identify the socle or construct the determinant line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.*(prod|directSum)|determinant.*(line|module)|annihilator.*[Ee]xterior",
+   "results": "25 hits; top=['Mathlib/LinearAlgebra/Matrix/GeneralLinearGroup/Defs.lean', 'Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean', 'Mathlib/LinearAlgebra/Matrix/AbsoluteValue.lean', 'Mathlib/LinearAlgebra/Matrix/Kronecker.lean', 'Mathlib/LinearAlgebra/Matrix/Nondegenerate.lean', 'Mathlib/LinearAlgebra/Matrix/ToLinearEquiv.lean', 'Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean', 'Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean']; note=; digest=e2f5b52884cb38fc. The hits supply exterior powers, tensor localization and invertible-module instances, not the exterior-socle chart realization with its canonical overlap and descent assertions. LinearMap.det_eq_det_mul_det (Mathlib/LinearAlgebra/Determinant.lean:811) concerns scalar determinants of endomorphisms. Read exteriorPower.linearMap_ext and map (ExteriorPower/Basic.lean:206,263); these do not identify the socle or construct the determinant line.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(socle|annihilator).*(exterior|ExteriorAlgebra)|determinant.*(glue|descent)",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read ExteriorAlgebra.hom_ext (Basic.lean:136), ιMulti_span_fixedDegree (:344), lhom_ext (OfAlternating.lean:154); these give universal-property/extensionality tools, not the socle localization and tensor descent theorem. The second semantic search returned free-locus and finite-presentation lemmas, also not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exterior algebra socle of a finite projective module localizes to its top exterior power and compatible determinant tensor pairings descend uniquely",
+   "results": "8 hits; top=['ExteriorAlgebra', 'ExteriorAlgebra.lhom_ext', 'ExteriorAlgebra.exteriorPower', 'ModuleCat.exteriorPower', 'ModuleCat.exteriorPower.iso₀', 'ExteriorAlgebra.hom_ext', 'exteriorPower.pairingDual_ιMulti_ιMulti', 'ExteriorAlgebra.ιMulti_span_fixedDegree']; note=; digest=9f4db4b8bb518fab. Read ExteriorAlgebra.hom_ext (Basic.lean:136), ιMulti_span_fixedDegree (:344), lhom_ext (OfAlternating.lean:154); these give universal-property/extensionality tools, not the socle localization and tensor descent theorem. The second semantic search returned free-locus and finite-presentation lemmas, also not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ExteriorAlgebra, Module.Projective",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read ExteriorAlgebra.hom_ext (Basic.lean:136), ιMulti_span_fixedDegree (:344), lhom_ext (OfAlternating.lean:154); these give universal-property/extensionality tools, not the socle localization and tensor descent theorem. The second semantic search returned free-locus and finite-presentation lemmas, also not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The annihilator of a finite projective module in its exterior algebra is the determinant line, identified locally with top exterior powers, and compatible local tensor isomorphisms glue uniquely",
+   "results": "8 hits; top=['ModuleCat.exteriorPower', 'ExteriorAlgebra.exteriorPower', 'ModuleCat.exteriorPower.iso₁', 'exteriorPower.pairingDual_ιMulti_ιMulti', 'ModuleCat.exteriorPower.iso₀', 'ModuleCat.exteriorPower.mk', 'exteriorPower.presentation', 'exteriorPower.presentation.isPresentationCore']; note=; digest=a16dc366e021a840. Read ExteriorAlgebra.hom_ext (Basic.lean:136), ιMulti_span_fixedDegree (:344), lhom_ext (OfAlternating.lean:154); these give universal-property/extensionality tools, not the socle localization and tensor descent theorem. The second semantic search returned free-locus and finite-presentation lemmas, also not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "annihilator|socle",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read ExteriorAlgebra.hom_ext (Basic.lean:136), ιMulti_span_fixedDegree (:344), lhom_ext (OfAlternating.lean:154); these give universal-property/extensionality tools, not the socle localization and tensor descent theorem. The second semantic search returned free-locus and finite-presentation lemmas, also not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Annihilator of the positive degree generators in an exterior algebra is a locally free rank one module and Zariski local isomorphisms of modules glue",
+   "results": "8 hits; top=['Module.FinitePresentation.exists_free_localizedModule_powers', 'Module.freeLocus', 'exteriorPower.presentation.isPresentationCore', 'Module.basicOpen_subset_freeLocus_iff', 'Module.mem_freeLocus', 'Module.FinitePresentation.exists_notMem_bijective', 'Module.isLocallyConstant_rankAtStalk_freeLocus', 'Module.freeLocus_eq_univ_iff']; note=; digest=5d58dca5ac6fef2e. Read ExteriorAlgebra.hom_ext (Basic.lean:136), ιMulti_span_fixedDegree (:344), lhom_ext (OfAlternating.lean:154); these give universal-property/extensionality tools, not the socle localization and tensor descent theorem. The second semantic search returned free-locus and finite-presentation lemmas, also not this statement.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-projective-determinant-exact-sequence",
+  "date": "2026-10-22",
+  "group": "Q101"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Auxiliary module input: Determinant-line isomorphism for an exact sequence of finite projective modules. Re-split argument: Tag 0FJ9 (section-determinants), Tag 0FJA (remark-determinant-as-socle), and the descent portion of Tag 0FJB (lemma-det-ses), first proof. Auxiliary descent: Algebra Tag 00EK (lemma-cover-module).",
+   "via": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-determinant-chart-descent",
+  "worker": "stage1",
+  "group": "Q45",
+  "summary": "Nine explicit steps expand the exterior-socle localization and free-basis calculation, identify all overlaps through the intrinsic socle module, prove finite projectivity by an existing cover criterion, and glue supplied tensor maps and inverses elementwise. No statement change and no new nodes. All cited statements opened; no cited dependency reaches this item. Zero rings, zero overlaps, rank zero and multiplicative subsets containing zero included.",
+  "blueprint": "Retains the inherited auxiliary determinant-line branch below lem-trf-local-term-locality, via projective-determinant-exact-sequence: the local top-wedge realization and descent portion of Tag 0FJB. Latest blueprint node read; no change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "new-v2-generic-exterior-power-localization",
+    "why": "Generic pure-wedge module localization, for arbitrary degree and multiplicative subset; no node of this unit states it."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-projective",
+    "why": "Generic finite principal-cover criterion for finite projectivity of the socle module, already known locally free of rank one; no unit-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-cover-module-exact",
+    "why": "Generic uniqueness and existence of gluing module elements on a finite principal cover, used for module identifications, maps and inverses; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "new-v2-generic-exterior-power-localization",
+  "lem-sc-affine-standard-cover-finite-projective",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-5d5b6a4fb",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-5d5b6a4fb (reviewer sub-agent of L); spot-checked: I read all nine steps and every cited statement in full. The delivery is the item plus the report, with no new nodes; it is not a 2026-10-21 re-split (base was an unsplit Q101 node, no repair note). The statement and stmt_deps are unchanged and match the 0FJA annihilator model (Stacks more-algebra Tags 0FJ9, 0FJA and 0FJB, both proofs read). Every clause the parent lem-trf-projective-determinant-exact-sequence uses in its steps 2-3 is present: chart realization, pairing descent, inverse, refinement independence and uniqueness over a localization. Steps check: (1) graded localization via new-v2-generic, with componentwise denominators; (2) socle localization via finite generators and the product u of annihilators, covering t=0 and 0 in S; (3) free coefficient argument, with I plus j distinct and only signs plus or minus 1 used; (4) alpha_a charts, IBN only on nonzero overlaps, cocycle by cancellation; (5) the cover criterion gives finite projective, plus an elementwise 00EK comparison; (6) common refinement and intrinsic chart maps; (7)-(9) elementwise gluing of lambda and its inverse, R_{f_a}-linearity on fractions, uniqueness by injectivity, and localization over S^{-1}R. Small cases: R=Z/6 with E supported on one factor gives D=Z/3+Z/2, which is invertible; rank 2 over F_2 needs no division by 2; R=0, E=0, zero overlaps. No dependency cycle (closure of 26 nodes). DAG searches for socle, determinant and exterior nodes found no duplicate. I accept the three declared generic tool_uses: new-v2-generic-exterior-power-localization, lem-sc-affine-standard-cover-finite-projective and lem-weil-pbc-cover-module-exact. No SGA. Minor, no change: steps 6, 8 and 9 are marked elementary although they cite lemma nodes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.ProjectiveDeterminantChartDescent",
+  "declaration": "Module.determinant_chart_descent",
+  "declarations": [
+   "Module.determinantChartLine",
+   "Module.determinantChartRestriction",
+   "Module.DeterminantCharts",
+   "Module.DeterminantCharts.iso",
+   "Module.DeterminantCharts.restrictedIso",
+   "Module.DeterminantCharts.transition",
+   "Module.determinant_chart_descent",
+   "Module.determinantLocalizedTensorMap",
+   "Module.DeterminantCharts.pairingSection",
+   "Module.DeterminantCharts.PairingsCompatible",
+   "Module.DeterminantCharts.IsPairingDescent",
+   "Module.determinant_chart_tensor_descent"
+  ],
+  "file": "lean/Sheaf/LinearAlgebra/ProjectiveDeterminantChartDescent.lean",
+  "statement": "theorem determinant_chart_descent {R : Type u} [CommRing R] {E : Type v} [AddCommGroup E] [Module R E] [Module.Finite R E] [Module.Projective R E] {r : ℕ} (f : Fin r → R) (hcover : Ideal.span (Set.range f) = ⊤) (n : Fin r → ℕ) (basis : ∀ a : Fin r, Module.Basis (Fin (n a)) (Localization.Away (f a)) (LocalizedModule.Away (f a) E)) : (∃! C : DeterminantCharts E f n, True) ∧ Module.Finite R (determinantModule R E) ∧ Module.Projective R (determinantModule R E) ∧ (∀ a : Fin r, Nonempty (LocalizedModule.Away (f a) (determinantModule R E) ≃ₗ[ Localization.Away (f a)] Localization.Away (f a))) ∧ (∀ (a b : Fin r), Nontrivial (Localization.Away (f a * f b)) → n a = n b) ∧ (∀ (C : DeterminantCharts E f n) (P : Type t) [AddCommGroup P] [Module R P] (p : ∀ a : Fin r, P →ₗ[R] determinantChartLine E (f a) (n a)), (∀ a : Fin r, IsLocalizedModule (Submonoid.powers (f a)) (p a)) → (∀ (a b : Fin r) (x : P), determinantChartRestriction (determinantModule R E) (f a) (f a * f b) (dvd_mul_right (f a) (f b)) ((C.iso a).symm (p a x)) = determinantChartRestriction (determinantModule R E) (f b) (f a * f b) (dvd_mul_left (f b) (f a)) ((C.iso b).symm (p b x))) → ∃! d : P ≃ₗ[R] determinantModule R E, ∀ (a : Fin r) (x : P), C.map a (d x) = p a x) ∧ (∀ (C : DeterminantCharts E f n) (a b : Fin r) (h : R) (ha : f a ∣ h) (hb : f b ∣ h) (x : determinantModule R E), C.transition C a b h ha hb (LocalizedModule.mk (C.map a x) (1 : Submonoid.powers h)) = LocalizedModule.mk (C.map b x) (1 : Submonoid.powers h)) ∧ (∀ (C : DeterminantCharts E f n) (a : Fin r) (h : R) (ha : f a ∣ h), C.transition C a a h ha ha = LinearEquiv.refl R _) ∧ (∀ (C : DeterminantCharts E f n) (a b c : Fin r) (h : R) (ha : f a ∣ h) (hb : f b ∣ h) (hc : f c ∣ h), (C.transition C a b h ha hb).trans (C.transition C b c h hb hc) = C.transition C a c h ha hc) ∧ (∀ (S : Submonoid R), ∃! q : determinantModule R E →ₗ[R] determinantModule (Localization S) (LocalizedModule S E), (∀ x : determinantModule R E, (q x).val = ExteriorAlgebra.scalarExtensionMap (LocalizedModule.mkLinearMap S E) x.val) ∧ IsLocalizedModule S q) ∧ (Subsingleton E → ∃! e : determinantModule R E ≃ₗ[R] R, ∀ a : R, (e.symm a).val = algebraMap R (ExteriorAlgebra R E) a)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0240bac06",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Read the item node, all 7 stmt_deps, recorded determinantModule/scalarExtensionMap, CoverModuleExact (proved localizationAway_map_units_of_dvd, used only as a proof argument; determinantChartRestriction equals the 00EK map), the full delivered module and both report sections, plus the 4 citers' proof steps. Every clause is rendered: DeterminantCharts pinned by the exterior inclusion formula plus IsLocalizedModule (∃! is meaningful), rank equality only on nontrivial overlaps, transition formula with identity/cocycle equations, finite projective plus local rank one, universal P/p descent ∃! equivalence, ∀ S ∃! localization q (0∈S allowed), Subsingleton E gives ∃! D≃R with empty wedge to 1; pairing descent: PairingsCompatible (equivalent to full-overlap agreement), unique e, inverse formula, arbitrary second-cover refinement, unique eS over Localization S with chart formula. Edge cases: r=0, R=0, rank 0, char 2, zero overlaps, independent universes. No hollow defs; only the 2 theorems are sorry; docstrings carry source, blueprint and all 9 steps; lines ≤100; lean.statement verbatim; node differs from live only in lean. No name clashes or duplicate notion. Note: commutation of charts with further localization is implied by the shared scalarExtensionMap characterization rather than stated as a separate square; acceptable."
+ }
+}

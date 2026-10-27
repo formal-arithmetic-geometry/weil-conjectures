@@ -1,0 +1,95 @@
+{
+ "id": "lem-trf-finite-dimensional-short-exact-dimension",
+ "kind": "statement",
+ "title": "Dimension additivity for a short exact sequence of finite-dimensional vector spaces",
+ "statement": "Let $K$ be a field [def-weil-field], let $V_1,V_2,V_3$ be finite-dimensional $K$-vector spaces [def-weil-finite-dimensional-subspace], and let $0\\to V_1\\xrightarrow{f}V_2\\xrightarrow{g}V_3\\to0$ be a short exact sequence [def-weil-pbc-exact-sequence] of $K$-linear maps (so $f$ is injective, $g$ is surjective and $\\operatorname{im}f=\\ker g$). Then $\\dim_K V_2=\\dim_K V_1+\\dim_K V_3$, with dimension as in [def-weil-vector-space-dimension].",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 08AA, lemma-euler-characteristic-additive, proof: rank-nullity for the finite-dimensional cohomology exact sequence, specialized to three terms."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finrank_eq_add_of_exact|free_shortExact_finrank_add|finrank_add_of_exact",
+   "results": "Actual search returned 1 hits: Mathlib/Algebra/Category/ModuleCat/Free.lean. ; returned types read in the worker session. ModuleCat.free_shortExact_finrank_add is the exact generalization; rank-nullity hits also support the formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For injective f and surjective g with image f equal kernel g finite dimensional vector spaces satisfy finrank V2 equals finrank V1 plus finrank V3",
+   "results": "Actual search returned 8 hits: LinearMap.finrank_range_add_finrank_ker, DivisionRing.hasRankNullity, LinearMap.lift_rank_range_add_rank_ker, LinearMap.lift_rank_eq_of_surjective, Submodule.finrank_sup_add_finrank_inf_eq, LinearMap.rank_eq_of_surjective, lift_rank_range_of_injective, rank_add_rank_split. ; returned types read in the worker session. ModuleCat.free_shortExact_finrank_add is the exact generalization; rank-nullity hits also support the formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap, Function.Exact, Module.finrank",
+   "results": "Actual search returned 2 hits: Module.sum_neg_one_pow_finrank_eq_zero_of_exact_six, Module.sum_neg_one_pow_finrank_eq_zero_of_exact. ; returned types read in the worker session. ModuleCat.free_shortExact_finrank_add is the exact generalization; rank-nullity hits also support the formula.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a short exact sequence of finite dimensional vector spaces the dimension of the middle space is the sum of the dimensions of the outer spaces",
+   "results": "Actual search returned 8 hits: ModuleCat.free_shortExact_finrank_add, Module.length_eq_add_of_exact, ModuleCat.free_shortExact_rank_add, rank_add_rank_split, rank_quotient_add_rank_of_divisionRing, LinearMap.finrank_range_add_finrank_ker, HasRankNullity.rank_quotient_add_rank, CategoryTheory.ShortComplex.ShortExact.ab_finite_iff. ; returned types read in the worker session. ModuleCat.free_shortExact_finrank_add is the exact generalization; rank-nullity hits also support the formula.",
+   "date": "2026-10-23",
+   "verdict": "match: ModuleCat.free_shortExact_finrank_add"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank nullity dimensions add for an exact sequence with injective first map and surjective last map",
+   "results": "Actual search returned 8 hits: Module.length_eq_add_of_exact, rank_add_rank_split, ModuleCat.free_shortExact_rank_add, ModuleCat.free_shortExact_finrank_add, LinearMap.injective_of_surjective_of_injective_of_right_exact, LinearMap.rank_eq_of_surjective, HasRankNullity, LinearMap.lift_rank_eq_of_surjective. ; returned types read in the worker session. ModuleCat.free_shortExact_finrank_add is the exact generalization; rank-nullity hits also support the formula.",
+   "date": "2026-10-23",
+   "verdict": "match: ModuleCat.free_shortExact_finrank_add"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "ModuleCat.free_shortExact_finrank_add",
+  "file": "Mathlib/Algebra/Category/ModuleCat/Free.lean",
+  "how": "Specializes in one line: apply to the given short complex in ModuleCat K with n = Module.finrank K V₁ and p = Module.finrank K V₃, both equality arguments rfl. Read lines 181–190. Vector spaces are free by Module.Free.of_divisionRing, Mathlib/LinearAlgebra/Basis/VectorSpace.lean:156–157; fields have StrongRankCondition by IsNoetherianRing.strongRankCondition, Mathlib/LinearAlgebra/InvariantBasisNumber.lean:249–250. Finite-dimensionality supplies Module.Finite. No geometric hypothesis or comparison theorem is needed.",
+  "line": 181
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-euler-defect-additivity",
+  "date": "2026-10-23",
+  "group": "Q147"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV). Within this supporting calculation: Tag 0AYV, lemma-degree-on-proper-curve, proof of condition (1), with the Noetherian, coherence, finite generic rank and zero-object preliminaries of returned steps 1-3. Supporting linear algebra in 0AYV condition (1): additivity of dimensions of the generic-stalk short exact sequence.",
+   "via": [
+    "lem-trf-curve-euler-defect-additivity",
+    "lem-trf-curve-euler-tensor-generic-rank",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

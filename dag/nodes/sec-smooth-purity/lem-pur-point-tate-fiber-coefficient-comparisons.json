@@ -1,0 +1,256 @@
+{
+ "id": "lem-pur-point-tate-fiber-coefficient-comparisons",
+ "kind": "statement",
+ "title": "Canonical coefficient comparisons in signed point-line coordinates",
+ "statement": "Fix a finite field $k_0$ of characteristic $p$, its algebraic closure $k$, $s=\\operatorname{Spec}k$, a prime $\\ell\\ne p$, and an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ [def-weil-finite-field-fiber]. For every finite intermediate field $E$, let $\\mathcal O_E$ be its valuation ring, $\\varpi_E$ a uniformizer, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\ge1$). Choose compatible primitive $\\ell^r$-th roots $\\zeta_r\\in k$ with $\\zeta_{r+1}^{\\ell}=\\zeta_r$. Form all signed Tate twists as in [def-coefficient-twists-detailed], with $e=(\\zeta_r)_r$, $e_{m,\\mathcal O_E}$ its tensor generator for $m>0$, $e_{0,\\mathcal O_E}=1$, and $e_{-r,\\mathcal O_E}(e_{r,\\mathcal O_E})=1$ for $r>0$; write $e_{m,A_{E,n}}$ for the corresponding residue generator. Set $V_{\\mathcal O_E,m}=\\Gamma(s,\\mathcal O_E(m)_s)$, $V_{A_{E,n},m}=\\Gamma(s,A_{E,n}(m)_s)$, and $V_{E,m}=V_{\\mathcal O_E,m}\\otimes_{\\mathcal O_E}E$.\nFor every integer $m$, the canonical sections-tensor map induced by the quotient of coefficient sheaves is an isomorphism\n$$V_{\\mathcal O_E,m}\\otimes_{\\mathcal O_E}A_{E,n}\\xrightarrow{\\sim}V_{A_{E,n},m},\\qquad e_{m,\\mathcal O_E}\\otimes a\\longmapsto a e_{m,A_{E,n}}.$$\nThe integral-to-rational comparison for the point fiber [def-weil-finite-coefficient-point] is the localization map on these coordinates. For every finite inclusion $E\\subset E'$ in $\\overline{\\mathbf Q}_\\ell$, the canonical completed integral scalar-extension comparison [def-weil-integral-scalar-extension, lem-weil-point-sections-scalar-extension] gives isomorphisms\n$$V_{\\mathcal O_E,m}\\otimes_{\\mathcal O_E}\\mathcal O_{E'}\\xrightarrow{\\sim}V_{\\mathcal O_{E'},m},\\qquad V_{E,m}\\otimes_E E'\\xrightarrow{\\sim}V_{E',m},$$\ntaking $e_{m,E}\\otimes b$ to $b e_{m,E'}$, where $e_{m,E}=e_{m,\\mathcal O_E}\\otimes1$. The analogous formula holds before rationalization. For negative $m$, these are the comparisons on sheaf duals normalized by evaluation equal to $1$ on the positive generator. They are the identity for $E'=E$ and commute with the canonical tensor associators for $E\\subset E'\\subset E''$. At algebraically closed coefficients the point fiber comparison is represented by these maps at any common finite stage and is independent of that stage.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Finite-reduction and scalar-extension sentence of def-weil-frobenius-coefficient-twists; canonical point comparisons of def-weil-finite-coefficient-point; Deligne Weil II (1.1.3), p. 150; returned item steps 8-9"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-coefficient-twists-detailed",
+  "def-weil-finite-coefficient-point",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-signed-twist-reduction-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "def-weil-frobenius-point-transport"
+ ],
+ "proof": [
+  {
+   "text": "Use normalizedSectionGenerators with the prescribed root section. It gives a single family g at all finite coefficient fields, with the original positive tensors, negative evaluation, positive finite reduction, and compatibility with every fixed signed scalar map. Obtain the finite section isomorphisms z separately from finiteSectionComparison.",
+   "uses": [
+    "lem-pur-point-tate-normalized-section-generators",
+    "lem-pur-point-tate-finite-section-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the explicitly constructed canonicalSheaf, canonicalIntegral and canonicalRational. The sheaf tensor formula follows by moving the tensor through the inverse ordinary-model comparison and applying integral_twist_base_change. The integral tensor formula is the pointSectionsTensor formula followed by that sheaf formula. Rational tensor normalization follows from pointTensorRationalization and the integral formula, with the coefficient one. Apply preservation of g to obtain both generator formulas. Rationalization compatibility is cancellation of an isomorphism with its inverse.",
+   "uses": [
+    "def-pur-point-tate-canonical-comparisons",
+    "lem-pur-point-tate-normalized-section-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For negative finite reduction, apply the normalized dual-evaluation clause of signedTwistReduction_comparison to g in degrees -(r+1) and r+1. The integral evaluation equals one and the coefficient quotient preserves one. For localization on a times g, apply pointFibreRationalDown_existsUnique on the pure tensor of one with a times g. Tensor balancing moves a into the field factor.",
+   "uses": [
+    "lem-weil-signed-twist-reduction-comparison",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Insert canonicalDerivedCoordinates to identify the actual rational normalization with size descent and exact-single transport, single.map of the constructed integral comparison with completedSectionsComparison, and the actual rational point scalar comparison with single.map of the constructed rational comparison.",
+   "uses": [
+    "lem-pur-point-tate-derived-comparison-coordinates"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The integral identity and tower equations follow from the constructed tensor formulas, twistScalarMaps_identity and twistScalarMaps_composition. Repeated use of the scalar-extension adjunction reduces equality to tensors whose new coefficients are one. The specified integral associator takes the double one tensor to the single one tensor. For rational identity and towers apply the coefficient adjunction as well, reducing to the rational tensor formula; use extendScalarsId_hom_app_one_tmul and the inverse of extendScalarsComp_hom_app_one_tmul. These are complete Lean proofs in PointTateFiberCanonicalComparisons.",
+   "uses": [
+    "def-pur-point-tate-canonical-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply canonicalCommonStage at M and at N to identify the source representatives of the fixed twistPairComparison. The defining representative formula of pointQbarFibre gives heterogeneous equalities for both. Rewrite by the source equalities; transitivity gives equality of the two representatives. Thus independence follows without introducing another arbitrary comparison family.",
+   "uses": [
+    "lem-pur-point-tate-common-stage-coherence",
+    "def-weil-finite-coefficient-point"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-point-tate-normalized-section-generators",
+  "lem-pur-point-tate-finite-section-comparison",
+  "def-pur-point-tate-canonical-comparisons",
+  "lem-weil-signed-twist-reduction-comparison",
+  "def-weil-finite-coefficient-point",
+  "lem-pur-point-tate-derived-comparison-coordinates",
+  "lem-pur-point-tate-common-stage-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Finite-reduction and scalar-extension sentence; the existing six-step argument assembled with concrete maps and four strict intermediate lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections of signed Tate lines on an algebraically closed pro-etale point identify with the coefficient ring in degree zero and commute with reduction and coefficient extension",
+   "results": "8 hits: StandardEtalePair.homEquiv_apply_coe, Algebra.Generators.cotangentCompAwaySec_apply, StandardEtalePair.homEquiv, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.instFormallyEtaleRing, StandardEtalePresentation.toPresentation_σ', Algebra.SubmersivePresentation.sectionCotangent_eq_iff, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical coefficient change maps on the fiber of a free rank one completed sheaf are isomorphisms normalized by its basis and transitive under field extensions",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeHomEquiv_comp_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "12 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a Tate twist on an algebraically closed point and compatibility of derived fibers with coefficient reduction",
+   "results": "8 hits: Algebra.Extension.H1Cotangent, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.tensorH1CotangentOfIsLocalization, KaehlerDifferential.cotangentComplexBaseChange_tmul, Algebra.Extension.H1Cotangent.map_apply_coe, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.formallyEtale_iff, Algebra.IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|point.*[Ss]calar.*[Ee]xtension|[Ss]ections.*[Cc]omplet",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sections tensor comparison for a completed rank one Tate line under finite reduction, localization and finite extension of coefficient fields",
+   "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletion, IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, IsDedekindDomain.FiniteAdeleRing.instDFunLikeHeightOneSpectrumAdicCompletion, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProduct_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not give the specified pro-etale completed Tate-line construction and its canonical coordinate compatibilities"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|[Ss]ections.*[Cc]omplet|point.*[Ss]calar.*[Ee]xtension",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary algebraic tensor/cotangent modules or free sheaves, not completed signed Tate lines and the specified point comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed Tate lines on a geometric point commute with coefficient reduction and finite field extension and the canonical maps preserve tensor generators",
+   "results": "8 hits: Algebra.Generators.baseChange, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, TensorProduct.fromDirectLimit, TensorProduct.AlgebraTensorModule.map_eq, Algebra.tensorH1CotangentOfIsLocalization, Algebra.Extension.Cotangent.of, FiniteField.instIsScalarTowerZModExtension, Algebra.EssFiniteType.baseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary algebraic tensor/cotangent modules or free sheaves, not completed signed Tate lines and the specified point comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical sections tensor comparison for signed Tate lines on an algebraically closed pro-etale point under reduction and completed coefficient extension",
+   "results": "8 hits: Algebra.Extension.tensorCotangentInvFun, Algebra.Extension.tensorH1Cotangent, Algebra.Extension.tensorCotangent, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Extension.tensorCotangentSpace, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap, Algebra.tensorH1CotangentOfIsLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary algebraic tensor/cotangent modules or free sheaves, not completed signed Tate lines and the specified point comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chosen generator of a free rank one module sheaf computes the canonical map on global sections under extension of coefficient rings",
+   "results": "8 hits: SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.Presentation.mapGenerators, SheafOfModules.freeMap, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.ιFree, SheafOfModules.GeneratingSections.π",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary algebraic tensor/cotangent modules or free sheaves, not completed signed Tate lines and the specified point comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twist-frobenius-scalar",
+  "date": "2026-10-22",
+  "group": "Q122"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Finite-reduction and scalar-extension sentence of def-weil-frobenius-coefficient-twists; canonical point comparisons of def-weil-finite-coefficient-point; Deligne Weil II (1.1.3), p. 150; returned item steps 8-9",
+   "via": [
+    "lem-pur-twist-frobenius-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-point-tate-fiber-coefficient-comparisons",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved each canonical map in the existing global signed root coordinates; used existing sheaf twist base change and the specified ordinary-to-completed comparison, rather than introducing duplicate coefficient-comparison clauses. Checked negative twists by evaluation and tower/common-stage coherence by explicit pure-tensor formulas. No new nodes.",
+  "blueprint": "Realizes the finite-reduction and scalar-extension sentence of def-weil-frobenius-coefficient-twists, through the parent lem-pur-twist-frobenius-scalar; its returned steps 8-9 are the coordinate comparisons proved here.",
+  "tool_uses": [
+   {
+    "node": "def-coefficient-twists-detailed",
+    "why": "Generic coefficient/point-functor interface used in the explicit Tate-line coordinate computation; the purity-conventions unit does not construct this interface."
+   },
+   {
+    "node": "lem-weil-integral-twist-base-change",
+    "why": "Generic coefficient/point-functor interface used in the explicit Tate-line coordinate computation; the purity-conventions unit does not construct this interface."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient/point-functor interface used in the explicit Tate-line coordinate computation; the purity-conventions unit does not construct this interface."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic coefficient/point-functor interface used in the explicit Tate-line coordinate computation; the purity-conventions unit does not construct this interface."
+   },
+   {
+    "node": "def-weil-finite-coefficient-point",
+    "why": "Generic coefficient/point-functor interface used in the explicit Tate-line coordinate computation; the purity-conventions unit does not construct this interface."
+   },
+   {
+    "node": "def-weil-algebraically-closed-coefficients",
+    "why": "Generic coefficient/point-functor interface used in the explicit Tate-line coordinate computation; the purity-conventions unit does not construct this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-coefficient-twists-detailed",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-finite-coefficient-point",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-e8d80ef70",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-e8d80ef70 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item with all six steps, and the statement of every cited node. There are no new nodes, and the statement is unchanged. The DAG has no cycle: a transitive closure over 12069 nodes contains neither the item nor its parent lem-pur-twist-frobenius-scalar. Step 1 (root-coordinates, same unit) gives the generators and section lines for B=O_E and A_{E,n}, with e_{-r}(e_r)=1. Step 2 computes finite reduction in the global bases, including the dual case (functional c e_{-r} goes to a e_r ↦ c̄ a); marking it elementary is justified, and it agrees with lem-weil-signed-twist-reduction-comparison. Step 3 checks that lem-weil-integral-twist-base-change gives O_E(m)⊗R_{E'} ≅ O_{E'}(m) by associativity, by the dual base-change map, and with evaluation compatibility, so the formula is e_m⊗b ↦ b e'_m for every sign. Step 4 uses χ of lem-weil-finite-free-completed-scalar-comparison and φ=(Γ(χ)∘θ)^{-1} of lem-weil-point-sections-scalar-extension; the item's map is (step-3 iso)∘θ, the right base-change morphism into the strict-tower completed category. Step 5 is the rational point functor, which is localization by def-weil-finite-coefficient-point item 3. The identity case and the tower case follow from pure-tensor formulas. Step 6 is the common-stage directed colimit, with compositum upper bounds. Edge cases checked: m=0, ±1, −r; n=1; E'=E; ramified E'/E. No duplicate in the DAG. Tool uses accepted: lem-weil-integral-twist-base-change and lem-weil-point-sections-scalar-extension are the two genuine off-route uses, both generic coefficient interfaces. The declared definition nodes are notions, and the χ lemma is on route via sk-def-sf-operations. FIX (C4/C1): step 4 used the global rank-one basis of lem-pur-point-tate-root-coordinates without citing it. That node is also what puts O_E(m) in D^b_c(s,O_E) for m≠1, because the definition node states this only for O_E(1). I added it to step 4's uses and wrote out the membership and K-flatness argument. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-point-tate-fiber-coefficient-comparisons.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointTateFiberCoefficientComparisons",
+  "declaration": "WeilConjectures.PointTateFiber.coefficientComparisons",
+  "declarations": [
+   "WeilConjectures.PointTateFiber.coefficientComparisons"
+  ],
+  "file": "lean/Sheaf/Paper/PointTateFiberCoefficientComparisons.lean",
+  "statement": "theorem coefficientComparisons (hl : l ≠ D.p)\n    (e : (purTwistZlOne (Spec (.of D.k)) l).obj.obj (finalObject D))\n    (he : ∀ r : ℕ, IsPrimitiveRoot\n      (rootValue D (l ^ (r + 1))\n        ((limit.π (proEtaleRootsOfUnityTower (Spec (.of D.k)) l Fact.out) (op r)).hom.app\n          (finalObject D) e)) (l ^ (r + 1))) :\n    ∃ (g : ∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (m : ℤ), integral D l F m)\n      (z : FiniteComparisons D l) (β : SheafComparisons D l)\n      (α : IntegralComparisons D l) (ρ : RationalComparisons D l),\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (r : ℕ),\n      g F (r : ℤ) = positiveGenerator D l F e r) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (r : ℕ),\n      integralEvaluate D l F r (g F (Int.negSucc r))\n        (positiveGenerator D l F e (r + 1)) = 1) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (n : ℕ) (m : ℤ)\n        (a : Padic.coefficientExtensionRing l F (n + 1)) (x : integral D l F m),\n      (z F n m).hom (a ⊗ₜ[Padic.coefficientExtensionIntegers l F,\n          Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l F (n + 1))] x) =\n        a • (@id (finite D l F n m)\n          ((reduction D l F hl n m).val.app (finalObject D) x))) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (n r : ℕ),\n      (reduction D l F hl n (r : ℤ)).val.app (finalObject D) (g F (r : ℤ)) =\n        finiteTateProPowerGenerator l F n (Spec (.of D.k)) (finalObject D) 1 r\n          (fun _ ↦ e)) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (n r : ℕ),\n      finiteEvaluate D l F n r\n        ((reduction D l F hl n (Int.negSucc r)).val.app (finalObject D)\n          (g F (Int.negSucc r)))\n        ((reduction D l F hl n ((r + 1 : ℕ) : ℤ)).val.app\n          (finalObject D) (g F ((r + 1 : ℕ) : ℤ))) = 1) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (m : ℤ),\n      (rationalLineNormalization D l F hl m).hom =\n        (rationalSizeNormalization D l F hl m).hom ≫\n          (Functor.mapDerivedCategory.{u + 1, u + 2, u + 1, u + 1, u + 2, u + 2}\n            (pointFibreCoefficientDown F)).map\n            (rawRationalSingle D l F m).hom ≫\n          ((pointFibreCoefficientDown F).mapDerivedCategorySingleFunctor 0).hom.app _ ≫\n          (DerivedCategory.singleFunctor _ 0).map\n            ((pointFibreRationalDown_existsUnique D l F).exists.choose.hom.app\n              (integralTwistLine l F (Spec (.of D.k)) m)) ∧\n      ∀ a : Padic.coefficientExtensionIntegers l F,\n        ((pointFibreRationalDown_existsUnique D l F).exists.choose.hom.app\n          (integralTwistLine l F (Spec (.of D.k)) m))\n          ((ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}\n            (pointIntegralToField l F)).unit.app\n            ((pointIntegralSections l F D.k).obj\n              (integralTwistLine l F (Spec (.of D.k)) m)) (a • g F m)) =\n        (a : F) • ((1 : F) ⊗ₜ[Padic.coefficientExtensionIntegers l F,\n          algebraMap (Padic.coefficientExtensionIntegers l F) F] g F m)) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (L : Type u) [Field L] [Algebra (Padic l) L]\n        [FiniteDimensional (Padic l) L] (ι : F →ₐ[Padic l] L) (m : ℤ),\n      (∀ (U : (Spec (.of D.k)).ProEtᵒᵖ)\n          (b : (completedIntegralCommRingSheafUnrestricted l L (Spec (.of D.k))).obj.obj U)\n          (x : (integralTwistLine l F (Spec (.of D.k)) m).val.obj U),\n        (β F L ι m).hom.val.app U\n          (completedScalarTensorSection l F L ι (Spec (.of D.k)) _ U b x) =\n        b • (@id ((integralTwistLine l L (Spec (.of D.k)) m).val.obj U)\n          ((scalarMap D l F hl L ι m).val.app U x))) ∧\n      (α F L ι m).hom =\n        (pointSectionsTensor D.k l F L ι).hom.app (integralTwistLine l F (Spec (.of D.k)) m) ≫\n          (pointCompletedSections D.k l L).map (β F L ι m).hom ∧\n      (DerivedCategory.singleFunctor _ 0).map (α F L ι m).hom =\n        completedSectionsComparison D l F hl L ι m β ∧\n      (∀ b : Padic.coefficientExtensionIntegers l L,\n        (α F L ι m).hom (b ⊗ₜ[Padic.coefficientExtensionIntegers l F,\n          integralScalarIntegerInclusion l F L ι] g F m) = b • g L m) ∧\n      (∀ b : L, (ρ F L ι m).hom\n        (b ⊗ₜ[F, ι.toRingHom] ((1 : F) ⊗ₜ[Padic.coefficientExtensionIntegers l F,\n          algebraMap (Padic.coefficientExtensionIntegers l F) F] g F m)) =\n        b • ((1 : L) ⊗ₜ[Padic.coefficientExtensionIntegers l L,\n          algebraMap (Padic.coefficientExtensionIntegers l L) L] g L m)) ∧\n      (pointModuleRationalization l L).map (α F L ι m).hom =\n        ((pointTensorRationalization_existsUnique l F L ι).exists.choose).hom.app\n          (integral D l F m) ≫ (ρ F L ι m).hom) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (L : Type u) [Field L] [Algebra (Padic l) L]\n        [FiniteDimensional (Padic l) L] (ι : F →ₐ[Padic l] L) (m : ℤ),\n      letI := frobeniusPointPrimeInvertible D l hl\n      (Functor.mapDerivedCategory.{u, u + 2, u, u + 1, u + 1, u + 2}\n        (ModuleCat.uliftFunctor.{u + 1, u} L)).map\n          (rationalPointComparison D l F hl L ι m β).hom.hom ≫\n        (rationalLineNormalization D l L hl m).hom =\n      (pointFibreTensorLiftIso l F L ι).hom.app\n          ((pointRationalFibre D l hl F).obj\n            (sfRationalTwistingCoefficient l F (Spec (.of D.k)) m)).obj ≫\n        (pointCoefficientFieldDerivedTensor l F L ι).map\n          (rationalLineNormalization D l F hl m).hom ≫\n        ((ModuleCat.extendScalars ι.toRingHom).mapDerivedCategorySingleFunctor 0).hom.app\n          (rational D l F m) ≫\n        (DerivedCategory.singleFunctor _ 0).map (ρ F L ι m).hom) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (m : ℤ),\n      (α F F (AlgHom.id (Padic l) F) m).hom =\n        ((pointIntegralModuleUnit_existsUnique l F).exists.choose).hom.app (integral D l F m) ∧\n      (ρ F F (AlgHom.id (Padic l) F) m).hom =\n        (ModuleCat.extendScalarsId.{u, u + 1} F).hom.app (rational D l F m)) ∧\n    (∀ (F : Type u) [Field F] [Algebra (Padic l) F]\n        [FiniteDimensional (Padic l) F] (L : Type u) [Field L] [Algebra (Padic l) L]\n        [FiniteDimensional (Padic l) L] (ι : F →ₐ[Padic l] L)\n        (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]\n        (κ : L →ₐ[Padic l] M) (m : ℤ),\n      (pointIntegralModuleTensor l L M κ).map (α F L ι m).hom ≫ (α L M κ m).hom =\n        ((pointIntegralModuleAssoc_existsUnique l F L ι M κ).exists.choose).hom.app\n          (integral D l F m) ≫ (α F M (κ.comp ι) m).hom ∧\n      (ModuleCat.extendScalars κ.toRingHom).map (ρ F L ι m).hom ≫ (ρ L M κ m).hom =\n        (ModuleCat.extendScalarsComp.{u, u + 1} ι.toRingHom κ.toRingHom).inv.app\n          (rational D l F m) ≫\n          (ρ F M (κ.comp ι) m).hom) ∧\n    (∀ (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n        (F L M N : Padic.FiniteCoefficientFields l Ω) (hFL : F ≤ L)\n        (hFM : F ≤ M) (hLM : L ≤ M) (hMN : M ≤ N) (m : ℤ),\n      HEq ((pointQbarFibre D l hl Ω).map\n          (twistPairComparison D l hl Ω F L hFL m β))\n        (pointQbarFibreRepresentative D l hl Ω\n          (twistPair D l hl Ω F m) (twistPair D l hl Ω L m) M hFM hLM\n          ((stageLineComparison D l hl Ω F M hFM m β).hom ≫\n            (stageLineComparison D l hl Ω L M hLM m β).inv)) ∧\n      pointQbarFibreRepresentative D l hl Ω\n        (twistPair D l hl Ω F m) (twistPair D l hl Ω L m) M hFM hLM\n        ((stageLineComparison D l hl Ω F M hFM m β).hom ≫\n          (stageLineComparison D l hl Ω L M hLM m β).inv) =\n      pointQbarFibreRepresentative D l hl Ω\n        (twistPair D l hl Ω F m) (twistPair D l hl Ω L m) N\n        (hFM.trans hMN) (hLM.trans hMN)\n        ((stageLineComparison D l hl Ω F N (hFM.trans hMN) m β).hom ≫\n          (stageLineComparison D l hl Ω L N (hLM.trans hMN) m β).inv))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of L H3 x2 at 04c844db511c: the localization clause identifies the actual pointRationalNormalization on the signed twist with its size-descent and exact-single tensor composite and gives its localization formula. The canonical completed twist comparison is rationalized and its actual point scalar map is explicitly identified with rho after the recorded normalization and tensor/lift transport. The final clause applies pointQbarFibre to this specific twistPair F to twistPair L comparison and identifies its representatives made from the same comparisons at every common stage, with independence after every enlargement. Original generator, finite reduction, sheaf-dual, chi/phi, unit and tower clauses retained. Owned helpers are real composites; only the main theorem is sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad347b341",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery after 04c844 RETURN (H3 x2), both repaired. (1) Localization: the new clause equates the recorded pointRationalNormalization on sfRationalTwistingCoefficient with sizeNorm ≫ down.map(rawRationalSingle) ≫ single.map(pointFibreRationalDown_existsUnique.choose.app V), matching the dep definitions factor by factor, and gives the localization formula a•g ↦ a•(1⊗g); the clause is now tied to the actual point fibre. New clause: pointRationalFibreScalarIso⁻¹ ≫ fibre(rationalized χ/β line comparison), conjugated by the normalizations and pointFibreTensorLiftIso, = single.map ρ. (2) Q̄: canonical twistPairComparison F→L (stage object equality + rationalLineComparison), whose pointQbarFibre image is HEq the representative at every common M of stage F M ≫ (stage L M)⁻¹ and equal after any enlargement N; this needs the tower coherence, so it is not the dep spec, and there is no arbitrary f. Mechanical theorem-stmt_dep finding: reduction = .choose of the signedTwistReduction_comparison ∃!, an object the theorem constructs → PASS on that point. Node fields unchanged; lean.statement verbatim; declarations list = file decls (26); only sorry is the main theorem; new helpers are real composites; docstrings and steps 5-6 updated; edge cases m=0,±1,negSucc, n=0, E'=E, M=L covered; universes as in the dep. Advisory: 2nd Q̄ conjunct redundant; local [-instance] residueLisseAlgebraHasDerivedCategory, harmless. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9358e",
+  "group": "T8",
+  "result": "fix",
+  "landing": "20261025T164411-L-1009148",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 9358 vs d9f7 delivered files (Lean+nodes byte-identical) and vs my d9f7 fixes (all lost); moved Data block and coefficientComparisons statement vs clone a81c27f (identical)"
+ }
+}

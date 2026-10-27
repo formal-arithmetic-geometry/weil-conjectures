@@ -1,0 +1,203 @@
+{
+ "id": "lem-sfb-graphs-open-in-hilbert",
+ "kind": "statement",
+ "title": "The graph transformation into the Hilbert functor is an open immersion",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $Z\\to S$ be proper [def-weil-proper-morphism], flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], and let $X\\to S$ be separated [def-weil-proper-morphism]. Write $Z_T=Z\\times_ST$, $X_T=X\\times_ST$ [def-pc-fibre-product]. The graph construction is a natural injective transformation from $T\\mapsto\\operatorname{Hom}_T(Z_T,X_T)$ into the functor of closed subschemes [def-weil-closed-immersion] of $(Z\\times_SX)_T$ that are proper, flat and finitely presented over $T$. This transformation is representable by open immersions [def-weil-open-immersion]. Explicitly, for each such closed subscheme $D\\subset Z_T\\times_TX_T$, there is an open $U\\subset T$ such that, for every $T'\\to T$, $D_{T'}\\to Z_{T'}$ is an isomorphism exactly when $T'\\to T$ factors through $U$. On this open the corresponding morphism is $\\operatorname{pr}_2\\circ(\\operatorname{pr}_1|_D)^{-1}$. In particular, any representing Hilbert scheme contains the relative morphism functor as this open subscheme, with universal evaluation and compatibility with all base changes.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A and 0D1B, quot-lemma-Mor-into-Hilb and quot-lemma-Mor-into-Hilb-open (scheme specialization of the algebraic-space statements)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-sfb-proper-hilbert-presheaf",
+  "def-sfb-relative-morphisms-presheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-hilbert-graph-family-base-change] to the given $Z\\to S$ and $X\\to S$. It constructs the actual closed graph families and the natural transformation $\\gamma$ into the stated proper Hilbert presheaf, and gives properness, flatness and finite presentation of every $Z_T\\to T$.",
+   "uses": [
+    "lem-sfb-hilbert-graph-family-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1A, graph construction and naturality"
+   }
+  },
+  {
+   "text": "For a Hilbert family $D$ over $T$, let $k:D\\to Z_T$ be the first projection. Apply [lem-sfb-universal-isomorphism-open] with $B=T$, $A=D$, $C=Z_T$, $p:D\\to T$ and $q:Z_T\\to T$. The proper Hilbert-family definition [def-sfb-proper-hilbert-presheaf] makes $p$ flat, finitely presented and proper. Thus $p$ is locally of finite presentation and universally closed. Step 1 makes $q$ proper, hence separated, locally of finite type and closed, by [def-weil-proper-morphism]. All six hypotheses hold. The resulting open $U_D\\subseteq T$ has the required isomorphism criterion for every test map, without any finiteness or flatness condition on $X/S$.",
+   "uses": [
+    "lem-sfb-universal-isomorphism-open",
+    "def-sfb-proper-hilbert-presheaf",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1B, invoking Tag 05XD"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-graph-projection-functor-comparison] with $F$ the proper Hilbert presheaf and with $\\gamma$ from Step 1. Step 2 supplies its universal first-projection opens. The comparison identifies each $h_T\\times_F\\mathcal M$ with $h_{U_D}$, proves injectivity, and recovers the unique morphism as $\\operatorname{pr}_2\\circ(\\operatorname{pr}_1|_D)^{-1}$. If $H$ represents $F$, the same comparison at its universal family gives the open representing scheme, its evaluation and compatibility with every base change. These are all the remaining conclusions.",
+   "uses": [
+    "lem-sfb-graph-projection-functor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D1A--0D1B, graph recovery and functor comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-hilbert-graph-family-base-change",
+  "lem-sfb-universal-isomorphism-open",
+  "def-sfb-proper-hilbert-presheaf",
+  "def-weil-proper-morphism",
+  "lem-sfb-graph-projection-functor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tags 0D1A and 0D1B, with the scheme specialization of Tag 05XD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The relative morphism functor is an open subfunctor of the Hilbert scheme via graphs",
+   "results": "{\"t\": \"2026-10-22T03:44:17Z\", \"tool\": \"leansearch\", \"query\": \"The relative morphism functor is an open subfunctor of the Hilbert scheme via graphs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.opensDiagram\", \"AlgebraicGeometry.opensDiagram_obj\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor\", \"AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.opensFunctor\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.opensFunctor\", \"AlgebraicGeometry.Scheme.restrictFunctor_obj_hom\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.opensFunctor\"], \"digest\": \"c178c7f80c369932\"}; no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor.",
+   "date": "2026-10-22",
+   "verdict": "no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor."
+  },
+  {
+   "tool": "grep",
+   "query": "Mor.*Hilb|Hilb.*Mor|[Hh]om[Ss]cheme|[Hh]ilbert.*[Ff]unctor",
+   "results": "{\"t\": \"2026-10-22T03:44:17Z\", \"tool\": \"grep\", \"query\": \"Mor.*Hilb|Hilb.*Mor|[Hh]om[Ss]cheme|[Hh]ilbert.*[Ff]unctor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor.",
+   "date": "2026-10-22",
+   "verdict": "no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"graph\"",
+   "results": "{\"t\": \"2026-10-22T03:44:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"graph\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor.",
+   "date": "2026-10-22",
+   "verdict": "no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graphs of morphisms from a proper flat finitely presented scheme form an open subfunctor of the Hilbert functor",
+   "results": "{\"t\": \"2026-10-22T03:44:19Z\", \"tool\": \"leanfinder\", \"query\": \"Graphs of morphisms from a proper flat finitely presented scheme form an open subfunctor of the Hilbert functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.AffineSpace.isOpenMap_over\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.V\", \"AlgebraicGeometry.Scheme.Hom.opensRange\", \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\"], \"digest\": \"5b172e24f74395a5\"}; no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor.",
+   "date": "2026-10-22",
+   "verdict": "no match: open maps, open-immersion ranges and opens functors do not parametrize graphs in a Hilbert functor."
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.*functor|Mor.*Hilb|Hilb.*Mor|HomScheme",
+   "results": "{\"t\": \"2026-10-22T04:01:07Z\", \"tool\": \"grep\", \"query\": \"Hilbert.*functor|Mor.*Hilb|Hilb.*Mor|HomScheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Graphs of morphisms form an open subfunctor of the Hilbert scheme",
+   "results": "{\"t\": \"2026-10-22T04:01:07Z\", \"tool\": \"leansearch\", \"query\": \"Graphs of morphisms form an open subfunctor of the Hilbert scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.opensDiagram\", \"AlgebraicGeometry.opensDiagram_obj\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor_map_homOfLE\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor\", \"AlgebraicGeometry.Scheme.Hom.opensFunctor.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.instIsContinuousOpensOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.Hom.image_le_image_of_le\", \"AlgebraicGeometry.opensDiagram_map\"], \"digest\": \"cb1b4974ff9f262e\"}; no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"graph\"",
+   "results": "{\"t\": \"2026-10-22T04:01:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"graph\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph map from the relative Hom functor of a proper flat finitely presented scheme to the Hilbert functor is representable by open immersions",
+   "results": "{\"t\": \"2026-10-22T04:01:08Z\", \"tool\": \"leanfinder\", \"query\": \"The graph map from the relative Hom functor of a proper flat finitely presented scheme to the Hilbert functor is representable by open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.instIsOpenImmersionMapI₀Functor\", \"AlgebraicGeometry.Scheme.LocalRepresentability.instIsOpenImmersionToGlued\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V\"], \"digest\": \"a11d18e88885997f\"}; no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem.",
+   "date": "2026-10-22",
+   "verdict": "no match: opens functors and gluing representability theorems do not state the graph-to-Hilbert open-immersion theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-hom-closure",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation",
+   "via": [
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-graphs-open-in-hilbert",
+  "worker": "stage1",
+  "summary": "Repair of the human-mandated re-split: extracted two independent statement-only tasks of comparable argument size, graph-family base change (old steps 1--2) and general graph-projection functor comparison/evaluation (old steps 3,5,6). Kept the six-hypothesis geometric open-locus application in the parent. All old argument text is retained in the report; parent statement and literature route are unchanged.",
+  "blueprint": "The item serves de Jong 3.9 in the existing ancestry: passage from Hilbert schemes to the relative morphism scheme and its evaluation. Steps 1--3 realize quot.tex 0D1A; steps 4--5 realize 0D1B using 05XD; step 6 spells out the representing-scheme/evaluation consequence. The nearest blueprint ancestor is null in the live ancestry; its inherited from.node and via were preserved. Re-split: graph-family node carries old steps 1--2; comparison node carries old steps 3,5,6; parent applies 05XD in old step 4. Both inherit the null nearest blueprint ancestor and exact via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-775e79a59",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-775e79a59 (reviewer sub-agent of L); spot-checked: Re-split note (live coord/repair-notes, released 2026-10-22) is satisfied. The parent statement is identical to live; only proof, proof_deps and split_report changed. All six base steps are kept verbatim in the report. Old steps 1-2 (1769 chars) went to the new node lem-sfb-hilbert-graph-family-base-change. Old steps 3, 5 and 6 (2013 chars) went to the new node lem-sfb-graph-projection-functor-comparison. Old step 4 (the 05XD hypothesis check through the existing node lem-sfb-universal-isomorphism-open) stays as parent step 2 with the same content. The parent proof is 1488 chars, and the two new nodes are of comparable size. Sources checked: Stacks quot.tex 0D1A (l.3140) and 0D1B (l.3176), tags confirmed. Graph-family node: true. The graph is the base change of the diagonal of a separated morphism, its image is isomorphic to Z_T so the family is proper, flat and finitely presented, and the graph is compatible with pullback. It is not a duplicate of def-sfb-relative-morphisms-presheaf, def-sfb-proper-hilbert-presheaf or the nagata graph uses. Comparison node: a formal, conditional generalisation, checked as true. Graph recovery j = Γ_f∘k is scheme-theoretic, so thickenings are correctly excluded. Given the U_D inputs, the fibre product is h_{U_D}. The universal family gives the evaluation, and the open and the inverse are compatible with base change. Tested on a k-point mapping to A^1. It does not restate the parent, because the geometric inputs come from the other new node and from 05XD. Parent assembly: Hilb^proper meets the presheaf hypotheses, all six 05XD hypotheses hold, every clause of the item follows, and proof_deps is the union of the step uses. No SGA source. Mathlib searches are recorded (one leansearch hit a rate limit). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GraphsOpenInHilbert",
+  "declaration": "AlgebraicGeometry.graphs_open_in_hilbert",
+  "file": "lean/Sheaf/AlgebraicGeometry/GraphsOpenInHilbert.lean",
+  "statement": "theorem graphs_open_in_hilbert {Z X S : Scheme.{u}} (z : Z ⟶ S) (x : X ⟶ S) [IsProper z] [Flat z] [LocallyOfFinitePresentation z] [IsSeparated x] : ∃ γ : relativeMorphismsPresheaf z x ⟶ properHilbertPresheaf (pullback.fst z x ≫ z), (∀ (T : Over S) (f : (relativeMorphismsPresheaf z x).obj (op T)), IsClosedImmersion (relativeMorphismGraph z x T f) ∧ (γ.app (op T) f).1 = (relativeMorphismGraph z x T f).ker) ∧ (∀ T : Over S, Function.Injective (γ.app (op T))) ∧ ((@IsOpenImmersion : MorphismProperty Scheme.{u}).over (X := S)).presheaf γ ∧ (∀ (T : Over S) (D : (properHilbertPresheaf (pullback.fst z x ≫ z)).obj (op T)), ∃ U : T.left.Opens, ∀ (T' : Over S) (h : T' ⟶ T), IsIso (((properHilbertPresheaf (pullback.fst z x ≫ z)).map h.op D).1.subschemeι ≫ graphFirstProjection z x T') ↔ ∃ a : T'.left ⟶ U.toScheme, a ≫ U.ι = h.left) ∧ (∀ (T : Over S) (D : (properHilbertPresheaf (pullback.fst z x ≫ z)).obj (op T)) (e : D.1.subscheme ≅ pullback T.hom z), e.hom = D.1.subschemeι ≫ graphFirstProjection z x T → ∃ f : (relativeMorphismsPresheaf z x).obj (op T), γ.app (op T) f = D ∧ f.left = e.inv ≫ D.1.subschemeι ≫ graphSecondProjection z x T) ∧ (∀ (H : Over S) (eH : (properHilbertPresheaf (pullback.fst z x ≫ z)).RepresentableBy H), ∃ (M : Over S) (i : M ⟶ H) (eM : (relativeMorphismsPresheaf z x).RepresentableBy M), IsOpenImmersion i.left ∧ (∀ (T : Over S) (a : T ⟶ M), eH.homEquiv (a ≫ i) = γ.app (op T) (eM.homEquiv a)) ∧ ∃ ev : pullback M.hom z ⟶ X, ev = (eM.homEquiv (𝟙 M)).left ∧ (∀ (T : Over S) (a : T ⟶ M), (eM.homEquiv a).left = ((Over.pullback z).map a).left ≫ ev))",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9fced69a4",
+  "group": "NR",
+  "result": "pass",
+  "note": "Read item, all 9 stmt_deps, the 2 new def nodes, the 3 delivered modules, and quot.tex 0CZY/0D1A/0D1B plus spaces-more-morphisms 05XD. Hypotheses are exactly IsProper/Flat/LFP on z and IsSeparated on x (proper makes LFP = fp); universe u throughout. relativeMorphismsPresheaf = (Over.pullback z ⋙ Over.map z).op ⋙ yoneda.obj (Over.mk x) with the real graph and projections. properHilbertPresheaf = IdealSheafData proper/flat/LFP over T, maps by comap along baseChangeMap (pullback.map), complete permanence proofs. γ components pinned to graph ker; injective; IsOpenImmersion.over.presheaf; universal open locus tested on all T'→T; recovery l∘k⁻¹; representing-Hilb clause with open M, γ-compatibility and evaluation. No duplicate: fixed-degree hilbertPresheaf and NE's RelativeHomSchemeData are different notions. lean.statement fields verbatim; vs live only lean and stmt_deps (+2 new used def nodes) differ; one sorry; docstrings have source, blueprint and 6 proof steps. Advisories: ProperHilbertPresheaf docstrings cite 0D1A not the node's 0CZY; baseChangeMap from PicardFunctor is outside stmt_deps; second reading is a self-reading. No compile run (no file changed)."
+ }
+}

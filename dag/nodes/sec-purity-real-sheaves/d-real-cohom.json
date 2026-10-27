@@ -106,14 +106,29 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-cohom",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "For any abelian sheaf $A$ on the etale site, ordinary cohomology means\n$H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution.\nFor a constructible Weil sheaf $\\mathcal K$ of\n[def-weil-weil-sheaf-complex] on a\ncurve in the sense of [d-real-setup], $H^i(C,\\mathcal K)$ and $H_c^i(C,\\mathcal K)$\nare the etale cohomology groups obtained from derived global sections\nand derived sections with proper support. With an adic lattice, take\nthe derived inverse limit of its finite coefficient levels and then\ninvert $\\ell$; extend the finite coefficient field as needed.\nThey carry geometric Frobenius $F$ in the convention of [d-real-setup],\nwith Tate twists the constant Weil twists of [def-wf-constant-weil-twist].\nUsing the local characteristic factors $P_x$ of [def-wf-iota-real], the\nEuler series is\nthe locally finite formal product\n\n$$\nL_\\iota(C_0,\\mathcal K,T)\n=\\prod_{x\\in|C_0|}\\iota P_x(\\mathcal K,T^{e_x})^{-1}\n\\in 1+T\\mathbf C[[T]].\n$$\n\nLocally finite means that only finitely many factors contribute to any\nfixed coefficient; there are finitely many closed points of bounded degree.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For an abelian sheaf $A$ on the étale site (for instance a torsion sheaf),\nordinary cohomology means $H^i(C,A)=R^i\\Gamma(C_{\\mathrm{ét}},A)$, computed by an\ninjective resolution. For a constructible Weil sheaf $\\mathcal K$ of\n[def-weil-weil-sheaf-complex] on a\ncurve in the sense of [d-real-setup], i.e. $\\mathcal K\\in\\Cons(C,\\Qlb)$\n([sk-lem-coefficient-heart]) with a Weil structure, or more generally for a Weil\ncomplex with underlying object in $\\Dbc(C,\\Qlb)$ ([det-def-sfb-bounded-constructible]),\nput\n\n$$\nH^i(C,\\mathcal K)=H^iR\\Gamma(C_{\\mathrm{proét}},\\mathcal K),\\qquad\nH^i_c(C,\\mathcal K)=H^i\\bigl(Ra_!\\mathcal K\\bigr),\n$$\n\nwith $a:C\\to\\operatorname{Spec}k$ the structure map, computed in\n$D(-_{\\mathrm{proét}},\\Qlb)$ ([det-def-sfb-derived-categories]). They are\nfinite-dimensional $\\Qlb$-vector spaces, vanishing outside finitely many degrees, since\n$Ra_*$ and $Ra_!$ preserve $\\Dbc$ ([sk-thm-sf-ctf-stability]).\nThey carry geometric Frobenius $F$, induced by the Weil structure, in the convention of [d-real-setup],\nwith Tate twists the constant Weil twists of [def-wf-constant-weil-twist].\n\n*Comparison with the classical description.* This is a consequence, not part of the\ndefinition. By [sk-thm-sfb-qlbar-two-colimit] there are a finite $E/\\Ql$ and\n$\\mathcal K_E\\in\\Dbc(C,E)$ with $\\mathcal K\\simeq\\mathcal K_E\\otimes_{E_C}\\overline{\\mathbf Q}_{\\ell,C}$,\nand by [sk-thm-sfb-rationalization-comparison] and [sk-lem-integral-models] an integral\nmodel $\\mathcal K_0\\in\\Dbc(C,\\cO_E)$ with $\\mathcal K_0[1/\\ell]\\simeq\\mathcal K_E$.\nThe coefficient comparisons of [sk-prop-scalar-six] give\n$R\\Gamma(C,\\mathcal K)\\simeq R\\Gamma(C,\\mathcal K_0)\\otimes_{\\cO_E}\\Qlb$ and\n$R\\Gamma(C,\\mathcal K_0)\\otimes^{\\mathbf L}_{\\cO_E}\\cO_E/\\pi_E^n\\simeq\nR\\Gamma(C,\\mathcal K_0\\otimes^{\\mathbf L}\\cO_E/\\pi_E^n)$, and likewise for $Ra_!$.\nSince $\\mathcal K_0$ is derived complete ([def-pe-derived-complete], [sk-prop-integral-criterion],\n[sk-prop-sfb-qlbar-colimit-x]) and $R\\Gamma$ commutes with derived limits,\n$R\\Gamma(C,\\mathcal K_0)\\simeq R\\varprojlim_nR\\Gamma(C,\\mathcal K_0\\otimes^{\\mathbf L}\\cO_E/\\pi_E^n)$\n(compare [sk-prop-pe-continuous-cohomology]), and the finite levels are étale\ncohomology with torsion coefficients. Thus $H^i(C,\\mathcal K)$ is the classical\n$\\ell$-adic cohomology: derived limit over the finite levels of a lattice, then\ninvert $\\ell$ and extend scalars to $\\Qlb$; likewise for $H^i_c$.\n\nUsing the local characteristic factors $P_x$ of [sk-d-real-weights], the\nEuler series is\nthe locally finite formal product\n\n$$\nL_\\iota(C_0,\\mathcal K,T)\n=\\prod_{x\\in|C_0|}\\iota P_x(\\mathcal K,T^{e_x})^{-1}\n\\in 1+T\\mathbf C[[T]].\n$$\n\nLocally finite means that only finitely many factors contribute to any\nfixed coefficient; there are finitely many closed points of bounded degree.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "split_report": {
   "date": "2026-10-18",

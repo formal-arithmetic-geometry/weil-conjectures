@@ -1,0 +1,161 @@
+{
+ "id": "lem-sfb-integral-residue-model-comparison",
+ "kind": "statement",
+ "title": "Normalized isomorphism of the two derived first residues",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme X. Let k be the lifted valuation ring modulo the first power of its lifted uniformizer ideal [det-prop-integral-criterion-constant-coefficients]. Use the ring equivalence ULift(O_E/(pi_E)) ≃+* k induced by the existing integralCoefficientULift. Let c be a discrete coefficient presentation normalized by this equivalence, with its additive equivalence functor F [lem-sfb-discrete-coefficient-model]. For every internal complex K over continuous integral coefficients, F on derived categories takes the derived first residue of the constant scalar restriction of K [def-sfb-integral-models-stacks-data] to an object isomorphic to fixedScalarDerivedModel of sfbResidueComplex of the canonical integral realization of K [def-sfb-integral-constant-model-realization, def-sfb-fixed-scalar-complex-model]. There are no Noetherian, completeness, constructibility or Tor assumptions on K.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099L, section-derived-completion-noetherian: the completed constant algebra is flat and identifies quotients; Tag 099M, lemma-naive-completion; Cohomology on Sites Tag 06YY, lemma-derived-base-change. Integral-models proof (1)--(2), comparison of the first reductions."
+ },
+ "stmt_deps": [
+  "det-prop-integral-criterion-constant-coefficients",
+  "lem-sfb-discrete-coefficient-model",
+  "def-sfb-integral-models-stacks-data",
+  "def-sfb-integral-constant-model-realization",
+  "def-sfb-fixed-scalar-complex-model"
+ ],
+ "proof": [
+  {
+   "text": "Select the uniquely normalized ordinary integer and first-residue comparison pair. Transport its integer isomorphism to the small site. Its reduction naturality and the normalized integralCoefficientULift representative equation give the discrete residue square. Uniqueness from DiscreteCoefficientNormalized identifies the given residue comparison c with this normalized one.",
+   "uses": [
+    "lem-sfb-discrete-coefficient-model",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sfb-integral-constant-section-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical ordinary finite-projection identity and the constant-to-small-site completion comparison to identify the scalar map with the constant coefficient map. The exact canonical integral module realization agrees with the section reconstruction followed by this coefficient restriction.",
+   "uses": [
+    "lem-sfb-integral-constant-section-projection",
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+    "lem-sfb-integral-models-complete-section-predicate",
+    "def-sfb-integral-constant-model-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The fixed-scalar small-site coordinate isomorphism identifies the literal constant-quotient module functor with normalized small-site coefficient restriction. Site precomposition and the two commuting ring squares therefore give ordinary restriction-of-scalars squares. Derive these exact squares and use inverse mates of the scalar adjunctions to identify the left derived extensions.",
+   "uses": [
+    "lem-sfb-fixed-scalar-small-coordinates",
+    "lem-sfb-integral-models-completion-transport",
+    "lem-stage3-inverse-mate-equivalences",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-sfb-constant-completion-coefficient-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite common quotient comparison of integral_constant_completion at index zero. Compose it with the derived square isomorphisms. The localization comparison for fixedScalarComplexToModel and Q.objObjPreimageIso remove the chosen representative in sfbResidueComplex, giving the required isomorphism for every K without completeness hypotheses.",
+   "uses": [
+    "det-prop-integral-criterion-constant-coefficients",
+    "def-sfb-fixed-scalar-etale-model",
+    "def-sfb-fixed-scalar-complex-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-coefficient-model",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-sfb-integral-constant-section-projection",
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-sfb-integral-models-complete-section-predicate",
+  "def-sfb-integral-constant-model-realization",
+  "lem-sfb-fixed-scalar-small-coordinates",
+  "lem-sfb-integral-models-completion-transport",
+  "lem-stage3-inverse-mate-equivalences",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-sfb-constant-completion-coefficient-data",
+  "det-prop-integral-criterion-constant-coefficients",
+  "def-sfb-fixed-scalar-etale-model",
+  "def-sfb-fixed-scalar-complex-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/_section.md",
+  "place": "Integral-models proof (1)--(2), via ordinary restriction squares, inverse mates and the index-zero common quotient comparison. The unit route through integral_constant_completion is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction modulo an ideal commutes with an exact monoidal equivalence of sheaves of modules",
+   "date": "2026-10-25",
+   "results": "8 hits, including LinearMap.reduceModIdeal, AdicCompletion.transitionMap_comp_reduceModIdeal, Ideal.qoutMapEquivTensorQout and presheaf module sheafification.",
+   "verdict": "Ordinary quotient and sheafification lemmas do not identify these two derived residue presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived extension of scalars to a residue ring is isomorphic under a normalized exact monoidal coefficient comparison",
+   "date": "2026-10-25",
+   "results": "8 hits, including ModuleCat.extendScalarsComp and unrelated cotangent exact sequences.",
+   "verdict": "No exact match. The existing normalized project common-quotient and tensor comparison declarations are the route."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*extendScalars|extendScalars.*mapDerivedCategory",
+   "date": "2026-10-25",
+   "results": "0 hits.",
+   "verdict": "No Mathlib derived residue comparison for these project coefficient functors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.IntegralResidueCoefficientTransport",
+  "date": "2026-10-25",
+  "group": "Z9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Integral-models proof (1)--(2): normalized common-quotient isomorphism of first reductions, independently of all finiteness predicates.",
+   "via": [
+    "lem-sfb-integral-residue-coefficient-transport",
+    "lem-sfb-integral-models-residue-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IntegralResidueModelComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralResidueModelComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_residue_model_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueTensorColimits",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueFlatResolution",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueExtensionKFlat",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integralResidueScalarEquiv",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_residue_model_comparison"
+  ],
+  "statement": "theorem integral_residue_model_comparison (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u})\n    (c : ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n        (IntegralConstantCompletion.integers l E ⧸\n          IntegralConstantCompletion.ideal l E ^ (0 + 1)) ≅\n      smallRing X (condensedRingObj\n        (discreteObj (Padic.coefficientExtensionRing l E 1)) X))\n    (hc : DiscreteCoefficientNormalized X (Padic.coefficientExtensionRing l E 1) _\n      (integralResidueScalarEquiv l E) c)\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj (integersObj l E) X))) :\n    letI := (residueTensorColimits X\n      (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X)).1\n    letI := (residueTensorColimits X\n      (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X)).2\n    letI := residueFlatResolution X\n      (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X)\n    letI := residueExtensionKFlat X _ _ (residueMap l E X)\n    letI := HasDerivedCategory.standard (ConstantCompletion.Mod\n      (ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X)\n        (IntegralConstantCompletion.integers l E ⧸\n          IntegralConstantCompletion.ideal l E ^ (0 + 1))))\n    Nonempty\n      ((discreteCoefficientModel X\n          (Padic.coefficientExtensionRing l E 1) _ c).mapDerivedCategory.obj\n        (show DerivedCategory.{u + 1}\n          (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n            (condensedRingObj (discreteObj (Padic.coefficientExtensionRing l E 1)) X)) from\n          (Mod.extendScalars (residueMap l E X)).leftDerivedFunctor.obj\n            ((restriction l E X).obj K)) ≅\n      Scheme.fixedScalarDerivedModel X\n        (IntegralConstantCompletion.integers l E ⧸\n          IntegralConstantCompletion.ideal l E ^ (0 + 1))\n        (Scheme.sfbResidueComplex X (IntegralConstantCompletion.ideal l E)\n          ((IntegralConstantModel.derived l E X).functor.obj K)))",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261025T212803-L-234683",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T024018-L-630468",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

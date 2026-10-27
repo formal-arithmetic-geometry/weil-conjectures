@@ -1,0 +1,267 @@
+{
+ "id": "lem-sfb-space-artinian-etale-lift-smooth-point",
+ "kind": "statement",
+ "title": "Pointwise smoothness from etale-local Artinian lifts",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $f:X\\to S$ be a locally finitely presented morphism of algebraic spaces [def-trf-algebraic-space, def-sfb-space-morphism-properties], and let $x\\in|X|$ [def-a1-space-point-topology]. Suppose that for every surjection $B'\\twoheadrightarrow B$ of Artinian local rings with square-zero kernel and every commutative diagram $\\operatorname{Spec}B\\xrightarrow{a}X$, $\\operatorname{Spec}B'\\xrightarrow{c}S$ with $a$ sending the unique point to $x$, there is an etale covering $\\{T_i\\to\\operatorname{Spec}B'\\}$ and maps $T_i\\to X$ over $S$ restricting to $a$ on $T_i\\times_{\\operatorname{Spec}B'}\\operatorname{Spec}B$. Here Artinian means that descending chains of ideals stabilize, and local means having a unique maximal ideal. Then $x$ has an open neighbourhood $V\\subset X$ [def-a1-space-open-subspace] on which $f$ is smooth, with smoothness tested on etale scheme charts [def-sbc-smooth-morphisms].",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0APN, lemma-lifting-along-artinian-at-point, Artinian small-extension test; Tag 04AM, lemma-smooth-formally-smooth, and the preceding discussion of the equivalent etale-local lifting convention. The etale-local Artinian form is the pointwise variant, with obstruction vanishing descended along the etale cover."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-sfb-space-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "Fix a test from the hypothesis, and put $T_0=\\operatorname{Spec}B$, $T=\\operatorname{Spec}B'$ and $I=\\ker(B'\\to B)$. The quotient presentation identifies $j:T_0\\hookrightarrow T$ with the affine first order thickening defined by $I$, since $I^2=0$. Apply [lem-sfb-space-infinitesimal-lift-pseudotorsor] to $f:X\\to S$, $j$, $a$ and $c$. It supplies a quasi-coherent module $H$ on $T$ and a sheaf $\\mathcal L$ of compatible lifts, with a simply transitive action of $H_{\\mathrm{et}}$ wherever a lift exists. The given etale covering and its lifts give local sections of $\\mathcal L$. Translation by each such section identifies the restricted lift sheaf with $H_{\\mathrm{et}}$ there. Thus $\\mathcal L$ is an $H_{\\mathrm{et}}$-torsor in the general abelian-sheaf sense of [def-sc-gm-torsor].",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+    "def-sc-gm-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 061A (lemma-sheaf), 061C (lemma-action-sheaf), 061D (remark-special-case); Tag 04AM (lemma-smooth-formally-smooth), proof, torsor steps (I) and (II)."
+   }
+  },
+  {
+   "text": "The scheme $T$ is affine and $H$ is quasi-coherent, so [lem-sc-etale-affine-qcoherent] gives $H^1(T_{\\mathrm{et}},H_{\\mathrm{et}})=0$. By [lem-sc-torsor-h1], the torsor $\\mathcal L$ is isomorphic to the trivial torsor $H_{\\mathrm{et}}$. The image of its zero section is a section of $\\mathcal L(T)$. By the definition of $\\mathcal L$, this is a map $\\gamma:T\\to X$ with $\\gamma j=a$ and $f\\gamma=c$. We have therefore obtained an actual global lift for every centered Artinian square-zero test in the hypothesis.",
+   "uses": [
+    "lem-sc-etale-affine-qcoherent",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P2 (theorem-zariski-fpqc-quasi-coherent), affine case; torsor classification: sites-cohomology.tex Tag 03AJ (lemma-torsors-h1)."
+   }
+  },
+  {
+   "text": "Choose a representable surjective etale scheme chart $q:U\\to X$ and a point $u\\in U$ over $x$, using the atlas in [def-trf-algebraic-space]. Write $g=fq:U\\to S$. By the chart definition [def-sfb-space-morphism-properties], applied with the identity chart of $S$, $g$ is locally of finite presentation. The calculus [lem-sfb-stack-chartwise-smooth-etale-calculus] gives that $g$ is locally of finite type and that $q$, being etale, is smooth. Algebraic spaces here are viewed as stacks with only identity arrows, so these representable-morphism laws apply.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-sfb-space-morphism-properties",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0APN (lemma-lifting-along-artinian-at-point), proof, choice of etale scheme charts; spaces-morphisms.tex Tag 0410 (lemma-finite-presentation-local)."
+   }
+  },
+  {
+   "text": "Consider any Artinian local square-zero test for $g$ at $u$, with $b:T_0\\to U$, $c:T\\to S$ and $gb=cj$. The map $qb$ sends the unique point of $T_0$ to $x$, so step 2 gives $\\gamma:T\\to X$ with $\\gamma j=qb$ and $f\\gamma=c$. Apply [lem-sfb-smooth-space-affine-infinitesimal-lift] to the smooth map $q:U\\to X$, the affine first order thickening $j$, and the maps $b$ and $\\gamma$, all over the scheme $S$. It gives $\\delta:T\\to U$ with $\\delta j=b$ and $q\\delta=\\gamma$. Then $g\\delta=fq\\delta=f\\gamma=c$. Consequently every such test for the scheme map $g$ has a global lift.",
+   "uses": [
+    "lem-sfb-smooth-space-affine-infinitesimal-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0APN (lemma-lifting-along-artinian-at-point), proof, transfer of tests to a chart; Tag 04AM (lemma-smooth-formally-smooth), smooth implies affine infinitesimal lifting."
+   }
+  },
+  {
+   "text": "In particular step 4 solves every small-extension test for $g$ at $u$: [lem-weil-pbc-smooth-artinian-lifting-at-point] states that these are Artinian local extensions with length-one kernel and in particular square-zero kernel. Its other hypotheses hold: $S$ is locally Noetherian and $g$ is locally of finite type by step 3. That criterion gives that $g$ is smooth at $u$. Now [lem-sfb-space-smooth-source-point-locality] applies to $f$ and the smooth map $q$ from step 3. Since $g=fq$, it implies that $f$ is smooth at $q(u)=x$. The same cited statement defines smoothness at a point as smoothness on an open neighbourhood; hence it supplies the required open subspace $V\\subset X$ containing $x$.",
+   "uses": [
+    "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "lem-sfb-space-smooth-source-point-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0APN (lemma-lifting-along-artinian-at-point), final chart reduction, using more-morphisms.tex Tag 02HX (lemma-lifting-along-artinian-at-point); smooth-source descent is spaces-descent.tex Tag 06F2 (lemma-smooth-smooth-local-source)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "lem-sfb-space-infinitesimal-lift-pseudotorsor",
+  "def-sc-gm-torsor",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1",
+  "def-trf-algebraic-space",
+  "def-sfb-space-morphism-properties",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-smooth-space-affine-infinitesimal-lift",
+  "lem-weil-pbc-smooth-artinian-lifting-at-point",
+  "lem-sfb-space-smooth-source-point-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0APN (lemma-lifting-along-artinian-at-point), chart reduction, preceded by the sheaf-of-lifts torsor argument of Tag 04AM (lemma-smooth-formally-smooth); scheme criterion Tag 02HX and smooth-source locality Tag 06F2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finitely presented morphism over a locally noetherian scheme, infinitesimal lifting for Artinian local test schemes centered at a point implies smoothness at that point",
+   "results": "8 hits; inspected results: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Artinian.*smooth|smooth.*Artinian|lifting.*smooth",
+   "results": "0 hits; inspected results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"Smooth\"",
+   "results": "12 hits; inspected results: Algebra.FormallySmooth.inst, Algebra.FormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallySmooth.polynomial, Algebra.FormallySmooth.of_isLocalization, Algebra.instFormallySmoothMvPolynomial, Algebra.FormallySmooth.of_equiv",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finitely presented morphism of algebraic spaces over a noetherian base is smooth at a point if every square zero extension of local Artinian test rings centered there admits a lift etale locally",
+   "results": "8 hits; inspected results: AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth.recOn, RingHom.smooth_def, Algebra.Smooth.finitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smoothness at a point of an algebraic space can be tested by existence of etale local lifts of maps from Artinian local rings across square zero extensions",
+   "results": "8 hits; inspected results: AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, rings, or topological groups, and do not state this algebraic-space assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "Artinian.*smooth|smooth.*Artinian|AlgebraicSpace",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern rings or schemes, not the algebraic-space pointwise Artinian etale-local criterion; none specializes in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Infinitesimal Artinian criterion for smoothness at a point of an algebraic space with etale local lifts",
+   "results": "8 hits; Algebra.IsSmoothAt, Algebra.FormallyEtale.instFormallySmooth, Algebra.FormallySmooth.of_comp_surjective, Algebra.FormallySmooth, Algebra.Smooth.formallySmooth, Algebra.FormallySmooth.lift, Algebra.FormallyEtale.of_unramified_and_smooth, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern rings or schemes, not the algebraic-space pointwise Artinian etale-local criterion; none specializes in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Smooth\", \"Artinian\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern rings or schemes, not the algebraic-space pointwise Artinian etale-local criterion; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finitely presented morphism of algebraic spaces over a locally Noetherian scheme is smooth at a point if all centered square zero Artinian local lifting problems have etale local solutions",
+   "results": "8 hits; AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern rings or schemes, not the algebraic-space pointwise Artinian etale-local criterion; none specializes in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth locus of an algebraic space determined by infinitesimal deformations over Artinian local rings and etale descent of the obstruction torsor",
+   "results": "8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth, Algebra.smoothLocus_eq_univ_iff, Algebra.etaleLocus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern rings or schemes, not the algebraic-space pointwise Artinian etale-local criterion; none specializes in one line"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-group-proper-neutral",
+  "date": "2026-10-23",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Proper neutral subgroup from local infinitesimal smoothness. Supporting input: Pointwise smoothness from etale-local Artinian lifts.",
+   "via": [
+    "lem-sfb-smooth-group-proper-neutral",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-artinian-etale-lift-smooth-point",
+  "worker": "stage1",
+  "group": "Q52",
+  "summary": "Kept the statement and its hypotheses. Made etale-local-to-global lifting explicit using the existing algebraic-space lift pseudo-torsor and affine quasi-coherent H1 vanishing; transferred the resulting global Artinian lifts to a smooth etale scheme chart, applied the existing scheme pointwise Artinian criterion, and descended smoothness at the chosen point. Reused existing nodes throughout; no new node and no Mathlib leaf.",
+  "blueprint": "Preserved the inherited null blueprint ancestor and full via chain, as returned by blueprint_refs.py ancestor. The recorded place is the auxiliary pointwise-smoothness input for the proper neutral subgroup in the Picard/moduli subargument of direct-image stability proof (3). The latest blueprint direct-image proof (3) has the compactification/preservation assembly, not this local infinitesimal lemma. The five steps supply the recorded auxiliary input, without changing the chapter or unit route. Whole-blueprint searches for Artinian, lifting and smooth found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic affine etale quasi-coherent H1 vanishing trivializes the lift torsor in step 2; no unit-specific replacement supplies this cohomological law."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic abelian torsor classification identifies the lift torsor with the trivial torsor when H1 vanishes in step 2."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-artinian-lifting-at-point",
+    "why": "The generic scheme pointwise Artinian criterion finishes the etale-chart reduction in step 5; it is the scheme lemma explicitly used by Stacks 0APN."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-etale-affine-qcoherent",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-smooth-artinian-lifting-at-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-0bfe66670",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-0bfe66670 (reviewer sub-agent of L); spot-checked: I read the full proof; review.md has the per-step checks. The delivery changes only the item's proof fields: the statement, stmt_deps and blueprint fields are unchanged against side-live, and live is still unsplit with no repair note. There are no new nodes and no cycle. Steps 1-2 build the sheaf of lifts with lem-sfb-space-infinitesimal-lift-pseudotorsor, which applies because f is locally of finite presentation and fa=cj. The item's etale covering makes this sheaf an H_et-torsor in the general abelian sense of def-sc-gm-torsor. H^1 vanishes on the affine T (lem-sc-etale-affine-qcoherent), so the torsor is trivial by lem-sc-torsor-h1 and gives a global lift. This follows Stacks 04AM steps (I)/(II), which I read. Step 3 takes an atlas q and a point u over x, gets g=fq locally of finite presentation from the chart test with the identity of S, and q smooth from the chart calculus. Step 4 lifts along the smooth q with lem-sfb-smooth-space-affine-infinitesimal-lift: qd=gamma and dj=b give gd=c. This replaces the formally-etale unique lift of 0APN, which I read. Step 5 applies the scheme criterion 02HX (S locally Noetherian, g locally of finite type) and then smooth-source point locality (06F2), whose 'smooth at a point' is defined by an open neighbourhood, so it gives exactly the item's V. Edge cases checked: I=0, empty X, non-separated X, and Spec k[e]/e^2, where the hypothesis and the conclusion both fail. Duplicate search (0APN, Artinian with algebraic space) found only stack, scheme or global-test variants, no restatement. Accepted tool_uses: lem-sc-etale-affine-qcoherent, lem-sc-torsor-h1 and lem-weil-pbc-smooth-artinian-lifting-at-point, all generic. No SGA. Batch-5: the four flagged citations reach sec-trace-formula only through def-trf-algebraic-space, the general definition of an algebraic space, which is already a stmt_dep of the item. They are general infinitesimal and smoothness lemmas for algebraic spaces, outside the trace-formula and Poincare duality statements and proofs, so they are not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceArtinianEtaleLiftSmoothPoint",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.smooth_near_of_artinian_etale_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceArtinianEtaleLiftSmoothPoint.lean",
+  "statement": "theorem smooth_near_of_artinian_etale_lifting {S : Scheme.{u}} [IsLocallyNoetherian S] (X : AlgebraicSpace S) (f : X ⟶ schemeSpace (Over.mk (𝟙 S))) (hfp : MapIsLocallyOfFinitePresentation f) (x : Point X.obj.obj) (hlift : ∀ (B' B : Type u) [CommRing B'] [CommRing B] [IsArtinianRing B'] [IsArtinianRing B] [IsLocalRing B'] [IsLocalRing B] (φ : B' →+* B), Function.Surjective φ → (RingHom.ker φ) ^ 2 = ⊥ → ∀ (c : Spec (CommRingCat.of B') ⟶ S) (a : yoneda.obj (Over.mk (Spec.map (CommRingCat.ofHom φ) ≫ c)) ⟶ X.obj.obj), schemePointMap a (IsLocalRing.closedPoint B) = x → ∃ (I : Type u) (T : I → Over S) (q : ∀ i, T i ⟶ Over.mk c), (∀ i, Etale (q i).left) ∧ (∀ y : Spec (CommRingCat.of B'), ∃ (i : I) (z : (T i).left), (q i).left z = y) ∧ ∀ i, ∃ b : yoneda.obj (T i) ⟶ X.obj.obj, yoneda.map (Limits.pullback.fst (q i) (Over.homMk (Spec.map (CommRingCat.ofHom φ)) rfl : Over.mk (Spec.map (CommRingCat.ofHom φ) ≫ c) ⟶ Over.mk c)) ≫ b = yoneda.map (Limits.pullback.snd (q i) (Over.homMk (Spec.map (CommRingCat.ofHom φ)) rfl : Over.mk (Spec.map (CommRingCat.ofHom φ) ≫ c) ⟶ Over.mk c)) ≫ a) : ∃ V : OpenSubspace X, x ∈ pointImage V.val.ι ∧ ∀ (U : Over S) (a : yoneda.obj U ⟶ V.val.toFunctor), IsEtale a → Smooth U.hom",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The base S is its existing schemeSpace representable. Over-S Yoneda maps enforce all compatibility with the base. Smoothness on the open subfunctor is tested directly on its representable etale scheme charts. Adds the already landed definition node def-trf-scheme-algebraic-space for the schemeSpace construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6f604427",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Only the item changed vs side-live; all 10 dep records are byte-identical. stmt_deps gains the already landed def-trf-scheme-algebraic-space (schemeSpace owner), allowed by brief-stage2 l.177. lean.statement is verbatim. Checked against the live declarations: f to schemeSpace(𝟙 S) is the unique structure map; MapIsLocallyOfFinitePresentation is the chart test; Point/schemePointMap at closedPoint B give the centering; the Artinian local square-zero test with surjective φ, the Over-S maps building in f a = c j, the jointly surjective étale cover indexed by Type u, and the pullback.fst/snd restriction equation all match the node; the conclusion OpenSubspace V with x in pointImage V.ι and every étale chart U→V smooth over S is the node's smooth neighbourhood. No assumption stronger than the node's (Stacks 0APN variant). Edge cases checked: empty X, zero ring, zero kernel, empty or infinite covers, universes. Point owner def-a1-algebraic-space-point-classes is reached through the def-a1-space-point-topology stmt_dep, which states it: not a fault. No duplicate found. No defs, single sorry, docstrings with source, blueprint and the 5 proof steps; public statement imports, plain proof-dep imports; no line over 100 chars; worker and second-reading sections present. Not recompiled (no file changed)."
+ }
+}

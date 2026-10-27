@@ -1,0 +1,37 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-connected-filtered-coalgebra-kernel-primitive.json`, with the unchanged statement and four proof steps; `citations.json`, containing the full verbatim statement of every dependency used at each step. No new nodes and no Mathlib leaves were created.
+
+Attachments: none for this item. The existing dependency `lem-sfb-vector-space-tensor-family-zero-detection` is already attached to `TensorProduct.eq_zero_of_forall_rTensor_eq_zero`; I read its project declaration and complete proof in `lean/WeilConjectures/Mathlib/LinearAlgebra/TensorProduct/Basis.lean:32–48`. This theorem concerns an arbitrary detecting family, and the singleton specialization suffices here.
+
+WANTED: none.
+
+The item was unsplit with no proof. No statement correction was needed. Its source already accurately describes the kernel lemma as an agent-written generalization of Milne's filtration and coproduct arguments, rather than a quotation of Lemma 14.44. I retain all inherited source, creation and blueprint provenance fields. In particular `blueprint_refs.py ancestor` returns None; the nonempty precise inherited place and its via chain are retained.
+
+Nothing remains unfinished in the split. Compilation, Lean edits, and repository writes were not performed.
+
+## Searches and duplicate check
+
+Project searches for the exact blueprint tag and for connected coalgebras, coradicals and primitive coalgebra elements found no exact declaration under `lean/WeilConjectures/`. Whole-DAG searches for tensor-map injectivity and primitive kernels found the existing tensor-family zero-detection lemma, which is used rather than creating a new tensor-injectivity leaf. The field-extension tensor-injectivity node requires an algebra and scalar extension, so is not used. The filtered-coalgebra-nonzero-coinvariant node concerns comodules and does not give this primitive kernel assertion; no proof of that node is borrowed.
+
+Whole-blueprint `blueprint_refs.py search coalgebra` returned no nodes; `search primitive` returned nine nodes concerning roots, characters, and curve cohomology, none giving this lemma. I also read the current latest direct-images proof (3) and the chapter/unit records. The coalgebra input is the inherited auxiliary prerequisite of that route, not a change to the unit proof.
+
+The six fresh Mathlib searches are preserved exactly from `searches.jsonl` in the item's `mathlib_searches`: two LeanFinder phrasings, a Loogle coalgebra/injective query, LeanSearch, and grep in both Coalgebra and HopfAlgebra. They found coalgebra representations and group-like-element results, and injectivity of coercions between bundled morphisms, not this theorem. I read `Coalgebra/Hom.lean` including `CoalgHom`, its morphism identities and its function-like injectivity proof. These do not establish injectivity of an individual coalgebra map or locate primitives in its kernel. No unavailable service was represented as a negative result.
+
+## Review by NM
+
+I read Milne, Algebraic Groups (2017), Definition 14.4 and equation (91), printed p.281 (PDF p.293), and Lemma 14.43 and its coproduct calculation, printed p.294 (PDF p.306). The former gives precisely the increasing exhaustive connected filtration with the coproduct sum by degree. The latter explains the primitive coproduct calculation in the restricted enveloping setting. Neither is claimed to state the general kernel theorem: the proof here supplies that missing general linear argument. I read the definition statements `def-weil-field` and `def-weil-pbc-module-tensor-product`, and the full statement of the tensor-family lemma cited below. There are no new nodes whose sources need separate review.
+
+Step 1 uses the given hypotheses directly. A noninjective linear map has a nonzero kernel element by taking a difference. Exhaustiveness makes the set of filtration indices meeting the kernel nonempty, so its least natural number exists. Counit preservation makes the chosen x have counit zero. The hypothesis epsilon(g)=1 rules out index zero, and minimality makes h on C_(n-1) injective. No finite-dimensionality is used.
+
+Step 2 cites the tensor-product definition for bilinear maps, their linear extensions and generation by pure tensors. Its argument is elementary: expand (id-g epsilon) tensor itself on Delta(x); the two counit identities give the two cross terms, and their composite gives the last coefficient epsilon(x). The subspaces contain g, so the projection preserves them; it kills exactly the endpoint factors needed in the filtration sum. Every interior pair of indices is at most n-1. We need only a preimage t in L tensor L of the reduced coproduct, not an injective identification of tensor subspaces. This explicitly avoids an unproved tensor-inclusion assertion.
+
+Step 3 cites that same definition for map composition. On pure generators it identifies the image of t with (f tensor f)r. The assumed coalgebra-map equation and f(x)=0 make that image zero. It uses no theorem about kernels being coideals.
+
+Step 4 cites `lem-sfb-vector-space-tensor-family-zero-detection`, whose statement permits arbitrary k-vector spaces and a singleton family, with precisely the zero-detection hypothesis proved for h in step 1. First apply it with M=L and N=D to the flipped intermediate tensor, and then with M=L and N=L to t. The flip exists by the cited tensor universal property, and its involution and naturality are verified on generators; these are elementary map equations, not another comparison lemma. Both right factors are arbitrary vector spaces allowed by the cited statement. This is the only non-elementary input, and it is an existing closed project theorem in the same unit. The resulting r=0 supplies the exact primitive identity, while step 1 already supplies nonzero, kernel, and counit clauses. Every citation has a verbatim statement entry in citations.json.
+
+I checked delivery-errors B through E: self-contained unchanged hypotheses; no new unsplit nodes or duplicated clauses; all non-elementary input cited by its statement; no circular use of the item or of a parent's proof; no SGA source; and no assertion requiring additional flatness, algebra structure or cocommutativity. Each proof step is under 800 characters, so there is no long hidden comparison. The two applications of zero detection are a direct specialization of its existing statement.
+
+Small cases checked: if C=kg the counit forces f to be injective, so the premise is impossible; if n=1 the interior coproduct sum is empty and p tensor p already kills all of Delta(x); if C_1=C_0 there is no artificial degree-one kernel. The expansion remains valid in characteristic two, since it is a linear identity with signs and epsilon(x)=0. For an actual noninjective example, the coalgebra with basis g,x, Delta(g)=g tensor g, Delta(x)=x tensor g+g tensor x, epsilon(g)=1 and epsilon(x)=0, mapped by the counit to k, has the required kernel primitive. The same proof works for infinite-dimensional C and D because each tensor has a finite pure-tensor expression. D=0 is excluded by counit preservation and epsilon(g)=1, without adding a hypothesis.
+
+Corrections made during self-review: used the existing family theorem twice instead of creating a redundant tensor-injectivity node, and stated the reduced coproduct membership as an image with an explicit preimage, avoiding an uncited injectivity claim. No hypotheses or conclusions were changed.

@@ -1,0 +1,164 @@
+{
+ "id": "lem-sf-integral-datum-pull-composition-reduction",
+ "kind": "statement",
+ "title": "Whole-system reduction of the datum pullback compositor",
+ "statement": "Fix D,C,E,n,S,o,z and invertibility of the coefficient prime [def-fix-six-functor-datum]. For composable finite-type-space arrows f:X -> Y and g:Y -> Z and constructible N on Z, let chi be pullComparison [def-sf-integral-proper-projection-coordinates]. Reduction of S.higher.integral.pullComposition(f,g) at N, followed by chi_f at pull_g N and system pull_f of chi_g at N, equals chi_(f followed by g) at N followed by z.compositors.pullComp(f,g) at reduce_Z N. This is solely a pullback equation: tensor, open extension and projection do not occur.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-integral-proper-projection-coordinates",
+  "def-sf-integral-system-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Compose the datum finite coefficient comparison with the finitePullback realization. Naturality of finitePullback moves the inner comparison past the outer pullback. The pullComposition equation of integralNormalization.reduction and finitePullCompositionNormalization then give the canonical intrinsic finite compositor square.",
+   "uses": [
+    "def-sf-operation-stages"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "Apply integralProjectionPullEvaluation to each of f, g and their composite, and cancel its finitePullback inverse. This identifies evaluation of pullComparison followed by the intrinsic pullback-evaluation map with reductionEvaluation followed by the finite coefficient comparison. Reverse systemPullbackCompositorEvaluation by cancelling its isomorphisms to obtain the forward system-compositor evaluation square.",
+   "uses": [
+    "lem-sf-integral-projection-pull-evaluation",
+    "lem-pur-system-pullback-compositor-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "Postcompose the desired evaluated square with the two pullback-evaluation isomorphisms and the iterated finite pullback of reductionEvaluation at N. Naturality of outer pullback evaluation, the three unary equations, naturality of reductionEvaluation, and the finite datum-compositor square reduce it to the forward system-compositor evaluation equation. Cancel this common invertible postcomposition.",
+   "uses": [
+    "lem-sf-integral-projection-pull-evaluation",
+    "lem-pur-system-pullback-compositor-evaluation",
+    "def-sf-operation-stages"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  },
+  {
+   "text": "On X the coefficient prime is invertible in every residue field, so whole-system reduction restricted to constructible integral objects is full. Lift the system compositor, conjugated by pullComparison, to an integral arrow b. The preceding evaluated square and the lift equation show that reduction of the datum compositor and reduction of b have equal finite evaluations. Naturality of reductionEvaluation and faithfulness of the finite full-subcategory inclusion turn these into equality under every actual finite integral reduction. Apply integral_reductions_jointly_faithful to the two integral arrows, then apply whole-system reduction and cancel the conjugating isomorphisms. This proves the original system equation without claiming that arbitrary derived evaluations are faithful.",
+   "uses": [
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-sf-integral-reductions-jointly-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "lem-sf-integral-projection-pull-evaluation",
+  "lem-pur-system-pullback-compositor-evaluation",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-sf-integral-reductions-jointly-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction. U8: finite normalization and existing unary/system evaluation squares, followed by a full lift and joint integral faithfulness."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "reduction commutes with the unit and counit of an open extension adjunction and with pullback composition",
+   "results": "Eight generic adjunction and chosen-pullback equations, including Adjunction.comp_unit_app and unit_comp_map_eq_iff; no integral coefficient normalizations.",
+   "date": "2026-10-27",
+   "verdict": "Use the adjunction API for assembly; it does not identify the specified coefficient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Twelve mate-equivalence declarations, including unit and counit identities and composition/pasting.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate calculus only; no geometric quotient normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*[Rr]eduction|[Rr]eduction.*[Pp]rojection",
+   "results": "msearch found zero Mathlib matches. Local searches found ProperCoordinates and the canonical completed tensor reduction square in DerivedPullbackTensorIso; no existing datum open unit or datum compositor whole-system square.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the existing coefficient-coordinate definitions and canonical tensor theorem; isolate only the missing normalization steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralProjectionOpenTensorCoordinates",
+  "date": "2026-10-27",
+  "group": "X5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Compactification-independence sentence, compatibility with counits and j_!, together with naturality. The local open and one-input support portions of lem-sf-integral-projection-open-factor-reduction.",
+   "via": [
+    "lem-sf-integral-projection-open-tensor-coordinates",
+    "lem-sf-integral-projection-open-factor-reduction",
+    "lem-sf-integral-projection-reduction-normalization",
+    "lem-sf-integral-projection-system-coordinates",
+    "lem-sf-integral-projection-refinement-square",
+    "lem-fix-projection-compactification-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralDatumPullCompositionReduction",
+  "file": "lean/Sheaf/Paper/IntegralDatumPullCompositionReduction.lean",
+  "declaration": "WeilConjectures.IntegralProjectionReduction.OpenCoordinates.integralDatumPullCompositionReduction",
+  "statement": "theorem integralDatumPullCompositionReduction\n    {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)\n    (E : Type u) [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)\n    (S : SixFunctorOperationDatum D C E n hn) (hl : IsUnit (C.l : D.k))\n    (o : Operations C.l E) (z : Realizations C.l E D o)\n    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (N : sfIntegralConstructibleCategory C.l E Z.obj.left) :\n    (reduce X).map ((S.higher.integral.pullComposition f g).hom.app N) ≫\n        (pullComparison S.higher hl o z f).hom.app ((S.higher.integral.pull g).obj N) ≫\n        (pull C.l E f.hom.left).map ((pullComparison S.higher hl o z g).hom.app N) =\n      (pullComparison S.higher hl o z (f ≫ g)).hom.app N ≫\n        (z.compositors.pullComp f.hom.left g.hom.left).hom.app ((reduce Z).obj N)",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261027T050654-L-252705",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261027T094529-L-239699",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

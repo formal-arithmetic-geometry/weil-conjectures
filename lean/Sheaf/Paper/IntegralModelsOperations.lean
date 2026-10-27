@@ -15,32 +15,19 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.CategoryTheory.MorphismProperty.Composition
-import Mathlib.CategoryTheory.Sites.Precoverage
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Sheaf.Algebra.Homology.KFlat
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Mathlib.CategoryTheory.Adjunction.Limits
-import WeilConjectures.CategoryTheory.SiteMorphismComposition
-import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
-import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+import Sheaf.Paper.ConstantModelTorAmplitude
 import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.ScalarModelImmersionExtension
+import Sheaf.Paper.AdicConstructibilityPredicateComparison
+import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
+import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import Sheaf.AlgebraicGeometry.LfpTensorSingle
+import Sheaf.AlgebraicGeometry.EllAdicBoundedTriangulated
+import Sheaf.AlgebraicGeometry.BoundedConstructibleDevissage
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+import Sheaf.AlgebraicGeometry.CondensedSupportProjectionFormula
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!
 # Operations on bounded constructible integral coefficient complexes
@@ -55,13 +42,152 @@ sk-def-sfb-constructible. The tensors and the projection formula are ambient and
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local irreducible] DerivedCategory.TStructure.t
+attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
+  CategoryTheory.Functor.rightDerivedFunctor
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The constructible-sheaf tensor calculation on an arbitrary Noetherian scheme.
+Source: Bhatt--Scholze, Proposition 6.8.11(3), as in the existing
+`boundedConstructible_tensor_single` proof. Its local calculation, common stratification
+and vanishing detection use only Noetherianity; no field base is needed. -/
+private theorem tensor_single_noetherian
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ]
+    (X : Scheme.{u}) [IsNoetherian X]
+    (F G : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))
+    (hF : IsConstructibleModuleObject (condensedRingObj Λ X) F)
+    (hG : IsConstructibleModuleObject (condensedRingObj Λ X) G) :
+    boundedConstructible (condensedRingObj Λ X)
+      ((DerivedCategory.singleFunctor _ 0).obj F ⊗
+        (DerivedCategory.singleFunctor _ 0).obj G) := by
+  classical
+  let R := condensedRingObj Λ X
+  let K := (DerivedCategory.singleFunctor _ 0).obj F ⊗
+    (DerivedCategory.singleFunctor _ 0).obj G
+  obtain ⟨S, hS⟩ := common_lfp_stratification hF hG
+  let H (a : Fin S.n) := upperStar Λ (S.immersion a)
+  have lfp (a : Fin S.n)
+      (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+      (hM : IsLocallyFinitelyPresented
+        ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).obj R)
+        (((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).mapMod R).obj M)) :
+      IsLocallyFinitelyPresented (condensedRingObj Λ (S.domain a)) ((H a).obj M) := by
+    exact localFinitePresentation_of_iso
+      ((Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ (S.immersion a))).app _).symm
+      (localFinitePresentation_comap _ hM)
+  let e (a : Fin S.n) : (H a).leftDerivedFunctor.obj K ≅
+      (DerivedCategory.singleFunctor _ 0).obj ((H a).obj F) ⊗
+        (DerivedCategory.singleFunctor _ 0).obj ((H a).obj G) :=
+    (Functor.Monoidal.μIso (H a).leftDerivedFunctor _ _).symm ≪≫
+      tensorIso ((H a).singleFunctorCompLeftDerivedFunctorIso.app F)
+        ((H a).singleFunctorCompLeftDerivedFunctorIso.app G)
+  have hlocal (a : Fin S.n) :
+      TopologicalSpace.NoetherianSpace (S.domain a) :=
+    (S.immersion a).isEmbedding.noetherianSpace
+  have hom_lfp (a : Fin S.n) (n : ℤ) :
+      IsLocallyFinitelyPresented (condensedRingObj Λ (S.domain a))
+        ((H a).obj ((DerivedCategory.homologyFunctor _ n).obj K)) := by
+    apply localFinitePresentation_of_iso
+      ((H a).leftDerivedFunctorHomologyFunctorIso n |>.app K).symm
+    apply localFinitePresentation_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso (e a)).symm
+    exact (lfp_tensor_single Λ (S.domain a) ((H a).obj F) ((H a).obj G)
+      (lfp a F (hS a).1) (lfp a G (hS a).2)).2 n
+  have detect
+      (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+      (hM : ∀ a : Fin S.n, IsZero ((H a).obj M)) : IsZero M := by
+    rw [IsZero.iff_id_eq_zero]
+    apply Mod.hom_ext
+    apply abDetectMaps S.immersion
+    · intro x
+      obtain ⟨a, ha⟩ := Set.mem_iUnion.mp (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
+      exact ⟨a, S.range_immersion a |>.symm ▸ ha⟩
+    · intro a
+      let e' := (Mod.extendScalarsIsoComapInv
+        (condensedPullbackHom Λ (S.immersion a))).app
+        (((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).mapMod R).obj M)
+      have hz := (Mod.forget _).map_isZero ((hM a).of_iso e'.symm)
+      change IsZero ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).obj M.X) at hz
+      simpa using hz.eq_of_src
+        ((ProEtale.upperStar Ab.{u + 1} (S.immersion a)).map (𝟙 M.X)) 0
+  have hupper := DerivedCategory.isLE_tensor
+    ((DerivedCategory.singleFunctor _ 0).obj F)
+    ((DerivedCategory.singleFunctor _ 0).obj G) 0 0
+  rw [add_zero] at hupper
+  apply (mem_boundedConstructible_iff R K).2
+  constructor
+  · refine ⟨-1, 0, fun n hn ↦ ?_⟩
+    rcases hn with hn | hn
+    · apply detect
+      intro a
+      have hb := (lfp_tensor_single Λ (S.domain a) ((H a).obj F) ((H a).obj G)
+        (lfp a F (hS a).1) (lfp a G (hS a).2)).1
+      have hz := (DerivedCategory.isGE_iff _ (-1)).1 hb n hn
+      exact hz.of_iso
+        (((H a).leftDerivedFunctorHomologyFunctorIso n).app K ≪≫
+          (DerivedCategory.homologyFunctor _ n).mapIso (e a))
+    · exact (DerivedCategory.isLE_iff K 0).1 hupper n hn
+  · intro n
+    refine ⟨S, fun a ↦ ?_⟩
+    apply localFinitePresentation_of_comap (inv (condensedPullbackHom Λ (S.immersion a)))
+    apply localFinitePresentation_of_iso
+      ((Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ (S.immersion a))).app _)
+    exact hom_lfp a n
+
+attribute [local irreducible] upperStar lowerStar openImmersionLowerShriek supportPullback
+attribute [local irreducible] closedSupportProjection openSupportProjection
+
+/-- Compose the unbounded open and closed support projection isomorphisms.
+The coefficient is kept abstract so elaboration uses the functor comparison API. -/
+private theorem immersion_projection
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {S Z X : Scheme.{u}} [IsNoetherian Z] [IsNoetherian X]
+    (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i]
+    (L : DerivedCategory (supportModules Λ S))
+    (M : DerivedCategory (supportModules Λ X)) :
+    Nonempty
+      ((((derivedTensor Λ X).obj
+        ((lowerStar Λ i).rightDerivedFunctor.obj
+          ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj M) ≅
+        (lowerStar Λ i).rightDerivedFunctor.obj
+          ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj
+            (((derivedTensor Λ S).obj L).obj
+              ((upperStar Λ (j ≫ i)).mapDerivedCategory.obj M)))) := by
+  have hij : Set.range i.base = (Set.range i.openComplement.ι.base)ᶜ := by
+    simp [Scheme.Hom.coe_openComplement]
+  have : PreservesFiniteColimits (lowerStar Λ i) :=
+    closedSupport_lowerStarExact Λ i i.openComplement.ι hij
+  have hc := (openClosedSupportProjectionFormula Λ i i.openComplement.ι hij).1
+  have ho := (openClosedSupportProjectionFormula Λ j.closedComplement j
+    j.range_closedComplement).2
+  let qi := (lowerStar Λ i).mapDerivedCategory
+  let qj := (openImmersionLowerShriek Λ j).mapDerivedCategory
+  let pi := (upperStar Λ i).mapDerivedCategory
+  let ei := Functor.mapDerivedCategoryNatIso (supportPullbackIsoUpperStar Λ i)
+  let ej := Functor.mapDerivedCategoryNatIso (supportPullbackIsoUpperStar Λ j)
+  let ecomp := Functor.mapDerivedCategoryNatIso (upperStarComp Λ j i) ≪≫
+    Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)
+  let er := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+  have : IsIso (closedSupportProjection Λ i (qj.obj L) M) := hc (qj.obj L) M
+  have : IsIso (openSupportProjection Λ j L (pi.obj M)) := ho L (pi.obj M)
+  refine ⟨((derivedTensor Λ X).mapIso (er.app (qj.obj L))).app M ≪≫
+    asIso (closedSupportProjection Λ i (qj.obj L) M) ≪≫
+    qi.mapIso (((derivedTensor Λ Z).obj (qj.obj L)).mapIso (ei.app M)) ≪≫
+    qi.mapIso (asIso (openSupportProjection Λ j L (pi.obj M))).symm ≪≫
+    qi.mapIso (qj.mapIso (((derivedTensor Λ S).obj L).mapIso
+      (ej.app (pi.obj M) ≪≫ (ecomp.app M).symm))) ≪≫
+    (er.app _).symm⟩
 
 /-- Inverse image, uncompleted relative derived tensor and locally closed extension by zero
 preserve bounded constructibility over the integral coefficient ring. The projection formula
@@ -266,6 +392,58 @@ theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime]
               (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) S).obj L).obj
                 (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) (j ≫
                   i)).mapDerivedCategory).obj M))))) := by
-  sorry
+  have hE : FiniteDimensional ℚ_[ℓ] E.val := E.property
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro X Y _ _ f K hK
+    let Λ := Profinite.padicIntegersRingObj ℓ E.val
+    have hX := (adicConstructibilityPredicateComparison ℓ X Λ (.integral E.val)).1
+    have hY := (adicConstructibilityPredicateComparison ℓ Y Λ (.integral E.val)).1
+    refine ⟨(upperStar Λ f).bounded_mapDerivedCategory_obj hK.1, fun n ↦ ?_⟩
+    apply (hX _).1
+    exact constructible_of_iso
+      (((upperStar Λ f).mapDerivedCategoryHomologyFunctorIso n).app K)
+      (isConstructibleModuleObject_upperStar Λ f _ ((hY _).2 (hK.2 n)))
+  · intro X _ K M hK hM
+    let Λ := Profinite.padicIntegersRingObj ℓ E.val
+    let P := boundedConstructible (condensedRingObj Λ X)
+    have hp := (adicConstructibilityPredicateComparison ℓ X Λ (.integral E.val)).2
+    rw [← hp] at hK hM ⊢
+    have : P.IsTriangulated := isTriangulated_boundedConstructible_ellAdic Λ X
+    change P (K ⊗ M)
+    apply prop_of_boundedConstructibleModule (P.inverseImage (tensorLeft K)) ?_ hM
+    intro G hG
+    exact prop_of_boundedConstructibleModule
+      (P.inverseImage (tensorRight ((DerivedCategory.singleFunctor _ 0).obj G)))
+      (fun F hF ↦ tensor_single_noetherian Λ X F G hF hG) hK
+  · intro S Z X _ _ _ j _ i _ L hL
+    let Λ := Profinite.padicIntegersRingObj ℓ E.val
+    have ho : ScalarModelImmersionExtensionAssertions Λ j j.closedComplement :=
+      ((scalarModelImmersionExtension ℓ j j.closedComplement
+      (by simp [j.range_closedComplement])).2.2.2.1 E).1
+    have hc : ScalarModelImmersionExtensionAssertions Λ i.openComplement.ι i :=
+      ((scalarModelImmersionExtension ℓ i.openComplement.ι i
+      (by simp [Scheme.Hom.coe_openComplement])).2.2.2.1 E).1
+    have : PreservesFiniteColimits (lowerStar Λ i) := hc.2.2.2.1
+    have hiZ : ObjectProperty.IsClosedUnderIsomorphisms
+        (IsConstantModelConstructible Λ Z) :=
+      (constantModelConstructibleFiniteTor_wellDefined Λ Z).1
+    have hiX : ObjectProperty.IsClosedUnderIsomorphisms
+        (IsConstantModelConstructible Λ X) :=
+      (constantModelConstructibleFiniteTor_wellDefined Λ X).1
+    have hJ : constantModelBoundedConstructible Λ Z
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L) := by
+      refine ⟨(openImmersionLowerShriek Λ j).bounded_mapDerivedCategory_obj hL.1,
+        fun n ↦ ?_⟩
+      exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ Z)
+        (((openImmersionLowerShriek Λ j).mapDerivedCategoryHomologyFunctorIso n).app L)
+        (ho.2.2.2.2.1 _ (hL.2 n))
+    have he := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory
+    refine ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso (he.app _).symm
+      ((lowerStar Λ i).bounded_mapDerivedCategory_obj hJ.1), fun n ↦ ?_⟩
+    exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ X)
+      (((lowerStar Λ i).rightDerivedFunctorHomologyFunctorIso n).app _)
+      (hc.2.2.2.2.2.1 _ (hJ.2 n))
+  · intro S Z X _ _ _ j _ i _ L M
+    exact immersion_projection (Profinite.padicIntegersRingObj ℓ E.val) j i L M
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-very-ample-affine-finite-sections",
+ "kind": "statement",
+ "title": "Finite immersion sections for a relatively very ample module over an affine base",
+ "statement": "Let $A$ be a commutative ring and $S=\\operatorname{Spec}A$ an affine scheme [def-pc-scheme, def-weil-affine-spectrum]. Let $g:Y\\to S$ be a morphism of finite type [def-weil-finite-type-morphism] and $L$ an invertible $\\mathcal O_Y$-module [def-sc-invertible-module] which is relatively very ample over $S$ [def-trf-relatively-very-ample]. Then there are an integer $n\\ge0$ and sections $s_0,\\ldots,s_n\\in\\Gamma(Y,L)$ which generate $L$, meaning that the map $q:g^*\\mathcal O_S^{\\oplus(n+1)}\\to L$ sending the pulled-back standard basis to these sections is surjective [def-pc-module-pullback]. The $S$-morphism $a_s:Y\\to\\mathbf P^n_S$ classified by this invertible quotient [lem-trf-projective-bundle-quotient-geometry, def-nagata-relative-projective-space] is an immersion [def-weil-closed-immersion], and its quotient-compatible isomorphism $a_s^*\\mathcal O_{\\mathbf P^n_S}(1)\\cong L$ uses the canonical degree-one twist [def-pc-projective-space-twist].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, statement and proof. The finite sections are the pullbacks of the homogeneous coordinates under its immersion, using the canonical quotient on projective space."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-trf-relatively-very-ample",
+  "def-pc-module-pullback",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-nagata-relative-projective-space",
+  "def-weil-closed-immersion",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Choose the witness $E$, $\\alpha:Y\\to P_S(E)$ and $\\eta:\\alpha^*\\mathcal O(1)\\cong L$ in relative very ampleness. Put $M=E(S)$ and $B=\\operatorname{Sym}_A(M)$ with its symmetric grading. The canonical symmetric graded algebra has this affine model over $S=\\operatorname{Spec}A$; the affine restriction isomorphism of relative Proj identifies $P_S(E)$ with $P=\\operatorname{Proj}(B)$ over $S$. Retain the normalized tautological quotient $p^*E\\twoheadrightarrow\\mathcal O_P(1)$ and transport it by $\\alpha$ and $\\eta$ to a quotient $g^*E\\twoheadrightarrow L$. For $m\\in M$, denote its image section by $t_m$.",
+   "uses": [
+    "def-trf-relatively-very-ample",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lemma-nagata-relative-proj-exists",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "Record the coordinate calculation for this normalization. The degree-one elements $m\\in M$ generate the irrelevant ideal of $B$, since each positive homogeneous component is spanned by products of degree-one elements. Thus the opens $D_+(m)$ cover $P$. On $D_+(m)$, the twist has free basis $m/1$, and the quotient sends $v\\in M$ to $(v/m)(m/1)$. For homogeneous $b\\in B_d$, the section of $\\mathcal O_P(d)$ is therefore $(b/m^d)(m/1)^d$. Its nonvanishing locus on this chart is $D(b/m^d)=D_+(b)\\cap D_+(m)$: both conditions say that $b$ is outside the homogeneous prime, since $m$ is already outside it. After pullback, the same calculation evaluates $b$ on the sections $t_v$ in $L^{\\otimes d}$. In particular its nonvanishing locus is $\\alpha^{-1}(D_+(b))$. On that locus the pullback of a degree-zero fraction $c/b^e$ is the ratio of the evaluated numerator to the $e$th power of the evaluated denominator. These are equalities in localizations and the displayed rank-one bases; local ring homomorphisms preserve and reflect units, so the nonvanishing assertion is also valid after pullback.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "prop-nagata-proj-standard-open",
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA/01OB, normalized quotient; 01MN, definition-twist; 01M7, lemma-proj-sheaves; coordinate calculation used in Tag 02NP"
+   }
+  },
+  {
+   "text": "Because $g$ is finite type and $S$ is affine, $Y=g^{-1}(S)$ is quasi-compact. Since $\\alpha$ is an immersion, there is an open $W\\subseteq P$ containing its image such that $Y\\to W$ is a closed immersion. The positive-degree homogeneous standard opens form a basis, so choose a finite family $b_j\\in B_{d_j}$, $d_j>0$, with $D_+(b_j)\\subseteq W$ whose inverse images $U_j=\\alpha^{-1}(D_+(b_j))$ cover $Y$. The affine-cover criterion for closed immersions gives that each $U_j$ is affine and $B_{(b_j),0}\\to\\Gamma(U_j,\\mathcal O_Y)$ is surjective, where $B_{(b_j),0}=\\Gamma(D_+(b_j),\\mathcal O_P)$ by the standard-open identification. Write $A_j=\\Gamma(U_j,\\mathcal O_Y)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-quasi-compact-scheme",
+    "def-weil-closed-immersion",
+    "lem-sc-proj-standard-open-basis",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "Each affine pair $U_j\\to S$ has $A_j$ finitely generated as an $A$-algebra, by the locally finite type affine-pair criterion. Choose algebra generators $x_{jk}\\in A_j$. Surjectivity in step 3 lifts each $x_{jk}$ to a fraction $c_{jk}/b_j^{e_{jk}}$ in $B_{(b_j),0}$, where $e_{jk}\\ge0$ and $c_{jk}\\in B_{e_{jk}d_j}$; these homogeneous representatives are exactly the description of degree-zero localization.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "Each $b_j$ and $c_{jk}$ is a finite $A$-linear combination of monomials in elements of $M$, by the description of the symmetric homogeneous components. Collect the finitely many elements of $M$ occurring in these finitely many expressions, and list them as $y_0,\\ldots,y_n$, padding with $0$ if necessary to make the list nonempty. Replacing every occurring element by its variable gives homogeneous polynomials $F_j\\in A[T_0,\\ldots,T_n]_{d_j}$ and $F_{jk}\\in A[T_0,\\ldots,T_n]_{e_{jk}d_j}$ mapping respectively to $b_j,c_{jk}$ under $T_i\\mapsto y_i$. The expressions can be chosen homogeneous because each component is spanned by monomials of exactly that degree.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "Set $s_i=t_{y_i}$. At any $z\\in Y$, choose $j$ with $z\\in U_j$. Step 2 says that the value of $F_j(s_0,\\ldots,s_n)$ in the fibre of $L^{\\otimes d_j}$ is nonzero. Since $d_j>0$, this is impossible if every $s_i$ has zero value in the fibre of $L$ at $z$. Hence some $s_i$ has nonzero value. In a local rank-one trivialization of $L$ this says that its coefficient is outside the maximal ideal and is a unit. That $s_i$ generates $L_z$. Consequently the map $q:g^*\\mathcal O_S^{\\oplus(n+1)}\\to L$ specified by the $s_i$ is surjective on all stalks, hence is a surjective sheaf map. The same argument proves $Y=\\bigcup_i Y_{s_i}$.",
+   "uses": [
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "Apply the projective-bundle quotient bijection to $q$, with $E_0=\\mathcal O_S^{\\oplus(n+1)}$. Its free-module identification supplies the $S$-morphism $a_s:Y\\to\\mathbf P^n_S$ and a quotient-compatible isomorphism $a_s^*\\mathcal O(1)\\cong L$ for the canonical degree-one twist. Equivalently use the morphism constructed from the generating sections: on $Y_{s_i}$ its coordinate pullback sends $T_l/T_i$ to $s_l/s_i$, and its twist isomorphism sends the pulled-back basis to $s_i$. Thus that morphism has precisely quotient $q$, and uniqueness in the quotient bijection identifies it with $a_s$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "For $V_j=D_+(F_j)\\subseteq\\mathbf P^n_S$, these coordinate formulas give $a_s^{-1}(V_j)=U_j$ and $a_s^\\sharp(F_{jk}/F_j^{e_{jk}})=x_{jk}$. Indeed on $Y_{s_i}$ a homogeneous polynomial $H$ of degree $r$ pulls back, in the basis $s_i^{\\otimes r}$, to $H(s_0,\\ldots,s_n)/s_i^r$: dehomogenize as $H/T_i^r$ and substitute $T_l/T_i=s_l/s_i$. Apply this to $F_j$ and use step 2 and $F_j(y)=b_j$ to obtain the equality of opens. Apply it to numerator and denominator of $F_{jk}/F_j^{e_{jk}}$; their factors $s_i^{e_{jk}d_j}$ cancel, leaving the evaluated ratio. Since $F_{jk}(y)=c_{jk}$, step 2 identifies it with $\\alpha^\\sharp(c_{jk}/b_j^{e_{jk}})=x_{jk}$. The $Y_{s_i}$ cover $Y$, so these local equalities give the asserted global equality of opens and section pullbacks.",
+   "uses": [
+    "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+    "def-pc-projective-space-twist",
+    "def-nagata-homogeneous-localization-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  },
+  {
+   "text": "The affine opens $V_j$ cover the open $V=\\bigcup_j V_j$ and the image of $a_s$ lies in $V$ by step 8 and the covering by $U_j$. Factor $a_s$ uniquely through $V$. Each $V_j$ is affine, its inverse image $U_j$ is affine, and its coordinate-ring map is surjective: it is an $A$-algebra map whose image contains every algebra generator $x_{jk}$ by step 8. The affine-cover criterion therefore makes $Y\\to V$ a closed immersion. Composing with the open inclusion $V\\to\\mathbf P^n_S$ is an immersion by the definition. Together with steps 6 and 7, this proves every clause, retaining the same $L$ throughout. If $Y$ is empty, take $n=0$ and its unique zero section: the stalk-surjectivity condition is vacuous and the empty map is a closed immersion into the empty open of $\\mathbf P^0_S$; the quotient bijection still provides its compatible twist isomorphism.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-closed-immersion",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-relatively-very-ample",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "lemma-nagata-relative-proj-exists",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-proj-standard-open",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-closed-immersion",
+  "lem-sc-proj-standard-open-basis",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-lft-affine-pairs",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02NP, lemma-very-ample-finite-type-over-affine, proof; the omitted degree-one twist comparison is checked by normalized quotient coordinates (Constructions 01OA, 01MN), defining the final morphism directly from the retained sections."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Vv]ery[Aa]mple|very.?ample|[Ii]s[Aa]mple",
+   "results": "{\"t\": \"2026-10-22T05:24:27Z\", \"tool\": \"grep\", \"query\": \"[Vv]ery[Aa]mple|very.?ample|[Ii]s[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many global sections of a relatively very ample line bundle define an immersion into projective space over an affine base",
+   "results": "{\"t\": \"2026-10-22T05:24:27Z\", \"tool\": \"leansearch\", \"query\": \"Finitely many global sections of a relatively very ample line bundle define an immersion into projective space over an affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.isImmersion_iff\", \"AlgebraicGeometry.IsImmersion.mk\"], \"digest\": \"1e76b4e7892ebdb0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ample\"",
+   "results": "{\"t\": \"2026-10-22T05:24:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A very ample invertible sheaf for a finite type morphism to an affine scheme is the pullback of O(1) by an immersion into finite dimensional projective space",
+   "results": "{\"t\": \"2026-10-22T05:24:28Z\", \"tool\": \"leanfinder\", \"query\": \"A very ample invertible sheaf for a finite type morphism to an affine scheme is the pullback of O(1) by an immersion into finite dimensional projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"b98cb3943b973571\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme over an affine base with a very ample line bundle has finitely many generating sections defining a locally closed embedding",
+   "results": "{\"t\": \"2026-10-22T05:24:30Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type scheme over an affine base with a very ample line bundle has finitely many generating sections defining a locally closed embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\"], \"digest\": \"ccbf3efcfdfe92c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned Proj constructions, affine finite-type criteria and immersion criteria do not supply finite sections realizing an arbitrary relatively very ample invertible module"
+  },
+  {
+   "tool": "grep",
+   "query": "very.?ample|IsVeryAmple|finite.*homogeneous.*coordinates",
+   "results": "{\"t\": \"2026-10-22T05:39:07Z\", \"tool\": \"grep\", \"query\": \"very.?ample|IsVeryAmple|finite.*homogeneous.*coordinates\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj universal maps require a ring map to global functions and do not select finite immersion coordinates for the same invertible sheaf; projectivization cardinality and finite-type/properness of a given Proj do not assert this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme over an affine base with a relatively very ample line bundle admits a projective immersion pulling O(1) back to that same line bundle",
+   "results": "{\"t\": \"2026-10-22T05:39:07Z\", \"tool\": \"leansearch\", \"query\": \"A finite type scheme over an affine base with a relatively very ample line bundle admits a projective immersion pulling O(1) back to that same line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.isClosedImmersion_iff_isAffineHom\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\"], \"digest\": \"06158421fd350865\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj universal maps require a ring map to global functions and do not select finite immersion coordinates for the same invertible sheaf; projectivization cardinality and finite-type/properness of a given Proj do not assert this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"ample\"",
+   "results": "{\"t\": \"2026-10-22T05:39:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj universal maps require a ring map to global functions and do not select finite immersion coordinates for the same invertible sheaf; projectivization cardinality and finite-type/properness of a given Proj do not assert this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many sections of a relatively very ample invertible sheaf over an affine base define an immersion into projective space",
+   "results": "{\"t\": \"2026-10-22T05:39:08Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many sections of a relatively very ample invertible sheaf over an affine base define an immersion into projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Proj.toBasicOpenOfGlobalSections\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"AlgebraicGeometry.Proj\"], \"digest\": \"9e496e31693cd95d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj universal maps require a ring map to global functions and do not select finite immersion coordinates for the same invertible sheaf; projectivization cardinality and finite-type/properness of a given Proj do not assert this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme embedded in Proj of the symmetric algebra of any module embeds in finite projective space by choosing finitely many degree one elements",
+   "results": "{\"t\": \"2026-10-22T05:39:21Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type scheme embedded in Proj of the symmetric algebra of any module embeds in finite projective space by choosing finitely many degree one elements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.finite_of_finite\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"Projectivization.finite_iff_of_finite\", \"AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\"], \"digest\": \"5ad7270e82567ef4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the Proj universal maps require a ring map to global functions and do not select finite immersion coordinates for the same invertible sheaf; projectivization cardinality and finite-type/properness of a given Proj do not assert this statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-very-ample-finite-type-realization",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, final sentence: proper and quasi-projective implies projective by 0BCL(1); concludes projectivity of composed modification towers. Technical finite-type approximation in Stacks 07RM, proof after replacing the ample sheaf by a relatively very ample power: choose a finite-type quasi-coherent module realizing the same very ample sheaf by an immersion. Affine-local section selection in the proof of Stacks 07RM: the sections s_{j,0},...,s_{j,n_j} supplied by 02NP before choosing a common finite-type approximation stage.",
+   "via": [
+    "lem-sfb-very-ample-finite-type-realization",
+    "lem-sfb-proper-relative-ample-projective-bundle",
+    "lem-sfb-projective-bundle-composition",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-very-ample-affine-finite-sections",
+  "worker": "stage1",
+  "summary": "Split Stacks 02NP into nine steps using existing nodes only. Chose finite homogeneous chart equations and lifts of finite algebra generators, retained their degree-one supports, and constructed the required quotient and immersion from those same sections. Expanded the normalized homogeneous-coordinate calculation instead of assuming the omitted twist comparison. Checked arbitrary affine bases, non-finite modules, empty source and n=0; statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; composition of the normalized-blowup and strictification towers in steps 8, 13 and 15. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Stacks 0C4P, final sentence: proper and quasi-projective implies projective by 0BCL(1); concludes projectivity of composed modification towers. Technical finite-type approximation in Stacks 07RM, proof after replacing the ample sheaf by a relatively very ample power: choose a finite-type quasi-coherent module realizing the same very ample sheaf by an immersion. Affine-local section selection in the proof of Stacks 07RM: the sections s_{j,0},...,s_{j,n_j} supplied by 02NP before choosing a common finite-type approximation stage. This split realizes the affine-local finite-section selection by the complete finite-coordinate argument of Stacks 02NP, not by a new copy of that conclusion.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Affine restriction identifies the given projective bundle with Proj of Sym_A(E(S)); no change to the unit route. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Normalized tautological quotient and its representing bijection identify the sections morphism and its canonical twist. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Homogeneous elements are finite linear combinations of monomials in degree-one module elements. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "prop-nagata-proj-standard-open",
+    "why": "The chart D_+(f) is affine with its degree-zero localization ring. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-sc-proj-standard-open-basis",
+    "why": "Refine the closed-immersion neighbourhood by homogeneous standard opens. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "why": "Read and prove closed immersions by surjectivity of affine coordinate maps. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "The affine source chart rings have finite sets of A-algebra generators. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+    "why": "The sections morphism supplies coordinate ratios and normalized twist bases. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "why": "Restrict the final map to the union of its selected target charts. This is a generic scheme/algebra tool; the constructible six-functor unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-relative-proj-exists",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-proj-standard-open",
+  "lem-sc-proj-standard-open-basis",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-sections-morphism-to-proj-polynomial-ring",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-771ae74f8",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-771ae74f8 (reviewer sub-agent of L); spot-checked: Read Stacks 02NP (morphisms.tex lemma-very-ample-finite-type-over-affine, statement and full proof) and the nine steps against every cited statement. The item's statement, stmt_deps and source are unchanged; the node is still unsplit in live, has no re-split note of its own and is not dropped. The steps follow 02NP and the math is correct. The coordinates on D_+(m) check out: the basis is m/1, the nonvanishing locus is D_+(b)∩D_+(m), and the pullback reflects units. Finite cover inside W, affine-pair finite generation, homogeneous lifts and degree-d monomial expressions all check. Stalk generation needs d_j>0, which holds. a_s is identified with the sections morphism by the quotient bijection plus clauses (iii)/(iv). The substitution H/x_i^r gives H(s)/s_i^r, so preimages and ring maps match. Surjectivity follows because A-algebra generators lie in the image. Edge cases tested: Y empty, A=0, e_jk=0, E not finitely generated, nonproper affine Y, n=0. Duplicate search: the only 02NP nodes are the item, its parent citer (no cycle) and the 0BCL lemma. Batch-5 flag on def-trf-canonical-symmetric-graded-algebra: it is a general Sym-algebra definition, outside the trace formula and Poincare duality, already in the statement closure through def-trf-relatively-very-ample; accepted. The declared generic tool_uses are accepted. FIX adds two missing citations: def-pc-module-pullback in step 1 (pullback composition) and prop-nagata-proj-standard-open in step 3 (Gamma(D_+(b_j)) = B_(b_j),0), plus that phrase in the step 3 text.; 1 file(s) fixed by the reviewer"
+ }
+}

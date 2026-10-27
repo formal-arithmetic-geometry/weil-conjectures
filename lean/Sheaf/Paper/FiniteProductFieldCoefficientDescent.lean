@@ -12,6 +12,7 @@ public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Sheaf.Paper.DerivedPullbackTensorHom
+import all Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Paper.ConstantCoefficientObjectsConstructible
 public import Sheaf.Paper.FiniteTorAmplitudeSites
 public import Sheaf.Paper.FiniteTorAmplitude
@@ -24,6 +25,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Pi
 import Sheaf.Paper.SfScalarExtensionComposition
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Mathlib.CategoryTheory.Equivalence
+import Mathlib.Data.Fintype.Order
 import Sheaf.CategoryTheory.ScalarLocalization
 import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 
@@ -39,6 +41,7 @@ constructions. In particular rationalization is raw and common-stage objects are
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedSectionVars false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
@@ -328,6 +331,225 @@ variable [hft : LocallyOfFiniteType X.hom] [hqc : QuasiCompact X.hom]
   (hcover : (⋃ i, Set.range (j i).left) = Set.univ)
   (H : IntegralComparisons P X Xi j)
 
+section Generic
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] integralDerivedPullback integralCompletedTensor
+  integralScalarExtension integralOrdinaryScalar completedIntegralCoefficientSheafUnrestricted
+
+
+private theorem rawBifunctorIso
+    {R : Type*} [CommRing R] {C D : Type*} [Category C] [Preadditive C] [Linear R C]
+    [Category D] [Preadditive D] [Linear R D] (t : R)
+    (U V : C × C ⥤ D) (e : U ≅ V)
+    (F G : ScalarLocalization R C t × ScalarLocalization R C t ⥤
+      ScalarLocalization R D t)
+    (hF : ∀ M N, F.obj (M, N) = ⟨U.obj (M.obj, N.obj)⟩)
+    (hG : ∀ M N, G.obj (M, N) = ⟨V.obj (M.obj, N.obj)⟩)
+    (bF : ∀ M M' N N',
+      ∃ b : (M ⟶ M') →+ (N ⟶ N') →+
+        (F.obj (M, N) ⟶ F.obj (M', N')),
+        (∀ f g, F.map (Prod.mkHom f g) = b f g) ∧
+        ∀ (f : M.obj ⟶ M'.obj) (g : N.obj ⟶ N'.obj) (c d : Localization.Away t),
+          HEq (b (c ⊗ₜ[R] f) (d ⊗ₜ[R] g)) ((c * d) ⊗ₜ[R] U.map (Prod.mkHom f g)))
+    (bG : ∀ M M' N N',
+      ∃ b : (M ⟶ M') →+ (N ⟶ N') →+
+        (G.obj (M, N) ⟶ G.obj (M', N')),
+        (∀ f g, G.map (Prod.mkHom f g) = b f g) ∧
+        ∀ (f : M.obj ⟶ M'.obj) (g : N.obj ⟶ N'.obj) (c d : Localization.Away t),
+          HEq (b (c ⊗ₜ[R] f) (d ⊗ₜ[R] g)) ((c * d) ⊗ₜ[R] V.map (Prod.mkHom f g))) :
+    ∃! a : F ≅ G, ∀ M N, HEq (a.hom.app (M, N))
+      ((ScalarLocalization.localization R D t).map (e.hom.app (M.obj, N.obj)))  := by
+  obtain ⟨a, ha, hu⟩ := rawBilinearIso_existsUnique t t id U V e F G
+    (fun K ↦ hF K.1 K.2) (fun K ↦ hG K.1 K.2) bF bG
+  refine ⟨a, fun M N ↦ ha (M, N), ?_⟩
+  intro a' ha'
+  exact hu a' (fun K ↦ ha' K.1 K.2)
+
+private theorem map_heq {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A B A' B' : C} (hA : A = A') (hB : B = B')
+    {f : A ⟶ B} {g : A' ⟶ B'} (h : HEq f g) : HEq (F.map f) (F.map g) := by
+  subst A'
+  subst B'
+  cases h
+  rfl
+
+private theorem prod_heq {C : Type u} [Category.{w} C]
+    {A B A' B' D E D' E' : C}
+    (hA : A = A') (hB : B = B') (hD : D = D') (hE : E = E')
+    {f : A ⟶ B} {f' : A' ⟶ B'} {g : D ⟶ E} {g' : D' ⟶ E'}
+    (hf : HEq f f') (hg : HEq g g') : HEq (Prod.mkHom f g) (Prod.mkHom f' g') := by
+  subst A'
+  subst B'
+  subst D'
+  subst E'
+  cases hf
+  cases hg
+  rfl
+
+attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
+  sfRationalScalarExtension commonStageDerivedPullback commonStageDerivedTensor
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem rationalDerivedPullbackSpec (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] :
+    let F := rationalDerivedPullback l E f;
+      F.Additive ∧
+      (∀ K, F.obj K = ⟨(constructibleIntegralPullback l E f).obj K.obj⟩) ∧
+      (∀ (K L : sfIntegralConstructibleCategory l E Y) (a : K ⟶ L)
+        (c : Localization.Away (Padic.coefficientExtensionUniformizer l E)),
+        HEq (F.map (c ⊗ₜ[Padic.coefficientExtensionIntegers l E] a :
+          (sfRationalConstructibleLocalization l E Y).obj K ⟶
+            (sfRationalConstructibleLocalization l E Y).obj L))
+          (c ⊗ₜ[Padic.coefficientExtensionIntegers l E]
+            (constructibleIntegralPullback l E f).map a)) := by
+  unfold rationalDerivedPullback
+  exact (rationalDerivedPullback_existsUnique l E f).exists.choose_spec
+
+private theorem genericTensorComparison (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (q : Y ⟶ X)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (μ : constructibleIntegralTensor l E X ⋙ constructibleIntegralPullback l E q ≅
+      (constructibleIntegralPullback l E q).prod (constructibleIntegralPullback l E q) ⋙
+        constructibleIntegralTensor l E Y) :
+    ∃! e : rationalDerivedTensor l E X ⋙ rationalDerivedPullback l E q ≅
+      (rationalDerivedPullback l E q).prod (rationalDerivedPullback l E q) ⋙
+        rationalDerivedTensor l E Y,
+      ∀ M N : sfRationalConstructibleCategory l E X,
+        HEq (e.hom.app (M, N)) ((sfRationalConstructibleLocalization l E Y).map
+          (μ.hom.app (M.obj, N.obj))) := by
+  let F := rationalDerivedPullback l E q
+  let T := rationalDerivedTensor l E X
+  let U := rationalDerivedTensor l E Y
+  have hs := rationalDerivedPullbackSpec l
+    E q
+  have ht := rationalTensor_spec l
+    E X
+  have hu := rationalTensor_spec l
+    E Y
+  have : F.Additive := by
+    simpa only [F] using hs.1
+  let R := Padic.coefficientExtensionIntegers l
+    E
+  let t := Padic.coefficientExtensionUniformizer l
+    E
+  apply rawBifunctorIso
+    (C := sfIntegralConstructibleCategory l
+      E X)
+    (D := sfIntegralConstructibleCategory l
+      E Y) t
+    (constructibleIntegralTensor l E X ⋙ constructibleIntegralPullback l E q)
+    ((constructibleIntegralPullback l E q).prod (constructibleIntegralPullback l E q) ⋙
+      constructibleIntegralTensor l E Y) (μ) (T ⋙ F) (F.prod F ⋙ U)
+  · intro M N
+    change F.obj (T.obj (M, N)) = _
+    have hT := ht.1 (M, N)
+    change T.obj (M, N) = _ at hT
+    have hF := hs.2.1
+      (ScalarLocalization.mk ((constructibleIntegralTensor l E X).obj (M.obj, N.obj)))
+    exact (congrArg F.obj hT).trans hF
+  · intro M N
+    change U.obj (F.obj M, F.obj N) = _
+    have hu' := hu.1 (F.obj M, F.obj N)
+    have hm := hs.2.1 M
+    have hn := hs.2.1 N
+    change U.obj (F.obj M, F.obj N) = _ at hu'
+    change F.obj M = _ at hm
+    change F.obj N = _ at hn
+    exact hu'.trans (congrArg
+      (fun MN ↦ ScalarLocalization.mk ((constructibleIntegralTensor l E Y).obj MN))
+      (congrArg₂ Prod.mk (congrArg ScalarLocalization.obj hm)
+        (congrArg ScalarLocalization.obj hn)))
+  · intro M M' N N'
+    obtain ⟨b, hb, hbt⟩ := ht.2 M M' N N'
+    let c : (M ⟶ M') →+ (N ⟶ N') →+
+        ((T ⋙ F).obj (M, N) ⟶ (T ⋙ F).obj (M', N')) :=
+      { toFun := fun f ↦
+          { toFun := fun g ↦ F.map (b f g)
+            map_zero' := by simp
+            map_add' := by intros; simp }
+        map_zero' := by ext g; simp
+        map_add' := by intros; ext g; simp }
+    refine ⟨c, ?_, ?_⟩
+    · intro f g
+      exact congrArg F.map (hb f g)
+    · intro f g a d
+      exact (map_heq F (ht.1 (M, N)) (ht.1 (M', N')) (hbt f g a d)).trans
+        (hs.2.2 _ _ _ (a * d))
+  · intro M M' N N'
+    obtain ⟨b, hb, hbt⟩ := hu.2 (F.obj M) (F.obj M') (F.obj N) (F.obj N')
+    let c : (M ⟶ M') →+ (N ⟶ N') →+
+        ((F.prod F ⋙ U).obj (M, N) ⟶ (F.prod F ⋙ U).obj (M', N')) :=
+      { toFun := fun f ↦
+          { toFun := fun g ↦ b (F.map f) (F.map g)
+            map_zero' := by simp
+            map_add' := by intros; simp }
+        map_zero' := by ext g; simp
+        map_add' := by intros; ext g; simp }
+    refine ⟨c, ?_, ?_⟩
+    · intro f g
+      exact hb (F.map f) (F.map g)
+    · intro f g a d
+      change HEq (b (F.map (a ⊗ₜ[R] f)) (F.map (d ⊗ₜ[R] g))) _
+      rw [← hb]
+      have h := map_heq U
+        (congrArg₂ Prod.mk (hs.2.1 M) (hs.2.1 N))
+        (congrArg₂ Prod.mk (hs.2.1 M') (hs.2.1 N'))
+        (prod_heq (hs.2.1 M) (hs.2.1 M') (hs.2.1 N) (hs.2.1 N')
+          (hs.2.2 _ _ f a) (hs.2.2 _ _ g d))
+      obtain ⟨b', hb', hbt'⟩ := hu.2
+        (ScalarLocalization.mk ((constructibleIntegralPullback l E q).obj M.obj))
+        (ScalarLocalization.mk ((constructibleIntegralPullback l E q).obj M'.obj))
+        (ScalarLocalization.mk ((constructibleIntegralPullback l E q).obj N.obj))
+        (ScalarLocalization.mk ((constructibleIntegralPullback l E q).obj N'.obj))
+      exact h.trans ((heq_of_eq (hb' _ _)).trans
+        (hbt' ((constructibleIntegralPullback l E q).map f)
+          ((constructibleIntegralPullback l E q).map g) a d))
+
+
+private theorem genericHomCoordinates (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (q : Y ⟶ X)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (K M : sfIntegralConstructibleCategory l E X) (f : K ⟶ M) (a : E) :
+    HEq ((rationalDerivedPullback l E q).map
+      ((sfRationalHomCoordinates l E X
+        ((sfRationalConstructibleLocalization l E X).obj K)
+        ((sfRationalConstructibleLocalization l E X).obj M)).symm (f ⊗ₜ a)))
+      ((sfRationalHomCoordinates l E Y
+        ((sfRationalConstructibleLocalization l E Y).obj
+          ((constructibleIntegralPullback l E q).obj K))
+        ((sfRationalConstructibleLocalization l E Y).obj
+          ((constructibleIntegralPullback l E q).obj M))).symm
+        ((constructibleIntegralPullback l E q).map f ⊗ₜ a)) := by
+  let c := (sfRationalCoefficientEquiv l E).symm a
+  have coord (W : Scheme.{u}) (A B : sfIntegralConstructibleCategory l E W)
+      (g : A ⟶ B) :
+      (sfRationalHomCoordinates l E W ⟨A⟩ ⟨B⟩).symm (g ⊗ₜ a) = c ⊗ₜ g := by
+    apply (sfRationalHomCoordinates l E W ⟨A⟩ ⟨B⟩).injective
+    rw [AddEquiv.apply_symm_apply]
+    have hc := (sfRationalHomCoordinates_existsUnique l E W ⟨A⟩ ⟨B⟩).exists.choose_spec c g
+    exact (hc.trans (congrArg (fun z ↦ g ⊗ₜ z)
+      ((sfRationalCoefficientEquiv l E).apply_symm_apply a))).symm
+  change HEq ((rationalDerivedPullback l E q).map
+    ((sfRationalHomCoordinates l E X ⟨K⟩ ⟨M⟩).symm (f ⊗ₜ a)))
+    ((sfRationalHomCoordinates l E Y
+      ⟨(constructibleIntegralPullback l E q).obj K⟩
+      ⟨(constructibleIntegralPullback l E q).obj M⟩).symm
+      ((constructibleIntegralPullback l E q).map f ⊗ₜ a))
+  rw [coord X K M f, coord Y _ _ ((constructibleIntegralPullback l E q).map f)]
+  exact (rationalDerivedPullbackSpec l E q).2.2 K M f c
+
+
+end Generic
+
 include hft hqc hopen hclosed hdisjoint hcover H in
 /-- Restriction descends through raw rationalization and the actual common-stage pairs.
 No idempotent completion occurs; the finite-Tor field categories are the same categories.
@@ -362,6 +584,11 @@ theorem restriction_equivalences :
   sorry
 
 
+section HomCoordinates
+set_option allowUnsafeReducibility true in
+attribute [local reducible] rationalCategory rationalCategoryStructure rationalPreadditive
+  integralCategory integralCategoryStructure integralPreadditive integralLinear localization
+
 include hft hqc hopen hclosed hdisjoint hcover H in
 /-- Rational restriction's pure-tensor formula in Hom-first E coordinates.
 Its finite-product Hom isomorphism is the existing TensorProduct.piLeft.
@@ -386,8 +613,13 @@ theorem hom_tensor_formula (E : Index P.coefficients.l P.coefficients.Qbar)
           ((localization P E (Xi i)).obj ((integralRestriction P E (j i)).obj K))
           ((localization P E (Xi i)).obj ((integralRestriction P E (j i)).obj M))).symm
           ((integralRestriction P E (j i)).map f ⊗ₜ a))) := by
-  sorry
+  intro f a i
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  exact genericHomCoordinates P.coefficients.l
+    (Coefficient.{u} P.coefficients.l P.coefficients.Qbar E) (j i).left K M f a
 
+end HomCoordinates
 include hft hqc hopen hclosed hdisjoint hcover H in
 /-- Every component tuple glues at one finite coefficient field, containing every
 field of definition in the tuple. The empty tuple uses the base coefficient field.
@@ -403,7 +635,14 @@ theorem objects_at_common_field
     ∃ (L : Index P.coefficients.l P.coefficients.Qbar)
       (hB : ∀ i, (B i).stage ≤ L) (K : rationalCategory P L X),
       ∀ i, Nonempty ((rationalRestriction P L (j i)).obj K ≅ (B i).toStage (hB i)) := by
-  sorry
+  obtain ⟨L, hB⟩ := Finite.exists_le (fun i ↦ (B i).stage)
+  let F := Functor.pi' (A := rationalCategory P L X)
+    (C := fun i : I ↦ rationalCategory P L (Xi i))
+    (fun i : I ↦ rationalRestriction P L (j i))
+  have : F.IsEquivalence :=
+    (restriction_equivalences P X Xi j hdisjoint hcover H).1 L
+  obtain ⟨K, ⟨e⟩⟩ := Functor.EssSurj.mem_essImage F (fun i ↦ (B i).toStage (hB i))
+  exact ⟨L, hB, K, fun i ↦ ⟨(Pi.eval _ i).mapIso e⟩⟩
 
 include hft hqc hopen hclosed hdisjoint hcover H in
 /-- A finite tuple of component arrows has one global representative over one common
@@ -425,7 +664,14 @@ theorem arrows_at_common_field
       (hB : B.stage ≤ L) (u : StageHom A B ⟨L, hA, hB⟩),
       ∀ i, (commonRestriction P (j i)).map
         (GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB u) = v i := by
-  sorry
+  let F := Functor.pi' (A := commonCategory P X)
+    (C := fun i : I ↦ commonCategory P (Xi i))
+    (fun i : I ↦ commonRestriction P (j i))
+  have : F.IsEquivalence :=
+    (restriction_equivalences P X Xi j hdisjoint hcover H).2
+  obtain ⟨a, ha⟩ := F.map_surjective (X := A) (Y := B) v
+  obtain ⟨L, hA, hB, u, rfl⟩ := (representatives A B).1 a
+  exact ⟨L, hA, hB, u, fun i ↦ congrFun ha i⟩
 
 include hft hqc hopen hclosed hdisjoint hcover H in
 /-- Component equality is exactly equality of the global representatives after a single
@@ -448,7 +694,18 @@ theorem component_equality_iff_eventual
         (GeneralAlgebraicallyClosedCoefficients.ofHom A B M.val M.property.1 M.property.2 g)) ↔
       ∃ (N : Common A B) (hL : L ≤ N) (hM : M ≤ N),
         transport A B L N hL f = transport A B M N hM g := by
-  sorry
+  let F := Functor.pi' (A := commonCategory P X)
+    (C := fun i : I ↦ commonCategory P (Xi i))
+    (fun i : I ↦ commonRestriction P (j i))
+  have : F.IsEquivalence :=
+    (restriction_equivalences P X Xi j hdisjoint hcover H).2
+  rw [← (representatives A B).2 L M f g]
+  constructor
+  · intro h
+    exact F.map_injective (funext h)
+  · intro h i
+    exact congrArg (commonRestriction P (j i)).map h
+
 
 
 include hft hqc hopen hclosed hdisjoint hcover H in
@@ -469,7 +726,10 @@ theorem rational_tensor_existsUnique
       ∀ M N : rationalCategory P E X,
         HEq (μ.hom.app (M, N))
           ((localization P E (Xi i)).map ((H.tensor E i).hom.app (M.obj, N.obj))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  exact genericTensorComparison P.coefficients.l
+    (Coefficient.{u} P.coefficients.l P.coefficients.Qbar E) (j i).left (H.tensor E i)
 
 /-- The tensor comparison fixed by integral localization, not an arbitrary isomorphism.
 Source: blueprint transport, step 4
@@ -479,6 +739,69 @@ def rationalTensorComparison (E : Index P.coefficients.l P.coefficients.Qbar) (i
       ((rationalRestriction P E (j i)).prod (rationalRestriction P E (j i))) ⋙
         rationalTensor P E (Xi i) :=
   (rational_tensor_existsUnique P X Xi j hdisjoint hcover H E i).exists.choose
+
+
+
+section ScalarUnitProof
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] sfRationalScalarExtension
+private theorem genericScalarUnit (l : ℕ) [Fact l.Prime]
+    (E L : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
+    (ι : E →ₐ[ℚ_[l]] L) (Y : Scheme.{u})
+    (A : sfIntegralConstructibleCategory l E Y)
+    (B : sfIntegralConstructibleCategory l L Y)
+    (ν : (sfConstructibleIntegralScalarExtension 0 l
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι Y).obj A ≅ B) :
+    ∃! e : (sfRationalScalarExtension l E Y 0
+      (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+      ((sfRationalConstructibleLocalization l E Y).obj A) ≅
+        (sfRationalConstructibleLocalization l L Y).obj B,
+      HEq e.hom ((sfRationalConstructibleLocalization l L Y).map ν.hom) := by
+  let Q := sfRationalConstructibleLocalization l L Y
+  have ho := (sfRationalScalarExtension_existsUnique l E Y 0
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).exists.choose_spec.2.1
+      ((sfRationalConstructibleLocalization l E Y).obj A)
+  unfold sfRationalScalarExtension
+  let e := eqToIso ho ≪≫ Q.mapIso ν
+  have he : HEq e.hom (Q.map ν.hom) := eqToHom_comp_heq (Q.map ν.hom) ho
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  exact eq_of_heq (he'.trans he.symm)
+
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem genericUnitComparison (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {X Y : Scheme.{u}} (q : Y ⟶ X)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (A : sfIntegralConstructibleCategory l E X)
+    (B : sfIntegralConstructibleCategory l E Y)
+    (ε : (constructibleIntegralPullback l E q).obj A ≅ B) :
+    ∃! e : (rationalDerivedPullback l E q).obj
+      ((sfRationalConstructibleLocalization l E X).obj A) ≅
+        (sfRationalConstructibleLocalization l E Y).obj B,
+      HEq e.hom ((sfRationalConstructibleLocalization l E Y).map ε.hom) := by
+  let Q := sfRationalConstructibleLocalization l E Y
+  have ho : (rationalDerivedPullback l E q).obj
+      ((sfRationalConstructibleLocalization l E X).obj A) =
+      ScalarLocalization.mk ((constructibleIntegralPullback l E q).obj A) := by
+    unfold rationalDerivedPullback
+    exact (rationalDerivedPullback_existsUnique l E q).exists.choose_spec.2.1
+      ((sfRationalConstructibleLocalization l E X).obj A)
+  let e := eqToIso ho ≪≫ Q.mapIso ε
+  have he : HEq e.hom (Q.map ε.hom) := eqToHom_comp_heq (Q.map ε.hom) ho
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  exact eq_of_heq (he'.trans he.symm)
+
+end ScalarUnitProof
 
 include hft hqc hopen hclosed hdisjoint hcover H in
 /-- The unit restriction comparison is exactly the rationalized integral unit comparison.
@@ -493,7 +816,12 @@ theorem rational_unit_existsUnique
       ((localization P E X).obj (integralUnit P E X)) ≅
         (localization P E (Xi i)).obj (integralUnit P E (Xi i)),
       HEq e.hom ((localization P E (Xi i)).map (H.unit E i).hom) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  exact genericUnitComparison P.coefficients.l
+    (Coefficient.{u} P.coefficients.l P.coefficients.Qbar E) (j i).left
+    (integralUnit P E X) (integralUnit P E (Xi i)) (H.unit E i)
+
 
 /-- The rational unit restriction comparison, fixed by its integral representative.
 Source: blueprint transport, step 4
@@ -502,6 +830,9 @@ def rationalUnitComparison (E : Index P.coefficients.l P.coefficients.Qbar) (i :
     (rationalRestriction P E (j i)).obj ((localization P E X).obj (integralUnit P E X)) ≅
       (localization P E (Xi i)).obj (integralUnit P E (Xi i)) :=
   (rational_unit_existsUnique P X Xi j hdisjoint hcover H E i).exists.choose
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 /-- The canonical rational scalar transition on the recorded coefficient stage system.
 Source: blueprint coefficient extensions
@@ -578,7 +909,14 @@ theorem rational_scalar_unit_existsUnique
       ((localization P E Y).obj (integralUnit P E Y)) ≅
         (localization P L Y).obj (integralUnit P L Y),
       HEq e.hom ((localization P L Y).map ν.hom) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  exact genericScalarUnit P.coefficients.l
+    (Coefficient.{u} P.coefficients.l P.coefficients.Qbar E)
+    (Coefficient.{u} P.coefficients.l P.coefficients.Qbar L)
+    (coefficientInclusion P.coefficients.l P.coefficients.Qbar E L h) Y.left
+    (integralUnit P E Y) (integralUnit P L Y) ν
+
 
 /-- The prescribed scalar-unit comparison after raw localization.
 Source: blueprint transport, step 4
@@ -735,7 +1073,36 @@ theorem common_unit_existsUnique
             GeneralAlgebraicallyClosedCoefficients.unitor
               P.coefficients.l P.coefficients.Qbar (Xi i).left E).inv.app
               ((localization P E (Xi i)).obj (integralUnit P E (Xi i))))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+  let A' := commonStagePullbackObject P.coefficients.l P.coefficients.Qbar
+    (j i).left (commonUnit P E X)
+  let B' := commonUnit P E (Xi i)
+  let S := stageSystem P.coefficients.l P.coefficients.Qbar (Xi i).left
+  let c := operationStageTransitionIso P.coefficients.l P.coefficients.Qbar
+    (Xi i).left E E le_rfl ≪≫ unitor P.coefficients.l P.coefficients.Qbar (Xi i).left E
+  let d : A'.toStage le_rfl ≅ B'.toStage le_rfl :=
+    c.app ((rationalRestriction P E (j i)).obj
+      ((localization P E X).obj (integralUnit P E X))) ≪≫
+      rationalUnitComparison P X Xi j hdisjoint hcover H E i ≪≫
+      (c.app ((localization P E (Xi i)).obj (integralUnit P E (Xi i)))).symm
+  let e₀ : A' ≅ B' := S.isoToStage A' le_rfl ≪≫ (S.ι E).mapIso d ≪≫
+    (S.isoToStage B' le_rfl).symm
+  have hd : e₀.hom = ofHom A' B' E le_rfl le_rfl d.hom :=
+    (StageSystem.mkHom_eq_isoToStage (S := S) (X := A') (Y := B')
+      (n := E) le_rfl le_rfl d.hom).symm
+  have ho : (commonRestriction P (j i)).obj (commonUnit P E X) = A' := by
+    unfold commonRestriction commonStageDerivedPullback
+    exact (commonStageDerivedPullback_existsUnique P.coefficients.l
+      P.coefficients.Qbar (j i).left).exists.choose_spec.1 (commonUnit P E X)
+  let e := eqToIso ho ≪≫ e₀
+  have he : HEq e.hom (ofHom A' B' E le_rfl le_rfl d.hom) :=
+    (eqToHom_comp_heq e₀.hom ho).trans (heq_of_eq hd)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  exact eq_of_heq (he'.trans he.symm)
+
 
 end FiniteProductFieldDescent
 end WeilConjectures

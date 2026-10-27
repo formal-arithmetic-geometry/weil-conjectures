@@ -1,0 +1,373 @@
+{
+ "id": "lem-sfb-split-integral-radical-cover",
+ "kind": "statement",
+ "title": "Integral split radical quotient and simply connected cover",
+ "statement": "Let $H$ be a split reductive $\\mathbf Z$-group scheme with a split maximal torus and a Borel subgroup scheme containing it. A reductive group scheme over a commutative ring is a smooth affine finitely presented group scheme with connected geometric fibres having no nontrivial smooth connected normal unipotent subgroup; unipotent means that in a faithful matrix representation each geometric point $u$ satisfies $(u-I)^N=0$ for some $N\\geq1$. Group objects use the diagrams of [def-sc-group-scheme] over the specified spectrum [def-weil-affine-spectrum], with smooth, affine, finite presentation and connected as in [def-sbc-smooth-morphisms, pqf-def-affine-morphism, def-sbc-locally-finite-presentation, def-weil-connected-scheme]. A split maximal torus is a subgroup scheme isomorphic to $\\mathbf G_m^r$ with fibrewise maximal tori, where $\\mathbf G_m(B)=B^\\times$ and $r\\geq0$. A Borel subgroup scheme has geometric fibres maximal smooth connected solvable subgroups; solvable means that iterated commutator subgroups eventually become trivial. There are a closed [def-weil-closed-immersion] central subgroup scheme $T\\simeq\\mathbf G_{m,\\mathbf Z}^r$ for some $r\\geq0$, a split semisimple $\\mathbf Z$-group scheme $Q$, a split semisimple simply connected $\\mathbf Z$-group scheme $S$, and exact sequences of group schemes\n$$1\\longrightarrow T\\longrightarrow H\\longrightarrow Q\\longrightarrow1,\n\\qquad 1\\longrightarrow F\\longrightarrow S\\xrightarrow{\\pi}Q\\longrightarrow1.$$\nHere $F$ is central and finite locally free over $\\mathbf Z$ (its coordinate algebra is a finitely generated projective $\\mathbf Z$-module). Exact means that the first arrow identifies the scheme-theoretic kernel, and the last arrow is faithfully flat (flat [def-weil-flat-morphism] and surjective) and locally of finite presentation and represents the fppf sheaf quotient; fppf covers are jointly surjective flat locally finitely presented families. Semisimple means smooth affine finitely presented with connected geometric fibres having no nontrivial smooth connected solvable normal subgroup. Simply connected means that every central isogeny onto a geometric fibre from a connected semisimple group is an isomorphism; a central isogeny is a surjective homomorphism with finite central scheme-theoretic kernel. Both sequences remain exact after every ring base change $\\mathbf Z\\to B$, with the displayed split, semisimple and simply connected properties retained. Trivial tori and trivial semisimple groups are allowed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Example 5.1.7, printed pp.138-139 (root-lattice centre); Theorem 5.3.1 and Corollary 5.3.3, pp.160-164 (maximal central torus and semisimple quotient); Theorem 6.1.16, p.196, and Exercise 6.5.2(i), p.235 (split simply connected covering). Use the split root datum over Z; finite central kernels are scheme-theoretic. Local PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sfb-relative-reductive-cover-terminology",
+  "def-sfb-fppf-group-quotient-presentation",
+  "def-sfb-relative-split-torus",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Write $U=D_{\\mathbf Z}(M)$ for the given split maximal torus of $H$. Apply [lem-sfb-integral-split-root-datum] to obtain the constant roots $\\Phi$ and coroots, valid on every geometric fibre. Put $L=\\mathbf Z\\Phi$. The relative centre formula [lem-sfb-relative-reductive-centre-weight-kernel] gives the scheme-theoretic closed centre\n$$Z(H)=D_{\\mathbf Z}(M/L)\\subseteq U.$$\nThe latter lemma applies over $\\mathbf Z$, a nonzero Noetherian ring, and its constant-support hypothesis is exactly supplied by the first citation. In particular this is an identity of group schemes, not merely of points over fields.",
+   "uses": [
+    "lem-sfb-integral-split-root-datum",
+    "lem-sfb-relative-reductive-centre-weight-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Proposition 5.1.6 and Example 5.1.7, printed p.138."
+   }
+  },
+  {
+   "text": "Set $A=M/L$, let $A_{\\mathrm{tor}}$ be its subgroup of finite-order elements, and put $C=A/A_{\\mathrm{tor}}$. The finitely generated abelian-group structure theorem makes $A_{\\mathrm{tor}}$ finite and $C\\simeq\\mathbf Z^r$ for some $r\\geq0$. The surjection $M\\twoheadrightarrow A\\twoheadrightarrow C$ induces a closed immersion $T=D_{\\mathbf Z}(C)\\hookrightarrow Z(H)$ by relative diagonalizable duality. Thus $T\\simeq\\mathbf G_m^r$ is central and closed in $H$ (in coordinates the two successive quotient maps are surjective). For any algebraically closed field $k$, a subtorus of $Z(H)_k=D_k(A)$ has character group free of finite rank. Its character map from $A$ kills $A_{\\mathrm{tor}}$, so its inclusion factors through $D_k(C)=T_k$. Hence $T_k$ is the largest central subtorus. This elementary factorization uses the duality statement over $k$ and does not replace the centre by its reduction.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 5.1.7, pp.138-139; Remark B.1.2, pp.280-281 (largest torus in a diagonalizable group)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-central-multiplicative-quotient] over $\\mathbf Z$ to the closed central multiplicative-type subgroup $T\\subseteq H$. It represents $Q=H/T$ by a reductive integral group, with kernel $T$, and makes $p:H\\to Q$ faithfully flat and finitely presented and a represented fppf quotient. Formation of this quotient and the maximal torus $U/T$ commute with arbitrary base change. Put $N=\\ker(M\\to C)$. The relative diagonalizable quotient formula identifies $U/T=D_{\\mathbf Z}(N)$; $N$ is free of finite rank by [lem-weil-subgroup-finite-free-abelian-group-free]. Therefore $Q$ has a split maximal torus. For every algebraically closed $k$, step 2 identifies $T_k$ with the largest central torus of $H_k$. By [lem-sfb-reductive-radical-quotient] this is its radical and $H_k/T_k$ is semisimple. The arbitrary-base-change clause of the relative quotient identifies this quotient with $Q_k$. Thus $Q$ is split semisimple.",
+   "uses": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-weil-subgroup-finite-free-abelian-group-free",
+    "lem-sfb-reductive-radical-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary 3.3.5, pp.100-101; Example 5.1.7 and Corollary 5.3.3, pp.138-139,164. Field radical criterion: Milne Corollary 17.62(b)-(d), pp.372-373."
+   }
+  },
+  {
+   "text": "Extract the root datum $(X,\\Psi,X^\\vee,\\Psi^\\vee)$ of the split semisimple group $Q$ by [lem-sfb-integral-split-root-datum]. Its roots span $V=X\\otimes\\mathbf Q$. Apply [lem-sfb-root-datum-lattice-embedding] with this datum. Since the root span is all of $V$, its complementary central space is zero. Its weight lattice\n$$P=\\{v\\in V:\\langle v,\\beta^\\vee\\rangle\\in\\mathbf Z\\text{ for every }\\beta\\in\\Psi\\}$$\nis free of finite rank, and $X\\subseteq P$ with finite index: the lemma's map $j$ is precisely this inclusion because its root-space projection is the identity. Every root is in $X$, so the inclusion fixes all roots and the coroot restrictions agree.",
+   "uses": [
+    "lem-sfb-integral-split-root-datum",
+    "lem-sfb-root-datum-lattice-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Example 5.1.7, pp.138-139; Theorem 6.1.16 and Exercise 6.5.2(i), pp.196,235. Weight-lattice construction: Milne Appendix C and Section 23h."
+   }
+  },
+  {
+   "text": "Use the roots $\\Psi\\subset P$ and coroot functionals on $P$ induced by the rational coroots. They form a reduced root datum: the pairing is integral by the definition of $P$; $s_\\beta(v)=v-\\langle v,\\beta^\\vee\\rangle\\beta$ preserves $P$ since both $v$ and $\\beta$ lie there and the coefficient is integral; the root-coroot permutations, finiteness of the reflection group and reducedness are those of the datum on $X$, acting on the same rational vector space. By [lem-sfb-integral-root-datum-isogenies], realize this datum by a split reductive integral group $S$ with maximal torus $D_{\\mathbf Z}(P)$. The roots still span $P\\otimes\\mathbf Q=V$, and the full weight lattice computed from these coroots is $P$ itself. The two fibre criteria of [lem-sfb-integral-split-root-datum] therefore make $S$ semisimple and simply connected on every geometric fibre, exactly in the sense required in the item.",
+   "uses": [
+    "lem-sfb-integral-root-datum-isogenies",
+    "lem-sfb-integral-split-root-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.1.16(2), p.196; Example 5.1.7, pp.138-139; Exercise 6.5.2, p.235."
+   }
+  },
+  {
+   "text": "The finite-index inclusion $u:X\\hookrightarrow P$ satisfies the isogeny theorem with $G_0=Q$, $G_1=S$ and the identity bijection of roots: $u(\\beta)=\\beta$ and restriction of the coroot on $P$ is the coroot on $X$. Thus [lem-sfb-integral-root-datum-isogenies] supplies a finite faithfully flat finitely presented homomorphism $\\pi:S\\to Q$ with closed central kernel\n$$F=D_{\\mathbf Z}(P/X).$$\nSince $P/X$ is finite, $\\mathbf Z[P/X]$ is a free $\\mathbf Z$-module on the finite basis $\\{e_a:a\\in P/X\\}$. Thus $F$ is finite locally free, including at primes dividing its rank. In particular no prime-to-characteristic or reduced-kernel assumption has entered the construction.",
+   "uses": [
+    "lem-sfb-integral-root-datum-isogenies",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Theorem 6.1.16(1), p.196; Definition 6.1.8 and Example 6.1.9, p.191; Appendix B.1, p.280."
+   }
+  },
+  {
+   "text": "Let $\\mathbf Z\\to B$ be any ring map. The first quotient and its kernel remain the represented fppf quotient by the arbitrary-base-change clause of [lem-sfb-relative-central-multiplicative-quotient]. The second map and its kernel remain faithfully flat, finitely presented and $D_B(P/X)$ by [lem-sfb-integral-root-datum-isogenies]. To verify its quotient interpretation explicitly, pull back the singleton fppf cover $S_B\\to Q_B$ along any point $q:V\\to Q_B$. By [lem-trf-fppf-covering-base-change] it gives a cover of $V$ on which $q$ lifts to $S_B$. Two lifts $s_1,s_2$ have the same image exactly when $s_1^{-1}s_2\\in F_B$, by the kernel equality. Consequently the fppf sheafification of $S_B/F_B$ is $Q_B$. This proves the second exact sequence and its base-change assertion, with scheme-theoretic kernels throughout.",
+   "uses": [
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-integral-root-datum-isogenies",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Definition 3.3.9, p.103; Appendix B.1; quotient torsor interpretation of Corollary 3.3.5, pp.100-101. Cover base change: Stacks Tag 021O, topologies.tex lemma-fppf (3)."
+   }
+  },
+  {
+   "text": "The chosen split tori remain products of $\\mathbf G_m$ over $B$; $F_B$ has coordinate algebra $B[P/X]$, free on the same finite basis. Every geometric fibre over $B$ is obtained from an algebraically closed field equipped with a map from $\\mathbf Z$, so the root-datum and fibre criteria already checked give the same semisimple and simply connected properties after this base change. These criteria are compatible with base change by [lem-sfb-integral-split-root-datum]. If $B$ is the zero ring the base scheme is empty and the assertions hold vacuously. For empty root data, $H$ is a torus, $T=H$ and $Q=S=1$; for a semisimple $H$, $C=0$ and $T=1$. Thus the allowed trivial cases introduce no exceptions.",
+   "uses": [
+    "lem-sfb-integral-split-root-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Definition 5.1.1, p.136; Proposition 5.1.6 and Example 5.1.7, pp.138-139."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-split-root-datum",
+  "lem-sfb-relative-reductive-centre-weight-kernel",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-relative-central-multiplicative-quotient",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-sfb-reductive-radical-quotient",
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-integral-root-datum-isogenies",
+  "def-sfb-ring-diagonalizable-group",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Root-lattice construction following Example 5.1.7, Theorem 6.1.16 and Exercise 6.5.2(i); source read online, local copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"simplyConnected\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"SimplyConnectedSpace\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" (X : Type u_3) [TopologicalSpace X] : Prop\", \"doc\": \"A simply connected space is one whose fundamental groupoid is equivalent to `Discrete Unit`\"}\n  {\"name\": \"IsSimplyConnected\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_1} [TopologicalSpace X] (s : Set X) : Prop\", \"doc\": \"We say that a set is simply connected if it's a simply connected topological space\\nin the induced topology.\"}\n  {\"name\": \"SimplyConnectedSpace.instPathConnectedSpace\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_3} [TopologicalSpace X] [SimplyConnectedSpace X] : PathConnectedSpace X\", \"doc\": \"\"}\n  {\"name\": \"SimplyConnectedSpace.ofContractible\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" (Y : Type u_4) [TopologicalSpace Y] [ContractibleSpace Y] : SimplyConnectedSpace Y\", \"doc\": \"\"}\n  {\"name\": \"IsSimplyConnected.nonempty\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} (hs : IsSimplyConnected s) : s.Nonempty\", \"doc\": \"\"}\n  {\"name\": \"SimplyConnectedSpace.instSubsingletonFundamentalGroup\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_3} [TopologicalSpace X] [SimplyConnectedSpace X] (x : X) : Subsingleton (FundamentalGroup X x)\", \"doc\": \"\"}\n  {\"name\": \"IsSimplyConnected.isPathConnected\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_1} [TopologicalSpace X] {s : Set X} (hs : IsSimplyConnected s) : IsPathConnected s\", \"doc\": \"\"}\n  {\"name\": \"SimplyConnectedSpace.instSubsingletonQuotient\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_3} [TopologicalSpace X] [SimplyConnectedSpace X] (x y : X) : Subsingleton (Path.Homotopic.Quotient x y)\", \"doc\": \"\"}\n  {\"name\": \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] [hY : SimplyConnectedSpace Y] (e : ContinuousMap.HomotopyEquiv X Y) : SimplyConnectedSpace X\", \"doc\": \"\"}\n  {\"name\": \"ContinuousMap.HomotopyEquiv.simplyConnectedSpace_iff\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_1} {Y : Type u_2} [TopologicalSpace X] [TopologicalSpace Y] (e : ContinuousMap.HomotopyEquiv X Y) : SimplyConnectedSpace X ↔ SimplyConnectedSpace Y\", \"doc\": \"\"}\n  {\"name\": \"SimplyConnectedSpace.equiv_unit\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_3} {inst✝ : TopologicalSpace X} [self : SimplyConnectedSpace X] : Nonempty (FundamentalGroupoid X ≌ CategoryTheory.Discrete Unit)\", \"doc\": \"\"}\n  {\"name\": \"SimplyConnectedSpace.mk\", \"module\": \"Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\", \"type\": \" {X : Type u_3} [TopologicalSpace X] (equiv_unit : Nonempty (FundamentalGroupoid X ≌ CategoryTheory.Discrete Unit)) : SimplyConnectedSpace X\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "central.*isogeny|semisimple.*cover|reductive.*radical",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simply connected semisimple central cover split reductive group scheme radical torus over integers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.radical\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"(I : IdealSheafData X) : IdealSheafData X\", \"doc\": \"Given a scheme $X$ and an ideal sheaf data $\\\\mathcal{I}$ on $X$, the radical of $\\\\mathcal{I}$ is the ideal sheaf data whose sections over each affine open subset $U \\\\subseteq X$ are the radicals of th\"}\n  {\"name\": \"LieAlgebra.radical\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"(R : Type u) → (L : Type v) → [inst : CommRing R] → [inst_1 : LieRing L] → [inst_2 : LieAlgebra R L] → LieIdeal R L\", \"doc\": \"The radical of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ is defined as the supremum (sum) of all solvable Lie ideals in $\\\\mathfrak{g}$. This represents the largest solvable ideal contai\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.recOn\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {motive : LieAlgebra.HasCentralRadical R L → Sort u} →\\n            (t : LieAlgebra.HasCentralRadical R L) →\\n              ((radical_eq_center : LieAlgebra.radical \", \"doc\": \"Given a property of Lie algebras with central radical, if we can define it for the case where the radical equals the center, then this recursion principle allows extending the definition to all such L\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.mk\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L = LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"If the radical of a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ equals its center, then $\\\\mathfrak{g}$ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasTrivialRadical R L ↔ LieAlgebra.radical R L = ⊥\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $, the Lie algebra $ L $ has a trivial radical if and only if its radical (the sum of all solvable ideals) equals the zero submodule $\\\\{0\\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive group scheme over the integers has a central split torus radical with split semisimple quotient and simply connected central covering",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a field $k$ with an irreducible and faithful module $M$, the radical of $\\\\mathfrak{g}$ is central, and an element $x \\\\in \\\\mathfrak{g}$ lies in the center if and o\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_iff\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasCentralRadical R L ↔ LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is a central ideal if and only if the radical of $\\\\mathfrak{g}$ is equal to the center of $\\\\mathfrak{g}$.\"}\n  {\"name\": \"LieAlgebra.hasCentralRadical_of_radical_le\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.radical R L ≤ LieAlgebra.center R L → LieAlgebra.HasCentralRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $, if the radical of $ L $ is contained within its center, then $ L $ has a central radical (i.e., its radical is a central ideal).\"}\n  {\"name\": \"LieAlgebra.HasCentralRadical.radical_eq_center\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.HasCentralRadical R L], LieAlgebra.radical R L = LieAlgebra.center R L\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $ with a central radical, the radical of $ L $ is equal to its center. That is, $ \\\\operatorname{rad}(L) = \\\\mathfrak{z}(L) $, where $ \\\\oper\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.subsingleton_of_hasTrivialRadical_lie_abelian\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L] [h : IsLieAbelian L], Subsingleton L\", \"doc\": \"If $ L $ is an abelian Lie algebra over a commutative ring $ R $ with a trivial radical (i.e., its radical is the zero ideal), then $ L $ is trivial, meaning it contains only the zero element.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split reductive groups radical torus quotient simply connected semisimple cover over rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n  {\"name\": \"LieAlgebra.HasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.instIsFaithfulOfHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], LieModule.IsFaithful R L L\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal), then $ L $ is a faithful Lie module over itself. This means the action of $ L $ on its\"}\n  {\"name\": \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every simple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.abelian_radical_of_hasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.HasTrivialRadical R L], IsLieAbelian ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ has a trivial radical (i.e., its radical is the zero ideal), then the radical is an abelian Lie algebra. This follows because the trivial ra\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern reduced rings, ordinary group extensions, Lie algebras, topological simple connectedness, tensor constructions, or etale geometry; none states this rational group-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classification of split reductive group schemes over the integers by root data and realization of central isogenies by finite index character lattice inclusions",
+   "results": "Actual search: 8 hits; RootDatum, RootPairing.Hom.indexEquiv, RootPairingCat.index, RootPairingCat, RootPairingCat.mk.inj, RootPairing.EmbeddedG2.indexEquivAllRoots, RootPairing.EmbeddedG2, RootPairingCat.weight",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsRootSystem|RootPairing|isogeny|Isogeny)",
+   "results": "Actual search: 25 hits; Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean, Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean, Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean, Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean, Mathlib/LinearAlgebra/RootSystem/RootPairingCat.lean, Mathlib/LinearAlgebra/RootSystem/Reduced.lean, Mathlib/LinearAlgebra/RootSystem/Reduced.lean, Mathlib/LinearAlgebra/RootSystem/Reduced.lean",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(root.datum|rootDatum|RootDatum|central.isogeny|semisimple.*group.scheme|reductive.*group.scheme)",
+   "results": "Actual search: 5 hits; Mathlib/LinearAlgebra/RootSystem/Defs.lean, Mathlib/LinearAlgebra/RootSystem/Defs.lean, Mathlib/LinearAlgebra/RootSystem/Defs.lean, Mathlib/LinearAlgebra/RootSystem/Defs.lean, Mathlib/LinearAlgebra/RootSystem/Defs.lean",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split reductive group scheme over the integers has a central torus radical quotient and a simply connected semisimple central cover",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, LieAlgebra.HasCentralRadical.casesOn, AddGroupExtension.IsConj.refl, AddGroupExtension.Splitting.casesOn, GroupExtension.Splitting.mk, GroupExtension.IsConj.refl, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsReduced.of_openCover",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reductive\", \"RootDatum\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootPairing\"",
+   "results": "Actual search: 12 hits; RootPairing, RootPairing.IsRootSystem, RootPairing.indexNeg, RootPairing.IsOrthogonal, RootPairing.coroot, RootPairing.coxeterWeight, RootPairing.pairing, RootPairing.root",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize finite index inclusions between lattices with identical roots and coroots as central isogenies of split reductive groups over Z",
+   "results": "Actual search: 8 hits; RootPairing.Hom.indexEquiv, RootPairing.EmbeddedG2.indexEquivAllRoots, RootPairing.Equiv.comp_indexEquiv_apply, RootPairing.EmbeddedG2.indexEquivAllRoots_apply_coe, RootPairing.Hom.comp_indexEquiv_apply, RootPairing.EmbeddedG2, RootPairing.EmbeddedG2.indexEquivAllRoots_symm_apply, RootPairing.mk''",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(simply.connected|semisimple|reductive|root.datum)",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Root datum of a split reductive group over Z and character lattice criterion for semisimple simply connected geometric fibres",
+   "results": "Actual search: 8 hits; RootDatum, RootPairing.Base.coroot_mem_span_int, RootPairing.RootSystem, RootPairing.finrank_corootSpanIn_int, RootPairing.Base.root_mem_span_int, RootPairing.IsRootSystem.mk, RootSystem.mk', RootPairing.baseOf_root_eq_baseOf_coroot",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"RootDatum\", \"AlgebraicGeometry\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Roots and coroots of a split reductive group scheme over the integers form a constant root datum; semisimplicity and simple connectedness are characterized by root and weight lattices",
+   "results": "Actual search: 8 hits; RootDatum, RootSystem.mk', RootPairing.isRootSystem_mk'', RootPairing.mk'', RootPairing.baseOf_root_eq_baseOf_coroot, RootPairingCat.weight, RootPairing.EmbeddedG2, RootPairing.IsG2",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric fibres of a split semisimple group are simply connected if and only if the character lattice of a maximal torus is the full weight lattice",
+   "results": "Actual search: 8 hits; LieAlgebra.IsKilling.instIsIrreducibleSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystemOfIsSimple, RootPairing.GeckConstruction.instHasTrivialRadical, RootPairing.GeckConstruction.instIsIrreducible, LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem, RootPairing.isSimpleModule_weylGroupRootRep, LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate, LieAlgebra.IsKilling.span_weight_eq_top, LieAlgebra.IsSemisimple.booleanGenerators",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every reduced root datum is realized by a split reductive group scheme over Z and finite index root compatible lattice maps give central isogenies",
+   "results": "Actual search: 8 hits; RootDatum, AlgebraicGeometry.IsReduced, RootPairing.IsReduced.mk, RootPairing.IsReduced, AlgebraicGeometry.IsReduced.rec, AlgebraicGeometry.IsReduced.casesOn, AlgebraicGeometry.IsReduced.mk, RootPairing.isReduced_iff",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "RootPairing.Hom|structure Hom|root.*coroot",
+   "results": "Actual search: 5 hits; 19, 62, 64, 76, 95",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-symmetric-power-dvr-reduction",
+  "date": "2026-10-24",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: central torus radical and split simply connected cover of the semisimple quotient, chosen integrally before DVR base change.",
+   "via": [
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-integral-radical-cover",
+  "worker": "stage1",
+  "summary": "Constructed the central split torus from the torsion-free quotient of the centre character group; used the existing relative quotient and field radical theorems; constructed the simply connected group via weight-lattice enlargement and integral root-datum isogeny realization. Two statement-only integral structural inputs, searched in Mathlib. Verified fppf exactness, arbitrary base change and nonreduced finite kernels without invoking a forbidden source. Statement unchanged.",
+  "blueprint": "Realizes the inherited place: det-thm-sf-ctf-stability-direct-images, proof (3), integral reductive-group reduction before DVR base change. The latest blueprint has no separate radical-cover node; searches for root datum, integral root and central isogeny found no blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic fppf covering base-change axiom used to check the sheaf quotient after arbitrary scalar extension; no same-unit relative-group node gives this site axiom."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-0f24bfe04",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-0f24bfe04 (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps are identical to live (live has the item unsplit with an empty proof), so this is not a re-split. Read all 8 steps; each holds. Step 1: the relative centre node gives Z(H)=D_Z(M/ZΦ) scheme-theoretically; its constant-Φ hypothesis comes from the new integral-split-root-datum node. Step 2: C=A/A_tor, and D(C)→Z(H) is a closed immersion because M→C is surjective; it is the largest subtorus because a surjection onto a free group kills torsion. Step 3: the central-multiplicative quotient gives Q=H/T, and U/T=D(N) by the duality quotient clause. Z(H)_k=Z(H_k) by base change, so the radical node (checked against Milne iAG Cor 17.62(b)-(d), local PDF) makes Q_k=H_k/T_k semisimple. Step 4: the lattice-embedding j is the inclusion X⊆P, of finite index. Step 5: (P,Ψ) is a valid reduced datum; S is realized by node B and is semisimple and simply connected by node A. Step 6: u=X⊆P meets the isogeny hypotheses; the kernel D(P/X) is central and finite free, including at p | [P:X]. Step 7: the fppf quotient follows from local lifts plus the kernel. Step 8: base change and B=0 are fine. Both new nodes are true standard results (Conrad: constancy and lattice criteria; existence and exponent-one central isogenies over Z with kernel D(coker u)) and restate no clause of the item. No duplicates: read the integral Chevalley atlas and root model, central-lattice-enlargement, central-character-sublattice-quotient, root-datum-(isogeny-)realization, simply-connected-character-lattice, local-split-root-data and etale-integral-models; each is field-only, local, simply-connected-only or has no prescribed datum. Small cases checked: Gm, SL2, PGL2 (F=μ2), empty root datum. Batch-5: the trf nodes reached (Artin approximation, fppf⇒fpqc, smooth fpqc descent, fg torsion-free free, fppf covering base change) are generic algebra or site lemmas, not steps of the trace formula or Poincaré duality, so accepted; the tool_use is accepted for the same reason. Minor: the item says 'subgroup' rather than 'closed subgroup' for the torus, which is the standard convention. Conrad is not available locally (WANTED); the theorem numbering inside §6.1 should be confirmed when it arrives."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitIntegralRadicalCover",
+  "declaration": "AlgebraicGeometry.splitIntegral_radical_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitIntegralRadicalCover.lean",
+  "statement": "theorem splitIntegral_radical_cover (H T₀ B : Grp (Over (Spec (.of (ULift.{u} ℤ))))) (iT : T₀ ⟶ H) (iB : B ⟶ H) (j : T₀ ⟶ B) (hH : IsReductive H) (hT : IsSplitMaximalTorus iT) (hB : IsBorel iB) (hTB : j ≫ iB = iT) : ∃ (T Q S F : Grp (Over (Spec (.of (ULift.{u} ℤ))))) (i : T ⟶ H) (p : H ⟶ Q) (a : F ⟶ S) (π : S ⟶ Q) (r : ℕ), Nonempty (T ≅ relativeSplitTorus (Spec (.of (ULift.{u} ℤ))) r) ∧ IsClosedImmersion i.hom.hom.left ∧ IsCentral i.hom.hom ∧ IsSemisimple Q ∧ HasSplitMaximalTorus Q ∧ IsSemisimple S ∧ HasSplitMaximalTorus S ∧ HasSimplyConnectedFibres S ∧ IsClosedImmersion a.hom.hom.left ∧ IsCentral a.hom.hom ∧ IsFinite F.X.hom ∧ Flat F.X.hom ∧ LocallyOfFinitePresentation F.X.hom ∧ IsFppfGroupQuotient i p ∧ Flat p.hom.hom.left ∧ Surjective p.hom.hom.left ∧ LocallyOfFinitePresentation p.hom.hom.left ∧ IsFppfGroupQuotient a π ∧ Flat π.hom.hom.left ∧ Surjective π.hom.hom.left ∧ LocallyOfFinitePresentation π.hom.hom.left ∧ ∀ (R : Type u) [CommRing R] (f : Spec (.of R) ⟶ Spec (.of (ULift.{u} ℤ))), Nonempty ((Over.pullback f).mapGrp.obj T ≅ relativeSplitTorus (Spec (.of R)) r) ∧ IsClosedImmersion ((Over.pullback f).mapGrp.map i).hom.hom.left ∧ IsCentral ((Over.pullback f).mapGrp.map i).hom.hom ∧ IsReductive ((Over.pullback f).mapGrp.obj H) ∧ IsSplitMaximalTorus ((Over.pullback f).mapGrp.map iT) ∧ IsSemisimple ((Over.pullback f).mapGrp.obj Q) ∧ HasSplitMaximalTorus ((Over.pullback f).mapGrp.obj Q) ∧ IsSemisimple ((Over.pullback f).mapGrp.obj S) ∧ HasSplitMaximalTorus ((Over.pullback f).mapGrp.obj S) ∧ HasSimplyConnectedFibres ((Over.pullback f).mapGrp.obj S) ∧ IsClosedImmersion ((Over.pullback f).mapGrp.map a).hom.hom.left ∧ IsCentral ((Over.pullback f).mapGrp.map a).hom.hom ∧ IsFinite ((Over.pullback f).mapGrp.obj F).X.hom ∧ Flat ((Over.pullback f).mapGrp.obj F).X.hom ∧ LocallyOfFinitePresentation ((Over.pullback f).mapGrp.obj F).X.hom ∧ IsFppfGroupQuotient ((Over.pullback f).mapGrp.map i) ((Over.pullback f).mapGrp.map p) ∧ Flat ((Over.pullback f).mapGrp.map p).hom.hom.left ∧ Surjective ((Over.pullback f).mapGrp.map p).hom.hom.left ∧ LocallyOfFinitePresentation ((Over.pullback f).mapGrp.map p).hom.hom.left ∧ IsFppfGroupQuotient ((Over.pullback f).mapGrp.map a) ((Over.pullback f).mapGrp.map π) ∧ Flat ((Over.pullback f).mapGrp.map π).hom.hom.left ∧ Surjective ((Over.pullback f).mapGrp.map π).hom.hom.left ∧ LocallyOfFinitePresentation ((Over.pullback f).mapGrp.map π).hom.hom.left",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-316c8fb58",
+  "group": "NI",
+  "result": "fix",
+  "note": "Item statement checked clause by clause against node (split reductive H with torus iT and Borel iB, j≫iB=iT; central closed split torus T≅relativeSplitTorus r; Q and S IsSemisimple+HasSplitMaximalTorus; S simply connected fibres; F closed central, IsFinite+Flat+LFP; IsFppfGroupQuotient for both sequences plus flat/surjective/LFP; all repeated under (Over.pullback f).mapGrp for every ring R); edge cases R=0, r=0, torus H, semisimple H, μ2 in char 2 ok; one universe u, only sorry, docstrings with source and 8 steps, worker report and independent NI second reading present. H4: new node def-sfb-relative-reductive-cover-terminology redefined relative IsReductive and IsSimplyConnected/HasSimplyConnectedFibres, already owned on the delivery base (side-live c5c4e76, ancestor of parent 7cdf047) by def-sfb-relative-reductive-group (GroupScheme.IsReductive) and def-sfb-relative-reductive-conditions (RelativeReductive.HasSimplyConnectedSemisimpleFibres). FIX: fixes/RelativeReductiveCoverTerminology.lean makes both abbrevs of the owners and drops the field-level IsSimplyConnected copy; fixes/def-sfb-relative-reductive-cover-terminology.json (whole node) cites both owners in statement and stmt_deps, lean.statement 'abbrev IsReductive …', declarations minus IsSimplyConnected, note added. Item module and record unchanged (meaning preserved). nt_compile --json of fixed terminology + item module: exit 0, no errors or warnings."
+ }
+}

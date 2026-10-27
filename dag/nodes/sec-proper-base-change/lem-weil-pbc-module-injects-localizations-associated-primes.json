@@ -114,7 +114,18 @@
   "item": "lem-weil-pbc-analytic-unramified-principal-criterion",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "reviewed": {
@@ -163,5 +174,32 @@
    "Module.injective_pi_localization_associatedPrimes"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a Noetherian ring and $M$ an $R$-module. Call a prime ideal $\\mathfrak p\\subset R$ an associated prime of $M$ if $\\mathfrak p=\\{a\\in R:az=0\\}$ for some $z\\in M$, and write $\\operatorname{Ass}(M)$ for the set of them. For a prime $\\mathfrak p$ let $M_{\\mathfrak p}$ be the localization of $M$ at $R\\setminus\\mathfrak p$. Then the $R$-linear map $M\\to\\prod_{\\mathfrak p\\in\\operatorname{Ass}(M)}M_{\\mathfrak p}$, $m\\mapsto(m/1)_{\\mathfrak p}$, is injective (the empty product being $0$). Equivalently: if $m\\in M$ and for every $\\mathfrak p\\in\\operatorname{Ass}(M)$ there is $s\\in R\\setminus\\mathfrak p$ with $sm=0$, then $m=0$.",
+  "proof": [
+   {
+    "text": "Let $m\\in M$ map to zero in every $M_{\\mathfrak p}$ for $\\mathfrak p\\in\\operatorname{Ass}(M)$, and suppose $m\\ne0$. The cyclic submodule $N=Rm\\subseteq M$ is nonzero. Since $0\\cdot m=0$, the scalar $0$ is a zerodivisor on $N$; since over a Noetherian ring the set of zerodivisors on a module is the union of its associated primes, $0$ lies in some associated prime $\\mathfrak p\\in\\operatorname{Ass}(N)$. Thus $\\operatorname{Ass}(N)$ is nonempty.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Since associated primes of a submodule are associated primes of the module, the prime $\\mathfrak p\\in\\operatorname{Ass}(N)$ chosen in Step 1 belongs to $\\operatorname{Ass}(M)$. Hence the kernel assumption gives $m/1=0$ in $M_{\\mathfrak p}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Because $\\mathfrak p\\in\\operatorname{Ass}(N)$, choose $z\\in N$ with $\\operatorname{Ann}_R(z)=\\mathfrak p$ and write $z=rm$ for some $r\\in R$. By the definition of the localization, $m/1=0$ in $M_{\\mathfrak p}$ means that some $s\\in R\\setminus\\mathfrak p$ satisfies $sm=0$. Then $sz=srm=0$, so $s\\in\\operatorname{Ann}_R(z)=\\mathfrak p$, a contradiction. Thus $m=0$; this includes the empty-product case, since a nonzero $m$ would have produced an associated prime in Step 1.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

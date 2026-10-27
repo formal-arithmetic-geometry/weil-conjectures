@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-smooth-connected-semiabelian-subgroup",
+ "kind": "statement",
+ "title": "Smooth connected closed subgroups of a semiabelian group are semiabelian",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G/k$ be a smooth separated commutative group scheme of finite type [def-pc-scheme, def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism] with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Let $j:B\\hookrightarrow G$ be a closed subgroup scheme [def-sc-group-scheme-subgroup] such that $B$ is smooth over $k$ and connected [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Then there are an integer $r\\geq0$, an abelian variety $A/k$ [def-sc-abelian-variety], and homomorphisms $i:(\\mathbf G_{m,k})^r\\to B$ and $q:B\\to A$ such that $i$ identifies the split torus [def-sfb-tori-multiplicative-type] with the scheme-theoretic kernel of $q$ and $q$ is locally surjective for the big fppf topology [def-pc-fppf-site]. Thus $1\\to(\\mathbf G_{m,k})^r\\to B\\to A\\to1$ is exact as fppf sheaves. Rank zero and the trivial subgroup are allowed.",
+ "source": {
+  "document": "literature/conrad-semistable-reduction-abelian-varieties.pdf",
+  "place": "Corollary 3.2 and its application in Corollary 3.3, printed p.8. WANTED local archive; author PDF read online at https://math.stanford.edu/~conrad/DarmonCM/2011Notes/SemistableReduction.pdf . No SGA source is used."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-connected-scheme",
+  "def-sc-abelian-variety",
+  "def-sfb-tori-multiplicative-type",
+  "def-pc-fppf-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply [def-sfb-semiabelian-geometric-fibres] to the identity geometric point $\\operatorname{Spec}k\\to\\operatorname{Spec}k$. It supplies $u:T_0=(\\mathbf G_{m,k})^n\\to G$ and $v:G\\to A_0$, with $A_0$ an abelian variety and $u$ identifying $T_0$ with $\\ker v$. The identity base change is identified with $G$ by its fibre-product universal property.",
+   "uses": [
+    "def-sfb-semiabelian-geometric-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.27, Proposition 8.1(b), Example 8.4 and Definition 12.14; the subgroup argument of Conrad Corollary 3.2 (online author PDF, printed p.8)."
+   }
+  },
+  {
+   "text": "The closed immersion $j:B\\to G$ is proper by [lem-weil-pbc-proper-fp-permanence](c), hence separated and of finite type by the definition of proper. The same node's clause (e) gives separatedness of $B\\to\\operatorname{Spec}k$; [lem-sfb-finite-type-composition-base-change](1) gives finite type. Smoothness and connectedness of $B$ are hypotheses. Apply [lem-sfb-barsotti-chevalley-decomposition] to obtain $a:L\\hookrightarrow B$ and $p:B\\to C$ with $L$ smooth connected affine, $C$ an abelian variety, $L=\\ker p$ and $p$ fppf-locally surjective.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-barsotti-chevalley-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.27, Proposition 8.1(b), Example 8.4 and Definition 12.14; the subgroup argument of Conrad Corollary 3.2 (online author PDF, printed p.8)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-to-abelian-hom-vanishing] to the homomorphism $v\\circ j\\circ a:L\\to A_0$. Its source is smooth connected affine of finite type by step 2, and its target is the abelian variety of step 1. It is zero. The universal property of $\\ker v=G\\times_{A_0}\\operatorname{Spec}k$ therefore gives a homomorphism $h:L\\to T_0$ with $u\\circ h=j\\circ a$. Its compatibility with multiplication follows by composing the two candidate multiplication maps with the monomorphism $u$ and cancelling $u$.",
+   "uses": [
+    "lem-sfb-affine-to-abelian-hom-vanishing",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.27, Proposition 8.1(b), Example 8.4 and Definition 12.14; the subgroup argument of Conrad Corollary 3.2 (online author PDF, printed p.8)."
+   }
+  },
+  {
+   "text": "The map $h:L\\to T_0$ is a closed immersion. Indeed, under $T_0=\\ker v$, the square with horizontal arrows $h:L\\to T_0$ and $j\\circ a:L\\to G$, and vertical arrows $\\mathrm{id}_L$ and $u$, is Cartesian: on every test scheme $U$, a pair $(l,t)$ with $j(a(l))=u(t)$ has the unique solution $t=h(l)$ since $u$ is a monomorphism. By [lem-weil-pbc-closed-immersion-comp], $j\\circ a$ is a closed immersion, and by [lem-weil-pbc-closed-immersion-base-change] its pullback $h$ is one. Thus $L$ is a smooth connected closed subgroup of the torus $T_0$. Apply [lem-sfb-multiplicative-type-largest-subtorus] to conclude that $L$ is a torus. Over the algebraically closed field $k$ this means there is a group-scheme isomorphism $b:(\\mathbf G_{m,k})^r\\simeq L$ for some $r\\geq0$ [def-sfb-tori-multiplicative-type].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "def-sfb-tori-multiplicative-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.27, Proposition 8.1(b), Example 8.4 and Definition 12.14; the subgroup argument of Conrad Corollary 3.2 (online author PDF, printed p.8)."
+   }
+  },
+  {
+   "text": "Set $A=C$, $q=p$ and $i=a\\circ b$. Since $b$ is an isomorphism and $a$ identifies $L$ with $\\ker p$, $i$ identifies the split torus with $\\ker q$. The fppf local surjectivity of $p$ from step 2 is unchanged. These are exactly the two required exactness conditions. If $L=1$, choose $r=0$; the same construction works for $B=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 8.27, Proposition 8.1(b), Example 8.4 and Definition 12.14; the subgroup argument of Conrad Corollary 3.2 (online author PDF, printed p.8)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sfb-barsotti-chevalley-decomposition",
+  "lem-sfb-affine-to-abelian-hom-vanishing",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Explicit kernel-factorization assembly of Conrad Corollary 3.2 using the archived Milne structure theorems; Conrad local archive is WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"semiabelian\", \"subgroup\"",
+   "results": "{\"t\": \"2026-10-24T05:28:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"semiabelian\\\", \\\"subgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or Lie groups, not smooth connected closed subgroup schemes of a semiabelian variety."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|smooth.*connected.*closed.*subgroup",
+   "results": "{\"t\": \"2026-10-24T05:28:10Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|smooth.*connected.*closed.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or Lie groups, not smooth connected closed subgroup schemes of a semiabelian variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected closed subgroup of a semiabelian variety is semiabelian",
+   "results": "{\"t\": \"2026-10-24T05:28:10Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected closed subgroup of a semiabelian variety is semiabelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.ofClosedSubgroup\", \"ProfiniteAddGrp.ofClosedAddSubgroup\", \"TopologicalAbelianization\", \"LieGroup\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"Subgroup.connectedComponentOfOne\", \"instLieAddGroupOfTopWithTopENat\", \"instLieGroupOfTopWithTopENat\"], \"digest\": \"8b5720d491918465\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or Lie groups, not smooth connected closed subgroup schemes of a semiabelian variety."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected closed subgroups of semiabelian varieties are semiabelian",
+   "results": "{\"t\": \"2026-10-24T05:28:10Z\", \"tool\": \"leansearch\", \"query\": \"Smooth connected closed subgroups of semiabelian varieties are semiabelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.recOn\", \"ClosedAddSubgroup.ext_iff\", \"ClosedSubgroup\", \"ClosedSubgroup.noConfusionType\", \"ClosedAddSubgroup.instAddSubgroupClass\", \"ClosedSubgroup.casesOn\", \"ClosedSubgroup.isClosed'\"], \"digest\": \"ebe2124faa1de26a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or Lie groups, not smooth connected closed subgroup schemes of a semiabelian variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth subgroup of an extension of an abelian variety by a torus is another such extension",
+   "results": "{\"t\": \"2026-10-24T05:28:11Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth subgroup of an extension of an abelian variety by a torus is another such extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UnitAddTorus\", \"Prod.instLieAddGroup\", \"Prod.instLieGroup\", \"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfTopWithTopENat\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\", \"TopologicalAbelianization\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\"], \"digest\": \"6172ee548fd3ec88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern topological or Lie groups, not smooth connected closed subgroup schemes of a semiabelian variety."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected closed subgroup of a semiabelian variety is an extension of an abelian variety by a torus",
+   "results": "{\"t\": \"2026-10-24T07:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth connected closed subgroup of a semiabelian variety is an extension of an abelian variety by a torus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalAbelianization\", \"UnitAddTorus\", \"TopologicalAbelianization.commGroup\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\", \"instLieAddGroupOfNatWithTopENat\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieAddGroupOfTopWithTopENat\", \"instLieAddGroupOfSomeENatTopOfLEInfty\"], \"digest\": \"65bb600008f6ad06\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"semiabelian\"",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"semiabelian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?abelian|smooth.*connected.*closed.*subgroup",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"grep\", \"query\": \"semi.?abelian|smooth.*connected.*closed.*subgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth connected algebraic subgroups of semiabelian varieties are semiabelian",
+   "results": "{\"t\": \"2026-10-24T07:03:47Z\", \"tool\": \"leansearch\", \"query\": \"Smooth connected algebraic subgroups of semiabelian varieties are semiabelian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"ClosedSubgroup.ctorIdx\", \"Algebra.smoothLocus\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"ClosedSubgroup\", \"Algebra.FormallySmooth.casesOn\"], \"digest\": \"69590214ba48df6b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected smooth subgroup of an extension of an abelian variety by a torus is an extension of that form",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"leanfinder\", \"query\": \"A connected smooth subgroup of an extension of an abelian variety by a torus is an extension of that form\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopologicalAbelianization\", \"instLieAddGroupOfNatWithTopENat\", \"instLieAddGroupOfNatWithTopENatOfIsTopologicalAddGroup\", \"LieAlgebra.IsExtension.range_eq_top\", \"instLieGroupOfNatWithTopENatOfIsTopologicalGroup\", \"instLieAddGroupOfTopWithTopENat\", \"UnitAddTorus\", \"LieAlgebra.IsExtension.kerEquivRange\"], \"digest\": \"da36248f4019ca62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract or topological groups, Lie groups, linear endomorphisms, affine-space maps, or sheaf categories; none states this algebraic-group-scheme assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+  "date": "2026-10-24",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Conrad Corollary 3.3, printed p.8: semiabelianity of the smooth connected closed subgroup obtained as the reduced identity component; this is its use of Corollary 3.2.",
+   "via": [
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-connected-semiabelian-subgroup",
+  "worker": "stage1",
+  "summary": "Expanded the affine-part argument into Chevalley decomposition, affine-to-abelian vanishing, a scheme-theoretic kernel pullback, and the existing torus-subgroup theorem. Two statement-only supporting nodes; no Lean attachment or Mathlib leaf. Statement unchanged.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs ancestor returns None). Realizes Conrad Corollary 3.2 subgroup direction used by Corollary 3.3 and the ancestor trivial-torsion finiteness split; current latest blueprint searched for semiabelian/semi-abelian, Chevalley, Barsotti, torus and affine-group formulations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-morphism permanence establishes the closed subgroup is separated and finite type; it does not replace a unit route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition for B to G to Spec k; no algebraic-group route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "Generic closed-immersion composition for L to B to G."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic base-change stability identifies the kernel-factorized inclusion L to the ambient torus as closed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-28b47d48f",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-28b47d48f (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited node's statement. Milne iAG2017 confirms Thm 8.27 with Note 8.30 (pp.154-155), Prop 8.1(b) and Ex 8.4 (p.149); Conrad is WANTED and not archived, so the proof is correctly marked agent-written. The item statement is true (Conrad Cor 3.2) and unchanged, and there is no re-split note. Step 1 applies the semiabelian-fibres definition at the identity geometric point. Step 2 gets B separated and of finite type from closed-immersion properness, separated composition and finite-type composition, then applies the Chevalley node. Step 3: the vanishing node makes v∘j∘a zero, so the map factors through ker v = T_0 by the fibre-product definition of the kernel in def-sc-group-scheme. Step 4: the square is Cartesian because u is a monomorphism, so h is the base change of a closed immersion; then the largest-subtorus node's last clause (a smooth connected closed subgroup of a torus is a torus) applies. Step 5 is elementary. New nodes: barsotti-chevalley-decomposition is Milne 8.27 over k=k̄, with fppf surjectivity coming from the faithfully flat quotient; affine-to-abelian-hom-vanishing is Milne 8.1(b) plus 8.4, and it needs smooth and connected (α_p and μ_n inside E show this) and has both. Neither node restates the item. Duplicate search over the snapshot DAG (chevalley, barsotti, affine/abelian, rigidity, semiabelian) found none; torus-abelian-hom-vanishing is a special case only. The four tool_uses are generic Mathlib-leaf scheme lemmas and are accepted. Batch-5 finding: lem-trf-smooth-fpqc-base-descent is a Mathlib leaf (Stacks 02VL, smoothness descends along flat quasi-compact surjections). It is generic descent, given by neither assumption and not a step of their proofs, so it is outside the assumed statements and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothConnectedSemiabelianSubgroup",
+  "declaration": "AlgebraicGeometry.smooth_connected_semiabelian_subgroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothConnectedSemiabelianSubgroup.lean",
+  "statement": "theorem smooth_connected_semiabelian_subgroup (k : Type u) [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsCommMonObj G.X] [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hG : HasSemiabelianGeometricFibres G) (B : Grp (Over (Spec (.of k)))) (j : B ⟶ G) [IsClosedSubgroupScheme j.hom.hom] [Smooth B.X.hom] [ConnectedSpace B.X.left] : ∃ (r : ℕ) (A : Grp (Over (Spec (.of k)))) (i : MultiplicativeType.splitTorus k r ⟶ B) (q : B ⟶ A), IsAbelianVariety A.X ∧ IsPullback i.hom.hom (toUnit (MultiplicativeType.splitTorus k r).X) q.hom.hom η[A.X] ∧ Presheaf.IsLocallySurjective (Scheme.fppfTopology.over (Spec (.of k))) (yoneda.map q.hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q89",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-52e510e75",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Item JSON = side-live except lean (existing:false, by Q89); lean.statement verbatim in SmoothConnectedSemiabelianSubgroup.lean. Clause check: IsAlgClosed k; G : Grp(Over Spec k) with IsCommMonObj, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact, hG : HasSemiabelianGeometricFibres; B with j and IsClosedSubgroupScheme j.hom.hom (closed immersion + subgroup), Smooth and ConnectedSpace, nothing extra on B. Conclusion ∃ r A i q with IsAbelianVariety, IsPullback kernel square (i, toUnit, q, η) and fppf IsLocallySurjective (yoneda.map q) is word for word the semiabelian-fibres def body, so one rendering of the notion. Edge cases r=0 (splitTorus 0 = unit), trivial B, empty scheme excluded, any characteristic, single universe u as in the deps. Docstrings carry source places, blueprint tag and 5 proof steps; proof is only sorry; no defs. NK's parallel delivery b4fdc900e was 'retired' (superseded), not landed, with an identical statement, so no clash. Compile not reproduced; no fixes."
+ }
+}

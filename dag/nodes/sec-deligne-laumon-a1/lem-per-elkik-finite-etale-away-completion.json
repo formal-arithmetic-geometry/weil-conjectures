@@ -262,20 +262,37 @@
    "CommRingCat.elkik_finiteEtaleAway_completion"
   ],
   "file": "lean/Sheaf/RingTheory/ElkikFiniteEtaleAwayCompletion.lean",
-  "statement": "theorem elkik_finiteEtaleAway_completion (B : CommRingCat.{u}) [IsNoetherianRing B] (I : Ideal B) [HenselianRing B I] : ∃ h : ∀ C : (finiteEtaleAwayProperty B I).FullSubcategory, finiteEtaleAwayProperty (.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B))) ((tensorProd B (.of (AdicCompletion I B))).obj C.obj), ((finiteEtaleAwayProperty (.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B)))).lift ((finiteEtaleAwayProperty B I).ι ⋙ tensorProd B (.of (AdicCompletion I B))) h).IsEquivalence ∧ ∀ E : (finiteEtaleAwayProperty (.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B)))).FullSubcategory, ∃ C : (finiteEtaleAwayProperty B I).FullSubcategory, Nonempty ((tensorProd B (.of (AdicCompletion I B))).obj C.obj ≅ E.obj)",
+  "statement": "theorem elkik_finiteEtaleAway_completion (B : CommRingCat.{u}) [IsNoetherianRing B] (I : Ideal B) [HenselianRing B I] : ∃ h : ∀ C : (finiteEtaleAwayProperty B I).FullSubcategory, finiteEtaleAwayProperty (CommRingCat.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B))) ((tensorProd B (CommRingCat.of (AdicCompletion I B))).obj C.obj), ((finiteEtaleAwayProperty (CommRingCat.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B)))).lift ((finiteEtaleAwayProperty B I).ι ⋙ tensorProd B (CommRingCat.of (AdicCompletion I B))) h).IsEquivalence ∧ ∀ E : (finiteEtaleAwayProperty (CommRingCat.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B)))).FullSubcategory, ∃ C : (finiteEtaleAwayProperty B I).FullSubcategory, Nonempty ((tensorProd B (CommRingCat.of (AdicCompletion I B))).obj C.obj ≅ E.obj)",
   "branch": "newtargets-dag",
-  "by": "N6",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "The canonical CommRingCat.tensorProd functor is restricted using ObjectProperty.lift. Its landing proof is existentially asserted in the conclusion, so no well-definedness hypothesis is added. Under B has exactly the B-algebra homomorphisms. 2026-10-20 (U): module Sheaf.RingTheory.ElkikFiniteEtaleAwayCompletion deleted (dead: no target reaches it); this node is not reached either."
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c7432e7f5",
-  "group": "N6",
+  "reviewer": "NT-stage2-cc-0d700d799",
+  "group": "NB",
   "result": "pass",
-  "note": "Statement matches node and ILO V Thm 1.2.4 (p.64): Noetherian [HenselianRing B I], AdicCompletion with canonical algebra, Under-B full subcategories of Module.Finite algebras étale (morphismRestrict) over the complement of zeroLocus I and of I·B̂, Mathlib CommRingCat.tensorProd lifted via ObjectProperty.lift with landing proof stated existentially, IsEquivalence plus ∀E ∃C iso clause; no extra hypotheses or universe restriction. Edge cases I=0, nilpotent I, zero ring, I=⊤ (via jac), ramified on V(I) ok. finiteEtaleAwayProperty is a real predicate, no duplicate in DAG/Sheaf/Mathlib. Only the item's lean field changed, statement verbatim, proof-dep plain imports per rule 7, docstrings with source and blueprint, sorry-only. nt_compile --json clean in 3.6 s, exit 0."
+  "note": "Statement matches node and ILO V Thm 1.2.4 (p.64, read in the PDF): [IsNoetherianRing B], [HenselianRing B I], AdicCompletion with canonical algebra, Under-B full subcategories cut out by Module.Finite ∧ Etale(morphismRestrict Spec.map C.hom to (zeroLocus I)ᶜ), target over I.map algebraMap, Mathlib CommRingCat.tensorProd lifted via ObjectProperty.lift with proof-valued ∃h, IsEquivalence plus ∀E ∃C Nonempty iso in Under B̂ (B̂-algebra iso). No extra hypotheses; single universe u (no restriction); all variables bound. Edge cases I=0, nilpotent I, zero ring, I=⊤ (excluded by jac, as source 1.2.2 notes), ramified on V(I) fine. Only the lean field differs from live (live lean null after dead-module removal; node now cited by ~10 sec-deligne-laumon-a1 nodes); text identical to statement N6 passed 2026-10-18. lean.statement verbatim; dep records are existing Mathlib/upstream declarations; helper is a real predicate with no duplicate (grep of side-live lean/ and Mathlib); docstrings give source place, blueprint id and six proof steps; proof is sorry only; Worker report and Second reading by NB sections present. No recompile (no file changed); worker's scompile was clean."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/RingTheory/ElkikFiniteEtaleAwayCompletion.lean",
+  "module": "Sheaf.RingTheory.ElkikFiniteEtaleAwayCompletion",
+  "declaration": "CommRingCat.elkik_finiteEtaleAway_completion",
+  "reason": "dead module deleted (no target reaches it by imports, node not reached); the declaration survives nowhere in Sheaf or Mathlib, so the node has no Lean statement"
+ }
 }

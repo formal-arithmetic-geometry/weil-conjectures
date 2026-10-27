@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-space-ideal-power-rees-cohomology-data",
+ "kind": "definition",
+ "title": "Normalized ideal-power Rees cohomology data on an algebraic space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal, $X$ an algebraic space over $\\operatorname{Spec} A$ [def-pc-scheme, def-weil-affine-spectrum, def-trf-algebraic-space], and $F$ a module sheaf on its small etale ringed site [def-weil-sheaf-of-modules-category]. Use the pullback $a_T$ of a base element on a chart $T$ from [def-sfb-space-ideal-power-quotients]. An ideal-power Rees cohomology datum in degree $q\\in\\mathbb N$ consists of module sheaves $G_r$, maps $i_r:G_r\\to F$ injective on every chart, and maps $\\lambda_{k,r}(a):G_r\\to G_{r+k}$ for $a\\in I^k$. Require that the range of $i_r$ on every chart $T$ consists exactly of sections $s$ for which some covering sieve $R$ of $T$ has $s|_V\\in\\langle a_Vt:a\\in I^r,t\\in F(V)\\rangle_{\\mathcal O_X(V)}$ for every arrow $V\\to T$ of $R$. Thus $G_r$ is precisely the locally generated $(I\\mathcal O_X)^rF$, including $G_0=F$ via its inclusion. Require $i_{r+k}(\\lambda_{k,r}(a)(s))=a_Ti_r(s)$ on every chart. Compute the actual cohomology $H_r=H^q(X,G_r)$ of underlying additive sheaves [def-weil-pbc-sites-and-cohomology] by restriction to the equivalent small affine etale model [def-sfb-space-small-ringed-model] and Mathlib sheaf cohomology, with Ext in the section universe $u$ (as for the graded finiteness input lem-sfb-space-graded-cohomology-finite). The datum also includes $A$-module structures on $H_r$ such that $H^q(\\lambda_{0,r}(a))(x)=ax$ for every $a\\in I^0=A$, and each $H^q(\\lambda_{k,r}(a))$ is $A$-linear. Finally it includes a module structure over $\\mathcal R_A(I)$ [def-nagata-rees-algebra] on the additive direct sum $\\bigoplus_r H_r$, with action $b\\cdot x=\\sum_{k\\in\\operatorname{supp}b}\\sum_{r\\in\\operatorname{supp}x}\\operatorname{in}_{r+k}H^q(\\lambda_{k,r}(b_k))(x_r)$ for every polynomial $b=\\sum b_kt^k$ in that Rees algebra and every finite-support vector $x$. Its degree-zero action satisfies $(a t^0)\\operatorname{in}_r(x)=\\operatorname{in}_r(ax)$. All cohomology maps here are those of the fixed additive-sheaf cohomology functor. No existence or finiteness assertion is part of this definition.",
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-nagata-rees-algebra",
+  "def-sfb-space-ideal-power-quotients",
+  "def-sfb-space-small-ringed-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Situation 08AV and Lemma 08AW, preceding definition of ideal-power submodules and its natural graded cohomology action; the equivalent small affine site is the comparison model 039Z."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IdealPowerReesCohomologyData|idealPowerCohomologyFunctor|reesAlgebra",
+   "results": "Read returned hits: none.",
+   "date": "2026-10-24",
+   "verdict": "No match. Rees algebra and scheme ideal-sheaf infrastructure are reused; local cohomology is Ext-colimit local cohomology, not small-etale cohomology of algebraic spaces. No result packages the local ideal-power subsheaves with the normalized geometric cohomology action.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ideal power subsheaves and their normalized Rees action on cohomology on the small etale site of an algebraic space",
+   "results": "Read returned hits: reesAlgebra, localCohomology.idealPowersDiagram, AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop, FractionalIdeal.coeIdeal_pow, AlgebraicGeometry.Scheme.IdealSheafData, instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra, AlgebraicGeometry.Scheme.IdealSheafData.ideal, Ideal.Filtration.submodule.",
+   "date": "2026-10-24",
+   "verdict": "No match. Rees algebra and scheme ideal-sheaf infrastructure are reused; local cohomology is Ext-colimit local cohomology, not small-etale cohomology of algebraic spaces. No result packages the local ideal-power subsheaves with the normalized geometric cohomology action.",
+   "digest": "b296895069a2f1d4"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ideal power subsheaves and their normalized Rees convolution action on sheaf cohomology of algebraic spaces",
+   "results": "Read returned hits: localCohomology.idealPowersDiagram, localCohomology.idealPowersToSelfLERadical, localCohomology.diagram, localCohomology.ofSelfLERadical, localCohomology, localCohomology.ofDiagram, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.Scheme.IdealSheafData.",
+   "date": "2026-10-24",
+   "verdict": "No match. Rees algebra and scheme ideal-sheaf infrastructure are reused; local cohomology is Ext-colimit local cohomology, not small-etale cohomology of algebraic spaces. No result packages the local ideal-power subsheaves with the normalized geometric cohomology action.",
+   "digest": "99b02d11e0883ae4"
+  },
+  {
+   "tool": "grep",
+   "query": "IdealPowerReesCohomologyData|idealPowerCohomologyFunctor in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search ideal power Rees cohomology; DAG search for ideal-power and Rees cohomology data",
+   "results": "No declaration or blueprint node for this package. Existing def-sfb-space-ideal-power-products gives local products of a sheaf ideal, def-sfb-space-ideal-power-quotients supplies the base-chart scalar map, and def-sfb-space-small-ringed-model supplies the equivalent small ringed site. Those notions and declarations are retained.",
+   "date": "2026-10-24",
+   "verdict": "The missing package specializes existing powers and sheaf cohomology and specifies their canonical Rees action; no existing node owns it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-cohomology-powers-rees-finite",
+  "date": "2026-10-24",
+  "group": "Q32"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Tag 08AW, lemma-cohomology-powers-ideal-times-F; the preceding paragraph defines the ideal-power submodules. The action and its degree-zero normalization are the natural graded action used in the lemma. Packaging the ideal-power submodules, their inclusion-normalized multiplication, and the induced cohomology action.",
+   "via": [
+    "lem-sfb-space-cohomology-powers-rees-finite",
+    "lem-sfb-space-ideal-power-cohomology-image-bound",
+    "lem-sfb-space-infinitesimal-section-image-stabilization",
+    "lem-sfb-space-ample-fibre-section-lifting",
+    "lem-sfb-space-noetherian-ample-neighbourhood",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceIdealPowerReesData",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IdealPowerReesCohomologyData",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.idealPowerCohomologyFunctor",
+   "AlgebraicGeometry.AlgebraicSpace.IdealPowerReesCohomologyData"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceIdealPowerReesData.lean",
+  "statement": "structure IdealPowerReesCohomologyData {A : Type u} [CommRing A] (X : AlgebraicSpace (Spec (CommRingCat.of A))) (I : Ideal A) (F : X.Modules) (q : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-565b34f32"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-565b34f32",
+  "group": "Q32",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-565b34f32",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Statement matches 08AW and the node clause by clause (Noetherian A, arbitrary I, proper f to the terminal space over Spec A, quasi-coherent F with finitely generated sections on Noetherian affine charts, locally generated J^rF via a sieve-local span, multiplication fixed by inclusion plus injectivity, A-action by scalar_normalization, Rees action by convolution, finiteness for d.reesModule). Every field of the existential datum is determined up to canonical isomorphism, so it is not a weakening; no hollow definitions; docstrings and proof steps OK; edge cases covered. F1 (H4/H9): idealPowerCohomologyFunctor used HasExt.standard at u+1, unlike the landed AbelianAffineReducedCoproduct.cohomologyFunctor and gradedCohomologyPiece (Type u) of lem-sfb-space-graded-cohomology-finite, which the proof applies. FIX: functor to AddCommGrpCat.{u} with the default HasExt instance (Grothendieck imports added), Type (u + 1) to Type u in both modules, def node statement text updated, item lean-record statement verbatim. nt_compile --json on both fixed files: clean, exit 0 (38.2 s and 1.9 s)."
+ }
+}

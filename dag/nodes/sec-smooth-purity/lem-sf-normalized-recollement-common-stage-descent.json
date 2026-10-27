@@ -1,0 +1,148 @@
+{
+ "id": "lem-sf-normalized-recollement-common-stage-descent",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Descent of already normalized recollement presentations over any base field",
+ "statement": "Fix a prime $l$, an algebraic closure $\\Omega/\\mathbf Q_l$, any field $k$ in which $l$ is invertible, a separated finite-type $k$-scheme $X$, and complementary closed and open immersions $i:Z\\hookrightarrow X$ and $j:U\\hookrightarrow X$ over $k$. Suppose $P_L$ and $Q_L$ are given integral and rational recollement presentations at every finite coefficient field $L$ in $\\Omega$, with integral and rational normalizations [def-sf-recollement-presentation-data]. Then there exists a presentation $R$ on the literal common-stage category [def-weil-algebraically-closed-coefficients], normalized from the $Q_L$ with the literal stagewise object formulas and the prescribed map squares. Its counit and unit extend to distinguished triangles at every object, and $\\operatorname{Hom}(R_{\\mathrm{open}}K[n],R_{\\mathrm{closed}}M)=0$ for every pair $K,M$ and every integer $n$. This assertion does not construct the finite-stage presentations or assert uniqueness and naturality of the connecting arrows.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle, Hom vanishing, constructibility, and Weil structures paragraphs"
+ },
+ "stmt_deps": [
+  "def-sf-recollement-presentation-data",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the coherent scalar comparisons for both rational vertices, with their prescribed map squares. They form endomorphisms O,C of the actual coefficient stage system and compatible families from O to the identity and from the identity to C.",
+   "uses": [
+    "lem-sf-normalized-recollement-scalar-coherence",
+    "def-sf-recollement-presentation-data",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Descend O,C and the compatible natural transformations by the existing StageSystem.Morphism quotient construction. Compose with the identity-family comparison. The inclusion comparisons have identity components, so their two map squares and the literal stagewise object formulas give SfCommonStageRecollementNormalization.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-sf-recollement-presentation-data",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply normalized rational triangle and orthogonality to each coefficient field. For a literal pair (L,K), map its finite triangle through the exact inclusion. Its connecting arrow conjugated by the two normalization isomorphisms and the inclusion shift comparison completes the prescribed two arrows. Triangle.isoMk and isomorphic_distinguished verify this directly.",
+   "uses": [
+    "lem-sf-normalized-rational-recollement-triangles",
+    "def-sf-recollement-presentation-data",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Represent the shifted open vertex by the literal shifted pair at its original field. At every common overfield the transition shift comparison and the two scalar comparisons conjugate the raw cross-Hom to the normalized rational cross-Hom, which is a subsingleton. Induct on a common-stage Hom representative. Write it using isoToStage and the inclusion of its raw map; that map is zero, hence its image is zero by additivity of the inclusion. Thus all representatives vanish. Conjugate by the inclusion shift comparison to obtain the requested shifted Hom subsingleton.",
+   "uses": [
+    "lem-sf-normalized-rational-recollement-triangles",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-normalized-recollement-scalar-coherence",
+  "def-sf-recollement-presentation-data",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-sf-normalized-rational-recollement-triangles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "The triangle and Hom vanishing paragraphs; explicit StageSystem quotient descent and transport by D9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor and natural transformations descend through filtered common stages with compatible coefficient extension",
+   "results": "CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapExtLinearMap, CategoryTheory.Functor.exact_tfae",
+   "date": "2026-10-25",
+   "verdict": "No direct match; use the recorded sheaf and coefficient theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_distinguished",
+   "results": "CategoryTheory.Functor.map_distinguished, CategoryTheory.Triangulated.Octahedron.map, CategoryTheory.Triangulated.Octahedron.map_m₁, CategoryTheory.Triangulated.Octahedron.map_m₃",
+   "date": "2026-10-25",
+   "verdict": "Generic ingredients only, no normalized recollement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans.*CommShift|triangle_morphism_extension|SfRecollement",
+   "results": "Mathlib/CategoryTheory/ObjectProperty/Shift.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Opposite.lean, Mathlib/CategoryTheory/Shift/Opposite.lean",
+   "date": "2026-10-25",
+   "verdict": "The generic shift and triangle interfaces do not state normalized recollement transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfNormalizedCommonStageDescent",
+  "file": "lean/Sheaf/Paper/SfNormalizedCommonStageDescent.lean",
+  "declaration": "WeilConjectures.sfNormalizedRecollement_commonStage_descent",
+  "declarations": [
+   "WeilConjectures.sfNormalizedRecollement_commonStage_descent"
+  ],
+  "statement": "theorem sfNormalizedRecollement_commonStage_descent\n    (k : Type u) [Field k] (hk : IsUnit (l : k))\n    {Z U X : Scheme.{u}}\n    [X.Over (Spec (.of k))] [U.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]\n    [j.IsOver (Spec (.of k))]\n    (_hij : Set.range j.base = (Set.range i.base)ᶜ)\n    (P : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω,\n      SfRecollementPresentation (sfIntegralConstructibleCategory l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X))\n    (Q : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω,\n      SfRecollementPresentation (GeneralAlgebraicallyClosedCoefficients.Stage l Ω X L))\n    (hPQ : ∀ L, SfIntegralRecollementNormalization l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) i\n        (sfRecollementNoetherian k X) (P L) ∧\n      SfRationalRecollementNormalization l\n        (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) X (P L) (Q L)) :\n    ∃ R : SfRecollementPresentation (generalAlgebraicallyClosedConstructibleCategory l Ω X),\n      SfCommonStageRecollementNormalization l Ω X Q R ∧\n      (∀ K, ∃ δ, Triangle.mk (R.counit.app K) (R.unit.app K) δ ∈ distTriang _) ∧\n      ∀ (K L : generalAlgebraicallyClosedConstructibleCategory l Ω X) (n : ℤ),\n        Subsingleton ((R.openTerm.obj K)⟦n⟧ ⟶ R.closedTerm.obj L)",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261025T095659-L-3464608",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T122751-L-1804627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

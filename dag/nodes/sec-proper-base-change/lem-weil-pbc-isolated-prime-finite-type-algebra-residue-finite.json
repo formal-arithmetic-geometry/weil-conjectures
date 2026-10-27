@@ -126,7 +126,18 @@
   "item": "lem-weil-pbc-lft-over-field-isolated-point-residue-finite",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -158,5 +169,32 @@
   "group": "M1",
   "result": "pass",
   "note": "field k; CommRing B + Algebra k B + Algebra.FiniteType k B; p : PrimeSpectrum B; IsOpen {p} in Zariski topology (node's open-singleton form, nonhollow: generic point of k[x]); p.asIdeal.IsMaximal ∧ Module.Finite k p.asIdeal.ResidueField with IsScalarTower k B κ(p) checked by inferInstance (composite structure); Ideal.ResidueField = κ(B_p) as def-weil-pbc-localization-at-prime; universes u v independent, no test-object quantifier"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a field and let $B$ be a finite type (finitely generated) $k$-algebra. If $\\mathfrak p\\in\\operatorname{Spec}B$ has singleton $\\{\\mathfrak p\\}$ open in $\\operatorname{Spec}B$, then $\\mathfrak p$ is a maximal ideal of $B$, and the residue field $\\kappa(\\mathfrak p)=B_{\\mathfrak p}/\\mathfrak pB_{\\mathfrak p}$, with its field extension structure from $k\\to B\\to\\kappa(\\mathfrak p)$, is finite over $k$, i.e. $\\dim_k\\kappa(\\mathfrak p)<\\infty$.",
+  "proof": [
+   {
+    "text": "*$\\mathfrak p$ is maximal.* The closed subsets of $\\operatorname{Spec}B$ in the Zariski topology are the sets $V(I)=\\{\\mathfrak q:\\ I\\subseteq\\mathfrak q\\}$ for ideals $I\\subseteq B$. Since $\\{\\mathfrak p\\}$ is open, its complement is $V(I)$ for some ideal $I$, so $\\{\\mathfrak p\\}=\\{\\mathfrak q\\in\\operatorname{Spec}B:\\ I\\not\\subseteq\\mathfrak q\\}$. In particular $I\\not\\subseteq\\mathfrak p$; choose $f\\in I$ with $f\\notin\\mathfrak p$. A finite type algebra over a field is a Jacobson ring, so every prime of $B$ is the intersection of the maximal ideals containing it; hence there is a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$ with $f\\notin\\mathfrak m$. Then $I\\not\\subseteq\\mathfrak m$, so $\\mathfrak m\\notin V(I)$, i.e. $\\mathfrak m\\in\\{\\mathfrak p\\}$, hence $\\mathfrak p=\\mathfrak m$ is maximal. (This is the argument of Lemma 00G3, that the closed points of $V(J)$ are dense in it, applied to $Z=\\operatorname{Spec}B$ and the open set $\\{\\mathfrak p\\}$.)",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*$\\kappa(\\mathfrak p)$ is a finite type $k$-algebra.* Write $\\mathfrak m=\\mathfrak p$, now maximal, so $B/\\mathfrak m$ is a field. The composite $B\\to B_{\\mathfrak m}\\to\\kappa(\\mathfrak m)=B_{\\mathfrak m}/\\mathfrak mB_{\\mathfrak m}$ is surjective: for $b\\in B$ and $s\\in B\\setminus\\mathfrak m$ choose $t\\in B$ with $st-1\\in\\mathfrak m$ (the class of $s$ is invertible in the field $B/\\mathfrak m$); then $b/s-bt/1=b(1-st)/s\\in\\mathfrak mB_{\\mathfrak m}$, so $b/s$ and the image of $bt$ have the same class in $\\kappa(\\mathfrak m)$. If $b_1,\\dots,b_n$ generate $B$ as a $k$-algebra, their images generate $\\kappa(\\mathfrak m)$ as a $k$-algebra (a $k$-algebra surjection carries polynomials in the $b_i$ to the same polynomials in their images). So $\\kappa(\\mathfrak m)$ is a field which is a finite type $k$-algebra via $k\\to B\\to\\kappa(\\mathfrak m)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*$\\kappa(\\mathfrak p)$ is finite over $k$.* By step 2, $K=\\kappa(\\mathfrak p)$ with $k\\to B\\to K$ is a field that is a finitely generated $k$-algebra; by Zariski's lemma (the Nullstellensatz) $\\dim_kK<\\infty$, i.e. $K/k$ is a finite field extension, with exactly the $k$-structure of the statement.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

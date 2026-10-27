@@ -1,0 +1,156 @@
+{
+ "id": "lem-sf-native-hom-representative-existence",
+ "kind": "statement",
+ "title": "Normalized forgetting for prescribed native Hom representatives",
+ "statement": "For a separated finite-type quasi-compact k0-scheme X, with k0 finite and l prime away from its characteristic, let M be any NativeClosedHomModels [def-sf-native-weil-closed-models]. There exists a natural derived isomorphism chi from M.weilHom followed by nativeForget to M.ordinaryHom applied to the forgotten variables, satisfying NativeHomRepresentativeCompatibility for precisely the representative systems in M. Its chain comparison on K-injective pairs has the unsigned projection formula, and its derived representative square includes both localization factors. No tensor, adjunction or monoidal structure is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-closed-models"
+ ],
+ "proof": [
+  {
+   "text": "Take the standard native two-injective model. Compose each prescribed representative with the inverse row-sign isomorphism; conjugating row-sign naturality gives both-variable representative naturality.",
+   "uses": [
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-row-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7"
+   }
+  },
+  {
+   "text": "Apply kInjectiveHomComparisonDescent to the rebased representatives and the existing chain comparison. Underlying native forgetting preserves K-injectives. This gives chi with its localized representative square.",
+   "uses": [
+    "lem-sf-kinjective-hom-comparison-descent",
+    "lem-sf-ringed-forget-two-injective-hom",
+    "lem-sf-weil-native-row-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7"
+   }
+  },
+  {
+   "text": "Conjugate both ends of the chain comparison back by the row-sign isomorphisms. Apply conjugateLocalizationSquare to its derived equation and cancel inverse sign maps. On every product projection the two factors (-1)^(np) cancel, giving exactly the required compatibility.",
+   "uses": [
+    "lem-sf-weil-native-row-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-forget-two-injective-hom",
+  "lem-sf-weil-native-row-hom-comparison",
+  "lem-sf-kinjective-hom-comparison-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7; native total-complex formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A prescribed derived internal Hom on K injective representatives admits a normalized forgetful comparison",
+   "results": "Found CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.injectiveResolutions, CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.iso_inv_naturality_assoc. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fullyFaithfulWhiskeringLeft\"",
+   "results": "Found CategoryTheory.Localization.fullyFaithfulWhiskeringLeft, CategoryTheory.ObjectProperty.SerreClassLocalization.fullyFaithfulWhiskeringLeft. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective.*(Hom|hom)|[Ee]valuation.*[Cc]ompat|ParametrizedAdjunction",
+   "results": "Found Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Inner/PushoutProduct.lean, Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/ParametrizedLimits.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean. No exact prescribed native statement.",
+   "date": "2026-10-27",
+   "verdict": "generic tools only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilRingedTensorModel",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7 Parent records cor-coef-verdier-weil-equivariance; blueprint_refs ancestor returns None.",
+   "via": [
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeHomRepresentativeExistence",
+  "file": "lean/Sheaf/Paper/NativeHomRepresentativeExistence.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_hom_representative_exists",
+  "statement": "theorem native_hom_representative_exists\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X) :\n    ∃ χ : M.weilHom ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom,\n      NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)\n        (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n        M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives\n        (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) χ",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-sf-native-weil-ringed-tensor-model",
+  "worker": "stage3",
+  "summary": "Normalized forgetting for prescribed native Hom representatives. The Lean declaration and proof steps specify the exact representative interface needed by the parent tensor model.",
+  "blueprint": "Native tensor model, Hom-comparison part of steps 2 and 3; Stacks 0A95, 08J7; serves the internal-Hom/evaluation/transposition paragraph of cor-coef-verdier-weil-equivariance through the parent chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261027T034614-L-3665275",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

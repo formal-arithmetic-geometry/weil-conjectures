@@ -1,0 +1,313 @@
+{
+ "id": "lem-sfb-split-unipotent-quotient-split",
+ "kind": "statement",
+ "title": "Quotients preserve split unipotence over arbitrary fields",
+ "statement": "Let $k$ be a field [def-weil-field]. Groups are affine $k$-group schemes of finite type [def-sc-group-scheme, def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]; geometrically connected means connected after every field extension. Write $\\mathbf G_a(R)=(R,+)$ and $\\mathbf G_m(R)=R^\\times$ for every commutative $k$-algebra $R$ [def-sc-gm-ga]. A represented fppf quotient means a group scheme representing the sheafification of the right-coset functor for faithfully flat finitely presented coverings of commutative $k$-algebras. A smooth geometrically connected group is split unipotent if it admits a faithful finite-dimensional matrix representation with unipotent geometric points and a finite descending series of smooth geometrically connected subgroups, each normal in its predecessor, with represented fppf successive quotients isomorphic to $\\mathbf G_a$. Let $U$ be split unipotent, and let $N\\subseteq U$ be a smooth geometrically connected normal subgroup. Suppose $Q$ represents the fppf quotient $U/N$, with quotient homomorphism $q:U\\to Q$. Then $Q$ is split unipotent over $k$. In particular it has a faithful finite-dimensional matrix representation with unipotent geometric points and a finite descending series of smooth geometrically connected subgroups, each normal in its predecessor, whose represented fppf successive quotients are $\\mathbf G_a$. There is no perfectness or characteristic restriction on $k$; $N=1$ and $N=U$ are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Milne, Algebraic Groups, Section 16g, printed p.343, first paragraph: quotients of split solvable groups are split; Exercise 14-3 gives the additive quotients. Compare Section 14.61--14.62, printed p.299, and Conrad--Lichtenstein, Linear Algebraic Groups I, Example 20.1.6(i), printed pp.52--53. This is a quotient assertion, not the false assertion that all smooth connected subgroups of a split group are split."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given series $U=U_0\\supseteq\\cdots\\supseteq U_r=1$. For each $i$, apply [lem-sfb-algebraic-group-homomorphism-factorization] to $U_i\\to U\\xrightarrow q Q$, obtaining $U_i\\xrightarrow{a_i}V_i\\hookrightarrow Q$ with $a_i$ faithfully flat, finitely presented, and presenting the fppf quotient by its scheme-theoretic kernel $K_i$. Its hypotheses hold: all schemes are affine of finite type, and hence separated by [lem-weil-pbc-affine-source-morphism-separated]; $V_i$ is affine because it is closed in $Q$. These are images as sheaves, not just images on $k$-points. Thus $V_{i+1}\\subseteq V_i$: locally lift a section of $V_{i+1}$ to $U_{i+1}\\subseteq U_i$. Membership in the closed subgroup $V_i$ descends by [lem-weil-pbc-fpqc-representable-descent], since its inclusion is a monomorphism. As $q$ presents $U/N$, every section of $Q$ lifts fppf locally, so the same argument gives $V_0=Q$. The image of $U_r=1$ is $V_r=1$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16g, first paragraph, printed p.343: image of a split series; Theorem 5.39, printed p.108. Separatedness: Stacks Tag 01KN (schemes-lemma-affine-separated); descent: Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-affine-normal-quotient-geometry] to $K_i\\triangleleft U_i$. By Step 1, $V_i$ represents precisely $U_i/K_i$, so the lemma implies that $V_i$ is smooth. For every field extension $L/k$, quotient formation commutes with extension and the connected scheme $(U_i)_L$ surjects onto $(V_i)_L$; the connected-quotient clause over $L$ gives connectedness of $(V_i)_L$. Thus every $V_i$ is connected after every field extension of $k$. No $K_i=U_i\\cap N$ has been assumed smooth or connected.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16g, printed p.343; Definition 14.61 and paragraph 14.62, printed p.299; quotient smoothness and connectedness in Proposition 1.62 and Proposition 5.59."
+   }
+  },
+  {
+   "text": "For $v\\in V_i(A)$ and $w\\in V_{i+1}(A)$, take a common fppf refinement on which $v=a_i(u)$ and $w=a_{i+1}(h)$ for $u\\in U_i$ and $h\\in U_{i+1}$. Normality of $U_{i+1}$ in $U_i$ gives $uhu^{-1}\\in U_{i+1}$, so $vwv^{-1}$ lies locally in $V_{i+1}$. Descent of this membership, again [lem-weil-pbc-fpqc-representable-descent], gives $V_{i+1}\\triangleleft V_i$ over every algebra. The local lifts are supplied by [lem-sfb-algebraic-group-homomorphism-factorization]. Now [lem-sfb-affine-normal-quotient-geometry] supplies the affine finite-type represented quotient $R_i=V_i/V_{i+1}$, with quotient map $b_i$ and scheme-theoretic kernel $V_{i+1}$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16g, printed p.343, taking images of the subnormal series; Theorem 5.39 and Theorem 5.55, printed pp.108,113; descent is Stacks Tag 023Q (descent-lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "The composite $b_i a_i:U_i\\to R_i$ kills $U_{i+1}$. It is therefore constant on its right cosets and factors through the given quotient $U_i/U_{i+1}\\simeq\\mathbf G_a$, giving $c_i:\\mathbf G_a\\to R_i$. This uses exactly the universal property of sheafification in [def-weil-pbc-sheafification]; representable targets are sheaves by [lem-weil-pbc-fpqc-representable-descent]. The group identities descend along the locally surjective quotient map. Every section of $R_i$ locally lifts first to $V_i$ and then to $U_i$, by [lem-sfb-affine-normal-quotient-geometry] and Step 1, hence locally belongs to the image of $c_i$. Apply [lem-sfb-algebraic-group-homomorphism-factorization] to $c_i$. Its closed image is all $R_i$, since every section locally belongs to that image and membership descends. Consequently $c_i$ presents $R_i$ as the fppf quotient $\\mathbf G_a/H_i$ for the closed subgroup scheme $H_i=\\ker(c_i)$.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16g, printed p.343, successive quotients are quotients of the original factors; Proposition 5.21, printed p.104, and Theorem 5.39, printed p.108. Sheafification: Stacks Tag 00WH (sites-proposition-sheafification-adjoint)."
+   }
+  },
+  {
+   "text": "If $H_i=\\mathbf G_a$, its coset sheaf is the one-element sheaf, so $R_i=1$. Otherwise [lem-sfb-additive-subgroup-polynomial-quotient] gives $\\mathbf G_a/H_i\\simeq\\mathbf G_a$ over $k$, hence $R_i\\simeq\\mathbf G_a$. The lemma allows arbitrary proper subgroup schemes, including nonreduced or disconnected ones. When $R_i=1$, its kernel description in Step 3 gives $V_i=V_{i+1}$. Delete just these repetitions from the finite chain. Each remaining inclusion is one of the previous normal inclusions, with quotient $\\mathbf G_a$; all terms remain smooth and geometrically connected by Step 2. If all terms coincide, the chain is $Q=1$ with length zero.",
+   "uses": [
+    "lem-sfb-additive-subgroup-polynomial-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 16g, printed p.343, and Exercise 14-3(a), printed p.301, with Definition 14.61, printed p.299."
+   }
+  },
+  {
+   "text": "It remains to verify the matrix clause without assuming a quotient representation of $U$ remains faithful. The trivial group embeds in $\\mathcal U_{1,k}$; $\\mathbf G_a$ embeds in $\\mathcal U_{2,k}$ by $x\\mapsto\\begin{pmatrix}1&x\\\\0&1\\end{pmatrix}$. This map is closed since the induced coordinate map is onto [def-sc-gm-ga, def-sc-general-linear-group, def-weil-closed-immersion]. Induct upwards along the chain of Step 5: the base is its last, trivial term; at each preceding term the kernel is the already treated successor and the quotient is $\\mathbf G_a$. All groups are affine of finite type, the successor is closed normal, and the quotient is the represented fppf quotient with that kernel. Thus [lem-sfb-unipotent-extension-arbitrary] gives a closed embedding of this term into some $\\mathcal U_{n,k}$. At the first term this embeds $Q$ faithfully into $\\operatorname{GL}_{n,k}$. For an upper unitriangular matrix, any nonzero summand in an entry of $(g-I)^n$ would require $n+1$ strictly increasing indices in $\\{1,\\ldots,n\\}$; there are none. Thus every geometric point is unipotent. This representation, Step 2, and Step 5 give precisely split unipotence as stated, including $N=1$ and $N=U$.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-sc-general-linear-group",
+    "def-weil-closed-immersion",
+    "lem-sfb-unipotent-extension-arbitrary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 14.61 and paragraph 14.62, printed p.299; Theorem 14.5(b) and Corollary 14.7 (extensions), printed pp.281--282; Section 16g, printed p.343."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "def-weil-pbc-sheafification",
+  "lem-sfb-additive-subgroup-polynomial-quotient",
+  "def-sc-gm-ga",
+  "def-sc-general-linear-group",
+  "def-weil-closed-immersion",
+  "lem-sfb-unipotent-extension-arbitrary"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 16g, first paragraph, printed p.343: take images of a split series, use Exercise 14-3(a), printed p.301, and remove trivial factors. The representation clause is assembled using Corollary 14.7 (extensions), printed p.282."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quotients of split unipotent algebraic groups by smooth connected normal subgroups are split unipotent with additive dimension formula",
+   "results": "{\"t\": \"2026-10-24T08:17:06Z\", \"tool\": \"leanfinder\", \"query\": \"Quotients of split unipotent algebraic groups by smooth connected normal subgroups are split unipotent with additive dimension formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"solvable_quotient_of_solvable\", \"nilpotent_quotient_of_nilpotent\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"of_quotient_center_nilpotent\", \"nilpotencyClass_quotient_le\", \"nilpotencyClass_quotient_center\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"nilpotencyClass_eq_quotient_center_plus_one\"], \"digest\": \"74bf10f8be37e9fe\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "grep",
+   "query": "split.*unipotent|unipotent.*quotient",
+   "results": "{\"t\": \"2026-10-24T08:19:39Z\", \"tool\": \"grep\", \"query\": \"split.*unipotent|unipotent.*quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a split unipotent algebraic group by a normal subgroup is split unipotent",
+   "results": "{\"t\": \"2026-10-24T08:19:39Z\", \"tool\": \"leansearch\", \"query\": \"Quotient of a split unipotent algebraic group by a normal subgroup is split unipotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_quotient_of_nilpotent\", \"IsPGroup.to_quotient\", \"solvable_quotient_of_solvable\", \"QuotientAddGroup.instHasQuotientAddSubgroup\", \"QuotientGroup.Quotient.commGroup\", \"Rep.quotientToInvariants\", \"QuotientGroup.quotientInfEquivProdNormalQuotient\", \"QuotientGroup.Quotient.group\"], \"digest\": \"ac3cd9b58a81e235\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", QuotientGroup",
+   "results": "{\"t\": \"2026-10-24T08:19:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", QuotientGroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'QuotientGroup'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid pattern: Loogle reported an unknown identifier; not evidence of absence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"solvable_quotient_of_solvable\"",
+   "results": "{\"t\": \"2026-10-24T08:21:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"solvable_quotient_of_solvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k",
+   "results": "{\"t\": \"2026-10-24T08:21:18Z\", \"tool\": \"leanfinder\", \"query\": \"A faithfully flat quotient of a k split unipotent group has a series of additive group quotients over k\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"coe_lowerCentralSeries_ideal_quot_eq\", \"LieModule.isNilpotent_quotient_iff\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"nilpotent_quotient_of_nilpotent\", \"LieModule.iInf_lcs_le_of_isNilpotent_quot\", \"nilpotencyClass_quotient_le\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"AdicCompletion.flat_of_isNoetherian\"], \"digest\": \"408bab4c9da75c2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients",
+   "results": "{\"t\": \"2026-10-24T08:28:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus action on a split unipotent group admits a torus stable normal series with one dimensional additive character quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"instNormalUpperCentralSeriesStep\", \"Group.IsNilpotent.nilpotent'\", \"Group.IsNilpotent.nilpotent\", \"LieModule.iInf_lowerCentralSeries_eq_posFittingComp\", \"nilpotent_center_quotient_ind\", \"comap_upperCentralSeries_quotient_center\"], \"digest\": \"1b709116e35512a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "grep",
+   "query": "solvable_quotient_of_solvable|nilpotent_quotient_of_nilpotent",
+   "results": "{\"t\": \"2026-10-24T08:29:39Z\", \"tool\": \"grep\", \"query\": \"solvable_quotient_of_solvable|nilpotent_quotient_of_nilpotent\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\", \"Mathlib/GroupTheory/Nilpotent.lean\"], \"digest\": \"585f32b04727a524\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: nilpotent_quotient_of_nilpotent and solvable_quotient_of_solvable concern abstract groups; they do not assert splitness or represented additive quotient schemes over a field."
+  },
+  {
+   "tool": "grep",
+   "query": "14-3|quotient.*[Aa]dditive|[Aa]dditive.*quotient|AdditivePolynomial",
+   "results": "{\"t\": \"2026-10-24T08:57:32Z\", \"tool\": \"grep\", \"query\": \"14-3|quotient.*[Aa]dditive|[Aa]dditive.*quotient|AdditivePolynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\"], \"digest\": \"05f63e8ed7d5dc42\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"quotient\"",
+   "results": "{\"t\": \"2026-10-24T08:57:32Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry, \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "invalid pattern: unknown identifier, not evidence of absence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient group scheme of the additive group over an arbitrary field is either trivial or isomorphic to the additive group, including nonsmooth finite kernels",
+   "results": "{\"t\": \"2026-10-24T08:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient group scheme of the additive group over an arbitrary field is either trivial or isomorphic to the additive group, including nonsmooth finite kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCircle\", \"Field.absoluteGaloisGroupAbelianization\", \"QuotientAddGroup.subsingleton_quotient_top\", \"QuotientAddGroup.quotientBot_apply\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AddGroup.fintypeOfDomOfCoker\", \"IsZGroup.instQuotientSubgroupOfFinite\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\"], \"digest\": \"ba004f75a886ced2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "grep",
+   "query": "additive|quotient",
+   "results": "{\"t\": \"2026-10-24T08:58:00Z\", \"tool\": \"grep\", \"query\": \"additive|quotient\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every proper closed subgroup scheme of the additive algebraic group over a field has additive group as its fppf quotient",
+   "results": "{\"t\": \"2026-10-24T08:58:00Z\", \"tool\": \"leansearch\", \"query\": \"Every proper closed subgroup scheme of the additive algebraic group over a field has additive group as its fppf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubgroup.addGroupEquivQuotientProdAddSubgroup\", \"AddSubgroup.noConfusionType\", \"QuotientAddGroup.instHasQuotientAddSubgroup\", \"ClosedAddSubgroup.instAddSubgroupClass\", \"QuotientAddGroup.finite\", \"Finite.of_finite_quot_finite_addSubgroup\", \"Finite.of_addSubgroup_quotient\", \"instProperVAddSubtypeMemAddSubgroupOfIsClosedCoe\"], \"digest\": \"20f8bad262b50d98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"additive\", Polynomial",
+   "results": "{\"t\": \"2026-10-24T08:58:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"additive\\\", Polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every closed subgroup scheme of Ga over a field is the kernel of an additive polynomial, and its fppf quotient is Ga unless the subgroup is all of Ga",
+   "results": "{\"t\": \"2026-10-24T08:58:02Z\", \"tool\": \"leanfinder\", \"query\": \"Every closed subgroup scheme of Ga over a field is the kernel of an additive polynomial, and its fppf quotient is Ga unless the subgroup is all of Ga\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"AlgebraicGeometry.Scheme.kerFunctor_obj\", \"AlgebraicGeometry.Scheme.Hom.ker_eq_top_iff_isEmpty\", \"AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot\", \"AlgebraicGeometry.Scheme.ker_of_isAffine\", \"AlgebraicGeometry.Scheme.Hom.ker_eq_bot_of_isIso\", \"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\"], \"digest\": \"ad197930b98e67d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "grep",
+   "query": "unipotent|Unipotent",
+   "results": "{\"t\": \"2026-10-24T08:59:27Z\", \"tool\": \"grep\", \"query\": \"unipotent|Unipotent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient of a split unipotent group scheme by a smooth connected normal subgroup admits a finite series with additive group quotients over the same field",
+   "results": "{\"t\": \"2026-10-24T08:59:28Z\", \"tool\": \"leansearch\", \"query\": \"The quotient of a split unipotent group scheme by a smooth connected normal subgroup admits a finite series with additive group quotients over the same field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientAddGroup.finite\", \"QuotientAddGroup.instHasQuotientAddSubgroup\", \"QuotientAddGroup.fg\", \"QuotientAddGroup.Quotient.addGroup\", \"nilpotent_quotient_of_nilpotent\", \"IsZGroup.instQuotientSubgroupOfFinite\", \"QuotientAddGroup.fintype\", \"QuotientAddGroup.Quotient.addGroup.congr_simp\"], \"digest\": \"b15f985f31cd9c50\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a split unipotent algebraic group over any field is split unipotent, by taking the image of an additive composition series",
+   "results": "{\"t\": \"2026-10-24T08:59:28Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a split unipotent algebraic group over any field is split unipotent, by taking the image of an additive composition series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"nilpotent_quotient_of_nilpotent\", \"solvable_quotient_of_solvable\", \"of_quotient_center_nilpotent\", \"IsPGroup.to_quotient\", \"nilpotencyClass_quotient_le\", \"nilpotent_center_quotient_ind\", \"nilpotencyClass_quotient_center\", \"LieAlgebra.nilpotent_of_nilpotent_quotient\"], \"digest\": \"a64f5166b99e10f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group, topological-group and scheme-ideal statements do not give represented additive group-scheme quotients or split unipotence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-unipotent-torus-stable-series",
+  "date": "2026-10-24",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Quotients preserve split unipotence over arbitrary fields.",
+   "via": [
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-unipotent-quotient-split",
+  "worker": "stage1",
+  "summary": "Kept the statement. Descended the given additive series by scheme-theoretic images, proved normality and the quotient maps by fppf local lifts, applied the existing additive-polynomial quotient node even for nonsmooth intersections, deleted trivial factors, and used existing arbitrary-field unipotent-extension permanence to obtain the matrix clause. All inputs already exist: zero new nodes and zero new Mathlib leaves.",
+  "blueprint": "The existing from.place records the deep prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), through the torus-stable split-unipotent series. The current latest direct-images proof and unit were read; no unit route is changed. Its existing ancestry has from.node=null, as blueprint_refs.py ancestor reports. Steps 1--5 realize Milne 16g's quotient-series argument; Step 6 verifies the representation clause.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-87c891436",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-87c891436 (reviewer sub-agent of L); spot-checked: First split of a proofless item (not a 2026-10-21 re-split). The statement is unchanged and there are no new nodes. The proof follows Milne iAG2017 §16g p.343 (quotients of split groups are split, via Exercise 14-3(a) p.301; Def 14.61/14.62 p.299), which I read in the local PDF. Steps: (1) the images V_i of U_i in Q come from the homomorphism-factorization node, with separatedness from affine-source-separated and membership descending by fpqc representable descent; V_0=Q because q is the fppf quotient. (2) V_i=U_i/K_i is smooth and connected after every field extension, by the affine-normal-quotient node. Its geometric connectedness is defined through k-bar, but the gap is bridged by base change to each L. K_i is not assumed smooth. (3) Normality is proved by local lifts and descent, and gives R_i=V_i/V_{i+1} with kernel V_{i+1}. (4) b_i a_i factors through U_i/U_{i+1}≅Ga by the universal property of sheafification, and is locally surjective, so the factorization node gives R_i≅Ga/H_i. (5) The additive-polynomial node handles any proper H_i, including nonreduced or étale ones; repeated terms are deleted correctly. (6) Unipotent-extension permanence, by upward induction from 1 and Ga⊂U_2, gives a closed embedding into U_n; the nilpotence count is elementary. Small cases checked: N=1, N=U, U=Ga, and alpha_p or Artin-Schreier kernels. Duplicate search (rg -L for split unipotent or solvable) found only the definition, the Rosenlicht criterion, the perfect-field series, permanence, and the consumer, so no duplicates; there is no cycle. Batch-5: the four new citations reach sec-trace-formula only through fppf base change, fppf-is-fpqc (Mathlib leaves) and the scheme descent-datum definition. These are general site infrastructure, not the trace formula or Poincaré duality or a step of their proofs, so they are accepted. No fixes, no tool_uses."
+ }
+}

@@ -1,0 +1,283 @@
+{
+ "id": "lem-sf-framework-theta-shift-compatibility",
+ "kind": "statement",
+ "title": "Framework completed pullback scalar comparison commutes with shifts",
+ "statement": "Fix the global datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$ [def-weil-finite-field-fiber]. Let $E\\subset L\\subset\\Omega$ be finite extensions of $\\mathbf Q_\\ell$ with valuation rings $\\mathcal O_E,\\mathcal O_L$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. For $W=X,Y$, use the derived-complete integral constructible category $\\mathcal C_F(W)=D^b_c(W,\\mathcal O_F)$ for $F=E,L$ [def-weil-derived-complete-integral-detailed]. Write $F_{f,F}=Lf_F^*$ for the completed pullback of [def-pur-integral-derived-operations], and $T_W=T_{L/E,W}$ for the completed strict-tower scalar extension of [def-weil-integral-scalar-extension].\n\nLet $\\theta_{f,E,L}:T_XF_{f,E}\\xrightarrow{\\sim}F_{f,L}T_Y$ be the pullback scalar comparison of [lem-pur-integral-operations-scalar-extension], with the specified whole-tower realization normalization of [lem-trf-integral-pullback-comparison-realization]. Give $F_{f,F}$ and $T_W$ their canonical integer shift comparisons induced by shifting the K-flat representative and its entire quotient tower in their defining derived-limit constructions. For a functor $A$ write $\\chi_{A,K,m}:A(K[m])\\xrightarrow{\\sim}(AK)[m]$ for this comparison; for a composite $AB$ use $\\chi_{AB,K,m}=\\chi_{A,BK,m}\\circ A(\\chi_{B,K,m})$ [def-weil-triangulated-category]. Then, for every $K\\in\\mathcal C_E(Y)$ and $m\\in\\mathbf Z$, the following equality holds in the derived category:\n$$\n\\chi_{F_{f,L}T_Y,K,m}\\circ\\theta_{f,E,L,K[m]}\n=(\\theta_{f,E,L,K})[m]\\circ\\chi_{T_XF_{f,E},K,m}.\n$$\nIts inverse satisfies the corresponding reversed equation. The same equations hold after raw rationalization [def-weil-rationalization-karoubi], with the rationalized comparisons used in the prescribed pullback of [def-weil-derived-pullback-tensor-hom].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures paragraph: compatibility of the prescribed automorphism and immersion pullbacks with shifts and coefficient extension. Agent-extracted comparison/descent interface; the blueprint does not state this auxiliary lemma separately."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pur-integral-derived-operations",
+  "def-weil-integral-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-triangulated-category",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-fd-integral-pullback-shift-coordinates",
+  "def-pur-completed-scalar-shift-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Equip the actual total limits with their right-derived shifts, the supplied reduction functors with adjoint-mate shifts, exact sequence pullbacks with their termwise derived shifts, and sequence scalar change with its universal-counit shift. These choices are fixed independently of lambda and mu.",
+   "uses": [
+    "def-sf-integral-comparison-canonical-shifts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The normalized completed pullback realization and completed scalar realization commute with these fixed shifts, by the two realization lemmas. Reduction of either realization followed by the actual adjunction counit therefore commutes with shifts: the counit has the adjoint-mate shift equation. Whisker and compose these maps to obtain the natural transformation lambda from completed scalar after pullback to the common strict-system realization. It commutes with shifts.",
+   "uses": [
+    "lem-sf-integral-pullback-realization-shifts",
+    "lem-sf-integral-scalar-realization-shifts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The generator-normalized sequence scalar/pullback comparison commutes with the independently fixed sequence shifts. Whisker its inverse with reduction and total limit and compose it with pullback realization and the reduced scalar counit. This gives the natural transformation mu to precisely the same common strict-system realization, commuting with the same shift.",
+   "uses": [
+    "lem-sf-integral-sequence-scalar-pullback-shifts",
+    "lem-sf-integral-pullback-realization-shifts",
+    "lem-sf-integral-scalar-realization-shifts"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On constructible inputs lambda and mu are exactly the integralComparisonLambda and integralComparisonMu isomorphisms. Their defining scalar comparison a satisfies a followed by mu equals lambda, at both K and K[m]. Precompose the natural transformation shift equations by the inclusion comparison K[m].obj → K.obj[m]. Naturality gives the same common realization shift on the right. Postcompose the desired a square by shifted mu, substitute the two equations and a followed by mu equals lambda, and cancel this invertible shifted map. The output constructible inclusion comparison cancels from both sides; its naturality is exactly the inserted inverse comparison in SourceShift and TargetShift.",
+   "uses": [
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Precompose the forward square by a at K[m] to deduce the inverse square using both inverse identities. Apply raw rationalization to the two integral equations; its preservation of composition yields the two rational equations. All comparisons and the target statement are unchanged.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-comparison-canonical-shifts",
+  "lem-sf-integral-pullback-realization-shifts",
+  "lem-sf-integral-scalar-realization-shifts",
+  "lem-sf-integral-sequence-scalar-pullback-shifts",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Weil-structures and rational-stage paragraphs; paste the normalized unary realization squares and cancel the shared whole-system target."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived completed pullback change of coefficient rings natural comparison compatible shift functors",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.commShiftPullback; CategoryTheory.NatTrans.PullbackShift.natIsoComp; CategoryTheory.NatTrans.commShiftPullback; CategoryTheory.PullbackShift.natTrans; CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp; CategoryTheory.PullbackShift.functor; CategoryTheory.Functor.commShiftPullback_iso_eq; CategoryTheory.pullbackShiftIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical theta integral pullback completed scalar extension comparison is an exact natural transformation and respects suspension",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.mapExactFunctor_smul; CategoryTheory.Functor.IsHomological.exact; CategoryTheory.Functor.map_distinguished_exact; CategoryTheory.Functor.homologySequence_exact₂; CategoryTheory.Functor.homologySequence_exact₁; CategoryTheory.Functor.homologySequence_exact₃; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Functor.homologySequenceComposableArrows₅_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "OK 12 hit(s); CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "CommShift|commShift",
+   "results": "OK 25 hit(s); Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Twist.lean; Mathlib/CategoryTheory/Shift/Twist.lean; Mathlib/CategoryTheory/Shift/Twist.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete pullback scalar extension comparison commutes with shift",
+   "results": "OK 8 hit(s); CategoryTheory.NatTrans.commShiftPullback; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.commShiftPullback_iso_eq; CategoryTheory.NatTrans.CommShiftCore.shift_comm; CategoryTheory.Equivalence.commShiftFunctor; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.pullbackShiftFunctorZero'_hom_app; CategoryTheory.Equivalence.CommShift.mk''",
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift, pseudofunctor, localization or colimit infrastructure does not give the specified completed-coefficient comparison or framework common-stage descent assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|completedPullback|scalarPullback|CommShift",
+   "results": "OK 25 hit(s); Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Induced.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean; Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic shift/adjunction infrastructure or ordinary ring completion, not the specified completed coefficient comparison; its normalization still requires the whole-tower calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived limit counit natural transformation compatible with integer shift of complexes",
+   "results": "OK 8 hit(s); CategoryTheory.Adjunction.CommShift.commShift_counit; CategoryTheory.Adjunction.CommShift.CompatibilityCounit; CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app; CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CochainComplex.shiftEval; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.NatTrans.CommShift₂Int",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic shift/adjunction infrastructure or ordinary ring completion, not the specified completed coefficient comparison; its normalization still requires the whole-tower calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "OK 12 hit(s); CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic shift/adjunction infrastructure or ordinary ring completion, not the specified completed coefficient comparison; its normalization still requires the whole-tower calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "completed derived pullback scalar extension natural comparison commutes with all integer shifts",
+   "results": "OK 8 hit(s); CategoryTheory.Functor.commShiftPullback; CategoryTheory.NatTrans.commShiftPullback; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoComp; CategoryTheory.NatTrans.instCommShiftPullbackShiftHomFunctorNatIsoId; CategoryTheory.NatTrans.PullbackShift.natIsoComp; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic shift/adjunction infrastructure or ordinary ring completion, not the specified completed coefficient comparison; its normalization still requires the whole-tower calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K flat quotient tower completed change of coefficient ring comparison with inverse image compatible suspension",
+   "results": "OK 8 hit(s); AdicCompletion.flat_of_isNoetherian; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; Module.flat_of_isLocalized_span; AdicCompletion.tensor_map_id_left_eq_map; Module.Flat.trans; AdicCompletion.ofTensorProduct_naturality; Module.flat_iff_of_isLocalization; RingHom.Flat.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits provide generic shift/adjunction infrastructure or ordinary ring completion, not the specified completed coefficient comparison; its normalization still requires the whole-tower calculation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-automorphism-constructible-stage-equivalence",
+  "date": "2026-10-22",
+  "group": "Q53"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Weil-structures paragraph: compatibility of the prescribed automorphism and immersion pullbacks with shifts and coefficient extension.",
+   "via": [
+    "lem-sf-automorphism-constructible-stage-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-framework-theta-shift-compatibility",
+  "worker": "stage1",
+  "summary": "Checked the whole-tower normalization of theta, wrote the signed Roos and entire counit calculations, pasted the lambda/mu shift squares and proved inverse and raw-rational equations. Statement unchanged; all needed facts already have DAG nodes; no new nodes.",
+  "blueprint": "prop-sf-open-closed-triangle-all-stages.proof.md, Weil-structures paragraph: compatibility of the prescribed automorphism/immersion pullbacks with shifts and coefficient extension; rational-stage paragraph for raw rationalization.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-weil-completed-scalar-shift-descent",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-weil-roos-comm-shift",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pur-injective-tower-roos-shifts",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pur-coefficient-scalar-shifts",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pur-coefficient-associator-shifts",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pur-coefficient-pullback-shifts",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic representative, coefficient-change, or whole-tower realization tool used for the prescribed pullback comparison; the localization unit does not supply this normalization/shift calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-integral-pullback-comparison-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-672223431",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-672223431 (reviewer sub-agent of L); spot-checked: I read the item in full: 9 steps, statement unchanged, no new nodes. In side-live the item is still unsplit with an identical statement and stmt_deps, and it has no repair note. Every citation checks against the cited node's statement. lem-trf-integral-pullback-comparison-realization gives λ, μ, a=μ⁻¹λ, the whole-tower counit ε_C, the zero component of the completion map in the shifted product, and representative independence. lem-weil-completed-scalar-shift-descent says flat-term K-flat representatives are stable under shifts. lem-pur-injective-tower-roos-shifts gives χ_{I,r}(y,x)=((−1)^r y,x) with χη_{I[r]}=η_I[r]. lem-pur-cochain-pullback-tensor-coherence has κ_K, which is the step-3 formula. I accept lem-pur-coefficient-*-shifts and lem-pur-derived-change-of-rings as tools for K-flat coefficient change. Checks: degreewise shift identity with (−1)^m differentials (Stacks 011G); K-injectivity of I[m]; type of ε_{C[m]}=ε_C[m]Δ(σ); step 7 pasting types; the step-8 cancellation and inverse equation; the step-9 raw localization (no Karoubi; Lf_E*(u⊗c)=Lf*(u)⊗c). The step-1 source, Stacks 099N(5), fits. Edge cases m=0, odd and negative m, E=L (θ=id) and f=id all work. Duplicates: lem-fd-whole-tower-integral-pullback-comparison covers only isomorphisms between noetherian finite-dimensional schemes, and lem-pur-adic-purity-scalar-naturality only smooth separated maps with ctf objects, so neither is a duplicate. There is no cycle, proof_deps equals the union of step uses, and no source is SGA. Maintainer: please record the off-route generic tools listed in split_report.tool_uses: trf realization (accepted at Q60), pc K-flat resolution, sf-admissible shift descent and Roos shift, purity-conv cochain coherence, sf-compatibility Roos shifts, and the three purity-transport coefficient shift nodes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfFrameworkThetaShiftCompatibility",
+  "declaration": "WeilConjectures.sfFrameworkThetaShiftCompatibility",
+  "declarations": [
+   "WeilConjectures.SfFrameworkThetaShifts",
+   "WeilConjectures.sfFrameworkThetaSource",
+   "WeilConjectures.sfFrameworkThetaTarget",
+   "WeilConjectures.sfFrameworkTheta",
+   "WeilConjectures.sfFrameworkThetaSourceShift",
+   "WeilConjectures.sfFrameworkThetaTargetShift",
+   "WeilConjectures.sfFrameworkThetaShiftCompatibility"
+  ],
+  "file": "lean/Sheaf/Paper/SfFrameworkThetaShiftCompatibility.lean",
+  "statement": "theorem sfFrameworkThetaShiftCompatibility (_D₀ : FiniteFieldDatum.{d}) (_hl : l ≠ _D₀.p) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (eE : E →ₐ[ℚ_[l]] Ω) (eL : L →ₐ[ℚ_[l]] Ω) (_hι : eL.comp ι = eE) (D : IntegralComparisonSystem.{u} l) (S : SfFrameworkThetaShifts l E L ι f) (K : sfIntegralConstructibleCategory l E Y) (m : ℤ) : ((sfFrameworkTheta l E L ι f D (K⟦m⟧)).hom ≫ (sfFrameworkThetaTargetShift l E L ι f S K m).hom = (sfFrameworkThetaSourceShift l E L ι f S K m).hom ≫ (sfFrameworkTheta l E L ι f D K).hom⟦m⟧') ∧ ((sfFrameworkTheta l E L ι f D (K⟦m⟧)).inv ≫ (sfFrameworkThetaSourceShift l E L ι f S K m).hom = (sfFrameworkThetaTargetShift l E L ι f S K m).hom ≫ (sfFrameworkTheta l E L ι f D K).inv⟦m⟧') ∧ ((sfRationalConstructibleLocalization l L X).map (sfFrameworkTheta l E L ι f D (K⟦m⟧)).hom ≫ (sfRationalConstructibleLocalization l L X).map (sfFrameworkThetaTargetShift l E L ι f S K m).hom = (sfRationalConstructibleLocalization l L X).map (sfFrameworkThetaSourceShift l E L ι f S K m).hom ≫ (sfRationalConstructibleLocalization l L X).map ((sfFrameworkTheta l E L ι f D K).hom⟦m⟧')) ∧ ((sfRationalConstructibleLocalization l L X).map (sfFrameworkTheta l E L ι f D (K⟦m⟧)).inv ≫ (sfRationalConstructibleLocalization l L X).map (sfFrameworkThetaSourceShift l E L ι f S K m).hom = (sfRationalConstructibleLocalization l L X).map (sfFrameworkThetaTargetShift l E L ι f S K m).hom ≫ (sfRationalConstructibleLocalization l L X).map ((sfFrameworkTheta l E L ι f D K).inv⟦m⟧'))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the normalized whole-system lambda/mu comparison and the existing signed cochain/descent predicates, with explicit transport through the constructible inclusions. Both forward and inverse equations and their raw rationalizations are stated. The finite fields are arbitrary small models embedded compatibly into an independently sized fixed algebraic closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0ef816e0",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H12 RETURN at c77ef803. The item now cites the live def node def-pur-completed-scalar-shift-coordinates; the module diff is one import line, and the record changes only in lean and stmt_deps (two def nodes added). Re-checked: theta = integralComparisonScalar (lambda then mu inverse, the specified normalization); shift data pinned by ShiftCoordinates/ShiftDescent and the scalar cone-formula/integral-normalization predicates; composite shift order matches the node; forward, inverse and raw-rational equations match; no extra hypotheses; edge cases m=0, odd and negative m, E=L, f=id and empty scheme covered; docstrings complete, sole sorry is the item theorem. No compile reproduced, no FIX."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T041134-L-1020859",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

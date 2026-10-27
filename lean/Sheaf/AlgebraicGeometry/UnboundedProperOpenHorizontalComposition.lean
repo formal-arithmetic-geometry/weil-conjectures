@@ -15,6 +15,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 
+import Sheaf.AlgebraicGeometry.EtaleProperOpenHorizontalNormalization
+
 /-! Horizontal composition of unbounded proper/open interchange, Stacks Tag 0F7D. -/
 
 @[expose] public section
@@ -109,6 +111,26 @@ theorem unboundedProperOpenHorizontalComposition_of_normalization
               ((Functor.mapDerivedCategoryNatIso
                   (openImmersionLowerShriekComp (ModuleCat.{u + 1} A) k l) ≪≫
                 Functor.mapDerivedCategoryCompIso _ _).inv.app K)) := by
-  sorry
+  have normalized {U V W Z : Scheme.{u}}
+      [IsNoetherian U] [IsNoetherian V] [IsNoetherian W] [IsNoetherian Z]
+      (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+      [IsOpenImmersion k] [IsOpenImmersion i] [IsProper r] [IsProper p]
+      (sq : CommSq k r p i) :
+      ProperOpenUnitNormalized
+        (r)_*[ModuleCat.{u + 1} A] (p)_*[ModuleCat.{u + 1} A]
+        (k)_!open[ModuleCat.{u + 1} A] (i)_!open[ModuleCat.{u + 1} A]
+        (θ k r p i sq).hom (Γ k r p i sq).hom := by
+    intro X
+    exact hΓ k r p i sq X
+  intro U V T W Z S _ _ _ _ _ _ k l r p q i j _ _ _ _ _ _ _ sq₁ sq₂ K
+  exact etaleProperOpenHorizontalNormalization A k l r p q i j sq₁ sq₂
+    (θ k r p i sq₁) (θ l p q j sq₂)
+    (θ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂))
+    (fun F ↦ hθ k r p i sq₁ F) (fun F ↦ hθ l p q j sq₂ F)
+    (fun F ↦ hθ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂) F)
+    (Γ k r p i sq₁) (Γ l p q j sq₂)
+    (Γ (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂))
+    (normalized k r p i sq₁) (normalized l p q j sq₂)
+    (normalized (k ≫ l) r q (i ≫ j) (sq₁.horiz_comp sq₂)) K
 
 end AlgebraicGeometry.Etale

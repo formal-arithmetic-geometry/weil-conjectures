@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-space-relative-flat-closed-kernel-base-change",
+ "kind": "statement",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "title": "Derived base change of a relatively flat closed kernel on a product of algebraic spaces",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme] and algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use module sheaves and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], the canonical module functors [def-trf-space-etale-module-functors], and derived tensor pullback computed by K-flat resolutions [def-sfb-space-derived-pullback]. Let $S_0$ be a scheme, let $X_0,Y_0$ be algebraic spaces over $S_0$, and let $a:S\\to S_0$ be any scheme morphism. Put $T_0=X_0\\times_{S_0}Y_0$, $T=T_0\\times_{S_0}S$, and let $q:T\\to T_0$ be projection [lem-trf-space-fibre-products-etale-covers]. Let $i_0:W_0\\hookrightarrow T_0$ be a closed immersion, meaning representable by closed immersions on scheme tests [def-weil-closed-immersion]. Assume $Y_0\\to S_0$ and $W_0\\to T_0\\to X_0$ are flat, meaning flat on compatible etale scheme charts [def-weil-flat-morphism]. Form $W=W_0\\times_{T_0}T$, with projection $r:W\\to W_0$ and closed immersion $i:W\\hookrightarrow T$. There is a canonical isomorphism in the derived category\n$$Lq^*((i_{0,*}\\mathcal O_{W_0})[0])\\simeq(i_*\\mathcal O_W)[0]\\quad\\text{in }D(\\mathcal O_T).$$\nIt is the derived base-change comparison $Lq^*Ri_{0,*}\\mathcal O_{W_0}\\to Ri_*Lr^*\\mathcal O_{W_0}$ under the identifications $Lr^*\\mathcal O_{W_0}=\\mathcal O_W$ and derived closed pushforward of the structure sheaf with its degree-zero ordinary pushforward. No flatness of $a$, $X_0\\to S_0$ or $i_0$, and no Noetherian or finiteness assumptions, are imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-derived-pullback",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-module-derived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=X_0\\times_{S_0}S$ and $Y=Y_0\\times_{S_0}S$. The fibre-product universal property identifies $X\\times_SY$ with $T$: on every test scheme both have triples $(x_0,y_0,s)$ whose images in $S_0$ agree. The projection to $T_0$ is $q$ under this identification. The same universal property identifies its inverse image of $W_0$ with the stated $W$, with projections $r,i$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTQ, lemma-case-of-tor-independence: its notation for the base-changed product."
+   }
+  },
+  {
+   "text": "Apply the product Tor-independence lemma to the square with corners $Z_0=W_0$, $X_0$, $Y_0$, $B_0=S_0$, the map $W_0\\to Y_0$ induced by $i_0$, and $B=S$. Take its ambient scheme to be $\\operatorname{Spec}\\mathbf Z$. The square commutes because $i_0$ maps to the product. Its two flatness assumptions are exactly $Y_0/S_0$ and $W_0/X_0$, which are hypotheses here. By step 1 its conclusion says that $i_0$ and $q$ are Tor independent over $T_0$.",
+   "uses": [
+    "lem-sfb-space-product-tor-independence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0CTQ, lemma-case-of-tor-independence, specialized to the displayed product."
+   }
+  },
+  {
+   "text": "For every scheme test $U\\to T$, the fibre-product equations give $W\\times_TU\\simeq W_0\\times_{T_0}U$. The latter is a closed subscheme of $U$ by the representable closed-immersion hypothesis, so $i$ is closed. On an affine test of either $T_0$ or $T$, the closed source is $\\operatorname{Spec}(A/I)$ by the affine characterization of closed immersions. Thus $i_0$ and $i$ are affine. The affine-locality lemma makes $i_0$ quasi-compact and separated, in particular quasi-separated, as required for derived base change.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-sfb-space-affine-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex; literature/stacks-project/morphisms.tex",
+    "place": "Closed immersions on scheme tests; Tag 01QO, lemma-closed-immersion (affine quotient characterization); affine locality and qcqs permanence."
+   }
+  },
+  {
+   "text": "The structure sheaf has the rank-one free local presentation, so is quasi-coherent. Closed pushforward gives quasi-coherent $i_{0,*}\\mathcal O_{W_0}$ and $i_*\\mathcal O_W$. Apply affine module higher-image vanishing to both maps of step 3 and these structure modules. Their canonical maps from degree-zero ordinary pushforward to derived pushforward are isomorphisms: positive cohomology is the vanishing $R^j i_*$, negative cohomology is zero for a degree-zero injective resolution, and degree zero is ordinary direct image. The comparison is therefore a quasi-isomorphism.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-affine-module-higher-image-vanishing",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex; literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073H, lemma-affine-vanishing-higher-direct-images; Tags 03MB, lemma-closed-immersion-ideals, and 04CJ, lemma-i-star-equivalence."
+   }
+  },
+  {
+   "text": "The complex $\\mathcal O_{W_0}[0]$ is K-flat directly from the definition: tensoring any acyclic complex with it gives that same complex. It can therefore serve as its own K-flat resolution for $Lr^*$. Ordinary tensor pullback sends it to $\\mathcal O_W[0]$: multiplication $b\\otimes c\\mapsto b\\,r^\\sharp(c)$ is inverse to $b\\mapsto b\\otimes1$. These are the canonical tensor-unit identifications, without flatness of $r$.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-sfb-space-derived-tensor-pullback",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+    "place": "K-flat derived tensor pullback; ordinary tensor-unit calculation (Tags 06YV, 03D7)."
+   }
+  },
+  {
+   "text": "Apply Tor-independent derived base change with $f=i_0$, $g=q$, $f^\\prime=i$, $g^\\prime=r$, and $E=\\mathcal O_{W_0}[0]$. Step 2 supplies Tor independence, step 3 supplies qcqs, and step 4 supplies quasi-coherence of $E$. This gives the canonical isomorphism $Lq^*Ri_{0,*}E\\to Ri_*Lr^*E$. Substitute the canonical identifications of steps 4 and 5 to obtain the isomorphism claimed in the item. The morphism is exactly the adjunction-mate comparison specified by the cited theorem; only its source and target have been identified.",
+   "uses": [
+    "lem-sfb-space-tor-independent-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08IR, lemma-compare-base-change, with its canonical map from the first sentence of the proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-product-tor-independence",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-affine-locality",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "lem-sfb-space-affine-module-higher-image-vanishing",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-sfb-space-derived-tensor-pullback",
+  "def-trf-space-etale-module-functors",
+  "lem-sfb-space-tor-independent-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex; literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 0CTQ and 08IR, specialized to the closed immersion structure sheaf; degree-zero simplification by 073H."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change of a closed immersion structure sheaf in a product when both factors are flat over one common base algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsImmersion\", \"doc\": \"The property of being an immersion of schemes is stable under base change, meaning that if a morphism of schemes is an immersion, then any base change (pullback) of this morphism is also an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion g],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, given morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, if $ g $ is a closed immersion, then the first projection morphism $ \\text{pullback}(f, g) \\to X $ from the pullback diagra\"}\n  {\"name\": \"AlgebraicGeometry.instIsClosedImmersionSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.IsClosedImmersion f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, if $ f : X \\to Z $ is a closed immersion, then the second projection morphism from the pullback of $ f $ and $ g : Y \\to Z $ to $ Y $ is also a closed immersion. This means i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces Tor independent closed pushforward structure sheaf derived base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": X.Modules ⥤ Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \": algebraMap R ((Spec.topMap f _* (structureSheaf S).1).stalk p) = (f ≫ StructureSheaf.toPushforwardStalk f p).hom\", \"doc\": \"The algebra map from $ R $ to the stalk of the pushforward structure sheaf at $ p $ is equal to the composition of the ring homomorphism $ f $ with the stalk map at $ p $.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Spec\", \"type\": \":\\n  f ≫ StructureSheaf.toPushforwardStalk f p =\\n    StructureSheaf.toStalk R p ≫ (TopCat.Presheaf.stalkFunctor _ _).map (Spec.sheafedSpaceMap f).hom.c\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback f ⊣ pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \":\\n  pushforward.{v} ψ ⋙ pushforward.{v} φ ≅\\n    pushforward.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ⊣ pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pushforward f ⋙ pushforward g ≅ pushforward (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"derived\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"LieAlgebra.derivedSeries_baseChange\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \" {R : Type u} {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] {A : Type u_1} [CommRing A] [Algebra R A] (k : ℕ) : LieAlgebra.derivedSeries A (TensorProduct R A L) k = LieSubmodule.baseChange A (LieAlgebra.derivedSeries R L k)\", \"doc\": \"\"}\n  {\"name\": \"LieAlgebra.derivedSeriesOfIdeal_baseChange\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \" {R : Type u} {L : Type v} [CommRing R] [LieRing L] [LieAlgebra R L] (I : LieIdeal R L) {A : Type u_1} [CommRing A] [Algebra R A] (k : ℕ) : LieAlgebra.derivedSeriesOfIdeal A (TensorProduct R A L) k (LieSubmodule.baseChange A I) = LieSubmodule.baseChange A (LieAlgebra.derivedSeriesOfIdeal R L k I)\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|tor.independen|derivedPullback.*closed|closed.*derivedPullback",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Galois/GaloisObjects.lean\", \"line\": \"17\", \"text\": \"We define when a connected object of a Galois category `C` is Galois in a fiber-functor-independent\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of closed kernel in product after arbitrary base extension assuming kernel is flat over first factor and second factor is flat over base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {ZX ZY X Y : AlgebraicGeometry.Scheme} (iX : ZX ⟶ X) (iY : ZY ⟶ Y) (Zf : ZX ⟶ ZY) (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsClosedImmersion iX] [AlgebraicGeometry.IsClosedImmersion iY],\\n  CategoryTheory.CategoryStruct.comp iX f = CategoryTheory.CategoryStruct.comp Zf iY →\\n    (AlgebraicGeometry.Scheme.Ho\", \"doc\": \"Given schemes $Z_X \\\\subset X$ and $Z_Y \\\\subset Y$ as closed immersions with ideal sheaves $\\\\mathcal{I}_X$ and $\\\\mathcal{I}_Y$, and morphisms $f: X \\\\to Y$ and $Zf: Z_X \\\\to Z_Y$ forming a commutative sq\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n  {\"name\": \"Algebra.kerTensorProductMapIdToAlgHomEquiv\", \"module\": \"Mathlib/RingTheory/Flat/Equalizer\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (T : Type u_3) →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [inst_6 : IsSc\", \"doc\": \"Given a surjective algebra homomorphism $ S \\\\to T $, there is a linear equivalence between the kernel of the induced ring homomorphism $ A \\\\otimes_R S \\\\to A \\\\otimes_R T $ and the tensor product $ (A \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"Module.Flat.ker_lTensor_eq\", \"module\": \"Mathlib/RingTheory/Flat/Equalizer\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (M : Type u_3)\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : Module S M] [inst_6 : IsScalarTower R S M] {N : Type u_4}\\n  {P : Type u_5} [inst_7 : AddCommGroup N] [inst_8 : AddCommGroup P] [\", \"doc\": \"For a flat $ R $-module $ M $, the kernel of the $ A $-linear map $ M \\\\otimes_R N \\\\to M \\\\otimes_R Q $ induced by an $ R $-linear map $ f: N \\\\to Q $ is equal to the image of the $ A $-linear map $ M \\\\o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (i : Z ⟶ Y) (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion i],\\n  AlgebraicGeometry.Scheme.Hom.ker (CategoryTheory.Limits.pullback.fst f i) =\\n    (AlgebraicGeometry.Scheme.Hom.ker i).comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary scheme morphisms, underived module operations, or unrelated graph/Lie algebra results do not state this algebraic-space assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tor independence of a product base change and a relatively flat algebraic space over one factor",
+   "results": "Read 8 returned hits: AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instFstScheme, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, TensorProduct.LinearIndepOn.tmul_of_flat_right, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of a closed immersion structure sheaf under Tor independent base change of algebraic spaces",
+   "results": "Read 8 returned hits: AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.hasPullback_of_left, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"derived\"",
+   "results": "Read 2 returned hits: LieAlgebra.derivedSeries_baseChange, LieAlgebra.derivedSeriesOfIdeal_baseChange. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "TorIndependent|torIndependent|tor_independent|AlgebraicSpace",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned signatures concern ordinary flatness, scheme morphisms, underived tensor or pullback comparisons, Kan extensions, or unrelated name substrings; none states this geometric Tor-independence or derived algebraic-space assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-derived-chow-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q45"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect pseudo-coherent tensor tests on flat algebraic spaces. Supporting input: Tag 0CTT, lemma-characterize-pseudo-coherent. Supporting proof input: 0CTT proof, choose n,Z,z,V,E using derived Chow. Supporting input: Tag 0CTQ, lemma-case-of-tor-independence; Tag 08IR, lemma-compare-base-change, applied to a closed immersion and its structure sheaf.",
+   "via": [
+    "lem-sfb-space-derived-chow-neighbourhood",
+    "lem-sfb-space-pseudocoherent-tests-relative",
+    "lem-sfb-space-perfect-tests-pseudocoherence",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-relative-flat-closed-kernel-base-change",
+  "worker": "stage1",
+  "summary": "Separated geometric Tor independence (0CTQ) from general qcqs derived base change (08IR), reused closed-space quasi-coherence and module-valued affine vanishing, and wrote the fibre-product and structure-unit calculations explicitly. Statement unchanged; two new statement-only nodes, neither a Mathlib match.",
+  "blueprint": "Supports the inherited direct-image alteration/duality branch at derived Chow Tag 0CTR clause (4), specifically the pullback of its closed structure-sheaf kernel by 0CTQ and 08IR. Searched the current latest blueprint and imported nodes; no matching imported statement found. The inherited ancestry has blueprint.from.node=null, retained as computed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic closed-immersion base-change tool used on represented scheme tests; the item does not change its unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-964f2fda7",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-964f2fda7 (reviewer sub-agent of L); spot-checked: Read Stacks 0CTQ (spaces-more-morphisms lemma-case-of-tor-independence, full statement and footnoted chart proof) and 08IP/08IQ/08IR (spaces-perfect: definition-tor-independent, lemma-tor-independent, lemma-compare-base-change with its canonical map). New node product-tor-independence matches 0CTQ hypothesis by hypothesis: arbitrary commutative square, arbitrary B→B_0, flatness of Y_0/B_0 and Z_0/X_0, Tor independence through geometric stalks. New node tor-independent-base-change matches 08IR: f qcqs, g arbitrary, E in D_QCoh, beta pinned as the counit mate. Neither restates the item or a clause of it. Duplicate search over the whole DAG: the existing flat-space 08IR node covers only flat f, and i_0 is not flat; 0A1K needs G flat over Y; 0DKD gives amplitude, not exchange; the 0E23/0CTA/flat-families nodes are about schemes only. Steps: 1 is the fibre-product universal property (elementary); 2 substitutes Z_0=W_0, B_0=S_0, B=S and gives i_0 and q Tor independent over T_0; 3 gets i closed from W×_T U = W_0×_{T_0} U, affine from 01QO, and qcqs from affine-locality; 4 uses free-presentation quasi-coherence, the closed-pushforward qc node and the module-valued 073H vanishing, so (i_*O)[0] ≅ Ri_*(O[0]); 5 shows O[0] is K-flat and r^*O = O_W (genuinely elementary); 6 substitutes f=i_0, g=q, f'=i, g'=r into the 08IR node with all hypotheses supplied, and the result is the canonical mate. Tested: an A^1_Z/V(t) example with S=Spec F_p holds; with nonflat W_0=Spec F_p[t], Tor_1 ≠ 0, so the flatness hypothesis is needed. Statement and stmt_deps are byte-identical to side-live, and the item is unsplit live with no repair note. proof_deps equals the union of step uses. Accepted tool_use lem-trf-space-fibre-products-etale-covers as a generic fibre-product tool; its 'why' text describing it as a closed-immersion base-change tool is imprecise (advisory only). Batch-5: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions, and lem-trf-space-fibre-products-etale-covers is foundational 02X2; the affine-locality, closed-qc, 073H, tensor-pullback and chart-calculus nodes reach sec-trace-formula only through the definition def-trf-algebraic-space. None is part of the trace formula or Poincaré duality. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceRelativeFlatClosedKernelBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.relativeFlatClosedKernel_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.relativeClosedKernelSmallStructureMap",
+   "AlgebraicGeometry.AlgebraicSpace.relativeClosedKernelDirectImageComparison",
+   "AlgebraicGeometry.AlgebraicSpace.relativeClosedKernelDerivedStructureMap",
+   "AlgebraicGeometry.AlgebraicSpace.relativeFlatClosedKernel_baseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceRelativeFlatClosedKernelBaseChange.lean",
+  "statement": "theorem relativeFlatClosedKernel_baseChange (S0 S : Over (Spec (CommRingCat.of (ULift.{u} ℤ)))) (a : S ⟶ S0) (X0 Y0 T0 T W0 W : AlgebraicSpace (Spec (CommRingCat.of (ULift.{u} ℤ)))) [HasDerivedCategory.{w} T0.SmallModules] [HasDerivedCategory.{w} T.SmallModules] [HasDerivedCategory.{w} W0.SmallModules] [HasDerivedCategory.{w} W.SmallModules] (x0 : X0 ⟶ schemeSpace S0) (y0 : Y0 ⟶ schemeSpace S0) (pX : T0 ⟶ X0) (pY : T0 ⟶ Y0) (hT0 : IsPullback pX pY x0 y0) (q : T ⟶ T0) (b : T ⟶ schemeSpace S) (hT : IsPullback q b (pX ≫ x0) (ObjectProperty.homMk ((Scheme.fppfTopology.over (Spec (CommRingCat.of (ULift.{u} ℤ)))).yoneda.map a))) (i0 : W0 ⟶ T0) (hi0 : IsRepresentableWith (fun _ _ c ↦ IsClosedImmersion c.left) i0.hom.hom) (hY : MapIsFlat y0) (hW : MapIsFlat (i0 ≫ pX)) (r : W ⟶ W0) (i : W ⟶ T) (hWsq : IsPullback r i i0 q) : IsRepresentableWith (fun _ _ c ↦ IsClosedImmersion c.left) i.hom.hom ∧ ∃ (e0 : (DerivedCategory.singleFunctor T0.SmallModules 0).obj ((smallModuleDirectImage i0).obj (SheafOfModules.unit W0.smallStructureRings)) ≅ (derivedDirectImage i0).obj W0.derivedStructure) (ei : (DerivedCategory.singleFunctor T.SmallModules 0).obj ((smallModuleDirectImage i).obj (SheafOfModules.unit W.smallStructureRings)) ≅ (derivedDirectImage i).obj W.derivedStructure) (er : (spaceDerivedPullback r).obj W0.derivedStructure ≅ W.derivedStructure) (alpha : (spaceDerivedPullback q).obj ((DerivedCategory.singleFunctor T0.SmallModules 0).obj ((smallModuleDirectImage i0).obj (SheafOfModules.unit W0.smallStructureRings))) ≅ (DerivedCategory.singleFunctor T.SmallModules 0).obj ((smallModuleDirectImage i).obj (SheafOfModules.unit W.smallStructureRings))), e0.hom = relativeClosedKernelDirectImageComparison i0 (SheafOfModules.unit W0.smallStructureRings) ∧ ei.hom = relativeClosedKernelDirectImageComparison i (SheafOfModules.unit W.smallStructureRings) ∧ er.hom = relativeClosedKernelDerivedStructureMap r ∧ alpha.hom ≫ ei.hom = (spaceDerivedPullback q).map e0.hom ≫ moduleDerivedExchange i0 i q r hWsq.w W0.derivedStructure ≫ (derivedDirectImage i).map er.hom",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Canonical comparison equation unchanged. The derived-exchange notion is owned by def-sfb-space-module-derived-exchange, replacing the unused flat-complex theorem statement dependency. The live derived-pullback module and record are used without modification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29d5c5001",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Re-delivery after the dd7b RETURN. H2 fixed: stmt_deps swaps theorem lem-sfb-space-flat-complex-base-change for def-sfb-space-module-derived-exchange (already landed by maintenance commit 964fd9a5, record byte-identical to side-live; moduleDerivedExchange keeps name, signature and body, a counit mate via spaceDerivedPullbackComp/spaceDerivedAdjunction). H13 fixed: no SpaceDerivedPullback module or record delivered. Item .lean differs from dd7b only by that import; item JSON only in stmt_deps and lean.note; lean.statement verbatim. Mathematics re-checked against 0CTQ/08IR: a arbitrary, hY and hW are exactly the two flatness assumptions, hi0 closed immersion on scheme tests, three IsPullback witnesses, i closed in the conclusion, alpha pinned via exchange f=i0,f'=i,g=q,h=r with w=hWsq.w, e0/ei/er fixed to canonical maps, four separate HasDerivedCategory.{w}; edge cases covered; real helpers; proof sorry only. Advisory: derived-module-calculus and small-ringed-model decls are used with their owners reached only through cited def nodes (unchanged since the last review). No compile (no FIX)."
+ }
+}

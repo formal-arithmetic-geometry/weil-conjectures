@@ -307,7 +307,65 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-abefc5a12 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements and source locations, and chapter/unit route. All five steps are valid; coefficient map and internal-module categories agree with the source. Checked edge cases, duplicate candidates, and absence of dependency cycles through this item. Accepted the generic abelian-sheaf tool use. No repairs needed; detailed checks are in review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_obj",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_comp_forget",
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_additive"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      133,
+      139
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_obj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      151,
+      154
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_comp_forget",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      144,
+      149
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_additive",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      156,
+      158
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
@@ -331,5 +389,15 @@
   "group": "N3",
   "result": "pass",
   "note": "Existing binding to AlgebraicGeometry.ProEtale.CondensedRing.upperStar (ModuleObject/UpperLowerStar/Defs.lean:136-139, identical to the live published file). Body is (f)^*[Ab].mapMod _ then Mod.extendScalars (condensedPullbackHom Λ f), which matches the node: transport along strong monoidal f^*, then extension along the canonical alpha_f. Lambda is any condensed ring with MonObj and IsCommMonObj, f any scheme morphism, universes u/u+1, no extra hypotheses. upperStar_obj gives the relative tensor formula and the upperStar_additive instance gives additivity. lean.statement is verbatim; the node copy changes only lean. Dependency records for coefficient rings, alpha_f, f^* and its monoidal structure, mapMod, Mod and extendScalars were checked. Probe compile through nt_compile --json: all declarations resolve, axioms only propext/Classical.choice/Quot.sound. Edge cases (empty schemes, zero ring, identity f) are covered. Report sections are present. No findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes, with coefficient rings $\\Lambda_X=p_X^*\\Lambda$\n([det-def-sfb-pulled-back-coefficients]) and categories of module objects\n$\\Mod_{\\Lambda_X}$ ([det-def-sfb-module-objects]). The *pullback of module objects* is\n\n$$\nf^*:=\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^*_{\\Ab})\\colon\n\\Mod_{\\Lambda_Y}\\to\\Mod_{\\Lambda_X},\n$$\n\nwhere the transport ([det-def-sfb-transport]) $\\operatorname{mapMod}(f^*_{\\Ab})$ makes $f^*_{\\Ab}M$ an\n$f^*\\Lambda_Y$-module through the strong monoidal structure of the pullback\n$f^*_{\\Ab}$ of abelian sheaves ([def-sfb-finite-upper-star],\n[def-sfb-finite-upper-star-monoidal]), and\n$\\operatorname{Ext}_{\\alpha_f}$ extends scalars ([det-def-sfb-change-of-scalars])\nalong $\\alpha_f\\colon f^*\\Lambda_Y\\to\\Lambda_X$ ([det-def-sfb-coefficient-morphisms]). Thus\n\n$$\nf^*M=\\Lambda_X\\otimes_{f^*\\Lambda_Y}f^*_{\\Ab}M,\n$$\n\nthe ringed-topos pullback. The functor $f^*$ is additive.",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

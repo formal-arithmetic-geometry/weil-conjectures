@@ -1,0 +1,266 @@
+{
+ "id": "lem-trf-strict-local-comparison-ind-etale",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "By clause (1) of [lem-weil-pbc-strict-henselization-functoriality], each chosen small strict-local ring is local and strictly henselian, and its structural morphism [def-weil-pbc-strict-henselization-structural-map] sends the closed point to the given geometric point. Every point of the spectrum of a local ring generalizes its closed point. Continuity and stability of open sets under generalization therefore put the whole image of the structural map in each prescribed affine open. The open-immersion lifting property gives its factorization, and [def-weil-affine-spectrum] gives the ring maps a and b.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, proof: affine neighbourhood and its colimit leg; open immersions etale is Tag 02GP in morphisms.tex"
+   }
+  },
+  {
+   "text": "Use the structural square for the canonical pointed map from [lem-weil-pbc-strict-henselization-functoriality]. For any a and b satisfying the displayed factorizations, compose Spec(h) followed by Spec(a), and Spec(b) followed by Spec(f), with the open immersion i_U. Both composites equal j_T followed by g, by the structural square, the factorization equations and the chart equation. Cancel the monomorphism i_U and apply the faithful spectrum correspondence [def-weil-affine-spectrum] to obtain h.comp a = b.comp f. Thus h is an A-algebra map for the structures a and b.comp f.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "After Tag 04HX, canonical functorial diagram; algebra.tex Tag 04GU, lemma-strictly-henselian-functorial"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-small-strict-henselization-ind-etale] with its parameters $(S,s,R,i,A,e,a)$ instantiated by $(S,s,A,i_U,H_S,\\mathrm{id}_{\\operatorname{Spec}H_S},a)$. Here $S_{(s)}=\\operatorname{Spec}H_S$ is precisely the small representative model fixed in the item. The chart contains the image of $s$, $i_U$ is an affine open immersion, and the required equation is $i_U\\circ\\operatorname{Spec}a=j_S\\circ\\mathrm{id}_{\\operatorname{Spec}H_S}$, which is Step 1. Thus $a$ makes $H_S$ ind-etale over $A$. Apply the same statement with parameters $(T,t,B,i_V,H_T,\\mathrm{id}_{\\operatorname{Spec}H_T},b)$; the chart contains the image of $t$ and its structural-map equation is $i_V\\circ\\operatorname{Spec}b=j_T\\circ\\mathrm{id}_{\\operatorname{Spec}H_T}$, again Step 1. Both sides in the first application map $\\operatorname{Spec}H_S$ to $S$, and in the second map $\\operatorname{Spec}H_T$ to $T$. Thus $b$ makes $H_T$ ind-etale over $B$. These are applications to the chosen small colimits, with no identification with a different strict-henselization construction and no extra condition on either chart ring.",
+   "uses": [
+    "lem-weil-pbc-small-strict-henselization-ind-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, affine-chart colimit description; algebra.tex Tag 04GW"
+   }
+  },
+  {
+   "text": "The hypothesis gives that $f:A\\to B$ is ind-etale, and Step 3 gives that $b:B\\to H_T$ is ind-etale. Composition stability in [lem-weil-pbc-ind-etale-stability] therefore gives that $b\\circ f:A\\to H_T$ is ind-etale. Thus $H_S$ and $H_T$ are both ind-etale $A$-algebras for exactly the structures $a$ and $b\\circ f$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097K, lemma-composition-ind-etale"
+   }
+  },
+  {
+   "text": "Apply relative permanence in [lem-weil-pbc-ind-etale-stability] to the A-algebra map h of Step 2 between the two ind-etale A-algebras of Steps 3 and 4. This gives ind-etaleness of h. The canonical ULift definition is equivalent to ordinary ind-etaleness here because every ring is in universe u: transport along ULift.ringEquiv using invariance under ring isomorphisms. For locality, identify the pointed residue formula of clause (1) of [lem-weil-pbc-strict-henselization-functoriality] with canonical point evaluation: their spectrum maps have the same composites with every limit projection of [def-weil-pbc-strict-henselization-limit], so limit extensionality and spectrum faithfulness identify them. This formula is local, being a composite of the local residue map, the residue isomorphism, and a field embedding. The defining pointed equation of the canonical map now says evaluation_S = evaluation_T.comp h. Locality of this composite implies locality of h. Clause (1) already supplied strict henselianity, and the defining structural square supplies the final equality.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097M, lemma-ind-etale-permanence; algebra.tex Tag 04GU for locality and structural compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex; literature/stacks-project/proetale.tex",
+  "place": "Stacks 04HX and 04GU for the closed point, residue formula and canonical structural square; 097K and 097M for composition and relative permanence. E6 Lean proof uses generalization from the closed point to factor through open charts and monomorphism cancellation to prove compatibility, avoiding representative-chart transport."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ind-etale-strict-local-invariance",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "title": "The canonical strict-local ring comparison is ind-etale on an ind-etale chart",
+ "statement": "Let $u:T\\to S$ be a morphism of schemes [def-pc-scheme], let $t:\\operatorname{Spec}\\Omega\\to T$ be a geometric point [def-weil-geometric-point], and put $s=u\\circ t$, using the same algebraically closed field $\\Omega$. Suppose there are affine open subschemes $V=\\operatorname{Spec}B\\subset T$ and $U=\\operatorname{Spec}A\\subset S$ [def-weil-affine-spectrum, def-weil-open-immersion] containing the images of $t$ and $s$, with $u(V)\\subset U$, such that the induced homomorphism $f:A\\to B$ is ind-etale [def-weil-pbc-ind-etale-algebra]. Write $H_S=\\mathcal O^{\\mathrm{sh}}_{S,s}$, $H_T=\\mathcal O^{\\mathrm{sh}}_{T,t}$ for the chosen small pointed-neighbourhood colimits [def-weil-pbc-strict-henselization-limit], and $j_S:\\operatorname{Spec}H_S\\to S$, $j_T:\\operatorname{Spec}H_T\\to T$ for their structural morphisms [def-weil-pbc-strict-henselization-structural-map]. Let $h:H_S\\to H_T$ be the canonical local homomorphism of [lem-weil-pbc-strict-henselization-functoriality]. Then $j_S$ and $j_T$ factor through $U$ and $V$, respectively. If $a:A\\to H_S$ and $b:B\\to H_T$ are the ring homomorphisms of these factorizations, then $h\\circ a=b\\circ f$, and $a$, $b$, $b\\circ f$, and $h$ are ind-etale. In particular, $h$ is a local homomorphism of strictly henselian local rings [def-weil-pbc-henselian-terminology] satisfying $j_S\\circ\\operatorname{Spec}h=u\\circ j_T$. No local ind-etaleness away from these chosen charts is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex; literature/stacks-project/proetale.tex",
+  "place": "Tag 04HX, lemma-describe-etale-local-ring, affine-chart colimit; Tag 04GU, lemma-strictly-henselian-functorial, structural square; Tags 097K, lemma-composition-ind-etale, and 097M, lemma-ind-etale-permanence. Synthesis of the returned parent proof, steps 1--2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-affine-spectrum",
+  "def-weil-open-immersion",
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictHenseli|strict.?henseli|strictLocalization",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: no strict-henselization or ind-etale declarations occur in these hits",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functorial map of strict henselization rings is ind etale when a scheme morphism is ind etale on affine neighbourhoods",
+   "results": "RingHom.Etale; RingHom.Etale.ofLocalizationSpanTarget; RingHom.FormallyEtale; RingHom.Etale.propertyIsLocal; AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE; Algebra.FormallyEtale.of_isLocalization; RingHom.Etale.toAlgebra; AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: no strict-henselization or ind-etale declarations occur in these hits",
+   "digest": "021f088722c24395"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: no strict-henselization or ind-etale declarations occur in these hits",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given affine ind etale charts of a scheme morphism, the induced canonical local homomorphism between geometric strict henselization rings is ind etale",
+   "results": "Algebra.mem_etaleLocus_iff; AlgebraicGeometry.IsEtale; RingHom.Etale.propertyIsLocal; Algebra.basicOpen_subset_etaleLocus_iff; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.Scheme.Etale; Algebra.etaleLocus; RingHom.Etale.toAlgebra",
+   "date": "2026-10-22",
+   "verdict": "no match: no strict-henselization or ind-etale declarations occur in these hits",
+   "digest": "129fe6fff380e75b"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of strict henselization sends an ind etale affine ring map to an ind etale local ring map",
+   "results": "RingHom.Etale.propertyIsLocal; RingHom.Etale.toAlgebra; Algebra.IsEtaleAt.comp; RingHom.Etale.ofLocalizationSpanTarget; RingHom.Etale.ofLocalizationSpan; AlgebraicGeometry.IsEtale.of_comp; Algebra.exists_etale_of_isEtaleAt; RingHom.etale_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: no strict-henselization or ind-etale declarations occur in these hits",
+   "digest": "bb1a2757c88cfa9a"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenseli|strict_henseli|IndEtale|indEtale",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-presentation etale morphisms, not geometric strict henselization or ind-etale comparison",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between strict henselizations of schemes is ind etale when its affine chart ring map is ind etale",
+   "results": "0 hits; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IndEtale\"",
+   "results": "0 hits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-presentation etale morphisms, not geometric strict henselization or ind-etale comparison",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical homomorphism between geometric strict henselization rings induced by an ind etale affine chart is ind etale",
+   "results": "StandardEtalePair.instFormallyEtaleRing; RingHom.Etale.toAlgebra; Algebra.instEtaleOfIsStandardEtale; Algebra.mem_etaleLocus_iff; Algebra.exists_etale_of_isEtaleAt; Algebra.etaleLocus; StandardEtalePair.homEquiv; Algebra.IsEtaleAt.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-presentation etale morphisms, not geometric strict henselization or ind-etale comparison",
+   "digest": "77d5f9a198b629f6"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism between two ind etale algebras over a ring is ind etale and strict henselization is ind etale over an affine neighbourhood",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instFormallyUnramified; RingHom.Etale.propertyIsLocal; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; RingHom.Etale.toAlgebra; Algebra.basicOpen_subset_etaleLocus_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern finite-presentation etale morphisms, not geometric strict henselization or ind-etale comparison",
+   "digest": "45266692b3011bf0"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Normal-cone specialization and strict-local tests in the external-product comparison: canonical affine ring comparison, extracted from lem-trf-ind-etale-strict-local-invariance proof steps 1--2, below lem-trf-oriented-nearby-strict-local-description.",
+   "via": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-strict-local-comparison-ind-etale",
+  "worker": "stage1",
+  "summary": "Q39 repair reconstructed on the current unsplit live-DAG record, retaining its statement, statement dependencies, source, creation metadata and blueprint ancestry. Re-read every current proof dependency and checked all eleven citation quotations. Preserved the five-step argument and the exact small representative model. Corrected Step 3 to write the spectrum-isomorphism structural equations in their typed order: i_U ∘ Spec(a) = j_S ∘ id and i_V ∘ Spec(b) = j_T ∘ id. The small-model chart theorem, neighbourhood compatibility, composition 097K and permanence 097M prove every clause. No new nodes or statement change.",
+  "blueprint": "The strict-local test used below the normal-cone specialization in lem-trf-local-term-locality, via trace specialization, external-product comparison, oriented-nearby description and lem-trf-ind-etale-strict-local-invariance: the present steps realize the affine ring comparison extracted from the latter proof steps 1--2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-small-strict-henselization-ind-etale",
+    "why": "Generic affine-chart ind-etaleness for the exact small representative colimit used here; the trace-formula unit does not provide this ring-colimit fact."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic composition and relative permanence for ind-etale ring maps, applied to the chosen affine charts; no trace-formula lemma replaces this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Canonical strict-local comparison, its neighbourhood compatibility, locality and strictly henselian source/target; this is the functoriality explicitly named in the item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-7c71b4fb1",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-7c71b4fb1 (reviewer sub-agent of L); spot-checked: 4th delivery of a promotion loop. Earlier heads 8175ad10, cd828cd4 and bae38f19 all received PASS; the live item is still unsplit with an empty proof, and there is no repair note. Compared with the live record, only stage-1 fields differ; statement, stmt_deps, source and ancestry are unchanged. 0 new nodes, no SGA. The only change since bae38f19 is Step 3: the chart equations are now i_U∘Spec a = j_S∘id and i_V∘Spec b = j_T∘id. This exactly matches the hypothesis i∘Spec a = ρ∘e of lem-weil-pbc-small-strict-henselization-ind-etale, so the correction is right. All 5 steps were re-checked against the cited statements in this snapshot. Step 1: open immersions are étale (02GP clause (1)); projections come from the small limit by transport; i_U p_S = j_S by the structural-map node. Step 2: functoriality (4) with (U,s_U,V,t_V,u_VU); both hypotheses verified; this gives h a = b f. Step 3: small-model chart instantiation correct. Steps 4–5: stability composition (097K) and relative permanence (097M, checked at proetale.tex:1200); functoriality (1) and (3) give the remaining clauses. Tags 04HX, 04GU, 097K and 097M match the labels in tags/tags. Edge cases checked: identity, open immersion, separable field extension. The 3 generic tool_uses are accepted. Maintainer note: L should promote this item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalComparisonIndEtale",
+  "declaration": "AlgebraicGeometry.Scheme.strictLocalComparison_indEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalComparisonIndEtale.lean",
+  "statement": "theorem strictLocalComparison_indEtale {S T : Scheme.{u}} (g : T ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) (A B : CommRingCat.{u}) (iU : Spec A ⟶ S) (iV : Spec B ⟶ T) [IsOpenImmersion iU] [IsOpenImmersion iV] (hs : (t ≫ g) (IsLocalRing.closedPoint Ω) ∈ Set.range iU) (ht : t (IsLocalRing.closedPoint Ω) ∈ Set.range iV) (f : A →+* B) (hf : Spec.map (CommRingCat.ofHom f) ≫ iU = iV ≫ g) (hind : f.IndEtaleAcrossUniverses) (h : strictHenselizationRing (t ≫ g) ⟶ strictHenselizationRing t) (hh : Spec.map h = strictHenselizationMap g t) : (∃ a : A →+* strictHenselizationRing (t ≫ g), Spec.map (CommRingCat.ofHom a) ≫ iU = strictHenselizationStructuralMap (t ≫ g)) ∧ (∃ b : B →+* strictHenselizationRing t, Spec.map (CommRingCat.ofHom b) ≫ iV = strictHenselizationStructuralMap t) ∧ (∀ (a : A →+* strictHenselizationRing (t ≫ g)) (b : B →+* strictHenselizationRing t), Spec.map (CommRingCat.ofHom a) ≫ iU = strictHenselizationStructuralMap (t ≫ g) → Spec.map (CommRingCat.ofHom b) ≫ iV = strictHenselizationStructuralMap t → h.hom.comp a = b.comp f ∧ a.IndEtaleAcrossUniverses ∧ b.IndEtaleAcrossUniverses ∧ (b.comp f).IndEtaleAcrossUniverses ∧ h.hom.IndEtaleAcrossUniverses) ∧ IsStrictlyHenselianLocalRing (strictHenselizationRing (t ≫ g)) ∧ IsStrictlyHenselianLocalRing (strictHenselizationRing t) ∧ IsLocalHom h.hom ∧ Spec.map h ≫ strictHenselizationStructuralMap (t ≫ g) = strictHenselizationStructuralMap t ≫ g",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-686639068",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Only the item's lean field changes; lean.statement matches the file verbatim. Every clause matches the node: open-immersion charts Spec A→S and Spec B→T contain the points, hf is Spec f≫iU = iV≫g, hind uses the recorded IndEtaleAcrossUniverses. The conclusion gives both factorizations (∃), then for every a,b with those equations h∘a=b∘f and a, b, b∘f, h ind-etale (equivalent to the node because a and b are unique), both rings IsStrictlyHenselianLocalRing (no local instance assumed in advance), IsLocalHom h, and the structural square. h is pinned by Spec.map h = strictHenselizationMap g t, the unique ∃! witness tagged with the functoriality node, as in landed items that cite the same node; strictHenselizationScheme = Spec ring, so the types agree. Proof-step-3 helper smallStrictHenselization_indEtale_of_affine_chart takes exactly these equations with e=𝟙. Edge cases: empty schemes and zero rings are excluded by the geometric point; no characteristic, Noetherian or affineness assumptions; single universe forced by Spec(.of Ω). No definitions, sorry only, docstrings carry source tags, blueprint tag and the 5 proof steps; no duplicate declaration. Not recompiled (no change); the report shows a clean scompile. Minor: the Second reading section is the author's own second pass."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261026T081635-L-2029507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

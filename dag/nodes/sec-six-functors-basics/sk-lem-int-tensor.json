@@ -32,48 +32,56 @@
  ],
  "proof": [
   {
-   "text": "The extension-by-zero and closed-direct-image assertions, including preservation of derived completeness and constructibility, and the finite open–closed dévissage into locally closed stratum models, are exactly the two conclusions of the existing extension/direct-image lemma.",
+   "text": "For open extension use lem-sfb-dc-open-lower-shriek-preserves. For a closed immersion take its open complement, which is quasi-compact on the Noetherian target. Condensed open-closed recollement supplies exact closed direct image. Its exact derived homology comparison and constructible_open_closed_images give bounded constructibility for the right-derived presentation. These are the open/closed assertions in the first paragraph of the unit proof.",
    "uses": [
-    "det-lem-int-tensor-shriek"
+    "lem-sfb-dc-open-lower-shriek-preserves",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-constructible-open-closed-images"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
-    "place": "statement, parts (1) and (2)"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/sk-lem-int-tensor.proof.md",
+    "place": "Extension by zero and closed direct image"
    }
   },
   {
-   "text": "Apply the existing integral inverse-image lemma to obtain preservation of $\\Dbc$ and the comparison isomorphism with the completed Stacks inverse image after restriction of scalars.",
+   "text": "Apply lem-sfb-dc-upper-star-preserves to the given morphism of schemes over k. On X identify boundedConstructible with finite constant-model bounded constructibility by lem-sfb-adic-constructibility-predicate-comparison. Choose a generator of the principal maximal ideal of the embedded coefficient integers. Apply only the completeness direction of clause (2) of sk-lem-integral-models to the image: it is intrinsically derived complete. IntegralPullbackIsCompleted now uses exactly that existing canonical completeness predicate. Cartesian exact inverse image identifies the finite cone units with the reductions of the image, and the principal completion criterion and cofinality of ell and uniformizer powers identify this with the completed inverse-image comparison. The definition/interface equivalence and all consumer checks are recorded in coord/changes/S7-integral-pullback-completion-predicate.md.",
    "uses": [
-    "det-lem-int-tensor-pullback"
+    "lem-sfb-dc-upper-star-preserves",
+    "lem-sfb-adic-constructibility-predicate-comparison",
+    "sk-lem-integral-models"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.md",
-    "place": "statement, parts (1) and (2)"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+    "place": "Canonical comparison is an isomorphism iff the image is derived complete; integral models clauses (1),(2)"
    }
   },
   {
-   "text": "Apply the first paragraph of the existing integral tensor-product lemma: for any $K,L\\in\\Dbc(X,\\mathcal O_E)$, their uncompleted derived tensor product lies in $\\Dbc(X,\\mathcal O_E)$. Its moreover clause also states that a stratum local model is dualizable and that tensoring with it preserves products, derived inverse limits and derived complete objects, which supplies the local-model preservation used in the finite dévissage.",
+   "text": "Apply the existing integral-coefficient instance of lem-sfb-dc-tensor-preserves to K and L. Its conclusion is the ambient uncompleted derived tensor, and its proof uses the finite truncation devissage. This supplies precisely the tensor assertion in the unit proof; no completed tensor or new tensor construction is introduced.",
    "uses": [
-    "det-lem-int-tensor-product"
+    "lem-sfb-dc-tensor-preserves"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-product.md",
-    "place": "statement, first paragraph and moreover clause"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/sk-lem-int-tensor.proof.md",
+    "place": "Tensor product, final citation lem-sfb-dc-tensor-preserves"
    }
   }
  ],
  "proof_deps": [
-  "det-lem-int-tensor-shriek",
-  "det-lem-int-tensor-pullback",
-  "det-lem-int-tensor-product"
+  "lem-sfb-dc-open-lower-shriek-preserves",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-condensed-constructible-open-closed-images",
+  "lem-sfb-dc-upper-star-preserves",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "sk-lem-integral-models",
+  "lem-sfb-dc-tensor-preserves"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/sk-lem-int-tensor.proof.md",
+  "place": "Three preservation paragraphs, using the existing declared preservation tools and integral_models clause (2); Lean assembly by S7, 2026-10-23."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -121,7 +129,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q20-47bd9ff5a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, blueprint source and proof, all three cited DAG nodes and their source proofs, plus Stacks Tags 09AA, 09BM, and 09BP. The three steps correctly cite existing stronger lemmas; hypotheses, O_E coefficient category, completion comparison, uncompleted tensor, and open/closed preservation match. Edge cases and duplicate-node search pass. Review written to review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -146,6 +165,16 @@
   "by": "Q31",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The canonical completed inverse-image comparison is stated by its normalized derived-limit triangle, using canonical cone reductions and cofinal ell powers. The cone of multiplication on a representing complex computes the usual derived finite reduction by the two-term flat resolution. No comparison morphism or completeness hypothesis is assumed; no coefficient category, constructibility predicate or derived operation is redefined."
+  "note": "The completed inverse-image comparison is expressed by the existing intrinsic derived-completeness predicate on the ordinary inverse image, with a generator of the coefficient maximal ideal. This is equivalent to the former ell-power cone triangle by the canonical principal completion criterion and cofinality. See coord/changes/S7-integral-pullback-completion-predicate.md. All three explicit finite-cone helper declarations and the theorem signature are retained. No comparison morphism is assumed or chosen."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261023T135327-L-2870348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -131,5 +131,65 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-module-pushforward-pullback",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp"
+   ]
+  },
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+     "lines": [
+      297,
+      303
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+     "lines": [
+      120,
+      124
+     ],
+     "kind": "theorem",
+     "nodes": [
+      "lem-sfb-pushforward-comp-monoidal",
+      "sk-def-sfb-module-pushforward-pullback"
+     ],
+     "below": true
+    }
+   ]
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$, $g\\colon Y\\to Z$\nmorphisms of schemes. The natural isomorphism\n\n$$\n(g\\circ f)^*\\cong f^*\\circ g^*\\colon\\Mod_{\\Lambda_Z}\\to\\Mod_{\\Lambda_X}\n$$\n\nof pullbacks of module objects ([def-sfb-module-upper-star]) is the isomorphism of\nleft adjoints conjugate, under the adjunctions $(g\\circ f)^*\\dashv(g\\circ f)_*$ and\n$f^*\\circ g^*\\dashv g_*\\circ f_*$ of [def-sfb-module-upper-lower-adjunction], to the\ncomposition isomorphism $g_*\\circ f_*\\cong(g\\circ f)_*$ of\n[def-sfb-module-lower-star-comp]. Since conjugation reverses the direction of\ntransformations, its forward map $(g\\circ f)^*\\to f^*\\circ g^*$ is the conjugate of\nthe forward map $g_*\\circ f_*\\to(g\\circ f)_*$, and its inverse\n$f^*\\circ g^*\\to(g\\circ f)^*$ is the conjugate of the inverse\n$(g\\circ f)_*\\to g_*\\circ f_*$.",
+  "proof": [
+   {
+    "text": "A composite of adjunctions is an adjunction, so $f^*\\circ g^*\\dashv g_*\\circ f_*$ by\n[def-sfb-module-upper-lower-adjunction] applied to $f$ and $g$; also\n$(g\\circ f)^*\\dashv(g\\circ f)_*$. Natural transformations between right adjoints\ncorrespond bijectively (by conjugation, i.e. taking mates) to natural transformations\nin the opposite direction between the left adjoints, compatibly with composition and\nidentities. Hence the isomorphism $g_*\\circ f_*\\to(g\\circ f)_*$ of\n[def-sfb-module-lower-star-comp] corresponds to a transformation\n$(g\\circ f)^*\\to f^*\\circ g^*$, its inverse corresponds to a transformation\n$f^*\\circ g^*\\to(g\\circ f)^*$, and these two are mutually inverse, giving the\nisomorphism $(g\\circ f)^*\\cong f^*\\circ g^*$. This is the uniqueness of left adjoints.",
+    "uses": [
+     "def-sfb-module-upper-lower-adjunction",
+     "def-sfb-module-lower-star-comp"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
 }

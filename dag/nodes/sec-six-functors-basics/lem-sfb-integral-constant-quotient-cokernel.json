@@ -1,0 +1,151 @@
+{
+ "id": "lem-sfb-integral-constant-quotient-cokernel",
+ "kind": "statement",
+ "title": "Constant ordinary tensor quotient as the uniformizer-action sheaf cokernel",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with lifted valuation ring $A$ and prescribed lifted uniformizer $p$ [def-weil-l-adic-coefficient-extension, def-weil-pbc-adic-coefficient-datum]. Let $W$ be any scheme and $C_W$ the constant ring sheaf $A_W$. For every $C_W$-module sheaf $N$ [def-pc-sheaf-restrict-scalars] and $n\\in\\mathbf N$, there is an endomorphism $\\mu:N\\to N$ acting on each section by the constant $p^{n+1}$ and an isomorphism $c:\\operatorname{coker}(\\mu)\\cong (N\\otimes_{C_W}(A/(p^{n+1}))_W)$ [def-pur-sheaf-tensor-product, def-sp-constant-reduction-models]. The target retains its $C_W$-module structure. The equality $\\operatorname{coker}.\\pi(\\mu)c=\\eta_{N,n}$ holds for the published ordinary quotient augmentation $\\eta_{N,n}:x\\mapsto1\\otimes x$. This is a sheaf cokernel, with no assertion of sectionwise surjectivity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph and Comparison with the Stacks Project; ordinary quotient refinement of steps 2, 4 and 6 of lem-sfb-integral-augmented-quotient-towers."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-constant-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "The chosen lifted valuation ring A and uniformizer p give the constant quotient coefficient sheaf A/(p^(n+1)). The recorded coefficient comparison identifies its projection with OrderedExchange.quotient. Constant sheafification preserves cokernels, so the regular constant coefficient quotient has this actual projection.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-sp-constant-reduction-models",
+    "lem-weil-pbc-finite-type-constant-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+    "place": "First paragraph and Comparison with the Stacks Project; ordinary quotient refinement of steps 2, 4 and 6 of lem-sfb-integral-augmented-quotient-towers."
+   }
+  },
+  {
+   "text": "For an arbitrary constant-coefficient module sheaf N, multiplication by the constant p^(n+1) is an endomorphism mu. Form its sheaf cokernel. Define a balanced local pairing q(a) tensor x to the class of a*x. Two lifts differ locally by a p^(n+1) multiple and hence give the same class. Sheafification glues these local pairings.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+    "place": "First paragraph and Comparison with the Stacks Project; ordinary quotient refinement of steps 2, 4 and 6 of lem-sfb-integral-augmented-quotient-towers."
+   }
+  },
+  {
+   "text": "The reverse map sends the class of x to 1 tensor x. It kills p^(n+1)*x since that scalar vanishes in the quotient. The two composites fix the local quotient classes and pure tensors; sheafification therefore gives inverse sheaf-module maps. The tensor-side inverse is the actual ordinary augmentation by its section formula.",
+   "uses": [
+    "def-sp-constant-reduction-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+    "place": "First paragraph and Comparison with the Stacks Project; ordinary quotient refinement of steps 2, 4 and 6 of lem-sfb-integral-augmented-quotient-towers."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-sp-constant-reduction-models",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-pullback.proof.md",
+  "place": "First paragraph and Comparison with the Stacks Project; ordinary quotient refinement of steps 2, 4 and 6 of lem-sfb-integral-augmented-quotient-towers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A constant principal quotient coefficient sheaf tensor an arbitrary module sheaf is the cokernel of multiplication by that constant",
+   "results": "rTensor.toFun; ModuleCat.cokernelIsoRangeQuotient; ModuleCat.cokernelIsColimit; CategoryTheory.Sheaf.isConstant_iff_mem_essImage; SMulCon.Quotient; ModuleCat.Tilde.const; CategoryTheory.constantSheaf; CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app",
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic quotient and cokernel lemmas do not identify the prescribed sheaf scalar-extension functor and augmentation for arbitrary modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.tensorQuotientEquiv",
+   "results": "TensorProduct.tensorQuotientEquiv; TensorProduct.tensorQuotientEquiv_apply_mk_tmul; TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk",
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic quotient and cokernel lemmas do not identify the prescribed sheaf scalar-extension functor and augmentation for arbitrary modules"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorQuot|cokernel.*tensor|tensor.*cokernel",
+   "results": "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/LinearAlgebra/TensorProduct/Quotient.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/QuotSMulTop.lean",
+   "date": "2026-10-25",
+   "verdict": "no match: algebraic quotient and cokernel lemmas do not identify the prescribed sheaf scalar-extension functor and augmentation for arbitrary modules"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralAugmentedQuotientTowers",
+  "date": "2026-10-25",
+  "group": "T8"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-pullback",
+   "place": "Comparison with the Stacks Project: restriction commutes with reduction modulo the uniformizer power; ordinary quotient part of step 2 of lem-sfb-integral-augmented-quotient-towers.",
+   "via": [
+    "lem-sfb-integral-augmented-quotient-towers",
+    "lem-sfb-integral-pullback-strict-roos-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralConstantQuotientCokernel",
+  "file": "lean/Sheaf/Paper/IntegralConstantQuotientCokernel.lean",
+  "declaration": "WeilConjectures.IntegralAugmentedQuotient.constantQuotientCokernel",
+  "statement": "theorem constantQuotientCokernel\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (W : Scheme.{u})\n    (N : reductionModules W (exchangeConstantRing W (PbcIntegralRing l E))) (n : ℕ) :\n    ∃ μ : End N,\n      (∀ (Z : W.ProEtᵒᵖ) (x : N.val.obj Z),\n        μ.val.app Z x =\n          @SMul.smul ((exchangeConstantRing W (PbcIntegralRing l E)).obj.obj Z)\n            (N.val.obj Z) inferInstance\n            ((toSheafify (ProEt.topology W)\n              ((Functor.const W.ProEtᵒᵖ).obj (CommRingCat.of (PbcIntegralRing l E)))).app Z\n                ((pbcUniformizer l E) ^ (n + 1))) x) ∧\n      ∃ c : cokernel μ ≅ ((OrderedExchange.reductionModule (pbcIntegralDatum l E) W).obj\n          N).obj (op n),\n        cokernel.π μ ≫ c.hom =\n          ((OrderedExchange.ordinaryAugmentation (pbcIntegralDatum l E) W).app N).app\n            (op n)",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261025T123935-L-1919141",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261025T123935-L-1919141",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

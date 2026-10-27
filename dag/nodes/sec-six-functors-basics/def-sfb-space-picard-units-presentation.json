@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-space-picard-units-presentation",
+ "kind": "definition",
+ "title": "Normalized units presentation of an algebraic-space Picard obstruction",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $j:Z\\to Z'$ a morphism of algebraic spaces with their small etale ringed sites [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Use the normalized thickening site model of [def-sfb-space-square-zero-extension-data] and the small affine etale ringed model and module restriction equivalence of [def-sfb-space-small-ringed-model]. Module sheaves are [def-weil-sheaf-of-modules-category]. Write $H^n_{\\rm Mod}(Z,M)=\\operatorname{Ext}^n_{\\operatorname{Mod}(\\mathcal O_Z)}(\\mathcal O_Z,M)$ on this small model; applying $\\operatorname{Hom}(\\mathcal O_Z,-)$ to an injective module resolution identifies this with right derived global sections. Write $A_{ab}$ for the additive sheaf of a commutative-ring sheaf $A$. For a ring-sheaf map $p:A\\to B$, write $p^\\times:A^\\times\\to B^\\times$ for restriction on units and $Q(p)=(\\ker p^\\times\\to A^\\times\\to B^\\times)$ for its categorical kernel sequence. Units are written additively as in [def-sfb-ringed-site-picard-data], and their cohomology is [def-weil-pbc-sites-and-cohomology].\n\nA normalized Picard units presentation for $j$ consists of: a normalized thickening site model $T$; a commutative ring sheaf $A$ on the reduced small affine model; an isomorphism of its underlying ring presheaf with the restriction of $T$'s transported thick ring; a quotient $p:A\\to\\mathcal O_Z$ which under that isomorphism is exactly the pullback of regular functions along the reduction arrows of $T$; a quasi-coherent module $J$ on the original small etale site [def-trf-space-quasi-coherent-module]; and an additive map $i:J_{ab}\\to A_{ab}$ after restriction to the affine model. Require $i$ injective on each object, its image equal to $\\ker p$ on each object, and $p$ locally surjective on covering sieves. Require $i(m)i(n)=0$ and $i(p(a)m)=a i(m)$ on each object. Include a proof that $Q(p)$ is short exact and an isomorphism $e:J_{ab}\\cong\\ker p^\\times$ normalized by the equation that its composite with the kernel inclusion sends $m$ to the unit $1+i(m)$. Include a map $z:\\underline{\\mathbf Z}\\to(\\mathcal O_Z)_{ab}$ sending the distinguished section $1$ to the actual ring section $1$ on each object. No existence of a presentation is part of this definition.\n\nFor such a presentation define the canonical module-to-abelian cohomology homomorphism $H^n_{\\rm Mod}(Z,J)\\to H^n(Z,J_{ab})$ by applying the exact forgetful functor from module sheaves to abelian sheaves to an Ext class and then precomposing with $z$. No inverse or bijectivity is asserted in this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sfb-space-square-zero-extension-data",
+  "def-sfb-space-small-ringed-model",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-ringed-site-picard-data",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0DNM, proof; normalized common site from Tag 05ZS; sites-cohomology.tex Tags 040E and 03FD."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized square zero units sequence and module cohomology comparison for algebraic space Picard obstruction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"NormalizationMonoid.ofUniqueUnits\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \": NormalizationMonoid α\", \"doc\": \"For a commutative monoid with zero $\\\\alpha$, if the group of units $\\\\alpha^\\\\times$ is trivial (i.e., contains only the identity element), then $\\\\alpha$ admits a normalization monoid structure defined \"}\n  {\"name\": \"NormalizationMonoid.normUnit\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \"{α : Type u_2} → {inst : CommMonoidWithZero α} → [self : NormalizationMonoid α] → α → αˣ\", \"doc\": \"The function that maps each element $ a $ of a normalization monoid $ \\\\alpha $ to the unit $ u \\\\in \\\\alpha^\\\\times $ such that $ a \\\\cdot u $ is the normalized form of $ a $. This provides the unit facto\"}\n  {\"name\": \"NormalizationMonoid.normUnit_zero\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \"∀ {α : Type u_2} {inst : CommMonoidWithZero α} [self : NormalizationMonoid α], normUnit 0 = 1\", \"doc\": \"In a normalization monoid, the normalization unit of the zero element is equal to the multiplicative identity element $1$, i.e., $\\\\mathrm{normUnit}(0) = 1$.\"}\n  {\"name\": \"groupCohomology.H1InfRes\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \": ShortComplex (ModuleCat k)\", \"doc\": \"A short complex in the category of modules over a commutative ring $ k $, consisting of the first group cohomology modules $ H^1(G/S, A^S) $, $ H^1(G, A) $, and $ H^1(S, A) $ for a group $ G $, its no\"}\n  {\"name\": \"retractionOfSectionOfKerSqZero\", \"module\": \"Mathlib.RingTheory.Smooth.Kaehler\", \"type\": \": S ⊗[P] Ω[P⁄R] →ₗ[P] RingHom.ker (algebraMap P S)\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings. Let $f: P \\\\to S$ be an $R$-algebra homomorphism with kernel $I = \\\\ker(f)$, and assume that $I$ is a square-zero ideal (i.e., $I^2 = \\\\{0\\\\}$). Suppose there e\"}\n  {\"name\": \"normalize_eq_zero\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \"{x : α} : normalize x = 0 ↔ x = 0\", \"doc\": \"In a commutative monoid with zero equipped with a normalization structure, for any element $x$, the normalization of $x$ is zero if and only if $x$ itself is zero.\"}\n  {\"name\": \"uniqueNormalizationMonoidOfUniqueUnits\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \": Unique (NormalizationMonoid α)\", \"doc\": \"If $\\\\alpha$ is a commutative monoid with zero whose group of units $\\\\alpha^\\\\times$ is trivial (contains only the identity element), then the normalization monoid structure on $\\\\alpha$ is uniquely dete\"}\n  {\"name\": \"NormalizationMonoid.mk\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \"{α : Type u_2} →\\n  [inst : CommMonoidWithZero α] →\\n    (normUnit : α → αˣ) →\\n      normUnit 0 = 1 →\\n        (∀ {a b : α}, a ≠ 0 → b ≠ 0 → normUnit (a * b) = normUnit a * normUnit b) →\\n          (∀ (u : αˣ), normUnit ↑u = u⁻¹) → NormalizationMonoid α\", \"doc\": \"Given a commutative monoid with zero $\\\\alpha$, this constructs a normalization monoid structure on $\\\\alpha$ by specifying a function $\\\\operatorname{normUnit}: \\\\alpha \\\\to \\\\alpha^\\\\times$ satisfying: $\\\\o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match. Existing scheme-specific units boundary cannot express this algebraic-space small-etale presentation. Existing site models, quasi-coherence, Picard classes and Ext are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A square zero ring sheaf quotient has kernel of the map on units isomorphic to the additive ideal by one plus x",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.ker_infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), P.infinitesimal.ker = P.ker.cotangentIdeal\", \"doc\": \"For any algebra extension $ P $ of a commutative ring $ R $ over an $ R $-algebra $ S $, the kernel of the infinitesimal extension $ P_{\\text{infinitesimal}} $ coincides with the cotangent ideal of the\"}\n  {\"name\": \"AlgHom.ker_kerSquareLift\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {A : Type u_1} {B : Type u_2} [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (f : A →ₐ[R] B),\\n  RingHom.ker f.kerSquareLift.toRingHom = (RingHom.ker f.toRingHom).cotangentIdeal\", \"doc\": \"For an algebra homomorphism $ f : A \\\\to B $ over a commutative ring $ R $, the kernel of the ring homomorphism obtained from the kernel square lift of $ f $ is equal to the cotangent ideal of the kern\"}\n  {\"name\": \"derivationToSquareZeroEquivLift_symm_apply_apply_coe\", \"module\": \"Mathlib/RingTheory/Derivation/ToSquareZero\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type w} [inst : CommSemiring R] [inst_1 : CommSemiring A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal B) [inst_5 : Algebra A B] (hI : I ^ 2 = ⊥)\\n  [inst_6 : IsScalarTower R A B] (f : { f // (Ideal.Quotient.mkₐ R I).comp f = IsScal\", \"doc\": \"Given a commutative semiring $ R $, an $ R $-algebra $ A $, a commutative ring $ B $ equipped with $ R $-algebra and $ A $-algebra structures, and a square-zero ideal $ I $ of $ B $ (i.e., $ I^2 = 0 $\"}\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Algebra.Extension.Cotangent.mk.ker = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"derivationOfSectionOfKerSqZero\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra R S] →\\n                (f : P →ₐ[R] S) →\\n                  RingHom.ker f ^ 2 = ⊥\", \"doc\": \"Let $R$, $P$, and $S$ be commutative rings, where $P$ and $S$ are $R$-algebras. Given an $R$-algebra homomorphism $f: P \\\\to S$ whose kernel $\\\\ker(f)$ is a square-zero ideal (i.e., $(\\\\ker(f))^2 = \\\\{0\\\\}\"}\n  {\"name\": \"retractionKerToTensorEquivSection\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {P : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing P] →\\n          [inst_2 : CommRing S] →\\n            [inst_3 : Algebra R P] →\\n              [inst_4 : Algebra P S] →\\n                [inst_5 : Algebra R S] →\\n                  [inst_6 : IsSc\", \"doc\": \"There is a canonical equivalence between linear retractions $ l $ of the kernel-to-tensor map $ \\\\kerToTensor_{R,P,S} $ (satisfying $ l \\\\circ \\\\kerToTensor = \\\\text{id} $) and algebra homomorphism sectio\"}\n  {\"name\": \"KaehlerDifferential.End_equiv_aux\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"∀ (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (f : S →ₐ[R] TensorProduct R S S ⧸ KaehlerDifferential.ideal R S ^ 2),\\n  (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n      IsScalarTower.toAlgHom R S\\n        ((TensorProd\", \"doc\": \"For a commutative ring $ S $ over a commutative semiring $ R $, an algebra homomorphism $ f : S \\\\to S \\\\otimes_R S / I^2 $ (where $ I $ is the kernel of the multiplication map $ S \\\\otimes_R S \\\\to S $) \"}\n  {\"name\": \"KaehlerDifferential.endEquivAuxEquiv\", \"module\": \"Mathlib/RingTheory/Kaehler/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          { f //\\n              (Ideal.Quotient.mkₐ R (KaehlerDifferential.ideal R S).cotangentIdeal).comp f =\\n                IsScalarTower.toAlgHom R S\\n                  ((Tensor\", \"doc\": \"Let $R$ and $S$ be commutative rings, where $S$ is an $R$-algebra. Let $I$ be the kernel of the multiplication map $m: S \\\\otimes_R S \\\\to S$. This theorem establishes a bijection between two sets of $R\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No match. Existing scheme-specific units boundary cannot express this algebraic-space small-etale presentation. Existing site models, quasi-coherence, Picard classes and Ext are reused."
+  },
+  {
+   "tool": "grep",
+   "query": "SpacePicardUnitsPresentation|picardModuleCohomology|moduleToAbelian|squareZeroUnitsSequence",
+   "results": "[grep] OK 0 hit(s)\n\nProject/DAG rg -l with the same expression: only the scheme-specific SquareZeroUnitsBoundary.lean and def-sfb-square-zero-units-boundary.json.\nblueprint_refs.py search square-zero: only def-nagata-conrad-disjointness-setup (unrelated); search Picard: 95 existing blueprint nodes, none defines this normalized algebraic-space presentation.\n",
+   "date": "2026-10-24",
+   "verdict": "No match. Existing scheme-specific units boundary cannot express this algebraic-space small-etale presentation. Existing site models, quasi-coherence, Picard classes and Ext are reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-square-zero-picard-obstruction",
+  "date": "2026-10-24",
+  "group": "Q121"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: local scheme representability of the curve family, before using scheme cohomology. Supporting input in Tag 0E6F proof, first paragraph: the smooth covering with a relatively ample invertible module obtained from Tag 0DQ0. Picard-stack input in the smoothness paragraph of Tag 0DQ0 (lemma-polarized-curves-over-curves): moduli.tex Tag 0DPJ, for an algebraic-space total space. Supporting Picard obstruction sequence for a square-zero thickening of algebraic spaces. Definition of its normalized common-site units boundary and module-cohomology comparison.",
+   "via": [
+    "lem-sfb-space-square-zero-picard-obstruction",
+    "lem-sfb-space-picard-stack-smooth",
+    "lem-sfb-curve-smooth-polarization-cover",
+    "lem-sfb-curve-etale-scheme-cover",
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePicardUnitsPresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SpacePicardUnitsPresentation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.picardModuleCohomology",
+   "AlgebraicGeometry.AlgebraicSpace.picardRingAdditive",
+   "AlgebraicGeometry.AlgebraicSpace.picardUnitsMap",
+   "AlgebraicGeometry.AlgebraicSpace.picardUnitsSequence",
+   "AlgebraicGeometry.AlgebraicSpace.SpacePicardUnitsPresentation",
+   "AlgebraicGeometry.AlgebraicSpace.SpacePicardUnitsPresentation.moduleToAbelian"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePicardUnitsPresentation.lean",
+  "statement": "structure SpacePicardUnitsPresentation {S : Scheme.{u}} {Z Z' : AlgebraicSpace S} (j : Z ⟶ Z')",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dcab15a2",
+  "group": "Q121",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3dcab15a2",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Read item, new node def-sfb-space-picard-units-presentation, both modules, Stacks 0DNM (spaces-more-morphisms l.2265-2299), and dependency declarations (IsSpaceFirstOrderThickening/ThickeningSiteModel, small ringed model, RingedSitePicard Line/Pic/Comparison/IsComparison, Sheaf.H.δSucc). Every clause matches: thickening hypothesis; J pinned as the actual kernel by injective/kernel_eq/quotient_normalization/ringIdentification, with the O_Z action fixed by scalar plus local surjectivity; Pic group pinned by IsComparison; r fixed on actual lines via moduleTensorPullback; H^2 = Ext^2(O,J) in all module sheaves (right-derived global sections); δ pinned by the units δSucc, the x↦1+x identification and the bijective 03FD module-to-abelian map; Function.Exact r δ correctly oriented; vanishing clause gives the restriction iso. No extra hypotheses, single universe u. New node is not a duplicate, has real data, no sorry, docstrings with source and blueprint id, fields per the extra-node rule; no name clashes in live Sheaf. Item changed only lean/stmt_deps (new node plus landed def-trf-space-etale-module-functors); both statements verbatim; lines ≤100; report sections present. Edge cases: empty space, J=0, k[ε]→k, no terminal object. No compile run (no changes); worker's dry run OK. Advisory: some declarations used are owned by definition nodes reached only through the new node's stmt_deps; Q140 lem-sfb-space-picard-obstruction-natural overlaps mathematically but has no Lean."
+ }
+}

@@ -1,0 +1,271 @@
+{
+ "id": "lem-pd-internal-direct-image-lax-realization",
+ "kind": "statement",
+ "title": "Section realization of the actual internal direct-image lax structure and adjunction unit",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $f:X\\to Y$ be a morphism of schemes, and use the small pro-étale sites small relative to module sheaves [def-weil-pbc-proetale-site]. Put $R_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and also write $R_T$ for its reconstructed section-ring sheaf. Let $E_T:\\operatorname{Mod}_{R_T}(\\operatorname{Sh}(T_{\\mathrm{proet}},\\operatorname{Ab}))\\simeq\\operatorname{Mod}(R_T)$ be the fixed equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Use the specified operations and adjunctions of [def-pd-section-module-operations-data], internal relative tensors [def-sfb-modobj-relative-tensor] and sectionwise sheafified balanced tensors [def-pur-sheaf-tensor-product]. Write $L_{\\rm int}=f^*_{\\rm int}$, $P_{\\rm int}=f_{*,\\rm int}$, $L=f^*_{\\rm sec}$ and $P=f_{*,\\rm sec}$, with their specified adjunctions. Use the fixed strong monoidal constraints on $E_X,E_Y$ characterized by identity on pure tensors [lem-pe-internal-section-tensor-comparison]. Let $S=R_X$, $R'=f^{-1}R_Y$, $\\alpha_f:R'\\to S$ be the coefficient map and $c:R_Y\\to f_*S$ its adjunct. Give $P_{\\rm int}$ the actual pairing obtained from the sheafification-induced lax abelian direct image, scalar restriction [def-sfb-module-lower-star], and the relative-tensor balancing projection. Then the fixed comparisons $E_XL_{\\rm int}\\cong LE_Y$ and $E_YP_{\\rm int}\\cong PE_X$ identify the specified adjunctions, including unit and counit, and the latter comparison preserves tensor pairing and regular unit. The transported adjunction unit is geometric inverse-image insertion followed by $a\\mapsto1\\otimes a$ into $L(A)=S\\otimes_{R'}f^{-1}A$. The transported direct-image tensor map is the sheaf map $P(H)\\otimes_{R_Y}P(K)\\to P(H\\otimes_SK)$ sending every local pure tensor $a\\otimes b$ over $V$ to $a\\otimes b$ over $V\\times_YX$; its unit sends $r$ to $c(r)$. These are equalities of the actual specified structure maps, without assuming evaluation preserves sheaf tensors.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules), 03EK (section-tensor-product); agent extraction of parent proof Steps 1–2, identifying actual internal structure maps."
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pd-section-module-operations-data",
+  "def-sfb-modobj-relative-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-module-lower-star",
+  "def-pd-proetale-section-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Apply the direct-image comparison part of internal_module_operations_transport from [lem-sfb-internal-module-operations-transport]. With the specified aliases in [def-pd-section-module-operations-data], its three equations are exactly the required mate, unit, and counit equations for the fixed comparisons.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, 03D7 and 03EK; agent proof using the existing normalized section/module operations and Mathlib mates and sheafification adjunctions."
+   }
+  },
+  {
+   "text": "The unique normalized internal lax structure of [def-pd-proetale-section-module-functors] sends internal local pure tensors to the same tensors on the base-changed site object. Precompose the claimed balancing-projection equation with the abelian sheaf tensor generators and use the monoidality of the canonical sheaf-to-presheaf pushforward comparison. TensorProduct.induction_on and sheafification tensor hom extensionality prove equality of the underlying maps.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "def-sfb-modobj-relative-tensor",
+    "def-sfb-module-lower-star"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, 03D7 and 03EK; agent proof using the existing normalized section/module operations and Mathlib mates and sheafification adjunctions."
+   }
+  },
+  {
+   "text": "The ordinary tensor comparisons in [def-pd-proetale-section-module-functors] have their specified pure-tensor formulas from [lem-pe-internal-section-tensor-comparison]. To test the tensor-comparison square, apply faithfulness of the section-to-abelian-sheaf functor, cancel the epimorphic relative-tensor projection, and test on the local generators of the abelian sheaf tensor. The direct-image comparison fixes every section by [lem-sfb-internal-module-operations-transport]. Naturality of the canonical section pure tensors and the two direct-image normalizations make both composites agree on these generators. The section pushforward formula itself is its normalization.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, 03D7 and 03EK; agent proof using the existing normalized section/module operations and Mathlib mates and sheafification adjunctions."
+   }
+  },
+  {
+   "text": "Use [lem-pd-ringed-direct-image-pairing-lax] and uniqueness of the specified pure-tensor normalization to obtain the section direct-image unit formula r maps to c(r). For the internal lax structure apply left-unitality at the regular module to the tensor of 1 and 1. Naturality of internal pure tensors and the pushforward normalization imply its unit sends 1 to 1. Reconstruct its section-module map via the fixed direct-image and regular-unit comparisons; linearity over R_Y then gives r maps to c(r). Since the normalized ordinary unit comparison fixes scalar sections, both unit comparison composites agree on every section. All internal tensor-generator and unitor calculations use the relative-tensor construction, without evaluation preserving tensors.",
+   "uses": [
+    "def-pd-proetale-section-module-functors",
+    "def-sfb-module-lower-star",
+    "def-sfb-modobj-relative-tensor",
+    "def-pd-section-module-operations-data",
+    "lem-pd-ringed-direct-image-pairing-lax"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, 03D7 and 03EK; agent proof using the existing normalized section/module operations and Mathlib mates and sheafification adjunctions."
+   }
+  },
+  {
+   "text": "For an arbitrary section module A use naturality of the section adjunction unit along the equivalence counit to transport the unit equation from its inverse image M. Evaluate on a section and use the fact that pushComparison fixes sections. The underlying internal adjunction Hom formula, evaluated at the identity, identifies its unit with geometric insertion followed by the scalar-extension unit extendUnitHom. This is precisely the final displayed formula.",
+   "uses": [
+    "def-sfb-module-upper-lower-adjunction",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-internal-module-operations-transport",
+    "def-pd-section-module-operations-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D6, 03D7 and 03EK; agent proof using the existing normalized section/module operations and Mathlib mates and sheafification adjunctions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "def-pd-section-module-operations-data",
+  "def-pd-proetale-section-module-functors",
+  "def-sfb-modobj-relative-tensor",
+  "def-sfb-module-lower-star",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pd-ringed-direct-image-pairing-lax",
+  "def-sfb-module-upper-lower-adjunction",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D6, 03D7 and 03EK; agent proof using the existing normalized section/module operations and Mathlib mates and sheafification adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The internal module to section module equivalence identifies the actual lax monoidal direct image pairing and the specified pullback pushforward adjunction unit as geometric insertion followed by scalar insertion",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"PresheafOfModules.unitHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.unitHomEquiv\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"SheafOfModules.unitHomEquiv_comp_apply\"], \"note\": \"\", \"digest\": \"cbd5d8e0dbed74a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: section pushforward and its unit adjoint are present, but not the monoidal identification of the actual internal balanced direct-image pairing together with the specified adjunction under the section equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Functor.LaxMonoidal",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: section pushforward and its unit adjoint are present, but not the monoidal identification of the actual internal balanced direct-image pairing together with the specified adjunction under the section equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*([Ll]ax|[Tt]ensor)|([Ll]ax|[Tt]ensor).*pushforward",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: section pushforward and its unit adjoint are present, but not the monoidal identification of the actual internal balanced direct-image pairing together with the specified adjunction under the section equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical internal module pushforward lax tensor structure agrees with the sectionwise balanced tensor pairing under the equivalence with sheaves of modules",
+   "results": "{\"n_hits\": 8, \"top\": [\"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"SheafOfModules.pushforward_obj_val\", \"PresheafOfModules.pushforward₀_obj\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardSections\"], \"note\": \"\", \"digest\": \"a5e14535f6e68db3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: section pushforward and its unit adjoint are present, but not the monoidal identification of the actual internal balanced direct-image pairing together with the specified adjunction under the section equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit|pushforward_obj_val|pullbackObjUnitToUnit",
+   "results": "{\"n_hits\": 7, \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean\"], \"note\": \"\", \"digest\": \"a514e8c41e2ef574\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: section pushforward and its unit adjoint are present, but not the monoidal identification of the actual internal balanced direct-image pairing together with the specified adjunction under the section equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between internal modules in abelian sheaves and sectionwise modules preserves the canonical direct image tensor pairing and the pullback pushforward adjunction unit",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.unitHomEquiv_comp_apply\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\", \"SheafOfModules.unitHomEquiv_symm_comp\"], \"note\": \"\", \"digest\": \"3aa520ef13e1a30f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern section-module pushforward, scalar extension, or sheafification separately; none identifies the actual internal-module balanced pairing and specified adjunction under the fixed section equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModule.*(pushforward|adjunction)|pushforward.*sectionModule",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern section-module pushforward, scalar extension, or sheafification separately; none identifies the actual internal-module balanced pairing and specified adjunction under the fixed section equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules.pushforward\", \"LaxMonoidal\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern section-module pushforward, scalar extension, or sheafification separately; none identifies the actual internal-module balanced pairing and specified adjunction under the fixed section equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal module objects in tensor abelian sheaves are equivalent to sheaves of modules compatibly with the canonical pushforward lax tensor pairing",
+   "results": "{\"n_hits\": 8, \"top\": [\"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardPushforwardAdj\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.pushforwardCompToPresheaf\"], \"note\": \"\", \"digest\": \"42a845b7f865df79\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern section-module pushforward, scalar extension, or sheafification separately; none identifies the actual internal-module balanced pairing and specified adjunction under the fixed section equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification and restriction of scalars identify the tensor pairing of internal module direct image with the balanced bilinear pairing on sections",
+   "results": "{\"n_hits\": 8, \"top\": [\"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\"], \"note\": \"\", \"digest\": \"214a325c08826240\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern section-module pushforward, scalar extension, or sheafification separately; none identifies the actual internal-module balanced pairing and specified adjunction under the fixed section equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-ordinary-oplax-normalization",
+  "date": "2026-10-22",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Seeded target nt-target-poincare-isiso, Step 2: canonical open projection and module-object comparison; refinement of lem-pd-module-ringed-topos-derived-comparison (Ordinary module pullback oplax mate on balanced generators). No imported ancestor exists. Re-split of lem-pd-section-ordinary-oplax-normalization: proof Steps 1–2 (specified adjunction unit and actual lax direct-image pairing).",
+   "via": [
+    "lem-pd-section-ordinary-oplax-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pd-internal-direct-image-lax-realization",
+  "worker": "stage1",
+  "summary": "Q24: identified the fixed adjunction comparisons by their mate normalization, computed unit and counit, and proved equality of the actual internal direct-image pairing using the existing abelian generator equation and balanced-bilinear universal property. No new nodes; no statement change.",
+  "blueprint": "Seeded target nt-target-poincare-isiso, Step 2: canonical open projection and module-object comparison; refinement of lem-pd-module-ringed-topos-derived-comparison (Ordinary module pullback oplax mate on balanced generators). No imported ancestor exists. Re-split of lem-pd-section-ordinary-oplax-normalization: proof Steps 1–2 (specified adjunction unit and actual lax direct-image pairing).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-section-ring-lax-pushforward-coherence",
+    "why": "Generic sheaf/module comparison or universal property used on the specified pro-etale sites; the current unit has no such lower-level construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic sheaf/module comparison or universal property used on the specified pro-etale sites; the current unit has no such lower-level construction."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf/module comparison or universal property used on the specified pro-etale sites; the current unit has no such lower-level construction."
+   },
+   {
+    "node": "lem-sfb-sheaf-pushforward-generator-comparison",
+    "why": "Generic sheaf/module comparison or universal property used on the specified pro-etale sites; the current unit has no such lower-level construction."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic sheaf/module comparison or universal property used on the specified pro-etale sites; the current unit has no such lower-level construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-1bb391afe",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-1bb391afe (reviewer sub-agent of L); spot-checked: Read the item in full, all 11 cited statements, Stacks sites-modules 03D6/03D7(l.1197, proof = two successive Hom bijections)/03EK, and compared with the parent's old Steps 1-2 (Q01 snapshot); nothing was dropped. Delivery: one commit, item plus report, no new nodes. Statement, stmt_deps and blueprint are identical to the live unsplit node. No repair note for this item, so the 2026-10-21 re-split rule does not apply; no SGA; uses = proof_deps; acyclic (391-node closure). Step 1: section-ring-lax-pushforward-coherence with F=–×_YX, ψ=c=η_f; the hypotheses hold (size, def-sfb-finite-lower-star, coefficient-morphisms), with the sheafification/monoidal-W assumption inherited from E_T. P^int matches Res_{η_f}∘mapMod of def-sfb-module-lower-star. Step 2: the mate normalization gives units and counits formally; the unit is geometric insertion then 1⊗–, the counit s⊗h↦sε(h), and the inverse is a sheaf map by bilinear-universal over R'. Steps 3-5: generator equation with A=Ab, balancing via the c-action, and a unique map by bilinear-universal equal to the transported pairing via the lem-pe pure-tensor constraints; unit = c. Edge cases f=id, X=∅, zero ring and r=0 all hold. All 5 tool_uses accepted as generic sheaf/module tools. Advisory: lem-sfb-internal-module-operations-transport already states the adjunction part and could have been cited; not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalDirectImageLaxRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internal_direct_image_lax_realization",
+  "file": "lean/Sheaf/Paper/InternalDirectImageLaxRealization.lean",
+  "statement": "theorem internal_direct_image_lax_realization {X Y : Scheme.{u}} (f : X ⟶ Y) : (mateEquiv (CondensedRing.upperStarLowerStarAdjunction Λ f) (adjunction Λ f) (.mk _ _ _ _ (pullComparison Λ f).inv)).natTrans = (pushComparison Λ f).hom ∧ (∀ M : internalModules Λ Y, (equivalence Λ Y).functor.map ((CondensedRing.upperStarLowerStarAdjunction Λ f).unit.app M) ≫ (pushComparison Λ f).hom.app ((CondensedRing.upperStar Λ f).obj M) ≫ (pushforward Λ f).map ((pullComparison Λ f).hom.app M) = (adjunction Λ f).unit.app ((equivalence Λ Y).functor.obj M)) ∧ (∀ N : internalModules Λ X, (pullback Λ f).map ((pushComparison Λ f).inv.app N) ≫ (pullComparison Λ f).inv.app ((CondensedRing.lowerStar Λ f).obj N) ≫ (equivalence Λ X).functor.map ((CondensedRing.upperStarLowerStarAdjunction Λ f).counit.app N) = (adjunction Λ f).counit.app ((equivalence Λ X).functor.obj N)) ∧ (∀ M N : internalModules Λ X, Mod.tensorObjπ ((CondensedRing.lowerStar Λ f).obj M) ((CondensedRing.lowerStar Λ f).obj N) ≫ ((internalPushLax Λ f).μ M N).hom = Functor.LaxMonoidal.μ (ProEtale.lowerStar Ab.{u + 1} f) M.X N.X ≫ (ProEtale.lowerStar Ab.{u + 1} f).map (Mod.tensorObjπ M N)) ∧ (∀ M N : internalModules Λ X, (ordinaryTensorComparison Λ Y ((CondensedRing.lowerStar Λ f).obj M) ((CondensedRing.lowerStar Λ f).obj N)).hom ≫ ((pushComparison Λ f).hom.app M ⊗ₘ (pushComparison Λ f).hom.app N) ≫ (pushLax Λ f).μ ((equivalence Λ X).functor.obj M) ((equivalence Λ X).functor.obj N) = (equivalence Λ Y).functor.map ((internalPushLax Λ f).μ M N) ≫ (pushComparison Λ f).hom.app (M ⊗ N) ≫ (pushforward Λ f).map (ordinaryTensorComparison Λ X M N).hom) ∧ ((equivalence Λ Y).functor.map (internalPushLax Λ f).ε ≫ (pushComparison Λ f).hom.app (𝟙_ (internalModules Λ X)) ≫ (pushforward Λ f).map (ordinaryUnitComparison Λ X).hom = (ordinaryUnitComparison Λ Y).hom ≫ (pushLax Λ f).ε) ∧ (∀ (H K : modules Λ X) (V : Y.ProEtᵒᵖ) (a : ((pushforward Λ f).obj H).val.obj V) (b : ((pushforward Λ f).obj K).val.obj V), (((pushLax Λ f).μ H K).val.app V) (sectionPureTensor Λ Y _ _ V a b) = sectionPureTensor Λ X H K ((InternalModuleOperations.siteMap f).op.obj V) a b) ∧ (∀ (V : Y.ProEtᵒᵖ) (r : (ring Λ Y).obj.obj V), ((pushLax Λ f).ε.val.app V) r = ((coefficientMap Λ f).hom.app V) r) ∧ (∀ (A : modules Λ Y) (V : Y.ProEtᵒᵖ) (a : A.val.obj V), (((adjunction Λ f).unit.app A).val.app V) a = ((((pullback Λ f).map ((equivalence Λ Y).counitIso.hom.app A)).val.app ((InternalModuleOperations.siteMap f).op.obj V))) ((((pullComparison Λ f).hom.app ((equivalence Λ Y).inverse.obj A)).val.app ((InternalModuleOperations.siteMap f).op.obj V)) (((Mod.extendUnitHom (condensedPullbackHom Λ f) (((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y)).obj ((equivalence Λ Y).inverse.obj A))).hom.app ((InternalModuleOperations.siteMap f).op.obj V)) ((((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).unit.app ((equivalence Λ Y).inverse.obj A).X).hom.app V) ((((equivalence Λ Y).counitIso.inv.app A).val.app V) a)))))",
+  "branch": "newtargets-dag",
+  "by": "Q56",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing specified adjunctions, internalPushLax/pushLax, and uniquely pure-tensor-normalized ordinary tensor/unit comparisons. The added landed definition dependency supplies those canonical structures; no new operations, arbitrary maps, or evaluation-tensor assumption are introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2c426264b",
+  "group": "Q56",
+  "result": "pass",
+  "note": "First stage-2 delivery. Node differs from live only in lean and stmt_deps. Added stmt_dep def-pd-proetale-section-module-functors is a landed def node that owns internalPushLax/pushLax/ordinaryTensorComparison/ordinaryUnitComparison, all used in the statement (allowed by brief-stage2 l.167). lean.statement is verbatim. One sorry theorem; docstrings carry Stacks 03D6/03D7/03EK, the blueprint id and Steps 1-5; no extra hypotheses or universe restriction. Clause checks: conj 4 pins the internal pairing as abelian sheaf-pushforward lax mu followed by f_*(tensorObjπ), true by the dep's private canonical_projection. Conj 5/6 tensor and unit squares are correctly oriented, every leg pinned on pure tensors or scalars. Conj 8 pushLax.ε = coefficientMap is genuine (unitality). Conj 9 arbitrary-A unit formula is true by naturality + conj 2 + upperStarLowerStarAdjunction_homEquiv_hom; since the section pullback is Mathlib's abstract left adjoint, routing 1⊗a through the fixed pullComparison is the faithful rendering of the 'transported' unit. Edge cases f=id, X empty, zero ring/modules/sections hold. Advisories: conj 1-3 copy internal_module_operations_transport (node-demanded; stage 3 should cite it); conj 7 and 1 are choose_specs; the second-reading section is brief but concrete. No files changed, so no compile; the worker reports clean 31.5 s / 22.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261024T190027-L-3859989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

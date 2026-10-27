@@ -1,0 +1,34 @@
+# global build 2026-10-25T23:00:37Z of b870277349: Sheaf.Paper.SectionOrdinaryOplaxNormalization failed
+error: Sheaf/Paper/SectionOrdinaryOplaxNormalization.lean:388:5: Unknown identifier `upperStar_tensorπ_delta`
+error: Sheaf/Paper/SectionOrdinaryOplaxNormalization.lean:376:68: unsolved goals
+Λ : Sheaf (coherentTopology Profinite) Ab
+inst✝¹ : MonObj Λ
+inst✝ : IsCommMonObj Λ
+X Y : Scheme
+f : X ⟶ Y
+M N : internalModules Λ Y
+W : X.ProEtᵒᵖ
+m : ↑(((normalizationInverseImage Λ f).obj M).X.obj.obj W)
+n : ↑(((normalizationInverseImage Λ f).obj N).X.obj.obj W)
+A : Sheaf (Scheme.ProEt.topology Y) Ab ⥤ Sheaf (Scheme.ProEt.topology X) Ab := (f)^*[Ab]
+T : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab) (condensedRingObj Λ Y) ⥤
+  CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab) ((f)^*[Ab].obj (condensedRingObj Λ Y)) :=
+  normalizationInverseImage Λ f
+φ : (f)^*[Ab].obj (condensedRingObj Λ Y) ⟶ condensedRingObj Λ X := condensedPullbackHom Λ f
+E : Mod.extendScalars φ ≅ Mod.comap (asIso φ).inv := Mod.extendScalarsIsoComapInv φ
+hu :
+  ∀ (K : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab) (A.obj (condensedRingObj Λ Y))),
+    (E.inv.app K).hom = Mod.extendUnitHom φ K
+⊢ (ConcreteCategory.hom ((normalizationInternalTensor Λ f M N).hom.hom.app W))
+      ((ConcreteCategory.hom
+          ((Mod.extendUnitHom (condensedPullbackHom Λ f) ((normalizationInverseImage Λ f).obj (M ⊗ N))).hom.app W))
+        (normalizationInverseImageTensor Λ f M N W m n)) =
+    internalPureTensor Λ X (Mod.extendScalarsObj (condensedPullbackHom Λ f) ((normalizationInverseImage Λ f).obj M))
+      (Mod.extendScalarsObj (condensedPullbackHom Λ f) ((normalizationInverseImage Λ f).obj N)) W
+      ((ConcreteCategory.hom
+          ((Mod.extendUnitHom (condensedPullbackHom Λ f) ((normalizationInverseImage Λ f).obj M)).hom.app W))
+        m)
+      ((ConcreteCategory.hom
+          ((Mod.extendUnitHom (condensedPullbackHom Λ f) ((normalizationInverseImage Λ f).obj N)).hom.app W))
+        n)
+error: Lean exited with code 1

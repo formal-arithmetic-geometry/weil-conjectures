@@ -1,0 +1,106 @@
+{
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SemilinearCompactSupportCoefficientTransport",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 10: support and resolution subarguments for the coefficient transport comparisons.",
+   "via": [
+    "def-pur-semilinear-compact-support-coefficient-transport",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarProofs",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarProofs.lean",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.scalarRestriction_openSupported",
+  "statement": "theorem scalarRestriction_openSupported\n    (C D : ℕ → CommRingCat.{u + 1})\n    (τ : ∀ n, C (n + 1) ⟶ C n) (σ : ∀ n, D (n + 1) ⟶ D n)\n    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n    (a : SemilinearProperOpen.ringSystem C τ X ⟶ SemilinearProperOpen.ringSystem D σ X)\n    (M : SemilinearProperOpen.Derived D σ U) :\n    (SemilinearProperOpen.J C τ j).essImage\n      ((SemilinearSections.res a).mapDerivedCategory.obj\n        ((SemilinearProperOpen.J D σ j).obj M))",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "id": "lem-pur-derived-scalar-open-support",
+ "kind": "statement",
+ "title": "Scalar restriction preserves derived open support",
+ "statement": "Let C and D be arbitrary towers of commutative rings, let j : U → X be an open immersion of schemes, and let a : C_X → D_X be any map of their sequence ring sheaves. For every object M of the ordinary unbounded derived category of D-systems on U, scalar restriction of J_D(j)(M) belongs to the essential image of J_C(j). The systems and exact ordinary/derived extension functors are [lem-sf-semilinear-proper-open-mate-pasting], and scalar restriction is [def-coef-semilinear-system-models].",
+ "stmt_deps": [
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "def-coef-semilinear-system-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 0D6E; already proved generic subargument of blueprint sk-thm-purity-transport Step 10, moved from the assigned module for compile performance."
+ },
+ "proof": [
+  {
+   "text": "The ordinary open unit is invertible by the canonical VaryingRing open adjunction. The ordinary support theorem makes its counit invertible on the scalar-restricted open extension. On complexes, exact functors preserve the termwise counit isomorphisms, and the exact derived comparison transfers this to all derived objects by the Q representative comparison. The derived open unit is invertible as well, so the derived counit criterion recognizes the claimed essential-image membership.",
+   "uses": [
+    "lem-pur-semilinear-open-restriction-support",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-semilinear-open-restriction-support",
+  "def-sp-varying-ring-operations"
+ ],
+ "proof_origin": "K3 proved this argument as a private helper; K1 isolates the unchanged proof with a public supporting statement. No new proof assumption or sorry.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertibility of derived adjunction mates from injective resolutions and preservation of quasi isomorphisms by ringed direct image; scalar restriction preserves open extension essential image",
+   "results": "Eight hits for restriction/coextension, injective presentations, right-derived-zero on injectives, and scheme module adjunctions. No exact unbounded coefficient-system statement.",
+   "date": "2026-10-27",
+   "verdict": "No direct replacement for this existing proved helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "Twelve hits for equivalence criteria and fully faithful adjoints. These underlie the helper, but none supplies its exact mate or derived support conclusion.",
+   "date": "2026-10-27",
+   "verdict": "Reuse standard adjunction APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate.*[iI]sIso|continuous_scalar_resolution|scalarRestriction_openSupported|inverse_mate_isIso_of_support",
+   "results": "Zero Mathlib hits. The shared library has these proved private helpers in the assigned module; they are transferred, not reproved or replaced by holes. Imported blueprint searches found no exact statement.",
+   "date": "2026-10-27",
+   "verdict": "Isolate the existing proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31762",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222727-L-687038",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 new modules vs clone/published item (verbatim move by diff; only systemRestrictionPullInv_isIso newly proved), 8 node JSONs vs Lean signatures, 4 direct importers compiled against the delivery and against the published build"
+ }
+}

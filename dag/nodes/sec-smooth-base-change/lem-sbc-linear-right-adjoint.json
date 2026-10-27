@@ -11,9 +11,50 @@
   "def-weil-linear-category",
   "def-weil-linear-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\psi_{X,Y}:\\operatorname{Hom}_{\\mathcal C}(X,GY)\\to\\operatorname{Hom}_{\\mathcal D}(FX,Y)$ for the inverse of the given natural bijection, and set $\\varepsilon_Y=\\psi_{GY,Y}(1_{GY})$. Naturality in $X$, applied to $h:X\\to GY$, gives $\\psi_{X,Y}(h)=\\varepsilon_Y\\circ F(h)$. Naturality in $Y$, applied to $u:Y\\to Z$ and $1_{GY}$, gives $\\psi_{GY,Z}(G(u))=u\\circ\\varepsilon_Y$. These are just the two naturality squares in the hypothesis, evaluated at an identity; each $\\psi_{X,Y}$ is injective because it is a bijection.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09MJ (definition-linear-category) and 09MK (definition-functor-linear-categories); agent calculation expanding the counit proofs in WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:27-36 and Mathlib/CategoryTheory/Adjunction/Additive.lean:33-39."
+   }
+  },
+  {
+   "text": "Let $s,t:Y\\to Z$ be parallel morphisms. By bilinearity of composition [def-weil-linear-category] and additivity of $F$ [def-weil-linear-functor], the formulas of step 1 give $$\\psi_{GY,Z}(G(s+t))=(s+t)\\circ\\varepsilon_Y=s\\circ\\varepsilon_Y+t\\circ\\varepsilon_Y=\\varepsilon_Z\\circ F(Gs)+\\varepsilon_Z\\circ F(Gt)=\\varepsilon_Z\\circ F(Gs+Gt)=\\psi_{GY,Z}(Gs+Gt).$$ Injectivity of this same bijection proves $G(s+t)=Gs+Gt$. No additivity of $G$ or of the adjunction bijections was used.",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09MJ (definition-linear-category) and 09MK (definition-functor-linear-categories); agent calculation expanding the counit proofs in WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:27-36 and Mathlib/CategoryTheory/Adjunction/Additive.lean:33-39."
+   }
+  },
+  {
+   "text": "For $a\\in A$ and $s:Y\\to Z$, bilinearity of composition [def-weil-linear-category] and scalar linearity of $F$ [def-weil-linear-functor] give $$\\psi_{GY,Z}(G(as))=(as)\\circ\\varepsilon_Y=a(s\\circ\\varepsilon_Y)=a(\\varepsilon_Z\\circ F(Gs))=\\varepsilon_Z\\circ(aF(Gs))=\\varepsilon_Z\\circ F(aGs)=\\psi_{GY,Z}(aGs).$$ Injectivity proves $G(as)=aG(s)$. Together with step 2 this says precisely that the maps induced by $G$ on morphism modules are additive and $A$-linear. The argument uses only the stated natural bijections and bilinear composition, so requires no abelian, exactness or boundedness assumptions.",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09MJ (definition-linear-category) and 09MK (definition-functor-linear-categories); agent calculation expanding the counit proofs in WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:27-36 and Mathlib/CategoryTheory/Adjunction/Additive.lean:33-39."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-linear-category",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09MJ and 09MK supply the definitions, not the adjoint theorem. Agent expansion of the ordinary-adjunction counit computations read in the project LinearFunctor.lean:27-36 and Mathlib Adjunction/Additive.lean:33-39."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -77,10 +118,59 @@
    "results": "8 hits: ModuleCat.instIsRightAdjointCoextendScalars, CategoryTheory.Adjunction.homAddEquiv, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.homAddEquiv_apply, ModuleCat.adj, CategoryTheory.InducedCategory.homLinearEquiv, MoritaEquivalence.linear, CategoryTheory.Functor.Linear",
    "date": "2026-10-21",
    "verdict": "no match for arbitrary R-linear categories: Mathlib provides adjoint additivity and additive Hom equivalences, not right-adjoint scalar linearity; the scalar clause is already proved in the project extension WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor"
+  },
+  {
+   "tool": "grep",
+   "query": "homLinearEquiv|map_smul|linear_iff",
+   "results": "0 hits: ; subdirectory Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "right_adjoint_linear|right_adjoint_additive",
+   "results": "5 hits: Mathlib/CategoryTheory/Triangulated/Adjunction.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean, Mathlib/CategoryTheory/Adjunction/Additive.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of an additive linear functor is additive and preserves scalar multiplication",
+   "results": "8 hits: CategoryTheory.Adjunction.right_adjoint_additive, CategoryTheory.Functor.Linear.map_smul, CategoryTheory.Adjunction.left_adjoint_additive, CategoryTheory.Adjunction.homAddEquiv, ModuleCat.instIsRightAdjointCoextendScalars, CategoryTheory.Functor.unop_additive, CategoryTheory.rightExactFunctor_le_additiveFunctor, CategoryTheory.Functor.linear_iff",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Adjunction",
+   "results": "1 hits: CategoryTheory.Adjunction.extLinearEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adjoint\", \"linear\"",
+   "results": "12 hits: AlgCat.instIsRightAdjointModuleCatForget₂AlgHomCarrierLinearMapIdCarrierOfSmall, LinearEquiv.isAdjointPair_symm_iff, LinearMap.IsSelfAdjoint, LinearMap.isAdjointPair_id, LinearMap.IsSkewAdjoint, LinearMap.IsPairSelfAdjoint, LinearMap.IsAdjointPair, LinearMap.isAdjointPair_one",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordinary right adjoint of an additive R linear functor between R linear preadditive categories is additive and R linear",
+   "results": "8 hits: CategoryTheory.Adjunction.right_adjoint_additive, CategoryTheory.Adjunction.left_adjoint_additive, CategoryTheory.linearCoyoneda_obj_additive, CategoryTheory.Functor.mapLinearMap, CategoryTheory.Functor.Linear, CategoryTheory.linearYoneda_obj_additive, CategoryTheory.Adjunction.homAddEquiv, CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If F is left adjoint to G and preserves scalar multiplication then G preserves scalar multiplication on morphisms",
+   "results": "8 hits: CategoryTheory.Functor.map_smul, CategoryTheory.Functor.Linear.map_smul, CategoryTheory.Functor.map_units_smul, Action.smul_hom, ModuleCat.hom_smul, CategoryTheory.IsMod_Hom.smul_hom, ModuleCat.instIsLeftAdjointRestrictScalars, Rep.instIsLeftAdjointActionModuleCatRes",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: right_adjoint_additive supplies only additivity (Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39); the scalar result is a project extension (WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34-36), not a Mathlib declaration. Ext linear equivalences require abelian categories and exactness and do not state this result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sbc-ambient-operations-scalar-linearity",
@@ -116,5 +206,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sbc-linear-right-adjoint",
+  "worker": "stage1",
+  "summary": "Read both existing counit proofs and Stacks Tags 09MJ/09MK. Kept the statement and all maintainer fields unchanged. Expanded inverse-Hom naturality and proved additivity and scalar linearity by explicit injectivity calculations. The project scalar declaration alone does not cover additivity, and Mathlib has no full match. No auxiliary node is needed: each step is a short calculation from the hypotheses and the two existing definition leaves.",
+  "blueprint": "Realizes the ordinary-adjunction scalar-linearity prerequisite behind the central-localization sentence of sbc-thm-e-coefficient-smooth-base-change, via lem-sbc-completed-operations-linear-natural-exchange and lem-sbc-ambient-operations-scalar-linearity. The unit sk-rem-rest is a contextual remark with no proof steps; neither the chapter nor unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NA-063cc8818",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-063cc8818 (reviewer sub-agent of L); spot-checked: The statement is byte-identical to the base and the item is still unsplit in live and side-live, with no repair note, so this is not a re-split. The delivery has 0 new nodes and only the item plus the report (A ok). I read Stacks dga.tex Tags 09MJ and 09MK (lines 2863-2895, both definitions only), the project LinearFunctor.lean:27-36 (right_adjoint_linear, scalar clause only) and Mathlib Adjunction/Additive.lean:33-39 (right_adjoint_additive, additive clause only). Step 1: the inverse-Hom naturality formulas psi(h)=eps_Y∘F(h) and psi(Gu)=u∘eps_Y are correct, with types checked. Steps 2 and 3: I checked the injectivity calculations link by link inside Hom(FGY,Z); they use only the distributivity and scalar clauses of def-weil-linear-category and the additivity and scalar clauses of def-weil-linear-functor, and assume no linearity of G or of the bijection. proof_deps equals the union of uses. Unit sk-rem-rest has no steps; the only deps are Mathlib-leaf definitions, so there is no route issue and no tool_uses. There is no SGA reference. Edge cases a=0, a=1, s=0, t=-s, the zero ring and M⊗- ⊣ Hom(M,-) are fine. The three citers (ambient-operations-scalar-linearity step 3, rational-supported-adjoint-transport step 1, etale-system-brown-construction step 9) use exactly the statement. An rg -L search of the DAG found no duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LinearRightAdjoint",
+  "declaration": "CategoryTheory.Adjunction.right_adjoint_additive_linear",
+  "file": "lean/Sheaf/CategoryTheory/LinearRightAdjoint.lean",
+  "statement": "theorem right_adjoint_additive_linear {A : Type w} [CommRing A] {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [Preadditive C] [Preadditive D] [Linear A C] [Linear A D] {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Additive] [F.Linear A] : G.Additive ∧ G.Linear A",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49e4ff790",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Statement verbatim in file; non-lean node fields identical to side-live. Lean signature renders every node clause: CommRing A; Preadditive+Linear A on C,D (def-weil-linear-category match); ordinary adj : F ⊣ G (no linear Hom bijection); [F.Additive] [F.Linear A] (def-weil-linear-functor match); conclusion G.Additive ∧ G.Linear A (Mathlib Functor.Linear has no Additive parameter, so it types). Independent universes w,u1,u2,v1,v2. Existing project right_adjoint_linear (scalar only) and Mathlib right_adjoint_additive (additive only) each cover one clause, so the combined theorem is not an H4 duplicate. No defs, proof sorry, docstrings with Stacks 09MJ/09MK + blueprint id and the 3 proof steps (counit orientation correct), report has Worker report + Second reading by Q48. Edge cases (zero ring, empty categories, a=0/1, t=-s) fine; citers unaffected since the statement is unchanged. Not recompiled per instruction; worker scompile + deliver2 dry run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261023T103253-L-3089242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.right_adjoint_additive_linear"
+  ],
+  "sorry_after": []
  }
 }

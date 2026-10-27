@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-finite-exceptional-quotient-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the finite exceptional quotient mate",
+ "statement": "Fix l prime, a finite extension E of Q_l, the finite-field datum D with l different from D.p, separated finite-type D.k-schemes X,Y, a separated finite-type morphism f:X→Y over D.k and a compactification c. Use the actual finite-Tor domains, normalized adjunctions and quotient mate b of [def-sf-finite-exceptional-constructions]. For every n≤m (indices denote positive exponents n+1 and m+1), the natural transformation b:G_m⋙Q_X→Q_Y⋙G_n is invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraph 2: coherent duality comparisons and identification of their adjunction maps"
+ },
+ "stmt_deps": [
+  "def-sf-finite-exceptional-constructions"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite Verdier coefficient comparison on X and Y, and commute quotient tensor past ordinary pullback. On V=f*D_Y L compose the X duality comparison with D_X of the inverse of the inner comparison t:Q_X V→f*D_Y Q_Y L. Each factor is an isomorphism and natural on the finite-Tor domain. Conjugate the resulting Q_X H_m→H_n Q_Y by the uniquely normalized dual formula at both levels.",
+   "uses": [
+    "cor-coef-finite-verdier",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite Hom coefficient change preserves evaluation. Absolute dualizing coefficient change preserves the structural trace, and compact-support coefficient change preserves the counit and projection. Therefore the transpose of the constructed comparison is q inverse followed by the quotient image of the old counit. The target adjunction Hom bijection is injective, so this comparison is exactly b. Its inverse is the reverse composite of the inverses; full-subcategory inclusion reflects invertibility.",
+   "uses": [
+    "thm-coef-finite-hom",
+    "lem-coef-finite-dualizing",
+    "lem-fix-compact-support-coefficient-change"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-coef-finite-verdier",
+  "lem-fix-operation-reduction",
+  "thm-coef-finite-hom",
+  "lem-coef-finite-dualizing",
+  "lem-fix-compact-support-coefficient-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-coef-finite-exceptional.proof.md",
+  "place": "Paragraph 2: coherent duality comparisons and identification of their adjunction maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image on finite Tor constructible sheaves commutes with quotient reduction of coefficients, with compatible identity and composition maps",
+   "results": "Eight hits including Equivalence.sheafCongrPrecoherent_inverse_map_val_app and SheafOfModules.pushforwardComp_inv_app_val_app; these concern underived site equivalences and pushforward, not exceptional coefficient reduction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertibility and coherent quotient cocycle for finite exceptional inverse image coefficient change as the adjoint mate of compact support scalar comparison",
+   "results": "Eight hits including ContinuousCohomology.MultiInd.complex and LightCondensed.ihomPoints_symm_comp; no exceptional inverse image or finite coefficient cocycle.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|coefficientCounitMate|comparison_comp",
+   "results": "Mathlib has generic mateEquiv_counit, unit_mateEquiv and mateEquiv_vcomp; these prove the formal identities but do not assert invertibility or the scalar normalization of finite exceptional mates.",
+   "date": "2026-10-25",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteExceptional",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-finite-exceptional",
+   "place": "Paragraph 2: coherent duality comparisons and identification of their adjunction maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteExceptionalQuotientIso",
+  "file": "lean/Sheaf/SixFunctors/FiniteExceptionalQuotientIso.lean",
+  "declaration": "WeilConjectures.FiniteExceptional.exceptional_quotient_isIso",
+  "statement": "theorem exceptional_quotient_isIso {m n : ℕ} (h : n ≤ m) :\n    IsIso (b l E D hl f c h)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-92de4",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164236-L-981366",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-92de4",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T164236-L-981366",
+  "kind": "interface",
+  "note": "independent cc review: FiniteExceptionalData vs published FiniteExceptional.lean (verbatim names, signatures, bodies, imports); split theorems vs conjuncts 2-4 of finite_exceptional; 12 direct importers compiled against sandbox build"
+ }
+}

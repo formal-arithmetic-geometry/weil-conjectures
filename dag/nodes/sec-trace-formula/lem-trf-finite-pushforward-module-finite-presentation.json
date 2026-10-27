@@ -17,95 +17,76 @@
  ],
  "proof": [
   {
-   "text": "For any open neighbourhood $W$ of $t$, the set $C=T\\setminus W$ is closed and $p(C)$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres](1). Since the entire fibre over $u$ is $\\{t\\}$, we have $u\\notin p(C)$. Thus $V_0=U\\setminus p(C)$ is an open neighbourhood of $u$ with $p^{-1}V_0\\subseteq W$. Choose an affine open $u\\in V\\subseteq V_0$ by [lem-weil-pbc-affine-opens-basis]. Consequently inverse images of affine neighbourhoods of $u$ are cofinal among all neighbourhoods of $t$.",
+   "text": "Apply [lem-trf-finite-singleton-fibre-localization] to $p,t,\\mathcal M$: its hypotheses are finiteness, the given singleton fibre, and quasi-coherence. For every neighbourhood $W\\ni t$ it supplies an open $V_0\\ni u$ with $p^{-1}V_0\\subseteq W$. Refine $V_0$ to an affine neighbourhood $V$ by [lem-weil-pbc-affine-opens-basis]. The same singleton-fibre lemma supplies the canonical $\\mathcal O_{U,u}$-linear isomorphism $\\theta:(p_*\\mathcal M)_u\\xrightarrow{\\sim}\\mathcal M_t$, with scalars on the right restricted along $p_t^\\sharp$.",
    "uses": [
-    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-finite-singleton-fibre-localization",
     "lem-weil-pbc-affine-opens-basis"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 05B8(1), lemma-finite-morphism-single-point-in-fibre; explicit closed-complement argument."
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, neighbourhood and final stalk comparisons; More on Morphisms 05B8(1),(4)."
    }
   },
   {
-   "text": "Let $V=\\operatorname{Spec}R$ be any affine neighbourhood of $u$. Finiteness of $p$ means $p^{-1}V=\\operatorname{Spec}S$ is affine and $R\\to S$ is finite [def-weil-finite-integral-morphism]. Since $p$ is locally of finite presentation, [lem-weil-pbc-lfp-affine-opens-finite-presentation] applied to these two affine opens makes $R\\to S$ finitely presented as an algebra. Put $N=\\Gamma(p^{-1}V,\\mathcal M)$. The direct image is quasi-coherent by [lem-weil-pbc-affine-pushforward-base-change](1), since $p$ is affine and $\\mathcal M$ is quasi-coherent. Its module of sections on $V$ is $N$ regarded as an $R$-module: [lem-weil-pbc-pushforward-spec-global-sections] identifies the scalar action with restriction of scalars along $R\\to S$.",
+   "text": "For each affine open $V\\subseteq U$, put $p_V:p^{-1}V\\to V$. This is finite by [def-weil-finite-integral-morphism]: affine opens in $V$ have the same affine inverse images and finite section-ring maps as for $p$. By [lem-weil-pbc-lfp-affine-opens-finite-presentation] all these affine section-ring maps are finitely presented, so $p_V$ is locally of finite presentation by [def-sbc-locally-finite-presentation]. The restriction $\\mathcal M|_{p^{-1}V}$ is quasi-coherent by its affine-local definition [pqf-def-coherent]. Thus both new global direct-image lemmas apply to $p_V$ and this restriction. Its direct image equals $(p_*\\mathcal M)|_V$: on every open $D\\subseteq V$ both are $\\mathcal M(p^{-1}D)$, with the same structural scalar map. Consequently [lem-trf-finite-pushforward-preserves-finite-presentation] gives the forward finite-presentation implication on these opens, and [lem-trf-finite-pushforward-reflects-finite-presentation] gives the reverse implication.",
    "uses": [
     "def-weil-finite-integral-morphism",
     "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-weil-pbc-pushforward-spec-global-sections"
+    "def-sbc-locally-finite-presentation",
+    "pqf-def-coherent",
+    "lem-trf-finite-pushforward-preserves-finite-presentation",
+    "lem-trf-finite-pushforward-reflects-finite-presentation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 05B4, lemma-finite-finitely-presented-module, affine reduction."
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057T, comparison (2) versus (3); Descent 05B4, lemma-finite-finitely-presented-module."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-quasi-coherent-finite-type-affine](b) on $p^{-1}V$ and on $V$. It identifies finite presentation of $\\mathcal M|_{p^{-1}V}$ with finite presentation of $N$ over $S$, and finite presentation of $(p_*\\mathcal M)|_V$ with finite presentation of the same $N$ over $R$. All hypotheses hold by Step 2. The hypotheses that $S$ is finitely generated as an $R$-module and finitely presented as an $R$-algebra therefore allow [lem-trf-finite-extension-module-finite-presentation] to give\n$$\\mathcal M|_{p^{-1}V}\\text{ is of finite presentation}\\quad\\Longleftrightarrow\\quad(p_*\\mathcal M)|_V\\text{ is of finite presentation}.$$",
-   "uses": [
-    "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "lem-trf-finite-extension-module-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 05B4, lemma-finite-finitely-presented-module, proof using Algebra 0564 and Properties 01PC."
-   }
-  },
-  {
-   "text": "If $\\mathcal M$ is of finite presentation on an open $W\\ni t$, choose $V$ as in Step 1. Its restriction to $p^{-1}V\\subseteq W$ remains of finite presentation, because the local finite-free presentations in [def-weil-pbc-module-finite-type-presentation] restrict to open subsets. Step 3 shows that $p_*\\mathcal M$ is of finite presentation on $V\\ni u$. Conversely, if $p_*\\mathcal M$ is of finite presentation on an open $V_0\\ni u$, choose affine $u\\in V\\subseteq V_0$ by Step 1 (or the affine basis). Step 3 gives finite presentation of $\\mathcal M$ on $p^{-1}V\\ni t$. This proves the neighbourhood equivalence.",
+   "text": "Finite presentation restricts to smaller opens, since its local finite-free presentations in [def-weil-pbc-module-finite-type-presentation] still present the restricted module. If $\\mathcal M$ has finite presentation on $W\\ni t$, choose $V$ as in Step 1 and apply the forward implication of Step 2. If $p_*\\mathcal M$ has finite presentation on $V_0\\ni u$, choose affine $u\\in V\\subseteq V_0$ by Step 1 and apply the reverse implication of Step 2. The inverse image $p^{-1}V$ contains $t$. This proves the neighbourhood equivalence.",
    "uses": [
     "def-weil-pbc-module-finite-type-presentation"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T neighbourhood paragraph, the (2) versus (3) comparison; 05B8(1) shrinking made explicit."
+    "place": "Tag 057T, neighbourhood equivalence; restriction of local presentations."
    }
   },
   {
-   "text": "The map $\\theta:(p_*\\mathcal M)_u\\to\\mathcal M_t$ sends the germ at $u$ of a section $s\\in\\mathcal M(p^{-1}V)$ to its germ at $t$. This is bijective directly from [def-weil-pbc-module-stalk] and Step 1: every germ at $t$ is represented on some $W\\ni t$ and can be restricted to $p^{-1}V\\subseteq W$, proving surjectivity. If two such sections have equal germs at $t$, they agree on a neighbourhood $W\\subseteq p^{-1}(V_1\\cap V_2)$ of $t$; Step 1 gives a neighbourhood $V_3\\subseteq V_1\\cap V_2$ of $u$ with $p^{-1}V_3\\subseteq W$, so their germs at $u$ agree, proving injectivity. If $a\\in\\mathcal O_U(V)$ and $s\\in\\mathcal M(p^{-1}V)$, then $\\theta((a\\cdot s)_u)=(p^\\sharp(a)s)_t=p_t^\\sharp(a_u)\\,\\theta(s_u)$. Hence $\\theta$ is an $\\mathcal O_{U,u}$-linear isomorphism when $\\mathcal M_t$ has its scalar action restricted through $p_t^\\sharp$.",
-   "uses": [
-    "def-weil-pbc-module-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 05B8(4), final proof sentence: alternative proof from (1) and the definition of stalks, written out."
-   }
-  },
-  {
-   "text": "By [lem-trf-finite-singleton-fibre-stalk-ring], the canonical map $p_t^\\sharp:\\mathcal O_{U,u}\\to\\mathcal O_{T,t}$ is finite and finitely presented: $p$ is finite and finitely presented and its fibre over $u$ is exactly $\\{t\\}$, as required. Apply [lem-trf-finite-extension-module-finite-presentation] to this ring map and the $\\mathcal O_{T,t}$-module $\\mathcal M_t$. Its hypotheses hold because $\\mathcal O_{T,t}$ is finitely generated as an $\\mathcal O_{U,u}$-module and finitely presented as an $\\mathcal O_{U,u}$-algebra, and it gives finite presentation over $\\mathcal O_{T,t}$ if and only if finite presentation over $\\mathcal O_{U,u}$. The $\\mathcal O_{U,u}$-linear identification in Step 5 identifies the latter module with $(p_*\\mathcal M)_u$, proving the asserted stalkwise equivalence.",
+   "text": "By [lem-trf-finite-singleton-fibre-stalk-ring], $p_t^\\sharp:\\mathcal O_{U,u}\\to\\mathcal O_{T,t}$ is finite and finitely presented, using exactly the finite, finitely presented and singleton-fibre hypotheses of the item. Apply [lem-trf-finite-extension-module-finite-presentation] to this map and $\\mathcal M_t$: finite presentation over $\\mathcal O_{T,t}$ is equivalent to finite presentation over $\\mathcal O_{U,u}$. Use the linear isomorphism $\\theta$ of Step 1 to replace the latter module by $(p_*\\mathcal M)_u$. Explicitly, compose the final surjection of a finite presentation with $\\theta$ or $\\theta^{-1}$; its kernel stays the same, so exactness and the two finite ranks are unchanged [def-sc-finitely-presented-module].",
    "uses": [
     "lem-trf-finite-singleton-fibre-stalk-ring",
-    "lem-trf-finite-extension-module-finite-presentation"
+    "lem-trf-finite-extension-module-finite-presentation",
+    "def-sc-finitely-presented-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T final stalk paragraph, with the correct references 05B8(2)--(4) and 0564."
+    "place": "Tag 057T, final stalk paragraph; More on Morphisms 05B8(2),(3); Algebra 0564."
    }
   }
  ],
  "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-sc-finitely-presented-module",
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-module-finite-type-presentation",
-  "def-weil-pbc-module-stalk",
   "lem-trf-finite-extension-module-finite-presentation",
+  "lem-trf-finite-pushforward-preserves-finite-presentation",
+  "lem-trf-finite-pushforward-reflects-finite-presentation",
+  "lem-trf-finite-singleton-fibre-localization",
   "lem-trf-finite-singleton-fibre-stalk-ring",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "lem-weil-pbc-finite-closed-map-finite-fibres",
   "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-pushforward-spec-global-sections",
-  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+  "pqf-def-coherent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 057T finite-pushforward portions; expanded using the affine proof of Descent 05B4 and the explicit topological and germ arguments of More on Morphisms 05B8."
+  "place": "Tag 057T, lemma-devissage-finite-presentation: finite-direct-image neighbourhood and stalk comparisons, using Descent 05B4 and More on Morphisms 05B8."
  },
  "mathlib_searches": [
   {
@@ -213,25 +194,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-finite-pushforward-module-finite-presentation",
   "worker": "stage1",
-  "summary": "Split both the neighbourhood and stalk assertions, keeping their full hypotheses. Reused the existing ring-extension module comparison, affine finite-presentation criterion, finite closedness and affine pushforward interfaces. Wrote out singleton-fibre shrinking and the scalar-compatible germ bijection; created only the finite singleton-fibre local-ring lemma (05B8(2)--(3)). Corrected the imported source tags and completed the historical blueprint ancestry. No mathematical statement changed.",
+  "summary": "Repair of L's live-DAG promotion refusal, refreshed 2026-10-23: rebuilt the delivery item from the current read-clone record, overlaying only proof, proof_deps, proof_origin and split_report from the reader-approved re-split. The current live six-step proof equals returned-proof.json; all other fields agree. Re-read all cited current statements and Stacks 057T, 05B4, 05B8, 0564 and 01PC; checked all 12 verbatim citation entries against the current statements. Preserved both statement-only global direct-image directions and their actual logged searches, the original proof allocation, and the four-step assembly of 2767 characters. The initial current-base dry run passed at c29897a14fd; final validation and push follow the refreshed repair report.",
   "blueprint": "Supporting elementary-devissage branch of lem-trf-local-term-locality, proof (1)--(2), through the recorded alteration/flatification ancestry: Stacks 057T neighbourhood comparison of the sheaf with its finite pushforward, and its final stalk comparison.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
-    "why": "Generic affine section criterion for finite presentation of a quasi-coherent module; no node in the trace-formula unit supplies it."
-   },
-   {
-    "node": "lem-weil-pbc-affine-pushforward-base-change",
-    "why": "Only the quasi-coherence of affine direct image in clause (1) is used, a generic scheme-module tool."
-   },
-   {
-    "node": "lem-weil-pbc-pushforward-spec-global-sections",
-    "why": "Generic affine direct-image section and scalar-action identification needed for the restriction-of-scalars comparison."
-   }
-  ]
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-quasi-coherent-finite-type-affine",
@@ -239,12 +207,12 @@
   "lem-weil-pbc-pushforward-spec-global-sections"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-NW-759a69edc",
-  "group": "NW",
+  "reviewer": "NT-cc-Q86-dc5f5dbae",
+  "group": "Q86",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-759a69edc (reviewer sub-agent of L); spot-checked: Read the full item, new node, unit/chapter route, cited DAG statements, and Stacks Tags 057T, 05B4, 05B8, 0564, 01PC, and 00EA. All hypotheses, stalk scalar actions, edge cases, duplicates, searches, and route constraints check out; no repair is needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-dc5f5dbae (reviewer sub-agent of L); spot-checked: This is the 4th push. Compared with the previously PASSed head 475aae06, the item changes only split_report.date and summary, both new nodes are byte-identical, and the report adds one rebase section; it answers L's live-DAG promotion refusal. I re-read all the mathematics. Sources: Flatness 057T (flat.tex:598, (4)<=>(2)<=>(3) via Descent 05B4 and the stalk paragraph via More on Morphisms 05B8 and Algebra 0564), Descent 05B4 (descent.tex:2099, both directions, affine proof via 0564 and 01PC) and 05B8 (more-morphisms.tex:13552, parts 1-4). The item statement is unchanged and matches the source. Step 1: lem-trf-finite-singleton-fibre-localization states both the neighbourhood shrinking (05B8(1)) and the O_{Y,y}-linear germ isomorphism (05B8(4)); the affine-opens-basis leaf refines the open to an affine one. Step 2: p_V is finite (same affine inverse images) and locally fp (lfp-affine-opens holds for any affine pair); quasi-coherence restricts to opens; the restricted direct image agrees sectionwise with the same scalar map. Step 3: presentations restrict to smaller opens; both neighbourhood directions are correct and nothing is inferred from a stalk. Step 4: stalk-ring gives p_t^# finite and fp; the finite-extension-module lemma (0564) applies; transport along theta keeps the kernel. New nodes: preserves and reflects are the two directions of 05B4 with its hypotheses (finite implies qcqs). Both are self-contained, statement-only and unsplit, record five real searches each (no Mathlib match), have empty same_as, and are comparable in size. Neither restates the item: neither has a point, fibre or stalk clause. Every old step is now in a new node (2-3), an existing exact node (1, 5) or the assembly (4, 6); the assembly is 2767 characters. rg -L finds 05B4 only in these nodes and inline in lem-trf-devissage-flattening-transfer step 4, a different statement, so no duplicate. Edge cases checked: zero module, empty inverse image, identity, closed immersion by a finitely generated vs non-finitely-generated ideal (the latter shows the fp hypothesis is needed), several fibre points. No SGA. Advisory, maintainer-owned and unchanged: item source.place names 03C4/0A1H instead of 05B4/05B8; item tool_uses lists three pbc lemmas no longer cited; new nodes lack lean_audit (the tooling fills it). No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FinitePushforwardModuleFinitePresentation",
@@ -264,5 +232,16 @@
   "result": "fix",
   "note": "Statement and dependencies match the source; per-file compilation passed cleanly. Repaired the H11 second-reading placeholder with a complete replacement report under fixes/. Full checks and findings are recorded in review.md; snapshot and branch head unchanged."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,135 @@
+{
+ "id": "def-trf-line-quotient-chart-inverse-data",
+ "kind": "definition",
+ "title": "Normalized quotient sections and fraction-chart comparison predicates",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $\\mathcal E$ a quasi-coherent module [pqf-def-coherent], $A=\\operatorname{Sym}(\\mathcal E)$ its canonical symmetric graded algebra [def-trf-canonical-symmetric-graded-algebra], and $p:P\\to S$ its relative Proj [def-nagata-relative-proj]. Fix a normalized tautological quotient $D=(Q,q_P)$ [def-per-projective-bundle-quotient-data]. Use the section-normalized composite pullback comparison [def-pc-module-pullback]. For $h:T\\to S$, $u:T'\\to T$ and $q:h^*\\mathcal E\\to L$, define $\\operatorname{lineQuotientPullback}(q)$ as the comparison followed by $u^*q$. For a section $m$ over an affine base $U$, define the tautological section as its adjoint image under $q_P$, and its section along $F:T\\to P$ by tensor pullback and restriction. For a frame $l$ on an affine $W$, write $b_m$ for the unique scalar coefficient of $q(m)$ [lem-trf-line-quotient-homogeneous-fraction-map]. Define $\\mathrm{InverseLineChartNormalization}$ to require $\\theta(e_m)=b_m l$ on every smaller open, freeness of $e_m$ when $b_m$ is a unit, the quotient ratio formula for every section $v$, and $e_m=(b_m/b_n)e_n$ when $b_n$ is a unit. Define $\\mathrm{RecoveredQuotientFrame}$ as coefficient one for the pulled tautological frame. Define $\\mathrm{RecoveredFractionCoefficients}$ as $b(c)=a^*(c/e_m^d)$ for every homogeneous $c$ of degree $d$ and every affine factorization through the $e_m$ chart. Define $\\mathrm{QuotientFractionNaturality}$ as equality of homogeneous and generator coefficients after arbitrary pullback, together with a scalar-preserving homomorphism of away localizations carrying each fraction to the fraction of its images. These are predicates, with no asserted existence of $\\theta$ or the fraction comparisons.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA (section-projective-bundle) and 01O4 (lemma-apply-relative); inverse quotient constructions and their arbitrary-pullback compatibility, with the explicit degree-one chart calculations."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "def-nagata-relative-proj",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "lem-trf-line-quotient-homogeneous-fraction-map"
+ ],
+ "proof": [
+  {
+   "text": "The normalized section and composition pullback constructions of [def-pc-module-pullback] define the pulled quotient. Apply adjunction to the quotient datum [def-per-projective-bundle-quotient-data] to define tautological sections, then pull them back and restrict. The remaining predicates are the displayed equations in frames and fraction charts of [lem-trf-line-quotient-homogeneous-fraction-map], with all affine opens and refinements quantified. No existence theorem is invoked to define data.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-per-projective-bundle-quotient-data",
+    "lem-trf-line-quotient-homogeneous-fraction-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-per-projective-bundle-quotient-data",
+  "lem-trf-line-quotient-homogeneous-fraction-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Explicit chart calculation in Tags 01OA and 01O4, expanded in the Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a line quotient normalized by tensor pullback composition with tautological generator frame coefficients",
+   "results": "{\"t\": \"2026-10-23T12:05:01Z\", \"tool\": \"leansearch\", \"query\": \"Pullback of a line quotient normalized by tensor pullback composition with tautological generator frame coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Bundle.Pullback\", \"VectorField.mpullback\", \"VectorField.mpullback_smul_apply\", \"VectorField.mpullbackWithin_comp_of_left\", \"lTensor.inverse_comp_lTensor\", \"VectorField.mpullbackWithin_comp_of_right\", \"VectorBundle.pullback\", \"IsLocalFrameOn.coeff\"], \"digest\": \"3dbf0ae256523239\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a line quotient normalized by tensor pullback composition with tautological generator frame coefficients",
+   "results": "{\"t\": \"2026-10-23T12:05:06Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback of a line quotient normalized by tensor pullback composition with tautological generator frame coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_snd\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.fst_SpecTensorTo_apply\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_base_fst\"], \"digest\": \"ca9c5cedc2bd7333\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern absolute Proj charts, vector-space projectivization or general quotient modules; none states this normalized relative quotient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator",
+   "results": "{\"t\": \"2026-10-23T12:24:25Z\", \"tool\": \"grep\", \"query\": \"HasQuotientFractionCharts|ExtendsLineQuotient|quotientCoefficient|lineQuotient|tautologicalGenerator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: zero occurrences in Mathlib; these fraction-chart predicates are project declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LineQuotientChartInversePullback",
+  "date": "2026-10-23",
+  "group": "G3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical ancestor lem-trf-local-term-locality, proof (1)--(2), specialization-to-the-normal-cone route: the fibrewise-ampleness/projectivity tool in lem-trf-proper-fibrewise-ample-projective, Step 4. This prerequisite supplies the projective-bundle quotient geometry used to construct the canonical evaluation immersion in the proof of 01VR, not a new claim about local terms. Re-split of lem-trf-projective-bundle-quotient-geometry, old steps 7--8 and arbitrary-pullback part of step 9. Intermediate Normalized quotient sections and fraction-chart comparison predicates.",
+   "via": [
+    "lem-trf-line-quotient-chart-inverse-pullback",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LineQuotientChartInverseData",
+  "file": "lean/Sheaf/AlgebraicGeometry/LineQuotientChartInverseData.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.lineQuotientPullback",
+  "statement": "def lineQuotientPullback {S T T' : Scheme.{u}} (h : T ⟶ S) (u : T' ⟶ T) (E : S.Modules) (L : T.Modules) (q : (tensorPullback h).obj E ⟶ L) : (tensorPullback (u ≫ h)).obj E ⟶ (tensorPullback u).obj L",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-23",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.lineQuotientPullback",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.tautologicalGenerator",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.pulledTautologicalGenerator",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.InverseLineChartNormalization",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.RecoveredQuotientFrame",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.RecoveredFractionCoefficients",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.QuotientFractionNaturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-c58e7",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185801-L-3673567",
+  "kind": "interface",
+  "note": "independent cc review: c58e7f70 vs prior af9d4180 files (diff -r: only helper removal → invertible_pullback_tensor, node cite lem-weil-pbc-invertible-pullback-tensor, report text) and vs live clone (7 defs verbatim, theorem statement identical); 3 sorry halves checked against HasQuotientFractionCharts/ExtendsLineQuotient/pulledQuotient; 6 delivered modules + importers ProjectiveBundleQuotientGeometry, ProjectiveBundleRelativeAmple compiled rc 0; #print axioms item (sorryAx from declared halves) and iso_charts (clean)"
+ }
+}

@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-integral-orbit-affine-descent",
+ "kind": "statement",
+ "title": "Invariant affine neighbourhoods descend along integral orbit covers",
+ "statement": "Let $(U,R,s,t,e,i,c)$ be a groupoid scheme [def-a1-groupoid-scheme]. Assume $s,t$ are integral [def-weil-finite-integral-morphism]. Let $a:T\\to U$ be integral and assume every $R$-orbit meets $a(T)$, where the $R$-orbit of $u\\in U$ is the set $t(s^{-1}(\\{u\\}))$ of targets of points $r\\in R$ with $s(r)=u$. For a morphism $a:T\\to U$, the restricted groupoid has object scheme $T$ and arrow scheme $T\\times_{a,U,s}R\\times_{t,U,a}T$ [def-pc-fibre-product], with induced source, target and groupoid operations. If $x\\in T$ lies in an affine open $V\\subseteq T$ with $s_T^{-1}(V)=t_T^{-1}(V)$ as open subschemes, then $a(x)$ lies in an affine open $W\\subseteq U$ with $s^{-1}(W)=t^{-1}(W)$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABE (lemma-find-affine-integral), statement."
+ },
+ "stmt_deps": [
+  "def-a1-groupoid-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "First record the point-lifting consequence of the cited statements. Given scheme points $y,z$ with the same image $b$, the ring $\\kappa(y)\\otimes_{\\kappa(b)}\\kappa(z)$ is nontrivial by the field-tensor lemma, so it has a maximal prime ideal by the maximal-ideal lemma. The fibre-product-points lemma therefore supplies a point of the fibre product projecting to exactly $y,z$. We use this consequence repeatedly, including for iterated fibre products.",
+   "uses": [
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABE, lemma-find-affine-integral, proof; pointwise lifting needed for the set-theoretic assertions labelled details omitted; auxiliary Tag 01JT (schemes.tex, lemma-points-fibre-product)."
+   }
+  },
+  {
+   "text": "Write $u\\sim v$ when some $r\\in R$ has $s(r)=u,t(r)=v$. This is an equivalence relation: $e$ gives reflexivity, $i$ symmetry, and for arrows from $u$ to $v$ and from $v$ to $w$, Step 1 lifts their two points to the composition fibre product, where $c$ gives an arrow from $u$ to $w$. Similarly, $y\\sim_T z$ holds exactly when $a(y)\\sim a(z)$: projection gives one implication; for the other, lift the witnessing arrow together with $y,z$ successively by Step 1 to $T\\times_{a,U,s}R\\times_{t,U,a}T$. Thus the assumed equality of inverse images of $V$ says that $V$ contains every $\\sim_T$-equivalence class which meets it.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABE, lemma-find-affine-integral, proof; details omitted: groupoid laws and the restricted groupoid; composition and two successive point lifts."
+   }
+  },
+  {
+   "text": "Put $P=T\\times_{a,U,t}R$, with $p:P\\to T$, $q:P\\to R$, and $h=s\\circ q:P\\to U$. The map $p$ is the base change of the integral map $t$ and $q$ is the base change of the integral map $a$. Hence $p,q$ are integral, and composition with the integral map $s$ makes $h$ integral. Set $\\widetilde V=p^{-1}(V)$. Integral morphisms are affine by definition, so the affine-open inverse-image clause applied to $p$ shows that $\\widetilde V$ is affine.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-finite-integral-morphism",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABE, lemma-find-affine-integral, proof; first three sentences: construction of tilde R and integrality of the projections and h."
+   }
+  },
+  {
+   "text": "Set $W=h(\\widetilde V)\\subseteq|U|$. By Step 1, $u\\in W$ is equivalent to $u\\sim a(v)$ for some $v\\in V$. Consequently $W$ is a union of $R$-orbits by Step 2. We prove $h^{-1}(W)=\\widetilde V$. The inclusion from right to left is the definition of $W$. If $z\\in P$ and $h(z)\\in W$, choose $v\\in V$ with $h(z)\\sim a(v)$. The arrow $q(z)$ gives $h(z)\\sim a(p(z))$, hence $a(p(z))\\sim a(v)$. Step 2 gives $p(z)\\sim_T v$, so invariance of $V$ implies $p(z)\\in V$, or $z\\in\\widetilde V$. Also $a(x)\\in W$ since $x\\in V$ and $a(x)\\sim a(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABE, lemma-find-affine-integral, proof; details omitted: W is invariant and tilde W is the full inverse image of W; membership of the requested point."
+   }
+  },
+  {
+   "text": "The map $h$ is surjective: for any $u\\in U$, choose $y\\in T$ with $a(y)$ in the orbit $t(s^{-1}(\\{u\\}))$. By definition of the orbit there is an arrow with source $u$ and target $a(y)$; Step 1 lifts it and $y$ to $P$. Its image under $h$ is $u$. Since $h$ is integral, it is universally closed by the cited characterization, hence closed by the definition, using the identity base change. Step 4 and surjectivity give $U\\setminus W=h(P\\setminus\\widetilde V)$. The latter is closed because $\\widetilde V$ is open and $h$ is closed. Therefore $W$ is open; give it its open subscheme structure.",
+   "uses": [
+    "pqf-lem-integral-univclosed",
+    "def-weil-proper-morphism",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABE, lemma-find-affine-integral, proof; last three sentences: orbit-surjectivity, closedness of integral morphisms (Tag 01WM), and quotient-topology argument, here written via complements."
+   }
+  },
+  {
+   "text": "The inverse image of the open subscheme $W$ under $h$ is exactly $\\widetilde V$ by Step 4. Thus $\\widetilde V\\to W$ is the base change of $h$ along $W\\hookrightarrow U$, and is integral and surjective. Its source is affine by Step 3, so the cited affine-target theorem implies that $W$ is affine. Since $W$ is a union of the equivalence classes of Step 2, for every $r\\in R$ one has $s(r)\\in W$ if and only if $t(r)\\in W$. The inverse-image open subschemes therefore agree: $s^{-1}(W)=t^{-1}(W)$. Together with $a(x)\\in W$ from Step 4 this is the conclusion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sbc-integral-morphism-base-change",
+    "lem-weil-pbc-surjective-universally-closed-affine-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0ABE, lemma-find-affine-integral, proof; middle of proof: integral-surjective affine descent, Tag 05YU (limits.tex, proposition-affine), and final invariant neighbourhood."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-pbc-fibre-product-points",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism",
+  "pqf-lem-integral-univclosed",
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0ABE, lemma-find-affine-integral; the omitted pointwise details are expanded using Tag 01JT and the groupoid laws, and submersiveness is proved directly by the closed-complement argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an integral morphism meeting every orbit of an integral scheme groupoid, invariant affine neighbourhoods descend from the restricted groupoid",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineOpenCover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↑X.toTopCat), X.affineOpenCover.X x = Classical.choose ⋯\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, the $X$-component of the affine open cover at $x$ is the affine open neighborhood selected by the classical choice function, e\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"If $ f : X \\\\to Y $ is an integral morphism of schemes and $ U \\\\subseteq Y $ is an affine open subset, then the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism on the sections $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X] {U : X.Opens} [Nonempty ↥↑U],\\n  AlgebraicGeometry.IsIntegral ↑U\", \"doc\": \"Every non-empty open subset $ U $ of an integral scheme $ X $ is itself an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.isIntegralHom_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsIntegralHom f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any schemes $X$ and $Y$ and a morphism $f : X \\to Y$, $f$ is an integral morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the induced ring homomorphism\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_global\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : {X : AlgebraicGeometry.Scheme} → X.Opens → Prop) {X : AlgebraicGeometry.Scheme} (U : X.Opens),\\n  (∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (∀ (x : ↥U), ∃ V, ∃ (_ : ↑x ∈ V), ∃ x, P V) → P U) →\\n    (∀ (X Y : AlgebraicGeometry.Scheme) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion \", \"doc\": \"If a property $P$ of open subsets of schemes satisfies: (1) local verification on affine opens, (2) compatibility with open immersions, and (3) holds for the maximal open subset of affine schemes, the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invariant affine open for a groupoid pulls down along an integral orbit-surjective map to an invariant affine neighbourhood",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : Scheme} {U : Y.Opens} (hU : IsAffineOpen U) (f : X ⟶ Y) [IsAffineHom f] : IsAffineOpen (f ⁻¹ᵁ U)\", \"doc\": \"Let $ f : X \\\\to Y $ be an affine morphism of schemes, and let $ U \\\\subseteq Y $ be an affine open subset. Then the preimage $ f^{-1}(U) \\\\subseteq X $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Y) [H : IsOpenImmersion f] {U : X.Opens} : IsAffineOpen (f ''ᵁ U) ↔ IsAffineOpen U\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes and an open subset $ U $ of $ X $, the image $ f(U) $ is an affine open subset of $ Y $ if and only if $ U $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.isAffine_preimage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsAffineHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"Let $f : X \\\\to Y$ be an affine morphism of schemes, and let $U \\\\subseteq Y$ be an affine open subset. Then the preimage $f^{-1}(U) \\\\subseteq X$ is also an affine open subset of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.preimage_of_isIso\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{U : Y.Opens} (hU : IsAffineOpen U) (f : X ⟶ Y) [IsIso f] : IsAffineOpen (f ⁻¹ᵁ U)\", \"doc\": \"If $ U $ is an affine open subset of a scheme $ Y $ and $ f : X \\to Y $ is an isomorphism of schemes, then the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv_apply_coe_coe\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] (U : ↑X.affineOpens),\\n  ↑↑((AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv f) U) = (AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj ↑U\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes and any affine open subset $ U $ of $ X $, the image of $ U $ under the equivalence of affine open subsets induced by $ f $ coincides with the image of $\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.affineOpensEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Y) [H : IsOpenImmersion f] : X.affineOpens ≃o { U : Y.affineOpens // U ≤ f.opensRange }\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, the induced map establishes an order-preserving equivalence between the poset of affine open subsets of $ X $ and the poset of affine open subsets conta\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{U : Y.Opens} (hU : IsAffineOpen U) (f : X ⟶ Y) [IsOpenImmersion f] (hU' : U ≤ f.opensRange) : IsAffineOpen (f ⁻¹ᵁ U)\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, if $ U $ is an affine open subset of $ Y $ contained within the image of $ f $, then the preimage $ f^{-1}(U) $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Y) [H : IsOpenImmersion f] : IsAffineOpen (f ''ᵁ U)\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes, if $ U $ is an affine open subset of $ X $, then the image $ f(U) $ is an affine open subset of $ Y $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"IsIntegral\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*integral|integral.*groupoid",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned signatures do not state this lemma or a one-line generalization; scheme affine-open and immersion facts alone do not supply the groupoid construction or this affineness criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*integral|integral.*groupoid",
+   "results": "{\"t\": \"2026-10-23T09:41:39Z\", \"tool\": \"grep\", \"query\": \"groupoid.*integral|integral.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine covers, integrality and affine morphisms, not invariant neighbourhood descent for an arbitrary internal scheme groupoid."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral surjective scheme groupoid invariant affine open neighbourhood descent",
+   "results": "{\"t\": \"2026-10-23T09:41:39Z\", \"tool\": \"leansearch\", \"query\": \"Integral surjective scheme groupoid invariant affine open neighbourhood descent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.isIntegralHom_iff\", \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.casesOn\", \"AlgebraicGeometry.IsIntegralHom.mk\", \"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\"], \"digest\": \"7d94db4276a27ba7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine covers, integrality and affine morphisms, not invariant neighbourhood descent for an arbitrary internal scheme groupoid."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegralHom\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-23T09:41:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegralHom\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.toIsAffineHom\", \"AlgebraicGeometry.IsIntegralHom.iff_universallyClosed_and_isAffineHom\", \"AlgebraicGeometry.IsIntegralHom.eq_universallyClosed_inf_isAffineHom\"], \"digest\": \"2510123f8ec1fbc9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine covers, integrality and affine morphisms, not invariant neighbourhood descent for an arbitrary internal scheme groupoid."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant affine neighbourhood descends along an integral morphism meeting every orbit of a scheme groupoid",
+   "results": "{\"t\": \"2026-10-23T09:41:50Z\", \"tool\": \"leanfinder\", \"query\": \"Invariant affine neighbourhood descends along an integral morphism meeting every orbit of a scheme groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.Hom.isIntegral_app\", \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"AlgebraicGeometry.IsIntegralHom.isIntegral_app\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\"], \"digest\": \"d94389108d7815cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern affine covers, integrality and affine morphisms, not invariant neighbourhood descent for an arbitrary internal scheme groupoid."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the invariant affine neighbourhood W in the second paragraph of the proof of Tag 0ADD. Proof of Tag 0ABI: lemma-find-affine-integral.",
+   "via": [
+    "lem-sfb-finite-groupoid-codimension-one-invariant-affine",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-integral-orbit-affine-descent",
+  "worker": "stage1",
+  "summary": "Read Tag 0ABE and the sources of all cited statements. Expanded the omitted orbit and saturation arguments with explicit lifting of fibre-product points. Reused all auxiliary nodes; no new nodes or statement changes. Mathlib and project searches found no attachment.",
+  "blueprint": "The existing inherited path serves det-thm-sf-ctf-stability-direct-images (3), through the marked alteration and finite-groupoid codimension-one neighbourhood prerequisites: this split realizes exactly the invocation of Tag 0ABE in Tag 0ABI. The ancestor utility reports no imported blueprint ancestor (from.node remains null); current latest direct-images proof (3) was read and contains no separate equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-affine-target",
+    "why": "Generic Tag 05YU affine-descent theorem, expressly invoked by Tag 0ABE. No node in this unit supplies that general affineness theorem; this is the source route, not an alternative to it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-universally-closed-affine-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-95280fc63",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-95280fc63 (reviewer sub-agent of L); spot-checked: Read Stacks 0ABE (more-groupoids.tex:2670-2698) in full. Statement and stmt_deps are unchanged and match the source hypothesis by hypothesis. Six steps checked against every cited statement. Step 1: residue-field tensor nontrivial → maximal ideal → 01JT point, all Mathlib leaves. Step 2: e/i/c give an equivalence relation; I checked the order sc=s pr_1, tc=t pr_0 on the lift of (r2,r1); the restricted relation follows by two lifts and V is saturated. Step 3: p and q are base changes of t and a (01WL), h integral by 01WK clause (e), Ṽ affine because p is affine. Step 4: W=h(Ṽ) is saturated and h^{-1}(W)=Ṽ by a correct point chase (the source's omitted details). Step 5: h is surjective via orbit arrows, integral ⇒ closed (01WM), U∖W=h(P∖Ṽ) is closed. Step 6: Ṽ→W is integral surjective with affine source, so W is affine by 05YU, and s^{-1}W=t^{-1}W. Edge cases checked: identity a, trivial groupoid, non-surjective a, empty schemes, nonreduced schemes. Duplicates checked: lem-pd-descent-orbit-saturated (transport descent only), lem-sfb-locally-free-groupoid-invariant-affine, lem-a1-affine-groupoid-orbit-fibres; none applies. The parent uses the item as stated. Tool use lem-weil-pbc-surjective-universally-closed-affine-target (sk-thm-p1, generic Tag 05YU, invoked by 0ABE itself) is accepted. FIX (B2/B3): 'R-orbit' was undefined in the statement. I added the Stacks definition (more-groupoids.tex:2532), t(s^{-1}({u})), which is the parent's O(u). This is a clarification only. Step 5 is reworded to use it directly. Corrected item JSON is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralOrbitAffineDescent",
+  "declaration": "AlgebraicGeometry.integral_orbit_affine_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralOrbitAffineDescent.lean",
+  "statement": "theorem integral_orbit_affine_descent {U R T : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (hG : IsGroupoidScheme s t e i c) [IsIntegralHom s] [IsIntegralHom t] (a : T ⟶ U) [IsIntegralHom a] (horbit : ∀ u : U, ∃ y : T, ∃ r : R, s r = u ∧ t r = a y) (x : T) (V : T.Opens) (hxV : x ∈ V) (hV : IsAffineOpen V) (hVinvar : (pullback.fst (pullback.snd a s ≫ t) a ≫ pullback.fst a s) ⁻¹ᵁ V = (pullback.snd (pullback.snd a s ≫ t) a) ⁻¹ᵁ V) : ∃ W : U.Opens, IsAffineOpen W ∧ a x ∈ W ∧ s ⁻¹ᵁ W = t ⁻¹ᵁ W",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57c6ca013",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Read node, Stacks 0ABE (more-groupoids.tex:2668-2698) and definition-restrict-groupoid, IsGroupoidScheme (12 fields, c : pullback s t, single universe u), IsIntegralHom and pullback records. Clause audit: s,t,a IsIntegralHom only; orbit condition ∀u ∃y r, s r = u ∧ t r = a y exact (a not forced surjective); restricted arrows pullback (pullback.snd a s ≫ t) a with source fst≫fst (first T coord) and target snd (last); x∈V affine with equal preimages; conclusion ∃ W affine, a x ∈ W, s⁻¹W = t⁻¹W. Edge cases: empty T/U, identity a, trivial groupoid. Node diff vs side-live: only the lean field; statement verbatim. Only `by sorry`, no defs, docstrings with source place, blueprint tag and the six proof steps; both report sections present. No existing statement found. Maintainer note: def-sfb-restricted-groupoid-relation (Over S restrictedEtaleRelation) is the relative version of the inline pullback; the item does not cite it and introduces no duplicate declaration. Not re-compiled per instructions; no files changed."
+ }
+}

@@ -1,0 +1,301 @@
+{
+ "id": "lem-trf-normalized-curve-branch-coordinates",
+ "kind": "statement",
+ "title": "Power-series coordinates on the actual normalized curve branches",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], $X$ a reduced finite-type $k$-scheme of pure dimension one [def-pc-reduced-scheme, def-weil-finite-type-morphism, def-weil-pure-dimension], $x$ a closed point, and $\\nu:X^\\nu\\to X$ its componentwise normalization [def-weil-pbc-reduced-normalization]. Enumerate the distinct points of its fibre as $y_1,\\ldots,y_b$, with $1\\le b<\\infty$. Put $A=\\mathcal O_{X,x}$, $B=(\\nu_*\\mathcal O_{X^\\nu})_x$, $H=\\varprojlim_n A/\\mathfrak m_A^n$, $C=\\varprojlim_n B/\\mathfrak m_A^n B$, and $R_i=\\varprojlim_n\\mathcal O_{X^\\nu,y_i}/\\mathfrak m_{y_i}^n$ [def-weil-pbc-adic-completion]. Each $\\mathcal O_{X^\\nu,y_i}$ and each $R_i$ is a discrete valuation ring, meaning a local principal ideal domain which is not a field; $R_i$ is complete for its maximal ideal [def-weil-pbc-adically-complete-ring], and its residue field is $k$ by the structural map. There is a canonical $H$-algebra isomorphism $C\\cong\\prod_{i=1}^b R_i$. For every choice of generators $t_i$ of the maximal ideals of $R_i$, evaluation with the structural coefficients and $T_i\\mapsto t_i$ gives a $k$-algebra isomorphism $k[[T_i]]\\cong R_i$ [def-weil-pbc-multivariate-power-series]. These maps identify $C$ with $D=\\prod_{i=1}^b k[[T_i]]$. For every $h\\in H$, all constant coefficients of its images in these factors are equal to its residue in $H/\\mathfrak m_H=k$. In particular the image of $H$ under the constant-coefficient map $D\\to k^b$ is exactly the diagonal copy of $k$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), (8), and proof of Tag 0C3V (lemma-normalization-same-after-completion); algebra.tex Tag 07N9 (lemma-completion-finite-extension) and Tag 0C0S (lemma-regular-complete-containing-coefficient-field), clause (2). Agent refinement preserving the actual fibre indices and structural residue maps."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-curve-delta-completion-data] to the given $k,X,x,\\nu$. It gives the finite nonempty fibre of closed points with structural residue fields $k$, the reduced Noetherian local ring $A$ of dimension one, its structural residue field $k$, and the finite integral closure $A\\hookrightarrow B\\subset Q(A)$. It also identifies the specified inverse-limit ring $C$ canonically with $B\\otimes_A H$ and makes $H$ complete local with structural residue field $k$. Thus the displayed enumeration of distinct fibre points is legitimate and $1\\le b<\\infty$.",
+   "uses": [
+    "lem-trf-curve-delta-completion-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R (lemma-prepare-delta-invariant), (1), (3), (6), (7); finite fibres and residue fields in Tag 0C45 (lemma-normalize-noetherian-dim-1)."
+   }
+  },
+  {
+   "text": "The field $k$ is excellent by [lem-exc-fields-excellent]. The essentially finite-type presentation of $A$ in Step 1 expresses it as a localization of a finite-type $k$-algebra, so [lem-exc-finite-type-localization-excellent] makes $A$ excellent. By [def-exc-excellent-ring] it is quasi-excellent; [lem-exc-quasi-excellent-nagata] therefore makes $A$ Nagata. This verifies the extra hypothesis needed for the algebraic DVR-branch statement below, without assuming that reducedness alone suffices for arbitrary completions.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-exc-quasi-excellent-nagata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QW (proposition-ubiquity-excellent), (1); 07QU (lemma-finite-type-over-excellent); 07QV (lemma-quasi-excellent-nagata)."
+   }
+  },
+  {
+   "text": "Choose an affine neighbourhood $U=\\operatorname{Spec}R$ of $x$, with point $\\mathfrak p$. By [lem-trf-normalization-affine-stalk-closure], $\\nu^{-1}U=\\operatorname{Spec}T$, $A=R_{\\mathfrak p}$ and $B=(R\\setminus\\mathfrak p)^{-1}T$, compatibly with structural maps. Points $y_i$ correspond to primes $Q_i\\subset T$ contracting to $\\mathfrak p$. By [lem-weil-pbc-localization-spectrum-embedding], extension and contraction give exactly the primes $\\mathfrak q_i\\subset B$ over $\\mathfrak m_A$. Indeed a prime over $\\mathfrak m_A$ contracts to $\\mathfrak p$ in $R$, and conversely a prime over $\\mathfrak p$ is disjoint from $R\\setminus\\mathfrak p$. By [lem-weil-pbc-affine-open-stalk-localization], $\\mathcal O_{X^\\nu,y_i}=T_{Q_i}$. Its canonical identification with $B_{\\mathfrak q_i}$ is explicit: the map $T\\to T_{Q_i}$ inverts $R\\setminus\\mathfrak p$, then every element of $B\\setminus\\mathfrak q_i$, giving $B_{\\mathfrak q_i}\\to T_{Q_i}$. Conversely $T\\to B_{\\mathfrak q_i}$ inverts $T\\setminus Q_i$, giving the inverse. The two composites fix $T$ and its inverted elements, hence are identities. They fix $R$, so identify the local structural maps from $A$, not just abstract rings.",
+   "uses": [
+    "lem-trf-normalization-affine-stalk-closure",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C3B (lemma-stalk-normalization) and Tag 0CDV (lemma-normalization-in-terms-of-components); schemes.tex Tag 01HV (lemma-spec-sheaves); algebra.tex Tag 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nagata-normalization-dvr-branches] to the reduced local Nagata ring $A$ of dimension one and its integral closure $B$. It gives that each $B_{\\mathfrak q_i}$ is a DVR, hence so is the actual local ring $\\mathcal O_{X^\\nu,y_i}$ of Step 3. Now [lem-trf-finite-dvr-branch-completion] applies: $A$ is Noetherian local of dimension one, $A\\hookrightarrow B$ is finite and injective, and every prime over $\\mathfrak m_A$ is one of the $\\mathfrak q_i$. The isomorphism is induced by the completed local maps $H\\to\\widehat{B_{\\mathfrak q_i}}$, as specified in [lem-weil-pbc-completion-finite-extension]. Together with Step 1 it gives $C=B\\otimes_A H\\cong\\prod_i\\widehat{B_{\\mathfrak q_i}}=\\prod_i R_i$, and each $R_i$ is a DVR. The last equality is induced by the local isomorphisms in Step 3 on every maximal-ideal quotient. Thus these are exactly the specified factors, indexed by the actual points $y_i$.",
+   "uses": [
+    "lem-trf-nagata-normalization-dvr-branches",
+    "lem-trf-finite-dvr-branch-completion",
+    "lem-weil-pbc-completion-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3V (lemma-normalization-same-after-completion), last paragraph; algebra.tex Tag 07N9 (lemma-completion-finite-extension); more-algebra.tex Tag 0AP1 (lemma-completion-dvr)."
+   }
+  },
+  {
+   "text": "Write $L_i=\\mathcal O_{X^\\nu,y_i}$ and $\\mathfrak n_i=\\mathfrak m_{y_i}$. By [def-sc-discrete-valuation-ring], a DVR is equivalently a Noetherian local domain with nonzero principal maximal ideal, so $\\mathfrak n_i$ is finitely generated. Apply [lem-weil-pbc-local-completion-local-ring]: the maximal ideal of $R_i$ is $\\mathfrak n_iR_i$, the kernel of its first projection, and the structural completion map identifies its residue field with $L_i/\\mathfrak n_i$. By Step 1 the latter is $k$ via the structural map. Apply [lem-weil-pbc-module-completion-complete] to $L_i$, $I=\\mathfrak n_i$, $M=L_i$. It makes $R_i$ complete for the extended ideal $\\mathfrak n_iR_i$, hence for its own maximal ideal. Powers of that extended ideal equal the extended powers because both are generated by the corresponding products of generators.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 05GG (lemma-hathat-finitely-generated), (1), and 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "For each $i$, [lem-sc-dvr-dimension-one] gives $\\dim R_i=1$. The Noetherian characterization in [def-sc-discrete-valuation-ring] and a generator $t_i$ of its maximal ideal show from [def-weil-regular-scheme] that $R_i$ is regular local: the maximal ideal has one generator, precisely its dimension. Step 5 gives completeness and the specified coefficient map $k\\to R_i$ inducing the residue isomorphism. Apply [lem-trf-regular-complete-coefficient-coordinates] with $d=1$ and this particular generator $t_i$. It gives the $k$-algebra isomorphism $e_i:k[[T_i]]\\xrightarrow{\\sim}R_i$ using structural coefficients and $e_i(T_i)=t_i$. Taking the product and composing its inverse with Step 4 identifies $C$ with $D=\\prod_i k[[T_i]]$ as claimed. This works for every choice of the generators.",
+   "uses": [
+    "lem-sc-dvr-dimension-one",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-regular-scheme",
+    "lem-trf-regular-complete-coefficient-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD (lemma-characterize-dvr), equivalence with regular local of dimension one; Tag 0C0S (lemma-regular-complete-containing-coefficient-field), (2) and its proof with prescribed parameters."
+   }
+  },
+  {
+   "text": "Fix $h=(h_n)_n\\in H$. The $i$th structural map $H\\to R_i$ is the completed local map from $A\\to L_i$ in Step 4. Its first projection is the map $A/\\mathfrak m_A\\to L_i/\\mathfrak n_i$ applied to $h_1$: this follows componentwise from [def-weil-pbc-adic-completion], since $\\mathfrak m_A^n$ maps into $\\mathfrak n_i^n$. Both residue maps identify the structural field $k$ with the residue field, so this residue map is the identity on $k$. If $f=e_i^{-1}(h|_{R_i})$, write $f=a_0+T_i g$ by shifting its coefficient sequence [def-weil-pbc-multivariate-power-series]. Then $e_i(f)=c_i(a_0)+t_i e_i(g)$, so its residue is exactly $a_0$. Thus every constant coefficient is the residue $h_1\\in k$, which is also the residue of $h$ in $H/\\mathfrak m_H$ by Step 1. The image lies in the diagonal. Conversely, the structural image in $H$ of any $a\\in k$ maps to the constant series $a$ in every factor because each $e_i$ is a $k$-algebra map. Every diagonal tuple therefore occurs, proving equality with the diagonal copy of $k$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07N9 (lemma-completion-finite-extension), compatibility of completed local maps; Tag 0C0S (lemma-regular-complete-containing-coefficient-field), (2); elementary first-projection and constant-coefficient calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-curve-delta-completion-data",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-trf-normalization-affine-stalk-closure",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-trf-nagata-normalization-dvr-branches",
+  "lem-trf-finite-dvr-branch-completion",
+  "lem-weil-pbc-completion-finite-extension",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-sc-dvr-dimension-one",
+  "def-weil-regular-scheme",
+  "lem-trf-regular-complete-coefficient-coordinates",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly of Tags 0C1R (lemma-prepare-delta-invariant), 0C3V (lemma-normalization-same-after-completion), 07N9 (lemma-completion-finite-extension, algebra.tex), and 0C0S (lemma-regular-complete-containing-coefficient-field, algebra.tex), retaining actual fibre indices and structural residue maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "powerSeries.*[Ee]quiv|[Ee]quiv.*powerSeries|completion.*[Pp]rod|[Pp]rod.*completion",
+   "results": "{\"t\": \"2026-10-22T06:07:08Z\", \"tool\": \"grep\", \"query\": \"powerSeries.*[Ee]quiv|[Ee]quiv.*powerSeries|completion.*[Pp]rod|[Pp]rod.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Evaluation.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\", \"Mathlib/RingTheory/PowerSeries/Substitution.lean\"], \"digest\": \"ad89ffcdf8283258\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) gives a DVR for a power-series ring, not coordinates on an arbitrary normalized curve branch. LaurentSeries.powerSeriesAlgEquiv concerns a rational-function valuation completion, not these branches; Weierstrass preparation and renaming do not give the required product with structural residue maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completion of finite normalization algebra is product of completed DVR local rings each isomorphic to formal power series over the residue field",
+   "results": "{\"t\": \"2026-10-22T06:07:08Z\", \"tool\": \"leansearch\", \"query\": \"Completion of finite normalization algebra is product of completed DVR local rings each isomorphic to formal power series over the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNonarchimedeanLocalField.instCompleteSpace\", \"UniformSpace.Completion.instNormedAlgebra\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.LaurentSeriesAlgEquiv\", \"PowerSeries.instIsDiscreteValuationRing\", \"LaurentSeries.powerSeriesRingEquiv\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\"], \"digest\": \"41912990f93f5364\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) gives a DVR for a power-series ring, not coordinates on an arbitrary normalized curve branch. LaurentSeries.powerSeriesAlgEquiv concerns a rational-function valuation completion, not these branches; Weierstrass preparation and renaming do not give the required product with structural residue maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-22T06:07:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PowerSeries.instIsDiscreteValuationRing\"], \"digest\": \"9a2e5e0ffa9348cf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) gives a DVR for a power-series ring, not coordinates on an arbitrary normalized curve branch. LaurentSeries.powerSeriesAlgEquiv concerns a rational-function valuation completion, not these branches; Weierstrass preparation and renaming do not give the required product with structural residue maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed local branches of normalization of a reduced curve over an algebraically closed field are power series rings and have the structural residue maps",
+   "results": "{\"t\": \"2026-10-22T06:07:19Z\", \"tool\": \"leanfinder\", \"query\": \"Completed local branches of normalization of a reduced curve over an algebraically closed field are power series rings and have the structural residue maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.reduction\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.weierstrassMod\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassFactorization.unique\", \"PowerSeries.weierstrassUnit\"], \"digest\": \"55596de9622c372d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) gives a DVR for a power-series ring, not coordinates on an arbitrary normalized curve branch. LaurentSeries.powerSeriesAlgEquiv concerns a rational-function valuation completion, not these branches; Weierstrass preparation and renaming do not give the required product with structural residue maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of the normalization of a reduced algebraic curve at a closed point is the product of power series rings over the algebraically closed base field",
+   "results": "{\"t\": \"2026-10-23T09:39:13Z\", \"tool\": \"leanfinder\", \"query\": \"The completion of the normalization of a reduced algebraic curve at a closed point is the product of power series rings over the algebraically closed base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.adicCompletion\", \"WeierstrassCurve.Affine.FunctionField\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"LaurentSeries.RatFuncAdicCompl\", \"PowerSeries.algEquivQuotientWeierstrassDistinguished\"], \"digest\": \"9e303ced9587834c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits. MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) concerns the variable-ideal completion of a polynomial ring; LaurentSeries.powerSeriesAlgEquiv (Mathlib/RingTheory/LaurentSeries.lean:1212) concerns the unit ball of the X-adic completion of k(X); PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) concerns the source power-series ring. None provides arbitrary normalized curve branches or the finite product and structural residue compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "powerSeries.*[Ee]quiv|[Ee]quiv.*powerSeries|completion.*[Pp]rod|[Pp]rod.*completion",
+   "results": "{\"t\": \"2026-10-23T09:41:56Z\", \"tool\": \"grep\", \"query\": \"powerSeries.*[Ee]quiv|[Ee]quiv.*powerSeries|completion.*[Pp]rod|[Pp]rod.*completion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean\"], \"digest\": \"68b616db83340ccc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits. MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) concerns the variable-ideal completion of a polynomial ring; LaurentSeries.powerSeriesAlgEquiv (Mathlib/RingTheory/LaurentSeries.lean:1212) concerns the unit ball of the X-adic completion of k(X); PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) concerns the source power-series ring. None provides arbitrary normalized curve branches or the finite product and structural residue compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a reduced curve over an algebraically closed field the completed normalization is a finite product of formal power series rings in one variable with diagonal residue map",
+   "results": "{\"t\": \"2026-10-23T09:41:56Z\", \"tool\": \"leansearch\", \"query\": \"For a reduced curve over an algebraically closed field the completed normalization is a finite product of formal power series rings in one variable with diagonal residue map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"PowerSeries.X_eq_normalizeX\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"PowerSeries.residueFieldOfPowerSeries\"], \"digest\": \"5e9cb9945d80ae22\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits. MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) concerns the variable-ideal completion of a polynomial ring; LaurentSeries.powerSeriesAlgEquiv (Mathlib/RingTheory/LaurentSeries.lean:1212) concerns the unit ball of the X-adic completion of k(X); PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) concerns the source power-series ring. None provides arbitrary normalized curve branches or the finite product and structural residue compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"PowerSeries\"",
+   "results": "{\"t\": \"2026-10-23T09:41:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AdicCompletion\\\", \\\"PowerSeries\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"MvPowerSeries.toAdicCompletionInv\", \"MvPowerSeries.toAdicCompletion\", \"MvPowerSeries.toAdicCompletionAlgEquiv\", \"MvPowerSeries.toAdicCompletionAlgEquiv_symm_apply\", \"MvPowerSeries.toAdicCompletionAlgEquiv_apply\", \"MvPowerSeries.toAdicCompletion_coe\", \"MvPowerSeries.coeff_toAdicCompletionInv\", \"MvPowerSeries.coeff_toAdicCompletion_val_apply_out\"], \"digest\": \"494e5200ee9779cb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits. MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) concerns the variable-ideal completion of a polynomial ring; LaurentSeries.powerSeriesAlgEquiv (Mathlib/RingTheory/LaurentSeries.lean:1212) concerns the unit ball of the X-adic completion of k(X); PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) concerns the source power-series ring. None provides arbitrary normalized curve branches or the finite product and structural residue compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"IsDiscreteValuationRing\"",
+   "results": "{\"t\": \"2026-10-23T09:49:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"IsDiscreteValuationRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PowerSeries.instIsDiscreteValuationRing\"], \"digest\": \"9a2e5e0ffa9348cf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits. MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) concerns the variable-ideal completion of a polynomial ring; LaurentSeries.powerSeriesAlgEquiv (Mathlib/RingTheory/LaurentSeries.lean:1212) concerns the unit ball of the X-adic completion of k(X); PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) concerns the source power-series ring. None provides arbitrary normalized curve branches or the finite product and structural residue compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete discrete valuation ring containing a field which maps isomorphically to its residue field is a power series algebra in any uniformizer",
+   "results": "{\"t\": \"2026-10-23T09:49:13Z\", \"tool\": \"leanfinder\", \"query\": \"A complete discrete valuation ring containing a field which maps isomorphically to its residue field is a power series algebra in any uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.instIsDiscreteValuationRing\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"PowerSeries.residueFieldOfPowerSeries\", \"PowerSeries.hasUnitMulPowIrreducibleFactorization\", \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.exists_powerSeries_of_memIntegers\"], \"digest\": \"f739eba3adfa387c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits. MvPowerSeries.toAdicCompletionAlgEquiv (Mathlib/RingTheory/MvPowerSeries/Equiv.lean:344) concerns the variable-ideal completion of a polynomial ring; LaurentSeries.powerSeriesAlgEquiv (Mathlib/RingTheory/LaurentSeries.lean:1212) concerns the unit ball of the X-adic completion of k(X); PowerSeries.instIsDiscreteValuationRing (Mathlib/RingTheory/PowerSeries/Inverse.lean:288) concerns the source power-series ring. None provides arbitrary normalized curve branches or the finite product and structural residue compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ordinary-point-delta-branches",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, ordinary n-fold points and the inequality/equality characterization preceding Lemma B.1, printed pp. 56--57. Argument extracted from returned proof steps 4--5 of lem-trf-ordinary-point-delta-branches.",
+   "via": [
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normalized-curve-branch-coordinates",
+  "worker": "stage1",
+  "summary": "Unchanged statement; seven explicit steps assemble existing finite normalization, Nagata DVR-branch, finite-completion and prescribed-parameter coordinate results. The fibre primes, actual local rings, coefficient maps, and diagonal residue image are checked explicitly. No new nodes, Lean or compiles.",
+  "blueprint": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, ordinary n-fold points and the inequality/equality characterization preceding Lemma B.1, printed pp. 56--57. Argument extracted from returned proof steps 4--5 of lem-trf-ordinary-point-delta-branches. This supplies the branch-coordinate prerequisite extracted from ordinary-point-delta-branches step 2; the historical Appendix B branch is retained without substituting it for the current contracting-correspondence proof.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Field excellence verifies the Nagata hypothesis for the curve local ring; no node of the item unit supplies this generic commutative algebra fact."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of a localization of a finite-type field algebra verifies Nagata for A; this is a generic tool, not a replacement of the curve route."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Converts the verified excellence hypothesis to Nagata for the existing branch lemma; no same-unit node gives this implication."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-extension",
+    "why": "Generic completion or dimension tool for the normalized-branch argument, not supplied by any node of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-weil-pbc-completion-finite-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-ed2e5993d",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-ed2e5993d (reviewer sub-agent of L); spot-checked: First stage-1 delivery; the item is unsplit with no proof on live and side-live, and there is no repair note. The statement, stmt_deps and blueprint are byte-identical to live. There are no new nodes. I read all 7 steps and every cited statement. Step 1 (curve-delta-completion-data) gives the finite nonempty fibre with residue field k, the finite integral closure B and C=B⊗H. Step 2: excellence of essentially finite-type k-algebras gives quasi-excellent, hence Nagata (07QW/07QU/07QV). Step 3: the affine-stalk-closure, localization-spectrum and affine-open-stalk lemmas, with explicit inverse maps B_{q_i}↔T_{Q_i} fixing R. Step 4: I checked every hypothesis of nagata-normalization-dvr-branches and finite-dvr-branch-completion; completion-finite-extension makes H→B̂_q the completed local maps (0C3V last paragraph, 07N9). Step 5: maximal ideal n_iR_i, residue field k, and n_i-adic completeness via the module-completion lemma with (n_iR_i)^n=n_i^nR_i. Step 6: a DVR is regular of dimension 1; regular-complete-coefficient-coordinates with d=1 applies to every generator t_i (0C0S(2)). Step 7 is genuinely elementary: the residue map is a k-algebra map k→k, so the identity, which gives exactly the diagonal. Small cases agree: a smooth point gives b=1; a node gives k[[u]]×k[[v]] with equal constant terms; a cusp is unibranch with H≠C. I accept the tool uses (three lem-exc-* nodes and lem-weil-pbc-completion-finite-extension) as generic black boxes. All 16 Stacks tags match tags/tags, and no SGA source is cited. No duplicate: coordinate-axes-normalization is a different statement. Advisory: the report mentions citations.json and searches.jsonl, but they are not on the branch."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedCurveBranchCoordinates",
+  "declaration": "AlgebraicGeometry.Scheme.normalized_curve_branch_coordinates",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.normalizedCurveBranchLocalRing",
+   "AlgebraicGeometry.Scheme.normalizedCurveBranchCompletion",
+   "AlgebraicGeometry.Scheme.normalizedCurveBranchStalkMap",
+   "AlgebraicGeometry.Scheme.normalizedCurveBranchCoefficient",
+   "AlgebraicGeometry.Scheme.normalizedCurveBranchProductCoordinates",
+   "AlgebraicGeometry.Scheme.normalized_curve_branch_coordinates"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedCurveBranchCoordinates.lean",
+  "statement": "theorem normalized_curve_branch_coordinates (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (p : X ⟶ Spec (.of k)) [IsReduced X] [LocallyOfFiniteType p] [QuasiCompact p] (hpure : X.IsPureDimension 1) (x : X) (hx : IsClosed ({x} : Set X)) : Finite {y : X.reducedNormalization // X.fromReducedNormalization y = x} ∧ Nonempty {y : X.reducedNormalization // X.fromReducedNormalization y = x} ∧ (∀ y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}, IsDomain (normalizedCurveBranchLocalRing X x y) ∧ IsPrincipalIdealRing (normalizedCurveBranchLocalRing X x y) ∧ ¬ IsField (normalizedCurveBranchLocalRing X x y)) ∧ ∃ φ : X.presheaf.stalk x →+* ((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x, φ = ((TopCat.Presheaf.stalkFunctor CommRingCat x).map X.fromReducedNormalization.c).hom ∧ ∃ (hlocal : ∀ y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}, IsLocalRing (normalizedCurveBranchCompletion X x y)) (hH : IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x))) (r : (X.presheaf.stalk x ⧸ IsLocalRing.maximalIdeal (X.presheaf.stalk x)) ≃+* k) (g : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) →+* AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map φ) (((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x)) (e : AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map φ) (((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x) ≃+* ((y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}) → normalizedCurveBranchCompletion X x y)), (∀ a : k, r (Ideal.Quotient.mk _ ((X.presheaf.germ ⊤ x (Set.mem_univ x)).hom (p.appTop.hom ((Scheme.ΓSpecIso (.of k)).inv.hom a)))) = a) ∧ RingHom.ker (r.toRingHom.comp (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk x))).toRingHom) = @IsLocalRing.maximalIdeal (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) _ hH ∧ (∀ (n : ℕ) (h : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) (a : X.presheaf.stalk x), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) n h = Ideal.Quotient.mk _ a → AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map φ) n (g h) = Ideal.Quotient.mk _ (φ a)) ∧ (∀ (y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}) (n : ℕ) (c : AdicCompletion ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map φ) (((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x)) (b : ((TopCat.Presheaf.pushforward CommRingCat X.fromReducedNormalization.base).obj X.reducedNormalization.presheaf).stalk x), AdicCompletion.evalₐ ((IsLocalRing.maximalIdeal (X.presheaf.stalk x)).map φ) n c = Ideal.Quotient.mk _ b → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (normalizedCurveBranchLocalRing X x y)) n (e c y) = Ideal.Quotient.mk _ (normalizedCurveBranchStalkMap X x y b)) ∧ (∀ y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}, IsDomain (normalizedCurveBranchCompletion X x y) ∧ IsPrincipalIdealRing (normalizedCurveBranchCompletion X x y) ∧ ¬ IsField (normalizedCurveBranchCompletion X x y) ∧ IsAdicComplete (@IsLocalRing.maximalIdeal (normalizedCurveBranchCompletion X x y) _ (hlocal y)) (normalizedCurveBranchCompletion X x y) ∧ Function.Bijective ((Ideal.Quotient.mk (@IsLocalRing.maximalIdeal (normalizedCurveBranchCompletion X x y) _ (hlocal y))).comp (normalizedCurveBranchCoefficient p x y))) ∧ (∀ t : (y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}) → normalizedCurveBranchCompletion X x y, (∀ y, Ideal.span {t y} = @IsLocalRing.maximalIdeal (normalizedCurveBranchCompletion X x y) _ (hlocal y)) → ∃ E : (y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}) → PowerSeries k ≃+* normalizedCurveBranchCompletion X x y, (∀ y, (∀ a : k, E y (PowerSeries.C a) = normalizedCurveBranchCoefficient p x y a) ∧ E y PowerSeries.X = t y ∧ (∀ n : ℕ, Ideal.comap (E y).toRingHom ((@IsLocalRing.maximalIdeal (normalizedCurveBranchCompletion X x y) _ (hlocal y)) ^ n) = Ideal.span {PowerSeries.X} ^ n)) ∧ (∀ (h : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) (y : {y : X.reducedNormalization // X.fromReducedNormalization y = x}), PowerSeries.constantCoeff (normalizedCurveBranchProductCoordinates e E (g h) y) = r (AdicCompletion.evalOneₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) h)) ∧ Set.range (fun h : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ↦ fun y ↦ PowerSeries.constantCoeff (normalizedCurveBranchProductCoordinates e E (g h) y)) = Set.range (fun a : k ↦ fun _ : {y : X.reducedNormalization // X.fromReducedNormalization y = x} ↦ a))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Stage-2 review FIX: the statement no longer uses Orgogozo.localScalar (owned by def node def-trf-orgogozo-induction-data, not a stmt_dep; its module Sheaf.Paper.OrgogozoInductionData is in live quarantine since 2026-10-24T06:58Z) nor the abbrevs normalizationPushforwardStalk/normalizationBaseCompletion/normalizationCompletionIdeal/normalizationStalkCompletion and the instance normalizationPushforwardStalkAlgebra (owned by theorem node lem-trf-normalization-singular-skyscraper, not a stmt_dep). They are inlined from Mathlib primitives: the structural scalar k → O_{X,x} is germ at x of p.appTop ∘ (ΓSpecIso k).inv; B is the stalk at x of the pushforward of the normalization's structure presheaf; A → B is pinned as φ = (stalkFunctor x).map ν.c; H, C are AdicCompletion of m_A and of m_A.map φ. normalizedCurveBranchProductCoordinates now takes any source ring C. Mathematical content unchanged.",
+  "fixed_by": "NT-stage2-cc-44d0b82af"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44d0b82af",
+  "group": "Q74",
+  "result": "fix",
+  "note": "Maths correct clause by clause: k alg-closed, X reduced, LocallyOfFiniteType+QuasiCompact, pure dim 1, closed x; actual fibre index Finite∧Nonempty; DVR = domain∧PID∧¬field for stalks and completions; g/e pinned at every quotient level (canonical); E pinned by C a↦coefficient, X↦t, comap m^n=(X)^n (evaluation map); constant coeff = r∘evalOne; range = diagonal. Edge cases (empty X, b=1 cusp/smooth, node) ok; no extra assumptions. Landing faults fixed: (1) Orgogozo.localScalar from def-trf-orgogozo-induction-data (not a stmt_dep), module Sheaf.Paper.OrgogozoInductionData quarantined 2026-10-24T06:58Z → inlined germ⊤x∘p.appTop∘ΓSpecIso.inv; (2) theorem-owned abbrevs of lem-trf-normalization-singular-skyscraper (normalizationPushforwardStalk/BaseCompletion/CompletionIdeal/StalkCompletion + algebra instance) uncited (H2) → inlined, A→B pinned as ∃ φ, φ = (stalkFunctor x).map ν.c ∧ …; product-coordinates def takes generic C. fixes/: complete module + lean-record.json (verbatim statement, note). nt_compile --json clean 6.3 s, exit 0."
+ }
+}

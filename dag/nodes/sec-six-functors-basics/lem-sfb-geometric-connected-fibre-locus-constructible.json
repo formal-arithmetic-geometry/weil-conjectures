@@ -1,0 +1,323 @@
+{
+ "id": "lem-sfb-geometric-connected-fibre-locus-constructible",
+ "kind": "statement",
+ "title": "Constructibility of geometric connected-component-count level sets",
+ "statement": "Let $f:Y\\to T$ be a morphism of finite presentation of schemes [def-pc-scheme, def-sbc-locally-finite-presentation]. For $t\\in T$, let $n_f(t)\\in\\mathbb N\\cup\\{\\infty\\}$ be the well-defined geometric connected-component count of [lem-weil-pbc-geometric-component-count-base-change]: the number of maximal nonempty connected subsets of $Y\\times_T\\operatorname{Spec}K$ for any algebraically closed extension $K$ of the residue field $\\kappa(t)$, with an infinite number recorded as $\\infty$ and the empty fibre having count $0$. For each integer $m\\geq0$, put $E_m(f)=\\{t\\in T:n_f(t)=m\\}$. Then $E_m(f)$ is locally constructible: every point of $T$ has an open neighbourhood $V$ such that $E_m(f)\\cap V$ is constructible in $V$ [def-weil-constructible-subset]. If $T$ is Noetherian, meaning quasi-compact and locally Noetherian [pqf-def-locnoeth], $E_m(f)$ is constructible in $T$. No smoothness, properness, flatness, section, normality or nonemptiness hypothesis on $Y$ or $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055I, label lemma-nr-geom-connected-components-constructible, all finite level sets E_m; its proof explicitly proves constructibility for Noetherian T. The geometric component count is the already-existing node lem-weil-pbc-geometric-component-count-base-change."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "def-weil-constructible-subset",
+  "pqf-def-locnoeth"
+ ],
+ "proof": [
+  {
+   "text": "First assume $T$ is Noetherian. By [pqf-def-locnoeth], local Noetherianity supplies an affine cover by spectra of Noetherian rings; quasi-compactness supplies a finite subcover, as required by [lem-trf-noetherian-constructible-subset-criterion]. Finite presentation implies finite type: its affine algebras have finitely many generators, and the morphism is quasi-compact [def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. For each nonempty irreducible closed $Z\\subseteq|T|$, apply [lem-sfb-geometric-connected-count-generic-constancy] to obtain a nonempty relatively open $W\\subseteq Z$ and a constant value $c$ of $n_f$ on $W$. If $c=m$, then $W\\subseteq E_m(f)$; otherwise $W\\cap E_m(f)=\\varnothing$. Thus [lem-trf-noetherian-constructible-subset-criterion] proves that $E_m(f)$ is constructible in $T$. This proves the global Noetherian clause.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-sfb-geometric-connected-count-generic-constancy",
+    "lem-trf-noetherian-constructible-subset-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055I, label lemma-nr-geom-connected-components-constructible; second paragraph: apply 053Z and 055H."
+   }
+  },
+  {
+   "text": "For arbitrary $T$ and $t\\in T$, choose an affine open neighbourhood $V=\\operatorname{Spec}A$ of $t$, and let $f_V:Y\\times_TV\\to V$ be the restriction. It is of finite presentation by the base-change clause (3) of [lem-weil-pbc-qcqs-morphism-permanence]. The count identity of [lem-weil-pbc-geometric-component-count-base-change] for the open immersion $V\\to T$ gives $E_m(f_V)=E_m(f)\\cap V$. It suffices to prove constructibility of this subset in $V$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-geometric-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055I, label lemma-nr-geom-connected-components-constructible; first paragraph: reduce to an affine neighbourhood."
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-noetherian-inverse-system-affine] to $V$: the finitely generated $\\mathbf Z$-subalgebras $A_i\\subseteq A$ give a small cofiltered affine-transition system $V_i=\\operatorname{Spec}A_i$ with limit $V$. Each $V_i$ is affine, hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is of finite type over $\\operatorname{Spec}\\mathbf Z$. Apply [lem-weil-pbc-finite-presentation-family-descent] to the singleton family $f_V$ to obtain an index $i$, a finitely presented $f_i:Y_i\\to V_i$, and a cartesian square identifying $f_V$ with its base change along $a:V\\to V_i$. All stages satisfy the qcqs hypothesis of this descent theorem.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-presentation-family-descent",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055I, label lemma-nr-geom-connected-components-constructible; first paragraph: affine Noetherian approximation and 01ZM(1)."
+   }
+  },
+  {
+   "text": "Apply step 1 to $f_i$ over its Noetherian base $V_i$; hence $E_m(f_i)$ is constructible. By [lem-weil-pbc-geometric-component-count-base-change], $n_{f_V}(v)=n_{f_i}(a(v))$ for every $v\\in V$, so $E_m(f_V)=a^{-1}(E_m(f_i))$. By [lem-pur-scheme-constructible-preimage] this inverse image is constructible in $V$. Step 2 identifies it with $E_m(f)\\cap V$. This gives the required neighbourhood for every $t$, proving local constructibility. The count identities and the dichotomy in step 1 include $m=0$ and empty fibres.",
+   "uses": [
+    "lem-weil-pbc-geometric-component-count-base-change",
+    "lem-pur-scheme-constructible-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055I, label lemma-nr-geom-connected-components-constructible; first paragraph: pull back the Noetherian level set using 055F and 054I."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-geometric-connected-count-generic-constancy",
+  "lem-trf-noetherian-constructible-subset-criterion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-pur-scheme-constructible-preimage"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055I, label lemma-nr-geom-connected-components-constructible; its two paragraphs, with the Noetherian argument first."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely presented morphism of schemes the locus where the geometric fibre has exactly n connected components is locally constructible, and geometric component counts commute with arbitrary base change",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.LocallyQuasiFinite, PrimeSpectrum.isConstructible_range_comap",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; Chevalley image constructibility, geometric-connectedness definitions/permanence, affine smooth algebra descent and normalization do not state this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The number of geometric connected components of the fibres of a finite presentation morphism of schemes is a constructible function",
+   "results": "8 hits; PrimeSpectrum.isConstructible_comap_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.IsFinite.finite_preimage_singleton, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; Chevalley image constructibility, geometric-connectedness definitions/permanence, affine smooth algebra descent and normalization do not state this assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, IsConstructible",
+   "results": "0 hits; ; loogle: unknown identifier 'IsConstructible'",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; Chevalley image constructibility, geometric-connectedness definitions/permanence, affine smooth algebra descent and normalization do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected|[Cc]onnected[Cc]omponent|[Cc]onstructible",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; Chevalley image constructibility, geometric-connectedness definitions/permanence, affine smooth algebra descent and normalization do not state this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|[Cc]omponent.*[Cc]ount|[Cc]onnected.*[Cc]onstructible",
+   "results": "6 hits; Mathlib/Topology/ClopenBox.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; Chevalley image constructibility, geometric-connectedness definitions/permanence, affine smooth algebra descent and normalization do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finitely presented family of schemes the nonempty geometrically connected fibre locus is locally constructible and formation of this locus commutes with base change",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme, AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage",
+   "date": "2026-10-23",
+   "verdict": "no match: hits inspected; Chevalley image constructibility, geometric-connectedness definitions/permanence, affine smooth algebra descent and normalization do not state this assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes the number of geometric connected components of the fibres is constant on a dense open of every irreducible closed subset",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.Scheme.Hom.finite_preimage, AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget, AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints, AlgebraicGeometry.IsDominant",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, IsLocallyConstructible",
+   "results": "0 hits; ; loogle: unknown identifier 'IsLocallyConstructible'",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]onnected.*[Cc]onstructible|[Cc]omponent.*[Cc]onstant|[Cc]onstant.*[Cc]omponent)",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The number of geometric connected components in a finite type family of schemes is constant on a nonempty open subset of an irreducible base",
+   "results": "8 hits; AlgebraicGeometry.Scheme.OpenCover.restrict_I₀, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.germToFunctionField.congr_simp, AlgebraicGeometry.Scheme.isAffine_affineCover, irreducibleComponent_subset_connectedComponent, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.IsSeparated.instMorphismRestrict",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme morphism of finite presentation each level set of the number of connected components of geometric fibres is locally constructible",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.LocallyOfFinitePresentation, PrimeSpectrum.isConstructible_range_comap, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Hom.discrete_fiber, PrimeSpectrum.isConstructible_comap_image",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric connected component count of a finite type family is generically constant on every irreducible closed subset of the base",
+   "results": "8 hits; genericPoints.component_ofComponent, genericPoints.finite, genericPoints.component_surjective, genericPoints.ofComponent, genericPoints.isGenericPoint_ofComponent, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, genericPoints.ofComponent_component, irreducibleComponent_subset_connectedComponent",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "results": "12 hits; AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected, AlgebraicGeometry.instSurjectiveOfGeometricallyConnected, AlgebraicGeometry.GeometricallyConnected.eq_geometrically, AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace, AlgebraicGeometry.GeometricallyConnected.mk, AlgebraicGeometry.geometricallyConnected_iff, AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyConnected|geometricallyConnected",
+   "results": "5 hits; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean, Mathlib/AlgebraicGeometry/Geometrically/Connected.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finitely presented morphism of schemes the locus where a geometric fibre has exactly m connected components is locally constructible",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected, Topology.IsLocallyConstructible",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected returned signatures; Chevalley images/preimages, finite fibres, geometric-connectedness permanence and generic-point topology do not assert constancy or constructibility of geometric connected-component counts."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-domain-smooth-family-models",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; normal-base step: pass from residue-field fibre triviality to local base pullbacks; normal-base Picard locality: unpointed normal arithmetic models, before descending a line or its generic trivialization; constructibility of the one-geometric-component locus, replacing the section-component shortcut in the unpointed arithmetic-model input. Stacks 055I: Noetherian reduction, then 055H generic constancy on irreducible closed subsets.",
+   "via": [
+    "lem-sfb-normal-domain-smooth-family-models",
+    "lem-sfb-normal-base-fibrewise-line-locality",
+    "lem-sfb-relative-picard-cube-face-detection",
+    "lem-sfb-semiabelian-cubical-rigidification",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-connected-fibre-locus-constructible",
+  "worker": "stage1",
+  "summary": "Followed Stacks 055I, separating its 055H generic connected-count input. Reused existing approximation, finite-family descent, Noetherian criterion, count base-change and constructible-preimage nodes. Preserved the statement, including all m and the Noetherian global clause. Checked connected versus irreducible components and all cited statements.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; Relative Picard detection by the three identity faces; normal-base step: pass from residue-field fibre triviality to local base pullbacks; normal-base Picard locality: unpointed normal arithmetic models, before descending a line or its generic trivialization; constructibility of the one-geometric-component locus, replacing the section-component shortcut in the unpointed arithmetic-model input. Stacks 055I: Noetherian reduction, then 055H generic constancy on irreducible closed subsets.",
+  "tool_uses": [
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lem-trf-noetherian-constructible-subset-criterion",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-component-count-base-change",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lemma-nagata-noetherian-inverse-system-affine",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-family-descent",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   },
+   {
+    "node": "lem-pur-scheme-constructible-preimage",
+    "why": "Generic scheme/topology tool in Stacks 055I; this supports the existing unpointed arithmetic-model branch of the unit, whose own nodes do not replace this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-def-locnoeth",
+  "lem-trf-noetherian-constructible-subset-criterion",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-presentation-family-descent",
+  "lem-pur-scheme-constructible-preimage"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-d793fac09",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-d793fac09 (reviewer sub-agent of L); spot-checked: I read Stacks 055I (lemma-nr-geom-connected-components-constructible), 055H (lemma-nr-geom-connected-components-good) and 054I in full. The item's statement, unchanged from live, matches 055I, including the Noetherian global clause that 055I's second paragraph proves. The four steps follow 055I in order. Step 1 applies the 053Z criterion with the new 055H node, after checking the finite Noetherian cover, finite presentation implying finite type, the c=m dichotomy and that irreducible sets are nonempty. Step 2 localises to an affine open using clause (3) of qcqs-permanence and the 055F count base change. Step 3 uses Nagata affine approximation, affine-qcqs, finite type over Z being Noetherian, and 01ZM(1) singleton descent, whose hypotheses I checked. Step 4 uses 055F along a:V->V_i and the 054I preimage leaf. The new node lem-sfb-geometric-connected-count-generic-constancy is 055H restated for irreducible closed Z, which is equivalent in a scheme because every such Z has a generic point. It is statement-only, self-contained, has real searches recorded and no Mathlib match, and is strictly smaller than the item, so it is not a restatement. It duplicates no existing node: 055A trf is about irreducible counts, 055G sbc covers only c=1, and the 0554 lower bound is about irreducible components. I searched the snapshot, live and side-live. I tested small cases: V(x(x-t)) over A^1, the empty Y, D(t) into A^1, and two crossing lines. Batch-5 finding: lem-trf-noetherian-constructible-subset-criterion is the generic topology fact 053Z. Its closure contains no other trace-formula, Poincaré or nt node, and it is not part of either assumed statement or its proof, so I accept it. I accept the declared tool_uses as generic 055I tools. There are no SGA citations, the item is not superseded on live, and I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricConnectedFibreLocusConstructible",
+  "declaration": "AlgebraicGeometry.isLocallyConstructible_geometricConnectedComponentCount_levelSet",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricConnectedFibreLocusConstructible.lean",
+  "statement": "theorem isLocallyConstructible_geometricConnectedComponentCount_levelSet {Y T : Scheme.{u}} (f : Y ⟶ T) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (m : ℕ) : Topology.IsLocallyConstructible {t : T | ENat.card (ConnectedComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t) : Scheme.{u})) = (m : ℕ∞)} ∧ (IsNoetherian T → Topology.IsConstructible {t : T | ENat.card (ConnectedComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) (AlgebraicClosure (T.residueField t)))) ≫ T.fromSpecResidueField t) : Scheme.{u})) = (m : ℕ∞)})",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-775a40640",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read node, Stacks 055I (more-morphisms.tex 8093-8129), all 5 stmt_dep records + the Mathlib/project declarations (LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated = node's finite presentation; geometricComponentCount_baseChange pullback/ENat.card form used verbatim with AlgebraicClosure, conjunct 1 gives K-independence; Topology.IsLocallyConstructible def = open-nbhd constructible-in-U; IsNoetherian = IsLocallyNoetherian+CompactSpace, only on global clause). ConnectedComponents not irreducible; ENat.card gives 0 for empty fibre and ⊤ for infinite, so m=0 and the infinite case are right. Edge cases empty T/Y, non-Noetherian T, universe u not lowered. Node diff vs live: lean field only; lean.statement verbatim. No count def or duplicate theorem in project/Mathlib; same inline count as the generic-constancy proof dep. sorry only, docstrings with source and blueprint and the 4 proof steps; report has Worker report + Second reading. No recompile (per instructions); no findings."
+ }
+}

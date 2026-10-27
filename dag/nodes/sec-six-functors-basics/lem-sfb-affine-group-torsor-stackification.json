@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-affine-group-torsor-stackification",
+ "kind": "statement",
+ "title": "Affine group action stackification equals the torsor stack without smoothness",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be an affine group scheme over $k$ [def-sc-group-scheme], and let $V$ be any $k$-scheme [def-pc-scheme] with a left action $a:G\\times_k V\\to V$. No smoothness or finite-type hypothesis is imposed on $G$ or $V$. Use universes [def-weil-size-convention] and the big fppf site [def-pc-fppf-site]. Let $\\mathcal A$ be the stackification [lem-sfb-groupoid-stackification-local-description] of the action groupoid, with objects $x:T\\to V$ and arrows $g:x\\to y$ given by $g\\in G(T)$ such that $a(g,x)=y$. Let $\\mathcal T(T)$ have objects pairs $(P,f)$ where $P\\to T$ is a scheme with a left $G_T$-action fppf locally isomorphic to $G_T=G\\times_kT$ with left translation, and $f:P\\to V$ is $G$-equivariant. Its arrows are equivariant $T$-isomorphisms commuting with $f$, and pullback is by fibre product. Then $\\mathcal T$ is an fppf stack and the trivial-torsor functor extends to a pullback-compatible equivalence $\\mathcal A\\simeq\\mathcal T$. This functor sends $x$ to $(G_T,(h,t)\\mapsto a(h,x(t)))$ and sends $g:x\\to y$ to right translation $h\\mapsto hg^{-1}$. A stack means a category fibred in groupoids with sheaves of isomorphisms and effective descent for objects [def-sfb-stable-pointed-moduli-groupoids]. All torsors here are schemes, rather than just algebraic spaces.",
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 04WM (proposition-equal-quotient-stacks), situation-quotient-stack and lemma-group-quotient-stack-in-groupoids, with no smoothness hypothesis. Scheme torsors for affine G: spaces-descent.tex Tag 041Z (lemma-descending-property-affine), descent.tex Tag 0245 (lemma-affine)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fppf-site",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-scheme-action-torsor-groupoids",
+  "def-sfb-fppf-stackification"
+ ],
+ "proof": [
+  {
+   "text": "Affine effectivity available for the covering families used below. Apply [lem-trf-fppf-family-affine-effectivity-reduction] to the property that a scheme morphism is affine. Base-change stability is [lem-weil-pbc-affine-morphism-permanence](1). For finite coproduct stability, cover each target component by affine opens; each inverse image is affine, so the coproduct morphism is affine by [pqf-lem-affine-local-target]. This also treats the empty coproduct. The affine flat surjective case is [lem-galois-affine-flat-descent-effective], which assumes only flatness and surjectivity, hence applies in particular with the finite-presentation hypothesis in the reduction lemma. Consequently every descent datum of affine scheme morphisms on an fppf covering is effective as a scheme. In particular the trivial torsors $G_U\\to U$ are affine morphisms: they are base changes of the affine structural morphism $G\\to\\operatorname{Spec}k$. No finite presentation of G is needed: the finite-presentation hypothesis in the reduction concerns the covering A to B, not the object being descended.",
+   "uses": [
+    "lem-trf-fppf-family-affine-effectivity-reduction",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-affine-local-target",
+    "lem-galois-affine-flat-descent-effective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0245 (lemma-affine), first paragraph of proof and Tag 02W3 (lemma-descending-types-morphisms); morphisms.tex Tags 01S8 and 01SD."
+   }
+  },
+  {
+   "text": "Isomorphisms in $\\mathcal T$ form fppf sheaves. Given compatible local equivariant isomorphisms $P|_{U_i}\\to Q|_{U_i}$, the family $P\\times_TU_i\\to P$ is an fppf covering. By [lem-trf-fppf-covering-is-fpqc] it is fpqc, so [lem-weil-pbc-fpqc-representable-descent] glues these maps uniquely to a scheme morphism $P\\to Q$. Apply the same assertion to the local inverses; the composites equal the identity because they do on the covering. The resulting isomorphism lies over $T$ and commutes with the maps to $V$ since those equations hold locally. Equivariance is equality of two maps $G_T\\times_TP\\to Q$, checked after its covering base change to the $U_i$ using the same uniqueness assertion. This proves both existence and uniqueness of glued arrows without any separation assumption on $Q$ or $V$.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370 (lemma-group-quotient-stack-in-groupoids), omitted arrow-sheaf axiom expanded using descent.tex Tag 023Q and topologies.tex Tag 022C."
+   }
+  },
+  {
+   "text": "Descend the underlying schemes of objects. Let $(P_i,f_i)$ and equivariant transition isomorphisms $\\alpha_{ij}$ be a descent datum on an fppf covering $T_i\\to T$. Choose fppf coverings $U_{ia}\\to T_i$ trivializing $P_i$, and write $\\lambda_{ia}:G_{U_{ia}}\\xrightarrow{\\sim}P_i|_{U_{ia}}$. Composing coverings gives an fppf covering of $T$. On $U_{ia}\\times_TU_{jb}$ transport $\\alpha_{ij}$ by the $\\lambda$'s; these are scheme isomorphisms between the restrictions of $G_{U_{ia}}$ and $G_{U_{jb}}$. Their cocycle follows by cancellation of $\\lambda$ and the cocycle of $\\alpha$. Step 1 therefore supplies a scheme $P/T$ and compatible isomorphisms $P|_{U_{ia}}\\simeq G_{U_{ia}}$. For fixed $i$, their composites with $\\lambda_{ia}$ are compatible maps to $P_i$ over the covering $U_{ia}\\to T_i$, since pulling the original transition along the diagonal $T_i\\to T_i\\times_TT_i$ gives the identity (the cocycle gives an invertible idempotent there). Glue them, and their inverses, by [lem-weil-pbc-fpqc-representable-descent] and [lem-trf-fppf-covering-is-fpqc]. This gives $\\eta_i:P|_{T_i}\\simeq P_i$; the identities $\\alpha_{ij}\\eta_i=\\eta_j$ follow after the refining covering, hence globally by uniqueness in the same lemma.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370 (lemma-group-quotient-stack-in-groupoids), object descent; scheme effectivity supplied by descent.tex Tag 0245 instead of descent of algebraic-space torsors."
+   }
+  },
+  {
+   "text": "Descend the remaining structure. Via $\\eta_i$, the actions on $P_i$ give compatible maps from $(G_T\\times_TP)|_{T_i}$ to $P$, and the $f_i$ give compatible maps from $P|_{T_i}$ to $V$. By [lem-trf-fppf-covering-is-fpqc] and [lem-weil-pbc-fpqc-representable-descent] these glue to $a:G_T\\times_TP\\to P$ and $f:P\\to V$. The unit and associativity equations for $a$ hold after the coverings of $P$ and $G_T\\times_TG_T\\times_TP$ induced by $T_i\\to T$, so hold globally by uniqueness in morphism descent. The same argument on $G_T\\times_TP$ proves $f(a(g,p))=g\\cdot f(p)$. On every $U_{ia}$ the constructed action is left translation under $P|_{U_{ia}}\\simeq G_{U_{ia}}$; hence $P$ is a scheme torsor by the definition in the item. The $\\eta_i$ are equivariant and commute with $f$, as checked on that covering. Thus the original datum is effective. Together with Step 2 this proves that $\\mathcal T$ is a stack; fibre-product pullbacks give its cartesian lifts and groupoid fibres. In particular we never use the torsor projection itself as an fppf covering: it need not be locally of finite presentation when G is not of finite type.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370 (lemma-group-quotient-stack-in-groupoids), descent of the equivariant map and omitted structural checks, using descent.tex Tag 023Q."
+   }
+  },
+  {
+   "text": "Define the functor $F_p$ from the action groupoid by $x\\mapsto(G_T,f_x)$ with $f_x(h,t)=h\\cdot x(t)$ and $g:x\\to y\\mapsto R_{g^{-1}}$. Right translation commutes with left translation, and $f_y(hg^{-1},t)=h\\cdot(g^{-1}\\cdot y(t))=h\\cdot x(t)$, so it is an arrow of $\\mathcal T$. If $g:x\\to y$ and $b:y\\to z$, their composite is $bg$, and $R_{b^{-1}}\\circ R_{g^{-1}}(h)=hg^{-1}b^{-1}=h(bg)^{-1}$; identities are also preserved. Each formula is unchanged by base substitution. Thus $F_p$ is a pullback-compatible functor on the associated fibred groupoid.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM (proposition-equal-quotient-stacks), construction of F_p and right-translation formula."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-groupoid-stackification-local-description] on the big fppf site, with $\\mathcal P$ the action fibred groupoid and $\\mathcal Y=\\mathcal T$. The site and its fibre groupoids are taken in the larger universe fixed in the big-site convention. Step 4 verifies the required stack hypothesis on $\\mathcal Y$ and Step 5 verifies pullback compatibility. The universal-property clause supplies a pullback-compatible $F:\\mathcal A\\to\\mathcal T$ and an invertible comparison $Fi\\simeq F_p$. We use this comparison when identifying images of objects and arrows below.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, extension of F_p using stacks.tex Tag 0436 (lemma-stackify-groupoids-universal-property)."
+   }
+  },
+  {
+   "text": "The functor $F$ is fully faithful. First take objects $i(x),i(y)$ from the action groupoid over $T$. The presheaf of $g\\in G(U)$ with $g\\cdot x|_U=y|_U$ is already a sheaf: compatible $g$ glue as maps $U\\to G$ by [lem-trf-fppf-covering-is-fpqc] and [lem-weil-pbc-fpqc-representable-descent], and the equality in $V$ is local by the same morphism-uniqueness assertion. By [lem-sfb-groupoid-stackification-local-description] this is the isomorphism sheaf between $i(x)$ and $i(y)$. On the torsor side an equivariant isomorphism $r:G_U\\to G_U$ has $r(h)=h\\,r(e)$, hence is uniquely $R_{g^{-1}}$ for $g=r(e)^{-1}$. The compatibility $f_y r=f_x$, evaluated at $e$, is equivalent to $g\\cdot x=y$; the converse follows from Step 5. These inverse descriptions commute with restriction. For arbitrary $\\xi,\\zeta\\in\\mathcal A(T)$, the same stackification node supplies a common refining covering on which both come from $x,y$. The map on isomorphism sheaves is thus bijective locally; local preimages of a target arrow agree on overlaps by the local injectivity, and glue uniquely because $\\mathcal A$ is a stack. This proves bijectivity on each isomorphism set, globally.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, full-faithfulness argument identifying the two Isom sheaves; local description from stacks.tex Tag 02ZP."
+   }
+  },
+  {
+   "text": "Finally, any $(P,f)\\in\\mathcal T(T)$ has a trivialization $\\lambda:G_U\\simeq P|_U$ on an fppf covering. Put $x=f(\\lambda(e))$. Equivariance gives $f(\\lambda(h))=h\\cdot x$, so $\\lambda$ identifies the restriction with $F_p(x)$, hence with $F(i(x))$. Both $\\mathcal A$ and $\\mathcal T$ are stacks, $F$ is pullback-compatible by Step 6, and its fibres are fully faithful by Step 7. Therefore [lem-sfb-stack-fully-faithful-local-equivalence] gives the asserted equivalence over $k$, including a pullback-compatible inverse up to invertible natural transformations. Its arrow convention is the one of Step 5. The argument used affineness of $G$ solely to descend the trivial torsor schemes in Step 3 and imposed no finiteness, affineness or separatedness condition on $V$. Thus neither smoothness nor finite type of G has been used.",
+   "uses": [
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM, last paragraph; stacks.tex Tag 046N (lemma-characterize-essentially-surjective-when-ff)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-affine-flat-descent-effective",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-stack-fully-faithful-local-equivalence",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-fppf-family-affine-effectivity-reduction",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tags 0370 (lemma-group-quotient-stack-in-groupoids) and 04WM (proposition-equal-quotient-stacks); omitted arrow descent and scheme representability expanded with descent.tex Tags 0245, 023Q and 02W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine group scheme acting on a scheme, the stackification of its action groupoid is the fppf stack of torsors with equivariant maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor'\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C}, ∀ R ∈ J S, F.IsStackFor R.arrows\", \"doc\": \"A pseudofunctor $\\\\mathcal{F}$ from the locally discrete opposite category $\\\\mathcal{C}^{\\\\text{op}}$ to the category of small categories $\\\\mathsf{Cat}$ satisfies the stack conditions with respect to a \"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.of_isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C}, (∀ (S : C), ∀ R ∈ J S, F.IsStackFor R.arrows) → F.IsStack J\", \"doc\": \"Let $\\\\mathcal{C}$ be a category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{F}: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathsf{Cat}$ be a pseudofunctor from the locally discrete opposite categor\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat →\\n      CategoryTheory.GrothendieckTopology C → Prop\", \"doc\": \"A predicate asserting that a pseudofunctor from the locally discrete opposite category of $\\\\mathcal{C}$ to the category of small categories satisfies the stack conditions with respect to a given Groth\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    {F : CategoryTheory.Functor C FintypeCat} →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          (X : C) →\\n            [CategoryTheory.PreGaloisCategory.IsConnected\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}\n  {\"name\": \"CategoryTheory.ActionCategory.instGroupoid\", \"module\": \"Mathlib/CategoryTheory/Action\", \"type\": \"{X : Type u} →\\n  {G : Type u_2} →\\n    [inst : Group G] → [inst_1 : MulAction G X] → CategoryTheory.Groupoid (CategoryTheory.ActionCategory G X)\", \"doc\": \"For any group $G$ acting on a type $X$, the action category $\\\\mathrm{ActionCategory}(G, X)$ forms a groupoid. This follows because the single-object category associated to $G$ is itself a groupoid (as\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.isStackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  (F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat)\\n  {J : CategoryTheory.GrothendieckTopology C} [F.IsStack J] {S : C} (R : CategoryTheory.Presieve S),\\n  CategoryTheory.Sieve.generate R ∈ J S → F.IsSta\", \"doc\": \"A pseudofunctor $ \\\\mathcal{F} $ from the locally discrete opposite category of $ \\\\mathcal{C} $ to the category of small categories $ \\\\mathsf{Cat} $ satisfies the stack conditions with respect to a giv\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.toIsPrestack\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/IsStack\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C}\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [self : F.IsStack J], F.IsPrestack J\", \"doc\": \"If a pseudofunctor from the opposite category (viewed as a locally discrete bicategory) to the category of small categories satisfies the stack conditions with respect to a Grothendieck topology on th\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → F.IsPrestackFor R\", \"doc\": \"If a pseudofunctor $\\\\mathcal{F}$ satisfies the stack condition for a presieve $R$ on an object $S$ in a category $\\\\mathcal{C}$, then $\\\\mathcal{F}$ also satisfies the prestack condition for $R$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme-morphism, abstract action-groupoid and categorical-stack results do not give this theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient stack of a group scheme action is equivalent to the groupoid of principal bundles with equivariant morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ActionCategory.instGroupoid\", \"module\": \"Mathlib/CategoryTheory/Action\", \"type\": \"{X : Type u} →\\n  {G : Type u_2} →\\n    [inst : Group G] → [inst_1 : MulAction G X] → CategoryTheory.Groupoid (CategoryTheory.ActionCategory G X)\", \"doc\": \"For any group $G$ acting on a type $X$, the action category $\\\\mathrm{ActionCategory}(G, X)$ forms a groupoid. This follows because the single-object category associated to $G$ is itself a groupoid (as\"}\n  {\"name\": \"IsFreeGroupoid.actionGroupoidIsFree\", \"module\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier\", \"type\": \"{G A : Type u} →\\n  [inst : Group G] → [IsFreeGroup G] → [inst_2 : MulAction G A] → IsFreeGroupoid (CategoryTheory.ActionCategory G A)\", \"doc\": \"Given a free group $G$ acting on a set $A$, the action groupoid $\\\\mathrm{ActionCategory}(G, A)$ is a free groupoid. This follows because the generators of the free group $G$ induce generating morphism\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{u₂, u₁} C] →\\n    {F : CategoryTheory.Functor C FintypeCat} →\\n      [inst_1 : CategoryTheory.GaloisCategory C] →\\n        [CategoryTheory.PreGaloisCategory.FiberFunctor F] →\\n          (X : C) →\\n            [CategoryTheory.PreGaloisCategory.IsConnected\", \"doc\": \"For a connected object $ X $ in a pre-Galois category $\\\\mathcal{C}$ with fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, and for any element $ x $ in the finite type $ F(X) $, there exists an\"}\n  {\"name\": \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"module\": \"Mathlib/CategoryTheory/Galois/Examples\", \"type\": \"{G : Type u} →\\n  [inst : Group G] →\\n    (X : Action FintypeCat G) →\\n      [CategoryTheory.PreGaloisCategory.IsConnected X] →\\n        (x : X.V.carrier) →\\n          [inst_2 : Fintype (G ⧸ MulAction.stabilizer G x)] →\\n            X ≅ Action.FintypeCat.ofMulAction G { carrier := G ⧸ MulAction.stabilizer\", \"doc\": \"For a connected action $ X $ of a group $ G $ on the category of finite types and any element $ x $ in the underlying type of $ X $, there exists an isomorphism between $ X $ and the quotient $ G / \\te\"}\n  {\"name\": \"CategoryTheory.groupoidOfElements\", \"module\": \"Mathlib/CategoryTheory/Elements\", \"type\": \"{G : Type u} →\\n  [inst : CategoryTheory.Groupoid G] → (F : CategoryTheory.Functor G (Type w)) → CategoryTheory.Groupoid F.Elements\", \"doc\": \"For any groupoid $\\\\mathcal{G}$ and functor $F : \\\\mathcal{G} \\\\to \\\\mathrm{Type}\\\\, w$, the category of elements $\\\\mathrm{Elements}\\\\, F$ forms a groupoid. This means that every morphism in $\\\\mathrm{Elemen\"}\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence\", \"module\": \"Mathlib/CategoryTheory/Sites/Descent/DescentData\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat} {S : C}\\n  {R : CategoryTheory.Presieve S}, F.IsStackFor R → (F.toDescentData fun f => f.obj.hom).IsEquivalence\", \"doc\": \"For a category $\\\\mathcal{C}$, a pseudofunctor $\\\\mathcal{F}: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^{\\\\text{op}}) \\\\to \\\\mathsf{Cat}$, an object $S \\\\in \\\\mathcal{C}$, and a presieve $R$ on $S$, if $\\\\mathcal{F}\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{u₂, u₁} C} {F : CategoryTheory.Functor C FintypeCat}\\n  {inst_1 : CategoryTheory.GaloisCategory C} {G : Type u_1} {inst_2 : Group G}\\n  {inst_3 : (X : C) → MulAction G (F.obj X).carrier} {inst_4 : TopologicalSpace G} {inst_5 : IsTopologicalGroup G}\\n  {i\", \"doc\": \"Given a Galois category $\\\\mathcal{C}$, a functor $F : \\\\mathcal{C} \\\\to \\\\text{Fintype}$, and a compact topological group $G$ that is the fundamental group of $\\\\mathcal{C}$ with respect to $F$, this prop\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] {G : Type u_1} [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [inst_4 : CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst\", \"doc\": \"There exists a multiplicative equivalence between the compact topological group $ G $ and the automorphism group $ \\\\mathrm{Aut}(F) $ of the fiber functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, establ\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme-morphism, abstract action-groupoid and categorical-stack results do not give this theorem for algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torsor\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme-morphism, abstract action-groupoid and categorical-stack results do not give this theorem for algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*stack|stack.*torsor|actionGroupoid|quotientStack",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"line\": \"30\", \"text\": \"- `actionGroupoidIsFree G A` corresponds to the fact that a covering of a (single-vertex)\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"line\": \"106\", \"text\": \"instance actionGroupoidIsFree {G A : Type u} [Group G] [IsFreeGroup G] [MulAction G A] :\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme-morphism, abstract action-groupoid and categorical-stack results do not give this theorem for algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stackification of a scheme action groupoid equals the torsor quotient stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"MulAction.injective_ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \": Function.Injective (ofQuotientStabilizer α x)\", \"doc\": \"The induced action of the quotient group $G / \\\\text{Stab}(x)$ on $\\\\beta$ is injective, meaning distinct cosets of the stabilizer subgroup $\\\\text{Stab}(x)$ act differently on $x$.\"}\n  {\"name\": \"AddAction.injective_ofQuotientStabilizer\", \"module\": \"Mathlib.GroupTheory.GroupAction.Quotient\", \"type\": \"∀ (α : Type u) {β : Type v} [inst : AddGroup α] [inst_1 : AddAction α β] (x : β),\\n  Function.Injective (AddAction.ofQuotientStabilizer α x)\", \"doc\": \"The function induced by the quotient group $\\\\alpha / \\\\text{Stab}(x)$ acting on $x$ is injective, i.e., the induced action $\\\\alpha / \\\\text{Stab}(x) \\\\to \\\\beta$ is injective.\"}\n  {\"name\": \"CategoryTheory.ActionCategory.instGroupoid\", \"module\": \"Mathlib.CategoryTheory.Action\", \"type\": \": Groupoid (ActionCategory G X)\", \"doc\": \"For any group $G$ acting on a type $X$, the action category $\\\\mathrm{ActionCategory}(G, X)$ forms a groupoid. This follows because the single-object category associated to $G$ is itself a groupoid (as\"}\n  {\"name\": \"CategoryTheory.Limits.SingleObj.colimitTypeRelEquivOrbitRelQuotient\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.SingleObj\", \"type\": \": J.ColimitType ≃ MulAction.orbitRel.Quotient G (J.obj (SingleObj.star G))\", \"doc\": \"For a group $G$ and a functor $J$ from the single-object category associated with $G$ to the category of types, there exists a canonical equivalence between the colimit type of $J$'s objects under the\"}\n  {\"name\": \"AddTorsor.toAddAction\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{G : outParam (Type u_1)} → {P : Type u_2} → {inst : AddGroup G} → [self : AddTorsor G P] → AddAction G P\", \"doc\": \"Given an additive torsor $P$ for an additive group $G$, this constructs the additive monoid action of $G$ on $P$ by restricting the torsor's free and transitive group action to the additive monoid str\"}\n  {\"name\": \"AddTorsor\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"(G : outParam (Type u_1)) → Type u_2 → [AddGroup G] → Type (max u_1 u_2)\", \"doc\": \"A structure on a type $\\\\alpha$ making it a torsor for an additive group $G$, i.e., a free and transitive action of $G$ on $\\\\alpha$\"}\n  {\"name\": \"AddTorsor.mk\", \"module\": \"Mathlib.Algebra.AddTorsor.Defs\", \"type\": \"{G : outParam (Type u_1)} →\\n  {P : Type u_2} →\\n    [inst : AddGroup G] →\\n      [toAddAction : AddAction G P] →\\n        [toVSub : VSub G P] →\\n          [nonempty : Nonempty P] →\\n            (∀ (p₁ p₂ : P), (p₁ -ᵥ p₂) +ᵥ p₂ = p₁) → (∀ (g : G) (p : P), (g +ᵥ p) -ᵥ p = g) → AddTorsor G P\", \"doc\": \"Given an additive group $ G $, a non-empty type $ P $ with an additive action of $ G $ and a vector subtraction operation, if for all $ p_1, p_2 \\\\in P $, $ (p_1 - p_2) + p_2 = p_1 $ and for all $ g \\\\i\"}\n  {\"name\": \"MulAction.selfEquivSigmaOrbits'\", \"module\": \"Mathlib.GroupTheory.GroupAction.Defs\", \"type\": \": α ≃ Σ ω : Ω, ω.orbit\", \"doc\": \"The equivalence between the set $\\\\alpha$ and the disjoint union of its orbits under the group action, represented as the sigma type $\\\\Sigma_{\\\\omega \\\\in \\\\Omega} \\\\omega.\\\\text{orbit}$, where $\\\\Omega$ is \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme-morphism, abstract action-groupoid and categorical-stack results do not give this theorem for algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stackification of an affine group scheme action is the fppf stack of scheme torsors with equivariant morphisms",
+   "results": "OK; 8 hits. AlgebraicGeometry.instCategoryAffineScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.functor_obj_obj, AlgebraicGeometry.AffineScheme.forgetToScheme, AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass, CategoryTheory.PreGaloisCategory.toAut_hom_app_apply, AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj, CategoryTheory.PreGaloisCategory.functorToAction",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack predicates, actions on types, and affine scheme constructions do not identify the fppf stack of scheme torsors for a group scheme",
+   "digest": "05aba0559c4f1adc"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|quotientStack|stackification",
+   "results": "OK; 0 hits. . Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack predicates, actions on types, and affine scheme constructions do not identify the fppf stack of scheme torsors for a group scheme",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stackification of a group scheme action classifies fppf torsors with equivariant maps",
+   "results": "OK; 8 hits. CategoryTheory.Pseudofunctor.IsStackFor.mk, AddTorsor.mk, instProperVAdd, MulActionHom.instAddGroup, MulActionHom.instAddCommGroup, CategoryTheory.ActionCategory.instGroupoid, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack predicates, actions on types, and affine scheme constructions do not identify the fppf stack of scheme torsors for a group scheme",
+   "digest": "640993c7000d1e7d"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\", \"Scheme\"",
+   "results": "OK; 0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack predicates, actions on types, and affine scheme constructions do not identify the fppf stack of scheme torsors for a group scheme",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient stack of an arbitrary affine algebraic group action classifies principal bundles equipped with equivariant maps",
+   "results": "OK; 8 hits. Action.FintypeCat.term_⧸ₐ_, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, MulAction.ofQuotientStabilizer, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget₂",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract stack predicates, actions on types, and affine scheme constructions do not identify the fppf stack of scheme torsors for a group scheme",
+   "digest": "3264df297650fa86"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-affine-action-stack-presentation",
+  "date": "2026-10-23",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Identify the flat action-groupoid quotient with the stated scheme-torsor groupoid; the existing comparison assumes smooth G.",
+   "via": [
+    "lem-sfb-flat-affine-action-stack-presentation",
+    "lem-sfb-power-lifting-quotient-submersive",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-group-torsor-stackification",
+  "worker": "stage1",
+  "summary": "Eight-step scheme-descent proof of Stacks 0370 and 04WM for an arbitrary affine group scheme. All prerequisites reused; no new nodes. Neither smoothness nor finite type is used, and torsor projections are never assumed to be fppf covers. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Power lifting implies universal submersiveness of an affine invariant quotient. Fppf presentation used after the affine invariant quotient construction. Supporting input: Identify the flat action-groupoid quotient with the stated scheme-torsor groupoid; the existing comparison assumes smooth G. Steps 1-4 supply scheme torsor descent; steps 5-8 identify stackification and the stated trivial-torsor functor. The current latest blueprint direct-image proof (3) is the upstream unit context; the inherited long alteration-place text is provenance, not a new citation.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-family-affine-effectivity-reduction",
+    "why": "Generic covering-family effectivity reduction, used only for affine scheme morphisms; this unit has no such reduction."
+   },
+   {
+    "node": "lem-galois-affine-flat-descent-effective",
+    "why": "Generic affine flat surjective scheme-descent effectivity, supplying the affine-case hypothesis of the covering-family reduction; no unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-family-affine-effectivity-reduction",
+  "lem-galois-affine-flat-descent-effective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q153-68d94e453",
+  "group": "Q153",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-68d94e453 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full: statement, stmt_deps and source unchanged; zero new nodes. Live and side-live still show the item unsplit, so there is no supersession, and no re-split note applies. Source check: examples-stacks.tex 04WM (l.1311), situation-quotient-stack (l.1201) and 0370 (l.1272). The 04WM proof has F_p(x) = trivial torsor with a∘(id×x) and arrows ↦ R_{g^{-1}}, matching the item's convention, and it assumes neither smoothness nor finite type. Step checks: (1) affine-morphism property satisfies (i) via permanence(1), (ii) via the third form of the 01S8 local-target criterion including m=0, (iii) via the galois 0245 node, which needs only flat and surjective. (2) and (4) glue morphisms with 022C+023Q, which need no separation, and never use P→T as a cover. (3) On the refined cover, the transitions on U_ia×_{T_i}U_ib factor through the diagonal, where α_ii is the identity (invertible idempotent), so η_i glues; checked. (5) f_y(hg^{-1})=hx and R_{b^{-1}}R_{g^{-1}}=R_{(bg)^{-1}}, recomputed. (6) and (7) use the 02ZP/0436 clauses: the action Isom presheaf is already a sheaf, and r(h)=h r(e) gives the bijection. (8) uses 046N. proof_deps equals the union of uses; the closure contains neither the item nor its parent, so no cycle. Edge cases: trivial G, empty T/V, a noncommutative constant group, α_p, and an infinite product of G_a; non-separated V is allowed. The existing lem-sfb-action-groupoid-torsor-comparison is a smooth finite-type special case, not a duplicate, and is not cited. Batch-5: lem-trf-fppf-covering-is-fpqc is Stacks 022C, a generic mathlib leaf; lem-trf-fppf-family-affine-effectivity-reduction is a Stacks 02W3 generic descent reduction whose closure holds only generic fppf/fpqc descent nodes. Neither is a step of the trace formula or Poincaré duality, so both are accepted, along with the galois 0245 tool_use. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupTorsorStackification",
+  "declaration": "AlgebraicGeometry.SchemeAction.affineGroup_torsor_stackification",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupTorsorStackification.lean",
+  "statement": "theorem affineGroup_torsor_stackification (k : Type u) [Field k] (G V : Over (Spec (CommRingCat.of k))) [GrpObj G] [ModObj G V] [IsAffineHom G.hom] (A : BasedCategory.{u, u + 1} (Over (Spec (CommRingCat.of k)))) (i : BasedFunctor (actionGroupoid G V) A) (hi : IsFppfStackification i) : IsFppfModuliStack (torsorGroupoid G V) ∧ ∃ (F : BasedFunctor A (torsorGroupoid G V)) (H : BasedFunctor (torsorGroupoid G V) A), Nonempty (F.comp H ≅ BasedFunctor.id A) ∧ Nonempty (H.comp F ≅ BasedFunctor.id (torsorGroupoid G V)) ∧ Nonempty (i.comp F ≅ trivialTorsorFunctor G V)",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0e647663",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Statement = landed smooth actionGroupoid_torsor_comparison minus Smooth/LFT/QC binders; only IsAffineHom G.hom remains, V arbitrary with ModObj; conclusion IsFppfModuliStack torsorGroupoid ∧ ∃ F H based equivalence with vertical isos ∧ i.comp F ≅ trivialTorsorFunctor (actual (h,t)↦h•x(t), h↦h*g⁻¹ maps). Matches node and Stacks 04WM/situation-quotient-stack (no smoothness/finite type). Universes {u,u+1} consistent with IsFppfStackification test stacks. Item changed only in lean + stmt_deps adding two landed def nodes (allowed). lean.statement verbatim; docstrings with source, blueprint id, 8 steps; lines ≤100; plain imports are proof_dep modules. Edge cases (empty T/V, noncommutative G, α_p, infinite-type G, non-separated V) covered. Report has Worker report and Second reading. No findings, no fixes."
+ }
+}

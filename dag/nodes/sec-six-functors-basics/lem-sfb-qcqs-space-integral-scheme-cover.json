@@ -1,0 +1,377 @@
+{
+ "id": "lem-sfb-qcqs-space-integral-scheme-cover",
+ "kind": "statement",
+ "title": "Integral surjective scheme cover of a qcqs algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with algebraic spaces over $S$ as in [def-trf-algebraic-space] and universes as in [def-weil-size-convention]. Let $X$ be a quasi-compact and quasi-separated algebraic space over $S$. Quasi-compact means that every open cover of the underlying point space has a finite subcover; quasi-separated means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on scheme tests. The point topology is [def-a1-space-point-topology]. A morphism of algebraic spaces is finite (respectively integral, affine) when every base change by a scheme is represented by a finite (respectively integral, affine) scheme morphism [def-weil-finite-integral-morphism, pqf-def-affine-morphism]. There are an $S$-scheme $Y$ and a surjective integral morphism $p:Y\\to X$ over $S$. Surjectivity is surjectivity on field-valued point classes [def-a1-space-point-topology].",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-point-topology",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-affine-morphism",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-a1-space-etale-open-image], topological quasi-compactness gives a quasi-compact scheme atlas. Refine it by [lem-trf-space-qc-finite-affine-atlas-refinement] to a surjective etale map $a:U\\to X$ with $U$ affine. More generally we prove the following induction assertion: for every qcqs algebraic space $X$ and every surjective etale map $a:U\\to X$ from a quasi-compact scheme separated over $\\operatorname{Spec}\\mathbf Z$, whose geometric fibres have at most $d$ points, there is a surjective integral $p:H\\to X$ from a scheme such that every point of $H$ has an open neighbourhood on which $p$ factors through $U$. The bound exists for our atlas by [lem-sfb-space-qc-etale-fibre-bound]. The map $a$ is quasi-compact by [lem-sfb-space-integral-qcqs-permanence]. It is separated: its diagonal is the pullback of the closed absolute diagonal of $U$ along $U\\times_XU\\to U\\times_{\\operatorname{Spec}\\mathbf Z}U$. Thus this induction uses separated morphisms, even though $X$ need not be separated. The affine scheme $U$ is separated over $\\operatorname{Spec}\\mathbf Z$ by the affine-separated clause of [lem-weil-pbc-affine-morphism-permanence].",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "lem-sfb-space-qc-etale-fibre-bound",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "def-weil-closed-immersion",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "Use strong induction on $d$. If $X$ is empty, its empty scheme atlas and the identity give the assertion. If $d=0$, surjectivity forces this empty case. If $d=1$ and $X$ is nonempty, every geometric fibre has exactly one point, so [lem-sfb-space-separated-etale-diagonal-complement] makes $a$ an isomorphism. Take $H=U$, $p=a$ and the identity local factorization. Isomorphisms are integral because every scheme test is an isomorphism and its affine ring map is integral. Now fix $d>1$ and assume the assertion for all smaller bounds, all qcqs targets, and all the specified scheme charts.",
+   "uses": [
+    "lem-sfb-space-separated-etale-diagonal-complement",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "By [lem-sfb-space-quasifinite-integral-compactification] factor $a$ as $U\\xrightarrow{j}B\\xrightarrow{\\pi}X$, with $j$ a quasi-compact open immersion and $\\pi$ integral. Replace $B$ by the schematic closure of $U$, using [lem-sfb-space-qc-open-schematic-closure]. The inclusion of this closure is closed, hence integral on each scheme test by [lem-weil-pbc-closed-immersion-integral-separated-uc]; the composite with $\\pi$ is integral, since after a scheme test its two factors are integral scheme maps. The open $U$ is now dense in $B$. The space $B$ is qcqs by [lem-sfb-space-integral-qcqs-permanence].",
+   "uses": [
+    "lem-sfb-space-quasifinite-integral-compactification",
+    "lem-sfb-space-qc-open-schematic-closure",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-sfb-space-integral-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "Form $P=U\\times_XB$. Projection to $U$ is integral by the scheme-test definition, hence $P$ is a quasi-compact separated scheme by [lem-sfb-space-integral-qcqs-permanence]. Projection $q:P\\to B$ is surjective etale by [lem-trf-space-fibre-products-etale-covers]. Its section $i:U\\to P$, $u\\mapsto(u,j(u))$, is closed: it is the pullback of the closed diagonal of $\\pi:B\\to X$ along $(j,\\mathrm{id}_B):P\\to B\\times_XB$. It is also etale, since it is a morphism between the two etale $B$-spaces $U$ and $P$ by [lem-trf-space-chartwise-etale-permanence]. A section is a monomorphism, so [lem-sfb-space-etale-monomorphism-open] makes $i$ open. Write $P=U\\amalg W$ with $W$ the open and closed complement. As a closed subspace of the quasi-compact separated scheme $P$, $W$ is itself a quasi-compact separated scheme; its scheme structure is the open subscheme structure on the complement.",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-closed-immersion",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-etale-monomorphism-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "Let $V\\subseteq B$ be the open image of $W\\to B$ given by [lem-a1-space-etale-open-image]. This map factors as a surjective etale $W\\to V$. Since $W$ is quasi-compact, so is $V$; since $B$ is quasi-separated, this open $V$ is quasi-separated by [lem-sfb-space-integral-qcqs-permanence]. Every point of $B\\setminus U$ lies in $V$: the surjective fibre $P_b$ is nonempty there and the section summand has empty fibre, so $P_b=W_b$. Thus $B\\setminus V\\subseteq U$. On a geometric point of $U\\subseteq B$, exactly one point of the fibre $P_b$ belongs to the section summand, so $|W_b|=|P_b|-1\\leq d-1$. Everywhere $|W_b|\\leq |P_b|\\leq d$, because $P\\to B$ is the base change of $a$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "The map $W\\to B$ is separated and etale as the restriction of $P\\to B$, and quasi-compact by its quasi-compact source and quasi-separated target, using [lem-sfb-space-integral-qcqs-permanence]. Separatedness follows by restricting the closed diagonal of $a$ after base change. Its geometric fibre cardinalities are bounded by $d$. By [lem-sfb-space-etale-closed-degree-loci], the locus where their cardinalities are at most $d-1$ is closed. Step 5 shows it contains the dense open $U$, hence it is all of $B$. Apply the induction hypothesis to $W\\to V$ with bound $d-1$: the target $V$ is qcqs and the scheme $W$ is quasi-compact and separated over $\\operatorname{Spec}\\mathbf Z$. We obtain a scheme $Z$ with a surjective integral map $Z\\to V$ which Zariski locally factors through $W$.",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-etale-closed-degree-loci",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "The open inclusion $V\\hookrightarrow B$ is quasi-compact by [lem-sfb-space-integral-qcqs-permanence], since $V$ is quasi-compact and $B$ quasi-separated. Apply [lem-sfb-space-integral-extension-qc-open] to $Z\\to V$ and obtain an integral $E\\to B$ with $E\\times_BV=Z$. The open immersion $Z\\hookrightarrow E$ is quasi-compact: $Z$ is quasi-compact since it is integral over the quasi-compact space $V$, while $E$ is quasi-separated since it is integral over the qcqs space $B$; apply [lem-sfb-space-integral-qcqs-permanence] to $Z\\to E$. Replace $E$ by the schematic closure of $Z$, using [lem-sfb-space-qc-open-schematic-closure]. Since $Z$ is already closed in $E\\times_BV=Z$, restriction of that closure to $V$ remains exactly $Z$. The map $E\\to B$ remains integral: a closed immersion is integral and integral scheme morphisms compose on each scheme test by [lem-weil-pbc-closed-immersion-integral-separated-uc].",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-sfb-space-integral-extension-qc-open",
+    "lem-sfb-space-qc-open-schematic-closure",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "The two open subspaces $Z=E\\times_BV$ and $E\\times_BU$ cover $E$, because $U\\cup V=B$. The first is a scheme by induction; the second is a scheme since it is integral over the scheme $U$, by [lem-sfb-space-integral-qcqs-permanence]. Hence [lem-pc-schemes-criterion] implies that $E$ is a scheme: the algebraic-space sheaf is a Zariski sheaf, these are representable open subfunctors, and their pullbacks cover every scheme test. Its map to $X$ locally factors through $U$: over $E\\times_BU$ use its projection to $U$; over $Z$ use the local factorizations $Z\\to W\\subseteq U\\times_XB\\to U$ from induction. The composites with $a$ are the map $E\\to B\\to X$ by the fibre-product identities.",
+   "uses": [
+    "lem-sfb-space-integral-qcqs-permanence",
+    "lem-pc-schemes-criterion",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "Take the reduced closed subspace $T\\hookrightarrow B$ supported on $B\\setminus V$, supplied by [lem-sfb-space-reduced-closed-support]. Its map factors through $U$ because this closed subset is contained in $U$. The base change to $U$ is therefore $T$ itself, a closed subscheme of $U$; thus $T$ is a scheme. Let $H=E\\amalg T$ be the scheme coproduct [lem-weil-pbc-scheme-coproduct-family]. Both maps to $B$ are integral, using the closed-immersion clause of [lem-weil-pbc-closed-immersion-integral-separated-uc] for $T$. Their coproduct is integral: over an affine scheme test of $B$ its source is the spectrum of the product of the two integral algebras; affineness of this finite disjoint union is the final clause of [lem-weil-pbc-affine-morphism-permanence]. For $(b,c)$ annihilated by monic polynomials $F$ and $G$, the monic product $FG$ annihilates $(b,c)$, proving integrality. Composing with the integral $B\\to X$ is integral by the same cited scheme composition theorem on each test.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  },
+  {
+   "text": "The image of $E\\to B$ contains $V$ because its restriction is the surjection $Z\\to V$, and $T$ covers $B\\setminus V$. Hence $H\\to B$ is surjective. The image of $B\\to X$ contains the image of $U\\to X$, which is all of $X$, so $H\\to X$ is surjective. The local factorizations through $U$ on $E$ were constructed in step 8, and on $T$ there is a global factorization through $U$. They persist on the two open summands of $H$. This completes the strong induction assertion. Applied to the affine atlas of step 1, it gives the required surjective integral map from the $S$-scheme $H$ to $X$. All constructions and maps were over $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-separated-etale-diagonal-complement",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-space-quasifinite-integral-compactification",
+  "lem-sfb-space-qc-open-schematic-closure",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-sfb-space-etale-monomorphism-open",
+  "lem-sfb-space-etale-closed-degree-loci",
+  "lem-sfb-space-integral-extension-qc-open",
+  "lem-pc-schemes-criterion",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 09YB (lemma-there-is-a-scheme-integral-over), proof of (2), retaining local factorization in the degree induction and concluding (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated algebraic space admits a surjective integral morphism from a scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CompactSpace ↥X] [QuasiSeparatedSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism $ f: X \\to Y $ of schemes is quasi-compact if $ X $ is a compact topological space and $ Y $ is a quasi-separated scheme. This follows from the property that compactness of $ X $ ensures f\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_compactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If the target scheme $Y$ is both quasi-separated and compact as a topological space, then the morphism $f$ is quasi-compact if and only if the source scheme \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space can be covered by a scheme via an integral surjection",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  [AlgebraicGeometry.Scheme.JointlySurjective K] (𝒰 : AlgebraicGeometry.Scheme.Cover K X) (x : ↥X),\\n  ∃ i y, (CategoryTheory.ConcreteCategory.hom (𝒰.f i).base) y = x\", \"doc\": \"For any scheme $X$ equipped with a jointly surjective precoverage $K$, and for any cover $\\\\mathcal{U}$ of $X$ defined by $K$, every point $x \\\\in X$ admits an index $i$ and a point $y$ such that the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on precoverages of the category of schemes, asserting that for every scheme $X$, the covering sieves assigned to $X$ consist of families of morphisms with codomain $X$ whose images cover $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover_X\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] (x : PUnit.{v + 1}), (AlgebraicGeometry.Scheme.Hom.cover f hf).X x = X\", \"doc\": \"For a surjective morphism $ f: X \\to S $ of schemes satisfying a morphism property $ P $, the $ X $-component of the covering sieve $\\\\{f\\\\}$ in the precoverage defined by jointly surjective families and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"∀ {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.Scheme.JointlySurjective K]\\n  {X : AlgebraicGeometry.Scheme},\\n  ∀ S ∈ K.coverings X, ∀ (x : ↥X), ∃ Y g, S g ∧ x ∈ Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base)\", \"doc\": \"For any scheme $X$ and any covering sieve $S$ assigned by a jointly surjective precoverage $K$ on $X$, every point $x$ in $X$ lies in the image of the underlying continuous map of some morphism $g$ in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.precoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The precoverage on the category of schemes is defined as the intersection of the jointly surjective precoverage (where a family of morphisms is covering if their images form a jointly surjective famil\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The precoverage on the category of schemes induced by the forgetful functor to types, where a family of morphisms is covering if their images in the underlying sets form a jointly surjective family.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsIntegralHom\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|scheme.integral.cover",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "surjective integral cover of an algebraic space by a scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.JointlySurjective\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate on precoverages of the category of schemes, asserting that for every scheme $X$, the covering sieves assigned to $X$ consist of families of morphisms with codomain $X$ whose images cover $\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral) →\\n    AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is integral if it is affine and for every affine open subset $ U $ of $ Y $, the induced ring homomorphism on the sections over $ U $ and $ f^{-1}(U) $ is integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.covers\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"[JointlySurjective K] (𝒰 : X.Cover K) (x : X) : x ∈ Set.range (𝒰.f (𝒰.idx x))\", \"doc\": \"For any scheme $X$ equipped with a jointly surjective precoverage $K$ and any cover $\\\\mathcal{U}$ of $X$ defined by $K$, every point $x \\\\in X$ lies in the image of the morphism $\\\\mathcal{U}.f_i$ corre\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.jointlySurjectivePrecoverage\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.MorphismProperty\", \"type\": \": Precoverage Scheme.{u}\", \"doc\": \"The precoverage on the category of schemes induced by the forgetful functor to types, where a family of morphisms is covering if their images in the underlying sets form a jointly surjective family.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.cover\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{P : MorphismProperty Scheme.{u}} {X S : Scheme.{u}} (f : X ⟶ S) (hf : P f) [Surjective f] :\\n  Cover.{v} (precoverage P) S\", \"doc\": \"Given a morphism $ f: X \\to S $ of schemes that is surjective and satisfies a morphism property $ P $, the singleton presieve $\\\\{f\\\\}$ forms a covering sieve in the precoverage defined by the intersecti\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern schemes, scheme limits or unrelated integrals; none states this assertion for algebraic spaces or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi compact quasi separated algebraic space has an integral surjective scheme cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"{S : AlgebraicGeometry.Scheme} → CategoryTheory.PreZeroHypercover S → Prop\", \"doc\": \"A predicate that determines whether a given pre-zero hypercover of a scheme $ S $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.homCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (hf : P f)\\n  [inst : AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (AlgebraicGeometry.Scheme.Hom.cover f hf).toPreZeroHypercover\", \"doc\": \"Given a surjective morphism $ f: X \\to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\\\{f\\\\}$ forms a quasi-compact covering sieve in the precovera\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.singleton\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S X : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.QuasiCompactCover (CategoryTheory.PreZeroHypercover.singleton f)\", \"doc\": \"A singleton pre-zero hypercover of a scheme $ S $, constructed from a surjective and quasi-compact morphism $ f: X \\to S $, satisfies the quasi-compactness predicate.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ (S : AlgebraicGeometry.Scheme) (𝒰 : CategoryTheory.PreZeroHypercover S),\\n  S.quasiCompactCover 𝒰 ↔ AlgebraicGeometry.QuasiCompactCover 𝒰\", \"doc\": \"For a scheme $ S $ and a pre-zero hypercover $ \\\\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\\\mathca\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.inst\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} (𝒰 : S.OpenCover), AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZeroHypercover\", \"doc\": \"Any open cover of a scheme, defined as a collection of open immersion morphisms whose images form a jointly surjective family, satisfies the quasi-compactness condition for pre-zero hypercovers.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {K : CategoryTheory.Precoverage AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover K S} [AlgebraicGeometry.Scheme.JointlySurjective K]\\n  [∀ (i : 𝒰.I₀), AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀],\\n  AlgebraicGeometry.QuasiCompactCover 𝒰.toPreZe\", \"doc\": \"A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage.\"}\n  {\"name\": \"AlgebraicGeometry.compactSpace_iff_exists\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme},\\n  CompactSpace ↥X ↔ ∃ R f, Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A topological space $ X $ is compact if and only if there exists a commutative ring $ R $ and a surjective continuous map from the prime spectrum $ \\\\operatorname{Spec}(R) $ (endowed with the Zariski t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits do not state the algebraic-space scheme-cover theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Covering an algebraic space by a scheme using an integral morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"Given a precoverage $K$ on the category of schemes, the cover associated to $K$ is the zero hypercover defined by $K$, which consists of a collection of covering sieves for each scheme in the category\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme → Type (max (u + 1) (v + 1))\", \"doc\": \"A predicate on morphisms between schemes that assigns to each morphism $ f : X \\to Y $ the proposition that it is an affine cover, i.e., an affine morphism forming a cover in the Zariski topology.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.precoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme → CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The precoverage on the category of schemes is defined as the intersection of the jointly surjective precoverage (where a family of morphisms is covering if their images form a jointly surjective famil\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instInhabitedOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → Inhabited X.OpenCover\", \"doc\": \"For any scheme $X$, the type of open covers of $X$ is inhabited, with the canonical affine open cover constructed from affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose image\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/QuasiCompact\", \"type\": \"(S : AlgebraicGeometry.Scheme) → CategoryTheory.ObjectProperty (CategoryTheory.PreZeroHypercover S)\", \"doc\": \"For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"CategoryTheory.Precoverage AlgebraicGeometry.Scheme\", \"doc\": \"The Zariski precoverage on the category of schemes is the precoverage generated by open immersions. Each covering sieve consists of morphisms that are open immersions, forming a basis for the Zariski \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits do not state the algebraic-space scheme-cover theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace, IsIntegralHom",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicSpace'",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits do not state the algebraic-space scheme-cover theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|integral.*scheme.*cover",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits do not state the algebraic-space scheme-cover theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "integral surjective scheme cover of a quasi separated algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.covers\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.MorphismProperty\", \"type\": \"[JointlySurjective K] (𝒰 : X.Cover K) (x : X) : x ∈ Set.range (𝒰.f (𝒰.idx x))\", \"doc\": \"For any scheme $X$ equipped with a jointly surjective precoverage $K$ and any cover $\\\\mathcal{U}$ of $X$ defined by $K$, every point $x \\\\in X$ lies in the image of the morphism $\\\\mathcal{U}.f_i$ corre\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsAffineHom : AlgebraicGeometry.IsAffineHom f],\\n  (∀ (U : Y.Opens),\\n      AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral) →\\n    AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is integral if it is affine and for every affine open subset $ U $ of $ Y $, the induced ring homomorphism on the sections over $ U $ and $ f^{-1}(U) $ is integral\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [X.IsSeparated] : QuasiSeparatedSpace X\", \"doc\": \"Every separated scheme is a quasi-separated space. That is, for any scheme $X$ equipped with the separatedness property, the intersection of any two quasi-compact open subsets of $X$ is itself quasi-c\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The predicate that a morphism $ f: X \\\\to Y $ of schemes is quasi-separated, i.e., the diagonal morphism $ X \\\\to X \\\\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is surjective if the underlying continuous map on topological spaces is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.Over\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Over\", \"type\": \"(S : AlgebraicGeometry.Scheme) →\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} →\\n    [P.IsStableUnderBaseChange] →\\n      [AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving P] →\\n        {X : AlgebraicGeometry.Scheme} →\\n          [X.Over S] → AlgebraicGeometry.Scheme.Cover (Alg\", \"doc\": \"Given a scheme $ S $, a morphism property $ P $ stable under base change and preserved under jointly surjective families, and a scheme $ X $ over $ S $, the cover of $ X $ is defined by the precoverag\"}\n  {\"name\": \"AlgebraicGeometry.Surjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.Surjective f\", \"doc\": \"Given a morphism $ f: X \\to Y $ of schemes, if the underlying continuous map on topological spaces is surjective, then $ f $ is a surjective morphism of schemes.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only hits do not state the algebraic-space scheme-cover theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-finite-scheme-cover",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1).",
+   "via": [
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-qcqs-space-integral-scheme-cover",
+  "worker": "stage1",
+  "summary": "Expanded Tag 09YB into strong induction on the geometric fibre bound, retaining local factorization through the chosen etale chart. Made the seven non-elementary algebraic-space inputs statement-only nodes; reused existing atlas, open-image, reduced-support, scheme-criterion and scheme integral-calculus nodes. Checked the source, hypotheses, empty and degree-one cases, and all cited statements. Statement unchanged.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images (3) alteration-support ancestry needs Tag 09YB(1) via Tag 09YC and 0ADD. The latest blueprint still has the direct-image clause (3); its proof now cites preservation results. This subordinate Stacks proof realizes the inherited finite-cover prerequisite, not a replacement of the unit route. The ancestor command prints None; preserved that value and the inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-trf-space-qc-finite-affine-atlas-refinement",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-pc-schemes-criterion",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic algebraic-space or scheme foundational input used in the cited step; the unit has no competing result for this atlas/representability/integral-calculus operation, and no cohomological unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-trf-space-qc-finite-affine-atlas-refinement",
+  "def-weil-closed-immersion",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-pc-schemes-criterion",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-abba74a32",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-abba74a32 (reviewer sub-agent of L); spot-checked: Read in full: Stacks 09YB (decent-spaces) and its inputs 0ABS, 082X/082Z, 0G2D, 07S8, 03JX/03JT, 03HK, 05W5. The item statement is unchanged from side-live and matches 09YB(1), with absolute quasi-separatedness. The ten steps follow the Stacks induction on the fibre bound d, with the local factorisation through U written out. Cases X empty, d=0 and d=1 are handled. Checked steps: a is separated (pullback of the absolute diagonal); the section is closed (pullback of the diagonal of pi) and open (an étale monomorphism); B minus V lies in U; W has at most d-1 points over U, extended to all of B by the 07S8 closed locus and density; Z->E is qc; the closure keeps E x_B V = Z; E is a scheme by 01JJ; T is a closed subscheme of U; integrality of the coproduct is checked by the monic product FG. All seven new nodes are true, smaller than the item and no restatement of it. Notes: étale + separated gives the 07S8 hypotheses, and the line with doubled origin shows separatedness is needed; in Stacks quasi-finite includes qc, so 0ABS applies. Grep by tag and label found only scheme-level analogues, so no duplicates. Batch-5 flags all point at general definitions (def-trf-algebraic-space, def-a1-space-point-topology) or general space foundations (fibre products, affine atlas, étale permanence, open image, 05W5); none is a trace-formula or Poincaré-duality step, so accepted. The ten tool_uses are accepted as generic. FIX: all seven new nodes cite [def-weil-etale-morphism] in the statement but omit it from stmt_deps; I added it in fixes/dag/nodes/sec-six-functors-basics/*.json, with no other change.; 7 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsSpaceIntegralSchemeCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_surjective_integral_scheme_cover",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsSpaceIntegralSchemeCover.lean",
+  "statement": "theorem exists_surjective_integral_scheme_cover {S : Scheme.{u}} (X : AlgebraicSpace S) [CompactSpace (Point X.obj.obj)] (hqs : IsAbsolutelyQuasiSeparated X) : ∃ (Y : Over S) (p : schemeSpace Y ⟶ X), IsRepresentableWith (fun _ _ q ↦ IsIntegralHom q.left) p.hom.hom ∧ pointImage p.hom.hom = Set.univ",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5adccf307",
+  "group": "NS",
+  "result": "pass",
+  "note": "Read Stacks 09YB(1) (decent-spaces.tex l.1807), item node, module, report and dep declarations IsRepresentableWith, pointImage/pointTopologicalSpace, IsAbsolutelyQuasiSeparated (affine-test absolute), schemeSpace. Every clause matches: arbitrary S; X : AlgebraicSpace S; CompactSpace (Point X); absolute quasi-separatedness; ∃ Y : Over S with p : schemeSpace Y ⟶ X integral on all scheme base changes (IsIntegralHom) and pointImage = univ. No extra assumptions, single universe u, edge cases (empty X, represented X, non-qs S) covered. lean.statement verbatim. The two added stmt_deps are landed def owners; dep records identical to live; Point is reached through def-a1-space-point-topology. No new defs; proof is sorry; docstrings carry the source, blueprint id and ten steps; proof imports exist. Report has a stray sentence about a withdrawn CompactObject module (harmless). No changes, no compile."
+ }
+}

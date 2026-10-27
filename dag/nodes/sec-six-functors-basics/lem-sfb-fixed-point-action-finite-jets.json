@@ -1,0 +1,321 @@
+{
+ "id": "lem-sfb-fixed-point-action-finite-jets",
+ "kind": "statement",
+ "title": "Finite jets at a fixed point detect the kernel of an algebraic action",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $H$ be a separated finite-type $k$-group scheme [def-sc-group-scheme, def-weil-finite-type-morphism], with no affineness, smoothness or connectedness assumption. Let $X$ be a smooth connected separated finite-type $k$-scheme [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme]. Separated means that the diagonal is a closed immersion [def-weil-proper-morphism]. Suppose $a:H\\times_kX\\to X$ is an action, meaning that $a(1,z)=z$ and $a(h,a(h',z))=a(hh',z)$ after every base change, with products as in [def-pc-fibre-product]. Let $x:\\operatorname{Spec}k\\to X$ be fixed by this action, meaning $a\\circ(\\mathrm{id}_H\\times x)=x\\circ p_H$. Write $R=\\mathcal O_{X,x}$ for the local ring (the stalk of the structure sheaf), and $\\mathfrak m=\\ker(R\\to k)$ for its maximal ideal. For $n\\geq1$ put $V_n=R/\\mathfrak m^{n+1}$, with ideal powers and quotient rings in their usual ring-theoretic sense [def-weil-pbc-algebra-hom-quotient]. Then $V_n$ is a nonzero finite-dimensional $k$-vector space [def-weil-finite-dimensional-subspace]. Pullback by the inverse action on the infinitesimal neighbourhood $\\operatorname{Spec}V_n\\hookrightarrow X$ defines a homomorphism of $k$-group schemes $\\rho_n:H\\to\\operatorname{GL}(V_n)$; here $\\operatorname{GL}(V_n)$ is the affine general linear group [def-sc-general-linear-group] in any basis, whose $B$-points are the invertible $B$-linear maps of $B\\otimes_k V_n$ [def-weil-pbc-module-tensor-product]. Its scheme-theoretic kernel $K_n=H\\times_{\\operatorname{GL}(V_n)}\\operatorname{Spec}k$ is a closed normal finite-type subgroup scheme [def-sc-group-scheme-subgroup, def-weil-closed-immersion]. There is $n_0\\geq1$ such that for every $n\\geq n_0$, every commutative $k$-algebra $B$, and every $h\\in H(B)$, one has\n$$h\\in K_n(B)\\quad\\Longleftrightarrow\\quad a_{B'}(h_{B'},z)=z\\ \\text{for every commutative }B\\text{-algebra }B'\\text{ and every }z\\in X(B').$$\nThus a single sufficiently high jet detects the entire action kernel on all algebra-valued points, including nonreduced algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 8.9 proof, printed p.150: descending kernels on O_P/m_P^(n+1) and Krull intersection; use its argument up to identifying the stable kernel with the kernel of the action, before invoking faithfulness. Fixed subschemes: Theorem 7.1, printed pp.138--139. Smooth connected X over an algebraically closed field ensures that X is reduced and irreducible, as required in the fixed-subscheme argument. Corollary 8.10 is the conjugation application. No Stacks tag states this action-kernel theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-general-linear-group",
+  "def-weil-pbc-module-tensor-product",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-rational-point-thickenings-base-change] to $(X,x)$. Thus $R$ is Noetherian local with residue $k$, each $V_n$ is nonzero finite-dimensional, and $Z_n=\\operatorname{Spec}V_n\\subset X$ has ideal $\\mathcal J^{n+1}$. For every $k$-scheme $T$, its base change is the thickening of the section $x_T$ defined by $\\mathcal J_T^{n+1}$. Smoothness gives regularity by [lem-weil-pbc-smooth-scheme-over-field-regular]. The rational point makes $X$ nonempty; connectedness and [lem-sc-regular-connected-integral] therefore make $X$ integral. Finally [lem-weil-pbc-finite-type-over-noetherian], with base $\\operatorname{Spec}k$, makes $H$ Noetherian. A field is Noetherian since its only ideals are $0,k$.",
+   "uses": [
+    "lem-sfb-rational-point-thickenings-base-change",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, printed p.150, local quotients and Noetherianity; reducedness correction in the appended errata. Stacks 056S, 0569, 033N, 01T6 supply the cited geometric inputs."
+   }
+  },
+  {
+   "text": "For a $k$-scheme $T$ and $h:T\\to H$, the action defines the $T$-automorphism $c_h$ of $X_T$, $z\\mapsto h z$, with inverse $c_{h^{-1}}$. Since $x$ is fixed as a morphism, $c_h$ preserves the section $x_T$, hence its ideal $\\mathcal J_T$ (the kernel of restriction to the section) and all its powers. Step 1 therefore restricts $c_h$ to $T\\times Z_n$. For $T=\\operatorname{Spec}B$, pullback by $c_{h^{-1}}$ is a $B$-algebra automorphism $T_h$ of $B\\otimes_kV_n$. It is natural in $B$. The identity $c_{(hh')^{-1}}=c_{h'^{-1}}c_{h^{-1}}$ and contravariance give $T_{hh'}=T_hT_{h'}$, and $T_1=1$. The restriction maps $V_{n+1}\\to V_n$ commute with these operators because the same automorphism preserves both ideal powers.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-sfb-rational-point-thickenings-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, first paragraph: action on infinitesimal neighbourhoods; inverse-action convention made explicit."
+   }
+  },
+  {
+   "text": "This construction works for every $k$-scheme $T$, not just affine ones: on affine charts the coordinate modules of $T\\times Z_n$ are $\\mathcal O_T\\otimes_kV_n$ by step 1, and the pullbacks agree on overlaps. In a basis of $V_n$, its automorphism $T_h$ is an invertible matrix of sections, hence, by [lem-a1-locally-ringed-space-affine-adjunction] (morphisms $T\\to\\operatorname{Spec}A$ correspond naturally to ring maps $A\\to\\Gamma(T,\\mathcal O_T)$, and $k$-morphisms to $k$-algebra maps), a $T$-point of the general linear group $\\operatorname{Spec}A$ of [def-sc-general-linear-group], whose $\\Gamma(T,\\mathcal O_T)$-points are the invertible matrices; this description is basis-independent as an automorphism of the free module. We have a natural transformation $h_H\\to h_{\\operatorname{GL}(V_n)}$ on all $k$-schemes. [lem-galois-yoneda-fully-faithful], with category $(\\mathit{Sch}/k)$, gives a unique morphism $\\rho_n$. The identities of step 2 make it a group-scheme homomorphism. The cited GL description applies since $\\dim_kV_n\\geq1$.",
+   "uses": [
+    "lem-sfb-rational-point-thickenings-base-change",
+    "def-sc-general-linear-group",
+    "lem-galois-yoneda-fully-faithful",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, first paragraph, natural representations and Yoneda; Stacks 001P (categories-lemma-yoneda)."
+   }
+  },
+  {
+   "text": "By [lem-sc-kernel-subgroup], $K_n=\\ker\\rho_n$ is a closed subgroup with $K_n(B)=\\ker\\rho_n(B)$ for every $k$-algebra $B$. These kernels are normal: $\\rho_n(ghg^{-1})=\\rho_n(g)1\\rho_n(g)^{-1}=1$ for $h\\in K_n(B)$, universally in $B$. Closed subschemes of a finite-type $k$-scheme are finite type: intersect a finite affine cover with the closed subscheme; its coordinate rings are quotients of finitely generated $k$-algebras. Since $V_{n+1}\\to V_n$ is surjective after every scalar extension, equivariance in step 2 gives $K_{n+1}(B)\\subseteq K_n(B)$ for all $B$. Test on affine charts of $K_{n+1}$ to obtain a factorization $K_{n+1}\\to K_n$ over $H$, equivalently an inclusion $\\mathcal L_n\\subseteq\\mathcal L_{n+1}$ of their quasi-coherent ideal sheaves.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "def-weil-finite-type-morphism",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, descending kernels; elementary kernel and closed-immersion ideal calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-acc-quasi-coherent] on the Noetherian scheme $H$ to the nonempty set $\\{\\mathcal L_n:n\\geq1\\}$ of quasi-coherent ideals. Choose a maximal member $\\mathcal L_{n_0}$. Since the sequence is increasing, maximality forces $\\mathcal L_n=\\mathcal L_{n_0}$ for all $n\\geq n_0$. Thus $K_n=K_{n_0}$ as closed subschemes, including nilpotents. Put $K=K_{n_0}$. The inclusions also imply $K\\subseteq K_n$ for every $n\\geq1$. Hence the restricted $K$-action on each $Z_n$ is trivial: its inverse pullback on functions is the identity on every algebra point, so the action morphism equals the projection, tested on affine charts of $K\\times Z_n$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "lem-sfb-rational-point-thickenings-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, descending-chain stabilization as closed subgroup schemes; Stacks 01Y8 (coherent-lemma-acc-coherent)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-universal-fixed-subscheme] to the restriction of the action to $K\\times X$. Its hypotheses hold: $K$ is separated and finite type as a closed subscheme of $H$, and $X$ is separated finite type. Let $Y=X^K\\hookrightarrow X$ have quasi-coherent ideal $\\mathcal I$. The trivial actions on $Z_n$ and the fixed-subscheme factorization property give $Z_n\\subseteq Y$ for every $n\\geq1$. By [lem-weil-pbc-closed-immersion-factor-ideal-inclusion], $\\mathcal I\\subseteq\\mathcal J^{n+1}$, so $\\mathcal I_x\\subseteq\\mathfrak m^{n+1}$ for every $n$. Apply [lem-weil-pbc-krull-intersection-jacobson] to $R$, its maximal ideal $\\mathfrak m$, and the cyclic module $R$. The maximal ideal of a local ring is its Jacobson radical. The intersection is zero; omitting the exponents $0,1$ leaves the same intersection by nesting. Consequently $\\mathcal I_x=0$.",
+   "uses": [
+    "lem-sfb-universal-fixed-subscheme",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1, printed pp.138–139; Proposition 8.9, ideal and Krull intersection paragraph. Stacks 01QP and 00IQ (algebra-lemma-intersection-powers-ideal-module), part (2)."
+   }
+  },
+  {
+   "text": "The equality $\\mathcal I_x=0$ forces $\\mathcal I=0$ because $X$ is integral. Here are the affine details. Take an affine neighbourhood $U=\\operatorname{Spec}A$ of $x$. If $t\\in\\mathcal I(U)$, then $t/1=0$ in $A_{\\mathfrak p_x}$, so $st=0$ for some $s\\notin\\mathfrak p_x$. The domain $A$ has $s\\ne0$, hence $t=0$, and $\\mathcal I|_U=0$ by quasi-coherence. For any nonempty affine $W=\\operatorname{Spec}C$ in $X$, irreducibility makes $W\\cap U$ nonempty. Choose a nonempty principal open $D(f)\\subset W\\cap U$. For $t\\in\\mathcal I(W)$ its image in $C_f$ is zero, so $f^rt=0$ for some $r$. Since $C$ is a domain and $f\\ne0$, $t=0$. Thus $\\mathcal I$ vanishes on every affine, $Y=X$, and the fixed-subscheme statement says that $K\\times X\\to X$ equals the projection.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-sfb-universal-fixed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9, final fixed-subscheme argument, with the reducedness gap repaired by the integral affine calculation (errata p.2)."
+   }
+  },
+  {
+   "text": "Fix $n\\geq n_0$, a commutative $k$-algebra $B$, and $h\\in H(B)$. If $h\\in K_n(B)=K(B)$, the equality of action and projection on $K\\times X$ remains an equality after any $B$-algebra extension $B'$, proving $a_{B'}(h_{B'},z)=z$ for every $z\\in X(B')$. Conversely suppose this universal condition holds. For the affine chart $U=\\operatorname{Spec}C$ of $X_B$, test it at the point of $X(C)$ given by $U\\hookrightarrow X_B\\to X$, taking $B'=C$. It gives $c_h|_U=\\mathrm{id}|_U$. These charts cover $X_B$, so $c_h=\\mathrm{id}$, and its inverse has identity pullback on $B\\otimes_kV_n$. Thus $\\rho_n(B)(h)=1$, or $h\\in K_n(B)$. No reduction of $B$ or $B'$ entered this argument.",
+   "uses": [
+    "lem-sc-kernel-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 8.9 up to the stable action kernel, before its faithfulness hypothesis is used; universal algebra-point conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rational-point-thickenings-base-change",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-sc-group-scheme",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-general-linear-group",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sc-kernel-subgroup",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-closed-immersion-factor-ideal-inclusion",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-sfb-universal-fixed-subscheme",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 7.1, printed pp.138–139, and Proposition 8.9, printed p.150, stopping at the stable action kernel. Expanded naturality, ideal calculations, and the reducedness correction required in the appended errata."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixed.point|fixedPoint|jet|local.action|faithful",
+   "results": "{\"t\": \"2026-10-24T09:02:05Z\", \"tool\": \"grep\", \"query\": \"fixed.point|fixedPoint|jet|local.action|faithful\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"1337c547394165e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an algebraic group action fixing a rational point the kernels of its representations on the local ring modulo powers of the maximal ideal stabilize to the kernel of the action",
+   "results": "{\"t\": \"2026-10-24T09:02:05Z\", \"tool\": \"leansearch\", \"query\": \"For an algebraic group action fixing a rational point the kernels of its representations on the local ring modulo powers of the maximal ideal stabilize to the kernel of the action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.Coinvariants.le_comap_ker\", \"Ideal.Quotient.map_ker_stabilizer_subtype\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"Ideal.Quotient.stabilizerHom\", \"Ideal.Quotient.ker_stabilizerHom\", \"MulAction.stabilizer\", \"IsLocalRing.ResidueField.residue_smul\", \"AddAction.stabilizer\"], \"digest\": \"f82cfa3763f4f1ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"Action\"",
+   "results": "{\"t\": \"2026-10-24T09:02:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"GrpObj\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A faithful algebraic group action on an integral variety fixing a point induces a faithful finite dimensional linear representation on a truncated local ring",
+   "results": "{\"t\": \"2026-10-24T09:02:06Z\", \"tool\": \"leanfinder\", \"query\": \"A faithful algebraic group action on an integral variety fixing a point induces a faithful finite dimensional linear representation on a truncated local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.faithful\", \"FDRep.instFaithfulRepForget₂\", \"TannakaDuality.FiniteGroup.rightFDRep\", \"FDRep.instFiniteDimensionalCarrierVFGModuleCat\", \"FixedPoints.toAlgHom_bijective\", \"FaithfulSMul.of_field_isFractionRing\", \"CategoryTheory.PreGaloisCategory.toAut_injective_of_non_trivial\", \"FixedPoints.finrank_eq_card\"], \"digest\": \"0c2d242ba1bc3b3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group action on a smooth connected variety with a fixed rational point has its scheme theoretic kernel detected by a finite order infinitesimal neighbourhood of that point",
+   "results": "{\"t\": \"2026-10-24T09:02:07Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group action on a smooth connected variety with a fixed rational point has its scheme theoretic kernel detected by a finite order infinitesimal neighbourhood of that point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.ker_infinitesimal\", \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"AlgebraicGeometry.FormallyUnramified\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"Ideal.Quotient.ker_stabilizerHom\", \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\"], \"digest\": \"62ddc0ece7d2e823\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract actions, inertia of ring ideals, cotangent modules, Galois categories, or the Hopf algebra of an already affine group; none constructs or detects the scheme-theoretic kernel of an algebraic action on finite jets."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic group scheme action fixing a rational point acts on all infinitesimal neighborhoods and finite jets detect the kernel",
+   "results": "{\"t\": \"2026-10-24T09:29:01Z\", \"tool\": \"leanfinder\", \"query\": \"An algebraic group scheme action fixing a rational point acts on all infinitesimal neighborhoods and finite jets detect the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"AlgebraicGeometry.formallyUnramified_iff\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\"], \"digest\": \"64d94dc164a1cdbf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general fixed sets and infinitesimal lifting do not give finite-jet detection for algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Action\"",
+   "results": "{\"t\": \"2026-10-24T09:31:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general fixed sets and infinitesimal lifting do not give finite-jet detection for algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of an algebraic group action is detected by some finite jet at a smooth fixed point",
+   "results": "{\"t\": \"2026-10-24T09:31:19Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of an algebraic group action is detected by some finite jet at a smooth fixed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.d₀₁_ker_eq_invariants\", \"MonoidHom.ker\", \"LieAlgebra.ad_ker_eq_self_module_ker\", \"Representation.Coinvariants.ker\", \"Representation.Coinvariants.le_comap_ker\", \"LieModule.ker\", \"AddAction.fixedBy_subset_fixedBy_zsmul\", \"LieHom.ker\"], \"digest\": \"679822657b085bf3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: general fixed sets and infinitesimal lifting do not give finite-jet detection for algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-general-group-centre-zero-dimension-affine",
+  "date": "2026-10-24",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Theorem 8.26, first case, invoking Corollary 8.10: detect the conjugation kernel on a finite infinitesimal neighbourhood; serves det-thm-sf-ctf-stability-direct-images proof (3) through the existing pseudo-abelian/Barsotti-Chevalley chain.",
+   "via": [
+    "lem-sfb-general-group-centre-zero-dimension-affine",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fixed-point-action-finite-jets",
+  "worker": "stage1",
+  "summary": "Expanded Milne’s finite-jet argument without assuming H affine, smooth, connected or the action faithful. Two general inputs are statement-only nodes; all other inputs reuse existing nodes. Stabilization is schematic and the fixed-subscheme argument retains nilpotent test algebras. No statement change.",
+  "blueprint": "Milne Proposition 8.9/Corollary 8.10 inside the existing general-group/centre and Barsotti–Chevalley chain serving det-thm-sf-ctf-stability-direct-images proof (3). Latest blueprint proof (3) is preserved; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Smoothness supplies the regularity needed for integrality; the unit has no local algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-acc-quasi-coherent",
+    "why": "Generic ascending-chain theorem on quasi-coherent ideals supplies schematic stabilization of kernels; the unit does not replace this algebraic tool."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic Yoneda bijection turns the natural representation on all test schemes into a morphism; no use of an affine-group representation dictionary."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-weil-pbc-noetherian-acc-quasi-coherent",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-0aa15c575",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-0aa15c575 (reviewer sub-agent of L); spot-checked: Read Milne Prop 8.9 and Cor 8.10 (p.150), the p.150 erratum (X must be reduced; here smooth X is regular and integral), Thm 7.1 (pp.138-139) with 1.75-1.78, and Stacks 04EY/04EZ (more-morphisms.tex l.684/700). First split, so the re-split comparison does not apply. New node rational-point-thickenings-base-change is true: a section of a separated morphism is a closed immersion, V(J^{n+1}) is the spectrum of R/m^{n+1}, and the ideal of the base change is J·O_{X_T}. New node universal-fixed-subscheme is Milne 7.1 for algebraic groups (no affineness needed); I checked its factorisation clause on affine charts. Neither node duplicates an existing one: the torus/mu_n/flag fixed-scheme nodes, near-point and rational-point-base-change nodes are not these statements. Neither restates the item. Steps 1-8 checked against each cited statement: smooth gives regular gives integral (x makes X nonempty); H Noetherian; c_{gh}=c_g c_h gives T_{hh'}=T_hT_{h'}; kernel lemma; schematic factorisation K_{n+1} to K_n; ACC maximal element gives L_n=L_{n0}; Z_n inside X^K, so I_x is in every m^{n+1}, which is 0 by Krull (Jacobson); I_x=0 gives I=0 by the domain argument; both directions of step 8 hold universally, nilpotents kept. Edge cases: X=Spec k, trivial action, mu_p on A^1 in char p, non-affine H. All cited units are on the route; the declared tool_uses (smooth-regular, ACC, Yoneda) are acceptable. FIX (C1/C4): step 3 identified an invertible matrix over Gamma(T,O_T) with a T-point of GL for non-affine T, but def-sc-general-linear-group gives only algebra points. I added lem-a1-locally-ringed-space-affine-adjunction (mathlib node) to the text, uses and proof_deps; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FixedPointActionFiniteJets",
+  "declaration": "AlgebraicGeometry.FixedPointAction.fixed_point_action_finite_jets",
+  "declarations": [
+   "AlgebraicGeometry.FixedPointAction.Jet",
+   "AlgebraicGeometry.FixedPointAction.jetAlgebra",
+   "AlgebraicGeometry.FixedPointAction.jetInclusion",
+   "AlgebraicGeometry.FixedPointAction.fixed_point_action_finite_jets"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FixedPointActionFiniteJets.lean",
+  "statement": "theorem fixed_point_action_finite_jets (k : Type u) [Field k] [IsAlgClosed k] (H X : Over (Spec (.of k))) [GrpObj H] [ModObj H X] [IsSeparated H.hom] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] [Smooth X.hom] [ConnectedSpace X.left] [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (x : 𝟙_ (Over (Spec (.of k))) ⟶ X) (hfixed : ∀ (T : Over (Spec (.of k))) (h : T ⟶ H), h • (toUnit T ≫ x) = toUnit T ≫ x) : ∃ n₀ : ℕ, 1 ≤ n₀ ∧ ∀ n : ℕ, 1 ≤ n → Nontrivial (Jet X x n) ∧ FiniteDimensional k (Jet X x n) ∧ ∃ (c : ℕ) (_hc : 1 ≤ c) (b : Module.Basis (LinearGroupSchemes.Index.{u} c) k (Jet X x n)) (jₙ : StandardGroupSchemes.affine k (Jet X x n) ⟶ X) (ρ : H ⟶ GeneralLinearGroup (LinearGroupSchemes.Index.{u} c) k) (_hρ : IsMonHom ρ), jₙ.left = jetInclusion X x n ∧ IsClosedImmersion jₙ.left ∧ IsClosedSubgroupScheme (CategoryTheory.GrpObj.kerι ρ) ∧ IsNormalSubgroupScheme (CategoryTheory.GrpObj.kerι ρ) ∧ LocallyOfFiniteType (CategoryTheory.GrpObj.ker ρ).hom ∧ QuasiCompact (CategoryTheory.GrpObj.ker ρ).hom ∧ (∀ (B : Type u) [CommRing B] [Algebra k B] (h : StandardGroupSchemes.affine k B ⟶ H), ∃ T : (B ⊗[k] Jet X x n) ≃ₐ[B] (B ⊗[k] Jet X x n), StandardGroupSchemes.map k (T.restrictScalars k).toAlgHom ≫ StandardGroupSchemes.map k (Algebra.TensorProduct.includeRight : Jet X x n →ₐ[k] B ⊗[k] Jet X x n) ≫ jₙ = (StandardGroupSchemes.map k (Algebra.TensorProduct.includeLeft : B →ₐ[k] B ⊗[k] Jet X x n) ≫ h)⁻¹ • (StandardGroupSchemes.map k (Algebra.TensorProduct.includeRight : Jet X x n →ₐ[k] B ⊗[k] Jet X x n) ≫ jₙ) ∧ ∀ i j : LinearGroupSchemes.Index.{u} c, (b.baseChange B).repr (T ((b.baseChange B) j)) i = (GeneralLinearGroup.homMulEquiv (LinearGroupSchemes.Index.{u} c) k B (h ≫ ρ)).val i j) ∧ (n₀ ≤ n → ∀ (B : Type u) [CommRing B] [Algebra k B] (h : StandardGroupSchemes.affine k B ⟶ H), (∃ q : StandardGroupSchemes.affine k B ⟶ CategoryTheory.GrpObj.ker ρ, q ≫ CategoryTheory.GrpObj.kerι ρ = h) ↔ ∀ (B' : Type u) [CommRing B'] [Algebra k B'] (f : B →ₐ[k] B') (z : StandardGroupSchemes.affine k B' ⟶ X), (StandardGroupSchemes.map k f ≫ h) • z = z)",
+  "branch": "sheaf-dag",
+  "by": "Q101",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9b20be56d",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read node, 15 stmt_dep records, module, report (Worker report + Second reading by Q101 present), Milne Prop 8.9 p.150. Only lean changed vs live node; statement verbatim. Hypotheses exact. Jet = actual stalk quotient by maximalIdeal^(n+1) with canonical k-algebra; jₙ = Spec(quotient)≫fromSpecStalk, closed immersion. ρ pinned: unique B-linear T with Spec T≫z₀=(h_{B⊗V})⁻¹•z₀ and matrix of T = homMulEquiv(h≫ρ); T_{hh'}=T_hT_{h'} checked, conventions consistent, basis freedom only conjugates. Kernel GrpObj.ker with closed/normal/LOFT/QC; ∃n₀≥1 then universal iff over all B'/f/z incl. nonreduced. Universe-u restriction on B, B' equivalent. Edge cases X=Spec k, trivial action, μ_p, non-affine H, n=0 excluded. No hollow defs, one sorry, docstrings with source/blueprint and 8 steps, lines ≤100. Advisory: StandardGroupSchemes.affine/map owned by def-sc-gm-ga, reached via def-sc-general-linear-group stmt_deps/public import; same object as homMulEquiv domain. No findings; no compile (no file changed)."
+ }
+}

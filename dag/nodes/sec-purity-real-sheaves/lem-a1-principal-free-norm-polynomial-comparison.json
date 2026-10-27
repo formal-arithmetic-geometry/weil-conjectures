@@ -1,0 +1,247 @@
+{
+ "id": "lem-a1-principal-free-norm-polynomial-comparison",
+ "kind": "statement",
+ "title": "Comparing the locally characterized norm polynomial with the multiplication characteristic polynomial",
+ "statement": "Let $A,B$ be commutative rings, $\\varphi:A\\to B$ unital, $r\\ge0$, and $f_1,\\ldots,f_m\\in A$ generate the unit ideal. Suppose $e_{i,1},\\ldots,e_{i,r}$ are bases of the $A_{f_i}$-modules $B_{f_i}$ [def-weil-ring-localization-away, def-weil-pbc-module-localization-away, def-weil-pbc-free-module]. Write $\\varphi[T]$ for coefficientwise polynomial extension [def-weil-polynomial-ring]. Let $N_T:B[T]\\to A[T]$ be any function such that for every $v\\in B[T]$ the coefficientwise image of $N_T(v)$ in $A_{f_i}[T]$ is the determinant of multiplication by the image of $v$ on $B_{f_i}[T]$, computed in the constant polynomial basis $C(e_{i,1}),\\ldots,C(e_{i,r})$ [def-weil-endomorphism-determinant]. For $b\\in B$ let $\\chi_b(T)\\in A[T]$ be the scalar-extension characteristic polynomial of multiplication by $b$ supplied by [lem-weil-pbc-charpoly-locally-free-existence], and put $P_b(T)=N_T(T-C(b))$. Then\n$$P_b(T)=\\chi_b(T)=T^r+\\sum_{j<r}a_jT^j\\quad(a_j\\in A),\\qquad (\\varphi[T](P_b))(b)=0.$$\nIn particular $P_b$ is monic of degree $r$ if $A\\ne0$. If $r=0$ then $B=0$ and $P_b=1_A$, whose image evaluates to zero in $B$. If $A=0$, unitality forces $B=0$, and the expansion and evaluation remain valid, including for the empty family. No scheme hypothesis or global basis is assumed.",
+ "source": {
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/algebra.tex; literature/stacks-project/groupoids.tex",
+  "place": "Tag 02DV (exercises-exercise-trace-det-rings)(1),(3); Tag 00DX (algebra-lemma-charpoly), Tag 00EK (algebra-lemma-cover-module); groupoids-lemma-integral-over-invariants, monicity and precise Cayley-Hamilton paragraph; old item proof steps 8-10."
+ },
+ "stmt_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-pbc-free-module",
+  "def-weil-polynomial-ring",
+  "def-weil-endomorphism-determinant",
+  "lem-weil-pbc-charpoly-locally-free-existence"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-charpoly-locally-free-existence] to multiplication by b and take its specified chosen polynomial χ. For each principal chart, [lem-weil-pbc-localization-module-tensor] transports the given localized basis to a basis of A[1/fᵢ] ⊗ B. Apply the chosen polynomial’s scalar-extension property over ULift A[1/fᵢ], so its test-ring universe is exactly the prescribed maximum. Base-change compatibility and invariance under tensor cancellation from [lem-weil-pbc-charpoly-free-module-properties] descend this identity along the injective ULift map. Naturality on the generators x/1 identifies scalar-extended multiplication with mapExtendScalars of multiplication. Thus the image of χ is the characteristic polynomial of the displayed localized multiplication matrix. The same existence theorem supplies the expansion of χ.",
+   "uses": [
+    "lem-weil-pbc-charpoly-locally-free-existence",
+    "lem-weil-pbc-localization-module-tensor",
+    "lem-weil-pbc-charpoly-free-module-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), monicity and precise Cayley-Hamilton paragraph; Tag 00DX (algebra-lemma-charpoly); Tag 00EK (algebra-lemma-cover-module); Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
+   }
+  },
+  {
+   "text": "Localization of linear maps and toMatrix are additive. They carry multiplication by 1 to the identity matrix. In each matrix entry, expand the polynomial sum for X−C(b) using additivity, the sum formulas for X and C, and preservation of negatives. The result is Xδⱼₖ−C(Mᵢ(b)ⱼₖ). Thus hN at X−C(b) identifies the localized norm polynomial with det(XI−Mᵢ(b)), which is its characteristic polynomial by [def-weil-pbc-charpoly-free-module] and the determinant description [def-weil-endomorphism-determinant].",
+   "uses": [
+    "def-weil-endomorphism-determinant",
+    "def-weil-pbc-charpoly-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), monicity and precise Cayley-Hamilton paragraph; Tag 00DX (algebra-lemma-charpoly); Tag 00EK (algebra-lemma-cover-module); Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
+   }
+  },
+  {
+   "text": "For every coefficient k the local identities in steps 1 and 2 give equal images of the coefficients of N(X−C(b)) and χ on all principal charts. Use coefficientwise injectivity of the standard localization cover, the ring case of [lem-weil-pbc-localized-span-eq-zero], to conclude N(X−C(b))=χ. Transfer the expansion from step 1.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), monicity and precise Cayley-Hamilton paragraph; Tag 00DX (algebra-lemma-charpoly); Tag 00EK (algebra-lemma-cover-module); Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
+   }
+  },
+  {
+   "text": "For the localized multiplication endomorphism μᵢ, prove by induction on n that μᵢⁿ(x/1)=(bⁿx)/1, using naturality of mapExtendScalars. Induction on polynomials, with additive and monomial cases, then identifies localization of (p.map(A→B)).eval(b) with evaluation of the endomorphism polynomial p.map(A→A[1/fᵢ]) at μᵢ, applied to 1/1. Step 2 and basis invariance from [lem-weil-pbc-charpoly-free-module-properties] identify this endomorphism polynomial with its characteristic polynomial. Apply [lem-weil-cayley-hamilton-free-module] to get zero. This uses no nontriviality or degree assertion.",
+   "uses": [
+    "lem-weil-pbc-charpoly-free-module-properties",
+    "lem-weil-cayley-hamilton-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), monicity and precise Cayley-Hamilton paragraph; Tag 00DX (algebra-lemma-charpoly); Tag 00EK (algebra-lemma-cover-module); Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
+   }
+  },
+  {
+   "text": "The preceding calculation shows that z=(N(X−C(b)).map(A→B)).eval(b) maps to zero under every localized-module numerator map. Apply [lem-weil-pbc-localized-span-eq-zero] with M=B and the given unit-ideal cover to obtain z=0. The algebra map is never assumed injective.",
+   "uses": [
+    "lem-weil-pbc-localized-span-eq-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), monicity and precise Cayley-Hamilton paragraph; Tag 00DX (algebra-lemma-charpoly); Tag 00EK (algebra-lemma-cover-module); Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
+   }
+  },
+  {
+   "text": "Over a nontrivial A, the lower-degree sum in the expansion has degree strictly below r. The elementary polynomial degree and leading-coefficient formulas [def-weil-polynomial-ring] show that Xʳ plus this sum is monic of natural degree r. If r=0, the sum is empty and the expansion gives N(X−C(b))=1. Its already proved evaluation identity gives 1_B=0_B, hence B is subsingleton. If A is subsingleton, apply the unital algebra map to 0_A=1_A to get 0_B=1_B. All earlier steps hold for zero local rings and an empty cover.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), monicity and precise Cayley-Hamilton paragraph; Tag 00DX (algebra-lemma-charpoly); Tag 00EK (algebra-lemma-cover-module); Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-charpoly-locally-free-existence",
+  "lem-weil-pbc-localization-module-tensor",
+  "lem-weil-pbc-charpoly-free-module-properties",
+  "def-weil-endomorphism-determinant",
+  "def-weil-pbc-charpoly-free-module",
+  "lem-weil-pbc-localized-span-eq-zero",
+  "lem-weil-cayley-hamilton-free-module",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/algebra.tex; literature/stacks-project/groupoids.tex",
+  "place": "Stacks Tags 03BJ, 00DX, 00EK and 02DV, as in the existing source record. U3 formalized the local matrix comparison, scalar-extension universe transport, Cayley–Hamilton evaluation and localization descent; rank zero follows from the expansion and evaluation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebra locally free on a finite principal cover a polynomial whose localizations are characteristic polynomials of multiplication by b annihilates b by Cayley Hamilton and injectivity of module localization",
+   "results": "OK 8 hits: Polynomial.annIdealGenerator, LinearMap.polyCharpolyAux_map_aeval, LinearMap.aeval_self_charpoly, Polynomial.annIdealGenerator_aeval_eq_zero, LinearMap.exists_monic_and_aeval_eq_zero, Polynomial.annIdealGenerator_mem, Polynomial.isIntegral_isLocalization_polynomial_quotient, LinearMap.exists_monic_and_coeff_mem_pow_and_aeval_eq_zero_of_range_le_smul. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the free Cayley-Hamilton and leading-coefficient hits are local ingredients; none identifies a prescribed locally characterized polynomial norm with the glued characteristic polynomial and descends its value."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"aeval\", \"charpoly\"",
+   "results": "OK 9 hits: Matrix.aeval_self_charpoly, Algebra.aeval_charpoly_leftMulMatrix, Matrix.pow_eq_aeval_mod_charpoly, Matrix.aeval_eq_aeval_mod_charpoly, Algebra.aeval_self_charpoly_lmul, LinearMap.aeval_self_charpoly, LinearMap.pow_eq_aeval_mod_charpoly, LinearMap.aeval_eq_aeval_mod_charpoly. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the free Cayley-Hamilton and leading-coefficient hits are local ingredients; none identifies a prescribed locally characterized polynomial norm with the glued characteristic polynomial and descends its value."
+  },
+  {
+   "tool": "grep",
+   "query": "aeval_self_charpoly|algebraMap_injective_of_span_eq_top|exists_monic_and_aeval_eq_zero",
+   "results": "OK 19 hits: Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the free Cayley-Hamilton and leading-coefficient hits are local ingredients; none identifies a prescribed locally characterized polynomial norm with the glued characteristic polynomial and descends its value."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A polynomial equal locally to determinant of X identity minus multiplication by b on an algebra with local bases has leading term X power r and vanishes at b globally",
+   "results": "OK 8 hits: LinearMap.polyCharpoly, Matrix.charpoly, Polynomial.leadingCoeff_det_X_one_add_C, Matrix.charpolyRev, MulSemiringAction.eval_charpoly, Polynomial.coeff_det_X_add_C_card, Polynomial.mem_annIdeal_iff_aeval_eq_zero, Polynomial.annIdealGenerator. Read relevant source; see report for the hypothesis comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match: the free Cayley-Hamilton and leading-coefficient hits are local ingredients; none identifies a prescribed locally characterized polynomial norm with the glued characteristic polynomial and descends its value."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial norm defined as local determinants on a principal free cover equals the characteristic polynomial of multiplication and annihilates the element",
+   "results": "OK 8 hits: Algebra.norm_eq_zero_iff', Algebra.norm_apply, LinearMap.polyCharpolyAux, Algebra.norm, LinearMap.polyCharpolyAux_map_eq_charpoly, charpoly_leftMulMatrix, LinearMap.polyCharpoly, LinearMap.charpoly. Read relevant declarations in Norm/Defs.lean, Charpoly/Basic.lean, and Matrix/Charpoly/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: global free norm and characteristic-polynomial results do not state the arbitrary locally determinant-characterized function comparison on a principal free cover. Cayley-Hamilton is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*charpoly|charpoly.*norm|aeval_self_charpoly",
+   "results": "OK 15 hits: Mathlib/RingTheory/Norm/Basic.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Eigenspace/Zero.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap.lean. Read relevant declarations in Norm/Defs.lean, Charpoly/Basic.lean, and Matrix/Charpoly/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: global free norm and characteristic-polynomial results do not state the arbitrary locally determinant-characterized function comparison on a principal free cover. Cayley-Hamilton is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant norm of X minus an element of a finite locally free algebra equals its multiplication characteristic polynomial",
+   "results": "OK 8 hits: LinearMap.det_eq_sign_charpoly_coeff, LinearMap.polyCharpoly, Matrix.charpoly, Matrix.det_eq_prod_roots_charpoly, Matrix.charpoly_fin_two, LinearMap.charpoly, Algebra.norm_eq_matrix_det, LinearMap.eval_charpoly. Read relevant declarations in Norm/Defs.lean, Charpoly/Basic.lean, and Matrix/Charpoly/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: global free norm and characteristic-polynomial results do not state the arbitrary locally determinant-characterized function comparison on a principal free cover. Cayley-Hamilton is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"charpoly\"",
+   "results": "OK 0 hits: . Read relevant declarations in Norm/Defs.lean, Charpoly/Basic.lean, and Matrix/Charpoly/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: global free norm and characteristic-polynomial results do not state the arbitrary locally determinant-characterized function comparison on a principal free cover. Cayley-Hamilton is reused as an existing Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free algebra characteristic polynomial determined on a principal localization cover annihilates the algebra element",
+   "results": "OK 8 hits: Algebra.SubmersivePresentation.localizationAway, Algebra.exists_aeval_invOf_eq_zero_of_idealMap_adjoin_sup_span_eq_top, Polynomial.annIdealGenerator, Algebra.Smooth.exists_span_eq_top_isStandardSmooth, Algebra.Generators.localizationAway, Algebra.IsStandardSmooth, is_integral_localization_at_leadingCoeff, Module.FinitePresentation.exists_free_localizedModule_powers. Read relevant declarations in Norm/Defs.lean, Charpoly/Basic.lean, and Matrix/Charpoly/Basic.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: global free norm and characteristic-polynomial results do not state the arbitrary locally determinant-characterized function comparison on a principal free cover. Cayley-Hamilton is reused as an existing Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Auxiliary affine-quotient algebra in the historical expansion beneath lem-a1-affine-hc0's lissity/support argument. Precise current use: lem-a1-affine-groupoid-integral-invariants, proof step 3; Stacks groupoids-lemma-integral-over-invariants, second paragraph, monicity and Cayley-Hamilton for the norm polynomial. The earlier 'fourth paragraph' locator was stale: the master blueprint ancestor has one support paragraph and main-20261015 has no proof text. Re-split of norm-polynomial item, old proof steps 8-10 (TI-M comparison and Cayley-Hamilton descent).",
+   "via": [
+    "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-principal-free-norm-polynomial-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement. Supplied six steps using existing nodes only: locally free characteristic polynomial and localization identification, explicit TI-M matrix computation, coefficient descent, Cayley-Hamilton evaluated at 1, module descent, and degenerate cases. Checked Stacks sources and all cited statements; no scheme hypotheses or global basis introduced.",
+  "blueprint": "Historical affine-quotient algebra beneath lem-a1-affine-hc0, through lem-a1-affine-groupoid-integral-invariants step 3 and the norm-polynomial parent: realizes old proof steps 8-10. Current latest blueprint lemma concerns compact support; its proof does not itself assert this algebra lemma. The assigned item is retained as the existing historical auxiliary; Tag 03BJ supplies the exact algebra source.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-charpoly-locally-free-existence",
+    "why": "Generic algebra lemma supplying the prescribed characteristic polynomial and its local values; no node of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-charpoly-locally-free-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-6ac795cce",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-6ac795cce (reviewer sub-agent of L); spot-checked: Read all six steps of the item in full against every cited statement, and read Stacks 03BJ (groupoids-lemma-integral-over-invariants, Cayley-Hamilton paragraph), 00DX, 00EK and 02DV(1),(3). No SGA source. Step 1: the existence lemma applies with A'=A_f_i; B⊗A_f_i≅B_f_i via the localization-tensor leaf, with naturality and charpoly-properties (a),(b), giving chi_b,i=det(TI-M_i). The column conventions of def-weil-endomorphism-determinant and def-weil-pbc-charpoly-free-module agree. Step 2: the matrix of T-C(b_i) on the constant basis is checked, and the local N_T hypothesis gives P_b,i=chi_b,i. Step 3: coefficient descent by localized-span-eq-zero with M=A. Step 4: Cayley-Hamilton identity only, evaluated at 1. Step 5: descent with M=B as an A-module, using no faithfulness or injectivity of phi. Step 6: the r=0 and A=0 cases and the empty cover are correct. proof_deps equals the union of the step uses. No cycle. No new nodes. No duplicate found after searching for Cayley/charpoly/CharPol/norm-chart nodes; the groupoid annihilator and principal-free determinant-norm nodes are different statements. Tested r=1 with B=A; r=0; A=0; a zero chart. Accepted tool_use: lem-weil-pbc-charpoly-locally-free-existence (sk-thm-p1), already a stmt_dep of the inherited statement. Minor inherited nit: C(.) is not named explicitly in the statement; no change made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalFreeNormPolynomialComparison",
+  "declaration": "Algebra.principal_free_norm_polynomial_comparison",
+  "file": "lean/Sheaf/RingTheory/PrincipalFreeNormPolynomialComparison.lean",
+  "statement": "theorem principal_free_norm_polynomial_comparison {A : Type u} {B : Type v} [CommRing A] [CommRing B] [Algebra A B] {r m : ℕ} (f : Fin m → A) (hgen : Ideal.span (Set.range f) = ⊤) (e : ∀ i : Fin m, Module.Basis (Fin r) (Localization.Away (f i)) (LocalizedModule.Away (f i) B)) (N : Polynomial B → Polynomial A) (hN : ∀ (q : Polynomial B) (i : Fin m), (N q).map (algebraMap A (Localization.Away (f i))) = Matrix.det (fun j k : Fin r ↦ q.sum fun d c ↦ Polynomial.monomial d (LinearMap.toMatrix (e i) (e i) (IsLocalizedModule.mapExtendScalars (Submonoid.powers (f i)) (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) B) (LocalizedModule.mkLinearMap (Submonoid.powers (f i)) B) (Localization.Away (f i)) (LinearMap.mul A B c)) j k))) (b : B) : N (Polynomial.X - Polynomial.C b) = Classical.choose (charpoly_locallyFree_exists_unique.{u, v, w} f hgen (fun i ↦ ⟨e i, trivial⟩) (LinearMap.mul A B b)) ∧ (∃ a : Fin r → A, N (Polynomial.X - Polynomial.C b) = Polynomial.X ^ r + ∑ j : Fin r, Polynomial.C (a j) * Polynomial.X ^ (j : ℕ)) ∧ ((N (Polynomial.X - Polynomial.C b)).map (algebraMap A B)).eval b = 0 ∧ (Nontrivial A → (N (Polynomial.X - Polynomial.C b)).Monic ∧ (N (Polynomial.X - Polynomial.C b)).natDegree = r) ∧ (r = 0 → Subsingleton B ∧ N (Polynomial.X - Polynomial.C b) = 1) ∧ (Subsingleton A → Subsingleton B)",
+  "branch": "sheaf-dag",
+  "by": "Q106",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93f0acef6",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Read the item node, all 6 stmt_dep records, the module, the report and CharpolyLocallyFree source. All clauses match: arbitrary N with a local determinant condition whose matrix entry Σ_d M_i(c_d)_{jk}T^d is multiplication by q in the constant basis (mapExtendScalars of LinearMap.mul, toMatrix column convention as def-weil-endomorphism-determinant); χ_b = Classical.choose of the ∃-with-uniqueness dependency (pinned); P_b = χ_b, expansion, evaluation via map algebraMap, Monic/natDegree under Nontrivial A, r=0 → B=0 ∧ P_b=1, A=0 → B=0; no Nonempty(Fin m). Universe w is the dependency's test-algebra universe, left arbitrary. Edge cases r=0, A=0, m=0 and zero charts checked. Node differs from live only in lean; lean.statement is verbatim. No new definitions or duplicates (parent IsLocallyFreeDeterminantNorm is distinct); not in live Lean. sorry only; docstrings carry the source place, the blueprint id and 6 steps. No file changed, so no compile; the worker reports a clean compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T083201-L-2289694",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,180 @@
+{
+ "id": "lem-sfb-field-open-group-image-closed",
+ "kind": "statement",
+ "title": "An open group-homomorphism image over a field is closed",
+ "statement": "Let $k$ be a field [def-weil-field], and let $u:P\\to Q$ be a homomorphism of group schemes over $\\operatorname{Spec}k$ [def-sc-group-scheme, def-pc-scheme, def-weil-affine-spectrum]. A group scheme here is a scheme over $k$ with multiplication, inverse and identity satisfying the group diagrams, and a homomorphism respects these morphisms. If the point image $u(|P|)$ is open in the underlying topological space $|Q|$, then $u(|P|)$ is closed in $|Q|$. No finite-type, smoothness, separatedness, affineness, injectivity or surjectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 047S, lemma-open-subgroup-closed-over-field, statement and translation proof."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "A group scheme over $\\operatorname{Spec}k$ gives an absolute groupoid scheme by taking the object scheme to be $V=\\operatorname{Spec}k$, the arrow scheme to be the group scheme, and both source and target maps to be its structure morphism. The unit, inverse and composition are the group unit, inverse and multiplication; the group axioms imply the groupoid diagrams. A homomorphism of group schemes, together with $\\mathrm{id}_V$, commutes with these operations. Thus the given image is the image of a morphism of the absolute groupoid schemes in the existing open-image lemma.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0234 (lemma-groupoid-from-action) with Y = X = Spec k and the trivial action: U = Spec k, R = G, s = t = structure morphism, c = m, e = e_G, i = i_G."
+   }
+  },
+  {
+   "text": "Apply `lem-sfb-field-groupoid-open-image-closed` to the two groupoid schemes and their morphism from Step 1. Its hypotheses are exactly satisfied, and it says that the image of the morphism is closed whenever it is open. Therefore $u(|P|)$ is closed in $|Q|$.",
+   "uses": [
+    "lem-sfb-field-groupoid-open-image-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q6, conclusion; this is the general groupoid-on-a-field lemma to which Tag 047S specializes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme",
+  "def-a1-groupoid-scheme",
+  "lem-sfb-field-groupoid-open-image-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04Q6 (lemma-open-image-is-closed) applied to the groupoid of Groupoids Tag 0234 with trivial action on Spec k; this is the statement of Groupoids Tag 047S, whose own Stacks proof instead uses the translation Lemma 0B7N."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The image of a homomorphism of group schemes over a field which is open is also closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat),\\n  IsClosed (Set.range ⇑(CategoryTheory.PreGaloisCategory.autEmbedding F))\", \"doc\": \"The image of the automorphism group embedding $\\\\text{Aut}(F) \\\\to \\\\prod_{X \\\\in \\\\mathcal{C}} \\\\text{Aut}(F(X))$ is a closed subset in the product topology, where each factor $\\\\text{Aut}(F(X))$ is equippe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isLocallyClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsImmersion f],\\n  IsLocallyClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any immersion $ f : X \\to Y $ of schemes, the image of the underlying continuous map $ f : |X| \\to |Y| $ is a locally closed subset of the topological space $ |Y| $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → [AlgebraicGeometry.IsImmersion f] → Y.Opens\", \"doc\": \"Given an immersion $ f : X \\to Y $ of schemes, this defines the open subset of $ Y $ obtained as the cobord of the image of $ f $, which is the complement of the set difference between the closure of $\"}\n  {\"name\": \"MulHom.isClosed_range_coe\", \"module\": \"Mathlib/Topology/Algebra/Monoid\", \"type\": \"∀ (M₁ : Type u_6) (M₂ : Type u_7) [inst : TopologicalSpace M₂] [T2Space M₂] [inst_2 : Mul M₁] [inst_3 : Mul M₂]\\n  [ContinuousMul M₂], IsClosed (Set.range DFunLike.coe)\", \"doc\": \"The set of all multiplicative homomorphisms from $ M_1 $ to $ M_2 $, when viewed as functions under the product topology on the space of functions $ M_1 \\to M_2 $, is a closed subset of that space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.app_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ [AlgebraicGeometry.IsClosedImmersion f],\\n      Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.app f U))\", \"doc\": \"Let $f: X \\\\to Y$ be a closed immersion of schemes, and let $U$ be an affine open subset of $Y$. Then the canonical ring homomorphism from the ring of sections of the structure sheaf of $Y$ over $U$ to\"}\n  {\"name\": \"AlgebraicGeometry.Polynomial.isOpen_imageOfDf\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/IsOpenComapC\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {f : Polynomial R}, IsOpen (AlgebraicGeometry.Polynomial.imageOfDf f)\", \"doc\": \"For any polynomial $ f $ over a commutative semiring $ R $, the set of prime ideals $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ such that at least one coefficient of $ f $ is not contained in $ \\\\mathf\"}\n  {\"name\": \"AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  IsClosed (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base)) → AlgebraicGeometry.Surjective f\", \"doc\": \"If a morphism of schemes $ f: X \\\\to Y $ is dominant (i.e., its image is dense in $ Y $) and the image of $ f $ is a closed subset of $ Y $, then $ f $ is surjective.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: OpenSubgroup.isClosed concerns an ordinary topological group. The underlying point space of a group scheme is not such a group; scheme immersions only have locally closed image without the group argument. No one-line specialization states this scheme-theoretic result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subgroup scheme of any group scheme over a field is a closed subgroup scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"OpenSubgroup.isClosed\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] (U : OpenSubgroup G), IsClosed ↑U\", \"doc\": \"In a topological group $G$ with continuous multiplication, every open subgroup $U$ is also a closed subset of $G$. This means the complement of $U$ in $G$ is an open set, establishing that openness im\"}\n  {\"name\": \"Subgroup.isClosed_of_isOpen\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] (U : Subgroup G),\\n  IsOpen ↑U → IsClosed ↑U\", \"doc\": \"In a topological group $G$ with continuous multiplication, if a subgroup $U$ is an open set in the topology of $G$, then $U$ is also a closed set. This follows because the complement of $U$ can be exp\"}\n  {\"name\": \"InfiniteGalois.fixingSubgroup_isClosed\", \"module\": \"Mathlib/FieldTheory/Galois/Infinite\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (L : IntermediateField k K)\\n  [IsGalois k K], IsClosed ↑L.fixingSubgroup\", \"doc\": \"For a Galois field extension $K/k$ and an intermediate field $L$ (with $k \\\\subseteq L \\\\subseteq K$), the subgroup of the Galois group $\\\\text{Gal}(K/k)$ consisting of automorphisms that fix every eleme\"}\n  {\"name\": \"ClosedSubgroup\", \"module\": \"Mathlib/Topology/Algebra/Group/ClosedSubgroup\", \"type\": \"(G : Type u) → [Group G] → [TopologicalSpace G] → Type u\", \"doc\": \"A closed subgroup of a topological group $G$ is a subgroup $H$ of $G$ that is closed in the topology of $G$.\"}\n  {\"name\": \"OpenSubgroup.isClopen\", \"module\": \"Mathlib/Topology/Algebra/OpenSubgroup\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [ContinuousMul G] (U : OpenSubgroup G), IsClopen ↑U\", \"doc\": \"In a topological group $G$ with continuous multiplication, every open subgroup $U$ is a clopen set (i.e., both open and closed) in the topology of $G$.\"}\n  {\"name\": \"ClosedSubgroup.isClosed'\", \"module\": \"Mathlib/Topology/Algebra/Group/ClosedSubgroup\", \"type\": \"∀ {G : Type u} [inst : Group G] [inst_1 : TopologicalSpace G] (self : ClosedSubgroup G), IsClosed (↑self).carrier\", \"doc\": \"For any topological group $ G $, the underlying set of a closed subgroup $ H $ of $ G $ is closed in the topology of $ G $.\"}\n  {\"name\": \"OpenNormalSubgroup.instIsClosedCoePathComponentOne\", \"module\": \"Mathlib/Topology/Connected/PathComponentOne\", \"type\": \"∀ (G : Type u_1) [inst : TopologicalSpace G] [inst_1 : Group G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : LocPathConnectedSpace G], IsClosed ↑(OpenNormalSubgroup.pathComponentOne G)\", \"doc\": \"In a locally path-connected topological group $G$, the subgroup consisting of all elements path-connected to the identity element $1$ is a closed subset of $G$. This follows from the local path-connec\"}\n  {\"name\": \"Subgroup.isClosed_of_discrete\", \"module\": \"Mathlib/Topology/Algebra/IsUniformGroup/Basic\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [IsTopologicalGroup G] [T2Space G] {H : Subgroup G}\\n  [DiscreteTopology ↥H], IsClosed ↑H\", \"doc\": \"In a Hausdorff topological group $G$, if a subgroup $H$ is equipped with the discrete topology, then $H$ is a closed subset of $G$. This follows from the fact that in a Hausdorff space, discrete subsp\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: OpenSubgroup.isClosed concerns an ordinary topological group. The underlying point space of a group scheme is not such a group; scheme immersions only have locally closed image without the group argument. No one-line specialization states this scheme-theoretic result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open immersion of group schemes over a field has open and closed image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isOpen_range\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [H : IsOpenImmersion f] : IsOpen (Set.range f)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is an open immersion, then the image of $ f $ is an open subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": Y.Opens\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, this constructs the open subset of $ Y $ which is the image of the underlying continuous map $ f: X \\to Y $, using the fact that open immersions have o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.apply_mem_image_iff\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] {U : X.Opens} {x : X} : f x ∈ f ''ᵁ U ↔ x ∈ U\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. For any point $x$ in $X$ and any open subset $U$ of $X$, the image point $f(x)$ is in the image set $f(U)$ if and only if $x$ is in $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.image_le_opensRange\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(U : X.Opens) : f ''ᵁ U ≤ f.opensRange\", \"doc\": \"For any open subset $U$ of a scheme $X$ and an open immersion $f: X \\\\to Y$ of schemes, the image of $U$ under $f$ is contained within the open subset $f(X) \\\\subseteq Y$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsImmersion f] : IsLocallyClosed (Set.range f)\", \"doc\": \"For any immersion $ f : X \\\\to Y $ of schemes, the image of $ f $ is a locally closed subset of $ Y $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: OpenSubgroup.isClosed concerns an ordinary topological group. The underlying point space of a group scheme is not such a group; scheme immersions only have locally closed image without the group argument. No one-line specialization states this scheme-theoretic result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"IsClosed\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: OpenSubgroup.isClosed concerns an ordinary topological group. The underlying point space of a group scheme is not such a group; scheme immersions only have locally closed image without the group argument. No one-line specialization states this scheme-theoretic result."
+  },
+  {
+   "tool": "grep",
+   "query": "open.*subgroup|subgroup.*closed|[Ii]sClosed.*[Rr]ange",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"line\": \"97\", \"text\": \"      (by exact γ.left.isClosedMap.isClosed_range)]\"} Search subdirectory: Mathlib/AlgebraicGeometry/Group.",
+   "date": "2026-10-24",
+   "verdict": "no match: OpenSubgroup.isClosed concerns an ordinary topological group. The underlying point space of a group scheme is not such a group; scheme immersions only have locally closed image without the group argument. No one-line specialization states this scheme-theoretic result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dedekind-finite-kernel-hom-affine",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction and the inherited relative-semisimple-affineness prerequisite; Conrad Proposition 6.3.16, printed p.229, quasi-finite group homomorphism assertion. Field translation input applied to the canonical open subgroup in every residue fibre, including the generic fibre.",
+   "via": [
+    "lem-sfb-dedekind-finite-kernel-hom-affine",
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-field-open-group-image-closed",
+  "worker": "stage1",
+  "summary": "Read Stacks Tag 047S and the general groupoid-on-a-field lemma Tag 04Q6. The group-scheme statement is obtained by the elementary identification of a group scheme over Spec k with a groupoid whose object scheme is Spec k and whose arrows are the group scheme, then applying the existing groupoid open-image-closed node. No new node is needed.",
+  "blueprint": "The item realizes the field translation input in det-thm-sf-ctf-stability-direct-images, proof (3), specifically the sentence applying the field open-group result to the canonical open subgroup in each residue fibre."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-9d4dc43d5",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-9d4dc43d5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item split into 2 steps, with no new nodes and no tool_uses. The mathematics is correct. The statement is Stacks 047S (groupoids.tex l.858). Step 1 views a group scheme over Spec k as a groupoid with U=Spec k, R=G, s=t=the structure map, c=m. This is Tag 0234 with the trivial action, and I checked it against every axiom of def-a1-groupoid-scheme. Step 2 cites lem-sfb-field-groupoid-open-image-closed (Stacks 04Q6, more-groupoids l.1493). That node is on the base, reviewed pass by Q40, in the same unit sk-thm-sf-ctf-stability, and adds no extra hypotheses. Edge cases check out: a trivial subgroup in a constant group, in G_a and in nonreduced mu_p. Search found no duplicates. Two citation/source faults are repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-open-group-image-closed.json. (1) The statement redefined group schemes inline without citing the existing def-sc-group-scheme. I added the citation and stmt_dep and kept the meaning. (2) Step 1 had uses=[] although it builds an instance of def-a1-groupoid-scheme, and its source wrongly said this construction is in the proof of 047S; Stacks actually proves 047S by translation (0B7N). Step 1 now uses def-sc-group-scheme and def-a1-groupoid-scheme with source Tag 0234; proof_deps and proof_origin are corrected to match. Cosmetic: the report mentions a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldOpenGroupImageClosed",
+  "declaration": "AlgebraicGeometry.isClosed_range_of_isMonHom_of_isOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldOpenGroupImageClosed.lean",
+  "statement": "theorem isClosed_range_of_isMonHom_of_isOpen (k : Type u) [Field k] {P Q : Over (Spec (CommRingCat.of k))} [GrpObj P] [GrpObj Q] (f : P ⟶ Q) [IsMonHom f] (hopen : IsOpen (Set.range f.left)) : IsClosed (Set.range f.left)",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02d272a04",
+  "group": "Q45",
+  "result": "pass",
+  "note": "Lean isClosed_range_of_isMonHom_of_isOpen matches Stacks 047S (groupoids.tex l.858) and the node clause by clause: Field k; P,Q : Over (Spec (.of k)) with GrpObj (recorded def-sc-group-scheme interface); f with IsMonHom (unit clause automatic for groups, so not stronger); IsOpen/IsClosed of the same Set.range f.left. No extra hypotheses; single universe u from the recorded interface. Node unchanged except lean; lean.statement verbatim; sorry-only; source and blueprint docstrings with the 2-step proof; both report sections present. No name or module clash on side-live; project isClosed_range_of_isMonHom needs finite type, so not a duplicate. Edge cases: char p, imperfect k, non-reduced, identity/surjective maps. Proof dependency lem-sfb-field-groupoid-open-image-closed has no Lean binding yet; acceptable. No compile: no file changed."
+ }
+}

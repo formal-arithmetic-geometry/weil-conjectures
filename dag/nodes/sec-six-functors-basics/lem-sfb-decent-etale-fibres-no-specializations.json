@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-decent-etale-fibres-no-specializations",
+ "kind": "statement",
+ "title": "Etale chart fibres of decent spaces have no nontrivial specializations",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with field-valued point classes and atlas topology [def-a1-space-point-topology]. Suppose every point of $|X|$ is represented by a quasi-compact monomorphism $\\operatorname{Spec}F\\to X$, for a field $F$ [def-weil-field, def-weil-affine-spectrum]. Monomorphism means injectivity of composition on morphisms from every algebraic space over $S$; quasi-compact means that after any scheme test the inverse image of a quasi-compact open is quasi-compact [def-weil-pbc-quasi-compact-scheme]. Let $p:U\\to X$ be a representable etale morphism from a scheme, meaning that every scheme base change is etale [def-weil-etale-morphism]. If $u,u'\\in U$ have $p(u)=p(u')$ and $u'\\leadsto u$ (that is, $u$ belongs to the closure of $\\{u'\\}$), then $u=u'$. No quasi-separatedness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03K5 (lemma-decent-no-specializations-map-to-same-point); the decency hypothesis is condition (4) of Tag 03JV (lemma-UR-finite-above-x), via Definition 03I8 (definition-very-reasonable)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $x=p(u)=p(u\\prime)$. Choose an affine open neighbourhood $W\\subset U$ of $u$ by [lem-weil-pbc-affine-opens-basis]. Since opens contain every generalization of their points, $u\\prime\\in W$. Write $a:W\\to X$ for the restriction. It remains representable etale: on each scheme test it is an open immersion followed by an etale map, so [lem-weil-pbc-etale-composition-cancellation](1)-(2) applies. Form the scheme $R=W\\times_XW$ with etale projections $s,t:R\\to W$. Representability and etaleness follow from the scheme-test definition [def-trf-algebraic-space]; the sheaf fibre product has the categorical universal property [lem-trf-space-fibre-products-etale-covers]. In particular $as=at$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03K5 (lemma-decent-no-specializations-map-to-same-point), expanded through Tag 03IM (lemma-no-specializations-map-to-same-point), first paragraph."
+   }
+  },
+  {
+   "text": "Choose the quasi-compact field monomorphism $j:\\operatorname{Spec}F\\to X$ representing $x$ supplied by the hypothesis. The scheme $P=W\\times_X\\operatorname{Spec}F$ is quasi-compact, by the affine scheme test $W\\to X$ for quasi-compactness of $j$, and is etale over $F$, by the scheme-test definition [def-trf-algebraic-space]. By [lem-weil-pbc-etale-fibre-discrete-separable-points], applied over the unique point of $\\operatorname{Spec}F$, $P$ has discrete underlying space: its fibre is $P$ itself, since that point's residue-field map is an isomorphism [def-pc-scheme-fibre]. A quasi-compact discrete space is finite, since its singleton open cover has a finite subcover. By [lem-a1-space-point-open-calculus], the image of $|P|\\to|W|$ equals $A=|a|^{-1}(\\{x\\})$. Consequently $A$ is finite. This argument uses only quasi-compactness of the given representative, not quasi-separatedness of $X$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JV (lemma-UR-finite-above-x), (4) implies (3); Tag 03IM, the finite chart fibre used at the end; spaces-properties.tex Tag 03H4 (lemma-points-cartesian)."
+   }
+  },
+  {
+   "text": "The etale scheme projections $s,t$ are flat by [def-weil-etale-morphism]. Thus generalizations lift along them by [lem-weil-pbc-flat-generalizations-lift], with orientation $v\\prime\\leadsto v$: given $r$ and $w\\leadsto t(r)$, there is $r\\prime\\leadsto r$ with $t(r\\prime)=w$. Their fibres are discrete by [lem-weil-pbc-etale-fibre-discrete-separable-points] and the fibre-subspace homeomorphism in [def-pc-scheme-fibre]. Hence if two comparable points of $R$ have the same $s$-image, or the same $t$-image, they coincide: their specialization is also a specialization in the discrete fibre subspace. Specialization on $W$ is antisymmetric by [lem-sc-scheme-sober]: mutually specializing points have the same singleton closure, and both are generic points of that irreducible closed set.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-pc-scheme-fibre",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03IM, using Remark recall: flat generalization lifting (morphisms.tex Tag 03HV, lemma-generalizations-lift-flat) and discrete etale fibres (Tag 02GL, lemma-etale-over-field)."
+   }
+  },
+  {
+   "text": "Set $v_0=u$ and $v_1=u\\prime$, so $v_1\\leadsto v_0$ and both are in $A$. The point-fibre-product surjectivity in [lem-a1-space-point-open-calculus] supplies $r_0\\in R$ with $t(r_0)=v_0$ and $s(r_0)=v_1$. Recursively suppose $r_n$ has $t(r_n)=v_n$, $s(r_n)=v_{n+1}$ and $v_{n+1}\\leadsto v_n$. Lift this last generalization through $t$ using step 3, obtaining $r_{n+1}\\leadsto r_n$ with $t(r_{n+1})=v_{n+1}$, and put $v_{n+2}=s(r_{n+1})$. Continuity gives $v_{n+2}\\leadsto v_{n+1}$, while $as=at$ implies $a(v_{n+2})=x$. Thus the construction continues with every $v_n\\in A$. Only finitely many choices are needed: continue until there are $|A|+1$ points.",
+   "uses": [
+    "lem-a1-space-point-open-calculus",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03IM (lemma-no-specializations-map-to-same-point), tower of lifted specializations and common image in X."
+   }
+  },
+  {
+   "text": "If $v_{n+2}=v_{n+1}$, the comparable $r_{n+1},r_n$ have the same $s$-image, so step 3 gives $r_{n+1}=r_n$. Applying $t$ yields $v_{n+1}=v_n$. Every adjacent equality therefore propagates backwards to $v_1=v_0$. But $|A|+1$ points in the finite set $A$ include a repeated pair $v_i=v_j$, $i<j$. The chain gives $v_j\\leadsto v_{i+1}\\leadsto v_i=v_j$, so antisymmetry from step 3 gives $v_{i+1}=v_i$. If $i=0$ we already have $v_1=v_0$; otherwise backward propagation gives it. Hence $u\\prime=u$, as required in the original chart $U$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03IM, last paragraph: equality propagates backwards and finiteness forces the tower to collapse; Tag 03K5 follows."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-pc-scheme-fibre",
+  "lem-a1-space-point-open-calculus",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-sc-scheme-sober"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03K5 via Tag 03IM; finite fibres from Tag 03JV (4) implies (3), expanded in the proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Specializations between points of an etale scheme chart of a decent algebraic space with the same image are equal",
+   "results": "{\"t\": \"2026-10-23T14:31:27Z\", \"tool\": \"leansearch\", \"query\": \"Specializations between points of an etale scheme chart of a decent algebraic space with the same image are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Specializes.of_eq\", \"specializes_of_eq\", \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"239449fe3c112718\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, specialization identities, or unrelated Ordset prose; none states this theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale scheme chart of a decent algebraic space two points in the same fibre cannot specialize to each other unless equal",
+   "results": "{\"t\": \"2026-10-23T14:31:31Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale scheme chart of a decent algebraic space two points in the same fibre cannot specialize to each other unless equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.le_iff_specializes\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\"], \"digest\": \"a85c8dd27714e98a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, specialization identities, or unrelated Ordset prose; none states this theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|specializ.*fibre",
+   "results": "{\"t\": \"2026-10-23T14:31:51Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Dd]ecent|specializ.*fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Data/Ordmap/Ordset.lean\"], \"digest\": \"035261f8bac28890\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, specialization identities, or unrelated Ordset prose; none states this theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Specializes\", \"AlgebraicSpace\"",
+   "results": "{\"t\": \"2026-10-23T14:31:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Specializes\\\", \\\"AlgebraicSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, specialization identities, or unrelated Ordset prose; none states this theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale maps to decent algebraic spaces have no nontrivial specializations in their point fibres",
+   "results": "{\"t\": \"2026-10-23T14:31:53Z\", \"tool\": \"leanfinder\", \"query\": \"Etale maps to decent algebraic spaces have no nontrivial specializations in their point fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus\"], \"digest\": \"9266379bb4be41d0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, specialization identities, or unrelated Ordset prose; none states this theorem for decent algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Dd]ecent|no_specializations",
+   "results": "{\"t\": \"2026-10-23T20:18:48Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Dd]ecent|no_specializations\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, residue-field parametrizations or stalk identities, not this assertion for decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specializations between points of an etale chart of a decent algebraic space in the same fibre are equal",
+   "results": "{\"t\": \"2026-10-23T20:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"Specializations between points of an etale chart of a decent algebraic space in the same fibre are equal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"AlgebraicGeometry.PresheafedSpace.stalkMap.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_congr_point\", \"AlgebraicGeometry.Scheme.Hom.stalkSpecializes_stalkMap_apply\", \"AlgebraicGeometry.Scheme.stalkSpecializes_stalkMap\"], \"digest\": \"f6ceeadc75e8e623\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, residue-field parametrizations or stalk identities, not this assertion for decent algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale maps to decent algebraic spaces have no nontrivial specializations in their point fibres",
+   "results": "{\"t\": \"2026-10-23T20:19:16Z\", \"tool\": \"leansearch\", \"query\": \"Etale maps to decent algebraic spaces have no nontrivial specializations in their point fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.isClosedMap_iff_specializingMap\"], \"digest\": \"67e7ca0b5201fba8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, residue-field parametrizations or stalk identities, not this assertion for decent algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Specializes\", \"AlgebraicSpace\"",
+   "results": "{\"t\": \"2026-10-23T20:19:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Specializes\\\", \\\"AlgebraicSpace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, residue-field parametrizations or stalk identities, not this assertion for decent algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two comparable scheme points mapping to the same point under an etale map to an algebraic space with quasi compact field representatives must coincide",
+   "results": "{\"t\": \"2026-10-23T20:19:17Z\", \"tool\": \"leanfinder\", \"query\": \"Two comparable scheme points mapping to the same point under an etale map to an algebraic space with quasi compact field representatives must coincide\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\"], \"digest\": \"9680dca036ff1371\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern schemes, residue-field parametrizations or stalk identities, not this assertion for decent algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-decent-closed-point-field-immersion",
+  "date": "2026-10-23",
+  "group": "Q110"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: Finiteness for field-valued maps over closed base points, before using the rational section identity. Supporting lemma for Tag 08AL: Tag 0AHB (lemma-decent-space-closed-point); decency is Tag 03I8 (definition-very-reasonable), equivalently Tag 03JV (lemma-UR-finite-above-x), condition (6). Supporting input for Tag 0AHB: Tag 03K5, no nontrivial specializations in etale chart fibres.",
+   "via": [
+    "lem-sfb-decent-closed-point-field-immersion",
+    "lem-sfb-decent-space-finite-field-map",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-decent-etale-fibres-no-specializations",
+  "worker": "stage1",
+  "summary": "Expanded the proof of Stacks 03K5 through 03IM, deriving finiteness of the affine-chart point fibre directly from the assumed quasi-compact field representative as in 03JV. All non-elementary inputs are existing DAG nodes; the finite specialization tower and its collapse remain explicit steps. No statement change, no new nodes and no Lean attachment.",
+  "blueprint": "Retains the inherited supporting role for the closed-point field immersion (Stacks 0AHB) below det-thm-sf-ctf-stability-direct-images (3). The latest blueprint has no separate statement of this lemma; from.place records the inherited prerequisite chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Choose an affine neighbourhood without a quasi-separatedness assumption. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Restrict an etale chart to an open subscheme. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Use the categorical sheaf fibre product of algebraic spaces. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Discrete scheme fibres of an etale map, also over the chosen field. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Point-surjectivity onto the set-theoretic fibre product and the resulting fibre image. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-generalizations-lift",
+    "why": "Lift the given generalization through an etale scheme projection. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Antisymmetry of specialization in the chart scheme. This is a generic scheme or point-topology tool; no statement in the unit supplies it, and it does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-656499ae8",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-656499ae8 (reviewer sub-agent of L); spot-checked: Read decent-spaces.tex in full: Tag 03K5, the proof of 03IM (tower picture and collapse), and 03JV (4)⇒(3). The statement is unchanged, and its hypothesis is 03JV(4) decency, matching 03K5. Step 1 checked: affine W∋u (leaf), W→X still representable étale (open immersion then étale), R=W×_XW with étale projections s,t, and as=at from the categorical fibre product. Step 2 checked: P=W×_X Spec F is quasi-compact because j is quasi-compact on the affine test W, and étale over F, so discrete, so finite. The fibre-image equality in lem-a1-space-point-open-calculus gives A=|a|^{-1}(x), so A is finite (the 03JV (4)⇒(3) argument). Step 3 checked: flat lifting has the right orientation, the s- and t-fibres are discrete via the def-pc-scheme-fibre homeomorphism, and specialization is antisymmetric by uniqueness of generic points. Steps 4–5 checked: the tower indices match 03IM (t(r0)=u, s(r0)=u′, r_{n+1}⇝r_n), backward propagation is verified, and pigeonhole plus antisymmetry give u=u′. The induction is explicit and finite. There are no new nodes. No existing node duplicates the item: qs-space-etale-specializations needs a quasi-compact diagonal, finite-groupoid-orbit-incomparability needs finite s and t, and the decency-criterion nodes state the converse. The 7 declared tool_uses are all generic scheme/space foundations and are accepted. Batch-5: lem-trf-space-fibre-products-etale-covers is generic fibre-product infrastructure, and lem-a1-space-point-open-calculus reaches the trace-formula chapter only through the definition def-trf-algebraic-space. Neither is given by the trace-formula or Poincaré-duality assumption, so both are outside the assumed statements. No SGA. No fixes."
+ }
+}

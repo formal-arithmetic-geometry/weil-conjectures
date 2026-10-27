@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-space-qcoh-cartesian-chart-family",
+ "kind": "statement",
+ "title": "Quasi-coherent module sheaves as cartesian families on all etale charts",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ with small etale ringed site $(X_{\\mathrm{et}},\\mathcal O_X)$ [def-trf-algebraic-space]. Work in a universe and small-skeleton convention as in [def-weil-size-convention]. Quasi-coherent module sheaves on a ringed site are defined by local presentations [def-trf-space-quasi-coherent-module], and module morphisms are [def-weil-sheaf-of-modules-category]. For each object $v:V\\to X$ of $X_{\\mathrm{et}}$, specify a quasi-coherent module $F_V$ on $(V_{\\mathrm{et}},\\mathcal O_V)$. For each morphism $f:W\\to V$ over $X$, specify an isomorphism $c_f:f_{\\mathrm{et}}^*F_V\\xrightarrow{\\sim}F_W$, where etale pullback is restriction on localized etale sites. Require $c_{\\mathrm{id}}=\\mathrm{id}$ and $c_{f\\circ g}=c_g\\circ g_{\\mathrm{et}}^*c_f$ under the canonical composition identification. A morphism between two such families is a family of module maps $h_V:F_V\\to G_V$ satisfying $h_Wc_f^F=c_f^Gf_{\\mathrm{et}}^*h_V$. Restriction of a quasi-coherent $\\mathcal O_X$-module to all these charts, with its canonical restriction identifications, is an equivalence to this category of cartesian families. In particular every such family comes from a quasi-coherent module on $X$, with compatible isomorphisms of its restrictions to the $F_V$, and compatible families of maps come from unique maps on $X$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03LZ (lemma-characterize-quasi-coherent-small-etale), together with Tag 03LY (lemma-characterize-module-small-etale); the compatible-map formulation is the categorical meaning of the description by data."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-cartesian-chart-family"
+ ],
+ "proof": [
+  {
+   "text": "Use the localized-site meaning of etale pullback specified in the statement and in [def-trf-algebraic-space]: an object $a:T\\to V$ of $V_{\\mathrm{et}}$ is the object $va:T\\to X$ of $X_{\\mathrm{et}}$ over $V$, restriction of a module $M$ from $X$ has value $M(T)$, with the same ring $\\Gamma(T,\\mathcal O_T)$ and the same restrictions, and the slice of $V_{\\mathrm{et}}$ over $a$ is the slice of $X_{\\mathrm{et}}$ over $va$ with the same restricted ring sheaf. Let $M$ be quasi-coherent in the sense of [def-trf-space-quasi-coherent-module] and fix such an object $T$. That definition, applied to the object $va$ of $X_{\\mathrm{et}}$, gives a covering $\\{T_i\\to T\\}$ and exact presentations $\\mathcal O^{(I)}\\to\\mathcal O^{(J_0)}\\to M\\to0$ on each slice over $T_i$. The same family is a covering of $T$ in $V_{\\mathrm{et}}$, and these are literally presentations of $M|_V$ on the same slices, so $M|_V$ is quasi-coherent. Repeated restriction gives identical section maps, hence the canonical identifications satisfy the identity and composition conditions. Restricting module maps gives the stated compatibility equation. Thus the restriction functor in the statement is defined.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LZ (lemma-characterize-quasi-coherent-small-etale), forward construction; quasi-coherence of restriction to a localized site is local by sites-modules.tex Tag 03DL (definition-site-local)"
+   }
+  },
+  {
+   "text": "For a cartesian family $(F_V,c_f)$ define $F(V)=F_V(V)$, with its $\\Gamma(V,\\mathcal O_V)$-module structure. For $f:W\\to V$ put $\\rho_f=(c_f)_W\\circ\\operatorname{res}^{F_V}_{W/V}:F_V(V)\\to F_W(W)$. Here $(c_f)_W:F_V(W\\xrightarrow f V)\\to F_W(W)$ uses the localized-site interpretation. Each $\\rho_f$ is semilinear over restriction of regular functions, since the first factor is linear over $\\mathcal O_W(W)$ and the second is a module-sheaf restriction. Therefore these maps have precisely the scalar compatibility of [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LY (lemma-characterize-module-small-etale); explicit evaluation construction in sites.tex, lemma-glue-sheaves-absolute"
+   }
+  },
+  {
+   "text": "The identity condition gives $\\rho_{\\mathrm{id}}=\\mathrm{id}$. For $g:T\\to W$, naturality of the sheaf map $c_f$ gives $\\operatorname{res}^{F_W}_{T/W}(c_f)_W=(c_f)_T\\operatorname{res}^{F_V}_{T/W}$. Consequently $\\rho_g\\rho_f=(c_g)_T(c_f)_T\\operatorname{res}^{F_V}_{T/V}=(c_{fg})_T\\operatorname{res}^{F_V}_{T/V}=\\rho_{fg}$ by the supplied cocycle. Hence $F$ is a presheaf of modules. For fixed $V$, the maps $b_{V,a}=(c_a)_T:F_V(T\\xrightarrow a V)\\to F(T)$ are linear bijections. For $k:T'\\to T$ over $V$ the same calculation gives $\\rho_k b_{V,a}=b_{V,ak}\\operatorname{res}^{F_V}_k$. Thus $b_V$ is an isomorphism of module presheaves $F_V\\simeq F|_{X_{\\mathrm{et}}/V}$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LY (lemma-characterize-module-small-etale); expanded presheaf and localization checks in sites.tex, lemma-glue-sheaves-absolute"
+   }
+  },
+  {
+   "text": "Let $\\{a_i:V_i\\to V\\}$ be a covering and let $s_i\\in F(V_i)$ be a matching family. Put $t_i=b_{V,a_i}^{-1}(s_i)$. Naturality of $b_V$ identifies equality of the two restrictions of the $s_i$ on $V_i\\times_VV_j$ with equality of the corresponding restrictions of the $t_i$ in $F_V$. The sheaf axiom for $F_V$ therefore gives a unique $t\\in F_V(V)$ restricting to all $t_i$. Then $b_{V,\\mathrm{id}}(t)\\in F(V)$ is the unique amalgamation of the $s_i$. This proves the equalizer condition of [def-weil-pbc-sites-and-cohomology]. Along with the sectionwise module structures already checked, [def-weil-sheaf-of-modules-category] now makes $F$ a module sheaf, and each $b_V$ is an isomorphism of module sheaves.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LY (lemma-characterize-module-small-etale); sheaf-axiom verification expanding sites.tex, lemma-glue-sheaves-absolute"
+   }
+  },
+  {
+   "text": "For $f:W\\to V$, evaluate $b_Wc_f=(f^*b_V)$ on $a:T\\to W$. Its left side is $(c_a)_T(c_f)_T=(c_{fa})_T$, which is exactly the component of its right side. Thus $b_V^{-1}:F|_V\\to F_V$ is compatible with every transition. To check quasi-coherence, fix any chart $V$. By [def-trf-space-quasi-coherent-module], $F_V$ admits, on a covering $\\{V_i\\to V\\}$, presentations by coproducts of the restricted structure sheaf. The isomorphism $b_V$ identifies $F|_{X_{\\mathrm{et}}/V}$ with this very module on this very ringed site. Its presentations therefore give the local presentations required for $F$ on each $V_i$; no preservation-of-cokernels assertion is being imposed on section evaluation. Since this holds for every $V$, that definition says $F$ is quasi-coherent.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LZ (lemma-characterize-quasi-coherent-small-etale), reverse implication; sites-modules.tex, definition-site-local, clause (6)"
+   }
+  },
+  {
+   "text": "For a compatible family $h_V:F_V\\to G_V$, set $h(V)=(h_V)_V:F_V(V)\\to G_V(V)$. Naturality of $h_V$ and the given equation $h_Wc_f^F=c_f^G f^*h_V$, evaluated at $W$, give $h(W)\\rho_f^F=\\rho_f^G h(V)$. Thus these linear maps define a module-sheaf map $h:F\\to G$ by [def-weil-sheaf-of-modules-category]. On $a:T\\to V$ the same compatibility equation reads $(h_T)_T(c_a^F)_T=(c_a^G)_T(h_V)_T$, so restriction of $h$ is the prescribed $h_V$ under the isomorphisms $b_V$. Componentwise identities and compositions are preserved.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03LY (lemma-characterize-module-small-etale), categorical morphism formulation; expansion of the omitted quasi-inverse details in sites.tex, lemma-glue-sheaves-absolute"
+   }
+  },
+  {
+   "text": "Starting from a module sheaf $M$ on $X$, restriction followed by the evaluation construction gives $F(V)=(M|_V)(V)=M(V)$ and $\\rho_f=M(f)$, on maps as well as objects. Starting from a family, the maps $b_V^{-1}$ of step 5 identify its reconstructed restrictions with the original family, and step 6 proves naturality in family morphisms. These are inverse functors up to the specified natural isomorphisms. Uniqueness of a descended map is also explicit: a global map with the prescribed restrictions must have component $(h_V)_V$ at each object $V$, so all its components are forced. The resulting equivalence has both the object and map clauses asserted in the statement.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03LY and 03LZ (lemma-characterize-module-small-etale; lemma-characterize-quasi-coherent-small-etale), completed quasi-inverse and unique-map verification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03LZ and 03LY, expanded using the explicit evaluation construction of sites.tex Tag 0GWK (lemma-glue-sheaves-absolute); module operations and compatible maps checked sectionwise."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent module sheaves on a ringed etale site are reconstructed from compatible families on all etale scheme charts",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.mk.inj, SheafOfModules.QuasicoherentData.X, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.localGeneratorsData_X",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherent local-presentation structures, not reconstruction of cartesian chart families; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-265 read"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]artesian|[Cc]hart).*[Qq]uasi|[Qq]uasi.*([Cc]artesian|[Cc]hart)",
+   "results": "OK 1 hits: Mathlib/AlgebraicTopology/Quasicategory/StrictBicategory.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the sole hit is an unrelated quasicategory comment"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent sheaves on an algebraic space are compatible module families on all etale scheme charts",
+   "results": "OK 8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.mk, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.QuasicoherentData.ctorIdx",
+   "date": "2026-10-23",
+   "verdict": "no match: quasi-coherent local-presentation structures, not reconstruction of cartesian chart families; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:202-265 read"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasicoherent\", \"Equivalence\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf on a site is reconstructed by evaluating a compatible family of sheaves on slice sites at their terminal objects",
+   "results": "OK 8 hits: CategoryTheory.evalEquiv, CategoryTheory.typesGlue, CategoryTheory.evalEquiv_symm_apply, CategoryTheory.evalEquiv_apply, CategoryTheory.eval_typesGlue, CategoryTheory.typesGlue_eval, CategoryTheory.Functor.IsCoverDense.sheaf_eq_amalgamation, CategoryTheory.Presheaf.FamilyOfElementsOnObjects.IsCompatible.section_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: evaluation for the site of types, or ordinary sheaf amalgamation, not cartesian module families on etale charts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qcoh-groupoid-equivalence",
+  "date": "2026-10-23",
+  "group": "Q30"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Quasi-coherent modules on a Noetherian algebraic space are coherent filtered unions. Supporting input to Tag 07UV: the equivalence QCoh(X) = QCoh(U,R,s,t,c) in the second paragraph, with coherence detected on U. Input to the proof of Tag 03M3: chartwise characterization in Tag 03LZ, using Tag 03LY for modules and morphisms.",
+   "via": [
+    "lem-sfb-space-qcoh-groupoid-equivalence",
+    "lem-sfb-space-coherent-filtered-union",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qcoh-cartesian-chart-family",
+  "worker": "stage1",
+  "summary": "Expanded the 03LZ/03LY proof down to section formulas: restriction is quasi-coherent by the existing pullback theorem; evaluate each chart module on its terminal chart, use the cocycle to prove functoriality and slice comparison, verify gluing and local presentations, construct compatible maps and both quasi-inverse identifications. No new nodes: the remaining checks are explicit consequences of the supplied family axioms and the existing definitions. No statement correction. Searched current project Lean and Mathlib without an exact attachment or leaf.",
+  "blueprint": "Inherited ancestor det-thm-sf-ctf-stability-direct-images, proof (3): supporting chartwise quasi-coherent reconstruction used in Tag 03M3, via the recorded chain from lem-sfb-space-qcoh-groupoid-equivalence. The current latest blueprint was read; same_as search found no exact blueprint node. The inherited null ancestor was left unchanged as required."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-5b5d85cfd",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-5b5d85cfd (reviewer sub-agent of L); spot-checked: I read the item in full; there are 0 new nodes and no re-split note. The statement matches Stacks 03LZ/03LY (spaces-properties.tex l.5267/4446) with the morphism clause made explicit. Steps 2-7 follow sites.tex 0GWK and I checked each one: the semilinearity of rho_f, the cocycle order rho_g rho_f = rho_{fg}, naturality of b_V, the sheaf condition including the empty cover, the transition compatibility b_W c_f = f^*b_V, chartwise local presentations, reconstruction of maps, and the quasi-inverse. One fault, fixed: step 1 used lem-sfb-space-module-pullback-quasicoherent, which is about the tensor pullback O_X ⊗ f^{-1}M, to conclude that the restriction M|_V is quasi-coherent. The bridge 'tensor pullback = restriction for an étale map' (Stacks 03LV) was not cited. The repaired step 1 proves it directly from def-trf-space-quasi-coherent-module: V_et/T is the same slice as X_et/(va) with the same ring sheaf, so the coverings and presentations for M carry over unchanged (Stacks 03DL). proof_deps are now the union of the step uses, and the flagged lemma is no longer cited. Batch-5 flag: that lemma is general quasi-coherent pullback, reached only through the general definition def-trf-algebraic-space (already a stmt_dep). It is not a step of the trace formula or Poincaré duality proofs, and it is gone after the fix. No duplicate in the DAG: the parent groupoid-equivalence, affine-chart-calculus and integral-algebra-fp-colimit all differ. No SGA. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQCohCartesianChartEquivalence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcChartRestriction_isEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartTransition",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartRestriction_identity",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartRestriction_composition",
+   "AlgebraicGeometry.AlgebraicSpace.moduleChartRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.chartRestriction_isQuasicoherent",
+   "AlgebraicGeometry.AlgebraicSpace.qcChartRestriction",
+   "AlgebraicGeometry.AlgebraicSpace.qcChartRestriction_isEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQCohCartesianChartEquivalence.lean",
+  "statement": "theorem qcChartRestriction_isEquivalence {S : Scheme.{u}} (X : AlgebraicSpace S) : X.qcChartRestriction.IsEquivalence",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14357085f",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the node (Stacks 03LY/03LZ) and def-sfb-space-cartesian-chart-family against both delivered modules. F_V are SheafOfModules on X_et/V (the localized convention the node specifies), with Mathlib's IsQuasicoherent unchanged. The transitions use the recorded etalePullbackMap = overMap. I checked the identity and cocycle laws by hand: the reindexing via Over.mapId/Over.mapComp is canonical and c_g ∘ g^*c_f is in the right order. Hom.comm = h_W c_f^F = c_f^G f^*h_V. The functor is the canonical overFunctor restriction with overFunctorMap transitions. IsEquivalence covers reconstruction and existence/uniqueness of maps. No extra hypotheses or universe restrictions; the iterated-slice Prop instances are transported along iteratedSliceEquiv; theorem proofs are all sorry; lean.statement is verbatim; docstrings carry sources. The worker had no compile evidence (the disk filled on every attempt), so I compiled both files once, unchanged, via nt_compile --json: clean (38.3 s and 25.8 s, exit 0)."
+ }
+}

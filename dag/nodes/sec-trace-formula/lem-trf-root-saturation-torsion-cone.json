@@ -1,0 +1,252 @@
+{
+ "id": "lem-trf-root-saturation-torsion-cone",
+ "kind": "statement",
+ "title": "Root saturation through the finite torsion quotient",
+ "statement": "Let $G$ be an abelian group generated as a group by a finite list $p_1,\\ldots,p_r$, allowing $r=0$, and let $P=\\{\\sum_{i=1}^r n_i p_i:n_i\\in\\mathbf N\\}\\subseteq G$. Put $T=\\{g\\in G:\\exists n\\in\\mathbf Z_{\\ge1},\\ ng=0\\}$, the torsion subgroup, and let $\\pi:G\\to L=G/T$ be the quotient homomorphism. Then $T$ is finite and $L$ is free abelian of finite rank, meaning that $L$ has a finite $\\mathbf Z$-basis [def-weil-pbc-free-module], for the canonical action of $\\mathbf Z$ by integer multiples. In particular $\\ell\\mapsto\\ell\\otimes1$ embeds $L$ in $L\\otimes_{\\mathbf Z}\\mathbf Q$. With this identification, set\n$$C=\\left\\{\\sum_{i=1}^r q_i\\pi(p_i):q_i\\in\\mathbf Q_{\\ge0}\\right\\}\\subseteq L\\otimes_{\\mathbf Z}\\mathbf Q.$$\nFor every $g\\in G$ one has\n$$\\bigl(\\exists n\\in\\mathbf Z_{\\ge1},\\ ng\\in P\\bigr)\\quad\\Longleftrightarrow\\quad\\pi(g)\\in C.$$\nNo torsion-freeness assumption on $G$ is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.1.17, printed p. 101 (root saturation), and 3.2.9 proof, printed p. 104 (finite toric saturation input); the torsion-quotient and denominator-clearing argument is agent supplied, as in the returned parent proof, Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The finite generating list gives AddGroup.FG G and Module.Finite ℤ G. The torsion subgroup, regarded as its integral submodule, is finitely generated because ℤ is noetherian. Its elements have finite additive order, so it is finite by Module.finite_of_fg_torsion (Mathlib.GroupTheory.FiniteAbelian.Basic), the torsion specialization of the PID structure theorem [lem-sbc-finitely-generated-abelian-group-structure]. The quotient L = G/T is finitely generated and torsion-free (Mathlib QuotientAddGroup.fg and QuotientAddGroup.instIsAddTorsionFree). Apply Module.basisOfFiniteTypeTorsionFree' [lem-trf-fg-torsionfree-group-free] to L over ℤ to obtain a basis b indexed by Fin s [def-weil-pbc-free-module].",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-trf-fg-torsionfree-group-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0FJ8 (example-K0-PID), structure theorem; explicit torsion and quotient computation by Q87 using the cited Mathlib structure theorem."
+   }
+  },
+  {
+   "text": "For every coordinate i of b, apply the tensor linear map TensorProduct.lid ℤ ℚ after TensorProduct.map (b.coord i) id. By bilinearity [def-weil-pbc-module-tensor-product], it sends l ⊗ 1 to the rational cast of the integer b.repr l i. Equality of two canonical tensors therefore gives equality of every integer coordinate, since ℤ → ℚ is injective. Injectivity of b.repr gives equality in L. This proof also works when the basis is empty; no full tensor coordinate isomorphism is needed.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property; explicit finite-coordinate calculation by Q87."
+   }
+  },
+  {
+   "text": "Use tensor symmetry to work in V = ℚ ⊗[ℤ] L with its rational scalar action. Let f:G→V send g to 1 ⊗ π(g); its kernel is exactly T by step 2 and the quotient kernel criterion. If ng = ∑ m_i p_i with n > 0, applying f gives n f(g) = ∑ m_i f(p_i). Multiply by 1/n to get f(g) = ∑ (m_i/n) f(p_i), with all coefficients nonnegative. Tensor symmetry and bilinearity [def-weil-pbc-module-tensor-product] turn this back into the stated tensors π(p_i) ⊗ (m_i/n).",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.17, printed p. 101 (root saturation), and 3.2.9 proof, printed p. 104 (finite toric saturation input); the torsion-quotient and denominator-clearing argument is agent supplied, as in the returned parent proof, Step 1."
+   }
+  },
+  {
+   "text": "For q_i ≥ 0 take D = ∏ q_i.den > 0, with empty product 1. For each i, q_i.den divides D, say D = q_i.den * c_i. Nonnegativity gives q_i.num ≥ 0, so m_i = c_i * q_i.num.toNat is a natural number and D q_i = m_i by Rat.den_mul_eq_num. Multiplying the rational cone identity by D gives f(Dg - ∑ m_i p_i) = 0 by bilinearity [def-weil-pbc-module-tensor-product]. The kernel calculation from step 3 puts t = Dg - ∑ m_i p_i in T. Choose k > 0 with kt = 0 from the definition of torsion. Distributing k over the difference and finite sum gives (kD)g = ∑ (k m_i)p_i, with kD > 0. Empty sums cause no exception.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, 3.1.17, printed p. 101 (root saturation), and 3.2.9 proof, printed p. 104 (finite toric saturation input); the torsion-quotient and denominator-clearing argument is agent supplied, as in the returned parent proof, Step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-trf-fg-torsionfree-group-free",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VIII 3.1.17 and 3.2.9 provide the root-saturation context; P6 formalizes the parent node's elementary denominator argument, using Mathlib's finite torsion and finite torsion-free basis APIs to avoid explicit product reconstruction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torsion.*[Ff]inite|[Ff]inite.*torsion|root.*saturat|saturat.*cone",
+   "results": "[grep] OK 25 hit(s): Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean, Mathlib/Algebra/Module/DedekindDomain.lean. Hits give torsion or saturation definitions, PID module structure, number-field-specific cones or quotients; none gives this monoid/cone equivalence together with the finite torsion quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Saturation of a finitely generated additive monoid is the preimage of a nonnegative rational cone modulo torsion",
+   "results": "[leansearch] OK 8 hit(s): AddSubgroup.Saturated, Subalgebra.saturation, AddSubgroup.saturated_iff_zsmul, AddSubgroup.saturated_iff_nsmul, AddCommMonoid.addTorsion, AddSubmonoid.FG, AddSubgroup.ker_saturated, AddMonoid.closure_finset_fg. Hits give torsion or saturation definitions, PID module structure, number-field-specific cones or quotients; none gives this monoid/cone equivalence together with the finite torsion quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddCommGroup.torsion, Module.Finite",
+   "results": "[loogle] OK 0 hit(s): none. Hits give torsion or saturation definitions, PID module structure, number-field-specific cones or quotients; none gives this monoid/cone equivalence together with the finite torsion quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root saturation of a finitely generated submonoid of an abelian group equals the inverse image of its rational cone in the quotient by torsion; torsion subgroup finite and quotient free of finite rank",
+   "results": "[leanfinder] OK 8 hit(s): NumberField.mixedEmbedding.fundamentalCone.unit_smul_mem_iff_mem_torsion, NumberField.mixedEmbedding.fundamentalCone.torsion_smul_mem_of_mem, NumberField.Units.dirichletUnitTheorem.map_logEmbedding_sup_torsion, NumberField.Units.rootsOfUnity_eq_torsion, NumberField.mixedEmbedding.fundamentalCone.torsion_unitSMul_mem_integerSet, NumberField.Units.closure_fundSystem_sup_torsion_eq_top, NumberField.Units.finiteIndex_iff_sup_torsion_finiteIndex, NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion. Hits give torsion or saturation definitions, PID module structure, number-field-specific cones or quotients; none gives this monoid/cone equivalence together with the finite torsion quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finitely generated abelian group, an element has a positive multiple in the monoid generated by p_i if and only if its image modulo torsion is a nonnegative rational combination of the images of p_i",
+   "results": "[leanfinder] OK 8 hit(s): Module.exists_smul_eq_zero_and_mk_eq, AddCircle.isOfFinAddOrder_iff_exists_rat_eq_div, AddSubgroup.nsmul_mem_zmultiples_iff_exists_sub_div, AddSubgroup.zsmul_mem_zmultiples_iff_exists_sub_div, AddCircle.exists_gcd_eq_one_of_isOfFinAddOrder, QuotientAddGroup.zmultiples_nsmul_eq_nsmul_iff, mem_zmultiples_iff_mem_range_addOrderOf, QuotientAddGroup.zmultiples_zsmul_eq_zsmul_iff. Hits give torsion or saturation definitions, PID module structure, number-field-specific cones or quotients; none gives this monoid/cone equivalence together with the finite torsion quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "torsion|saturat|rational.*cone",
+   "results": "[grep] OK 5 hit(s): 11, 25, 26, 28, 29. Hits give torsion or saturation definitions, PID module structure, number-field-specific cones or quotients; none gives this monoid/cone equivalence together with the finite torsion quotient.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equiv.*(prod|pi).*|torsion.*(finite|fintype)|finite.*torsion",
+   "results": "{\"t\": \"2026-10-23T10:44:09Z\", \"tool\": \"grep\", \"query\": \"equiv.*(prod|pi).*|torsion.*(finite|fintype)|finite.*torsion\", \"sub\": \"GroupTheory/FiniteAbelian\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Duality.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\", \"Mathlib/GroupTheory/FiniteAbelian/Basic.lean\"], \"digest\": \"2b3802f4d7ce6250\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*torsion|torsion.*quotient|IsTorsionFree.*Free",
+   "results": "{\"t\": \"2026-10-23T10:44:09Z\", \"tool\": \"grep\", \"query\": \"quotient.*torsion|torsion.*quotient|IsTorsionFree.*Free\", \"sub\": \"Algebra/Module\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Algebra/Module/PID.lean\", \"Mathlib/Algebra/Module/LinearMap/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/Pi.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"Mathlib/Algebra/Module/LocalizedModule/Basic.lean\", \"Mathlib/Algebra/Module/Submodule/Basic.lean\", \"Mathlib/Algebra/Module/Torsion/Field.lean\"], \"digest\": \"cdaf77d26b42ad7e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The torsion subgroup of a finitely generated abelian group is finite",
+   "results": "{\"t\": \"2026-10-23T10:44:09Z\", \"tool\": \"leansearch\", \"query\": \"The torsion subgroup of a finitely generated abelian group is finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGroup.finite_of_fg_torsion\", \"Module.finite_of_fg_torsion\", \"CommGroup.finite_of_fg_torsion\", \"AddCommGroup.torsion\", \"CommGroup.torsion\", \"AddCommGroup.mem_torsion\", \"CommGroup.mem_torsion\", \"AddSubgroup.torsionBy\"], \"digest\": \"6c0e8403a98537a6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite, Module.torsion",
+   "results": "{\"t\": \"2026-10-23T10:44:10Z\", \"tool\": \"loogle\", \"query\": \"Module.Finite, Module.torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Module.torsion'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated abelian group is isomorphic to a product of a finite abelian group and a finite power of the integers",
+   "results": "{\"t\": \"2026-10-23T10:44:10Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated abelian group is isomorphic to a product of a finite abelian group and a finite power of the integers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoid.FG.to_moduleFinite_int\", \"Module.Finite.iff_addGroup_fg\", \"FreeAbelianGroup.instFiniteInt\", \"FreeAbelianGroup.instFG\", \"AddGroup.fg_iff_exists_freeAddGroup_hom_surjective\", \"AddGroup.FG\", \"AddCommGroup.finite_of_fg_torsion\", \"CommGroup.finite_of_fg_torsion\"], \"digest\": \"7da70970c67306b2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive multiple of an element lies in the monoid generated by a finite list if and only if its image modulo torsion lies in the nonnegative rational cone of that list",
+   "results": "{\"t\": \"2026-10-23T10:45:43Z\", \"tool\": \"leansearch\", \"query\": \"A positive multiple of an element lies in the monoid generated by a finite list if and only if its image modulo torsion lies in the nonnegative rational cone of that list\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddSubmonoid.multiples_le\", \"IsOfFinAddOrder.mem_multiples_iff_mem_zmultiples\", \"AddSubmonoid.multiples\", \"mem_multiples_iff_mem_zmultiples\", \"AddSubmonoid.mem_multiples_iff\", \"AddSubmonoid.multiples_eq_closure\", \"AddMonoid.multiples_fg\", \"AddSubmonoid.multiples_fg\"], \"digest\": \"942fe8094d74f913\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "root.*saturat|saturat.*cone|saturat.*rational|cone.*torsion",
+   "results": "{\"t\": \"2026-10-23T10:45:44Z\", \"tool\": \"grep\", \"query\": \"root.*saturat|saturat.*cone|saturat.*rational|cone.*torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone.lean\"], \"digest\": \"ef5d87b69183eea7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Root saturation of a finitely generated additive submonoid is the inverse image of its rational cone in the torsion free quotient of its group completion",
+   "results": "{\"t\": \"2026-10-23T10:45:44Z\", \"tool\": \"leanfinder\", \"query\": \"Root saturation of a finitely generated additive submonoid is the inverse image of its rational cone in the torsion free quotient of its group completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupCone.toAddSubmonoid\", \"AddSubgroup.ker_saturated\", \"GroupCone.toSubmonoid\", \"AddSubmonoid.subPairs\", \"Algebra.GrothendieckAddGroup.instFG\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetToAssociates_apply\", \"RootPairing.Base.root_mem_or_neg_mem\", \"AddSubmonoid.closure_image_isAddIndecomposable_baseOf\"], \"digest\": \"df174075410beb15\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubmonoid, \"saturat\"",
+   "results": "{\"t\": \"2026-10-23T10:45:45Z\", \"tool\": \"loogle\", \"query\": \"AddSubmonoid, \\\"saturat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddSubmonoid.AddSaturated\", \"AddSubmonoid.saturation\", \"SaturatedAddSubmonoid.toAddSubmonoid\", \"SaturatedAddSubmonoid.mk\", \"SaturatedAddSubmonoid.toAddSubmonoid_injective\", \"AddSubmonoid.AddSaturated.top\", \"AddSubmonoid.saturation_top\", \"AddSubmonoid.AddSaturated.iInf\"], \"digest\": \"9b63176032901330\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; related group structure, torsion, or saturation results do not state the rational-cone equivalence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-monoid-finite-saturation",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), historical nearby-duality alteration reduction: finite toric saturation in ILO VIII 3.2.9 proof, printed p.104; torsion reduction and rational-cone criterion.",
+   "via": [
+    "lem-trf-fine-monoid-finite-saturation",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-root-saturation-torsion-cone",
+  "worker": "stage1",
+  "summary": "Reused the existing Mathlib structure theorem instead of creating a duplicate. Computed the finite torsion subgroup and free quotient in coordinates, constructed the tensor-coordinate isomorphism from its universal property, and wrote both directions of the cone criterion with explicit positive denominators and torsion annihilator. Added the missing tensor-product statement dependency; the mathematical statement is unchanged. No new nodes.",
+  "blueprint": "Historical nearby-duality alteration reduction underlying lem-trf-local-term-locality, proof (1)--(2), as inherited through the fine-monoid finite-saturation chain. This item supplies precisely the torsion-quotient and rational-cone calculation in that inherited reduction; no chapter or unit route is changed. The latest blueprint now states the contracting-correspondence route, which was read as context."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-8a3e587da",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-8a3e587da (reviewer sub-agent of L); spot-checked: Read the whole item: 4 steps, no new nodes, one commit touching only the item and the report, first delivery, not a re-split. The statement is unchanged from Q156's and matches ILO VIII 3.1.17 (printed p.101): saturation is in the group G, with a positive multiple. It also matches exactly what step 1 of the parent lem-trf-fine-monoid-finite-saturation uses (T finite, L free of finite rank, P^sat = π⁻¹(C∩L)). Cited nodes: lem-sbc-finitely-generated-abelian-group-structure, checked against AddCommGroup.equiv_free_prod_directSum_zmod at Mathlib FiniteAbelian/Basic.lean:119-132 (e=0 allowed, d_j ≥ 1); def-weil-pbc-free-module; def-weil-pbc-module-tensor-product (universal property and generation by pure tensors). Step 1: f(T)={0}×H through coordinate cancellation and N=∏d_j, so T is finite; α: L ≅ Z^s is well defined with inverse a ↦ π f⁻¹(a,0), both composites checked. Step 2: Φ comes from the bilinear map; ΦΨ = id on tuples and ΨΦ = id on pure tensors, and the Q-action is compatible; ℓ ↦ ℓ⊗1 is injective because Z ⊂ Q. Step 3 divides by n. Step 4 clears denominators with D, uses injectivity to get t ∈ T, and the torsion annihilator k gives kDg ∈ P; the r=0 case is covered. Small cases checked: Z/2; Z with (2); Z with (1,−1); Z⊕Z/2 with (1,1),(0,1); r=0. Duplicate search (rg -L for torsion/saturation/G/T, and the citers): lem-trf-rational-cone-simultaneous-lifts gives the cone criterion only for an injective i, so it is no duplicate (reusing it was optional). sharp-cone-lattice-intersection needs P sharp, fg-torsionfree-group-free needs G torsion-free, and finite-kernel-cone-translates is the parent's next step. Step 1's source, Stacks 0FJ8 (algebra.tex:13077), does state the PID structure theorem. Only a Mathlib leaf and definitions are cited, so no route statement is used and no tool_uses are needed; no SGA. Advisory only: step 1 reuses the letter p_j for primes, which clashes with the generators p_i. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.RootSaturationTorsionCone",
+  "declaration": "AddCommGroup.root_saturation_torsion_cone",
+  "file": "lean/Sheaf/GroupTheory/RootSaturationTorsionCone.lean",
+  "statement": "theorem root_saturation_torsion_cone {G : Type u} [AddCommGroup G] (r : ℕ) (p : Fin r → G) (hp : AddSubgroup.closure (Set.range p) = ⊤) : Finite (torsion G) ∧ (∃ s : ℕ, Nonempty (Module.Basis (Fin s) ℤ (G ⧸ torsion G))) ∧ Function.Injective (fun l : G ⧸ torsion G ↦ l ⊗ₜ[ℤ] (1 : ℚ)) ∧ ∀ g : G, (∃ n : ℕ, 0 < n ∧ ∃ m : Fin r → ℕ, n • g = ∑ i, m i • p i) ↔ ∃ q : Fin r → ℚ, (∀ i, 0 ≤ q i) ∧ (QuotientAddGroup.mk' (torsion G) g) ⊗ₜ[ℤ] (1 : ℚ) = ∑ i, (QuotientAddGroup.mk' (torsion G) (p i)) ⊗ₜ[ℤ] q i",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a968fac02",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: AddCommGroup G with any universe; finite list Fin r → G that may be empty and generates G as a group (AddSubgroup.closure = ⊤); P written as ℕ-combinations; T = AddCommGroup.torsion; π = QuotientAddGroup.mk'; Finite T; basis of G⧸T indexed by Fin s; l ↦ l⊗1 into ⊗ℚ is injective; root-saturation ↔ non-negative rational cone in (G⧸T)⊗ℚ, with π(p i)⊗q i = q i•(π(p i)⊗1). No torsion-free or extra assumptions. Edge cases r=0, finite G, ℤ, ℤ⊕ℤ/2 checked. Node identical to side-live apart from lean; lean.statement verbatim in file; no defs, proof sorry only, docstrings give source place + blueprint id + 4-step proof; report has Worker report and Second reading by Q82 sections. No duplicate in Mathlib or project (FineMonoidFiniteSaturation is the parent; rational-cone-simultaneous-lifts needs injective i). Not recompiled, no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T092245-L-3417068",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

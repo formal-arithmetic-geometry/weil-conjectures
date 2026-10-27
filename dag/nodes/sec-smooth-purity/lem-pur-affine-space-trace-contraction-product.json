@@ -1,0 +1,152 @@
+{
+ "id": "lem-pur-affine-space-trace-contraction-product",
+ "kind": "statement",
+ "title": "Last-line contraction evaluated through the specified binary product",
+ "statement": "Let P be a finite purity setting and Y separated finite type over k. Put m=d+1 for d>=0, and use C_j,T_j,U=C_1T_1 and t_Y from [def-pur-ordered-affine-trace-data]. Assume C_mT_m,U,C_(m+1)T_(m+1) are finite-Tor constructible [def-weil-finite-tor-amplitude] and UniversalLineBaseChange [def-pur-affine-space-binary-trace-coordinates]. Let kappa:C_(m+1)T_(m+1)≅C_mT_m tensor U, let h certify etale origin of H_m, and suppose kappa.inv equals the specified binaryForward(h). Then the canonical last-line projection is invertible, with proof hq, and the explicit L_m(h,hq) [def-pur-affine-space-last-line-contraction] equals kappa.hom followed by 1 tensor t_Y and the coefficient right unitor. This asserts no identity about exceptional transposes.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space, ordered trace recursion and projection formula"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-ordered-affine-trace-data",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-affine-space-binary-trace-coordinates",
+  "def-pur-affine-space-last-line-contraction",
+  "def-pur-affine-line-purity-comparison",
+  "def-pur-affine-line-purity-coordinate-maps"
+ ],
+ "proof": [
+  {
+   "text": "The Tate powers are finite-Tor constructible by [prop-weil-twist-preserves]. The assumed compact-support images supply V,U and the next image. Compact-support base change and the finite compact projection formula make the specified exchange and projection maps invertible. The tensor-domain witnesses follow from ordinary finite-Tor representatives and their pulled-back tensor products.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-weil-finite-compact-projection-formula",
+    "thm-cbc-finite-level-proetale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-base-changed-line-trace-evaluation] at f=p_m and M=T_m. UniversalLineBaseChange supplies its trace equation. Transport its evaluation map using the canonical Tate pullbacks, externalTateIso, successorSourceIso and the origin change to the standard projective-line compactification. Naturality of projection in the Tate coefficient, and cancellation of the lineCoordinate inverse pair in normalizedPulledTrace, identify the left side with L_m. The right side is D followed by 1 tensor t_Y and the right unitor.",
+   "uses": [
+    "lem-pur-base-changed-line-trace-evaluation",
+    "def-pur-affine-space-binary-trace-coordinates",
+    "def-pur-affine-space-last-line-contraction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pur-affine-space-last-factor-product] on the same square. Its positiveTate presentation identifies with T_m by the coefficient left unitor. Transport through this isomorphism and the pullTate and appendTate identifications. Its finiteProductChosenForward is binaryForward: copied compactification contributes precisely rightDerivedLowerShriekCongr and the final object map is externalTateIso. The hypothesis on kappa.inv therefore makes D=kappa.hom by uniqueness of inverses. Substitute in the evaluation equality.",
+   "uses": [
+    "lem-pur-affine-space-last-factor-product",
+    "def-pur-affine-space-binary-trace-coordinates"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-twist-preserves",
+  "lem-weil-finite-compact-projection-formula",
+  "thm-cbc-finite-level-proetale",
+  "lem-pur-base-changed-line-trace-evaluation",
+  "def-pur-affine-space-binary-trace-coordinates",
+  "def-pur-affine-space-last-line-contraction",
+  "lem-pur-affine-space-last-factor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Integration on affine space, ordered trace recursion and projection formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional transpose of ordered affine space purity comparison equals the tensor product of normalized affine line integration under relative compact support Kunneth",
+   "results": "BoxIntegral.IntegrationParams.isoProd, MeasureTheory.GridLines.T, SSet.prodStdSimplex.nonDegenerate_iff_strictMono_objEquiv, exteriorPower.pairingDual_apply_apply_eq_one, NumberField.mixedEmbedding.fundamentalCone.setLIntegral_expMapBasis_image, MeasureTheory.GridLines.T_univ, NumberField.mixedEmbedding.volume_eq_two_pi_pow_mul_integral, NumberField.mixedEmbedding.volume_eq_two_pow_mul_two_pi_pow_mul_integral",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.NatTrans.naturality\"",
+   "results": "CategoryTheory.NatTrans.naturality, CategoryTheory.NatTrans.naturality_assoc, CategoryTheory.NatTrans.naturality_map, CategoryTheory.NatTrans.naturality_map_assoc, CategoryTheory.NatTrans.naturality_inv, CategoryTheory.NatTrans.naturality_inv_assoc, CategoryTheory.NatTrans.naturality_app, CategoryTheory.NatTrans.naturality_app_assoc",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "trace.*factorization|integration.*succ|integration.*kunneth",
+   "results": "No matching declarations.",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the counit transpose for affine line purity under composition and base change",
+   "results": "CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Comonad.counit_naturality, CategoryTheory.Comonad.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.OverPresheafAux.counitForward_naturality₁",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support Kunneth product composed with a line trace equals contraction of the last affine line",
+   "results": "GenLoop.cCompInsert, curveIntegralFun_segment, curveIntegral_segment, GenLoop.fromLoop_apply, GenLoop.toLoop_apply_coe, GenLoop.toLoop_apply, GenLoop.fromLoop_coe, GenLoop.homotopyTo_apply",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified geometric maps; generic naturality lemmas used for assembly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineSpaceTraceFactorization",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Proof Steps 3--4, Integration paragraph: ordered trace and binary product",
+   "via": [
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineSpaceTraceContractionProduct",
+  "file": "lean/Sheaf/Paper/AffineSpaceTraceContractionProduct.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpaceTrace.lastLineContraction_product",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AffineSpaceTrace.lastLineContraction_product"
+  ],
+  "statement": "theorem lastLineContraction_product\n    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})\n    (aY : Y ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ)\n    (hV : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y\n      ((compact P Y (d + 1)).obj (tate P Y (d + 1))))\n    (hU : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y\n      ((compact P Y 1).obj (tate P Y 1)))\n    (hNext : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (Ring P)) Y\n      ((compact P Y (d + 2)).obj (tate P Y (d + 2))))\n    (ht : UniversalLineBaseChange P Y aY)\n    (kappa : (compact P Y (d + 2)).obj (tate P Y (d + 2)) ≅\n      ((tensor (Ring P) Y).obj ((compact P Y (d + 1)).obj (tate P Y (d + 1)))).obj\n        ((compact P Y 1).obj (tate P Y 1)))\n    (h : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Ring P))\n      (iteratedAffineLine Y (d + 2)) (externalTate P Y (d + 1)))\n    (hk : kappa.inv = binaryForward P Y aY d h) :\n    ∃ hq : ProjectionInvertible (Ring P)\n      (affineTraceLineCompactification (iteratedAffineLine Y (d + 1)))\n      (coefficient P.coefficients.l P.extension (P.level - 1)\n        (iteratedAffineLine Y (d + 1)) P.level (annihilates P)) (tate P Y (d + 1)),\n    lastLineContraction P Y aY d h hq = kappa.hom ≫\n      ((tensor (Ring P) Y).obj ((compact P Y (d + 1)).obj (tate P Y (d + 1)))).map\n        (lineNormalizedIntegration P Y aY) ≫\n      (moduleRightUnit (Ring P) Y\n        ((compact P Y (d + 1)).obj (tate P Y (d + 1)))).hom",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-63e77",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T204458-L-2960906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-63e77",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261025T204458-L-2960906",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 3 new modules + 7 node files vs live composite_transpose/standingEvaluation, originChange/TraceCompatible, affineSpace_lastFactor_product, OrderedAffineTranspose.integration/tateSourceIso and the base item node"
+ }
+}

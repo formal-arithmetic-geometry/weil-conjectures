@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-finite-representable-matrix-totalization",
+ "kind": "statement",
+ "title": "Contravariant finite representable matrices and signed total homotopies",
+ "statement": "Let $I$ be a small category and $\\mathcal C$ an abelian category [def-sp-abelian], in compatible universes. Put $R_i(j)=\\mathbf Z[\\operatorname{Hom}_I(i,j)]$. Let $\\mathcal F_I$ have objects finite lists $(i_1,\\ldots,i_k)$, including the empty list, interpreted as $\\bigoplus_{t=1}^kR_{i_t}$, and morphisms the natural transformations between these functors. For $X:I\\to\\operatorname{Ch}^{\\geq0}(\\mathcal C)$, there is an additive contravariant evaluation $E_X$ on $\\mathcal F_I$. It sends a list to $\\bigoplus_tX(i_t)$ and a map $R_i\\to R_j$ determined at $i$ by $\\sum_{\\alpha:j\\to i}c_\\alpha[\\alpha]$ to $\\sum_\\alpha c_\\alpha X(\\alpha):X(j)\\to X(i)$. On finite sums it is the transposed matrix of these maps. This prescription is well-defined and preserves identities, sums and composition contravariantly, and it is natural in $X$.\n\nFor a nonnegative chain complex $P$ in $\\mathcal F_I$, define $L_X(P)^{n,r}=E_X(P_n)^r$ for $n,r\\geq0$, with $d_n=E_X(\\partial_P)$ and internal differential $d_r$. Its total complex is\n$$\\mathbb T_X(P)^m=\\bigoplus_{n+r=m}E_X(P_n)^r,\\qquad d=d_n+(-1)^n d_r,$$\nas in [def-sp-double-complex-total]. Every chain map $u:P\\to Q$ gives a natural cochain map $\\mathbb T_X(u):\\mathbb T_X(Q)\\to\\mathbb T_X(P)$. If $u,v:P\\to Q$ and $h_n:P_n\\to Q_{n+1}$ satisfy $u-v=\\partial_Qh+h\\partial_P$, the evaluated components $E_X(h_n)^r:E_X(Q_{n+1})^r\\to E_X(P_n)^r$ form a degree-minus-one total homotopy with\n$$\\mathbb T_X(u)-\\mathbb T_X(v)=d\\mathbb T_X(h)+\\mathbb T_X(h)d.$$\nEvery component commutes with the internal differential, and on an input of horizontal degree $n$ the internal terms in this identity are $(-1)^{n-1}d_rE_X(h)+(-1)^nE_X(h)d_r=0$. Consequently chain homotopy equivalences give natural total cochain homotopy equivalences and induced natural isomorphisms in $D(\\mathcal C)$ [def-weil-abstract-derived-category]. All matrix entries are finite integral sums and all total-degree sums are finite; no infinite coproducts in $\\mathcal C$ are required. For diagrams concentrated in internal degree zero the same assertions give evaluation in $\\mathcal C$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal diagonal versus successive bar comparison. Agent-formulated finite matrix evaluation and internal-differential extension extracted from returned proof steps 6–7; the blueprint gives the application, not a proof of this algebraic lemma."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category",
+  "def-sfb-finite-free-representables"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-galois-yoneda-hom-bijection] to the category $I^{\\mathrm{op}}$ and the underlying set functor of $R_j:I\\to\\mathrm{Ab}$. Restricting an abelian-group natural transformation $a:R_i\\to R_j$ to the generators gives a set-valued transformation $\\operatorname{Hom}_I(i,-)\\to R_j$, determined by $z=a_i([1_i])$. Conversely, if $z=\\sum_\\alpha c_\\alpha[\\alpha]\\in R_j(i)$, define\n$$a_t([f:i\\to t])=\\sum_\\alpha c_\\alpha[f\\alpha]$$\nand extend by integer linearity to finite formal sums. This extension is unique; for $g:t\\to t'$ both naturality composites send $[f]$ to $\\sum c_\\alpha[gf\\alpha]$, so it is natural. Thus the displayed finite coefficient family is unique. For lists $A=(i_a)$ and $B=(j_b)$, use the canonical inclusions and projections of their pointwise finite direct sums. A transformation $M:A\\to B$ is uniquely determined by $M_{ba}=\\pi_bM\\iota_a:R_{i_a}\\to R_{j_b}$, since $M=\\sum_{a,b}\\iota_bM_{ba}\\pi_a$. This also covers empty lists, when the morphism is zero.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, categories-lemma-yoneda; free abelian extension and finite-sum identities written out"
+   }
+  },
+  {
+   "text": "The abelian hypothesis [def-sp-abelian] supplies abelian groups of morphisms, bilinear composition and finite biproducts. For a singleton entry $a:R_i\\to R_j$ represented by $\\sum c_\\alpha[\\alpha]$, set $e_X(a)=\\sum c_\\alpha X(\\alpha):X(j)\\to X(i)$. This is a finite sum of cochain maps, hence a cochain map: its commutation equation with each differential is the sum of those for the $X(\\alpha)$. If $b:R_j\\to R_k$ is represented by $\\sum d_\\beta[\\beta]$, Step 1 gives\n$$ (ba)_i([1_i])=\\sum_{\\alpha,\\beta}c_\\alpha d_\\beta[\\alpha\\beta]. $$\nBilinearity and $X(\\alpha\\beta)=X(\\alpha)X(\\beta)$ give $e_X(ba)=e_X(a)e_X(b)$. The coefficient family of the identity is $[1_i]$, so its evaluation is the identity; addition of coefficient families gives $e_X(a+a')=e_X(a)+e_X(a')$. These equations establish all singleton functor laws, including negative and zero coefficients.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, homology-definition-preadditive; explicit finite integral composition calculation"
+   }
+  },
+  {
+   "text": "Put $E_X(A)=\\bigoplus_aX(i_a)$ with componentwise differential. Define $E_X(M):E_X(B)\\to E_X(A)$ by the block from $X(j_b)$ to $X(i_a)$ being $e_X(M_{ba})$. For $N:B\\to C$, the $(c,a)$ entry of $NM$ is $\\sum_bN_{cb}M_{ba}$. By Step 2 its evaluation is $\\sum_be_X(M_{ba})e_X(N_{cb})$, exactly the $(a,c)$ block of $E_X(M)E_X(N)$. The biproduct relations $\\pi_a\\iota_b=\\delta_{ab}$ and $\\sum_a\\iota_a\\pi_a=1$ therefore prove contravariant composition, the identity law and additivity. The empty list is sent to zero; the identity of zero is its zero map. If $\\tau:X\\to Y$ is a natural transformation, its components satisfy $\\tau_iX(\\alpha)=Y(\\alpha)\\tau_j$ for $\\alpha:j\\to i$. Multiply by each coefficient and add: the maps $\\bigoplus_a\\tau_{i_a}$ give $E_X(A)\\to E_Y(A)$ commuting with every evaluated matrix. Their identities and compositions hold componentwise. Thus $E$ is natural in $X$, also on internal differentials.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, homology-definition-preadditive; finite biproduct identities and naturality calculation"
+   }
+  },
+  {
+   "text": "For a chain complex $P$, take $d_H^{n,r}=E_X(\\partial_{P,n+1})^r:E_X(P_n)^r\\to E_X(P_{n+1})^r$ and $d_V=d_r$. Contravariance gives $d_H^2=E_X(\\partial_{P,n+1}\\partial_{P,n+2})=0$, and $d_V^2=0$. Each evaluated differential is a cochain map by Steps 2–3, so $d_Hd_V=d_Vd_H$. These are exactly the commuting-double-complex conditions of [def-sp-double-complex-total], after extending by zero outside $n,r\\geq0$. Its total has the required finite sums and differential. Explicitly, on a summand of bidegree $(n,r)$ its square is\n$$d_H^2+(-1)^{n+1}d_Vd_H+(-1)^nd_Hd_V+d_V^2=0.$$\nThere are only $m+1$ summands in total degree $m\\geq0$ and none for $m<0$. Finite biproducts of $\\mathcal C$ suffice.",
+   "uses": [
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Y, homology-definition-double-complex; homology-definition-associated-simple-complex, first-quadrant specialization"
+   }
+  },
+  {
+   "text": "For a chain map $u:P\\to Q$, take the bidegree-preserving maps $U^{n,r}=E_X(u_n)^r:E_X(Q_n)^r\\to E_X(P_n)^r$. The equation $\\partial_{Q,n+1}u_{n+1}=u_n\\partial_{P,n+1}$ evaluates to $d_{H,P}U^{n,r}=U^{n+1,r}d_{H,Q}$, and the internal commutation equation gives $d_{V,P}U^{n,r}=U^{n,r+1}d_{V,Q}$. Thus the finite direct sum of these maps commutes separately with the two signed parts of the total differential. It is $\\mathbb T_X(u)$. Its contravariant identity and composition laws hold on each summand by Step 3. The same summand equations for $\\tau:X\\to Y$ show that these cochain maps are natural in $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal diagonal versus successive bar comparison. Agent-formulated finite matrix evaluation and internal-differential extension extracted from returned proof steps 6–7; the blueprint gives the application, not a proof of this algebraic lemma.; explicit evaluation of the chain-map equation"
+   }
+  },
+  {
+   "text": "Suppose $u_n-v_n=\\partial_{Q,n+1}h_n+h_{n-1}\\partial_{P,n}$, with $h_{-1}=0$. Define $H$ on the total summand $(k,r)$ of $\\mathbb T_X(Q)$ by $H^{k,r}=E_X(h_{k-1})^r$ into $(k-1,r)$ of $\\mathbb T_X(P)$ when $k\\geq1$, and by zero when $k=0$. Thus $H$ has total degree $-1$. On this summand the horizontal contributions to $d_PH+Hd_Q$ are\n$$E_X(\\partial_{P,k})E_X(h_{k-1})+E_X(h_k)E_X(\\partial_{Q,k+1})\n=E_X(h_{k-1}\\partial_{P,k}+\\partial_{Q,k+1}h_k)=E_X(u_k-v_k).$$\nThe vertical contributions land in $(k-1,r+1)$ and are\n$$(-1)^{k-1}d_VE_X(h_{k-1})+(-1)^kE_X(h_{k-1})d_V=0,$$\nbecause $E_X(h_{k-1})$ is an internal cochain map. For $k=0$ both vertical terms and the first horizontal term are absent; the second horizontal term is precisely $E_X(\\partial_{Q,1}h_0)=E_X(u_0-v_0)$. These computations on all summand inclusions prove the total homotopy identity. Step 3 applied to the entries of $h$ proves that $H$ is natural in $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Cochain homotopy equation preceding homology-lemma-compose-homotopy-cochain; explicit signed total calculation"
+   }
+  },
+  {
+   "text": "Given a chain homotopy inverse $w:Q\\to P$ of $u$, Steps 5–6 apply to the two homotopies $wu\\simeq1_P$ and $uw\\simeq1_Q$. Contravariance identifies their evaluated composites with $\\mathbb T_X(u)\\mathbb T_X(w)$ and $\\mathbb T_X(w)\\mathbb T_X(u)$, respectively. Hence these are mutually inverse total cochain homotopy equivalences, natural in $X$. Apply clause (b) of [lem-weil-pbc-homotopic-maps-equal-cohomology] with the identity additive functor: the two composites induce identity maps on every cohomology object, so the two induced cohomology maps are inverse. Therefore $\\mathbb T_X(u)$ is a quasi-isomorphism. The localization defining $D(\\mathcal C)$ in [def-weil-abstract-derived-category] sends it to an isomorphism, and applying the localization functor to the naturality squares preserves naturality. All sums used above are finite coefficient supports, finite list indices or finite antidiagonals. If $X(i)$ is concentrated in internal degree zero, its only surviving total summand has $r=0$ and $n=m$; all the formulas specialize to the stated evaluation in $\\mathcal C$.",
+   "uses": [
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0116, homology-lemma-map-cohomology-homotopy-cochain; localization as in def-weil-abstract-derived-category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-yoneda-hom-bijection",
+  "def-sp-abelian",
+  "def-sp-double-complex-total",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3): finite representable algebra supporting the formal diagonal/successive-bar comparison; the matrix and signed-homotopy proof is supplied here, not claimed to occur in the blueprint."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant evaluation of finite integral matrices of representable functors in an abelian category preserves chain homotopies under nonnegative cochain totalization",
+   "results": "{\"t\": \"2026-10-22T06:01:23Z\", \"tool\": \"leanfinder\", \"query\": \"Contravariant evaluation of finite integral matrices of representable functors in an abelian category preserves chain homotopies under nonnegative cochain totalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyDown\", \"ComplexShape.QFactorsThroughHomotopy_of_exists_prev\", \"HomologicalComplex.homotopyCofiber.desc_f'\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\", \"instQFactorsThroughHomotopyIntUp\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"HomologicalComplex.homotopyCofiber.inrCompHomotopy\", \"HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom\"], \"digest\": \"17a1288e38db5df0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mapHomotopyEquiv assumes an additive functor already constructed and does not construct this contravariant matrix evaluation or its signed total extension. BifunctorHomotopy treats totals of a supplied bifunctor of two complexes, not this evaluation on arbitrary representable chain complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend an additive contravariant evaluation of finite sums of free representable diagrams to chain complexes valued in cochain complexes with Koszul differential signs",
+   "results": "{\"t\": \"2026-10-22T06:01:33Z\", \"tool\": \"leanfinder\", \"query\": \"Extend an additive contravariant evaluation of finite sums of free representable diagrams to chain complexes valued in cochain complexes with Koszul differential signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChainComplex.linearYonedaObj\", \"Rep.standardComplex.d_of\", \"HomologicalComplex.evalCompCoyonedaCorepresentative\", \"AlgebraicTopology.alternatingCofaceMapComplex\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂\", \"inhomogeneousCochains.d_eq\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"AlgebraicTopology.DoldKan.Γ₀.Obj.summand\"], \"digest\": \"991423b394485381\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mapHomotopyEquiv assumes an additive functor already constructed and does not construct this contravariant matrix evaluation or its signed total extension. BifunctorHomotopy treats totals of a supplied bifunctor of two complexes, not this evaluation on arbitrary representable chain complexes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural contravariant evaluation of finite free representable chain homotopy equivalences on nonnegative complex valued diagrams preserves total homotopies",
+   "results": "{\"t\": \"2026-10-22T06:01:33Z\", \"tool\": \"leansearch\", \"query\": \"Natural contravariant evaluation of finite free representable chain homotopy equivalences on nonnegative complex valued diagrams preserves total homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.homotopyOp\", \"HomologicalComplex.homotopyEquivalences\", \"Homotopy.noConfusionType\", \"HomotopyEquiv.mk\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\", \"CochainComplex.homotopyUnop\", \"CategoryTheory.Functor.mapHomotopyEquiv\", \"CochainComplex.homotopyOpEquiv\"], \"digest\": \"26aaccd58208c50e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mapHomotopyEquiv assumes an additive functor already constructed and does not construct this contravariant matrix evaluation or its signed total extension. BifunctorHomotopy treats totals of a supplied bifunctor of two complexes, not this evaluation on arbitrary representable chain complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"total\"",
+   "results": "{\"t\": \"2026-10-22T06:01:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"total\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mapHomotopyEquiv assumes an additive functor already constructed and does not construct this contravariant matrix evaluation or its signed total extension. BifunctorHomotopy treats totals of a supplied bifunctor of two complexes, not this evaluation on arbitrary representable chain complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*[Hh]omotopy|[Hh]omotopy.*map|total.*[Hh]omotopy|[Hh]omotopy.*total",
+   "results": "{\"t\": \"2026-10-22T06:01:34Z\", \"tool\": \"grep\", \"query\": \"map.*[Hh]omotopy|[Hh]omotopy.*map|total.*[Hh]omotopy|[Hh]omotopy.*total\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyFiber.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory.lean\"], \"digest\": \"ec3c33cfbb655216\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mapHomotopyEquiv assumes an additive functor already constructed and does not construct this contravariant matrix evaluation or its signed total extension. BifunctorHomotopy treats totals of a supplied bifunctor of two complexes, not this evaluation on arbitrary representable chain complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|preadditiveYoneda|additiveYoneda",
+   "results": "{\"t\": \"2026-10-22T06:01:34Z\", \"tool\": \"grep\", \"query\": \"freeYoneda|preadditiveYoneda|additiveYoneda\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Linear/Yoneda.lean\", \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"Mathlib/CategoryTheory/Adjunction/Additive.lean\"], \"digest\": \"0425587d9da45910\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mapHomotopyEquiv assumes an additive functor already constructed and does not construct this contravariant matrix evaluation or its signed total extension. BifunctorHomotopy treats totals of a supplied bifunctor of two complexes, not this evaluation on arbitrary representable chain complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|linearYoneda|total.*[Hh]omotopy|[Hh]omotopy.*total",
+   "results": "{\"t\": \"2026-10-23T04:19:07Z\", \"tool\": \"grep\", \"query\": \"freeYoneda|linearYoneda|total.*[Hh]omotopy|[Hh]omotopy.*total\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean\"], \"digest\": \"6600b25c12ee8fbb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"total\"",
+   "results": "{\"t\": \"2026-10-23T04:19:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Homotopy\\\", \\\"total\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite matrices of free abelian representable functors evaluate contravariantly on complex valued diagrams preserving total homotopies",
+   "results": "{\"t\": \"2026-10-23T04:19:08Z\", \"tool\": \"leansearch\", \"query\": \"Finite matrices of free abelian representable functors evaluate contravariantly on complex valued diagrams preserving total homotopies\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRepresentable\", \"CategoryTheory.Functor.mapMat_\", \"CategoryTheory.Functor.mapMat__obj_fintype\", \"CategoryTheory.Mat_.lift\", \"CategoryTheory.Functor.mapMat__obj_X\", \"CategoryTheory.Functor.representable_preservesLimitsOfShape\", \"ModuleCat.toMatrixModCat\", \"CategoryTheory.Functor.representable_preservesLimit\"], \"digest\": \"fb5634090390d02b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contravariant evaluation of finite free representable diagrams in an abelian category and total cochain homotopy",
+   "results": "{\"t\": \"2026-10-23T04:19:14Z\", \"tool\": \"leanfinder\", \"query\": \"Contravariant evaluation of finite free representable diagrams in an abelian category and total cochain homotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"CochainComplex.IsKProjective.homotopyZero\", \"HomologicalComplex.evalCompCoyonedaCorepresentable\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply\", \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"CochainComplex.cm5b.homotopyEquiv\"], \"digest\": \"3d9839faeea717c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  },
+  {
+   "tool": "grep",
+   "query": "total.*[Hh]omotopy|[Hh]omotopy.*total|mapHomotopyEquiv",
+   "results": "{\"t\": \"2026-10-23T04:26:51Z\", \"tool\": \"grep\", \"query\": \"total.*[Hh]omotopy|[Hh]omotopy.*total|mapHomotopyEquiv\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/Homotopy.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\"], \"digest\": \"a15d8efa5ee78c67\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|lift_map|map_comp",
+   "results": "{\"t\": \"2026-10-23T04:26:51Z\", \"tool\": \"grep\", \"query\": \"def lift|lift_map|map_comp\", \"sub\": \"CategoryTheory/Preadditive/Mat.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"292\", \"368\", \"378\", \"396\", \"414\"], \"digest\": \"7f84aa9c8e773092\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from an opposite category to cochain complexes sends chain homotopies to total cochain homotopies with finite antidiagonals",
+   "results": "{\"t\": \"2026-10-23T04:27:00Z\", \"tool\": \"leanfinder\", \"query\": \"An additive functor from an opposite category to cochain complexes sends chain homotopies to total cochain homotopies with finite antidiagonals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.homotopyUnop_hom_eq\", \"CochainComplex.homotopyOp_hom_eq\", \"CategoryTheory.Functor.mapHomotopy\", \"CochainComplex.mappingCone.mapOfHomotopy\", \"Homotopy.mkCoinductive\", \"Homotopy.mkCoinductiveAux₂\", \"CochainComplex.mappingCone.liftHomotopy\", \"CochainComplex.mappingCone.descHomotopy\"], \"digest\": \"48f7db870a3732ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Mat_.lift extends an already additive functor on a supplied preadditive category; it does not identify free-representable transformations, reverse their matrices or construct the signed total homotopy. mapHomotopy and mapHomotopyEquiv act termwise on a supplied additive functor, and cochain opposite homotopies alone do not give this total construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-bicosimplicial-shuffle-totalization",
+  "date": "2026-10-22",
+  "group": "Q23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: compare the diagonal product-group nerve with its two successive augmentations; the general bicosimplicial shuffle, before any group or coefficient choices. Inherited ancestor command returns None. Re-split of the universal proof: Contravariant finite representable matrices and signed total homotopies.",
+   "via": [
+    "lem-sfb-bicosimplicial-shuffle-totalization",
+    "lem-sfb-condensed-product-bar-comparison",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-representable-matrix-totalization",
+  "worker": "stage1",
+  "summary": "Kept the statement and gave a seven-step proof: Yoneda plus free linear extension, singleton coefficient composition, transposed finite matrices and naturality, first-quadrant total differential, maps, explicit signed homotopy including horizontal degree zero, and passage through cohomology to the derived category. Reused existing Yoneda and homotopy-cohomology Mathlib leaves; no new nodes. Searched project Lean and Mathlib, and checked all cited statements and empty/zero boundary cases.",
+  "blueprint": "Realizes the algebraic finite-representable evaluation and internal-differential extension used in paragraph (3) of the current direct-images proof, through the inherited bicosimplicial-shuffle ancestry. The ancestor tool returns None as on the base; preserved inherited from.node and via. Whole-blueprint searches for representable matrices, finite representable and homotopic found no equivalent blueprint statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-1bf3ef0e1",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-1bf3ef0e1 (reviewer sub-agent of L); spot-checked: I read all seven steps in full and reran each calculation; I made no changes. This is an ordinary first split of the unsplit node Q23 created: no re-split repair note exists and no new nodes were added. The statement is unchanged, proof_deps equals the union of the steps' uses, and nothing cites SGA. The step-source Stacks tags 001P, 00ZY, 012Y, 012Z and 0116 match their labels. Blueprint main-20261015 direct-images paragraph (3) gives only the application, and the node honestly records proof_origin=agent. Coefficient direction: Nat(R_i,R_j)=Z[Hom_I(j,i)]. Step 1 applies the Yoneda bijection (Mathlib leaf yonedaEquiv) to I^op, with the free Z-extension and its naturality written out. Composition order is correct: ba ↔ Σc_α d_β[αβ], so E(ba)=E(a)E(b), and the transposed matrix blocks check out in step 3. Step 4 meets every hypothesis of def-sp-double-complex-total: d_H²=0 by contravariance, and d_H commutes with d_V because the blocks are internal cochain maps. In step 6 the horizontal terms sum to E(u_k−v_k), the vertical terms (−1)^{k−1}d_V E(h)+(−1)^k E(h)d_V cancel, and the k=0 boundary case is right. Step 7 applies clause (b) of lem-weil-pbc-homotopic-maps-equal-cohomology (Mathlib leaf) to get a quasi-isomorphism, and the localization in def-weil-abstract-derived-category gives the derived-category isomorphism. Small cases tested: empty I, a one-object category (integer matrices), no arrows, total degree 0, and diagrams concentrated in internal degree 0. The statement matches what step 6 of the citer lem-sfb-bicosimplicial-shuffle-totalization takes from it (I=Δ×Δ, δ_diag, δ_1+(−1)^aδ_2). Duplicate search found no node that states this item; the closest are lem-sc-preorder-bar-horizontal-homotopy, lem-sfb-total-tensor-homotopy and lem-trf-free-representable-module-ext-evaluation, which all prove different things. No tool_uses entry is needed: the cross-unit citations are Mathlib leaves or definitions."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteRepresentableMatrixTotalization",
+  "declaration": "CategoryTheory.finite_representable_matrix_totalization",
+  "declarations": [
+   "CategoryTheory.finiteRepresentableEvaluationBiproducts",
+   "CategoryTheory.finite_representable_matrix_totalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteRepresentableMatrixTotalization.lean",
+  "statement": "theorem finite_representable_matrix_totalization (I : Type u) [SmallCategory I] (C : Type v) [Category.{w} C] [Abelian C] [HasDerivedCategory.{z} C] : ∃ (E : (I ⥤ CochainComplex C ℕ) ⥤ (FiniteFreeRepresentables I)ᵒᵖ ⥤ CochainComplex C ℕ) (e : ∀ (X : I ⥤ CochainComplex C ℕ) (A : FiniteFreeRepresentables I), (E.obj X).obj (op A) ≅ ⨁ (fun a : Fin A.1 ↦ X.obj (A.2 a))) (T : (I ⥤ CochainComplex C ℕ) ⥤ (ChainComplex (FiniteFreeRepresentables I) ℕ)ᵒᵖ ⥤ CochainComplex C ℕ) (ι : ∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (n r m : ℕ), n + r = m → (((E.obj X).obj (op (P.X n))).X r ⟶ ((T.obj X).obj (op P)).X m)), (∀ X, (E.obj X).Additive) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (A B : FiniteFreeRepresentables I) (M : A ⟶ B) (b : Fin B.1) (a : Fin A.1), biproduct.ι (fun b : Fin B.1 ↦ X.obj (B.2 b)) b ≫ (e X B).inv ≫ (E.obj X).map M.op ≫ (e X A).hom ≫ biproduct.π (fun a : Fin A.1 ↦ X.obj (A.2 a)) a = FreeAbelianGroup.lift (fun α : B.2 b ⟶ A.2 a ↦ X.map α) (finiteRepresentableCoefficient I M b a)) ∧ (∀ (X Y : I ⥤ CochainComplex C ℕ) (τ : X ⟶ Y) (A : FiniteFreeRepresentables I), (e X A).inv ≫ (E.map τ).app (op A) ≫ (e Y A).hom = biproduct.map (fun a : Fin A.1 ↦ τ.app (A.2 a))) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (m : ℕ), Nonempty (IsColimit (Cofan.mk (((T.obj X).obj (op P)).X m) (fun a : ↥(Finset.antidiagonal m) ↦ ι X P a.val.1 a.val.2 m (Finset.mem_antidiagonal.mp a.property))))) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (n r : ℕ), ι X P n r (n + r) rfl ≫ ((T.obj X).obj (op P)).d (n + r) (n + r + 1) = ((E.obj X).map (P.d (n + 1) n).op).f r ≫ ι X P (n + 1) r (n + r + 1) (by omega) + (-1 : ℤ) ^ n • (((E.obj X).obj (op (P.X n))).d r (r + 1) ≫ ι X P n (r + 1) (n + r + 1) (by omega))) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (P Q : ChainComplex (FiniteFreeRepresentables I) ℕ) (f : P ⟶ Q) (n r : ℕ), ι X Q n r (n + r) rfl ≫ ((T.obj X).map f.op).f (n + r) = ((E.obj X).map (f.f n).op).f r ≫ ι X P n r (n + r) rfl) ∧ (∀ (X Y : I ⥤ CochainComplex C ℕ) (τ : X ⟶ Y) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (n r : ℕ), ι X P n r (n + r) rfl ≫ ((T.map τ).app (op P)).f (n + r) = ((E.map τ).app (op (P.X n))).f r ≫ ι Y P n r (n + r) rfl) ∧ (∀ (P Q : ChainComplex (FiniteFreeRepresentables I) ℕ) (f g : P ⟶ Q) (h : Homotopy f g), ∃ H : ∀ X : I ⥤ CochainComplex C ℕ, Homotopy ((T.obj X).map f.op) ((T.obj X).map g.op), (∀ (X : I ⥤ CochainComplex C ℕ) (n r : ℕ), ι X Q (n + 1) r (n + 1 + r) rfl ≫ (H X).hom (n + 1 + r) (n + r) = ((E.obj X).map (h.hom n (n + 1)).op).f r ≫ ι X P n r (n + r) rfl) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (r m : ℕ), ι X Q 0 r r (by omega) ≫ (H X).hom r m = 0) ∧ (∀ (X Y : I ⥤ CochainComplex C ℕ) (τ : X ⟶ Y) (m k : ℕ), ((T.map τ).app (op Q)).f m ≫ (H Y).hom m k = (H X).hom m k ≫ ((T.map τ).app (op P)).f k)) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (P Q : ChainComplex (FiniteFreeRepresentables I) ℕ) (f g : P ⟶ Q) (h : Homotopy f g) (n r : ℕ), (-1 : ℤ) ^ n • (((E.obj X).map (h.hom n (n + 1)).op).f r ≫ ((E.obj X).obj (op (P.X n))).d r (r + 1)) + (-1 : ℤ) ^ (n + 1) • (((E.obj X).obj (op (Q.X (n + 1)))).d r (r + 1) ≫ ((E.obj X).map (h.hom n (n + 1)).op).f (r + 1)) = 0) ∧ (∀ (X : I ⥤ CochainComplex C ℕ), (∀ (i : I) (r : ℕ), 0 < r → IsZero ((X.obj i).X r)) → ∀ (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (m : ℕ), IsIso (ι X P m 0 m (by omega))) ∧ (∃ (L : (I ⥤ CochainComplex C ℕ) → ChainComplex (FiniteFreeRepresentables I) ℕ → HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ)) (hL : ∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (p q : ℤ), p < 0 ∨ q < 0 → IsZero (((L X P).X p).X q)) (ℓ : ∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (n : ℕ), (L X P).X (n : ℤ) ≅ ((E.obj X).obj (op (P.X n))).extend ComplexShape.embeddingUpNat), (∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ) (n : ℕ), (ℓ X P n).inv ≫ (L X P).d (n : ℤ) ((n : ℤ) + 1) ≫ (ℓ X P (n + 1)).hom = (ComplexShape.embeddingUpNat.extendFunctor C).map ((E.obj X).map (P.d (n + 1) n).op)) ∧ (∀ (X : I ⥤ CochainComplex C ℕ) (P : ChainComplex (FiniteFreeRepresentables I) ℕ), Nonempty ((((T.obj X).obj (op P)).extend ComplexShape.embeddingUpNat) ≅ @HomologicalComplex₂.total C _ _ ℤ ℤ ℤ (ComplexShape.up ℤ) (ComplexShape.up ℤ) (L X P) (ComplexShape.up ℤ) _ _ ((L X P).hasTotal_of_firstQuadrant (hL X P))))) ∧ (∀ (P Q : ChainComplex (FiniteFreeRepresentables I) ℕ) (f : HomotopyEquiv P Q), ∃ F : ∀ X : I ⥤ CochainComplex C ℕ, HomotopyEquiv ((T.obj X).obj (op Q)) ((T.obj X).obj (op P)), ∀ X : I ⥤ CochainComplex C ℕ, (F X).hom = (T.obj X).map f.hom.op ∧ (F X).inv = (T.obj X).map f.inv.op ∧ ∃ D : DerivedCategory.Q.obj (((T.obj X).obj (op Q)).extend ComplexShape.embeddingUpNat) ≅ DerivedCategory.Q.obj (((T.obj X).obj (op P)).extend ComplexShape.embeddingUpNat), D.hom = DerivedCategory.Q.map ((ComplexShape.embeddingUpNat.extendFunctor C).map (F X).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46e850ffd",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Read the item node, the 4 stmt_deps and the new node def-sfb-finite-free-representables with its module FiniteFreeRepresentables (InducedCategory on Σ k, Fin k → I of ⨁ coyoneda⋙AddCommGrpCat.free; coefficient = entry at [𝟙] in Z[Hom(B_b,A_a)]; §5 fields complete; blueprint.from.node null is inherited). Item: only lean and stmt_deps (+new node) differ from live; statement verbatim. Clauses checked: E functorial and natural in X with (E.obj X).Additive; transposed matrix block = FreeAbelianGroup.lift X.map coef through the biproduct iso e; E.map τ = biproduct.map; total = finite antidiagonal cofan colimit; d = d_n + (-1)^n d_r; T(f) and T(τ) summandwise; Homotopy H = E(h_n) on (n+1,r), 0 on n=0, natural in X (recomputed: horizontal terms give E(f-g), internal terms cancel); internal cancellation signs match node k=n+1; internal-degree-0 IsIso; first-quadrant L with Mathlib total ≅ extended T; HomotopyEquiv with pinned hom/inv and an actual DerivedCategory iso D.hom = Q.map. Independent universes, no extra assumptions, no hollow defs, sorry only in the theorem, docstrings and 7-step proof present, report sections present. No duplicate found in side-live Sheaf/WeilConjectures or DAG. Minor: redundant Prop-valued HasFiniteBiproducts instances, harmless. No compile run (no change)."
+ }
+}

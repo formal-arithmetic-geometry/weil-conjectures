@@ -28,107 +28,94 @@
  ],
  "proof": [
   {
-   "text": "Every standing scheme is Noetherian: a field has only the ideals $0$ and $k$, and finite type over a Noetherian scheme preserves Noetherianness [lem-weil-pbc-finite-type-over-noetherian]. Also $N=\\ell^n$ is invertible on every standing scheme because $\\ell\\ne p$; both coefficient rings are finite Noetherian rings since an ascending chain of subsets of a finite set stabilizes. Apply [lem-sp-etale-ctf-chart-domain] to $h=g$ and separately to $R=A,B$. It supplies preservation of $\\mathcal C$ by $F^{et}_{g,R}$ and by $e_R^*p_{d,R}^*(-)(d)[2d]$. Apply [det-pe-finite-tor-comparison-noetherian] on $U,Y$: the same fixed Tor interval is preserved and reflected, and $C_{U,R},C_{Y,R}$ are equivalences on these full subcategories.",
+   "text": "Finite type over the field makes U and Y Noetherian by Mathlib. Since ell differs from the positive characteristic, ell^n is a unit on Y. Apply etaleCtfChartDomain to g and to the identity on U for etale compact-support preservation, chart-operation preservation and both comparison equivalences. Convert the constructible image predicate to intrinsic constructible cohomology by exceptionalTransport_constructible_comparison; enlarge the lower endpoint of any Tor interval to min(a,b).",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
     "lem-sp-etale-ctf-chart-domain",
-    "det-pe-finite-tor-comparison-noetherian"
+    "new-etale-proetale-exceptional-object-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: finite-Tor domains, retained Steps 3--4"
+    "place": "Charts: finite-Tor domain, geometric chart adjunction and its actual transported counit; retained Steps 3, 4 and first half of 11"
    }
   },
   {
-   "text": "For one fixed $R$, let $E_R=De_{\\Sigma!,R}$, let $F_{d,R}$ be the ordered affine-space left functor, and set $G_{d,R}=p_{d,R}^*(-)(d)[2d]$. The exact sum adjunction $E_R\\dashv e_R^*$ is given by [lem-amb-etale-adjoint-locality]; [lem-amb-affine-space-top-trace] gives $F_{d,R}\\dashv G_{d,R}$, including the identity adjunction when $d=0$. Compose their Hom bijections as in [def-weil-pbc-composite-adjunction]. The right functor is $e_R^*G_{d,R}=H^{et}_{g,R}$, and the composite counit is $\\epsilon_{d,R}\\circ F_{d,R}(\\epsilon_{e,R}G_{d,R})$: evaluation over the etale sheets followed by the ordered affine-space counit.",
+   "text": "The finite etale Tate powers are flat by finite_etale_torsion_twist_line. The specified ordered tower normal form, inverse-image composition, tensor symmetry and the shift identify the chart right functor with etaleChartOperation, so it preserves the domain (the domain is closed under isomorphisms because finite-value constructibility of the cohomology agrees with the source constructibility predicate, which is replete). Compose the exact etale sum adjunction and the ordered affine trace adjunction. Restrict this composite using Mathlib Adjunction.restrictFullyFaithful and chartLeftOnPlus. Its counit is the original sum-then-affine counit precomposed with the inverse graph-normalized comparison, by map_restrictFullyFaithful_counit_app.",
    "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-asd-finite-etale-twist-line",
     "lem-amb-etale-adjoint-locality",
     "lem-amb-affine-space-top-trace",
-    "def-weil-pbc-composite-adjunction"
+    "lem-amb-affine-trace-right-normal-form"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: sum-then-affine adjunction, retained Step 4"
+    "place": "Charts: finite-Tor domain, geometric chart adjunction and its actual transported counit; retained Steps 3, 4 and first half of 11"
    }
   },
   {
-   "text": "By [lem-sp-chart-left-scalar-normalization], the specified graph-normalized left comparison $\\lambda_R:F_{d,R}E_R\\xrightarrow{\\sim}F^{et}_{g,R}$ carries precisely this composite adjunction to the chosen compact-support functor, through the canonical refinement to the chosen compactification. Concretely its counit at $K$ is the Step 2 composite counit precomposed by $\\lambda_R(H^{et}_{g,R}K)^{-1}$. Since Step 1 places both functors in the full finite-Tor subcategories, their ordinary Hom bijection restricts unchanged to those subcategories. This proves the specified $F^{et}_{g,R}\\dashv H^{et}_{g,R}$ on $\\mathcal C_{-,R}$.",
+   "text": "Use the already constructed fixedCompactSupportComparisonIso on bounded-below inputs. Essential surjectivity of the U comparison gives pro-etale compact-support preservation. Lift the inverse fixed comparison to the full subcategories; its normalization equation is definitional.",
    "uses": [
-    "lem-sp-chart-left-scalar-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: normalized left comparison, retained Step 11"
-   }
-  },
-  {
-   "text": "For the fixed compactification of $g$, [lem-sp-finite-compact-support-domains] says that the map obtained from the proper counit mate and open comparison is invertible on every bounded-below etale input. By [def-sp-fixed-compact-support-comparison] its inverse is the displayed comparison with orientation $F^{pro}_{g,R}C_{U,R}\\simeq C_{Y,R}F^{et}_{g,R}$, so the forward map is exactly the fixed $c_{g,R}$ in the item. Step 1 ensures the needed bounded-below inputs. Essential surjectivity of $C_{U,R}$ now also proves that $F^{pro}_{g,R}$ preserves $\\mathcal C$: write an input as $C_{U,R}M$, apply $c_{g,R}^{-1}$, and use $C_{Y,R}F^{et}_{g,R}M\\in\\mathcal C$.",
-   "uses": [
-    "lem-sp-finite-compact-support-domains",
     "def-sp-fixed-compact-support-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: actual fixed proper-and-open comparison, retained Steps 3--4 and 11"
+    "place": "Charts: finite-Tor domain, geometric chart adjunction and its actual transported counit; retained Steps 3, 4 and first half of 11"
    }
   },
   {
-   "text": "Apply [det-sp-et-proet-adjunction-transfer] with $f=g$, $G=H^{et}_{g,R}$, and the very comparison $c_{g,R}$ verified in Step 4. This gives $\\widehat H_R=C_{U,R}H^{et}_{g,R}Q_{Y,R}$ as a right adjoint of $F^{pro}_{g,R}$. Explicitly, for $M\\in\\mathcal C_{U,R}^{et}$ and $K\\in\\mathcal C_{Y,R}^{et}$ its Hom bijection is\n$$\\operatorname{Hom}(C_UM,C_UH^{et}_{g,R}K)\\simeq\\operatorname{Hom}(M,H^{et}_{g,R}K)\\simeq\\operatorname{Hom}(F^{et}_{g,R}M,K)\\simeq\\operatorname{Hom}(C_YF^{et}_{g,R}M,C_YK)\\simeq\\operatorname{Hom}(F^{pro}_{g,R}C_UM,C_YK).$$\nThe last arrow precomposes by $c_{g,R}(M)^{-1}$. Taking $M=H^{et}_{g,R}K$ and the identity of $C_UH^{et}_{g,R}K$ gives exactly $C_Y(\\epsilon^{et}_{g,R,K})\\circ c_{g,R}(H^{et}_{g,R}K)^{-1}$, with the equivalence endpoint identifications. Fullness and essential surjectivity give the bijections for arbitrary objects and their naturality, as asserted by the transfer lemma.",
+   "text": "Apply the categorical construction underlying etaleProEtaleAdjunctionTransfer to these particular equivalences and this particular lifted comparison. Compose the equivalence adjunctions with the restricted etale adjunction and transport the left functor along the comparison. Naturality of the fixed comparison, the equivalence triangles and naturality of the etale counit give the displayed proCounit formula, with the actual quasi-inverse unit.",
    "uses": [
     "det-sp-et-proet-adjunction-transfer"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: transported adjunction and its actual counit, retained Step 4"
+    "place": "Charts: finite-Tor domain, geometric chart adjunction and its actual transported counit; retained Steps 3, 4 and first half of 11"
    }
   },
   {
-   "text": "The canonical comparison isomorphisms in [lem-sp-etale-ctf-chart-domain] intertwine site comparison with scheme inverse image, finite Tate powers and shifts. Thus\n$$C_{U,R}H^{et}_{g,R}K\\simeq e_{pro,R}^*p_{d,pro,R}^*C_{Y,R}K(d)[2d]=H^{pro}_{g,R}C_{Y,R}K.$$\nHere the pro-etale Tate line is defined to be the comparison inverse image of the etale line, so no comparison with a different coefficient convention is required. Evaluating this natural isomorphism at $Q_{Y,R}L$ and then using $C_{Y,R}Q_{Y,R}L\\simeq L$ identifies $\\widehat H_RL$ canonically with $H^{pro}_{g,R}L$. It preserves $\\mathcal C$ by Step 1. Carrying the adjunction along this isomorphism gives the counit of Step 5 at $C_{Y,R}K$ under exactly these endpoint identifications.",
+   "text": "Build the geometric comparison as a natural isomorphism from the canonical ordered tower normal form, tensor/pullback interchange, comparison shift commutation, derived monoidality, the comparison/pullback square and the degree-zero comparison for the actual finite Tate sheaf. Evaluate it at the specified quasi-inverse and postcompose by the equivalence counit. This gives geometric preservation and the required componentwise normalization.",
    "uses": [
-    "lem-sp-etale-ctf-chart-domain"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: geometric identification of the transported right functor, retained Steps 3--4"
-   }
-  },
-  {
-   "text": "By [sk-prop-sf-rf-shriek-preservation] the Brown adjunction for this separated finite-type $g$ restricts to $F^{pro}_{g,R}\\dashv g_R^!$ on the same constant-ring finite-Tor categories. Apply [det-sp-unique-right-adjoint] to this adjunction and the one from Steps 5--6. Its isomorphism $\\theta_R:H^{pro}_{g,R}\\xrightarrow{\\sim}g_R^!$ is the unique transpose of $\\widetilde\\epsilon_{g,R}$; equivalently $\\epsilon^{Brown}_{g,R}\\circ F^{pro}_{g,R}(\\theta_R)=\\widetilde\\epsilon_{g,R}$. The reverse transpose is its inverse. This proves existence, naturality and counit-preserving uniqueness for each $R=A,B$.",
-   "uses": [
-    "sk-prop-sf-rf-shriek-preservation",
-    "det-sp-unique-right-adjoint"
+    "lem-sp-etale-ctf-chart-domain",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-affine-trace-right-normal-form"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts: counit-preserving comparison with the Brown right adjoint, retained Step 4"
+    "place": "Charts: finite-Tor domain, geometric chart adjunction and its actual transported counit; retained Steps 3, 4 and first half of 11"
+   }
+  },
+  {
+   "text": "For a given Brown adjunction on the localizing closures, the generic rightAdjoint_preserves_generators lemma restricts its right functor to the finite-Tor subcategories. Restrict its adjunction with restrictFullyFaithful. The unique right-adjoint isomorphism is counit preserving; injectivity of its Hom equivalence proves uniqueness. Compose this isomorphism with the inverse canonical geometric comparison, then apply the single-ring construction to A and B.",
+   "uses": [
+    "det-sp-et-proet-adjunction-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: finite-Tor domain, geometric chart adjunction and its actual transported counit; retained Steps 3, 4 and first half of 11"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sp-etale-ctf-chart-domain",
-  "det-pe-finite-tor-comparison-noetherian",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "new-etale-proetale-exceptional-object-comparison",
+  "lem-asd-finite-etale-twist-line",
   "lem-amb-etale-adjoint-locality",
   "lem-amb-affine-space-top-trace",
-  "def-weil-pbc-composite-adjunction",
-  "lem-sp-chart-left-scalar-normalization",
-  "lem-sp-finite-compact-support-domains",
   "def-sp-fixed-compact-support-comparison",
   "det-sp-et-proet-adjunction-transfer",
-  "sk-prop-sf-rf-shriek-preservation",
-  "det-sp-unique-right-adjoint"
+  "lem-amb-affine-trace-right-normal-form"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Charts paragraph: explicit assembly of retained Steps 3--4 and the adjunction part of Step 11, using existing domain, normalization and transfer nodes."
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "G4: the Charts route, using full-subcategory restriction, the fixed comparison and explicit canonical geometric normalizations."
  },
  "mathlib_searches": [
   {
@@ -267,15 +254,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "det-pe-finite-tor-comparison-noetherian",
   "lem-amb-etale-adjoint-locality",
   "lem-amb-affine-space-top-trace",
-  "def-weil-pbc-composite-adjunction",
-  "lem-sp-finite-compact-support-domains",
-  "det-sp-et-proet-adjunction-transfer",
-  "sk-prop-sf-rf-shriek-preservation",
-  "det-sp-unique-right-adjoint"
+  "det-sp-et-proet-adjunction-transfer"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -285,5 +266,76 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-92f67ca85 (reviewer sub-agent of L); spot-checked: PASS on content: this split has no new nodes and keeps the item statement unchanged. Each of the seven steps checked against what its cited nodes actually state. Step 1: the finite-type-over-Noetherian lemma, the chart-domain lemma (preservation of D^b_ctf by F^et_g and g^*(-)(d)[2d]) and the finite-Tor comparison (equivalences C_U, C_Y). Step 2: u_!⊣u^* plus the ordered affine-space adjunction, composed with counit ε_d∘F_d(ε_e G_d), which matches def-weil-pbc-composite-adjunction. Step 3: the chart-left normalization statement explicitly carries this composite adjunction to F_g. Step 4: compact-support-domains gives invertibility of the proper-mate/open map on D^+, and the fixed comparison def is its inverse, so c_{g,R} has the item's orientation; pro-étale preservation follows by essential surjectivity. Step 5: all hypotheses of the adjunction-transfer theorem are checked, its counit formula is the item's verbatim, and the Hom chain is correct. Step 6 is correctly marked elementary: it substitutes the chart-domain intertwining isomorphisms, with the pro-étale Tate line defined as ν^* of the étale line. Step 7: the Brown adjunction restricts to D_ctf for an arbitrary field and arbitrary finite ℓ-primary A, and det-sp-unique-right-adjoint gives θ_R. Rf_! of sk-prop-sf-existence is Rp_*D(j_!) for the chosen compactification, the same functor as F^pro. Edge cases checked: d=0, empty U, the zero ring, and non-flat Z/ℓ²→Z/ℓ. No cycle, no SGA citation, no repair note. Blueprint source checked: the Charts paragraph of sk-lem-sp-reduction-exceptional.proof.md (lines 20-36); the item covers exactly parent Step 4's use. Batch-5 check: the cite of lem-sp-finite-compact-support-domains reaches lem-pd-module-ringed-topos-derived-comparison. That node is a general module-object/ringed-topos derived comparison, not a step of the Poincaré duality or trace formula proofs. A recomputed closure of the two batch-5 targets, with and without the new citation, has 17942 nodes both ways (difference 0): both nodes were already in the closure. Accepted. All nine tool_uses are accepted as generic tools the unit's route needs. Maintainer note: N5 delivered the same item (64df883a) 3 s later and neither has landed, so land only one."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ChartFiniteRingAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartFiniteRingAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.shiftedComp",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.tensorShiftCompGeneral",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.singleProductGeneral",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.lineShiftGeneral",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.singleE",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.lineR",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.singleEPullback",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.tensorEPullback",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.lineENormalForm",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.productE",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.towerENormalForm",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.affineLeftOnPlus",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartLeftOnPlus",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.etaleRight",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.geometricRight",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.affineRightNormalComponent",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.etaleChartNormalComponent",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartGeometryComponent",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.geometricRestriction",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.Datum",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartFiniteRingAdjunction",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartTensorComparison",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartGeometryComparison",
+   "AlgebraicGeometry.Etale.ChartFiniteRingNormalization.chartENormalForm",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.affineRightNormalIso",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.etaleChartNormalIso",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.flipTensorComparison",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartGeometryIso",
+   "AlgebraicGeometry.ProEtale.ChartFiniteRing.chartGeometryWithNormalForm"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ChartFiniteRingAdjunction.lean",
+  "statement": "theorem chartFiniteRingAdjunction (ell pchar : ℕ) [Fact ell.Prime] (hp : 0 < pchar) (hne : ell ≠ pchar) (k : Type u) [Field k] [CharP k pchar] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (_φ : A →+* B) (n : ℕ) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0) {U Y : Scheme.{u}} [U.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (d : ℕ) (e : U ⟶ affineTraceTower Y d) [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (_he : e ≫ affineTraceProjection Y d ≫ (Y ↘ Spec (.of k)) = (U ↘ Spec (.of k))) (cp : Compactification (affineTraceProjection Y d)) (cg : Compactification (e ≫ affineTraceProjection Y d)) : ∃ (hU : IsNoetherian U) (hY : IsNoetherian Y) (hN : IsUnit ((ell ^ n : ℕ) : Γ(Y, ⊤))), ∀ (MA : Etale.EtaleCompactSupportNormalization A) (tA : Etale.OrdinaryFiniteTwistTransport A (ell ^ n) hA) (DA : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit ((ell ^ n : ℕ) : Γ(T, ⊤))), Etale.OrdinaryFiniteP1Datum A (ell ^ n) hA tA T hT) (MB : Etale.EtaleCompactSupportNormalization B) (tB : Etale.OrdinaryFiniteTwistTransport B (ell ^ n) hB) (DB : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit ((ell ^ n : ℕ) : Γ(T, ⊤))), Etale.OrdinaryFiniteP1Datum B (ell ^ n) hB tB T hT), Nonempty (@Datum A _ _ U Y hU hY (ell ^ n) hA d e inferInstance inferInstance inferInstance inferInstance cp cg MA tA DA hN) ∧ Nonempty (@Datum B _ _ U Y hU hY (ell ^ n) hB d e inferInstance inferInstance inferInstance inferInstance cp cg MB tB DB hN)",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Repair H2: intrinsic bounded constructibility and Tor amplitude are written directly using the recorded predicates; the unlanded theorem dependency is removed. Repair H3: the geometric isomorphism is pinned componentwise to the canonical coordinate-tower tensor/pullback/shift normalization, strong monoidal site comparison and the actual equivalence counit. Brown uniqueness is stated from the restricted geometricRight with the counit transported through this pinned isomorphism. No mathematical statement or theorem hypotheses changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4313015d0",
+  "group": "O4",
+  "result": "pass",
+  "note": "Re-delivery after the 74a643 RETURN; both findings are repaired. H2: theorem stmt_dep lem-sf-etale-proetale-exceptional-transport and its import removed; Datum.intrinsic written directly as bounded ∧ IsConstructibleProEtaleFixedModuleSheaf on every H^i ∧ ∃ a≤b torAmplitudeIn. The item node differs from live only in lean; statement verbatim; 21 declarations listed. H3: Datum.geometric is a natural iso to geometricRestriction, every component pinned by geometric_normalization to canonical maps: towerENormalForm with finiteEtaleTateSheaf and finiteEtaleTwistPullbackData c/p (law-pinned, unique), e-pullback interchange, C.commShiftIso, leftDerivedTensorComparison monoidality, site/pullback square, single-functor comparison, eY.counitIso. The −𝟙 twist is excluded. Brown ∃!θ is on geometricRestriction with F(θ)≫ε_Brown = F(geometric.inv)≫ε_pro. geometricRight uses finiteEtaleTateSheaf (d:ℤ), which is defeq to finiteEtaleTateTwist. Other clauses, edge cases (d=0, empty schemes, zero ring, non-flat φ) and universes unchanged; single sorry; docstrings ok. No compile (no file changed); worker reports clean compiles 52.2/48.8 s and a passing dry run. Advisories: public verbatim copies of private AffineTraceRightNormalForm helpers (dedupe later); finiteEtaleTwistPullbackData (theorem-constructed) and finiteEtaleTateSheaf owners reachable through lem-amb-affine-space-top-trace, affineTraceRightTower only through affineTraceRight; FiniteEtaleTwistLine import likely redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ecc8e",
+  "group": "G4",
+  "result": "fix",
+  "landing": "20261025T013919-L-4036767",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 3 changed defs and alias helpers vs live clone bf7884c and node lem-sp-chart-finite-ring-adjunction; reader-gate compile of 3 delivered modules + 5 direct importers (exit 0); axioms; unit sk-lem-sp-reduction realized empty"
+ }
 }

@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-normal-multiplicative-layers-central",
+ "kind": "statement",
+ "title": "Normal multiplicative-type layers in a connected group are central",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. A group is of multiplicative type if, after extension to an algebraic closure $\\bar k$ [def-weil-algebraic-closure], it admits a closed group immersion [def-weil-closed-immersion] into $(\\mathbf G_m)^r$ for some integer $r\\geq0$ [def-sfb-tori-multiplicative-type, def-sc-gm-ga]. Let $G$ be connected [def-weil-connected-scheme], and let $N\\subseteq E\\subseteq G$ be subgroups both normal in $G$. Let $q:E\\to Q$ represent the fppf quotient $E/N$: its represented sheaf is the sheafification of $A\\mapsto E(A)/N(A)$ for faithfully flat finitely presented coverings [def-sfb-solvable-group-structure]. Assume $N$ and $Q$ are of multiplicative type. Then $E$ is of multiplicative type and $E\\subseteq Z(G)$ [lem-sfb-affine-group-centre-base-change]. Explicitly, for every commutative $k$-algebra $A$, every $e\\in E(A)$ and every commutative $A$-algebra $A^{\\prime}$, the image of $e$ commutes with all of $G(A^{\\prime})$. No smoothness, perfectness, or connectedness of $N,E,Q$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.43, printed p.340. Corollary 12.38, p.244, first makes N central in G (hence in E), so the central-kernel correction to Corollary 12.41 in the Chapter 12 erratum is satisfied; Corollary 12.22, p.239, gives multiplicative type after commutativity."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-algebraic-closure",
+  "def-weil-closed-immersion",
+  "def-sfb-tori-multiplicative-type",
+  "def-sc-gm-ga",
+  "def-weil-connected-scheme",
+  "def-sfb-solvable-group-structure",
+  "lem-sfb-affine-group-centre-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=k[Q]$ and $S=k[E]$. By the quotient hypothesis, $q$ is flat and surjective and $N=\\ker q$. The affine flatness criterion makes $R\\to S$ flat; surjectivity of its spectrum then makes it faithfully flat. The affine fibre-product formula and preservation of faithful flatness under ring base change show that every pullback of $q$ to an affine scheme $\\operatorname{Spec}B\\to Q$ is $\\operatorname{Spec}(B\\otimes_R S)\\to\\operatorname{Spec}B$, flat and surjective. In particular the inverse image of every affine open of $Q$ is affine and surjects onto that open. Thus $q$ is an fpqc cover by the definition. We may pull this cover back and compose such covers; in particular products with the parameter group and products of two copies of $q$ are fpqc covers. For the latter, factor $1\\times q\\times q$ as $1\\times q\\times1$ followed by $1\\times1\\times q$.",
+   "uses": [
+    "def-sfb-solvable-group-structure",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D, lemma-fpqc; affine criterion Tag 01U5, morphisms.tex lemma-flat-characterize, and faithful-flat spectrum criterion Tag 00HQ, algebra.tex lemma-ff-rings. This supplies the quotient-cover details for Milne 16.43."
+   }
+  },
+  {
+   "text": "Set $F=\\bar k$ and append a subscript $F$ to scalar extensions. The identity gives a $k$-rational point of $G$, whose residue field is $k$; the connected-point geometric-connectedness criterion therefore makes $G_F$ connected. The affine fibre-product formula identifies the new coordinate rings with $F\\otimes_k k[H]$ for $H=G,E,N,Q$. Group operations, inclusions, normality and the kernel identity pull back by the fibre-product definition: on an $F$-algebra they are the original operations and kernel tested on its underlying $k$-algebra. Closedness persists because tensoring a surjective presentation remains surjective (lift the finitely many coefficients of each tensor); finite generation persists by the same generators. The map $q_F$ is an fpqc cover by step 1, and its coordinate map is faithfully flat by ring base change. The multiplicative-type hypotheses give closed immersions of $N_F,Q_F$ into split tori. The split-torus subgroup theorem thus writes each as $D(M)=\\operatorname{Spec}F[M]$ with $M$ finitely generated abelian. Work over $F$ in steps 3--7, suppressing subscripts.",
+   "uses": [
+    "lem-trf-connected-point-geometrically-connected",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-base-change",
+    "def-sc-group-scheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-sfb-tori-multiplicative-type",
+    "lem-sfb-split-torus-subgroups-diagonalizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340, reduction to an algebraic closure; Stacks Tag 04KV, varieties.tex lemma-geometrically-connected-if-connected-and-point. Diagonalizability is Milne Theorem 12.9(c), p.233."
+   }
+  },
+  {
+   "text": "Normality of $N$ in $G$ restricts conjugation to $\\phi:G\\times_F N\\to N$. For every $F$-algebra $A$ and $g\\in G(A)$, this is the group automorphism $n\\mapsto gng^{-1}$, with inverse conjugation by $g^{-1}$. Apply homomorphism-family rigidity with $X=G$, $x_0=1_G$, and $D_1=D_2=N$. Step 2 supplies a connected affine finite-type parameter scheme and a diagonalizable target and source; the lemma requires no smoothness. At $x_0$ conjugation is the identity, hence $gng^{-1}=n$ on every algebra. Thus $N$ is central in $G$, in particular central in $E$. This proves the extra hypothesis required by the Chapter 12 correction before it is used.",
+   "uses": [
+    "lem-sfb-diagonalizable-hom-family-rigidity",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.38, p.244, obtained directly from Theorem 12.36, pp.243--244; Chapter 12 erratum: the kernel in Corollary 12.41 must be central."
+   }
+  },
+  {
+   "text": "Write $a(g,e)=geg^{-1}$, a morphism $G\\times_F E\\to E$ because $E$ is normal in $G$; it preserves $N$. Descend $q\\circ a$ along $p=1_G\\times q$. Its overlap is $G\\times_F E\\times_F N$, with two lifts $e,en$: the kernel-pair isomorphism sends $(e,n)$ to $(e,en)$ and its inverse sends $(e,e')$ to $(e,e^{-1}e')$. On the overlap, $q(a(g,en))=q(a(g,e)a(g,n))=q(a(g,e))$, since $a(g,n)\\in N$. Representable fpqc descent gives a morphism $b:G\\times_F Q\\to Q$ satisfying $b(g,q(e))=q(a(g,e))$. It is over $F$, since its structure maps agree after the cover. Its homomorphism identity in the second variable holds: after the product cover by $G\\times_F E\\times_F E$, it reads $q(a(g,ee'))=q(a(g,e))q(a(g,e'))$; uniqueness in descent proves the original identity. Likewise $b(g,1)=1$ and $b(1,t)=t$ follow after $p$ or $q$ from the corresponding identities of $a$. Homomorphism-family rigidity with $X=G$, $x_0=1_G$, $D_1=D_2=Q$ now gives $b(g,t)=t$. Thus $q(a(g,e))=q(e)$.",
+   "uses": [
+    "def-sc-group-scheme-subgroup",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-sfb-diagonalizable-hom-family-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of corrected Corollary 12.41, p.244, quotient action and Corollary 12.37 via Theorem 12.36; representable descent is Stacks Tag 023Q, descent.tex lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "Define $c(g,e)=a(g,e)e^{-1}$. Step 4 gives $q(c(g,e))=1$, so the kernel fibre product makes $c$ a morphism to $N$. On the overlap from step 4, step 3 gives\n$$c(g,en)=a(g,e)n(en)^{-1}=c(g,e).$$\nDescent therefore yields $d:G\\times_F Q\\to N$ with $d(g,q(e))=c(g,e)$. Centrality of $N$ in $E$ proves, on every algebra,\n$$c(g,ee')=a(g,e)a(g,e')e'^{-1}e^{-1}=c(g,e)e\\,c(g,e')e^{-1}=c(g,e)c(g,e').$$\nAlso $c(g,1)=1$. Pulling back along the product cover $G\\times_F E\\times_F E\\to G\\times_F Q\\times_F Q$ and using uniqueness in descent proves that $d(g,-)$ is a homomorphism; the unit equality descends in the same way. Finally $d(1_G,-)=1$, since this holds after $q$. Thus it is the difference $c$, rather than $a$ itself, which descends to a family $Q\\to N$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-weil-pbc-fpqc-covering-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of corrected Corollary 12.41, p.244, two factorizations interpreted for the difference a(g,e)e^{-1}; central-kernel Chapter 12 erratum. Descent is Stacks Tag 023Q, descent.tex lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "Apply homomorphism-family rigidity to $d$ with $X=G$, $x_0=1_G$, $D_1=Q$, $D_2=N$. Both diagonalizable groups were obtained in step 2, and step 5 proves the family-of-homomorphisms hypothesis. Hence $d(g,t)=d(1_G,t)=1$, so $a(g,e)e^{-1}=1$. Therefore conjugation $G\\times_F E\\to E$ is the second projection. In particular the multiplication of $E$ is commutative. These are morphism identities, not merely identities at $F$-points: the rigidity lemma tests every algebra, and evaluating at the coordinate algebra of the affine source identifies its two comorphisms.",
+   "uses": [
+    "lem-sfb-diagonalizable-hom-family-rigidity",
+    "def-sc-group-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.36, pp.243--244, and Lemma 16.43, p.340: trivial conjugation gives centrality and commutativity."
+   }
+  },
+  {
+   "text": "The coordinate map of $q$ is faithfully flat by steps 1--2; its kernel is $N$, and $N,Q$ are diagonalizable. Apply the commutative multiplicative-type extension lemma to the commutative $E$ from step 6. It gives $E\\simeq D(M)$ for a finitely generated abelian group $M$. To recover precisely the immersion formulation in the item, choose generators $m_1,\\ldots,m_r$ of $M$. The map $F[t_1^{\\pm1},\\ldots,t_r^{\\pm1}]\\to F[M]$ sending $t_i$ to $e_{m_i}$ is surjective: every basis element $e_m$ is a Laurent monomial in these generators. It preserves the group operations since each $e_{m_i}$ is group-like. Its spectrum is consequently a closed group immersion of $E$ into $\\mathbf G_m^r$. This proves that the original $E$ is of multiplicative type by its defining condition over $\\bar k$.",
+   "uses": [
+    "lem-sfb-commutative-multiplicative-type-extension",
+    "def-weil-closed-immersion",
+    "def-sc-gm-ga",
+    "def-sfb-tori-multiplicative-type",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 12.22, p.239, as used in Lemma 16.43, p.340; the closed immersion from finitely many character generators is the construction in Theorem 12.9, pp.233--234."
+   }
+  },
+  {
+   "text": "Restore the original field $k$. Let $a:G\\times_k E\\to G$ be conjugation followed by inclusion, and let $j\\operatorname{pr}_E:G\\times_k E\\to G$ be projection followed by inclusion. Step 6 says their scalar extensions to $F$ agree. For each $f\\in k[G]$, the difference of their pullbacks in $B=k[G\\times_k E]$ has zero image in $B\\otimes_k F$ by the affine fibre-product formula. The field-extension tensor-injectivity lemma forces that difference to be zero. The affine spectrum correspondence gives $a=j\\operatorname{pr}_E$ over $k$. For any $k$-algebra $A$, $e\\in E(A)$ and $A$-algebra $A'$, evaluating this equality at $(g,e_{A'})$ for every $g\\in G(A')$ gives $ge_{A'}g^{-1}=e_{A'}$. This is exactly the defining functor of $Z(G)$ in the cited centre lemma, so $E\\subseteq Z(G)$ with the explicit all-algebras meaning required.",
+   "uses": [
+    "lem-sfb-field-extension-tensor-injective",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-sfb-affine-group-centre-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.43, p.340; affine faithfully-flat field descent made explicit by tensor injectivity; the centre is Proposition 1.92, pp.33--34."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-solvable-group-structure",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-trf-connected-point-geometrically-connected",
+  "def-pc-base-change",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-tori-multiplicative-type",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "lem-sfb-diagonalizable-hom-family-rigidity",
+  "def-sc-group-scheme-subgroup",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-commutative-multiplicative-type-extension",
+  "def-sc-gm-ga",
+  "def-weil-affine-spectrum",
+  "lem-sfb-field-extension-tensor-injective",
+  "lem-sfb-affine-group-centre-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.43, p.340, with Corollary 12.38 first enforcing the Chapter 12 erratum to Corollary 12.41. Expanded quotient and difference descent follows the corrected 12.41 argument, with Theorem 12.36 applied directly so no smoothness assumption is introduced; Corollary 12.22 concludes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonalizable.*extension|extension.*diagonalizable",
+   "results": "{\"t\": \"2026-10-24T07:35:14Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|diagonalizable.*extension|extension.*diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Group/TypeTags/Hom.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\"], \"digest\": \"1cd07479a7dcbe48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group central series, ordinary subgroups or additive/multiplicative type tags; none states the affine group-scheme assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal subgroup of a connected affine group scheme which is a central extension of multiplicative type groups is central and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T07:35:15Z\", \"tool\": \"leansearch\", \"query\": \"A normal subgroup of a connected affine group scheme which is a central extension of multiplicative type groups is central and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.instNormalCenter\", \"AddSubgroup.instNormalCenter\", \"Subgroup.Normal\", \"Subgroup.center_le_normalizer\", \"Subgroup.center.isMulCommutative\", \"AddSubgroup.Normal.addSubgroupOf\", \"Subgroup.normal_of_characteristic\", \"instNormalCommutator\"], \"digest\": \"f1fee3114a4d16e7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group central series, ordinary subgroups or additive/multiplicative type tags; none states the affine group-scheme assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T07:35:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group central series, ordinary subgroups or additive/multiplicative type tags; none states the affine group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal subgroup of a connected algebraic group with central multiplicative type subgroup and multiplicative type quotient is central and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T07:35:16Z\", \"tool\": \"leanfinder\", \"query\": \"A normal subgroup of a connected algebraic group with central multiplicative type subgroup and multiplicative type quotient is central and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesStep\", \"upperCentralSeriesStep_eq_comap_center\", \"instNormalUpperCentralSeriesStep\", \"Subgroup.instNormalCenter\", \"upperCentralSeriesAux\", \"upperCentralSeries_normal\", \"QuotientGroup.comap_comap_center\", \"nilpotent_center_quotient_ind\"], \"digest\": \"fcce1c2ddb8da97a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group central series, ordinary subgroups or additive/multiplicative type tags; none states the affine group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected algebraic group has central normal subgroups whenever both layers of a normal subgroup filtration are diagonalizable group schemes",
+   "results": "{\"t\": \"2026-10-24T07:36:33Z\", \"tool\": \"leanfinder\", \"query\": \"A connected algebraic group has central normal subgroups whenever both layers of a normal subgroup filtration are diagonalizable group schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesAux\", \"instNormalUpperCentralSeriesStep\", \"upperCentralSeries_normal\", \"upperCentralSeriesStep\", \"lowerCentralSeries_normal\", \"Sylow.le_center_or_le_commutator\", \"normalizerCondition_of_isNilpotent\", \"lowerCentralSeries_succ_eq_bot\"], \"digest\": \"9ce2bdcbffb60223\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group central series, ordinary subgroups or additive/multiplicative type tags; none states the affine group-scheme assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a connected affine group scheme, normal subgroups N inside E with N and E/N of multiplicative type force E central and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T08:04:45Z\", \"tool\": \"leanfinder\", \"query\": \"In a connected affine group scheme, normal subgroups N inside E with N and E/N of multiplicative type force E central and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"upperCentralSeriesStep_eq_comap_center\", \"Subgroup.instNormalCenter\", \"Subgroup.SchurZassenhausInduction.step7\", \"Sylow.le_center_or_le_commutator\", \"upperCentralSeries_normal\", \"instNormalUpperCentralSeriesStep\", \"isNilpotent_of_ker_le_center\", \"of_quotient_center_nilpotent\"], \"digest\": \"a6fd6640da5ac0e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no group-scheme statement; hits are abstract group theory or unrelated affine-scheme and Galois-category facts"
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonaliz.*normal|normal.*diagonaliz",
+   "results": "{\"t\": \"2026-10-24T08:05:03Z\", \"tool\": \"grep\", \"query\": \"multiplicative.type|diagonaliz.*normal|normal.*diagonaliz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no matching declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal subgroup of a connected algebraic group with multiplicative type kernel and quotient is central and of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T08:05:04Z\", \"tool\": \"leansearch\", \"query\": \"A normal subgroup of a connected algebraic group with multiplicative type kernel and quotient is central and of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.instNormalCenter\", \"AddSubgroup.instNormalCenter\", \"QuotientAddGroup.ker_mk'\", \"Subgroup.IsComplement'.QuotientMulEquiv\", \"Subgroup.center.isMulCommutative\", \"Subgroup.normalizerMonoidHom_ker\", \"QuotientGroup.ker_mk'\", \"AddSubgroup.normal_centralizer\"], \"digest\": \"824fc632efed476e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no group-scheme statement; hits are abstract group theory or unrelated affine-scheme and Galois-category facts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"center\"",
+   "results": "{\"t\": \"2026-10-24T08:05:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"center\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no matching declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of homomorphisms between diagonalizable group schemes parametrized by a connected scheme is constant, including nonreduced schemes",
+   "results": "{\"t\": \"2026-10-24T08:06:06Z\", \"tool\": \"leanfinder\", \"query\": \"A family of homomorphisms between diagonalizable group schemes parametrized by a connected scheme is constant, including nonreduced schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"CategoryTheory.PreGaloisCategory.connected_component_unique\", \"AlgebraicGeometry.instSubsingletonOverTerminalScheme\", \"AlgebraicGeometry.AffineSpace.hom_ext\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"cb8cde2b45252df6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no group-scheme statement; hits are abstract group theory or unrelated affine-scheme and Galois-category facts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-quotient-unipotent-centre",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Theorem 5.28, p.110). Supporting input for this split: Lemma 16.45 and its proof using Lemma 16.43, printed p.340. Connectedness of the quotient is Proposition 5.59, p.114; nilpotence descends by the images of a central series, Section 6.f. The lemma concludes unipotence of the centre, not of H. Supporting input: Milne Lemma 16.43, p.340: normal multiplicative-type layers force centrality and multiplicative type; the kernel is central by Corollary 12.38 before applying corrected Corollary 12.41.",
+   "via": [
+    "lem-sfb-nilpotent-quotient-unipotent-centre",
+    "lem-sfb-nilpotent-central-torus-quotient",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-normal-multiplicative-layers-central",
+  "worker": "stage1",
+  "group": "O2",
+  "summary": "Kept every hypothesis and clause. No new nodes: reuse the general homomorphism-family rigidity lemma directly, because the action-rigidity and extension-action lemmas available in the DAG assume smoothness absent here. Wrote out quotient descent and the central difference family, and checked centrality of N before using the corrected extension argument. Supplied geometric connectedness via the identity point, the affine faithful-flat quotient checks, conversion between diagonalizable and closed-in-a-torus forms, and descent of centrality to k. Searched project declarations, the full DAG and latest blueprint, and Mathlib.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through alterations, moduli, maximal tori and the nilpotent central-torus quotient. The item is the Milne 16.43 input to lem-sfb-nilpotent-quotient-unipotent-centre. Read the current latest unit and direct-images proof; no unit route is replaced. blueprint_refs ancestor reports None, as in the base; retained the inherited null ancestor and full via rather than fabricating it.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-connected-point-geometrically-connected",
+    "why": "Generic geometric-connectedness criterion (Stacks 04KV), applied to the identity rational point; this unit has no substitute, and this is only the scalar-extension prerequisite for Milne 16.43."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-connected-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-80e544d24",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-80e544d24 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the statements of all 22 cited nodes, and the source: Milne iAG2017 Lemma 16.43 (p.340), Theorem 12.36, Corollaries 12.37, 12.38 and 12.41 with the Chapter 12 erratum (N central), and Corollary 12.22. The item statement and stmt_deps are identical to the version N5 created, so nothing was weakened. The delivery creates no new nodes. There is no cycle: the item is not in its own closure of 259 nodes. Every step checks. In step 1 the quotient is flat, surjective and has kernel N, which makes k[Q]→k[E] faithfully flat and q an fpqc cover. In step 2, Stacks 04KV applied at the identity point makes G_F connected, and the split-torus lemma gives N_F and Q_F as D(M). In step 3, family rigidity with X=G and x0=1 makes N central; this needs no smoothness, which is why the two smooth-G action-rigidity nodes are correctly avoided. Step 4 descends q∘a along 1×q over the overlap G×E×N, and rigidity gives b=pr. In step 5 the difference c=a·e⁻¹ descends; I recomputed that c is a homomorphism, which uses N central from step 3. In step 6 rigidity gives d=1, so E is central over F. Step 7 uses the commutative extension lemma, plus an elementary Hopf surjection F[t^±]→F[M] giving the closed immersion. Step 8 descends the result to k by injectivity of the tensor map and evaluates the Z(G) functor. Edge cases checked: N=E, E=1, μ_p in characteristic p (non-reduced), and the disconnected normaliser of a torus in SL2 as a counterexample showing connectedness is needed. My duplicate search found no node stating this item. Batch-5 flag: lem-trf-connected-point-geometrically-connected is the generic Stacks 04KV criterion. Its closure contains only generic connectedness and Galois-descent lemmas, it is not part of the trace formula or Poincaré duality or their proofs, and another sfb node already cites it. I accept it and its recorded tool_use. The blueprint from.node is null, inherited from the base; the maintainer should note this. No SGA sources are used. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalMultiplicativeLayersCentral",
+  "declaration": "AlgebraicGeometry.normal_multiplicativeType_layers_central",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalMultiplicativeLayersCentral.lean",
+  "statement": "theorem normal_multiplicativeType_layers_central {k : Type u} [Field k] (G N E Q : Grp (Over (Spec (.of k)))) (hG : SolvableGroupStructure.IsAlgebraic G) (hN : SolvableGroupStructure.IsAlgebraic N) (hE : SolvableGroupStructure.IsAlgebraic E) (hQ : SolvableGroupStructure.IsAlgebraic Q) (hconnected : ConnectedSpace G.X.left) (i : N ⟶ E) (j : E ⟶ G) (q : E ⟶ Q) (hi : IsClosedSubgroupScheme i.hom.hom) (hj : IsClosedSubgroupScheme j.hom.hom) (hNnormal : IsNormalSubgroupScheme (i ≫ j).hom.hom) (hEnormal : IsNormalSubgroupScheme j.hom.hom) (hq : SolvableGroupStructure.IsFppfQuotient i.hom.hom q) (hNmult : MultiplicativeType.IsMultiplicativeType N) (hQmult : MultiplicativeType.IsMultiplicativeType Q) : MultiplicativeType.IsMultiplicativeType E ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (e : StandardGroupSchemes.affine k A ⟶ E.X), e ≫ j.hom.hom ∈ ReductiveTorusCentralizer.centralizerPoints (𝟙 G) A",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06cf9dc52",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Only the new lean record differs from side-live. lean.statement is verbatim, the module is new and all imports exist. Every node clause matches the Lean: affine finite type via IsAlgebraic; closed subgroups N⊆E⊆G with both normal in G; ConnectedSpace G; IsFppfQuotient i q, the recorded owner, whose lfp is automatic; IsMultiplicativeType for N and Q, including rank 0; conclusion IsMultiplicativeType E ∧ every A-point of E lies in centralizerPoints (𝟙 G), the same centre as lem-sfb-affine-group-centre-base-change, tested over all A-algebras. No stronger assumptions (hN and hE are redundant). Edge cases N=E, trivial E, μ_p in char p, imperfect k and disconnected N/E/Q are covered. Single universe u, as recorded. No duplicate found. Only sorry, no new defs, docstrings carry the source, blueprint id and 8 steps, report sections present. No compile needed since no file changed. Inherited from.node null is a base-node fault."
+ }
+}

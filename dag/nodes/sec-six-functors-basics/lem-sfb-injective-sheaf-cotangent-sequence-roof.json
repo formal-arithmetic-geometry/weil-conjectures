@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-injective-sheaf-cotangent-sequence-roof",
+ "kind": "statement",
+ "title": "Injective ring-sheaf differential sequence and its canonical quotient-resolution roof",
+ "statement": "Let $T$ be a topological space and $\\mathcal A\\to\\mathcal B\\xrightarrow{j}\\mathcal C$ maps of sheaves of commutative rings, with $j$ injective. Use the standard resolutions and alternating complexes $K$ of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. Set $P=P^{\\mathrm{std}}(\\mathcal B/\\mathcal A)$, $Q=P^{\\mathrm{std}}(\\mathcal C/\\mathcal A)$, $S=P^{\\mathrm{std}}(\\mathcal B/\\mathcal B)$ and $R=P^{\\mathrm{std}}(\\mathcal C/\\mathcal B)$. With standard functoriality maps and augmentations, put $\\overline Q=Q\\otimes_P\\mathcal B$ and $\\overline R=R\\otimes_S\\mathcal B$, degreewise in sheaves. These agree with sheafification of the sectionwise tensor constructions. Before sheafification, on every open $U$, the quotient augmentations $Q(U)\\otimes_{P(U)}\\mathcal B(U)\\to\\mathcal C(U)$ and $R(U)\\otimes_{S(U)}\\mathcal B(U)\\to\\mathcal C(U)$, with $P(U),Q(U),R(U),S(U)$ here denoting the sectionwise standard polynomial resolutions before sheafification, are polynomial resolutions in the precise sense of [lem-trf-cotangent-resolution-coherence]. Their sheafified augmentations are quasi-isomorphisms on alternating complexes.\nThere is a degreewise short exact sequence of complexes of $\\mathcal C$-modules\n$$0\\to K_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal C\\xrightarrow{i}K_{\\mathcal C/\\mathcal A}\\xrightarrow{q}T_Q\\to0,\\qquad T_Q=s(\\Omega^1_{\\overline Q/\\mathcal B}\\otimes_{\\overline Q}\\mathcal C).$$\nThe maps are induced by $P\\to Q\\to\\overline Q$ and universal differentials [def-weil-pbc-kahler-differentials]; $i$ is the canonical standard functoriality map. Put $T_R=s(\\Omega^1_{\\overline R/\\mathcal B}\\otimes_{\\overline R}\\mathcal C)$. The canonical maps\n$$K_{\\mathcal C/\\mathcal B}\\xrightarrow{\\alpha}T_R\\xleftarrow{\\beta}T_Q$$\ninduced by $R\\to\\overline R$ and $\\overline Q\\to\\overline R$ are quasi-isomorphisms. In $D(\\mathcal C)$ [def-weil-abstract-derived-category], $\\alpha^{-1}\\beta:T_Q\\xrightarrow{\\sim}K_{\\mathcal C/\\mathcal B}$ carries $q$ to the canonical base-ring functoriality arrow $K_{\\mathcal C/\\mathcal A}\\to K_{\\mathcal C/\\mathcal B}$. The sequence, roof and this equality commute with open restrictions. No flatness of $\\mathcal C$ over $\\mathcal B$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SZ (lemma-triangle-sheaves-rings), injective case, displayed differential sequence and canonical roof; Tags 08SD (remark-triangle) and 08SE (remark-explicit-map)."
+ },
+ "stmt_deps": [
+  "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix an open $U$ and write $A=\\mathcal A(U)$, $B=\\mathcal B(U)$, $C=\\mathcal C(U)$. In Steps 1--5 all resolutions are sectionwise, before sheafification. The map $B\\to C$ is injective. The recursive standard maps of [lem-trf-cotangent-resolution-coherence] identify the variable set of $P_n$ with a subset $X_n$ of the variable set $E_n$ of $Q_n$: for $n=0$ this is $B\\hookrightarrow C$; inductively an injection of variable sets gives an injection of polynomial rings because distinct finitely supported monomial coefficient lists remain distinct. The resulting injection of underlying sets is the variable injection in the next degree. Put $Y_n=E_n\\setminus X_n$. Thus $P_n=A[X_n]$, $Q_n=A[X_n\\sqcup Y_n]=P_n[Y_n]$, with the actual standard map as the displayed inclusion. Tensoring its augmentation $P_n\\to B$ gives $\\overline Q_n=B[Y_n]$. The same argument with base ring $B$ gives the analogous description for $S_n\\to R_n$. Complements are used only to check exactness, not to define any simplicial or restriction map.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SD (remark-triangle), polynomiality of Q_n over P_n; Tag 08SE (remark-explicit-map), polynomiality of R_n over S_n."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-injective-standard-resolution-quotients] to $A\\to B\\hookrightarrow C$. It gives polynomiality, degreewise surjectivity to $C$, and the quasi-isomorphism $s(\\overline Q)\\to C[0]$. Apply the same node a second time to $B\\xrightarrow{\\mathrm{id}}B\\hookrightarrow C$, whose two standard resolutions are precisely $S$ and $R$. It gives the same three properties for $\\overline R$. These are exactly the polynomial-resolution hypotheses of [lem-trf-cotangent-resolution-coherence]; no flatness of $B\\to C$ occurs in either application.",
+   "uses": [
+    "lem-sfb-injective-standard-resolution-quotients",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SD and 08SE, quotient-resolution input; Tag 08QI (remark-resolution), polynomial-resolution convention."
+   }
+  },
+  {
+   "text": "In degree $n$, apply [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables] over $A$ to $P_n=A[X_n]$ and $Q_n=A[X_n\\sqcup Y_n]$, and over $B$ to $\\overline Q_n=B[Y_n]$, always tensoring coefficients to $C$. The three differential modules are respectively $\\bigoplus_{X_n}C$, $\\bigoplus_{X_n\\sqcup Y_n}C$, and $\\bigoplus_{Y_n}C$. The universal differential maps [def-weil-pbc-kahler-differentials] make the first arrow inclusion of the $X_n$ coordinates and the second projection onto $Y_n$: an old variable maps into $B$, so its relative $B$-differential is zero; a new variable maps to its namesake. An element in the kernel of the projection has zero $Y_n$ coordinates and is therefore the image of its finitely supported $X_n$ coordinates; inclusion is injective, and extending a $Y_n$ vector by zeros proves surjectivity. Thus the sequence is split exact without flatness of $C$ over $B$. The maps themselves are induced by $P\\to Q\\to\\overline Q$, not by the chosen complements, and commute with all faces and degeneracies by their universal derivation formulas. Taking alternating faces therefore gives a degreewise short exact sequence of complexes before sheafification.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SD, displayed differential sequence; Algebra Tag 00RX (lemma-differentials-polynomial-ring), with the same finite-support argument for arbitrary variable sets."
+   }
+  },
+  {
+   "text": "The standard square maps in [lem-trf-cotangent-resolution-coherence] give $P\\to S$, $Q\\to R$ for change of base $A\\to B$, with $P\\to Q\\to R=P\\to S\\to R$ and with all augmentations commuting. Hence the tensor universal property gives $h:\\overline Q\\to\\overline R$, explicitly $q\\otimes b\\mapsto f(q)\\otimes b$ where $f:Q\\to R$. The relation $p q\\otimes b=q\\otimes\\epsilon_P(p)b$ is preserved because $f(p)$ is the image of $p$ in $S$ and $\\epsilon_S(f(p))=\\epsilon_P(p)$. Its augmentation satisfies $\\epsilon_{\\overline R}h(q\\otimes b)=\\epsilon_R(f(q))j(b)=\\epsilon_Q(q)j(b)=\\epsilon_{\\overline Q}(q\\otimes b)$. For a face or degeneracy $\\theta$, both $\\theta h$ and $h\\theta$ send $q\\otimes b$ to $f(\\theta q)\\otimes b$, since $f$ is simplicial and $B$ is constant. Hence $h$ is an augmented simplicial $B$-algebra map over $C$. Together with $g:R\\to\\overline R$, $r\\mapsto r\\otimes1$, it induces the two chain maps $\\alpha$ and $\\beta$ on relative $B$-differentials tensored to $C$; their formula is $\\mathrm dz\\otimes c\\mapsto\\mathrm d(\\text{image of }z)\\otimes c$, by [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SE, commutative diagram and the resulting canonical map Q_bar to R_bar."
+   }
+  },
+  {
+   "text": "The standard augmentation $R\\to C$ is a polynomial resolution by [lem-trf-cotangent-resolution-coherence], and Step 2 supplies this hypothesis for $\\overline Q\\to C$ and $\\overline R\\to C$. Apply that node's comparison isomorphisms and their naturality to the two augmented $B$-algebra maps $g$ and $h$ of Step 4. For either map the comparison of the target differential complex with $L_{C/B}$, composed with the induced map, equals the comparison of the source with $L_{C/B}$. Both comparisons are isomorphisms. Hence $\\alpha$ and $\\beta$ are isomorphisms in $D(C)$, where $L_{C/B}$ lives. Since cohomology factors through localization [def-weil-abstract-derived-category], their cohomology maps are isomorphisms, so they are quasi-isomorphisms. The maps and all three complexes are $C$-linear. Their kernels, images and cohomology have the same underlying $B$-modules after restriction of scalars, since those submodules and quotients are computed on the same elements. Each cohomology map is therefore a bijective $C$-linear map $u$. Its inverse is $C$-linear: applying injective $u$ to $u^{-1}(cx)$ and $c u^{-1}(x)$ gives $cx$ in both cases. Thus both roof maps are quasi-isomorphisms over $C$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SE, final roof; Tag 08QI (remark-resolution), canonical comparison for arbitrary polynomial resolutions."
+   }
+  },
+  {
+   "text": "Perform Steps 1--5 on all opens and sheafify the actual canonical maps. By [lem-trf-affine-cotangent-comparison], the free sheaf algebra and the standard differential complexes are the sheafified sectionwise constructions. The simplicial sheaf algebras themselves are sheafified sectionwise standard resolutions, by induction on $n$: $\\mathcal P_0$ is the sheafified sectionwise algebra $U\\mapsto\\mathcal A(U)[\\mathcal B(U)]$; if the sectionwise $P_{n-1}$ sheafifies to $\\mathcal P_{n-1}$ as rings, then by [lem-pc-sites-sheafification-underlying-sets] the underlying sheaf of sets $|\\mathcal P_{n-1}|$ is the set-sheafification of $|P_{n-1}|$. For a presheaf of sets $G$, maps of sheaves of $\\mathcal A$-algebras out of the sheafified sectionwise polynomial algebra $(U\\mapsto\\mathcal A(U)[G(U)])^\\#$ are, by the universal properties of sheafification [def-weil-pbc-sheafification] and of polynomial algebras, maps of presheaves of sets out of $G$, hence out of $G^\\#$. So the sheafified algebras on $|P_{n-1}|$ and on $|\\mathcal P_{n-1}|$ agree, i.e. $P_n$ sheafifies to $\\mathcal P_n=\\mathcal A[|\\mathcal P_{n-1}|]$. Faces, degeneracies, augmentations and the standard maps are given by the same evaluation and unit formulas on both sides, so they correspond. The same holds for $Q,R,S$.",
+   "uses": [
+    "lem-trf-affine-cotangent-comparison",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SZ (lemma-triangle-sheaves-rings), presheaf-then-sheafify paragraph; sites-modules.tex Tags 08TP (lemma-differentials-sheafify), 0GMW (lemma-sheafification-tensor), 03CN and 03CO."
+   }
+  },
+  {
+   "text": "With the algebras identified as in Step 6, by [lem-pc-sites-module-sheafification-tensor], sheafification of each degreewise tensor $Q\\otimes_P B$ and $R\\otimes_S B$ is respectively the specified sheaf tensor $\\overline Q$ and $\\overline R$; the algebra multiplications agree since both send $(q\\otimes b)(q'\\otimes b')$ to $qq'\\otimes bb'$. By [lem-trf-sheafified-module-differentials-cokernel], sectionwise relative differentials sheafify to the relative sheaf differentials, preserving their universal derivations. Applying the tensor comparison again identifies the terms of Step 3. For the first term, the balanced maps $(\\mathrm dp\\otimes b)\\otimes c\\mapsto\\mathrm dp\\otimes bc$ and $\\mathrm dp\\otimes c\\mapsto(\\mathrm dp\\otimes1)\\otimes c$ identify $(\\Omega^1_{P/A}\\otimes_P B)\\otimes_B C$ with $\\Omega^1_{P/A}\\otimes_P C$; they are inverse and commute with faces. Thus its sheafification is exactly $K_{\\mathcal B/\\mathcal A}\\otimes_{\\mathcal B}\\mathcal C$. The same comparisons identify Step 5's roof with $\\alpha,\\beta$. Exact sheafification [lem-weil-pbc-ringed-site-module-sheafification-exact] preserves the degreewise exact sequence. It also preserves these quasi-isomorphisms and the two quotient augmentations: it preserves kernels, images and cokernels, so sheafified cohomology is the sheafification of the sectionwise cohomology. This proves all the asserted sheaf exactness and quasi-isomorphism clauses.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SZ (lemma-triangle-sheaves-rings), presheaf-then-sheafify paragraph; sites-modules.tex Tags 08TP (lemma-differentials-sheafify), 0GMW (lemma-sheafification-tensor), 03CN and 03CO."
+   }
+  },
+  {
+   "text": "Let $v:K_{\\mathcal C/\\mathcal A}\\to K_{\\mathcal C/\\mathcal B}$ be the standard base-ring functoriality map of [lem-sfb-standard-sheaf-cotangent-flat-functorial-model]. The square in Step 4 gives an equality of ring maps $Q\\to\\overline Q\\xrightarrow h\\overline R=Q\\xrightarrow f R\\xrightarrow g\\overline R$: both send $q$ to $f(q)\\otimes1$. On each generating differential $\\mathrm dq\\otimes c$, both $\\beta q$ and $\\alpha v$ therefore give $\\mathrm d(f(q)\\otimes1)\\otimes c$. Universal differentials generate the modules [def-weil-pbc-kahler-differentials], so $\\beta q=\\alpha v$ as chain maps, before and after sheafification. In $D(\\mathcal C)$ [def-weil-abstract-derived-category] invert $\\alpha$ to obtain $\\alpha^{-1}\\beta q=v$. The first arrow of the short exact sequence is likewise exactly the standard arrow: it sends $\\mathrm dp\\otimes c$ to $\\mathrm d(\\text{image of }p)\\otimes c$, the formula in the flat functorial model node. This identifies both arrows, including the required quotient-arrow comparison.",
+   "uses": [
+    "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08SE and 08SZ, the arrow-compatible roof; Tag 08SS, standard functoriality maps."
+   }
+  },
+  {
+   "text": "For an inclusion of opens $V\\subseteq U$, restriction is a commutative square of ring maps on sections. The strict composition property of [lem-trf-cotangent-resolution-coherence] makes every square between $P,Q,S,R$ commute with that restriction. On quotients the map is $z\\otimes b\\mapsto z|_V\\otimes b|_V$; on differentials it is $\\mathrm dz\\otimes c\\mapsto\\mathrm d(z|_V)\\otimes c|_V$. These formulas commute with $g,h$, both differential arrows, and the equality of Step 8. Their sheafifications are the same maps by the natural tensor and differential identifications [lem-pc-sites-module-sheafification-tensor, lem-trf-sheafified-module-differentials-cokernel]. Finally, a commuting square with an invertible $\\alpha$ also commutes with its inverse, by multiplying the square by the inverses. For restriction to an open subspace $V\\subseteq T$: on every open $W\\subseteq V$ the sectionwise rings, resolutions, tensors, differential modules and maps of Steps 1--5 for $\\mathcal A|_V\\to\\mathcal B|_V\\to\\mathcal C|_V$ are literally those for $\\mathcal A\\to\\mathcal B\\to\\mathcal C$ on $W$, so the presheaf data on $V$ are the restrictions of the presheaf data on $T$. The inclusion of the opens of $V$ into the opens of $T$ is continuous and cocontinuous, so by [lem-sp-module-slice-sheafification-independent-ring] module sheafification commutes with this restriction, naturally and compatibly with the sheafification units. Hence the restricted sheaf sequence, roof and the arrows of Step 8 are the ones built from the restricted rings. Thus the sequence, roof, derived identification and arrow equality commute with open restrictions. No naturality of the auxiliary complements $Y_n$ is needed.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-trf-sheafified-module-differentials-cokernel",
+    "lem-sp-module-slice-sheafification-independent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08SZ, construction on presheaves followed by sheafification; Tag 08SE, canonical maps; Tag 08SX, restriction-compatible section maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-sfb-injective-standard-resolution-quotients",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-abstract-derived-category",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-sfb-standard-sheaf-cotangent-flat-functorial-model",
+  "lem-sp-module-slice-sheafification-independent-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08SD (remark-triangle), 08SE (remark-explicit-map), and 08SZ (lemma-triangle-sheaves-rings), injective case. Polynomial-basis verification spells out the displayed exact sequence; the commuting ring square spells out arrow compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an injective map of ring sheaves B to C, standard polynomial resolutions P and Q give a differential short exact sequence whose quotient is canonically compared to the cotangent complex of C over B by a roof of quasi isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ'\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} {τ : Type w₅} (Q : Algebra.Generators S T ι) (P : Algebra.Ge\", \"doc\": \"For an algebra extension homomorphism $ f $, the induced map on the first cotangent cohomology modules is exact at the image of $ f $, meaning the image of $ f $ is equal to the kernel of the connecti\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the first cotangent cohomology modules is exact at $ H^1(Q) $ with the connecting homomorphism $ \\\\delta $, as established by the Snake Lemma applied to the cotangent complexes o\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {T : Type u₃} →\\n            [inst_3 : CommRing T] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower R \", \"doc\": \"The linear map $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence, constructed via the Snake Lemma from the commutative diagram of cotangent complexes associated to com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical quasi isomorphism from the quotient differential complex of an injective standard simplicial polynomial resolution to the relative cotangent complex using a common resolution",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.InjectiveResolution X), QuasiIso R.ι'\", \"doc\": \"The morphism $\\\\iota'$ constructed from an injective resolution $R$ is a quasi-isomorphism between the extended single-term cochain complex (concentrated at degree 0 with object $X$) and the cochain co\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.quasiIso\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] {Z : C} (self : CategoryTheory.InjectiveResolution Z),\\n  QuasiIso self.ι\", \"doc\": \"In a category with a zero object and zero morphisms, the inclusion morphism from the single-term cochain complex (with object $Z$ at degree 0) to the cochain complex associated with an injective resol\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.iso\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasInjectiveResolutions C] →\\n        {X : C} →\\n          (I : CategoryTheory.InjectiveResolution X) →\\n            (CategoryTheory.injectiveResolutions C).obj X ≅\\n    \", \"doc\": \"For an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, this constructs an isomorphism in the homotopy category between the image of $X$ under the injective resolutions f\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.Extension.cotangentComplex_injective_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] (P : Algebra.Extension R A)\\n  [Algebra.FormallySmooth R P.Ring], Function.Injective ⇑P.cotangentComplex ↔ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For an $ R $-algebra extension $ P $, the cotangent complex map $ P.\\text{cotangentComplex} $ is injective if and only if the first cohomology group $ \\text{Algebra.H1Cotangent}(R, A) $ is trivial (i.e.\"}\n  {\"name\": \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Monoid G],\\n  QuasiIso\\n    (((CategoryTheory.forget₂ (Rep k G) (ModuleCat k)).mapHomologicalComplex (ComplexShape.down ℕ)).map\\n      (Rep.standardComplex.εToSingle₀ k G))\", \"doc\": \"The morphism from the standard chain complex in the category of representations of a monoid $ G $ over a commutative ring $ k $ to the single-term chain complex at degree 0 with the trivial representa\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C),\\n  (CategoryTheory.InjectiveResolution.ofCocomplex Z).d 0 1 = CategoryTheory.Injective.d (CategoryTheory.Injective.ι Z)\", \"doc\": \"The differential between the 0th and 1st terms of the injective resolution of an object $Z$ is equal to the morphism $\\\\iota_Z: Z \\\\to J_0$ from $Z$ to its injective hull $J_0$ in the resolution complex\"}\n  {\"name\": \"Algebra.FormallySmooth.kerCotangentToTensor_injective_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {P : Type u_2}\\n  [inst_3 : CommRing P] [inst_4 : Algebra R P] [Algebra.FormallySmooth R P] [inst_6 : Algebra P A]\\n  [IsScalarTower R P A],\\n  Function.Surjective ⇑(algebraMap P A) →\\n    (Function.Injective ⇑(\", \"doc\": \"Given a commutative ring $ R $, an $ R $-algebra $ P $, and a $ P $-algebra $ A $ with a scalar tower structure over $ R $, if the canonical algebra map $ P \\to A $ is surjective, then the injectivity \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"ShortExact\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*[Ss]hort[Ee]xact|[Ss]hort[Ee]xact.*cotangent|simplicial.*polynomial|polynomial.*simplicial",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Short exact sequence of differential complexes from injective polynomial resolutions of sheaves of commutative rings and its canonical quotient comparison roof",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.casesOn\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {S : CategoryTheory.ShortComplex C} →\\n        {motive : S.Exact → Sort u} →\\n          (t : S.Exact) → ((condition : ∃ h, CategoryTheory.Limits.IsZero h.left.H) → motive \", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.exact₀\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{Z : C} (I : InjectiveResolution Z) : (ShortComplex.mk _ _ I.ι_f_zero_comp_complex_d).Exact\", \"doc\": \"For any object $Z$ in a category $\\\\mathcal{C}$ with zero morphisms and its injective resolution $I$, the short complex formed by the inclusion morphism from the single-term cochain complex (containing\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.recOn\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {S : CategoryTheory.ShortComplex C} →\\n        {motive : S.Exact → Sort u} →\\n          (t : S.Exact) → ((condition : ∃ h, CategoryTheory.Limits.IsZero h.left.H) → motive \", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.mk\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {S : CategoryTheory.ShortComplex C},\\n  S.Exact → ∀ [mono_f : CategoryTheory.Mono S.f] [epi_g : CategoryTheory.Epi S.g], S.ShortExact\", \"doc\": \"Given an exact short complex $S$ in a category with zero morphisms, if the differential $f: X_1 \\to X_2$ is a monomorphism and the differential $g: X_2 \\to X_3$ is an epimorphism, then $S$ forms a short\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_injective_f\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Ab\", \"type\": \"(hS : S.ShortExact) : Function.Injective S.f\", \"doc\": \"If a short complex $ S $ of abelian groups is exact, then the first differential $ f : X_1 \\to X_2 $ is an injective homomorphism.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.descToInjective\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"(hS : S.Exact) {J : C} (f : S.X₂ ⟶ J) [Injective J] (hf : S.f ≫ f = 0) : S.X₃ ⟶ J\", \"doc\": \"Given an exact short complex $S$ denoted by $X_1 \\\\xrightarrow{f} X_2 \\\\xrightarrow{g} X_3$ in an abelian category $\\\\mathcal{C}$, and an injective object $J$, this definition takes a morphism $h: X_2 \\\\t\"}\n  {\"name\": \"CategoryTheory.ShortComplex.exact_iff_isIso_imageToKernel'\", \"module\": \"Mathlib.CategoryTheory.Abelian.Exact\", \"type\": \": S.Exact ↔ IsIso (imageToKernel' S.f S.g S.zero)\", \"doc\": \"For a short complex $ S $ in an abelian category, the complex is exact if and only if the canonical morphism from the image of the first differential $ f: X_1 \\to X_2 $ to the kernel of the second diff\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.mk'\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \"(h : S.Exact) (_ : Mono S.f) (_ : Epi S.g) : S.ShortExact\", \"doc\": \"A short complex $ S $ in a category with zero morphisms is short exact if $ S $ is exact, the differential $ f : X_1 \\\\to X_2 $ is a monomorphism, and the differential $ g : X_2 \\\\to X_3 $ is an epimorp\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: related declarations concern naive cotangent modules, ordinary presheaf differentials, or unrelated resolutions; none states this full standard simplicial sheaf-complex assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical comparison of the differential complex of a polynomial resolution of sheaves of rings with the cotangent complex",
+   "results": "8 hits; KaehlerDifferential.polynomialEquiv, Algebra.formallyEtale_iff, CategoryTheory.ProjectiveResolution.cochainComplex_d, CategoryTheory.ProjectiveResolution.complex_d_succ_comp, CategoryTheory.ProjectiveResolution.cochainComplex_d_assoc, Algebra.Presentation.differentials.comm₁₂, Algebra.Presentation.differentials.hom₁, KaehlerDifferential.polynomialEquiv_comp_D",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give naive ring cotangent modules, individual polynomial differentials, or ordinary projective-resolution facts, not the full simplicial ring-sheaf sequence, roof and arrow identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity differential exact sequence for simplicial polynomial resolutions of ring sheaves identified with the relative cotangent complex",
+   "results": "8 hits; Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ', Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.Generators.H1Cotangent.δ, Algebra.H1Cotangent.exact_map_δ, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.Generators.CotangentSpace.exact",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give naive ring cotangent modules, individual polynomial differentials, or ordinary projective-resolution facts, not the full simplicial ring-sheaf sequence, roof and arrow identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an injective map of sheaves of commutative rings B to C, standard simplicial polynomial resolutions give a short exact sequence of cotangent complexes and a canonical roof of quasi isomorphisms",
+   "results": "8 hits; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Extension.cotangentComplex_injective_iff, Algebra.FormallySmooth.iff_injective_lTensor_residueField, CochainComplex.isKInjective_of_injective_aux, Algebra.FormallySmooth.kerCotangentToTensor_injective_iff, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.SubmersivePresentation.cotangentComplex_injective",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give naive ring cotangent modules, individual polynomial differentials, or ordinary projective-resolution facts, not the full simplicial ring-sheaf sequence, roof and arrow identity"
+  },
+  {
+   "tool": "grep",
+   "query": "exact_cotangentComplex_toKaehler|exact_map_δ|def cotangentComplex|polynomialEquiv",
+   "results": "21 hits; Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Smooth/StandardSmoothCotangent.lean, Mathlib/RingTheory/Extension/ExtendScalars.lean, Mathlib/RingTheory/Smooth/Quotient.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean, Mathlib/RingTheory/Kaehler/Polynomial.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: hits give naive ring cotangent modules, individual polynomial differentials, or ordinary projective-resolution facts, not the full simplicial ring-sheaf sequence, roof and arrow identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-cotangent-transitivity",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Regular pullback of the logarithmic dualizing line along a nodal modification; etale source locality of the adjunction line used in the codimension-one differential calculation of the regular-pullback input; general scheme cotangent transitivity supporting the source-etale determinant comparison; finer split of existing proof: Steps 3-5: sheafified polynomial quotient resolutions, differential exact sequence and arrow-compatible roof",
+   "via": [
+    "lem-sfb-scheme-cotangent-transitivity",
+    "lem-sfb-etale-source-adjunction-line",
+    "lem-sfb-nodal-log-dualizing-pullback",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-injective-sheaf-cotangent-sequence-roof",
+  "worker": "stage1",
+  "summary": "Retained the exact statement and split its construction into eight steps. Reused the existing ring quotient-resolution lemma twice; used arbitrary-variable differential bases to prove exactness without flatness of C/B; used natural resolution comparisons for both roof quasi-isomorphisms; sheafified using the existing tensor, differential and exactness nodes; verified the arrow equality on generators and all restriction maps. No new nodes. Promotion repair: rebased the retained split onto the current unsplit live item, re-read all ten cited current statements and checked all nineteen citation passages; made the balanced associativity identification of the first exact-sequence term explicit in Step 6. Current-return repair (head 1879d25eedb): repeated the current-base dry run, rechecked all cited statements and nineteen quotes, and expanded Step 4 to verify the quotient map preserves augmentation and every face and degeneracy on pure tensors. Repair of returned head a80d68723d0: rebuilt on the current server DAG, reread all ten cited statements and verified all nineteen passages, and expanded Steps 3 and 5 with the finite-support kernel/surjectivity argument and the elementwise restriction-of-scalars/cohomology argument. The statement and route are unchanged. Maintainer-reader Q64 FIX (fca70d5d, third loss): re-applied the a80d6872/1879d25e repairs (Step 5 in D(C); iterated sheaf-algebra induction as Step 6; open-subspace restriction in Step 9), keeping this head's expanded Step 3 coordinate exactness and Step 5 C-linear inverse argument.",
+  "blueprint": "Retained the inherited precise from.place and via chain; blueprint_refs.py ancestor reports None, already inherited from the parent split. Steps 1--3 realize the injective quotient-resolution and differential-sequence portion of parent Steps 3--5; Steps 4--5 the common-resolution roof; Steps 6--8 its sheafification, canonical arrows and restriction compatibility. Whole-blueprint searches for cotangent, polynomial resolution, 08SD and differentials found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-cotangent-resolution-coherence",
+    "why": "Canonical comparison for augmented polynomial ring resolutions, used only for the generic cotangent-complex construction; no trace-formula assertion or unit-level route is substituted."
+   },
+   {
+    "node": "lem-trf-affine-cotangent-comparison",
+    "why": "The sectionwise/sheafified standard cotangent comparison identifies the presheaf construction with the stipulated sheaf models; a generic cotangent foundation, already used by the parent."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Natural module tensor/sheafification comparison for variable presheaf rings; a general module-sheaf tool needed for both quotient resolutions and their differential complexes."
+   },
+   {
+    "node": "lem-trf-sheafified-module-differentials-cokernel",
+    "why": "Universal sheaf differentials are sheafifications of sectionwise differentials; a generic ringed-site construction required to identify the actual complexes in the statement."
+   },
+   {
+    "node": "lem-sp-module-slice-sheafification-independent-ring",
+    "why": "Module sheafification commutes with restriction along the continuous and cocontinuous inclusion of the opens of an open subspace; a generic site tool used only for the open-restriction clause, no unit-level route is replaced (added by the maintainer reader Q64 FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-affine-cotangent-comparison",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-trf-sheafified-module-differentials-cokernel",
+  "lem-sp-module-slice-sheafification-independent-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-fca70d5d5",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-fca70d5d5 (reviewer sub-agent of L); spot-checked: Fourth promotion re-delivery: 28a22329 FIX, then 1879d25e and a80d6872 each lost the FIX and got it re-applied. This head again has none of the repairs. Diff vs the a80d snapshot: statement, stmt_deps, source, blueprint and proof_deps are byte-identical. Steps 1, 2, 4 and 6-8 are identical. Only Step 3 (coordinate kernel, injectivity and surjectivity checks) and Step 5 (C-linear inverse of the cohomology bijection) were rewritten. Both new texts are correct and kept. There are no new nodes, no repair note and no SGA. Only the item and its parent cite 08SZ, so there is no duplicate. I re-read Stacks cotangent.tex 08SZ (l.3278: P,Q,R,S,Qbar,Rbar, the simplicial C-module SES, the triangle in D(C)) and 08SE, and all 13 cited statements in this snapshot. The three faults persist and are re-applied in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-injective-sheaf-cotangent-sequence-roof.json. (1) Step 5: alpha and beta are isomorphisms in D(C), where L_{C/B} lives by the coherence node, not in D(B). (2) C4: lem-trf-affine-cotangent-comparison covers one free-algebra layer and the differential complex, not the iterated P_n. The induction through lem-pc-sites-sheafification-underlying-sets and def-weil-pbc-sheafification is re-applied as Step 6. (3) The parent lem-sfb-scheme-cotangent-transitivity needs restriction to open subschemes. The open-subspace paragraph via lem-sp-module-slice-sheafification-independent-ring is re-applied in Step 9. The fix has 9 steps (max 1700 chars), and proof_deps is the union of the step uses (13). Five generic tool_uses are accepted. Batch-5 check: lem-sfb-injective-standard-resolution-quotients (closure reaches trf resolution-coherence), lem-trf-affine-cotangent-comparison and lem-trf-sheafified-module-differentials-cokernel are general cotangent and sheafification foundations. None is a step of the proof of the trace formula or of Poincare duality, so all are accepted. Edge cases: B=C (T_Q=0); A=B; A->B not injective; C not flat over B (Z into ZxF2); empty opens; infinite variable sets. Maintainer: this FIX has now been lost three times; please land this fix file or have the worker start from it.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Topology.InjectiveSheafCotangentRoof",
+  "declaration": "TopCat.SheafCotangent.exists_injectiveCotangentRoof",
+  "declarations": [
+   "TopCat.SheafCotangent.injectiveRingSheafify",
+   "TopCat.SheafCotangent.injectiveRingSheafPushouts",
+   "TopCat.SheafCotangent.injectiveTargetSquare",
+   "TopCat.SheafCotangent.injectiveBaseSquare",
+   "TopCat.SheafCotangent.injectivePolynomialMap",
+   "TopCat.SheafCotangent.injectiveQuotient",
+   "TopCat.SheafCotangent.injectiveQuotientLeft",
+   "TopCat.SheafCotangent.injectiveQuotientRight",
+   "TopCat.SheafCotangent.injectiveSectionSquare",
+   "TopCat.SheafCotangent.injectiveSectionQuotient",
+   "TopCat.SheafCotangent.injectiveSectionLeft",
+   "TopCat.SheafCotangent.injectiveQuotientTensor",
+   "TopCat.SheafCotangent.InjectiveQuotientModel",
+   "TopCat.SheafCotangent.injectiveQuotientAugmentation",
+   "TopCat.SheafCotangent.QuotientDifferentials",
+   "TopCat.SheafCotangent.quotientDifferentialComplex",
+   "TopCat.SheafCotangent.quotientDifferentialGenerator",
+   "TopCat.SheafCotangent.standardSheafGenerator",
+   "TopCat.SheafCotangent.InjectiveCotangentRoof",
+   "TopCat.SheafCotangent.roofForget",
+   "TopCat.SheafCotangent.roofOpenRings",
+   "TopCat.SheafCotangent.roofOpenComplex",
+   "TopCat.SheafCotangent.quotientTensorSection",
+   "TopCat.SheafCotangent.roofLocalGenerator",
+   "TopCat.SheafCotangent.roofFirstGenerator",
+   "TopCat.SheafCotangent.InjectiveRoofOpenRestriction",
+   "TopCat.SheafCotangent.exists_injectiveCotangentRoof"
+  ],
+  "file": "lean/Sheaf/Topology/InjectiveSheafCotangentRoof.lean",
+  "statement": "theorem exists_injectiveCotangentRoof (C : Coherence.{u}) (S : Comparison C) (F : FlatFunctorialModel C S) {T : TopCat.{u}} {A B E : T.Sheaf CommRingCat.{u}} (f : A ⟶ B) (j : B ⟶ E) (hj : ∀ V : (Opens T)ᵒᵖ, Function.Injective (j.hom.app V)) (D : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, u, u, u + 1, u + 1} j) : ∃ M : InjectiveCotangentRoof C S F f j D, ∀ (U : Opens T) (D' : SheafOfModules.DerivedChangeOfRingsCochainModel.{u, u, u, u + 1, u + 1} ((roofOpenRings U).map j)), ∃ N : InjectiveCotangentRoof C S F ((roofOpenRings U).map f) ((roofOpenRings U).map j) D', Nonempty (InjectiveRoofOpenRestriction C S F M U N)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the recorded normalized standard sheaf model. Quotients are actual simplicial ring-sheaf pushouts with normalized sectionwise tensor presentations. Differential terms are the existing sheaf differential tensors; all roof maps and open-subspace comparisons are fixed on generators. The single postponed theorem asserts the complete sequence, resolution and roof construction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53efbe9ff",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Read the node, Stacks 08SD/08SE/08SZ, the module (27 decls) and the dependency sources (flat model, comparison, coherence, quotientAugmentation, cochain model with E pinned by obj_eq/map_eq). Every clause is stated and pinned: Q̄/R̄ are actual pushouts whose sheafified sectionwise tensor presentations are pinned on pure tensors; sectionwise IsPolynomialResolution; augmentation qis; SES from StandardLinearization plus quotientArrow on generators, ShortExact in every degree; quotientMap fixed by its pushout legs; α, β pinned on generators and qis; derivedIso = Qβ(Qα)⁻¹ with Q q ≫ iso = Q baseArrow in D(E); open restriction through comparisons pinned on generators and all squares. No flatness or extra hypotheses; universes as in the dep; statement verbatim; declarations list exact; docstrings and proof steps present; the only sorry is the theorem. Edge cases j=id, A=B, non-flat j, empty opens, infinite variable sets. Advisories: (1) public duplicate HasSheafify instance injectiveRingSheafify, not defeq to Mathlib's; removing it times out in instance synthesis at l.163, so the attempted FIX was withdrawn and fixes/ is empty; (2) plain defs from theorem nodes lem-sfb-injective-standard-resolution-quotients and lem-trf-affine-cotangent-comparison used without stmt_deps, no cycle; (3) the second reading is the author's self-check."
+ }
+}

@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-homogeneous-line-bundle-sections",
+ "kind": "statement",
+ "title": "Homogeneous line bundles and regular semi-invariant sections",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a reductive $F$-group scheme [def-sc-group-scheme], meaning a smooth connected affine group scheme of finite type with no nontrivial smooth connected normal unipotent subgroup. Unipotent means that all geometric points are unipotent matrices in a faithful linear representation. Fix a split maximal torus $T$ and a Borel subgroup $B\\supseteq T$, and let $Q=G/B$ and $\\pi:G\\to Q$ be the right $B$-torsor of [lem-sfb-reductive-borel-pair-structure]. For any character $\\chi:B\\to\\mathbf G_m$, the quotient of $G\\times\\mathbf A^1$ by the right action $$(g,z)\\cdot b=(gb,\\chi(b)^{-1}z)$$ is a $G$-homogeneous line bundle on $Q$, whose sheaf of sections $\\mathcal L_\\chi$ is an invertible coherent $\\mathcal O_Q$-module. Pullback to $G$ and the specified trivialization give an $F$-linear identification $$\\Gamma(Q,\\mathcal L_\\chi)\\simeq E(\\chi):=\\{f\\in F[G]:f(gb)=\\chi(b)^{-1}f(g)\\text{ for every commutative }F\\text{-algebra }A,\\ g\\in G(A),\\ b\\in B(A)\\}.$$ The identification is equivariant for the natural left $G$-action, which on functions is $(s f)(g)=f(s^{-1}g)$. An invertible sheaf means one locally isomorphic to $\\mathcal O_Q$; coherent means locally finitely generated with finitely generated relations among any finite list of local generators.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 18c (pp.389--390), especially the quotient construction preceding Proposition 18.14; Definition 22.21 (p.468) and the proof of Theorem 22.48 (p.479)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure",
+  "def-sfb-associated-character-line-bundle",
+  "def-sfb-rho-section-module-data",
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "The cited Borel-pair result gives the faithfully flat map $\\pi:G\\to Q$ and $G\\times_QG\\simeq G\\times_FB$. The scheme $G$ is affine of finite type over $F$, so its underlying space is Noetherian by lem-wf-affine-noetherian-components. By lem-sfb-noetherian-space-compact-subsets, every open $\\pi^{-1}(V)$, for $V\\subset Q$ affine open, is quasi-compact. Cover it by affine opens and choose finitely many. Their images cover $V$ since $\\pi$ is surjective, so the definition of fpqc covering applies. Thus $\\{G\\to Q\\}$ is an fpqc covering, and remains so after any base change. We use the torsor isomorphism throughout, including over arbitrary test schemes.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-wf-affine-noetherian-components",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "def-weil-pbc-fpqc-covering",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 18c, p.390; fpqc verification using Stacks topologies.tex Tag 022B (definition-fpqc-covering), Tag 022D (lemma-fpqc), and topology.tex Tag 04ZA (lemma-Noetherian-quasi-compact)."
+   }
+  },
+  {
+   "text": "On $G\\times_QG$, write the second point as $gb$ when the first is $g$. Give the trivial rank-one module $\\mathcal O_G$ the descent isomorphism from its fibre at $g$ to its fibre at $gb$ given by $z\\mapsto\\chi(b)^{-1}z$. This is multiplication by a regular unit, hence is an isomorphism of modules. On the triple overlap $(g,gb,gbc)$ its composite multiplies by $\\chi(c)^{-1}\\chi(b)^{-1}=\\chi(bc)^{-1}$; on the diagonal it is the identity. Apply lem-pc-fpqc-descent to this datum to obtain a quasi-coherent module $\\mathcal L_\\chi$ with $\\pi^*\\mathcal L_\\chi\\simeq\\mathcal O_G$, including that specified descent isomorphism. The rank-one clause of that same node makes $\\mathcal L_\\chi$ invertible in the Zariski topology, not just locally trivial on the flat cover.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "18.11 and Section 18c, pp.389--390; Stacks descent.tex Tag 023T (proposition-fpqc-descent-quasi-coherent) and Tag 05B2 (lemma-finite-locally-free-descends)."
+   }
+  },
+  {
+   "text": "Choose Zariski frames $e_i$ for $\\mathcal L_\\chi$ on $U_i\\subset Q$. On $U_i\\cap U_j$ write $e_j=u_{ij}e_i$ with $u_{ij}$ a regular unit. Glue $U_i\\times\\mathbf A^1$ by $(x,z)_j\\mapsto(x,u_{ij}z)_i$ using lem-weil-pbc-glue-schemes. The equations $u_{ik}=u_{ij}u_{jk}$ verify its cocycle hypothesis. This gives a line bundle $V\\to Q$ whose sections are exactly those of $\\mathcal L_\\chi$: in these charts both are families $z_ie_i$ with $z_i=u_{ij}z_j$. The chosen pullback trivialization gives $V\\times_QG\\simeq G\\times\\mathbf A^1$. Its overlap map is precisely $(g,z)\\mapsto(gb,\\chi(b)^{-1}z)$ by the datum of step 2. Consequently $V$ represents the fpqc sheaf quotient by that right action: every $H\\to V$ lifts to $G\\times\\mathbf A^1$ on the cover $H\\times_QG\\to H$, and two lifts with the same image differ by the unique $b$ supplied by $G\\times_QG\\simeq G\\times B$, with exactly the indicated scalar change. Equality and gluing of these maps are detected on the cover by lem-weil-pbc-fpqc-representable-descent. Since $Q$ is proper over $F$ and $\\mathcal L_\\chi$ invertible, lem-trf-proper-field-invertible-coherent implies that $\\mathcal L_\\chi$ is coherent.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-trf-proper-field-invertible-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 18c, pp.389--390; Stacks schemes.tex Tags 01JB/01JC (lemma-glue, lemma-glue-schemes), descent.tex Tag 023Q (lemma-fpqc-universal-effective-epimorphisms), coherent.tex Tag 01XZ (lemma-coherent-Noetherian)."
+   }
+  },
+  {
+   "text": "First descend $(s,g)\\mapsto\\pi(sg)$ along the fpqc cover $G\\times_FG\\to G\\times_FQ$: its values at $(s,g)$ and $(s,gb)$ agree, since $\\pi(sgb)=\\pi(sg)$. Representable descent supplies the base action morphism. For the total space, left multiplication sends $(g,z)$ to $(sg,z)$ and commutes with the right action, since $s(gb)=(sg)b$ and the scalar factor remains $\\chi(b)^{-1}$. Use the pullback cover $G\\times_F(G\\times\\mathbf A^1)\\to G\\times_FV$ and the map $(s,g,z)\\mapsto[sg,z]$. It agrees on its overlap by the displayed identity, so representable descent supplies $G\\times_FV\\to V$ above the base action. Identity and composition follow by uniqueness after the analogous fpqc pullbacks, where they are $1g=g$ and $s(tg)=(st)g$. Fibrewise linearity is checked in the same trivialization, where $z$ is unchanged. Thus this is the required $G$-homogeneous structure.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 18c, p.390, sentence before Proposition 18.14; Stacks descent.tex Tag 023Q (lemma-fpqc-universal-effective-epimorphisms)."
+   }
+  },
+  {
+   "text": "Pull a section of $\\mathcal L_\\chi$ back to $G$ and write it as $f$ in the specified trivialization. Here $\\Gamma(G,\\mathcal O_G)=F[G]$. The two pullbacks agree as sections of the descended module precisely when $f(gb)=\\chi(b)^{-1}f(g)$. Conversely a regular function satisfying this equation gives compatible pullback sections on $G\\times_QG$; lem-sc-etale-qcoherent-descent-fpqc-sections, applied with $S=T=Q$, $f=\\mathrm{id}_Q$, the quasi-coherent module $\\mathcal L_\\chi$ and the cover $G\\to Q$, gives a unique global section. The equation is an equality of regular functions on $G\\times B$: its functor-of-points formulation on every commutative $F$-algebra is equivalent, as can be seen by evaluating at the universal point with algebra $F[G\\times B]$. Thus the condition is exactly the stated definition of $E(\\chi)$, not a condition merely on $F$-points. Both constructions preserve addition and $F$-scalars in the trivialization, and their composites are the identity by uniqueness of descent. This proves the asserted $F$-linear identification.",
+   "uses": [
+    "lem-sc-etale-qcoherent-descent-fpqc-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 22.48, proof, p.479; Definition 22.21, p.468; Stacks descent.tex Tag 03DT (lemma-sheaf-condition-holds)."
+   }
+  },
+  {
+   "text": "Under the action of step 4 a section transforms by $(s\\sigma)(x)=s\\sigma(s^{-1}x)$. Pulling back at $g$ gives $s[g',f(g')]=[g,f(s^{-1}g)]$ with $g'=s^{-1}g$, so its function is $(sf)(g)=f(s^{-1}g)$. It satisfies $(sf)(gb)=\\chi(b)^{-1}(sf)(g)$. This calculation also verifies the algebraic action, without invoking a cohomology base-change theorem: write $E(\\chi)=\\ker d$, where $d:F[G]\\to F[G\\times B]$ sends $f$ to $((g,b)\\mapsto f(gb)-\\chi(b)^{-1}f(g))$. For any $F$-algebra $A$, a vector-space complement to $\\ker d$ shows $A\\otimes_F\\ker d=\\ker(A\\otimes_Fd)$. Hence the same descent comparison from step 5, applied after base change to $\\operatorname{Spec}A$, identifies its sections with $A\\otimes_FE(\\chi)$. Apply the displayed action calculation for $s\\in G(A)$, in particular for the universal $s$ over $A=F[G]$. It identifies the coaction on sections with the left regular coaction on $E(\\chi)$, proving the claimed equivariance.",
+   "uses": [
+    "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 22.21, p.468, and proof of Theorem 22.48, p.479."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "18.11 and Section 18c, pp.389--390; Definition 22.21, p.468; proof of Theorem 22.48, p.479, with the cited Stacks descent and gluing results spelling out the construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sections of a homogeneous line bundle on a flag variety are regular functions on the algebraic group satisfying right Borel semi invariance",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContinuousCohomology.kerHomogeneousCochainsZeroEquiv\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] →\\n          [inst_3 : TopologicalSpace G] →\\n            [inst_4 : IsTopologicalGroup G] →\\n              (X : Action (TopModuleCat R) G) →\\n                (n : ℕ) →\\n         \", \"doc\": \"For a topological $ R $-module $ X $ equipped with a continuous $ G $-action, when $ n = 1 $, the kernel of the differential map $ d_{0,1} $ in the homogeneous cochain complex is continuously and line\"}\n  {\"name\": \"ContinuousCohomology.invariants\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"(R : Type u_1) →\\n  (G : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : Group G] →\\n        [inst_2 : TopologicalSpace R] → CategoryTheory.Functor (Action (TopModuleCat R) G) (TopModuleCat R)\", \"doc\": \"The functor that assigns to each topological $ R $-module equipped with a continuous $ G $-action its submodule of $ G $-invariant elements, and to each continuous $ G $-equivariant linear map the res\"}\n  {\"name\": \"Rep.indToCoindAux\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} → [DecidableRel ⇑(QuotientGroup.rightRel S)] → (A : Rep k ↥S) → G → ↑A.V →ₗ[k] G → ↑A.V\", \"doc\": \"For a group $G$, subgroup $S$, and representation $A$ in $\\\\text{Rep}(k, G)$, this linear map sends an element $a \\\\in A$ to a function $G \\\\to A$ defined by: for each $g_1 \\\\in G$, if $g_1$ belongs to th\"}\n  {\"name\": \"Representation.linHom.invariantsEquivFDRepHom\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"{k : Type u} →\\n  [inst : Field k] →\\n    {G : Type u} → [inst_1 : Group G] → (X Y : FDRep k G) → ↥(Representation.linHom X.ρ Y.ρ).invariants ≃ₗ[k] X ⟶ Y\", \"doc\": \"For a field $k$ and group $G$, the invariant elements of the linear maps between two finitely generated representations $X$ and $Y$ (fixed by the $G$-action) are linearly equivalent to the space of mo\"}\n  {\"name\": \"ContinuousCohomology.I_obj_V_carrier\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"∀ (R : Type u_1) (G : Type u_2) [inst : CommRing R] [inst_1 : Group G] [inst_2 : TopologicalSpace R]\\n  [inst_3 : TopologicalSpace G] [inst_4 : IsTopologicalGroup G] (rep : Action (TopModuleCat R) G),\\n  ↑((ContinuousCohomology.I R G).obj rep).V.toModuleCat = C(G, ↑rep.V.toModuleCat)\", \"doc\": \"For a commutative ring $ R $ and a topological group $ G $, applying the ContinuousCohomology functor $ I $ to a $ G $-action on a topological $ R $-module results in an object whose underlying module\"}\n  {\"name\": \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"module\": \"Mathlib/RepresentationTheory/Invariants\", \"type\": \"∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] {X : ModuleCat k} {Y : Rep k G}\\n  (f : (Rep.trivialFunctor k G).obj X ⟶ Y),\\n  ModuleCat.Hom.hom (((Rep.invariantsAdjunction k G).homEquiv X Y) f) =\\n    LinearMap.codRestrict Y.ρ.invariants (ModuleCat.Hom.hom f.hom) ⋯\", \"doc\": \"For any commutative ring $k$, group $G$, $k$-module $X$, and $G$-representation $Y$, the hom equivalence of the adjunction between the trivial representation functor and the invariants functor maps a \"}\n  {\"name\": \"ContinuousCohomology.Iobj_ρ_apply\", \"module\": \"Mathlib/Algebra/Category/ContinuousCohomology/Basic\", \"type\": \"∀ (R : Type u_1) (G : Type u_2) [inst : CommRing R] [inst_1 : Group G] [inst_2 : TopologicalSpace R]\\n  [inst_3 : TopologicalSpace G] [inst_4 : IsTopologicalGroup G] (rep : Action (TopModuleCat R) G) (g : G)\\n  (f : ↑(ContinuousCohomology.Iobj rep).V.toModuleCat) (x : G),\\n  ((TopModuleCat.Hom.hom ((Co\", \"doc\": \"Given a topological ring $ R $, a topological group $ G $, and a continuous action $ \\\\rho $ of $ G $ on a topological $ R $-module $ V $, the induced action of $ G $ on the space $ C(G, V) $ of contin\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : Finite G] → [Fintype G] → (X : FDRep k G) → ↑X.V → (TannakaDuality.FiniteGroup.rightFDRep ⟶ X)\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group induction, topological bundles and functions on finite groups do not identify algebraic regular functions with sections on a flag scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated line bundle on G mod B has global sections equal to induced representation with inverse character equivariance",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Representation.ind_mk\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"∀ {k : Type u_1} {G : Type u_2} {H : Type u_3} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] (φ : G →* H)\\n  {A : Type u_4} [inst_3 : AddCommGroup A] [inst_4 : Module k A] (ρ : Representation k G A) (h₁ h₂ : H) (a : A),\\n  ((Representation.ind φ ρ) h₁) ((Representation.IndV.mk φ ρ h₂) a) =\", \"doc\": \"For any elements $h_1, h_2 \\\\in H$ and $a \\\\in A$, the action of $h_1$ on the induced module element constructed from $h_2$ and $a$ results in the element constructed from $h_2 \\\\cdot h_1^{-1}$ and $a$. \"}\n  {\"name\": \"Rep.indToCoindAux\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} → [DecidableRel ⇑(QuotientGroup.rightRel S)] → (A : Rep k ↥S) → G → ↑A.V →ₗ[k] G → ↑A.V\", \"doc\": \"For a group $G$, subgroup $S$, and representation $A$ in $\\\\text{Rep}(k, G)$, this linear map sends an element $a \\\\in A$ to a function $G \\\\to A$ defined by: for each $g_1 \\\\in G$, if $g_1$ belongs to th\"}\n  {\"name\": \"Rep.indResHomEquiv_symm_apply_hom\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"∀ {k G H : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Group H] (φ : G →* H) (A : Rep k G) (B : Rep k H)\\n  (f : A ⟶ (Action.res (ModuleCat k) φ).obj B),\\n  ((Rep.indResHomEquiv φ A B).symm f).hom =\\n    ModuleCat.ofHom\\n      (Representation.Coinvariants.lift (Representation.tprod (MonoidH\", \"doc\": \"For a commutative ring $ k $, groups $ G $ and $ H $, a group homomorphism $ \\\\varphi: G \\\\to H $, a $ kG $-representation $ A $, and a $ kH $-representation $ B $, the inverse of the induction-restrict\"}\n  {\"name\": \"TannakaDuality.FiniteGroup.ofRightFDRep_hom\", \"module\": \"Mathlib/RepresentationTheory/Tannaka\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] [inst_2 : Finite G] [inst_3 : Fintype G] (X : FDRep k G)\\n  (v : ↑X.V),\\n  (TannakaDuality.FiniteGroup.ofRightFDRep X v).hom =\\n    CategoryTheory.InducedCategory.homMk (ModuleCat.ofHom (TannakaDuality.FiniteGroup.sumSMulInv v))\", \"doc\": \"For a finite group $G$, commutative ring $k$, and representation $X$ in $\\\\text{FDRep}_k(G)$, this constructs a morphism from the right regular representation of $G$ to $X$ by mapping each function $f:\"}\n  {\"name\": \"Rep.coindToInd\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} → (A : Rep k ↥S) → [S.FiniteIndex] → ↑(Rep.coind S.subtype A).V →ₗ[k] ↑(Rep.ind S.subtype A).V\", \"doc\": \"A $ k $-linear map from the coinduced representation module $ \\\\mathrm{Coind}_S(A) $ to the induced representation module $ \\\\mathrm{Ind}_S(A) $, defined by summing over coset representatives of the quo\"}\n  {\"name\": \"Rep.coindVEquiv\", \"module\": \"Mathlib/RepresentationTheory/Coinduced\", \"type\": \"{k G H : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Monoid G] →\\n      [inst_2 : Monoid H] →\\n        (φ : G →* H) →\\n          (A : Rep k G) →\\n            ↥(Representation.coindV φ A.ρ) ≃ₗ[k] (Action.res (ModuleCat k) φ).obj (Rep.leftRegular k H) ⟶ A\", \"doc\": \"For a commutative ring $k$, monoids $G$ and $H$, a monoid homomorphism $\\\\varphi: G \\\\to H$, and a $k$-module $A$ with $G$-action $\\\\rho$, this establishes a $k$-linear equivalence between the coinduced \"}\n  {\"name\": \"Rep.indResHomEquiv\", \"module\": \"Mathlib/RepresentationTheory/Induced\", \"type\": \"{k G H : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      [inst_2 : Group H] →\\n        (φ : G →* H) → (A : Rep k G) → (B : Rep k H) → (Rep.ind φ A ⟶ B) ≃ₗ[k] A ⟶ (Action.res (ModuleCat k) φ).obj B\", \"doc\": \"For a commutative ring $ k $, groups $ G $ and $ H $, a group homomorphism $ \\\\varphi: G \\\\to H $, and representations $ A $ of $ G $ and $ B $ of $ H $, there is a $ k $-linear isomorphism between the \"}\n  {\"name\": \"Rep.indToCoind\", \"module\": \"Mathlib/RepresentationTheory/FiniteIndex\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      {S : Subgroup G} →\\n        [DecidableRel ⇑(QuotientGroup.rightRel S)] →\\n          (A : Rep k ↥S) → ↑(Rep.ind S.subtype A).V →ₗ[k] ↑(Rep.coind S.subtype A).V\", \"doc\": \"The linear map from the induced representation of a subgroup $S$ on a module $A$ to the coinduced representation, constructed by lifting a bilinear map through the tensor product with the left regular\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group induction, topological bundles and functions on finite groups do not identify algebraic regular functions with sections on a flag scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedBundle\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group induction, topological bundles and functions on finite groups do not identify algebraic regular functions with sections on a flag scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "inducedRepresentation|semiInvariant|semi.invariant|homogeneous.*line.bundle|flag.variety",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group induction, topological bundles and functions on finite groups do not identify algebraic regular functions with sections on a flag scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a Borel subgroup B the regular functions satisfying f(gb)=chi(b) inverse times f(g) form the sections of an associated line bundle on G/B",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TannakaDuality.FiniteGroup.leftRegular\", \"module\": \"Mathlib.RepresentationTheory.Tannaka\", \"type\": \": Representation k G (G → k)\", \"doc\": \"Let $G$ be a finite group and $k$ be a commutative ring. The left regular representation of $G$ over $k$ is the representation on the $k$-module of functions from $G$ to $k$. The action of an element \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf\", \"type\": \"{U : Opens (ProjectiveSpectrum.top 𝒜)} (f : ∀ x : U, at x.1) : Prop\", \"doc\": \"A function $ f $ defined on an open set $ U $ of the projective spectrum is a section of the structure sheaf if there exists a degree $ i $, homogeneous elements $ r, s $ of degree $ i $ in the graded\"}\n  {\"name\": \"GroupExtension.Section.instFunLike\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \": FunLike S.Section G E\", \"doc\": \"For a group extension $1 \\\\to N \\\\to E \\\\to G \\\\to 1$, the set of sections $s : G \\\\to E$ is equipped with a function-like structure. This means sections can be treated as functions from $G$ to $E$, with t\"}\n  {\"name\": \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"[IrreducibleSpace X] (U : X.Opens) [Nonempty U] : Algebra Γ(X, U) X.functionField\", \"doc\": \"For an irreducible scheme $X$ and a non-empty open subset $U$ of $X$, the ring of sections $\\\\Gamma(X, U)$ over $U$ is equipped with an algebra structure over the function field of $X$. This algebra st\"}\n  {\"name\": \"Representation.leftRegular\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(k : Type u_1) → [inst : CommSemiring k] → (G : Type u_2) → [inst_1 : Monoid G] → Representation k G (G →₀ k)\", \"doc\": \"The left regular representation of a monoid $G$ over a commutative semiring $k$, constructed by letting $G$ act on itself via left multiplication and extending this action to the space of finite suppo\"}\n  {\"name\": \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"[IsAffine X] (r : Γ(X, ⊤)) : IsLocalization.Away r Γ(X, X.basicOpen r)\", \"doc\": \"For a scheme $ X $, an open subset $ U $ of $ X $, and a section $ f $ of the structure sheaf over $ U $, the ring of sections over the basic open set $ D(f) $ (consisting of points where the germ of \"}\n  {\"name\": \"Bundle.Trivial.symmₗ_trivialization\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"(x : B) : (trivialization B F).symmₗ 𝕜 x = LinearMap.id\", \"doc\": \"For any base point $x$ in the base space $B$, the inverse of the canonical linear trivialization of the trivial bundle with fiber $F$ at $x$ is the identity linear map on the fiber $F$.\"}\n  {\"name\": \"VectorBundleCore.localTriv_symmL\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"{b : B} (hb : b ∈ (Z.localTriv i).baseSet) : (Z.localTriv i).symmL R b = Z.coordChange i (Z.indexAt b) b\", \"doc\": \"For each index $i$ and a point $b$ in the base set of the $i$-th local trivialization of the vector bundle, the inverse of the local trivialization map at $b$ is equal to the coordinate change functio\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-group induction, topological bundles and functions on finite groups do not identify algebraic regular functions with sections on a flag scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "semiInvariant|semi.invariant|homogeneous.*line.bundle|flag.variety",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or continuous representations, general sheaf presentations or global-section notation, not an algebraic group torsor and its regular semi-invariant functions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of a homogeneous line bundle on G mod B are regular functions f with f(gb) equal to the inverse character of b times f(g)",
+   "results": "8 hits: AlgebraicGeometry.termΓ(_,_), CategoryTheory.Sheaf.Γ, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.StructureSheaf.globalSectionsIso_hom, AlgebraicGeometry.Proj.basicOpenIsoAway_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or continuous representations, general sheaf presentations or global-section notation, not an algebraic group torsor and its regular semi-invariant functions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedBundle\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or continuous representations, general sheaf presentations or global-section notation, not an algebraic group torsor and its regular semi-invariant functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sections of an algebraic homogeneous line bundle on a flag variety are regular functions on the group with right character equivariance",
+   "results": "8 hits: ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, TannakaDuality.FiniteGroup.ofRightFDRep, ContinuousCohomology.I_obj_V_carrier, Rep.leftRegularHomEquiv, FDRep.char_linHom, Rep.indToCoindAux, Rep.invariantsAdjunction_homEquiv_apply_hom, TannakaDuality.FiniteGroup.ofRightFDRep_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or continuous representations, general sheaf presentations or global-section notation, not an algebraic group torsor and its regular semi-invariant functions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fpqc descent of a rank one locally free sheaf with character cocycle gives an associated line bundle on a torsor quotient",
+   "results": "8 hits: SheafOfModules.Presentation.mapGenerators, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.ιFree, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract or continuous representations, general sheaf presentations or global-section notation, not an algebraic group torsor and its regular semi-invariant functions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rho-section-modules",
+  "date": "2026-10-23",
+  "group": "NM"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Regular-function realization of sections on the flag quotient used for finite dimensionality of the rho section modules.",
+   "via": [
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homogeneous-line-bundle-sections",
+  "worker": "stage1",
+  "summary": "Checked Milne 18c and 22.48, retained the inverse-character convention, and gave the character cocycle, rank-one descent, Zariski chart gluing, sheaf-quotient identification, left linearization and regular-section calculation. Reused existing general tools; no new nodes. Searches found no exact completed project attachment or Mathlib match. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Regular-function realization of sections on the flag quotient used for finite dimensionality of the rho section modules. This is an inherited support chain with null blueprint ancestor, not a new blueprint route; the latest direct-image proof (3) remains the ancestor context.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic fpqc descent of quasi-coherent modules (Stacks 023T, 05B2): step 2 takes effectivity of the character descent datum and its rank-one/finite-locally-free reflection; the unit sk-thm-sf-ctf-stability and the units it cites have no descent statement."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Generic coherence tool for an invertible module on a proper field scheme; the unit has no corresponding statement."
+   },
+   {
+    "node": "lem-sc-etale-qcoherent-descent-fpqc-sections",
+    "why": "Generic fpqc descent of sections of a quasi-coherent pullback, used for the explicit regular-function comparison; no unit-specific replacement exists."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descent",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-sc-etale-qcoherent-descent-fpqc-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-b8c6e3536",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-b8c6e3536 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full. FIX only adds a missing tool_uses declaration. The statement and stmt_deps are byte-identical to the base (live node is still unsplit with an empty proof). There are no new nodes and no re-split note. Source: Milne iAG 2017 §18c pp.389-390, Def 22.21 p.468 and the proof of 22.48 p.479 give the same quotient (g,x)b=(gb,χ(b⁻¹)x) and the same E(χ) condition f(xb)=f(x)χ(b⁻¹), and the item matches. Step 1: π is flat and surjective, G is Noetherian, so π⁻¹(affine) is quasi-compact; this meets fpqc Tag 022B and 022D(3). Step 2: checked the cocycle χ(bc)⁻¹=χ(c)⁻¹χ(b)⁻¹ and the diagonal; the 023T node clauses (1)-(3) give effective descent and a Zariski-invertible L_χ; the sign matches (142). Step 3: chart gluing (01JB), V×_QG≅G×A¹ with the correct overlap, the quotient property via 023Q, coherence via 01XZ (Q proper by the Borel-pair node). Step 4: the base and total-space actions descend along base changes of π; identity and composition by uniqueness. Step 5: 03DT with S=T=Q and the cover G→Q; the condition holds as an identity on G×B and hence on all A-points. Step 6: recomputed (sf)(g)=f(s⁻¹g); A⊗ker d=ker(A⊗d) over a field; the universal point gives the coaction. Small cases G=B=1, G=B=T (weight χ on both sides) and trivial χ are consistent. No duplicate found in dag/nodes. Batch-5: lem-trf-proper-field-invertible-coherent is generic Stacks 01XZ/01T6 coherence. It is outside both assumed statements and their proofs, and its 81-node closure reaches no other trace-formula or Poincaré-duality node and no nt-assume leaf, so I accept it. Tool uses accepted: lem-trf-proper-field-invertible-coherent; lem-sc-etale-qcoherent-descent-fpqc-sections (actually inside the route through sk-prop-h2); lem-pc-fpqc-descent (sk-thm-picard-descent), off-route, generic 023T descent, but undeclared. FIX: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-homogeneous-line-bundle-sections.json adds lem-pc-fpqc-descent to split_report.tool_uses; nothing else changes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.HomogeneousLineBundleSections",
+  "declaration": "AlgebraicGeometry.exists_homogeneousLineBundle_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/HomogeneousLineBundleSections.lean",
+  "statement": "theorem exists_homogeneousLineBundle_sections {F : Type u} [Field F] [IsAlgClosed F] (G : Grp (Over (Spec (.of F)))) (hG : ReductiveTorusCentralizer.IsReductive G) (T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ G) (iB : B ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hTs : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsBorelGroupScheme iB.hom.hom) (j : T ⟶ B) (hj : j ≫ iB = iT) (Q : Over (Spec (.of F))) (π : G.X ⟶ Q) (hQ : IsProper Q.hom) (hQft : LocallyOfFiniteType Q.hom) (hQqc : QuasiCompact Q.hom) (hπf : Flat π.left) (hπs : Surjective π.left) (hπi : (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) ≫ π = fst G.X B.X ≫ π) (hπt : IsPullback (fst G.X B.X) (fst G.X B.X * (snd G.X B.X ≫ iB.hom.hom)) π π) (χ : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) : ∃ ψ : B ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), ψ.hom.hom = χ.hom.hom⁻¹ ∧ ∃ P : AssociatedCharacterLineBundle.Presentation G B iB Q π χ, P.L.IsInvertible ∧ Scheme.Modules.isCoherent Q.left P.L ∧ ∃ e : AssociatedCharacterLineBundle.sections Q P.L ≃ₗ[F] RhoSection.sectionModule G B iB ψ 1, (∀ σ : AssociatedCharacterLineBundle.sections Q P.L, (e σ).val = AssociatedCharacterLineBundle.pullbackCoordinate π P.L P.trivialization σ) ∧ ∀ (S : Over (Spec (.of F))) (s g : S ⟶ G.X) (σ : AssociatedCharacterLineBundle.sections Q P.L), lift s ((P.sectionRepresentation S ((s⁻¹ * g) ≫ π) (AssociatedCharacterLineBundle.pullTopSection ((s⁻¹ * g) ≫ π).left P.L σ)).val) ≫ P.totalAction.smul = lift g (AssociatedCharacterLineBundle.linePoint S (((algΓ (.of F)).map (s⁻¹ * g)).unop.hom (e σ).val)) ≫ P.quotientMap",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1da22b715",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Item statement byte-identical to base; only lean+stmt_deps changed (new def-sfb-associated-character-line-bundle plus landed def-sfb-rho-section-module-data and def-sc-invertible-module). Hypotheses = verbatim conclusion of reductive_borel_pair_structure (Q,π torsor, proper, flat, surjective). ψ pinned to χ⁻¹; sectionModule ψ 1 = E(χ) over all F-algebras. Presentation pins the quotient (exact orbit relation, fpqc atlas), the natural section representation normalized to [g,z], and the base/total ModObj actions to π(sg)/[sg,z]. e is pinned to pullback+trivialization; the equivariance clause gives (sf)(g)=f(s⁻¹g) on all test schemes. New def node fields per §5/H12; no duplicate in DAG/Mathlib/upstream. No sorry in the def module, statement verbatim, docstrings with all 6 steps, no line over 100 chars. Edge cases trivial χ, B=G=T, E=0, any characteristic, single universe OK. Advisory: isCoherent (qcoh+f.p.) vs Stacks 01BV agree on the locally Noetherian Q; IsReductive/Borel/splitTorus owners reached only via stmt_dep nodes."
+ }
+}

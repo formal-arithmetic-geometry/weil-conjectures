@@ -1,0 +1,139 @@
+{
+ "id": "lem-trf-affine-monoscheme-hom-ext",
+ "kind": "statement",
+ "title": "Rigidity of local morphisms to an ordinary affine monoid spectrum",
+ "statement": "Let P be a fine commutative monoid and T any space with a sheaf of commutative monoids, with unsharpened affine spectrum A(P), canonical numerator sections and local morphisms as in [def-trf-fine-fan-blowup] and [def-trf-monoscheme-toric-realization]. If local morphisms f,g : T -> A(P) have equal pullbacks of all canonical global numerator sections, then f=g as sheafed-space morphisms. This is a uniqueness assertion only and asserts no existence of a morphism for arbitrary section data.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+ },
+ "stmt_deps": [
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization"
+ ],
+ "proof": [
+  {
+   "text": "For a prime q, take its smallest neighborhood D(b) from [lem-trf-monoid-prime-minimal-neighborhood]. Every germ of the ordinary structure sheaf is uniquely its section on that smallest neighborhood, with sections P_b=P-(P\\q); in the local-fraction construction and its sheafification this is the usual localization stalk. The same lemma implies that the canonical germ of p is a unit exactly when p is outside q. Pullback commutes with germs. By locality, at each t the membership p in f(t) and p in g(t) is therefore equivalent to the common pulled-back section having nonunit germ at t. Extensionality of prime ideals and of continuous maps gives equality of the underlying base maps.",
+   "uses": [
+    "lem-trf-monoid-prime-minimal-neighborhood",
+    "def-trf-fine-fan-blowup",
+    "def-trf-monoscheme-toric-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  },
+  {
+   "text": "After identifying the base maps, on D(a) naturality forces the image of a numerator p to be the restriction of its global pullback, and preservation of units forces the image of a inverse to be the unique inverse of the pulled-back a. Every element of P[a inverse] is p/a^n, so the two section homomorphisms agree on D(a). Clause (a) of [lem-weil-pbc-sheaf-morphism-on-basis], applied with target the pushforward of the sheaf on T, extends equality from this principal-open basis to all opens. Consequently the sheaf maps and the sheafed-space morphisms agree. No existence theorem or affine Hom bijection has been used.",
+   "uses": [
+    "def-trf-fine-fan-blowup",
+    "lem-weil-pbc-sheaf-morphism-on-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.1.8(i) and its proof, printed p.99, using 3.1.2--3.1.6, pp.98--99. This is the unsharpened assertion (i), not the sharp-stalk assertion (ii). No Stacks tag states this monoidal-space result."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-monoid-prime-minimal-neighborhood",
+  "def-trf-fine-fan-blowup",
+  "def-trf-monoscheme-toric-realization",
+  "lem-weil-pbc-sheaf-morphism-on-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.1.8(i), printed p.99, with 3.1.2--3.1.6, pp.98--99; details of the straightforward sheaf construction written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two local morphisms of monoidal spaces into an ordinary affine monoid spectrum are equal when they pull back each canonical numerator to the same global section.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ext_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X Y : Scheme} [IsAffine Y] {f g : X ⟶ Y} (e : f.appTop = g.appTop) : f = g\", \"doc\": \"For any schemes $X$ and $Y$ where $Y$ is affine, if two morphisms $f, g : X \\to Y$ induce the same map on global sections of the structure sheaf (i.e., $f^\\\\#(\\\\top) = g^\\\\#(\\\\top)$), then $f = g$. This es\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  f = g ↔\\n    CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n        CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) ∧\\n      ∀ (i : n),\\n        \", \"doc\": \"Two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over a base scheme $S$ are equal if and only if (1) their compositions with the canonical morphism $\\\\mathbb{A}^n_S \\\\to S$ are equal\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv\", \"module\": \"Mathlib.AlgebraicGeometry.AffineSpace\", \"type\": \": (X ⟶ Spec ℤ[n]) ≃ (n → Γ(X, ⊤))\", \"doc\": \"There is a natural equivalence between the set of morphisms from a scheme $ X $ to the affine space $ \\\\mathbb{A}^n_\\\\mathbb{Z} $ (realized as $ \\\\operatorname{Spec}(\\\\mathbb{Z}[x_1, \\\\dots, x_n]) $) and t\"}\n  {\"name\": \"IsLocalization.monoidHom_ext\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \"{P : Type*} [Monoid P] ⦃j k : S →* P⦄ (h : j.comp (algebraMap R S : R →* S) = k.comp (algebraMap R S)) : j = k\", \"doc\": \"Given a localization $ S $ of a commutative semiring $ R $ at a submonoid $ M $, and a monoid $ P $, any two monoid homomorphisms $ j, k : S \\\\to P $ that satisfy $ j \\\\circ \\\\mathrm{algebraMap}(R, S) = \"}\n  {\"name\": \"CommMonCat.Hom.ext\", \"module\": \"Mathlib.Algebra.Category.MonCat.Basic\", \"type\": \"∀ {A B : CommMonCat} {x y : A.Hom B}, x.hom' = y.hom' → x = y\", \"doc\": \"Two morphisms between objects in a commutative monoidal category are equal if their induced monoid homomorphisms (with respect to the tensor product structure) are equal.\"}\n  {\"name\": \"Submonoid.LocalizationMap.ext\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \"{f g : LocalizationMap S N} (h : ∀ x, f x = g x) : f = g\", \"doc\": \"If two localization maps $f$ and $g$ with respect to a submonoid $S$ satisfy $f(x) = g(x)$ for all $x$, then $f = g$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.ext_iff\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} {x y : X.Hom Y}, x = y ↔ x.base = y.base ∧ x.c ≍ y.c\", \"doc\": \"Two morphisms between locally ringed spaces are equal if and only if their underlying continuous maps between the topological spaces are equal and their associated natural transformations between the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Hom.ext'_iff\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} {f g : X ⟶ Y}, f = g ↔ f.toHom = g.toHom\", \"doc\": \"Two morphisms between locally ringed spaces are equal if and only if their underlying morphisms in the category of presheafed spaces over commutative rings are equal, i.e., their continuous maps and s\"}\n\nInspected the returned signatures and their source: ring-spectral results require commutative rings or locally ringed spaces. The monoid-localization lift/ext lemmas concern a single monoid homomorphism, not a sheafed-space morphism and its locality. None states this ordinary monoid-spectrum assertion. Searches of the project and the current blueprint found only the parent universal property, its downstream spectrum_hom_universal restatement, and sharp variants; the downstream restatement depends on the parent and cannot be used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local morphism into the unsharpened spectrum of a fine commutative monoid is determined by its homomorphism on canonical global numerator sections.",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : CommRingCat}\\n  {f : R ⟶ AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)}\\n  {β : X ⟶ AlgebraicGeometry.Spec.locallyRingedSpaceObj R},\\n  CategoryTheory.CategoryStruct.comp X.toΓSpec.base (AlgebraicGeometry.Spec.locallyRingedSpaceMap f).base \", \"doc\": \"Given a locally ringed space $ X $ and a commutative ring $ R $, if a morphism $ \\\\beta: X \\\\to \\\\operatorname{Spec}(R) $ satisfies two conditions: (1) its base map agrees with the composition of the Γ-S\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X)))\\n  (f :\\n    (AlgebraicGeometry.Spec.structureSheaf ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))).val.obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      X.preshe\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, a morphism $f$ from the localization $\\\\Gamma(X)_r$ to the sections over the basic open subset $X_{D(r)}$ s\"}\n  {\"name\": \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {X : AlgebraicGeometry.RingedSpace} {R : CommRingCat} {α β : X ⟶ AlgebraicGeometry.Spec.sheafedSpaceObj R}\\n  (w : α.hom.base = β.hom.base),\\n  (∀ (r : ↑R),\\n      let U := PrimeSpectrum.basicOpen r;\\n      CategoryTheory.CategoryStruct.comp\\n          (CategoryTheory.CategoryStruct.comp (AlgebraicGeom\", \"doc\": \"For any ringed space $X$ and commutative ring $R$, if two morphisms $\\\\alpha, \\\\beta : X \\\\to \\\\operatorname{Spec}(R)$ have equal underlying continuous maps and for every $r \\\\in R$ the induced maps on sec\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"(X : AlgebraicGeometry.LocallyRingedSpace) →\\n  (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))) →\\n    (AlgebraicGeometry.Spec.structureSheaf ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))).val.obj\\n        (Opposite.op (PrimeSpectrum.basicOpen r)) ⟶\\n      X.presheaf.\", \"doc\": \"For a locally ringed space $X$ and element $r$ in its ring of global sections $\\\\Gamma(X)$, this is the canonical ring homomorphism from the localization $\\\\Gamma(X)_r$ to the ring of sections over the \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.to_global_factors_apply\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (x : CategoryTheory.ToType { carrier := R, commRing := inst }),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.toOpen R ⊤)) x =\\n    (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).val.map (CategoryTheory.eqT\", \"doc\": \"For any commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections of the structure sheaf $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)} $ over the entire prime spectrum $ \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.to_global_factors\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R],\\n  AlgebraicGeometry.StructureSheaf.toOpen R ⊤ =\\n    CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (algebraMap R (Localization.Away 1)))\\n      (CategoryTheory.CategoryStruct.comp (CommRingCat.ofHom (AlgebraicGeometry.StructureSheaf.toBasicOpen R 1))\\n       \", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to the ring of global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphism. \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (s f : R) (g : ↥(Submonoid.powers s)),\\n  (AlgebraicGeometry.StructureSheaf.toBasicOpen R s) (IsLocalization.mk' (Localization.Away s) f g) =\\n    AlgebraicGeometry.StructureSheaf.const R f (↑g) (PrimeSpectrum.basicOpen s) ⋯\", \"doc\": \"The canonical ring homomorphism from the localization $ R_s $ of a commutative ring $ R $ at an element $ s $ to the ring of sections $ \\\\mathcal{O}(D(s)) $ over the basic open set $ D(s) = \\\\{\\\\mathfrak\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace) (r : ↑(AlgebraicGeometry.LocallyRingedSpace.Γ.obj (Opposite.op X))),\\n  X.toΓSpecSheafedSpace.hom.c.app (Opposite.op (PrimeSpectrum.basicOpen r)) = X.toΓSpecCApp r\", \"doc\": \"For a locally ringed space $X$ and element $r$ in its global sections $\\\\Gamma(X)$, the component of the natural transformation $\\\\Gamma$-Spec at the basic open set $D(r)$ coincides with the canonical l\"}\n\nInspected the returned signatures and their source: ring-spectral results require commutative rings or locally ringed spaces. The monoid-localization lift/ext lemmas concern a single monoid homomorphism, not a sheafed-space morphism and its locality. None states this ordinary monoid-spectrum assertion. Searches of the project and the current blueprint found only the parent universal property, its downstream spectrum_hom_universal restatement, and sharp variants; the downstream restatement depends on the parent and cannot be used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "local_affine_hom_ext|monoid.*spectrum.*ext|MonoidalSpace",
+   "results": "[grep] OK 0 hit(s)\n\nInspected the returned signatures and their source: ring-spectral results require commutative rings or locally ringed spaces. The monoid-localization lift/ext lemmas concern a single monoid homomorphism, not a sheafed-space morphism and its locality. None states this ordinary monoid-spectrum assertion. Searches of the project and the current blueprint found only the parent universal property, its downstream spectrum_hom_universal restatement, and sharp variants; the downstream restatement depends on the parent and cannot be used here.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineMonoschemeHomUniversal",
+  "date": "2026-10-26",
+  "group": "V2"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, 3.1.17--3.1.23, Lemmas 3.2.9, 3.2.12 and 3.2.15, Lemma 3.2.17 and Corollary 3.2.18, printed pp.101--105; regular-over-Q application in 3.2.19, p.106. Re-split of lem-trf-toric-monoid-comparison, original step(s) 7: Saturated monomial blowup charts commute with free monoid products. Supporting input for the categorical monoscheme chart pullback: ILO VIII Lemma 3.1.8(i), p.99, the unsharpened spectrum/global-sections bijection used with the amalgamated sum in Remark 3.1.23. Split of the affine-monoscheme universal property: uniqueness from numerator pullbacks, original step 5.",
+   "via": [
+    "lem-trf-affine-monoscheme-hom-universal",
+    "lem-trf-saturated-blowup-product-charts",
+    "lem-trf-toric-monoid-comparison",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineMonoschemeHomExt",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMonoschemeHomExt.lean",
+  "declaration": "AlgebraicGeometry.Monoscheme.local_affine_hom_ext",
+  "declarations": [
+   "AlgebraicGeometry.Monoscheme.local_affine_hom_ext"
+  ],
+  "statement": "theorem local_affine_hom_ext (P : Type u) [CommMonoid P] (hP : FineFan.IsFine P)\n    (T : SheafedSpace CommMonCat.{u}) (f g : T ⟶ affine P)\n    (hf : FineFan.IsLocalMorphism f) (hg : FineFan.IsLocalMorphism g)\n    (h : (SheafedSpace.Γ.map f.op).hom.comp (affineSection P) =\n      (SheafedSpace.Γ.map g.op).hom.comp (affineSection P)) : f = g",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T092841-L-3472970",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T092841-L-3472970",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

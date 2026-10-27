@@ -16,110 +16,62 @@
  ],
  "proof": [
   {
-   "text": "Use the simultaneous ringed-diagram models supplied by [lem-sf-integral-compactification-system-realization]. A flat-term K-flat representative for a system pullback is sent termwise by the exact inverse-image map, and a K-injective representative computes the proper direct image; a quasi-compact open extension is termwise exact. Reindexing a cochain complex and changing its differential by the shift sign commutes with each degree-zero component map. The K-injective shift lemma preserves the resolution class, while the derived-adjunction shift lemma identifies the direct-image comparison with the one characterized by its unit and counit. Thus the canonical comparisons for P_v, S_p and J_j are natural in every input slot and commute with the single-shift square.",
+   "text": "Case on the selected basic operation. For inverse image, proper image and open extension the prescribed system and integral comparisons are components of the CommShift structures already in def-pur-integral-operation-shift-data (proper integral image uses its defining composite). For each tensor slot use system_tensor_laws and integral_tensor_laws of lem-pur-basic-system-shift-resolution-calculus at the fixed second operand. These give exactly the prescribed signed components, including zero and addition coherence.",
    "uses": [
-    "lem-sf-integral-compactification-system-realization",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-kinjective-shift",
-    "lem-weil-pbc-derived-adjunction-shift"
+    "def-pur-integral-operation-shift-data",
+    "lem-pur-basic-system-shift-resolution-calculus"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: the basic operations used in the expression-tree recursion; agent-written termwise shift calculation"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; stage-3 assembly of the prescribed basic shifts"
    }
   },
   {
-   "text": "For derived tensor choose flat-term K-flat representatives and use the comparison $t_{a,b}$ of [lem-pur-shifted-tensor-morphism-calculus], which multiplies the summand $M[a]^p\\otimes N[b]^q$ by $(-1)^{bp}$. If the first input is shifted ($t_{r,0}$) the comparison is the identity on reindexed summands; if the second input is shifted ($t_{0,r}$) it multiplies the summand whose first factor has degree $p$ by $(-1)^{rp}$. In both cases the two total differentials agree after this factor, so it is a chain isomorphism (a factor $(-1)^{rp}$ in the first slot would fail for odd $r$). The signed tensor-morphism calculus states that this comparison is natural, associative and compatible with the Koszul symmetry. The completed integral tensor has the same signed finite-level comparison and the cone comparison on the reduction tower, and its quotient transitions commute with it: for the second slot this is [lem-sf-completed-tensor-shift-right]; for the first slot the finite-level maps are identities, which commute with transitions, and the cone map of Step 3 applies. Consequently the tensor operation and the tensor component of d_A have the required shift square in either slot.",
+   "text": "Compose reductionShift, the system CommShift witness of Step 1, and limitShift by the Mathlib composite CommShift instance of lem-weil-pbc-commshift-nattrans-comp-whisker. Its component formula is exactly the expanded sourceShift after functoriality of map and associativity. For proper image sourceShift evaluates this same canonical composite directly through basicIntegralPushShift, avoiding normalization of the concrete derived-limit model. This preserves the specified total-limit normalization; no alternative comparison is chosen.",
    "uses": [
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-sf-completed-tensor-shift-right",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: tensor reassociation and coefficient comparisons; agent-written signed tensor calculation"
-   }
-  },
-  {
-   "text": "Give the reduction and total-limit functors the termwise shift maps. The reduction functor is defined by termwise derived scalar extension, so its map is the identity on reindexed components. For the total limit use the Roos model of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]: the limit is the total cone of 1-s on the product of the tower complexes. Shift the product degreewise and send a cone pair (b,a) to (b,(-1)^r a). The cone differential calculation gives a chain map, and strictness of every tower map makes it natural. Its inverse handles negative r, and composing these maps gives the comparison for sums of shifts. Hence the source-side comparison in d_A is fixed coherently.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: total-limit comparison on the source side; agent-written Roos-cone shift calculation"
-   }
-  },
-  {
-   "text": "The comparison d_A is the canonical single-operation reduction-tower realization comparison of [lem-sf-generator-reduction-coherence], and [lem-sf-integral-compactification-system-realization] identifies its target with the completed integral operation. On the chosen finite-level models, d_A is assembled from scalar-reduction maps (for $J_j$, $d_j=u_{j_!K}^{-1}\\circ\\mathcal L(r_j(K))^{-1}$ of [lem-sf-integral-open-reduction-comparison], where $r_j$ is extension by zero on a K-flat reduction representative and the unit $u$ has as level-$n$ composite the actual reduction map by [lem-coef-derived-system-evaluation-calculus], hence is the pair (reduction maps, 0) into the Roos cone and is fixed by the cone map of Step 3), the degree-zero operation maps of Step 1, and for tensor the signed map of Step 2. Every square commutes componentwise after reindexing; the only differential signs are exactly those already checked in the shift comparison. Thus the finite-level square for d_A commutes for P_v, S_p, J_j and tensor, naturally in all input morphisms.",
-   "uses": [
-    "lem-sf-generator-reduction-coherence",
-    "lem-sf-integral-compactification-system-realization",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pur-shifted-tensor-morphism-calculus",
-    "lem-sf-integral-open-reduction-comparison",
-    "lem-coef-derived-system-evaluation-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: coefficient comparisons and the basic operations; agent-written finite-level comparison calculation"
-   }
-  },
-  {
-   "text": "Apply the functorial Roos total cone to the finite-level squares of Step 4. By [def-pur-integral-derived-operations] and [def-weil-derived-direct-image], completed pullback, completed tensor and integral proper direct image are $R\\lim_n\\operatorname{Res}_n$ of their finite-level towers, represented by $\\operatorname{Cone}(1-s)[-1]$ on products; their integral shift comparisons are the termwise finite-level comparisons of Steps 1 and 2 followed by the product shift and the cone map of Step 3, and localized open extension is exact termwise. The product shift and cone map from Step 3 carry the source square to the shifted source, and on the target the same maps give the integral shifts just described. Functoriality of Rlim from [lem-weil-pbc-ringed-strict-tower-homotopy-limit] therefore gives the displayed square for d_A itself, not merely equality after evaluating a level. The same argument applies to the actual total-limit comparison occurring in the source of d_A.",
-   "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sf-generator-reduction-coherence",
-    "lem-sf-integral-compactification-system-realization",
-    "lem-sf-completed-tensor-shift-right",
-    "def-pur-integral-derived-operations",
-    "def-weil-derived-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: reduction-tower realization and total-limit comparison; agent-written passage to the Roos model"
-   }
-  },
-  {
-   "text": "All component maps used above are natural in system morphisms by the realization statement, and compatible shift squares paste under composition and whiskering by [lem-weil-pbc-commshift-nattrans-comp-whisker]. The component formula for two successive shifts is the product of the two sign factors, so it is the comparison for their sum; inverses give negative integers. The normalization, constructibility bounds and finite Tor-amplitude intervals are unchanged by reindexing, so every shifted input and intermediate object remains in the stated domain. This proves naturality and coherence for every allowed input slot and completes the basic-operation assertion.",
-   "uses": [
-    "lem-sf-integral-compactification-system-realization",
     "lem-weil-pbc-commshift-nattrans-comp-whisker",
-    "lem-pur-shifted-tensor-morphism-calculus"
+    "def-pur-integral-operation-shift-data"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: naturality and coherence of the basic operation comparisons; agent-written closure"
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; stage-3 assembly of the prescribed basic shifts"
+   }
+  },
+  {
+   "text": "Extract BasicDerivedRealizationSquares from lem-pur-basic-realization-shift-square. For pullback and open extension use its pull and shriek fields, with the two admissibility projections. For the two tensor slots use respectively the first and second conclusions of tensor, in the latter case interchanging the selected and fixed inputs. For proper image the comparison is identity and sourceShift equals the composite integral shift, so functoriality proves the square.",
+   "uses": [
+    "lem-pur-basic-realization-shift-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; stage-3 assembly of the prescribed basic shifts"
+   }
+  },
+  {
+   "text": "Use the same derived-square structure for naturality: pull_natural and open_natural give the unary cases, while tensor_natural with the identity map in the fixed slot gives either partial tensor case. Proper-image naturality is the identity law on its defining reduction-system-limit tower. Assemble these statements with the three coherence witnesses. All supplied hypotheses and the theorem statement are unchanged.",
+   "uses": [
+    "lem-pur-basic-realization-shift-square"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Maps-used sentence; stage-3 assembly of the prescribed basic shifts"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-integral-derived-operations",
-  "def-weil-derived-direct-image",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-shifted-tensor-morphism-calculus",
-  "lem-sf-completed-tensor-shift-right",
-  "lem-sf-generator-reduction-coherence",
-  "lem-sf-integral-compactification-system-realization",
-  "lem-sf-integral-open-reduction-comparison",
-  "lem-weil-pbc-commshift-nattrans-comp-whisker",
-  "lem-weil-pbc-derived-adjunction-shift",
-  "lem-weil-pbc-kinjective-shift",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "def-pur-integral-operation-shift-data",
+  "lem-pur-basic-realization-shift-square",
+  "lem-pur-basic-system-shift-resolution-calculus",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-  "place": "Maps-used sentence: tensor reassociation, coefficient comparisons, and the basic operations used in the expression-tree recursion; explicit termwise, tensor-sign and Roos-cone shift calculations"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "J6 stage-3 Lean proof: constructor cases, existing resolution laws and derived realization squares; composite CommShift component calculation; equivalent canonical-composite presentation of proper sourceShift (change record J6-integral-basic-operation-source-shift)"
  },
  "mathlib_searches": [
   {
@@ -173,23 +125,34 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "merged_into": null,
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-pur-integral-basic-operation-shift",
   "worker": "stage1",
-  "summary": "Kept the imported statement unchanged and split its basic-operation shift assertion into six source-backed steps. The proof checks termwise pullback, proper direct image and open extension on simultaneous ringed-diagram models, the signed tensor comparison, the Roos total-limit cone, the finite-level reduction comparison d_A, and naturality/coherence under composition. No new nodes or Mathlib leaves were needed.",
-  "blueprint": "Realizes the maps-used sentence of fix-prop-coherence.proof.md for the four basic operations and their reduction-tower realization comparisons, with the termwise shift and Roos-cone calculations made explicit.",
+  "summary": "Repair of C5/D1 and D2: dropped the duplicate normalization task; reused both existing primitive nodes, the open formula and operation definitions. The second genuine statement-only task now carries old steps 4-5: strict quotient shift squares and normalized functorial Roos passage. Retained the first resolution-calculus task, all old proof material, statement and statement dependencies. Four-step assembly under 3000 characters.",
+  "blueprint": "Maps-used sentence: old steps 1-2 in resolution calculus; old steps 4-5 in strict shift-square/Roos passage; old step 3 by existing reduction and injective-Roos shift statements; old step 6 in naturality/coherence assembly.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NO-8b9cb9ada",
-  "group": "NO",
+  "reviewer": "NT-cc-Q51-10db68b81",
+  "group": "Q51",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-8b9cb9ada (reviewer sub-agent of L); spot-checked: Read the item, its parent and siblings, the statement of every cited node, the integral-operation definitions, the source fix-prop-coherence.proof.md (maps-used sentence) and the unit route. The statement is unchanged and right: same coefficient category, same hypotheses, and d_A exactly as the generator node specifies it. It is strictly smaller than its parent and duplicates no existing node. There is no cycle, and every cited unit is on the route of sk-thm-sf-compatibility, so no tool_uses are needed. Repaired three small faults in the item file. (1) Step 2 put the factor (-1)^{rp} on whichever tensor slot is shifted. I checked by hand that this is not a chain map for odd r when the first slot is shifted. The step now uses t_{a,b}: identity for the first slot, (-1)^{rp} for the second, and it separates the two completed-tensor slots. (2) Step 4 used d_j=u^{-1}L(r_j)^{-1} without citing it. It now cites lem-sf-integral-open-reduction-comparison and lem-coef-derived-system-evaluation-calculus, with the check that the unit is fixed by the cone map. (3) Step 5 said the integral shift comparisons come from Steps 1-2 (E5). It now cites def-pur-integral-derived-operations and def-weil-derived-direct-image: the integral operations are R lim of finite-level towers, so their shift is the termwise one plus the cone map (b,a)->(b,(-1)^r a), which I verified on cochains. proof_deps is updated; no nodes are added or dropped.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-10db68b81 (reviewer sub-agent of L); spot-checked: Re-delivery after the RETURN of 8f3b. The repair is done as that review asked. The duplicate normalization node is dropped. Step 3 now cites lem-pur-completed-primitive-counit-comparison (r_T and r_F with rho), lem-sf-primitive-reduction-transpose (d_A^{-1} for pullback, tensor and proper image is the tower realization map) and lem-sf-integral-open-reduction-comparison (d_j=u^{-1}L(r_j)^{-1}), plus the two operation definitions. Old steps 4-5 are now the new node lem-pur-basic-realization-shift-square: the strict quotient-level shift squares, the cone square chi_Y C(f[r])=C(f)[r]chi_X, rho, and the derived identity. Its open case uses the unit square of lem-pur-reduction-limit-shift-adjunction. Old steps 1-2 are the node lem-pur-basic-system-shift-resolution-calculus, which now cites def-pur-integral-operation-shift-data. Old step 3 is covered by the existing lem-pur-reduction-limit-shift-adjunction and lem-pur-injective-tower-roos-shifts; old step 6 is item step 4. The two nodes come from 1955 and 2039 characters of old proof, so they are of comparable size; the assembly is 2009 characters; proof_deps equal the union of the step uses. Hand checks: the tensor comparison t_{a,b} is a chain map with coefficient 1 in the first slot and (-1)^{ri} in the second. chi(b,a)=(b,(-1)^r a) in (unshifted, shifted) order is the same map as ((-1)^r y,x) in the injective-roos node and satisfies chi eta=eta[r]. Bounds and Tor amplitude go to [a-r,b-r]. Checked r=0, r=±1, the empty or identity open, and constant towers. No cycles (closure computed). No SGA. Stacks tags 011G, 014E and 0941 match tags/tags. Advisory: the future proof of the square node should cite lem-a1-normalized-roos-shift-comparison for the generic rho/shift step; that node is a tool for the square node, not a duplicate of it. Batch-5 flags: lem-sf-integral-compactification-system-realization, lem-sf-generator-reduction-coherence and lem-sf-primitive-reduction-transpose already lie in the item's base stmt closure. lem-pur-reduction-limit-shift-adjunction adds only 7 sequence-site shift nodes from sec-smooth-purity. Every path ends at lem-trf-adjoint-composition-coherence, which is pure composite-adjunction coherence and not a step of the trace formula or of Poincare duality, so all flags are accepted. No fixes."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.IntegralBasicOperationShift",
@@ -223,5 +186,15 @@
   "group": "Q54",
   "result": "fix",
   "note": "Read the node, the six source steps, all 5 stmt_dep records (byte-equal to live) and the side declarations: TensorShifts and its normalizations, limitShift/limitShift_roos, reductionShift, systemPull/Push/OpenShift, integralShifts, and GeneratorReduction pullD/tensorD/openD/openDInv/integralPush/Admissible/SystemAdmissible. Hypotheses (k, l≠p, E finite, finite-type U and V, separated/proper/qc-open maps, both tensor slots), d_A as the generator's, the signed tensor shifts, the Roos-pinned total-limit shift, common-bound admissibility, CommShift-pinned coherence clauses and naturality all match the node. Edge cases r=0, negative r, empty schemes and universes are covered. H3 fault: conjunct 4 added IsIso of d_A, which the node does not state; it is trivial for pull/tensor/push and restates the generator theorem's openD inverse laws for open. FIX drops that conjunct (fixes/IntegralBasicOperationShift.lean; record statement refit from the file). nt_compile --json clean: delivered 5.4 s, fixed 6.0 s. No hollow defs, sorry-only theorem, docstrings and blueprint ids, lines ≤100, imports = proof_deps modules, statement verbatim, no live name collision. Advisories: plain defs from theorem stmt_deps per the node's design; integral push shift is the composite on the generator's L∘S∘R push."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-be687",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261025T204739-L-3003535",
+  "kind": "interface",
+  "note": "independent cc review: delivered IntegralBasicOperationShift.lean vs clone 3cf4ba45 + node/change record; new .push sourceShift branch matched with old composite via commShiftIso_comp_hom_app (coherentTriple); delivered module + 3 direct importers compiled in sandbox"
  }
 }

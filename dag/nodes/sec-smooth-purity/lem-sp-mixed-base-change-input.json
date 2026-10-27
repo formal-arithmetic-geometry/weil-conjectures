@@ -1,0 +1,149 @@
+{
+ "id": "lem-sp-mixed-base-change-input",
+ "kind": "statement",
+ "title": "Intrinsic constructible inputs for mixed base change",
+ "statement": "Fix a field k of characteristic p>0 and a prime ℓ≠p. Let X,Y,X′,Y′ and the compactification space Z be separated finite-type k-schemes, with k-morphisms h:X′→X, f′:X′→Y′, f:X→Y and g:Y′→Y forming a Cartesian square. Let c=(j:X→Z,q:Z→Y) be a compactification of f by k-morphisms. Let A be a finite commutative ring killed by a power of ℓ and let M be bounded intrinsically constructible of finite Tor amplitude on X. Then h_A^*M is bounded intrinsically constructible of finite Tor amplitude on X′, and the specified proper/open mixedCompactSupportExchange [def-sp-mixed-base-change-operations] at M is invertible. Smoothness of f and a coefficient change A→B are not needed for either conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct images: compactification formulas and legitimacy of constructible inputs; invertibility of beta (DAG Step 4)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-cbc-compact-support-square",
+  "def-sp-mixed-base-change-operations",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-proetale-operations",
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof": [
+  {
+   "text": "Finite-type schemes over a field are Noetherian. Pullback of the finite locally constant stratification preserves intrinsic constructibility; exact inverse image preserves the cohomological bounds, and its canonical tensor comparison preserves the Tor interval. This is the finite ordinary constant-ring specialization of constructible finite-Tor pullback stability.",
+   "uses": [
+    "det-thm-sf-ctf-stability-direct-images",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a bounded etale antecedent of M by finite-ring constructible derived origin. Extend it by zero and use the exact open-extension comparison. Proper base change makes the proper exchange at this extended object invertible. Its counit-mate normalization identifies it with directImageConstantExchange; the open factor is an isomorphism by construction. Hence the composite defining mixedCompactSupportExchange is invertible.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-transport-identifies-exchange",
+    "thm-cbc-finite-level-proetale",
+    "def-sp-mixed-base-change-operations",
+    "thm-weil-pbc-finite-level-proetale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-thm-sf-ctf-stability-direct-images",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-transport-identifies-exchange",
+  "thm-cbc-finite-level-proetale",
+  "def-sp-mixed-base-change-operations",
+  "thm-weil-pbc-finite-level-proetale"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-mixed.proof.md",
+  "place": "Direct images: compactification formulas and legitimacy of constructible inputs; invertibility of beta (DAG Step 4)",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "extension by zero base change compatible with derived scalar extension",
+   "results": "8 hits, including Function.ExtendByZero.linearMap and LinearMap.baseChange_zero; none concerns derived pro-etale open exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper base change on bounded constructible finite Tor pro etale module complexes",
+   "results": "8 hits, including AlgebraicGeometry.IsProper.isStableUnderBaseChange and AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange; none is the module-derived exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits, including mateEquiv, mateEquiv_counit, mateEquiv_vcomp and mateEquiv_hcomp. These give the formal mate calculations, not the specialized comparisons.",
+   "date": "2026-10-27",
+   "verdict": "generic formal tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport|openScalarExchange",
+   "results": "25 hits for topological compact support, no categorical openScalarExchange. Local project search found directImageScalarExchange and openScalarExchange; their coordinate-model difference is retained explicitly.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper base change and pullback preserve bounded constructible complexes of finite Tor amplitude on the pro etale site",
+   "results": "8 hits for stability under geometric/site base change, including IsProper.isStableUnderBaseChange and GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage; none concerns these derived modules.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero base change commutes with derived scalar extension along a homomorphism of finite rings",
+   "results": "8 hits, including ModuleCat.extendScalarsComp and IsBaseChange.comp; ordinary module scalar extension, not this derived open exchange.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.MixedBaseChange",
+  "date": "2026-10-27",
+  "group": "R2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-mixed-base-change",
+   "place": "Direct images: compactification formulas and legitimacy of constructible inputs; invertibility of beta (DAG Step 4)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.MixedBaseChangeInput",
+  "file": "lean/Sheaf/SecSmoothPurity/MixedBaseChangeInput.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.mixedBaseChange_input",
+  "statement": "theorem mixedBaseChange_input\n    (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ)\n    (k : Type u) [Field k] [CharP k pchar]\n    {X Y X' : Scheme.{u}}\n    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [X'.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))]\n    [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]\n    [LocallyOfFiniteType (X' ↘ Spec (.of k))]\n    [QuasiCompact (X' ↘ Spec (.of k))] [IsSeparated (X' ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    (cpt : Compactification f) [cpt.Z.Over (Spec (.of k))]\n    [LocallyOfFiniteType (cpt.Z ↘ Spec (.of k))]\n    [QuasiCompact (cpt.Z ↘ Spec (.of k))] [IsSeparated (cpt.Z ↘ Spec (.of k))]\n    [cpt.i.IsOver (Spec (.of k))] [cpt.g.IsOver (Spec (.of k))]\n    {Y' : Scheme.{u}} [Y'.Over (Spec (.of k))]\n    [LocallyOfFiniteType (Y' ↘ Spec (.of k))]\n    [QuasiCompact (Y' ↘ Spec (.of k))] [IsSeparated (Y' ↘ Spec (.of k))]\n    (g' : X' ⟶ X) (f' : X' ⟶ Y') (g : Y' ⟶ Y)\n    [g'.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))]\n    [g.IsOver (Spec (.of k))]\n    (sq : ChosenCartesianSquare g' f' f g)\n    (A : Type u) [CommRing A] [Finite A]\n    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)\n    (M : proEtaleDerivedCategory X A) (hM : spFiniteConstructibleTor X A M) :\n    spFiniteConstructibleTor X' A\n        ((proEtaleConstantRingDerivedPullback A g').obj M) ∧\n      IsIso ((mixedCompactSupportExchange A sq cpt).app M)",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8d00c",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T222750-L-693083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8d00c",
+  "group": "R2",
+  "result": "fix",
+  "landing": "20261026T222750-L-693083",
+  "kind": "interface",
+  "note": "independent cc review: item mixedBaseChange proof, moved defs and two new sorry statements against node det-sp-mixed-base-change, the clone source and the change record; direct importer SmoothPurityTowerMateEvaluationReduction and transitive user ExceptionalBaseChangeIntegralComparisons compiled OK against the delivered modules"
+ }
+}

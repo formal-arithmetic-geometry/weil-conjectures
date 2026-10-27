@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-etale-quotient-tensor-projection",
+ "kind": "statement",
+ "title": "Restricted coefficient projection equals the constant-tensor projection",
+ "statement": "For a homomorphism a:C→D of commutative rings, a scheme morphism f:X→Y and a compactification c, let V=D[0] as a C-complex. Identify U^W T^W K with V_W tensor K by the normalized scalar/tensor isomorphism, constant-sheaf comparison, exact descent of the single complex and signed symmetry [lem-pur-derived-change-of-rings, lem-pur-change-of-rings-tensor-comparison]. The restriction of compactScalarMap(a,c), followed by singleRestriction(a,c) [def-pur-etale-system-projection-data] and the tensor identification on X, equals the tensor identification on Y followed by exceptionalConstantProjectionMap(C,c,V,K) [lem-pur-etale-exceptional-constant-tensor]. This holds on the whole unbounded categories, without finiteness, flatness or Tor bounds.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2) and Construction 2.26, printed pp. 15–16; the coefficient projection calculation in step 2 of lem-pur-etale-system-quotient-normalization. Stacks more-etale.tex Tag 0GL6 supplies the proper/open coefficient construction."
+ },
+ "stmt_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "def-pur-etale-system-projection-data",
+  "lem-pur-etale-exceptional-constant-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Write c=(j,p). Expand compactScalarMap as the proper coefficient mate followed by Rp_* of the open balancing isomorphism. Expand singleRestriction as the restriction/proper-image mate followed by Rp_* of the inverse open/restriction isomorphism. The normalized scalar/tensor comparison identifies U T with tensor by D[0].",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the proper factor, transpose through p^* dashv Rp_*. The scalar/pullback comparison on K-flat representatives is the tensor/pullback comparison retaining the D factor. The defining counit equation for the scalar mate gives the usual proper projection morphism followed by the coefficient pullback identification. This is an equality of the specified maps, with no boundedness or flatness assumption.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-comparison",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the open factor take j_! dashv j^* adjuncts of the two proposed maps. The open/restriction comparison is the mate of the restriction/pullback comparison. The inverse open scalar isomorphism is the mate of the inverse scalar/pullback comparison. Thus the restricted tensor/pullback square, with naturality of the open unit, identifies the two adjuncts. Adjunction injectivity gives the open projection inverse with the coefficient pullback factor. This also handles non-quasi-compact opens.",
+   "uses": [
+    "def-pur-etale-system-projection-data",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Paste the proper and open identities using naturality of the restriction/proper-image mate. The pullback of the constant complex is its canonical constant-sheaf pullback; the constant comparisons respect composition and exact localization. The two signed symmetries change tensor order to coefficient first and cancel by involutivity. The resulting composite is exactly exceptionalConstantProjectionMap, giving the asserted equality. Identity ring maps, zero rings, the empty scheme and identity compactifications all use these same unit and counit equations; no cancellation by a noninvertible coefficient map occurs.",
+   "uses": [
+    "lem-pur-etale-exceptional-constant-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-system-projection-data",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pur-etale-exceptional-constant-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Proposition 2.29(2) and Construction 2.26, printed pp. 15–16; the coefficient projection calculation in step 2 of lem-pur-etale-system-quotient-normalization. Stacks more-etale.tex Tag 0GL6 supplies the proper/open coefficient construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars identifies the compactly supported coefficient extension mate with the derived tensor projection formula",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RestrictScalars\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \"(_R _S M : Type*) : Type _\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module, given a ring homomorphism $ R \\\\to S $. This allows scalar multiplication by elements of $ R $ instead of $ \"}\n  {\"name\": \"Submodule.restrictScalars\", \"module\": \"Mathlib.Algebra.Module.Submodule.RestrictScalars\", \"type\": \"(V : Submodule R M) : Submodule S M\", \"doc\": \"Given a scalar tower $ S \\\\to R \\\\to M $, the restriction of scalars maps an $ R $-submodule $ V $ of $ M $ to an $ S $-submodule of $ M $ with the same underlying set. The submodule structure is inheri\"}\n  {\"name\": \"ModuleCat.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} → [inst : Ring R] → [inst_1 : Ring S] → (R →+* S) → CategoryTheory.Functor (ModuleCat S) (ModuleCat R)\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $, this functor maps the category of left $ S $-modules to the category of left $ R $-modules by restricting scalar multiplication through $ f $. For an $ S $-m\"}\n  {\"name\": \"ModuleCat.RestrictScalars.obj'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} → {S : Type u₂} → [inst : Ring R] → [inst_1 : Ring S] → (R →+* S) → ModuleCat S → ModuleCat R\", \"doc\": \"Given a ring homomorphism $ f : R \\\\to S $ and an $ S $-module $ M $, this functor constructs the corresponding $ R $-module structure on $ M $ by composing the scalar multiplication with $ f $, effect\"}\n  {\"name\": \"AlgHom.restrictScalars\", \"module\": \"Mathlib.Algebra.Algebra.Tower\", \"type\": \"(f : A →ₐ[S] B) : A →ₐ[R] B\", \"doc\": \"Given an $ S $-algebra homomorphism $ f : A \\to B $ and a scalar tower $ R \\to S \\to A $ and $ R \\to S \\to B $, this constructs the corresponding $ R $-algebra homomorphism by restricting scalars along $ R\"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(α : R ⟶ R') : PresheafOfModules.{v} R' ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between presheaves of rings on a category $\\\\mathcal{C}$, this defines a functor from the category of presheaves of modules over $R'$ to the category o\"}\n  {\"name\": \"LinearMap.restrictScalarsₗ\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \": (M →ₗ[S] N) →ₗ[R₁] M →ₗ[R] N\", \"doc\": \"The linear map from the space of $ S $-linear maps $ M \\to N $ to the space of $ R $-linear maps $ M \\to N $, induced by restricting scalars through the scalar tower $ R \\to S $. This map preserves addit\"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}\n",
+   "date": "2026-10-25",
+   "verdict": "No whole geometric-map identity. Generic adjunction mate calculus is reused; Mathlib does not contain these ordinary etale compact-support constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"Suppose we have a square of functors (where the top and bottom are adjunctions `L₁ ⊣ R₁`\\nand `L₂ ⊣ R₂` respectively).\\n\\n```\\n      C ↔ D\\n    G ↓   ↓ H\\n      E ↔ F\\n```\\n\\nThen we have a bijection between n\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with vertical composition.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_hcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with horizontal composition of squares.\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"When all four functors in a square are left adjoints, the mates operation can be iterated:\\n\\n```\\n         L₁                  R₁                  R₁\\n      C --→ D             C ←-- D             C ←-- \"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"}\n",
+   "date": "2026-10-25",
+   "verdict": "No whole geometric-map identity. Generic adjunction mate calculus is reused; Mathlib does not contain these ordinary etale compact-support constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "compactScalarMap|exceptionalConstantProjectionMap",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-25",
+   "verdict": "No whole geometric-map identity. Generic adjunction mate calculus is reused; Mathlib does not contain these ordinary etale compact-support constructions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleSystemQuotientNormalization",
+  "date": "2026-10-25",
+  "group": "E4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-exceptional-inverse-image",
+   "place": "Adic-stage paragraph: finite-reduction compatibility of exceptional inverse image. This lemma isolates the proper/open tensor-map identification of step 2 of the quotient-normalization argument.",
+   "via": [
+    "lem-pur-etale-system-quotient-normalization",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleQuotientTensorProjection",
+  "file": "lean/Sheaf/Paper/EtaleQuotientTensorProjection.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleQuotientTensorProjection",
+  "statement": "theorem etaleQuotientTensorProjection\n    {C D : Type (u + 1)} [CommRing C] [CommRing D] (a : C →+* D)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (K : DerivedCategoryModule C X) :\n  let V := (DerivedCategory.singleFunctor (ModuleCat.{u + 1} C) 0).obj\n    ((ModuleCat.restrictScalars a).obj (ModuleCat.of D D))\n  let e (W : Scheme.{u}) (L : DerivedCategoryModule C W) :=\n    (scalarTensorIso a W).app L ≪≫\n      ((derivedTensor (ModuleCat.{u + 1} C) W).obj L).mapIso\n        ((DerivedCategory.singleFunctor _ 0).mapIso\n          ((constantCommuteCompose W.smallEtaleTopology\n            (ModuleCat.restrictScalars a)).app (ModuleCat.of D D)) ≪≫\n          (Functor.mapDerivedCategorySingleFunctor\n            (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} C)) 0).symm.app\n              ((ModuleCat.restrictScalars a).obj (ModuleCat.of D D))) ≪≫\n      ((derivedTensorSymmetry (ModuleCat.{u + 1} C) W).app L).app\n        ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} C)).mapDerivedCategory.obj V)\n  (Sheaf.derivedRestrictScalars Y.smallEtaleTopology a).map\n      ((compactScalarMap a c).app K) ≫\n    (SystemProjection.singleRestriction (CommRingCat.ofHom a) c).app\n      ((scalarExtension a X).obj K) ≫\n    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).map\n      (e X K).hom =\n  (e Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} C) c).obj K)).hom ≫\n    exceptionalConstantProjectionMap C c V K",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T095109-L-3292941",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261025T095109-L-3292941",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

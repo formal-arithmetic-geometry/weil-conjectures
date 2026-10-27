@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-fppf-face-heart-descent",
+ "kind": "statement",
+ "title": "Effective quasi-coherent module descent with face maps",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Z$ an algebraic space over $S$ [def-trf-algebraic-space]. Let $u:U_\\bullet\\to Z$ be an augmented simplicial algebraic space such that $U_0\\to Z$ and every map from $U_n$ to its matching object are flat, locally finitely presented and surjective; the degree-$n$ matching object is the finite limit of the compatible proper faces over $Z$. Restrict to injective order-preserving maps $[m]\\hookrightarrow[n]$ and use the enlarged small etale ringed sites of algebraic-space objects [lem-trf-space-enlarged-etale-ringed-site-model], with fibre-product transition functors and their canonical ring maps. Let $\\mathscr M$ and $u$ be the resulting ringed total module category and augmentation [lem-sfb-semisimplicial-ringed-total-category]. A module in $\\mathscr M$ is in $\\mathcal A$ if all its components are quasi-coherent [def-trf-space-quasi-coherent-module] and all its transitions $h^*F_m\\to F_n$ are isomorphisms. The tensor pullback $u^*$ restricts to an equivalence $\\operatorname{QCoh}(Z)\\simeq\\mathcal A$, with quasi-inverse the ordinary module direct image $u_*$. The restricted adjunction unit and counit are isomorphisms.",
+ "source": {
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHD, lemma-descent-qcoh-for-fppf-hypercovering: injective-order-map adaptation. The source treats all simplicial maps; the face-only assertion is agent-supplied and must be proved without assuming flat degeneracies."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-fppf-hypercover"
+ ],
+ "proof": [
+  {
+   "text": "Write $q_n:U_n\\to Z$, $v_i:U_n\\to U_0$ for the vertices, and $c_\\alpha:f_\\alpha^*F_m\\xrightarrow{\\sim}F_n$ for the transitions of $F\\in\\mathcal A$. Pullback preserves quasi-coherence, so $u^*$ takes $\\operatorname{QCoh}(Z)$ into $\\mathcal A$. Put $R=U_0\\times_ZU_0$ and $r=(v_0,v_1):U_1\\to R$. This is the first matching cover. On $U_1$ put $t=c_{v_1}^{-1}c_{v_0}:v_0^*F_0\\to v_1^*F_0$. On $U_2$ transition composition gives $t_{02}=t_{12}t_{01}$: each $t_{ij}$ equals $c_{v_j}^{-1}c_{v_i}$ after transport through $F_2$, and the middle factors cancel. Let $e=s_0:U_0\\to U_1$. Pulling this equation along $s_0s_0:U_0\\to U_2$ gives $(e^*t)^2=e^*t$. Since $e^*t$ is invertible, $e^*t=1$. Here degeneracies are only morphisms along which equations are pulled back; they are not transitions of $F$, and need not be flat.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-sfb-space-module-pullback-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHD, face-only adaptation: construct the edge transition; simplicial identities and cancellation"
+   }
+  },
+  {
+   "text": "Let $D=U_1\\times_RU_1$, with universal edges $a,b$ from $x$ to $y$. Its boundary with vertices $(x,y,y)$ and edges $(a,b,e(y))$ defines a map $D\\to M_2$, the degree-two matching object. Thus $W=D\\times_{M_2}U_2\\to D$ is fppf. Step 1's triangle equation on $W$ says $t_b=t_{e(y)}t_a=t_a$. Uniqueness of descended module maps makes the two pullbacks of $t$ equal on $D$: apply full faithfulness for the cover $W\\to D$ to the two maps between the pulled-back vertex modules. Full faithfulness for $r:U_1\\to R$ now descends $t$ uniquely to $\\theta:\\operatorname{pr}_0^*F_0\\to\\operatorname{pr}_1^*F_0$. Descend $t^{-1}$ too; uniqueness applied to the composites makes $\\theta$ invertible. All modules in these applications are quasi-coherent by pullback preservation. No global lift of a boundary is chosen.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-fppf-qcoh-descent",
+    "lem-sfb-space-module-pullback-quasicoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHD, face-only adaptation: compare parallel edges using a degenerate third edge and the matching cover"
+   }
+  },
+  {
+   "text": "Put $T=U_0\\times_ZU_0\\times_ZU_0$. The matching object $M_2\\to T$ is the fibre product of the three base changes of $r:U_1\\to R$, one for each edge; hence it is fppf, by repeated base change and composition. Therefore $U_2\\to T$ is fppf. Pulling $\\theta_{02}$ and $\\theta_{12}\\theta_{01}$ to $U_2$ gives exactly the equality of Step 1. Full faithfulness for this cover makes them equal on $T$. Thus $(F_0,\\theta)$ is a descent datum for $q_0:U_0\\to Z$. Effective descent gives $G\\in\\operatorname{QCoh}(Z)$ and an isomorphism $b_0:q_0^*G\\xrightarrow{\\sim}F_0$ inducing $\\theta$. This uses a cover of the triple product, not an assertion that every compatible boundary has a global filler.",
+   "uses": [
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-sfb-space-fppf-qcoh-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHD, face-only adaptation: descend the triangle equation, then apply Tag 04W8"
+   }
+  },
+  {
+   "text": "For $n\\geq0$ define $b_n:q_n^*G\\to F_n$ by $c_{v_i}\\circ v_i^*b_0$, using any vertex $i$. For $i<j$, pull $\\theta$ back along the edge $U_n\\to U_1$ determined by $\\{i,j\\}$. The defining descent identity for $b_0$ and $t_{ij}=c_{v_j}^{-1}c_{v_i}$ make the two formulas equal. They are therefore independent of $i$. For $\\alpha:[m]\\hookrightarrow[n]$, choose vertex $i$ in $[m]$; transition composition gives $c_\\alpha f_\\alpha^*b_m=c_{v_{\\alpha(i)}}v_{\\alpha(i)}^*b_0=b_n$. Thus $b:u^*G\\xrightarrow{\\sim}F$ is an isomorphism of systems. A map between two such systems is determined by its degree-zero map, since every $c_{v_i}$ is invertible. Its degree-one compatibility is precisely compatibility with $\\theta$. Conversely that compatibility and the same vertex formula give every higher square. Full faithfulness of ordinary descent for $q_0$ now proves full faithfulness of $u^*$ on quasi-coherent modules.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-sfb-space-fppf-qcoh-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHD, face-only adaptation: vertex assembly and compatible morphisms"
+   }
+  },
+  {
+   "text": "Identify the ordinary right adjoint, including its values in the ambient module category. For any system $F$ put $K=\\operatorname{Eq}(q_{0,*}F_0\\rightrightarrows q_{1,*}F_1)$, where the arrows come from the two vertex transitions. By component module adjunction, a map $N\\to K$ is a map $q_0^*N\\to F_0$ whose two induced maps $q_1^*N\\to F_1$ agree. Define its degree-$n$ map by any vertex. Every pair of vertices bounds an edge, so the degree-one equality makes this independent of the vertex; composition then gives compatibility with every injection. Conversely a map of systems has these properties. These mutually inverse constructions are natural for every module $N$, so $K\\simeq u_*F$ by the right-adjoint universal property. In the enlarged model its sections over etale $V\\to Z$ are the equalizer of the two maps $F_0(U_0\\times_ZV)\\rightrightarrows F_1(U_1\\times_ZV)$, with scalar action from $\\mathcal O_Z(V)$.",
+   "uses": [
+    "lem-sfb-semisimplicial-ringed-total-category",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0D70, lemma-augmentation-site, compatible-family proof repeated for injective maps and module adjunction"
+   }
+  },
+  {
+   "text": "For the $G$ of Step 3, use $b_0,b_1$ in Step 5. The condition on a section of $q_0^*G$ is agreement of its two pulls on $U_1\\times_ZV$. Faithfulness of descent for the base change of $r$ makes this equivalent to agreement on $R\\times_ZV$. Full faithfulness for the cover $U_0\\times_ZV\\to V$, applied to maps from $\\mathcal O_V$ to $G|_V$, identifies this equalizer with $G(V)$. A section is a map from the structure module: send $1$ to the section, with inverse $s\\mapsto(a\\mapsto as)$ on each restriction. These identifications respect restrictions and scalars, so $u_*F\\simeq G$ is quasi-coherent. For $F=u^*G$ the identification of $G\\to u_*u^*G$ is exactly restriction of sections, hence the adjunction unit. It is invertible. The triangle identity $\\epsilon_{u^*G}\\circ u^*\\eta_G=1$ makes the counit invertible on $u^*G$; naturality and Step 4's isomorphism give it on every $F\\in\\mathcal A$. This proves both the claimed quasi-inverse and the restricted adjunction assertion.",
+   "uses": [
+    "lem-sfb-space-fppf-qcoh-descent",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-space-enlarged-etale-ringed-site-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-simplicial.tex",
+    "place": "Tag 0DHD, final quasi-inverse argument; here the compatible-section equalizer also identifies the actual unit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-semisimplicial-ringed-total-category",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-sfb-space-fppf-qcoh-descent",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-simplicial.tex",
+  "place": "Tag 0DHD, face-only reconstruction using Tag 04W8; the proof is supplied by N5 rather than attributed to the all-simplicial source"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Effective descent of quasi coherent sheaves on algebraic spaces along an fppf hypercover using only face maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over a diagram indexed by a covering sieve $S$ con\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a generating family of one-step hypercovers in a site $(\\\\mathcal{C}, J)$, a contravariant functor $P: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A}$, and a covering sieve $S$ containing the zeroth sie\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/IsSheaf\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} {A : Type u'}\\n  [inst_1 : CategoryTheory.Category.{v', u'} A] {H : J.OneHypercoverFamily} {P : CategoryTheory.Functor Cᵒᵖ A}\\n  (hP : ∀ ⦃X : C⦄ (E : J.OneHypercover X), H E → Nonempty (CategoryTheory.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, an object $X \\\\in \\\\mathcal{C}$, a one-step hypercover $E$ of $X$, and a multifork $F$ over the diagram indexed by a covering sieve $S$ c\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.amalgamate\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"{C : Type u_2} →\\n  [inst : CategoryTheory.Category.{v_2, u_2} C] →\\n    {K : CategoryTheory.GrothendieckTopology C} →\\n      {P : CategoryTheory.Functor Cᵒᵖ (Type u_3)} →\\n        {S : C} →\\n          (E : K.OneHypercover S) →\\n            CategoryTheory.Presieve.IsSheaf K P →\\n              (x : (i : E.I\", \"doc\": \"Given a sheaf $ P $ on a category $ \\\\mathcal{C} $ with a Grothendieck topology $ J $, a one-step hypercover $ E $ of an object $ S $, and a family of elements $ x_i \\\\in P(X(i)) $ indexed by $ E.I_0 $ \"}\n  {\"name\": \"CategoryTheory.isSheaf_coherent\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/CoherentSheaves\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Precoherent C]\\n  (P : CategoryTheory.Functor Cᵒᵖ (Type w)),\\n  CategoryTheory.Presieve.IsSheaf (CategoryTheory.coherentTopology C) P ↔\\n    ∀ (B : C) (α : Type) [Finite α] (X : α → C) (π : (a : α) → X a ⟶ B),\\n     \", \"doc\": \"A presheaf $ P $ is a sheaf with respect to the coherent topology on a category $ \\\\mathcal{C} $ if and only if for every object $ B $ in $ \\\\mathcal{C} $, every finite effective epimorphic family $ \\\\{X\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.map_amalgamate\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/One\", \"type\": \"∀ {C : Type u_2} [inst : CategoryTheory.Category.{v_2, u_2} C] {K : CategoryTheory.GrothendieckTopology C}\\n  {P : CategoryTheory.Functor Cᵒᵖ (Type u_3)} {S : C} (E : K.OneHypercover S) (h : CategoryTheory.Presieve.IsSheaf K P)\\n  (x : (i : E.I₀) → P.obj (Opposite.op (E.X i)))\\n  (hc : ∀ ⦃i j : E.I₀⦄ (\", \"doc\": \"For a sheaf $ P $ on a category $ \\\\mathcal{C} $ with a Grothendieck topology $ J $, given a one-step hypercover $ E $ of an object $ S $, a compatible family of elements $ x_i \\\\in P(X(i)) $ indexed by\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.OneHypercover.glueMorphisms\", \"module\": \"Mathlib/CategoryTheory/Sites/Hypercover/Subcanonical\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [J.Subcanonical] →\\n        {S T : C} →\\n          (E : J.OneHypercover S) →\\n            (f : (i : E.I₀) → E.X i ⟶ T) →\\n              (∀ ⦃i j : E.I₀⦄ (k : E.I₁ i j),\\n                  C\", \"doc\": \"Given a one-step hypercover $ E $ of an object $ S $ in a category $ \\\\mathcal{C} $ with a subcanonical Grothendieck topology $ J $, a family of morphisms $ f_i : E.X(i) \\\\to T $ indexed by $ E.I_0 $, a\"}\n  {\"name\": \"CategoryTheory.Precoherent.pullback\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/Basic\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} [self : CategoryTheory.Precoherent C] {B₁ B₂ : C}\\n  (f : B₂ ⟶ B₁) (α : Type) [Finite α] (X₁ : α → C) (π₁ : (a : α) → X₁ a ⟶ B₁),\\n  CategoryTheory.EffectiveEpiFamily X₁ π₁ →\\n    ∃ β,\\n      ∃ (_ : Finite β),\\n        ∃ X₂ π₂,\\n          Cate\", \"doc\": \"In a precoherent category $\\\\mathcal{C}$, given a morphism $f: B_2 \\\\to B_1$ and an effective epimorphic family $\\\\{X_1(a) \\\\to B_1\\\\}_{a \\\\in \\\\alpha}$ (with $\\\\alpha$ finite), there exists a finite effectiv\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercover amalgamation of sections is not effective descent of quasi-coherent module systems; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cartesian quasi coherent module systems on the face total site descend to the augmented algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsQuasicoherent.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  [inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{M}$ of $\\\\mathcal{R}$-modules, this constructor establishes that \"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"∀ {C : Type u'} {inst : CategoryTheory.Category.{v', u'} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat}\\n  {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)}\\n  {inst_2 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.ov\", \"doc\": \"For a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, if a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{M}$ is quasicoherent, then the\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.ctorIdx\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  {inst : CategoryTheory.Category.{v', u'} C} →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)} →\\n          {inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this definition constructs the data required to define a quasicoherent sheaf over $\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent.recOn\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A recursor that enables definitions or proofs by recursion on the quasicoherence structure of a sheaf of modules over a ring sheaf, which is established via sheaf composition properties, weak sheafifi\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercover amalgamation of sections is not effective descent of quasi-coherent module systems; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pushforwardPushforwardEquivalence\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"If `e : C ≌ D`, then the pushforwards along `e.functor` and `e.inverse` forms an equivalence.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} (eqv : C ≌ D) {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheory.Sheaf K RingCat} [eqv.functor.IsContin\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercover amalgamation of sections is not effective descent of quasi-coherent module systems; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]escent.*[Qq]uasi|[Qq]uasi.*[Dd]escent|[Cc]artesian.*[Mm]odule",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: one-hypercover amalgamation of sections is not effective descent of quasi-coherent module systems; pushforwardPushforwardEquivalence requires an equivalence of the underlying sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent modules on algebraic spaces form a stack for fppf covers: effective descent of objects and morphisms",
+   "results": "Hits: SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.coversTop",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"descent\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat descent equivalence for quasi coherent modules and descent data",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.ofObj, Module.Flat.of_flat_tensorProduct, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsQuasicoherent.mk, CategoryTheory.Pseudofunctor.fullyFaithfulToDescentData, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.DescentData.exists_equivalence_of_sieve_eq, SheafOfModules.QuasicoherentData.ctorIdx",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "descent.*quasi|quasi.*descent|fppf.*module",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian module systems on an augmented simplicial algebraic space restricted to injective ordinal maps descend effectively along an fppf hypercover",
+   "results": "Hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.GlueData.oneHypercover, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰X, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', CategoryTheory.GrothendieckTopology.HOneHypercover, CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules with isomorphic gluing data on a faithfully flat surjective locally finitely presented algebraic space cover glue uniquely including compatible maps",
+   "results": "Hits: AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj, AlgebraicGeometry.LocallyRingedSpace.GlueData.toSheafedSpaceGlueData, AlgebraicGeometry.Scheme.GlueData, AlgebraicGeometry.LocallyRingedSpace.GlueData.mk.inj, AlgebraicGeometry.SheafedSpace.GlueData.mk.inj, AlgebraicGeometry.SheafedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.PresheafedSpace.GlueData.mk.inj, AlgebraicGeometry.Scheme.GlueData.isoCarrier",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pseudofunctor\", \"isEquivalence_toDescentData\"",
+   "results": "Hits: CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_iff_of_sieve_eq, CategoryTheory.Pseudofunctor.isEquivalence_toDescentDataAsCoalgebra_iff_isEquivalence_comonadComparison, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.DescentData.isEquivalence_toDescentData_of_sieve_le",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithfulToDescentData|isEquivalence_toDescentData|pushforwardPushforwardEquivalence",
+   "results": "Hits: Mathlib/Topology/Sheaves/Module.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/DescentData.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean, Mathlib/CategoryTheory/Sites/Descent/IsStack.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic stack equivalences require an IsStack hypothesis for the particular pseudofunctor; quasi-coherent presentation constructors do not establish effective fppf descent on algebraic spaces. Scheme gluing and one-hypercover section results do not state this result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-face-total-qcoh-equivalence",
+  "date": "2026-10-23",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Derived quasi-coherent hyperdescent with negative Ext vanishing. Supporting input for the face-only repair: Unbounded quasi-coherent descent on the face total site. Supporting lemma: hypothesis (2) in the unbounded descent argument: underived descent only",
+   "via": [
+    "lem-sfb-fppf-face-total-qcoh-equivalence",
+    "lem-sfb-space-negative-ext-hyperdescent",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-face-heart-descent",
+  "worker": "stage1",
+  "summary": "Reconstructs ordinary descent data from degrees zero through two, with explicit parallel-edge comparison and cocycle descent. Assembles every face transition by vertices, then identifies the ambient module direct image and actual unit and counit. Adds one strictly smaller ordinary fppf-descent prerequisite; retains the statement and all prior search records.",
+  "blueprint": "Supporting heart-descent prerequisite below det-thm-sf-ctf-stability-direct-images proof (3), as recorded by the inherited provenance. Latest blueprint has no separate face-only hypercover statement; this is an agent-supplied supporting argument and does not change the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module adjunction identifies the ordinary total direct image from its compatible-family universal property; no algebraic-space descent claim is imported from another unit."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "The enlarged etale model identifies direct-image sections on algebraic-space fibre products; this is the ringed model already required by the item statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-trf-space-enlarged-etale-ringed-site-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-e784b3ce8",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-e784b3ce8 (reviewer sub-agent of L); spot-checked: I read the item's 6 steps, the new node lem-sfb-space-fppf-qcoh-descent, every cited statement, and Stacks 0DHD (spaces-simplicial l.7327), 04W8 (spaces-descent l.208) and 0DFQ. Step 1: degeneracies are used only to pull back equations; s_0s_0 composed with each edge is s_0, so (e^*t)^2=e^*t and hence e^*t=1. Step 2: the boundary (x,y,y; a,b,s_0y) is a compatible point of M_2; W→D is fppf by covering calculus (2); t descends along r:U_1→R=M_1. Step 3: M_2 is the fibre product over T of the three base changes of r, so U_2→T is fppf and the cocycle descends. Step 4: the vertex formula assembles b and gives full faithfulness. Step 5: the equalizer K represents Hom(u^*N,F) for every N, so it is the actual u_*. Step 6: section descent identifies u_*F with G and the unit with restriction of sections; the triangle identity gives the counit. The new node is a faithful fppf specialization of 04W8 with no finiteness hypotheses, strictly smaller than the item. I found no duplicate: lem-pc-fpqc-descent and picard-descent are for schemes only, and the blueprint search found nothing. It is not a Mathlib leaf. Batch-5: def-trf-algebraic-space, def-trf-space-quasi-coherent-module and def-trf-space-etale-module-functors are general definitions; pullback-quasicoherent and covering-calculus reach sec-trace-formula only through the algebraic-space definition. None is a trace-formula or Poincaré step, so I accept them. Tool uses accepted: ringed-topoi-module-adjunction (generic adjunction) and the enlarged étale site model (already a stmt_dep). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFaceHeartDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fppf_face_heart_descent",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.spaceFaceQCohProperty",
+   "AlgebraicGeometry.AlgebraicSpace.fppf_face_heart_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFaceHeartDescent.lean",
+  "statement": "theorem fppf_face_heart_descent (U : SimplicialObject (Over X)) (hU : IsSpaceFppfHypercover U) (P : SpaceFaceAugmentationModel U) : (∀ N : X.QCoh, spaceFaceQCohProperty U (P.pullback.obj N.obj)) ∧ (∀ M : SpaceFaceModuleSystem U, spaceFaceQCohProperty U M → (P.direct.obj M).IsQuasicoherent) ∧ (∀ N : X.QCoh, IsIso (P.adjunction.unit.app N.obj)) ∧ (∀ M : SpaceFaceModuleSystem U, spaceFaceQCohProperty U M → IsIso (P.adjunction.counit.app M)) ∧ ∃ e : X.QCoh ≌ (spaceFaceQCohProperty U).FullSubcategory, Nonempty (e.functor ⋙ (spaceFaceQCohProperty U).ι ≅ (SheafOfModules.isQuasicoherent X.structureSheaf).ι ⋙ P.pullback) ∧ Nonempty (e.inverse ⋙ (SheafOfModules.isQuasicoherent X.structureSheaf).ι ≅ (spaceFaceQCohProperty U).ι ⋙ P.direct)",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29dfb8865",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN (a4f3d66573fb). Dependency record lem-sfb-semisimplicial-ringed-total-category vs side-live: only lean.declarations (superset: 11 spaceFace*/SpaceFace* helpers + space_face_total_augmentation added, nothing removed) and lean.note (live note kept as exact prefix, NP repair sentence appended) differ; module/file/declaration/statement/reviewed_lean unchanged. Dependency module SemisimplicialRingedTotalCategory.lean is a pure superset of live: 3 public imports plus a helper block appended after the generic namespace; only one live importer, so no import cycle. Helpers are identical to the previously accepted SpaceFaceModuleSystems block; that module is removed; the item module changed only its import. Re-checked composition/augmentation/equalizer typing and the canonical pinning (component+transition, direct = equalizer, adjunction_zero); the normalizing isos are Classical.choose of ∃! normalized statements, so the existence claim is sound. Item statement clause by clause correct (IsSpaceFppfHypercover incl. degree 0, injective-only diagram, heart = QCoh components + iso transitions, unit/counit IsIso on P.adjunction, equivalence identified with restricted pullback/direct); no extra hypotheses or universe restriction. The added stmt_dep def-sfb-space-fppf-hypercover is used directly. No face-total duplicate in live. Sorry only; docstrings carry source and blueprint. Nothing compiled (no file changed)."
+ }
+}

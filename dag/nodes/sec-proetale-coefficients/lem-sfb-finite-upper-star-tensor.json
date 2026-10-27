@@ -72,7 +72,43 @@
   "existing": true,
   "note": "Exact existing source instance in the canonical finite-coefficient pro-etale monoidal module. It states that the oplax comparison δ : g^*(F ⊗ G) ⟶ g^*F ⊗ g^*G is invertible. The oplax structure on g^* is the adjunction mate of the lax monoidal lowerStar structure, so δ is precisely the map specified by this node. The source section assumes braided monoidal Grothendieck-abelian coefficients, monoidal sheaf localizations, and preservation of filtered colimits by tensorLeft; the node's closed symmetric monoidal Grothendieck-abelian hypotheses provide these standard instances. Declaration and full signature were read with scompile.py --source; no new module is needed. Independent second reading compiled a consumer with only the node's closed symmetric Grothendieck-abelian coefficient hypotheses and arbitrary g,F,G: both localization and filtered-colimit conditions are inferred; the recorded sfbSheafTensorStructure tensor equals Sheaf.monoidalCategory by rfl at the mixed-universe pro-etale site. The existing instance has only propext, Classical.choice and Quot.sound as axioms."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.isIso_δ_upperStar",
+    "AlgebraicGeometry.ProEtale.isIso_upperStar_δ"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_δ_upperStar",
+     "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal",
+     "lines": [
+      81,
+      85
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.isIso_upperStar_δ",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal",
+     "lines": [
+      102,
+      109
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-finite-pushforward-pullback",
  "reviewed_lean": {
@@ -82,5 +118,25 @@
   "group": "Q115",
   "result": "pass",
   "note": "Existing-declaration delivery: AlgebraicGeometry.ProEtale.isIso_upperStar_δ (FiniteCoefficient/UpperLowerStar/Monoidal.lean:106, identical in side and live trees); node changes only lean; statement field verbatim with the blueprint and lean.statement verbatim with the source. Hypotheses: Braided (weaker than symmetric); W.IsMonoidal and PreservesFilteredColimitsOfSize.{u,u+1}(tensorLeft M) inferred from SymmetricCategory+MonoidalClosed; arbitrary g (no weakly-etale), F, G; u' free, Hom u+1 as in all dependencies. δ = adj.homEquiv.symm((unit⊗unit)≫μ lowerStar) by rfl (mate of recorded laxMonoidal_lowerStar under recorded upperStarLowerStarAdjunction); sfbSheafTensorStructure.monoidal = Sheaf.monoidalCategory by rfl. nt_compile --json check file with exactly the node's hypotheses and autoImplicit false: exit 0, no warnings; axioms propext/Classical.choice/Quot.sound. Report has real Worker report and Second reading by Q115 sections. No new definitions, no proof, no live write. Findings: none of substance (blueprint lean name isIso_δ_upperStar is the old name; node records the correct actual name)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A$ and $g\\colon Z\\to Y$ be as in [lem-sfb-finite-upper-star-unit]. For\nsheaves $F,G$ on $Y_{\\mathrm{proét}}$, the map\n\n$$\ng^*(F\\otimes G)\\to g^*F\\otimes g^*G,\n$$\n\nmate under $g^*\\dashv g_*$ ([def-sfb-finite-upper-lower-star-adjunction]) of the lax\nstructure of [def-sfb-finite-lower-star-lax-monoidal], is an isomorphism.",
+  "proof": [
+   {
+    "text": "Write $a$ for sheafification and $\\otimes_{\\mathrm{pre}}$ for the objectwise tensor\nproduct, so $F\\otimes G=a(F\\otimes_{\\mathrm{pre}}G)$ ([lem-weil-pbc-sheaf-tensor-closed]). As in the\nproof of [lem-sfb-finite-upper-star-unit], $g^*\\circ a\\cong a\\circ\\operatorname{Lan}_{b^{\\mathrm{op}}}$.\nThe value of $\\operatorname{Lan}_{b^{\\mathrm{op}}}$ at $W$ is a filtered colimit (proof of\n[lem-sfb-finite-upper-star-exact]). Since $\\mathcal A$ is closed, $\\otimes$ preserves\ncolimits in each variable, and a filtered colimit of a diagonal diagram $i\\mapsto P_i\\otimes Q_i$\nis $\\colim P_i\\otimes\\colim Q_i$. Hence\n$\\operatorname{Lan}_{b^{\\mathrm{op}}}(P\\otimes_{\\mathrm{pre}}Q)\\cong\n\\operatorname{Lan}_{b^{\\mathrm{op}}}P\\otimes_{\\mathrm{pre}}\\operatorname{Lan}_{b^{\\mathrm{op}}}Q$.\nFinally $a(P\\otimes_{\\mathrm{pre}}Q)\\cong a(aP\\otimes_{\\mathrm{pre}}aQ)$, which is the\ncompatibility of sheafification with the tensor product from [lem-weil-pbc-sheaf-tensor-closed].\nTogether,\n\n$$\ng^*(F\\otimes G)\\cong a\\bigl(\\operatorname{Lan}F\\otimes_{\\mathrm{pre}}\\operatorname{Lan}G\\bigr)\n\\cong a\\bigl(a\\operatorname{Lan}F\\otimes_{\\mathrm{pre}}a\\operatorname{Lan}G\\bigr)\n=g^*F\\otimes g^*G,\n$$\n\nand the composite is the mate of the lax structure map. For $g$ weakly étale, $g^*$ is\nrestriction along the localization functor, and the statement is the compatibility of\nsheafification with restriction along a continuous and cocontinuous functor.",
+    "uses": [
+     "lem-weil-pbc-sheaf-tensor-closed",
+     "lem-sfb-finite-upper-star-unit",
+     "lem-sfb-finite-upper-star-exact"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

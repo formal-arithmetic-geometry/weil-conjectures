@@ -1,0 +1,265 @@
+{
+ "id": "lem-sp-field-scalar-strict-limit",
+ "kind": "statement",
+ "title": "Finite free scalar extension and the canonical strict derived limit",
+ "statement": "Let $T$ be a scheme and $R_T\\to S_T$ a map of sheaves of commutative rings on a small skeleton of $T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], with a finite $R_T$-module basis of $S_T$. Use unbounded module derived categories [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category], scalar extension $C=-\\otimes^L_{R_T}S_T$ [lem-pur-derived-change-of-rings], and total derived inverse limit of strict towers, with its projection-normalized Roos realization [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Extension of scalars on strict towers is termwise. For every object $K_\\bullet$ in the derived category of strict $R_T$-module towers, the canonical comparison\n$$\\lambda_{K_\\bullet}:C(R\\varprojlim K_\\bullet)\\longrightarrow R\\varprojlim(CK_\\bullet)$$\nis an isomorphism in $D(S_T)$, natural on the derived category of entire towers. The comparison is the derived version of the canonical scalar/limit map, not an arbitrary map between cones. In a chosen finite basis, after restriction to $R_T$, it is the finite-sum/product reindexing on both product coordinates of the Roos complex; it intertwines $1-s$, where $s((x_n))=(t_nx_{n+1})$. It is $S_T$-linear and independent of the basis. For another finite free ring-sheaf extension $S_T\\to U_T$, the two composites obtained by these comparisons agree with $\\lambda$ for $R_T\\to U_T$ under the balanced derived tensor associator; the identity extension gives the identity. No boundedness, constructibility, completeness or normalization of $K_\\bullet$ is assumed.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), derived inverse limits and finite sums; returned step 2 limit argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-strict-roos-model",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-sfb-scalar-inverse-image-normalization",
+  "def-sbc-strict-projection-tower-data",
+  "def-weil-pbc-ringed-scalar-extension-complex-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-basis presentation of ordinary scalar extension after restriction. Restriction reflects isomorphisms and preserves limits, and the finite power functor preserves limits. Thus finite-free scalar extension preserves finite limits and countable products; its tensor adjunction gives finite colimits. The corresponding assertions for towers follow pointwise.",
+   "uses": [
+    "lem-sp-field-scalar-ordinary-coordinates",
+    "lem-weil-pbc-finite-free-strict-tower-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact countable products on the specified small pro-etale model allow strictRoosDerivation to construct a single derived-limit functor L_R and normalized rho_R for each R, with the required universal right-derived property.",
+   "uses": [
+    "lem-sp-small-proetale-exact-products",
+    "lem-weil-strict-roos-derivation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical additive Roos comparison. Preservation of countable products makes it an iso. Its product projections, transition compatibility and both cone-coordinate formulas are the standard additive Roos formulas. Fully faithful whiskering with localization descends the rho-conjugate cone iso to the derived comparison. The zero-first-coordinate inclusion and product projections prove its ordinary-limit normalization. Naturality of the finite-basis iso proves the requested coordinate formula.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "def-sp-field-scalar-strict-limit-data",
+    "lem-sp-field-scalar-ordinary-coordinates",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category",
+    "lem-cbc-normalized-limit-square-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary balanced associator and unitor have the prescribed pure-tensor normalization. Horizontal coherence and the identity formula for the actual additive Roos comparison give equal cone maps. At objects in the image of Q, expand the derived associator or unitor using exact-functor factorization. Apply naturality, cancel adjacent rho and factorization inverse pairs, and use the cone equation. Full faithfulness of localization whiskering extends these equalities to every entire derived tower.",
+   "uses": [
+    "lem-sp-field-scalar-ordinary-coordinates",
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "lem-pur-exact-restriction-composition",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-field-scalar-ordinary-coordinates",
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-sp-small-proetale-exact-products",
+  "lem-weil-strict-roos-derivation",
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "def-sp-field-scalar-strict-limit-data",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-cbc-normalized-limit-square-coherence",
+  "lem-pur-exact-restriction-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(1), direct additive Roos transport, localization normalization and horizontal coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of sheaves of rings commutes canonically with total derived inverse limit of any strict tower of complexes",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.ιFree_mapFree_inv: ∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\n  {R :; SheafOfModules.ιFree_mapFree_inv_assoc: ∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\n  {R :; SheafOfModules.map_ιFree_mapFree_hom_assoc: ∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\n  {R :; SheafOfModules.map_ιFree_mapFree_hom: ∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\n  {R :; SheafOfModules.mapFree: {C : Type u'} →\n  [inst : CategoryTheory.Category.{v', u'} C] →\n    {J : CategoryTheory.GrothendieckTopology C; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v; SheafOfModules.freeFunctorCompPullbackIso: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTh; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free tensor product preserves homotopy inverse limits naturally and coherently for successive scalar extensions",
+   "results": "[leanfinder] OK 8 hit(s); CommRingCat.Under.piFanTensorProductIsLimit: {R S : CommRingCat} →\n  [inst : Algebra ↑R ↑S] →\n    {ι : Type u} →\n      (P : ι → CategoryTheory.Under R) →\n ; CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier: ∀ {R S : CommRingCat} [inst : Algebra ↑R ↑S] [Module.Flat ↑R ↑S],\n  CategoryTheory.Limits.PreservesLimitsOfSha; AdicCompletion.tensor_map_id_left_eq_map: ∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [inst_1 : IsNoetherianRing R] {M : Type u} [inst_2 : AddCommG; AdicCompletion.ofTensorProduct_naturality: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R; AdicCompletion.ofTensorProductEquivOfPiFintype: {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (ι : Type u_4) →\n        [Fintype ι] →\n    ; TensorProduct.directLimitLeft_symm_of_tmul: ∀ {R : Type u_1} [inst : CommSemiring R] {ι : Type u_2} [inst_1 : DecidableEq ι] [inst_2 : Preorder ι]\n  {G : ; TensorProduct.directLimitRight_symm_of_tmul: ∀ {R : Type u_1} [inst : CommSemiring R] {ι : Type u_2} [inst_1 : DecidableEq ι] [inst_2 : Preorder ι]\n  {G : ; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat: ∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\n  f.Flat →\n    CategoryTheory.Limits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.preservesLimit_of_preservesFiniteProducts",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Limits.preservesLimit_of_preservesFiniteProducts'; ",
+   "date": "2026-10-22",
+   "verdict": "no match: query identifier not recognized; semantic searches and source grep also inspected"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*(limit|product)|tensor.*(lim|prod)",
+   "results": "[grep] OK 25 hit(s); Mathlib/FieldTheory/LinearDisjoint.lean:74: ### Equivalent characterization by `IsDomain` or `IsField` of tensor product; Mathlib/FieldTheory/LinearDisjoint.lean:91: - `Algebra.TensorProduct.isField_of_isAlgebraic`:; Mathlib/FieldTheory/LinearDisjoint.lean:94:   See `Algebra.TensorProduct.isAlgebraic_of_isField` for its converse (in an earlier file).; Mathlib/FieldTheory/LinearDisjoint.lean:132: linearly disjoint, linearly independent, tensor product; Mathlib/FieldTheory/LinearDisjoint.lean:138: open scoped TensorProduct; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean:13: public import Mathlib.RingTheory.TensorProduct.Finite; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean:80:   let g := Algebra.TensorProduct.productMap E1.val E2.val; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean:85:   rw [Algebra.TensorProduct.productMap_range, E1.range_val, E2.range_val, sup_toSubalgebra_of_left]; Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean:803:   .of_equiv _ (Algebra.TensorProduct.liftEquivRight _ K _ _).symm; Mathlib/FieldTheory/PurelyInseparable/Basic.lean:638: open TensorProduct; Mathlib/FieldTheory/PurelyInseparable/Basic.lean:669: lemma IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar; Mathlib/FieldTheory/PurelyInseparable/Basic.lean:685:       rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]; Mathlib/FieldTheory/PurelyInseparable/Basic.lean:686:     rw [Algebra.TensorProduct.tmul_pow, this]; Mathlib/FieldTheory/PurelyInseparable/Basic.lean:688:     rw [← IsScalarTower.algebraMap_apply, Algebra.TensorProduct.algebraMap_apply,; Mathlib/LinearAlgebra/Matrix/Kronecker.lean:10: public import Mathlib.RingTheory.TensorProduct.Basic; Mathlib/LinearAlgebra/Matrix/Kronecker.lean:425: open TensorProduct; Mathlib/LinearAlgebra/Matrix/Kronecker.lean:427: open Matrix TensorProduct; Mathlib/LinearAlgebra/Matrix/Kronecker.lean:435: /-- The Kronecker tensor product. This is just a shorthand for `kroneckerMap (⊗ₜ)`.; Mathlib/LinearAlgebra/Matrix/Kronecker.lean:442: scoped[Kronecker] infixl:100 \" ⊗ₖₜ \" => Matrix.kroneckerMap (TensorProduct.tmul _); Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean:498: open scoped TensorProduct Valued in; Mathlib/NumberTheory/NumberField/Completion/FinitePlace.lean:500:   let Φ : Kv ⊗[K] L →ₗ[Kv] Lw := Algebra.TensorProduct.lift (Algebra.algHom Kv Kv Lw); Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:8: public import Mathlib.LinearAlgebra.TensorProduct.Basis; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:9: public import Mathlib.RingTheory.TensorProduct.Maps; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:21: - `Subalgebra.centralizer_range_includeLeft_eq_center_tensorProduct`: if `B` is free as a module,; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:23: - `Subalgebra.centralizer_range_includeRight_eq_center_tensorProduct`: if `A` is free as a module,",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of sheaves of rings commutes canonically with total derived inverse limit of any strict tower of complexes",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.free: (I : Type u) : SheafOfModules.{u} R; SheafOfModules.ιFree: {I : Type u} (i : I) : unit R ⟶ free I; SheafOfModules.freeFunctor: : Type u ⥤ SheafOfModules.{u} R; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom: {I : Type u} (i : I) : (pullback φ).map (ιFree i) ≫ (pullbackObjFreeIso φ I).hom = pullbackObjUnitToUnit φ ≫ ι; SheafOfModules.freeFunctorCompPullbackIso: : freeFunctor ⋙ pullback φ ≅ freeFunctor; SheafOfModules.pullbackObjFreeIso_hom_naturality: {I J : Type u} (f : I → J) :\n  (pullback φ).map (freeMap f) ≫ (pullbackObjFreeIso φ J).hom = (pullbackObjFreeI; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v; SheafOfModules.ιFree_mapFree_inv: : ιFree i ≫ (mapFree F η I).inv = η.inv ≫ F.map (ιFree i)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the ordinary derived coefficient-system assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesLimitsOfShape\"",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Limits.PreservesLimitsOfShape:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (J : Type w) [Cat; CategoryTheory.Limits.preservesLimitsOfShape_subsingleton:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (J : Type w) [Cat; CategoryTheory.Limits.PreservesLimitsOfSize.preservesLimitsOfShape:  {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} ; CategoryTheory.Limits.PreservesLimitsOfShape.preservesLimit:  {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} ; CategoryTheory.Limits.preservesLimitsOfShape_of_equiv:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [Cat; CategoryTheory.Limits.PreservesLimitsOfShape.mk:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [Cat; CategoryTheory.Limits.preservesLimitsOfShape_of_natIso:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [Cat; CategoryTheory.Limits.preservesLimitsOfShape_iff_of_natIso:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [Cat; CategoryTheory.Limits.comp_preservesLimitsOfShape:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [Cat; CategoryTheory.Limits.preservesLimitsOfShape_of_reflects_of_preserves:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : Type w} [Cat; CategoryTheory.Limits.preservesLimitsOfShape_pempty_of_preservesTerminal:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (G : CategoryTheo; CategoryTheory.Functor.preservesLimitsOfShape_of_isZero:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.L",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module facts or basic site definitions; no whole-system coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(limit|prod)|KInjective",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:8: public import Mathlib.LinearAlgebra.TensorProduct.Basis; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:9: public import Mathlib.RingTheory.TensorProduct.Maps; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:21: - `Subalgebra.centralizer_range_includeLeft_eq_center_tensorProduct`: if `B` is free as a module,; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:23: - `Subalgebra.centralizer_range_includeRight_eq_center_tensorProduct`: if `A` is free as a module,; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean:31: open Algebra.TensorProduct; Mathlib/Algebra/Vertex/HVertexOperator.lean:26: * curry for tensor product inputs; Mathlib/Algebra/Central/TensorProduct.lean:14: # Lemmas about tensor products of central algebras; Mathlib/Algebra/Central/TensorProduct.lean:36: open TensorProduct; Mathlib/Algebra/Central/TensorProduct.lean:40: lemma Algebra.TensorProduct.includeLeft_map_center_le :; Mathlib/Algebra/Central/TensorProduct.lean:46:   induction bc using TensorProduct.induction_on with; Mathlib/Algebra/Central/TensorProduct.lean:51: lemma Algebra.TensorProduct.includeRight_map_center_le :; Mathlib/Algebra/Category/CoalgCat/Monoidal.lean:11: public import Mathlib.RingTheory.Coalgebra.TensorProduct; Mathlib/Algebra/Category/CoalgCat/Monoidal.lean:16: In `Mathlib/RingTheory/Coalgebra/TensorProduct.lean`, given two `R`-coalgebras `M, N`, we define a; Mathlib/Algebra/Category/CoalgCat/Monoidal.lean:17: coalgebra instance on `M ⊗[R] N`, as well as the tensor product of two `CoalgHom`s as a; Mathlib/Algebra/Category/CoalgCat/Monoidal.lean:21: fields given by the definitions in `Mathlib/RingTheory/Coalgebra/TensorProduct.lean`, and Prop; Mathlib/Algebra/Category/CoalgCat/Monoidal.lean:35: open scoped TensorProduct MonoidalCategory; Mathlib/Algebra/Algebra/Bilinear.lean:9: public import Mathlib.LinearAlgebra.TensorProduct.Map; Mathlib/Algebra/Algebra/Bilinear.lean:12: # Facts about algebras involving bilinear maps and tensor products; Mathlib/Algebra/Algebra/Bilinear.lean:16: `LinearAlgebra.TensorProduct` unnecessarily.; Mathlib/Algebra/Algebra/Bilinear.lean:21: open TensorProduct Module; Mathlib/Algebra/Algebra/Bilinear.lean:41:   TensorProduct.lift (mul R A); Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean:12: public import Mathlib.LinearAlgebra.TensorProduct.Tower; Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean:13: public import Mathlib.RingTheory.Coalgebra.TensorProduct; Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean:22: We then use this to set up boilerplate for the `Coalgebra` instance on a tensor product of; Mathlib/Algebra/Category/CoalgCat/ComonEquivalence.lean:23: coalgebras defined in `Mathlib/RingTheory/Coalgebra/TensorProduct.lean`.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical/module facts or basic site definitions; no whole-system coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of sheaves of rings commutes canonically with derived inverse limit of unbounded strict towers",
+   "results": "Inspected 8 hits: SheafOfModules.mapFree, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.freeHomEquiv_symm_comp, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf. Free-sheaf constructions, exact-functor localization, ordinary tensor limits or general complex associators do not state this canonical strict derived-limit comparison with composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*free.*(limit|product)|tensor.*(limit|prod)|Roos",
+   "results": "Inspected 25 hits: Mathlib/CategoryTheory/Action/Monoidal.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Sites/Point/IsMonoidalW.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean, Mathlib/CategoryTheory/GradedObject/Monoidal.lean. Free-sheaf constructions, exact-functor localization, ordinary tensor limits or general complex associators do not state this canonical strict derived-limit comparison with composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a finite free sheaf algebra commutes with homotopy limits naturally in towers and coherently for composition",
+   "results": "Inspected 8 hits: CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, lTensorHomEquivHomLTensor, CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite, TensorProduct.directLimitRight, PresheafOfModules.Monoidal.tensorHom, TensorProduct.directLimitLeft, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier. Free-sheaf constructions, exact-functor localization, ordinary tensor limits or general complex associators do not state this canonical strict derived-limit comparison with composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Inspected 12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId. Free-sheaf constructions, exact-functor localization, ordinary tensor limits or general complex associators do not state this canonical strict derived-limit comparison with composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite rank scalar tensor comparison with homotopy inverse limits satisfies the tensor associator cocycle on both Roos cone coordinates",
+   "results": "Inspected 8 hits: HomologicalComplex.associator, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.leftUnitor'_inv_comm_assoc, HomologicalComplex.ιOrZero_mapBifunctorAssociatorX_hom, HomologicalComplex.ιTensorObj. Free-sheaf constructions, exact-functor localization, ordinary tensor limits or general complex associators do not state this canonical strict derived-limit comparison with composition.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-field-extension-towers",
+  "date": "2026-10-22",
+  "group": "Q62"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(1): finite freeness makes scalar extension commute with derived limits (finite direct sums do); canonical maps and composition in (2)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-field-scalar-strict-limit",
+  "worker": "stage1",
+  "summary": "Reused the existing general finite-free strict-tower transport; added explicit finite-basis maps, their 1-s identity, an injective-resolution normalization check, and the balanced tensor composition calculation on both Roos coordinates. No new nodes; statement unchanged.",
+  "blueprint": "det-sp-field-extension-towers proof (1), finite-free scalar extension commutes with derived limits; the canonical composition needed in (2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-strict-tower-transport",
+    "why": "General small-ringed-site finite-free strict-tower transport supplies exact scalar extension and the canonical derived ordinary-limit comparison; the field-extension unit has no such general theorem."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Exact-functor localization computes unbounded scalar extension on complex representatives and identifies its derived associator."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic pro-etale exact-product theorem justifies termwise Roos products for the arbitrary coefficient sheaves R,S,U."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic augmentation-normalized strict Roos realization identifies the actual cone maps with total derived inverse limit."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Definition of the sheafified balanced tensor used for the explicit finite-basis and associator calculations."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Localization definition passes equal natural chain maps to equal maps of unbounded derived towers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-337e52ee3",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-337e52ee3 (reviewer sub-agent of L); spot-checked: Shape: one commit with the item and the report. No new nodes, statement unchanged, no repair note, proof_deps equals the union of step uses, no SGA. The item realizes sk-lem-sp-field-extension-towers.proof.md (1), 'finite free, commutes with derived limits', plus the composition law that the parent det-sp-field-extension-towers uses in steps 2 and 5. The global-basis hypothesis holds for O_E⊂O_F. Step 1: lem-weil-pbc-finite-free-strict-tower-transport states λ as the total-derived ordinary limit/tensor comparison, basis-independent, on any small site with S≅R^d. Step 2: lem-weil-proetale-countable-products-exact holds for arbitrary ring sheaves on Y_proet, which is the product-exactness hypothesis of lem-weil-strict-roos-comparison; that statement gives ρ and its normalization by lim I→Cone with zero shifted component. Step 3 (elementary): checked β_X F(1−s) = (1−s)β_X by projections and the cone signs through additivity. Step 4: redid the chase ρ_{FX} h_X F(ρ_X^{-1}) = R lim(Fq)^{-1} lim(r) β^lim_I, which is the transport's canonical comparison. Step 5 (elementary): checked the balanced associator and its inverse, and that both routes give (x_n⊗b(s)u)_n. Step 6: U is finite free over R, so the exact-functor and localization descent with ρ-naturality is correct. Duplicate search over dag/nodes for finite-free with Rlim/Roos/associator: the completion-χ nodes (lem-weil-finite-free-completed-scalar-comparison, lem-fix-scalar-completion-associator, lem-weil-integral-scalar-extension-well-defined, lem-weil-completed-scalar-chain-shift), lem-fd-scalar-roos-comparison-intertwining and lem-pur-constant-finite-free-products are different statements. The transport lacks the coordinate and composition clauses, so it is reuse, not a duplicate. Edge cases d=0, d=1/identity, zero transitions and unbounded complexes are fine. Tool uses accepted as generic: the transport, exact-functor factorization, pro-étale exact products, strict Roos comparison, the sheaf tensor definition and the abstract derived category definition."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldScalarStrictLimit",
+  "declaration": "SheafOfModules.fieldScalarStrictLimit",
+  "declarations": [
+   "SheafOfModules.fieldScalarStrictLimit"
+  ],
+  "file": "lean/Sheaf/Paper/FieldScalarStrictLimit.lean",
+  "statement": "theorem fieldScalarStrictLimit (T : AlgebraicGeometry.Scheme.{t}) (e : C ≌ T.ProEt) (hJ : J = e.functor.inducedTopology (AlgebraicGeometry.Scheme.ProEt.topology T)) : (∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteLimits (tensorFunctor a.val)) ∧ (∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteColimits (tensorFunctor a.val)) ∧ (∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteLimits (projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val))) ∧ (∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteColimits (projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val))) ∧ ∀ (hlim : ∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteLimits (tensorFunctor a.val)) (hcolim : ∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteColimits (tensorFunctor a.val)) (htlim : ∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteLimits (projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val))) (htcolim : ∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), PreservesFiniteColimits (projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val))), ∃ (L : ∀ R : Sheaf J CommRingCat.{u}, DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) ⥤ DerivedCategory.{w} (ringedSiteModules.{u} (ringSheaf R))) (rho : ∀ R : Sheaf J CommRingCat.{u}, roosF ⋙ DerivedCategory.Q.{w} ≅ DerivedCategory.Q.{w} ⋙ L R), (∀ R : Sheaf J CommRingCat.{u}, (L R).IsRightDerivedFunctor (roosDerivedUnit (rho R)) (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) (.up ℤ))) ∧ ∃ cmp : ∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S), @ScalarStrictLimitComparison _ _ _ _ _ _ _ _ _ _ _ _ _ _ (tensorFunctor a.val) _ (hlim a) (hcolim a) (htlim a) (htcolim a) (L R) (L S) (rho R) (rho S), (∀ {R S : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S) (d : ℕ) (theta : (∏ᶜ fun _ : Fin d ↦ unit (ringSheaf R)) ≅ (restriction a.val).obj (unit (ringSheaf S))), ∃ phi : tensorFunctor a.val ⋙ restriction a.val ≅ Functor.const (Discrete (Fin d)) ⋙ lim, (∀ (M : SheafOfModules.{u} (ringSheaf R)) (V : Cᵒᵖ) (s : S.obj.obj V) (m : M.val.obj V) (i : Fin d), (phi.hom.app M ≫ Pi.π (fun _ : Fin d ↦ M) i).val.app V (scalarPure a.val M V s m) = (theta.inv ≫ Pi.π (fun _ : Fin d ↦ unit (ringSheaf R)) i).val.app V s • m) ∧ (∀ (M : SheafOfModules.{u} (ringSheaf R)) (V : Cᵒᵖ) (x : ((Functor.const (Discrete (Fin d)) ⋙ lim).obj M).val.obj V), (phi.inv.app M).val.app V x = ∑ i : Fin d, scalarPure a.val M V ((Pi.lift (fun j : Fin d ↦ if i = j then 𝟙 _ else 0) ≫ theta.hom).val.app V (@id ((unit (ringSheaf R)).val.obj V) (1 : R.obj.obj V))) ((Pi.π (fun _ : Fin d ↦ M) i).val.app V x)) ∧ ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) ℤ) (p : ℤ) (n : ℕ) (i : Fin d), (restriction a.val).map (((cmp a).beta X).hom.f p ≫ (Pi.π (fun k : ℕ ↦ (((projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val)).mapHomologicalComplex (.up ℤ)).obj X).asFunctor.obj (op k)) n).f p) ≫ phi.hom.app ((X.X p).obj (op n)) ≫ Pi.π (fun _ : Fin d ↦ (X.X p).obj (op n)) i = phi.hom.app ((roosP X).X p) ≫ Pi.π (fun _ : Fin d ↦ (roosP X).X p) i ≫ (Pi.π (fun k : ℕ ↦ X.asFunctor.obj (op k)) n).f p) ∧ (∀ {R S U : Sheaf J CommRingCat.{u}} (a : FiniteFreeScalarArrow J R S) (b : FiniteFreeScalarArrow J S U), ∃ (ab : FiniteFreeScalarArrow J R U) (_hab : ab.val = a.val ≫ b.val) (A : tensorFunctor a.val ⋙ tensorFunctor b.val ≅ tensorFunctor ab.val) (AT : projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val) ⋙ projectionPost (I := ℕᵒᵖ) (tensorFunctor b.val) ≅ projectionPost (I := ℕᵒᵖ) (tensorFunctor ab.val)), (∀ (M : ringedSiteModules.{u} (ringSheaf R)) (V : Cᵒᵖ) (s : S.obj.obj V) (z : U.obj.obj V) (x : M.val.obj V), (A.hom.app M).val.app V (scalarPure b.val ((tensorFunctor a.val).obj M) V z (scalarPure a.val M V s x)) = scalarPure ab.val M V (b.val.hom.app V s * z) x) ∧ (∀ (M : ringedSiteModules.{u} (ringSheaf R)) (V : Cᵒᵖ) (z : U.obj.obj V) (x : M.val.obj V), (A.inv.app M).val.app V (scalarPure ab.val M V z x) = scalarPure b.val ((tensorFunctor a.val).obj M) V z (scalarPure a.val M V 1 x)) ∧ (∀ (X : ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) (n : ℕᵒᵖ), (AT.hom.app X).app n = A.hom.app (X.obj n)) ∧ ∀ K : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)), (exactDerived (tensorFunctor b.val) (hlim b) (hcolim b)).map ((cmp a).comparison.hom.app K) ≫ (cmp b).comparison.hom.app ((exactDerived (projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val)) (htlim a) (htcolim a)).obj K) ≫ (L U).map ((exactDerivedComp (htlim a) (htcolim a) (htlim b) (htcolim b) (htlim ab) (htcolim ab) AT).hom.app K) = (exactDerivedComp (hlim a) (hcolim a) (hlim b) (hcolim b) (hlim ab) (hcolim ab) A).hom.app ((L R).obj K) ≫ (cmp ab).comparison.hom.app K) ∧ (∀ R : Sheaf J CommRingCat.{u}, ∃ (a : FiniteFreeScalarArrow J R R) (_ha : a.val = 𝟙 R) (U : tensorFunctor a.val ≅ 𝟭 (ringedSiteModules.{u} (ringSheaf R))) (UT : projectionPost (I := ℕᵒᵖ) (tensorFunctor a.val) ≅ 𝟭 (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R))), (∀ (M : ringedSiteModules.{u} (ringSheaf R)) (V : Cᵒᵖ) (r : R.obj.obj V) (x : M.val.obj V), (U.hom.app M).val.app V (scalarPure a.val M V r x) = r • x) ∧ (∀ (X : ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)) (n : ℕᵒᵖ), (UT.hom.app X).app n = U.hom.app (X.obj n)) ∧ ∀ K : DerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} (ringSheaf R)), (cmp a).comparison.hom.app K ≫ (L R).map ((exactDerivedUnit (htlim a) (htcolim a) UT).hom.app K) = (exactDerivedUnit (hlim a) (hcolim a) U).hom.app ((L R).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5017d57e",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Re-delivery after 7c766dee RETURN. H2 fixed: scalarPure now via def-sfb-scalar-inverse-image-normalization; coordinate formulas inlined verbatim. H13 fixed: all 10 dependency records byte-identical to side-live. Item record differs from live only in lean and stmt_deps; added deps are landed def owners (Roos model, ringed tensor sections, scalarPure, projectionPost, scalar-extension additive instance); statement, proof and proof_deps unchanged. Clause check: small-model pro-etale site via e and hJ, no universe equality; finite free basis as exists d with an iso, d=0 allowed, no chosen basis; R lim and rho existential but pinned by IsRightDerivedFunctor with the Roos unit, unique up to unique iso; lambda a natural iso on D(towers), pinned by limit.post normalization and realized by the cone map; cone pinned on both roosChi coordinates with p/p+1 offsets checked; beta pinned by projections and intertwines 1-s; composition under pinned balanced associator and mapDerivedCategoryCompNatIso; identity under the derived unitor; no extra hypotheses. Edge cases d=0, identity, zero and constant towers, unbounded complexes, empty T covered. lean.statement verbatim, 6 declarations present, one sorry, docstrings carry source and blueprint, report sections present. No compile (no file changed); worker reports clean compile and dry run. Advisory: mapDerivedCategory and the universal property used instead of the recorded lem-pur and homotopy-limit declarations (equivalent here because finite free scalar extension is exact); the (p,n,i) clause is redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-c1fa5",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261025T202058-L-2671112",
+  "kind": "interface",
+  "note": "independent cc review: delivered FieldScalarStrictLimit theorem statement vs clone (identical); FieldScalarStrictLimitData vs the clone's interface block (verbatim); the two sorry statements vs their nodes and the item's needs; node proof_deps vs Lean imports/uses; #print axioms on a scratch build"
+ }
+}

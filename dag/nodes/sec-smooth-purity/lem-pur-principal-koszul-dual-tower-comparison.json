@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-principal-koszul-dual-tower-comparison",
+ "kind": "statement",
+ "title": "Strict singleton dual Koszul and principal cone tensor tower comparison",
+ "statement": "Let C be a small site with topology J and R a sheaf of commutative rings. Let a be a global section of the unit R-module and P an arbitrary integer cochain complex of R-module sheaves. The transposed principal negative cone tensor tower koszulTowerComplex R (koszulTensorTower R P a) [def-pur-principal-koszul-quotient-towers] is isomorphic as a strict complex of inverse towers to ringedKoszulTensorTowerComplex R 1 (a) P [def-weil-pbc-ringed-koszul-system]. The isomorphism carries the degreewise components of koszulStrictAugmentation to ringedKoszulTensorUnitComponent at every tower index. There is no exact-product, derived-category, regularity or K-flatness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E, proof of lemma-derived-completion-koszul, identification of the dual positive Koszul complex with the negative Koszul complex; singleton calculation in the parent proof step 1."
+ },
+ "stmt_deps": [
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-pbc-ringed-koszul-system"
+ ],
+ "proof": [
+  {
+   "text": "Construct the actual termwise isomorphisms c_m^q from the cone biproduct projections, removal of the positive tensor unit, Hom-to-single projection, rank-one evaluation, and the unique isomorphism of zero objects off degrees -1 and 0. The sole nonzero differential identity makes them chain isomorphisms: the remaining chain-map equations follow from zero source or zero target.",
+   "uses": [
+    "def-pur-principal-koszul-dual-terms",
+    "lem-pur-principal-koszul-finite-dual-differential"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two supported successor transition identities give a natural transformation between the strict untensored towers; at other degrees the source is zero. Its components are chain isomorphisms, so it is a natural isomorphism. The degree-zero cone-inclusion equation identifies the finite unit, and the remaining unit equations have zero source.",
+   "uses": [
+    "lem-pur-principal-koszul-finite-dual-endpoints"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor the finite tower isomorphism with P. Use the adopted source library instance CochainComplex.Monoidal.braidedCategory (WeilConjectures.Mathlib.Algebra.Homology.Monoidal), whose braiding is the signed total-complex symmetry with summand sign (-1)^(i*j). Braiding naturality identifies the two orders of tensoring; BraidedCategory.leftUnitor_inv_braiding identifies the canonical principal unit inclusion with the dual tensor unit. These identities give the strict tensor tower isomorphism and transport the prescribed augmentation. Transpose degreewise by natural isomorphisms of evaluation diagrams; the chain-map identities give the transposed differential equation, and evaluating the augmentation equation gives exactly the required equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-principal-koszul-dual-terms",
+  "lem-pur-principal-koszul-finite-dual-differential",
+  "lem-pur-principal-koszul-finite-dual-endpoints"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "T9",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E: explicit finite maps, supported matrix identities, signed tensor symmetry and strict tower assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dual of the singleton Koszul complex is isomorphic to the negative two term Koszul complex",
+   "results": "HomologicalComplex.dgoEquivHomologicalComplex_counitIso; HomologicalComplex.alternatingConstScIsoEven; HomologicalComplex.alternatingConstScIsoOdd; HomologicalComplex.singleObjOpcyclesSelfIso_hom; HomologicalComplex.pOpcycles_singleObjOpcyclesSelfIso_inv; HomologicalComplex.extend.XOpIso; HomologicalComplex.singleCompEvalIsoSelf_inv_app; HomologicalComplex.singleCompEvalIsoSelf_hom_app",
+   "date": "2026-10-26",
+   "verdict": "No strict singleton Koszul tensor tower comparison. Existing project Hom-to-single and finite-free calculations supply component infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*dual|dual.*Koszul",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "No strict singleton Koszul tensor tower comparison. Existing project Hom-to-single and finite-free calculations supply component infrastructure only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dual of the singleton Koszul complex is the two term negative Koszul complex and its augmentation and transitions agree",
+   "results": "HomologicalComplex.instHasHomologyOppositeOp; HomologicalComplex.unop; CategoryTheory.ShortComplex.unop; Module.subsingleton_dual_iff; HomologicalComplex.op; FGModuleCat.FGModuleCatDual; HomologicalComplex.instHasHomologyUnopOfOpposite; HomologicalComplex.opSymm",
+   "date": "2026-10-26",
+   "verdict": "No strict singleton Koszul tensor tower comparison. Existing project Hom-to-single and finite-free calculations supply component infrastructure only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrincipalKoszulRoosPresentationComparison",
+  "date": "2026-10-26",
+  "group": "U7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-scalar-extension-composition",
+   "place": "Principal Koszul presentation comparison, proof step 1: augmentation-compatible strict finite tensor tower identification.",
+   "via": [
+    "lem-pur-principal-koszul-roos-presentation-comparison",
+    "lem-pur-regular-quotient-completion-unit",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalKoszulDualTowerComparison",
+  "file": "lean/Sheaf/Paper/PrincipalKoszulDualTowerComparison.lean",
+  "declaration": "CategoryTheory.principalKoszul_dual_tower_comparison",
+  "statement": "theorem principalKoszul_dual_tower_comparison\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{u})\n    (a : (SheafOfModules.unit\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections)\n    (P : CochainComplex (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) :\n    ∃ e : koszulTowerComplex R (koszulTensorTower R P a) ≅\n        ringedKoszulTensorTowerComplex R 1 (fun _ ↦ ⟨a.val, a.property⟩) P,\n      ∀ (m : ℕ) (q : ℤ),\n        ((koszulStrictAugmentation R P a).app (op m)).f q ≫\n            (e.hom.f q).app (op m) =\n          (ringedKoszulTensorUnitComponent R 1\n            (fun _ ↦ ⟨a.val, a.property⟩) P (op m)).f q",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261025T204950-L-3070366",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ec731",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T092722-L-3459472",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone statement (identical); new nodes vs Lean signatures; adapted unclaimed modules vs change records; 94-module consistent sandbox build (delivery + import chains to FiniteFreeCompletionTransport, KoszulRoosProjectionComparison, principalKoszul users, import-all users) all compiled; axioms of main/new lemmas = propext, Classical.choice, Quot.sound"
+ }
+}

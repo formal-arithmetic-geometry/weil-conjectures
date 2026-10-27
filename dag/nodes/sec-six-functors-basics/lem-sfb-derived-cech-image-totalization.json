@@ -22,132 +22,59 @@
  ],
  "proof": [
   {
-   "text": "The module category on each of the small ringed sites is Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose an ordinary injective resolution $a:K[0]\\to I^\\bullet$ with $I^q=0$ for $q<0$, in the sense of [def-sp-injective-resolutions]. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. The exact module inverse images are left adjoint to the corresponding direct images. Define $B^{n,q}=(fv_n)_*v_n^*I^q$ for $n,q\\geq0$. A face deleting a factor induces the restriction map on these sheaves; the alternating sum defines $d_{\\mathrm{Cech}}$. Naturality of restriction gives $d_{\\mathrm{Cech}}d_I=d_Id_{\\mathrm{Cech}}$, and the simplicial identities give $d_{\\mathrm{Cech}}^2=0$. Thus $B$ has the total complex of [def-sp-double-complex-total], with the stipulated sign. The units of slice restriction define a chain augmentation $b:f_*I\\to\\operatorname{Tot}B$, landing in Cech degree zero.",
+   "text": "Use the constructed coherent model CechColumnAux.model from [lem-sfb-cech-injective-column-model], with its adjunction-defined restrictions and units. Sectionwise evaluation proves additivity of elementModulePullback. The zero extension of each ordinary injective resolution is K-injective by the bounded-below injective criterion. For the column comparison, the exact extension-by-zero adjunction of [lem-weil-pbc-ringed-sheaf-slice-adjunction] implies that element-site restriction preserves injectives; commute restriction with extension and apply the same K-injective criterion. The ordinary right-derived unit is therefore invertible, and its image under H remains invertible.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sp-grothendieck-enough-injectives",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sfb-cech-injective-column-model",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-sfb-cech-injective-image-augmentation] to the supplied resolution and model. Its total_augmentation field gives b0 with the precise localization-unit components and QuasiIso b0. This is the rowwise injective Cech argument and the first-quadrant augmentation criterion, including degree-zero descent.",
+   "uses": [
+    "lem-sfb-cech-injective-image-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree r the pairs (n,q) with n+q=r form a finite set, contained in the finite interval below (r,r). Additive H preserves the resulting finite coproducts. The identity on each bicomplex component identifies the bicomplex for F followed by H with H applied to the bicomplex for F. Apply HomologicalComplex2.mapTotalIso to this identification. Its coprojection equation gives exactly the displayed finite_total_comparison, including both differential signs. Define b=H(b0) followed by the inverse total comparison; its components are exactly the localization unit into (0,q).",
+   "uses": [
     "def-sp-double-complex-total"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03FC (lemma-injective-module-trivial-cech), double-complex construction; Tag 07A5 (section-unbounded)."
-   }
+   "elementary": false
   },
   {
-   "text": "For a localization at an arbitrary topos object $A$, use [lem-trf-topos-localization-site-presentation] to present $A$ by an object of a small site. Under this presentation [lem-pur-kinjective-restrict-localized-universes] says that restriction carries $I$ to a K-injective complex. Restriction is exact, so $v_n^*a$ resolves $K_n$. Hence [lem-weil-pbc-kinjective-total-derived] identifies $Q((fv_n)_*v_n^*I)$ with $R(fv_n)_*(K_n[0])$, and $Q(f_*I)$ with $Rf_*(K[0])$. Here $Q$ denotes localization at quasi-isomorphisms. These comparisons use the right-derived comparison at the specified resolution; they are not arbitrary isomorphisms. All faces and degeneracies are induced on this one complex $I$, so they supply a compatible cosimplicial resolution, rather than independently chosen column representatives.",
+   "text": "Exact H preserves the quasi-isomorphism b0, so b and its zero extension are quasi-isomorphisms. The resolutionComparison is invertible: it is H applied to the derived resolution map and the K-injective computing isomorphism, followed by the exact-functor factorization isomorphism. Compose it with Q of mapExtendIso followed by extendMap b, and take the associated isomorphism. Its hom is the required composite by construction, giving derived_cech_image_totalization with unchanged normalization.",
    "uses": [
-    "lem-trf-topos-localization-site-presentation",
-    "lem-pur-kinjective-restrict-localized-universes",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A5 (section-unbounded) and Tag 08FI (lemma-restrict-K-injective-to-open); slice presentation: sites.tex, Tag 04GZ (lemma-localize-topos)."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $q$ and a site object $W$ of $\\mathcal Y$. Put $A=f^{-1}h_W^\\#$ and work in $\\mathcal X/A$. The direct-image adjunction identifies $B^{n,q}(W)$ with sections of $I^q|_A$ over the $(n+1)$-fold fibre product of $V_A=V\\times A\\to A$. Present this slice and its object $V_A$ by [lem-trf-topos-localization-site-presentation]. The restriction of $I^q$ is injective: [lem-pur-kinjective-restrict-localized-adjunction-universes] gives an exact left adjoint $G$ to restriction, and a map $M\\to I^q|_A$ extends across a mono $M\\hookrightarrow N$ by adjoining it to $GM\\to I^q$, extending across the mono $GM\\hookrightarrow GN$, and transposing back. By [lem-weil-pbc-ringed-site-injective-module-injective-presheaf], its underlying module presheaf is injective. Apply [lem-sc-injective-presheaf-module-nerve-acyclic] to the map of set presheaves $V_A\\to1$ to obtain exactness in positive Cech degrees. Since $v$ is epic, $V_A\\to1$ is locally surjective by [lem-weil-pbc-site-sheaf-sets-epi-locally-surjective]: lift the terminal section locally, using the epi characterization before base change. The sheaf gluing axiom therefore identifies degree-zero cycles with sections over $A$, uniquely. Consequently $f_*I^q(W)[0]\\to B^{\\bullet,q}(W)$ is a quasi-isomorphism. This holds for every $W$, so the augmented row is exact as a complex of module sheaves.",
+   "text": "For a resolution map, check the augmentation square degreewise using ιTotal_map and naturality of the localization unit. Apply refinement_laws from [lem-sfb-cech-augmentation-normalized-naturality] for the refinement square. For an arbitrary chain homotopy use its signed_total_homotopy, extend by zero, and apply Q_map_eq_of_homotopy. These arguments work for arbitrary supplied complexes and maps, with no extra lifting assumptions.",
    "uses": [
-    "lem-trf-topos-localization-site-presentation",
-    "lem-pur-kinjective-restrict-localized-adjunction-universes",
-    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-    "lem-sc-injective-presheaf-module-nerve-acyclic",
-    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+    "lem-sfb-cech-augmentation-normalized-naturality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 03FB (lemma-injective-module-injective-presheaf), 03FC (lemma-injective-module-trivial-cech); sites.tex, Tags 00WN (lemma-mono-epi-sheaves), 03CI (lemma-topos-good-site)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sc-first-quadrant-column-augmentation] to $B$ with the internal and external indices chosen so that its tested complexes are the Cech rows $B^{\\bullet,q}$ and its complex $A$ is $f_*I^\\bullet$. The row quasi-isomorphisms are precisely step 3. The condition that the augmentation is killed by the first Cech differential is equality of the two restrictions to $V\\times V$; its component in total degree $q$ is the $(0,q)$ inclusion. These are exactly the two augmentation hypotheses of that node. It follows that the specified map $b$ is a quasi-isomorphism. If one uses the transposed total convention, the comparison on bidegree $(n,q)$ is multiplication by $(-1)^{nq}$: it interchanges the two total differential conventions and is the identity at $n=0$, so it preserves this augmentation. This proves the derived descent assertion before applying $h^*$.",
-   "uses": [
-    "lem-sc-first-quadrant-column-augmentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0133 (lemma-double-complex-gives-resolution), including its second-variable variant."
-   }
-  },
-  {
-   "text": "Apply $h^*$ termwise to $b$. By [lem-weil-pbc-exact-functor-derived-factorization] this represents the derived exact inverse image and remains a quasi-isomorphism. In degree $r$ the identity of finite biproducts gives $h^*(\\bigoplus_{n+q=r}B^{n,q})\\cong\\bigoplus_{n+q=r}h^*B^{n,q}$. Additivity makes this identification commute with the two differentials and their signs, hence it is a chain isomorphism $h^*\\operatorname{Tot}B\\cong\\operatorname{Tot}(h^*B)$. Compose with the column comparisons of step 2. This gives the displayed isomorphism, represented by $h^*b$ and these finite-sum identifications. There are exactly $r+1$ possible summands for $r\\geq0$, and none for $r<0$.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-sp-double-complex-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); homology.tex, Tag 0133 (lemma-double-complex-gives-resolution)."
-   }
-  },
-  {
-   "text": "The component $f_*I^q\\to(fv_0)_*v_0^*I^q$ is the direct image of the ordinary localization unit. On sections it sends a section to its restriction to $V$; no sign is present in Cech degree zero. For any module $M$, the composite $v^*M\\xrightarrow{v^*\\eta_M}v^*v_*v^*M\\xrightarrow{\\varepsilon_{v^*M}}v^*M$ is the identity by the adjunction triangle identity. Thus evaluating the restriction map on $V$ and then evaluating sections is the direct-image counit, with exactly this normalization. The derived version has the same representative: [lem-trf-bounded-below-derived-adjunction] identifies the derived unit and counit with the localized termwise ones through the derived comparison on the bounded-below injective model. Exact restriction makes its left-derived comparison the termwise restriction. Applying $f_*$ and $h^*$ preserves these identities, which identifies the requested augmentation and its normalization.",
-   "uses": [
-    "lem-trf-bounded-below-derived-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5 (lemma-derived-adjoint-functors), canonical adjunction; sites.tex, Tag 04GZ (lemma-localize-topos)."
-   }
-  },
-  {
-   "text": "For $u:K\\to L$, take injective resolutions $a:K\\to I$ and $c:L\\to J$. By [lem-weil-pbc-injective-resolution-lift-exists] choose $t:I\\to J$ lifting $u$. Restrict $t$ in each Cech degree and apply the direct images: the resulting double-complex map commutes with the units defining $b$. [lem-sp-derived-injective-resolution-naturality] identifies the source and column maps with the prescribed derived maps. Independence of choices follows from [lem-weil-pbc-kinjective-hom-derived]: two lifts have the same homotopy class. A homotopy $s$ of vertical degree $-1$ induces on the total a homotopy whose $(n,q)$ component is $(-1)^n s$; the horizontal cross terms cancel and the vertical terms give the difference of total maps. For a covering refinement $V'\\to V$, the maps of fibre powers induce restrictions of sections, commute with every deletion and repetition of a factor, and commute with $b$ because their composites to $1$ agree. Therefore the same augmentation square proves refinement naturality, with composition and identities inherited from the actual restrictions.",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-sp-derived-injective-resolution-naturality",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective), uniqueness of resolution comparisons; sites-cohomology.tex, Tag 03FC (lemma-injective-module-trivial-cech), functorial restrictions."
-   }
-  },
-  {
-   "text": "Let $T$ be an exact coefficient-restriction functor as in the statement, with its natural commutation identifications. It commutes with finite totals by the degreewise biproduct calculation in step 5. The resolution $TK\\to TI$ is a quasi-isomorphism by [lem-weil-pbc-exact-functor-derived-factorization]. Choose an injective resolution $TK\\to J$ for the new coefficients. By [lem-weil-pbc-kinjective-hom-derived] the derived map $Q(TI)\\to QJ$ specified by these augmentations is represented by a chain map $t:TI\\to J$, unique up to homotopy. In each slice, restrict $t$ and apply the displayed direct images. Commutation with those underived functors gives maps from $T B(I)$ to $B(J)$; they respect both differentials and the augmentation because the underived adjunction units are natural for restriction of scalars. These maps represent the canonical right-derived coefficient comparison, obtained by applying the right-derived unit to $TI$ and then the resolution comparison. Their augmentation square commutes in the derived category; the signed homotopy calculation of step 7 removes the choice of $t$. Exactness of $T$ also preserves the quasi-isomorphism $b$. This is the asserted naturality under coefficient restriction. It uses no claim that $TI$ is injective, or that a right-derived coefficient comparison is invertible.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor) and Tag 070I (lemma-K-injective); agent coefficient-comparison extension of the Cech argument."
-   }
+   "text": "For coefficient naturality, apply ιTotal_map to the actual coefficientTotalMap. On the (0,q) component the claimed equality is hδ at I.X q followed by naturality of the target localization unit at t.f q. For the derived normalization apply rightDerivedFunctorUnitQ_rightDerivedPullback_app, then rightDerivedFunctorUnitQ_naturality at t and functoriality of Q. This directly proves the canonical unit equation for the stated general additive functors; no scalar-specific coefficient comparison theorem is required and invertibility is not asserted.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sfb-cech-injective-column-model",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-sfb-cech-injective-image-augmentation",
   "def-sp-double-complex-total",
-  "lem-trf-topos-localization-site-presentation",
-  "lem-pur-kinjective-restrict-localized-universes",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pur-kinjective-restrict-localized-adjunction-universes",
-  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-  "lem-sc-injective-presheaf-module-nerve-acyclic",
-  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
-  "lem-sc-first-quadrant-column-augmentation",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-trf-bounded-below-derived-adjunction",
-  "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-sp-derived-injective-resolution-naturality",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sfb-cech-augmentation-normalized-naturality"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 03FC (lemma-injective-module-trivial-cech), derived sheaf-valued extension using homology.tex Tag 0133; augmentation, counit and coefficient naturality written explicitly by NZ."
+  "place": "Tag 03FC; finite total and exact inverse image: homology.tex Tag 0133 and derived.tex Tags 015F, 070I. U1 Lean proof uses the existing coherent-model construction, exact image-augmentation theorem and normalized signed homotopy; coefficient squares follow directly from naturality and the right-derived unit factorization."
  },
  "mathlib_searches": [
   {
@@ -247,73 +174,22 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-derived-cech-image-totalization",
   "worker": "stage1",
-  "summary": "Reused existing general presheaf-nerve acyclicity, localized module adjunction and K-injective comparison nodes; constructed the actual first-quadrant direct-image bicomplex and its augmentation, verified rows on slice sections, and proved finite-total exact inverse-image and normalized naturality. No new nodes. Clarified coherent totalization and non-invertible coefficient comparisons without changing the displayed descent statement.",
-  "blueprint": "The parent chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None); retain its inherited provenance. Realizes paragraph (3) (open direct image) of sk-thm-sf-ctf-stability-direct-images.proof.md through the tame-stratum Kummer descent expansion, namely its normalized covering-nerve derived descent step.",
-  "tool_uses": [
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic Existence of K-injective resolutions of sheaves of modules used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-trf-topos-localization-site-presentation",
-    "why": "Generic A small presenting site representing a prescribed topos object and its slice used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-pur-kinjective-restrict-localized-universes",
-    "why": "Generic Restriction to a localized ringed site preserves K-injectivity with independent coefficient universe used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-total-derived",
-    "why": "Generic Enough K-injectives compute total right derived functors used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-pur-kinjective-restrict-localized-adjunction-universes",
-    "why": "Generic Exact additive extension by zero adjoint to localized restriction with independent coefficient universe used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-    "why": "Generic Injective module sheaves are injective as module presheaves used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-sc-injective-presheaf-module-nerve-acyclic",
-    "why": "Generic Injective module presheaves are acyclic on presheaf Čech nerves used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-sc-first-quadrant-column-augmentation",
-    "why": "Generic A first-quadrant resolution-column augmentation induces a total quasi-isomorphism used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-trf-bounded-below-derived-adjunction",
-    "why": "Generic Canonical bounded-below derived adjunction and its comparison normalization used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   },
-   {
-    "node": "lem-sp-derived-injective-resolution-naturality",
-    "why": "Generic Naturality of the specified injective-resolution computation used in the covering-nerve injective-resolution calculation; no geometric finiteness or constructibility route is replaced, and the inherited unit has no alternative statement for this homological tool."
-   }
-  ]
+  "summary": "Repair of the human re-split return: retained the statement verbatim and distributed all eight original proof steps across four comparable statement-only unsplit tasks plus the finite-total calculation. The report retains the original arguments verbatim and assigns each to its new obligation; no new proof step is longer than 2000 characters.",
+  "blueprint": "Inherited ancestor is None (blueprint_refs.py ancestor); paragraph (3), open direct image, of main-20261015 sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. The four new tasks realize the derived covering-nerve argument of the tame-boundary Kummer expansion without changing the unit route."
  },
  "tool_uses": [
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-trf-topos-localization-site-presentation",
-  "lem-pur-kinjective-restrict-localized-universes",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-pur-kinjective-restrict-localized-adjunction-universes",
-  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
-  "lem-sc-injective-presheaf-module-nerve-acyclic",
-  "lem-sc-first-quadrant-column-augmentation",
-  "lem-trf-bounded-below-derived-adjunction",
-  "lem-sp-derived-injective-resolution-naturality"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NZ-c5e537e73",
-  "group": "NZ",
+  "reviewer": "NT-cc-Q71-7101a3cda",
+  "group": "Q71",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-c5e537e73 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, every cited statement, Stacks 03FC at sites-cohomology.tex:1816, and the Lean quasiIso_of_column_augmentation. The item is unsplit and unreviewed on live and side-live, so it is not superseded, and there is no re-split repair note. The displayed isomorphism and all original clauses are kept. The two appended sentences only make precise the existing 'compatible resolution' (coherent resolution model) and state that coefficient naturality is along the canonical comparisons T Rf_* -> Rf'_* T without claiming they are invertible. That is not a weakening: underived commutation cannot give invertibility, and the only citer (tame-stratum-kummer-descent, steps 4 and 7) gets that identification from another node. The statement is true (Cech descent for an epimorphism V->1 in a ringed topos). Edge cases checked: V=1 (constant nerve exact), split cover, K=0, degenerate topos, h=id. Step checks: (1) a bounded-below injective resolution is K-injective, and the total sign d_Cech+(-1)^n d_res matches def-sp-double-complex-total. (2) A topos slice is not a site object, so lem-trf-topos-localization-site-presentation is needed before 08FI-type restriction, and kinjective-total-derived gives the comparison. (3) Restriction preserves injectives via the exact left adjoint G; then 03FB, then presheaf-nerve acyclicity for V_A->1 with no covering hypothesis; degree 0 via local surjectivity and gluing; sectionwise exactness gives exactness of sheaves. (4) The Lean indexing (a: A->K.X 0, hypothesis on K.flip.X n) puts the Cech degree first, and the Mathlib sign (-1)^p on d2 matches. (5) Exact h^* is applied termwise over finite biproducts. (6) The triangle identity plus the derived-adjunction normalization equations. (7) Lift, naturality, Hom uniqueness, and the total-homotopy sign (-1)^n s are correct. (8) T is exact and the target J is K-injective, which is enough. Duplicate search found only narrower nodes (degreewise, etale open covers, weakly contractible hypercovers, Lambda-module holim). There is no SGA, all 11 Stacks tags exist with the stated labels, and the off-unit split statements are all declared in tool_uses and accepted as generic. Batch-5 flags: lem-trf-topos-localization-site-presentation is a Giraud/03CI/04GZ presentation whose closure has no trace-formula or Poincare content (only def-trf-geometric-morphism) and no assumption leaf; lem-trf-bounded-below-derived-adjunction is a generic derived adjunction (09T5) with a 14-node definitional closure. Both are outside the assumed statements, so both are accepted."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-7101a3cda (reviewer sub-agent of L); spot-checked: Re-split note checked (coord/repair-notes, released 2026-10-22, batch-5, 8038 characters in 8 steps). The item is not superseded: live and side-live still hold the NZ 8-step split. Not in the dropped list; no SGA source. Field diff against side-live: only proof, proof_deps and split_report change; the statement is byte-identical; the proof is 2475 characters in 5 steps. Step-by-step mapping, all verified against the side-live proof: old steps 1-2 (injective resolution, K-injectivity, coherent bicomplex, unit augmentation, canonical column comparisons) go to lem-sfb-cech-injective-column-model. Old steps 3-4 (A=f^{-1}h_W^#, injectivity of I^q|_A via exact j_!, presheaf nerve exactness, degree-zero gluing, total quasi-isomorphism via 0133, transpose sign (-1)^{nq}) go to lem-sfb-cech-injective-image-augmentation. Old steps 6-7 (triangle identity, derived unit/counit, lift existence and independence, total homotopy (-1)^n s, refinement ρ_r) go to lem-sfb-cech-augmentation-normalized-naturality. Old step 8 (t:TI→J unique up to homotopy, column comparisons, square, no invertibility) goes to lem-sfb-cech-coefficient-derived-comparison. Old step 5 (finite-biproduct h^*) stays in the item as step 3 at full length. The new nodes are statement-only, of comparable size (2255/2429/2736/3079 characters), none restates the item, and each is cited by its step. Mathematics checked: all four statements are true. I verified the sign identities ΦD1=D2Φ and DS+SD=t1−t0 directly. b is a chain map at n=0. Exactness for an epi V_A→A follows Stacks 03FC (sites-cohomology.tex:1816) plus the sheaf axiom. K-injective J makes t unique up to homotopy. Edge cases V=1, K=0, degenerate topos, r<0. No duplicate in the snapshot DAG; lem-sfb-cech-localization-unit-totalization, def-sfb-coherent-cech-image-model and the Koszul/open-cover Cech nodes are distinct. Each new node records four searches of three kinds. Stacks tags 03FC/08FI/04IE/04J4/0133/09T5/070I/015F exist with the stated labels. FIX (B2): lem-sfb-cech-coefficient-derived-comparison used restriction of scalars [def-pc-sheaf-restrict-scalars] without introducing the ring maps and assumed the commutation identifications. The corrected file introduces φ_X:R'_X→R_X and φ_Y:R'_Y→R_Y compatible with the coefficient maps of f and f', sets T_X, T_Y, T_n to scalar restriction along φ_X, φ_Y and v_n^*φ_X, and makes the identifications the identities on underlying sheaves. This makes the old implicit reading explicit, is not a weakening, and still covers item step 5. No new tool_uses: the new proof cites only a Mathlib leaf and a definition outside the new nodes. Lean record untouched.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.DerivedCechImageTotalization",
@@ -347,5 +223,27 @@
   "group": "NK",
   "result": "pass",
   "note": "Re-delivery of d2bb6cae H2/H12 RETURN. Lean byte-identical (diff -r snapshots); item statement byte-identical to side-live, only stmt_deps added def-sfb-element-site-localization. New def node existing:true on Sheaf.CategoryTheory.RingedSheafSliceConstruction (elementProjection/Topology/Ring/ModulePullback/Map/ModulePullbackOver, all plain defs at l.34-300, live=side-live by cmp); TeX matches the bodies (induced topology, p_A^*R, sectionwise pushforward with identity coefficient map, continuity as data), Stacks 0791/04IE/04J4 correct; stmt_deps own ringedSiteModules; covers every element* decl used by both delivered modules; no other def owner in side-live DAG; check_existing: no failures, only the noncomputable note (advisory). def-sfb-coherent-cech-image-model now cites the def node instead of lem-weil-pbc-ringed-sheaf-slice-adjunction; all stmt_deps of item and new nodes are definition nodes. Prior mathematical reading stands (e pinned to resolutionComparison ≫ Q(extendMap b), sign d_Cech+(-1)^n d_res, canonical naturalities, derived-category form). No compile (no file changed); worker 17.3 s/27.2 s clean, dry run 74eb826a246 passed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261026T092732-L-3461398",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

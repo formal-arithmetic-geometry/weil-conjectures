@@ -1,0 +1,280 @@
+{
+ "id": "lem-pur-integral-scalar-finite-comparison-models",
+ "kind": "statement",
+ "title": "Finite models and good representatives for normalized integral scalar comparisons",
+ "statement": "Let ell be prime, E and L finite extensions of Q_ell, and iota:E→L an embedding. Use the ordinary scalar functors [def-weil-integral-scalar-extension, lem-weil-scalar-extension-composition] and the strict finite pullback and tensor models [lem-pur-integral-operations-well-defined]. For every n the unique natural finite pullback map sends 1 tensor f*(1 tensor x) to f*(1 tensor (1 tensor x)); the unique finite tensor map sends 1 tensor ((1 tensor x) tensor (1 tensor y)) to (1 tensor (1 tensor x)) tensor (1 tensor (1 tensor y)). Their consecutive reduction equations assemble unique strict tower maps and the specified diagonal Roos chain maps. Ordinary scalar extension preserves the good complexes (termwise flat and K-flat). The diagonal Roos map is the coordinate-normalized additive comparison [def-sf-additive-roos-map]. This is the unchanged finite-model part formerly in IntegralOperationsScalarComparisons, not a new derived comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (pullback and tensor) and 0G7E (pullback preserves K-flatness); derived.tex Tag 08TC (Roos homotopy limit), and sites-modules.tex Tags 03EK--03EL (sheafified tensor product and pullback).",
+  "note": "Compile-time extraction of existing declarations of lem-pur-integral-operations-scalar-extension; mathematical statements and data constructions retained verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-integral-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-integral-operations-well-defined",
+  "def-sf-additive-roos-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply the two finite-level existence-and-uniqueness lemmas to obtain the normalized natural chain maps at every n, on all complexes and pairs of complexes. Their displayed generator equations are exactly the pullback and tensor equations of this statement.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-level-exists-unique",
+    "lem-pur-integral-scalar-tensor-level-exists-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product and lemma-tensor-product-pullback; project ScalarRoosComparison.lean scalarTowerAssembly; sites-cohomology.tex lemma-pullback-K-flat; derived.tex definition-derived-limit."
+   }
+  },
+  {
+   "text": "The two consecutive reduction lemmas apply to these natural maps with their proved generator equations. For an arrow m→n with m≥n, iterate consecutive squares: the case m=n is the identity square; the case m+1→n is the composite of the consecutive square m+1→m with the inductively established square m→n. Thus the level maps define strict tower transformations. Naturality is componentwise in the input complexes. Any other transformation with these level components is equal by equality at each n; finite-level uniqueness therefore also gives the claimed normalized tower uniqueness. This is the retained scalarTowerAssembly argument.",
+   "uses": [
+    "lem-pur-integral-scalar-pullback-level-reduction",
+    "lem-pur-integral-scalar-tensor-level-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product and lemma-tensor-product-pullback; project ScalarRoosComparison.lean scalarTowerAssembly; sites-cohomology.tex lemma-pullback-K-flat; derived.tex definition-derived-limit."
+   }
+  },
+  {
+   "text": "For either tower C and its transformation a, define the specified chain map to be κ_(S,C) followed by Roos(a). The first factor is exactly the two-coordinate additive Roos map of the cited definition; the second is the Roos functor applied to the strict tower transformation. Composition defines the claimed diagonal chain map, without choosing a map of triangles or claiming that scalar extension preserves arbitrary products.",
+   "uses": [
+    "def-sf-additive-roos-map",
+    "def-sf-strict-roos-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product and lemma-tensor-product-pullback; project ScalarRoosComparison.lean scalarTowerAssembly; sites-cohomology.tex lemma-pullback-K-flat; derived.tex definition-derived-limit."
+   }
+  },
+  {
+   "text": "Ordinary scalar extension is termwise sheaf change of rings along j_W:R_(E,W)→R_(L,W). Its concrete complex has terms R_(L,W)⊗P^i and differential 1⊗d_P. Hence the object and morphism formulas identify it as a complex, not merely degreewise, with the change-of-rings complex. Apply the cited K-flat change-of-rings theorem to a good P: its hypotheses are precisely K-flatness and flatness of every term. It gives both properties over R_(L,W); the complex identification transfers K-flatness and its degree components transfer flatness. The independent-universe tensor-colimit theorem says these sheaf tensor functors preserve colimits in the module universe even when the site object and Hom universes differ. The retained ordinary pullback normalization is an equation using these good representatives and the specified chain map; no further derived comparison is asserted.",
+   "uses": [
+    "def-pur-change-of-rings-complex",
+    "lem-pur-kflat-change-of-rings",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "section-tensor-product and lemma-tensor-product-pullback; project ScalarRoosComparison.lean scalarTowerAssembly; sites-cohomology.tex lemma-pullback-K-flat; derived.tex definition-derived-limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-pullback-level-exists-unique",
+  "lem-pur-integral-scalar-tensor-level-exists-unique",
+  "lem-pur-integral-scalar-pullback-level-reduction",
+  "lem-pur-integral-scalar-tensor-level-reduction",
+  "def-sf-additive-roos-map",
+  "def-sf-strict-roos-functor",
+  "def-pur-change-of-rings-complex",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "NG",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product and lemma-tensor-product-pullback; project ScalarRoosComparison.lean scalarTowerAssembly; sites-cohomology.tex lemma-pullback-K-flat; derived.tex definition-derived-limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite scalar extension of coefficient sheaves commutes with finite pullback and tensor reductions through their pure tensor generator maps",
+   "results": "ModuleCat.ExtendScalars.map_tmul and ModuleCat.extendRestrictScalarsAdj, PresheafOfModules.pullback and restrictScalars, SheafOfModules.restrictScalars found. These are generic ingredients; no matching concrete finite pullback/tensor generator-normalized comparison.",
+   "date": "2026-10-26",
+   "verdict": "Retain existing project models and proofs; no replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"changeOfRings\", \"tensor\"",
+   "results": "Zero hits.",
+   "date": "2026-10-26",
+   "verdict": "No direct replacement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackLevel_existsUnique|scalarTensorLevel_existsUnique|scalarGood",
+   "results": "Zero Mathlib hits. Local source contains the assigned existing declarations, which are relocated verbatim here.",
+   "date": "2026-10-26",
+   "verdict": "Relocation only, no duplicate logical declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackLevel|scalarTensorLevel|changeOfRings.*pullback|pullback.*changeOfRings",
+   "results": "{\"t\": \"2026-10-27T06:07:18Z\", \"tool\": \"grep\", \"query\": \"scalarPullbackLevel|scalarTensorLevel|changeOfRings.*pullback|pullback.*changeOfRings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension and inverse image for sheaves of modules commute on cochain complexes",
+   "results": "{\"t\": \"2026-10-27T06:07:18Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension and inverse image for sheaves of modules commute on cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"ModuleCat.coextendScalars\", \"PresheafOfModules.pullback\", \"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"ModuleCat.extendRestrictScalarsAdj\", \"PresheafOfModules.restrictScalarsObj\"], \"digest\": \"e02ad50e1f275a6b\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-27T06:07:18Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback, SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unique natural chain map commuting scalar extension and finite coefficient pullback of sheaf complexes, normalized on pure tensor generators",
+   "results": "{\"t\": \"2026-10-27T06:07:19Z\", \"tool\": \"leanfinder\", \"query\": \"Unique natural chain map commuting scalar extension and finite coefficient pullback of sheaf complexes, normalized on pure tensor generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"b821636a5ae801fa\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(pullback|extendScalars)|extendScalars.*tensor|changeOfRings",
+   "results": "{\"t\": \"2026-10-27T06:07:31Z\", \"tool\": \"grep\", \"query\": \"tensor.*(pullback|extendScalars)|extendScalars.*tensor|changeOfRings\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pushforward.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean\"], \"digest\": \"29bffbd564b64867\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique natural scalar extension comparison for the total tensor complex of two sheaves of modules reduced modulo a uniformizer power",
+   "results": "{\"t\": \"2026-10-27T06:07:31Z\", \"tool\": \"leansearch\", \"query\": \"Unique natural scalar extension comparison for the total tensor complex of two sheaves of modules reduced modulo a uniformizer power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.hom_ext\", \"IsLocalization.moduleLid\", \"IsLocalization.moduleTensorEquiv\", \"PiTensorProduct.instIsScalarTower\", \"TensorProduct.isScalarTower\", \"PiTensorProduct.isScalarTower'\", \"TensorProduct.isScalarTower_left\", \"PresheafOfModules.Sheafify.instSubsingletonSMulCandidate\"], \"digest\": \"5a477908d01be71e\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-27T06:07:32Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with sheaf tensor product and direct sum totalization as a unique natural transformation determined on pure tensors",
+   "results": "{\"t\": \"2026-10-27T06:07:33Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars commutes with sheaf tensor product and direct sum totalization as a unique natural transformation determined on pure tensors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.mapFree\", \"SheafOfModules.ιFree_mapFree_inv\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"PresheafOfModules.Monoidal.tensorObj_map_tmul\", \"SheafOfModules.ιFree_freeMap_assoc\"], \"digest\": \"569e2099d803e9d9\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "grep",
+   "query": "hom_ext|pullback|tensor",
+   "results": "{\"t\": \"2026-10-27T06:07:49Z\", \"tool\": \"grep\", \"query\": \"hom_ext|pullback|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"43b36f0fd16cc9c8\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-27T06:07:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"extendScalars\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"LieAlgebra.ExtendScalars.instBracketTensorProduct\"], \"digest\": \"e0a36c84cd2a1bfe\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of rings of module sheaves is compatible with inverse image and preserves termwise flat K-flat cochain complexes",
+   "results": "{\"t\": \"2026-10-27T06:07:51Z\", \"tool\": \"leanfinder\", \"query\": \"Change of rings of module sheaves is compatible with inverse image and preserves termwise flat K-flat cochain complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.Flat.shrink\", \"Module.Flat.of_shrink\", \"Module.Flat.isBaseChange\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.flat_iff_of_isLocalization\"], \"digest\": \"c2be15f5d4cddfd4\"}",
+   "date": "2026-10-27",
+   "verdict": "No match: generic module, free-sheaf, pullback or tensor ingredients do not state the specified finite-level normalized natural chain map."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "H1",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph: reduction and scalar compatibility is a theorem (sk-prop-scalar-six). This node retains the finite-reduction model portion of the assigned legacy scalar comparison without changing its route.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOperationsScalarComparisonModels",
+  "file": "lean/Sheaf/Paper/IntegralOperationsScalarComparisonModels.lean",
+  "declaration": "WeilConjectures.scalarGood",
+  "declarations": [
+   "WeilConjectures.scalarPullbackLevelNormalization",
+   "WeilConjectures.scalarPullbackLevel_existsUnique",
+   "WeilConjectures.scalarPullbackLevel",
+   "WeilConjectures.scalarPullbackTowerNormalization",
+   "WeilConjectures.scalarPullbackTower_existsUnique",
+   "WeilConjectures.scalarPullbackTower",
+   "WeilConjectures.scalarPullbackChain",
+   "WeilConjectures.scalarTensorLevelNormalization",
+   "WeilConjectures.scalarTensorLevel_existsUnique",
+   "WeilConjectures.scalarTensorLevel",
+   "WeilConjectures.scalarTensorTowerNormalization",
+   "WeilConjectures.scalarTensorTower_existsUnique",
+   "WeilConjectures.scalarTensorTower",
+   "WeilConjectures.scalarTensorChain",
+   "WeilConjectures.scalarGood",
+   "WeilConjectures.scalarPullbackOrdinaryNormalization"
+  ],
+  "statement": "theorem scalarGood (W : AlgebraicGeometry.Scheme.{u}) (P : (integralOperationsGoodComplex l E W).FullSubcategory) : integralOperationsGoodComplex l L W (((integralOrdinaryScalar l E L ι W).mapHomologicalComplex (ComplexShape.up ℤ)).obj P.obj)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-integral-scalar-finite-comparison-models",
+  "worker": "stage1 NG",
+  "summary": "Released keep_plan repair: assigned each of the two sorried finite-level normalized comparison declarations its own statement-only node; preserved the statement and the strict tower/Roos/good-representative argument. Construction details and verbatim original proof retained in report.md for the new-node workers. Lean attachment candidates name the existing sorried declarations.",
+  "blueprint": "Retains the recorded ancestor def-weil-derived-pullback-tensor-hom, final coefficient-compatibility paragraph; latest blueprint now locates it in sec-proetale-coefficients/sk-prop-sf-open-closed-triangle and refers coefficient compatibility to sk-prop-scalar-six. No unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic ring-sheaf change of rings preserves good complexes; no scalar comparison assertion."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Sheaf tensor presentation in independent site and module universes; no geometric comparison assertion."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NG-66122de67",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-66122de67 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, plus every cited statement, against the base item (dagsnap 13bcf586) and the Lean source. Item statement and stmt_deps are unchanged. Old proof, step by step: old step 1 (Roos map) is now step 3, whose kappa;Roos(a) composite equals scalarPullbackChain/scalarTensorChain. Old step 2 (the two finite-level constructions) became the two new nodes, with the old argument kept in source.note. Old step 3 is now step 2: the induction (base m=n, step m+1->n) is written out and uses the two level-reduction lemmas, whose hypothesis is exactly the generator formula. Old step 4 is now step 4: S_W is the def-pur-change-of-rings-complex complex up to symmetry of the tensor product, and lem-pur-kflat-change-of-rings has exactly the K-flat-and-flat-terms hypotheses and both conclusions. Nothing was dropped, and the parent proof is about 2.2k characters. Removing lem-weil-scalar-extension-composition from the proof is correct, since it is about rationalized D^b_c. Each new node matches its Lean normalization predicate: lines 88-109 for pullback and 201-225 for tensor. Direction, the base-changed object X x_Y V and the sign convention all agree, and n means exponent n+1, as coefficientExtensionRing (n+1) confirms. Both new statements are true. The map O_E/pi_E^{n+1}->O_L/pi_L^{n+1} exists because iota(pi_E) lies in pi_L O_L, ramified or not. Existence comes from the adjunction and f^* functoriality (pro-etale f^{-1} of a constant ring is constant), and uniqueness from the generators. S_W commutes with direct-sum Tot as a left adjoint. I tested iota=id, zero complexes, empty X, n=0, unbounded complexes and a ramified extension. Stacks 03EL (sites-modules.tex:3649) is the right source. All three search kinds are logged. A duplicate search over all integral-scalar nodes, including the pullback/tensor-clause nodes, def-pod-scalar-pullback-generator and def-trf-integral-scalar-tower-functors, found nothing. Restating a clause (D1) is acceptable here because the repair order asks for one node per Lean hole and the parent keeps real assembly. I accept both tool_uses: lem-pur-kflat-change-of-rings and lem-weil-pbc-independent-sheaf-tensor-colimits. Advisory only: from.node is null in both new nodes because the ancestor tool returns None; the ancestor is def-weil-derived-pullback-tensor-hom. Also attach the existing sorried scalarPullbackLevel_existsUnique and scalarTensorLevel_existsUnique from lean_candidates to the new nodes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-05af7",
+  "group": "N4",
+  "result": "fix",
+  "landing": "20261027T112415-L-1580767",
+  "kind": "interface",
+  "note": "independent cc review: item proofs and 4 new construction modules vs nodes pullback/tensor-level-exists-unique and 4 new nodes; removed CoefficientExtensionFinite import vs import closure (still public via IntegralOperationsWellDefined) and unit sk-thm-sf-compatibility realized (empty)",
+  "sorry_before": [
+   "WeilConjectures.scalarPullbackLevel_existsUnique",
+   "WeilConjectures.scalarTensorLevel_existsUnique"
+  ],
+  "sorry_after": []
+ },
+ "tool_uses": [
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ]
+}

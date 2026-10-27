@@ -1,0 +1,394 @@
+{
+ "id": "lem-sfb-abelian-structure-h1-dimension",
+ "kind": "statement",
+ "title": "First coherent cohomology dimension of an abelian variety",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $A/k$ be an abelian variety [def-sc-abelian-variety] of dimension $g$. Then $\\dim_k H^1(A,\\mathcal O_A)=g$, where $H^1$ is Zariski sheaf cohomology of the structure sheaf.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Remark 8.7(e), printed p.37: coherent-cohomology dimension input underlying the dimension assertion; see also Mumford, Abelian Varieties, coherent cohomology of abelian varieties (WANTED for its proof)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sc-abelian-variety-characterization] and [lem-sc-abelian-variety-projective], $A$ is geometrically integral and projective. Put $H^q=H^q(A,\\mathcal O_A)$ and $h=\\dim_kH^1$. Proper coherent finiteness [lem-fin-proper-coherent-finite-dimensional] makes each $H^q$ finite dimensional. The scheme is Noetherian, since it is of finite type over the field $k$. Thus [lem-sc-noetherian-cohomology-above-dimension] gives $H^q=0$ for $q>g$. Also $H^0=k$ by [lem-pc-h0-proper-variety].",
+   "uses": [
+    "lem-sc-abelian-variety-characterization",
+    "lem-sc-abelian-variety-projective",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-pc-h0-proper-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.7(e), printed p.37; I Lemma 12.2, printed p.55, with coherent finiteness and Stacks 02UZ for the coherent degree bound"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-coherent-group-bialgebra] on $A$. Its coproduct has every element of $H^1$ primitive. If $h>g$, choose $g+1$ members of a basis of $H^1$. By [lem-sfb-graded-primitive-product] their product is a nonzero element of $H^{g+1}$, contradicting step 1. Consequently $h\\leq g$. This uses the ordered-product assertion, so in characteristic two it requires neither division by a factorial nor a separate assertion that degree-one squares vanish.",
+   "uses": [
+    "lem-sfb-coherent-group-bialgebra",
+    "lem-sfb-graded-primitive-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55: degree-one bound, adapted to coherent cohomology"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-picard-identity-representability] to $(A,0)$, and call its proper connected identity component $P$. It is a separated finite-type group scheme and represents rigidified algebraically trivial families; its universal sheaf is trivial on both identity axes. Crucially the cited statement gives $T_0P\\cong H^1(A,\\mathcal O_A)$ without assuming $P$ smooth or reduced. We will only need $\\dim P\\leq h$, not smoothness of $P$.",
+   "uses": [
+    "lem-sfb-projective-picard-identity-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.7(e), printed p.37, and the general projective Picard input recorded by the cited auxiliary"
+   }
+  },
+  {
+   "text": "Choose an ample invertible sheaf $L$ using [lem-sc-abelian-variety-projective]. On $A_x\\times A_y$ form $N=m^*L\\otimes p_1^*L^{-1}\\otimes p_2^*L^{-1}\\otimes c^*(0^*L)$, where $c$ is the structure map. Cancellation trivializes both identity axes. The family, with parameter the smooth connected $A_y$, connects each fibre to the trivial fibre; hence its fibres are algebraically trivial. Representability [lem-sfb-projective-picard-identity-representability] gives $f:A\\to P$ with $N\\cong(1\\times f)^*\\mathcal P$. By [thm-sc-theorem-of-cube], $N(x,y+z)\\cong N(x,y)\\otimes N(x,z)$ as families rigidified at $x=0$: the quotient is the seven-factor cube expression $L_{x+y+z}L_xL_yL_z/(L_{x+y}L_{x+z}L_{y+z})$, with its constant identity-line factor cancelled by normalization. Uniqueness in representability gives $f(y+z)=f(y)+f(z)$ and $f(0)=0$ as morphisms of schemes. Thus $f$ is a homomorphism.",
+   "uses": [
+    "lem-sc-abelian-variety-projective",
+    "lem-sfb-projective-picard-identity-representability",
+    "thm-sc-theorem-of-cube"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Theorem 5.5 and Remark 5.6; I section 8, normalized L* construction, printed pp.39–40"
+   }
+  },
+  {
+   "text": "The kernel $K=f^{-1}(0)$ is a closed subgroup, since $P$ is separated. Apply [lem-sfb-abelian-closed-subgroup-reduced-component]: $B=(K_{\\mathrm{red}})^0$ is an abelian subvariety and $\\dim B=\\dim K$. As $f|_B=0$, the representing equality for $N$ and the trivial zero fibre of the universal sheaf show that $N|_{A\\times B}$ is trivial. Restrict further to $B\\times B$ and pull back by $x\\mapsto(x,-x)$. Since addition on this map is zero, cancellation yields $L|_B\\otimes[-1]^*(L|_B)\\cong\\mathcal O_B$, up to a constant one-dimensional factor, which is trivial over $k$.",
+   "uses": [
+    "lem-sfb-abelian-closed-subgroup-reduced-component",
+    "lem-sfb-projective-picard-identity-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.1, printed p.35: the connected reduced kernel and its restricted ample sheaf"
+   }
+  },
+  {
+   "text": "The restriction $L|_B$ is ample in the complete-linear-system convention [def-sc-ample]. Indeed choose $L^{\\otimes m}$ very ample on $A$, and restrict its embedding to the closed subscheme $B$, obtaining $i:B\\hookrightarrow\\mathbf P^N$ defined by generating sections $s_0,\\ldots,s_N$ of $M=L^{\\otimes m}|_B$. By [lem-fin-proper-coherent-finite-dimensional], $V=H^0(B,M)$ is finite dimensional. The quotient $V\\otimes\\mathcal O_B\\twoheadrightarrow M$ defines $j:B\\to\\mathbf P(V^\\vee)$ by [lem-trf-projective-bundle-quotient-geometry]. The linear map $k^{N+1}\\to V$ defined by the $s_i$ gives a projection $\\pi$ on the open where they generate, containing $j(B)$; quotient functoriality gives $i=\\pi j$. Hence $j$ is a monomorphism: equality after $j$ implies equality after $i$. It is proper by [lem-weil-pbc-proper-to-separated], and therefore a closed immersion by [lem-pc-proper-monomorphism-closed]. This proves $M$ very ample and $L|_B$ ample. The inverse automorphism of $B$ also pulls its complete linear embedding back to an embedding, so $[-1]^*(L|_B)$ is ample.",
+   "uses": [
+    "def-sc-ample",
+    "lem-fin-proper-coherent-finite-dimensional",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.1, printed p.35: restriction of an ample bundle; complete-system details supplied by the agent"
+   }
+  },
+  {
+   "text": "By [lem-sc-ample-tensor], the trivial bundle in step 5 is ample on $B$. If $\\dim B>0$ this is impossible: $B$ is proper geometrically integral by [lem-sc-abelian-variety-characterization], so [lem-pc-h0-proper-variety] gives $H^0(B,\\mathcal O_B)=k$. Every complete linear system of a power of the trivial bundle therefore maps $B$ to $\\mathbf P^0$, and cannot be a closed immersion from a positive-dimensional scheme. This contradicts [def-sc-ample]. Thus $\\dim B=0$, and [lem-sfb-abelian-closed-subgroup-reduced-component] implies that $K$ is finite, including its possibly nonreduced structure.",
+   "uses": [
+    "lem-sc-ample-tensor",
+    "lem-sc-abelian-variety-characterization",
+    "lem-pc-h0-proper-variety",
+    "def-sc-ample",
+    "lem-sfb-abelian-closed-subgroup-reduced-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.1, printed p.35, finite-kernel argument"
+   }
+  },
+  {
+   "text": "The morphism $f$ is proper by [lem-weil-pbc-proper-to-separated]. For a closed point $p\\in P$, [lem-weil-pbc-closed-point-residue-field-base] gives $\\kappa(p)=k$. If $A_p$ is nonempty, it has a closed point by [lem-sc-lft-over-field-jacobson-space] applied to $A_p$, and this point is $k$-rational by the residue-field result. A choice $u\\in A_p(k)$ identifies the whole scheme-theoretic fibre with $K$ by $v\\mapsto v-u$, with inverse $w\\mapsto u+w$. Thus every closed fibre is finite or empty. By [lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous], the locus of fibres of dimension greater than zero is closed in $P$. If nonempty it contains a closed point by [lem-sc-lft-over-field-jacobson-space], a contradiction. Hence every fibre has dimension at most zero.",
+   "uses": [
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Proposition 8.1 and Remark 8.7(e): scheme-theoretic finite-kernel dimension argument, with closed-fibre extension supplied by the agent"
+   }
+  },
+  {
+   "text": "Now [lem-zl-finite-type-fibre-image-dimension-bounds], with $d=\\dim P$ and $n=0$, gives $g=\\dim A\\leq\\dim P$. The identity is $k$-rational and $P$ is finite type. Its local ring is Noetherian, and [lem-ag-group-identity-local-dimension] identifies its Krull dimension with $\\dim P$. The cotangent inequality [lem-weil-pbc-regular-local-cotangent-dimension] gives $\\dim P\\leq\\dim_kT_0P=h$, since a finite-dimensional vector space and its dual have equal dimension. With step 2 this yields $g\\leq\\dim P\\leq h\\leq g$, so $h=g$. This also covers $g=0$; no smoothness of $P$ has been used.",
+   "uses": [
+    "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "lem-ag-group-identity-local-dimension",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Remark 8.7(e), printed p.37: dimension comparison assembled from the two bounds"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-ample",
+  "lem-ag-group-identity-local-dimension",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "lem-sfb-coherent-group-bialgebra",
+  "lem-sfb-graded-primitive-product",
+  "lem-sfb-projective-picard-identity-representability",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "thm-sc-theorem-of-cube"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Proposition 8.1, Remark 8.7(e), and the degree-one Hopf argument of Lemma 12.2 (adapted from etale to coherent cohomology); general Picard input and dimension comparisons made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of H1 of the structure sheaf of an abelian variety is the dimension of the abelian variety",
+   "results": "8 hits; recorded top results: Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, FunctionField.classNumber, NumberField.Units.rank_modTorsion, IsLocalRing.finrank_cotangentSpace_eq_zero, NumberField.Units.finrank_eq_rank, Algebra.IsStandardSmoothOfRelativeDimension.iff_of_isStandardSmooth, AffineAddMonoid.dim",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent-complex H1 and abstract exterior algebras do not compute coherent cohomology of abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension of coherent cohomology H1 of the structure sheaf of an abelian variety equals its dimension",
+   "results": "8 hits; recorded top results: groupCohomology.H1, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallyEtale.subsingleton_h1Cotangent, groupCohomology.d₀₁_ker_eq_invariants, Algebra.Extension.H1Cotangent, CategoryTheory.PresheafOfGroups.H1, groupCohomology.shortComplexH1, Algebra.IsStandardSmooth.subsingleton_h1Cotangent",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent-complex H1 and abstract exterior algebras do not compute coherent cohomology of abelian varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent cohomology of an abelian variety is the exterior algebra on its first cohomology",
+   "results": "8 hits; recorded top results: ExteriorAlgebra, groupCohomology, Algebra.Extension.H1Cotangent, CategoryTheory.PresheafOfGroups.H1, groupCohomology.shortComplexH1, groupCohomologyIsoExt, Algebra.Extension.cotangentComplex_injective_iff, groupCohomology.coboundaries₁",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent-complex H1 and abstract exterior algebras do not compute coherent cohomology of abelian varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\"",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent-complex H1 and abstract exterior algebras do not compute coherent cohomology of abelian varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|coherentCohomology|structureSheafCohomology",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: group cohomology, cotangent-complex H1 and abstract exterior algebras do not compute coherent cohomology of abelian varieties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The first coherent cohomology of an abelian variety has dimension equal to the dimension of the variety",
+   "results": "8 hits: groupCohomology.H1ofAutOnUnitsUnique, Algebra.SubmersivePresentation.rank_kaehlerDifferential, IsLocalRing.finrank_cotangentSpace_eq_zero, NumberField.Units.rank_modTorsion, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, NumberField.Units.finrank_eq_rank, ModularForm.levelOne_weight_zero_rank_one, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology, cotangent complexes and differential ranks do not compute H1 of the structure sheaf of an abelian variety"
+  },
+  {
+   "tool": "grep",
+   "query": "AbelianVariety|coherentCohomology|structureSheafCohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology, cotangent complexes and differential ranks do not compute H1 of the structure sheaf of an abelian variety"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first coherent cohomology of an abelian variety has dimension equal to its dimension",
+   "results": "8 hits: groupCohomology.coboundaries₁_ext, groupCohomology.H1π_eq_zero_iff, groupCohomology.coboundaries₁, groupCohomology.coboundaries₁.coe_mk, groupCohomology.H1IsoOfIsTrivial.congr_simp, groupCohomology.d₀₁_ker_eq_invariants, Algebra.FormallySmooth.subsingleton_h1Cotangent, groupCohomology.coboundaries₁_le_cocycles₁",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology, cotangent complexes and differential ranks do not compute H1 of the structure sheaf of an abelian variety"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AbelianVariety\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology, cotangent complexes and differential ranks do not compute H1 of the structure sheaf of an abelian variety"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The irregularity h1 of the structure sheaf of a complete connected algebraic group equals its dimension",
+   "results": "8 hits: Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.Presentation.id_dimension, Algebra.SubmersivePresentation.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.rank_kaehlerDifferential, Algebra.IsStandardSmoothOfRelativeDimension.id, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.IsStandardSmooth.relativeDimension, Module.rankAtStalk_self",
+   "date": "2026-10-23",
+   "verdict": "no match: group cohomology, cotangent complexes and differential ranks do not compute H1 of the structure sheaf of an abelian variety"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-polarization-calculus",
+  "date": "2026-10-22",
+  "group": "Q46"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety.",
+   "via": [
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-abelian-structure-h1-dimension",
+  "worker": "stage1",
+  "summary": "Proved the upper bound using the coherent cohomology bialgebra and primitive-product nonvanishing, and the lower bound by the normalized ample line-bundle map to the general Picard identity component. Kept the finite-kernel, complete-linear-system restriction, closed-fibre and cotangent-dimension arguments explicit. Two new statement-only inputs; no Lean writing or attachment. The statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supplies the supporting coherent H1 input without invoking its parent polarization theorem. The ancestor command returns None; the inherited null ancestor and lineage are retained. Current latest-blueprint and all-DAG searches found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "def-sc-ample",
+    "why": "Generic Very ample and ample line bundles is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Generic Local dimension at a group identity equals global dimension is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-fin-proper-coherent-finite-dimensional",
+    "why": "Generic Source API for finite-dimensional proper coherent cohomology is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-pc-h0-proper-variety",
+    "why": "Generic Global sections of a proper scheme is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-pc-proper-monomorphism-closed",
+    "why": "Generic Proper monomorphisms of schemes are closed immersions is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-sc-abelian-variety-characterization",
+    "why": "Generic Abelian varieties are the complete group varieties is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-sc-abelian-variety-projective",
+    "why": "Generic Abelian varieties are projective is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-sc-ample-tensor",
+    "why": "Generic Tensor products of ample modules is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-sc-lft-over-field-jacobson-space",
+    "why": "Generic Schemes locally of finite type over a field are Jacobson is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic Quasi-coherent cohomology vanishes above the dimension of a Noetherian scheme is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "Generic Projective bundles of arbitrary quasi-coherent modules classify invertible quotients is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Residue fields of closed points over an algebraically closed field is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "why": "Generic Upper semicontinuity of proper fibre dimension is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Generic Proper to a separated target is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-cotangent-dimension",
+    "why": "Generic Fundamental inequality dim R <= dim m/m^2, with equality iff regular is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Generic Fibre and image dimension bounds for finite-type schemes over a field is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   },
+   {
+    "node": "thm-sc-theorem-of-cube",
+    "why": "Generic The theorem of the cube is used only for the stated cohomology, complete-linear-system or dimension comparison; it supplies no replacement of a step of the constructible-finite-Tor unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-ample",
+  "lem-ag-group-identity-local-dimension",
+  "lem-fin-proper-coherent-finite-dimensional",
+  "lem-pc-h0-proper-variety",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-sc-abelian-variety-characterization",
+  "lem-sc-abelian-variety-projective",
+  "lem-sc-ample-tensor",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "thm-sc-theorem-of-cube"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-c59345d97",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-c59345d97 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Milne sources in full: AV I Prop 8.1 (p.35), Remark 8.7(e) (p.37), and the construction before Lemma 12.2 plus the lemma itself (p.55). Only the split fields changed; the statement and blueprint fields are unchanged from the Q46 parent snapshot. There is no cycle: the item is absent from its 3624-node closure. proof_deps equals the union of the step uses, the longest step is 1070 characters, and there is no SGA citation. Upper bound h<=g: Grothendieck vanishing kills H^q above g; the bialgebra node makes H^1 primitive; the primitive-product node makes g+1 independent elements multiply to a nonzero class in H^{g+1}=0. Lower bound g<=h: I recomputed the normalized family N on both identity axes and the cube quotient, so f is a homomorphism. The kernel argument follows Milne 8.1: B=(K_red)^0, then the (1,-1) pullback makes L|_B tensor [-1]^*L|_B trivial. Step 6 shows L|_B ample in the complete-linear-system sense (i = pi j, so j is a proper monomorphism and hence closed). Since H^0(O_B)=k, dim B=0. Closed fibres are translates of K, and semicontinuity plus Jacobson density bound every fibre. Then fibre bound g<=dim P = dim O_{P,0} <= dim m/m^2 = h, with no smoothness of P used, so the item avoids the parent's dim A^vee = g. Bialgebra node: true by Stacks 0BED (proper gives qc and separated), Koszul-sign multiplicativity, the counit from m(e x 1)=pr_2, and H^0=k from geometric integrality. Primitive-product node: true by projecting the iterated coproduct to multidegree (1,...,1) and applying dual coordinates, where only sigma=id survives; checked for r=2 and for characteristic 2. Both new nodes are statement-only, self-contained and searched. Neither duplicates an existing node (kunneth-qcoh, h1-product-spanning and wf-hopf-augmentation-height differ) or restates the item. The 17 generic tool_uses are accepted. Batch 5: lem-fin-proper-coherent-finite-dimensional, lem-pc-h0-proper-variety, lem-trf-projective-bundle-quotient-geometry (Proj Sym functor of points) and thm-sc-theorem-of-cube are generic, and their closures reach only the definition def-trf-schematically-dense-open. def-sc-field-linear-module-cohomology-operations is a definition reaching only the generic def-pod-ring-scalar-extension. None is part of the trace formula or Poincare duality. Advisory: steps 3-9 repeat parent steps 1-3, 7 and 8, which cannot be avoided without a cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.StructureSheafH1Dimension",
+  "declaration": "AlgebraicGeometry.IsAbelianVariety.finrankH_one_structureSheaf_eq_dim",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/StructureSheafH1Dimension.lean",
+  "statement": "theorem finrankH_one_structureSheaf_eq_dim {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] : Scheme.Modules.finrankH k (SheafOfModules.unit A.left.ringCatSheaf) 1 = IsAbelianVariety.dim A",
+  "branch": "sheaf-dag",
+  "by": "Q147",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eef3d1844",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Statement finrankH k (unit O_A) 1 = IsAbelianVariety.dim A for [Field k][IsAlgClosed k], A : Over (Spec k) with [GrpObj A][IsAbelianVariety A] matches the node clause by clause. H is Zariski sheaf cohomology (Cohomology.Defs:81) with the k-action via A.hom (OverClass.fromOver). No extra hypotheses; one universe u. lean.statement is verbatim. Edge cases: g=0 covered, any characteristic, empty scheme excluded by ConnectedSpace, finiteness from lem-fin-proper-coherent-finite-dimensional. Node fields identical to live apart from lean; live item still split with no lean. No existing H^1-dimension declaration found by rg in side-live or slopmaster2. Docstrings have source, blueprint id and the 9 proof steps; only sorry; no definitions; imported modules exist. Advisory: Scheme.Modules.H has no owning node in stmt_deps (older library notion; ModuleAbelianZariskiCohomology bridges it to scalarCohomology for stage 3). No compile run since nothing was changed."
+ }
+}

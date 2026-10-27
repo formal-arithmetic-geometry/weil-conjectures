@@ -1,0 +1,113 @@
+{
+ "id": "lem-coef-restriction-sections-evaluation-acyclic",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "title": "Scalar-restriction resolutions are quasi-isomorphisms on sections of every slice",
+ "statement": "Let C : Type a be a category with arrows in Type v, let J be a Grothendieck topology, and set m=max(a,v,r). Assume J admits composition with the commutative-ring forgetful functor, abelian sheafification in universe m, and its locally bijective characterization. Let B,D be sheaves of rings in universe m whose multiplication is commutative on each object, and b:B→D a ring-sheaf map. For K-injective cochain complexes I of D-module sheaves and K of B-module sheaves, every quasi-isomorphism j:Res_b(I)→K induces a quasi-isomorphism of the underlying abelian-group complexes of sections on each object U of C.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, on the slice over an object; literature/stacks-project/sites-modules.tex, Tags 03DI and 03DJ, exact extension by zero and restriction to a slice."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Retain commutativity on the given ring sheaves without changing their ring data. Lift the ring homomorphism to the fully faithful commutative-ring forgetful functor. Restrict the two complexes and the resolution map to the slice over U. Exact restriction preserves the quasi-isomorphism; its exact left adjoint shows that it preserves K-injective complexes.",
+   "uses": [
+    "lem-sp-site-restriction-kinjective-independent-ring",
+    "lem-sf-site-perfect-restriction-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalar-restriction acyclicity of global sections on the slice. The slice has terminal object id_U. The natural isomorphisms from global sections to the limit and to evaluation at this terminal object identify the resulting map with the original sections of j on U. Quasi-isomorphisms are invariant under this natural isomorphism.",
+   "uses": [
+    "lem-coef-restriction-sections-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-site-restriction-kinjective-independent-ring",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-coef-restriction-sections-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, on the slice over an object; literature/stacks-project/sites-modules.tex, Tags 03DI and 03DJ, exact extension by zero and restriction to a slice."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A K-injective scalar restriction resolution induces quasi-isomorphisms of sections over every object of a site",
+   "results": "Eight hits on injective resolutions, K-injectivity under isomorphism, and derived-category maps to K-injective complexes. None states scalar-restriction acyclicity on sections. The project global-sections theorem and slice-restriction results are reused.",
+   "date": "2026-10-27",
+   "verdict": "reuse project global-sections and slice-restriction results"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "Four hits: restrictScalars, its additive instance, and its underlying object/map equations. No resolution-to-sections acyclicity theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientRestrictionSections|restrictionEvaluation_quasiIso",
+   "results": "Remote grep returned zero hits. Local search finds coefficientRestrictionSections_quasiIso for global sections and the private pro-etale-only restrictionEvaluation_quasiIso in ProEtaleRestrictionPushforwardAcyclic. The present proof generalizes the latter slice argument and reuses the former theorem.",
+   "date": "2026-10-27",
+   "verdict": "partial match; general slice evaluation proved from existing declarations"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientSystemRestrictionAcyclic",
+  "date": "2026-10-27",
+  "group": "M9"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-pur-completed-coefficient-system-restriction-acyclic",
+   "place": "Proof step 2: scalar-restriction acyclicity on sections of each sequence-site slice."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CoefficientRestrictionSectionEvaluationAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/CoefficientRestrictionSectionEvaluationAcyclic.lean",
+  "declaration": "SheafOfModules.coefficientRestrictionSectionsEvaluation_quasiIso",
+  "statement": "theorem coefficientRestrictionSectionsEvaluation_quasiIso\n    (B D : Sheaf J RingCat.{max a v r})\n    (hB : ∀ (U : Cᵒᵖ) (x y : B.obj.obj U), x * y = y * x)\n    (hD : ∀ (U : Cᵒᵖ) (x y : D.obj.obj U), x * y = y * x)\n    (b : B ⟶ D)\n    (I : CochainComplex (SheafOfModules.{max a v r} D) ℤ)\n    (K : CochainComplex (SheafOfModules.{max a v r} B) ℤ)\n    (j : ((SheafOfModules.restrictScalars b).mapHomologicalComplex (.up ℤ)).obj I ⟶ K)\n    [I.IsKInjective] [K.IsKInjective] [QuasiIso j] (U : C) :\n    QuasiIso (((SheafOfModules.toSheaf _ ⋙\n      sheafToPresheaf J AddCommGrpCat.{max a v r} ⋙\n      (CategoryTheory.evaluation _ _).obj (op U)).mapHomologicalComplex (.up ℤ)).map j)",
+  "branch": "sheaf-dag",
+  "by": "M9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T012910-L-2344913",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261027T012910-L-2344913",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

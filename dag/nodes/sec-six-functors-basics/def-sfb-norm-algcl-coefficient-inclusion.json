@@ -1,0 +1,131 @@
+{
+ "id": "def-sfb-norm-algcl-coefficient-inclusion",
+ "kind": "definition",
+ "title": "Finite-subextension to norm-continuous coefficient inclusion",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology. On profinite sets with the coherent topology let $C(P)$ be the ring of continuous maps $P\\to\\Omega$ whose image lies in one finite intermediate field [sk-def-sfb-qlbar-condensed], and let $B(P)=C(P,\\Omega)$ be the ring of all continuous maps [def-sfb-continuous-map-condensed-ring]. Define the morphism of sheaves of rings $c:C\\to B$ by the sectionwise subring inclusion $f\\mapsto f$. Its underlying abelian-sheaf morphism is the corresponding morphism of commutative ring objects [sk-def-sfb-ring-object], with its unit and multiplication compatibility. The section maps commute with restriction by precomposition. This definition asserts no cohomological comparison or flatness.",
+ "stmt_deps": [
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-ring-object"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), coefficient-change obligation: the actual inclusion from finite-subextension-valued functions to all norm-continuous functions; definitions only."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientInclusionRing|coefficientInclusion_isMonHom|SectionScalarComparison|SectionScalarNormalized",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; existing project definitions recorded directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sectionwise inclusion of finite subextension valued continuous functions into all continuous functions on profinite sets",
+   "results": "8 hits: Profinite.NobelingProof.continuous_CC'₀, Finset.continuous_restrict₂_apply, Profinite.IndexFunctor.obj, ContinuousMap.inclusion, continuousSubring, ContinuousMap.restrict, continuousSubsemiring, ProfiniteAddGrp.instCoeFunHomForallCarrierToTopTotallyDisconnectedSpaceToProfinite",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; existing project definitions recorded directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sectionwise inclusion of finite subextension valued continuous functions into all continuous functions on profinite sets",
+   "results": "8 hits: Profinite.NobelingProof.iso_map, Profinite.IndexFunctor.map, Profinite.IndexFunctor.π_app, Profinite.NobelingProof.πJ, Profinite.NobelingProof.spanFunctor, Profinite.IndexFunctor.obj, Profinite.indexFunctor, Profinite.NobelingProof.Linear_CC'₁",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; existing project definitions recorded directly."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientInclusionRing|coefficientInclusion_isMonHom|SectionScalarComparison|SectionScalarNormalized in dag/nodes, lean/WeilConjectures and lean/Sheaf",
+   "results": "DAG occurrences are helper lists in theorem nodes; no definition node owns these notions. Existing definitions found in Sheaf.Paper.NormAlgclCohomologyTopologyComparison lines 51-74 and Sheaf.Paper.InternalScalarPullbackNormalization lines 67-116. No matching upstream definition. blueprint_refs.py searches coefficient inclusion and scalar comparison returned 2 and 3 unrelated blueprint nodes, respectively.",
+   "date": "2026-10-22",
+   "verdict": "Reuse existing declarations; add definition ownership only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-stage-supported-generation",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), coefficient-change obligation: the actual inclusion from finite-subextension-valued functions to all norm-continuous functions; definitions only.",
+   "via": [
+    "lem-sfb-finite-stage-supported-generation",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.NormAlgclCoefficientMap",
+  "declaration": "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusionRing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusionRing",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusion",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientInclusion_isMonHom",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.finiteScalarMap",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.inclusionOnScheme",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.finiteSubextensionModule",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.normContinuousModule",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.coefficientModuleMap",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.comparison",
+   "AlgebraicGeometry.ProEtale.NormAlgclComparison.derivedGlobalSections"
+  ],
+  "statement": "def coefficientInclusionRing :\n    Profinite.padicAlgClCondensedRing.{u} ℓ ⟶\n      Profinite.continuousMapRingSheaf (PadicAlgCl ℓ)",
+  "branch": "newtargets-dag",
+  "by": "M2",
+  "date": "2026-10-25",
+  "existing": true,
+  "note": "Definition ownership for already published declarations, as requested by the immutable-head e55b77c4d6c4 H2 return. M2 (2026-10-25) moved these declarations verbatim (names, signatures, bodies, visibility) from Sheaf.Paper.NormAlgclCohomologyTopologyComparison to Sheaf.Paper.NormAlgclCoefficientMap, which the original module publicly re-exports (change record coord/changes/M2-norm-algcl-coefficient-module.md). All surrounding source variables and universe parameters are retained.",
+  "file": "lean/Sheaf/Paper/NormAlgclCoefficientMap.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45666c6c0",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45666c6c0",
+  "group": "NN",
+  "result": "pass",
+  "note": "H4/H12 correction from the 60bdbbf7 return is complete: duplicate def-sfb-section-scalar-comparison-data dropped; item stmt_deps cite the landed def-sfb-internal-section-scalar-pullback-comparison-data (Q96, same hash in snapshot and side-live, owns SectionScalarComparison and SectionScalarNormalized used by SectionAgreement); def-sfb-norm-algcl-coefficient-inclusion (byte-identical to the version checked before; coefficientInclusionRing, coefficientInclusion and the IsMonHom instance; no other owner) and def-sfb-internal-derived-scalar-comparisons kept. Lean byte-identical (sha 986dbeed) across e55b/60bd/4566; item node differs only in stmt_deps and lean.note; statement verbatim. Independent re-read of the substance: actual C/B/A_E and inclusions, ScalarAssertions (K-flat computation, unit v->1⊗v, section agreement, lisse degree 0), pinned pull, existential supported isomorphism as the node states, tower normalized by SuccessiveNormalized/composite unit, replete generator class, smallest replete triangulated subcategory plus FiniteConstruction, J_X formula in D(B_X), geometric clauses; edge cases empty X and S, rank 0, N=0, unbounded inputs, no flatness, arbitrary u. Item not landed live; all 26 imports exist. Advisory: supported-tower clause vacuous (c existential). No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d0d92",
+  "group": "M2",
+  "result": "fix",
+  "landing": "20261025T050838-L-3850424",
+  "kind": "interface",
+  "note": "independent cc review: extracted CoefficientMap block vs published item module (verbatim); item theorem signature vs published (identical); new normalization statement vs parent node, arithmetic interface (TensorModel/DerivedTensor/Invariants) and its use in the parent; 3 direct importers compiled against delivered modules (all OK)"
+ }
+}

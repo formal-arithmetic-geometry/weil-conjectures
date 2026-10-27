@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-sl2-invariant-complement",
+ "kind": "statement",
+ "title": "Invariant complements for rational sl2 operators",
+ "statement": "Let $V$ be a finite-dimensional $\\mathbf Q$-vector space [def-weil-finite-dimensional-subspace] and let $E,F,H\\in\\operatorname{End}_{\\mathbf Q}(V)$ satisfy $HE-EH=2E$, $HF-FH=-2F$, and $EF-FE=H$. If $U\\subseteq V$ is a $\\mathbf Q$-linear subspace with $E(U)\\subseteq U$, $F(U)\\subseteq U$, and $H(U)\\subseteq U$, then there is a $\\mathbf Q$-linear subspace $C\\subseteq V$ such that $V=U\\oplus C$, $E(C)\\subseteq C$, $F(C)\\subseteq C$, and $H(C)\\subseteq C$. Here $V=U\\oplus C$ means that every $v\\in V$ has a unique expression $v=u+c$ with $u\\in U$ and $c\\in C$. No faithfulness, nilpotence, diagonalizability, or algebraic-closure hypothesis is imposed. The cases $V=0$, $U=0$, $U=V$, and $E=F=H=0$ are included.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.70, proof (a), printed p.507: Weyl’s theorem that finite-dimensional representations of a semisimple Lie algebra over a characteristic-zero field are semisimple. Specialization to the rational Lie algebra of trace-zero 2 by 2 matrices with its standard e,f,h basis. This is the Weyl input invoked in the proof, not the group-integration conclusion of Theorem 23.70."
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Let $L=\\mathfrak{sl}_2(\\mathbf Q)$ be the trace-zero $2\\times2$ matrices with commutator bracket [def-wf-lie-algebra]. Its basis is $e=\\left(\\begin{smallmatrix}0&1\\\\0&0\\end{smallmatrix}\\right)$, $f=\\left(\\begin{smallmatrix}0&0\\\\1&0\\end{smallmatrix}\\right)$, $h=\\operatorname{diag}(1,-1)$. Multiplication gives $[h,e]=2e$, $[h,f]=-2f$, $[e,f]=h$, so $L$ is perfect. It is simple: any nonzero ideal $I$ is preserved by $\\operatorname{ad}h$; putting $T=\\operatorname{ad}h$, the projectors $T(T+2)/8$, $T(T-2)/8$, and $1-T^2/4$ isolate its $e,f,h$ components, respectively, hence isolate the nonzero components of any $ae+bf+ch\\in I$. Thus $I$ contains one of $e,f,h$ up to nonzero scalar. Bracketing with the other basis vectors gives all three. Since $[L,L]=L\\ne0$, $L$ is not solvable, and its only solvable ideal is zero. Thus it is semisimple in [def-wf-semisimple-lie-algebra].",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-wf-semisimple-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 23.70 proof (a), p.507; explicit rational rank-one matrix verification supporting its Weyl input."
+   }
+  },
+  {
+   "text": "The three given identities make the linear map $\\rho(e)=E$, $\\rho(f)=F$, $\\rho(h)=H$ a Lie representation: bracket preservation is bilinear, so checking these three pairs and the alternating diagonal pairs suffices. A subspace is $L$-invariant exactly when it is stable under $E,F,H$, since $e,f,h$ span $L$. By [lem-sfb-perfect-lie-hyperplane-criterion], it suffices to show that every simple invariant hyperplane $W$ in every finite-dimensional rational representation $M$ of this fixed $L$ has an invariant complement. The criterion is over $\\mathbf Q$ itself and requires only the perfectness proved above.",
+   "uses": [
+    "lem-sfb-perfect-lie-hyperplane-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40, pp.476-477, Lie-module criterion; Theorem 23.70 proof (a), p.507."
+   }
+  },
+  {
+   "text": "Fix such $M,W$ with representation $r$. If $r=0$, any basis of $W$ extended to $M$ supplies a stable complementary line. Otherwise $r$ is injective: its kernel is an ideal, since $r([x,y])=[r(x),r(y)]$, and simplicity of $L$ makes a proper kernel zero. Apply [lem-sfb-faithful-semisimple-trace-form] to this injective representation of the three-dimensional semisimple rational Lie algebra $L$. Its hypotheses are exactly characteristic zero and finite-dimensionality of $L,M$. We obtain the nondegenerate form $B(x,y)=\\operatorname{Tr}_M(r(x)r(y))$. Choose any basis $x_1,x_2,x_3$ and its $B$-dual basis $x^1,x^2,x^3$, obtained by inverting the Gram matrix, and put $c=\\sum_i r(x_i)r(x^i)$.",
+   "uses": [
+    "lem-sfb-faithful-semisimple-trace-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22c, The Casimir operator, p.475; Proposition 22.41, p.477, adapted to the rational Lie representation."
+   }
+  },
+  {
+   "text": "Trace cyclicity [lem-pc-finite-dimensional-trace-cyclic] gives $B([z,x],y)+B(x,[z,y])=0$: expand the two brackets and move the first factor of $\\operatorname{Tr}(r(z)r(x)r(y))$ to the end. Write $[z,x_i]=\\sum_j a_{ji}x_j$. Duality then gives $[z,x^i]=-\\sum_j a_{ij}x^j$, by pairing with each $x_j$. Consequently\n$$[r(z),c]=\\sum_{i,j}a_{ji}r(x_j)r(x^i)-\\sum_{i,j}a_{ij}r(x_i)r(x^j)=0,$$\nby exchanging $i,j$. Also the matrix definition of trace [def-weil-endomorphism-trace] gives $\\operatorname{Tr}_M(c)=\\sum_i B(x_i,x^i)=3$. Thus $c$ commutes with the $L$-action, without invoking a group integration theorem.",
+   "uses": [
+    "lem-pc-finite-dimensional-trace-cyclic",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 22c, p.475, Casimir commutation and trace calculation, expanded in a dual basis."
+   }
+  },
+  {
+   "text": "The one-dimensional space $M/W$ has scalar endomorphisms, whose commutators vanish. Since $L=[L,L]$, its induced action is zero; therefore $r(x)M\\subseteq W$ for every $x$. Each $r(x)$ preserves $W$, so $c(M)\\subseteq W$. In a basis adapted to $W$, the diagonal blocks of $c$ are $c|_W$ and zero, hence $\\operatorname{Tr}_W(c|_W)=3\\ne0$. In particular $c|_W\\ne0$. Its kernel is invariant by the commutation identity above. Since $W$ is simple, that kernel is zero. An injective endomorphism of a finite-dimensional vector space is surjective (its matrix has full rank), so $a=c|_W$ has an inverse. This argument replaces the algebraically closed Schur-lemma step of Proposition 22.41.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 22.41, p.477; agent rational-field replacement of its scalar Schur step by kernel and rank."
+   }
+  },
+  {
+   "text": "Define $p=a^{-1}c:M\\to W$. Since $a$ commutes with $r(z)|_W$, multiplying $ar(z)=r(z)a$ by $a^{-1}$ on both sides shows that $a^{-1}$ does too. Thus $p$ is equivariant and $p|_W=1_W$. Its kernel $D$ is invariant, and $m=p(m)+(m-p(m))$ exhibits $M=W+D$. If $w\\in W\\cap D$, then $w=p(w)=0$, so the decomposition is unique. This verifies the hyperplane antecedent for every $M,W$. Apply [lem-sfb-perfect-lie-hyperplane-criterion] to the original $V,U$ and take its complement $C$. Its invariance gives all three required stability clauses. If $U=0$ take $C=V$, and if $U=V$ take $C=0$, covering $V=0$; for the zero action any linear complement works.",
+   "uses": [
+    "lem-sfb-perfect-lie-hyperplane-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 22.40 and Proposition 22.41, pp.476-477, retraction and invariant kernel; application to Theorem 23.70 Weyl input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra",
+  "lem-sfb-perfect-lie-hyperplane-criterion",
+  "lem-sfb-faithful-semisimple-trace-form",
+  "lem-pc-finite-dimensional-trace-cyclic",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Weyl input in Theorem 23.70(a), p.507; expanded using the Casimir and hyperplane route of Section 22c, pp.475-477. Rational kernel/rank argument avoids algebraic closure."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSemisimple|[Ww]eyl|[Cc]ompletely[Rr]educible|IsCompl",
+   "results": "{\"t\": \"2026-10-24T00:09:28Z\", \"tool\": \"grep\", \"query\": \"IsSemisimple|[Ww]eyl|[Cc]ompletely[Rr]educible|IsCompl\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Killing.lean\", \"Mathlib/Algebra/Lie/Submodule.lean\", \"Mathlib/Algebra/Lie/Submodule.lean\", \"Mathlib/Algebra/Lie/Submodule.lean\"], \"digest\": \"a82d13ab6ef71f94\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: invariant-form complements concern ideals in the adjoint representation and require a nondegenerate form; single-endomorphism semisimplicity assumes the desired property, Fitting decompositions require a nilpotent Lie algebra, and primitive-vector lemmas do not give common stable complements for arbitrary rational sl2 modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieSubmodule, IsCompl",
+   "results": "{\"t\": \"2026-10-24T00:09:28Z\", \"tool\": \"loogle\", \"query\": \"LieSubmodule, IsCompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieSubmodule.isCompl_toSubmodule\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\"], \"digest\": \"dcaa2b1dedb1cf52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: invariant-form complements concern ideals in the adjoint representation and require a nondegenerate form; single-endomorphism semisimplicity assumes the desired property, Fitting decompositions require a nilpotent Lie algebra, and primitive-vector lemmas do not give common stable complements for arbitrary rational sl2 modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weyl theorem every invariant subspace of a finite dimensional sl2 module over rationals has a stable complement",
+   "results": "{\"t\": \"2026-10-24T00:09:28Z\", \"tool\": \"leansearch\", \"query\": \"Weyl theorem every invariant subspace of a finite dimensional sl2 module over rationals has a stable complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_iff'\", \"Module.End.isSemisimple_iff\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"IsSl2Triple.toLieSubalgebra\", \"LieAlgebra.InvariantForm.orthogonal_isCompl_toSubmodule\", \"IsSl2Triple.toLieSubalgebra.congr_simp\", \"Submodule.exists_isCompl\", \"LieAlgebra.InvariantForm.orthogonal.congr_simp\"], \"digest\": \"0548927863bbaaae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: invariant-form complements concern ideals in the adjoint representation and require a nondegenerate form; single-endomorphism semisimplicity assumes the desired property, Fitting decompositions require a nilpotent Lie algebra, and primitive-vector lemmas do not give common stable complements for arbitrary rational sl2 modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weyl complete reducibility finite dimensional representation semisimple Lie algebra characteristic zero invariant subspace has invariant complement",
+   "results": "{\"t\": \"2026-10-24T00:09:29Z\", \"tool\": \"leanfinder\", \"query\": \"Weyl complete reducibility finite dimensional representation semisimple Lie algebra characteristic zero invariant subspace has invariant complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.InvariantForm.orthogonal_isCompl_toSubmodule\", \"LieAlgebra.InvariantForm.orthogonal_isCompl\", \"Module.End.isSemisimple_iff\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"Module.End.isSemisimple_iff'\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"LieModule.iSup_genWeightSpace_eq_top'\", \"LieModule.iSup_genWeightSpace_eq_top\"], \"digest\": \"4ddf34d24a01fa23\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: invariant-form complements concern ideals in the adjoint representation and require a nondegenerate form; single-endomorphism semisimplicity assumes the desired property, Fitting decompositions require a nilpotent Lie algebra, and primitive-vector lemmas do not give common stable complements for arbitrary rational sl2 modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A subspace stable under three rational endomorphisms satisfying sl2 commutator relations has a common stable complementary subspace",
+   "results": "{\"t\": \"2026-10-24T00:09:32Z\", \"tool\": \"leanfinder\", \"query\": \"A subspace stable under three rational endomorphisms satisfying sl2 commutator relations has a common stable complementary subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"IsSl2Triple.mem_toLieSubalgebra_iff\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"RootPairing.GeckConstruction.ωConjLieSubmodule\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\"], \"digest\": \"de5d00f16e665e38\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: invariant-form complements concern ideals in the adjoint representation and require a nondegenerate form; single-endomorphism semisimplicity assumes the desired property, Fitting decompositions require a nilpotent Lie algebra, and primitive-vector lemmas do not give common stable complements for arbitrary rational sl2 modules."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSemisimple|[Ww]eyl|[Cc]ompletely[Rr]educible|IsCompl",
+   "results": "{\"t\": \"2026-10-24T00:37:30Z\", \"tool\": \"grep\", \"query\": \"IsSemisimple|[Ww]eyl|[Cc]ompletely[Rr]educible|IsCompl\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/JordanChevalley.lean\", \"Mathlib/Algebra/Lie/AdjointAction/Basic.lean\", \"Mathlib/Algebra/Lie/AdjointAction/Basic.lean\", \"Mathlib/Algebra/Lie/AdjointAction/Basic.lean\"], \"digest\": \"23cd8d6eb4917332\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A submodule of a finite dimensional representation of a semisimple Lie algebra over a characteristic zero field has an invariant complement",
+   "results": "{\"t\": \"2026-10-24T00:37:30Z\", \"tool\": \"leansearch\", \"query\": \"A submodule of a finite dimensional representation of a semisimple Lie algebra over a characteristic zero field has an invariant complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.exists_isCompl\", \"Submodule.ClosedComplemented.of_finiteDimensional\", \"LieAlgebra.InvariantForm.orthogonal\", \"LieAlgebra.InvariantForm.orthogonal_toSubmodule\", \"IsSemisimpleModule.toComplementedLattice\", \"LieAlgebra.InvariantForm.orthogonal.congr_simp\", \"LieAlgebra.InvariantForm.orthogonal_carrier\", \"LieAlgebra.InvariantForm.orthogonal_isCompl_toSubmodule\"], \"digest\": \"83e8470d7f36eee6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieSubmodule, IsCompl",
+   "results": "{\"t\": \"2026-10-24T00:37:30Z\", \"tool\": \"loogle\", \"query\": \"LieSubmodule, IsCompl\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"LieSubmodule.isCompl_toSubmodule\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\"], \"digest\": \"dcaa2b1dedb1cf52\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite dimensional rational representation of sl2 has an invariant complement to each invariant subspace",
+   "results": "{\"t\": \"2026-10-24T00:37:31Z\", \"tool\": \"leanfinder\", \"query\": \"Every finite dimensional rational representation of sl2 has an invariant complement to each invariant subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.isSemisimple_iff\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"LieAlgebra.InvariantForm.orthogonal_isCompl_toSubmodule\", \"LieAlgebra.InvariantForm.orthogonal_isCompl\", \"LieModule.isCompl_genWeightSpaceOf_zero_posFittingCompOf\", \"LieModule.isCompl_genWeightSpace_zero_posFittingComp\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\"], \"digest\": \"6570f6ca991004d8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Three endomorphisms satisfying the sl2 commutator relations over Q act completely reducibly on a finite dimensional vector space",
+   "results": "{\"t\": \"2026-10-24T00:38:41Z\", \"tool\": \"leanfinder\", \"query\": \"Three endomorphisms satisfying the sl2 commutator relations over Q act completely reducibly on a finite dimensional vector space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.isSl2Triple\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"LieModule.instIsTriangularizableOfIsAlgClosed\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.IsKilling.exists_isSl2Triple_of_weight_isNonZero\", \"RootPairing.GeckConstruction.instIsIrreducible\"], \"digest\": \"adbab81940c30e7f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give definitions of irreducibility or semisimplicity, complements already assumed, single-operator decompositions, or orthogonal complements for adjoint ideals; none gives the stated simple-hyperplane criterion or Weyl complements for arbitrary modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sl2-rational-polynomial-model",
+  "date": "2026-10-24",
+  "group": "Q113"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L. Supporting proof of root-datum realization: Section 23h, equation (153) and Theorem 23.72, printed pp.510--511, with the full-weight representation of Corollary 23.73; torus defined by its weight characters. Supporting Section 23h, equation (153), Theorem 23.72 proof, pp.510-511: rank-one hypotheses and simple-root generation omitted there; Section 23d and Theorem 23.71 for Weyl signs. These integral rank-one details are an agent-stated supporting lemma, not a quotation of Theorem 23.72. Supporting input: Section 23h, equation (153), pp.509--510, and characteristic-zero integration Theorem 23.70, pp.507--508. Agent-formulated integral sl2 input filling the omitted rank-one verification in Theorem 23.72; the lattice integration assertion is not explicitly proved in Milne. Rational-fibre input: decompose the given sl2 operators into homogeneous polynomial modules before constructing the two integral charts. Weyl complement input used after constructing one highest-weight string (item proof step 5); Milne Theorem 23.70 proof (a), printed p.507: representations of a semisimple Lie algebra are semisimple.",
+   "via": [
+    "lem-sfb-sl2-rational-polynomial-model",
+    "lem-sfb-sl2-lattice-integration",
+    "lem-sfb-chevalley-integral-rank-one",
+    "lem-sfb-chevalley-root-exponential-group",
+    "lem-sfb-root-datum-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-invariant-complement",
+  "worker": "stage1",
+  "summary": "Expanded Weyl complement input over Q using the elementary simplicity of matrix sl2, existing faithful trace-form nondegeneracy, explicit Casimir commutation and nonzero trace, and an invariant retraction. One new unsplit perfect-Lie hyperplane criterion records the Hom-space reduction. No change to statement or original statement dependencies; no use of integration or of the polynomial-model parent.",
+  "blueprint": "Realizes the Weyl-complement prerequisite of lem-sfb-sl2-rational-polynomial-model step 5, in the inherited det-thm-sf-ctf-stability-direct-images (3) alteration/moduli chain. Ancestor tool returns None, inherited blueprint.from.node stays null; inherited place and via retained. Latest direct-images proof (3), the chapter and unit were read. Whole-blueprint searches for Casimir, invariant complement, complete reducibility, hyperplane and Lie algebra found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-dimensional-trace-cyclic",
+    "why": "Generic cyclicity of ordinary matrix trace in the explicit Casimir commutator calculation; no unit-specific substitute is needed or claimed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-dimensional-trace-cyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-f02d3090e",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-f02d3090e (reviewer sub-agent of L); spot-checked: I read Milne Thm 23.70(a) p.507 (Weyl input), §22c p.475 (Casimir), Lemma 22.40 pp.476-477 and Prop 22.41 p.477. Item statement and stmt_deps unchanged; no SGA. Step 1: rechecked the sl2 brackets and the ad h projectors T(T+2)/8, T(T-2)/8, 1-T^2/4 (they give 1,0,0 / 0,1,0 / 0,0,1 on e,f,h), so L is simple and perfect, hence semisimple by the definition node. Step 2: the Lie-hom check on basis pairs is valid and correctly reduces to the new node's antecedent over all M and W. Step 3: r=0 branch handled; otherwise ker r is a proper ideal, so r is injective and lem-sfb-faithful-semisimple-trace-form applies (char 0, finite dimensions, no algebraic closure needed). Step 4: invariance of B by trace cyclicity, the dual-basis formula [z,x^i] = -sum a_ij x^j, [r(z),c]=0 and Tr c = 3 all recomputed. Step 5: L perfect gives r(L)M in W; then Tr(c|W)=3, c|W is injective and invertible. The kernel/rank argument correctly replaces Milne's Schur step over Q. Step 6: equivariant retraction; complement and uniqueness are written out. New node lem-sfb-perfect-lie-hyperplane-criterion: true over any field and for L of any dimension. I checked the (c)=>(b) induction (dim P = dim T + 1 < dim M) and the (b)=>(a) Hom(V,U) argument against Milne; it is conditional, so it neither restates nor carries the item, and it is self-contained, statement-only and single-escaped. Small cases tested: L=0, M=0, trivial line, standard sl2 plus a trivial line. Duplicate candidates read and distinguished: simple-hyperplane-splitting-criterion (group scheme, algebraically closed field), module-socle-complements, semisimple-lie-ideal-complement, single-operator complement nodes. Mathlib has no Weyl or Casimir result. No cycle (the only citer is sl2-rational-polynomial-model). Accepted tool_use lem-pc-finite-dimensional-trace-cyclic (generic Mathlib-status trace lemma). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.Sl2InvariantComplement",
+  "declaration": "RepresentationTheory.exists_sl2_invariant_complement",
+  "file": "lean/Sheaf/RepresentationTheory/Sl2InvariantComplement.lean",
+  "statement": "theorem exists_sl2_invariant_complement (V : Type u) [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V] (E F H : Module.End ℚ V) (hHE : H * E - E * H = (2 : ℚ) • E) (hHF : H * F - F * H = (-2 : ℚ) • F) (hEF : E * F - F * E = H) (U : Submodule ℚ V) (hEU : ∀ v : V, v ∈ U → E v ∈ U) (hFU : ∀ v : V, v ∈ U → F v ∈ U) (hHU : ∀ v : V, v ∈ U → H v ∈ U) : ∃ C : Submodule ℚ V, IsCompl U C ∧ (∀ v : V, v ∈ C → E v ∈ C) ∧ (∀ v : V, v ∈ C → F v ∈ C) ∧ (∀ v : V, v ∈ C → H v ∈ C)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-085ce29fc",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Only the item's lean field changes, and lean.statement is verbatim in the file. Matched clause by clause: ℚ-module V of any universe with FiniteDimensional (the stmt_dep's Mathlib match); E, F, H in Module.End with composition order and the signs of HE−EH=2E, HF−FH=−2F, EF−FE=H; three U-stability hypotheses; ∃ C with IsCompl U C (unique decomposition) and three C-stability clauses. No extra hypotheses; the cases V=0, U=0, U=V and the zero action are typeable. No Weyl/Casimir/complete-reducibility result in Mathlib Algebra/Lie and no project duplicate; the only citer (sl2-rational-polynomial-model) mentions it in a docstring. No definitions, proof is sorry, docstrings carry the source places, the blueprint tag and the six proof steps; imports exist in live (PerfectLieHyperplaneCriterion, Lie.Radical). Report has Worker report and Second reading sections. Not recompiled per instructions."
+ }
+}

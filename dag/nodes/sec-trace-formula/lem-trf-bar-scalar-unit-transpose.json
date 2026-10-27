@@ -1,0 +1,270 @@
+{
+ "id": "lem-trf-bar-scalar-unit-transpose",
+ "kind": "statement",
+ "title": "Category-bar scalar isomorphism as the transpose of the coefficient unit",
+ "statement": "Let $\\mathcal E$ be a small category with identity-cover topology and $\\alpha:R\\to S$ a homomorphism of commutative rings. Use $R$- and $S$-module presheaves, derived colimits $L_R=L\\pi_{\\mathcal E,!}^R$, $L_S=L\\pi_{\\mathcal E,!}^S$, exact constant functors $C_R,C_S$, bar complexes $K_R,K_S$ and their canonical derived representatives from [lem-trf-derived-colimit-bar]. Write $T_{\\mathcal E}=-\\otimes_{\\underline R}^{\\mathbf L}\\underline S$, $T_*=-\\otimes_R^{\\mathbf L}S$ [lem-pur-derived-change-of-rings], and $r_{\\mathcal E},r_*$ for exact scalar restriction [def-pc-sheaf-restrict-scalars]. Give $T_{\\mathcal E}\\dashv r_{\\mathcal E}$ and $T_*\\dashv r_*$ the representative-normalized adjunctions of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let $F$ be an $R$-module presheaf and suppose $F[0]$ and $K_R(F)$ are K-flat with flat terms [def-pc-kflat-complex]; use their canonical tensor comparisons to represent $T_{\\mathcal E}F$ by $(F\\otimes_R S)[0]$ and $T_*L_RF$ by $Q(K_R(F)\\otimes_R S)$.\nThere is an $S$-linear chain isomorphism, hence an isomorphism in $D(S)$,\n$$\\Phi_F:K_S(F\\otimes_R S)\\xrightarrow{\\sim}K_R(F)\\otimes_R S,\\qquad(\\sigma,x\\otimes s)\\longmapsto(\\sigma,x)\\otimes s,$$\nwhere $\\sigma=(U_n\\to\\cdots\\to U_0)$ in degree $-n$. Its inverse sends $(\\sum_\\sigma(\\sigma,x_\\sigma))\\otimes s$ to $\\sum_\\sigma(\\sigma,x_\\sigma\\otimes s)$ for finite sums. Let $t_F:F\\to r_{\\mathcal E}(F\\otimes_R S)$ be $x\\mapsto x\\otimes1$, and let $a_F:L_RF\\to r_*L_S(F\\otimes_R S)$ be its canonical semilinear derived-colimit map, represented by $(\\sigma,x)\\mapsto(\\sigma,x\\otimes1)$. The adjunct $\\beta_F:T_*L_RF\\to L_ST_{\\mathcal E}F$ of $a_F$ under $T_*\\dashv r_*$ is represented by $\\Phi_F^{-1}$. Put $A=L_ST_{\\mathcal E}$, $B=T_*L_R$, and $V=r_{\\mathcal E}C_S=C_Rr_*$. If $\\eta_A:1\\to VA$ and $\\eta_B:1\\to VB$ are the composite units [def-weil-pbc-composite-adjunction], then $V(\\beta_F)\\eta_{B,F}=\\eta_{A,F}$. Thus $\\beta_F$ is the component of the unique natural comparison $B\\to A$ characterized by this unit equation [lem-weil-pbc-conjugate-iso-unit-equation].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 08Q8 (lemma-change-of-rings, typed order corrected). Agent extraction of returned proof steps 6-7: the finite-sum tensor isomorphism and its unit-normalized derived-adjunction identification, not a verbatim separate Stacks lemma."
+ },
+ "stmt_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pc-kflat-complex",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof": [
+  {
+   "text": "Write $H=F\\otimes_R S$. Let $\\delta_R:1\\to C_RL_R$ and $\\delta_S:1\\to C_SL_S$ be the colimit units. By [lem-trf-derived-colimit-bar] both are units of the stated derived-colimit adjunctions. Denote the coefficient units by $u_{\\mathcal E}$ and $u_*$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], the assumed K-flat, flat-term representatives give $u_{\\mathcal E,F}=Q(t_F)$, with $t_F(x)=x\\otimes1$, and $u_{*,L_RF}$ is represented on $K_R(F)$ by $z\\mapsto z\\otimes1$. The same bar theorem represents the canonical semilinear map $a_F$ by $g(\\sigma,x)=(\\sigma,x\\otimes1)$. Every indexing set is small because $\\mathcal E$ is small; the displayed direct sums have finite-support elements.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 07A6 (lemma-adjoint); representative normalizations of the cited nodes."
+   }
+  },
+  {
+   "text": "For each string $\\sigma$, the rule $x\\otimes s\\mapsto(\\sigma,x)\\otimes s$ is balanced: $(\\sigma,rx)\\otimes s=(\\sigma,x)\\otimes\\alpha(r)s$. It therefore extends over each tensor product and then the direct sum to an $S$-linear map $\\Phi^{-n}$. In the other direction the rule $(\\sum_\\sigma(\\sigma,x_\\sigma),s)\\mapsto\\sum_\\sigma(\\sigma,x_\\sigma\\otimes s)$ is additive in both entries and $R$-balanced; it induces an $S$-linear map $\\Psi^{-n}$ out of $K_R(F)^{-n}\\otimes_R S$. Both compositions fix the spanning generators $(\\sigma,x\\otimes s)$ and $(\\sigma,x)\\otimes s$, respectively. Thus $\\Psi^{-n}=(\\Phi^{-n})^{-1}$, with exactly the finite-sum formula in the statement. The zero positive-degree terms give the unique zero maps there.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PG (example-left-derived-colimits), explicit direct-sum terms; agent tensor-universal-property calculation."
+   }
+  },
+  {
+   "text": "Use the faces of [lem-trf-derived-colimit-bar]. For $j<n$, both $\\Phi d_j$ and $(d_j\\otimes1)\\Phi$ send $(\\sigma,x\\otimes s)$ to $(d_j\\sigma,x)\\otimes s$. For the last face they both give $(d_n\\sigma,F(U_1\\to U_0)(x))\\otimes s$, since the tensor-presheaf restriction is $F(U_1\\to U_0)\\otimes1$. The signs $(-1)^j$ are the same, so the differentials commute with $\\Phi$. Its degreewise inverse $\\Psi$ is consequently a chain map as well. This proves the chain isomorphism and, after localization, the asserted isomorphism in $D(S)$. No exactness of tensoring with $S$ is needed for this calculation.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PG (example-left-derived-colimits), vertex-deletion differential."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pur-sheaf-ring-derived-coefficient-adjunction] on the point site to $P=K_R(F)$, $H^\\bullet=K_S(H)$, and $g$ from step 1. Its hypotheses are precisely the assumed K-flatness and flat terms of $K_R(F)$. The adjunct is represented by $z\\otimes s\\mapsto s g(z)$. On a generator this is $(\\sigma,x)\\otimes s\\mapsto(\\sigma,x\\otimes s)$, which is $\\Psi=\\Phi^{-1}$ by step 2. Hence the adjunct $\\beta_F$ in the statement is the localized inverse of $\\Phi$, using exactly the prescribed tensor comparison, rather than a separately chosen isomorphism.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); the representative-normalized Hom bijection in the cited node."
+   }
+  },
+  {
+   "text": "The canonical semilinear derived-colimit map in [lem-trf-derived-colimit-bar] is formed by transposing the coefficient map followed by the target colimit unit. Unwinding this definition for the identity indexing functor gives $C_R(a_F)\\delta_{R,F}=r_{\\mathcal E}(\\delta_{S,T_{\\mathcal E}F})u_{\\mathcal E,F}$. Indeed the map to be transposed is $F\\xrightarrow{t_F}r_{\\mathcal E}H\\xrightarrow{r_{\\mathcal E}\\delta_{S,H}}r_{\\mathcal E}C_SL_SH=C_Rr_*L_SH$; its adjoint is $a_F$. This uses the canonical semilinear-map clause of the bar theorem, not just its formula for the complex. By the definition of $\\beta_F$ as the coefficient adjunct, $r_*(\\beta_F)u_{*,L_RF}=a_F$. Applying $C_R$ and precomposing with $\\delta_{R,F}$ therefore gives\n$$V(\\beta_F)\\,C_R(u_{*,L_RF})\\delta_{R,F}=r_{\\mathcal E}(\\delta_{S,T_{\\mathcal E}F})u_{\\mathcal E,F}.$$\nThe equality $C_Rr_*=r_{\\mathcal E}C_S$ identifies the same underlying constant $R$-complex and the same maps [def-pc-sheaf-restrict-scalars]. By [def-weil-pbc-composite-adjunction], the left inner composite is $\\eta_{B,F}$ and the right side is $\\eta_{A,F}$. This is the required unit equation.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PH (example-morphism-categories), 08Q8 (lemma-change-of-rings), typed order corrected; categories.tex Tag 0DV0 (lemma-compose-counits)."
+   }
+  },
+  {
+   "text": "The two composite adjunctions have the same right adjoint $V$ on the whole derived categories. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=B$, $L_2=A$, and identity right-adjoint isomorphism. It supplies a unique natural isomorphism $c:B\\to A$ preserving the units. At $F$, the Hom bijection of $B\\dashv V$ is injective and sends a map $b:BF\\to AF$ to $V(b)\\eta_{B,F}$. Step 5 sends $\\beta_F$ to $\\eta_{A,F}$, just as $c_F$ does; thus $\\beta_F=c_F$. This proves the final natural-comparison assertion even though the explicit K-flat representatives were only assumed for this $F$.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0B65 (lemma-transformation-between-functors-and-adjoints), 0DV0 (lemma-compose-counits), uniqueness via the adjunction Hom bijection."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PG, 08PH, 08Q8: explicit tensor calculation and adjunction-unit calculation; categories.tex Tags 0DV0 and 0B65. Agent expansion, not a verbatim separate Stacks proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bar complex tensor coefficient extension is the canonical mate of the unit under derived tensor restriction adjunction",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.counit; full returned signatures and snippets retained in search-lem-trf-bar-scalar-unit-transpose-1.txt. Ordinary extension/restriction units and derived-unit machinery do not identify the small-category bar map with the colimit-unit transpose; group bar and Dold-Kan results are different complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived category colimit scalar extension comparison represented by tensor on bar generators and normalized by adjunction unit",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, ModuleCat.preservesColimit_restrictScalars, CategoryTheory.Adjunction.derived_unit, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.derivedη, CategoryTheory.Limits.colimConstAdj; full returned signatures and snippets retained in search-lem-trf-bar-scalar-unit-transpose-2.txt. Ordinary extension/restriction units and derived-unit machinery do not identify the small-category bar map with the colimit-unit transpose; group bar and Dold-Kan results are different complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction, \"colimit\"",
+   "results": "loogle: unknown identifier 'Adjunction'; 0 hits: ; full returned signatures and snippets retained in search-lem-trf-bar-scalar-unit-transpose-3.txt. Ordinary extension/restriction units and derived-unit machinery do not identify the small-category bar map with the colimit-unit transpose; group bar and Dold-Kan results are different complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bar.*[Tt]ensor|[Tt]ensor.*bar|colimit.*[Ss]calar|[Ss]calar.*colimit",
+   "results": "17 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean:145, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean:164, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean:188, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean:70, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean:46, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:63, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:64, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:75, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:80, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean:87, Mathlib/Algebra/Category/ModuleCat/Presheaf/ColimitFunctor.lean:77, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:940, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:943, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:944, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean:67, Mathlib/Algebra/Category/ModuleCat/FilteredColimits.lean:82, Mathlib/Algebra/Category/ModuleCat/Stalk.lean:39; full returned signatures and snippets retained in search-lem-trf-bar-scalar-unit-transpose-4.txt. Ordinary extension/restriction units and derived-unit machinery do not identify the small-category bar map with the colimit-unit transpose; group bar and Dold-Kan results are different complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "simplicial replacement commutes with extension of scalars and its chain isomorphism represents the common right adjoint comparison",
+   "results": "8 hits: CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, Rep.standardComplex.compForgetAugmentedIso, AlgebraicTopology.DoldKan.N₁Γ₀_app, AlgebraicTopology.DoldKan.N₁Γ₀_hom_app, AlgebraicTopology.DoldKan.Γ₀'CompNondegComplexFunctor, AlgebraicTopology.DoldKan.N₁Γ₀, SimplicialObject.Split.toKaroubiNondegComplexFunctorIsoN₁, SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁; full returned signatures and snippets retained in search-lem-trf-bar-scalar-unit-transpose-5.txt. Ordinary extension/restriction units and derived-unit machinery do not identify the small-category bar map with the colimit-unit transpose; group bar and Dold-Kan results are different complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"colimit\"",
+   "results": "12 hits: CategoryTheory.Limits.IsColimit.ofLeftAdjoint, CategoryTheory.Adjunction.leftAdjoint_preservesColimits, CategoryTheory.Adjunction.hasExactColimitsOfShape, PresheafOfModules.colimitAdjunction, CategoryTheory.IsUniversalColimit.map_reflective, CategoryTheory.IsVanKampenColimit.map_reflective, CategoryTheory.Adjunction.preservesColimitsOfSize_iff, CategoryTheory.Adjunction.preservesColimitsOfShape_iff; ordinary colimit/constant adjunction or generic mates operations, without the derived category bar comparison or the semilinear coefficient-square identification.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bar.*[Tt]ensor|[Tt]ensor.*bar|colimit.*[Ss]calar|[Ss]calar.*colimit",
+   "results": "17 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRingsExact.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean. Read returned signatures. Ordinary module units, generic adjunction formulas, group bar complexes, and Dold-Kan comparisons do not state the category-bar derived coefficient comparison. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived colimit bar complex scalar extension comparison equals the transpose of the extension of coefficients unit",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, Rep.barComplex.isoStandardComplex, CategoryTheory.Limits.IsColimit.ofExtendIso, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.counit_app, groupCohomology.inhomogeneousCochainsIso, CategoryTheory.Limits.IndObjectPresentation.extend_isColimit_desc_app. Read returned signatures. Ordinary module units, generic adjunction formulas, group bar complexes, and Dold-Kan comparisons do not state the category-bar derived coefficient comparison. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"unit\"",
+   "results": "12 hits: CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.ext_counit, CategoryTheory.Adjunction.ofNatIsoLeft_counit, CategoryTheory.Adjunction.ofNatIsoLeft_unit, CategoryTheory.Adjunction.ofNatIsoRight_counit, CategoryTheory.Adjunction.ofNatIsoRight_unit. Read returned signatures. Ordinary module units, generic adjunction formulas, group bar complexes, and Dold-Kan comparisons do not state the category-bar derived coefficient comparison. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The chain isomorphism between a small category bar complex after extension of scalars and tensor of its bar complex represents the derived tensor restriction adjunct of the coefficient unit",
+   "results": "8 hits: groupHomology.inhomogeneousChainsIso, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, Rep.barComplex.isoStandardComplex, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.unit_app. Read returned signatures. Ordinary module units, generic adjunction formulas, group bar complexes, and Dold-Kan comparisons do not state the category-bar derived coefficient comparison. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simplicial replacement commutes with extension of coefficients and its map is the unique common right adjoint comparison preserving the composite adjunction units",
+   "results": "8 hits: CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f, CategoryTheory.SimplicialObject.coskAdj, CategoryTheory.SimplicialObject.skAdj, CategoryTheory.Idempotents.DoldKan.hε, CategoryTheory.Idempotents.DoldKan.ε, AlgebraicTopology.DoldKan.Γ₂N₁, AlgebraicTopology.DoldKan.Γ₂N₂, AlgebraicTopology.DoldKan.compatibility_N₂_N₁_karoubi. Read returned signatures. Ordinary module units, generic adjunction formulas, group bar complexes, and Dold-Kan comparisons do not state the category-bar derived coefficient comparison. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-colimit-change-rings",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Supporting coefficient comparison: Returned coefficient-comparison proof steps 6-7: balancing and inverse of the bar tensor map, face compatibility, and unit/transposition identification of the canonical map.",
+   "via": [
+    "lem-trf-derived-colimit-change-rings",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-bar-scalar-unit-transpose",
+  "worker": "stage1",
+  "summary": "Q59 checked the canonical bar and tensor representatives, constructed the finite-support balanced tensor inverse and checked every face, applied the representative-normalized coefficient Hom bijection, and expanded both composite units. No change of statement or new nodes. Canonical semilinear means transpose of the coefficient map followed by the target colimit unit; the bar theorem identifies its chain representative.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Supporting coefficient comparison: Returned coefficient-comparison proof steps 6-7: balancing and inverse of the bar tensor map, face compatibility, and unit/transposition identification of the canonical map.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Representative-normalized derived tensor units and Hom bijection for the same site and point; this unit does not supply coefficient-adjunction machinery."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Underlying scalar restriction identifies the two constant right adjoints; generic coefficient notion."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Explicit formula for composing adjunction units, needed to compare the two left adjoints."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uniqueness of the common-right-adjoint comparison, applied after the explicit unit calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-71b60b150",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-71b60b150 (reviewer sub-agent of L); spot-checked: I read the item, all seven cited statements, the parent lem-trf-derived-colimit-change-rings and Stacks sites-cohomology at 08PG, 08PH, remark-morphism-fibred-categories and 08Q8. The delivery has no new nodes and leaves the statement unchanged. It keeps the inherited correction of 08Q8's printed composite order and adjoint direction. Steps 2-3 are correct elementary checks: the balanced finite-sum tensor isomorphism and its inverse, then the faces including the last restriction face, with matching signs. Step 4 applies clause (2) of the coefficient adjunction to P=K_R(F), and the adjunct of g(σ,x)=(σ,x⊗1) is (σ,x)⊗s↦(σ,x⊗s)=Φ^{-1}. Step 5: I recomputed both composite units, η_B=C_R(u_*)δ_R and η_A=r_E(δ_S)u_E; together with a_F being the derived adjunct of r_E(δ_S)t_F this gives V(β_F)η_B=η_A. The adjunct is the meaning of 'canonical' in the bar node's proof and in Stacks' remark. Step 6 applies the conjugate lemma with L1=B, L2=A and δ=id, and the injective Hom bijection gives β_F=c_F. The K-flat hypotheses are used exactly where needed, and no flatness of S over R is assumed. Edge cases checked: empty and singleton E, S=0, α=id, and Z→Z/2. proof_deps equals the union of the step uses. No duplicate in the DAG: only the parent cites the item. The four tool_uses are accepted. Advisory: the bar node's statement should say explicitly that its canonical semilinear map is the adjunct."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.BarScalarUnitTranspose",
+  "declaration": "CategoryTheory.categoryBarScalarUnitTranspose",
+  "file": "lean/Sheaf/CategoryTheory/BarScalarUnitTranspose.lean",
+  "statement": "theorem categoryBarScalarUnitTranspose (B : CategoryColimitBarSystem.{u}) (E : Type u) [SmallCategory E] {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (T₀ : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} S)) (T₁ : DerivedCategory (Eᵒᵖ ⥤ ModuleCat.{u} R) ⥤ DerivedCategory (Eᵒᵖ ⥤ ModuleCat.{u} S)) (ε₀ : DerivedCategory.Q ⋙ T₀ ⟶ (ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (ε₁ : DerivedCategory.Q ⋙ T₁ ⟶ ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q) (_h₀ : T₀.IsLeftDerivedFunctor ε₀ (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ))) (_h₁ : T₁.IsLeftDerivedFunctor ε₁ (HomologicalComplex.quasiIso (Eᵒᵖ ⥤ ModuleCat.{u} R) (.up ℤ))) : ∃ (a₀ : T₀ ⊣ (ModuleCat.restrictScalars φ).mapDerivedCategory) (a₁ : T₁ ⊣ ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} S) (ModuleCat.{u} R)).obj (ModuleCat.restrictScalars φ)).mapDerivedCategory), (∀ (P : CochainComplex (ModuleCat.{u} R) ℤ) (N : CochainComplex (ModuleCat.{u} S) ℤ) (f : ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj P ⟶ N), a₀.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) (ε₀.app P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map (((ModuleCat.extendRestrictScalarsAdj φ).mapHomologicalComplex (.up ℤ)).homEquiv P N f) ≫ (ModuleCat.restrictScalars φ).mapDerivedCategoryFactors.inv.app N) ∧ (∀ (P : CochainComplex (Eᵒᵖ ⥤ ModuleCat.{u} R) ℤ) (N : CochainComplex (Eᵒᵖ ⥤ ModuleCat.{u} S) ℤ) (f : (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).mapHomologicalComplex (.up ℤ)).obj P ⟶ N), a₁.homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) (ε₁.app P ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((((ModuleCat.extendRestrictScalarsAdj φ).whiskerRight Eᵒᵖ).mapHomologicalComplex (.up ℤ)).homEquiv P N f) ≫ ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} S) (ModuleCat.{u} R)).obj (ModuleCat.restrictScalars φ)).mapDerivedCategoryFactors.inv.app N) ∧ ∀ F : Eᵒᵖ ⥤ ModuleCat.{u} R, (∀ P : CochainComplex (Eᵒᵖ ⥤ ModuleCat.{u} R) ℤ, P.Acyclic → (mapBifunctor P ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F) (curriedTensor (Eᵒᵖ ⥤ ModuleCat.{u} R)) (.up ℤ)).Acyclic) → (∀ U : Eᵒᵖ, Module.Flat R (F.obj U)) → (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat ((B.models E R).bar.obj F) → (∀ q : ℤ, Module.Flat R (((B.models E R).bar.obj F).X q)) → IsIso (ε₁.app ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)) ∧ IsIso (ε₀.app ((B.models E R).bar.obj F)) ∧ ∃ (Φ : ((B.models E S).bar.obj (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F)) ≅ ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj ((B.models E R).bar.obj F)) (a : ((B.models E R).derived.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F))) ⟶ (ModuleCat.restrictScalars φ).mapDerivedCategory.obj ((B.models E S).derived.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} S) 0).obj (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F))))) (β : T₀.obj ((B.models E R).derived.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F))) ⟶ (B.models E S).derived.obj (T₁.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)))), (∀ (n : ℕ) (σ : ComposableArrows E n) (x : F.obj (op σ.right)) (s : S), Φ.hom.f (-(n : ℤ)) ((B.models E S).generator (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F) n σ (s ⊗ₜ[R,φ] x)) = s ⊗ₜ[R,φ] ((B.models E R).generator F n σ x)) ∧ (∀ (n : ℕ) (I : Type u) (J : Finset I) (σ : I → ComposableArrows E n) (x : ∀ i : I, F.obj (op (σ i).right)) (s : S), Φ.inv.f (-(n : ℤ)) (s ⊗ₜ[R,φ] (∑ i ∈ J, (B.models E R).generator F n (σ i) (x i))) = ∑ i ∈ J, (B.models E S).generator (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F) n (σ i) (s ⊗ₜ[R,φ] (x i))) ∧ a = (B.models E R).model.hom.app F ≫ DerivedCategory.Q.map (B.map (𝟭 E) φ (((ModuleCat.extendRestrictScalarsAdj φ).whiskerRight Eᵒᵖ).unit.app F)) ≫ (ModuleCat.restrictScalars φ).mapDerivedCategoryFactors.inv.app ((B.models E S).bar.obj (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F)) ≫ (ModuleCat.restrictScalars φ).mapDerivedCategory.map ((B.models E S).model.inv.app (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F)) ∧ a₀.homEquiv ((B.models E R).derived.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F))) ((B.models E S).derived.obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} S) 0).obj (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F)))) (β ≫ (B.models E S).derived.map (ε₁.app ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)) ≫ (B.models E S).derived.map (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)) (.up ℤ) 0).hom.app F))) = a ∧ β ≫ (B.models E S).derived.map (ε₁.app ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)) ≫ (B.models E S).derived.map (DerivedCategory.Q.map ((HomologicalComplex.singleMapHomologicalComplex ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)) (.up ℤ) 0).hom.app F)) ≫ (B.models E S).model.hom.app (((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} R) (ModuleCat.{u} S)).obj (ModuleCat.extendScalars φ)).obj F) = T₀.map ((B.models E R).model.hom.app F) ≫ ε₀.app ((B.models E R).bar.obj F) ≫ DerivedCategory.Q.map Φ.inv ∧ (((B.models E R).adjunction.comp a₀).unit.app (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)) ≫ ((ModuleCat.restrictScalars φ).mapDerivedCategory ⋙ (Functor.const Eᵒᵖ : (ModuleCat.{u} R) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} R)).mapDerivedCategory).map (β) ≫ (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars φ) (Functor.const Eᵒᵖ : (ModuleCat.{u} R) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} R))).inv.app ((T₁ ⋙ (B.models E S).derived).obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F))) = (a₁.comp (B.models E S).adjunction).unit.app (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)) ≫ (Functor.mapDerivedCategoryCompIso (Functor.const Eᵒᵖ : (ModuleCat.{u} S) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} S)) ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} S) (ModuleCat.{u} R)).obj (ModuleCat.restrictScalars φ))).inv.app ((T₁ ⋙ (B.models E S).derived).obj (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)))) ∧ ∃ c : ((B.models E R).derived ⋙ T₀) ≅ (T₁ ⋙ (B.models E S).derived), (∀ X : DerivedCategory (Eᵒᵖ ⥤ ModuleCat.{u} R), ((B.models E R).adjunction.comp a₀).unit.app X ≫ ((ModuleCat.restrictScalars φ).mapDerivedCategory ⋙ (Functor.const Eᵒᵖ : (ModuleCat.{u} R) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} R)).mapDerivedCategory).map (c.hom.app X) ≫ (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars φ) (Functor.const Eᵒᵖ : (ModuleCat.{u} R) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} R))).inv.app ((T₁ ⋙ (B.models E S).derived).obj X) = (a₁.comp (B.models E S).adjunction).unit.app X ≫ (Functor.mapDerivedCategoryCompIso (Functor.const Eᵒᵖ : (ModuleCat.{u} S) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} S)) ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} S) (ModuleCat.{u} R)).obj (ModuleCat.restrictScalars φ))).inv.app ((T₁ ⋙ (B.models E S).derived).obj X)) ∧ β = c.hom.app (DerivedCategory.Q.obj ((CochainComplex.singleFunctor (Eᵒᵖ ⥤ ModuleCat.{u} R) 0).obj F)) ∧ ∀ c' : (B.models E R).derived ⋙ T₀ ⟶ T₁ ⋙ (B.models E S).derived, (∀ X : DerivedCategory (Eᵒᵖ ⥤ ModuleCat.{u} R), ((B.models E R).adjunction.comp a₀).unit.app X ≫ ((ModuleCat.restrictScalars φ).mapDerivedCategory ⋙ (Functor.const Eᵒᵖ : (ModuleCat.{u} R) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} R)).mapDerivedCategory).map (c'.app X) ≫ (Functor.mapDerivedCategoryCompIso (ModuleCat.restrictScalars φ) (Functor.const Eᵒᵖ : (ModuleCat.{u} R) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} R))).inv.app ((T₁ ⋙ (B.models E S).derived).obj X) = (a₁.comp (B.models E S).adjunction).unit.app X ≫ (Functor.mapDerivedCategoryCompIso (Functor.const Eᵒᵖ : (ModuleCat.{u} S) ⥤ (Eᵒᵖ ⥤ ModuleCat.{u} S)) ((Functor.whiskeringRight Eᵒᵖ (ModuleCat.{u} S) (ModuleCat.{u} R)).obj (ModuleCat.restrictScalars φ))).inv.app ((T₁ ⋙ (B.models E S).derived).obj X)) → c' = c.hom",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55a51ae5f",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Q63 lem-trf-bar-scalar-unit-transpose 55a51ae5: only item lean field changes vs live (first S2 delivery); the 7 stmt_dep records are unchanged; lean.statement verbatim equal to file signature; one sorry theorem, no defs, universes all u as in the bar dependency; docstrings carry Stacks 08PG/08PH/08Q8 and blueprint tag plus the 6 proof steps; report has Worker report + Second reading sections. Clause check: B : CategoryColimitBarSystem (derived/adjunction/model/map all pinned); T0/T1 are universal left-derived pairs (equivalent to the recorded OrdinaryDerivedChangeOfRings shape, needed for the u+1 derived-category instance, not vacuous); a0/a1 are existential but pinned by an all-P Hom formula (true for the canonical derived adjunction; determines them uniquely); Phi chain iso with generator and finite-sum inverse formulas; t_F = whiskered extendRestrictScalars unit; a pinned via model and B.map (bar formula); beta is the adjunct of a and represented by Phi^-1; V(beta)eta_B = eta_A via Adjunction.comp and mapDerivedCategoryCompIso; c unique comparison with beta = c_F. Edge cases: empty E, F=0, S=0, phi=id, non-flat Z->Z/2 all fine. Advisory: K-flatness of F[0] on presheaves written inline as acyclic-preservation (equivalent and implied by objectwise flatness); unused imports. No compile (no file changed)."
+ }
+}

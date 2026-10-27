@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-connected-group-dimension-two-solvable",
+ "kind": "statement",
+ "title": "Connected affine algebraic groups of dimension at most two are solvable",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $\\dim G$ be the Krull dimension of its underlying topological space [def-kun-topological-krull-dimension]. If $\\dim G\\leq2$, then $G$ is solvable in the scheme-theoretic derived-series sense [def-sfb-semisimple-group-scheme]: there is an integer $n\\geq0$ for which $D^nG=1$, where $D^0G=G$ and $D^{a+1}G$ is the smallest closed subgroup scheme [def-sc-group-scheme-subgroup] of $D^aG$ through which its commutator morphism factors. No restriction on the characteristic of $k$ is imposed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.27, printed p.360, with the standing hypotheses of Section 17b on printed p.353 (connected group variety over an algebraically closed field); group variety equals smooth algebraic group by Proposition 1.26, printed p.13. Solvability is the scheme-theoretic derived-series notion of Proposition 6.30, printed p.132."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-semisimple-group-scheme",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Choose a smooth connected solvable closed subgroup $B\\subseteq G$ of greatest dimension. Such subgroups exist (the identity subgroup is one), and their dimensions are nonnegative integers bounded by $\\dim G$ by [lem-sfb-solvable-normal-subgroup-products]. That same node says every proper inclusion of smooth connected groups strictly increases dimension. Consequently no larger smooth connected solvable subgroup contains $B$, so $B$ is Borel by [def-sfb-borel-subgroup-scheme]. Put $d=\\dim B$; then $0\\leq d\\leq2$. If $d=2$, a proper inclusion $B\\subsetneq G$ would give $2<\\dim G$, a contradiction. Thus $B=G$ in this case, proving solvability.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "def-sfb-borel-subgroup-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.27, printed p.360, choice of B and dimension-two case; largest-dimension observation following Definition 17.6, printed pp.353--354."
+   }
+  },
+  {
+   "text": "For $d\\leq1$, apply [lem-sfb-perfect-solvable-unipotent-torus] to $B$. Its solvability hypothesis (a normal series with commutative quotients) holds for the derived series $D^aB$: for every algebra $A$, $D^{a+1}B(A)$ contains all commutators of $D^aB(A)$, so $hxh^{-1}=[h,x]x$ shows that $D^{a+1}B$ is normal in $D^aB$, and commutators of local sections of $D^aB/D^{a+1}B$ lift locally to commutators lying in the kernel $D^{a+1}B$ of [lem-sfb-affine-normal-quotient-geometry], so the quotients are commutative. The base $k$ is perfect because an algebraically closed field has no proper algebraic extensions. We obtain a smooth connected normal unipotent subgroup $U\\subseteq B$ and a torus quotient $D=B/U$. By [lem-sfb-affine-normal-quotient-geometry], the quotient is represented by an affine finite-type group, its map $q:B\\to D$ is faithfully flat of finite presentation, its kernel is $U$, and $B\\times_D B\\simeq B\\times_k U$. These are the represented coset quotient properties. The group $B$ is separated by [lem-sc-group-scheme-separated-field], so [lem-sfb-homogeneous-quotient-krull-dimension] applies and gives $d=\\dim U+\\dim D$. In particular one of $U,D$ has dimension zero.",
+   "uses": [
+    "lem-sfb-perfect-solvable-unipotent-torus",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sc-group-scheme-separated-field",
+    "lem-sfb-homogeneous-quotient-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.27 and Theorem 16.33(a)--(c), printed pp.335--336; Proposition 5.23, printed p.104. The split uses the quotient version of the same unipotent/torus dichotomy."
+   }
+  },
+  {
+   "text": "A smooth connected dimension-zero group $H$ here is trivial: if $1\\subsetneq H$, [lem-sfb-solvable-normal-subgroup-products] gives $0\\leq\\dim1<\\dim H=0$, impossible. Thus either $U=1$ or $D=1$. If $D=1$, the kernel equality in the previous step gives $B=U$. If $U=1$, the torsor identity makes $q$ a monomorphism: any two local lifts differ by a section of $U$, hence agree. Every section of $D$ has an fppf-local lift to $B$; uniqueness makes these lifts agree on overlaps and glue. Thus $q$ is an isomorphism of represented sheaves, and hence of group schemes, so $B\\simeq D$. We have obtained that $B$ is either unipotent or a torus, including the trivial case.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.27, printed p.360, cases dim B=0,1; quotient-kernel and sheaf argument for Theorem 16.33 decomposition."
+   }
+  },
+  {
+   "text": "If $B$ is unipotent, [lem-sfb-perfect-unipotent-additive-series] gives a finite descending series $B=B_0\\supseteq\\cdots\\supseteq B_m=1$ with $B_i/B_{i+1}$ central in $B/B_{i+1}$. Since the kernel of $B\\to B/B_{i+1}$ is $B_{i+1}$ and $B_i/B_{i+1}$ is the image of $B_i$ in $B/B_{i+1}$ [lem-sfb-affine-normal-quotient-geometry], centrality says exactly that $[B(A),B_i(A)]\\subseteq B_{i+1}(A)$ for every commutative $k$-algebra $A$, so this is the nilpotent series required by [lem-sfb-nilpotent-borel-equals-group]. If $B$ is a torus, it is isomorphic to $\\mathbf G_m^r$; multiplication is commutative on every algebra by [def-sc-gm-ga], and $B\\supseteq1$ is such a series. In either case the nilpotent-Borel criterion gives $G=B$. Since $B$ was chosen solvable, the derived series of $G$ terminates. All three possible values of $d$ are covered, in every characteristic.",
+   "uses": [
+    "lem-sfb-perfect-unipotent-additive-series",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-nilpotent-borel-equals-group",
+    "def-sc-gm-ga"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.27, printed p.360; Proposition 17.23(b) to (c), printed p.359; Corollary 16.24, printed p.331, for the unipotent central series."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-solvable-normal-subgroup-products",
+  "def-sfb-borel-subgroup-scheme",
+  "lem-sfb-perfect-solvable-unipotent-torus",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-perfect-unipotent-additive-series",
+  "lem-sfb-nilpotent-borel-equals-group",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 17.27, printed p.360; Proposition 17.23(b) to (c), printed p.359; Theorem 16.33, printed pp.335--336, with its unipotent central series from Corollary 16.24, printed p.331."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(solvab.*(finrank|dimension|krull)|((finrank|dimension|krull).*solvab))",
+   "results": "{\"t\": \"2026-10-23T22:24:57Z\", \"tool\": \"grep\", \"query\": \"(solvab.*(finrank|dimension|krull)|((finrank|dimension|krull).*solvab))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\", \"Mathlib/Algebra/Lie/CartanCriterion.lean\"], \"digest\": \"7c0337af45c5db79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group of dimension less than three is solvable",
+   "results": "{\"t\": \"2026-10-23T22:24:58Z\", \"tool\": \"leansearch\", \"query\": \"A connected linear algebraic group of dimension less than three is solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"IsNilpotent.to_isSolvable\", \"isSolvable_of_comm\", \"IsSolvable.mk\", \"IsSimpleGroup.comm_iff_isSolvable\", \"isSolvable_of_top_eq_bot\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"IsSolvable.solvable\"], \"digest\": \"194113a0bc013227\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\"",
+   "results": "{\"t\": \"2026-10-23T22:24:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.IsSolvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.IsSolvable.mk\", \"LieAlgebra.IsSolvable.mk_int\", \"LieAlgebra.IsSolvable.solvable\", \"LieAlgebra.IsSolvable.solvable_int\", \"LieAlgebra.isSolvable_iff\"], \"digest\": \"dbd9bb31c6b2dc63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected affine algebraic group of dimension at most two over an algebraically closed field is solvable in arbitrary characteristic",
+   "results": "{\"t\": \"2026-10-23T22:24:59Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected affine algebraic group of dimension at most two over an algebraically closed field is solvable in arbitrary characteristic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"CommGroup.isSolvable\", \"isSolvable_of_subsingleton\", \"gal_one_isSolvable\", \"isSolvable_def\", \"IsSolvable.solvable\", \"IsNilpotent.to_isSolvable\", \"isSolvable_of_top_eq_bot\"], \"digest\": \"1b3ed1a0355dcf37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "solvab|Borel",
+   "results": "{\"t\": \"2026-10-23T22:25:28Z\", \"tool\": \"grep\", \"query\": \"solvab|Borel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups or Lie algebras, not solvability of affine algebraic group schemes from their Krull dimension"
+  },
+  {
+   "tool": "grep",
+   "query": "solvab|Borel",
+   "results": "{\"t\": \"2026-10-23T22:57:18Z\", \"tool\": \"grep\", \"query\": \"solvab|Borel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected linear algebraic group of dimension less than three is solvable",
+   "results": "{\"t\": \"2026-10-23T22:57:19Z\", \"tool\": \"leansearch\", \"query\": \"A connected linear algebraic group of dimension less than three is solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"IsNilpotent.to_isSolvable\", \"isSolvable_of_comm\", \"IsSolvable.mk\", \"IsSimpleGroup.comm_iff_isSolvable\", \"isSolvable_of_top_eq_bot\", \"LieAlgebra.isSolvable_of_isNilpotent\", \"IsSolvable.solvable\"], \"digest\": \"194113a0bc013227\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\"",
+   "results": "{\"t\": \"2026-10-23T22:57:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LieAlgebra.IsSolvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"LieAlgebra.IsSolvable.mk\", \"LieAlgebra.IsSolvable.mk_int\", \"LieAlgebra.IsSolvable.solvable\", \"LieAlgebra.IsSolvable.solvable_int\", \"LieAlgebra.isSolvable_iff\"], \"digest\": \"dbd9bb31c6b2dc63\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every smooth connected affine algebraic group of dimension at most two over an algebraically closed field is solvable",
+   "results": "{\"t\": \"2026-10-23T22:57:20Z\", \"tool\": \"leanfinder\", \"query\": \"Every smooth connected affine algebraic group of dimension at most two over an algebraically closed field is solvable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommGroup.isSolvable\", \"IsSolvable\", \"isSolvable_of_subsingleton\", \"isSolvable_def\", \"IsSolvable.solvable\", \"IsNilpotent.to_isSolvable\", \"isSolvable_of_top_eq_bot\", \"IsZGroup.instIsSolvableOfFinite\"], \"digest\": \"5e77813330fbc66a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract group or Lie-algebra results do not assert this scheme-theoretic algebraic-group theorem; grep hits concern nilpotent sections, not nilpotent group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one. Sub-argument: Theorem 20.22, printed p.415, and Theorem 20.16, pp.412--413: action on the Borel quotient projective line has kernel the full scheme-theoretic centre. Supporting input: Corollary 17.27, printed p.360, together with the smooth reduction theorem over a perfect field and dimension three of PGL2; used in Theorem 20.16 (c) implies (d), printed p.413. General low-dimensional input: Corollary 17.27, before its application to the proper image subgroup in Theorem 20.16(c) implies (d).",
+   "via": [
+    "lem-sfb-pgl2-proper-connected-subgroup-solvable",
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-split-rank-one-classification",
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-connected-group-dimension-two-solvable",
+  "worker": "stage1",
+  "summary": "Kept the statement and its dependencies. Expanded Milne Corollary 17.27 into a maximal-dimension Borel choice, dimension-two equality, unipotent/torus quotient dimension dichotomy, and nilpotence. Added only the general nilpotent-Borel equality criterion of Proposition 17.23; reused all existing structure and dimension nodes, without using the flag-normalizer theorem that depends on this corollary.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration reduction, through the recorded stable-curve/moduli/invariant-theory/root-datum/rank-one chain, specifically the Corollary 17.27 prerequisite to Theorem 20.16(c) implies (d). Steps 1--4 realize the general low-dimensional input. Current latest blueprint sk-thm-sf-ctf-stability states constructible-functor preservation; no current blueprint node duplicates this auxiliary group theorem. The inherited ancestor field is null (confirmed by blueprint_refs ancestor); preserved rather than inventing an imported node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-400b248cb",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-400b248cb (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 pp.358-360: Prop. 17.21-17.23 with proofs and Cor. 17.27. The item statement matches 17.27 (k algebraically closed; G smooth, connected and affine of finite type; dim<=2; scheme-theoretic derived-series solvability; any characteristic), and the 4-step route follows Milne's proof. Step 1: taking B of greatest dimension makes it a Borel, using the strict-growth and dimension-bound clause of solvable-normal-subgroup-products; dim B=2 forces G=B. Step 2: B/U is a torus by perfect-solvable-unipotent-torus; by affine-normal-quotient-geometry it has kernel U and B×U≅B×_D B, so B/U is the coset quotient; 047L (Lean-closed slopmaster2 GrpObj.isSeparated_hom) gives separatedness; homogeneous-quotient-krull-dimension gives d=dim U+dim D. Step 3: a smooth connected zero-dimensional group is trivial by strict growth (smoothness excludes alpha_p); a mono that is also an fppf epi is an isomorphism. Step 4: the central additive series becomes commutator containment; a torus is commutative; the new criterion gives G=B. New node lem-sfb-nilpotent-borel-equals-group is Milne 17.23 (b)=>(c) in the G=B form proved there. Its objects are introduced in the node and it is statement-only. Tested on the trivial group, Ga, Gm, Ga⋊Gm (Borel = G, not nilpotent, so nothing claimed) and SL2 (Borel not nilpotent). It is not a clause of the item. No duplicate: checked central-maximal-torus-nilpotent (17.23 (d)=>(c)), nilpotent-connected-central-series, borel-scheme-normalizer, general-borel-flag-variety (circular via 17.27) and the main-20261015 blueprint. No cycle; the item is unsplit live and side-live; no SGA. Batch-5: the trf nodes reached are generic Mathlib leaves (fppf covering base change, fpqc smooth descent) and definitions (descent datum, scheme as algebraic space), not trace-formula or Poincaré steps, so they are accepted. FIX (2 faults, repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-connected-group-dimension-two-solvable.json): (E1/C3) step 2 applied perfect-solvable-unipotent-torus, whose solvability is a normal series with commutative quotients, to a B that is only derived-series solvable; added the bridge that D^{a+1} contains all commutators, hence is normal with commutative quotients. (C1) step 4 used the kernel/image description of B->B/B_{i+1} without citing affine-normal-quotient-geometry; added it to the text and uses. proof_deps is unchanged and the new node is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ConnectedGroupDimensionTwoSolvable",
+  "declaration": "AlgebraicGeometry.connected_group_dimension_two_solvable",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ConnectedGroupDimensionTwoSolvable.lean",
+  "statement": "theorem connected_group_dimension_two_solvable {k : Type u} [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hdim : topologicalKrullDim G.left ≤ 2) : IsSolvableGroupScheme G",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5551b59f",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Statement matches node and Milne Cor 17.27 (p.360, read): IsAlgClosed k; G : Over Spec k with GrpObj; Smooth, ConnectedSpace, IsAffine, LOFT+QC each bound; topologicalKrullDim ≤ 2; conclusion IsSolvableGroupScheme (Semisimple.lean read: derived length with terminal base and minimal closed derived subgroup), so the scheme-theoretic derived series, not k-points. No char/extra hypotheses; universe u consistent; lean.statement verbatim. Node differs from live only in lean; no new nodes or dep records; report has both sections; docstrings carry source, blueprint tag and 4 proof steps; only sorry. No duplicate in Mathlib or project lean (rg). Edge cases: trivial, empty excluded, Ga/Gm/Ga⋊Gm, SL2 dim 3, alpha_p, char p. No compile rerun (2026-10-21 rule); no fixes."
+ }
+}

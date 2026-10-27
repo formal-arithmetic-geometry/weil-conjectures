@@ -1,0 +1,160 @@
+{
+ "id": "lem-fix-proetale-immersion-algebraic-limits-universes",
+ "kind": "statement",
+ "title": "ProEtaleImmersionAlgebraicLimitsOfUniverses",
+ "statement": "Let X,Y be schemes in universe t [def-pc-scheme], and let i:X to Y be an immersion [def-weil-closed-immersion]. On their small pro-etale sites [def-weil-pbc-proetale-site], fix independently a universe u and put r=max(u,t+1). Let L and B be any left adjoints to actual sectionwise pro-etale direct image with values in RingCat at size r and AddCommGrpCat at size r, respectively [def-weil-proetale-inverse-image]. Then L and B preserve all limits indexed by categories whose objects and morphisms have size 0. No qcqs, nonempty-source or nonzero-coefficient hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AA, lemma-closed-immersion (1); Tag 09BL, lemma-closed-immersion-affines-apply (3)--(4); algebraic-operation lift: sites.tex, Tag 00YV."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use largeSetSheafification_locallyBijective for the larger set universe. Use the native-universe weakly contractible affine covering objects only to split finite covering sigma maps (cover_split from the affine evaluation module). For set sheaves in the independent larger universe, the sigma-cover gluing theorem is already universe-polymorphic. A left adjoint lift preserves the finite sigma coproduct. Thus the sheafification unit of precomposition with the closed-site lift is injective by cover preservation and surjective at each native projective object by gluing and pulling back along the geometric splitting. The adjunction of affine site functors, affine restriction equivalences, and inverse mates identify this sheafified precomposition with the actual constructed inverse image.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+    "lem-weil-pbc-large-set-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply (1)--(3); Tag 0990, affine weakly contractible covers."
+   }
+  },
+  {
+   "text": "Evaluation at the native projective objects jointly reflects isomorphisms for larger set-valued sheaves: on a weakly contractible covering family, bijectivity gives the covering equalizer and image sieves, hence local bijectivity and an isomorphism. At every such object the inverse image is naturally evaluation on the lifted object, so preserves limits. Joint reflection transfers this to the affine closed inverse image. Reduce any affine closed immersion to a quotient by an ideal and scheme isomorphisms using Spec_iff.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis-wcontractible-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BL, lemma-closed-immersion-affines-apply (3); Tag 09AA, lemma-closed-immersion (1)."
+   }
+  },
+  {
+   "text": "Reprove the Zariski-local argument at the independent set universe: open inverse image is composition restriction by the map/pullback adjunction; restrictions to preimages of affine opens jointly detect isomorphisms by the covering-sieve criterion. The inverse-image composition isomorphism identifies each restricted comparison. This proves closed-immersion preservation. Factor an immersion into its closed coborder lift and open inclusion and compose. All scheme and site objects retain their original universe, and empty schemes and empty finite covers satisfy the same arguments.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA, lemma-closed-immersion (1), Zariski locality and open restriction."
+   }
+  },
+  {
+   "text": "Transport the supplied ring and abelian adjunctions to the coefficient-sized AsSmall site models. Transport the proved set inverse image by the same equivalences and uniqueness of left adjoints. On these small sites, base change is representably flat. Apply sheafPullbackForgetIso to RingCat and AddCommGrpCat; their forgetful functors preserve filtered Kan extensions and sheafification. Sheaf composition with these forgetful functors preserves limits (compute after the limit-reflecting inclusion into presheaves) and reflects isomorphisms. Reflect limits through the underlying-set comparisons, then transport back through the site equivalences. No extra choice of a left adjoint or coefficient identification is assumed.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, lemma-morphism-of-sites-algebraic-structures; limit preservation by sectionwise forgetful functors."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-ind-etale-basis-wcontractible-cover",
+  "lem-weil-pbc-large-set-sheafification",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09BL and 09AA; the coefficient-universe-independent splitting/gluing proof, and sites.tex Tag 00YV."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves of rings and abelian groups along an immersion on the pro etale site preserves all limits with independent universes",
+   "results": "Eight hits: sheaf pullback finite-limit and module pullback adjunction results; no independent-universe pro-etale algebraic comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; the returned generic pullback constructions require algebraic lift and site transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pro etale immersion inverse image sheaves of rings and abelian groups preserves all limits",
+   "results": "Eight hits: open immersion preservation and module pullback/free-module comparisons; no exact result.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "module.*[Pp]ullback.*[Uu]nderlying|immersion.*[Ll]imits",
+   "results": "Eight Mathlib hits, concerning scheme immersions and pullbacks, not algebraic sheaf inverse-image comparisons. Local project signatures have only the fixed same-universe versions.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate with independent t and u."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryRestrictionExact",
+  "date": "2026-10-27",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.; Step 1: geometric inverse image, completed coefficient identification and module limits; immersion geometric inverse-image limit comparison",
+   "via": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleImmersionAlgebraicLimitsOfUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleImmersionAlgebraicLimitsOfUniverses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_immersion_algebraicInverse_limits",
+  "statement": "theorem proEtale_immersion_algebraicInverse_limits\n    {X Y : Scheme.{t}} (i : X ⟶ Y) [IsImmersion i]\n    (L : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)} ⥤\n      Sheaf (ProEt.topology X) RingCat.{max u (t + 1)})\n    (aL : L ⊣ (proEtaleBaseChange i).sheafPushforwardContinuous\n      RingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X))\n    (B : Sheaf (ProEt.topology Y) AddCommGrpCat.{max u (t + 1)} ⥤\n      Sheaf (ProEt.topology X) AddCommGrpCat.{max u (t + 1)})\n    (aB : B ⊣ (proEtaleBaseChange i).sheafPushforwardContinuous\n      AddCommGrpCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X)) :\n    PreservesLimitsOfSize.{0, 0} L ∧ PreservesLimitsOfSize.{0, 0} B",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T012936-L-2350264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261027T034755-L-3685369",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,467 @@
+{
+ "id": "lem-sfb-semiabelian-gm-extension-ample-reflection",
+ "kind": "statement",
+ "title": "A semiabelian group extension by Gm reflects ampleness",
+ "statement": "Let $S$ be a normal integral Noetherian affine scheme [def-pc-scheme, def-pc-integral-scheme, pqf-def-locnoeth, def-weil-pbc-normal-ring], where Noetherian means locally Noetherian and quasi-compact, and normal means that all local rings are integrally closed domains. A commutative $S$-group scheme has addition, inverse and identity as $S$-morphisms satisfying the commutative group identities [def-sc-group-scheme, def-pc-fibre-product]; separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Let $E$ and $H$ be smooth separated commutative $S$-group schemes of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], both with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. Suppose $q:E\\to H$ is an $S$-group homomorphism, faithfully flat of finite presentation [def-weil-flat-morphism, def-weil-surjective-morphism], and an embedding $j:\\mathbf G_{m,S}\\to E$ identifies $\\mathbf G_{m,S}=\\operatorname{Spec}_S\\mathcal O_S[t,t^{-1}]$ [def-sc-gm-ga] with its scheme-theoretic kernel. Assume $1\\to\\mathbf G_{m,S}\\xrightarrow{j}E\\xrightarrow{q}H\\to1$ is exact as fppf sheaves [def-pc-fppf-site]; equivalently $q$ is the group quotient torsor with $E\\times_S\\mathbf G_{m,S}\\simeq E\\times_HE$, $(u,a)\\mapsto(u,u+j(a))$. Let $M$ be an invertible $\\mathcal O_H$-module [def-sc-invertible-module]. Assume $M$ is symmetric under the group inversion $\\iota_H=[-1]_H$: there is an isomorphism $\\iota_H^*M\\simeq M$. If the tensor pullback $q^*M$ [def-pc-module-pullback] is ample on $E$, then $M$ is ample on $H$ [def-weil-pbc-ample-invertible-module]. This is absolute ampleness over the specified affine base. No cubical structure, inversion-norm hypothesis or properness of $H$ is assumed; inversion symmetry of $M$ is essential in this corrected relative formulation. The homomorphism and group-extension hypotheses are essential; this is not a descent assertion for arbitrary $\\mathbf G_m$-torsors.",
+ "source": {
+  "document": "literature/raynaud-faisceaux-amples-LNM119-1970.pdf",
+  "place": "XI 1.11, ampleness comparison for group quotients: supporting source for the field abelian-quotient case. The relative semiabelian Gm-extension assertion here is an agent-formulated geometric prerequisite, not claimed as the verbatim statement of XI 1.11. Original and proof of this relative formulation WANTED. No general fpqc descent of absolute ampleness is asserted."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-integral-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-flat-morphism",
+  "def-weil-surjective-morphism",
+  "def-sc-gm-ga",
+  "def-pc-fppf-site",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-pbc-ample-invertible-module",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentation implies finite type directly from its affine finite-polynomial presentation and quasi-compactness. Hence $E$ and $H$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Their geometric fibres are connected: use the supplied semiabelian presentation and [lem-sfb-semiabelian-geometric-power-integrality] with $n=1$; smoothness and finite type of these fibres follow from [lem-pc-proper-base-change] and [lem-sfb-finite-type-composition-base-change]. The algebraic-closure connectedness criterion then makes every residue-field fibre geometrically connected. Since $S$ is normal integral and $E,H$ have identities, [lem-sbc-smooth-connected-generic-geometry] makes their local rings integrally closed domains. In particular the normality and finite-type hypotheses for the eigensection-chart input hold for $E$. The separatedness of geometric fibres is preserved by base change. Writing $S=\\operatorname{Spec}A$, its affine coordinate ring is Noetherian by [pqf-lem-affine-open-locnoeth].",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-semiabelian-geometric-power-integrality",
+    "lem-pc-proper-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-geometrically-connected-algebraic-closure",
+    "lem-sbc-smooth-connected-generic-geometry",
+    "lem-weil-pbc-separated-base-change",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  },
+  {
+   "text": "Write $T=\\mathbf G_{m,S}$ and let it act on $E$ by $a(t,u)=u+j(t)$. The torsor identity $q a=q p_2$ gives $L=q^*M$ its canonical $T$-linearization; the unit and cocycle equalities are the identity on the common pullback from $H$. Choose the assumed isomorphism $\\iota_H^*M\\simeq M$. Because $q\\iota_E=\\iota_Hq$, it induces $\\iota_E^*L\\simeq L$, and hence identifications for every positive power. These identifications are compatible with the canonical pullback linearizations when inversion sends $t$ to $t^{-1}$: both sides are pullbacks of the chosen sheaf map on $H$. Tensor-power and composite-pullback identifications are supplied by [lem-weil-pbc-invertible-pullback-tensor].",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  },
+  {
+   "text": "Fix $s\\in S$ and its identity point $e_E(s)$. Apply [lem-sfb-linearized-ample-eigen-affine-cover] to the ample linearized $L$ on $E$ to obtain $n\\geq1$, a weight $w$, and $\\sigma\\in\\Gamma(E,L^{\\otimes n})$ whose affine nonvanishing open $U$ contains $e_E(s)$. Transfer $\\iota_E^*\\sigma$ through the preceding isomorphism and call it $\\tau$. Its weight is $-w$: substitute $\\iota_E(tu)=t^{-1}\\iota_E(u)$ into the displayed eigensection identity of that node and pull back the chosen sheaf map from $H$. Thus $\\rho=\\sigma\\otimes\\tau$ has weight zero for every test algebra, as the factors $t^w$ and $t^{-w}$ cancel. Its nonvanishing locus is $W=U\\cap\\iota_E^{-1}(U)$ by the residue-field tensor formula. It contains $e_E(s)$ and is affine: it is the nonvanishing locus of $\\tau|_U$ on affine $U$, so [lem-sc-affine-cap-section-open] applies.",
+   "uses": [
+    "lem-sfb-linearized-ample-eigen-affine-cover",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-sc-affine-cap-section-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  },
+  {
+   "text": "The fppf cover $q$ is fpqc by [lem-trf-fppf-covering-is-fpqc]. The weight-zero identity for $\\rho$, under $E\\times_HE\\simeq E\\times_ST$, is precisely equality of its two pullbacks to $E\\times_HE$ using the canonical descent identifications of $q^*(M^{\\otimes2n})$. Full faithfulness of [lem-pc-fpqc-descent], applied to the map $\\mathcal O_E\\to q^*(M^{\\otimes2n})$ defined by $\\rho$, gives a section $v\\in\\Gamma(H,M^{\\otimes2n})$ whose pullback is $\\rho$. The residue-field formula in [lem-weil-pbc-invertible-pullback-tensor] gives $q^{-1}(H_v)=W$. No assertion of fpqc descent of ampleness is used.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descent",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  },
+  {
+   "text": "The affine open $W$ is a finite-type $S$-scheme: $E$ is Noetherian, so every intersection of its opens is quasi-compact; its open inclusion is therefore quasi-compact and of finite type, and compose with $E\\to S$. The restricted $T$-action is free on all test schemes by the original torsor isomorphism. Apply [lem-sfb-affine-free-split-torus-invariants] to $W=\\operatorname{Spec}B$ over $S=\\operatorname{Spec}A$. It says that its fppf orbit sheaf is $\\operatorname{Spec}(B^T)$. This orbit sheaf is also $H_v$: any test map to $H_v$ lifts fppf locally to $W$ by base change of $q$, and any two lifts differ by a unique element of $T$. These local descriptions and fppf sheafification give mutually inverse maps of represented sheaves; Yoneda gives $H_v\\simeq\\operatorname{Spec}(B^T)$. Thus $H_v$ is affine and meets the fibre above $s$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-affine-free-split-torus-invariants",
+    "lem-trf-fppf-covering-base-change",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  },
+  {
+   "text": "The image $V=p(H_v)$ in $S$ is open, since $p:H\\to S$ is smooth, hence flat and locally of finite presentation, and such maps are open. It contains $s$ because $\\rho(e_E(s))\\ne0$. Choose a principal affine neighbourhood $S_s=D(f)\\subseteq V$ of $s$ in the affine base $S$. The nonvanishing locus of $v|_{H_{S_s}}$ is $H_v\\times_SS_s$, a principal open in the affine $H_v$, hence affine. It meets every fibre over $S_s$ by the definition of $V$. On $H_{S_s}\\to S_s$, smoothness, separatedness and finite presentation persist by base change, and the connected-fibre conclusion of step 1 persists. The affine base $S_s$ is locally Noetherian and normal because its local rings are local rings of $S$. Therefore [lem-sfb-group-affine-section-ampleness] applied to $M|_{H_{S_s}}$, exponent $2n\\geq1$ and section $v$ proves absolute ampleness on $H_{S_s}$.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sc-affine-cap-section-open",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-group-affine-section-ampleness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  },
+  {
+   "text": "As $s$ varies, these principal affine opens $S_s$ cover $S$. The morphism $H\\to S$ is quasi-compact by finite presentation. Apply [lem-trf-scheme-relative-ample-affine-cover] with this affine open covering and the restrictions shown ample in step 6. Taking its affine open $V=S$ gives that $M$ is ample on the whole of $H$. This proves the corrected symmetric relative assertion. It does not supply the unsymmetric input requested by the parent norm-reflection proof.",
+   "uses": [
+    "lem-trf-scheme-relative-ample-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Agent assembly; ideal-section and nonvanishing-locus arguments, with the named DAG inputs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-semiabelian-geometric-power-integrality",
+  "lem-pc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-connected-generic-geometry",
+  "lem-weil-pbc-separated-base-change",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sfb-linearized-ample-eigen-affine-cover",
+  "lem-sc-affine-cap-section-open",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-affine-free-split-torus-invariants",
+  "lem-trf-fppf-covering-base-change",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-group-affine-section-ampleness",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Character cancellation under inversion, fpqc descent of a section and a free affine torus quotient, followed by the existing normal-group affine-section criterion; 01Q3 supplies the polarized-chart positivity input."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semiabelian|[Aa]mple|[Tt]orus",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean, Mathlib/AlgebraicGeometry/Morphisms/IsIso.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ample|isAmple|SemiAbelian|semiabelian|cubical",
+   "results": "Hits: Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Diffeology/Basic.lean, Mathlib/Geometry/Euclidean/Altitude.lean, Mathlib/Geometry/Convex/Star.lean, Mathlib/Geometry/Manifold/LocalInvariantProperties.lean, Mathlib/Geometry/Manifold/Algebra/SMul.lean None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a semiabelian group scheme is ample if its pullback under an extension by Gm is ample",
+   "results": "Hits: AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.IsProper.instSndScheme, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, instAddCommMonoidPullback, CommRing.relPic, AlgebraicGeometry.Scheme.GrpObjAsOverPullback None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, Module.Invertible",
+   "results": "No hits. None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ampleness descends along a quotient homomorphism of semiabelian group schemes whose kernel is the multiplicative group over a normal affine base",
+   "results": "Hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a group extension by a split torus the pullback of an invertible sheaf reflects relative ampleness",
+   "results": "Hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine, AlgebraicGeometry.of_targetAffineLocally_of_isPullback, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Modules.pullback None states this geometric assertion; affine scheme pullbacks, Picard groups of rings, category group objects and topological vector bundles do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ll]ineariz|[Ee]igensection|[Ss]emi.?invariant|[Aa]mple",
+   "results": "{\"t\": \"2026-10-24T06:43:31Z\", \"tool\": \"grep\", \"query\": \"[Ll]ineariz|[Ee]igensection|[Ss]emi.?invariant|[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\"], \"digest\": \"4ca89379df20bd9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ample equivariant invertible sheaf for a split torus action gives a basis of invariant affine opens by homogeneous sections of positive powers",
+   "results": "{\"t\": \"2026-10-24T06:43:31Z\", \"tool\": \"leansearch\", \"query\": \"An ample equivariant invertible sheaf for a split torus action gives a basis of invariant affine opens by homogeneous sections of positive powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.isBasis_affine_open\", \"AlgebraicGeometry.isBasis_basicOpen\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.isBasis_basicOpen\", \"AlgebraicGeometry.RingedSpace.basicOpen_pow\", \"AlgebraicGeometry.Proj.basicOpenIsoAway\"], \"digest\": \"eebce1284fe183f0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"lineariz\"",
+   "results": "{\"t\": \"2026-10-24T06:43:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"lineariz\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal separated finite type scheme over a noetherian affine ring with a split multiplicative group action and a linearized ample line bundle has affine nonvanishing opens from eigenvector sections of powers of that same line bundle",
+   "results": "{\"t\": \"2026-10-24T06:43:33Z\", \"tool\": \"leanfinder\", \"query\": \"A normal separated finite type scheme over a noetherian affine ring with a split multiplicative group action and a linearized ample line bundle has affine nonvanishing opens from eigenvector sections of powers of that same line bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\"], \"digest\": \"909deb3be0dc4eed\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ample line with torus linearization every point lies in an affine principal open cut out by a semi invariant section of a positive tensor power",
+   "results": "{\"t\": \"2026-10-24T06:43:34Z\", \"tool\": \"leanfinder\", \"query\": \"For an ample line with torus linearization every point lies in an affine principal open cut out by a semi invariant section of a positive tensor power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.IsAffineOpen.exists_basicOpen_le\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'\", \"AlgebraicGeometry.Proj.basicOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\"], \"digest\": \"0cd98e7ce1e42791\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; ordinary Proj affine charts, basic opens and unrelated module or group extensions do not give eigenvector sections of an ample equivariant line on this scheme."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"ample\"",
+   "results": "{\"t\": \"2026-10-24T06:05:42Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a symmetric line bundle pulls back to an ample line bundle under a semiabelian group homomorphism with kernel Gm over a normal noetherian affine base then it is ample",
+   "results": "{\"t\": \"2026-10-24T06:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"If a symmetric line bundle pulls back to an ample line bundle under a semiabelian group homomorphism with kernel Gm over a normal noetherian affine base then it is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AmpleSet.preimage_iff\", \"AmpleSet.preimage\", \"AmpleSet.image_iff\", \"AlgebraicGeometry.AffineSpace.isPullback_map\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AmpleSet.image\", \"AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion\"], \"digest\": \"52ecab21ec56fcb2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"ample\"",
+   "results": "{\"t\": \"2026-10-24T06:45:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme, \\\"ample\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ampleness reflection for a symmetric invertible sheaf under an extension of semiabelian group schemes by the multiplicative group",
+   "results": "{\"t\": \"2026-10-24T06:45:36Z\", \"tool\": \"leansearch\", \"query\": \"Ampleness reflection for a symmetric invertible sheaf under an extension of semiabelian group schemes by the multiplicative group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.relPic\", \"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"AddGroupExtension.Equiv.refl_apply\", \"Submodule.unitsQuotEquivRelPic_symm_apply\", \"AddGroupExtension.IsConj.refl\", \"LinearMap.IsReflective.reflective_reflection\", \"RootPairing.coreflection\"], \"digest\": \"4cbb27e331476f2b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]emi[Aa]belian|[Ss]emiabelian|[Ii]sAmple|[Ss]ymmetric.*[Aa]mple",
+   "results": "{\"t\": \"2026-10-24T06:45:39Z\", \"tool\": \"grep\", \"query\": \"[Ss]emi[Aa]belian|[Ss]emiabelian|[Ii]sAmple|[Ss]ymmetric.*[Aa]mple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle invariant under inversion on a smooth connected commutative group is ample if its pullback to a central multiplicative group extension is ample",
+   "results": "{\"t\": \"2026-10-24T06:45:44Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle invariant under inversion on a smooth connected commutative group is ample if its pullback to a central multiplicative group extension is ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AmpleSet.preimage\", \"AmpleSet.preimage_iff\", \"AmpleSet.image\", \"AmpleSet.image_iff\", \"AmpleSet.of_one_lt_codim\", \"AmpleSet.vadd_iff\", \"Submodule.mulExact_unitsToPic_mapAlgebra\", \"AmpleSet.vadd\"], \"digest\": \"9f7701dd12d7de84\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cubical-ample-norm-reflection",
+  "date": "2026-10-24",
+  "group": "NV"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3 opening application of Raynaud XI 1.13 to generic ample modules; isolate the positive generic input before forming a tensor quotient and comparing over U. Supporting input for Q35: Relative ampleness of the inversion norm of a supplied line. Q15 support: Fibrewise ampleness criterion for cubical lines on semiabelian schemes. Q06 supporting input: One affine section chart at the strict-local identity. NM supporting input: Agent-formulated norm-reflection input to the cubical ampleness argument; the normal-base relative version is a separate unsplit theorem, not claimed as a numbered assertion of Raynaud. Original ampleness chapters WANTED. Supporting input: group-quotient ampleness comparison, applied to the antisymmetric frame extension",
+   "via": [
+    "lem-sfb-cubical-ample-norm-reflection",
+    "lem-sfb-cubical-strict-local-affine-seed",
+    "lem-sfb-cubical-fibrewise-ample-criterion",
+    "lem-sfb-semiabelian-supplied-norm-ampleness",
+    "lem-sfb-raynaud-generic-ample-symmetrization",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-gm-extension-ample-reflection",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED and repaired: the unsymmetric normal-base assertion is false by the antisymmetric frame extension of the explicit two-parameter Tate degeneration in Kallal arXiv:2610.26133 §4.1. Retained the relative semiabelian extension setup and added inversion symmetry of M. Seven steps cancel opposite eigensection weights, descend an affine chart and apply the existing normal-group affine-section criterion. One general polarized torus-chart auxiliary, statement only, is new. The parent norm-reflection use no longer meets this corrected hypothesis and must be repaired upstream.",
+  "blueprint": "Inherited stable-Picard / direct-image (3) supporting group-quotient input. No equivalent blueprint statement was found; the correction is explicitly reported rather than silently preserving an invalid positivity route.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-geometrically-connected-algebraic-closure",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-sbc-smooth-connected-generic-geometry",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-trf-fppf-covering-is-fpqc",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-pc-fpqc-descent",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   },
+   {
+    "node": "lem-trf-scheme-relative-ample-affine-cover",
+    "why": "Generic scheme geometry, module descent/tensor compatibility or relative-ampleness gluing used exactly as stated in the numbered proof; no constructible-cohomology or trace theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-proper-base-change",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "lem-sbc-smooth-connected-generic-geometry",
+  "lem-weil-pbc-separated-base-change",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-sc-affine-cap-section-open",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descent",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-trf-fppf-covering-base-change",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-trf-scheme-relative-ample-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-bb82b6f55",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-bb82b6f55 (reviewer sub-agent of L); spot-checked: E7 statement correction accepted. The base item (any M with q*M ample implies M ample) is false. Kallal arXiv:2610.26133v1 §4.1, read online: over R=C[[q1,q2]] with Tate parameter q1q2 and ψ(y)=q1^{(y²+y)/2}q2^{(y²−y)/2}, there is a line P that is ample on the generic fibre but not on G. I checked the bimultiplicativity (q1q2)^{y1y2}. The frame extension E=(P⊗(ι*P)^∨)^× → G has semiabelian fibres (closed fibre: an extension of G_m by G_m). Then q*(P²)≅q*(P⊗ι*P) is ample: the norm is symmetric and generically ample (Moret-Bailly VI 3.1), and q is affine. But P² is not ample. The delivery adds only ι_H^*M≅M and names the change in the report. Steps checked against the full cited statements: (1) Noetherian, integral geometric fibres via power-integrality with n=1, geometric connectedness, normality via sbc-smooth-connected-generic-geometry; (2) canonical linearization and symmetry pulled back from H; (3) the new chart node gives σ of weight w, τ=φ(ι*σ) has weight −w (checked by hand), W=U∩ι^{-1}U is affine by the cap lemma; (4) weight 0 equals descent compatibility, and fpqc full faithfulness gives v with q^{-1}H_v=W; (5) the action on W is free and of finite type, affine-free-split-torus-invariants plus torsor base change plus Yoneda give H_v affine; (6) flat lfp open image, principal D(f), then group-affine-section-ampleness, all hypotheses checked; (7) 01VJ affine-cover gluing. New node lem-sfb-linearized-ample-eigen-affine-cover: statement only, self-contained, true. Argument: invariant affine U, a section vanishing on the reduced invariant complement, weight components vanish on Z by Laurent base change, cap lemma. It is general and strictly smaller than the item. No duplicate found (GIT/PGL linearization nodes, invariant-affines and coaction nodes all lack it). Batch-5 flags: smooth-composition (Mathlib-level), fppf-is-fpqc and relative-ample-affine-cover (sk-i-curve-zero foundations, 022C/01VJ), def-trf-scheme-algebraic-space (a definition), fppf-covering-base-change (Mathlib), and the Proj twist comparison: all generic, none a trace-formula or Poincaré-duality step, so accepted. The tool_uses of generic scheme and descent nodes are accepted. No SGA source is used. MAINTAINER: the same example falsifies the parent lem-sfb-cubical-ample-norm-reflection (cubical P with P⊗ι*P ample does not imply P ample). Its step 4 uses this item with M=P², which is not symmetric, so it needs a human decision (HUMAN.md)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianGmExtensionAmpleReflection",
+  "declaration": "AlgebraicGeometry.semiabelian_gm_extension_ample_reflection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianGmExtensionAmpleReflection.lean",
+  "statement": "theorem semiabelian_gm_extension_ample_reflection {S : Scheme.{u}} [IsAffine S] [IsIntegral S] [IsLocallyNoetherian S] (hS : ∀ s : S, IsDomain (S.presheaf.stalk s) ∧ IsIntegrallyClosed (S.presheaf.stalk s)) (E H : Grp (Over S)) [IsCommMonObj E.X] [IsCommMonObj H.X] [Smooth E.X.hom] [IsSeparated E.X.hom] [LocallyOfFinitePresentation E.X.hom] [QuasiCompact E.X.hom] [Smooth H.X.hom] [IsSeparated H.X.hom] [LocallyOfFinitePresentation H.X.hom] [QuasiCompact H.X.hom] (hE : HasSemiabelianGeometricFibres E) (hH : HasSemiabelianGeometricFibres H) (q : E ⟶ H) [Flat q.hom.hom.left] [Surjective q.hom.hom.left] [LocallyOfFinitePresentation q.hom.hom.left] [QuasiCompact q.hom.hom.left] (j : relativeSplitTorus S 1 ⟶ E) (hkernel : IsPullback j.hom.hom (toUnit (relativeSplitTorus S 1).X) q.hom.hom η[H.X]) (hepi : Presheaf.IsLocallySurjective (Scheme.fppfTopology.over S) (yoneda.map q.hom.hom)) (M : H.X.left.Modules) [M.IsInvertible] (hsymmetric : Nonempty ((Scheme.Modules.tensorPullback (ι[H.X]).left).obj M ≅ M)) (hample : @Scheme.Modules.IsAmple E.X.left ((Scheme.Modules.tensorPullback q.hom.hom.left).obj M) (((Scheme.Modules.invertible_pullback_tensor q.hom.hom.left).1 M).2)) : Scheme.Modules.IsAmple H.X.left M",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b94e35dac",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Item record diff vs side-live: only lean + stmt_dep def-sfb-relative-split-torus (landed Q110). lean.statement verbatim, a single sorry, no defs. Clause check: affine integral locally Noetherian S with inline normal-local-domain stalks; Grp (Over S) + IsCommMonObj; Smooth/IsSeparated/LFP/QC on E, H and Flat/Surjective/LFP/QC on q (QS from separatedness); G_m,S = relativeSplitTorus S 1 (Stacks 022U), not a copy; kernel = IsPullback against η[H.X]; fppf IsLocallySurjective of yoneda.map q; Nonempty iota^*M ≅ M; absolute IsAmple of q^*M ⇒ IsAmple M, with invertibility from invertible_pullback_tensor. Edge cases (empty S excluded by integrality, torus rank 0, every characteristic, one universe) OK. Docstrings have source, blueprint id and the 7 steps. No compile run (no file changed)."
+ }
+}

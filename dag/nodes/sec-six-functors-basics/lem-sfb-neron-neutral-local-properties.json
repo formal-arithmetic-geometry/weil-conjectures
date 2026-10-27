@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-neron-neutral-local-properties",
+ "kind": "statement",
+ "title": "Identity component and localization of a Néron lft-model",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension one, $K=\\operatorname{Frac}(D)$, and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. A commutative group scheme over a base has multiplication, inverse and identity morphisms over that base satisfying the commutative group identities. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. A scheme over a field $k$ is geometrically connected if its base change to every field extension of $k$ is connected [def-weil-connected-scheme]; a scheme over $S$ has geometrically connected fibres if its fibre over each point $s\\in S$ is geometrically connected over the residue field $\\kappa(s)$. Let $H$ be a smooth separated geometrically connected commutative finite-type $K$-group [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], and let $\\mathcal H$ be a Néron lft-model of $H$. A Néron lft-model of a smooth separated $K$-group $V$ means a smooth separated $S$-group $\\mathcal V$, with a specified generic group isomorphism $\\mathcal V_K\\simeq V$, such that restriction is a bijection $\\operatorname{Hom}_S(X,\\mathcal V)\\simeq\\operatorname{Hom}_K(X_K,V)$ for every smooth $S$-scheme $X$ [def-pc-base-change, def-sbc-smooth-morphisms]. It is only locally of finite type; finite type additionally requires quasi-compactness [def-weil-finite-type-morphism]. The identity components of the geometric fibres define an open subgroup scheme $\\mathcal H^0\\subseteq\\mathcal H$ [def-weil-open-immersion]; it is smooth separated of finite type over $S$, has geometrically connected fibres, and has generic fibre $H$. For every maximal ideal $\\mathfrak m\\subset D$, the base change $\\mathcal H_{D_{\\mathfrak m}}$ is a Néron lft-model of $H$ over $\\operatorname{Spec}D_{\\mathfrak m}$, with the same generic identification. Its open subgroup of fibrewise identity components is $(\\mathcal H^0)_{D_{\\mathfrak m}}$. The notation $D_{\\mathfrak m}$ denotes localization at the complement of $\\mathfrak m$ [def-weil-pbc-localization-at-prime].",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Definition 1 and the paragraph immediately following it, printed pp.289–290 (PDF pp.295–296): localization compatibility and finite type of the identity component. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-open-immersion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\mathcal H$. Its geometric fibres are smooth: apply [lem-sbc-smooth-relative-dimension-permanence](1) locally where the relative dimension is constant. Thus they are locally of finite type. Let $N\\subseteq|G|$ be the union of the ordinary fibre components containing the identity. The section-component base-change theorem [lem-sbc-section-component-cartesian] identifies its inverse image in every geometric fibre with that fibre's identity component. Apply [lem-sfb-locally-algebraic-group-identity-component] over each algebraically closed residue field: these components are open-and-closed, geometrically irreducible, quasi-compact subgroup schemes. In particular the ordinary component $C_s\\subseteq G_s$ is quasi-compact too: it is the continuous image of its geometric component under field-extension projection. That projection is surjective, since for a point with residue field $L$ the tensor product $L\\otimes_{\\kappa(s)}\\overline{\\kappa(s)}$ is nonzero (tensor a basis of the field extension) and hence has a prime ideal. These assertions apply to locally finite type fibres; no quasi-compactness of $G$ is assumed.",
+   "uses": [
+    "lem-sbc-section-component-cartesian",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055M, lemma-base-change-connected-along-section; groupoids.tex Tag 0B7R, proposition-connected-component"
+   }
+  },
+  {
+   "text": "Fix $s\\in S$. Both $e(S)$ and $C_s$ are quasi-compact, so finitely many affine opens of $G$ cover them; let $W$ be their union. The section factors through $W$. This open restriction is smooth by [lem-pc-open-immersion-smooth-composition]. It is separated: its diagonal is the restriction of the closed diagonal of $G$, using [lem-pc-closed-imm-base-change]. As $W$ is quasi-compact over the affine base, it is quasi-compact and quasi-separated over $S$. Thus [lem-sbc-smooth-section-component-open] applies to $W\\to S$. Its section-component locus $W^0$ is open in $G$, is contained in $N$, and contains all of $C_s$: the component of $e(s)$ in $W_s$ is exactly $C_s$, since $C_s\\subset W_s$ and connected subsets of $W_s$ containing $e(s)$ remain connected in $G_s$. Varying $s$ shows that $N$ is open. Give it the restricted structure sheaf.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-pc-closed-imm-base-change",
+    "lem-sbc-smooth-section-component-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 055R (lemma-connected-along-section-open), 01VC and 01VA (open smooth restriction), 01QR (lemma-base-change-closed-immersion); finite affine-open unions"
+   }
+  },
+  {
+   "text": "The multiplication, inverse and identity maps factor through the open subscheme $N$: at every geometric point this is the subgroup assertion of [lem-sfb-locally-algebraic-group-identity-component]. A map into a scheme factors through an open subscheme exactly when its point image lies in that open, by [def-weil-open-immersion]. The group identities restrict because the open inclusion is a monomorphism. Smoothness follows from [lem-pc-open-immersion-smooth-composition], and separatedness from the restricted diagonal and [lem-pc-closed-imm-base-change]. The geometric fibres are the components identified in Step 1, so are geometrically connected. The generic component is all of $H$, because $H$ is geometrically connected; hence $N_K=H$ with the specified generic identification.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-open-immersion",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-pc-closed-imm-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055M and groupoids.tex Tag 0B7R; open-factorization and restriction of the group operations"
+   }
+  },
+  {
+   "text": "Choose a finite union $U$ of affine opens of $N$ containing $e(S)$. It is quasi-compact and its every geometric fibre is a nonempty open in the irreducible scheme $N_{\\bar s}$, by [lem-sfb-locally-algebraic-group-identity-component]. The difference map $q:U\\times_SU\\to N$, $(u,v)\\mapsto uv^{-1}$, is surjective on points. Indeed for any geometric point $g$ of $N_{\\bar s}$, the two nonempty opens $U_{\\bar s}$ and $gU_{\\bar s}$ meet by irreducibility. A point of their intersection, after extension to its residue field, writes $u=gv$ with $u,v\\in U$, so $g=uv^{-1}$ and the original point lifts to the source of $q$. The source is quasi-compact: pairs of the finitely many affine opens of $U$ give a finite cover by affine fibre products over the affine $S$, using [lem-weil-pbc-fibre-product-affine-spectra]. Pulling back an open cover of $N$ along the continuous surjection $q$ and taking a finite subcover proves $N$ quasi-compact. It is locally of finite type by smoothness, so [def-weil-finite-type-morphism] gives finite type. This proves the required finiteness without assuming that the whole lft-model is of finite type.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 following Definition 1, printed p.290: finite type by the surjective group-law map from a fibrewise dense open; groupoids.tex Tag 0B7R; schemes.tex Tag 01I4, lemma-fibre-product-affine-schemes"
+   }
+  },
+  {
+   "text": "Fix a maximal ideal $\\mathfrak m$, put $R=D_{\\mathfrak m}$ and $T=\\operatorname{Spec}R$, and let $G_T=G\\times_ST$. Smoothness survives this base change: locally in the source the relative dimension of a smooth morphism is constant, and [lem-sbc-smooth-relative-dimension-permanence](1) applies there. Separatedness survives because the new diagonal is the base change of the old diagonal, a closed immersion by [lem-pc-closed-imm-base-change]. The group operations base change by the fibre-product universal property. Localization does not change the fraction field: the maps $(a/s)/ (b/t)\\mapsto at/(sb)$ and $a/b\\mapsto(a/1)/(b/1)$ are inverse. Thus $(G_T)_K=H$ with the original generic identification. It remains to prove its mapping property.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-closed-imm-base-change",
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "morphisms.tex Tags 01VB and 02NK (smooth base change); closed-immersion base change; BLR 10.1 localization"
+   }
+  },
+  {
+   "text": "Let $X\\to T$ be smooth and $u_K:X_K\\to H$ a morphism. On an affine open $V=\\operatorname{Spec}B\\subset X$, the map $R\\to B$ is smooth in the affine-ring sense, by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine]. Write $R=\\varinjlim_{f\\notin\\mathfrak m}D[1/f]$: any finite list of fractions lies in the stage with denominator their product, directly from [def-weil-pbc-localization-at-prime]. Apply [lem-weil-pbc-smooth-algebra-filtered-colimit-descent] to obtain $f\\notin\\mathfrak m$ and a smooth $D[1/f]$-algebra $B_f$ with $B\\simeq R\\otimes_{D[1/f]}B_f$. Put $V_f=\\operatorname{Spec}B_f$, smooth over $\\operatorname{Spec}D[1/f]$ by the reverse implication of that same equivalence. The base map $\\operatorname{Spec}D[1/f]\\hookrightarrow S$ is smooth (apply [lem-pc-open-immersion-smooth-composition] to the identity of $S$), so $V_f\\to S$ is smooth by [lem-trf-smooth-composition]. Its generic fibre is $V_K$, since both bases have fraction field $K$. The original Néron mapping property extends $u_K|_{V_K}$ to $V_f\\to G$. Pull back to $T$ to obtain $u_V:V\\to G_T$. Only the test scheme descends here; no finite-presentation hypothesis on $G$ is used.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "algebra.tex Tag 0CAQ, lemma-smooth-descends-through-colimit; morphisms.tex Tag 01VA, lemma-composition-smooth; BLR 10.1 localization; Tag 01V6, lemma-smooth-characterize; Tag 01VC, lemma-open-immersion-smooth"
+   }
+  },
+  {
+   "text": "The generic-fibre map of every smooth $T$-scheme $Y$ is scheme-theoretically dominant, meaning injective on the structure sheaf. Indeed on an affine open $\\operatorname{Spec}A\\subset Y$, the ring map $R\\to A$ is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], hence flat by [lem-weil-pbc-smooth-ring-map-flat]. Tensoring the injection $R\\hookrightarrow K$ with $A$ gives $A\\hookrightarrow K\\otimes_RA$ by [def-weil-pbc-flat-ring-map]; this is precisely injectivity on affine sections, hence on the sheaf. Apply [lemma-nagata-ext-scheme-theoretically-dominant-separated] to the separated $T$-scheme $G_T$: two maps from $Y$ agreeing generically are equal. The maps $u_V$ of Step 6 therefore agree on every overlap, which is smooth as an open of $X$ by [lem-pc-open-immersion-smooth-composition]. They glue to a map $X\\to G_T$ because scheme morphisms glue on an open cover (glue the continuous maps and their maps of restricted structure sheaves). The same uniqueness argument applies to $X$ itself, with no quasi-compactness assumption. Thus restriction on Hom is bijective, and $G_T$ is the required Néron lft-model.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "lem-pc-open-immersion-smooth-composition",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "algebra.tex Tags 00TA and 00SL (smooth implies flat); separated uniqueness on a scheme-theoretically dominant restriction; BLR 10.1 localization; Tag 01V6, lemma-smooth-characterize"
+   }
+  },
+  {
+   "text": "Finally apply [lem-sbc-section-component-cartesian] to the structure map $G\\to S$, its identity section, and $T\\to S$. Its equality of component loci says that the neutral subset of $G_T$ is exactly the inverse image of $N$. Both are open by Step 2, which applies to this smooth separated group over the affine Noetherian base $T$ as well. An open subscheme is the restriction of the structure sheaf to its open subset [def-weil-open-immersion], so identical subsets give identical open subschemes. Their group structures restrict the same operations. Consequently $(\\mathcal H^0)_T=(\\mathcal H_T)^0$, as asserted.",
+   "uses": [
+    "lem-sbc-section-component-cartesian",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055M, lemma-base-change-connected-along-section; equality of the associated open subschemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "lem-pc-closed-imm-base-change",
+  "lem-pc-open-immersion-smooth-composition",
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-section-component-open",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 055M, 055R with groupoids.tex 0B7R and algebra.tex 0CAQ; explicit assembly expanding BLR 10.1 following Definition 1, printed p.290. BLR local PDF WANTED; primary online scan read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a Neron locally finite type model has finite type geometrically connected fibres and Neron models commute with localization",
+   "results": "{\"t\": \"2026-10-24T05:02:29Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a Neron locally finite type model has finite type geometrically connected fibres and Neron models commute with localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"d55dfe18d7dd4a1e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron lft models over Dedekind schemes identity component open finite type and localization to discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T05:02:23Z\", \"tool\": \"leansearch\", \"query\": \"Neron lft models over Dedekind schemes identity component open finite type and localization to discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"IsDedekindDomainDvr.is_dvr_at_nonzero_prime\", \"IsDedekindDomainDvr\", \"IsDedekindDomain.isDedekindDomainDvr\", \"IsDedekindDomainDvr.mk\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"IsDedekindDomainDvr.isDedekindDomain\", \"IsDedekindDomainDvr.casesOn\"], \"digest\": \"3d6b5430412de133\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T05:02:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|neron",
+   "results": "{\"t\": \"2026-10-24T05:02:24Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|neron\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open neutral subgroup of a smooth separated group model with connected generic fibre over a Dedekind domain",
+   "results": "{\"t\": \"2026-10-24T05:02:30Z\", \"tool\": \"leanfinder\", \"query\": \"Open neutral subgroup of a smooth separated group model with connected generic fibre over a Dedekind domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.AdeleRing.principalSubgroup\", \"NonarchimedeanGroup.exists_openSubgroup_separating\", \"Subgroup.connectedComponentOfOne\", \"OpenNormalSubgroup.pathComponentOne\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"NonarchimedeanGroup.instTotallySeparated\", \"OpenNormalAddSubgroup.pathComponentZero\", \"NonarchimedeanAddGroup.exists_openAddSubgroup_separating\"], \"digest\": \"59044f70d9740342\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|neron",
+   "results": "{\"t\": \"2026-10-24T07:09:02Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|neron\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron model localization and open neutral connected component finite type",
+   "results": "{\"t\": \"2026-10-24T07:09:02Z\", \"tool\": \"leansearch\", \"query\": \"Neron model localization and open neutral connected component finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.isOpen_unramifiedLocus\"], \"digest\": \"55ff5befaad5a5fc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are local standard-smooth characterizations, smooth loci, finite-type restrictions, or topological/pre-Galois components; none is the Néron lft-model identity-component and localization assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T07:09:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity component of a smooth separated group scheme locally of finite type over a Dedekind domain is open of finite type and Neron mapping property is preserved by localization",
+   "results": "{\"t\": \"2026-10-24T07:09:13Z\", \"tool\": \"leanfinder\", \"query\": \"Identity component of a smooth separated group scheme locally of finite type over a Dedekind domain is open of finite type and Neron mapping property is preserved by localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.isOpen_smoothLocus\", \"Algebra.basicOpen_subset_smoothLocus_iff\"], \"digest\": \"97c70093d61103ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are local standard-smooth characterizations, smooth loci, finite-type restrictions, or topological/pre-Galois components; none is the Néron lft-model identity-component and localization assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fibrewise connected component containing the identity section of a smooth group scheme is an open subgroup whose formation commutes with base change",
+   "results": "{\"t\": \"2026-10-24T07:09:13Z\", \"tool\": \"leanfinder\", \"query\": \"The fibrewise connected component containing the identity section of a smooth group scheme is an open subgroup whose formation commutes with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"Subgroup.connectedComponentOfOne\", \"OpenNormalSubgroup.pathComponentOne_carrier\", \"OpenNormalSubgroup.pathComponentOne\", \"Subgroup.pathComponentOne\", \"mul_mem_connectedComponent_one\", \"Subgroup.Normal.pathComponentOne\", \"CategoryTheory.PreGaloisCategory.fiber_in_connected_component\"], \"digest\": \"f6d956e0dc950e1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits are local standard-smooth characterizations, smooth loci, finite-type restrictions, or topological/pre-Galois components; none is the Néron lft-model identity-component and localization assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-extension-neron-lft",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Definition 1 and the paragraph immediately following it, printed pp.289–290 (PDF pp.295–296): localization compatibility and finite type of the identity component.",
+   "via": [
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-neutral-local-properties",
+  "worker": "stage1",
+  "summary": "Proved openness by applying the existing section-component theorem on finite affine-open unions, finite type by the explicit fibrewise difference-map cover, localization by smooth affine-algebra descent and separated generic uniqueness. Reused all prerequisites; no new nodes. Statement unchanged.",
+  "blueprint": "Latest blueprint det-thm-sf-ctf-stability-direct-images, proof paragraph (3), inherited alteration/trait-extension prerequisite chain through lem-sfb-split-torus-extension-neron-lft. Steps 1–4 realize its neutral finite-type model input, Steps 5–8 its localization compatibility input. The existing created.item chain has no imported ancestor (blueprint_refs.py ancestor returns None); preserved the inherited null ancestor and recorded the precise latest proof place.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-closed-imm-base-change",
+    "why": "General scheme/component/affine-descent tool used exactly as stated in the numbered proof; the Néron prerequisite unit has no replacement for this general fact. It does not replace the inherited BLR/trait-extension route."
+   },
+   {
+    "node": "lem-sbc-section-component-cartesian",
+    "why": "General scheme/component/affine-descent tool used exactly as stated in the numbered proof; the Néron prerequisite unit has no replacement for this general fact. It does not replace the inherited BLR/trait-extension route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "General scheme/component/affine-descent tool used exactly as stated in the numbered proof; the Néron prerequisite unit has no replacement for this general fact. It does not replace the inherited BLR/trait-extension route."
+   },
+   {
+    "node": "lem-sbc-smooth-section-component-open",
+    "why": "General scheme/component/affine-descent tool used exactly as stated in the numbered proof; the Néron prerequisite unit has no replacement for this general fact. It does not replace the inherited BLR/trait-extension route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+    "why": "General scheme/component/affine-descent tool used exactly as stated in the numbered proof; the Néron prerequisite unit has no replacement for this general fact. It does not replace the inherited BLR/trait-extension route."
+   },
+   {
+    "node": "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+    "why": "General scheme/component/affine-descent tool used exactly as stated in the numbered proof; the Néron prerequisite unit has no replacement for this general fact. It does not replace the inherited BLR/trait-extension route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Affine smooth-ring/scheme equivalence used in the test-chart descent and flatness argument; a generic tool, not a change to the inherited Néron route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-closed-imm-base-change",
+  "lem-sbc-section-component-cartesian",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sbc-smooth-section-component-open",
+  "lem-weil-pbc-smooth-algebra-filtered-colimit-descent",
+  "lemma-nagata-ext-scheme-theoretically-dominant-separated",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-3b124b5ac",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-3b124b5ac (reviewer sub-agent of L); spot-checked: PASS. I read all 8 steps against the cited statements. The item statement is unchanged and there are no new nodes. The item was unsplit with no proof on the base, so this is not a re-split. The local BLR 10.1 PDF is missing (marked WANTED). I checked the statement clause by clause against BLR 10.1 Definition 1 and the paragraph after it: Néron lft-model with the mapping property for every smooth S-scheme, the open subgroup H^0 of finite type, and localization. Step 1: the section-component cartesian lemma at a geometric point plus the identity-component lemma over an algebraically closed field. The projection from the geometric fibre is surjective, so C_s is quasi-compact. Step 2: the openness lemma is applied only to a quasi-compact union W of affine opens; W is separated via the base-changed diagonal. The maximality argument shows W^0 lies in N and contains C_s. Step 3: the subgroup and open-factorization arguments are correct. Step 4: the difference map U×U→N is surjective because N_{s̄} is irreducible, and this gives finite type without assuming G is quasi-compact. I tested it on the split-torus lft-model and on the trivial group. Steps 5–7: descent of smooth algebras along D_m = colim D[1/f], smooth composition and flatness give generic scheme-theoretic dominance. Uniqueness for a separated target then lets the maps glue for any smooth X. Step 8: the cartesian lemma identifies the neutral part of G_T with the preimage of H^0. Unstated one-liners: W→S and N→S are quasi-compact because W and N are Noetherian, and id_S is smooth. Both are elementary. Batch-5 flag: lem-trf-smooth-composition is the generic Mathlib-matched fact that a composite of smooth morphisms is smooth (Stacks 01VA). It is outside the trace-formula and Poincaré-duality assumptions, so I accept it. I also accept the tool_uses: general scheme lemmas used exactly as stated. No duplicates found; the field identity-component nodes with stronger hypotheses were rightly not used."
+ }
+}

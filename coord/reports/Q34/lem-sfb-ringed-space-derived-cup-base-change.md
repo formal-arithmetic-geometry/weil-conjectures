@@ -1,0 +1,53 @@
+## Worker report
+
+Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-ringed-space-derived-cup-base-change.json` (statement, split; no Mathlib match), `citations.json`, and this report. Search commands wrote `searches.jsonl`. There are no new nodes and no Mathlib leaves in this delivery.
+
+Attachments: none. I searched `lean/WeilConjectures/` for the exact blueprint tag and cup/base-change terminology. `AlgebraicGeometry.Scheme.picardCupPairing_baseChange` in `AlgebraicGeometry/PicardCupPairingBaseChange.lean:90` is a degree-zero scheme pairing with structure-unit hypotheses. Reading its statement shows that it does not state this item for arbitrary unbounded derived complexes of arbitrary ringed spaces, so it is not an attachment.
+
+WANTED: none. The sources actually used are present locally.
+
+The imported statement agrees with Stacks 0H99, `cohomology-lemma-base-change-cup-product`, after spelling out the intended objects and arrows in its diagram. Its proof is omitted in Stacks. I therefore marked the explicit assembly as agent-written. It uses the existing projection/exchange theorem, rather than treating an omitted verification as a proof. The statement and its statement dependencies were retained. There is no statement dispute.
+
+Nothing remains unfinished in this one-level split. No Lean was written, no compiler or Lake command was run, and the repository and launcher were not modified.
+
+## Sources and existing-node searches
+
+I read `cohomology.tex` at 0H99 (`lemma-base-change-cup-product`), 0B68 (`remark-cup-product`), 079U (`lemma-pullback-tensor-product`), and the derived-pullback composition passage 0D5S. I read `sites-cohomology.tex` at 0B56 (`equation-projection-formula-map`) and 0E48 (`remark-compatible-with-diagram`), including the complete displayed diagram and its target-composition arrow. The latter is a compatibility of maps without a projection-isomorphism hypothesis. I also read the relevant existing node statements in full: ringed-space derived adjunction, ringed-site cup definition, ringed-topos tensor pullback, projection mate, exchange/tensor coherence, and adjunction mate.
+
+Before deciding that no new nodes were necessary, I searched the whole DAG by 0H99/0H9A/079U/0B68, pullback/tensor/monoidal keywords, and titles of derived tensor and composition lemmas. I ran `tools/blueprint_refs.py search` for `cup`, `0H99`, `base change cup`, `pullback tensor`, `tensor comparison`, `monoidal`, and `projection formula`, and `ancestor` for the item. No imported blueprint node states this arbitrary-ringed-space derived cup/base-change equality. The ancestor command reports `None`, agreeing with the inherited null `blueprint.from.node`; I retained its ancestry and exact existing place rather than inventing an ancestor. I read the current `literature/blueprint/latest` chapter/unit route and its direct-image statement and proof. This is a generic coherence tool below the inherited direct-image/trace branch, not a replacement route for the unit.
+
+The existing `lem-weil-pbc-ringed-exchange-tensor-coherence` is about a projection map with an arbitrary coefficient complex on Y; it does not state the cup theorem. Its projection square supplies the non-elementary step after we prove the cup factorization. The ringed-topos hypotheses allow specialization to ringed spaces with their small open-set sites, including compatibility of ring maps; they require neither Cartesian squares nor flatness. The existing ringed-space tensor-composition nodes restricted to schemes were not silently substituted for arbitrary ringed-space statements.
+
+I ran the required Mathlib searches through `msearch.py`: LeanSearch, Loogle, two LeanFinder phrasings, and greps in CategoryTheory and AlgebraicGeometry. All returned successfully. The first phrasing found underived sheaf pullbacks and relative differentials; the second found the general mate identities. I read `CategoryTheory/Adjunction/Mates.lean:84` and `:123` and the sheaf pullback adjunction source. They provide general categorical operations, not the derived ringed-space cup/base-change statement. The general mate theorem already belongs to `def-weil-pbc-adjunction-mate`; it needs no new leaf here. Actual queries and results are retained in `mathlib_searches` and the command log; inherited searches were preserved as historical records.
+
+## New nodes
+
+None. The cup-factorization identity is a two-line transposition calculation from existing definitions, so making it a new node would violate the elementary-node rule. The mate/counit equation is also already the defining transpose characterization of an existing Mathlib leaf.
+
+## Not duplicates
+
+No new nodes were created, so there are no new/existing same-tag pairs to justify. The item itself remains distinct from the existing projection/base-change theorem as explained above.
+
+## Review by Q34
+
+I reviewed the source statements and all cited node statements against delivery-errors B–E. This is the author's self-review under the direct-delivery brief.
+
+Step 1 uses `lem-weil-pbc-ringed-exchange-tensor-coherence` for exactly its displayed projection/exchange square, with E=K and then Q=RL. That statement explicitly covers arbitrary commutative ringed-topos squares and naturality in E,Q, without a Cartesian hypothesis. I checked the direction of theta: CB to HF; multiplying its stated target identification by theta gives the displayed form in this step. `lem-pc-ringed-spaces-derived-adjoint-general` supplies precisely the natural Hom-bijection for the unbounded ringed-space adjunction, so the exchange defined by the cited theorem and the item's beta have the same transpose. The open-set sites satisfy the smallness assumption already made by the item; no equality of unrelated coefficient categories is assumed.
+
+Step 2 uses `lem-weil-pbc-ringed-projection-mate-exact` for the map pi and its transpose (counit tensor identity), and `def-sfb-ringed-site-module-cup-product` for cup's transpose (tensor of both counits). The latter really states this for arbitrary ringed topoi before its etale examples; it is not merely a global or underived definition. I checked the two sources and targets: pi lands in R(K tensor FRL); only then is R(1 tensor epsilon_L) applied. The transpose is exactly (epsilon_K tensor epsilon_L)t_F, and the natural Hom-bijection in the cited derived-adjunction node makes transposition injective. This calculation is written in the step, not delegated to a new node or to the proof of a cited node. The same calculation gives the f' factorization.
+
+Step 3 is elementary substitution of the identities already obtained. It explicitly writes beta naturality for the map K tensor FRL to K tensor L and the tensor-comparison naturality equation. I checked their intermediate objects: both routes land in S(HK tensor HL); the intermediate projection square lands in S(HK tensor HFRL). Thus no comparison or identification is being asserted without a formula. This step takes naturality from the previously cited canonical natural transformations, not a new geometric assertion.
+
+Step 4 uses `def-weil-pbc-adjunction-mate` for exactly its transpose formula, not an assertion about the proof of a definition. I read its full statement and independently read Mathlib's mateEquiv_counit. Its equation is epsilon'_HL C(beta_L)=H(epsilon_L)theta_RL. The other citation, `lem-weil-pbc-ringed-projection-mate-exact`, states naturality of the projection transformation in its coefficient argument. Applying that naturality to beta_L:BRL to SHL gives the displayed pi' square; tensor functoriality then combines (beta_K tensor 1) with (1 tensor beta_L). Step 2 identifies the resulting last two arrows with c_f'. No beta is cancelled or assumed invertible.
+
+Step 5 checks the remaining coefficient clause explicitly rather than calling it transport. `lem-weil-pbc-ringed-topoi-derived-tensor-pullback` states a canonical bifunctorial isomorphism, so S(t_H) has the inverse used solely to identify the coefficient target. For a:K tensor L to M the displayed beta naturality equation identifies the coefficient-composed original route. The projection-naturalness and bifunctorial adjunction statements cited in this step say exactly the other naturalities used. This is naturality in both complexes, not merely an objectwise equality.
+
+For B1–B7, there are no new statements, no hollow data, and no new proof sketch masquerading as a statement-only node. The original statement remains self-contained, with its explicit formulas and original notion dependencies. The proof is five steps of at most 1025 characters each; none hides a long standard lemma. For C1–C4 I checked every used fact against the statement, with a verbatim entry in citations.json for each use; the non-elementary input is the existing projection/exchange square. For C5 I searched the entire DAG and imported blueprint, and for C6 I checked that the closure of the proposed projection/exchange inputs (353 nodes) does not contain this item. The off-unit generic tools are declared in split_report.tool_uses, with reasons; no top-level maintainer tool_uses field was added.
+
+For D1–D5 the proof carries the argument: neither a clause nor the whole item has been moved into a new lemma, and Stacks' omitted proof is replaced by explicit cup factorization and counit algebra. For E1–E7 I checked small sites, ring-map commutation, unbounded complexes, and the directions of all four functors in every formula. Identity squares reduce to the cup factorization itself; with K=0 or L=0 both maps are zero; empty spaces and zero ring sheaves have the same identities. In the one-point case arbitrary ring maps, including nonflat Z to Z/2, are allowed: all tensors stay derived, and no underived exactness was used. The proof never uses a Cartesian property or invertibility of beta, so non-Cartesian squares and noninvertible exchange maps do not invalidate a step. Coefficient maps need not be isomorphisms either.
+
+There was no prior split or report in the sandbox to repair. During self-review I chose the existing general ringed-topos projection theorem instead of creating a duplicate tensor-coherence node, and wrote the pi' naturality and coefficient postcomposition equations explicitly to remove possible C4/E5 gaps. No mathematical hypothesis or conclusion was changed.
+
+## Validation
+
+The required deliver.py --no-push completed successfully: preflight passed, including the server DAG and split checks, and printed OK (not pushed) at b6ee712a092. All ten citations were accepted. No new-node search gate applies because no new nodes are created. This report records that completed dry run; the final packaged report is checked again before push.

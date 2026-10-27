@@ -1,0 +1,389 @@
+{
+ "id": "lem-sfb-multiplicative-line-dedekind-extension",
+ "kind": "statement",
+ "title": "Extension of coherent multiplicative lines over a Dedekind base",
+ "statement": "Let $D$ be a Noetherian integrally closed domain of Krull dimension one, $K=\\operatorname{Frac}(D)$, and $S=\\operatorname{Spec}D$ [def-weil-affine-spectrum]. A commutative group scheme over a base has multiplication, inverse and identity morphisms over that base satisfying the commutative group identities. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. A scheme over a field $k$ is geometrically connected if its base change to every field extension of $k$ is connected [def-weil-connected-scheme]; a scheme over $S$ has geometrically connected fibres if its fibre over each point $s\\in S$ is geometrically connected over the residue field $\\kappa(s)$. Let $Q\\to S$ be a smooth separated commutative group scheme of finite type with geometrically connected fibres [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. For an invertible module $L$ on $Q_K$ [def-sc-invertible-module], suppose given a frame $u:\\mathcal O_K\\simeq e_K^*L$ and an isomorphism $\\mu:p_1^*L\\otimes p_2^*L\\simeq m_K^*L$, where $m_K$ is multiplication and $p_1,p_2$ are the projections from $Q_K\\times_KQ_K$ [def-pc-fibre-product, def-pc-module-pullback, def-pur-sheaf-tensor-product]. Require the two composites of $\\mu$ on $Q_K^3$ to agree, require invariance under interchange of the two factors, and require $\\mu(v\\otimes u)=v=\\mu(u\\otimes v)$ on the identity axes. There exist an invertible module $\\mathcal L$ on $Q$, a frame $\\widetilde u:\\mathcal O_S\\simeq e^*\\mathcal L$, and an isomorphism $\\widetilde\\mu:p_1^*\\mathcal L\\otimes p_2^*\\mathcal L\\simeq m^*\\mathcal L$ with the same associativity, symmetry and unit identities, together with a generic identification recovering $(L,u,\\mu)$. For every finite list of such generic data, indexed by $1\\leq j\\leq r$ with $r\\geq0$, the product $B=\\mathcal L_1^\\times\\times_Q\\cdots\\times_Q\\mathcal L_r^\\times$ is represented by a smooth separated commutative finite-type $S$-group scheme with geometrically connected fibres. Here $\\mathcal L_j^\\times$ represents frames $\\mathcal O_U\\simeq h^*\\mathcal L_j$ on $h:U\\to Q$, and multiplication of frames is induced by $\\widetilde\\mu_j$. Its identity is $(\\widetilde u_j)_j$, scalar multiplication identifies its kernel over $e$ with $\\mathbf G_{m,S}^r$, and $1\\to\\mathbf G_{m,S}^r\\to B\\to Q\\to1$ is exact as fppf sheaves [def-pc-fppf-site]. The group $\\mathbf G_{m,S}$ is obtained by gluing $\\operatorname{Spec}A[t,t^{-1}]$ over affine opens $\\operatorname{Spec}A\\subseteq S$, with multiplication of units. For $r=0$, the product is $Q$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 7 proof, printed p.292 (PDF p.298): extension of primitive line bundles to the identity component. Agent-extracted coherent, rigidified form and frame-product geometry. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-invertible-module",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-fppf-site",
+  "def-weil-connected-scheme",
+  "def-sfb-coherent-multiplicative-line",
+  "def-sfb-split-torus-over-ring",
+  "def-sfb-split-torus-frame-model"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\eta=\\operatorname{Spec}K$. The scheme $S$ is integral, normal and Noetherian: the affine stalks are $D_{\\mathfrak p}$, and localization preserves normality [lem-weil-pbc-affine-open-stalk-localization, lem-weil-pbc-localization-normal-domain]. Its local-ring dimensions are at most one, since a chain of primes in $D_{\\mathfrak p}$ is a chain in $D$. Finite type over $S$ makes $Q$ Noetherian [lem-weil-pbc-finite-type-over-noetherian], hence quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated]. The finite-type affine algebras are finitely presented by [lem-weil-pbc-finite-type-noetherian-finite-presentation]; with quasi-compactness and separatedness this gives finite presentation of $Q/S$. Let $U$ range over the affine open neighbourhoods of $\\eta$ in $S$, ordered by shrinking. By [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] their limit is $\\operatorname{Spec}\\mathcal O_{S,\\eta}=\\eta$. By [lem-weil-pbc-scheme-over-limit] the qcqs schemes $Q_U$ have affine transitions and limit $Q_K$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-scheme-over-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW and 01YZ: local-ring neighbourhood limit and base change of limits; algebra.tex Tag 00FP."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-invertible-affine-limit-descent] to the system $Q_U$: obtain an invertible $L_U$ with specified generic identification $L_U|_{Q_K}\\simeq L$. Pullback preserves invertibility [lem-weil-pbc-invertible-pullback-tensor]. Thus $e_U^*L_U$ is an invertible module on $U$, and $u$ gives a specified generic isomorphism $\\mathcal O_K\\simeq(e_U^*L_U)_K$. Invertible modules are finitely presented, since locally their presentation is the free rank-one presentation. Apply [lem-trf-fp-module-limit-isomorphism-descent] on the shrinking affine base neighbourhoods of $\\eta$ inside $U$; after shrinking $U$, the specified frame extends to $u_U:\\mathcal O_U\\simeq e_U^*L_U$. Now [lem-sfb-rigidified-line-big-open-extension], with rigidification $u_U^{-1}$, extends $(L_U,u_U^{-1})$ to an open containing every point of local-ring dimension at most one. Step 1 says this open is all of $S$. Inverting the extended rigidification gives $(\\mathcal L,\\widetilde u)$ and a generic identification that recovers the originally specified $u$.",
+   "uses": [
+    "lem-trf-invertible-affine-limit-descent",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-fp-module-limit-isomorphism-descent",
+    "lem-sfb-rigidified-line-big-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, lemma-descend-invertible-modules (2); Tag 01ZR, lemma-descend-modules-finite-presentation (2),(3). Regular-trait extension is used through the existing big-open extension statement."
+   }
+  },
+  {
+   "text": "For every $n\\geq1$, $Q^n=Q\\times_S\\cdots\\times_SQ$ is again a smooth separated commutative group scheme of finite presentation. Smoothness follows inductively by smooth base change and composition [lem-pc-proper-base-change, lem-trf-smooth-composition]; separatedness follows by the separated base-change and composition statements [lem-sfb-space-separated-fp-composition]. Finite type is preserved by base change and composition [lem-sfb-finite-type-composition-base-change], so $Q^n$ is Noetherian [lem-weil-pbc-finite-type-over-noetherian], hence quasi-separated [lem-weil-pbc-locally-noetherian-quasi-separated], and its finite-type affine algebras over $D$ are finitely presented [lem-weil-pbc-finite-type-noetherian-finite-presentation]; thus $Q^n/S$ is of finite presentation exactly as for $Q$ in step 1. Its geometric fibres are connected: apply [lem-weil-pbc-geometrically-connected-product-components] successively over each extended residue field. All fibres are nonempty, since they contain the identity tuple. Hence [lem-sfb-normal-group-vertical-cartier-descent] applies to $Q^n/S$ for every dense open in $S$; in particular $Q^n$ is normal integral. Smoothness also makes each $Q^n/S$ flat [lem-pc-smooth-flat]. On an affine open with ring $R$, the map $R\\to R\\otimes_DK$ is injective: for $0\\ne a\\in D$, flatness preserves the injection $D\\xrightarrow{a}D$, so multiplication by $a$ on $R$ is injective. Consequently two maps of line modules on $Q^n$ that agree generically agree everywhere: in local frames their difference is a regular function whose image in this localization is zero.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sfb-space-separated-fp-composition",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-geometrically-connected-product-components",
+    "lem-sfb-normal-group-vertical-cartier-descent",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, normal integral smooth family and vertical-divisor input; smooth/base-change statements as in the cited nodes."
+   }
+  },
+  {
+   "text": "On $H=Q^2$, regard $\\mu$ as a nonzero rational section $s$ of the line $M=(p_1^*\\mathcal L\\otimes p_2^*\\mathcal L)^\\vee\\otimes m^*\\mathcal L$. The tensor and dual operations give lines [lem-weil-pbc-invertible-pullback-tensor, lem-pc-tensor-dual-invertible]. The Cartier divisor $C=\\operatorname{div}(s)$ is vertical: on the generic fibre $s$ is an invertible section. Its support is a closed subset missing that fibre. It has only finitely many irreducible components [lem-sc-noetherian-closed-subset-finite-components]; each component maps to a single closed point of $S$ (all its points specialize its generic point). Removing these finitely many points gives a dense open $V$ with $C|_{H_V}=0$. Write $a:S\\to H$ for the identity tuple and $p:H\\to S$. By [lem-sfb-normal-group-vertical-cartier-descent], $C=p^*E$ for $E=a^*C$. To show $E=0$, fix $t\\in S$ and a local equation $h\\in K^\\times$ for $E$ at $t$. Near $a(t)$ choose a frame $w$ of $M$ whose restriction by $a$ is the canonical frame specified by $\\widetilde u$. Since $\\operatorname{div}(s)=\\operatorname{div}(p^*h)$, write $s=(p^*h)v w$ with $v$ a regular unit near $a(t)$. On the generic identity tuple the unit axiom says the coefficient of $s$ is $1$, hence $h\\,a^*v=1$ in $K$. The factor $a^*v$ is a unit in $\\mathcal O_{S,t}$, so $h$ is a unit there. Thus $E=C=0$. The zero-divisor criterion of that node extends $s$ to an everywhere invertible section, equivalently the required isomorphism $\\widetilde\\mu$. This argument evaluates only the regular unit $v$, not an arbitrary rational function along $a$.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-tensor-dual-invertible",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sfb-normal-group-vertical-cartier-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, lemma-in-image-pullback, local factorization and fibre comparison; zero Cartier divisor in local frames. Agent elaboration of BLR 10.1 Proposition 7, primitive-line extension."
+   }
+  },
+  {
+   "text": "The two associativity composites for $\\widetilde\\mu$ on $Q^3$, the multiplication and its factor-interchanged version on $Q^2$, and the two unit-axis maps on $Q$ are maps between the same line modules, using the tensor/pullback composition and symmetry comparisons of [lem-weil-pbc-invertible-pullback-tensor]. Their generic restrictions are equal by the given identities. Step 3's injectivity calculation therefore proves each identity everywhere. In particular no arbitrary extension of a generic multiplication is being asserted to be coherent: the specified multiplication was extended in step 4 and its specified identities were checked here.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CD, lemma-tensor-product-pullback; tensor symmetry and associativity, Tag 01CA. Equality is the flat-localization calculation of step 3."
+   }
+  },
+  {
+   "text": "For a finite list $\\mathcal L_1,\\ldots,\\mathcal L_r$, take a Zariski open covering $W_\\alpha$ of $Q$ on which all lines have frames $e_{j,\\alpha}$. On $W_\\alpha\\cap W_\\beta$ write $e_{j,\\beta}=g_{j,\\alpha\\beta}e_{j,\\alpha}$ with regular units $g_{j,\\alpha\\beta}$. Glue $W_\\alpha\\times\\mathbf G_m^r$ over the overlaps by the coordinate changes $z_{j,\\beta}=g_{j,\\alpha\\beta}^{-1}z_{j,\\alpha}$. They satisfy the cocycle identities because the transition units do. The gluing theorem [lem-weil-pbc-glue-schemes] gives a scheme $B\\to Q$. A morphism $U\\to B$ over $h:U\\to Q$ is locally a tuple of units $z_{j,\\alpha}$ satisfying precisely these transitions; the sections $z_{j,\\alpha}h^*e_{j,\\alpha}$ glue to frames of $h^*\\mathcal L_j$, and conversely frames supply these local units, whose local morphisms agree on overlaps and glue uniquely to $U\\to B$ because Zariski coverings are fppf, hence fpqc, and morphisms to a scheme glue along fpqc coverings [lem-pc-zariski-coverings-are-fppf, lem-trf-fppf-covering-is-fpqc, lem-weil-pbc-fpqc-representable-descent]. These constructions are inverse and commute with arbitrary base change. Thus $B$ represents simultaneous frames. The same construction with one line gives $\\mathcal L_j^\\times$; the product universal property identifies $B$ with their fibre product over $Q$. For $r=0$ the gluing is that of the opens $W_\\alpha$ themselves and gives $B=Q$.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JB (lemma-glue) and 01JC (lemma-glue-schemes); constructions.tex Tag 01M2 (definition-vector-bundle), frame open described by units."
+   }
+  },
+  {
+   "text": "On a test scheme, define $(x,(v_j))\\cdot(y,(w_j))=(x+y,(\\widetilde\\mu_j(v_j\\otimes w_j)))$. The identity is $(e,(\\widetilde u_j))$. These formulas commute with pullback, so [lem-pc-yoneda] makes them scheme morphisms. Step 5 proves associativity, symmetry and the unit identities. There is also a regular inverse, as follows. Pull $\\widetilde\\mu_j$ back along $(1,[-1]):Q\\to Q^2$ and use $\\widetilde u_j$ to get a perfect pairing $\\mathcal L_j\\otimes[-1]^*\\mathcal L_j\\simeq\\mathcal O_Q$ [lem-weil-pbc-invertible-pullback-tensor, lem-pc-tensor-dual-invertible]. For a frame $v_j$ over $x$, its pairing with the unique frame $w_j$ over $-x$ equals $1$. In local frames the pairing is multiplication by a regular unit $c$, so if $v_j$ has coordinate $z\\in\\mathcal O_U^\\times$, then $w_j$ has coordinate $c^{-1}z^{-1}$. Hence this construction is regular and natural, and Yoneda gives the inverse morphism. Its product with the original point is the identity by construction, and symmetry supplies the other inverse identity. Thus $B$ is a commutative $S$-group scheme and $B\\to Q$ is a homomorphism.",
+   "uses": [
+    "lem-pc-yoneda",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M2, frame interpretation; modules.tex Tag 01CT, invertible-module tensor duality; categories.tex Tag 001P, Yoneda. Agent construction of the group operations."
+   }
+  },
+  {
+   "text": "Representable functors are fppf sheaves: [lem-trf-fppf-covering-is-fpqc] converts any covering to fpqc and [lem-weil-pbc-fpqc-representable-descent] supplies unique gluing of morphisms (the condition of being over the base is checked after the cover by uniqueness). Over the identity of $Q$, every frame is uniquely $a_j\\widetilde u_j$ for $a_j\\in\\mathcal O_U^\\times$. Bilinearity and the unit law give $\\widetilde\\mu_j(a_j\\widetilde u_j\\otimes b_j\\widetilde u_j)=a_jb_j\\widetilde u_j$. Thus scalar multiplication identifies the kernel as a group scheme with $\\mathbf G_{m,S}^r$. Every $U$-point of $Q$ lifts to $B$ after a Zariski covering of $U$ trivializing its finitely many pulled-back lines. Such a covering is fppf [lem-pc-zariski-coverings-are-fppf], so the map is an epimorphism of fppf sheaves. The kernel computation is valid on every test scheme, hence also as sheaves. It proves $1\\to\\mathbf G_{m,S}^r\\to B\\to Q\\to1$ is exact. The generic identification of the lines and multiplication identifies this entire generic extension, including identity and inverse, with the extension constructed from the given $(L_j,u_j,\\mu_j)$.",
+   "uses": [
+    "lem-pc-zariski-coverings-are-fppf",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0499 (lemma-characterize-trivial-pseudo-torsors) and 049A (definition-principal-homogeneous-space); local frame sections give the asserted local surjectivity."
+   }
+  },
+  {
+   "text": "The frame-chart descriptions and [lem-sfb-frame-product-laurent-algebra] make $q:B\\to Q$ affine, with chart $\\operatorname{Spec}R[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ over any affine trivializing open $\\operatorname{Spec}R\\subset Q$. Each such chart is the open $z_1\\cdots z_r\\ne0$ in $\\mathbf A^r_R$, so $q$ is smooth by [sbc-lem-affine-space-smooth, lem-weil-pbc-smooth-restrict-open-subschemes, lem-weil-pbc-smooth-local-on-source]. It follows that $B/S$ is smooth by [lem-trf-smooth-composition]. Each chart algebra is of finite type, with presentation $R[z_1,w_1,\\ldots,z_r,w_r]/(z_jw_j-1)_j$; affine $q$ is quasi-compact, so $q$ is of finite type. Then $B/S$ is of finite type by [lem-sfb-finite-type-composition-base-change]. For separatedness, the relative diagonal of $q$ on each such affine chart is a closed immersion: its ring map is the surjective multiplication map $R[z^{\\pm1}]\\otimes_RR[z^{\\pm1}]\\to R[z^{\\pm1}]$, $a\\otimes b\\mapsto ab$. These charts cover the target of that diagonal, so its defining quasi-coherent ideals glue and $q$ is separated. Composition with separated $Q/S$ is separated by [lem-sfb-space-separated-fp-composition].",
+   "uses": [
+    "lem-sfb-frame-product-laurent-algebra",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-trf-smooth-composition",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sfb-space-separated-fp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01M2 (definition-vector-bundle) and 01LX (lemma-spec-properties); morphisms.tex Tags 01V6, 01VA, 01T3. Laurent charts give the finite presentation and relative diagonal explicitly."
+   }
+  },
+  {
+   "text": "Fix any point $s\\in S$ and any field extension $k/\\kappa(s)$. The map $q_k:B_k\\to Q_k$ is surjective, since each fibre is a product of frame sets of one-dimensional vector spaces and has a point after choosing bases over its residue field. It is open: $q$ is smooth, hence flat and locally of finite presentation [lem-pc-smooth-flat], and openness persists after base change [lem-weil-pbc-flat-lfp-open]. Every fibre over $Q_k$ is a split torus over a residue field $F$ and is connected: $F[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$ is a domain, as a subring of the rational function field, so its spectrum is integral [def-pc-integral-scheme] and therefore connected. If $B_k=C\\amalg C'$ were a partition into two nonempty clopen subsets, connected fibres would put each fibre entirely in one member. Openness would then make $q_k(C)$ and $q_k(C')$ disjoint nonempty opens partitioning $Q_k$, contradicting its given connectedness. Thus $B_k$ is connected. Since $s$ and $k$ were arbitrary, $B/S$ has geometrically connected fibres. With $r=0$, all these constructions and computations reduce to $B=Q$ and the trivial kernel, as required.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01UA, lemma-flat-finite-presentation-open; the clopen-partition argument proves connectedness from connected base and connected fibres."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-scheme-over-limit",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-trf-fp-module-limit-isomorphism-descent",
+  "lem-sfb-rigidified-line-big-open-extension",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-geometrically-connected-product-components",
+  "lem-sfb-normal-group-vertical-cartier-descent",
+  "lem-pc-smooth-flat",
+  "lem-pc-tensor-dual-invertible",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-glue-schemes",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "lem-pc-yoneda",
+  "lem-pc-zariski-coverings-are-fppf",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-frame-product-laurent-algebra",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-pc-integral-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "BLR 10.1 Proposition 7, printed p.292 (PDF p.298), supplies the primitive-line route. Detailed assembly from Stacks 0B8W, 01ZR, 0BD7 and scheme gluing 01JB/01JC, plus the existing rigidified big-open extension statement. BLR local PDF WANTED; primary scan read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rigidified multiplicative invertible sheaf on the generic fibre of a smooth connected group over a Dedekind domain extends with its coherent multiplication",
+   "results": "{\"t\": \"2026-10-24T05:02:27Z\", \"tool\": \"leanfinder\", \"query\": \"A rigidified multiplicative invertible sheaf on the generic fibre of a smooth connected group over a Dedekind domain extends with its coherent multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheafGroup\", \"smoothSheafCommGroup\", \"ModuleCat.tildeInType\", \"smoothPresheafCommGroup\", \"AlgebraicGeometry.StructureSheaf.const_mul\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\"], \"digest\": \"66fa5ca675484076\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extending primitive line bundles from the generic fibre to a smooth group scheme with geometrically connected fibres over a Dedekind scheme",
+   "results": "{\"t\": \"2026-10-24T05:02:22Z\", \"tool\": \"leansearch\", \"query\": \"Extending primitive line bundles from the generic fibre to a smooth group scheme with geometrically connected fibres over a Dedekind scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.fiber\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.instCanonicallyOverFiber\", \"VectorBundleCore.moduleFiber\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"VectorBundleCore.vectorBundle\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"VectorBundle.recOn\"], \"digest\": \"26ba841969b99a80\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LineBundle\"",
+   "results": "{\"t\": \"2026-10-24T05:02:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"LineBundle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive.*(line|invertible)|multiplicative.*(line|invertible)|rigidified",
+   "results": "{\"t\": \"2026-10-24T05:02:21Z\", \"tool\": \"grep\", \"query\": \"primitive.*(line|invertible)|multiplicative.*(line|invertible)|rigidified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/Analysis/CStarAlgebra/Classes.lean\", \"Mathlib/Algebra/Algebra/Equiv.lean\", \"Mathlib/Algebra/Ring/Invertible.lean\", \"Mathlib/LinearAlgebra/Projectivization/Action.lean\", \"Mathlib/LinearAlgebra/Projectivization/Action.lean\", \"Mathlib/LinearAlgebra/Projectivization/Action.lean\", \"Mathlib/LinearAlgebra/GeneralLinearGroup/Basic.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\"], \"digest\": \"d44e691c2e80eb79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of a central multiplicative line bundle and its associativity and unit rigidification over a regular one dimensional base",
+   "results": "{\"t\": \"2026-10-24T05:02:28Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of a central multiplicative line bundle and its associativity and unit rigidification over a regular one dimensional base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Center\", \"CategoryTheory.Center.tensorObj\", \"CategoryTheory.Center.tensorUnit\", \"CategoryTheory.TwistShiftData.z\", \"CategoryTheory.Center.ext\", \"CategoryTheory.Center.instCategory\", \"CategoryTheory.Center.instMonoidalCategory\", \"CategoryTheory.Linear.ofRingMorphism\"], \"digest\": \"dabf645d3bbab21c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.*(line|invertible)|primitive.*line|rigidified",
+   "results": "{\"t\": \"2026-10-24T07:07:33Z\", \"tool\": \"grep\", \"query\": \"multiplicative.*(line|invertible)|primitive.*line|rigidified\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/GeneralLinearGroup/Basic.lean\", \"Mathlib/Analysis/CStarAlgebra/Classes.lean\", \"Mathlib/Algebra/Algebra/Equiv.lean\", \"Mathlib/LinearAlgebra/Projectivization/Action.lean\", \"Mathlib/LinearAlgebra/Projectivization/Action.lean\", \"Mathlib/LinearAlgebra/Projectivization/Action.lean\", \"Mathlib/Algebra/Ring/Invertible.lean\", \"Mathlib/Algebra/Order/Archimedean/Class.lean\"], \"digest\": \"6c3979a3243ecf2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; abstract group extensions, Selmer groups, ring Picard functors, manifold smooth groups and ordinary scalar lemmas do not state the relative multiplicative-line extension or frame-group geometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension of a smooth connected group scheme by the multiplicative group extends over a Dedekind base using line bundles",
+   "results": "{\"t\": \"2026-10-24T07:07:33Z\", \"tool\": \"leansearch\", \"query\": \"An extension of a smooth connected group scheme by the multiplicative group extends over a Dedekind base using line bundles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension\", \"GroupExtension.mk\", \"smoothSheafGroup\", \"GroupExtension.noConfusion\", \"smoothSheafCommGroup\", \"GroupExtension.mk.noConfusion\", \"AddGroupExtension.Section\", \"instContMDiffMulOfTopWithTopENat\"], \"digest\": \"b6f31b478b0bade9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; abstract group extensions, Selmer groups, ring Picard functors, manifold smooth groups and ordinary scalar lemmas do not state the relative multiplicative-line extension or frame-group geometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LineBundle\"",
+   "results": "{\"t\": \"2026-10-24T07:07:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"LineBundle\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rigidified multiplicative line bundle on the generic fibre of a smooth group over a Dedekind domain extends to the group scheme",
+   "results": "{\"t\": \"2026-10-24T07:07:34Z\", \"tool\": \"leanfinder\", \"query\": \"A rigidified multiplicative line bundle on the generic fibre of a smooth group over a Dedekind domain extends to the group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.selmerGroup\", \"IsDedekindDomain.selmerGroup.fromUnit\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"CommRing.Pic.functor\", \"CommRing.Pic.mapAlgebra\", \"ModuleCat.instAddCommGroupObjOppositeOpensCarrierTopValTildeInType\", \"CommRing.relPic\", \"CommRing.Pic.mapAlgebra_apply\"], \"digest\": \"bcf74c1350f2a246\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; abstract group extensions, Selmer groups, ring Picard functors, manifold smooth groups and ordinary scalar lemmas do not state the relative multiplicative-line extension or frame-group geometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a central extension by a split torus from the generic fibre to a smooth geometrically connected group over a regular one dimensional scheme",
+   "results": "{\"t\": \"2026-10-24T07:07:35Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a central extension by a split torus from the generic fibre to a smooth geometrically connected group over a regular one dimensional scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.Splitting\", \"GroupExtension.IsConj\", \"LieAlgebra.Extension.oneCochainOfTwoSplitting_apply\", \"GroupExtension.IsConj.refl\", \"GroupExtension.Section.exists_eq_inl_mul\", \"LieAlgebra.Extension.oneCochainOfTwoSplitting\", \"GroupExtension.Section.exists_eq_mul_inl\", \"LieAlgebra.Extension.twoCocycleOf\"], \"digest\": \"54b1b6b564e2bff8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned signatures; abstract group extensions, Selmer groups, ring Picard functors, manifold smooth groups and ordinary scalar lemmas do not state the relative multiplicative-line extension or frame-group geometry."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-extension-neron-lft",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 7 proof, printed p.292 (PDF p.298): extension of primitive line bundles to the identity component. Agent-extracted coherent, rigidified form and frame-product geometry.",
+   "via": [
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-multiplicative-line-dedekind-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. No new nodes: reuse invertible-limit descent, rigidified big-open line extension, and vertical Cartier descent; explicitly extend the specified multiplication and its coherence, glue frame charts, construct inverse, and prove exactness, geometry and fibre connectedness. Searches checked; no Lean attachment.",
+  "blueprint": "Preserve the imported creation chain and null ancestor: blueprint_refs.py ancestor returns None. The latest sk-thm-sf-ctf-stability unit was read; this auxiliary node realizes the existing BLR primitive-line prerequisite below its recorded direct-image route, without changing any unit or chapter. Whole-blueprint searches for multiplicative line Dedekind extension, rigidified and frame found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-invertible-affine-limit-descent",
+    "why": "Generic scheme/module tool used exactly for the statement quoted in citations.json; the unit has no replacement for this limit, smoothness, tensor, gluing or covering fact. It supplies the existing BLR auxiliary construction and does not replace a unit step."
+   },
+   {
+    "node": "lem-trf-fp-module-limit-isomorphism-descent",
+    "why": "Generic scheme/module tool used exactly for the statement quoted in citations.json; the unit has no replacement for this limit, smoothness, tensor, gluing or covering fact. It supplies the existing BLR auxiliary construction and does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-trf-fp-module-limit-isomorphism-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-fe026d9a4",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-fe026d9a4 (reviewer sub-agent of L); spot-checked: Read the item's statement (unchanged from base, where it was unsplit with no proof; not a re-split case) and all 10 steps, and checked every cited statement. There are no new nodes and no cycle. Two citation repairs, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-multiplicative-line-dedekind-extension.json: (C4) step 3 took finite presentation of Q^n from lem-sfb-space-separated-fp-composition, which has no fp base-change clause; fp now comes from finite type over the Noetherian base, citing finite-type-over-noetherian, locally-noetherian-quasi-separated and finite-type-noetherian-finite-presentation. (C1 minor) Step 6 glued local morphisms into B without citing a node; it now cites zariski-coverings-are-fppf, fppf-covering-is-fpqc and fpqc-representable-descent, all already in proof_deps. Mathematics checked: the limit system Q_U over affine neighbourhoods of the generic point, with limit Q_K (01ZR/0B8W read locally in limits.tex); the hypotheses of the big-open rigidified extension, whose open contains every point with local dimension at most 1, i.e. all of S; the step-4 vertical-divisor argument, where each component lies over a closed point, then C=p^*a^*C, and the unit axiom gives h·a^*v=1, so h is a unit; coherence identities by D-flatness injectivity; frame-chart gluing, Yoneda group law with inverse c^{-1}z^{-1}, fppf exactness, Laurent charts (smooth, finite type, separated) and the clopen connectedness argument. Edge cases r=0, Q=S and nontrivial lines from S all hold. Batch 5: every flagged citation (trf limit descent ×2, rigidified big-open extension, smooth composition, separated/fp composition for spaces, normal-group vertical descent, fppf⇒fpqc) has a closure that reaches only generic sk-i-curve-zero/sk-lem-finite lemmas and no trace-formula or Poincaré-duality statement, so all are accepted as generic tools. The two declared tool_uses (trf limit descent) are accepted. The BLR PDF is still WANTED; the statement was unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MultiplicativeLineDedekindExtension",
+  "declaration": "AlgebraicGeometry.MultiplicativeLine.exists_multiplicative_line_dedekind_extension",
+  "declarations": [
+   "AlgebraicGeometry.MultiplicativeLine.ringCoordinate",
+   "AlgebraicGeometry.MultiplicativeLine.ringScalar",
+   "AlgebraicGeometry.MultiplicativeLine.atFrame",
+   "AlgebraicGeometry.MultiplicativeLine.FrameExtension",
+   "AlgebraicGeometry.MultiplicativeLine.genericMap",
+   "AlgebraicGeometry.MultiplicativeLine.exists_multiplicative_line_dedekind_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/MultiplicativeLineDedekindExtension.lean",
+  "statement": "theorem exists_multiplicative_line_dedekind_extension (D K : Type u) [CommRing D] [IsDomain D] [IsNoetherianRing D] [IsIntegrallyClosed D] (_hdim : ringKrullDim D = 1) [Field K] [Algebra D K] [IsFractionRing D K] (G : CommGrp (Over (Spec (.of D)))) [Smooth G.X.hom] [IsSeparated G.X.hom] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [GeometricallyConnected G.X.hom] : (∀ A : Coherent (changeBase G (genericMap D K)), ∃ E : Coherent G, Nonempty (Identification (genericMap D K) E A)) ∧ (∀ (r : ℕ) (A : Fin r → Coherent (changeBase G (genericMap D K))), ∃ E : Fin r → Coherent G, (∀ j : Fin r, Nonempty (Identification (genericMap D K) (E j) (A j))) ∧ Nonempty (FrameExtension G r E))",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5da65dfb",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Re-delivery after the f7fa RETURN; both Lean files are byte-identical to f7fa. R1 repaired: the theorem stmt_dep lem-sfb-split-torus-torsor-frame-geometry is replaced by its owner def-sfb-split-torus-frame-model in the item and the new node. R2 repaired: def-sc-tensor-pullback-power-comparison is cited and listed by def-sfb-coherent-multiplicative-line. The item differs from base only in lean and added stmt_deps; statement, proof and proof_deps are unchanged. Independent re-read: hypotheses exact (Noetherian, integrally closed, ringKrullDim=1, IsFractionRing, CommGrp over Spec D, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact, Mathlib GeometricallyConnected tests all field points, equivalent to the node). Coherent tests framed points over all S-schemes, equivalent to the tensor diagrams. Identification is an iso pr^*E≅A preserving unit and multiplication. FrameExtension gives frame models, the product over Q, a CommGrp B, an IsMonHom quotient, the group law pinned to mu-tilde and identity to u-tilde, smooth, closed diagonal, finite type, connected fibres, kernelIso splitTorus≅GrpObj.ker pinned by kernel_scalar (HEq not vacuous), fppf sheaves plus local surjectivity (= exactness), and rank_zero. Edge cases r=0, r=1, Q=S, nonreduced/empty tests and all characteristics hold. No hollow defs, only the theorem is sorry, docstrings and 10 proof steps present, lean.statement verbatim, imports exist, no name clash. Not compiled (no change). Advisory: GrpObj.ker owner def-sc-group-scheme reached only through the new node; unitSectionsEquiv has no recorded owner."
+ }
+}

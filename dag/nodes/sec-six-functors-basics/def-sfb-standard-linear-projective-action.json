@@ -1,0 +1,136 @@
+{
+ "id": "def-sfb-standard-linear-projective-action",
+ "kind": "definition",
+ "title": "Standard linear action on scheme-theoretic projective space",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and $I$ a finite set. Write $H=\\operatorname{GL}_{I,k}$ [def-sc-general-linear-group], a group scheme [def-sc-group-scheme], $C=k[H]$, and $P=\\operatorname{Proj}(k[z_i:i\\in I])$ with total-degree grading [def-pc-proj] [def-weil-pbc-mv-polynomial-ring], regarded as the projective space of lines in $k^I$. Put $\\delta:k[z_i]\\to C[z_i]$, fixing base coefficients and sending $z_i$ to $\\sum_j x_{ij}z_j$. An action $a:H\\times_k P\\to P$, satisfying the identity and associativity diagrams, is the standard linear projective action if, under the canonical affine-base-change isomorphism $\\operatorname{Proj}(C[z_i])\\simeq H\\times_k P$ [def-pc-fibre-product], its action map is $\\operatorname{Proj}(\\delta)$. The first projection of this isomorphism is the structure morphism to $H=\\operatorname{Spec}C$, and the second is $\\operatorname{Proj}$ of the coefficient extension fixing all $z_i$. These projection formulas determine the comparison uniquely. The coordinate substitution and all equalities concern scheme morphisms, so include arbitrary nonreduced test algebras.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sc-general-linear-group",
+  "def-pc-proj",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 7e, Definition 7.26, printed p.145: projectivization of a representation; standard matrix-coordinate realization. Stacks Constructions Section 01ND for polynomial Proj."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "General linear group scheme standard action on projective space by matrix multiplication on homogeneous coordinates",
+   "results": "{\"t\": \"2026-10-24T06:50:47Z\", \"tool\": \"leansearch\", \"query\": \"General linear group scheme standard action on projective space by matrix multiplication on homogeneous coordinates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.generalLinearGroup_smul_def\", \"Matrix.GeneralLinearGroup.fin_two_smul_prod\", \"Matrix.GeneralLinearGroup\", \"OnePoint.smul_infty_eq_ite\", \"OnePoint.smul_some_eq_ite\", \"Matrix.termGL\", \"Projectivization.smul_def\", \"OnePoint.instGLAction\"], \"digest\": \"66bb1cc653cea173\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: abstract projectivization actions on vector spaces are not actions on scheme Proj; no universal GL matrix action on scheme projective space was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "General linear group scheme action on projective space induced by z_i maps to sum x_ij z_j",
+   "results": "{\"t\": \"2026-10-24T06:50:48Z\", \"tool\": \"leanfinder\", \"query\": \"General linear group scheme action on projective space induced by z_i maps to sum x_ij z_j\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Projectivization.generalLinearGroup_smul_def\", \"Projectivization.instMulAction\", \"Projectivization.smul_def\", \"Projectivization.smul_mk\", \"OnePoint.instGLAction\", \"OnePoint.smul_infty_def\", \"OnePoint.smul_some_eq_ite\", \"WeierstrassCurve.Projective.smul_eq\"], \"digest\": \"845fd533c8be5410\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: abstract projectivization actions on vector spaces are not actions on scheme Proj; no universal GL matrix action on scheme projective space was found."
+  },
+  {
+   "tool": "grep",
+   "query": "generalLinear.*projectiv|projectiv.*generalLinear|standard.*projective.*action",
+   "results": "{\"t\": \"2026-10-24T06:54:34Z\", \"tool\": \"grep\", \"query\": \"generalLinear.*projectiv|projectiv.*generalLinear|standard.*projective.*action\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No match: abstract projectivization actions on vector spaces are not actions on scheme Proj; no universal GL matrix action on scheme projective space was found."
+  },
+  {
+   "tool": "grep",
+   "query": "rg generalLinear.*projectiv|projectiv.*generalLinear|standard.*projective.*action in lean/WeilConjectures and lean/Sheaf; rg -l standard linear projective action|standard projective action|universal matrix substitution dag/nodes; blueprint_refs.py search projective action; blueprint_refs.py search general linear group action on projective space",
+   "results": "Only unrelated ProjTwistInverseTransport comment; no matching node; 0 blueprint nodes for either query. Existing DiagonalProjectiveAction.IsDiagonal is restricted to split-torus diagonal matrices, not the full general linear group.",
+   "date": "2026-10-24",
+   "verdict": "No exact match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-quasiprojective-equivariant-immersion",
+  "date": "2026-10-24",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. The projective action induced by the finite-dimensional representation, on all test algebras.",
+   "via": [
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StandardLinearProjectiveAction",
+  "declaration": "AlgebraicGeometry.StandardLinearProjectiveAction.IsStandard",
+  "file": "lean/Sheaf/AlgebraicGeometry/StandardLinearProjectiveAction.lean",
+  "statement": "def IsStandard (k : Type u) [CommRing k] (I : Type u) [Fintype I] [DecidableEq I] (a : ModObj (GeneralLinearGroup I k) (Over.mk (Proj.projectiveSpaceOverAffineToSpec I k))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.StandardLinearProjectiveAction.coaction",
+   "AlgebraicGeometry.StandardLinearProjectiveAction.IsStandard"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bea997105",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bea997105",
+  "group": "NP",
+  "result": "pass",
+  "note": "Item lean record plus one new def node (def-sfb-standard-linear-projective-action); no other node or dependency record changed; both lean.statement fields verbatim; all 8 imported proof-dep modules exist. Each hypothesis and conclusion of the node has a matching Lean binder or conjunct: alg-closed k; G GrpObj, smooth, affine, connected, finite type; X separated, finite type, normal at every stalk (IsDomain ∧ IsIntegrallyClosed); quasi-projective as an immersion into Proj k[z_0..z_N]; ∃ n, ρ : G ⟶ upstream GL with IsMonHom, ∃ standard ModObj a, immersion j, equivariance as an equality of Over-morphisms; empty case n=0 with trivial ρ, satisfiable. IsStandard fixes a.smul as Proj of z_i ↦ Σ_j x_ij z_j; the comparison iso is fixed by both projections. On points [v] ↦ [gv]; the comultiplication is the standard matrix product and homMulEquiv is multiplicative, so this is a left action compatible with ModObj mul_smul and the existential is not vacuous. It is the action on lines of V, as in the node. Same pattern as the landed DiagonalProjectiveAction.IsDiagonal; no existing GL action on projective space found (H4). Gates ok: source and blueprint docstrings, six proof steps in the docstring, only proof is sorry, report has Worker report and Second reading by NP. No compile run (no changes); worker reports both files compiled with scompile."
+ }
+}

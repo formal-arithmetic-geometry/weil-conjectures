@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-noetherian-quadrant-abutment",
+ "kind": "statement",
+ "title": "Finite generation through a shifted-quadrant spectral sequence",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], and let $a,b\\in\\mathbf Z$. Let $E=(E_s^{p,q},d_s)_{s\\geq2}$ be a cohomological spectral sequence of $A$-modules [def-sp-spectral-sequence], indexed by $p,q\\in\\mathbf Z$, with $A$-linear differentials $d_s:E_s^{p,q}\\to E_s^{p+s,q-s+1}$ and the specified isomorphisms from the homology of page $s$ to page $s+1$. Suppose every $E_2^{p,q}$ is finitely generated [def-weil-finitely-generated-module] and $E_2^{p,q}=0$ whenever $p<a$ or $q<b$. Then every page is supported in $p\\geq a$, $q\\geq b$ and has finitely generated terms. For each $(p,q)$ its incoming and outgoing differentials are zero for every integer $s\\geq2$ satisfying $s>\\max(p-a,q-b+1)$, so the page identifications yield an eventual stable term $E_\\infty^{p,q}$; every such term is finitely generated. If $T^n$ ($n\\in\\mathbf Z$) are $A$-modules equipped with finite exhaustive separated decreasing filtrations [def-sp-filtration] and $A$-linear isomorphisms $F^pT^n/F^{p+1}T^n\\cong E_\\infty^{p,n-p}$ for all $p,n$, then each $T^n$ is finitely generated and $T^n=0$ for $n<a+b$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0D0C, lemma-coherent-internal-hom, proof: the algebra problem and the two displayed Ext spectral sequences."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sp-spectral-sequence",
+  "def-weil-finitely-generated-module",
+  "def-sp-filtration"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $s\\geq2$ for support. The base is the hypothesis. By [def-sp-spectral-sequence], $E_{s+1}^{p,q}$ is isomorphic to $\\ker(d_s^{p,q})/\\operatorname{im}(d_s^{p-s,q+s-1})$. If $p<a$ or $q<b$, its middle page term is zero by induction, so its kernel and this quotient are zero. This proves support on every page.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof, final finite-generation inference from the two convergent Ext spectral sequences; expanded using homology.tex definition-spectral-sequence and algebra.tex Tag 00FP(2)."
+   }
+  },
+  {
+   "text": "Induct on $s\\geq2$ for finite generation, starting with the assumed $E_2$ terms. By [lem-trf-noetherian-submodule-finitely-presented], $\\ker(d_s^{p,q})\\subseteq E_s^{p,q}$ is finitely generated, since $A$ is Noetherian. The images of a finite generating set generate its quotient by the incoming image: every class is the same linear combination of the generator classes. The page isomorphism of [def-sp-spectral-sequence] takes these generators to generators of $E_{s+1}^{p,q}$, in the sense of [def-weil-finitely-generated-module].",
+   "uses": [
+    "lem-trf-noetherian-submodule-finitely-presented",
+    "def-sp-spectral-sequence",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof, final finite-generation inference from the two convergent Ext spectral sequences; expanded using homology.tex definition-spectral-sequence and algebra.tex Tag 00FP(2)."
+   }
+  },
+  {
+   "text": "Fix $(p,q)$. If $s>\\max(p-a,q-b+1)$, the incoming source has $p-s<a$ and the outgoing target has $q-s+1<b$, hence both differentials are zero by Step 1. Thus the page isomorphism identifies $E_{s+1}^{p,q}$ with $E_s^{p,q}/0$. Take $s_0=\\max(2,p-a+1,q-b+2)$ and define $E_\\infty^{p,q}=E_{s_0}^{p,q}$; compositions of these specified page identifications identify every later term with it. It is finite by Step 2 and vanishes outside the quadrant by Step 1.",
+   "uses": [
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof, final finite-generation inference from the two convergent Ext spectral sequences; expanded using homology.tex definition-spectral-sequence and algebra.tex Tag 00FP(2)."
+   }
+  },
+  {
+   "text": "Fix $n$. Finiteness of [def-sp-filtration] gives integers $l\\leq h$ with $F^lT^n=T^n$ and $F^hT^n=0$. Descend from $h$ to $l$. At step $p$, the quotient $F^pT^n/F^{p+1}T^n\\cong E_\\infty^{p,n-p}$ has finite generators by Step 3. Choose lifts in $F^pT^n$ and adjoin finite generators of $F^{p+1}T^n$ already obtained by induction. For any $x\\in F^pT^n$, subtract the linear combination of those lifts representing its quotient class; the difference belongs to $F^{p+1}T^n$. This finite union therefore generates $F^pT^n$ by [def-weil-finitely-generated-module]. The base zero module has the empty generating set. At $l$ this proves that $T^n$ is finite.",
+   "uses": [
+    "def-sp-filtration",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof, final finite-generation inference from the two convergent Ext spectral sequences; expanded using homology.tex definition-spectral-sequence and algebra.tex Tag 00FP(2)."
+   }
+  },
+  {
+   "text": "If $n<a+b$, no integer $p$ satisfies both $p\\geq a$ and $n-p\\geq b$. Consequently every graded piece in Step 4 is zero. A zero quotient $F^pT^n/F^{p+1}T^n$ means $F^pT^n=F^{p+1}T^n$. Induction along the finite interval from $h$ to $l$ gives $T^n=F^lT^n=F^hT^n=0$.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0D0C, lemma-coherent-internal-hom, proof, final finite-generation inference from the two convergent Ext spectral sequences; expanded using homology.tex definition-spectral-sequence and algebra.tex Tag 00FP(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-spectral-sequence",
+  "lem-trf-noetherian-submodule-finitely-presented",
+  "def-weil-finitely-generated-module",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0D0C, lemma-coherent-internal-hom, proof, final finite-generation inference from the two convergent Ext spectral sequences; expanded using homology.tex definition-spectral-sequence and algebra.tex Tag 00FP(2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological spectral sequence of modules over a Noetherian ring supported in a shifted first quadrant with finitely generated second page has finitely generated abutment",
+   "results": "{\"t\": \"2026-10-22T06:03:34Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomological spectral sequence of modules over a Noetherian ring supported in a shifted first quadrant with finitely generated second page has finitely generated abutment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isGE_iff\", \"CochainComplex.isLE_iff\", \"CochainComplex.exactAt_of_isGE\", \"CochainComplex.exactAt_of_isLE\", \"CochainComplex.cm5b\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isZero_of_isGE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"b34938bdd31d53bf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FGModuleCat abelianity/finite limits and Noetherian linear-map or extension lemmas do not assert pagewise propagation, quadrant stabilization and finite-generation of a spectral-sequence abutment. The grep hits Basic.lean:127-134 describe finitely many rows, not finite generation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generation of all pages stable terms and abutments of a bounded convergent spectral sequence of Noetherian modules",
+   "results": "{\"t\": \"2026-10-22T06:04:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finite generation of all pages stable terms and abutments of a bounded convergent spectral sequence of Noetherian modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂\", \"isNoetherian_linearMap_pi\", \"isNoetherian_linearMap\", \"FGModuleCat.instAbelian\", \"FGModuleCat.instHasFiniteLimits\", \"FGModuleCat.instHasLimitsOfShapeOfFinCategory\", \"isNoetherian_of_range_eq_ker\", \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\"], \"digest\": \"4037d42af2f2a8de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FGModuleCat abelianity/finite limits and Noetherian linear-map or extension lemmas do not assert pagewise propagation, quadrant stabilization and finite-generation of a spectral-sequence abutment. The grep hits Basic.lean:127-134 describe finitely many rows, not finite generation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A first quadrant spectral sequence with finitely generated modules over a Noetherian ring has finitely generated abutment modules",
+   "results": "{\"t\": \"2026-10-22T06:04:00Z\", \"tool\": \"leansearch\", \"query\": \"A first quadrant spectral sequence with finitely generated modules over a Noetherian ring has finitely generated abutment modules\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T06:04:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SpectralSequence, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FGModuleCat abelianity/finite limits and Noetherian linear-map or extension lemmas do not assert pagewise propagation, quadrant stabilization and finite-generation of a spectral-sequence abutment. The grep hits Basic.lean:127-134 describe finitely many rows, not finite generation."
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Finite|IsNoetherian|[Ff]inite",
+   "results": "{\"t\": \"2026-10-22T06:04:00Z\", \"tool\": \"grep\", \"query\": \"Module.Finite|IsNoetherian|[Ff]inite\", \"sub\": \"Algebra/Homology/SpectralSequence\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\"], \"digest\": \"6051ca4919fc3aa3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: FGModuleCat abelianity/finite limits and Noetherian linear-map or extension lemmas do not assert pagewise propagation, quadrant stabilization and finite-generation of a spectral-sequence abutment. The grep hits Basic.lean:127-134 describe finitely many rows, not finite generation.",
+   "subdirectory": "Algebra/Homology/SpectralSequence"
+  },
+  {
+   "tool": "grep",
+   "query": "Module.Finite|IsNoetherian|[Ff]inite",
+   "results": "{\"t\": \"2026-10-22T07:14:30Z\", \"tool\": \"grep\", \"query\": \"Module.Finite|IsNoetherian|[Ff]inite\", \"sub\": \"Algebra/Homology/SpectralSequence\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/SpectralSequence/ComplexShape.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\", \"Mathlib/Algebra/Homology/SpectralSequence/Basic.lean\"], \"digest\": \"6051ca4919fc3aa3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern complex bounds, Noetherian submodules, finite underlying abelian groups, or definitions of spectral sequences, not all clauses of this item.",
+   "subdirectory": "Algebra/Homology/SpectralSequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely generated abutment of a bounded convergent spectral sequence of modules over a Noetherian ring",
+   "results": "{\"t\": \"2026-10-22T07:14:31Z\", \"tool\": \"leansearch\", \"query\": \"Finitely generated abutment of a bounded convergent spectral sequence of modules over a Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherian_of_isNoetherianRing_of_finite\", \"Module.finitePresentation_of_finite\", \"ModuleCat.isFG\", \"Module.finitePresentation_iff_finite\", \"Module.IsNoetherian.finite\", \"IsNoetherian\", \"IsSemisimpleModule.instIsNoetherianOfFinite\", \"isNoetherian_def\"], \"digest\": \"7214f12dfb7521e6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern complex bounds, Noetherian submodules, finite underlying abelian groups, or definitions of spectral sequences, not all clauses of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SpectralSequence, Module.Finite",
+   "results": "{\"t\": \"2026-10-22T07:14:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SpectralSequence, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern complex bounds, Noetherian submodules, finite underlying abelian groups, or definitions of spectral sequences, not all clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cohomological spectral sequence supported in a shifted first quadrant over a Noetherian ring with finite second page terms has finitely generated pages stable terms and abutment",
+   "results": "{\"t\": \"2026-10-22T07:14:39Z\", \"tool\": \"leanfinder\", \"query\": \"A cohomological spectral sequence supported in a shifted first quadrant over a Noetherian ring with finite second page terms has finitely generated pages stable terms and abutment\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isGE_iff\", \"CochainComplex.isLE_iff\", \"CochainComplex.exactAt_of_isGE\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.isZero_of_isGE\", \"CochainComplex.exactAt_of_isLE\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\"], \"digest\": \"09744bf774dd61fb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern complex bounds, Noetherian submodules, finite underlying abelian groups, or definitions of spectral sequences, not all clauses of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generation is preserved by passing to homology pages and the finite filtration abutment of a spectral sequence",
+   "results": "{\"t\": \"2026-10-22T07:31:57Z\", \"tool\": \"leanfinder\", \"query\": \"Finite generation is preserved by passing to homology pages and the finite filtration abutment of a spectral sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.Exact.ab_finite\", \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"HomologicalComplex.ab5OfSize\", \"Ideal.Filtration.submodule_fg_iff_stable\", \"HomologicalComplex.truncGE'.hasHomology_sc'_of_not_mem_boundary\", \"HomologicalComplex.instHasHomologyTruncLE\", \"HomologicalComplex.isGrothendieckAbelian\", \"HomologicalComplex.truncGE'.hasHomology_of_not_mem_boundary\"], \"digest\": \"2f2b95df4d4c6699\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern complex bounds, Noetherian submodules, finite underlying abelian groups, or definitions of spectral sequences, not all clauses of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "ab_finite",
+   "results": "{\"t\": \"2026-10-22T07:34:47Z\", \"tool\": \"grep\", \"query\": \"ab_finite\", \"sub\": \"Algebra/Homology/ShortComplex\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/Ab.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Ab.lean\", \"Mathlib/Algebra/Homology/ShortComplex/Ab.lean\"], \"digest\": \"9dbf1b99a6bda4f7\"}",
+   "date": "2026-10-22",
+   "subdirectory": "Algebra/Homology/ShortComplex",
+   "verdict": "no match: Exact.ab_finite and ShortExact.ab_finite_iff at Mathlib/Algebra/Homology/ShortComplex/Ab.lean:152,170 concern finite underlying sets of abelian groups, not finite generation over an arbitrary Noetherian ring or spectral-sequence stabilization. Read lines 150–173."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-bounded-above-coherent-rhom",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Expanded input: Tag 0G4H proof, final application of perfect.tex lemma-coherent-internal-hom (Tag 0D0C); the algebra assertion explicitly stated in the proof of that lemma. Re-split algebra problem, final finite-generation inference from the two convergent Ext spectral sequences; old proof steps 1 and 5, including finite filtrations and stabilization.",
+   "via": [
+    "lem-trf-bounded-above-coherent-rhom",
+    "lem-trf-coherent-rhom-finite-injective-dimension",
+    "lem-trf-complete-local-coherent-duality",
+    "lem-trf-semidualizing-rhom-conservative",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-noetherian-quadrant-abutment",
+  "worker": "stage1",
+  "summary": "Expanded the final finite-generation inference of Stacks 0D0C into support induction, finite-generation induction using the existing Noetherian submodule Mathlib leaf, explicit stabilization, lifted generators along the finite abutment filtration, and low-degree vanishing. Statement unchanged; no new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Auxiliary algebraic input: Coherent biduality over a complete Noetherian local ring. Supporting input: First paragraph of the proof of dualizing.tex Tag 0A7C, lemma-dualizing. Expanded input: Tag 0G4H proof, final application of perfect.tex lemma-coherent-internal-hom (Tag 0D0C); the algebra assertion explicitly stated in the proof of that lemma. Re-split algebra problem, final finite-generation inference from the two convergent Ext spectral sequences; old proof steps 1 and 5, including finite filtrations and stabilization. This auxiliary split expands precisely the final finite-generation inference of 0D0C already identified by the parent: steps 1–3 give finite stable terms and steps 4–5 give the finite filtered abutment and its lower bound."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-2707601a3",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-2707601a3 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is unchanged from the base and stmt_deps are unchanged. There are no new nodes and no repair note exists for this item, so the re-split rule does not apply. Checks: d_s has bidegree (s,1-s). The incoming source vanishes when s>p-a and the outgoing target vanishes when s>q-b+1, so the strict threshold max(p-a,q-b+1) is correct; at the corner (a,b) every s>=2 works. s0=max(2,p-a+1,q-b+2) is valid. For n<a+b no p satisfies both p>=a and n-p>=b, so T^n=0. Step 1 (support induction from the page isomorphisms of def-sp-spectral-sequence) is correct. Step 2 uses lem-trf-noetherian-submodule-finitely-presented (statement opened) for the kernels, and quotient generation is argued directly. In Step 4 the endpoints of the finite filtration come from def-sp-filtration and the downward generator-lifting induction is correct. Step 5 is correct. Source: I read Stacks perfect.tex lemma-coherent-internal-hom (Tag 0D0C), where the item is the final finiteness inference from the two convergent Ext spectral sequences. No SGA is used. Duplicate search (rg -L for spectral sequence, finitely generated, filtration, quadrant) turned up only lem-pc-coherent-hi, ce-prescribed-quotient-page-descent, comparison-next-degree-image and the parent, and none of these duplicates the item. The submodule leaf is in the same unit, sk-i-curve-zero, and there is no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.NoetherianQuadrantAbutment",
+  "declaration": "CategoryTheory.SpectralSequence.noetherian_quadrant_abutment",
+  "file": "lean/Sheaf/Algebra/Homology/NoetherianQuadrantAbutment.lean",
+  "statement": "theorem noetherian_quadrant_abutment (A : Type u) [CommRing A] [IsNoetherianRing A] (a b : ℤ) (E : E₂CohomologicalSpectralSequence (ModuleCat.{v} A)) (hfinite : ∀ p q : ℤ, Module.Finite A ((E.page 2).X (p, q))) (hsupport : ∀ p q : ℤ, p < a ∨ q < b → IsZero ((E.page 2).X (p, q))) : (∀ (s : ℤ) (hs : 2 ≤ s) (p q : ℤ), (p < a ∨ q < b → IsZero ((E.page s hs).X (p, q))) ∧ Module.Finite A ((E.page s hs).X (p, q))) ∧ (∀ (s : ℤ) (hs : 2 ≤ s) (p q : ℤ), max (p - a) (q - b + 1) < s → (E.page s hs).d (p - s, q + s - 1) (p, q) = 0 ∧ (E.page s hs).d (p, q) (p + s, q - s + 1) = 0) ∧ ∃ EInf : ℤ → ℤ → ModuleCat.{v} A, (∀ p q : ℤ, Module.Finite A (EInf p q)) ∧ (∀ p q : ℤ, ∃ e : ∀ (s : ℤ) (hs : 2 ≤ s) (_ht : max (p - a) (q - b + 1) < s), (E.page s hs).X (p, q) ≅ EInf p q, ∀ (s : ℤ) (hs : 2 ≤ s) (ht : max (p - a) (q - b + 1) < s) (hs' : 2 ≤ s + 1) (ht' : max (p - a) (q - b + 1) < s + 1), (E.page s hs).iCycles (p, q) ≫ (e s hs ht).hom = (E.page s hs).homologyπ (p, q) ≫ (E.iso s (s + 1) (p, q) rfl hs).hom ≫ (e (s + 1) hs' ht').hom) ∧ (∀ (T : ℤ → ModuleCat.{v} A) (F : ∀ n : ℤ, DecreasingFiltration (T n)), (∀ n : ℤ, (F n).IsFinite ∧ (F n).IsExhaustive ∧ (F n).IsSeparated) → (∀ p n : ℤ, Nonempty ((F n).gr p ≅ EInf p (n - p))) → (∀ n : ℤ, Module.Finite A (T n)) ∧ ∀ n : ℤ, n < a + b → IsZero (T n))",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a9644e1b",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read node, 4 stmt_dep records, Mathlib SpectralSequence page/iso and E₂Cohomological shape up'(r,1-r), and DecreasingFiltration/gr/IsFinite (∃n m, ⊤/⊥)/IsExhaustive/IsSeparated in side-live. Every clause matches: page-2 finiteness and support; support and finiteness on all pages s≥2; vanishing of incoming (p-s,q+s-1) and outgoing (p+s,q-s+1) differentials under the strict max(p-a,q-b+1)<s; ∃ EInf, finite, with page isos tied by iCycles≫e_s = homologyπ≫E.iso≫e_{s+1} (canonical, not arbitrary); finite exhaustive separated filtrations with gr ≅ EInf p (n-p) ⇒ T^n finite and zero for n<a+b. Universes u,v independent. No defs, sorry only, docstrings with source place, blueprint tag and the 5 proof steps, lean.statement verbatim, node differs from live only in lean, first stage-2 delivery. No findings."
+ }
+}

@@ -168,7 +168,89 @@
   "item": "lem-weil-pbc-cohomology-pullback-functorial",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      181,
+      187
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      172,
+      179
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasLeftKanExtension_op_overPullback",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      223,
+      231
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      181,
+      187
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.localizationRestrictionLowerStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      172,
+      179
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "branch",
+    "declarations",
+    "note"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -194,5 +276,45 @@
   "by": "L",
   "result": "pass",
   "note": "sheaf-level adjoint-uniqueness route (Stacks 00XX/00XY); 2 new Mathlib leaves; Lean attached (closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $j:Y\\to X$ be an etale morphism of schemes [def-weil-etale-morphism], with small etale sites [def-weil-pbc-etale-site]. An object $V\\to Y$ of $Y_{\\Et}$ gives the object $V\\to Y\\xrightarrow{j}X$ of $X_{\\Et}$ (a composite of etale morphisms is etale), and a morphism over $Y$ is a morphism over $X$; write $\\iota_j:Y_{\\Et}\\to X_{\\Et}$ for this functor. For an abelian sheaf $G$ on $X_{\\Et}$ [def-weil-pbc-abelian-etale-sheaves] let $G|_Y=G\\circ\\iota_j$, i.e. $G|_Y(V\\to Y)=G(V\\to X)$ with the restriction maps of $G$. Let $j^{-1}$, $j_*$ and $\\eta_j:\\mathrm{id}\\to j_*j^{-1}$ be the inverse image, the direct image $(j_*F)(W)=F(W\\times_XY)$ and the unit of $j^{-1}\\dashv j_*$ [def-weil-pbc-inverse-image], [def-weil-pbc-direct-image]. Then:\n\n1. $G|_Y$ is an abelian sheaf on $Y_{\\Et}$, and there is an isomorphism $\\rho_G:j^{-1}G\\xrightarrow{\\sim}G|_Y$ of abelian sheaves on $Y_{\\Et}$, natural in $G$.\n2. Under $\\rho$, the unit is restriction: for every object $W$ of $X_{\\Et}$, $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W):G(W)\\to G|_Y(W\\times_XY)=G(W\\times_XY)$ is the restriction map of $G$ along the projection $W\\times_XY\\to W$ (a morphism of $X_{\\Et}$). In particular, on global sections, $\\rho_G(Y)\\circ\\eta_{j,G}(X):\\Gamma(X,G)=G(X)\\to G(Y)$ is the restriction of $G$ along $j:Y\\to X$, and $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\xrightarrow{\\sim}G(Y)$.",
+  "proof": [
+   {
+    "text": "*Step 1 (the two functors and their adjunction).* Since $j$ is etale and composites of etale morphisms are etale, $\\iota_j(V\\xrightarrow{v}Y)=(V\\xrightarrow{j\\circ v}X)$ is a functor $Y_{\\Et}\\to X_{\\Et}$; it is the identity on morphisms, a $Y$-morphism being in particular an $X$-morphism. Since etale morphisms are stable under base change, $b_j(W)=(W\\times_XY\\xrightarrow{q_W}Y)$ is a functor $X_{\\Et}\\to Y_{\\Et}$, and by the universal property of the fibre product $\\iota_j$ is left adjoint to $b_j$ ($\\operatorname{Hom}_Y(V,W\\times_XY)=\\operatorname{Hom}_X(V,W)$), with counit $\\varepsilon_W=p_W:W\\times_XY\\to W$, the projection, regarded as a morphism $\\iota_jb_jW\\to W$ of $X_{\\Et}$. By [def-weil-pbc-direct-image], $(j_*F)(W)=F(W\\times_XY)=F(b_jW)$ for an abelian sheaf $F$ on $Y_{\\Et}$, i.e. $j_*F=F\\circ b_j$, with the restriction maps $F(b_j(g))$.",
+    "uses": [
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2 (precomposition with $\\iota_j$ and with $b_j$ preserves sheaves; $G|_Y$ is a sheaf).* (a) Let $H$ be a sheaf of sets on $X_{\\Et}$ and $\\{V_i\\to V\\}_i$ a covering of $Y_{\\Et}$: a jointly surjective family of etale morphisms of schemes etale over $Y$ [def-weil-pbc-etale-site]. The same morphisms form a jointly surjective family of etale morphisms between the objects $\\iota_jV_i$, $\\iota_jV$ of $X_{\\Et}$, i.e. a covering $\\{\\iota_jV_i\\to\\iota_jV\\}$ of $X_{\\Et}$. The fibre products $V_i\\times_VV_k$ of $Y_{\\Et}$ and $\\iota_jV_i\\times_{\\iota_jV}\\iota_jV_k$ of $X_{\\Et}$ are both the scheme-theoretic fibre product [def-weil-pbc-etale-site], so $\\iota_j(V_i\\times_VV_k)=\\iota_jV_i\\times_{\\iota_jV}\\iota_jV_k$. Hence the diagram $H(\\iota_jV)\\to\\prod_iH(\\iota_jV_i)\\rightrightarrows\\prod_{i,k}H(\\iota_j(V_i\\times_VV_k))$ expressing the sheaf condition of $H\\circ\\iota_j$ for $\\{V_i\\to V\\}$ is the diagram expressing the sheaf condition of $H$ for the covering $\\{\\iota_jV_i\\to\\iota_jV\\}$, which is an equalizer; so $H\\circ\\iota_j$ is a sheaf. Applied to the underlying sheaf of sets of an abelian sheaf $G$ (whose sheaf condition is that of the underlying presheaf of sets), $G|_Y=G\\circ\\iota_j$ is an abelian sheaf on $Y_{\\Et}$, the first assertion of clause 1. (b) Let $F$ be a sheaf of sets on $Y_{\\Et}$ and $\\{W_i\\to W\\}_i$ a covering of $X_{\\Et}$. Since jointly surjective etale families are stable under base change, applied to the jointly surjective etale family $\\{W_i\\to W\\}$ and the projection $W\\times_XY\\to W$, the family $\\{(W\\times_XY)\\times_WW_i\\to W\\times_XY\\}$ is etale and jointly surjective; composing with the canonical isomorphisms $(W\\times_XY)\\times_WW_i\\cong W_i\\times_XY$ over $W\\times_XY$, $\\{b_jW_i\\to b_jW\\}$ is a covering of $Y_{\\Et}$. Base change along $j$ preserves fibre products, being a right adjoint (and $b_j$ is the base change $Y\\times_X-$ up to the symmetry of the fibre product), so $b_j$ carries the fibre products $W_i\\times_WW_k$ to fibre products: $b_j(W_i\\times_WW_k)\\cong b_jW_i\\times_{b_jW}b_jW_k$ compatibly with the projections. So the sheaf-condition diagram of $F\\circ b_j$ for $\\{W_i\\to W\\}$ is isomorphic to that of $F$ for the covering $\\{b_jW_i\\to b_jW\\}$, an equalizer; $F\\circ b_j$ is a sheaf. In particular $j_*F=F\\circ b_j$ of step 1 is an abelian sheaf, as [def-weil-pbc-direct-image] takes for granted.\n\n*Step 3 (restriction is left adjoint to $j_*$, with unit the restriction along $p_W$).* The functors $\\lambda=\\iota_j:Y_{\\Et}\\to X_{\\Et}$, $\\beta=b_j:X_{\\Et}\\to Y_{\\Et}$ form an adjunction $\\lambda\\dashv\\beta$ (step 1), and precomposition with either of them preserves sheaves (step 2). Precomposition turns $\\lambda\\dashv\\beta$ into an adjunction $(-)\\circ\\lambda\\dashv(-)\\circ\\beta$ between presheaf categories, whose unit at $G$ is given at $W$ by $G(\\varepsilon_W)$; by step 2 it restricts to sheaves, with $G\\circ\\lambda=G|_Y$ and $F\\circ\\beta=F\\circ b_j=j_*F$. Thus $G\\mapsto G|_Y$ is left adjoint to $j_*:\\Ab(Y_{\\Et})\\to\\Ab(X_{\\Et})$, with unit $u_G:G\\to j_*(G|_Y)$ given at $W\\in X_{\\Et}$ by $G(\\varepsilon_W)=G(p_W):G(W)\\to G(W\\times_XY)=G|_Y(b_jW)=j_*(G|_Y)(W)$, the restriction map of $G$ along the projection $p_W:W\\times_XY\\to W$ (a morphism of $X_{\\Et}$). ([def-weil-pbc-direct-image]).",
+    "uses": [
+     "def-weil-pbc-etale-site",
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4 (the isomorphism $\\rho$; clause 1).* By [def-weil-pbc-inverse-image], $j^{-1}:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is left adjoint to $j_*$, with unit $\\eta_j$. By step 3, $G\\mapsto G|_Y$ is also left adjoint to $j_*$. By uniqueness of left adjoints, there is a unique natural isomorphism $\\rho:j^{-1}\\xrightarrow{\\sim}(-)|_Y$ of functors $\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ with $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ for all $G$. Its component $\\rho_G:j^{-1}G\\to G|_Y$ is an isomorphism of abelian sheaves on $Y_{\\Et}$, natural in $G$. This is clause 1.",
+    "uses": [
+     "def-weil-pbc-inverse-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5 (the unit is restriction; clause 2).* Evaluate $j_*(\\rho_G)\\circ\\eta_{j,G}=u_G$ (step 4) at $W\\in X_{\\Et}$. Since $j_*F=F\\circ b_j$ on objects and on morphisms (step 1), $j_*(\\rho_G)(W)=\\rho_G(b_jW)=\\rho_G(W\\times_XY)$; and $u_G(W)=G(p_W)$ by step 3. Hence $\\rho_G(W\\times_XY)\\circ\\eta_{j,G}(W)=G(p_W):G(W)\\to G(W\\times_XY)$, the restriction of $G$ along the projection $p_W$, which is the first statement of clause 2. Global sections: take $W=(X,\\mathrm{id}_X)$. The fibre product $X\\times_XY$ has $q_X:X\\times_XY\\to Y$ an isomorphism and $p_X=j\\circ q_X$, so $q_X$ is an isomorphism $(X\\times_XY,p_X)\\cong(Y,j)=\\iota_j(Y,\\mathrm{id}_Y)$ in $X_{\\Et}$ and in $Y_{\\Et}$; identifying $G(X\\times_XY)$ with $G(Y)$ through $G(q_X)$ (and $\\Gamma(Y,j^{-1}G)=(j^{-1}G)(Y)$ with $(j^{-1}G)(X\\times_XY)$ through $(j^{-1}G)(q_X)$, compatibly with $\\rho_G$ by its naturality in the object), the identity reads $\\rho_G(Y)\\circ\\eta_{j,G}(X)=G(j):G(X)\\to G(Y)$, since $G(p_X)=G(q_X)\\circ G(j)$. Finally $\\rho_G(Y):\\Gamma(Y,j^{-1}G)\\to G(Y)$ is an isomorphism, being a component of the isomorphism of sheaves $\\rho_G$. ([def-weil-pbc-direct-image]).",
+    "uses": [
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

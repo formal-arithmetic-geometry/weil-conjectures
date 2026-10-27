@@ -1,0 +1,145 @@
+{
+ "id": "lem-pe-integral-section-projection-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Final coefficient interpretation: compatibility of the specified integral comparison with each finite quotient projection.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite quotient projections of the normalized integral section comparison",
+ "statement": "Fix a prime l, a finite coefficient extension E/Q_l [def-weil-l-adic-coefficient-extension], a scheme X, the integral and quotient rings [sk-def-pe-derived-completion], an integral encoding A [def-pe-integral-presentation-encoding], and a normalized abelian comparison e [def-sfb-integral-comparison-normalization] with the endpoint identifications [def-sfb-integral-comparison-coefficients]. Suppose forgetting A.ringIso gives e under these identifications. For every positive level n+1 and normalized finite encoding f [def-pe-finite-discrete-presentation-encoding], the reconstructed section quotient map equals A.ringIso.hom followed by the completed nth projection and f.ringIso.hom. The reconstructed map is sectionScalarMap of [lem-sfb-internal-section-scalar-adjunction]; the completed projection is that of [lem-pe-integral-completion-presentation].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md",
+  "place": "Final sentence: interpreting all finite reductions in the existing complete integral category."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-pe-derived-completion",
+  "def-pe-integral-presentation-encoding",
+  "def-pe-finite-discrete-presentation-encoding",
+  "def-sfb-integral-comparison-normalization",
+  "def-sfb-integral-comparison-coefficients",
+  "lem-pe-integral-completion-presentation",
+  "lem-sfb-internal-section-scalar-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Identify the source endpoint transport with the inverse image of the identity-on-functions integerPointIso. For equal topologies, continuousRingTopologyIso is eqToHom of the continuous-ring-sheaf equality, proved by equality elimination. Apply the underlying-abelian functor and the point inverse image; proof irrelevance identifies the resulting equality transport with the supplied hsrc. The target endpoint htgt has definitionally equal endpoints and hence identity transport.",
+   "uses": [
+    "lem-pe-integral-normalized-restriction-squares",
+    "det-pe-derived-nakayama-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extract a, c, j and the quotient normalization equations from he. Apply the already proved integral_projection_back from the normalized restriction-square construction to e and each positive level n. Its finiteBack_ringIso lemma identifies finiteBack with the forgotten inverse of the supplied normalized finite encoding f. These lemmas require only finite quotient discreteness and finiteness, not an existence choice for f.",
+   "uses": [
+    "def-sfb-integral-comparison-normalization",
+    "lem-pe-integral-normalized-restriction-squares",
+    "det-pe-derived-nakayama-resolution",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel f.ringIso.inv and apply faithfulness of forgetting commutative ring sheaves to abelian sheaves. Rewrite the forgotten A.ringIso.hom by hc and the endpoint transports by the first step. Precompose integral_projection_back with the inverse image of integerPointIso.hom and cancel its inverse. The forgotten sectionScalarMap is exactly the pulled-back quotient on abelian sheaves, giving the required equality.",
+   "uses": [
+    "lem-sfb-internal-section-scalar-adjunction",
+    "lem-pe-integral-normalized-restriction-squares"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-integral-normalized-restriction-squares",
+  "det-pe-derived-nakayama-resolution",
+  "def-sfb-integral-comparison-normalization",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-sfb-internal-section-scalar-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md",
+  "place": "Final coefficient interpretation. Reuse the proved finiteBack_ringIso and integral_projection_back calculations of the normalized restriction-square construction; identify the supplied endpoint equality transports with its identity-on-functions topology comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The normalized integral coefficient comparison commutes with finite quotient projections after reconstructing section rings",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\"]}",
+   "date": "2026-10-24",
+   "verdict": "No section-ring normalization statement. ModuleCat.restrictScalarsComp'App supplies association of successive scalar restrictions in the explicit module-square construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"Comp\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"LinearMap.restrictScalars_comp\", \"Submodule.isCompl_restrictScalars_iff\", \"Algebra.TensorProduct.map_restrictScalars_comp_includeRight\", \"AlgCat.restrictScalarsComp'\", \"AlgCat.restrictScalarsComp'_hom_app_hom_apply\", \"AlgCat.restrictScalarsComp'_inv_app_hom_apply\", \"ModuleCat.restrictScalarsComp\", \"ModuleCat.restrictScalarsComp'\"]}",
+   "date": "2026-10-24",
+   "verdict": "No section-ring normalization statement. ModuleCat.restrictScalarsComp'App supplies association of successive scalar restrictions in the explicit module-square construction."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionScalarMap|SfbIntegralComparison",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No section-ring normalization statement. ModuleCat.restrictScalarsComp'App supplies association of successive scalar restrictions in the explicit module-square construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCriterionReductions",
+  "date": "2026-10-24",
+  "group": "C9"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralSectionProjectionNormalization",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralSectionProjectionNormalization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralPresentation.integral_section_projection_normalization",
+  "statement": "theorem integral_section_projection_normalization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    (A : Encoding l E X)\n    (e : (coefficientRing X (sfbCondensedIntegers l E)).X ≅ sfbCompletedIntegersAb l E X)\n    (he : SfbIntegralComparison l E X e)\n    (hsrc : (sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙\n        forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n          (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n            (Scheme.ProEt.topology X) (AdicCompletion.ring l E X)) =\n        (coefficientRing X (sfbCondensedIntegers l E)).X)\n    (htgt : (sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙\n        forget₂ RingCat.{u + 1} Ab.{u + 1})).obj\n          (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E X) =\n        sfbCompletedIntegersAb l E X)\n    (hc : (sheafCompose (Scheme.ProEt.topology X)\n      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1} ⋙\n        forget₂ RingCat.{u + 1} Ab.{u + 1})).map A.ringIso.hom =\n          eqToHom hsrc ≫ e.hom ≫ eqToHom htgt.symm) :\n    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField\n    ∀ (n : ℕ) (f : FiniteEncoding l E X n),\n    InternalAbelianSheafModule.sectionScalarMap (Scheme.ProEt.topology X)\n        (AdicCompletion.quotient l E X n) =\n      A.ringIso.hom ≫ WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E X n ≫\n        f.ringIso.hom",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261023T230621-L-3452091",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261026T082235-L-2152333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

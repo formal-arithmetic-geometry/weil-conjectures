@@ -1,0 +1,347 @@
+{
+ "id": "lem-sfb-snc-labelled-root-algebra-geometry",
+ "kind": "statement",
+ "title": "Geometry of finite roots for possibly disconnected SNC labels",
+ "statement": "Let $k$ be a field of characteristic a positive prime $p$, and let $V=\\operatorname{Spec}B$ be a regular Noetherian affine $k$-scheme [def-weil-regular-scheme, def-weil-pbc-scheme-conventions]. Let $t_1,\\ldots,t_r\\in B$, $r\\geq0$, define a reduced strict normal crossings boundary $V(\\prod_i t_i)$ [def-trf-strict-normal-crossings-boundary]. At every $v\\in V$, assume that the labels vanishing at $v$ occupy distinct positions in a regular system of parameters of $\\mathcal O_{V,v}$ [def-weil-pbc-regular-system-of-parameters]. Individual $V(t_i)$ may be disconnected or reducible. Put $f=\\prod_i t_i$, with empty product $1$. For each $a\\geq1$ prime to $p$, form the multivariate polynomial quotient [def-weil-pbc-mv-polynomial-ring]\n$$C_a=B[x_{1,a},\\ldots,x_{r,a}]/(x_{i,a}^{a}-t_i)_i,\\qquad X_a=\\operatorname{Spec}C_a.$$\nThen $C_a$ is finite free over $B$ with basis $\\{\\prod_i x_{i,a}^{e_i}:0\\leq e_i<a\\}$. For any $B$-algebra $R$, the canonical map identifies $R\\otimes_B C_a$ with $R[x_{1,a},\\ldots,x_{r,a}]/(x_{i,a}^{a}-t_i)_i$, fixing coefficients and the named root coordinates. For $a\\mid b$, the substitutions $x_{i,a}\\mapsto x_{i,b}^{b/a}$ define $B$-algebra maps $C_a\\to C_b$; these maps are identity for $a=b$, compose by divisibility, and commute with these scalar-extension identifications [def-weil-pbc-module-tensor-product].\nFor every $v\\in V$, set $I(v)=\\{i:t_i(v)=0\\}$. There is an affine neighbourhood $W$ of $v$ on which all inactive $t_j$ are units, and the nonempty closed subschemes $V(t_i)\\cap W$ for $i\\in I(v)$ are pairwise distinct reduced integral branches forming the restricted strict normal crossings boundary. For every $a$ as above, the algebra on $W$ adjoining only these active roots is regular Noetherian; the algebra adjoining all roots is also regular Noetherian. Globally $C_a$ is regular Noetherian and normal [def-weil-pbc-normal-ring]. Multiplication by $f$ is injective on both $B$ and $C_a$. Each $X_a$ has finitely many open and closed normal integral components, and $X_a^\\circ=\\operatorname{Spec}C_a[1/f]$ contains every generic point and is dense in each component [def-weil-ring-localization-away, def-pc-integral-scheme]. The zero ring, empty boundary, and $a=1$ are allowed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1 proof, printed p.133, full parameter-root algebra; regular-local branch shrinking and inactive-unit roots made explicit in the returned proof steps 1-3. Supporting Stacks Tags 0AG0 (more-algebra.tex, lemma-regular-local-UFD), 0BIA (etale.tex, lemma-strict-normal-crossings), and 07PF (more-algebra.tex, lemma-quotient-regular)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-normal-ring",
+  "def-weil-ring-localization-away",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Treat $B=0$ directly as in step 11. Otherwise, for fixed $a$, set $A_0=B$ and $A_j=A_{j-1}[x_j]/(x_j^a-t_j)$ for $1\\leq j\\leq r$. Evaluation of the named variables in either direction identifies $A_r$ with $C_a$: the relations vanish and the composites fix coefficients and all variables. By [lem-weil-pbc-monic-quotient-free], every element of $A_j$ has a unique expression $\\sum_{e_j<a}u_{e_j}x_j^{e_j}$ with $u_{e_j}\\in A_{j-1}$. Induction starting with the basis $\\{1\\}$ of $A_0$ gives the asserted unique monomial expansion over $B$. Thus $C_a$ is finite free, and [lem-weil-pbc-finite-algebra-noetherian] makes it Noetherian. The same argument applies to any subfamily of the labels over any Noetherian coefficient ring.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG (lemma-characterize-henselian), proof of (10) implies (1), monic quotient basis; Tag 00FN (lemma-Noetherian-permanence). Iteration written out for the ILO IX 2.1 parameter-root presentation."
+   }
+  },
+  {
+   "text": "Let $R$ be a $B$-algebra and put $D=R[y_1,\\ldots,y_r]/(y_i^a-t_i)_i$. The tensor pushout [lem-weil-pbc-algebra-tensor-pushout-universal-property] defines $F:R\\otimes_BC_a\\to D$ by $F(u\\otimes[P])=uP(y)$. Conversely evaluation gives $G:D\\to R\\otimes_BC_a$, fixing $R$ by $u\\mapsto u\\otimes1$ and sending $y_i$ to $1\\otimes x_{i,a}$. It respects $y_i^a=t_i$ since $1\\otimes t_i=t_i\\otimes1$. The composite $FG$ fixes coefficients and variables, and $GF$ fixes $u\\otimes1$ and $1\\otimes x_{i,a}$, hence all tensors and their sums. They are inverse $R$-algebra maps. These are exactly the required scalar-extension identifications, retaining every named coordinate.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4 (lemma-fibre-product-affine-schemes), tensor pushout universal property; explicit polynomial-quotient inverse maps."
+   }
+  },
+  {
+   "text": "For $a\\mid b$, write $b=ah$. Substitution $x_{i,a}\\mapsto x_{i,b}^h$ kills $x_{i,a}^a-t_i$, since $(x_{i,b}^h)^a=x_{i,b}^b=t_i$, and so induces the required algebra map. If $a=b$, $h=1$ and it fixes the generators. If $a\\mid b\\mid c$, the composite sends $x_{i,a}$ to $x_{i,c}^{(c/b)(b/a)}=x_{i,c}^{c/a}$; agreement on coefficients and variables proves composition. For any $B\\to R$, both routes around the scalar-extension square fix $u\\otimes1$ and send $1\\otimes x_{i,a}$ to the same $y_{i,b}^{b/a}$. The tensor universal property proves that the square commutes.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1 proof, printed p.133, simultaneous parameter-root algebra; divisibility substitutions and base-change compatibility made explicit."
+   }
+  },
+  {
+   "text": "For each label put $D_i=\\operatorname{Spec}(B/(t_i))$. Its coordinate ring is Noetherian by [lem-weil-pbc-surjective-image-noetherian]. Identify the ambient stalk with $B_{\\mathfrak p_w}$ using [lem-weil-pbc-affine-open-stalk-localization]. At $w\\in D_i$ its local ring is $B_{\\mathfrak p_w}/(t_i)$ by [lem-weil-pbc-localization-at-prime-of-quotient]. The hypothesis places $t_i$ in a regular parameter system of $B_{\\mathfrak p_w}$, so [lem-weil-pbc-regular-local-generators-regular-sequence] makes this quotient regular local. Thus $D_i$ is a regular Noetherian scheme, including when it is empty. By [rem-pc-regular-normal](1),(2), $D_i$ is a finite disjoint union of open and closed normal integral components. This conclusion concerns each entire labelled vanishing locus; it does not assume it was an irreducible boundary component.",
+   "uses": [
+    "lem-weil-pbc-surjective-image-noetherian",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-regular-scheme",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA (lemma-strict-normal-crossings), regular parameter quotients; Algebra Tag 00NQ (lemma-regular-ring-CM); Properties Tag 033M (lemma-normal-Noetherian)."
+   }
+  },
+  {
+   "text": "Fix $v$. For every $i\\in I(v)$ retain the unique component $E_i$ of $D_i$ containing $v$. Delete all other components of these finitely many $D_i$, and delete $D_j$ for $j\\notin I(v)$. These are finitely many closed subsets of $V$, none containing $v$. By [lem-weil-pbc-affine-opens-basis] choose an affine open $W$ containing $v$ in their complement. Every inactive $t_j$ is invertible on $W$: it belongs to no maximal ideal of its coordinate ring. Also $D_i\\cap W=E_i\\cap W$ is nonempty integral and reduced. The branches are pairwise distinct: equality of two of them would give $(t_i)=(t_j)$ in $\\mathcal O_{V,v}$, whereas after putting $t_i,t_j$ first in a parameter system, [lem-weil-pbc-regular-local-generators-regular-sequence] makes $t_j$ a nonzerodivisor on the nonzero ring $\\mathcal O_{V,v}/(t_i)$; it therefore cannot be zero there. Their union is the restricted boundary since the deleted inactive labels are units. Restricting the supplied SNC boundary to $W$ preserves its regular-intersection and local dimension conditions, so these are exactly its reduced integral branches.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "def-trf-strict-normal-crossings-boundary",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tag 0BIA (lemma-strict-normal-crossings), identification of branches through a point with the distinct parameter primes; finite-component shrinking made explicit using Properties Tag 033M."
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak p\\subset B$, put $R=B_{\\mathfrak p}$, $d=\\dim R$ and $S=\\{i:t_i\\in\\mathfrak p\\}$. The ring $R$ is regular local by [def-weil-regular-scheme], and its parameter hypothesis is identified with the given stalk hypothesis by [lem-weil-pbc-affine-open-stalk-localization]. For every $J\\subseteq S$, put those distinct parameter positions first in a full parameter system. By [lem-weil-pbc-regular-local-generators-regular-sequence], $R/(t_j:j\\in J)$ is regular local of dimension $d-|J|$. Thus all the hypotheses of [lem-sfb-transverse-local-root-family-regular] hold for the full finite family of labels at this prime. Since $(a,p)=1$, Bezout gives integers $u,v$ with $ua+vp=1$; characteristic $p$ gives $(u\\cdot1_R)(a\\cdot1_R)=1$. That lemma with its $J=\\varnothing$ proves that, for every subset $K$ of the labels, the local-coefficient algebra $T_K=R[x_i:i\\in K]/(x_i^a-t_i)_i$ is regular Noetherian. In particular it handles inactive units together with the ramified active roots, without a henselian or root-of-unity hypothesis.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sfb-transverse-local-root-family-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1 proof, printed p.133; local regularity input supplied by the existing transverse-root lemma, with its quotient/dimension hypotheses checked by Algebra Tag 00NQ."
+   }
+  },
+  {
+   "text": "Here is the localization passage for any subfamily $K$. Write $C_K=B[x_i:i\\in K]/(x_i^a-t_i)_i$ and $M=B\\setminus\\mathfrak p$. By step 2 and the fraction formulas, $M^{-1}C_K\\cong T_K$: send $c/s$ to $(1/s)\\otimes c$, with inverse $(b/s)\\otimes c\\mapsto bc/s$. These inverse formulas respect balancing and fraction equality. If $\\mathfrak q\\subset C_K$ contracts to $\\mathfrak p$, its extension in this localization is the prime $Q=\\{c/s:c\\in\\mathfrak q,s\\in M\\}$: denominators avoid $\\mathfrak q$, so primality and membership follow by multiplying denominators. The maps between $(M^{-1}C_K)_Q$ and $(C_K)_{\\mathfrak q}$ send $(c/s)/(e/t)$ to $ct/(se)$ and $c/e$ to $(c/1)/(e/1)$, respectively, where $e\\notin\\mathfrak q$. Their denominators are units and their composites fix every fraction. Thus $(C_K)_{\\mathfrak q}\\cong(T_K)_Q$. By step 6 the right side is regular local. Step 1 supplies Noetherianity, proving global regularity of every $C_K$, in particular $C_a$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00CO (definition-localization), 00CP (proposition-universal-property-localization) and 00E3 (lemma-spec-localization); the coefficient and prime localization maps are written explicitly."
+   }
+  },
+  {
+   "text": "Let $A=\\Gamma(W,\\mathcal O_W)$ for the neighbourhood in step 5. Its ring is Noetherian by [pqf-lem-affine-open-locnoeth], and its stalks agree with the stalks of $V$ by [lem-weil-pbc-affine-open-stalk-localization]. Hence $A$ is regular and the original hypothesis about each vanishing subtuple remains valid at every $w\\in W$. Repeating steps 6 and 7 over $A$ proves regular Noetherianity both for $K=I(v)$ (the algebra adjoining just the roots labelled active at $v$) and for the full set of labels. The neighbourhood was chosen before $a$, so it works for every permitted $a$. Globally $C_a$ is regular Noetherian by step 7; [lem-weil-pbc-regular-ring-normal] therefore gives its asserted normality.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0567 (lemma-regular-normal); Properties Tag 01OW (lemma-locally-Noetherian). Application of the local root argument to an affine open."
+   }
+  },
+  {
+   "text": "For a prime $\\mathfrak p\\subset B$: if $t_i\\notin\\mathfrak p$, its image is a unit. Otherwise put $t_i$ first in a parameter system; [lem-weil-pbc-regular-local-generators-regular-sequence] and [def-weil-pbc-regular-sequence] show that multiplication by it is injective. Thus multiplication by $f$ is injective in every $B_{\\mathfrak p}$. If $fz=0$ in $B$, all $z/1$ vanish, and [lem-weil-pbc-prime-localizations-jointly-injective] gives $z=0$. Finally, write $z\\in C_a$ uniquely in the monomial basis of step 1. The equation $fz=0$ says that $f$ kills every coefficient, so all coefficients are zero. This proves injectivity on $B$ and on $C_a$ without assuming either ring is a domain.",
+   "uses": [
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-prime-localizations-jointly-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NP (lemma-regular-domain), 00NQ (lemma-regular-ring-CM) and 00HN (lemma-characterize-zero-local), followed by the monic-basis coefficient calculation."
+   }
+  },
+  {
+   "text": "By [rem-pc-regular-normal](1),(2), the regular Noetherian affine scheme $X_a$ is a finite disjoint union of open and closed normal integral components. By [lem-weil-pbc-spec-irreducible-components-minimal-primes], every component is $V(\\mathfrak q)$ for a minimal prime $\\mathfrak q$ of $C_a$. Its generic point is $\\mathfrak q$ by the closure formula and uniqueness in [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. By [lem-pc-minimal-prime-avoids-nonzerodivisor] and step 9, $f\\notin\\mathfrak q$. Thus every such generic point belongs to $D(f)$. The principal open $D(f)$ is $\\operatorname{Spec}C_a[1/f]$ by [lem-weil-pbc-affine-ideals-closed-subscheme](0). Its intersection with each component contains that component's generic point, so its closure in the component is the whole component by [def-sc-generic-point]. This is exactly the required componentwise density.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-pc-minimal-prime-avoids-nonzerodivisor",
+    "def-weil-affine-spectrum",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 033M (lemma-normal-Noetherian); density by the minimal-prime/nonzerodivisor statement of Mathlib notMem_nonZeroDivisors_of_mem_mem_minimalPrimes (Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean:97), and the generic-point closure formula."
+   }
+  },
+  {
+   "text": "If $B=0$, every root algebra and its scalar extensions are zero; a $B$-algebra is necessarily zero. Its monomial expansion is still unique, all multiplication maps on its singleton underlying set are injective, and the pointwise and component assertions are vacuous. If $r=0$, the root algebra is $B$, its basis is $\\{1\\}$, $f=1$, all transitions are identities and the boundary is empty. One may choose $W=V$; the component and density assertions follow from step 10 with $D(1)=X_a$. For $a=1$, evaluation $x_{i,1}\\mapsto t_i$ identifies $C_1$ with $B$ and every formula above specializes to this identification. These cases require no nonempty boundary or positive dimension.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX Proposition 2.1 proof, printed p.133, empty parameter tuple; explicit checks of zero ring, r=0 and a=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-surjective-image-noetherian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "def-weil-regular-scheme",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-pbc-regular-sequence",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-pc-integral-scheme",
+  "lem-sfb-transverse-local-root-family-regular",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-prime-localizations-jointly-injective",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-pc-minimal-prime-avoids-nonzerodivisor",
+  "def-weil-affine-spectrum",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-weil-pbc-affine-ideals-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1 proof, printed p.133, finite simultaneous parameter-root algebra. Agent assembly for possibly disconnected labels, explicit polynomial/tensor and localization maps, with the regularity calculation delegated to the existing transverse-root lemma and Stacks parameter-quotient and normal-component results."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous roots of possibly disconnected labelled normal crossings parameters form a regular normal finite free algebra with dense boundary complement",
+   "results": "{\"t\": \"2026-10-22T06:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneous roots of possibly disconnected labelled normal crossings parameters form a regular normal finite free algebra with dense boundary complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmooth.out\"], \"digest\": \"f2e461ec2b5fce2e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations, AdjoinRoot integrality and weakly regular sequence localization do not assert regularity, labelled-branch shrinking and density for this ramified simultaneous root quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular noetherian ring remains regular after adjoining invertible order roots of a locally partial regular parameter system",
+   "results": "{\"t\": \"2026-10-22T06:04:37Z\", \"tool\": \"leanfinder\", \"query\": \"A regular noetherian ring remains regular after adjoining invertible order roots of a locally partial regular parameter system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"StandardEtalePair\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardEtale\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"Algebra.IsSmoothAt.exists_notMem_smooth\"], \"digest\": \"61486fff818bd390\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations, AdjoinRoot integrality and weakly regular sequence localization do not assert regularity, labelled-branch shrinking and density for this ramified simultaneous root quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularRing\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-22T06:04:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularRing\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations, AdjoinRoot integrality and weakly regular sequence localization do not assert regularity, labelled-branch shrinking and density for this ramified simultaneous root quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "(root|AdjoinRoot).*(IsRegularRing|normal.?crossing)|(IsRegularRing|normal.?crossing).*(root|AdjoinRoot)",
+   "results": "{\"t\": \"2026-10-22T06:04:26Z\", \"tool\": \"grep\", \"query\": \"(root|AdjoinRoot).*(IsRegularRing|normal.?crossing)|(IsRegularRing|normal.?crossing).*(root|AdjoinRoot)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations, AdjoinRoot integrality and weakly regular sequence localization do not assert regularity, labelled-branch shrinking and density for this ramified simultaneous root quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjoining roots of normal crossings parameters gives a regular ring and the complement of the root divisor is dense",
+   "results": "{\"t\": \"2026-10-22T06:04:26Z\", \"tool\": \"leansearch\", \"query\": \"Adjoining roots of normal crossings parameters gives a regular ring and the complement of the root divisor is dense\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot\", \"AdjoinRoot.isIntegral_root\", \"AdjoinRoot.isAdjoinRoot\", \"AdjoinRoot.root\", \"AdjoinRoot.isDomain_of_prime\", \"AdjoinRoot.isAdjoinRootMonic\", \"AdjoinRoot.instCommRing\", \"AdjoinRoot.instInhabited\"], \"digest\": \"60293cfdb3323068\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard smooth/etale presentations, AdjoinRoot integrality and weakly regular sequence localization do not assert regularity, labelled-branch shrinking and density for this ramified simultaneous root quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularRing\", \"AdjoinRoot\"",
+   "results": "{\"t\": \"2026-10-22T11:32:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegularRing\\\", \\\"AdjoinRoot\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved standard smooth presentations, differential bases, AdjoinRoot constructions and regular-sequence results do not give the combined labelled root geometry or branch shrinking statement"
+  },
+  {
+   "tool": "grep",
+   "query": "(root|AdjoinRoot).*(IsRegularRing|normal.?crossing)|(IsRegularRing|normal.?crossing).*(root|AdjoinRoot)",
+   "results": "{\"t\": \"2026-10-22T11:32:45Z\", \"tool\": \"grep\", \"query\": \"(root|AdjoinRoot).*(IsRegularRing|normal.?crossing)|(IsRegularRing|normal.?crossing).*(root|AdjoinRoot)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved standard smooth presentations, differential bases, AdjoinRoot constructions and regular-sequence results do not give the combined labelled root geometry or branch shrinking statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular ring with locally transverse parameter divisors remains regular after adjoining roots of invertible order",
+   "results": "{\"t\": \"2026-10-22T11:32:46Z\", \"tool\": \"leansearch\", \"query\": \"A regular ring with locally transverse parameter divisors remains regular after adjoining roots of invertible order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdjoinRoot.isAdjoinRoot\", \"AdjoinRoot.instIsNoetherianRing\", \"AdjoinRoot.isAdjoinRootMonic\", \"AdjoinRoot\", \"AdjoinRoot.instInhabited\", \"IsLocalization.adjoin_inv\", \"AdjoinRoot.instCommRing\", \"IsLocalRing.isRegular_of_perm\"], \"digest\": \"d3637d82c9a83203\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved standard smooth presentations, differential bases, AdjoinRoot constructions and regular-sequence results do not give the combined labelled root geometry or branch shrinking statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite simultaneous root algebras along labelled strict normal crossing divisors are regular and have a monomial basis, compatible with scalar extension",
+   "results": "{\"t\": \"2026-10-22T11:32:47Z\", \"tool\": \"leanfinder\", \"query\": \"Finite simultaneous root algebras along labelled strict normal crossing divisors are regular and have a monomial basis, compatible with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.basisDeriv\", \"StandardEtalePresentation\", \"Algebra.SubmersivePresentation.basisKaehler\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.SubmersivePresentation.basisCotangent\", \"Algebra.SubmersivePresentation.basisCotangent_apply\"], \"digest\": \"784576dca651d7d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved standard smooth presentations, differential bases, AdjoinRoot constructions and regular-sequence results do not give the combined labelled root geometry or branch shrinking statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoining roots of a partial regular parameter system and of units yields a regular noetherian algebra with dense principal open complement",
+   "results": "{\"t\": \"2026-10-22T11:33:17Z\", \"tool\": \"leanfinder\", \"query\": \"Adjoining roots of a partial regular parameter system and of units yields a regular noetherian algebra with dense principal open complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmooth\", \"Algebra.essFiniteType_iff\", \"StandardEtalePair\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.zariskisMainProperty_iff'\", \"Algebra.zariskisMainProperty_iff\"], \"digest\": \"2b5784f2a5030c43\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the retrieved standard smooth presentations, differential bases, AdjoinRoot constructions and regular-sequence results do not give the combined labelled root geometry or branch shrinking statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-tame-root-etale-extension",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, inherited finite-cover Kummer input: IX Proposition 2.1 proof, printed p.133, full parameter-root algebra; regular-local branch shrinking and inactive-unit roots made explicit in the returned proof steps 1-3. Supporting Stacks Tags 0AG0 (more-algebra.tex, lemma-regular-local-UFD), 0BIA (etale.tex, lemma-strict-normal-crossings), and 07PF (more-algebra.tex, lemma-quotient-regular).",
+   "via": [
+    "lem-sfb-snc-tame-root-etale-extension",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-labelled-root-algebra-geometry",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eleven steps prove the finite free basis, scalar-extension and power-transition maps, local integral branch shrinking, regularity via existing transverse local root algebra, normality, nonzerodivisors and componentwise density. No new nodes: all substantive auxiliary results already exist. Checked zero ring, empty boundary, exponent one and disconnected labels.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof paragraph (3), open direct image, inherited Kummer finite-cover input: full parameter-root algebra before invariants in ILO IX Proposition 2.1, p.133. Realizes the labelled geometric input through the retained created.item/via chain. blueprint_refs.py ancestor returns None; the inherited from.node=null is retained. Whole-blueprint searches for root algebra, finite root, parameter, normal components and strict normal crossings found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Uses the general regular-parameter quotient and dimension theorem to check the hypotheses of the unit-local transverse-root lemma and to separate distinct labelled branches; no unit-local node supplies this commutative algebra theorem."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Uses the general theorem that regular Noetherian schemes are normal and decompose into finitely many clopen integral components, both for each labelled divisor and for the root scheme; this is a generic geometric tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Uses regular-ring normality after finite-root regularity is proved; a generic commutative algebra tool needed by the prescribed Kummer route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-regular-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-07f67032f",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-07f67032f (reviewer sub-agent of L); spot-checked: I read all eleven steps and every cited statement, plus ILO IX Prop 2.1 on printed p.133 (the algebra A[x]/(x_i^n - t_i) before invariants). The statement is unchanged, there are no new nodes, and no repair note names this item. Steps 1-3 (power basis, tensor identification, divisibility transitions): checked elementary, using the monic-quotient, finite-Noetherian and tensor-pushout lemmas. Step 4: each D_i is regular Noetherian, by the parameter quotient and the stalk/quotient localizations, and splits into finitely many clopen normal integral components (rem-pc-regular-normal (1),(2)). Step 5: the shrinking to W is correct: the removed sets are closed, inactive labels become units, and branches are distinct because t_j is a nonzerodivisor on the nonzero ring O/(t_i). I also checked that no branch can contain another (both are height-one primes) and that the SNC conditions are pointwise, so they restrict to W. Step 6: all hypotheses of lem-sfb-transverse-local-root-family-regular hold, including R/(t_J) regular of dimension d-|J| for every J in S, and a is a unit by Bezout in characteristic p. Steps 7-8: localization to the global and W-level regularity, then normality. Steps 9-10: f is a nonzerodivisor (unit or first parameter at each prime, then joint injectivity of localizations, then coefficientwise on the basis), so f misses every minimal prime and D(f) is dense in each component. Step 11: B=0, r=0 and a=1 are correct. I also tested k[u] with t=u(u-1), and k[u,v] with labels u,v. Batch-5: lem-trf-polynomial-ring-regular-base is a Mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing), pure commutative algebra outside the trace-formula and Poincare-duality assumptions, so I accept it. There is no cycle. FIX: step 9 cited lem-sc-regular-local-domain (imported, other unit, not Mathlib, not declared in tool_uses) for a domain property the argument never uses. I removed the sentence and the citation, and proof_deps now equals the union of the step uses.; 1 file(s) fixed by the reviewer"
+ }
+}

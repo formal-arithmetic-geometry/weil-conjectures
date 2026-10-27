@@ -1,0 +1,256 @@
+{
+ "id": "lem-trf-monoid-face-localization-ideal-tensor",
+ "kind": "statement",
+ "title": "Face localization on monomial ideal tensors with unit coefficients",
+ "statement": "Let $P$ be an integral commutative monoid, written additively, meaning $P\\to P^{\\rm gp}$ is injective, and let $F\\subset P$ be a face (a submonoid with $p+p'\\in F$ implying $p,p'\\in F$). Let $A$ be a commutative ring and $\\alpha:P\\to(A,\\cdot)$ a homomorphism sending $F$ to $A^\\times$. Put $P_F=\\{p-f:p\\in P,f\\in F\\}\\subset P^{\\rm gp}$ and $\\alpha_F(p-f)=\\alpha(p)\\alpha(f)^{-1}$. For a monoid ideal $H\\subset P$, meaning $H+P\\subset H$ and allowing $H=\\varnothing$, put $H_F=\\{h-f:h\\in H,f\\in F\\}$. For any commutative ring $D$ and monoid $T$, write $D[T]$ for the finite sums $\\sum d_tz^t$ with $z^tz^{t'}=z^{t+t'}$, and $D[K]\\subset D[T]$ for the ideal with additive basis $z^k$, $k\\in K$, when $K$ is a monoid ideal.\nThe extension of $\\mathbf Z[H]$ to $\\mathbf Z[P_F]$ is $\\mathbf Z[H_F]$. Give $A$ the actions induced by $\\alpha$ and $\\alpha_F$. There is an $A$-linear isomorphism of module tensors [def-weil-pbc-module-tensor-product]\n$$\\lambda:\\mathbf Z[H]\\otimes_{\\mathbf Z[P]}A\\xrightarrow{\\sim}\\mathbf Z[H_F]\\otimes_{\\mathbf Z[P_F]}A,\\qquad z^h\\otimes a\\longmapsto z^h\\otimes a,$$\nwhose inverse is $z^{h-f}\\otimes a\\mapsto z^h\\otimes\\alpha(f)^{-1}a$, independent of the fraction representative. Both tensors have multiplication maps to $A$, respectively $z^h\\otimes a\\mapsto\\alpha(h)a$ and $z^{h-f}\\otimes a\\mapsto\\alpha_F(h-f)a$; $\\lambda$ commutes with these maps and the identity on $A$. The isomorphism and its inverse commute with any coefficient homomorphism $\\phi:A\\to A'$ when the new chart is $\\phi\\alpha$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.2 (printed p. 98) and proof of 3.4.3 (printed p. 110). Agent algebraic localization calculation on monomial ideal tensors; returned parent step 5 and monomial-basis clause of step 4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-monomial-quotient-tor",
+  "def-trf-monoid-face-localization",
+  "def-trf-monoid-face-localization-inclusion"
+ ],
+ "proof": [
+  {
+   "text": "Regard $P$ as a submonoid of $P^{\\rm gp}$ by integrality. Addition of representatives gives $(p-f)+(p'-f')=(p+p')-(f+f')$, so $P_F$ is a monoid containing $P$. If $p-f=p'-f'$, then $p+f'=p'+f$ in $P$; applying $\\alpha$ and multiplying by the inverse of $\\alpha(f)\\alpha(f')$ proves $\\alpha(p)\\alpha(f)^{-1}=\\alpha(p')\\alpha(f')^{-1}$. Thus $\\alpha_F$ is well defined, multiplicative, and extends $\\alpha$. Moreover $(h-f)+(p-g)=(h+p)-(f+g)\\in H_F$, so $H_F$ is a monoid ideal. None of these assertions requires finite generation, saturation, or a nonempty $H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideals); agent calculation, step 1."
+   }
+  },
+  {
+   "text": "Put $R=\\mathbf Z[P]$, $S=\\mathbf Z[P_F]$, $I=\\mathbf Z[H]$, $J=\\mathbf Z[H_F]$ and $M=I\\otimes_R A$, $N=J\\otimes_S A$. All products of a monomial in the image of $I$ with a monomial of $S$ have exponent $h+(p-f)=(h+p)-f\\in H_F$; hence the extended ideal $IS$ is contained in $J$. Conversely each additive basis vector $z^{h-f}$ of $J$ is $z^h z^{-f}$ and belongs to $IS$. Taking finite integer linear combinations proves $IS=J$, including $H=\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideals); agent calculation, step 2."
+   }
+  },
+  {
+   "text": "For $i\\in I$ and $a\\in A$, send $(i,a)$ to $i\\otimes_S a\\in N$, using the inclusion $I\\to J$. This is additive in both entries and $R$-bilinear, since $(ri)\\otimes_S a=i\\otimes_S\\alpha(r)a$ for $r\\in R$ (here $\\alpha$ denotes the induced ring map). The tensor universal property [def-weil-pbc-module-tensor-product] gives $\\lambda:M\\to N$. It is $A$-linear: on pure tensors $\\lambda(i\\otimes ca)=i\\otimes ca=c\\lambda(i\\otimes a)$, and pure tensors generate. In particular $\\lambda(z^h\\otimes a)=z^h\\otimes a$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideal tensors); agent calculation, step 3. Tensor universal property: Stacks Tag 00CX, lemma-tensor-product, algebra.tex."
+   }
+  },
+  {
+   "text": "Define on a monomial of $J$ the prospective inverse value $\\beta(z^{h-f},a)=z^h\\otimes_R\\alpha(f)^{-1}a\\in M$. To check representatives, suppose $h-f=h'-f'$, so integrality gives $h+f'=h'+f$ in $P$. For $b=\\alpha(f)^{-1}\\alpha(f')^{-1}a$, tensor balancing [def-weil-pbc-module-tensor-product] gives\n$$z^h\\otimes\\alpha(f)^{-1}a=z^{h+f'}\\otimes b=z^{h'+f}\\otimes b=z^{h'}\\otimes\\alpha(f')^{-1}a.$$\nThe exponents $h+f'$ and $h'+f$ belong to $H$ by its ideal property. This proves representative independence without cancellation of any nonunit scalar in $A$. Extend $\\beta$ by finite integer linear combinations in $J$; the monomial basis makes the extension unique. It is additive in both arguments and $A$-linear in the second.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideal tensors); agent calculation, step 4. Tensor universal property: Stacks Tag 00CX, lemma-tensor-product, algebra.tex."
+   }
+  },
+  {
+   "text": "It remains to check $S$-balancing. For $h\\in H$, $f,g\\in F$, $p\\in P$, the formula and $R$-balancing give\n$$\\begin{aligned}\\beta(z^{h-f}z^{p-g},a)&=z^{h+p}\\otimes\\alpha(f+g)^{-1}a\\\\&=z^h\\otimes\\alpha(p)\\alpha(f)^{-1}\\alpha(g)^{-1}a\\\\&=\\beta(z^{h-f},\\alpha_F(p-g)a).\\end{aligned}$$\nHere $h+p\\in H$ and $f+g\\in F$. Expanding finite sums proves the relation for every element of $S$ and every element of $J$. Give $M$ its $S$-action through $\\alpha_F:S\\to A$; then the displayed relation and $A$-linearity in the second argument say exactly that $\\beta:J\\times A\\to M$ is $S$-bilinear. The universal property [def-weil-pbc-module-tensor-product] gives $\\mu:N\\to M$, $z^{h-f}\\otimes a\\mapsto z^h\\otimes\\alpha(f)^{-1}a$, and the same formula shows that $\\mu$ is $A$-linear.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideal tensors); agent calculation, step 5. Tensor universal property: Stacks Tag 00CX, lemma-tensor-product, algebra.tex."
+   }
+  },
+  {
+   "text": "For $h\\in H$, using $f=0$ gives $\\mu\\lambda(z^h\\otimes a)=z^h\\otimes a$. Conversely $S$-balancing and $z^h=z^{h-f}z^f$ give\n$$\\lambda\\mu(z^{h-f}\\otimes a)=z^h\\otimes\\alpha(f)^{-1}a=z^{h-f}\\otimes\\alpha(f)\\alpha(f)^{-1}a=z^{h-f}\\otimes a.$$\nThe monomials additively generate $I$ and $J$, and pure tensors generate by [def-weil-pbc-module-tensor-product], so these identities prove $\\mu\\lambda=1_M$ and $\\lambda\\mu=1_N$. Thus $\\lambda$ is the stated $A$-linear isomorphism with the specified inverse.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideal tensors); agent calculation, step 6. Tensor universal property: Stacks Tag 00CX, lemma-tensor-product, algebra.tex."
+   }
+  },
+  {
+   "text": "Evaluation of a finite sum at $\\alpha$ or $\\alpha_F$ is additive and respects multiplication. Consequently the pairings $(i,a)\\mapsto\\alpha(i)a$ and $(j,a)\\mapsto\\alpha_F(j)a$ are respectively $R$- and $S$-bilinear and give the multiplication maps by [def-weil-pbc-module-tensor-product]. On $z^h\\otimes a$, the two composites to $A$ both equal $\\alpha(h)a$. For the inverse formula the value is $\\alpha(h)\\alpha(f)^{-1}a=\\alpha_F(h-f)a$. Additivity and generation by monomial pure tensors prove the asserted commuting square.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideal tensors); agent calculation, step 7. Tensor universal property: Stacks Tag 00CX, lemma-tensor-product, algebra.tex."
+   }
+  },
+  {
+   "text": "Let $\\phi:A\\to A'$ be a coefficient homomorphism and $\\alpha'=\\phi\\alpha$. The coefficient maps $M\\to M'$ and $N\\to N'$ send $z^h\\otimes a\\mapsto z^h\\otimes\\phi(a)$ and $z^{h-f}\\otimes a\\mapsto z^{h-f}\\otimes\\phi(a)$; the balancing relations are respected because $\\phi(\\alpha(p)a)=\\alpha'(p)\\phi(a)$ and likewise for $\\alpha_F$. Thus these maps descend from the tensor presentations [def-weil-pbc-module-tensor-product]. They commute with $\\lambda$ on every monomial pure tensor. They commute with $\\mu$ because $\\phi(\\alpha(f)^{-1}a)=\\alpha'(f)^{-1}\\phi(a)$: a ring homomorphism sends a unit and its inverse to inverse units. Expanding sums gives both naturality squares.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII 3.1.2, printed p. 98 (monoid localization), and proof of 3.4.3, printed p. 110 (monomial ideal tensors); agent calculation, step 8. Tensor universal property: Stacks Tag 00CX, lemma-tensor-product, algebra.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.1.2, printed p. 98, and proof of 3.4.3, printed p. 110. Explicit elementary fraction and balancing calculation supplied by Q127; tensor presentation from Stacks Tag 00CX (lemma-tensor-product, algebra.tex)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localizing a monomial ideal tensor a coefficient ring where the inverted monomials act by units gives an isomorphism with explicit fraction inverse",
+   "results": "[leanfinder] OK 8 hit(s); IsLocalization.Away.tensorEquiv [Mathlib/RingTheory/Localization/BaseChange]; IsLocalization.Away.tensorRightEquiv [Mathlib/RingTheory/Localization/BaseChange]; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul [Mathlib/RingTheory/Extension/Presentation/Core]; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val [Mathlib/RingTheory/Extension/Presentation/Core]; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul [Mathlib/RingTheory/Extension/Presentation/Core]; IsLocalization.mk'_tmul [Mathlib/RingTheory/Localization/BaseChange]; IsLocalization.tmul_mk' [Mathlib/RingTheory/Localization/BaseChange]; Algebra.tensorH1CotangentOfIsLocalization [Mathlib/RingTheory/Etale/Kaehler]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of a monoid algebra ideal with a ring is unchanged by face localization when the chart sends the face to units",
+   "results": "[leansearch] OK 8 hit(s); IsLocalization.instIsLocalizedModuleTensorProductMap [Mathlib.RingTheory.Localization.BaseChange]; IsLocalizedModule.rTensor [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tensorProduct_tensorProduct [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tensor [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tensorProduct_isLocalizedModule [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.mk'_tmul [Mathlib.RingTheory.Localization.BaseChange]; Algebra.instIsStandardOpenImmersionTensorProduct [Mathlib.RingTheory.RingHom.OpenImmersion]; IsLocalization.tensorRight [Mathlib.RingTheory.Localization.BaseChange]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "[loogle] OK 12 hit(s); IsLocalization.tensorRight [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tensor [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.algebraLid [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.algebraTensorEquiv [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.moduleLid [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.moduleTensorEquiv [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.mk'_tmul [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tmul_mk' [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.bijective_linearMap_mul' [Mathlib.RingTheory.Localization.BaseChange]; instIsLocalizedModuleTensorProductOfClassAlgHomToAlgHom [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tensorProduct_isLocalizedModule [Mathlib.RingTheory.Localization.BaseChange]; IsLocalization.tensorProduct_tensorProduct [Mathlib.RingTheory.Localization.BaseChange]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalization.*tensor|tensor.*IsLocalization|MonoidAlgebra.*localiz",
+   "results": "[grep] OK 22 hit(s); Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:77:   exact mem_freeLocus_of_isLocalization p Rₚ (f := TensorProduct.mk R Rₚ M 1); Mathlib/RingTheory/LocalProperties/Basic.lean:228:       ((IsLocalization.Away.tensorRightEquiv S r (Localization.Away r)).symm : _ →+* _).comp; Mathlib/RingTheory/Localization/BaseChange.lean:271: instance IsLocalization.tensor (M : Submonoid R) [IsLocalization M A] :; Mathlib/RingTheory/Localization/BaseChange.lean:278: instance IsLocalization.tensorRight (M : Submonoid R) [IsLocalization M A] :; Mathlib/RingTheory/Localization/BaseChange.lean:358: lemma IsLocalization.tensorProduct_tensorProduct (M : Submonoid A); Mathlib/RingTheory/Localization/BaseChange.lean:371: lemma IsLocalization.tensorProduct_tensorProduct_right (M : Submonoid A); Mathlib/RingTheory/Localization/BaseChange.lean:377:     IsLocalization (M.map (Algebra.TensorProduct.includeRight (R := R) (A := S))) (S ⊗[R] B) := by; Mathlib/RingTheory/LocalIso.lean:181:   exact .of_algEquiv <| IsLocalization.Away.tensorProductEquivTMulRight R T g (Localization.Away g); Mathlib/RingTheory/Smooth/IntegralClosure.lean:24: - `TensorProduct.toIntegralClosure_bijective_of_isLocalization`:; Mathlib/RingTheory/Smooth/IntegralClosure.lean:74: lemma TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway; Mathlib/RingTheory/Smooth/IntegralClosure.lean:86:     refine IsLocalization.tensorProduct_tensorProduct _ _ (.powers r.1) _ ?_; Mathlib/RingTheory/Smooth/IntegralClosure.lean:103:       refine IsLocalization.tensorProduct_tensorProduct _ _ (.powers r.1) _ ?_; Mathlib/RingTheory/Smooth/IntegralClosure.lean:161: lemma TensorProduct.toIntegralClosure_bijective_of_isLocalization; Mathlib/RingTheory/RingHom/QuasiFinite.lean:96:     Algebra.TensorProduct.lift (Algebra.ofId _ _) ⟨IsLocalization.map (M := .powers r); Mathlib/RingTheory/RingHom/Locally.lean:304:   let e := IsLocalization.Away.tensorProductEquivTMulRight R S g (Localization.Away g); Mathlib/RingTheory/Etale/QuasiFinite.lean:351:     refine IsLocalization.tensorProduct_tensorProduct _ _ _ _ ?_; Mathlib/RingTheory/Etale/QuasiFinite.lean:406:     refine IsLocalization.tensorProduct_tensorProduct _ _ _ _ ?_; Mathlib/RingTheory/Etale/Kaehler.lean:20: - `Algebra.tensorH1CotangentOfIsLocalization`:; Mathlib/RingTheory/Etale/Kaehler.lean:281: def tensorH1CotangentOfIsLocalization (M : Submonoid S) [IsLocalization M T] :; Mathlib/RingTheory/Etale/Kaehler.lean:345: lemma tensorH1CotangentOfIsLocalization_toLinearMap; Mathlib/RingTheory/Etale/Kaehler.lean:347:     (tensorH1CotangentOfIsLocalization R T M).toLinearMap =; Mathlib/RingTheory/Etale/Kaehler.lean:352:   simp only [tensorH1CotangentOfIsLocalization,",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invert monomials in a monoid ideal tensor module with invertible monomial action; fraction representative maps to inverse scalar times tensor",
+   "results": "[leanfinder] OK 8 hit(s); Submodule.tensorInvEquiv [Mathlib/RingTheory/PicardGroup]; PolyEquivTensor.invFun_monomial [Mathlib/RingTheory/PolynomialAlgebra]; Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val [Mathlib/RingTheory/Extension/Presentation/Core]; MvPolynomial.scalarRTensor_symm_apply_single [Mathlib/RingTheory/TensorProduct/MvPolynomial]; MvPolynomial.rTensor_symm_apply_single [Mathlib/RingTheory/TensorProduct/MvPolynomial]; TensorProduct.piScalarRight_symm_algebraMap [Mathlib/RingTheory/TensorProduct/Pi]; Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul [Mathlib/RingTheory/Extension/Presentation/Core]; Algebra.Presentation.algebraTensorAlgEquiv_symm_relation [Mathlib/RingTheory/Extension/Presentation/Core]",
+   "date": "2026-10-22",
+   "verdict": "no match: hits provide units, localization or whole monoid-algebra infrastructure, not this chart/monomial-ideal tensor statement with its specified maps and multiplication compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, TensorProduct",
+   "results": "OK 12 hits; IsLocalization.tensorRight, IsLocalization.tensor, IsLocalization.algebraLid, IsLocalization.algebraTensorEquiv, IsLocalization.moduleLid, IsLocalization.moduleTensorEquiv, IsLocalization.mk'_tmul, IsLocalization.tmul_mk'. Source read: Localization/BaseChange.lean:65-155; general localization equivalences require identifying the localized monomial ideal, rather than directly stating the item.",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra coefficient changes and abstract localization theorems do not directly state the monomial ideal extension, explicit fraction inverse and both compatibility clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocalizedModule|moduleTensorEquiv|MonoidAlgebra.*localiz",
+   "results": "OK 25 hits; Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/Finiteness.lean, Mathlib/RingTheory/Localization/Finiteness.lean, Mathlib/RingTheory/Localization/Finiteness.lean. Source read: Localization/BaseChange.lean:65-155; general localization equivalences require identifying the localized monomial ideal, rather than directly stating the item.",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra coefficient changes and abstract localization theorems do not directly state the monomial ideal extension, explicit fraction inverse and both compatibility clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral monoid P and a monoid ideal H, inverting elements whose chart values are units preserves Z[H] tensor over Z[P] with A, with inverse z^(h-f) tensor a maps to z^h tensor alpha(f)^(-1) a",
+   "results": "OK 8 hits; MonoidAlgebra.tensorEquiv.invFun, MonoidAlgebra.tensorEquiv.invFun_tmul, PolyEquivTensor.invFun_monomial, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, MonoidAlgebra.scalarTensorEquiv_symm_single, AddMonoidAlgebra.tensorEquiv.invFun_tmul, MonoidAlgebra.tensorEquiv_symm_single, Submodule.tensorInvEquiv. Source read: Localization/BaseChange.lean:65-155; general localization equivalences require identifying the localized monomial ideal, rather than directly stating the item.",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra coefficient changes and abstract localization theorems do not directly state the monomial ideal extension, explicit fraction inverse and both compatibility clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomial ideal tensor a ring is unchanged by localizing the monoid at elements which map to units",
+   "results": "OK 8 hits; IsLocalization.at_units, IsLocalization.tensor, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.atUnit, IsLocalization.submonoid_map_le_is_unit, IsLocalization.self, IsLocalization.tensorRight, IsLocalization.atUnits. Source read: Localization/BaseChange.lean:65-155; general localization equivalences require identifying the localized monomial ideal, rather than directly stating the item.",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra coefficient changes and abstract localization theorems do not directly state the monomial ideal extension, explicit fraction inverse and both compatibility clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal of a monoid algebra extended along a face localization, tensor with an algebra whose face monomials are invertible, gives the same module with natural multiplication map",
+   "results": "OK 8 hits; IsLocalization.algebraTensorEquiv, Algebra.Presentation.tensorModelOfHasCoeffsInv, IsLocalization.tensorRight, IsLocalization.mk'_tmul, IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.Away.tensorRight, IsLocalization.tmul_mk'. Source read: Localization/BaseChange.lean:65-155; general localization equivalences require identifying the localized monomial ideal, rather than directly stating the item.",
+   "date": "2026-10-23",
+   "verdict": "no match: whole monoid-algebra coefficient changes and abstract localization theorems do not directly state the monomial ideal extension, explicit fraction inverse and both compatibility clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-log-chart-face-tor-comparison",
+  "date": "2026-10-22",
+  "group": "Q06"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), nearby-duality alteration reduction (through the ancestry of lem-trf-log-blowup-normalization): input Expose VIII, proof of Lemma 3.4.3, printed p. 110, where Tor_1^{Z[P]}(Z[P]/IZ[P],O_X)=0 is taken from Kato 1994, 6.1(ii); this node reduces the given chart to the sharp chart at a geometric point to which the Kato statement applies (face localization, splitting, unit twist; cf. Expose VI, 3.7(a), printed p. 75). Subargument: Expose VIII 3.1.2 (printed p. 98) and proof of 3.4.3 (printed p. 110). Agent algebraic localization calculation on monomial ideal tensors; returned parent step 5 and monomial-basis clause of step 4.",
+   "via": [
+    "lem-trf-log-chart-face-tor-comparison",
+    "lem-trf-log-regular-monomial-tor",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-monoid-face-localization-ideal-tensor",
+  "worker": "stage1",
+  "summary": "Eight explicit elementary calculations prove well-definedness of the localized chart, monomial ideal extension, the forward map, representative independence and balancing of its inverse, the inverse identities, multiplication compatibility and coefficient naturality. No new nodes: the only imported tool is the existing tensor universal-property/presentation leaf. The statement is unchanged. Fresh logged searches and two semantic phrasings found general localization infrastructure, not a one-line specialization giving the whole monomial-ideal statement.",
+  "blueprint": "Realizes the face-localization argument inside the nearby-duality alteration reduction of lem-trf-local-term-locality, via lem-trf-log-chart-face-tor-comparison: its ideal tensor comparison and multiplication square, ILO VIII 3.1.2 and proof of 3.4.3. The current main-20261015 blueprint was read; no blueprint node states this standalone algebra calculation.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-6537da9d7",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-6537da9d7 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged, it has 8 elementary steps, it creates no new nodes, and it cites only the Mathlib leaf def-weil-pbc-module-tensor-product, whose statement gives the universal property, the presentation and generation by pure tensors that steps 3-8 use. I recomputed every step. Step 1: integrality turns p-f=p'-f' into p+f'=p'+f in P, so alpha_F is well defined and H_F is an ideal of P_F. Step 2: IS=J by monomials z^{h-f}=z^h z^{-f}. Step 3: (ri) tensor_S a = i tensor alpha(r)a, which gives lambda. Step 4: the representative independence via z^{h+f'}=z^{h'+f} with b=alpha(f)^{-1}alpha(f')^{-1}a inverts only units. Step 5: S-balancing for p-g. Step 6: mu.lambda=1 and lambda.mu=1 on monomial pure tensors, with no flatness. Step 7: both multiplication squares commute. Step 8: naturality under phi with alpha'=phi.alpha, including phi(alpha(f)^{-1})=alpha'(f)^{-1}. Small cases checked: H empty, F={0}, H=P, A=0, P=N^2 with alpha(e1) a zero divisor and alpha(e2) a unit, and P a group. The parent lem-trf-log-chart-face-tor-comparison uses exactly what the statement provides: lambda as the forward map in step 2, multiplication compatibility in step 4, coefficient naturality in step 5. Source: ILO VIII 3.1.2 (p.98, M_S=M[S^-1] in M^gp for integral M) matches P_F, and the proof of 3.4.3 (p.110, the Tor_1 / I tensor O_X context) is cited as context only; proof_origin is agent, correctly. No SGA. The DAG search (rg -L for face localization, H_F, alpha_F and monoid-algebra localization) found only sibling nodes for other parent steps (face-localization-units, face-localization-fs, chart-face-split-coordinates, split-unit-group-ideal-tensor, monoid-unit-twist-ideal-tensor), none a duplicate or generalization. The five Mathlib searches find only general localization base-change results, not a one-line specialization. There is no route issue (only a Mathlib-leaf definition is cited) and no tool_uses. There is no repair note, so this is not a re-split. The face hypothesis is stronger than needed but harmless, so I left it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonoidFaceLocalizationIdealTensor",
+  "declaration": "MonoidAlgebra.FaceIdealTensor.face_localization_ideal_tensor",
+  "declarations": [
+   "MonoidAlgebra.FaceIdealTensor.fraction",
+   "MonoidAlgebra.FaceIdealTensor.localizedIdeal",
+   "MonoidAlgebra.FaceIdealTensor.tensor",
+   "MonoidAlgebra.FaceIdealTensor.tensorModule",
+   "MonoidAlgebra.FaceIdealTensor.pure",
+   "MonoidAlgebra.FaceIdealTensor.multiplication",
+   "MonoidAlgebra.FaceIdealTensor.IsComparison",
+   "MonoidAlgebra.FaceIdealTensor.face_localization_ideal_tensor"
+  ],
+  "file": "lean/Sheaf/RingTheory/MonoidFaceLocalizationIdealTensor.lean",
+  "statement": "theorem face_localization_ideal_tensor {P : Type u} [CommMonoid P] (hP : Function.Injective (GrothendieckGroup.of : P →* GrothendieckGroup P)) (F : Submonoid P) (hF : ∀ p q : P, p * q ∈ F → p ∈ F ∧ q ∈ F) {A : Type v} [CommRing A] (α : P →* A) (hα : ∀ f : F, IsUnit (α f.1)) : ∃ αF : faceLocalization P F →* A, αF.comp (MonoidAlgebra.toricLocalizationInclusion F) = α ∧ (∀ (p : P) (f : F), αF (fraction F p f) = α p * (↑((hα f).unit⁻¹) : A)) ∧ ∀ (H : Set P), (∀ h ∈ H, ∀ p : P, h * p ∈ H) → (∀ x ∈ localizedIdeal F H, ∀ p : faceLocalization P F, x * p ∈ localizedIdeal F H) ∧ (LogChartFaceTor.ideal H).map (MonoidAlgebra.mapDomainRingHom ℤ (MonoidAlgebra.toricLocalizationInclusion F)) = LogChartFaceTor.ideal (localizedIdeal F H) ∧ ∃ e : tensor α H ≃ₗ[A] tensor αF (localizedIdeal F H), IsComparison F α hα αF H e ∧ ∀ (A' : Type w) [CommRing A'] (φ : A →+* A'), ∃ (e' : tensor (φ.toMonoidHom.comp α) H ≃ₗ[A'] tensor (φ.toMonoidHom.comp αF) (localizedIdeal F H)) (c : tensor α H →+ tensor (φ.toMonoidHom.comp α) H) (cF : tensor αF (localizedIdeal F H) →+ tensor (φ.toMonoidHom.comp αF) (localizedIdeal F H)), IsComparison F (φ.toMonoidHom.comp α) (fun f ↦ (hα f).map φ) (φ.toMonoidHom.comp αF) H e' ∧ (∀ (z : LogChartFaceTor.ideal H) (a : A), c (pure α H z a) = pure (φ.toMonoidHom.comp α) H z (φ a)) ∧ (∀ (z : LogChartFaceTor.ideal (localizedIdeal F H)) (a : A), cF (pure αF (localizedIdeal F H) z a) = pure (φ.toMonoidHom.comp αF) (localizedIdeal F H) z (φ a)) ∧ (∀ x : tensor α H, cF (e x) = e' (c x)) ∧ (∀ y : tensor αF (localizedIdeal F H), c (e.symm y) = e'.symm (cF y))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Multiplicative notation for the node’s additive monoid. Reuses Algebra.faceLocalization, toricLocalizationInclusion, and LogChartFaceTor.ideal. The tensor abbreviation uses the same chart action with independent coefficient universe, and its A-module instance is transported from the flipped tensor. Coefficient comparison maps are existentially specified on every pure tensor, hence uniquely fixed. No statement correction. H2 repair of 60731223b912: definition ownership is recorded by def-trf-monoid-face-localization and def-trf-monoid-face-localization-inclusion; neither containing theorem is a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30e75df0b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery of 6073 H2 RETURN. The Lean is byte-identical; the item changes only lean and stmt_deps (theorem nodes lem-trf-face-localization-fs/affine-toric-equivariant-ideals replaced by new existing:true def nodes def-trf-monoid-face-localization -> Algebra.faceLocalization and def-trf-monoid-face-localization-inclusion -> MonoidAlgebra.toricLocalizationInclusion; signatures verbatim with side-live, statements match ILO VIII 3.1.2). def-trf-monomial-quotient-tor owns LogChartFaceTor.ideal. Rechecked all clauses: integrality, face, unit chart; alphaF pinned; H_F ideal and extension; real tensor with A-action on the coefficient; IsComparison forward and inverse for every representative plus multiplication square; phi-naturality with c/cF pinned and both squares; universes u/v/w; edge cases. Advisory: Q02 ab8b (PASS, not landed) adds def-trf-face-localization owning the same Algebra.faceLocalization; the second lander is a duplicate owner -> drop-nodes/same_as and repoint citations then. No compile (no change)."
+ }
+}

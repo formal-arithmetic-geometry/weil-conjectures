@@ -43,9 +43,9 @@
    }
   },
   {
-   "text": "For each $a$, set $g_a:Y'_a\\to Y_a$. Clause 1 of [det-pe-topos-functoriality-inverse-image] applies to this arbitrary scheme morphism: the base-change functor from $(Y_a)_{\\mathrm{pro\\acute et}}$ to $(Y'_a)_{\\mathrm{pro\\acute et}}$ sends coverings to coverings. Apply it to the whole given family $\\{U_{a,i}\\to Y_a\\}_i$. We obtain the cover $\\{V_{a,i}=U_{a,i}\\times_{Y_a}Y'_a\\to Y'_a\\}_i$. No assertion that $g_a$ is itself weakly etale is needed.",
+   "text": "For each stratum use the canonical Scheme.Cover.pullback₂ construction on the entire specified pro-etale cover [def-weil-pbc-proetale-site]. Stability of the pro-etale precoverage under arbitrary base change gives a cover with the same index set and the specified fiber-product members; no weakly-etale hypothesis on the stratum map is used.",
    "uses": [
-    "det-pe-topos-functoriality-inverse-image"
+    "def-weil-pbc-proetale-site"
    ],
    "elementary": false,
    "source": {
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "For each $(a,i)$ write $U=U_{a,i}$, $V=U\\times_{Y_a}Y\\prime_a$, $h:V\\to U$, and $P=P_{a,i}$. Choose a finite scalar presentation $R^m\\xrightarrow{A}R^n\\to P\\to0$, where $R=\\Lambda(*)$ [def-sfb-finitely-presented-module]. Apply [lem-sfb-scalar-presentation-cokernel] to this specified presentation on $U$ and on $V$. It identifies the given $M|_U$ with $\\operatorname{coker}(A_U)$ and identifies $\\Lambda_V\\otimes_R P$ with $\\operatorname{coker}(A_V)$, using the same $P$ and the same matrix $A$.",
+   "text": "Unpack finite presentation of each specified scalar module P [def-sfb-finitely-presented-module] as an isomorphism P ≅ coker(f) for f between finite free scalar modules. Define each scalar matrix entry as 1 followed by the corresponding component of f. The regular-module universal property and biproduct extensionality reconstruct f from these entries. Apply [lem-sfb-scalar-presentation-cokernel] to coker(f), its quotient map, and its cokernel universal property, on both old and new cover members. Composing with the scalar-extension image of P ≅ coker(f) gives the two model-to-matrix-cokernel isomorphisms with the same matrix and the same P.",
    "uses": [
     "def-sfb-finitely-presented-module",
     "lem-sfb-scalar-presentation-cokernel"
@@ -78,9 +78,11 @@
    }
   },
   {
-   "text": "Step 1 gives a finite stratification of $Y'$ by constructible locally closed subschemes; Step 2 gives the covers of these strata; Steps 3-4 give the local models with the same finitely presented scalar modules. Since $Y'$ is qcqs, these are precisely the witnesses required by [sk-def-sfb-constructible]. Hence $g^*M$ is constructible with all the more precise data asserted in the statement.",
+   "text": "For the constructibility clause reuse the already proved private pullback_constructible theorem of Sheaf.Paper.UnboundedLocalizingPullback [det-proper-base-change-unbounded-pullback], via a proof-only import all. That theorem pulls back the finite stratification [lemma-constructible-pullback-stratification] and applies [new-unbounded-pullback-finite-constant-local-model] on each stratum, using inverse-image composition to compare the restrictions. Its module and DAG dependency graph do not depend on this item. For the separately specified stratification, cover and scalar modules, apply steps 3-4 directly to the two nested fiber-product squares. The elementary predicate HasScalarModelOnRestriction names precisely the repeated isomorphism condition; it is an additional Lean attachment of this node, not a new mathematical lemma. The statement and generic comparison share this predicate, avoiding repeated expansion of inverse-image module objects during conversion. Use the actual pulled-back cover map and the actual immersion of constantModelPullbackStratification in the conclusion.",
    "uses": [
-    "sk-def-sfb-constructible"
+    "det-proper-base-change-unbounded-pullback",
+    "new-unbounded-pullback-finite-constant-local-model",
+    "lemma-constructible-pullback-stratification"
    ],
    "elementary": true,
    "source": {
@@ -91,18 +93,19 @@
  ],
  "proof_deps": [
   "def-sfb-finitely-presented-module",
-  "det-pe-topos-functoriality-inverse-image",
+  "def-weil-pbc-proetale-site",
+  "det-proper-base-change-unbounded-pullback",
   "lem-pur-scheme-constructible-preimage",
   "lem-sfb-scalar-matrix-inverse-image",
   "lem-sfb-scalar-presentation-cokernel",
   "lemma-constructible-pullback-stratification",
-  "sk-def-sfb-constructible",
+  "new-unbounded-pullback-finite-constant-local-model",
   "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-base-change-unbounded/sk-prop-proper-base-change-unbounded-pullback.proof.md",
-  "place": "Expansion of 'pull back the stratification / via the local coefficient models on strata'; the blueprint is agent-written. Stacks 054I supplies constructible preimages; the scalar-matrix calculation is written out using the cited DAG statements."
+  "place": "Constructible complexes paragraph; C3 scalar-presentation and scalar-matrix assembly for specified models, with the existing private pullback_constructible proof for the first clause. No module or DAG dependency cycle."
  },
  "mathlib_searches": [
   {
@@ -173,7 +176,18 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-proper-base-change-unbounded",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "lem-sfb-pullback-constant-model-constructible",
@@ -187,9 +201,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-topos-functoriality-inverse-image"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -203,6 +215,7 @@
   "declaration": "AlgebraicGeometry.ProEtale.pullback_constantModelConstructible",
   "declarations": [
    "AlgebraicGeometry.ProEtale.constantModelPullbackStratification",
+   "AlgebraicGeometry.ProEtale.HasScalarModelOnRestriction",
    "AlgebraicGeometry.ProEtale.ConstantModelPullbackStatement",
    "AlgebraicGeometry.ProEtale.pullback_constantModelConstructible"
   ],
@@ -221,5 +234,15 @@
   "group": "Q29",
   "result": "pass",
   "note": "Read node, all 11 stmt_deps and the declarations they name (IsConstantModelConstructible, finiteConstantScalarExtension, FiniteLocallyClosedStratification, Scheme.Stratification.pullback at ConstructibleSheaf/Pullback.lean:174-188, EllAdic condensed rings). All coefficient cases (finite A as constant ring sheaf, Z_l, Q_l, O_E/E for finite E in PadicAlgCl, finite-subextension Qlbar), qcqs Y,Y' with arbitrary g, recorded upperStar/condensedRingObj, constructibility conclusion and the precise clause (pulled-back stratification, pullback₂ cover, same P) match the node; no stronger assumptions. Mechanical stmt_dep finding: lemma-constructible-pullback-stratification's Lean is the sorry-free def Scheme.Stratification.pullback, an object the statement uses directly (its immersions), so it passes on that point. Edge cases (empty schemes/strata/covers, P=0, zero ring, g=id, E=Q_l) covered; universes as framework. Gates: real defs, docstrings with source and blueprint, only sorry, statement verbatim, report sections present. nt_compile.py on snapshot: exit 0, no messages."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-bb10d",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T051819-L-4142651",
+  "kind": "interface",
+  "note": "independent cc review: delivered PullbackConstantModelConstructible.lean, node json and change record against clone d42ee42 (unit realized list, node DAG ancestors, UnboundedLocalizingPullback.pullback_constructible); compiled item + 4 direct importers + #print axioms in /tmp sandbox, all exit 0, axioms clean"
  }
 }

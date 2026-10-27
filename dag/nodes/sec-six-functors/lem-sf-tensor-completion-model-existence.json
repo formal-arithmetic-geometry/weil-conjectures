@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-tensor-completion-model-existence",
+ "kind": "statement",
+ "title": "Existence of a normalized quotient tensor-completion model",
+ "statement": "Fix a prime l, a finite extension E of Q_l, and a qcqs scheme X on which l is invertible. There exists a Tensor l E X in the sense of [def-sf-tensor-completion-comparison]: an ordinary tensor model on flat-term K-flat representatives, its normalized quotient-chain augmentation, and a natural isomorphism from its completion to the specified completed tensor, satisfying the representative square. No constructible objects are chosen.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Coefficient presentation of the projection map; the explicit quotient augmentation is the one of Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5, as retained in def-sf-projection-tensor-coefficient-comparison"
+ },
+ "stmt_deps": [
+  "def-sf-tensor-completion-comparison",
+  "lem-fix-constructible-tensor-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit ordinary tensor, good-class inclusion and quotient-chain data of def-sf-tensor-quotient-chain-data. The ordinary tensor is the recorded ambient tensor, with its representative comparison restricted from independent-coefficient K-flat complexes to flat-term K-flat complexes.",
+   "uses": [
+    "def-sf-tensor-quotient-chain-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructed quotient chain has tensorOperationUnit as every component. Apply lem-sf-tensor-operation-unit-normalization to obtain both clauses of IsTensorChain.",
+   "uses": [
+    "def-sf-tensor-quotient-chain-data",
+    "lem-sf-tensor-operation-unit-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralAmbientOperationModels to the identity of X, obtaining its natural tensor-completion isomorphism and the tensor augmentation equation. Transport the shared operation record along ambientPackage_eq; all operations are the recorded constructions. Evaluate on the two good representatives supplied by the first step. The resulting equation is completion unit followed by the comparison and completed-tensor representative isomorphism equals the inverse ordinary representative isomorphism followed by localization of the chain augmentation. Precompose with the ordinary representative isomorphism and cancel its inverse. This proves IsTensorCompletion.",
+   "uses": [
+    "lem-pur-integral-ambient-operation-models",
+    "def-sf-tensor-completion-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the ordinary tensor model, good-class inclusion, natural completion comparison, chain augmentation, and the two established normalization assertions into Tensor. All constructions apply equally to the empty scheme and zero complexes.",
+   "uses": [
+    "def-sf-tensor-completion-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-tensor-completion-comparison",
+  "def-sf-tensor-quotient-chain-data",
+  "lem-pur-integral-ambient-operation-models",
+  "lem-sf-tensor-operation-unit-normalization"
+ ],
+ "proof_origin": "S4, 2026-10-27: Lean proof from the existing ambient operation comparison, the normalized strict tensor tower and quotient Roos augmentation; ordinary tensor comparison restricted to flat-term representatives. No new proof obligations.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor followed by derived completion is naturally isomorphic to completed tensor on quotient towers",
+   "results": "Eight results, with no theorem for the project-specific quotient-completion normalization. General localization/adic-completion results only.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project constructions; no direct library match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.fullyFaithfulWhiskeringLeft",
+   "results": "Found CategoryTheory.Localization.fullyFaithfulWhiskeringLeft in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Reused as the generic extensionality/localization tool."
+  },
+  {
+   "tool": "grep",
+   "query": "IsTensorChain|tensorCompletionModel_nonempty|tensorCompletionChain_unique",
+   "results": "Repository search found only the definition IsTensorChain in OpenFactorTensorModel, and no corresponding existence or chain-uniqueness API. The ambient operation models contain the underlying normalized completion comparison.",
+   "date": "2026-10-27",
+   "verdict": "Extract the normalized model bridge and the chain-coordinate uniqueness lemma."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionTensorCoefficientComparison",
+  "date": "2026-10-27",
+  "group": "D6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Proof step 13: canonical comparison of the framework and PBC tensor presentations; Integral comparison: nonvacuity of the normalization and independence of the two Roos coordinates",
+   "via": [
+    "def-sf-projection-tensor-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.TensorCompletionModelExistence",
+  "file": "lean/Sheaf/SixFunctors/TensorCompletionModelExistence.lean",
+  "declaration": "WeilConjectures.OpenFactorCoherence.tensorCompletionModel_nonempty",
+  "statement": "theorem tensorCompletionModel_nonempty [CompactSpace X] [QuasiSeparatedSpace X]\n    [∀ x : X, Invertible (l : X.residueField x)] :\n    Nonempty (Tensor l E X)",
+  "branch": "sheaf-dag",
+  "by": "D6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261026T194738-L-2534206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T222756-L-694475",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

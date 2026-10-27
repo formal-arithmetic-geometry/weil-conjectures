@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-finite-normal-generic-section-extension",
+ "kind": "statement",
+ "title": "Generic sections of finite schemes extend uniquely over normal integral bases",
+ "statement": "Let $S$ be an integral scheme [def-pc-integral-scheme] whose local rings are normal domains [def-weil-pbc-normal-ring]. Let $\\eta$ be its generic point, put $K=\\mathcal O_{S,\\eta}=k(S)$ [def-sc-function-field], and let $j:\\operatorname{Spec}K\\to S$ be the generic-point morphism. Let $f:X\\to S$ be any finite morphism [def-weil-finite-integral-morphism]. Restriction along $j$ is a bijection\n$$\\{s:S\\to X\\mid f\\circ s=\\mathrm{id}_S\\}\\ \\xrightarrow{\\ \\sim\\ }\\ \\{a:\\operatorname{Spec}K\\to X\\mid f\\circ a=j\\}.$$\nThus every prescribed generic section of $f$ extends to exactly one section over $S$. No reducedness, normality, integrality or flatness assumption on $X$, and no Noetherian or finite-type-over-a-field assumption on $S$, is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AB1 (lemma-finite-birational-over-normal), applied to the reduced closure of a prescribed generic section; affine uniqueness by injection into the function field. Agent general finite-scheme formulation of the normal-base argument in de Jong 1997 section 3.8, returned proof steps 7--8."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-sc-function-field",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For each nonempty affine open $U=\\operatorname{Spec}A\\subseteq S$, finite affineness gives $X_U=f^{-1}(U)=\\operatorname{Spec}B$ with $B$ finite as an $A$-module. The generic point belongs to $U$, and its germ map $i_U:A\\hookrightarrow K$ identifies $K$ with $\\operatorname{Frac}(A)$. Every localization $A_{\\mathfrak m}$ at a maximal ideal is isomorphic to the corresponding local ring of $S$, hence is a normal domain by hypothesis. The local criterion for normal domains therefore makes $A$ integrally closed in $K$. Nonempty affine opens cover $S$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030B, lemma-normality-is-local, (3) implies (1); Schemes Tag 01HV, lemma-spec-sheaves; Morphisms Tag 0AB1, lemma-finite-birational-over-normal, affine normality argument"
+   }
+  },
+  {
+   "text": "Fix a prescribed $a:\\operatorname{Spec}K\\to X$ above $j$. Over each $U$ of step 1 it factors through $X_U$ and corresponds to a ring map $\\phi_U:B\\to K$ whose composite with $A\\to B$ is $i_U$. For $b\\in B$, finite integrality gives $b^n+c_{n-1}b^{n-1}+\\cdots+c_0=0$ with $c_r\\in A$. Applying $\\phi_U$ gives $\\phi_U(b)^n+i_U(c_{n-1})\\phi_U(b)^{n-1}+\\cdots+i_U(c_0)=0$. Thus $\\phi_U(b)$ lies in $i_U(A)$ by normality. Define $\\psi_U(b)$ to be its unique preimage in $A$. Applying the injective $i_U$ to the equations for sums, products, zero and one proves that $\\psi_U:B\\to A$ is a ring map; it is an $A$-algebra map because $i_U\\psi_U$ is the identity on the image of $A$ in $B$. Consequently $s_U=\\operatorname{Spec}(\\psi_U):U\\to X_U$ is a section restricting to $a$ at $\\eta$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, lemma-finite-birational-over-normal, monic-equation argument, adapted directly to the image of a generic-section map; Algebra Tag 00GK, lemma-finite-is-integral"
+   }
+  },
+  {
+   "text": "For any nonempty affine $W=\\operatorname{Spec}C\\subseteq S$, two sections over $W$ with the same generic restriction give maps $\\theta_1,\\theta_2:\\Gamma(X_W,\\mathcal O)\\to C$. Their composites with the injective germ map $C\\hookrightarrow K$ agree, since they are the ring maps of that same generic morphism. Hence $\\theta_1=\\theta_2$ elementwise, and affine contravariant functoriality gives equality of the sections. This proves local uniqueness without any assumption on the ring of $X_W$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, lemma-finite-birational-over-normal, injective affine coordinate maps; Schemes Tag 01I1, lemma-morphism-into-affine"
+   }
+  },
+  {
+   "text": "On $U\\cap V$ cover by nonempty affine opens $W\\subseteq U\\cap V$. Each contains $\\eta$. The restrictions $s_U|_W$ and $s_V|_W$ are sections over $W$ with generic restriction $a$, so step 3 makes them equal. Morphism gluing and its uniqueness clause give equality on $U\\cap V$, including the vacuous empty case, and then glue all $s_U:U\\to X$ to $s:S\\to X$. Since $f\\circ s$ restricts to the identity on every $U$, the same uniqueness clause gives $f\\circ s=\\mathrm{id}_S$. Its generic restriction is $a$, as may be checked on any one nonempty affine $U$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 04TN, lemma-glue-maps, and 00AN, lemma-mapping-property-glue; scheme morphism gluing as in Schemes Tag 01JA, section-glueing-schemes"
+   }
+  },
+  {
+   "text": "If two global sections have the same generic restriction, step 3 identifies them on every nonempty affine open of $S$; uniqueness of morphism gluing identifies them globally. Restriction is therefore injective, and step 4 proves it surjective. Composition with $j$ takes a section to a morphism above $j$ by associativity, so these are exactly the two sets in the statement. If the generic-section set is empty, the global-section set is empty too, and the same bijectivity assertion holds.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tag 04TN, lemma-glue-maps, uniqueness; elementary injectivity and surjectivity assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0AB1, lemma-finite-birational-over-normal, affine integrally-closed argument adapted to a map B to K rather than a birational inclusion; gluing and uniqueness written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational section of a finite morphism over a normal integral scheme extends uniquely to a global section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, rational-map spreading and generic-point formulas do not extend every generic section of a finite scheme over a normal integral base in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sections of a finite scheme over a normal integral base to its function field is bijective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"IsAlgClosed.ringHom_bijective_of_isIntegral\", \"module\": \"Mathlib/FieldTheory/IsAlgClosed/Basic\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} [inst : Field k] [inst_1 : CommRing K] [IsDomain K] [IsAlgClosed k] (f : k →+* K),\\n  f.IsIntegral → Function.Bijective ⇑f\", \"doc\": \"Let $ k $ be an algebraically closed field and $ K $ be a commutative integral domain. If $ f : k \\\\to K $ is an integral ring homomorphism, then $ f $ is bijective.\"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f] [AlgebraicGeometry.LocallyOfFiniteType f],\\n  (CommRingCat.Hom.\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, rational-map spreading and generic-point formulas do not extend every generic section of a finite scheme over a normal integral base in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"section\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, rational-map spreading and generic-point formulas do not extend every generic section of a finite scheme over a normal integral base in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*section|section.*generic|normal.*section|section.*normal",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"217\", \"text\": \"/-- The sections of the relative normalization on the preimage of an affine open is isomorphic to\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean\", \"line\": \"19\", \"text\": \"The following normal forms are in [silverman2009], section III.1, page 42.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, rational-map spreading and generic-point formulas do not extend every generic section of a finite scheme over a normal integral base in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generic rational point of a finite scheme over a normal integral scheme extends to a unique section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"genericPoint.congr_simp\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"∀ (α : Type u_1) [inst : TopologicalSpace α] [inst_1 : QuasiSober α] [inst_2 : IrreducibleSpace α],\\n  genericPoint α = genericPoint α\", \"doc\": \"In a quasi-sober irreducible topological space, the generic point is uniquely determined, meaning that any two instances of the generic point for the space are equal as elements of the space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.SpreadingOut\", \"type\": \"[IsIntegral X] : X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] [hX : IrreducibleSpace X] [IrreducibleSpace Y] :\\n  f (genericPoint X) = genericPoint Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint\", \"module\": \"Mathlib.AlgebraicGeometry.FunctionField\", \"type\": \"{X : Scheme} [IsIntegral X] {U : X.Opens} (hU : IsAffineOpen U) [h : Nonempty U] :\\n  hU.primeIdealOf ⟨genericPoint X, ((genericPoint_spec X).mem_open_set_iff U.isOpen).mpr (by simpa using h)⟩ =\\n    genericPoint (Spec Γ(X, U))\", \"doc\": \"For an integral scheme $X$ and an affine open subset $U \\\\subseteq X$, the prime ideal associated with the generic point of $X$ in the affine scheme $\\\\operatorname{Spec}(\\\\Gamma(U, \\\\mathcal{O}_X))$ coin\"}\n  {\"name\": \"genericPoint\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] [IrreducibleSpace α] : α\", \"doc\": \"In a quasi-sober topological space that is irreducible, this is the unique point $ x $ such that the closure of $ \\\\{x\\\\} $ equals the entire space. This follows from the quasi-sober property ensuring e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) (x : f.fiber y) : f.fiberToSpecResidueField y x = IsLocalRing.closedPoint (Y.residueField y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $y \\\\in Y$ be a point. Let $\\\\kappa(y)$ be the residue field of $Y$ at $y$. The canonical projection from the fiber $X_y := X \\\\times_Y \\\\operatorname{Spe\"}\n  {\"name\": \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsIntegral X] : OrderTop X\", \"doc\": \"For any integral scheme $X$, its underlying topological space is equipped with an order having a top element, which is the unique generic point of $X$. This means that every point in $X$ is a speciali\"}\n  {\"name\": \"genericPoints.ofComponent\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] (x : irreducibleComponents α) : genericPoints α\", \"doc\": \"In a quasi-sober topological space, this function maps each irreducible component to its unique generic point, whose closure is the component itself.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization universal maps, rational-map spreading and generic-point formulas do not extend every generic section of a finite scheme over a normal integral base in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*section|section.*generic|normal.*section|section.*normal",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/EllipticCurve/NormalForms.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: generic germ injectivity, rational maps and normalization constructions do not state the whole extension bijection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sections of a finite scheme over a normal integral base to its function field is bijective",
+   "results": "Hits: AlgebraicGeometry.Scheme.germToFunctionField_injective, AlgebraicGeometry.map_injective_of_isIntegral, AlgebraicGeometry.Scheme.germToFunctionField.congr_simp, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.germToFunctionField, AlgebraicGeometry.morphismRestrict_app, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: generic germ injectivity, rational maps and normalization constructions do not state the whole extension bijection"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsNormal",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.IsNormal'",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give rational maps, generic injectivity or normalization constructions, not unique global sections over every normal integral base; the Loogle query with IsNormal was rejected as an unknown identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational section of a finite morphism over a normal integral scheme extends uniquely to a global section",
+   "results": "Hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.ι_toNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: generic germ injectivity, rational maps and normalization constructions do not state the whole extension bijection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sections of a finite scheme over a normal integral base to its function field is bijective",
+   "results": "Hits: AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.germToFunctionField_injective, IsPurelyInseparable.bijective_restrictDomain, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: generic germ injectivity, rational maps and normalization constructions do not state the whole extension bijection"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsFinite\", \"section\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: generic germ injectivity, rational maps and normalization constructions do not state the whole extension bijection"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-pointed-isom-finite",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; de Jong section 3.8, last paragraph, normality of S and the prescribed point of I at its generic point: reduced-closure extension and affine uniqueness (returned proof steps 7--8).",
+   "via": [
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-normal-generic-section-extension",
+  "worker": "stage1",
+  "summary": "The statement is correct as written. Give the affine monic-equation factorization B to A inside K, prove uniqueness by the injective germ map, check arbitrary affine refinements of overlaps, and glue. All tools already have DAG nodes (indeed Mathlib leaves); no new nodes are required. No hypotheses on X or finiteness conditions on S were added.",
+  "blueprint": "Realizes the normal-base generic Isom-section extension prerequisite in the recorded ancestry of det-thm-sf-ctf-stability-direct-images, proof (3), via the stable pointed curve rigidity reduction; keeps the existing blueprint.from place and via unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-61aed0a67",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-61aed0a67 (reviewer sub-agent of L); spot-checked: I read the item and all five proof steps in full; the delivery creates no new nodes. The statement is true with no hypothesis on X. It generalizes Stacks 0AB1 (morphisms.tex l.14630, lemma-finite-birational-over-normal), whose proof I read. I tested S=Spec K, X empty, B=A[eps]/eps^2 and ZxF_2 over Z. k[t^2,t^3] in k[t] shows normality is necessary. Step 1: the cited fraction-field lemma gives eta in U, A a domain and A injecting into K as its fraction field. stalk-localization (c) gives A_m = O_{S,x}, which is normal by hypothesis. normal-domain-of-local-normal then makes A integrally closed in K. No Noetherian assumption is made. Step 2: the monic equation from finite-algebra-is-integral, mapped by phi_U, puts phi_U(b) in i_U(A). Injectivity of i_U makes psi_U a ring map with psi_U composed with A->B equal to the identity, so Spec psi_U is a section with generic restriction a. Step 3: affine uniqueness by injectivity of C into K; correctly marked elementary. Step 4: overlaps are covered by affine W, so no affineness of U∩V is assumed. Each W contains eta, and the gluing node (existence and uniqueness) glues the sections and gives f∘s=id. Step 5: injectivity plus surjectivity; correct. Every citation says what its step takes from it, and the Stacks tags 030B, 00GK, 01HV, 01I1, 04TN, 00AN, 01JA, 0AB1 match their labels. The citer lem-sfb-stable-pointed-isom-finite (step 4, I->S finite over a normal integral S) uses exactly this statement. No DAG duplicate: lem-trf-finite-birational-normal-iso is the 0AB1 isomorphism statement, which is different. All proof tools from other units are Mathlib leaves, so no tool_uses are needed. No SGA source is cited. Statement, stmt_deps, unit and blueprint are unchanged. Minor: the report mentions a citations.json that the commit does not contain, which is harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteNormalGenericSectionExtension",
+  "declaration": "AlgebraicGeometry.finite_normal_generic_section_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteNormalGenericSectionExtension.lean",
+  "statement": "theorem finite_normal_generic_section_extension {S X : Scheme.{u}} [IsIntegral S] (hS : ∀ x : S, IsDomain (S.presheaf.stalk x) ∧ IsIntegrallyClosed (S.presheaf.stalk x)) (f : X ⟶ S) [IsFinite f] : Function.Bijective (fun s : {s : S ⟶ X // s ≫ f = 𝟙 S} => (⟨S.fromSpecStalk (genericPoint S) ≫ s.1, by simp [s.2]⟩ : {a : Spec S.functionField ⟶ X // a ≫ f = S.fromSpecStalk (genericPoint S)}))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b6afc10f7",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: [IsIntegral S]; hS stalkwise IsDomain ∧ IsIntegrallyClosed (= normal local rings, the IsDomain half automatic); [IsFinite f]; canonical genericPoint/functionField/fromSpecStalk; Function.Bijective of the explicit restriction map j ≫ s between the section subtypes. No hypotheses on X, no Noetherian/finite-type on S, single universe u, autoImplicit off. Mathematics true (Stacks 0AB1 monic-equation retraction plus germ-injective uniqueness and gluing); edge cases X=∅, S=Spec K, nonreduced X, cusp necessity checked. Node differs from side-live only in lean; first delivery (no rebind); statement verbatim in file. No defs, sorry only, docstrings carry source place, blueprint id and all 5 steps; no name clash in side-live lean or slopmaster2; report has Worker report and Second reading by Q11. No fixes, no compile run."
+ }
+}

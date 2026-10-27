@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-free-quotient-grassmann-projective",
+ "kind": "statement",
+ "title": "Free quotient Grassmannians and their projective Plücker embedding",
+ "statement": "For any scheme $S$ [def-pc-scheme] and integers $N\\geq0$ and $0\\leq r\\leq N$, the functor on $S$-schemes sending $T$ to isomorphism classes of surjections $\\mathcal O_T^{\\oplus N}\\twoheadrightarrow Q$, where $Q$ is locally isomorphic to $\\mathcal O_T^{\\oplus r}$, is represented [def-pc-representable-functor] by an $S$-scheme $G_S(N,r)$ with a universal quotient. Formation of this scheme and quotient commutes with arbitrary base change. For $0<r<N$, taking the top exterior power of the quotient defines the Plücker closed immersion\n$$G_S(N,r)\\hookrightarrow\\mathbf P^{\\binom Nr-1}_S.$$\nFor $r=0$ or $r=N$, $G_S(N,r)=S$. Thus in every case $G_S(N,r)\\to S$ is H-projective [def-kun-projective].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 089T (lemma-gkn-representable), and the quotient convention preceding it; projective Plücker embedding as recalled in Grothendieck, Bourbaki Expose 221, proof of Theorem 3.2 preceding Lemma 3.3, printed p.261. Archival Expose 221 PDF WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-representable-functor",
+  "def-kun-projective",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "def-nagata-projective-space-base-change",
+  "def-sc-sheaf-exterior-power",
+  "def-amb-finite-locally-free-module",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Assume $0<r<N$. Take the explicitly defined integer determinant locus $X$, its closed immersion $j$ and its affine charts from [lem-sfb-plucker-determinant-locus-charts]. The transition and gluing theorem [lem-sfb-plucker-chart-quotient-gluing] supplies the quotient $q_X$. Applying [lem-sfb-plucker-chart-classifying-bijection] to this quotient gives the natural quotient-class bijection and identifies $j$ with its top exterior-power map, including its coordinate sections.",
+   "uses": [
+    "lem-sfb-plucker-determinant-locus-charts",
+    "lem-sfb-plucker-chart-quotient-gluing",
+    "lem-sfb-plucker-chart-classifying-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T (lemma-gkn-representable); assembly of the three extracted determinant-coordinate arguments"
+   }
+  },
+  {
+   "text": "For arbitrary $S$, define $G_S(N,r)=S\\times_{\\operatorname{Spec}\\mathbf Z}X$ and pull back $q_X$. By [def-pc-fibre-product], $S$-maps from $T$ into this scheme are exactly maps $T\\to X$ together with the given $T\\to S$. [lem-sfb-plucker-chart-classifying-bijection] identifies these naturally with all required quotients on $T$. This proves representability and universality. For $S'\\to S$, an $S'$-map $T\\to G_S(N,r)\\times_SS'$ is likewise precisely an $S$-map $T\\to G_S(N,r)$ with the given map $T\\to S'$. Hence it represents the quotient functor over $S'$, with the pulled-back quotient. [lem-pc-representable-unique] gives the unique quotient-preserving isomorphism with $G_{S'}(N,r)$. This argument proves arbitrary base change directly and does not use the flat-only base-change clause of the cited Proj theorem.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-representable-unique",
+    "def-pc-module-pullback",
+    "lem-sfb-plucker-chart-classifying-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 089T (lemma-gkn-representable) and definition-grassmannian immediately following it; arbitrary base change from the representing bijection and fibre-product universal property"
+   }
+  },
+  {
+   "text": "Base change $j$ along $\\mathbf P^{\\binom Nr-1}_S\\to\\mathbf P^{\\binom Nr-1}_{\\mathbf Z}$. By [lem-weil-pbc-closed-immersion-base-change] the resulting map is a closed immersion. The fibre-product universal property identifies its source with $S\\times_{\\operatorname{Spec}\\mathbf Z}X=G_S(N,r)$; its target is the specified projective space by [def-nagata-projective-space-base-change]. The determinant-line and section identities of [lem-sfb-plucker-chart-classifying-bijection] identify this map, including its line quotient, with the top exterior-power construction on the universal quotient. Consequently it is the required Plücker embedding, and [def-kun-projective] gives H-projectivity.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product",
+    "def-nagata-projective-space-base-change",
+    "def-kun-projective",
+    "lem-sfb-plucker-chart-classifying-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01N0 (lemma-surjective-graded-rings-map-proj); base change of closed immersions; explicit Plücker-coordinate argument of Steps 2–9"
+   }
+  },
+  {
+   "text": "For $r=0$ the quotient is necessarily the zero module and has exactly one isomorphism class. For $r=N$, in any local frame the surjection is square; at each point its reduction modulo the maximal ideal is a surjective square matrix, so its determinant is nonzero in the residue field and hence a unit in the local ring. Its adjugate gives a local inverse, and uniqueness glues these inverses. Thus $q$ itself identifies $Q$ with $\\mathcal O_T^N$, giving again one quotient class. In both cases $S$ represents the functor, with its evident universal quotient, and arbitrary pullback preserves it. Finally $\\mathbf P^0_{\\mathbf Z}=\\operatorname{Proj}\\mathbf Z[t]$ has the single covering chart $D_+(t)=\\operatorname{Spec}\\mathbf Z$, since its degree-zero localization is $\\mathbf Z$; hence $\\mathbf P^0_S=S$. The identity is a closed immersion, so $S\\to S$ is H-projective by [def-kun-projective]. This includes $N=0$, empty bases and empty test schemes.",
+   "uses": [
+    "lem-weil-pbc-matrix-adjugate-identity",
+    "def-weil-pbc-matrix-determinant",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "def-pc-proj",
+    "def-nagata-projective-space-base-change",
+    "def-kun-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Endpoint cases added explicitly to Tag 089T, which assumes 0<k<n; single-chart Proj calculation for projective zero-space"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-plucker-determinant-locus-charts",
+  "lem-sfb-plucker-chart-quotient-gluing",
+  "lem-sfb-plucker-chart-classifying-bijection",
+  "def-pc-fibre-product",
+  "lem-pc-representable-unique",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-nagata-projective-space-base-change",
+  "def-kun-projective",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "def-weil-pbc-matrix-determinant",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "def-pc-proj"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 089T (lemma-gkn-representable), normalized quotient charts; NV supplies explicit homogeneous determinant equations, inverse chart-ring maps, matrix transition cocycles, Plücker identification and endpoint cases. Bourbaki Expose 221, printed p.261, not present; projectivity completion is agent-written, not attributed to the unread archival source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Grassmannian of rank r quotients of a finite free sheaf is a projective scheme by the Plucker embedding",
+   "results": "{\"t\": \"2026-10-22T04:03:33Z\", \"tool\": \"leanfinder\", \"query\": \"The Grassmannian of rank r quotients of a finite free sheaf is a projective scheme by the Plucker embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"Module.Grassmannian\", \"Module.Grassmannian.mk.inj\", \"Projectivization\", \"Projectivization.finite_of_finite\", \"Submodule.projectivization\", \"AlgebraicGeometry.Proj\", \"Projectivization.Subspace\"], \"digest\": \"e12241887b6e5ab9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Grassmannian and its functor are set-valued constructions; RingTheory/Grassmannian.lean explicitly lists scheme representability as TODO. Projective quotient modules are not projective representing schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\"",
+   "results": "{\"t\": \"2026-10-22T04:03:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Grassmannian.«termG(_,_;_)»\", \"Module.Grassmannian\", \"Module.Grassmannian.functor\", \"Module.Grassmannian.toSubmodule\", \"Module.Grassmannian.instCoeOutSubmodule\", \"Module.Grassmannian.ext\", \"Module.Grassmannian.ext_iff\", \"Module.Grassmannian.finite_quotient\"], \"digest\": \"a8145fe36309621c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Grassmannian and its functor are set-valued constructions; RingTheory/Grassmannian.lean explicitly lists scheme representability as TODO. Projective quotient modules are not projective representing schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|grassmann|Plucker|plucker",
+   "results": "{\"t\": \"2026-10-22T04:03:34Z\", \"tool\": \"grep\", \"query\": \"Grassmann|grassmann|Plucker|plucker\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Grassmannian and its functor are set-valued constructions; RingTheory/Grassmannian.lean explicitly lists scheme representability as TODO. Projective quotient modules are not projective representing schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grassmannian scheme represents locally free quotients and embeds as a closed subscheme in projective space",
+   "results": "{\"t\": \"2026-10-22T04:03:34Z\", \"tool\": \"leansearch\", \"query\": \"Grassmannian scheme represents locally free quotients and embeds as a closed subscheme in projective space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian\", \"Module.Grassmannian.mk\", \"Module.Grassmannian.rec\", \"Module.Grassmannian.projective_quotient\", \"Module.Grassmannian.mk.inj\", \"Module.Grassmannian.noConfusionType\", \"Module.Grassmannian.finite_quotient\", \"Module.Grassmannian.recOn\"], \"digest\": \"6334313a70cd2cc6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Grassmannian and its functor are set-valued constructions; RingTheory/Grassmannian.lean explicitly lists scheme representability as TODO. Projective quotient modules are not projective representing schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representability by a projective scheme of the functor of finite locally free quotients of a trivial vector bundle",
+   "results": "{\"t\": \"2026-10-22T04:03:42Z\", \"tool\": \"leanfinder\", \"query\": \"Representability by a projective scheme of the functor of finite locally free quotients of a trivial vector bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.AffineSpace\", \"Rep.free_projective\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"Rep.diagonal_succ_projective\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\"], \"digest\": \"b1702ababb9b8cdf\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Grassmannian and its functor are set-valued constructions; RingTheory/Grassmannian.lean explicitly lists scheme representability as TODO. Projective quotient modules are not projective representing schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmannian",
+   "results": "{\"t\": \"2026-10-22T04:04:16Z\", \"tool\": \"grep\", \"query\": \"Grassmannian\", \"sub\": \"RingTheory/Grassmannian.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"14\", \"18\", \"20\", \"23\", \"30\"], \"digest\": \"3d8ac61914da4fbd\"}; read Mathlib/RingTheory/Grassmannian.lean:14--53 and 68--76: functor definition only, representability TODO.",
+   "date": "2026-10-22",
+   "verdict": "no match: Module.Grassmannian and its functor are set-valued constructions; RingTheory/Grassmannian.lean explicitly lists scheme representability as TODO. Projective quotient modules are not projective representing schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two square matrices A B over a commutative ring the determinant of the matrix of column replacement determinants equals det A to the power n minus one times det B",
+   "results": "{\"t\": \"2026-10-22T04:22:22Z\", \"tool\": \"leanfinder\", \"query\": \"For two square matrices A B over a commutative ring the determinant of the matrix of column replacement determinants equals det A to the power n minus one times det B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.cramerMap\", \"Matrix.det_updateCol_smul_left\", \"Algebra.Norm.Transitivity.det_mul_corner_pow\", \"Matrix.cramer_apply\", \"Matrix.det_eq_of_forall_col_eq_smul_add_pred\", \"Matrix.cramer_row_self\", \"Matrix.det_mul_column\", \"Matrix.det_add_replicateCol_mul_replicateRow\"], \"digest\": \"8b6437bd5481d94a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Grassmannian scheme representability and projective Plücker embedding are not in Mathlib; Module.Grassmannian is a module-valued quotient functor whose scheme version and representability are explicitly TODO at Mathlib/RingTheory/Grassmannian.lean:46–53. Read that file and the generic local-representability hit; the latter is a criterion, not the desired Grassmannian construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme representing the Grassmannian functor of locally free quotients with projective Plucker embedding",
+   "results": "{\"t\": \"2026-10-22T04:23:44Z\", \"tool\": \"leansearch\", \"query\": \"Scheme representing the Grassmannian functor of locally free quotients with projective Plucker embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"Module.Grassmannian.termG(_,_;_)\", \"Module.Grassmannian.mk.inj\", \"Module.Grassmannian.noConfusionType\", \"Module.Grassmannian.mk\", \"Module.Grassmannian.projective_quotient\", \"Module.Grassmannian.recOn\"], \"digest\": \"f4232cf365fa8e90\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Grassmannian scheme representability and projective Plücker embedding are not in Mathlib; Module.Grassmannian is a module-valued quotient functor whose scheme version and representability are explicitly TODO at Mathlib/RingTheory/Grassmannian.lean:46–53. Read that file and the generic local-representability hit; the latter is a criterion, not the desired Grassmannian construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\"",
+   "results": "{\"t\": \"2026-10-22T04:23:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Grassmannian.«termG(_,_;_)»\", \"Module.Grassmannian\", \"Module.Grassmannian.functor\", \"Module.Grassmannian.toSubmodule\", \"Module.Grassmannian.instCoeOutSubmodule\", \"Module.Grassmannian.ext\", \"Module.Grassmannian.ext_iff\", \"Module.Grassmannian.finite_quotient\"], \"digest\": \"a8145fe36309621c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Grassmannian scheme representability and projective Plücker embedding are not in Mathlib; Module.Grassmannian is a module-valued quotient functor whose scheme version and representability are explicitly TODO at Mathlib/RingTheory/Grassmannian.lean:46–53. Read that file and the generic local-representability hit; the latter is a criterion, not the desired Grassmannian construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|Plucker|Plücker",
+   "results": "{\"t\": \"2026-10-22T04:23:44Z\", \"tool\": \"grep\", \"query\": \"Grassmann|Plucker|Plücker\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Grassmannian scheme representability and projective Plücker embedding are not in Mathlib; Module.Grassmannian is a module-valued quotient functor whose scheme version and representability are explicitly TODO at Mathlib/RingTheory/Grassmannian.lean:46–53. Read that file and the generic local-representability hit; the latter is a criterion, not the desired Grassmannian construction."
+  },
+  {
+   "tool": "grep",
+   "query": "TODO|Representability|Grassmannians for schemes",
+   "results": "{\"t\": \"2026-10-22T04:23:44Z\", \"tool\": \"grep\", \"query\": \"TODO|Representability|Grassmannians for schemes\", \"sub\": \"RingTheory/Grassmannian.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"46\", \"52\", \"53\"], \"digest\": \"2d33e0d17ec131d2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Grassmannian scheme representability and projective Plücker embedding are not in Mathlib; Module.Grassmannian is a module-valued quotient functor whose scheme version and representability are explicitly TODO at Mathlib/RingTheory/Grassmannian.lean:46–53. Read that file and the generic local-representability hit; the latter is a criterion, not the desired Grassmannian construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grassmannian of constant rank quotients of a finite free sheaf represented by a projective scheme with Plucker closed immersion",
+   "results": "{\"t\": \"2026-10-22T04:23:53Z\", \"tool\": \"leanfinder\", \"query\": \"Grassmannian of constant rank quotients of a finite free sheaf represented by a projective scheme with Plucker closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"Module.Grassmannian.mk.inj\", \"Module.Grassmannian\", \"Projectivization\", \"AlgebraicGeometry.termProj|_\", \"Submodule.projectivization\", \"Projectivization.rep\", \"Projectivization.mk''\"], \"digest\": \"7136bc0cc9b56a56\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Grassmannian scheme representability and projective Plücker embedding are not in Mathlib; Module.Grassmannian is a module-valued quotient functor whose scheme version and representability are explicitly TODO at Mathlib/RingTheory/Grassmannian.lean:46–53. Read that file and the generic local-representability hit; the latter is a criterion, not the desired Grassmannian construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Grassmannian of rank r quotients of a finite free sheaf is a projective scheme by the Plucker embedding",
+   "results": "{\"t\": \"2026-10-22T06:02:52Z\", \"tool\": \"leanfinder\", \"query\": \"The Grassmannian of rank r quotients of a finite free sheaf is a projective scheme by the Plucker embedding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Grassmannian.projective_quotient\", \"AlgebraicGeometry.Proj\", \"Projectivization.mk''_submodule\", \"Projectivization\", \"Projectivization.map\", \"Projectivization.finite_of_finite\", \"Submodule.projectivization\", \"ProjectiveSpectrum\"], \"digest\": \"6ba54c51ee8a535d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians and affine/Proj constructions do not prove scheme representability with universal quotient and closed Plucker embedding; scheme Grassmannians are TODO in Mathlib/RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Grassmannian\"",
+   "results": "{\"t\": \"2026-10-22T06:02:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"Grassmannian\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Grassmannian.«termG(_,_;_)»\", \"Module.Grassmannian\", \"Module.Grassmannian.functor\", \"Module.Grassmannian.toSubmodule\", \"Module.Grassmannian.instCoeOutSubmodule\", \"Module.Grassmannian.ext\", \"Module.Grassmannian.ext_iff\", \"Module.Grassmannian.finite_quotient\"], \"digest\": \"a8145fe36309621c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians and affine/Proj constructions do not prove scheme representability with universal quotient and closed Plucker embedding; scheme Grassmannians are TODO in Mathlib/RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "grep",
+   "query": "Grassmann|grassmann|Plucker|plucker",
+   "results": "{\"t\": \"2026-10-22T06:02:53Z\", \"tool\": \"grep\", \"query\": \"Grassmann|grassmann|Plucker|plucker\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians and affine/Proj constructions do not prove scheme representability with universal quotient and closed Plucker embedding; scheme Grassmannians are TODO in Mathlib/RingTheory/Grassmannian.lean:46--53."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability and projectivity of Grassmannians over an arbitrary base scheme",
+   "results": "{\"t\": \"2026-10-22T06:02:53Z\", \"tool\": \"leansearch\", \"query\": \"Representability and projectivity of Grassmannians over an arbitrary base scheme\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme representing finite locally free quotients of a trivial vector bundle with universal quotient and Plucker closed immersion",
+   "results": "{\"t\": \"2026-10-22T06:03:06Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme representing finite locally free quotients of a trivial vector bundle with universal quotient and Plucker closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.over\", \"AlgebraicGeometry.AffineSpace.homOfVector\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\"], \"digest\": \"2fcc18b3bf1fef84\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: module Grassmannians and affine/Proj constructions do not prove scheme representability with universal quotient and closed Plucker embedding; scheme Grassmannians are TODO in Mathlib/RingTheory/Grassmannian.lean:46--53."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-hilbert-polynomial-representability",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Free quotient Grassmannians and their projective Plücker embedding",
+   "via": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-free-quotient-grassmann-projective",
+  "worker": "stage1",
+  "summary": "Repair of the 2026-10-21/22 human re-split: unchanged statement, three comparable statement-only unsplit tasks extracting all arguments of former steps 1--9, with the exact original steps and prior report retained in report.md. The item now only assembles the three tasks, arbitrary base change, the closed Plucker map and the endpoint cases. All new tasks searched with the logged search command; no Lean or compilation.",
+  "blueprint": "No imported blueprint ancestor is recorded (blueprint_refs.py ancestor returns None). This item refines the Hilbert-scheme prerequisite in the inherited det-thm-sf-ctf-stability-direct-images proof (3) route. The proof realizes the free quotient Grassmannian/Plücker prerequisite named in blueprint.from.place, retaining that exact place and its inherited via chain; full-blueprint searches Grassmann, Plücker, Cramer, adjugate and determinant calculus found no equivalent blueprint node. The new tasks refine this same inherited location and via chain into determinant equations/charts (old 2--4), pivot normalization/cocycle/gluing (old 1,5,6), and determinant factorization/inverse bijection (old 7--9).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-glue-sheaves-of-modules",
+    "why": "Open-cover gluing of module objects and arrows with explicit transition cocycles; the quotient-chart argument requires this general tool. No lemma of this unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-matrix-adjugate-identity",
+    "why": "Inverses of square pivot matrices with unit determinant; no Grassmannian theorem is obtained from another unit. No lemma of this unit states this general tool."
+   },
+   {
+    "node": "lem-pc-representable-unique",
+    "why": "Uniqueness of the quotient-preserving base-change isomorphism after both functors are explicitly identified. No lemma of this unit states this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Preserves the already constructed integer Plücker embedding under arbitrary base change. No lemma of this unit states this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-nagata-relative-proj-functoriality",
+  "prop-nagata-proj-standard-open",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-sc-exterior-sheaf-local-free-comparison",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-projective-space-functor-of-points",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-pc-representable-unique",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-df3510ef0",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-df3510ef0 (reviewer sub-agent of L); spot-checked: This is a valid human re-split. The note was released 2026-10-22 05:47Z, after NV's stage-1 landing (12:33 +0800) and NU's stage-2 landing (12:50 +0800). The Lean proof is still sorry and the node has no reviewed_proof, so this is not superseded (no B10/A7).\n\nAll 12 base steps (9708 characters) appear verbatim in the report. Each argument now has a self-contained statement-only node, and the three are of comparable size (1779, 2153 and 2610 characters):\n- determinant-locus-charts carries old steps 2-4: the homogeneous F_{I,K}, the closed immersion, and the chart ring isomorphic to Z[x].\n- chart-quotient-gluing carries old steps 1, 5 and 6: the pivot loci, the transition cocycle, and the glued surjection q_X.\n- chart-classifying-bijection carries old steps 7-9: the determinant line, the factorization, and the inverse natural bijection. It also states j^*O(1) = top exterior power of Q_X with p_J mapped to the ordered wedge, which old step 11 uses.\n\nThe item keeps its statement. Its 2935-character assembly retains old steps 10-12 (base change via S x_Z X, the base-changed closed immersion, and the endpoint cases) as verbatim short arguments, which matches accepted precedent.\n\nMathematics checked:\n- F = p_I^{r-1}p_K - det C vanishes on maximal minors over any commutative ring. Cramer gives C = adj(M_I)M_K, then det adj = det^{r-1} and det is multiplicative; there is no cancellation.\n- N=4, r=2 gives the Plücker relation p12p34 - p13p24 + p14p23. For r=1, F is identically 0 and X = P^{N-1}.\n- The chart-ring inverse is valid: M^(I)_J = C_{I,J}/p_I, so det M^(I)_J = p_J/p_I.\n- The transitions satisfy M^(K) = D^{-1}M^(I), and the cocycle holds by comparing on the identity pivot columns.\n- For r=N, a surjection O^N -> Q with Q locally free of rank N is an isomorphism by the local-unit determinant and adjugate. P^0_S = S.\n- The cited statements I opened support each step: fibre product, representable-unique, closed-immersion base change for any morphism, def-kun-projective with N >= 0, and module gluing.\n\nSources: Stacks 089T (constructions.tex line 4994, quotient convention with rank n-k) is confirmed, and tags 01N0, 01M4 and 01NE exist. No SGA source is used.\n\nDuplicates: none in the DAG. The hits for Grassmann/Plücker/pivot/089T are the Hilbert and GIT citers of this item, the flag-bundle definition, and matrix tools.\n\nAdvisories, not faults: the item's node-level tool_uses are stale, and step 2 still mentions 'the cited Proj theorem', which is now cited only through the charts node. The bijection node's stmt_dep on the gluing node is not referenced in its statement. Generic tools accepted: glue-sheaves, adjugate, representable-unique, closed-immersion base change.\n\nNo fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FreeQuotientGrassmannProjective",
+  "declaration": "AlgebraicGeometry.exists_freeQuotientGrassmann_projective",
+  "declarations": [
+   "AlgebraicGeometry.freeQuotientPullback",
+   "AlgebraicGeometry.exists_freeQuotientGrassmann_projective"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FreeQuotientGrassmannProjective.lean",
+  "statement": "theorem exists_freeQuotientGrassmann_projective (S : Scheme.{u}) (N r : ℕ) (hr : r ≤ N) : ∃ (G : Scheme.{u}) (π : G ⟶ S) (Q : G.Modules) (q : SheafOfModules.free (R := G.ringCatSheaf) (ULift.{u} (Fin N)) ⟶ Q), Epi q ∧ Q.IsFiniteLocallyFreeOfRank r ∧ (∀ (T : Scheme.{u}) (a : T ⟶ G), Epi (freeQuotientPullback a q) ∧ ((Scheme.Modules.tensorPullback a).obj Q).IsFiniteLocallyFreeOfRank r) ∧ (∀ (T : Scheme.{u}) (t : T ⟶ S) (P : T.Modules) (p : SheafOfModules.free (R := T.ringCatSheaf) (ULift.{u} (Fin N)) ⟶ P), Epi p → P.IsFiniteLocallyFreeOfRank r → ∃! a : T ⟶ G, a ≫ π = t ∧ ∃ e : (Scheme.Modules.tensorPullback a).obj Q ≅ P, freeQuotientPullback a q ≫ e.hom = p) ∧ (∀ (S' : Scheme.{u}) (f : S' ⟶ S) (T : Scheme.{u}) (t : T ⟶ S') (P : T.Modules) (p : SheafOfModules.free (R := T.ringCatSheaf) (ULift.{u} (Fin N)) ⟶ P), Epi p → P.IsFiniteLocallyFreeOfRank r → ∃! a : T ⟶ pullback π f, a ≫ pullback.snd π f = t ∧ ∃ e : (Scheme.Modules.tensorPullback a).obj ((Scheme.Modules.tensorPullback (pullback.fst π f)).obj Q) ≅ P, freeQuotientPullback a (freeQuotientPullback (pullback.fst π f) q) ≫ e.hom = p) ∧ ((r = 0 ∨ r = N) → IsIso π) ∧ (0 < r → r < N → ∃ j : G ⟶ ℙ(ULift.{u} (Set.powersetCard (Fin N) r); S), IsClosedImmersion j ∧ j ≫ ℙ(ULift.{u} (Set.powersetCard (Fin N) r); S) ↘ S = π ∧ ∃ e : (Scheme.Modules.tensorPullback j).obj (ProjectiveSpace.twist (ULift.{u} (Set.powersetCard (Fin N) r)) S 1) ≅ Scheme.Modules.exteriorSheaf Q r, ∀ I : ULift.{u} (Set.powersetCard (Fin N) r), e.hom.app ⊤ (((Scheme.Modules.tensorPullbackSectionAdjunction j).unit.app (ProjectiveSpace.twist (ULift.{u} (Set.powersetCard (Fin N) r)) S 1)).app ⊤ (ProjectiveSpace.twistOneSection (ULift.{u} (Set.powersetCard (Fin N) r)) S I)) = Scheme.Modules.exteriorSheafSection Q r ⊤ (fun k ↦ (SheafOfModules.freeHomEquiv Q q (ULift.up (I.down.val.orderEmbOfFin I.down.property k))).val (op ⊤))) ∧ IsHProjective π",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Universal-element formulation of representability: unique scheme morphisms together with quotient-preserving module isomorphisms, for every test scheme and quotient. Arbitrary base change is stated with the actual pulled-back universal quotient on the fibre product. Plucker coordinates are indexed by r-element subsets of Fin N (cardinality N.choose r); their pullbacks equal the ordered wedges of the quotient generators. Endpoint equality with S is expressed invariantly as IsIso of the structure map. The helper freeQuotientPullback is the canonical map on standard generators, with real data and the recorded section-normalized tensor pullback."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-394c3eb3c",
+  "group": "NU",
+  "result": "pass",
+  "note": "Live node has no lean record and an unchanged statement (first stage-2 delivery); not dropped, no repair note; lean.statement verbatim in the file; report has both required sections. Clauses checked against Stacks 089T: arbitrary S and r<=N; quotients rendered as Epi from SheafOfModules.free (ULift (Fin N)) onto an IsFiniteLocallyFreeOfRank r module; representability as an exists-unique map over S with a quotient-preserving isomorphism; arbitrary base change via pullback pi f with the quotient pulled back along pullback.fst; interior Plucker closed immersion into P(powersetCard (Fin N) r; S) with j^*O(1) iso exteriorSheaf Q r sending the pulled-back twistOneSection I to the ordered wedge of q(e_i), which pins the map; endpoints as IsIso pi; IsHProjective in all cases. Helper freeQuotientPullback has real data via the unit-pinned tensorPullbackSectionAdjunction. Edge cases N=r=0, r=0, r=N, empty schemes, zero ring, non-reduced T, char 2 and universes covered. No duplicate in Mathlib (Grassmannian scheme representability is TODO there) or the project. Advisories: twistOneSection missing from the declarations list of def-pc-projective-space-twist (its module is cited); homOfGlobalSection, owned by non-stmt_dep lemma node lem-sc-module-hom-local-bijective-iso, used only in the helper body. No compile: no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

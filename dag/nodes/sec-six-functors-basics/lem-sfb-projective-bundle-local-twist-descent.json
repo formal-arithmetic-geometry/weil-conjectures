@@ -1,0 +1,170 @@
+{
+ "id": "lem-sfb-projective-bundle-local-twist-descent",
+ "kind": "statement",
+ "title": "Descent and uniqueness for local projective-bundle twists",
+ "statement": "Let S,E,r,D,p be as in [lem-trf-projective-bundle-quotient-geometry], with E finite locally free of constant rank r >= 2 [def-amb-finite-locally-free-module]. Let L be an invertible module on P(E) [def-sc-invertible-module]. Assume that every s in S has an open neighbourhood U and integer m with L|p^{-1}U isomorphic to D.line^{tensor m}|p^{-1}U. Then there are a locally constant d:S->Z and an invertible N on S such that L is isomorphic to the glued twist D.line^d tensor p^*N [def-sfb-locally-constant-line-twist; def-pc-module-pullback]. For any other such pair (d\\',N\\'), d\\'=d and N\\' is isomorphic to N. The local normal form is a hypothesis, and no tensor or base-change law is asserted.",
+ "source": {
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75, descent of the coefficient line; Stacks sheaves.tex Tags 00AL, 00AM, 04TN, coherent.tex Tag 01XS, and field uniqueness from divisors.tex Tag 0BXJ."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-locally-constant-line-twist"
+ ],
+ "proof": [
+  {
+   "text": "Choose the local normal forms from the hypothesis. Restrict two forms to the intersection of their base neighbourhoods and apply local integer twist separation at every point of the intersection. Thus the chosen local integers agree wherever both forms apply, and define a locally constant d:S->Z. This is proved directly with IsLocallyConstant.iff_exists_open; no gluing theorem is postponed.",
+   "uses": [
+    "lem-sfb-projective-bundle-integer-twist-separation",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the twist restriction identity and the chosen local forms to identify T=O(d) locally with L. Transport the given invertibility of L through these local isomorphisms, refining by unit trivializations of L. The concrete dual evaluation lineTensorInverse T then gives a two-sided tensor inverse B. Construct F=B tensor L. On each chosen base neighbourhood use the pullback tensor comparison and the local isomorphism L with T, followed by the pulled-back evaluation B tensor T isomorphic to O, to trivialize F.",
+   "uses": [
+    "lem-sfb-locally-constant-line-twist-identities",
+    "def-sfb-locally-constant-line-twist",
+    "lem-weil-pbc-module-pullback-tensor",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply relatively trivial line descent to F to obtain an invertible N and F isomorphic to p^*N. Compose the inverse evaluation and associator to give L isomorphic to T tensor F, then substitute the descended isomorphism. This constructs the required presentation.",
+   "uses": [
+    "lem-sfb-projective-bundle-relatively-trivial-line-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For another presentation choose an open making its degree constant and trivializing its coefficient line. The pullback square, tensor comparison and twist restriction identity give the corresponding integer normal form of L on this open. Intersect with the originally chosen local form and use integer twist separation to recover equality of degrees pointwise. Cancel the now common twist by the fully faithful tensor equivalence given by its explicit two-sided inverse. This gives an isomorphism between coefficient pullbacks. Apply coefficient-line reflection to obtain the required isomorphism on S.",
+   "uses": [
+    "lem-sfb-projective-bundle-integer-twist-separation",
+    "lem-sfb-projective-bundle-pullback-line-reflection",
+    "lem-sfb-locally-constant-line-twist-identities",
+    "def-sc-invertible-module",
+    "def-pc-module-pullback",
+    "lem-weil-pbc-module-pullback-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-projective-bundle-integer-twist-separation",
+  "def-pc-module-pullback",
+  "lem-sfb-locally-constant-line-twist-identities",
+  "def-sfb-locally-constant-line-twist",
+  "lem-weil-pbc-module-pullback-tensor",
+  "lem-sfb-projective-bundle-relatively-trivial-line-descent",
+  "lem-sfb-projective-bundle-pullback-line-reflection",
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/ega/EGA-II_PMIHES-8-1961.pdf",
+  "place": "Remark 4.2.7, printed p.75; original local-twist descent steps 1-4, with explicit degree gluing, local transfer of invertibility, dual evaluation and tensor cancellation, and coefficient descent/reflection separated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "invertible sheaf on a projective bundle is locally over the base an integer power of the tautological line",
+   "results": "msearch: 8 hits, all basic Proj sections/structure-sheaf declarations, including Proj.pow_apply and Proj.mul_apply; none classifies line bundles or gives relative local normal forms.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "a line bundle locally a relative integer twist on a projective bundle descends uniquely to a line bundle on the base",
+   "results": "msearch: 8 hits, including CommRing.Pic, CommRing.Pic.ext_iff, CommRing.Pic.mk_eq_one, and basic Proj.ext; none is projective-bundle line descent.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstantLineTwist|Pic.*Projective|Projective.*Pic; full DAG title search for projective Picard/invertible/local twist; blueprint_refs.py search projective bundle picard and locally constant line twist",
+   "results": "msearch Mathlib: three irrelevant projective-object/product-measure hits. Local repository: only the item defines HasPicardClassification and IsLocallyTwist; ProjectiveSpace.LineInvertibleClassification treats P1 over a field, ProjectiveSpace.PicardPn is a cohomology theorem. Full DAG title search found the item and its weaker P1 field/fibrewise statements; neither proves the new parts. Both blueprint searches gave 0 matches.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundlePicardClassification",
+  "date": "2026-10-27",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Picard-classification proof steps 5-8: glue local degrees and descend transition units, including coefficient uniqueness.",
+   "via": [
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleLocalTwistDescent",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleLocalTwistDescent.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.projective_bundle_local_twist_descent",
+  "statement": "theorem projective_bundle_local_twist_descent (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)\n    (D : TautologicalQuotient E)\n    (L : (SymmetricAlgebraSheaf.gradedAlgebraData E).relProj.Modules)\n    (hL : L.IsInvertible)\n    (hlocal : ∀ s : S, ∃ U : S.Opens, s ∈ U ∧ ∃ m : ℤ,\n      Nonempty ((tensorPullback\n        ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ U).ι).obj L ≅\n        (tensorPullback\n          ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom ⁻¹ᵁ U).ι).obj\n          (integerLinePower D.line D.invertible m))) :\n    ∃ (d : LocallyConstant S ℤ) (N : S.Modules),\n      (N.IsInvertible ∧ Nonempty (L ≅\n        locallyConstantLineTwist D.line D.invertible\n          (d.comap (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.base.hom) ⊗\n            (tensorPullback (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).obj N)) ∧\n      ∀ (d' : LocallyConstant S ℤ) (N' : S.Modules),\n        (N'.IsInvertible ∧ Nonempty (L ≅\n          locallyConstantLineTwist D.line D.invertible\n            (d'.comap (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.base.hom) ⊗\n              (tensorPullback (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom).obj N')) →\n          d' = d ∧ Nonempty (N' ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261027T094510-L-235261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261027T123425-L-2295567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

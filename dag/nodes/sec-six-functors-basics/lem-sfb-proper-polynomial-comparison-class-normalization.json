@@ -1,0 +1,335 @@
+{
+ "id": "lem-sfb-proper-polynomial-comparison-class-normalization",
+ "kind": "statement",
+ "title": "Diagonal-class normalization of the intrinsic proper polynomial comparisons",
+ "statement": "Let $S$ be an arbitrary scheme and $f:X\\to S$ a proper, flat morphism of finite presentation [def-pc-scheme], [def-weil-proper-morphism], [def-weil-flat-morphism], [def-sbc-locally-finite-presentation]. Write $K_f=f^!\\mathcal O_S$, with its adjunction trace and its canonical polynomial comparisons, for the object of [lem-sfb-proper-flat-dualizing-polynomial-model], in the quasi-coherent derived category [def-pc-derived-category], with derived pullback [def-pc-derived-pullback]. The intrinsic pair of that theorem has a specified diagonal class $\\xi_f$, so $(K_f,\\xi_f)$ is a coherent relative dualizing pair [def-trf-coherent-relative-dualizing-pair]. This class and the canonical comparisons satisfy the following normalization statements.\nFor every affine open $V\\subset S$, let $f_V:X_V=f^{-1}(V)\\to V$ and let $a_V$ be a right adjoint of $Rf_{V,*}$ [def-pc-derived-direct-image]. The unique trace-preserving identification $K_f|_{X_V}\\simeq a_V(\\mathcal O_V)$ carries $\\xi_f|_{X_V\\times_VX_V}$ to the canonical class $\\xi_{a_V}$ of [lem-sfb-proper-adjoint-diagonal-pair].\nFor every $V=\\operatorname{Spec}R\\subset S$, $U=\\operatorname{Spec}B\\subset X_V$, and surjection $P=R[t_1,\\ldots,t_n]\\twoheadrightarrow B$ [def-weil-pbc-mv-polynomial-ring], put $C_P=C_B^P(\\Omega^n_{P/R}[n])$ with its coinduction $B$-action [def-trf-derived-coinduction], [def-weil-pbc-kahler-differentials], [def-weil-pbc-exterior-algebra]. Let $Q=B\\otimes_RB$, $p_1(b)=b\\otimes1$, and let $\\xi_P:B\\to C_P\\otimes_{B,p_1}^{\\mathbf L}Q$ be the arbitrary-ring graph-evaluation class of [lem-sfb-arbitrary-polynomial-graph-class-base-change]. Under the affine derived equivalence [lem-pc-affine-qcoh-derived-equivalence], $(C_P,\\xi_P)$ realizes a coherent relative dualizing pair on $U/V$. The canonical comparison $\\alpha_P:K_f|_U\\xrightarrow{\\sim}\\widetilde C_P$ of [lem-sfb-proper-flat-dualizing-polynomial-model] satisfies\n$$(Lp_1^*\\alpha_P)(\\xi_f|_{U\\times_VU})=\\widetilde\\xi_P.$$\nIt is the unique isomorphism with this equation. Here $p_1:U\\times_VU\\to U$ on the displayed equation is the first projection, and tildes denote the affine realization; the preceding ring coprojection defines its module pullback. These assertions hold for every such chart and every proper flat finitely presented $f$ over an arbitrary base, and refer to the specified canonical comparisons, with no freedom to multiply them by chart-dependent units. No comparison between two base schemes and no identification of a proper trace-pair base-change map with a polynomial exchange is asserted.\nThe specified construction in this statement is fixed as follows. The trace on $K_f$ is identified with the proper trace pair of [lem-sfb-proper-flat-space-derived-duality], using [lem-sfb-derived-etale-zariski-equivalence]; the diagonal class is constructed from the local adjunctions and glued. On a chart put $M=R\\Gamma(U,K_f|_U)$ and let $\\gamma:B[0]\\to M\\otimes_{B,p_1}^{\\mathbf L}Q$ be that class under affine realization. Identify $\\Omega^n_{P/R}$ with $P$ by the ordered volume $dt_1\\wedge\\cdots\\wedge dt_n$. Taking $H^0$ of [lem-sfb-arbitrary-polynomial-diagonal-hom] gives a $B$-linear natural representing bijection\n$$\\psi_T:\\operatorname{Hom}_{D(Q)}(B[0],T\\otimes_{B,p_1}^{\\mathbf L}Q)\\xrightarrow{\\sim}\\operatorname{Hom}_{D(B)}(C_P,T).$$\nPut $w=\\psi_{C_P}(\\xi_P)$ and $e=\\psi_M(\\gamma)\\circ w^{-1}:C_P\\to M$. The construction takes $\\alpha_P$ to be the affine realization of $e^{-1}$. The assertions include that $w$ and $e$ are invertible and that this prescription is independent of the auxiliary representing bijection $\\psi$. This specifies the meaning of the canonical arrows, which otherwise are not determined by the polynomial-refinement and restriction rules alone.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Z (lemma-flat-proper-relative-dualizing), 0E2W (lemma-uniqueness-relative-dualizing), 0E4P (remark-relative-dualizing-complex-bis), and 0BV2 (remark-local-calculation-shriek). Agent explicit normalization of the arbitrary-base polynomial model construction; arbitrary-ring graph-class identification uses lem-sfb-arbitrary-polynomial-graph-class-base-change, beyond the literal Stacks statements."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-trf-coherent-relative-dualizing-pair",
+  "def-pc-derived-direct-image",
+  "lem-sfb-proper-adjoint-diagonal-pair",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-trf-derived-coinduction",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-exterior-algebra",
+  "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-arbitrary-polynomial-diagonal-hom"
+ ],
+ "proof": [
+  {
+   "text": "First identify the trace, without using polynomial comparisons. Let $(K^0,\\tau^0)$ be the proper space trace pair, transported to the Zariski category. On every affine base $V$, its Hom characterization identifies $K^0|_{X_V}$ with $a_V(\\mathcal O_V)$, with the adjunction trace. These are qcqs schemes since $X_V$ is proper over affine $V$. The adjoint tensor formula identifies $Lf_V^*(-)\\otimes K^0|_{X_V}$ with $a_V$, including its counit. The local adjunction criterion gives $Rf_*\\dashv (Lf^*(-)\\otimes K^0)$ on the arbitrary base $S$. The model theorem already supplies $Rf_*\\dashv f^!$. The two representing Hom bijections give the unique counit-preserving isomorphism between these right adjoints; at $\\mathcal O_S$ it gives $K^0\\simeq K_f$, preserving trace. Consequently $h_V:K_f|_{X_V}\\simeq a_V(\\mathcal O_V)$ is the trace-preserving identification, and these identifications are compatible on affine refinements of base-open overlaps. Apply the proper-adjoint diagonal theorem on $V$ and transport its class backwards by $h_V$. Write this local class as $\\zeta_V$. That theorem says both that the local pair is coherent and that trace-preserving adjoint identifications preserve its class.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-proper-flat-adjoint-tensor-formula",
+    "lem-sfb-zariski-local-duality-adjunction",
+    "lem-sfb-proper-flat-dualizing-polynomial-model",
+    "lem-sfb-proper-adjoint-diagonal-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2Z (lemma-flat-proper-relative-dualizing), 0E4P (remark-relative-dualizing-complex-bis); spaces-duality.tex Tags 0E61/0E6E; explicit trace identification before choosing classes"
+   }
+  },
+  {
+   "text": "Put $Y=X\\times_SX$, $D=\\Delta_*\\mathcal O_X[0]$ and $H=R\\mathcal Hom_Y(D,Lp_1^*K_f)$. The opens $Y_V=X_V\\times_VX_V$ cover $Y$, since every point has an image in some affine $V\\subset S$. Restriction of derived internal Hom, restriction of the first-projection pullback, and the multiplication isomorphism of each local pair give $H|_{Y_V}\\simeq D|_{Y_V}$. Hence $H$ has cohomology only in degree zero. The derived-Hom/global-sections identification, in its open-restriction-compatible form (an isomorphism of presheaves $U\\mapsto H^0(U,H)\\simeq\\operatorname{Hom}_{D(\\mathcal O_U)}(D|_U,Lp_1^*K_f|_U)$), now identifies morphisms $D\\to Lp_1^*K_f$ over $Y$ and over each $Y_V$ with sections of $\\mathcal H^0H$, compatibly with restriction: indeed a nonnegative injective resolution of the degree-zero sheaf computes $H^0R\\Gamma$ as its ordinary sections. On an overlap $V\\cap W$, cover the base intersection by affine opens; Step 1 and the base-open compatibility clause of the proper-adjoint theorem identify the restrictions of $\\zeta_V$ and $\\zeta_W$. Their sections therefore glue to a unique $\\xi_f$. The multiplication map is invertible on every $Y_V$, hence globally. Pseudo-coherence and local relative Tor amplitude hold on the source cover $X_V$ by the local pairs. Thus $(K_f,\\xi_f)$ is coherent. By construction $h_V$ carries its restriction to $\\xi_{a_V}$. No intersection of affine opens has been assumed affine, and no finite cover of $S$ has been used.",
+   "uses": [
+    "lem-sc-derived-internal-hom-restrict-open",
+    "lem-pur-rhom-global-sections",
+    "lem-sfb-proper-adjoint-diagonal-pair",
+    "def-trf-coherent-relative-dualizing-pair",
+    "lem-trf-open-ext-hypercohomology-comparison",
+    "lem-pc-affine-derived-pullback-tensor-tilde"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E2X (lemma-existence-relative-dualizing), diagonal-section gluing, and 0E4P (remark-relative-dualizing-complex-bis)"
+   }
+  },
+  {
+   "text": "Fix a chart. Apply arbitrary-base affine realization to the supplied pair of Step 2, taking both its input pairs equal to $(K_f,\\xi_f)$. It gives the flat finitely presented map $R\\to B$, an $R$-perfect complex $M$, and the actual class $\\gamma:B\\to M_1$, with multiplication $B\\xrightarrow{\\sim}R\\operatorname{Hom}_Q(B,M_1)$. Here $T_1=T\\otimes_{B,p_1}^{\\mathbf L}Q$. The arbitrary polynomial-dual properties give $R$-perfect $C_P$ and the scalar isomorphism $B\\simeq R\\operatorname{Hom}_B(C_P,C_P)$, after identifying $\\Omega^n$ with $P$ by its ordered volume. The arbitrary-ring graph-class theorem supplies the actual $\\xi_P$ and its multiplication isomorphism $B\\simeq R\\operatorname{Hom}_Q(B,(C_P)_1)$. Applying the unmarked relative-dualizing isomorphism theorem to $M,C_P$ therefore supplies some isomorphism $a:C_P\\xrightarrow{\\sim}M$. It is used only to test invertibility below; it is not taken as the canonical comparison.",
+   "uses": [
+    "lem-sfb-arbitrary-base-affine-dualizing-realization",
+    "lem-sfb-arbitrary-polynomial-dual-properties",
+    "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+    "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U (lemma-relative-dualizing-complex-algebra); dualizing.tex Tags 0E2D/0E2E; arbitrary-ring versions are the cited statements"
+   }
+  },
+  {
+   "text": "The two multiplication isomorphisms in Step 3 identify the modules $F(C_P)=\\operatorname{Hom}_{D(Q)}(B,(C_P)_1)$ and $F(M)=\\operatorname{Hom}_{D(Q)}(B,M_1)$ with $B$, sending $\\xi_P$ and $\\gamma$ respectively to their unit generators. This follows by taking $H^0$: multiplication by the class sends $b$ to precomposition of the class by multiplication by $b$. The polynomial-diagonal Hom theorem, with its first-coprojection restriction and the ordered-volume identification, gives a $B$-linear natural representing bijection $\\psi_T:F(T)\\simeq\\operatorname{Hom}_{D(B)}(C_P,T)$. The scalar isomorphism of Step 3 gives $\\operatorname{End}(C_P)=B$; hence $w=\\psi_{C_P}(\\xi_P)$ is a generator of this rank-one module, so is multiplication by a unit. Also $\\operatorname{Hom}(C_P,M)$ is free rank one with basis $a$ from Step 3. Thus $\\psi_M(\\gamma)$ is a unit times $a$, and $e=\\psi_M(\\gamma)\\circ w^{-1}$ is invertible. Only invertibility of a generator of the regular module $B$ is used: if $Bw=B$, write $bw=1$; commutativity gives $wb=1$.",
+   "uses": [
+    "lem-sfb-arbitrary-polynomial-diagonal-hom",
+    "lem-sfb-arbitrary-polynomial-dual-properties",
+    "lem-sfb-arbitrary-polynomial-graph-class-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A65 (lemma-internal-hom); elementary generator argument after the cited derived-category isomorphisms"
+   }
+  },
+  {
+   "text": "For every $u:C_P\\to T$, naturality of $\\psi$ gives the explicit equation\n$$\\psi_T((u\\otimes^{\\mathbf L}_{B,p_1}Q)\\xi_P)=u\\circ w.$$\nSince $w$ is invertible, the map $u\\mapsto(u\\otimes^{\\mathbf L}Q)\\xi_P$ is a bijection from $\\operatorname{Hom}(C_P,T)$ to $F(T)$. At $T=M$, the construction $e=\\psi_M(\\gamma)w^{-1}$ is therefore its unique inverse image of $\\gamma$. In particular\n$$(e\\otimes^{\\mathbf L}Q)\\xi_P=\\gamma,\\qquad (e^{-1}\\otimes^{\\mathbf L}Q)\\gamma=\\xi_P.$$\nThe displayed bijection is defined using only the specified graph class and tensoring; its inverse is unique. Thus replacing $\\psi$ by any other $B$-linear natural representing bijection produces exactly the same $e$. This proves independence without assuming that an unspecified natural isomorphism already has the graph normalization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Elementary naturality/Yoneda calculation with the representing bijection constructed in Step 4"
+   }
+  },
+  {
+   "text": "Realize $e^{-1}:M\\to C_P$ on $U$. This is the specified construction of $\\alpha_P$. Affine realization in Step 3 identifies $\\gamma$ with $\\xi_f|_{U\\times_VU}$; the canonical affine derived pullback/tensor comparison identifies sheafification of $e^{-1}\\otimes^{\\mathbf L}_{B,p_1}Q$ with $Lp_1^*\\alpha_P$. Applying associated sheaf to the second equation of Step 5 gives precisely\n$$(Lp_1^*\\alpha_P)(\\xi_f|_{U\\times_VU})=\\widetilde\\xi_P.$$\nMoreover $\\widetilde C_P\\simeq K_f|_U$, so it has the required finiteness properties. The multiplication maps of the two classes are conjugate under this isomorphism: transposing $\\xi_f\\circ\\mu$ and then applying $Lp_1^*\\alpha_P$ is the same as transposing $(Lp_1^*\\alpha_P)\\xi_f\\circ\\mu$, by naturality of tensor--Hom. Consequently multiplication by $\\widetilde\\xi_P$ is invertible. Thus $(\\widetilde C_P,\\widetilde\\xi_P)$ is a coherent pair on $U/V$.",
+   "uses": [
+    "lem-sfb-arbitrary-base-affine-dualizing-realization",
+    "lem-pc-affine-derived-pullback-tensor-tilde",
+    "def-trf-coherent-relative-dualizing-pair",
+    "def-pc-canonical-derived-tensor-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2U (lemma-relative-dualizing-complex-algebra), affine realization of actual classes and evaluation; 0BV2 (remark-local-calculation-shriek), polynomial model"
+   }
+  },
+  {
+   "text": "Apply supplied-pair open rigidity on $U/V$ to the pairs in Steps 2 and 6. It gives uniqueness of the isomorphism satisfying the displayed class equation; existence is already the computed $\\alpha_P$. In particular multiplying a comparison by $b\\in B^\\times$ would multiply its target class by $b$, and the generator property in Step 4 forces $b=1$. The same argument applies to every chart independently, with the fixed adjunction trace and the ordered graph volume; no chart-dependent scalar choices remain. The empty open is included by open rigidity. For $B=0$ all the relevant objects and Hom modules are zero and all maps are unique isomorphisms; the zero ring has its unique unit. For $n=0$ the volume is $1$, its shift is zero and the graph tuple is empty, as included in the graph-class theorem. All invoked algebraic theorems allow arbitrary rings. No base-change comparison between distinct base schemes is used to identify a proper polynomial arrow.",
+   "uses": [
+    "lem-sfb-relative-dualizing-pair-open-rigidity",
+    "lem-sfb-arbitrary-polynomial-graph-class-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E2W (lemma-uniqueness-relative-dualizing); source-open restriction and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-canonical-derived-tensor-hom-bijection",
+  "def-trf-coherent-relative-dualizing-pair",
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-sfb-arbitrary-base-affine-dualizing-realization",
+  "lem-sfb-arbitrary-polynomial-diagonal-hom",
+  "lem-sfb-arbitrary-polynomial-dual-properties",
+  "lem-sfb-arbitrary-polynomial-graph-class-base-change",
+  "lem-sfb-arbitrary-ring-relative-dualizing-isomorphism",
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-proper-adjoint-diagonal-pair",
+  "lem-sfb-proper-flat-adjoint-tensor-formula",
+  "lem-sfb-proper-flat-dualizing-polynomial-model",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sfb-relative-dualizing-pair-open-rigidity",
+  "lem-sfb-zariski-local-duality-adjunction",
+  "lem-trf-open-ext-hypercohomology-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E2Z/0E4P/0E2W; explicit chosen-arrow repair and rank-one representability argument over arbitrary rings"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat scheme dualizing polynomial comparison sends intrinsic adjoint diagonal class to the normalized graph Koszul class",
+   "results": "AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly_assoc; AlgebraicGeometry.diagonal_Spec_map; AlgebraicGeometry.diagonal_SpecMap; AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_comp; Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply; AlgebraicGeometry.AffineSpace.map_toSpecMvPoly_assoc; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|polynomialModel|polynomial.*dualizing|dualizing.*polynomial",
+   "results": "0 hits",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper duality canonical polynomial chart isomorphism normalized by the diagonal coinduction class",
+   "results": "Rep.indCoindNatIso; AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord; AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization; KaehlerDifferential.polynomialEquiv; AlgebraicGeometry.IsProper.instRespectsIsoScheme; LinearMap.IsPerfPair.id; OrderHom.dualIso; AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism of relative dualizing pairs polynomial derived Hom graph class and proper right adjoint trace",
+   "results": "FGModuleCat.rightRigidCategory; FGModuleCat.exactPairing; FGModuleCat.rightDual; ModuleCat.adj_homEquiv; CharacterModule.dual_rTensor_conj_homEquiv; CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction; FGModuleCat.FGModuleCatCoevaluation; CommRingCat.coyonedaAdj",
+   "date": "2026-10-24",
+   "verdict": "no match: results do not state normalized derived coinduction graph classes or coherent proper duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper flat dualizing complex canonical polynomial model comparison preserves the graph Koszul diagonal class",
+   "results": "8 hits: Algebra.SubmersivePresentation.aevalDifferentialEquiv_apply, Algebra.Generators.H1Cotangent.δ_comp_equiv, Algebra.Generators.Cotangent.exact, Algebra.PreSubmersivePresentation.cotangentComplexAux, Algebra.Presentation.differentials.comm₂₃, Algebra.Generators.CotangentSpace.exact, Algebra.Presentation.differentialsSolution_isPresentation, Algebra.smoothLocus_eq_compl_support_inter; digest ae07d6d0c98da2b0",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|polynomial.*dualizing|dualizing.*polynomial|diagonal.*RHom",
+   "results": "1 hits: Mathlib/Order/Hom/Basic.lean; digest bcfea7b482a6811b",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper flat morphism dualizing complex polynomial chart comparison preserves its canonical diagonal class",
+   "results": "8 hits: AlgebraicGeometry.IsProper, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Flat.of_stalkMap, AlgebraicGeometry.Flat, AlgebraicGeometry.IsProper.isStableUnderBaseChange; digest 66f1bfe2ca2e869d",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented ring algebra over an arbitrary ring the derived Hom from the diagonal into a relatively perfect complex identifies with derived Hom from the polynomial relative dualizing module",
+   "results": "8 hits: Algebra.Extension.tensorH1Cotangent, KaehlerDifferential.endEquivAuxEquiv, Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.Smooth.flat, Algebra.Smooth, KaehlerDifferential.End_equiv_aux, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; digest 051388dfeb73dd28",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*diagonal|diagonal.*coinduct|relative.*dualizing|dualizing.*relative|derived.*coinduct",
+   "results": "2 hits: Mathlib/RingTheory/PowerSeries/Substitution.lean, Mathlib/LinearAlgebra/Matrix/Charpoly/Univ.lean; digest 5e9b18e0f86a79dd",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a flat finitely presented algebra diagonal equals derived Hom from its polynomial dualizing module with ordered top differentials",
+   "results": "8 hits: Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType, RingHom.Flat, KaehlerDifferential.polynomialEquiv_D, Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation, RingHom.Smooth, KaehlerDifferential.polynomialEquiv_comp_D, CommRingCat.KaehlerDifferential, Algebra.Presentation.differentials; digest 10dba3898f77ce50",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"Hom\"",
+   "results": "12 hits: DerivedCategory.instEssSurjHomotopyCategoryIntUpQh, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.instAdditiveHomotopyCategoryIntUpQh, DerivedCategory.singleFunctorIsoCompQ_hom_app, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.singleFunctorsPostcompQIso_hom_hom, DerivedCategory.singleFunctorsPostcompQIso_inv_hom; digest b1c12b60144f0a9e",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial presentation duality reduction RHom over A tensor R A of A and the pullback of M is RHom over A of RHom over P of A and top differential forms shifted by dimension into M over non Noetherian rings",
+   "results": "8 hits: KaehlerDifferential.cotangentComplexBaseChange, KaehlerDifferential.tensorKaehlerEquivBase, Algebra.Presentation.differentials.comm₂₃, KaehlerDifferential.endEquivAuxEquiv, Algebra.Generators.H1Cotangent.δAux, Algebra.Extension.tensorCotangentInvFun, KaehlerDifferential.polynomialEquiv, Algebra.Generators.toKaehler_tmul_D; digest 198d0e2314d111ce",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits concern ordinary differentials, flat morphisms, or the generic derived category; none states this chosen proper polynomial diagonal-class normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-polynomial-model-base-change",
+  "date": "2026-10-24",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument. General coherent-duality input, after computing the canonical character: the smooth proper trace pairing and its compatibility with isomorphisms and scalar extension. Supporting comparison: derived relative cup and base-change mates, before taking cohomology and composing with the coherent trace. Supporting argument here: arbitrary scalar extension of the normalized polynomial model, preservation of the graph-defined diagonal class, and identification with the proper trace-pair comparison. Supporting sublemma: The intrinsic diagonal pair on affine bases and the precise class normalization of polynomial-model comparisons, previously only recorded inside the construction proof.",
+   "via": [
+    "lem-sfb-proper-flat-polynomial-model-base-change",
+    "lem-sfb-smooth-proper-coherent-trace-pairing",
+    "lem-sfb-flag-line-equivariant-serre-pairing",
+    "lem-sfb-top-bottom-cohomology-simple-image",
+    "lem-sfb-induced-composition-linkage",
+    "lem-sfb-restricted-rho-simple-dimension",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-polynomial-comparison-class-normalization",
+  "worker": "stage1",
+  "summary": "NY: seven-step proof reusing existing arbitrary-ring polynomial diagonal Hom, graph class, and dual-properties nodes. Made previously unspecified canonical comparison construction explicit; local trace normalization is proved before gluing, and the natural representing bijection is normalized by an actual scalar-generator calculation. No new nodes. No Noetherian hypothesis or polynomial proper-base-change identification is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Dimension of the simple module at the first restricted rho weight. Supporting general input: dominant induced-module composition factors, multiplicity one at the highest weight and affine linkage; used to exclude all lower factors at (p-1)rho. Repair of the strong-linkage input: Simple image of top-to-bottom line cohomology maps. Serre-duality input: canonical homogeneous line and invariant trace pairing before the elementary map-space argument. General coherent-duality input, after computing the canonical character: the smooth proper trace pairing and its compatibility with isomorphisms and scalar extension. Supporting comparison: derived relative cup and base-change mates, before taking cohomology and composing with the coherent trace. Supporting argument here: arbitrary scalar extension of the normalized polynomial model, preservation of the graph-defined diagonal class, and identification with the proper trace-pair comparison. Supporting sublemma: The intrinsic diagonal pair on affine bases and the precise class normalization of polynomial-model comparisons, previously only recorded inside the construction proof. The supporting normalization is realized by Steps 1–7. The latest blueprint direct-images proof (3) is the inherited branch; no unit step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-derived-pullback-tensor-tilde",
+    "why": "Generic affine derived tensor/sheaf comparison, needed to transport the actual ring class equation to the scheme chart. Also used in Step 2 for restriction of the first-projection pullback to the opens Y_V."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic identification of derived-category morphisms with H^0 of derived internal Hom, used for section gluing, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-restrict-open",
+    "why": "Generic open restriction of derived internal Hom, needed to turn local diagonal maps into sections of one sheaf; the six-functor unit does not supply this coherent-module comparison."
+   },
+   {
+    "node": "lem-trf-open-ext-hypercohomology-comparison",
+    "why": "Generic ringed-space comparison of H^i of derived internal Hom with derived Hom groups, compatible with open restriction; needed to glue the local diagonal maps as sections in Step 2. Not a trace-formula or Poincare-duality step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-derived-pullback-tensor-tilde",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-derived-internal-hom-restrict-open",
+  "lem-trf-open-ext-hypercohomology-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-844a76aca",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-844a76aca (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, every cited statement, model theorem lem-sfb-proper-flat-dualizing-polynomial-model (proof 1-8), citer lem-sfb-proper-flat-polynomial-model-base-change, and Stacks 0E2Z/0E2W/0E4P/0BV2. No new nodes; no SGA; no repair note. STATEMENT-DISPUTED paragraph accepted. The model's statement fixes chart comparisons only up to u in Gamma(X,O)^x (the -1 counterexample is correct). The added convention alpha_P=(e^{-1})~, e=psi_M(gamma)w^{-1}, is by Steps 5/7 the unique class-preserving iso, which is the arrow model step 6 constructs, and xi_f matches model steps 1-3. Nothing is weakened (class equation, uniqueness, every chart, arbitrary base kept) and the citer's use still holds. Step checks: Step 1, the local adjunction criterion needs quasi-compact separated (proper gives both), the two right adjoints give a trace-preserving K^0=K_f, and the diagonal pair is taken on qcqs V. Step 2, the Y_V cover Y and H is degree 0. Steps 3-4, End(C_P)=B and Hom(C_P,M)=B a, so w and e are generators and units. Step 5, the Yoneda identity psi_T(F(u)xi_P)=u w gives psi-independence. Steps 6-7 sheafify the equation and apply open rigidity. Edge cases B=0, n=0, identity over Q and non-Noetherian R are OK. FIX (Step 2 only): gluing zeta_V needs the Hom<->H^0 identification to commute with open restriction, which lem-pur-rhom-global-sections does not state. I added lem-trf-open-ext-hypercohomology-comparison (generic ringed-space Ext presheaf, declared tool_use) and lem-pc-affine-derived-pullback-tensor-tilde(1), and updated proof_deps. No cycle. Batch-5 findings: every flagged path ends at a def-trf definition (algebraic-space, space-QCoh, derived-coinduction, coherent pair, affine-diagonal data, schematically-dense-open) or at the generic lem-trf-open-ext-hypercohomology-comparison. None is part of the trace formula or Poincare duality, and all were already in the base closure through the model stmt_dep.; 1 file(s) fixed by the reviewer"
+ }
+}

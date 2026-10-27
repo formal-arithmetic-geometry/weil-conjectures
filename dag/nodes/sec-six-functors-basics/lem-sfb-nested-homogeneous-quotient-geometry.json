@@ -1,0 +1,349 @@
+{
+ "id": "lem-sfb-nested-homogeneous-quotient-geometry",
+ "kind": "statement",
+ "title": "Nested homogeneous quotients, translated fibres and equal-dimension finiteness",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and let $H\\subseteq J\\subseteq G$ be closed subgroup schemes [def-sc-group-scheme-subgroup], with no smoothness or connectedness assumption on $H$ or $J$. Quotients mean the separated finite-type schemes representing the fppf coset sheaves of [lem-sfb-algebraic-group-homogeneous-quotient]. There is a canonical faithfully flat morphism of finite presentation\n$$\\pi:G/H\\longrightarrow G/J,\\qquad gH\\longmapsto gJ.$$\nFor the quotient map $q_J:G\\to G/J$ there is a canonical isomorphism over $G$\n$$G\\times_k(J/H)\\xrightarrow{\\sim}G\\times_{G/J}(G/H),\\qquad(g,jH)\\longmapsto(g,gjH).$$\nThus the fibre over $q_J(g)$, for $g\\in G(k)$, is isomorphic to $J/H$ by $jH\\mapsto gjH$. If $\\dim H=\\dim J$, then $\\pi$ is finite. Dimensions mean topological Krull dimension [def-kun-topological-krull-dimension]. In particular, for an arbitrary closed subgroup $J\\subseteq G$, let $J^0$ denote the open and closed identity component, with its open-subscheme structure, and let $H=(J^0)_{\\mathrm{red}}$ be its reduction (quotienting the structure sheaf by the ideal of nilpotent sections) [lem-sfb-locally-algebraic-group-identity-component, def-weil-pbc-scheme-reduction]. Then $H$ is smooth and connected, $\\dim H=\\dim J$, and $G/H\\to G/J$ is finite and faithfully flat. Here finite and morphism properties have the meanings of [def-weil-finite-integral-morphism, def-pc-morphism-conventions], and the displayed products have the meaning of [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 7.15 and its Cartesian square, printed pp.142--143; Remark 7.16(a),(b), printed p.143; Proposition 5.23, printed p.104. The map direction is the one in the Cartesian square and Remark 7.16(b), correcting the reversed arrow in the second sentence of Proposition 7.15."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-finite-integral-morphism",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply the homogeneous-quotient theorem to $(G,H)$, $(G,J)$ and $(J,H)$, obtaining $X=G/H$, $Y=G/J$, $Z=J/H$ and quotient maps $q_H,q_J,r$. The closed subgroups are separated and finite type: on a finite affine cover of the affine finite-type group $G$, their rings are quotients of the chart rings. The theorem explicitly allows nonsmooth and disconnected subgroups. Each quotient map is flat, surjective and of finite presentation, hence is a singleton fpqc cover by the covering definition. Also $Z\\to\\operatorname{Spec}k$ is flat, since every vector space has a basis and tensoring with it is a direct sum of identity functors. It is locally of finite presentation by the locally-Noetherian-base lemma: the only ideals of $k$ are $(0)$ and $k$, so $\\operatorname{Spec}k$ is Noetherian. It is quasi-compact and quasi-separated, being separated and finite type.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "def-weil-pbc-fpqc-covering",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.15 setup; Theorem 5.28; finite-presentation input Stacks Tag 01TX (lemma-noetherian-finite-type-finite-presentation)"
+   }
+  },
+  {
+   "text": "On $G\\times_XG$ the universal pair $(a,b)$ satisfies $a^{-1}b\\in H$, by the coset-fibre clause of the quotient theorem. Since $H\\subseteq J$, the same clause for $q_J$ gives $q_J(a)=q_J(b)$. The representable fpqc descent theorem, applied to the singleton $q_H:G\\to X$, therefore gives a unique $\\pi:X\\to Y$ with $\\pi q_H=q_J$. This constructs the canonical map, with the stipulated formula on cosets, without assuming that every section of $X$ lifts globally to $G$.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.21 and Proposition 7.15: descend q_J along q_H; representable descent Stacks Tag 023Q (lemma-fpqc-universal-effective-epimorphisms)"
+   }
+  },
+  {
+   "text": "The map $(g,j)\\mapsto(g,q_H(gj))$ from $G\\times_kJ$ lands in $G\\times_YX$, since $q_J(gj)=q_J(g)$. Along the fpqc cover $1_G\\times r$ of $G\\times_kZ$, two representatives of the second coordinate differ by right multiplication by $h\\in H$, and $q_H(gjh)=q_H(gj)$. Representable descent gives $\\Phi:G\\times_kZ\\to G\\times_YX$. For its inverse, take a $T$-section $(g,x)$ of the latter scheme and pull back $q_H$ along $x$ to an fpqc cover $T'\\to T$. There $x=q_H(a)$; equality $q_J(a)=q_J(g)$ implies $j=g^{-1}a\\in J(T')$ by the coset-fibre clause for $J$. On $T'\\times_TT'$, two lifts satisfy $a_2=a_1h$ for some $h\\in H$, so $r(g^{-1}a_2)=r(g^{-1}a_1)$. Representable descent glues this section to $z:T\\to Z$. It is independent of the lift and of further covers by the same uniqueness. Thus $(g,x)\\mapsto(g,z)$ is natural in $T$, and its composites with $\\Phi$ are identities: on local representatives they are $g^{-1}(gj)=j$ and $g(g^{-1}a)=a$. Taking universal sections gives inverse scheme morphisms. This proves the displayed isomorphism over $G$, also on nonreduced test schemes.",
+   "uses": [
+    "lem-sfb-algebraic-group-homogeneous-quotient",
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.15 Cartesian square: explicit construction and inverse after fpqc local lifts; Stacks Tag 023Q for gluing"
+   }
+  },
+  {
+   "text": "By Step 3, the pullback of $\\pi$ along $q_J$ is the projection $G\\times_kZ\\to G$. It is flat and locally of finite presentation by base change of the structure morphism of $Z$, using Step 1. Apply fpqc descent of flatness and of local finite presentation to the singleton cover $q_J$; hence $\\pi$ has both properties. It is surjective because $q_J=\\pi q_H$ is surjective: every point of $Y$ is the image of some point of $G$, hence of its image in $X$. Finally $X$ is quasi-compact and quasi-separated and $Y$ is quasi-separated, since both are separated finite-type $k$-schemes. The qcqs permanence statement shows that $\\pi$ is quasi-compact and quasi-separated. Together with local finite presentation, this proves finite presentation.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 7.15 and A.80; Stacks Tags 02L2 (lemma-descending-property-flat), 02KY (lemma-descending-property-locally-finite-presentation)"
+   }
+  },
+  {
+   "text": "For $g\\in G(k)$ pull the isomorphism $\\Phi$ back along $g:\\operatorname{Spec}k\\to G$. Its left side becomes $Z$ and its right side is $X\\times_{Y,q_J(g)}\\operatorname{Spec}k$, by the defining universal property of fibre products. The resulting map is exactly $jH\\mapsto gjH$, with inverse obtained by multiplication by $g^{-1}$ as in Step 3. This identifies the whole fibre scheme, not just its set of $k$-points.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 7.16(a), translated by g; base change of the Proposition 7.15 Cartesian square"
+   }
+  },
+  {
+   "text": "Assume $\\dim H=\\dim J$. Apply the homogeneous-quotient dimension formula with $A=J$ and $L=H$: $\\dim J=\\dim H+\\dim Z$, with finite nonnegative integer dimensions, so $\\dim Z=0$. By the local-ring description of scheme dimension, every local ring of $Z$ has Krull dimension at most $0$, so $Z$ has dimension at most $0$ in the local-ring sense of the next lemma. The zero-dimensional finite-type scheme lemma makes $Z\\to\\operatorname{Spec}k$ finite. Its base change $G\\times_kZ\\to G$ is finite by finite-morphism permanence. Step 3 identifies this map with the pullback of $\\pi$ along the fpqc singleton $q_J$. Fpqc descent of finite morphisms now makes $\\pi$ finite. This argument retains infinitesimal structure in $H$, $J$ and $Z$; it uses no smoothness of them.",
+   "uses": [
+    "lem-sfb-homogeneous-quotient-krull-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-algebraic-dim-zero-affine-finite",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-fpqc-descend-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 5.23 and Remark 7.16(b); Stacks Tag 06LH (lemma-algebraic-scheme-dim-0), Tag 02LA (lemma-descending-property-finite); Stacks Tag 04MU (properties-lemma-dimension) for the two dimension notions"
+   }
+  },
+  {
+   "text": "For an arbitrary $J$, apply the identity-component statement to $J$: its clopen subgroup $J^0$ has reduction $H$ which is a smooth connected finite-type subgroup and has the same underlying space as $J^0$. The inclusion $H\\hookrightarrow J$ is closed: on the clopen decomposition $J=J^0\\amalg(J\\setminus J^0)$ its defining ideal is the nilradical on the first piece and the unit ideal on the second piece. At the identity the local rings of $J$ and its open subscheme $J^0$ agree. The group-identity local-dimension lemma, applied separately to $J$ and $J^0$, therefore gives $\\dim J=\\dim\\mathcal O_{J,e}=\\dim\\mathcal O_{J^0,e}=\\dim J^0$. The equality of underlying spaces gives $\\dim H=\\dim J^0$. Thus $\\dim H=\\dim J$, and Steps 4 and 6 give the required finite faithfully flat map $G/H\\to G/J$.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-ag-group-identity-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 0B7R (proposition-connected-component), 047R (lemma-reduced-subgroup-scheme-perfect), 047P/047N for smoothness; local dimension input from lem-ag-group-identity-local-dimension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-fpqc-covering",
+  "lem-ag-group-identity-local-dimension",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-sfb-algebraic-group-homogeneous-quotient",
+  "lem-sfb-homogeneous-quotient-krull-dimension",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 7.15 and Remark 7.16(a),(b), printed pp.142–143; Proposition 5.23, printed p.104. Expanded local-lift/descent argument and identity-component application use the cited Stacks and DAG statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Nested algebraic group homogeneous quotients G/H to G/J have fibres J/H and are finite if H and J have equal dimension",
+   "results": "{\"t\": \"2026-10-23T21:05:47Z\", \"tool\": \"leanfinder\", \"query\": \"Nested algebraic group homogeneous quotients G/H to G/J have fibres J/H and are finite if H and J have equal dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.FintypeCat.quotientToQuotientOfLE\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"Subgroup.finite_quotient_of_finite_quotient_of_index_ne_zero\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Subgroup.finite_quotient_of_pretransitive_of_index_ne_zero\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"Subgroup.quotient_finite_of_isOpen'\"], \"digest\": \"ae7c4079479666d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/topological group quotients or generic finite morphisms, not the stated maps of homogeneous quotient schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected component subgroup has finite component group and the induced quotient G over the identity component maps finitely onto G over a closed subgroup",
+   "results": "{\"t\": \"2026-10-23T21:00:48Z\", \"tool\": \"leansearch\", \"query\": \"A connected component subgroup has finite component group and the induced quotient G over the identity component maps finitely onto G over a closed subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.connectedComponentOfOne\", \"ClosedSubgroup.ctorIdx\", \"ClosedSubgroup.recOn\", \"AddSubgroup.connectedComponentOfZero\", \"Subgroup.pathComponentOne\", \"QuotientAddGroup.isClosedMap_coe\", \"Subgroup.fintypeQuotientOfFiniteIndex\", \"QuotientGroup.isClosedMap_coe\"], \"digest\": \"44fb6f1f09ba541d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/topological group quotients or generic finite morphisms, not the stated maps of homogeneous quotient schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme",
+   "results": "{\"t\": \"2026-10-23T21:05:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsFinite, AlgebraicGeometry.Scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instContainsIdentitiesScheme\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"d8d1e1ba79c5fa21\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/topological group quotients or generic finite morphisms, not the stated maps of homogeneous quotient schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*quotient|quotient.*finite|component.*group",
+   "results": "{\"t\": \"2026-10-23T21:00:48Z\", \"tool\": \"grep\", \"query\": \"finite.*quotient|quotient.*finite|component.*group\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/topological group quotients or generic finite morphisms, not the stated maps of homogeneous quotient schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient of homogeneous spaces by a finite component group of an algebraic subgroup",
+   "results": "{\"t\": \"2026-10-23T21:00:49Z\", \"tool\": \"leanfinder\", \"query\": \"Finite quotient of homogeneous spaces by a finite component group of an algebraic subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"instFiniteCuspOrbitsOfIsArithmetic\", \"Subgroup.finite_quotient_of_pretransitive_of_index_ne_zero\", \"Subgroup.finite_quotient_of_finite_quotient_of_index_ne_zero\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AddAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"AddAction.finite_quotient_of_pretransitive_of_finite_quotient\"], \"digest\": \"c8ff6056f22f9deb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract/topological group quotients or generic finite morphisms, not the stated maps of homogeneous quotient schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*quotient|quotient.*homogeneous|torsor",
+   "results": "{\"t\": \"2026-10-23T21:43:35Z\", \"tool\": \"grep\", \"query\": \"homogeneous.*quotient|quotient.*homogeneous|torsor\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean\"], \"digest\": \"7c16acc2aceca870\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract topological group quotients, finite-morphism definitions, ring faithfully flatness, or Spec of an ideal quotient. None gives nested homogeneous quotient scheme geometry. Read AffineScheme.lean:1222–1233, Morphisms/Finite.lean:100, Properties.lean:376–399 and Group/Affine.lean:1–90."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism between nested homogeneous quotient schemes is finite faithfully flat if the subgroups have equal Krull dimension",
+   "results": "{\"t\": \"2026-10-23T21:43:35Z\", \"tool\": \"leansearch\", \"query\": \"A morphism between nested homogeneous quotient schemes is finite faithfully flat if the subgroups have equal Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FaithfullyFlat\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.Flat.mk\", \"AlgebraicGeometry.isFinite_iff\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"AlgebraicGeometry.Flat\"], \"digest\": \"2a08e1fa564141d9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract topological group quotients, finite-morphism definitions, ring faithfully flatness, or Spec of an ideal quotient. None gives nested homogeneous quotient scheme geometry. Read AffineScheme.lean:1222–1233, Morphisms/Finite.lean:100, Properties.lean:376–399 and Group/Affine.lean:1–90."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-23T21:43:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"quotient\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\"], \"digest\": \"6d7c2c7ac7bded1f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract topological group quotients, finite-morphism definitions, ring faithfully flatness, or Spec of an ideal quotient. None gives nested homogeneous quotient scheme geometry. Read AffineScheme.lean:1222–1233, Morphisms/Finite.lean:100, Properties.lean:376–399 and Group/Affine.lean:1–90."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For closed subgroup schemes H contained in J contained in G, the morphism G/H to G/J becomes the projection G times J/H over the faithfully flat cover G to G/J and is finite when dim H equals dim J",
+   "results": "{\"t\": \"2026-10-23T21:43:37Z\", \"tool\": \"leanfinder\", \"query\": \"For closed subgroup schemes H contained in J contained in G, the morphism G/H to G/J becomes the projection G times J/H over the faithfully flat cover G to G/J and is finite when dim H equals dim J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor\", \"Subgroup.quotient_finite_of_isOpen'\", \"Subgroup.quotient_finite_of_isOpen\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"ProfiniteGrp.toFiniteQuotientFunctor\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\"], \"digest\": \"c1d1b5bb69d84e5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits are abstract topological group quotients, finite-morphism definitions, ring faithfully flatness, or Spec of an ideal quotient. None gives nested homogeneous quotient scheme geometry. Read AffineScheme.lean:1222–1233, Morphisms/Finite.lean:100, Properties.lean:376–399 and Group/Affine.lean:1–90."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-solvable-homogeneous-proper-subschemes",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Conjugate an arbitrary Borel into the maximum-dimensional one by its action on the already proper quotient. Supporting geometric input: Milne Theorem 17.1, used after the minimum-dimensional orbit has been proved closed. Supporting quotient geometry in Milne Theorem 17.1: the finite reduction of the subgroup and the fibres of G/H -> G/N (Proposition 7.15 and Remark 7.16).",
+   "via": [
+    "lem-sfb-solvable-homogeneous-proper-subschemes",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nested-homogeneous-quotient-geometry",
+  "worker": "stage1",
+  "summary": "Constructed the quotient map and the Cartesian product trivialization by explicit fpqc descent, including its inverse on arbitrary nonreduced tests; descended flatness and local finite presentation; reduced finiteness to one new general homogeneous-quotient dimension formula and existing zero-dimensional finiteness/descent nodes. Checked the reduction of the identity subgroup and its dimension using identity stalks. Preserved the corrected source arrow and every statement clause.",
+  "blueprint": "Supporting quotient geometry in the inherited det-thm-sf-ctf-stability-direct-images (3) alteration chain, specifically the finite subgroup reduction and translated fibres used in Milne Theorem 17.1; realizes Milne 7.15, 7.16(a),(b). The ancestor command returns None, matching the inherited blueprint.from.node=null. Current latest direct-images proof inspected; no unit/chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Glue maps to the existing quotient schemes on fpqc covers; the unit contains no scheme-valued descent replacement."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Pull back the existing quotient covers to lift test-scheme sections; generic covering calculus."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Local finite presentation of the finite-type scheme J/H over the field; generic finiteness-property tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flatness of the product projection after base change from the field."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Base change of local finite presentation and qcqs bounds for the quotient morphism."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Descend flatness from the explicitly computed product projection."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Descend local finite presentation from the same product projection."
+   },
+   {
+    "node": "lem-pc-algebraic-dim-zero-affine-finite",
+    "why": "Convert the zero-dimensional finite-type fibre scheme to a finite field scheme."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Base-change finiteness of J/H to the product projection."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Descend finiteness along q_J; generic morphism-property descent."
+   },
+   {
+    "node": "lem-ag-group-identity-local-dimension",
+    "why": "Compare dimensions of J and its open identity subgroup using their identical identity stalks; no group dimension lemma in the unit supplies this."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Pass from the topological dimension of J/H to the local-ring dimension in the hypothesis of the zero-dimensional finiteness lemma; generic scheme-dimension fact (Stacks 04MU)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-pc-algebraic-dim-zero-affine-finite",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-ag-group-identity-local-dimension",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-b3d502891",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-b3d502891 (reviewer sub-agent of L); spot-checked: Read Milne iAG Prop. 5.23 (p.104), Prop. 7.15 with its Cartesian square, and Rem. 7.16(a),(b) (pp.142-143), plus every cited node statement; Stacks tags 01TX/023Q/02L2/02KY/02LA/06LH/04MU checked. The item statement is identical to live and the item is still unsplit there; no repair note, so this is a first split. Steps 1-5 and 7 are correct. The quotient node applies to (G,H), (G,J) and (J,H). pi comes by representable descent along q_H. The inverse of Phi is built on arbitrary T through the base change T x_X G. Flatness, lfp, surjectivity and qcqs descend along q_J. Step 7 uses the identity-component node and identity local dimension, applied to J and to J^0. One gap, fixed: step 6 got dim Z=0 as a topological dimension and fed it to lem-pc-algebraic-dim-zero-affine-finite, whose hypothesis uses def-pc-dimension (supremum of local-ring dimensions). The fix cites lem-pc-scheme-dimension-local-rings (Stacks 04MU) in step 6, proof_deps and tool_uses. New node lem-sfb-homogeneous-quotient-krull-dimension is exactly Milne 5.23 and is true. Tested on G_a/alpha_p, E/E[n], finite nonreduced groups, L=A and L=1. Not a duplicate: DAG nodes give only fibre-dimension inequalities or the smooth-connected strict inequality. It is strictly smaller than the item. Batch-5 flag: the homogeneous-quotient node reaches only def-trf-scheme-algebraic-space, a general definition and not a trace-formula or Poincare step, so accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.NestedHomogeneousQuotientGeometry",
+  "declaration": "AlgebraicGeometry.nested_homogeneousQuotient_geometry",
+  "declarations": [
+   "AlgebraicGeometry.nested_homogeneousQuotient_geometry",
+   "AlgebraicGeometry.reduced_identityComponent_homogeneousQuotient_finite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/NestedHomogeneousQuotientGeometry.lean",
+  "statement": "theorem nested_homogeneousQuotient_geometry (k : Type u) [Field k] [IsAlgClosed k] (G H J : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [GrpObj J] [IsAffine G.left] [Smooth G.hom] [ConnectedSpace G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : H ⟶ J) (j : J ⟶ G) [IsClosedSubgroupScheme i] [IsClosedSubgroupScheme j] (X Y Z : Over (Spec (.of k))) (qH : G ⟶ X) (qJ : G ⟶ Y) (r : J ⟶ Z) (hX : IsSeparated X.hom ∧ LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom ∧ Flat qH.left ∧ Surjective qH.left ∧ LocallyOfFinitePresentation qH.left ∧ QuasiCompact qH.left ∧ QuasiSeparated qH.left ∧ (∀ (T : Over (Spec (.of k))) (a b : T ⟶ G), a ≫ qH = b ≫ qH ↔ a⁻¹ * b ∈ Set.range (fun l : T ⟶ H ↦ l ≫ (i ≫ j))) ∧ (∀ (T : Over (Spec (.of k))) (x : T ⟶ X), ∃ (I : Type u) (T' : I → Over (Spec (.of k))) (f : ∀ t, T' t ⟶ T), Presieve.ofArrows (fun t ↦ (T' t).left) (fun t ↦ (f t).left) ∈ Scheme.fpqcPrecoverage T.left ∧ ∀ t, ∃ a : T' t ⟶ G, a ≫ qH = f t ≫ x)) (hY : IsSeparated Y.hom ∧ LocallyOfFiniteType Y.hom ∧ QuasiCompact Y.hom ∧ Flat qJ.left ∧ Surjective qJ.left ∧ LocallyOfFinitePresentation qJ.left ∧ QuasiCompact qJ.left ∧ QuasiSeparated qJ.left ∧ (∀ (T : Over (Spec (.of k))) (a b : T ⟶ G), a ≫ qJ = b ≫ qJ ↔ a⁻¹ * b ∈ Set.range (fun l : T ⟶ J ↦ l ≫ j)) ∧ (∀ (T : Over (Spec (.of k))) (x : T ⟶ Y), ∃ (I : Type u) (T' : I → Over (Spec (.of k))) (f : ∀ t, T' t ⟶ T), Presieve.ofArrows (fun t ↦ (T' t).left) (fun t ↦ (f t).left) ∈ Scheme.fpqcPrecoverage T.left ∧ ∀ t, ∃ a : T' t ⟶ G, a ≫ qJ = f t ≫ x)) (hZ : IsSeparated Z.hom ∧ LocallyOfFiniteType Z.hom ∧ QuasiCompact Z.hom ∧ Flat r.left ∧ Surjective r.left ∧ LocallyOfFinitePresentation r.left ∧ QuasiCompact r.left ∧ QuasiSeparated r.left ∧ (∀ (T : Over (Spec (.of k))) (a b : T ⟶ J), a ≫ r = b ≫ r ↔ a⁻¹ * b ∈ Set.range (fun l : T ⟶ H ↦ l ≫ i)) ∧ (∀ (T : Over (Spec (.of k))) (x : T ⟶ Z), ∃ (I : Type u) (T' : I → Over (Spec (.of k))) (f : ∀ t, T' t ⟶ T), Presieve.ofArrows (fun t ↦ (T' t).left) (fun t ↦ (f t).left) ∈ Scheme.fpqcPrecoverage T.left ∧ ∀ t, ∃ a : T' t ⟶ J, a ≫ r = f t ≫ x)) : ∃ π : X ⟶ Y, qH ≫ π = qJ ∧ (∀ π' : X ⟶ Y, qH ≫ π' = qJ → π' = π) ∧ Flat π.left ∧ Surjective π.left ∧ LocallyOfFinitePresentation π.left ∧ QuasiCompact π.left ∧ QuasiSeparated π.left ∧ (∃ e : G ⊗ Z ≅ pullback qJ π, e.hom ≫ pullback.fst qJ π = fst G Z ∧ ∀ (T : Over (Spec (.of k))) (g : T ⟶ G) (a : T ⟶ J), lift g (a ≫ r) ≫ e.hom ≫ pullback.snd qJ π = (g * (a ≫ j)) ≫ qH) ∧ (∀ g : 𝟙_ (Over (Spec (.of k))) ⟶ G, ∃ e : Z ≅ pullback π (g ≫ qJ), r ≫ e.hom ≫ pullback.fst π (g ≫ qJ) = ((toUnit J ≫ g) * j) ≫ qH) ∧ (topologicalKrullDim H.left = topologicalKrullDim J.left → IsFinite π.left)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The main declaration states the nested-quotient geometry for arbitrary presentations with exactly the properties of exists_homogeneousQuotient. The second declaration states the final reduced-identity-component application using the actual nilradical subscheme of the clopen neutral component. No chosen quotient or arbitrary comparison map is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c37561532",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Snapshot vs live: only the item's new lean record (no rebind, no dependency record or statement change); lean.statement matches the file verbatim; all imports exist. Main theorem: the hypotheses (alg. closed k; smooth connected affine finite-type G; closed subgroups i:H→J, j:J→G with no smoothness on H, J) match the node. The presentations hX/hY/hZ are exactly the conjunctions exists_homogeneousQuotient returns for (G,H via i≫j), (G,J), (J,H). π is unique with qH≫π=qJ, Flat/Surjective/LFP/QC/QS. e : G⊗Z ≅ pullback qJ π is over G with (g,aH)↦(g,g·a H) on all test schemes; the fibre iso Z ≅ pullback π (g≫qJ) for k-points g has jH↦gjH; topologicalKrullDim H = J → IsFinite π. Second theorem: U is the clopen identity component (same form as the identity-component dep); H = nilradical subscheme of U, smooth, connected, same dimension as J; the existential GrpObj gH is unique since the inclusion is mono (@IsClosedSubgroupScheme argument order checked against Defs.lean); existential X presentation with unique π, IsFinite∧Flat∧Surjective. Edge cases (H=J, trivial H with J=G, nonreduced finite subgroups, disconnected J, universes) fine. No definitions, sorry-only proofs, docstrings have source, blueprint tag and proof steps, worker report and second-reading sections present. No compile run (no file changed). No findings."
+ }
+}

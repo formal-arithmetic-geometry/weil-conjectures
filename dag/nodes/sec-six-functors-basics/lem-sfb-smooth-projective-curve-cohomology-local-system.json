@@ -1,0 +1,314 @@
+{
+ "id": "lem-sfb-smooth-projective-curve-cohomology-local-system",
+ "kind": "statement",
+ "title": "First cohomology local system of a smooth projective curve family",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $g\\geq0$ an integer, and $\\ell$ a prime invertible in every local ring of $T$. Put $A=\\mathbf Z/\\ell\\mathbf Z$. Let $f:X\\to T$ be a smooth morphism [def-sbc-smooth-morphisms], projective in the projective-bundle sense [def-trf-projective-bundle-morphism]. Suppose every geometric fibre [def-weil-geometric-fibre] is a geometrically connected curve of genus $g$: explicitly, for every algebraically closed field $\\Omega$ and geometric point $\\bar t:\\operatorname{Spec}\\Omega\\to T$ [def-weil-geometric-point, def-weil-field, def-weil-algebraic-closure], $X_{\\bar t}$ is a connected smooth projective curve of dimension one with $\\dim_\\Omega H^1(X_{\\bar t},\\mathcal O_{X_{\\bar t}})=g$ [def-sc-genus]. On the small etale site [def-weil-pbc-etale-site], set $H=R^1f_*\\underline A_X$ [def-weil-pbc-direct-image, def-weil-pbc-constant-sheaf], as a sheaf of $\\underline A_T$-modules [def-weil-sheaf-of-modules-category]. Then $H$ is etale locally isomorphic to $\\underline{A^{2g}}_T$. For every morphism $v:T'\\to T$, with $X'=X\\times_TT'$ and $f':X'\\to T'$ [def-pc-fibre-product], the canonical degree-one proper-base-change map\n$$\\mathrm{BC}^1_v:v^{-1}H\\xrightarrow{\\sim}R^1f'_*\\underline A_{X'}$$\nis an isomorphism [def-weil-pbc-inverse-image, def-weil-pbc-derived-exchange]. In particular $H_{\\bar t}\\cong H^1((X_{\\bar t})_{\\mathrm{et}},\\underline A)$ has dimension $2g$ over $A$, with the stalk identification induced by this base-change map [def-weil-pbc-etale-cohomology, def-weil-pbc-geometric-stalks]. No Noetherian hypothesis or choice of a root of unity on $T$ is required; $g=0$, $\\ell=2$, disconnected $T$ and empty $T$ are included.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GLI, proposition-loc-cst-torsion; etale-cohomology.tex Tag 095T, theorem-proper-base-change, and Tag 03RQ, lemma-cohomology-smooth-projective-curve. Returned proof Step 1, including projective-bundle properness and the fibrewise primitive-root choice. Its full argument and existing inputs are preserved in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-geometric-fibre",
+  "def-weil-geometric-point",
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-genus",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-trf-projective-bundle-proper], the specified projective-bundle convention makes $f$ proper, without a Noetherian assumption. The constant coefficient sheaf $\\underline A_X$ is already locally constant with one-dimensional fibre over the field $A$. Apply [lem-sfb-smooth-proper-finite-cohomology-local-system] with $S=T$, $F=\\underline A_X$ and $q=1$: $f$ is smooth and proper and $\\ell$ is invertible on $T$. Thus $H$ is etale locally constant with finite-dimensional $A$-vector-space local models.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "lem-sfb-smooth-proper-finite-cohomology-local-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GLI, proposition-loc-cst-torsion; properness: morphisms.tex Tag 01WC, lemma-locally-projective-proper"
+   }
+  },
+  {
+   "text": "For arbitrary $v:T\\!\\prime\\to T$, apply [det-properbasechange-modules] with $\\Lambda=A$ and $K=\\underline A_X[0]$. Its underlying cohomology is killed by $\\ell$, hence torsion. It gives an isomorphism for the specified derived exchange, not merely an unspecified comparison. By [lem-pe-constant-left-module-inverse-image], inverse image on constant-coefficient modules is exact, and by [lem-kun-pullback-constant] the pulled-back coefficient sheaf is canonically $\\underline A_{X\\!\\prime}$. Taking degree-one cohomology therefore gives exactly the asserted $\\mathrm{BC}^1_v$ isomorphism.",
+   "uses": [
+    "det-properbasechange-modules",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-kun-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095T, theorem-proper-base-change; the module exchange comparison is det-properbasechange-modules"
+   }
+  },
+  {
+   "text": "In Step 2 take $v=\\bar t:P=\\operatorname{Spec}\\Omega\\to T$. By [lem-weil-pbc-geometric-point-pullback-stalk], global sections on $P$ are exact and $\\Gamma(P,\\bar t^{-1}H)=H_{\\bar t}$. To identify the other side, compute $Rf_{\\bar t*}\\underline A$ with an injective resolution $I^\\bullet$ as in [def-weil-pbc-direct-image]. Exactness of $\\Gamma(P,-)$ gives $\\Gamma(P,\\mathcal H^1(f_{\\bar t*}I^\\bullet))=H^1(\\Gamma(P,f_{\\bar t*}I^\\bullet))=H^1(\\Gamma(X_{\\bar t},I^\\bullet))$. This last group is $H^1((X_{\\bar t})_{\\mathrm{et}},\\underline A)$ by [def-weil-pbc-etale-cohomology]. The identifications are $A$-linear, since all maps commute with scalar endomorphisms. This constructs the required stalk identification from the same base-change map.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04JN, remark-stalk-pullback, and 04JQ, lemma-equivalence-abelian-sheaves-point; degree one of Tag 095T"
+   }
+  },
+  {
+   "text": "The hypothesis says that $X_{\\bar t}$ is a connected smooth projective curve over the algebraically closed field $\\Omega$, with genus $g$. It is proper by base change of the proper $f$, using [lem-pc-proper-base-change]. The image of $\\ell$ in $\\Omega$ is a unit, so $\\ell\\ne\\operatorname{char}\\Omega$. Choose a primitive $\\ell$-th root in this field using [lem-sc-primitive-root] and apply [thm-sc-proper-cohomology] with $n=\\ell$. It gives $H^1((X_{\\bar t})_{\\mathrm{et}},\\underline A)\\cong A^{2g}$. Even if this isomorphism is initially read as additive, it is $A$-linear: every scalar is represented by an integer and additive homomorphisms commute with integer multiplication. Together with Step 3 this gives $\\dim_A H_{\\bar t}=2g$. No root on the base $T$ has been chosen.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sc-primitive-root",
+    "thm-sc-proper-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RQ, lemma-cohomology-smooth-projective-curve, degree one"
+   }
+  },
+  {
+   "text": "Choose a trivializing etale cover from Step 1, with $H|_U\\cong\\underline V_U$. Discard empty members. On a nonempty member choose a geometric point $\\bar u$ and let $\\bar t$ be its image on $T$. By [lem-weil-pbc-inverse-image-stalk-germ], the stalk of $H|_U$ at $\\bar u$ is $H_{\\bar t}$; by [lem-weil-pbc-constant-sheaf-geometric-stalk], it is also $V$. Step 4 identifies this finite-dimensional $A$-vector space with $A^{2g}$. Applying that linear isomorphism to the constant sheaves gives $H|_U\\cong\\underline{A^{2g}}_U$ on every member. For empty $T$ the empty etale cover suffices. This proves the local rank assertion also for disconnected $T$; the same argument gives the zero sheaf when $g=0$ and works unchanged for $\\ell=2$.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GLI, proposition-loc-cst-torsion, combined with etale-cohomology.tex Tag 03RQ; elementary identification of local models by their stalks"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-proper",
+  "lem-sfb-smooth-proper-finite-cohomology-local-system",
+  "det-properbasechange-modules",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-cohomology",
+  "lem-pc-proper-base-change",
+  "lem-sc-primitive-root",
+  "thm-sc-proper-cohomology",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Assembly of Tag 0GLI with etale-cohomology.tex Tags 095T, 04JN, 04JQ and 03RQ; projective-bundle properness is morphisms.tex Tag 01WC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology of a smooth projective family of geometrically connected genus g curves is a locally constant free module sheaf of rank 2g and commutes with arbitrary base change",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth proper family of curves has a finite coefficient first cohomology local system of rank twice the genus with arbitrary base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  (f : Gal(L/K) → Lˣ), groupCohomology.IsMulCocycle₁ f → groupCohomology.IsMulCoboundary₁ f\", \"doc\": \"In the context of Galois cohomology, if $ f : \\\\text{Gal}(L/K) \\\\to L^\\\\times $ is a 1-cocycle (satisfying $ f(gh) = g \\\\cdot f(h) \\\\cdot f(g) $ for all $ g, h \\\\in \\\\text{Gal}(L/K) $), then $ f $ is a 1-cob\"}\n  {\"name\": \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class group of the ring of integers $\\\\mathcal{O}_F$ (integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over $\\\\mathbb{F}_q$ is finite. This follows from the admissibility of the degree\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S],\\n  Algebra.IsStandardSmooth R S ↔\\n    Subsingleton (Algebra.H1Cotangent R S) ∧ ∃ I b, Set.range ⇑b ⊆ Set.range ⇑(KaehlerDifferential.D R S)\", \"doc\": \"An $ R $-algebra $ S $ of finite presentation is standard smooth if and only if the first cohomology group $ H^1 $ of its cotangent complex is trivial (a subsingleton) and there exists a basis for the\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed hits concern cotangent cohomology, ordinary scheme smoothness or unrelated group cohomology, not etale R^1 of a curve family with rank 2g and arbitrary base change."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"genus\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed hits concern cotangent cohomology, ordinary scheme smoothness or unrelated group cohomology, not etale R^1 of a curve family with rank 2g and arbitrary base change."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Cc]ohomology|[Cc]ohomology.*[Gg]enus|[Ll]ocal[Ss]ystem.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed hits concern cotangent cohomology, ordinary scheme smoothness or unrelated group cohomology, not etale R^1 of a curve family with rank 2g and arbitrary base change."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "R1 direct image of the constant finite field sheaf for a smooth projective genus g curve family is etale locally the constant vector space of dimension 2g",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed hits concern cotangent cohomology, ordinary scheme smoothness or unrelated group cohomology, not etale R^1 of a curve family with rank 2g and arbitrary base change."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First etale cohomology of a smooth proper genus g curve family is a locally constant sheaf of rank 2g and commutes with base change",
+   "results": "Algebra.Etale.baseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Condensed.lanSheafProfinite, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.FormallyEtale.subsingleton_h1Cotangent, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.tensorH1CotangentOfIsLocalization",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states etale curve-family cohomology, its rank 2g or its proper-base-change map."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*[Cc]ohomology|[Cc]ohomology.*[Gg]enus|[Ll]ocal[Ss]ystem.*[Cc]urve",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states etale curve-family cohomology, its rank 2g or its proper-base-change map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"genus\"",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states etale curve-family cohomology, its rank 2g or its proper-base-change map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First etale cohomology of smooth proper families of curves forms a local system of rank twice the genus",
+   "results": "Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.H1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.formallyEtale_iff, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states etale curve-family cohomology, its rank 2g or its proper-base-change map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image of finite constant coefficients under a smooth proper morphism is locally constant and satisfies proper base change",
+   "results": "CompHausLike.LocallyConstantModule.functor, Profinite.exists_locallyConstant_finite_aux, Condensed.lanSheafProfinite, Profinite.exists_locallyConstant_finite_nonempty, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, CompHausLike.LocallyConstant.functor, Profinite.exists_locallyConstant_fin_two, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: no returned declaration states etale curve-family cohomology, its rank 2g or its proper-base-change map."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-abelian-level-rigidification",
+  "date": "2026-10-22",
+  "group": "Q61"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Returned rigidification proof: Tag 0GLI, proposition-loc-cst-torsion; etale-cohomology.tex Tag 095T, theorem-proper-base-change, and Tag 03RQ, lemma-cohomology-smooth-projective-curve. Returned proof Step 1, including projective-bundle properness and the fibrewise primitive-root choice. Its full argument and existing inputs are preserved in report.md.",
+   "via": [
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-projective-curve-cohomology-local-system",
+  "worker": "stage1",
+  "summary": "Reused existing smooth-proper finite cohomology local constancy, module proper exchange, projective-bundle properness, geometric-point stalk and proper-curve Kummer computation. Checked arbitrary schemes, the specific canonical degree-one map and all stated edge cases. No new nodes.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/level-structure prerequisite: smooth curve cohomology local system before choosing a frame. Latest blueprint has this same direct-image step; this item is a non-imported descendant with null blueprint ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic tool for the curve-family local-system assembly: Projective-bundle morphisms are proper. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "det-properbasechange-modules",
+    "why": "Generic tool for the curve-family local-system assembly: Étale proper base change for module coefficients. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic tool for the curve-family local-system assembly: Exact geometric inverse image with arbitrary constant left-module coefficients. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic tool for the curve-family local-system assembly: Inverse image of a constant sheaf. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Generic tool for the curve-family local-system assembly: Inverse image to a geometric point is the stalk. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic tool for the curve-family local-system assembly: Proper and smooth morphisms are stable under base change. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Generic tool for the curve-family local-system assembly: Primitive roots of unity. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "thm-sc-proper-cohomology",
+    "why": "Generic tool for the curve-family local-system assembly: Kummer computation on a proper curve. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic tool for the curve-family local-system assembly: Stalk of an inverse image, compatible with germs of pulled-back sections. It supplies the cited statement without replacing the alteration route of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic tool for the curve-family local-system assembly: Geometric stalks of a constant etale sheaf. It supplies the cited statement without replacing the alteration route of the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-projective-bundle-proper",
+  "det-properbasechange-modules",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-kun-pullback-constant",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-pc-proper-base-change",
+  "lem-sc-primitive-root",
+  "thm-sc-proper-cohomology",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-cfd5c6c09",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-cfd5c6c09 (reviewer sub-agent of L); spot-checked: I read the item's 5 steps and all 13 cited nodes in full; the delivery adds no new nodes and leaves the statement unchanged, so no target is weakened. Sources checked: Stacks 0GLI (more-etale l.4786), 03RQ (etale-cohomology l.11135), 095T and 01WC. Step 1: projective-bundle properness, then smooth-proper finite local constancy with F=A_X, q=1, over an arbitrary base. Step 2: module proper base change with K=A_X[0] (killed by ell, so torsion) gives Ex^Lambda an isomorphism in both the DAG statement and its blueprint_update. Since For(Ex^Lambda)=Ex^Z, this is the abelian BC map of def-weil-pbc-derived-exchange; pullback of the constant sheaf is constant, and v^{-1} is exact so it commutes with H^1. Step 3: Gamma(P,-) is exact and Gamma(P,t^{-1}H)=H_t; with an injective resolution and the direct-image formula at W=P this gives H^1_et(X_t,A), and the stalk identification is the BC map. Step 4: X_t is proper by base change; ell nonzero in Omega gives char Omega != ell; a primitive root then gives H^1 = (Z/ell)^{2g} by thm-sc-proper-cohomology, with genus as in def-sc-genus; additive maps of F_ell-vector spaces are linear. Step 5: on a trivialising cover, the inverse-image stalk germ and the constant-sheaf stalk give dim V = 2g. Edge cases g=0, ell=2, disconnected T and empty T all hold, and no Noetherian hypothesis is used (0GLI's Noetherian condition is on Lambda = F_ell). No duplicate found among the existing R^1f_* / 2g nodes. I accept the 10 declared tool_uses as black boxes; other sfb nodes in this unit already cite the same tools. Batch 5: each of the 4 flagged citations is generic and lies outside both assumed statements. lem-trf-projective-bundle-proper is Stacks 01WC (projective implies proper). The smooth-proper local-system node reaches trf only through the abstract derived-adjunction lemma lem-trf-bounded-below-derived-adjunction. det-properbasechange-modules is proper base change, reaching pod only through the foundational lisse-sheaves-as-module-objects lemma. thm-sc-proper-cohomology is the curve cohomology computation (03RQ), reaching trf only through the proper finite-fibre lemma, and is already cited by batch-5 cor-zl-hasse-bound. Neither the trace-formula nor the Poincare-duality leaf gives any of these, and none is a step of their proofs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothProjectiveCurveCohomologyLocalSystem",
+  "declaration": "AlgebraicGeometry.Etale.localSystem_firstCohomology_smooth_projective_curve",
+  "declarations": [
+   "AlgebraicGeometry.Etale.curveFirstCohomology",
+   "AlgebraicGeometry.Etale.curveFirstBaseChange",
+   "AlgebraicGeometry.Etale.curvePointPullbackStalkIso",
+   "AlgebraicGeometry.Etale.curveFirstSectionsIso",
+   "AlgebraicGeometry.Etale.curveFirstStalkMap",
+   "AlgebraicGeometry.Etale.localSystem_firstCohomology_smooth_projective_curve"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothProjectiveCurveCohomologyLocalSystem.lean",
+  "statement": "theorem localSystem_firstCohomology_smooth_projective_curve {X T : Scheme.{u}} (f : X ⟶ T) [Smooth f] (hprojective : IsProjectiveBundle f) (g ell : ℕ) [Fact ell.Prime] (hunit : ∀ t : T, IsUnit (ell : T.presheaf.stalk t)) (hfibre : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T), IsConnectedCurve (pullback.snd f t) ∧ Smooth (pullback.snd f t) ∧ IsProjectiveBundle (pullback.snd f t) ∧ (pullback.snd f t).genus = g) : (∃ 𝒰 : Scheme.Cover.{u} Scheme.etalePrecoverage T, ∀ i : 𝒰.I₀, Nonempty ((curveFirstCohomology ell f).over (𝒰.etalePrecoverageToEtale i) ≅ (constantSheaf (T.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell)))).obj (ModuleCat.of _ (Fin (2 * g) → ULift.{u + 1} (ZMod ell))))) ∧ (∀ (T' : Scheme.{u}) (v : T' ⟶ T), IsIso (curveFirstBaseChange ell f v)) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T), IsIso (curveFirstStalkMap ell f t) ∧ Module.finrank (ULift.{u + 1} (ZMod ell)) (pointedEtaleStalk (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ell))) (curveFirstCohomology ell f) t) = 2 * g)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The five helpers are explicit specializations and composites of the recorded direct-image, constant-sheaf, exchange, stalk, and cohomology constructions. In particular curveFirstStalkMap is induced by curveFirstBaseChange, not an unspecified fibre isomorphism. No statement correction or new independent notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dba2ae138",
+  "group": "NP",
+  "result": "pass",
+  "note": "Delivery changes only the new module and the item lean record (rest of node identical to live; first S2 delivery, not a rebind); lean.statement verbatim; all imports exist. Clause check: Smooth f, IsProjectiveBundle f (recorded owner), Fact ell.Prime, IsUnit ell in every stalk, geometric points over all alg. closed Ω : Type u, fibre IsConnectedCurve (dim exactly 1, connected) ∧ Smooth ∧ IsProjectiveBundle (implied by base change; node says smooth projective) ∧ genus=g (recorded def-sc-genus owner, = dim H1(O) by duality). H = H^1 of rightDerivedLowerStarPlus of constant ModuleCat sheaf; etale-cover chartwise iso to constant Fin(2g)→A; curveFirstBaseChange = homology/upperStar comm ≫ H^1(derivedBaseChangeMapPlus on IsPullback.of_hasPullback) ≫ constantSheafCompUpperStarIso, canonical, direction checked; curveFirstStalkMap = canonical Γ-point/stalk iso ≫ Γ(BC^1_t) ≫ exact-Γ + Leray to Etale.cohomology of fibre; finrank pointedEtaleStalk = 2g. Edge cases g=0, ell=2, empty/disconnected T, arbitrary v covered; no Noetherian/root assumption. Helpers are real canonical composites with source/blueprint docstrings; only sorry; report has Worker report and Second reading by NP. No findings."
+ }
+}

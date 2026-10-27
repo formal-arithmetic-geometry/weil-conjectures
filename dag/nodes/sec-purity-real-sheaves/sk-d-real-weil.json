@@ -183,7 +183,43 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-weil",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilGroup",
+    "AlgebraicGeometry.WeilGroup.IsLisse"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilGroup",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic",
+     "lines": [
+      90,
+      175
+     ],
+     "kind": "structure",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilGroup.IsLisse",
+     "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic",
+     "lines": [
+      246,
+      259
+     ],
+     "kind": "structure",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "sk-d-real-weil",
@@ -293,5 +329,31 @@
   "landing": "20261021T134529-L-1318687",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "*Convention.* Put $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, and fix a prime\n$\\ell\\nmid q$ and a field embedding\n$\\iota:\\overline{\\mathbf Q}_\\ell\\hookrightarrow\\mathbf C$.\nFor $X_0/k_0$ separated of finite type, write $X=X_0\\times_{k_0}k$.\nWe use geometric Frobenius and Weil structures as in [sk-d-weil] and\n[sk-lem-tf-frobenius-convention]. A Weil sheaf is a Weil complex concentrated\nin degree zero. Derived constructions take place in the geometric pro-étale\ncategory and carry the induced Weil isomorphisms of\n[sk-def-sf-weil-complexes].\n\nOn a connected smooth scheme of finite type over a field, we identify a\nlisse $\\overline{\\mathbf Q}_\\ell$-sheaf with the corresponding continuous representation of the\nprofinite fundamental group, by [sk-p-real-integral]. All arguments with\nrepresentations below take place on smooth schemes. A lisse Weil\n$\\overline{\\mathbf Q}_\\ell$-sheaf has a lisse Weil model over some finite\nextension $E/\\Ql$, and two models become identified after a finite extension\nof scalars. The model includes the Weil isomorphism, which need not\npreserve a geometric $\\mathcal O_E$-lattice.\n\nFor a geometrically connected smooth curve $U_0$, choose a geometric base\npoint and set $P=\\pi_1(U)$, where $U=U_0\\times_{k_0}k$. The inverse image\nof the integer powers of geometric Frobenius in $\\pi_1(U_0)$ is its Weil\ngroup. It has an exact sequence\n\n$$\n 1\\longrightarrow P\\longrightarrow W(U_0)\n   \\xrightarrow{\\deg}\\mathbf Z\\longrightarrow0.\n$$\n\nA degree-one lift $s$ splits this sequence as a group extension.\nLisse Weil sheaves are the same as representations of this group,\ndefined over a finite extension of $\\Ql$, whose restriction to $P$ is\ncontinuous. Since the quotient $\\mathbf Z$ is discrete, continuity\nimposes no boundedness condition on $\\rho(s)$. For $x\\in|U_0|$, put\n$d(x)=[\\kappa(x):k_0]$ and $q_x=q^{d(x)}$. The local Frobenius $F_x$\nat $x$ is a conjugacy class of degree $d(x)$.\n\nIn this description, the Weil isomorphism is given by transport by $s$,\nand conversely the Weil isomorphism determines the action of $s$.\nPassing to the finite reductions, one sees that the correspondence\ncommutes with finite extension of scalars and with inverse image\nbetween normal schemes.\n\n*Complement.* In the detail nodes the degree $d(x)$ is also written $e_x$,\na curve means a nonempty separated smooth $\\Fq$-scheme of finite type, of pure\ndimension one, with connected base change ([d-real-setup]), and the\ndegree-one lift is also written $\\gamma$, with $F=\\rho(\\gamma)$. The local\nFrobenius $F_x$ is the image in $W(U_0)$ of the geometric Frobenius of a\ndecomposition group at $x$, for a chosen path from a geometric point over $x$\nto the base point; it is well defined up to conjugacy in $W(U_0)$. The\ncorrespondence $\\mathcal F\\mapsto(\\mathcal F_{\\bar\\eta},\\rho_{\\mathcal F})$ is an\nexact tensor equivalence between lisse Weil sheaves on $U_0$ and these\nrepresentations, so subobjects, quotients and subquotients match in both\ndirections ([prop-wf-weil-sheaf-representation-equivalence]). A constructible\nWeil sheaf is lisse of finite rank on each stratum of a finite stratification\ninto locally closed subschemes.",
+  "proof": [
+   {
+    "text": "The exact sequence is [lem-wf-weil-group-exact-sequence]. The local\nFrobenius $F_x$ is well defined up to conjugacy in $W(U_0)$.\nChanging the path conjugates it by some $g\\in\\pi_1(U_0)$, and this is\nalready a conjugation inside $W(U_0)$: identify $\\Gal(k/\\Fq)$ with\n$\\widehat{\\mathbf Z}$ by sending geometric Frobenius to $1$, so that\n$\\deg$ extends to $\\pi_1(U_0)\\to\\widehat{\\mathbf Z}$ with\n$W(U_0)=\\deg^{-1}(\\mathbf Z)$. Since\n$\\widehat{\\mathbf Z}=\\mathbf Z+d(x)\\widehat{\\mathbf Z}$, write\n$\\deg g=n+d(x)t$ with $n\\in\\mathbf Z$ and $t\\in\\widehat{\\mathbf Z}$, and\nlet $F_x^t$ be the image of the $t$-th power of geometric Frobenius in\nthe procyclic group $\\Gal(\\overline{\\kappa(x)}/\\kappa(x))\\simeq\\widehat{\\mathbf Z}$;\nit has degree $d(x)t$ and commutes with $F_x$. Then $w=gF_x^{-t}$ has\ndegree $n$, so $w\\in W(U_0)$, and\n$gF_xg^{-1}=wF_x^{t}F_xF_x^{-t}w^{-1}=wF_xw^{-1}$. Hence conjugacy in\n$\\pi_1(U_0)$ and in $W(U_0)$ agree on $F_x$.",
+    "uses": [
+     "lem-wf-weil-group-exact-sequence"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The equivalence with representations is\n[prop-wf-weil-sheaf-representation-equivalence]: at the geometric level it is\nthe lisse sheaf–representation equivalence of [sk-p-real-integral] (for smooth\ncurves also [thm-lisse-qlbar-representations]), and a Weil structure\n$\\varphi:\\Frob^*\\mathcal F\\to\\mathcal F$ is the same as an automorphism\n$\\Phi$ of the generic stalk with $\\Phi\\rho(g)\\Phi^{-1}=\\rho(sgs^{-1})$ for\n$g\\in P$, which extends $\\rho$ to $W(U_0)$ by $\\rho(s)=\\Phi$.",
+    "uses": [
+     "prop-wf-weil-sheaf-representation-equivalence",
+     "thm-lisse-qlbar-representations"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; the node is proved in Lean: recorded 2026-10-25, not reopened"
  }
 }

@@ -1,0 +1,382 @@
+{
+  "id": "lem-pur-shifted-line-site-inverse",
+  "kind": "statement",
+  "title": "Specified inverse and finite-Tor bounds for a shifted line under site comparison",
+  "statement": "Fix the finite coefficient datum of [def-pur-conventions], so $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, $n\\geq1$, and $A=\\mathcal O_E/\\varpi_E^n$. Let $T$ be a finite-type $k$-scheme [def-weil-finite-type-morphism], with no absolute separatedness assumption. Write $V_T=\\nu_T^*$ for exact derived comparison from the small etale to the small pro-etale site [def-weil-pbc-site-comparison-morphism, def-sf-comparison-derived-pullback]. Use ordinary constant-$A$ module derived categories on both sites [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], with ordinary derived tensor [def-kun-derived-tensor, def-weil-derived-tensor]. Let $L$ be an etale sheaf of $A$-modules which is locally isomorphic to $A_T$, and let $m\\in\\mathbf Z$. Put $L^\\vee=\\mathcal Hom_A(L,A_T)$ [def-pur-sheaf-hom].\n\nThe sheaves $L,L^\\vee,V_TL,V_TL^\\vee$ are constructible [def-weil-pbc-constructible-complexes, def-weil-finite-torsion-constructibility] and flat [def-pc-flat-sheaf-modules], and the last two are pro-etale locally isomorphic to $A_T$. The specified evaluations, given on a local basis $e$ and dual basis $e^\\vee$ by $(ae)\\otimes(be^\\vee)\\mapsto ab$, induce isomorphisms in the derived categories\n$$L[m]\\otimes_A^LL^\\vee[-m]\\xrightarrow{\\sim}A_T,\\qquad L^\\vee[-m]\\otimes_A^LL[m]\\xrightarrow{\\sim}A_T.$$\nUnder the canonical tensor and unit comparisons for $V_T$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], these are precisely the corresponding evaluation isomorphisms for $V_TL[m]$ and $V_TL^\\vee[-m]$. Both complexes lie in $D^b_{ctf}(T,A)$ [def-weil-finite-tor-amplitude], with Tor intervals $[-m,-m]$ and $[m,m]$, respectively. For every $K\\in D^b_{ctf}(T,A)$ of Tor amplitude $[a,b]$, their tensors with $K$ remain bounded constructible and have Tor amplitude $[a-m,b-m]$ and $[a+m,b+m]$, respectively. The analogous bounds hold on the etale site, with Tor amplitude as in [def-kun-tor-amplitude].",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-pur-cohomological-smoothness.proof.md",
+    "place": "First paragraph, sentences “omega_f[-2d] is a locally constant free rank-one sheaf” and “In particular it is tensor-invertible”; inherited proof Step 4, including flatness, specified evaluation, comparison and finite-Tor inverse"
+  },
+  "stmt_deps": [
+    "def-pur-conventions",
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sf-comparison-derived-pullback",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-proetale-modules",
+    "def-kun-derived-tensor",
+    "def-weil-derived-tensor",
+    "def-pur-sheaf-hom",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-finite-torsion-constructibility",
+    "def-pc-flat-sheaf-modules",
+    "def-kun-tor-amplitude"
+  ],
+  "proof": [
+    {
+      "text": "Apply the ringed-site line-evaluation lemma on the etale site with $R=A_T$ and $P=L$. It identifies the given sheaf $L^\\vee$ as another locally free rank-one sheaf, gives both flatness assertions, and gives the specified evaluation and its inverse, with $e((ae)\\otimes(be^\\vee))=ab$. The reverse-order evaluation is the ordinary sheaf symmetry followed by this map. Its formula is also multiplication. Because $A$ is finite, the stalks of both locally constant sheaves are finite; the one-stratum partition $T=T$ therefore makes both constructible by the etale definition. No stratification theorem or separatedness assumption is used.",
+      "uses": [
+        "lem-pur-sheaf-line-evaluation-inverse-pair",
+        "def-weil-pbc-constructible-complexes"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 0B8Q (lemma-invertible-is-locally-free-rank-1), 0B8N (lemma-invertible), applied to the given trivializations"
+      }
+    },
+    {
+      "text": "For comparison, use the inclusion of etale schemes into the pro-etale site. It preserves finite limits and coverings. The comparison-exactness lemma identifies the pulled coefficient ring with $A_T$, so its module pullback is the exact inverse-image functor in the item. Apply the finite-locally-free dual-pullback theorem to the rank-one trivializations of $L$. The pulled trivializing covering is a covering on the target site, and its comparison identifies $V_TL^\\vee$ with $\\mathcal Hom_A(V_TL,A_T)$, sending the pulled dual basis to the dual of the pulled basis. In particular both $V_TL$ and $V_TL^\\vee$ are pro-etale locally $A_T$. The ringed-site line lemma on that site gives their flatness and evaluation isomorphisms. Their locally constant finite values and the one-stratum partition give pro-etale constructibility.",
+      "uses": [
+        "def-weil-pbc-site-comparison-morphism",
+        "lem-sf-comparison-pullback-exact",
+        "lem-pur-ringed-site-finite-free-dual-pullback",
+        "lem-pur-sheaf-line-evaluation-inverse-pair",
+        "def-weil-finite-torsion-constructibility"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 0GMX (remark-pullback-internal-hom), 0FNY (example-dual); Tags 0B8Q and 0B8N; comparison uses Tag 099R in proetale.tex"
+      }
+    },
+    {
+      "text": "On either site, the two single-sheaf complexes and their integer shifts are bounded complexes of flat sheaves, hence K-flat. Compute their derived tensor by total tensor, using the K-flat-single comparison for $L[m]\\otimes^L_AL^\\vee[0]$ (resp. $L^\\vee[-m]\\otimes^L_AL[0]$), and extract the remaining shift of the second factor by the derived tensor-shift isomorphism $t^2$, whose representatives on these flat-term K-flat complexes are the chain-level integer tensor-shift maps. The total complex $L[m]\\otimes L^\\vee[-m]$ is concentrated in degree zero with sole term $L\\otimes L^\\vee$; use the degree-zero evaluation already obtained. The reverse order has sole term $L^\\vee\\otimes L$, and use its ordinary evaluation. Thus both displayed derived arrows are isomorphisms. On a local basis each sends $(ae)\\otimes(be^\\vee)$, in its stated order, to $ab$, with inverse $a\\mapsto(ae)\\otimes e^\\vee$ (and the reversed formula in the other order). Under $e'=ue$ the dual is $u^{-1}e^\\vee$, so these formulas are unchanged. We specify the reverse arrow independently on its sole degree-zero term: applying the graded braiding instead would introduce $(-1)^m$. The two specified arrows are the shifts of the ordinary evaluations under the total-shift normalization on original degree-zero terms.",
+      "uses": [
+        "lem-pc-bounded-above-flat-kflat-site",
+        "lem-sf-ringed-kflat-single-tensor-comparison",
+        "lem-weil-pbc-total-tensor-integer-shifts",
+        "lem-pur-sheaf-line-evaluation-inverse-pair",
+        "lem-weil-pbc-derived-tensor-shift-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0FNH (item-shift-tensor) and item-flip-tensor-product; K-flat computation: sites-cohomology.tex Tag 06YQ (lemma-bounded-flat-K-flat)"
+      }
+    },
+    {
+      "text": "Use the canonical derived tensor comparison for $V_T$, with the coefficient-unit comparison and signed shift compatibilities. Its representatives are ordinary pullback on the flat single complexes of Step 3. Under the dual-pullback isomorphism of Step 2, the pulled evaluation sends the pulled basis and pulled dual basis to $1$, exactly as target evaluation does. More explicitly, the ordinary tensor comparison takes $a\\otimes(x\\otimes\\phi)$ to $(a\\otimes x)\\otimes(1\\otimes\\phi)$, and both composites to the coefficient ring give $a\\phi(x)$. This is the evaluation-normalization equation in the dual-pullback theorem. The canonical comparison commutes with each signed tensor shift and the unitors, so the same equation holds for shifts $m,-m$ and for the reverse order. Hence it identifies the particular evaluation arrows of Step 3, as required, rather than only the source and target objects.",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+        "lem-pur-ringed-site-finite-free-dual-pullback"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4 (lemma-pullback-tensor-product), representative construction; sites-modules.tex Tag 0GMX; signed-shift compatibility as in more-algebra.tex Tag 0FNH"
+      }
+    },
+    {
+      "text": "For either site let $P$ be either of its two flat line sheaves. For every module sheaf $M$ in degree zero the K-flat-single calculation gives $P[s]\\otimes_A^LM\\cong(P\\otimes_AM)[s]$. Its cohomology is zero outside degree $-s$. By the definitions of Tor interval this is amplitude $[-s,-s]$. Take $(P,s)=(L,m),(L^\\vee,-m)$ and their comparison images. Their only cohomology sheaves are the constructible sheaves of Steps 1--2; therefore they are bounded constructible with the claimed intervals.",
+      "uses": [
+        "lem-sf-ringed-kflat-single-tensor-comparison",
+        "lem-pc-bounded-above-flat-kflat-site",
+        "lem-weil-pbc-total-tensor-integer-shifts",
+        "def-kun-tor-amplitude",
+        "def-weil-finite-tor-amplitude"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 06YQ (lemma-bounded-flat-K-flat), single-flat-term calculation; Tor interval is tested on all module sheaves"
+      }
+    },
+    {
+      "text": "The flat-single normalization on an arbitrary ringed site, followed by the derived tensor-shift comparison, gives for every complex $K$ and integer $r$ the formula\n$$\\mathcal H^r(K\\otimes_A^LP[s])\\cong\\mathcal H^{r+s}(K)\\otimes_AP.$$\nIt applies without a flat representative or any Tor condition on $K$. Consequently, if the cohomology of $K$ vanishes outside $[u,v]$, the cohomology after tensoring with $P[s]$ vanishes outside $[u-s,v-s]$. This proves the needed boundedness on both sites.",
+      "uses": [
+        "lem-pur-flat-single-derived-normalization",
+        "lem-weil-pbc-derived-tensor-shift-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Flat-single total-tensor computation of Tag 06YQ; shift comparisons descend from more-algebra.tex Tag 0FNH"
+      }
+    },
+    {
+      "text": "On the etale site, apply the flat-constructible tensor theorem with each of $L,L^\\vee$, already flat and constructible, to the bounded constructible $K$. Its cohomology formula gives constructibility, and extracting the shift reindexes the cohomology sheaves. On the pro-etale site apply the finite-tensor constructible-cohomology lemma to $K$ and either $V_TL[0]$ or $V_TL^\\vee[0]$. Its hypotheses are precisely bounded constructibility at $A=A_{E,n}$ and invertibility of $\\ell$ on $T$: the first is supplied by Step 2 and the assumption on $K$, and the second follows since $T$ is over the field of characteristic different from $\\ell$. It supplies constructible cohomology in every degree, with no absolute separatedness requirement. Extracting the shift again just reindexes. Combine with Step 6 for bounded constructibility.",
+      "uses": [
+        "lem-fd-flat-constructible-tensor",
+        "lem-pur-finite-tensor-constructible-cohomology",
+        "lem-weil-pbc-derived-tensor-shift-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 095I (lemma-tensor-product-constructible), Tag 0961 (lemma-tensor-c); pro-etale local tensor calculation: sites-cohomology.tex Tag 094H"
+      }
+    },
+    {
+      "text": "Finally let $K$ have Tor amplitude $[a,b]$ and let $M$ be any module sheaf in degree zero on the same site. The associator and symmetry of the symmetric monoidal derived category of the ringed site identify\n$$(K\\otimes_A^LP[s])\\otimes_A^LM\\cong(K\\otimes_A^LM)\\otimes_A^LP[s].$$\nThese constraints are induced by unsigned reassociation and the signed swap $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ on total tensors of K-flat representatives, and the ringed-topos comparison statement describes the same constraints; no boundedness of the test module and no constructibility of it are assumed. Apply Step 6 to the complex $K\\otimes_A^LM$: by the Tor hypothesis its cohomology vanishes outside $[a,b]$, so the right side vanishes outside $[a-s,b-s]$. Since this works for every $M$, the definitions give the desired Tor interval. Substituting $s=m$ and $s=-m$ gives $[a-m,b-m]$ and $[a+m,b+m]$. Step 7 gives the remaining bounded-constructible condition, hence these tensors lie in $D^b_{ctf}$ as asserted.",
+      "uses": [
+        "lem-sf-ringed-derived-closed-symmetric-monoidal",
+        "lem-sfb-ringed-derived-monoidal-comparisons",
+        "lem-pur-flat-single-derived-normalization",
+        "lem-weil-pbc-derived-tensor-shift-descent",
+        "def-kun-tor-amplitude",
+        "def-weil-finite-tor-amplitude"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0FNH (section-sign-rules), tensor associativity and graded symmetry; sites-cohomology.tex Tag 06YQ"
+      }
+    }
+  ],
+  "proof_deps": [
+    "def-kun-tor-amplitude",
+    "def-weil-finite-tor-amplitude",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-fd-flat-constructible-tensor",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-pur-flat-single-derived-normalization",
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0B8Q, 0B8N, 0GMX, 0FNY; derived calculations in sites-cohomology.tex Tags 06YQ and 07A4, more-algebra.tex Tag 0FNH, and etale-cohomology.tex Tags 095I and 0961"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "On etale and proetale sites a shifted locally constant free rank one sheaf over a finite constant ring has the shifted sheaf dual as tensor inverse, with finite Tor amplitude and monoidal site comparison preserving the evaluation",
+      "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Invertible\", \"Sheaf\"",
+      "results": "0 hits: ",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+    },
+    {
+      "tool": "grep",
+      "query": "rank.?one.*([dD]ual|[tT]or)|[sS]hift.*[iI]nvertible|[eE]tale.*[lL]ine",
+      "results": "19 hits: Mathlib/NumberTheory/RatFunc/Ostrowski.lean, Mathlib/Algebra/Module/LinearMap/End.lean, Mathlib/Algebra/Module/LinearMap/End.lean, Mathlib/Analysis/Normed/Operator/Bilinear.lean, Mathlib/Analysis/Normed/Operator/Bilinear.lean, Mathlib/Analysis/InnerProductSpace/Positive.lean, Mathlib/Analysis/Normed/Module/Bases.lean, Mathlib/Analysis/Normed/Module/Bases.lean",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+    },
+    {
+      "tool": "leansearch",
+      "query": "The dual of a locally free rank one sheaf gives a tensor inverse in the derived category with finite Tor amplitude, preserved by site inverse image",
+      "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; 0 hits: ",
+      "date": "2026-10-22",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Exact tensor by a locally constant line preserves constructibility and Tor amplitude; derived evaluation of a shifted line and its opposite shifted dual is the unit on etale and proetale sites",
+      "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits do not state this finite-coefficient site-comparison assertion"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A shifted locally constant rank one sheaf has its oppositely shifted sheaf dual as tensor inverse; tensoring preserves constructibility and translates Tor amplitude on etale and proetale sites",
+      "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits concern modules, light condensed sheaves or ordinary Tor; none states the etale/pro-etale shifted-line assertion with these evaluations and intervals"
+    },
+    {
+      "tool": "grep",
+      "query": "shift.*[iI]nvertible|[lL]ocally.*[rR]ank.*[oO]ne|[tT]or[Aa]mplitude",
+      "results": "0 hits: ",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits concern modules, light condensed sheaves or ordinary Tor; none states the etale/pro-etale shifted-line assertion with these evaluations and intervals"
+    },
+    {
+      "tool": "leansearch",
+      "query": "The dual of a locally free line sheaf is its derived tensor inverse and tensor with its shift translates the Tor amplitude",
+      "results": "8 hits: CommRing.Pic.inv_eq_dual, CommRing.Pic.mk_dual, dualTensorHomEquiv, Module.dual_free, dualTensorHomEquivOfBasis, dualTensorHomEquivOfBasis_symm_cancel_left, Module.dual_projective, TensorProduct.dualDistrib_dualDistribInvOfBasis_right_inverse",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits concern modules, light condensed sheaves or ordinary Tor; none states the etale/pro-etale shifted-line assertion with these evaluations and intervals"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"Sheaf\", \"IsInvertible\"",
+      "results": "0 hits: ",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits concern modules, light condensed sheaves or ordinary Tor; none states the etale/pro-etale shifted-line assertion with these evaluations and intervals"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "In a ringed topos tensoring by a flat line sheaf is an exact equivalence; its derived cohomology is termwise tensor and shifts translate all universal Tor bounds",
+      "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_exact', CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj",
+      "date": "2026-10-22",
+      "verdict": "no match: the hits concern modules, light condensed sheaves or ordinary Tor; none states the etale/pro-etale shifted-line assertion with these evaluations and intervals"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "thm-pur-cohomological-smoothness",
+    "date": "2026-10-22",
+    "group": "Q117"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-prop-cohsm",
+  "blueprint": {
+    "from": {
+      "node": "thm-pur-cohomological-smoothness",
+      "place": "First paragraph: “In particular it is tensor-invertible, and tensoring it with the pullback of a bounded constructible finite-Tor complex stays in that category”; specified finite-level evaluation and exact site comparison implicit in the next sentences",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-22",
+    "item": "lem-pur-shifted-line-site-inverse",
+    "worker": "stage1",
+    "summary": "Proved the finite shifted-line assertion by the existing general ringed-site evaluation, finite-free dual-pullback, flat-single normalization, signed tensor-shift and constructibility lemmas. No new nodes and no statement change. Both specified evaluations are tracked on flat single complexes, including comparison and the reverse-order sign convention; universal Tor tests give all translated bounds without separatedness.",
+    "blueprint": "The first paragraph of the main-20261015 thm-pur-cohomological-smoothness proof: steps 1--5 supply the specified tensor inverse and comparison; steps 6--8 supply bounded constructibility and the quantitative finite-Tor stability.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-bounded-above-flat-kflat-site",
+        "why": "General ringed-site K-flatness of the two flat single complexes; the unit has no separate resolution theorem."
+      },
+      {
+        "node": "lem-pur-ringed-site-finite-free-dual-pullback",
+        "why": "General local-basis dual comparison for the comparison morphism; not a replacement for smooth purity."
+      },
+      {
+        "node": "lem-sf-ringed-kflat-single-tensor-comparison",
+        "why": "General K-flat representative calculation on either site, including arbitrary test sheaves."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "why": "General canonical tensor comparison for the site morphism already specified in the statement."
+      },
+      {
+        "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+        "why": "Tracks that canonical comparison on the particular evaluations after shifts and the unit comparison."
+      },
+      {
+        "node": "lem-pur-flat-single-derived-normalization",
+        "why": "General flat-single cohomology calculation, applied also to nonconstructible Tor-test tensors."
+      },
+      {
+        "node": "lem-weil-pbc-derived-tensor-shift-descent",
+        "why": "General signed shift comparisons for ordinary ringed-site derived tensor."
+      },
+      {
+        "node": "lem-fd-flat-constructible-tensor",
+        "why": "General ordinary-etale flat-constructible tensor closure, without separatedness."
+      },
+      {
+        "node": "lem-pur-finite-tensor-constructible-cohomology",
+        "why": "Finite-level pro-etale constructible tensor closure, with boundedness supplied separately."
+      },
+      {
+        "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+        "why": "General ordinary ringed-site associativity and symmetry needed to reorder the arbitrary Tor-test sheaf."
+      },
+      {
+        "node": "lem-sf-comparison-pullback-exact",
+        "why": "Constant-ring identification and exactness of the specified site comparison."
+      },
+      {
+        "node": "lem-pur-sheaf-line-evaluation-inverse-pair",
+        "why": "General ringed-site evaluation inverse and flatness, already carrying the precise local formulas."
+      },
+      {
+        "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+        "why": "General symmetric monoidal structure (associator, signed symmetry) of the derived category of a ringed site, used to reorder the arbitrary Tor-test sheaf in Step 8."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "lem-pur-flat-single-derived-normalization",
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-fd-flat-constructible-tensor",
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-comparison-pullback-exact",
+    "lem-pur-sheaf-line-evaluation-inverse-pair",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+  ],
+  "reviewed": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-cc-Q53-ff4587914",
+    "group": "Q53",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-ff4587914 (reviewer sub-agent of L); spot-checked: I read all of the item and its source in full: the main-20261015 thm-pur-cohomological-smoothness proof, first paragraph, plus the Stacks tags 0B8Q, 0B8N, 0GMX, 0FNY, 06YQ, 07A4, 0FNH, 095I, 0961, 094H, 099R and 099Y, all present locally. No SGA is cited. The delivery has no new nodes, and the statement and stmt_deps are unchanged. The live node is still unsplit and there is no repair note. I checked the Tor intervals: L[m] gives [-m,-m], L^vee[-m] gives [m,m], and the tensors give [a-m,b-m] and [a+m,b+m]. A swap in bidegree (-m,m) carries the sign (-1)^m, so the reverse arrow is correctly specified on its own term. I checked the hypotheses of every cited node. The dual-pullback lemma needs sites with finite limits and a covering-preserving u, and both hold. lem-pur-finite-tensor-constructible-cohomology needs ell invertible on T, which holds because T is over k, and the lemma is used only for constructibility, with boundedness coming from Step 6. lem-fd-flat-constructible-tensor needs a flat constructible line, which Step 1 gives. Step 4's comparison holds degreewise on the single term: a(x)phi... more precisely a⊗(x⊗phi) goes to a·phi(x) on both sides. The closest existing node, lem-sp-etale-pullback-twist-tor-window, covers only Tate twists on separated schemes, so it is not a duplicate. I accept the declared tool uses. Two citation repairs are in fixes/dag/nodes/sec-smooth-purity/lem-pur-shifted-line-site-inverse.json. First, Step 3 shifted the second factor without citing the derived t^2 of lem-weil-pbc-derived-tensor-shift-descent; I added it. Second, Step 8 cited only lem-sfb-ringed-derived-monoidal-comparisons, which presupposes the derived associator and symmetry; I added lem-sf-ringed-derived-closed-symmetric-monoidal, which states them, and declared it in tool_uses. proof_deps are updated.; 1 file(s) fixed by the reviewer"
+  },
+  "lean": {
+    "module": "Sheaf.Paper.ShiftedLineSiteInverse",
+    "declaration": "AlgebraicGeometry.ShiftedLineSiteInverse.shifted_line_site_inverse",
+    "declarations": [
+      "AlgebraicGeometry.ProEtale.siteComparisonCanonicalDerivedTensor",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.singleTensorMap",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.evaluation",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.inverseImage",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.derivedInverseImage",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.dualComparison",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.pulledPairing",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.shiftedSingleComparison",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.unitComparison",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.evaluationComparison",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.locallyIsomorphic",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.coefficientFinite",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.dual",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.etaleSingle",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.proEtaleSingle",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.pairing",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.reversePairing",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.factor",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.factorShift",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.factorPairing",
+      "AlgebraicGeometry.ShiftedLineSiteInverse.shifted_line_site_inverse"
+    ],
+    "file": "lean/Sheaf/Paper/ShiftedLineSiteInverse.lean",
+    "statement": "theorem shifted_line_site_inverse (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (T ↘ Spec (CommRingCat.of P.field.k))] (L : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) (hL : locallyIsomorphic T.smallEtaleTopology L (𝟙_ _)) (m : ℤ) : IsIso (dualComparison (ModuleCat.{u + 1} P.Coefficient) T L) ∧ pulledPairing (ModuleCat.{u + 1} P.Coefficient) T L (dual P.Coefficient T L) (pairing P.Coefficient T L) = ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj L ◁ dualComparison (ModuleCat.{u + 1} P.Coefficient) T L) ≫ (ihom.ev ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj L)).app (𝟙_ _) ∧ ∀ b : Bool, Scheme.IsConstructibleEtaleModuleSheaf (factor P.Coefficient T L b) ∧ ObjectProperty.flat (factor P.Coefficient T L b) ∧ ProEtale.IsConstructible P.Coefficient ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj (factor P.Coefficient T L b)) ∧ ObjectProperty.flat ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj (factor P.Coefficient T L b)) ∧ locallyIsomorphic (Scheme.ProEt.topology T) ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj (factor P.Coefficient T L b)) (𝟙_ _) ∧ IsIso (evaluation (factor P.Coefficient T L b) (factor P.Coefficient T L (!b)) (factorPairing P.Coefficient T L b) (factorShift m b)) ∧ IsIso (evaluation ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj (factor P.Coefficient T L b)) ((inverseImage (ModuleCat.{u + 1} P.Coefficient) T).obj (factor P.Coefficient T L (!b))) (pulledPairing (ModuleCat.{u + 1} P.Coefficient) T _ _ (factorPairing P.Coefficient T L b)) (factorShift m b)) ∧ evaluationComparison (ModuleCat.{u + 1} P.Coefficient) T _ _ (factorPairing P.Coefficient T L b) (factorShift m b) ∧ Etale.DerivedCategory.isBoundedConstructible P.Coefficient T (etaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b)) ∧ Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient T (-(factorShift m b)) (-(factorShift m b)) (etaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b)) ∧ ProEtale.DerivedCategory.boundedConstructibleIntrinsic P.Coefficient T (proEtaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b)) ∧ ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} P.Coefficient) T (-(factorShift m b)) (-(factorShift m b)) (proEtaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b)) ∧ (∀ (K : Etale.DerivedCategoryModule P.Coefficient T) (a c : ℤ), Etale.DerivedCategory.isBoundedConstructible P.Coefficient T K → Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient T a c K → Etale.DerivedCategory.isBoundedConstructible P.Coefficient T (((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) T).obj K).obj (etaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b))) ∧ Etale.DerivedCategory.hasTorAmplitudeIn P.Coefficient T (a - factorShift m b) (c - factorShift m b) (((Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) T).obj K).obj (etaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b)))) ∧ (∀ (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient))) (a c : ℤ), ProEtale.DerivedCategory.boundedConstructibleIntrinsic P.Coefficient T K → ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} P.Coefficient) T a c K → ProEtale.DerivedCategory.boundedConstructibleIntrinsic P.Coefficient T (((ProEtale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) T).obj K).obj (proEtaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b))) ∧ ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} P.Coefficient) T (a - factorShift m b) (c - factorShift m b) (((ProEtale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) T).obj K).obj (proEtaleSingle P.Coefficient T (factor P.Coefficient T L b) (factorShift m b))))",
+    "branch": "sheaf-dag",
+    "by": "Q32",
+    "date": "2026-10-23",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-23",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-6273acbd7",
+    "group": "Q32",
+    "result": "pass",
+    "note": "Re-delivery after the H13 RETURN of 28f8868c. NY record: only a declarations superset and an appended note; existing:false, file and primary kept; the module gains one public import of ConstructibleIntrinsic; no name clash in the Sheaf tree. Q18 record: only mapDerivedCategory added to declarations and the note extended; existing:false and file kept; module not delivered. Q52 record identical to live; the canonical comparison alias moved into the item module with the same body. def-pc-flat: ObjectProperty.flat added; the record becomes existing:false owning FlatOnSite.lean (previously existing:true, no file; lean.by Q48 to Q32), its only change is a public import of FromJoel Flat.Basic, and every original declaration stays. def-pur-sheaf-hom superset accepted as before. Item node unchanged except lean; statement verbatim; single sorry; pro-etale D^b_ctf via boundedConstructibleIntrinsic matches the recorded finiteTorConstructible. All clauses (constructibility, flatness, pro-etale local triviality, both evaluations with the reverse arrow taking no sign, comparison square, singleton intervals [-m,-m] and [m,m], translated intervals for every K on both sites) and the edge cases checked. No compile run (no file changed); the worker reports clean per-file compiles and an OK dry run."
+  }
+}

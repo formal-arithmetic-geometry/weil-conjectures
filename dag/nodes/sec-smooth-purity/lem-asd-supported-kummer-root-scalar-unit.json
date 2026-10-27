@@ -1,0 +1,124 @@
+{
+ "id": "lem-asd-supported-kummer-root-scalar-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "The normalized root coefficient unit and its supported boundary square in the final scalar-extension paragraph",
+   "via": [
+    "lem-asd-supported-kummer-boundary-scalar",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized derived coefficient unit on the ordinary Tate root line",
+ "statement": "Let R,S be commutative coefficient rings, φ:R→S a ring homomorphism, N>0 with N=0 in both rings, and T a scheme on which N is invertible. There is a map θ:R_T(1)→Resφ(S_T(1)) on the ordinary etale Tate lines [def-asd-finite-etale-tate-twist], satisfying θ(a tensor z)=φ(a) tensor z on every etale section and the full unbounded derived scalar-unit property [def-asd-ordinary-supported-kummer-scalar]. No flatness of S over R is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+ },
+ "stmt_deps": [
+  "def-asd-finite-etale-tate-twist",
+  "def-asd-ordinary-supported-kummer-scalar"
+ ],
+ "proof": [
+  {
+   "text": "Use the Tate-line Hom equivalence to construct θ from the target root generator. Evaluation at one followed by linearity gives its pure-root formula. The two Hom equivalences identify precomposition with θ with a bijection on all target module Hom sets. The source line has its tensor inverse, so is flat. The proved flat scalar-unit theorem gives the unbounded derived universal property.",
+   "uses": [
+    "lem-asd-finite-etale-tate-line-comparison",
+    "lem-asd-finite-etale-tate-tensor-family",
+    "lem-asd-flat-ordinary-scalar-unit-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-tate-line-comparison",
+  "lem-asd-finite-etale-tate-tensor-family",
+  "lem-asd-flat-ordinary-scalar-unit-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "Relative torsor-extension boundary, followed by the final scalar-extension paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized coefficient map on a sheaf of roots of unity tensor a coefficient ring is a derived extension of scalars unit, and preserves the supported Kummer boundary",
+   "results": "Only normalization-monoid, polynomial and roots-of-unity ring lemmas, ModuleCat.RestrictionCoextensionAdj.unit and SheafOfModules.unitToPushforwardObjUnit; none states a Tate-line derived unit or supported boundary square.",
+   "date": "2026-10-27",
+   "verdict": "no matching specialized theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"scalarUniversal\"",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedDerivedScalarUnit|SupportedKummerScalar|scalarUniversal in Mathlib; normalized root scalar and supported boundary square in Sheaf, WeilConjectures, DAG and latest blueprint",
+   "results": "No Mathlib hits. The source provides the private line Hom equivalence, proved tensor inverse and flat scalar-unit theorem; it also provides the integral derived-unit Ext injection and exact-functor composition comparison. Existing pro-etale normalized scalar-unit and comparison theorems have different sites and interfaces. The two new public statements isolate the fully proved root unit and its ordinary supported assembly.",
+   "date": "2026-10-27",
+   "verdict": "Use the stated component APIs; no existing node or public declaration states these isolated ordinary-site results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SupportedKummerBoundaryScalar",
+  "date": "2026-10-27",
+  "group": "Q1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SupportedKummerRootScalarUnit",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedKummerRootScalarUnit.lean",
+  "declaration": "AlgebraicGeometry.Etale.supported_kummer_root_scalar_unit",
+  "statement": "theorem supported_kummer_root_scalar_unit\n    {R S : Type (u + 1)} [CommRing R] [CommRing S]\n    (φ : R →+* S) (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)\n    (hR : (N : R) = 0) (hS : (N : S) = 0) (hT : IsUnit (N : Γ(T, ⊤))) :\n    ∃ θ : finiteEtaleTateLine T N R hR ⟶\n        (Sheaf.restrictScalars T.smallEtaleTopology φ).obj (finiteEtaleTateLine T N S hS),\n      (∀ (W : T.Etaleᵒᵖ) (a : R) (z : (T.rootsOfUnitySheaf N).obj.obj W),\n        θ.hom.app W (finiteEtaleTateOneGenerator R N T hR W a z) =\n          finiteEtaleTateOneGenerator S N T hS W (φ a) z) ∧\n      SupportedDerivedScalarUnit φ T (finiteEtaleTateLine T N R hR)\n        (finiteEtaleTateLine T N S hS) θ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T103505-L-1089636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T103505-L-1089636",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

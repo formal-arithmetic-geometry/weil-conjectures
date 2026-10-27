@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-proper-dualizing-closed-stalk-normalized",
+ "kind": "statement",
+ "title": "Closed stalk normalization of proper coherent duality",
+ "statement": "Let $k$ be a field [def-weil-field], let $f:X\\to\\operatorname{Spec}k$ be a proper morphism of schemes [def-pc-scheme, def-weil-proper-morphism], and let $a:D(k)\\to D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be a right adjoint of $Rf_*$ [def-pc-derived-category, def-pc-derived-direct-image]. Put $K=a(k[0])$. For every closed point $x\\in X$, set $A=\\mathcal O_{X,x}$ [def-weil-pbc-module-stalk] and $\\kappa(x)=A/\\mathfrak m_x$ [def-weil-residue-field]. The local ring $A$ is Noetherian [def-weil-pbc-noetherian-ring]. The stalk complex $K_x$ is an algebraic dualizing complex over $A$: it is isomorphic to a bounded complex of injective $A$-modules [def-sp-injective-resolutions], every $H^j(K_x)$ is finitely generated [def-weil-finitely-generated-module], and the scalar-action map $A[0]\\to R\\operatorname{Hom}_A(K_x,K_x)$ is an isomorphism in $D(A)$. Moreover it is normalized, meaning that there is an isomorphism\n$$R\\operatorname{Hom}_A(\\kappa(x)[0],K_x)\\cong\\kappa(x)[0]$$\nin $D(A)$. Here the stalk complex is obtained by applying the exact stalk functor to a representative of $K$, and $R\\operatorname{Hom}$ is [def-pur-derived-internal-hom] for the one-object ringed site. No dimension, reducedness, connectedness, smoothness or rationality hypothesis on $x$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AWL (lemma-good-dualizing-normalized), specialized to S=Spec(k) with k[0]; proper adjoint identification: Tag 0AWI (example-proper-over-local)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-module-stalk",
+  "def-weil-residue-field",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-noetherian-ring",
+  "def-sp-injective-resolutions",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "By the definition of properness, $f$ is of finite type. A field is Noetherian (its only ideals are $0$ and $k$), so $\\operatorname{Spec}k$ is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to obtain that $X$ is Noetherian. Apply [lem-sfb-proper-field-algebraic-dualizing] to the given adjoint $a$: $K$ has bounded coherent cohomology, $A$ is Noetherian, and $K_x$ has finite injective dimension (a bounded injective representative) and the scalar map $A[0]\\to R\\operatorname{Hom}_A(K_x,K_x)$ is an isomorphism. The cited node does not itself state finite generation of $H^j(K_x)$; it follows from bounded coherent cohomology: since stalks are exact [lem-weil-pbc-module-stalk-exact](5), $H^j(K_x)=H^j(K)_x$; the coherent sheaf $H^j(K)$ is of finite type [pqf-def-coherent], so on a neighbourhood $U$ of $x$ there is a surjection $\\mathcal O_U^{\\oplus n}\\to H^j(K)|_U$, and by [lem-weil-pbc-module-stalk-exact](3) its stalk $A^{\\oplus n}\\to H^j(K)_x$ is surjective. It remains to prove normalization.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-proper-field-algebraic-dualizing",
+    "lem-weil-pbc-module-stalk-exact",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+   }
+  },
+  {
+   "text": "Fix a closed point $x$ and put $L=\\kappa(x)$. By [lem-kun-closed-point-field](a), $L/k$ is finite. The canonical map $i:\\operatorname{Spec}L\\to X$ is a closed immersion by [lem-trf-closed-point-residue-immersion], hence finite and proper by [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-closed-immersion-proper]. Put $\\pi=fi:\\operatorname{Spec}L\\to\\operatorname{Spec}k$. It is finite by the definition of a finite morphism and the finiteness of $L/k$, and flat by [lem-pc-flat-field]. The source and target of $i$ and $\\pi$ are Noetherian, so their derived direct images have right adjoints by [lem-pc-noetherian-derived-direct-image-right-adjoint]; denote these by $i^!$ and $\\pi^!$.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-trf-closed-point-residue-immersion",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-finite-integral-morphism",
+    "lem-pc-flat-field",
+    "lem-pc-noetherian-derived-direct-image-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-finite-flat-duality-evaluation] to $\\pi$ and the rank-one free sheaf $\\mathcal O_{\\operatorname{Spec}k}$. It says that $\\pi^!k[0]$ is a sheaf in degree zero and identifies its pushforward, with its $L$-action, with $\\operatorname{Hom}_k(L,k)[0]$. Here $(b\\lambda)(c)=\\lambda(bc)$ for $b,c\\in L$. Via [lem-pc-affine-qcoh-derived-equivalence] on the spectra of the two fields, this is the $L$-module $V=\\operatorname{Hom}_k(L,k)$ in degree zero. No separability is used.",
+   "uses": [
+    "lem-sc-finite-flat-duality-evaluation",
+    "lem-pc-affine-qcoh-derived-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+   }
+  },
+  {
+   "text": "Proper composition [lem-sc-proper-upper-shriek-composition] applied to $i$ and $f$ gives $i^!K=i^!a(k[0])\\cong\\pi^!k[0]$. Thus $i^!K$ corresponds to $V[0]$ in $D(L)$.",
+   "uses": [
+    "lem-sc-proper-upper-shriek-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+   }
+  },
+  {
+   "text": "Set $\\mathcal F=i_*\\mathcal O_{\\operatorname{Spec}L}$; it is coherent by [lem-weil-pbc-finite-pushforward-coherent]. Since $K$ is bounded below, finite duality [lem-sc-finite-duality-derived-hom] gives $Ri_*i^!K\\cong R\\mathcal Hom_X(\\mathcal F[0],K)$. Take the stalk at $x$ and apply [lem-sfb-coherent-bounded-below-rhom-stalk]. Explicitly, on an open $U$, $i_*M(U)$ is $M$ if $x\\in U$ and zero otherwise, for any $L$-module $M$; this functor is exact, and its stalk at $x$ is $M$ with scalar action through $A\\to L$. Consequently $\\mathcal F_x=L$ and $(Ri_*i^!K)_x\\cong V[0]$ as $A$-complexes. We obtain $R\\operatorname{Hom}_A(L[0],K_x)\\cong V[0]$ in $D(A)$. This uses the derived comparison, not just separate isomorphisms of cohomology groups.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-sc-finite-duality-derived-hom",
+    "lem-sfb-coherent-bounded-below-rhom-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+   }
+  },
+  {
+   "text": "Choose a nonzero $k$-linear functional $\\lambda:L\\to k$ (a coordinate functional in a $k$-basis). The map $L\\to V$, $b\\mapsto(c\\mapsto\\lambda(bc))$, is $L$-linear for the action in Step 3 and injective: if $b\\ne0$, choose $d$ with $\\lambda(d)\\ne0$ and evaluate at $c=b^{-1}d$. Both spaces have $k$-dimension $[L:k]$, so it is bijective. It is therefore also $A$-linear through $A\\to L$. Combine its inverse in degree zero with Step 5 to obtain $R\\operatorname{Hom}_A(\\kappa(x)[0],K_x)\\cong\\kappa(x)[0]$ in $D(A)$, as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-proper-field-algebraic-dualizing",
+  "lem-weil-pbc-module-stalk-exact",
+  "pqf-def-coherent",
+  "lem-kun-closed-point-field",
+  "lem-trf-closed-point-residue-immersion",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-finite-integral-morphism",
+  "lem-pc-flat-field",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-finite-flat-duality-evaluation",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-proper-upper-shriek-composition",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-sc-finite-duality-derived-hom",
+  "lem-sfb-coherent-bounded-below-rhom-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tag 0AWL (lemma-good-dualizing-normalized), proof specialized to S=Spec(k); Tag 0AWI (example-proper-over-local)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"stalk\"",
+   "results": "0 hits: . Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|dualising|normalizedDualizing",
+   "results": "14 hits: Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/Data/Set/Defs.lean. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dualizing complex of a proper scheme over a field is normalized at each closed point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a field the stalk of the adjoint dualizing complex at a closed point is normalized RHom residue field equals residue field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.Scheme.residue_descResidueField, AlgebraicGeometry.Scheme.descResidueField, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.Scheme.instFieldCarrierResidueField, AlgebraicGeometry.Scheme.residue_descResidueField_assoc, AlgebraicGeometry.Scheme.Γevaluation. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed point stalk of proper Grothendieck duality has residue field Ext concentrated in degree zero",
+   "results": "8 hits: AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.Scheme.residue, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.Scheme.residueField, AlgebraicGeometry.stalkClosedPointIso_inv, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.evaluation, AlgebraicGeometry.Scheme.instFieldCarrierResidueField. Read the returned statements; none states algebraic dualizing normalization or Cohen–Macaulay dualizing concentration.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right adjoint dualizing complex of a proper scheme over a field has normalized stalks at closed points",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization.  The displayed types concern scheme normalization or unrelated dualization, not normalized coherent dualizing stalks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper scheme over a field the stalk of the dualizing complex at every closed point is normalized",
+   "results": "Returned 8 hits: AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.stalkClosedPointIso, AlgebraicGeometry.stalkwise, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.stalkClosedPointIso_inv, AlgebraicGeometry.germ_stalkClosedPointIso_hom, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_closedPoint, AlgebraicGeometry.Scheme.Hom.normalization.  The displayed types concern scheme normalization or unrelated dualization, not normalized coherent dualizing stalks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reduced-curve-dualizing-module",
+  "date": "2026-10-23",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: vanishing and length-one/length-two restriction: the support-of-dualizing-map obstruction of Stacks 0E3E; 0E3E proof: duality, generic rank one and absence of finite-support submodules, and the dualizing Euler characteristic; supporting input: Tag 0AWL (lemma-good-dualizing-normalized), specialized to S=Spec(k) with k[0]; proper adjoint identification: Tag 0AWI (example-proper-over-local).",
+   "via": [
+    "lem-sfb-reduced-curve-dualizing-module",
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-proper-dualizing-closed-stalk-normalized",
+  "worker": "stage1",
+  "summary": "Proved normalization by the closed residue-field immersion, proper composition and finite flat duality, explicitly identifying the finite field dual without a separability assumption. Reused the existing proper algebraic dualizing theorem for the underlying dualizing properties. Added one derived stalk comparison for coherent sheaves against bounded-below complexes; the existing degree-zero/cohomology comparison is insufficient. Statement unchanged.",
+  "blueprint": "The inherited blueprint ancestry records the coherent-duality prerequisite in the alteration/stable-curve route of det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint now cites proper base change and coefficient direct-image finiteness there and no longer displays that alteration expansion; this split proves the already queued supporting coherent-duality fact without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-pc-noetherian-derived-direct-image-right-adjoint",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-sc-finite-flat-duality-evaluation",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-pc-affine-qcoh-derived-equivalence",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-sc-proper-upper-shriek-composition",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-sc-finite-duality-derived-hom",
+    "why": "Generic coherent-duality, scheme, or commutative-algebra input in the closed-point normalization argument; the six-functor stability unit has no statement supplying this ordinary Zariski module theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Step 1 needs exactness of the Zariski module stalk functor (H^j commutes with stalks, stalks of a surjection are surjective) to get finitely generated H^j(K_x); generic sheaf fact, no node of the six-functor stability unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-closed-point-field",
+  "lem-pc-noetherian-derived-direct-image-right-adjoint",
+  "lem-sc-finite-flat-duality-evaluation",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "lem-sc-proper-upper-shriek-composition",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-sc-finite-duality-derived-hom",
+  "lem-weil-pbc-module-stalk-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NM-aac35bdb7",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-aac35bdb7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item follows Stacks 0AWL with S=Spec k, together with 0AWI. Its statement is unchanged from base, it was unsplit with an empty proof, and this is not a re-split order. The proof steps match the 0AWL proof. Step 2: closed point gives L/k finite (lem-kun-closed-point-field(a)), i is a closed immersion so finite and proper, π=fi is finite and flat, and the right adjoints exist. Step 3: finite flat duality gives π^!k[0] as Hom_k(L,k) in degree 0 with the precomposition L-action. Step 4: proper composition gives i^!K≅π^!k[0]. Step 5: finite duality gives Ri_*i^!K≅RHom(i_*O,K), and the new derived stalk comparison then gives RHom_A(L,K_x)≅V[0] in D(A) via an explicit skyscraper stalk calculation. Step 6: an explicit pairing that does not use the trace gives V≅L; checked on k=F_p(t), L=k(t^{1/p}). New node lem-sfb-coherent-bounded-below-rhom-stalk: true by 0GM8(2) plus 08E8. It is statement-only, with full stmt_deps and three kinds of search. It is not a duplicate: lem-sc-derived-internal-hom-stalk-localization is per-degree with a degree-0 second argument, and lem-sc-ext-stalk-localization is Ext between coherent sheaves. It is not a clause of the item. No cycle, no missing or merged ids, no SGA. FIX (C4): step 1 credited lem-sfb-proper-field-algebraic-dualizing with finite generation of H^j(K_x), which that node does not state. Step 1 now proves it from coherent cohomology and exact stalks, citing lem-weil-pbc-module-stalk-exact and pqf-def-coherent. proof_deps and split_report.tool_uses are updated (the stalk-exactness lemma is a generic tool). I accept the 7 declared tool_uses (generic coherent-duality and scheme facts). Batch-5 flag: lem-sfb-proper-field-algebraic-dualizing (coherent duality over a field) reaches lem-trf-regular-local-bounded-injective-resolution (Stacks 0AWX, regular local implies finite injective dimension). That is generic commutative algebra. Neither the ℓ-adic trace formula nor ℓ-adic Poincaré duality gives it, and it is not a step of their proofs, so it is genuinely outside them and not a RETURN.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperDualizingClosedStalkNormalized",
+  "declaration": "AlgebraicGeometry.proper_dualizing_closed_stalk_normalized",
+  "declarations": [
+   "AlgebraicGeometry.properFieldDerivedDirectImage",
+   "AlgebraicGeometry.properDualizingStalk",
+   "AlgebraicGeometry.proper_dualizing_closed_stalk_normalized"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperDualizingClosedStalkNormalized.lean",
+  "statement": "theorem proper_dualizing_closed_stalk_normalized (k : Type u) [Field k] (X : Scheme.{u}) [HasDerivedCategory.{wX} (SheafOfModules.{u} (moduleRings X.toRingedSpace))] [HasDerivedCategory.{wS} (SheafOfModules.{u} (moduleRings (Spec (.of k)).toRingedSpace))] (f : X ⟶ Spec (.of k)) [IsProper f] (a : DerivedCategory (ModuleCat.{u} k) ⥤ schemeDerivedQCohCategory X) (_adj : properFieldDerivedDirectImage k X f ⊣ a) (x : X) (_hx : IsClosed ({x} : Set X)) : IsNoetherianRing (X.presheaf.stalk x) ∧ (∃ I : CochainComplex (ModuleCat.{u} (X.presheaf.stalk x)) ℤ, (∃ p q : ℤ, ∀ n : ℤ, n < p ∨ q < n → IsZero (I.X n)) ∧ (∀ n : ℤ, Injective (I.X n)) ∧ Nonempty (DerivedCategory.Q.obj I ≅ properDualizingStalk X x (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj)) ∧ (∀ j : ℤ, Module.Finite (X.presheaf.stalk x) ((DerivedCategory.homologyFunctor (ModuleCat.{u} (X.presheaf.stalk x)) j).obj (properDualizingStalk X x (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj))) ∧ IsIso (MonoidalClosed.curry' (𝟙 (properDualizingStalk X x (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj))) ∧ Nonempty ((ordinaryModuleDerivedInternalHom (X.presheaf.stalk x)).obj (op ((DerivedCategory.singleFunctor (ModuleCat.{u} (X.presheaf.stalk x)) 0).obj ((ModuleCat.restrictScalars (X.residue x).hom).obj (ModuleCat.of (X.residueField x) (X.residueField x)))), properDualizingStalk X x (a.obj ((DerivedCategory.singleFunctor (ModuleCat.{u} k) 0).obj (ModuleCat.of k k))).obj) ≅ (DerivedCategory.singleFunctor (ModuleCat.{u} (X.presheaf.stalk x)) 0).obj ((ModuleCat.restrictScalars (X.residue x).hom).obj (ModuleCat.of (X.residueField x) (X.residueField x))))",
+  "branch": "sheaf-dag",
+  "by": "Q87",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5209c4bca",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Item lem-sfb-proper-dualizing-closed-stalk-normalized (Stacks 0AWL with S=Spec k, plus 0AWI) matches the node clause by clause. The direct image to D(k) is the scheme direct image followed by the canonical derived global sections read as k-modules, exactly the inverse in exists_affineQCohDerivedEquivalence, and a is adjoint to it. Clauses checked: A Noetherian; bounded injective complex isomorphic to K_x; Module.Finite of every H^j; IsIso of curry'(𝟙 K_x), same internal Hom as ordinaryModuleDerivedInternalHom with unit A[0]; the normalization is an isomorphism in D(A). properDualizingStalk applies the exact stalk functor to a representative; all clauses are invariant under isomorphism, so it is not hollow. The node is unchanged except the lean field; the statement is verbatim; all 23 imports exist; docstrings carry the source place, blueprint id and the six proof steps; no extra hypotheses or universe restrictions. Not recompiled per the 2026-10-21 rule. Advisories: RingedSpace.moduleStalkFunctor is owned by def-pc-module-stalk-functor, which is not a stmt_dep (the cited stalk node's record points to it); the stalk helper is object-level and needs a mapDerivedCategory bridge in stage 3; both helpers are plain defs in a theorem module."
+ }
+}

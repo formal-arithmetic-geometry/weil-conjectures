@@ -1,0 +1,436 @@
+{
+ "id": "lem-sfb-relative-commutative-multiplicative-extension",
+ "kind": "statement",
+ "title": "Relative commutative extensions of multiplicative-type groups",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. An $S$-group scheme is a group object in schemes over $S$, and a homomorphism respects multiplication, identity and inverse. An $S$-group scheme is of multiplicative type of finite presentation if it is, locally for the fppf topology [def-pc-fppf-site], isomorphic to $D_U(M)=\\operatorname{Spec}_U\\mathcal O_U[M]$ for a finitely generated abelian group $M$, with group-algebra Hopf operations as in [def-sfb-ring-diagonalizable-group]. Here the relative spectrum is obtained by gluing $\\operatorname{Spec}A[M]$ over affine opens $\\operatorname{Spec}A\\subseteq U$. Let $E$ be an affine commutative $S$-group scheme, where affine means that the inverse image of every affine open of $S$ is affine [pqf-def-affine-morphism], and commutative means that its multiplication is unchanged by exchanging the factors. Let $p:E\\to D$ be a homomorphism that is faithfully flat (flat [def-weil-flat-morphism] and surjective on underlying spaces) and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $N=E\\times_{D,e_D}S$ be its scheme-theoretic kernel, with the induced group structure. If $N$ and $D$ are of multiplicative type of finite presentation, then $E$ is of multiplicative type of finite presentation. No smoothness or connectedness of $E,N,D$, no reducedness of $S$, and no residue-characteristic restriction is assumed.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary B.4.2(2), printed pp.299--301, commutative case, with its short exact sequence expressed by a faithfully flat locally finitely presented homomorphism and its kernel. The middle group is automatically fppf over S since p and D -> S are fppf. WANTED locally as literature/conrad-reductive-group-schemes.pdf. No Stacks tag states this relative multiplicative-type extension theorem."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-sfb-ring-diagonalizable-group",
+  "pqf-def-affine-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sfb-relative-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "The assertion is local for the fppf topology by the definition of multiplicative type: compose a covering on which the assertion holds with its diagonalizing coverings. Restrict to affine opens and then successive splitting covers for $D$ and $N$; [lem-trf-fppf-covering-base-change] retains the first splitting under the second cover, and [lem-pc-fppf-affine-refinement] lets us work on affine charts. Thus assume $S=\\operatorname{Spec}A$, $D=D_A(Q)$ and $N=D_A(P)$ with $P,Q$ finitely generated. The empty base has nothing to prove. Fppf covering composition is the covering axiom of [def-pc-fppf-site].",
+   "uses": [
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, local reduction; Definition B.1.1, printed p.280."
+   }
+  },
+  {
+   "text": "Write $E=\\operatorname{Spec}C$. By [lem-sfb-subgroup-algebra-coset-presentation] with $L=0$, $A[Q]$ and $A[P]$ are finitely presented $A$-algebras. They are free over $A$ on their displayed group bases. Tensoring a module map with either algebra is a direct sum of copies of that map, so kernels and images are computed coordinatewise; the nonempty basis also detects zero modules. Thus these algebras are flat. The affine flatness dictionary [lem-weil-pbc-flat-ring-map-iff-flat-affine] applies. The given locally finitely presented map $p$ makes $A[Q]\\to C$ finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]; composition [lem-weil-pbc-finite-presentation-base-change-composition] makes $C$ finitely presented over $A$. The affine map $A[Q]\\to C$ is flat, and composition [lem-weil-pbc-flat-ring-map-comp] makes $C$ flat over $A$. In particular $E$ is flat of finite presentation over $A$.",
+   "uses": [
+    "lem-sfb-subgroup-algebra-coset-presentation",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-flat-ring-map-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed pp.299-300, fppf hypothesis; affine finite presentation and group-algebra calculation."
+   }
+  },
+  {
+   "text": "Use the system of finitely generated integer subrings $A_i\\subseteq A$ of [lemma-nagata-noetherian-inverse-system-affine]. By [thm-pd-spreading-out], descend $E$, its multiplication, inverse, identity, $p:E\\to D_A(Q)$ and the specified isomorphism $D_A(P)\\simeq E\\times_{D_A(Q)}S$ to one stage. For affineness choose a finite algebra presentation of $C$ and descend its finitely many coefficients, giving affine models $E_i$ from the outset. The group diagrams, commutativity, homomorphism diagrams and both inverse equations for the kernel isomorphism are finitely many equalities of arrows; the equality clause puts all of them at a common later stage. The kernel is modelled by the same fibre product, whose coordinate ring is the tensor product of [lem-weil-pbc-fibre-product-affine-spectra]. All schemes in these finite diagrams are finitely presented over the base: tensor a finite algebra presentation for the fibre products, using [lem-weil-pbc-finite-presentation-base-change-composition]. They are affine and hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]. This verifies the limit lemma's size and qcqs hypotheses.",
+   "uses": [
+    "lemma-nagata-noetherian-inverse-system-affine",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, Noetherian reduction; Stacks Tags 01ZM, 01YW."
+   }
+  },
+  {
+   "text": "For the model $p_i:E_i\\to D_{A_i}(Q)$, local finite presentation holds: a finite set of algebra generators for $A_i[Q]$ can be expressed in the chosen finite presentation of $C_i$, so adjoining equations equating those expressions to the generators gives a finite presentation of $C_i$ over $A_i[Q]$. Apply [lem-weil-pbc-colimit-flat-ring-map] to the system $A_i[Q]\\to C_i$ to arrange that $p_i$ is flat, using [lem-weil-pbc-flat-ring-map-iff-flat-affine]. Apply [lem-weil-pbc-descend-surjective] to arrange surjectivity as well. Its schemes and bases are affine qcqs by [lem-weil-pbc-affine-scheme-qcqs]. The kernel is still $D_{A_i}(P)$ at later stages. By [lem-weil-pbc-finite-type-over-noetherian], the finite-type integer base is Noetherian. It suffices to prove the assertion for these Noetherian split models: a diagonalizing fppf covering then pulls back to the original base by [lem-trf-fppf-covering-base-change]. Rename the model's base ring $A$.",
+   "uses": [
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-descend-surjective",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, Noetherian reduction; Stacks Tags 04AI and 07RR, flatness and surjectivity at a stage."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset A$ and let $R=A_{\\mathfrak p}$. It is Noetherian by [lem-weil-pbc-localization-noetherian]. Let $B=R^{\\mathrm{sh}}$ be the ring of [lem-weil-pbc-strict-henselization-triples]; it is local with separably closed residue field $k$. It is Noetherian by [lem-sc-strict-henselization-noetherian] and faithfully flat over $R$ by [lem-sc-strict-henselization-faithfully-flat]. Put $V=\\widehat B$. By [lem-weil-pbc-adic-completion-noetherian], [lem-weil-pbc-local-completion-local-ring] and [lem-weil-pbc-adic-completion-mod-ideal], $V$ is complete Noetherian local with the same residue field $k$; it is faithfully flat over $B$ by [lem-weil-pbc-local-completion-faithfully-flat]. All the given group structures and kernel identifications pull back. The base-changed quotient remains fppf by [lem-trf-fppf-covering-base-change]. Thus $E_V$ is flat of finite presentation by the argument of step 2 over $V$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, strictly henselian complete local reduction; the completion is taken only after the Noetherian model."
+   }
+  },
+  {
+   "text": "Let $K$ be an algebraic closure of $k$. Over $K$, apply [lem-sfb-commutative-multiplicative-type-extension] to $E_K\\to D_K(Q)$ with kernel $D_K(P)$. Its groups are affine of finite type, and its coordinate map is faithfully flat: $p_K$ is the base change of the fppf map $p_V$, hence flat and surjective by [lem-trf-fppf-covering-base-change]; flatness of the ring map is the affine dictionary, and surjectivity gives faithful flatness by [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat]. Consequently $E_K\\simeq D_K(M)$ for some finitely generated abelian $M$. This is also a closed subgroup of a finite power of $\\mathbf G_m$: choose generators of $M$, hence a surjection $\\mathbf Z^t\\twoheadrightarrow M$, and apply the closed-immersion clause of [lem-sfb-relative-diagonalizable-character-duality]. Thus $E_k$ satisfies exactly the geometric multiplicative-type hypothesis of [lem-sfb-multiplicative-character-antiduality], which gives a splitting over a finite separable extension of $k$. Since $k$ is separably closed, [lem-pc-sepclosed-finite-sep-trivial] makes that extension trivial. Choose $j_0:D_k(M)\\xrightarrow{\\sim}E_k$. No perfection or smoothness of $k$-groups has been used.",
+   "uses": [
+    "lem-sfb-commutative-multiplicative-type-extension",
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-sfb-relative-diagonalizable-character-duality",
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-pc-sepclosed-finite-sep-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed pp.300-301, field case; existing Milne Corollary 12.22 and Theorem 12.23 supply this case."
+   }
+  },
+  {
+   "text": "Write $p_kj_0:D_k(M)\\to D_k(Q)$ as $D_k(a)$ for $a:Q\\to M$ using [lem-sfb-relative-diagonalizable-character-duality]. Its fppf image is all of $D_k(Q)$. The image formula therefore makes $a$ injective: otherwise $k[Q]\\to k[\\operatorname{im}a]$ identifies distinct basis vectors and cannot be an isomorphism. The kernel formula identifies $\\ker(p_kj_0)$ with $D_k(M/a(Q))$. This kernel is the specified $D_k(P)$, so character duality gives an isomorphism $M/a(Q)\\simeq P$ under which the inclusion of the kernel is $D_k(b)$ for a surjection $b:M\\twoheadrightarrow P$. Hence $0\\to Q\\xrightarrow{a}M\\xrightarrow{b}P\\to0$ is exact. Put $q=D_V(a):D_V(M)\\to D_V(Q)$ and $i=D_V(b):D_V(P)\\hookrightarrow D_V(M)$. The same node gives that $q$ is faithfully flat and finitely presented and that its kernel is exactly $i(D_V(P))$.",
+   "uses": [
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, character extension dual to the special-fibre exact sequence."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-complete-local-diagonalizable-fibre-hom-lift] to the flat finite-type $V$-group $E_V$ and $j_0$. It gives an open and closed immersion $j:D_V(M)\\to E_V$. Both $j\\circ i$ and the specified kernel inclusion $n:D_V(P)\\to E_V$ reduce to the same map on $k$. The injectivity of the Hom restriction map in that node, now with source $D_V(P)$ and target $E_V$, proves $j\\circ i=n$. Also $p_V\\circ j=q$: both are maps between split diagonalizable groups, and their character homomorphisms are locally constant by [lem-sfb-relative-diagonalizable-character-duality]. A local ring has connected spectrum, since any open containing its closed point contains a basic open $D(f)$ with $f$ a unit and hence contains the whole spectrum. Thus each locally constant character map is constant and is determined by its special fibre. The two special fibres here are $p_kj_0=D_k(a)$.",
+   "uses": [
+    "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+    "lem-sfb-relative-diagonalizable-character-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, lift of the special fibre, compatibility with the kernel and the quotient."
+   }
+  },
+  {
+   "text": "For any $V$-scheme $T$ and $x\\in E_V(T)$, the fppf cover obtained by pulling back $q$ along $p_V(x)$ has a section $y$ of $D_V(M)$ with $q(y)=p_V(x)$. On that cover $xj(y)^{-1}$ lies in $\\ker p_V=N_V$, hence equals $n(z)=j(i(z))$ for a unique $z\\in D_V(P)$. Therefore $x=j(i(z)y)$ fppf-locally. The cover is surjective, so applying this to points shows that every point of $E_V$ lies in the image of $j$. Since $j$ is an open immersion, its image is an open subscheme isomorphic to its source; surjectivity says this open subscheme is all of $E_V$. Thus $j$ is an isomorphism and $E_V=D_V(M)$. This step uses the fppf quotient supplied in step 7, not an assumption that every open subgroup containing the special fibre is the whole group.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, the chain of inclusions after passage to quotients; explicit local lifting argument."
+   }
+  },
+  {
+   "text": "The affine faithfully flat maps $\\operatorname{Spec}V\\to\\operatorname{Spec}B$ and $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ are singleton fpqc covers. Indeed [lem-weil-pbc-flat-ring-map-iff-flat-affine] and [lem-weil-pbc-faithfully-flat-surjective-spectrum] give flatness and surjectivity; over any affine open $W$ of the target, its inverse image is the fibre product of $W$ with an affine scheme over an affine scheme, hence affine by [lem-weil-pbc-fibre-product-affine-spectra], and by surjectivity its image is all of $W$; so they satisfy [def-weil-pbc-fpqc-covering]. Apply [lem-sfb-multiplicative-type-fpqc-descent] first to $E_B$, then to $E_R$. Their affineness and finite presentation follow by tensoring their finite algebra presentations, and their flatness follows from the quotient and the free group algebra exactly as in step 2. We conclude that $E_R$ is of multiplicative type for each prime $\\mathfrak p$ of the Noetherian model $A$.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-fpqc-covering",
+    "lem-sfb-multiplicative-type-fpqc-descent",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(1),(2), printed pp.299-300, descent from the completion."
+   }
+  },
+  {
+   "text": "Spread this conclusion from $R=A_{\\mathfrak p}$ to a neighborhood of $\\mathfrak p$ as follows. By [lem-pc-fppf-affine-refinement], choose finitely many affine charts $T_l\\to\\operatorname{Spec}R$ of a diagonalizing cover, with $E_{T_l}\\simeq D_{T_l}(M_l)$. Each chart's algebra is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. The ring $R$ is the directed colimit of $A_f$, $f\\notin\\mathfrak p$. Descend these finite algebra presentations to some $A_f$ and descend the group isomorphisms, their inverses and their group diagrams by [thm-pd-spreading-out], using its equality clause for both inverse identities. The sources are affine fp schemes, hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-weil-pbc-colimit-flat-ring-map] to make each of the finitely many chart maps flat at a common later stage. Apply [lem-weil-pbc-finite-family-joint-surjectivity-stage] to make the chart family jointly surjective there. All its maps are lfp because the chart algebras are finitely presented. This is a diagonalizing fppf cover of $\\operatorname{Spec}A_f$, with $f\\notin\\mathfrak p$. Thus the neighborhoods so obtained cover $\\operatorname{Spec}A$, proving the assertion for the Noetherian model.",
+   "uses": [
+    "lem-pc-fppf-affine-refinement",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-colimit-flat-ring-map",
+    "lem-weil-pbc-finite-family-joint-surjectivity-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed p.300, spreading from local rings; Stacks Tags 01ZM, 04AI and 07RR, with the cover and its surjectivity retained."
+   }
+  },
+  {
+   "text": "Pull the resulting diagonalizing coverings back from the model of steps 3-4 to the original split affine base, using [lem-trf-fppf-covering-base-change]. Then compose with the splitting and affine-refinement covers of step 1. The fppf covering axiom [def-pc-fppf-site] gives a cover of the original $S$ on which $E$ is $D(M)$ with $M$ finitely generated. This is precisely the asserted multiplicative type of finite presentation. For the finite-presentation terminology, the group algebras are finitely presented by step 2; local finite presentation descends across fppf covers by [lem-trf-fppf-covering-is-fpqc] and [lem-weil-pbc-fpqc-descend-locally-finite-presentation]. An affine morphism which is lfp is of finite presentation: on affine opens of the base it is a map of affine schemes with a finite algebra presentation. This proves every claimed case without adding a smoothness, reducedness, connectedness or characteristic assumption.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+    "place": "Corollary B.4.2(2), printed pp.299-301, completion of the relative commutative case."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "lem-sfb-subgroup-algebra-coset-presentation",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-flat-ring-map-comp",
+  "lemma-nagata-noetherian-inverse-system-affine",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-weil-pbc-descend-surjective",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-sfb-commutative-multiplicative-type-extension",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-sfb-relative-diagonalizable-character-duality",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-sfb-complete-local-diagonalizable-fibre-hom-lift",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-multiplicative-type-fpqc-descent",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Corollary B.4.2(2), printed pp.299-301; online proof followed, with the limit/spreading reductions expanded and the algebraically closed field case supplied by existing Milne nodes. Local archive WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "multiplicative.?type|diagonaliz.*extension|extension.*diagonaliz",
+   "results": "{\"t\": \"2026-10-24T09:29:24Z\", \"tool\": \"grep\", \"query\": \"multiplicative.?type|diagonaliz.*extension|extension.*diagonaliz\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf exact sequence of commutative affine group schemes with diagonalizable kernel and quotient has middle group of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T09:29:25Z\", \"tool\": \"leansearch\", \"query\": \"An fppf exact sequence of commutative affine group schemes with diagonalizable kernel and quotient has middle group of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"Function.MulExact.of_ladder_mulEquiv_of_mulExact'\", \"AddGroupExtension\", \"Function.MulExact.monoidHom_rangeRestrict\", \"AddCommGrpCat.toCommGrp_obj_coe\", \"Function.Exact.split_tfae'\", \"MulAutMultiplicative\", \"MonoidHom.mulExact_iff\"], \"digest\": \"ffcf9565a2cf1fb7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"extension\"",
+   "results": "{\"t\": \"2026-10-24T09:29:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"extension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutative affine group scheme extensions of groups of multiplicative type over arbitrary schemes are of multiplicative type",
+   "results": "{\"t\": \"2026-10-24T09:29:26Z\", \"tool\": \"leanfinder\", \"query\": \"Commutative affine group scheme extensions of groups of multiplicative type over arbitrary schemes are of multiplicative type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"CategoryTheory.CommGrp.forget₂Grp_obj_mul\", \"CommGrpCat.commGroupObj\", \"CategoryTheory.CommGrp_Class.ofRepresentableBy\", \"CategoryTheory.CommGrpObj.ofRepresentableBy\"], \"digest\": \"9e24fe53c1040709\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|IsMultiplicativeType",
+   "results": "{\"t\": \"2026-10-24T09:29:57Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|IsMultiplicativeType\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of diagonalizable affine group schemes which is commutative is fppf locally diagonalizable over any base ring",
+   "results": "{\"t\": \"2026-10-24T09:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of diagonalizable affine group schemes which is commutative is fppf locally diagonalizable over any base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\"], \"digest\": \"8c1f0e3c4976593d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract group extensions, group objects, affine space, or scheme diagonals, not relative groups of multiplicative type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commutative affine group scheme extension of two groups of multiplicative type is of multiplicative type over an arbitrary base scheme",
+   "results": "{\"t\": \"2026-10-24T10:00:43Z\", \"tool\": \"leanfinder\", \"query\": \"A commutative affine group scheme extension of two groups of multiplicative type is of multiplicative type over an arbitrary base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GrpObjAsOverPullback\", \"CommGrpCat.cartesianMonoidalCategory\", \"CategoryTheory.Hom.commGroup\", \"CategoryTheory.PreGaloisCategory.instGroupAutGalois\", \"CategoryTheory.CommGrp.instCategory\", \"CategoryTheory.CommGrp.forget₂Grp_obj_mul\", \"CategoryTheory.Preadditive.commGrpEquivalence_functor_obj_grp_mul\", \"CommGrpTypeEquivalenceCommGrp.inverse_obj_mul\"], \"digest\": \"f060057e87d24368\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: AlgebraicGeometry.Scheme.GrpObjAsOverPullback, CommGrpCat.cartesianMonoidalCategory, CategoryTheory.Hom.commGroup, CategoryTheory.PreGaloisCategory.instGroupAutGalois, CategoryTheory.CommGrp.instCategory, CategoryTheory.CommGrp.forget₂Grp_obj_mul, CategoryTheory.Preadditive.commGrpEquivalence_functor_obj_grp_mul, CommGrpTypeEquivalenceCommGrp.inverse_obj_mul concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"multiplicative\"",
+   "results": "{\"t\": \"2026-10-24T10:00:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"GroupScheme\\\", \\\"multiplicative\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Commutative extensions of fppf locally diagonalizable affine group schemes are locally diagonalizable",
+   "results": "{\"t\": \"2026-10-24T10:00:39Z\", \"tool\": \"leansearch\", \"query\": \"Commutative extensions of fppf locally diagonalizable affine group schemes are locally diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source\", \"AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion\", \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"IsAbelianGalois.toIsMulCommutative\"], \"digest\": \"f582e77e8adf0dc9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the displayed signatures: AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.HasAffineProperty.diagonal_iff, AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_of_openCover_source, AlgebraicGeometry.instIsZariskiLocalAtSourceDiagonalSchemeOfHasOfPostcompPropertyOfRespectsRightIsOpenImmersion, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, IsAbelianGalois.toIsMulCommutative concern scheme diagonals, ordinary ring lifting, or general descent, not this group-scheme theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonali[sz]able|MultiplicativeType|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T10:01:10Z\", \"tool\": \"grep\", \"query\": \"diagonali[sz]able|MultiplicativeType|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-central-multiplicative-preimage",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Lemma 4.1.3 (rank-one centralizer), Theorem 4.2.6, pp.120-121 (perfect opposite-root pairing and coroot), and Corollary 5.1.9(1), printed pp.140-141 (three-exponential normalizer element and reflection formula).  Supporting structural classification before the opposite-root matrix calculation: Conrad Theorem 5.1.8, printed pp.139-140. Supporting input to the matrix-model proof: the saturated root-kernel torus and its semisimple quotient, before either centre case. General structural input: Relative quotient by a central subgroup of multiplicative type. Supporting prerequisite: Central multiplicative preimages in smooth connected group extensions. Lemma 3.3.1(2) and proof, printed pp.96--97. Applied to an arbitrary smooth connected affine group, without reductivity. Supporting generic input after the commutator has been killed: Conrad Corollary B.4.2(2), commutative extensions over arbitrary schemes.",
+   "via": [
+    "lem-sfb-relative-central-multiplicative-preimage",
+    "lem-sfb-relative-central-multiplicative-quotient",
+    "lem-sfb-relative-rank-one-central-quotient",
+    "lem-sfb-relative-rank-one-local-matrix-model",
+    "lem-sfb-relative-opposite-root-reflection-map",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-relative-commutative-multiplicative-extension",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded the split-affine Noetherian reduction, strict henselian completion, algebraically closed field input and separable splitting, exact character lattice, unique lifting and the explicit fppf-surjectivity argument that fills the lifted subgroup. Two strictly smaller structural inputs: complete-local deformation and fpqc descent. All searches logged, all cited node statements read, and no SGA source used.",
+  "blueprint": "blueprint_refs.py ancestor returns null for this inherited created chain. Retained the exact inherited from.place and via. The current latest sk-thm-sf-ctf-stability-direct-images proof (3) was read; this split serves its inherited relative group-theory prerequisite without changing a unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic Affine refinement of an fppf covering input in the explicit local and descent reductions; the unit has no more specific version."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-flat-ring-map",
+    "why": "flatness of the finitely presented quotient and chart maps eventually holds at a stage"
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic The colimit over etale algebras with a point and a residue embedding is strictly henselian input in the explicit local and descent reductions; the unit has no more specific version."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings input in the explicit local and descent reductions; the unit has no more specific version."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic Strict henselization is faithfully flat input in the explicit local and descent reductions; the unit has no more specific version."
+   },
+   {
+    "node": "lem-weil-pbc-finite-family-joint-surjectivity-stage",
+    "why": "the finite family of splitting charts remains jointly surjective after shrinking around the prime"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-finite-family-joint-surjectivity-stage"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q102-1e23ab20f",
+  "group": "Q102",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-1e23ab20f (reviewer sub-agent of L); spot-checked: FIX: read in full; two small justification repairs, no statement, stmt_deps or proof_deps change. Source: Conrad's PDF fetched from the node's URL and read at Thm B.3.2(2) pp.288-290 and Cor B.4.2(1)(2) pp.299-300. The item matches B.4.2(2) in the commutative case: E is fppf because p and D are fppf. lem-sfb-complete-local-diagonalizable-fibre-hom-lift matches B.3.2(2) for a split source, and lem-sfb-multiplicative-type-fpqc-descent matches B.4.2(1). Both new nodes are true, statement-only, self-contained and searched. No duplicate: the DAG grep for B.3.x/B.4.x and fpqc with multiplicative found only B.3.2(1) effectivity, a smooth-target torus lift and torus-only nodes. Steps 1-12 checked against every cited statement. Step 7: the character-duality image and kernel formulas over k give 0->Q->M->P->0, and the quotient clause over V gives q. Step 8: the lift node's Hom injectivity gives j∘i=n, and p_V∘j=q follows from connectedness of Spec V. Step 9: x·j(y)^{-1} lies in ker p_V on the q-pullback cover, so the open immersion j is surjective; marking it elementary is acceptable. Steps 3-4 and 11 meet the hypotheses of 01ZM, 07RR, colimit flatness and finite-family joint surjectivity. Fix 1: step 6 did not justify flatness and surjectivity of p_K; I added that it is the base change of fppf p_V, citing lem-trf-fppf-covering-base-change. Fix 2: step 10 called the inverse images of affine opens 'affine localizations', which is false for non-principal opens; I replaced this with 'fibre product of affines, hence affine', citing lem-weil-pbc-fibre-product-affine-spectra, which with surjectivity is what the fpqc covering definition needs. Batch-5: lem-trf-fppf-covering-base-change and lem-trf-fppf-covering-is-fpqc are generic site leaves. The character-duality closure reaches the trf part only through the is-fpqc leaf, and the antiduality closure only through commutative-algebra scalar comparisons (lem-trf-projective-exterior-scalar-comparisons). None of these is a statement given by either assumption or a step of its proof: accepted. Accepted tool_uses: the six declared generic local and limit tools. The maintainer should also record descend-surjective, adic-completion-noetherian, fpqc-descend-lfp, 01ZM and Nagata approximation. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeCommutativeMultiplicativeExtension",
+  "declaration": "AlgebraicGeometry.relative_commutative_multiplicativeType_extension",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeCommutativeMultiplicativeExtension.lean",
+  "statement": "theorem relative_commutative_multiplicativeType_extension {S : Scheme.{u}} (E D : Over S) [GrpObj E] [GrpObj D] [IsAffineHom E.hom] [IsCommMonObj E] (p : E ⟶ D) [IsMonHom p] [Flat p.left] [Surjective p.left] [LocallyOfFinitePresentation p.left] (hN : IsRelativeMultiplicativeType (Grp.mk (GrpObj.ker p))) (hD : IsRelativeMultiplicativeType (Grp.mk D)) : IsRelativeMultiplicativeType (Grp.mk E)",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1de0e0d73",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Re-delivery after return for duplicate def: now reuses Q140's landed IsRelativeMultiplicativeType (fppf affine cover, Grp-iso to ringDiagonalizableGroup R_i M_i, M_i fg = Conrad B.1.1). Node differs from main only in lean + stmt_deps (+def-sfb-relative-multiplicative-type); statement/proof/proof_deps unchanged; lean.statement verbatim. Clauses: IsAffineHom E.hom, IsCommMonObj E, IsMonHom p, Flat/Surjective/LFP p.left, kernel = GrpObj.ker p = pullback p η[D] with instGrpObjKer; no extra hypotheses (D not assumed affine; no smooth/connected/char). Edge cases empty S, rank 0, mu_p, varying M ok; single universe u. No defs, sorry only, source+blueprint docstrings with 12-step plan, imports all exist, report sections present. No file changed so no compile. Advisory: prose does not bracket-cite the added def stmt_dep (Q140 precedent)."
+ }
+}

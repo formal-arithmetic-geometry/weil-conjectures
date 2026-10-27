@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Arrows
 
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer
+
 /-!
 # Normalized ordinary finite projective-line duality data
 
@@ -119,6 +121,7 @@ def OrdinaryFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ordinaryFiniteP1Exchange A f ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫
       (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
         (ordinaryFiniteShiftedLinePullback A N hA t
+          (X := ProjectiveLine S') (Y := ProjectiveLine S)
           (ProjectiveSpace.map (ULift.{u} (Fin 2)) f) (d S hS).invertible_on_projectiveLine).hom =
     ordinaryFiniteP1DecompositionSourceMap A N hA t f hS ≫
       (d S' hS').decomposition.hom) ∧
@@ -127,6 +130,7 @@ def OrdinaryFiniteP1BaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
       ordinaryFiniteP1Exchange A f ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫
         (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map
           (ordinaryFiniteShiftedLinePullback A N hA t
+            (X := ProjectiveLine S') (Y := ProjectiveLine S)
             (ProjectiveSpace.map (ULift.{u} (Fin 2)) f)
               (d S hS).invertible_on_projectiveLine).hom ≫ (d S' hS').trace) ∧
     ∀ K : DerivedCategoryModule A S,

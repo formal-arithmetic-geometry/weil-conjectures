@@ -25,217 +25,60 @@
  ],
  "proof": [
   {
-   "text": "The scheme and coefficient conventions are [sk-def-sfb-dc-setting] and [sk-def-localizing-closure]. A field is Noetherian (its only ideals are zero and the unit ideal), so [lem-weil-pbc-finite-type-over-noetherian] makes all standing schemes Noetherian, hence qcqs; their open subsets are quasi-compact. The coefficient pullbacks are exact and identify the inverse-image coefficient rings by [sk-prop-sfb-cartesian-coefficients]. We will use only the relative module-sheaf operations over these rings, including the completed integral coefficient sheaf, never tensor over the discrete scalar field in place of the condensed field.",
+   "text": "Use admissible bounded-constructibility triangulated closure and the existing finite-Tor well-definedness theorem. Their intersection dctfPred is triangulated and replete.",
    "uses": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-localizing-closure",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 1, standing conventions and finite stratifications."
-   }
-  },
-  {
-   "text": "The categories $\\Dctf$ are triangulated. For finite $A$, constructible sheaves are weak Serre by [lem-sfb-discrete-noetherian-constructible-serre], so [prop-weil-pbc-module-bounded-constructible-triangulated], with coefficient category $\\Ab$ and ring object $A_X$, makes $\\Dbc$ triangulated. For integral coefficients use [sk-lem-int-integral-heart](1), and for rational coefficients use [det-cor-coefficient-heart-ii-triangulated]. Finally [det-def-sfb-constructible-tor-amplitude] makes finite Tor amplitude thick and identifies $\\Dctf$ with its intersection with $\\Dbc$. These facts give closure under zero, isomorphisms, finite cones and shifts in every coefficient case.",
-   "uses": [
-    "lem-sfb-discrete-noetherian-constructible-serre",
-    "prop-weil-pbc-module-bounded-constructible-triangulated",
-    "sk-lem-int-integral-heart",
-    "det-cor-coefficient-heart-ii-triangulated",
+    "lem-sfb-admissible-bounded-constructible-triangulated",
     "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraphs 1 and 3, the triangulated closure used in dévissage."
-   }
+   "elementary": false
   },
   {
-   "text": "We spell out the finite stratification dévissage used below. By the geometric clause (1) of [det-lem-coefficient-heart-common-stratification], any given finite locally closed stratification can be refined and ordered $S_1,\\ldots,S_m$ with $V_r=S_1\\cup\\cdots\\cup S_r$ open. This clause is independent of its auxiliary coefficient $E$ or $\\Qlb$; fix $E=\\mathbf Q_\\ell$ when applying it even to finite or integral coefficient objects. For a complex $C$ adapted to these strata, let $v_r:V_r\\hookrightarrow X$ and put $C_r=v_{r!}v_r^*C$ on $X$. Apply the short exact open--closed sequence of [lem-weil-pbc-proetale-ringed-open-closed] termwise on $V_r$ to its open $V_{r-1}$ and closed complement $S_r$. Exact extension by zero gives a degreewise short exact sequence $0\\to C_{r-1}\\to C_r\\to a_{r!}(C|_{S_r})\\to0$. The corresponding derived triangle is [lem-weil-pbc-complex-ses-triangle]. The composition and factorization identifications, including agreement of closed-then-open with open-then-closed extension, are precisely [lem-sfb-locally-closed-extension-coherence]. With $C_0=0$ and $C_m=C$, induction on $r$ expresses $C$ as finite cones of the displayed pieces. Exactness also shows that the same construction applies to any representing complex, independently of its representative.",
+   "text": "For a=j≫i apply locallyClosed_support_hom_model to obtain its genuine restricted adjunction, a representative N of L, the Dctf membership of G(N), and the ambient Hom isomorphism. The immersion source inherits its k-structure and is Noetherian and finite type; no source field-structure hypothesis is added.",
    "uses": [
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-sfb-locally-closed-extension-coherence"
+    "lem-sfb-locally-closed-support-hom-model",
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 1, open--closed localization triangles, expanded as a finite filtration."
-   }
+   "elementary": false
   },
   {
-   "text": "For finite $A$, use [det-pe-finite-tor-comparison-noetherian] to descend $K$ to an étale bounded constructible finite-Tor complex, and choose an ordered Tor interval $[a,b]$. The finite ring $A$ is Noetherian, since each ideal is a finite set of generators. By [lem-sf-etale-flat-constructible] choose a bounded complex $F$ of flat constructible sheaves representing the descent. On a common finite stratification of the étale terms [lem-weil-pbc-constructible-stratification-intersection], each term has a finite locally constant $A$-module model. Check its flatness on the étale site, before pulling back: for a geometric point $x$ of the stratum and any scalar $A$-module $M$, apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the geometric-point inverse image and $F^r\\otimes_A^{\\mathbf L}\\underline M$. Exactness of the étale stalk functor [prop-weil-pbc-geometric-stalks-exact] and flatness of $F^r$ imply that $F^r_x\\otimes_A^{\\mathbf L}M$ is concentrated in degree zero. Thus the scalar model $F^r_x$ is flat. It is finitely presented: it is finite, and the kernel of a finite free surjection onto it is finitely generated by [lem-weil-pbc-noetherian-submodule-finite]. Now [lem-weil-pbc-finitely-presented-flat-module-projective] makes this model finite projective. Pull $F$ back exactly to the pro-étale site. Its étale local constant models give pro-étale local constant models on the same strata. Apply Step 3 to each of the finitely many terms. Each term is consequently obtained by finite cones of sheaves $a_!P$ with $P$ locally constant finite projective in degree zero. The stupid truncations of the bounded complex $F$ have degreewise split short exact successive sequences with quotients $F^r[-r]$; [lem-weil-pbc-complex-ses-triangle] supplies their triangles. Induction through its finitely many nonzero degrees proves the required finite-cone-and-shift generation of $K$. In particular this does not replace a finite-Tor complex by its cohomology sheaves.",
+   "text": "For scalar-perfect P use locallyConstantPerfect_dual_constructible for the bounded-constructible dual and tensor--Hom isomorphism. Apply internalHom_dual_tor_amplitude, and translate its cohomology vanishings outside [-b,-a] using DerivedCategory.isGE_iff/isLE_iff. This puts the same specified dual in Dctf. Apply the existing tensor and direct-image stability clauses to dual tensor G(N), push the evaluation isomorphism through Ra_*, and transport its Dctf membership along the composite ambient Hom isomorphism. This proves the generator case and both displayed formulas.",
    "uses": [
-    "det-pe-finite-tor-comparison-noetherian",
-    "lem-sf-etale-flat-constructible",
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-finitely-presented-flat-module-projective",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-noetherian-submodule-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 1, finite coefficients: bounded flat model and its stupid filtration."
-   }
-  },
-  {
-   "text": "For $\\Lambda=\\mathcal O_E$, clause (1) of [det-lem-int-integral-heart-local-model] gives a finite stratification on which $K$ is pro-étale locally the completed scalar extension of a bounded complex of finite free $\\mathcal O_E$-modules. Thus each restriction is a locally constant perfect complex in the statement's sense. Apply Step 3 directly to $K$ on this stratification, giving finitely many pieces $a_!(K|_S)$ and no retract operation. The case $\\mathbf Z_\\ell$ is $E=\\mathbf Q_\\ell$. For $\\Lambda=E$ or $\\Qlb$, [det-lem-coefficient-heart-filtration] gives a finite filtration of each constructible cohomology sheaf by $a_!P$ with $P$ lisse finite free, hence perfect in degree zero. Since $K$ is bounded, finitely many truncation triangles [lem-pc-derived-lower-truncation-step-triangle], followed by the triangles of these sheaf filtrations [lem-weil-pbc-complex-ses-triangle], express $K$ by finite cones and shifts of those pieces. This includes $\\mathbf Q_\\ell$ and proves the generation clause at every stage.",
-   "uses": [
-    "det-lem-int-integral-heart-local-model",
-    "det-lem-coefficient-heart-filtration",
-    "lem-pc-derived-lower-truncation-step-triangle",
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 1, integral and rational local models; the separate finite generation arguments."
-   }
-  },
-  {
-   "text": "By [lem-sfb-ringed-site-perfect-duality], $P^\\vee$ is perfect and $\\cHom_S(P,N)\\simeq P^\\vee\\otimes^{\\mathbf L}N$ for every ambient $N$. The slice-restriction assertion of [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies its restrictions with the duals of the local models. The scalar-cohomology formulas of [lem-sfb-internal-hom-dual-constructible-models] apply to the locally constant perfect models in the statement and put both $P$ and $P^\\vee$ in $\\Dbc(S,\\Lambda)$, including completed integral coefficients. Finite Tor amplitude is established separately in Step 7.",
-   "uses": [
-    "lem-sfb-ringed-site-perfect-duality",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sfb-internal-hom-dual-constructible-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 2, perfect dual and tensor-Hom formula; paragraph 3, membership of the perfect factors."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-internal-hom-dual-tor-amplitude] to the same local scalar models. It gives a single interval $[a,b]$ for $P$ and $[-b,-a]$ for $P^\\vee$, tested against every module sheaf; for empty $S$ it gives $[0,0]$. Together with the bounded-constructibility conclusion of Step 6 and the definition [sk-def-sfb-constructible], this proves $P,P^\\vee\\in\\Dctf(S,\\Lambda)$. This uses no finite global dimension assumption on a finite coefficient ring.",
-   "uses": [
+    "lem-sfb-locally-constant-perfect-dual-ctf",
     "lem-sfb-internal-hom-dual-tor-amplitude",
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 2, perfect dual and tensor-Hom formula; paragraph 3, membership of the perfect factors."
-   }
-  },
-  {
-   "text": "Let $a:S\\hookrightarrow X$ be as in the statement. By [lem-pqf-qc-immersion-open-closed-factor], write it $S\\xrightarrow{u}Z\\xrightarrow{i}X$ with $u$ open and $i$ closed, and let $j:X\\setminus Z\\hookrightarrow X$ be the complementary open. Put $T=u^*R\\underline\\Gamma_ZL$, using the ambient derived support adjoint of [det-lem-formal-closed-support-adjunction]. Its fiber formula is $R\\underline\\Gamma_ZL\\simeq i^*\\operatorname{fib}(L\\to Rj_*j^*L)$. Each of $j^*$, $Rj_*$ and $i^*$ preserves $\\Dctf$ by [det-thm-sf-ctf-stability-direct-images](1),(3). Step 2 therefore puts this fiber and then $R\\underline\\Gamma_ZL$ in $\\Dctf$, and the same node's pullback clause puts $T$ in $\\Dctf(S,\\Lambda)$. This establishes support preservation without inferring it from existence of a right adjoint.",
-   "uses": [
-    "lem-pqf-qc-immersion-open-closed-factor",
-    "det-lem-formal-closed-support-adjunction",
     "det-thm-sf-ctf-stability-direct-images"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraphs 2 and 3, locally closed support and preservation, with the ambient support object made explicit."
-   }
+   "elementary": false
   },
   {
-   "text": "The closed immersion $i$ is proper by [lem-weil-pbc-closed-immersion-proper](a), so $(u,i)$ is a compactification of $a$. It computes $Ra_!=Ri_*u_!=i_*u_!=a_!$, because $i_*$ and $u_!$ are exact [lem-weil-pbc-proetale-ringed-open-closed, lem-weil-pbc-exact-functor-derived-functor]; this is the compactification formula of [sk-def-sfb-module-derived-lower-shriek]. Its comparison with the chosen compactification on the localizing closure is [det-sf-comp-coherence-cocycle]. For any $B\\in\\Loc(\\Dctf(S,\\Lambda))$, the ambient adjunction $i_*\\dashv R\\underline\\Gamma_Z$ [det-lem-formal-closed-support-adjunction], followed by the ambient derived open adjunction $u_!\\dashv u^*$ [def-sfb-dc-open-lower-shriek-adjunction], gives $\\Hom_X(a_!B,L)\\cong\\Hom_S(B,T)$. By [sk-prop-sf-existence], the same functor is represented by $a^!L$. Both representing objects lie in the full localizing closure: $T$ by Step 8, and $a^!L$ by its definition. Transpose each counit under the other adjunction; the two resulting maps $T\\rightleftarrows a^!L$ compose to the identities by the adjunction triangle identities. Thus $T\\simeq a^!L$, naturally in $L$. This comparison tests only objects of the localizing closure, where that adjunction is actually defined.",
+   "text": "Map a generator isomorphism contravariantly through derivedHom(-,L). Coherent native contravariant exactness equips that functor with shifts and a triangulated structure on the opposite category. Pull back dctfPred and then unop its property; Mathlib proves this Q triangulated. Transport isomorphisms by the same functor to prove repleteness.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-sfb-dc-open-lower-shriek-adjunction",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "sk-def-sfb-module-derived-lower-shriek",
-    "det-sf-comp-coherence-cocycle",
-    "det-lem-formal-closed-support-adjunction",
-    "sk-prop-sf-existence"
+    "lem-weil-native-internal-hom-contravariant-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 2, trivial compactification and adjunction, repairing the scope of the Yoneda argument."
-   }
+   "elementary": false
   },
   {
-   "text": "Now apply the ambient internal-Hom formulas of [lem-sfb-open-closed-internal-hom-formulas], first to $i$ and then to $u$ with target $R\\underline\\Gamma_ZL$. They give\n$$\\cHom_X(i_*u_!P,L)\\simeq i_*\\cHom_Z(u_!P,R\\underline\\Gamma_ZL)\\simeq i_*Ru_*\\cHom_S(P,u^*R\\underline\\Gamma_ZL).$$\nThe ringed-topos composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], with exact $i_*$, identifies $i_*Ru_*=Ra_*$. Step 9 replaces $u^*R\\underline\\Gamma_ZL$ by $a^!L$. We obtain the first stated isomorphism in the entire ambient $D(X_{\\mathrm{proét}},\\Lambda)$, naturally in $P,L$. Unlike a calculation of global Hom alone, the cited formulas are identities of internal sheaf-valued derived Hom, without constructibility assumptions.",
+   "text": "Apply finite triangulated generation to Q, with the generator membership from Step 3, proving the membership clause for K. Apply the same generation theorem to an arbitrary replete triangulated property R containing internalHomGenerator, supplying the actual extension as its own generator via the identity isomorphism. Pair these conclusions with the adjunction and formulas from Step 3.",
    "uses": [
-    "lem-sfb-open-closed-internal-hom-formulas",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-sfb-ctf-locally-closed-perfect-generation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraph 2, first internal-Hom isomorphism, using ambient open/closed internal adjunction."
-   }
-  },
-  {
-   "text": "Step 6 with $N=a^!L$ gives the second isomorphism after applying $Ra_*$. Steps 8 and 9 give $a^!L\\in\\Dctf$, and Steps 6 and 7 give $P^\\vee\\in\\Dctf$. The tensor and direct-image clauses of [det-thm-sf-ctf-stability-direct-images](1),(3) therefore show that $Ra_*(P^\\vee\\otimes^{\\mathbf L}a^!L)$ belongs to $\\Dctf(X,\\Lambda)$. By Step 10 this is $\\cHom_X(a_!P,L)$, proving membership for every generator and both displayed isomorphisms.",
-   "uses": [
-    "lem-sfb-ringed-site-perfect-duality",
-    "det-thm-sf-ctf-stability-direct-images"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraphs 2 and 3, second isomorphism and membership of each generator."
-   }
-  },
-  {
-   "text": "Fix $L$. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], $\\cHom(-,L)$ sends distinguished triangles contravariantly to distinguished triangles and commutes with shifts with the opposite sign. Step 2 therefore shows that the objects $B$ for which $\\cHom(B,L)\\in\\Dctf$ form a full triangulated class: a triangle with two vertices satisfying the property has the third by the image triangle. It contains all $a_!P$ by Step 11. The finite constructions of Steps 3--5 now prove the property for every $K\\in\\Dctf$. Only finitely many cones and shifts have been used, exactly as asserted.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-    "place": "Paragraphs 1 and 3, exactness of internal Hom and the final finite dévissage."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-dc-setting",
-  "sk-def-localizing-closure",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-discrete-noetherian-constructible-serre",
-  "prop-weil-pbc-module-bounded-constructible-triangulated",
-  "sk-lem-int-integral-heart",
-  "det-cor-coefficient-heart-ii-triangulated",
+  "lem-sfb-admissible-bounded-constructible-triangulated",
   "det-def-sfb-constructible-tor-amplitude",
-  "det-lem-coefficient-heart-common-stratification",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-sfb-locally-closed-extension-coherence",
-  "det-pe-finite-tor-comparison-noetherian",
-  "lem-sf-etale-flat-constructible",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "det-lem-int-integral-heart-local-model",
-  "det-lem-coefficient-heart-filtration",
-  "lem-pc-derived-lower-truncation-step-triangle",
-  "lem-sfb-ringed-site-perfect-duality",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-sfb-internal-hom-dual-constructible-models",
+  "lem-sfb-locally-closed-support-hom-model",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-locally-constant-perfect-dual-ctf",
   "lem-sfb-internal-hom-dual-tor-amplitude",
-  "sk-def-sfb-constructible",
-  "lem-pqf-qc-immersion-open-closed-factor",
-  "det-lem-formal-closed-support-adjunction",
   "det-thm-sf-ctf-stability-direct-images",
-  "lem-weil-pbc-closed-immersion-proper",
-  "def-sfb-dc-open-lower-shriek-adjunction",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "sk-def-sfb-module-derived-lower-shriek",
-  "det-sf-comp-coherence-cocycle",
-  "sk-prop-sf-existence",
-  "lem-sfb-open-closed-internal-hom-formulas",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-weil-native-internal-hom-contravariant-exact",
+  "lem-sfb-ctf-locally-closed-perfect-generation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
-  "place": "All three paragraphs, with the support-adjunction scope repaired using ambient open/closed formulas, and coefficient-specific generation expanded."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "A6: four explicit unresolved intermediate steps, followed by tensor/direct-image membership, native contravariant exactness and actual finite triangulated devissage in Lean. The theorem signature and full unit route are preserved."
  },
  "mathlib_searches": [
   {
@@ -298,7 +141,18 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "det-thm-sf-ctf-stability-internal-hom",
@@ -387,10 +241,10 @@
   "module": "Sheaf.Paper.DetThmSfCtfStabilityInternalHom",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.internalHom_stability",
   "file": "lean/Sheaf/Paper/DetThmSfCtfStabilityInternalHom.lean",
-  "statement": "theorem internalHom_stability (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) (K L : moduleDerived Λ X) (_hK : dctfPred Λ X K) (_hL : dctfPred Λ X L) : dctfPred Λ X (internalHomObj Λ X K L) ∧ (∀ (S Sbar : Scheme.{u}) (a : S ⟶ X) (u : S ⟶ Sbar) (i : Sbar ⟶ X), (hu : IsOpenImmersion u) → (hi : IsClosedImmersion i) → a = u ≫ i → ∀ (P : moduleDerived Λ S), IsLocallyConstantPerfectComplex Λ S P → ∃ (h : ∀ N, localizingClosureProEtale Λ S N → localizingClosureProEtale Λ X ((locallyClosedExtension Λ u i hu hi).obj N)) (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤ (localizingClosureProEtale Λ S).FullSubcategory), Nonempty (localizingLocallyClosedExtension Λ u i hu hi h ⊣ G) ∧ ∃ N : (localizingClosureProEtale Λ X).FullSubcategory, N.obj = L ∧ Nonempty (internalHomObj Λ X ((locallyClosedExtension Λ u i hu hi).obj P) L ≅ (CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj (internalHomObj Λ S P (G.obj N).obj)) ∧ Nonempty ((CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj (internalHomObj Λ S P (G.obj N).obj) ≅ (CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj (dualTensorObj Λ S P (G.obj N).obj))) ∧ ∀ K' : moduleDerived Λ X, dctfPred Λ X K' → ∀ Q : ObjectProperty (moduleDerived Λ X), Q.IsTriangulated → Q.IsClosedUnderIsomorphisms → (∀ J : moduleDerived Λ X, internalHomGenerator Λ X J → Q J) → Q K'",
-  "branch": "newtargets-dag",
-  "by": "Q20",
-  "date": "2026-10-18",
+  "statement": "theorem internalHom_stability\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X : Scheme.{u}} [X.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)\n    (K L : moduleDerived Λ X) (_hK : dctfPred Λ X K) (_hL : dctfPred Λ X L) :\n    dctfPred Λ X (internalHomObj Λ X K L) ∧\n    (∀ (S Sbar : Scheme.{u}) (a : S ⟶ X) (j : S ⟶ Sbar) (i : Sbar ⟶ X),\n      (hj : IsOpenImmersion j) → (hi : IsClosedImmersion i) → a = j ≫ i →\n      ∀ (P : moduleDerived Λ S), IsLocallyConstantPerfectComplex Λ S P →\n      ∃ (h : ∀ N, localizingClosureProEtale Λ S N → localizingClosureProEtale Λ X\n          ((locallyClosedExtension Λ j i hj hi).obj N))\n        (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤\n          (localizingClosureProEtale Λ S).FullSubcategory),\n        Nonempty (localizingLocallyClosedExtension Λ j i hj hi h ⊣ G) ∧\n        ∃ N : (localizingClosureProEtale Λ X).FullSubcategory, N.obj = L ∧\n          Nonempty (internalHomObj Λ X ((locallyClosedExtension Λ j i hj hi).obj P) L ≅\n            (CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj\n              (internalHomObj Λ S P (G.obj N).obj)) ∧\n          Nonempty ((CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj\n              (internalHomObj Λ S P (G.obj N).obj) ≅\n            (CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj\n              (dualTensorObj Λ S P (G.obj N).obj))) ∧\n    ∀ K' : moduleDerived Λ X, dctfPred Λ X K' →\n      ∀ Q : ObjectProperty (moduleDerived Λ X), Q.IsTriangulated →\n        Q.IsClosedUnderIsomorphisms →\n        (∀ J : moduleDerived Λ X, internalHomGenerator Λ X J → Q J) → Q K'",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-25",
   "existing": false,
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.moduleDerived",
@@ -402,6 +256,16 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.internalHomGenerator",
    "AlgebraicGeometry.ProEtale.CondensedRing.internalHom_stability"
   ],
-  "note": "The exceptional inverse image is bound by an adjunction to the actual locally closed extension restricted to the recorded localizing categories; this uniquely specifies a^! up to the canonical adjunction-compatible isomorphism. Its argument N has underlying object L. Finite generation is membership in every replete triangulated subcategory containing the generators, which is exactly finite shifts and cones and does not introduce retract closure. No statement correction. 2026-10-20 (U): module Sheaf.Paper.DetThmSfCtfStabilityInternalHom deleted (dead: no target reaches it); this node is not reached either."
+  "note": "Restored the absent module for its original pending consumer PodCtfAdjunctions. Retained the full theorem (membership, locally closed formulas and finite triangulated generation) from this existing Lean record. All auxiliary definitions are explicit constructions using the recorded ambient operations. No new mathematical statement or node; the existing named theorem is still sorry."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T201322-L-2420949",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

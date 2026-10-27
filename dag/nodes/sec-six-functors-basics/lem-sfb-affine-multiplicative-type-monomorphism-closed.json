@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+ "kind": "statement",
+ "title": "Affine-target monomorphisms from groups of multiplicative type",
+ "statement": "Let $S$ be any scheme [def-pc-scheme]. An $S$-group scheme is an $S$-scheme with multiplication, identity and inverse satisfying the group diagrams, and an $S$-group homomorphism respects these operations. Let $H$ be a commutative $S$-group scheme of multiplicative type of finite presentation: there is an fppf covering $\\{S_i\\to S\\}$ [def-pc-fppf-site] and finitely generated abelian groups $M_i$ such that $H\\times_S S_i\\simeq D_{S_i}(M_i)$. Here $D_U(M)=\\operatorname{Spec}_U(\\mathcal O_U[M])$ is obtained by gluing the affine spectra of the group algebras $A[M]$ on affine opens $\\operatorname{Spec}A\\subseteq U$; $A[M]$ has basis $e^m$, product $e^me^n=e^{m+n}$, and the group operations are given by $e^m\\mapsto e^m\\otimes e^m$, $e^m\\mapsto1$, and $e^m\\mapsto e^{-m}$. Let $G\\to S$ be an affine group scheme of finite presentation [def-weil-pbc-scheme-conventions], where affine means that inverse images of affine opens of $S$ are affine. Let $j:H\\to G$ be an $S$-group homomorphism such that for every $S$-scheme $T$ the induced map $\\operatorname{Hom}_S(T,H)\\to\\operatorname{Hom}_S(T,G)$ is injective. Then $j$ is a closed immersion [def-weil-closed-immersion]. The groups $M_i$ may have torsion; in particular $H$ need not be smooth.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Appendix B, Definition B.1.1 and Lemma B.1.3, printed pp.280–282, alternative direct argument under finite-presentation hypotheses. Read online; local archive WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-closed-immersion",
+  "def-sfb-ring-diagonalizable-group"
+ ],
+ "proof": [
+  {
+   "text": "Refine the given splitting cover by affine opens $U=\\operatorname{Spec}R$ mapping into affine opens $V\\subseteq S$. The fppf covering calculus gives a covering by these $U$, and its base change gives an fppf cover $\\{G_U\\to G\\}$. It is fpqc by [lem-trf-fppf-covering-is-fpqc], so [lem-pc-fpqc-descend-closed-immersion] reduces the assertion to all $j_U$. The scheme $G_V$ is affine by the hypothesis, and the affine fibre-product formula makes $G_U=G_V\\times_VU$ affine. The split source is $H_U=D_R(M)$, and monicity persists: two $U$-points with equal images are equal as $S$-points and hence as $U$-points. Thus it remains to treat $S=\\operatorname{Spec}R$, $H=D_R(M)$ and $G=\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-pc-zariski-coverings-are-fppf",
+    "lem-sfb-space-fppf-covering-calculus",
+    "lem-trf-fppf-covering-base-change",
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex; literature/stacks-project/topologies.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 02L6 (lemma-descending-property-closed-immersion); fppf covering definition 021M, covering axioms 021O, Zariski coverings 021N; affine fibre-product formula 01I4/01JQ. Fppf-local split reduction from Conrad Definition B.1.1."
+   }
+  },
+  {
+   "text": "Let $\\varphi:A\\to R[M]$ be the coordinate map of $j$. Right translation $(x,h)\\mapsto xj(h)$ defines an action on $G$. By the affine fibre-product formula and contravariance of Spec, its pullback is an algebra coaction $\\rho:A\\to A\\otimes_RR[M]$: the action identity and associativity give the two coaction identities. Apply [lem-sfb-group-algebra-coaction-grading] to obtain $A=\\bigoplus_{m\\in M}A_m$. Write $c:A\\to R$ for pullback along the identity section of $G$. Restricting the translation action along that section gives $j$, whence $(c\\otimes1)\\rho=\\varphi$. In particular $\\varphi(a)=c(a)e_m$ for $a\\in A_m$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-group-algebra-coaction-grading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/schemes.tex",
+    "place": "Tag 022S (definition-group-scheme), action identities; Tag 0EKK (lemma-complete-reducibility-Gm), coefficient-grading argument generalized in the new node; 01I4 affine products."
+   }
+  },
+  {
+   "text": "In $A[M]$ with formal symbols $t^m$, put $I=(a(t^m-1):a\\in A_m)$ and $J=(t^m-1:m\\in M)$. Clearly $I\\subseteq J$. To prove the reverse inclusion take $C=A[M]/I$ and its universal $A$-algebra map $q$. The elements $q(t^m)$ are units, multiply according to $M$, and define $h\\in D_R(M)(C)$. Let $x\\in G(C)$ be the point given by $A\\to C$. For $a\\in A_m$, the action coaction sends its value at $xj(h)$ to $q(a)q(t^m)=q(a)$; finite homogeneous expansions give $xj(h)=x$ on every coordinate. Cancellation in $G(C)$ gives $j(h)=1$, and the assumed injectivity on $\\operatorname{Spec}C$ gives $h=1$. Thus $q(t^m)=1$ for every $m$, so $J\\subseteq\\ker q=I$ and $I=J$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-affine-spectrum",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 022S, group law on all scheme-valued points; elementary universal-quotient calculation with the grading of step 2, written by Q69."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-graded-stabilizer-strong-products] to this $M$-graded ring and $I=J$. For every $m$ it supplies $a_i\\in A_m$, $b_i\\in A_{-m}$ with $\\sum_i a_ib_i=1$. Applying the identity-section homomorphism gives $\\sum_i c(a_i)c(b_i)=1$ in $R$. The element $z_m=\\sum_i c(b_i)a_i\\in A_m$ therefore satisfies $\\varphi(z_m)=\\sum_i c(b_i)c(a_i)e_m=e_m$. Every element of $R[M]$ is a finite sum of scalar multiples of these basis elements, so $\\varphi$ is surjective. This includes the zero ring: the empty sums give its unique element.",
+   "uses": [
+    "lem-sfb-graded-stabilizer-strong-products",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK supplies the grading context only; the independent graded-stabilizer lemma of Q20/Q112 supplies the opposite-degree products. Evaluation at the identity and the displayed lifts are Q69’s assembly argument."
+   }
+  },
+  {
+   "text": "The affine criterion for closed immersions applies to $j=\\operatorname{Spec}\\varphi$, since both schemes are affine and $\\varphi$ is surjective. Thus each $j_U$ in step 1 is a closed immersion, and the cited fpqc descent gives that $j$ is a closed immersion. None of the grading, cancellation or lifting steps used smoothness or torsion-freeness of $M$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-affine-spectrum",
+    "lem-pc-fpqc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/descent.tex",
+    "place": "Tag 01QO (lemma-closed-immersion), affine surjective-ring criterion; Tag 02L6 (lemma-descending-property-closed-immersion)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-zariski-coverings-are-fppf",
+  "lem-sfb-space-fppf-covering-calculus",
+  "lem-trf-fppf-covering-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-sfb-ring-diagonalizable-group",
+  "def-weil-affine-spectrum",
+  "lem-sfb-group-algebra-coaction-grading",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-sfb-graded-stabilizer-strong-products",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/descent.tex",
+  "place": "Independent Q69 graded-stabilizer/identity-section argument for Conrad Lemma B.1.3, using the existing Q20/Q112 graded-stabilizer theorem; avoids the quotient/valuation route. Coaction grading adapts Tag 0EKK."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism with trivial scheme kernel from a diagonalizable group into an affine group of finite presentation is a closed embedding",
+   "results": "8 hits; ; returned names/files: CategoryTheory.PreGaloisCategory.autEmbedding_isClosedEmbedding, AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.Scheme.Hom.isClosedEmbedding, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine, CategoryTheory.PreGaloisCategory.autEmbedding_range_isClosed",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:124) and iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393) require finiteness or properness, the missing assertion. Affineness alone does not imply either. The other hits concern closed immersions already supplied or topological groups. Semantic phrasings inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monomorphism from a group scheme of multiplicative type to an affine group scheme of finite presentation is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:124) and iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393) require finiteness or properness, the missing assertion. Affineness alone does not imply either. The other hits concern closed immersions already supplied or topological groups. Semantic phrasings inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsClosedImmersion\", \"CategoryTheory.Mono\"",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:124) and iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393) require finiteness or properness, the missing assertion. Affineness alone does not imply either. The other hits concern closed immersions already supplied or topological groups. Semantic phrasings inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|multiplicative.type|diagonalizable",
+   "results": "0 hits; ; returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:124) and iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393) require finiteness or properness, the missing assertion. Affineness alone does not imply either. The other hits concern closed immersions already supplied or topological groups. Semantic phrasings inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "iff_isFinite_and_mono|iff_isProper_and_mono",
+   "results": "6 hits; ; returned names/files: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean, Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: IsClosedImmersion.iff_isFinite_and_mono (Mathlib/AlgebraicGeometry/Morphisms/Finite.lean:124) and iff_isProper_and_mono (Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean:393) require finiteness or properness, the missing assertion. Affineness alone does not imply either. The other hits concern closed immersions already supplied or topological groups. Semantic phrasings inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism from a diagonalizable group scheme to an affine group scheme is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.isClosedImmersion_diagonal_restrict_diagonalCoverDiagonalRange, AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated",
+   "date": "2026-10-24",
+   "verdict": "no match: the closed-immersion characterizations require properness or finiteness, which is not given. Graded Hopf-algebra constructions do not prove closedness of multiplicative-type monomorphisms. Project keyword and blueprint-tag searches found no finished attachment."
+  },
+  {
+   "tool": "grep",
+   "query": "multiplicative.type|diagonalizable|HopfAlgebra",
+   "results": "25 hits; ; returned names/files: Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean, Mathlib/RingTheory/HopfAlgebra/MonoidAlgebra.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the closed-immersion characterizations require properness or finiteness, which is not given. Graded Hopf-algebra constructions do not prove closedness of multiplicative-type monomorphisms. Project keyword and blueprint-tag searches found no finished attachment."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective homomorphism of group scheme functors from a group of multiplicative type to an affine group is a closed immersion",
+   "results": "8 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: the closed-immersion characterizations require properness or finiteness, which is not given. Graded Hopf-algebra constructions do not prove closedness of multiplicative-type monomorphisms. Project keyword and blueprint-tag searches found no finished attachment."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Mono\"",
+   "results": "4 hits; ; returned names/files: AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono, AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono, AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+   "date": "2026-10-24",
+   "verdict": "no match: the closed-immersion characterizations require properness or finiteness, which is not given. Graded Hopf-algebra constructions do not prove closedness of multiplicative-type monomorphisms. Project keyword and blueprint-tag searches found no finished attachment."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-torus-monomorphism-closed",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Generic torus quotient input, closedness of the extended generic torus inclusion: A monic relative torus homomorphism is a closed immersion. No imported blueprint ancestor was found (blueprint_refs.py ancestor returns None). Supporting input: Conrad Theorem 5.3.5, p.166, after the nonaffine-target reduction: the multiplicative-type affine-target input of Lemma B.1.3 suffices for a torus.",
+   "via": [
+    "lem-sfb-relative-torus-monomorphism-closed",
+    "lem-sfb-torus-hom-generic-closed-rigidity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-affine-multiplicative-type-monomorphism-closed",
+  "worker": "stage1",
+  "summary": "Statement preserved. Split by fppf affine localization, right-translation coaction, universal stabilizer quotient, the existing graded-stabilizer strong-product lemma, and identity-section evaluation. One new arbitrary-ring group-algebra coaction grading node; all other inputs reused. No field-only Hopf or finite-dimensional weight lemma is applied over a ring. All steps are below 2000 characters.",
+  "blueprint": "The item has no imported blueprint ancestor (ancestor returns None). Refines the inherited generic torus quotient closedness input of the recorded ancestry, without changing the unit/chapter route. Whole-blueprint searches for diagonalizable, multiplicative type, comodule, coaction, group algebra, graded and weight decomposition found no equivalent arbitrary-ring coaction lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "Generic covering/descent tool used only to localize and reassemble closedness; no node of this unit replaces this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-69b7e4f3f",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-69b7e4f3f (reviewer sub-agent of L); spot-checked: PASS: I read every step, the new node and the full statement of each cited node. Item statement: byte-identical to clones/live, where the item is still unsplit; no repair note exists. Step 1: Zariski refinement into affine opens over affine V; the pieces compose by clauses (3) and (4) of space-fppf-covering-calculus; base change by lem-trf-fppf-covering-base-change, fpqc by lem-trf-fppf-covering-is-fpqc; 02L6 descent along a target cover, whose base change is j_U. G_U is affine via the affine fibre product; monicity passes to U. Step 2: the right-translation coaction satisfies the comodule identities because j is a homomorphism; (c⊗1)ρ=φ along the identity section. Step 3: the universal quotient C=A[M]/I gives x·j(h)=x, cancellation gives j(h)=1, and monicity on Spec C gives h=1, so I=J. The argument uses scheme-valued points (valid for μ_p in characteristic p); C=0 checked. Step 4: graded-stabilizer-strong-products hypotheses match exactly; z_m=Σc(b_i)a_i gives φ surjective; R=0 and M=0 checked. Step 5: 01QO affine criterion plus descent. New node lem-sfb-group-algebra-coaction-grading: true for any R and M (coefficient-projection proof generalizing 0EKK, groupoids.tex 2340–2370), statement only, not a restatement of the item. No duplicate: gm-affine-action-grading covers only M=Z; the weight-grading nodes need a field and finite dimension; trf toric nodes work over a field. Mathlib has no comodule API, so no leaf. Tags 0EKK/02L6/01QO/021M/021O/021N/022S/01I4 checked in tags/tags. Conrad B.1.3 is WANTED, and proof_origin=agent is correct. Accepted tool_use: lem-pc-fpqc-descend-closed-immersion (generic 02L6 descent). Batch-5 check: lem-trf-fppf-covering-base-change and lem-trf-fppf-covering-is-fpqc are generic site-axiom Mathlib leaves with no proof deps, not steps of the trace formula or Poincaré duality; space-fppf-covering-calculus reaches sec-trace-formula only through the general definition def-trf-algebraic-space; all accepted. Advisory: the new node's recorded grep '0 hits' result is implausible, but the other searches support the verdict. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineMultiplicativeTypeMonomorphismClosed",
+  "declaration": "AlgebraicGeometry.affine_multiplicativeType_monomorphism_closed",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineMultiplicativeTypeMonomorphismClosed.lean",
+  "statement": "theorem affine_multiplicativeType_monomorphism_closed {S : Scheme.{u}} (H G : Grp (Over S)) [IsCommMonObj H.X] [LocallyOfFinitePresentation H.X.hom] [QuasiCompact H.X.hom] [QuasiSeparated H.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] (hH : ∃ (I : Type u) (R : I → CommRingCat.{u}) (p : ∀ i : I, Spec (R i) ⟶ S) (M : I → AddCommGrpCat.{u}), (∀ i : I, AddGroup.FG (M i)) ∧ Presieve.ofArrows (fun i : I ↦ Spec (R i)) p ∈ Scheme.fppfPrecoverage S ∧ ∀ i : I, Nonempty (((Over.pullback (p i)).mapGrp.obj H) ≅ ringDiagonalizableGroup (R i) (M i))) (j : H ⟶ G) (hj : ∀ T : Over S, Function.Injective (fun x : T ⟶ H.X ↦ x ≫ j.hom.hom)) : IsClosedImmersion j.hom.hom.left",
+  "branch": "sheaf-dag",
+  "by": "Q145",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3313849ea",
+  "group": "Q145",
+  "result": "pass",
+  "note": "Only change vs live: item lean record + stmt_deps gains landed def-sfb-ring-diagonalizable-group (allowed); lean.statement verbatim once in file. Clauses match: Grp (Over S) H,G; IsCommMonObj H; H lfp+qc+qs; hH fppfPrecoverage family of affine Spec R_i with AddGroup.FG M_i and Grp-isos of base change to ringDiagonalizableGroup (=hopfSpec R[M]), equivalent to arbitrary fppf cover by affine refinement within Type u; G IsAffineHom+lfp (qc/qs implied); hj injectivity on all T : Over S; conclusion IsClosedImmersion j.hom.hom.left. No extra hypotheses (no smooth/torsion-free/field/Noetherian). Edge cases empty S/I, zero rings, M=0, mu_p char p ok. No duplicate: existing multiplicative-type nodes are field-only, relative_torus_monomorphism_closed is smooth-torus/separated-target. Docstrings with source/blueprint/5 steps, sorry only, imports exist. No file changed, no compile run."
+ }
+}

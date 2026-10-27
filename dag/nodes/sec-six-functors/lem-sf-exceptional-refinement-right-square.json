@@ -1,0 +1,116 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23 and 2.29; elementary counit transposition calculation of refinement proof step 5."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 2.23 and 2.29; elementary counit transposition calculation of refinement proof step 5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized left compactification refinement comparisons commute with coefficient localization common finite field inclusions and shifts",
+   "results": "OK 8 hits, including CategoryTheory.NatTrans.commShift_iso_hom_of_localization; remaining hits concern algebraic normalization.",
+   "date": "2026-10-27",
+   "verdict": "No normalized geometric left refinement or strict-system realization statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural isomorphism of left adjoints induces conjugate natural isomorphism of right adjoints commuting with unit counit and shifts",
+   "results": "OK 8 hits including CategoryTheory.Adjunction.RightAdjointCommShift.iso and LeftAdjointCommShift.iso; adjunction shift component formulas.",
+   "date": "2026-10-27",
+   "verdict": "Generic mate and shift tools apply to the proved assembly, but do not construct the geometric comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*refinement|refinement.*compactification",
+   "results": "OK 0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No Mathlib geometric refinement construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalRefinementMates",
+  "date": "2026-10-27",
+  "group": "Z6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Adjunction transposition of the retained normalized refinement left square.",
+   "via": [
+    "lem-sf-exceptional-refinement-mates",
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "id": "lem-sf-exceptional-refinement-right-square",
+ "kind": "statement",
+ "title": "Right coefficient descent follows by transposition from its left square",
+ "statement": "For operations A,B at one coefficient stage and A′,B′ at another, coefficient functors TX,TY, fixed coefficient comparisons a,b and fixed refinement comparisons p,q, the left conjugation square a.q inverse followed by TY(p.left) followed by b.q equals q.left after TX implies the right conjugation square b.b inverse followed by TX(p.right) followed by a.b equals q.right after TY. All units and counits are those of these given operations; no geometric assumption is added.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-sf-constructible-exceptional-refinement-mate"
+ ],
+ "proof": [
+  {
+   "text": "Cancel b.b.hom and apply injectivity of the inverse Hom bijection of A′. The two coefficient counit equations identify the images of a.b.hom and b.b.hom. Naturality of a.q.inv and the counit equation of p turn the old right comparison into its left comparison. Substitute the assumed left square. Naturality of q.left and its counit equation produce the same transpose on the other side, proving equality.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalRefinementRightSquare",
+  "file": "lean/Sheaf/Paper/ExceptionalRefinementRightSquare.lean",
+  "declaration": "WeilConjectures.ExceptionalRefinement.right_coefficient_square_of_left",
+  "declarations": [
+   "WeilConjectures.ExceptionalRefinement.right_coefficient_square_of_left"
+  ],
+  "statement": "theorem right_coefficient_square_of_left {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l} (A B : Operation.{u, v} l Ω X Y s) (A' B' : Operation.{u, v} l Ω X Y t) (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t) (a : FieldComparison.{u, v} l Ω A A' TX TY) (b : FieldComparison.{u, v} l Ω B B' TX TY) (p : RefinementComparison.{u, v} l Ω A B) (q : RefinementComparison.{u, v} l Ω A' B') (h : ∀ K, a.q.inv.app K ≫ TY.map (p.left.hom.app K) ≫ b.q.hom.app K = q.left.hom.app (TX.obj K)) (L : C.{u, v} l Ω Y s) : b.b.inv.app L ≫ TX.map (p.right.hom.app L) ≫ a.b.hom.app L = q.right.hom.app (TY.obj L)",
+  "branch": "sheaf-dag",
+  "by": "Z6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-d2c5d",
+  "group": "Z6",
+  "result": "fix",
+  "landing": "20261027T013016-L-2358323",
+  "kind": "interface",
+  "note": "independent cc review: item exceptional_refinement_mates assembly vs node lem-sf-exceptional-refinement-mates; new sorry statements and Transport repair vs change record, the λ(field)-conjugation counterexample and the existing commonTransitionNatural practice; new node stmt_deps vs owners of the definitions used"
+ }
+}

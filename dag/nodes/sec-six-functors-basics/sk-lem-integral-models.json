@@ -30,109 +30,66 @@
  ],
  "proof": [
   {
-   "text": "[det-def-localizing-closure-ctf-equals-bc](2) gives Tor amplitude $[a-1,b]$ for an integral constructible complex with cohomology in $[a,b]$. The reverse inclusion is definitional by [det-def-sfb-constructible-tor-amplitude](4), proving the opening equality.",
+   "text": "Apply localizingClosure_ctf_equals_bc to the integral coefficient object, with the reflexive coefficient isomorphism. Its integral finite-Tor equality is the opening equality.",
    "uses": [
-    "det-def-localizing-closure-ctf-equals-bc",
-    "det-def-sfb-constructible-tor-amplitude"
+    "det-def-localizing-closure-ctf-equals-bc"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
-    "place": "Clause (2); opening equality."
-   }
+   "elementary": false
   },
   {
-   "text": "By [det-prop-integral-criterion-constant-coefficients](1)-(2), $C_X\\to R_X$ is flat, has compatible quotients $S_n=(\\cO_E/\\pi_E^n)_X$, and gives (1). Apply [lem-weil-pbc-flat-common-quotient-reduction-tower] on the small pro-étale site with $R=C_X$, $B=R_X$, $J_n=\\pi_E^nC_X$. For any $K$, it gives $\\operatorname{Res}K\\otimes^L_{C_X}S_n\\cong K\\otimes^L_{R_X}S_n$. On one K-flat model both sides are $P/J_nP$; their strict transitions and cones $p\\mapsto p\\otimes1$ agree.",
+   "text": "Apply the embedded completion comparison to obtain the required complete-subcategory equivalence and the pointwise completeness iff. This is clause (1). Its proof retains the flat common-quotient tower and normalized derived-limit/unit argument of the unit.",
    "uses": [
-    "det-prop-integral-criterion-constant-coefficients",
-    "lem-weil-pbc-flat-common-quotient-reduction-tower"
+    "lem-sfb-embedded-integral-completion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099L (section-derived-completion-noetherian), flat common quotients and complete-object equivalence; sites-cohomology.tex Tag 06YY, finite derived reduction comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "[det-lem-integral-models-stacks] gives $K\\in\\Dbc(X,\\cO_E)\\iff\\operatorname{Res}K\\in\\Dc(X,\\cO_E)$ for our Noetherian $X$. The ambient constant and completed coefficient categories remain distinct.",
+   "text": "For each K the embedded Stacks criterion is the first iff. Compose it with and_congr of the reversed completeness iff and the residue comparison to obtain the second iff in clause (2). The residue comparison retains the constant-field Tor criterion and constructible etale comparison.",
    "uses": [
-    "det-lem-integral-models-stacks"
+    "lem-sfb-embedded-integral-completion",
+    "lem-sfb-embedded-integral-stacks-criterion",
+    "lem-sfb-embedded-integral-residue-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-stacks.md",
-    "place": "Displayed equivalence; first assertion of (2)."
-   }
+   "elementary": false
   },
   {
-   "text": "For the identity ringed topos with $C_X\\to R_X$, direct image is restriction, exact and conservative since underlying sheaves are unchanged [def-pc-sheaf-restrict-scalars]. Apply [lem-weil-ringed-tower-pushforward-limit-comparison] to step 2's strict tower $T$: $\\operatorname{Res}R\\lim T\\cong R\\lim\\operatorname{Res}T$. Its normalized comparison and step 2's cone equality identify the maps from $\\operatorname{Res}K$. By [lem-weil-pbc-constant-completion-equivalence] ($A=\\cO_E$, $I=(\\pi_E)$), these quotient units are the canonical completion units. Hence $K$ is complete iff $\\operatorname{Res}K$ is complete.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first tower-site proof, specialized to identity topos with the structural coefficient map; proetale.tex Tags 099L and 099M, canonical quotient completion unit."
-   }
-  },
-  {
-   "text": "In the definition of $\\Dc$ from [det-lem-integral-models-stacks], replace finite Tor amplitude by boundedness using [lem-sfb-constant-field-tor-bounds] for $\\kappa_E$. Step 2 identifies the reductions and step 4 identifies completeness. Since $X$ is Noetherian, it is qcqs; [sk-thm-pe-constructible-comparison] for discrete $\\kappa_E$ identifies bounded constructibility with étale origin. Step 3 gives both directions of the second criterion in (2).",
-   "uses": [
-    "det-lem-integral-models-stacks",
-    "lem-sfb-constant-field-tor-bounds",
-    "sk-thm-pe-constructible-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
-    "place": "First paragraph; bounded residue criterion."
-   }
-  },
-  {
-   "text": "Apply [det-lem-integral-models-operations](1)-(3) to the Noetherian schemes in the statement. They give inverse image, the ambient uncompleted derived tensor, and $a_!=i_*u_!$ preservation. By [sk-prop-sfb-cartesian-coefficients](1), module inverse image is exact and agrees with its derived functor. This proves (3).",
+   "text": "Apply integralModelsOperations for inverse-image preservation. Exactness of the inverse image identifies its total left derived functor with mapDerivedCategory; transport constructibility along leftDerivedFunctorIsoMapDerivedCategory using the proved repleteness statement.",
    "uses": [
     "det-lem-integral-models-operations",
-    "sk-prop-sfb-cartesian-coefficients"
+    "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.md",
-    "place": "Clauses (1)-(3); the three operation paragraphs."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [det-lem-integral-models-generators](1)-(3). Its classes $\\mathcal G_E$ and $\\mathcal G_{\\Qlb}$ are exactly the scalar extensions of $a_!L_0$ in (4). Clauses (1)-(2) give finite cones and shifts, with one finite $E$ for the given $\\Qlb$-object. Clause (3) gives integral constructibility and every derived reduction $a_!(L_0/\\pi_E^n)$ with étale origin, for the same lattice and every $n\\ge1$.",
+   "text": "The tensor and locally closed extension-by-zero assertions are exactly clauses (2) and (3) of integralModelsOperations, with the given schemes and morphisms.",
+   "uses": [
+    "det-lem-integral-models-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the three assertions of integral_models_generators: finite cones and shifts over E, one finite intermediate field for each algebraic-closure object, and integral constructibility with every positive derived reduction for the same locally free lattice.",
    "uses": [
     "det-lem-integral-models-generators"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.md",
-    "place": "Clauses (1)-(3); last paragraph, lattices and finite coefficient descent."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "det-def-localizing-closure-ctf-equals-bc",
-  "det-def-sfb-constructible-tor-amplitude",
-  "det-prop-integral-criterion-constant-coefficients",
-  "lem-weil-pbc-flat-common-quotient-reduction-tower",
-  "det-lem-integral-models-stacks",
-  "def-pc-sheaf-restrict-scalars",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-sfb-constant-field-tor-bounds",
-  "sk-thm-pe-constructible-comparison",
+  "lem-sfb-embedded-integral-completion",
+  "lem-sfb-embedded-integral-stacks-criterion",
+  "lem-sfb-embedded-integral-residue-comparison",
   "det-lem-integral-models-operations",
-  "sk-prop-sfb-cartesian-coefficients",
+  "det-def-sfb-constructible-tor-amplitude",
   "det-lem-integral-models-generators"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
-  "place": "first paragraph and the three operations and generator paragraphs; existing detailed blueprint statements reused; field finite-Tor assertion made explicit using Stacks 03ET and 06YQ"
+  "group": "J8",
+  "date": "2026-10-23",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "All clauses assembled in Lean from existing Tor, operations and generators declarations and three separate coefficient comparison lemmas. Unit route retained."
  },
  "mathlib_searches": [
   {
@@ -232,8 +189,6 @@
  "tool_uses": [
   "lem-weil-pbc-constant-completion-equivalence",
   "det-def-localizing-closure-ctf-equals-bc",
-  "lem-pc-sites-modules-sheafification-flat",
-  "lem-pc-bounded-above-flat-kflat-site",
   "sk-thm-pe-constructible-comparison",
   "lem-weil-pbc-flat-common-quotient-reduction-tower",
   "lem-weil-ringed-tower-pushforward-limit-comparison"
@@ -248,29 +203,22 @@
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-integral-models",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.IntegralModels",
   "declaration": "AlgebraicGeometry.ProEtale.integral_models",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteSheaf",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteObj",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteObj_comm",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.constantToContinuous",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarPointMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarPointMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.residueMap",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.residueMap_mon",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.restriction",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.complete",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.completedComplete",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.constantComplete",
-   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.stacksConstructible",
-   "AlgebraicGeometry.ProEtale.integralModelResidueEtaleOrigin",
    "AlgebraicGeometry.ProEtale.integral_models"
   ],
   "file": "lean/Sheaf/Paper/IntegralModels.lean",
@@ -279,7 +227,7 @@
   "by": "Q06",
   "date": "2026-10-19",
   "existing": false,
-  "note": "The published live build lacks the recorded module object file, so the recorded declaration is unusable to the stage-2 compiler despite its source being present. This delivery supplies the exact recorded module and declaration unchanged, including its helper declarations, to compile the item."
+  "note": "Embedded coefficient definitions move unchanged to Sheaf.Paper.IntegralModelsEmbedded, publicly re-exported here; attachment def-sfb-embedded-integral-model-coefficients. The theorem signature and statement are unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -288,5 +236,15 @@
   "group": "Q06",
   "result": "fix",
   "note": "Item correct (H3): ℓ prime, char k = p > 0 with p ≠ ℓ, X separated of finite type over k, E/Q_ℓ finite in an independent universe. (1) triangulated, bounded and truncation-stable; constructible sheaves = degree-0 objects in both directions; abelian heart with ambient kernels/cokernels, extension-closed, essentially small. (2) one finite stratification, pro-étale charts with finite O_E-modules, torsion allowed. (3) ExactPairing dual on the same strata, Tor amplitude [-1,0] for C and [0,1] for the dual, both on Mod.derivedMonoidalCategory. Edge cases: empty X, C = 0, O_E/π. F1 (H13/H2): to get round missing published oleans the delivery re-sent three landed modules (IntegralHeartLocalModel, SmallCoefficientDerivedCompletion, IntegralModels) changed only by a trailing comment, and rewrote the NW/NW/NZ dependency records' by/note to say 'unusable'. Fixed: fixes/ hold the byte-identical landed texts. M1: land with --revert-nodes det-lem-int-integral-heart-local-model def-sfb-small-coefficient-derived-completion sk-lem-integral-models; a missing olean at landing is an infrastructure retry. F2 (H9): unused import Sheaf.Paper.IntegralModels dropped; signature unchanged. Advisory: plain declarations from the det-lem-int-integral-heart-triangulated and det-lem-int-integral-heart-local-model theorem modules and from def-sfb-small-coefficient-derived-completion are used outside stmt_deps. nt_compile --json of the exact fix set clean, exit 0 (41.1/24.4/6.9/15.4 s)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-88e12",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261023T231645-L-3629673",
+  "kind": "interface",
+  "note": "independent cc review: integral_models assembly vs node sk-lem-integral-models (6 steps) and the three new nodes; moved IntegralModelsEmbedded defs vs clone bodies (identical); 12 direct importers compiled against the delivery"
  }
 }

@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-nodal-surface-flat-hartogs",
+ "kind": "statement",
+ "title": "Regular nodal trait surface and Hartogs after flat base change",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $\\pi$ a uniformizer, $B=A[s,t]/(st-\\pi)$, $X=\\operatorname{Spec}B$ [def-weil-affine-spectrum], $o=V(s,t)$, and $U=D(s)\\cup D(t)$. Then $X$ is an integral Noetherian regular scheme of dimension two [def-pc-integral-scheme, def-weil-regular-scheme, def-weil-pbc-krull-dimension-ring], and $\\dim\\mathcal O_{X,o}=2$. For every flat morphism $f:T\\to X$ [def-weil-flat-morphism], put $U_T=T\\times_XU$ and let $j_T:U_T\\hookrightarrow T$ be the open inclusion. The canonical map $\\mathcal O_T\\to(j_T)_*\\mathcal O_{U_T}$ is an isomorphism. Consequently, for finite locally free $\\mathcal O_T$-modules $M,N$ [def-sc-finite-locally-free-sheaf], restriction induces a bijection $\\operatorname{Hom}_{\\mathcal O_T}(M,N)\\to\\operatorname{Hom}_{\\mathcal O_{U_T}}(M|_{U_T},N|_{U_T})$; for every affine $T$-scheme $Z\\to T$ [pqf-def-affine-morphism], restriction induces a bijection between its sections over $T$ and over $U_T$. No Noetherian hypothesis on $T$ is imposed.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read https://sites.math.washington.edu/~jarod/papers/iwahori.pdf, Section 2, Claim 2, printed p.2 (regularity and functions). Flat-base version: on affine charts tensor the exact Laurent two-open equalizer for B with a flat B-algebra. This does not use completion."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-integral-scheme",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-flat-morphism",
+  "def-sc-finite-locally-free-sheaf",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-noetherian-ring",
+  "def-kun-topological-krull-dimension",
+  "def-trf-strict-semistable-curve"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sfb-dvr-binomial-local-geometry with $R=A$, $x=s$, $y=t$, and $e=1$. Since $\\pi=st$ in $B$, its distinguished ideal $(\\pi,s,t)$ is exactly $(s,t)$, so its point $o$ and its complementary opens are the ones here. The lemma gives Noetherianity, regularity at $o$, regularity on both complementary opens, the bound $\\dim\\mathcal O_{X,x}\\le2$ at every point, and equality at $o$. By the local-ring characterization of regular schemes, $X$ is regular; the supremum-of-local-dimensions theorem gives $\\dim X=2$. The binomial Laurent normal-form lemma applies because a DVR is a domain and $\\pi\\ne0$; its injection $B\\hookrightarrow\\operatorname{Frac}(A)(T)$ makes $B$ a domain. The spectrum-of-domain theorem therefore makes $X$ integral.",
+   "uses": [
+    "lem-sfb-dvr-binomial-local-geometry",
+    "def-weil-regular-scheme",
+    "lem-pc-scheme-dimension-local-rings",
+    "def-sc-discrete-valuation-ring",
+    "lem-sfb-binomial-laurent-normal-form",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent assembly of existing binomial local geometry and normal form; properties.tex Tags 02IT (lemma-characterize-regular), 04MU (lemma-dimension), 01ON (lemma-characterize-integral)."
+   }
+  },
+  {
+   "text": "The binomial Laurent normal-form lemma embeds $B_s$ and $B_t$ into $K(T)$, where $K=\\operatorname{Frac}(A)$, and identifies their intersection with the image of $B$. Their further localizations $B_{st}$ embed there as well: localization of any subring of a field at a nonzero element is represented by fractions in that field, and $s,t\\ne0$. Consequently\n$$0\\longrightarrow B\\xrightarrow{b\\mapsto(b,b)}B_s\\oplus B_t\\xrightarrow{(a,b)\\mapsto a-b}B_{st}$$\nis exact: injectivity follows from the embedding of $B$, and a pair in the kernel is a common element of $B_s$ and $B_t$, hence comes from exactly one element of $B$. No surjectivity onto $B_{st}$ is asserted.",
+   "uses": [
+    "lem-sfb-binomial-laurent-normal-form"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary intersection-to-kernel argument from the cited Laurent normal-form statement; supporting localization definition."
+   }
+  },
+  {
+   "text": "Let $V=\\operatorname{Spec}C$ be any affine open of $T$. The affine flatness criterion applied to $V\\to X$ makes $C$ a flat $B$-algebra. Tensor the exact sequence of step 2 with $C$ over $B$ using flat tensor exactness. The canonical localization-tensor isomorphisms identify its three terms with $C$, $C_s\\oplus C_t$, and $C_{st}$. Here the binary-sum identification is explicit: $(u,v)\\otimes c\\mapsto(u\\otimes c,v\\otimes c)$, with inverse the sum of the two summand inclusions. The maps become $c\\mapsto(c,c)$ and $(a,b)\\mapsto a-b$, because all comparisons send $c\\otimes(b/s^n)$ to $cb/s^n$, and similarly for $t$ and $st$. We obtain\n$$0\\longrightarrow C\\longrightarrow C_s\\oplus C_t\\longrightarrow C_{st}$$\nexact at the first two terms. No finiteness or Noetherianity of $C$ has been used.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-localization-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HD (lemma-flat), Tag 00DK (lemma-tensor-localization); morphisms.tex Tag 01U5 (lemma-flat-characterize)."
+   }
+  },
+  {
+   "text": "On $V=\\operatorname{Spec}C$, the inverse image of $U$ is $D(s)\\cup D(t)$: at a point the pulled-back section is invertible exactly when its image point lies in the corresponding principal open, since the map on local rings is local. Principal-open sections and their restriction maps identify the sheaf gluing equalizer for these two opens with $\\ker(C_s\\oplus C_t\\to C_{st})$. Step 3 therefore says precisely that the canonical restriction $\\mathcal O_T(V)\\to\\mathcal O_{U_T}(V\\cap U_T)$ is an isomorphism. These are the components of the given sheaf map on the affine-open basis. Its local inverses glue uniquely: cover any open by affine opens, extend its restricted section on each, and use uniqueness on affine subopens of pairwise intersections to glue. Thus $\\mathcal O_T\\to(j_T)_*\\mathcal O_{U_T}$ is an isomorphism, including on every open subset of $T$.",
+   "uses": [
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves), parts (1), (3), (5); elementary sheaf gluing on D(s), D(t), with the comparison maps calculated in step 3."
+   }
+  },
+  {
+   "text": "Choose an open cover $(V_i)$ trivializing both finite locally free modules, of ranks $m_i,n_i$. A homomorphism over $V_i\\cap U_T$ is a matrix of $n_im_i$ functions: its columns are the images of the standard basis sections, which determine the sheaf map on every smaller open by linearity. Step 4 extends each entry uniquely to $V_i$, giving a homomorphism on $V_i$. On $V_i\\cap V_j$ the two extensions agree: locally trivialize there and use injectivity for each matrix entry from step 4, since their restrictions to $U_T$ agree. The local homomorphisms thus glue, uniquely, to $M\\to N$. The same entrywise injectivity shows that restriction is injective, proving its bijectivity. Ranks zero and ranks varying between opens cause no change.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01C6 (definition-locally-free); elementary matrix and sheaf gluing argument from the function isomorphism proved in step 4."
+   }
+  },
+  {
+   "text": "Let $q:Z\\to T$ be affine. For each affine open $V=\\operatorname{Spec}C$ of $T$, write $q^{-1}(V)=\\operatorname{Spec}D$. By the locally ringed space affine adjunction, sections over $V\\cap U_T$ correspond to ring maps $D\\to\\Gamma(V\\cap U_T,\\mathcal O)$ whose composite with $C\\to D$ is the structural map. Step 4 identifies this target ring with $C$ by the canonical restriction. Composing with its inverse therefore gives a unique $C$-algebra map $D\\to C$, hence a unique section over $V$. The base condition holds because the inverse restriction sends the image of each $c\\in C$ back to $c$. On overlaps the extensions agree on every affine subopen by the same uniqueness, so the sections glue. This proves both surjectivity and injectivity of restriction on sections. Empty opens and the zero ring are included by the same argument.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1 (lemma-morphism-into-affine); morphisms.tex Tag 01S6 (definition-affine); elementary gluing of the uniquely extended ring maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-binomial-local-geometry",
+  "def-weil-regular-scheme",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-sc-discrete-valuation-ring",
+  "lem-sfb-binomial-laurent-normal-form",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sc-finite-locally-free-sheaf",
+  "pqf-def-affine-morphism",
+  "lem-a1-locally-ringed-space-affine-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of existing binomial geometry and Laurent-intersection nodes, followed by flat tensor exactness (00HD), localization tensor (00DK), sheaf gluing (schemes.tex 01HV), and affine adjunction (01I1). Motivated by Alper--Halpern-Leistner--Heinloth Section 2 Claim 2; locally missing PDF reported WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The ring A[s,t]/(st-pi) for a discrete valuation ring A is a regular integral surface and functions extend across the origin after flat base change",
+   "results": "8 hits: WeierstrassCurve.IsGoodReduction, WeierstrassCurve.instIsIntegralOfIsMinimal, AlgebraicGeometry.ValuativeCommSq.domain, RingHom.isStandardSmooth_holdsForLocalizationAway, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, AlgebraicGeometry.ValuativeCommSq.isFractionRing, Algebra.IsSmoothAt, AlgebraicGeometry.ValuativeCommSq.valuationRing",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regularity and codimension two of the origin in the total space of the semistable node st equals a uniformizer",
+   "results": "8 hits: IsDedekindDomain.HeightOneSpectrum.valuation_uniformizer_ne_zero, IsDedekindDomain.HeightOneSpectrum.valuation_exists_uniformizer, IsDedekindDomain.HeightOneSpectrum.intValuation_exists_uniformizer, Valuation.IsUniformizer, Valuation.Uniformizer, PowerSeries.IsWeierstrassDivisor, Valuation.IsUniformizer.iff, Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs restriction of regular functions and homomorphisms between vector bundles on the semistable nodal trait is an isomorphism after every flat base change",
+   "results": "8 hits: AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.Flat.instMorphismRestrict, AlgebraicGeometry.Flat.instResLE, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp",
+   "date": "2026-10-24",
+   "verdict": "no match: Hits concern ordinary representations, topological bundles, valuations, or basic scheme morphisms, not this scheme-theoretic assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegularLocalRing\"",
+   "results": "12 hits: IsRegularLocalRing, IsRegularLocalRing.toIsLocalRing, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing, IsRegularLocalRing.toIsNoetherian, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.spanFinrank_maximalIdeal, IsRegularRing.isRegularLocalRing_localization",
+   "date": "2026-10-24",
+   "verdict": "no match: The named structures and their basic operations do not state this extension, quotient, or equivalence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|st.*uniformizer",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration gives this assertion; the few keyword hits concern other notions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The semistable node st equals a uniformizer is regular and has Hartogs extension after flat base change",
+   "results": "8 hits: IsSMulRegular.of_flat_of_isBaseChange, Module.Flat.isBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingHom.Flat.isStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange, RingHom.IsStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange",
+   "date": "2026-10-24",
+   "verdict": "no match: The returned sheaf, scheme, flatness, or abstract group declarations do not give this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "hartogs|nodal|semistable|binomial.*laurent",
+   "results": "5 hits: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/LinearAlgebra/Lagrange.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hartogs extension of regular functions after flat base change on the surface xy equals a uniformizer",
+   "results": "8 hits: IsSMulRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingHom.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.stalkMap, RingHom.Flat, AlgebraicGeometry.Scheme.Hom.flat_appLE.",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hartogs\"",
+   "results": "0 hits: .",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functions, morphisms between finite locally free modules, and sections of affine schemes extend uniquely across the origin of a semistable trait surface after flat base change",
+   "results": "8 hits: AlgebraicGeometry.Flat, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.ValuativeCriterion.uniqueness, AlgebraicGeometry.ValuativeCriterion.Existence.eq, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.AffineSpace.hom_ext, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.FormallyUnramified.",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a discrete valuation ring A with uniformizer pi, Spec A[s,t]/(s*t-pi) is a regular integral surface and its punctured structure sheaf is unchanged after arbitrary flat base change",
+   "results": "8 hits: AlgebraicGeometry.ValuativeCommSq.domain, AlgebraicGeometry.instIsDomainCarrierStalkCommRingCatPresheafOfIsIntegral, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, Algebra.smoothLocus, Algebra.IsSmoothAt, Algebra.IsStandardSmooth.localization_away, AlgebraicGeometry.ValuativeCommSq.isFractionRing.",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing",
+   "results": "12 hits: IsRegularLocalRing, IsRegularLocalRing.toIsLocalRing, IsRegularLocalRing.of_isRegularRing_of_isLocalRing, IsRegularLocalRing.instOfIsLocalRingOfIsDomainOfIsPrincipalIdealRing, IsRegularLocalRing.toIsNoetherian, IsRegularLocalRing.of_ringEquiv, IsRegularLocalRing.spanFinrank_maximalIdeal, IsRegularRing.isRegularLocalRing_localization.",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*quotient|quotient.*regular|IsRegularRing",
+   "results": "10 hits: Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Polynomial.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean, Mathlib/RingTheory/RegularLocalRing/Defs.lean.",
+   "date": "2026-10-24",
+   "verdict": "no match: Returned declarations give flatness stability, ordinary affine uniqueness, interpolation nodes, or the regular-ring structures and polynomial instances; none gives the nodal surface together with its flat-base Hartogs assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "date": "2026-10-24",
+  "group": "Q118"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: regularity, the codimension-two origin, and extension of functions; flat-base Hom and section forms needed to extend the group action.",
+   "via": [
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nodal-surface-flat-hartogs",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes: specialize existing DVR binomial geometry and Laurent intersection; write the exact diagonal sequence, tensor with every flat affine chart, and use explicit sheaf, matrix, and affine-target gluing. Statement unchanged; no Noetherian hypothesis on T. Read the cited statements and recorded verbatim quotations.",
+  "blueprint": "Retains the inherited from.place and null ancestor, as blueprint_refs.py ancestor confirms. Realizes its final sentence: Claim 2 regularity, the codimension-two origin, functions, and flat-base Hom and section forms. Read latest sk-thm-sf-ctf-stability and direct-images proof; this is a generic algebra prerequisite inside the inherited chain, not a replacement of any unit-level six-functor step. Whole-blueprint Hartogs/nodal/flat Hartogs searches found no exact equivalent.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic equality of scheme dimension with the supremum of local-ring dimensions, used only to assemble the surface dimension from existing local geometry; no unit proof route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-e885e879a",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-e885e879a (reviewer sub-agent of L); spot-checked: I read the item and all 13 proof_deps in full; there are no new nodes. The statement is unchanged; the delivery only added stmt_deps for the definitions its objects use. Step 1: lem-sfb-dvr-binomial-local-geometry with e=1 and (pi,s,t)=(s,t)=o, where D(s) and D(t) cover X minus o. It gives Noetherian, regular everywhere (local-ring form) and local dimension at most 2 with equality at o, so dim X=2 by lem-pc-scheme-dimension-local-rings. X is integral because the Laurent normal form embeds B in K(T) (pi nonzero since a DVR is not a field), then spec-domain (2) applies. Step 2: the Laurent intersection equals the image of B and B_st embeds in K(T), so 0->B->B_s+B_t->B_st is exact; no surjectivity is claimed. Step 3: the affine flat criterion, flat tensor exactness and localization-tensor give the same sequence for every affine chart C, with no Noetherian hypothesis. Step 4: the tilde sections node identifies the two-open equalizer; affine-local bijectivity then glues to every open. Step 5: matrix entries extend by step 4, and entrywise injectivity gives agreement on overlaps. Step 6: q^{-1}V=Spec D; the adjunction applied to the non-affine source V intersect U_T, together with Gamma(V intersect U_T)=C, gives unique C-algebra maps D->C, which glue. Small cases: Z_(p) and k[[pi]] satisfy the hypotheses; Spec k at o is not flat and the conclusion fails there, so flatness is essential; empty and non-Noetherian T are covered. No Hartogs duplicate in the DAG. The unit route is unchanged. Accepted tool_use: lem-pc-scheme-dimension-local-rings (generic dimension theory). Batch-5: lem-trf-polynomial-ring-regular-base is a mathlib leaf (a polynomial ring over a regular ring is regular) and def-trf-strict-semistable-curve is a definition. Both are generic, outside the trace formula and Poincare duality and their proofs, so accepted. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalSurfaceFlatHartogs",
+  "declaration": "AlgebraicGeometry.nodal_surface_flat_hartogs",
+  "declarations": [
+   "AlgebraicGeometry.strictNodalPuncturedOpen",
+   "AlgebraicGeometry.nodal_surface_flat_hartogs"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalSurfaceFlatHartogs.lean",
+  "statement": "theorem nodal_surface_flat_hartogs (A : CommRingCat.{u}) [IsDomain A] [IsDiscreteValuationRing A] (π : A) (hπ : Irreducible π) : IsIntegral (StrictSemistableModel.nodal π).scheme ∧ IsNoetherian (StrictSemistableModel.nodal π).scheme ∧ IsRegularScheme (StrictSemistableModel.nodal π).scheme ∧ topologicalKrullDim (StrictSemistableModel.nodal π).scheme = 2 ∧ (∃ o : (StrictSemistableModel.nodal π).scheme, o.asIdeal = Ideal.span {Ideal.Quotient.mk _ (MvPolynomial.X 0), Ideal.Quotient.mk _ (MvPolynomial.X 1)} ∧ ringKrullDim ((StrictSemistableModel.nodal π).scheme.presheaf.stalk o) = 2) ∧ ∀ (T : Scheme.{u}) (f : T ⟶ (StrictSemistableModel.nodal π).scheme), Flat f → IsIso (f ⁻¹ᵁ strictNodalPuncturedOpen A π).ι.c ∧ (∀ (M N : T.Modules), M.IsFiniteLocallyFree → N.IsFiniteLocallyFree → Function.Bijective (fun g : M ⟶ N ↦ (Scheme.Modules.restrictFunctor (f ⁻¹ᵁ strictNodalPuncturedOpen A π).ι).map g)) ∧ (∀ (Z : Scheme.{u}) (q : Z ⟶ T), IsAffineHom q → Function.Bijective (fun σ : Over.mk (𝟙 T) ⟶ Over.mk q ↦ (Over.homMk (f ⁻¹ᵁ strictNodalPuncturedOpen A π).ι : Over.mk (f ⁻¹ᵁ strictNodalPuncturedOpen A π).ι ⟶ Over.mk (𝟙 T)) ≫ σ))",
+  "branch": "newtargets-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing strictNodalRing and StrictSemistableModel.scheme supply B and X. The sole helper constructs D(s) union D(t); its inverse image is the open base change. The origin is introduced existentially by its exact ideal, avoiding a choice from an unproved primality theorem. The three conclusions use the canonical presheaf map, restriction functor on module morphisms, and precomposition on morphisms over T."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4515cfe9a",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node. DVR is the IsDomain+IsDiscreteValuationRing record and the uniformizer is Irreducible π. B and X are reused from strictNodalRing and StrictSemistableModel.nodal (def-trf-strict-semistable-curve). The origin is ∃ o with o.asIdeal = span{s,t}, which determines it uniquely. U is the real helper basicOpen s ⊔ basicOpen t. IsIntegral, IsNoetherian, IsRegularScheme (locally Noetherian and stalkwise regular), topologicalKrullDim = 2, stalk ringKrullDim = 2. For every flat f, U_T = f⁻¹ᵁU; IsIso of the canonical presheaf map ι.c on all opens; bijectivity of restrictFunctor ι .map on Hom between IsFiniteLocallyFree modules; bijectivity of precomposition with Over.homMk ι for IsAffineHom q. No Noetherian or extra hypothesis on T or Z; universes all u, as forced by X. Edge cases (empty or non-Noetherian T, rank 0, non-flat closed fibre) agree with the node. The delivery changes only the item's stmt_deps and lean record; all 13 deps are identical to live and have landed records; the statement is verbatim. H4: no existing punctured open or Hartogs declaration; DvrNodalChartBlowupCalculus helpers are theorem-node plain defs; no name clash. Docstrings carry the source place, blueprint tag and the 6 proof steps; only sorry; not recompiled, per the 2026-10-21 instruction, relying on the worker's clean scompile."
+ }
+}

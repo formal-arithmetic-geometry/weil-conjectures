@@ -1,0 +1,143 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-cech-perfect-model-completeness",
+ "kind": "statement",
+ "title": "Perfect constant realization is complete in the intrinsic Cech presentation",
+ "statement": "For any scheme T, Noetherian commutative coefficient ring A in the coefficient universe, and adic coefficient datum d on A, a perfect scalar complex P has intrinsically complete completed constant realization integralConstantDerived T d(P), for every finite generating list of d.ideal and every representative complex C and realization eC. This asserts no slice-model comparison or preservation under scheme pullback. Use the actual completed coefficient sheaf and the fixed intrinsic Koszul unit.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "proof": [
+  {
+   "text": "Present the perfect scalar object by its bounded finite-projective complex. On the exact AsSmall.{0} pro-etale model used by intrinsic completion, repeat the existing constant-sheafification comparison and scalar-extension adjunction comparison; all termwise maps and differentials are identified. Finite-projective retracts and the slice multiplication-difference calculation prove local ringed-ideal completeness of this normalized realization.",
+   "uses": [
+    "lem-weil-pbc-cech-perfect-complex-model",
+    "lem-sfb-perfect-model-complex-comparison",
+    "lem-sfb-integral-completed-constant-model-transport",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  },
+  {
+   "text": "The actual coefficient equivalence sends completed constant realization to this model. Its scalar-preserving normalization identifies the intrinsic Koszul unit with the constant-completion unit. The existing reflector criterion makes that unit invertible for the complete model. Reflect invertibility through the exact derived equivalence and compose with the supplied representative isomorphism.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-coefficient-equivalence",
+    "lem-weil-pbc-completed-koszul-constant-transport",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cech-perfect-complex-model",
+  "lem-sfb-perfect-model-complex-comparison",
+  "lem-sfb-integral-completed-constant-model-transport",
+  "def-pc-perfect-ring-complex",
+  "lem-weil-pbc-completed-constant-coefficient-equivalence",
+  "lem-weil-pbc-completed-koszul-constant-transport",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Lemmas 6.5.8 and 6.6.8, with the recorded completed coefficient comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex realized in completed constant sheaves is derived complete",
+   "results": "Inspected completion and condensed-module hits; none identifies the actual intrinsic Koszul unit.",
+   "date": "2026-10-27",
+   "verdict": "Use the project coefficient comparison and reflector APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedCompleteIntrinsic",
+   "results": "No declaration in Mathlib.",
+   "date": "2026-10-27",
+   "verdict": "Project-specific predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*constant.*[Ii]ntrinsic|[Ii]ntrinsic.*perfect.*model",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex of completed constant modules is derived complete",
+   "results": "AdicCompletion, IsAdicComplete and elementary algebraic completeness hits; no site or derived comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project finite-projective and coefficient APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPerfectChartComplete",
+  "date": "2026-10-27",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "The coefficient-model completeness and unit-normalization steps.",
+   "via": [
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-integral-perfect-chart-complete"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CechPerfectModelCompleteness",
+  "file": "lean/Sheaf/Paper/CechPerfectModelCompleteness.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cechPerfectModel_intrinsicComplete",
+  "statement": "theorem cechPerfectModel_intrinsicComplete (T : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A]\n    (d : AdicCoefficientDatum A)\n    (P : completedConstantDerived (ModuleCat.{u + 1} A))\n    (hP : @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) P)\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)\n    (C : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ)\n    (eC : DerivedCategory.Q.obj C ≅ (integralConstantDerived T d).obj P) :\n    IsDerivedCompleteIntrinsic T d r a ha ((integralConstantDerived T d).obj P) C eC",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261027T012920-L-2347218",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

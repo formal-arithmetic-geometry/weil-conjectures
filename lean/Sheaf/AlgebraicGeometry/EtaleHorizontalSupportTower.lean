@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
+import Sheaf.AlgebraicGeometry.EtaleGraphOpenTower
+import Sheaf.AlgebraicGeometry.EtaleGraphProperTower
 
 /-! # The normalized compactification tower for etale horizontal composition
 
@@ -28,6 +30,43 @@ attribute [local irreducible] lowerStar upperStar etaleLowerShriek openImmersion
   canonicalEtaleCompactSupportComparison derivedEtaleLowerShriekUpperStarAdjunction
   derivedOpenImmersionLowerShriekUpperStarAdjunction mapDerivedUpperStarLowerStarAdjunction
   rightDerivedLowerShriekIso unboundedEtaleLowerShriekCompIso unboundedEtaleLowerShriekCongr
+
+private lemma compactSupportCongr_symm
+    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} {f g : X ⟶ Y}
+    [HasCompactification f] [HasCompactification g] (w : f = g) :
+    (unboundedEtaleLowerShriekCongr A w).symm = unboundedEtaleLowerShriekCongr A w.symm := by
+  subst w
+  simp only [unboundedEtaleLowerShriekCongr, Iso.refl_symm]
+
+private lemma compactSupportCongr_trans
+    (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}} {f g h : X ⟶ Y}
+    [HasCompactification f] [HasCompactification g] [HasCompactification h]
+    (w : f = g) (w' : g = h) :
+    unboundedEtaleLowerShriekCongr A w ≪≫ unboundedEtaleLowerShriekCongr A w' =
+      unboundedEtaleLowerShriekCongr A (w.trans w') := by
+  subst w
+  subst w'
+  simp only [unboundedEtaleLowerShriekCongr, Iso.refl_trans]
+
+private lemma mapIso_cancel
+    {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {X Y : C} (i : X ≅ Y) {Z : D} (h : F.obj X ⟶ Z) :
+    F.map i.hom ≫ F.map i.inv ≫ h = h := by
+  rw [← F.map_comp_assoc, i.hom_inv_id, F.map_id X, Category.id_comp]
+
+private lemma compactSupportTower_cancel
+    {C : Type*} [Category* C] {A₀ A₁ A₂ A₃ A₄ A₅ A₆ : C}
+    (d : A₀ ⟶ A₁) (l : A₁ ⟶ A₂) [Mono l] (rho : A₀ ⟶ A₂)
+    (u : A₀ ⟶ A₃) (g : A₃ ⟶ A₄) (a : A₄ ⟶ A₅) (t : A₅ ⟶ A₁)
+    (ai : A₅ ⟶ A₄) (s : A₄ ⟶ A₆) (k : A₆ ⟶ A₂) (q : A₃ ⟶ A₀)
+    (hd : d ≫ l = rho) (hl : t ≫ l = ai ≫ s ≫ k)
+    (ha : a ≫ ai ≫ s ≫ k = s ≫ k) (hr : q ≫ rho = g ≫ s ≫ k)
+    (ht : u ≫ q ≫ rho = rho) : d = u ≫ g ≫ a ≫ t := by
+  apply (cancel_mono l).1
+  rw [hd]
+  simp only [Category.assoc]
+  rw [hl, ha, ← hr]
+  exact ht.symm
 
 /-- The canonical graph comparisons put compact-support composition in the proper/open
 compactification normal form. This identity is before either horizontal counit is applied.
@@ -138,6 +177,121 @@ theorem etaleHorizontalSupport_tower
           (a.hom.app M) ≫
         (rightDerivedLowerShriekIso A c).hom.app
           ((etaleLowerShriek (ModuleCat.{u + 1} A) v' inferInstance).mapDerivedCategory.obj M) := by
-  sorry
+  dsimp only
+  let cs := c.ofIsPullback sq
+  let va := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v' inferInstance
+  let ba := derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)
+    (pullback.fst c.g v) inferInstance
+  let ja := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i
+  let j'a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) cs.i
+  let a := (conjugateIsoEquiv (va.comp ja) (j'a.comp ba)).symm
+    (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)
+      (c.isPullback_i_ofIsPullback sq).toCommSq.flip)
+  let sumEx := ((mateEquiv
+    (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v inferInstance)
+    (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A)
+      (pullback.fst c.g v) inferInstance)).symm
+    (TwoSquare.mk _ _ _ _ (exactDerivedSquareUpperStarIso (ModuleCat.{u + 1} A)
+      (IsPullback.of_hasPullback c.g v).toCommSq).hom)).natTrans
+  let gam := (mateEquiv
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A)
+      (pullback.snd c.g v))
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g)
+    (TwoSquare.mk _ _ _ _ (inv sumEx))).natTrans
+  let dv' := (rightDerivedLowerShriekIso A
+    (HasCompactification.compactification v')).symm ≪≫
+      canonicalEtaleCompactSupportComparison A v' (HasCompactification.compactification v')
+  let dv := (rightDerivedLowerShriekIso A
+    (HasCompactification.compactification v)).symm ≪≫
+      canonicalEtaleCompactSupportComparison A v (HasCompactification.compactification v)
+  let delta := Functor.isoWhiskerRight dv'.symm
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f) ≪≫
+      unboundedEtaleLowerShriekCompIso A v' f ≪≫
+      unboundedEtaleLowerShriekCongr A sq.toCommSq.w ≪≫
+      (unboundedEtaleLowerShriekCompIso A f' v).symm ≪≫
+      Functor.isoWhiskerLeft
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f') dv
+  change delta.inv.app M =
+    (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map
+        ((rightDerivedLowerShriekIso A cs).inv.app M) ≫
+      gam.app
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} A) cs.i).mapDerivedCategory.obj M) ≫
+      (rightDerivedLowerStar (ModuleCat.{u + 1} A) c.g).map (a.hom.app M) ≫
+      (rightDerivedLowerShriekIso A c).hom.app
+        ((etaleLowerShriek (ModuleCat.{u + 1} A) v' inferInstance).mapDerivedCategory.obj M)
+  let : IsLocallyNoetherian c.Z := LocallyOfFiniteType.isLocallyNoetherian c.g
+  let : CompactSpace c.Z := QuasiCompact.compactSpace_of_compactSpace c.g
+  let : IsNoetherian c.Z := ⟨⟩
+  let : IsLocallyNoetherian cs.Z := LocallyOfFiniteType.isLocallyNoetherian cs.g
+  let : CompactSpace cs.Z := QuasiCompact.compactSpace_of_compactSpace cs.g
+  let : IsNoetherian cs.Z := ⟨⟩
+  let r := v' ≫ c.i
+  let p := c.g
+  let e := (HasCompactification.compactification (v' ≫ f)).ofComp c
+  let : HasCompactification (r ≫ p) := (e.postcomp p).hasCompactification
+  let osq := (c.isPullback_i_ofIsPullback sq).toCommSq
+  let s := (conjugateIsoEquiv
+    (derivedEtaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) r inferInstance)
+    (j'a.comp ba)).symm
+    (Functor.mapDerivedCategoryNatIso
+      (upperStarComp (ModuleCat.{u + 1} A) cs.i (pullback.fst c.g v) r osq.w) ≪≫
+      Functor.mapDerivedCategoryCompIso _ _)
+  let k := Functor.isoWhiskerRight
+    (canonicalEtaleCompactSupportComparison A r e).symm
+    (rightDerivedLowerStar (ModuleCat.{u + 1} A) p) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) e.i).mapDerivedCategory
+      (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) e.g p) ≪≫
+    rightDerivedLowerShriekIso A (e.postcomp p)
+  have w₁ : v' ≫ f = r ≫ p :=
+    (congrArg (fun h : X ⟶ Y ↦ v' ≫ h) c.comm).trans (Category.assoc _ _ _).symm
+  have w₂ : f' ≫ v = r ≫ p := sq.w.symm.trans w₁
+  let l := Functor.isoWhiskerRight dv'.symm
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f) ≪≫
+    unboundedEtaleLowerShriekCompIso A v' f ≪≫ unboundedEtaleLowerShriekCongr A w₁
+  let rho := Functor.isoWhiskerLeft
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f') dv.symm ≪≫
+    unboundedEtaleLowerShriekCompIso A f' v ≪≫ unboundedEtaleLowerShriekCongr A w₂
+  have hl := etaleGraph_open_tower A c cs.i (pullback.fst c.g v) osq e M
+  change (rightDerivedLowerShriekIso A c).hom.app
+      ((etaleLowerShriek (ModuleCat.{u + 1} A) v' inferInstance).mapDerivedCategory.obj M) ≫
+      l.hom.app M =
+    (rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (a.inv.app M) ≫
+      (rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (s.hom.app M) ≫
+      k.hom.app M at hl
+  have hr := etaleGraph_proper_tower A cs p (pullback.fst c.g v)
+    (IsPullback.of_hasPullback c.g v) r osq.w e M
+  change (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map
+      ((rightDerivedLowerShriekIso A cs).hom.app M) ≫ rho.hom.app M =
+    gam.app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) cs.i).mapDerivedCategory.obj M) ≫
+      (rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (s.hom.app M) ≫
+      k.hom.app M at hr
+  have hcongr : (unboundedEtaleLowerShriekCongr A sq.w).symm ≪≫
+      unboundedEtaleLowerShriekCongr A w₁ = unboundedEtaleLowerShriekCongr A w₂ := by
+    rw [compactSupportCongr_symm, compactSupportCongr_trans]
+  have hdelta : delta.symm ≪≫ l = rho := by
+    dsimp only [delta, l, rho]
+    simp only [Iso.trans_symm, Iso.symm_symm_eq, Iso.trans_assoc,
+      ← Functor.isoWhiskerLeft_symm, ← Functor.isoWhiskerRight_symm,
+      Iso.self_symm_id_assoc, Iso.symm_self_id_assoc, hcongr]
+  have hd : delta.inv.app M ≫ l.hom.app M = rho.hom.app M := by
+    exact congr_app (congrArg Iso.hom hdelta) M
+  have ha := mapIso_cancel (rightDerivedLowerStar (ModuleCat.{u + 1} A) p) (a.app M)
+    ((rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (s.hom.app M) ≫ k.hom.app M)
+  have ht := mapIso_cancel
+    (etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory
+    ((rightDerivedLowerShriekIso A cs).app M).symm (rho.hom.app M)
+  exact compactSupportTower_cancel (delta.inv.app M) (l.hom.app M) (rho.hom.app M)
+    ((etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map
+      ((rightDerivedLowerShriekIso A cs).inv.app M))
+    (gam.app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) cs.i).mapDerivedCategory.obj M))
+    ((rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (a.hom.app M))
+    ((rightDerivedLowerShriekIso A c).hom.app
+      ((etaleLowerShriek (ModuleCat.{u + 1} A) v' inferInstance).mapDerivedCategory.obj M))
+    ((rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (a.inv.app M))
+    ((rightDerivedLowerStar (ModuleCat.{u + 1} A) p).map (s.hom.app M)) (k.hom.app M)
+    ((etaleLowerShriek (ModuleCat.{u + 1} A) v inferInstance).mapDerivedCategory.map
+      ((rightDerivedLowerShriekIso A cs).hom.app M)) hd hl ha hr ht
 
 end AlgebraicGeometry.Etale

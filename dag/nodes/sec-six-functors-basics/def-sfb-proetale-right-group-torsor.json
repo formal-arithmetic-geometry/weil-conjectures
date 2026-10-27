@@ -1,0 +1,107 @@
+{
+ "id": "def-sfb-proetale-right-group-torsor",
+ "kind": "definition",
+ "title": "Right torsors under arbitrary pro-etale group sheaves",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with the small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], in compatible universes [def-weil-size-convention]. Let $H$ be a sheaf of possibly noncommutative groups on that site. A right $H$-torsor is a sheaf of sets $P$ and restriction-compatible maps $P(U)\\times H(U)\\to P(U)$, written $(s,g)\\mapsto sg$, satisfying $s1=s$ and $(sg)h=s(gh)$, such that for every $U$ and $s\\in P(U)$ the function $g\\mapsto sg$ is bijective, and the sieve of $V\\to U$ with $P(V)$ nonempty is covering for every $U$. For $s,t\\in P(U)$ define the transition coefficient $\\delta(s,t)\\in H(U)$ by applying the inverse of the bijection $g\\mapsto sg$ to $t$. Thus it is the unique coefficient with $t=s\\delta(s,t)$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AH, definition-torsor, with right translation; the same notion is explicitly assumed in lem-sfb-pointed-limit-cech-coordinates, step 10."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structure.*Torsor|def.*Torsor|class.*Torsor",
+   "results": "0 hits; ; project rg: only additive Torsor, etale NonabelianTorsor, and ComparisonTorsor for inverse images of etale group sheaves. No arbitrary pro-etale right-group-sheaf torsor.",
+   "date": "2026-10-22",
+   "verdict": "No exact definition of a right torsor under an arbitrary pro-etale group sheaf. Reuse existing Sheaf, GrpCat, ProEt.topology and nonemptySieve; define only the missing right torsor interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right torsor under an arbitrary sheaf of noncommutative groups on the small pro etale site, with natural simply transitive action and local sections",
+   "results": "8 hits; AddTorsor.noConfusionType, AddTorsor.noConfusion, AddTorsor, AddTorsor.mk, AlgebraicGeometry.Scheme.smallEtaleTopology, instProperVAdd, AddTorsor.rec, IsTopologicalAddTorsor",
+   "date": "2026-10-22",
+   "verdict": "No exact definition of a right torsor under an arbitrary pro-etale group sheaf. Reuse existing Sheaf, GrpCat, ProEt.topology and nonemptySieve; define only the missing right torsor interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, MulAction",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No exact definition of a right torsor under an arbitrary pro-etale group sheaf. Reuse existing Sheaf, GrpCat, ProEt.topology and nonemptySieve; define only the missing right torsor interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pointed-limit-cech-coordinates",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; Lemma 7.4.3, p. 69 (cofiltered-limit compatibility for profinite groups), Construction 7.4.4, and the finite-cover fibre functor underlying Lemma 7.4.10. Agent expansion into the pointed finite-etale inverse limit and its Cech coordinates. Upstream reference implementation: lean/WeilConjectures/AlgebraicGeometry/FundamentalGroup/UniversalCoverConstruction.lean, cover/proj/pt, bijective_fiber, transport, loop and continuous_loop, lines 129–164, 305–314, 356–376, 783–852; the full Cech statement here is not asserted to be an already finished Lean declaration.; re-split argument: old item steps [11, 12, 15].; the right-torsor transition section and shifted cocycle clause.",
+   "via": [
+    "lem-sfb-pointed-limit-cech-coordinates",
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ProEtaleRightTorsor",
+  "declaration": "CategoryTheory.Sheaf.ProEtaleRightTorsor",
+  "declarations": [
+   "CategoryTheory.Sheaf.ProEtaleRightTorsor",
+   "CategoryTheory.Sheaf.ProEtaleRightTorsor.transition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ProEtaleRightTorsor.lean",
+  "statement": "structure ProEtaleRightTorsor (X : AlgebraicGeometry.Scheme.{u}) (H : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) GrpCat.{v})",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e229fabfc",
+  "group": "Q99",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e229fabfc",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Re-delivery of 3afc RETURN. Lean identical to 3afc apart from imports and the moved label_only_cocycle. Maths re-checked: vertices d_{g1..gi}, cumulative/inverse permutations, faces via restrictedLabels with the full first-face base, constant_simplicial via deck_mul, cocycle c02=c01*c12, naturality via fundamentalGroupMap, id/comp, edge cases. Fault (H2/H4): the final packet dropped the parent-module edits (preflight refuses owners outside the closure), so PointedLimitSplittingData, FiniteCechLabels and UniversalCover.label_only_cocycle redeclare names still in live PointedLimitFiniteSplitting/PointedLimitCech. Control: importing the item with PointedLimitCech fails with 'environment already contains UniversalCover.finiteLabelDiagram'. FIX, no stmt_deps change: def-sfb-pointed-limit-splitting-data existing:true on unchanged PointedLimitFiniteSplitting (no cycle; check_existing clean; Data module left out); FiniteCechLabels in namespace FiniteCechLabels, node record renamed; label_only_cocycle moved to PointedLimitCech namespace; item imports PointedLimitFiniteSplitting; lean-record and report updated. nt_compile clean (4.6/6.4/13.3 s); probe with live PointedLimitCech compiles and the label copies are equal by rfl; check_new_node clean for all 3 new nodes. Maintainer note: the stage-3 prover of PointedLimitCech should delete its UniversalCover label copies and label_only_cocycle and import FiniteCechLabels and the item.; left out new module(s) lean/Sheaf/AlgebraicGeometry/FundamentalGroup/PointedLimitSplittingData.lean (--drop-files, or a record fixed to existing: true)"
+ }
+}

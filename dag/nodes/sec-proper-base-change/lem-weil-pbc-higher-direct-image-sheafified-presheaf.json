@@ -161,7 +161,32 @@
   "item": "lem-weil-pbc-injective-module-direct-image-acyclic",
   "date": "2026-10-09"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.higherDirectImageSheafifiedPresheaf"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.higherDirectImageSheafifiedPresheaf",
+     "module": "WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf",
+     "lines": [
+      33,
+      134
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -205,5 +230,52 @@
   "landing": "20261012T085247-L-17972",
   "kind": "interface",
   "note": "independent Codex review: Matched the unchanged theorem signature and completed proof with the node, cited comparisons, dependency records, unit route, import-change record, and report; compilation and axiom checks pass."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $p:X\\to S$ be any morphism of schemes [def-pc-scheme] and let $F\\in\\Ab(X_{\\Et})$ be an abelian sheaf on the small etale site [def-weil-pbc-etale-site] of $X$. For an object $U$ of $X_{\\Et}$ write $H^q(U,F)$ for the $q$-th right derived functor, evaluated at $F$, of the left exact functor $\\Ab(X_{\\Et})\\to\\Ab$, $G\\mapsto G(U)$ [def-sp-left-exact-additive] (computed from an injective resolution of $F$ in $\\Ab(X_{\\Et})$ [def-sp-injective-resolutions]). For an etale $V\\to S$ the base change $X\\times_SV\\to X$ is etale, hence an object of $X_{\\Et}$, and a morphism $g:V'\\to V$ of $S_{\\Et}$ gives the morphism $\\mathrm{id}_X\\times g:X\\times_SV'\\to X\\times_SV$ of $X_{\\Et}$; the restriction map $H^q(X\\times_SV,F)\\to H^q(X\\times_SV',F)$ is the map induced on $H^q$ by the restriction maps $I^\\bullet(X\\times_SV)\\to I^\\bullet(X\\times_SV')$ of an injective resolution $F\\to I^\\bullet$. Then for every $q\\geq0$ the higher direct image $R^qp_*F=\\mathcal H^q(Rp_*F)$ of [def-weil-pbc-direct-image] is canonically isomorphic to the sheafification of the presheaf on $S_{\\Et}$\n\n$$\n V\\longmapsto H^q(X\\times_SV,F).\n$$\n\nNo hypothesis (quasi-compactness, separatedness) is put on $p$.",
+  "proof": [
+   {
+    "text": "Abelian sheaves on the small etale site form a Grothendieck abelian category, hence have enough injectives [lem-sp-grothendieck-enough-injectives]; choose an injective resolution $F\\to I^\\bullet$. Put $f=p_*$, $K=f(I^\\bullet)$ and $L=\\iota(K)$, where $\\iota$ is the inclusion of sheaves into presheaves. The classical right derived functors $R^qf(F)$ are computed as $H^q(K)$ using this resolution [def-sp-injective-resolutions]; [def-sp-left-exact-additive]; [lem-sp-derived-well-defined]. For a bounded-below complex such as $F[0]$, the $q$-th cohomology of the total derived functor $Rf(F[0])$ is canonically the classical right derived value $R^qf(F)$ [def-weil-pbc-direct-image]. Thus no separate choice or comparison of arbitrary K-injective resolutions is needed. ([def-sp-injective-resolutions], [def-sp-left-exact-additive], [lem-sp-derived-well-defined]).",
+    "uses": [
+     "lem-sp-grothendieck-enough-injectives",
+     "def-sp-injective-resolutions",
+     "def-sp-left-exact-additive",
+     "lem-sp-derived-well-defined",
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $V$ in $S_{\\Et}$, the value of $L$ at $V$ is by definition the value of $I^\\bullet$ at the base-change object $X\\times_SV$, since $p_*$ is precomposition with the base-change functor $S_{\\Et}\\to X_{\\Et}$, $V\\mapsto X\\times_SV$, which preserves finite limits [def-weil-pbc-direct-image]. The same identification holds for differentials and restriction maps. ([def-weil-pbc-direct-image]).",
+    "uses": [
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Construct an isomorphism $e_P$ from the specified presheaf $P_q:V\\mapsto H^q(X\\times_SV,F)$ to the presheaf cohomology $\\mathcal H^q(L)$. Its component at $V$ is the identification $H^q(X\\times_SV,F)\\cong H^q(I^\\bullet(X\\times_SV))$ given by the resolution, followed by the identification $H^q(I^\\bullet(X\\times_SV))=H^q(L(V))\\cong\\mathcal H^q(L)(V)$; the latter holds because evaluation at $V$ is exact on presheaves (limits and colimits of presheaves are computed pointwise), hence commutes with cohomology. For a restriction $g:V'\\to V$, the derived restriction map is the map induced on cohomology by the restriction maps of $I^\\bullet$ [lem-sp-derived-well-defined], and the identification above is natural in the evaluation point. This proves naturality of $e_P$, including the specified derived restriction maps.",
+    "uses": [
+     "lem-sp-derived-well-defined"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Sheafification $a$ is exact (it is a left adjoint and preserves finite limits). The counit gives a termwise natural isomorphism $a(\\iota(K))\\cong K$, hence an isomorphism of complexes $e_K:a(L)\\cong K$. Exactness of $a$ identifies $a(\\mathcal H^q(L))$ with $\\mathcal H^q(a(L))$, and applying $\\mathcal H^q$ to $e_K$ identifies this with $\\mathcal H^q(K)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Compose $a(e_P)$, the identification $a(\\mathcal H^q(L))\\cong\\mathcal H^q(a(L))$, $\\mathcal H^q(e_K)$, the identification $\\mathcal H^q(K)\\cong R^qf(F)$ given by the resolution, and the identification of $R^qf(F)$ with $\\mathcal H^q(Rp_*(F[0]))$. This is the required isomorphism from the sheafification of $P_q$ to $R^qp_*F=\\mathcal H^q(Rp_*(F[0]))$. All components are the canonical resolution or cohomology comparisons; the restriction naturality was verified in the preceding step.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

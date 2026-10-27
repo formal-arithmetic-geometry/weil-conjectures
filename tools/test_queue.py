@@ -22,10 +22,13 @@ class RepairOrder(unittest.TestCase):
             for module in modules:
                 (root/module).write_text(('def data := Classical.choose exists_data\n' if module=='Sheaf.Data' else 'theorem t : True := by sorry\n')+
                                         ('-- STATEMENT-DISPUTED\n' if module=='Sheaf.Disputed' else ''))
+            (root/'claims').mkdir()
+            for module in ('Sheaf.Small','Sheaf.Data','Sheaf.Waiting'):
+                (root/'claims'/(module+'.lock')).write_text('{"who": "Y7"}')
             import sorry_route  # the live route (local/sorry-route.json) knows none of these modules
             with patch.object(queue,'WORK',root),patch.object(queue.li,'file_of',lambda m:root/m),\
                  patch.object(sorry_route,'load',lambda:None):
-                items,held=queue.stage3({},modules,{'Sheaf.Waiting','Sheaf.Small'})
+                items,held=queue.stage3({},modules,{'Sheaf.Waiting','Sheaf.Small','Sheaf.Data'})
             # 2026-10-17: a waiting module is not an item, also a repair with sorry (Sheaf.Small); a repair without sorry is
             self.assertEqual([item[2] for item in items],
                              ['Sheaf.Medium','Sheaf.Data','Sheaf.Disputed','Sheaf.Near','Sheaf.Far'])
@@ -55,6 +58,57 @@ class RepairOrder(unittest.TestCase):
                 self.assertEqual(queue.STATE['off_route'],['Sheaf.Bypassed'])
                 items,held=queue.stage3({},dist,set(),{})   # no reach computed: the route only
                 self.assertEqual([item[2] for item in items],['Sheaf.OnRoute'])
+
+
+class DependencyReadiness(unittest.TestCase):
+    def test_claimed_item_waits_then_reopens_when_dependency_is_stated(self):
+        # A re-split can add an unstated prerequisite after the proof was claimed.
+        # The claim must survive selection, but cannot make the proof ready.
+        import assumed
+        import sorry_route
+        dq = queue.dag_queue
+        for edge in ("stmt_deps", "proof_deps", "uses"):
+            with self.subTest(edge=edge), tempfile.TemporaryDirectory() as tmp:
+                root = pathlib.Path(tmp)
+                module = "Sheaf.Claimed"
+                source = root / module
+                source.write_text("theorem t : True := by sorry\n")
+                (root / "claims").mkdir()
+                claim = root / "claims" / (module + ".lock")
+                claim.write_text('{"who": "Y7"}')
+                original_claim = claim.read_bytes()
+                parent = {"id": "parent", "target": True, "lean": {"module": module}}
+                if edge == "uses":
+                    parent["proof"] = [{"uses": ["dependency"]}]
+                else:
+                    parent[edge] = ["dependency"]
+                dependency = {"id": "dependency", "status": "unsplit"}
+                route = {"t": 0, "route": set(), "batches": {}}
+                with patch.object(queue, "WORK", root), \
+                     patch.object(queue.li, "file_of", lambda m: root / m), \
+                     patch.object(queue.li, "config", return_value={}), \
+                     patch.object(dq, "closed_upstream", return_value=False), \
+                     patch.object(dq, "_ASSUMED", {}), \
+                     patch.object(assumed, "nodes", return_value={}), \
+                     patch.object(sorry_route, "load", return_value=route), \
+                     patch.object(sorry_route, "changed_in_batches", return_value=set()):
+                    graph = dq.Dag({"parent": parent, "dependency": dependency})
+                    below = {"batch5": {module: 1}}
+
+                    def select():
+                        return queue.stage3({}, {}, {m for m, _ in graph.waiting()}, below)
+
+                    self.assertEqual(graph.waiting(), [(module, "dependency")])
+                    items, held = select()
+                    self.assertEqual(items, [])
+                    self.assertEqual(held, [(queue.FAR, module, 1)])
+                    # A Lean attachment suffices; its proof need not be closed.
+                    dependency["lean"] = {"module": "Sheaf.Dependency"}
+                    self.assertEqual(graph.waiting(), [])
+                    items, held = select()
+                    self.assertEqual([item[2] for item in items], [module])
+                    self.assertEqual(held, [])
+                    self.assertEqual(claim.read_bytes(), original_claim)
 
 
 if __name__=='__main__': unittest.main()

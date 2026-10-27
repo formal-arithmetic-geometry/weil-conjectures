@@ -207,7 +207,18 @@
   "thm-sc-finite-type-torsion-cd"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
@@ -310,8 +321,13 @@
   "note": "Wrote review.md. All four statements match the node and source; dependencies, universes, edge cases, docstrings, and verbatim signature checked. Snapshot scompile.py sandbox/library passes succeeded without warnings. No fixes needed; branch unchanged."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $k$ be a separably closed field, let $A$ be a finite commutative ring\nannihilated by a power of a prime $\\ell\\neq\\operatorname{char}(k)$, let\n$T$ be a finite-type\n$k$-scheme of dimension at most $d$, and let\n$j:V\\hookrightarrow T$ be a\nquasi-compact open immersion.\nThen the pair $(V,T)$ satisfies the open-complement condition of\n[def-exc-open-complement-bound] with $c=2d$, and it does so for\n*every* finite coefficient ring $A$ of that shape at once: both\nclauses hold — the vanishing $R^qj_*M=0$ for every $q>2d$ and every\nsheaf $M$ of $A$-modules on $V_{\\Et}$, and the\nconstructibility of\n$R^qj_*F$ in every degree for every constructible $A$-sheaf $F$ — and\nthe constant $2d$ depends on $T$ alone, not on $A$. In particular, in\nthe setting of the global finite-field datum with $k=\\Fbar$ and at the\nfinite coefficient stages $A=A_{E,n}$ of [def-pur-conventions], the\ncondition holds for every $n\\geq1$ with the same constant $2d$; for the\nchart complements $W_U\\subseteq\\mathbf A^{d_U}_V$ of the assembly\n[thm-pur-general-admissibility], where\n$d_U+\\dim V\\leq d_U+\\dim Y$, it holds with\n$c_U=2(d_U+\\dim V)$, again independent of $n$.",
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be a separably closed field, let $A$ be a finite commutative ring\nannihilated by a power of a prime $\\ell\\neq\\operatorname{char}(k)$, let\n$T$ be a finite-type\n$k$-scheme of dimension at most $d$, and let\n$j:V\\hookrightarrow T$ be a\nquasi-compact open immersion.\nThen the pair $(V,T)$ satisfies the open-complement condition of\n[def-exc-open-complement-bound] with $c=2d$, and it does so for\n*every* finite coefficient ring $A$ of that shape at once: both\nclauses hold — the vanishing $R^qj_*M=0$ for every $q>2d$ and every\nsheaf $M$ of $A$-modules on $V_{\\Et}$, and the\nconstructibility of\n$R^qj_*F$ in every degree for every constructible $A$-sheaf $F$ — and\nthe constant $2d$ depends on $T$ alone, not on $A$. In particular, in\nthe setting of the global finite-field datum with $k=\\Fbar$ and at the\nfinite coefficient rings $A=A_{E,n}$ of [def-pur-conventions], the\ncondition holds for every $n\\geq1$ with the same constant $2d$; for the\nchart complements $W_U\\subseteq\\mathbf A^{d_U}_V$ of the assembly\n[thm-pur-general-admissibility], where\n$d_U+\\dim V\\leq d_U+\\dim Y$, it holds with\n$c_U=2(d_U+\\dim V)$, again independent of $n$.",
   "proof": [
    {
     "text": "The argument is that of [lem-exc-open-complement-known], repeated with\nits two hypotheses weakened and its constant tracked; no step of it uses more\nabout $k$ or about $A$ than the hypotheses of the statement, which is why\nthe conclusion is uniform in the coefficient ring.",
@@ -344,7 +360,7 @@
     "elementary": false
    },
    {
-    "text": "*Step 4: uniformity in the coefficient ring.* Steps 2 and 3 use of\n$A$ exactly its finiteness and the annihilation by a power of a prime\n$\\ell\\neq\\operatorname{char}(k)$: the constructibility clause is clause (1)\nof the input, whose only coefficient hypothesis is that $A$ is finite and\nannihilated by an integer invertible in $k$, and the vanishing clause is\nclause (2), which is quantified over all torsion sheaves and mentions no\ncoefficient ring. The integer $d=\\dim T$ likewise depends on the scheme\nalone. Hence both clauses hold with the constant $2d$ for every finite ring\n$A$ of the stated shape, which is the uniformity assertion. In the global\nfinite-field datum one has $k=\\Fbar$, separably closed with\n$\\operatorname{char}(k)=p$, and $A_{E,n}$ is annihilated by the power\n$\\varpi_E^n$ of the prime $\\ell\\neq p$, so the condition holds at every\nstage $n\\geq1$ with the constant $2d$; for the chart complement\n$W_U$ of the closed subscheme $U\\subseteq\\mathbf A^{d_U}_V$ of\n[def-sbc-affine-space] the ambient scheme is of dimension\n$d_U+\\dim V\\leq d_U+\\dim Y$, giving $c_U=2(d_U+\\dim V)$ independently of\n$n$. This is the assertion of the second half of the statement, and the\nfinal sentence records the two independent computations of the same condition\nin [lem-exc-open-complement-known].",
+    "text": "*Step 4: uniformity in the coefficient ring.* Steps 2 and 3 use of\n$A$ exactly its finiteness and the annihilation by a power of a prime\n$\\ell\\neq\\operatorname{char}(k)$: the constructibility clause is clause (1)\nof the input, whose only coefficient hypothesis is that $A$ is finite and\nannihilated by an integer invertible in $k$, and the vanishing clause is\nclause (2), which is quantified over all torsion sheaves and mentions no\ncoefficient ring. The integer $d=\\dim T$ likewise depends on the scheme\nalone. Hence both clauses hold with the constant $2d$ for every finite ring\n$A$ of the stated shape, which is the uniformity assertion. In the global\nfinite-field datum one has $k=\\Fbar$, separably closed with\n$\\operatorname{char}(k)=p$, and $A_{E,n}$ is annihilated by the power\n$\\pi_E^n$ of the prime $\\ell\\neq p$, so the condition holds at every\nstage $n\\geq1$ with the constant $2d$; for the chart complement\n$W_U$ of the closed subscheme $U\\subseteq\\mathbf A^{d_U}_V$ of\n[def-sbc-affine-space] the ambient scheme is of dimension\n$d_U+\\dim V\\leq d_U+\\dim Y$, giving $c_U=2(d_U+\\dim V)$ independently of\n$n$. This is the assertion of the second half of the statement, and the\nfinal sentence records the two independent computations of the same condition\nin [lem-exc-open-complement-known].",
     "uses": [
      "def-sbc-affine-space",
      "lem-exc-open-complement-known"
@@ -352,7 +368,7 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
   "date": "2026-10-19",

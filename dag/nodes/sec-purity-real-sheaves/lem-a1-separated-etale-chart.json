@@ -17,19 +17,7 @@
  ],
  "proof": [
   {
-   "text": "Write $a:U\\to S$ for the structure morphism. Absolute separatedness says that $U\\to\\operatorname{Spec}\\mathbf Z$ is separated. Apply clause (b) of [lem-weil-pbc-separated-cancellation] to $U\\xrightarrow{a}S\\to\\operatorname{Spec}\\mathbf Z$: $a$ is separated, so its diagonal $\\delta:U\\to P:=U\\times_SU$ is a closed immersion by [def-weil-proper-morphism]. No separatedness of $S$ is used.",
-   "uses": [
-    "lem-weil-pbc-separated-cancellation",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FZ (lemma-separated-cover), proof: U to S is separated; Schemes Tag 01KV (lemma-compose-after-separated)"
-   }
-  },
-  {
-   "text": "By representability in [def-trf-algebraic-space], $R:=U\\times_EU$ is a scheme, with its natural map $j:R\\to P$ and diagonal $d:U\\to R$. The square with top $d:U\\to R$, bottom $\\delta:U\\to P$, left $\\mathrm{id}_U$, and right $j$ is cartesian. Indeed, for a test $S$-scheme $T$, an element of $R(T)$ is a pair $(x,y)$ of maps $T\\to U$ with $u(x)=u(y)$. An element of $U\\times_PR$ is therefore a triple $(z,x,y)$ with $(z,z)=(x,y)$; it is uniquely $(z,z,z)$, since $u(z)=u(z)$ imposes no further condition. The maps $z\\mapsto(z,z,z)$ and $(z,x,y)\\mapsto z$ are mutually inverse and commute with restriction in $T$. This is precisely the fibre-product universal property of [def-pc-fibre-product].",
+   "text": "For a scheme test a:h_T -> h_U ×_E h_U of the chart diagonal, use full faithfulness of Yoneda to obtain f,g:T -> U from its two components. Let V be their equalizer in Sch/S, with projection p:V -> T and q=h_(p f):h_V -> h_U. This is a genuine scheme construction. The equality p f = p g implies that q followed by the chart diagonal equals h_p followed by a.",
    "uses": [
     "def-trf-algebraic-space",
     "def-pc-fibre-product"
@@ -37,46 +25,50 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03FZ (lemma-separated-cover), diagonal argument expanded directly using its scheme R and map j"
+    "place": "Tag 03FZ (lemma-separated-cover), the cartesian diagonal argument expressed by the equalizer of the two scheme-test projections; Yoneda full faithfulness and preservation of equalizers"
    }
   },
   {
-   "text": "By the cartesian square in step 2, $d$ is the base change of the closed immersion $\\delta$. Hence [lem-weil-pbc-closed-immersion-base-change] shows that $d$ is a closed immersion. Applying the same lemma to $d$ and any scheme map $T\\to R$ shows that every scheme base change of the diagonal of $u$ is a closed immersion, which is the asserted representable separatedness.",
+   "text": "Yoneda preserves the equalizer. For any presheaf cone (b:H -> h_U, d:H -> h_T) over the chart diagonal and a, its commutativity says d h_f = b = d h_g. The preserved equalizer gives a unique map H -> h_V whose composite with h_p is d; its composite with q is then b. This proves IsPullback q h_p delta_u a. Since U is absolutely separated, U -> S is separated by [lem-weil-pbc-separated-cancellation]. Mathlib isClosedImmersion_equalizer_ι_left identifies p.left as a closed immersion, by writing this equalizer as a base change of the closed relative diagonal of U, using [def-weil-proper-morphism] and [lem-weil-pbc-closed-immersion-base-change]. Thus every scheme test of the chart diagonal is represented by a closed immersion.",
    "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-separated-cancellation",
+    "def-weil-proper-morphism",
     "lem-weil-pbc-closed-immersion-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01QR (lemma-base-change-closed-immersion); Schemes Tag 01JY (lemma-base-change-immersion)"
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FZ (lemma-separated-cover), diagonal argument; Schemes 01KV and Morphisms 01QR; Mathlib.AlgebraicGeometry.Morphisms.Separated.isClosedImmersion_equalizer_ι_left"
    }
   },
   {
-   "text": "Fix $c:h_C\\to E$ and let $W=C\\times_EU$. This is a scheme because $u$ is representable [def-trf-algebraic-space]. The map $k:W\\times_CW\\to R$ sends $((t,x),(t,y))$ to $(x,y)$. The square with top $W\\to U$ the second projection, bottom $k:W\\times_CW\\to R$, left $\\Delta_{W/C}$, and right $d$ is cartesian: its test-object data are $t:T\\to C$ and $x,y:T\\to U$ with $c(t)=u(x)=u(y)$, together with $z:T\\to U$ satisfying $x=z=y$; these are uniquely the data $(t,z)$ of $W(T)$. Thus $\\Delta_{W/C}$ is a base change of $d$ by [def-pc-fibre-product], and is a closed immersion by [lem-weil-pbc-closed-immersion-base-change]. By [def-weil-proper-morphism], $W\\to C$ is separated.",
+   "text": "For c:h_C -> E, the representability part of the given etale morphism supplies W,p:W -> C,q:h_W -> h_U with IsPullback q h_p u c. Write q=h_r by Yoneda and i=(p,r):W -> C ×_S U. The map i is a monomorphism: equality after i gives equality after p and r, hence equality of the Yoneda images by the hom-ext property of the representing pullback, and equality of the original maps by faithfulness. The underlying scheme map i.left is mono and therefore separated, by Mathlib IsSeparated.isSeparated_of_mono. The projection C ×_S U -> C is separated as a base change of U -> S. Their composite is p.left, so p.left is separated by composition. No separatedness of E, C or S is needed.",
    "uses": [
     "def-trf-algebraic-space",
     "def-pc-fibre-product",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "def-weil-proper-morphism"
+    "lem-weil-pbc-separated-cancellation",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01KU (lemma-separated-permanence), proof of base-change permanence via the cartesian diagonal; Morphisms Tag 01QR (lemma-base-change-closed-immersion)"
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FZ (lemma-separated-cover), separatedness of the relation map to the scheme product and base-change permanence; Schemes 01KU and 01KV. The same argument applies to C ×_E U."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-separated-cancellation",
-  "def-weil-proper-morphism",
   "def-trf-algebraic-space",
   "def-pc-fibre-product",
+  "lem-weil-pbc-separated-cancellation",
+  "def-weil-proper-morphism",
   "lem-weil-pbc-closed-immersion-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tag 03FZ (lemma-separated-cover), first assertion; direct cartesian-diagonal expansion using Schemes 01KV and Morphisms 01QR, instead of introducing the auxiliary separatedness of R."
+  "place": "Tag 03FZ (lemma-separated-cover), first assertion and scheme-test consequence. B8 expresses the cartesian diagonal as a scheme equalizer and proves separatedness of W -> C through its monomorphism into C ×_S U, using Mathlib separatedness and closed-immersion permanence."
  },
  "mathlib_searches": [
   {
@@ -207,5 +199,26 @@
   "result": "pass",
   "note": "Only the module, the node's lean record and the report changed; the node is otherwise identical to the base and lean.statement matches the file verbatim. Each clause matches the node and Stacks 03FZ (spaces-properties l.774-780): S a scheme; E : AlgebraicSpace S; U : Over S with Mathlib Scheme.IsSeparated (absolute); u : h_U -> E with AlgebraicSpace.IsEtale (representable, built on Mathlib Etale); the canonical diagonal pullback.lift (1)(1) is a closed immersion after every scheme base change via IsRepresentableWith; for all C and c, a pullback square representing C x_E U with IsSeparated p.left. No extra hypotheses or universe restriction; empty U or C covered. Name resolution confirmed by printing the signature with full names; axioms include sorryAx. No new definitions. The first clause is IsSeparatedPresheafMap written out using the recorded def-trf-algebraic-space declarations: not a second definition. Docstrings have source, blueprint tag and proof steps; lines within 100 characters; imports used. nt_compile.py --json: rc 0, no errors or warnings; a deliberately broken copy errors, so the file is really elaborated. Informational only: the node's maintainer-owned source field still cites Morphisms 01UA."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B8",
+  "result": "pass",
+  "landing": "20261023T104711-L-3415967",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

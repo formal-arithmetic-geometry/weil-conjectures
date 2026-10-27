@@ -1,0 +1,149 @@
+{
+ "id": "lem-qcqs-compact-support-normalized-iso-existence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Existence and invertibility portions of the qcqs realization; scalar-six compact-support proof, Isomorphism paragraph",
+   "via": [
+    "lem-qcqs-compact-support-normalized-lift",
+    "def-weil-integral-rational-qbar-compact-support"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of a normalized qcqs compact-support natural isomorphism",
+ "statement": "Let $l$ be prime, $E/\\mathbf Q_l$ finite, and $k$ a field in which $l$ is invertible. Let $X,Y$ be finite-type $k$-schemes, $f:X\\to Y$ separated of finite type, and $c$ a compactification [def-weil-scheme-morphism-properties, def-weil-l-adic-coefficient-extension, def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed, def-weil-integral-derived-reduction, def-weil-compactifications-refinements, def-compact-support-direct-image-detailed]. The actual completed proper/open functor, restricted to integral bounded constructible inputs, is naturally isomorphic to the recorded integral compact-support action followed by ambient inclusion [def-weil-compact-support-finite-action]. Its finite scalar reductions, followed by the recorded finite reduction isomorphisms, equal the actual proper/open scalar mates in the fixed finiteReductionIso and finiteImageIso coordinates [def-sf-open-reduction-coefficient-mate, def-pur-finite-compact-support-scalar-data]. Only existence is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Isomorphism paragraph; Bhatt--Scholze Definition 6.7.6 and Lemma 6.7.7; Stacks sites-cohomology.tex lemma-derived-limit-is-ok (0941), more-etale.tex lemma-shriek-composition (0F7J)",
+  "note": "Agent-formulated existence part of the normalized realization; it asserts no faithfulness of finite evaluations and no uniqueness."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-compactifications-refinements",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-pur-finite-compact-support-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the strict reduction comparison to obtain SX, SY, beta, gamma, and both coordinate equations. Form tau as SY.unit followed by total limit of beta followed by gamma inverse. Whiskering and composition give naturality. Transpose its finite projection equation through the scalar adjunction: unit naturality, cancellation of gamma, native projection naturality and SY.unit_projection reduce it exactly to the recorded beta equation.",
+   "uses": [
+    "lem-qcqs-compact-support-strict-reduction-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The qcqs finite comparison gives completeness of each source value and invertibility of the prescribed finite proper/open mates. The projection equation implies that every scalar reduction of tau is invertible. The target is constructible, so transport its uniform cohomological interval and finite constructibility along these isomorphisms to prove source constructibility.",
+   "uses": [
+    "lem-qcqs-compact-support-finite-comparison",
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a distinguished cone of each component. Triangulated closure of integral constructible objects makes this cone constructible and complete. Every finite reduction of the cone is zero. Restriction preserves zero; the product of these zero objects is zero by product Hom extensionality. The defining completeness Roos triangle then makes the cone zero. A map with zero cone is invertible. Componentwise invertibility makes tau a natural isomorphism, retaining its finite equations.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-strict-reduction-comparison",
+  "lem-qcqs-compact-support-finite-comparison",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q7",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-prop-scalar-six-compact-support.proof.md",
+  "place": "Projection transposition, complete cone conservativity and componentwise inversion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupport.*(normalized|exists)|projection_transpose",
+   "results": "['Mathlib/Analysis/Calculus/ContDiff/Convolution.lean', 'Mathlib/Analysis/Calculus/ContDiff/Convolution.lean', 'Mathlib/Analysis/Convolution.lean', 'Mathlib/Analysis/Convolution.lean', 'Mathlib/Analysis/Convolution.lean', 'Mathlib/Analysis/Convolution.lean', 'Mathlib/Analysis/Convolution.lean', 'Mathlib/MeasureTheory/Function/SimpleFuncDense.lean']",
+   "date": "2026-10-27",
+   "verdict": "no matching compact-support existence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.isIso_of_isIso_app",
+   "results": "['CategoryTheory.NatIso.isIso_of_isIso_app']",
+   "date": "2026-10-27",
+   "verdict": "Componentwise isomorphism API used; no matching compact-support existence theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "existence of natural isomorphism between compact support over complete coefficients and homotopy limit of reductions, using a reduction limit adjunction",
+   "results": "['CategoryTheory.Idempotents.DoldKan.isoΓ₀', 'ComplexShape.Embedding.extendHomotopyFunctorFactors', 'CategoryTheory.Idempotents.DoldKan.η', \"AlgebraicTopology.DoldKan.Γ₀'CompNondegComplexFunctor\", 'AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans', 'CategoryTheory.Abelian.DoldKan.comparisonN', 'AlgebraicTopology.DoldKan.N₂Γ₂ToKaroubiIso', 'AlgebraicTopology.DoldKan.N₂Γ₂ToKaroubiIso_hom_app']",
+   "date": "2026-10-27",
+   "verdict": "no matching compact-support existence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized natural isomorphism between compact support over complete coefficients and the total limit of its finite quotient systems exists by adjunction and complete cone conservativity",
+   "results": "['CategoryTheory.Functor.ranCompLimIso', 'CategoryTheory.Adjunction.coconesIso', 'Profinite.asLimitConeIso', 'CategoryTheory.Limits.HasLimit.isoOfNatIso', 'Profinite.isoindexConeLift', 'CategoryTheory.Limits.whiskeringLimYonedaIsoCones', 'Profinite.isIso_asLimitCone_lift', 'CategoryTheory.Limits.IsLimit.OfNatIso.limitCone']",
+   "date": "2026-10-27",
+   "verdict": "generic ordinary-limit isomorphisms; no matching geometric derived compact-support theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsCompactSupportTorsionInputDetection",
+  "date": "2026-10-27",
+  "group": "Q7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QcqsCompactSupportNormalizedIsoExistence",
+  "file": "lean/Sheaf/Paper/QcqsCompactSupportNormalizedIsoExistence.lean",
+  "declaration": "WeilConjectures.sfQcqsCompactSupport_normalizedIso_exists",
+  "statement": "theorem sfQcqsCompactSupport_normalizedIso_exists :\n    ∃ τ : (sfIntegralConstructible l E X).ι ⋙ image (completed l E) c ≅\n        sfCompactSupportFiniteIntegralFunctor l K₀ hl c E ⋙\n          (sfIntegralConstructible l E Y).ι,\n      ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ),\n        (scalarReductionDerivedExtension l E Y n).map (τ.hom.app K) ≫\n            (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom =\n          (finiteReductionIso l E Y n).inv.app ((image (completed l E) c).obj K.obj) ≫\n            (comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app K.obj ≫\n            (finiteImageIso l E n c).hom.app\n              ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj K.obj) ≫\n            (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1))\n              c).map ((finiteReductionIso l E X n).hom.app K.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-15aa3",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T034729-L-3679934",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-15aa3",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261027T034729-L-3679934",
+  "kind": "interface",
+  "note": "independent cc review: item statement, parent signature and new node statement against the published clone, DAG nodes and the 3b importer compile (QcqsCompactSupportRealization OK); new module's helpers and IsIso argument against the published QcqsCompactSupportRealization (verbatim apart from let/have)"
+ }
+}

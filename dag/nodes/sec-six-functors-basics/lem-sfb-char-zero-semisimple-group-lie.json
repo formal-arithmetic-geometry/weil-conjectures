@@ -1,0 +1,280 @@
+{
+ "id": "lem-sfb-char-zero-semisimple-group-lie",
+ "kind": "statement",
+ "title": "Semisimplicity of the tangent Lie algebra in characteristic zero",
+ "statement": "Let $F$ be an algebraically closed field of characteristic zero [def-weil-field, def-weil-algebraic-closure], and let $G$ be a smooth connected affine $F$-group scheme of finite type [def-sc-group-scheme, def-weil-finite-type-morphism, def-sbc-smooth-morphisms, def-weil-connected-scheme]. Assume $G$ is semisimple, meaning that it has no nontrivial smooth connected solvable normal closed subgroup [def-sc-group-scheme-subgroup]; a group is solvable when its successive scheme-theoretic commutator subgroups eventually become the trivial group. Endow $\\mathfrak g=T_eG$ with the canonical finite-dimensional Lie algebra structure of [lem-sfb-char-zero-differentiation-hom]. Then $\\mathfrak g$ is semisimple [def-wf-semisimple-lie-algebra]: every solvable Lie ideal of $\\mathfrak g$ is zero.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.476, paragraph beginning Let G be a semisimple algebraic group; Theorem 22.53, first assertion, printed p.481."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "lem-sfb-char-zero-differentiation-hom",
+  "def-wf-semisimple-lie-algebra",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-central-torus-faithful-weight-blocks] with $H=G$ and the trivial central torus $T=\\mathbf G_m^0=1$ to choose a closed immersion $G\\hookrightarrow\\operatorname{GL}(V)$. The identity is a closed subgroup: on coordinates its counit $F[G]\\to F$ is surjective, since it is the identity on constants. Work in this matrix realization. The tangent space and matrix description in [def-wf-lie-algebra-derivation] both mean $T_eG$. The differential of this representation is a Lie homomorphism by [lem-sfb-char-zero-differentiation-hom]; its tangent map identifies $T_eG$ with the matrices $X$ for which $1+\\epsilon X\\in G(F[\\epsilon]/\\epsilon^2)$, since the immersion is defined by a quotient of coordinate rings. Thus its bracket is the matrix commutator, and this realization preserves the canonical Lie algebra in the item.",
+   "uses": [
+    "lem-sfb-central-torus-faithful-weight-blocks",
+    "def-wf-lie-algebra-derivation",
+    "lem-sfb-char-zero-differentiation-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 4.9, printed p.87, and Theorem 10.23, printed pp.193-194; matrix realization of the argument at p.476."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak n\\subseteq\\mathfrak g$ be a commutative Lie ideal. The adjoint action $\\operatorname{Ad}(g)X=gXg^{-1}$ is rational and has differential $\\operatorname{ad}(x)y=[x,y]$ by [def-wf-lie-algebra-derivation]. The ideal condition says that $\\mathfrak n$ is invariant under this differential. Apply the stable-subspace clause of [sk-p-comparison] to the connected matrix group $G$ and this representation. It follows that $\\mathfrak n$ is a rational $G$-stable subspace. Equivalently, in a basis extending a basis of $\\mathfrak n$, the matrices of this action have zero lower-left block. Consequently restriction defines a group-scheme homomorphism $r:G\\to\\operatorname{GL}(\\mathfrak n)$ over every commutative $F$-algebra.",
+   "uses": [
+    "def-wf-lie-algebra-derivation",
+    "sk-p-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.476, centralizer argument; Proposition 10.31, printed p.196."
+   }
+  },
+  {
+   "text": "Define $H=\\ker r$ scheme-theoretically: in $G$ impose the finitely many matrix equations $r(g)_{ij}=\\delta_{ij}$. These equations give a closed affine finite-type subgroup, and $r(aba^{-1})=1$ when $r(b)=1$, so $H$ is normal in $G$ over every algebra. By the dual-number definition in [def-wf-lie-algebra-derivation], $x\\in\\operatorname{Lie}(H)$ exactly when $r(1+\\epsilon x)=1$. The differential of $r$ is restriction of $\\operatorname{ad}$ to $\\mathfrak n$, hence this condition is $[x,u]=0$ for every $u\\in\\mathfrak n$. Write $\\mathfrak h=\\operatorname{Lie}(H)=\\{x\\in\\mathfrak g:[x,\\mathfrak n]=0\\}$. Commutativity of $\\mathfrak n$ gives $\\mathfrak n\\subseteq\\mathfrak h$; the defining equality gives $[\\mathfrak h,\\mathfrak n]=0$. Thus $\\mathfrak n\\subseteq Z(\\mathfrak h)$.",
+   "uses": [
+    "def-wf-lie-algebra-derivation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.476, displayed centralizer Lie algebra; §10.14, printed p.190 (kernel calculation directly by dual numbers)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-char-zero-affine-group-smooth], $H$ is smooth, with no assumption about reducedness of its kernel. Let $H^0$ be its identity component with its open-and-closed subgroup structure from [lem-sfb-group-neutral-component-translates]. It is smooth, connected, affine and of finite type; because it is an open neighborhood of the identity, its tangent space and bracket are those of $H$, namely $\\mathfrak h$. By [lem-sfb-affine-group-centre-base-change], the centre $Z=Z(H^0)$ is a closed commutative subgroup. Apply Cartier again to $Z$ and [lem-sfb-group-neutral-component-translates] to form $C=Z^0$. Then $C$ is a smooth connected affine commutative closed subgroup of $G$. In particular it is solvable: its first commutator subgroup is trivial.",
+   "uses": [
+    "lem-sfb-char-zero-affine-group-smooth",
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-affine-group-centre-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.476; Theorem 3.23, printed p.71; Proposition 1.34, printed p.16; centre representability, Proposition 1.92, printed p.33."
+   }
+  },
+  {
+   "text": "For each $g\\in G(F)$, normality of $H$ makes conjugation by $g$ an automorphism of the group scheme $H$. It fixes the identity, so it preserves its identity component $H^0$ with its open subscheme structure. An automorphism preserves the centre functor (commuting with all points after scalar extension), so it preserves $Z(H^0)$, and hence also its identity component $C$. Thus $\\operatorname{Int}(g)(C)=C$ as closed subgroup schemes. Apply [lem-sfb-smooth-ambient-normality-geometric] to the smooth ambient group $G$, the closed subgroup $C$, and the algebraic closure $F$ itself. It gives normality of $C$ in $G$ over all commutative $F$-algebras. The semisimplicity hypothesis now forces $C=1$.",
+   "uses": [
+    "lem-sfb-group-neutral-component-translates",
+    "lem-sfb-affine-group-centre-base-change",
+    "lem-sfb-smooth-ambient-normality-geometric"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.476, normality of the centre of the centralizer identity component; use its smooth connected identity component to apply the stated semisimplicity hypothesis."
+   }
+  },
+  {
+   "text": "The group $H^0$ is a connected closed matrix group over the algebraically closed characteristic-zero field $F$. Apply the centre clause of [sk-p-comparison] to it: $\\operatorname{Lie}(Z(H^0)^0)=Z(\\operatorname{Lie}(H^0))=Z(\\mathfrak h)$. Its left side is $\\operatorname{Lie}(C)=\\operatorname{Lie}(1)=0$, so $Z(\\mathfrak h)=0$. Together with $\\mathfrak n\\subseteq Z(\\mathfrak h)$ from step 3 this proves that every commutative Lie ideal $\\mathfrak n$ of $\\mathfrak g$ is zero.",
+   "uses": [
+    "sk-p-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.476, final two sentences of the first paragraph; Proposition 10.33, printed p.197, in characteristic zero."
+   }
+  },
+  {
+   "text": "Let $I$ be any solvable Lie ideal. Use the derived sequence of [def-wf-lie-algebra]: $I_0=I$ and $I_{j+1}=[I_j,I_j]$. Every $I_j$ is an ideal of $\\mathfrak g$: inductively $[x,[a,b]]=[[x,a],b]+[a,[x,b]]$ puts brackets with $x\\in\\mathfrak g$ back into the span $[I_j,I_j]$. Solvability says $I_N=0$ for some $N$. If $I\\ne0$, choose the largest $j<N$ with $I_j\\ne0$; then $[I_j,I_j]=I_{j+1}=0$. This is a nonzero commutative ideal, contradicting step 6. Therefore $I=0$. By [def-wf-semisimple-lie-algebra] this is precisely the required semisimplicity.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-wf-semisimple-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.476, reduction from no commutative ideals to semisimplicity; Theorem 22.53, printed p.481."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-central-torus-faithful-weight-blocks",
+  "def-wf-lie-algebra-derivation",
+  "lem-sfb-char-zero-differentiation-hom",
+  "sk-p-comparison",
+  "lem-sfb-char-zero-affine-group-smooth",
+  "lem-sfb-group-neutral-component-translates",
+  "lem-sfb-affine-group-centre-base-change",
+  "lem-sfb-smooth-ambient-normality-geometric",
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.476, first paragraph; Theorem 22.53, printed p.481. The last-derived-term argument expands the reduction left implicit in the text."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Lie algebra of a smooth connected semisimple algebraic group over an algebraically closed field of characteristic zero has no nonzero solvable ideals",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasTrivialRadical R L ↔ ∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → I = ⊥\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal) if and only if every solvable Lie ideal $ I $ of $ L $ satisfies $ I = \\\\{0\\\\} $.\"}\n  {\"name\": \"LieAlgebra.HasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_no_solvable_ideals\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → I = ⊥) → LieAlgebra.HasTrivialRadical R L\", \"doc\": \"If every solvable Lie ideal $ I $ of a Lie algebra $ L $ over a commutative ring $ R $ satisfies $ I = \\\\{0\\\\} $, then $ L $ has a trivial radical (i.e., its radical—the largest solvable ideal—is the ze\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Lie semisimplicity and Geck root-system constructions do not identify the tangent Lie algebra of an arbitrary semisimple algebraic group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"GroupScheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Lie semisimplicity and Geck root-system constructions do not identify the tangent Lie algebra of an arbitrary semisimple algebraic group"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|LieAlgebra",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Lie semisimplicity and Geck root-system constructions do not identify the tangent Lie algebra of an arbitrary semisimple algebraic group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lie algebra of a semisimple algebraic group in characteristic zero is semisimple",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.mk\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  sSup {I | IsAtom I} = ⊤ →\\n    sSupIndep {I | IsAtom I} → (∀ (I : LieIdeal R L), IsAtom I → ¬IsLieAbelian ↥I) → LieAlgebra.IsSemisimple R L\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ is semisimple if it is the sum of its simple ideals, these ideals are supremum-independent, and each simple ideal is non-abelian.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Killing\", \"type\": \"[IsKilling K L] [Module.Finite K L] : IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib.Algebra.Lie.InvariantForm\", \"type\": \": IsSemisimple K L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.rec\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"{R : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : LieRing L] →\\n        [inst_2 : LieAlgebra R L] →\\n          {motive : LieAlgebra.IsSemisimple R L → Sort u} →\\n            ((sSup_atoms_eq_top : sSup {I | IsAtom I} = ⊤) →\\n                (sSupIndep_isAtom : sSupIndep {I | I\", \"doc\": \"This recursor allows defining functions or proving properties about semisimple Lie algebras by recursion on their decomposition into simple ideals. Given a semisimple Lie algebra $ L $ over a commutat\"}\n  {\"name\": \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every simple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Lie semisimplicity and Geck root-system constructions do not identify the tangent Lie algebra of an arbitrary semisimple algebraic group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine semisimple algebraic group in characteristic zero has semisimple tangent Lie algebra at the identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.HasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L]\\n  [PerfectField K] {x : L}, x ∈ H → ((LieAlgebra.ad K L) x).IsSe\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with non-degenerate Killing form, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $x \\\\in \\\\mathfrak{h}$, then the adjoint end\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract Lie semisimplicity and Geck root-system constructions do not identify the tangent Lie algebra of an arbitrary semisimple algebraic group"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tangent Lie algebra of a connected semisimple algebraic group over an algebraically closed characteristic zero field has no nonzero solvable ideals",
+   "results": "OK 8 hits: RootPairing.GeckConstruction.instHasTrivialRadical, LieAlgebra.IsSemisimple, LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals, LieAlgebra.IsSemisimple.instHasTrivialRadical, LieAlgebra.HasTrivialRadical, LieAlgebra.IsKilling.instSemisimple, LieAlgebra.hasTrivialRadical_of_no_solvable_ideals, LieAlgebra.IsKilling.instHasTrivialRadical",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract semisimple Lie algebras and Geck constructions do not prove semisimplicity for the tangent algebra of an arbitrary semisimple affine group."
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|LieAlgebra",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract semisimple Lie algebras and Geck constructions do not prove semisimplicity for the tangent algebra of an arbitrary semisimple affine group."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semisimple affine algebraic groups in characteristic zero have semisimple Lie algebras",
+   "results": "OK 8 hits: LieAlgebra.IsSimple.instIsSemisimple, LieAlgebra.IsSemisimple, LieAlgebra.IsSemisimple.instHasTrivialRadical, LieAlgebra.IsKilling.instSemisimple, LieAlgebra.IsSemisimple.mk, LieAlgebra.IsSemisimple.rec, RootPairing.GeckConstruction.instHasTrivialRadical, LieAlgebra.IsSemisimple.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract semisimple Lie algebras and Geck constructions do not prove semisimplicity for the tangent algebra of an arbitrary semisimple affine group."
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra, \"GroupScheme\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract semisimple Lie algebras and Geck constructions do not prove semisimplicity for the tangent algebra of an arbitrary semisimple affine group."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected semisimple linear algebraic groups over a characteristic zero field have Lie algebra with trivial solvable radical",
+   "results": "OK 8 hits: LieAlgebra.IsSemisimple.instHasTrivialRadical, RootPairing.GeckConstruction.instHasTrivialRadical, LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful, LieAlgebra.IsKilling.instHasTrivialRadical, LieAlgebra.IsSimple.instHasTrivialRadical, LieAlgebra.HasTrivialRadical, LieAlgebra.HasTrivialRadical.radical_eq_bot, LieAlgebra.hasTrivialRadical_of_no_solvable_ideals",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract semisimple Lie algebras and Geck constructions do not prove semisimplicity for the tangent algebra of an arbitrary semisimple affine group."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-group-casimir-trace",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group. Prerequisite: Semisimplicity of the tangent Lie algebra in characteristic zero.",
+   "via": [
+    "lem-sfb-semisimple-group-casimir-trace",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-char-zero-semisimple-group-lie",
+  "worker": "stage1",
+  "summary": "Follows Milne p.476: centralize an arbitrary commutative Lie ideal, use the connected centre of its centralizer to force the ideal to vanish, then take the last nonzero derived term of a solvable ideal. Uses existing matrix realization, group-Lie comparison, component, centre and geometric-normality nodes. Adds only general Cartier smoothness, attached to the existing project theorem. The pointwise stabilizer and its tangent space are explicit equations, kept as elementary work. Statement unchanged mathematically.",
+  "blueprint": "Serves the inherited det-thm-sf-ctf-stability-direct-images proof (3), through the marked plurinodal/level-structure invariant-theory route recorded in blueprint.from.place. Supplies the semisimple tangent-Lie input for the characteristic-zero Casimir step. Read the current latest sketch and detailed proof; no unit step is replaced. Ancestor command returns None; retain that value.",
+  "tool_uses": [
+   {
+    "node": "sk-p-comparison",
+    "why": "Generic characteristic-zero matrix group-Lie comparison: stable subspaces and the Lie algebra of the connected centre. It supplies a tool for Milne p.476; no statement of the alteration unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-p-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-35198e9f4",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-35198e9f4 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The item follows Milne Algebraic Groups §22c, printed p.476, and Thm 22.53, p.481. Steps: (1) The faithful-weight-blocks node with T=G_m^0 gives a closed immersion of G into GL(V); since dρ is an injective Lie map, the canonical bracket is the matrix commutator. (2) A commutative ideal n is G-stable by the stable-subspace clause of sk-p-comparison, which holds for any algebraically closed field L of characteristic 0 (blueprint sk-i-cartier/_section.md:9). (3) H=ker r is normal and its Lie algebra is the centralizer h of n, so n ⊆ Z(h). This step is elementary. (4) The new Cartier node makes H and Z(H°) smooth; then H° and C=Z(H°)° come from the component and centre nodes. (5) C is preserved by every Int(g), so lem-sfb-smooth-ambient-normality-geometric makes C normal and semisimplicity gives C=1. (6) The centre clause of sk-p-comparison on H° gives Z(h)=Lie(C)=0. (7) A last-nonzero-derived-term argument finishes. The new node is Cartier's theorem (Milne Thm 3.23, p.71). It is attached to the sorry-free Cartier.lean:356 smooth_of_grpObj_of_charZero, which is also listed in lem-ag-cartier-reduced lean.others. That node's live statement covers only Q̄_ℓ; its pending blueprint_update would generalize it, which is advisory only. No other duplicate exists, there is no SGA citation, no re-split note, and no change made. I accept the sk-p-comparison tool_use. The report names a citations.json that is not in the commit, which is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CharZeroSemisimpleGroupLie",
+  "declaration": "AlgebraicGeometry.semisimpleGroupScheme_lie_hasTrivialRadical",
+  "file": "lean/Sheaf/AlgebraicGeometry/CharZeroSemisimpleGroupLie.lean",
+  "statement": "theorem semisimpleGroupScheme_lie_hasTrivialRadical (F : Type u) [Field F] [IsAlgClosed F] [CharZero F] (G : Scheme.{u}) [G.Over (Spec (.of F))] [GrpObj (G.asOver (Spec (.of F)))] (hG : IsSemisimpleGroupScheme (G.asOver (Spec (.of F)))) : LieAlgebra.HasTrivialRadical F (GrpObj.Lie (G.asOver (Spec (.of F))))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed def-sfb-semisimple-group-scheme predicate (added to stmt_deps), which packages exactly the five geometric hypotheses and the stated normal-solvable-subgroup condition. GrpObj.Lie is the canonical tangent Lie algebra used by charZero_differentiation_hom; HasTrivialRadical is the recorded def-wf-semisimple-lie-algebra predicate, equivalent to every solvable ideal being zero."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d67eae4e8",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in lean + added stmt_dep def-sfb-semisimple-group-scheme (landed owner of IsSemisimpleGroupScheme). Statement: F Field/IsAlgClosed/CharZero, G : Scheme.{u} over Spec F with GrpObj, hG : IsSemisimpleGroupScheme (= Smooth ∧ Connected ∧ IsAffine ∧ LOFT ∧ QC ∧ every closed normal smooth connected scheme-theoretically solvable subgroup is terminal) matches the node exactly; conclusion HasTrivialRadical F (GrpObj.Lie …) = recorded def-wf-semisimple-lie-algebra predicate (iff every solvable ideal is ⊥); Lie object/bracket are the ones pinned by charZero_differentiation_hom. Universes forced by Spec, all bound. Edge cases: trivial G ok, G_a/G_m excluded by hG. No defs, single sorry, source/blueprint docstrings with 7 proof steps, lean.statement verbatim, imports exist on side-live, no duplicate theorem found, report has Worker report + Second reading by Q102. No compile rerun (no file changed)."
+ }
+}

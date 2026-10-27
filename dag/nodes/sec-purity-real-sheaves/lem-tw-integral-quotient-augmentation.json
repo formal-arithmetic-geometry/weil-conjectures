@@ -1,0 +1,228 @@
+{
+ "id": "lem-tw-integral-quotient-augmentation",
+ "kind": "statement",
+ "title": "Strict quotient augmentation of ordinary integral pullback on all complexes",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$ and a uniformizer $t$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a morphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. On their small pro-etale sites [def-weil-pbc-proetale-site] set $C_{W,n}=(R/t^n)_W$ for $n\\geq1$, $B_W=\\varprojlim_n C_{W,n}$, with quotient projections $\\pi_{W,n}$ [def-weil-completed-integral-coefficients]. Let $c_f:f^{-1}B_Y\\to B_X$ be the adjoint of the limit map $B_Y\\to f_*B_X$ whose $n$-th projection is the constant-section map after $\\pi_{Y,n}$ [def-weil-proetale-inverse-image]. Use module sheaves, sheaf tensor and unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category]. Put $f_B^*M=B_X\\otimes_{f^{-1}B_Y}f^{-1}M$, with its ordinary module adjunction [def-sf-ordinary-integral-pullback-construction].\n\nFor every cochain complex $Q$ of $B_Y$-modules, put $Q_n=Q\\otimes_{B_Y}C_{Y,n}$ and $T_f(Q)_n=\\operatorname{Res}_{\\pi_{X,n}}f_n^*Q_n$, where $f_n^*$ is the finite-coefficient module pullback and the strict transitions $T_f(Q)_{n+1}\\to T_f(Q)_n$ are induced by the actual coefficient reductions [def-pur-integral-derived-operations]. There is a unique natural transformation of strict complex towers\n$$a:\\Delta f_B^*\\longrightarrow T_f$$\non the category of all $B_Y$-cochain complexes, normalized on local tensor generators by\n$$a_{Q,n}(b\\otimes q)=1\\otimes(q\\otimes\\pi_{X,n}(b)).$$\nHere $q$ is an inverse-image local section, and the right side uses the inverse-image comparison for sheaf tensor; equivalently the adjunction-unit image of any section $q$ maps to the finite-pullback unit image of $q\\otimes1$. Every $a_{Q,n}$ is $B_X$-linear and commutes with differentials. Writing $r_{Q,n}$ for the displayed transition and $v:Q\\to Q'$ for any chain map, its strict identities are\n$$r_{Q,n}a_{Q,n+1}=a_{Q,n},\\qquad T_f(v)_n a_{Q,n}=a_{Q',n}f_B^*(v).$$\nConsequently $a_Q=\\prod_n a_{Q,n}$ satisfies $(1-s)a_Q=0$ and determines the natural chain map\n$$\\alpha_Q:f_B^*Q\\longrightarrow\\operatorname{Cone}(1-s:T_f(Q)_{\\rm prod}\\to T_f(Q)_{\\rm prod})[-1]$$\nwhose unshifted product coordinate is $a_Q$ and whose shifted product coordinate is zero, with the cone conventions of [def-weil-derived-limit]. No flatness, boundedness, constructibility or completeness of $Q$ is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(4) and Remark 6.8.15; agent extraction of the strict quotient augmentation and resolving-class normalization, specified in Sheaf.Paper.OrdinaryCompletedIntegralPullback. Theorem ordinaryIntegralQuotientAugmentation_existsUnique, lines 276-298; completion chain condition, lines 313-370."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-sf-ordinary-integral-pullback-construction",
+  "def-pur-integral-derived-operations",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Identify the completed coefficient map with IntegralAmbient.coefficientMap by the unique finite-projection equations. Uniqueness of left adjoints gives an isomorphism from the specified ordinary module pullback to IntegralAmbient.pull; its unit equation identifies original adjunction-unit sections with pullSection. Apply this comparison termwise, then IntegralOnSlice.augmentation, then IntegralAmbient.pullTowerIso. These are natural transformations of actual strict towers, so their composite is natural and retains all quotient transitions. The two normalization formulas for augmentation and pullTowerModel send a unit generator to the stated finite-pullback generator of x tensor 1; scalar insertion of 1 acts trivially.",
+   "uses": [
+    "def-sf-ordinary-integral-pullback-construction",
+    "def-pur-integral-derived-operations",
+    "lem-pur-integral-ambient-operation-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03EL; normalized scalar association in the ambient-operation tower model"
+   }
+  },
+  {
+   "text": "For uniqueness, compare any normalized transformation with this composite at each complex, level and degree. Apply the injective module-adjunction Hom equivalence; equality of its sections on every original site object is exactly the given normalization formula. Extensionality successively for module maps, chain maps, tower maps and natural transformations proves equality. No generation assertion on sections of an arbitrary target-site object is needed.",
+   "uses": [
+    "def-sf-ordinary-integral-pullback-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7, injectivity of the adjunction Hom bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-sf-ordinary-integral-pullback-construction",
+  "lem-pur-integral-ambient-operation-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "G6: normalized ambient tower comparison and uniqueness by the module adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullback.*(quotient|tensor|naturality)|quotient.*pullback",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean.  Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and PullbackFree.lean:113-142. The results give underived pullback, sheafification and free-generator naturality, not this strict quotient augmentation for arbitrary complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a morphism of ringed sites with compatible towers of quotient coefficient rings, the pure tensor maps from ordinary pullback to finite quotient pullbacks form a unique natural transformation of strict cochain towers",
+   "results": "8 hits: SheafOfModules.pullback, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardNatTrans, PresheafOfModules.pullback, SheafOfModules.pullbackComp, SheafOfModules.sheafificationCompPullback, TopCat.Presheaf.toTotalQuotientPresheaf.  Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and PullbackFree.lean:113-142. The results give underived pullback, sheafification and free-generator naturality, not this strict quotient augmentation for arbitrary complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso.  Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and PullbackFree.lean:113-142. The results give underived pullback, sheafification and free-generator naturality, not this strict quotient augmentation for arbitrary complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of sheaf module extension of scalars under reduction of coefficients, with quotient transition maps and a generator formula",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.mapGenerators, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.Sheafify.SMulCandidate.mk', SheafOfModules.map_ιFree_mapFree_hom, PresheafOfModules.Sheafify.map_smul_eq, SheafOfModules.ιFree_freeMap_assoc, SheafOfModules.freeHomEquiv_symm_comp.  Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and PullbackFree.lean:113-142. The results give underived pullback, sheafification and free-generator naturality, not this strict quotient augmentation for arbitrary complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed sites with compatible towers of quotient coefficient rings, the pure tensor maps from ordinary pullback to finite quotient pullbacks form a unique natural transformation of strict cochain towers",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base.  Read Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:85-130 and PullbackFree.lean:113-142. The results give underived pullback, sheafification and free-generator naturality, not this strict quotient augmentation for arbitrary complexes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any complex of sheaves of modules, ordinary pullback has a natural strict tower augmentation to pullbacks of coefficient quotients, compatible with reduction and with zero shifted coordinate in the Roos cone",
+   "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality. Read PullbackContinuous.lean:48-67,99-130 and PullbackFree.lean:113-140. These give generic pullback/adjunction/free-module naturality, not the stated quotient tower and prescribed cone augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*(quotient|tensor|naturality)|quotient.*pullback",
+   "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Read PullbackContinuous.lean:48-67,99-130 and PullbackFree.lean:113-140. These give generic pullback/adjunction/free-module naturality, not the stated quotient tower and prescribed cone augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical quotient maps from extension of scalars of a sheaf module to finite coefficient pullbacks are natural and compatible with the inverse system of coefficient quotients",
+   "results": "8 hits: Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality, ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, PresheafOfModules.pullback, ModuleCat.RestrictionCoextensionAdj.unit', SheafOfModules.sheafificationCompPullback, ModuleCat.ExtendRestrictScalarsAdj.counit_app, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.pullbackPushforwardAdjunction. Read PullbackContinuous.lean:48-67,99-130 and PullbackFree.lean:113-140. These give generic pullback/adjunction/free-module naturality, not the stated quotient tower and prescribed cone augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "12 hits: SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso. Read PullbackContinuous.lean:48-67,99-130 and PullbackFree.lean:113-140. These give generic pullback/adjunction/free-module naturality, not the stated quotient tower and prescribed cone augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of extension of scalars for sheaves of modules under a commutative square of coefficient rings, with the canonical tensor unit and compatible quotient maps",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, ModuleCat.extendScalars_assoc, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_app_val_app. Read PullbackContinuous.lean:48-67,99-130 and PullbackFree.lean:113-140. These give generic pullback/adjunction/free-module naturality, not the stated quotient tower and prescribed cone augmentation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-ordinary-completed-integral-pullback",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "blueprint": {
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof, first sentence: the dual stalk is the dual representation. This item supplies the strict quotient-generator augmentation and zero-coordinate cone map used in the integral ordinary/completed pullback comparison behind the dual-stalk realization.",
+   "via": [
+    "lem-tw-ordinary-completed-integral-pullback",
+    "lem-tw-lisse-rational-realization",
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-tw-integral-quotient-augmentation",
+  "worker": "stage1",
+  "summary": "Constructed the quotient maps from the actual coefficient square and the sheaf tensor universal property, checked module linearity, all-complex naturality, strict reductions and uniqueness, and computed both Roos cone coordinates and naturality. Reused existing generic nodes; no new nodes. The upstream occurrence is sorry, so not an attachment. Statement retained.",
+  "blueprint": "Nearest ancestor lem-tw-dual-negation, proof first sentence (dual stalk representation), through ordinary/completed integral pullback: steps 1-6 realize the quotient-generator augmentation; steps 7-9 realize its strict zero-shifted-coordinate completion map. Whole-blueprint searches for quotient augmentation, inverse image tensor, tensor universal, augmentation found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor bilinear universal property needed to construct and compare balanced maps; the weight/duality unit has no tensor-construction lemma."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic normalized inverse-image tensor comparison interprets the required generator formula; it changes no weight/duality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-topos module Hom adjunction detects equality on original adjunction-unit sections, without a false objectwise generation assumption."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Existence of sectionwise countable products of arbitrary completed-coefficient module sheaves supplies the concrete product complex; only existence, not exactness, is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-b73a981e1",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-b73a981e1 (reviewer sub-agent of L); spot-checked: I read the whole delivery and the item passes. This is a first split: the live node is unsplit with no repair note, the delivery is one commit containing only the item and its report, and the statement is byte-identical to the base, so nothing was weakened. It adds no new nodes and has no cycle (the item is not in the 707-node closure of its dependencies). I read every cited statement and checked all nine steps. Step 1: the coefficient square pi_X c_f = c_n F(pi_Y) holds because both sides have the same adjunct by the limit equation for rho; the reduction square holds because both maps extend the same constant-presheaf map. Step 2: u(xq) = pi_X(c_f x) u(q). The inverse-image tensor comparison (clause 1) is used only to read the statement's notation for the generator formula. Step 3: the pairing is A-bilinear and the tensor universal property gives a B-linear map. Steps 4 and 5: chain-map property, naturality and strict transitions r a_{n+1} = a_n, all checked on pure tensors. Step 6: uniqueness from injectivity of the tensor bijection, and also from the Hom bijection of the module adjunction; this avoids the objectwise local-generation claim made in the Lean docstring. Step 7: products exist sectionwise and (1-s)a = 0. Step 8: I checked the cone signs against def-weil-abstract-derived-category (C(f)^r = L^r + K^{r+1}, shift differential -d): Cone(w)[-1] has d(z,x) = (-dz - wx, dx), and alpha = (0, a) is a chain map. Step 9: the mapping-cocone map is natural. Edge cases checked: Q = 0, f = id, n = 1, t-torsion and non-flat M, M = B_Y, unbounded complexes, empty schemes. Lean source checked: OrdinaryCompletedIntegralPullback.lean:276-298 is the same assertion with proof sorry, so there is nothing to attach. No duplicate exists; the closest candidates are lem-a1-finite-pullback-strict-tower-comparison, lem-fd-whole-tower-integral-pullback-comparison, lem-weil-isomorphism-scalar-augmentation-cone and lem-trf-strict-quotient-*, and def-sf-ordinary only defines the data. I accept the 4 declared tool_uses as generic tools. Maintainer note, no change made: the inherited statement says 'cone conventions of [def-weil-derived-limit]', but the signs actually come from def-weil-abstract-derived-category, which is already a statement dependency. This is a citation imprecision, not a falsity, and step 8 states the correct source."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OrdinaryIntegralPullbackConstruction",
+  "declaration": "WeilConjectures.ordinaryIntegralQuotientAugmentation_existsUnique",
+  "declarations": [
+   "WeilConjectures.ordinaryIntegralQuotientAugmentation",
+   "WeilConjectures.ordinaryIntegralProductAugmentation",
+   "WeilConjectures.ordinaryIntegralCompletionChain_condition",
+   "WeilConjectures.ordinaryIntegralCompletionChain"
+  ],
+  "statement": "theorem ordinaryIntegralQuotientAugmentation_existsUnique :\n    ∃! a : ordinaryIntegralPullComplex l E f ⋙\n        (Functor.const ℕᵒᵖ : CochainComplex (integralTowerModules l E X) ℤ ⥤ _) ⟶\n      integralOperationsPullbackTowerFunctor l E f,\n      ∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) (i : ℤ)\n        (V : Y.ProEt) (x : (P.X i).val.obj (op V)),\n        (((a.app P).app (op n)).f i).val.app (op ((proEtaleBaseChange f).obj V))\n          (((ordinaryIntegralModuleAdjunction l E f).unit.app (P.X i)).val.app (op V) x) =\n        integralOperationsPullbackGenerator l E f n\n          (((unrestrictedIntegralFiniteComplex l E Y n).obj P).X i) V\n          (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) 1 x)",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing statement in the module of def-sf-ordinary-integral-pullback-construction, lines 276-298, with the strict product and zero-coordinate mapping-cocone construction at lines 306-370. The outer natural transformation gives naturality in all complexes, its components are strict tower morphisms, and the unit-section equation is the equivalent normalization explicitly allowed in the node. Positive exponent n is encoded by index n-1. The existing result applies in particular when l is invertible on X and Y; no added hypothesis or alternate construction is required.",
+  "file": "lean/Sheaf/Paper/OrdinaryIntegralPullbackConstruction.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18ea31e41",
+  "group": "Q106",
+  "result": "pass",
+  "note": "existing:true attachment to ordinaryIntegralQuotientAugmentation_existsUnique (side OrdinaryCompletedIntegralPullback.lean:287-298, sorry) plus QuotientAugmentation/ProductAugmentation/CompletionChain_condition/CompletionChain; only the lean field changed; statement verbatim; record complete. All clauses match: ∃! NatTrans from ordinaryIntegralPullComplex ⋙ const ℕᵒᵖ to integralOperationsPullbackTowerFunctor (Res ∘ finite pullback ∘ reduction; transitions ∃!-pinned actual reductions); unit-section normalization = node's allowed equivalent form (finite adjunction unit of 1⊗x), and uniqueness is genuine via the adjunction Hom bijection; (1-s)a=0 and α=mappingCocone.lift(Πa,0) into Roos cone; α naturality is the private proved lemma. ℓ-invertibility dropped = more general; index n ↔ R/t^(n+1); E:Type u with Scheme.{u} inherited from landed def-sf dep. Advisories: docstring blueprint id is the parent's; generator/tower/tensor-section owners outside stmt_deps come through the def-pur-integral-derived-operations re-export (precedent NS 0eb24c0d); cone-sign citation imprecision already noted by Q138. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-0c664",
+  "group": "V2",
+  "result": "fix",
+  "landing": "20261025T101620-L-3714355",
+  "kind": "interface",
+  "note": "independent cc review: item proof (characterization + new integralStratifiedPerfect_pullback + existing sorried strict-model comparison + actual-tower unit) against lem-tw-ordinary-completed-integral-pullback; construction module vs live item (verbatim move + local irreducible/private helpers); adapted modules and node stmt_deps/lean records vs clone; sandbox --all compile incl. importer ProperIntegralOrdinaryInputs"
+ }
+}

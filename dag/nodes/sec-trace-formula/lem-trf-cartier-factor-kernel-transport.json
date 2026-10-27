@@ -1,0 +1,275 @@
+{
+ "id": "lem-trf-cartier-factor-kernel-transport",
+ "kind": "statement",
+ "title": "Transport of supported-section kernels for Cartier-related blowups",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Z\\subseteq S$ be a closed subscheme [def-weil-closed-immersion] with finite-type quasi-coherent ideal $\\mathcal I$ [pqf-def-coherent], and let $D\\subseteq S$ have an effective Cartier ideal $\\mathcal J$ [def-nagata-effective-cartier-ideal]. Then $\\mathcal J$ is invertible and $\\mathcal I\\mathcal J$ is finite-type quasi-coherent. Put $Z_D=V(\\mathcal I\\mathcal J)$, let $b:S'\\to S$ and $b_D:S'_D\\to S$ be the blowups in $\\mathcal I$ and $\\mathcal I\\mathcal J$ [def-nagata-global-blowup], and fix the isomorphism $\\varphi:S'_D\\cong S'$ over $S$ of [lemma-nagata-blowup-invertible-factor]. For a morphism $f:X\\to S$ and a quasi-coherent $\\mathcal O_X$-module $\\mathcal F$, put $T=X\\times_SS'$, $T_D=X\\times_SS'_D$ [def-pc-fibre-product], with projections $p:T\\to X$, $q:T\\to S'$, and $p_D:T_D\\to X$. The induced isomorphism $\\alpha=\\mathrm{id}_X\\times_S\\varphi:T_D\\cong T$ has $p\\alpha=p_D$, and the induced module-pullback identification $\\alpha^*p^*\\mathcal F\\cong p_D^*\\mathcal F$ [def-pc-module-pullback] transports the two strict-transform quotient kernels [def-trf-module-strict-transform] to quasi-coherent submodules $\\mathcal K,\\mathcal K_D\\subseteq p^*\\mathcal F$ with the following descriptions, as submodules including their inclusions: for every open $V\\subseteq T$,\n$$\\mathcal K(V)=\\{s\\in(p^*\\mathcal F)(V):s|_{V\\setminus q^{-1}b^{-1}(Z)}=0\\},\\qquad\n\\mathcal K_D(V)=\\{s\\in(p^*\\mathcal F)(V):s|_{V\\setminus q^{-1}b^{-1}(Z\\cup D)}=0\\}.$$\nHere $Z\\cup D$ denotes the union of underlying closed subsets. No absence of sections supported on $f^{-1}(D)$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080H, divisors-lemma-strict-transform-different-centers, clause (1) and the geometric reduction at the start of the proof of clause (2); Tag 080D, divisors-definition-strict-transform, for the quotient kernels."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "pqf-def-coherent",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-global-blowup",
+  "lemma-nagata-blowup-invertible-factor",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "def-trf-module-strict-transform",
+  "def-nagata-invertible-ideal"
+ ],
+ "proof": [
+  {
+   "text": "The hypothesis already supplies J.IsInvertible. First identify each ideal module with the kernel of O_S to the direct image of the structure sheaf of its closed subscheme. Quasi-coherence of kernels and qcqs pushforward gives quasi-coherence of every ideal module. On each affine open, finite_sections_of_finiteType and the range formula for toModulesι turn the finite-type module hypothesis on I into finite generation of I.ideal. The regular-principal neighbourhoods supplied by hJ make J locally finitely generated; ofFiniteTypeOn.iSup glues this over the cover. Products of finitely generated ideals are finitely generated, and isFiniteType_toModules_sheaf gives finite type of (I * J).toModules. The product support is the union by IdealSheafData.support_mul.",
+   "uses": [
+    "pqf-def-coherent",
+    "def-nagata-effective-cartier-ideal",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "lem-pqf-finite-type-ideal-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Divisors, Tag 080H, product centre; Properties, Tags 01PB and 01PG; Schemes, Tags 01IC and 01LC."
+   }
+  },
+  {
+   "text": "Use the specified isomorphism φ over S to form the canonical fibre-product map a = pullback.map id φ.hom id. All three component maps are isomorphisms, so a is an isomorphism. Its first projection is p_D by pullback.map_fst. Choose α = asIso a, and choose θ to be exactly tensorPullbackSectionComp.symm followed by the prescribed eqToIso of the first-projection equality. No new blowup comparison is needed, since φ and its equation are hypotheses.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Divisors, Tag 080H (1); Sheaves, Tag 0097."
+   }
+  },
+  {
+   "text": "Apply moduleStrictTransform_properties to I and to I * J. Its quasi-coherent-kernel clause gives quasi-coherence of both actual restriction kernels. For any module H and open U, range_map_kernelι identifies the image of the kernel inclusion with sections killed by the open restriction unit; restrictAdjunction_unit_app_app and image_preimage_eq_opensRange_inf identify this with restriction to V intersect U.",
+   "uses": [
+    "lem-trf-strict-transform-sheaf-kernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Divisors, Tag 080D (1); Sheaves of Modules, Tag 01AH."
+   }
+  },
+  {
+   "text": "For the isomorphism α, write L = tensorPullback α.hom and R = pushforward α.hom. Pushforward along α.inv and R are inverse equivalences, by the identity and composition comparisons. Hence the unit and counit of the normalized tensor adjunction are isomorphisms. Put c = unit_H followed by R(θ), K = the product-centre restriction kernel, KD = R(K), and ιD = R(kernel.ι) followed by c.inv. The map is mono. Set eD equal to the counit at K. Counit naturality and the left triangle identity prove L(ιD) followed by θ equals eD followed by the product-centre kernel inclusion.",
+   "uses": [
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Sheaves, Tags 0095, 0096 and 0097, specialized to inverse ringed-space isomorphisms."
+   }
+  },
+  {
+   "text": "Set U equal to the inverse image on the original fibre product of the complement of I.support union J.support. The two pullback projection equalities and support_mul identify α inverse image U with moduleStrictTransformOpen f (I * J). On any V, the equation ιD followed by c.hom = R(kernel.ι) identifies its range with product-kernel sections on α inverse image V. Apply the section-kernel formula of step 3 there. Naturality of c along V intersect U to V identifies restriction of c(s) with c applied to restriction of s. Since c is an isomorphism on sections, that vanishes exactly when the restriction of s vanishes. Apply step 3 also to the original centre to obtain the first displayed formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Divisors, Tag 080H, the geometric identification preceding the affine torsion calculation; Sheaves, Tag 0095."
+   }
+  },
+  {
+   "text": "The scheme isomorphism α.hom is quasi-compact and quasi-separated. The product-centre kernel K is quasi-coherent by step 3, so qcqs pushforward gives quasi-coherence of KD = R(K). Together with the original-kernel clause from step 3, this proves all required quasi-coherence assertions. The constructions never identify the two kernels and use no torsion hypothesis on F.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project",
+    "place": "Schemes, Tag 01LC, applied to an isomorphism; equivalently Modules, Tag 01BG along the inverse isomorphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "def-nagata-effective-cartier-ideal",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "lem-pqf-finite-type-ideal-module",
+  "def-pc-fibre-product",
+  "def-pc-module-pullback",
+  "lem-trf-strict-transform-sheaf-kernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex; sheaves.tex; schemes.tex",
+  "place": "Tags 080H, 080D, 0095-0097 and 01LC. Lean proof transports the included kernel by pushforward along the given scheme isomorphism, using the normalized adjunction unit and counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|blowup|BlowUp|Cartier",
+   "results": "Mathlib/Algebra/HierarchyDesign.lean; Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean; Mathlib/RingTheory/ReesAlgebra.lean; Mathlib/Tactic/ITauto.lean; Mathlib/Tactic/GRewrite/Core.lean; Mathlib/Tactic/Linarith/Frontend.lean. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport kernels of module strict transforms for blowup centers I and I times an effective Cartier ideal along an isomorphism over the base",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData; AlgebraicGeometry.Scheme.nilradical; AlgebraicGeometry.Scheme.IdealSheafData.instAdd; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice; AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup; AlgebraicGeometry.Scheme.IdealSheafData.instIdemCommSemiring; AlgebraicGeometry.Scheme.IdealSheafData.instMul; AlgebraicGeometry.Scheme.IdealSheafData.instOne. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On isomorphic blowups over S identify the two pullbacks of a quasi-coherent module and their subsheaves supported over the centers Z and Z union D",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackCongr; AlgebraicGeometry.Scheme.IdealSheafData.comapIso; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι; AlgebraicGeometry.Scheme.Modules.pullbackComp. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IdealSheafData|kernelSubobject",
+   "results": "No hits. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism over S transports the strict transform quotient kernel to the subsheaf of pullback sections vanishing outside the inverse image of the center",
+   "results": "AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp; AlgebraicGeometry.Scheme.Hom.toImage_app; AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion; AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal; AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop; AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι; AlgebraicGeometry.Scheme.IdealSheafData.comapIso; AlgebraicGeometry.Scheme.IdealSheafData.map_ker. Read the returned signatures; none gives the stated blowup/module-kernel assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|strict_transform|sectionsSupported|sections_supported",
+   "results": "No hits. Read returned signatures: generic kernel, ideal, and pullback comparisons do not state the module strict-transform assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport the kernels of module strict transform quotient maps along isomorphic blowups with centers I and I times a Cartier ideal",
+   "results": "CategoryTheory.Limits.kernel.mapIso, Ideal.map_toCotangent_ker, Ideal.mem_toCotangent_ker, Submodule.ker_liftQ_eq_bot', AlgebraicGeometry.Scheme.IdealSheafData.map_ker, AlgebraicGeometry.Scheme.IdealSheafData.ideal_map, AlgebraicGeometry.Scheme.Hom.liftQuotient.congr_simp, Algebra.Extension.Cotangent.ker_mk Read returned signatures: generic kernel, ideal, and pullback comparisons do not state the module strict-transform assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Modules.pullbackCongr",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackCongr Read returned signatures: generic kernel, ideal, and pullback comparisons do not state the module strict-transform assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport the kernels of module strict transform quotient maps along isomorphic blowups with centers I and I times a Cartier ideal",
+   "results": "AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, AlgebraicGeometry.Scheme.Hom.liftQuotient, Ideal.map_toCotangent_ker, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop, Ideal.quotientRangePowQuotSuccInclusionEquiv, Ideal.quotientToQuotientRangePowQuotSucc_mk, Ideal.map_mk_comap_factorPow Read returned signatures: generic kernel, ideal, and pullback comparisons do not state the module strict-transform assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of schemes identifies submodules of local sections vanishing on complementary open subsets and the kernels of their strict transform quotients",
+   "results": "AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp, AlgebraicGeometry.Scheme.IdealSheafData.ideal_le_ker_glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.ker_glueDataObjι_appTop, AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι_app, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι, AlgebraicGeometry.Scheme.Hom.ideal_ker_le, AlgebraicGeometry.Scheme.Hom.toImage_app Read returned signatures: generic kernel, ideal, and pullback comparisons do not state the module strict-transform assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-strict-transform-different-centers",
+  "date": "2026-10-22",
+  "group": "Q15"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting argument for the Orgogozo modification input: Tag 080H (2), the strict-transform comparison after multiplying the centre by the effective Cartier divisor $D$; its affine proof is the a-power versus xa-power torsion calculation. Returned proof step 1: identify the common ambient pullback and the two quasi-coherent supported-section kernels for the Cartier-multiplied centre.",
+   "via": [
+    "lem-trf-strict-transform-different-centers",
+    "lem-trf-strict-transform-composition",
+    "lem-trf-finite-after-blowup",
+    "lem-trf-alteration-finite-refinement",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-cartier-factor-kernel-transport",
+  "worker": "stage1",
+  "summary": "Retained the statement and all inherited fields. Reused the existing Cartier-invertibility, invertible-factor blowup, strict-transform kernel, and quasi-coherent pullback lemmas. Wrote out the finite-type product calculation, the equality of underlying product supports, and sectionwise transport with restriction and inclusion compatibility. No new nodes or leaves are required.",
+  "blueprint": "Supporting Orgogozo modification route under lem-trf-local-term-locality: Tag 080H geometric identification preceding the affine a-power versus xa-power torsion comparison; the item realizes the returned parent step identifying the common ambient pullback and its two included kernels. Current blueprint latest checked; no same statement occurs among blueprint nodes.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "Generic Cartier-ideal invertibility used to form the product-centre blowup comparison; the trace-formula unit supplies no replacement for this commutative-algebra tool."
+   },
+   {
+    "node": "lemma-nagata-blowup-invertible-factor",
+    "why": "Generic blowup invariance under an invertible ideal factor, already named in the statement; used only to justify the given base isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Generic pullback preservation of quasi-coherence, applied along the inverse scheme isomorphism to the second kernel; the trace-formula unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-a50b43b89",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-a50b43b89 (reviewer sub-agent of L); spot-checked: PASS with no fixes. I read the item and all six steps in full, along with every cited statement: the effective-Cartier-is-invertible and blowup-invertible-factor Nagata lemmas, def-nagata-effective-cartier-ideal, pqf-def-coherent, def-pc-fibre-product, def-pc-module-pullback, lem-trf-strict-transform-sheaf-kernel, lem-weil-pbc-module-pullback-quasi-coherent and def-trf-module-strict-transform. I also read Stacks 080H (divisors.tex 8935-8967) and checked in tags/tags that 080D, 07ZP, 01WS, 01BG, 0095 and 0097 map to the cited labels. The statement is byte-identical to the one Q15 created. The only stmt_deps change adds def-nagata-invertible-ideal, which the clause 'J is invertible' needs; as an advisory, the statement text names that notion without bracket-citing it. Checks: proof_deps equals the union of the step uses; no cycle; no SGA. The only citer, lem-trf-strict-transform-different-centers step 1, takes exactly what this statement provides. Step checks: (1) on a local cover J=(x) with x regular, so multiplication by x is a sheaf isomorphism I to IJ, giving finite type and quasi-coherence, and the prime argument gives |Z_D|=|Z|∪|D|. (2) alpha=id×φ is a valid induced map because φ is over S; its inverse comes from φ⁻¹, and θ comes from the composition isomorphism, with no flatness used. (3) The kernel lemma is applied to both centres, whose finite-type hypotheses hold; fp=bq gives the first formula. (4) The transport along a homeomorphism and along a ring-sheaf isomorphism is an elementary specialization of the pullback definition, so I accept elementary:true. (5) The set identity holds via fp_D=fpα=bqα, and zero restriction transfers because c_{V°} is injective. (6) β^*L_D is quasi-coherent and isomorphic to K_D. Edge cases: with I=O_S, D=V(x), F=O_D the formulas give K=0 and K_D=F, correctly showing the kernels differ without the torsion hypothesis; I=0 is vacuous; D empty gives K=K_D. No duplicates: supported-kernel-blowup-charts is an affine chart description, sheaf-kernel covers a single centre, and the affine torsion comparison is left to its own node. I accept the three declared tool_uses: two generic Nagata blowup/Cartier lemmas and pbc pullback quasi-coherence."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierFactorKernelTransport",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleStrictTransform_cartierFactor_kernel_transport",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierFactorKernelTransport.lean",
+  "statement": "theorem moduleStrictTransform_cartierFactor_kernel_transport {X S : Scheme.{u}} (f : X ⟶ S) (I J : S.IdealSheafData) [I.toModules.IsFiniteType] (hJ : J.IsInvertible) (φ : (I * J).blowup ≅ I.blowup) (hφ : φ.hom ≫ I.blowupMap = (I * J).blowupMap) (F : X.Modules) [F.IsQuasicoherent] : J.IsInvertible ∧ (I * J).toModules.IsQuasiCoherentFiniteType ∧ ∃ (α : Limits.pullback f (I * J).blowupMap ≅ Limits.pullback f I.blowupMap) (hα : α.hom ≫ pullback.fst f I.blowupMap = pullback.fst f (I * J).blowupMap), α.hom = pullback.map f (I * J).blowupMap f I.blowupMap (𝟙 X) φ.hom (𝟙 S) ((Category.comp_id f).trans (Category.id_comp f).symm) ((Category.comp_id (I * J).blowupMap).trans hφ.symm) ∧ ∃ θ : (tensorPullback α.hom).obj ((tensorPullback (pullback.fst f I.blowupMap)).obj F) ≅ (tensorPullback (pullback.fst f (I * J).blowupMap)).obj F, θ = (tensorPullbackSectionComp α.hom (pullback.fst f I.blowupMap)).symm.app F ≪≫ eqToIso (congrArg (fun g ↦ (tensorPullback g).obj F) hα) ∧ (moduleStrictTransformKernel f I F).IsQuasicoherent ∧ ∃ (KD : (Limits.pullback f I.blowupMap).Modules) (ιD : KD ⟶ (tensorPullback (pullback.fst f I.blowupMap)).obj F), Mono ιD ∧ KD.IsQuasicoherent ∧ (∃ eD : (tensorPullback α.hom).obj KD ≅ moduleStrictTransformKernel f (I * J) F, (tensorPullback α.hom).map ιD ≫ θ.hom = eD.hom ≫ kernel.ι (moduleStrictTransformRestriction f (I * J) F)) ∧ (∀ (V : (Limits.pullback f I.blowupMap).Opens) (s : Γ((tensorPullback (pullback.fst f I.blowupMap)).obj F, V)), s ∈ Set.range ((kernel.ι (moduleStrictTransformRestriction f I F)).app V) ↔ ((tensorPullback (pullback.fst f I.blowupMap)).obj F).presheaf.map (homOfLE (inf_le_left : V ⊓ (pullback.snd f I.blowupMap ≫ I.blowupMap) ⁻¹ᵁ I.support.compl ≤ V)).op s = 0) ∧ (∀ (V : (Limits.pullback f I.blowupMap).Opens) (s : Γ((tensorPullback (pullback.fst f I.blowupMap)).obj F, V)), s ∈ Set.range (ιD.app V) ↔ ((tensorPullback (pullback.fst f I.blowupMap)).obj F).presheaf.map (homOfLE (inf_le_left : V ⊓ (pullback.snd f I.blowupMap ≫ I.blowupMap) ⁻¹ᵁ (I.support ⊔ J.support).compl ≤ V)).op s = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-085e33441",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 2e0a9f611629 makes exactly the requested correction: def-nagata-invertible-ideal record restored (all delivered dependency records equal side-live; item differs only in lean), LocallyFree import and contrasting docstring sentence removed, 'J is invertible' rendered as J.IsInvertible, lean.statement verbatim. Clause by clause against node and Stacks 080H/080D/0097: S, f, finite-type qc I ([I.toModules.IsFiniteType], same convention as moduleStrictTransform), effective Cartier J (hJ), product finite type via IsQuasiCoherentFiniteType, φ over S (unique, no weakening), α pinned to pullback.map id φ id with hα, θ pinned to tensorPullbackSectionComp.symm ≫ eqToIso (direction checked), K = moduleStrictTransformKernel with formula on moduleStrictTransformOpen, KD Mono+qc+eD inclusion equation+formula with I.support ⊔ J.support; no torsion hypothesis, no K=KD. Edge cases I=0, I=O_S, J=O_S, F=O/x pass. No defs, sorry only, docstrings and report sections present. No file changed, no compile run (worker reports clean). Advisory: node does not bracket-cite def-nagata-invertible-ideal for 'J is invertible' (stage-1)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261026T092717-L-3458220",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

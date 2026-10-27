@@ -1,0 +1,81 @@
+{
+ "id": "lem-pur-kan-coprojection-unit-normalization",
+ "kind": "statement",
+ "title": "Pointwise Kan coprojections are the unit followed by restriction",
+ "statement": "Fix a universe $\\mathcal V$. Let $\\mathcal C,\\mathcal E$ be $\\mathcal V$-small categories, let $b:\\mathcal C\\to\\mathcal E$ be a functor, and let $\\mathcal A$ be a category with $\\mathcal V$-small morphism sets and all $\\mathcal V$-small colimits [def-weil-pbc-category-colimit]. For a presheaf $F:\\mathcal C^{\\mathrm{op}}\\to\\mathcal A$, let $K=\\operatorname{Lan}_{b^{\\mathrm{op}}}F$ and let $\\lambda:F\\to K\\circ b^{\\mathrm{op}}$ be the unit of the Kan-extension/restriction adjunction [lem-sfb-pointwise-kan-colimit]. For $W\\in\\mathcal E$, let $\\mathcal I_W$ have objects $(V,\\phi:W\\to b(V))$ and morphisms $a:(V,\\phi)\\to(V',\\phi')$ satisfying $b(a)\\phi=\\phi'$. Write\n$$\\alpha_W:K(W)\\xrightarrow{\\sim}\\operatorname{colim}_{\\mathcal I_W^{\\mathrm{op}}}F(V)$$\nfor the canonical pointwise Kan comparison, and $\\iota_{(V,\\phi)}$ for the colimit coprojection. Then, as morphisms $F(V)\\to K(W)$,\n$$\\alpha_W^{-1}\\circ\\iota_{(V,\\phi)}=K(\\phi)\\circ\\lambda_V.$$\nHere $K(\\phi):K(b(V))\\to K(W)$ is restriction along $\\phi$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00VE, lemma-adjoints-u, with the coprojections c(phi) and lemma-recover immediately before it; arbitrary coefficient category and the chosen Kan comparison: Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean:78-90, 148-169."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-pointwise-kan-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv",
+   "results": "CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv",
+   "date": "2026-10-25",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "def leftKanExtensionObjIsoColimit|lemma ι_leftKanExtensionObjIsoColimit_inv",
+   "results": "Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib subdirectory: CategoryTheory/Functor/KanExtension",
+   "date": "2026-10-25",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Left Kan extension evaluated at an object colimit costructured arrow unit coprojection formula",
+   "results": "CategoryTheory.lanEvaluationIsoColim; CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtension_map_leftKanExtensionObjIsoColimit_hom; CategoryTheory.Functor.leftKanExtensionObjIsoColimit; CategoryTheory.Functor.pointwiseLeftKanExtension_obj; CategoryTheory.Functor.pointwiseLeftKanExtensionUnit; CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv_assoc; CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom_assoc; CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom",
+   "date": "2026-10-25",
+   "verdict": "match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise left Kan extension colimit coprojection equals Kan unit followed by functor map",
+   "results": "CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom; CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_hom; CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtension_map_leftKanExtensionObjIsoColimit_hom; CategoryTheory.Functor.pointwiseLeftKanExtensionUnit_app; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.ι_isoColimit_hom; CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv; CategoryTheory.Functor.LeftExtension.IsPointwiseLeftKanExtensionAt.ι_isoColimit_hom_assoc; CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma lanAdjunction_unit|def sheafAdjunctionContinuous|def sheafPullback",
+   "results": "Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib subdirectory: CategoryTheory",
+   "date": "2026-10-25",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_inv",
+  "file": "Mathlib/CategoryTheory/Functor/KanExtension/Adjunction.lean",
+  "line": 86,
+  "how": "specializes in one line: take L = b.op, X = op W, and the costructured arrow (op V, phi.op) in ι_leftKanExtensionObjIsoColimit_inv at lines 86-90, using the comparison leftKanExtensionObjIsoColimit at lines 78-81. The displayed composition is written in mathematical rather than Lean diagram order. The unit is precisely the Kan adjunction unit by lanAdjunction_unit at lines 166-169 (lanUnit at lines 54-57). Pointwise colimits and their existence are the existing leaf lem-sfb-pointwise-kan-colimit; no sheaf, equivalence, or normalization of a pro-etale inverse image is asserted here."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-route-exists-unique-pro-etale-iso-inverse-image-identification",
+  "date": "2026-10-25",
+  "group": "NC"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "via": [
+    "lem-route-exists-unique-pro-etale-iso-inverse-image-identification",
+    "lem-pur-roots-of-unity-inverse-image-iso"
+   ],
+   "place": "Current blueprint def-weil-frobenius-coefficient-twists, statement sentence \"its natural Weil isomorphism is induced by the geometric Frobenius convention\": section identification used to construct the roots-of-unity inverse-image isomorphism in lem-pur-roots-of-unity-inverse-image-iso. Precisely, the Kan-unit normalization needed to compare the chosen sheaf adjunction with the distinguished comma coprojection."
+  },
+  "same_as": [],
+  "is": null
+ }
+}

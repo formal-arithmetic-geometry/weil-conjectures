@@ -120,7 +120,18 @@
   "def-weil-pbc-etale-sheaves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-h2",
  "split_report": {
@@ -138,5 +149,51 @@
   "group": "J1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ff2 (reviewer sub-agent of L); spot-checked: Repaired re-push after return 14:52 (head 971d14539); all six numbered points checked repaired: (1) def-sc-field-extension removed from the three helpers, def-pc-field-extension / def-weil-pbc-separable-algebraic-extension cited, stmt_deps match the citations (one surplus fixed below); (2) Kummer helper defines mu_ell inline as kernel of ell-th power on G_m of def-sc-gm-torsor (stated for any scheme), roots-of-unity hypothesis dropped; (3) Artin-Schreier helper defines F_p via def-weil-pbc-constant-sheaf and G_a via def-sc-etale-qcoherent-module on (Spec E)_Et, iota and wp named; (4) vacuous step 3 deleted, split_report.blueprint assigns paragraphs 2 and 3 to step 2; (5) item mathlib_searches has leansearch/leanfinder/loogle/grep; (6) unit file line removed from report. Source: blueprint sec-curve-estimates/sk-prop-h2/lem-sc-function-field-cd-one.md ## Proof, four paragraphs; item statement unchanged. Steps: 1 torsion filtered union + filtered colimit + lem-exc-field-discrete-modules reduce to H^2(E,F_ell)=0 for finite separable E/L as hypothesis of lem-sc-group-cd-one; 2 (ell != p) mu_ell = F_ell since k alg. closed in E, lem-sc-field-kummer-h2-brauer-injection (true: Hilbert 90) and lem-sc-brauer-algebraic-function-field-zero (true: E algebraic over k(C), C1 by Tsen); 3 (ell = p) lem-sc-field-artin-schreier-sequence (true) with lem-sc-etale-affine-qcoherent on affine Spec E gives H^2(E,F_p)=0, then lem-sc-group-cd-one. All cited statements read and match. Small case: E=k(t) for both branches. Fixes: lem-sc-field-artin-schreier-sequence.json: stmt_deps: dropped def-weil-pbc-etale-cohomology (not cited in statement); lem-sc-field-artin-schreier-sequence.json: blueprint.from.place: stale 'step 4' -> step 3 / fourth blueprint paragraph; lem-sc-brauer-algebraic-function-field-zero.json: blueprint.from.place: stale 'step 3' -> step 2 / third blueprint paragraph; lem-sc-function-field-cd-one.json: split_report.summary: 'four-step' -> three-step and names the Artin-Schreier helper. Start Sat Oct 10 03:04:39 PM UTC 2026, end Sat Oct 10 03:05:20 PM UTC 2026.; 3 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $k$ be algebraically closed, $C/k$ an integral\ncurve, and $L$ an algebraic extension\nof its function field $k(C)$.\nFor every torsion abelian etale sheaf\n$M$ on $\\operatorname{Spec}L$, its\ncohomology vanishes\nin degrees $q\\geq2$.",
+  "proof": [
+   {
+    "text": "By [lemma-weil-pbc-torsion-filtered-union], [lem-weil-pbc-cohomology-filtered-colimit]\nwe may work with bounded-exponent torsion, and then with one\nprimary component. Use the exact field dictionary of\n[lem-exc-field-discrete-modules]. The open subgroups of\n$G_L$ correspond to finite separable extensions $E/L$.\nWe verify the hypothesis of [lem-sc-group-cd-one] for each one.",
+    "uses": [
+     "lemma-weil-pbc-torsion-filtered-union",
+     "lem-weil-pbc-cohomology-filtered-colimit",
+     "lem-exc-field-discrete-modules",
+     "lem-sc-group-cd-one"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $\\ell\\ne\\operatorname{char}k$, the field $E$ contains all\n$\\ell$-th roots of unity, so $\\mu_\\ell$ is a trivial\n$\\mathbf F_\\ell$-module. Kummer's exact sequence on the field\nand $\\operatorname{Pic}(\\operatorname{Spec}E)=0$ inject\n$H^2(E,\\mu_\\ell)$ into $\\operatorname{Br}(E)$.\nHere Kummer exactness follows by adjoining a root of $T^\\ell-u$\nfor a unit $u$; its derivative is invertible at a root.\nThe assertion about $H^1(\\mathbf G_m)=\\operatorname{Pic}$ is\nfaithfully flat descent for one-dimensional vector spaces, or\nHilbert 90 ([cor-sc-hilbert-90-field]). The algebraic identification of the Brauer group\nwith $H^2(\\mathbf G_m)$ is\nthe definition of the Brauer group as $H^2$ with coefficients\n$\\mathbf G_m$, which is the convention of this blueprint; the\nvanishing itself is [lem-sc-tsen].",
+    "uses": [
+     "cor-sc-hilbert-90-field",
+     "lem-sc-tsen"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "To see $\\operatorname{Br}(E)=0$, any central simple algebra over\n$E$ descends to a finite extension $E_0/k(C)$ contained in\n$E$. Namely its multiplication table, unit, and the inverse\nto the map $D\\otimes D^{\\rm op}\\to\\operatorname{End}(D)$\ninvolve finitely many coefficients. This last inverse ensures\nthat the descended algebra is central simple. The finitely\ngenerated field $E_0/k$, of transcendence degree one, is the\nfunction field of an integral affine curve: take the algebra\ngenerated by a finite field generating set. Apply\n[lem-sc-tsen] to that curve. The descended algebra is split,\nand stays split over $E$.",
+    "uses": [
+     "lem-sc-tsen"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $\\ell=\\operatorname{char}k=p$, the same polynomial argument\nfor $T^p-T-u$ proves the Artin–Schreier exact sequence, as in\n[lem-sc-as-sequence]. The two adjacent positive cohomology\ngroups of $\\mathbf G_a$ on $\\operatorname{Spec}E$ vanish by\n[lem-sc-etale-affine-qcoherent], so $H^2(E,\\mathbf F_p)=0$.\nIn both cases [lem-sc-group-cd-one] gives the assertion.",
+    "uses": [
+     "lem-sc-as-sequence",
+     "lem-sc-etale-affine-qcoherent",
+     "lem-sc-group-cd-one"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

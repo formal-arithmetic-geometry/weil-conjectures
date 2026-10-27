@@ -1,0 +1,126 @@
+{
+ "id": "def-pur-coefficient-reduction-presentation",
+ "kind": "definition",
+ "title": "Strict coefficient reduction presentation with actual transitions",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite coefficient field $E$ [def-weil-l-adic-coefficient-extension], a scheme $W$, and a coherent reduction calculus $S$ [def-coef-derived-system-calculus-data]. For a K-flat completed-coefficient complex $P$ [def-pc-kflat-complex], a strict sequence complex $C$ [def-coef-ringed-sequence-site], an isomorphism $e:S(P)\\simeq Q(C)$ in the derived system category, and chain isomorphisms $\\kappa_n:C_n\\simeq P\\otimes B_n$, define $\\operatorname{CoefficientReductionPresentation}(P,C,e,\\kappa)$ by two equations. At every $n$, evaluation of $e$ followed by localization of $\\kappa_n$ equals the calculus's normalized finite-reduction comparison. At every $m\\geq n$, the actual horizontal transition of $C$, followed by restriction of $\\kappa_n$, equals $\\kappa_m$ followed by the ordinary quotient map on $P$. These are predicates on specified data, without an existence claim.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-coef-derived-system-calculus-data",
+  "def-pc-kflat-complex",
+  "def-coef-ringed-sequence-site"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Representative interface for the integral comparison and its finite-reduction/scalar compatibility; Stacks 0941, 07A4, 07A2, 0G7E. Existing definitions in Sheaf.Paper.CoefDerivedSystemEvaluationCalculus."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StrictQuotient|ScalarExtensionTower|CoefficientReductionPresentation",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact generic library match; reuse the landed Sheaf definitions without copying them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict quotient expression syntax K flat sequence systems scalar association normalized tensor models",
+   "results": "OK 8 hits: term_⧸_, Module.Flat.instTensorProduct, SMulCon.Quotient, SMulCon.instSMulQuotient, PiTensorProduct, ModuleCon.instSMulQuotient, Submodule.Quotient.instIsBoundedSMul, Module.Flat.iff_rTensor_exact",
+   "date": "2026-10-23",
+   "verdict": "No exact generic library match; reuse the landed Sheaf definitions without copying them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict quotient expression syntax K flat sequence systems scalar association normalized tensor models",
+   "results": "OK 8 hits: Quotient.term⟦_⟧, Mathlib.Tactic.Module.NF.term_::ᵣ_, TensorProduct.term⨂[_]^_, TensorProduct.termSym[_]__, MvFunctor.term_⊗'_, TensorProduct.termSym[_]^__, MvFunctor.term_⊗_, TensorProduct.term⨂[_]_,_",
+   "date": "2026-10-23",
+   "verdict": "No exact generic library match; reuse the landed Sheaf definitions without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "Definition-node lean.declaration/declarations containing StrictQuotient.Expression, StrictQuotient.SystemGood, IntegralCoherence, ScalarExtensionTower, CoefficientExtensionSystems, CoefficientReductionPresentation, CoefficientExtensionReductionData; rg in lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search strict quotient and scalar coherence",
+   "results": "No definition-node owner of these declarations. The declarations exist in Sheaf theorem-interface modules; no match in WeilConjectures. Blueprint search strict quotient: three unrelated proper-base-change reconstruction lemmas; scalar coherence: zero.",
+   "date": "2026-10-23",
+   "verdict": "Add existing:true ownership records for existing data only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-completed-comparison-quotient-realization",
+  "date": "2026-10-23",
+  "group": "Q128"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Integral comparison used for coefficient twists: simultaneous quotient representatives, completed substitution and scalar squares.",
+   "via": [
+    "lem-pur-completed-comparison-quotient-realization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.CoefDerivedSystemEvaluationCalculus",
+  "declaration": "WeilConjectures.CoefficientReductionPresentation",
+  "declarations": [
+   "WeilConjectures.CoefficientReductionPresentation"
+  ],
+  "statement": "def CoefficientReductionPresentation\n    (S : CoefficientDerivedSystemReduction l E W)\n    (P : CochainComplex (scalarReductionSource l E W) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients\n      (J := Scheme.ProEt.topology W) (R := completedIntegralCommRingSheafUnrestricted l E W) P)\n    (C : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (e : S.reduction.obj (DerivedCategory.Q.obj P) ≅ DerivedCategory.Q.obj C)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj C ≅\n        ((scalarReductionExtension l E W n).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) :\n    Prop",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Definition ownership only: these are existing data/predicates in a theorem module, not objects constructed by that module's theorem. No Lean source is duplicated."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80763e0dd",
+  "group": "Q128",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80763e0dd",
+  "group": "Q128",
+  "result": "fix",
+  "note": "Re-delivery of 2f0e (review PASS; landing refused: 4 proof_deps not in any step's uses). Lean module byte-identical (sha 3444cc67); the only item-node delta is proof_deps, now exactly the 10-id union of step uses, the same set as live. All 17 pre-existing stmt_dep records byte-identical to side-live; live item still split and unlanded. Independent full reading of the module against the node: quotient representatives, recursive substitution, comparison c and inverse, counit whole-system equation, NaturalComparison, StrictCoherence, the unique structural iso, ScalarGenerated→ScalarGood, ScalarLimitImage (both gamma/alpha composites, left=right as isos, scalarTransport(c_L)=canonical at L); edge cases n=0, empty schemes, L=E, ramified non-flat. Gates OK; only sequencePullback_eq and the main theorem are sorry, with proof docstrings. Finding R1 (H4/H12): new node def-pur-coefficient-extension-reduction-data lists CoefficientReductionModelData, already owned by the live definition node stage3-pur-extension-reduction-data (E6). FIX: fixes/def-pur-coefficient-extension-reduction-data.json drops that declaration (14 remain; the item never names it) and records the owner in lean.note; nothing else changed. Advisories as at 2f0e: strict type_of% scalar identity/composition/association; base-era owners outside stmt_deps; H11 self-check. No compile (JSON-only fix)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-39893",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T134955-L-3651497",
+  "kind": "interface",
+  "note": "independent cc review: delivered 4 modules vs clone original (verbatim prefix split + 1 hole proved, statement unchanged); all 107 direct importers compiled against the delivered set (104 OK, 3 slow pre-existing, equal time on published); axioms clean; nodes vs Lean",
+  "sorry_before": [
+   "WeilConjectures.coefficientDerivedSystemEvaluationCalculus",
+   "WeilConjectures.coefficientEvaluationTensorIso_exists"
+  ],
+  "sorry_after": [
+   "WeilConjectures.coefficientDerivedSystemEvaluationCalculus"
+  ]
+ }
+}

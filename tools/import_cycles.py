@@ -30,8 +30,21 @@ def graph(root):
     for directory in root.iterdir():
         if directory.is_dir() and not directory.name.startswith('.'):
             files.extend(directory.rglob('*.lean'))
-    return {'.'.join(p.relative_to(root).with_suffix('').parts): imports(p.read_text(errors='replace'))
+    scan = _memo_imports()
+    return {'.'.join(p.relative_to(root).with_suffix('').parts): scan(p.read_text(errors='replace'))
             for p in files}
+
+
+def _memo_imports():
+    """imports(), memoized by the text in tools/leanindex.py's text cache (2026-10-24, cpu: graph() ran imports() on
+    every file of the library, 2-4 min of one core for each stage-3 preflight and batch landing). The kind names a
+    digest of this file, so a change of imports() starts a new memo."""
+    try:
+        import hashlib, leanindex as li
+        kind = 'cycle_imports-' + hashlib.sha1(pathlib.Path(__file__).read_bytes()).hexdigest()[:12]
+        return lambda text: set(li._memo(kind, text, lambda x: frozenset(imports(x))))
+    except Exception:  # noqa: BLE001
+        return imports
 
 
 

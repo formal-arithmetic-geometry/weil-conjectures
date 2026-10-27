@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-nil-ring-tower-limit-henselian",
+ "kind": "statement",
+ "title": "Henselian projection kernels of a surjective nil-kernel ring tower",
+ "statement": "Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative unital rings with unital ring homomorphisms $A_{n+1}\\to A_n$. Suppose every transition is surjective and every element of its kernel is nilpotent. Put $A=\\varprojlim_n A_n$, the ring of compatible tuples with componentwise operations. For every $n\\geq1$, the projection $\\pi_n:A\\to A_n$ is surjective. Write $I_n=\\ker(\\pi_n)$, so $A/I_n\\simeq A_n$. Then $I_n$ is contained in the Jacobson radical of $A$ (the intersection of its maximal ideals), and $(A,I_n)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Explicitly, for every monic $f\\in A[T]$ and factorization of its reduction $\\bar f=g_nh_n$ into monic polynomials $g_n,h_n\\in A_n[T]$ generating the unit ideal, there are monic $g,h\\in A[T]$ reducing to $g_n,h_n$ such that $f=gh$. No nilpotence bound on the transition kernels, locality, Noetherian condition, or adic presentation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CT7 (lemma-limit-henselian), for a sequence indexed by positive integers; projection surjectivity by successive lifting in the surjective tower."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Write $p_m:A_{m+1}\\to A_m$ for the transitions and $p_{r,s}:A_r\\to A_s$ for their composites. Fix $n$ and $b_n\\in A_n$. Recursively choose $b_{m+1}$ with $p_m(b_{m+1})=b_m$ for $m\\geq n$, using surjectivity; for $m<n$ set $b_m=p_{n,m}(b_n)$. These entries form a compatible tuple in $A$ projecting to $b_n$. Thus $\\pi_n$ is surjective. The induced map $A/I_n\\to A_n$ is injective by the definition of its kernel and surjective by this construction, hence is a ring isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  },
+  {
+   "text": "For $r>s$, every element of $\\ker(p_{r,s})$ is nilpotent. Induct on $r-s$: the base is the hypothesis. If $x$ maps to zero in $A_s$, its image in $A_{r-1}$ is nilpotent by induction, so $x^e\\in\\ker(p_{r-1})$ for some $e\\geq1$; the hypothesis gives $(x^e)^d=0$ for some $d\\geq1$. This uses exponents depending on $x$. Also, if any $A_s$ is the zero ring then $1\\in\\ker(p_s)$ forces $A_{s+1}$ to be zero; earlier rings are zero by unitality and surjectivity. Hence all rings and $A$ are zero, and every assertion is immediate. In the remaining steps all $A_m$ and $A$ are nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  },
+  {
+   "text": "If $a\\in1+I_n$, then $a_m=1$ for $m\\leq n$ and $a_m-1\\in\\ker(p_{m,n})$ for $m>n$. Step 2 makes $a_m-1$ nilpotent. If $z^e=0$, the identity $(1+z)\\sum_{j=0}^{e-1}(-z)^j=1$ gives an inverse to $1+z$. Thus every $a_m$ is a unit. The inverses form a compatible tuple, since ring maps preserve inverses and inverses are unique. This tuple is an inverse of $a$ in $A$. Apply [lem-weil-pbc-jacobson-radical-one-plus-units] to obtain $I_n\\subseteq\\operatorname{rad}(A)$.",
+   "uses": [
+    "lem-weil-pbc-jacobson-radical-one-plus-units"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  },
+  {
+   "text": "We will preserve coprimality at each successive lift. Suppose monic $g_{m+1},h_{m+1}\\in A_{m+1}[T]$ reduce to coprime $g_m,h_m\\in A_m[T]$. Choose $u_m,v_m$ with $u_mg_m+v_mh_m=1$, and lift their finitely many coefficients along the surjection $p_m$, obtaining $u,v$. Then $q=ug_{m+1}+vh_{m+1}-1$ has all coefficients in $J_m=\\ker(p_m)$, so lies in $J_mA_{m+1}[T]$. Apply [lem-weil-pbc-locally-nilpotent-extension] to $A_{m+1}\\to A_{m+1}[T]$: $q$ is nilpotent. The geometric-sum identity of step 3 makes $1+q$ a unit. Multiplying $u,v$ by its inverse gives a Bezout identity for $g_{m+1},h_{m+1}$.",
+   "uses": [
+    "lem-weil-pbc-locally-nilpotent-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  },
+  {
+   "text": "Fix $f,g_n,h_n$ as in the statement and write $f_m$ for the coefficientwise image of $f$ in $A_m[T]$. Recursively construct pairs $(g_m,h_m)$ for $m\\geq n$ with $f_m=g_mh_m$, both monic and generating the unit ideal, and $p_m(g_{m+1})=g_m$, $p_m(h_{m+1})=h_m$. The prescribed pair is the base case. Given the pair at $m$, use the isomorphism $A_{m+1}/J_m\\simeq A_m$ and apply [lem-weil-pbc-henselian-factorization-locally-nilpotent] to $f_{m+1}$ and this factorization: its hypotheses hold because $J_m$ is a nil ideal and the factors at $m$ are monic and coprime. It supplies monic factors at $m+1$ with the prescribed reductions. Step 4 proves their coprimality, completing the induction. No uniqueness assertion is needed.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-locally-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  },
+  {
+   "text": "Put $d=\\deg(g_n)$ and $e=\\deg(h_n)$. A unital map between nonzero rings preserves the degree of a monic polynomial, since its leading coefficient stays $1$ and all higher coefficients stay zero. Consequently all $g_m$ have degree $d$ and all $h_m$ have degree $e$. For each coefficient index $i<d$, the compatible coefficients of $g_m$ for $m\\geq n$ extend to a tuple in $A$ by applying transitions at the earlier indices. Denote this tuple $c_i$ and set $g=T^d+\\sum_{i<d}c_iT^i$; define $h=T^e+\\sum_{i<e}b_iT^i$ similarly. These are monic finite polynomials reducing to every chosen pair at $m\\geq n$, and in particular to $g_n,h_n$. At every index $m\\geq n$ their product projects to $f_m$; applying transitions gives the same equality for $m<n$. Each coefficient of $f-gh$ is therefore a tuple with all entries zero, hence is zero. Thus $f=gh$. This includes $d=0$ or $e=0$, with the corresponding sum empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  },
+  {
+   "text": "Step 3 gives the Jacobson-radical condition. Steps 5 and 6 give every monic coprime-factorization lift over $A/I_n\\simeq A_n$. Apply [lem-weil-pbc-henselian-factorization-criterion], conditions (i) and (ii), to conclude that $(A,I_n)$ is henselian in the finite-algebra idempotent sense of [def-weil-pbc-henselian-terminology]. The construction already proves the explicit factorization clause, and step 1 supplies both the surjectivity and quotient identification for every $n$.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CT7 (lemma-limit-henselian), proof, specialized to a sequence; elementary details expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-jacobson-radical-one-plus-units",
+  "lem-weil-pbc-locally-nilpotent-extension",
+  "lem-weil-pbc-henselian-factorization-locally-nilpotent",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CT7 (lemma-limit-henselian), with the coefficient-limit and coprimality arguments expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselian|Henselian",
+   "results": "5 hits: Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.henselianRing requires adic completeness, not the given arbitrary nil-kernel tower; remaining hits define henselianity or concern adic completion/direct limits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limit rings with surjective nilpotent transitions form henselian pairs",
+   "results": "8 hits: HenselianRing, HenselianLocalRing, HenselianLocalRing.TFAE, IsAdicComplete.henselianRing, Ring.DirectLimit.commRing, HenselianRing.mk, Ring.DirectLimit.ring, DirectLimit.instRingOfRingHomClass",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.henselianRing requires adic completeness, not the given arbitrary nil-kernel tower; remaining hits define henselianity or concern adic completion/direct limits."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "6 hits: HenselianRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianRing.jac, HenselianRing.is_henselian, HenselianRing.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.henselianRing requires adic completeness, not the given arbitrary nil-kernel tower; remaining hits define henselianity or concern adic completion/direct limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of a sequence of surjective ring maps with nil kernels is henselian along each projection kernel",
+   "results": "8 hits: IsAdicComplete.henselianRing, HenselianRing, HenselianLocalRing, instHenselianRingMaximalIdeal, HenselianRing.is_henselian, HenselianLocalRing.TFAE, AdicCompletion.kerProj, AdicCompletion.kerProj_surjective",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.henselianRing requires adic completeness, not the given arbitrary nil-kernel tower; remaining hits define henselianity or concern adic completion/direct limits."
+  },
+  {
+   "tool": "grep",
+   "query": "(inverse|limit|surject|nilpotent).*henselian|henselian.*(inverse|limit|surject|nilpotent)",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.henselianRing requires adic completeness, not the given arbitrary nil-kernel tower; remaining hits define henselianity or concern adic completion/direct limits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Henselian pairs from complete inverse systems of rings with locally nilpotent kernels",
+   "results": "8 hits: IsAdicComplete.henselianRing, HenselianRing, HenselianLocalRing, instHenselianRingMaximalIdeal, BDeRhamPlus, PreTilt.exists_smodEq_untiltAux, IsAdicComplete.StrictMono.liftRingHom, IsPrecomplete.prec'",
+   "date": "2026-10-24",
+   "verdict": "no match: IsAdicComplete.henselianRing requires adic completeness, not the given arbitrary nil-kernel tower; remaining hits define henselianity or concern adic completion/direct limits."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|Henselian",
+   "results": "5 hits: Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned henselian instances require adic completeness or local hypotheses; no arbitrary nil-kernel inverse-sequence theorem. Source of IsAdicComplete.henselianRing read at Mathlib/RingTheory/Henselian.lean:170."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse limits of rings with surjective nil transition kernels give henselian pairs",
+   "results": "8 hits: HenselianRing, HenselianLocalRing, HenselianLocalRing.TFAE, Ring.DirectLimit.commRing, IsAdicComplete.henselianRing, InverseSystem.limit, Ring.DirectLimit.ring, HenselianRing.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned henselian instances require adic completeness or local hypotheses; no arbitrary nil-kernel inverse-sequence theorem. Source of IsAdicComplete.henselianRing read at Mathlib/RingTheory/Henselian.lean:170."
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing",
+   "results": "6 hits: HenselianRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianRing.jac, HenselianRing.is_henselian, HenselianRing.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned henselian instances require adic completeness or local hypotheses; no arbitrary nil-kernel inverse-sequence theorem. Source of IsAdicComplete.henselianRing read at Mathlib/RingTheory/Henselian.lean:170."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of a surjective sequence of commutative rings with nil kernels is henselian along each projection kernel",
+   "results": "8 hits: IsAdicComplete.henselianRing, HenselianRing, HenselianLocalRing, instHenselianRingMaximalIdeal, HenselianRing.is_henselian, HenselianLocalRing.TFAE, AdicCompletion.kerProj_surjective, AdicCompletion.kerProj",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned henselian instances require adic completeness or local hypotheses; no arbitrary nil-kernel inverse-sequence theorem. Source of IsAdicComplete.henselianRing read at Mathlib/RingTheory/Henselian.lean:170."
+  },
+  {
+   "tool": "grep",
+   "query": "(inverse|limit|surject|nilpotent).*henselian|henselian.*(inverse|limit|surject|nilpotent)",
+   "results": "0 hits: none",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned henselian instances require adic completeness or local hypotheses; no arbitrary nil-kernel inverse-sequence theorem. Source of IsAdicComplete.henselianRing read at Mathlib/RingTheory/Henselian.lean:170."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete inverse systems of rings whose successive surjections have locally nilpotent kernel satisfy Hensels factorization lemma",
+   "results": "8 hits: IsAdicComplete.henselianRing, HenselianRing, HenselianLocalRing, HenselianRing.is_henselian, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AdicCompletion.factor_eval_liftRingHom, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', IsAdicComplete.StrictMono.mk_liftRingHom",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned henselian instances require adic completeness or local hypotheses; no arbitrary nil-kernel inverse-sequence theorem. Source of IsAdicComplete.henselianRing read at Mathlib/RingTheory/Henselian.lean:170."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-inverse-module-proper-shrinking",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tag 0CXA (lemma-proper-support), proof, which uses only a finitely presented local module and its proper special-fibre support; underlying-set interpretation of support, not equality of annihilator subschemes. Inputs in that proof: more-algebra.tex Tag 0CT7 (lemma-limit-henselian) and spaces-more-morphisms.tex Tag 0CWI (lemma-split-off-proper-part-henselian). Henselian base-pair input, Tag 0CT7, used before splitting the closed support by 0CWI.",
+   "via": [
+    "lem-sfb-space-inverse-module-proper-shrinking",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-nil-ring-tower-limit-henselian",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0CT7 into projection lifting, elementwise nilpotence of composite kernels, coordinatewise inversion, coprimality preservation, recursive factorization lifting, and bounded-degree coefficient limits. Reused the existing 0ALI factorization, 0544 nil-extension, 0AME radical criterion and 09XI equivalence nodes; no new nodes. Retained the statement and inherited provenance/searches.",
+  "blueprint": "Supporting algebra input under the inherited compactification/direct-image proper-support effectivity chain, precisely Tag 0CT7 before Tag 0CWI. Latest sk-thm-sf-ctf-stability proof, paragraph on compactification and direct images, retained; this item is not a unit key node. Whole-blueprint henselian/ring-tower/limit-henselian searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-factorization-locally-nilpotent",
+    "why": "Generic nil-ideal factorization lift used at each transition; the constructible-six-functor unit supplies no commutative-algebra substitute."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Generic equivalence between factorization and finite-algebra idempotent definitions; needed because the terminology node uses the latter."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-factorization-locally-nilpotent",
+  "lem-weil-pbc-henselian-factorization-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-eb1708e93",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-eb1708e93 (reviewer sub-agent of L); spot-checked: I read Stacks 0CT7 (more-algebra.tex, lemma-limit-henselian) in full. The item agrees with it for an N-indexed sequence and adds two facts it proves itself in step 1: surjectivity of the projections π_n and A/I_n ≅ A_n. Statement and stmt_deps are unchanged, there are no new nodes, and the node has no SGA citation. proof_deps is exactly the union of the step uses. I read the statements of all cited nodes: 0AME one-plus-units, 0544 nil-extension, 0ALI factorization lift for a locally nilpotent ideal, 09XI criterion (i)+(ii) ⇔ idempotent definition, and the terminology definition. Step 1: projections are surjective by recursive choice of preimages. Step 2: composite kernels are nil by induction, with exponents depending on the element; a single zero ring forces the whole tower to be zero. Step 3: 1+I_n consists of units via coordinatewise geometric series and uniqueness of inverses, then 0AME. Step 4: the Bezout error q lies in J_m·A_{m+1}[T], so it is nilpotent by 0544 and 1+q is a unit, which preserves coprimality. This is a valid replacement for Stacks' Spec-homeomorphism remark and corrects its A_n/A_m indexing slip. Step 5: an explicit induction using 0ALI at A_{m+1} with J_m; the uniqueness clause is unused. Step 6: degrees stay fixed over nonzero rings, so the finitely many coefficient tuples give polynomials, which fills Stacks' 'as A = lim A_m'. Step 7: the 09XI criterion. Small cases tested: constant tower, zero tower, k[t]/(t^n), and an unbounded-exponent nil kernel; every argument is elementwise. Searches with rg for 0CT7 and for inverse-limit henselian statements found only users of the item and different colimit or formal-fibre nodes; Mathlib's IsAdicComplete.henselianRing is not a match. The generic tools 0ALI and 09XI from sk-thm-p1 are accepted. The worker wrote split_report.tool_uses itself, which C8 reserves for the maintainer; the content is correct and is left for the merge to record."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NilRingTowerLimitHenselian",
+  "declaration": "CommRingCat.limit_henselian_of_surjective_nil_ker",
+  "file": "lean/Sheaf/RingTheory/NilRingTowerLimitHenselian.lean",
+  "statement": "theorem limit_henselian_of_surjective_nil_ker (F : ℕᵒᵖ ⥤ CommRingCat.{u}) (hsurj : ∀ n : ℕ, Function.Surjective (F.map (homOfLE (Nat.le_succ n)).op).hom) (hnil : ∀ (n : ℕ) (x : F.obj ⟨n + 1⟩), x ∈ RingHom.ker (F.map (homOfLE (Nat.le_succ n)).op).hom → IsNilpotent x) : ∀ n : ℕ, Function.Surjective (limit.π F ⟨n⟩).hom ∧ Function.Bijective (RingHom.kerLift (limit.π F ⟨n⟩).hom) ∧ RingHom.ker (limit.π F ⟨n⟩).hom ≤ Ideal.jacobson (⊥ : Ideal (limit F : CommRingCat.{u})) ∧ HenselianRing (limit F : CommRingCat.{u}) (RingHom.ker (limit.π F ⟨n⟩).hom) ∧ ∀ (f : Polynomial (limit F : CommRingCat.{u})), f.Monic → ∀ (gₙ hₙ : Polynomial (F.obj ⟨n⟩)), gₙ.Monic → hₙ.Monic → IsCoprime gₙ hₙ → f.map (limit.π F ⟨n⟩).hom = gₙ * hₙ → ∃ g h : Polynomial (limit F : CommRingCat.{u}), g.Monic ∧ h.Monic ∧ f = g * h ∧ g.map (limit.π F ⟨n⟩).hom = gₙ ∧ h.map (limit.π F ⟨n⟩).hom = hₙ",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e1128b22",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read the node, Stacks 0CT7 (more-algebra.tex:2452-2479), the delivered module and the stmt_dep record. F : ℕᵒᵖ ⥤ CommRingCat.{u} with documented index shift n↦n+1; transition direction checked; elementwise IsNilpotent with no common bound; no extra hypotheses or universe restriction. Conclusions are all present: projection surjectivity, bijectivity of the canonical RingHom.kerLift, ker ≤ jacobson ⊥, HenselianRing (the recorded def-weil-pbc-henselian-terminology declaration), and the monic IsCoprime factorisation lift in the same quantifier order. lean.statement is verbatim in the file; only the node's lean field changed vs live; imported modules exist and the new module path is free; source and blueprint docstrings present with proof steps 1-7; sorry only; no definitions; report has both required sections. No Mathlib or project duplicate: IsAdicComplete.henselianRing needs adic completeness and the project's similar results are colimit-only. Edge cases fine: zero ring, constant tower, degree-0 factors. No compile run because no file was changed. No findings."
+ }
+}

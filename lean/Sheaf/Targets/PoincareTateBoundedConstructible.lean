@@ -11,13 +11,12 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import Sheaf.Paper.ProEtaleTateTwists
-import Sheaf.Paper.CompletedCondensedCoefficients
-import Sheaf.Paper.CondensedZlReduction
-import Sheaf.Paper.PurTwistSheafLocallyFree
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Sheaf.Paper.CondensedConstantConstructibility
-import WeilConjectures.CategoryTheory.ModuleObjects.Free
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Sheaf.PoincareDuality.TateTwistOneLocalLine
+import Sheaf.PoincareDuality.ConstructibleShiftSingle
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
+import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
+import all Sheaf.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 
 /-!
 # Bounded constructibility of shifted condensed Tate twists
@@ -40,65 +39,143 @@ universe u
 
 open scoped CategoryTheory.Obj
 
-open CategoryTheory
+open CategoryTheory MonoidalCategory MonoidalClosed Limits
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+attribute [local irreducible] Mod.monoidalClosed
+
+private noncomputable def concreteHomIso
+    {Y : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) :
+    ihom M ≅ Mod.ihom' R M :=
+  (ihom.adjunction M).rightAdjointUniq
+    ((Mod.ihom'Adjunction R M).ofNatIsoLeft
+      (Mod.relativeTensorRightIso M ≪≫
+        (BraidedCategory.tensorLeftIsoTensorRight M).symm))
+
+private theorem nonempty_pullback_ihom
+    {X Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    Nonempty (((ProEtale.upperStar Ab.{u + 1} f).mapMod R).obj ((ihom M).obj N) ≅
+      (ihom (((ProEtale.upperStar Ab.{u + 1} f).mapMod R).obj M)).obj
+        (((ProEtale.upperStar Ab.{u + 1} f).mapMod R).obj N)) := by
+  let G := ProEtale.upperStar Ab.{u + 1} f
+  let F := G.mapMod R
+  let : G.Braided := {}
+  let e : F ⋙ Mod.comap (𝟙 (G.obj R)) ≅ F :=
+    Functor.isoWhiskerLeft F (Mod.comapId _) ≪≫ Functor.rightUnitor F
+  have : ∀ Z, IsIso (Functor.LaxMonoidal.ihomComparison G Z).natTrans :=
+    ProEtale.isIso_ihomComparison_upperStar Ab.{u + 1} f
+  have := Mod.isIso_mapIhom'Hom G (𝟙 (G.obj R)) M N
+  exact ⟨F.mapIso ((concreteHomIso R M).app N) ≪≫
+    (e.app ((Mod.ihom' R M).obj N)).symm ≪≫
+    asIso (Mod.mapIhom'Hom G (𝟙 (G.obj R)) M N) ≪≫
+    ((concreteHomIso _ _).app _).symm ≪≫
+    asIso ((pre (e.app M).inv).app _) ≪≫ (ihom _).mapIso (e.app N)⟩
+
+private theorem powers_image_regular
+    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    {Y : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f]
+    {Z : Scheme.{u}} (g : Z ⟶ Y) [WeaklyEtale g]
+    (e : (((ProEtale.upperStar Ab.{u + 1} g).mapMod
+      ((ProEtale.upperStar Ab.{u + 1} f).obj
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))).obj
+      (((ProEtale.upperStar Ab.{u + 1} f).mapMod
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)).obj
+          (tateTwistOne X ℓ))) ≅ 𝟙_ _) (d : ℤ) :
+    Nonempty ((((ProEtale.upperStar Ab.{u + 1} g).mapMod
+      ((ProEtale.upperStar Ab.{u + 1} f).obj
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))).obj
+      (((ProEtale.upperStar Ab.{u + 1} f).mapMod
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)).obj
+          (tateTwist X ℓ d))) ≅ 𝟙_ _) := by
+  let R := condensedRingObj (Profinite.padicAlgClRingObj ℓ) X
+  let F := ProEtale.upperStar Ab.{u + 1} f
+  let G := ProEtale.upperStar Ab.{u + 1} g
+  let : F.Braided := {}
+  let : G.Braided := {}
+  let H := F.mapMod R ⋙ G.mapMod (F.obj R)
+  have hn (n : ℕ) : Nonempty (H.obj (tateTwistNat X ℓ n) ≅ 𝟙_ _) := by
+    induction n with
+    | zero => exact ⟨Functor.Monoidal.εIso H |>.symm⟩
+    | succ n hn =>
+      exact ⟨(Functor.Monoidal.μIso H _ _).symm ≪≫
+        tensorIso hn.some e ≪≫ λ_ _⟩
+  cases d with
+  | ofNat n => exact hn n
+  | negSucc n =>
+    obtain ⟨hf⟩ := nonempty_pullback_ihom f R (tateTwistNat X ℓ (n + 1)) (𝟙_ _)
+    obtain ⟨hg⟩ := nonempty_pullback_ihom g (F.obj R)
+      ((F.mapMod R).obj (tateTwistNat X ℓ (n + 1))) ((F.mapMod R).obj (𝟙_ _))
+    exact ⟨(G.mapMod (F.obj R)).mapIso hf ≪≫ hg ≪≫
+      asIso ((pre (hn (n + 1)).some.inv).app _) ≪≫
+      (ihom _).mapIso (Functor.Monoidal.εIso H).symm ≪≫
+      MonoidalClosed.unitIsoSelf _⟩
+
+private lemma finitelyPresented_of_regular_iso
+    {Y : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R]
+    {M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R}
+    (e : M ≅ Mod.regular R) : Mod.IsFinitelyPresented R M := by
+  refine ⟨1, 0, 0, ⟨?_⟩⟩
+  exact e ≪≫ (biproductUniqueIso (fun _ : Fin 1 ↦ Mod.regular R)).symm ≪≫
+    (cokernelZeroIsoTarget (X := Mod.finiteFree R 0)).symm
 
 /-- Every integer shift of the actual condensed Tate twist is bounded constructible when
 ell is invertible on the scheme. Source: archived upstream Poincare.lean, the lemma
 `boundedConstructible_tateTwistDerived`, and current blueprint `sk-def-sp-tate-twist`
 (blueprint: nt-target-poincare-tate-bc).
 
-Proof plan (the six steps of the node):
-1. Put R_X = p_X^* Z_ell and A_r = (Z/ell^r)_X. The integral coefficient comparison
-   `sk-prop-sfb-qlbar-colimit-x` at E = Q_ell identifies R_X with the inverse limit of A_r.
-   The ring-and-module isomorphism of `lem-pur-condensed-zl-reduction-mod-ell-power`
-   identifies R_X/ell^r with A_r; its compatibility clause identifies successive quotient
-   maps with residue reduction. These inputs impose no further hypothesis on X.
-2. The actual level F_r of `def-pur-condensed-tate-twists` is R_X tensor_Z mu_(ell^r).
-   Since ell^r annihilates the roots sheaf, balancing factors through A_r. Multiplication
-   a tensor z ↦ az and z ↦ 1 tensor z are inverse R_X-linear maps. Locally an element of
-   the constant residue sheaf has an integer representative k, and
-   1 tensor az = 1 tensor kz = k tensor z = a tensor z. For successive transitions both
-   composites are z^(k*ell), so these isomorphisms identify the whole inverse systems.
-   At r = 0 the roots sheaf mu_1 is zero. A cone on the positive levels extends uniquely
-   to this zero level. The universal property of the limit therefore identifies the
-   actual tateModule with the positive-level inverse limit Z_X of roots of unity.
-3. Clause 2 of `lem-pur-twist-sheaf-locally-free`, with E = Q_ell, supplies a pro-etale
-   covering on which Z_X is the completed constant integral coefficient line. It requires
-   exactly the displayed residue-field invertibility hypothesis. Step 1 identifies this
-   coefficient ring with R_X. Restriction to the covering slice preserves the sectionwise
-   tensor and its sheafification. Thus the actual scalar extension tateTwistOne becomes
-   B tensor_R R, identified with B by multiplication and b ↦ b tensor 1. The coefficient
-   comparisons of `sk-prop-sfb-qlbar-colimit-x` identify the restricted coefficient rings.
-4. On this same cover the zero power is B and positive powers are B tensor_B B = B,
-   with inverse b ↦ b tensor 1. A negative power is the internal Hom from its positive
-   opposite power into B. By `def-pur-sheaf-hom`, evaluation at 1 identifies this with B;
-   its inverse sends b to multiplication by b. These maps commute with restrictions.
-   Consequently every signed tateTwist is locally free of rank one on that cover.
-5. Use the single stratum id_X, whose image is the constructible whole space. The scalar
-   model P = B(*) has the rank-one finite presentation with zero relations; its scalar
-   extension is B. This meets `det-def-sfb-constructible-local-model` and
-   `sk-def-sfb-constructible`. For the exact predicate `def-sfb-constructible-module`,
-   inverse image along a covering object is restriction to its slice: the base-change
-   functor has as left adjoint the functor forgetting the map to the covering object,
-   so its sheafified left Kan extension is that restriction
-   (`def-sfb-finite-upper-star`). The local trivializations are therefore finite free
-   presentations in `def-sfb-finitely-presented-module`, proving
-   `def-sfb-locally-finitely-presented` and the required constructibility on the single
-   stratum. The cover need not be finite. The zero module has the rank-zero presentation.
-6. The complex tateTwistDerived is the single complex in degree zero. Its shift by n has
-   tateTwist in degree -n and zero elsewhere, with zero differentials. Computing kernels
-   and images gives H^(-n) = tateTwist and H^i = 0 otherwise. Step 5 makes all these
-   modules constructible, and [-n,-n] bounds the cohomology. This is exactly
-   `def-sfb-bounded-constructible-complexes` and `sk-def-sfb-bounded-constructible`.
-   The empty scheme gives zero sheaves and the same argument applies.
+Proof (the five steps of the node):
+1. The residue-field hypothesis makes ell a unit in every stalk, hence in Gamma(X, O_X) by
+   the ringed-space stalk criterion. The proved first-twist local line
+   `lem-poincare-first-twist-pullback-local-line`, applied to id_X, gives a pro-etale
+   cover on whose members the two raw inverse images of tateTwistOne are regular.
+2. By induction on n, using the unit and tensor comparisons of the monoidal inverse
+   images, the image of tateTwistNat n is regular (`powers_image_regular`).
+3. For a weakly etale inverse image the internal-Hom comparison is an isomorphism
+   (`nonempty_pullback_ihom`, through the concrete module internal Hom `Mod.ihom'`);
+   with `MonoidalClosed.unitIsoSelf` the negative signed twists are regular on the
+   same cover.
+4. On the single stratum X with identity immersion, a regular module has the rank-one
+   presentation with zero relations, so every signed twist is constructible in the
+   sense of `def-sfb-constructible-module`, with no finiteness assumption on X.
+5. `lem-poincare-constructible-shift-single` turns this into bounded constructibility of
+   every shift of the degree-zero single complex tateTwistDerived.
 -/
 theorem boundedConstructible_tateTwistDerived_of_invertible
     (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
     [∀ x : X, Invertible (ℓ : X.residueField x)] (d n : ℤ) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)
-      ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d)) :=
-  sorry
+      ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d)) := by
+  classical
+  have hℓ : IsUnit (ℓ : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    simp only [map_natCast]
+    apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
+    simpa only [map_natCast] using
+      (isUnit_of_invertible (ℓ : X.residueField x)).ne_zero
+  obtain ⟨𝒰, h𝒰⟩ := tateTwistOne_pullback_locally_trivial X ℓ hℓ (𝟙 X)
+  have hM : IsConstructibleModuleObject
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) (tateTwist X ℓ d) := by
+    let S : Scheme.Stratification X :=
+      { n := 1
+        stratum := fun _ ↦ Set.univ
+        isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed
+        isConstructible_stratum := fun _ ↦ Topology.IsConstructible.univ
+        iUnion_stratum_eq_univ := Set.iUnion_const _
+        pairwise_disjoint_stratum := fun i j hij ↦ (hij (Subsingleton.elim i j)).elim
+        domain := fun _ ↦ X
+        immersion := fun _ ↦ 𝟙 X
+        range_immersion := fun _ ↦ Set.range_id' }
+    refine ⟨S, fun a ↦ ⟨𝒰, fun i ↦ ?_⟩⟩
+    have : WeaklyEtale (𝒰.f i) :=
+      Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ 𝒰.mem₀ ⟨i⟩
+    exact finitelyPresented_of_regular_iso _
+      (powers_image_regular X ℓ (𝟙 X) (𝒰.f i) (h𝒰 i).some d).some
+  exact boundedConstructible_shift_single _ (tateTwist X ℓ d) hM n
 
 end AlgebraicGeometry.ProEtale.CondensedRing

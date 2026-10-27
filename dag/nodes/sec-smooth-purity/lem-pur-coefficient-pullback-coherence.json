@@ -13,35 +13,34 @@
  ],
  "proof": [
   {
-   "text": "Represent every input by a common flat-term K-flat complex. The given scalar normalizations provide invertible computation maps, and inverse image preserves the representative class.",
+   "text": "Represent each derived input by a flat-term K-flat complex. Use the existing computation-isomorphism and inverse-image preservation lemmas. Scalar extension preserves this representative class by ringed-topos pullback for the identity inverse image.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topos-kflat-pullback"
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-coefficient-pullback-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "Ordinary insertion fixes the scalar/inverse-image comparison uniquely by tensor generation and module-sheafification uniqueness. The two maps around the associator square take t tensor (s tensor x) to b(s)t tensor x. Thus they are equal chain maps. The representative equations identify these maps with the derived composites. Cancel the invertible computation maps and use the chosen resolution to deduce the composition equation on every derived object.",
-   "uses": [
-    "def-weil-presheaf-modules-sheafification"
-   ],
+   "text": "The composite scalar-extension and inverse-image adjunctions make equality detectable after scalar insertion. The normalization of ordinary scalar associators identifies double insertion with composite insertion. The ordinary_insertion equations and naturality then prove the ordinary composition square, including rings.map_comp transport. On the chosen complexes combine this square with naturality, the representative equations of Comparisons and Normalization, and cancellation of invertible computation maps. Extend equality from these representatives by naturality and the quasi-isomorphism from a K-flat resolution.",
+   "uses": [],
    "elementary": true
   },
   {
-   "text": "Both scalar unitors are multiplication. The identity comparison and its rings.map_id transport therefore make the unit square commute on ordinary tensors. Descend its equality using the representative equations for e and the units, giving the exact PullbackCoherence.unit equation.",
+   "text": "The multiplication normalization identifies insertion followed by either ordinary unit with the identity. Composite-adjunction injectivity and ordinary_insertion give the ordinary unit square, including rings.map_id transport. Apply the unit representative formulas and naturality of the exact inverse-image derived comparison. Cancel its invertible factor and extend from flat-term K-flat representatives by a resolution.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-presheaf-modules-sheafification",
   "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topos-kflat-pullback"
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-coefficient-pullback-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6D, common K-flat representatives for pullback composition; explicit balanced double-tensor and scalar multiplication calculations.; explicit normalization and transport details as in the proof steps."
+  "place": "Tag 0D6D, common K-flat representatives for pullback composition. M6: ordinary coherence from insertion normalization and composite-adjunction injectivity; derived coherence from representative equations and naturality, with explicit map_comp and map_id transports."
  },
  "mathlib_searches": [
   {
@@ -126,14 +125,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "C-eb4db",
-  "group": "R4",
+  "reviewer": "COMPILER",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261020T221333-L-4175763",
+  "landing": "20261024T204633-L-3811031",
   "kind": "interface",
-  "note": "independent cc review: delivered Data module vs live item module (verbatim move of 16 public records + 6 Prop cache instances, change record lists all 8 users); item proof vs the 6 sublemma nodes; sorry statements PullbackComparison/PullbackCoherence vs Stacks 03EL/0G7E/0D6D; importers RingedRefinementData/RingedRefinementClopen compiled against the delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -3,12 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q25
 -/
+module
 
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Sheaf.AlgebraicGeometry.NormalizedBlowupCalculus
-import Mathlib.AlgebraicGeometry.Gluing
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.Algebra.MonoidAlgebra.Basic
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Sheaf.AlgebraicGeometry.NormalizedBlowupCalculus
+public import Mathlib.AlgebraicGeometry.Gluing
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.Algebra.MonoidAlgebra.Basic
+import Sheaf.AlgebraicGeometry.MonoidGenericSingletonAffine
+import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Fine monoschemes, toric realization, and normalized towers
@@ -21,6 +24,8 @@ The realization is the actual colimit of the affine monoid-algebra diagram. The 
 localization obligations justify that colimit; they do not choose undetermined data.
 -/
 
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -217,7 +222,10 @@ Proof: the defining colimit-desc equation gives its restriction to every chart, 
 the Spec map of the scalar inclusion k → k[P]. -/
 theorem realizationι_over (k : Type u) [Field k] (M : Fine.{u}) (U : AffineOpens M) :
     realizationι k M U ≫ realizationToBase k M = (baseCocone k M).ι.app U := by
-  sorry
+  let : ∀ {U V : AffineOpens M} (f : U ⟶ V),
+      IsOpenImmersion ((realizationDiagram k M).map f) := realizationDiagram_open k M
+  let := realizationDiagram_locallyDirected k M
+  exact colimit.ι_desc (baseCocone k M) U
 
 /-- Realization charts are open immersions into the gluing.
 Source: ILO VIII 3.2.2 (blueprint: def-trf-monoscheme-toric-realization).
@@ -226,7 +234,11 @@ space diagram is locally directed. The open-gluing construction therefore makes 
 colimit injection an open immersion, including charts in a disconnected monoscheme. -/
 theorem realizationι_open (k : Type u) [Field k] (M : Fine.{u}) (U : AffineOpens M) :
     IsOpenImmersion (realizationι k M U) := by
-  sorry
+  let : ∀ {U V : AffineOpens M} (f : U ⟶ V),
+      IsOpenImmersion ((realizationDiagram k M).map f) := realizationDiagram_open k M
+  let := realizationDiagram_locallyDirected k M
+  change IsOpenImmersion (colimit.ι (realizationDiagram k M) U)
+  infer_instance
 
 attribute [instance] realizationι_open
 
@@ -244,6 +256,121 @@ Source: ILO VIII 3.1.10(ii), 3.2.4 (blueprint: def-trf-monoscheme-toric-realizat
 def ComponentAffineOpens {M : Fine.{u}} (C : ToricComponent M) :=
   {U : AffineOpens M // ∀ x : M.space, x ∈ U.1 → ConnectedComponents.mk x = C.component}
 
+private theorem monoidPrime_ext {P : Type u} [CommMonoid P]
+    {x y : FineFan.MonoidPrime P} (h : x.carrier = y.carrier) : x = y := by
+  cases x
+  cases y
+  congr 1
+  exact SetLike.coe_injective h
+
+private def emptyPrime (P : Type u) [CommMonoid P] : FineFan.MonoidPrime P where
+  carrier := ∅
+  smul_mem' := by simp
+  proper := by
+    intro h
+    have h1 : (1 : P) ∈ (∅ : Set P) := h.symm ▸ Set.mem_univ 1
+    exact h1
+  complement_mul := by simp
+
+private theorem emptyPrime_specializes {P : Type u} [CommMonoid P]
+    (x : FineFan.MonoidPrime P) : emptyPrime P ⤳ x := by
+  apply specializes_iff_forall_open.mpr
+  intro S hS hx
+  change TopologicalSpace.GenerateOpen _ S at hS
+  induction hS with
+  | basic S hS =>
+    obtain ⟨a, rfl⟩ := hS
+    exact fun h ↦ h
+  | univ => trivial
+  | inter S T hS hT ihS ihT => exact ⟨ihS hx.1, ihT hx.2⟩
+  | sUnion S hS ih =>
+    obtain ⟨T, hT, hx⟩ := hx
+    exact ⟨T, hT, ih T hT hx⟩
+
+private theorem monoidPrime_t0 (P : Type u) [CommMonoid P] :
+    T0Space (FineFan.MonoidPrime P) := by
+  refine ⟨fun x y h ↦ monoidPrime_ext ?_⟩
+  ext a
+  exact not_iff_not.mp (h.mem_open_iff (FineFan.basicOpen a).isOpen)
+
+private theorem space_t0 (M : Fine.{u}) : T0Space M.space := by
+  apply T0Space.of_open_cover
+  intro x
+  obtain ⟨n, c, hc⟩ := M.finiteCover
+  obtain ⟨i, hi⟩ := hc x
+  have := monoidPrime_t0 (c i).monoid
+  let e : (c i).openSet ≃ₜ FineFan.MonoidPrime (c i).monoid :=
+    TopCat.homeoOfIso ((SheafedSpace.forget CommMonCat).mapIso (c i).iso)
+  exact ⟨(c i).openSet, hi, (c i).openSet.isOpen, e.symm.t0Space⟩
+
+private theorem exists_affineOpen (M : Fine.{u}) (x : M.space) :
+    ∃ U : AffineOpens M, x ∈ U.1 := by
+  obtain ⟨n, c, hc⟩ := M.finiteCover
+  obtain ⟨i, hi⟩ := hc x
+  exact ⟨⟨(c i).openSet, (c i).monoid, (c i).fine, ⟨(c i).iso⟩⟩, hi⟩
+
+private theorem affineOpen_generic (M : Fine.{u}) (U : AffineOpens M) :
+    ∃ η : M.space, η ∈ U.1 ∧ (∀ x : M.space, x ∈ U.1 → η ⤳ x) ∧
+      ∀ z : M.space, z ⤳ η → z = η := by
+  have := space_t0 M
+  obtain ⟨P, _, ⟨h⟩⟩ := U.2
+  let e : U.1 ≃ₜ FineFan.MonoidPrime P :=
+    TopCat.homeoOfIso ((SheafedSpace.forget CommMonCat).mapIso h)
+  let η : M.space := (e.symm (emptyPrime P)).val
+  have hη : η ∈ U.1 := (e.symm (emptyPrime P)).property
+  have hspec : ∀ x : M.space, x ∈ U.1 → η ⤳ x := by
+    intro x hx
+    have h := (emptyPrime_specializes (e ⟨x, hx⟩)).map e.symm.continuous
+    simpa [η] using h.map continuous_subtype_val
+  refine ⟨η, hη, hspec, fun z hz ↦ ?_⟩
+  exact (hz.antisymm (hspec z (hz.mem_open U.1.isOpen hη))).eq
+
+private theorem existsUnique_maximalGeneralization (M : Fine.{u}) (x : M.space) :
+    ∃! η : M.space, η ⤳ x ∧ ∀ z : M.space, z ⤳ η → z = η := by
+  obtain ⟨U, hx⟩ := exists_affineOpen M x
+  obtain ⟨η, hη, hspec, hmax⟩ := affineOpen_generic M U
+  refine ⟨η, ⟨hspec x hx, hmax⟩, fun ζ hζ ↦ ?_⟩
+  exact (hζ.2 η (hspec ζ (hζ.1.mem_open U.1.isOpen hx))).symm
+
+private noncomputable def maximalGeneralization (M : Fine.{u}) (x : M.space) : M.space :=
+  (existsUnique_maximalGeneralization M x).choose
+
+private theorem maximalGeneralization_spec (M : Fine.{u}) (x : M.space) :
+    maximalGeneralization M x ⤳ x ∧
+      ∀ z : M.space, z ⤳ maximalGeneralization M x → z = maximalGeneralization M x :=
+  (existsUnique_maximalGeneralization M x).choose_spec.1
+
+private theorem maximalGeneralization_on_chart (M : Fine.{u}) (U : AffineOpens M)
+    (η : M.space) (hspec : ∀ x : M.space, x ∈ U.1 → η ⤳ x)
+    (hmax : ∀ z : M.space, z ⤳ η → z = η) (x : M.space) (hx : x ∈ U.1) :
+    maximalGeneralization M x = η :=
+  (existsUnique_maximalGeneralization M x).unique (maximalGeneralization_spec M x)
+    ⟨hspec x hx, hmax⟩
+
+private theorem maximalGeneralization_locallyConstant (M : Fine.{u}) :
+    IsLocallyConstant (maximalGeneralization M) := by
+  apply (IsLocallyConstant.iff_exists_open _).mpr
+  intro x
+  obtain ⟨U, hx⟩ := exists_affineOpen M x
+  obtain ⟨η, hη, hspec, hmax⟩ := affineOpen_generic M U
+  refine ⟨U.1, U.1.isOpen, hx, fun y hy ↦ ?_⟩
+  rw [maximalGeneralization_on_chart M U η hspec hmax y hy,
+    maximalGeneralization_on_chart M U η hspec hmax x hx]
+
+private theorem specializes_component {M : Fine.{u}} {x y : M.space} (h : x ⤳ y) :
+    ConnectedComponents.mk x = ConnectedComponents.mk y := by
+  have hmem : y ∈ connectedComponent x :=
+    (isConnected_singleton.closure.subset_connectedComponent (subset_closure (by simp)))
+      h.mem_closure
+  exact (ConnectedComponents.coe_eq_coe'.mpr hmem).symm
+
+private theorem affineOpen_component {M : Fine.{u}} (U : AffineOpens M)
+    {x y : M.space} (hx : x ∈ U.1) (hy : y ∈ U.1) :
+    ConnectedComponents.mk x = ConnectedComponents.mk y := by
+  obtain ⟨η, _, hspec, _⟩ := affineOpen_generic M U
+  exact (specializes_component (hspec x hx)).symm.trans
+    (specializes_component (hspec y hy))
+
 /-- Every component has its unique generic point, lying in all its affine opens.
 Source: ILO VIII 3.1.10(ii), 3.2.4 (blueprint: def-trf-monoscheme-toric-realization).
 Proof: the generic point of Spec P is the empty prime and belongs to every nonempty
@@ -254,7 +381,44 @@ is unique because these affine opens form a basis and monoid spectra are T0. -/
 theorem existsUnique_componentGenericPoint {M : Fine.{u}} (C : ToricComponent M) :
     ∃! η : M.space, ConnectedComponents.mk η = C.component ∧
       ∀ U : ComponentAffineOpens C, η ∈ U.1.1 := by
-  sorry
+  classical
+  obtain ⟨x, hx⟩ := ConnectedComponents.surjective_coe C.component
+  let η := maximalGeneralization M x
+  have hηC : ConnectedComponents.mk η = C.component :=
+    (specializes_component (maximalGeneralization_spec M x).1).trans hx
+  have hηU : ∀ U : ComponentAffineOpens C, η ∈ U.1.1 := by
+    intro U
+    obtain ⟨ζ, hζ, _, _⟩ := affineOpen_generic M U.1
+    have heq : ConnectedComponents.mk ζ = ConnectedComponents.mk x :=
+      (U.2 ζ hζ).trans hx.symm
+    have heqη : maximalGeneralization M ζ = η :=
+      (maximalGeneralization_locallyConstant M).apply_eq_of_isPreconnected
+        isConnected_connectedComponent.isPreconnected
+        (ConnectedComponents.coe_eq_coe'.mp heq) mem_connectedComponent
+    rw [← heqη]
+    exact (maximalGeneralization_spec M ζ).1.mem_open U.1.1.isOpen hζ
+  refine ⟨η, ⟨hηC, hηU⟩, ?_⟩
+  intro ζ hζ
+  obtain ⟨U, hxU⟩ := exists_affineOpen M x
+  let V : ComponentAffineOpens C :=
+    ⟨U, fun y hy ↦ (affineOpen_component U hy hxU).trans hx⟩
+  obtain ⟨P, hP, ⟨e⟩⟩ := U.2
+  have hηspec : ∀ y : M.space, y ∈ U.1 → η ⤳ y := by
+    intro y hy
+    obtain ⟨ξ, hξ, hspec, hmax⟩ := affineOpen_generic M U
+    rw [show η = ξ from maximalGeneralization_on_chart M U ξ hspec hmax x hxU]
+    exact hspec y hy
+  obtain ⟨W, Q, hQ, hW, eW⟩ := monoid_generic_singleton_affine M.space U.1 P hP e
+    η (hηU V) hηspec
+  let W' : ComponentAffineOpens C :=
+    ⟨⟨W, Q, hQ, eW⟩, by
+      intro y hy
+      change y ∈ (W : Set M.space) at hy
+      rw [hW] at hy
+      exact (Set.mem_singleton_iff.mp hy) ▸ hηC⟩
+  have hζW := hζ.2 W'
+  change ζ ∈ (W : Set M.space) at hζW
+  rwa [hW, Set.mem_singleton_iff] at hζW
 
 /-- The uniquely determined generic point of this component, as a point of M.
 Source: ILO VIII 3.1.10(ii) (blueprint: def-trf-monoscheme-toric-realization). -/
@@ -267,7 +431,7 @@ Source: ILO VIII 3.1.10(ii) (blueprint: def-trf-monoscheme-toric-realization).
 Proof: apply the specification of the uniquely determined generic point. -/
 theorem ToricComponent.generic {M : Fine.{u}} (C : ToricComponent M)
     (U : ComponentAffineOpens C) : C.genericPoint ∈ U.1.1 := by
-  sorry
+  exact (Classical.choose_spec (existsUnique_componentGenericPoint C).exists).2 U
 
 /-- The component's open subscheme of k[M], the union of its affine chart images.
 This is the realization of that component inside the original realization.
@@ -295,7 +459,10 @@ image of the open-subscheme embedding is exactly that union. -/
 theorem componentChart_range (k : Type u) [Field k] {M : Fine.{u}}
     (C : ToricComponent M) (U : ComponentAffineOpens C) :
     Set.range (realizationι k M U.1) ⊆ Set.range (componentι k C) := by
-  sorry
+  have h : (realizationι k M U.1).opensRange ≤ componentOpen k C :=
+    le_iSup (fun V : ComponentAffineOpens C ↦ (realizationι k M V.1).opensRange) U
+  intro x hx
+  exact (Scheme.Opens.range_ι (componentOpen k C)).symm.subset (h hx)
 
 /-- The canonical chart map to the component open, obtained by factoring its ambient map.
 Source: ILO VIII 3.2.4 (blueprint: def-trf-monoscheme-toric-realization). -/
@@ -318,7 +485,9 @@ chart embedding. Compose with realizationToBase and apply realizationι_over. -/
 theorem componentChart_over (k : Type u) [Field k] {M : Fine.{u}}
     (C : ToricComponent M) (U : ComponentAffineOpens C) :
     componentChart k C U ≫ componentToBase k C = (baseCocone k M).ι.app U.1 := by
-  sorry
+  unfold componentToBase componentChart componentι
+  rw [← Category.assoc, IsOpenImmersion.lift_fac]
+  exact realizationι_over k M U.1
 
 /-- The generic lattice, using the canonical completion of the generic group stalk of M.
 Source: ILO VIII 3.1.4(i), 3.2.4 (blueprint: def-trf-monoscheme-toric-realization). -/
@@ -715,6 +884,76 @@ noncomputable def realizationMap (k : Type u) [Field k] {N M : Fine.{u}} (f : Ho
     realization k N ⟶ realization k M :=
   Classical.choose (existsUnique_realizationMap k f).exists
 
+private theorem exists_component_singleton_chart {M : Fine.{u}} (C : ToricComponent M) :
+    ∃ W : ComponentAffineOpens C, (W.1.1 : Set M.space) = {C.genericPoint} := by
+  obtain ⟨U, hxU⟩ := exists_affineOpen M C.genericPoint
+  obtain ⟨ξ, hξ, hspec, _⟩ := affineOpen_generic M U
+  obtain ⟨P, hP, ⟨e⟩⟩ := U.2
+  obtain ⟨W, Q, hQ, hW, eW⟩ := monoid_generic_singleton_affine M.space U.1 P hP e
+    ξ hξ hspec
+  have hξC : ConnectedComponents.mk ξ = C.component :=
+    (specializes_component (hspec C.genericPoint hxU)).trans
+      (Classical.choose_spec (existsUnique_componentGenericPoint C).exists).1
+  let V : ComponentAffineOpens C :=
+    ⟨⟨W, Q, hQ, eW⟩, by
+      intro y hy
+      change y ∈ (W : Set M.space) at hy
+      rw [hW] at hy
+      exact (Set.mem_singleton_iff.mp hy) ▸ hξC⟩
+  have heq := C.generic V
+  change C.genericPoint ∈ (W : Set M.space) at heq
+  rw [hW, Set.mem_singleton_iff] at heq
+  exact ⟨V, hW.trans (congrArg Set.singleton heq.symm)⟩
+
+private theorem componentChart_fac (k : Type u) [Field k] {M : Fine.{u}}
+    (C : ToricComponent M) (U : ComponentAffineOpens C) :
+    componentChart k C U ≫ componentι k C = realizationι k M U.1 := by
+  unfold componentChart componentι
+  exact IsOpenImmersion.lift_fac _ _ _
+
+private theorem componentChart_naturality (k : Type u) [Field k] {M : Fine.{u}}
+    (C : ToricComponent M) {W U : ComponentAffineOpens C} (h : W.1.1 ≤ U.1.1) :
+    (realizationDiagram k M).map (homOfLE h) ≫ componentChart k C U =
+      componentChart k C W := by
+  apply (cancel_mono (componentOpen k C).ι).mp
+  change (_ ≫ componentChart k C U) ≫ componentι k C =
+    componentChart k C W ≫ componentι k C
+  rw [Category.assoc, componentChart_fac, componentChart_fac]
+  let : ∀ {A B : AffineOpens M} (f : A ⟶ B),
+      IsOpenImmersion ((realizationDiagram k M).map f) := realizationDiagram_open k M
+  let := realizationDiagram_locallyDirected k M
+  exact colimit.w (realizationDiagram k M) (homOfLE h)
+
+private theorem degree_restrict {M : Fine.{u}} (C : ToricComponent M)
+    {W U : ComponentAffineOpens C} (h : W.1.1 ≤ U.1.1) :
+    (degree C W).comp (M.space.presheaf.map (homOfLE h).op).hom = degree C U := by
+  apply MonoidHom.ext
+  intro s
+  have hg : M.space.presheaf.map (homOfLE h).op ≫
+      FineFan.germ M.space.presheaf W.1.1 C.genericPoint (C.generic W) =
+        FineFan.germ M.space.presheaf U.1.1 C.genericPoint (C.generic U) :=
+    colimit.w (FineFan.stalkDiagram M.space.presheaf C.genericPoint)
+      (show op (⟨U.1.1, C.generic U⟩ : OpenNhds C.genericPoint) ⟶
+        op (⟨W.1.1, C.generic W⟩ : OpenNhds C.genericPoint) from (homOfLE h).op)
+  exact congrArg Algebra.GrothendieckGroup.of (ConcreteCategory.congr_hom hg s)
+
+private theorem torusChart_naturality (k : Type u) [Field k] {M : Fine.{u}}
+    (C : ToricComponent M) {W U : ComponentAffineOpens C} (h : W.1.1 ≤ U.1.1) :
+    Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom k (degree C U))) ≫
+        componentChart k C U =
+      Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom k (degree C W))) ≫
+        componentChart k C W := by
+  rw [← componentChart_naturality k C h, ← Category.assoc]
+  rw [show (realizationDiagram k M).map (homOfLE h) =
+    Spec.map ((monoidAlgebra k).map (M.space.presheaf.map (homOfLE h).op)) from rfl,
+    ← Spec.map_comp]
+  congr 2
+  apply CommRingCat.hom_ext
+  change MonoidAlgebra.mapDomainRingHom k (degree C U) =
+    (MonoidAlgebra.mapDomainRingHom k (degree C W)).comp
+      (MonoidAlgebra.mapDomainRingHom k (M.space.presheaf.map (homOfLE h).op).hom)
+  rw [← MonoidAlgebra.mapDomainRingHom_comp, degree_restrict]
+
 /-- The dense torus embedding is the localization map specified by every component chart.
 Source: ILO VIII 3.2.4 (blueprint: def-trf-monoscheme-toric-realization).
 Proof: on each affine component chart, localize its monoid to the generic group. The
@@ -727,7 +966,17 @@ theorem existsUnique_torusEmbedding (k : Type u) [Field k] {M : Fine.{u}}
       ∀ U : ComponentAffineOpens C,
         j = Spec.map (CommRingCat.ofHom (MonoidAlgebra.mapDomainRingHom k (degree C U))) ≫
           componentChart k C U := by
-  sorry
+  obtain ⟨W, hW⟩ := exists_component_singleton_chart C
+  refine ⟨Spec.map (CommRingCat.ofHom
+    (MonoidAlgebra.mapDomainRingHom k (degree C W))) ≫ componentChart k C W, ?_, ?_⟩
+  · intro U
+    apply (torusChart_naturality k C ?_).symm
+    intro x hx
+    change x ∈ (W.1.1 : Set M.space) at hx
+    rw [hW, Set.mem_singleton_iff] at hx
+    exact hx ▸ C.generic U
+  · intro j hj
+    exact hj W
 
 /-- The original torus as an open subscheme of the ambient realization.
 Source: ILO VIII 3.2.4 (blueprint: def-trf-monoscheme-toric-realization). -/
@@ -737,3 +986,4 @@ noncomputable def torusEmbedding (k : Type u) [Field k] {M : Fine.{u}}
 
 end Monoscheme
 end AlgebraicGeometry
+

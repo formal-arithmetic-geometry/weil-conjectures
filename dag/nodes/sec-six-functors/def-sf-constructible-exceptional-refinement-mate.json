@@ -1,0 +1,108 @@
+{
+ "id": "def-sf-constructible-exceptional-refinement-mate",
+ "kind": "definition",
+ "title": "Adjunction conjugate completing a left refinement",
+ "statement": "Given a prime l, algebraic closure Omega and two exact coefficient operations A and B on the same finite, integral, rational or closed stage, a shift-compatible natural isomorphism alpha from A.F to B.F determines a RefinementComparison. Its left map is alpha and its right map is conjugateIsoEquiv B.adjunction A.adjunction alpha. The counit and unit equations hold, and the right map commutes with shifts because the units, counits and alpha do. No geometric refinement hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-weil-exceptional-inverse-image.md",
+  "place": "Adjunction conjugate completing a left refinement; normalized coefficient construction in the existing assembly node."
+ },
+ "proof": [
+  {
+   "text": "Apply Mathlib conjugateIsoEquiv; its defining counit and unit equations give the two equations. Expand the right transformation as unit, whiskered alpha and counit; each factor commutes with integer shifts.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Lemma 5.22, Proposition 5.24; synthesis of the existing normalized construction steps."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Assemble compatible compact support exceptional adjunctions for finite integral rational coefficients and common finite fields",
+   "results": "MeasureTheory.Integrable.exists_hasCompactSupport_lintegral_sub_le, MeasureTheory.MemLp.exists_hasCompactSupport_integral_rpow_sub_le, MeasureTheory.Integrable.exists_hasCompactSupport_integral_sub_le, HasCompactSupport.exist_eLpNorm_sub_le_of_continuous, exists_lt_rieszContentAux_add_pos, HasCompactSupport.exists_simpleFunc_approx_of_prod, MeasureTheory.MemLp.exists_hasCompactSupport_eLpNorm_sub_le, exists_continuous_sum_one_of_isOpen_isCompact",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated, CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_coefficient_construction|CoefficientConstructionRing|exceptionalIntegralReconstruction",
+   "results": "No matches.",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category constructible exceptional adjunction coefficient field descent normalized compactification refinement",
+   "results": "CategoryTheory.Adjunction.derivedη.congr_simp, HasDerivedCategory.standard, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+   "date": "2026-10-25",
+   "verdict": "No equivalent normalized coefficient construction or geometric refinement theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstructibleExceptionalCoefficientConstruction",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-tensor-hom",
+   "place": "Adjunction conjugate completing a left refinement",
+   "via": [
+    "lem-sf-constructible-exceptional-coefficient-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstructibleExceptionalRefinementMate",
+  "file": "lean/Sheaf/Paper/ConstructibleExceptionalRefinementMate.lean",
+  "declaration": "WeilConjectures.ConstructibleExceptionalCoefficients.refinementComparisonOfLeft",
+  "statement": "def refinementComparisonOfLeft {X Y : Scheme.{max u v}} {s : Stage.{max u v} l}\n    (A B : Operation.{u, v} l Ω X Y s) (α : A.F ≅ B.F)\n    (hα : α.hom.CommShift ℤ) : RefinementComparison.{u, v} l Ω A B",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1106a",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T100757-L-3622475",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-1106a",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261025T100757-L-3622475",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module, ConstructionData (verbatim move of old item, diffed against clone), RefinementMate, AssemblyData, Stages, LeftRefinements and 6 node files against the node statements, GeneralAlgebraicallyClosedCoefficients pair-category definitions, and the 3 direct importers (compiled)"
+ }
+}

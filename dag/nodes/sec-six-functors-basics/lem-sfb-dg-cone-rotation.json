@@ -1,0 +1,204 @@
+{
+ "id": "lem-sfb-dg-cone-rotation",
+ "kind": "statement",
+ "title": "DG cone rotation by an A-linear homotopy equivalence",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$. Write $K_A$ for the category of these modules with degree-preserving $A$-linear chain maps modulo homotopies $f-g=dh+hd$, where $h$ is $A$-linear of degree $-1$. Shifts have $M[k]^i=M^{i+k}$, differential $(-1)^kd_M$, and the unchanged right action. For a chain map $f:X\\to Y$, put $C(f)^i=Y^i\\oplus X^{i+1}$, $d_{C(f)}(y,x)=(d_Yy+f(x),-d_Xx)$, with componentwise right action. Put $i_f(y)=(y,0)$ and $p_f(y,x)=x$. Write $T_f$ for the triangle $X\\xrightarrow fY\\xrightarrow{i_f}C(f)\\xrightarrow{-p_f}X[1]$ in $K_A$. For every $f:X\\to Y$, the rotation $(Y,C(f),X[1],i_f,-p_f,-f[1])$ of $T_f$ is isomorphic to $T_{i_f}$ in the category of triangles of $K_A$, with identity components on $Y$ and $C(f)$. More explicitly, in coordinates $C(i_f)^n=Y^n\\oplus X^{n+1}\\oplus Y^{n+1}$ the maps $q(y,x,y')=-x$ and $s(x)=(0,-x,f(x))$ are $A$-linear chain maps $C(i_f)\\rightleftarrows X[1]$ inverse up to $A$-linear homotopy, with $q s=1$, $q i_{i_f}=-p_f$, and $(-p_{i_f})s=-f[1]$. The inverse rotation $(C(f)[-1],X,Y,p_f[-1],f,i_f)$ is likewise isomorphic to the standard cone triangle $T_{p_f[-1]}$, with identity components on its first two objects.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KB, lemma-rotate-cone; Tag 09KC, lemma-rotate-triangle; Tag 09KH, lemma-homotopy-category-pre-triangulated, proof of TR2. The explicit maps are the cone-coordinate formulation of these rotations, with the -p convention of Tag 09KF, lemma-the-same-up-to-isomorphisms."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-dg-module-cone-calculus"
+ ],
+ "proof": [
+  {
+   "text": "All constructions below use the unchanged right action in the statement. It makes a shift a DG module: for $m\\in M[k]^n$, $(-1)^kd_M(ma)=(-1)^kd_M(m)a+(-1)^{k+n+k}m\\,d_A(a)=d_{M[k]}(m)a+(-1)^nm\\,d_A(a)$. The same calculation in the two cone coordinates gives its Leibniz rule, and $d_{C(f)}^2(y,x)=(d_Yf(x)-f(d_Xx),0)=0$. Thus all the following iterated cones and shifts are DG modules. Every coordinate formula below is additive and $A$-linear because it uses only projections, inclusions, signs and the $A$-linear map $f$; the homotopies have degree $-1$. No differential is assumed to be $A$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "definition-shift and definition-cone, checked directly for right modules; Tag 09KF, lemma-the-same-up-to-isomorphisms (signed cone convention)."
+   }
+  },
+  {
+   "text": "Put $E=C(i_f)$. For $(y,x,y')\\in E^n=Y^n\\oplus X^{n+1}\\oplus Y^{n+1}$ its differential is $D(y,x,y')=(d_Yy+fx+y',-d_Xx,-d_Yy')$. Consequently $qD(y,x,y')=d_Xx=d_{X[1]}q(y,x,y')$. Also $Ds(x)=(0,d_Xx,-f(d_Xx))=s(-d_Xx)=s(d_{X[1]}x)$. This proves that the specified $q$ and $s$ are chain maps. They satisfy $qs=1$ and $sq(y,x,y')=(0,x,-fx)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KB (lemma-rotate-cone) and 09KF (lemma-the-same-up-to-isomorphisms (1)), in cone coordinates."
+   }
+  },
+  {
+   "text": "Define $H:E^n\\to E^{n-1}$ by $H(y,x,y')=(0,0,y)$. Then $DH(y,x,y')=(y,0,-d_Yy)$ and $HD(y,x,y')=(0,0,d_Yy+fx+y')$. Hence $DH+HD=(y,0,fx+y')=1_E-sq$. The maps $[q]$ and $[s]$ in $K_A$ are therefore inverse. Moreover $qi_{i_f}(y,x)=-x=-p_f(y,x)$ and $(-p_{i_f})s(x)=-fx=-f[1](x)$, proving all the explicit identities requested.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KF, lemma-the-same-up-to-isomorphisms (1), contraction; Tag 09KH, lemma-homotopy-category-pre-triangulated, forward TR2."
+   }
+  },
+  {
+   "text": "For the remaining triangle square, let $J:E^n\\to Y[1]^{n-1}=Y^n$ be $J(y,x,y')=-y$. The homotopy equation is $d_{Y[1]}J+JD=-fx-y'=(-p_{i_f})-(-f[1])q$. Thus $(1_Y,1_{C(f)},[q])$ is a morphism from $T_{i_f}$ to the rotation of $T_f$: its first square is the identity, its second is $qi_{i_f}=-p_f$, and its third is the displayed homotopy. Its inverse has components $(1_Y,1_{C(f)},[s])$: cancel $[q]$ in the same three square equations using $[q][s]=1=[s][q]$. This is the claimed triangle isomorphism with the first two components fixed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KH, lemma-homotopy-category-pre-triangulated, forward TR2; Tags 09KB and 09KF, with the minus projection convention."
+   }
+  },
+  {
+   "text": "For inverse rotation put $U=C(f)[-1]$ and $g=p_f[-1]:U\\to X$, so $g(y,x)=x$. Write $F=C(g)^n=X^n\\oplus Y^n\\oplus X^{n+1}$, with differential $D'(u,y,x)=(d_Xu+x,d_Yy+fx,-d_Xx)$. Define $r:F\\to Y$ by $r(u,y,x)=fu-y$ and $t:Y\\to F$ by $t(y)=(0,-y,0)$. Then $rD'=f(d_Xu)-d_Yy=d_Yr$ and $D't(y)=(0,-d_Yy,0)=t(d_Yy)$; also $rt=1$ and $tr(u,y,x)=(0,y-fu,0)$. For $H'(u,y,x)=(0,0,u)$, $D'H'=(u,fu,-d_Xu)$ and $H'D'=(0,0,d_Xu+x)$, giving $D'H'+H'D'=1_F-tr$. Hence $[r]$ and $[t]$ are inverse in $K_A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KC, lemma-rotate-triangle, expanded in cone coordinates; Tag 09KH, lemma-homotopy-category-pre-triangulated, inverse TR2; Tag 09KF, signed convention."
+   }
+  },
+  {
+   "text": "The inverse rotation is $(U,X,Y,g,f,i_f)$, since its first arrow is $-(-p_f)[-1]=g$. We have $ri_g=f$ and $(-p_g)t=i_f$ strictly. Identify $U[1]=C(f)$. For $J':F^n\\to C(f)^{n-1}$ given by $J'(u,y,x)=(0,-u)$, one has $d_{C(f)}J'=(-fu,d_Xu)$ and $J'D'=(0,-d_Xu-x)$. Thus $dJ'+J'D'=(-fu,-x)=(-p_g)-i_fr$. Consequently $(1_U,1_X,[r])$ is a morphism from $T_g$ to the inverse rotation, with the first square tautological and the other two established above. Its componentwise inverse $(1_U,1_X,[t])$ satisfies the reverse square equations by cancellation. This proves the inverse-rotation isomorphism, with identity components on its first two objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09KC (lemma-rotate-triangle), 09KF (lemma-the-same-up-to-isomorphisms), and 09KH (lemma-homotopy-category-pre-triangulated, inverse TR2)."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tags 09KB, 09KC, 09KF and 09KH. Explicit DG coordinate calculations expanding the Stacks cone rotations and their A-linear homotopies; no triangulation theorem is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rotation of a mapping cone triangle of right differential graded modules is isomorphic up to A linear homotopy to the cone triangle of the inclusion",
+   "results": "{\"t\": \"2026-10-24T00:38:43Z\", \"tool\": \"leanfinder\", \"query\": \"Rotation of a mapping cone triangle of right differential graded modules is isomorphic up to A linear homotopy to the cone triangle of the inclusion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.rotateTrianglehIso\", \"CochainComplex.trianglehOfDegreewiseSplitRotateRotateIso\", \"CochainComplex.mappingCone.triangleRotateIsoTriangleOfDegreewiseSplit\", \"CochainComplex.triangleOfDegreewiseSplitRotateRotateIso\", \"CochainComplex.mappingCone.trianglehRotateIsoTrianglehOfDegreewiseSplit\", \"CochainComplex.mappingCone.rotateHomotopyEquiv\", \"CochainComplex.mappingCone.rotateHomotopyEquivComm₂Homotopy\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₃_assoc\"], \"digest\": \"19ccf73e2966f94d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rotation of the cone triangle of a DG A module map preserves its A linear homotopy type",
+   "results": "{\"t\": \"2026-10-24T00:39:13Z\", \"tool\": \"leansearch\", \"query\": \"Rotation of the cone triangle of a DG A module map preserves its A linear homotopy type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle'\", \"CategoryTheory.Pretriangulated.rotate\", \"HomotopyCategory.Pretriangulated.invRotate_distinguished_triangle'\", \"CategoryTheory.Pretriangulated.triangleRotation\", \"CategoryTheory.Functor.rotate_essImageDistTriang\", \"CategoryTheory.Pretriangulated.instIsEquivalenceTriangleRotate\", \"CochainComplex.mappingCone.mapTrianglehIso\"], \"digest\": \"50691d6307f94f25\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"rotateHomotopyEquiv\"",
+   "results": "{\"t\": \"2026-10-24T00:39:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"mappingCone\\\", \\\"rotateHomotopyEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.rotateHomotopyEquiv\", \"CochainComplex.mappingCone.rotateHomotopyEquivComm₂Homotopy\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₃\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₃_assoc\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₂\", \"CochainComplex.mappingCone.rotateHomotopyEquiv_comm₂_assoc\"], \"digest\": \"88b9f258bb29e3ab\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "grep",
+   "query": "rotateTrianglehIso|rotateHomotopyEquiv",
+   "results": "{\"t\": \"2026-10-24T00:39:13Z\", \"tool\": \"grep\", \"query\": \"rotateTrianglehIso|rotateHomotopyEquiv\", \"sub\": \"Algebra/Homology/HomotopyCategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\"], \"digest\": \"ae123957ec90ad82\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits are for ordinary cochain complexes in a fixed preadditive category. A DG module over a general DG algebra is not such a complex of A-modules: its differential obeys the Leibniz rule rather than A-linearity. Forgetting to abelian groups loses A-linear maps and homotopies. A DG-action lift of the cone identities is a real argument, not a one-line specialization. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336 and Triangulated.lean:25-170; DifferentialObject.lean:12-18 has no DG-algebra action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mapping cone of a DG module inclusion contracts A linearly to the shifted source with homotopies preserving the graded algebra action",
+   "results": "{\"t\": \"2026-10-24T01:23:03Z\", \"tool\": \"leanfinder\", \"query\": \"A mapping cone of a DG module inclusion contracts A linearly to the shifted source with homotopies preserving the graded algebra action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone.inl_v_descCochain_v\", \"CochainComplex.mappingCone.inl_v_d\", \"CochainComplex.mappingCone.inl_desc\", \"CochainComplex.mappingCone.d_snd_v'\", \"CochainComplex.mappingCone.inl_descCochain\", \"CochainComplex.mappingCone.id_X\", \"CochainComplex.mappingCone.δ_inl\"], \"digest\": \"23281dcb943347db\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the declarations concern ordinary cochain complexes in a fixed preadditive category, not modules over a general DG algebra with Leibniz differential and A-linear homotopies. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336; DifferentialObject.lean:12-18. The coordinate maps must be proved A-linear; forgetting the action does not give the statement in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DifferentialGraded|differential graded",
+   "results": "{\"t\": \"2026-10-24T01:23:52Z\", \"tool\": \"grep\", \"query\": \"DGModule|DifferentialGraded|differential graded\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\", \"Mathlib/Algebra/Homology/DifferentialObject.lean\"], \"digest\": \"b00540e86065b3f2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the declarations concern ordinary cochain complexes in a fixed preadditive category, not modules over a general DG algebra with Leibniz differential and A-linear homotopies. Read Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:45-62,208-336; DifferentialObject.lean:12-18. The coordinate maps must be proved A-linear; forgetting the action does not give the statement in one line."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dg-derived-admissible-triangles",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P. Supporting input for the finite-filtration induction: admissible exact triangles in the DG derived category (09K8, 09KW, 09KX). Supporting cone calculation: Tag 09KB, lemma-rotate-cone; Tag 09KC, lemma-rotate-triangle; Tag 09KH, lemma-homotopy-category-pre-triangulated, proof of TR2. The explicit maps are the cone-coordinate formulation of these rotations, with the -p convention of Tag 09KF, lemma-the-same-up-to-isomorphisms.",
+   "via": [
+    "lem-sfb-dg-derived-admissible-triangles",
+    "lem-sfb-dg-finite-cell-compact",
+    "lem-sfb-dg-countable-compact-telescope",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-cone-rotation",
+  "worker": "stage1",
+  "summary": "Proved both signed cone rotations by explicit A-linear chain maps and degree-minus-one homotopies. Computed all triangle squares, including the non-strict third squares. Kept the statement and its size dependency unchanged, searched the project/DAG/blueprint and Mathlib, and created no subordinate nodes because every remaining argument is direct coordinate substitution.",
+  "blueprint": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 0CRM, lemma-countable, implication (2) to (1); derived.tex Tags 090Z, definition-derived-colimit and 0CRH, remark-map-from-derived-colimit, for the legs. Supporting input for 0CRM (2) to (1): Tag 09R3, proposition-compact, implication (2) to (1), with the identity retraction of P. Supporting input for the finite-filtration induction: admissible exact triangles in the DG derived category (09K8, 09KW, 09KX). Supporting cone calculation: Tag 09KB, lemma-rotate-cone; Tag 09KC, lemma-rotate-triangle; Tag 09KH, lemma-homotopy-category-pre-triangulated, proof of TR2. The explicit maps are the cone-coordinate formulation of these rotations, with the -p convention of Tag 09KF, lemma-the-same-up-to-isomorphisms. Latest blueprint: sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md (3), inherited supporting branch. The immediate parent uses this item in step 2 (TR2). blueprint_refs ancestor returns None: inherited null ancestor and via retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N5-cc2779b0e",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-cc2779b0e (reviewer sub-agent of L); spot-checked: PASS. One commit with the item and its report; no new nodes. The statement, stmt_deps and blueprint are byte-identical to side-live; live is unsplit with no repair note, so nothing supersedes this delivery. I recomputed all six coordinate steps. Step 1: the Leibniz rule on shifts and cones with unchanged right action, and d_C^2=0. Step 2: in E=C(i_f), D=(dy+fx+y',-dx,-dy'); q=-x and s=(0,-x,fx) are chain maps with qs=1. Step 3: H=(0,0,y) gives DH+HD=1-sq; qi_{i_f}=-p_f and (-p_{i_f})s=-f[1]. Step 4: J=-y gives the third-square homotopy -fx-y'. Step 5: in F=C(p_f[-1]), D'=(du+x,dy+fx,-dx); r=fu-y and t=(0,-y,0) are chain maps and H'=(0,0,u) gives D'H'+H'D'=1-tr. Step 6: J'=(0,-u) gives (-p_g)-i_f r=(-fu,-x), and the inverse triangle maps follow by cancellation. All maps are A-linear and the homotopies have degree -1. I checked against Stacks dga.tex: definition-shift l.250, definition-cone l.402, 09KB l.746, 09KC l.762, 09KF l.853 (-p convention) and the TR1/TR2 proof of 09KH l.1008. Edge cases X=0 and f=0 hold. The steps are correctly elementary and need no citations. Both citers (dg-derived-admissible-triangles and dg-homotopy-acyclic-localization, step 2 of each) use exactly the two stated clauses. No duplicate found; the nearest nodes, the abstract dg-category lem-coef-dg-abc-*, are a different statement. The three Mathlib search kinds are recorded, and the mappingCone rotation declarations correctly do not cover a DG algebra action. No SGA citation and no tool_uses. Maintainer note: the null blueprint.from.node is inherited from the base along the whole via chain, so it is not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DgConeRotation",
+  "declaration": "CategoryTheory.DgAlgebra.nonempty_coneRotation",
+  "declarations": [
+   "CategoryTheory.DgAlgebra.ConeRotation",
+   "CategoryTheory.DgAlgebra.nonempty_coneRotation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DgConeRotation.lean",
+  "statement": "theorem nonempty_coneRotation (A : Algebra.{u}) {X Y : RightModule A} (f : X ⟶ Y) : Nonempty (ConeRotation A f)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-857f796fb",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement unchanged; lean.statement verbatim; added stmt_dep def-sfb-dg-module-cone-calculus is landed. Shift/cone actions pinned (unchanged-action and projection fields); Leibniz checked by hand. Mathlib rotateHomotopyEquiv inv/hom give q(y,x,y')=-x and s(x)=(0,-x,fx) after leftShift signs; qs=1, sq~1 (homotopyRel), q i_{i_f}=-p_f, (-p_{i_f})s=-f[1] match node and rotateHomotopyEquiv_comm₃. Forward mk₃ iso in K_A: identity components 0/1/3, [q] at 2. Inverse: g=(-mor₃)[-1] ≫ cancellation = p_f[-1], i_f via shiftFunctorCompIsoId; identity components 0/1/3; component 2 free as node allows. Nonempty not hollow, not stronger; node proof steps 1-6 recomputed. Edge cases X=0, f=0, zero/noncommutative A, d_A≠0, char 2 covered. No duplicate in side-live or Mathlib. Docstrings with source/blueprint; sorry only; report has Worker report and Second reading by Q46 (advisory: in-thread reading). No file changed, no compile."
+ }
+}

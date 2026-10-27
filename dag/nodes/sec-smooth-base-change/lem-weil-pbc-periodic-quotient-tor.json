@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-periodic-quotient-tor",
+ "kind": "statement",
+ "title": "Tor from an exact periodic unit pair",
+ "statement": "Let φ:R→S be a coefficient-ring-sheaf map on the pro-etale site. Suppose unit endomorphisms f,g form an exact alternating pair and a normalized unit epimorphism p:R→Resφ(S) identifies its kernel with the image of g. If f and g kill Resφ(N), then H^i(Lφ_!(Resφ(N)[0]))≅N for every i≤0.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, residue counterexample in (1); normalized tensor and periodic free resolutions, Stacks Tags 06YU and 0118."
+ },
+ "proof": [
+  {
+   "text": "Identify the cokernel of g with the restricted quotient unit using the exact normalized epimorphism. Use the alternating K-flat unit resolution. Tensoring with the restricted N kills both differentials. Compare this tensor model with the specified derived extension using a K-flat resolution of N and the double tensor complex; both augmentation maps are quasi-isomorphisms. The ordinary tensor-extension comparison and universal counit give the desired model, and fully faithful exact quotient restriction lifts the cohomology isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-alternating-unit-resolution",
+    "lem-pc-kflat-resolution",
+    "lem-sf-proetale-residue-tor-test",
+    "lem-weil-pbc-adic-reduction-triangle",
+    "lem-pe-successive-quotient-flat-tensor-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-alternating-unit-resolution",
+  "lem-pc-kflat-resolution",
+  "lem-sf-proetale-residue-tor-test",
+  "lem-weil-pbc-adic-reduction-triangle",
+  "lem-pe-successive-quotient-flat-tensor-sequence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/prop-weil-pbc-levelwise-truncations.md",
+  "place": "Order 1429, residue counterexample in (1); normalized tensor and periodic free resolutions, Stacks Tags 06YU and 0118. Complete G1 proof restored by E1 from returned repair packet 48160399e7852af6."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LevelwiseAdicTruncations",
+  "date": "2026-10-22",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-levelwise-truncations",
+   "place": "Order 1429, residue counterexample in (1); normalized tensor and periodic free resolutions, Stacks Tags 06YU and 0118.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PeriodicQuotientTor",
+  "file": "lean/Sheaf/Paper/PeriodicQuotientTor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.periodicQuotient_tor",
+  "statement": "theorem periodicQuotient_tor\n    (f g : End (SheafOfModules.unit ((adicLisseForget T).obj R)))\n    (hfg : f ≫ g = 0) (hgf : g ≫ f = 0)\n    (hef : (ShortComplex.mk f g hfg).Exact)\n    (heg : (ShortComplex.mk g f hgf).Exact)\n    (p : SheafOfModules.unit ((adicLisseForget T).obj R) ⟶\n      (pbcRestrict φ).obj (SheafOfModules.unit ((adicLisseForget T).obj S)))\n    [Epi p] (hp : ∀ U : T.ProEtᵒᵖ,\n      p.val.app U (1 : R.obj.obj U) = (1 : S.obj.obj U))\n    (hz : g ≫ p = 0) (hex : (ShortComplex.mk g p hz).Exact)\n    (N : pbcModules T S)\n    (hfkill : ∀ (U : T.ProEtᵒᵖ) (x : ((pbcRestrict φ).obj N).val.obj U),\n      f.val.app U (1 : R.obj.obj U) • x = 0)\n    (hgkill : ∀ (U : T.ProEtᵒᵖ) (x : ((pbcRestrict φ).obj N).val.obj U),\n      g.val.app U (1 : R.obj.obj U) • x = 0)\n    (i : ℤ) (hi : i ≤ 0) :\n    Nonempty ((DerivedCategory.homologyFunctor _ i).obj\n      ((pbcDerivedExtend φ).obj\n        ((DerivedCategory.singleFunctor _ 0).obj ((pbcRestrict φ).obj N))) ≅ N)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-22"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "cohomology of derived tensor with a regular principal quotient and periodic resolution of powers of a nonzero divisor",
+   "date": "2026-10-22",
+   "results": "Found cyclic-group resolutions and generic projective Tor vanishing, but no module-sheaf quotient result.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.Exact, CategoryTheory.End, pow",
+   "date": "2026-10-22",
+   "results": "The unqualified query returned no match; the project exactness declarations and Mathlib refinements provide the usable API.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "grep",
+   "query": "alternating.*resolution|periodic.*Tor|principal.*quotient",
+   "date": "2026-10-22",
+   "results": "Found principal quotient ring results, but no periodic derived module-sheaf computation.",
+   "verdict": "Use the existing abelian, homology and K-flat APIs; no direct sheaf-coefficient periodic Tor computation was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An alternating periodic flat resolution with both maps zero after tensoring computes the same Tor module in every nonnegative degree",
+   "results": "CategoryTheory.Tor' (Mathlib.CategoryTheory.Monoidal.Tor); CategoryTheory.Tor (Mathlib.CategoryTheory.Monoidal.Tor); Module.Flat.rTensor_exact (Mathlib.RingTheory.Flat.Basic); Module.Flat.lTensor_exact (Mathlib.RingTheory.Flat.Basic); ChainComplex.instHasHomologyNatObjAlternatingConst (Mathlib.Algebra.Homology.AlternatingConst); Module.Flat.lTensor_shortComplex_exact (Mathlib.RingTheory.Flat.CategoryTheory); Module.Flat.iff_lTensor_exact' (Mathlib.RingTheory.Flat.Basic); Module.FaithfullyFlat.zero_iff_lTensor_zero (Mathlib.RingTheory.Flat.FaithfullyFlat.Basic)",
+   "date": "2026-10-22",
+   "verdict": "No exact match: CategoryTheory.Tor uses projective resolutions in a monoidal category; it does not identify the specified change-of-ring derived functor with this sheaf K-flat computation. The alternatingConst instance concerns the identity/zero complex."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261022T040155-L-2822089",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

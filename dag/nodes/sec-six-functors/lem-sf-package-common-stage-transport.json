@@ -1,0 +1,216 @@
+{
+ "id": "lem-sf-package-common-stage-transport",
+ "kind": "statement",
+ "title": "Transport of common-stage descent and retract closure",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and the operation datum [def-fix-six-functor-datum] on small pro-etale sites. All schemes below are separated of finite type over $k$, and all morphisms are separated of finite type. Fix an algebraic closure $\\Omega=\\overline{\\mathbf Q}_\\ell$. For $W=T,S$ write $\\mathcal C_E(W)=D^b_c(W,E)$ for the raw rationalization of [def-weil-rationalization-karoubi] and $\\mathcal C_W$ for its common-stage category [def-weil-algebraically-closed-coefficients]. Write $\\mathcal P_E(W)$ and $\\mathcal P_W$ for the distinct rational and pair categories of [def-weil-pbc-rational-category, def-weil-pbc-qbar-category]. Use their specified scalar extensions $T^{\\mathrm{sf},W}_{F/E}$ and $T^{\\mathrm{pbc},W}_{F/E}$ and scalar associators. Let $J_{W,E}:\\mathcal C_E(W)\\simeq\\mathcal P_E(W)$ and $J_W:\\mathcal C_W\\simeq\\mathcal P_W$ be the exact comparison equivalences of [lem-fd-rational-coefficient-category-comparison], with coherent scalar comparisons $j_{W,F/E}:J_{W,F}T^{\\mathrm{sf},W}_{F/E}\\simeq T^{\\mathrm{pbc},W}_{F/E}J_{W,E}$.\n\nLet $\\Phi_E:\\mathcal C_E(T)\\to\\mathcal C_E(S)$ be exact functors for all intermediate fields $\\mathbf Q_\\ell\\subset E\\subset\\Omega$ finite over $\\mathbf Q_\\ell$, with exact natural isomorphisms\n$$\\beta_{F/E}:T^{\\mathrm{sf},S}_{F/E}\\Phi_E\\xrightarrow{\\sim}\\Phi_F T^{\\mathrm{sf},T}_{F/E}$$\nsatisfying the identity, scalar-associator and shift equations. There is an exact functor $\\Phi:\\mathcal C_T\\to\\mathcal C_S$ taking $(E,K)$ to $(E,\\Phi_EK)$ and taking a common-stage arrow $[M,u]:(E,K)\\to(F,L)$ to the class represented by\n$$\\beta_{M/F}^{-1}\\circ\\Phi_M(u)\\circ\\beta_{M/E}.$$\nScalar-compatible natural transformations between any two such families descend to natural transformations of these functors, and equations between compatible transformations descend. Under $J_T,J_S$, this functor is naturally isomorphic to the descent on $\\mathcal P_T,\\mathcal P_S$ of the transported family $J_{S,E}\\Phi_EJ_{T,E}^{-1}$ with its scalar comparisons induced by $j$ and $\\beta$. Finally the literal categories $\\mathcal C_W$ with their common-stage shifts and triangles are idempotent-complete ordinary triangulated categories, and the finite-stage embeddings $D^b_c(W,E)\\to\\mathcal C_W$ are exact. No Karoubi envelope is inserted.",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (1): descent functors and idempotent-complete triangulation, transported through the coefficient-category comparison; returned item steps 9–10"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-qbar-category",
+  "lem-fd-rational-coefficient-category-comparison",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-coefficient-coherent-inverse to JT. It supplies exact inverse family H, finite equivalences HT with forward stages JT.family.Φ, and scalar-compatible inverse unit ν. Apply the same coefficient lemma to JS for forward finite-stage exactness. Its finite_shift and scalar_shift fields then give a coherent exact forward family. Compose H, F, JS to define G with finite functors HT inverse followed by F then JS. Its beta is the existing StageSystem.Morphism.comp beta. Naturality and the component scalar shift compatibility give the exact coherent composite. Whisker ν by F followed by JS to construct τ; its scalar square follows from ν.comm and naturality of the composite beta. Each τ component is invertible, with exactly the inverse-unit formula in the statement.",
+   "uses": [
+    "lem-sf-coefficient-coherent-inverse",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply prop-weil-pbc-descent-functors to G. Descend τ using StageSystem.Morphism.descNatTrans. At a pair (E,K) its component is the E-stage inclusion of τ_E,K, hence invertible. The natural isomorphism given by this descended transformation, composed with the canonical functorCompIso on both sides and the pair_functor equations, is F.functor followed by JS equivalence naturally isomorphic to JT equivalence followed by G.functor.",
+   "uses": [
+    "prop-weil-pbc-descent-functors",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Give F.functor the shift induced from the just-constructed isomorphism by CommShift.ofComp, using full faithfulness of JS. CommShift.ofComp_compatibility makes this isomorphism commute with shifts. Functor.isTriangulated_iff_comp_right reflects exactness of JT followed by G through JS, proving F.functor exact, and hence additive. The representative formula is Morphism.functor_map_mkHom. Compatible transformation components, identity and composition are descNatTrans_app, descNatTrans_id and descNatTrans_comp. Equality of finite components gives equality after descending by natural-transformation extensionality. Thus the full DescentSpec F.base holds.",
+   "uses": [
+    "prop-weil-pbc-descent-functors",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For W = T and S, the existing GeneralAlgebraicallyClosedCoefficients.isTriangulated and inclusion_exact already supply the prescribed triangulation and finite-stage exactness. Obtain idempotent completeness of the PBC pair category from thm-weil-pbc-idempotent-complete-triangulation; transfer it along J.equivalence.symm by Mathlib Idempotents.Equivalence.isIdempotentComplete. Assemble these conclusions with the constructed G, τ, descent assertions and natural isomorphism. No replacement shifts, categories or Karoubi objects are constructed.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "thm-weil-pbc-idempotent-complete-triangulation",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-coefficient-coherent-inverse",
+  "lem-fd-rational-coefficient-category-comparison",
+  "prop-weil-pbc-descent-functors",
+  "def-weil-algebraically-closed-coefficients",
+  "thm-weil-pbc-idempotent-complete-triangulation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (1); inverse coherence isolated as lem-sf-coefficient-coherent-inverse, remaining argument assembled in Lean from actual descent and comparison declarations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Transport exact functor descent and idempotent completeness between coherent common finite coefficient stage categories",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.ExactFunctor.of_fst\", \"CategoryTheory.Functor.exact_tfae\", \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"CategoryTheory.Idempotents.functorExtension\", \"CategoryTheory.exactFunctor_iff\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteHomologicalComplex\", \"CategoryTheory.Idempotents.KaroubiHomologicalComplexEquivalence.functor\", \"CategoryTheory.ExactFunctor.of\"], \"note\": \"\"} Read the returned signatures. The hits supply generic exact functors for finite limits/colimits, condensed AB axioms and idempotent completeness under equivalence. The last theorem at Mathlib/CategoryTheory/Idempotents/Basic.lean:163 handles only retract closure once J exists; it does not provide coherent coefficient-category descent or exact finite-stage embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete",
+   "results": "{\"hits\": 12, \"top\": [\"CategoryTheory.IsIdempotentComplete\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteOpposite\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_isIdempotentComplete_opposite\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_opposite\", \"CategoryTheory.Idempotents.Equivalence.isIdempotentComplete\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_of_equivalence\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_hasEqualizer_of_id_and_idempotent\"], \"note\": \"\"} Read the returned signatures. The hits supply generic exact functors for finite limits/colimits, condensed AB axioms and idempotent completeness under equivalence. The last theorem at Mathlib/CategoryTheory/Idempotents/Basic.lean:163 handles only retract closure once J exists; it does not provide coherent coefficient-category descent or exact finite-stage embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact descent of scalar compatible functors on finite field pair categories along coherent equivalences",
+   "results": "{\"hits\": 8, \"top\": [\"Condensed.hasExactColimitsOfShape\", \"Condensed.instAB4StarCondensedMod\", \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"Condensed.hasExactLimitsOfShape\", \"Condensed.instAB5CondensedMod\", \"CategoryTheory.exactFunctor_iff\", \"Condensed.instAB4CondensedMod\", \"CategoryTheory.ExactFunctor.of_fst\"], \"note\": \"\"} Read the returned signatures. The hits supply generic exact functors for finite limits/colimits, condensed AB axioms and idempotent completeness under equivalence. The last theorem at Mathlib/CategoryTheory/Idempotents/Basic.lean:163 handles only retract closure once J exists; it does not provide coherent coefficient-category descent or exact finite-stage embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "common.?stage|coefficient.*descent|isIdempotentComplete_iff_of_equivalence",
+   "results": "{\"hits\": 4, \"top\": [\"Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean\", \"Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean\", \"Mathlib/CategoryTheory/Idempotents/Basic.lean\", \"Mathlib/CategoryTheory/Idempotents/Basic.lean\"], \"note\": \"\"} Read the returned signatures. The hits supply generic exact functors for finite limits/colimits, condensed AB axioms and idempotent completeness under equivalence. The last theorem at Mathlib/CategoryTheory/Idempotents/Basic.lean:163 handles only retract closure once J exists; it does not provide coherent coefficient-category descent or exact finite-stage embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport exact functor descent and idempotent completeness between coherent common finite coefficient stage categories",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.Idempotents.functor_category_isIdempotentComplete\", \"CategoryTheory.exactFunctor\", \"CategoryTheory.ExactFunctor.of\", \"CategoryTheory.exactFunctor_iff\", \"CategoryTheory.ExactFunctor\", \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\", \"CategoryTheory.coherentTopology.instIsDenseSubsite\", \"CategoryTheory.Pseudofunctor.DescentData.isoMk\"], \"note\": \"\"} Read the returned signatures. The hits supply generic exact functors for finite limits/colimits, condensed AB axioms and idempotent completeness under equivalence. The last theorem at Mathlib/CategoryTheory/Idempotents/Basic.lean:163 handles only retract closure once J exists; it does not provide coherent coefficient-category descent or exact finite-stage embeddings.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "common.?stage|coefficient.*descent|isIdempotentComplete_iff_of_equivalence",
+   "results": "{\"hits\": 4, \"top\": [\"Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean\", \"Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean\", \"Mathlib/CategoryTheory/Idempotents/Basic.lean\", \"Mathlib/CategoryTheory/Idempotents/Basic.lean\"], \"note\": \"\"} Read the returned signatures. Generic finite-limit exact functors, module scalar extension, triangulated precomposition/localization and idempotent-completeness transfer do not state this coherent common-stage coefficient transport. Idempotent transfer in Mathlib/CategoryTheory/Idempotents/Basic.lean:145-166 was read; its elementary splitting argument is written in step 1 rather than made a new node.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of exact functors with coherent scalar extension comparisons to common finite field stage categories",
+   "results": "{\"hits\": 8, \"top\": [\"CommRingCat.moduleCatExtendScalarsPseudofunctor\", \"CategoryTheory.exactFunctor\", \"ModuleCat.extendScalars\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.ExactFunctor.of\", \"CategoryTheory.ExactFunctor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.exactFunctor_iff\"], \"note\": \"\"} Read the returned signatures. Generic finite-limit exact functors, module scalar extension, triangulated precomposition/localization and idempotent-completeness transfer do not state this coherent common-stage coefficient transport. Idempotent transfer in Mathlib/CategoryTheory/Idempotents/Basic.lean:145-166 was read; its elementary splitting argument is written in step 1 rather than made a new node.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.IsIdempotentComplete",
+   "results": "{\"hits\": 12, \"top\": [\"CategoryTheory.IsIdempotentComplete\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_abelian\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteOpposite\", \"CategoryTheory.Idempotents.isIdempotentComplete_of_isIdempotentComplete_opposite\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_opposite\", \"CategoryTheory.Idempotents.Equivalence.isIdempotentComplete\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_of_equivalence\", \"CategoryTheory.Idempotents.isIdempotentComplete_iff_hasEqualizer_of_id_and_idempotent\"], \"note\": \"\"} Read the returned signatures. Generic finite-limit exact functors, module scalar extension, triangulated precomposition/localization and idempotent-completeness transfer do not state this coherent common-stage coefficient transport. Idempotent transfer in Mathlib/CategoryTheory/Idempotents/Basic.lean:145-166 was read; its elementary splitting argument is written in step 1 rather than made a new node.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of exact functors with coherent scalar extension comparisons to common finite field stage categories",
+   "results": "{\"hits\": 8, \"top\": [\"Condensed.profiniteSolidCounit\", \"Condensed.profiniteSolid\", \"Condensed.instAB4CondensedMod\", \"Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.instAB5CondensedMod\", \"CategoryTheory.ExactFunctor.of\", \"Condensed.hasExactColimitsOfShape\"], \"note\": \"\"} Read the returned signatures. Generic finite-limit exact functors, module scalar extension, triangulated precomposition/localization and idempotent-completeness transfer do not state this coherent common-stage coefficient transport. Idempotent transfer in Mathlib/CategoryTheory/Idempotents/Basic.lean:145-166 was read; its elementary splitting argument is written in step 1 rather than made a new node.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudonatural transformations induce functors on filtered two colimits of triangulated categories",
+   "results": "{\"hits\": 8, \"top\": [\"CategoryTheory.Functor.mapTriangulatedSpectralObject\", \"CategoryTheory.Functor.isTriangulated_of_precomp\", \"CategoryTheory.Functor.isTriangulated_of_precomp_iso\", \"CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism\", \"CategoryTheory.isTriangulated_of_essSurj_mapComposableArrows_two\", \"CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated\", \"CategoryTheory.Functor.distTriang_iff\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\"], \"note\": \"\"} Read the returned signatures. Generic finite-limit exact functors, module scalar extension, triangulated precomposition/localization and idempotent-completeness transfer do not state this coherent common-stage coefficient transport. Idempotent transfer in Mathlib/CategoryTheory/Idempotents/Basic.lean:145-166 was read; its elementary splitting argument is written in step 1 rather than made a new node.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-package-coefficient-domain-realization",
+  "group": "Q140",
+  "date": "2026-10-22"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-functor-package",
+   "place": "Clause (1): descent functors and idempotent-complete triangulation, transported through the coefficient-category comparison; returned item steps 9–10",
+   "via": [
+    "lem-sf-package-coefficient-domain-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-package-common-stage-transport",
+  "worker": "stage1",
+  "summary": "Assembled existing PBC functor descent and idempotent-complete triangulation through the specified rational/common-stage equivalences. Wrote inverse scalar comparisons, the transported family, the conjugation formula on arrows and the transformation components explicitly. No new nodes and no extra linearity hypothesis.",
+  "blueprint": "prop-functor-package, proof clause (1): prop-weil-pbc-descent-functors and thm-weil-pbc-idempotent-complete-triangulation; comparison bridge is the present item.",
+  "tool_uses": [
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Uses the specified exact equivalences and their scalar, inclusion, shift and triangle comparisons to transport the clause (1) PBC results to the distinct framework categories; this is a coefficient-category comparison tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-triangulated-equivalence-transfer",
+    "why": "Generic equivalence transfer supplies triangulation witnesses; the specified comparisons identify the transported shifts and triangles with the literal common-stage ones. No coefficient-specific alternative proof is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-11f565961",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-11f565961 (reviewer sub-agent of L); spot-checked: Read the item's six steps, its unchanged statement and stmt_deps (identical to Q140's unsplit version) and every cited statement. Source checked: prop-functor-package.proof.md lines 9-11, clause (1) = prop-weil-pbc-descent-functors + thm-weil-pbc-idempotent-complete-triangulation; both are on the unit route (sk-thm-properbasechange, sk-prop-sf-cbc). The coefficient categories are kept distinct: framework raw rationalizations and C_W versus PBC ones with literal T_{E/E}=id, linked only by the J/j equivalences of lem-fd-rational-coefficient-category-comparison. Separated finite-type k-schemes are noetherian and finite-dimensional with ell invertible, so the comparison and PBC hypotheses hold. Step 1: triangles move across J_W, which identifies shifts and triangles; the idempotent splitting by fullness and faithfulness is correct; i_E is exact because J_W reflects triangles. Steps 2-3: I checked the directions of h and b and that b_{E/E}=1 literally (from the beta unit equation); the tower equation reduces to the j cocycle plus the beta tower; no linearity is used. Step 4 meets the hypotheses of the PBC descent node exactly. Step 5: I verified the key cancellation h∘H(j)∘eta_S = S(eta) after applying J, using naturality of epsilon and j and the triangle identities; it gives the stated representative formula. Step 6 is the naturality of tau at eta, and equations are reflected by faithful J_S. Duplicates: lem-sf-framework-common-stage-descent needs E-linear Phi_E (stronger hypothesis, correctly not used); lem-sbc-coherent-pair-functor-descent needs strict identity transitions. No new nodes, no cycle, no SGA, proof_deps equals the union of uses. I accept both tool uses (lem-fd comparison as the stmt_dep comparison; lem-pc triangulated-equivalence transfer as generic). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfPackageCommonStageTransport",
+  "declaration": "WeilConjectures.sfPackageCommonStageTransport",
+  "file": "lean/Sheaf/Paper/SfPackageCommonStageTransport.lean",
+  "statement": "theorem sfPackageCommonStageTransport (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E₀ : Type u) [Field E₀] [Algebra (Padic C.l) E₀] [FiniteDimensional (Padic C.l) E₀] (n : ℕ) (hn : 1 ≤ n) (_operations : SixFunctorOperationDatum D C E₀ n hn) (Ω : Type w) [Field Ω] [Algebra (Padic C.l) Ω] [IsAlgClosure (Padic C.l) Ω] (T S : SixFunctorSpace D) [IsSeparated T.obj.hom] [IsSeparated S.obj.hom] [IsNoetherian T.obj.left] [IsNoetherian S.obj.left] [dT : Fact (∃ m : ℕ, topologicalKrullDim T.obj.left ≤ (m : WithBot ℕ∞))] [iT : Fact (∀ t : T.obj.left, IsUnit (C.l : T.obj.left.presheaf.stalk t))] [dS : Fact (∃ m : ℕ, topologicalKrullDim S.obj.left ≤ (m : WithBot ℕ∞))] [iS : Fact (∀ s : S.obj.left, IsUnit (C.l : S.obj.left.presheaf.stalk s))] (JT : FdCoefficientComparison C.l Ω T.obj.left) (JS : FdCoefficientComparison C.l Ω S.obj.left) (F : StageSystem.CoherentExactMorphism (GeneralAlgebraicallyClosedCoefficients.stageSystem C.l Ω T.obj.left) (GeneralAlgebraicallyClosedCoefficients.stageSystem C.l Ω S.obj.left)) : StageSystem.Morphism.DescentSpec F.base ∧ (∃ HT : ∀ E : Padic.FiniteCoefficientFields C.l Ω, GeneralAlgebraicallyClosedCoefficients.Stage C.l Ω T.obj.left E ≌ pbcStageCategory C.l Ω T.obj.left E, (∀ E : Padic.FiniteCoefficientFields C.l Ω, (HT E).functor = JT.family.Φ E) ∧ ∃ G : StageSystem.CoherentExactMorphism (pbcScalarSystem C.l Ω T.obj.left dT.out iT.out) (pbcScalarSystem C.l Ω S.obj.left dS.out iS.out), (∀ E : Padic.FiniteCoefficientFields C.l Ω, G.base.Φ E = (HT E).inverse ⋙ F.base.Φ E ⋙ JS.family.Φ E) ∧ (∃ τ : StageSystem.Morphism.Hom (JT.family.comp G.base) (F.base.comp JS.family), (∀ E : Padic.FiniteCoefficientFields C.l Ω, IsIso (τ.τ E)) ∧ ∀ (E : Padic.FiniteCoefficientFields C.l Ω) (K : GeneralAlgebraicallyClosedCoefficients.Stage C.l Ω T.obj.left E), HEq ((τ.τ E).app K) ((JS.family.Φ E).map ((F.base.Φ E).map ((HT E).unitIso.inv.app K)))) ∧ StageSystem.Morphism.DescentSpec G.base ∧ Nonempty (F.base.functor ⋙ JS.equivalence.functor ≅ JT.equivalence.functor ⋙ G.base.functor)) ∧ (IsTriangulated (generalAlgebraicallyClosedConstructibleCategory C.l Ω T.obj.left) ∧ IsIdempotentComplete (generalAlgebraicallyClosedConstructibleCategory C.l Ω T.obj.left) ∧ ∀ E : Padic.FiniteCoefficientFields C.l Ω, (GeneralAlgebraicallyClosedCoefficients.inclusion (l := C.l) (Ω := Ω) (Y := T.obj.left) E).IsTriangulated) ∧ (IsTriangulated (generalAlgebraicallyClosedConstructibleCategory C.l Ω S.obj.left) ∧ IsIdempotentComplete (generalAlgebraicallyClosedConstructibleCategory C.l Ω S.obj.left) ∧ ∀ E : Padic.FiniteCoefficientFields C.l Ω, (GeneralAlgebraicallyClosedCoefficients.inclusion (l := C.l) (Ω := Ω) (Y := S.obj.left) E).IsTriangulated)",
+  "branch": "newtargets-dag",
+  "by": "Q100",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing literal StageSystem functor and DescentSpec; no new category or arrow construction. The transported PBC family is specified by its exact finite conjugates and the scalar-compatible inverse-unit comparison. HT chooses inverse equivalences of the recorded JT.family finite functors, avoiding expensive conversion between two definitionally identical small-field presentations. Source and coefficient universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-049b1658b",
+  "group": "Q100",
+  "result": "fix",
+  "note": "Lean/record accepted unchanged. Clause check: hypotheses (D,C,the operation datum, Ω alg. closed, universe w independent of u; T,S separated finite type; Noetherian/dimension/ℓ-unit Facts implied; JT/JS arbitrary FdCoefficientComparison, right because lem-fd is ∃; F CoherentExactMorphism, β direction T'Φ≅ΦT) and conclusions (DescentSpec F.base: exactness, representative β_hK.hom≫Φ_M u≫β_hL.inv, descent of transformations between any two families with equations/id/comp; transported G with Φ = HT.inverse⋙Φ_E⋙J_S,E, scalar comparison fixed through τ with components J_SΦ_E(η⁻¹), DescentSpec G.base, Nonempty natural iso as the node says 'naturally isomorphic'; IsTriangulated/IsIdempotentComplete/exact inclusions on the literal pair categories) match. Edge cases covered; no definitions; sorry only; docstrings carry source place and 6 steps; statement verbatim; only the item node changed vs live; the dependency rebinding was dropped. Sole fault H11: second reading was a self-reread → fixes/lem-sf-package-common-stage-transport.report.md (Worker report and Dependency check verbatim + real second reading; old retry logs dropped). Advisories: owners of CoherentExactMorphism/DescentSpec/pbcScalarSystem not in stmt_deps; live def-weil-pbc-qbar-category record intrinsicPbcQbarCategory is an abbrev of the SF category, not P_W (item correctly uses pbcQbarCategory via FdCoefficientComparison). No compile (report-only FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T101905-L-3748653",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

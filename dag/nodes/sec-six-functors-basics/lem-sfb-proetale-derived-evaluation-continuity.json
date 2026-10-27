@@ -1,0 +1,123 @@
+{
+ "id": "lem-sfb-proetale-derived-evaluation-continuity",
+ "kind": "statement",
+ "title": "Filtered continuity of derived abelian evaluation at an affine pro-etale object",
+ "statement": "For a scheme X and an affine object W of its small pro-etale site [def-weil-pbc-proetale-site], let E_W be evaluation of abelian sheaves at W. For every small filtered category I in the coefficient universe and every q≥0, the functor F↦H^q(RE_W(F[0])) preserves colimits of shape I. Derived functors and homology use [def-weil-abstract-derived-category].",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A3; source implementation WeilConjectures/AlgebraicGeometry/ProEtale/CohomologyFilteredColimit.lean, with Stacks Tags 03Q6 and 03F3 for cohomology and localization"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing source-library Sheaf.H_map_isColimit_of_isFiltered_small to the terminal object of the pro-etale site of W.left. The qcqs class satisfies its finite Cech-cover condition by Scheme.ProEt.exists_finite_cechNerve_of_mem_topology. The elementwise surjectivity and eventual-zero criteria imply that the cohomology functor preserves filtered colimits, using the forgetful functor to types to reflect the colimit.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The source-library nonempty_rightDerived_sections_iso_functorH naturally identifies this cohomology with classical right-derived global sections. Localization along W→X is exact and preserves colimits and injectives. Evaluation is localization followed by global sections, so rightDerivedCompIsoOfExact identifies its classical derived functors with this colimit-preserving composite.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Use the source-library singleFunctorCompRightDerivedFunctorCompHomologyFunctorIso to identify the classical derived functor with homology of total derived evaluation on degree-zero sheaves. Transport colimit preservation along this natural isomorphism and the functor associator.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A3; source implementation WeilConjectures/AlgebraicGeometry/ProEtale/CohomologyFilteredColimit.lean, with Stacks Tags 03Q6 and 03F3 for cohomology and localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of derived evaluation on an affine pro etale object preserves filtered colimits of abelian sheaves",
+   "results": "{\"t\": \"2026-10-23T13:28:32Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology of derived evaluation on an affine pro etale object preserves filtered colimits of abelian sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"PresheafOfModules.evaluation_preservesColimit\", \"instPreservesHomologyFunctorAddCommGrpCatColim\", \"CategoryTheory.Limits.evaluation_preservesColimits\", \"PresheafOfModules.evaluationJointlyReflectsColimits\", \"CategoryTheory.Limits.pointwiseProductCompEvaluation\", \"SheafOfModules.evaluationPreservesLimit\", \"HomologicalComplex.instPreservesColimitEval\"], \"digest\": \"308f138260f3fc95\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. General colimit, derived-adjunction or sheaf-cohomology infrastructure appears; the proof needs the stated specific comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation of abelian sheaves at an affine pro etale object commutes with filtered colimits in nonnegative degree",
+   "results": "{\"t\": \"2026-10-23T13:28:33Z\", \"tool\": \"leanfinder\", \"query\": \"Derived evaluation of abelian sheaves at an affine pro etale object commutes with filtered colimits in nonnegative degree\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightProfinite.hasSheafify\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondAb.ofSheafLightProfinite\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\"], \"digest\": \"8288c22ea974274b\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. General colimit, derived-adjunction or sheaf-cohomology infrastructure appears; the proof needs the stated specific comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedEvaluation.*preservesFiltered|preservesFiltered.*derivedEvaluation",
+   "results": "{\"t\": \"2026-10-23T13:28:32Z\", \"tool\": \"grep\", \"query\": \"derivedEvaluation.*preservesFiltered|preservesFiltered.*derivedEvaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No exact match. General colimit, derived-adjunction or sheaf-cohomology infrastructure appears; the proof needs the stated specific comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionOpenTestDevissage",
+  "date": "2026-10-23",
+  "group": "R9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Direct-images paragraph (3), cyclic-to-bounded-primary open test: Filtered continuity of derived abelian evaluation at an affine pro-etale object.",
+   "via": [
+    "lem-sfb-torsion-open-test-devissage",
+    "lem-sfb-torsion-acyclic-norm-coefficient-test",
+    "lem-sfb-root-coordinate-supported-vanishing",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleDerivedEvaluationContinuity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleDerivedEvaluationContinuity.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedEvaluation_preservesFiltered",
+  "statement": "theorem derivedEvaluation_preservesFiltered\n    (X : Scheme.{u}) (W : X.ProEt) [IsAffine W.left]\n    (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (q : ℕ) :\n    PreservesColimitsOfShape I\n      ((DerivedCategory.singleFunctor\n          (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) 0 ⋙\n        (sheafToPresheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1} ⋙\n          (evaluation X.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj (op W)).rightDerivedFunctor) ⋙\n        DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} (q : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261023T135320-L-2868022",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261023T135320-L-2868022",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

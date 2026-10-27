@@ -1,0 +1,238 @@
+{
+ "id": "lem-sfb-finite-p-group-normal-index-p",
+ "kind": "statement",
+ "title": "A nontrivial finite p-group has a normal subgroup of index p",
+ "statement": "Let $p$ be a prime natural number and let $P$ be a group with finite underlying set [def-sfb-finite-infinite-set] and $|P|=p^a$ for an integer $a\\geq1$. Then there is a subgroup $H\\subseteq P$ such that $gHg^{-1}=H$ for every $g\\in P$ and $[P:H]=p$. Here $|P|$ denotes the number of elements, and $[P:H]$ the number of left cosets of $H$ in $P$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F8, lemma-special-case, third proof paragraph: the group-theoretic refinement implicit in the use of solvability of inertia after Tag 09EE, lemma-galois-inertia. The asserted group-theoretic tool is agent-supplied; its independent induction proof is recorded in the delivery report."
+ },
+ "stmt_deps": [
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof": [
+  {
+   "text": "Write $a=b+1$ with $b\\geq0$. Since $|P|=p^{b+1}=p^b p$, the prime power $p^b$ divides $|P|$. Apply [lem-sfb-finite-subgroup-prime-power-order] to the finite group $P$, the given prime $p$, and $n=b$. Obtain a subgroup $H\\subseteq P$ with $|H|=p^b$.",
+   "uses": [
+    "lem-sfb-finite-subgroup-prime-power-order"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F8, lemma-special-case, third proof paragraph (finite normal-extension filtration), after Tag 09EE, lemma-galois-inertia; agent-supplied group-theoretic argument, using the cited Mathlib tools."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-surjective-subgroup-image-index] with both groups equal to $P$, the identity surjection, and $L=H$, so that its image $J$ is $H$. Its order-index formula gives $|H|[P:H]=|P|$. Substitution yields $p^b[P:H]=p^{b+1}=p^b p$. Since $p$ is prime, $p\\geq2$ and $p^b>0$; cancellation in the natural numbers gives $[P:H]=p$.",
+   "uses": [
+    "lem-sfb-surjective-subgroup-image-index"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F8, lemma-special-case, third proof paragraph (finite normal-extension filtration), after Tag 09EE, lemma-galois-inertia; agent-supplied group-theoretic argument, using the cited Mathlib tools."
+   }
+  },
+  {
+   "text": "The least prime divisor of $|P|=p^{b+1}$ is $p$. Indeed $p$ divides this integer. Any prime $q$ dividing it must equal $p$: induction on the exponent and the elementary prime-divides-product rule show that $q\\mid p^{b+1}$ implies $q\\mid p$, and a prime divisor of the prime $p$ is $p$. The exponent is positive, so $|P|\\geq p>1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F8, lemma-special-case, third proof paragraph (finite normal-extension filtration), after Tag 09EE, lemma-galois-inertia; agent-supplied group-theoretic argument, using the cited Mathlib tools."
+   }
+  },
+  {
+   "text": "The subgroup $H$ from step 1 has index $p$ by step 2, and $p$ is the smallest prime divisor of $|P|>1$ by step 3. Apply [lem-sfb-least-prime-index-normal] to $G=P$ and this $H$. It gives $gHg^{-1}=H$ for every $g\\in P$, while the already computed index is $p$. These are the two required properties of the same subgroup.",
+   "uses": [
+    "lem-sfb-least-prime-index-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09F8, lemma-special-case, third proof paragraph (finite normal-extension filtration), after Tag 09EE, lemma-galois-inertia; agent-supplied group-theoretic argument, using the cited Mathlib tools."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-subgroup-prime-power-order",
+  "lem-sfb-surjective-subgroup-image-index",
+  "lem-sfb-least-prime-index-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09F8, lemma-special-case, third proof paragraph (finite normal-extension filtration), after Tag 09EE, lemma-galois-inertia; agent-supplied group-theoretic argument, using the cited Mathlib tools.",
+  "note": "The Stacks filtration motivates the tool but does not supply its proof; this argument chooses a subgroup by generalized Sylow, computes its index, and invokes the least-prime-index normality criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every nontrivial finite p-group has a normal subgroup of index p",
+   "results": "8 hits; IsPGroup.toSylow, IsPGroup.bot_lt_center, Sylow.nonempty, IsPGroup.center_nontrivial, IsPGroup.exists_le_sylow, Sylow.exists_subgroup_le_card_le, IsPGroup.index, Sylow.exists_subgroup_card_pow_prime_of_le_card. ",
+   "date": "2026-10-24",
+   "verdict": "no match in the pinned source: Sylow subgroup existence by cardinality and normal_of_index_eq_minFac_card are candidates requiring an index/cardinality argument, not a one-line specialization. The Loogle isCoatom theorem is absent from the pinned local Nilpotent.lean; it cannot certify a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A maximal proper subgroup of a finite p group is normal and has index p",
+   "results": "8 hits; IsPGroup.toSylow, Sylow.normal_of_all_max_subgroups_normal, Subgroup.normal_of_index_eq_minFac_card, IsPGroup.toSylow_coe, Sylow.ofCard, IsPGroup.index, IsPGroup.exists_le_sylow, Sylow.exists_subgroup_card_pow_prime_of_le_card. ",
+   "date": "2026-10-24",
+   "verdict": "no match in the pinned source: Sylow subgroup existence by cardinality and normal_of_index_eq_minFac_card are candidates requiring an index/cardinality argument, not a one-line specialization. The Loogle isCoatom theorem is absent from the pinned local Nilpotent.lean; it cannot certify a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every nontrivial finite p-group has a normal subgroup of index p",
+   "results": "8 hits; Sylow.nonempty, Subgroup.normal_of_index_eq_minFac_card, IsPGroup.center_nontrivial, Sylow.not_dvd_index', IsPGroup.index, IsPGroup.to_quotient, Sylow.card_dvd_index, IsPGroup.isNilpotent. ",
+   "date": "2026-10-24",
+   "verdict": "no match in the pinned source: Sylow subgroup existence by cardinality and normal_of_index_eq_minFac_card are candidates requiring an index/cardinality argument, not a one-line specialization. The Loogle isCoatom theorem is absent from the pinned local Nilpotent.lean; it cannot certify a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPGroup, Subgroup.index",
+   "results": "7 hits; IsPGroup.index, IsPGroup.le_or_disjoint_of_coprime, IsPGroup.toSylow, IsPGroup.toSylow_coe, IsPGroup.mem_toSylow, IsPGroup.isCoatom_iff_index_eq_prime, IsPGroup.not_isCyclic_iff_exists_ne_index_eq_prime. ",
+   "date": "2026-10-24",
+   "verdict": "no match in the pinned source: Sylow subgroup existence by cardinality and normal_of_index_eq_minFac_card are candidates requiring an index/cardinality argument, not a one-line specialization. The Loogle isCoatom theorem is absent from the pinned local Nilpotent.lean; it cannot certify a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isCoatom_iff_index_eq_prime\"",
+   "results": "1 hits; IsPGroup.isCoatom_iff_index_eq_prime. ",
+   "date": "2026-10-24",
+   "verdict": "no match in the pinned source: Sylow subgroup existence by cardinality and normal_of_index_eq_minFac_card are candidates requiring an index/cardinality argument, not a one-line specialization. The Loogle isCoatom theorem is absent from the pinned local Nilpotent.lean; it cannot certify a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "isCoatom_iff_index_eq_prime|normal_of_coatom|exists.*index.*prime",
+   "results": "1 hits; Mathlib/GroupTheory/Nilpotent.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match in the pinned source: Sylow subgroup existence by cardinality and normal_of_index_eq_minFac_card are candidates requiring an index/cardinality argument, not a one-line specialization. The Loogle isCoatom theorem is absent from the pinned local Nilpotent.lean; it cannot certify a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every nontrivial finite p-group has a normal subgroup of index p",
+   "results": "{\"t\": \"2026-10-24T08:15:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every nontrivial finite p-group has a normal subgroup of index p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPGroup.toSylow\", \"IsPGroup.bot_lt_center\", \"Sylow.nonempty\", \"IsPGroup.center_nontrivial\", \"IsPGroup.exists_le_sylow\", \"Sylow.exists_subgroup_le_card_le\", \"IsPGroup.index\", \"Sylow.exists_subgroup_card_pow_prime_of_le_card\"], \"digest\": \"46143f91348bece2\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match in the pinned source: separate subgroup-existence and least-prime-index normality theorems require the order-index computation between them. The online isCoatom characterization is absent from the pinned source; this item remains split.",
+   "digest": "46143f91348bece2"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A maximal subgroup in a finite group of prime power order is normal of prime index",
+   "results": "{\"t\": \"2026-10-24T08:16:39Z\", \"tool\": \"leanfinder\", \"query\": \"A maximal subgroup in a finite group of prime power order is normal of prime index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Sylow.normal_of_all_max_subgroups_normal\", \"Subgroup.normal_of_index_eq_minFac_card\", \"IsPGroup.toSylow\", \"Sylow.ofCard\", \"Sylow\", \"IsPGroup.index\", \"Sylow.exists_subgroup_card_pow_prime\", \"Sylow.exists_subgroup_card_pow_succ\"], \"digest\": \"98b46cc172879631\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match in the pinned source: separate subgroup-existence and least-prime-index normality theorems require the order-index computation between them. The online isCoatom characterization is absent from the pinned source; this item remains split.",
+   "digest": "98b46cc172879631"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPGroup, Subgroup.index",
+   "results": "{\"t\": \"2026-10-24T08:15:22Z\", \"tool\": \"loogle\", \"query\": \"IsPGroup, Subgroup.index\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"IsPGroup.index\", \"IsPGroup.le_or_disjoint_of_coprime\", \"IsPGroup.toSylow\", \"IsPGroup.toSylow_coe\", \"IsPGroup.mem_toSylow\", \"IsPGroup.isCoatom_iff_index_eq_prime\", \"IsPGroup.not_isCyclic_iff_exists_ne_index_eq_prime\"], \"digest\": \"6995bb0c6ce00b55\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match in the pinned source: separate subgroup-existence and least-prime-index normality theorems require the order-index computation between them. The online isCoatom characterization is absent from the pinned source; this item remains split.",
+   "digest": "6995bb0c6ce00b55"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_subgroup_card_pow_prime|normal_of_index_eq_minFac_card|isCoatom_iff_index_eq_prime",
+   "results": "{\"t\": \"2026-10-24T08:15:21Z\", \"tool\": \"grep\", \"query\": \"exists_subgroup_card_pow_prime|normal_of_index_eq_minFac_card|isCoatom_iff_index_eq_prime\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/Sylow.lean\", \"Mathlib/GroupTheory/IndexNormal.lean\"], \"digest\": \"b07568f716cb23ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match in the pinned source: separate subgroup-existence and least-prime-index normality theorems require the order-index computation between them. The online isCoatom characterization is absent from the pinned source; this item remains split.",
+   "digest": "b07568f716cb23ee"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A maximal proper subgroup of a finite p group is normal and has index p",
+   "results": "{\"t\": \"2026-10-24T08:15:22Z\", \"tool\": \"leansearch\", \"query\": \"A maximal proper subgroup of a finite p group is normal and has index p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPGroup.toSylow\", \"Sylow.normal_of_all_max_subgroups_normal\", \"IsPGroup.index\", \"Subgroup.normal_of_index_eq_minFac_card\", \"Sylow.mk.sizeOf_spec\", \"Sylow.mk\", \"Sylow.card_eq_index_normalizer\", \"Sylow.recOn\"], \"digest\": \"5ae4c65da7581b93\"}",
+   "date": "2026-10-24",
+   "verdict": "no exact match in the pinned source: separate subgroup-existence and least-prime-index normality theorems require the order-index computation between them. The online isCoatom characterization is absent from the pinned source; this item remains split.",
+   "digest": "5ae4c65da7581b93"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-normal-ramification-filtration",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through lem-sfb-epp-finite-coefficient-triple: Stacks 09F8 lemma-special-case, normal-closure/inertia paragraph and the following induction paragraph. The latest blueprint direct-image proof (3) no longer contains this historical auxiliary algebra argument. Supporting input: refining the wild p-group by normal index-p subgroups",
+   "via": [
+    "lem-sfb-epp-normal-ramification-filtration",
+    "lem-sfb-epp-finite-coefficient-triple",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-p-group-normal-index-p",
+  "worker": "stage1",
+  "summary": "Preserved the statement and historical source provenance. Supplied a complete four-step proof through generalized Sylow subgroup existence, the existing order-index formula, elementary prime-divisor arithmetic, and least-prime-index normality. Created two exact/general Mathlib leaves with source lines and logged searches; searched the project and all blueprint nodes for attachments and duplicates. No Lean written or compiled.",
+  "blueprint": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through lem-sfb-epp-finite-coefficient-triple: Stacks 09F8 lemma-special-case, normal-closure/inertia paragraph and the following induction paragraph. The latest blueprint direct-image proof (3) no longer contains this historical auxiliary algebra argument. Supporting input: refining the wild p-group by normal index-p subgroups; the four steps prove only the auxiliary p-group input, without changing the current unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-7e8ec39a6",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-7e8ec39a6 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The item statement is unchanged from live (clones/side-live, still unsplit) and true; a>=1 is needed. Step 1: lem-sfb-finite-subgroup-prime-power-order = Sylow.exists_subgroup_card_pow_prime (Sylow.lean:699-703, exact) gives H with |H|=p^(a-1). Step 2: the existing leaf lem-sfb-surjective-subgroup-image-index with the identity surjection gives |H|[P:H]=|P|, hence [P:H]=p (checked against Subgroup.card_mul_index, Index.lean:290). Step 3 (elementary): the least prime divisor of p^a is p and |P|>1. Step 4: lem-sfb-least-prime-index-normal = Subgroup.normal_of_index_eq_minFac_card (IndexNormal.lean:45). Its hypothesis |G|>1 rules out the degenerate minFac cases, so the leaf is a one-line specialization; Normal is equivalent to gHg^-1=H. Both new nodes are general, strictly smaller than the item, statement-only Mathlib leaves. rg -L over dag/nodes for those Mathlib declarations and for p-group/Sylow/index titles found no duplicates (closest: sylow-subgroup-cardinality, weil-pbc-sylow-subgroup-prime-index, per-finite-prime-power-central-series, which state other things). Stacks 09F8 lemma-special-case filtration paragraph (more-algebra.tex l.35400ff) was read and is correctly cited as context only, so proof_origin=agent is right. Every cited node is a Mathlib leaf, so no route or tool_uses issue; no SGA. Edge cases a=1, C_p x C_p, order-8 groups and S_3 checked. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.FinitePGroupNormalIndex",
+  "declaration": "Subgroup.exists_normal_index_prime_of_card_eq_prime_pow",
+  "file": "lean/Sheaf/GroupTheory/FinitePGroupNormalIndex.lean",
+  "statement": "theorem exists_normal_index_prime_of_card_eq_prime_pow (P : Type u) [Group P] [Finite P] (p a : ℕ) (hp : p.Prime) (ha : 1 ≤ a) (hcard : Nat.card P = p ^ a) : ∃ H : Subgroup P, H.Normal ∧ H.index = p",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9094bc4df",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Node unchanged from live except the lean field; lean.statement verbatim in the file. Every clause matches: Type u group, [Finite P] (= Set.univ.Finite, the dependency def-sfb-finite-infinite-set), p.Prime, 1 ≤ a, Nat.card P = p^a, ∃ H with H.Normal ∧ H.index = p (finite index = left-coset count). No extra instances or universe restriction. Edge cases a=1 (H=⊥), a=0 excluded, p=2, nonabelian groups. No exact Mathlib or project duplicate (isCoatom_iff_index_eq_prime absent in pinned Mathlib; Sheaf/WeilConjectures grep). Only proof is sorry, no definitions; source and blueprint docstrings present, declaration docstring has all 4 proof steps. Report has both required sections. Minor: no copyright header. No compile needed, no file changed."
+ }
+}

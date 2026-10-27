@@ -1,0 +1,280 @@
+{
+ "id": "lem-trf-residue-simultaneous-section-lift",
+ "kind": "statement",
+ "title": "Residue reduction and lifting a simultaneous good section",
+ "statement": "Let $R$ be a commutative ring with exactly one maximal ideal $\\mathfrak m$, put $k=R/\\mathfrak m$, and let $\\rho:R\\to k$ be the quotient map. For $t\\geq0$ let $R^{\\oplus t}$ and $k^{\\oplus t}$ denote the coordinate modules [def-weil-pbc-free-module], and let $\\rho_t:R^{\\oplus t}\\to k^{\\oplus t}$ act coordinatewise. Given integers $m,n\\geq0$ and $R$-linear maps $\\alpha,\\beta:R^{\\oplus n}\\to R^{\\oplus m}$, write $a,b:k^{\\oplus n}\\to k^{\\oplus m}$ for their coefficientwise reductions in the standard bases. Then $k$ is a field [def-weil-field], $\\rho$ is a local homomorphism (the inverse image of the unique maximal ideal of $k$ is $\\mathfrak m$), and surjectivity of $\\alpha$ or $\\beta$ implies surjectivity of $a$ or $b$, respectively. For every $k$-linear map $q:k^{\\oplus m}\\to k^{\\oplus n}$ there exists an $R$-linear map $s:R^{\\oplus m}\\to R^{\\oplus n}$ with $\\rho_n\\circ s=q\\circ\\rho_m$. More precisely, any choices $v_j\\in R^{\\oplus n}$ with $\\rho_n(v_j)=q(e_j)$, for the standard vectors $e_j$ of $k^{\\oplus m}$, give such a map by $s((r_j))=\\sum_jr_jv_j$. Under the scalar-extension identifications $R^{\\oplus t}\\otimes_R k\\simeq k^{\\oplus t}$ given by $(r_i)\\otimes c\\mapsto(\\rho(r_i)c)$, with inverse $(c_i)\\mapsto\\sum_i e_i\\otimes c_i$ [def-weil-module-base-change], the scalar extensions of $\\alpha\\circ s$ and $\\beta\\circ s$ are $a\\circ q$ and $b\\circ q$. If $a\\circ q$ and $b\\circ q$ are linear isomorphisms, then every such lift $s$ has both $\\alpha\\circ s$ and $\\beta\\circ s$ linear isomorphisms over $R$, and $s$ is injective. In that case put $U=\\operatorname{im}(s)\\subseteq R^{\\oplus n}$. The induced map $s:R^{\\oplus m}\\to U$ is a linear isomorphism, both restrictions $\\alpha|_U$ and $\\beta|_U$ are linear isomorphisms onto $R^{\\oplus m}$, and $R^{\\oplus n}=\\ker(\\alpha)\\oplus U=\\ker(\\beta)\\oplus U$. For $\\gamma\\in\\{\\alpha,\\beta\\}$ the projection of $x\\in R^{\\oplus n}$ to $U$ in this decomposition is $(\\gamma|_U)^{-1}(\\gamma(x))$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK (lemma-homotopic-surjections), final paragraph: the field common-complement assertion and its residue-field lift; details explicitly omitted in the source."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-free-module",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Since $\\mathfrak m$ is maximal it is proper, so $\\rho(1)\\ne0$. If $\\bar r\\ne0$, choose a representative $r\\notin\\mathfrak m$. By [lem-weil-pbc-local-ring-unit-criterion], $r$ has an inverse; its image is an inverse of $\\bar r$. Thus $k$ is a field [def-weil-field]. Its only maximal ideal is zero: any ideal containing a nonzero element contains its inverse product $1$. Hence $\\rho^{-1}(0)=\\mathfrak m$ proves locality. Quotient classes have representatives, so $\\rho$ and every finite coordinate map $\\rho_t$ are surjective.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "For any $R$-linear $f:R^{\\oplus u}\\to R^{\\oplus v}$, write $f(e_j)=\\sum_i f_{ij}e_i$ using the coordinate bases [def-weil-pbc-free-module]. Then $\\rho_v(f(x))_i=\\sum_j\\rho(f_{ij})\\rho(x_j)$, so coefficient reduction $\\bar f$ satisfies $\\rho_v f=\\bar f\\rho_u$. If $f$ is surjective, lift $y\\in k^{\\oplus v}$ to $z\\in R^{\\oplus v}$, choose $x$ with $f(x)=z$, and obtain $\\bar f(\\rho_u x)=y$. Apply this to $\\alpha$ and $\\beta$ separately.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "For each standard vector $e_j\\in k^{\\oplus m}$, surjectivity of $\\rho_n$ provides $v_j\\in R^{\\oplus n}$ with $\\rho_n(v_j)=q(e_j)$. Given any such choices, set $s((r_j))=\\sum_j r_jv_j$. The finite sum is $R$-linear and $\\rho_n s((r_j))=\\sum_j\\rho(r_j)q(e_j)=q(\\rho_m((r_j)))$. The basis property [def-weil-pbc-free-module] justifies the formula on every vector, and proves the required lift for arbitrary choices.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "Define $T_t:R^{\\oplus t}\\otimes_R k\\to k^{\\oplus t}$ by $T_t(r\\otimes c)=(\\rho(r_i)c)_i$. The formula is additive in each argument and balanced, since $\\rho(ar_i)c=\\rho(r_i)(\\rho(a)c)$; it therefore defines a map on the tensor product [def-weil-module-base-change]. It is $k$-linear. Define $J_t((c_i))=\\sum_i e_i\\otimes c_i$, also $k$-linear. Directly $T_tJ_t=1$, while on a pure tensor $J_tT_t(r\\otimes c)=\\sum_i e_i\\otimes\\rho(r_i)c=\\sum_i r_ie_i\\otimes c=r\\otimes c$ by balancing. Pure tensors generate the tensor product, so $J_tT_t=1$. These are exactly the identifications in the statement.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "For $f:R^{\\oplus u}\\to R^{\\oplus v}$ and its coefficient reduction $\\bar f$, the scalar-extension formula [def-weil-module-base-change] gives, on each pure tensor, $T_v((f\\otimes_R k)(r\\otimes c))=\\rho_v(f(r))c=\\bar f(\\rho_u(r)c)=\\bar f(T_u(r\\otimes c))$. Thus $T_v(f\\otimes_R k)T_u^{-1}=\\bar f$. Using $\\rho_n s=q\\rho_m$ and $\\rho_m\\gamma=\\bar\\gamma\\rho_n$ for $\\gamma=\\alpha,\\beta$ identifies the reduction of $\\gamma s$ with $\\bar\\gamma q$: both agree after precomposition with the surjection $\\rho_m$. Hence the two scalar extensions are $aq$ and $bq$ as claimed.",
+   "uses": [
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "Assume $aq$ and $bq$ are isomorphisms. For each $\\gamma\\in\\{\\alpha,\\beta\\}$ apply [lem-sc-local-free-base-change-reflects-iso] to the local homomorphism $\\rho:R\\to k$ and the map $\\gamma s:R^{\\oplus m}\\to R^{\\oplus m}$. Both rings are commutative local rings by step 1; source and target have finite coordinate bases, and step 5 identifies scalar extension with the assumed isomorphism. The cited theorem therefore makes both $\\alpha s$ and $\\beta s$ isomorphisms over $R$. This applies to every chosen lift, because only its reduction identity was used.",
+   "uses": [
+    "lem-sc-local-free-base-change-reflects-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "If $s(y)=0$, then $(\\alpha s)(y)=0$, so $y=0$. Thus $s$ is injective and its corestriction $\\widetilde s:R^{\\oplus m}\\to U=\\operatorname{im}(s)$ is bijective; its inverse is linear, since the unique preimages of sums and scalar multiples are sums and scalar multiples of preimages. For either $\\gamma$, the restriction $\\gamma|_U=(\\gamma s)\\widetilde s^{-1}$ is an isomorphism with inverse $\\widetilde s(\\gamma s)^{-1}$. This proves all the image and restriction assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  },
+  {
+   "text": "For either $\\gamma$, put $p_\\gamma(x)=(\\gamma|_U)^{-1}(\\gamma(x))\\in U$. Then $\\gamma(x-p_\\gamma(x))=0$, so $x=(x-p_\\gamma(x))+p_\\gamma(x)$ lies in $\\ker\\gamma+U$. If $u\\in U\\cap\\ker\\gamma$, injectivity of $\\gamma|_U$ gives $u=0$. Consequently this sum is direct, and its $U$-projection is exactly $p_\\gamma$. Applying the calculation to $\\alpha$ and $\\beta$ proves both decompositions and both projection formulas, including empty coordinate modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph: explicit expansion of the omitted residue-field lift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-field",
+  "def-weil-pbc-free-module",
+  "def-weil-module-base-change",
+  "lem-sc-local-free-base-change-reflects-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FJK, lemma-homotopic-surjections, final paragraph (details omitted); explicit coordinate and tensor calculations supplied by Q78, with existing local-map reflection theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "bijective.*residue|residue.*bijective|lift.*[Mm]atrix|[Mm]atrix.*lift|isUnit_det_iff",
+   "results": "{\"t\": \"2026-10-22T06:44:27Z\", \"tool\": \"grep\", \"query\": \"bijective.*residue|residue.*bijective|lift.*[Mm]atrix|[Mm]atrix.*lift|isUnit_det_iff\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\"], \"digest\": \"b64b61299b02f703\"} The hits supply single-map lifting or a criterion for a fixed family to be a basis, not the full coefficient lift with its tensor comparison and two simultaneous invertible composites. Read Module.IsLocalRing.linearCombination_bijective_of_flat at Mathlib/RingTheory/LocalRing/Module.lean:294-301 and IsLocalRing.split_injective_iff_lTensor_residueField_injective at lines 334-337.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, LinearMap, Function.Bijective",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, LinearMap, Function.Bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.IsLocalRing.linearCombination_bijective_of_flat\"], \"digest\": \"71696f432db1562c\"} The hits supply single-map lifting or a criterion for a fixed family to be a basis, not the full coefficient lift with its tensor comparison and two simultaneous invertible composites. Read Module.IsLocalRing.linearCombination_bijective_of_flat at Mathlib/RingTheory/LocalRing/Module.lean:294-301 and IsLocalRing.split_injective_iff_lTensor_residueField_injective at lines 334-337.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A matrix over a residue field of a local ring lifts to a linear map between finite free modules and invertible compositions modulo the maximal ideal lift to invertible compositions",
+   "results": "{\"t\": \"2026-10-22T06:44:28Z\", \"tool\": \"leansearch\", \"query\": \"A matrix over a residue field of a local ring lifts to a linear map between finite free modules and invertible compositions modulo the maximal ideal lift to invertible compositions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.residue\", \"IsLocalRing.ResidueField.lift\", \"IsLocalizedModule.lift_comp\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"LinearMap.codLift\", \"IsLocalizedModule.lift_iso\", \"IsLocalRing.ResidueField.lift_comp_residue\", \"LocalizedModule.lift_comp\"], \"digest\": \"30db58a10a286604\"} The hits supply single-map lifting or a criterion for a fixed family to be a basis, not the full coefficient lift with its tensor comparison and two simultaneous invertible composites. Read Module.IsLocalRing.linearCombination_bijective_of_flat at Mathlib/RingTheory/LocalRing/Module.lean:294-301 and IsLocalRing.split_injective_iff_lTensor_residueField_injective at lines 334-337.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a commutative local ring lift a linear map q between finite free residue vector spaces to a matrix s so that two prescribed composites alpha s and beta s are invertible whenever their reductions are invertible",
+   "results": "{\"t\": \"2026-10-22T06:44:38Z\", \"tool\": \"leanfinder\", \"query\": \"Over a commutative local ring lift a linear map q between finite free residue vector spaces to a matrix s so that two prescribed composites alpha s and beta s are invertible whenever their reductions are invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_bijective_map_powers\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"LinearMap.split_surjective_of_localization_maximal\", \"Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"IsAzumaya.matrix\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\"], \"digest\": \"eb344f2b537c5a2e\"} The hits supply single-map lifting or a criterion for a fixed family to be a basis, not the full coefficient lift with its tensor comparison and two simultaneous invertible composites. Read Module.IsLocalRing.linearCombination_bijective_of_flat at Mathlib/RingTheory/LocalRing/Module.lean:294-301 and IsLocalRing.split_injective_iff_lTensor_residueField_injective at lines 334-337.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "linearCombination_bijective_of_flat|split_injective_iff|bijective.*[Tt]ensor|[Tt]ensor.*bijective",
+   "results": "{\"t\": \"2026-10-22T06:44:45Z\", \"tool\": \"grep\", \"query\": \"linearCombination_bijective_of_flat|split_injective_iff|bijective.*[Tt]ensor|[Tt]ensor.*bijective\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"feb9f113a6961eb2\"} The hits supply single-map lifting or a criterion for a fixed family to be a basis, not the full coefficient lift with its tensor comparison and two simultaneous invertible composites. Read Module.IsLocalRing.linearCombination_bijective_of_flat at Mathlib/RingTheory/LocalRing/Module.lean:294-301 and IsLocalRing.split_injective_iff_lTensor_residueField_injective at lines 334-337.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lifting a simultaneous good section from the residue field of a local ring by choosing lifts of finitely many columns, compatible with base change and invertibility of two composites",
+   "results": "{\"t\": \"2026-10-22T06:45:00Z\", \"tool\": \"leanfinder\", \"query\": \"Lifting a simultaneous good section from the residue field of a local ring by choosing lifts of finitely many columns, compatible with base change and invertibility of two composites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"LinearMap.split_surjective_of_localization_maximal\", \"Ideal.ResidueField.liftₐ_comp_toAlgHom\", \"Module.FinitePresentation.exists_notMem_bijective\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\", \"Module.exists_basis_of_basis_baseChange\", \"IsLocalRing.ResidueField.lift_comp_residue\", \"AdicCompletion.eval_lift\"], \"digest\": \"3e6a3ee1bceccf7c\"} The hits supply single-map lifting or a criterion for a fixed family to be a basis, not the full coefficient lift with its tensor comparison and two simultaneous invertible composites. Read Module.IsLocalRing.linearCombination_bijective_of_flat at Mathlib/RingTheory/LocalRing/Module.lean:294-301 and IsLocalRing.split_injective_iff_lTensor_residueField_injective at lines 334-337.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, LinearMap, Function.Bijective",
+   "results": "{\"t\": \"2026-10-23T12:17:49Z\", \"tool\": \"loogle\", \"query\": \"IsLocalRing, LinearMap, Function.Bijective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Module.IsLocalRing.linearCombination_bijective_of_flat\"], \"digest\": \"71696f432db1562c\"} Read the hits: basis lifting, split-injection detection, and localization equivalence lifting do not state the full two-map lift with its tensor identification, image and projection clauses. Read Mathlib/RingTheory/LocalRing/Module.lean:294-301,334-337; reuse the existing DAG local-map reflection theorem instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift finite free module maps from a local residue field with two invertible composites and complementary image",
+   "results": "{\"t\": \"2026-10-23T12:17:49Z\", \"tool\": \"leansearch\", \"query\": \"Lift finite free module maps from a local residue field with two invertible composites and complementary image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.ResidueField.liftₐ\", \"IsLocalizedModule.lift_comp\", \"Ideal.ResidueField.lift\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"IsLocalRing.ResidueField.lift_comp_residue\", \"LocalizedModule.lift'\", \"Module.FinitePresentation.exists_lift_of_isLocalizedModule\", \"IsLocalizedModule.lift_iso\"], \"digest\": \"b1837213aafedb0b\"} Read the hits: basis lifting, split-injection detection, and localization equivalence lifting do not state the full two-map lift with its tensor identification, image and projection clauses. Read Mathlib/RingTheory/LocalRing/Module.lean:294-301,334-337; reuse the existing DAG local-map reflection theorem instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "linearCombination_bijective_of_flat|bijective.*residue|residue.*bijective|lift.*[Mm]atrix",
+   "results": "{\"t\": \"2026-10-23T12:17:49Z\", \"tool\": \"grep\", \"query\": \"linearCombination_bijective_of_flat|bijective.*residue|residue.*bijective|lift.*[Mm]atrix\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MatrixAlgebra.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\"], \"digest\": \"7618997315bdef43\"} Read the hits: basis lifting, split-injection detection, and localization equivalence lifting do not state the full two-map lift with its tensor identification, image and projection clauses. Read Mathlib/RingTheory/LocalRing/Module.lean:294-301,334-337; reuse the existing DAG local-map reflection theorem instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a linear map between finite free residue vector spaces over a local ring by lifting its columns; if two composites reduce to isomorphisms then both lifted composites are invertible and the image is a common kernel complement",
+   "results": "{\"t\": \"2026-10-23T12:17:58Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a linear map between finite free residue vector spaces over a local ring by lifting its columns; if two composites reduce to isomorphisms then both lifted composites are invertible and the image is a common kernel complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.exists_notMem_bijective\", \"exists_bijective_map_powers\", \"Module.free_of_lTensor_residueField_injective\", \"Module.FinitePresentation.exists_lift_equiv_of_isLocalizedModule\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.exists_basis_of_basis_baseChange\", \"LinearMap.split_surjective_of_localization_maximal\"], \"digest\": \"959aa6475980a2c8\"} Read the hits: basis lifting, split-injection detection, and localization equivalence lifting do not state the full two-map lift with its tensor identification, image and projection clauses. Read Mathlib/RingTheory/LocalRing/Module.lean:294-301,334-337; reuse the existing DAG local-map reflection theorem instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "linearCombination_bijective_of_flat|split_injective_iff_lTensor_residueField_injective",
+   "results": "{\"t\": \"2026-10-23T12:18:26Z\", \"tool\": \"grep\", \"query\": \"linearCombination_bijective_of_flat|split_injective_iff_lTensor_residueField_injective\", \"sub\": \"RingTheory/LocalRing\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\", \"Mathlib/RingTheory/LocalRing/Module.lean\"], \"digest\": \"de0e35c25663b367\"} Read the hits: basis lifting, split-injection detection, and localization equivalence lifting do not state the full two-map lift with its tensor identification, image and projection clauses. Read Mathlib/RingTheory/LocalRing/Module.lean:294-301,334-337; reuse the existing DAG local-map reflection theorem instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose lifts of columns of a common section for two surjective linear maps over the residue field of a local ring, and show its image complements both kernels",
+   "results": "{\"t\": \"2026-10-23T12:18:29Z\", \"tool\": \"leanfinder\", \"query\": \"Choose lifts of columns of a common section for two surjective linear maps over the residue field of a local ring, and show its image complements both kernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.exists_notMem_bijective\", \"LinearMap.split_surjective_of_localization_maximal\", \"Module.IsLocalRing.linearCombination_bijective_of_flat\", \"exists_bijective_map_powers\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"Module.FinitePresentation.exists_lift_of_isLocalizedModule\", \"surjective_of_isLocalized_span\"], \"digest\": \"26713ef07b443001\"} Read the hits: basis lifting, split-injection detection, and localization equivalence lifting do not state the full two-map lift with its tensor identification, image and projection clauses. Read Mathlib/RingTheory/LocalRing/Module.lean:294-301,334-337; reuse the existing DAG local-map reflection theorem instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-local-common-summand-surjections",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Lower-level input: the homotopy and composition calculus for kernel-normalized determinant maps of surjective two-term complex maps, before passage to derived objects. Auxiliary module input: A common summand for two surjections of finite free modules over a local ring. Re-split of this auxiliary input: the passage from the residue-field solution to the local ring in Stacks 0FJK, final paragraph; old proof steps 1, 6--8: residue reduction, column lifts, scalar comparison, local isomorphism reflection, and the image/kernel decompositions for the supplied section.",
+   "via": [
+    "lem-trf-local-common-summand-surjections",
+    "lem-trf-surjective-two-term-determinant-calculus",
+    "lem-trf-two-term-perfect-determinant",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-residue-simultaneous-section-lift",
+  "worker": "stage1",
+  "summary": "Q78 expanded the residue lifting omitted in Stacks 0FJK into eight checked steps; preserves every statement clause, reuses the existing local-ring unit criterion and finite-free local-map isomorphism reflection, and creates no nodes. Coordinate lifts, tensor inverse formulas, surjectivity reduction, kernel complements and projections are explicit.",
+  "blueprint": "The inherited nearest ancestor is lem-trf-local-term-locality; retain the recorded auxiliary determinant/common-summand descent chain. This split realizes the residue-field lift component of lem-trf-local-common-summand-surjections (old steps 1 and 6--8), below the unit route; current latest blueprint ancestor read. Whole-blueprint searches for common summand, section lift and simultaneous found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-local-free-base-change-reflects-iso",
+    "why": "Generic finite-free module isomorphism reflection along a local homomorphism, used for the residue quotient; this unit provides no corresponding algebraic reflection theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-local-free-base-change-reflects-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-8ec5870b8",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-8ec5870b8 (reviewer sub-agent of L); spot-checked: Read the whole item and all 8 steps against Stacks more-algebra.tex 0FJK lemma-homotopic-surjections, last paragraph (residue lift, 'details omitted'), and algebra.tex 00E9. The delivery changes no statement, stmt_deps, source or blueprint (byte-identical to live and side-live). It adds the proof and no new nodes. There is no repair note for this item: the re-split rule applies to the parent lem-trf-local-common-summand-surjections, and this item is one of its split nodes. Steps 1-5 and 7-8 are correct elementary calculations, each checked: the field and locality via lem-weil-pbc-local-ring-unit-criterion; coefficient reduction and surjectivity descent; column lifts; T_t/J_t balanced and inverse on pure tensors; reduction of the composite = a q or b q via surjectivity of rho_m; restriction inverses; direct sums and projection formula. Step 6 is the only non-elementary step. It correctly applies lem-sc-local-free-base-change-reflects-iso: R and k are local, rho is local, R^m is finite free. Lean signature checked; no extra hypotheses. Edge cases tested: m=0, n=0<m, R a field, and Z/4 with alpha=(1,0), beta=(1,2), where every lift (odd, even) works. No duplicate found (rg -L), no cycle, no SGA. I accept the tool_uses entry for the generic reflection node from another unit. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ResidueSimultaneousSectionLift",
+  "declaration": "IsLocalRing.residue_simultaneous_section_lift",
+  "declarations": [
+   "IsLocalRing.residueCoordinates",
+   "IsLocalRing.residueCoordinateMap",
+   "IsLocalRing.residue_simultaneous_section_lift"
+  ],
+  "file": "lean/Sheaf/RingTheory/ResidueSimultaneousSectionLift.lean",
+  "statement": "theorem residue_simultaneous_section_lift (R : Type u) [CommRing R] [IsLocalRing R] (m n : ℕ) (α β : (Fin n → R) →ₗ[R] (Fin m → R)) : IsField (ResidueField R) ∧ IsLocalHom (residue R) ∧ Ideal.comap (residue R) (maximalIdeal (ResidueField R)) = maximalIdeal R ∧ (∀ γ : (Fin n → R) →ₗ[R] (Fin m → R), γ = α ∨ γ = β → Function.Surjective γ → Function.Surjective (residueCoordinateMap R γ)) ∧ (∀ t : ℕ, (∀ (x : Fin t → R) (c : ResidueField R), TensorProduct.piScalarRight R (ResidueField R) (ResidueField R) (Fin t) (c ⊗ₜ[R] x) = fun i ↦ residue R (x i) * c) ∧ (∀ z : Fin t → ResidueField R, (TensorProduct.piScalarRight R (ResidueField R) (ResidueField R) (Fin t)).symm z = ∑ i : Fin t, z i ⊗ₜ[R] (Pi.single i (1 : R)))) ∧ ∀ q : (Fin m → ResidueField R) →ₗ[ResidueField R] (Fin n → ResidueField R), (∃ s : (Fin m → R) →ₗ[R] (Fin n → R), ∀ x, residueCoordinates R n (s x) = q (residueCoordinates R m x)) ∧ (∀ v : Fin m → (Fin n → R), (∀ j, residueCoordinates R n (v j) = q (Pi.single j 1)) → (∀ x, residueCoordinates R n ((Pi.basisFun R (Fin m)).constr R v x) = q (residueCoordinates R m x)) ∧ (∀ x, (Pi.basisFun R (Fin m)).constr R v x = ∑ j : Fin m, x j • v j)) ∧ (∀ s : (Fin m → R) →ₗ[R] (Fin n → R), (∀ x, residueCoordinates R n (s x) = q (residueCoordinates R m x)) → (∀ γ : (Fin n → R) →ₗ[R] (Fin m → R), γ = α ∨ γ = β → (TensorProduct.piScalarRight R (ResidueField R) (ResidueField R) (Fin m)).toLinearMap ∘ₗ (γ.comp s).baseChange (ResidueField R) ∘ₗ (TensorProduct.piScalarRight R (ResidueField R) (ResidueField R) (Fin m)).symm.toLinearMap = (residueCoordinateMap R γ).comp q) ∧ (Function.Bijective ((residueCoordinateMap R α).comp q) → Function.Bijective ((residueCoordinateMap R β).comp q) → Function.Bijective (α.comp s) ∧ Function.Bijective (β.comp s) ∧ Function.Injective s ∧ ∃ e : (Fin m → R) ≃ₗ[R] LinearMap.range s, e.toLinearMap = s.rangeRestrict ∧ ∀ γ : (Fin n → R) →ₗ[R] (Fin m → R), γ = α ∨ γ = β → ∃ g : LinearMap.range s ≃ₗ[R] (Fin m → R), g.toLinearMap = γ.comp (LinearMap.range s).subtype ∧ ∃ h : IsCompl (LinearMap.ker γ) (LinearMap.range s), ∀ x : Fin n → R, (LinearMap.range s).projectionOnto (LinearMap.ker γ) h.symm x = g.symm (γ x)))",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d8166a3e7",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Node unchanged except the lean field; lean.statement matches the file verbatim. Every clause matches the node: field and locality of the residue map, surjectivity carried down with none assumed, existence of a lift and the explicit column-lift formula, the tensor identifications with formulas proved by Mathlib piScalarRightHom_tmul/piScalarRight_symm_single (k on the left, the order of def-weil-module-base-change), base change of gamma∘s equals the reduced gamma∘q for every lift, invertibility and injectivity for every lift, e pinned to s.rangeRestrict, g pinned to gamma∘subtype, IsCompl with projectionOnto direction checked at Projection.lean:126. Edge cases m=0, n=0<m, R a field and Z/4 checked; no extra hypotheses or universe restriction. Helpers have real data and no project duplicate. Proof is sorry only; docstrings have the source place, blueprint id and proof plan. Not recompiled because no file changed. Note: the report's 'Second reading by Q09' is the worker's own self-audit, not an independent reading."
+ }
+}

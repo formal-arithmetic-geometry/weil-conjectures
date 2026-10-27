@@ -18,123 +18,52 @@
  ],
  "proof": [
   {
-   "text": "For invertible $L$, quasi-coherence is part of [def-sc-invertible-module], so [lem-sc-etale-qcoherent-descent] supplies the sheaf underlying $A_X(L)$. Its restrictions are semilinear and compose by [lem-sc-etale-qcoherent-presheaf-functorial]; thus its sectionwise scalar action makes it a module sheaf. For $h:L\\to K$, naturality of the pullback adjunction [lem-pc-module-pullback-adjunction] gives $g^*(u^*h(s))=g^*u^*h(g^*s)$, and naturality of the composition comparison in [def-pc-module-pullback] gives $\\rho_g(u^*h(s))=u'^*h(\\rho_g(s))$. Therefore the stated components define $A_X(h)$. Pullback and global sections preserve identities and compositions, proving the functor laws. For the structure module, $u^*\\mathcal O_X\\simeq\\mathcal O_U$ is the tensor map $a\\otimes b\\mapsto a\\,u^\\sharp(b)$ with inverse $a\\mapsto a\\otimes1$. It identifies the restrictions with the ring restrictions, proving $A_X(\\mathcal O_X)\\simeq\\mathcal O_{X_{\\mathrm{et}}}$, including its module action.",
+   "text": "Apply [lem-trf-etale-line-sections-normalized-comparisons] to the specified section functor. It gives its module action and morphism formula, the structure-module identification, all natural etale restriction comparisons with their identity and composition equations, and the line-module property on Zariski frames. Thus $A_X$ has precisely the objects, maps and additional comparisons required in the statement.",
    "uses": [
-    "def-sc-invertible-module",
-    "lem-sc-etale-qcoherent-descent",
-    "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-pc-module-pullback-adjunction",
-    "def-pc-module-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
-   }
-  },
-  {
-   "text": "For etale $v:Y\\to X$ and $w:W\\to Y$, the component of the restriction comparison is $\\Gamma(W,(v\\circ w)^*L)\\simeq\\Gamma(W,w^*v^*L)$ from [def-pc-module-pullback]. The composition is etale: apply [lem-weil-pbc-etale-covering-composition] to the covering $\\{v,\\mathrm{id}_X\\}$ and, over its $Y$ member, $\\{w,\\mathrm{id}_Y\\}$ (use the identity covering over its $X$ member). Compatibility with restrictions and with $h$ follows from the unit-normalized composition comparison of [lem-sc-etale-qcoherent-presheaf-functorial]. Explicitly its tensor formula multiplies the intermediate scalar into the final scalar; the inverse inserts $1$ in the intermediate factor. For three successive pullbacks, both composites on local tensor generators multiply the three scalars in their original order, so associativity makes them equal; identity comparisons insert or remove $1$. Since tensor generators locally generate the pullback sheaves, these are equalities of the module maps. This proves the identity, composition and morphism compatibilities claimed in the item.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-weil-pbc-etale-covering-composition",
-    "lem-sc-etale-qcoherent-presheaf-functorial"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), and remark-change-topologies-ringed-sites; explicit tensor associativity verifies coherence."
-   }
-  },
-  {
-   "text": "Choose a Zariski trivializing cover $V_i\\subseteq X$ for $L$, using [def-sc-invertible-module]. These are objects and a covering of $X_{\\mathrm{et}}$ by [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites]. Pullback along an open immersion is restriction by [lem-weil-pbc-open-immersion-module-pullback-restriction], so $L|_{V_i}\\simeq\\mathcal O_{V_i}$ identifies $v_i^*L$ with the structure module. Step 2 and the structure comparison of Step 1 now identify $A_X(L)$ on each $(V_i)_{\\mathrm{et}}$ with its structure module. Thus the functor takes values in the stated line modules.",
-   "uses": [
-    "def-sc-invertible-module",
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "lem-weil-pbc-open-immersion-module-pullback-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
-   }
-  },
-  {
-   "text": "Given a module-sheaf map $\\alpha:A_X(L)\\to A_X(K)$, evaluate it on every open immersion $j:V\\hookrightarrow X$. Via the natural, unit-compatible restriction identification in [lem-weil-pbc-open-immersion-module-pullback-restriction], these components are $\\mathcal O_X(V)$-linear maps $L(V)\\to K(V)$ commuting with restriction to smaller opens. They therefore define an ordinary module map $h:L\\to K$, by the definition [def-weil-sheaf-of-modules-category]. For a general etale $u:U\\to X$, cover $X$ by opens $V_i$ with frames $e_i$ of $L$ and cover $U$ by $U_i=U\\times_XV_i$. The first cover is etale by [lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites]; its pullback is a cover by [def-weil-pbc-sites-and-cohomology](1). Naturality of $\\alpha$ along $U_i\\to V_i$ gives $\\alpha_{U_i}(u^*e_i)=u^*(h(e_i))$ using Step 2. Every section on $U_i$ is $b\\,u^*e_i$, so linearity gives $\\alpha_{U_i}=\\Gamma(U_i,u^*h)$. For any $s\\in A_X(L)(U)$ the two images in $A_X(K)(U)$ agree on all $U_i$, and hence agree by separatedness. Thus $\\alpha=A_X(h)$. Evaluation on opens also shows that $A_X(h)=A_X(h')$ implies $h=h'$, proving the Hom bijection for all module morphisms.",
-   "uses": [
-    "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "def-weil-sheaf-of-modules-category",
-    "def-sc-invertible-module",
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
-   }
-  },
-  {
-   "text": "Let $G$ be a line module and choose its trivializing etale family $u_a:U_a\\to X$ and frames $t_a:\\mathcal O_{(U_a)_{\\mathrm{et}}}\\xrightarrow{\\sim}G|_{(U_a)_{\\mathrm{et}}}$. Put $R_{ab}=U_a\\times_XU_b$. These are objects of the site by [def-weil-pbc-etale-site]. On its localized site set $\\beta_{ab}=t_a^{-1}t_b$. A module endomorphism $\\beta$ of this structure sheaf is multiplication by its value $g=\\beta_{R_{ab}}(1)$: for $q:W\\to R_{ab}$, naturality gives $\\beta_W(1)=q^\\sharp(g)$, and linearity gives $\\beta_W(b)=bq^\\sharp(g)$. Applying this to the inverse makes $g_{ab}=\\beta_{ab}(1)$ a unit. On triple products the identity $(t_a^{-1}t_b)(t_b^{-1}t_c)=t_a^{-1}t_c$ evaluated at $1$ gives $g_{ab}g_{bc}=g_{ac}$, with the functions pulled back to the triple product. On the diagonal it gives $g_{aa}=1$ after diagonal pullback. Thus multiplication by $g_{ab}$ gives ordinary module gluing maps $\\mathcal O_{U_b}|_{R_{ab}}\\to\\mathcal O_{U_a}|_{R_{ab}}$ satisfying exactly the descent cocycle. Here pullbacks of the structure modules use the tensor unit comparison of Step 1. This is a calculation in frames, requiring no general theorem identifying the two categories of modules.",
-   "uses": [
-    "def-weil-pbc-etale-site",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
-   }
-  },
-  {
-   "text": "The jointly surjective etale family $(u_a)_a$ is fpqc by [lem-weil-pbc-fpqc-finer-than-etale]. Apply the invertible-module descent assertion (3) of [lem-pc-fpqc-descent] to the ordinary structure modules $\\mathcal O_{U_a}$ and the gluing maps of Step 5. It supplies an ordinary invertible module $L$ and isomorphisms $\\lambda_a:u_a^*L\\xrightarrow{\\sim}\\mathcal O_{U_a}$ compatible with those maps. With our orientation this compatibility reads $\\lambda_a=g_{ab}\\lambda_b$ on $R_{ab}$ after the canonical pullback comparisons. Consequently $t_aA(\\lambda_a)=t_bA(\\lambda_b)$ there, because $t_b=t_a\\,g_{ab}$. Steps 1 and 2 identify the domains of these local maps with $A_X(L)$ restricted to $R_{ab}$. All covers here are arbitrary set-indexed covers in the universes of [def-weil-size-convention]; no quasi-compactness or separatedness of $X$ was imposed.",
-   "uses": [
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "lem-pc-fpqc-descent",
-    "def-weil-size-convention"
+    "lem-trf-etale-line-sections-normalized-comparisons"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
    }
   },
   {
-   "text": "Write $e_a=t_aA(\\lambda_a)$. For an object $W\\to X$ and $s\\in A_X(L)(W)$, restrict to $W_a=W\\times_XU_a$ and apply $e_a$ to obtain $r_a\\in G(W_a)$. The family $(W_a\\to W)_a$ is a covering by [def-weil-pbc-sites-and-cohomology](1), and Step 6 makes $r_a$ agree on $W_a\\times_WW_b$. Its sheaf equalizer axiom therefore gives a unique $r\\in G(W)$; define $e_W(s)=r$. Restriction along $W'\\to W$, addition and multiplication by $b\\in\\mathcal O(W)$ commute with this rule because both resulting sections have the same restrictions to all $W'_a$ or $W_a$. Hence $e$ is a module-sheaf map. The inverses $e_a^{-1}$ agree on overlaps as well; the identical gluing rule constructs its inverse. Their composites are identities since they are identities on each $W_a$ and sections are separated. Thus $G\\simeq A_X(L)$, proving essential surjectivity.",
+   "text": "Apply [lem-trf-etale-line-sections-full-faithful] to A, alpha and their scalar and morphism formulas. This supplies full faithfulness on every scheme.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category"
+    "lem-trf-etale-line-sections-full-faithful"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
    }
   },
   {
-   "text": "Finally choose for each line module $G$ a pair $(L_G,e_G:A_X(L_G)\\xrightarrow{\\sim}G)$ from Steps 6 and 7. For $f:G\\to H$, define its inverse-functor image as the unique ordinary module map with $A_X$-image $e_H^{-1}fe_G$, using Step 4. Uniqueness gives the identity and composition laws. The maps $e_G$ form a natural counit isomorphism. For ordinary $L$, lift $e_{A_X(L)}$ by the same Hom bijection to $L_{A_X(L)}\\to L$; lifting its inverse proves this is an isomorphism. Its naturality and the triangle identities follow by applying the faithful $A_X$ and cancelling the $e_G$. This gives an equivalence with the specified functor $A_X$. Steps 1 and 2 already provide its natural structure-module and etale-restriction identifications.",
+   "text": "Apply [lem-trf-etale-line-sections-essentially-surjective] to A, alpha and the scalar formula. Its frame transition and effective gluing argument supplies essential surjectivity.",
+   "uses": [
+    "lem-trf-etale-line-sections-essentially-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
+   }
+  },
+  {
+   "text": "Mathlib Functor.asEquivalence constructs the equivalence from full faithfulness and essential surjectivity while retaining A as the forward functor definitionally. Reuse alpha, epsilon, p and beta with their existing equations, discarding only the extra unit-inverse, unit-compatibility and Zariski-frame clauses of the normalized-comparison lemma.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), proof specialized to locally free rank one modules; Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness."
+    "place": "Tag 03DX (proposition-equivalence-quasi-coherent), part (2); Tag 05VG (lemma-equivalence-quasi-coherent-properties), finite local freeness, specialized to rank one; Tag 03LC (proposition-equivalence-quasi-coherent-functorial), part (1), for pullback compatibility. The equivalence is restricted to invertible modules."
    }
   }
  ],
  "proof_deps": [
-  "def-sc-invertible-module",
-  "lem-sc-etale-qcoherent-descent",
-  "lem-sc-etale-qcoherent-presheaf-functorial",
-  "lem-pc-module-pullback-adjunction",
-  "def-pc-module-pullback",
-  "lem-weil-pbc-etale-covering-composition",
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-pbc-etale-site",
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "lem-pc-fpqc-descent",
-  "def-weil-size-convention"
+  "lem-trf-etale-line-sections-normalized-comparisons",
+  "lem-trf-etale-line-sections-full-faithful",
+  "lem-trf-etale-line-sections-essentially-surjective"
  ],
  "proof_origin": {
   "by": "document",
@@ -515,55 +444,39 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-scheme-etale-invertible-comparison",
   "worker": "stage1",
-  "summary": "Proved the rank-one comparison directly by tensor-pullback sections, restriction to Zariski opens, local-frame transition units, existing fpqc descent of invertible modules, and sectionwise sheaf gluing. All module maps are retained. No new node is needed: the non-elementary descent and topology comparisons already exist. Statement unchanged.",
-  "blueprint": "Realizes the existing blueprint.from place in lem-trf-local-term-locality: interpret polarizations on scheme atlases and overlaps as small-etale line modules, compatibly with pullback; preserves the full recorded ancestry. Whole-blueprint searches for 03DX, 05VG, 03LC and invertible comparison found no identical blueprint statement.",
+  "summary": "Repair of the human re-split order: three statement-only nodes distribute normalized section-functor coherence, frame transition descent data, and effective framed descent/gluing. Reuse the existing more general Hom-bijection node rather than duplicate it. Every old argument is retained verbatim in the report with an allocation to its new task; the parent keeps only assembly. Statement and statement dependencies unchanged. Returned-delivery repair (2026-10-22, returned head c1de88aa34b): rebased by the delivery tool onto current origin/sheaf-dag, re-read all five cited node statements, and verified the canonical section identification and full Hom bijection remain sufficient. Retained all three new tasks, original arguments, searches and citations; updated the report with the live/side-DAG landing disposition for L. Current returned-head repair (2026-10-23, head 8edd03a4974): re-read every current parent citation and the two newly added same-tag nodes. Neither is a duplicate; distinctions are recorded in the report. Clarified the canonical conjugation identifying the existing Hom bijection with the specified A_X Hom map; kept the statement, tasks, source arguments and logged searches.",
+  "blueprint": "Preserves the full recorded ancestry and scheme-polarization comparison place under lem-trf-local-term-locality. The added nodes refine its existing scheme-atlas line-module comparison input, rather than replacing the contracting-correspondence route.",
   "tool_uses": [
    {
-    "node": "lem-sc-etale-qcoherent-descent",
-    "why": "Sheaf condition for the tensor-pullback section presheaf; a generic input, not a replacement of the trace-formula route. No node of this unit states this generic comparison."
-   },
-   {
-    "node": "lem-sc-etale-qcoherent-presheaf-functorial",
-    "why": "Unit-normalized semilinear restrictions and their functor laws needed for the actual associated sheaf. No node of this unit states this generic comparison."
-   },
-   {
-    "node": "lem-weil-pbc-etale-covering-composition",
-    "why": "Composition of etale arrows, deduced by adjoining identity members to covering families. No node of this unit states this generic comparison."
-   },
-   {
-    "node": "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-    "why": "Zariski trivializing covers are small-etale covers and open immersions are site objects. No node of this unit states this generic comparison."
-   },
-   {
-    "node": "lem-weil-pbc-open-immersion-module-pullback-restriction",
-    "why": "Natural identification of tensor pullback with restriction, used to recover the ordinary module morphism. No node of this unit states this generic comparison."
-   },
-   {
-    "node": "lem-weil-pbc-fpqc-finer-than-etale",
-    "why": "The given etale trivializing family satisfies precisely the fpqc hypothesis of the existing descent theorem. No node of this unit states this generic comparison."
+    "node": "lem-trf-etale-extension-free-presentations-hom",
+    "why": "Its canonical Hom bijection for all quasi-coherent Zariski modules supplies the fully faithful rank-one specialization; this is a generic comparison tool, with no other node of this unit giving it."
    }
   ]
  },
- "tool_uses": [
-  "lem-sc-etale-qcoherent-descent",
-  "lem-sc-etale-qcoherent-presheaf-functorial",
-  "lem-weil-pbc-etale-covering-composition",
-  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
-  "lem-weil-pbc-open-immersion-module-pullback-restriction",
-  "lem-weil-pbc-fpqc-finer-than-etale"
- ],
+ "tool_uses": [],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q04-c537b4657",
-  "group": "Q04",
+  "reviewer": "NT-cc-N6-bb369e6b6",
+  "group": "N6",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q04-c537b4657 (reviewer sub-agent of L); spot-checked: Read all eight steps and 23 citations; checked Stacks 03DX, 05VG, 03LC, fpqc descent, transition orientation, pullback coherence, and edge cases. No new nodes, cycles, hidden long steps, or mathematical faults found. Accepted six generic tool uses; review.md records checks and the unavailable route-pivot list."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-bb369e6b6 (reviewer sub-agent of L); spot-checked: This is the third push of this split (after c1de88 drop-FIX and 8edd PASS). Both earlier heads were approved and then refused only because the side completion was not promoted. Compared with 8edd, the three new nodes are identical; in the item only the Step 2 wording changed (it spells out the conjugation by the canonical identification L_XF(u)=Γ(U,u^*F)) plus the split_report summary. Against live, the statement, stmt_deps and Lean record are unchanged. All 8 old base steps are kept verbatim in the report and allocated: steps 1-3 to normalized-comparisons, 4 to the existing unsplit same-unit Hom node lem-trf-etale-extension-free-presentations-hom (no cycle: I computed the closures), 5 to frame-transition-units, 6-7 to framed-line-effective-gluing, and 8 stays as the elementary assembly. The assembly is 2084 characters. Maths checks: beta = Γ(c^{-1}); the identity and composition equations reduce to the unit and associativity coherence of tensor pullback, and the types match. End(O_{R,et}) = Γ(R,O_R), so g_ab is unique and a unit; the cocycle holds; Δ^* normalization is right for non-monomorphic charts. The orientations λ_a = g_ab λ_b and t_b = t_a m_g give e_a = e_b. An étale cover is fpqc (lem-weil-pbc-fpqc-finer-than-etale), so lem-pc-fpqc-descent(3) applies, with no qc, separatedness or affine-overlap assumption. Edge cases checked: X empty, the identity chart, zero maps. Sources read: Stacks descent.tex 03DX statement and full proof, 05VG, 03LC(1), 023T. No SGA. Duplicates: the new same-tag nodes since 8edd (fpqc-cartier-ideal-reflection, scheme-etale-module-exact-finiteness-comparison) are distinct. The overlap of N2/N3 with the rank-one case (K_a = ∅) of lem-trf-etale-presented-module-effective-recovery, raised by the c1de reader, is a generalization overlap, not a fault: the repair note demands at least 2 new nodes and that every old argument reappear as a new node, so dropping N2/N3 would break it. Maintainer note: N3's future proof should cite presented-recovery plus fpqc-descent(2). Batch-5 flags: all four cited trf nodes are general étale/Zariski module descent facts (03DX/023T/05VG) that neither the trace-formula nor the Poincaré-duality assumption gives, and none is a step of their proofs; accepted. The same-unit tool_use of the Hom node is redundant but accepted. Maintainer notes: L should promote this head rather than ask for another rebase; the new nodes have lean_audit null."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -577,20 +490,6 @@
   "module": "Sheaf.SixFunctors.TraceFormula.SchemeEtaleInvertibleComparison",
   "declaration": "AlgebraicGeometry.Scheme.scheme_etale_invertible_comparison",
   "declarations": [
-   "AlgebraicGeometry.Scheme.trfEtaleStructureRing_isSheaf",
-   "AlgebraicGeometry.Scheme.trfEtaleStructureRing",
-   "AlgebraicGeometry.Scheme.TrfInvertibleModules",
-   "AlgebraicGeometry.Scheme.TrfIsEtaleLine",
-   "AlgebraicGeometry.Scheme.TrfEtaleLineModules",
-   "AlgebraicGeometry.Scheme.trfInvertibleSections",
-   "AlgebraicGeometry.Scheme.trfEtaleCompose",
-   "AlgebraicGeometry.Scheme.trfTensorId",
-   "AlgebraicGeometry.Scheme.trfEtaleIdArrow",
-   "AlgebraicGeometry.Scheme.trfEtaleCompArrow",
-   "AlgebraicGeometry.Scheme.trfStructureInvertible",
-   "AlgebraicGeometry.Scheme.trfTensorUnit",
-   "AlgebraicGeometry.Scheme.trfLineSections",
-   "AlgebraicGeometry.Scheme.trfComparisonMap",
    "AlgebraicGeometry.Scheme.scheme_etale_invertible_comparison"
   ],
   "file": "lean/Sheaf/SixFunctors/TraceFormula/SchemeEtaleInvertibleComparison.lean",
@@ -599,6 +498,16 @@
   "by": "Q38",
   "date": "2026-10-17",
   "existing": false,
-  "note": "The comparison is specified by an equivalence and additive sheaf identifications with the recorded etaleTensorSectionsSheaf, with scalar and morphism formulas. Restriction is a module-presheaf isomorphism characterized by the normalized tensorSectionsComp, with explicit naturality and identity/composition equations. Helpers belong to the ring, line-module, and restriction notions introduced by this node; the structure ring has explicit data and a separately named sheaf-condition theorem. No statement correction or dependency replacement."
+  "note": "The shared definitions were moved verbatim to SchemeEtaleLineDefinitions and re-exported publicly, to break the proof-dependency import cycle. The structure-ring sheaf condition is proved pointwise. The comparison theorem is assembled from normalized comparisons, full faithfulness, and essential surjectivity."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9daea",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261026T082814-L-2225263",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement + lean.statement vs clone (unchanged); moved defs vs original (verbatim, public re-export); FF/EssSurj Lean vs new nodes; adapted NormalizedComparisons (1 import line, cycle-forced) vs clone; §3b 7 importers OK"
  }
 }

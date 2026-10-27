@@ -1,0 +1,232 @@
+{
+ "id": "lem-trf-noetherian-model-dimension-locus-pullback",
+ "kind": "statement",
+ "title": "Bounded fibre-dimension loci pulled back from a Noetherian model",
+ "statement": "Let $h_0:X_0\\to S_0$ and $g:S\\to S_0$ be morphisms of schemes [def-pc-scheme], with $h_0$ locally of finite type [def-weil-finite-type-morphism]. Assume $X_0$ is locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]. Form $X=X_0\\times_{S_0}S$ [def-pc-fibre-product], with projections $h:X\\to S$ and $q:X\\to X_0$, and assume $q$ is quasi-compact [def-weil-finite-type-morphism]. For each integer $n\\ge0$ set $L_{0,n}=\\{x_0\\in X_0\\mid\\dim_{x_0}((X_0)_{h_0(x_0)})\\le n\\}$ and $L_n=\\{x\\in X\\mid\\dim_x(X_{h(x)})\\le n\\}$, using scheme-theoretic fibres [def-pc-scheme-fibre] and topological dimension at their distinguished points [def-kun-topological-dimension-at-point]. Then $L_n=q^{-1}(L_{0,n})$, and both $L_{0,n}\\subset X_0$ and $L_n\\subset X$ are open and quasi-compact. No finite-presentation hypothesis on $h_0$ and no Noetherian hypothesis on $X$ or $S$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QJ, lemma-dimension-fibres-bounded-quasi-compact-open-upstairs, proof: inverse-image paragraph and final Noetherian quasi-compactness sentence, with the Noetherian-source and quasi-compact-projection hypotheses made explicit"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-pc-fibre-product",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Fix $n\\ge0$. For each $x\\in X$, put $x_0=q(x)$ and $s=h(x)$. The cartesian square gives $h_0(x_0)=g(s)$. Apply [lem-sc-fibre-dimension-after-base-change] to $h_0$, $g$ and $x$: its local-dimension equality is $\\dim_x X_s=\\dim_{x_0}(X_0)_{h_0(x_0)}$. Thus $x\\in L_n$ if and only if $q(x)\\in L_{0,n}$, proving $L_n=q^{-1}(L_{0,n})$ by equality of memberships. Only local finite type of $h_0$ is required.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY, lemma-dimension-fibre-after-base-change, part (1); used in the inverse-image argument of Algebra Tag 00QJ"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-local-fibre-dimension-open] to the locally finite type morphism $h_0$ and the integer $n$: $L_{0,n}$ is open. The underlying map of the scheme morphism $q$ is continuous, so its inverse image is open. Step 1 identifies this inverse image with $L_n$.",
+   "uses": [
+    "lem-weil-pbc-local-fibre-dimension-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, lemma-openness-bounded-dimension-fibres; Algebra Tag 00QJ, opening and inverse-image sentences"
+   }
+  },
+  {
+   "text": "By local Noetherianity [pqf-def-locnoeth], choose an affine open cover of $X_0$ with Noetherian coordinate rings. Quasi-compactness of $X_0$ [def-weil-pbc-quasi-compact-scheme] gives a finite subcover $U_1,\\ldots,U_r$. Each $U_i$ has Noetherian underlying space by [lem-sc-affine-noetherian-underlying-space]. By [lem-sfb-noetherian-space-compact-subsets], $L_{0,n}\\cap U_i$ is quasi-compact. To check quasi-compactness of $L_{0,n}$ directly, restrict any open cover of it to each intersection, choose a finite subcover there, and take the union of these finitely many finite families. Every point lies in some $U_i$, so the resulting family covers $L_{0,n}$. If $X_0$ is empty, take $r=0$ and the empty subcover.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ, lemma-Noetherian-topology, finite affine cover argument; Topology Tag 04ZA, lemma-Noetherian-quasi-compact; Algebra Tag 00QJ, final sentence"
+   }
+  },
+  {
+   "text": "The morphism $q$ is quasi-compact by hypothesis, and $L_{0,n}$ is open by Step 2 and quasi-compact by Step 3. Apply [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open] to $q$ and this open: $q^{-1}(L_{0,n})$ is quasi-compact. By Step 1 this is $L_n$. These arguments use no finite presentation of $h_0$ and no Noetherianity of $X$ or $S$.",
+   "uses": [
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K4, lemma-quasi-compact-affine, (2) implies (1); Algebra Tag 00QJ, inverse-image paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-local-fibre-dimension-open",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00QJ, lemma-dimension-fibres-bounded-quasi-compact-open-upstairs: inverse-image and Noetherian quasi-compactness argument, with scheme-level inputs Morphisms 02FY(1), 02FZ, Properties 01OZ and Schemes 01K4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*(dimension|krullDim)|(dimension|krullDim).*(fiber|fibre)",
+   "results": "1 hits; top=['Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean']; note=; digest=176ea85752ac6450. Read the hits: compact fibres, quasi-compact pullbacks and compact preimages are supporting tools, not the local-dimension equality or compact-open locus identification asserted here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local fibre dimension sublevel sets of a base change of a locally finite type morphism from a Noetherian scheme are compact if the projection is quasi compact",
+   "results": "8 hits; top=['AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact', 'AlgebraicGeometry.quasiCompact_isStableUnderBaseChange', 'AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace', 'AlgebraicGeometry.Scheme.Hom.isCompact_preimage', 'AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme', 'AlgebraicGeometry.quasiCompact_of_noetherianSpace_source', 'AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen', 'AlgebraicGeometry.QuasiCompact']; note=; digest=d7b7c329bba425e5. Read the hits: compact fibres, quasi-compact pullbacks and compact preimages are supporting tools, not the local-dimension equality or compact-open locus identification asserted here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, IsCompact",
+   "results": "6 hits; top=['AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen', 'AlgebraicGeometry.Scheme.Hom.isCompact_preimage', 'AlgebraicGeometry.QuasiCompact.isCompact_preimage', 'AlgebraicGeometry.QuasiCompact.mk', 'AlgebraicGeometry.quasiCompact_iff', 'AlgebraicGeometry.Scheme.Hom.isCompact_preimage_singleton']; note=; digest=815817f8ac93f35d. Read the hits: compact fibres, quasi-compact pullbacks and compact preimages are supporting tools, not the local-dimension equality or compact-open locus identification asserted here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact base change projection from a locally finite type morphism with Noetherian source pulls the bounded fibre dimension locus back to a quasi compact open",
+   "results": "8 hits; top=['AlgebraicGeometry.quasiCompact_isStableUnderBaseChange', 'AlgebraicGeometry.instQuasiCompactFstScheme', 'AlgebraicGeometry.instQuasiCompactSndScheme', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.quasiCompact_of_noetherianSpace_source', 'AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact', 'AlgebraicGeometry.instLocallyQuasiFiniteSndScheme']; note=; digest=f99e2986462e236f. Read the hits: compact fibres, quasi-compact pullbacks and compact preimages are supporting tools, not the local-dimension equality or compact-open locus identification asserted here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local fibre dimension is invariant under arbitrary base change and its sublevel open is compact on a Noetherian scheme",
+   "results": "8 hits; top=['AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact', 'AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.quasiCompact_isStableUnderBaseChange', 'AlgebraicGeometry.quasiCompact_of_noetherianSpace_source', 'AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite']; note=; digest=c284d4137ad4bab5. Read the hits: compact fibres, quasi-compact pullbacks and compact preimages are supporting tools, not the local-dimension equality or compact-open locus identification asserted here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local fibre dimension is unchanged by base change and bounded dimension loci are quasi compact open for a Noetherian source and quasi compact projection",
+   "results": "8 hits; top=['AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.quasiCompact_isStableUnderBaseChange', 'AlgebraicGeometry.quasiCompact_of_noetherianSpace_source', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.LocallyQuasiFinite', 'AlgebraicGeometry.instLocallyQuasiFiniteSndScheme', 'AlgebraicGeometry.instLocallyQuasiFiniteFstScheme', 'AlgebraicGeometry.instCompactSpaceCarrierCarrierCommRingCatFiberOfQuasiCompact']; digest=2bac432bf832b4ed. Read returned statements: finite-type and quasi-compact stability, compact-preimage and compact-fibre results do not state the required pointwise local-dimension equality or the full locus conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, IsCompact",
+   "results": "6 hits; top=['AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen', 'AlgebraicGeometry.Scheme.Hom.isCompact_preimage', 'AlgebraicGeometry.QuasiCompact.isCompact_preimage', 'AlgebraicGeometry.QuasiCompact.mk', 'AlgebraicGeometry.quasiCompact_iff', 'AlgebraicGeometry.Scheme.Hom.isCompact_preimage_singleton']; digest=815817f8ac93f35d. Read returned statements: finite-type and quasi-compact stability, compact-preimage and compact-fibre results do not state the required pointwise local-dimension equality or the full locus conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*(dimension|krullDim)|(dimension|krullDim).*(fiber|fibre)",
+   "results": "1 hits; top=['Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean']; digest=176ea85752ac6450. Read returned statements: finite-type and quasi-compact stability, compact-preimage and compact-fibre results do not state the required pointwise local-dimension equality or the full locus conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded local fibre dimension loci commute with base change and are quasi compact open when pulled back from a Noetherian scheme",
+   "results": "8 hits; top=['AlgebraicGeometry.quasiCompact_isStableUnderBaseChange', 'AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange', 'AlgebraicGeometry.IsLocalAtTarget.of_isPullback', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange', 'AlgebraicGeometry.universallyClosed_isStableUnderBaseChange', 'AlgebraicGeometry.isAffineHom_isStableUnderBaseChange', 'AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange']; digest=fa18fa3e948c01e1. Read returned statements: finite-type and quasi-compact stability, compact-preimage and compact-fibre results do not state the required pointwise local-dimension equality or the full locus conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension at a point of the fibre of a locally finite type scheme morphism is invariant under arbitrary base change",
+   "results": "8 hits; top=['AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange', 'AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite', 'AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme', 'AlgebraicGeometry.instIsPreimmersionFiberι', 'AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange', 'AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme']; digest=cdfe1efba002c52e. Read returned statements: finite-type and quasi-compact stability, compact-preimage and compact-fibre results do not state the required pointwise local-dimension equality or the full locus conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-retrocompact-bounded-fibre-dimension",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: finite-stage descent of the relative-dimension condition. Bounded-dimension subargument: inverse-image paragraph and final Noetherian quasi-compactness sentence, with the Noetherian-source and quasi-compact-projection hypotheses made explicit",
+   "via": [
+    "lem-trf-retrocompact-bounded-fibre-dimension",
+    "lem-trf-pure-relative-dimension-finite-stage",
+    "lem-trf-marked-curve-finite-type-model",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-noetherian-model-dimension-locus-pullback",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused existing fibre-dimension base-change and openness nodes, proved Noetherian-model compactness by a finite affine cover and compactness of subsets of each chart, and applied the existing quasi-compact inverse-image lemma. No new nodes. Searched project Lean, the full DAG and blueprint, and Mathlib with both combined and pointwise phrasings.",
+  "blueprint": "Historical ancestry is lem-trf-local-term-locality, proof (1)--(2), former nearby-cycle semistable-alteration branch, via the existing finite-stage chain. The latest proof (1)--(2) now uses the contracting-correspondence route and no longer contains that subargument. This delivery retains ancestry and proves the existing bounded-dimension auxiliary statement: steps 1--2 realize the inverse-image/open subargument of its parent lem-trf-retrocompact-bounded-fibre-dimension; steps 3--4 realize the Noetherian quasi-compactness subargument of Algebra 00QJ. No unit or chapter route is edited.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic Morphisms 02FY(1) pointwise fibre-dimension comparison for the already prescribed 00QJ inverse-image argument; no trace-formula unit node supplies this general comparison."
+   },
+   {
+    "node": "lem-weil-pbc-local-fibre-dimension-open",
+    "why": "Generic Morphisms 02FZ openness for a locally finite type map, as required by the prescribed 00QJ route; does not replace a step of the trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-local-fibre-dimension-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-ee4881f69",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-ee4881f69 (reviewer sub-agent of L); spot-checked: PASS with no fixes; review.md has the details. The delivery is one commit with the item and its report (which has a Review by N5 section) and no new nodes. The item is still unsplit in clones/live and side-live, so it is not superseded, and there is no repair note. The statement, stmt_deps and blueprint are unchanged from live; only the proof fields and split_report are new. The statement is true: it is the final argument of Algebra 00QJ (read) at scheme level. Without the quasi-compactness of q it fails (X_0=S_0=Spec k, S an infinite disjoint union of Spec k), and the parent's model node supplies that hypothesis. Small cases checked: X_0 empty; a point over a field; A^1 over k pulled back to K, where every point including the generic one has dimension 1. Step 1: the 02FY(1) node (read) applied to h_0 and x, with h_0(q(x))=g(h(x)), gives L_n=q^{-1}(L_{0,n}). Step 2: 02FZ openness (read) plus continuity of q. Step 3: a finite cover of X_0 by affine opens with Noetherian rings; each chart has Noetherian underlying space (noetherianSpace_of_isAffine) and every subset of it is quasi-compact (04ZA, NoetherianSpace.isCompact); a finite union is quasi-compact. This matches Properties 01OZ (read). Step 4: the 01K4 node (Scheme.Hom.isCompact_preimage) applied to the quasi-compact q and the quasi-compact open L_{0,n}. proof_deps is exactly the union of the step uses. The two dimension notions are the same (Topology 0055(4)). Searches for 00QJ, 01OZ and the dim/quasi-compact/open combination found no duplicate. No SGA is cited. The declared tool uses (02FY lem-sc-fibre-dimension-after-base-change, 02FZ lem-weil-pbc-local-fibre-dimension-open) are generic black boxes and are accepted. Advisory only: lem-sc-affine-noetherian-underlying-space cites the imprecise source tag 0052."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianModelDimensionLocusPullback",
+  "declaration": "AlgebraicGeometry.noetherianModel_localFibreDimension_locus_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianModelDimensionLocusPullback.lean",
+  "statement": "theorem noetherianModel_localFibreDimension_locus_pullback {X₀ S₀ S : Scheme.{u}} (h₀ : X₀ ⟶ S₀) [LocallyOfFiniteType h₀] [IsLocallyNoetherian X₀] [CompactSpace X₀] (g : S ⟶ S₀) [QuasiCompact (pullback.fst h₀ g)] (n : ℕ) : {x : ↥(pullback h₀ g) | topologicalKrullDimAt ((pullback.snd h₀ g).asFiber x) ≤ (n : WithBot ℕ∞)} = (pullback.fst h₀ g) ⁻¹' {x₀ : X₀ | topologicalKrullDimAt (h₀.asFiber x₀) ≤ (n : WithBot ℕ∞)} ∧ (IsOpen {x₀ : X₀ | topologicalKrullDimAt (h₀.asFiber x₀) ≤ (n : WithBot ℕ∞)} ∧ IsCompact {x₀ : X₀ | topologicalKrullDimAt (h₀.asFiber x₀) ≤ (n : WithBot ℕ∞)}) ∧ (IsOpen {x : ↥(pullback h₀ g) | topologicalKrullDimAt ((pullback.snd h₀ g).asFiber x) ≤ (n : WithBot ℕ∞)} ∧ IsCompact {x : ↥(pullback h₀ g) | topologicalKrullDimAt ((pullback.snd h₀ g).asFiber x) ≤ (n : WithBot ℕ∞)})",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c24b56fe",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Item lean record only; node otherwise identical to live (not superseded). Lean renders every clause: LocallyOfFiniteType h₀, IsLocallyNoetherian X₀, CompactSpace X₀, QuasiCompact (pullback.fst h₀ g); L via topologicalKrullDimAt (f.asFiber x) ≤ (n:ℕ) (scheme-theoretic fibre distinguished point, Stacks 0055(4) local topological dim); set equality with fst⁻¹', IsOpen ∧ IsCompact for both loci. No extra hypotheses (no lfp, no Noetherian S/X), single universe forced by pullback. Matches fibre_dimension_after_base_change and isOpen_localFibreDimension_le interfaces (same snd/fst roles and set expression). Edge cases: empty X₀/S, n=0, A¹ base change; qc-of-q necessary. statement verbatim (+' := by'), docstrings with source/blueprint and 4 proof steps, sorry only, no defs, report sections present, no duplicate found. No compile (no file changed)."
+ }
+}

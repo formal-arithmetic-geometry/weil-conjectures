@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-diagonal-kernel-integral-triangles",
+ "kind": "statement",
+ "title": "Coordinate integrals imply the diagonal-kernel triangles",
+ "statement": "Let A be a finite commutative ring and f:X->Y a proper morphism of schemes. Work on ordinary unbounded small-etale A-module derived categories. Put W=X times_Y X with projections p1,p2 and diagonal Delta. Let B be a complex on X and let d be a trace-diagonal datum: t:Rf! B->A_Y and delta:RDelta! A_X->p2*B. Let J be a lisse rank-one A-module sheaf on Y, n an integer, L=J[2n], and e:B~f*L. Use canonical compact-support exchange and composition, and the normalized signed tensor comparisons [lem-sfb-ringed-derived-monoidal-comparisons, lem-kun-tensor-sym, lem-kun-tensor-unit]. Define t1=beta1^(-1) followed by f*t and the pullback unit, and t2=Rp2!(coordinate_e^(-1)) followed by beta2^(-1), f*t and the pullback unit; coordinate_e:p1*B~p2*B is induced by e and equality of the two maps to Y. Let alpha_i:A_X~Rp_i! RDelta! A_X be the canonical identity/composition comparisons for p_i Delta=id. Suppose alpha_i followed by Rp_i!(delta) and t_i is identity for i=1,2. Form the natural unit by tensoring the supported diagonal with p1*M, pushing along p2, applying inverse projection and inverse proper exchange, and transporting to H(K)=B tensor f*K by the canonical symmetry. Form epsilon by inverse PF_{B,K}, t tensor identity and the left unitor. Then for all M and K, Rf!(eta_M) followed by epsilon_{Rf!M} is identity and eta_{HK} followed by H(epsilon_K) is identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "lem-kun-tensor-sym",
+  "lem-kun-tensor-unit",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-sf-etale-ambient-adjoint-projection",
+  "def-pur-td-datum",
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Factor the specified unit component as I_delta(M) followed by C_B(M). This is the associativity identity proved in unit_app_eq. The specified counit component is epsilon_t by definition. Apply the diagonal-free compact-support coordinate contractions.",
+   "uses": [
+    "lem-sf-supported-trace-contractions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate triangle computations"
+   }
+  },
+  {
+   "text": "For the first triangle, expand F of the unit factorization and use the first contraction. Functoriality reassociates it as F(I_delta);D;F(pi_p1 inverse), followed by F(identity tensor t1 then rho). Use the first insertion-projection equation. Combine tensor maps into tensor with alpha1(1);P1(delta);t1. The first integral hypothesis sets this to identity; cancel the right unitor and its inverse inside F, then use F.map_id.",
+   "uses": [
+    "lem-sf-diagonal-insertion-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate triangle computations"
+   }
+  },
+  {
+   "text": "For the second triangle apply the second contraction at K after the unit factorization, and reassociate. The second insertion-projection equation leaves rho inverse followed by tensor with alpha2(1);P2(delta);t2, then rho. The second integral hypothesis, tensor functoriality, and inverse-unitor cancellation give identity. No geometric hypothesis is added.",
+   "uses": [
+    "lem-sf-diagonal-insertion-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+    "place": "Both coordinate triangle computations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-supported-trace-contractions",
+  "lem-sf-diagonal-insertion-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both triangle computations; explicit Lean assembly from diagonal-free contraction and projection insertion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized diagonal kernel trace integrals imply both triangle identities of a derived adjunction",
+   "results": "Adjunction.left_triangle, Adjunction.right_triangle, Adjunction.CoreUnitCounit.right_triangle, Adjunction.derived'; no geometric integration theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match: these are the formal adjunction triangles, with no normalized diagonal or etale trace."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adjunction between derived pushforward on the projective line and Tate twisted pullback with trace counit",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, Scheme.Modules.pullbackPushforwardAdjunction; no projective-line duality.",
+   "date": "2026-10-25",
+   "verdict": "no match: the inverse-image/direct-image adjunction has the other direction and no Tate shift or diagonal integral."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*[Aa]djunction|[Tt]race.*[Dd]iagonal",
+   "results": "16 hits, on matrix diagonal traces, matrix group traces and general preservation of projective objects; none on etale diagonal kernels.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfAffineBaseP1TraceAdjunction",
+  "date": "2026-10-25",
+  "group": "U8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Inherited null ancestor; Both coordinate diagonal integrals and their two triangle computations, followed by the inverse-projection trace counit.",
+   "via": [
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfDiagonalKernelIntegrals",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfDiagonalKernelIntegrals.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfDiagonalKernel.triangles",
+  "statement": "theorem triangles (J : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))\n    (hJ : Scheme.IsLisseRankOneSheaf J) (n : ℤ)\n    (e : B ≅ (CoordinateTrace.pull A f).obj (CoordinateTrace.shiftedLine A J n))\n    (h : Integrals A d (CoordinateTrace.shiftedLine A J n) e) :\n    (∀ M : DerivedCategoryModule A X,\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map ((unit A d).app M) ≫\n        (counit A d).app\n          ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) = 𝟙 _) ∧\n    (∀ K : DerivedCategoryModule A Y,\n      (unit A d).app\n          ((CoordinateTrace.pull A f ⋙\n            (derivedTensor (ModuleCat.{u + 1} A) X).obj B).obj K) ≫\n        (CoordinateTrace.pull A f ⋙ (derivedTensor (ModuleCat.{u + 1} A) X).obj B).map\n          ((counit A d).app K) = 𝟙 _)",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.Etale.SfDiagonalKernel.triangles"
+  ]
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261025T203401-L-2811201",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-fda89",
+  "group": "A4",
+  "result": "fix",
+  "landing": "20261026T222540-L-666663",
+  "kind": "interface",
+  "note": "independent cc review: SfDiagonalKernelIntegrals.triangles assembly vs lem-sf-diagonal-kernel-integral-triangles; moved defs vs clone (verbatim, unit reassociated per change record); new sorry statements vs proved CoordinateTrace.contractions and coherence; 3b 8/8 importers OK"
+ }
+}

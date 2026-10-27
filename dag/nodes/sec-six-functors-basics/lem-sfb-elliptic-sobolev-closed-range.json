@@ -1,0 +1,215 @@
+{
+ "id": "lem-sfb-elliptic-sobolev-closed-range",
+ "kind": "statement",
+ "title": "Sobolev realization of an elliptic operator has closed range",
+ "statement": "All vector spaces are over the real field $\\mathbf R$ [def-weil-field]. Let $N$ be a compact oriented smooth manifold without boundary, of dimension $m\\geq1$, with a smooth Riemannian metric and volume form. Let $G,H$ be smooth real vector bundles of the same finite rank, with smooth positive definite fibre metrics. Let $Q:\\Gamma^\\infty(G)\\to\\Gamma^\\infty(H)$ be a real-linear differential operator with smooth coefficients of order at most $k\\geq1$, locally $Q=\\sum_{|\\alpha|\\leq k}b_\\alpha(x)\\partial^\\alpha$, whose degree-$k$ principal symbol $\\sum_{|\\alpha|=k}b_\\alpha(x)\\xi^\\alpha:G_x\\to H_x$ is invertible for every nonzero real cotangent vector $\\xi$. For a metric bundle $B$, let $L^2(B)$ be the Hilbert completion of its smooth sections in the norm $\\|u\\|_0^2=\\int_N|u|^2\\,dV$. This completion canonically identifies with measurable square-integrable sections modulo almost-everywhere equality. Let $H^k(B)$ be their Sobolev completion: choose a finite smooth trivializing atlas and subordinate smooth partition of unity, take in each chart the Euclidean $L^2$ norms of all derivatives of the localized section through order $k$, and sum their squares. These completions admit the canonical injective maps $H^k(B)\\hookrightarrow L^2(B)\\hookrightarrow\\mathcal D^{\\prime}(B)$, where $\\mathcal D^{\\prime}(B)$ denotes distributional sections (local distributions in smooth frames, with the usual change-of-frame rule); smooth sections have their usual image under these maps. In particular $L^2(B)$ is a complete real inner product space for the integrated pairing. The map $Q$ extends uniquely to a bounded real-linear operator $T_Q:H^k(G)\\to L^2(H)$, its value $T_Qu$ agrees with $Qu$ computed by distributional differentiation in charts, and its range is closed in $L^2(H)$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-elliptic-sobolev-realization-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-bundle-sobolev-rellich] to $B=G$ and $B=H$, with $s=k$. It gives precisely the asserted measurable realization, Hilbert structures, and injective maps into $L^2$ and distributions. In particular $E=H^k(G)$ is Hilbert, $F=L^2(H)$ is complete, and $J:E\\to L^2(G)$ is bounded and compact. Smooth sections have their original distributional images.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-rellich"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §1 (1.4) and VI §2 (2.2), printed pp.288–289"
+   }
+  },
+  {
+   "text": "Choose the finite atlas to trivialize both bundles, refining the given one if necessary; the Sobolev realization lemma gives equivalent norms after this change, so a bound for the refined norm yields a bound for the original norm. Write $u=\\sum_i\\chi_i u$. In the $i$th chart $Q(\\chi_i u)=\\sum_{|\\alpha|\\leq k}b_{i,\\alpha}\\partial^\\alpha(\\chi_i u)$. On the compact support of $\\chi_i$, each coefficient and the volume/metric comparison factors are bounded. The triangle inequality gives $\\|Qu\\|_{L^2(H)}\\leq\\sum_{i,\\alpha}M_{i,\\alpha}\\|\\partial^\\alpha(\\chi_i u)\\|_2\\leq M\\|u\\|_{H^k(G)}$, taking $M>0$ larger than the sum of these finitely many constants. Regard smooth sections as a dense linear subspace of $E$. Apply [lem-sfb-dense-subspace-contractive-extension] over $\\mathbf R$ to $Q/M$ and multiply the extension by $M$. This constructs a unique bounded linear extension $T_Q:E\\to F$.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-rellich",
+    "lem-sfb-dense-subspace-contractive-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §1 local formula (1.1), VI §2 Sobolev setup; explicit finite-chart estimate by NU"
+   }
+  },
+  {
+   "text": "For $u\\in E$, take smooth $u_n\\to u$ in $H^k$. By [lem-sfb-bundle-sobolev-rellich], every localized derivative through order $k$ converges in $L^2$ to the corresponding distributional derivative of $u$. Multiplication by the bounded local coefficients preserves this convergence. Thus the local differential expressions $Qu_n$ converge to the distributional $Qu$, whereas the bounded extension gives $Qu_n\\to T_Qu$ in $L^2(H)$. These limits agree as distributions: pairing an $L^2$ difference with a compactly supported smooth test section is bounded by its $L^2$ norm times the test section's $L^2$ norm. The injectivity into distributions identifies their values. This proves the asserted agreement.",
+   "uses": [
+    "lem-sfb-bundle-sobolev-rellich"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 distributional extension in (2.3); explicit limiting argument by NU"
+   }
+  },
+  {
+   "text": "For smooth $u_n$, [lem-sfb-elliptic-global-garding-estimate] gives $\\|u_n\\|_E\\leq C(\\|Qu_n\\|_F+\\|u_n\\|_{L^2(G)})$. Let $u_n\\to u$ in $E$; the boundedness of $T_Q$ and $J$ and continuity of norms give $\\|u\\|_E\\leq C(\\|T_Qu\\|_F+\\|Ju\\|_{L^2(G)})$ for all $u\\in E$. Therefore [lem-sfb-compact-remainder-coercivity], applied to $T=T_Q$ and this compact $J$, supplies $D>0$ with $\\|v\\|_E\\leq D\\|T_Qv\\|_F$ on $K^\\perp$, where $K=\\ker T_Q$ and orthogonality is for the $H^k$ inner product.",
+   "uses": [
+    "lem-sfb-elliptic-global-garding-estimate",
+    "lem-sfb-compact-remainder-coercivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 (2.3) and compactness argument in Corollary (2.4)(ii); kernel-complement formulation by NU"
+   }
+  },
+  {
+   "text": "Let $y_n=T_Qx_n\\to y$ in $F$. The subspace $K$ is closed since $T_Q$ is continuous. By [lem-sfb-hilbert-orthogonal-projection], write $x_n=z_n+v_n$ with $z_n\\in K$ and $v_n\\in K^\\perp$. Then $T_Qv_n=y_n$. Applying the estimate of the preceding step to $v_n-v_l\\in K^\\perp$ gives $\\|v_n-v_l\\|_E\\leq D\\|y_n-y_l\\|_F$. Hence $(v_n)$ is Cauchy, so it converges to some $v\\in E$. Continuity gives $T_Qv=y$. Thus every convergent sequence in the range has its limit in the range, which is the closedness criterion in the norm metric on $F$.",
+   "uses": [
+    "lem-sfb-hilbert-orthogonal-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "VI §2 Corollary (2.4)(ii), closedness after the estimate; explicit Cauchy argument by NU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bundle-sobolev-rellich",
+  "lem-sfb-dense-subspace-contractive-extension",
+  "lem-sfb-elliptic-global-garding-estimate",
+  "lem-sfb-compact-remainder-coercivity",
+  "lem-sfb-hilbert-orthogonal-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "Demailly VI §2 (2.2), (2.3), proof of (2.4)(ii), read online; NU supplies the finite-chart extension argument and uses the equivalent kernel-complement compactness argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sobolev spaces of sections of finite rank bundles on a compact manifold are Hilbert spaces with compact inclusion into L2 and differential operators extend continuously",
+   "results": "{\"t\": \"2026-10-24T01:25:22Z\", \"tool\": \"leanfinder\", \"query\": \"Sobolev spaces of sections of finite rank bundles on a compact manifold are Hilbert spaces with compact inclusion into L2 and differential operators extend continuously\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsContMDiffRiemannianBundle.of_le\", \"instIsContMDiffRiemannianBundleOfNatWithTopENat_2\", \"instIsContMDiffRiemannianBundleOfNatWithTopENat_1\", \"instIsContMDiffRiemannianBundleOfNatWithTopENat\", \"instIsContMDiffRiemannianBundleOfTopWithTopENat\", \"instIsContMDiffRiemannianBundleOfSomeENatTopOfLEInfty\", \"IsContMDiffRiemannianBundle.exists_contMDiff\", \"Bundle.ContMDiffRiemannianMetric.isVonNBounded\"], \"digest\": \"16344e732832a842\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": "{\"t\": \"2026-10-24T01:25:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sobolev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  },
+  {
+   "tool": "grep",
+   "query": "Sobolev|Rellich|sobolev|rellich",
+   "results": "{\"t\": \"2026-10-24T01:25:23Z\", \"tool\": \"grep\", \"query\": \"Sobolev|Rellich|sobolev|rellich\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"10724567e4bf3a48\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An elliptic operator of order k on compact manifold extends to a bounded operator from Sobolev Hk to L2 with closed range",
+   "results": "{\"t\": \"2026-10-24T01:50:38Z\", \"tool\": \"leansearch\", \"query\": \"An elliptic operator of order k on compact manifold extends to a bounded operator from Sobolev Hk to L2 with closed range\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsCoercive.isClosed_range\", \"ContinuousLinearMap.opNorm_extend_le\", \"LinearMap.norm_extendOfNorm_apply_le\", \"LinearMap.opNorm_extendOfNorm_le\", \"IsCompactOperator.continuous\", \"IsCompactOperator\", \"isClosed_setOf_isCompactOperator\", \"IsCompactOperator.image_subset_compact_of_bounded\"], \"digest\": \"3374ae1520734153\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Fredholm\"",
+   "results": "{\"t\": \"2026-10-24T01:50:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Fredholm\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"FredholmDecomposition\", \"FredholmDecomposition.X₀\", \"FredholmDecomposition.X₁\", \"FredholmDecomposition.cofg_X₁\", \"ContinuousLinearMap.IsFredholm.id\", \"FredholmDecomposition.isTopCompl\", \"ContinuousLinearMap.FredholmPackage\", \"ContinuousLinearMap.IsFredholm\"], \"digest\": \"ae339c59ee293231\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed range of Sobolev realization of elliptic differential operators on compact manifolds",
+   "results": "{\"t\": \"2026-10-24T01:50:40Z\", \"tool\": \"leanfinder\", \"query\": \"Closed range of Sobolev realization of elliptic differential operators on compact manifolds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.isClosed_range_coe\", \"ModelWithCorners.isClosed_range\", \"IsCoercive.isClosed_range\", \"isClosed_setOf_isCompactOperator\", \"exists_embedding_euclidean_of_compact\", \"LinearMap.range_toContinuousLinearMap\", \"ZeroAtInftyContinuousMap.isClosed_range_toBCF\", \"ContinuousLinearMap.isCompact_image_coe_of_bounded_of_closed_image\"], \"digest\": \"9e9d2e18d5f3b2df\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFredholm|closed_range|isClosed_range",
+   "results": "{\"t\": \"2026-10-24T01:50:38Z\", \"tool\": \"grep\", \"query\": \"IsFredholm|closed_range|isClosed_range\", \"sub\": \"Analysis/Normed/Operator/\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean\", \"Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean\", \"Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean\", \"Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean\"], \"digest\": \"258e3d644d2c0f6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Euclidean Sobolev spaces, abstract coercive/Fredholm operators or bundle metrics; none supplies the Sobolev realization and closed range of an elliptic differential operator on compact bundle sections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-smooth-fredholm-decomposition",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf",
+   "via": [
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-elliptic-sobolev-closed-range",
+  "worker": "stage1",
+  "summary": "NU checked the live Lean attachment search, online Demailly VI §§1–2, DAG/blueprint duplicates and Mathlib searches. The unchanged statement is proved from Sobolev realization/Rellich, the smooth Gårding estimate and an abstract compact-remainder coercivity lemma, reusing existing Mathlib leaves for dense contraction extension and Hilbert orthogonal decomposition. New nodes are statement-only.",
+  "blueprint": "Current latest det-thm-sf-ctf-stability-direct-images proof (3), analytic prerequisite chain through the existing elliptic smooth Fredholm decomposition: Sobolev completion and closed range; five steps realize Demailly VI (1.4), (2.2), (2.3) and the closed-range argument of (2.4)(ii)."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NU-f9d089ded",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-f9d089ded (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, the cited leaves and the parent in full. I read the source by fetching Demailly's agbook.pdf, VI (1.1)-(1.4) pp.287-288, (2.2) Rellich, (2.3) Gårding and (2.4)(ii) with the (2.5)-(2.6) closed-range proof pp.289-290; the cited places are correct. The item statement is byte-identical to live, and live still has the item unsplit, so no other group has superseded it. Step 1 takes Hilbert spaces, compact j_k and the injections into L2 and distributions from lem-sfb-bundle-sobolev-rellich (s=k>=1). Step 2 has a correct finite-chart coefficient bound with M = sum of the constants; the atlas is refined through the norm equivalence stated in the Rellich node, and the extension comes from the Mathlib leaf LinearMap.extendOfNorm applied to Q/M on the isometric dense image, giving uniqueness among continuous extensions. Step 3: localized derivatives are Cauchy in L2 and their limit is identified distributionally, which with injectivity of L2 into D' gives agreement. Step 4: the smooth Gårding estimate (the atlas fixed to E's) extends by continuity, and every hypothesis of the compact-remainder lemma holds (E Hilbert, J compact, T bounded, C>0). Step 5: the orthogonal decomposition gives a Cauchy sequence in K-perp, then completeness and continuity give closed range. I checked the compact-remainder lemma's proof by the normalized-sequence argument, with edge cases K-perp=0, J=0 and T injective. The Gårding node is Demailly (2.3) at k=0 for smooth u; the L2 remainder is needed (d/dx on the circle). On the Rellich node: the norm is definite because sum chi_i = 1, and rank 0 and disconnected N are consistent. No new node restates the item (D1/D2). A search of the statement fields of every DAG node found no duplicate. All cited nodes are in unit sk-thm-sf-ctf-stability and the two leaves are Mathlib leaves, so no tool_uses are needed. B1-B9 hold, there is no SGA, and the only citer (the Fredholm-decomposition parent, step 2) is served exactly. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.EllipticSobolevClosedRange",
+  "declaration": "EllipticSobolev.exists_elliptic_sobolev_closed_range",
+  "file": "lean/Sheaf/Analysis/EllipticSobolevClosedRange.lean",
+  "statement": "theorem exists_elliptic_sobolev_closed_range (m r k : ℕ) (hm : 1 ≤ m) (hk : 1 ≤ k) (N : Type u) [TopologicalSpace N] [ChartedSpace (Model m) N] [IsManifold (𝓘(ℝ, Model m)) ∞ N] [T2Space N] [CompactSpace N] [MeasurableSpace N] [BorelSpace N] (d : Base m N) (G H : MetricBundle.{u, v} m r N) (Q : EllipticOperator G H k) (aG : Localization G) (aH : Localization H) : ∃ (LG : L2Model d G) (LH : L2Model d H) (SG : SobolevModel aG k LG) (_ : SobolevModel aH k LH), ∃ T : SG.space →L[ℝ] LH.space, (∀ s : Sections G, T (SG.ofSmooth s) = LH.ofSmooth (Q.op s)) ∧ (∀ T' : SG.space →L[ℝ] LH.space, (∀ s : Sections G, T' (SG.ofSmooth s) = LH.ofSmooth (Q.op s)) → T' = T) ∧ (∀ u : SG.space, DistributionalEquation Q LG LH (SG.toL2 u) (T u)) ∧ IsClosed (Set.range T)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da6ec4886",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Lean matches the node clause by clause. Compact T2 boundaryless oriented m>=1 manifold; positive smooth volume pinned per chart (weight*sqrt det g*Lebesgue); equal-rank Mathlib metric bundles. EllipticOperator coefficients pinned by op via formula, smooth on chart targets, degree-k symbol bijective at xi!=0. L2Model = complete inner-product completion (dense smooth image, integrated pairing) with a.e.-quotient measurable identification and regular injective local Mathlib Distributions. SobolevModel = completion with squared norm = literal finite-chart energy, injective continuous toL2. Conclusion: exists T agreeing on smooth sections, unique among all bounded extensions, DistributionalEquation (transpose rule, (-1)^|a|, coefficient inside test derivative), IsClosed range. Existential models are unique up to isometry fixing smooth sections: not hollow or weaker. Edge cases N empty, r=0, k=1, a=0, nontrivial kernel, universes u/v ok. lean.statement verbatim in both files, item changes only lean+stmt_dep, sorry only, docstrings ok, 15 real declarations. Sole fault H11: self-audit second reading -> FIX fixes/lem-sfb-elliptic-sobolev-closed-range.report.md (worker report verbatim + independent reading); no Lean change, no compile. Maintainer note: NO def-sfb-bundle-sobolev-space (BundleSobolev, landed 13:18 CST) is after this base (index 13:08 CST), different namespace, no clash; elliptic chain has parallel EllipticSobolev/BundleSobolev/RealManifold interfaces to consolidate in stage 3."
+ }
+}

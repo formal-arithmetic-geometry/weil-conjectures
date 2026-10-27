@@ -279,7 +279,18 @@
   "thm-sf-direct-image-tor-amplitude"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
@@ -365,5 +376,33 @@
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
   "sorry_before": [],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $f:T\\to X$ be separated of finite type, and let\n$K\\in D^b_{ctf}(T,A)$. The canonical projection map is an\nisomorphism\n\n$$\nc_{f,K}:(Rf_{*,A}K)\\otimes_A^LB\n\\xrightarrow{\\sim}Rf_{*,B}(K_B).\n$$\n\nIt is natural in $K$, compatible with composition of morphisms\nand successive coefficient quotients, and has the same assertion\non finite constructible pro-etale realizations.",
+  "proof": [
+   {
+    "text": "The bound $R^qf_*M=0$ for all etale $A$-module sheaves and\n$q>2\\dim T$ is [lem-sf-etale-direct-image-vanishing].\nThe module $B$ is finite over the Noetherian ring $A$.\nConsequently [lem-sf-projection-finite-constant] applies to\nthis constant module and gives the asserted map as an isomorphism.\nHere is the relevant truncation estimate from that proof.\nChoose a resolution $P\\to B$ by finite free $A$-modules in\nnonpositive degrees, and set $P_t=\\sigma_{\\geq-t}P$.\nIts error $C_t=\\operatorname{Cone}(P_t\\to B)$ lies in\n$D^{\\leq-t-1}(A)$. If $K\\in D^{\\leq b}$ and\n$N=2\\dim T$, then uniform cohomological dimension gives\n$Rf_*D^{\\leq r}\\subseteq D^{\\leq r+N}$ on bounded-above\ncomplexes. The two error terms\n\n$$\n(Rf_*K)\\otimes_A^LC_t,\n\\qquad Rf_*(K\\otimes_A^LC_t)\n$$\n\ntherefore lie in $D^{\\leq b+N-t-1}$. For each fixed degree,\ntake $t$ large enough; the coefficient comparison for $P_t$\nis an isomorphism by finite sums, shifts and cones from $A$,\nand the error terms no longer affect that degree. This is an\nargument in $D^-$ with a fixed cohomological-dimension bound;\nfinite length of the resolution of $B$ is not asserted. Both outputs are bounded\nconstructible of finite Tor amplitude by\n[thm-sf-direct-image-tor-amplitude] and by derived scalar\nextension. Direct image computed with $B$-module coefficients\nhas the same underlying $A$-module derived object: the usual\netale sections, acyclic resolutions, or hypercover computation of\nsheaf cohomology do not change when the coefficient action is\nforgotten. This identifies the projection formula with the\ndisplayed comparison between the two coefficient categories.",
+    "uses": [
+     "lem-sf-etale-direct-image-vanishing",
+     "lem-sf-projection-finite-constant",
+     "thm-sf-direct-image-tor-amplitude"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The map is the projection transformation defined by tensor\nadjunction and the pullback counit. In a successive quotient\n$A\\to B\\to C$, reassociating the threefold tensor product makes\nthe one-step and two-step maps have the same transpose. The same\nargument with the composite pullback counit proves compatibility\nwith composition of $f$'s. These identities hold before a\nfree resolution is chosen, hence also after the truncation proof.\nFinally [prop-weil-pbc-comparison-direct-image] and\n[lem-exc-comparison-tor-interval] transport the objects and\nthese specified maps to the finite pro-etale categories.",
+    "uses": [
+     "prop-weil-pbc-comparison-direct-image",
+     "lem-exc-comparison-tor-interval"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

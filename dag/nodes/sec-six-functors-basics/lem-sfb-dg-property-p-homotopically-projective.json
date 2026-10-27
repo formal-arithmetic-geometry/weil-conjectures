@@ -1,0 +1,202 @@
+{
+ "id": "lem-sfb-dg-property-p-homotopically-projective",
+ "kind": "statement",
+ "title": "Property-(P) DG modules are homotopically projective",
+ "statement": "Work in the universes of [def-weil-size-convention]. A differential graded algebra over $\\mathbf Z$ means an associative unital graded ring $A=\\bigoplus_{i\\in\\mathbf Z}A^i$ with additive differential $d:A^i\\to A^{i+1}$ satisfying $d^2=0$ and $d(ab)=d(a)b+(-1)^ia\\,d(b)$ for $a\\in A^i$. A right differential graded $A$-module is a graded right module $M$ with $d^2=0$ and $d(ma)=d(m)a+(-1)^jm\\,d(a)$ for $m\\in M^j$; its cohomology is $H^i(M)=\\ker(d:M^i\\to M^{i+1})/d(M^{i-1})$, and a quasi-isomorphism is a homomorphism of differential graded modules (degree-preserving, $A$-linear, commuting with the differentials) inducing isomorphisms on all $H^i$. For $k\\in\\mathbf Z$ let $A[k]$ be the shifted module with $A[k]^i=A^{i+k}$, differential $(-1)^kd_A$ and right action by multiplication. Say that a right differential graded $A$-module $P$ has property (P) if there is a filtration $0=F_0P\\subset F_1P\\subset F_2P\\subset\\cdots$ by differential graded submodules such that $P=\\bigcup_{n\\geq0}F_nP$, each inclusion $F_nP\\subset F_{n+1}P$ admits a left inverse as a map of graded right $A$-modules (not necessarily commuting with $d$), and each quotient $F_{n+1}P/F_nP$ is isomorphic, as a differential graded $A$-module, to a direct sum $\\bigoplus_{j\\in J_n}A[k_{nj}]$ over a set $J_n$ (possibly empty) with integers $k_{nj}$. Let $P$ be a right differential graded $A$-module with property (P). For any right differential graded $A$-module $N$, let $\\underline{\\operatorname{Hom}}_A(P,N)^r$ consist of degree-$r$ additive graded right $A$-linear maps $f$, with $f(pa)=f(p)a$ and differential $\\delta f=d_Nf-(-1)^rfd_P$. If $N$ is acyclic, meaning $H^i(N)=0$ for every $i\\in\\mathbf Z$, this Hom complex is acyclic. Equivalently, every chain map $P\\to N$ to an acyclic right differential graded module is null-homotopic, and the same holds with $N$ replaced by any integer shift. Thus $P$ is homotopically projective. No boundedness, commutativity or countability hypothesis on $A$, $P$, $N$ or the filtration quotient index sets is imposed.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KM, lemma-property-P-K-projective, also applied to every shift of the acyclic target; property (P) is Tag 09KK, section-P-resolutions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Fix $r\\in\\mathbf Z$ and a degree-$r$ cocycle $f$, so $d_Nf=(-1)^rfd_P$. We construct compatible degree-$(r-1)$ graded right $A$-linear maps $h_n:F_nP\\to N$ satisfying $d_Nh_n+(-1)^rh_nd_P=f|_{F_nP}$. At $n=0$ take the zero map on $F_0P=0$. In the induction step suppose $h_n$ has been constructed. All subsequent choices concern only the next filtration stage, and the extension will agree with $h_n$ on $F_nP$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  },
+  {
+   "text": "Write $Q_n=F_{n+1}P/F_nP$ and choose the given dg isomorphism $\\bigoplus_{j\\in J_n}A[k_{nj}]\\cong Q_n$. Let $\\rho_n:F_{n+1}P\\to F_nP$ be a graded retraction and $i_n$ the inclusion. The formula $s_n([x])=x-i_n\\rho_n(x)$ is independent of the lift $x$, since $\\rho_ni_n=1$, and is a graded right-linear section of the quotient. Lift the unit of the $j$th summand to $e_j=s_n(1_j)$ of degree $q_j=-k_{nj}$. The identity $d_A1=d_A(1\\cdot1)=2d_A1$ gives $d_A1=0$, so $d_Pe_j\\in F_nP$. The section and the quotient isomorphism give a graded direct-sum decomposition $F_{n+1}P=F_nP\\oplus\\bigoplus_j e_jA$: each element has a unique expression $x+\\sum_j e_ja_j$ with finitely many nonzero coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  },
+  {
+   "text": "For each $j$ set $z_j=f(e_j)-(-1)^rh_n(d_Pe_j)\\in N^{q_j+r}$. The cocycle equation for $f$ gives $d_Nf(e_j)=(-1)^rf(d_Pe_j)$. The inductive equation, evaluated on $d_Pe_j\\in F_nP$, gives $d_Nh_n(d_Pe_j)=f(d_Pe_j)$ because $d_P^2e_j=0$. Subtracting these two equations shows $d_Nz_j=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  },
+  {
+   "text": "Since $H^{q_j+r}(N)=0$, the definition $H=\\ker d/\\operatorname{im}d$ gives $y_j\\in N^{q_j+r-1}$ with $d_Ny_j=z_j$. Choose one such primitive for each $j\\in J_n$. Using the direct-sum decomposition from Step 2 define $h_{n+1}(x+\\sum_j e_ja_j)=h_n(x)+\\sum_j y_ja_j$. Every sum here is finite. Uniqueness of that decomposition makes this a well-defined additive graded right $A$-linear map of degree $r-1$, extending $h_n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  },
+  {
+   "text": "The required equation already holds on $F_nP$. On a new generator times a homogeneous $a\\in A$ the two module Leibniz rules give\n$$\\begin{aligned}(d_Nh_{n+1}+(-1)^rh_{n+1}d_P)(e_ja)&=(d_Ny_j+(-1)^rh_n(d_Pe_j))a\\\\&\\quad+\\big((-1)^{q_j+r-1}+(-1)^{q_j+r}\\big)y_jd_Aa\\\\&=f(e_j)a=f(e_ja).\\end{aligned}$$\nHere $d_P(e_ja)=(d_Pe_j)a+(-1)^{q_j}e_jd_Aa$, so the displayed cancellation uses no commutation of elements of $A$. Additivity and the decomposition prove the equation on all of $F_{n+1}P$, completing the induction step.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  },
+  {
+   "text": "Recursion in $n$ therefore produces compatible $h_n$. For a homogeneous $p\\in P$ choose $n$ with $p\\in F_nP$ and put $h(p)=h_n(p)$. If two stages contain $p$, their values agree in the larger stage. A common stage for two elements, or for $p$ and $pa$, proves additivity and right linearity of $h$, and $h$ has degree $r-1$. Since each $F_nP$ is a dg submodule, $p$ and $d_Pp$ lie in the same stage, and its equation gives $d_Nh(p)+(-1)^rh(d_Pp)=f(p)$. Thus $\\delta h=f$. This works for every integer $r$ and every cocycle $f$, proving acyclicity of the Hom complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  },
+  {
+   "text": "In degree zero $\\delta h=d_Nh+hd_P$, so the construction gives a null-homotopy of every chain map $P\\to N$. Every $N[t]$ remains acyclic: multiplying its differential by $(-1)^t$ changes neither kernel nor image, so $H^i(N[t])=H^{i+t}(N)=0$. The conclusion applies to all these shifts. Conversely a degree-$r$ Hom cocycle is a chain map $P\\to N[r]$; if $s$ is a null-homotopy for that map, then $(-1)^rd_Ns+sd_P=f$. Setting $h=(-1)^rs$ gives $\\delta h=f$, verifying the stated equivalence in every degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09KM, lemma-property-P-K-projective, with the filtration of Tag 09KK, section-P-resolutions. Direct cell-by-cell null-homotopy extension written by NN; the generator calculation is the defining computation underlying Tag 09K1, lemma-hom-from-shift-free."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09KM, lemma-property-P-K-projective, for property (P) of Tag 09KK, section-P-resolutions. Direct construction of primitives one filtration stage at a time, expanding the generator calculation of Tag 09K1, lemma-hom-from-shift-free; replaces the previously returned one-object argument. This is an alternative to the telescope/triangle proof printed in Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right differential graded module over an arbitrary differential graded algebra with an exhaustive graded split filtration by direct sums of shifts of the algebra is homotopically projective",
+   "results": "{\"t\": \"2026-10-24T01:34:25Z\", \"tool\": \"leanfinder\", \"query\": \"A right differential graded module over an arbitrary differential graded algebra with an exhaustive graded split filtration by direct sums of shifts of the algebra is homotopically projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.isKProjective_iff_leftOrthogonal\"], \"digest\": \"69ef3b0d4f297214\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary complexes in an abelian category, bounded-above projective complexes, ordinary projective modules, or homotopy invariance; none treats a property-(P) filtration of a module over a differential graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every map from a semi free dg module to an acyclic dg module is null homotopic",
+   "results": "{\"t\": \"2026-10-24T01:34:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every map from a semi free dg module to an acyclic dg module is null homotopic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.homotopyZero_def\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.homotopyZero\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"instQFactorsThroughHomotopyDown\", \"ComplexShape.QFactorsThroughHomotopy\"], \"digest\": \"8a8e35435cf33562\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary complexes in an abelian category, bounded-above projective complexes, ordinary projective modules, or homotopy invariance; none treats a property-(P) filtration of a module over a differential graded algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.IsKProjective\"",
+   "results": "{\"t\": \"2026-10-24T01:34:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"CochainComplex.IsKProjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CochainComplex.isKProjective_of_projective\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_iff_of_iso\", \"CochainComplex.isKProjective_shift_iff\", \"CochainComplex.isKProjective_of_op\", \"CochainComplex.IsKProjective.homotopyZero\", \"CochainComplex.IsKProjective.mk\"], \"digest\": \"9d110711e4505d79\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary complexes in an abelian category, bounded-above projective complexes, ordinary projective modules, or homotopy invariance; none treats a property-(P) filtration of a module over a differential graded algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "DGModule|DGAlgebra|DifferentialGraded|[Ss]emi.?free",
+   "results": "{\"t\": \"2026-10-24T01:34:23Z\", \"tool\": \"grep\", \"query\": \"DGModule|DGAlgebra|DifferentialGraded|[Ss]emi.?free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary complexes in an abelian category, bounded-above projective complexes, ordinary projective modules, or homotopy invariance; none treats a property-(P) filtration of a module over a differential graded algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Property P filtered differential graded modules over a differential graded ring are K projective",
+   "results": "{\"t\": \"2026-10-24T01:34:23Z\", \"tool\": \"leansearch\", \"query\": \"Property P filtered differential graded modules over a differential graded ring are K projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Projective.of_lifting_property'\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"Module.Projective.of_lifting_property\", \"CochainComplex.IsKProjective\", \"CochainComplex.IsKProjective.mk\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"Module.Projective.of_lifting_property''\", \"CochainComplex.IsKProjective.casesOn\"], \"digest\": \"e8ca83486b361f46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern ordinary complexes in an abelian category, bounded-above projective complexes, ordinary projective modules, or homotopy invariance; none treats a property-(P) filtration of a module over a differential graded algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every map from a semi free right dg module to an acyclic dg module is null homotopic",
+   "results": "{\"t\": \"2026-10-24T01:55:35Z\", \"tool\": \"leansearch\", \"query\": \"Every map from a semi free right dg module to an acyclic dg module is null homotopic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective.nonempty_homotopy_zero\", \"CochainComplex.IsKInjective.homotopyZero\", \"Homotopy.nullHomotopicMap\", \"CochainComplex.IsKInjective.homotopyZero_def\", \"Homotopy.nullHomotopicMap'\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.IsKProjective.homotopyZero\", \"Homotopy.nullHomotopy\"], \"digest\": \"a843580e6d15448c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-129. These declarations concern ordinary complexes in an abelian category, with bounded-above degreewise projectivity for the sufficient criterion; they do not prove property-(P) homotopical projectivity over a general DG algebra. The grep found no DG-module or semi-free interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A right differential graded module with an exhaustive graded split filtration by direct sums of shifts of its dg algebra is homotopically projective",
+   "results": "{\"t\": \"2026-10-24T01:55:36Z\", \"tool\": \"leanfinder\", \"query\": \"A right differential graded module with an exhaustive graded split filtration by direct sums of shifts of its dg algebra is homotopically projective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKProjective_of_projective\", \"CochainComplex.IsKProjective\", \"HomotopyEquiv.isKProjective\", \"CochainComplex.IsKProjective.homotopyZero_def\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.IsKProjective.leftOrthogonal\"], \"digest\": \"2194a455124aa844\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-129. These declarations concern ordinary complexes in an abelian category, with bounded-above degreewise projectivity for the sufficient criterion; they do not prove property-(P) homotopical projectivity over a general DG algebra. The grep found no DG-module or semi-free interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Semifree differential graded modules are left orthogonal to acyclic modules in the homotopy category",
+   "results": "{\"t\": \"2026-10-24T01:56:02Z\", \"tool\": \"leanfinder\", \"query\": \"Semifree differential graded modules are left orthogonal to acyclic modules in the homotopy category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.isKProjective_iff_leftOrthogonal\", \"CochainComplex.IsKInjective.rightOrthogonal\", \"CochainComplex.isKInjective_iff_rightOrthogonal\", \"HomotopyCategory.subcategoryAcyclic\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"CochainComplex.IsKProjective.homotopyZero_def\"], \"digest\": \"303e50c3dc31a24c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean:35-129. These declarations concern ordinary complexes in an abelian category, with bounded-above degreewise projectivity for the sufficient criterion; they do not prove property-(P) homotopical projectivity over a general DG algebra. The grep found no DG-module or semi-free interface."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-dg-tensor-hom",
+  "date": "2026-10-24",
+  "group": "Q124"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3) of det-thm-sf-ctf-stability-direct-images, inherited coherent-family/Quot effectivity prerequisite: Tag 0CX8 (lemma-compute-over-affine), with its canonical maps from 0CX6 (lemma-compute-against-perfect). Supporting input: Tag 0CRW (lemma-computing-sections-as-colim), part (2) and its proof constructing hocolim E_m = Ru_*O_U; Tag 08IN (lemma-cohomology-base-change) supplies the normalized maps. The coefficient-linear version retains the commuting B-action in the same tensor and section construction. Supporting subargument: 0CRW proof, application of lemma-countable to the descended structure-sheaf image. Supporting argument in spaces-perfect Tag 0CRV, proof (2) to (1): Tag 09MC, theorem-DQCoh-is-Ddga and its proof, with an arbitrary chosen perfect generator and its K-injective representative; the displayed derived tensor/Hom adjunction and equation-E-is-OK. Supporting subargument: Tag 09MC proof: construct the dg endomorphism algebra and the derived tensor/Hom adjunction, including equation-E-is-OK. Supporting input to the tensor/Hom construction: dga.tex 09LX and 09LY use 09KM, lemma-property-P-K-projective, after the ordinary property-(P) resolution of 09KP.",
+   "via": [
+    "lem-sfb-ringed-site-dg-tensor-hom",
+    "lem-sfb-space-generator-dg-equivalence",
+    "lem-sfb-space-countable-telescope",
+    "lem-sfb-space-etale-sections-perfect-telescope",
+    "lem-sfb-space-inverse-module-affine-base-change",
+    "lem-sfb-space-inverse-modules-near-special-fibre",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dg-property-p-homotopically-projective",
+  "worker": "stage1",
+  "summary": "Repaired the route-pivot return by replacing the entire one-object specialization with an explicit construction of a Hom primitive at every filtration stage. Graded retractions lift the quotient generators; the inductive homotopy makes each obstruction closed; acyclicity supplies primitives; the Leibniz signs prove right-linear extension solves the equation. Compatible extensions define the global primitive. Statement and inherited searches are unchanged; no new nodes or theorem dependencies remain.",
+  "blueprint": "Retains the inherited proof (3) of det-thm-sf-ctf-stability-direct-images through its coherent-family/Quot and Stacks 09MC tensor/Hom prerequisites. Supplies the ordinary DG-algebra Tag 09KM input to 09LX/09LY by the direct cell extension explicitly authorized in the return, without the dropped DG-category branch. The null ancestor and full from.place/via remain as on the current live node; same_as remains empty after whole-blueprint searches."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NN-212dad937",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-212dad937 (reviewer sub-agent of L); spot-checked: The repair fixes the earlier route-pivot return (ce42, C3/C7). The citation of the dropped lem-coef-dg-semi-free-homotopically-projective is gone. In its place the item proves the cell-by-cell null-homotopy extension directly, in 7 elementary steps, with no proof_deps and no tool_uses, so it cannot form a cycle. The statement, stmt_deps, source and blueprint are unchanged from live, where the item is still unsplit. All inherited searches are kept. I read Stacks dga.tex 09KK, 09KL, 09KM and 09K1. The statement matches 09KM: starting the filtration at F_0=0 instead of F_{-1}=0 is only a reindexing, and acyclicity of the Hom complex is equivalent to Hom_K(P,N)=0 because shifts of N are allowed. I recomputed every step: the graded section from the retraction is well defined; d_A1=0 puts d e_j in F_n; the direct sum decomposition is unique; d z_j=0 follows from d^2=0 and the induction hypothesis; the extension h_{n+1} is well defined and right-linear; in the Leibniz check on e_j a the two da terms (-1)^{q+r-1} and (-1)^{q+r} cancel without any commutativity; the union step works because each F_n is a dg submodule; the sign h=(-1)^r s is right; and delta keeps right-linearity under the convention f(pa)=f(p)a. I tested A=0, P=0, A=Z, odd r and odd k, noncommutative A with nonzero d, and uncountable index sets. I searched for 09KM over dag/nodes and found no duplicate: the lem-pc filtered-free nodes are about ordinary complexes, and the sfb dg-Hom nodes use this result rather than state it. No SGA, no new nodes, no fixes."
+ }
+}

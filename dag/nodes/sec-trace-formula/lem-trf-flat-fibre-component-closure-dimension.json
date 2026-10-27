@@ -17,53 +17,49 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal F=\\mathcal O_X$. Because $f$ is flat, $\\mathcal F$ is flat over $S$ at every point. The generic point of an irreducible component $B$ of the locally Noetherian fibre $X_t$ is an associated point of the fibre structure sheaf, hence belongs to the relative assassin $\\operatorname{Ass}_{X/S}(\\mathcal O_X)$ by the fibrewise definition of the relative assassin.",
+   "text": "Apply [lem-trf-fibre-component-relative-associated] to the given component B and its generic point y. Its first clause says that the maximal ideal of the fibre stalk is a Mathlib associated prime. The fibre is locally Noetherian by [pqf-lem-locnoeth-lft], since it is locally of finite type over the residue field. Thus isAssociatedPrime_iff removes the radical in this associated-prime convention. Use [lem-weil-pbc-module-pullback-structure-sheaf] and the canonical linear identification of the structure-sheaf stalk with the local ring to transport the element annihilator to the tensor pullback of O_X. The fibre embedding identifies y with f.asFiber of its image, giving membership in Scheme.Modules.relativeAssassin f O_X.",
    "uses": [
-    "lem-trf-fibre-component-relative-associated"
+    "lem-trf-fibre-component-relative-associated",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 05AT (definition-relative-assassin) and Tag 05AH (lemma-minimal-support-in-ass), applied to the structure sheaf of the fibre X_t"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the flat-associated-equidimensional lemma to $f$, $\\mathcal F=\\mathcal O_X$, and the relative associated point $y$. Its closure $Y$ is the reduced integral closed subscheme with underlying space $Z=\\overline{\\{y\\}}$, and $T$ is the closure of $\\{f(y)\\}$. The flatness hypothesis at generic points of fibres of $Y\\to T$ holds because $f$ is flat everywhere. The lemma gives an integer $d$ such that $Y\\to T$ has relative dimension $d$, and every generic point of every irreducible component of a fibre $Y_s$ has local dimension $d$.",
+   "text": "Let z be the image of y in X and Y its reduced closure. The composite Y_s -> Y -> X is an embedding. The range of the closed immersion Y -> X is closure{z}, while the range of the fibre embedding is the inverse image of {s}. Therefore Y_s is homeomorphic to closure{z} intersect f^{-1}({s}). Pull the component D back by this homeomorphism to a component C of Y_s, preserving its dimension. Sobriety supplies the generic point x of C. The unit module O_X is quasi-coherent and of finite type (it is free of rank one). Its stalk is linearly isomorphic to O_{X,x}; restricting scalars along f.stalkMap identifies its base action with the flat module supplied by Flat.stalkMap. Apply [lem-trf-flat-relative-associated-specialization] to O_X, z, C and x. Its last clause gives dim(C) = dim(Y_t).",
    "uses": [
-    "lem-trf-flat-associated-equidimensional"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0GSJ (lemma-flat-associated-equidimensional), parts (1)--(2)"
-   }
-  },
-  {
-   "text": "The fibre $Y_t$ has underlying topological space $B$: it is the closure of the generic point $y$ inside the fibre $X_t$, and $B$ is the irreducible component whose generic point is $y$. Thus $d=\\dim B$. For any $s\\in S$, the subspace $Y_s$ has the same underlying space as $Z_s$, and its irreducible components are exactly the $D$ in the statement. The relative-dimension conclusion therefore gives $\\dim D=d=\\dim B$ for every irreducible component $D$ of $Z_s$. No reducedness or flatness of $Y$ is used; only the flatness of $\\mathcal O_X$ over $S$ enters the cited lemma.",
-   "uses": [
-    "lem-trf-flat-associated-equidimensional",
+    "lem-trf-flat-relative-associated-specialization",
     "def-pc-scheme-fibre",
     "def-weil-irreducible-components",
     "def-kun-topological-krull-dimension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0GSJ (lemma-flat-associated-equidimensional), part (2), and Tag 0GSK (remark-flat-equidimensional), second list"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The fibre embedding i_t is inducing, hence closure{y} = i_t^{-1}(closure{z}). Since hy identifies closure{y} with B and range(i_t) = f^{-1}({t}), the image i_t(B) equals closure{z} intersect f^{-1}({t}). Consequently Y_t is homeomorphic to B. Transporting dimension along this homeomorphism and the component homeomorphism in step 2 gives dim(D) = dim(C) = dim(Y_t) = dim(B). The component quantifier makes the empty-intersection case vacuous.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-irreducible-components",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-trf-fibre-component-relative-associated",
-  "lem-trf-flat-associated-equidimensional",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-trf-flat-relative-associated-specialization",
   "def-pc-scheme-fibre",
   "def-weil-irreducible-components",
   "def-kun-topological-krull-dimension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tags 0GSJ and 0GSK, with the relative-assassin definition in Divisors Tag 05AT"
+  "place": "Tag 0GSI, lemma-associated-point-specializes, especially the component-dimension equality in the second proof paragraph. Direct application to the structure sheaf avoids factoring through the closure of the base point in Tag 0GSJ. Private Lean helpers prove the stalk and fibre-topology identifications.",
+  "date": "2026-10-23",
+  "group": "Q7"
  },
  "mathlib_searches": [
   {
@@ -150,5 +146,26 @@
   "result": "pass",
   "note": "Delivery changes only the node's lean record (statement, proof and sources unchanged; no §1(C) correction) and adds the module and a report with real Worker report and Second reading by Q05 sections. Every clause matches: [Flat f], [LocallyOfFiniteType f], B ∈ irreducibleComponents (f.fiber t), IsGenericPoint y B, Z_s = closure{f.fiberι t y} ∩ f.base⁻¹'{s} as a subspace (Set.inter = ∩ by rfl), and ∀ D ∈ irreducibleComponents Z_s, topologicalKrullDim D = topologicalKrullDim B. No extra hypotheses; a single universe u, which a morphism requires. True by Stacks 0GSJ(2) with F=O_X and 05AH/05AT, using the fibreι embedding with range f⁻¹(t), both checked in Lean. Empty fibres and empty Z_s are vacuous, as in the node. Gates OK: no definitions, one sorry, source and blueprint docstrings, proof steps in the docstring, lean.statement verbatim in the file. nt_compile.py on the snapshot file: clean in 3.4 s; a /tmp check copy also compiled. No fixes needed; Set.inter vs ∩ is cosmetic only."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261023T131738-L-2145724",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

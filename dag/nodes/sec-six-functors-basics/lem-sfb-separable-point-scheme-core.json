@@ -1,0 +1,380 @@
+{
+ "id": "lem-sfb-separable-point-scheme-core",
+ "kind": "statement",
+ "title": "Canonical geometrically reduced subscheme carrying separable points",
+ "statement": "Let $k$ be a field [def-weil-field] and let $X$ be a scheme of finite type over $k$ [def-pc-scheme, def-weil-finite-type-morphism]. There exists a unique geometrically reduced closed subscheme $X^{\\natural}\\hookrightarrow X$ [def-weil-closed-immersion, def-pc-geometrically-irreducible] such that $X^{\\natural}(L)=X(L)$ for every separable field extension $L/k$ [def-pc-field-extension], where $X(L)=\\operatorname{Hom}_k(\\operatorname{Spec}L,X)$. Here a possibly transcendental extension is separable if each finitely generated intermediate extension is separably generated, that is, finite separable over a purely transcendental extension of $k$. The construction is functorial: every $k$-morphism $f:X\\to Y$ between finite-type schemes restricts uniquely to $f^{\\natural}:X^{\\natural}\\to Y^{\\natural}$, compatibly with composition and identities. The construction commutes with finite products over $k$ and with every separable field extension $K/k$: $(X\\times_kY)^{\\natural}=X^{\\natural}\\times_kY^{\\natural}$ and $(X^{\\natural})_K=(X_K)^{\\natural}$ as closed subschemes [def-pc-base-change]. If $X$ is geometrically reduced, then $X^{\\natural}=X$. If $X=G$ is an affine group scheme [def-sc-group-scheme], its structure maps restrict to make $G^{\\natural}$ a geometrically reduced closed subgroup scheme [def-sc-group-scheme-subgroup]. The empty scheme is allowed; no perfectness, reducedness or smoothness of $X$ is assumed.",
+ "source": {
+  "document": "literature/conrad-finiteness-function-fields.pdf",
+  "place": "Brian Conrad, Finiteness theorems for algebraic groups over function fields, Lemma 3.1.1, printed p.15 (PDF page 16), read online at https://math.stanford.edu/~conrad/papers/cosetfinite.pdf. WANTED locally. The displayed lemma gives the general scheme construction, functoriality, products and separable base change; the geometrically reduced case follows from its uniqueness. No Stacks tag is claimed for the complete assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-pbc-separable-field-extension"
+ ],
+ "proof": [
+  {
+   "text": "We first record the affine bookkeeping used below. By [def-weil-closed-immersion], a closed subscheme on an affine chart $\\operatorname{Spec}A$ is $\\operatorname{Spec}(A/I)$. It is finite type over $k$ when $A$ is: the images of a finite generating list still generate. Closed immersions are monomorphisms: a ring map out of $A/I$ is determined by its composite with the surjection $A\\to A/I$, and these unique affine factorizations agree on overlaps. By [lem-weil-pbc-fibre-product-affine-spectra] and [lem-weil-pbc-open-fibre-product], affine products and field base changes have rings $A\\otimes_kB$ and $A\\otimes_kK$, and these charts cover the fibre products. Tensoring quotient maps gives quotient maps, explicitly $(A/I)\\otimes_k(B/J)=(A\\otimes_kB)/(I\\otimes B+A\\otimes J)$ and $(A/I)\\otimes_kK=(A\\otimes_kK)/(I\\otimes K)$. Thus products and field base changes of the closed subschemes below remain closed subschemes; their finite generating lists give finite type. Here the fibre-product maps and their identifications are always the ones characterized by [def-pc-fibre-product].",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JQ (lemma-fibre-product-affines), 01JR (lemma-open-fibre-product); affine quotient and tensor universal properties. Elementary affine bookkeeping."
+   }
+  },
+  {
+   "text": "Choose a separable closure $k^s/k$ using [lem-weil-pbc-separable-closure-exists-galois], and put $T_X=X(k^s)$ and $C_X=\\overline{\\{\\operatorname{image}(t):t\\in T_X\\}}\\subseteq |X|$. Let $i_X:X^\\natural\\hookrightarrow X$ be the reduced induced closed subscheme on $C_X$, provided by [lem-weil-pbc-reduced-induced-closed-subscheme]. It is finite type by step 1. The family $T_X$ is stable under every $k$-automorphism of $k^s$, because composing a $k$-point with such an automorphism is again a $k$-point. Apply [lem-sfb-separable-point-closure-universal-density] with $Z=X$ and this whole family: the result is geometrically reduced. Its common-overfield qualification covers any field extension $E/k$: choose an algebraic closure of $E$ by [def-weil-algebraic-closure], and embed $k^s$ into it by [lem-weil-pbc-separable-extension-embeds-separably-closed] (an algebraically closed field is separably closed). This supplies exactly the common algebraically closed overfield in that node. Every $t\\in T_X$ factors through $i_X$ by [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], since a field spectrum is reduced and its image is in $C_X$. Uniqueness follows from the monomorphism in step 1.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sfb-separable-point-closure-universal-density",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 0356 (lemma-map-into-reduction); geometric reducedness from the existing separable-point-closure node."
+   }
+  },
+  {
+   "text": "Let $L/k$ be any separable extension in the stated, possibly transcendental sense, and $x:\\operatorname{Spec}L\\to X$. Choose a finite-type affine chart $U=\\operatorname{Spec}A$ containing its image, and let $S\\subseteq L$ be the image of $A\\to L$. Then $S$ is a finite-type domain over $k$, and $F=\\operatorname{Frac}S\\subseteq L$ is finitely generated as a field. Every finitely generated subfield of $F/k$ is one of $L/k$, so $F/k$ is separable by the definition in [def-weil-pbc-separable-field-extension]. By [lem-weil-pbc-smooth-at-generic-point-over-field] choose $0\\ne g\\in S$ with $S_g$ smooth over $k$. The affine comparison [lem-weil-pbc-smooth-ring-map-iff-smooth-affine] makes $V=\\operatorname{Spec}S_g$ a smooth $k$-scheme mapping to $U$, and $\\operatorname{Spec}L\\to U$ factors through $V$ since $g$ is invertible in $L$. By [lem-pc-dense-separable-points], the closed $v\\in V$ with $\\kappa(v)/k$ finite separable are dense in $V$. Each embeds into $k^s$ by [lem-weil-pbc-separable-extension-embeds-separably-closed], so its image in $X$ is the image of a point in $T_X$, hence belongs to $C_X$. The inverse image of $C_X$ in $V$ is closed and contains this dense set, hence is all of $V$. The ring $S_g$ is a subring of $L$ and therefore has no nonzero nilpotents; [lem-weil-pbc-affine-scheme-reduced-iff] makes $V$ reduced. Now [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] factors $V\\to X$ through $i_X$, and composition gives the desired factorization of $x$. It is unique by step 1. This proves $X^\\natural(L)=X(L)$.",
+   "uses": [
+    "def-weil-pbc-separable-field-extension",
+    "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-pc-dense-separable-points",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07ND (lemma-smooth-at-generic-point); morphisms.tex Tag 01V6 (lemma-smooth-characterize); varieties.tex Tag 056U (lemma-smooth-separable-closed-points-dense); schemes.tex Tag 0356."
+   }
+  },
+  {
+   "text": "For uniqueness, let $j:Z\\hookrightarrow X$ be another geometrically reduced closed subscheme with the asserted point equality. It is finite type by step 1. The scheme $\\operatorname{Spec}k$ is locally Noetherian: its coordinate field has only the ideals $(0)$ and $(1)$, both finitely generated. Thus [pqf-lem-lft-fp-locnoeth] makes $Z/k$ locally finitely presented. By [lem-pur-geometrically-reduced-dense-smooth-open], its smooth locus is dense. On each smooth open in the definition of this locus, [lem-pc-dense-separable-points] gives dense closed points with finite separable residue fields. Embed each such field into $k^s$ using [lem-weil-pbc-separable-extension-embeds-separably-closed]; their images in $X$ lie in $C_X$. Since $j^{-1}(C_X)$ is closed and contains a dense subset of every such open, and these opens have dense union, it is all of $Z$. Conversely every $k^s$-point of $X$ factors through $Z$ by the assumed point equality, so $|Z|$ is a closed subset containing $T_X$ and therefore $C_X$. We obtain $|Z|=C_X$. Both closed subschemes are reduced, so the uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] identifies their ideal sheaves and gives $Z=X^\\natural$ as closed subschemes. This also removes dependence on the chosen $k^s$. If $X$ is itself geometrically reduced, the identity closed subscheme has the point equality, so this uniqueness gives $X^\\natural=X$.",
+   "uses": [
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-pur-geometrically-reduced-dense-smooth-open",
+    "lem-pc-dense-separable-points",
+    "lem-weil-pbc-separable-extension-embeds-separably-closed",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 056V (lemma-geometrically-reduced-dense-smooth-open) and 056U; schemes.tex Tag 01J3, uniqueness of the reduced induced closed subscheme."
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$ be a $k$-morphism between finite-type schemes. Composition sends $T_X$ into $T_Y$. Continuity implies $f(C_X)\\subseteq\\overline{f(T_X)}\\subseteq C_Y$: indeed the inverse image of the closed subset $C_Y$ is closed and contains $T_X$, hence its closure. The scheme $X^\\natural$ is reduced, so [lem-weil-pbc-reduced-source-factors-through-closed-subscheme] gives $f^\\natural:X^\\natural\\to Y^\\natural$ with $i_Yf^\\natural=fi_X$. Step 1 makes this restriction unique. The identity of $X^\\natural$ has the required equation for $f=\\mathrm{id}_X$. For $X\\xrightarrow fY\\xrightarrow h Z$, the composite $h^\\natural f^\\natural$ has the equation required for $(hf)^\\natural$; uniqueness gives equality. This proves functoriality.",
+   "uses": [
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0356 (lemma-map-into-reduction); continuity and uniqueness of factorization give the functor laws."
+   }
+  },
+  {
+   "text": "Put $P=X^\\natural\\times_kY^\\natural$, a closed finite-type subscheme of $X\\times_kY$ by step 1. It is geometrically reduced as follows. For every extension $E/k$, cover $X^\\natural_E$ and $Y^\\natural_E$ by affine opens $\\operatorname{Spec}A$ and $\\operatorname{Spec}B$. Their rings are geometrically reduced over $E$: after any further field extension these opens remain open in the corresponding reduced schemes, and [lem-weil-pbc-affine-scheme-reduced-iff] translates this to rings. In particular $B$ is reduced. By [lem-trf-geometrically-reduced-base-change] over the field $E$, $A\\otimes_EB$ is reduced. By [lem-weil-pbc-fibre-product-affine-spectra], [lem-weil-pbc-open-fibre-product], and the same affine reducedness criterion, these rings give a reduced affine cover of $P_E$. Thus $P$ is geometrically reduced. For separable $L/k$, the universal property [def-pc-fibre-product] gives $P(L)=X^\\natural(L)\\times Y^\\natural(L)=X(L)\\times Y(L)=(X\\times_kY)(L)$ by step 3. Uniqueness in step 4 proves $P=(X\\times_kY)^\\natural$. The nullary product is $\\operatorname{Spec}k$: every field base change is a field spectrum and hence reduced, so step 4 gives its core equal to itself. Induction gives compatibility with every finite product; the identifications respect projections by their defining universal properties.",
+   "uses": [
+    "lem-trf-geometrically-reduced-base-change",
+    "lem-weil-pbc-affine-scheme-reduced-iff",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-open-fibre-product",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 034N (lemma-geometrically-reduced-any-reduced-base-change); schemes.tex Tags 01J2, 01JQ, 01JR; affine tensor calculation and the defining fibre-product universal property."
+   }
+  },
+  {
+   "text": "Let $K/k$ be separable and $Q=(X^\\natural)_K\\hookrightarrow X_K$. This is a finite-type closed subscheme by step 1. It is geometrically reduced over $K$: for every $E/K$, the universal property of [def-pc-fibre-product] identifies $Q_E$ with $X^\\natural_E$, which is reduced by step 2. If $L/K$ is separable, [lem-sfb-separable-field-extension-transitivity] says that $L/k$ is separable as well; this node explicitly permits transcendental extensions. A $K$-point $\\operatorname{Spec}L\\to X_K$ corresponds to its $k$-map $\\operatorname{Spec}L\\to X$ together with the fixed map to $\\operatorname{Spec}K$. Step 3 gives a unique factorization of that $k$-map through $X^\\natural$; pairing this factorization with the same fixed map to $\\operatorname{Spec}K$ gives a unique point of $Q(L)$, by the fibre-product universal property. Therefore $Q(L)=X_K(L)$ for every separable $L/K$. Applying step 4 with ground field $K$ yields $(X^\\natural)_K=(X_K)^\\natural$ as closed subschemes. This argument uses separability, not commutation of ordinary reduction with an arbitrary field extension.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-separable-field-extension-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 030U (lemma-separable-extension-preserves-reducedness) and 030W (lemma-characterize-separable-field-extensions), through the existing general transitivity node; scheme part is the fibre-product universal property."
+   }
+  },
+  {
+   "text": "Finally let $X=G$ be an affine finite-type group scheme. Apply step 5 to its multiplication, inverse and identity maps of [def-sc-group-scheme]. By step 6 their source cores are respectively $G^\\natural\\times_kG^\\natural$, $G^\\natural$, and $\\operatorname{Spec}k$. Thus these maps give multiplication $m^\\natural$, inverse $a^\\natural$ and identity $e^\\natural$ on $G^\\natural$, and $i_G$ commutes with each operation. To verify associativity, compose the two maps from $(G^\\natural)^3$ with $i_G$: both are the restriction of the associative multiplication on $G$. The monomorphism in step 1 cancels $i_G$, so the two maps agree. The same cancellation proves both unit equations and both inverse equations. These are precisely the group diagrams. For every $k$-algebra $R$, step 1 makes $G^\\natural(R)\\to G(R)$ injective, and the three operation equations say its image contains the identity and is closed under multiplication and inverse, so it is a subgroup. This is a closed subgroup scheme in [def-sc-group-scheme-subgroup], and it is geometrically reduced by step 2. The quotient description in step 1 also makes it affine. If $X$ is empty then $T_X=C_X=\\varnothing$ and the construction gives the empty closed subscheme; all preceding point, uniqueness, product and base-change assertions still apply.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-abelian-varieties/sk-def-av-group-scheme/def-sc-group-scheme.md",
+    "place": "Group-object diagrams and the definition of a closed subgroup scheme; restrictions supplied by steps 5-6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-open-fibre-product",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-separable-point-closure-universal-density",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-separable-extension-embeds-separably-closed",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-smooth-at-generic-point-over-field",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-pc-dense-separable-points",
+  "lem-weil-pbc-affine-scheme-reduced-iff",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-pur-geometrically-reduced-dense-smooth-open",
+  "lem-trf-geometrically-reduced-base-change",
+  "lem-sfb-separable-field-extension-transitivity",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Assembly by Q158 from Tags 01J3 and 0356, Algebra 07ND and 034N, Varieties 056U and 056V, and the existing reviewed separable-point-closure-universal-density node. Conrad Lemma 3.1.1 states the result but gives no proof here; its PDF is WANTED locally."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Largest smooth connected subgroup of a finite type group scheme commutes with separable field extensions",
+   "results": "{\"t\": \"2026-10-24T09:39:16Z\", \"tool\": \"leanfinder\", \"query\": \"Largest smooth connected subgroup of a finite type group scheme commutes with separable field extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable_aux\", \"CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected\", \"Field.absoluteGaloisGroupAbelianization\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"Algebra.FormallyEtale.iff_isSeparable\", \"InfiniteGalois.profiniteGalGrp\"], \"digest\": \"d1930866b6900923\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T09:40:46Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "grep",
+   "query": "smoothCore|smooth.core|maximal.*smooth|separable.*reduced",
+   "results": "{\"t\": \"2026-10-24T09:44:43Z\", \"tool\": \"grep\", \"query\": \"smoothCore|smooth.core|maximal.*smooth|separable.*reduced\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically reduced closed subscheme with the same points over all separable extensions, functorial and commuting with separable base change",
+   "results": "{\"t\": \"2026-10-24T09:44:43Z\", \"tool\": \"leansearch\", \"query\": \"Geometrically reduced closed subscheme with the same points over all separable extensions, functorial and commuting with separable base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.IsGeometricallyReduced.mk\", \"Algebra.IsGeometricallyReduced.recOn\", \"Algebra.IsGeometricallyReduced.rec\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\"], \"digest\": \"c055755696d9429b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical geometrically reduced closed subscheme containing all separable points of a scheme over a field",
+   "results": "{\"t\": \"2026-10-24T09:44:44Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical geometrically reduced closed subscheme containing all separable points of a scheme over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.Scheme.nilradical\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\"], \"digest\": \"4511a5339ff379be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyReduced|GeometricallyReduced|smoothening|smoothCore|separable",
+   "results": "{\"t\": \"2026-10-24T09:51:31Z\", \"tool\": \"grep\", \"query\": \"geometricallyReduced|GeometricallyReduced|smoothening|smoothCore|separable\", \"sub\": \"AlgebraicGeometry/Group\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Smooth.lean\"], \"digest\": \"ae0e8d641a24d546\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; definitions of geometric reducedness, smoothness of an already geometrically reduced group, separable algebras and abstract topological groups do not construct the canonical closed subscheme with its functorial and separable-base-change properties."
+  },
+  {
+   "tool": "grep",
+   "query": "separable.point|smoothCore|geometrically.reduced.*closed",
+   "results": "{\"t\": \"2026-10-24T10:14:30Z\", \"tool\": \"grep\", \"query\": \"separable.point|smoothCore|geometrically.reduced.*closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures and grep lines; geometric reducedness, field embeddings, ordinary reduction, and general morphism properties do not construct the canonical separable-point closed subscheme or supply all its clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme over a field has a unique geometrically reduced closed subscheme with the same points over all separable extensions",
+   "results": "{\"t\": \"2026-10-24T10:14:30Z\", \"tool\": \"leansearch\", \"query\": \"A finite type scheme over a field has a unique geometrically reduced closed subscheme with the same points over all separable extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsGeometricallyReduced\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.IsGeometricallyReduced.recOn\", \"Algebra.IsGeometricallyReduced.of_forall_fg\", \"Algebra.IsGeometricallyReduced.mk\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\"], \"digest\": \"1ccc9e28051f274e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures and grep lines; geometric reducedness, field embeddings, ordinary reduction, and general morphism properties do not construct the canonical separable-point closed subscheme or supply all its clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsClosedImmersion",
+   "results": "{\"t\": \"2026-10-24T10:14:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsClosedImmersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\"], \"digest\": \"3f1be225a5b04e74\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures and grep lines; geometric reducedness, field embeddings, ordinary reduction, and general morphism properties do not construct the canonical separable-point closed subscheme or supply all its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical geometrically reduced closed subscheme containing exactly the separable field valued points of a finite type scheme",
+   "results": "{\"t\": \"2026-10-24T10:14:31Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical geometrically reduced closed subscheme containing exactly the separable field valued points of a finite type scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.instT0SpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"Algebra.isReduced_of_isGeometricallyReduced\"], \"digest\": \"7413185a04683f38\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures and grep lines; geometric reducedness, field embeddings, ordinary reduction, and general morphism properties do not construct the canonical separable-point closed subscheme or supply all its clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced Zariski closure of separable rational points defines a functor commuting with products and separable scalar extension",
+   "results": "{\"t\": \"2026-10-24T10:20:24Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced Zariski closure of separable rational points defines a functor commuting with products and separable scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.lift_def\", \"isClosed_restrictScalars_separableClosure\", \"AlgebraicGeometry.IsSeparated.instMap\", \"AlgebraicGeometry.pointsPi\", \"AlgebraicGeometry.pointsPi_injective\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.Scheme.instIsOverToPartialMapOfIsSeparatedOfIsOver\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\"], \"digest\": \"bfa351f336b40947\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures and grep lines; geometric reducedness, field embeddings, ordinary reduction, and general morphism properties do not construct the canonical separable-point closed subscheme or supply all its clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyReduced|geometrically_reduced|separable.*point|point.*separable",
+   "results": "{\"t\": \"2026-10-24T10:22:41Z\", \"tool\": \"grep\", \"query\": \"geometricallyReduced|geometrically_reduced|separable.*point|point.*separable\", \"sub\": \"AlgebraicGeometry/Geometrically\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\"], \"digest\": \"c40552f41b245879\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned signatures and grep lines; geometric reducedness, field embeddings, ordinary reduction, and general morphism properties do not construct the canonical separable-point closed subscheme or supply all its clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unipotent-cckp-kernel-wound-criterion",
+  "date": "2026-10-24",
+  "group": "Q109"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c). Supporting input in this split: Proposition 16.54 and its proof, printed p.344: maximal split tori of a split solvable group are images of sections of its split-torus quotient and are conjugate under the unipotent kernel. An arbitrary split torus lies in a maximal one by bounded dimension. Applied to H=U semidirect D; the torus D is a maximal split torus because the kernel is unipotent. This is the split-solvable assertion, not reductive-group rational conjugacy. Supporting structural input: replace the given split series by a torus-stable series with linear one-dimensional quotients before successively removing the crossed homomorphism. Supporting prerequisite in the induction: Nonzero torus-stable central vector subgroup of a split unipotent group. Positive-characteristic construction: canonical central p-torsion kernel, before taking its vector factor. Supporting general scheme input: separable-point core of the kernel of multiplication by p in the centre, before taking its identity component.",
+   "via": [
+    "lem-sfb-unipotent-cckp-kernel-wound-criterion",
+    "lem-sfb-split-unipotent-central-vector-subgroup",
+    "lem-sfb-split-unipotent-torus-stable-series",
+    "lem-sfb-split-unipotent-torus-absorption",
+    "lem-sfb-minimal-parabolic-split-centralizers",
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separable-point-scheme-core",
+  "worker": "stage1",
+  "summary": "Q158 retained the statement and its statement dependencies, supplied eight explicit steps using existing nodes only, and searched the project library plus Mathlib with two semantic phrasings, Loogle and source grep. The construction is the reduced closure of all k^s-points. Generic smoothness of the coordinate-image algebra proves the point property for every separable extension, including transcendental ones. Dense smooth opens prove uniqueness; tensor reducedness gives products; general separability transitivity gives base change; the group diagrams are checked after composing with the closed monomorphism. No new nodes or Mathlib leaves.",
+  "blueprint": "This created node has blueprint ancestor None, as blueprint_refs.py ancestor reports. The inherited specified from.place and via chain are retained. The current latest sk-thm-sf-ctf-stability unit and direct-images proof (3) were read: this is a general scheme prerequisite in the retained alteration/unipotent-group branch, not a change to a unit route. Steps 1-4 realize the inherited separable-point core prerequisite; steps 5-8 prove its functorial, product, base-change and subgroup clauses. Searches for geometrically reduced, separable points, separable extension and reduced closed subscheme found no blueprint node stating the complete item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-at-generic-point-over-field",
+    "why": "Step 3 uses the finite-type domain generic-smoothness criterion to realize a separable-valued point through a smooth affine source; this unit has no such algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Step 3 converts the smooth algebra supplied by the generic-point criterion into a smooth affine scheme for the density theorem."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Steps 2, 3 and 5 use the general reduced-source closed-factorization criterion; this is a scheme-theoretic tool, not a replacement of a unit step."
+   },
+   {
+    "node": "lem-trf-geometrically-reduced-base-change",
+    "why": "Step 6 uses only the general commutative-algebra tensor-reducedness theorem over a field (Stacks 034N) to prove reducedness of product charts; no trace-formula assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-at-generic-point-over-field",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-trf-geometrically-reduced-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-ff3959541",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-ff3959541 (reviewer sub-agent of L); spot-checked: I read the item and all eight steps against the statements of the 22 cited nodes; the delivery adds no new nodes and leaves the statement and stmt_deps unchanged. The construction is correct: X^♮ is the reduced induced subscheme on the closure of X(k^s). Geometric reducedness comes from lem-sfb-separable-point-closure-universal-density; its common-overfield restriction is handled by choosing an algebraic closure Ω of E and embedding k^s in it. Step 3 proves the point property for any separable L, including transcendental L, via generic smoothness of the coordinate image (07ND node) and density of separable points (056U). Step 4 proves uniqueness using the dense smooth locus (056V node, lfp via the locally Noetherian base) and clause (3) of the reduced-induced node. Steps 5-8 (functoriality, products via 034N, separable base change via the transitivity node, closed subgroup by cancelling the monomorphism) are correct, and steps 1 and 8 are genuinely elementary. Small cases checked: inseparable point Spec k[x]/(x^p-a) gives an empty core, α_p gives the identity point, and the empty scheme works. Stacks 034N, 056V and 07ND were read in the local tex. Conrad 3.1.1 is not available locally, so the statement was checked mathematically. There is no cycle and no duplicate. Batch-5 check: lem-trf-geometrically-reduced-base-change (Stacks 034N) and lem-trf-flat-tensor-preserves-injection (a Mathlib flatness leaf, reached through separable-field-extension-transitivity) are general commutative algebra outside the trace-formula and Poincaré-duality assumptions and are not steps of their proofs, so I accept them; the closure reaches no other trace-formula or Poincaré-duality node. The four declared tool_uses are accepted. Three more off-unit generic tools are not declared (reduced-induced-closed-subscheme, dense-separable-points, geometrically-reduced-dense-smooth-open); the route check records them without refusing, and the maintainer may add them. Maintainer note: the page footer of the Conrad lemma is p.16, not p.15."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparablePointCore",
+  "declaration": "AlgebraicGeometry.separablePointCore_spec",
+  "declarations": [
+   "AlgebraicGeometry.separablePointCoreIdeal",
+   "AlgebraicGeometry.separablePointCore",
+   "AlgebraicGeometry.separablePointCoreι",
+   "AlgebraicGeometry.separablePointCore_spec",
+   "AlgebraicGeometry.existsUnique_separablePointCoreMap",
+   "AlgebraicGeometry.separablePointCoreMap",
+   "AlgebraicGeometry.separablePointCoreMap_laws",
+   "AlgebraicGeometry.separablePointCore_finiteProduct",
+   "AlgebraicGeometry.separablePointCore_baseChange",
+   "AlgebraicGeometry.separablePointCoreIdeal_eq_bot",
+   "AlgebraicGeometry.separablePointCore_closedSubgroup"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparablePointCore.lean",
+  "statement": "theorem separablePointCore_spec (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] : IsClosedImmersion (separablePointCoreι X).left ∧ GeometricallyReduced (separablePointCore X).hom ∧ (∀ (L : Type u) [Field L] [Algebra k L], Algebra.IsSeparableExtension k L → Function.Bijective (fun t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k L))) ⟶ separablePointCore X ↦ t ≫ separablePointCoreι X)) ∧ (∀ I : X.left.IdealSheafData, GeometricallyReduced (I.subschemeι ≫ X.hom) → (∀ (L : Type u) [Field L] [Algebra k L], Algebra.IsSeparableExtension k L → Function.Bijective (fun t : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k L))) ⟶ Over.mk (I.subschemeι ≫ X.hom) ↦ t ≫ Over.homMk I.subschemeι rfl)) → I = separablePointCoreIdeal X)",
+  "branch": "sheaf-dag",
+  "by": "Q156",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations together render every clause. Canonical helpers construct the reduced induced closure of the separable-closure points using Mathlib vanishingIdeal/subscheme. The map is chosen only from the uniquely determining factorization theorem. Products and separable base change are equalities of ideal sheaves, hence of closed subschemes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64a29f236",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Read node, all stmt_dep records (finite type = LocallyOfFiniteType+QuasiCompact, GeometricallyReduced, GrpObj, IsClosedSubgroupScheme = IsMonHom+R-point injectivity+closed immersion, Algebra.IsSeparableExtension = FG subfields separably generated), module, report. Core = vanishingIdeal of closure of SeparableClosure-points (real data, step 2). _spec: closed immersion, geometrically reduced, L-point bijection for all separable L incl. transcendental, uniqueness among ideal sheaves. Functoriality ∃! + choose + laws. Products: core ideal of ∏ᶜ = ⨆ comap along projections (Mathlib comap = ker of pullback.fst, ⨆ = sum), empty J gives ⊥. Base change: core ideal of Over.pullback = comap along pullback.fst. Geometrically reduced → ⊥. Group: ∃ GrpObj with IsClosedSubgroupScheme ι (structure forced by IsMonHom+mono) and affine. Edge cases: empty X, empty product, inseparable points, non-reduced X; universes natural. lean.statement verbatim; only lean and stmt_deps changed vs live; added stmt_dep def-weil-pbc-separable-field-extension is landed with a lean record and used. All sorry, docstrings with source/blueprint/steps. No files changed, no compile; worker dry run OK. Notes: second reading was a self-check by the same worker; Conrad PDF not local."
+ }
+}

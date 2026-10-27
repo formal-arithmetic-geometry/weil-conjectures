@@ -8,6 +8,15 @@ module
 public import Sheaf.AlgebraicGeometry.CompactProductArrows
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+import all Sheaf.AlgebraicGeometry.SupportedExteriorProduct
+import all Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct
+import all Sheaf.AlgebraicGeometry.SupportSiteComparison
+import all Sheaf.AlgebraicGeometry.SupportQuotientPairPullback
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
+import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
+import WeilConjectures.SixFunctors.ProEtale.OpenClosed.Sequence
 
 /-! # Proper support and compact cohomology maps
 
@@ -23,6 +32,14 @@ universe u v
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Functor
 
+private theorem compactCounit_normalize
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (a : L ⊣ R) {P : C} {Q Q' : D} (t : L.obj P ⟶ Q) (q : Q ⟶ Q') :
+    L.map (a.homEquiv _ _ t) ≫ L.map (R.map q) ≫ a.counit.app Q' = t ≫ q := by
+  rw [← L.map_comp_assoc]
+  change (a.homEquiv _ _).symm (a.homEquiv _ _ t ≫ R.map q) = _
+  rw [← a.homEquiv_naturality_right, Equiv.symm_apply_apply]
+
 namespace AlgebraicGeometry.Etale
 
 variable (A : Type (u + 1)) [CommRing A]
@@ -37,7 +54,32 @@ is closed. -/
 theorem compactProperSupportClosed {B X Z : Scheme.{u}} {f : X ⟶ B}
     (c : Compactification f) (i : Z ⟶ X) [IsClosedImmersion i] [IsProper (i ≫ f)] :
     IsClosedImmersion (i ≫ c.i) := by
-  sorry
+  have : IsProper ((i ≫ c.i) ≫ c.g) := by
+    simpa only [Category.assoc, ← c.comm] using
+      (inferInstance : IsProper (i ≫ f))
+  have : IsProper (i ≫ c.i) := IsProper.of_comp _ c.g
+  exact IsClosedImmersion.of_isPreimmersion _ (i ≫ c.i).isClosedMap.isClosed_range
+
+private theorem compactCoefficientQuotient_comp {Z X Y : Scheme.{u}}
+    (i : Z ⟶ X) (j : X ⟶ Y) (M : ModuleCat.{u + 1} A) :
+    supportedCoefficientQuotient A (i ≫ j) M =
+      supportedCoefficientQuotient A j M ≫
+        (lowerStar (ModuleCat.{u + 1} A) j).map (supportedCoefficientQuotient A i M) ≫
+          (lowerStarComp (ModuleCat.{u + 1} A) i j).hom.app _ := by
+  let C := ModuleCat.{u + 1} A
+  unfold supportedCoefficientQuotient
+  simp only [Adjunction.homEquiv_unit]
+  rw [← Scheme.upperStarConstantSheafIso_comp C i j M]
+  rw [Functor.map_comp, reassoc_of% (upperStarComp_hom_app_unit_app C i j
+    ((constantSheaf Y.smallEtaleTopology C).obj M)),
+    ← (lowerStarComp C i j).hom.naturality]
+  have hn := (upperStarLowerStarAdjunction C i).unit.naturality
+    ((Scheme.upperStarConstantSheafIso C j).hom.app M)
+  simp only [Adjunction.comp_unit_app, Functor.comp_map, Functor.map_comp,
+    Category.assoc] at hn ⊢
+  simp only [← Functor.map_comp_assoc (lowerStar C j)]
+  rw [← reassoc_of% hn]
+  rfl
 
 /-- Restriction of supported constants along the compactifying open, uniquely
 normalized on the constant quotient sections.
@@ -56,7 +98,42 @@ theorem compactSupportCoefficientRestriction_existsUnique
             (supportedCoefficientQuotient A (i ≫ c.i) M) ≫ e.hom.app M =
           (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) c.i).hom.app M ≫
             supportedCoefficientQuotient A i M := by
-  sorry
+  let a := upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.i
+  let e : supportedCoefficients A (i ≫ c.i) ⋙ upperStar (ModuleCat.{u + 1} A) c.i ≅
+      supportedCoefficients A i :=
+    Functor.isoWhiskerRight
+        (Functor.isoWhiskerLeft (constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))
+          (lowerStarComp (ModuleCat.{u + 1} A) i c.i).symm) (upperStar (ModuleCat.{u + 1} A) c.i) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (supportedCoefficients A i) (asIso a.counit) ≪≫
+      Functor.rightUnitor _
+  have he (M : ModuleCat.{u + 1} A) :
+      (upperStar (ModuleCat.{u + 1} A) c.i).map (supportedCoefficientQuotient A (i ≫ c.i) M) ≫
+          e.hom.app M =
+        (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) c.i).hom.app M ≫
+          supportedCoefficientQuotient A i M := by
+    change (upperStar (ModuleCat.{u + 1} A) c.i).map (supportedCoefficientQuotient A (i ≫ c.i) M) ≫
+      ((upperStar (ModuleCat.{u + 1} A) c.i).map
+          ((lowerStarComp (ModuleCat.{u + 1} A) i c.i).inv.app _) ≫
+        a.counit.app ((supportedCoefficients A i).obj M)) = _
+    rw [compactCoefficientQuotient_comp A i c.i M]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← (upperStar (ModuleCat.{u + 1} A) c.i).map_comp_assoc
+      ((lowerStarComp (ModuleCat.{u + 1} A) i c.i).hom.app _)
+      ((lowerStarComp (ModuleCat.{u + 1} A) i c.i).inv.app _), Iso.hom_inv_id_app]
+    erw [(upperStar (ModuleCat.{u + 1} A) c.i).map_id, Category.id_comp]
+    exact compactCounit_normalize a
+      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) c.i).hom.app M)
+      (supportedCoefficientQuotient A i M)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  have := coefficientQuotient_epi A (i ≫ c.i) M
+  apply (cancel_epi ((upperStar (ModuleCat.{u + 1} A) c.i).map
+    (supportedCoefficientQuotient A (i ≫ c.i) M))).mp
+  exact (he' M).trans (he M).symm
 
 /-- The quotient-normalized closed-coefficient restriction.
 Source: blueprint Step 1, proper-support paragraph
@@ -87,6 +164,26 @@ def compactSupportCoefficientExtension {B X Z : Scheme.{u}} {f : X ⟶ B}
     (ModuleCat.{u + 1} A) c.i).homEquiv _ _).symm
       ((compactSupportDerivedCoefficientRestriction A c i).inv.app M)
 
+private noncomputable def compactSupportOrdinaryExtensionIso
+    {B X Z : Scheme.{u}} {f : X ⟶ B} (c : Compactification f)
+    (i : Z ⟶ X) [IsClosedImmersion i] [IsProper (i ≫ f)] :
+    supportedCoefficients A i ⋙ openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ≅
+      supportedCoefficients A (i ≫ c.i) := by
+  let C := ModuleCat.{u + 1} A
+  have sq : IsPullback (𝟙 Z) i (i ≫ c.i) c.i :=
+    IsPullback.of_horiz_isIso_mono ⟨by simp⟩
+  have := isIso_finiteOpenComparison C sq
+  let e : openImmersionLowerShriek C (𝟙 Z) ≅ 𝟭 _ :=
+    (openImmersionLowerShriekUpperStarAdjunction C (𝟙 Z)).leftAdjointUniq
+      (Adjunction.id.ofNatIsoRight (upperStarId C Z).symm)
+  exact Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (constantSheaf Z.smallEtaleTopology C)
+      (asIso (finiteOpenComparison C sq)) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft (constantSheaf Z.smallEtaleTopology C) e ≪≫
+        Functor.rightUnitor _) (lowerStar C (i ≫ c.i))
+
 /-- Properness makes the supported coefficient extension comparison invertible.
 Source: blueprint Step 1, proper-support paragraph
 (blueprint: def-pur-proper-support-compact-maps).
@@ -100,7 +197,20 @@ theorem compactSupportCoefficientExtension_isIso {B X Z : Scheme.{u}} {f : X ⟶
     (c : Compactification f) (i : Z ⟶ X) [IsClosedImmersion i] [IsProper (i ≫ f)]
     (M : DerivedCategory (ModuleCat.{u + 1} A)) :
     IsIso (compactSupportCoefficientExtension A c i M) := by
-  sorry
+  let L := openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i
+  let e : (supportedCoefficients A i).mapDerivedCategory ⋙ L.mapDerivedCategory ≅
+      (supportedCoefficients A (i ≫ c.i)).mapDerivedCategory :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (compactSupportOrdinaryExtensionIso A c i)
+  let ff := a.fullyFaithfulLOfIsIsoUnit
+  let := ff.full
+  let := ff.faithful
+  have := a.isIso_counit_app_of_iso (e.app M).symm
+  change IsIso ((a.homEquiv _ _).symm
+    ((compactSupportDerivedCoefficientRestriction A c i).inv.app M))
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
 
 /-- The ordinary derived map forgetting support, using the recorded kernel inclusion.
 Source: blueprint Step 1, forgetting supports
@@ -183,7 +293,12 @@ theorem compactProductSupportProper {B X Y Z W : Scheme.{u}}
     (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
     [IsProper (i ≫ f)] [IsProper (j ≫ g)] :
     IsProper (supportedProductImmersion f g i j ≫ pullback.toBase f g) := by
-  sorry
+  have h : supportedProductImmersion f g i j ≫ pullback.toBase f g =
+      pullback.fst (i ≫ f) (j ≫ g) ≫ (i ≫ f) := by
+    dsimp only [pullback.toBase]
+    simp only [supportedProductImmersion, pullback.map, pullback.lift_fst_assoc, Category.assoc]
+  rw [h]
+  infer_instance
 
 /-- Excision with the specified restriction identification of an arbitrary extension.
 Source: blueprint Step 1, excision paragraph
@@ -214,6 +329,27 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
+private theorem compactCoefficientQuotient_comp {Z X Y : Scheme.{u}}
+    (i : Z ⟶ X) (j : X ⟶ Y) (M : ModuleCat.{u + 1} A) :
+    supportedCoefficientQuotient A (i ≫ j) M =
+      supportedCoefficientQuotient A j M ≫
+        (lowerStar (ModuleCat.{u + 1} A) j).map (supportedCoefficientQuotient A i M) ≫
+          (lowerStarComp (ModuleCat.{u + 1} A) i j).hom.app _ := by
+  have hq {S T : Scheme.{u}} (h : T ⟶ S) :
+      supportedCoefficientQuotient A h M =
+        Scheme.constantDirect (Scheme.ProEt.topology S) (Scheme.ProEt.topology T)
+          (Scheme.proEtaleBaseChange h) M := by
+    unfold supportedCoefficientQuotient
+    rw [CachedConstantCoherence.proConstant_eq_inverse]
+    change ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).homEquiv _ _)
+      (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).homEquiv _ _).symm _) = _
+    exact Equiv.apply_symm_apply _ _
+  rw [hq, hq, hq]
+  exact (Scheme.constantDirect_comp (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+    (Scheme.ProEt.topology Z) (Scheme.proEtaleBaseChange j) (Scheme.proEtaleBaseChange i)
+    (Scheme.proEtaleBaseChange (i ≫ j))
+    (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) i j).symm M).symm
+
 /-- Restriction of supported constants along the compactifying open, uniquely
 normalized on the constant quotient sections.
 Source: blueprint Step 1, proper-support paragraph
@@ -232,7 +368,42 @@ theorem compactSupportCoefficientRestriction_existsUnique
             (supportedCoefficientQuotient A (i ≫ c.i) M) ≫ e.hom.app M =
           (constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) c.i).hom.app M ≫
             supportedCoefficientQuotient A i M := by
-  sorry
+  let a := upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.i
+  let e : supportedCoefficients A (i ≫ c.i) ⋙ upperStar (ModuleCat.{u + 1} A) c.i ≅
+      supportedCoefficients A i :=
+    Functor.isoWhiskerRight
+        (Functor.isoWhiskerLeft (constantSheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} A))
+          (lowerStarComp (ModuleCat.{u + 1} A) i c.i).symm) (upperStar (ModuleCat.{u + 1} A) c.i) ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (supportedCoefficients A i) (asIso a.counit) ≪≫
+      Functor.rightUnitor _
+  have he (M : ModuleCat.{u + 1} A) :
+      (upperStar (ModuleCat.{u + 1} A) c.i).map (supportedCoefficientQuotient A (i ≫ c.i) M) ≫
+          e.hom.app M =
+        (constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) c.i).hom.app M ≫
+          supportedCoefficientQuotient A i M := by
+    change (upperStar (ModuleCat.{u + 1} A) c.i).map (supportedCoefficientQuotient A (i ≫ c.i) M) ≫
+      ((upperStar (ModuleCat.{u + 1} A) c.i).map
+          ((lowerStarComp (ModuleCat.{u + 1} A) i c.i).inv.app _) ≫
+        a.counit.app ((supportedCoefficients A i).obj M)) = _
+    rw [compactCoefficientQuotient_comp A i c.i M]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← (upperStar (ModuleCat.{u + 1} A) c.i).map_comp_assoc
+      ((lowerStarComp (ModuleCat.{u + 1} A) i c.i).hom.app _)
+      ((lowerStarComp (ModuleCat.{u + 1} A) i c.i).inv.app _), Iso.hom_inv_id_app]
+    erw [(upperStar (ModuleCat.{u + 1} A) c.i).map_id, Category.id_comp]
+    exact compactCounit_normalize a
+      ((constantSheafCompUpperStarIso (ModuleCat.{u + 1} A) c.i).hom.app M)
+      (supportedCoefficientQuotient A i M)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  have := coefficientQuotient_epi A (i ≫ c.i) M
+  apply (cancel_epi ((upperStar (ModuleCat.{u + 1} A) c.i).map
+    (supportedCoefficientQuotient A (i ≫ c.i) M))).mp
+  exact (he' M).trans (he M).symm
 
 /-- The quotient-normalized closed-coefficient restriction.
 Source: blueprint Step 1, proper-support paragraph
@@ -266,6 +437,22 @@ def compactSupportCoefficientExtension {B X Z : Scheme.{u}} {f : X ⟶ B}
     (ModuleCat.{u + 1} A) c.i).homEquiv _ _).symm
       ((compactSupportDerivedCoefficientRestriction A c i).inv.app M)
 
+private noncomputable def compactSupportOrdinaryExtensionIso
+    {B X Z : Scheme.{u}} {f : X ⟶ B}
+    (c : Compactification f) [IsLocallyNoetherian X] [IsLocallyNoetherian c.Z]
+    (i : Z ⟶ X) [IsClosedImmersion i] [IsProper (i ≫ f)] :
+    supportedCoefficients A i ⋙ openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ≅
+      supportedCoefficients A (i ≫ c.i) :=
+  Functor.isoWhiskerRight (coefficientComparison A i).symm
+      (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (Etale.supportedCoefficients A i)
+      (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) c.i).symm ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (Etale.compactSupportOrdinaryExtensionIso A c i)
+      (comparisonUpperStar (ModuleCat.{u + 1} A) c.Z) ≪≫
+    coefficientComparison A (i ≫ c.i)
+
 /-- Properness makes the supported coefficient extension comparison invertible.
 Source: blueprint Step 1, proper-support paragraph
 (blueprint: def-pur-proper-support-compact-maps).
@@ -280,7 +467,23 @@ theorem compactSupportCoefficientExtension_isIso {B X Z : Scheme.{u}} {f : X ⟶
       [IsClosedImmersion i] [IsProper (i ≫ f)]
     (M : DerivedCategory (ModuleCat.{u + 1} A)) :
     IsIso (compactSupportCoefficientExtension A c i M) := by
-  sorry
+  let L := openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i
+  let e : (supportedCoefficients A i).mapDerivedCategory ⋙ L.mapDerivedCategory ≅
+      (supportedCoefficients A (i ≫ c.i)).mapDerivedCategory :=
+    (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (compactSupportOrdinaryExtensionIso A c i)
+  have : IsIso a.unit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_unit
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) c.i)
+  let ff := a.fullyFaithfulLOfIsIsoUnit
+  let := ff.full
+  let := ff.faithful
+  have := a.isIso_counit_app_of_iso (e.app M).symm
+  change IsIso ((a.homEquiv _ _).symm
+    ((compactSupportDerivedCoefficientRestriction A c i).inv.app M))
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
 
 /-- The ordinary derived map forgetting support, using the recorded kernel inclusion.
 Source: blueprint Step 1, forgetting supports

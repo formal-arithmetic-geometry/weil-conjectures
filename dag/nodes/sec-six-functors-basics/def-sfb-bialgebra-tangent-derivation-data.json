@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-bialgebra-tangent-derivation-data",
+ "kind": "definition",
+ "title": "Bialgebra tangent functionals, contraction and invariant derivations",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $k$ be a field [def-weil-field] and $C$ a commutative unital $k$-algebra with a $k$-bialgebra structure: the unital algebra maps $\\Delta:C\\to C\\otimes_k C$ and $\\varepsilon:C\\to k$ satisfy coassociativity and the two counit identities, using the canonical tensor associativity and unit identifications [def-weil-pbc-module-tensor-product]. Define the subspace $L\\subseteq\\operatorname{Hom}_k(C,k)$ of tangent functionals by $x(ab)=\\varepsilon(a)x(b)+\\varepsilon(b)x(a)$ for all $a,b\\in C$. For every $k$-linear functional $x:C\\to k$, define its contraction $D_x=(1_C\\otimes x)\\Delta:C\\to C$, followed by $C\\otimes_k k\\simeq C$. For a $k$-linear derivation $D:C\\to C$, meaning $D(ab)=aD(b)+D(a)b$, define left invariance to be the equation $\\Delta D=(1_C\\otimes D)\\Delta$. These are definitions; they assert neither that every contraction is a derivation nor any identification or closure theorem.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Sections 10e and 10l, printed pp.195--196,208; Section 11e, Theorem 11.25 and Proposition 11.26, printed pp.217--218, for the tangent contraction. Existing definitions in Sheaf/RingTheory/BialgebraDistributionTangentCalculus.lean:71,81,91."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tangent functionals at the counit of a bialgebra and invariant derivations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"BialgCat.of_counit\", \"module\": \"Mathlib.Algebra.Category.BialgCat.Basic\", \"type\": \"{X : Type v} [Ring X] [Bialgebra R X] : Coalgebra.counit (A := of R X) = Coalgebra.counit (R := R) (A := X)\", \"doc\": \"For a bialgebra $ X $ over a commutative ring $ R $, the counit map of the corresponding object in the category of bialgebras over $ R $ coincides with the counit map of the coalgebra structure on $ X\"}\n  {\"name\": \"Bialgebra.counitAlgHom\", \"module\": \"Mathlib.RingTheory.Bialgebra.Basic\", \"type\": \": A →ₐ[R] R\", \"doc\": \"The algebra homomorphism from a bialgebra $ A $ over a commutative semiring $ R $ to $ R $, defined by the counit map $ \\\\epsilon: A \\\\to R $, which satisfies $ \\\\epsilon(1_A) = 1_R $ and $ \\\\epsilon(ab) \"}\n  {\"name\": \"Bialgebra.counitBialgHom\", \"module\": \"Mathlib.RingTheory.Bialgebra.Hom\", \"type\": \": A →ₐc[R] R\", \"doc\": \"The counit map $\\\\epsilon: A \\\\to R$ is a bialgebra homomorphism from a bialgebra $A$ over a commutative semiring $R$ to $R$, preserving both the algebra structure (satisfying $\\\\epsilon(1_A) = 1_R$ and \"}\n  {\"name\": \"Bialgebra.counitBialgHom_toCoalgHom\", \"module\": \"Mathlib.RingTheory.Bialgebra.Hom\", \"type\": \": counitBialgHom R A = Coalgebra.counitCoalgHom R A\", \"doc\": \"The counit bialgebra homomorphism from a bialgebra $ A $ over a commutative semiring $ R $ to $ R $ coincides with the counit coalgebra homomorphism from $ A $ to $ R $.\"}\n  {\"name\": \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"module\": \"Mathlib.RingTheory.Bialgebra.TensorProduct\", \"type\": \":\\n  Coalgebra.counit (R := S) (A := A ⊗[R] B) =\\n    ((Algebra.TensorProduct.rid _ _ _).toAlgHom.comp\\n        (Algebra.TensorProduct.map (Bialgebra.counitAlgHom S A) (Bialgebra.counitAlgHom R B))).toLinearMap\", \"doc\": \"The counit of the tensor product bialgebra $ A \\\\otimes_R B $ is equal to the composition of the algebra homomorphisms from $ A $ and $ B $ to $ R $, tensored together, followed by the isomorphism $ A \"}\n  {\"name\": \"BialgHom.ofAlgHom\", \"module\": \"Mathlib.RingTheory.Bialgebra.Hom\", \"type\": \"(f : A →ₐ[R] B) (counit_comp : (counitAlgHom R B).comp f = counitAlgHom R A)\\n  (map_comp_comul : (Algebra.TensorProduct.map f f).comp (comulAlgHom _ _) = (comulAlgHom _ _).comp f) : A →ₐc[R] B\", \"doc\": \"Given an algebra homomorphism $ f : A \\to B $ over a commutative semiring $ R $, this constructs a bialgebra homomorphism by verifying two compatibility conditions: (1) the composition of the counit ma\"}\n  {\"name\": \"Bialgebra.ofAlgHom\", \"module\": \"Mathlib.RingTheory.Bialgebra.Basic\", \"type\": \"(comul : A →ₐ[R] (A ⊗[R] A)) (counit : A →ₐ[R] R)\\n  (h_coassoc :\\n    (Algebra.TensorProduct.assoc R R A A A).toAlgHom.comp ((Algebra.TensorProduct.map comul (.id R A)).comp comul) =\\n      (Algebra.TensorProduct.map (.id R A) comul).comp comul)\\n  (h_rTensor : (Algebra.TensorProduct.map counit (.id R \", \"doc\": \"Given a commutative semiring $ R $ and an $ R $-algebra $ A $, if there exist algebra homomorphisms $\\\\Delta: A \\\\to A \\\\otimes_R A$ (comultiplication) and $\\\\epsilon: A \\\\to R$ (counit) satisfying coassoc\"}\n  {\"name\": \"Bialgebra.counitBialgHom_apply\", \"module\": \"Mathlib.RingTheory.Bialgebra.Hom\", \"type\": \"(x : A) : counitBialgHom R A x = Coalgebra.counit x\", \"doc\": \"For any commutative semiring $ R $ and a bialgebra $ A $ over $ R $, the counit map $ \\\\epsilon: A \\\\to R $ is a bialgebra homomorphism. This map preserves both the algebra structure (satisfying $ \\\\epsi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing three definitions in Sheaf.RingTheory.BialgebraDistributionTangentCalculus without copying them."
+  },
+  {
+   "tool": "loogle",
+   "query": "Bialgebra, Derivation",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing three definitions in Sheaf.RingTheory.BialgebraDistributionTangentCalculus without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "tangentFunctionals|tangentContraction|invariantDerivation",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"19\", \"text\": \"Moreover we prove that `LeftInvariantDerivation I G` has the structure of a Lie algebra, hence\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"47\", \"text\": \"structure LeftInvariantDerivation extends Derivation 𝕜 C^∞⟮I, G; 𝕜⟯ C^∞⟮I, G; 𝕜⟯ where\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"54\", \"text\": \"namespace LeftInvariantDerivation\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"56\", \"text\": \"instance : Coe (LeftInvariantDerivation I G) (Derivation 𝕜 C^∞⟮I, G; 𝕜⟯ C^∞⟮I, G; 𝕜⟯) :=\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Algebra/LeftInvariantDerivation.lean\", \"line\": \"62\", \"text\": \"    Function.Injective (toDerivation : LeftInvariantDerivation I G → _) :=\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/GroupLieAlgebra.lean\", \"line\": \"26\", \"text\": \"functions (see `LeftInvariantDerivation.instLieAlgebra`). For finite-dimensional `C^∞` real\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the existing three definitions in Sheaf.RingTheory.BialgebraDistributionTangentCalculus without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n tangentFunctionals|tangentContraction|invariantDerivation lean/WeilConjectures lean/Sheaf; DAG definition-node search and blueprint_refs.py search tangent functionals / invariant derivation",
+   "results": "No declaration hit in WeilConjectures. Sheaf/RingTheory/BialgebraDistributionTangentCalculus.lean:71,81,91 defines tangentFunctionals, tangentContraction, invariantDerivation. DAG declaration-name hits name the theorem node lem-sfb-bialgebra-distribution-tangent-calculus; no definition node owns these three declarations. def-sfb-affine-group-distribution-calculus defines different affine-group distribution APIs, not these general bialgebra declarations. blueprint_refs.py search tangent functionals: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "Record existing declarations under a definition node as explicitly requested by the maintainer; introduce no Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-restricted-rational-differentiation",
+  "date": "2026-10-24",
+  "group": "Q105"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Section 1, restricted enveloping algebra definition, Theorem 1.2 and Corollary 1.3, printed pp.148--150; positive-root grading of the Borel radical in Section 1, printed pp.151--152. The nilpotent augmentation assertion is the bounded positive-root grading consequence, not a claim that x^[p] is always zero. Supporting input for the augmentation argument: restricted invariant derivations, their functoriality and rational-module actions. Definition interfaces for the tangent-functional submodule, contraction, and invariant-derivation predicate in restricted rational differentiation.",
+   "via": [
+    "lem-sfb-restricted-rational-differentiation",
+    "lem-sfb-unipotent-restricted-enveloping-augmentation",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.RingTheory.BialgebraDistributionTangentCalculus",
+  "declaration": "BialgebraDistribution.tangentFunctionals",
+  "declarations": [
+   "BialgebraDistribution.tangentFunctionals",
+   "BialgebraDistribution.tangentContraction",
+   "BialgebraDistribution.invariantDerivation"
+  ],
+  "statement": "def tangentFunctionals (k : Type u) (C : Type v) [Field k] [CommRing C]\n    [Bialgebra k C] : Submodule k (C →ₗ[k] k)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition-node ownership of the three unchanged real-data definitions requested in the return of immutable head d18a1a477182. The submodule is the intersection of the Leibniz kernels, the contraction is the tensor map followed by rid, and invariance is its displayed equality. No move or copy, no theorem conclusion, no .choose, and no use of finiteOrderConvolutionAndTangentDerivations is involved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64ef75836",
+  "group": "Q105",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64ef75836",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Re-delivery of returned d18a1a477182. The Lean module is byte-identical (sha256 7390cad9…8418), and the mathematics was already verified clause by clause in that review; I re-read the signature against the node and agree. The H2/H12 fix is as instructed: the theorem stmt_deps lem-sfb-bialgebra-distribution-tangent-calculus and lem-sfb-hopf-coaction-linearization are replaced by the new existing:true def node def-sfb-bialgebra-tangent-derivation-data (tangentFunctionals/tangentContraction/invariantDerivation in Sheaf.RingTheory.BialgebraDistributionTangentCalculus) and by the landed def-sfb-coordinate-hopf-algebra, def-sfb-hopf-action-module-data and def-wf-lie-algebra-derivation. Compared with the live node, only stmt_deps and lean change; proof_deps, statement and proof are unchanged. The new node has every §5 field, its statement matches the three definitions, it asserts no theorem, its stmt_deps match its citations, and no other definition node owns these declarations. Report sections are present. No file changed, so nothing was compiled."
+ }
+}

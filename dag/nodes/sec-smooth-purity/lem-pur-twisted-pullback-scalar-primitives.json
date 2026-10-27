@@ -1,0 +1,148 @@
+{
+ "id": "lem-pur-twisted-pullback-scalar-primitives",
+ "kind": "statement",
+ "title": "Primitive twist and compositor scalar squares",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "statement": "Let ell be prime, E and L finite extensions of Q_ell, and i:E→L a Q_ell-algebra map. Let u:X′→X, f:X→Y, f′:X′→Y′ and v:Y′→Y be morphisms of schemes with ell invertible in all residue fields, and u≫f=f′≫v. Let d be a natural number. Use the raw rational framework categories and the exact specified maps D,T,p,q,z,t,PU,PV,a,rA,rB,m of [def-pur-twisted-pullback-square-maps]. The scalar/twist/pullback square (Z) holds on every object of X, and the scalar/compositor square (C) holds on every object of Y, with precisely the directions in those definitions. All twelve component families satisfy [def-pur-twisted-pullback-coefficient-coherence].Naturality. This asserts no intermediate identity, middle square, unit/tower law, shift coherence, PBC-coordinate existence or adic identification.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Clause (3), coefficient-extension tower comparisons; expanded ordinary pullback/tensor/shift calculation in lem-pur-twisted-pullback-square-scalars."
+ },
+ "stmt_deps": [
+  "def-pur-twisted-pullback-square-maps",
+  "def-pur-twisted-pullback-coefficient-coherence"
+ ],
+ "proof": [
+  {
+   "text": "For the roots-induced Tate line, pullback and extension of scalars both send (zeta tensor e) tensor l to pull(zeta) tensor el. This respects the roots transitions by functoriality of powers. Tensoring the fixed ordered factors proves the same identity for positive d; the empty tensor uses coefficient multiplication for d=0.",
+   "uses": [
+    "def-pur-roots-of-unity-inverse-image",
+    "det-prop-sfb-cartesian-coefficients-twists",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the whole-system scalar/pullback/tensor balancing square with the second input the Tate line. Substitute its line equation, use the normalized realization of the completed maps, apply the common shift 2d and raw scalar localization. The result is precisely Z, on every common integral object and therefore every raw rational object. Naturality holds before realization and extends by bilinearity to every localized hom.",
+   "uses": [
+    "lem-pur-scalar-extension-tower-coherence",
+    "lem-pur-normalized-scalar-comparison-realization",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar/pullback comparison obeys composition for the prescribed integral compositors. Apply its equation for u,f and f′,v. Equality sq identifies the maps on the composite morphism. Cancel the first compositor and insert the second, obtaining T(t_E) followed by PV = PU followed by t_L. Whiskering and composing the natural constituent maps gives the naturality of q, PU, PV, a, rA, rB, z and m at both coefficient fields.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-framework-pbc-pullback-scalar-bridge"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-roots-of-unity-inverse-image",
+  "det-prop-sfb-cartesian-coefficients-twists",
+  "def-coefficient-twists-detailed",
+  "lem-pur-scalar-extension-tower-coherence",
+  "lem-pur-normalized-scalar-comparison-realization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-semilinear-scalar-localization",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-framework-pbc-pullback-scalar-bridge"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Clause (3), coefficient-extension tower comparisons; expanded ordinary pullback/tensor/shift calculation in lem-pur-twisted-pullback-square-scalars."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tate twist derived pullback scalar extension commutative square naturality composition",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullbackObjFreeIso_hom_naturality; PresheafOfModules.pullbackComp; SheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatIso\", \"naturality\"",
+   "results": "CategoryTheory.NatIso.naturality_1; CategoryTheory.NatIso.naturality_2; CategoryTheory.NatIso.naturality_1'; CategoryTheory.NatIso.naturality_2'; CategoryTheory.NatIso.naturality_1_assoc; CategoryTheory.NatIso.naturality_2_assoc; CategoryTheory.NatIso.naturality_1'_assoc; CategoryTheory.NatIso.naturality_2'_assoc",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "twistedPullbackSquareScalars|TwistedPullbackScalars.*(natur|coher)|rationalPullbackScalarComparison.*comp",
+   "results": "No hits.",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate twist pullback coefficient extension canonical coherence and rational localization",
+   "results": "Module.Basis.ofIsLocalizedModule_repr_apply; LinearMap.restrictScalars_extendScalarsOfIsLocalization; Module.FinitePresentation.isLocalizedModule_mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv; LinearMap.extendScalarsOfIsLocalization; IsLocalization.mapₐ_coe; ModuleCat.instIsScalarTowerLocalizationCarrierLocalizedModule; instIsScalarTowerLocalizationAlgebraMapSubmonoidPrimeCompl_1",
+   "date": "2026-10-25",
+   "verdict": "No match: the hits concern module sheaves or general localization, not the normalized framework/PBC coefficient comparisons and Tate-line maps in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(twist|pullback)|twist.*scalar in Mathlib/AlgebraicGeometry and Mathlib/CategoryTheory/Localization",
+   "results": "No hits for the specified comparisons; checked the local Mathlib source.",
+   "date": "2026-10-25",
+   "verdict": "No match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackSquareScalars",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Ordinary scalar/pullback/twist constituents of base-change coherence, as expanded by lem-pur-twisted-pullback-square-scalars",
+   "via": [
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-smooth-exchange-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackScalarPrimitives",
+  "file": "lean/Sheaf/Paper/TwistedPullbackScalarPrimitives.lean",
+  "declaration": "WeilConjectures.TwistedPullbackScalars.twistedPullbackScalarPrimitives",
+  "statement": "theorem twistedPullbackScalarPrimitives :\n  (∀ M : sfRationalConstructibleCategory l E X,\n    (p l E L i u ((D l E X d).obj M)).hom ≫\n      (rationalDerivedPullback l L u).map (q l E L i X d M).hom ≫\n      (z l L u d ((T l E L i X).obj M)).hom =\n    (T l E L i X').map (z l E u d M).hom ≫\n      (q l E L i X' d ((rationalDerivedPullback l E u).obj M)).hom ≫\n      (D l L X' d).map (p l E L i u M).hom) ∧\n  (∀ K : sfRationalConstructibleCategory l E Y,\n    (T l E L i X').map ((t l E u f f' v sq).hom.app K) ≫\n      (PV l E L i f' v K).hom =\n    (PU l E L i u f K).hom ≫\n      (t l L u f f' v sq).hom.app ((T l E L i Y).obj K)) ∧\n    Naturality l E L i u f f' v sq d",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T181101-L-4074722",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T181101-L-4074722",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

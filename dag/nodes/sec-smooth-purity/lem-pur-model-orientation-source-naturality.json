@@ -1,0 +1,108 @@
+{
+ "id": "lem-pur-model-orientation-source-naturality",
+ "kind": "statement",
+ "title": "Naturality of the eight-factor source comparison",
+ "statement": "Fix a finite purity datum P [def-pur-conventions], schemes X,Y,Z with Y over k, morphisms f:X->Y and g:Y->Z, and d,e in N. Let I_K:L(gf)*K(d+e)[2(d+e)] -> Lf*(Lg*K(e)[2e])(d)[2d] be the actual eight-factor comparison of [def-pur-composition-comparisons], with intrinsic realization on both sides, as expressed by [def-pur-composition-model-orientation-coordinates]. For arbitrary derived coefficient objects K,L on Z and a:K->L, shifted composite pullback of a followed by I_L equals I_K followed by iterated shifted pullback of a. No constructibility hypothesis on a or its endpoints is needed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "stmt_deps": [
+  "def-pur-composition-model-orientation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "Use naturality of the eight specified factors in their recorded order. Their ordered product is fixed by CompositionSourceNormalized, and uniqueness identifies this product with compositionSourceFixed. Applying intrinsic realization preserves the resulting naturality square.",
+   "uses": [
+    "def-pur-composition-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Steps 1–2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-composition-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing affine orientations zero section multiplicativity and detection of automorphisms of shifted Tate lines",
+   "results": "Orientation.map; CharacterModule.dual_zero; FractionalIdeal.dual_zero; Module.Basis.orientation; DomAddAct.mk_zero; instMulZeroClassOrderDual; OrderDual.instMulActionWithZero; AffineMap.zero_linear. None concerns the specified sheaf orientations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical smooth dualizing orientations respect composition and descend from affine charts",
+   "results": "inTangentCoordinates_eq; inTangentCoordinates; SmoothBumpCovering.comp_embeddingPiTangent_mfderiv; SingularManifold.comap_f; tangentCoordChange_comp; ModelWithCorners.coe_extChartAt_transContinuousLinearEquiv; ContinuousLinearEquiv.toTransContinuousLinearEquiv; mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm'. These are manifold coordinate results, not etale sheaf comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*orientation|orientation.*descent|compositionSourceFixed",
+   "results": "0 hits in the Mathlib search service.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositionModelOrientationDescent",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–2; Naturality of the eight-factor source comparison",
+   "via": [
+    "lem-pur-composition-model-orientation-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModelOrientationSourceNaturality",
+  "file": "lean/Sheaf/Paper/ModelOrientationSourceNaturality.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.model_orientation_source_naturality",
+  "statement": "theorem model_orientation_source_naturality (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} [Y.Over (Spec (.of P.field.k))] (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z) (K L : Scheme.proEtaleDerivedCategory Z P.Ring) (a : K ⟶ L) : ((P.compositionShiftedPullback (f ≫ g) (d + e)).map a) ≫ (P.compositionSourceIdentification f g d e L).hom = (P.compositionSourceIdentification f g d e K).hom ≫ ((P.compositionShiftedPullback g e) ⋙ (P.compositionShiftedPullback f d)).map a",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositionModelOrientationDefinitions.lean vs clone item module (definitions verbatim, only blueprint tags), item theorem statement vs clone (byte-identical), five split statements vs original conclusion conjuncts and PurityCompositionCoherence source normalization, item node fields vs clone (only proof/proof_deps/proof_origin/lean/tool_uses)"
+ }
+}

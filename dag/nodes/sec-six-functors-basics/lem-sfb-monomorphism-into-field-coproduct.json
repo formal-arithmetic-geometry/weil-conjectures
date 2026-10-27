@@ -1,0 +1,228 @@
+{
+ "id": "lem-sfb-monomorphism-into-field-coproduct",
+ "kind": "statement",
+ "title": "Monomorphisms into disjoint unions of field spectra",
+ "statement": "Let $I$ be a set and $(k_i)_{i\\in I}$ a family of fields [def-weil-field]. Put $D=\\coprod_{i\\in I}\\operatorname{Spec}k_i$, the disjoint union scheme [def-pc-scheme, def-weil-affine-spectrum]. For every monomorphism of schemes $m:T\\to D$ there is a subset $J\\subseteq I$ and an isomorphism $T\\cong\\coprod_{j\\in J}\\operatorname{Spec}k_j$ over $D$, with $m$ the corresponding component inclusion. Here monomorphism means that for every scheme $H$ the function $\\operatorname{Hom}(H,T)\\to\\operatorname{Hom}(H,D)$ is injective. Both the empty family and an infinite family are allowed.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 03DP (lemma-mono-towards-spec-field), final, arbitrary-disjoint-union assertion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\iota_i:\\operatorname{Spec}k_i\\to D$. By [lem-weil-pbc-scheme-coproduct-family] their images $D_i$ are disjoint clopen subsets covering $D$. Set $T_i=m^{-1}(D_i)$, with open inclusion $j_i:T_i\\to T$; these opens are disjoint and cover $T$. By [lem-weil-pbc-morphism-factors-through-open-subscheme], $m j_i=\\iota_i f_i$ for a morphism $f_i:T_i\\to\\operatorname{Spec}k_i$. It is monic: if $f_i a=f_i b$, then $m j_i a=m j_i b$, hence $j_i a=j_i b$ by monicity of $m$, and $a=b$ by [lem-weil-pbc-open-immersion-monomorphism].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03DP, lemma-mono-towards-spec-field, proof."
+   }
+  },
+  {
+   "text": "Monicity of $f_i$ gives injectivity on morphisms from every field spectrum. The equivalence (1) with (2) in [def-weil-radicial-morphism] therefore makes $f_i$ universally injective, hence injective on points by the identity base change. A field spectrum has one point by [def-weil-affine-spectrum], so $T_i$ has at most one point. If $T_i$ is nonempty, [lem-weil-pbc-affine-opens-basis] gives an affine open containing its point; its underlying open is all of $T_i$, so $T_i\\cong\\operatorname{Spec}A_i$ is affine.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03DP, lemma-mono-towards-spec-field, proof."
+   }
+  },
+  {
+   "text": "For a nonempty $T_i$, write $f_i=\\operatorname{Spec}(\\varphi_i)$ with $\\varphi_i:k_i\\to A_i$, using the affine identification and [def-weil-affine-spectrum]. This ring map is epic: if $a,b:A_i\\to B$ satisfy $a\\varphi_i=b\\varphi_i$, functoriality gives $f_i\\operatorname{Spec}a=f_i\\operatorname{Spec}b$; monicity of $f_i$ and uniqueness of the ring map inducing an affine morphism give $a=b$. Apply [lem-sfb-field-ring-epimorphism-trivial-or-iso]. The zero-ring case would make $\\operatorname{Spec}A_i$ empty, since a prime ideal is proper and a zero ring has no proper ideal. Thus $\\varphi_i$ is an isomorphism and functoriality of $\\operatorname{Spec}$ makes $f_i$ an isomorphism.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-sfb-field-ring-epimorphism-trivial-or-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03DP, lemma-mono-towards-spec-field, proof."
+   }
+  },
+  {
+   "text": "Let $J=\\{i\\in I:T_i\\ne\\varnothing\\}$. The $T_j$ for $j\\in J$ still form a clopen decomposition of $T$, so [det-pe-finite-local-systems-type-coproduct] says their inclusions present $T$ as their coproduct. Put $C=\\coprod_{j\\in J}\\operatorname{Spec}k_j$ with inclusions $\\eta_j$, using [lem-weil-pbc-scheme-coproduct-family]. The two universal properties define $\\theta:C\\to T$ by $\\theta\\eta_j=j_j f_j^{-1}$ and $\\psi:T\\to C$ by $\\psi j_j=\\eta_j f_j$. Both composites restrict to the identity on each coprojection, so $\\theta$ and $\\psi$ are inverse. Moreover $m\\theta\\eta_j=\\iota_j$, proving the assertion over $D$. This includes empty $J$ and empty $I$, and uses no finiteness of the index set.",
+   "uses": [
+    "det-pe-finite-local-systems-type-coproduct",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 03DP, lemma-mono-towards-spec-field, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-weil-radicial-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-sfb-field-ring-epimorphism-trivial-or-iso",
+  "det-pe-finite-local-systems-type-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tag 03DP, lemma-mono-towards-spec-field, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of schemes into a disjoint union of spectra of fields is the inclusion of a subset of components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instMonoCoprodScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.Limits.MonoCoprod AlgebraicGeometry.Scheme\", \"doc\": \"In the category of schemes, for any two schemes $X$ and $Y$, the coproduct $X \\\\sqcup Y$ exists, and the canonical morphisms $X \\\\to X \\\\sqcup Y$ and $Y \\\\to X \\\\sqcup Y$ are monomorphisms.\"}\n  {\"name\": \"AlgebraicGeometry.sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"{ι : Type u} →\\n  (R : ι → CommRingCat) →\\n    (∐ fun i => AlgebraicGeometry.Spec (R i)) ⟶\\n      AlgebraicGeometry.Spec { carrier := (i : ι) → ↑(R i), commRing := Pi.commRing }\", \"doc\": \"Given an indexed family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, this constructs the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ to the\"}\n  {\"name\": \"AlgebraicGeometry.ι_sigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat) (i : ι),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.Sigma.ι (fun i => AlgebraicGeometry.Spec (R i)) i)\\n      (AlgebraicGeometry.sigmaSpec R) =\\n    AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Pi.evalRingHom (fun i => ↑(R i)) i))\", \"doc\": \"For a family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the composition of the canonical coproduct inclusion $\\\\iota_i : \\\\operatorname{Spec}(R_i) \\\\to \\\\coprod_{i \\\\in \\\\iota} \\\\operatorname{Spec}(R_i)$ \"}\n  {\"name\": \"AlgebraicGeometry.coprodSpec_coprodMk\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ (R S : Type u) [inst : CommRing R] [inst_1 : CommRing S]\\n  (x :\\n    ↥(AlgebraicGeometry.Spec { carrier := R, commRing := inst }) ⊕\\n      ↥(AlgebraicGeometry.Spec { carrier := S, commRing := inst_1 })),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.coprodSpec R S).base)\\n      ((Algebrai\", \"doc\": \"The coproduct inclusion map from $\\\\operatorname{Spec}(R)$ to $\\\\operatorname{Spec}(R) \\\\sqcup \\\\operatorname{Spec}(S)$ corresponds under the canonical isomorphism $\\\\operatorname{Spec}(R \\\\times S) \\\\cong \\\\\"}\n  {\"name\": \"AlgebraicGeometry.sigmaMk_mk\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} (f : ι → AlgebraicGeometry.Scheme) (i : ι) (x : ↥(f i)),\\n  (AlgebraicGeometry.sigmaMk f) ⟨i, x⟩ =\\n    (CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.Sigma.ι f i).base) x\", \"doc\": \"For each index $i$ and element $x$ in the scheme $f(i)$, the homeomorphism $\\\\sigma\\\\text{Mk}$ applied to the pair $(i, x)$ equals the coproduct inclusion morphism $\\\\iota_i$ evaluated at $x$. This estab\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionSigmaSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {ι : Type u} (R : ι → CommRingCat), AlgebraicGeometry.IsOpenImmersion (AlgebraicGeometry.sigmaSpec R)\", \"doc\": \"For any indexed family of commutative rings $\\\\{R_i\\\\}_{i \\\\in \\\\iota}$, the canonical morphism from the coproduct (disjoint union) of the affine schemes $\\\\operatorname{Spec}(R_i)$ to the affine scheme $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionInlScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ (X Y : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsOpenImmersion CategoryTheory.Limits.coprod.inl\", \"doc\": \"For any schemes $X$ and $Y$, the left inclusion morphism $X \\to X ⨿ Y$ into their coproduct is an open immersion. This means the morphism induces a homeomorphism of $X$ onto an open subset of $X ⨿ Y$ a\"}\n  {\"name\": \"AlgebraicGeometry.inl_ne_inr\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ (X Y : AlgebraicGeometry.Scheme) (x : ↥X) (y : ↥Y),\\n  (CategoryTheory.ConcreteCategory.hom CategoryTheory.Limits.coprod.inl.base) x ≠\\n    (CategoryTheory.ConcreteCategory.hom CategoryTheory.Limits.coprod.inr.base) y\", \"doc\": \"For any elements $x \\\\in X$ and $y \\\\in Y$, the left inclusion $\\\\text{inl}(x)$ and the right inclusion $\\\\text{inr}(y)$ into the coproduct $X \\\\amalg Y$ are distinct, i.e., $\\\\text{inl}(x) \\\\neq \\\\text{inr}(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism to the spectrum of a field is empty or an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X], AlgebraicGeometry.Scheme.Hom.ker X.toSpecΓ = ⊥\", \"doc\": \"Let $X$ be a scheme whose underlying topological space is quasi-compact. Let $\\\\Gamma(X, \\\\mathcal{O}_X)$ be the ring of global sections of its structure sheaf. There is a canonical morphism of schemes \"}\n  {\"name\": \"AlgebraicGeometry.specZIsTerminal\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.Limits.IsTerminal (AlgebraicGeometry.Spec { carrier := ℤ, commRing := Int.instCommRing })\", \"doc\": \"The scheme $\\\\operatorname{Spec}(\\\\mathbb{Z})$ is the terminal object in the category of schemes, meaning that for every scheme $X$, there exists a unique morphism $X \\\\to \\\\operatorname{Spec}(\\\\mathbb{Z})\"}\n  {\"name\": \"AlgebraicGeometry.spec_punit_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"IsEmpty ↥(AlgebraicGeometry.Spec { carrier := PUnit.{u + 1}, commRing := PUnit.commRing })\", \"doc\": \"The scheme $\\\\operatorname{Spec}(\\\\mathbf{1})$, where $\\\\mathbf{1}$ denotes the unit type endowed with its canonical trivial commutative ring structure (where $0 = 1$), has an empty underlying topologica\"}\n  {\"name\": \"AlgebraicGeometry.specULiftZIsTerminal\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.Limits.IsTerminal (AlgebraicGeometry.Spec { carrier := ULift.{u, 0} ℤ, commRing := ULift.commRing })\", \"doc\": \"The spectrum of the universe-lifted integers $\\\\mathrm{ULift}\\\\, \\\\mathbb{Z}$ serves as the terminal object in the category of schemes, meaning there exists a unique morphism from any scheme to $\\\\operato\"}\n  {\"name\": \"AlgebraicGeometry.specPunitIsInitial\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.Limits.IsInitial (AlgebraicGeometry.Spec { carrier := PUnit.{u + 1}, commRing := PUnit.commRing })\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(\\\\mathbf{1})$, constructed from the trivial commutative ring $\\\\mathbf{1}$ on the unit type, is the initial object in the category of schemes. This follows because\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mono\", \"Spec\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AddSubmonoid.LocalizationMap.mk'_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] (f : S.LocalizationMap N) (x : M) (y : ↥S) : f.mk' x y + f ↑y = f x\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.mk'_spec'\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] (f : S.LocalizationMap N) (x : M) (y : ↥S) : f ↑y + f.mk' x y = f x\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.LocalizationMap.mk'_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] (f : S.LocalizationMap N) (x : M) (y : ↥S) : f.mk' x y * f ↑y = f x\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.LocalizationMap.mk'_spec'\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] (f : S.LocalizationMap N) (x : M) (y : ↥S) : f ↑y * f.mk' x y = f x\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.sec_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] {f : S.LocalizationMap N} (z : N) : z + f ↑(f.sec z).2 = f (f.sec z).1\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.sec_spec'\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] {f : S.LocalizationMap N} (z : N) : f (f.sec z).1 = f ↑(f.sec z).2 + z\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.LocalizationMap.sec_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] {f : S.LocalizationMap N} (z : N) : z * f ↑(f.sec z).2 = f (f.sec z).1\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.LocalizationMap.sec_spec'\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Basic\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] {f : S.LocalizationMap N} (z : N) : f (f.sec z).1 = f ↑(f.sec z).2 * z\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.lift_mk'_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Maps\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] {P : Type u_3} [AddCommMonoid P] (f : S.LocalizationMap N) {g : M →+ P} (hg : ∀ (y : ↥S), IsAddUnit (g ↑y)) (x : M) (v : P) (y : ↥S) : (f.lift hg) (f.mk' x y) = v ↔ g x = g ↑y + v\", \"doc\": \"\"}\n  {\"name\": \"Submonoid.LocalizationMap.lift_mk'_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Maps\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] {P : Type u_3} [CommMonoid P] (f : S.LocalizationMap N) {g : M →* P} (hg : ∀ (y : ↥S), IsUnit (g ↑y)) (x : M) (v : P) (y : ↥S) : (f.lift hg) (f.mk' x y) = v ↔ g x = g ↑y * v\", \"doc\": \"\"}\n  {\"name\": \"AddSubmonoid.LocalizationMap.lift_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Maps\", \"type\": \" {M : Type u_1} [AddCommMonoid M] {S : AddSubmonoid M} {N : Type u_2} [AddCommMonoid N] {P : Type u_3} [AddCommMonoid P] (f : S.LocalizationMap N) {g : M →+ P} (hg : ∀ (y : ↥S), IsAddUnit (g ↑y)) (z : N) (v : P) : (f.lift hg) z = v ↔ g (f.sec z).1 = g ↑(f.sec z).2 + v\", \"doc\": \"Given a Localization map `f : M →+ N` for an AddSubmonoid `S ⊆ M`, if an\\n`AddCommMonoid` map `g : M →+ P` induces a map `f.lift hg : N →+ P` then for all\\n`z : N, v : P`, we have `f.lift hg z = v ↔ g x\"}\n  {\"name\": \"Submonoid.LocalizationMap.lift_spec\", \"module\": \"Mathlib.GroupTheory.MonoidLocalization.Maps\", \"type\": \" {M : Type u_1} [CommMonoid M] {S : Submonoid M} {N : Type u_2} [CommMonoid N] {P : Type u_3} [CommMonoid P] (f : S.LocalizationMap N) {g : M →* P} (hg : ∀ (y : ↥S), IsUnit (g ↑y)) (z : N) (v : P) : (f.lift hg) z = v ↔ g (f.sec z).1 = g ↑(f.sec z).2 * v\", \"doc\": \"Given a Localization map `f : M →* N` for a Submonoid `S ⊆ M`, if a `CommMonoid` map\\n`g : M →* P` induces a map `f.lift hg : N →* P` then for all `z : N, v : P`, we have\\n`f.lift hg z = v ↔ g x = g y *\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]ono.*[Ff]ield|[Ff]ield.*[Mm]ono|[Mm]ono.*[Ss]pec",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"line\": \"242\", \"text\": \"      (Proj 𝒜).homOfLE (basicOpen_mono _ _ _ ⟨_, hx⟩) ≫ basicOpenToSpec 𝒜 f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"line\": \"174\", \"text\": \"theorem vanishingIdeal_anti_mono {s t : Set (ProjectiveSpectrum 𝒜)} (h : s ⊆ t) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"line\": \"107\", \"text\": \"  rw [← cancel_mono (pullbackSpecIso ..).inv]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"213\", \"text\": \"  rw [← cancel_mono U.2.fromSpec]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"298\", \"text\": \"  · rw [← cancel_mono (f.normalizationOpenCover.f U), ← cancel_epi (U.2.preimage f).isoSpec.hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"194\", \"text\": \"            ← cancel_mono (Scheme.ΓSpecIso _).hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"219\", \"text\": \"    rw [← cancel_mono V.toScheme.isoSpec.hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"242\", \"text\": \"    rw [← cancel_mono (Y.fromSpecStalk _)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"line\": \"383\", \"text\": \"    rw [← cancel_mono (S.fromSpecStalk _)]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"241\", \"text\": \"  · rw [← cancel_mono <| X.fromSpecResidueField T.x]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"line\": \"244\", \"text\": \"  · rw [← cancel_mono <| Y.fromSpecResidueField T.y]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"257\", \"text\": \"  rw [cancel_mono, Spec.map_inj] at this\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"170\", \"text\": \"    rw [← cancel_mono (Scheme.residueFieldCongr (hux ▸ hu).symm).hom]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"171\", \"text\": \"    have : Mono (Scheme.Hom.residueFieldMap (pullback.diagonal f) x) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"line\": \"173\", \"text\": \"    simp [← cancel_mono ((pullback.diagonal f).residueFieldMap x), ← Scheme.residueFieldMap_comp,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"135\", \"text\": \"    Iff.trans ?_ (arrow_mk_iso_iff (monomorphisms _) (arrowIsoSpecΓOfIsAffine f).symm)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"138\", \"text\": \"  exact (Functor.mono_map_iff_mono Scheme.Spec _).symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"135\", \"text\": \"      rw [Functor.OplaxMonoidal.δ_of_cartesianMonoidalCategory, prodComparison_algSpec_left]; rfl))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"137\", \"text\": \"@[simp] lemma ε_algSpec_left : (LaxMonoidal.ε (algSpec R)).left = 𝟙 (Spec R) := rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"138\", \"text\": \"@[simp] lemma η_algSpec_left : (OplaxMonoidal.η (algSpec R)).left = 𝟙 (Spec R) := rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"141\", \"text\": \"    (OplaxMonoidal.δ (algSpec R) X Y).left = (pullbackSpecIso R X.unop Y.unop).inv := rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"line\": \"144\", \"text\": \"    (LaxMonoidal.μ (algSpec R) X Y).left = (pullbackSpecIso R X.unop Y.unop).hom := rfl\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"line\": \"882\", \"text\": \"    exact closure_mono (Set.range_comp_subset_range _ (Spec.map φ))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"156\", \"text\": \"  rw [← cancel_mono Y.toSpecΓ, Scheme.toSpecΓ_naturality, Scheme.toSpecΓ_naturality, e]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineScheme.lean\", \"line\": \"422\", \"text\": \"  rw [← cancel_mono hU.isoSpec.hom.appTop, ← Scheme.Hom.comp_appTop, isoSpec_hom_appTop]\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monomorphisms into disjoint unions of field spectra are open and closed immersions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion ≤ MorphismProperty.monomorphisms Scheme.{u}\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes, i.e., the property of being an open immersion is contained within the property of being a monomorphism for morphisms in th\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.mono\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": Mono f\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": Mono f\", \"doc\": \"Every open immersion of locally ringed spaces is a monomorphism in the category of locally ringed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": Mono f\", \"doc\": \"Every open immersion of presheafed spaces is a monomorphism in the category of presheafed spaces.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsImmersion f\", \"doc\": \"Any closed immersion between schemes is an immersion. Specifically, if $ f: X \\to Y $ is a closed immersion of schemes (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with a su\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R : CommRingCat.{u}} (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned scheme, spectrum, or category-theoretic statements do not give this assertion; no exact match or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monomorphism of schemes into a disjoint union of spectra of fields is the inclusion of a subset of components",
+   "results": "8 hits: instMonoCoprodScheme, sigmaSpec, ι_sigmaSpec, coprodSpec_coprodMk, sigmaMk_mk, instIsOpenImmersionSigmaSpec, instIsOpenImmersionInlScheme, inl_ne_inr; these concern coproduct geometry, not classification of arbitrary monomorphisms into it.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any subscheme in the categorical sense of a disjoint union of fields is the union of a subset of those field spectra",
+   "results": "8 hits including sigmaSpec, coprodSpec_apply, instIsOpenImmersionSigmaSpec, coprodSpec_coprodMk, instPrespectralSpaceCarrierCarrierCommRingCat, instIsAffineSigmaObjScheme, instIsIsoSchemeSigmaSpecOfFinite, sigmaOpenCover_I₀.",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-coproduct affineness is insufficient and an infinite family is allowed"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Monomorphisms into a disjoint union of spectra of fields are inclusions of components",
+   "results": "8 hits including ContinuousMap.sigmaMk, coprodSpec_coprodMk and CategoryTheory.Mono.ι_of_coproductDisjoint/of_coproductDisjoint; all concern coprojections, not arbitrary subobjects.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mono.*injective|injective.*mono|epimorphism.*field|field.*epimorphism",
+   "results": "Directory AlgebraicGeometry. 23 hits including UniversallyInjective.lean:79 instUniversallyInjectiveOfMonoScheme, and other injectivity/monicity facts. Read UniversallyInjective.lean:42-81: this gives point injectivity, not the field-component ring isomorphism.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-locally-separated-space-decent",
+  "date": "2026-10-23",
+  "group": "Q31"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Adequate moduli spaces are universal for separated targets. Alper Theorem 7.2.1, locally separated case through Proposition 7.1.1: Proposition 7.1.1, proof, printed p.36: surjectivity of the diagonal pullback W from condition (a), expanded as its closure-equivalence input. Rational points of a locally separated space over an algebraically closed field have closed images; continuity gives the assertion. This is the geometric-points sublemma, not the universality conclusion. Supporting geometric input: rational sections after field base change are closed immersions. Supporting input: The absolute locally separated space has quasi-compact field-valued representatives. First paragraph of Tag 088J: the monomorphism into the etale field fibre is a union of its field components; also identifies the distinct chart points in the second paragraph.",
+   "via": [
+    "lem-sfb-locally-separated-space-decent",
+    "lem-sfb-locally-separated-rational-point-closed-immersion",
+    "lem-sfb-locally-separated-closure-equivalent-images",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-monomorphism-into-field-coproduct",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded Stacks 03DP into clopen inverse images, point injectivity via the existing 01S4 criterion, affineness of nonempty singleton pieces, affine ring-epimorphism cancellation, and explicit inverse coproduct maps. Created only the smaller ring-theoretic 04VV input; reused all existing geometry nodes. Checked all cited statements and the empty and infinite cases.",
+  "blueprint": "The inherited from.place and via chain record the locally-separated-decent prerequisite of the alteration/moduli direct-image branch. Read latest sk-thm-sf-ctf-stability/_section.md and its direct-images proof (3); no unit route changed. blueprint_refs.py ancestor reports null, preserved. Whole-blueprint searches for 03DP, field spectra, monomorphism field, 04VV and epimorphism field found no matching imported statement.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-local-systems-type-coproduct",
+    "why": "Generic geometric universal property for any clopen decomposition of any scheme; used only to assemble the field components. Its statement has no coefficient or local-system hypothesis, and no same-unit node supplies this universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-local-systems-type-coproduct"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-93ac7ec16",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-93ac7ec16 (reviewer sub-agent of L); spot-checked: Read Stacks schemes.tex Tag 03DP lemma-mono-towards-spec-field (l.4681-4705) and algebra.tex Tag 04VV lemma-epimorphism-over-field (l.25987-25998). The item statement is unchanged and matches the arbitrary-disjoint-union clause, over D, with empty and infinite I allowed. Step 1: the scheme-coproduct-family clopen images, factors-through-open-subscheme and open-immersion-monomorphism give monic f_i:T_i->Spec k_i (elementary, checked). Step 2: def-weil-radicial-morphism states 01S4 (1)<=>(2), so f_i is point-injective; Spec K has one point (def-weil-affine-spectrum), and affine-opens-basis makes a nonempty T_i affine. Step 3: the Spec bijection and uniqueness make phi_i:k_i->A_i a ring epimorphism in exactly the new node's sense (arbitrary commutative B). Spec 0 is empty, which excludes the zero case, so f_i is an iso. Step 4: J={i: T_i nonempty}. The pieces are pairwise disjoint and cover T, which is the hypothesis IsClopenDecomposition (checked at CoproductCopiesMorphismsClopen.lean:31) of det-pe-finite-local-systems-type-coproduct. The explicit inverses theta/psi are checked on coprojections, and m theta eta_j = iota_j. proof_deps equal the union of uses; no cycle. New node lem-sfb-field-ring-epimorphism-trivial-or-iso: statement only, self-contained, B1-B5 OK, source 04VV. It is true, tested on k, 0, k[t], k[eps], k x k and proper field extensions. It is not a restatement of the item, and rg -L found no duplicate in the DAG; only finite-module ring-epi results exist in Mathlib, so it stays unsplit. tool_uses det-pe-finite-local-systems-type-coproduct accepted as a generic clopen-decomposition gluing tool (Lean-landed, no coefficient hypotheses). No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MonomorphismIntoFieldCoproduct",
+  "declaration": "AlgebraicGeometry.monomorphism_into_field_coproduct",
+  "file": "lean/Sheaf/AlgebraicGeometry/MonomorphismIntoFieldCoproduct.lean",
+  "statement": "theorem monomorphism_into_field_coproduct (I : Type u) (k : I → Type u) [∀ i : I, Field (k i)] (T : Scheme.{u}) (m : T ⟶ ∐ (fun i : I ↦ Spec (CommRingCat.of (k i)))) [Mono m] : ∃ (J : Set I) (e : T ≅ ∐ (fun j : J ↦ Spec (CommRingCat.of (k j.val)))), e.hom ≫ Sigma.desc (fun j : J ↦ Sigma.ι (fun i : I ↦ Spec (CommRingCat.of (k i))) j.val) = m",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c542ca1d4",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 03DP final assertion: I:Type u, k:I→Type u fields, D=∐Spec k_i in Scheme.{u}, [Mono m], ∃ J:Set I, e:T≅∐_{j∈J}Spec k_j with e.hom≫Sigma.desc(Sigma.ι ∘ val)=m (over D, correct direction). No extra hypotheses; one-universe convention standard. Edge cases empty I/T/J and infinite I/J covered. lean.statement verbatim; stmt_deps all used and Mathlib-recorded; only change vs live is the new lean field. No duplicate in Mathlib/Sheaf/WeilConjectures (only proof-docstring citations). Docstrings carry source place and blueprint; proof sorry; no hollow defs; ProEtaleFiniteLocalSystemsType plain import only for the proof-dep coproduct lemma. Report has Worker report and Second reading by Q04. No file changed, so no compile run; worker reports clean scompile."
+ }
+}

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-independent-torus-character-values",
+ "kind": "statement",
+ "title": "Prescribing values of independent split-torus characters",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $T$ be an affine $F$-group scheme [def-sc-group-scheme] isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ for every commutative $F$-algebra $A$ [def-sc-gm-ga]. Let $m\\geq0$ and let $\\chi_1,\\ldots,\\chi_m:T\\to\\mathbf G_m$ be group-scheme homomorphisms. Assume these characters are $\\mathbf Z$-linearly independent: an identity $\\prod_{i=1}^m\\chi_i^{n_i}=1$ of characters, for integers $n_i$, implies $n_i=0$ for every $i$. For every $(c_1,\\ldots,c_m)\\in(F^\\times)^m$, there exists $t\\in T(F)$ such that $\\chi_i(t)=c_i$ for every $i$. The assertion includes $m=0$ and $r=0$, and places no restriction on the characteristic.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.7, printed p.486, choice of the torus element with specified simple-root values; Theorem 12.9(a), printed pp.233--234. The independent-character generalization over an algebraically closed field is the lattice extension argument underlying this choice; written by the agent, rather than asserted as the literal statement of 12.9."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose $\\iota:\\mathbf G_m^r\\xrightarrow{\\sim}T$. By [lem-sfb-split-torus-hom-matrices], each $\\chi_i\\circ\\iota$ has an exponent vector $u_i\\in L=\\mathbf Z^r$, with value $\\prod_k x_k^{u_{ik}}$. The correspondence is an isomorphism of abelian groups, so independence of the characters implies independence of the $u_i$. Put $N=\\sum_i\\mathbf Zu_i\\subseteq L$. Each element of $N$ has a unique expression $\\sum_i n_i u_i$: subtract two expressions and use independence. Thus $h_N(\\sum_i n_i u_i)=\\prod_i c_i^{n_i}$ is a well-defined homomorphism $N\\to F^\\times$, with $h_N(u_i)=c_i$.",
+   "uses": [
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, printed p.486, prescribed simple-root values; Theorem 12.9(a), printed pp.233--234. Agent-written lattice-extension argument for independent characters."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-pid-submodule-smith-bases] with $R=\\mathbf Z$, ambient module $L$ with its standard finite basis, and submodules $N\\subseteq O=L$. Obtain $n\\leq o$, a basis $b_1,\\ldots,b_o$ of $L$ and a basis $v_1,\\ldots,v_n$ of $N$, with $v_j=a_jb_j$ for integers $a_j$. Every $a_j$ is nonzero: otherwise $v_j=0$, contrary to linear independence of a basis. No identification of $n$ with $m$ or of $o$ with $r$ is needed.",
+   "uses": [
+    "lem-sfb-pid-submodule-smith-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent lattice-extension argument underlying Milne Proposition 23.7, p.486; Smith bases are the cited Mathlib leaf Submodule.exists_smith_normal_form_of_le, Mathlib/LinearAlgebra/FreeModule/PID.lean:492--497."
+   }
+  },
+  {
+   "text": "For $1\\leq j\\leq n$ set $d_j=h_N(v_j)\\in F^\\times$. If $a_j>0$, choose a root $w_j$ of $X^{a_j}-d_j$; if $a_j<0$, choose a root of $X^{-a_j}-d_j^{-1}$. Such a root exists by [def-weil-algebraic-closure], since the exponent is positive and the polynomial is nonconstant. Its nonzero constant term ensures $w_j\\ne0$. In either case $w_j^{a_j}=d_j$. For $n<j\\leq o$ set $w_j=1$. This uses existence of roots only, also when the characteristic divides $a_j$.",
+   "uses": [
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, printed p.486, prescribed simple-root values; Theorem 12.9(a), printed pp.233--234. Agent-written lattice-extension argument for independent characters."
+   }
+  },
+  {
+   "text": "Define $h:L\\to F^\\times$ on the unique basis expansion by $h(\\sum_{j=1}^o k_jb_j)=\\prod_{j=1}^o w_j^{k_j}$. Adding expansions and the integer-power law show that $h$ is a homomorphism. For $j\\leq n$, $h(v_j)=w_j^{a_j}=d_j=h_N(v_j)$. For any $v=\\sum_{j=1}^n l_jv_j\\in N$, therefore $h(v)=\\prod_j h(v_j)^{l_j}=\\prod_j h_N(v_j)^{l_j}=h_N(v)$. Thus $h$ extends $h_N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, printed p.486, prescribed simple-root values; Theorem 12.9(a), printed pp.233--234. Agent-written lattice-extension argument for independent characters."
+   }
+  },
+  {
+   "text": "Let $e_1,\\ldots,e_r$ be the standard basis of $L$, set $x_k=h(e_k)\\in F^\\times$ and $t=\\iota_F((x_k)_k)$. The monomial formula of [lem-sfb-split-torus-hom-matrices] gives $\\chi_i(t)=\\prod_k h(e_k)^{u_{ik}}=h(u_i)=h_N(u_i)=c_i$. If $m=0$, all conditions are empty and the construction still works (the identity point suffices). If $r=0$, every exponent vector is zero, so independence forces $m=0$ and the unique point suffices.",
+   "uses": [
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.7, printed p.486, prescribed simple-root values; Theorem 12.9(a), printed pp.233--234. Agent-written lattice-extension argument for independent characters."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-sfb-pid-submodule-smith-bases",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 23.7, printed p.486, prescribed simple-root values; Theorem 12.9(a), printed pp.233--234. Agent-written lattice-extension argument for independent characters. Smith reduction is supplied by an existing Mathlib leaf; no general extension theorem is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"surjective\"",
+   "results": "{\"t\": \"2026-10-23T22:24:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern polynomial maps, abstract additive character modules, or the definition of scheme surjectivity; none supplies prescribed values for algebraic torus characters. CharacterModule is A ->+ Q/Z (Mathlib/Algebra/Module/CharacterModule.lean:46), not the torus character lattice. AlgebraicGeometry.Surjective is a definition (Morphisms/UnderlyingMap.lean:59), not this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|Torus|tor[ui].*character|character.*tor[ui]",
+   "results": "{\"t\": \"2026-10-23T22:24:01Z\", \"tool\": \"grep\", \"query\": \"torus|Torus|tor[ui].*character|character.*tor[ui]\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern polynomial maps, abstract additive character modules, or the definition of scheme surjectivity; none supplies prescribed values for algebraic torus characters. CharacterModule is A ->+ Q/Z (Mathlib/Algebra/Module/CharacterModule.lean:46), not the torus character lattice. AlgebraicGeometry.Surjective is a definition (Morphisms/UnderlyingMap.lean:59), not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Independent characters of a split algebraic torus over an algebraically closed field attain any prescribed nonzero values",
+   "results": "{\"t\": \"2026-10-23T22:24:01Z\", \"tool\": \"leanfinder\", \"query\": \"Independent characters of a split algebraic torus over an algebraically closed field attain any prescribed nonzero values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ax_grothendieck_univ\", \"MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"CharacterModule.exists_character_apply_ne_zero_of_ne_zero\", \"NumberField.Embeddings.instNonemptyRingHom\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"exists_linearIndependent_algEquiv_apply\", \"ax_grothendieck_of_locally_finite\", \"NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed\"], \"digest\": \"09c5687d70194f6a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern polynomial maps, abstract additive character modules, or the definition of scheme surjectivity; none supplies prescribed values for algebraic torus characters. CharacterModule is A ->+ Q/Z (Mathlib/Algebra/Module/CharacterModule.lean:46), not the torus character lattice. AlgebraicGeometry.Surjective is a definition (Morphisms/UnderlyingMap.lean:59), not this theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a split algebraic torus defined by linearly independent characters is surjective on points over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T22:24:02Z\", \"tool\": \"leansearch\", \"query\": \"A morphism from a split algebraic torus defined by linearly independent characters is surjective on points over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Surjective\", \"AlgebraicGeometry.Surjective.mk\", \"AlgebraicGeometry.Surjective.surj\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\", \"AlgebraicGeometry.instIsDominantOfSurjective\", \"AlgebraicGeometry.surjective_eq_topologically\", \"AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.surjectiveOnStalks_iff\"], \"digest\": \"08cafcd2bfefada3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern polynomial maps, abstract additive character modules, or the definition of scheme surjectivity; none supplies prescribed values for algebraic torus characters. CharacterModule is A ->+ Q/Z (Mathlib/Algebra/Module/CharacterModule.lean:46), not the torus character lattice. AlgebraicGeometry.Surjective is a definition (Morphisms/UnderlyingMap.lean:59), not this theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prescribing values of independent torus characters is equivalent to extending a lattice homomorphism to the divisible group of nonzero elements of an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T22:24:39Z\", \"tool\": \"leanfinder\", \"query\": \"Prescribing values of independent torus characters is equivalent to extending a lattice homomorphism to the divisible group of nonzero elements of an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BoundedContinuousFunction.ext_of_char_eq\", \"CharacterModule.int\", \"CharacterModule.exists_character_apply_ne_zero_of_ne_zero\", \"CharacterModule\", \"CharacterModule.instLinearMapClassIntAddCircleRatOfNat\", \"CharacterModule.ofSpanSingleton\", \"AddChar.circleEquivComplex\", \"ZMod.toCircle\"], \"digest\": \"50d09361c3877a2d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern polynomial maps, abstract additive character modules, or the definition of scheme surjectivity; none supplies prescribed values for algebraic torus characters. CharacterModule is A ->+ Q/Z (Mathlib/Algebra/Module/CharacterModule.lean:46), not the torus character lattice. AlgebraicGeometry.Surjective is a definition (Morphisms/UnderlyingMap.lean:59), not this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "Divisible.*[Ii]njective|[Ii]njective.*Divisible|def.*extend|exists.*extend",
+   "results": "{\"t\": \"2026-10-23T23:16:48Z\", \"tool\": \"grep\", \"query\": \"Divisible.*[Ii]njective|[Ii]njective.*Divisible|def.*extend|exists.*extend\", \"sub\": \"GroupTheory/Divisible\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Divisible\", \"extend\"",
+   "results": "{\"t\": \"2026-10-23T23:16:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"Divisible\\\", \\\"extend\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism from a subgroup of an abelian group to a divisible abelian group extends to the whole group",
+   "results": "{\"t\": \"2026-10-23T23:16:49Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism from a subgroup of an abelian group to a divisible abelian group extends to the whole group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Baer.of_divisible\", \"Module.Baer.extension_property_addMonoidHom\", \"AddCommGrpCat.injective_of_divisible\", \"AddCommGrpCat.enoughInjectives\", \"addMonoidHomOfForallMemZMultiples\", \"AddIsTorsion.extension_closed\", \"Abelianization.lift\", \"ModN.liftEquiv\"], \"digest\": \"5b4211c2259275ea\"}",
+   "date": "2026-10-24",
+   "verdict": "related general algebra: Module.Baer.of_divisible and Module.Baer.extension_property_addMonoidHom provide abstract divisible-group extension, but no torus-character identification; not an exact match for the item. The final proof instead uses the existing Smith-basis node."
+  },
+  {
+   "tool": "grep",
+   "query": "Divisible.*[Ii]njective|[Ii]njective.*[Dd]ivisible|extend.*[Dd]ivisible|[Dd]ivisible.*extend",
+   "results": "{\"t\": \"2026-10-23T23:17:28Z\", \"tool\": \"grep\", \"query\": \"Divisible.*[Ii]njective|[Ii]njective.*[Dd]ivisible|extend.*[Dd]ivisible|[Dd]ivisible.*extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/DivisibleHull.lean\", \"Mathlib/RingTheory/HahnSeries/HahnEmbedding.lean\", \"Mathlib/Algebra/Category/Grp/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/Grp/Injective.lean\", \"Mathlib/Algebra/Category/Grp/Injective.lean\", \"Mathlib/Algebra/Category/Grp/Injective.lean\", \"Mathlib/Algebra/Category/Grp/Injective.lean\"], \"digest\": \"16118e6854142078\"}",
+   "date": "2026-10-24",
+   "verdict": "related general algebra: Module.Baer.of_divisible and Module.Baer.extension_property_addMonoidHom provide abstract divisible-group extension, but no torus-character identification; not an exact match for the item. The final proof instead uses the existing Smith-basis node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A divisible abelian group is injective so a homomorphism from a subgroup extends to the whole abelian group",
+   "results": "{\"t\": \"2026-10-23T23:17:29Z\", \"tool\": \"leansearch\", \"query\": \"A divisible abelian group is injective so a homomorphism from a subgroup extends to the whole abelian group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddCommGrpCat.injective_of_divisible\", \"AddCommGrpCat.enoughInjectives\", \"Module.Injective.recOn\", \"CommGrpCat.enoughInjectives\", \"Module.Baer.of_divisible\", \"DivisibleHull.coe_inj\", \"DivisibleHull.coe_injective\", \"DivisibleHull.mk_left_injective\"], \"digest\": \"1f24eda62e0252e5\"}",
+   "date": "2026-10-24",
+   "verdict": "related general algebra: Module.Baer.of_divisible and Module.Baer.extension_property_addMonoidHom provide abstract divisible-group extension, but no torus-character identification; not an exact match for the item. The final proof instead uses the existing Smith-basis node."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|Torus|character.*lattice|lattice.*character",
+   "results": "{\"t\": \"2026-10-23T23:18:44Z\", \"tool\": \"grep\", \"query\": \"torus|Torus|character.*lattice|lattice.*character\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integer matrix with linearly independent rows gives a surjective monomial map on powers of the units of an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T23:18:45Z\", \"tool\": \"leansearch\", \"query\": \"An integer matrix with linearly independent rows gives a surjective monomial map on powers of the units of an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.linearIndependent_rows_iff_isUnit\", \"FirstOrder.genericPolyMapSurjOnOfInjOn\", \"ax_grothendieck_univ\", \"Matrix.vecMul_surjective_of_invertible\", \"Matrix.mulVec_surjective_of_invertible\", \"FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime_or_zero\", \"FirstOrder.ACF_models_genericPolyMapSurjOnOfInjOn_of_prime\", \"FirstOrder.realize_genericPolyMapSurjOnOfInjOn\"], \"digest\": \"a82423a5a8e15458\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned square-matrix linear maps and Ax-Grothendieck polynomial injectivity results, not a rectangular monomial map on multiplicative groups; the item need not give an injective map."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torus\", \"character\"",
+   "results": "{\"t\": \"2026-10-23T23:18:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"torus\\\", \\\"character\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearly independent characters of a split algebraic torus over an algebraically closed field attain arbitrary prescribed nonzero values",
+   "results": "{\"t\": \"2026-10-23T23:18:46Z\", \"tool\": \"leanfinder\", \"query\": \"Linearly independent characters of a split algebraic torus over an algebraically closed field attain arbitrary prescribed nonzero values\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_linearIndependent_algEquiv_apply\", \"Module.exists_dual_forall_apply_ne_zero\", \"Module.exists_dual_forall_apply_eq_one\", \"Profinite.NobelingProof.GoodProducts.linearIndependentSingleton\", \"Profinite.NobelingProof.GoodProducts.linearIndependent\", \"Module.Dual.exists_forall_ne_zero_of_forall_exists\", \"RootPairing.linearIndepOn_root_baseOf'\", \"NumberField.mixedEmbedding.fundamentalCone.linearIndependent_completeFamily\"], \"digest\": \"52df57d6b4981d40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no torus-character result; semantic hits concern field-linear dual functionals, normal bases and root systems, not prescribed values of scheme characters."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smith_normal_form_of_le",
+   "results": "{\"t\": \"2026-10-23T23:19:21Z\", \"tool\": \"grep\", \"query\": \"exists_smith_normal_form_of_le\", \"sub\": \"LinearAlgebra/FreeModule/PID.lean\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"492\", \"514\", \"521\"], \"digest\": \"17461031effe9f66\"}",
+   "date": "2026-10-24",
+   "verdict": "related match: Submodule.exists_smith_normal_form_of_le, Mathlib/LinearAlgebra/FreeModule/PID.lean:492--497; already represented by lem-sfb-pid-submodule-smith-bases and used through that existing node. Not the item."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_smith_normal_form_of_le",
+   "results": "{\"t\": \"2026-10-23T23:20:05Z\", \"tool\": \"grep\", \"query\": \"exists_smith_normal_form_of_le\", \"sub\": \"LinearAlgebra/FreeModule\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\", \"Mathlib/LinearAlgebra/FreeModule/PID.lean\"], \"digest\": \"e0c9bfdf927da103\"}",
+   "date": "2026-10-24",
+   "verdict": "related match: Submodule.exists_smith_normal_form_of_le, Mathlib/LinearAlgebra/FreeModule/PID.lean:492--497; already represented by lem-sfb-pid-submodule-smith-bases and used through that existing node. Not the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isogeny-torus-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Multiplication of simple-module dimensions along the p-adic weight expansion. Supporting input to the numerical multiplication: Steinberg tensor-product simplicity for a restricted simple module and a Frobenius pullback. Supporting input: Sections 2.25--2.29, printed pp.47--49 (relative Frobenius), and full isogeny theorem 23.25, printed pp.492--493 (existence and uniqueness up to an inner torus automorphism); isomorphism theorem 23.26. Scalar p isogeny specialization: compare f with relative Frobenius after the root-datum isomorphism between G^(p) and G, and absorb the inner torus automorphism into h. Supporting input here: Proposition 23.7, printed p.486, and full isogeny theorem 23.25, pp.492--493 (same character map determines the root-data isogeny and uniqueness up to inner torus automorphism). Algebraically closed base allows a representative in T_0(F) of a point of T_0/Z(G_0); the proof of 23.7 constructs its simple-root values. Supporting input for torus-conjugacy uniqueness: Proposition 23.7, printed p.486, choice of the torus element with specified simple-root values; Theorem 12.9(a), printed pp.233--234. The independent-character generalization over an algebraically closed field is the lattice extension argument underlying this choice; written by the agent, rather than asserted as the literal statement of 12.9.",
+   "via": [
+    "lem-sfb-isogeny-torus-conjugacy",
+    "lem-sfb-scalar-p-isogeny-relative-frobenius",
+    "lem-sfb-restricted-frobenius-tensor-simplicity",
+    "lem-sfb-restricted-highest-weight-dimension-product",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-independent-torus-character-values",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reduced characters to exponent vectors using the existing monomial correspondence; prescribed the homomorphism on their independent span; used the existing PID Smith-basis Mathlib leaf; chose roots of nonzero field elements and explicitly extended by a basis. Checked every cited statement, arbitrary characteristic, empty families and the trivial torus. No new nodes.",
+  "blueprint": "Supports the prescribed-simple-root-value choice in Milne Proposition 23.7 within the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/moduli prerequisite chain. Current latest blueprint unit and direct-image proof read; no unit route is replaced. Existing from.node=null is retained, as ancestor reports null because the original created.item is a Lean module name.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-1afdc0301",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-1afdc0301 (reviewer sub-agent of L); spot-checked: I read the item, the report, all three cited statements and Milne iAG2017 Prop. 23.7 (p.486, where Δ' is a Z-basis) and Thm 12.9(a). The statement and stmt_deps are byte-identical to live, where the item is still unsplit. There are no new nodes and no repair note. proof_deps equal the union of the step uses. Step 1: the hom-matrices node with s=1 gives a group isomorphism Hom(G_m^r,G_m)≅Z^r. Precomposing with ι turns character independence into independence of the exponent vectors, so h_N is a well-defined homomorphism on their span. Step 2: the Smith-bases leaf (R=Z, N⊆O=L, ranks may differ) gives bases v_j=a_j b_j, and a_j≠0 holds. Step 3: roots of X^{|a_j|}-d_j^{±1} exist by the algebraic-closure statement; they are nonzero and satisfy w_j^{a_j}=d_j, also when char F divides a_j. Step 4: h on the b-basis extends h_N. Step 5: the monomial formula on F-points gives χ_i(t)=h(u_i)=c_i. Edge cases: m=0 is vacuous; for r=0 independence forces m=0. Hand-tested cases: x² with value -1, x^{-2}, x^p in characteristic p, and (2,0),(1,3) in Z². The hypotheses are needed: x² cannot reach -1 over R, and two equal characters cannot take different values. No duplicate in the DAG (finite-character-separation, torus-homomorphism-image and endomorphism-kernel-dichotomy all differ). No cycle: the closure has 73 nodes without the item. The deps are in the item's unit or a Mathlib leaf, and no tool_uses are needed. No SGA. The report mentions a citations.json that is not in the commit; no rule requires it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndependentTorusCharacterValues",
+  "declaration": "AlgebraicGeometry.exists_torus_point_of_independent_characters",
+  "file": "lean/Sheaf/AlgebraicGeometry/IndependentTorusCharacterValues.lean",
+  "statement": "theorem exists_torus_point_of_independent_characters (F : Type u) [Field F] [IsAlgClosed F] (T : Grp (Over (Spec (.of F)))) [IsAffine T.X.left] (r m : ℕ) (hT : Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (χ : Fin m → (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (hind : ∀ n : Fin m → ℤ, (List.ofFn (fun i : Fin m ↦ (χ i).hom.hom ^ n i)).prod = 1 → ∀ i, n i = 0) (c : Fin m → Fˣ) : ∃ t : Over.mk (𝟙 (Spec (.of F))) ⟶ T.X, ∀ i : Fin m, (t ≫ (χ i).hom.hom).left = Spec.map (CommRingCat.ofHom (LaurentPolynomial.eval₂ (RingHom.id F) (c i)))",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de3cd3759",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Only the new module and the item node changed (lean record; stmt_deps gains landed def-sfb-tori-multiplicative-type, allowed by brief-stage2 l.177). lean.statement verbatim. Clauses match the node: IsAlgClosed field with no char hypothesis; T : Grp(Over Spec F), affine, iso in Grp to the landed splitTorus F r; chi_i are Grp morphisms to Grp.mk (multiplicative F) with the Laurent Hopf GrpObj; hind is the integer relation in the Hom group as scheme morphisms (ordered product harmless since G_m is commutative); the conclusion gives an F-point t with (t ≫ chi_i).left = Spec.map(eval₂ id (c i)), i.e. chi_i(t)=c_i, Spec.map direction correct. Edge cases m=0, r=0 and char p covered; single universe u. Docstrings carry the source place, blueprint id and 5 proof steps; proof is sorry only, no new defs, new name. No compile (no file changed); worker reports a clean scompile. Both report sections present."
+ }
+}

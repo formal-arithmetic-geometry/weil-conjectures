@@ -1,0 +1,124 @@
+{
+ "id": "def-sfb-equivariant-affine-algebra",
+ "import_flags": [],
+ "kind": "definition",
+ "title": "Equivariant commutative algebras over an affine Hopf action",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field], $H$ a commutative Hopf $k$-algebra, $E$ a commutative $k$-algebra, and $\\rho_E:E\\to E\\otimes_kH$ an algebra coaction in the sense of [def-sfb-hopf-action-module-data]. Define the category of equivariant commutative $E$-algebras: an object is a commutative $k$-algebra $B$, a $k$-algebra homomorphism $j:E\\to B$, and an algebra coaction $\\rho_B:B\\to B\\otimes_kH$ such that $\\rho_Bj=(j\\otimes1)\\rho_E$. Its morphisms are $k$-algebra homomorphisms commuting with $j$ and with the coactions. Identity and composition are those of algebra homomorphisms. The invariant subring of $B$ is the equalizer $\\{b\\in B:\\rho_B(b)=b\\otimes1\\}$. Neither $E$ nor $B$ is required to be finitely generated.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hopf-action-module-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03LF (definition-equivariant-module), applied to commutative algebra objects; stacks-sheaves.tex Tag 06WT, maps from the unit for invariant sections."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Equivariant commutative algebras with a Hopf algebra coaction form a category",
+   "results": "8 hits: HopfAlgCat, HopfAlgCat.category, CategoryTheory.Hopf.instCategory, CommBialgCat, HopfAlgCat.concreteCategory, CoalgCat.category, CommBialgCat.noConfusion, HopfAlgCat.instMonoidalCategoryStruct.",
+   "date": "2026-10-24",
+   "verdict": "These are categories of Hopf/bialgebras themselves, not algebras equipped with coaction of a fixed Hopf algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent algebras on an affine quotient stack are equivariant algebras and global sections are invariants",
+   "results": "8 hits: AlgebraicGeometry.AffineScheme.Γ, Scheme.AffineCover.obj, Scheme.Modules, SheafOfModules.QuasicoherentData.X, exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, SheafOfModules.QuasicoherentData.I, IsAffineOpen.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpens, exists_appTop_map_eq_zero_of_isAffine_of_isLimit.",
+   "date": "2026-10-24",
+   "verdict": "No category of equivariant commutative algebras."
+  },
+  {
+   "tool": "loogle",
+   "query": "HopfAction.AlgebraCoaction, AlgebraCoaction, Comodule",
+   "results": "0 hits; unknown identifier 'HopfAction.AlgebraCoaction'.",
+   "date": "2026-10-24",
+   "verdict": "Search service indexes Mathlib; reuse the project AlgebraCoaction declaration read directly, but add the missing category."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraCoaction|equivariant.*[Aa]lgebra|[Aa]lgebra.*[Cc]oaction",
+   "results": "Mathlib msearch: one unrelated Algebra/Lie/Subalgebra.lean:247 equivariant-Lie-module hit. rg of lean/WeilConjectures found affineTorsorEquivariantAlgebra for finite torsor descent, a different object. rg of lean/Sheaf found HopfAction.AlgebraCoaction, ModuleCoaction, and unrelated fixed-ideal/representation helpers, but no category of arbitrary equivariant algebras. rg of DAG found the existing Hopf-action-module-data node and consumers; blueprint_refs.py search equivariant algebra returned 0 blueprint nodes. dag/lean_names_upstream.json has scheme quasi-coherent algebras, not equivariant algebra objects.",
+   "date": "2026-10-24",
+   "verdict": "Reuse the existing coaction. The category and equalizer invariant subring are missing as a combined interface; no duplicate of a DAG definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-action-quasicoherent-descent",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Power lifting of invariants gives an adequate affine quotient. Supporting descent calculation: arbitrary equivariant algebras on every affine chart of the invariant quotient. The affine equivariant-algebra category and its equalizer of invariant sections.",
+   "via": [
+    "lem-sfb-affine-action-quasicoherent-descent",
+    "lem-sfb-power-lifting-adequate-affine-quotient",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EquivariantAffineAlgebra",
+  "declaration": "HopfAction.EquivariantAffineAlgebra",
+  "declarations": [
+   "HopfAction.EquivariantAffineAlgebra",
+   "HopfAction.EquivariantAffineAlgebra.Hom",
+   "HopfAction.EquivariantAffineAlgebra.category",
+   "HopfAction.EquivariantAffineAlgebra.invariants"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EquivariantAffineAlgebra.lean",
+  "statement": "structure EquivariantAffineAlgebra",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a58797fb6",
+  "group": "Q08",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a58797fb6",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Read the item, all stmt_deps declarations (AffineActionQuotientStack torsorGroupoid/quotientAtlas, AlgebraCoaction, coordinateHopfAlgebra, StackQcqsMorphism, StackQuasiCoherentAlgebra, StablePointedModuliGroupoids) and both modules in full. Every node clause is rendered: arbitrary D with the AlgebraCoaction coaction; left action Spec((S⊗1)τρ) with H first via pullbackSpecIso, so g·x=x·g⁻¹; quotient = SchemeAction.torsorGroupoid used directly (the wrapper requires FiniteType); algebraicity plus qcqs ψ pinned by its atlas restriction; scalar-extension coaction fixed by an ∃! generator formula; base change uses the actual moduliTwoFiberProduct with F keeping the torsor, action, projection and arrows; descent equivalence pinned by e M, the unit, IsAtlasCoaction (hand check for B=D gives ρ, not ρ composed with the antipode), all morphisms, the surjection iff and the invariants ring iso with naturality; restriction is B⊗_D E pinned on generators, with no invariants base-change iso claimed; structure sections are D^G and the base map is algebraMap (c↦1⊗c at D_C). B in u+1 includes every smaller algebra through ULift, so no silent universe restriction. The new def-sfb-equivariant-affine-algebra is not a duplicate (affine-groupoid-algebra is the β-descent form), has real data and correct fields. No hollow defs; all theorems are sorry; docstrings and blueprint tags are present; lean.statement is verbatim and the declarations list is exact; no line over 100 characters. Advisory: stable-pointed-moduli-groupoids and scheme-action-torsor-groupoids are used but reached only transitively through def-sfb-affine-action-quotient-stack; unused imports of proof modules and of FullSubcategory are harmless."
+ }
+}

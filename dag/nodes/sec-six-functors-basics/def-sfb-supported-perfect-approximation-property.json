@@ -1,0 +1,128 @@
+{
+ "id": "def-sfb-supported-perfect-approximation-property",
+ "kind": "definition",
+ "title": "Uniform approximation by perfect complexes with closed support",
+ "statement": "Let $Y$ be a scheme [def-pc-scheme]. Say that $\\mathsf A(Y)$ holds if the following condition holds. For every closed subset $T\\subseteq Y$ whose open complement is retrocompact in $Y$ (that is, $(Y\\setminus T)\\cap W$ is quasi-compact for every affine open $W\\subseteq Y$), there exists $r\\in\\mathbf Z$ such that, for every $m\\in\\mathbf Z$ and $F\\in D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ [def-pc-derived-category] which is $(m-r)$-pseudo-coherent [def-sfb-m-pseudo-coherent-complex] and satisfies $H^i(F)_y=0$ for every $i\\ge m-r$ and every $y\\notin T$, there exist a perfect object $P\\in D(\\mathcal O_Y)$ [def-pc-perfect-complex] and a morphism $v:P\\to F$ such that $H^i(P)_y=0$ for every $i\\in\\mathbf Z$ and every $y\\notin T$, $H^i(v)$ is an isomorphism for every $i>m$, and $H^m(v)$ is surjective. Thus support is a condition on all cohomology stalks, and the integer $r$ may depend on $Y,T$ but not on $F,m$.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tags 08EM (definition-approximation-holds) and 08EN (definition-approximation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-sfb-m-pseudo-coherent-complex",
+  "def-pc-perfect-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pseudo.?coher|supported.*perfect.*approx|approx.*perfect",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-representative theorems do not define the uniform supported perfect approximation property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-representative theorems do not define the uniform supported perfect approximation property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform approximation by perfect complexes with closed support and a cohomological error bound",
+   "results": "OK: 8 hits; Continuous.exists_contDiff_approx, Continuous.exists_contDiff_dist_le_of_forall_mem_ball_dist_le, HasCompactSupport.exist_eLpNorm_sub_le_of_continuous, HasFPowerSeriesWithinOnBall.uniform_geometric_approx, ContinuousMap.exists_mem_subalgebra_near_continuous_of_isCompact_of_separatesPoints, continuous_of_uniform_approx_of_continuous, Continuous.exists_contMDiff_approx_and_eqOn, UniformContinuous.exists_contDiff_dist_le",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-representative theorems do not define the uniform supported perfect approximation property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme has the uniform supported perfect approximation property if sufficiently pseudo coherent complexes supported in high degrees admit perfect approximations with that support",
+   "results": "OK: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, DerivedCategory.IsGE, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-representative theorems do not define the uniform supported perfect approximation property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex approximation with support in a closed subset and isomorphisms on cohomology above an integer",
+   "results": "OK: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded-representative theorems do not define the uniform supported perfect approximation property."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-perfect-approximation",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 2, Lemma 2.5 (printed pp.178--179), using Section 1, Corollary 1.5 and Lemma 1.6: multiplication and the pushforward exact sequences, retaining the twist by minus the old-marking divisor. Lemma 2.5, first paragraph and final evaluation: Corollary 1.5 supplies vanishing, base-flat direct images, arbitrary base change and generation for the five divisor modules. Corollary 1.5, printed p.167: the general cohomology-and-base-change tool whose conditions (1) and (2) the exceptional-fibre calculation must verify. General tool for Corollary 1.5: finite presentation of the acyclic image: detect pseudo-coherence by perfect tensor tests on V, using proper-support perfect direct image for U -> S. Supporting tool: 0CSH (lemma-perfect-enough). In Stacks 0CSH proof, choose a perfect approximation P to E at degree m-N-1-b; this is the 08ES approximation theorem with support T=X. The precise uniform-with-support property used to induct in Tag 08ES.",
+   "via": [
+    "lem-sfb-pseudocoherent-perfect-approximation",
+    "lem-sfb-perfect-to-pseudocoherent-tensor-tests",
+    "lem-sfb-perfect-tests-detect-pseudocoherence",
+    "lem-sfb-relative-acyclic-direct-image",
+    "lem-sfb-rational-contraction-line-cohomology",
+    "lem-sfb-elementary-contraction-evaluation",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "def-sfb-supported-perfect-approximation-property",
+  "worker": "stage1",
+  "group": "Q05",
+  "summary": "Checked the definition clause by clause against Stacks perfect.tex Tags 08EM (definition-approximation-holds) and 08EN (definition-approximation). The existing four statement dependencies supply schemes and affine opens, the derived and quasi-coherent derived categories, fixed-degree pseudo-coherence, and perfect complexes. Retrocompactness and cohomological support are already explicit in the statement. Retained the statement and dependencies without adding any theorem assertion or helper node; definitions have no proof steps. Searched the project for the blueprint tag and the approximation notion, and repeated all five inherited Mathlib searches through msearch.py, including a second semantic phrasing: no exact match.",
+  "blueprint": "Supporting definition for det-thm-sf-ctf-stability-direct-images proof (3), via the inherited perfect-approximation and perfect-tensor-test chain recorded in blueprint.from.place. Read the current latest sk-thm-sf-ctf-stability unit and its direct-images proof; no current blueprint node defines this uniform supported approximation property. blueprint_refs.py ancestor returns None for the inherited chain, so blueprint.from.node=null and its via list are preserved. Whole-blueprint searches for approximation, perfect, supported perfect, 08EM and 08EN found no duplicate definition; same_as remains []. No chapter or unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-ff8fe26e5",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-ff8fe26e5 (reviewer sub-agent of L); spot-checked: The definition is unchanged from live: the only edits are status unsplit→split and the new split_report. There are no new nodes and no repair note, and live is still unsplit, so the delivery is not superseded. I checked the statement clause by clause against Stacks perfect.tex 08EM (definition-approximation-holds), 08EN (definition-approximation) and definition-supported-on (787-793). Y is an arbitrary scheme and T is closed with retrocompact complement. r is chosen per (Y,T) before m and F. F is in D_QCoh, (m-r)-pseudo-coherent and supported on T in degrees >= m-r. P is perfect and supported on T in all degrees. H^i(v) is an isomorphism for i>m and H^m(v) is surjective. Testing retrocompactness on affine W is equivalent to testing it on all quasi-compact W (finite affine cover). The four stmt_deps (def-pc-scheme, def-pc-derived-category, def-sfb-m-pseudo-coherent-complex matching 08FT, def-pc-perfect-complex matching 08CM) were read, and they define every notion used. Edge cases checked: Y empty, F=0, T empty (P=0, r=0 works, any r>=0), T=Y, Spec k. The citers affine-supported-perfect-approximation and open-step use A(Y) with the same quantifiers, and there is no cycle. An rg -L search for 08EM/08EN/approximation finds no duplicate definition. The Mathlib searches cover all three kinds. No SGA, no tool_uses, no fixes. Minor: the report mentions a citations.json that the commit does not contain; this has no effect on the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedPerfectApproximation",
+  "declaration": "AlgebraicGeometry.Scheme.HasSupportedPerfectApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedPerfectApproximation.lean",
+  "statement": "def HasSupportedPerfectApproximation (Y : Scheme.{u}) [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace))] [∀ U : Y.Opens, HasDerivedCategory.{w} (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))] : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-858d80b7e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Checked HasSupportedPerfectApproximation against Stacks perfect.tex 08EM/08EN/definition-supported-on clause by clause. Arbitrary scheme Y; T closed; affine-open retrocompactness test (equivalent to IsRetrocompact); r chosen before m and F; F in D_QCoh via schemeDerivedQCohProperty; IsMPseudoCoherent Y (m-r) F; stalk vanishing for i>=m-r off T; P with IsPerfect, supported off T in all degrees; IsIso H^i(v) for i>m and Epi H^m(v). Edge cases (empty Y, T=Y, T=empty, F=0, negative r/m, non-qs Y) covered. Statement verbatim; node diff vs live = lean only; universes u,w bound; instance binders exactly those of IsMPseudoCoherent/IsPerfect; no sorry; docstrings with source and blueprint; imports all used; no supersession (no live module, citers have no Lean). The AlgebraicSpace analogue is a separate node. Advisory: Mathlib IsRetrocompact could have been used. No recompile, as instructed."
+ }
+}

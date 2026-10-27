@@ -264,5 +264,40 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q119-823bc13aa (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight proof steps, cited nodes, unit/chapter route, and Stacks Tag 00UF. The algebra, base-change morphism, coefficient category, uniqueness, hypotheses, edge cases, searches, and route constraints check out; no repairs or dropped nodes are needed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalizedFibrePrimeFactor",
+  "declaration": "AdjoinRoot.exists_unique_localized_fibre_prime_factor",
+  "declarations": [
+   "AdjoinRoot.localizedMap",
+   "AdjoinRoot.localizedFactorIdeal",
+   "AdjoinRoot.exists_unique_localized_fibre_prime_factor"
+  ],
+  "file": "lean/Sheaf/RingTheory/LocalizedFibrePrimeFactor.lean",
+  "statement": "theorem exists_unique_localized_fibre_prime_factor {R : Type u} [CommRing R] (f g : Polynomial R) (hf : f.Monic) (q : Ideal (Localization.Away (AdjoinRoot.mk f g))) [q.IsPrime] (p : Ideal R) [p.IsPrime] (hp : p = Ideal.comap ((algebraMap (AdjoinRoot f) (Localization.Away (AdjoinRoot.mk f g))).comp (AdjoinRoot.of f)) q) : ∃ h : Polynomial p.ResidueField, h.Monic ∧ Irreducible h ∧ h ∣ f.map (algebraMap R p.ResidueField) ∧ ¬ h ∣ g.map (algebraMap R p.ResidueField) ∧ q = Ideal.comap (localizedMap (algebraMap R p.ResidueField) f g) (localizedFactorIdeal (algebraMap R p.ResidueField) f g h) ∧ (∀ (P : Polynomial R) (m : ℕ), Localization.mk (AdjoinRoot.mk f P) (⟨AdjoinRoot.mk f g ^ m, m, rfl⟩ : Submonoid.powers (AdjoinRoot.mk f g)) ∈ q ↔ h ∣ P.map (algebraMap R p.ResidueField)) ∧ (∀ h' : Polynomial p.ResidueField, h'.Monic → Irreducible h' → h' ∣ f.map (algebraMap R p.ResidueField) → ¬ h' ∣ g.map (algebraMap R p.ResidueField) → q = Ideal.comap (localizedMap (algebraMap R p.ResidueField) f g) (localizedFactorIdeal (algebraMap R p.ResidueField) f g h') → h' = h)",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical quotient/localization map and the twice-extended principal ideal are real-data helpers in the owning module. The fibre localization is written at the image of the class of g under AdjoinRoot.map, namely the class of g.map (algebraMap R p.ResidueField). The final universal clause gives uniqueness among candidates satisfying the ideal-contraction conditions, without assuming their explicit fraction test."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2fdbe6b88",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps (Polynomial, Localization.Away, Localization.AtPrime/Ideal.ResidueField), Stacks 00UF residue-field paragraph, module and report. Every clause matches: R CommRing only; f monic; A=AdjoinRoot f; B=Away(mk f g); q prime; p=comap contraction (IsPrime binder automatic); k=p.ResidueField; F localized at AdjoinRoot.map image of [g] (= class of g_k, documented); j=Localization.awayMap of canonical AdjoinRoot.map; ideal = Ideal.map of Ideal.map of span{h}. Conclusion: monic, Irreducible (excludes 0 over the nonzero field), h|f_k, h∤g_k, contraction identity, explicit fraction test for all P, m, and uniqueness over all candidates meeting the defining conditions. Statement true via B⊗κ(p)≅F. Edge cases (R=0, f=1, g nilpotent, m=0, repeated factors, char p, non-maximal p) and universes fine. Helpers are canonical compositions, not hollow; no name clash (only Algebra.ParameterRoot.localizedMap elsewhere); docstrings carry source, blueprint and 8-step plan; sorry only; lean.statement verbatim once; node differs from live only in lean. No compile (no change)."
+ }
 }

@@ -1,0 +1,256 @@
+{
+ "id": "lem-sfb-space-coherent-support-union-sequence",
+ "kind": "statement",
+ "title": "Separating two closed supports of a coherent module on an algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Noetherian means locally Noetherian on etale scheme charts [pqf-def-locnoeth], quasi-compact, and quasi-separated; the last two conditions mean that every open cover has a finite subcover and the diagonal is quasi-compact on scheme tests. Modules are on the small etale ringed site, with quasi-coherence as in [def-trf-space-quasi-coherent-module]. On a locally Noetherian space, coherent means quasi-coherent with coherent pullbacks on all etale scheme charts [pqf-def-coherent]. Write $\\operatorname{Supp}(M)$ for the locus of nonzero geometric stalks, with the atlas topology [def-a1-space-point-topology]. A closed immersion is representable and a closed immersion after every scheme base change [def-weil-closed-immersion]; reduced means that etale scheme charts have local rings without nonzero nilpotents, and irreducible means nonempty and not the union of two proper closed subsets. Assume $X$ is Noetherian. Let $F$ be a coherent $\\mathcal O_X$-module, and let $T_1,T_2\\subseteq|X|$ be closed subsets such that $\\operatorname{Supp}(F)=T_1\\cup T_2$. There is a coherent submodule $A\\subseteq F$ for which $B=F/A$ is coherent and $$0\\longrightarrow A\\longrightarrow F\\longrightarrow B\\longrightarrow0$$ is exact, with $\\operatorname{Supp}(A)\\subseteq T_1$ and $\\operatorname{Supp}(B)\\subseteq T_2$. Quotients are cokernels in module sheaves.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UP, lemma-prepare-filter-support, with Zprime = T_1 and Z = T_2."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-trf-space-quasi-coherent-module",
+  "pqf-def-coherent",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-sfb-space-module-support",
+  "def-trf-space-module-scheme-restriction",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-reduced-closed-support] to $T_2$, obtaining a reduced closed subspace $i:Z\\hookrightarrow X$ with $|Z|=T_2$. By [lem-sfb-space-ideal-closed-subspace-correspondence], its defining ideal $I=\\ker(\\mathcal O_X\\to i_*\\mathcal O_Z)$ is quasi-coherent, and its restriction under an etale base change is the defining ideal of the base-changed closed subspace. Define $A_n=I^nF$, with $I^0F=F$, by the locally generated products in [lem-sfb-space-coherent-support-ideal-power], and set $B_n=F/A_n$. That same node states that both $A_n$ and $B_n$ are coherent for every $n\\geq0$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-coherent-support-ideal-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UP (lemma-prepare-filter-support), first paragraph; Tags 03IQ, 03MB and 07UK"
+   }
+  },
+  {
+   "text": "Let $j:U\\hookrightarrow X$ be the open subspace with $|U|=|X|\\setminus T_1$, using the open-subspace correspondence in [lem-a1-space-etale-open-image]. It is Noetherian: [lem-sfb-noetherian-space-topology] makes $|X|$ Noetherian, hence $U$ is quasi-compact. Explicitly, for any cover of $U$ by opens of $X$, choose a minimal complement in $X$ of a finite subunion. Adding any member cannot shrink this complement, so the finite subunion already covers $U$. The locally Noetherian condition is inherited because every etale scheme chart of $U$ is an etale scheme chart of $X$ [def-trf-algebraic-space]. Quasi-separatedness of a quasi-compact open subspace is supplied by [lem-sfb-space-integral-qcqs-permanence]. Thus all three Noetherian conditions hold on $U$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-noetherian-space-topology",
+    "def-trf-algebraic-space",
+    "lem-sfb-space-integral-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UP, sentence that the open complement is Noetherian; spaces-properties.tex Tags 03BZ and 04ZF"
+   }
+  },
+  {
+   "text": "Restriction along an etale map is restriction to the localized etale site [def-trf-algebraic-space]. Thus geometric stalks on $U$ are the same stalks as on $X$ at points of $U$, and coherence of $F|_U$ follows from its chartwise definition. Since $\\operatorname{Supp}(F)=T_1\\cup T_2$, its restriction has support contained in $T_2\\cap|U|$. By [lem-sfb-space-reduced-closed-support], this is exactly the point set of $Z_U=Z\\times_XU$. The ideal of $Z_U$ is $I|_U$ by [lem-sfb-space-ideal-closed-subspace-correspondence]. Apply the annihilation implication of [lem-sfb-space-coherent-support-ideal-power] on the Noetherian space $U$ to obtain $n\\geq0$ with $(I|_U)^n(F|_U)=0$. Locally generated products commute with this restriction: both sides are generated locally by the identical products of $n$ ideal sections and one module section. Consequently $A_n|_U=0$, so every geometric stalk of $A_n$ outside $T_1$ is zero. Hence $\\operatorname{Supp}(A_n)\\subseteq T_1$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "lem-sfb-space-coherent-support-ideal-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UP, application of Tag 07UK on the complement of Zprime"
+   }
+  },
+  {
+   "text": "On the open subspace $W=X\\setminus T_2$ (again [lem-a1-space-etale-open-image]), $Z\\times_XW$ is empty by [lem-sfb-space-reduced-closed-support]. The ideal correspondence [lem-sfb-space-ideal-closed-subspace-correspondence] identifies $I|_W$ with $\\ker(\\mathcal O_W\\to0)=\\mathcal O_W$. Therefore $A_n|_W=F|_W$: multiplication by the unit ideal generates the entire module, also for $n=0$. The quotient $B_n|_W$ is zero. Indeed cokernels are sheafified sectionwise quotients [def-weil-sheaf-of-modules-category], and restriction to this localized site computes the same local quotients. Thus all geometric stalks of $B_n$ outside $T_2$ vanish and $\\operatorname{Supp}(B_n)\\subseteq T_2$. This treats points outside $T_1\\cup T_2$ as well as points in $T_1\\setminus T_2$.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-ideal-closed-subspace-correspondence",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UP, geometric-stalk calculation for Gn; the same unit-ideal calculation on the entire complement of Z"
+   }
+  },
+  {
+   "text": "Set $A=A_n$ and $B=B_n$ for the exponent chosen in step 3. By definition $A$ is a submodule of $F$ and $B$ its quotient, so in the abelian module-sheaf category [def-weil-sheaf-of-modules-category] the sequence $0\\to A\\to F\\to B\\to0$ is exact: the inclusion is injective, the quotient map is locally surjective, and its kernel is precisely $A$. Step 1 gives coherence, while steps 3 and 4 give the two required support inclusions.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UP, displayed short exact sequence and final sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-ideal-closed-subspace-correspondence",
+  "lem-sfb-space-coherent-support-ideal-power",
+  "lem-a1-space-etale-open-image",
+  "lem-sfb-noetherian-space-topology",
+  "def-trf-algebraic-space",
+  "lem-sfb-space-integral-qcqs-permanence",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07UP, lemma-prepare-filter-support, proof, with Z = T_2 and Zprime = T_1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|prepare.filter.support|coherent.*support.*union",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split a coherent sheaf on an algebraic space along a union of two closed supports",
+   "results": "8 hits; recorded top results: tsupport_add, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, Finsupp.mem_splitSupport_iff_nonzero, AlgebraicGeometry.Scheme.IdealSheafData.support, Finsupp.supported_union, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.Scheme.IdealSheafData.support_sup, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_sup",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"support\"",
+   "results": "0 hits; recorded top results: ",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a Noetherian algebraic space a coherent module whose support is a union of two closed subsets is an extension of coherent modules supported on the two subsets",
+   "results": "8 hits; recorded top results: AlgebraicGeometry.Scheme.IdealSheafData.support_sup, AlgebraicGeometry.Scheme.IdealSheafData.support_iSup, AlgebraicGeometry.Scheme.IdealSheafData.support_sSup, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent module devissage separating two closed pieces of its support by a short exact sequence",
+   "results": "8 hits; recorded top results: Module.support_of_exact, Profinite.NobelingProof.succ_exact, CondensedMod.IsSolid, localCohomology.diagram, associatedPrimes.subset_union_of_exact, Module.exists_ltSeries_support_isMaximal_last_of_ltSeries_support, exact_of_isLocalized_maximal, localCohomology.ofSelfLERadical",
+   "date": "2026-10-23",
+   "verdict": "no match: these are scheme ideal-zero-locus statements, affine module support statements, or general sheaf constructions, not the stated algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|prepare.filter.support|coherent.*support.*union",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological separability, scheme ideal sheaves, Mayer-Vietoris sequences or ordinary ring-module support/local cohomology; none states coherent support separation on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaf on algebraic space separating union of two closed supports",
+   "results": "8 hits; TopologicalSpace.isSeparable_union, SeparatedNhds.isClosed_union_iff, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.support, TopologicalSpace.separableSpace_sum_iff, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_sup, AlgebraicGeometry.Scheme.Hom.iUnion_support_ker_openCover_map_comp, TopCat.Presheaf.IsSheaf",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological separability, scheme ideal sheaves, Mayer-Vietoris sequences or ordinary ring-module support/local cohomology; none states coherent support separation on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCoherent\", \"support\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological separability, scheme ideal sheaves, Mayer-Vietoris sequences or ordinary ring-module support/local cohomology; none states coherent support separation on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent module devissage by taking powers of an ideal sheaf to separate closed supports",
+   "results": "8 hits; localCohomology.ideal_powers_initial, localCohomology.idealPowersToSelfLERadical, localCohomology.idealPowersDiagram, localCohomology.ofSelfLERadical, localCohomology, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, localCohomology.ofDiagram, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological separability, scheme ideal sheaves, Mayer-Vietoris sequences or ordinary ring-module support/local cohomology; none states coherent support separation on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent sheaf on a Noetherian algebraic space with support in two closed subsets has a short exact sequence separating those supports",
+   "results": "8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, Module.support_of_exact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern topological separability, scheme ideal sheaves, Mayer-Vietoris sequences or ordinary ring-module support/local cohomology; none states coherent support separation on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-ideal-filtration",
+  "date": "2026-10-23",
+  "group": "Q51"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, the support and nilpotent-thickening reduction, packaged using the preceding Tag 07UR filtration. Supporting input for Tag 07UR: the reducible-support paragraph of lemma-coherent-filter, using lemma-prepare-filter-support (07UP).",
+   "via": [
+    "lem-sfb-space-coherent-ideal-filtration",
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-coherent-support-union-sequence",
+  "worker": "stage1",
+  "summary": "Q119: followed Tag 07UP with the specified exchange of the two closed supports. Reused existing reduced-closed-support, ideal correspondence, ideal-power coherence/annihilation and open-space topology nodes; no new nodes. Wrote the open-complement hypotheses and both vanishing calculations explicitly. Retained the statement, imported provenance, earlier Mathlib searches and added the searches actually run by Q119. No exact project Lean attachment exists for algebraic spaces.",
+  "blueprint": "Supporting prerequisite in the inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration/affine-descent chain: the reducible-support paragraph of Tag 07UR, using Tag 07UP. The current latest blueprint direct-images proof (3) and unit section were read. The inherited blueprint ancestor is null (blueprint_refs.py ancestor returns None); no ancestor is invented.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic open-subspace/topological-open correspondence, needed to form the two complements; not a replacement of any unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-0ba1760b8",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-0ba1760b8 (reviewer sub-agent of L); spot-checked: I read Stacks 07UP (spaces-cohomology.tex l.2218) and 07UK (l.2122) in full. The item uses Z'=T_1 and Z=T_2: the submodule A has support in T_1 and the quotient B has support in T_2. The statement is unchanged and is correct, with no hypothesis added or dropped; I tested F=0, T_1 or T_2 empty, equal supports, disjoint supports and nonreduced X. The citer lem-sfb-space-coherent-ideal-filtration uses it in exactly this form. This is a plain split with no new nodes and no re-split repair note. Step 1: reduced-closed-support gives Z with |Z|=T_2; the ideal correspondence gives the quasi-coherent ideal I; the ideal-power node, under its exact hypotheses, gives coherence of I^nF and F/I^nF for every n>=0. Step 2: U=X minus T_1 is Noetherian. Quasi-compactness comes from the minimal-closed-set argument on the Noetherian |X|, which I checked. Local Noetherianity is chartwise. Quasi-separatedness comes from the qcqs-permanence clause on quasi-compact opens; it holds under either diagonal convention, because Delta_U is a base change of Delta_X along a monomorphism. Step 3: the base-change clauses of reduced-closed-support and of the correspondence identify Z_U and its ideal as I restricted to U, and 07UK on the Noetherian U gives A_n restricted to U = 0. Step 4: on W = X minus T_2, Z x_X W is empty, so I restricted to W is the unit ideal and B_n restricted to W = 0. This is elementary from the cited statements. Step 5: exactness in the abelian category of module sheaves. No statement is taken from the proof of a cited node. Duplicates: only the scheme versions exist (lem-weil-pbc-coherent-support-union-exact-sequence, lem-pc-s3-coherent-reducible-support-exact-sequence); there is no space-level duplicate. I accept the tool use of lem-a1-space-etale-open-image as the generic correspondence between open subspaces and open subsets. Batch-5: all five flagged citations reach sec-trace-formula only through the general definition def-trf-algebraic-space. They are general space and coherent-module facts, outside both assumed statements, so the flags are generic. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoherentSupportUnionSequence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_coherent_subobject_of_support_union",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoherentSupportUnionSequence.lean",
+  "statement": "theorem exists_coherent_subobject_of_support_union {S : Scheme.{u}} (X : AlgebraicSpace S) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (F : X.Modules) (hFqc : F.IsQuasicoherent) (hFcoh : ∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj F)) (T₁ T₂ : Set (Point X.obj.obj)) (hT₁ : IsClosed T₁) (hT₂ : IsClosed T₂) (hSupp : moduleSupport F = T₁ ∪ T₂) : ∃ (A : Subobject F) (B : X.Modules) (q : F ⟶ B) (w : A.arrow ≫ q = 0), SheafOfModules.IsQuasicoherent (A : X.Modules) ∧ (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj (A : X.Modules))) ∧ B.IsQuasicoherent ∧ (∀ T : X.EtaleSite, RingedSpace.IsCoherent (X.etaleForget.obj T).toRingedSpace ((X.schemeRestriction T).obj B)) ∧ Nonempty (IsColimit (CokernelCofork.ofπ q w)) ∧ (ShortComplex.mk A.arrow q w).ShortExact ∧ moduleSupport (A : X.Modules) ⊆ T₁ ∧ moduleSupport B ⊆ T₂",
+  "branch": "sheaf-dag",
+  "by": "Q135",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35e107cbf",
+  "group": "Q135",
+  "result": "pass",
+  "note": "The statement matches the node and Stacks Tag 07UP clause by clause (A ⊆ F with Supp A ⊆ T1; B = coker, specified by IsColimit; ShortExact; coherence = IsQuasicoherent plus chartwise RingedSpace.IsCoherent; Noetherian = chartwise locally Noetherian + CompactSpace + IsAbsolutelyQuasiSeparated, as in the sibling ideal-power and filtration nodes). The node diff has only the lean record and three added stmt_deps, all landed on the base and all used. The statement field is verbatim the file signature. The single theorem is sorry, with source and blueprint docstrings and the 5-step plan. There is no definition or duplicate (only the scheme-level analogue exists). Edge cases F=0, empty T_i, overlapping T's and n=0 are covered. There is no universe restriction and no recompile was needed because nothing was changed."
+ }
+}

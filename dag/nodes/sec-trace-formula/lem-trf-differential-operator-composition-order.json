@@ -1,0 +1,210 @@
+{
+ "id": "lem-trf-differential-operator-composition-order",
+ "kind": "statement",
+ "title": "Composition adds the bounds on differential order",
+ "statement": "Let $R$ be a commutative ring and $C$ an $R$-algebra with structure map $R\\to C$ [def-weil-pbc-algebra-hom-quotient], and let $L,M,N$ be $C$-modules, regarded as $R$-modules by restriction of scalars. For a nonnegative integer $n$, an $R$-linear map $T$ between $C$-modules has differential order at most $0$ when it is $C$-linear, and recursively has differential order at most $n>0$ when, for every $c\\in C$, the map $[T,c]:x\\mapsto T(cx)-cT(x)$ has differential order at most $n-1$. Let $k,l\\geq0$. If $D:L\\to M$ and $E:M\\to N$ are $R$-linear maps of differential orders at most $k$ and $l$, respectively, then $E\\circ D:L\\to N$ has differential order at most $k+l$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 09CJ, lemma-composition-differential-operators; recursive definition is Tag 09CI, definition-differential-operators."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-trf-differential-operator-order"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\delta_c(T)(x)=T(cx)-cT(x)$. Multiplication by $c$ on any $C$-module is $R$-linear, since the $R$-action is through the commutative ring $C$; hence every $\\delta_c(T)$ is $R$-linear. For each $n$, the zero map has order at most $n$, and sums of maps of order at most $n$ have order at most $n$: at $n=0$ this is closure of $C$-linear maps under zero and addition; at $n>0$ use $\\delta_c(0)=0$ and $\\delta_c(T+U)=\\delta_c(T)+\\delta_c(U)$ and induction on $n$. These are direct consequences of the recursive definition in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09CJ, lemma-composition-differential-operators, proof; Tag 09CI, definition-differential-operators and the immediately following paragraph."
+   }
+  },
+  {
+   "text": "Prove the composition assertion by strong induction on $s=k+l$, for every pair of nonnegative bounds and every triple of $C$-modules. If $s=0$, then $k=l=0$ and $E\\circ D$ is $C$-linear: $(E\\circ D)(cx)=E(cD(x))=cE(D(x))$. Thus it has order at most $0$. For $s>0$, assume the assertion for every strictly smaller sum.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09CJ, lemma-composition-differential-operators, proof; Tag 09CI, definition-differential-operators and the immediately following paragraph."
+   }
+  },
+  {
+   "text": "Fix $c\\in C$. Additivity of $E$ gives, for each $x\\in L$, $$\\delta_c(E\\circ D)(x)=E(D(cx))-cE(D(x))=E(D(cx)-cD(x))+(E(cD(x))-cE(D(x))).$$ Therefore $$\\delta_c(E\\circ D)=E\\circ\\delta_c(D)+\\delta_c(E)\\circ D.$$ The two summands are maps from $L$ to $N$, so their sum is defined.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09CJ, lemma-composition-differential-operators, proof; Tag 09CI, definition-differential-operators and the immediately following paragraph."
+   }
+  },
+  {
+   "text": "If $k>0$, the recursive definition gives order at most $k-1$ for $\\delta_c(D)$, and the induction hypothesis applied to the bounds $(k-1,l)$ gives order at most $s-1$ for $E\\circ\\delta_c(D)$. If $k=0$, then $D$ is $C$-linear, so this summand is zero and has order at most $s-1$ by step 1. Similarly, if $l>0$, apply the induction hypothesis to $(k,l-1)$ to bound $\\delta_c(E)\\circ D$ by $s-1$; if $l=0$, that summand is zero. Step 1 now shows that their sum has order at most $s-1$. This holds for every $c\\in C$. Since $E\\circ D$ is $R$-linear, the recursive definition proves it has order at most $s=k+l$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 09CJ, lemma-composition-differential-operators, proof; Tag 09CI, definition-differential-operators and the immediately following paragraph."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 09CJ, lemma-composition-differential-operators, proof; Tag 09CI, definition-differential-operators and the immediately following paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DiffOp|DifferentialOperator|differential.operator|differentialOperator",
+   "results": "{\"t\": \"2026-10-23T14:41:17Z\", \"tool\": \"grep\", \"query\": \"DiffOp|DifferentialOperator|differential.operator|differentialOperator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern derivations, Hasse derivatives of polynomials, analytic derivatives, or unrelated order notions; none states the recursive finite-order composition bound for arbitrary modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The composition of two finite order differential operators between modules over a commutative algebra has order bounded by the sum of the orders",
+   "results": "{\"t\": \"2026-10-23T14:41:18Z\", \"tool\": \"leansearch\", \"query\": \"The composition of two finite order differential operators between modules over a commutative algebra has order bounded by the sum of the orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.le_order_prod\", \"BoundedOrderHom.comp\", \"PowerSeries.le_order_mul\", \"MvPowerSeries.order_mul\", \"norm_iteratedFDeriv_clm_apply\", \"HasFiniteFPowerSeriesAt.comp\", \"CategoryTheory.DifferentialObject.Hom.comp\", \"PowerSeries.order_mul_ge\"], \"digest\": \"23ab56d348390fb1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern derivations, Hasse derivatives of polynomials, analytic derivatives, or unrelated order notions; none states the recursive finite-order composition bound for arbitrary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "DifferentialOperator",
+   "results": "{\"t\": \"2026-10-23T14:41:18Z\", \"tool\": \"loogle\", \"query\": \"DifferentialOperator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DifferentialOperator'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern derivations, Hasse derivatives of polynomials, analytic derivatives, or unrelated order notions; none states the recursive finite-order composition bound for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-differential-operator-composition-order: composition of algebraic differential operators of orders k and l between modules has order at most k plus l",
+   "results": "{\"t\": \"2026-10-23T14:41:19Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-differential-operator-composition-order: composition of algebraic differential operators of orders k and l between modules has order at most k plus l\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.compDer\", \"Derivation.llcomp\", \"Derivation.llcomp_apply\", \"Derivation.compAlgebraMap\", \"Derivation.coe_comp\", \"Polynomial.hasseDeriv_comp\", \"Derivation.compAlgebraMapL\", \"Derivation.coe_to_linearMap_comp\"], \"digest\": \"506cb72282a6719a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern derivations, Hasse derivatives of polynomials, analytic derivatives, or unrelated order notions; none states the recursive finite-order composition bound for arbitrary modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-differential-operator-composition-order: higher order linear differential operators form a filtered algebra under composition commutator definition",
+   "results": "{\"t\": \"2026-10-23T14:41:20Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-differential-operator-composition-order: higher order linear differential operators form a filtered algebra under composition commutator definition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instDifferentialAlgebra\", \"LinearMap.compDer\", \"Differential\", \"LineDeriv.iteratedLineDerivOpCLM\", \"DifferentialAlgebra\", \"SchwartzMap.iteratedPDeriv\", \"Derivation.llcomp\", \"Derivation.commutator_coe_linear_map\"], \"digest\": \"8e9ea0802179fb06\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern derivations, Hasse derivatives of polynomials, analytic derivatives, or unrelated order notions; none states the recursive finite-order composition bound for arbitrary modules."
+  },
+  {
+   "tool": "grep",
+   "query": "DiffOp|DifferentialOperator|differential.operator|differentialOperator",
+   "results": "{\"t\": \"2026-10-23T20:03:41Z\", \"tool\": \"grep\", \"query\": \"DiffOp|DifferentialOperator|differential.operator|differentialOperator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-order differential operator notion found; hits concern derivations composed with algebra-linear maps, analytic derivatives, or orders of power series, rather than the recursive module-map predicate in this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "DifferentialOperator",
+   "results": "{\"t\": \"2026-10-23T20:03:41Z\", \"tool\": \"loogle\", \"query\": \"DifferentialOperator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'DifferentialOperator'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-order differential operator notion found; hits concern derivations composed with algebra-linear maps, analytic derivatives, or orders of power series, rather than the recursive module-map predicate in this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of algebraic differential operators between modules of orders k and l has differential order at most k plus l",
+   "results": "{\"t\": \"2026-10-23T20:03:42Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of algebraic differential operators between modules of orders k and l has differential order at most k plus l\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.compDer\", \"Derivation.llcomp\", \"Derivation.compAlgebraMap\", \"Derivation.compAlgebraMapL\", \"LinearEquiv.compDer\", \"Derivation.llcomp_apply\", \"Derivation.coe_comp\", \"DifferentialAlgebra\"], \"digest\": \"695e874280296f9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-order differential operator notion found; hits concern derivations composed with algebra-linear maps, analytic derivatives, or orders of power series, rather than the recursive module-map predicate in this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "differential [Oo]perator|differential_[Oo]perator|diffOp|IsDiffOp",
+   "results": "{\"t\": \"2026-10-23T20:04:13Z\", \"tool\": \"grep\", \"query\": \"differential [Oo]perator|differential_[Oo]perator|diffOp|IsDiffOp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-order differential operator notion found; hits concern derivations composed with algebra-linear maps, analytic derivatives, or orders of power series, rather than the recursive module-map predicate in this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of finite order differential operators over a commutative algebra has order at most the sum of their orders",
+   "results": "{\"t\": \"2026-10-23T20:04:14Z\", \"tool\": \"leansearch\", \"query\": \"Composition of finite order differential operators over a commutative algebra has order at most the sum of their orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.le_order_prod\", \"PowerSeries.order_prod\", \"PowerSeries.le_order_mul\", \"MvPowerSeries.order_mul\", \"PowerSeries.order_mul_ge\", \"AddMonoidAlgebra.supDegree_prod_le\", \"MvPowerSeries.order_prod\", \"norm_iteratedFDeriv_clm_apply\"], \"digest\": \"8175cfc98d7640de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-order differential operator notion found; hits concern derivations composed with algebra-linear maps, analytic derivatives, or orders of power series, rather than the recursive module-map predicate in this statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated commutators with scalar multiplication vanish for composites of linear maps with bounded differential operator orders",
+   "results": "{\"t\": \"2026-10-23T20:04:15Z\", \"tool\": \"leanfinder\", \"query\": \"Iterated commutators with scalar multiplication vanish for composites of linear maps with bounded differential operator orders\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"norm_iteratedFDeriv_smul_le\", \"ContDiffMapSupportedIn.iteratedFDerivWithOrderLM_eq_of_scalars\", \"iteratedFDerivWithin_clm_apply_const_apply\", \"LineDeriv.iteratedLineDerivOp_smul\", \"ContDiffMapSupportedIn.iteratedFDerivLM_eq_of_scalars\", \"SchwartzMap.iteratedPDeriv\", \"norm_iteratedFDerivWithin_smul_le\", \"SchwartzMap.iteratedPDeriv_succ_right\"], \"digest\": \"1cfda94f44862e3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no finite-order differential operator notion found; hits concern derivations composed with algebra-linear maps, analytic derivatives, or orders of power series, rather than the recursive module-map predicate in this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-differential-operator-localization",
+  "date": "2026-10-23",
+  "group": "NV"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Lower input: Expose VIII 2.3.11 and 2.3.13, pp.93--94: local invariant input underlying the cited strong embedded algorithm; BMT sections 6.1--6.3, especially local embedding independence and the correction of synchronization for arbitrary smooth morphisms. Lower input: Smooth-stable Hilbert--Samuel head and component-dimension correction. Refinement here: Component-dimension rigidity at a Hilbert--Samuel near point of a blowup. Supporting refinement: Normal-flat normal cone and linear vertex at a Hilbert--Samuel near point. Lower input here: Theorem 2.10(2), printed pp.32--33, and the characteristic-independent additive-subgroup argument in the proof of Theorem 2.14, printed p.36, before its linearity argument: Hironaka [H4], Certain numerical characters of singularities, Theorem IV, and [H5], Additive groups associated with points of a projective space, Theorem 2. The normal-cone quotient used there is Theorem 2.2(2)(ii), printed p.28. Refinement in Q87: Algebraic subgroup input: homogeneous forms of maximal local order are generated by additive polynomials. Refinement in Q114: finite-order differential operators extend to ordinary prime localizations, used to show Hasse derivatives preserve the maximal-order spaces; Stacks 0G36. Supporting refinement: Stacks 09CJ supplies the order bound for composing with multiplication maps in the localization construction and its algebra-generator test.",
+   "via": [
+    "lem-trf-differential-operator-localization",
+    "lem-trf-projective-order-algebra-additive-generators",
+    "lem-trf-near-point-additive-symmetry",
+    "lem-trf-hilbert-samuel-near-normal-cone",
+    "lem-trf-hilbert-samuel-equality-component-rigidity",
+    "lem-trf-hilbert-samuel-smooth-dimension-profile",
+    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-differential-operator-composition-order",
+  "worker": "stage1",
+  "group": "Q09",
+  "summary": "Expanded the proof of Stacks 09CJ into the commutator identity and strong induction on k+l, explicitly handling zero order and proving the elementary closure under zero and sums directly from the recursive definition. Statement unchanged. No new nodes: no non-elementary auxiliary result is used. No matching completed project declaration or Mathlib theorem was found.",
+  "blueprint": "Supports the inherited historical branch of lem-trf-local-term-locality through lem-trf-differential-operator-localization. The current latest blueprint does not state this algebraic lemma; its precise source is Stacks 09CJ, not a direct assertion of the current contracting-correspondence proof. Retained the inherited blueprint.from place and via list; whole-blueprint search found no equivalent node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-9183180b5",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-9183180b5 (reviewer sub-agent of L); spot-checked: Read the item in full. It matches Stacks algebra.tex Tag 09CI (definition-differential-operators) and Tag 09CJ (lemma-composition-differential-operators) hypothesis by hypothesis: commutative R; C an R-algebra; C-modules L, M, N; R-linear maps; the same recursive definition; the bound k+l for E∘D. The statement is unchanged and not weakened. The stmt_dep def-weil-pbc-algebra-hom-quotient defines the R-algebra structure map the statement cites. No new nodes, proof_deps=[]=union of uses, tool_uses=[]. Step 1 (δ_c(T) is R-linear; zero and sums closed under each order bound, by induction) is elementary and makes explicit the Stacks remark after 09CI. Step 2 (strong induction on s=k+l over all bound pairs and module triples, base k=l=0 via C-linearity) is correct. I re-expanded step 3's commutator identity δ_c(E∘D)=E∘δ_c(D)+δ_c(E)∘D, which matches the 09CJ display. Step 4 covers k>0, k=0, l>0 and l=0 separately: the k=0 or l=0 summand is the zero map, so no negative order is used. Tested (0,0), (1,0), (0,1), (1,1) (d/dx on R[x]) and zero rings or modules. The DAG search (rg -L 09CJ / differential order) finds no duplicate. The only citer, lem-trf-differential-operator-localization (steps 1, 2, 5, 6), uses instances consistent with the statement. This is not a 2026-10-21 re-split order (the item was created 2026-10-23 by NV, with no repair note). The inherited unit sk-i-curve-zero and blueprint.from route are unchanged, and no SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DifferentialOperatorCompositionOrder",
+  "declaration": "LinearMap.IsDifferentialOperatorOfOrderLE.comp",
+  "file": "lean/Sheaf/RingTheory/DifferentialOperatorCompositionOrder.lean",
+  "statement": "theorem IsDifferentialOperatorOfOrderLE.comp {R : Type u} {C : Type v} [CommRing R] [CommRing C] [Algebra R C] {L : Type w₁} {M : Type w₂} {N : Type w₃} [AddCommGroup L] [AddCommGroup M] [AddCommGroup N] [Module C L] [Module C M] [Module C N] [Module R L] [Module R M] [Module R N] [IsScalarTower R C L] [IsScalarTower R C M] [IsScalarTower R C N] {k l : ℕ} {D : L →ₗ[R] M} {E : M →ₗ[R] N} (hD : IsDifferentialOperatorOfOrderLE R C k D) (hE : IsDifferentialOperatorOfOrderLE R C l E) : IsDifferentialOperatorOfOrderLE R C (k + l) (E.comp D)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90dda41e5",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Item lem-trf-differential-operator-composition-order: Lean theorem LinearMap.IsDifferentialOperatorOfOrderLE.comp matches node and Stacks 09CJ clause by clause (CommRing R, CommRing C with Algebra R C, C-modules L,M,N with independent universes, R-structure via IsScalarTower = restriction of scalars, k,l : ℕ, conclusion order ≤ k+l for E.comp D). New def node def-trf-differential-operator-order matches Stacks 09CI exactly: order 0 = C-linear, order n+1 = every scalarCommutator has order n; scalarCommutator = T∘lsmul c − lsmul c∘T evaluates by rfl to T(cx)−cT(x). The def has real recursive data, no sorry, and the helper is in lean.declarations. No Mathlib, Sheaf or live-tree duplicate and no parallel owner. Both lean.statement fields match the file signatures verbatim; the only item change is the lean record plus the added stmt_dep. Docstrings carry source and blueprint and all four proof steps; report sections present. Edge cases (k=l=0, (1,0)/(0,1), zero ring or modules, any characteristic) covered. No recompile, since no file changed. No findings."
+ }
+}

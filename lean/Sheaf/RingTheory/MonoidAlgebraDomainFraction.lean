@@ -3,9 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Q57
 -/
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.RingTheory.Localization.FractionRing
 
 import Mathlib.Algebra.AffineMonoid.UniqueSums
 import Mathlib.Algebra.MonoidAlgebra.NoZeroDivisors
@@ -17,6 +19,8 @@ Source: ILO, Exposé VIII, 3.2.4, Lemma 3.2.9 and the first proof paragraph of
 Lemma 3.2.12, printed pp. 103–104 (blueprint: lem-trf-monoid-algebra-domain-fraction).
 The additive monoid conventions are those of `def-trf-fine-fan-blowup`.
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

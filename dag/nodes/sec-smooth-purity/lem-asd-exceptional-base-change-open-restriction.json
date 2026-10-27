@@ -17,41 +17,40 @@
  ],
  "proof": [
   {
-   "text": "Choose the compactification of f and restrict its proper/open diagram along j. Base change this same diagram along c. Use the graph-factorization construction of the existing unbounded compact-support composition theorem to compare the chosen compactifications without requiring quasi-compactness of f or p. Construct the open-composition comparison j! Fp ≅ Ff a! by proper/open interchange and open-extension composition. Normalize comparison maps between compactifications by their identity on the source open. Inserting the two comparisons into the proper/open exchange diagrams, their cocycle identities cancel the middle comparisons. Proper base-change pasting and degreewise open-extension base change then identify the two compact-support maps on the cube. These constructions use exact extension by zero for the open arrows and do not invoke exceptional base-change maps for those opens.",
+   "text": "Construct the actual support comparison E and its conjugate exceptional comparison λ from the graph model, with no qc assumption on the opens. Deduce the remaining source face sqA by cancellation of pullback squares.",
    "uses": [
-    "lem-cbc-extension-zero-base-change",
-    "lem-cbc-extension-zero-composition",
-    "lem-etale-unbounded-compact-support-composition",
-    "lem-kun-proper-base-change-torsion-ring"
+    "def-asd-open-restriction-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "Take right adjoints of the open-composition comparisons to obtain lambda_f : La* Rf ≅ Rp Lj* and lambda_f' : La'* Rf' ≅ Rp' Lj'*. Let sigma : La'* Lg'* ≅ Lb* La* be induced by b a = a' g', and tau : Lc* Lj* ≅ Lj'* Lg* by sqj. The mate equation defining beta and injectivity of the exceptional-adjunction Hom bijection give La'* beta(f,g)_K followed by lambda_f'(Lg* K) = sigma(Rf K), then Lb*(lambda_f(K)), then beta(p,c)_(Lj* K), then Rp'(tau(K)). To verify this equation, apply Fp' and compose with its counit. Naturality moves the open-composition comparisons through the counit, and the compact-support cube identity from Step 1 makes both expressions inverse exchange followed by the pullback of the original counit.",
+   "text": "Apply conjugateEquiv_mateEquiv_vcomp and mateEquiv_conjugateEquiv_vcomp (through mateEquiv_whiskerTop_conjugateEquiv) to the compact-support cube equation. Apply mateEquiv_hcomp to each paste. The existing mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso identifies the two open mates with the inverse derived square pullback isomorphisms. Evaluate at K.",
    "uses": [
+    "lem-asd-open-restriction-compact-support-cube",
     "lem-weil-pbc-mate-pasting",
+    "lem-cbc-extension-zero-base-change",
     "thm-amb-etale-exceptional-adjoint"
    ],
    "elementary": false
   },
   {
-   "text": "The hypothesis makes beta(p,c)_(Lj* K) invertible. All remaining factors in the equation of Step 2 are isomorphisms. Functors preserve isomorphisms; cancel lambda_f' to deduce the desired invertibility. This covers empty schemes, the zero ring, identity opens and unbounded K.",
+   "text": "The evaluated cube has three factors on each side. The left side is invertible by h, λ, and preservation of isomorphisms by functors. Cancel the inverse square isomorphism on the right and the conjugate support isomorphism on the right to conclude that La'*(β_f(K)) is invertible.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-cbc-extension-zero-base-change",
-  "lem-cbc-extension-zero-composition",
-  "lem-etale-unbounded-compact-support-composition",
-  "lem-kun-proper-base-change-torsion-ring",
+  "def-asd-open-restriction-comparisons",
+  "lem-asd-open-restriction-compact-support-cube",
   "lem-weil-pbc-mate-pasting",
+  "lem-cbc-extension-zero-base-change",
   "thm-amb-etale-exceptional-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-  "place": "Coherences (i) and (iii): restriction of the compactification exchange to a base chart, transposition, and descent. The generic compactification calculation is stated without quasi-compactness of the restricting open."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Coherences (i) and (iii): restriction of the compactification diagram to an open and adjunction transposition.",
+  "note": "S3: explicit comparison construction, complete formal mate pasting and cancellation, reduced to the support-only cube lemma."
  },
  "mathlib_searches": [
   {
@@ -283,14 +282,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P2",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261020T122116-L-478185",
+  "landing": "20261025T164246-L-987459",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

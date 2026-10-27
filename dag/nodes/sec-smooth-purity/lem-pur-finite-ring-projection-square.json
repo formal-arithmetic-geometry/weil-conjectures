@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-finite-ring-projection-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose; Canonical compact-support projection comparison square",
+   "via": [
+    "lem-pur-finite-ring-site-tensor-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical compact-support projection comparison square",
+ "statement": "For any finite commutative ring B and chosen compactification c=(i,g) of a scheme morphism f, let EX,EY be derived comparison inverse images, FE,FP the two compact-support functors, PE,PP the derived pullbacks, beta the canonical compact-support comparison, tX,tY the canonical tensor comparisons, pb the canonical pullback comparison, and pfE,pfP the named projection maps [def-pur-finite-ring-site-tensor-transport-data]. Let q=tX followed by id⊗pb. For every unbounded M,K, EY(pfE_M,K)≫beta_(M⊗PEK)≫FP(q_M,K)=tY_(FEM),K≫(beta_M⊗id)≫pfP_EXM,EYK. No projection invertibility is asserted or assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose"
+ },
+ "stmt_deps": [
+  "def-pur-finite-ring-site-tensor-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "For the proper factor transpose the projection square under derived pullback/direct image. Normalize the direct-image comparison by its counit-mate equation. The projection-map definition and tensor/pullback comparison reduce both adjuncts to the same counit tensored with identity.",
+   "uses": [
+    "lem-sfb-unbounded-direct-image-comparison",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the open factor restrict the adjuncts to the open, where both send a pure tensor to itself. Use exact extension by zero and K-flat representatives to descend this degreewise equality. Paste the open and proper squares and use naturality. The outside beta is the proper comparison followed by direct image of the open comparison, exactly the named canonical beta.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-trf-open-tensor",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-unbounded-direct-image-comparison",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-trf-open-tensor",
+  "lem-weil-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose; factored into the precise categorical or canonical-map step recorded below."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image commutes with the tensor unit and the signed braiding and with compact support projection maps",
+   "results": "8 hits: braiding_inv_tensorUnit_right, braiding_inv_tensorUnit_left_assoc, braiding_inv_tensorUnit_right_assoc, braiding_inv_tensorUnit_left, HomologicalComplex.rightUnitor_inv, Comon.monoidal_tensorUnit_comon_comul, MonoidalCategory.tensor_ε, leftUnitor_inv_braiding.",
+   "date": "2026-10-25",
+   "verdict": "General monoidal identities only; no equality for the named site comparisons or compact-support projection maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived inverse image tensor comparison preserves the tensor unit and braiding; compact support projection formula comparison between sites",
+   "results": "8 hits including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, GrothendieckTopology.W.transport_isMonoidal, and ordinary sheaf pushforward isomorphisms.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary sheaf results do not state the named unbounded-derived identities; generic categorical results are used in the proved transport helper."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*comparison|comparison.*projection",
+   "results": "0 hits in the Mathlib search service. Local source search finds the named canonical maps in the project; none proves the two new site identities.",
+   "date": "2026-10-25",
+   "verdict": "No matching Mathlib theorem; use project canonical comparisons and split only their required equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTranspose",
+  "date": "2026-10-25",
+  "group": "S3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingProjectionSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingProjectionSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteRingProjectionSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteRingProjectionSquare"
+  ],
+  "statement": "theorem finiteRingProjectionSquare (B : Type) [CommRing B] [Finite B] {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} B)))) (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} B)))) : (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) Y).mapDerivedCategory.map (finiteRingEtalePF (ModuleCat.{u + 1} (ULift.{u + 1} B)) c M K) ≫ finiteComparisonCompactSupportMap B c.i c.g (M ⊗ (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f).leftDerivedFunctor.obj K) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} B)) c).map (finiteRingTensorPullbackComparison (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory (Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f).leftDerivedFunctor (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) f).leftDerivedFunctor (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) Y).mapDerivedCategory (finiteRingSiteTensor (ModuleCat.{u + 1} (ULift.{u + 1} B)) X) (finiteRingSitePullback (ModuleCat.{u + 1} (ULift.{u + 1} B)) f (unboundedDirectImagePullbackIso (ULift.{u + 1} B) f)) M K).hom = (finiteRingSiteTensor (ModuleCat.{u + 1} (ULift.{u + 1} B)) Y ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} B)) c).obj M) K).hom ≫ (finiteComparisonCompactSupportMap B c.i c.g M ⊗ₘ 𝟙 ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) Y).mapDerivedCategory.obj K)) ≫ finiteRingProPF (ModuleCat.{u + 1} (ULift.{u + 1} B)) c ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory.obj M) ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) Y).mapDerivedCategory.obj K)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pur-finite-ring-site-tensor-transpose",
+  "worker": "S3",
+  "summary": "Canonical compact-support projection comparison square",
+  "blueprint": "Proof (3), finite-ring tensor formula; explicit site transport steps of lem-pur-finite-ring-site-tensor-transpose"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-f1067",
+  "group": "S3",
+  "result": "fix",
+  "landing": "20261025T123735-L-1895222",
+  "kind": "interface",
+  "note": "independent cc review: the 16 moved defs, Data module vs clone item module, verbatim; theorem signature byte-identical; FiniteGeneralRing importer compiled against the delivered modules (37 s ok); #print axioms: main theorem sorryAx only via the two split-off statements, helpers clean; projection square = the item's own Statement conjunct"
+ }
+}

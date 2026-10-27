@@ -1,0 +1,233 @@
+{
+ "id": "lem-a1-affine-split-morphism-positive-rank-pieces",
+ "kind": "statement",
+ "title": "Finite positive affine rank pieces for a finite locally free morphism with a section",
+ "statement": "Let $X=\\operatorname{Spec}B$ and $Y=\\operatorname{Spec}A$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum], let $f:X\\to Y$ be finite locally free [def-pc-finite-locally-free], and let $a:Y\\to X$ satisfy $f\\circ a=\\mathrm{id}_Y$. For $y\\in Y$ with residue field $\\kappa(y)$ [def-weil-residue-field], write $X_y=X\\times_Y\\operatorname{Spec}\\kappa(y)$ [def-pc-fibre-product] and $d(y)=\\dim_{\\kappa(y)}\\Gamma(X_y,\\mathcal O_{X_y})$. Then $d(y)\\geq1$ for every $y$. The sets $Y_r=\\{y:d(y)=r\\}$, for integers $r\\geq0$, are pairwise disjoint open-and-closed subsets with union $Y$ and $Y_0=\\varnothing$. With their open-subscheme structures [def-weil-open-immersion], every $Y_r$ and $X_r=f^{-1}(Y_r)$ is affine, and $f_r:X_r\\to Y_r$ is finite locally free of degree $r$. Moreover there are idempotents $b_r\\in A$ and $b'_r\\in B$, meaning $b_r^2=b_r$ and $(b'_r)^2=b'_r$, such that $Y_r=D(b_r)$ and $X_r=D(b'_r)$, where $D(b)=\\{\\mathfrak p:b\\notin\\mathfrak p\\}$. The set $I=\\{r\\geq1:Y_r\\ne\\varnothing\\}$ is finite, $Y=\\coprod_{r\\in I}Y_r$, and $Y=\\varnothing$ implies $I=\\varnothing$.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), positive-degree argument, and Tag 03BJ (groupoids-lemma-integral-over-invariants), first proof paragraph, abstracted to an affine finite locally free morphism admitting a section; rank strata: Morphisms Tag 04MH (morphisms-lemma-finite-locally-free); clopen affine pieces: Algebra Tags 00E8 (algebra-lemma-quasi-compact) and 00EE (algebra-lemma-disjoint-decomposition), Schemes Tag 01I3 (schemes-lemma-standard-open-affine)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-weil-residue-field",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-locally-free-degree-locally-constant] to $f$. Its fibre dimension is exactly $d(y)$, so it is finite and locally constant, its level sets $Y_r$ are clopen, $Y=\\coprod_{r\\geq0}Y_r$, and $f^{-1}(Y_r)\\to Y_r$ is finite locally free of degree $r$. Distinct level sets are disjoint because an integer cannot have two distinct values.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04MH (morphisms-lemma-finite-locally-free), rank decomposition."
+   }
+  },
+  {
+   "text": "Fix y. The section identity gives f(a(y))=y, hence the fibre over y is nonempty, using Scheme.Hom.fiberHomeo from [def-pc-fibre-product]. The ring of global sections of a nonempty scheme is nontrivial (evaluation at a stalk, a nontrivial local ring, sends 0 and 1 to distinct elements). Step 1 supplies finite-dimensionality over the residue field with its canonical algebra structure. Module.finrank_pos therefore gives d(y)>=1. Thus Y_0 is empty. This uses the standard affine spectrum and residue-field conventions [def-weil-affine-spectrum].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), exclusion of rank zero; explicit section argument abstracted from the groupoid unit."
+   }
+  },
+  {
+   "text": "For each $r$, apply [lem-weil-pbc-spec-clopen-idempotent] to the clopen subset $Y_r\\subseteq\\operatorname{Spec}A$, obtaining $b_r^2=b_r$ and $Y_r=D(b_r)$. A scheme morphism is continuous, so $X_r=f^{-1}(Y_r)$ is clopen in $\\operatorname{Spec}B$; apply the same node with ring $B$ to obtain $(b'_r)^2=b'_r$ and $X_r=D(b'_r)$. This also applies to empty strata, where one can choose the zero idempotent.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE (algebra-lemma-disjoint-decomposition), for A and B."
+   }
+  },
+  {
+   "text": "Mathlib IsAffineOpen.Spec_basicOpen makes each principal open D(b_r) and D(b′_r) affine. Its proof encapsulates [lem-weil-pbc-principal-localization-open-immersion] and the identification with its image open subscheme [def-weil-open-immersion]. Rewrite by the two basic-open equalities from step 3. The finite locally free degree-r restrictions are already supplied by step 1.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (schemes-lemma-standard-open-affine), proof via localization open immersion."
+   }
+  },
+  {
+   "text": "The affine target is compact by [lem-weil-pbc-affine-scheme-qcqs]. Apply IsLocallyConstant.range_finite to its fibre-degree function. Every nonempty rank stratum witnesses a value in that finite range, so I={r | 1<=r and Y_r nonempty} is finite. Each point y lies in the piece indexed by d(y), and positivity puts this index in I. The indexed open inclusions are pairwise disjoint, since equality of subtype indices follows from equality of their natural-number values. Apply AlgebraicGeometry.nonempty_isColimit_cofanMk_of to these covering disjoint open immersions to get the required cofan colimit. If Y is empty, membership in I would give a point of Y, a contradiction, so I is empty.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), first proof paragraph: quasi-compactness leaves finitely many rank pieces."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03BI and 03BJ, with Morphisms 04MH, Algebra 00EE and Schemes 01I3. Lean implementation uses the section to obtain nonempty fibres, Module.finrank_pos, the existing fibre-degree decomposition, spectrum clopen idempotents, IsAffineOpen.Spec_basicOpen, IsLocallyConstant.range_finite, and the disjoint-open cofan colimit theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free morphism between affine schemes with a section has finitely many nonempty positive rank strata that are open closed and affine with affine inverse images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes that is locally of finite type, if $ U $ is an affine open subset of $ Y $ and $ V $ is an affine open subset of $ X $ contained in $ f^{-1}(U) $, then the indu\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFiniteType f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n         \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite type if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ with $ f(V) \\\\subseteq U $, t\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type. For any affine open subset $U \\\\subseteq Y$ and affine open subset $V \\\\subseteq X$ contained in $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFiniteType f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is locally of finite type, $ U $ is an affine open subset of $ Y $, and $ V $ is an affine open subset of $ X $ contained in the preimage of $ U $ under $ f $, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk local constancy and positivity, clopen-idempotent correspondence, or finite-morphism affine properties provide components only; none states the finite affine positive-degree decomposition for a morphism with a section in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFiniteLocallyFree\", \"rank\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk local constancy and positivity, clopen-idempotent correspondence, or finite-morphism affine properties provide components only; none states the finite affine positive-degree decomposition for a morphism with a section in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteLocallyFree|finite_locally_free|IsFiniteLocallyFree).*(section|strat|rank)|rankAtStalk",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"line\": \"53\", \"text\": \"    have h1 : rankAtStalk M 𝔭 = 1 := by simp [rankAtStalk, Invertible.finrank_eq_one]\"}\n  {\"file\": \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"line\": \"54\", \"text\": \"    have heq := congr($(rankAtStalk_prod M N) 𝔭)\"}\n  {\"file\": \"Mathlib/Algebra/Module/StablyFree/FreeOfInvertible.lean\", \"line\": \"55\", \"text\": \"    simp only [rankAtStalk_eq_finrank_of_free, Pi.natCast_apply, Pi.add_apply, h1] at heq\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"32\", \"text\": \"- `Module.rankAtStalk`: The function `Spec R → ℕ` sending `x` to `rank_{Rₓ} Mₓ`.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"33\", \"text\": \"- `Module.isLocallyConstant_rankAtStalk`:\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"34\", \"text\": \"  If `M` is flat over `R`, then `rankAtStalk` is locally constant.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"183\", \"text\": \"def rankAtStalk (p : PrimeSpectrum R) : ℕ :=\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"186\", \"text\": \"lemma isLocallyConstant_rankAtStalk_freeLocus [Module.FinitePresentation R M] :\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"146\", \"text\": \"    (hn : Module.rankAtStalk (R := R) S = n) :\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"155\", \"text\": \"      rw [Nat.cast_zero, Module.rankAtStalk_eq_zero_iff_subsingleton] at hn\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"164\", \"text\": \"      apply Module.nontrivial_of_rankAtStalk_pos (R := R)\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"179\", \"text\": \"    have (p : PrimeSpectrum S) : Module.rankAtStalk (R := S) (S × U) p = n + 1 := by\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"180\", \"text\": \"      simp [Module.rankAtStalk_eq_of_equiv e.symm.toLinearEquiv, Module.rankAtStalk_baseChange, hn]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"11\", \"text\": \"# A finite flat module `M` is locally free if `rankAtStalk M` is constant\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"25\", \"text\": \"lemma bijective_of_surjective_of_rankAtStalk_eq {φ : M →ₗ[R] N} (hs : Function.Surjective φ)\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"27\", \"text\": \"      rankAtStalk M ⟨m, inferInstance⟩ = rankAtStalk N ⟨m, inferInstance⟩) :\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"34\", \"text\": \"/-- Let `M` be a finite flat `R`-module, `p` be a prime ideal of `R`. If `rankAtStalk M` is\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"36\", \"text\": \"theorem Free.away_of_finite_of_flat_of_rankAtStalk_constant (p : Ideal R) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"25\", \"text\": \"- `Module.algebraMap_bijective_iff_rankAtStalk`: `S` is of constant `R`-rank `1` if and only if\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"44\", \"text\": \"lemma PrimeSpectrum.rankAtStalk_pos_iff_mem_range_comap (p : PrimeSpectrum R) :\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"45\", \"text\": \"    0 < Module.rankAtStalk (R := R) S p ↔ p ∈ Set.range (PrimeSpectrum.comap (algebraMap R S)) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"46\", \"text\": \"  rw [Module.rankAtStalk_eq, Module.finrank_pos_iff, p.nontrivial_iff_mem_rangeComap]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"50\", \"text\": \"lemma PrimeSpectrum.rankAtStalk_pos_iff_comap_surjective :\"}\n  {\"file\": \"Mathlib/RingTheory/Grassmannian.lean\", \"line\": \"71\", \"text\": \"  rankAtStalk_eq : ∀ p, rankAtStalk (R := R) (M ⧸ toSubmodule) p = k\"}\n  {\"file\": \"Mathlib/RingTheory/Grassmannian.lean\", \"line\": \"130\", \"text\": \"    rankAtStalk_eq p := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk local constancy and positivity, clopen-idempotent correspondence, or finite-morphism affine properties provide components only; none states the finite affine positive-degree decomposition for a morphism with a section in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine finite flat finitely presented map admitting a section decomposes over finitely many positive constant degree clopen affine pieces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.of_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[h : IsAffineHom f] : IsSeparated f\", \"doc\": \"Any affine morphism $ f: X \\\\to Y $ of schemes is automatically a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties\", \"type\": \": AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.Flat f → Sort u_1} →\\n      (t : AlgebraicGeometry.Flat f) →\\n        ((flat_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  ∀ {V : X.Opens},\\n                 \", \"doc\": \"A function that allows defining or proving properties of a flat morphism $ f : X → Y $ of schemes by verifying the flatness condition on affine open subsets $ U ⊆ Y $ and $ V ⊆ X $, where $ V $ maps i\"}\n  {\"name\": \"AffineMap.decomp\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineMap\", \"type\": \"(f : V1 →ᵃ[k] V2) : (f : V1 → V2) = ⇑f.linear + fun _ => f 0\", \"doc\": \"Every affine map $ f : V_1 \\\\to V_2 $ can be expressed as the sum of its linear component $ f.\\\\text{linear} $ and a constant function whose value is $ f(0) $, i.e., $ f(v) = f.\\\\text{linear}(v) + f(0) $\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"[∀ i, IsAffine (D.obj i)] (s : Γ(c.pt, ⊤)) : ∃ (i : I) (t : Γ(D.obj i, ⊤)), (c.π.app i).appTop t = s\", \"doc\": \"In a limit cone over a diagram of affine schemes, every global section of the apex is the image of a global section from some object in the diagram under the projection map.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.LocallyOfFinitePresentation f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRing\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite presentation. Let $U$ be an affine open subset of $Y$ and $V$ be an affine open subset of $X$ such that $V$ is contained in the prei\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk local constancy and positivity, clopen-idempotent correspondence, or finite-morphism affine properties provide components only; none states the finite affine positive-degree decomposition for a morphism with a section in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split finite locally free algebra over a commutative ring has a finite clopen spectrum decomposition into positive constant rank pieces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : PrimeSpectrum S)\\n  [IsArtinianRing R] [Algebra.FiniteType R S] [Algebra.QuasiFiniteAt R p.asIdeal], IsClopen {p}\", \"doc\": \"If $ R $ is an Artinian ring, $ S $ is a finitely generated $ R $-algebra, and $ S $ is quasi-finite at a prime ideal $ p $, then the singleton set $ \\\\{ p \\\\} $ is clopen in the Zariski topology on $ \\\\\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Finite (PrimeSpectrum R)] [Algebra.QuasiFinite R S], Finite (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring with a finite prime spectrum and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum of $ S $ is also f\"}\n  {\"name\": \"Algebra.QuasiFinite.discreteTopology_primeSpectrum\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [DiscreteTopology (PrimeSpectrum R)] [Algebra.QuasiFinite R S], DiscreteTopology (PrimeSpectrum S)\", \"doc\": \"If $ R $ is a commutative ring equipped with the discrete topology and $ S $ is a quasi-finite $ R $-algebra (i.e., $ S $ is finitely generated as an $ R $-module), then the prime spectrum $ \\\\operator\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib/RingTheory/Etale/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A],\\n  Algebra.Etale K A ↔\\n    ∃ I, ∃ (_ : Finite I), ∃ Ai x x_1 x_2, ∀ (i : I), Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"PrimeSpectrum.mulZeroAddOneEquivClopens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} →\\n  [inst : CommSemiring R] → { e // e.1 * e.2 = 0 ∧ e.1 + e.2 = 1 } ≃o TopologicalSpace.Clopens (PrimeSpectrum R)\", \"doc\": \"There is a bijective correspondence between clopen subsets of the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative semiring $R$ and pairs of elements $e, f \\\\in R$ satisfying $e \\\\cdot f = 0$ an\"}\n  {\"name\": \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {s : Set (PrimeSpectrum R)},\\n  IsClopen s → ∃ e f, e * f = 0 ∧ e + f = 1 ∧ s = ↑(PrimeSpectrum.basicOpen e) ∧ sᶜ = ↑(PrimeSpectrum.basicOpen f)\", \"doc\": \"For any clopen set $ s $ in the Zariski topology on the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative semiring $ R $, there exist elements $ e, f \\\\in R $ such that $ e \\\\cdot f = 0 $, $ e \"}\n  {\"name\": \"PrimeSpectrum.isIdempotentElemEquivClopens\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Topology\", \"type\": \"{R : Type u} → [inst : CommRing R] → { e // IsIdempotentElem e } ≃o TopologicalSpace.Clopens (PrimeSpectrum R)\", \"doc\": \"There is a canonical order isomorphism between the set of idempotent elements in a commutative semiring $ R $ and the set of clopen subsets of its prime spectrum $ \\\\operatorname{Spec}(R) $ equipped wi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk local constancy and positivity, clopen-idempotent correspondence, or finite-morphism affine properties provide components only; none states the finite affine positive-degree decomposition for a morphism with a section in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free morphism of affine schemes admitting a section has a finite clopen decomposition by positive fibre degree with idempotent affine pieces",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, Algebra.QuasiFiniteAt.isClopen_singleton, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, PrimeSpectrum.isClopen_iff, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, PrimeSpectrum.existsUnique_idempotent_basicOpen_eq_of_isClopen",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply individual rank, clopen-idempotent, compactness, or finite-morphism facts; none gives all the affine section, positive-degree, idempotent and finite-decomposition clauses in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteLocallyFree|finite_locally_free|IsFiniteLocallyFree).*(section|strat|rank)|rankAtStalk_pos_iff|isLocallyConstant_rankAtStalk",
+   "results": "[grep] OK 14 hit(s): Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply individual rank, clopen-idempotent, compactness, or finite-morphism facts; none gives all the affine section, positive-degree, idempotent and finite-decomposition clauses in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split finite flat finitely presented algebra has finitely many positive constant rank clopen affine spectrum pieces represented by idempotents",
+   "results": "[leansearch] OK 8 hit(s): PrimeSpectrum.mulZeroAddOneEquivClopens, IsArtinianRing.instFinitePrimeSpectrum, PrimeSpectrum.isClopen_iff, PrimeSpectrum.isClopen_iff_zeroLocus, Algebra.QuasiFinite.finite_primeSpectrum, PrimeSpectrum.exists_idempotent_basicOpen_eq_of_isClopen, IsIdempotentElem.spectrum_subset, PrimeSpectrum.isClopen_iff_mul_add",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply individual rank, clopen-idempotent, compactness, or finite-morphism facts; none gives all the affine section, positive-degree, idempotent and finite-decomposition clauses in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rankAtStalk\", \"IsClopen\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply individual rank, clopen-idempotent, compactness, or finite-morphism facts; none gives all the affine section, positive-degree, idempotent and finite-decomposition clauses in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a finite locally free affine scheme morphism excludes rank zero and compactness makes its locally constant rank partition finite",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.instIsAffineXSchemeFiniteSubcover, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits supply individual rank, clopen-idempotent, compactness, or finite-morphism facts; none gives all the affine section, positive-degree, idempotent and finite-decomposition clauses in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-invariant-rank-strata",
+  "date": "2026-10-22",
+  "group": "Q11"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 03BI exclusion of rank zero and Tag 03BJ first proof paragraph finite affine constant-rank reduction in the ancestor fourth-paragraph affine quotient route; old item steps 1, 2, 5 and 6.",
+   "via": [
+    "lem-a1-affine-groupoid-invariant-rank-strata",
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-affine-split-morphism-positive-rank-pieces",
+  "worker": "Q91",
+  "summary": "Statement unchanged. Five steps reuse the existing fibre-degree decomposition, spectrum clopen-idempotent correspondence, principal-localization open immersion, and affine quasi-compactness. The section retraction and finite-subcover argument are explicit elementary steps. No new nodes and no new Mathlib leaves. Item searched by tag and concept in project Lean and in Mathlib with two semantic phrasings.",
+  "blueprint": "Historical ancestor lem-a1-affine-hc0: the inherited fourth-paragraph affine quotient route, refined through the existing ancestry to the rank reduction of Stacks 03BI/03BJ. The latest main blueprint proof of that ancestor was read: it now uses locally constant finite-level support and contains no affine quotient paragraph. This delivery preserves the assigned item and its ancestry and proves the general algebraic tool from its stated Stacks sources; it changes neither the unit nor the chapter."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-06c1ad28d",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-06c1ad28d (reviewer sub-agent of L); spot-checked: I read the item in full, all 10 cited nodes and Stacks groupoids.tex 03BI/03BJ (l.4289-4330), and checked the 04MH tag. The delivery has no new nodes and leaves the statement, stmt_deps and blueprint unchanged; only the proof fields were added. proof_deps equals the union of the step uses. Live and side-live still have the item unsplit and there is no repair note, so this is not a re-split. Step 1: lem-weil-pbc-finite-locally-free-degree-locally-constant (Lean-closed) defines exactly d(y) and states that it is finite and locally constant, with clopen strata of degree r. Step 2 (elementary): the section with the fibre-product universal property gives K→Γ(X_y)→K equal to id, so d≥1 and Y_0=∅; this is correct. Step 3: the 00EE clopen-idempotent leaf applies to Y_r and to its clopen preimage. Step 4: the principal-localization open-immersion leaf plus the open-immersion definition make Y_r and X_r affine, including the empty b=0 case. Step 5: affine schemes are quasi-compact, so a finite subcover plus disjointness makes I finite, as in 03BJ's first paragraph. Route: all cited statements are Mathlib leaves or Lean-closed, so no tool_uses are needed; no SGA is cited. Duplicate search over 03BI/03BJ and section/rank nodes found only groupoid users or larger nodes. Edge cases checked: A=0, Spec k^n→Spec k, and mixed ranks 1 and 2 over Spec(k×k). Minor: the report mentions a citations.json that is not in the delivery; this has no effect on the node."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSplitMorphismPositiveRankPieces",
+  "declaration": "AlgebraicGeometry.affine_split_morphism_positive_rank_pieces",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSplitMorphismPositiveRankPieces.lean",
+  "statement": "theorem affine_split_morphism_positive_rank_pieces (A B : CommRingCat.{u}) (f : Spec B ⟶ Spec A) [f.IsFiniteLocallyFree] (a : Spec A ⟶ Spec B) (ha : a ≫ f = 𝟙 (Spec A)) : (∀ y : Spec A, 1 ≤ f.fiberDegree y) ∧ ∃ U : ℕ → (Spec A).Opens, (∀ (r : ℕ) (y : Spec A), y ∈ U r ↔ f.fiberDegree y = r) ∧ (∀ r : ℕ, IsClopen (U r : Set (Spec A))) ∧ Pairwise (fun r s : ℕ ↦ Disjoint (U r) (U s)) ∧ iSup U = ⊤ ∧ U 0 = ⊥ ∧ (∀ r : ℕ, IsAffineOpen (U r) ∧ IsAffineOpen (f ⁻¹ᵁ U r) ∧ (f ∣_ U r).IsFiniteLocallyFreeOfDegree r ∧ ∃ (b : A) (b' : B), b ^ 2 = b ∧ b' ^ 2 = b' ∧ U r = PrimeSpectrum.basicOpen b ∧ f ⁻¹ᵁ U r = PrimeSpectrum.basicOpen b') ∧ ∃ I : Set ℕ, I = {r : ℕ | 1 ≤ r ∧ (U r : Set (Spec A)).Nonempty} ∧ I.Finite ∧ Nonempty (IsColimit (Cofan.mk (Spec A) (fun r : I ↦ (U r.val).ι))) ∧ (IsEmpty (Spec A) → I = ∅)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-635e29cdb",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Only the lean field added vs side-live (no new nodes, dep repairs or statement change). Clause-by-clause match: Spec A/Spec B over arbitrary CommRingCat.{u}; [f.IsFiniteLocallyFree] (recorded def-pc-finite-locally-free, FiberDegree l.899); section a ≫ f = 𝟙; d(y) = f.fiberDegree y = finrank κ(y) Γ(f.fiber y, ⊤) with canonical fiberAlgebra; 1 ≤ d; U pinned as exact level sets; clopen, pairwise disjoint, iSup = ⊤, U 0 = ⊥; IsAffineOpen for U r and f⁻¹ᵁ U r; (f ∣_ U r).IsFiniteLocallyFreeOfDegree r; idempotents b, b' with basicOpen equalities; I defined by equality and finite; coproduct as the IsColimit of the actual open-inclusion cofan; IsEmpty → I = ∅. Edge cases A=0, k^n over k, identity, mixed ranks, empty strata all fine; single universe and no extra hypotheses. Statement field matches the file verbatim; one sorry; source and blueprint docstrings plus the 5-step plan present; no new definitions, no pro-étale. Plain imports for the proof plan are advisory only. Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261026T070522-L-3605506",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

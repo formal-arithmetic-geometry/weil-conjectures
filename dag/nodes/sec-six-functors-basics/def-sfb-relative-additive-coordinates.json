@@ -1,0 +1,153 @@
+{
+ "id": "def-sfb-relative-additive-coordinates",
+ "kind": "definition",
+ "title": "Additive coordinates on a group scheme over a ring",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $A$ be a commutative ring, $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and $U$ an $S$-group scheme, meaning a group object [def-sc-group-scheme] in schemes over $S$ [def-pc-scheme]. For an $A$-algebra $R$, let $L_{A,R}=\\operatorname{Spec}R[x]$, using the polynomial ring [def-weil-polynomial-ring], with its structural map to $S$. For an $R$-algebra $B$ with compatible $A$-structure and $b\\in B$, write $p_b:\\operatorname{Spec}B\\to L_{A,R}$ for the $A$-morphism induced by coefficient extension and $x\\mapsto b$. An additive coordinate of $U_R$ is an $S$-morphism $q:L_{A,R}\\to U$ such that the square with the structural maps $L_{A,R}\\to\\operatorname{Spec}R$ and $U\\to S$ is Cartesian [def-pc-fibre-product], and for every such $B$ and every $b,c\\in B$ one has $q(p_{b+c})=q(p_b)q(p_c)$ in $U(B)$. Thus the induced isomorphism $\\mathbf A^1_R\\simeq U_R$ respects the additive group law. For the multiplicative group $\\mathbf G_{m,A}$ [def-sfb-split-torus-over-ring] and a $B$-point $t$, define its coordinate value as the image of the Laurent coordinate $T^1$ under the ring map corresponding to $t$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf",
+  "place": "Conrad, Reductive group schemes, Lemma 4.2.2, printed pp.117–119, affine-line parameter and final additive group-law calculation; formulation as a Cartesian square uses the universal property of base change."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An additive coordinate on a group scheme over a commutative ring is an isomorphism from the affine line preserving addition on all test algebras",
+   "results": "{\"t\": \"2026-10-24T08:00:47Z\", \"tool\": \"leanfinder\", \"query\": \"An additive coordinate on a group scheme over a commutative ring is an isomorphism from the affine line preserving addition on all test algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.homOfVector_appTop_coord\", \"AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.map_appTop_coord\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"AlgebraicGeometry.AffineSpace.homOfVector\"], \"digest\": \"6df638fddabb63fc\"}",
+   "date": "2026-10-24",
+   "verdict": "No additive-coordinate predicate over arbitrary rings. AffineSpace gives the underlying line and its points, not a Cartesian additive parametrization of a given group scheme. Reuse algSpec, Polynomial.aevalTower, IsPullback and the group-object Hom multiplication."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAdditiveCoordinate|relativeAdditive|additiveCoordinate",
+   "results": "{\"t\": \"2026-10-24T08:01:42Z\", \"tool\": \"grep\", \"query\": \"IsAdditiveCoordinate|relativeAdditive|additiveCoordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No additive-coordinate predicate over arbitrary rings. AffineSpace gives the underlying line and its points, not a Cartesian additive parametrization of a given group scheme. Reuse algSpec, Polynomial.aevalTower, IsPullback and the group-object Hom multiplication."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive coordinate on a group scheme over a ring is a cartesian affine line parametrization preserving addition",
+   "results": "{\"t\": \"2026-10-24T08:01:43Z\", \"tool\": \"leansearch\", \"query\": \"An additive coordinate on a group scheme over a ring is a cartesian affine line parametrization preserving addition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.coord\", \"WeierstrassCurve.Affine.map_addX\", \"WeierstrassCurve.Affine.map_addY\", \"WeierstrassCurve.Affine.CoordinateRing.C_addPolynomial\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine\", \"AddCircle.coe_add\", \"AffineBasis.coord_smul\", \"AddConstMap\"], \"digest\": \"3df97def10e96e38\"}",
+   "date": "2026-10-24",
+   "verdict": "No additive-coordinate predicate over arbitrary rings. AffineSpace gives the underlying line and its points, not a Cartesian additive parametrization of a given group scheme. Reuse algSpec, Polynomial.aevalTower, IsPullback and the group-object Hom multiplication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPullback\", \"Polynomial\"",
+   "results": "{\"t\": \"2026-10-24T08:01:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPullback\\\", \\\"Polynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No additive-coordinate predicate over arbitrary rings. AffineSpace gives the underlying line and its points, not a Cartesian additive parametrization of a given group scheme. Reuse algSpec, Polynomial.aevalTower, IsPullback and the group-object Hom multiplication."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n additive coordinate|additive-coordinate|IsAdditiveCoordinate|relativeAdditive|RelativeAdditive dag/nodes lean/Sheaf lean/WeilConjectures Mathlib; blueprint_refs.py search additive coordinate",
+   "results": "Only unrelated cochain coordinates and prose uses; blueprint search: 0 blueprint nodes. StandardGroupSchemes.additive and additiveGroup require Field k. RingGroupSchemes.multiplicative already supplies G_m over a ring and is reused. No arbitrary-ring additive-coordinate definition.",
+   "date": "2026-10-24",
+   "verdict": "New definition predicate required; no second group structure or theorem is introduced."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-contracted-smooth-curve-linearization",
+  "date": "2026-10-24",
+  "group": "Q68"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 4.1, proof, printed p.7: Bruhat cells and approximation by integral root-group coordinates. Agent strengthening of that approximation input to all split reductive points over a local quotient; proof plan retained in report.md, with no proof stored in this unsplit node. Supporting relative structural input: a finite open atlas by affine-space times split-torus charts, before quotient-coordinate lifting. Relative structural prerequisite: constant roots, trivial root lines and normalizer representatives over the local base, before forming the open cell. Specific prerequisite: Conrad, Reductive group schemes, Theorem 4.1.4, printed p.110, and its proof, pp.116-118; Remark 4.2.4. Closed canonical exponential of the root line, uniqueness and arbitrary base change.  Supporting prerequisite: Conrad, Reductive group schemes, Lemma 4.2.2 and its proof, printed pp.117-119, with the preceding etale-local choice of a section away from the identity, printed p.117; extracted for a general contracted smooth curve with the same hypotheses used in that proof. Additive-coordinate formulation of the affine-line parametrizations in the geometric-fibre hypothesis and the conclusion.",
+   "via": [
+    "lem-sfb-contracted-smooth-curve-linearization",
+    "lem-sfb-relative-canonical-root-exponential",
+    "lem-sfb-local-split-root-data-weyl-lifts",
+    "lem-sfb-split-reductive-local-gauss-atlas",
+    "lem-sfb-split-reductive-local-quotient-points",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RelativeAdditiveCoordinates",
+  "declaration": "AlgebraicGeometry.RelativeAdditiveCoordinates.IsAdditiveCoordinate",
+  "declarations": [
+   "AlgebraicGeometry.RelativeAdditiveCoordinates.line",
+   "AlgebraicGeometry.RelativeAdditiveCoordinates.point",
+   "AlgebraicGeometry.RelativeAdditiveCoordinates.unitValue",
+   "AlgebraicGeometry.RelativeAdditiveCoordinates.IsAdditiveCoordinate"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RelativeAdditiveCoordinates.lean",
+  "statement": "def IsAdditiveCoordinate (A : Type u) [CommRing A] (U : Over (Spec (.of A))) [GrpObj U] (R : Type u) [CommRing R] [Algebra A R] (q : line A R ⟶ U) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-094a3199e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-094a3199e",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Clause-by-clause check of contracted_smooth_curve_etale_linearization against the node: GrpObj over Spec A, affine+Smooth+lfp (=fp), the ModObj Gm action with haut, hgeom over alg-closed Ω:Type u via IsAdditiveCoordinate (Cartesian + additive), hcontract (q(0)=1, restriction to G_m,B = orbit), hrank via upstream lieAlgebraSheaf (=dual e^*Ω, equivalent for smooth affine U), hweight with the full character t^n via DualNumber.scale, n>0; conclusion: étale affine jointly surjective family (I may be empty), additive coordinates, t^n-equivariance after every R_i-algebra; quantifier order matches. New node def-sfb-relative-additive-coordinates: absent from Mathlib/project/DAG (StandardGroupSchemes is field-only), real data, §5 fields OK, no name clash. Item changed only in lean + stmt_deps (new node + landed def-amb-finite-locally-free-module); 7 dep node files byte-identical to base; lean.statement verbatim. Docstrings/source/blueprint/9 proof steps, sorry only. Edge cases: zero ring, n=1, n=p, universes; sanity model G_a with t^n x satisfies all hypotheses. Notes only: same-worker second reading; split torus cited transitively; lfp redundant with Smooth."
+ }
+}

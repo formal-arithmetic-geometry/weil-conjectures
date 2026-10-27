@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-tensor-tower-limit-acyclic",
+ "kind": "statement",
+ "title": "Koszul tensor towers of K-injective coefficients are inverse-limit acyclic",
+ "statement": "Let C be a small category with Grothendieck topology J, O a sheaf of commutative rings, r a natural number (including zero), and b a Fin r-indexed family of global sections. Use the actual strict positive Koszul diagram P, its augmentation, dual tensor-tower functor T and ordinary-limit unit of [def-weil-pbc-ringed-koszul-system]. Assume derived categories of module sheaves and of strict natural-number inverse towers, and let D be any RingedKoszulLimitPresentation. For every K-injective coefficient complex I, the specified comparison D.comparison at T(I) from the ordinary-limit complex to D.inverseLimit(Q(T(I))) is an isomorphism. No termwise injectivity of I is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "sites-cohomology.tex Tag 0A0A, lemma-colim-and-lim-of-duals; Tag 0941, lemma-derived-limit-is-ok; more-algebra.tex Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul; derived.tex Tag 0949, lemma-colim-hocolim"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite Koszul dual term computation from lem-weil-pbc-ringed-cech-koszul-dual-kflat. The same two-row total-term induction gives P_m^n=0 for n>r, and the existing nonnegative support gives P_m^n=0 for n<0. Thus its dual is supported in [-r,0]. Dualizing the existing finite-free basis of P_m^(-n), then identifying the finite coproduct and product of unit modules and reindexing by Fin(card S), gives the explicit splitting of each dual term required by lem-weil-pbc-split-perfect-tensor-kinjective. Apply that theorem, and use the componentwise identity chain isomorphism between the transposed strict tower level and the tensor total complex. Hence every tower level is K-injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+    "lem-weil-pbc-split-perfect-tensor-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The remaining ordinary-complex calculation is exactly lem-weil-pbc-ringed-koszul-roos-inclusion: the specified zero-second-coordinate comparison from the ordinary limit to the explicit Roos fibre is a quasi-isomorphism. This step does not mention D or a derived-limit presentation.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-roos-inclusion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve the strict tower X by a K-injective tower K with injective terms, using lem-pur-kinjective-degreewise-existence and the tower Grothendieck argument in lem-weil-pbc-ringed-strict-tower-homotopy-limit. Evaluation preserves K-injectivity. Products of the levels of both X and K represent derived products by lem-pc-ringed-space-product-kinjective. Naturality of the product comparison conjugates Q(product q) to the product of the levelwise Q(q_n), so it is invertible. The cone triangle and the shift functor imply that the explicit Roos fibre map on q is a quasi-isomorphism, without exactness of arbitrary products. The existing proof of comparison_quasiIso for K only needs its injective terms: its transitions split, and the kernel-to-mapping-fibre comparison of the resulting short exact sequence is a quasi-isomorphism. Naturality of the ordinary-to-Roos comparison now makes Q(lim q) invertible. Finally naturality of D.comparison gives Q(lim q) followed by D.comparison_K equal to D.comparison_X followed by D.inverseLimit(Q q). The first three maps are invertible by the preceding argument, D.comparison_isIso and quasi-isomorphism invariance. Cancel D.inverseLimit(Q q) to conclude.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-cech-koszul-dual-kflat",
+  "lem-weil-pbc-split-perfect-tensor-kinjective",
+  "lem-weil-pbc-ringed-koszul-roos-inclusion",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-tower-evaluation-kinjective"
+ ],
+ "proof_origin": {
+  "by": "Y2 stage 3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A0A and 0941, lemma-colim-and-lim-of-duals and lemma-derived-limit-is-ok",
+  "note": "The finite split-perfect level computation and resolution/comparison argument are proved in Lean. Only the strictly ordinary-complex Koszul-to-Roos inclusion remains a named step. No exactness of arbitrary countable products is assumed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The comparison from ordinary inverse limit to derived inverse limit is an isomorphism for Hom of a direct system of perfect complexes into a K-injective complex",
+   "results": "8 hits: injective-resolution comparison isomorphisms, localization quasi-isomorphism criterion and inverse-system equivalences. No exact unbounded strict-tower comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite perfect Koszul Hom evaluation identifies internal Hom from the colimit with the inverse limit of dual tensor complexes",
+   "results": "8 hits: light condensed internal Hom and ModuleCat evaluation, finite dimensional dual evaluation. No Koszul chain-complex or strict inverse-limit comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\"",
+   "results": "12 hits: universal-property definitions and general uniqueness/invertibility criteria; no acyclicity result for this tower.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Cc]olimit|[Ll]imit.*homComplex|comparison.*isIso",
+   "results": "25 hits: generic preservation comparisons and HomComplex kernels; no finite Koszul evaluation or limit-acyclicity statement.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulHomLimitComparison",
+  "date": "2026-10-25",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulTensorTowerLimitAcyclic",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulTensorTowerLimitAcyclic.lean",
+  "declaration": "CategoryTheory.ringedKoszulTensorTower_limit_comparison_isIso",
+  "statement": "theorem ringedKoszulTensorTower_limit_comparison_isIso\n    (D : RingedKoszulLimitPresentation O r b) (I : ringedSiteComplex O)\n    [I.IsKInjective] :\n    IsIso (D.comparison.app (ringedKoszulTensorTowerComplex O r b I))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T142801-L-764548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261025T181341-L-4160376",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

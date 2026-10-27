@@ -93,12 +93,53 @@
    ]
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
+    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
+     "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+     "lines": [
+      166,
+      190
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app",
+     "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+     "lines": [
+      141,
+      163
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-def-exchange",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\square$ be a commutative square of schemes and $\\mathcal A$ a coefficient\ncategory as in [def-weil-pbc-derived-exchange]. For every bounded below\ncomplex $K$ of $\\mathcal A$-valued sheaves on $X_{\\Et}$, the composite\n\n$$\n g^{-1}f_*K\\xrightarrow{g^{-1}(\\eta_K)}g^{-1}Rf_*K\n \\xrightarrow{\\Ex_{\\square,K}}Rf'_*g'^{-1}K\n$$\n\nof the derived exchange morphism [def-weil-pbc-derived-exchange] with\n$g^{-1}$ of the canonical map $\\eta_K:f_*K\\to Rf_*K$ equals the termwise\nunderived exchange morphism [def-weil-pbc-underived-exchange]\n$\\Ex^0_{\\square,K}:g^{-1}f_*K\\to f'_*g'^{-1}K$ followed by the canonical map\n$f'_*g'^{-1}K\\to Rf'_*g'^{-1}K$. Conversely, every natural transformation\n$g^{-1}Rf_*\\to Rf'_*g'^{-1}$ on $\\Dplus(X_{\\Et},\\mathcal A)$ satisfying this\nidentity for every bounded below complex $K$ equals $\\Ex_{\\square}$. In\nparticular, if $K$ is a bounded below complex of injectives\n[def-weil-pbc-kinjective-resolutions], $\\Ex_{\\square,K}$ is computed by the\ntermwise underived exchange morphism, independently of any choices.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\square$ be a commutative square of schemes and $\\mathcal A$ a coefficient\ncategory as in [def-weil-pbc-derived-exchange]. For every bounded below\ncomplex $K$ of $\\mathcal A$-valued sheaves on $X_{\\Et}$, the composite\n\n$$\n g^{-1}f_*K\\xrightarrow{g^{-1}(\\eta_K)}g^{-1}Rf_*K\n \\xrightarrow{\\Ex_{\\square,K}}Rf'_*g'^{-1}K\n$$\n\nof the derived exchange morphism [def-weil-pbc-derived-exchange] with\n$g^{-1}$ of the canonical map $\\eta_K:f_*K\\to Rf_*K$ equals the termwise\nunderived exchange morphism [def-weil-pbc-underived-exchange]\n$\\Ex^0_{\\square,K}:g^{-1}f_*K\\to f'_*g'^{-1}K$ followed by the canonical map\n$f'_*g'^{-1}K\\to Rf'_*g'^{-1}K$. Conversely, every natural transformation\n$g^{-1}Rf_*\\to Rf'_*g'^{-1}$ on $\\Dplus(X_{\\Et},\\mathcal A)$ satisfying this\nidentity for every bounded below complex $K$ equals $\\Ex_{\\square}$. In\nparticular, if $K$ is a bounded below complex of injectives\n[def-sp-kinjective-bridge], $\\Ex_{\\square,K}$ is computed by the\ntermwise underived exchange morphism, independently of any choices.",
   "proof": [
    {
     "text": "Write $Q$ for the passage from bounded below complexes (up to homotopy) to\n$\\Dplus$, and $c_M:f'_*M\\to Rf'_*M$ for the canonical map. The termwise\nunderived exchange morphisms $\\Ex^0_{\\square,K}$, followed by\n$c_{g'^{-1}K}$, form a natural transformation\n$\\beta:g^{-1}f_*\\to Rf'_*g'^{-1}Q$ of functors on bounded below complexes up to\nhomotopy: $\\Ex^0_\\square$ is natural [lemma-weil-pbc-underived-exchange-naturality],\nso applied degreewise it commutes with chain maps and carries chain homotopies\nto chain homotopies.",
@@ -108,9 +149,9 @@
     "elementary": false
    },
    {
-    "text": "Because $g^{-1}$ is exact, the pair $(g^{-1}Rf_*,\\,g^{-1}\\eta)$ is a right\nderived functor of $g^{-1}f_*$: for every functor $G$ on $\\Dplus(X_{\\Et},\\mathcal A)$\nand every natural transformation $\\beta:g^{-1}f_*\\to GQ$ there is a unique\nnatural transformation $\\alpha:g^{-1}Rf_*\\to G$ with\n$\\alpha_K\\circ g^{-1}(\\eta_K)=\\beta_K$ for all $K$. (Uniqueness: every object of\n$\\Dplus$ is isomorphic to a bounded below complex of injectives $I$\n[def-weil-pbc-kinjective-resolutions], and for such $I$ the map $\\eta_I$ is an\nisomorphism, so $\\alpha_I=\\beta_I\\circ(g^{-1}\\eta_I)^{-1}$ is forced.\nExistence: define $\\alpha$ by this formula on a chosen injective resolution of\neach object; naturality of $\\beta$ and the homotopy uniqueness of maps into\ncomplexes of injectives make it well defined and natural, and naturality of\n$\\beta$ along $K\\to I$ gives $\\alpha_K\\circ g^{-1}(\\eta_K)=\\beta_K$ for every $K$.)",
+    "text": "Because $g^{-1}$ is exact, the pair $(g^{-1}Rf_*,\\,g^{-1}\\eta)$ is a right\nderived functor of $g^{-1}f_*$: for every functor $G$ on $\\Dplus(X_{\\Et},\\mathcal A)$\nand every natural transformation $\\beta:g^{-1}f_*\\to GQ$ there is a unique\nnatural transformation $\\alpha:g^{-1}Rf_*\\to G$ with\n$\\alpha_K\\circ g^{-1}(\\eta_K)=\\beta_K$ for all $K$. (Uniqueness: every object of\n$\\Dplus$ is isomorphic to a bounded below complex of injectives $I$\n[def-sp-kinjective-bridge], and for such $I$ the map $\\eta_I$ is an\nisomorphism, so $\\alpha_I=\\beta_I\\circ(g^{-1}\\eta_I)^{-1}$ is forced.\nExistence: define $\\alpha$ by this formula on a chosen injective resolution of\neach object; naturality of $\\beta$ and the homotopy uniqueness of maps into\ncomplexes of injectives make it well defined and natural, and naturality of\n$\\beta$ along $K\\to I$ gives $\\alpha_K\\circ g^{-1}(\\eta_K)=\\beta_K$ for every $K$.)",
     "uses": [
-     "def-weil-pbc-kinjective-resolutions"
+     "def-sp-kinjective-bridge"
     ],
     "elementary": false
    },
@@ -122,6 +163,6 @@
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

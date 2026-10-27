@@ -1,0 +1,372 @@
+{
+ "id": "lem-sfb-ringed-site-global-rhom-derived-limits",
+ "kind": "statement",
+ "title": "Global derived Hom preserves derived inverse limits on ringed sites",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $(\\mathcal C,\\mathcal O)$ be a small ringed site, with $\\mathcal O$ a sheaf of commutative rings and module category and unbounded derived category as in [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $A$ be a commutative ring with a specified homomorphism $A\\to\\Gamma(\\mathcal C,\\mathcal O)$. For $E,N\\in D(\\mathcal O)$ set\n$$R\\operatorname{Hom}_{\\mathcal C}(E,N)=R\\Gamma(\\mathcal C,R\\mathcal Hom_{\\mathcal O}(E,N))\\in D(A),$$\nwhere internal derived Hom is [def-pur-derived-internal-hom] and $R\\Gamma$ is the unbounded right derived functor of global sections [def-pur-ringed-site-zeroth-hypercohomology] with restriction of scalars to $A$. Fix $E$ and let $(N_n)_{n\\ge1}$ be a strict tower of complexes of $\\mathcal O$-module sheaves. Use a resolution in the category of towers to choose the derived inverse limits; their underlying objects have the Roos triangle of [def-weil-derived-limit]. Then the canonical comparison is a natural isomorphism in $D(A)$,\n$$R\\operatorname{Hom}_{\\mathcal C}(E,R\\varprojlim_nN_n)\\xrightarrow{\\sim}R\\varprojlim_nR\\operatorname{Hom}_{\\mathcal C}(E,N_n).$$\nThe comparison is induced by the projections of the strict tower, is compatible with its resolution-derived limiting cone, and is natural for maps of strict towers. No quasi-coherence of $N_n$ or of their derived limit is required. For every $N\\in D(\\mathcal O)$ there are natural identifications $H^qR\\operatorname{Hom}_{\\mathcal C}(E,N)=\\operatorname{Hom}_{D(\\mathcal O)}(E,N[q])$ for all $q\\in\\mathbf Z$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B6E, section-global-RHom, for the global Hom construction; spaces-perfect.tex Tag 0D3F, proof paragraph beginning The exact functor, for preservation of products and derived limits. This is the ambient ringed-site version of that formal right-adjoint argument."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-limit",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-sheaf-modules-hom-module",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat complex $L$ representing $E$ by the K-flat resolution theorem. The ringed-site tensor–Hom adjunction makes the recorded internal Hom $R\\mathcal Hom_{\\mathcal O}(E,-)$ right adjoint to $-\\otimes^{\\mathbf L}E$ for the native monoidal structure. That structure is symmetric and its one-K-flat comparison represents $E\\otimes^{\\mathbf L}N$ by $\\operatorname{Tot}(L\\otimes N)$ [lem-sf-ringed-derived-native-tensor]; composing with the braiding, $R\\mathcal Hom_{\\mathcal O}(E,-)$ is the right adjoint of $E\\otimes^{\\mathbf L}-$ required by the sections-model lemma. For every K-injective complex $J$, that lemma represents $R\\operatorname{Hom}_{\\mathcal C}(E,QJ)$ by $C(J)=\\Gamma(\\mathcal C,\\mathcal Hom^\\bullet(L,J))$, naturally in $J$. Its degree-$r$ term is $\\prod_p\\operatorname{Hom}_{\\mathcal O}(L^p,J^{p+r})$. Give this complex its $A$-action by postmultiplication through $A\\to\\Gamma(\\mathcal C,\\mathcal O)$; all differentials and comparison maps are $A$-linear. The Hom-from-K-flat lemma makes $\\mathcal Hom^\\bullet(L,J)$ K-injective, so the definition of derived global sections computes it by ordinary global sections, with exactly this $A$-action. This proves the comparison in $D(A)$, not just after forgetting scalars. No boundedness of $L$ is needed.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "def-pur-hom-complex",
+    "lem-pc-kflat-resolution",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B6E (section-global-RHom), 08JA (lemma-section-RHom-over-U), and 08J9 (lemma-internal-hom). Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective); Tag 06YS (lemma-K-flat-resolution)."
+   }
+  },
+  {
+   "text": "Resolve the strict tower $N_\\bullet$ by a K-injective tower $I_\\bullet$ with injective terms. The injective-tower lemma says that each $I_n$ is K-injective, every $I_{n+1}^p\\to I_n^p$ is split epic, and $\\lim I_n$ represents the resolution-derived limit with its actual projection maps. Moreover $\\lim I_n$ is K-injective: ordinary inverse limit is right adjoint to the constant-tower functor, which is exact because tower exactness is levelwise. Apply the lemma that a right adjoint to an exact additive functor preserves K-injectives. Step 1 therefore represents the left side by $C(\\lim I_n)$ and the right-hand tower by the strict tower $C(I_n)$.",
+   "uses": [
+    "lem-pur-injective-tower-roos-shifts",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), resolution and evaluation paragraphs; Derived Categories Tag 08BJ (lemma-adjoint-preserve-K-injectives)."
+   }
+  },
+  {
+   "text": "Put $P=\\prod_n C(I_n)$, termwise in $A$-modules, and $h=1-s$, where $\\operatorname{pr}_n s=C(t_n)\\operatorname{pr}_{n+1}$. From the explicit terms and differential of the Hom complex there are chain isomorphisms\n$$C(\\lim_n I_n)\\cong\\lim_n C(I_n)=\\ker(h:P\\to P),\\qquad C(\\prod_n I_n)\\cong\\prod_n C(I_n).$$\nIndeed a map $L^p\\to\\lim_n I_n^{p+r}$ is precisely a compatible family of maps to the $I_n^{p+r}$; interchanging the two products over $p,n$ identifies the terms. Postcomposition with $d_I$ and precomposition with $d_L$ give the same differential on each projection. For each degree $r$, the transition of $C(I_n)^r$ is surjective: choose sections of the split epimorphisms $I_{n+1}^{p+r}\\to I_n^{p+r}$ and postcompose every component. Consequently $h^r$ is surjective: given $(b_n)$, choose $x_1=0$ and recursively choose $x_{n+1}$ lifting $x_n-b_n$. Thus $0\\to C(\\lim I_n)\\to P\\xrightarrow{h}P\\to0$ is degreewise exact. This uses splitness only for the resolved tower, not for $N_\\bullet$.",
+   "uses": [
+    "def-pur-hom-complex",
+    "lem-pur-injective-tower-roos-shifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), split-transition and short-exact-sequence paragraphs; Tag 0B6E (section-global-RHom)."
+   }
+  },
+  {
+   "text": "Apply the degreewise-epimorphism kernel–cone lemma to $h$. It gives a quasi-isomorphism\n$$k:C(\\lim I_n)\\longrightarrow\\operatorname{Cone}(1-s:P\\to P)[-1],\\qquad z\\longmapsto(0,(C(\\operatorname{pr}_n)z)_n).$$\nUse the strict Roos comparison for the category of $A$-modules (the module-sheaf category on the one-object identity site). Its hypothesis on exact countable products holds: a product of surjections is surjective by choosing one preimage in every coordinate, and kernels are coordinatewise. Its normalized isomorphism $\\rho$ identifies this cone with the resolution-derived $R\\lim_n C(I_n)$. Hence $\\rho\\circ Q(k)$ is the desired isomorphism in $D(A)$ after Step 1's identifications. The same strict Roos lemma identifies $(0,(C(\\operatorname{pr}_n)z)_n)$ with the map induced by the strict augmentation. It therefore proves compatibility with the resolution-derived limiting cone, rather than merely giving an unspecified isomorphism between vertices of triangles.",
+   "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), final paragraph; strict Roos normalization on the point site."
+   }
+  },
+  {
+   "text": "For a map of resolved towers $u:I_\\bullet\\to I'_\\bullet$, the two maps from $C(\\lim I_n)$ to the target product in Step 4 agree on the $n$th projection: both are postcomposition with $u_n\\operatorname{pr}_n=\\operatorname{pr}'_n\\lim(u)$. Their other cone coordinate is zero. Thus $k$ is natural, and $\\rho$ is natural by the strict Roos comparison. These maps pass to derived objects: maps into K-injective complexes are computed in the homotopy category, and quasi-isomorphisms between K-injectives are homotopy equivalences. Applying $C$ carries such homotopies to homotopies by postcomposition, using its displayed differential. The sections-model identification is natural on those representatives; changing the tower resolution gives the same morphism after localization. All products and maps used are in the ambient module-sheaf category and $D(A)$; no step assumes that the limit has quasi-coherent cohomology.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B6E (section-global-RHom) and 0941 (lemma-derived-limit-is-ok); naturality of the explicit resolution comparison."
+   }
+  },
+  {
+   "text": "For any $N\\in D(\\mathcal O)$ choose a K-injective representative $J$. The sections-model lemma gives, for every integer $q$, $H^q C(J)\\cong\\operatorname{Hom}_{D(\\mathcal O)}(E,N[q])$, naturally in $N$. Combined with Step 1 this is the asserted identification of $H^q R\\operatorname{Hom}_{\\mathcal C}(E,N)$. The $A$-action is postmultiplication on the target in both descriptions, so the identification respects scalars. This also applies to $q<0$ and to unbounded $E,N$.",
+   "uses": [
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B6E (section-global-RHom), cohomology identities, using Tag 08JA (lemma-section-RHom-over-U)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "def-pur-hom-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B6E and 0941; explicit global Hom / strict Roos argument expanding the products-and-derived-limits sentence of spaces-perfect.tex Tag 0D3F."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site global derived Hom from a fixed complex commutes with countable derived inverse limits and its zeroth cohomology is morphisms in the derived category",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          [inst_3 : HasDerivedCategory C] →\\n            {n : ℕ} →\\n              CategoryTheory.Abelian.Ext X Y n ≃\\n                Cat\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is equivalent to the hom-set in the derived category between the $ n $-shifted single-term cochain com\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X)\\n  [inst_3 : HasDerivedCategory C] {n : ℕ} (f : R.complex.X n ⟶ Y) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.Ca\", \"doc\": \"In an abelian category with derived category structure, for a projective resolution $ R $ of an object $ X $, if a morphism $ f: R_n \\\\to Y $ satisfies $ d_{n+1,n} \\\\circ f = 0 $, then the extended homo\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y) {n : ℕ}\\n  [inst_3 : HasDerivedCategory C]\\n  (x : CochainComplex.HomComplex.Cocycle ((CochainComplex.singleFunctor C 0\", \"doc\": \"For an object $X$ in an abelian category $\\\\mathcal{C}$ with derived category structure, the inverse of the cohomology class equivalence applied to a cocycle $x$ yields a morphism equal to the composit\"}\n  {\"name\": \"DerivedCategory.right_fac\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X' s,\\n    ∃ (x : CategoryTheory.IsIso (DerivedCategory.Q.map s)),\\n      ∃ g,\\n        \", \"doc\": \"In the derived category $ \\\\mathcal{D}(\\\\mathcal{C}) $ of an abelian category $ \\\\mathcal{C} $, every morphism $ f: Q(X) \\\\to Q(Y) $ can be expressed as a fraction $ g \\\\circ s^{-1} $, where $ s: X' \\\\to X \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extMk_hom\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.InjectiveResolution Y)\\n  [inst_3 : HasDerivedCategory C] {n : ℕ} (f : X ⟶ R.cocomplex.X n) (m : ℕ) (hm : n + 1 = m)\\n  (hf : CategoryTheory.C\", \"doc\": \"Given an injective resolution $ R $ of an object $ Y $ in an abelian category $ \\\\mathcal{C} $, a morphism $ f: X \\\\to R.\\\\text{cocomplex}.X(n) $ satisfying $ f \\\\circ d_{n,m} = 0 $ for all $ m $, and int\"}\n  {\"name\": \"DerivedCategory.left_fac\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y' g s,\\n    ∃ (x : CategoryTheory.IsIso (DerivedCategory.Q.map s)),\\n      f = Categor\", \"doc\": \"In the derived category $ \\\\mathcal{D}(\\\\mathcal{C}) $ of an abelian category $ \\\\mathcal{C} $, any morphism $ f : Q(X) \\\\to Q(Y) $ between the images of cochain complexes $ X $ and $ Y $ under the locali\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom preserves products and homotopy limits in its second variable for sheaves of modules",
+   "sub": "",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.createsLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {D : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          {R : CategoryTheory.Sheaf J RingCat} →\\n            (F : CategoryTheory.Functor D (SheafOfModules R\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$ and $R$ a sheaf of rings on $\\\\mathcal{C}$. The forgetful functor from the category of sheaves of modules over $R$ to the category of pr\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification\", \"type\": \"∀ {C : Type u'} [inst : CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.val)\\n  [inst_1 : CategoryTheory.Presheaf.IsLocallyInjective J α] [inst_2 : CategoryTheory.Presheaf.IsLo\", \"doc\": \"The composition of the sheafification functor for presheaves of modules over a presheaf of rings and the forgetful functor from sheaves of modules to sheaves of abelian groups preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.instAbelian\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] → CategoryTheory.Abelian (SheafOfM\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ is an abelian category. This follows from the pre\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"PresheafOfModules.isSheaf_of_isLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  {F : CategoryTheory.Functor D (PresheafOfModules R)}\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂\", \"doc\": \"If $\\\\mathcal{C}$ is a category equipped with a Grothendieck topology $J$, and $F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R)$ is a diagram of presheaves of modules such that each $F(j)$ is a sheaf wi\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.DerivedCategory, CategoryTheory.Limits.PreservesLimits",
+   "sub": "",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.DerivedCategory'\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "rhom.*(limit|product)|derivedHom.*(limit|product)|globalRHom",
+   "sub": "CategoryTheory",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"line\": \"125\", \"text\": \"/-- Notation for `tensorHom`, the tensor product of morphisms in a monoidal category -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"line\": \"137\", \"text\": \"    tensorHom ℬ (BinaryFan.associatorOfLimitCone ℬ W X Y).hom (𝟙 Z) ≫\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"line\": \"139\", \"text\": \"          tensorHom ℬ (𝟙 W) (BinaryFan.associatorOfLimitCone ℬ X Y Z).hom =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"line\": \"155\", \"text\": \"        tensorHom ℬ (𝟙 X) (BinaryFan.leftUnitor 𝒯.isLimit (ℬ 𝒯.cone.pt Y).isLimit).hom =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"line\": \"156\", \"text\": \"      tensorHom ℬ (BinaryFan.rightUnitor 𝒯.isLimit (ℬ X 𝒯.cone.pt).isLimit).hom (𝟙 Y) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"line\": \"161\", \"text\": \"    tensorHom ℬ (𝟙 𝒯.cone.pt) f ≫ (BinaryFan.leftUnitor 𝒯.isLimit (ℬ 𝒯.cone.pt X₂).isLimit).hom =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"line\": \"54\", \"text\": \"    tensorHom := fun f g ↦ Limits.coprod.map f g\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/OfHasFiniteProducts.lean\", \"line\": \"84\", \"text\": \"theorem tensorHom {W X Y Z : C} (f : W ⟶ X) (g : Y ⟶ Z) : f ⊗ₘ g = Limits.coprod.map f g :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"line\": \"357\", \"text\": \"  simp only [tensorHom_def, Category.assoc, externalProductBifunctor_obj_obj, tensor_obj,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"line\": \"55\", \"text\": \"                simp only [Category.id_comp, tensorHom_comp_tensorHom, limit.w] } })\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"line\": \"58\", \"text\": \"      simp only [limit.lift_π, Cone.postcompose_obj_π, Monoidal.tensorHom_app, limit.lift_map,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"line\": \"62\", \"text\": \"      simp only [tensorHom_id, limit.lift_map, Category.assoc, limit.lift_π,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"line\": \"80\", \"text\": \"      simp only [tensorHom_id, limit.lift_map, Category.assoc, limit.lift_π]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Basic.lean\", \"line\": \"88\", \"text\": \"      simp only [id_tensorHom, limit.lift_map, Category.assoc, limit.lift_π]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean\", \"line\": \"16\", \"text\": \"This file provides instances for when OrderHom.toFunctor preserves limits/colimits.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean\", \"line\": \"18\", \"text\": \"then `(toOrderHom f).toFunctor` preserves finite limits/colimits. If `f` preserves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean\", \"line\": \"49\", \"text\": \"points, then the fan constructed from `combPairHoms` is a limit cone. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean\", \"line\": \"85\", \"text\": \"points, then the cofan constructed from `combPairHoms` is a colimit cocone. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global derived Hom of sheaves of modules commutes with derived inverse limits",
+   "sub": "",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M N : X.Modules) : Type u\", \"doc\": \"Given a scheme $X$, this defines the type of homomorphisms between two sheaves of modules over the structure sheaf of $X$. Each homomorphism is a morphism of modules that satisfies the sheaf condition\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfSize.{v₂, v} (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits for diagrams indexed by categories\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"CategoryTheory.sheafHom'\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafHom\", \"type\": \"(F G : Sheaf J A) : Cᵒᵖ ⥤ Type _\", \"doc\": \"For sheaves $F$ and $G$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$ taking values in a category $\\\\mathcal{A}$, this defines a contravariant functor from $\\\\mathcal{C}$ to the category of\"}\n  {\"name\": \"SheafOfModules.Hom\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} → SheafOfModules R → SheafOfModules R → Type (max u₁ v)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this defines the type of homomorphisms between two sheaves of modules over $R$, wher\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoLim\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasLimitsOfShape Cᵒᵖ A] : Γ J A ≅ sheafToPresheaf J A ⋙ lim\", \"doc\": \"Given that the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has all limits of shape $J$, there exists a natural isomorphism between the global sections functor $\\\\Gamma_{J,A}$ and the composition of the\"}\n  {\"name\": \"CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasLimitsOfShape Cᵒᵖ A] : HasGlobalSectionsFunctor J A\", \"doc\": \"If the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has all limits of shape $J$, then the category $A$ admits a global sections functor, which serves as the left adjoint to the constant sheaf functor.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state this algebraic-space or unbounded derived-limit assertion; ordinary limits, flatness and direct-limit tensor formulas are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "global.*(RHom|derivedHom)|derivedHom.*(limit|product)",
+   "sub": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom of complexes of sheaves commutes with countable derived inverse limits",
+   "sub": "",
+   "results": "; 8 hits: HomologicalComplex.instHasLimit, DerivedCategory, HasDerivedCategory, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, HomologicalComplex.instHasLimitsOfShape, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, PreservesLimits",
+   "sub": "",
+   "results": "loogle: unknown identifier 'PreservesLimits'; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom from an unbounded complex on a ringed site commutes with derived inverse limits of strict towers",
+   "sub": "",
+   "results": "; 8 hits: DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, Ext, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.ProjectiveResolution.extMk_hom",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The complex of global morphisms into a K-injective complex computes global derived internal Hom",
+   "sub": "",
+   "results": "; 8 hits: CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective, CochainComplex.cm5b.I, CochainComplex.cm5b.instInjectiveXIntI, CochainComplex.IsKInjective, CategoryTheory.Sheaf.H, CochainComplex.cm5b.I_X, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CochainComplex.isKInjective_of_injective_aux",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CategoryTheory.Limits.PreservesLimits",
+   "sub": "",
+   "results": "; 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  },
+  {
+   "tool": "grep",
+   "query": "HomComplex|IsKInjective",
+   "sub": "Algebra/Homology/DerivedCategory",
+   "results": "; 19 hits: Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean, Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean, Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean, Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean, Mathlib/Algebra/Homology/DerivedCategory/SmallShiftedHom.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary complex limits, localized Hom cohomology, and K-injectivity do not give the ringed-site global derived-Hom comparison of strict derived limits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-pullback-limit",
+  "date": "2026-10-23",
+  "group": "O4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3F (lemma-pullback-and-limits); the first paragraph of its proof states precisely the universal derived-Hom formulation used here. Supporting input: Tag 0D3F proof, second paragraph: the exact global RHom functor commutes with products and derived limits; specify ambient D(O) since the limit need not be quasi-coherent.",
+   "via": [
+    "lem-sfb-proper-flat-space-pullback-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-ringed-site-global-rhom-derived-limits",
+  "worker": "stage1",
+  "summary": "Expanded the global-Hom product argument on an injective strict tower, constructed the canonical kernel-to-Roos comparison and checked its naturality and all cohomological degrees. Reused existing sections-model, injective-tower and strict-Roos nodes; no new nodes and no statement changes. All work is in the ambient unbounded module derived category; no exact products assumption is imposed on module sheaves.",
+  "blueprint": {
+   "ancestor": null,
+   "places": [
+    "Inherited supporting chain from det-thm-sf-ctf-stability-direct-images, proof (3), through spaces-perfect.tex Tag 0D3F: exact global RHom commutes with products and derived limits. The inherited ancestor is null in the live DAG; it is preserved."
+   ]
+  },
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Step 1 takes symmetry of the native derived tensor and its one-K-flat Tot comparison, to turn the right-tensoring adjunction into the left-tensoring right adjoint that the sections-model lemma requires; the constructibility unit has no ringed-site tensor symmetry node."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-pur-injective-tower-roos-shifts",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ringed-site Hom, K-injective tower, or normalized Roos tool for the ambient derived-limit argument; the inherited constructibility unit supplies no replacement for this homological algebra fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-72bfc29d1",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-72bfc29d1 (reviewer sub-agent of L); spot-checked: Read the item in full; it is a split with no new nodes, its statement and stmt_deps are unchanged against live, the item is still unsplit live, and there is no repair note. Checked against Stacks 0B6E (sites-cohomology 9235-9260), 0941 lemma-derived-limit-is-ok (5066-5110) and spaces-perfect 0D3F proof (6284-6315); no SGA. Steps 2-6 check: lim of a K-injective tower is K-injective (lim is right adjoint to the exact constant-tower functor), Hom of a limit is the limit of Homs, 1-s is degreewise surjective via the x_{n+1} recursion, the kernel-cone and strict-Roos cone conventions agree, the strict-Roos augmentation clause gives the canonical comparison, naturality and resolution independence hold via homotopies, and the H^q clause holds for all q. Small cases E=0, zero tower, identity tower, zero transitions, q<0 and A=0 all check. No duplicate: lem-pc-ringed-space-rgamma-derived-limit, lem-weil-ringed-tower-pushforward-limit-comparison and lem-pc-homotopy-limit-map state different things. FIX (C4): step 1 applied the sections-model lemma, which needs a right adjoint of E⊗^L−, but the tensor-Hom adjunction node gives only a right adjoint of −⊗E and explicitly asserts no symmetry. Added lem-sf-ringed-derived-native-tensor (symmetry plus the one-K-flat Tot comparison) to the step 1 text, uses and proof_deps, and to split_report.tool_uses. The other 11 tool uses are accepted as generic homological tools. Note: the inherited blueprint.from.node is null, which is a fault of the base chain, not of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteGlobalRHomDerivedLimits",
+  "declaration": "CategoryTheory.RingedSiteGlobalRHom.preserves_derived_limits",
+  "declarations": [
+   "CategoryTheory.RingedSiteGlobalRHom.Modules",
+   "CategoryTheory.RingedSiteGlobalRHom.Scalars",
+   "CategoryTheory.RingedSiteGlobalRHom.modulesLinear",
+   "CategoryTheory.RingedSiteGlobalRHom.sections",
+   "CategoryTheory.RingedSiteGlobalRHom.globalHom",
+   "CategoryTheory.RingedSiteGlobalRHom.representative",
+   "CategoryTheory.RingedSiteGlobalRHom.resolvedProperty",
+   "CategoryTheory.RingedSiteGlobalRHom.limitGlobalHom",
+   "CategoryTheory.RingedSiteGlobalRHom.representativeTowers",
+   "CategoryTheory.RingedSiteGlobalRHom.globalHomLimit",
+   "CategoryTheory.RingedSiteGlobalRHom.preserves_derived_limits"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteGlobalRHomDerivedLimits.lean",
+  "statement": "theorem preserves_derived_limits (E : DerivedCategory (Modules.{c, v, max c v r} R)) (L : CochainComplex (Modules.{c, v, max c v r} R) ℤ) (eL : DerivedCategory.Q.obj L ≅ E) : (∀ X : CochainComplex (ℕᵒᵖ ⥤ Modules.{c, v, max c v r} R) ℤ, ∃ (I : (resolvedProperty.{c, v, r} R).FullSubcategory) (q : X ⟶ I.obj), QuasiIso q) ∧ ∃ (β : ∀ (I : CochainComplex (Modules.{c, v, max c v r} R) ℤ) (_hI : I.IsKInjective), DerivedCategory.Q.obj ((representative.{c, v, r, a} R A φ L).obj I) ≅ (globalHom.{c, v, r, a, w, z} R A φ E).obj (DerivedCategory.Q.obj I)) (α : limitGlobalHom.{c, v, r, a, w, z} R A φ E ≅ globalHomLimit.{c, v, r, a} R A φ L), (∀ (I I' : CochainComplex (Modules.{c, v, max c v r} R) ℤ) (hI : I.IsKInjective) (hI' : I'.IsKInjective) (f : I ⟶ I'), DerivedCategory.Q.map ((representative.{c, v, r, a} R A φ L).map f) ≫ (β I' hI').hom = (β I hI).hom ≫ (globalHom.{c, v, r, a, w, z} R A φ E).map (DerivedCategory.Q.map f)) ∧ (∀ I : (resolvedProperty.{c, v, r} R).FullSubcategory, ∃ hLim : CochainComplex.IsKInjective (limit I.obj.asFunctor), α.hom.app I = (β (limit I.obj.asFunctor) hLim).inv ≫ DerivedCategory.Q.map (limit.post I.obj.asFunctor (representative.{c, v, r, a} R A φ L))) ∧ (∀ I : (resolvedProperty.{c, v, r} R).FullSubcategory, ∃ hp : HasProduct (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj (I.obj.asFunctor.obj (op n))), ∃ (p : DerivedCategory.Q.{w}.obj (limit I.obj.asFunctor) ⟶ ∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj (I.obj.asFunctor.obj (op n)))) (δ : (∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj (I.obj.asFunctor.obj (op n)))) ⟶ (DerivedCategory.Q.{w}.obj (limit I.obj.asFunctor))⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n : ℕ ↦ DerivedCategory.Q.{w}.map (I.obj.asFunctor.map (homOfLE (Nat.le_succ n)).op)) (DerivedCategory.Q.{w}.obj (limit I.obj.asFunctor)) p δ ∧ ∀ n : ℕ, p ≫ Pi.π _ n = DerivedCategory.Q.{w}.map (limit.π I.obj.asFunctor (op n))) ∧ (∀ (I : (resolvedProperty.{c, v, r} R).FullSubcategory) (n : ℕ), ∃ hIn : CochainComplex.IsKInjective (I.obj.asFunctor.obj (op n)), α.hom.app I ≫ DerivedCategory.Q.map (limit.π ((representativeTowers.{c, v, r, a} R A φ L).obj I) (op n)) ≫ (β (I.obj.asFunctor.obj (op n)) hIn).hom = (globalHom.{c, v, r, a, w, z} R A φ E).map (DerivedCategory.Q.map (limit.π I.obj.asFunctor (op n)))) ∧ (∀ I : (resolvedProperty.{c, v, r} R).FullSubcategory, ∃ hp : HasProduct (fun n : ℕ ↦ DerivedCategory.Q.obj (((representativeTowers.{c, v, r, a} R A φ L).obj I).obj (op n))), ∃ (p : (globalHomLimit.{c, v, r, a} R A φ L).obj I ⟶ ∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.obj (((representativeTowers.{c, v, r, a} R A φ L).obj I).obj (op n)))) (δ : (∏ᶜ (fun n : ℕ ↦ DerivedCategory.Q.obj (((representativeTowers.{c, v, r, a} R A φ L).obj I).obj (op n)))) ⟶ ((globalHomLimit.{c, v, r, a} R A φ L).obj I)⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun n : ℕ ↦ DerivedCategory.Q.map (((representativeTowers.{c, v, r, a} R A φ L).obj I).map (homOfLE (Nat.le_succ n)).op)) ((globalHomLimit.{c, v, r, a} R A φ L).obj I) p δ ∧ ∀ n : ℕ, p ≫ Pi.π _ n = DerivedCategory.Q.map (limit.π ((representativeTowers.{c, v, r, a} R A φ L).obj I) (op n))) ∧ ∃ e : ∀ (N : DerivedCategory (Modules.{c, v, max c v r} R)) (q : ℤ), ((DerivedCategory.homologyFunctor (ModuleCat.{max c v r} A) q).obj ((globalHom.{c, v, r, a, w, z} R A φ E).obj N)) ≃+ (E ⟶ N⟦q⟧), (∀ (N N' : DerivedCategory (Modules.{c, v, max c v r} R)) (f : N ⟶ N') (q : ℤ) (x : (DerivedCategory.homologyFunctor (ModuleCat.{max c v r} A) q).obj ((globalHom.{c, v, r, a, w, z} R A φ E).obj N)), e N' q ((DerivedCategory.homologyFunctor (ModuleCat.{max c v r} A) q).map ((globalHom.{c, v, r, a, w, z} R A φ E).map f) x) = e N q x ≫ f⟦q⟧') ∧ (∀ (N : DerivedCategory (Modules.{c, v, max c v r} R)) (q : ℤ) (b : A) (x : (DerivedCategory.homologyFunctor (ModuleCat.{max c v r} A) q).obj ((globalHom.{c, v, r, a, w, z} R A φ E).obj N)), e N q (b • x) = (φ b) • e N q x)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical comparison is stated as a natural isomorphism on K-injective resolutions of strict towers with injective tower terms; every strict tower is supplied such a resolution. Both limits are actual ordinary limiting complexes on this resolution model, with their actual projections and Roos triangles. The normalization is Q(limit.post) after the natural representative comparison β. Values and all maps lie in D(A), using the existing global-section Hom-module action restricted along the specified ring homomorphism. No quasi-coherence, boundedness or exact-products assumption on module sheaves is added. The two gained landed definition nodes expose the Hom-complex and global-section scalar structures used by this model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d66e78fd4",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read node, live node diff (only lean + stmt_deps; statement identical; added stmt_deps def-pur-hom-complex and def-pur-sheaf-modules-hom-module are definition nodes landed 2026-10-11 and used by the Lean, which the brief allows), the module, and dep sources (derivedInternalHomOfUniverses, ringedSiteZerothHypercohomologyOfUniverses, homComplexFunctor, IsDerivedLimitTriangle, ringedSiteModules, rightDerivedFunctor). globalHom is the recorded internal RHom then the right derived functor of Hom-from-unit restricted along phi, i.e. full unbounded RGamma in D(A). Resolved-tower model: every tower has a resolution (conjunct 1); alpha is a NatIso pinned by beta(lim I).inv then Q(limit.post); source and target Roos triangles carry the actual projections; projection compatibility holds, so RHom(E,-) sends the derived-limit cone to a derived-limit cone. beta is true for an arbitrary representative L (K-flat replacement, I K-injective); limit.post is an iso; target triangle holds because injective towers split. H^q clause covers all q in Z, natural in N, A-linear. No universe equality and no qcoh/bounded/K-flat/exact-products hypothesis. No hollow defs, only sorry, docstrings and 6 proof steps present, lines <=100, 24 imports exist, lean.statement verbatim. Edge cases E=0, zero tower, q<0, A=0, empty site check. Notes only: A-linear RGamma rebuilt locally because the recorded dep is H0 with abelian-group values and no general D(A)-valued RGamma exists; second-reading section is short. No compile run (no file changed)."
+ }
+}

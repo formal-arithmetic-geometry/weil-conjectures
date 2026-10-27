@@ -1,0 +1,255 @@
+{
+ "id": "lem-sf-native-weil-proper-natural-base-change",
+ "kind": "statement",
+ "title": "Natural proper base change for native derived Weil modules",
+ "statement": "Fix a finite field $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Use the native coefficient sheaves $B_{\\bar T}$, abelian Weil categories $\\mathcal W_T$, their ordinary derived categories $D(\\mathcal W_T)$, bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(T)$, and the actual equivariant operations of [def-sf-native-weil-derived-framework]. Let\n$$\\begin{array}{ccc}Z'&\\xrightarrow{v}&Z\\\\ p'\\downarrow&&\\downarrow p\\\\ T'&\\xrightarrow{u}&T\\end{array}$$\nbe a cartesian square [def-weil-pbc-cartesian-square] of $k_0$-schemes and $k_0$-morphisms, with $p$ proper [def-weil-proper-morphism] and $T,T'$ quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type [def-weil-finite-type-morphism] over $k_0$. There is no absolute separatedness hypothesis on $T$ or $T'$, and $u$ is arbitrary. For the actual ordinary right-derived pushforwards $Rp_*,Rp'_*$ and the termwise inverse images $u^*,v^*$, there exists a natural isomorphism of functors\n$$u^*Rp_*\\ \\cong\\ Rp'_*v^*:\\mathrm{WC}^{\\mathrm{der}}(Z)\\longrightarrow D(\\mathcal W_{T'}).$$\nEvery component, inverse and naturality equality is in the native equivariant derived category; no identification of $D(\\mathcal W_T)$ with fixed pairs in a geometric derived category is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "Forgetting the Weil structure; Constructibility and the isomorphism. Agent formulation for the specific locally finite coefficient sheaves and ordinary D(W) of def-sf-native-weil-derived-framework; the coefficient-realization comparison is an obligation of this unsplit node, not presumed from the blueprint."
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-proper-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Construct the ambient native natural transformation beta using the already available exact-derived adjunction and the localized native composition comparison, via mateEquiv. These are the explicit constructions in the forget-comparison module; no natural transformations or data are chosen from an existence theorem.",
+   "uses": [
+    "lem-sf-native-base-change-forget-comparison",
+    "def-weil-pbc-adjunction-mate",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Forgetting the Weil structure; canonical mate construction"
+   }
+  },
+  {
+   "text": "For a bounded constructible native Weil object K, exact forgetting preserves boundedness. Its homology comparison isomorphism carries the native constructibility of every cohomology object to constructibility of the forgotten complex.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "lem-sf-native-adic-pullback-exact-lisse",
+    "lem-sf-fixed-pair-derived-forget-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Forgetting the Weil structure; bounded constructible underlying input"
+   }
+  },
+  {
+   "text": "Apply geometric proper base change to this forgotten complex. The forget-mate equality conjugates that invertible component by sourceComparison and targetComparison, so the image under derived forgetting of beta_K is invertible. The proved fixed-pair forget theorem makes derived forgetting conservative; hence beta_K itself is invertible.",
+   "uses": [
+    "lem-sf-native-base-change-forget-comparison",
+    "lem-sf-geometric-native-proper-base-change",
+    "lem-sf-fixed-pair-derived-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism; conservative forgetting"
+   }
+  },
+  {
+   "text": "Whisker the ambient natural transformation beta with the full bounded constructible inclusion. The preceding component proof gives IsIso at every object. NatIso.isIso_of_isIso_app and asIso provide the functor isomorphism, with natural inverse. This is a natural construction on the full source subcategory, not a choice of unrelated objectwise isomorphisms.",
+   "uses": [
+    "lem-sf-native-base-change-forget-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+    "place": "Constructibility and the isomorphism; natural inverse"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-base-change-forget-comparison",
+  "def-weil-pbc-adjunction-mate",
+  "def-sf-native-weil-derived-framework",
+  "lem-sf-native-adic-pullback-exact-lisse",
+  "lem-sf-fixed-pair-derived-forget-comparison",
+  "lem-sf-geometric-native-proper-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/thm-weil-pbc-qbar.proof.md",
+  "place": "The existing eight-step argument reduced to canonical mate compatibility and the geometric chart theorem, then exact forgetting, conservativity and componentwise natural inversion. Formalized by M1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural base change for proper right derived direct image in the ordinary derived category of native pro etale Frobenius equivariant adic module sheaves",
+   "results": "Logged 2026-10-26T11:17:09Z: 8 hits. AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardNatIso, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforwardNatTrans, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforwardPushforwardAdj, Condensed.profiniteSolid, SheafOfModules.pushforward. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"IsIso\"",
+   "results": "Logged 2026-10-26T11:17:09Z: 6 hits. CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.instIsIsoFunctorRanBaseChangeOfGuitartExact, CategoryTheory.TwoSquare.isIso_lanBaseChange_app, CategoryTheory.TwoSquare.isIso_ranBaseChange_app, CategoryTheory.TwoSquare.isIso_lanBaseChange_app_iff, CategoryTheory.TwoSquare.isIso_ranBaseChange_app_iff. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "properBaseChange|proper_base_change|WeilComplex|ProEtaleWeilSheaf",
+   "results": "Logged 2026-10-26T11:17:09Z: 0 hits. . ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward on bounded constructible derived Frobenius equivariant module sheaves commutes naturally with inverse image",
+   "results": "Logged 2026-10-26T11:17:10Z: 8 hits. SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforward, PresheafOfModules.pushforward₀, SheafOfModules.pushforwardSections, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforward_map_val, SheafOfModules.pushforwardNatTrans_app_val_app. ",
+   "date": "2026-10-26",
+   "verdict": "no match: hits concern underived module pullback/pushforward or Kan extensions, not this native equivariant derived base-change assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for ordinary right derived direct image of Frobenius equivariant locally finite continuous algebraic l adic module sheaves is a natural isomorphism",
+   "date": "2026-10-26",
+   "results": "NC search 2026-10-26T12:18:54Z: 8 hits; SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardCongr, SheafOfModules.pullbackIso, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. ",
+   "verdict": "no match: hits are ordinary sheaf comparisons, generic Kan-extension base change, or stability of proper morphisms, not natural native equivariant derived proper base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural proper base change for bounded constructible complexes of pro etale Weil sheaves",
+   "date": "2026-10-26",
+   "results": "NC search 2026-10-26T12:19:32Z: 0 hits; . service unavailable: ",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper.*baseChange|baseChange.*IsProper",
+   "date": "2026-10-26",
+   "results": "NC search 2026-10-26T12:22:21Z: 1 hits; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean. ",
+   "verdict": "no match: hits are ordinary sheaf comparisons, generic Kan-extension base change, or stability of proper morphisms, not natural native equivariant derived proper base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image commutes naturally with proper derived direct image for bounded constructible continuous algebraic l adic sheaves with a Frobenius action",
+   "date": "2026-10-26",
+   "results": "NC search 2026-10-26T12:22:23Z: 8 hits; SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardNatIso_inv, CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp. ",
+   "verdict": "no match: hits are ordinary sheaf comparisons, generic Kan-extension base change, or stability of proper morphisms, not natural native equivariant derived proper base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-native-weil-compact-base-change",
+  "date": "2026-10-26",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "prop-functor-package, Clause (4), proper-base-change factor; thm-weil-pbc-qbar proof, Forgetting the Weil structure and Constructibility and the isomorphism, with native coefficient realization and affine localization.",
+   "via": [
+    "lem-sf-native-weil-compact-base-change"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-sf-native-weil-proper-natural-base-change",
+  "worker": "stage1",
+  "summary": "Constructed the actual native derived mate, verified derived forgetting and coefficient encoding preserve its adjunction maps, and checked invertibility by separated affine charts. Reused existing abstract derived-adjunction-square, ringed exchange/localization, coefficient realization and rational proper-base-change nodes; no new nodes. Statement unchanged; no derived fixed-pair equivalence or absolute separatedness added.",
+  "blueprint": "prop-functor-package Clause (4); thm-weil-pbc-qbar proof paragraphs Forgetting the Weil structure and Constructibility and the isomorphism. The inherited ancestor tool returns null for this created-item chain; its existing null node and via list are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-native-adic-encoding-ordinary-operations",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-sf-fixed-pair-adjunction-lift",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-kun-derived-adjoint-square-comparison",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-sf-right-derived-from-adapted-complexes",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-sf-weil-verdier-module-constructibility-comparison",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   },
+   {
+    "node": "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "why": "Generic tool used for the stated native coefficient, derived-adjunction, affine-chart or localization comparison; it does not replace the unit proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-cc-NC-c68cc6ded",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-c68cc6ded (reviewer sub-agent of L); spot-checked: I read the item's 8 steps and all 29 cited statements in full, against thm-weil-pbc-qbar.proof.md (main-20261026, 'Forgetting the Weil structure' and 'Constructibility and the isomorphism') and the sk-thm-sf-package assembly. The statement is unchanged. It has no new nodes and cites no SGA. The steps follow the blueprint route: (1) fixed-pair forgetting gives Grothendieck categories, preservation of K-injectives and a conservative D(U), with no separatedness; (2) fixed-pair-adjunction-lift, whose mate-formula conventions I checked; (3) the derived adjunction plus the kun derived-adjoint-square comparison, whose right-derived hypothesis holds via adapted K-injectives; (4) β is the unit–square–counit mate, matching sk-def-sfb-base-change-morphism; (5) affine charts A' ⊂ u^{-1}A, with Z_A separated via the separated-over-affine lemma and base change to k, so the dc-setting holds and no affine intersections are used; (6) qcqs stratification and the native/condensed constructibility comparison; (7) finite-span comparison, rational PBC (3) at Q̄_ℓ, open-descent for base opens and the slice comparison for target opens, checked on the K-injective representative; (8) sheaf axiom, the cohomology criterion and conservativity. Edge cases checked: u = id, empty schemes, K = 0, rank 0, and T the affine line with doubled origin. No duplicate in the DAG. Accepted tool_uses: det-thm-sfb-proper-base-change-rational (Q40 precedent, same unit), lem-sbc-ringed-topos-sheaf-slice-derived-comparison and lem-sfb-grothendieck-k-injective; the other nine declared nodes are on route. FIX, in the item proof only: (C4) step 3 now shows that K-injective resolutions make RF defined in the sense of lem-pc-derived-adjoint-functors, by a cofinality argument via kinjective-hom-derived; (C4) step 6 now cites det-def-sfb-constructible-local-model for the step from finite constant local model to locally finitely presented, which is the constructibility predicate of the rational theorem's D^b_c. proof_deps were recomputed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.WeilSheaf.NativeProperNaturalBaseChange",
+  "declaration": "AlgebraicGeometry.nativeWeil_proper_natural_baseChange",
+  "file": "lean/Sheaf/WeilSheaf/NativeProperNaturalBaseChange.lean",
+  "statement": "theorem nativeWeil_proper_natural_baseChange (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {Z' Z T' T : Scheme.{u}} [Z'.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))] [T'.Over (Spec (CommRingCat.of k₀))] [T.Over (Spec (CommRingCat.of k₀))] (v : Z' ⟶ Z) (p' : Z' ⟶ T') (p : Z ⟶ T) (u : T' ⟶ T) [v.IsOver (Spec (CommRingCat.of k₀))] [p'.IsOver (Spec (CommRingCat.of k₀))] [p.IsOver (Spec (CommRingCat.of k₀))] [u.IsOver (Spec (CommRingCat.of k₀))] (_sq : ChosenCartesianSquare v p' p u) [IsProper p] [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (T ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (T' ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (T' ↘ Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T' ↘ Spec (CommRingCat.of k₀))] : Nonempty (((WeilComplex.objectProperty k₀ l Z).ι ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l p).rightDerivedFunctor ⋙ (ProEtaleWeilSheaf.upperStar k₀ l u).mapDerivedCategory) ≅ ((WeilComplex.objectProperty k₀ l Z).ι ⋙ (ProEtaleWeilSheaf.upperStar k₀ l v).mapDerivedCategory ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l p').rightDerivedFunctor))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7813317c",
+  "group": "NH",
+  "result": "fix",
+  "note": "Lean exact against node and framework: ambient ProEtaleWeilSheaf.lowerStar.rightDerivedFunctor and upperStar.mapDerivedCategory (same as WeilComplex.derivedLowerStar/upperStar restrict); ChosenCartesianSquare v p' p u orientation correct; IsProper p; qc/qs/lft structure maps for T,T' only; no separatedness, nothing on u or lft on Z,Z'; codomain D(W_T'); Nonempty functor iso = node's existence claim. lean.statement verbatim; node differs from live only in lean; edge cases (u=id, empty, K=0, rank 0, nonseparated T) covered; single universe is framework's; no duplicate (landed objectwise sibling cites it and is weaker); docstrings/source/blueprint/8 proof steps present; sorry only; imports exist. Sole fault H11: second reading was a same-worker self-check -> fixes/lem-sf-native-weil-proper-natural-base-change.report.md keeps worker report verbatim + independent clause-by-clause second reading. No Lean changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T222737-L-689151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

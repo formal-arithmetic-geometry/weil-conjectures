@@ -6,6 +6,8 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.TowerClassChern
+import Sheaf.Paper.TowerLineEvaluationUniversal
+import Sheaf.Paper.FiniteTateLineUniversal
 
 /-! # Diagonal for canonical tower classes
 
@@ -46,7 +48,7 @@ recorded Cartier theorem makes the ideal invertible, and its dual is invertible
 by def-pc-divisor-line-bundle. -/
 theorem diagonalLine_invertible (S : Scheme.{u}) :
     Scheme.Modules.IsInvertible (diagonalLine S) := by
-  sorry
+  exact (diagonalImmersion_cartier S).isInvertible_dual_toModules
 
 /-- The Picard class of the actual diagonal divisor line.
 Source: classes (3) (blueprint: def-sp-tower-class-diagonal). -/
@@ -189,6 +191,11 @@ Source: sk-def-sp-tate-twist (blueprint: def-sp-tower-class-diagonal). -/
 abbrev finiteLine (T : Scheme.{u}) (n : ℕ) :=
   Scheme.tateFiniteLine T l (FiniteRing l E n) n (finiteScalar l E n)
 
+private theorem section_cast_heq {A B : AddCommGrpCat.{u + 1}}
+    (h : A = B) (x : A) : HEq ((eqToHom h) x) x := by
+  subst B
+  rfl
+
 /-- The finite comparison is fixed on every scalar multiple of every root generator.
 Source: classes (2), evaluation of coefficient extension
 (blueprint: def-sp-tower-class-diagonal).
@@ -209,7 +216,64 @@ theorem lineEvaluation_existsUnique {T : Scheme.{u}} (c : Chern l E T) (n : ℕ)
         e.hom.val.app U v =
           Scheme.tateFiniteTensor T l (FiniteRing l E n) n (finiteScalar l E n)
             U.unop a ((c.rootForget.hom.app (op n)).hom.app U x') := by
-  sorry
+  let M := (SpTowerShriek.ev l E T n).obj (lineModule l E c)
+  let L := finiteLine l E T n
+  obtain ⟨Φ, hΦ, pΦ⟩ := towerLineEvaluation_universal l E c n
+  obtain ⟨Ψ, hΨ, pΨ⟩ :=
+    finiteTateLine_universal T l (FiniteRing l E n) n (finiteScalar l E n)
+  let f : M ⟶ L := (Φ L).symm (Ψ L (𝟙 L))
+  let g : L ⟶ M := (Ψ M).symm (Φ M (𝟙 M))
+  have hf : Φ L f = Ψ L (𝟙 L) := (Φ L).apply_symm_apply _
+  have hg : Ψ M g = Φ M (𝟙 M) := (Ψ M).apply_symm_apply _
+  have hfg : f ≫ g = 𝟙 M := by
+    apply (Φ M).injective
+    erw [hΦ, hf, ← hΨ, Category.id_comp, hg]
+  have hgf : g ≫ f = 𝟙 L := by
+    apply (Ψ L).injective
+    erw [hΨ, hg, ← hΦ, Category.id_comp, hf]
+  let e : M ≅ L := ⟨f, g, hfg, hgf⟩
+  have hp : ∀ (U : T.ProEtᵒᵖ) (a : (SpTowerShriek.B l E T n).obj.obj U)
+      (x : c.rootModule.val.obj (op (n, U.unop)))
+      (x' : ((c.reduction.forget.F.obj c.rootModule).obj (op n)).obj.obj U)
+      (v : M.val.obj U),
+      HEq x x' →
+      HEq v (a • SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+        (coefficientSystemMap l E T) c.scalar c.rootModule (op (n, U.unop)) x) →
+      f.val.app U v = Scheme.tateFiniteTensor T l (FiniteRing l E n) n
+        (finiteScalar l E n) U.unop a ((c.rootForget.hom.app (op n)).hom.app U x') := by
+    intro U a x x' v hx hv
+    rw [pΦ L f U a x x' v hx hv, hf]
+    exact pΨ L (𝟙 L) U a _
+  refine ⟨e, hp, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply (Φ L).injective
+  apply ObjectProperty.hom_ext
+  apply NatTrans.ext
+  funext U
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro z
+  let x' := (c.rootForget.inv.app (op n)).hom.app U z
+  let x := (eqToHom (c.reduction.forget.sections c.rootModule n U)) x'
+  have hx : HEq x x' := section_cast_heq _ _
+  let v : M.val.obj U :=
+    SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+      (coefficientSystemMap l E T) c.scalar c.rootModule (op (n, U.unop)) x
+  have hv : HEq v ((1 : (SpTowerShriek.B l E T n).obj.obj U) •
+      SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+        (coefficientSystemMap l E T) c.scalar c.rootModule (op (n, U.unop)) x) := by
+    simpa only [one_smul] using (HEq.rfl : HEq v v)
+  have hz : (c.rootForget.hom.app (op n)).hom.app U x' = z := by
+    have h := congrArg (fun k => (k.hom.app U) z)
+      (NatTrans.congr_app c.rootForget.inv_hom_id (op n))
+    exact h
+  have h₁ := pΦ L e'.hom U 1 x x' v hx hv
+  have h₂ := pΦ L f U 1 x x' v hx hv
+  have h₃ := he' U 1 x x' v hx hv
+  have h₄ := hp U 1 x x' v hx hv
+  have hval : e'.hom.val.app U v = f.val.app U v := h₃.trans h₄.symm
+  simpa only [one_smul, hz] using h₁.symm.trans (hval.trans h₂)
 
 /-- The uniquely normalized finite Tate-line realization.
 Source: classes (2) (blueprint: def-sp-tower-class-diagonal). -/

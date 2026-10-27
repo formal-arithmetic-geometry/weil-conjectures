@@ -145,7 +145,18 @@
   "item": "lem-weil-pbc-conormal-module-principal-localization",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -193,5 +204,42 @@
    "Algebra.Extension.presentations_homotopy_equivalent"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R$ be a commutative ring and $S$ an $R$-algebra. Let $\\alpha:P\\to S$ and $\\alpha':P'\\to S$ be surjective homomorphisms of $R$-algebras, where $P=R[x_t,\\ t\\in T]$ and $P'=R[x'_u,\\ u\\in U]$ are polynomial rings over $R$ on arbitrary sets of variables; let $I=\\ker\\alpha$, $I'=\\ker\\alpha'$. Then $I/I^2$ is an $S=P/I$-module and $I'/I'^2$ an $S=P'/I'$-module, and the maps $\\mathrm d_\\alpha:I/I^2\\to S\\otimes_P\\Omega_{P/R}$, $f\\bmod I^2\\mapsto1\\otimes\\mathrm df$, and $\\mathrm d_{\\alpha'}:I'/I'^2\\to S\\otimes_{P'}\\Omega_{P'/R}$, $f'\\bmod I'^2\\mapsto1\\otimes\\mathrm df'$, are well defined and $S$-linear. There exist $S$-linear maps $$\\varphi_1:I/I^2\\to I'/I'^2,\\quad\\varphi_0:S\\otimes_P\\Omega_{P/R}\\to S\\otimes_{P'}\\Omega_{P'/R},\\quad\\psi_1:I'/I'^2\\to I/I^2,\\quad\\psi_0:S\\otimes_{P'}\\Omega_{P'/R}\\to S\\otimes_P\\Omega_{P/R},$$ $$h:S\\otimes_P\\Omega_{P/R}\\to I/I^2,\\qquad h':S\\otimes_{P'}\\Omega_{P'/R}\\to I'/I'^2$$ such that $\\mathrm d_{\\alpha'}\\circ\\varphi_1=\\varphi_0\\circ\\mathrm d_\\alpha$, $\\mathrm d_\\alpha\\circ\\psi_1=\\psi_0\\circ\\mathrm d_{\\alpha'}$, $$\\mathrm{id}_{I/I^2}-\\psi_1\\circ\\varphi_1=h\\circ\\mathrm d_\\alpha,\\qquad\\mathrm{id}_{S\\otimes_P\\Omega_{P/R}}-\\psi_0\\circ\\varphi_0=\\mathrm d_\\alpha\\circ h,$$ $$\\mathrm{id}_{I'/I'^2}-\\varphi_1\\circ\\psi_1=h'\\circ\\mathrm d_{\\alpha'},\\qquad\\mathrm{id}_{S\\otimes_{P'}\\Omega_{P'/R}}-\\varphi_0\\circ\\psi_0=\\mathrm d_{\\alpha'}\\circ h'.$$ Moreover $\\varphi_1,\\varphi_0$ may be taken to be the maps induced by any homomorphism of $R$-algebras $\\varphi:P\\to P'$ with $\\alpha'\\circ\\varphi=\\alpha$ (one exists), namely $\\varphi_1(f\\bmod I^2)=\\varphi(f)\\bmod I'^2$ and $\\varphi_0(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d\\varphi(p)$, and likewise $\\psi_1,\\psi_0$ for any $R$-algebra map $\\psi:P'\\to P$ with $\\alpha\\circ\\psi=\\alpha'$.",
+  "proof": [
+   {
+    "text": "Choose, for every variable $x_t$ of $P$, an element $p'_t\\in P'$ whose image under $\\alpha'$ is $\\alpha(x_t)$; these choices exist since $\\alpha'$ is onto. The universal property of the polynomial ring gives an $R$-algebra map $\\varphi:P\\to P'$ with $\\varphi(x_t)=p'_t$ and $\\alpha'\\varphi=\\alpha$, since the two maps agree on $R$ and each $x_t$. Reversing the roles of the presentations gives $\\psi:P'\\to P$ with $\\alpha\\psi=\\alpha'$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For any $R$-algebra map $a:P\\to P'$ over $S$ (so $\\alpha'a=\\alpha$), $a(I)\\subseteq I'$ and $a(I^2)\\subseteq I'^2$; multiplication on $I/I^2$ by $P$ therefore factors through $S=P/I$, and $a_1(f\\bmod I^2)=a(f)\\bmod I'^2$ is $S$-linear. By the universal property of Kähler differentials, $a$ gives the $S$-linear map $a_0:S\\otimes_P\\Omega_{P/R}\\to S\\otimes_{P'}\\Omega_{P'/R}$ determined by $a_0(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d(a(p))$. The Leibniz rule makes $\\mathrm d_\\alpha$ well defined on $I/I^2$: for $f,g\\in I$, $\\mathrm d(fg)$ maps to $\\alpha(f)\\otimes\\mathrm dg+\\alpha(g)\\otimes\\mathrm df=0$; the same holds for $\\alpha'$. On $f\\bmod I^2$ one has $\\mathrm d_{\\alpha'}a_1(f)=1\\otimes\\mathrm d(a(f))=a_0\\mathrm d_\\alpha(f)$, so $(a_1,a_0)$ is a chain map.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Let $a,b:P\\to P'$ be any two such maps over $S$. Since $\\alpha'(a(p)-b(p))=0$, the difference defines $D:P\\to I'/I'^2$, $D(p)=(a(p)-b(p))\\bmod I'^2$. It is additive and vanishes on $R$. Moreover $a(p)-b(p)\\in I'$ implies that $a(p)$ and $b(p)$ act on $I'/I'^2$ through the common scalar $\\alpha(p)\\in S$; hence the identity $a(pq)-b(pq)=a(p)(a(q)-b(q))+(a(p)-b(p))b(q)$ becomes $D(pq)=\\alpha(p)D(q)+\\alpha(q)D(p)$. Thus $D$ is an $R$-derivation into the $P$-module $I'/I'^2$ defined by $\\alpha$. The universal property of $\\Omega_{P/R}$, followed by extension of scalars from $P$ to $S$, gives a unique $S$-linear $H:S\\otimes_P\\Omega_{P/R}\\to I'/I'^2$ with $H(s\\otimes\\mathrm dp)=sD(p)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "The two homotopy identities follow on generators. For $f\\in I$, $H\\mathrm d_\\alpha(f\\bmod I^2)=H(1\\otimes\\mathrm df)=(a(f)-b(f))\\bmod I'^2=(a_1-b_1)(f\\bmod I^2)$. For $s\\otimes\\mathrm dp$, $\\mathrm d_{\\alpha'}H(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d(a(p)-b(p))=(a_0-b_0)(s\\otimes\\mathrm dp)$; both sides are $S$-linear, and the differentials $\\mathrm dp$ generate $\\Omega_{P/R}$ as a $P$-module.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For maps of presentations $a:P\\to P'$ and $c:P'\\to P''$ over the same base algebra, the induced maps compose termwise: on $f\\bmod I^2$, $c_1a_1(f)=c(a(f))\\bmod I''^2=(c\\circ a)_1(f)$, and on $s\\otimes\\mathrm dp$, $c_0a_0(s\\otimes\\mathrm dp)=s\\otimes\\mathrm d(c(a(p)))=(c\\circ a)_0(s\\otimes\\mathrm dp)$. The identity presentation map induces identities in both degrees. Apply steps 3-4 first to $a=\\mathrm{id}_P$, $b=\\psi\\circ\\varphi$ to obtain $h$; composition then gives $\\mathrm{id}-\\psi_1\\varphi_1=h\\mathrm d_\\alpha$ and $\\mathrm{id}-\\psi_0\\varphi_0=\\mathrm d_\\alpha h$. Apply them again to $a=\\mathrm{id}_{P'}$, $b=\\varphi\\circ\\psi$ to obtain $h'$ and the two analogous identities for $\\alpha'$. Step 2 supplies the two chain-map identities. Thus the selected maps are mutual homotopy inverses, and the construction works for any choices of $\\varphi,\\psi$ over $S$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

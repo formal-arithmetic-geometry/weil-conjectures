@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-invariant-closed-substack-descent",
+ "kind": "statement",
+ "title": "Invariant closed subspaces of a smooth atlas descend to closed substacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $\\mathcal X/S$ an algebraic stack [def-sfb-algebraic-moduli-stack]. Use the fibred-groupoid and 2-fibre-product conventions of [def-sfb-stable-pointed-moduli-groupoids] and algebraic spaces [def-trf-algebraic-space]. Let $p:U\\to\\mathcal X$ be a smooth surjective scheme atlas, with smoothness as in [def-sbc-smooth-morphisms], and put $R=U\\times_{\\mathcal X}U$ with projections $s,t$. A closed substack is a strictly full substack whose inclusion is representable and whose pullback to every scheme is a closed subscheme [def-weil-closed-immersion]; a closed subspace is defined by the same scheme test. Pullback along $p$ gives a bijection between closed substacks $\\mathcal Z\\subseteq\\mathcal X$ and closed subschemes $Z\\subseteq U$ satisfying $s^{-1}Z=t^{-1}Z$ as closed subspaces of $R$, with scheme-theoretic inverse images. The corresponding pair satisfies $U\\times_{\\mathcal X}\\mathcal Z=Z$, and $Z\\to\\mathcal Z$ is a representable smooth surjective atlas. Each descended $\\mathcal Z$ is an algebraic stack.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 0507 (lemma-substacks-presentation), closed case; the atlas assertion follows from its cartesian square, and Tag 04YN (lemma-immersion-presentation)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-closed-immersion",
+  "def-sfb-closed-moduli-substack",
+  "def-sfb-invariant-closed-atlas-ideal"
+ ],
+ "proof": [
+  {
+   "text": "For a closed substack $\\mathcal W\\subseteq\\mathcal X$, put $W=U\\times_{\\mathcal X}\\mathcal W$. This is a closed subscheme by its scheme test. An $R$-object includes an isomorphism between its two images in $\\mathcal X$; strict fullness makes membership in $\\mathcal W$ invariant under it. Thus $s^{-1}W=t^{-1}W$ as subfunctors, hence as closed subspaces, not merely as point subsets.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507 (lemma-substacks-presentation), forward map."
+   }
+  },
+  {
+   "text": "The etale-stack/atlas descent node makes $\\mathcal X$ an fppf stack, so the fppf self-relation and quotient conventions apply. Fix an invariant closed $Z\\subseteq U$. The self-relation node gives the groupoid $R=U\\times_{\\mathcal X}U$: its arrows are triples $(u,v,\\alpha:p(u)\\simeq p(v))$. Set $R_Z=s^{-1}Z=t^{-1}Z$. Identity, inversion and composition restrict: an arrow with source in $Z$ has target in $Z$ by invariance; the composite has the source of the first arrow and target of the second. Consequently $R_Z=Z\\times_{\\mathcal X}Z$, and both maps $R_Z\\to Z$ are base changes of the atlas projections $R\\to U$. The chartwise calculus makes these maps smooth. The smooth-groupoid quotient theorem gives an algebraic stack $\\mathcal Q=[Z/R_Z]$ with smooth surjective scheme atlas $Z\\to\\mathcal Q$.",
+   "uses": [
+    "lem-sfb-etale-smooth-atlas-fppf-descent",
+    "lem-sfb-self-relation-quotient-embedding",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-smooth-groupoid-fppf-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YN (lemma-immersion-presentation), restriction of the smooth groupoid."
+   }
+  },
+  {
+   "text": "The chartwise calculus makes $p$ flat and locally finitely presented. Its surjectivity is part of the atlas hypothesis, so clause (2) of the fppf-presentation node identifies $[U/R]$ with $\\mathcal X$. Apply the cartesian-source criterion to $(Z,R_Z)\\to(U,R)$. Its source square is cartesian because $R_Z=Z\\times_{U,s}R$; all groupoid operations were restricted in step 2. It follows that $U\\times_{\\mathcal X}\\mathcal Q=Z$. The self-relation embedding node, applied to $Z\\to\\mathcal X$, supplies the same induced map $i:\\mathcal Q\\to\\mathcal X$, fully faithful on every fibre and representable by algebraic spaces because $\\mathcal Q$ is algebraic.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-fppf-groupoid-stack-presentations",
+    "lem-sfb-groupoid-source-cartesian-quotient-square",
+    "lem-sfb-self-relation-quotient-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YN, cartesian square; spaces-groupoids.tex Tag 04ZN; algebraic.tex Tags 04WY and 04T4."
+   }
+  },
+  {
+   "text": "For a scheme test $T\\to\\mathcal X$, let $E=T\\times_{\\mathcal X}\\mathcal Q$ and $V=T\\times_{\\mathcal X}U$. These are algebraic spaces by representability of $i$ and of the atlas; $V\\to T$ is smooth surjective by the atlas condition. The smooth-cover sections node supplies a jointly surjective etale scheme family $T_a\\to T$ lifting to $V$. Associativity of fibre-product tuples and step 3 identify $E\\times_TT_a$ with $T_a\\times_UZ$. Its projection to $T_a$ is a closed immersion by scheme base change of $Z\\to U$. The closed-immersion atlas-locality node, applied to $E\\to T$ and this family, proves that $E$ is a closed subscheme of $T$. In particular every scheme test of $i$ is a closed immersion; no scheme-representability of $E$ was presumed.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-sfb-space-closed-immersion-atlas-locality",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04YN, closedness; use spaces-topologies.tex Tag 0CFV and spaces-morphisms.tex Tag 03M4 to implement the smooth-cover test."
+   }
+  },
+  {
+   "text": "Let $\\mathcal Z\\subseteq\\mathcal X$ be the strictly full essential image of $i$: its objects over $T$ are the objects isomorphic to $i(q)$ for some $q\\in\\mathcal Q(T)$. It is closed under pullback and isomorphism. It is a substack: an etale descent datum in this image lifts to $\\mathcal Q$; full faithfulness lifts its overlap arrows uniquely and reflects their cocycle condition. Effectiveness in $\\mathcal Q$ then puts the descended object in the image. Isomorphism sheaves are those of $\\mathcal X$. The map $\\mathcal Q\\to\\mathcal Z$ is fully faithful and essentially surjective, so it is an equivalence in each fibre, compatible with pullback. Thus the scheme tests from step 4, the diagonal, and the smooth surjective atlas $Z\\to\\mathcal Q$ give the corresponding tests, diagonal and atlas for $\\mathcal Z$. In particular $\\mathcal Z$ is algebraic, closed, and has $U\\times_{\\mathcal X}\\mathcal Z=Z$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-algebraic-moduli-stack"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0506 (lemma-substack-image), expanded essential-image argument."
+   }
+  },
+  {
+   "text": "For uniqueness let $\\mathcal W_1,\\mathcal W_2$ be closed substacks with the same pullback $Z$. For any object $x:T\\to\\mathcal X$, choose a jointly surjective etale family $T_a\\to T$ lifting to the smooth surjective space $T\\times_{\\mathcal X}U$. It gives maps $u_a:T_a\\to U$ and isomorphisms $x|_{T_a}\\simeq p(u_a)$. By the specified pullbacks, membership of $x|_{T_a}$ in either $\\mathcal W_j$ is equivalent to factorization of $u_a$ through $Z$. Hence these memberships agree. Membership in a strictly full substack is etale-local: local objects with the overlap arrows inherited from $x$ descend in the substack, and the resulting object is isomorphic to $x$ by descent in $\\mathcal X$. Therefore $x$ belongs to $\\mathcal W_1$ exactly when it belongs to $\\mathcal W_2$. Strict fullness then identifies all arrows as well. This proves injectivity, while steps 2--5 prove surjectivity and all atlas and algebraicity assertions.",
+   "uses": [
+    "lem-sfb-smooth-space-cover-etale-sections",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0507, uniqueness expanded by smooth-local etale lifts and stack descent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-etale-smooth-atlas-fppf-descent",
+  "lem-sfb-self-relation-quotient-embedding",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-smooth-groupoid-fppf-quotient",
+  "lem-sfb-fppf-groupoid-stack-presentations",
+  "lem-sfb-groupoid-source-cartesian-quotient-square",
+  "lem-sfb-smooth-space-cover-etale-sections",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-closed-immersion-atlas-locality",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 0507 and 04YN; essential image (0506) and uniqueness expanded from stack descent; closedness checked through etale local sections (0CFV) and closed-immersion atlas locality (03M4)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A closed substack of an algebraic stack descends from an invariant closed subspace in a smooth atlas",
+   "results": "Read returned hits: AlgebraicGeometry.IsClosedImmersion.isZariskiLocalAtTarget, AlgebraicGeometry.isClosedEmbedding_isZariskiLocalAtTarget, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsClosedImmersion.base_closed, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; 8 hits; digest 6406029ff5821e53",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme closed immersions, fpqc descent of properties of already given scheme morphisms, or manifold atlases; none constructs closed substacks from invariant closed subschemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersions into algebraic stacks satisfy effective descent under smooth surjective scheme covers",
+   "results": "Read returned hits: AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion, AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact; 8 hits; digest 39a6fc6d8236eebe",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme closed immersions, fpqc descent of properties of already given scheme morphisms, or manifold atlases; none constructs closed substacks from invariant closed subschemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme closed immersions, fpqc descent of properties of already given scheme morphisms, or manifold atlases; none constructs closed substacks from invariant closed subschemes."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSubstack|closed_substack|invariant.*closed.*subspace|ClosedImmersion.*descent",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme closed immersions, fpqc descent of properties of already given scheme morphisms, or manifold atlases; none constructs closed substacks from invariant closed subschemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Invariant closed subspaces of a smooth atlas descend to closed substacks",
+   "results": "Read returned hits: StructureGroupoid.LocalInvariantProp.liftPropOn_of_mem_maximalAtlas, restr_mem_maximalAtlas, StructureGroupoid.isLocalStructomorphWithinAt_localInvariantProp, StructureGroupoid.restriction_in_maximalAtlas, StructureGroupoid.subtypeRestr_mem_maximalAtlas, StructureGroupoid.subset_maximalAtlas, TopologicalSpace.Opens.instChartedSpace, Module.End.invtSubmodule; 8 hits; digest 6ec4c9a44dfa3c4f",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits concern scheme closed immersions, fpqc descent of properties of already given scheme morphisms, or manifold atlases; none constructs closed substacks from invariant closed subschemes."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSubstack|closed_substack|invariant.*closed.*subspace|ClosedImmersion.*descent",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme closed-immersion properties do not construct closed substacks from scheme-theoretically invariant closed subschemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersions into an algebraic stack correspond to invariant closed subschemes of a smooth presentation",
+   "results": "Read returned hits: AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom; 8 hits; digest 08e1d7b79698a52e",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme closed-immersion properties do not construct closed substacks from scheme-theoretically invariant closed subschemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme closed-immersion properties do not construct closed substacks from scheme-theoretically invariant closed subschemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant closed subschemes of a smooth atlas descend uniquely to algebraic closed substacks",
+   "results": "Read returned hits: AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.IsClosedImmersion.isIso_lift, AlgebraicGeometry.IsClosedImmersion.instSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.subscheme, AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj; 8 hits; digest 4604723645eb5fb5",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme closed-immersion properties do not construct closed substacks from scheme-theoretically invariant closed subschemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-presentation-closed-subsets",
+  "date": "2026-10-23",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient. Supporting input: scheme-theoretic descent after the reduced inverse images along s and t have been identified, in the proof of Stacks 0509.",
+   "via": [
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-invariant-closed-substack-descent",
+  "worker": "stage1",
+  "summary": "Q96 checked Stacks 0507/04YN and all cited statements, wrote the restricted-groupoid construction, used existing quotient and self-relation inputs, extracted only the general 04ZN square criterion, and expanded closedness, strict essential image and uniqueness. Statement unchanged; no Lean attachment or Mathlib leaf.",
+  "blueprint": "Supporting closed-substack descent under the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry. The latest blueprint has no separate copy of this lemma; these generic stack foundations implement the inherited auxiliary input without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Scheme closed-immersion base change used on the etale scheme tests in step 4; generic foundational input, not a replacement of a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-a0931de25",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-a0931de25 (reviewer sub-agent of L); spot-checked: I read the item, the new node and the statement of every cited node in full, against Stacks stacks-properties 04YN with its proof, definition-substacks, 0506 (proof omitted) and 0507 with its proof, and spaces-groupoids 04ZN with its proof. The statement and stmt_deps are identical to Q27's base copy, so the three citers are unaffected. proof_deps equals the union of the step uses, the DAG has no cycle, there is no SGA, and every cited lemma is in the unit except the Mathlib leaf 01QR, whose declared tool_use I accept. Step 1: strict fullness gives s^-1W = t^-1W as subfunctors, not only as point sets. Step 2: 076V makes X an fppf stack; R_Z = s^-1Z = Z x_X Z, the operations restrict, the maps R_Z to Z are smooth base changes, and 04TK gives the quotient Q with atlas Z. Step 3: p is flat, lfp, surjective and representable, so 04WY(2) gives [U/R] = X; the source square of (Z,R_Z) to (U,R) is cartesian, so 04ZN gives U x_X Q = Z; the self-relation node gives i fully faithful, and representable once Q is algebraic. Identifying i with the composite map is uniqueness of the extension through stackification, which takes a few lines; I accepted it. Step 4: 0CFV etale lifts give E x_T T_a = T_a x_U Z, a closed immersion by 01QR, and 03M4 makes E a closed subscheme with no representability assumed. Step 5: 0506 is written out (descent in the essential image, full faithfulness, an equivalence onto the strictly full image). Step 6: uniqueness by etale-local membership, as in the 0507 proof. Edge cases checked: Z empty, Z = U, a nonreduced Z, nontrivial stabilisers. The new node states 04ZN exactly, is statement-only, self-contained and fully searched. I tested it on the identity functor (true) and on pt to BG (correctly excluded). It is not a duplicate of 04M9/smooth-groupoid-fppf-quotient, of fppf-presentations(3) (which needs flat surjective object maps) or of the open-substack node, and it is strictly smaller than the item. Batch 5: every flagged citation reaches sec-trace-formula only through def-trf-algebraic-space, def-trf-projective-bundle-morphism or general sheafification existence, all generic definitions or foundations and no step of the trace formula or Poincare duality, so all are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvariantClosedSubstackDescent",
+  "declaration": "CategoryTheory.invariantClosedSubstackDescent",
+  "declarations": [
+   "CategoryTheory.invariantClosedSubstackDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/InvariantClosedSubstackDescent.lean",
+  "statement": "theorem invariantClosedSubstackDescent {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (U : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj U)) F) (hp : IsSmoothModuliAtlas F U p) : ∃ e : ClosedModuliSubstack F ≃ {I : U.left.IdealSheafData // IsInvariantClosedAtlasIdeal p I}, ∀ W : ClosedModuliSubstack F, HasSchemeModuliBaseChange W.inclusion U p (closedAtlasScheme U (e W).val) (closedAtlasSchemeι U (e W).val) ∧ IsAlgebraicModuliStack W.category ∧ ∃ q : BasedFunctor (discreteModuli (yoneda.obj (closedAtlasScheme U (e W).val))) W.category, Nonempty (ModuliTwoIso (q.comp W.inclusion) ((discreteModuliMap (yoneda.map (closedAtlasSchemeι U (e W).val))).comp p)) ∧ IsSmoothModuliAtlas W.category (closedAtlasScheme U (e W).val) q",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce3ff46ef",
+  "group": "NV",
+  "result": "fix",
+  "note": "Item statement matches node and Stacks 0507/04YN clause by clause: algebraic F, smooth surjective atlas, closed substacks are strictly full predicate substacks with closed scheme tests (proof fields are Props, so equality = predicate equality), invariance is comap ideal equality on all scheme points of R, bijection e pinned by the pullback clause, U×_X𝒵=Z, atlas q with 2-iso to j∘p plus IsSmoothModuliAtlas, algebraicity of each W. Edge cases (Z empty/whole, nonreduced, empty U, stabilisers) and universes ok; gates H5/H6/H8/H9 and verbatim records ok. Finding H4/H12: HasSchemeModuliBaseChange re-wrote the landed CategoryTheory.IsSchemeModuliBaseChange (def-sfb-moduli-chart-normalization, 2026-10-22). FIX: fixes/ClosedModuliSubstack.lean defines it as ∃ e, IsSchemeModuliBaseChange e j with the import (same proposition, same names); fixes/def-sfb-closed-moduli-substack.json adds that node to stmt_deps and the TeX. nt_compile --json: all three modules clean (15.6/12.0/5.6 s)."
+ }
+}

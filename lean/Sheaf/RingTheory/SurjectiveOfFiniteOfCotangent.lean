@@ -51,6 +51,69 @@ theorem surjective_of_finite_of_cotangent
       (Ideal.mapCotangent (IsLocalRing.maximalIdeal A) (IsLocalRing.maximalIdeal B)
         f.toIntAlgHom (fun a ha => map_nonunit f a ha))) :
     Function.Surjective f := by
-  sorry
+  let : Algebra A B := f.toAlgebra
+  have : Module.Finite A B := hfinite
+  let m := IsLocalRing.maximalIdeal A
+  let n := IsLocalRing.maximalIdeal B
+  let J := m.map (algebraMap A B)
+  have hJn : J ≤ n := Ideal.map_le_iff_le_comap.mpr (fun a ha => map_nonunit f a ha)
+  have hcot' : n ≤ J ⊔ n ^ 2 := by
+    intro b hb
+    obtain ⟨x, hx⟩ := hcot (n.toCotangent ⟨b, hb⟩)
+    obtain ⟨a, rfl⟩ := m.toCotangent_surjective x
+    have he : f a - b ∈ n ^ 2 := n.toCotangent_eq.mp hx
+    have ha : f a ∈ J := Ideal.mem_map_of_mem f a.2
+    have ha' : f a ∈ J ⊔ n ^ 2 := (show J ≤ J ⊔ n ^ 2 from le_sup_left) ha
+    have he' : f a - b ∈ J ⊔ n ^ 2 := (show n ^ 2 ≤ J ⊔ n ^ 2 from le_sup_right) he
+    simpa only [sub_sub_cancel] using sub_mem ha' he'
+  let Q := B ⧸ J
+  let q : B →+* Q := Ideal.Quotient.mk J
+  have : Module.Finite A Q := inferInstance
+  have : Module.Finite (A ⧸ m) Q := Module.Finite.of_restrictScalars_finite A _ _
+  let : Field (A ⧸ m) := Ideal.Quotient.field m
+  have : IsNoetherianRing Q := IsNoetherianRing.of_finite (A ⧸ m) Q
+  let N := n.map q
+  have hN : N ≤ N * N := by
+    have h := Ideal.map_mono (f := q) hcot'
+    have hq : J.map q = ⊥ := Ideal.map_quotient_self J
+    rw [Ideal.map_sup, hq, bot_sup_eq, Ideal.map_pow, pow_two] at h
+    exact h
+  have hrad : N ≤ (⊥ : Ideal Q).jacobson := by
+    have hproper : J ≠ ⊤ :=
+      ne_top_of_le_ne_top (IsLocalRing.maximalIdeal.isMaximal B).ne_top hJn
+    have he : J.jacobson = n := IsLocalRing.jacobson_eq_maximalIdeal J hproper
+    rw [show N = J.jacobson.map q by rw [he],
+      Ideal.map_jacobson_of_surjective Ideal.Quotient.mk_surjective]
+    · simp
+    · exact le_of_eq (Ideal.mk_ker (I := J))
+  have hzero : N = ⊥ := Submodule.eq_bot_of_le_smul_of_le_jacobson_bot N N
+    (Ideal.fg_of_isNoetherianRing N) (by simpa only [Ideal.smul_eq_mul] using hN) hrad
+  have hnJ : n ≤ J := by
+    have := (Ideal.map_eq_bot_iff_le_ker q).mp hzero
+    change n ≤ RingHom.ker (Ideal.Quotient.mk J) at this
+    rw [Ideal.mk_ker] at this
+    exact this
+  have hsurj : Function.Surjective (IsLocalRing.ResidueField.map f) := by
+    intro b
+    obtain ⟨a, ha⟩ := iA.surjective (iB b)
+    refine ⟨a, iB.injective ?_⟩
+    exact (DFunLike.congr_fun hres a).trans ha
+  let g : A →ₗ[A] B := Algebra.linearMap A B
+  have hrange : g.range = ⊤ := by
+    apply top_unique
+    apply Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
+      (show m ≤ (⊥ : Ideal A).jacobson by
+        rw [IsLocalRing.jacobson_eq_maximalIdeal ⊥ bot_ne_top])
+    intro b _
+    obtain ⟨a₀, ha₀⟩ := hsurj (IsLocalRing.residue B b)
+    obtain ⟨a, rfl⟩ := IsLocalRing.residue_surjective a₀
+    have hb : b - f a ∈ n := by
+      apply (IsLocalRing.residue_eq_zero_iff _).mp
+      rw [map_sub, ← IsLocalRing.ResidueField.map_residue f a, ha₀, sub_self]
+    apply Submodule.mem_sup.mpr
+    refine ⟨f a, ⟨a, rfl⟩, b - f a, ?_, add_sub_cancel _ _⟩
+    rw [Ideal.smul_top_eq_map]
+    exact hnJ hb
+  exact LinearMap.range_eq_top.mp hrange
 
 end RingHom

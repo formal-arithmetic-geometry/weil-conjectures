@@ -21,102 +21,29 @@
  ],
  "proof": [
   {
-   "text": "Etale maps are flat by [def-weil-etale-morphism]. Apply [lem-trf-relative-flatness-source-cover] to the structure sheaf O_X: it is quasi-coherent because on each affine it is the sheaf associated to the free rank-one module, and h_i*O_X=O_U_i since B tensor_A A=B on stalks. Flatness of this sheaf over S is precisely flatness of the structure morphism. Therefore f is flat if and only if every f∘h_i is flat.",
+   "text": "Apply [lem-trf-etale-source-fibre-preparation] to the given jointly surjective etale family. Its two equivalences give flatness and local finite presentation of $f$ exactly when all composites have them. In either implication, the assumed nodality supplies local finite presentation on the assumed side, hence on both sides. Fix any algebraically closed field $\\Omega$ and $g:\\operatorname{Spec}\\Omega\\to S$. Put $C=X\\times_S\\operatorname{Spec}\\Omega$ and $D_i=U_i\\times_S\\operatorname{Spec}\\Omega$. The lemma identifies $D_i$ with $U_i\\times_X C$ over $C$; the maps $e_i:D_i\\to C$ form a jointly surjective etale family, and $C,D_i$ are locally finite type over $\\Omega$ and locally Noetherian.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-trf-relative-flatness-source-cover"
+    "lem-trf-etale-source-fibre-preparation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D proof, flatness clause; Tag 036K"
+    "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, structural descent and geometric-fibre preparation (old steps 1--4); descent.tex Tags 036K lemma-flat-fpqc-local-source and 036N lemma-locally-finite-presentation-fppf-local-source; algebra.tex Tag 05G5 lemma-base-change-finiteness (4); morphisms.tex Tag 01T6 lemma-finite-type-noetherian"
    }
   },
   {
-   "text": "Each h_i is flat and locally of finite presentation by [def-weil-etale-morphism]. The jointly surjective family thus satisfies [lem-trf-lfp-fppf-source-locality], so f is locally of finite presentation if and only if every f∘h_i is. In either direction of the desired implication we may henceforth use local finite presentation on both f and the composites.",
+   "text": "Apply [lem-trf-etale-cover-field-curve-nodality] to this cover with $k=\\Omega$; step 1 supplies all its hypotheses. With $n=1$ its purity equivalence gives pure dimension one for $C$ exactly when all $D_i$ have it. Under this condition, if the nonsmooth nodal condition holds on $C$, every nonsmooth $y\\in D_i$ maps to a nonsmooth $x\\in C$ by the smoothness equivalence; the completion equivalence gives the condition at $y$. Conversely, lift each nonsmooth $x\\in C$ to some $y\\in D_i$ by joint surjectivity. The same two equivalences make $y$ nonsmooth and give the nodal completion at $x$ from that at $y$. Empty fibres have no irreducible components or points, so the fibre conditions there are vacuous. As $\\Omega,g$ were arbitrary, both fibre clauses are equivalent for every geometric fibre. Together with step 1 this proves the stated iff.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-trf-lfp-fppf-source-locality"
+    "lem-trf-etale-cover-field-curve-nodality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D proof, local finite presentation clause; Tag 036N"
+    "place": "Tag 0C5D, lemma-nodal-family-etale-local-source, dimension and singularity argument over a field (old steps 5--8); descent.tex Tag 04N4 lemma-dimension-at-point-local and Tag 04NL lemma-dimension-at-point; varieties.tex Tag 0A21 lemma-dimension-locally-algebraic (3), (5); curves.tex Tag 0C57 lemma-node-etale-local; descent.tex Tag 036U lemma-smooth-smooth-local-source"
    }
   },
   {
-   "text": "Fix an algebraically closed field Ω and a geometric point Spec Ω→S. Write C=X×_S Spec Ω and D_i=U_i×_S Spec Ω. Associativity of fibre products identifies D_i with U_i×_X C: both represent compatible pairs of maps to U_i and Spec Ω over S. By [lem-weil-pbc-etale-covering-base-change], the maps e_i:D_i→C are etale and jointly surjective. These are exactly the geometric fibres of the composites used in the statement.",
-   "uses": [
-    "lem-weil-pbc-etale-covering-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D proof, reduction to a field"
-   }
-  },
-  {
-   "text": "The schemes C and D_i are locally of finite type over Ω. Indeed, choose finite-presentation affine charts for f and f∘h_i; after base change their rings are Ω tensor_R A, which are finitely presented by [lem-weil-pbc-finite-presentation-base-change-composition](1), and hence finitely generated simply by retaining the finitely many presentation generators. These affine charts cover the fibres by the definition of fibre product. Since Spec Ω is Noetherian (its ring is a field), [pqf-lem-locnoeth-lft] shows that C and D_i are locally Noetherian.",
-   "uses": [
-    "lem-weil-pbc-finite-presentation-base-change-composition",
-    "pqf-lem-locnoeth-lft"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D, fibre reduction; affine finite-presentation base change and Tag 01T6"
-   }
-  },
-  {
-   "text": "For y∈D_i with x=e_i(y), the map e_i is flat and locally of finite type by the definition of etale (a finite presentation in particular supplies finitely many generators). Apply [lem-sbc-flat-composite-fibre-dimension-at-point] to D_i→C→Spec Ω. Its relative fibre over x has dimension zero by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. Thus dim_y(D_i)=0+dim_x(C)=dim_x(C), where the dimensions mean local topological dimension at the indicated points, not the Krull dimension of the local rings.",
-   "uses": [
-    "lem-sbc-flat-composite-fibre-dimension-at-point",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D proof, relative dimension clause; Tag 04NL"
-   }
-  },
-  {
-   "text": "Take the whole schemes as the open sets in the two local-dimension criteria. If C is pure of dimension one, [lem-sbc-equidimensional-open-local-dimension] gives dim_x(C)=1 at every x; step 5 gives dim_y(D_i)=1; [lem-sbc-constant-local-dimension-components] then gives pure dimension one for each D_i. Conversely, if all D_i are pure of dimension one, the first criterion gives dim_y(D_i)=1, and each x has some lift y by step 3. Step 5 gives dim_x(C)=1, and the second criterion gives purity of C. The finite type and local Noetherian hypotheses of the criteria were supplied in step 4. Empty fibres have no components, so the assertions remain valid.",
-   "uses": [
-    "lem-sbc-equidimensional-open-local-dimension",
-    "lem-sbc-constant-local-dimension-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D proof, relative dimension clause via Tag 04NL"
-   }
-  },
-  {
-   "text": "Assume f is nodal. Steps 1, 2 and 6 give all the structural properties of every composite. If y is a nonsmooth point of D_i, the pointwise assertion of [lem-trf-etale-source-smoothness], applied to D_i→C→Spec Ω, implies that x=e_i(y) is nonsmooth on C. The nodal hypothesis on f gives the completed local Ω-algebra Ω[[u,v]]/(uv) at x. By [lem-trf-nodal-point-etale-locality], the same completed local algebra occurs at y. Its hypotheses hold: C is locally finite type by step 4, pure of dimension one by hypothesis, and e_i is etale by step 3. This proves nodality of each composite.",
-   "uses": [
-    "lem-trf-etale-source-smoothness",
-    "lem-trf-nodal-point-etale-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tags 0C5C and 0C5D, forward implication; Tag 0C57"
-   }
-  },
-  {
-   "text": "Conversely assume every composite is nodal. Steps 1, 2 and 6 give flatness, local finite presentation and pure dimension one for the geometric fibres of f. Let x be any nonsmooth point of C. Step 3 supplies i and y∈D_i above x. By the pointwise equivalence in [lem-trf-etale-source-smoothness], y is nonsmooth on D_i, so nodality of the composite supplies its completed local Ω-algebra Ω[[u,v]]/(uv). Apply [lem-trf-nodal-point-etale-locality] backwards: C is locally finite type by step 4 and pure of dimension one by step 6, and e_i is etale. The completed local algebra at x is therefore Ω[[u,v]]/(uv). This works for every Ω and x, proving the required nodal fibre condition.",
-   "uses": [
-    "lem-trf-etale-source-smoothness",
-    "lem-trf-nodal-point-etale-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/curves.tex",
-    "place": "Tag 0C5D reverse implication; Tags 036U and 0C57"
-   }
-  },
-  {
-   "text": "If X is empty, the existence of the maps U_i→X forces every U_i to be empty. The structure conditions are local on points and the fibre conditions quantify over points or components, so both sides hold vacuously. A jointly surjective empty family forces X empty. This includes the empty-family edge case.",
+   "text": "If $X$ is empty, each map $U_i\\to X$ forces $U_i$ to be empty. Flatness and local finite presentation are then vacuous pointwise conditions, and each geometric fibre has no points or irreducible components to test. Thus both sides hold. A jointly surjective empty family forces $X$ empty, covering the empty-family case.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -126,18 +53,8 @@
   }
  ],
  "proof_deps": [
-  "def-weil-etale-morphism",
-  "lem-trf-relative-flatness-source-cover",
-  "lem-trf-lfp-fppf-source-locality",
-  "lem-weil-pbc-etale-covering-base-change",
-  "lem-weil-pbc-finite-presentation-base-change-composition",
-  "pqf-lem-locnoeth-lft",
-  "lem-sbc-flat-composite-fibre-dimension-at-point",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-  "lem-sbc-equidimensional-open-local-dimension",
-  "lem-sbc-constant-local-dimension-components",
-  "lem-trf-etale-source-smoothness",
-  "lem-trf-nodal-point-etale-locality"
+  "lem-trf-etale-source-fibre-preparation",
+  "lem-trf-etale-cover-field-curve-nodality"
  ],
  "proof_origin": {
   "by": "document",
@@ -236,41 +153,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-nodal-family-etale-source-locality",
   "worker": "stage1",
-  "summary": "Split the Stacks 0C5D proof using existing flatness, base-change and fibre-dimension statements. Created only generic fppf source locality of local finite presentation and etale invariance of the nodal completed local ring. The statement is unchanged mathematically; its purity reference now points to the exact definition.",
-  "blueprint": "Historical auxiliary branch of lem-trf-local-term-locality, via the original symmetric blowup ancestry; no new trace-formula route or SGA input. The current main-20261015 blueprint has no duplicate of either new generic lemma.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-etale-covering-base-change",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   },
-   {
-    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   },
-   {
-    "node": "pqf-lem-locnoeth-lft",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   },
-   {
-    "node": "lem-sbc-flat-composite-fibre-dimension-at-point",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   },
-   {
-    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   },
-   {
-    "node": "lem-sbc-equidimensional-open-local-dimension",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   },
-   {
-    "node": "lem-sbc-constant-local-dimension-components",
-    "why": "Generic structural scheme/fibre-dimension tool used in the Stacks 0C5D argument; the item unit has no statement supplying this input."
-   }
-  ]
+  "summary": "Rebased the retained reader-approved re-split onto the current DAG after the side-completion/live-DAG landing refusal. Current statement, statement dependencies, blueprint, Lean, review and audit metadata are retained verbatim; the old nine-step proof still equals old-proof.json and both extracted nodes are absent from the live tree. Re-read both cited statements and all old proof inputs. The assembly now explicitly checks the field-cover hypotheses, both nodal implications and empty fibres; source records distinguish topological dimension Tag 04N4 from relative fibre dimension Tag 04NL and supply exact tags for structural preparation. The two unchanged statement-only tasks retain all old arguments and all actual search records. No Lean edits or compilation.",
+  "blueprint": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. The re-split preserves this historical auxiliary route: source preparation, then dimension and nodal invariance on geometric fibres. No replacement chapter/unit route."
  },
  "tool_uses": [
   "lem-weil-pbc-etale-covering-base-change",
@@ -282,12 +169,12 @@
   "lem-sbc-constant-local-dimension-components"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q111-05bbd964e",
-  "group": "Q111",
+  "reviewer": "NT-cc-NR-c4081ae26",
+  "group": "NR",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-05bbd964e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and sources in full. Stacks 0C5D/036N/0C57 support the split; dimension, completion, empty-case and route checks pass. Repaired B3 missing definition citations for algebraically closed fields and closed points in the new point lemma. Corrected JSON is under fixes/; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-c4081ae26 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This answers the human re-split note released 2026-10-22: the 4453-character, 9-step proof must become at least 2 statement-only new nodes, with an assembly of at most 3000 characters. It is not superseded: clones/live and clones/side-live still have the 9-step proof and neither new id. It re-delivers heads 5cbde388 and cc662a6e, both PASSed, after a landing refusal. A JSON diff against cc662a6e shows both new statements and the item statement and stmt_deps are byte-identical; only the assembly wording and source tags changed. Every Stacks tag maps to the label named (01T6, 036K, 036N, 036U, 04N4, 04NL, 05G5, 0A21, 0C57, 0C5C, 0C5D). The route matches curves.tex 0C5D: lfp, flat and relative dimension are étale local, then reduce to a field, then 0C57 plus 036U. Node A, etale-source-fibre-preparation (old steps 1-4): flat iff by 036K (jointly surjective étale family = fppf/fpqc covering); lfp iff by 036N; D_i ≅ U_i×_X C by pasting; e_i étale and jointly surjective by base change; fibres lft and locally Noetherian by 01T6; Ω⊗_R A charts finitely presented by 05G5(4) and they cover the fibres because Spec Ω has one point. No Noetherian assumption on S. Node B, etale-cover-field-curve-nodality (old steps 5-8): dim_y=dim_x by 04N4 with topological dimension at a point; pure n iff via 0A21 plus lifts; smoothness iff = lem-trf-etale-source-smoothness pointwise clause; completion iff under purity = lem-trf-nodal-point-etale-locality, where non-closed nonsmooth points fail on both sides. Tested k[x,y]/(xy), k[x,y]/(y^2), A^1⊔pt, n=0 and the empty cover. Old step 9 stays in the assembly. Two nodes of comparable size; neither restates the item, cites the other or creates a cycle. The assembly is 1861 characters, equates purity before the completion clause, and lifts nonsmooth points by joint surjectivity. rg -L over the snapshot found no duplicate. Batch-5: both flagged citations are generic scheme theory (étale-source locality of flat and lfp; dimension, smoothness and nodes over a field). Neither assumption gives them, neither is a step of the trace formula or Poincaré duality proofs, and neither reaches their closure; the flag is the chapter location only, accepted. No SGA. Advisory: stale tool_uses on the item; base-era stmt_dep def-trf-orgogozo-induction-data is unused."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.NodalFamilyEtaleSourceLocality",
@@ -311,5 +198,16 @@
   "result": "pass",
   "note": "Clause-by-clause check of isNodalRelativeCurve_iff_etale_source_cover and helper IsNodalRelativeCurve against the node and Stacks curves.tex 0C5A/0C5C/0C5D: f, I:Type v family, Etale, joint surjectivity, Flat, LocallyOfFinitePresentation, IsPureDimension 1 on geometric fibres (vacuous on empty), nonsmooth = no smooth open neighbourhood, AdicCompletion ≃+* MvPowerSeries (Fin 2) Ω/(X0X1), iff over all i; no extra hypotheses. Equivalent to the node and Stacks: Ω in Type u, ring iso vs algebra iso, all nonsmooth points vs closed points. Empty I, empty X, empty or disconnected fibres OK; universes u,v bound. Helper is real, not hollow; no existing DAG node or declaration is the same notion (HasNodalGeometricFibres needs connected fibres; HasOnlySmoothOrNodalGeometricFibres is only the equivalent pointwise clause). Node changed only in lean; statement verbatim; all 9 dependency declarations used; imports match proof-dep records; docstrings with source, blueprint and 9 proof steps; lines <=94 chars; sorry only. nt_compile --json rc 0 with no errors or warnings (about 4 s); probe confirmed error reporting and axioms. Minor: the Second reading by NF section is thin, but this independent reading found nothing to change."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

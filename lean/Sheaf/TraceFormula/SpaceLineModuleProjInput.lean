@@ -5,11 +5,11 @@ Authors: SHEAF group Q69
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.AlgebraicSpace
-public import WeilConjectures.AlgebraicGeometry.SquareZeroTensorBoundaryComparisons
-public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
+public import Sheaf.TraceFormula.SpaceLinePresentationDefs
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import Mathlib.CategoryTheory.Subfunctor.Image
+import Sheaf.TraceFormula.SpaceLinePresentationExistence
+import Sheaf.TraceFormula.SpaceLinePresentationHomDescent
 
 /-!
 # Scheme-test presentations for a line module and its graded sections
@@ -45,110 +45,11 @@ namespace AlgebraicGeometry.AlgebraicSpace
 
 variable {S : Scheme.{u}}
 
-/-- Schemes mapping to a presheaf, with commuting triangles as morphisms.
-Source: Stacks, Tag 0D2Z (blueprint: def-trf-space-line-module-proj-input). -/
-abbrev SchemeTests (F : (Over S)ᵒᵖ ⥤ Type u) := CostructuredArrow yoneda F
-
-/-- The structural map of a scheme test to the scheme base.
-Source: Stacks, Tag 0D2Z (blueprint: def-trf-space-line-module-proj-input). -/
-noncomputable def testToBase {F : (Over S)ᵒᵖ ⥤ Type u} {T : Over S}
-    (f : F ⟶ yoneda.obj T) (W : SchemeTests F) : W.left ⟶ T :=
-  yoneda.preimage (W.hom ≫ f)
-
-/-- A family of invertible modules with specified tensor-pullback identifications.
-Coherence and identification with the small-etale module are imposed below.
-Source: Stacks, Tags 03G7 and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
-structure TestLineFamily (F : (Over S)ᵒᵖ ⥤ Type u) where
-  module (W : SchemeTests F) : W.left.left.Modules
-  invertible (W : SchemeTests F) : (module W).IsInvertible
-  pullbackIso {W V : SchemeTests F} (j : W ⟶ V) :
-    (Scheme.Modules.tensorPullback j.left.left).obj (module V) ≅ module W
-
-attribute [instance] TestLineFamily.invertible
-
-/-- Pullback of a global section, using the tensor-formula adjunction normalized by
-`1 ⊗ eta(s)`, followed by the specified cartesian identification.
-Source: Stacks, Tags 0095, 0096 and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
-noncomputable def TestLineFamily.sectionMap {F : (Over S)ᵒᵖ ⥤ Type u}
-    (L : TestLineFamily F) {W V : SchemeTests F} (j : W ⟶ V)
-    (s : Γ(L.module V, ⊤)) : Γ(L.module W, ⊤) :=
-  (L.pullbackIso j).hom.app ⊤
-    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j.left.left)).unit.app
-      (L.module V)).val.app (op ⊤) s)
-
-/-- The same pullback on tensor powers, using the existing monoidal comparisons.
-Source: Stacks, Tags 01CD and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
-noncomputable def TestLineFamily.powerMap {F : (Over S)ᵒᵖ ⥤ Type u}
-    (L : TestLineFamily F) {W V : SchemeTests F} (j : W ⟶ V) (n : ℕ)
-    (s : Γ((L.module V).tensorPow n, ⊤)) : Γ((L.module W).tensorPow n, ⊤) :=
-  (Scheme.Modules.boundaryPullbackPowIso j.left.left (L.module V) n ≪≫
-    Scheme.Modules.boundaryTensorPowIso (L.pullbackIso j) n).hom.app ⊤
-    (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction j.left.left)).unit.app
-      ((L.module V).tensorPow n)).val.app (op ⊤) s)
-
-/-- The full identity and composition equations of the cartesian pullback isomorphisms.
-These are equations of sheaf isomorphisms, so they include every local section.
-Source: Stacks, Tags 03G7 and 0097
-(blueprint: def-trf-space-line-module-proj-input). -/
-def TestLineFamily.IsCoherent {F : (Over S)ᵒᵖ ⥤ Type u} (L : TestLineFamily F) : Prop :=
-  (∀ W : SchemeTests F, L.pullbackIso (𝟙 W) =
-    (Scheme.Modules.boundaryPullbackComparison (𝟙 W.left.left)).app (L.module W) ≪≫
-      (Scheme.Modules.pullbackId W.left.left).app (L.module W)) ∧
-    ∀ (W V Z : SchemeTests F) (j : W ⟶ V) (k : V ⟶ Z),
-      L.pullbackIso (j ≫ k) =
-        (Scheme.Modules.tensorPullbackCompositionIso j.left.left k.left.left
-          (j ≫ k).left.left rfl).app (L.module Z) ≪≫
-        (Scheme.Modules.tensorPullback j.left.left).mapIso (L.pullbackIso k) ≪≫
-        L.pullbackIso j
-
-/-- Restricting a cartesian family along a map of presheaves is its scheme-test pullback.
-There are no choices of objects or morphisms in this construction.
-Source: Stacks, Tag 0D2Z(3) (blueprint: def-trf-space-line-module-proj-input). -/
-noncomputable def TestLineFamily.pullback {F G : (Over S)ᵒᵖ ⥤ Type u}
-    (L : TestLineFamily F) (g : G ⟶ F) : TestLineFamily G where
-  module W := L.module ((CostructuredArrow.map g).obj W)
-  invertible W := L.invertible ((CostructuredArrow.map g).obj W)
-  pullbackIso j := L.pullbackIso ((CostructuredArrow.map g).map j)
-
-/-- A cartesian scheme-test presentation of the given small-etale line module.
-The additive equivalences are linear over regular functions, and commute with every
-small-etale restriction map. Thus the family is the pullback of `line`, not arbitrary
-extra line modules on the test schemes.
-Source: Stacks, Tags 03G7 and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
-structure EtaleLinePresentation (X : AlgebraicSpace S) extends TestLineFamily X.obj.obj where
-  coherent : toTestLineFamily.IsCoherent
-  line : X.Modules
-  isLine : X.IsLineModule line
-  etaleSections (T : X.EtaleSite) : Γ(module T.obj, ⊤) ≃+ line.val.obj (op T)
-  etaleSections_smul (T : X.EtaleSite) (r : Γ(T.obj.left.left, ⊤))
-      (s : Γ(module T.obj, ⊤)) : etaleSections T (r • s) = r • etaleSections T s
-  etaleSections_naturality {T U : X.EtaleSite} (j : T ⟶ U)
-      (s : Γ(module U.obj, ⊤)) :
-    etaleSections T (toTestLineFamily.sectionMap j.hom s) =
-      line.val.map j.op (etaleSections U s)
-
-/-- Cartesian isomorphisms of the actual pullback modules on scheme tests.
-Source: Stacks, Tags 03G7 and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
-structure TestLineIso {F : (Over S)ᵒᵖ ⥤ Type u} (P Q : TestLineFamily F) where
-  app (W : SchemeTests F) : P.module W ≅ Q.module W
-  naturality {W V : SchemeTests F} (j : W ⟶ V) :
-    (P.pullbackIso j).hom ≫ (app W).hom =
-      (Scheme.Modules.tensorPullback j.left.left).map (app V).hom ≫ (Q.pullbackIso j).hom
-
-/-- Compatibility with the prescribed small-etale module, rather than only an abstract
-isomorphism of the test families. `HEq` uses the fixed equality of the underlying line
-modules when applying this predicate to two realizations of the same module.
-Source: Stacks, Tags 03G7 and 0D2Z
-(blueprint: def-trf-space-line-module-proj-input). -/
-def TestLineIso.IsEtaleCompatible {X : AlgebraicSpace S} (P Q : EtaleLinePresentation X)
-    (e : TestLineIso P.toTestLineFamily Q.toTestLineFamily) : Prop :=
-  ∀ (T : X.EtaleSite) (s : Γ(P.module T.obj, ⊤)),
-    HEq (Q.etaleSections T ((e.app T.obj).hom.app ⊤ s)) (P.etaleSections T s)
+private theorem eqToHom_sections_heq {X : AlgebraicSpace S} {L M : X.Modules}
+    (h : L = M) (T : X.EtaleSite) (s : L.val.obj (op T)) :
+    HEq ((eqToHom h).val.app (op T) s) s := by
+  subst M
+  rfl
 
 /-- Every small-etale line module has its cartesian scheme-test realization, uniquely
 up to the unique isomorphism inducing the identity of that small-etale module. This
@@ -173,7 +74,39 @@ theorem exists_linePresentation (X : AlgebraicSpace S) (L : X.Modules)
       ∀ Q : EtaleLinePresentation X, Q.line = L →
         ∃! e : TestLineIso P.toTestLineFamily Q.toTestLineFamily,
           e.IsEtaleCompatible P Q := by
-  sorry
+  obtain ⟨P, hP⟩ := exists_etaleLinePresentation X L hL
+  refine ⟨P, hP, ?_⟩
+  intro Q hQ
+  let a : P.line ≅ Q.line := eqToIso (hP.trans hQ.symm)
+  obtain ⟨f, hf, hfu⟩ := existsUnique_testLineHom P Q a.hom
+  obtain ⟨g, hg, hgu⟩ := existsUnique_testLineHom Q P a.inv
+  have hfg : f.comp g = TestLineHom.id P.toTestLineFamily := by
+    obtain ⟨e, _, he⟩ := existsUnique_testLineHom P P (𝟙 P.line)
+    exact (he _ (by simpa using hf.comp hg)).trans
+      (he _ (TestLineHom.isEtaleCompatible_id P)).symm
+  have hgf : g.comp f = TestLineHom.id Q.toTestLineFamily := by
+    obtain ⟨e, _, he⟩ := existsUnique_testLineHom Q Q (𝟙 Q.line)
+    exact (he _ (by simpa using hg.comp hf)).trans
+      (he _ (TestLineHom.isEtaleCompatible_id Q)).symm
+  let e : TestLineIso P.toTestLineFamily Q.toTestLineFamily :=
+    { app := fun W ↦
+        { hom := f.app W
+          inv := g.app W
+          hom_inv_id := congrArg (fun t ↦ t.app W) hfg
+          inv_hom_id := congrArg (fun t ↦ t.app W) hgf }
+      naturality := f.naturality }
+  have he : e.IsEtaleCompatible P Q := by
+    intro T s
+    exact (hf T s) ▸ eqToHom_sections_heq (hP.trans hQ.symm) T (P.etaleSections T s)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply TestLineIso.toHom_injective
+  change e'.toHom = f
+  apply hfu
+  intro T s
+  apply eq_of_heq
+  exact (he' T s).trans
+    (eqToHom_sections_heq (hP.trans hQ.symm) T (P.etaleSections T s)).symm
 
 /-- The cartesian realization selected by its preceding universal property. It is
 uniquely determined up to the unique isomorphism preserving the original line module.

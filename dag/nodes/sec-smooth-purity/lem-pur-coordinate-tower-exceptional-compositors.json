@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-coordinate-tower-exceptional-compositors",
+ "kind": "statement",
+ "title": "Invertibility of the fixed exceptional tower compositors",
+ "statement": "Fix $P,n,B$ as in [def-pur-coordinate-tower-normalization-data], and $r\\geq0$. The fixed exceptional-composition arrow $Rq_r^!Rp_r^!A_B\\to Rp_{r+1}^!A_B$ (using the identity exceptional functor at $r=0$) and the closed-composition arrow $Rz_r^!Rs_r^!W_{r+1}\\to Rz_{r+1}^!W_{r+1}$ are invertible. No affine-line comparison or orientation is assumed invertible.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "stmt_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "restrict the exceptional adjunctions to bounded-below etale-origin objects.\nTheir composite is an adjunction, with the pasted counit. Conjugate the canonical\noriginCompositionAmbient isomorphism. Its component is compositionInverse: both\nare the unique transpose of that pasted counit. The conjugate is invertible.\nAt stage zero exceptionalCompositeRaw instead uses identityCompositeMap, an\nisomorphism induced by equality of scheme morphisms. Its defining HEq identifies\nexceptionalComposite with that map. At positive stages use compositionInverse.\nThe closed-composition arrow is compositionInverse followed by equality transport\nalong zero_successor; hence it too is invertible. These statements concern no\norientation or normalization identity. At r=0 they use the identity normalization;\non an empty scheme the same adjunction argument applies.",
+   "uses": [
+    "def-pur-coordinate-tower-normalization-data",
+    "thm-sf-comp-composition",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-coordinate-tower-normalization-data",
+  "thm-sf-comp-composition",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The conjugate of an isomorphism under adjunctions is an isomorphism",
+   "results": "CategoryTheory.conjugateEquiv_iso and conjugateIsoEquiv; generic functor-level conjugation only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical mate of a composition isomorphism between left adjoints is an isomorphism between composite right adjoints",
+   "results": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv; generic composition mates.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv|comp_counit_app|mateEquiv_hcomp",
+   "results": "CategoryTheory/Adjunction/Mates.lean and Basic.lean; no specified origin compositor component.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; generic categorical tools are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoordinateTowerNormalizationInduction",
+  "group": "K6",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "Final paragraph: the specified composite affine-line adjunction and exceptional pullback of its comparison; normalization-induction proof Steps 2--8.",
+   "via": [
+    "lem-pur-coordinate-tower-normalization-induction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateTowerExceptionalCompositors",
+  "file": "lean/Sheaf/Paper/CoordinateTowerExceptionalCompositors.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateTowerNormalization.exceptionalCompositors_isIso",
+  "statement": "theorem exceptionalCompositors_isIso\n    (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})\n    (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (r : ℕ) :\n    IsIso (exceptionalComposite (setting P n) B aB\n      ⟨coefficientUnit P n B, (unit_origin P n B).plus⟩ r) ∧\n    IsIso (closedCompositionInverse P n B aB r)",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-9e440",
+  "group": "K6",
+  "result": "fix",
+  "landing": "20261026T001939-L-44426",
+  "kind": "interface",
+  "note": "independent cc review: delivered Lean/node files vs reviewed head 728195 (byte-identical) and clone 509a6c5b (item untouched since af5def4); Data module vs published item (verbatim move); item theorem signature (identical); importer CoordinateSectionArrows compiled against published and against the delivery (same 4 pre-existing errors)"
+ }
+}

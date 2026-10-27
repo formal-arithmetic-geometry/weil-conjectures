@@ -1,0 +1,253 @@
+{
+ "id": "lem-zl-classical-finite-weil-diagram-realization",
+ "kind": "statement",
+ "title": "Finite classical lisse Weil diagrams admit simultaneous normalized heart realizations",
+ "statement": "Fix a prime power $q=p^a$, $k_0=\\mathbf F_q$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Let $Y_0$ be a separated finite-type $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and write $g_Y$ for geometric Frobenius. Use the classical lisse adic categories of [def-pod-lisse-l-adic-sheaves], the sf raw rationalized and common-stage constructible hearts of [def-weil-constructible-heart, def-weil-algebraically-closed-coefficients], and the normalized lisse realization of [lem-tw-lisse-rational-realization]. The scheme $Y$ is Noetherian of finite dimension and is a finite disjoint union of clopen connected components. Let $I$ and $A$ be finite sets of vertices and arrows, with source and target maps $A\\rightrightarrows I$. At each vertex prescribe a classical lisse $\\Omega$-sheaf $M_i$ with a Weil isomorphism $\\theta_i:g_Y^*M_i\\xrightarrow{\\sim}M_i$, where $g_Y^*$ is the classical lisse pullback of [def-wf-lisse-adic-automorphism-pullback]; along each arrow prescribe a Weil-equivariant rational sheaf map. Prescribe finitely many equations between finite additive composites of these maps, their Frobenius pullbacks, the Weil maps and their inverses. Then there are a finite extension $E/\\mathbf Q_\\ell$ in $\\Omega$, classical lisse $E$-models for all these objects, arrows, inverse maps and equations, and normalized inverse systems $N_i=(N_{i,n})_{n\\geq1}$ of finite locally free $\\mathcal O_E/\\varpi_E^n$-sheaves with locally constant finite ranks, whose rationalizations are those models. Each $N_i$ gives a lisse sf heart object $K_i$ whose module realization is $\\widehat N_i[1/\\varpi_E]$, where $\\widehat N_i=\\varprojlim_n\\nu_Y^*N_{i,n}$. The normalized Hom identifications lift all the prescribed maps, inverses and equations, and give Weil isomorphisms $Lg_Y^*K_i\\xrightarrow{\\sim}K_i$ and Weil-equivariant arrow maps. These identifications use the actual Frobenius pullbacks with the unit pinning of [def-zl-normalized-classical-weil-realization] and are compatible with finite coefficient extension. The rational maps need not preserve the chosen integral systems. After scalar extension to $\\Omega$, any prescribed Weil-compatible identification of one $M_i$ with the realization of a given lisse heart Weil object (one carrying $\\theta_i$ to the realized Weil structure of that object) lifts uniquely to a Weil isomorphism with that object. Zero objects, zero maps, an empty diagram, and disconnected or empty $Y$ are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4) and Proposition 6.8.14(2); finite Hom-colimit diagrams and underlying stable lattices (Weil II (1.1.1)b-d; Stanford L19 Proposition 1.1.9). Agent refinement for blueprint real-mixed-by-curves paragraph 1."
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-tw-lisse-rational-realization",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-zl-normalized-classical-weil-realization",
+  "def-wf-lisse-adic-automorphism-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Choose coherent finite stages P0 for the supplied realization R using lem-zl-coherent-normalized-diagram-stages. Apply lem-zl-finite-weil-diagram-descent to the finite classical diagram and its equations, obtaining E,N,b,beta and the raw signed-expression equalities.",
+   "uses": [
+    "lem-zl-coherent-normalized-diagram-stages",
+    "lem-zl-finite-weil-diagram-descent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At the chosen stage, its finite_add field induces an additive homomorphism from the underlying raw Hom group to the sf Hom group. An additive homomorphism preserves integer scalar multiples and finite list sums; induction on the expression list therefore sends each raw expression value to the corresponding finite value. Apply this homomorphism to each descended equation. The stage lisse field supplies finite lissity.",
+   "uses": [
+    "def-zl-finite-weil-diagram-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The geometric fibre is noetherian by the inherited zlClassicalNoetherian instance. A locally noetherian scheme is locally connected; compactness then makes its connected-component quotient finite, and every connected component is clopen. A finite lisse object is common-stage lisse by reusing its local free charts and applying the finite-to-common pullback object equality. This property is invariant under isomorphism by composing each chart isomorphism with pullback of the inverse isomorphism. Apply it to stage inverse followed by R.functor.mapIso beta to obtain common-stage lissity of each supplied classical object.",
+   "uses": [
+    "def-zl-normalized-classical-weil-realization",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each classical vertex apply lem-zl-prescribed-weil-isomorphism-lifts. Assemble the descended diagram, its finite equations, component topology, finite and common lissity, coefficient coherence and unique prescribed-object lifts into the unchanged conclusion.",
+   "uses": [
+    "lem-zl-prescribed-weil-isomorphism-lifts"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-zl-finite-weil-diagram-data",
+  "def-zl-normalized-classical-weil-realization",
+  "lem-zl-coherent-normalized-diagram-stages",
+  "lem-zl-finite-weil-diagram-descent",
+  "lem-zl-prescribed-weil-isomorphism-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "BS 6.8.4 and 6.8.14; compiled assembly from three strictly smaller source steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of classical lisse adic Weil sheaves and rational maps with equations has simultaneous lisse constructible heart realizations over a finite coefficient field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f]\\n \", \"doc\": \"Given a diagram $ D: \\\\mathcal{I} \\\\to \\\\text{Sch} $ of schemes, a natural transformation from $ D $ to the constant diagram at $ S $, and a morphism $ X \\\\to S $, there exists an index $ j $ in the refin\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, there exists an index \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"In a cofiltered diagram of schemes where all transition morphisms are affine, if two compact open subsets $U$ and $V$ of an object $D(i)$ have equal preimages under the cone projection map $c.\\\\pi.app_\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine inverse-limit descent concerns diagrams of schemes, and fully faithful functor lemmas do not supply lisse adic lattices, completed realization or the pinned Frobenius comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.FullyFaithful, CategoryTheory.Equivalence",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.FullyFaithful'",
+   "date": "2026-10-22",
+   "verdict": "invalid identifier pattern: retried by the recorded substring Loogle query; not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|lisse|adic.*realization",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"line\": \"47\", \"text\": \"lemma isSeparated_iff_setRelIsSeparated :\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"103\", \"text\": \"  .of_maximal_isSeparated <| by simpa [isSeparated_iff_setRelIsSeparated] using hN\"}\n  {\"file\": \"Mathlib/Data/Rel/Separated.lean\", \"line\": \"45\", \"text\": \"alias _root_.Set.Subsingleton.relIsSeparated := IsSeparated.of_subsingleton\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine inverse-limit descent concerns diagrams of schemes, and fully faithful functor lemmas do not supply lisse adic lattices, completed realization or the pinned Frobenius comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of classical lisse adic Weil sheaves and rational maps with equations has simultaneous lisse constructible heart realizations over a finite coefficient field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"[HasFiniteLimits D] : HasFiniteLimits (Sheaf J D)\", \"doc\": \"If a category $\\\\mathcal{D}$ has finite limits, then the category of sheaves on a site $(\\\\mathcal{C}, J)$ with values in $\\\\mathcal{D}$ also has finite limits. This instance asserts that the category of\"}\n  {\"name\": \"instHasLimitsCondensedSet\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \": HasLimits CondensedSet.{u}\", \"doc\": \"The category of condensed sets admits all limits, meaning that for every diagram indexed by a category of the same size as the category of condensed sets, the limit of the diagram exists within the ca\"}\n  {\"name\": \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor.FullyFaithful\", \"doc\": \"The functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces is fully faithful. This follows from the fact that its adjunction unit is an isomorphism, ensuring th\"}\n  {\"name\": \"instHasFiniteLimitsCondensed\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A : Type*} [Category* A] [HasFiniteLimits A] : HasFiniteLimits (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite limits, then the category of condensed objects over $\\\\mathcal{A}$, denoted $\\\\text{Condensed}\\\\, \\\\mathcal{A}$, also has finite limits. This follows from the fact t\"}\n  {\"name\": \"instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology\", \"module\": \"Mathlib.Condensed.Limits\", \"type\": \"{A : Type*} [Category* A] [HasFiniteColimits A] [HasWeakSheafify (coherentTopology CompHaus.{u}) A] :\\n  HasFiniteColimits (Condensed.{u} A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits and the category of compact Hausdorff spaces equipped with the coherent Grothendieck topology admits weak sheafification into $\\\\mathcal{A}$, then the ca\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib.Condensed.Discrete.Characterization\", \"type\": \"(X : LightCondSet.{u})\\n  (h : ∀ S : LightProfinite.{u}, IsColimit <| X.val.mapCocone (coconeRightOpOfCone S.asLimitCone)) :\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"LightCondensed\", \"module\": \"Mathlib.Condensed.Light.Basic\", \"type\": \"(C : Type w) [Category.{v} C]\", \"doc\": \"The category of sheaves on the category of light profinite spaces equipped with the coherent Grothendieck topology, taking values in the category $ \\\\mathcal{C} $.\"}\n  {\"name\": \"CondensedSet.LocallyConstant.iso\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \": functor ≅ discrete (Type (u + 1))\", \"doc\": \"An isomorphism between the functor constructing sheaves of locally constant functions on compact Hausdorff spaces and the discrete functor embedding types into condensed sets, established via the adju\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine inverse-limit descent concerns diagrams of schemes, and fully faithful functor lemmas do not supply lisse adic lattices, completed realization or the pinned Frobenius comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of lisse ell adic sheaves lift through fully faithful completed rational realization with Frobenius pullback and inverse maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] (s : ↑(c.p\", \"doc\": \"Given a cofiltered diagram of schemes where each morphism is affine and each object is compact and quasi-separated, any global section of the structure sheaf of the limit scheme can be expressed as th\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram $ D : I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes with affine transition maps, a compact open subset $ U \\\\subseteq D(i) $, and sections $ s,t \\\\in \\\\Gamma(D(i), U) $ whose image\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"LightCondensed.ofSheafForgetLightProfinite_val\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"∀ {A : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} A] [inst_1 : CategoryTheory.HasForget A]\\n  [inst_2 : CategoryTheory.Limits.ReflectsFiniteLimits (CategoryTheory.forget A)]\\n  (F : CategoryTheory.Functor LightProfiniteᵒᵖ A)\\n  [inst_3 : CategoryTheory.Limits.PreservesFiniteProducts (F.comp (\", \"doc\": \"Given a category $\\\\mathcal{A}$ with a forgetful functor reflecting finite limits, and a functor $F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\mathcal{A}$ such that $F$ composed with the forgetful funct\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine inverse-limit descent concerns diagrams of schemes, and fully faithful functor lemmas do not supply lisse adic lattices, completed realization or the pinned Frobenius comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FullyFaithful\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.id\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" (C : Type u₁) [CategoryTheory.Category.{v₁, u₁} C] : (CategoryTheory.Functor.id C).FullyFaithful\", \"doc\": \"The identity functor is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) : Type (max (max u₁ v₁) v₂)\", \"doc\": \"Structure containing the data of inverse map `(F.obj X ⟶ F.obj Y) → (X ⟶ Y)` of `F.map`\\nin order to express that `F` is a fully faithful functor.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.instSubsingleton\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} : Subsingleton F.FullyFaithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.faithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) : F.Faithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.full\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) : F.Full\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.Full] [F.Faithful] : F.FullyFaithful\", \"doc\": \"A `FullyFaithful` structure can be obtained from the assumption the `F` is both\\nfull and faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {G : CategoryTheory.Functor C D} (e : F ≅ G) : G.FullyFaithful\", \"doc\": \"If `F` is fully faithful and `F ≅ G`, then `G` is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} (e : F.obj X ≅ F.obj Y) : X ≅ Y\", \"doc\": \"The unique isomorphism `X ≅ Y` which induces an isomorphism `F.obj X ≅ F.obj Y`\\nwhen `hF : F.FullyFaithful`.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.isoEquiv\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} : (X ≅ Y) ≃ (F.obj X ≅ F.obj Y)\", \"doc\": \"The equivalence `(X ≅ Y) ≃ (F.obj X ≅ F.obj Y)` given by `h : F.FullyFaithful`.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.comp\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {G : CategoryTheory.Functor D E} (hG : G.FullyFaithful) : (F.comp G).FullyFaithful\", \"doc\": \"Fully faithful functors are stable by composition.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofCompFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D E} [G.Faithful] (hFG : (F.comp G).FullyFaithful) : F.FullyFaithful\", \"doc\": \"If `F ⋙ G` is fully faithful and `G` is faithful, then `F` is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimage\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (self : F.FullyFaithful) {X Y : C} (f : F.obj X ⟶ F.obj Y) : X ⟶ Y\", \"doc\": \"The inverse map `(F.obj X ⟶ F.obj Y) → (X ⟶ Y)` of `F.map`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: affine inverse-limit descent concerns diagrams of schemes, and fully faithful functor lemmas do not supply lisse adic lattices, completed realization or the pinned Frobenius comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of lisse adic sheaves with Frobenius isomorphisms lifts to the rational constructible heart preserving equations",
+   "results": "8 hits; names/files: IsAdicComplete.mk_lift, IsAdicComplete.lift.congr_simp, CategoryTheory.Localization.Lifting.ofIsos, IsAdicComplete.StrictMono.lift.congr_simp, Isocrystal.term_≃ᶠˡ[_,_]_, IsAdicComplete.liftAlgHom, CategoryTheory.GrothendieckTopology.liftToDiagramLimitObjAux, IsAdicComplete.of_comp_lift",
+   "date": "2026-10-23",
+   "verdict": "no match: module adic-completion lifts, isocrystals and site limits do not provide the classical/sf normalized Weil comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of classical lisse ell adic Weil sheaves admit common finite coefficient models and fully faithful normalized constructible heart realization",
+   "results": "8 hits; names/files: LightCondMod.LocallyConstant.fullyFaithfulFunctor, CondensedMod.LocallyConstant.fullyFaithfulFunctor, Condensed.finFree, CondensedMod.ofSheafProfinite, Condensed.profiniteSolid, LightCondMod.ofSheafLightProfinite, Condensed.ofSheafForgetProfinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern discrete condensed modules and affine inverse limits, not classical adic lattices and the specified sf heart realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stable lattices for classical lisse adic sheaves and rational realization into the heart of the derived constructible pro etale category with automorphism pullback",
+   "results": "8 hits; names/files: Condensed.lanSheafProfinite, Condensed.profiniteSolid, LightCondMod.ofSheafLightProfinite, LightCondAb.ofSheafLightProfinite, LightProfinite.hasSheafify, CondensedMod.ofSheafProfinite, Condensed.profiniteFree, CondensedMod.IsSolid",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern discrete condensed modules and affine inverse limits, not classical adic lattices and the specified sf heart realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-classical-weil-filtration-heart-transport",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1: construction of the actual Weil filtration; heart-transport argument, old steps 1-4 (finite components, finite models, lattices and lifting)",
+   "via": [
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-zl-classical-finite-weil-diagram-realization",
+  "worker": "stage1",
+  "summary": "Q159 split the finite classical Weil-diagram realization into nine steps using existing nodes only. Preserved statement and statement dependencies. Wrote finite coefficient descent, underlying stable lattices, actual inverse-limit heart objects, unit-pinned Frobenius comparison, inverse/equivariance calculations, finite equations and unique prescribed-object identification; checked zero, empty and permuted-component cases.",
+  "blueprint": "thm-zl-real-mixed-by-curves, proof paragraph 1: constructing an actual finite Weil filtration; realizes the finite-model/lattice/map-lifting segment previously isolated from old heart-transport steps 1-4. Current latest proof and unit route checked.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-sf-pbc-normalized-heart-model",
+    "why": "Use only its Noetherian, finite-dimensional, invertible-coefficient conclusion for finite-type geometric schemes; the unit contains no replacement for these scheme hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Finite irreducible components are a generic Noetherian topological tool for choosing lattices componentwise."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Classical finite and adic fibre equivalences turn underlying sheaves into profinite representations and lattice reductions back into sheaves."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "The compact-group stable-lattice theorem applies to geometric monodromy only, not to the Weil group."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Use reduction/limit equivalence and fully faithful rationalization with actual pullback and coefficient comparisons."
+   },
+   {
+    "node": "lem-zl-classical-system-raw-lisse-realization",
+    "why": "Use the actual inverse-limit integral complex and its raw sf heart realization, not a new definition of the heart."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Use the specified fully faithful sf lisse-heart realization, ordinary pullback, unit and finite-extension normalizations."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "The identity-induced sf/PBC coefficient bridge gives the identical finite-reduction pullback tower required by the normalized model datum."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Canonical continuous integral reduction equivalence supplies the actual reduction datum and quotient maps for unit pinning."
+   },
+   {
+    "node": "lem-per-lisse-completed-coefficient-iso",
+    "why": "Fix the coefficient isomorphism by its actual finite-quotient projections; this avoids silently choosing a scalar automorphism."
+   },
+   {
+    "node": "lem-per-lisse-completed-pointwise-comparison",
+    "why": "Existence of Comparison records with the prescribed integral datum and coefficient isomorphism, needed before applying the operation theorem."
+   },
+   {
+    "node": "lem-per-lisse-completed-tensor-operations",
+    "why": "Use the actual-adjunction-unit normalization of completed tensor pullback operations for the comparisons, not an unproved existence assertion from a definition."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-e2dfc903a",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-e2dfc903a (reviewer sub-agent of L); spot-checked: I read the item's nine steps (no new nodes; statement and stmt_deps unchanged from base and identical to the live and side-live clones, which still have the item unsplit, so it is not superseded). There is no repair note. The parent heart-transport step 1 uses exactly this statement. Sources checked: Bhatt–Scholze 6.8.4(1),(4), 6.8.14(2) and Rem. 6.8.15; Weil II (1.1.1) b)–d); L19 Prop. 1.1.9, second bullet (only π₁ stabilises a lattice, so Weil maps are correctly left rational). There is no SGA citation. Step checks: S1 Noetherian/finite-dimension clause plus finitely many components, with the clopen chain argument written out. S2 builds the finite Hom-colimit models; by def-wf, g^*(E,F) = (E, g^*F). S3 cor-galois(2) applies on clopen connected components (Noetherian, separated, ℓ invertible); the compact-group lattice gives continuous finite free reductions, and part (1) turns them back into sheaves; tests: θ = ℓ on a point, components swapped by g. S4 uses lem-per-system-comparison and lem-zl-classical-system-raw-lisse-realization on free-modelled systems, as their statements give. S5 lem-tw allows non-k-linear pullback; full faithfulness lifts c_i. S6 lem-per coefficient-iso projections match the hypothesis of lem-per-pointwise; the tensor-operations node is used only for unit normalisation; every pinning clause of def-zl is addressed by the section and local-basis computations. S7–S9 are elementary cancellations through faithfulness; the lift of a Weil-compatible b is unique; rank zero, empty I and empty Y are treated. Step uses equal proof_deps. I found no duplicate: rg hits are fd pullback data only, and raw-lisse-realization is strictly smaller. All 12 tool_uses are accepted as black boxes that replace no step of the unit route. Batch 5: cor-galois (π₁ equivalence) and lem-pod-profinite-stable-lattice are foundational and not steps of the Poincaré duality or trace-formula proofs; the other closures reach only def-pod-lisse-l-adic-sheaves (a definition already in stmt_deps), lem-pd-sheaf-scalar-tensor-inverse-formulas (site tensor formulas), lem-pod-derived-exact-square-composition (abstract derived pasting) and lem-trf-site-functorial-flat-resolution (flat resolutions), all generic, so no assumption leaf is needed. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClassicalFiniteWeilDiagramRealization",
+  "declaration": "WeilConjectures.classical_finite_weil_diagram_realization",
+  "declarations": [
+   "WeilConjectures.classical_finite_weil_diagram_realization"
+  ],
+  "file": "lean/Sheaf/Paper/ClassicalFiniteWeilDiagramRealization.lean",
+  "statement": "theorem classical_finite_weil_diagram_realization (I : Type v) [Finite I] (A : Type w) [Finite A] (s t : A → I) (J : Type z) [Finite J] (x y : J → I × ℕ) (e f : ∀ j : J, ZlWeilExpression s t (x j) (y j)) : letI := zlDiagramUnits D l hl Y₀ ∀ (R : ZlClassicalRealization D l hl Ω Y₀) (M : I → ZlClassicalWeil D l Ω Y₀) (a : ∀ j : A, M (s j) ⟶ M (t j)), (∀ j : J, zlClassicalEquation D l Ω Y₀ M a (e j) (f j)) → ∃ P₀ : ∀ E : Padic.FiniteCoefficientFields l Ω, ZlDiagramStage D l hl Ω Y₀ R E, ∃ E : Padic.FiniteCoefficientFields l Ω, let P := P₀ E ∃ N : I → P.Weil D l hl Ω Y₀, ∃ b : ∀ j : A, N (s j) ⟶ N (t j), ∃ β : ∀ i : I, (P.classicalWeil D l hl Ω Y₀).obj (N i) ≅ M i, (∀ j : A, (P.classicalWeil D l hl Ω Y₀).map (b j) ≫ (β (t j)).hom = (β (s j)).hom ≫ a j) ∧ (∀ j : J, zlExpressionValue P.operation.raw N b (ObjectProperty.ι _) (e j) = zlExpressionValue P.operation.raw N b (ObjectProperty.ι _) (f j)) ∧ (∀ j : J, zlExpressionValue P.operation.raw N b P.finite (e j) = zlExpressionValue P.operation.raw N b P.finite (f j)) ∧ Finite (_root_.ConnectedComponents (D.geometricFiber Y₀).left) ∧ (∀ y : (D.geometricFiber Y₀).left, IsClopen (connectedComponent y)) ∧ (∀ i : I, LisseRealization.Lisse D l hl (Coefficient.{u} l Ω E) (zlRealizationBase D l hl Y₀) (P.finite.obj (N i).carrier)) ∧ (∀ i : I, IsCommonStageLisse l Ω (D.geometricFiber Y₀).left (R.functor.obj (M i).carrier)) ∧ ZlDiagramCoefficientCoherence D l hl Ω Y₀ R P₀ ∧ (∀ i : I, ZlPrescribedWeilLifts D l hl Ω Y₀ R (M i))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "C3 stage-3 decomposition: all original diagram definitions moved verbatim to ClassicalFiniteWeilDiagramData, publicly re-exported here. The original theorem signature is unchanged. Its assembly proves topology, additive equation transport and common-stage lissity from three split lemmas."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b78b925a9",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H3 (1ccc): R : ZlClassicalRealization is now an input (∀ R placed before M, a); the ∃ R is removed; all of P₀, E, N, β, common-stage lissity, coherence and ZlPrescribedWeilLifts refer to that R. Diff vs 1ccc: binder move plus docstrings; node differs only in lean.statement/note; statement verbatim in file; single sorry. ZlDiagramStage is the owner's ZlClassicalPullbackStage body verbatim (pinning vs R.pullback) plus classical/finite_fullyFaithful/finite_add, which follow from Operation.raw_map/finite_unit and rational full faithfulness for any R. Family coherence is obtained by transporting the sheaf comparison (proof-plan step 6) without choosing R. Unique prescribed lifts hold for every stage P over R. Consumer heart-transport is ∀ R and is now usable. Gates OK: no hollow defs, docstrings with source and blueprint, universes v/w/z independent, edge cases allowed. Advisory: the auto-included stalk-unit Fact variable is derivable via zlDiagramUnits; the stage body copy could become an owner structure. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ee1f2",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261025T122605-L-1788533",
+  "kind": "interface",
+  "note": "independent cc review: item module vs clone (theorem statement byte-identical, 14 defs moved verbatim to ClassicalFiniteWeilDiagramData and publicly re-exported), three new sorry step statements vs the item conclusion and the node plan, item node fields vs clone (only proof/proof_deps/proof_origin/tool_uses/lean changed), scratch --all compile + #print axioms [propext, sorryAx, Classical.choice, Quot.sound]"
+ }
+}

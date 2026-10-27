@@ -1,0 +1,438 @@
+{
+ "id": "lem-pur-section-compact-source-exchange",
+ "kind": "statement",
+ "title": "Normalized compact-support source and arbitrary exchange for a closed section",
+ "statement": "Let $K_0$ be a field, $\\ell$ a prime invertible in $K_0$, $F/\\mathbf Q_\\ell$ a finite extension with valuation ring $\\mathcal O_F$ and uniformizer $\\varpi_F$, $n\\geq1$, and $A=\\mathcal O_F/\\varpi_F^n$ [def-weil-l-adic-coefficient-extension]. Let $h:X\\to B$ be a separated finite-type morphism between separated finite-type $K_0$-schemes, and let $s:B\\hookrightarrow X$ be a closed section, so $hs=1_B$ [def-weil-finite-type-morphism, def-weil-proper-morphism, def-weil-closed-immersion]. Fix a compactification $X\\xrightarrow{j}\\bar X\\xrightarrow{p}B$ [def-weil-compactifications-refinements]. On site $t\\in\\{\\mathrm{et},\\mathrm{proet}\\}$ use ordinary constant-$A$ module derived categories [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules], and put $F_h^t=Rp_*^t j_!^t$ [def-amb-etale-compact-support, def-compact-support-direct-image-detailed].\n\nThere is an identity-normalized source isomorphism $a_h^t:A_B\\xrightarrow{\\sim}F_h^t s_*^t A_B$. On the etale site its inverse is the specified composite\n$$Rp_*j_!s_*A_B\\xrightarrow{\\sim}Rp_*R(js)_*A_B\\xrightarrow{\\sim}R(pjs)_*A_B\\xrightarrow{\\sim}A_B,$$\nusing the canonical proper/open interchange [lem-cbc-proper-open-interchange-coherence] and normalized direct-image compositors [lem-cbc-etale-derived-direct-image-coherence]. On the pro-etale site it is the compact-support composition comparison for $hs=1_B$ [thm-sf-comp-composition]. The canonical etale/pro-etale compact-support comparison [lem-sf-class-compact-support-comparison] identifies these actual source isomorphisms, using the canonical supported-constant comparison, and acts as the identity on $A_B$.\n\nLet $g:B'\\to B$ be any morphism of $K_0$-schemes, with no finiteness or flatness hypothesis. Form $X'=X\\times_BB'$, with $v:X'\\to X$, section $s'$ and map $h'$, and use the pulled-back compactification. Let $\\beta^t:v_t^{-1}s_*^t A_B\\xrightarrow{\\sim}s'_*{}^t A_{B'}$ be the canonical supported-constant comparison. Use the same etale proper/open formula for $a_{h'}^{\\mathrm{et}}$, and the source comparison transported from that formula for $a_{h'}^{\\mathrm{proet}}$ when $B'$ is not finite type. Let $C^t_{h,g}$ be the compactification exchange [def-cbc-exchange-map], transported to the pro-etale site as specified in [thm-cbc-finite-level-proetale]. Then for either site the actual maps satisfy\n$$F_{h'}^t(\\beta^t)\\circ C^t_{h,g}(s_*^t A_B)\\circ g_t^{-1}(a_h^t)=a_{h'}^t.$$\nEquivalently, exchange on the source supported on a section is the identity of $A_{B'}$ under these normalizations.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3 (base change): identity-normalized compact image of a supported section; argument extracted from lem-pur-line-zero-class-exchange old steps 3--4"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-amb-etale-compact-support",
+  "def-compact-support-direct-image-detailed",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "thm-sf-comp-composition",
+  "lem-sf-class-compact-support-comparison",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-level-proetale",
+  "def-pur-supported-constant-exchange-maps",
+  "def-pur-supported-constant-base-change-maps",
+  "def-pur-finite-compact-site-constructions",
+  "def-sf-compact-support-site-comparison-construction"
+ ],
+ "proof": [
+  {
+   "text": "The original composition_normalization remains an open proof obligation, with the compact-site coherence argument recorded in the declaration docstring. Its unchanged dependencies are retained.",
+   "uses": [
+    "def-cbc-compact-support-square",
+    "def-cbc-exchange-map",
+    "lem-cbc-etale-derived-direct-image-coherence",
+    "lem-cbc-open-closed-recollement",
+    "lem-cbc-proper-open-interchange-coherence",
+    "lem-exc-proetale-closed-exact",
+    "lem-pc-separated-quasi-separated",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-constant-exchange-normalization",
+    "lem-sf-class-compact-support-comparison",
+    "lem-sf-derived-immersion-comparison-normalization",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-sp-finite-compact-site-coherence",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "thm-cbc-finite-level-proetale",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use closed supported-comparison invertibility to obtain compareSupported, sourceComparison and proSource invertibility by exact single realization, functoriality and composition of isomorphisms. Etale finite base change gives etaleBeta invertibility. Exact single realization of supported-pro-exchange invertibility gives proBeta invertibility.",
+   "uses": [
+    "lem-pur-section-supported-comparison-iso",
+    "lem-pur-section-supported-pro-exchange-iso",
+    "lemma-weil-pbc-finite-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the etale section-source component, then the pro-etale component to that equation; combine these with the four independently proved invertibility clauses.",
+   "uses": [
+    "lem-pur-section-source-etale-exchange",
+    "lem-pur-section-source-pro-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-compact-support-square",
+  "def-cbc-exchange-map",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-cbc-open-closed-recollement",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-exc-proetale-closed-exact",
+  "lem-pc-separated-quasi-separated",
+  "lem-pur-etale-closed-constant-tensor",
+  "lem-pur-section-source-etale-exchange",
+  "lem-pur-section-source-pro-exchange",
+  "lem-pur-section-supported-comparison-iso",
+  "lem-pur-section-supported-pro-exchange-iso",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-derived-immersion-comparison-normalization",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lemma-weil-pbc-finite-exchange",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-comp-composition"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 3, decomposition into etale equation, site transport, and proved invertibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(shriek|compactSupport|lowerShriek).*(section|comp)|(section).*(shriek|compactSupport)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no source occurrence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change and composition of compactly supported direct image on a closed section give the identity map on the base constant sheaf",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"comp\"",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "LinearMap.baseChange_comp",
+     "TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm",
+     "TensorProduct.AlgebraTensorModule.baseChange_comp_cancelBaseChange_symm_self",
+     "TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange",
+     "LinearMap.liftBaseChange_comp",
+     "IsBaseChange.comp_equiv",
+     "IsBaseChange.lift_comp",
+     "IsBaseChange.comp"
+    ],
+    "note": "",
+    "digest": "32db24d33863dd07",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; these concern algebraic scalar extension, structure sheaves, constant sheaves, or field roots, not normalized etale/pro-etale compact-support morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a compactifiable separated finite type morphism with a closed section, the compact support base change exchange on the constant sheaf supported on the section is the identity under normalized composition with the section",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "SheafOfModules.pullback_id_comp",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "SheafOfModules.pullback_comp_id",
+     "SheafOfModules.pushforwardSections_unitHomEquiv",
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit"
+    ],
+    "note": "",
+    "digest": "de4fabaaf687a71b",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; these concern algebraic scalar extension, structure sheaves, constant sheaves, or field roots, not normalized etale/pro-etale compact-support morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compactly supported direct image of a constant sheaf supported on a retraction section is canonically the constant sheaf on the base, compatibly with arbitrary base change and etale to proetale comparison",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "CategoryTheory.Sheaf.isConstant_of_forget",
+     "CategoryTheory.Sheaf.isConstant_iff_forget",
+     "CompHausLike.LocallyConstant.counit",
+     "CompHausLike.LocallyConstant.functorToPresheavesIso",
+     "CompHausLike.LocallyConstant.functorIso",
+     "CategoryTheory.Sheaf.isConstant_iff_mem_essImage",
+     "CategoryTheory.instIsConstantObjSheafSheafCompose"
+    ],
+    "note": "",
+    "digest": "2226d40bd217c3e6",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected returned signatures; these concern algebraic scalar extension, structure sheaves, constant sheaves, or field roots, not normalized etale/pro-etale compact-support morphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed section of a compactifiable scheme morphism the compact support exchange identifies with identity on the constant sheaf under direct image composition",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.LocallyRingedSpace.Γ_Spec_left_triangle",
+     "AlgebraicGeometry.ΓSpec.left_triangle",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorId",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app",
+     "AlgebraicGeometry.Scheme.Opens.topIso_hom"
+    ],
+    "note": "",
+    "digest": "d88b9e5b7d39d8f6",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "(compactSupport|lowerShriek|shriek).*(section|comp)|(section).*(compactSupport|lowerShriek|shriek)",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported pushforward of a sheaf on a closed section is the constant sheaf compatibly with arbitrary base change",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.sheafPushforwardContinuous",
+     "TopCat.Sheaf.pushforward_sheaf_of_sheaf",
+     "TopCat.Sheaf.pushforward",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_map_app",
+     "CategoryTheory.Functor.sheafPushforwardCocontinuous.congr_simp",
+     "AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+     "SheafOfModules.pushforwardSections",
+     "SheafOfModules.pushforward"
+    ],
+    "note": "",
+    "digest": "2681d30f8f229658",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\", \"comp\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity normalization of a composite proper pushforward and open extension by zero for a closed section on etale sheaves, commuting with change of base",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE",
+     "AlgebraicGeometry.Scheme.Hom.naturality_assoc",
+     "AlgebraicGeometry.Scheme.Hom.appLE_map",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc",
+     "AlgebraicGeometry.Scheme.Hom.map_appLE'"
+    ],
+    "note": "",
+    "digest": "ec85c642903a6616",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: inspected signatures; hits concern Zariski structure modules or generic sheaf direct image, not section-normalized etale/pro-etale compactification exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-line-zero-class-exchange",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 3 (base change): identity-normalized compact image of a supported section; argument extracted from lem-pur-line-zero-class-exchange old steps 3--4",
+   "via": [
+    "lem-pur-line-zero-class-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-section-compact-source-exchange",
+  "worker": "stage1",
+  "summary": "Seven-step assembly from existing nodes only: proper/open supported source, normalized direct-image exchange pasting, proper-factor site composition coherence, exact closed-source hypotheses, and explicit conjugation on arbitrary base changes. Statement unchanged; no Lean attachment or new node.",
+  "blueprint": "thm-pur-rank-one-thom proof Step 3, the source normalization implicit in compact-support base change; via lem-pur-line-zero-class-exchange.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-etale-derived-direct-image-coherence",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-cbc-proper-open-interchange-coherence",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-pur-etale-closed-constant-tensor",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-pur-supported-constant-exchange-normalization",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-sf-derived-immersion-comparison-normalization",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-sp-finite-compact-site-coherence",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic normalized sheaf/derived compactification calculus used as a black box for the section source; sk-prop-an has no statement providing this auxiliary fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-cbc-open-closed-recollement",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-exc-proetale-closed-exact",
+  "lem-pur-etale-closed-constant-tensor",
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-derived-immersion-comparison-normalization",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "thm-cbc-finite-level-proetale",
+  "thm-sf-comp-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-1ba5d750c",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-1ba5d750c (reviewer sub-agent of L); spot-checked: Ordinary split: no repair note, statement unchanged, 7 steps, no new nodes. Statement: every named map (a^e, a^p, β^t, C^t) is pinned by a cited node, and every hypothesis matches the sources. I re-derived Steps 2-4. The interchange square is (1_B, j, s, q=js), which commutes, and the interchange node has no cartesian condition. Its base-change equation is Stacks 0F7F (more-etale l.2830). With β_k=id and E_s=β^e it gives Rp'_*(e')F(β)C = Rp'_*(E_q)E_p g^{-1}Rp_*(e). Mate pasting for pq=1 then gives r'F(β)C = g^{-1}r, which is the étale claim. Identifying d_{p,q} with the conjugate of the inverse-image compositor is unquoted but a few lines; accepted as elementary. Step 5: lem-sp-finite-compact-site-coherence is stated for any finite ring and Noetherian schemes. With s compactified by (1,s) and 1_B by (1,1), the tower gives α^et=r. C_s is the counit mate, which is the restriction-normalized closed comparison (immersion-normalization and supported-constant-exchange-normalization). C_h is the lem-sf-class comparison. Hence r^pT=N r. The in-route lem-pur-compact-support-site-coherence is finite-field only, so the tool use is justified. Step 6 finiteness checks are correct: complements are quasi-compact by permanence (1) and stay so under base change by (3), so proetale-closed-exact applies to s',q'; a finite-type B' makes X' and X̄' Noetherian. Step 7: thm-cbc-finite-level-proetale needs no condition on Y'. The supported-constant square and coherent pullback comparisons give D^pS=T'N(D^e). Tool uses accepted: exc-proetale-closed-exact, sf-derived-immersion-comparison-normalization, sp-finite-compact-site-coherence. No SGA. Batch-5: the flagged chain ends in lem-pod-lisse-module-sheaves-as-module-objects, which says lisse sheaves are module objects in FLC. That is generic sheaf algebra, not a step of Poincaré duality or the trace formula. It is also already in the base closure through the stmt_deps thm-sf-comp-composition, def-compact-support-direct-image-detailed, lem-cbc-proper-open-interchange-coherence and thm-cbc-finite-level-proetale; accepted. Advisory for the maintainer: the parallel Q123 unsplit node lem-pur-closed-section-compact-origin states the finite-field version of the site clause. It overlaps but is not a duplicate. Edge cases tested: g=id, X=B, empty B', non-flat g, non-qc B'."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SectionCompactSourceExchange",
+  "declaration": "AlgebraicGeometry.SectionCompactSource.section_compact_source_exchange",
+  "declarations": [
+   "AlgebraicGeometry.SectionCompactSource.composition_normalization",
+   "AlgebraicGeometry.SectionCompactSource.section_compact_source_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/SectionCompactSourceExchange.lean",
+  "statement": "theorem section_compact_source_exchange\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (n : ℕ) [Fact (1 ≤ n)] (K₀ : Type u) [Field K₀] (_hl : IsUnit (l : K₀))\n    {B X : Scheme.{u}} [B.Over (Spec (.of K₀))] [X.Over (Spec (.of K₀))]\n    [LocallyOfFiniteType (B ↘ Spec (.of K₀))] [QuasiCompact (B ↘ Spec (.of K₀))]\n    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]\n    [IsSeparated (B ↘ Spec (.of K₀))] [IsSeparated (X ↘ Spec (.of K₀))]\n    (h : X ⟶ B) [h.IsOver (Spec (.of K₀))]\n    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]\n    (c : Compactification h) (s : B ⟶ X) [IsClosedImmersion s]\n    (hs : s ≫ h = 𝟙 B)\n    {B' X' : Scheme.{u}} [B'.Over (Spec (.of K₀))] [X'.Over (Spec (.of K₀))]\n    (g : B' ⟶ B) [g.IsOver (Spec (.of K₀))]\n    (v : X' ⟶ X) (h' : X' ⟶ B') (sq : IsPullback v h' h g)\n    (s' : B' ⟶ X') [IsClosedImmersion s'] (hs' : s' ≫ h' = 𝟙 B')\n    (sqS : ChosenCartesianSquare g s' s v) :\n    IsIso (proSource (Coefficient l E n) c s hs) ∧\n    IsIso (proSource (Coefficient l E n) (c.ofIsPullback sq) s' hs') ∧\n    IsIso (etaleBeta (Coefficient l E n) sqS) ∧\n    IsIso (proBeta (Coefficient l E n) sqS) ∧\n    (Etale.upperStar (ModuleCat.{u + 1} (Coefficient l E n)) g).mapDerivedCategoryPlus.map\n        (etaleSource (Coefficient l E n) c s hs).hom ≫\n      (Etale.rightDerivedLowerShriekOfCompactificationPlusBaseChangeMap\n        (Coefficient l E n) sq c).app (etaleSupported (Coefficient l E n) s) ≫\n      (Etale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} (Coefficient l E n)) (c.ofIsPullback sq)).map\n        (etaleBeta (Coefficient l E n) sqS) =\n      (constantPull (Coefficient l E n) g).hom ≫\n        (etaleSource (Coefficient l E n) (c.ofIsPullback sq) s' hs').hom ∧\n    (ProEtale.upperStar (ModuleCat.{u + 1} (Coefficient l E n)) g).mapDerivedCategoryPlus.map\n        (proSource (Coefficient l E n) c s hs) ≫\n      proExchange (Coefficient l E n) sq c (proSupported (Coefficient l E n) s) ≫\n      (ProEtale.rightDerivedLowerShriekOfCompactificationPlus\n        (ModuleCat.{u + 1} (Coefficient l E n)) (c.ofIsPullback sq)).map\n        (proBeta (Coefficient l E n) sqS) =\n      (proConstantPull (Coefficient l E n) g).hom ≫\n        proSource (Coefficient l E n) (c.ofIsPullback sq) s' hs'",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem gives both actual exchange equations. The accompanying composition_normalization identifies the transported pro-etale source with the specified composition inverse; the etale source is defined by the required normalized proper/open and direct-image formula. All endpoints use the standard fixed-scalar realization and the usual ULift of the specified coefficient quotient. H2 repair at fb50ca0e70ff: statement dependencies now record the existing definition owners of the supported-constant maps and the finite compact-site constructions; both normalization theorems remain in proof_deps. The specified composition is lem-sp-finite-compact-site-coherence's computed alpha^pro, identified there with thm-sf-comp-composition's canonical composition. The comparison compactSupportSiteComparisonPlus is cited through def-sf-compact-support-site-comparison-construction. Lean code and all mathematical clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dd9dfdd7",
+  "group": "NI",
+  "result": "pass",
+  "note": "H2 repair of the fb50ca0e70ff RETURN is complete. Item Lean module byte-identical (sha256 b3b8d3dd), so the earlier full mathematical acceptance stands. Item record changes only stmt_deps and lean.note: lem-pur-supported-constant-exchange-normalization and lem-sp-finite-compact-site-coherence moved to proof_deps only; now cites landed def-pur-supported-constant-exchange-maps, new existing:true def-pur-supported-constant-base-change-maps (square/exchange: plain adjunction-mate defs, verbatim statement, Stacks 07A7/03S6), new existing:true def-pur-finite-compact-site-constructions (8 plain finiteCompactSite* defs checked against the node text: Δ direction, witness conjugation, tower, composition paste, identity unit; verbatim statement) and def-sf-compact-support-site-comparison-construction. Every SupportedConstantNormalization/finiteCompactSite/compactSupportSiteComparisonPlus name used is owned by a cited def node. All new-node stmt_deps on base, no cycle; live item still has no lean record. Report sections present. No compile needed (no change). Advisories: new compact-site def node cites lem-cbc-proetale-extension-zero-comparison, lem-sp-proper-open-coefficient-mate, prop-weil-pbc-comparison-direct-image and lem-cbc-compactifiable-compatible-tower for helpers with no def-node owner; étale baseChangeMap/squareUpperStarIso owners not cited; second reading is a disclosed self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e41a6",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261025T180738-L-4026443",
+  "kind": "interface",
+  "note": "independent cc review: item node lem-pur-section-compact-source-exchange and 4 new nodes vs the 6 delivered Lean modules (moved defs byte-identical to live SectionCompactSourceExchange); importers LineKummerFieldRealization/LineZeroClassExchange compiled against delivered modules (exit 0)"
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-framework-pbc-raw-comparison-laws",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Coefficient-change transport argument, especially (1)--(3); the parent bridge refines the comparison of the two completed presentations.",
+   "via": [
+    "lem-pur-framework-pbc-pullback-scalar-bridge",
+    "lem-pur-twisted-pullback-square-scalars",
+    "lem-pur-smooth-exchange-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Raw localization of fixed normalized integral comparison laws",
+ "statement": "Fix a prime $\\ell$ and an integral comparison system $C$ [def-sf-integral-comparison-system-data]. Suppose simultaneous families Pullback [def-pur-framework-pbc-pullback-comparison-data], Tensor and ScalarTensor [def-pur-framework-pbc-comparison-data] are given over every finite extension of $\\mathbf Q_\\ell$, every Noetherian scheme of finite Krull dimension on which $\\ell$ is invertible, and every scheme morphism and coefficient inclusion between such objects. Suppose the integral unit, composition, scalar_square and tensor_square equations of System [def-pur-framework-pbc-comparison-system] hold for these fixed families and $C$. Then there exist simultaneous families Coefficient, RawPullback, RawScalar and RawTensor [def-pur-framework-pbc-raw-comparison-data], with the prescribed integral-component, object and arrow formulas, satisfying the raw_scalar_square and raw_tensor_square equations of System and the normalized raw unit and composition equations displayed in the Lean statement. In particular su, pu, sc and pc are separately localized from the specified integral units and compositors. This asserts neither existence of the input integral families nor their laws.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+ },
+ "stmt_deps": [
+  "def-pur-framework-pbc-comparison-system",
+  "def-pur-framework-pbc-comparison-data",
+  "def-pur-framework-pbc-pullback-comparison-data",
+  "def-sf-integral-comparison-system-data",
+  "def-pur-framework-pbc-raw-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict the actual completed coefficient-presentation equivalence to the constructible full subcategories using its predicate comparison. The ambient normalized pullback and tensor isomorphisms transfer preservation to the PBC operations. Restrict the fixed pi, scalarComponent and tau; their ambient component equations are precisely the integral component fields of RawPullback, RawScalar and RawTensor.",
+   "uses": [
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  },
+  {
+   "text": "Finally apply raw scalar localization. By [def-weil-rationalization-karoubi] and [def-weil-pbc-rational-category], objects stay unchanged and a morphism is a sum of integral morphisms tensored with field scalars. Every map above is linear (semilinear for $E\\subset L$), being built from coefficient relabeling and balanced tensors. Send each comparison component $u$ and its inverse $v$ to $u\\otimes1$ and $v\\otimes1$. Their composites remain identities. Naturality for an integral $f$ implies naturality for $f\\otimes a$ by linearity, and hence for sums. All the asserted equations, composition and shift compatibilities are preserved because localization preserves composition and addition. This establishes (4) on the raw rational categories, without adjoining any idempotents. Throughout, finite coefficient scalar maps were handled by derived-system/K-flat balancing; no flatness of the ramified quotient map or invertibility of a geometric exchange was used. Apply this construction to the four supplied integral equations, unit, composition, scalar_square and tensor_square. The PBC unit and compositor are localized independently from the specified integral maps, giving exactly the displayed normalization formulas for su, pu, sc and pc. Their localized pi equations give the final raw unit and composition equations. The fixed completed scalar tensor map yields v and q in the tensor square. The unchanged objects of raw localization ensure these equations cover every rational object.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "prop-weil-pbc-rational-transport",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+    "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-pur-integral-operations-preserve-constructible",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-rational-transport",
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Current coefficient-change proof, paragraphs (2) and (3): extension of integral maps to rational coefficients and compatibility with coefficient towers. Agent-written framework/PBC refinement of parent proof Steps 1--8; supported by Stacks 099N, 0941, 07A4 and 0D6D."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived completion commutes with pullback and finite free scalar extension for sheaves of modules",
+   "results": "SheafOfModules.pullback, pullbackPushforwardAdjunction, conjugateEquiv_pullbackComp_inv and pullback free-object formulas; no completed-tower comparison or raw localization of that comparison.",
+   "date": "2026-10-25",
+   "verdict": "No matching theorem. Ordinary pullback identities supply only part of the argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between derived inverse limit models of completed module sheaf pullback compatible with scalar extension",
+   "results": "Ordinary sheaf pullback and adic completion results, no strict derived-complete coefficient-presentation bridge.",
+   "date": "2026-10-25",
+   "verdict": "No match for the integral system or its raw localization."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "SheafOfModules.pullbackComp, pullback_comp_id, pullback_id_comp, pullback_assoc, conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-25",
+   "verdict": "Ordinary sheaf pullback only; does not provide either specialized derived-complete comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "FrameworkPbc|RawCoherence|pullback.*presentation; rg in lean/Sheaf, lean/WeilConjectures and Mathlib/CategoryTheory/Localization",
+   "results": "The assigned module is the only owner of the full arbitrary-morphism bridge. SimultaneousIntegralPullbackComparisons supplies the initial realization; coefficient-category and finite-field pullback comparisons have narrower or different signatures.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing realization. No existing declaration states either remaining step."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FrameworkPbcPullbackScalarBridge",
+  "date": "2026-10-25",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FrameworkPbcRawComparisonLaws",
+  "file": "lean/Sheaf/Paper/FrameworkPbcRawComparisonLaws.lean",
+  "declaration": "WeilConjectures.FrameworkPbc.frameworkPbcRawComparisonLaws",
+  "statement": "theorem frameworkPbcRawComparisonLaws\n    (l : ℕ) [Fact l.Prime] (realization : IntegralComparisonSystem.{u} l)\n    (pullback : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))],\n      (h : X ⟶ Y) → Pullback l A h)\n    (tensor : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))], Tensor l A W)\n    (scalarTensor : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u})\n      [IsNoetherian W] [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      ScalarTensor l A B i W)\n    (h_unit : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))]\n      (K : sfIntegralConstructibleCategory l A W),\n      (pullback A (𝟙 W)).pi.hom.app K ≫\n        (pbcActualCompletedPullIdIso (pbcIntegralDatum l A) W).hom.app\n          ⟨(integralDetailedTransport W l A).obj K.obj,\n            (purDetailedTransport_complete_iff l A W K.obj).mp K.property.1⟩ =\n        (integralDetailedTransport W l A).map\n          (integralComparisonUnit l A realization W K).hom)\n    (h_composition : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (X Y Z : Scheme.{u})\n      [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Z ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n      [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]\n      (h : X ⟶ Y) (g : Y ⟶ Z) (K : sfIntegralConstructibleCategory l A Z),\n      (pullback A (h ≫ g)).pi.hom.app K ≫\n        (pbcActualCompletedPullCompIso h g (pbcIntegralDatum l A)).inv.app\n          ⟨(integralDetailedTransport Z l A).obj K.obj,\n            (purDetailedTransport_complete_iff l A Z K.obj).mp K.property.1⟩ =\n      (integralDetailedTransport X l A).map\n          (integralComparisonComposition l A realization h g K).hom ≫\n        (pullback A h).pi.hom.app ((constructibleIntegralPullback l A g).obj K) ≫\n        (pbcActualCompletedPull h (pbcIntegralDatum l A)).map\n          ((pullback A g).pi.hom.app K))\n    (h_scalar_square : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B)\n      {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n      (h : X ⟶ Y) (K : sfIntegralConstructibleCategory l A Y),\n      (integralDetailedTransport X l B).map\n          (integralPullbackScalarComparison l A B i h K).hom.hom ≫\n        (pullback B h).pi.hom.app ((integralComparisonConstructibleScalar l A B i Y).obj K) ≫\n        (pbcActualCompletedPull h (pbcIntegralDatum l B)).map\n          (scalarComponent l A B i Y K).hom =\n      (scalarComponent l A B i X ((constructibleIntegralPullback l A h).obj K)).hom ≫\n        (pbcEmbeddingAmbientTensor l A B i X).map ((pullback A h).pi.hom.app K) ≫\n        (pbcScalarCompletedPullIso l A B i h).inv.app\n          ((integralDetailedTransport Y l A).obj K.obj))\n    (h_tensor_square : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B)\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))]\n      (M N : sfIntegralConstructibleCategory l A W),\n      (pbcEmbeddingAmbientTensor l A B i W).map ((tensor A W).tau.inv.app (M.obj, N.obj)) ≫\n        (scalarComponent l A B i W ((constructibleIntegralTensor l A W).obj (M, N))).inv ≫\n        (integralDetailedTransport W l B).map\n          (integralTensorScalarComparison l A B i W M N).hom.hom ≫\n        (tensor B W).tau.hom.app\n          (((integralComparisonConstructibleScalar l A B i W).obj M).obj,\n            ((integralComparisonConstructibleScalar l A B i W).obj N).obj) ≫\n        (FrameworkPbc.tensor l B W).map\n          (Prod.mkHom (scalarComponent l A B i W M).hom\n            (scalarComponent l A B i W N).hom) =\n      ((scalarTensor A B i W).completed l A B i).hom.app\n        ((integralDetailedTransport W l A).obj M.obj,\n          (integralDetailedTransport W l A).obj N.obj))\n :\n    ∃ coefficient : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))], Coefficient l A W,\n    ∃ raw_pullback : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] (h : X ⟶ Y),\n      RawPullback l A h (coefficient A X) (coefficient A Y) (pullback A h),\n    ∃ raw_scalar : ∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u})\n      [IsNoetherian W] [hdim : Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [hinv : Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      RawScalar l A B i W hdim.out hinv.out (coefficient A W) (coefficient B W),\n    ∃ raw_tensor : ∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      RawTensor l A W (coefficient A W) (tensor A W),\n    (∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B)\n      {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]\n      [dx : Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [dy : Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [ix : Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [iy : Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n      (h : X ⟶ Y),\n      ∃ p : pbcRationalScalarExtension l A B i Y dy.out iy.out ⋙\n          pbcConditionalRational (pbcIntegralDatum l B)\n            (pbcActualCompletedPull h (pbcIntegralDatum l B))\n            (raw_pullback B h).preserves (pbcUniformizer l B) ≅\n        pbcConditionalRational (pbcIntegralDatum l A)\n          (pbcActualCompletedPull h (pbcIntegralDatum l A))\n          (raw_pullback A h).preserves (pbcUniformizer l A) ⋙\n            pbcRationalScalarExtension l A B i X dx.out ix.out,\n      (∀ K : PbcBoundedConstructibleComplete Y (pbcIntegralDatum l A),\n        ∃ f : (pbcConditionalIntegral (pbcIntegralDatum l A)\n            (pbcActualCompletedPull h (pbcIntegralDatum l A))\n            (raw_pullback A h).preserves ⋙\n              pbcEmbeddingIntegralTensor l A B i X dx.out ix.out).obj K ⟶\n          (pbcEmbeddingIntegralTensor l A B i Y dy.out iy.out ⋙\n            pbcConditionalIntegral (pbcIntegralDatum l B)\n              (pbcActualCompletedPull h (pbcIntegralDatum l B))\n              (raw_pullback B h).preserves).obj K,\n        HEq f.hom ((pbcScalarCompletedPullIso l A B i h).inv.app K.obj) ∧\n        HEq (p.inv.app ((pbcRationalization Y (pbcIntegralDatum l A)\n          (pbcUniformizer l A)).obj K))\n          ((pbcRationalization X (pbcIntegralDatum l B) (pbcUniformizer l B)).map f)) ∧\n      ∀ K : sfRationalConstructibleCategory l A Y,\n      (coefficient B X).rational.functor.map\n          ((rationalPullbackScalarComparison l A B i h).hom.app K) ≫\n        (raw_pullback B h).rational.hom.app\n          ((sfRationalScalarExtension l A Y 0\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) B i).obj K) ≫\n        (pbcConditionalRational (pbcIntegralDatum l B)\n          (pbcActualCompletedPull h (pbcIntegralDatum l B))\n          (raw_pullback B h).preserves (pbcUniformizer l B)).map\n            ((raw_scalar A B i Y).rational.hom.app K) =\n      (raw_scalar A B i X).rational.hom.app ((rationalDerivedPullback l A h).obj K) ≫\n        (pbcRationalScalarExtension l A B i X dx.out ix.out).map\n          ((raw_pullback A h).rational.hom.app K) ≫\n        p.inv.app ((coefficient A Y).rational.functor.obj K)) ∧\n    (∀ (A B : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] [Field B] [Algebra ℚ_[l] B]\n      [FiniteDimensional ℚ_[l] B] (i : A →ₐ[ℚ_[l]] B) (W : Scheme.{u})\n      [IsNoetherian W] [dw : Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [iw : Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      ∃ v : (raw_tensor A W).integral ⋙\n          pbcEmbeddingIntegralTensor l A B i W dw.out iw.out ≅\n        ((pbcEmbeddingIntegralTensor l A B i W dw.out iw.out).prod\n          (pbcEmbeddingIntegralTensor l A B i W dw.out iw.out)) ⋙\n            (raw_tensor B W).integral,\n      ∃ q : (raw_tensor A W).rational ⋙\n          pbcRationalScalarExtension l A B i W dw.out iw.out ≅\n        ((pbcRationalScalarExtension l A B i W dw.out iw.out).prod\n          (pbcRationalScalarExtension l A B i W dw.out iw.out)) ⋙\n            (raw_tensor B W).rational,\n      (∀ M N, HEq (v.hom.app (M, N)).hom\n        (((scalarTensor A B i W).completed l A B i).hom.app (M.obj, N.obj))) ∧\n      (∀ M N, HEq (q.hom.app\n        ((pbcRationalization W (pbcIntegralDatum l A) (pbcUniformizer l A)).obj M,\n          (pbcRationalization W (pbcIntegralDatum l A) (pbcUniformizer l A)).obj N))\n        ((pbcRationalization W (pbcIntegralDatum l B) (pbcUniformizer l B)).map\n          (v.hom.app (M, N)))) ∧\n      ∀ M N : sfRationalConstructibleCategory l A W,\n      (pbcRationalScalarExtension l A B i W dw.out iw.out).map\n          ((raw_tensor A W).rational_tau.inv.app (M, N)) ≫\n        (raw_scalar A B i W).rational.inv.app ((rationalDerivedTensor l A W).obj (M, N)) ≫\n        (coefficient B W).rational.functor.map\n          ((rationalTensorScalarComparison l A B i W).hom.app (M, N)) ≫\n        (raw_tensor B W).rational_tau.hom.app\n          ((sfRationalScalarExtension l A W 0\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) B i).obj M,\n            (sfRationalScalarExtension l A W 0\n              (Nat.Prime.ne_zero (Fact.out : l.Prime)) B i).obj N) ≫\n        (raw_tensor B W).rational.map\n          (Prod.mkHom ((raw_scalar A B i W).rational.hom.app M)\n            ((raw_scalar A B i W).rational.hom.app N)) =\n      q.hom.app ((coefficient A W).rational.functor.obj M,\n        (coefficient A W).rational.functor.obj N)) ∧\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A] [FiniteDimensional ℚ_[l] A]\n      (W : Scheme.{u}) [IsNoetherian W]\n      [Fact (∃ n : ℕ, topologicalKrullDim W ≤ n)]\n      [Fact (∀ w : W, IsUnit (l : W.presheaf.stalk w))],\n      ∃ su : rationalDerivedPullback l A (𝟙 W) ≅ 𝟭 _,\n      ∃ pu : pbcConditionalRational (pbcIntegralDatum l A)\n          (pbcActualCompletedPull (𝟙 W) (pbcIntegralDatum l A))\n          (raw_pullback A (𝟙 W)).preserves (pbcUniformizer l A) ≅ 𝟭 _,\n        (∀ K : sfIntegralConstructibleCategory l A W,\n          HEq (su.hom.app ((sfRationalConstructibleLocalization l A W).obj K))\n            ((sfRationalConstructibleLocalization l A W).map\n              (ObjectProperty.homMk\n                (X := (constructibleIntegralPullback l A (𝟙 W)).obj K) (Y := K)\n                (integralComparisonUnit l A realization W K).hom))) ∧\n        (∀ K : PbcBoundedConstructibleComplete W (pbcIntegralDatum l A),\n          HEq (pu.hom.app ((pbcRationalization W (pbcIntegralDatum l A)\n              (pbcUniformizer l A)).obj K))\n            ((pbcRationalization W (pbcIntegralDatum l A) (pbcUniformizer l A)).map\n              (ObjectProperty.homMk\n                (X := (pbcConditionalIntegral (pbcIntegralDatum l A)\n                  (pbcActualCompletedPull (𝟙 W) (pbcIntegralDatum l A))\n                  (raw_pullback A (𝟙 W)).preserves).obj K) (Y := K)\n                ((pbcActualCompletedPullIdIso\n                (pbcIntegralDatum l A) W).hom.app ⟨K.obj, K.property.1⟩)))) ∧\n        ∀ K : sfRationalConstructibleCategory l A W,\n          (raw_pullback A (𝟙 W)).rational.hom.app K ≫\n            pu.hom.app ((coefficient A W).rational.functor.obj K) =\n          (coefficient A W).rational.functor.map (su.hom.app K)) ∧\n    (∀ (A : Type u) [Field A] [Algebra ℚ_[l] A]\n      [FiniteDimensional ℚ_[l] A] (X Y Z : Scheme.{u})\n      [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]\n      [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]\n      [Fact (∃ n : ℕ, topologicalKrullDim Z ≤ n)]\n      [Fact (∀ x : X, IsUnit (l : X.presheaf.stalk x))]\n      [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]\n      [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]\n      (h : X ⟶ Y) (g : Y ⟶ Z),\n      ∃ sc : rationalDerivedPullback l A (h ≫ g) ≅\n          rationalDerivedPullback l A g ⋙ rationalDerivedPullback l A h,\n      ∃ pc : pbcConditionalRational (pbcIntegralDatum l A)\n          (pbcActualCompletedPull (h ≫ g) (pbcIntegralDatum l A))\n          (raw_pullback A (h ≫ g)).preserves (pbcUniformizer l A) ≅\n        pbcConditionalRational (pbcIntegralDatum l A)\n          (pbcActualCompletedPull g (pbcIntegralDatum l A))\n          (raw_pullback A g).preserves (pbcUniformizer l A) ⋙\n        pbcConditionalRational (pbcIntegralDatum l A)\n          (pbcActualCompletedPull h (pbcIntegralDatum l A))\n          (raw_pullback A h).preserves (pbcUniformizer l A),\n        (∀ K : sfIntegralConstructibleCategory l A Z,\n          HEq (sc.hom.app ((sfRationalConstructibleLocalization l A Z).obj K))\n            ((sfRationalConstructibleLocalization l A X).map\n              (ObjectProperty.homMk\n                (X := (constructibleIntegralPullback l A (h ≫ g)).obj K)\n                (Y := (constructibleIntegralPullback l A h).obj\n                  ((constructibleIntegralPullback l A g).obj K))\n                (integralComparisonComposition l A realization h g K).hom))) ∧\n        (∀ K : PbcBoundedConstructibleComplete Z (pbcIntegralDatum l A),\n          HEq (pc.hom.app ((pbcRationalization Z (pbcIntegralDatum l A)\n              (pbcUniformizer l A)).obj K))\n            ((pbcRationalization X (pbcIntegralDatum l A) (pbcUniformizer l A)).map\n              (ObjectProperty.homMk\n                (X := (pbcConditionalIntegral (pbcIntegralDatum l A)\n                  (pbcActualCompletedPull (h ≫ g) (pbcIntegralDatum l A))\n                  (raw_pullback A (h ≫ g)).preserves).obj K)\n                (Y := (pbcConditionalIntegral (pbcIntegralDatum l A)\n                  (pbcActualCompletedPull h (pbcIntegralDatum l A))\n                  (raw_pullback A h).preserves).obj\n                    ((pbcConditionalIntegral (pbcIntegralDatum l A)\n                      (pbcActualCompletedPull g (pbcIntegralDatum l A))\n                      (raw_pullback A g).preserves).obj K))\n                ((pbcActualCompletedPullCompIso h g\n                (pbcIntegralDatum l A)).inv.app ⟨K.obj, K.property.1⟩)))) ∧\n        ∀ K : sfRationalConstructibleCategory l A Z,\n          (raw_pullback A (h ≫ g)).rational.hom.app K ≫\n            pc.hom.app ((coefficient A Z).rational.functor.obj K) =\n          (coefficient A X).rational.functor.map (sc.hom.app K) ≫\n            (raw_pullback A h).rational.hom.app ((rationalDerivedPullback l A g).obj K) ≫\n            (pbcConditionalRational (pbcIntegralDatum l A)\n              (pbcActualCompletedPull h (pbcIntegralDatum l A))\n              (raw_pullback A h).preserves (pbcUniformizer l A)).map\n                ((raw_pullback A g).rational.hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T101603-L-3711048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T101603-L-3711048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

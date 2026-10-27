@@ -1,0 +1,175 @@
+{
+ "id": "lem-sfb-supported-model-hull-pullback",
+ "kind": "statement",
+ "title": "Restriction stability of degree-zero supported model hull membership",
+ "statement": "Let $\\Lambda$ be any commutative condensed ring on profinite sets, and on a scheme $T$ let $\\Lambda_T=p_T^*\\Lambda$ and $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ [sk-def-sfb-module-derived-pushpull]. Use ordinary derived categories and the small pro-etale sites and fixed indexing universe [def-weil-abstract-derived-category, def-weil-pbc-proetale-site, def-weil-size-convention]. Let $\\mathcal G_T$ be the supported model hull [def-sfb-supported-model-hull], namely the intersection of full replete triangulated classes containing supported finite scalar local models in degree zero and closed under retracts, small products and termwise colimits of strict filtered diagrams with a common lower bound. Let $W,T$ be quasi-compact quasi-separated schemes [def-pc-scheme, def-weil-pbc-scheme-conventions], and let $r:W\\to T$ be weakly etale, quasi-compact and quasi-separated [sk-def-pe-morphisms, def-weil-quasi-separated-morphism]. For every actual module $N\\in\\mathcal A_T$ with $N[0]\\in\\mathcal G_T$, one has $(r^*N)[0]\\in\\mathcal G_W$, where $r^*$ is the actual exact coefficient-compatible module inverse image [def-sfb-module-upper-star]. No coefficient admissibility, covering, affine or weak-contractibility hypothesis is needed. Empty schemes, zero coefficients, zero modules and the identity map are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Steps 2--3 of the assigned descent proof: exact localization, base-change of supported generators and the defining intersection. Exact full-hull reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-supported-model-hull",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-sfb-module-upper-star",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-pe-morphisms",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For a qcqs site arrow $r:W\\to T$, the site of $W$ is the localization of that of $T$. On section-ring modules its inverse image is restriction: $(U,s)\\mapsto M(U)$; identify its coefficient ring with $\\Lambda_W$ and transport along the exact internal/section-module equivalences. This is an exact functor preserving sheaf products (the displayed section formula) and all colimits (the module pullback adjunction). Applying it termwise therefore preserves products in the derived categories by the termwise-product theorem, and takes a strict filtered diagram with common termwise lower bound to one with the same bound. It preserves shifts and triangles by exactness, and preserves retract diagrams by functoriality.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-sfb-internal-module-operations-transport",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "det-pe-products-derived",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the specified supported hull; Sections 3-4 for coefficients and Lemma 5.3(1) only for bounded continuity. The generator-level coinduction obligation is separately stated, not attributed to HRS."
+   }
+  },
+  {
+   "text": "All schemes of a support chain are qcqs: an open arrow is quasi-compact by hypothesis, while a closed subscheme of a qcqs scheme has a finite affine cover with pairwise intersections closed in the ambient quasi-compact intersections. Apply closed-subset quasi-compactness and the affine-cover criterion inductively. Base-change each arrow in a support chain along $r$. The resulting arrows are again quasi-compact opens or closed immersions with quasi-compact open complement: use qcqs permanence for quasi-compactness and the open/closed base-change squares for the immersion properties. The canonical module base-change isomorphisms give $r^*JL\\cong J' r_W^*L$. Pulling back the cover trivializing $L$ gives a cover trivializing $r_W^*L$ by the same finitely presented scalar modules; the scalar extension formula is unchanged by restriction. Thus generators pull back to generators. By the preceding step the replete class of objects $K$ such that $r^*K\\in\\mathcal G_W$ has every closure property defining $\\mathcal G_T$. Intersecting gives $r^*(\\mathcal G_T)\\subseteq\\mathcal G_W$. This is a direct use of the defining intersection, not descent of hull-membership.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sf-ring-sheaf-base-change-mates",
+    "lem-sfb-internal-module-operations-transport",
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Agent assembly for the specified supported hull; Sections 3-4 for coefficients and Lemma 5.3(1) only for bounded continuity. The generator-level coinduction obligation is separately stated, not attributed to HRS."
+   }
+  },
+  {
+   "text": "Apply the derived preservation just proved to $N[0]$. The exact-functor single comparison identifies its inverse image with $(r^*N)[0]$; use repleteness.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-sfb-internal-module-operations-transport",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "det-pe-products-derived",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-sfb-module-upper-star"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Steps 2--3 of the assigned descent proof: exact localization, base-change of supported generators and the defining intersection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of module sheaves along a site localization preserves products and filtered colimits and takes the generated supported model hull into the corresponding hull",
+   "results": "{\"t\": \"2026-10-25T15:18:50Z\", \"tool\": \"leanfinder\", \"query\": \"Exact restriction of module sheaves along a site localization preserves products and filtered colimits and takes the generated supported model hull into the corresponding hull\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map_generators_I\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.LocalGeneratorsData.X\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.LocalGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.GeneratingSections.I\"], \"digest\": \"77d622a5d7a1081d\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a localization of a site preserves membership in the triangulated class generated by supported finite scalar models and closed under products and bounded filtered colimits",
+   "results": "{\"t\": \"2026-10-25T15:35:06Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a localization of a site preserves membership in the triangulated class generated by supported finite scalar models and closed under products and bounded filtered colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.isTriangulated\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Localization.hasProductsOfShape\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"DerivedCategory.isGE_Q_obj_iff\"], \"digest\": \"fc002e3ed087bd2c\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "{\"t\": \"2026-10-25T15:07:36Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.IsTriangulated\", \"CategoryTheory.ObjectProperty.IsTriangulated.toContainsZero\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsStableUnderShift\", \"CategoryTheory.ObjectProperty.instIsClosedUnderBinaryProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\", \"CategoryTheory.ObjectProperty.instIsClosedUnderFiniteProductsOfIsTriangulatedOfIsClosedUnderIsomorphisms\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₁OfIsTriangulated\", \"CategoryTheory.ObjectProperty.instIsTriangulatedClosed₃OfIsTriangulated\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂\"], \"digest\": \"7934f335ea18b330\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedModelHull|Cech.*[Tt]otal.*[Pp]roduct",
+   "results": "{\"t\": \"2026-10-25T15:07:36Z\", \"tool\": \"grep\", \"query\": \"supportedModelHull|Cech.*[Tt]otal.*[Pp]roduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "no exact match: general triangulated, module or colimit infrastructure only; the specialized supported-hull/Cech assembly is not among these hits"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedModelHullProetaleDescent",
+  "date": "2026-10-25",
+  "group": "P5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; descent of the structural supported generation class before applying closed-pair restriction. Substep: Steps 2--3 of the assigned descent proof: exact localization, base-change of supported generators and the defining intersection.",
+   "via": [
+    "lem-sfb-supported-hull-proetale-descent",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedModelHullPullback",
+  "file": "lean/Sheaf/Paper/SupportedModelHullPullback.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.supportedModelHull_pullback_single",
+  "statement": "theorem supportedModelHull_pullback_single\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (W T : Scheme.{u})\n    [CompactSpace W] [QuasiSeparatedSpace W] [CompactSpace T] [QuasiSeparatedSpace T]\n    (r : W ⟶ T) [WeaklyEtale r] [QuasiCompact r] [QuasiSeparated r]\n    (N : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))\n    (hN : supportedModelHull Λ T ((DerivedCategory.singleFunctor _ 0).obj N)) :\n    supportedModelHull Λ W ((DerivedCategory.singleFunctor _ 0).obj\n      ((CondensedRing.upperStar Λ r).obj N))",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164033-L-941227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261025T164033-L-941227",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

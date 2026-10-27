@@ -105,7 +105,18 @@
  "uses_not_cited": [
   "def-weil-pbc-scheme-conventions"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-09",
   "item": "def-sbc-smooth-morphisms",
@@ -143,9 +154,13 @@
   "note": "Smooth = Mathlib class smooth_appLE (affine-local smooth ring maps) = lfp + formally smooth by Stacks 02H6; SmoothOfRelativeDimension n (standard-smooth charts of rel dim n at every x) = smooth with dim_x fibre = n everywhere by 02G1/02G2 (Omega rank = fibre dim, smooth locally standard smooth); n:ℕ covers n=0; Etale = SmoothOfRelativeDimension 0 by Etale.iff_smoothOfRelativeDimension_zero; empty X vacuous both sides; no private copy kept"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "A morphism of schemes $f:X\\to Y$ is *smooth* if it is locally of\nfinite presentation and formally smooth, the latter meaning that every\nmorphism $T\\to X$ over $Y$ from a closed subscheme $T\\subset T'$\ndefined by a nilpotent ideal sheaf extends, Zariski locally on $T'$,\nto a morphism $T'\\to X$ over $Y$. A smooth morphism $f$ has\n*relative dimension $n$ at a point $x\\in X$* if the fibre\n$X_{f(x)}$ through that point has dimension $n$ at $x$; it has relative dimension\n$n$ if this holds at every point. An\n*etale* morphism is a smooth\nmorphism of relative dimension zero.\n\nThis notion of smoothness agrees with the one defined by local standard\nsmooth presentations (Stacks Project, Tag `02H6`). Smooth morphisms are\nexactly the flat morphisms locally of finite presentation with smooth\nfibres, and the relative dimension of a smooth morphism at $x$ is a\nlocally constant function of $x$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "An algebra $A$ over a commutative ring $R$ is *smooth* if it is of finite presentation and *formally smooth*:\n$\\Omega_{A/R}$ is a projective $A$-module and $H_1(L_{A/R})=0$; equivalently, for every $R$-algebra $B$ and every\nnilpotent ideal $I\\subseteq B$, every $R$-algebra map $A\\to B/I$ lifts to an $R$-algebra map $A\\to B$. A morphism of\nschemes $f:X\\to Y$ is *smooth* if for all affine opens $U\\subseteq Y$ and $V\\subseteq f^{-1}(U)$ the ring map\n$\\mathcal O_Y(U)\\to\\mathcal O_X(V)$ is smooth.\n\nThe morphism $f$ is *smooth of relative dimension $n$* if every $x\\in X$ has affine open neighbourhoods $V\\ni x$ and\n$U\\supseteq f(V)$ such that $\\mathcal O_X(V)$ is standard smooth of relative dimension $n$ over $\\mathcal O_Y(U)$:\n$\\mathcal O_X(V)\\cong\\mathcal O_Y(U)[x_1,\\dots,x_{n+c}]/(f_1,\\dots,f_c)$ with the determinant of\n$(\\partial f_i/\\partial x_{n+j})_{1\\le i,j\\le c}$ invertible in the quotient. The morphism $f$ is *étale* if for all\naffine opens $U\\subseteq Y$ and $V\\subseteq f^{-1}(U)$ the ring map $\\mathcal O_Y(U)\\to\\mathcal O_X(V)$ is étale.\n\nÉtale morphisms are exactly the morphisms smooth of relative dimension zero. A morphism locally of finite\npresentation is smooth if and only if it is flat and all its fibres $X_y\\to\\operatorname{Spec}\\kappa(y)$ are\nsmooth. If $f$ is smooth, every point has an open neighbourhood on which $f$ is smooth of some relative dimension\n$d$; a scheme smooth of relative dimension $n$ over a field has dimension $n$ at every point, and the function\n$x\\mapsto\\dim_x X_{f(x)}$ is locally constant on $X$.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

@@ -1,0 +1,381 @@
+{
+ "id": "lem-sfb-space-qcoh-finite-type-union",
+ "kind": "statement",
+ "title": "Finite-type quasi-coherent submodules exhaust a module on a qcqs space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Assume $X$ is quasi-compact, meaning it admits a representable surjective etale map from a quasi-compact scheme, and quasi-separated, meaning its absolute diagonal is quasi-compact on scheme tests. For every quasi-coherent $\\mathcal O_X$-module $M$ on the small etale site [def-trf-space-quasi-coherent-module], let $\\Sigma(M)$ be the inclusion-ordered set of quasi-coherent submodules $N\\subseteq M$ of finite type, where finite type means etale locally finitely generated. Take this set in a universe containing the subobjects of $M$ [def-weil-size-convention]. Then $\\Sigma(M)$ is nonempty and directed, and the inclusions induce an isomorphism $$\\varinjlim_{N\\in\\Sigma(M)}N\\xrightarrow{\\sim}M$$ in the category of sheaves of $\\mathcal O_X$-modules [def-weil-pbc-category-colimit]. No Noetherian or finite-type hypothesis on $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0829, lemma-directed-colimit-finite-type, statement and proof; nonempty directed indexing by subobjects is the first paragraph of the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-space-absolute-quasi-separated"
+ ],
+ "proof": [
+  {
+   "text": "The zero submodule belongs to $\\Sigma(M)$: it has the empty presentation and no generators. For $N,P\\in\\Sigma(M)$, form $H=\\operatorname{im}(N\\oplus P\\to M)$. By [lem-sfb-space-qcoh-kernels-colimits], $N\\oplus P$ and $H$ are quasi-coherent. On a common etale refinement where $N$ and $P$ have finite generating lists, their images together generate $H$: composing their surjection from a finite free module with the image quotient is still surjective. Hence $H$ is of finite type and contains both $N$ and $P$. Thus $\\Sigma(M)$ is nonempty and directed.",
+   "uses": [
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0829, lemma-directed-colimit-finite-type, first paragraph of proof (with zero submodule made explicit)."
+   }
+  },
+  {
+   "text": "The quasi-compact atlas in the hypothesis makes $|X|$ quasi-compact: pull an open cover back to the atlas, choose a finite subcover there, and use surjectivity; continuity is part of the atlas topology [def-a1-space-point-topology]. The absolute-diagonal hypothesis is exactly that of [lem-sfb-space-module-fp-directed-approximation]. Apply that node to obtain a small filtered diagram $F_j$ of finitely presented quasi-coherent modules with colimit maps $a_j:F_j\\to M$. Put $G_j=\\operatorname{im}(a_j)$. Its quasi-coherence follows from [lem-sfb-space-qcoh-kernels-colimits]. Each local presentation $\\mathcal O^m\\to\\mathcal O^n\\to F_j\\to0$ gives a surjection $\\mathcal O^n\\to G_j$ by composing with the image quotient. Consequently $G_j\\in\\Sigma(M)$.",
+   "uses": [
+    "def-a1-space-point-topology",
+    "lem-sfb-space-module-fp-directed-approximation",
+    "lem-sfb-space-qcoh-kernels-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tags 0829 and 07V9, lemma-directed-colimit-finite-type, second paragraph, and lemma-colimit-finitely-presented."
+   }
+  },
+  {
+   "text": "Use the small site skeleton and the universe containing the subobjects prescribed by [def-weil-size-convention]. By [lem-pur-ringed-site-grothendieck-abelian], module sheaves form an abelian category with small colimits and exact filtered colimits. Set $C=\\varinjlim_{N\\in\\Sigma(M)}N$ and write $\\lambda_N:N\\to C$ and $c:C\\to M$ for the canonical maps. Apply exact filtered colimits to the compatible sequences $0\\to N\\to M\\to M/N\\to0$. The constant diagram with value $M$ has colimit $M$: all legs of any cocone agree because every two indices have a common upper bound. We therefore obtain an exact sequence $0\\to C\\xrightarrow{c}M\\to\\varinjlim_N(M/N)\\to0$. In particular $c$ is a monomorphism.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA and 03DB, lemma-abelian and lemma-limits-colimits; explicit filtered-union interpretation of the last sentence of Tag 0829."
+   }
+  },
+  {
+   "text": "Factor $a_j$ as $F_j\\xrightarrow{q_j}G_j\\hookrightarrow M$, and define $b_j=\\lambda_{G_j}q_j:F_j\\to C$. For every transition $t:F_j\\to F_k$, the equality $a_k t=a_j$ implies $G_j\\subseteq G_k$ and $q_k t=(G_j\\hookrightarrow G_k)q_j$. Hence $b_k t=b_j$. The colimit property [def-weil-pbc-category-colimit] of the $a_j$ gives $b:M\\to C$ with $ba_j=b_j$. For every $j$, $cba_j=c\\lambda_{G_j}q_j=a_j$, so that same colimit property gives $cb=1_M$. Since $c$ is monic, $c(bc)=c$ implies $bc=1_C$. Thus the canonical map $c$ is an isomorphism, as required.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-limits.tex",
+    "place": "Tag 0829, lemma-directed-colimit-finite-type, final sentence; explicit cocone and inverse verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-qcoh-kernels-colimits",
+  "def-a1-space-point-topology",
+  "lem-sfb-space-module-fp-directed-approximation",
+  "def-weil-size-convention",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 0829, lemma-directed-colimit-finite-type, proof; final colimit assertion expanded using sites-modules.tex Tags 03DA and 03DB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent module on a quasi compact quasi separated algebraic space is the directed union of its finite type quasi coherent submodules",
+   "results": {
+    "hits": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.QuasicoherentData.coversTop",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.GeneratingSections.IsFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.localGeneratorsDataOfIsFiniteType"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "cf9ed6d14d64ec48",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and AlgebraicGeometry/Modules/Tilde.lean:415-468. They define quasi-coherence and construct affine tilde presentations; the sheaf filtered-colimit existence search result does not give exhaustion by finite-type quasi-coherent subobjects on algebraic spaces."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"colimit\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and AlgebraicGeometry/Modules/Tilde.lean:415-468. They define quasi-coherence and construct affine tilde presentations; the sheaf filtered-colimit existence search result does not give exhaustion by finite-type quasi-coherent subobjects on algebraic spaces."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Qq]uasi[Cc]oherent|[Qq]uasicoherent|AlgebraicSpace|[Ff]inite[Tt]ype.*[Ss]ubmodule",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean"
+    ],
+    "n_hits": 5,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "365d064e118d94ef",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and AlgebraicGeometry/Modules/Tilde.lean:415-468. They define quasi-coherence and construct affine tilde presentations; the sheaf filtered-colimit existence search result does not give exhaustion by finite-type quasi-coherent subobjects on algebraic spaces."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a qcqs algebraic space quasi coherent sheaves are filtered colimits of finitely generated quasi coherent subsheaves",
+   "results": {
+    "hits": [
+     "CategoryTheory.Sheaf.hasFilteredColimitsOfSize",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "AlgebraicGeometry.SheafedSpace.instHasColimitsOfShapeOfSmallOfHasLimitsOfShapeOpposite",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.IsFinitePresentation.mk",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.mk",
+     "SheafOfModules.IsQuasicoherent.casesOn"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "d3cbb23d17c8bfaf",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and AlgebraicGeometry/Modules/Tilde.lean:415-468. They define quasi-coherence and construct affine tilde presentations; the sheaf filtered-colimit existence search result does not give exhaustion by finite-type quasi-coherent subobjects on algebraic spaces."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type approximation of a quasi coherent sheaf by its submodules over a qcqs non Noetherian algebraic space",
+   "results": {
+    "hits": [
+     "SheafOfModules.localGeneratorsDataOfIsFiniteType",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.quasicoherentDataOfIsFinitePresentation"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2f5d3dac2dcd335e",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and AlgebraicGeometry/Modules/Tilde.lean:415-468. They define quasi-coherence and construct affine tilde presentations; the sheaf filtered-colimit existence search result does not give exhaustion by finite-type quasi-coherent subobjects on algebraic spaces."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every quasi coherent sheaf on a quasi compact quasi separated algebraic space is a filtered union of finite type quasi coherent submodules",
+   "results": {
+    "hits": [
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation",
+     "SheafOfModules.localGeneratorsDataOfIsFiniteType",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "SheafOfModules.GeneratingSections.IsFiniteType"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "cc6eebd2bc92603a",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and Algebra/Colimit/Finiteness.lean:29-66. The former gives local presentations and finite-type predicates; Module.fgSystem.equiv concerns modules over a ring, with no algebraic-space sheaf or quasi-coherent-subobject assertion."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ff]inite[Tt]ype.*[Ss]ubmodule|[Qq]uasicoherent.*[Cc]olimit",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "4f53cda18c2baa0c",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and Algebra/Colimit/Finiteness.lean:29-66. The former gives local presentations and finite-type predicates; Module.fgSystem.equiv concerns modules over a ring, with no algebraic-space sheaf or quasi-coherent-subobject assertion."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasicoherent module on a qcqs algebraic space is a directed colimit of its finitely generated quasicoherent subsheaves",
+   "results": {
+    "hits": [
+     "SheafOfModules.IsQuasicoherent.mk",
+     "SheafOfModules.isQuasicoherent",
+     "SheafOfModules.IsQuasicoherent.casesOn",
+     "SheafOfModules.QuasicoherentData",
+     "SheafOfModules.IsQuasicoherent.rec",
+     "SheafOfModules.IsQuasicoherent",
+     "SheafOfModules.IsQuasicoherent.recOn",
+     "Module.fgSystem.instDirectedSystemSubtypeSubmoduleFGMemValCoeLinearMapId"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "b9067281ddd3d9fc",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and Algebra/Colimit/Finiteness.lean:29-66. The former gives local presentations and finite-type predicates; Module.fgSystem.equiv concerns modules over a ring, with no algebraic-space sheaf or quasi-coherent-subobject assertion."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Quasicoherent\", \"colimit\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and Algebra/Colimit/Finiteness.lean:29-66. The former gives local presentations and finite-type predicates; Module.fgSystem.equiv concerns modules over a ring, with no algebraic-space sheaf or quasi-coherent-subobject assertion."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type quasi coherent subobjects exhaust a module sheaf on a quasi compact quasi separated algebraic space",
+   "results": {
+    "hits": [
+     "SheafOfModules.localGeneratorsDataOfIsFiniteType",
+     "SheafOfModules.IsFiniteType.exists_localGeneratorsData",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.QuasicoherentData.coversTop",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+     "SheafOfModules.GeneratingSections.IsFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "bd1b6438a57b5e25",
+    "source_read": "Read Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean:213-250,442-452 and Algebra/Colimit/Finiteness.lean:29-66. The former gives local presentations and finite-type predicates; Module.fgSystem.equiv concerns modules over a ring, with no algebraic-space sheaf or quasi-coherent-subobject assertion."
+   },
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-proj-finite-degree-equations",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Stacks 085M, proof, sentence citing Limits of Spaces 0829 to enlarge the finitely many affine-chart equations inside a global finite type submodule of I_d. This serves the inherited Chow-modification prerequisite of the current blueprint det-thm-sf-ctf-stability-direct-images, proof (3), compactification. The ancestry command returns None for the inherited created.item chain.",
+   "via": [
+    "lem-sfb-space-proj-finite-degree-equations",
+    "lem-sfb-space-blowup-finite-degree-ideal-descent",
+    "lem-sfb-space-compose-admissible-blowups",
+    "lem-sfb-space-blowup-embedding-extension",
+    "lem-sfb-space-chow-dense-modification",
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-qcoh-finite-type-union",
+  "worker": "stage1",
+  "summary": "Read Stacks 0829 and its prerequisite 07V9; reuse the existing finite-presentation approximation and quasi-coherent kernels/colimits nodes. Prove directedness by sums and prove the canonical isomorphism by exact filtered colimits and an explicit inverse cocone. No new nodes, statement changes, or Lean files.",
+  "blueprint": "Current latest blueprint sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3), compactification: this is the inherited Chow-modification prerequisite, used by Stacks 085M to bound equations in a finite-type submodule. The ancestry command returns None; inherited from.node=null and via chain retained. Whole-blueprint searches found no matching blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Exact filtered colimits and abelianity in the ringed small-etale module category; this is a generic module-sheaf tool, not a replacement of a unit step."
+   },
+   {
+    "node": "def-a1-space-point-topology",
+    "why": "The atlas topology identifies the quasi-compactness convention with the hypothesis of the existing finite-presentation approximation; it changes no geometric route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-a1-space-point-topology"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-5cac77974",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-5cac77974 (reviewer sub-agent of L); spot-checked: I read the item, its four steps, every cited statement and Stacks 0829 (spaces-limits.tex l.2302) in full. The statement and stmt_deps are unchanged from the base. There are no new nodes and no repair note, and clones/live and side-live both show the item unsplit, so no other group took it. Step 1: directedness uses images of N⊕P, which are quasi-coherent by the 03M1 node; finite type holds on a common étale refinement. Step 2: |X| is quasi-compact as the continuous image of the quasi-compact atlas under the final topology of def-a1-space-point-topology. Diagonal quasi-compactness on scheme tests implies it on affine tests, which is the 07V9 node's hypothesis; the step's word 'exactly' overstates this but is harmless. The G_j are of finite type via O^n↠F_j↠G_j. Step 3: on the small skeleton, lem-pur-ringed-site-grothendieck-abelian gives exact filtered colimits, so applying it to 0→N→M→M/N→0 makes c mono. Step 4: b comes from the cocone b_j=λ_{G_j}q_j; compatibility uses that the inclusions are mono, cb=1 by uniqueness and bc=1 because c is mono, and this holds for a non-poset filtered J. Edge cases checked: M=0, X empty, M of finite type. No duplicate nodes, no SGA citation. Batch-5: all three flagged citations (03M1 kernels/colimits, the point-topology definition, 07V9 fp-approximation) reach sec-trace-formula only through the general definition def-trf-algebraic-space. They are generic results, not steps of the trace formula or Poincaré duality, so the finding does not apply. Both declared tool_uses are generic tools and are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFiniteTypeUnion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.finiteTypeQuasiCoherentSubmodules_colimit",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.finiteTypeQuasiCoherentSubmodules",
+   "AlgebraicGeometry.AlgebraicSpace.finiteTypeQuasiCoherentSubmoduleDiagram",
+   "AlgebraicGeometry.AlgebraicSpace.finiteTypeQuasiCoherentSubmodules_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFiniteTypeUnion.lean",
+  "statement": "theorem finiteTypeQuasiCoherentSubmodules_colimit {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : ∃ (T : Over S) (a : yoneda.obj T ⟶ X.obj.obj), CompactSpace T.left ∧ IsEtale a ∧ IsSurjective a) (hqs : IsAbsolutelyQuasiSeparated X) (M : X.Modules) [M.IsQuasicoherent] : Nonempty (finiteTypeQuasiCoherentSubmodules M) ∧ Directed (· ≤ ·) (fun N : (finiteTypeQuasiCoherentSubmodules M) ↦ N) ∧ ∃ (c : Cocone (finiteTypeQuasiCoherentSubmoduleDiagram M)) (h : c.pt = M), Nonempty (IsColimit c) ∧ ∀ N : (finiteTypeQuasiCoherentSubmodules M), c.ι.app N ≫ eqToHom h = N.val.arrow",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The subobject subtype and its canonical inclusion diagram are helpers of this statement. The colimit cocone has vertex equal to M and legs exactly the subobject arrows; equivalently the canonical colimit comparison to M is an isomorphism. Absolute quasi-separatedness uses the landed affine-test definition, with no separation hypothesis on S."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22fa13704",
+  "group": "NA",
+  "result": "pass",
+  "note": "The Lean matches the node and Stacks 0829 clause by clause. Hypotheses: hqc is a quasi-compact étale surjective atlas (same form as the landed Tag 0853 extension lemma), hqs is the landed IsAbsolutelyQuasiSeparated (stmt_dep correctly added), and M is any quasi-coherent module with no extra assumption. Σ(M) is the subtype of Subobject M with Mathlib IsQuasicoherent ∧ IsFiniteType (site-local finite generators, i.e. étale locally finitely generated), in the universe of Subobject M. Conclusion: Nonempty, Directed in the subtype order, and the inclusion cocone with vertex M (legs N.val.arrow) is a colimit, equivalent to the canonical comparison being an isomorphism. The helpers have real data and docstrings, the proof is only sorry with the 4 steps in the docstring, and lean.statement matches the file verbatim. Edge cases M=0 and empty X are fine. No duplicate in Mathlib or lean/Sheaf. Not recompiled (worker compile evidence). No findings."
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-mapmod-strong-monoidal",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-proper-image-localizing-open",
+   "via": [
+    "def-sfb-upper-star-tensor-counit"
+   ],
+   "place": "the Lean of def-sfb-upper-star-tensor-counit uses the lax monoidal structure of (f)^*⟦Λ⟧ = mapMod(f^*) ⋙ extendScalars (instance monoidal_upperStar, ModuleObject.UpperLowerStar.MonoidalModule), built from Functor.monoidal_mapMod = mapModCoreMonoidal.toMonoidal"
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Transport of module objects along a braided functor is strong monoidal",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be braided monoidal categories [def-sfb-monoidal-category] whose tensor products preserve coequalizers in each variable, $R$ a commutative monoid object of $\\mathcal C$ [sk-def-sfb-ring-object], and $F\\colon\\mathcal C\\to\\mathcal D$ a braided strong monoidal functor [def-sfb-strong-monoidal-functor] preserving coequalizers. The transport of module objects $\\operatorname{mapMod}(F)\\colon\\Mod_R(\\mathcal C)\\to\\Mod_{FR}(\\mathcal D)$ [sk-def-sfb-module-objects] is strong monoidal for the relative tensor products $\\otimes_R$ and $\\otimes_{FR}$ [def-sfb-modobj-relative-tensor]: the isomorphisms $FM\\otimes_{FR}FN\\cong F(M\\otimes_RN)$, induced on the coequalizers presenting both sides by the tensorator $FM\\otimes FN\\cong F(M\\otimes N)$ of $F$, together with the unit isomorphism $FR\\cong F(R)$, are $FR$-linear and natural and satisfy the associativity and unit axioms.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-open-ctf/sk-prop-proper-image-localizing-open.md",
+  "place": "def-sfb-upper-star-tensor-counit: the Lean of def-sfb-upper-star-tensor-counit uses the lax monoidal structure of (f)^*⟦Λ⟧ = mapMod(f^*) ⋙ extendScalars (instance monoidal_upperStar, ModuleObject.UpperLowerStar.MonoidalModule), built from Functor.monoidal_mapMod = mapModCoreMonoidal.toMonoidal; Lean: upstream file lean/WeilConjectures/CategoryTheory/ModuleObjects/MapModMonoidal.lean, declaration CategoryTheory.Functor.mapModCoreMonoidal (module WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal, lines 234-383, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "sk-def-sfb-ring-object",
+  "def-sfb-strong-monoidal-functor",
+  "sk-def-sfb-module-objects",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "monoidal functor induces monoidal functor on module objects over a monoid",
+   "results": "Monoidal.InducingFunctorData.mk, functorCategoryMonoidalStruct, Functor.Monoidal.whiskeringLeft, Functor.mapMon: mapMon on monoids, nothing on modules over a monoid",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strong monoidal functor mapMod on module objects over a commutative monoid with relative tensor product",
+   "results": "Mod_.scalarRestriction, Mod_.comap, Mod_.scalarRestriction_hom (Mathlib.CategoryTheory.Monoidal.Mod_): no relative tensor product of modules",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapMod, CategoryTheory.Functor.Monoidal",
+   "results": "unknown identifier CategoryTheory.Functor.mapMod (not in Mathlib)",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'mapMod.*Monoidal|Monoidal.*mapMod' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "def-sfb-upper-star-tensor-counit",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-open-ctf",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal",
+  "file": "lean/WeilConjectures/CategoryTheory/ModuleObjects/MapModMonoidal.lean",
+  "declaration": "CategoryTheory.Functor.mapModCoreMonoidal",
+  "declarations": [
+   "CategoryTheory.Functor.mapModCoreMonoidal"
+  ],
+  "statement": "noncomputable def mapModCoreMonoidal : (F.mapMod R).CoreMonoidal where\n  εIso := F.mapModUnitIso\n  μIso := F.mapModTensorIso\n  μIso_hom_natural_left := by\n    intro M N f X\n    apply Mod.hom_ext\n    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj X))]\n    change _ ≫ ((F.mapMod R).map f ▷ (F.mapMod R).obj X).hom ≫\n      (F.mapModTensorIso N X).hom.hom = _\n    rw [Mod.tensorObjπ_whiskerRight_assoc]\n    rw [tensorπ_mapModTensorIso_hom_hom]\n    change _ = _ ≫ (F.mapModTensorIso M X).hom.hom ≫\n      ((F.mapMod R).map (f ▷ X)).hom\n    rw [tensorπ_mapModTensorIso_hom_hom_assoc]\n    dsimp only [Functor.mapMod] at ⊢\n    change F.map f.hom ▷ F.obj X.X ≫ LaxMonoidal.μ F N.X X.X ≫\n      F.map (N.tensorObjπ X) =\n      LaxMonoidal.μ F M.X X.X ≫ F.map (M.tensorObjπ X) ≫ F.map ((f ▷ X).hom)\n    rw [LaxMonoidal.μ_natural_left_assoc]\n    rw [← F.map_comp]\n    rw [← F.map_comp]\n    rw [Mod.tensorObjπ_whiskerRight]\n  μIso_hom_natural_right := by\n    intro M N X f\n    apply Mod.hom_ext\n    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj X) ((F.mapMod R).obj M))]\n    change _ ≫ ((F.mapMod R).obj X ◁ (F.mapMod R).map f).hom ≫\n      (F.mapModTensorIso X N).hom.hom = _\n    rw [Mod.tensorObjπ_whiskerLeft_assoc]\n    rw [tensorπ_mapModTensorIso_hom_hom]\n    change _ = _ ≫ (F.mapModTensorIso X M).hom.hom ≫\n      ((F.mapMod R).map (X ◁ f)).hom\n    rw [tensorπ_mapModTensorIso_hom_hom_assoc]\n    dsimp only [Functor.mapMod] at ⊢\n    change F.obj X.X ◁ F.map f.hom ≫ LaxMonoidal.μ F X.X N.X ≫\n      F.map (X.tensorObjπ N) =\n      LaxMonoidal.μ F X.X M.X ≫ F.map (X.tensorObjπ M) ≫ F.map ((X ◁ f).hom)\n    rw [LaxMonoidal.μ_natural_right_assoc]\n    rw [← F.map_comp]\n    rw [← F.map_comp]\n    rw [Mod.tensorObjπ_whiskerLeft]\n  associativity := by\n    intro M N P\n    apply Mod.hom_ext\n    rw [← cancel_epi (Mod.tensorObjπ\n      ((F.mapMod R).obj M ⊗ (F.mapMod R).obj N) ((F.mapMod R).obj P))]\n    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) ((F.mapMod R).obj N) ▷\n      ((F.mapMod R).obj P).X)]\n    simp only [Mod.comp_hom']\n    rw [Mod.tensorObjπ_whiskerRight_assoc]\n    rw [← comp_whiskerRight_assoc]\n    erw [tensorπ_mapModTensorIso_hom_hom]\n    rw [comp_whiskerRight_assoc]\n    erw [tensorπ_mapModTensorIso_hom_hom_assoc]\n    erw [LaxMonoidal.μ_natural_left_assoc]\n    rw [show ((F.mapMod R).map (α_ M N P).hom).hom =\n      F.map (α_ M N P).hom.hom from rfl]\n    rw [← F.map_comp_assoc, ← F.map_comp]\n    rw [Category.assoc, Mod.tensorObjπ_associator_hom]\n    rw [Mod.tensorObjπ_associator_hom_assoc, Mod.tensorObjπ_whiskerLeft_assoc]\n    rw [← MonoidalCategory.whiskerLeft_comp_assoc]\n    erw [tensorπ_mapModTensorIso_hom_hom]\n    rw [MonoidalCategory.whiskerLeft_comp_assoc]\n    erw [tensorπ_mapModTensorIso_hom_hom]\n    erw [LaxMonoidal.μ_natural_right_assoc]\n    simp only [F.map_comp]\n    erw [LaxMonoidal.associativity_assoc]\n    rfl\n  left_unitality := by\n    intro M\n    have hπC (Q : Mod C (R)) :\n        Mod.tensorObjπ (Mod.regular (R)) Q ≫ (λ_ Q).hom.hom = γ[R,Q.X] := by\n      change Mod.tensorObjπ (Mod.regular (R)) Q ≫\n        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := R)).hom\n        ((Mod.toBimod (R)).obj Q)).hom ≫\n          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerRight_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    have hπD (Q : Mod D (F.obj R)) :\n        Mod.tensorObjπ (Mod.regular (F.obj R)) Q ≫ (λ_ Q).hom.hom = γ[F.obj R,Q.X] := by\n      change Mod.tensorObjπ (Mod.regular (F.obj R)) Q ≫\n        (Bimod.whiskerRight (Mod.toBimodRegularIso (R := F.obj R)).hom\n        ((Mod.toBimod (F.obj R)).obj Q)).hom ≫\n          (Bimod.LeftUnitorBimod.hom ((Mod.toBimod (F.obj R)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerRight_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, id_whiskerRight,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    apply Mod.hom_ext\n    rw [← cancel_epi (Mod.tensorObjπ (Mod.regular (F.obj R)) ((F.mapMod R).obj M))]\n    simp only [Mod.comp_hom']\n    rw [hπD, Mod.tensorObjπ_whiskerRight_assoc]\n    erw [tensorπ_mapModTensorIso_hom_hom_assoc]\n    change γ[F.obj R,((F.mapMod R).obj M).X] =\n      (𝟙 (F.obj R)) ▷ F.obj M.X ≫ LaxMonoidal.μ F R M.X ≫\n        F.map (Mod.tensorObjπ (Mod.regular R) M) ≫ F.map (λ_ M).hom.hom\n    rw [id_whiskerRight, Category.id_comp, ← F.map_comp, hπC]\n    rfl\n  right_unitality := by\n    intro M\n    have hπC (Q : Mod C (R)) :\n        Mod.tensorObjπ Q (Mod.regular (R)) ≫ (ρ_ Q).hom.hom = (β_ Q.X (R)).hom ≫ γ[R,Q.X] := by\n      change Mod.tensorObjπ Q (Mod.regular (R)) ≫\n        (Bimod.whiskerLeft ((Mod.toBimod (R)).obj Q)\n        (Mod.toBimodRegularIso (R := R)).hom).hom ≫\n          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (R)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerLeft_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    have hπD (Q : Mod D (F.obj R)) :\n        Mod.tensorObjπ Q (Mod.regular (F.obj R)) ≫ (ρ_ Q).hom.hom =\n          (β_ Q.X (F.obj R)).hom ≫ γ[F.obj R,Q.X] := by\n      change Mod.tensorObjπ Q (Mod.regular (F.obj R)) ≫\n        (Bimod.whiskerLeft ((Mod.toBimod (F.obj R)).obj Q)\n        (Mod.toBimodRegularIso (R := F.obj R)).hom).hom ≫\n          (Bimod.RightUnitorBimod.hom ((Mod.toBimod (F.obj R)).obj Q)) = _\n      dsimp only [Mod.tensorObjπ]\n      rw [Bimod.whiskerLeft_hom]\n      erw [ι_colimMap_assoc]\n      simp only [parallelPairHom_app_one]\n      erw [Mod.toBimodRegularIso_hom_hom, MonoidalCategory.whiskerLeft_id,\n        Category.id_comp]\n      exact coequalizer.π_desc _ _\n    apply Mod.hom_ext\n    rw [← cancel_epi (Mod.tensorObjπ ((F.mapMod R).obj M) (Mod.regular (F.obj R)))]\n    simp only [Mod.comp_hom']\n    rw [hπD, Mod.tensorObjπ_whiskerLeft_assoc]\n    erw [tensorπ_mapModTensorIso_hom_hom_assoc]\n    change (β_ (F.obj M.X) (F.obj R)).hom ≫\n        LaxMonoidal.μ F R M.X ≫ F.map γ[R,M.X] =\n      F.obj M.X ◁ (𝟙 (F.obj R)) ≫ LaxMonoidal.μ F M.X R ≫\n        F.map (Mod.tensorObjπ M (Mod.regular R)) ≫ F.map (ρ_ M).hom.hom\n    rw [MonoidalCategory.whiskerLeft_id, Category.id_comp,\n      ← F.map_comp, hπC]\n    rw [F.map_comp, Functor.LaxBraided.braided_assoc]",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "upstream declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node",
+  "branch": "slopmaster2"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Functor.mapModCoreMonoidal"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.mapModCoreMonoidal",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal",
+     "lines": [
+      234,
+      383
+     ],
+     "kind": "def",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ }
+}

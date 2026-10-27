@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-common-linear-kernel-field-extension",
+ "kind": "statement",
+ "title": "Common kernels of linear functionals commute with field extension",
+ "statement": "Let $F\\subseteq L$ be fields [def-pc-field-extension, def-weil-field], let $V$ be an $F$-vector space, let $E$ be any set, and for each $e\\in E$ let $u_e:V\\to F$ be $F$-linear. Put $K=\\{v\\in V: u_e(v)=0\\text{ for every }e\\in E\\}$. In the tensor product $V_L=V\\otimes_F L$ [def-weil-pbc-module-tensor-product], with $L$ acting on the second factor, define the $L$-linear map $u_{e,L}:V_L\\to L$ by $u_{e,L}(v\\otimes\\lambda)=u_e(v)\\lambda$. Then $\\{x\\in V_L:u_{e,L}(x)=0\\text{ for every }e\\in E\\}$ equals the $L$-linear span of $\\{v\\otimes1:v\\in K\\}$. There is no finite-dimensionality assumption on $V$, no finiteness assumption on $E$ or on $L/F$, and $E=\\varnothing$ is allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Agent coefficient-basis consequence of tensor-product construction, Tag 00CX (lemma-tensor-product), and the free-module tensor/product injectivity in Tag 059R (example-ML), item (2), and Tag 059M (proposition-ML-tensor), (1) implies (2). The exact common-kernel statement is an agent lemma; complete coefficient proof in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For each $e$, the map $(v,\\lambda)\\mapsto u_e(v)\\lambda$ is $F$-bilinear, so the tensor universal property gives an $F$-linear map $u_{e,L}:V\\otimes_FL\\to L$ with the stated values. For $a\\in L$ and each pure tensor, $u_{e,L}(a\\cdot(v\\otimes\\lambda))=u_e(v)a\\lambda=a\\,u_{e,L}(v\\otimes\\lambda)$. Pure tensors generate, so this identity holds on every tensor and $u_{e,L}$ is $L$-linear.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property, bilinearity relations, and generation by pure tensors; agent coefficient calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-vector-space-free] to the $F$-vector space $L$ and choose an $F$-basis $(b_i)_{i\\in I}$ of $L$. Thus every $\\lambda\\in L$ is a finite $F$-linear combination of the $b_i$, and any finite relation $\\sum_i c_i b_i=0$ with $c_i\\in F$ has all $c_i=0$. The basis need not be finite.",
+   "uses": [
+    "lem-weil-pbc-vector-space-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09FN (lemma-vector-space-is-free), applied to L as an F-vector space."
+   }
+  },
+  {
+   "text": "Let $x\\in V\\otimes_FL$. Generation by pure tensors and absorption of $F$-coefficients into the first factor give $x=\\sum_{j=1}^n w_j\\otimes\\lambda_j$. Expand the finitely many $\\lambda_j$ in the chosen basis, and let $S\\subset I$ be the finite union of their supports: $\\lambda_j=\\sum_{i\\in S}c_{ji}b_i$ with $c_{ji}\\in F$. Bilinearity gives $x=\\sum_{i\\in S}v_i\\otimes b_i$, where $v_i=\\sum_{j=1}^n c_{ji}w_j\\in V$. In particular this uses no finite-dimensionality assumption on $V$ or $L/F$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property, bilinearity relations, and generation by pure tensors; agent coefficient calculation."
+   }
+  },
+  {
+   "text": "Suppose $u_{e,L}(x)=0$ for every $e\\in E$. For the expansion in step 3 and each fixed $e$, the defining formula and additivity give $0=\\sum_{i\\in S}u_e(v_i)b_i$ in $L$. Each coefficient $u_e(v_i)$ lies in $F$, so independence of the $b_i$ over $F$ gives $u_e(v_i)=0$ for every $i\\in S$. Since $e$ was arbitrary, every $v_i$ belongs to $K$. Hence $x=\\sum_{i\\in S}b_i\\cdot(v_i\\otimes1)$ belongs to the required $L$-linear span.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property, bilinearity relations, and generation by pure tensors; agent coefficient calculation."
+   }
+  },
+  {
+   "text": "Conversely, for $v\\in K$ and every $e$, $u_{e,L}(v\\otimes1)=u_e(v)=0$. By $L$-linearity, $u_{e,L}$ therefore vanishes on every finite $L$-linear combination of these generators. This proves the opposite inclusion and the equality. If $E=\\varnothing$, then $K=V$ and the conditions in step 4 are vacuous; step 3 still expresses every tensor as a sum $\\sum_i b_i\\cdot(v_i\\otimes1)$. Zero vector spaces, empty tensor sums, and arbitrary infinite bases are covered by the same formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property, bilinearity relations, and generation by pure tensors; agent coefficient calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-vector-space-free"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Coefficient-basis proof from Tag 00CX (lemma-tensor-product), using the basis-existence lemma Tag 09FN (fields.tex, lemma-vector-space-is-free); the exact common-kernel statement is not a quoted Stacks theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Submodule\", \"sInf\", \"map\"",
+   "results": "{\"t\": \"2026-10-23T14:31:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"Submodule\\\", \\\"sInf\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sInf.*(baseChange|tensor)|ker.*baseChange|baseChange.*ker|tensor.*(iInf|sInf)|basis.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-23T14:31:17Z\", \"tool\": \"grep\", \"query\": \"sInf.*(baseChange|tensor)|ker.*baseChange|baseChange.*ker|tensor.*(iInf|sInf)|basis.*[Tt]ensor\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Span/TensorProduct.lean\", \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/Coevaluation.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/BaseChange.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basis.lean\"], \"digest\": \"f7e453ec0901ccd3\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a family of linear functionals on a vector space over a field the common kernel after extending scalars to another field is the scalar extension of the common kernel",
+   "results": "{\"t\": \"2026-10-23T14:31:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a family of linear functionals on a vector space over a field the common kernel after extending scalars to another field is the scalar extension of the common kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ker_restrictScalars\", \"FiniteDimensional.mem_span_of_iInf_ker_le_ker\", \"mem_span_of_iInf_ker_le_ker\", \"LinearMap.ker_localizedMap_eq_localized'_ker\", \"LinearMap.localized'_ker_eq_ker_localizedMap\", \"RootPairing.ker_rootForm_eq_dualAnnihilator\", \"Submodule.dualRestrict_ker_eq_dualAnnihilator\", \"RootPairing.ker_corootForm_eq_dualAnnihilator\"], \"digest\": \"39c1a30556a21088\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The common kernel of any family of linear functionals on a vector space commutes with field extension",
+   "results": "{\"t\": \"2026-10-23T14:31:42Z\", \"tool\": \"leansearch\", \"query\": \"The common kernel of any family of linear functionals on a vector space commutes with field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.mem_span_of_iInf_ker_le_ker\", \"mem_span_of_iInf_ker_le_ker\", \"LinearMap.continuous_of_isClosed_ker\", \"WeakDual.CharacterSpace.ext_ker\", \"LinearMap.extendTo𝕜'.congr_simp\", \"Subfield.smulCommClass_right\", \"LinearMap.ker_comp_eq_of_commute_of_disjoint_ker\", \"Algebra.Extension.Hom.mapKer\"], \"digest\": \"96dedd6d21511235\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars from a field to a field commutes with arbitrary intersections of subspaces or kernels of linear functionals",
+   "results": "{\"t\": \"2026-10-23T14:31:45Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars from a field to a field commutes with arbitrary intersections of subspaces or kernels of linear functionals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subfield.extendScalars_inf\", \"IntermediateField.extendScalars_inf\", \"IntermediateField.restrictScalars_inf\", \"FiniteDimensional.mem_span_of_iInf_ker_le_ker\", \"Module.Baer.instMinExtensionOf\", \"RootPairing.corootSpan_dualAnnihilator_map_eq_iInf_ker_coroot'\", \"RootPairing.rootSpan_dualAnnihilator_map_eq_iInf_ker_root'\", \"mem_span_of_iInf_ker_le_ker\"], \"digest\": \"e9f28a0128d47c25\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf.*baseChange|baseChange.*iInf|ker_baseChange|baseChange_ker|piScalarRightHom.*injective",
+   "results": "{\"t\": \"2026-10-23T14:38:47Z\", \"tool\": \"grep\", \"query\": \"iInf.*baseChange|baseChange.*iInf|ker_baseChange|baseChange_ker|piScalarRightHom.*injective\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\"], \"digest\": \"ebad12918dbb4503\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T14:39:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Extension.ker_baseChange\", \"Algebra.Presentation.span_range_relation_eq_ker_baseChange\"], \"digest\": \"16a70faf8a773d53\"}; Read the returned hits and Mathlib/LinearAlgebra/TensorProduct/Pi.lean, TensorProduct/Tower.lean:899-903, Dual/Lemmas.lean:354-380, and LinearIndependent/BaseChange.lean. Kernel restriction, finite-family dual span, finite-product tensor equivalences, and cancellation of an already extended map do not give this arbitrary-family scalar-extension identity.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "iInf.*baseChange|baseChange.*iInf|ker_baseChange|baseChange_ker|equivFinsuppOfBasisRight",
+   "results": "{\"t\": \"2026-10-23T18:52:59Z\", \"tool\": \"grep\", \"query\": \"iInf.*baseChange|baseChange.*iInf|ker_baseChange|baseChange_ker|equivFinsuppOfBasisRight\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Tower.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Basis.lean\"], \"digest\": \"c2854388b49772eb\"}; Read the returned types, TensorProduct/Basis.lean:88-101, TensorProduct/Tower.lean:899-902 and Dual/Lemmas.lean:354-380. These give tensor coordinates, cancellation for an already scalar-extended map, or dual-span tests with a finite-family or finite-dimensional hypothesis. None states the arbitrary common-kernel field-extension identity. Scalar-restriction kernels and intersections of intermediate subfields are different constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intersection of kernels of linear forms after a field extension is the span of the original common kernel",
+   "results": "{\"t\": \"2026-10-23T18:52:59Z\", \"tool\": \"leansearch\", \"query\": \"The intersection of kernels of linear forms after a field extension is the span of the original common kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"mem_span_of_iInf_ker_le_ker\", \"FiniteDimensional.mem_span_of_iInf_ker_le_ker\", \"Algebra.Extension.Hom.mapKer.congr_simp\", \"LinearMap.ker_prod\", \"RootPairing.rootSpan_dualAnnihilator_map_eq_iInf_ker_root'\", \"ClosedSubmodule.orthogonal_eq_inter\", \"RootPairing.iInf_ker_root'_eq\", \"Submodule.orthogonal_eq_inter\"], \"digest\": \"ac84d3c1f8db6452\"}; Read the returned types, TensorProduct/Basis.lean:88-101, TensorProduct/Tower.lean:899-902 and Dual/Lemmas.lean:354-380. These give tensor coordinates, cancellation for an already scalar-extended map, or dual-span tests with a finite-family or finite-dimensional hypothesis. None states the arbitrary common-kernel field-extension identity. Scalar-restriction kernels and intersections of intermediate subfields are different constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"ker\"",
+   "results": "{\"t\": \"2026-10-23T18:52:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.ker_baseChange_comp_cancelBaseChange_symm\", \"KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\", \"Algebra.Extension.ker_baseChange\", \"Algebra.Presentation.span_range_relation_eq_ker_baseChange\"], \"digest\": \"16a70faf8a773d53\"}; Read the returned types, TensorProduct/Basis.lean:88-101, TensorProduct/Tower.lean:899-902 and Dual/Lemmas.lean:354-380. These give tensor coordinates, cancellation for an already scalar-extended map, or dual-span tests with a finite-family or finite-dimensional hypothesis. None states the arbitrary common-kernel field-extension identity. Scalar-restriction kernels and intersections of intermediate subfields are different constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Common kernels of an arbitrary family of linear functionals commute with extension of the base field",
+   "results": "{\"t\": \"2026-10-23T18:53:00Z\", \"tool\": \"leanfinder\", \"query\": \"Common kernels of an arbitrary family of linear functionals commute with extension of the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteDimensional.mem_span_of_iInf_ker_le_ker\", \"mem_span_of_iInf_ker_le_ker\", \"LinearMap.ker_noncommProd_eq_of_supIndep_ker\", \"RootPairing.iInf_ker_root'_eq\", \"RootPairing.iInf_ker_coroot'_eq\", \"LinearMap.ker_comp_eq_of_commute_of_disjoint_ker\", \"RootPairing.rootSpan_dualAnnihilator_map_eq_iInf_ker_root'\", \"RootPairing.corootSpan_dualAnnihilator_map_eq_iInf_ker_coroot'\"], \"digest\": \"d7a0b7c3ab5fb182\"}; Read the returned types, TensorProduct/Basis.lean:88-101, TensorProduct/Tower.lean:899-902 and Dual/Lemmas.lean:354-380. These give tensor coordinates, cancellation for an already scalar-extended map, or dual-span tests with a finite-family or finite-dimensional hypothesis. None states the arbitrary common-kernel field-extension identity. Scalar-restriction kernels and intersections of intermediate subfields are different constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with arbitrary intersections of kernels of linear maps to the base field",
+   "results": "{\"t\": \"2026-10-23T18:53:57Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars commutes with arbitrary intersections of kernels of linear maps to the base field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.ker_restrictScalars\", \"Submodule.map_iInf_of_ker_le\", \"Subfield.extendScalars_inf\", \"IntermediateField.extendScalars_inf\", \"LinearMap.ker_smul'\", \"LinearMap.ker_inf_lt_ker_inf_of_map_eq_of_lt\", \"mem_span_of_iInf_ker_le_ker\", \"LinearMap.ker_localizedMap_eq_localized'_ker\"], \"digest\": \"c76eabe4dacffabf\"}; Read the returned types, TensorProduct/Basis.lean:88-101, TensorProduct/Tower.lean:899-902 and Dual/Lemmas.lean:354-380. These give tensor coordinates, cancellation for an already scalar-extended map, or dual-span tests with a finite-family or finite-dimensional hypothesis. None states the arbitrary common-kernel field-extension identity. Scalar-restriction kernels and intersections of intermediate subfields are different constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dense-rational-closed-subscheme-descent",
+  "date": "2026-10-23",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, Proposition 10.1 and the simple-factor discussion following Remark 10.2, printed pp.42–43; Remark 8.6, printed p.36 (quasi-inverse isogenies). Auxiliary for this split: The abelian part of a homomorphism kernel over its ground field. Supporting lemma: Geometric abelian subvarieties have a finite separable field of definition. Coefficient-basis descent for the closed subscheme recovered from dense separable torsion points. Linear algebra used on each affine chart: arbitrary simultaneous linear equations commute with field extension.",
+   "via": [
+    "lem-sfb-dense-rational-closed-subscheme-descent",
+    "lem-sfb-abelian-subvariety-separable-definition",
+    "lem-sfb-abelian-kernel-abelian-part",
+    "lem-sfb-simple-isogeny-decomposition",
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-common-linear-kernel-field-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps construct the scalar-extended functionals, choose an F-basis of L using the existing Mathlib leaf, expand each tensor using finitely many basis coefficients, apply F-linear independence to all its evaluations, and prove both span inclusions. No new nodes: all remaining steps are explicit elementary calculations using the existing tensor-product definition. Existing Lean declarations and all search hits were checked; none attaches the whole statement. Empty E and arbitrary dimensions are handled explicitly.",
+  "blueprint": "Current latest blueprint, sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, (3): inherited alteration/descent prerequisite chain through dense-rational closed-subscheme descent. This item supplies precisely its simultaneous-linear-equations scalar-extension input. The ancestor tool returns None for the inherited chain; the existing blueprint.from.node and via are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-0b4a9c24f",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-0b4a9c24f (reviewer sub-agent of L); spot-checked: Read the item in full. The delivery adds five steps to a statement-only node, with no new nodes and the statement and stmt_deps unchanged; there is no re-split repair note. The statement (∩ ker u_{e,L} = span_L(K⊗1) for arbitrary V, E and L/F) is true. I checked E=∅, V=0, L=F, F²→F(√2) and infinite-E cases. Step 1 builds u_{e,L} from the universal property of def-weil-pbc-module-tensor-product, with L-linearity checked on generators. Step 2 takes an F-basis of L from lem-weil-pbc-vector-space-free (Stacks 09FN, fields.tex:154-162, checked). Step 3 regroups each tensor into finitely many terms x=Σ_{i∈S} v_i⊗b_i, and I checked the arithmetic. Step 4 gets u_e(v_i)=0 for every e from F-independence of the b_i, since u_{e,L}(x)=Σ u_e(v_i)b_i with coefficients in F. Step 5 gives the converse inclusion by L-linearity. Source Stacks 00CX (algebra.tex:1715-1785) provides the universal property, the bilinearity relations and pure-tensor generation. proof_deps is exact and no SGA is used. A DAG search found no duplicate: lem-trf-finite-scalar-power-common-kernel and lem-trf-formal-coefficient-operator-base-change state different results. The citer lem-sfb-dense-rational-closed-subscheme-descent step 2 uses the item consistently. Advisory only: the unit record sk-thm-sf-ctf-stability names chapter sec-six-functors while the item's chapter is sec-six-functors-basics; this mismatch was inherited, not introduced by this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CommonLinearKernelFieldExtension",
+  "declaration": "LinearMap.common_kernel_field_extension",
+  "file": "lean/Sheaf/LinearAlgebra/CommonLinearKernelFieldExtension.lean",
+  "statement": "theorem common_kernel_field_extension {F : Type uF} {L : Type uL} [Field F] [Field L] [Algebra F L] {V : Type uV} [AddCommGroup V] [Module F V] {E : Type uE} (u : E → V →ₗ[F] F) : {x : V ⊗[F] L | ∀ e : E, TensorProduct.AlgebraTensorModule.rid F L L ((u e).baseChange L ((TensorProduct.comm F V L).toAddEquiv.linearEquiv L x)) = 0} = (↑(@Submodule.span L (V ⊗[F] L) _ _ ((TensorProduct.comm F V L).toAddEquiv.module L) {x | ∃ v : V, (∀ e : E, u e v = 0) ∧ v ⊗ₜ[F] (1 : L) = x}) : Set (V ⊗[F] L))",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-447f2128b",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Node diff = lean field only; statement verbatim. Clauses match: Field F/L + Algebra, arbitrary V, E, u : E → V →ₗ[F] F, no finiteness/Nonempty, independent universes. Second-factor L-action via (comm F V L).toAddEquiv.module L (additive structure preserved, no default instance clash) passed explicitly to Submodule.span; u_{e,L} = rid F L L ∘ baseChange ∘ comm.linearEquiv, v⊗a ↦ u_e(v)•a, canonical. Conclusion set equality both inclusions. Edge cases E=∅, V=0, L=F, infinite E/[L:F] covered. Docstrings carry Stacks 00CX/09FN, blueprint tag, 5 proof steps; sorry-only; no defs; stmt_deps Algebra/Field/TensorProduct (mathlib). No existing declaration (finite-family/single-kernel lemmas only). Report has Worker report + Second reading sections. No compile (no file changed)."
+ }
+}

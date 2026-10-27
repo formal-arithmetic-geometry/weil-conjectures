@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-graded-primitive-product",
+ "kind": "statement",
+ "title": "Nonvanishing of products of independent primitive degree-one elements",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $H=\\bigoplus_{n\\geq0}H^n$ be a nonnegatively graded unital associative $k$-algebra with $H^0=k\\cdot1$ and $1\\ne0$. Give $H\\otimes_kH$ the signed multiplication $(a\\otimes b)(c\\otimes d)=(-1)^{\\deg b\\deg c}ac\\otimes bd$ on homogeneous tensors. Suppose $\\Delta:H\\to H\\otimes_kH$ is a degree-preserving coassociative unital $k$-algebra homomorphism for this multiplication. For every $r\\geq0$ and every linearly independent family $x_1,\\ldots,x_r\\in H^1$ satisfying $\\Delta(x_i)=x_i\\otimes1+1\\otimes x_i$, the ordered product $x_1\\cdots x_r\\in H^r$ is nonzero. The empty product is $1$. No characteristic restriction or assumption that the squares $x_i^2$ vanish is imposed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55, degree-one nonvanishing ingredient for the Hopf bound. Agent-supplied elementary tensor-coordinate replacement for the invoked Borel structure theorem; it proves only the primitive-product assertion, not the full structure theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Induct on $r$, uniformly over all independent primitive families in $H^1$. For $r=0$ the product is $1\\ne0$. For $r\\ge1$, the prefix $x_1,\\ldots,x_{r-1}$ is independent: a relation on the prefix extends by coefficient zero at $x_r$. The induction hypothesis therefore gives $y=x_1\\cdots x_{r-1}\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55: agent-written elementary replacement for only the primitive-product ingredient of the Borel argument."
+   }
+  },
+  {
+   "text": "Let $P=(\\bigoplus_{n\\ne1}H^n)+\\operatorname{span}_k(x_1,\\ldots,x_{r-1})\\subseteq H$. Then $x_r\\notin P$: projection onto degree one would otherwise express $x_r$ as a linear combination of the preceding independent vectors. Apply [lem-sfb-linear-map-extension-prescribed-value] with $V=H$, $U=k$, $f=0$ on $P$, $v=x_r$, and $u=1$. This gives $\\lambda:H\\to k$ vanishing on all degrees other than one, with $\\lambda(x_i)=0$ for $i<r$ and $\\lambda(x_r)=1$.",
+   "uses": [
+    "lem-sfb-linear-map-extension-prescribed-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55: agent-written elementary replacement for only the primitive-product ingredient of the Borel argument."
+   }
+  },
+  {
+   "text": "Put $z=x_1\\cdots x_r$. Multiplicativity and primitivity give $\\Delta(z)=\\prod_{i=1}^r(x_i\\otimes1+1\\otimes x_i)$. Distribute this ordered product. For each subset $S\\subseteq\\{1,\\ldots,r\\}$ the term is $(-1)^{N(S)}x_{S^c}\\otimes x_S$, with each subproduct in increasing order and $N(S)=\\#\\{(i,j):i\\in S,\\ j\\notin S,\\ i<j\\}$. Indeed adjoining a right-hand factor adds no crossing; adjoining a left-hand factor contributes $(-1)^{|S|}$ by the stipulated signed multiplication. This verifies the expansion by induction over the factors, starting with $1\\otimes1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55: agent-written elementary replacement for only the primitive-product ingredient of the Borel argument."
+   }
+  },
+  {
+   "text": "The bilinear map $(a,b)\\mapsto\\lambda(b)a$ induces a linear map $T:H\\otimes_kH\\to H$ by [def-weil-pbc-module-tensor-product]. Apply it to the expansion. If $|S|\\ne1$, then $x_S$ has degree $|S|$, so $\\lambda(x_S)=0$. If $S=\\{i\\}$ with $i<r$, it also vanishes. The sole surviving term is $S=\\{r\\}$, whose crossing number is zero; hence $T(\\Delta(z))=y\\ne0$. Were $z=0$, linearity of $\\Delta$ and $T$ would give $T(\\Delta(z))=0$, a contradiction. This proves the induction step. All coefficients used here are $0,1,-1$, so the argument also holds in characteristic two.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55: agent-written elementary replacement for only the primitive-product ingredient of the Borel argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-linear-map-extension-prescribed-value",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55: agent-written elementary replacement for only the primitive-product ingredient of the Borel argument.",
+  "group": "NX",
+  "date": "2026-10-23"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(primitive|bialgebra|HopfAlgebra).*(finrank|linearIndependent)|(finrank|linearIndependent).*(primitive|bialgebra|HopfAlgebra)",
+   "results": "7 hits: Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/NumberTheory/Cyclotomic/PrimitiveRoots.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean, Mathlib/FieldTheory/KummerExtension.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like linear independence is a different assertion; graded decomposition and primitive roots do not prove primitive-product nonvanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded connected graded Hopf algebra has dimension of degree one at most its top nonzero degree",
+   "results": "8 hits: GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, DirectSum.coe_decompose_mul_of_left_mem_of_not_le, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, Ideal.homogeneousHull_eq_iSup, GradedAlgebra, Ideal.IsHomogeneous.top, SetLike.one_mem_graded, SetLike.GradedOne.one_mem",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like linear independence is a different assertion; graded decomposition and primitive roots do not prove primitive-product nonvanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"finrank\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like linear independence is a different assertion; graded decomposition and primitive roots do not prove primitive-product nonvanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearly independent degree one primitive elements in a graded bialgebra have nonzero squarefree product",
+   "results": "8 hits: linearIndepOn_isGroupLikeElem, linearIndep_groupLikeVal, RootPairing.coxeterWeight_ne_four_of_linearIndependent, RootPairing.linearIndependent_iff_coxeterWeightIn_ne_four, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, multisetProd_apply_eq_zero', finsetProd_apply_eq_zero', linearIndependent_monoidHom",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like linear independence is a different assertion; graded decomposition and primitive roots do not prove primitive-product nonvanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a connected nonnegative graded bialgebra over a field which vanishes above degree d the dimension of the degree one part is at most d",
+   "results": "8 hits: HomogeneousLocalization.NumDenSameDeg.deg_one, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top, TensorAlgebra.rank_eq, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous, ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial, Algebra.PreSubmersivePresentation.dimension_comp_eq_dimension_add_dimension, HomogeneousLocalization.deg",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like linear independence is a different assertion; graded decomposition and primitive roots do not prove primitive-product nonvanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "(primitive|comul).*(linearIndependent|prod_ne_zero)|(linearIndependent|prod_ne_zero).*(primitive|comul)",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence, polynomial primitive parts and homogeneous product support bounds do not assert nonvanishing of independent primitive products in a signed graded algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The product of distinct linearly independent primitive elements in degree one of a connected graded bialgebra is nonzero",
+   "results": "8 hits: Polynomial.primPart_mul, DirectSum.coe_decompose_mul_of_left_mem_of_not_le, IsGroupLikeElem.mul, Polynomial.IsPrimitive.mul, GroupLike.val_mul, Multiset.prod_ne_zero_of_prime, SetLike.IsHomogeneousElem.mul, linearIndepOn_isGroupLikeElem",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence, polynomial primitive parts and homogeneous product support bounds do not assert nonvanishing of independent primitive products in a signed graded algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPrimitive\", \"LinearIndependent\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence, polynomial primitive parts and homogeneous product support bounds do not assert nonvanishing of independent primitive products in a signed graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearly independent primitive homogeneous degree one elements of a graded bialgebra have nonzero ordered product",
+   "results": "8 hits: linearIndepOn_isGroupLikeElem, finsetProd_apply_eq_zero', linearIndep_groupLikeVal, listProd_apply_eq_zero', multisetProd_apply_eq_zero', mul_apply_eq_zero, finsetProd_apply_eq_zero, listProd_apply_eq_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence, polynomial primitive parts and homogeneous product support bounds do not assert nonvanishing of independent primitive products in a signed graded algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected graded algebra with multiplicative coproduct primitive vectors in degree one: a product of independent vectors cannot vanish in any characteristic",
+   "results": "8 hits: listProd_apply_eq_zero', finsetProd_apply_eq_zero', multisetProd_apply_eq_zero', mul_apply_eq_zero, finsetProd_apply_eq_zero, GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero, multisetProd_apply_eq_zero, listProd_apply_eq_zero",
+   "date": "2026-10-23",
+   "verdict": "no match: group-like independence, polynomial primitive parts and homogeneous product support bounds do not assert nonvanishing of independent primitive products in a signed graded algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-structure-h1-dimension",
+  "date": "2026-10-23",
+  "group": "Q144"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: Nonvanishing of products of independent primitive degree-one elements.",
+   "via": [
+    "lem-sfb-abelian-structure-h1-dimension",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graded-primitive-product",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Supplied a four-step induction using a degree-one separating coordinate and an explicit signed subset expansion of the binary coproduct. One general prescribed-value linear extension theorem is a Mathlib leaf; tensor universal property is reused. Empty family, characteristic two, arbitrary dimensions and noncommutative ordered multiplication checked. No Borel structure theorem, exterior-algebra assertion or square-zero hypothesis used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: First coherent cohomology dimension of an abelian variety. Supporting input for the coherent H1 dimension argument: Nonvanishing of products of independent primitive degree-one elements. Supplies only the primitive-product ingredient in the coherent H1 bound in the inherited alteration route. Latest blueprint searches found no equivalent node; ancestor command returned None, and inherited null ancestor and lineage are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-27b21673b",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-27b21673b (reviewer sub-agent of L); spot-checked: Read the item, the new leaf, both cited statements, Milne AV I Lemma 12.2 and identity (3) (printed p.55), and the citer lem-sfb-abelian-structure-h1-dimension. The statement is unchanged and is exactly what the citer uses. There is no re-split note. Step 1 sets up the induction properly, with base case r=0. Step 2: x_r is not in P = (sum of H^n for n≠1) + span(x_i, i<r), shown by projecting to degree one. The new leaf gives λ with λ|P=0 and λ(x_r)=1. Step 3: I checked the sign recurrence. A left factor x_i⊗1 times a⊗x_S gives (-1)^{|S|}, which matches N(S); a right factor gives no sign; subproducts stay in order. Step 4: T(a⊗b)=λ(b)a comes from the universal property in def-weil-pbc-module-tensor-product. Only S={r} survives (N=0), giving y≠0. Small cases checked: r=1, r=2, characteristic 2, nonzero squares in k<x>, infinite-dimensional H^1. New leaf: LinearMap.exists_extend_of_notMem at Mathlib VectorSpace.lean:294-301, a one-line field specialization. It is not a duplicate: proper-subspace-separating-functional is finite-dimensional with no prescribed value, and the other near matches (bounded/ultrametric extension, pbc finite-kernel) are different statements. It is not a clause of the item. No SGA citations, no fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GradedPrimitiveProduct",
+  "declaration": "GradedAlgebra.primitive_product_ne_zero",
+  "file": "lean/Sheaf/RingTheory/GradedPrimitiveProduct.lean",
+  "statement": "theorem primitive_product_ne_zero (k : Type u) [Field k] (H : Type v) [Ring H] [Algebra k H] [Nontrivial H] (𝒜 : ℕ → Submodule k H) [GradedAlgebra 𝒜] (hconnected : 𝒜 0 = Submodule.span k {(1 : H)}) (Δ : H →ₗ[k] H ⊗[k] H) (hdegree : ∀ (n : ℕ) (a : 𝒜 n), Δ a ∈ Submodule.span k {z | ∃ (p q : ℕ) (b : 𝒜 p) (c : 𝒜 q), p + q = n ∧ z = (b : H) ⊗ₜ[k] (c : H)}) (hunit : Δ 1 = (1 : H) ⊗ₜ[k] (1 : H)) (hmul : ∀ a b : H, GradedTensorProduct.of k 𝒜 𝒜 (Δ (a * b)) = GradedTensorProduct.of k 𝒜 𝒜 (Δ a) * GradedTensorProduct.of k 𝒜 𝒜 (Δ b)) (hcoassoc : ∀ a : H, TensorProduct.assoc k H H H (TensorProduct.map Δ LinearMap.id (Δ a)) = TensorProduct.map LinearMap.id Δ (Δ a)) (r : ℕ) (x : Fin r → 𝒜 1) (hindependent : LinearIndependent k (fun i : Fin r ↦ (x i : H))) (hprimitive : ∀ i : Fin r, Δ (x i : H) = (x i : H) ⊗ₜ[k] (1 : H) + (1 : H) ⊗ₜ[k] (x i : H)) : (List.ofFn fun i : Fin r ↦ (x i : H)).prod ∈ 𝒜 r ∧ (List.ofFn fun i : Fin r ↦ (x i : H)).prod ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-593838da6",
+  "group": "NI",
+  "result": "pass",
+  "note": "First statement (live lean:null); only the item lean field changed; stmt_dep records identical to live. GradedAlgebra.primitive_product_ne_zero matches the node clause by clause: Field k; Ring+Algebra+Nontrivial H (1≠0, noncommutative allowed); GradedAlgebra over ℕ with 𝒜 0 = span{1}; Δ linear, degree-preserving (total-degree span), unital, coassociative (plain assoc), multiplicative via GradedTensorProduct.of (= refl), whose tmul_coe_mul_coe_tmul sign (-1)^(deg b*deg c) is exactly the node's; Fin r independent primitive degree-one family; conclusion: List.ofFn product ∈ 𝒜 r ∧ ≠ 0 (empty product 1). No added char/square/finiteness/counit hypotheses; universes u,v independent. Edge cases r=0, r=1, char 2, nonzero squares, infinite-dimensional H¹ checked; hypotheses non-vacuous (exterior algebra). Statement verbatim, source and blueprint docstrings present, sorry-only, report sections present. No compile (no file changed)."
+ }
+}

@@ -1,0 +1,94 @@
+{
+ "id": "lem-trf-complete-minpoly-constant-norm",
+ "kind": "statement",
+ "title": "The absolute value of an algebraic element from its minimal polynomial constant term",
+ "statement": "Let $K\\subseteq E$ be fields [def-weil-field] equipped with compatible nontrivial nonarchimedean real absolute values. Assume $K$ is complete for $d(x,y)=|x-y|$ and $E/K$ is algebraic, meaning that every element is a root of a nonzero polynomial in $K[T]$ [def-weil-polynomial-ring]. For $x\\in E$, let $m_x\\in K[T]$ be its monic minimal polynomial [def-weil-pbc-separable-algebraic-extension] and put $n=\\deg m_x\\ge1$. Then $$|x|=|m_x(0)|^{1/n}.$$ The right side is a nonnegative real power; the assertion includes $x=0$.",
+ "source": {
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow, line 991; spectralNorm_unique_field_norm_ext, line 770; hypotheses read at lines 690–692, 901–908 and 987–1009."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an algebraic extension of a complete nonarchimedean field the absolute value of an element equals the absolute value of the constant term of its minimal polynomial raised to the reciprocal degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"∀ (K : Type u) [inst : NontriviallyNormedField K] (L : Type v) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [Algebra.IsAlgebraic K L] [hu : IsUltrametricDist K] [CompleteSpace K] (x : L),\\n  spectralNorm K L x = ‖(minpoly K x).coeff 0‖ ^ (1 / ↑(minpoly K x).natDegree)\", \"doc\": \"For any element $x$ in a field extension $L$ over a nontrivially normed field $K$, the spectral norm of $x$ equals the norm of the constant term $a_0$ of its minimal polynomial over $K$, raised to the\"}\n  {\"name\": \"spectralNorm\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"(K : Type u_2) → [inst : NormedField K] → (L : Type u_3) → [inst_1 : Field L] → [Algebra K L] → L → ℝ\", \"doc\": \"The spectral norm of an element $ y $ in a field extension $ L $ over a base field $ K $ is defined as the spectral value of the minimal polynomial of $ y $ over $ K $. This yields a real number that \"}\n  {\"name\": \"spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"∀ (K : Type u) [inst : NontriviallyNormedField K] (L : Type v) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [hu : IsUltrametricDist K] [inst_3 : CompleteSpace K] (x : L) {E : Type u_2} [inst_4 : Field E] [inst_5 : Algebra K E]\\n  [inst_6 : Algebra L E] [IsScalarTower K L E] [Polynomial.IsSplittingFiel\", \"doc\": \"For an element $x$ in a field extension $L$ over a nontrivially normed field $K$, and for a splitting field $E$ of the minimal polynomial of $x$ over $K$, the spectral multiplicative algebra norm of $\"}\n  {\"name\": \"spectralNorm.spectralMulAlgNorm_eq_of_mem_roots\", \"module\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm\", \"type\": \"∀ (K : Type u) [inst : NontriviallyNormedField K] (L : Type v) [inst_1 : Field L] [inst_2 : Algebra K L]\\n  [hu : IsUltrametricDist K] [inst_3 : CompleteSpace K] (x : L) {E : Type u_2} [inst_4 : Field E] [inst_5 : Algebra K E]\\n  [inst_6 : Algebra L E] [IsScalarTower K L E] [inst_8 : Algebra.IsAlgebra\", \"doc\": \"Let `K` be a nontrivially normed field and `E` be an algebraic field extension of `K`. Let `L` be an intermediate field extension, so `K ⊆ L ⊆ E`. For any element `x ∈ L`, if `a ∈ E` is a root of the \"}\n  {\"name\": \"NumberField.Embeddings.coeff_bdd_of_norm_le\", \"module\": \"Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] {A : Type u_2} [inst_2 : NormedField A] [IsAlgClosed A]\\n  [NormedAlgebra ℚ A] {B : ℝ} {x : K},\\n  (∀ (φ : K →+* A), ‖φ x‖ ≤ B) →\\n    ∀ (i : ℕ),\\n      ‖(minpoly ℚ x).coeff i‖ ≤ max B 1 ^ Module.finrank ℚ K * ↑((Module.finrank ℚ K).choose (Modu\", \"doc\": \"Let $ K $ be a number field (a finite algebraic extension of $ \\\\mathbb{Q} $) and $ x \\\\in K $. Suppose that for every ring homomorphism $ \\\\varphi: K \\\\to A $ into a normed field $ A $, the norm $ \\\\|\\\\var\"}\n  {\"name\": \"Valuation.coeff_zero_minpoly\", \"module\": \"Mathlib/RingTheory/Valuation/Minpoly\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {Γ₀ : Type u_2} [inst_1 : LinearOrderedCommGroupWithZero Γ₀] (v : Valuation K Γ₀)\\n  (L : Type u_3) [inst_2 : Field L] [inst_3 : Algebra K L] (x : K), v ((minpoly K ((algebraMap K L) x)).coeff 0) = v x\", \"doc\": \"For any element $x$ in a field $K$, the valuation $v$ applied to the constant term of the minimal polynomial of $x$ (considered as an element of an extension field $L$) is equal to the valuation $v(x)\"}\n  {\"name\": \"Valuation.pow_coeff_zero_ne_zero_of_unit\", \"module\": \"Mathlib/RingTheory/Valuation/Minpoly\", \"type\": \"∀ {K : Type u_1} [inst : Field K] {Γ₀ : Type u_2} [inst_1 : LinearOrderedCommGroupWithZero Γ₀] (v : Valuation K Γ₀)\\n  {L : Type u_3} [inst_2 : Field L] [inst_3 : Algebra K L] [FiniteDimensional K L] (x : L),\\n  IsUnit x → v ((minpoly K x).coeff 0) ^ (Module.finrank K L / (minpoly K x).natDegree) ≠ 0\", \"doc\": \"For a unit element $ x $ in a finite-dimensional field extension $ L $ over $ K $, the valuation $ v $ of the constant term of the minimal polynomial of $ x $ raised to the power of the degree of the \"}\n  {\"name\": \"Algebra.PowerBasis.norm_gen_eq_prod_roots\", \"module\": \"Mathlib/RingTheory/Norm/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S] {F : Type u_6}\\n  [inst_3 : Field F] [inst_4 : Algebra R F] (pb : PowerBasis R S),\\n  (Polynomial.map (algebraMap R F) (minpoly R pb.gen)).Splits →\\n    (algebraMap R F) ((Algebra.norm R) pb.gen) = ((minpoly R \", \"doc\": \"For a power basis $\\\\{1, \\\\alpha, \\\\alpha^2, \\\\dots, \\\\alpha^{n-1}\\\\}$ of an $R$-algebra $S$ with generator $\\\\alpha$, if the minimal polynomial of $\\\\alpha$ over $R$ splits in a field $F$, then the norm $\\\\ma\"}",
+   "date": "2026-10-24",
+   "verdict": "match: constant-term formula and uniqueness identify the given absolute value with the spectral norm"
+  },
+  {
+   "tool": "leansearch",
+   "query": "spectral norm equals norm of constant coefficient of minimal polynomial to reciprocal degree over a complete nonarchimedean field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"(x : L) : spectralNorm K L x = ‖(minpoly K x).coeff 0‖ ^ (1 / (minpoly K x).natDegree : ℝ)\", \"doc\": \"For any element $x$ in a field extension $L$ over a nontrivially normed field $K$, the spectral norm of $x$ equals the norm of the constant term $a_0$ of its minimal polynomial over $K$, raised to the\"}\n  {\"name\": \"spectralNorm\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"(y : L) : ℝ\", \"doc\": \"The spectral norm of an element $ y $ in a field extension $ L $ over a base field $ K $ is defined as the spectral value of the minimal polynomial of $ y $ over $ K $. This yields a real number that \"}\n  {\"name\": \"spectralNorm.spectralNorm_pow_natDegree_eq_prod_roots\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"(x : L) {E : Type*} [Field E] [Algebra K E] [Algebra L E] [IsScalarTower K L E]\\n  [IsSplittingField L E (mapAlg K L (minpoly K x))] [Algebra.IsAlgebraic K E] :\\n  (spectralMulAlgNorm K E) ((algebraMap L E) x) ^ (minpoly K x).natDegree =\\n    (spectralMulAlgNorm K E) ((mapAlg K E) (minpoly K x)).roots.\", \"doc\": \"For an element $x$ in a field extension $L$ over a nontrivially normed field $K$, and for a splitting field $E$ of the minimal polynomial of $x$ over $K$, the spectral multiplicative algebra norm of $\"}\n  {\"name\": \"spectralNorm_unique\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"[CompleteSpace K] {f : AlgebraNorm K L} (hf_pm : IsPowMul f) : f = spectralAlgNorm K L\", \"doc\": \"The spectral norm on the field extension $ L $ over a normed field $ K $, defined via minimal polynomials, is an algebra norm that satisfies submultiplicativity ($\\\\|xy\\\\|_{\\\\text{spec}} \\\\leq \\\\|x\\\\|_{\\\\tex\"}\n  {\"name\": \"norm_root_le_spectralValue\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"{f : AlgebraNorm K L} (hf_pm : IsPowMul f) (hf_na : IsNonarchimedean f) {p : K[X]} (hp : p.Monic) {x : L}\\n  (hx : aeval x p = 0) : f x ≤ spectralValue p\", \"doc\": \"Let $K$ be a normed field and $L$ be a $K$-algebra. Let $f: L \\\\to \\\\mathbb{R}$ be an algebra norm that is non-Archimedean (i.e., satisfies the strong triangle inequality $f(a+b) \\\\le \\\\max(f(a), f(b))$) \"}\n  {\"name\": \"spectralAlgNorm\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \": AlgebraNorm K L\", \"doc\": \"The algebra norm on the field extension $ L $ over a normed field $ K $, induced by the spectral norm defined via minimal polynomials. This norm satisfies submultiplicativity ($\\\\|xy\\\\|_{\\\\text{spec}} \\\\l\"}\n  {\"name\": \"spectralAlgNorm_def\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"(x : L) : spectralAlgNorm K L x = spectralNorm K L x\", \"doc\": \"For any element $ x $ in the field extension $ L $ over a normed field $ K $, the spectral algebra norm of $ x $ is equal to its spectral norm, i.e., $ \\\\text{spectralAlgNorm}_K(L)(x) = \\\\text{spectralN\"}\n  {\"name\": \"max_norm_root_eq_spectralValue\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \"[DecidableEq L] {f : AlgebraNorm K L} (hf_pm : IsPowMul f) (hf_na : IsNonarchimedean f) (hf1 : f 1 = 1) (p : K[X])\\n  (s : Multiset L) (hp : mapAlg K L p = (map (fun a : L ↦ X - C a) s).prod) :\\n  (⨆ x : L, if x ∈ s then f x else 0) = spectralValue p\", \"doc\": \"Let $ K $ and $ L $ be seminormed commutative rings with $ L $ an $ K $-algebra. For a non-Archimedean algebra norm $ f : L \\\\to \\\\mathbb{R} $ satisfying $ f(1) = 1 $ and $ f(a^n) = (f(a))^n $ for all $\"}",
+   "date": "2026-10-24",
+   "verdict": "match: constant-term formula and uniqueness identify the given absolute value with the spectral norm"
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \" (K : Type u) [NontriviallyNormedField K] (L : Type v) [Field L] [Algebra K L] [Algebra.IsAlgebraic K L] [hu : IsUltrametricDist K] [CompleteSpace K] (x : L) : spectralNorm K L x = ‖(minpoly K x).coeff 0‖ ^ (1 / ↑(minpoly K x).natDegree)\", \"doc\": \"For `x : L` with minimal polynomial `f(X) := X^n + a_{n-1}X^{n-1} + ... + a_0` over `K`,\\nthe spectral norm of `x` is equal to `‖a_0‖^(1/(degree(f(X))))`.\"}",
+   "date": "2026-10-24",
+   "verdict": "match: constant-term formula and uniqueness identify the given absolute value with the spectral norm"
+  },
+  {
+   "tool": "grep",
+   "query": "spectralNorm_eq_norm_coeff_zero_rpow|spectralNorm_unique_field_norm_ext",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"770\", \"text\": \"theorem spectralNorm_unique_field_norm_ext [CompleteSpace K]\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\", \"line\": \"991\", \"text\": \"theorem spectralNorm_eq_norm_coeff_zero_rpow (x : L) :\"}",
+   "date": "2026-10-24",
+   "verdict": "match: constant-term formula and uniqueness identify the given absolute value with the spectral norm"
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralNorm_unique_field_norm_ext",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"spectralNorm_unique_field_norm_ext\", \"module\": \"Mathlib.Analysis.Normed.Unbundled.SpectralNorm\", \"type\": \" {K : Type u} [NontriviallyNormedField K] {L : Type v} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L] [hu : IsUltrametricDist K] [CompleteSpace K] {f : AbsoluteValue L ℝ} (hf_ext : ∀ (x : K), f ((algebraMap K L) x) = ‖x‖) (x : L) : f x = spectralNorm K L x\", \"doc\": \"If `K` is a field complete with respect to a nontrivial nonarchimedean multiplicative norm and\\n`L/K` is an algebraic extension, then any multiplicative ring norm on `L` extending the norm on\\n`K` coinc\"}",
+   "date": "2026-10-24",
+   "verdict": "match: constant-term formula and uniqueness identify the given absolute value with the spectral norm"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow",
+  "file": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "line": 991,
+  "how": "specializes in one line: rewrite the given extending AbsoluteValue as spectralNorm by spectralNorm_unique_field_norm_ext (same file, lines 770–772), then use spectralNorm.spectralNorm_eq_norm_coeff_zero_rpow (lines 991–992). Completeness, nontriviality, ultrametricity and algebraicity are exactly the hypotheses in scope at lines 690–692 and 907. No separability, discreteness or completeness of E is needed. Lines read 2026-10-24."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-immediate-prime-polynomial-obstruction",
+  "date": "2026-10-24",
+  "group": "Q141"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Theorem 2.1.10(i)--(iii), printed p. 10; etale form of unramifiedness by Lemma 2.1.6, same page. Supporting input: Theorem 6.3.1(iii), printed pp. 48–49; Cartesian means the degree formula of §6.1, p. 36 and §2.1, p. 9. Supporting input: Proposition 6.1.1, p. 36; reformulated and proved as Proposition 6.1.4(i),(iv)(a), pp. 38–40. No discreteness or separability of B/A assumed. Supporting input: Temkin Proposition 6.1.4, proof pp. 39–40: norms of the constant coefficient and of polynomial evaluations; Mathlib constant-term formula replaces the root-product computation.",
+   "via": [
+    "lem-trf-immediate-prime-polynomial-obstruction",
+    "lem-trf-analytic-type23-stability",
+    "lem-trf-analytic-uniformization",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

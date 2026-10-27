@@ -1,0 +1,266 @@
+{
+ "id": "lem-sfb-space-qcqs-distinguished-square-induction",
+ "kind": "statement",
+ "title": "Induction on qcqs algebraic spaces by elementary distinguished squares",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and $X$ a quasi-compact and quasi-separated algebraic space over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Quasi-compactness means that every open cover has a finite subcover, and quasi-separatedness means that the absolute diagonal over $\\operatorname{Spec}\\mathbf Z$ is quasi-compact on scheme tests. An elementary distinguished square $(U\\subset W,p:V\\to W)$ means an open immersion $U\\to W$ (identifying $U$ with an open subspace [def-a1-space-open-subspace]), a representable etale map $p$, and an isomorphism $V\\times_WZ\\to Z$, where $Z$ is the reduced closed subspace with underlying set $|W|\\setminus|U|$ [lem-sfb-space-reduced-closed-support], the point sets carrying the atlas topology [def-a1-space-point-topology]. Its fourth vertex is $U\\times_WV$. Let $P$ be an isomorphism-invariant property of etale maps $T\\to X$ with $T$ quasi-compact and quasi-separated; $T$ may be an algebraic space. Assume (a) $P(T)$ holds for every affine scheme $T$ etale over $X$; and (b) for every elementary distinguished square $(U\\subset W,V\\to W)$ over $X$ with $W$ quasi-compact and quasi-separated, $U$ quasi-compact, and $V$ affine, if $P(U)$, $P(V)$, and $P(U\\times_WV)$ hold, then $P(W)$ holds. All objects mentioned in (b) belong to the domain of $P$. Then $P(T)$ holds for every quasi-compact and quasi-separated algebraic space etale over $X$, including $T=X$. The empty affine scheme is allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GP (lemma-induction-principle); elementary distinguished squares as used in this lemma and in Tag 08JK (lemma-unbounded-relative-mayer-vietoris)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-a1-space-open-subspace",
+  "def-a1-space-point-topology",
+  "lem-sfb-space-reduced-closed-support",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix any qcqs etale object $T\\to X$. Every quasi-compact open $A\\subset T$ is quasi-separated: its absolute diagonal is the pullback of the diagonal of $T$ along $A\\times A\\to T\\times T$, and quasi-compactness is preserved by base change [lem-sfb-space-quasicompact-affine-tests]. Thus these opens are in the domain of $P$. Open inclusions and their composites with etale maps are etale on scheme tests. For a quasi-compact open $A\\subset T$ and an affine scheme $B\\to T$, the inclusion $A\\to T$ is quasi-compact by [lem-sfb-space-qcqs-permanence]; its base change $A\\times_TB\\to B$ is quasi-compact by [lem-sfb-space-quasicompact-affine-tests]. Consequently $A\\times_TB$ is a quasi-compact open subscheme of $B$, hence quasi-separated by the same diagonal argument. These checks will apply to all overlaps below.",
+   "uses": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-qcqs-permanence",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GP (lemma-induction-principle), domain and quasi-compactness checks in both proof paragraphs"
+   }
+  },
+  {
+   "text": "First suppose $T$ is a scheme. Apply [lem-sc-invert-s-cohomology-induction] to the property $Q(A)=P(A\\to T\\to X)$ of quasi-compact opens of $T$. For an affine open, (a) gives $Q$. For $A$ quasi-compact open and $B$ affine open, $(A\\subset A\\cup B,B\\to A\\cup B)$ is an elementary distinguished square: the reduced complement of $A$ lies in $B$, so its inverse image in $B$ is itself. The overlap is $A\\cap B$, and step 1 verifies the required domain conditions. Hypothesis (b) supplies exactly the union implication of the cited scheme-induction lemma. It follows that $P(T)$ holds for every qcqs scheme etale over $X$, and also for all its quasi-compact open subschemes.",
+   "uses": [
+    "lem-sc-invert-s-cohomology-induction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GP (lemma-induction-principle), first proof paragraph; coherent.tex Tag 08DR (lemma-induction-principle)"
+   }
+  },
+  {
+   "text": "For general $T$, pass to the algebraic space $j_!T$ over $\\operatorname{Spec}\\mathbf Z$ of [lem-sfb-space-change-base-to-integers]: by its parts (2) and (3), open subspaces, etale scheme charts, fibre products and reduced closed subspaces of $T$ and of $j_!T$ correspond, and quasi-compactness and the absolute diagonal are unchanged. Apply [lem-sfb-qcqs-space-splitting-filtration] to $j_!T$ and transport the result back to $T$. Obtain quasi-compact opens $\\emptyset=U_{n+1}\\subset U_n\\subset\\cdots\\subset U_1=T$ and surjective etale maps $f_p:V_p\\to U_p$ with $V_p$ quasi-compact separated schemes, isomorphic over the reduced complements $Z_p=U_p\\setminus U_{p+1}$. Each open and each chart inherits its map to $S$ from $T$, so this use of the absolute filtration imposes no condition on the original base $S$. The induction assertion is $P(U_p)$, descending from $p=n+1$ to $1$. Its initial case holds by (a), since the empty scheme is affine. Assume $P(U_{p+1})$. Choose a finite affine open cover $V_p=\\bigcup_{i=1}^mV_{p,i}$ by [lem-weil-pbc-qcqs-finite-affine-open-cover].",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers",
+    "lem-sfb-qcqs-space-splitting-filtration",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GP (lemma-induction-principle), second proof paragraph through the finite affine covering; decent-spaces.tex Tag 07ST (lemma-filter-quasi-compact-quasi-separated); spaces.tex Tags 03I4, 04SG (change of base scheme)"
+   }
+  },
+  {
+   "text": "Set $W_0=U_{p+1}$ and $W_i=U_{p+1}\\cup\\bigcup_{j\\le i}f_p(V_{p,j})$. By [lem-a1-space-etale-open-image] the images are open subspaces and quasi-compact; finite unions are quasi-compact by taking finite subcovers on each member. Step 1 makes each $W_i$ quasi-separated. Surjectivity gives $W_m=U_p$. Since $f_p(V_{p,i})\\subset W_i$, the open-image clause factors $V_{p,i}\\to V_p\\to U_p$ through $W_i$, and the factor is representable etale, its scheme base changes being those over $U_p$. The pairs $(W_{i-1}\\subset W_i,V_{p,i}\\to W_i)$ are elementary distinguished squares, as follows directly. Let $C_i$ be the reduced closed complement of $W_{i-1}$ in $W_i$. Its support lies in $Z_p\\cap W_i$, so $C_i$ factors through this reduced closed subspace: on affine charts, a function vanishing at every point of the reduced source is zero. The inverse image of $Z_p\\cap W_i$ under $f_p$ is that same space. Under this isomorphism the inverse image of $C_i$ lies entirely in $V_{p,i}$: every point of $W_i\\setminus W_{i-1}$ is in the image of $V_{p,i}$ by the definition of $W_i$. The open subspace in question is therefore the whole inverse image, by [lem-a1-space-point-open-calculus]. Thus $V_{p,i}\\times_{W_i}C_i\\to C_i$ is an isomorphism. The reduced subspaces used here exist uniquely by [lem-sfb-space-reduced-closed-support]; restricting one to an open remains reduced and has the prescribed support.",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-reduced-closed-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GP (lemma-induction-principle), construction of W_{p,i}; Tag 08GN (lemma-make-more-elementary-distinguished-squares), restriction argument written out"
+   }
+  },
+  {
+   "text": "For each $i$, (a) gives $P(V_{p,i})$. The overlap $W_{i-1}\\times_{W_i}V_{p,i}$ is a quasi-compact open subscheme of the affine $V_{p,i}$ by the checks in step 1; it is therefore a qcqs scheme etale over $X$. Step 2 gives $P$ for this overlap. Starting with $P(W_0)=P(U_{p+1})$, apply (b) successively to the distinguished squares from step 4. This proves $P(W_1),\\ldots,P(W_m)=P(U_p)$. If $V_p$ is empty, surjectivity gives $U_p=\\emptyset$ and the affine base case already applies. Descending induction now proves $P(U_1)=P(T)$. The choice of $T$ was arbitrary, and $T=X$ is allowed via the identity map, proving every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08GP (lemma-induction-principle), final proof paragraph; assembly of steps 1--4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-sfb-space-qcqs-permanence",
+  "def-a1-space-open-subspace",
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-sfb-space-change-base-to-integers",
+  "lem-sfb-qcqs-space-splitting-filtration",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-reduced-closed-support"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tag 08GP (lemma-induction-principle), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Induction on quasi compact quasi separated algebraic spaces using affine spaces and elementary distinguished squares",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.compact_open_induction_on\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {P : X.Opens → Prop} (S : X.Opens),\\n  IsCompact ↑S → P ⊥ → (∀ (S : X.Opens), IsCompact S.carrier → ∀ (U : ↑X.affineOpens), P S → P (S ⊔ ↑U)) → P S\", \"doc\": \"For any scheme $X$, if a property $P$ of open subsets satisfies $P(\\\\emptyset)$ and for every compact open subset $S \\\\subseteq X$ and affine open subset $U \\\\subseteq X$, the implication $P(S) \\\\implies \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [inst : AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  AlgebraicGeometry.AffineTargetMorphismProperty.diagonal (fun X x x_1 x_2 => CompactSpace ↥X) f ↔\\n    QuasiSeparatedSpace ↥X\", \"doc\": \"A scheme $X$ is quasi-separated if and only if, for every affine scheme $Y$ and morphism $f: X \\\\to Y$, the diagonal morphism associated to $f$ satisfies the quasi-compactness condition under pullbacks\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [QuasiSeparatedSpace ↥Y] [CompactSpace ↥Y],\\n  AlgebraicGeometry.QuasiCompact f ↔ CompactSpace ↥X\", \"doc\": \"For any schemes $X$ and $Y$, and a morphism $f: X \\to Y$, if $Y$ is quasi-separated and compact, then $f$ is quasi-compact if and only if $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], QuasiSeparatedSpace ↥X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A property of qcqs etale algebraic spaces holds if it holds for affine objects and glues over Nisnevich distinguished squares",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.Pretopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction principle algebraic spaces affine etale objects elementary distinguished square",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.of_affine_open_cover\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} {P : X.affineOpens → Prop} {ι} (U : ι → X.affineOpens) (iSup_U : (⨆ i, U i : X.Opens) = ⊤)\\n  (V : X.affineOpens) (basicOpen : ∀ (U : X.affineOpens) (f : Γ(X, U)), P U → P (X.affineBasicOpen f))\\n  (openCover :\\n    ∀ (U : X.affineOpens) (s : Finset (Γ(X, U))) (_ : Ideal.span (s : Set (Γ(X\", \"doc\": \"Let $ X $ be a scheme and $ P $ a property of affine open subsets of $ X $. Suppose that: (1) $ \\\\{U_i\\\\}_{i \\\\in I} $ is a cover of $ X $ by affine open subsets such that $ \\\\bigcup_i U_i = X $; (2) $ P \"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsAffineHom f → Sort u} →\\n      (t : AlgebraicGeometry.IsAffineHom f) →\\n        ((isAffine_preimage :\\n              ∀ (U : Y.Opens),\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  AlgebraicGeomet\", \"doc\": \"A recursion principle for the predicate that a morphism of schemes is affine. Given a property $ P $ depending on an affine morphism $ f $, and a construction that produces $ P(f) $ from the condition\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.rec\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsAffineHom f → Sort u} →\\n      ((isAffine_preimage :\\n            ∀ (U : Y.Opens),\\n              AlgebraicGeometry.IsAffineOpen U →\\n                AlgebraicGeometry.IsAffineOpen ((TopologicalSpace.Opens.map f.base).o\", \"doc\": \"A recursion principle for the predicate that a morphism of schemes is affine. Given a motive $ P $ depending on an affine morphism $ f $, and a construction that produces $ P(f) $ from the condition t\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"A property of an algebra $ A $ over a commutative ring $ R $, asserting that $ A $ is formally étale, meaning it satisfies the infinitesimal lifting property characterizing étale morphisms in algebrai\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsLocalIso f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsLocalIso f) →\\n        ((exists_isOpenImmersion :\\n              ∀ (x : ↥X), ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U\", \"doc\": \"Given a property $P$ of local isomorphisms $f : X \\to Y$, if $P$ holds for any local isomorphism constructed from open immersions on neighborhoods covering $X$, then $P$ holds for all local isomorphism\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineHom.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsAffineHom f → Sort u} →\\n      (t : AlgebraicGeometry.IsAffineHom f) →\\n        ((isAffine_preimage :\\n              ∀ (U : Y.Opens),\\n                AlgebraicGeometry.IsAffineOpen U →\\n                  AlgebraicGeomet\", \"doc\": \"A case analysis principle for the predicate that a morphism of schemes is affine. Given a property $ P $ depending on an affine morphism $ f $, and a construction that produces $ P(f) $ from the condi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"induction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|distinguished.square|Nisnevich.*induction",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits do not state the algebraic-space derived assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "distinguished.*square|AlgebraicSpace.*induction|induction.*AlgebraicSpace",
+   "results": "1 hits: Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compact open induction, scheme etale predicates, and triangulated distinguished triangles do not state induction for algebraic spaces by elementary distinguished squares"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic space",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compact open induction, scheme etale predicates, and triangulated distinguished triangles do not state induction for algebraic spaces by elementary distinguished squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compact open induction, scheme etale predicates, and triangulated distinguished triangles do not state induction for algebraic spaces by elementary distinguished squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"distinguished\"",
+   "results": "12 hits: CategoryTheory.Pretriangulated.distinguishedTriangles, CategoryTheory.Pretriangulated.contractible_distinguished, CategoryTheory.Pretriangulated.binaryBiproductTriangle_distinguished, CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₁, CategoryTheory.Pretriangulated.Triangle.distinguished_iff_of_isZero₃, CategoryTheory.Pretriangulated.rotate_distinguished_triangle, CategoryTheory.Pretriangulated.binaryProductTriangle_distinguished, CategoryTheory.Pretriangulated.isomorphic_distinguished",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compact open induction, scheme etale predicates, and triangulated distinguished triangles do not state induction for algebraic spaces by elementary distinguished squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich excision induction principle for properties of etale objects over an algebraic space",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compact open induction, scheme etale predicates, and triangulated distinguished triangles do not state induction for algebraic spaces by elementary distinguished squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Induction on quasi compact quasi separated algebraic spaces using affine schemes and elementary distinguished squares",
+   "results": "8 hits: AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.QuasiSeparated.rec, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, AlgebraicGeometry.QuasiSeparated.recOn, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.quasiCompact_over_affine_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme quasi-compact open induction, scheme etale predicates, and triangulated distinguished triangles do not state induction for algebraic spaces by elementary distinguished squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-single-complex-base-change",
+  "date": "2026-10-23",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tag 0A1K (lemma-base-change-tensor), statement and precise canonical map in the proof; sites-cohomology.tex Tags 07A6 (lemma-adjoint) and 07A7 (remark-base-change). Supporting input to 0A1K: Tag 0DKH (lemma-single-complex-base-change), with condition (1) of Tag 0DKG (lemma-single-complex-base-change-condition) and equation-bc immediately before it; the canonical exchange is the map specified there and explicitly defined in the statement. Supporting input: Tag 0DKH, first paragraph: use lemma-induction-principle (08GP) for qcqs etale objects over X.",
+   "via": [
+    "lem-sfb-space-single-complex-base-change",
+    "lem-sfb-space-flat-complex-base-change",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-qcqs-distinguished-square-induction",
+  "worker": "stage1",
+  "summary": "Checked the unchanged statement against Stacks 08GP. Reused the existing 07ST splitting filtration, scheme open-induction theorem, finite affine cover and algebraic-space topology/compactness nodes. Wrote out the affine-chart refinement, reduced-complement isomorphism, overlap domain checks and both finite inductions. No new nodes.",
+  "blueprint": "Supports the stored ancestor place at det-thm-sf-ctf-stability-direct-images proof (3), through the 0DKH invocation of 08GP. The latest blueprint direct-images proof still uses the proper/open direct-image route. The nearest blueprint ancestor is null (as printed by blueprint_refs.py ancestor); the inherited from.place is already explicit and is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-invert-s-cohomology-induction",
+    "why": "Generic scheme open-cover induction (08DR), used for schematic etale objects in the first paragraph of 08GP; no same-unit node supplies it."
+   },
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic open-image and quasi-compact image calculus for etale maps, used to construct W_i; no same-unit node supplies it."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point and open-subspace calculus, used to check the reduced-complement isomorphism; no same-unit node supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-invert-s-cohomology-induction",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q157-7256b82e3",
+  "group": "Q157",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-7256b82e3 (reviewer sub-agent of L); spot-checked: I read Stacks 08GP, 08GN and the statement of 07ST, which is over Spec Z only, together with every cited node's statement. The delivery has 0 new nodes and the statement is unchanged. Step 1 (qc opens are qs, overlaps are qc opens of affines via qcqs-permanence and affine-tests base change), step 2 (08DR scheme induction, A∪B square) and step 5 (double induction, empty cases) are correct. Step 4 is correct: C_i factors through the reduced Z_p∩W_i, every point of C_i has its preimage in V_{p,i}, and the full-point-image clause makes the open equal to the whole inverse image. C1 fault: step 3 passes from S to Spec Z ('regard it as an algebraic space over Spec Z') so that it can apply the Spec-Z-only splitting-filtration node. This uses Stacks 03I4/04SG without citation, and the DAG has it as lem-sfb-space-change-base-to-integers (split, same unit, no cycle). Fixed: step 3 now cites that node (parts (2) and (3) transport opens, charts and reduced subspaces), and proof_deps is updated. Step 4 never stated that V_{p,i}→W_i is representable étale, which the item's definition of a square requires; I added one sentence via the open-image factorization. I accept the three tool_uses (08DR scheme induction, a1 étale open-image, a1 point/open calculus) as generic. Batch-5: the four flagged citations, and the one I added, reach only def-trf-algebraic-space and generic trf algebraic-space foundations (fibre products, fppf descent, étale relations). These are not steps of the trace formula or of Poincaré duality, so no assumption-leaf citation is needed. No SGA source and no duplicate of 08GP in the DAG. Edge cases checked: empty T, affine T, non-separated qcqs scheme, n=1, empty strata, chart image inside W_{i-1}, nonreduced T.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceQcqsDistinguishedSquareInduction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.qcqs_etale_distinguishedSquare_induction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceQcqsDistinguishedSquareInduction.lean",
+  "statement": "theorem qcqs_etale_distinguishedSquare_induction {S : Scheme.{u}} (X : AlgebraicSpace S) (hXqc : CompactSpace (Point X.obj.obj)) (hXqs : IsAbsolutelyQuasiSeparated X) (P : Over X → Prop) (h_iso : ∀ (T T' : Over X), IsChartwiseEtale T.hom → CompactSpace (Point T.left.obj.obj) → IsAbsolutelyQuasiSeparated T.left → IsChartwiseEtale T'.hom → CompactSpace (Point T'.left.obj.obj) → IsAbsolutelyQuasiSeparated T'.left → (T ≅ T') → (P T ↔ P T')) (h_affine : ∀ (T : Over X), IsChartwiseEtale T.hom → (∃ A : Over S, IsAffine A.left ∧ Nonempty (T.left.obj.obj ≅ yoneda.obj A)) → P T) (h_square : ∀ (W U V O : Over X), IsChartwiseEtale W.hom → CompactSpace (Point W.left.obj.obj) → IsAbsolutelyQuasiSeparated W.left → IsChartwiseEtale U.hom → CompactSpace (Point U.left.obj.obj) → IsAbsolutelyQuasiSeparated U.left → IsChartwiseEtale V.hom → CompactSpace (Point V.left.obj.obj) → IsAbsolutelyQuasiSeparated V.left → IsChartwiseEtale O.hom → CompactSpace (Point O.left.obj.obj) → IsAbsolutelyQuasiSeparated O.left → ∀ (i : U ⟶ W) (p : V ⟶ W) (a : O ⟶ U) (b : O ⟶ V), IsPullback a.left.hom b.left.hom i.left.hom p.left.hom → (∃ A : OpenSubspace W.left, ∃ e : U.left.obj.obj ≅ A.val.toFunctor, e.hom ≫ A.val.ι = i.left.hom.hom) → IsEtale p.left.hom.hom → (∃ A : Over S, IsAffine A.left ∧ Nonempty (V.left.obj.obj ≅ yoneda.obj A)) → ∀ C : ClosedSubspace W.left, IsReduced (C.val : AlgebraicSpace S) → pointImage C.val.arrow.hom.hom = (pointImage i.left.hom.hom)ᶜ → IsIso (Limits.pullback.snd p.left.hom C.val.arrow.hom) → P U → P V → P O → P W) : (∀ T : Over X, IsChartwiseEtale T.hom → CompactSpace (Point T.left.obj.obj) → IsAbsolutelyQuasiSeparated T.left → P T) ∧ P (Over.mk (𝟙 X))",
+  "branch": "sheaf-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f468e187",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Re-delivery of a7c45ccdf795 RETURN: Lean module byte-identical; the only item change is stmt_deps replacing theorem lem-trf-space-enlarged-etale-ringed-site-model by new def node def-sfb-space-chartwise-etale-morphism (existing:true, AlgebraicGeometry.AlgebraicSpace.IsChartwiseEtale at EnlargedEtaleRingedSite.lean:47, statement verbatim, not moved). Node matches Stacks 03FR exactly (every etale scheme chart composes to representable etale; f not representable); no other def node, Mathlib or live copy owns space-map etaleness (def-sfb-space-morphism-properties has no etale member). Item re-checked vs 08GN/08GP: qcqs X (CompactSpace Point + IsAbsolutelyQuasiSeparated), P domain, h_iso, h_affine (empty allowed), h_square (IsPullback, OpenSubspace inclusion, representable etale p = etale for scheme source, affine V, reduced complement C unique, IsIso pullback.snd; vertex domain premises automatic), both conclusions; edge cases and universes ok. No hollow defs, sorry only, docstrings present. Advisory H9: could import EnlargedEtaleRingedSite instead of AtlasEtaleRestriction. No compile (file unchanged)."
+ }
+}

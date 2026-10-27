@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-finite-flat-homomorphism-extensions",
+ "kind": "statement",
+ "title": "Finite locally free surjections in a morphism of group extensions",
+ "statement": "Let $B$ be a scheme [def-pc-scheme]. For $i=1,2$, let $K_i,E_i,Q_i$ be commutative $B$-group schemes, meaning schemes over $B$ with addition, inverse and identity morphisms satisfying the commutative group identities. Suppose $0\\to K_i\\xrightarrow{j_i}E_i\\xrightarrow{q_i}Q_i\\to0$ is exact as a sequence of sheaves on the big fppf site of $B$ [def-pc-fppf-site]: for every $B$-scheme $U$, $j_i$ identifies $K_i(U)$ with the kernel of $q_i:E_i(U)\\to Q_i(U)$, and each section of $Q_i(U)$ lifts to $E_i$ after an fppf covering of $U$. Let $u:K_1\\to K_2$, $v:E_1\\to E_2$, and $w:Q_1\\to Q_2$ be homomorphisms with $v j_1=j_2u$ and $q_2v=wq_1$. If $u$ and $w$ are finite locally free [def-pc-finite-locally-free] and surjective on underlying points, then $v$ is finite locally free and surjective on underlying points. No smoothness, reducedness, connectedness or invertibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02VO, lemma-descending-property-finite-locally-free; group-extension consequence by fppf local lifting and translation, written by the worker (argument in report.md)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-pc-finite-locally-free"
+ ],
+ "proof": [
+  {
+   "text": "Form $P=Q_1\\times_{Q_2}E_2$, with projections $a:P\\to Q_1$ and $b:P\\to E_2$. The equation $q_2v=wq_1$ gives $h=(q_1,v):E_1\\to P$ and $v=bh$. The morphism $b$ is the base change of $w$ along $q_2$. These assertions follow immediately from the universal property of the fibre product.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001V, definition-fibre-product, applied to schemes; agent-written factorization"
+   }
+  },
+  {
+   "text": "Apply the assumed fppf-local lifting property of $q_1$ to $\\mathrm{id}_{Q_1}\\in Q_1(Q_1)$. Obtain an fppf covering $\\{V_i\\to Q_1\\}$ and lifts $e_i\\in E_1(V_i)$. Put $T_i=P\\times_{Q_1}V_i$. The base-change theorem for fppf covers makes $\\{T_i\\to P\\}$ an fppf covering. Write $x_i:T_i\\to Q_1$ and $y_i:T_i\\to E_2$ for its universal components and still write $e_i$ for the pulled-back lift, so $q_1(e_i)=x_i$ and $q_2(y_i)=w(x_i)$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-pc-fibre-product",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021O, lemma-fppf (3); universal-section lift from the item hypothesis, written by Q05"
+   }
+  },
+  {
+   "text": "Since $q_2(y_i-v(e_i))=w(x_i)-w(q_1(e_i))=0$, the kernel hypothesis gives a unique $k_i\\in K_2(T_i)$ with $j_2(k_i)=y_i-v(e_i)$. For every $T_i$-scheme $R$, translation $k\\mapsto e_i|_R+j_1(k)$ is a bijection from $\\{k\\in K_1(R):u(k)=k_i|_R\\}$ to $\\{e\\in E_1(R):q_1(e)=x_i|_R,\\ v(e)=y_i|_R\\}$: the inverse is the unique $k$ with $j_1(k)=e-e_i|_R$, and injectivity of $j_2$ makes $v(e)=y_i|_R$ equivalent to $u(k)=k_i|_R$. These formulas commute with restriction. The fibre-product universal property and fully faithful Yoneda therefore identify $E_1\\times_P T_i\\to T_i$ with $K_1\\times_{K_2,k_i}T_i\\to T_i$, as morphisms of schemes over $T_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001P, lemma-yoneda; inverse translation formulas and kernel argument written by Q05"
+   }
+  },
+  {
+   "text": "Apply finite-morphism base change, flat-morphism base change, and local-finite-presentation base change to $u$ and $w$. By the definition of finite locally free, every base change used here is finite locally free. Surjectivity is also stable under base change. Thus the local models for $h$ of step 3 are finite locally free and surjective, and so is $b$ from step 1. The local statements transfer across the displayed isomorphisms (finiteness, flatness and local finite presentation are properties of morphisms, independent of isomorphic presentations).",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WL, lemma-base-change-finite; 01U9, lemma-base-change-flat; 01TS, lemma-base-change-finite-presentation; 01S1, lemma-base-change-surjective; 02KB, lemma-finite-flat"
+   }
+  },
+  {
+   "text": "The covering $\\{T_i\\to P\\}$ is fpqc because it is fppf. Descend finiteness, flatness and local finite presentation separately along this very covering. Their three descent statements apply to $h:E_1\\to P$ and give these three properties for $h$; hence $h$ is finite locally free. It is also surjective on underlying points: for $z\\in P$ choose $t\\in T_i$ over $z$ by joint surjectivity, and then a point of $E_1\\times_PT_i$ over $t$ by step 4. Its projection to $E_1$ maps to $z$.",
+   "uses": [
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-weil-pbc-fpqc-descend-flat",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02LA, lemma-descending-property-finite; 02L2, lemma-descending-property-flat; 02KY, lemma-descending-property-locally-finite-presentation; together Tag 02VO, lemma-descending-property-finite-locally-free; fppf-to-fpqc: topologies.tex Tag 022C; point argument by Q05"
+   }
+  },
+  {
+   "text": "Finite locally free morphisms are closed under composition, so $v=bh$ is finite locally free. For any point $e_2\\in E_2$, surjectivity of $b$ gives $z\\in P$ with $b(z)=e_2$, and surjectivity of $h$ gives $e_1\\in E_1$ with $h(e_1)=z$; hence $v(e_1)=e_2$. This proves both conclusions with no further hypotheses.",
+   "uses": [
+    "lem-trf-finite-locally-free-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KC, lemma-composition-finite-locally-free; elementary point-surjectivity composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-base-change",
+  "lem-galois-yoneda-fully-faithful",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-trf-finite-locally-free-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02VO, lemma-descending-property-finite-locally-free, group-extension consequence; explicit local-lifting argument by Q05; permanence inputs in morphisms.tex Tags 02KC/02KD; topologies.tex Tags 021O/022C"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a morphism of short exact sequences of commutative group schemes for the fppf topology, finite locally free surjective maps on kernels and quotients imply the middle map is finite locally free surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → (Finite ↑S.X₂ ↔ Finite ↑S.X₁ ∧ Finite ↑S.X₃)\", \"doc\": \"In a short exact sequence $0 \\\\to A_1 \\\\to A_2 \\\\to A_3 \\\\to 0$ of abelian groups, the middle group $A_2$ is finite if and only if both $A_1$ and $A_3$ are finite.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.surjective_g\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ConcreteCategory\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type w}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [inst_3 : CategoryTheory.HasForget₂ C Ab] [inst_4 : CategoryTheory.Preadditive C]\\n  [inst_5 : (\", \"doc\": \"In a category with a zero object, if $ S $ is a short exact sequence, then the image of the second differential $ g : X_2 \\to X_3 $ under the forgetful functor from $ C $ to the category of abelian gro\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.Exact → ∀ [Finite ↑S.X₁] [Finite ↑S.X₃], Finite ↑S.X₂\", \"doc\": \"In an exact short complex of abelian groups, if the first and third objects are finite, then the middle object is also finite.\"}\n  {\"name\": \"Module.Finite.of_exact\", \"module\": \"Mathlib/RingTheory/Finiteness/Finsupp\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : Ring R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P},\\n  Function.Exact ⇑f ⇑g → Function.Surject\", \"doc\": \"If $ f: M \\\\to N $ and $ g: N \\\\to P $ are linear maps such that $ \\\\text{im}(f) = \\\\ker(g) $ and $ g $ is surjective, and if $ M $ and $ P $ are finitely generated $ R $-modules, then $ N $ is also a fin\"}\n  {\"name\": \"MonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram of monoid homomorphisms with exact rows, if the map i₂ is surjective, i₃ is injective, and g₁ is injective, then the map i₁ is surjective. This result follows from the standar\"}\n  {\"name\": \"LinearMap.surjective_of_surjective_of_surjective_of_injective\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M₁ : Type u_2} {M₂ : Type u_3} {M₃ : Type u_4} {M₄ : Type u_5} {N₁ : Type u_7}\\n  {N₂ : Type u_8} {N₃ : Type u_9} {N₄ : Type u_10} [inst_1 : AddCommGroup M₁] [inst_2 : AddCommGroup M₂]\\n  [inst_3 : AddCommGroup M₃] [inst_4 : AddCommGroup M₄] [inst_5 : Module R M₁]\", \"doc\": \"Given a commutative diagram of modules with exact rows, if the maps $i_1$ and $i_3$ are surjective and the map $i_4$ is injective, then the map $i_2$ is surjective.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_surjective_g\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom S.g)\", \"doc\": \"If $ 0 \\\\to A \\\\xrightarrow{f} B \\\\xrightarrow{g} C \\\\to 0 $ is a short exact sequence of abelian groups, then the morphism $ g $ is surjective.\"}\n  {\"name\": \"MonoidHom.bijective_of_surjective_of_bijective_of_right_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram with exact rows of monoid homomorphisms, if the first morphism $i_1$ is surjective, the second morphism $i_2$ is bijective, the fourth morphism $f_2$ is surjective, and the fi\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GrpObj\", \"Finite\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "grep",
+   "query": "(extension|exact).*(finite locally free|finite flat)|(finite locally free|finite flat).*(extension|exact)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of group extensions is finite flat surjective if its maps on the kernel and quotient are finite flat surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"GroupExtension.mk.inj\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} {inst : Group N} {inst_1 : Group E} {inst_2 : Group G} {inl : N →* E}\\n  {rightHom : E →* G} {inl_injective : Function.Injective ⇑inl} {range_inl_eq_ker_rightHom : inl.range = rightHom.ker}\\n  {rightHom_surjective : Function.Surjective ⇑rightHom} {inl_1 :\", \"doc\": \"If two group extension data structures $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ are equal, then their inclusion homomorphism $\\\\text{inl}: N \\\\to E$ and surjective homomorphism $\\\\text{rightHom}: E \\\\to G$ must coinci\"}\n  {\"name\": \"AddGroupExtension.rightHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] → [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → AddGroupExtension N E G → E →+ G\", \"doc\": \"Given an additive group extension representing the short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$, this is the surjective additive group homomorphism from $E$ to $G$ that completes the sequence.\"}\n  {\"name\": \"AddGroupExtension.mk.inj\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} {inst : AddGroup N} {inst_1 : AddGroup E} {inst_2 : AddGroup G}\\n  {inl : N →+ E} {rightHom : E →+ G} {inl_injective : Function.Injective ⇑inl}\\n  {range_inl_eq_ker_rightHom : inl.range = rightHom.ker} {rightHom_surjective : Function.Surjective ⇑rightHom}\", \"doc\": \"If two additive group extensions are equal, then their inclusion homomorphisms and surjective homomorphisms are equal.\"}\n  {\"name\": \"GroupExtension.inl\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} → [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → N →* E\", \"doc\": \"The canonical group homomorphism $ N \\\\to E $ associated to a group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $, which embeds the normal subgroup $ N $ into the total group $ E $ as the kernel of the proje\"}\n  {\"name\": \"GroupExtension.rightHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} → [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → E →* G\", \"doc\": \"The surjective group homomorphism $ E \\to G $ forming the right part of the short exact sequence $ 1 \\to N \\to E \\to G \\to 1 $ in a group extension.\"}\n  {\"name\": \"GroupExtension.mk\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : Group N] →\\n        [inst_1 : Group E] →\\n          [inst_2 : Group G] →\\n            (inl : N →* E) →\\n              (rightHom : E →* G) →\\n                Function.Injective ⇑inl →\\n                  inl.range = rightHom.ker → Functi\", \"doc\": \"Given groups $N$, $E$, and $G$ with group structures, and group homomorphisms $\\\\text{inl}: N \\\\to E$ and $\\\\text{rightHom}: E \\\\to G$ satisfying $\\\\text{inl}$ is injective, $\\\\text{inl}(N) = \\\\ker(\\\\text{rig\"}\n  {\"name\": \"AddGroupExtension.rightHom_surjective\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : AddGroup N] [inst_1 : AddGroup E] [inst_2 : AddGroup G]\\n  (self : AddGroupExtension N E G), Function.Surjective ⇑self.rightHom\", \"doc\": \"For any additive group extension representing the short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$, the projection homomorphism from $E$ to $G$ is surjective.\"}\n  {\"name\": \"GroupExtension.quotientKerRightHomEquivRight\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Basic\", \"type\": \": E ⧸ S.rightHom.ker ≃* G\", \"doc\": \"The quotient group $ E / \\\\ker(\\\\phi) $, where $ \\\\phi: E \\\\to G $ is the surjective homomorphism in the group extension $ 1 \\\\to N \\\\to E \\\\to G \\\\to 1 $, is isomorphic to $ G $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given two fppf exact sequences of group schemes, a map that is finite faithfully flat on the subgroup and on the quotient is finite faithfully flat on the total group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → (Finite ↑S.X₂ ↔ Finite ↑S.X₁ ∧ Finite ↑S.X₃)\", \"doc\": \"In a short exact sequence $0 \\\\to A_1 \\\\to A_2 \\\\to A_3 \\\\to 0$ of abelian groups, the middle group $A_2$ is finite if and only if both $A_1$ and $A_3$ are finite.\"}\n  {\"name\": \"Module.FaithfullyFlat.rTensor_reflects_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module and the sequence $ 0 \\\\to \\\\ker(l_{12}) \\\\to \\\\ker(l_{23} \\\\otimes \\\\id_M) $ obtained by tensoring the linear maps $ l_{12}: M_1 \\\\to M_2 $ and $ l_{23}: M_2 \\\\to M_\"}\n  {\"name\": \"MonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram of monoid homomorphisms with exact rows, if the map i₂ is surjective, i₃ is injective, and g₁ is injective, then the map i₁ is surjective. This result follows from the standar\"}\n  {\"name\": \"Module.FaithfullyFlat.range_le_ker_of_exact_rTensor\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"Given a faithfully flat $ R $-module $ M $ and linear maps $ l_{12}: M_1 \\\\to M_2 $, $ l_{23}: M_2 \\\\to M_3 $, if the sequence $ 0 \\\\to M_1 \\\\otimes_R M \\\\xrightarrow{l_{12} \\\\otimes \\\\text{id}_M} M_2 \\\\otime\"}\n  {\"name\": \"Module.FaithfullyFlat.lTensor_reflects_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"Given a commutative ring $ R $, a faithfully flat $ R $-module $ M $, and linear maps $ l_{12}: M_1 \\\\to M_2 $ and $ l_{23}: M_2 \\\\to M_3 $, if the sequence $ M_1 \\\\otimes_R M \\\\xrightarrow{l_{12} \\\\otimes\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for every sequence of $ R $-modules $ N_1 \\\\xrightarrow{f} N_2 \\\\xrightarrow{g} N_3 $, the sequence is exact if and only if\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for any $ R $-linear maps $ l_{12}: N_1 \\\\to N_2 $ and $ l_{23}: N_2 \\\\to N_3 $ between $ R $-modules, the sequence $ N_1 \\\\\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.Exact → ∀ [Finite ↑S.X₁] [Finite ↑S.X₃], Finite ↑S.X₂\", \"doc\": \"In an exact short complex of abelian groups, if the first and third objects are finite, then the middle object is also finite.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned abstract-group exactness, finite-module, flat ring-map and general scheme results do not assert finiteness and flatness for morphisms between group-scheme extensions. Read all returned types; second semantic phrasing checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a morphism of fppf exact sequences of group schemes finite locally free surjective maps on kernels and quotients imply the middle map is finite locally free surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.Finite.of_exact\", \"module\": \"Mathlib/RingTheory/Finiteness/Finsupp\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : Ring R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P},\\n  Function.Exact ⇑f ⇑g → Function.Surject\", \"doc\": \"If $ f: M \\\\to N $ and $ g: N \\\\to P $ are linear maps such that $ \\\\text{im}(f) = \\\\ker(g) $ and $ g $ is surjective, and if $ M $ and $ P $ are finitely generated $ R $-modules, then $ N $ is also a fin\"}\n  {\"name\": \"MonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram of monoid homomorphisms with exact rows, if the map i₂ is surjective, i₃ is injective, and g₁ is injective, then the map i₁ is surjective. This result follows from the standar\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.Exact → ∀ [Finite ↑S.X₁] [Finite ↑S.X₃], Finite ↑S.X₂\", \"doc\": \"In an exact short complex of abelian groups, if the first and third objects are finite, then the middle object is also finite.\"}\n  {\"name\": \"MonoidHom.bijective_of_surjective_of_bijective_of_right_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram with exact rows of monoid homomorphisms, if the first morphism $i_1$ is surjective, the second morphism $i_2$ is bijective, the fourth morphism $f_2$ is surjective, and the fi\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → (Finite ↑S.X₂ ↔ Finite ↑S.X₁ ∧ Finite ↑S.X₃)\", \"doc\": \"In a short exact sequence $0 \\\\to A_1 \\\\to A_2 \\\\to A_3 \\\\to 0$ of abelian groups, the middle group $A_2$ is finite if and only if both $A_1$ and $A_3$ are finite.\"}\n  {\"name\": \"MonoidHom.injective_of_surjective_of_injective_of_right_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : Group M₁]\\n  [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group N₁] [inst_4 : Group N₂] [inst_5 : Group N₃] (f₁ : M₁ →* M₂)\\n  (f₂ : M₂ →* M₃) (g₁ : N₁ →* N₂) (g₂ : N₂ →* N₃) (i₁ : M₁ →* N₁) \", \"doc\": \"In a commutative diagram with exact rows of groups and group homomorphisms, if the first map $i_1$ is surjective, the second map $i_2$ is injective, and the fourth map $f_2$ is surjective, then the fi\"}\n  {\"name\": \"MonoidHom.surjective_of_surjective_of_surjective_of_injective\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {M₄ : Type u_4} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8}\\n  {N₄ : Type u_9} [inst : Group M₁] [inst_1 : Group M₂] [inst_2 : Group M₃] [inst_3 : Group M₄] [inst_4 : Group N₁]\\n  [inst_5 : Group N₂] [inst_6 : Group N₃] [inst_7 : Group N₄] (f₁ : M₁\", \"doc\": \"In a commutative diagram of groups with exact rows, if the first and third morphisms are surjective and the fourth morphism is injective, then the second morphism is surjective.\"}\n  {\"name\": \"AddMonoidHom.surjective_of_surjective_of_injective_of_left_exact\", \"module\": \"Mathlib/Algebra/FiveLemma\", \"type\": \"∀ {M₁ : Type u_1} {M₂ : Type u_2} {M₃ : Type u_3} {N₁ : Type u_6} {N₂ : Type u_7} {N₃ : Type u_8} [inst : AddGroup M₁]\\n  [inst_1 : AddGroup M₂] [inst_2 : AddGroup M₃] [inst_3 : AddGroup N₁] [inst_4 : AddGroup N₂] [inst_5 : AddGroup N₃]\\n  (f₁ : M₁ →+ M₂) (f₂ : M₂ →+ M₃) (g₁ : N₁ →+ N₂) (g₂ : N₂ →+ N₃\", \"doc\": \"Given additive groups $M_1, M_2, M_3$ and $N_1, N_2, N_3$ with exact sequences $f_1: M_1 \\\\to M_2$, $f_2: M_2 \\\\to M_3$ and $g_1: N_1 \\\\to N_2$, $g_2: N_2 \\\\to N_3$, and additive monoid homomorphisms $i_1\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: examined all returned types; abstract group extensions, finite abelian groups, finite modules, and unrelated scheme flatness facts do not prove finite locally free morphisms in this diagram of group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "(extension|exact).*(finite locally free|finite flat)|(finite locally free|finite flat).*(extension|exact)",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"28\", \"text\": \"* `Ideal.sum_ramification_inertia_eq_card`: Let `S/R` be a finite flat extension of domains,\"}\n  {\"file\": \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"line\": \"77\", \"text\": \"/-- Let `S/R` be a finite flat extension of integral domains, and let `p` be prime ideal of `R`.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: examined all returned types; abstract group extensions, finite abelian groups, finite modules, and unrelated scheme flatness facts do not prove finite locally free morphisms in this diagram of group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A homomorphism of group scheme extensions is finite flat surjective when its kernel and quotient maps are finite flat surjective",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"GroupExtension.rightHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} → [inst : Group N] → [inst_1 : Group E] → [inst_2 : Group G] → GroupExtension N E G → E →* G\", \"doc\": \"The surjective group homomorphism $ E \\to G $ forming the right part of the short exact sequence $ 1 \\to N \\to E \\to G \\to 1 $ in a group extension.\"}\n  {\"name\": \"GroupExtension.mk.injEq\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : Group N] [inst_1 : Group E] [inst_2 : Group G] (inl : N →* E)\\n  (rightHom : E →* G) (inl_injective : Function.Injective ⇑inl) (range_inl_eq_ker_rightHom : inl.range = rightHom.ker)\\n  (rightHom_surjective : Function.Surjective ⇑rightHom) (inl_1 :\", \"doc\": \"Two group extension structures $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ are equal if and only if their inclusion homomorphisms $N \\\\to E$ and surjective homomorphisms $E \\\\to G$ are equal as group homomorphisms.\"}\n  {\"name\": \"AddGroupExtension.rightHom\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"{N : Type u_1} →\\n  {E : Type u_2} →\\n    {G : Type u_3} →\\n      [inst : AddGroup N] → [inst_1 : AddGroup E] → [inst_2 : AddGroup G] → AddGroupExtension N E G → E →+ G\", \"doc\": \"Given an additive group extension representing the short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$, this is the surjective additive group homomorphism from $E$ to $G$ that completes the sequence.\"}\n  {\"name\": \"AddGroupExtension.rightHom_surjective\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} [inst : AddGroup N] [inst_1 : AddGroup E] [inst_2 : AddGroup G]\\n  (self : AddGroupExtension N E G), Function.Surjective ⇑self.rightHom\", \"doc\": \"For any additive group extension representing the short exact sequence $0 \\\\to N \\\\to E \\\\to G \\\\to 0$, the projection homomorphism from $E$ to $G$ is surjective.\"}\n  {\"name\": \"GroupExtension.mk.inj\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \"∀ {N : Type u_1} {E : Type u_2} {G : Type u_3} {inst : Group N} {inst_1 : Group E} {inst_2 : Group G} {inl : N →* E}\\n  {rightHom : E →* G} {inl_injective : Function.Injective ⇑inl} {range_inl_eq_ker_rightHom : inl.range = rightHom.ker}\\n  {rightHom_surjective : Function.Surjective ⇑rightHom} {inl_1 :\", \"doc\": \"If two group extension data structures $1 \\\\to N \\\\to E \\\\to G \\\\to 1$ are equal, then their inclusion homomorphism $\\\\text{inl}: N \\\\to E$ and surjective homomorphism $\\\\text{rightHom}: E \\\\to G$ must coinci\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatMono\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] [Mono f] : IsIso f\", \"doc\": \"If $ f : X \\to Y $ is a morphism of schemes that is flat, quasi-compact, surjective, and a monomorphism, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Y) [Flat f] [Surjective f] : Epi f\", \"doc\": \"Every flat and surjective morphism of schemes is an epimorphism in the category of schemes.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: examined all returned types; abstract group extensions, finite abelian groups, finite modules, and unrelated scheme flatness facts do not prove finite locally free morphisms in this diagram of group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupExtension\", \"Surjective\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"AddGroupExtension.rightHom_surjective\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \" {N : Type u_1} {E : Type u_2} {G : Type u_3} [AddGroup N] [AddGroup E] [AddGroup G] (self : AddGroupExtension N E G) : Function.Surjective ⇑self.rightHom\", \"doc\": \"The projection map is surjective.\"}\n  {\"name\": \"GroupExtension.rightHom_surjective\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \" {N : Type u_1} {E : Type u_2} {G : Type u_3} [Group N] [Group E] [Group G] (self : GroupExtension N E G) : Function.Surjective ⇑self.rightHom\", \"doc\": \"The projection map is surjective.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: examined all returned types; abstract group extensions, finite abelian groups, finite modules, and unrelated scheme flatness facts do not prove finite locally free morphisms in this diagram of group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite faithfully flat morphisms of group schemes can be checked on the subgroup and quotient of short exact sequences",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → (Finite ↑S.X₂ ↔ Finite ↑S.X₁ ∧ Finite ↑S.X₃)\", \"doc\": \"In a short exact sequence $0 \\\\to A_1 \\\\to A_2 \\\\to A_3 \\\\to 0$ of abelian groups, the middle group $A_2$ is finite if and only if both $A_1$ and $A_3$ are finite.\"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_lTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for any $ R $-linear maps $ l_{12}: N_1 \\\\to N_2 $ and $ l_{23}: N_2 \\\\to N_3 $ between $ R $-modules, the sequence $ N_1 \\\\\"}\n  {\"name\": \"Module.FaithfullyFlat.lTensor_exact_iff_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module, then for any functions $ l_{12}: M_1 \\\\to M_2 $ and $ l_{23}: M_2 \\\\to M_3 $, the sequence $ l_{12} \\\\otimes M $, $ l_{23} \\\\otimes M $ is exact if and only if \"}\n  {\"name\": \"Module.FaithfullyFlat.iff_exact_iff_rTensor_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Module.FaithfullyFlat R M ↔\\n    ∀ {N1 : Type (max u v)} [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type (max u v)}\\n      [inst_5 : AddCommGroup N2] [inst_6 : Module R N2] {N3 : Type (max u\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is faithfully flat if and only if for every sequence of $ R $-modules $ N_1 \\\\xrightarrow{f} N_2 \\\\xrightarrow{g} N_3 $, the sequence is exact if and only if\"}\n  {\"name\": \"Module.FaithfullyFlat.rTensor_exact_iff_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"For a faithfully flat module $ M $ over a commutative ring $ R $, a sequence of linear maps $ l_{12}: M_1 \\\\to M_2 $ and $ l_{23}: M_2 \\\\to M_3 $ is exact if and only if the sequence obtained by tensori\"}\n  {\"name\": \"Module.FaithfullyFlat.lTensor_reflects_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"Given a commutative ring $ R $, a faithfully flat $ R $-module $ M $, and linear maps $ l_{12}: M_1 \\\\to M_2 $ and $ l_{23}: M_2 \\\\to M_3 $, if the sequence $ M_1 \\\\otimes_R M \\\\xrightarrow{l_{12} \\\\otimes\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.Exact → ∀ [Finite ↑S.X₁] [Finite ↑S.X₃], Finite ↑S.X₂\", \"doc\": \"In an exact short complex of abelian groups, if the first and third objects are finite, then the middle object is also finite.\"}\n  {\"name\": \"Module.FaithfullyFlat.rTensor_reflects_exact\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N1 : Type u_1}\\n  [inst_3 : AddCommGroup N1] [inst_4 : Module R N1] {N2 : Type u_2} [inst_5 : AddCommGroup N2] [inst_6 : Module R N2]\\n  {N3 : Type u_3} [inst_7 : AddCommGroup N3] [inst_8 : Module R N3] (l\", \"doc\": \"If $ M $ is a faithfully flat $ R $-module and the sequence $ 0 \\\\to \\\\ker(l_{12}) \\\\to \\\\ker(l_{23} \\\\otimes \\\\id_M) $ obtained by tensoring the linear maps $ l_{12}: M_1 \\\\to M_2 $ and $ l_{23}: M_2 \\\\to M_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: examined all returned types; abstract group extensions, finite abelian groups, finite modules, and unrelated scheme flatness facts do not prove finite locally free morphisms in this diagram of group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-multiplication-fppf",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Multiplication by any positive integer is an fppf cover of a semiabelian scheme; supporting input: finite locally free homomorphisms in a diagram of exact group extensions.",
+   "via": [
+    "lem-sfb-semiabelian-multiplication-fppf",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-flat-homomorphism-extensions",
+  "worker": "stage1",
+  "summary": "Q05 writes the group-extension argument explicitly: factor through the quotient pullback, lift the universal Q1 section fppf locally, identify each fibre of the first factor with a base change of u using translation, descend finite/flat/locally finitely presented, and compose. All supporting facts already exist; no new nodes and no statement change. The fixed-degree finite-cover stack is deliberately not used for a variable-rank morphism.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), the alteration input recorded in the inherited blueprint.from.place, via lem-sfb-semiabelian-multiplication-fppf. The latest blueprint proof is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md. This lower-level generic extension lemma does not replace a unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic fpqc descent for the indicated morphism property, applied to h after its explicit local description; preserves the unit route. No same-unit statement gives this variable-rank descent (the finite-cover stack node requires constant degree)."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-flat",
+    "why": "Generic fpqc descent for the indicated morphism property, applied to h after its explicit local description; preserves the unit route. No same-unit statement gives this variable-rank descent (the finite-cover stack node requires constant degree)."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Generic fpqc descent for the indicated morphism property, applied to h after its explicit local description; preserves the unit route. No same-unit statement gives this variable-rank descent (the finite-cover stack node requires constant degree)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-weil-pbc-fpqc-descend-flat",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-051b89c84",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-051b89c84 (reviewer sub-agent of L); spot-checked: I read the item and all 15 cited statements in full; there are no new nodes and no repair note, so the re-split rule does not apply. The statement is unchanged and true. It matches how the parent lem-sfb-semiabelian-multiplication-fppf uses it. Small cases checked: split extensions give v=u×w; K=0 gives v=w; 0→μ_p shows the hypothesis on u is needed. Step 1: v=bh through P=Q1×_{Q2}E2, where b is the base change of w; elementary. Step 2: the identity section is lifted fppf-locally and pulled back to T_i=P×_{Q1}V_i; 021O(3) makes {T_i→P} an fppf covering (read at topologies.tex l.1939). Step 3: I recomputed the translation e=e_i+j1(k) and the condition u(k)=k_i, which uses injectivity of j2 and vj1=j2u; by Yoneda, E1×_P T_i ≅ K1×_{K2,k_i}T_i; elementary. Step 4: base change of finite (01WL), flat (01U9), lfp (clause 3 of the qcqs node, which has no qcqs hypothesis) and surjective (01S1); finite locally free = finite+flat+lfp (02KB). Step 5: fppf is fpqc (022C), then the 02LA/02L2/02KY descent nodes, stated for arbitrary morphisms (together 02VO), plus an explicit point argument for surjectivity; the constant-degree stack node is rightly not used. Step 6: composition (02KC). Batch-5: the three lem-trf citations are Mathlib leaves of generic Stacks facts (021O, 022C, 02KC). They are not statements or proof steps of the trace formula or Poincaré duality, so they are accepted. Accepted tool_uses: the three generic fpqc-descent nodes of sk-thm-p1. Duplicate searches with rg -L over dag/nodes found nothing that states this lemma. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.FiniteLocallyFreeExtensions",
+  "declaration": "AlgebraicGeometry.finiteLocallyFree_surjective_of_extension_diagram",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/FiniteLocallyFreeExtensions.lean",
+  "statement": "theorem finiteLocallyFree_surjective_of_extension_diagram (B : Scheme.{u}) (K E Q : Fin 2 → Over B) [∀ i : Fin 2, GrpObj (K i)] [∀ i : Fin 2, IsCommMonObj (K i)] [∀ i : Fin 2, GrpObj (E i)] [∀ i : Fin 2, IsCommMonObj (E i)] [∀ i : Fin 2, GrpObj (Q i)] [∀ i : Fin 2, IsCommMonObj (Q i)] (j : ∀ i : Fin 2, K i ⟶ E i) (q : ∀ i : Fin 2, E i ⟶ Q i) [∀ i : Fin 2, IsMonHom (j i)] [∀ i : Fin 2, IsMonHom (q i)] (hkernel : ∀ (i : Fin 2) (U : Over B), Function.Injective (fun k : U ⟶ K i ↦ k ≫ j i) ∧ ∀ e : U ⟶ E i, e ≫ q i = 1 ↔ ∃ k : U ⟶ K i, k ≫ j i = e) (hlift : ∀ (i : Fin 2) (U : Over B) (x : U ⟶ Q i), ∃ (I : Type u) (V : I → Over B) (p : ∀ a : I, V a ⟶ U), Presieve.ofArrows (fun a ↦ (V a).left) (fun a ↦ (p a).left) ∈ Scheme.fppfPrecoverage U.left ∧ ∀ a : I, ∃ e : V a ⟶ E i, e ≫ q i = p a ≫ x) (u : K 0 ⟶ K 1) (v : E 0 ⟶ E 1) (w : Q 0 ⟶ Q 1) [IsMonHom u] [IsMonHom v] [IsMonHom w] (hleft : j 0 ≫ v = u ≫ j 1) (hright : v ≫ q 1 = q 0 ≫ w) (hu : Scheme.Hom.IsFiniteLocallyFree u.left) (hsu : Surjective u.left) (hw : Scheme.Hom.IsFiniteLocallyFree w.left) (hsw : Surjective w.left) : Scheme.Hom.IsFiniteLocallyFree v.left ∧ Surjective v.left",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2deeb4372",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Only the item lean record plus the new module FiniteLocallyFreeExtensions.lean; statement verbatim, proof sorry only. Clause check: B : Scheme.{u}; K,E,Q : Fin 2 → Over B with GrpObj+IsCommMonObj (global Over-S cartesian/braided instances, Pullbacks.lean:712); hkernel = injective postcomposition and kernel = image for all U : Over B, with 1 = toUnit≫η the zero section; hlift = fppfPrecoverage cover of U.left with local lifts (I : Type u harmless); IsMonHom on j,q,u,v,w; hleft/hright directions correct; hu/hw use the recorded IsFiniteLocallyFree (IsFinite+Flat+LFP, FiberDegree.lean:899); Surjective on points; conclusion is both clauses, no extra hypotheses. Edge cases empty/zero kernel/split/char p/identity covered. No duplicate in side-live lean; no hollow defs; docstrings carry 02VO, blueprint tag and 6 steps; worker+second-reading sections present (self second reading, advisory). No compile run (no changes)."
+ }
+}

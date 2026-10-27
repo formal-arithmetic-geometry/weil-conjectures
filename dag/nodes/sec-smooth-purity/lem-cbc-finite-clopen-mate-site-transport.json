@@ -1,0 +1,334 @@
+{
+ "id": "lem-cbc-finite-clopen-mate-site-transport",
+ "kind": "statement",
+ "title": "Counit-normalized etale/pro-etale transport of the finite clopen mate",
+ "statement": "Let $\\Lambda$ be a finite commutative ring. Let $Q$ be a commutative square of schemes with $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ quasi-compact open immersions, $r:V\\to S$, $p:W\\to T$ proper, and $pk=ir$. Put $W_S=W\\times_T S$ with projections $b:W_S\\to W$, $q:W_S\\to S$, and $s=(k,r):V\\to W_S$. Write $A_X=\\nu_X^*$ for exact etale/pro-etale comparison on module derived categories [def-weil-pbc-site-comparison-morphism] [def-weil-pbc-derived-categories] [def-weil-pbc-proetale-operations]. Use the canonical bounded-below open comparison [def-weil-pbc-proper-open-site-extension] and the etale clopen transformations and normalized comparison [def-cbc-etale-clopen-mate-normalization-data]. On either site form $\\alpha_Q^e,\\alpha_Q^p$ by the open-unit cartesian comparison followed by projection to the clopen lift $s(V)$ and the open compositor. Let $\\gamma_Q^e,\\gamma_Q^p$ be their proper-adjunction mates, and take $\\gamma_Q^e$ with the resolution normalization of [lem-cbc-proper-open-interchange-coherence]. For $u=p,r$, use the pullback comparison $a_u:A_{dom(u)}G_u^e\\cong G_u^pA_{cod(u)}$ and the canonical direct-image comparison $b_u:A_{cod(u)}R_u^e\\to R_u^pA_{dom(u)}$, satisfying\n$$\\varepsilon_u^p\\circ G_u^p(b_u)\\circ a_u=A_{dom(u)}(\\varepsilon_u^e).$$\nFor every $L\\in D^+(V_{et},\\Lambda)$, both $L$ and $k_!L$ lie in the bounded-below comparison domains, and $p,r$ are quasi-compact and quasi-separated with no Noetherian assumption. The canonical open and pullback comparisons identify $A_W\\alpha_Q^e$ with $\\alpha_Q^p$, including its identity/zero component normalization. Let $o_j:A_{cod(j)}J_j^e\\cong J_j^pA_{dom(j)}$ be the adjoint open comparison. Then\n$$\\gamma^p_{Q,A_VL}\\circ J_i^p(b_{r,L})\\circ o_{i,R_r^eL}\n=R_p^p(o_{k,L})\\circ b_{p,J_k^eL}\\circ A_T(\\gamma^e_{Q,L}).$$\nEvery comparison in this equation is the specified canonical one. They and $\\gamma^e_{Q,L}$ are isomorphisms, so $\\gamma^p_{Q,A_VL}$ is an isomorphism with exactly the finite etale proper/open and refinement normalization.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); counit-normalized proper-mate transport for open squares, original parent proof steps 14-15"
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-extension-by-zero",
+  "def-weil-quasi-separated-morphism",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-weil-pbc-proper-open-site-extension",
+  "def-cbc-etale-clopen-mate-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Properness makes $p,r$ finite type, hence quasi-compact; their diagonals are closed immersions, so they are quasi-separated by [lem-pc-separated-quasi-separated]. Exactness of $k_!$ gives $\\mathcal H^n(k_!L)=k_!\\mathcal H^n(L)$, so any lower bound for $L$ is also one for $k_!L$. The canonical-mate comparison therefore applies to $(u,K)=(r,L)$ and $(p,k_!L)$ and gives exactly the named invertible $b_r,b_p$ and their counit equations. Here finite rings are discrete. No absolute quasi-compactness, finite-dimensionality or Noetherian hypothesis is used.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099R, section-comparison; apply the existing canonical-mate comparison with its actual qcqs hypotheses"
+   }
+  },
+  {
+   "text": "Apply lem-cbc-finite-clopen-alpha-site-transport to obtain the displayed equality of the specified alphas on D+. This is the sheaf/compositor/localization part of the original argument, separated from the proper-mate calculation.",
+   "uses": [
+    "lem-cbc-finite-clopen-alpha-site-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the bounded-below clause of etaleClopenMateNormalization to identify the specified etale mate with normalizedComparison, componentwise at L.",
+   "uses": [
+    "lem-cbc-etale-clopen-mate-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $X=A_TJ_i^eR_r^eL$ and $Y=J_k^pA_VL$. Transpose the proposed left-hand side, a map $X\\to R_p^pY$, under $G_p^p\\dashv R_p^p$, and precompose with the isomorphism $a_{p,J_i^eR_r^eL}$. The defining mate identity for $\\gamma^p$ and naturality of $\\alpha^p$ in $b_{r,L}$ give\n$$J_k^p(\\varepsilon_r^p\\circ G_r^p(b_{r,L}))\\circ\\alpha^p_{Q,A_SR_r^eL}\\circ G_p^p(o_{i,R_r^eL})\\circ a_{p,J_i^eR_r^eL}.$$\nSubstitute step 4 with $M=R_r^eL$, then the normalized counit equation for $r$, and use naturality of $o_k$. The result is\n$$o_{k,L}\\circ A_W(J_k^e(\\varepsilon^e_{r,L})\\circ\\alpha^e_{Q,R_r^eL}).$$\nThese substitutions use the natural transformation $b_r$ at $L$, not any inverse chosen from an existence theorem.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-cbc-proetale-clopen-mate-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; explicit proper-adjunction transpose and counit substitution"
+   }
+  },
+  {
+   "text": "Transpose the proposed right-hand side and precompose with the same $a_p$. Naturality of the pro-etale counit first moves $o_{k,L}$ outside the transpose. Naturality of $a_p$ in $\\gamma^e_{Q,L}$ and the normalized counit equation for $p$, now at $J_k^eL$, give\n$$o_{k,L}\\circ A_W(\\varepsilon^e_{p,J_k^eL}\\circ G_p^e(\\gamma^e_{Q,L})).$$\nThe etale mate identity identifies the parenthesis with $J_k^e(\\varepsilon^e_{r,L})\\circ\\alpha^e_{Q,R_r^eL}$, exactly the expression in step 5. Cancel $a_p$ and use injectivity of the proper adjunction bijection. This proves the displayed equation in the item as an equality of the specified morphisms.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; explicit transpose of the other route"
+   }
+  },
+  {
+   "text": "The maps $o_i,o_k$ are isomorphisms, as are $b_{r,L}$ and $b_{p,J_k^eL}$ by step 1. The normalized etale comparison is an isomorphism by [lem-cbc-proper-open-interchange-coherence]. Functors preserve isomorphisms, so the proved equality expresses $\\gamma^p_{Q,A_VL}$ as the composite of the right-hand route with the inverse of $J_i^p(b_{r,L})\\circ o_{i,R_r^eL}$. It is therefore an isomorphism. Step 4 identifies the finite etale and refinement normalizations before taking mates, so the resulting isomorphism has exactly those normalizations. Empty opens, empty complements, identity squares and the zero ring are included: the component formula is still $(x,y)\\mapsto(x,0)$, with a missing component the zero module.",
+   "uses": [
+    "lem-cbc-etale-clopen-mate-normalization",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open; finite coefficients and bounded-below input, then cancellation of the specified comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-finite-clopen-alpha-site-transport",
+  "lem-cbc-etale-clopen-mate-normalization",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "def-cbc-proetale-clopen-mate-data",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 0B65; S4 formalized the counit transpose calculation in private transport_mate. The alpha comparison of original steps 2--4 is a separate node; the properness, etale normalization, mate equation, and invertibility are proved in the item."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative proper-open square and finite ring coefficients, etale to pro-etale inverse image carries the normalized finite etale proper-open mate to the single-level pro-etale clopen mate under counit-normalized direct image and open extension comparisons.",
+   "results": "8 hits: StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv, StandardEtalePair.HasMap.map, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.homEquiv_apply_coe, Algebra.isOpen_etaleLocus, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.Etale.respectsIso",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits: SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(comparison|mate)|properOpen.*(finite|comparison)|shriek.*comparison",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a commutative proper-open square and finite ring coefficients, etale to pro-etale inverse image carries the normalized finite etale proper-open mate to the single-level pro-etale clopen mate under counit-normalized direct image and open extension comparisons.",
+   "results": "8 hits: RingHom.Etale, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, Algebra.Etale.recOn, Algebra.Etale.formallyEtale, StandardEtalePair.homEquiv, RingHom.Etale.propertyIsLocal, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, Algebra.isOpen_etaleLocus",
+   "date": "2026-10-22",
+   "verdict": "no match: general categorical/module or algebraic-etale facts do not state this normalized pro-etale/etale tower assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit-normalized comparison between etale and pro-etale proper pushforwards carries the clopen projection mate to the etale proper support comparison",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, Condensed.profiniteSolidCounit, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, CompHausLike.LocallyConstant.incl_of_counitAppApp, CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary module adjunctions, topological gluing or algebraic etaleness, not the full specified comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp, CategoryTheory.mateEquiv_hcomp",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate, topological adjunction, condensed or algebraic etale declarations do not state the finite etale/pro-etale proper/open normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_hcomp|proetale.*comparison|clopen.*mate",
+   "results": "11 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean. Read Mathlib/CategoryTheory/Adjunction/Mates.lean lines 170 and 209: these give general mate pasting only.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate, topological adjunction, condensed or algebraic etale declarations do not state the finite etale/pro-etale proper/open normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to pro etale comparison transports the proper adjunction mate of open base change and a clopen projection, with counit normalized direct image comparison",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_counit, CompHausLike.LocallyConstant.adjunction_left_triangle, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.adjunction_unit, CompHausLike.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate, topological adjunction, condensed or algebraic etale declarations do not state the finite etale/pro-etale proper/open normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale to pro etale comparison transports the proper adjunction mate of open base change and a clopen projection",
+   "results": "8 hits: IsOpenMap.adjunction, Topology.IsInducing.adjunction, IsOpenMap.adjunctionNhds, CategoryTheory.frobeniusMorphism_mate, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Etale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate, topological adjunction, condensed or algebraic etale declarations do not state the finite etale/pro-etale proper/open normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of inverse image functors respecting the adjunction counits preserves the mate of a commutative square between left adjoints",
+   "results": "8 hits: CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.mateEquiv_square, CategoryTheory.CommSq.left_adjoint, CategoryTheory.CommSq.right_adjoint, CategoryTheory.mateEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: generic mate, topological adjunction, condensed or algebraic etale declarations do not state the finite etale/pro-etale proper/open normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-strict-tower-proper-open-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof, last sentence: 'with the compatibility of the comparisons ... with the completed maps' — strict-tower open/proper comparison and coherence underlying the passage to derived limits; parent proof steps 14,15: Counit-normalized etale/pro-etale transport of the finite clopen mate",
+   "via": [
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-cbc-finite-clopen-mate-site-transport",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing clopen etale normalization and canonical counit-normalized direct-image comparison. Explicitly compares beta by open-unit transposes, clopen projections by sheaf gluing, and both proper mates by their transposes. No new nodes; statement unchanged.",
+  "blueprint": "thm-cbc-complete-proetale, final parenthesis on compatibility of compactification comparisons with completed maps: supplies the finite etale/pro-etale normalization used in parent strict-tower proof steps 14-15. Current main-20261015 path is sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme tool supplies the quasi-separated hypothesis of canonical direct-image comparison; it replaces no compact-support argument."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic etale module exactness tool verifies the bounded-below input k_!L."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Canonical etale/pro-etale qcqs direct-image comparison, with the named counit equation required for the proper-mate transport."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical geometric pullback comparison, including cartesian and composition compatibility."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Explicit mate formula and transpose bijection used to compare the two arrows."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-113e52172",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-113e52172 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged, 0 new nodes, 7-step proof), the report, and every cited statement. Steps 1-4 check out. Step 1: properness gives finite type, hence quasi-compactness, and separatedness gives quasi-separatedness via lem-pc-separated-quasi-separated. Exactness of k_! keeps k_!L in D^+, so the canonical-mate comparison gives the invertible b_r, b_p and their counit equations. Step 2: the square (i,p,b,q) is cartesian, so both extension-by-zero base-change nodes apply. The open comparison is defined as the mate of the restriction comparison (lem-cbc-proetale-extension-zero-comparison step 1, Stacks 09AF), so it respects the open unit, and the pullback comparison respects the cartesian compositor. Step 3: the projection onto the clopen piece is pinned down by binary gluing over W_S = s(V) ⊔ C, first on sheaves, then degreewise, then after localization. Step 4: the transported α equation types correctly. Steps 5-6: I recomputed both transposes symbol by symbol, using naturality of α^p in b_r, the r- and p-counit equations, naturality of a_p and o_k, and the étale mate identity; both reduce to o_{k,L}∘A_W(J_kε^e_r∘α^e). Step 7: the cited comparisons and γ^e are isomorphisms, so γ^p is invertible on objects A_V L. The step rightly does not claim α is invertible. Edge cases checked: empty V or C, the refinement case r=id, identity squares, the zero ring. The off-unit tool_uses (qs lemma, j_! exactness, pullback and canonical direct-image comparisons, mate definition) are generic black boxes and accepted. review_split's 'no such node' messages are an artefact of the symlinked snapshot; I opened every cited node. No duplicate in the DAG: the sf site-transport nodes and the ambient clopen comparison node are pro-étale-internal. Source tags 099R and 09AF are present in Stacks proetale.tex; no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClopenMateSiteTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteClopenMateSiteTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteClopenMateSiteTransport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClopenMateSiteTransport.lean",
+  "statement": "theorem finiteClopenMateSiteTransport (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V W S T : Scheme.{u}} (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) : QuasiCompact p ∧ QuasiSeparated p ∧ QuasiCompact r ∧ QuasiSeparated r ∧ (∀ (M : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (comparisonUpperStar (ModuleCat.{u + 1} Λ) W).mapDerivedCategoryPlus.map ((Etale.ClopenMateNormalization.derivedAlphaPlus Λ k r p i h).app M) ≫ (properOpenSiteExtensionIso Λ k).hom.app ((Etale.upperStar (ModuleCat.{u + 1} Λ) r).mapDerivedCategoryPlus.obj M) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.map ((fixedComparisonPullbackPlus Λ r).hom.app M) = (fixedComparisonPullbackPlus Λ p).hom.app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.obj M) ≫ (upperStar (ModuleCat.{u + 1} Λ) p).mapDerivedCategoryPlus.map ((properOpenSiteExtensionIso Λ i).hom.app M) ≫ (cbcClopenAlphaPlus Λ k i r p h).app ((comparisonUpperStar (ModuleCat.{u + 1} Λ) S).mapDerivedCategoryPlus.obj M)) ∧ (∀ (L : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))), (Etale.ClopenMateNormalization.derivedMatePlus Λ k r p i h).app L = (Etale.ClopenMateNormalization.normalizedComparison Λ k r p i h).hom.app L ∧ (properOpenSiteExtensionIso Λ i).hom.app ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).obj L) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map ((fixedComparisonDirectImageMatePlus Λ r).app L) ≫ (cbcClopenMatePlus Λ k i r p h).app ((comparisonUpperStar (ModuleCat.{u + 1} Λ) V).mapDerivedCategoryPlus.obj L) = (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategoryPlus.map ((Etale.ClopenMateNormalization.derivedMatePlus Λ k r p i h).app L) ≫ (fixedComparisonDirectImageMatePlus Λ p).app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj L) ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus.map ((properOpenSiteExtensionIso Λ k).hom.app L) ∧ IsIso ((fixedComparisonDirectImageMatePlus Λ r).app L) ∧ IsIso ((fixedComparisonDirectImageMatePlus Λ p).app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj L)) ∧ IsIso ((Etale.ClopenMateNormalization.derivedMatePlus Λ k r p i h).app L) ∧ IsIso ((cbcClopenMatePlus Λ k i r p h).app ((comparisonUpperStar (ModuleCat.{u + 1} Λ) V).mapDerivedCategoryPlus.obj L)))",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The original theorem signature is unchanged. The six canonical constructions are relocated verbatim to Sheaf.AlgebraicGeometry.FiniteClopenMateData and recorded by def-cbc-proetale-clopen-mate-data; this module publicly reexports them. The theorem is proved from the separate alpha comparison, the canonical direct-image counit equations, etale normalization, and the complete categorical mate calculation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b476574",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Re-delivery fixing the landing return on 17f488670a6e (proof_deps listed lem-weil-pbc-proper-open-comparison-proetale, used by no proof step). Delta vs 17f4: only the item json (proof_deps, statement_change.what, old_proof_deps removed, lean.note) and the report. The Lean module is byte-identical across 19b6/17f4/60b4. proof_deps now equals the union of step uses and the live/base list, so omitting old_proof_deps is correct. Live node unchanged since base; no supersession. Both existing:true def records (etale clopen mate data, properOpenSiteExtensionIso) are still verbatim in the live modules. Item lean.statement is verbatim; one sorry. Report has the Worker report and Second reading sections. Mathematics re-read: hypotheses, real α^p/γ^p constructions, α transport and mate equations, IsIso clauses and edge cases all correct. Advisory only: AmbientClopen.projector duplicates cbcClopenProjection downstream. No compile (no change).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-22",
+  "by": "Q86 stage 2",
+  "old_statement": "Let $\\Lambda$ be a finite commutative ring. Let $Q$ be a commutative square of schemes with $k:V\\hookrightarrow W$, $i:S\\hookrightarrow T$ quasi-compact open immersions, $r:V\\to S$, $p:W\\to T$ proper, and $pk=ir$. Put $W_S=W\\times_T S$ with projections $b:W_S\\to W$, $q:W_S\\to S$, and $s=(k,r):V\\to W_S$. Write $A_X=\\nu_X^*$ for exact etale/pro-etale comparison on module derived categories [def-weil-pbc-site-comparison-morphism] [def-weil-pbc-derived-categories] [def-weil-pbc-proetale-operations]. On either site form $\\alpha_Q^e,\\alpha_Q^p$ by the open-unit cartesian comparison followed by projection to the clopen lift $s(V)$ and the open compositor. Let $\\gamma_Q^e,\\gamma_Q^p$ be their proper-adjunction mates, and take $\\gamma_Q^e$ with the resolution normalization of [lem-cbc-proper-open-interchange-coherence]. For $u=p,r$, use the pullback comparison $a_u:A_{dom(u)}G_u^e\\cong G_u^pA_{cod(u)}$ and the canonical direct-image comparison $b_u:A_{cod(u)}R_u^e\\to R_u^pA_{dom(u)}$, satisfying\n$$\\varepsilon_u^p\\circ G_u^p(b_u)\\circ a_u=A_{dom(u)}(\\varepsilon_u^e).$$\nFor every $L\\in D^+(V_{et},\\Lambda)$, both $L$ and $k_!L$ lie in the bounded-below comparison domains, and $p,r$ are quasi-compact and quasi-separated with no Noetherian assumption. The canonical open and pullback comparisons identify $A_W\\alpha_Q^e$ with $\\alpha_Q^p$, including its identity/zero component normalization. Let $o_j:A_{cod(j)}J_j^e\\cong J_j^pA_{dom(j)}$ be the adjoint open comparison. Then\n$$\\gamma^p_{Q,A_VL}\\circ J_i^p(b_{r,L})\\circ o_{i,R_r^eL}\n=R_p^p(o_{k,L})\\circ b_{p,J_k^eL}\\circ A_T(\\gamma^e_{Q,L}).$$\nEvery comparison in this equation is the specified canonical one. They and $\\gamma^e_{Q,L}$ are isomorphisms, so $\\gamma^p_{Q,A_VL}$ is an isomorphism with exactly the finite etale proper/open and refinement normalization.",
+  "what": "Citation/interface correction required by the H2 return on immutable head 19b681af90b5: the etale clopen transformations and open-site isomorphism were reached through two theorem-node records although their conclusions are unnecessary to state the item. Add two existing:true definition nodes for exactly those existing declarations, refer to them explicitly in the statement, and keep the etale clopen normalization theorem in proof_deps. The proper-open comparison theorem itself is unnecessary: its helper definition is now cited through its own definition node. Remove its unused proof_deps entry, as required by the return on immutable head 17f488670a6e, so proof_deps is exactly the union of the proof steps’ uses. The mathematical hypotheses, constructions, conclusions and Lean signature are unchanged.",
+  "source": {
+   "document": "literature/stacks-project/proetale.tex",
+   "place": "Tags 099R (section-comparison), 09AF (lemma-jshriek-comparison); counit-normalized proper-mate transport for open squares, original parent proof steps 14-15"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-system-compatible-compositor-normalization",
+    "holds": true,
+    "note": "The evaluation comparison between the intrinsic mate and specified finite compositor is unchanged, including its canonical open and direct-image comparisons."
+   },
+   {
+    "id": "lem-cbc-strict-tower-proper-open-calculus",
+    "holds": true,
+    "note": "The finite comparison and refinement normalization used after evaluating strict towers are unchanged; the new references only name the existing canonical data."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-fibre-product",
+   "def-weil-open-immersion",
+   "def-weil-finite-type-morphism",
+   "def-weil-proper-morphism",
+   "def-weil-closed-immersion",
+   "def-weil-pbc-site-comparison-morphism",
+   "def-weil-pbc-derived-categories",
+   "def-weil-pbc-proetale-operations",
+   "def-weil-pbc-adjunction-mate",
+   "lem-cbc-proper-open-interchange-coherence",
+   "lem-cbc-proetale-extension-zero-comparison",
+   "lem-weil-pbc-comparison-pullback",
+   "lem-weil-pbc-comparison-direct-image-canonical-mate",
+   "def-weil-pbc-direct-image",
+   "def-weil-pbc-extension-by-zero",
+   "def-weil-pbc-inverse-image",
+   "def-weil-extension-by-zero",
+   "def-weil-quasi-separated-morphism"
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-eae58",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261024T020314-L-2580794",
+  "kind": "interface",
+  "note": "independent cc review: Verbatim move of 6 defs (diffed vs live) + item theorem (identical signature) proved from the split-off alpha conjunct; importer SystemCompatibleCompositorNormalization and all 3 modules compile rc 0; node records vs Lean"
+ }
+}

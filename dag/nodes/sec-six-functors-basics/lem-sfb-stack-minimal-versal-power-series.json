@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-stack-minimal-versal-power-series",
+ "kind": "statement",
+ "title": "Versal rings differ from a minimal one by formal variables",
+ "statement": "Let $R$ be a commutative Noetherian ring and $l$ a field of finite type over $R$ [def-weil-pbc-noetherian-ring, def-weil-field, def-weil-finite-type-morphism]. Let $\\mathcal F$ be a predeformation category over $\\mathcal C_{R,l}$ as in [def-sfb-artin-deformation-test-category]: it is a groupoid-valued pseudofunctor on Artinian local $R$-algebras with residue field $l$, whose value on $l$ is nonempty with a unique arrow between any two objects. Suppose $C,D$ are complete Noetherian local $R$-algebras with specified residue field $l$, equipped with versal formal objects of $\\mathcal F$ in that node's sense [def-weil-pbc-adic-completion]. Then for some integer $r\\geq0$ there is an isomorphism $C\\cong D[[t_1,\\ldots,t_r]]$ or $D\\cong C[[t_1,\\ldots,t_r]]$ of complete local $R$-algebras inducing the identity on the specified residue field $l$ [def-weil-pbc-multivariate-power-series].",
+ "source": {
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06T5, lemma-minimal-versal, existence and uniqueness of minimal versal objects and power-series form; the displayed pairwise consequence is also Tag 0DQX, stacks-geometry.tex, lemma-versal-ring."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-field",
+  "def-weil-finite-type-morphism",
+  "def-sfb-artin-deformation-test-category",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak p=\\ker(R\\to l)$ and $\\Lambda=R_{\\mathfrak p}$. By [lem-sfb-artin-local-test-algebra], $\\Lambda$ is Noetherian local, $l$ is finite over $\\Lambda$, and the test categories and complete local algebra categories are identified by unique extension of the base action. Thus the formal systems and their prescribed-isomorphism lifting property are unchanged. Work over $\\Lambda$ until the last step; every resulting $\\Lambda$-isomorphism is an $R$-isomorphism.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06GC, definition-CLambda, base convention; localization comparison as in Artin Axioms, predeformation-categories section"
+   }
+  },
+  {
+   "text": "The category $\\mathcal F$ satisfies (S1). Indeed take $A_1\\to A\\leftarrow A_2$, with the second map surjective, and objects $x_i$ with specified identification over $A$. Regard $x_1$ as a formal object over the Artinian algebra $A_1$. Apply [lem-sfb-versal-formal-object-quasi-initial] to the given versal object over $C$ and $x_1$, obtaining $C\\to A_1$ and an isomorphism to $x_1$. Versality along $A_2\\twoheadrightarrow A$, using the specified identification and this map reduced to $A$, gives $C\\to A_2$ and an isomorphism to $x_2$ agreeing over $A$. Their pair defines $C\\to A_1\\times_A A_2$. This is a test algebra by [lem-sfb-artin-local-test-algebra]. Evaluate the formal object over $C$ along this map. Its two evaluations and their identification are the prescribed data, by the composition constraints in the test-category definition.",
+   "uses": [
+    "lem-sfb-versal-formal-object-quasi-initial",
+    "lem-sfb-artin-local-test-algebra",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06SY, lemma-versal-object-S1, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-versal-minimal-subring-descent] separately to the versal objects over $C$ and $D$, using (S1) from step 2. Obtain inclusions $B_C\\hookrightarrow C$ and $B_D\\hookrightarrow D$ and descended formal objects $\\eta_C,\\eta_D$, with both stated minimality properties. Each base is complete Noetherian local with specified residue field $l$. Hence [lem-sfb-versal-descended-base-power-series] applies to each inclusion: the descended objects are versal and there are local residue-preserving isomorphisms $C\\cong B_C[[x_1,\\ldots,x_a]]$, $D\\cong B_D[[y_1,\\ldots,y_b]]$ for finite $a,b\\geq0$.",
+   "uses": [
+    "lem-sfb-versal-minimal-subring-descent",
+    "lem-sfb-versal-descended-base-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T5, lemma-minimal-versal, first paragraph, via Tags 06T2 and 06T3"
+   }
+  },
+  {
+   "text": "By [lem-sfb-versal-formal-object-quasi-initial], there are morphisms $\\eta_C\\to\\eta_D$ and $\\eta_D\\to\\eta_C$. Their ring maps $f:B_C\\to B_D$ and $g:B_D\\to B_C$ are surjective by the incoming-map minimality in [lem-sfb-versal-minimal-subring-descent]. The surjective endomorphism $h=gf$ is injective: its ascending chain of kernel ideals stabilizes, since their union is an ideal with finitely many generators and all those generators lie in one kernel. Choose $N$ with $\\ker h^N=\\ker h^{N+1}$. If $h(z)=0$, surjectivity gives $w$ with $h^N(w)=z$, so $w\\in\\ker h^{N+1}=\\ker h^N$ and $z=0$. Thus $f$ is injective as well as surjective. Its inverse is a local $\\Lambda$-map preserving $l$, since $f$ is such a map. Write $B=B_C$ and use $f$ to identify $B_D$ with $B$.",
+   "uses": [
+    "lem-sfb-versal-formal-object-quasi-initial",
+    "lem-sfb-versal-minimal-subring-descent",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06T5, lemma-minimal-versal, uniqueness paragraph; Tag 06RN kernel stabilization argument written out"
+   }
+  },
+  {
+   "text": "We now have $C\\cong B[[x_1,\\ldots,x_a]]$ and $D\\cong B[[y_1,\\ldots,y_b]]$. If $a\\leq b$, write $b=a+r$ and identify $B[[y_1,\\ldots,y_b]]$ with $(B[[x_1,\\ldots,x_a]])[[t_1,\\ldots,t_r]]$: the coefficient with multi-index $(E,F)$ on the left becomes the coefficient with index $E$ of the coefficient series at index $F$ on the right. This is bijective, and it preserves multiplication because the finite sum over decompositions $(E,F)=(E_1,F_1)+(E_2,F_2)$ is the same iterated convolution sum in [def-weil-pbc-multivariate-power-series]. It fixes constants and the constant coefficient in $B$, hence preserves the residue marking and the local structures. This gives $D\\cong C[[t_1,\\ldots,t_r]]$. For $b\\leq a$ interchange the roles and obtain the other alternative. For $a=b$ take $r=0$. Restrict scalars from $\\Lambda$ to $R$ to finish.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 0DQX, stacks-geometry.tex, lemma-versal-ring, final sentence; coefficient regrouping written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-artin-local-test-algebra",
+  "lem-sfb-versal-formal-object-quasi-initial",
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-versal-minimal-subring-descent",
+  "lem-sfb-versal-descended-base-power-series",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06T5, lemma-minimal-versal, and Tag 0DQX, stacks-geometry.tex, lemma-versal-ring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Minimal versal deformation ring is unique and every versal ring is a finite power series extension of it",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallySmooth.inst\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R], Algebra.FormallySmooth R R\", \"doc\": \"Every commutative ring $ R $ has a canonical formally smooth algebra structure over itself, where scalar multiplication is given by the ring's own multiplication and the algebra map is the identity ho\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness of minimal versal formal objects and power series normal form of versal rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization.unique\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"(H : g.IsWeierstrassFactorization f h) (hg : g.map (IsLocalRing.residue A) ≠ 0) :\\n  f = g.weierstrassDistinguished hg ∧ h = g.weierstrassUnit hg\", \"doc\": \"Given a power series $ g $ over a commutative local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero, then any Weierstra\"}\n  {\"name\": \"PowerSeries.IsWeierstrassFactorization.elim\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsHausdorff (IsLocalRing.maximalIdeal A) A] {g : A⟦X⟧} {f f' : A[X]} {h h' : A⟦X⟧}\\n  (H : g.IsWeierstrassFactorization f h) (H2 : g.IsWeierstrassFactorization f' h') : f = f' ∧ h = h'\", \"doc\": \"In a local commutative ring $ A $ satisfying the Hausdorff condition with respect to its maximal ideal, if a power series $ g \\\\in A\\\\llbracket X\\\\rrbracket $ admits two Weierstrass factorizations $ g = \"}\n  {\"name\": \"HasFPowerSeriesOnBall.unique\", \"module\": \"Mathlib.Analysis.Analytic.Basic\", \"type\": \"(hf : HasFPowerSeriesOnBall f p x r) (hg : HasFPowerSeriesOnBall g p x r) : (EMetric.ball x r).EqOn f g\", \"doc\": \"If two functions $f$ and $g$ share the same formal power series expansion $p$ on the ball of radius $r$ centered at $x$, then $f$ and $g$ are equal on this ball, i.e., $f(y) = g(y)$ for all $y$ in the\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivision.unique\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete (IsLocalRing.maximalIdeal A) A] {q : A⟦X⟧} {r : A[X]} (H : f.IsWeierstrassDivision g q r) :\\n  q = f /ʷ g ∧ r = f %ʷ g\", \"doc\": \"In an adic-complete local ring $ A $ with maximal ideal $ \\\\mathfrak{m} $, given power series $ f, g \\\\in A[[X]] $, if the image of $ g $ under the residue map $ A \\\\to A/\\\\mathfrak{m} $ is non-zero in th\"}\n  {\"name\": \"PowerSeries.IsWeierstrassDivision.elim\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsHausdorff (IsLocalRing.maximalIdeal A) A] {q q' : A⟦X⟧} {r r' : A[X]} (H : f.IsWeierstrassDivision g q r)\\n  (H2 : f.IsWeierstrassDivision g q' r') : q = q' ∧ r = r'\", \"doc\": \"In a local ring $ A $ satisfying the Hausdorff condition with respect to its maximal ideal, the Weierstrass division of a power series $ f $ by another power series $ g $ yields unique quotient $ q $ \"}\n  {\"name\": \"PowerSeries.X_eq_normalizeX\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": (X : k⟦X⟧) = normalize X\", \"doc\": \"The formal variable $ X $ in the ring of formal power series $ k[[X]] $ over a field $ k $ is equal to its normalization, i.e., $ \\\\text{normalize}(X) = X $. This follows because the normalization unit\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext'\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R A] {C : Type*} [Ring C] (f : B →+* C) (hf : IsNilpotent <| RingHom.ker f) (g₁ g₂ : A →ₐ[R] B)\\n  (h : ∀ x, f (g₁ x) = f (g₂ x)) : g₁ = g₂\", \"doc\": \"Let $ R $ be a commutative ring and $ A $ an $ R $-algebra that is formally unramified over $ R $. If $ B $ and $ C $ are rings with $ f : B \\\\to C $ a ring homomorphism whose kernel is a nilpotent ide\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"{W : WeierstrassCurve K} : IsMinimal R (W.minimal R)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\", \"PowerSeries\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "grep",
+   "query": "minimal.*versal|versal.*[Pp]ower[Ss]eries|\\bversal\\b",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"17\", \"text\": \"map `stoneCechUnit : α → StoneCech α` which is minimal in the sense of the following universal\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schlessinger hulls any two versal complete local rings differ by formal variables",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"AdicCompletion.ext_evalₐ\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {x y : AdicCompletion I R},\\n  (∀ (n : ℕ), (AdicCompletion.evalₐ I n) x = (AdicCompletion.evalₐ I n) y) → x = y\", \"doc\": \"If two elements $x$ and $y$ in the $I$-adic completion of a commutative ring $R$ satisfy $\\\\text{eval}_\\\\mathfrak{a}(n, x) = \\\\text{eval}_\\\\mathfrak{a}(n, y)$ for all natural numbers $n$, then $x = y$. Th\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  IsNilpotent I →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quot\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a commutative $ R $-algebra that is formally unramified over $ R $, and $ I $ a nilpotent ideal of a commutative $ R $-algebra $ B $. If two $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g₁ g₂ : A →ₐ[R] B), (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext_of_iInf\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  ⨅ i, I ^ i = ⊥ →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quo\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ I $ is an ideal in $ B $ such that the intersection of all powers $ I^n $ is trivial (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n = 0 $), then any two $ R $-\"}\n  {\"name\": \"HenselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [inst : CommRing R] → Ideal R → Prop\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $ of $ R $, the property that $ R $ is Henselian with respect to $ I $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern ordinary formal smoothness, residue-field maps, generic universal properties, or Weierstrass uniqueness; none concerns versal deformation rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two versal deformation rings for a predeformation groupoid differ by finitely many formal power series variables",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.hcongr_5\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R R' : Type u),\\n  R = R' →\\n    ∀ (S S' : Type v),\\n      S = S' →\\n        ∀ (inst : CommRing R) (inst' : CommRing R'),\\n          inst ≍ inst' →\\n            ∀ (inst_1 : CommRing S) (inst'_1 : CommRing S'),\\n              inst_1 ≍ inst'_1 →\\n                ∀ (inst_2 : Algebra R S) (inst'_2 : Algebra \", \"doc\": \"If $ R = R' $ and $ S = S' $ as types, with congruent commutative ring structures and congruent algebra structures between $ R $-$ S $ and $ R' $-$ S' $, then the property of $ S $ being a standard sm\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g₁ g₂ : A →ₐ[R] B), (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  IsNilpotent I →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quot\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a commutative $ R $-algebra that is formally unramified over $ R $, and $ I $ a nilpotent ideal of a commutative $ R $-algebra $ B $. If two $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete local rings carrying versal formal deformations are power series extensions of a common minimal base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PowerSeries.instIsLocalRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing R⟦X⟧\", \"doc\": \"If $ R $ is a local ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a local ring.\"}\n  {\"name\": \"PowerSeries.exists_isWeierstrassDivision\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete (IsLocalRing.maximalIdeal A) A] (hg : g.map (IsLocalRing.residue A) ≠ 0) :\\n  ∃ q r, f.IsWeierstrassDivision g q r\", \"doc\": \"Let $ A $ be a local ring whose maximal ideal is adic complete. If $ g $ is a power series in $ A[[X]] $ whose image in the residue field of $ A $ is nonzero, then for any power series $ f $, there ex\"}\n  {\"name\": \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"module\": \"Mathlib.RingTheory.PowerSeries.WeierstrassPreparation\", \"type\": \"[IsAdicComplete (IsLocalRing.maximalIdeal A) A] : f.IsWeierstrassDivision g (f /ʷ g) (f %ʷ g)\", \"doc\": \"For a commutative local ring $ A $ that is adic complete with respect to its maximal ideal $ \\\\mathfrak{m} $, and power series $ f, g \\\\in A[[X]] $, if the image of $ g $ under the residue map $ A \\\\to A\"}\n  {\"name\": \"PowerSeries.instIsDomain\", \"module\": \"Mathlib.RingTheory.PowerSeries.NoZeroDivisors\", \"type\": \"[Ring R] [IsDomain R] : IsDomain R⟦X⟧\", \"doc\": \"For any domain $ R $, the ring of formal power series $ R⟦X⟧ $ is also a domain. That is, if $ R $ has no zero divisors, then neither does the ring of univariate power series over $ R $.\"}\n  {\"name\": \"PowerSeries.maximalIdeal_eq_span_X\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing.maximalIdeal (k⟦X⟧) = Ideal.span { X }\", \"doc\": \"If $ k $ is a local ring, then the maximal ideal of the ring of univariate power series $ k⟦X⟧ $ is equal to the ideal generated by the formal variable $ X $.\"}\n  {\"name\": \"PowerSeries.WithPiTopology.instCompleteSpace\", \"module\": \"Mathlib.RingTheory.PowerSeries.PiTopology\", \"type\": \"[CompleteSpace R] : CompleteSpace (PowerSeries R)\", \"doc\": \"If $ R $ is a complete space, then the space of univariate power series over $ R $, equipped with the product topology (induced by the uniform structures on each coefficient space), is also a complete\"}\n  {\"name\": \"PowerSeries.subsingleton_iff\", \"module\": \"Mathlib.RingTheory.PowerSeries.Basic\", \"type\": \": Subsingleton R⟦X⟧ ↔ Subsingleton R\", \"doc\": \"The ring of univariate power series $ R[[X]] $ is a subsingleton if and only if $ R $ is a subsingleton.\"}\n  {\"name\": \"PowerSeries.ker_coeff_eq_max_ideal\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": RingHom.ker (constantCoeff (R := k)) = maximalIdeal _\", \"doc\": \"For a local ring $ R $, the kernel of the constant coefficient ring homomorphism from the power series ring $ R⟦X⟧ $ to $ R $ is equal to the maximal ideal of $ R⟦X⟧ $. This means the set of power ser\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"versal\", \"PowerSeries\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "\\bversal\\b|\\bminiversal\\b",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schlessinger miniversal hull uniqueness and comparison of nonminimal versal bases",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.homInfinitesimal\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          (P₁ : Algebra.Extension R A) →\\n            (P₂ : Algebra.Extension R A) → [Algebra.FormallySmooth R P₁.Ring] → P₁.infinitesimal.Hom P₂.infinitesimal\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, and formally smooth algebra extensions $ P_1 $ and $ P_2 $ of $ R $ over $ A $, this constructs a homomorphism between\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g₁ g₂ : A →ₐ[R] B), (Ideal.Quotient.mkₐ R I).comp g₁ = (Ideal.Quotient.mkₐ R I\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally unramified $ R $-algebra, and $ B $ an $ R $-algebra with a nilpotent ideal $ I $. If $ g_1, g_2 : A \\\\to B $ are $ R $-algebra homomorphisms such that\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique'\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] {C : Type u_1} [inst_6 : Ring C]\\n  [inst_7 : Algebra R C] (f : B →ₐ[R] C),\\n  IsNilpotent (RingHom.ker ↑f) → ∀ (g₁ \", \"doc\": \"Let $ R $ be a commutative ring and $ A $ a formally unramified $ R $-algebra. Suppose $ B $ and $ C $ are rings equipped with $ R $-algebra structures, and $ f : B \\\\to C $ is an $ R $-algebra homomor\"}\n  {\"name\": \"Algebra.SubmersivePresentation.mk.inj\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Submersive\", \"type\": \"∀ {R : Type u} {S : Type v} {ι : Type w} {σ : Type t} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  {inst_3 : Finite σ} {toPreSubmersivePresentation : Algebra.PreSubmersivePresentation R S ι σ}\\n  {jacobian_isUnit : IsUnit toPreSubmersivePresentation.jacobian}\\n  {toPreSubmersiveP\", \"doc\": \"If two submersive presentations of an $ R $-algebra $ S $ share the same pre-submersive presentation data and both have Jacobian determinants that are invertible in $ S $, then these submersive presen\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext_of_iInf\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  ⨅ i, I ^ i = ⊥ →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quo\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ I $ is an ideal in $ B $ such that the intersection of all powers $ I^n $ is trivial (i.e., $ \\\\bigcap_{n=1}^\\\\infty I^n = 0 $), then any two $ R $-\"}\n  {\"name\": \"Algebra.FormallyUnramified.lift_unique_of_ringHom\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyUnramified R A] {C : Type u_1} [inst_6 : Ring C]\\n  (f : B →+* C), IsNilpotent (RingHom.ker f) → ∀ (g₁ g₂ : A →ₐ[R] B), f.comp ↑g₁ \", \"doc\": \"Given a formally unramified $ R $-algebra $ A $, if $ f : B \\\\to C $ is a ring homomorphism with nilpotent kernel, then any two $ A $-algebra homomorphisms $ g_1, g_2 : A \\\\to B $ satisfying $ f \\\\circ g\"}\n  {\"name\": \"Algebra.FormallyUnramified.ext\", \"module\": \"Mathlib/RingTheory/Unramified/Basic\", \"type\": \"∀ {R : Type v} [inst : CommRing R] {A : Type u} [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type w}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B) [Algebra.FormallyUnramified R A],\\n  IsNilpotent I →\\n    ∀ {g₁ g₂ : A →ₐ[R] B}, (∀ (x : A), (Ideal.Quotient.mk I) (g₁ x) = (Ideal.Quot\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a commutative $ R $-algebra that is formally unramified over $ R $, and $ I $ a nilpotent ideal of a commutative $ R $-algebra $ B $. If two $ R $-algebra homomo\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-versal-ring-smooth-span",
+  "date": "2026-10-23",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Common formally smooth extension of two stack versal rings. Supporting input: Versal rings differ from a minimal one by formal variables.",
+   "via": [
+    "lem-sfb-stack-versal-ring-smooth-span",
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-minimal-versal-power-series",
+  "worker": "stage1",
+  "summary": "Expanded the minimal-versal comparison into S1, minimal descent, power-series presentation, and a written uniqueness and coefficient-regrouping argument. Reused the existing local-test-algebra localization theorem to match the finite-base convention. Three genuine supporting statements are new and unsplit. The statement is unchanged.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), supporting common smooth span of versal rings: realizes the Tag 06T5/0DQX comparison needed there."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-8b686791d",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-8b686791d (reviewer sub-agent of L); spot-checked: PASS with no fixes. The item statement is unchanged and the item is still unsplit live. The three new statement-only nodes match Stacks formal-defos 06HT (quasi-initial), 06T2 (1),(2) (minimal subring descent; it assumes a predeformation category with (S1), which 06T2's proof needs through 06HT) and 06T3 (power series over the descended base; the 06T2 properties are written as explicit hypotheses, and the Stacks proof uses only incoming-surjectivity, versality and lemma-power-series). All three hold in the trivial-F case B=k, C=k[[x]]. The steps are complete. Step 1 localizes at p=ker(R→l) through lem-sfb-artin-local-test-algebra, whose last sentence gives Λ Noetherian, l finite over Λ and the identification of the categories; this meets Stacks' finite Λ→k convention. Step 2 is 06SY and proves only (S1). Steps 3-4 follow the 06T5(2) argument and write out the surjective-endomorphism-of-a-Noetherian-ring argument inline (the existing node is for linear maps only). Step 5 is the power-series regrouping. 0DQX gives the item's pairwise form. Searches of the snapshot and live DAG for 06HT/06T2/06T3/06T5/0DQX/minimal versal found no duplicate; versal-unobstructed-adic-criterion is 0DZK, a different statement. No SGA. The citer versal-ring-smooth-span is unaffected and there is no cycle."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackMinimalVersalPowerSeries",
+  "declaration": "AlgebraicGeometry.ArtinDeformation.stack_minimal_versal_power_series",
+  "file": "lean/Sheaf/AlgebraicGeometry/StackMinimalVersalPowerSeries.lean",
+  "statement": "theorem stack_minimal_versal_power_series {R l : Type u} [CommRing R] [IsNoetherianRing R] [Field l] [Algebra R l] [Algebra.FiniteType R l] (F : CofibredGroupoids.{u, v, w} R l) (hF : IsPredeformation F) (C D : CompleteLocalAlgebra R l) (ξ : FormalObject F C) (η : FormalObject F D) (hξ : IsVersal ξ) (hη : IsVersal η) : ∃ r : ℕ, (∃ e : C.ring ≃ₐ[R] MvPowerSeries (Fin r) D.ring, ∀ c : C.ring, D.residueEquiv (IsLocalRing.residue D.ring (MvPowerSeries.constantCoeff (e c))) = C.residueEquiv (IsLocalRing.residue C.ring c)) ∨ (∃ e : D.ring ≃ₐ[R] MvPowerSeries (Fin r) C.ring, ∀ d : D.ring, C.residueEquiv (IsLocalRing.residue C.ring (MvPowerSeries.constantCoeff (e d))) = D.residueEquiv (IsLocalRing.residue D.ring d))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7c3b9ba7e",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item, all 6 stmt_deps, the live ArtinDeformationTestCategory module (CofibredGroupoids, IsPredeformation, CompleteLocalAlgebra, FormalObject, LocalMap, evaluate, evaluationRestriction, IsVersal) and Stacks 0DQX/06T5. Every hypothesis matches the node and none is added. Algebra.FiniteType is the affine form of the finite-type dependency, the same convention as the test-category dependency; it is not module-finite. The conclusion is ∃ r, C ≃ₐ[R] MvPowerSeries (Fin r) D or the swap, each with the residue-identity condition (constantCoeff followed by the marked residue). The AlgEquiv is automatically local and adic-continuous. Edge cases: r = 0, both orders of variable counts, arbitrary characteristic, trivial F (r = 1). The snapshot node differs from live only in the new lean field; the statement is verbatim; exactly one sorry; no definitions; docstrings carry the source, the blueprint id and all five proof steps; the private import of ArtinLocalTestAlgebra exists live and makes no cycle. The report has the Worker report and Second reading by NF sections (the second reading is by the worker themself). No duplicate found in side-live lean/Sheaf or Mathlib. Not recompiled, per instructions; no files changed."
+ }
+}

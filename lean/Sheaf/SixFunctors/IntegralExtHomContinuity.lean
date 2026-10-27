@@ -104,6 +104,38 @@ private theorem constructible_hom_continuity
         ⟨inferInstance, inferInstance⟩)] using h
 
 set_option linter.unusedSectionVars false in
+/-- Ext continuity out of an integral constructible complex over a Noetherian scheme.
+The base field of `integralExtHomContinuous` only makes the scheme Noetherian.
+Source: blueprint det-lem-int-ext-continuity (blueprint: det-lem-int-ext-continuity). -/
+theorem integralExtHomContinuous_of_isNoetherian
+    (X : Scheme.{u}) [IsNoetherian X]
+    (C : DerivedCategory
+      (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))
+    (hC : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X C)
+    {I : Type (u + 1)} [SmallCategory I] [IsFiltered I]
+    (K : I ⥤ CochainComplex
+      (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ℤ)
+    [HasColimit K]
+    (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r)) (q : ℤ) :
+    IsIso (homContinuityComparison (K ⋙ DerivedCategory.Q)
+      (DerivedCategory.Q.mapCocone (colimit.cocone K)) C q) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let : NormedAlgebra ℚ_[ℓ] E := ⟨by
+    intro r x
+    change ‖algebraMap E (PadicAlgCl ℓ) (r • x)‖ ≤ ‖r‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
+    rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+      PadicAlgCl.norm_extends]⟩
+  have hR : CommMon.mk (integralCoeff.{u} ℓ E) =
+      CommMon.mk (Profinite.padicIntegersRingObj ℓ E) := rfl
+  have hlocal : localIntegralContinuity (CommMon.mk (integralCoeff.{u} ℓ E)) (I := I) := by
+    intro U _ P hP L hL n
+    exact integral_lfp_hom_continuity U ℓ E P hP L hL n
+  have hlocal' := Eq.mp (congrArg (fun R => localIntegralContinuity R (I := I)) hR) hlocal
+  exact constructible_hom_continuity _ X C hC K b hK hlocal' q
+
+set_option linter.unusedSectionVars false in
 /-- Ext out of an integral constructible complex commutes with a bounded-below filtered
 termwise colimit: for `C ∈ Dbc(X, 𝒪_E)` and every `q`, the canonical map
 `colim_i Hom(C, K_i[q]) ⟶ Hom(C, K[q])` induced by the colimit cocone is an isomorphism of
@@ -161,21 +193,9 @@ theorem integralExtHomContinuous
     (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r)) (q : ℤ) :
     IsIso (homContinuityComparison (K ⋙ DerivedCategory.Q)
       (DerivedCategory.Q.mapCocone (colimit.cocone K)) C q) := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  let : NormedAlgebra ℚ_[ℓ] E := ⟨by
-    intro r x
-    change ‖algebraMap E (PadicAlgCl ℓ) (r • x)‖ ≤ ‖r‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
-    rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
-      PadicAlgCl.norm_extends]⟩
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
   let : IsNoetherian X.left := {}
-  have hR : CommMon.mk (integralCoeff.{u} ℓ E) =
-      CommMon.mk (Profinite.padicIntegersRingObj ℓ E) := rfl
-  have hlocal : localIntegralContinuity (CommMon.mk (integralCoeff.{u} ℓ E)) (I := I) := by
-    intro U _ P hP L hL n
-    exact integral_lfp_hom_continuity U ℓ E P hP L hL n
-  have hlocal' := Eq.mp (congrArg (fun R => localIntegralContinuity R (I := I)) hR) hlocal
-  exact constructible_hom_continuity _ X.left C hC K b hK hlocal' q
+  exact integralExtHomContinuous_of_isNoetherian X.left C hC K b hK q
 
 end AlgebraicGeometry.ProEtale.CondensedRing

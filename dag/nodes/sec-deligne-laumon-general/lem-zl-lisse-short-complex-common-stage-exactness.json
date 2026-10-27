@@ -1,0 +1,349 @@
+{
+ "id": "lem-zl-lisse-short-complex-common-stage-exactness",
+ "kind": "statement",
+ "title": "Simultaneous common-stage exactness for finite lisse short-complex diagrams",
+ "statement": "Fix a prime power $q=p^a$, $k_0=\\mathbf F_q$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Let $Y_0$ be a separated finite-type $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and write $g_Y$ for geometric Frobenius. Use the classical lisse adic categories of [def-pod-lisse-l-adic-sheaves], the sf raw rationalized and common-stage constructible hearts of [def-weil-constructible-heart, def-weil-algebraically-closed-coefficients], and the normalized lisse realization of [lem-tw-lisse-rational-realization]. Let a finite diagram in the sf common-stage lisse heart be given by prescribed finite-stage lisse models and finitely many rational arrows, specified inverses and equations. Include finitely many short complexes $K_{u}\\xrightarrow{f}K_{v}\\xrightarrow{h}K_{w}$, with $hf=0$, among this data. Suppose each has short exact normalized point-fibre sequence\n$$0\\longrightarrow\\operatorname{Fib}_s(L\\bar y^*K_u)\\xrightarrow{f_{\\bar y}}\\operatorname{Fib}_s(L\\bar y^*K_v)\\xrightarrow{h_{\\bar y}}\\operatorname{Fib}_s(L\\bar y^*K_w)\\longrightarrow0$$\nfor every $\\bar y:\\operatorname{Spec}k\\to Y$. Then these are short exact sequences in the sf common-stage constructible heart, and all the given data have simultaneous representatives over one finite extension $E/\\mathbf Q_\\ell$ in $\\Omega$ such that each displayed short complex is short exact in the sf finite-stage heart. The objects at this stage may be taken to be scalar extensions of their prescribed lisse models; the arrows, inverse identities and all prescribed equations hold there. Under the finite-stage sf/PBC comparison of [lem-fd-rational-coefficient-category-comparison], these sequences are short exact also in the PBC finite-stage heart. Every further finite coefficient extension preserves these assertions. If the diagram carries Weil maps and their inverses, with the Weil-equivariance equations for its arrows included among the prescribed equations, the resulting sequences consist of Weil-equivariant maps with those same realized Weil structures. No exactness of any chosen integral lattice sequence is assumed. Zero short complexes and an empty family of complexes are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, Lemma 6.8.7 and Proposition 6.8.14(2); faithful extension on normalized fibre complexes and finite common-stage diagrams. Agent refinement for blueprint real-mixed-by-curves paragraph 1."
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-constructible-heart",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-tw-lisse-rational-realization",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-finite-coefficient-point",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-weil-pbc-exact-sequence",
+  "def-weil-coefficient-cohomology-modules",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "prop-weil-localized-tstructure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-dl-a1-constructible-fibres-exact] to each given short complex in the sf constructible heart. Its geometric datum is exactly $Y_0/k_0$, $Y=Y_0\\times_{k_0}k$ as here, and its fibres are the derived point pullback followed by the normalized point-fibre functor, exactly those in the hypothesis. Thus every displayed complex is short exact in the common-stage heart. This uses constructible coefficient fibres, not conservativity of points on arbitrary pro-etale sheaves.",
+   "uses": [
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 6.8.5, Lemma 6.8.7 and Proposition 6.8.14(2); normalized constructible-fibre detection as packaged by the cited node"
+   }
+  },
+  {
+   "text": "For each of these finitely many short exact sequences choose its connecting map $\\delta:K_w\\to K_u[1]$ by [lem-weil-heart-short-exact-triangles](4). The resulting triangle is distinguished. By [def-weil-algebraically-closed-coefficients], choose a finite-stage distinguished triangle $A\\xrightarrow a B\\xrightarrow b C\\xrightarrow c A[1]$ and an isomorphism from its image to that triangle. Write its components as $\\alpha_1:A\\simeq K_u$, $\\alpha_2:B\\simeq K_v$, $\\alpha_3:C\\simeq K_w$. Include the three inverses and equations $\\alpha_2a=f\\alpha_1$, $\\alpha_3b=h\\alpha_2$, $\\alpha_1[1]c=\\delta\\alpha_3$ in the auxiliary finite data.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Theorem 1.3.6 and admissible heart exact sequences; agent finite-stage assembly using the displayed Hom-colimit definition"
+   }
+  },
+  {
+   "text": "Keep the prescribed vertex models $M_i$ over their given fields $E_i$. In the Hom colimit of [def-weil-algebraically-closed-coefficients], choose representatives of every original arrow and inverse, every $\\delta$, and all the $\\alpha_j^{\\pm1}$ just chosen. Take a common finite upper field of their fields, the $E_i$, and the auxiliary triangle fields. Each original equation, inverse identity and triangle square holds as a colimit equality, hence holds over some further finite field. There are finitely many such equalities; take a common upper field $E$ of their witnesses. At this stage keep the vertex objects literally $M_i\\otimes_{E_i}E$; no new vertex models are substituted. All auxiliary objects and maps are extended to $E$ with the specified scalar associators and shift comparisons. If pullbacks by $g_Y$ occur, their representatives are the finite-stage pullbacks conjugated by scalar comparisons, as in [def-weil-weil-sheaf-complex]; [lem-tw-lisse-rational-realization] identifies these with the prescribed lisse pullbacks and preserves their equations. Thus these are equations between finitely many ordinary arrows at common stages; no injectivity of Hom transition maps is assumed.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-weil-sheaf-complex",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Hom colimit and common-stage composition; the scalar-compatible lisse pullback normalization is the cited realization statement"
+   }
+  },
+  {
+   "text": "Extend each auxiliary distinguished triangle to $E$ by [lem-weil-scalar-extension-exact-triangulated]. The descended inverse identities make the $\\alpha_j$ isomorphisms there. Its descended three squares identify it with the triangle on the prescribed objects and arrows $K_{u,E}\\xrightarrow{f_E}K_{v,E}\\xrightarrow{h_E}K_{w,E}\\xrightarrow{\\delta_E}K_{u,E}[1]$. This triangle is distinguished by TR1 of [def-weil-triangulated-category]. The objects $K_{i,E}=M_i\\otimes_{E_i}E$ remain in the heart because the standard truncations commute with scalar extension by [prop-constructible-truncations]; they remain lisse by the scalar-compatible equivalence [lem-tw-lisse-rational-realization]. Now [lem-weil-heart-short-exact-triangles](4) proves short exactness of each $f_E,h_E$ in the sf finite-stage heart.",
+   "uses": [
+    "lem-weil-scalar-extension-exact-triangulated",
+    "def-weil-triangulated-category",
+    "prop-constructible-truncations",
+    "lem-tw-lisse-rational-realization",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145, definition-triangulated-category, TR1; heart exactness is BBD Theorem 1.3.6 via the cited heart-triangle lemma"
+   }
+  },
+  {
+   "text": "The comparison $J_{Y,E}$ of [lem-fd-rational-coefficient-category-comparison] is the identity on the common integral category and sends $u\\otimes e$ to $u\\otimes e$. Consequently it preserves both standard halves: the integral halves are defined by vanishing of the ambient cohomology sheaves, by [def-weil-constructible-standard-tstructure] and [prop-weil-pbc-integral-tstructure], and these are the same sheaves because [lem-weil-pbc-integral-stratified-perfect-characterization] identifies the two integral categories as one full subcategory of $D(\\operatorname{Mod}(A_Y))$ with the same completed ring sheaf $A_Y=\\widehat{\\mathcal O}_{E,Y}$ ($Y$ is noetherian, finite-dimensional and $\\ell$ is invertible on it); the rational halves are their isomorphism closures, by that definition and [prop-weil-localized-tstructure]. This verifies t-exactness of $J$ and its inverse directly from the definitions. Apply its distinguished-triangle preservation to the triangles in step 4. Their terms lie in the PBC heart, so [lem-weil-heart-short-exact-triangles](4) makes the same sequences short exact there. We use both the identity formula and the half definitions, not merely an unqualified triangulated equivalence.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-constructible-standard-tstructure",
+    "prop-weil-pbc-integral-tstructure",
+    "prop-weil-localized-tstructure",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); agent verification from the common integral identity and the two localized standard-half definitions"
+   }
+  },
+  {
+   "text": "For any further finite $L/E$, scalar extension preserves the triangles by [lem-weil-scalar-extension-exact-triangulated], and preserves the heart by [prop-constructible-truncations]. Hence [lem-weil-heart-short-exact-triangles](4) again gives short exactness. Functoriality preserves every inverse identity and prescribed equation. The lisse scalar identifications are compatible with towers by [lem-tw-lisse-rational-realization]. The scalar-compatible comparison of [lem-fd-rational-coefficient-category-comparison] carries these same assertions to PBC. All maps and triangle witnesses used were rational; no exactness or map stability of a chosen integral lattice sequence was required.",
+   "uses": [
+    "lem-weil-scalar-extension-exact-triangulated",
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-tw-lisse-rational-realization",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Exact transitions and finite-stage distinguished triangles; BBD Theorem 1.3.6 for the induced short exact heart sequences"
+   }
+  },
+  {
+   "text": "When Weil structures are supplied, step 3 includes $\\theta_i$, $\\theta_i^{-1}$, their inverse equations, and $f\\theta_u=\\theta_v Lg_Y^*f$, $h\\theta_v=\\theta_w Lg_Y^*h$. By [def-weil-weil-sheaf-complex] these equations say exactly that the descended maps are Weil-equivariant; their common-stage classes are the original structures. The normalization in [lem-tw-lisse-rational-realization] preserves their realized Weil maps. For a zero complex the same construction uses its zero triangle. For an empty family of complexes there are no auxiliary triangles or squares, and step 3 alone descends the diagram; for an empty diagram take $E=\\mathbf Q_\\ell$. Nothing requires a geometric point when $Y$ is empty.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Finite representatives, inverse identities and equality witnesses; Weil-pair intertwining is the cited definition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-heart-short-exact-triangles",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-weil-sheaf-complex",
+  "lem-tw-lisse-rational-realization",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-triangulated-category",
+  "prop-constructible-truncations",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-weil-constructible-standard-tstructure",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 6.8.5, Lemma 6.8.7 and Proposition 6.8.14(2), with the existing normalized fibre theorem, BBD heart-triangle criterion, and an explicit finite Hom-colimit/triangle-witness assembly. The simultaneous exact descent is an agent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of rational lisse constructible heart objects with short complexes exact on geometric fibres descends to one finite coefficient field where all short complexes are short exact",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"CategoryTheory.ShortComplex.exact_iff_exact_up_to_refinements\", \"module\": \"Mathlib/CategoryTheory/Abelian/Refinements\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (S : CategoryTheory.ShortComplex C),\\n  S.Exact ↔\\n    ∀ ⦃A : C⦄ (x₂ : A ⟶ S.X₂),\\n      CategoryTheory.CategoryStruct.comp x₂ S.g = 0 →\\n        ∃ A' π,\\n          ∃ (_ : CategoryTheory.Epi π),\\n         \", \"doc\": \"A short complex $ S $ is exact if and only if for every morphism $ x_2: A \\\\to X_2 $ satisfying $ x_2 \\\\circ g = 0 $, there exists an object $ A' $, an epimorphism $ \\\\pi: A' \\\\to A $, and a morphism $ x_\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.exact_up_to_refinements\", \"module\": \"Mathlib/CategoryTheory/Abelian/Refinements\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {S : CategoryTheory.ShortComplex C},\\n  S.Exact →\\n    ∀ {A : C} (x₂ : A ⟶ S.X₂),\\n      CategoryTheory.CategoryStruct.comp x₂ S.g = 0 →\\n        ∃ A' π,\\n          ∃ (_ : CategoryTheory.Epi π),\\n         \", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given an exact short complex $S: X_1 \\\\xrightarrow{f} X_2 \\\\xrightarrow{g} X_3$ and a morphism $x_2: A \\\\to X_2$ satisfying $x_2 \\\\circ g = 0$, there exists an object\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → (Finite ↑S.X₂ ↔ Finite ↑S.X₁ ∧ Finite ↑S.X₃)\", \"doc\": \"In a short exact sequence $0 \\\\to A_1 \\\\to A_2 \\\\to A_3 \\\\to 0$ of abelian groups, the middle group $A_2$ is finite if and only if both $A_1$ and $A_3$ are finite.\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.prop_X₂_of_exact\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  (P : CategoryTheory.ObjectProperty C) [P.IsSerreClass] {S : CategoryTheory.ShortComplex C},\\n  S.Exact → P S.X₁ → P S.X₃ → P S.X₂\", \"doc\": \"In an abelian category, if $ P $ is a Serre class and there exists a short exact sequence $ 0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0 $ with $ X_1 $ and $ X_3 $ satisfying $ P $, then the middle object $ X_2 $ \"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"Condensed.instAB4StarCondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB4Star (CondensedMod R)\", \"doc\": \"The category of condensed modules over a ring $ R $ satisfies the AB4* axiom, meaning it has all products and the product of any family of epimorphisms is an epimorphism.\"}\n  {\"name\": \"LightCondensed.instCountableAB4StarLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.CountableAB4Star (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules satisfies the countable AB4* axiom. This means the category has countable products and the product of a family of epimorphisms is itse\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ShortExact, Serre-class and adic module-completion lemmas do not supply finite coefficient models or the sf/PBC normalized fibre criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Equivalence",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ShortExact, Serre-class and adic module-completion lemmas do not supply finite coefficient models or the sf/PBC normalized fibre criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "ShortExact|FaithfullyFlat.*exact|lisse",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"line\": \"47\", \"text\": \"lemma isSeparated_iff_setRelIsSeparated :\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ShortExact\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean\", \"line\": \"49\", \"text\": \"lemma prop_X₁_of_shortExact [HasZeroMorphisms C] {S : ShortComplex C} (hS : S.ShortExact)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean\", \"line\": \"75\", \"text\": \"lemma prop_X₃_of_shortExact [HasZeroMorphisms C] {S : ShortComplex C} (hS : S.ShortExact)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ShortExact\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"42\", \"text\": \"  prop_X₂_of_shortExact {S : ShortComplex C} (hS : S.ShortExact)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"45\", \"text\": \"lemma prop_X₂_of_shortExact [P.IsClosedUnderExtensions]\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"46\", \"text\": \"    {S : ShortComplex C} (hS : S.ShortExact)\"}\n  {\"file\": \"Mathlib/CategoryTheory/ObjectProperty/Extensions.lean\", \"line\": \"48\", \"text\": \"  IsClosedUnderExtensions.prop_X₂_of_shortExact hS h₁ h₃\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"103\", \"text\": \"  .of_maximal_isSeparated <| by simpa [isSeparated_iff_setRelIsSeparated] using hN\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean\", \"line\": \"49\", \"text\": \"variable (S : ShortComplex (CochainComplex C ℤ)) (hS : S.ShortExact)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean\", \"line\": \"38\", \"text\": \"    have hS := HomologicalComplex.shortExact_of_degreewise_shortExact S\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean\", \"line\": \"39\", \"text\": \"      (fun n => (σ n).shortExact)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Algebra.Homology.ShortComplex.ShortExact\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"line\": \"18\", \"text\": \"that category and satisfies `hS : S.ShortExact`), then whenever `i` and `j` are degrees\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"line\": \"227\", \"text\": \"  (hS : S.ShortExact) (i j : ι) (hij : c.Rel i j)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"line\": \"238\", \"text\": \"noncomputable def snakeInput (hS : S.ShortExact) (i j : ι) (hij : c.Rel i j) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomologySequence.lean\", \"line\": \"284\", \"text\": \"  (hS : S.ShortExact) (i j : ι) (hij : c.Rel i j)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"line\": \"150\", \"text\": \"        have : (ShortComplex.mk _ _ (cokernel.condition i)).ShortExact :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/ModelCategory/Injective.lean\", \"line\": \"155\", \"text\": \"        have : (ShortComplex.mk _ _ (kernel.condition p)).ShortExact :=\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"325\", \"text\": \"lemma shortExact [Mono f] : (ShortComplex.mk _ _ (cokernel.condition f)).ShortExact where\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"345\", \"text\": \"  exact (shortExact f).homology_exact₂ n\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"356\", \"text\": \"  refine ((shortExact f).homology_exact₃ i (i + 1) (by simp)).isZero_X₂ ?_ ?_\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"358\", \"text\": \"    rw [← ((shortExact f).homology_exact₂ i).epi_f_iff]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"360\", \"text\": \"  · rw [← ((shortExact f).homology_exact₁ i (i + 1) (by simp)).mono_g_iff]\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ShortExact, Serre-class and adic module-completion lemmas do not supply finite coefficient models or the sf/PBC normalized fibre criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite diagram of rational lisse constructible heart objects with short complexes exact on geometric fibres descends to one finite coefficient field where all short complexes are short exact",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.casesOn\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {S : CategoryTheory.ShortComplex C} →\\n        {motive : S.Exact → Sort u} →\\n          (t : S.Exact) → ((condition : ∃ h, CategoryTheory.Limits.IsZero h.left.H) → motive \", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.recOn\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {S : CategoryTheory.ShortComplex C} →\\n        {motive : S.Exact → Sort u} →\\n          (t : S.Exact) → ((condition : ∃ h, CategoryTheory.Limits.IsZero h.left.H) → motive \", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] → CategoryTheory.ShortComplex C → Prop\", \"doc\": \"A short complex is exact if the image of each differential is equal to the kernel of the subsequent differential.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.mk\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Exact\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {S : CategoryTheory.ShortComplex C}, (∃ h, CategoryTheory.Limits.IsZero h.left.H) → S.Exact\", \"doc\": \"If there exists homology data $ h $ for the short complex $ S $ such that the left homology object $ H $ of $ h $ is a zero object, then $ S $ is exact.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.isLimitImage\", \"module\": \"Mathlib.CategoryTheory.Abelian.Exact\", \"type\": \"(h : S.Exact) : IsLimit (KernelFork.ofι (Abelian.image.ι S.f) (Abelian.image_ι_comp_eq_zero S.zero) : KernelFork S.g)\", \"doc\": \"In an exact short complex $ S $, the image of the differential $ f: X_1 \\\\to X_2 $ forms the kernel of the subsequent differential $ g: X_2 \\\\to X_3 $, and this kernel fork satisfies the universal prope\"}\n  {\"name\": \"HomologicalComplex.shortExact_iff_degreewise_shortExact\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexAbelian\", \"type\": \": S.ShortExact ↔ ∀ (i : ι), (S.map (eval C c i)).ShortExact\", \"doc\": \"A short complex $ S $ in an abelian category is exact if and only if for every index $ i $, the sequence obtained by evaluating $ S $ at degree $ i $ is exact. This equivalence establishes that global\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Ab\", \"type\": \"{S : ShortComplex Ab.{u}} (hS : S.Exact) [Finite S.X₁] [Finite S.X₃] : Finite S.X₂\", \"doc\": \"In an exact short complex of abelian groups, if the first and third objects are finite, then the middle object is also finite.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.isColimitImage\", \"module\": \"Mathlib.CategoryTheory.Abelian.Exact\", \"type\": \"(h : S.Exact) : IsColimit (CokernelCofork.ofπ (Limits.factorThruImage S.g) (comp_factorThruImage_eq_zero S.zero))\", \"doc\": \"In an abelian category, for an exact short complex $S$ with differentials $f: X_1 \\to X_2$ and $g: X_2 \\to X_3$, the image of $g$ satisfies the universal property of a colimit for the cokernel cofork co\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ShortExact, Serre-class and adic module-completion lemmas do not supply finite coefficient models or the sf/PBC normalized fibre criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Short exact sequences of lisse adic sheaves descend along faithful coefficient field extension and are realized simultaneously at a common finite stage",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.map_exact\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Exactness\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {I : Ideal R} {M : Type u} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : Type u} [inst_5 : AddCommGroup P]\\n  [inst_6 : Module R P] [IsNoetherianRing R] [Module.Finite R N] {f : M →ₗ[R] N} {g : N \", \"doc\": \"If $ f : M \\\\to N $ and $ g : N \\\\to P $ are $ R $-linear maps forming an exact sequence (i.e., $ \\\\operatorname{im} f = \\\\ker g $), then their induced $ I $-adic completions $ \\\\hat{f} : \\\\hat{M} \\\\to \\\\hat{\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"CondensedMod.IsSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod R → Prop\", \"doc\": \"A property of a condensed module $ M $ over a ring $ R $ indicating that $ M $ is solid, i.e., satisfies the defining conditions of solidity in the context of condensed mathematics.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ShortExact, Serre-class and adic module-completion lemmas do not supply finite coefficient models or the sf/PBC normalized fibre criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] (S : CategoryTheory.ShortComplex C) : Prop\", \"doc\": \"A short complex `S` is short exact if it is exact, `S.f` is a mono and `S.g` is an epi.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.exact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S : CategoryTheory.ShortComplex C} (self : S.ShortExact) : S.Exact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Splitting.shortExact\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preadditive C] {S : CategoryTheory.ShortComplex C} [CategoryTheory.Limits.HasZeroObject C] (s : S.Splitting) : S.ShortExact\", \"doc\": \"A split short complex is short exact.\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.op\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S : CategoryTheory.ShortComplex C} (h : S.ShortExact) : S.op.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.shortExact_iff_op\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] (S : CategoryTheory.ShortComplex C) : S.ShortExact ↔ S.op.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.epi_g\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S : CategoryTheory.ShortComplex C} (self : S.ShortExact) : CategoryTheory.Epi S.g\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.mono_f\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S : CategoryTheory.ShortComplex C} (self : S.ShortExact) : CategoryTheory.Mono S.f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.shortExact_of_iso\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S₁ S₂ : CategoryTheory.ShortComplex C} (e : S₁ ≅ S₂) (h : S₁.ShortExact) : S₂.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.shortExact_iff_of_iso\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S₁ S₂ : CategoryTheory.ShortComplex C} (e : S₁ ≅ S₂) : S₁.ShortExact ↔ S₂.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.unop\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] {S : CategoryTheory.ShortComplex Cᵒᵖ} (h : S.ShortExact) : S.unop.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.shortExact_iff_unop\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasZeroMorphisms C] (S : CategoryTheory.ShortComplex Cᵒᵖ) : S.ShortExact ↔ S.unop.ShortExact\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.splittingOfInjective\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ShortExact\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Preadditive C] {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) [CategoryTheory.Injective S.X₁] [CategoryTheory.Balanced C] : S.Splitting\", \"doc\": \"A choice of splitting for a short exact short complex `S` in a balanced category\\nsuch that `S.X₁` is injective.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract ShortExact, Serre-class and adic module-completion lemmas do not supply finite coefficient models or the sf/PBC normalized fibre criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite diagrams of lisse adic sheaves with fibrewise short exact complexes descend simultaneously to a finite coefficient field with short exact sequences",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"Condensed.hasExactColimitsOfShape\", \"Condensed.hasExactLimitsOfShape\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondensed.instCountableAB4StarLightCondMod\", \"AdicCompletion.map_exact\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract sheaf, filtered-colimit, short-complex and homological-functor facts do not give normalized lisse adic fibres and simultaneous finite coefficient-stage exactness"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|common.stage.*[Ee]xact|[Ee]xact.*common.stage",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Topology/MetricSpace/MetricSeparated.lean\", \"Mathlib/Topology/MetricSpace/Cover.lean\", \"Mathlib/Data/Rel/Separated.lean\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract sheaf, filtered-colimit, short-complex and homological-functor facts do not give normalized lisse adic fibres and simultaneous finite coefficient-stage exactness"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite diagrams of rational lisse sheaves descend to a finite extension of the coefficient field and fibrewise short exactness is realized there",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.hasLimitsOfShape\", \"finiteExts\", \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"SheafOfModules.Finite.hasFiniteLimits\", \"CategoryTheory.Sheaf.instHasFiniteLimits\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract sheaf, filtered-colimit, short-complex and homological-functor facts do not give normalized lisse adic fibres and simultaneous finite coefficient-stage exactness"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Triangulated",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Triangulated'\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "invalid pattern: unknown identifier; repaired by the subsequent valid Loogle query"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.shortExact_iff_of_iso",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.shortExact_iff_of_iso\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract sheaf, filtered-colimit, short-complex and homological-functor facts do not give normalized lisse adic fibres and simultaneous finite coefficient-stage exactness"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact.*[Tt]riangle|[Tt]riangle.*shortExact|ShortExact",
+   "results": "{\"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ShortExact.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\", \"Mathlib/Algebra/Homology/ShortComplex/ModuleCat.lean\"], \"sub\": \"Algebra/Homology/ShortComplex\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract sheaf, filtered-colimit, short-complex and homological-functor facts do not give normalized lisse adic fibres and simultaneous finite coefficient-stage exactness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a filtered colimit of triangulated categories with t exact transitions, finitely many short exact heart sequences have simultaneous finite stage representatives",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.ab5OfSize\", \"CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity\", \"CategoryTheory.Functor.homologySequenceComposableArrows₅_exact\", \"CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize\", \"CategoryTheory.Limits.colim.exact_mapShortComplex\", \"CategoryTheory.Functor.IsHomological.exact\", \"CategoryTheory.Functor.homologySequence_exact₂\", \"CategoryTheory.Functor.homologySequence_exact₁\"], \"sub\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned abstract sheaf, filtered-colimit, short-complex and homological-functor facts do not give normalized lisse adic fibres and simultaneous finite coefficient-stage exactness"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-classical-weil-filtration-heart-transport",
+  "date": "2026-10-22",
+  "group": "NP"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Proof paragraph 1: construction of the actual Weil filtration; heart-transport argument, old steps 6-8 (heart exactness, descent and simultaneous finite stage)",
+   "via": [
+    "lem-zl-classical-weil-filtration-heart-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-zl-lisse-short-complex-common-stage-exactness",
+  "worker": "stage1",
+  "summary": "Reused existing normalized constructible-fibre detection and heart-triangle statements. Descended a finite list of distinguished-triangle witnesses, triangle isomorphisms and all equations while retaining prescribed scalar-extended vertex models. Checked the sf/PBC comparison on the standard halves and verified further extensions and empty cases. Corrected the final Weil clause to require the intertwining equations, with an explicit point counterexample in report.md. No new nodes.",
+  "blueprint": "thm-zl-real-mixed-by-curves proof paragraph 1: the actual finite Weil filtration; this item supplies the heart exactness and simultaneous coefficient-stage part of the parent heart-transport argument.",
+  "tool_uses": [
+   {
+    "node": "lem-dl-a1-constructible-fibres-exact",
+    "why": "Normalized constructible-fibre detection for the already given lisse heart complexes; the real-mixed unit does not reprove this generic coefficient-heart theorem."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart exactness/triangle criterion, used to retain finite witnesses of exactness rather than assume chosen integral lattices exact."
+   },
+   {
+    "node": "lem-weil-scalar-extension-exact-triangulated",
+    "why": "Generic exactness of finite coefficient transitions, used on the finitely many auxiliary distinguished triangles."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Standard truncations commute with scalar transitions, so prescribed finite-stage heart models stay in the heart."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "The item explicitly uses this normalized lisse realization; its scalar and Frobenius pullback compatibility retains the specified models and Weil maps."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "The item explicitly requests the sf/PBC comparison; its common-integral identity and scalar compatibilities are used as a coefficient tool."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Identifies the PBC integral standard halves by ambient cohomology, needed to check the requested comparison preserves hearts."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Identifies the PBC rational halves as isomorphism closures of integral halves, needed for the direct t-exactness check."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the sf and PBC integral categories inside one ambient derived category with the same completed ring sheaf, so that both integral standard halves test the same cohomology sheaves (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "prop-constructible-truncations",
+  "lem-tw-lisse-rational-realization",
+  "lem-fd-rational-coefficient-category-comparison",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-88dba7be6",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-88dba7be6 (reviewer sub-agent of L); spot-checked: Stage 1, 0 new nodes, no repair note. I read the 7 steps against every cited statement. Step 1: lem-dl-a1-constructible-fibres-exact works on the sf heart with Fib_s∘Lȳ^* fibres and Y_0 separated of finite type, exactly the item's setting. Steps 2-4: δ comes from lem-weil-heart-short-exact-triangles(4), and a finite-stage triangle with its isomorphism comes from the C_Y distinguished-triangle definition. A common E for the finitely many colimit equalities, scalar extension (exact) and TR1 then give the triangle on the prescribed objects. prop-constructible-truncations keeps the objects in the heart, and (4) in reverse gives exactness. Steps 6-7 check, including the Weil morphism equations of def-weil-weil-sheaf-complex. The statement change is justified: the old Weil clause fails for a rank-1 point with θ=1 on the source and θ=2 on the middle and an identity arrow. The only citer, the heart-transport parent, supplies the equivariance equations of a Weil filtration (thm-zl-real-mixed-by-curves paragraph 1). FIX in step 5: transferring halves from sf to PBC needs both integral halves to test the same ambient cohomology sheaves. I added lem-weil-pbc-integral-stratified-perfect-characterization (one ambient category, same completed ring sheaf) to the step, proof_deps and tool_uses; it is already a stmt_dep of lem-fd, so the closure does not grow. Batch-5: lem-dl-a1 reaches sec-poincare-duality only through the definition def-pod-lisse-l-adic-sheaves, which is already the item's own stmt_dep and not part of either assumed proof, so I accepted it. prop-constructible-truncations is general t-structure foundations, already cited through def-weil-constructible-heart, so I accepted it too. I read Bhatt-Scholze 6.8.5/6.8.7/6.8.14 as background; proof_origin.by=agent is correct. Edge cases checked: empty Y, empty family, zero complexes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseShortComplexCommonStageExactness",
+  "declaration": "WeilConjectures.LisseShortComplex.simultaneous_exactness",
+  "declarations": [
+   "WeilConjectures.LisseShortComplex.pathValue",
+   "WeilConjectures.LisseShortComplex.Presentation",
+   "WeilConjectures.LisseShortComplex.Presentation.complex",
+   "WeilConjectures.LisseShortComplex.model",
+   "WeilConjectures.LisseShortComplex.frobeniusScalar",
+   "WeilConjectures.LisseShortComplex.extendWeil",
+   "WeilConjectures.LisseShortComplex.WeilAt",
+   "WeilConjectures.LisseShortComplex.StageAssertions",
+   "WeilConjectures.LisseShortComplex.simultaneous_exactness"
+  ],
+  "file": "lean/Sheaf/Paper/LisseShortComplexCommonStageExactness.lean",
+  "statement": "theorem simultaneous_exactness [Finite V] [∀ i j : V, Finite (i ⟶ j)] {Q J : Type z} [Finite Q] [Finite J] (F : V ⥤q sfCommonStageHeart c.l (D.geometricFiber Y₀).left c.Qbar) (P : Presentation D c Y₀ V F Q J) (_models : ∀ i, @rationalLisseHeartProperty c.l _ (Coefficient.{u} c.l c.Qbar (F.obj i).obj.stage) _ _ _ (D.geometricFiber Y₀).left (sfWeilPrimeInvertible D c.l c.different Y₀) (F.obj i).obj.obj) (_fibres : ∀ (j : J) (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left), Function.Injective (((sfCommonStageHeartProperty c.l (D.geometricFiber Y₀).left c.Qbar).ι ⋙ @commonStageDerivedPullback c.l _ c.Qbar _ _ _ _ _ x (dlAdicGeometricResidueInvertible D c (Spec (.of D.k))) (dlAdicGeometricResidueInvertible D c (D.geometricFiber Y₀).left) ⋙ pointQbarFibre D c.l c.different c.Qbar ⋙ DerivedCategory.coefficientQbarCohomology c.l c.Qbar 0).map (F.map (P.f j))) ∧ Function.Exact (((sfCommonStageHeartProperty c.l (D.geometricFiber Y₀).left c.Qbar).ι ⋙ @commonStageDerivedPullback c.l _ c.Qbar _ _ _ _ _ x (dlAdicGeometricResidueInvertible D c (Spec (.of D.k))) (dlAdicGeometricResidueInvertible D c (D.geometricFiber Y₀).left) ⋙ pointQbarFibre D c.l c.different c.Qbar ⋙ DerivedCategory.coefficientQbarCohomology c.l c.Qbar 0).map (F.map (P.f j))) (((sfCommonStageHeartProperty c.l (D.geometricFiber Y₀).left c.Qbar).ι ⋙ @commonStageDerivedPullback c.l _ c.Qbar _ _ _ _ _ x (dlAdicGeometricResidueInvertible D c (Spec (.of D.k))) (dlAdicGeometricResidueInvertible D c (D.geometricFiber Y₀).left) ⋙ pointQbarFibre D c.l c.different c.Qbar ⋙ DerivedCategory.coefficientQbarCohomology c.l c.Qbar 0).map (F.map (P.g j))) ∧ Function.Surjective (((sfCommonStageHeartProperty c.l (D.geometricFiber Y₀).left c.Qbar).ι ⋙ @commonStageDerivedPullback c.l _ c.Qbar _ _ _ _ _ x (dlAdicGeometricResidueInvertible D c (Spec (.of D.k))) (dlAdicGeometricResidueInvertible D c (D.geometricFiber Y₀).left) ⋙ pointQbarFibre D c.l c.different c.Qbar ⋙ DerivedCategory.coefficientQbarCohomology c.l c.Qbar 0).map (F.map (P.g j)))) : (∀ j : J, (P.complex j).ShortExact) ∧ ∃ (E : Index c.l c.Qbar) (h : ∀ i, (F.obj i).obj.stage ≤ E) (A : ∀ {i j : V}, (i ⟶ j) → (model (F.obj i) E (h i) ⟶ model (F.obj j) E (h j))), StageAssertions P E h A ∧ ∀ (L : Index c.l c.Qbar) (k : E ≤ L), StageAssertions P L (fun i ↦ (h i).trans k) (fun a ↦ (stageSystem c.l c.Qbar (D.geometricFiber Y₀).left).tr k (A a))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd4ad1d92",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery of a82e: both H2 repairs done (dlAdicHeartFibre written out literally; def-weil-coefficient-cohomology-modules, def-dl-a1-locally-constructible-adic-heart and prop-weil-localized-tstructure added as landed stmt_deps; node otherwise unchanged except lean). Mechanical theorem-stmt_dep finding judged: the statement uses (pbc_localized_tstructure …).choose.heart, the object the theorem constructs; no def node owns a rational PBC t-structure, the heart is pinned by the theorem's characterization, and landed def-per-continuous-rational-realization-data and lem-per-adic-heart-pullback-fibres use the same .choose -> PASS on that point. Every signature declaration has its owner in the stmt_dep closure (rationalLisseHeartProperty via def-real-rational-lisse-heart, FdCoefficientComparisonSystem via def-fd-pullback-comparison-datum, the pullback/scalar comparisons via def-weil-derived-pullback-tensor-hom). Clauses match the node: literal toStage models, ofHom classes, path equations, sf and PBC ShortExact (family.Φ E pinned by finite_functor/integral_identity/objects; HEq types agree since pbcFiniteField = Coefficient = Shrink), all L >= E via tr, Weil clause via canonical extendWeil. Edge cases (empty V/Q/J, zero complexes, empty Y, loops) are covered; no hollow defs; only proof is sorry; report sections present; statement field verbatim. No compile run since no file changed (worker compile clean). Advisory: Q and J share universe z."
+ }
+}

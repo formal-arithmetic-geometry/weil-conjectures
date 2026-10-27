@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-principal-cone-koszul-roos-comparison",
+ "kind": "statement",
+ "title": "Principal Cone Koszul Roos Comparison",
+ "status": "split",
+ "statement": "On a small ringed site, let P be any cochain complex and μ its scalar endomorphism for a compatible global section a. The principal cone completion of μ is isomorphic in the derived category to the strict tensor singleton-Koszul Roos complex. The comparison sends the specified principal cone unit to the prescribed Koszul Roos unit. The statement uses the displayed countable-product and derived-category hypotheses and requires no regularity or K-flatness. Dependencies: [lem-pur-principal-koszul-roos-presentation-comparison], [def-pur-principal-cone-tower].",
+ "stmt_deps": [
+  "lem-pur-principal-koszul-roos-presentation-comparison",
+  "def-pur-principal-cone-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "tensoring a mapping cone with P commutes with that mapping cone, including its two inclusions. The unit-tensor isomorphism conjugates scalar multiplication on P to tensoring scalar multiplication on the unit. Taking powers therefore gives an isomorphism from each scalar cone to its tensor Koszul level. Naturality of the tensor-cone comparison identifies the (scalar,identity) transition squares, and its inclusion formula identifies the augmentations. Compare the products and their one-minus-shift endomorphisms, then their mapping cocones. The normalized comparison carries the zero-homotopy lift of the original augmentation to the tensor Koszul Roos unit. All finite level comparisons are isomorphisms; neither regularity of the scalar nor K-flatness or boundedness of P enters this calculation.",
+   "uses": [
+    "lem-pur-principal-koszul-roos-presentation-comparison",
+    "def-pur-principal-cone-tower",
+    "lem-pur-finite-free-quotient-tower",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-principal-cone-exact-equivalence",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-principal-koszul-roos-presentation-comparison",
+  "def-pur-principal-cone-tower",
+  "lem-pur-finite-free-quotient-tower",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-principal-cone-exact-equivalence",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a small ringed site, let P be any cochain complex and μ its scalar endomorphism for a compatible global section a. The principal cone completion of μ is isomorphic in the derived category to the strict tensor singleton-Koszul Roos complex. The comparison sends the specified principal cone unit to the prescribed Koszul Roos unit. The statement uses the displayed countable-product and derived-category hypotheses and requires no regularity or K-flatness.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.map\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated\", \"type\": \"(comm : φ₁ ≫ b = a ≫ φ₂) : mappingCone φ₁ ⟶ mappingCone φ₂\", \"doc\": \"Given morphisms $\\\\phi_1: K_1 \\\\to L_1$, $\\\\phi_2: K_2 \\\\to L_2$, and compatible morphisms $a: K_1 \\\\to K_2$, $b: L_1 \\\\to L_2$ satisfying $\\\\phi_1 \\\\circ b = a \\\\circ \\\\phi_2$, this constructs a morphism betwe\"}\n  {\"name\": \"DerivedCategory.singleFunctorIsoCompQ\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(n : ℤ) : singleFunctor C n ≅ CochainComplex.singleFunctor C n ⋙ Q\", \"doc\": \"For each integer $ n $, the single-term complex functor from category $ \\\\mathcal{C} $ to its derived category is naturally isomorphic to the composition of the single-term cochain complex functor (con\"}\n  {\"name\": \"HomologicalComplex.tensorUnitIso\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": (GradedObject.single₀ I).obj (𝟙_ C) ≅ (tensorUnit C c).X\", \"doc\": \"An isomorphism between the graded object constructed by placing the monoidal unit object at position 0 (via the single₀ functor) and the tensor unit homological complex (which places the monoidal unit\"}\n  {\"name\": \"CategoryTheory.ShortComplex.isoCyclesOfIsLimit\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.LeftHomology\", \"type\": \": kf.pt ≅ S.cycles\", \"doc\": \"Given a limit cone $ kf $ over the kernel fork of the first differential in a short complex $ S $, the apex $ kf.pt $ is isomorphic to the cycles $ S.cycles $, as the universal property of limits ensu\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\", \"module\": \"Mathlib.Algebra.Homology.Factorizations.CM5b\", \"type\": \"(n : ℤ) [K.IsStrictlyGE (n + 1)] [L.IsStrictlyGE n] : (mappingCone (𝟙 (I K)) ⊞ L).IsStrictlyGE n\", \"doc\": \"In an abelian category with enough injectives, if $ K $ is a cochain complex strictly supported in degree $ n+1 $ and $ L $ is strictly supported in degree $ n $, then the biproduct of the mapping con\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": (Q (C := C)).IsLocalization (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The derived category is obtained by localizing the category of cochain complexes with integer indices at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups). The canonical func\"}\n  {\"name\": \"HomologicalComplex.rightUnitor'\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": (tensorObj K (tensorUnit C c)).X ≅ K.X\", \"doc\": \"The natural isomorphism between the tensor product of a homological complex $ K $ with the tensor unit complex (placing the monoidal unit at index 0 and zero objects elsewhere) and $ K $ itself, given\"}\n  {\"name\": \"CategoryTheory.Idempotents.karoubiCochainComplexEquivalence_unitIso_hom_app_f_f\", \"module\": \"Mathlib.CategoryTheory.Idempotents.HomologicalComplex\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Preadditive C] (α : Type u_3)\\n  [inst_2 : AddRightCancelSemigroup α] [inst_3 : One α]\\n  (P : CategoryTheory.Idempotents.Karoubi (HomologicalComplex C (ComplexShape.up α))) (n : α),\\n  ((CategoryTheory.Idempotents.\", \"doc\": \"For any preadditive category $\\\\mathcal{C}$ and additive right-cancellative semigroup $\\\\alpha$ with identity, the component of the unit isomorphism at index $n$ for the Karoubi equivalence of cochain c\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (mappingCone|mappingCocone).*(tensor|[iI]so) Mathlib/ (local read-only Mathlib source)",
+   "results": "25 matching source lines. First matches:\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:462:      (CochainComplex.mappingCone.mapTriangleIso φ G)\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:511:  exact ⟨_, _, _, ⟨(rotate _).mapIso e ≪≫ CochainComplex.mappingCone.rotateTrianglehIso φ⟩⟩\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:517:  exact ⟨_, _, _, ⟨Functor.mapIso _ e ≪≫ CochainComplex.mappingCone.shiftTrianglehIso φ n⟩⟩\nMathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean:601:      CochainComplex.mappingCone.mapTrianglehIso f G⟩⟩\nMathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean:318:    ((mappingCone.triangle φ).mor₂ ≫ (shiftFunctorCompIsoId _ (-1 : ℤ) 1 (by lia)).inv.app _)\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:91:noncomputable def mappingConeHomOfDegreewiseSplitXIso (p q : ℤ) (hpq : p + 1 = q) :\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:128:noncomputable def mappingConeHomOfDegreewiseSplitIso :\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:130:  Hom.isoOfComponents (fun p => mappingConeHomOfDegreewiseSplitXIso S σ p _ rfl) (by\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:135:    simp only [mappingConeHomOfDegreewiseSplitXIso, mappingCone.ext_from_iff _ _ _ rfl,\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:151:lemma shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv :\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:152:    S.f⟦(1 : ℤ)⟧' ≫ (mappingConeHomOfDegreewiseSplitIso S σ).inv = -mappingCone.inr _ := by\nMathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean:156:  dsimp [mappingConeHomOfDegreewiseSplitXIso]",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrincipalConeKoszulRoosComparison",
+  "file": "lean/Sheaf/Paper/PrincipalConeKoszulRoosComparison.lean",
+  "declaration": "CategoryTheory.principalConeKoszulRoosComparison",
+  "statement": "theorem principalConeKoszulRoosComparison\n    (P : CochainComplex 𝒜 ℤ)\n    (a : (R.obj ⋙ forget CommRingCat).sections)\n    (μ : End P)\n    (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),\n      (μ.f q).val.app U x =\n        @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :\n    ∃ e : (DerivedCategory.Q.{w} (C := 𝒜)).obj (CochainComplex.PrincipalCone.completion (A := 𝒜)\n      (P := P) μ) ≅\n        (DerivedCategory.Q.{w} (C := 𝒜)).obj\n          ((roosF (A := 𝒜)).obj (koszulTowerComplex R (koszulTensorTower R P ⟨a.val, a.property⟩))),\n      (DerivedCategory.Q.{w} (C := 𝒜)).map (CochainComplex.PrincipalCone.unit (A := 𝒜) (P := P) μ)\n        ≫ e.hom =\n        (DerivedCategory.Q.{w} (C := 𝒜)).map (principalKoszulRoosUnit R P ⟨a.val, a.property⟩)",
+  "declarations": [
+   "CategoryTheory.principalConeKoszulRoosComparison"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

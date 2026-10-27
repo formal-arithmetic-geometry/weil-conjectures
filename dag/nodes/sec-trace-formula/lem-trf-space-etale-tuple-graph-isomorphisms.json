@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-space-etale-tuple-graph-isomorphisms",
+ "kind": "statement",
+ "title": "Graph evaluation and transition inverses for the etale tuple module",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $F$ an algebraic space over $S$ [def-trf-algebraic-space], and $(q_i:V_i\\to F)_{i\\in I}$ a set-indexed family of etale maps from schemes, not necessarily jointly surjective. Work in a universe containing $I$, all section sets and the products below, and a small skeleton of $F_{\\mathrm{et}}$ [def-weil-size-convention]. Write $R_{ij}=V_i\\times_F V_j$, with projections $p_i,p_j$; all displayed fibre products are schemes by the representable diagonal. Let $L_i$ be sheaves of $\\mathcal O_{(V_i)_{\\mathrm{et}}}$-modules [def-weil-sheaf-of-modules-category]. Restrictions to overlaps are restrictions on localized etale sites. Suppose now that $a_{ij}:L_j|_{(R_{ij})_{\\mathrm{et}}}\\xrightarrow{\\sim}L_i|_{(R_{ij})_{\\mathrm{et}}}$ are module isomorphisms, their pullbacks along $V_i\\to R_{ii}$ are identities, and $a_{ik}=a_{ij}a_{jk}$ on every $V_i\\times_FV_j\\times_FV_k$, using the canonical composition identifications. Let $M$ be the module sheaf whose sections, restrictions and module operations are the explicit compatible-tuple formulas of [lem-trf-space-etale-module-tuple-sheaf]; thus $M(W)$ consists of tuples $s_i\\in L_i(W\\times_FV_i)$ satisfying $s_i|_{W_{ij}}=a_{ij}(s_j|_{W_{ij}})$. For each $a\\in I$ and each etale $t:W\\to V_a$, put $W_i=W\\times_FV_i$ and let $d_a=(1_W,t):W\\to W_a$. Define\n$$e_{a,W}:M(W\\to F)\\longrightarrow L_a(W),\\qquad (s_i)\\longmapsto d_a^*s_a,$$\nand\n$$j_{a,W}:L_a(W)\\longrightarrow M(W\\to F),\\qquad y\\longmapsto\\bigl(a_{ia}(y|_{W_i})\\bigr)_i.$$\nIn the latter formula $a_{ia}$ is evaluated using $W_i\\to R_{ia}$ with components $W_i\\to V_i$ and $W_i\\to W\\xrightarrow t V_a$, and $y|_{W_i}$ is restriction on $(V_a)_{\\mathrm{et}}$. These formulas are well-defined linear maps, natural in every morphism $W'\\to W$ over $V_a$, and satisfy $e_{a,W}j_{a,W}=1$ and $j_{a,W}e_{a,W}=1$. Consequently they give module-sheaf isomorphisms $e_a:q_a^*M\\xrightarrow{\\sim}L_a$ whose inverses have exactly the displayed formula. For every $a,b$ and every etale test scheme $W\\to R_{ab}$, the resulting maps satisfy $e_{a,W}=a_{ab,W}e_{b,W}$. This includes $a=b$ with two different lifts of $W$ to $V_a$; identity for $a_{aa}$ is assumed only on the diagonal. No local freeness or joint-surjectivity hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), omitted construction of the local isomorphisms and verification of their transition compatibility, using graph evaluation on etale test schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-etale-module-tuple-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "All products used below are schemes: each $W\\times_FV_i$ is a scheme by representability of $q_i$, and iterate this observation for triple products. Base change and composition in [lem-trf-space-chartwise-etale-permanence] make their structural maps to $F$ etale. Its cancellation clause makes every map between these scheme objects over $F$ etale. In particular $W_i\\to W$, the graphs $d_a$, and the graph maps to triple products used below are legitimate arrows on the localized sites. A morphism $W\\to V_a$ over $F$ is etale by the same cancellation clause. Thus postcomposition identifies $(V_a)_{\\mathrm{et}}$ with $F_{\\mathrm{et}}/V_a$: the inverse forgets the composite to $F$, and both functors leave the underlying scheme arrows and covering families unchanged. The structure rings agree since both evaluate on a scheme $T$ as $\\Gamma(T,\\mathcal O_T)$ [def-trf-algebraic-space].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03EC (lemma-etale-over-space), 03FV (lemma-etale-permanence), 03ED (definition-etale-site), 03G7 (definition-structure-sheaf)."
+   }
+  },
+  {
+   "text": "Use the exact section and restriction formulas of [lem-trf-space-etale-module-tuple-sheaf]. For $y\\in L_a(W)$ set $z_i=a_{ia}(y|_{W_i})$. On $W_{ij}$ the cocycle pulled back along $(W_{ij}\\to V_i,W_{ij}\\to V_j,W_{ij}\\to W\\xrightarrow t V_a)$ gives\n$$a_{ij}(z_j|_{W_{ij}})=a_{ij}a_{ja}(y|_{W_{ij}})=a_{ia}(y|_{W_{ij}})=z_i|_{W_{ij}}.$$\nNaturality of each transition morphism justifies restricting $z_i$ in this equality. Hence $z$ lies in $M(W)$ and defines $j_{a,W}$. The other map $e_{a,W}$ is defined by restricting the $a$ coordinate along the arrow $d_a$ from step 1.",
+   "uses": [
+    "lem-trf-space-etale-module-tuple-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), proof: explicit compatible tuples and omitted local isomorphisms/commutative diagrams; graph calculations supplied by Q24."
+   }
+  },
+  {
+   "text": "The two maps are $\\mathcal O_F(W)=\\Gamma(W,\\mathcal O_W)$-linear. For $b\\in\\mathcal O_F(W)$, the tuple-module scalar formula gives\n$$e_{a,W}(bs)=d_a^*((b|_{W_a})s_a)=b\\,d_a^*s_a,$$\nsince $\\operatorname{pr}_W d_a=1_W$; and $a_{ia}((b|_{W_i})(y|_{W_i}))=(b|_{W_i})a_{ia}(y|_{W_i})$ by the assumed module-linearity. Addition and zero follow by the same coordinatewise formulas. For $f:W'\\to W$ over $V_a$, let $f_i:W'_i\\to W_i$ preserve both projections. The equality $f_a d'_a=d_af$ follows by comparing the two projections. Therefore $e_{a,W'}(s|_{W'})=e_{a,W}(s)|_{W'}$. Naturality of $a_{ia}$ gives $(j_{a,W}(y))_i|_{W'_i}=a_{ia}(y|_{W'_i})=(j_{a,W'}(y|_{W'}))_i$, proving naturality of $j$.",
+   "uses": [
+    "lem-trf-space-etale-module-tuple-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), proof: explicit compatible tuples and omitted local isomorphisms/commutative diagrams; graph calculations supplied by Q24."
+   }
+  },
+  {
+   "text": "In $e_{a,W}j_{a,W}(y)=d_a^*a_{aa}(y|_{W_a})$, the map $W_a\\to R_{aa}$ used in $a_{aa}$ has components $(\\operatorname{pr}_{V_a},t\\operatorname{pr}_W)$. Composing with $d_a$ gives $(t,t)=\\Delta_at$. By naturality this composite is $(\\Delta_a^*a_{aa})(y)=y$, using precisely the assumed diagonal normalization and $\\operatorname{pr}_Wd_a=1_W$. We do not assert that $a_{aa}$ is the identity on all of $R_{aa}$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), proof: explicit compatible tuples and omitted local isomorphisms/commutative diagrams; graph calculations supplied by Q24."
+   }
+  },
+  {
+   "text": "For $s\\in M(W)$ and $i\\in I$, pull its $(i,a)$ compatibility equation on $W\\times_FV_i\\times_FV_a$ back along\n$$h_i:W_i\\longrightarrow W\\times_FV_i\\times_FV_a,\\qquad (w,v_i)\\longmapsto(w,v_i,t(w)).$$\nThese coordinate formulas mean the unique maps with the displayed projections. Its projection to $W_i$ is the identity and its projection to $W_a$ is $d_a\\operatorname{pr}_W$. Naturality of $a_{ia}$ therefore gives\n$$s_i=a_{ia}\\bigl(\\operatorname{pr}_W^*d_a^*s_a\\bigr)=(j_{a,W}e_{a,W}(s))_i.$$\nEquality of every coordinate is equality of tuples, so $j_{a,W}e_{a,W}=1$.",
+   "uses": [
+    "lem-trf-space-etale-module-tuple-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), proof: explicit compatible tuples and omitted local isomorphisms/commutative diagrams; graph calculations supplied by Q24."
+   }
+  },
+  {
+   "text": "By step 1 and the restriction convention of [def-trf-algebraic-space], $q_a^*M(W\\to V_a)=M(W\\to F)$. The natural linear maps in step 3 are module-sheaf morphisms by [def-weil-sheaf-of-modules-category], and steps 4 and 5 give their two inverse identities, hence the asserted isomorphism with the specified inverse. For $W\\to R_{ab}$ write its two lifts as $t_a,t_b$. Pull the $(a,b)$ tuple equation back along\n$$h_{ab}:W\\to W\\times_FV_a\\times_FV_b,\\qquad w\\mapsto(w,t_a(w),t_b(w)).$$\nIts projections are $d_a$ and $d_b$. Naturality gives $d_a^*s_a=a_{ab,W}(d_b^*s_b)$, which is exactly $e_{a,W}=a_{ab,W}e_{b,W}$. This argument also applies when $a=b$ and $t_a\\ne t_b$, without using diagonal normalization there. No step used joint surjectivity or local freeness.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-sheaf-of-modules-category",
+    "lem-trf-space-etale-module-tuple-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TR (lemma-glue-sheaves), proof: explicit compatible tuples and omitted local isomorphisms/commutative diagrams; graph calculations supplied by Q24."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-etale-module-tuple-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), proof: explicit compatible tuples and omitted local isomorphisms/commutative diagrams; graph calculations supplied by Q24."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation along the graph is an isomorphism between a cocycle compatible tuples sheaf restricted to a cover object and its local sheaf with inverse given by transition maps",
+   "results": "8 hits; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff; TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst; TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom; CategoryTheory.evalEquiv_symm_apply; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map; TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological opens, scheme gluing, or generic evaluation; none states the graph inverse and overlap formulas for this explicit tuple module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local trivialization of a glued sheaf by restriction to the diagonal with inverse defined by cocycle transition isomorphisms",
+   "results": "8 hits; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; TopCat.Presheaf.isGluing_iff_pairwise; TopCat.Sheaf.existsUnique_gluing'; TopCat.Sheaf.existsUnique_gluing; AlgebraicGeometry.PresheafedSpace.GlueData.ιInvApp_π; TopCat.Presheaf.IsGluing; AlgebraicGeometry.PresheafedSpace.GlueData.ιInvAppπEqMap",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological opens, scheme gluing, or generic evaluation; none states the graph inverse and overlap formulas for this explicit tuple module"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, Iso",
+   "results": "0 hits; ; loogle: unknown identifier 'Iso'",
+   "date": "2026-10-22",
+   "verdict": "invalid query: unknown unqualified Iso; corrected by the recorded CategoryTheory.Iso query"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Iso",
+   "results": "12 hits; CategoryTheory.sheafSectionsNatIsoEvaluation; CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf; CategoryTheory.sheafToPresheafCompYonedaCompWhiskeringLeftSheafToPresheaf; CategoryTheory.sheafBotEquivalence_unitIso; CategoryTheory.sheafToPresheafCompCoyonedaCompWhiskeringLeftSheafToPresheaf_app_app; CategoryTheory.sheafBotEquivalence_counitIso; CategoryTheory.sheafToPresheafCompYonedaCompWhiskeringLeftSheafToPresheaf_app_app; CategoryTheory.sheafificationIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological opens, scheme gluing, or generic evaluation; none states the graph inverse and overlap formulas for this explicit tuple module"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]raph.*[Ee]val|[Ee]val.*[Gg]raph|[Gg]lue.*[Cc]ounit",
+   "results": "1 hits; Mathlib/Topology/Category/Profinite/Nobeling/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological opens, scheme gluing, or generic evaluation; none states the graph inverse and overlap formulas for this explicit tuple module"
+  },
+  {
+   "tool": "grep",
+   "query": "compatibleTuple|[Gg]lue|equalizer",
+   "results": "9 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Colimits.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean; searched Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological opens, scheme gluing, or generic evaluation; none states the graph inverse and overlap formulas for this explicit tuple module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local isomorphisms of a glued module sheaf are evaluation along graphs and their inverses are the transition maps of the cocycle",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued; AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_isoSheafedSpace_inv; AlgebraicGeometry.Scheme.Modules.inv_app; AlgebraicGeometry.Scheme.LocalRepresentability.glueData; AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage; AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso; AlgebraicGeometry.Scheme.GlueData.isoCarrier; AlgebraicGeometry.Scheme.OpenCover.map_glueMorphismsOfLocallyDirected",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern topological opens, scheme gluing, or generic evaluation; none states the graph inverse and overlap formulas for this explicit tuple module"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]raph.*[Ee]val|[Ee]val.*[Gg]raph|compatibleTuple|[Cc]ocycle",
+   "results": "{\"t\": \"2026-10-23T09:28:37Z\", \"tool\": \"grep\", \"query\": \"[Gg]raph.*[Ee]val|[Ee]val.*[Gg]raph|compatibleTuple|[Cc]ocycle\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned statements concern topological-open sheaf gluing, generic module or sheaf functors, group-valued cocycles or manifold stalk evaluation; none supplies the graph inverses and arbitrary-overlap formula for this algebraic-space tuple construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The restriction of a sheaf of compatible tuples to a chart is isomorphic to its local sheaf by evaluation on the graph and cocycle transition maps",
+   "results": "{\"t\": \"2026-10-23T09:28:38Z\", \"tool\": \"leansearch\", \"query\": \"The restriction of a sheaf of compatible tuples to a chart is isomorphic to its local sheaf by evaluation on the graph and cocycle transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.SheafedSpace.restrictTopIso\", \"ModuleCat.Tilde.res_apply\", \"CategoryTheory.sheafSectionsNatIsoEvaluation\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_assoc\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.SheafedSpace.restrictTopIso_hom\"], \"digest\": \"095f6134d48c9b97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned statements concern topological-open sheaf gluing, generic module or sheaf functors, group-valued cocycles or manifold stalk evaluation; none supplies the graph inverses and arbitrary-overlap formula for this algebraic-space tuple construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Iso",
+   "results": "{\"t\": \"2026-10-23T09:28:38Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.toSheafCompSheafToPresheafIso\", \"SheafOfModules.forgetToSheafModuleCatOfIso\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"SheafOfModules.freeSumIso\", \"SheafOfModules.mapFreeIso\", \"SheafOfModules.mapFreeIso_hom\", \"SheafOfModules.ιFree_mapFreeIso_hom\"], \"digest\": \"84368080bb857aa8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned statements concern topological-open sheaf gluing, generic module or sheaf functors, group-valued cocycles or manifold stalk evaluation; none supplies the graph inverses and arbitrary-overlap formula for this algebraic-space tuple construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Graph evaluation identifies a compatible tuple module sheaf restricted to an etale chart with the local module sheaf and the inverse uses cocycle transition maps",
+   "results": "{\"t\": \"2026-10-23T09:28:43Z\", \"tool\": \"leanfinder\", \"query\": \"Graph evaluation identifies a compatible tuple module sheaf restricted to an etale chart with the local module sheaf and the inverse uses cocycle transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"smoothSheaf.ι_evalHom\", \"smoothSheaf.ι_evalHom_apply\", \"smoothSheafCommRing.ι_evalHom\", \"smoothSheafCommRing.ι_evalHom_apply\", \"smoothSheafCommRing.evalHom\", \"smoothSheaf.ι_evalHom_assoc\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval\", \"smoothSheafCommRing.forgetStalk_inv_comp_eval_apply\"], \"digest\": \"f874db4feb2ffad7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned statements concern topological-open sheaf gluing, generic module or sheaf functors, group-valued cocycles or manifold stalk evaluation; none supplies the graph inverses and arbitrary-overlap formula for this algebraic-space tuple construction."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]escent|[Gg]lue|[Cc]ocycle|[Gg]raph",
+   "results": "{\"t\": \"2026-10-23T09:29:14Z\", \"tool\": \"grep\", \"query\": \"[Dd]escent|[Gg]lue|[Cc]ocycle|[Gg]raph\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/IsSheafFor.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\", \"Mathlib/CategoryTheory/Sites/Descent/DescentData.lean\"], \"digest\": \"f9da3a11fe3c75db\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned statements concern topological-open sheaf gluing, generic module or sheaf functors, group-valued cocycles or manifold stalk evaluation; none supplies the graph inverses and arbitrary-overlap formula for this algebraic-space tuple construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cocycle of sheaf isomorphisms gives an inverse between local sections and compatible families by restricting to the diagonal of a fibre product",
+   "results": "{\"t\": \"2026-10-23T09:29:25Z\", \"tool\": \"leanfinder\", \"query\": \"A cocycle of sheaf isomorphisms gives an inverse between local sections and compatible families by restricting to the diagonal of a fibre product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafOfGroups.OneCocycle.ev_symm\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst\", \"CategoryTheory.evalEquiv_symm_apply\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd\", \"TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst\", \"CategoryTheory.PresheafOfGroups.OneCochain.inv_ev\"], \"digest\": \"4410b5732ce104cd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned statements concern topological-open sheaf gluing, generic module or sheaf functors, group-valued cocycles or manifold stalk evaluation; none supplies the graph inverses and arbitrary-overlap formula for this algebraic-space tuple construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-algebraic-space-invertible-descent",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Inherited polarized-scheme descent input to lem-trf-local-term-locality, descent of the polarization to the quotient: Tag 04TR (lemma-glue-sheaves), omitted construction of the local isomorphisms and verification of their transition compatibility, using graph evaluation on etale test schemes.",
+   "via": [
+    "lem-trf-algebraic-space-invertible-descent",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-space-etale-tuple-graph-isomorphisms",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Supplied explicit graph pullbacks for well-definedness, naturality, both inverse identities and transition compatibility, including equal indices with different lifts. Reused the tuple module sheaf and chartwise etale permanence; no new node or Mathlib leaf. All proof steps are below 2000 characters.",
+  "blueprint": "Historical polarized-descent input below lem-trf-local-term-locality, via the existing ancestry through lem-trf-algebraic-space-invertible-descent: realizes the omitted local identifications and overlap diagrams in Tag 04TR. The latest ancestor blueprint was read; its contracting-correspondence route is unchanged. No blueprint node states this explicit module formula.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-70494187e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-70494187e (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item's statement is byte-identical to live. Live and side-live still have it unsplit, so this is not superseded, and there is no re-split note. The delivery is one commit containing the report and the item, with no new nodes. proof_deps equals the union of the steps' uses, there is no cycle, and SGA is not cited. Source: sites.tex Tag 04TR lemma-glue-sheaves, lines 5847-5888, which leaves out the construction of φ_i and the overlap diagrams; the six steps supply exactly that. The index convention a_ij: L_j→L_i, e_a = a_ab e_b agrees with Stacks' φ_ij∘φ_i = φ_j. I checked each step against the cited statements. Step 1: representability of q_i and the base-change, composition and cancellation clauses of lem-trf-space-chartwise-etale-permanence make d_a, h_i and h_ab arrows of the site, and (V_a)_et ≅ F_et/V_a with O = Γ. Step 2: the cocycle pulled back along W_ij→V_i×V_j×V_a, plus naturality, puts j(y) in M(W). Step 3: linearity via semilinearity and pr_W d_a = 1, and naturality via f_a d'_a = d_a f. Step 4: W_a→R_aa composed with d_a is Δ_a t, so only diagonal normalization is used. Step 5: h_i = (w, v, t(w)) has projections 1 and d_a pr_W, giving je = 1. Step 6: h_ab has projections d_a and d_b, giving e_a = a_ab e_b, including a = b with different lifts. Edge cases: I empty, W empty, a single chart, and a two-point chart with a_aa = c_r/c_s (not the identity off the diagonal) are all consistent. The cited statements say what the steps use: the tuple-sheaf formulas, the permanence clauses, the algebraic-space definitions and the module-morphism definition. Duplicates checked: lem-pe-site-sheaf-gluing and lem-pe-set-sheaf-cover-descent require a covering of an object and sheaves of sets; lem-weil-pbc-site-module-sheaf-gluing-aux requires a covering; none of these is a duplicate. The parent lem-trf-algebraic-space-invertible-descent uses exactly the stated clauses. tool_uses: none."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleTupleGraphIsomorphisms",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_tuple_graph_isomorphisms",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.tupleTransitionValue",
+   "AlgebraicGeometry.AlgebraicSpace.tupleGraphArrow",
+   "AlgebraicGeometry.AlgebraicSpace.tupleEqualizerCoordinate",
+   "AlgebraicGeometry.AlgebraicSpace.tupleGraphValue",
+   "AlgebraicGeometry.AlgebraicSpace.etale_tuple_graph_isomorphisms"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTupleGraphIsomorphisms.lean",
+  "statement": "theorem etale_tuple_graph_isomorphisms {S : Scheme.{u}} (F : AlgebraicSpace S) {I : Type v} (V : I → F.EtaleSite) (L : ∀ i : I, ringedSiteModules.{max (u + 1) v} (F.structureSheaf.over (V i))) (a : ∀ i j : I, (F.etalePullbackMap (prod.snd : V i ⨯ V j ⟶ V j)).obj (L j) ≅ (F.etalePullbackMap (prod.fst : V i ⨯ V j ⟶ V i)).obj (L i)) (hdiag : ∀ (i : I) (W : F.EtaleSite) (t : W ⟶ V i) (y : (L i).val.obj (op (Over.mk t))), tupleTransitionValue F (L i) (L i) (a i i).hom (Over.mk t) t y = y) (hcocycle : ∀ (i j k : I) (W : F.EtaleSite) (t : W ⟶ V i) (s : W ⟶ V j) (r : W ⟶ V k) (y : (L k).val.obj (op (Over.mk r))), tupleTransitionValue F (L i) (L k) (a i k).hom (Over.mk t) r y = tupleTransitionValue F (L i) (L j) (a i j).hom (Over.mk t) s (tupleTransitionValue F (L j) (L k) (a j k).hom (Over.mk s) r y)) (f g : tupleProduct F V L ⟶ tupleOverlapProduct F V L) (hf : ∀ (W : F.EtaleSite) (s : (tupleProduct F V L).val.obj (op W)) (i j : I), tupleOverlapCoordinates F V L W (f.val.app (op W) s) (i, j) = tupleLeftSection F V L W (tupleProductCoordinates F V L W s) i j) (hg : ∀ (W : F.EtaleSite) (s : (tupleProduct F V L).val.obj (op W)) (i j : I), tupleOverlapCoordinates F V L W (g.val.app (op W) s) (i, j) = tupleRightSection F V L (fun i j : I ↦ (a i j).hom) W (tupleProductCoordinates F V L W s) i j) : ∃ e : ∀ i : I, (F.etalePullback (V i)).obj (equalizer f g) ≅ L i, (∀ (i : I) (W : F.EtaleSite) (t : W ⟶ V i) (s : (equalizer f g).val.obj (op W)), (e i).hom.val.app (op (Over.mk t)) s = tupleGraphValue F V L f g i t s) ∧ (∀ (i k : I) (W : F.EtaleSite) (t : W ⟶ V i) (y : (L i).val.obj (op (Over.mk t))), tupleEqualizerCoordinate F V L f g W ((e i).inv.val.app (op (Over.mk t)) y) k = tupleTransitionValue F (L k) (L i) (a k i).hom ((Over.star (V k)).obj W) (prod.snd ≫ t) ((L i).val.map (Over.homMk (prod.snd : V k ⨯ W ⟶ W) rfl : Over.mk (prod.snd ≫ t) ⟶ Over.mk t).op y)) ∧ (∀ (i j : I) (W : F.EtaleSite) (t : W ⟶ V i) (s : W ⟶ V j) (z : (equalizer f g).val.obj (op W)), (e i).hom.val.app (op (Over.mk t)) z = tupleTransitionValue F (L i) (L j) (a i j).hom (Over.mk t) s ((e j).hom.val.app (op (Over.mk s)) z))",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the exact tuple-product equalizer of the recorded dependency, with its two arrows fixed by their section formulas. Specifies graph evaluation and every coordinate of the inverse as module-sheaf isomorphisms, hence natural linear mutually inverse maps. Diagonal normalization and cocycle are evaluated on all test objects with the canonical localized-site projection identifications; the overlap conclusion allows equal indices and distinct lifts. No covering or local-freeness assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e6e5c913",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Only the lean field changed vs side-live; the item is not landed elsewhere and there are no new nodes; lean.statement is verbatim in the file; report has both required sections. Checked against EtaleModuleTupleSheaf and AlgebraicSpace (etalePullback=overFunctor, etalePullbackMap=overMap). tupleTransitionValue evaluates a at prod.lift t.hom s between the canonical identity comparison arrows. hdiag = diagonal normalization at identical lifts only. hcocycle = a_ik=a_ij a_jk on every test object with three lifts. f,g pinned by hf/hg to the dependency's arrows, unique by coordinate bijectivity. Module-sheaf isos give linearity, naturality and both inverse identities. hom = d_a^* s_a via graph (t,1_W) in chart-first product order; every inverse coordinate is a_ki(y|_{W_k}) with lifts (pr_{V_k}, t∘pr_W); overlap identity e_i=a_ij e_j has no i≠j or t≠s restriction. Universes match the dependency; no covering, nonempty or local-freeness assumption. Edge cases (empty I, empty W, single chart with non-identity a_aa off the diagonal) consistent. Helpers are real; only the main theorem is sorry; docstrings and six-step proof present; no duplicates in side-live. Not recompiled (no change)."
+ }
+}

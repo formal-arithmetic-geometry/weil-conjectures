@@ -1,0 +1,471 @@
+{
+ "id": "lem-sfb-groupoid-cm-locus-descent",
+ "kind": "statement",
+ "title": "Descent of the Cohen--Macaulay locus of a groupoid saturation",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] in the universes of [def-weil-size-convention], and let $(U,R,s,t,e,i,c)$ be a groupoid scheme over $S$ [def-a1-groupoid-scheme], all structure morphisms being over $S$. A morphism $f:X\\to Y$ is Cohen--Macaulay at $x\\in X$ if it is flat at $x$ (the local ring $\\mathcal O_{X,x}$ is flat over $\\mathcal O_{Y,f(x)}$) [def-weil-flat-morphism] and the local ring at $x$ of the scheme-theoretic fibre $X_{f(x)}$ [def-pc-scheme-fibre] is Noetherian [def-weil-pbc-noetherian-ring] with depth [def-weil-pbc-depth] equal to Krull dimension [def-weil-pbc-krull-dimension-ring]. It is Cohen--Macaulay if this holds at every point. Assume $s,t$ are flat and locally of finite presentation [def-sbc-locally-finite-presentation]. Let $g:B\\to U$ be locally of finite presentation and put $H=B\\times_{g,U,t}R$, $p=\\operatorname{pr}_B:H\\to B$, and $h=s\\circ\\operatorname{pr}_R:H\\to U$ [def-pc-fibre-product]. There exists an open subscheme $W\\subseteq B$ [def-weil-open-immersion] such that $p^{-1}(W)$ is exactly the set of points at which $h$ is Cohen--Macaulay, with its open subscheme structure. In particular $h|_{p^{-1}(W)}$ is Cohen--Macaulay and locally of finite presentation, and whenever $h$ is Cohen--Macaulay at $(b,e(g(b)))$, one has $b\\in W$.",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LH (lemma-local-source) with Tag 047W (remark-local-source-apply), item (5): Q = locally of finite presentation, R = flat and locally of finite presentation, P = Cohen--Macaulay. Pointwise openness uses More on Morphisms, openness of flatness and Tag 045U (lemma-flat-finite-presentation-CM-open)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-a1-groupoid-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-sfb-cohen-macaulay-morphism-at-point"
+ ],
+ "proof": [
+  {
+   "text": "By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], $H\\to R$ is locally of finite presentation, as the base change of $g$ along $t$. Composition with $s$ is locally of finite presentation by [lem-sbc-locally-finite-presentation-composition], so $h$ is locally of finite presentation. By [lem-sbc-restricted-fibre-locally-noetherian], with the whole target as its open, every fibre of $h$ is locally Noetherian.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-sbc-restricted-fibre-locally-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), construction of h; Tag 047W (remark-local-source-apply), (5)."
+   }
+  },
+  {
+   "text": "Let $F\\subset H$ be the points where $h$ is flat. Apply [lem-sfb-relative-flat-affine-charts] with its $S=Y=U$, $q=\\mathrm{id}_U$, $p=f=h$. The identity is locally of finite type (on an affine it is generated as an algebra by the empty set), and $p$ is locally of finite presentation by step 1. The cited statement gives around every point an open affine chart on which $F$ is an open set $E$. Thus $F$ is open in $H$. The map $h|_F$ is flat by definition [def-weil-flat-morphism]. The inclusion $F\\hookrightarrow H$ is etale by [lem-weil-pbc-open-immersion-etale]; clause (i) of [lem-sfb-scheme-etale-source-target-properties] gives local finite presentation of $h|_F$.",
+   "uses": [
+    "lem-sfb-relative-flat-affine-charts",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0399 (theorem-openness-flatness), structure-sheaf case; source restriction to the flat locus."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-fibre-cohen-macaulay-locus-open] to the flat locally finitely presented map $h|_F$. It gives an open $D$ in $F$, hence in $H$, where the fibre local ring has depth equal to dimension. An open restriction leaves both source stalks and fibre stalks at its points unchanged [def-weil-open-immersion]. The fibres are locally Noetherian by step 1. Consequently $D$ is exactly the pointwise Cohen--Macaulay locus of $h$ as defined in the statement: membership requires flatness, hence membership in $F$, and then the displayed depth equality. In particular $h|_D$ is Cohen--Macaulay. The same source-restriction argument as step 2 gives local finite presentation of $h|_D$.",
+   "uses": [
+    "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-sfb-scheme-etale-source-target-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 045U (lemma-flat-finite-presentation-CM-open), (1),(2), applied on the open flat locus; Tag 045R (definition-CM)."
+   }
+  },
+  {
+   "text": "We check the base-change rule needed below. For a locally finitely presented $f:X\\to Y$ and a flat map $v:Y\\prime\\to Y$, write $f\\prime:X\\prime\\to Y\\prime$ for its base change and $a:X\\prime\\to X$ for the projection. At each $x\\prime$, [lem-sfb-pointwise-flatness-base-change] gives flatness of $f\\prime$ at $x\\prime$ if and only if $f$ is flat at $a(x\\prime)$. By [lem-weil-pbc-fibre-of-base-change], the new fibre is the old fibre extended from $\\kappa(y)$ to $\\kappa(y\\prime)$. Each old fibre is locally finite type over $\\kappa(y)$: tensoring an affine finite presentation $A[z_1,\\ldots,z_n]/(q_1,\\ldots,q_m)$ with $\\kappa(y)$ gives the same finite presentation with reduced coefficients [def-sbc-locally-finite-presentation]. The FIRST assertion of [lem-pur-cohen-macaulay-field-extension] therefore identifies the two fibre Cohen--Macaulay conditions at these points. It imposes no Noetherian condition on $Y$ or $Y\\prime$. Combining the two equivalences gives: $f\\prime$ is Cohen--Macaulay at $x\\prime$ if and only if $f$ is Cohen--Macaulay at $a(x\\prime)$.",
+   "uses": [
+    "lem-sfb-pointwise-flatness-base-change",
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-sbc-locally-finite-presentation",
+    "lem-pur-cohen-macaulay-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 045T (lemma-base-change-CM), (1),(3); Tag 047C (lemma-flat-locus-base-change); algebra.tex Tag 00RJ (lemma-extend-field-CM-locus)."
+   }
+  },
+  {
+   "text": "Put $C=H\\times_B H$, with projections $a,b:C\\to H$. Its components are $(\\beta,r_1,r_2)$ with $g\\beta=tr_1=tr_2$. Define $d=c(i(r_1),r_2):C\\to R$ using [def-a1-groupoid-scheme]. Then $td=ha$ and $sd=hb$. The morphism $(a,d):C\\to H\\times_{h,U,t}R$ has inverse $((\\beta,r),v)\\mapsto(\\beta,r,c(r,v))$. The morphism $(b,d):C\\to H\\times_{h,U,s}R$ has inverse $((\\beta,r),v)\\mapsto(\\beta,c(r,i(v)),r)$. All maps exist by the fibre-product universal property [def-pc-fibre-product]: the indicated composability conditions hold, and the new arrows have target $g\\beta$. The inverse identities follow from the groupoid laws; for instance $c(i(r),c(r,v))=v$ and $c(r,c(i(r),r_2))=r_2$, and the second pair uses $c(c(r_1,i(r_2)),r_2)=r_1$. Thus the square with top $d$, bottom $h$, left $a$, right $t$, and the square with top $d$, bottom $h$, left $b$, right $s$, are cartesian. This is an explicit verification from the two cited definitions, not an additional groupoid theorem.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), second cartesian diagram; groupoids.tex Tag 03C6 (lemma-diagram-pull), explicit division inverses."
+   }
+  },
+  {
+   "text": "Apply the equivalence proved in step 4 to the two cartesian squares of step 5, with original map $h$ and flat base maps $t$ and $s$. These are flat by hypothesis, and $h$ is locally of finite presentation by step 1. At each $z\\in C$, the condition that $d$ is Cohen--Macaulay at $z$ is therefore equivalent both to $a(z)\\in D$ and to $b(z)\\in D$. Hence $a^{-1}D=b^{-1}D$. The identity laws give a section $\\sigma:B\\to H$, $\\beta\\mapsto(\\beta,e(g\\beta))$, of $p$. Set $W=\\sigma^{-1}D$, open by continuity. By [def-pc-fibre-product], the pair $(\\mathrm{id}_H,\\sigma p)$ defines $j:H\\to C$, since both components have the same composite to $B$. Pulling the equality back along $j$ gives $D=(\\sigma p)^{-1}D=p^{-1}W$. The open-immersion definition [def-weil-open-immersion] upgrades this equality of open subsets to equality of their open subschemes.",
+   "uses": [
+    "def-a1-groupoid-scheme",
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), equality of inverse-image loci and final identity-section argument."
+   }
+  },
+  {
+   "text": "By steps 3 and 6, $h|_{p^{-1}W}=h|_D$ is Cohen--Macaulay and locally of finite presentation. If $h$ is Cohen--Macaulay at $(b,e(g(b)))=\\sigma(b)$, then $\\sigma(b)\\in D$, whence $b\\in\\sigma^{-1}D=W$. This proves every clause, including the empty-source case, where $D$ and $W$ are empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04LH (lemma-local-source), final conclusion specialized by Tag 047W (5)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-sbc-restricted-fibre-locally-noetherian",
+  "lem-sfb-relative-flat-affine-charts",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-sfb-scheme-etale-source-target-properties",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "def-weil-open-immersion",
+  "lem-sfb-pointwise-flatness-base-change",
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-sbc-locally-finite-presentation",
+  "lem-pur-cohen-macaulay-field-extension",
+  "def-a1-groupoid-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 04LH (lemma-local-source), proof, specialized by Tag 047W (remark-local-source-apply) (5); openness from Tags 0399 and 045U, pointwise flat base change from 047C and 00RJ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|groupoid",
+   "results": {
+    "t": "2026-10-23T14:43:33Z",
+    "tool": "grep",
+    "query": "Cohen.?Macaulay|groupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci, flatness and generic descent properties do not assert descent of this Cohen--Macaulay locus along the groupoid projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T14:43:34Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci, flatness and generic descent properties do not assert descent of this Cohen--Macaulay locus along the groupoid projection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Cohen Macaulay locus for a scheme groupoid saturation descends along its projection to the slice",
+   "results": {
+    "t": "2026-10-23T14:43:34Z",
+    "tool": "leansearch",
+    "query": "The Cohen Macaulay locus for a scheme groupoid saturation descends along its projection to the slice",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsLocalAtTarget.descendsAlong",
+     "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong",
+     "AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact"
+    ],
+    "digest": "d87c128dd5355160"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci, flatness and generic descent properties do not assert descent of this Cohen--Macaulay locus along the groupoid projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat locally finitely presented groupoid the Cohen Macaulay locus of the saturation map B times U R to U is pulled back from an open subset of B",
+   "results": {
+    "t": "2026-10-23T14:43:40Z",
+    "tool": "leanfinder",
+    "query": "For a flat locally finitely presented groupoid the Cohen Macaulay locus of the saturation map B times U R to U is pulled back from an open subset of B",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.isOpen_smoothLocus",
+     "Algebra.basicOpen_subset_smoothLocus_iff",
+     "Algebra.smoothLocus_comap_of_isLocalization",
+     "RingHom.Flat.holdsForLocalizationAway",
+     "Algebra.basicOpen_subset_smoothLocus_iff_smooth",
+     "Algebra.HasGoingDown.of_flat",
+     "Module.freeLocus_eq_univ",
+     "RingHom.Flat.ofLocalizationPrime"
+    ],
+    "digest": "e41d8323013577c3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci, flatness and generic descent properties do not assert descent of this Cohen--Macaulay locus along the groupoid projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+   "results": {
+    "t": "2026-10-23T14:46:44Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"Groupoid\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci, flatness and generic descent properties do not assert descent of this Cohen--Macaulay locus along the groupoid projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a scheme groupoid has flat locally finitely presented projections the Cohen Macaulay locus of B times U R to U is inverse image of an open in B",
+   "results": {
+    "t": "2026-10-23T16:10:36Z",
+    "tool": "leanfinder",
+    "query": "If a scheme groupoid has flat locally finitely presented projections the Cohen Macaulay locus of B times U R to U is inverse image of an open in B",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "Algebra.isOpen_smoothLocus",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "Algebra.isOpen_etaleLocus",
+     "AlgebraicGeometry.Flat",
+     "Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul",
+     "Algebra.isOpen_unramifiedLocus",
+     "AlgebraicGeometry.Flat.instOfIsOpenImmersion"
+    ],
+    "digest": "0ba1ba39869df880"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: smooth/etale loci, flatness and generic descent properties do not assert descent of this Cohen--Macaulay locus along the groupoid projection."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.?Macaulay|cmLocus|cohenMacaulay|Groupoid",
+   "results": {
+    "t": "2026-10-23T19:01:49Z",
+    "tool": "grep",
+    "query": "Cohen.?Macaulay|cmLocus|cohenMacaulay|Groupoid",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat/smooth/etale properties and generic descent, and none states the Cohen--Macaulay saturation locus assertion. No scheme Cohen--Macaulay or groupoid declaration was found by the grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohen Macaulay locus is an open subset and commutes with flat base change for schemes",
+   "results": {
+    "t": "2026-10-23T19:01:49Z",
+    "tool": "leansearch",
+    "query": "Cohen Macaulay locus is an open subset and commutes with flat base change for schemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Flat.isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+     "Module.Flat.of_isLocalizedModule",
+     "AlgebraicGeometry.Flat.stalkMap"
+    ],
+    "digest": "db89f44675fd8f48"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat/smooth/etale properties and generic descent, and none states the Cohen--Macaulay saturation locus assertion. No scheme Cohen--Macaulay or groupoid declaration was found by the grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+   "results": {
+    "t": "2026-10-23T19:01:49Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicGeometry\", \"CohenMacaulay\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat/smooth/etale properties and generic descent, and none states the Cohen--Macaulay saturation locus assertion. No scheme Cohen--Macaulay or groupoid declaration was found by the grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cohen Macaulay locus of a locally finitely presented scheme morphism descends along a flat locally finitely presented groupoid projection",
+   "results": {
+    "t": "2026-10-23T19:01:50Z",
+    "tool": "leanfinder",
+    "query": "The Cohen Macaulay locus of a locally finitely presented scheme morphism descends along a flat locally finitely presented groupoid projection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.Flat.instIsStableUnderCompositionScheme",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono"
+    ],
+    "digest": "cbb9658b29e92d44"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat/smooth/etale properties and generic descent, and none states the Cohen--Macaulay saturation locus assertion. No scheme Cohen--Macaulay or groupoid declaration was found by the grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For schemes with a flat finitely presented groupoid relation the open locus where the saturation map has Cohen Macaulay fibres is the inverse image of an open subset along the projection to B",
+   "results": {
+    "t": "2026-10-23T19:02:57Z",
+    "tool": "leanfinder",
+    "query": "For schemes with a flat finitely presented groupoid relation the open locus where the saturation map has Cohen Macaulay fibres is the inverse image of an open subset along the projection to B",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "Algebra.isOpen_etaleLocus",
+     "Algebra.isOpen_smoothLocus",
+     "AlgebraicGeometry.Flat",
+     "Algebra.isOpen_unramifiedLocus",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension"
+    ],
+    "digest": "1f3e688ddd5ed5e9"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern flat/smooth/etale properties and generic descent, and none states the Cohen--Macaulay saturation locus assertion. No scheme Cohen--Macaulay or groupoid declaration was found by the grep."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-cm-groupoid-maximal-slice",
+  "date": "2026-10-24",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489). Supporting input in Tag 0489: Tag 04N0 (lemma-max-slice-quasi-finite), clauses (1)--(4), with Situation 04MY (situation-slice), specialized to an equivalence relation, whose stabilizer is the identity V. Only the local slice and its saturation map are asserted. Supporting input in the proof of Tag 04N0: maximal slice, before imposing any quasi-finiteness conclusion (04MZ). In Tag 04MZ after the one-step slice, use Tag 047W(5) to replace the slice by an open containing its distinguished point on which its entire saturation morphism is Cohen--Macaulay.",
+   "via": [
+    "lem-sfb-cm-groupoid-maximal-slice",
+    "lem-sfb-cm-relation-point-slice",
+    "lem-sfb-fppf-space-relation-slicing",
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-groupoid-cm-locus-descent",
+  "worker": "stage1",
+  "summary": "NH follows the division-square and identity-section proof of Stacks 04LH/047W(5). Establishes the pointwise CM locus using the open flat locus before applying 045U. Uses existing flatness, affine-chart openness, fibre, and field-extension nodes; no new nodes. Checks every cited statement and does not assume h flat globally or a Noetherian base.",
+  "blueprint": "The inherited provenance serves det-thm-sf-ctf-stability-direct-images proof (3), through the Stacks 04MZ maximal-slice use of 047W(5). The current latest direct-images proof (3) states compactification and preservation, not the expanded historical alteration prerequisites; this supporting local groupoid argument does not change that unit route. This item has no imported blueprint id and ancestor returns None; preserve the inherited from.node and via.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-restricted-fibre-locally-noetherian",
+    "why": "Generic local Noetherianity of fibres; no groupoid-specific node in this unit supplies this statement. Used as a black box in the 04LH/047W route."
+   },
+   {
+    "node": "lem-sbc-fibre-cohen-macaulay-locus-open",
+    "why": "Generic openness of the CM locus on the flat restriction; no groupoid-specific node in this unit supplies this statement. Used as a black box in the 04LH/047W route."
+   },
+   {
+    "node": "lem-pur-cohen-macaulay-field-extension",
+    "why": "Generic pointwise CM invariance for locally finite-type fibres under residue-field extension; no groupoid-specific node in this unit supplies this statement. Used as a black box in the 04LH/047W route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-restricted-fibre-locally-noetherian",
+  "lem-sbc-fibre-cohen-macaulay-locus-open",
+  "lem-pur-cohen-macaulay-field-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NH-0ec1933b8",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-0ec1933b8 (reviewer sub-agent of L); spot-checked: I read Stacks 04LH and 047W(5), plus 045U, 047C, 045T and 00RJ. The statement and stmt_deps are unchanged from the live node, and there are no new nodes. Step 1: lfp comes from base change and composition, and the fibres of h are locally Noetherian. Step 2: relative-flat-affine-charts with q=id gives an open flat locus F, and h|_F is lfp by etale-source clause (i). Step 3: 045U applied on F gives D, which equals the item's pointwise CM locus because fibre stalks are unchanged and Noetherian by step 1. Step 4: flat base change preserves and reflects pointwise CM, by 047C (1)/(2) together with fibre-of-base-change and only the first paragraph of 00RJ, with no Noetherian base. Step 5: I checked both division squares by hand from the groupoid axioms, including composability, the inverses ((b,r),v)->(b,r,c(r,v)) and ((b,r),v)->(b,c(r,iv),r), and both composites in each case. Steps 6-7: a^-1D=b^-1D, sigma=(id,eg), j=(id,sigma p) gives D=p^-1(sigma^-1 D). Edge cases checked: B empty, the trivial groupoid, g=id, and non-flat CM-fibre points. No duplicates: relation-open-locus-descent needs an equivalence relation, groupoid-quasifinite-locus-descent is a different property, and flat-relation-cm-open is a different assertion. There is no cycle and proof_deps equals the union of the step uses. Batch-5 flag: the cited scheme-etale-source-target-properties (same unit) reaches lem-trf-smooth-composition (a Mathlib leaf, 01VA) and other generic trf local-on-source and fppf facts. None of them is the trace formula, Poincare duality, or a step of their proofs, so the citation is accepted. Optional: a 2-line argument from def-sbc-lfp would shrink the closure from 909 to 396 nodes. tool_uses accepted (fibre Noetherian, 045U, 00RJ first paragraph). The null blueprint.from.node is inherited, a base fault. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidCohenMacaulayLocusDescent",
+  "declaration": "AlgebraicGeometry.groupoid_cohenMacaulayLocus_descends",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidCohenMacaulayLocusDescent.lean",
+  "statement": "theorem groupoid_cohenMacaulayLocus_descends {S U R B : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) (uS : U ⟶ S) (rS : R ⟶ S) (_hs : s ≫ uS = rS) (_ht : t ≫ uS = rS) (_he : e ≫ rS = uS) (_hi : i ≫ rS = rS) (_hc : c ≫ rS = pullback.fst s t ≫ rS) (hG : IsGroupoidScheme s t e i c) (g : B ⟶ U) [Flat s] [Flat t] [LocallyOfFinitePresentation s] [LocallyOfFinitePresentation t] [LocallyOfFinitePresentation g] : ∃ W : B.Opens, (∀ z : ↥(pullback g t : Scheme.{u}), z ∈ (pullback.fst g t ⁻¹ᵁ W) ↔ Scheme.Hom.IsCohenMacaulayAtPoint (pullback.snd g t ≫ s) z) ∧ Scheme.Hom.IsCohenMacaulay ((pullback.fst g t ⁻¹ᵁ W).ι ≫ (pullback.snd g t ≫ s)) ∧ LocallyOfFinitePresentation ((pullback.fst g t ⁻¹ᵁ W).ι ≫ (pullback.snd g t ≫ s)) ∧ ∀ b : B, Scheme.Hom.IsCohenMacaulayAtPoint (pullback.snd g t ≫ s) ((pullback.lift (𝟙 B) (g ≫ e) (by simp only [Category.id_comp, Category.assoc, hG.identity_target, Category.comp_id])) b) → b ∈ W",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a26c074ca",
+  "group": "NF",
+  "result": "pass",
+  "note": "Item record changes only in lean and in stmt_deps (+def-sfb-cohen-macaulay-morphism-at-point, allowed by §1(A)); statement/proof/source match live. Lean matches node and Stacks 04LH+047W(5) clause by clause: groupoid via IsGroupoidScheme plus over-S equations (implied by groupoid laws, same encoding as landed groupoid_quasiFiniteLocus_descends), [Flat/LFP s,t],[LFP g] with no extra hypotheses; H=pullback g t, p=fst, h=snd≫s; ∃ W:B.Opens with fst⁻¹ᵁW ↔ pointwise CM, restriction CM and LFP, identity-section point via pullback.lift (𝟙 B) (g≫e) using identity_target. New def IsCohenMacaulayAtPoint (RingHom.Flat stalkMap ∧ Noetherian fibre stalk at asFiber ∧ depth=ringKrullDim) matches the node and the inline convention of landed CM modules; no CM predicate in Mathlib, project or DAG (H4 ok); §5 fields complete. statement fields verbatim; single sorry; docstrings with source+blueprint+7 steps; proof-only imports exist. Edge cases (B empty, trivial groupoid, g=id, non-flat CM-fibre points) ok. Notes: inherited null blueprint.from.node; cosmetic search verdict text. No compile (no file changed)."
+ }
+}

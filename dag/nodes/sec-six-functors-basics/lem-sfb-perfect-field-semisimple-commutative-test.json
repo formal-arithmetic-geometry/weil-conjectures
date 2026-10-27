@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-perfect-field-semisimple-commutative-test",
+ "kind": "statement",
+ "title": "Semisimplicity tested by commutative normal subgroups over a perfect field",
+ "statement": "Let $k$ be a perfect field [def-weil-field], meaning that every irreducible polynomial over $k$ is separable (has no repeated root in an algebraic closure [def-weil-algebraic-closure]). Let $G$ be a smooth geometrically connected affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Geometrically connected means connected after extension to an algebraic closure [def-weil-connected-scheme]. Closed normal subgroup inclusions have the meaning of [def-sc-group-scheme-subgroup]. Then the following are equivalent:\n(1) $G$ is semisimple: over an algebraic closure $\\bar k$ it has no nontrivial smooth connected solvable normal closed subgroup scheme. Here solvable means that the successive scheme-theoretic derived subgroups eventually become trivial, and a derived subgroup is the smallest closed subgroup through which the commutator morphism $(x,y)\\mapsto xyx^{-1}y^{-1}$ factors.\n(2) For every smooth connected commutative affine $k$-group scheme $N$ of finite type and every closed normal subgroup inclusion $N\\hookrightarrow G$, the identity morphism $\\operatorname{Spec}k\\to N$ is an isomorphism.\nNo characteristic-zero, splitness or reductivity hypothesis is assumed; the trivial group is allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 19.3 and its proof, printed p.398, with geometric semisimplicity in 6.44 (p.135), radical base change in Proposition 19.1 (p.397), and Proposition 19.2(a) (p.398). The test explicitly ranges over affine finite-type subgroup schemes, as all closed subgroups of G are such. No Stacks tag states this algebraic-group criterion."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-algebraic-closure",
+  "def-sfb-semisimple-group-scheme",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "First compare the two descriptions of solvability. Given a finite series $H=H_0\\supseteq\\cdots\\supseteq H_s=1$ whose commutators in $H_i$ lie in $H_{i+1}$, minimality of the derived subgroup gives $D^i(H)\\subseteq H_i$ by induction: the commutators of $D^i(H)$ lie in $H_{i+1}$. Conversely, a terminating derived series is such a series because the derived quotients are commutative. Thus the finite-series solvability in [lem-sfb-solvable-normal-subgroup-products] is exactly that in this item. The derived subgroups here exist for smooth connected groups; [lem-sfb-solvable-normal-subgroup-products] makes them geometrically connected, and [lem-sfb-derived-commutator-word-arbitrary-field] supplies the next smooth geometrically connected derived subgroup at each stage.",
+   "uses": [
+    "def-sfb-solvable-group-structure",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-derived-commutator-word-arbitrary-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 6.26 and Proposition 6.30, pp.131--132; Corollary 6.19, p.129"
+   }
+  },
+  {
+   "text": "Assume (1), and take $N$ as in (2). By [lem-sfb-solvable-normal-subgroup-products], its extension $N_{\\bar k}$ is smooth and connected. Its closed inclusion, normality and commutativity persist after extension: evaluate the subgroup identities on every commutative $\\bar k$-algebra, regarded as a $k$-algebra [def-sc-group-scheme-subgroup]. The commutator is identity-valued, so its derived subgroup is trivial and it is solvable. Hence (1) forces $N_{\\bar k}=1$. For completeness this implies $N=1$ scheme-theoretically: for the augmentation $\\epsilon:k[N]\\to k$, write $k[N]=k\\oplus I$ as vector spaces, where $I=\\ker\\epsilon$. Tensoring gives $\\bar k[N_{\\bar k}]=\\bar k\\oplus(I\\otimes_k\\bar k)$, so $I\\otimes_k\\bar k=0$. A nonzero vector in $I$ extends to a basis and stays nonzero after field extension, so $I=0$. Thus the augmentation is an isomorphism and its corresponding identity section $\\operatorname{Spec}k\\to N$ is an isomorphism.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products",
+    "def-sc-group-scheme-subgroup",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.3, first paragraph of proof, p.398; Proposition 1.36 on connected group varieties"
+   }
+  },
+  {
+   "text": "Construct $R\\subseteq G$ by choosing a smooth connected solvable normal closed subgroup of largest dimension. Such a choice exists: the trivial group is a candidate and the candidate dimensions are nonnegative integers bounded by $\\dim G$. For any other candidate $N$, [lem-sfb-solvable-normal-subgroup-products] supplies a candidate $RN$ containing $R,N$. If $R\\subsetneq RN$, its strict-inclusion dimension clause contradicts maximality. Therefore $RN=R$, whence $N\\subseteq R$. This proves precisely the largest-subgroup hypothesis needed below, without assuming reductivity.",
+   "uses": [
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "6.44, p.135, via Proposition 6.42 and Lemma 6.41, p.134"
+   }
+  },
+  {
+   "text": "Because $k$ is perfect, the minimal polynomial over $k$ of every element of $\\bar k$ is separable; hence $\\bar k/k$ is separable algebraic. Apply [lem-sfb-solvable-radical-separable-base-change] to the $R$ just constructed and $K=\\bar k$. It says that $R_{\\bar k}$ is a smooth connected solvable normal subgroup containing every such subgroup of $G_{\\bar k}$. If $R=1$, this proves (1) directly. Consequently, to prove (2) implies (1), it remains to exclude $R\\ne1$.",
+   "uses": [
+    "lem-sfb-solvable-radical-separable-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.1, p.397; Proposition 19.2(a), p.398"
+   }
+  },
+  {
+   "text": "Assume (2) and $R\\ne1$. Put $R_0=R$ and $R_{i+1}=D(R_i)$. Inductively [lem-sfb-derived-commutator-word-arbitrary-field] gives smooth geometrically connected affine finite-type closed subgroups. At the base $R$ is geometrically connected by [lem-sfb-solvable-normal-subgroup-products]. Each $R_i$ is normal in $G$: this holds for $i=0$ by construction; if it holds for $i$, for every commutative $k$-algebra $A$ and $g\\in G(A)$, conjugation restricts to an $A$-group automorphism of $(R_i)_A$. By [lem-sfb-derived-subgroup-universal-characteristic] it preserves $(R_{i+1})_A$. Evaluating this restriction on $A$-points proves normality of $R_{i+1}$ for all $A$, exactly [def-sc-group-scheme-subgroup]. Since $R$ is solvable, choose the least $s$ with $R_s=1$; then $s\\ge1$ and $R_{s-1}\\ne1$.",
+   "uses": [
+    "lem-sfb-derived-commutator-word-arbitrary-field",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-sfb-derived-subgroup-universal-characteristic",
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.3, converse proof, p.398; Corollary 6.19(b),(e), pp.129--130; derived series before Proposition 6.30, p.132"
+   }
+  },
+  {
+   "text": "Take $N=R_{s-1}$ with its composite closed inclusion in $G$. Its commutator morphism factors through $D(N)=R_s=1$, so for every $A$ and $x,y\\in N(A)$ one has $xyx^{-1}y^{-1}=e$, equivalently $xy=yx$. Thus $N$ is commutative, and step 5 already gives smoothness, connectedness, affineness, finite type and normality. Condition (2) makes its identity section an isomorphism, contradicting $R_{s-1}\\ne1$. Therefore $R=1$ and step 4 proves (1). If $G=1$, the forward argument and the choice $R=1$ apply without selecting any nontrivial derived term.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 19.3, final sentences of proof, p.398"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-solvable-group-structure",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-sfb-derived-commutator-word-arbitrary-field",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-affine-spectrum",
+  "lem-sfb-solvable-radical-separable-base-change",
+  "lem-sfb-derived-subgroup-universal-characteristic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 19.3, p.398, with Proposition 19.1 (p.397), 6.44 (p.135), and Corollary 6.19 (pp.129--130); dimension-maximal construction and all-algebra normality made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over a perfect field is semisimple if every smooth connected commutative normal subgroup is trivial",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSimple R L], LieAlgebra.IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"LieAlgebra.IsSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L], LieAlgebra.HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/InvariantForm\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L] [Module.Finite K L]\\n  (Φ : LinearMap.BilinForm K L),\\n  Φ.Nondegenerate →\\n    LinearMap.BilinForm.lieInvariant L Φ →\\n      Φ.IsRefl → (∀ (I : LieIdeal K L), IsAtom I → ¬IsLieAbelian ↥I) → LieAlgebra.IsSemi\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $K$ admits a non-degenerate invariant bilinear form, then $\\\\mathfrak{g}$ is semisimple.\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.non_abelian_of_isAtom\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} {inst : CommRing R} {inst_1 : LieRing L} {inst_2 : LieAlgebra R L}\\n  [self : LieAlgebra.IsSemisimple R L] (I : LieIdeal R L), IsAtom I → ¬IsLieAbelian ↥I\", \"doc\": \"If $ I $ is a minimal non-zero Lie ideal (i.e., an atom) of a semisimple Lie algebra $ L $ over a commutative ring $ R $, then $ I $ is not abelian (i.e., its Lie bracket does not vanish identically).\"}\n  {\"name\": \"LieAlgebra.IsSemisimple.isSimple_of_isAtom\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSemisimple R L] (I : LieIdeal R L), IsAtom I → LieAlgebra.IsSimple R ↥I\", \"doc\": \"Let $ R $ be a commutative ring and $ L $ a semisimple Lie algebra over $ R $. If $ I $ is a Lie ideal of $ L $ that is an atom in the lattice of Lie ideals (i.e., $ I $ is non-zero and contains no no\"}\n  {\"name\": \"LieAlgebra.HasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract Lie algebras and semisimple ring modules, not smooth connected normal subgroup schemes or the geometric solvable radical of an algebraic group"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a perfect field an algebraic group with no nontrivial connected abelian normal subgroup has trivial geometric solvable radical",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieAlgebra.IsSemisimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every semisimple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_no_solvable_ideals\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"(h : ∀ I : LieIdeal R L, IsSolvable I → I = ⊥) : HasTrivialRadical R L\", \"doc\": \"If every solvable Lie ideal $ I $ of a Lie algebra $ L $ over a commutative ring $ R $ satisfies $ I = \\\\{0\\\\} $, then $ L $ has a trivial radical (i.e., its radical—the largest solvable ideal—is the ze\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff_no_abelian_ideals\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L ↔ ∀ I : LieIdeal R L, IsLieAbelian I → I = ⊥\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal) if and only if every abelian Lie ideal of $ L $ is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff_no_solvable_ideals\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L ↔ ∀ I : LieIdeal R L, IsSolvable I → I = ⊥\", \"doc\": \"A Lie algebra $ L $ over a commutative ring $ R $ has a trivial radical (i.e., its radical is the zero ideal) if and only if every solvable Lie ideal $ I $ of $ L $ satisfies $ I = \\\\{0\\\\} $.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_iff\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Defs\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  LieAlgebra.HasTrivialRadical R L ↔ LieAlgebra.radical R L = ⊥\", \"doc\": \"For any commutative ring $ R $ and Lie algebra $ L $ over $ R $, the Lie algebra $ L $ has a trivial radical if and only if its radical (the sum of all solvable ideals) equals the zero submodule $\\\\{0\\\\\"}\n  {\"name\": \"LieAlgebra.radicalIsSolvable\", \"module\": \"Mathlib.Algebra.Lie.Solvable\", \"type\": \"[IsNoetherian R L] : IsSolvable (radical R L)\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ is Noetherian (i.e., every submodule is finitely generated), then its radical—the sum of all solvable ideals in $ L $—is itself a solvable ideal.\"}\n  {\"name\": \"LieAlgebra.abelian_radical_iff_solvable_is_abelian\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsNoetherian R L] : IsLieAbelian (radical R L) ↔ ∀ I : LieIdeal R L, IsSolvable I → IsLieAbelian I\", \"doc\": \"In a Noetherian Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the radical of $\\\\mathfrak{g}$ is abelian if and only if every solvable ideal of $\\\\mathfrak{g}$ is abelian.\"}\n  {\"name\": \"LieAlgebra.IsSimple.instHasTrivialRadical\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \": HasTrivialRadical R L\", \"doc\": \"Every simple Lie algebra over a commutative ring has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract Lie algebras and semisimple ring modules, not smooth connected normal subgroup schemes or the geometric solvable radical of an algebraic group"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"Normal\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract Lie algebras and semisimple ring modules, not smooth connected normal subgroup schemes or the geometric solvable radical of an algebraic group"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*commutative|commutative.*semisimple|solvableRadical",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/Basic.lean\", \"line\": \"39\", \"text\": \"  the annihilator of a semisimple module over a commutative ring is a radical ideal.\"}\n  {\"file\": \"Mathlib/RingTheory/SimpleModule/Basic.lean\", \"line\": \"288\", \"text\": \"/-- The annihilator of a semisimple module over a commutative ring is a radical ideal. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: results concern abstract Lie algebras and semisimple ring modules, not smooth connected normal subgroup schemes or the geometric solvable radical of an algebraic group"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.*commutative|commutative.*semisimple|solvableRadical",
+   "results": "[grep] OK 2 hit(s); Mathlib/RingTheory/SimpleModule/Basic.lean, Mathlib/RingTheory/SimpleModule/Basic.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, abstract groups or semisimple representations and modules; none states geometric semisimplicity of affine group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GroupScheme\", \"semisimple\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, abstract groups or semisimple representations and modules; none states geometric semisimplicity of affine group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth connected affine algebraic group over a perfect field is semisimple iff its smooth connected commutative normal subgroups are trivial",
+   "results": "[leanfinder] OK 8 hit(s); LieAlgebra.IsSimple.instIsSemisimple, LieAlgebra.IsSemisimple.instHasTrivialRadical, LieAlgebra.IsSemisimple, LieAlgebra.IsKilling.instSemisimple, LieAlgebra.InvariantForm.isSemisimple_of_nondegenerate, LieAlgebra.hasTrivialRadical_iff, LieAlgebra.IsSemisimple.non_abelian_of_isAtom, LieAlgebra.subsingleton_of_hasTrivialRadical_lie_abelian",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Lie algebras, abstract groups or semisimple representations and modules; none states geometric semisimplicity of affine group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-charzero-lie-semisimple-converse",
+  "date": "2026-10-24",
+  "group": "Q77"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Lemma 23.68, printed p.506, implication from semisimple Lie algebra to semisimple connected algebraic group. This is the converse direction to the existing lem-sfb-char-zero-semisimple-group-lie. Supporting input for the Q77 split: Proposition 19.3 and its proof, printed p.398, with geometric semisimplicity in 6.44 (p.135), radical base change in Proposition 19.1 (p.397), and Proposition 19.2(a) (p.398). The test explicitly ranges over affine finite-type subgroup schemes, as all closed subgroups of G are such. No Stacks tag states this algebraic-group criterion.",
+   "via": [
+    "lem-sfb-charzero-lie-semisimple-converse",
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-perfect-field-semisimple-commutative-test",
+  "worker": "stage1",
+  "summary": "Read Milne 19.1--19.3, 6.19 and 6.30; retained the statement. Used the existing product/dimension and arbitrary-field derived-group nodes, and isolated separable radical base change and universal characteristic invariance as two searched statement-only inputs. Wrote the maximum-dimension construction, the all-algebra normality induction and faithful scalar-extension triviality explicitly.",
+  "blueprint": "The inherited chain serves det-thm-sf-ctf-stability-direct-images (3), through the alteration/moduli and characteristic-zero Lie integration inputs to Milne 23.68. This item realizes the semisimplicity test used by lem-sfb-charzero-lie-semisimple-converse. Read the latest sk-thm-sf-ctf-stability unit and direct-images proof (3). blueprint_refs.py ancestor returns None; preserved the inherited null from.node and full via chain, and filled both child places with the precise Milne input. Whole-blueprint searches for semisimple, solvable radical, derived subgroup and characteristic subgroup found no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-70559b3fc",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-70559b3fc (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement against Milne iAG2017: p.16 (1.52, characteristic means for all R), pp.129-130 (6.19(a)-(e) with the proof of (e)) and pp.397-398 (19.1, 19.2(a), 19.3, 19.4). The item's statement is unchanged and agrees with 19.3 and 6.44. Step 1 reconciles the finite-series and derived-series notions of solvability: by minimality D^{i+1} lies in H_{i+1}∩D^i, and the converse comes from the derived node. Step 2 ((1)⇒(2)) uses base change through the products node, normality checked on k̄-algebras, and descent of triviality from I⊗k̄=0. Step 3 builds a maximal-dimension R using only the products node's product and strict-dimension clauses, with no reductivity. Step 4 uses that k̄/k is separable for perfect k, applies the new 19.1 node and gets 19.2(a). Step 5 proves the derived terms normal in G by induction over all k-algebras A: conjugation by g∈G(A) is an A-automorphism of (R_i)_A, and the characteristic node preserves (R_{i+1})_A. Step 6 is genuinely elementary: D(N)=1 makes N commutative, which contradicts (2). G=1 is covered. New node lem-sfb-solvable-radical-separable-base-change matches 19.1 (separable algebraic, nonreductive G allowed, largest R given). It holds for infinite extensions by finite presentation; I tested G=1, a torus, a triangular group, GL_n and a semisimple group. New node lem-sfb-derived-subgroup-universal-characteristic matches 6.19(e), whose proof uses R-algebras R′, so the all-base-algebra form is the source's own. Both new nodes carry statements only, are self-contained, use single-escaped TeX and record 4 searches. Duplicate scan of all snapshot statements (solvable radical, characteristic subgroup, every smooth connected solvable normal, automorphism with derived subgroup): only reductive-radical-quotient, unipotent-radical-existence and def-sfb-semisimple-group-scheme (over k̄) come up, and none states these facts. No new node restates the item. All proof_deps are in unit sk-thm-sf-ctf-stability or are definitions, so no tool_uses are needed. Batch-5: the reached nodes lem-trf-smooth-composition (a composite of smooth maps is smooth) and lem-trf-fppf-covering-base-change (fppf coverings are stable under base change) are generic Mathlib-leaf scheme facts filed in sec-trace-formula. They are neither statements nor steps of the trace formula or Poincaré duality, so I accept them for all three listed citations. Advisory for stage 2: the characteristic node's stmt_deps include the existence theorem lem-sfb-derived-commutator-word-arbitrary-field to name D(H) over a general k. The existing def node defines the derived subgroup only over algebraically closed F, so stage 2 will need D(H) as a predicate or a pinned construction. This is not a stage-1 fault. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.PerfectFieldSemisimpleCommutativeTest",
+  "declaration": "AlgebraicGeometry.perfectField_semisimple_iff_commutativeNormalSubgroups_trivial",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/PerfectFieldSemisimpleCommutativeTest.lean",
+  "statement": "theorem perfectField_semisimple_iff_commutativeNormalSubgroups_trivial {k : Type u} [Field k] [PerfectField k] (G : Grp (Over (Spec (.of k)))) [Smooth G.X.hom] [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] (hconn : ConnectedSpace ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj G).X.left) : IsSemisimpleGroupScheme ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj G).X ↔ ∀ (N : Over (Spec (.of k))) [GrpObj N] [IsCommMonObj N] (i : N ⟶ G.X), IsClosedSubgroupScheme i → IsNormalSubgroupScheme i → Smooth N.hom → ConnectedSpace N.left → IsAffine N.left → LocallyOfFiniteType N.hom → QuasiCompact N.hom → IsIso η[N]",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-193079398",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Item node differs from live only in the new lean record and two added stmt_deps (def-sfb-semisimple-group-scheme, def-sfb-tori-multiplicative-type), both landed on base and byte-identical to live; statement and proof unchanged. Lean matches node and Milne 19.3: [PerfectField k], G : Grp(Over Spec k) smooth/affine/LOFT/QC, hconn = connectedness of the base change to AlgebraicClosure k (canonical Over.pullback.mapGrp); (1) IsSemisimpleGroupScheme of the base change, whose extra conjuncts follow from the hypotheses, solvability = terminating scheme-theoretic derived series, trivial = terminal; (2) ∀ N with GrpObj, IsCommMonObj and a group-hom i (IsSubgroupScheme extends IsMonHom) that is closed and normal on all k-algebra points, N smooth/connected/affine/LOFT/QC → IsIso η[N] (scheme-level triviality). No extra hypotheses or universe restriction; edge cases G=1, G_m/G_a, char p (μ_p excluded as non-smooth), empty scheme, choice of closure all ok. lean.statement verbatim; one declaration with a single sorry; docstrings carry source place, blueprint tag and proof steps 1–6; lines ≤100; report has both sections; no duplicate declaration found. No recompile (2026-10-21 rule); no files changed."
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "id": "lem-pur-affine-line-comparison-naturality",
+ "kind": "statement",
+ "title": "Naturality of the single-coordinate comparison in standing coordinates",
+ "statement": "Fix a finite purity setting \\(P\\) [def-pur-conventions], a scheme \\(T\\), and a separated finite-type structure map \\(a_T:T\\to\\operatorname{Spec}k\\). Let \\(K,L\\in D^+(T,A)\\) have retained ordinary constructible finite-Tor representatives and specified realization isomorphisms. For every morphism \\(v:K\\to L\\), the single-coordinate comparison [def-pur-affine-space-comparison] satisfies \\(\\operatorname{lineSource}(v);\\Gamma_{\\mathrm{line},L}=\\Gamma_{\\mathrm{line},K};Rq^!(v)\\), where \\(q:\\mathbb A^1_T\\to T\\) is the recorded affine-line projection. This holds for every pair of retained representatives and every arrow, including zero arrows.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-space-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Specialize orderedAffineComparison_natural to dimension one. Expand the ordered recursion: its only nonidentity comparison is the single line comparison, precomposed with I_0 and postcomposed with the identity exceptional compositor. The canonical tensor and identity-pullback comparisons form a natural isomorphism firstSourceIso whose components equal the specified I_0 by their HEq uniqueness. The zero exceptional compositor is the component of rightDerivedUpperShriekCongr, hence is invertible and natural. Substitute these two naturality squares into the dimension-one equation and cancel the invertible source and target comparisons. This proves exactly single-line naturality, for arbitrary v and witnesses, without a new hypothesis or an integration-transpose identity.",
+   "uses": [
+    "lem-pur-ordered-affine-comparison-natural",
+    "def-pur-affine-space-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-comparison",
+  "lem-pur-ordered-affine-comparison-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Dimension-one extraction from the recorded ordered-comparison naturality, using the canonical zero-coordinate source and exceptional isomorphisms."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the affine line purity comparison as the adjoint transpose of integration with the projection formula",
+   "results": "Eight generic ExponentiableMorphism and adjunction results; no project affine-line comparison. Project search supplied OrderedAffineComparisonNaturality at dimension one.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match; reuse project constructions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv_naturality_right\"",
+   "results": "Adjunction.homEquiv_naturality_right and its symmetric, square and reassociated variants; generic naturality tools, not the specified line comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*[Tt]race|[Ii]ntegration.*[Tt]ranspose|lineComparison",
+   "results": "No Mathlib hits for the affine trace or line comparison constructions. Both project roots were searched; the source maps already exist and are relocated verbatim rather than recreated.",
+   "date": "2026-10-26",
+   "verdict": "no Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AffineOrderedIntegrationTransposes",
+  "date": "2026-10-26",
+  "group": "J7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-projection-purity-agreement",
+   "place": "Final paragraph: ordered affine-line transposes and canonical reassociations; expanded parent proof Steps 3--8.",
+   "via": [
+    "lem-pur-affine-ordered-integration-transposes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AffineLineComparisonNaturality",
+  "file": "lean/Sheaf/Paper/AffineLineComparisonNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineSpacePurity.lineComparison_natural",
+  "statement": "theorem lineComparison_natural (P : WeilConjectures.PurityFiniteSetting.{u})\n    (T : Scheme.{u}) (aT : T ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT]\n    (K : Plus (Ring P) T) (Ke : Etale.DerivedCategoryModule (Ring P) T)\n    (hKe : etaleFiniteTor (Ring P) T Ke)\n    (eK : (comparison (Ring P) T).obj Ke ≅ K.obj)\n    (L : Plus (Ring P) T) (Le : Etale.DerivedCategoryModule (Ring P) T)\n    (hLe : etaleFiniteTor (Ring P) T Le)\n    (eL : (comparison (Ring P) T).obj Le ≅ L.obj) (v : K.obj ⟶ L.obj) :\n    (lineSource P T).map v ≫ lineComparison P T aT L Le hLe eL =\n      lineComparison P T aT K Ke hKe eK ≫\n        (rightDerivedUpperShriek (ModuleCat.{u + 1} (Ring P))\n          (AffineSpace PUnit.{u + 1} T ↘ T)).map v",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bff03",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T070110-L-3382120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bff03",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261026T070110-L-3382120",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone lines 1-825 (verbatim bodies); item suffix vs clone 820-1581 (only main proof + 3 private helpers); successor statement vs item conjunct 4; node lean declarations vs files; 4 direct importers compiled against delivered modules in /tmp sandbox (all OK)"
+ }
+}

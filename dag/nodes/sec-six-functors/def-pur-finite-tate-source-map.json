@@ -1,0 +1,109 @@
+{
+ "id": "def-pur-finite-tate-source-map",
+ "kind": "definition",
+ "title": "Canonical finite Tate source map",
+ "statement": "For a purity finite setting and a strict Frobenius map on a finite-coefficient derived object, define the canonical source isomorphism using the geometric-Frobenius pullback square with source over-structure g_X ≫ a_X and target structure a_X, exactly as in [def-pur-tate-datum]. Also define the same twisted construction for a Cartesian Frobenius square and the pasted pullback comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-tate-datum.md",
+  "place": "Displayed source-of-purity composite and its ordinary pullback comparison factors."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-cartesian-square",
+  "def-pur-tate-datum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical finite Tate source map from a Frobenius pullback square and strict datum",
+   "results": "no exact match; only generic pullback and tensor comparisons",
+   "date": "2026-10-26",
+   "verdict": "no exact canonical finite Tate source map"
+  },
+  {
+   "tool": "loogle",
+   "query": "finiteReductionBaseChangeSource, finiteReductionPullbackCompositor",
+   "results": "existing project declarations, not a single source-map notion",
+   "date": "2026-10-26",
+   "verdict": "project components found; new composite notion missing"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteTateSourceMap|finiteTatePullbackComparison",
+   "results": "0 hits in dag/nodes and project before this delivery",
+   "date": "2026-10-26",
+   "verdict": "new notion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-tate-source-comparison-calculus",
+  "date": "2026-10-26",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent source comparison assembly",
+   "via": [
+    "lem-pur-finite-tate-source-comparison-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteTateSourceMap",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteTateSourceMap",
+  "file": "lean/Sheaf/Paper/FiniteTateSourceMap.lean",
+  "statement": "def finiteTateSourceMap (P : PurityFiniteSetting.{u}) {X₀ Y₀ : Over (Spec (CommRingCat.of P.field.k₀))} (f₀ : X₀ ⟶ Y₀) (d : ℕ) [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] [IsSeparated f₀.left] [SmoothOfRelativeDimension d (P.frobeniusMap f₀)] (K : Scheme.proEtaleDerivedCategory (P.frobeniusFiber Y₀).left P.Ring) (φK : (P.finiteReductionPullback (P.frobeniusGaloisMap Y₀)).obj K ≅ K) : (P.finiteReductionPullback (P.frobeniusGaloisMap X₀)).obj ((P.compositionShiftedPullback (P.frobeniusMap f₀) d).obj K) ≅ (P.compositionShiftedPullback (P.frobeniusMap f₀) d).obj K",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-26",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteTateSourceMap",
+   "WeilConjectures.PurityFiniteSetting.finiteTateSourceMapOfSquare",
+   "WeilConjectures.PurityFiniteSetting.finiteTatePullbackComparison"
+  ],
+  "fixed_by": "NT-stage2-cc-2b0de0d0f"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "import_flags": [
+  "lean_not_found"
+ ],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b0de0d0f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2b0de0d0f",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Mathematics correct: finiteTateSourceMap is the verbatim twisted-instance body of landed φpur (iX'=⟨g_X≫a_X⟩, fixing c9a7 return); reduction clause matches node (1≤m≤n, finiteTor K, canonical C_X/C_Y, φK'=Q_Y(φ)C_Y⁻¹, a_P=finiteReductionSourceComparison, equation a_P Q_X(ψ)=e'b'G'(a_P)C_X); Cartesian clause uses ChosenCartesianSquare + finiteReductionBaseChangeSource (ordinary pullback only), generalised to arbitrary gX/gX' pullback squares — true since twisted structures keep u over k and all base-change maps are chart-independent; no ctf hyp there (more general). Statements verbatim; stmt_deps add only the new def node; used owners are uncited def nodes (advisory). Edge cases d=0, m=n, identity square, K=0 ok. Advisory: NK structural-coherence (not landed) uses finiteTensorFixedLine for T_d. FIX: fixes/FiniteTateSourceMap.lean adds Source/blueprint docstring lines to the three new declarations (code unchanged); nt_compile 4.5 s clean."
+ }
+}

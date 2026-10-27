@@ -1,0 +1,283 @@
+{
+ "id": "lem-sfb-fibre-regular-localization-spectrum",
+ "kind": "statement",
+ "title": "Spectrum after inverting the regular elements on a finite closed-fibre module",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, where $A$ is local with maximal ideal $\\mathfrak m_A$ (every element outside $\\mathfrak m_A$ is a unit). Let $N$ be a $B$-module. Put $C=B/\\mathfrak m_AB$ and $\\overline N=N/\\mathfrak m_AN$, with the induced $C$-module structure. Suppose $C$ is Noetherian [def-weil-pbc-noetherian-ring] and $\\overline N$ is a finite $C$-module [def-weil-finitely-generated-module]. Let\n$$\\Sigma=\\{b\\in B:\\overline N\\xrightarrow{z\\mapsto bz}\\overline N\\text{ is injective}\\}.$$\nThis is a multiplicative subset, and write $\\Sigma^{-1}B$ for the ring of fractions $b/s$, $s\\in\\Sigma$ [def-weil-pbc-module-localization]. Use exact element-annihilator associated primes [def-weil-pbc-annihilator-associated-primes], viewing $\\overline N$ also as a $B$-module through $B\\to C$. Contraction along $B\\to\\Sigma^{-1}B$ identifies $\\operatorname{Spec}(\\Sigma^{-1}B)$ [def-weil-affine-spectrum] with precisely the primes $\\mathfrak p\\subset B$ contained in some $\\mathfrak q\\in\\operatorname{Ass}_B(\\overline N)$. The ring $\\Sigma^{-1}B$ is semilocal, meaning that it has finitely many maximal ideals, and the contractions of its maximal ideals are exactly the maximal elements, under inclusion, of $\\operatorname{Ass}_B(\\overline N)$. In particular each maximal ideal contracts to the inverse image of an associated prime of $\\overline N$ over $C$. The zero module is allowed; then $\\Sigma=B$, the localization is the zero ring, and its spectrum and set of maximal ideals are empty.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DE (lemma-homothety-spectrum), statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-annihilator-associated-primes",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $I=\\mathfrak m_AB$, $M=\\overline N$, and $\\pi:B\\to C=B/I$. The identity acts injectively on $M$, and a composite of two injective scalar maps is injective, so $1\\in\\Sigma$ and $\\Sigma\\Sigma\\subseteq\\Sigma$. For every $z\\in M$ one has $\\operatorname{Ann}_B(z)=\\pi^{-1}(\\operatorname{Ann}_C(z))$ and $\\operatorname{Ann}_C(z)=\\operatorname{Ann}_B(z)/I$. Surjectivity of $\\pi$ gives a bijection between these annihilators, and preserves and reflects primality: a product of classes kills $z$ precisely when the product of any lifts does, and properness is equivalent to $1$ not killing $z$. Thus $\\operatorname{Ass}_B(M)=\\{\\pi^{-1}(Q):Q\\in\\operatorname{Ass}_C(M)\\}$, with injective indexing, by the exact-annihilator definition. This writes out the quotient-ring comparison in Tag 05BY (lemma-ass-quotient-ring).",
+   "uses": [
+    "def-weil-pbc-annihilator-associated-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), proof, first sentence; algebra.tex Tag 05BY (lemma-ass-quotient-ring)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-associated-primes-finite] to the Noetherian ring $C$ and its finite module $M$. It gives finiteness of $\\operatorname{Ass}_C(M)$, hence of $\\mathcal Q=\\operatorname{Ass}_B(M)$ by step 1. No Noetherianity of $B$ is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), proof, finiteness sentence using algebra.tex Tag 00LC (lemma-finite-ass)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes] over $C$ to $M$. Multiplication by $b$ on $M$ fails to be injective exactly when some nonzero $z$ has $bz=0$, exactly when $\\pi(b)$ lies in an associated prime of $M$ over $C$. Taking inverse images and using step 1 gives $B\\setminus\\Sigma=\\bigcup_{\\mathfrak q\\in\\mathcal Q}\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), proof, complement formula using algebra.tex Tag 00LD (lemma-ass-zero-divisors)."
+   }
+  },
+  {
+   "text": "Set $T=\\Sigma^{-1}B$. By [lem-weil-pbc-localization-spectrum-embedding], contraction identifies $\\operatorname{Spec}T$ with the primes $\\mathfrak p$ of $B$ disjoint from $\\Sigma$. By step 3, disjointness is equivalent to $\\mathfrak p\\subseteq\\bigcup_{\\mathfrak q\\in\\mathcal Q}\\mathfrak q$. If $\\mathcal Q$ is nonempty, the finite prime-avoidance statement [lem-weil-pbc-prime-avoidance] applies to the ideal $\\mathfrak p$ and this finite family of prime ideals, and makes this equivalent to $\\mathfrak p\\subseteq\\mathfrak q$ for some $\\mathfrak q\\in\\mathcal Q$. If $\\mathcal Q$ is empty, no ideal is contained in its empty union, since every ideal contains $0$; both conditions are false. Conversely any prime contained in a member of $\\mathcal Q$ is disjoint from $\\Sigma$ by step 3. This proves the stated spectrum description.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), proof, prime correspondence using algebra.tex Tags 00E3 (lemma-spec-localization) and 00DS (lemma-silly)."
+   }
+  },
+  {
+   "text": "For every ideal $J\\subseteq T$ and $a\\in B$, $s\\in\\Sigma$, one has $a/s\\in J$ if and only if $a/1\\in J$: multiply by the unit $s/1$ or its inverse $1/s$. Hence an ideal of $T$ is determined by its contraction and inclusions of ideals are reflected by contraction. In particular, if $P_{\\mathfrak q}$ is the unique prime over $\\mathfrak q\\in\\mathcal Q$ supplied by step 4, then $a/s\\in P_{\\mathfrak q}$ if and only if $a\\in\\mathfrak q$, and $P_{\\mathfrak q}\\subseteq P_{\\mathfrak r}$ if and only if $\\mathfrak q\\subseteq\\mathfrak r$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), proof, last paragraph; fraction operations in algebra.tex Tag 00CO (definition-localization)."
+   }
+  },
+  {
+   "text": "Every proper ideal $J\\subset T$ is contained in some $P_{\\mathfrak q}$. Indeed, its contraction $K$ misses $\\Sigma$, since $J$ contains no unit. By step 3, $K\\subseteq\\bigcup_{\\mathfrak q\\in\\mathcal Q}\\mathfrak q$; this forces $\\mathcal Q$ nonempty because $0\\in K$. Apply [lem-weil-pbc-prime-avoidance] to $K$ to get $K\\subseteq\\mathfrak q$, and step 5 gives $J\\subseteq P_{\\mathfrak q}$. Now a maximal ideal $J$ must equal this proper prime $P_{\\mathfrak q}$, and $\\mathfrak q$ must be maximal in $\\mathcal Q$, since a strictly larger member would give a strictly larger proper prime by step 5. Conversely, if $\\mathfrak q$ is maximal in $\\mathcal Q$ and $J$ is a proper ideal containing $P_{\\mathfrak q}$, choose $\\mathfrak r\\in\\mathcal Q$ with $J\\subseteq P_{\\mathfrak r}$. Contraction gives $\\mathfrak q\\subseteq\\mathfrak r$, so $\\mathfrak q=\\mathfrak r$ and $J=P_{\\mathfrak q}$. Thus $P_{\\mathfrak q}$ is maximal. This proves the exact maximal-ideal assertion without presupposing a theorem on existence of maximal ideals. Finiteness in step 2 makes $T$ semilocal, and step 1 identifies each contracted maximal ideal with the inverse image of an associated prime over $C$.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), proof, last paragraph; algebra.tex Tag 00DS (lemma-silly) applied to the contraction of any proper ideal."
+   }
+  },
+  {
+   "text": "If $M=0$, every scalar map on $M$ is injective, so $\\Sigma=B$; no element of $M$ has a proper annihilator, so its associated-prime set is empty. The fraction relation with denominator set $B$ gives $1/1=0/1$ (take the annihilating factor $0\\in\\Sigma$). Thus $T$ is the zero ring and has no proper ideal, hence no prime or maximal ideal. All conclusions above include this case.",
+   "uses": [
+    "def-weil-pbc-annihilator-associated-primes",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05DE (lemma-homothety-spectrum), zero-module boundary case, expanded from the fraction and associated-prime definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-weil-pbc-prime-avoidance",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05DE (lemma-homothety-spectrum), complete proof; quotient-annihilator and maximal-ideal arguments expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Spectrum of localization at elements acting injectively on a finite module over a Noetherian quotient is the primes contained in associated primes",
+   "results": "[leansearch] OK 8 hit(s). Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes; associatedPrimes; PrimeSpectrum.localization_specComap_injective; Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule; Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule; PrimeSpectrum.localization_comap_injective; Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern associated-prime localization, localization spectrum injectivity, or semilocal finite generation separately; none gives this semilocal spectrum description for regular elements on the closed-fibre module. Both semantic phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"IsLocalization\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern associated-prime localization, localization spectrum injectivity, or semilocal finite generation separately; none gives this semilocal spectrum description for regular elements on the closed-fibre module. Both semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a local ring map with Noetherian closed fibre and finite fibre module localization at fibre nonzerodivisors is semilocal with maximal ideals associated primes",
+   "results": "[leanfinder] OK 8 hit(s). Module.Finite.of_isLocalized_maximal; Algebra.QuasiFiniteAt; RingHom.finiteType_isLocal; OfLocalizationMaximal; Algebra.quasiFinite_iff; Submodule.fg_of_isLocalized_maximal; instFiniteAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl; instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern associated-prime localization, localization spectrum injectivity, or semilocal finite generation separately; none gives this semilocal spectrum description for regular elements on the closed-fibre module. Both semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "homothety|semiLocal.*associated|associated.*semiLocal|associatedPrimes",
+   "results": "[grep] OK 15 hit(s). Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Localization.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean; Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern associated-prime localization, localization spectrum injectivity, or semilocal finite generation separately; none gives this semilocal spectrum description for regular elements on the closed-fibre module. Both semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "homothety|associatedPrimes|isSemilocalRing|IsSemilocalRing",
+   "results": "[grep] OK 25 hit(s). Mathlib/RingTheory/Regular/IsSMulRegular.lean; Mathlib/RingTheory/Regular/IsSMulRegular.lean; Mathlib/RingTheory/Regular/IsSMulRegular.lean; Mathlib/RingTheory/PowerSeries/Substitution.lean; Mathlib/RingTheory/Regular/LinearMap.lean; Mathlib/RingTheory/Regular/LinearMap.lean; Mathlib/RingTheory/Regular/LinearMap.lean; Mathlib/RingTheory/Regular/LinearMap.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: associated-prime localization and spectrum range results give only parts; the semilocal fraction-ring instance requires the ring itself Noetherian and its own fraction ring, unlike the arbitrary B and finite closed-fibre module here. Candidate source read in AssociatedPrime/Finiteness.lean and LocalProperties/Semilocal.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spectrum of localization at module nonzero divisors and maximal associated primes",
+   "results": "[leansearch] OK 8 hit(s). associatedPrimes; Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes; Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes; Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule; PrimeSpectrum.localization_specComap_range; PrimeSpectrum.localization_comap_range",
+   "date": "2026-10-24",
+   "verdict": "no match: associated-prime localization and spectrum range results give only parts; the semilocal fraction-ring instance requires the ring itself Noetherian and its own fraction ring, unlike the arbitrary B and finite closed-fibre module here. Candidate source read in AssociatedPrime/Finiteness.lean and LocalProperties/Semilocal.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, IsLocalization",
+   "results": "[loogle] OK 3 hit(s). Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule; Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg",
+   "date": "2026-10-24",
+   "verdict": "no match: associated-prime localization and spectrum range results give only parts; the semilocal fraction-ring instance requires the ring itself Noetherian and its own fraction ring, unlike the arbitrary B and finite closed-fibre module here. Candidate source read in AssociatedPrime/Finiteness.lean and LocalProperties/Semilocal.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization at scalars acting injectively on a finite module over a Noetherian quotient is semilocal and its primes lie below associated primes",
+   "results": "[leanfinder] OK 8 hit(s). Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg; Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes; Module.associatedPrimes.mem_associatePrimes_localizedModule_atPrime_of_mem_associated_primes; instFiniteLocalizationAlgebraMapSubmonoidPrimeCompl; LocalizedModule.exists_subsingleton_away; Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule; Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule",
+   "date": "2026-10-24",
+   "verdict": "no match: associated-prime localization and spectrum range results give only parts; the semilocal fraction-ring instance requires the ring itself Noetherian and its own fraction ring, unlike the arbitrary B and finite closed-fibre module here. Candidate source read in AssociatedPrime/Finiteness.lean and LocalProperties/Semilocal.lean."
+  },
+  {
+   "tool": "grep",
+   "query": "semilocal|semiLocal|IsSemiLocal|isSemiLocal",
+   "results": "[grep] OK 10 hit(s). Mathlib/RingTheory/LocalProperties/Semilocal.lean; Mathlib/RingTheory/LocalProperties/Semilocal.lean; Mathlib/RingTheory/LocalProperties/Semilocal.lean; Mathlib/RingTheory/LocalProperties/Semilocal.lean; Mathlib/RingTheory/LocalProperties/Semilocal.lean; Mathlib/RingTheory/Localization/Finiteness.lean; Mathlib/RingTheory/Localization/Finiteness.lean; Mathlib/RingTheory/PicardGroup.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: associated-prime localization and spectrum range results give only parts; the semilocal fraction-ring instance requires the ring itself Noetherian and its own fraction ring, unlike the arbitrary B and finite closed-fibre module here. Candidate source read in AssociatedPrime/Finiteness.lean and LocalProperties/Semilocal.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total quotient ring relative to a finite module over a noetherian ring has finitely many maximal ideals corresponding to maximal associated primes",
+   "results": "[leanfinder] OK 8 hit(s). instFiniteMaximalSpectrumOfIsFractionRing; associatedPrimes.finite; Ideal.IsMaximal.mem_associatedPrimes_of_isFractionRing; PrimeSpectrum.finite_setOf_isMin; Module.Finite.of_isLocalized_maximal; IsArtinianRing.instFiniteMaximalSpectrum; instFiniteQuotientIdealOfIsMaximal; IsLocalRing.finite_quotient_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: associated-prime localization and spectrum range results give only parts; the semilocal fraction-ring instance requires the ring itself Noetherian and its own fraction ring, unlike the arbitrary B and finite closed-fibre module here. Candidate source read in AssociatedPrime/Finiteness.lean and LocalProperties/Semilocal.lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-flatness-associated-generizations",
+  "date": "2026-10-24",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 0CX0 (lemma-localize-flat-dimension-n). Proof of Tag 05UD, final application of Tag 05UA: flatness at a point is detected at the associated generalizations in its fibre. Subinput of Tag 05UA: Tag 05DE (lemma-homothety-spectrum).",
+   "via": [
+    "lem-sfb-scheme-flatness-associated-generizations",
+    "lem-sfb-space-dimension-flatness-assassin-localization",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-fibre-regular-localization-spectrum",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies; expanded Stacks 05DE into seven complete steps. Reused four existing Mathlib statement leaves, proved the quotient-annihilator comparison and fraction-ideal calculations elementarily, and treated empty associated-prime sets and the zero module explicitly. No new nodes or Lean changes.",
+  "blueprint": "Inherited prerequisite chain below compactification/direct-image preservation in sk-thm-sf-ctf-stability: the 05UA input to 05UD uses Tag 05DE. The seven steps realize the entire proof of 05DE. blueprint_refs.py ancestor returns None, matching the inherited null from.node; retained the existing full via chain and specific from.place. Current latest blueprint sk-thm-sf-ctf-stability.proof.md, direct-image paragraph, read; no same statement found by tag searches 05DE and 05BY.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-associated-primes-finite",
+    "why": "Generic commutative-algebra input in the Stacks 05DE proof, already a Mathlib leaf; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "why": "Generic commutative-algebra input in the Stacks 05DE proof, already a Mathlib leaf; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic commutative-algebra input in the Stacks 05DE proof, already a Mathlib leaf; no replacement of the unit direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-localization-spectrum-embedding",
+    "why": "Generic commutative-algebra input in the Stacks 05DE proof, already a Mathlib leaf; no replacement of the unit direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-localization-spectrum-embedding"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-2dd0b4c2b",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-2dd0b4c2b (reviewer sub-agent of L); spot-checked: I read the item and all seven steps in full; no repairs were needed. First delivery (one commit: the item JSON and its report). The item is still unsplit in live and side-live, so nothing supersedes it. Statement, stmt_deps and blueprint are byte-identical to base; only split-owned fields changed. The statement matches Stacks flat.tex Tag 05DE (lemma-homothety-spectrum) hypothesis by hypothesis. Its maximal-elements form is the last sentence of the source proof, and the zero-module clause is a true edge case. Step checks: (1) Ass_B(M)=π⁻¹Ass_C(M) via Ann_B(z)=π⁻¹Ann_C(z), an elementary 05BY calculation; (2) 00LC applied over C only, B never assumed Noetherian; (3) 00LD gives B∖Σ=∪Q; (4) the 00E3 embedding plus 00DS prime avoidance, with the empty family handled separately because the cited node needs r≥1; (5) a/s∈J⇔a/1∈J; (6) prime avoidance on the contraction of any proper ideal gives exactly the maximal-ideal classification and semilocality, with no Zorn argument; (7) N̄=0 gives Σ=B and T=0. Every cited node statement was opened and says what its step takes from it. The four declared tool uses are generic lem-weil-pbc-* Mathlib leaves, accepted. Searches of the DAG for 05DE and homothety-spectrum find no duplicate. Advisory: lem-trf-fibre-associated-primes-module-ring states the fibre-ring version of step 1, but citing it would need B/m_A B≅B⊗κ(m_A) and an off-unit tool use, so the elementary step stands. Small cases checked: k[x,y] with N=B/(x)⊕B/(x,y) (only the maximal associated prime gives a maximal ideal); Z_(p)[t] (the maximal ideal contracts to the non-maximal prime pB); N̄=0 with N≠0; k[x,y]/(xy). Mathlib searches cover all three kinds with real results. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FibreRegularLocalizationSpectrum",
+  "declaration": "RingTheory.fibre_regular_localization_spectrum",
+  "file": "lean/Sheaf/RingTheory/FibreRegularLocalizationSpectrum.lean",
+  "statement": "theorem fibre_regular_localization_spectrum (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [IsLocalRing A] (N : Type w) [AddCommGroup N] [Module B N] [IsNoetherianRing (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B))] [Module.Finite (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B)) (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N)))] : (∀ b : B, b ∈ (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N)))) ↔ Function.Injective (fun z : (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))) ↦ b • z)) ∧ Set.BijOn (PrimeSpectrum.comap (algebraMap B (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))))) Set.univ {p : PrimeSpectrum B | ∃ q ∈ annihilatorAssociatedPrimes B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))), p.asIdeal ≤ q} ∧ {J : Ideal (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))) | J.IsMaximal}.Finite ∧ Set.BijOn (Ideal.comap (algebraMap B (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))))) {J : Ideal (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))) | J.IsMaximal} {q : Ideal B | Maximal (fun q ↦ q ∈ annihilatorAssociatedPrimes B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N)))) q} ∧ (∀ J : Ideal (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))), J.IsMaximal → ∃ Q ∈ annihilatorAssociatedPrimes (B ⧸ (IsLocalRing.maximalIdeal A).map (algebraMap A B)) (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))), Ideal.comap (algebraMap B (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N)))))) J = Ideal.comap (Ideal.Quotient.mk ((IsLocalRing.maximalIdeal A).map (algebraMap A B))) Q) ∧ (Subsingleton (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))) → (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N)))) = ⊤ ∧ Subsingleton (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))) ∧ IsEmpty (PrimeSpectrum (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N)))))) ∧ ∀ J : Ideal (Localization (nonZeroSMulDivisors B (N ⧸ ((IsLocalRing.maximalIdeal A).map (algebraMap A B) • (⊤ : Submodule B N))))), ¬ J.IsMaximal)",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e94ad1f0",
+  "group": "NR",
+  "result": "pass",
+  "note": "Item lean record verbatim = file signature; node differs from side-live only in lean field. Checked against Stacks 05DE (flat.tex 1783-1821) clause by clause: IsLocalRing A, C = B ⧸ m_A B Noetherian, N̄ = N ⧸ I•⊤ finite over C with the canonical Torsion.Basic action; Σ = nonZeroSMulDivisors with an explicit injectivity iff; Spec BijOn onto primes below Ass_B (exact-annihilator def, recorded dep); maximal ideals finite; Ideal.comap BijOn maximal ideals ↔ Maximal elements of Ass_B; inverse image of Ass_C; zero-module clause. Edge cases N̄=0, C=0, field base, B=0, nested associated primes checked. No duplicate in Sheaf/WeilConjectures (05DF module is a different theorem) or Mathlib. Docstrings have source, blueprint and 7 steps; proof is sorry only; universes bound. No fixes, no compile needed."
+ }
+}

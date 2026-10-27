@@ -1,0 +1,112 @@
+{
+ "id": "lem-asd-proper-ordered-projection-exchange",
+ "kind": "statement",
+ "title": "Forward proper ordered projection square with a source coefficient comparison",
+ "statement": "For a cartesian square of proper compactifiable scheme morphisms q and qprime, with qprime quasi-compact, finite commutative coefficients A, arbitrary source complexes L and Lprime, an isomorphism l:gprime*L ≅ Lprime, and an arbitrary base complex K, the ordered projection of [def-asd-ordinary-finite-p1-arrows], followed by inverse proper coincidence, commutes with compact-support exchange. The source comparison is tensor pullback followed by tensoring with E = g*(coincidence_q inverse); Ex_! at L; Rqprime_!(l); coincidence_qprime. The target comparison is tensor pullback, the inverse-image square comparison, and l. Precisely the equality in the attached Lean statement holds. No trace, projective-line presentation, exponent, splitting or exceptional adjunction is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Second paragraph, projective-line computation: trace and projection squares give the counit square."
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved compactProjectionMapCoeffFirst_baseChangeMap of [lem-asd-compact-projection-exchange]. Naturality of the compact projection in its source coefficient appends l; naturality of tensor pullback moves inverse proper coincidence to the source.",
+   "uses": [
+    "lem-asd-compact-projection-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upstream compactification projection/forget-supports identity identifies the proper compact projection with the ordinary projection: use rightDerivedLowerShriekToLowerStarComp_comp_eq to express the proper coincidence hom through the chosen compactification, then apply projectionMapOfCompactification_comp_compactificationForgetSupports. Conjugate by tensor symmetries, using naturality of proper coincidence and of symmetry, and cancel its inverse. The explicit ordered projection and twisted comparison are those of [def-asd-ordinary-finite-p1-arrows].",
+   "uses": [
+    "def-asd-ordinary-finite-p1-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-projection-exchange",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
+  "place": "Second paragraph, projective-line computation: trace and projection squares give the counit square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the projection formula and trace counit with proper base change",
+   "results": "Scheme pullback comparison identities and LinearMap.trace_baseChange; no etale derived trace or projection counit identity.",
+   "date": "2026-10-26",
+   "verdict": "No specialized Mathlib match; search local source APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.inv_hom_id_assoc",
+   "results": "CategoryTheory.Iso.inv_hom_id_assoc in Mathlib.CategoryTheory.Iso.",
+   "date": "2026-10-26",
+   "verdict": "Generic cancellation used, no geometric comparison supplied."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*BaseChange|trace.*baseChange",
+   "results": "Mathlib has linear-algebra trace base change only. Local rg finds compactProjectionMapCoeffFirst_baseChangeMap (proved), ordinary finite splitting trace compatibility, and proper coincidence projection compatibility.",
+   "date": "2026-10-26",
+   "verdict": "Reuse local forward projection API; presentation trace transport is missing."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceCounitBaseChange",
+  "group": "B9",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-presented-projective-line-trace-counit-base-change",
+   "place": "Forward proper ordered projection square with a source coefficient comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProperOrderedProjectionExchange",
+  "file": "lean/Sheaf/SixFunctors/ProperOrderedProjectionExchange.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOrderedProjection_exchange",
+  "statement": "theorem properOrderedProjection_exchange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X X' Y Y' : Scheme.{u}} {q : X ⟶ Y} {q' : X' ⟶ Y'}\n    {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : IsPullback g' q' q g)\n    [IsProper q] [IsProper q'] [HasCompactification q] [HasCompactification q']\n    [QuasiCompact q']\n    (L : DerivedCategoryModule A X) (L' : DerivedCategoryModule A X')\n    (l : (ordinaryFinitePullback A g').obj L ≅ L') (K : DerivedCategoryModule A Y) :\n    let F := ordinaryFinitePullback A g\n    let R' := R(q')_![ModuleCat.{u + 1} A]\n    let C := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) q\n    let C' := rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) q'\n    let E := F.map (C.inv.app L) ≫ (rightDerivedLowerShriekBaseChangeMap A sq).app L ≫\n      R'.map l.hom ≫ C'.hom.app L'\n    let c := ordinaryFiniteTwistedPullbackComparison A q q' g g' L L' K\n      ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).symm.app K) l\n    F.map (ordinaryFiniteProjection A q L K ≫\n        C.inv.app ((ordinaryFiniteTwistedPullback A q L).obj K)) ≫\n      (rightDerivedLowerShriekBaseChangeMap A sq).app\n        ((ordinaryFiniteTwistedPullback A q L).obj K) ≫ R'.map c.hom =\n    (ordinaryFiniteTensorPullback A g K ((ordinaryFinitePushforward A q).obj L)).hom ≫\n      ((ordinaryFiniteTensor A Y').obj (F.obj K)).map E ≫\n      ordinaryFiniteProjection A q' L' (F.obj K) ≫\n      C'.inv.app ((ordinaryFiniteTwistedPullback A q' L').obj (F.obj K))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T100226-L-4153250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261026T100226-L-4153250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

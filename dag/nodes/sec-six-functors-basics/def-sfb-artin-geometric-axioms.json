@@ -1,0 +1,148 @@
+{
+ "id": "def-sfb-artin-geometric-axioms",
+ "kind": "definition",
+ "title": "Geometric Artin deformation predicates over an affine base",
+ "statement": "Let $R$ be a commutative ring, $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum], and $\\mathcal X$ a category fibred in groupoids on $S$-schemes, with its actual fibres and pullback identifications as in [def-sfb-stable-pointed-moduli-groupoids], [def-pc-scheme]. Work in the universes of [def-weil-size-convention]. Define five predicates on $\\mathcal X$ as follows. The deformation vector operations in (3) are the canonical operations: pullback along scalar multiplication on the square-zero ideal gives scalar multiplication; gluing over the common special fibre and pullback along addition of the two square-zero directions gives tangent addition; composition gives addition on infinitesimal automorphisms. A finite-dimensional space means one isomorphic with these operations to $k^n$ for some $n\\geq0$. The square-zero algebra is [def-sc-trivial-square-zero-extension]. Residue fields and finite type use [def-weil-residue-field], [def-weil-finite-type-morphism].\n(1) For every small directed inverse system of affine $S$-schemes $T_i$ with limit $T$, the functor $2\\operatorname{colim}_i\\mathcal X(T_i)\\to\\mathcal X(T)$ is an equivalence; objects on the left occur at a stage and arrows at sufficiently late common stages.\n(2) For every pushout $B'=B\\amalg_A A'$ of spectra of Artinian local rings of finite type over $R$, with $A\\to A'$ a thickening (a closed immersion defined by a nilpotent ideal), the restriction functor $\\mathcal X(B')\\to\\mathcal X(B)\\times_{\\mathcal X(A)}\\mathcal X(A')$ is an equivalence. A local ring is a commutative ring with a unique maximal ideal, and Artinian means its descending chains of ideals stabilize.\n(3) For every field $k$ with $R\\to k$ of finite type and every $x_0\\in\\mathcal X(k)$, the tangent space (isomorphism classes of objects over $k[\\epsilon]/(\\epsilon^2)$ with an identified restriction $x_0$) and the infinitesimal automorphism space (automorphisms of the trivial deformation restricting to the identity of $x_0$) are finite-dimensional $k$-vector spaces [def-weil-field].\n(4) For each complete Noetherian local $R$-algebra $(A,\\mathfrak m)$ with residue field finite type over $R$, every system of objects $x_n\\in\\mathcal X(A/\\mathfrak m^n)$, $n\\geq1$, with compatible transition isomorphisms is the restriction, with these isomorphisms, of an object over $A$ [def-weil-pbc-noetherian-ring], [def-weil-pbc-adic-completion].\n(5) For every $U$ locally of finite type over $S$ and $x\\in\\mathcal X(U)$, versality at a finite type point $u\\in U$ holds throughout the finite type points of some open neighbourhood of $u$. Here finite type means that $\\operatorname{Spec}\\kappa(u)\\to U$ is of finite type; versality means that for every surjection $A'\\to A$ of Artinian local $R$-algebras with nilpotent kernel and residue field $\\kappa(u)$, every $\\operatorname{Spec}A\\to U$ reducing to $u$, and every deformation over $A'$ identified over $A$ with the pulled-back $x$, there is a lift $\\operatorname{Spec}A'\\to U$ and an isomorphism with the deformation extending that identification.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tags 07T4 (associated predeformation category), 07WP (definition-RS), 07XF (definition-versal), 07XQ (definition-openness-versality), 07XY (lemma-get-smooth), section-axioms; the canonical tangent operations are Formal Deformation Theory, section-tangent-spaces."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sc-trivial-square-zero-extension",
+  "def-weil-residue-field",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Artin axioms for category fibred in groupoids over arbitrary base ring: limit preservation Rim Schlessinger finite tangent infinitesimal automorphisms effectivity openness of versality",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Artinian.mk; AlgebraicGeometry.FormallyUnramified.casesOn; AlgebraicGeometry.IsLocallyArtinian.casesOn; AlgebraicGeometry.FormallyUnramified.recOn; AlgebraicGeometry.IsLocallyArtinian.mk; CategoryTheory.Artinian.toEssentiallySmall; AlgebraicGeometry.AffineScheme.hasLimits; AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover.",
+   "date": "2026-10-24",
+   "verdict": "no match for the geometric Artin predicates over a general affine base"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin representability smooth neighbourhood field valued object fibred groupoid Rim Schlessinger effective versal deformation",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.IsSmooth; AlgebraicGeometry.IsSmooth.exists_isStandardSmooth; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.isSmooth_iff; AlgebraicGeometry.IsEtale; Algebra.Smooth.formallySmooth; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension.",
+   "date": "2026-10-24",
+   "verdict": "no match: smooth schemes and smooth ring algebras, not Artin predicates on fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLimitPreserving|RimSchlessinger|FiniteInfinitesimalSpaces|FormalObjectsEffective|OpennessOfVersality",
+   "results": "[grep] OK 0 hit(s) in Mathlib. Actual rg of lean/WeilConjectures and lean/Sheaf finds only the Spec Z-specialized ArtinRepresentableDiagonalCriterion predicates and ArtinDeformationTestCategory.IsRimSchlessinger for cofibred groupoids on a fixed-residue Artinian category. No general-affine-base geometric predicates. Actual rg of DAG definition files for geometric Artin axioms or axioms over an affine base finds none. tools/blueprint_refs.py search Artin deformation conditions returns 0 blueprint nodes.",
+   "date": "2026-10-24",
+   "verdict": "no reusable general-affine-base definition; integer-specialized downstream predicates cannot state this item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-smooth-point-neighbourhood",
+  "date": "2026-10-24",
+  "group": "Q61"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Definitions of the five deformation predicates used by Tag 07XY, over the actual affine base R.",
+   "via": [
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinGeometricAxioms",
+  "declaration": "AlgebraicGeometry.ArtinGeometry.IsLimitPreserving",
+  "declarations": [
+   "AlgebraicGeometry.ArtinGeometry.affine",
+   "AlgebraicGeometry.ArtinGeometry.affineMap",
+   "AlgebraicGeometry.ArtinGeometry.Object",
+   "AlgebraicGeometry.ArtinGeometry.Lift",
+   "AlgebraicGeometry.ArtinGeometry.ObjectsDescend",
+   "AlgebraicGeometry.ArtinGeometry.ArrowsDescend",
+   "AlgebraicGeometry.ArtinGeometry.ArrowEqualitiesDescend",
+   "AlgebraicGeometry.ArtinGeometry.IsLimitPreserving",
+   "AlgebraicGeometry.ArtinGeometry.RimSchlessinger",
+   "AlgebraicGeometry.ArtinGeometry.squareZeroAffine",
+   "AlgebraicGeometry.ArtinGeometry.squareZeroReduction",
+   "AlgebraicGeometry.ArtinGeometry.squareZeroMap",
+   "AlgebraicGeometry.ArtinGeometry.squareZeroProjection",
+   "AlgebraicGeometry.ArtinGeometry.MarkedDeformation",
+   "AlgebraicGeometry.ArtinGeometry.MarkedDeformation.Isomorphic",
+   "AlgebraicGeometry.ArtinGeometry.MarkedDeformation.Induces",
+   "AlgebraicGeometry.ArtinGeometry.FiniteTangent",
+   "AlgebraicGeometry.ArtinGeometry.InfinitesimalAutomorphism",
+   "AlgebraicGeometry.ArtinGeometry.FiniteInfinitesimalAutomorphisms",
+   "AlgebraicGeometry.ArtinGeometry.FiniteInfinitesimalSpaces",
+   "AlgebraicGeometry.ArtinGeometry.AdicNeighbourhood",
+   "AlgebraicGeometry.ArtinGeometry.adicTransition",
+   "AlgebraicGeometry.ArtinGeometry.adicInclusion",
+   "AlgebraicGeometry.ArtinGeometry.FormalSystem",
+   "AlgebraicGeometry.ArtinGeometry.FormalObjectsEffective",
+   "AlgebraicGeometry.ArtinGeometry.IsVersalAt",
+   "AlgebraicGeometry.ArtinGeometry.OpennessOfVersality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinGeometricAxioms.lean",
+  "statement": "def IsLimitPreserving (F : BasedCategory.{v, w} (Over (Spec (.of R)))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Five predicates over the actual affine base R. The existing downstream ArtinCriterion predicates fix Spec(ULift Z); the ArtinDeformationTestCategory predicates instead take a cofibred groupoid over one fixed-residue Artinian category. Neither interface gives these predicates on a total category over Sch/Spec R. Every construction has real data; no theorem or sorry occurs in this definition module."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05465a191",
+  "group": "Q61",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05465a191",
+  "group": "Q61",
+  "result": "pass",
+  "note": "Read item and new node def-sfb-artin-geometric-axioms against Stacks 07XY plus the axiom, versality and openness definitions. Both lean.statement fields verbatim; declaration list = file's 27 decls; one sorry (item theorem); no line over 100 chars; item changed only in lean and stmt_deps (+new node); new-node fields and three searches OK. Clauses: IsGRing; IsFibredInGroupoids; existing HasAlgebraicSpaceDiagonal; (1) objects/arrows/equalities descend over directed affine limits = 2-colimit equivalence; (2) lifted IsPushout over all finite-type Artinian local R-pushouts with nilpotent surjection = fibre-product equivalence; (3) coordinates onto K^n respecting the canonical K⊕(K×K) addition, [c] scalars and composition; (4) IsAdicComplete Noetherian local with finite-type residue field, coherent FormalSystem, effective with all transitions; (5) openness with IsVersalAt keeping b≫d=c. Conclusion: affine finite-type U, finite-type point u₀, R-iso e pinned via α over S, x₀→a(𝟙) over α, IsRepresentableByAlgebraicSpaces, existing SpaceMapIsSmooth on every HasSpaceBaseChange. No extra assumptions; edge cases R=0, n=0, any characteristic, identity thickening covered. No Mathlib/side duplicate except the downstream Spec-ℤ ArtinCriterion copies (theorem-owned, cannot state the general-R item, would be cyclic). Advisories: CategoryTheory.SpaceMapIsSmooth (owner def-sfb-algebraic-moduli-stack, landed) not in stmt_deps and the stable-pointed vocabulary reached only through the new node (maintainer may add both landed nodes); ArtinCriterion should later reuse these predicates; four unused proof-plan imports; Second reading is a dispatcher-policy self-audit, but the Worker report matches clause by clause. No compile (none changed)."
+ }
+}

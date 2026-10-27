@@ -185,7 +185,18 @@
   "def-weil-finite-torsion-constructibility"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-localization",
  "split_report": {
@@ -252,5 +263,25 @@
   "landing": "20261018T071153-L-1667997",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$ and $A=A_{E,n}$, put $\\kappa=A/(\\pi_E)$, let $T$ be a\nscheme on which $\\ell$ is invertible, and let\n$K\\in D^b_c(T_{\\Proet},A)$ be a bounded constructible complex of\n$A$-modules on the small pro-étale site in the intrinsic sense of\n[def-weil-finite-torsion-constructibility]. Then $K$ has finite\nTor amplitude in $[a,b]$ if and\nonly if the derived tensor product $K\\otimes_A^L\\kappa_T$ with the\nconstant sheaf $\\kappa_T$ has cohomology only in $[a,b]$.",
+  "proof": [
+   {
+    "text": "One direction is the definition [def-weil-finite-tor-amplitude], the\nconstant sheaf $\\kappa_T$ being a sheaf of $A$-modules placed in degree\nzero. Conversely, every sheaf $N$ of $\\kappa$-modules is flat over\n$\\kappa$ (sectionwise tensor over a field is exact, and so is\nsheafification), so by associativity of the derived tensor product of\n[def-weil-derived-tensor]\n\n$$\n\\mathcal H^r(K\\otimes^L_AN)\\cong\\mathcal H^r\\bigl((K\\otimes^L_A\\kappa_T)\n\\otimes^L_\\kappa N\\bigr)\\cong\\mathcal H^r(K\\otimes^L_A\\kappa_T)\\otimes_\\kappa N,\n$$\n\nwhich vanishes outside $[a,b]$. A sheaf $M$ of $A$-modules has the finite\nfiltration $\\pi_E^sM$, $0\\le s\\le n$, whose graded pieces are sheaves\nof $\\kappa$-modules; the long exact cohomology sequences of\n$K\\otimes^L_A-$ applied to the short exact sequences of this filtration\ngive $\\mathcal H^r(K\\otimes^L_AM)=0$ for $r\\notin[a,b]$, which is finite\nTor amplitude in $[a,b]$. The argument uses no stalks and no comparison\nwith the étale site.",
+    "uses": [
+     "def-weil-finite-tor-amplitude",
+     "def-weil-derived-tensor"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

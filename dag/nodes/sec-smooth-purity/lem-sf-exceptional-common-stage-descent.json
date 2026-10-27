@@ -1,0 +1,337 @@
+{
+ "id": "lem-sf-exceptional-common-stage-descent",
+ "kind": "statement",
+ "title": "Counit-normalized exceptional scalar comparisons and common-stage descent",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a field $k$ with $\\ell$ invertible, and a complementary closed/open pair $i:Z\\hookrightarrow X$, $j:U\\hookrightarrow X$ with $X$ separated of finite type over $k$ [def-weil-l-adic-coefficient-extension, def-weil-scheme-morphism-properties]. For every finite coefficient field $E\\subset\\Omega$, use the actual raw rational categories $D^b_c(T,E)$, and for $E\\subset L$ their specified scalar functors $S_{T,L/E}=-\\otimes_E L$ [def-weil-rationalization-karoubi]. Suppose the exact functors $i_*,i^*,J_E,j^*,Rj_*$ give $i^*\\dashv i_*\\dashv J_E$ and $j^*\\dashv Rj_*$, invertible closed/open counits, closed-to-open orthogonality in all shifts, and supported triangles with the actual adjunction maps. Assume the canonical coefficient comparisons for $i_*,i^*,j^*,Rj_*$ are invertible and normalized by derived tensor/pullback and the projection mate of the counit [def-weil-derived-pullback-tensor-hom, def-weil-derived-direct-image].\nEquip each right adjoint with the canonical shift structure induced by its specified adjunction and the fixed shift structure on its left adjoint [lem-weil-pbc-adjunction-shift-compatibility-unique]. The canonical input coefficient comparisons are understood with their identity, scalar-associator and shift coherence, as specified in [prop-weil-pbc-scalar-extension].\nThen the scalar comparison for $Rj_*$ carries $S_{X,L/E}(\\eta_{j,E})$ to $\\eta_{j,L}$, and there is a unique natural isomorphism\n$$b_{L/E}:S_{Z,L/E}J_E\\xrightarrow{\\sim}J_LS_{X,L/E}$$\nwhose closed pushforward preserves the exceptional counit. These $b$ are compatible with identity inclusions, successive inclusions, the actual scalar associators, exact shifts, and both adjunction maps. The supported triangles and all three arrows have these same compatibilities. The functors $J_E$ and their adjunctions therefore descend to the finite-field pair category $D^b_c(T,\\Omega)$ with filtered-colimit Hom groups of [def-weil-algebraically-closed-coefficients]. The descended functor is right adjoint to the specified $i_*$; its supported triangles are distinguished, have the specified counit and open unit, and retain closed-to-open orthogonality. This assertion selects the mate-normalized maps and their coherent colimit action, rather than only a fieldwise family of isomorphic objects.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Algebraically closed stage: projection mate, scalar cocycle, shift compatibility and pair-category descent; returned step 12"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $I_E=i_{*,E}$, $Q_E=j_E^*$, $R_E=Rj_{*,E}$, and denote the exceptional counit by $e_E:I_EJ_E\\to1$ and the open unit by $v_E:1\\to R_EQ_E$. Suppress only the specified functor associators. Put $c:S_XI_E\\xrightarrow{\\sim}I_LS_Z$, $p:Q_LS_X\\xrightarrow{\\sim}S_UQ_E$, and $r:S_XR_E\\xrightarrow{\\sim}R_LS_U$. The assumption that $r$ is the counit projection mate means exactly that it is the right mate of $p$. The mate unit equation gives $r_{Q_EK}S_X(v_{E,K})=R_L(p_K)v_{L,S_XK}$. Consequently $t_K=R_L(p_K^{-1})r_{Q_EK}$ identifies $S_X(R_EQ_EK)$ with $R_LQ_LS_XK$ and satisfies $t_KS_X(v_{E,K})=v_{L,S_XK}$. This proves the claimed open-unit normalization; it is an equation of the actual maps.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: normalize the open comparison by its projection mate; categories.tex Tag 0B65, lemma-transformation-between-functors-and-adjoints (unit form)."
+   }
+  },
+  {
+   "text": "The closed counit $i_E^*I_E\\xrightarrow{\\sim}1$ makes $I_E$ fully faithful: the adjunction bijection followed by this counit identifies $\\operatorname{Hom}(I_EP,I_EQ)$ with $\\operatorname{Hom}(P,Q)$, with $I_E(f)$ corresponding to $f$. After scalar extension the given triangle for $K$ is distinguished. Its first vertex $A=S_XI_EJ_EK$ is identified by $c$ with $I_LS_ZJ_EK$, and its middle vertex is $M=S_XK$; step 1 identifies its last vertex $B$ with $R_LQ_LM$. Compare it with the specified $L$-triangle $A'=I_LJ_LM\\xrightarrow{e_L}M\\xrightarrow{v_L}B'$. Thus both last vertices are open and both first vertices are closed. All groups $\\operatorname{Hom}(A,B'[n])$ vanish by the assumed closed-to-open orthogonality; the same applies with the two triangles interchanged. Scalar extension is exact by the canonical coefficient package in the hypotheses.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: scalar extension of the supported triangle and closed full faithfulness."
+   }
+  },
+  {
+   "text": "For these two triangles, postcomposition with $e_L:A'\\to M$ gives a bijection $\\operatorname{Hom}(A,A')\\to\\operatorname{Hom}(A,M)$. Surjectivity follows from Hom-into-triangle exactness since $\\operatorname{Hom}(A,B')=0$; injectivity follows by rotating the target triangle, since a map killed by $e_L$ factors through $B'[-1]$, whose Hom from $A$ is zero. Let $h:A\\to A'$ be the unique lift of the scalar-extended first arrow $a:A\\to M$. TR3 extends $(h,1_M)$ to $(h,1_M,u)$. Its last component is necessarily the previously specified $t:B\\to B'$: the difference $u-t$ vanishes after the second arrow from $M$, hence factors through $A[1]$ by Hom-out-of-triangle exactness, and $\\operatorname{Hom}(A[1],B')=0$. The last square therefore commutes. Since $1_M$ and $t$ are isomorphisms, $h$ is an isomorphism by the triangle-morphism two-out-of-three lemma. Full faithfulness of $I_L$ now lifts $hc^{-1}$ uniquely to $b_K:S_ZJ_EK\\xrightarrow{\\sim}J_LS_XK$. Its inverse lifts the inverse of $hc^{-1}$, so this is genuinely an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: the orthogonal fibre comparison; derived.tex Tags 0149 (lemma-representable-homological) and 014A (lemma-third-isomorphism-triangle)."
+   }
+  },
+  {
+   "text": "The defining equation is $e_{L,S_XK}I_L(b_K)c_{J_EK}=S_X(e_{E,K})$. By the closed adjunction bijection this says exactly that $b$ is the mate of $c^{-1}:I_LS_Z\\to S_XI_E$; the mate is a natural transformation and its counit equation is the displayed one. The bijection also shows that any counit-preserving natural transformation equals $b$. Its unit compatibility is the mate unit equation: $b_{I_EP}S_Z(\\eta^J_{E,P})=J_L(c_P^{-1})\\eta^J_{L,S_ZP}$. Thus both exceptional adjunction maps have the required coefficient normalization, not just the counit.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-amb-mate-unit-counit",
+    "lem-pur-mate-unit-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: identify the exceptional comparison as the normalized right mate; categories.tex Tag 0B65."
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset N$, write $a_T:S_{T,N/L}S_{T,L/E}\\xrightarrow{\\sim}S_{T,N/E}$ for the actual scalar associators. Pasting mates applied to the coherent inverse closed comparisons gives\n$$b_{N/E}(a_ZJ_E)=(J_Na_X)(b_{N/L}S_{X,L/E})(S_{Z,N/L}b_{L/E}).$$\nThe identity square gives the identity mate, interpreted with the actual scalar unitors. Apply the same pasting identity to the squares for shift functors: the shift of $b$ and its value on a shifted object have the same counit transpose, since $c$ and scalar extension commute with shifts. The canonical right-adjoint shifts are the unique ones compatible with those left-adjoint shifts and counits, so these two comparisons agree. This proves identity, tower, associator and exact-shift coherence for $b$. No invertibility of a general right mate is being asserted: invertibility here was proved in step 3.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: scalar cocycle and shift compatibility; canonical right-adjoint shifts and mate pasting."
+   }
+  },
+  {
+   "text": "The preceding comparisons identify the first two arrows of each supported triangle, and step 3 proves that its third-arrow square also commutes. For completeness this comparison is unique among morphisms of these supported triangles extending a fixed middle map: the first component is forced by the injectivity of postcomposition with the target counit, and the last is forced by injectivity of precomposition with the source open unit, using the two Hom-exactness arguments in step 3. For two choices of a connecting arrow on the fixed three vertices, apply TR3 to the backward-rotated triangles and the identities on the middle and last vertices. The forced first component is the identity, so the last square says the two connecting arrows agree. Identities, composites, scalar towers and shifts therefore give the same maps on all three arrows; the finite-stage supported triangles are natural in $K$ for the same reason.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: uniqueness of the triangle maps and compatibility of the connecting arrow; derived.tex Tags 0145 and 0149."
+   }
+  },
+  {
+   "text": "Apply coherent pair-functor descent to the additive exact families $J_E$ with comparisons $b$. It sends $(E,K)$ to $(E,J_EK)$. For a common-stage representative $u:S_{X,M/E}K\\to S_{X,M/F}K'$, its value is\n$$[M,b_{M/F,K'}^{-1}J_M(u)b_{M/E,K}].$$\nThe tower equation in step 5 is precisely the hypothesis making this independent of representatives and further fields. Apply the same descent to the already specified $i_*,i^*,j^*,Rj_*$ and to their compatible units and counits. The lemma descends compositions and equations, hence descends the two adjunction triangle identities. It also descends the three triangle arrows of step 6 as natural transformations. This uses the existing raw pair categories: no idempotents or new lattices are introduced.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: functors and adjunction maps on common-field representatives."
+   }
+  },
+  {
+   "text": "More explicitly, for $P=(E,P_E)$ on $Z$ and $K=(F,K_F)$ on $X$, identify the two common-stage Hom groups using the canonical comparisons for $I$ and $b$. At each $M\\supset E,F$ the Hom bijection is $f\\mapsto J_M(f)\\eta^J_{M,S_{Z,M/E}P_E}$, with inverse $g\\mapsto e_{M,S_{X,M/F}K_F}I_M(g)$. Their compatibility with enlarging $M$ is exactly the unit and counit equations of step 4. Thus both formulas pass to equivalence classes. Their composites are identities because at any common stage they are identities; their naturality for an arbitrary pair-category morphism is checked by representing that morphism and $f$ or $g$ at one common overfield. This gives natural inverse Hom bijections on the filtered-colimit Hom groups. The adjunction-of-bijections lemma identifies their unit and counit with the descended ones, since transposing the identity at its original finite stage gives those same maps.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: actual adjunction Hom bijections on the filtered-colimit groups."
+   }
+  },
+  {
+   "text": "Every pair-category object is $(E,K)$ and its supported triangle is the image of the $E$-triangle. The exactness of the finite-stage inclusion makes that image distinguished. Its first and second arrows are the specified descended exceptional counit and open unit by steps 6--8. Exactness of the descended $J$ can also be read directly: represent a distinguished triangle at a finite field $M$, apply the exact functor $J_M$, and use step 5 for its shift and step 7 for its arrows. Finally, for $P=(E,P_E)$, $N=(F,N_F)$, every element of $\\operatorname{Hom}(i_*P[m],Rj_*N)$ is represented, after the operation and shift comparisons, in $\\operatorname{Hom}(I_MS_{Z,M/E}P_E[m],R_MS_{U,M/F}N_F)$ for some $M\\supset E,F$. This group is zero by the assumed finite-stage orthogonality. Every class is consequently zero, for every $m$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "thm-weil-pbc-verdier-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Algebraically closed stage: distinguished triangles, exactness and cross-stage orthogonality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-pur-mate-unit-compatibility",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-sf-triangle-morphism-iso",
+  "lem-amb-mate-unit-counit",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Algebraically closed stage, expanded using the explicit mate equations and Stacks derived.tex Tags 0149 and 014A; no SGA source."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent scalar extension of exceptional closed support adjoint from unique orthogonal triangle and descent to algebraic closure coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapExactFunctor_smul\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyLE b] [Y.IsStrictlyGE a]\\n  [Y.IsStrictlyLE b] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ Y',\\n    ∃ (_ : Y\", \"doc\": \"Given cochain complexes $X$ and $Y$ with integer indices, where $X$ is strictly supported in degrees $\\\\leq b$, $Y$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and a morphism $f: Q(X) \\\\to Q\"}\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.left_fac_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y)\\n  (n : ℤ) [Y.IsStrictlyGE n],\\n  ∃ Y',\\n    ∃ (_ : Y'.IsStrictlyGE n),\\n      ∃ g s,\\n        \", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, a morphism $f: Q(X) \\\\to Q(Y)$ in the derived category, and an integer $n$ such that $Y$ is strictly suppo\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"DerivedCategory.instIsLEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsLE n\", \"doc\": \"An object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, which consists of objects isomorphic to cochain complexes strictly supported in degrees $ \\\\leq n $, as defined by \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.colimit",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement.*(scalar|colimit)|exceptional.*(descent|coher)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed support right adjoint scalar extension counit mate cocycle common coefficient field descent",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \": coextendScalars f ⋙ restrictScalars f ⟶ 𝟭 (ModuleCat R)\", \"doc\": \"The counit of the adjunction between coextension of scalars and restriction of scalars functors, which provides a natural transformation from the composition $\\\\operatorname{Coext}_f \\\\circ \\\\operatornam\"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {Y : ModuleCat S}\\n  (a : TensorProduct R S ↑Y),\\n  (ModuleCat.Hom.hom (ModuleCat.ExtendRestrictScalarsAdj.Counit.map f)) a =\\n    (TensorProduct.lift\\n        { toFun := fun s => { toFun := fun y => s • y, map_add' :=\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit morphism of the adjunction between extending and restricting scalars provides a natura\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          (ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f) ⟶ CategoryTheory.Functor.id (ModuleCat S)\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, this is the counit natural transformation of the adjunction between extending scalars from $ R $ \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {Y : ModuleCat S} → ((ModuleCat.restrictScalars f).comp (ModuleCat.extendScalars f)).obj Y ⟶ Y\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, and an $ S $-module $ Y $, this is the counit morphism of the adjunction between extending and restricting scalars. It provid\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (Y ⟶ (ModuleCat.coextendScalars f).obj X) → ((ModuleCat.restrictScalars f).obj Y ⟶ X)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) (X : ModuleCat R),\\n  (ModuleCat.RestrictionCoextensionAdj.counit' f).app X =\\n    ModuleCat.ofHom { toFun := fun g => g.toFun 1, map_add' := ⋯, map_smul' := ⋯ }\", \"doc\": \"Let $R$ and $S$ be rings, and let $f: R \\\\to S$ be a ring homomorphism. The restriction of scalars functor $\\\\mathrm{Res}_f: \\\\mathrm{Mod}_S \\\\to \\\\mathrm{Mod}_R$ is left adjoint to the coextension of scal\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection mate preserves open unit induces coherent shriek comparisons on filtered colimit Hom categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.lanPresheafExt_hom\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F G : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))} (S : Profiniteᵒᵖ)\\n  (i : FintypeCat.toProfinite.op.comp F ≅ FintypeCat.toProfinite.op.comp G),\\n  (Condensed.lanPresheafExt i).hom.app S =\\n    CategoryTheory.Limits.colimMap\\n      ((CategoryTheory.CostructuredArrow.proj FintypeCat.toProfinit\", \"doc\": \"For presheaves $ F, G : \\\\text{Profinite}^{\\\\text{op}} \\\\to \\\\text{Type} $ and an isomorphism $ i : \\\\text{toProfinite}^{\\\\text{op}} \\\\circ F \\\\cong \\\\text{toProfinite}^{\\\\text{op}} \\\\circ G $, the hom-component\"}\n  {\"name\": \"LightCondensed.lanPresheafExt_hom\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F G : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)} (S : LightProfiniteᵒᵖ)\\n  (i : FintypeCat.toLightProfinite.op.comp F ≅ FintypeCat.toLightProfinite.op.comp G),\\n  (LightCondensed.lanPresheafExt i).hom.app S =\\n    CategoryTheory.Limits.colimMap\\n      ((CategoryTheory.CostructuredArrow.proj Fi\", \"doc\": \"For functors $F, G : \\text{LightProfinite}^\\\\text{op} \\\\to \\\\text{Type}\\\\, u$ and a natural isomorphism $i : F \\\\cong G$, the hom-component of the induced presheaf extension $\\\\text{lanPresheafExt}(i)$ at an\"}\n  {\"name\": \"CategoryTheory.constantCommuteCompose\", \"module\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      {D : Type u_2} →\\n        [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J D] →\\n            {B : Type u_3} →\\n              [\", \"doc\": \"There is a natural isomorphism between the composition of the constant sheaf functor with values in $ D $ followed by sheaf composition with $ U $, and the composition of $ U $ with the constant sheaf\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the underlying presheaf of the unit of the adjunction between cocontinuous an\"}\n  {\"name\": \"LightCondensed.isoLocallyConstantOfIsColimit\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n    ((S : LightProfinite) →\\n        CategoryTheory.Limits.IsColimit (F.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))) →\\n      (F ≅\\n        LightCondensed.locallyConst\", \"doc\": \"Given a contravariant functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type} $, if for every light profinite space $ S $ the cocone constructed from $ S $'s limit cone is a colimit for the co\"}\n  {\"name\": \"LightCondensed.lanPresheafNatIso_hom_app\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)}\\n  (hF :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (F.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone)))\\n  (S : LightProfiniteᵒᵖ),\\n  (LightCondensed.lanPresheafNatIso hF).hom.app S =\\n    CategoryTheory.\", \"doc\": \"Given a contravariant functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type} $ satisfying the colimit condition $ hF $, for any object $ S $ in the opposite category $ \\\\text{LightProfinite}^{\"}\n  {\"name\": \"Condensed.lanPresheafNatIso_hom_app\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F : CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))}\\n  (hF : (S : Profinite) → CategoryTheory.Limits.IsColimit (F.mapCocone S.asLimitCone.op)) (S : Profiniteᵒᵖ),\\n  (Condensed.lanPresheafNatIso hF).hom.app S =\\n    CategoryTheory.Limits.colimit.desc\\n      ((CategoryTheory.CostructuredArrow.proj F\", \"doc\": \"Given a presheaf $ F : \\text{Profinite}^{\\text{op}} \\to \\text{Type} $ satisfying colimit conditions on discrete quotients, the hom-component of the canonical isomorphism between the left Kan extension of \"}\n  {\"name\": \"LightCondensed.lanPresheafExt_inv\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {F G : CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)} (S : LightProfiniteᵒᵖ)\\n  (i : FintypeCat.toLightProfinite.op.comp F ≅ FintypeCat.toLightProfinite.op.comp G),\\n  (LightCondensed.lanPresheafExt i).inv.app S =\\n    CategoryTheory.Limits.colimMap\\n      ((CategoryTheory.CostructuredArrow.proj Fi\", \"doc\": \"For presheaves $F,G : \\text{LightProfinite}^\\\\text{op} \\\\to \\\\text{Type}\\\\, u$ and a natural isomorphism $i : \\\\text{toLightProfinite}^\\\\text{op} \\\\circ F \\\\Rightarrow \\\\text{toLightProfinite}^\\\\text{op} \\\\circ G\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*(scalar|descent)|recollement.*(scalar|colimit)",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoint to closed pushforward descends to common coefficient field category preserving localization triangles",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, PresheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Adjunction.derived'",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Triangulated",
+   "results": "No hits; loogle: unknown identifier 'CategoryTheory.Triangulated'",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional closed immersion right adjoint coherent scalar extension supported localization triangle descent filtered colimit coefficient fields",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, localCohomology.diagram, Condensed.freeForgetAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors with orthogonal distinguished localization triangles right mate scalar comparison isomorphism coherent coefficient changes",
+   "results": "Hits: CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.map_distinguished_exact, CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "Hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|homology.*exact",
+   "results": "Hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: results give component adjunction, triangulated or module-sheaf facts; none states exceptional scalar comparison plus raw common-stage descent"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Algebraically closed stage: projection mate, scalar cocycle, shift compatibility and pair-category descent; returned step 12",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exceptional-common-stage-descent",
+  "worker": "stage1",
+  "summary": "Expanded the normalized open-unit mate calculation, orthogonal supported-triangle comparison, exceptional mate coherence and explicit common-stage action. Reused existing nodes throughout; no new lemma is needed. Clarified the necessary canonical adjunction-induced shift normalization.",
+  "blueprint": "Realizes the algebraically closed-stage paragraph of prop-sf-localization-all-stages.proof.md: uniqueness of the supported fibre, coherent scalar comparisons, functor and adjunction descent, distinguished triangles and filtered-colimit Hom bijections.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic mate pasting for scalar towers; the localization unit has no statement of this categorical identity."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic uniqueness of the right-adjoint shift structure for a specified adjunction; fixes the shift normalization used by localization."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic pseudocone functor and natural-transformation descent on the raw additive pair category; not a substitute route for supported localization."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Generic construction and unit/counit formulas for an adjunction from natural Hom bijections; no localization-specific route is replaced."
+   },
+   {
+    "node": "thm-weil-pbc-verdier-axioms",
+    "why": "Generic exactness of the inclusions into the same raw common-stage categories; used only after constructing supported triangles at finite fields."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-c5fcbd1c3",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c5fcbd1c3 (reviewer sub-agent of L); spot-checked: I read all nine steps against the 'Algebraically closed stage' paragraph of the main-20261015 proof of prop-sf-localization-all-stages and against the statement of every cited node. The delivery adds no new nodes, and the only re-split note belongs to the parent, so this is an ordinary one-level split. I accept the statement correction (shifts on right adjoints are the ones the adjunctions induce). The counterexample holds: take Z=X, U empty, D^b of E-vector spaces; (Id, twice the shift comparison) is still exact, and since preserving the counit forces b=id, b cannot intertwine the two shifts at E and L. The parent's use of the item still holds after the correction. Step checks: step 1 is the mate-unit lemma with L1=j_E^*, G=S_X, H=S_U, alpha=p, and I recomputed t S_X(v)=v_L. In step 3, surjectivity and injectivity of postcomposition with e_L follow from hom-into-triangle (ii), the latter after a backward rotation, since Hom(A,B'[-1])=0; u=t by hom-out-of-triangle (ii) and Hom(A[1],B')=0; h is an isomorphism by lem-sf-triangle-morphism-iso (the right node); lifting through the fully faithful I_L gives b. In step 4, the defining equation is the counit identity for alpha=c^{-1}, so b is the mate (natural and unique), and the unit equation is the mate-unit lemma. In step 5, pasting clause 1 gives the tower equation demanded by the descent lemma, and the canonical J-shift is the mate of the I-shift, so compatibility with shifts also follows by pasting. Step 6 is the uniqueness argument through orthogonality. Step 7: the hypotheses of lem-sbc-coherent-pair-functor-descent match. The source cites prop-weil-pbc-descent-functors, but that node lives on the PBC categories, so the generic lemma avoids identifying them with the framework categories; I accept it as a tool use. Steps 8 and 9 use the adjunction-from-natural-bijection lemma and exactness of the finite-stage inclusions (thm-weil-pbc-verdier-axioms); cross-stage orthogonality is checked at a common field. No SGA source is used, and the DAG search found no duplicate. I accept all five declared tool uses. Maintainer notes: (1) def-weil-algebraically-closed-coefficients itself asserts that its pair category has the PBC common-stage cones and Verdier axioms, and step 9 relies on that; (2) the descent lemma assumes the transition E to E is literally the identity, whereas tensoring with E over E is only isomorphic to it (step 5 handles this with the unitors)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalCommonStageDescent",
+  "declaration": "WeilConjectures.ExceptionalCommonStage.exceptionalCommonStageDescent",
+  "declarations": [
+   "WeilConjectures.ExceptionalCommonStage.boundaryShiftCompatible",
+   "WeilConjectures.ExceptionalCommonStage.FiniteData",
+   "WeilConjectures.ExceptionalCommonStage.scalarUnit",
+   "WeilConjectures.ExceptionalCommonStage.Hypotheses",
+   "WeilConjectures.ExceptionalCommonStage.GeometricNormalization",
+   "WeilConjectures.ExceptionalCommonStage.comparison",
+   "WeilConjectures.ExceptionalCommonStage.firstMap",
+   "WeilConjectures.ExceptionalCommonStage.lastMap",
+   "WeilConjectures.ExceptionalCommonStage.FiniteConclusion",
+   "WeilConjectures.ExceptionalCommonStage.exceptionalSystem",
+   "WeilConjectures.ExceptionalCommonStage.Descent",
+   "WeilConjectures.ExceptionalCommonStage.Descent.boundaryShift",
+   "WeilConjectures.ExceptionalCommonStage.exceptionalCommonStageDescent"
+  ],
+  "file": "lean/Sheaf/Paper/ExceptionalCommonStageDescent.lean",
+  "statement": "theorem exceptionalCommonStageDescent {l : ℕ} [Fact l.Prime] {Ω : Type v} [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (k : Type u) [Field k] (hl : IsUnit (l : k)) {X Z U : Scheme.{u}} (s : X ⟶ Scheme.Spec.obj (Opposite.op (CommRingCat.of k))) [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (hij : Set.range j.base = (Set.range i.base)ᶜ) (D : FiniteData l Ω X Z U) (hD : Hypotheses D) (hgeom : GeometricNormalization i j D) : ∃ (F : FiniteConclusion D) (R : Descent D F), R.boundaryShift D F",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f25b6d530",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Read the item node, all 10 stmt_dep records, the source place (algebraically closed stage), the delivered module and the live declarations it uses (StageSystem.Morphism/functor/ιCompFunctorIso, GeneralAlgebraicallyClosedCoefficients Stage/stageSystem/unitor/Pair/inclusionCommShift/shift_existsUnique, rationalDerivedPullback/operationStageTransitionIso/commonStagePullbackComparison). Node copy differs from live only in lean; statement verbatim; 13 declarations present; one sorry. Hypotheses match: exact functors, three adjunctions, invertible counits, orthogonality for all n, distinguished supported triangles with the actual counit/unit, pullbacks pinned by HEq to rationalDerivedPullback and commonStagePullbackComparison (directions and types checked), push comparisons = right mates of the inverse pullback comparisons (mateEquiv directions checked), adjunction-induced right shifts via Adjunction.CommShift (excludes the stage-1 counterexample), input unit/tower/shift coherence with the actual unitor and associators. Conclusions: comparison is the real mate, invertible/unique/counit/unit/identity/tower/CommShift; openUnit = step-1 t; third arrow square; boundary naturality; signed boundary shift law (sign re-derived from Mathlib Triangle.shiftFunctor); descent on the recorded Pair category with the representative formula, exactness and shift pins, actual adjunctions with all units/counits pinned, distinguished triangle and cross-stage orthogonality. Edge cases (empty Z/U, E=L, all n, independent universes) covered; no hollow defs, docstrings OK, no pro-etale or PBC substitute. Advisory only: free left-adjoint shifts (harmless generalization), push functors assumed as right adjoints as in the node, unused stmt_dep imports PbcScalarExtension/SfDerivedDirectImage. No fix, no compile needed."
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "id": "lem-sf-twisted-action-site-restriction",
+ "kind": "statement",
+ "title": "Construction and restriction for the twisted ringed action site",
+ "statement": "Let $(C,J)$ be a small site with pullbacks, $s:C\\simeq C$ with both directions continuous, $R$ a commutative ring sheaf, and $a:(s^{-1})^*R\\simeq R$. There is a RestrictionPresentation [def-sf-twisted-action-presentation-data]: the integer-labelled ringed category with generated topology, coefficient sheaf and prescribed minus-one action, the module and set restriction equivalences to fixed pairs, and the ringed geometric restriction with its structural map and module-pullback adjunction. This assertion does not include created limits, orbit induction, tensor or internal Hom.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original twisted-site proof steps 1--6; the topology and semilinear restriction calculation. Agent twisted variant of Tag 00W0 (proposition-sheaves-on-group), motivation only; exact non-SGA reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Use siteCore to obtain the underlying site, coefficient sheaf, and cocontinuity of its degree-zero inclusion.",
+   "uses": [
+    "lem-sf-twisted-action-site-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module translation is an equivalence: use the Mathlib pushforwardPushforwardEquivalence with s inverse, the given coefficient isomorphism, and its transported inverse. Naturality and the unit/counit triangle identities verify the two structural-ring compatibility equations; this is the proved private sigma_isEquivalence helper. No new assumption on the fixed pairs is needed.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply moduleRestriction and setRestriction to this same underlying Site. These supply the two equivalences, natural restriction isomorphisms, and both generator equations.",
+   "uses": [
+    "lem-sf-twisted-action-module-restriction",
+    "lem-sf-twisted-action-set-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply geometricRestriction using the cocontinuity from siteCore. It gives the normalized ringed morphism and an adjunction for actual module restriction. Transfer this adjunction through the module restriction natural isomorphism by Adjunction.ofNatIsoLeft.",
+   "uses": [
+    "lem-sf-twisted-action-geometric-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Actual module restriction is additive because its section maps are unchanged linear maps. Transport that property through the restriction natural isomorphism by Functor.additive_of_iso and apply Functor.map_add to obtain the specified underlying-map addition equation. Assemble all fields of RestrictionPresentation, taking translation to be the proved sigma equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-twisted-action-site-core",
+  "lem-sf-twisted-action-module-restriction",
+  "lem-sf-twisted-action-set-restriction",
+  "lem-sf-twisted-action-geometric-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "D5",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Original construction steps 1--6; three genuine construction sub-obligations, with translation, geometric coefficient transport, additivity, and adjunction assembly proved in Lean."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves with an invertible semilinear action of a site automorphism are modules on its semidirect ringed action site; restriction preserves tensor and internal Hom",
+   "results": "8 hits: SheafOfModules.hom_ext, SheafOfModules.restrictScalars, SheafOfModules.instCategory, AlgebraicGeometry.Scheme.Modules, SheafOfModules, PresheafOfModules.Sheafify.map_smul_eq, SheafOfModules.mk, PresheafOfModules.Sheafify.module. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.forget",
+   "results": "6 hits: CategoryTheory.Endofunctor.Algebra.forget, CategoryTheory.Endofunctor.Algebra.forget_faithful, CategoryTheory.Endofunctor.Algebra.forget_reflects_iso, CategoryTheory.Endofunctor.Algebra.forget_obj, CategoryTheory.Endofunctor.Algebra.forget_map, CategoryTheory.Algebra.forget_additive. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|IsoAlgebra|preservesFiniteLimits_of_preservesHomology",
+   "results": "9 hits: Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean, Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/Algebra/Category/Grp/AB.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Homology/ShortComplex/ExactFunctor.lean, Mathlib/Algebra/Category/AlgCat/Basic.lean. Related primitives only; the explicit source free-algebra construction is reused. No complete normalized twisted-site presentation or orbit package.",
+   "date": "2026-10-22",
+   "verdict": "related declarations reused; no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionRingedSite",
+  "date": "2026-10-22",
+  "group": "U3"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 1--6; the topology and semilinear restriction calculation.",
+   "via": [
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionSiteRestriction",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionSiteRestriction.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.siteRestriction",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.siteRestriction"
+  ],
+  "statement": "theorem siteRestriction [HasPullbacks C] : Nonempty (RestrictionPresentation J s R a)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "C-9bf8a",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261023T105703-L-3592432",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261027T064441-L-2179293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

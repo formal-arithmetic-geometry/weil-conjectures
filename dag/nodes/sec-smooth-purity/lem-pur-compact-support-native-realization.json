@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-compact-support-native-realization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; auxiliary scalar-limit argument Step 1, normalized realization of the specified native towers.",
+   "via": [
+    "lem-pur-compact-support-scalar-limit-reduction",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Normalized realization of any specified native support tower",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite, $D$ a finite-field datum with $\\ell\\ne D.p$, and $f:X\\to Y$ a separated finite-type morphism of finite-type $D.k$-schemes. Fix a compactification $c$, a reduction calculus $S$ of [def-coef-derived-system-calculus-data], and a constructible completed-integral object $K$ as in [lem-coef-compact-support-normalized-realization]. There exists a realization $R$ with exactly the levels, complex identifications and transition equations of that node, and its normalized underlying tower is equal to $(\\operatorname{scalarSupportCompletedTower}_{E,c,S})(K)$ of [def-pur-compact-support-scalar-limit-maps]. The equality retains the prescribed native system at every positive exponent.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 07A6 (lemma-adjoint); application to the native proper/open coefficient system. The finite compact-support compatibility is more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings).",
+  "note": "Lean split/construction: lean/Sheaf/Paper/CompactSupportNativeRealization.lean:50; source proof step is recorded in proof_origin and the declaration docstring."
+ },
+ "stmt_deps": [
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-coef-derived-system-calculus-data",
+  "lem-coef-compact-support-normalized-realization"
+ ],
+ "proof": [
+  {
+   "text": "Use the native system transition formula and input reduction compatibility to identify its finite transition with coefCompactSupportNormalizedTau. The finite-action normalization makes its exact completed restriction a normalized DVR tower.",
+   "uses": [
+    "lem-weil-compact-support-native-system-transition",
+    "lem-coef-compact-support-input-tower-compatibility",
+    "lem-weil-compact-support-coefficient-transition",
+    "def-weil-compact-support-finite-action",
+    "lem-coef-compact-support-normalized-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent the native coefficient sequence by a complex. Exact evaluation gives its finite complexes and chain maps; exact scalar restriction gives its completed strict tower. Derived transition factorization proves the finite equations, and restrictedTransition proves the completed equation degree by degree. Its tower is the native restriction by construction.",
+   "uses": [
+    "lem-coef-sequence-roos-model",
+    "lem-weil-compact-support-reduction-tower-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-compact-support-native-system-transition",
+  "lem-coef-compact-support-input-tower-compatibility",
+  "lem-weil-compact-support-coefficient-transition",
+  "def-weil-compact-support-finite-action",
+  "lem-coef-compact-support-normalized-realization",
+  "lem-coef-sequence-roos-model",
+  "lem-weil-compact-support-reduction-tower-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), Tag 07A6 (lemma-adjoint); application to the native proper/open coefficient system. The finite compact-support compatibility is more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings). Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; auxiliary scalar-limit argument Step 1, normalized realization of the specified native towers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized compact support scalar extension derived inverse limit finite reduction projection adjunction",
+   "results": "8 unrelated Mathlib hits, including Condensed.profiniteSolidCounit; no normalized support-tower comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "effectivity of normalized DVR towers with canonical projection adjoints",
+   "results": "8 unrelated ring-theoretic/normalization hits, including IsDedekindDomainDvr.toIsNoetherian; no derived tower effectivity.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "CategoryTheory.Adjunction.homEquiv, homEquiv_unit and homEquiv_counit provide the adjunction API, but not native tower realization or scalar descent.",
+   "date": "2026-10-27",
+   "verdict": "partial match: generic adjunction API"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedDVRTower_effectivity|coefficientConstantTower_roos|compactSupportSystem_normalized",
+   "results": "msearch returned zero Mathlib hits. Repository rg found normalizedDVRTower_effectivity, coefficientConstantTower_roos and the native normalization helper, used in the proved supporting modules.",
+   "date": "2026-10-27",
+   "verdict": "no Mathlib match; project declarations used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarLimitReduction",
+  "group": "D4",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportNativeRealization",
+  "file": "lean/Sheaf/Paper/CompactSupportNativeRealization.lean",
+  "declaration": "WeilConjectures.compactSupport_native_realization",
+  "statement": "theorem compactSupport_native_realization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}} {f : X ⟶ Y}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (K : DerivedCategory (scalarReductionSource l E X)) (hK : sfIntegralConstructible l E X K) :\n    ∃ R : CoefCompactSupportRealization l E D hl c K,\n      CoefCompactSupportRealizationSpec l E D hl c K R ∧\n      R.normalized.tower = (PurStrictScalar.scalarSupportCompletedTower l E c S).obj K",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T123428-L-2296448",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

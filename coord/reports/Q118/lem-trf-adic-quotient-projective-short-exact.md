@@ -1,0 +1,33 @@
+## Worker report
+
+Files written: `dag/nodes/sec-trace-formula/lem-trf-adic-quotient-projective-short-exact.json` (item, split; not a Mathlib leaf), and `citations.json` (one verbatim statement quote for each citation in each proof step). There are no new nodes and no new Mathlib leaves. All writes are in this item's sandbox.
+
+Attachments: none. Searches of `lean/WeilConjectures/` for the exact blueprint tag and projective/quotient/adic/nilpotent wording found no declaration stating the item. Existing references to projective quotients concern other results and do not supply this tower.
+
+WANTED: none.
+
+The item had an empty proof, not an established argument. Its statement agrees with the portion of Stacks Tag 05D3 (algebra.tex, lemma-split-completed-sequence) assigned to it. I retained every hypothesis, conclusion, source and blueprint ancestry field. Its Mathlib searches from Q43 remain recorded; I additionally ran and read six Q118 searches in searches.jsonl, including two different semantic phrasings. Completion exactness requires absent Noetherian/finite hypotheses; projective_of_finitePresentation requires absent finite presentation; formal smoothness and unramifiedness hits concern algebra-specific hypotheses. None states the item or gives its projectivity clause in one line. I read Mathlib Flat/Equalizer.lean lines 185-212, Flat/Stability.lean lines 90-110 and TensorProduct/Quotient.lean lines 145-173 for the existing tools. The supplemental grep located projective_of_finitePresentation at Flat/EquationalCriterion.lean:287 and exposes its extra hypothesis.
+
+Nothing remains unfinished in this one-level split. No Lean file was written and no compiler, Lake or build tool was run.
+
+## Blueprint and duplicate search
+
+I read the latest blueprint's `sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.md` and `.proof.md`, together with the chapter/unit records. This item is a supporting algebraic descendant, through completion splitting, of that ancestor, not a replacement for its geometric proof. The existing from.place specifies the supporting Tag 05DP -> 05DK -> 05D3 chain and remains intact. Whole-blueprint searches for `projective quotient`, `adic quotient projective`, and `flat nilpotent projective` found no equivalent blueprint node. Whole-DAG source/tag and statement searches for 05D3, 05CG, 00HL, flat-tor-zero, flat base change, nilpotent projectivity, and tensor short exactness identified the nodes used here. In particular I reused lem-trf-local-nilpotent-projective-flat-lift rather than duplicating Tag 05CG.
+
+## Not duplicates
+
+No new nodes: no new/existing same-tag pairs need justification. The general existing lemmas are cited directly, and the item still proves its own quotient sequence, quotient module and reduction squares.
+
+## Review by Q118
+
+I opened algebra.tex at Tag 05D3, lemma-split-completed-sequence (lines 23177-23215), and checked the hypotheses: R is arbitrary commutative, I is arbitrary, the given sequence is short exact, M is flat, and only its first reduction is assumed projective. There is no finite-generation, finite-presentation, Noetherian or completeness hypothesis. The source invokes lemma-flat-tor-zero for quotient exactness and lemma-lift-projective for each quotient's projectivity. I read those statements and proofs at Tags 00HL (lemma-flat-tor-zero, lines 9037ff) and 05CG (lemma-lift-projective, lines 18924ff), and Tag 00HI (lemma-flat-base-change, lines 8889ff). No new node requires a separate source reading.
+
+Step 1 is elementary: linearity sends each generator rx of I^nL to rf(x), and I^(n+1)L is contained in I^nL. This proves all the induced maps exist, with the precise quotient scalar action. It is not a hidden exactness or lifting claim.
+
+For step 2 I read the statements of lem-weil-pbc-flat-quotient-tensor-injective and lem-weil-pbc-tensor-over-quotient-ring. The former explicitly gives a short exact tensor sequence for ANY tensor module when the final term is flat; it is not merely tensor exactness with a flat tensor factor. Taking that arbitrary module to be R/I^n verifies every hypothesis from the given u,v,M. The latter's clause (1) gives exactly the quotient-tensor identification. The proof writes the scalar-action check and both map formulas on tensor generators, so exactness is obtained for the stated u_n,v_n, not for unnamed isomorphic maps. These are the only non-elementary facts in that step. Both citations have their full verbatim statements in citations.json.
+
+For step 3 I read the statements of lem-weil-pbc-flat-module-base-change, lem-weil-pbc-tensor-over-quotient-ring and lem-trf-local-nilpotent-projective-flat-lift. The first gives flatness over the NEW ring A_n, without assuming the quotient ring map is flat. The second identifies its tensor module with M_n, with scalar compatibility checked in step 2. The last applies to any commutative ring and any nilpotent ideal, with no localness/finiteness condition despite the node's historical name. The proof verifies its three hypotheses over A_n: flatness just obtained, nilpotence J_n^n=0, and projective reduction. It gives explicit inverse formulas for A_n/J_n = R/I and M_n/J_nM_n = M/IM and checks scalar actions. This is the elementary double-quotient calculation (using I^n contained in I), not an uncited deformation theorem. The actual lifting theorem is cited. Again citations.json contains every cited statement verbatim.
+
+Step 4 uses no non-elementary result: on [k] both composites are [u(k)], and on [e] both are [v(e)]. Surjectivity of the class maps then gives the two identities. No compatibility of chosen sections or inverse-limit exactness is being assumed.
+
+I tested I=0 (the tower is constant, and the given projectivity is projectivity of M itself), I=R (all positive quotient modules and rings are zero), n=1 (J_1=0, with the original projectivity hypothesis), M=0, and the zero ring. The argument covers arbitrary infinite projective reductions; it never replaces projectivity by finite presentation. As a check on the need for flatness in exactness, tensoring 0 -> Z --2--> Z -> Z/2 -> 0 with Z/2 kills the injectivity, which the flat-final-term hypothesis correctly excludes. No statement dispute arose. The proof has four steps totalling 2054 characters, with each step below 2000 characters, and contains no new lemma hidden in a long step. I checked B1-B10 (no new-node obligations), C1-C8 (all non-elementary inputs have adequate statements, no off-unit non-leaf tool or circular citation), D1-D5 (the item's proof performs the assembly rather than moving its clauses elsewhere), and E1-E7 (the quotient ring, ideal and scalar structures match the source).

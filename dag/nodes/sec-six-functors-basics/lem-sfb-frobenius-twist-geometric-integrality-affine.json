@@ -1,0 +1,236 @@
+{
+ "id": "lem-sfb-frobenius-twist-geometric-integrality-affine",
+ "kind": "statement",
+ "title": "Frobenius twists: geometric integrality, scalar extension, and affine relative Frobenius",
+ "statement": "Let $k$ be a field of characteristic $p>0$, with $p$ prime [def-weil-field], [def-pc-field-characteristic], and let $s:X\\to\\operatorname{Spec}k$ be a geometrically integral $k$-scheme [def-weil-scheme-over-base], [def-pc-geometrically-irreducible]. For $n\\geq0$, put $\\varphi_n(c)=c^{p^n}$ and\n$$X_n=X\\times_{\\operatorname{Spec}k,\\operatorname{Spec}(\\varphi_n)}\\operatorname{Spec}k,$$\nwith $k$-structure the second projection [def-pc-base-change]. Let $F_{X/k,n}:X\\to X_n$ be the pair morphism with first projection $F_X^n$ and second projection $s$, where $F_X$ is absolute Frobenius [def-weil-absolute-frobenius-scheme], [def-weil-ring-frobenius]. Then $X_n$ is geometrically integral over $k$. More precisely, for every field extension $\\iota:k\\hookrightarrow k'$, the projection-compatible canonical identification is\n$$(X_n)_{k'}\\cong X\\times_{\\operatorname{Spec}k,\\operatorname{Spec}(\\iota\\circ\\varphi_n)}\\operatorname{Spec}k'.$$\nFor every affine open $U=\\operatorname{Spec}A\\subseteq X$ [def-weil-affine-spectrum], its twist $U_n\\subseteq X_n$ is canonically $\\operatorname{Spec}(A\\otimes_{k,\\varphi_n}k)$, these opens cover $X_n$, and $F_{X/k,n}^{-1}(U_n)=U$. The restriction $U\\to U_n$ is induced by the $k$-algebra homomorphism\n$$A\\otimes_{k,\\varphi_n}k\\longrightarrow A,\\qquad a\\otimes b\\longmapsto a^{p^n}s^\\sharp(b),$$\nwhere the source has $k$-structure through the second tensor factor. For $n=0$, the canonical identity-base-change isomorphism $X_0\\cong X$ identifies $F_{X/k,0}$ with the identity and its affine ring map with $a\\otimes b\\mapsto a s^\\sharp(b)$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0CC9 (varieties-definition-relative-frobenius), defining Cartesian diagram; Tag 0CCG (varieties-remark-n-fold-relative-frobenius), first displayed product and pair morphism. Geometric integrality follows by iterating the base change in its definition; the affine calculation and n=0 identity convention are the expanded calculation of parent step 6."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-characteristic",
+  "def-weil-scheme-over-base",
+  "def-pc-geometrically-irreducible",
+  "def-pc-base-change",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-ring-frobenius",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}k$, $q=p^n$, $t=\\operatorname{Spec}(\\varphi_n)$, and write $\\pi:X_n\\to X$, $\\rho:X_n\\to S$ for the projections. By [def-weil-ring-frobenius], $\\varphi_n$ is a unital ring homomorphism; it is injective because $c^q=0$ in a field implies $c=0$. Since $s^\\sharp:k\\to\\mathcal O_X(V)$ is a unital ring homomorphism for every open $V\\subseteq X$, $p\\cdot1_{\\mathcal O_X(V)}=s^\\sharp(p\\cdot1_k)=0$, so $X$ is of characteristic $p$ [def-weil-scheme-characteristic-p]; hence $F_X$ is defined and each $\\mathcal O_X(V)$ carries the ring Frobenius of [def-weil-ring-frobenius]. Frobenius commutes with the structure map: on sheaves this is the identity $s^\\sharp(c^q)=s^\\sharp(c)^q$, and the underlying maps agree because absolute Frobenius is the identity on points [def-weil-absolute-frobenius-scheme]. Thus $sF_X^n=ts$. The universal property [def-pc-fibre-product] gives the unique pair map $F=(F_X^n,s):X\\to X_n$ with $\\pi F=F_X^n$ and $\\rho F=s$. This also verifies that $F$ is a morphism over the second copy of $S$.",
+   "uses": [
+    "def-weil-ring-frobenius",
+    "def-weil-absolute-frobenius-scheme",
+    "def-pc-fibre-product",
+    "def-weil-scheme-characteristic-p"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0CC9 (definition-relative-frobenius) and 0CCG (remark-n-fold-relative-frobenius), pair maps; Tag 0CC7 (lemma-frobenius-endomorphism-identity), proof."
+   }
+  },
+  {
+   "text": "Let $\\iota:k\\hookrightarrow k'$ be arbitrary and set $h=\\operatorname{Spec}(\\iota):S'\\to S$. A morphism $T\\to (X_n)_{k'}$ is, by [def-pc-fibre-product], a triple $(a:T\\to X,b:T\\to S,c:T\\to S')$ with $sa=tb$ and $b=hc$. Eliminating $b$ gives exactly the pair $(a,c)$ with $sa=thc$; conversely such a pair gives $(a,hc,c)$. Apply these constructions to the projections of the two products themselves. They give morphisms in both directions; each composite has the original projections, hence is the identity by uniqueness. This gives the canonical projection-compatible isomorphism $(X_n)_{k'}\\cong X\\times_{S,th}S'$. Contravariance of spectra [def-weil-affine-spectrum] gives $th=\\operatorname{Spec}(\\iota\\circ\\varphi_n)$. The composite $\\iota\\circ\\varphi_n$ is a field embedding by step 1. Geometric integrality [def-pc-geometrically-irreducible] therefore makes this last fibre product integral. Since this holds for every $\\iota$, $X_n$ with structure $\\rho$ is geometrically integral. This argument uses no surjectivity of Frobenius and works over imperfect fields.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), first product; definition-geometrically-integral, clause (3), expanded using the fibre-product universal property."
+   }
+  },
+  {
+   "text": "For an affine open $U=\\operatorname{Spec}A\\subseteq X$, apply [lem-weil-pbc-open-fibre-product] with opens $U\\subseteq X$ and $S\\subseteq S$, over all of $S$. It identifies $U_n=U\\times_{S,t}S$ with the open $\\pi^{-1}(U)$ in $X_n$, compatibly with both projections. These opens cover, since the affine opens cover $X$. Apply [lem-weil-pbc-fibre-product-affine-spectra] to the maps $k\\to A$, $c\\mapsto s^\\sharp(c)$, and $k\\to k$, $c\\mapsto c^q$. It identifies $U_n$ with $\\operatorname{Spec}(A\\otimes_{k,\\varphi_n}k)$, with projection ring maps $a\\mapsto a\\otimes1$ and $b\\mapsto1\\otimes b$. Finally $F^{-1}(U_n)=(\\pi F)^{-1}(U)=(F_X^n)^{-1}(U)=U$, because [def-weil-absolute-frobenius-scheme] says Frobenius is the identity on the underlying space.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-absolute-frobenius-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JR (lemma-open-fibre-product); Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JQ (lemma-fibre-product-affines)."
+   }
+  },
+  {
+   "text": "Write $\\alpha:k\\to A$ for $s^\\sharp$. The restriction of $F_X^n$ to $U$ is induced by the ring endomorphism $f(a)=a^q$ [def-weil-absolute-frobenius-scheme], [def-weil-ring-frobenius]. Set $g:k\\to A$ to be $\\alpha$. Use [lem-weil-pbc-algebra-tensor-pushout-universal-property] with base ring $R=k$, left algebra structure $\\alpha$, right algebra structure $\\varphi_n$, and target $A$ with $R$-structure $\\alpha\\varphi_n$. Then $f$ is $R$-linear since $f(\\alpha(c)a)=\\alpha(c^q)f(a)$, and $g$ is $R$-linear since $g(c^q b)=\\alpha(c^q)g(b)$. The cited universal property supplies a ring map $H:A\\otimes_{k,\\varphi_n}k\\to A$, $H(a\\otimes b)=a^q\\alpha(b)$. Explicitly the balancing relation $\\alpha(c)a\\otimes b=a\\otimes c^q b$ has equal images $\\alpha(c)^q a^q\\alpha(b)=a^q\\alpha(c^q b)$. Its composites with the two tensor-factor inclusions are $f$ and $g$. By the projection description of [lem-weil-pbc-fibre-product-affine-spectra] and uniqueness in [def-pc-fibre-product], $\\operatorname{Spec}H$ is exactly $F|_U$. For the source $k$-structure through the second factor, $H(1\\otimes b)=\\alpha(b)$, so $H$ is the asserted $k$-algebra homomorphism.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-ring-frobenius",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0CC9 (definition-relative-frobenius), 0CCG (remark-n-fold-relative-frobenius), expanded affine calculation; schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes), tensor universal property in the proof."
+   }
+  },
+  {
+   "text": "If $n=0$, then $q=1$, $t=\\mathrm{id}_S$ and $F_X^0=\\mathrm{id}_X$. The first projection $\\pi:X_0\\to X$ has inverse the pair map $(\\mathrm{id}_X,s)$: both composites are identities by their two projections and uniqueness in [def-pc-fibre-product]. The defining projections of $F$ in step 1 therefore identify $F_{X/k,0}$ with $\\mathrm{id}_X$ under $\\pi$. On each affine open step 4 reads $a\\otimes b\\mapsto a\\alpha(b)$, with inverse $a\\mapsto a\\otimes1$: the tensor relation for the identity scalar map gives $a\\alpha(b)\\otimes1=a\\otimes b$. This is the canonical identity-base-change isomorphism, and verifies the claimed affine convention.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CCG (remark-n-fold-relative-frobenius), identity-iterate extension to n=0, verified directly from the defining Cartesian square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-frobenius",
+  "def-weil-absolute-frobenius-scheme",
+  "def-pc-fibre-product",
+  "def-weil-scheme-characteristic-p",
+  "def-weil-affine-spectrum",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 0CC9 (definition-relative-frobenius) and 0CCG (remark-n-fold-relative-frobenius), defining products and pair maps; definition-geometrically-integral (3); schemes.tex Tags 01I4 and 01JR. Universal-property and tensor calculations are expanded explicitly, including n=0."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|relative_frobenius|frobenius.*[Tt]wist|[Tt]wist.*frobenius",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: field-theoretic or semilinear iterated Frobenius, Witt-vector and coalgebra identities do not state geometric integrality of the scheme twist with its affine relative-Frobenius incarnation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"tensor\"",
+   "results": "2 hits; Coalgebra.IsFrobenius.lTensor_counit_comp_left_comp_rTensor_algebraLinearMap, Coalgebra.IsFrobenius.rTensor_counit_comp_right_comp_lTensor_algebraLinearMap",
+   "date": "2026-10-22",
+   "verdict": "No match: field-theoretic or semilinear iterated Frobenius, Witt-vector and coalgebra identities do not state geometric integrality of the scheme twist with its affine relative-Frobenius incarnation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a geometrically integral scheme along an iterated Frobenius of its base field and the affine tensor formula for relative Frobenius",
+   "results": "8 hits; LinearMap.iterateFrobenius, LinearMap.frobenius, IsPurelyInseparable.iterateFrobenius, iterateFrobenius_def, IsPurelyInseparable.iterateFrobeniusₛₗ, iterateFrobenius_eq_pow, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ",
+   "date": "2026-10-22",
+   "verdict": "No match: field-theoretic or semilinear iterated Frobenius, Witt-vector and coalgebra identities do not state geometric integrality of the scheme twist with its affine relative-Frobenius incarnation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometrically integral scheme over a field of characteristic p the iterated relative Frobenius twist is geometrically integral and on affine rings relative Frobenius sends a tensor b to a to the p power times b",
+   "results": "8 hits; IsPurelyInseparable.iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base, IsPurelyInseparable.algebraMap_iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap, IsPurelyInseparable.iterateFrobenius_algebraMap, IsPurelyInseparable.algebraMap_iterateFrobenius, IsPurelyInseparable.iterateFrobenius, WittVector.StandardOneDimIsocrystal.frobenius_apply",
+   "date": "2026-10-22",
+   "verdict": "No match: field-theoretic or semilinear iterated Frobenius, Witt-vector and coalgebra identities do not state geometric integrality of the scheme twist with its affine relative-Frobenius incarnation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometrically integral schemes remain geometrically integral after Frobenius base change and relative Frobenius on affine schemes is a tensor product ring map",
+   "results": "8 hits; AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed, Algebra.IsGeometricallyReduced, Algebra.isGeometricallyReduced_iff, Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct, Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, RingHom.isIntegral_isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "no match: integral morphisms, geometric-integrality definitions/base change, or ring and semilinear Frobenius do not supply the complete scheme-twist statement and affine pair-map identification."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeFrobenius|relative_frobenius|[Gg]eometricallyIntegral",
+   "results": "9 hits; Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean, Mathlib/AlgebraicGeometry/Group/Abelian.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: integral morphisms, geometric-integrality definitions/base change, or ring and semilinear Frobenius do not supply the complete scheme-twist statement and affine pair-map identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"pullback\"",
+   "results": "1 hits; CategoryTheory.Regular.frobeniusMorphism_isPullback",
+   "date": "2026-10-23",
+   "verdict": "no match: integral morphisms, geometric-integrality definitions/base change, or ring and semilinear Frobenius do not supply the complete scheme-twist statement and affine pair-map identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated relative Frobenius of a geometrically integral scheme over a field, affine tensor product description and compatibility of its twist with arbitrary field extension",
+   "results": "8 hits; iterateFrobenius, iterateFrobenius_mul_apply, LinearMap.iterateFrobenius, LinearMap.frobenius, iterateFrobenius_def, iterateFrobeniusEquiv_one, IsPurelyInseparable.iterateFrobenius, iterateFrobenius_eq_pow",
+   "date": "2026-10-23",
+   "verdict": "no match: integral morphisms, geometric-integrality definitions/base change, or ring and semilinear Frobenius do not supply the complete scheme-twist statement and affine pair-map identification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-frobenius-separable-factorization",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images clause (3), high-genus-cover auxiliary Frobenius/separable factorization: parent step 6, geometric integrality after arbitrary scalar extension, second-projection structure, affine tensor relation, and n=0.",
+   "via": [
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-frobenius-twist-geometric-integrality-affine",
+  "worker": "stage1",
+  "summary": "Expanded the defining Cartesian squares into a five-step proof over arbitrary, possibly imperfect, fields. Reused existing Mathlib leaves for open fibre products, affine fibre products, and the tensor pushout. Checked the balancing equation with the twisted target R-structure and the second-factor k-structure, arbitrary scalar extension, coverage, inverse images, and n=0. No statement change and no new nodes. Repair of the return at 0d3777b8f2c: rebased onto the current unsplit DAG item with unchanged statement and reread all eight proof-dependency statements. Added the characteristic-p check for X and explicit inverse comparison morphisms; all retained citation quotations remain verbatim.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images clause (3), high-genus-cover Frobenius/separable factorization, parent step 6: geometric integrality and affine Frobenius calculation. The inherited blueprint.from.node is null; its place and via are retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N6-c64a2333a",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-c64a2333a (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct; I re-applied one citation fix to step 1, the fix from the earlier review that never landed. Context: this is a re-delivery of 0d3777b8. That review was FIX (E1/C4: step 1 used characteristic p without citing it), and the return was a promotion mismatch, not a mathematical fault. Live still has the item unsplit, so that FIX was lost. Compared with 0d3777b8, the statement and stmt_deps are unchanged; only steps 1–2 and split_report changed. There are no new nodes and no re-split note. Source: I read Stacks varieties.tex 0CC9 (l.7071), 0CCG (l.7254, n>=1 only; step 5 proves n=0 itself) and definition-geometrically-integral (3). For S=Spec k, F_S^n=Spec(phi_n), so the statement matches. Step 1: phi_n is an injective ring map, s F_X^n = t s holds, and the pair map comes from def-pc-fibre-product. Step 2: pasting the two fibre products by their universal property gives (X_n)_{k'} = X x_{S,Spec(iota phi_n)} Spec k'. def-pc-field-extension allows any ring map k->k', so no perfectness is needed; checked over F_p(u). Step 3: lem-weil-pbc-open-fibre-product with W=S gives U_n = pi^-1(U); the opens cover; F^-1(U_n)=U. Step 4: with target structure alpha phi_n, f=Frobenius and g=alpha are R-linear, the balancing relation holds, and Spec H = F|_U by uniqueness; H(1 tensor b)=alpha(b) gives the second-factor k-linearity. Step 5: for n=0, pi has inverse (id,s), and a alpha(b) tensor 1 = a tensor b. Edge cases checked: U empty, X=Spec k, A^1 over F_p(u). Duplicate search (rg -L for relative Frobenius, 0CC9/0CCG, geometrically integral + Frobenius) found only finite-field q-power nodes, which are not substitutes. Fault fixed: the new step 1 argues characteristic p through the stalks, but def-weil-scheme-characteristic-p is stated on sections and was not cited, although def-weil-absolute-frobenius-scheme requires it. I put back the earlier fix's step-1 text (p*1 = s^#(p*1_k) = 0 on each O_X(V), citing def-weil-scheme-characteristic-p) and added that node to step-1 uses and proof_deps. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-frobenius-twist-geometric-integrality-affine.json. No tool_uses needed: all off-unit citations are Mathlib leaves or definitions.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FrobeniusTwistGeometricIntegralityAffine",
+  "declaration": "AlgebraicGeometry.frobeniusTwist_geometricIntegrality_affine",
+  "declarations": [
+   "AlgebraicGeometry.scalarTwistTensor",
+   "AlgebraicGeometry.scalarTwistTensorTmul",
+   "AlgebraicGeometry.scalarTwistTensorInl",
+   "AlgebraicGeometry.scalarTwistTensorInr",
+   "AlgebraicGeometry.frobeniusTwist_geometricIntegrality_affine"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusTwistGeometricIntegralityAffine.lean",
+  "statement": "theorem frobeniusTwist_geometricIntegrality_affine (k : Type u) [Field k] (p : ℕ) (hp : p.Prime) [CharP k p] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [GeometricallyIntegral s] (n : ℕ) : ∃ hX : (p : Γ(X, ⊤)) = 0, ∃ F : X ⟶ pullback s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))), F ≫ pullback.fst s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))) = X.iterateFrobenius hp hX n ∧ F ≫ pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))) = s ∧ GeometricallyIntegral (pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)))) ∧ (∀ (k' : Type u) [Field k'] (ι : k →+* k'), ∃ e : pullback (pullback.snd s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)))) (Spec.map (CommRingCat.ofHom ι)) ≅ pullback s (Spec.map (CommRingCat.ofHom (ι.comp (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)))), e.hom ≫ pullback.fst _ _ = pullback.fst _ _ ≫ pullback.fst _ _ ∧ e.hom ≫ pullback.snd _ _ = pullback.snd _ _) ∧ (∀ y : (pullback s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))) : Scheme.{u}), ∃ U : X.affineOpens, pullback.fst s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))) y ∈ U.1) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A] (i : Spec (.of A) ⟶ X) [IsOpenImmersion i], i ≫ s = Spec.map (CommRingCat.ofHom (algebraMap k A)) → ∃ j : Spec (scalarTwistTensor k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)) ⟶ pullback s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))), IsOpenImmersion j ∧ j ≫ pullback.fst _ _ = Spec.map (CommRingCat.ofHom (scalarTwistTensorInl k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))) ≫ i ∧ j ≫ pullback.snd _ _ = Spec.map (CommRingCat.ofHom (scalarTwistTensorInr k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n))) ∧ Set.range j = (pullback.fst s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)))) ⁻¹' Set.range i ∧ F ⁻¹' Set.range j = Set.range i ∧ ∃ H : scalarTwistTensor k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n) →+* A, H.comp (scalarTwistTensorInr k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)) = algebraMap k A ∧ (∀ (a : A) (b : k), H (scalarTwistTensorTmul k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n) a b) = a ^ (p ^ n) * algebraMap k A b) ∧ Spec.map (CommRingCat.ofHom H) ≫ j = i ≫ F ∧ (n = 0 → ∀ (a : A) (b : k), H (scalarTwistTensorTmul k A (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n) a b) = a * algebraMap k A b)) ∧ (n = 0 → IsIso (pullback.fst s (Spec.map (CommRingCat.ofHom (iterateFrobeniusOfPrime k hp (CharP.cast_eq_zero k p) n)))) ∧ F ≫ pullback.fst _ _ = 𝟙 X)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a620362c5",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause check of frobeniusTwist_geometricIntegrality_affine against node and Stacks 0CC9/0CCG/def geom-integral (3). Hypotheses: Field k, p prime, CharP k p, s with Mathlib GeometricallyIntegral; nothing stronger. p=0 on Γ(X) is a Prop conclusion feeding upstream Scheme.iterateFrobenius. X_n = pullback s (Spec.map φ_n) with snd as k-structure, as the def-pc-base-change convention says. F is pinned by both projections. Geometric integrality of snd, the ι-extension iso pinned by projections (Spec.map(ι∘φ)=Spec ι ≫ Spec φ), affine charts j with open immersion, both projection identities, range = fst⁻¹(range i), cover, F⁻¹(U_n)=U, H with H∘inr=algebraMap, H(a⊗b)=a^(p^n)α(b) (balancing checked) and Spec H ≫ j = i ≫ F, n=0 (IsIso fst, F≫fst=𝟙, affine formula): all correct. scalarTwistTensor is Mathlib A⊗[k]k with right module φ.toAlgebra; helpers are real data with docstrings. lean.statement verbatim; node otherwise identical to live (first binding, no statement_change or new nodes). Universes forced to u. No duplicate statement or notion found (TwistedTensorProduct has a different shape). Edge cases: n=0, zero ring, imperfect k, X=Spec k. Proof sorry only. No file changed, no compile."
+ }
+}

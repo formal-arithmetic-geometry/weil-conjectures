@@ -1,0 +1,139 @@
+{
+ "id": "lem-pur-completed-tower-finite-pullback-kflat",
+ "kind": "statement",
+ "title": "The actual finite tower pullback preserves arbitrary K-flat complexes",
+ "statement": "Fix a prime ell, a finite extension E of Q_ell and a scheme morphism f:X to Y, with coefficients and schemes in universe u [def-weil-l-adic-coefficient-extension, def-pc-scheme]. For n a natural number let B_{W,n} be the constant coefficient ring sheaf O_E/varpi^(n+1) on the small pro-etale site of W. Use the module categories normalizedDVRModules, with object/morphism/module universes u+1/u/u+1, and integralOperationsLevelPullback, the actual chosen left adjoint to coefficientProEtaleModuleDirectImage with its canonical constant-section ring map [lem-pur-integral-operations-well-defined, def-weil-proetale-inverse-image, def-coef-normalized-dvr-tower]. If P is any unbounded integer-indexed K-flat cochain complex of B_{Y,n}-modules, then termwise application of integralOperationsLevelPullback gives a K-flat B_{X,n}-module complex [def-pc-kflat-complex]. K-flat means the signed direct-sum total tensor with every acyclic complex in this full module universe is acyclic. There is no boundedness, flat-term, constructibility, completeness or ell-invertibility hypothesis. This is a finite-level statement; no sequence complex or sequence evaluation comparison occurs in its conclusion.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-proetale-inverse-image",
+  "def-pc-kflat-complex",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0DEN and 0DEP; arbitrary K-flat pullback via conservative points, and ordinary scalar extension. Instantiation to the specified finite constant-coefficient adjunction."
+ },
+ "proof": [
+  {
+   "text": "Fix the coefficient universe u+1 and use the actual algebraic inverse image of ring and module sheaves along the pro-etale geometric morphism. The proved inverseImageOfUniverses helper in the ringed-topos K-flat module transports its underlying-sheaf presentation to the equal ring/module universe; its module functor is still the actual proEtaleModuleInverseImage. Choose the conservative set-indexed family of points on X. The stalk criterion for algebraic inverse image proves K-flatness of the image of P without a flat-term hypothesis.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-sfb-proetale-enough-points",
+    "lem-sfb-algebraic-inverse-image-kflat",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend scalars along the specified constant-ring identification from the inverse-image ring to the target coefficient ring. Arbitrary K-flatness is preserved by scalar extension; no flatness of that ring map is assumed.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunct of the constant-ring identification is the actual constant-section coefficient map: apply the adjunction Hom equivalence to its inverse. Thus pushforwardCongr identifies the composite right adjoint with coefficientProEtaleModuleDirectImage. Uniqueness of left adjoints yields a natural module isomorphism from inverse image followed by scalar extension to integralOperationsLevelPullback. Apply it degreewise and use tensor functoriality to transport acyclicity of every test tensor, proving the claimed K-flatness.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pur-integral-operations-well-defined",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-sfb-proetale-enough-points",
+  "lem-sfb-algebraic-inverse-image-kflat",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-integral-operations-well-defined",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "M3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0DEN and 0DEP, with the actual coefficient adjoint identified directly. The stalk/scalar argument is also used by the proved pullbackTensorFiniteGood in CompletedPullbackTensorComparison; importing that descendant would form a Lean cycle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image for sheaves of modules on a ringed topos preserves arbitrary K-flat complexes by checking stalks",
+   "results": "8 hits, including CategoryTheory.compatiblePreservingOfFlat, AlgebraicGeometry.Flat.of_stalkMap, and the sheaf inverse-image finite-limit instance; none is this arbitrary module-complex statement.",
+   "date": "2026-10-27",
+   "verdict": "Use the project algebraic inverse-image K-flat theorem and scalar-extension theorem, with Mathlib adjunction uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKFlatIndependentCoefficients",
+   "results": "0 hits: unknown identifier in the Mathlib index.",
+   "date": "2026-10-27",
+   "verdict": "The independent-coefficient predicate belongs to the project."
+  },
+  {
+   "tool": "grep",
+   "query": "isKFlat_of_points|changeOfRings_isKFlat_independentCoefficients",
+   "results": "0 hits in the Mathlib index. Local rg found the exact project theorems in AlgebraicInverseImageKFlat and ChangeOfRingsKFlatAllIndependentCoefficients.",
+   "date": "2026-10-27",
+   "verdict": "Instantiate those proved project tools, preserving the actual finite pullback."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedPullbackTowerRealizations",
+  "date": "2026-10-27",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-sequence-pullback-kflat",
+   "place": "Finite-level K-flat preservation, isolated as a proved theorem for compile time.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedTowerFinitePullbackKFlat",
+  "file": "lean/Sheaf/Paper/CompletedTowerFinitePullbackKFlat.lean",
+  "declaration": "WeilConjectures.completedTowerFinitePullbackKFlat",
+  "statement": "theorem completedTowerFinitePullbackKFlat {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)\n    (P : CochainComplex (normalizedDVRModules l E Y n) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := ProEt.topology Y) (R := integralCoefficientCommRingSheaf l E Y n) P) :\n    CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}\n      (J := ProEt.topology X) (R := integralCoefficientCommRingSheaf l E X n)\n      (((integralOperationsLevelPullback l E f n).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261027T112410-L-1579585",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "id": "det-thm-picard-duality",
+ "kind": "statement",
+ "title": "Serre duality",
+ "statement": "Let $X$ be a smooth proper curve over $k$, of pure dimension\n$n\\in\\{0,1\\}$, and $\\cF$ a finite locally free $\\cO_X$-module. With\n$\\omega_X=\\Omega^n_{X/k}$ the canonical module, let\n$t_X:H^n(X,\\omega_X)\\to k$ be the *trace*: for $n=0$,\n$X=\\Spec A$ with $A$ finite étale over $k$, $\\omega_X=\\cO_X$ and\n$t_X=\\operatorname{Tr}_{A/k}$; for $n=1$ and $X$ integral with function\nfield $K$, the residue sequence\n$0\\to\\omega_X\\to\\underline{\\Omega^1_{K/k}}\\to\\bigoplus_{x}i_{x,*}\\bigl(\\Omega^1_{K/k}/\\omega_{X,x}\\bigr)\\to0$\n($x$ over the closed points; the constant sheaf in the middle is flasque) identifies\n$H^1(X,\\omega_X)$ with the cokernel of\n$\\Omega^1_{K/k}\\to\\bigoplus_x\\Omega^1_{K/k}/\\omega_{X,x}$, and\n$t_X\\bigl((\\eta_x)_x\\bigr)=\\sum_x\\operatorname{res}_x(\\eta_x)$, where\n$\\operatorname{res}_x:\\Omega^1_{K/k}\\to k$ is Tate's $k$-linear residue\nat $x$: it kills $\\omega_{X,x}$, it satisfies the residue theorem\n$\\sum_x\\operatorname{res}_x(\\eta)=0$ for $\\eta\\in\\Omega^1_{K/k}$, and it\nequals $\\operatorname{Tr}_{\\kappa(x)/k}$ of the classical residue\n(computed in $\\widehat{\\cO}_{X,x}\\cong\\kappa(x)[[t]]$) whenever\n$\\kappa(x)/k$ is separable, hence at every $x$ when $k$ is perfect. The residue theorem is exactly what makes\n$t_X$ well defined on the cokernel. (The naive formula\n$\\sum_x\\operatorname{Tr}_{\\kappa(x)/k}\\circ\\operatorname{res}_x$ is not\navailable over imperfect $k$: at a closed point with $\\kappa(x)/k$\ninseparable, $\\widehat{\\cO}_{X,x}$ has no coefficient field containing\n$k$, and $\\operatorname{Tr}_{\\kappa(x)/k}$ vanishes on a purely\ninseparable extension; Tate's residue avoids both problems.) For a possibly disconnected $X$ of pure dimension one, use this construction on each connected component $X_j$ (each is integral), identify $H^1(X,\\omega_X)=\\bigoplus_j H^1(X_j,\\omega_{X_j})$, and set $t_X=\\sum_jt_{X_j}$. For $X=\\varnothing$ the trace is zero. Cohomology in negative degrees is understood to be zero. Then the\ntrace pairing\n\n$$\nH^q(X,\\cF)\\otimes_kH^{n-q}(X,\\cF^{\\vee}\\otimes\\omega_X)\n\\xrightarrow{\\ \\cup\\ }H^n(X,\\cF\\otimes\\cF^{\\vee}\\otimes\\omega_X)\n\\xrightarrow{\\ \\mathrm{ev}\\ }H^n(X,\\omega_X)\\xrightarrow{\\ t_X\\ }k\n$$\n\nis perfect for every $q$:\n\n$$\nH^q(X,\\cF)^{\\vee}\\ \\cong\\ H^{n-q}\\bigl(X,\\cF^{\\vee}\\otimes\\omega_X\\bigr),\n$$\n\nand this isomorphism is natural in $\\cF$: for a morphism\n$\\varphi:\\cF\\to\\mathcal G$ of finite locally free modules,\n$\\langle\\varphi_*a,b\\rangle=\\langle a,(\\varphi^{\\vee}\\otimes1)_*b\\rangle$,\ni.e. it carries $H^q(\\varphi)^{\\vee}$ to\n$H^{n-q}(\\varphi^{\\vee}\\otimes1)$. In particular ($n=1$, $q=1$,\n$\\cF=\\cO_X$), $H^1(X,\\cO_X)^{\\vee}\\cong H^0(X,\\Omega^1_{X/k})$: for a\nsmooth proper connected curve over algebraically closed $k$ the genus\n$\\dim_kH^0(C,\\Omega^1_{C/k})$ of [sk-def-curve] equals\n$\\dim_kH^1(C,\\cO_C)$, the genus of the conventions of this section.",
+ "source": {
+  "document": "literature/blueprint/main-20261023-1620/blueprint/sec-picard-framework/sk-thm-picard-rr/det-thm-picard-duality.md",
+  "place": "node det-thm-picard-duality, order 722"
+ },
+ "stmt_deps": [
+  "sk-def-curve",
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-function-field",
+  "pqf-def-cohomology",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-pc-vector-bundle-principal-parts",
+  "lem-pc-tate-dvr-residue-calculus",
+  "def-sc-scalar-global-sections-comparison",
+  "def-pc-module-cohomology-ext-resolution-equiv"
+ ],
+ "proof": [
+  {
+   "text": "Apply [sk-thm-picard-duality] to the given field $k$, smooth proper curve $X$ of pure dimension $n\\in\\{0,1\\}$, and finite locally free $\\mathcal F$. These are exactly its hypotheses; it assumes neither that $k$ is perfect nor that $H^0(X,\\mathcal O_X)=k$. Its statement supplies the finite étale algebra trace for $n=0$, the principal-parts cokernel and the Tate residue trace for integral $X$ when $n=1$, and the componentwise trace for disconnected $X$. Thus the trace used here is the same map, including at inseparable closed points. Its displayed cup/evaluation/trace pairing is exactly the displayed pairing here, so its perfection and coefficient-morphism naturality prove those assertions for every $q$, with negative cohomology zero. The empty scheme and degrees outside $[0,n]$ are included in that statement.",
+   "uses": [
+    "sk-thm-picard-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/det-thm-picard-duality.md",
+    "place": "Whole statement; same theorem as the existing reviewed sk-thm-picard-duality, with the componentwise trace convention made explicit."
+   }
+  },
+  {
+   "text": "For $n=q=1$ set $\\mathcal F=\\mathcal O_X$ in the duality just obtained. In a local frame, $\\mathcal O_X^\\vee\\otimes\\Omega^1_{X/k}=\\Omega^1_{X/k}$ by multiplication, giving $H^1(X,\\mathcal O_X)^\\vee\\cong H^0(X,\\Omega^1_{X/k})$. The last sentence of [sk-thm-picard-duality] identifies their dimensions, and [sk-def-curve] defines the differential-form genus as $\\dim_kH^0(X,\\Omega^1_{X/k})$ for a smooth proper connected curve. Over algebraically closed $k$ this is precisely the required equality with $\\dim_kH^1(X,\\mathcal O_X)$.",
+   "uses": [
+    "sk-thm-picard-duality",
+    "sk-def-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/det-thm-picard-duality.md",
+    "place": "Final genus specialization, n=q=1 and F=O_X."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-picard-duality",
+  "sk-def-curve"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-picard-framework/sk-thm-picard-rr/det-thm-picard-duality.md",
+  "place": "Direct reuse of the already existing, independently reviewed stronger sketch theorem; no new mathematical proof route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "serreDuality|serre_duality|residueTrace|residue_trace",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect pairing between coherent cohomology of a vector bundle and its canonical dual on a smooth proper curve",
+   "results": "LinearMap.IsPerfPair.dualEval, LinearMap.IsPerfPair.mk, LinearMap.apply_symm_toPerfPair_self, LinearMap.IsPerfPair.recOn, LinearEquiv.instIsPerfPair, FGModuleCat.exactPairing, LinearMap.IsPerfectCompl, LinearMap.IsContPerfPair.mk",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"serre\", \"duality\"",
+   "results": "No hits",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality for finite locally free sheaves on a smooth proper curve with the Tate residue trace and natural cup evaluation pairing",
+   "results": "FGModuleCat.exactPairing, FGModuleCat.FGModuleCatEvaluation, FGModuleCat.FGModuleCatEvaluation_apply, FGModuleCat.rightRigidCategory, FGModuleCat.FGModuleCatEvaluation_apply', FGModuleCat.FGModuleCatCoevaluation, LinearMap.trace_eq_contract', FGModuleCat.FGModuleCatCoevaluation_apply_one",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  },
+  {
+   "tool": "grep",
+   "query": "Serre.{0,20}dual|dual.{0,20}cohomology",
+   "results": "No hits; searched AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"duality\"",
+   "results": "TannakaDuality.FiniteGroup.rightFDRep, TannakaDuality.FiniteGroup.leftRegular, TannakaDuality.FiniteGroup.rightRegular, TannakaDuality.FiniteGroup.leftRegularFDRepHom, TannakaDuality.FiniteGroup.equivApp, TannakaDuality.FiniteGroup.ofRightFDRep, TannakaDuality.FiniteGroup.forget, TannakaDuality.FiniteGroup.mulRepHom",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dual of H one of a vector bundle on a proper nonsingular curve is global sections of the dual bundle tensor differential one forms",
+   "results": "sectionOfRetractionKerToTensorAux, sectionOfRetractionKerToTensor, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', tensorKaehlerQuotKerSqEquiv_tmul_D, KaehlerDifferential.linearMapEquivDerivation, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, tensorKaehlerQuotKerSqEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: results do not state smooth proper curve duality with the specified Tate residue trace"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_not_found"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 722,
+ "blueprint_uses": [
+  "def-sc-curves"
+ ],
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.serreDuality",
+  "AlgebraicGeometry.Scheme.serreDuality_residueTrace",
+  "AlgebraicGeometry.Scheme.residueTrace",
+  "AlgebraicGeometry.Scheme.residueTrace_symm_mk",
+  "AlgebraicGeometry.Scheme.residueSum_differentialsPrincipalPartsMap",
+  "AlgebraicGeometry.Scheme.Modules.cupPairing",
+  "AlgebraicGeometry.Scheme.Modules.cupH0_naturality",
+  "AlgebraicGeometry.Scheme.serreDuality_zero",
+  "AlgebraicGeometry.Scheme.exists_serreDuality_zero_iso_trace",
+  "AlgebraicGeometry.Scheme.subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero",
+  "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus"
+ ],
+ "blueprint_lean_not_found": [
+  "AlgebraicGeometry.Scheme.serreDuality",
+  "AlgebraicGeometry.Scheme.serreDuality_residueTrace",
+  "AlgebraicGeometry.Scheme.residueTrace",
+  "AlgebraicGeometry.Scheme.residueTrace_symm_mk",
+  "AlgebraicGeometry.Scheme.residueSum_differentialsPrincipalPartsMap",
+  "AlgebraicGeometry.Scheme.Modules.cupPairing",
+  "AlgebraicGeometry.Scheme.Modules.cupH0_naturality",
+  "AlgebraicGeometry.Scheme.serreDuality_zero",
+  "AlgebraicGeometry.Scheme.exists_serreDuality_zero_iso_trace",
+  "AlgebraicGeometry.Scheme.subsingleton_H_and_dual_of_smoothOfRelativeDimension_zero",
+  "AlgebraicGeometry.Scheme.genus_eq_arithmeticGenus"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261023-1620",
+ "blueprint": {
+  "is": "det-thm-picard-duality",
+  "from": null,
+  "same_as": [
+   "sk-thm-picard-duality"
+  ]
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-rr",
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "det-thm-picard-duality",
+  "worker": "stage1 NU",
+  "summary": "Reused the existing reviewed sk-thm-picard-duality, which states the full theorem including residues, dimension zero, naturality, and genus. No new nodes. Corrected the omitted disconnected/empty trace conventions and made n in {0,1} explicit; the same corrections were already independently reviewed for the equivalent sketch theorem. Mathlib searched with two semantic phrasings. Live Lean has only partial declarations for the full conjunction, so no attachment asserted.",
+  "blueprint": "Realizes the entire statement and the projective-space/residue route of its proof by the existing sk-thm-picard-duality (same_as), whose reviewed proof follows that route. The item is in sk-thm-picard-rr, whose uses explicitly includes sk-thm-picard-duality. The final step extracts the genus clause.",
+  "tool_uses": [
+   {
+    "node": "sk-def-curve",
+    "why": "Definition of the differential-form genus in the final specialization; this does not replace any proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-curve"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-9fe0dfeb9",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-9fe0dfeb9 (reviewer sub-agent of L); spot-checked: I read the base item, the source det-thm-picard-duality.md and .proof.md (main-20261023-1620, identical to latest), and sk-thm-picard-duality in full (statement, 9 steps, review pass 2026-10-21), plus sk-def-curve, def-sc-curves, unit sk-thm-picard-rr and both citers. Statement changes: n<=1 became n in {0,1} (equivalent). The delivery adds a componentwise trace for disconnected pure-1-dimensional X (each component is integral, since the local rings are regular domains and the components are clopen), zero trace for the empty X, and zero negative cohomology. This fills a gap in the definition (the base gives no trace for P^1 disjoint union P^1) and weakens nothing. The genus citation def-sc-curves (no genus) became sk-def-curve (defines g=dim H^0(Omega^1) over algebraically closed k). The delivered statement and stmt_deps are byte-identical to the reviewed sk-thm-picard-duality. Step 1 takes its hypotheses, trace, perfection and naturality from that node's statement (C3 OK). Step 2 is the n=q=1, F=O_X specialization plus the genus definition, which is genuinely elementary. No cycle: the item is not in sk-thm-picard-duality's closure. The route is fine because unit sk-thm-picard-rr uses sk-thm-picard-duality; no SGA. The declared tool use sk-def-curve is a definition and is accepted. Both citers still hold. Batch-5: the closure of the newly cited nodes reaches only generic nodes in sec-trace-formula and sec-poincare-duality: def-pod-ring-scalar-extension (definition), lem-trf-vector-subspace-complement (Submodule.exists_isCompl), 01KU/01T4, 02UP, schematic density, Localization.essSurj, the affine-open limit lemma and the 00JZ numerical-polynomial lemma. None is the trace formula, Poincare duality or a step of their proofs. Coherent Serre duality is not given by the etale PD assumption. Edge cases checked: Spec k, Spec L separable, F=0, the empty X, P^1 disjoint union P^1, inseparable points. Report inaccuracy: it calls sk-def-curve arbitrary-field, but it says the field is algebraically closed in this chapter; harmless. Maintainer note: the item now duplicates sk-thm-picard-duality word for word; consider merged_into sk-thm-picard-duality and repointing sk-thm-picard-rr and lem-sfb-line-section-first-order-obstruction. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicardDuality",
+  "declaration": "AlgebraicGeometry.Scheme.picard_duality_one",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardCohomologyZ",
+   "AlgebraicGeometry.Scheme.Modules.picardCohomologyZMap",
+   "AlgebraicGeometry.Scheme.Modules.picardTracePairing",
+   "AlgebraicGeometry.Scheme.Modules.IsPicardTraceDuality",
+   "AlgebraicGeometry.Scheme.Modules.picardDifferentialPullback",
+   "AlgebraicGeometry.Scheme.Modules.picardDifferentialCohomologyPullback",
+   "AlgebraicGeometry.Scheme.picard_duality_zero",
+   "AlgebraicGeometry.Scheme.picard_duality_one",
+   "AlgebraicGeometry.Scheme.picard_duality_structureSheaf",
+   "AlgebraicGeometry.Scheme.picard_duality_genus"
+  ],
+  "statement": "theorem picard_duality_one\n    [SmoothOfRelativeDimension 1 (X ↘ Spec (.of k))] [IsProper (X ↘ Spec (.of k))] :\n    ∃ t : Module.Dual k (scalarCohomology (X ↘ Spec (.of k))\n        (X ↘ Spec (.of k)).relativeDifferentials 1),\n      (∀ (I : Type u) [Fintype I] (Y : I → Scheme.{u})\n        [∀ i, IsIntegral (Y i)] [∀ i, (Y i).Over (Spec (.of k))]\n        [∀ i, Algebra k (Y i).functionField] [∀ i, IsFunctionFieldAlgebra k (Y i)]\n        [∀ i, SmoothOfRelativeDimension 1 (Y i ↘ Spec (.of k))]\n        [∀ i, IsProper (Y i ↘ Spec (.of k))]\n        (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)]\n        (h : ∀ i, j i ≫ (X ↘ Spec (.of k)) = (Y i ↘ Spec (.of k)))\n        (_hc : IsColimit (Cofan.mk X j))\n        (z : scalarCohomology (X ↘ Spec (.of k))\n          (X ↘ Spec (.of k)).relativeDifferentials 1),\n        t z = ∑ i, residueTrace k (Y i)\n          (moduleCohomologyExtResolutionEquiv (Y i)\n            (Y i ↘ Spec (.of k)).relativeDifferentials 1\n            (picardDifferentialCohomologyPullback (X ↘ Spec (.of k))\n              (Y i ↘ Spec (.of k)) (j i) (h i) z))) ∧\n      IsPicardTraceDuality (X ↘ Spec (.of k))\n        (X ↘ Spec (.of k)).relativeDifferentials 1 t",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "The item and the reviewed sk-thm-picard-duality have byte-identical natural-language statements and statement dependencies. Reuse its existing module and full declaration list: picard_duality_zero, picard_duality_one, picard_duality_structureSheaf and picard_duality_genus jointly state both pure dimensions, normalized finite-etale and componentwise Tate traces, perfection for every integer degree, coefficient naturality, and the structure-sheaf/genus specializations. The six existing definitions supply the zero extension and the specified cup/evaluation/pullback maps. No new module or declaration."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90e9ea842",
+  "group": "N8",
+  "result": "pass",
+  "note": "existing:true reuse of the landed Q12 Sheaf.AlgebraicGeometry.Curve.PicardDuality (stage-2 PASS). Item statement and stmt_deps are byte-identical to sk-thm-picard-duality. Only the item's lean field changed; the 10 declarations equal the owner record, there is no file field, and the statement is a verbatim substring of the live source. Clauses checked: arbitrary field; n=0 trace = Algebra.trace via scalarGlobalSectionsEquiv; n=1 trace pinned on every integral-component cofan, with the empty cofan giving 0; perfection pinned to cup/eval/trace in every integer degree, zero in negative degrees; naturality in the correct direction; structure-sheaf and genus (IsAlgClosed, connected) specializations. Edge cases: empty X, disconnected X, F=0, q outside [0,n], imperfect k. Advisory: item duplicates sk-thm-picard-duality, consider merged_into; inherited stmt_dep/residueTrace ownership unchanged from the PASSed owner record."
+ }
+}

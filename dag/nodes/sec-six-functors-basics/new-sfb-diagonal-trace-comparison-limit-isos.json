@@ -1,0 +1,121 @@
+{
+ "id": "new-sfb-diagonal-trace-comparison-limit-isos",
+ "kind": "statement",
+ "title": "Milnor invertibility of diagonal trace coefficient maps",
+ "statement": "For every PartialPresentation in the diagonal trace setting, the completed-unit coefficient map and completed-line coefficient map are isomorphisms.",
+ "stmt_deps": [
+  "new-sfb-diagonal-trace-comparison-partial",
+  "det-pe-milnor-epimorphic",
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), Milnor comparison for quotient and root towers"
+ },
+ "proof": [
+  {
+   "text": "Use the proved completed-unit comparison theorem for the S coefficient datum.",
+   "uses": [
+    "new-sfb-diagonal-trace-unit-comparison-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull back the global unit l on S along f and then to every residue field of X. The root-transition theorem makes the root tower epic. The line projection equations identify its ordinary limit cone after forgetting scalars, and scalar forgetting reflects limits. Transfer epimorphy across lineForget and apply the ordinary-to-derived comparison. The exact single-functor comparisons give invertibility of the specified lineMap.",
+   "uses": [
+    "lem-pur-twist-root-transitions",
+    "new-sfb-diagonal-trace-ordinary-rlim-epi",
+    "new-sfb-diagonal-trace-comparison-partial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pair the two actual map-isomorphism proofs.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "new-sfb-diagonal-trace-unit-comparison-iso",
+  "lem-pur-twist-root-transitions",
+  "new-sfb-diagonal-trace-ordinary-rlim-epi",
+  "new-sfb-diagonal-trace-comparison-partial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "T3",
+  "date": "2026-10-27",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/_section.md",
+  "place": "Passage to the limit; normalized Roos-unit implementation of the coefficient comparison in trace paragraph (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit comparison isomorphism for epimorphic towers",
+   "results": "Generic limit comparison only; no diagonal trace theorem.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso derived Milnor limit comparison epimorphic tower",
+   "results": "No exact project match.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "milnor_epimorphic|unitMap.*lineMap",
+   "results": "Only the cited Milnor theorem and coefficient maps occur.",
+   "date": "2026-10-27",
+   "verdict": "Use cited project lemmas."
+  }
+ ],
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceComparisonPresentation",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), Milnor comparison for quotient and root towers"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceComparisonLimitIsos",
+  "file": "lean/Sheaf/Paper/DiagonalTraceComparisonLimitIsos.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTraceComparisonLimitIsos",
+  "statement": "theorem diagonalTraceComparisonLimitIsos (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S] [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S] (f : X ⟶ S) (m : X ≅ ProjectiveLine S) (hm : m.hom ≫ (ProjectiveLine S ↘ S) = f) (hS : IsUnit (l : Γ(S, ⊤))) (p : PartialPresentation l (ULift.{u} (Padic l)) f) : IsIso (p.coefficientsS.unitMap l (ULift.{u} (Padic l)) p.LS) ∧ IsIso (p.coefficientsX.lineMap l (ULift.{u} (Padic l)) p.LX)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261026T222554-L-669355",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T235938-L-1472648",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

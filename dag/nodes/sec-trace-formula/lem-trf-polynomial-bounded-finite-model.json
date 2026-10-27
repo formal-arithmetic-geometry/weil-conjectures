@@ -1,0 +1,259 @@
+{
+ "id": "lem-trf-polynomial-bounded-finite-model",
+ "kind": "statement",
+ "title": "Bounded finite module model after polynomial scalar extension",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $n\\geq0$ and $P=R[x_1,\\ldots,x_n]$ [def-weil-pbc-mv-polynomial-ring] with its canonical structure map. Use the ordinary module derived categories $D(R)$ and $D(P)$ [def-weil-abstract-derived-category], and ordinary derived extension of scalars $-\\otimes_R^{\\mathbf L}P$ [lem-pur-derived-change-of-rings]. Let $K\\in D(R)$ have $H^i(K)=0$ outside a finite interval and every $H^i(K)$ finitely generated over $R$ [def-weil-finitely-generated-module]. Then there exist integers $a\\leq b$ and a cochain complex $G^\\bullet$ of $P$-modules [def-pc-cochain-complex-modules] specialized to the one-point ringed site with structure ring $P$, with $G^j=0$ for $j<a$ or $j>b$ and every $G^j$ finitely generated over $P$, together with an isomorphism\n$$Q_P(G^\\bullet)\\xrightarrow{\\sim}K\\otimes_R^{\\mathbf L}P\\quad\\text{in }D(P),$$\nwhere $Q_P$ is localization of cochain complexes at quasi-isomorphisms. No perfectness of $K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZK, lemma-shriek-boundedness, proof: polynomial scalar extension preserves bounded coherent objects; expanded finite-complex representative."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-finitely-generated-module",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof": [
+  {
+   "text": "Choose integers $l\\leq u$ with $H^i(K)=0$ for $i\\notin[l,u]$. The Noetherian pseudo-coherence criterion applies to $R$ and $K$, since all their cohomology modules are finite and vanish above $u$. Thus $K$ is pseudo-coherent. Unpacking that definition gives a bounded-above complex $F^\\bullet$ of finite free $R$-modules and an isomorphism $e:Q_R(F^\\bullet)\\simeq K$. Choose $v$ with $F^i=0$ for $i>v$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066E, lemma-Noetherian-pseudo-coherent (2); Tag 064P, definition-pseudo-coherent (2)"
+   }
+  },
+  {
+   "text": "Each $F^i$ is flat: after choosing its finite basis, tensoring with it is a finite direct sum, and kernels and preimages in a short exact sequence are computed coordinatewise. Hence the bounded-above flat-complex lemma makes $F^\\bullet$ K-flat. Apply derived change of rings on the one-point ringed site for $R\\to P$. Apply its computation clause to the identity K-flat resolution $F\\to F$: writing $L=-\\otimes_R^{\\mathbf L}P$ and $E^i=F^i\\otimes_R P$, $d_E=d_F\\otimes1$, it gives $c:L(Q_R(F))\\simeq Q_P(E)$. Thus $h=L(e)\\circ c^{-1}:Q_P(E)\\simeq L(K)$, since a functor sends an isomorphism to an isomorphism. If $F^i\\cong R^{r_i}$ then $E^i\\cong P^{r_i}$ via $(z_s)_s\\otimes p\\mapsto(z_sp)_s$ with inverse $(p_s)_s\\mapsto\\sum_s e_s\\otimes p_s$. Thus $E$ has finite free terms and is zero above $v$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 064K, lemma-derived-tor-quasi-isomorphism; sites-cohomology.tex Tags 06YT and 06YY, derived change of rings on the one-point site"
+   }
+  },
+  {
+   "text": "By the polynomial-ring definition, $P$ is the direct sum of copies of $R$ indexed by monomials $x^\\alpha$. The mutually inverse coefficient maps $z\\otimes\\sum_\\alpha c_\\alpha x^\\alpha\\mapsto(c_\\alpha z)_\\alpha$ and $(z_\\alpha)_\\alpha\\mapsto\\sum_\\alpha z_\\alpha\\otimes x^\\alpha$ identify the underlying $R$-complex of $E$ with $\\bigoplus_\\alpha F$. Its differential acts coordinatewise. A finite-support tuple is a cycle exactly when each coordinate is a cycle; it is a boundary exactly when each coordinate is a boundary, since preimages can be chosen at its finitely many nonzero coordinates. Consequently $H^i(E)$ as an $R$-module is $\\bigoplus_\\alpha H^i(F)$, and vanishes for $i<l$ (and for $i>u$).",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BZK, lemma-shriek-boundedness, proof: polynomial scalar extension preserves bounded coherent objects; explicit monomial argument"
+   }
+  },
+  {
+   "text": "Set $a=l$ and $b=\\max(l,v)$. Define $G^i=0$ for $i<a$, $G^a=E^a/\\operatorname{im}d_E^{a-1}$, and $G^i=E^i$ for $i>a$, with the induced differential at $a$ and the old differentials above it. The quotient is valid since $d_E^a d_E^{a-1}=0$. The projection $p:E\\to G$ is a chain map. At $a$, its cycles are $\\ker d_E^a/\\operatorname{im}d_E^{a-1}$ and there are no incoming boundaries; in degree $a+1$, the induced map from $E^a/\\operatorname{im}d_E^{a-1}$ has the same image as $d_E^a$, while the outgoing differential is unchanged; in higher degrees both differentials are unchanged; below $a$, both cohomologies vanish by step 3. Thus $p$ is a quasi-isomorphism. Images of a finite basis of $E^a$ generate its quotient $G^a$; the other terms are finite free or zero. Therefore $G$ is zero outside $[a,b]$ with finite terms. Localization inverts $p$; the composite $h\\circ Q_P(p)^{-1}$ gives $Q_P(G)\\simeq K\\otimes_R^{\\mathbf L}P$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, Section section-truncations, canonical cochain truncation tau_ge_n: cokernel in the bottom degree and cohomology formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-abstract-derived-category",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BZK, lemma-shriek-boundedness, polynomial-extension assertion; expanded using More on Algebra 066E and 064K and Homology canonical truncations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial scalar extension of a bounded complex with finite cohomology over a Noetherian ring has a bounded complex of finite modules as a representative",
+   "results": "8 hits; top results: FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Rep.standardComplex.forget₂ToModuleCat, localCohomology.diagram, HomologicalComplex.instIsStrictlySupportedExtend, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Rep.isZero_Tor_succ_of_projective, Rep.standardResolution.extIso. The signatures concern finite limits, completion, ordinary flat base change or bounded derived representatives without finite terms; none gives a bounded finite polynomial scalar-extension model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded coherent derived object over a Noetherian ring becomes representable by a bounded complex of finitely generated modules after extension to a polynomial algebra",
+   "results": "8 hits; top results: Ext, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, instHasExtModuleCatOfSmall, localCohomology.diagram, CochainComplex.IsKProjective, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE. The signatures concern finite limits, completion, ordinary flat base change or bounded derived representatives without finite terms; none gives a bounded finite polynomial scalar-extension model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, CochainComplex",
+   "results": "0 hits; top results: none. The signatures concern finite limits, completion, ordinary flat base change or bounded derived representatives without finite terms; none gives a bounded finite polynomial scalar-extension model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(cohomolog|homology)|bounded.*finite.*(model|represent)|pseudo.?coherent",
+   "results": "0 hits; top results: none. The signatures concern finite limits, completion, ordinary flat base change or bounded derived representatives without finite terms; none gives a bounded finite polynomial scalar-extension model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded coherent complex over a Noetherian ring admits a bounded finite module complex after flat polynomial base change",
+   "results": "8 hits; top results: Algebra.Smooth.flat_of_isNoetherianRing, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, Algebra.FinitePresentation.baseChange, RingHom.Flat, RingHom.FaithfullyFlat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, Module.FaithfullyFlat.instTensorProduct, ModuleCat.preservesFiniteLimits_extendScalars_of_flat. The signatures concern finite limits, completion, ordinary flat base change or bounded derived representatives without finite terms; none gives a bounded finite polynomial scalar-extension model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*(cohomology|homology)|pseudo.?coherent|bounded.*finite",
+   "results": "0 hits; top results: none. The signatures concern finite limits, completion, ordinary flat base change or bounded derived representatives without finite terms; none gives a bounded finite polynomial scalar-extension model.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|isKProjective_of_projective|def HomComplex",
+   "results": "Read Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180 (bounded model without finite-generation assertion), HomotopyCategory/KProjective.lean:113 (K-projectivity only), HomotopyCategory/HomComplex.lean:566 (additive-group Hom complex, no module finiteness). These are ingredients, not a one-line specialization of this statement.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "polynomial.*(cohomolog|homology)|bounded.*finite.*(model|represent)|pseudo.?coherent",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives omit finite terms; other hits concern unrelated finiteness or ordinary flat base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded coherent complex over a Noetherian ring admits a bounded finite module complex after flat polynomial base change",
+   "results": "8 hits: Algebra.Smooth.flat_of_isNoetherianRing, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, Algebra.FinitePresentation.baseChange, RingHom.Flat, RingHom.FaithfullyFlat.isStableUnderBaseChange, IsSMulRegular.of_flat_of_isBaseChange, Module.FaithfullyFlat.instTensorProduct, ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives omit finite terms; other hits concern unrelated finiteness or ordinary flat base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, CochainComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives omit finite terms; other hits concern unrelated finiteness or ordinary flat base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial scalar extension of a bounded complex with finite cohomology over a Noetherian ring has a bounded complex of finite modules as a representative",
+   "results": "8 hits: FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, Rep.standardComplex.forget₂ToModuleCat, localCohomology.diagram, HomologicalComplex.instIsStrictlySupportedExtend, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Rep.isZero_Tor_succ_of_projective, Rep.standardResolution.extIso",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives omit finite terms; other hits concern unrelated finiteness or ordinary flat base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded coherent derived object over a Noetherian ring becomes representable by a bounded complex of finitely generated modules after extension to a polynomial algebra",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, localCohomology.diagram, Ext, instHasExtModuleCatOfSmall, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives omit finite terms; other hits concern unrelated finiteness or ordinary flat base change"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_iso_Q_obj_of_isGE_of_isLE|PseudoCoherent|pseudo.?coherent",
+   "results": "2 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: bounded derived representatives omit finite terms; other hits concern unrelated finiteness or ordinary flat base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-upper-shriek-bounded-coherent",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: coherent relative-duality polynomial-chart input; the algebraic upper-shriek relative-perfection calculation used before the marked dualizing construction. Bounded-coherence prerequisite: polynomial extension and finite good truncation (returned upper-shriek proof steps 2--4).",
+   "via": [
+    "lem-trf-upper-shriek-bounded-coherent",
+    "lem-trf-algebraic-shriek-relative-perfect",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-bounded-finite-model",
+  "worker": "stage1",
+  "summary": "Repair after returned head 8b18fb1b167: retained the reviewed finite-free/K-flat/monomial/truncation route and searches, rechecked the current unsplit item and every cited statement, made the identity-resolution computation and the final isomorphism explicit, and checked the degree a+1 boundary image. No statement changes or new nodes. Delivery is rebuilt on the current DAG for live promotion.",
+  "blueprint": "Keeps the inherited local-term-locality proof (1)--(2) ancestor and nearby-cycle/relative-duality dependency chain. Realizes the bounded-coherence prerequisite isolated by lem-trf-upper-shriek-bounded-coherent: polynomial extension followed by finite good truncation. The current ancestor text does not itself assert this commutative-algebra lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Generic Noetherian module-complex criterion supplies a finite-free model; no trace-formula node states this criterion."
+   },
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flatness theorem computes the scalar extension; no trace-formula node gives it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site derived change of rings specialized to the one-point site supplies the D(P) isomorphism and preserves the coefficient category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-1a4385d73",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-1a4385d73 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited node statement and found no fault, so no fixes were needed. The delivery has no new nodes. Compared with the returned head 8b18fb1b167, which was returned only because a side completion had not been promoted, the delivery changes only proof steps 2 and 4 and split_report; both are clarifications on the same route. Statement, stmt_deps, source and blueprint fields are unchanged from the base node. Source: Stacks 0BZK (lemma-shriek-boundedness) only says that tensoring with P preserves D^b_Coh. The item makes this explicit as a finite complex of finite P-modules, with no perfectness assumed, ordinary module categories and D(P) on the one-point site; the target is not weakened. Step 1: the Noetherian pseudo-coherence criterion (066E(2)), used in the reverse direction with b=u, plus the definition of pseudo-coherent, gives a bounded-above finite free complex F and an iso e : Q_R(F) ≅ K. Step 2: finite free modules are flat, so lem-pc-module-bounded-flat-kflat makes F K-flat. Applying clause (2) of lem-pur-derived-change-of-rings to the identity resolution gives c, and h = L(e)∘c⁻¹ : Q_P(E) ≅ L(K). The written maps E^i ≅ P^{r_i} are correct. Step 3: P is free on the monomials, so the R-module H^i(E) is a direct sum of copies of H^i(F) ≅ H^i(K) and vanishes for i<l; this is elementary. Step 4: truncating with G^a = E^a/im d^{a-1}, I checked the cohomology at a, the image in degree a+1, higher degrees and degrees below a, so the projection is a quasi-isomorphism. G is finite and vanishes outside [l, max(l,v)], and the composite h∘Q_P(p)⁻¹ points the right way. Edge cases tested: n=0; K=0; v<l; non-perfect K=(Z/2)[0] over Z/4, where the bottom term is finite but not projective. There is no cycle and no SGA citation. Of the 76 pseudo-coherent nodes and the polynomial/derived nodes I searched, none duplicates the item. I accept the three generic tool_uses: the pseudo-coherence criterion, bounded-flat K-flatness and derived change of rings."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PolynomialBoundedFiniteModel",
+  "declaration": "DerivedCategory.exists_bounded_finite_model_polynomial_scalarExtension",
+  "file": "lean/Sheaf/Algebra/Homology/PolynomialBoundedFiniteModel.lean",
+  "statement": "theorem exists_bounded_finite_model_polynomial_scalarExtension (R : Type u) [CommRing R] [IsNoetherianRing R] (n : ℕ) (K : DerivedCategory (ModuleCat.{u} R)) (_hbounded : ∃ l t : ℤ, l ≤ t ∧ ∀ i : ℤ, i < l ∨ t < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj K)) (_hfinite : ∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj K)) : ∃ (a b : ℤ) (G : CochainComplex (ModuleCat.{u} (MvPolynomial (Fin n) R)) ℤ), a ≤ b ∧ (∀ j : ℤ, j < a ∨ b < j → IsZero (G.X j)) ∧ (∀ j : ℤ, Module.Finite (MvPolynomial (Fin n) R) (G.X j)) ∧ Nonempty (Q.obj G ≅ (ModuleCat.ordinaryDerivedExtendScalars (MvPolynomial.C : R →+* MvPolynomial (Fin n) R)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a510faed9",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read the item node (only change from side-live is the new lean record), all 6 stmt_dep records, the delivered module (one theorem, proof sorry, source and blueprint docstrings) and the owner source OrdinaryDerivedChangeOfRings.lean (lines 41-75 and 402-412). Clauses match: Noetherian R, MvPolynomial (Fin n) R with C, K in D(R), cohomology vanishing outside an interval [l,t], finite cohomology; exists a<=b and a ModuleCat P cochain complex G zero outside [a,b] with finite terms and Nonempty (Q.obj G ≅ ordinaryDerivedExtendScalars C K), orientation correct. Derived scalar extension is the recorded owner, unique up to iso, and the statement is iso-invariant. No perfectness or extra hypotheses. The statement field is verbatim. Universe u matches what the dependency requires. Edge cases n=0, K=0, zero ring and non-perfect Z/4 input are fine. Proof-only imports exist in side-live. The report has the worker and second-reading sections. Nothing compiled because no file was changed. No findings."
+ }
+}

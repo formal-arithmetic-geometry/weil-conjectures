@@ -1,0 +1,335 @@
+{
+ "id": "lem-sf-cbc-strict-tensor-model-evaluation",
+ "kind": "statement",
+ "title": "Strict tensor towers compute diagram-derived reduction with the specified transitions",
+ "statement": "Let $\\mathcal C$ be a small Grothendieck site, $R$ a sheaf of commutative rings, and $S_\\bullet=(S_n,s_n:S_{n+1}\\to S_n)_{n\\ge1}$ a strict tower of unital commutative $R$-algebras [def-weil-inverse-system]. Use the ringed diagram site [lem-weil-pbc-diagram-site-realization], module sheaves, unbounded derived localizations $Q$, and flat-term K-flat complexes [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Fix derived tensor and its two-sided K-flat comparison as in [lem-weil-pbc-site-derived-tensor-descent], and the one-sided normalization [lem-trf-site-one-sided-tensor-normalization]. Whenever $P$ and $\\Delta P$ are flat-term K-flat, there is a normalized isomorphism in the derived category of strict $R$-module towers\n$$c_{P,S}:\\Delta(QP)\\otimes^L_{\\Delta R}S_\\bullet\\xrightarrow{\\sim}Q(T_S(P)),\\qquad T_S(P)_n=P\\otimes_RS_n.$$\nHere $\\Delta(QP)$ means the derived functor of exact diagonal applied to $QP$. The complex tower $T_S(P)$ has differential $d_P\\otimes1$, actual transition $1_P\\otimes s_n$, and coefficient-map components $1_P\\otimes a_n$ for every algebra-tower morphism $a:S_\\bullet\\to T_\\bullet$. The displayed comparison is natural in homotopy-category maps of the resolving complex and in coefficient-tower maps. Its evaluation agrees with the one-sided tensor computation on $\\mathcal C$ conjugated by the exact-evaluation localization comparisons, and the ordinary evaluation maps are identity on local pure tensors. In particular the evaluation identifications commute with the strict transitions before localization.\nFor $V\\in\\mathcal C$, put $R_V=R|_V$ and let $J_R$ be exact termwise slice extension [def-pur-localized-ringed-site, lem-pur-site-restriction-module-adjunction-exact, def-sf-strict-tensor-reduction-termwise]. If $P$ on $\\mathcal C/V$, $j_{R!}P$, and both constant diagrams are flat-term K-flat, the comparisons above and exact-extension localization give\n$$\\mathcal R_S(j_{R!}QP)\\cong Q(T_S(j_{R!}P)),\\qquad J_R\\mathcal R_{S|_V}(QP)\\cong Q(J_RT_{S|_V}(P)),$$\nwhere $\\mathcal R_S(M)=\\Delta M\\otimes^L_{\\Delta R}S_\\bullet$. These identifications are natural in both variables and have the same evaluated normalization. No K-flatness or flatness of $S_\\bullet$, nor surjectivity of its transitions, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU, definition-derived-tor and preceding one-sided construction; derived.tex Tag 015F, lemma-right-derived-exact-functor; agent strict-transition and evaluation refinement, returned proof Step 3."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sf-strict-tensor-reduction-termwise",
+  "def-sf-localized-strict-tensor-comparison-data",
+  "def-sf-strict-tensor-ordinary-model-data",
+  "def-sf-strict-tensor-derived-evaluation-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal A=\\operatorname{Mod}(R)$ and identify $\\operatorname{Tow}(\\mathcal A)$ with modules over $\\Delta R$ on the small diagram site by [lem-weil-pbc-diagram-site-realization]. Write $Q_d,Q_c$ for diagram and base localization. The levelwise kernels and cokernels of [lem-weil-tower-category-levelwise-abelian] show that $\\Delta$ is exact: applying it gives the constant diagrams on the original kernel and cokernel. Evaluation $e_n$ is exact by the diagram-site lemma. Apply [lem-weil-pbc-exact-functor-derived-factorization] to fix natural localization comparisons $d_P:\\Delta_D(Q_cP)\\cong Q_d(\\Delta P)$ and $\\epsilon_{n,A}:E_n(Q_dA)\\cong Q_c(e_nA)$. All subsequent conjugations use these comparisons; here $\\Delta_D,E_n$ denote the derived exact functors. No diagram in $D(R)$ is substituted for the derived category of strict diagrams.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; exact diagonal and evaluation in the existing diagram-site realization"
+   }
+  },
+  {
+   "text": "Regard $S_\\bullet$ as the degree-zero complex $S_\\bullet[0]$. The ordinary tensor on the diagram site is the sheafification of sectionwise tensor. The evaluation inverse images of [lem-weil-pbc-diagram-site-realization] have identity coefficient map, so [lem-pur-cochain-pullback-tensor-coherence] gives the ordinary evaluation comparison with $p\\otimes s\\mapsto p\\otimes s$. In degree $i$ of $\\operatorname{Tot}(\\Delta P\\otimes_{\\Delta R}S_\\bullet[0])$ only the summand $(i,0)$ is nonzero. Its differential is $d_P\\otimes1$ by [def-pc-tensor-complex-sheaves]. In the diagram direction the restriction of a sectionwise tensor is the tensor of the two restriction maps; hence it sends $p\\otimes s$ at level $n+1$ to $p\\otimes s_n(s)$ at level $n$. Sheafification preserves this equality by its universal property [def-weil-presheaf-modules-sheafification]. Thus these comparisons assemble to a cochain isomorphism $\\theta_{P,S}:\\operatorname{Tot}(\\Delta P\\otimes_{\\Delta R}S_\\bullet[0])\\cong T_S(P)$ with the specified strict transitions, rather than merely separate derived isomorphisms at each level.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), 03EL (lemma-tensor-product-pullback), 03CY (lemma-sheafification-presheaf-modules); cochain refinement in sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-site-one-sided-tensor-normalization] on the diagram site with $T=\\Delta P$ and $M=S_\\bullet[0]$. Its hypotheses hold by the assumed flat terms and K-flatness of $\\Delta P$; the second factor is unrestricted. Define, with composition written right to left,\n$$c_{P,S}=Q_d(\\theta_{P,S})\\,c^{d}_{\\Delta P,S_\\bullet[0]}\\,(d_P\\otimes^{\\mathbf L}1).$$\nThis is the claimed derived isomorphism. For a homotopy-category map $u:P\\to P'$ the second naturality equation of that lemma gives the conjugated map $Q_d(u\\otimes1)$; for $a:S_\\bullet\\to T_\\bullet$ its first equation gives $Q_d(1\\otimes a)$. The ordinary comparisons in Step 2 are natural in both variables by cochain tensor coherence. Therefore the resulting components on $T_S(P)$ are $u\\otimes1$ and $1_P\\otimes a_n$, respectively. In particular the comparison is normalized by the specified two-sided derived tensor comparison, not by an arbitrary isomorphism.",
+   "uses": [
+    "lem-trf-site-one-sided-tensor-normalization",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding one-sided construction, with the fixed two-sided normalization"
+   }
+  },
+  {
+   "text": "Fix $n$ and use the ringed inverse image $e_n$ of Step 1. By [lem-weil-pbc-ringed-pullback-preserves-kflat], it takes every flat-term K-flat diagram complex to a flat-term K-flat complex. Apply [lem-weil-pbc-tensor-comparison-descent-representatives] with $F=e_n$, $LF=E_n$, $q=Q_d$, $q'=Q_c$, and counit $\\epsilon_n$. The representative tensor isomorphisms are those of [lem-weil-pbc-site-derived-tensor-descent] on the two small sites; its full-faithfulness clause supplies the restriction hypothesis. The counit is invertible on every complex by Step 1, hence also on tensors of representatives. The ordinary comparison is the cochain comparison of [lem-pur-cochain-pullback-tensor-coherence]. We obtain the normalized natural derived comparison\n$$\\beta_{n;A,B}:E_n(A\\otimes^{\\mathbf L}B)\\cong E_nA\\otimes_R^{\\mathbf L}E_nB.$$\nIts defining representative square says exactly that, on two flat-term K-flat complexes, $\\beta_n$ is the localized ordinary tensor evaluation comparison conjugated by their specified two-sided tensor and exact-evaluation comparisons.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0G7E (lemma-pullback-K-flat); representative-square descent by the existing categorical lemma"
+   }
+  },
+  {
+   "text": "To verify the same square with the second factor $S_\\bullet[0]$, choose a flat-term K-flat resolution $v:V\\to S_\\bullet[0]$ on the diagram site using [lem-pc-kflat-resolution]. Exact evaluation carries $v$ to a quasi-isomorphism, and $e_nV$ has flat terms and is K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat]. Apply one-sided naturality [lem-trf-site-one-sided-tensor-normalization] to $v$ on both sites. The two-sided representative square in Step 4 gives equality for $(\\Delta P,V)$. Naturality of $\\beta_n$ and $\\epsilon_n$, and the ordinary cochain comparison's naturality, identify the two composites after precomposing with $E_n(1\\otimes^{\\mathbf L}Q_dv)$. This arrow is invertible; cancel it. Consequently\n$$\\epsilon_{n,T_S(P)}\\,E_n(c_{P,S})=c^c_{P,S_n[0]}\\,(\\epsilon_{n,\\Delta P}\\otimes^{\\mathbf L}\\epsilon_{n,S[0]})\\,\\beta_{n;Q_d\\Delta P,Q_dS[0]}\\,E_n(d_P\\otimes^{\\mathbf L}1),$$\nwhere the ordinary evaluation identification of Step 2 is inserted on the left. The diagonal localization and evaluation comparisons also identify $E_n\\Delta_D(Q_cP)$ with $Q_cP$. This is precisely the asserted one-sided evaluation normalization, including the exact-localization conjugations.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-trf-site-one-sided-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), and 06YU (definition-derived-tor); agent cancellation verification of normalization"
+   }
+  },
+  {
+   "text": "For an actual transition, the two routes in the ordinary evaluation square both send $p\\otimes s$ to $p\\otimes s_n(s)$. For a coefficient-tower map $a$, the corresponding square is the equality $a_ns_n=t_na_{n+1}$ tensored with $1_P$. The maps are linear, and equality on the presheaf tensor generators extends uniquely to the sheaf tensor by [def-pur-sheaf-tensor-product] and [def-weil-presheaf-modules-sheafification]. For a chain homotopy $h$, tensoring with a degree-zero coefficient gives $h\\otimes1$ and $d(h\\otimes1)+(h\\otimes1)d=(dh+hd)\\otimes1$. Thus the transition and coefficient squares already hold for strict complexes and homotopy-category maps. Localizing these equalities proves their compatibility with the comparisons of Steps 3–5; no faithfulness of derived evaluations is asserted.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 03CY (lemma-sheafification-presheaf-modules); direct degree-zero tensor calculation"
+   }
+  },
+  {
+   "text": "On the slice site apply Steps 1–5 with $R_V$ and $S_\\bullet|_V$. On the base apply them to $j_{R!}P$ and $S_\\bullet$. The required four flat-term K-flat hypotheses are exactly those assumed in the statement, so this invokes no unproved preservation property of extension. By [lem-pur-site-restriction-module-adjunction-exact] the module extension $j_{R!}$ is exact. By [def-sf-strict-tensor-reduction-termwise] its termwise diagram extension $J_R$ preserves finite limits and colimits. Thus [lem-weil-pbc-exact-functor-derived-factorization] supplies $\\lambda_A:J_{R,D}Q_{d,V}A\\cong Q_d(J_RA)$ and $\\xi_P:j_{R!,D}Q_{c,V}P\\cong Q_c(j_{R!}P)$. The two requested maps are explicitly\n$$c_{j_{R!}P,S}\\,\\mathcal R_S(\\xi_P),\\qquad \\lambda_{T_{S|_V}(P)}\\,J_{R,D}(c_{P,S|_V}).$$\nBoth are isomorphisms. Exact extension and evaluation commute termwise: at level $n$ both complexes are $j_{R!}(A_n)$ with the same differential. Their localization comparisons therefore agree under this ordinary identity by uniqueness in [lem-weil-pbc-localization-universal-property]. Applying Step 5 to these two composites gives their evaluated normalization. Naturality follows from the naturality of every displayed factor. Throughout only the resolving factors, never $S_\\bullet$, were required to be flat or K-flat; no step used surjectivity of $s_n$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-sf-strict-tensor-reduction-termwise",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact); agent termwise comparison refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-sf-strict-tensor-reduction-termwise",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor and preceding construction), specialized using existing diagram-site, cochain-coherence, representative-descent and exact-localization nodes; derived.tex Tag 015F (lemma-right-derived-exact-functor) for exact extensions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(tensor|Tensor).*(evaluation|Evaluation)|(evaluation|Evaluation).*(tensor|Tensor)",
+   "results": "Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/FunctorCategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary presheaf tensors, Cartesian functor-category tensors and projective Tor do not give normalized unbounded ringed strict-tower computation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"evaluation\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary presheaf tensors, Cartesian functor-category tensors and projective Tor do not give normalized unbounded ringed strict-tower computation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of derived tensor of constant sheaf diagrams is normalized on K-flat complexes and respects tower transitions",
+   "results": "Module.Flat.lTensor_shortComplex_exact; Module.Flat.rTensor_shortComplex_exact; HomologicalComplex.instPreservesColimitEval; CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; CategoryTheory.constantSheafAdj; Module.Flat.iff_lTensor_preserves_shortComplex_exact; SheafOfModules.evaluationPreservesLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary presheaf tensors, Cartesian functor-category tensors and projective Tor do not give normalized unbounded ringed strict-tower computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a strict inverse sequence of sheaf algebras is represented by the tower P tensor S n with transitions identity tensor s n",
+   "results": "CategoryTheory.Sheaf.tensorProd_isSheaf; CategoryTheory.Tor'_obj_obj; CategoryTheory.Sheaf.monoidalCategory; PresheafOfModules.Monoidal.tensorObj; CategoryTheory.Tor_obj; CategoryTheory.Tor; PresheafOfModules.Monoidal.tensorObj_obj; LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary presheaf tensors, Cartesian functor-category tensors and projective Tor do not give normalized unbounded ringed strict-tower computation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a strict inverse system of sheaf algebras evaluated on a K-flat complex commutes with evaluation and has transition identity tensor the ring map",
+   "results": "AdicCompletion.ofTensorProduct_naturality; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier; AdicCompletion.tensor_map_id_left_eq_map; TensorProduct.directLimitLeft_rTensor_of; TensorProduct.toDirectLimit_tmul_of; TensorProduct.directLimitLeft_symm_of_tmul; TensorProduct.directLimitRight_symm_of_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness, Cartesian functor tensors, rigid evaluation and adic completion hits do not give this normalized unbounded sheaf-diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor|Tensor).*(evaluation|Evaluation)|(evaluation|Evaluation).*(tensor|Tensor)",
+   "results": "Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean; Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean; Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness, Cartesian functor tensors, rigid evaluation and adic completion hits do not give this normalized unbounded sheaf-diagram comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "One-sided K-flat derived tensor on sheaves in a functor category commutes with exact evaluation",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier; Module.Flat.iff_lTensor_preserves_shortComplex_exact; CategoryTheory.eval_app; SheafOfModules.evaluationPreservesLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness, Cartesian functor tensors, rigid evaluation and adic completion hits do not give this normalized unbounded sheaf-diagram comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"evaluation\"",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness, Cartesian functor tensors, rigid evaluation and adic completion hits do not give this normalized unbounded sheaf-diagram comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact evaluation of diagrams of sheaf modules commutes with total tensor complexes and their derived tensor product using flat K-flat representatives",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_lTensor_preserves_shortComplex_exact; Module.Flat.iff_rTensor_preserves_shortComplex_exact; Module.Flat.iff_preservesFiniteLimits_tensorLeft; Module.Flat.lTensor_exact; HomologicalComplex.HasGoodTensor₁₂; Module.Flat.rTensor_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module flatness, Cartesian functor tensors, rigid evaluation and adic completion hits do not give this normalized unbounded sheaf-diagram comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-localized-strict-tensor-descent",
+  "date": "2026-10-22",
+  "group": "NG"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 1–2: extension-by-zero identification and coefficient naturality; localized strict-tensor refinement, returned descent proof Steps 3",
+   "via": [
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cbc-strict-tensor-model-evaluation",
+  "worker": "stage1",
+  "summary": "Seven-step proof using existing general DAG lemmas only: fixes exact localization comparisons, constructs the strict ordinary tensor tower and its transition equations, applies one-sided normalization on the diagram site, descends normalized evaluation and checks it on a coefficient resolution, then obtains the exact-slice-extension formulas. Statement unchanged; no new nodes.",
+  "blueprint": "fix-lem-exchanges proof Steps 1–2 in the creation lineage (extension-by-zero identification and coefficient naturality); in the current expanded live proof this is the open-factor strict reduction used in Step 6, and coefficient naturality of Step 7. This item supplies the strict representative normalization of lem-sf-cbc-localized-strict-tensor-descent Step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic small ringed diagram-site realization with exact evaluation; supplies the category, not a geometric base-change argument. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization comparisons on unbounded complexes, used for diagonal, evaluation and extension. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic flat-term K-flat localization equivalence and two-sided tensor representative comparisons. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Generic one-sided tensor normalization for an unrestricted second factor; applies to the entire coefficient diagram. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic ringed inverse-image total-tensor comparison, with explicit pure-tensor normalization. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic flat-term K-flat preservation for ringed evaluation inverse images. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-comparison-descent-representatives",
+    "why": "Generic representative-square descent fixes the normalized derived evaluation comparison. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat replacement used only to verify evaluation normalization by cancellation. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Uniqueness of localization of the termwise equality between extension and evaluation. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Definition of the direct-sum total tensor and signed differential. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Definition of sheaf tensor as sheafification of the sectionwise tensor. No node of the compact-support unit replaces this generic algebraic tool."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Module sheafification universal property extends the explicit generator equations. No node of the compact-support unit replaces this generic algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-tensor-comparison-descent-representatives",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-N8-800474227",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-800474227 (reviewer sub-agent of L); spot-checked: N8 lem-sf-cbc-strict-tensor-model-evaluation @8004742: I read the whole delivery. It is a one-level split with no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the NG re-split base, so nothing is weakened. Mechanical checks: proof_deps equals the union of uses, every cited id exists and none is merged, there is no cycle (195 reachable nodes), no SGA citation, steps are 849-1329 characters. The unit sk-prop-sf-cbc cites only av-jacobian, so every off-unit statement must be a declared generic tool, a mathlib leaf or closed (lem-pur-site-restriction-module-adjunction-exact is closed in slopmaster2); I accept the 12 tool_uses. Sources: Stacks 06YU (sites-cohomology l.3300) and 015F (derived l.5884, (3)-(4): every complex computes RF on unbounded D); the tags/tags labels match. Steps: (1) Delta is exact because tower kernels and cokernels are levelwise, e_n is exact, and the factorization lemma gives d_P and eps_n. (2) theta is the levelwise ordinary tensor via cochain pullback coherence with identity coefficient map; only bidegree (i,0) survives; transition p⊗s->p⊗s_n(s) extends by sheafification. (3) c = Q(theta) c^d_{ΔP,S[0]} (d_P⊗1); types check, and the one-sided lemma allows any M. (4) beta_n from representative descent; all hypotheses are supplied (K-flat preservation, full faithfulness, eps invertible everywhere). (5) Normalization for the non-K-flat factor S[0], checked end to end: resolve V->S[0], e_nV is a flat-term K-flat resolution, use naturality, cancel the invertible arrow; valid. (6) Elementary generator and homotopy squares with a degree-0 coefficient. (7) Composites c·R_S(ξ) and λ·J(c) type-check; the four K-flatness hypotheses are exactly the statement's; E_nJ_D ≅ j_{!,D}E_n by localization uniqueness (2). Edge cases: one-point site with ℤ->ℤ/2^n, non-surjective t->t², P=0, unbounded P, several arrows W->V. No duplicates: the Noetherian and pro-étale relatives are special cases, already advisory in the parent review. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.StrictTensorModelEvaluation",
+  "declaration": "SheafOfModules.StrictTensorEvaluation.strict_tensor_model_evaluation",
+  "declarations": [
+   "SheafOfModules.StrictTensorEvaluation.extensionFirst",
+   "SheafOfModules.StrictTensorEvaluation.extensionSecond",
+   "SheafOfModules.StrictTensorEvaluation.strict_tensor_model_evaluation"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/StrictTensorModelEvaluation.lean",
+  "statement": "theorem strict_tensor_model_evaluation (t : TowerTensor.{c, v, r} R) (b : BaseTensor.{c, v, r} R) : Nonempty (Computation.{c, v, r} R t b) ∧ ∀ (V : C) [HasSheafify (J.over V) AddCommGrpCat.{max c v r}] [(J.over V).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] (tV : TowerTensor.{max c v, v, r} (R.over V)) (bV : BaseTensor.{max c v, v, r} (R.over V)), Nonempty (Computation.{max c v, v, r} (R.over V) tV bV)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04a724cf7",
+  "group": "NK",
+  "result": "pass",
+  "note": "Item node unchanged vs live except lean + stmt_deps; stmt_deps gain only landed def-sf-localized-strict-tensor-comparison-data and the 2 new def nodes. comparison = derivedTensor.mapIso(diagonalFactors⊗1) ≪≫ normalized one-sided family ≪≫ Qh(θ), exactly proof Step 3. All Computation fields pinned: one-sided families = δ⁻¹ on resolving objects plus NatIso naturality; θ and ordinary maps fixed on local pure tensors (only the (i,0) summand is nonzero); homotopy and derived evaluation fixed by representative squares. natural_first (every homotopy map, Good P/P'), natural_coefficient (actual coefficientMap/strictMap) and evaluation_normalized (unrestricted S) present. extensionFirst/extensionSecond are the Step 7 composites with exactly the four K-flatness hypotheses. No flatness/surjectivity of S, independent universes, empty site handled by the inner slice binder. Single sorry, verbatim statements, docstrings with all 7 steps, lines <=100, no duplicate of ReductionModel/EvaluationModel. Advisories: (A1) new def node cites theorem nodes, incl. lem-weil-pbc-kflat-fixed-tensor-triangulated only for the plain TensorPresentation, which has no def owner (maintainer: add an existing:true def node); (A2) naturality and evaluated normalization of the extension composites are derivable but not stated as clauses; (A3) slice conjunct redundant; (A4) report miscounts the added stmt_deps; (A5) second reading disclaims independence under the dispatcher policy. No compile run: no file changed; the worker reports 43.6/41.1/35.8 s clean."
+ }
+}

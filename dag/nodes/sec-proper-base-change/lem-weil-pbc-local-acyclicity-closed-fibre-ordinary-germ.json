@@ -5,9 +5,9 @@
   "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
  },
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+  "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism; Tag 0GJP, equation-alpha-K"
  },
  "status": "split",
  "created": {
@@ -56,69 +56,55 @@
  ],
  "proof": [
   {
-   "text": "Choose the canonical pointed strict-local map q from the localization of iz on X' to that of x on X. The strict-base closed-point localizations theorem makes q invertible and gives e and the fibre isomorphism over X. The inverse-image stalk comparison for i, canonical strict-local restriction of K, coefficient composition along q, inverse pullback of global sections along q, and inverse canonical restriction of G define A. This choice of A avoids needing a separate naturality theorem for restriction under the morphism p.",
+   "text": "Apply the proved strict-fibre comparison to the point iz and the pullback square X times S_(s). It supplies the isomorphism q of strict localizations, the base isomorphism e and fibre isomorphism E. Compose the latter with pullback symmetry and associativity to obtain the presentation W= X_t times_X' X'_(iz), over its first projection.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-local-acyclicity-strict-fibre-comparison",
-    "lem-weil-pbc-strict-base-closed-point-localizations",
-    "lem-weil-pbc-strict-local-germ-restriction-iso"
+    "lem-weil-pbc-local-acyclicity-strict-fibre-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
-   }
+   "elementary": true
   },
   {
-   "text": "The map t is between affine schemes, so its base change h is affine and hence qcqs. Apply the unrestricted strict-henselization stalk theorem in degree zero to h and h-inverse-image K, retaining its actual canonical restriction composite. Transport through the left-exact degree-zero comparison and the single-complex/global-sections comparison. The degree-zero adjunction-unit normalization, its naturality, and the mate formula identify this canonical composite with r_(h_*h-inverse-image K) followed by ordinary exchange on strict-local sections and the direct-image global-sections isomorphism. It is therefore invertible. The fibre isomorphism and inverse-image coefficient composition over X then define B. Mere existence of an object-level target-stalk isomorphism is not sufficient here; use the canonical map in the unrestricted theorem.",
+   "text": "Choose the unique restriction from strictLocalSectionCone for each sheaf. The pointed-section-cone criterion, the strictly henselian sections-stalk theorem and the compatible residue lift prove that it is invertible. The representative germ colimit and naturality of the inverse-image unit prove naturality in the sheaf.",
    "uses": [
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-    "lem-weil-pbc-derived-adjunction-single-zero",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "pqf-def-affine-morphism",
-    "def-weil-pbc-underived-exchange"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
-   }
-  },
-  {
-   "text": "Canonical strict-local restriction is natural in the sheaf: precompose with representative affine pointed-neighbourhood germs, use strictHenselizationSectionRestriction_naturality, then use their colimit universal property. Apply this naturality to the ordinary unit. The base-change identity map_unit_baseChangeMap_app changes its pullback followed by the ordinary exchange map into the fibre-projection unit followed by the inverse-image square comparison. On global sections this is pullback to the strict-local fibre; strictLocalUnderivedMateSections_eq verifies the same formula on each pointed representative. Transport along q and the fibre isomorphism over X. Functoriality of global-sections pullback and the inverse-image composition-unit identity give exactly alpha after the chosen A. Equality on representative germs proves the displayed equality. Neither local acyclicity nor a vanishing assertion is used; zero sheaves and empty fibres are included.",
-   "uses": [
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "def-weil-pbc-small-strict-local-section-cone",
+    "lem-weil-pbc-pointed-section-cone-stalk-iso",
     "lem-weil-pbc-strictly-henselian-sections-stalk",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-local-acyclicity-abelian-sheaf",
-    "lem-weil-pbc-strict-local-localized-hom-germ",
-    "lem-weil-pbc-strict-local-underived-sections-mate"
+    "lem-weil-pbc-strict-henselization-functoriality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The geometric fibre projection h is affine, hence qcqs. The ordinary strict-local direct-image comparison proves invertibility of global sections of its exchange map. Compose the inverse-image stalk comparison, restriction, exchange and direct-image global-sections isomorphism, and the coefficient/fibre transport B. The source isomorphism uses restriction, transport U and inverse restriction of G.",
+   "uses": [
+    "lem-weil-pbc-strict-local-ordinary-direct-image-comparison",
+    "lem-weil-pbc-global-sections-iso-over-transport",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-affine-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of inverse-image stalks and strict-local restriction on the ordinary unit. The unit equation map_unit_baseChangeMap_app identifies its restriction followed by exchange with pullback of global sections and the square coefficient comparison. Apply the transport identity, cancel the inverse restriction of G against the first map in alpha, and obtain the requested actual morphism equality.",
+   "uses": [
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-global-sections-iso-over-transport",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "def-weil-pbc-small-strict-local-section-cone",
   "def-weil-pbc-underived-exchange",
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-derived-adjunction-single-zero",
-  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-global-sections-iso-over-transport",
   "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
   "lem-weil-pbc-local-acyclicity-strict-fibre-comparison",
-  "lem-weil-pbc-strict-base-closed-point-localizations",
-  "lem-weil-pbc-strict-local-germ-restriction-iso",
-  "lem-weil-pbc-strict-local-localized-hom-germ",
-  "lem-weil-pbc-strict-local-underived-sections-mate",
+  "lem-weil-pbc-pointed-section-cone-stalk-iso",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-local-ordinary-direct-image-comparison",
   "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
   "pqf-def-affine-morphism"
  ],
  "mathlib_searches": [
@@ -201,14 +187,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B5",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261018T071137-L-1664170",
+  "landing": "20261025T164537-L-1032605",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

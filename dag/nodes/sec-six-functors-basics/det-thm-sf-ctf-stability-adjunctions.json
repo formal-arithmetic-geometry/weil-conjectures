@@ -19,11 +19,12 @@
   "sk-def-sfb-dc-setting",
   "sk-def-sfb-constructible",
   "sk-def-localizing-closure",
-  "sk-def-sfb-module-derived-pushpull"
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sf-ctf-coefficient-stage-selectors"
  ],
  "proof": [
   {
-   "text": "For fully faithful inclusions iC and iD and comparison isomorphisms for proposed restricted functors, use Mathlib Adjunction.restrictFullyFaithful. Its restrictFullyFaithful_homEquiv_apply formula, fully faithful map_preimage, homEquiv_unit, map_comp and associativity give exactly the equation in HasCompatibleRestriction. When both object properties are preserved, construct the restricted functors with ObjectProperty.lift and take identity comparison isomorphisms. These two elementary categorical steps are proved as private helpers in the item module.",
+   "text": "For fully faithful inclusions iA and iB, construct the restricted adjunction with Adjunction.restrictFullyFaithful and prove the exact ambient Hom formula using restrictFullyFaithful_homEquiv_apply, map_preimage, homEquiv_unit, map_comp and associativity. This is the proved private helper compatible_of_fullyFaithful. For preserved object properties, compatible_of_preserves constructs both functors with ObjectProperty.lift and identity comparison isomorphisms.",
    "uses": [],
    "elementary": true
   },
@@ -36,7 +37,7 @@
    "elementary": false
   },
   {
-   "text": "For K in Dctf, transport the tensor-Hom adjunction [sk-def-sfb-derived-tensor-hom] along the Koszul-signed tensorLeftIsoTensorRight of the derived braided category. Its left adjoint sends M to M tensor K. The tensor clause of [det-thm-sf-ctf-stability-direct-images] and the first clause of [det-thm-sf-ctf-stability-internal-hom] prove preservation by both functors. Apply the same restriction construction for clause 2.",
+   "text": "For each K in Dctf, transport derivedTensorHomAdjunction along the derived signed tensorLeftIsoTensorRight to give the stated right-factor tensor functor. Apply the tensor preservation clause of det-thm-sf-ctf-stability-direct-images with arguments M,K. The first clause of internalHom_stability, restored with its existing node and complete statement, supplies Hom preservation. Apply compatible_of_preserves; its Hom equation gives the required compatibility.",
    "uses": [
     "sk-def-sfb-derived-tensor-hom",
     "det-thm-sf-ctf-stability-direct-images",
@@ -45,7 +46,7 @@
    "elementary": false
   },
   {
-   "text": "Let c0 be the compactification explicitly used by [det-thm-sf-ctf-stability-direct-images]. Apply [sk-prop-sf-existence] at c0 to obtain h0 and an adjunction F0 left adjoint to G on the localizing closures. Its Dctf preservation is given by the last two clauses of the direct-image stability theorem. Lift F0 and G to Dctf. For any boundary compactification c, [sk-prop-sf-existence] supplies its preservation witness h. The natural comparison of [det-sf-comp-coherence-cocycle] from c0 to c lifts to an isomorphism F0 isomorphic to Fc on the localizing closures, because their inclusions are fully faithful. Transport the ambient adjunction along this isomorphism, retaining G. Use the canonical small functors, the inverse left comparison whiskered with the Dctf inclusion, and the identity right comparison in restrictFullyFaithful. Its Hom formula proves clause 3. Compactness and quasi-separatedness of Y follow from its standing finite-type separated structure morphism to the field.",
+   "text": "Use the same chosen compactification c0 as constructibleFiniteTor_stability_direct_images and give its open part the quasi-compactness proof from quasiCompact_openImmersion_iff. Apply exists_localizingExceptionalAdjoint at c0, and its final two preservation clauses from the direct-image stability theorem, to construct the small functors F0 and G0 using ObjectProperty.lift. The inclusions in the localizing closures are the canonical ObjectProperty.ιOfLE. For any boundary compactification c, obtain its preservation witness from the same existence theorem. Lift compactification_coherence_cocycle from ambient targets through the fully faithful target inclusion, obtaining e : F_c0 ≅ F_c. Transport the ambient adjunction with ofNatIsoLeft e, keeping its right adjoint G. Apply compatible_of_fullyFaithful using F0,G0, the left comparison isoWhiskerLeft iX e and identity right comparison. This proves clause 3 with the actual localizingLowerShriek. CompactSpace and QuasiSeparatedSpace for Y follow from its finite-type separated structure morphism. Invoke the current compactification coherence theorem with its explicit ground-field argument k; the old compiled-signature fallback is no longer needed.",
    "uses": [
     "sk-prop-sf-existence",
     "det-thm-sf-ctf-stability-direct-images",
@@ -65,7 +66,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-adjunctions.md",
-  "place": "Proof paragraph, implemented using Adjunction.restrictFullyFaithful; arbitrary compactifications compared using det-sf-comp-coherence-cocycle"
+  "place": "Current blueprint restriction proof; categorical helpers and all three restrictions implemented in Lean, with the internal-Hom stability dependency restored from its recorded statement. T2 pruning: retain the completed general admissible-coefficient restriction proof and the explicit PodCtfAdjunctionData constructions. Remove only the unused auxiliary podCtfAdjunctions_exists assertion: all Lean Hom-chain consumers take the data R as a parameter and use its constructed adjunctions, never this auxiliary existence theorem. All parent-node dependencies and the unit route are retained."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -85,7 +86,18 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors-basics",
  "unit": "sk-thm-sf-ctf-stability",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "det-thm-sf-ctf-stability-adjunctions",
@@ -122,37 +134,45 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-bd9f09beb (reviewer sub-agent of L); spot-checked: Read the item, its single proof step and every cited node in full, plus the main-20261015 statement and proof files. The statement matches the source exactly; no hypothesis is added, dropped or weakened. Coefficient category: D(X_proét,Λ)=D(Mod_{Λ_X}) (sk-def-localizing-closure). Dctf sits inside it as a full subcategory (sk-def-sfb-constructible), and Loc(Dctf) is a full subcategory of the same category that contains Dctf, so all three clauses are restrictions along full inclusions. The full-subcategory restriction lemma is correct. Clause checks: (1) the ambient adjunction Lf^*⊣Rf_* is def-sfb-module-derived-pushpull-adjunction, and preservation is direct-images (1),(3). (2) The ambient adjunction is sk-def-sfb-derived-tensor-hom layer B; preservation is direct-images (1) for ⊗ and det-thm-sf-ctf-stability-internal-hom for cHom. (3) The ambient adjunction is sk-prop-sf-existence on Loc(Dctf) with Rf_!=Rp_*D(j_!) over the standing schemes of sk-def-sfb-dc-setting; preservation is direct-images (3),(4), whose (4) uses explicit preservation statements, not existence alone. A reachability check shows the DAG is acyclic. Edge cases checked: empty X, K=0, f=id, field coefficients, proper f (consistent with det-cor-existence-ii-restriction). There are no new nodes. There are no duplicates: def-sfb-dc-upper-lower-adjunction and def-sfb-dc-tensor-hom-adjunction are about D_cons, not Dctf. I accept the tool use of sk-prop-sf-existence, which the blueprint node itself cites; the two definition entries are notions and harmless. Fixes: (a) added the missing stmt_deps sk-def-sfb-dc-setting, sk-def-sfb-constructible, sk-def-localizing-closure and sk-def-sfb-module-derived-pushpull; (b) wrote out in the step the swap from the ambient K⊗−⊣RHom(K,−) to the stated −⊗K⊣cHom(K,−), via the commutative Koszul-signed symmetry of ⊗_{Λ_X} on a K-flat resolution. Details are in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.ConstructibleFiniteTorAdjunctions",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.constructibleFiniteTor_adjunctions",
+  "module": "Sheaf.Paper.PodCtfAdjunctions",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.podGeneralCtfAdjunctions",
   "declarations": [
-   "CategoryTheory.Adjunction.HasCompatibleRestriction",
-   "AlgebraicGeometry.ProEtale.CondensedRing.constructibleFiniteTor_adjunctions"
+   "WeilConjectures.PodCtfAdjunctionData",
+   "WeilConjectures.PodCtfAdjunctionData.pull",
+   "WeilConjectures.PodCtfAdjunctionData.direct",
+   "WeilConjectures.PodCtfAdjunctionData.support",
+   "WeilConjectures.PodCtfAdjunctionData.exceptional",
+   "WeilConjectures.PodCtfAdjunctionData.ordinaryAdjunction",
+   "WeilConjectures.PodCtfAdjunctionData.exceptionalAdjunction",
+   "WeilConjectures.PodCtfAdjunctionData.tensorAdjunctionX",
+   "WeilConjectures.PodCtfAdjunctionData.tensorAdjunctionY",
+   "WeilConjectures.podCompatibleRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.podGeneralCtfAdjunctions"
   ],
-  "file": "lean/Sheaf/Paper/ConstructibleFiniteTorAdjunctions.lean",
-  "statement": "theorem constructibleFiniteTor_adjunctions (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) : (derivedUpperStarLowerStarAdjunction Λ f).HasCompatibleRestriction (constantModelBoundedConstructible Λ Y ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K).ι (constantModelBoundedConstructible Λ X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K).ι ∧ (∀ K : ConstantModelConstructibleFiniteTor Λ X, ((derivedTensorHomAdjunction Λ K.obj).ofNatIsoLeft (@BraidedCategory.tensorLeftIsoTensorRight _ _ _ (DerivedCategory.braidedCategory _) K.obj)).HasCompatibleRestriction (constantModelBoundedConstructible Λ X ⊓ fun M ↦ DerivedCategory.finiteTorAmplitude _ M).ι (constantModelBoundedConstructible Λ X ⊓ fun M ↦ DerivedCategory.finiteTorAmplitude _ M).ι) ∧ (∀ c : Compactification.BoundaryCompactification f, ∃ (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (a : localizingLowerShriek Λ c.obj.obj h ⊣ G), a.HasCompatibleRestriction (constantModelFiniteTorToLocalizing Λ X) (constantModelFiniteTorToLocalizing Λ Y))",
+  "file": "lean/Sheaf/Paper/PodCtfAdjunctions.lean",
   "branch": "newtargets-dag",
-  "by": "Q14",
-  "date": "2026-10-18",
   "existing": false,
-  "note": "Maintainer-review fix: the delivered helper AlgebraicGeometry.ProEtale.CondensedRing.constantModelFiniteTorToLocalizing was a second copy (same type, same ObjectProperty.ιOfLE body) of the landed AlgebraicGeometry.ProEtale.constantModelFiniteTorToLocalizing of Sheaf.Paper.RationalExceptionalRestriction (sk-thm-restriction, Q06). The copy is removed and that module imported; the theorem's signature text is unchanged and now resolves to the recorded inclusion. 2026-10-20 (U): module Sheaf.Paper.ConstructibleFiniteTorAdjunctions deleted (dead: no target reaches it); this node is not reached either.",
-  "fixed_by": "NT-stage2-cc-93924c009"
+  "statement": "theorem podGeneralCtfAdjunctions\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]\n    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]\n    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]\n    [IsSeparated (X ↘ Spec (.of k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]\n    [IsSeparated (Y ↘ Spec (.of k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]\n    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]\n    (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) :\n    WeilConjectures.podCompatibleRestriction (derivedUpperStarLowerStarAdjunction Λ f)\n      (constantModelBoundedConstructible Λ Y ⊓\n        fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K).ι\n      (constantModelBoundedConstructible Λ X ⊓\n        fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K).ι ∧\n    (∀ K : ConstantModelConstructibleFiniteTor Λ X,\n      WeilConjectures.podCompatibleRestriction\n        ((derivedTensorHomAdjunction Λ K.obj).ofNatIsoLeft\n          (@BraidedCategory.tensorLeftIsoTensorRight _ _ _\n            (_root_.DerivedCategory.braidedCategory' _) K.obj))\n        (constantModelBoundedConstructible Λ X ⊓\n          fun M ↦ _root_.DerivedCategory.finiteTorAmplitude _ M).ι\n        (constantModelBoundedConstructible Λ X ⊓\n          fun M ↦ _root_.DerivedCategory.finiteTorAmplitude _ M).ι) ∧\n    (∀ c : Compactification.BoundaryCompactification f,\n      ∃ (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y\n          ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K))\n        (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤\n          (localizingClosureProEtale Λ X).FullSubcategory)\n        (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G),\n        WeilConjectures.podCompatibleRestriction adj\n          (ObjectProperty.ιOfLE (fun K hK _P _hP hSP ↦ hSP K hK) :\n            ConstantModelConstructibleFiniteTor Λ X ⥤\n              (localizingClosureProEtale Λ X).FullSubcategory)\n          (ObjectProperty.ιOfLE (fun K hK _P _hP hSP ↦ hSP K hK) :\n            ConstantModelConstructibleFiniteTor Λ Y ⥤\n              (localizingClosureProEtale Λ Y).FullSubcategory))",
+  "by": "Q18",
+  "date": "2026-10-24",
+  "note": "Section 1(B), returned delivery 191b54044d2f H2: the former module mixed the plain four-stage selectors with the restricted-adjunction theorem. The statement consumer needs only those definitions, not this theorem conclusion. Extract all eight selectors unchanged to the new definition-owned CtfCoefficientStageSelectors module and publicly import it here. Remove the moved selectors from this theorem node ownership list; all restricted functors, adjunction data and theorem signatures and bodies remain unchanged. Maintenance extraction landed separately as 20261024T175027-L-3988132 because the consumer delivery cannot own the former theorem module after replacing its dependency."
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-cc-93924c009",
-  "group": "Q14",
+  "reviewer": "NT-stage2-cc-cdbf7370a",
+  "group": "Q47",
   "result": "fix",
-  "note": "Statement matches node/source verbatim; hypotheses = standing setting + exists_localizingExceptionalAdjoint binders, nothing stronger; clause 1 derivedUpperStarLowerStarAdjunction restricted Dctf(Y)->Dctf(X); clause 2 derivedTensorHomAdjunction.ofNatIsoLeft(tensorLeftIsoTensorRight, real Koszul DerivedCategory.braidedCategory) gives -⊗K ⊣ RHom(K,-) for all K in Dctf(X); clause 3 asserts existence of h,G,a : localizingLowerShriek ⊣ G for every BoundaryCompactification (wide subcategory = all compactifications) with compatible restriction; HasCompatibleRestriction is non-vacuous (forces preservation, fixes Hom bijection); edge cases and universes fine; recorded statement verbatim; dep nodes unchanged. Finding H4: helper CondensedRing.constantModelFiniteTorToLocalizing duplicates landed AlgebraicGeometry.ProEtale.constantModelFiniteTorToLocalizing (Sheaf.Paper.RationalExceptionalRestriction, sk-thm-restriction): same type and body. Fix: copy deleted, that module imported (no cycle), statement text unchanged and verbatim, lean-record drops the helper and adds note, report appended. nt_compile --json: delivered clean 37.4 s once, timed out at 60 s under load on rerun; fixed file clean twice (54.4 s, 49.1 s); both near the 60 s limit."
+  "note": "Item lem-pod-hom-chain-counit-formula correct: clauses, directions (inverse ordinary/tensor/exceptional, forward projection, curry), naturality in T and N and the counit formula recomputed; R's free closed data is universally quantified, the conclusion is formal, accepted. Statements verbatim, universes bound, sorry only. H4 in the §1(B) repair of det-thm-sf-ctf-stability-adjunctions (PodCtfAdjunctions): the report wrongly calls LocalizingExceptionalAdjoint and RationalExceptionalRestriction retired; both are live in weil-conjectures-sheaf/lean and the live DAG. podLocalizingLowerShriek duplicated localizingLowerShriek (def-sf-localizing-lower-shriek), podCtfToLocalizing duplicated constantModelFiniteTorToLocalizing, podCtfRestrict duplicated sixFunctorDomainChange. FIX fixes/PodCtfAdjunctions.lean: import LocalizingExceptionalAdjoint, inline ObjectProperty.ιOfLE inclusion, use sixFunctorDomainChange, drop the three copies; no mathematical change. nt_compile --json: fixed dep clean 58.4 s and item clean 22.6 s against it; fixed dep timed out twice at load >=108, delivered dep took 38-56 s, same hot spot (podGeneralCtfAdjunctions kernel+lint ~25 s), so a landing-time risk under heavy load. Maintainer notes: dep lean.note now stale; podCtfAdjunctions_exists is an unused sorried four-stage theorem with no node, advisory."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C6",
+  "reviewer": "C-f9de6",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261019T154004-L-3024005",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261025T203212-L-2791315",
+  "kind": "interface",
+  "note": "independent cc review: delivered PodCtfAdjunctions.lean, node det-thm-sf-ctf-stability-adjunctions and change record vs clone (diff, rg for podCtfAdjunctions_exists over lean/dag), compactification_coherence_cocycle signature; reader gate: delivered module + importers PodCtfPairingMaps, PodHomChainCounitFormula compiled together OK"
  }
 }

@@ -97,14 +97,46 @@
  "uses_not_cited": [
   "def-weil-pbc-scheme-conventions"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.fourierKernel"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.artinSchreierSheafZModPullbackIso",
+     "module": "WeilConjectures.FourierTransform.ArtinSchreier",
+     "lines": [
+      534,
+      548
+     ],
+     "kind": "def",
+     "sorry": false,
+     "partial": "`sk-def-as`; blueprint: `def-fd-kernel`"
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.Etale.fourierKernel"
+   ],
+   "open": []
+  }
+ },
  "chapter": "sec-fourier-transform",
  "unit": "sk-def-kernel",
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\Lambda$ be a commutative ring in which the prime $p$ is invertible,\nlet $\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes such that\n$V\\times_SV'$ has characteristic $p$ (that is, $p=0$ in\n$\\Gamma(V\\times_SV',\\mathcal O)$), let\n$b\\in\\Gamma(V\\times_SV',\\mathcal O)$ be a global function (the\n*pairing*), and let $\\Psi:(\\mathbf F_p,+)\\to\\Lambda^\\times$ be an\nadditive character. The *Fourier kernel* is the Artin–Schreier sheaf of\n[def-fd-artin-schreier-sheaf], for $k=\\mathbf F_p$, attached to $b$:\n\n$$\n\\mathcal K_\\psi:=\\mathcal L_{\\Psi,b}=b^*\\mathcal L_\\Psi ,\n$$\n\na sheaf of $\\Lambda$-modules on the small étale site of $V\\times_SV'$,\nwhere $b$ is viewed as a morphism $V\\times_SV'\\to\\mathbf A^1_{\\mathbf F_p}$.\nIn the application, $S=S_0$ is a separated scheme of finite type over\n$k_0$ (conventions of [def-weil-pbc-scheme-conventions]), $V=V_0\\to S_0$\nis a vector bundle of rank $r$, $V'=V_0^\\vee$ is its dual, and\n$b(x,\\xi)=\\langle x,\\xi\\rangle$ is the evaluation pairing; on the affine\nline over a field this is the sheaf $\\mathcal L_{\\psi(x\\xi)}$.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be a coefficient ring in which the prime $p$ is invertible:\neither a finite commutative ring, or an admissible coefficient ring\n$\\Lambda\\in\\{A,\\mathcal O_E,E,\\Qlb\\}$ of [def-sf-setting], regarded as a\ncondensed ring. Let $\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes\nsuch that $V\\times_SV'$ has characteristic $p$ (that is, $p=0$ in\n$\\Gamma(V\\times_SV',\\mathcal O)$), let\n$b\\in\\Gamma(V\\times_SV',\\mathcal O)$ be a global function (the\n*pairing*), and let $\\Psi:(\\mathbf F_p,+)\\to\\Lambda(*)^\\times$ be an\nadditive character. The *Fourier kernel* is the Artin–Schreier sheaf of\n[def-fd-artin-schreier-sheaf], for $k=\\mathbf F_p$, attached to $b$:\n\n$$\n\\mathcal K_\\psi:=\\mathcal L_{\\Psi,b}=b^*\\mathcal L_\\Psi ,\n$$\n\nwhere $b$ is viewed as a morphism $V\\times_SV'\\to\\mathbf A^1_{\\mathbf F_p}$.\n\n- For an admissible condensed $\\Lambda$, $\\mathcal K_\\psi$ is the\n  $\\Lambda_{V\\times_SV'}$-module on $(V\\times_SV')_{\\mathrm{proét}}$ obtained\n  by pulling back the pro-étale Artin–Schreier sheaf of\n  [def-fd-artin-schreier-sheaf] along $b$\n  ([det-def-sfb-module-pushforward-pullback]). It is the pushout of the\n  Artin–Schreier $\\mathbf F_p$-torsor $b^*\\mathrm{AS}_p$ along $\\Psi$, and it\n  has a finite constant local model of rank one. This is the kernel used for\n  $\\Lambda=\\mathcal O_E,E,\\Qlb$.\n- For a finite ring $\\Lambda$ one may equally regard $\\mathcal K_\\psi$ as a\n  sheaf of $\\Lambda$-modules on the small étale site of $V\\times_SV'$. For\n  finite admissible $\\Lambda$ its pullback $\\nu^*$ is the pro-étale kernel of\n  the first item.\n\nIn the application, $S=S_0$ is a separated scheme of finite type over\n$k_0$ (conventions of [def-weil-pbc-scheme-conventions]), $V=V_0\\to S_0$\nis a vector bundle of rank $r$, $V'=V_0^\\vee$ is its dual, and\n$b(x,\\xi)=\\langle x,\\xi\\rangle$ is the evaluation pairing; on the affine\nline over a field this is the sheaf $\\mathcal L_{\\psi(x\\xi)}$. For an\narbitrary nontrivial character $\\psi:k_0\\to\\Lambda^\\times$ (with $\\Lambda$ a\nfield), write $\\psi(z)=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}(az))$ with\n$a\\in k_0^\\times$ ([lem-wft-as-comparison] (1)) and put\n$\\mathcal K_\\psi:=\\mathcal L_{\\Psi,ab}$; by [lem-wft-as-comparison] (2) this\nis $b^*\\mathcal L_\\psi=\\langle\\ ,\\ \\rangle^*\\mathcal L_\\psi$ for the\nArtin–Schreier sheaf $\\mathcal L_\\psi$ on $\\mathbf A^1_{k_0}$, the kernel of\nthe tex. For $a=1$, i.e. $\\psi=\\Psi\\circ\\operatorname{Tr}$, it is the sheaf\n$\\mathcal L_{\\Psi,b}$ displayed above.",
   "proof": [],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  },
  "split_report": {
   "date": "2026-10-21",

@@ -1,0 +1,122 @@
+{
+ "id": "def-cbc-completed-refinement-transformation",
+ "kind": "definition",
+ "title": "Canonical completed refinement natural transformation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof step 8, C_u before evaluating at K.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "Let d be an adic coefficient datum [def-weil-pbc-adic-coefficient-datum], with completed coefficient derived categories and canonical ordinary operations [def-weil-pbc-proetale-operations]. Let f:X→Y be quasi-compact, c1,c2 compactifications [def-weil-pbc-projection-compactification] and u:c1→c2 a proper refinement [def-weil-compactifications-refinements]. Use the section-normalized open extension functors J_j and adjunctions [lem-pur-site-restriction-module-adjunction-exact], and put F_c=J_j followed by Rp_*. Define the natural transformation F_c2→F_c1 by inverse identity unitor, whiskering of J_j2 applied to the inverse proper identity comparison followed by the proper/open mate gamma for the square (j1,1_X,u,j2) [lem-cbc-proper-open-clopen-projector], the functor associator, the proper direct-image composition comparison, and the equality u;p2=p1. The identity and composition comparisons are the specified canonical ones [lem-weil-pbc-completed-ordinary-comparisons]. All factors are specified natural transformations. Its component is the canonical map C_u in blueprint proof step 8. No invertibility of C_u, completeness of input, or refinement functoriality is asserted by this definition.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7C; canonical proper/open refinement comparison C_u, blueprint thm-cbc-complete-proetale proof step 8."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-compactifications-refinements",
+  "lem-cbc-proper-open-clopen-projector",
+  "lem-weil-pbc-completed-ordinary-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Construct the displayed composite of natural transformations. The intermediate functors match after the explicit left unitor and associator. Properness of u and of the compactification projections supplies the proper/open mate; quasi-compactness of each open immersion follows from quasi-compactness of f. Naturality is inherited by composition and whiskering. The two categorical coherence maps have identity components, so functor map_id and category unit laws recover the original component formula. This construction involves no unproved existence choice.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B and 0F7C; canonical proper/open refinement comparison C_u, blueprint thm-cbc-complete-proetale proof step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural transformation proper open compactification refinement completed coefficient derived direct image canonical comparison",
+   "results": "Eight general condensed and affine-transition results; no canonical proper/open refinement construction.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"whiskerRight\", \"leftUnitor\"",
+   "results": "Eleven coherence lemmas for bicategories, monoidal categories and Join; none constructs the geometric comparison. The standard functor coherence maps are used explicitly.",
+   "date": "2026-10-26",
+   "verdict": "partial match: categorical coherence only"
+  },
+  {
+   "tool": "grep",
+   "query": "compactification.*[Nn]at[Tt]rans|refinement.*[Nn]atural",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "date": "2026-10-26",
+  "group": "Q3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompleteCompactSupportProetale",
+  "file": "lean/Sheaf/Paper/CompleteCompactSupportProetale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcRefinementTransformation",
+  "statement": "def cbcRefinementTransformation\n    {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]\n    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :\n    cbcSupport d c₂ ⟶ cbcSupport d c₁",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-26",
+  "note": "Actual composite data, with no sorry; irreducible to avoid expanding derived-functor implementations when using its naturality field."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261026T002202-L-64499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T023220-L-531509",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_functoriality",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_isIso",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_composition_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_horizontal",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_vertical"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_composition_component",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_identity_component",
+   "AlgebraicGeometry.Scheme.cbcRefinementMap_isIso",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_composition_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_horizontal",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_refinement",
+   "AlgebraicGeometry.Scheme.completeCompactSupportProetale_vertical"
+  ]
+ }
+}

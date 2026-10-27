@@ -1,0 +1,299 @@
+{
+ "id": "lem-sfb-flat-deformation-lfp",
+ "kind": "statement",
+ "title": "Local finite presentation is invariant under flat nilpotent deformation",
+ "statement": "Let $A$ be a commutative ring, $I\\subseteq A$ an ideal with $I^N=0$ for some integer $N\\geq1$, and $f:Y\\to\\operatorname{Spec}A$ a flat morphism of schemes [def-pc-scheme, def-weil-affine-spectrum, def-weil-flat-morphism]. Write $f_0:Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}(A/I)\\to\\operatorname{Spec}(A/I)$ for its base change [def-pc-fibre-product]. Then $f$ is locally of finite presentation if and only if $f_0$ is locally of finite presentation [def-sbc-locally-finite-presentation]. No Noetherian or prior finite-type assumption is imposed on $A$ or $Y$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 06AG, lemma-deform-property, clause (13), with X prime = Y, Y prime = S prime = Spec A, and S = Spec(A/I)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-sbc-locally-finite-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Put $A_0=A/I$. For any affine open $U=\\operatorname{Spec}B\\subseteq Y$, its inverse image $U_0$ in $Y_0$ is $U\\times_{\\operatorname{Spec}A}\\operatorname{Spec}A_0$: this follows by restricting the universal property of the fibre product. By [lem-weil-pbc-fibre-product-affine-spectra], $U_0=\\operatorname{Spec}(A_0\\otimes_A B)=\\operatorname{Spec}(B/IB)$ over $\\operatorname{Spec}A_0$. Explicitly the ring identification sends $\\bar a\\otimes b$ to $ab\\bmod IB$, with inverse $b\\bmod IB\\mapsto1\\otimes b$; the inverse is well-defined since $1\\otimes ib=\\bar i\\otimes b=0$. The two composites are identities by tensor balancing. As $U$ ranges through an affine open cover of $Y$, the $U_0$ cover $Y_0$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, general remark (I), specialized to an affine base"
+   }
+  },
+  {
+   "text": "Suppose first that $f$ is locally of finite presentation. By [lem-weil-pbc-lfp-affine-opens-finite-presentation], every affine open $U=\\operatorname{Spec}B\\subseteq Y$ has $B$ finitely presented over $A$, taking the target affine open to be all of $\\operatorname{Spec}A$. Clause (1) of [lem-weil-pbc-finite-presentation-base-change-composition] gives finite presentation of $A_0\\otimes_A B$ over $A_0$. Step 1 identifies this with the coordinate ring of $U_0$. These affine opens cover $Y_0$, so the pointwise definition [def-sbc-locally-finite-presentation] proves that $f_0$ is locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, initial base-change direction; Tag 05G5, lemma-base-change-finiteness (4)"
+   }
+  },
+  {
+   "text": "Conversely suppose that $f_0$ is locally of finite presentation, and fix any affine open $U=\\operatorname{Spec}B\\subseteq Y$. By [lem-weil-pbc-flat-morphism-affine-criterion], the hypothesis that $f$ is flat implies that $B$ is a flat $A$-module; no finite-type hypothesis enters this assertion. Step 1 identifies $U_0$ as the affine open $\\operatorname{Spec}B_0$ of $Y_0$, where $B_0=B/IB$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to $f_0$, $U_0$ and the whole affine base $\\operatorname{Spec}A_0$: the $A_0$-algebra $B_0$ is finitely presented.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, general remark (I) and clause (13)"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-finitely-presented-algebra], a finite presentation of $B_0$ in particular supplies finitely many algebra generators, so $A_0\\to B_0$ is of finite type. Apply [lem-weil-pbc-finite-type-lift-nilpotent] to $A\\to B$ and the ideal $I$, using $I^N=0$ and $N\\geq1$. Thus $B$ is generated as an $A$-algebra by finitely many elements $b_1,\\ldots,b_n$. The polynomial universal property [def-weil-pbc-mv-polynomial-ring] gives a surjection $\\pi:P=A[x_1,\\ldots,x_n]\\to B$, $x_j\\mapsto b_j$. Put $K=\\ker\\pi$. Then $0\\to K\\to P\\to B\\to0$ is exact as a sequence of $A$-modules, simply by the definition of a kernel and surjectivity of $\\pi$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-type-lift-nilpotent",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, clauses (11) and (13); Tag 09ZW, lemma-thicken-property-morphisms-cartesian, finite-type algebra argument"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-quotient-tensor-injective] to this short exact sequence, with $R=A$, flat last term $M=B$, and tensor factor $A_0$. It gives an exact sequence $0\\to A_0\\otimes_A K\\to A_0\\otimes_A P\\to A_0\\otimes_A B\\to0$. For any $A$-module $M$ the balanced maps $\\bar a\\otimes m\\mapsto am\\bmod IM$ and $m\\bmod IM\\mapsto1\\otimes m$ are inverse, since $1\\otimes im=\\bar i\\otimes m=0$. Apply this to $M=K,P,B$. Coefficientwise reduction identifies $P/IP$ with $P_0=A_0[x_1,\\ldots,x_n]$: its kernel consists exactly of polynomials whose finitely many coefficients lie in $I$, hence is $IP$. The resulting exact sequence is $0\\to K/IK\\to P_0\\xrightarrow{\\pi_0}B_0\\to0$, with $k\\bmod IK\\mapsto k\\bmod IP$. In particular this identifies $K/IK$, as a $P_0$-module, with $\\ker\\pi_0$. This is where flatness is essential; the injection is not inferred merely from right exactness.",
+   "uses": [
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, clause (13), tensoring the presentation; Tag 00HL, lemma-flat-tor-zero"
+   }
+  },
+  {
+   "text": "The reduction $\\pi_0:P_0\\to B_0$ is a surjection of $A_0$-algebras and $B_0$ is finitely presented over $A_0$. Therefore [lem-weil-pbc-finite-presentation-surjection-kernel-fg] supplies finitely many generators $h_1,\\ldots,h_m$ of its kernel as an ideal of $P_0$. By step 5 each $h_j$ is the reduction of some $g_j\\in K$; choose these lifts. Since $P\\to P_0$ is surjective (lift the finitely many coefficients of a polynomial), the $P$-linear map $v:P^{\\oplus m}\\to K$, $(c_j)\\mapsto\\sum_jc_jg_j$, is surjective modulo $I$: its reduction has image all of $K/IK$, by the stated generation of $\\ker\\pi_0$ and the $P_0$-linear identification in step 5.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, clause (13), choosing lifted relations; Tag 00R2, lemma-finite-presentation-independent"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-nakayama-nilpotent] with ring $P$, ideal $J=IP$, source module $P^{\\oplus m}$, target module $K$, and map $v$. Here $J^N=0$: expanding a product of $N$ elements from $IP$ puts every coefficient in $I^N=0$. Moreover $JK=IK$, since multiplying an element of $IP$ by an element of the ideal $K$ is a sum of terms $i(pk)$ with $pk\\in K$, and the reverse inclusion is immediate. Thus the reduction of $v$ modulo $J$ is exactly the surjection from step 6. Nilpotent Nakayama, which assumes no module finiteness, makes $v$ surjective. Consequently $K=(g_1,\\ldots,g_m)$ as an ideal of $P$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, clause (13), final sentence; Tag 00DV, lemma-NAK (11)"
+   }
+  },
+  {
+   "text": "It follows that $B\\cong A[x_1,\\ldots,x_n]/(g_1,\\ldots,g_m)$: the map induced by $\\pi$ is surjective, and its kernel is zero because the ideal of relations is precisely $K$. This is a finite presentation of $B$ over $A$ by [def-weil-pbc-finitely-presented-algebra]. Since $U$ was any affine open of $Y$, these presentations provide affine neighbourhoods at every point. The definition [def-sbc-locally-finite-presentation], with target affine open $\\operatorname{Spec}A$, shows that $f$ is locally of finite presentation, completing the reverse implication.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 06AG, lemma-deform-property, clause (13), conclusion on affine charts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-finite-type-lift-nilpotent",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-flat-quotient-tensor-injective",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lem-weil-pbc-nakayama-nilpotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 06AG, lemma-deform-property, clause (13), with its finite-type step (11); the same proof works directly for I^N=0, using Tags 00HL, 00R2 and 00DV (11)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of schemes over a ring with nilpotent ideal local finite presentation is equivalent to local finite presentation of its reduction modulo that ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"RingHom.finitePresentation_isLocal\", \"module\": \"Mathlib/RingTheory/RingHom/FinitePresentation\", \"type\": \"RingHom.PropertyIsLocal @RingHom.FinitePresentation\", \"doc\": \"The property of a ring homomorphism between commutative rings being finitely presented is local, meaning it can be checked after localization at prime ideals or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.Flat fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being a flat morphism of schemes is characterized by the flatness of the corresponding ring homomorphism. Specifically, a morphism of schemes is flat if and only if the associated ring\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib/RingTheory/RingHom/Flat\", \"type\": \"RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => RingHom.Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.finitePresentation_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/FinitePresentation\", \"type\": \"RingHom.HoldsForLocalizationAway @RingHom.FinitePresentation\", \"doc\": \"For any commutative rings $ R $ and $ S $, where $ S $ is the localization of $ R $ at an element $ r $, the canonical ring homomorphism $ R \\to S $ is finitely presented. This means $ S $ is isomorphi\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation is preserved by flat infinitesimal deformations of schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every open immersion of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f] [CategoryTheory.Mono f], AlgebraicGeometry.IsOpenImmersion f\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes is flat, locally of finite presentation, and a monomorphism, then $ f $ is an open immersion. This means the underlying continuous map is a topological open emb\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat morphism of schemes over a ring with nilpotent ideal local finite presentation is equivalent to local finite presentation of its reduction modulo that ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [hf : LocallyOfFinitePresentation f] : LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"LocallyOfFinitePresentation\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderComposition @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" : CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) : Prop\", \"doc\": \"A morphism of schemes `f : X ⟶ Y` is locally of finite presentation if for each affine `U ⊆ Y`\\nand `V ⊆ f ⁻¹' U`, The induced map `Γ(Y, U) ⟶ Γ(X, V)` is of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" : AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.SpecMap_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {R S : CommRingCat} (f : R ⟶ S) : AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.Spec.map f) ↔ (CommRingCat.Hom.hom f).FinitePresentation\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f] [hg : AlgebraicGeometry.LocallyOfFinitePresentation g] : AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation g] : AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.LocallyOfFinitePresentation (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (V : Y.Opens) [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationResLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : X.Opens) (V : Y.Opens) (e : U ≤ (TopologicalSpace.Opens.map f.base).obj V) [AlgebraicGeometry.LocallyOfFinitePresentation f] : AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.Scheme.Hom.resLE f V U e)\", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]eform.*[Pp]resentation|[Nn]ilpotent.*[Pp]resentation|[Tt]hickening",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"74\", \"text\": \"  thickening δ {y | orderOf y = n}\"}\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"79\", \"text\": \"  simp only [approxOrderOf, thickening_eq_biUnion_ball, mem_iUnion₂, mem_ofPred_eq, exists_prop]\"}\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"108\", \"text\": \"  apply ball_subset_thickening hb ((m : ℝ) • δ)\"}\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"119\", \"text\": \"  apply ball_subset_thickening hb (m * δ)\"}\n  {\"file\": \"Mathlib/NumberTheory/WellApproximable.lean\", \"line\": \"126\", \"text\": \"  simp_rw [approxOrderOf, thickening_eq_biUnion_ball, ← image_smul, image_iUnion₂, image_smul,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"189\", \"text\": \"With `X ⟶ Y` formally unramified and `Z' ⟶ Z` an infinitesimal thickening, there exists at most\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ThickenedIndicator.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Topology.MetricSpace.Thickening\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ThickenedIndicator.lean\", \"line\": \"16\", \"text\": \"sequence of thickening radii tending to 0, the thickened indicators of a closed set form a\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ThickenedIndicator.lean\", \"line\": \"29\", \"text\": \"* For a sequence of thickening radii tending to 0, the `δ`-thickened indicators of a set `E` tend\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ThickenedIndicator.lean\", \"line\": \"47\", \"text\": \"and `0` outside a `δ`-thickening of `E` and interpolates (continuously) between\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ThickenedIndicator.lean\", \"line\": \"87\", \"text\": \"    (x_out : x ∉ thickening δ E) : thickenedIndicatorAux δ E x = 0 := by\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Thickening.lean\", \"line\": \"11\", \"text\": \"# Thickenings in pseudo-metric spaces\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Thickening.lean\", \"line\": \"14\", \"text\": \"* `Metric.thickening δ s`, the open thickening by radius `δ` of a set `s` in a pseudo emetric space.\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Thickening.lean\", \"line\": \"15\", \"text\": \"* `Metric.cthickening δ s`, the closed thickening by radius `δ` of a set `s` in a pseudo emetric\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Thickening.lean\", \"line\": \"19\", \"text\": \"* `Disjoint.exists_thickenings`: two disjoint sets admit disjoint thickenings\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Thickening.lean\", \"line\": \"20\", \"text\": \"* `Disjoint.exists_cthickenings`: two disjoint sets admit disjoint closed thickenings\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/LocallyConvex.lean\", \"line\": \"151\", \"text\": \"  rcases disj.exists_uniform_thickening_of_basis this hs₂ ht₂ with ⟨V, ⟨hV0, hVopen, hVconvex⟩, hV⟩\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.Topology.MetricSpace.Thickening\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"138\", \"text\": \"lemma IsCover.of_subset_cthickening_of_lt {δ : ℝ≥0} (hsN : s ⊆ cthickening ε N) (hεδ : ε < δ) :\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"140\", \"text\": \"  .of_subset_iUnion_closedBall <| hsN.trans (cthickening_subset_iUnion_closedBall_of_lt _\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"145\", \"text\": \"lemma isCover_iff_subset_cthickening (hN : IsClosed N) : IsCover ε s N ↔ s ⊆ cthickening ε N := by\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Cover.lean\", \"line\": \"146\", \"text\": \"  rw [isCover_iff_subset_iUnion_closedBall, hN.cthickening_eq_biUnion_closedBall ε.zero_le_coe]\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"17\", \"text\": \"We define the *simplicial thickening* of a linear order `J` as the simplicial category whose hom\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"22\", \"text\": \"`n`-simplices are given by the set of simplicial functors from the simplicial thickening of\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialNerve.lean\", \"line\": \"24\", \"text\": \"`SimplicialNerve C _⦋n⦌ := EnrichedFunctor SSet (SimplicialThickening (Fin (n + 1))) C`.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent|quotient|[Tt]hicken",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "grep",
+   "query": "[Nn]ilpotent|[Ff]lat|quotient",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"11\", \"line\": \"public import Mathlib.RingTheory.Ideal.Quotient.Operations\", \"text\": \"\"}\n  {\"file\": \"42\", \"line\": \"/-- An algebra over a commutative semiring is `Algebra.FinitePresentation` if it is the quotient of\", \"text\": \"\"}\n  {\"file\": \"58\", \"line\": \"  apply FiniteType.iff_quotient_mvPolynomial''.2\", \"text\": \"\"}\n  {\"file\": \"71\", \"line\": \"  obtain ⟨n, f, hf⟩ \", \"text\": \"= Algebra.FiniteType.iff_quotient_mvPolynomial''.1 h\"}\n  {\"file\": \"109\", \"line\": \"/-- The quotient of a finitely presented algebra by a finitely generated ideal is finitely\", \"text\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: no result states representability of a space thickening or reflection of local finite presentation under flat nilpotent deformation"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent|quotient|Flat",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"11\", \"line\": \"public import Mathlib.RingTheory.Ideal.Quotient.Operations\", \"text\": \"\"}\n  {\"file\": \"42\", \"line\": \"/-- An algebra over a commutative semiring is `Algebra.FinitePresentation` if it is the quotient of\", \"text\": \"\"}\n  {\"file\": \"58\", \"line\": \"  apply FiniteType.iff_quotient_mvPolynomial''.2\", \"text\": \"\"}\n  {\"file\": \"71\", \"line\": \"  obtain ⟨n, f, hf⟩ \", \"text\": \"= Algebra.FiniteType.iff_quotient_mvPolynomial''.1 h\"}\n  {\"file\": \"109\", \"line\": \"/-- The quotient of a finitely presented algebra by a finitely generated ideal is finitely\", \"text\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local finite presentation of a flat morphism of schemes is invariant under nilpotent thickening of the base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n  {\"name\": \"RingHom.finitePresentation_isLocal\", \"module\": \"Mathlib.RingTheory.RingHom.FinitePresentation\", \"type\": \": PropertyIsLocal @FinitePresentation\", \"doc\": \"The property of a ring homomorphism between commutative rings being finitely presented is local, meaning it can be checked after localization at prime ideals or on an open cover.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $f(V) \\\\subseteq U$, the induced ring homomorphism $\\\\mathcal{O}_Y\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @Flat\", \"doc\": \"The property of being a flat morphism of schemes is stable under base change, meaning that if a morphism of schemes is flat, then any base change (pullback) of this morphism is also flat.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.FinitePresentation\", \"IsNilpotent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat algebra over a ring is finitely presented if its quotient by a nilpotent ideal of the base is finitely presented",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Algebra.FinitePresentation R S\", \"doc\": \"Every standard smooth algebra over a commutative semiring is finitely presented over its base semiring. Specifically, if $ S $ is a standard smooth algebra over $ R $, then $ S $ admits a finite prese\"}\n  {\"name\": \"Algebra.FinitePresentation.iff\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ {R : Type w₁} {A : Type w₂} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FinitePresentation R A ↔ ∃ n I x, I.FG\", \"doc\": \"An algebra $ A $ over a commutative semiring $ R $ is finitely presented if and only if there exists a natural number $ n $, a finitely generated ideal $ I $ in the polynomial ring $ R[x_1, \\\\dots, x_n\"}\n  {\"name\": \"Algebra.FinitePresentation.quotient\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ {R : Type w₁} {A : Type w₂} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {I : Ideal A},\\n  I.FG → ∀ [Algebra.FinitePresentation R A], Algebra.FinitePresentation R (A ⧸ I)\", \"doc\": \"Let $ R $ be a commutative semiring and $ A $ an $ R $-algebra that is finitely presented over $ R $. If $ I $ is a finitely generated ideal of $ A $, then the quotient ring $ A/I $ is also finitely p\"}\n  {\"name\": \"Algebra.FinitePresentation.of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Module.FinitePresentation R S], Algebra.FinitePresentation R S\", \"doc\": \"If a module $ S $ over a commutative semiring $ R $ is finitely presented, then the $ R $-algebra structure on $ S $ is also finitely presented. This instance asserts that the finite presentation of t\"}\n  {\"name\": \"Algebra.Smooth.finitePresentation\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FinitePresentation R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ is finitely presented over $ R $.\"}\n  {\"name\": \"Algebra.FinitePresentation.trans\", \"module\": \"Mathlib/RingTheory/FinitePresentation\", \"type\": \"∀ (R : Type w₁) (A : Type w₂) (B : Type w₃) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B]\\n  [Algebra.FinitePresentation R A] [Algebra.FinitePresentation A B], Algebra.FinitePresentation R B\", \"doc\": \"If $A$ is a finitely presented algebra over a commutative semiring $R$, and $B$ is a finitely presented algebra over $A$ with compatible scalar actions (i.e., $R$-algebra structure on $B$ via the scal\"}\n  {\"name\": \"Module.FinitePresentation.of_finite_of_finitePresentation\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  [Algebra.FinitePresentation R S], Module.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module and finitely presented as an $ R $-algebra, then $ S $ is finitely presented as an $ R $-module.\"}\n  {\"name\": \"Module.FinitePresentation.iff_finitePresentation_of_finite\", \"module\": \"Mathlib/RingTheory/Finiteness/ModuleFinitePresentation\", \"type\": \"∀ (R : Type u) (S : Type u_1) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S],\\n  Module.FinitePresentation R S ↔ Algebra.FinitePresentation R S\", \"doc\": \"If $ S $ is a finitely generated $ R $-module, then $ S $ is finitely presented as an $ R $-module if and only if it is finitely presented as an $ R $-algebra.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent|thicken|deform",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFinitePresentation\", \"Flat\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"AlgebraicGeometry.instFaithfulOverSchemePullbackOfSurjectiveOfFlatOfLocallyOfFinitePresentation\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] [AlgebraicGeometry.LocallyOfFinitePresentation f] : (CategoryTheory.Over.pullback f).Faithful\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FlatDescent\", \"type\": \" (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)] [AlgebraicGeometry.IsZariskiLocalAtTarget P] : P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @Alg\", \"doc\": \"fpqc descent implies fppf descent\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeLocallyOfFinitePresentationMinMorphismPropertySurjectiveFlatQuasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalFlatDescent\", \"type\": \" : CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.LocallyOfFinitePresentation) (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instEffectiveEpiOfLocallyOfFinitePresentationOfSurjectiveOfFlat\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Fpqc\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.Flat f] : CategoryTheory.EffectiveEpi f\", \"doc\": \"Any surjective, flat morphism locally of finite presentation is an effective epimorphism.\\nIn particular, étale surjections satisfy this.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation descends from a nilpotent base reduction when the scheme morphism is flat",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFinitePresentation\\n  fun {R S} [CommRing R] [CommRing S] => RingHom.FinitePresentation\", \"doc\": \"A morphism of schemes is locally of finite presentation if and only if the corresponding ring homomorphism is finitely presented. This instance establishes that the scheme-theoretic property of being \"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Every morphism of schemes that is locally of finite presentation is also locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyOfFinitePresentation f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n \", \"doc\": \"A morphism of schemes $ f: X \\\\to Y $ is locally of finite presentation if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ contained in $ f^{-1\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: returned general finite-presentation, base-change, smoothness or fpqc-descent results do not reflect finite presentation across a nonflat nilpotent quotient"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-smooth-locus-deformation-test",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final paragraph reflecting local finite presentation from the special fibre, with the essential flatness hypothesis retained.",
+   "via": [
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-flat-deformation-lfp",
+  "worker": "stage1",
+  "summary": "Read Tag 06AG(13) and its cited algebraic inputs. Kept the exact statement, including flatness and absence of Noetherian assumptions. Gave eight steps on affine charts, lifted finite generators, identified the reduced presentation kernel using flat-quotient tensor exactness, lifted finitely many relations and applied nilpotent Nakayama. All ingredients already exist in the DAG; no new node is necessary. Searched current Lean and Mathlib and found no exact attachment or whole-item leaf.",
+  "blueprint": "The inherited from.place traces this tool through the final local-finite-presentation paragraph of Tag 0DZU, under the historical det-thm-sf-ctf-stability-direct-images proof (3). Its nearest imported ancestor is null, as blueprint_refs.py ancestor reports. The split realizes precisely that supporting tool, following the assigned source Tag 06AG(13); current latest blueprint and whole imported blueprint searches found no equivalent statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-ec352ee02",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-ec352ee02 (reviewer sub-agent of L); spot-checked: I read the delivery in full: a first split of the item, with 0 new nodes, and live/side-live still unsplit (no repair note, no supersession). Statement, stmt_deps, source and blueprint are unchanged from base. Only the proof, proof_deps, proof_origin, split_report and status changed, plus appended searches; proof_deps equals the union of the uses. Against the source: Stacks more-morphisms Tag 06AG(13), Ad (13) at lines 2480-2492. The item keeps flatness and I^N=0 with N>=1 and adds no qcqs or Noetherian assumption, so it is not weakened. Step by step: step 1 uses fibre-product-affine-spectra to get U_0 = Spec(B/IB) over A_0. Step 2 uses lfp-affine-opens with V=Spec A and fp-base-change clause (1). Step 3 gets B flat over A from the affine flatness criterion and B_0 finitely presented over A_0. Step 4 uses finite-type-lift-nilpotent with n=N-1, which is Lean-closed. Step 5 uses flat-quotient-tensor-injective with flat module M=B (not A/I) to get K/IK = ker pi_0, P_0-linearly. Step 6 uses surjection-kernel-fg, which covers every polynomial surjection, then lifts the generators. Step 7 uses nilpotent Nakayama over P with J=IP, J^N=0 and JK=IK all checked; it needs no finiteness and is Lean-closed. Step 8 concludes by the definitions. Every off-unit citation is a Mathlib leaf or a Lean-closed node, so no tool_uses are needed. There is no duplicate: the 0CG6 space node is for spaces, first order only, and a relative morphism; the proper and finite-type analogues are different statements. Mathlib grep found no whole-item match. Edge cases checked: I=0, empty Y, m=0, A=0; flatness is needed (counterexample k plus an infinite-dimensional square-zero ideal). review_split.py's 'no such node' lines are an artefact of it not following the snapshot's symlinked chapter directories; I checked every cited id exists. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.FlatDeformationLfp",
+  "declaration": "AlgebraicGeometry.locallyOfFinitePresentation_iff_of_flat_nilpotent_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/FlatDeformationLfp.lean",
+  "statement": "theorem locallyOfFinitePresentation_iff_of_flat_nilpotent_quotient {A : Type u} [CommRing A] (I : Ideal A) (N : ℕ) (hN : 0 < N) (hI : I ^ N = ⊥) {Y : Scheme.{u}} (f : Y ⟶ Spec (CommRingCat.of A)) [Flat f] : LocallyOfFinitePresentation f ↔ LocallyOfFinitePresentation (pullback.snd f (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))))",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-225d1bfcc",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 06AG(13) (X'=Y, Y'=S'=Spec A, S=Spec(A/I)): CommRing A, I^N=⊥ with 0<N, [Flat f] for f : Y ⟶ Spec A, f₀ = pullback.snd f (Spec.map (ofHom (Ideal.Quotient.mk I))), LocallyOfFinitePresentation f ↔ LocallyOfFinitePresentation f₀; no extra assumptions; single universe u. All 5 stmt_deps are existing Mathlib records and are the ones used. Node differs from live only in lean; lean.statement is verbatim in the file. Sorry-only, no defs, docstrings carry source/blueprint and the 8 proof steps, project imports exist as module files, report has both sections. No duplicate found in Mathlib or Sheaf. Edge cases I=0, N=1, empty Y, A=0 covered. No compile needed (no file changed)."
+ }
+}

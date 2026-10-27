@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-integral-system-tensor-cochain-composition",
+ "kind": "statement",
+ "title": "The sequence inverse-image cochain compositor respects tensor",
+ "statement": "Fix a prime l, a finite extension E of Q_l, Operations o and Compositors c [def-sf-integral-system-operations]. For composable scheme morphisms f:X to Y and g:Y to Z and arbitrary cochain complexes P,Q of coefficient-sequence modules on Z, the ordinary inverse-image compositor on the total tensor, followed by the tensor comparisons for g and f, equals the tensor comparison for f followed by g, followed by the total tensor of the ordinary compositors on P and Q. The tensors and comparisons are the specified unit-normalized cochain constructions of [def-pur-completed-pullback-tower-realizations]. No K-flatness hypothesis is required.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Coefficient-comparison sentence; expanded strict-system realization argument, as recorded in lem-sf-integral-canonical-ambient-models."
+ },
+ "stmt_deps": [
+  "def-sf-integral-system-operations",
+  "def-pur-completed-pullback-tower-realizations"
+ ],
+ "proof": [
+  {
+   "text": "The adjoint-conjugation equation for ordinaryPull and ordinaryDirect, together with unit_conjugateEquiv, identifies the composite adjunction unit followed by ordinaryDirect with the composite-map unit followed by the direct image of ordinaryPull. Evaluate on sections and apply Compositors.sections to obtain restriction along pullbackComp.",
+   "uses": [
+    "def-sf-integral-system-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the adjunction unit moves the first cochain tensor comparison through the second inverse image. Apply the two defining generator equations to compute the successive comparisons. Total tensor generators commute with restriction because the sheafification unit, tensor-to-sheafification map and total-summand inclusion are natural. The preceding compositor unit equation identifies the resulting generator factors with ordinaryPull applied to the composite unit images.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-sf-integral-system-operations",
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "In each cochain degree, transpose the proposed equation under the adjunction for f followed by g. Naturality of ordinaryDirect and its unit equation express the first transpose using the composite adjunction unit. Test equality on every total-summand pure generator using total_pure_hom_ext. The preceding section calculation and tensor_generator_map give equality. Injectivity of the adjunction Hom equivalence and cochain hom extensionality finish.",
+   "uses": [
+    "def-pur-completed-pullback-tower-realizations",
+    "def-sf-integral-system-operations",
+    "lem-sfb-scalar-hom-tensor-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-pullback-tower-realizations",
+  "def-sf-integral-system-operations",
+  "lem-sfb-scalar-hom-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "Pure-generator cochain step of the parent tensor-composition proof; X3, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cochain inverse image tensor pure generators composition adjunction unit",
+   "results": "8 hits, including CochainComplex.HomComplex.Cochain.fromSingleEquiv_fromSingleMk, toSingleEquiv_toSingleMk, toSingleMk_v, fromSingleEquiv, toSingleEquiv, ModuleCat.FreeMonoidal.εIso_inv_freeMk, groupCohomology.inhomogeneousCochainsIso, and Rep.standardComplex.εToSingle₀_comp_eq. None concerns the fixed inverse-image tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing generator equations and adjunction unit lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "unit_conjugateEquiv",
+   "results": "0 hits; loogle unknown identifier. The declaration was located in Mathlib/CategoryTheory/Adjunction/Mates.lean by grep.",
+   "date": "2026-10-27",
+   "verdict": "Reuse unit_conjugateEquiv from the local Mathlib source."
+  },
+  {
+   "tool": "grep",
+   "query": "unit_conjugateEquiv|comp_unit_app",
+   "results": "17 hits, including Mathlib/CategoryTheory/Adjunction/Mates.lean:300 and Mathlib/CategoryTheory/Adjunction/Basic.lean:575.",
+   "date": "2026-10-27",
+   "verdict": "These establish the ordinary compositor unit calculation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.IntegralSystemTensorComposition",
+  "date": "2026-10-27",
+  "group": "X3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-system-tensor-composition",
+   "place": "The cochain pure-generator computation before K-flat descent.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.IntegralSystemTensorCochainComposition",
+  "file": "lean/Sheaf/SixFunctors/IntegralSystemTensorCochainComposition.lean",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralSystemTensorCochainComposition",
+  "statement": "theorem integralSystemTensorCochainComposition (o : Operations l E) (c : Compositors l E o)\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    (P Q : CochainComplex (coefficientSequenceModules l E Z) ℤ) :\n    (NatIso.mapHomologicalComplex (c.ordinaryPull f g) (.up ℤ)).hom.app\n        ((coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology Z))\n          (coefficientSequenceCommRingSheaf l E Z)).obj (P, Q)) ≫\n        ((pullbackTensorSequenceInverse l E f).mapHomologicalComplex (.up ℤ)).map\n          ((pullbackTensorSequenceCochain l E g).hom.app (P, Q)) ≫\n        (pullbackTensorSequenceCochain l E f).hom.app\n          (((pullbackTensorSequenceInverse l E g).mapHomologicalComplex (.up ℤ)).obj P,\n            ((pullbackTensorSequenceInverse l E g).mapHomologicalComplex (.up ℤ)).obj Q) =\n      (pullbackTensorSequenceCochain l E (f ≫ g)).hom.app (P, Q) ≫\n        (coefficientTotalTensor.{u, u + 1, u}\n          (coefficientSequenceTopology (ProEt.topology X))\n          (coefficientSequenceCommRingSheaf l E X)).map (Prod.mkHom\n          ((NatIso.mapHomologicalComplex (c.ordinaryPull f g) (.up ℤ)).hom.app P)\n          ((NatIso.mapHomologicalComplex (c.ordinaryPull f g) (.up ℤ)).hom.app Q))",
+  "branch": "sheaf-dag",
+  "by": "X3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T034808-L-3687454",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261027T034808-L-3687454",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

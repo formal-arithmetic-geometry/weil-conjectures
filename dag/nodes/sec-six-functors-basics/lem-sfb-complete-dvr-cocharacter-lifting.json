@@ -1,0 +1,226 @@
+{
+ "id": "lem-sfb-complete-dvr-cocharacter-lifting",
+ "kind": "statement",
+ "title": "Lifting cocharacters over a complete discrete valuation ring",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $\\pi$ a uniformizer and $k=A/(\\pi)$ its residue field. Assume the canonical map $A\\to\\varprojlim_{n\\geq1}A/(\\pi^n)$ is bijective [def-weil-pbc-adic-completion]. An $A$-group scheme means a group object in schemes over $\\operatorname{Spec}A$: the multiplication, unit and inverse diagrams of [def-sc-group-scheme], with this base in place of the field base. Write $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. Let $H$ be a smooth affine finite-type $A$-group scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. For every homomorphism of $k$-group schemes $\\lambda_0:\\mathbf G_{m,k}\\to H_k$, there exists a homomorphism of $A$-group schemes $\\lambda:\\mathbf G_{m,A}\\to H$ whose base change to $k$ equals $\\lambda_0$. Reductivity of $H$ and perfection of $k$ are not required.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Lemma 3.6, proof of (2) implies (1), printed p.6: the residue-field one-parameter subgroup lifts over the complete DVR. Used as the lifting subclaim, independently of the forbidden seminar sources."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak m=(\\pi)$. By [def-sc-discrete-valuation-ring], $A$ is local and every ideal is principal. Consequently every ideal is finitely generated, so $A$ is Noetherian by [def-weil-pbc-noetherian-ring]. For every $n\\geq1$, $\\mathfrak m^n=(\\pi^n)$: products of $n$ multiples of $\\pi$ are multiples of $\\pi^n$, and $\\pi^n$ itself is such a product. Thus the quotient systems $A/\\mathfrak m^n$ and $A/(\\pi^n)$ are identical, including their transition maps. The assumed bijective canonical ring map is a ring isomorphism (its inverse preserves sums, products and the unit by injectivity). Hence $A$ is complete for its maximal ideal in exactly the sense of [def-weil-pbc-adic-completion], with residue field $k$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 00FM (section-Noetherian), and 0317 (definition-complete); elementary consequences of the stated definitions."
+   }
+  },
+  {
+   "text": "The structure morphism $H\\to\\operatorname{Spec}A$ is locally of finite presentation by the smoothness definition [def-sbc-smooth-morphisms]. Since it is affine, [lem-weil-pbc-affine-morphism-permanence](3) makes it quasi-compact and quasi-separated. Therefore it is of finite presentation by the parenthetical definition in [def-sbc-locally-finite-presentation]. Together with step 1, this verifies all the base-ring and target-group hypotheses of [lem-sfb-complete-local-split-torus-hom-lift] with $R=A$ and $G=H$.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S7 (lemma-affine-separated) and Tag 01TP (definition-finite-presentation); smoothness is locally of finite presentation as in Tag 02H0."
+   }
+  },
+  {
+   "text": "Use rank $r=1$ in [lem-sfb-complete-local-split-torus-hom-lift]. Its source is $T=\\operatorname{Spec}A[x,y]/(xy-1)$. The mutually inverse $A$-algebra maps $A[x,y]/(xy-1)\\to A[z,z^{-1}]$, $x\\mapsto z$, $y\\mapsto z^{-1}$, and $A[z,z^{-1}]\\to A[x,y]/(xy-1)$, $z\\mapsto x$, $z^{-1}\\mapsto y$, give an $A$-group isomorphism $\\alpha:\\mathbf G_{m,A}\\xrightarrow{\\sim}T$. They respect comultiplication since $x,y,z$ and $z^{-1}$ are group-like, respect the counit since all map to $1$, and respect inverse since it interchanges each indicated generator pair. These formulas also hold after reduction modulo $\\pi$. Set $f_0=\\lambda_0\\circ\\alpha_k^{-1}:T_k\\to H_k$. The cited lifting statement supplies a group homomorphism $f:T\\to H$ with $f_k=f_0$. Define $\\lambda=f\\circ\\alpha$. Then $\\lambda_k=f_k\\circ\\alpha_k=\\lambda_0\\circ\\alpha_k^{-1}\\circ\\alpha_k=\\lambda_0$, as required. The lifting statement makes no assumption on perfection of $k$, reductivity or connectedness of $H$, or injectivity of $f_0$.",
+   "uses": [
+    "lem-sfb-complete-local-split-torus-hom-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "WANTED locally; Corollary B.3.5, printed pp.292-293, rank-one specialization via the existing DAG statement. Read author-hosted https://math.stanford.edu/~conrad/papers/luminysga3.pdf, PDF page 292."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-sbc-locally-finite-presentation",
+  "lem-sfb-complete-local-split-torus-hom-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Agent assembly of the existing complete-local split-torus lifting node with the elementary DVR and rank-one identifications. Corollary B.3.5 read online; WANTED locally. No seminar source is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Lift a cocharacter of the special fiber of a smooth affine group scheme to a complete discrete valuation ring",
+   "results": "Tilt: Given a commutative ring $ O $, a prime number $ p $, and a valuation $ v $ on $ O $ satisfying $ v(p) \neq 1 $, the tilt is defined as the fraction ring of the pretilt of $ O $ modulo $ p $. The preti; PreTilt.untilt: The function defines a multiplicative homomorphism from the pretilt $ \\mathrm{PreTilt}(O, p) $ to the ring $ O $, mapping each sequence $ (f_n) $ in the pretilt to an element $ y \\in O $ such that $ y; AlgebraicGeometry.ValuativeCriterion.Existence.eq: The valuative criterion for existence of a scheme morphism is equivalent to the universal property that its underlying continuous map is a specializing map, meaning this property is preserved under al; IsDiscreteValuationRing.exists_lift_of_le_one: For any element $ x $ in the fraction field $ K $ of a discrete valuation ring $ A $, if the valuation of $ x $ with respect to the maximal ideal of $ A $ is at most $ 1 $, then $ x $ belongs to $ A $; AlgebraicGeometry.ValuativeCriterion.existence: If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion, then it satisfies the valuative criterion for existence, meaning that for every valuative commutative square involving $ f $; AlgebraicGeometry.ValuativeCommSq.i₁: For a valuative commutative square involving schemes $X$ and $Y$ with a morphism $f: X \to Y$, this is the morphism from the spectrum of the fraction field $K$ (equipped with its field structure) to th; AlgebraicGeometry.Proj.valuativeCriterion_existence_aux: Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\{x_i\\}_{i \\in I} $ of homogeneous elements in $ \\mathcal{A; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete: Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f ",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration for this group-scheme assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|one.parameter|Hom.*GroupScheme",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration for this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of one parameter subgroups from a smooth affine group over a complete local ring to its residue field is surjective",
+   "results": "AlgebraicGeometry.Scheme.residue_surjective: The canonical ring homomorphism from the local ring $\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\mathcal{O}_{X,x}$ by its unique; AdicCompletion.evalOneₐ_surjective: The evaluation map from the I-adic completion of a commutative ring $ R $ to the quotient ring $ R/I $, defined as the projection to the first component in the inverse limit $ \\varprojlim R/I^n $, is ; IsLocalRing.residue_surjective: For any commutative local ring $ R $, the canonical ring homomorphism from $ R $ to its residue field (the quotient of $ R $ by its unique maximal ideal) is surjective.; ValuationSubring.surjective_unitGroupToResidueFieldUnits: The canonical homomorphism from the unit group of the valuation subring $ A $ to the group of units of its residue field is surjective.; Ideal.algebraMap_residueField_surjective: For any commutative ring $ R $ and a maximal ideal $ I $, the canonical algebra homomorphism from $ R $ to the residue field of $ I $ is surjective. This follows because the residue field is construct; surjective_fontaineTheta: If the Frobenius endomorphism on the ring $ R/pR $ is surjective, then the Fontaine theta homomorphism from the Witt vectors over the pretilt of $ R $ to $ R $ is surjective.; AdicCompletion.surjective_evalₐ: For any natural number $ n $, the canonical $ R $-algebra homomorphism from the $ I $-adic completion of $ R $ to the quotient ring $ R/I^n $ is surjective, meaning every element of $ R/I^n $ is the i; Ideal.surjectiveOnStalks_residueField: For any prime ideal $ I $ in a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the residue field of $ I $ is surjective on stalks, meaning that for every prime ideal $ \\mathfrak{",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift group scheme homomorphism from multiplicative group over complete local ring",
+   "results": "WithOne.lift: There is a canonical bijection between multiplicative homomorphisms from $\\alpha$ to a monoid $\\beta$ and monoid homomorphisms from $\\text{WithOne}\\, \\alpha$ to $\\beta$. Specifically, any multiplicati; IsLocalization.lift_spec_mul_add: Given a commutative semiring $ R $ localized at a submonoid $ S $ to form $ N $, and a ring homomorphism $ g : R → P $ sending $ S $ to units in $ P $, the lifted homomorphism $ \\tilde{g} : N → P $ sa; IsAdicComplete.liftRingHom: Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, this constructs a ring homomorphism $ R \to+* S $ by composing the inverse of the canonic; IsAdicComplete.liftAlgHom: Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ ; IsAdicComplete.mk_comp_liftRingHom: Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ I $-adically complete commutative ring $ S $, there exists a ring homomorphism $ R \to S $ constructed by composing the inverse of the ; AdicCompletion.liftAlgHom: Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co; AddMonoidAlgebra.liftNC: Given an additive monoid homomorphism $ f : k →^+ R $ and a function $ g : \text{Multiplicative}(G) → R $, this constructs an additive monoid homomorphism from the additive monoid algebra $ k[G] $ to $; Submonoid.LocalizationMap.AwayMap.lift: Given a commutative monoid $M$ with submonoid $S$ generated by an element $x$, a localization map $f : M → N$ sending $S$ to units in $N$, and a monoid homomorphism $g : M → P$ such that $g(x)$ is a u",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a cocharacter of the special fiber of a smooth affine group scheme to a complete discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T04:18:48Z\", \"tool\": \"leanfinder\", \"query\": \"Lift a cocharacter of the special fiber of a smooth affine group scheme to a complete discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Tilt\", \"PreTilt.untilt\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"IsDiscreteValuationRing.exists_lift_of_le_one\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"05dd1d2d97ed5b54\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; ring-map lifting and residue/valuation surjectivity do not lift group-scheme homomorphisms. The torus lifting theorem is an existing DAG node, not a Mathlib declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cocharacter\"",
+   "results": "{\"t\": \"2026-10-24T04:18:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; ring-map lifting and residue/valuation surjectivity do not lift group-scheme homomorphisms. The torus lifting theorem is an existing DAG node, not a Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "cocharacter|one.parameter|Hom.*GroupScheme",
+   "results": "{\"t\": \"2026-10-24T04:18:49Z\", \"tool\": \"grep\", \"query\": \"cocharacter|one.parameter|Hom.*GroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; ring-map lifting and residue/valuation surjectivity do not lift group-scheme homomorphisms. The torus lifting theorem is an existing DAG node, not a Mathlib declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift group scheme homomorphism from multiplicative group over complete local ring",
+   "results": "{\"t\": \"2026-10-24T04:18:50Z\", \"tool\": \"leansearch\", \"query\": \"Lift group scheme homomorphism from multiplicative group over complete local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WithOne.lift\", \"IsLocalization.lift_spec_mul_add\", \"IsAdicComplete.liftRingHom\", \"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.mk_comp_liftRingHom\", \"AdicCompletion.liftAlgHom\", \"AddMonoidAlgebra.liftNC\", \"Submonoid.LocalizationMap.AwayMap.lift\"], \"digest\": \"7d529d57d784e2f4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; ring-map lifting and residue/valuation surjectivity do not lift group-scheme homomorphisms. The torus lifting theorem is an existing DAG node, not a Mathlib declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reduction of one parameter subgroups from a smooth affine group over a complete local ring to its residue field is surjective",
+   "results": "{\"t\": \"2026-10-24T04:18:52Z\", \"tool\": \"leanfinder\", \"query\": \"Reduction of one parameter subgroups from a smooth affine group over a complete local ring to its residue field is surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.residue_surjective\", \"AdicCompletion.evalOneₐ_surjective\", \"IsLocalRing.residue_surjective\", \"ValuationSubring.surjective_unitGroupToResidueFieldUnits\", \"Ideal.algebraMap_residueField_surjective\", \"surjective_fontaineTheta\", \"AdicCompletion.surjective_evalₐ\", \"Ideal.surjectiveOnStalks_residueField\"], \"digest\": \"e29dced337749135\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; ring-map lifting and residue/valuation surjectivity do not lift group-scheme homomorphisms. The torus lifting theorem is an existing DAG node, not a Mathlib declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-dvr-cocharacter-cartan",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.6, proof of (2) implies (1), printed p.6: the residue-field one-parameter subgroup lifts over the complete DVR. Used as the lifting subclaim, independently of the forbidden seminar sources.",
+   "via": [
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-dvr-cocharacter-lifting",
+  "worker": "stage1",
+  "summary": "Unchanged statement and statement dependencies. Found and reused the already existing complete-Noetherian-local split-torus lifting theorem. Checked local Noetherianity directly from the DVR definition, equality of adic systems, finite presentation from smoothness and affine permanence, and the Hopf-compatible rank-one Laurent coordinate isomorphism. No new nodes and no Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Lemma 3.6, proof of (2) implies (1), printed p.6: the residue-field one-parameter subgroup lifts over the complete DVR. Used as the lifting subclaim, independently of the forbidden seminar sources. Realizes the cocharacter-lifting input by specialization of the existing complete-local split-torus theorem; the latest direct-images proof (3) is read without changing the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-ad551a08c",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-ad551a08c (reviewer sub-agent of L); spot-checked: I read the item in full; it is an ordinary first split with no new nodes. The statement, stmt_deps, source and blueprint fields match the live base exactly. There is no repair note, so this is not a 10-21 re-split, and no other group has split the item on live or side-live. Step 1 is correctly marked elementary: the DVR definition (local, principal ideals, m=πA) makes A Noetherian, m^n=(π^n), and a bijective canonical map is a ring isomorphism. That is exactly the base hypothesis of lem-sfb-complete-local-split-torus-hom-lift. Step 2: smoothness gives lfp under both the live text and the blueprint_update; affine-permanence (3) gives qc and qs; the parenthesis in def-sbc-locally-finite-presentation then gives finite presentation (Stacks morphisms.tex:1721 and :4064). Step 3: the rank-1 torus T=Spec A[x,y]/(xy-1) is isomorphic to G_m through α (x↦z, y↦z^{-1}); α respects Δ, counit and inverse and commutes with reduction. Then λ=f∘α has λ_k=λ_0 exactly. The step uses only the torus node's statement, not its closed-immersion clause. Edge cases checked: trivial λ_0, z^d for every sign of d, inseparable powers, imperfect k, mixed characteristic, disconnected H; a field is excluded by the DVR definition. The torus node is in the same unit. It is split on side-live with the same statement, and a DFS shows it does not reach the item, so there is no cycle. A duplicate search over cocharacter, torus and diagonalizable nodes with lift and complete finds only the torus node, which is the strict generalization, so reusing it is correct. The AHHL and Conrad PDFs are WANTED (not local), as on base; no SGA is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.CompleteDvrCocharacterLifting",
+  "declaration": "AlgebraicGeometry.completeDvr_cocharacter_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/CompleteDvrCocharacterLifting.lean",
+  "statement": "theorem completeDvr_cocharacter_lifting (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (pi : A) (hpi : IsLocalRing.maximalIdeal A = Ideal.span ({pi} : Set A)) [IsAdicComplete (Ideal.span ({pi} : Set A)) A] (H : Grp (Over (Spec (.of A)))) [Smooth H.X.hom] [IsAffineHom H.X.hom] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (lambda0 : (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span ({pi} : Set A)))))).mapGrp.obj (RingGroupSchemes.multiplicative A) ⟶ (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span ({pi} : Set A)))))).mapGrp.obj H) : ∃ lambda : RingGroupSchemes.multiplicative A ⟶ H, (Over.pullback (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.span ({pi} : Set A)))))).mapGrp.map lambda = lambda0",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8015ef82c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Clause-by-clause match to the node: DVR stated as IsDomain+IsDiscreteValuationRing, uniformizer via hpi, completeness via IsAdicComplete(span{pi}) (equivalent to bijectivity), H : Grp(Over Spec A) with Smooth/IsAffineHom/LocallyOfFiniteType/QuasiCompact, G_m = RingGroupSchemes.multiplicative A (landed def-sfb-split-torus-over-ring, added to stmt_deps and used), lambda0 ranges over all Grp morphisms of the Over.pullback(Spec.map mk).mapGrp special fibres, conclusion ∃ lambda with exact equality mapGrp.map lambda = lambda0. No extra hypotheses; edge cases (trivial, inseparable or negative cocharacters, disconnected H, imperfect k, mixed characteristic) covered; universes uniform. lean.statement verbatim; diff vs live and side-live is only the new lean record plus one used stmt_dep; sorry only; source/blueprint docstrings with the 3 proof steps; special-fibre construction matches the landed CompleteDvrCocharacterCartan sibling; no existing duplicate. No file changed, so no recompile."
+ }
+}

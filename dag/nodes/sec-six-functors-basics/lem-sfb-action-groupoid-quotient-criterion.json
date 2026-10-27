@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-action-groupoid-quotient-criterion",
+ "kind": "statement",
+ "title": "Recognizing a stack from an action-groupoid cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $H$ a finite group, and $U$ an $S$-scheme with a left $H$-action. Write $H_T=\\coprod_{h\\in H}T$ for the constant group scheme over an $S$-scheme $T$. Let $\\mathcal Z$ be a stack in groupoids for the etale topology, in the conventions of [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. Let $a:U\\to\\mathcal Z$ be a morphism with the following local lifting property: for every $S$-scheme $T$ and $z\\in\\mathcal Z(T)$ there are a jointly surjective family of etale morphisms $T_i\\to T$ [def-weil-etale-morphism], maps $u_i:T_i\\to U$, and isomorphisms $a(u_i)\\simeq z|_{T_i}$. Suppose given isomorphisms $\\alpha_{h,u}:a(u)\\xrightarrow{\\sim}a(hu)$, functorial in the test scheme, satisfying $\\alpha_{1,u}=1$ and $\\alpha_{g,hu}\\alpha_{h,u}=\\alpha_{gh,u}$. Suppose that the morphism\n$$H_S\\times_SU\\longrightarrow U\\times_{\\mathcal Z}U,\\qquad(h,u)\\longmapsto(u,hu,\\alpha_{h,u})$$\nis an isomorphism, where the right side is the 2-fibre product: for every $S$-scheme $T$ it is an equivalence from the set $(H_S\\times_SU)(T)$, viewed as a discrete groupoid, to the fibre of the 2-fibre product over $T$ (a groupoid with at most one arrow between two objects). Then the canonical morphism $[U/H]\\to\\mathcal Z$, specified on the atlas by $a$ and on arrows by $\\alpha$, is an equivalence. Here $[U/H](T)$ is the groupoid of left $H_T$-torsors $P\\to T$ and equivariant maps $P\\to U$, with equivariant isomorphisms as arrows; a torsor is a $T$-scheme with a left $H_T$-action which, after base change to some jointly surjective family of etale morphisms $T_i\\to T$, is equivariantly isomorphic to $H_{T_i}$ with left translation. The equivalence is determined up to unique compatible 2-isomorphism by these specified maps on objects and arrows.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tags 04T4 (lemma-map-space-into-stack), 04T5 (lemma-stack-presentation), and examples-stacks.tex Tag 04WM (proposition-equal-quotient-stacks). The local-lifting version for an etale stack is the same stack-presentation criterion; finite constant group actions allow etale-local trivializations. Agent-formulated criterion with the groupoid identification as an explicit hypothesis."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-sfb-etale-scheme-action-torsor-groupoid"
+ ],
+ "proof": [
+  {
+   "text": "Work on the big etale site of $S$ in the size convention [def-weil-size-convention]. Define the fibred action groupoid $\\mathcal A$: objects over $T$ are $u:T\\to U$, and arrows $u\\to v$ are $h\\in H_T(T)$ with $hu=v$. Composition is $(g,h)\\mapsto gh$. The prescribed maps give a pullback-compatible functor $A:\\mathcal A\\to\\mathcal Z$, by $u\\mapsto a(u)$, $h\\mapsto\\alpha_{h,u}$. For a nonconstant section $h:T\\to H_S$, restrict to the open-and-closed components on which it is constant and glue the arrows using the isomorphism-sheaf axiom of $\\mathcal Z$. The given identities imply the functor laws on these components, hence globally. The assumed equivalence $H_S\\times_SU\\simeq U\\times_{\\mathcal Z}U$ identifies, for fixed $u,v$, the entire arrow presheaf $\\operatorname{Isom}_{\\mathcal A}(u,v)$ with $\\operatorname{Isom}_{\\mathcal Z}(a(u),a(v))$. It is therefore already an etale sheaf.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), description of fibre triples and composition; here representability of the relation is an explicit hypothesis."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-groupoid-stackification-local-description] to obtain $i:\\mathcal A\\to\\mathcal Q=a_{et}\\mathcal A$. The universe-small skeleton is the one fixed in step 1. Since $\\mathcal Z$ is an etale stack, $A$ extends to $F:\\mathcal Q\\to\\mathcal Z$ with $Fi\\cong A$. For atlas objects $i(u),i(v)$, the same cited statement identifies their isomorphism sheaf with the sheafification of $\\operatorname{Isom}_{\\mathcal A}(u,v)$. Step 1 shows this presheaf is already the isomorphism sheaf in $\\mathcal Z$, so $F$ induces a bijection on these isomorphisms.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tags 02ZP (lemma-stackify-groupoids), 0436 (lemma-stackify-groupoids-universal-property)."
+   }
+  },
+  {
+   "text": "For any $x,y\\in\\mathcal Q(T)$, the local-object assertion of [lem-sfb-groupoid-stackification-local-description] provides a common etale refinement on which both are isomorphic to atlas objects. Step 2 then makes the map of their isomorphism sheaves bijective locally. To see bijectivity on $T$, lift a target isomorphism on that refinement; local injectivity makes the lifts agree on overlaps, and the sheaf condition glues them uniquely. Thus $F$ is fully faithful. Every object of $\\mathcal Z$ is locally $a(u)=F(i(u))$ by the lifting hypothesis of the item. Both $\\mathcal Q$ and $\\mathcal Z$ are stacks; [lem-sfb-stack-fully-faithful-local-equivalence] therefore makes $F$ an equivalence.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks.tex",
+    "place": "Tag 046N (lemma-characterize-essentially-surjective-when-ff); local isomorphism-sheaf argument as in examples-stacks.tex Tag 04WM."
+   }
+  },
+  {
+   "text": "Put $\\mathcal T=[U/H]$ with the scheme-torsor definition of the item. By [lem-sfb-finite-constant-torsor-map-etale-stack], it is an etale stack over this same arbitrary $S$. There is a functor $B:\\mathcal A\\to\\mathcal T$: it sends $u$ to $q(u)=(H_T,(k,t)\\mapsto k u(t))$ and an arrow $h:u\\to v$ to $R_{h^{-1}}:k\\mapsto kh^{-1}$. Indeed $(kh^{-1})v=ku$, and $R_{g^{-1}}\\circ R_{h^{-1}}=R_{(gh)^{-1}}$. These formulas hold on every test scheme and commute with pullback. Apply [lem-sfb-groupoid-stackification-local-description] again to extend $B$ to $E:\\mathcal Q\\to\\mathcal T$, with $Ei\\cong B$.",
+   "uses": [
+    "lem-sfb-finite-constant-torsor-map-etale-stack",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 0370 (lemma-group-quotient-stack-in-groupoids); Tag 04WM (proposition-equal-quotient-stacks), definition of the functor on trivial torsors."
+   }
+  },
+  {
+   "text": "An equivariant $T$-isomorphism $r:H_T\\to H_T$ is determined on every test scheme by $c=r(1)\\in H_T(T)$, since $r(k)=kc$. For it to define $q(u)\\to q(v)$ one needs $cv=u$. Writing $h=c^{-1}$, this is exactly $v=hu$, and $r=R_{h^{-1}}$. Thus $B$ identifies all arrow presheaves between atlas objects. They are sheaves by step 1. The isomorphism-sheaf assertion and local-object assertion of [lem-sfb-groupoid-stackification-local-description], followed by the explicit sheaf gluing argument of step 3, show that $E$ is fully faithful. Every $(P,f)\\in\\mathcal T(T)$ admits an etale trivialization $P|_{T_i}\\cong H_{T_i}$ by the definition of torsor. On it put $u_i=f(1)$; equivariance gives $f(k)=ku_i$, so $(P,f)|_{T_i}\\cong q(u_i)$. The local-equivalence criterion [lem-sfb-stack-fully-faithful-local-equivalence] applies and makes $E$ an equivalence.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "lem-sfb-stack-fully-faithful-local-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM (proposition-equal-quotient-stacks), calculation of right translations and local essential surjectivity; stacks.tex Tag 046N."
+   }
+  },
+  {
+   "text": "Choose an inverse of $E$ over the base, which exists by step 5, and compose with $F$. This gives $C:\\mathcal T\\to\\mathcal Z$, an equivalence because $E$ and $F$ are equivalences. The comparisons $Ei\\cong B$ and $Fi\\cong A$ specify $Cq\\cong a$ and make the arrow $R_{h^{-1}}$ correspond to $\\alpha_{h,u}$; this is exactly the required morphism on the atlas and its action-groupoid arrows. For uniqueness, let $C,C'$ have these specified comparisons. For $(P,f)$ choose an etale trivialization, so it is locally $q(u_i)$. On each piece the comparisons give the required isomorphism $C(P,f)\\cong C'(P,f)$. Changes of trivialization are exactly the arrows $R_{h^{-1}}$ computed in step 5; compatibility with the prescribed $\\alpha$ makes these local isomorphisms agree on overlaps. The isomorphism sheaf in $\\mathcal Z$ glues them uniquely. Naturality holds after trivializing source and target of any arrow, hence globally by the same sheaf axiom. This proves uniqueness of the compatible 2-isomorphism.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-stacks.tex",
+    "place": "Tag 04WM (proposition-equal-quotient-stacks), comparison; uniqueness expanded using the stack isomorphism-sheaf axiom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-size-convention",
+  "lem-sfb-groupoid-stackification-local-description",
+  "lem-sfb-stack-fully-faithful-local-equivalence",
+  "lem-sfb-finite-constant-torsor-map-etale-stack"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tags 0370 and 04WM, adapted to etale torsors over arbitrary S; stacks.tex Tags 02ZP, 0436, 046N. algebraic.tex Tags 04T4/04T5 motivate the presentation argument but their algebraicity/smoothness assumptions are not imported."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "QuotientStack|stack_presentation|cech.*groupoid",
+   "results": "OK; 0 hits. ",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack is equivalent to the stack quotient of the groupoid given by an etale scheme presentation",
+   "results": "OK; 8 hits. StandardEtalePresentation.toPresentation_val, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, StandardEtalePresentation, AlgebraicGeometry.Scheme.smallEtaleTopology, Algebra.IsStandardEtale.mk, StandardEtalePresentation.mapEquiv, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "2cd6cb831ba3dfec"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientStack\"",
+   "results": "OK; 0 hits. ",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stack with a surjective etale atlas is the quotient stack of its Cech groupoid",
+   "results": "OK; 8 hits. CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "a1c7bcef5b66466a"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover a stack from a locally surjective representable map by stackifying its Cech groupoid",
+   "results": "OK; 8 hits. CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.coherentTopology.presheafIsLocallySurjective_iff, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve, CategoryTheory.Pseudofunctor.isStackFor, CategoryTheory.regularTopology.isLocallySurjective_iff, CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "04fa8ce8bee951c6"
+  },
+  {
+   "tool": "grep",
+   "query": "QuotientStack|ActionGroupoid|stackification",
+   "results": "OK; 0 hits. ",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a stack has a locally surjective atlas whose Cech groupoid is the action groupoid of H on U then it is equivalent to the quotient stack of H torsors with equivariant maps to U",
+   "results": "OK; 8 hits. CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.IsStack.essSurj_of_sieve, IsQuotientCoveringMap, isQuotientCoveringMap_iff, isQuotientCoveringMap_iff_isCoveringMap_and, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.Pseudofunctor.isStackFor_iff, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: descent-data equivalences do not construct the action-groupoid quotient stack or identify it with torsors; the topological and ring-theoretic hits are different notions",
+   "digest": "adeb0a6083491998"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A stack locally covered by a scheme with Cech groupoid the action groupoid of a finite group is equivalent to the stack of equivariant torsors",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, CategoryTheory.Pseudofunctor.IsStackFor.isEquivalence, CategoryTheory.Pseudofunctor.isEquivalence_toDescentData, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.Pseudofunctor.isStackFor_ofArrows_iff, CategoryTheory.Pseudofunctor.isStackFor_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-set group actions, ordinary torsors and abstract stack descent are not this scheme quotient criterion",
+   "digest": "5a30dc1c3a8b62ae"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stack presented by the action groupoid of a finite constant group on a scheme is equivalent to the groupoid of torsors with equivariant maps",
+   "results": "8 hits: CategoryTheory.ActionCategory.instGroupoid, MulAction.selfEquivSigmaOrbits', AddTorsor.noConfusion, AddTorsor.noConfusionType, Equiv.vaddConst, AddTorsor, MulAction.selfEquivSigmaOrbits, CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-set group actions, ordinary torsors and abstract stack descent are not this scheme quotient criterion",
+   "digest": "6103a6ae744d5259"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuotientStack\"",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-set group actions, ordinary torsors and abstract stack descent are not this scheme quotient criterion",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "QuotientStack|ActionGroupoid|quotient_stack",
+   "results": "2 hits: Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean, Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: finite-set group actions, ordinary torsors and abstract stack descent are not this scheme quotient criterion",
+   "digest": "5c4814c1786add09"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-formal-quotient-pullback",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Finite representable pullbacks of a formal quotient chart. General quotient-presentation input at every infinitesimal level: recover the stack from the action groupoid of its pulled-back atlas.",
+   "via": [
+    "lem-sfb-finite-formal-quotient-pullback",
+    "lem-sfb-dm-finite-normalization-charts",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-action-groupoid-quotient-criterion",
+  "worker": "stage1",
+  "summary": "Constructed the action groupoid and both comparison functors through etale stackification, checked right translations by inverse elements, sheaf-local full faithfulness, essential surjectivity and uniqueness. Reused stackification and the local-equivalence criterion; created only the strictly smaller effective-descent input for scheme torsors with maps over arbitrary bases. No statement change or Lean attachment.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: finite normalization and its etale/formal charts. Prerequisite: Finite representable pullbacks of a formal quotient chart. General quotient-presentation input at every infinitesimal level: recover the stack from the action groupoid of its pulled-back atlas.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NG-d05355258",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-d05355258 (reviewer sub-agent of L); spot-checked: I read the whole item (all 6 steps), the new node, the statement of every cited node, and the sources: Stacks examples-stacks.tex 0BLZ (l.349), 0370 (l.1272) and 04WM (l.1311), plus algebraic.tex 04T4/04T5, which serve only as motivation. The item's statement, stmt_deps and source are identical to the last Q81 FIX version, so the target is not weakened. Steps 1-6 are correct. Step 1: the 2-fibre product hypothesis, with U discrete, gives bijections {h : hu=v} -> Isom(a u, a v), so the action-groupoid arrow presheaf is already a sheaf; locally constant h are handled by gluing over the open-and-closed pieces. Steps 2-3: stackification extension F, a locally bijective map of iso sheaves, and the local-equivalence criterion with both sides stacks. Steps 4-5: B sends h to R_{h^-1}; I checked f_v(k h^-1) = k u and that composition gives R_{(gh)^-1}. A left-equivariant automorphism of H_T is r(k) = k r(1), so cv = u and h = c^-1. Local trivialization with u_i = f(1). Step 6: C = F E^-1; uniqueness by gluing in the iso sheaves of Z over transitions R_{h^-1}. The new node lem-sfb-finite-constant-torsor-map-etale-stack is true: morphisms descend, and the torsors are finite etale, hence affine, so descent is effective (0BLZ) and the action and map descend (0370). Small cases checked: H=1, the trivial action giving BH, V empty, characteristic dividing |H|. It is statement-only and self-contained, and no node duplicates it. action-groupoid-torsor-comparison needs a field base, smooth affine G and fppf; finite-group-quotient-atlas-torsor is an atlas-pullback statement. It does not restate the item (D1/D2). Batch 5: def-sfb-stable-pointed-moduli-groupoids is a definition already in the base item's stmt_deps; its closure reaches only the definition def-trf-projective-bundle-morphism, which is not part of the trace-formula or Poincare-duality statements or proofs, so it is accepted. No SGA source, no tool_uses needed, no cycle, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ActionGroupoidQuotientCriterion",
+  "declaration": "AlgebraicGeometry.SchemeAction.actionGroupoid_quotient_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/ActionGroupoidQuotientCriterion.lean",
+  "statement": "theorem actionGroupoid_quotient_criterion {S : Scheme.{u}} (H : Type u) [Group H] [Finite H] (G U : Over S) [GrpObj G] [ModObj G U] (incl : H → (Over.mk (𝟙 S) ⟶ G)) (hincl : IsColimit (Cofan.mk G incl)) (hincl_one : incl 1 = 1) (hincl_mul : ∀ g h : H, incl (g * h) = incl g * incl h) (Z : BasedCategory.{v, w} (Over S)) (hZ : IsModuliStack Z) (A : BasedFunctor (actionGroupoid G U) Z) (hrel : ∀ T : Over S, (moduliFiberMap A T).Full ∧ (moduliFiberMap A T).Faithful) (hlift : ∀ z : Z.obj, ∃ R : Sieve (Z.p.obj z), R ∈ (Scheme.etaleTopology.over S) (Z.p.obj z) ∧ ∀ (W : Over S) (b : W ⟶ Z.p.obj z), R b → ∃ (x : (actionGroupoid G U).obj) (r : A.obj x ⟶ z), Z.p.IsHomLift b r) : ∃ C : BasedFunctor (etaleTorsorGroupoid G U) Z, (∃ D : BasedFunctor Z (etaleTorsorGroupoid G U), Nonempty (C.comp D ≅ BasedFunctor.id (etaleTorsorGroupoid G U)) ∧ Nonempty (D.comp C ≅ BasedFunctor.id Z)) ∧ ∃ ε : (etaleTrivialTorsorFunctor G U).comp C ≅ A, ∀ (C' : BasedFunctor (etaleTorsorGroupoid G U) Z) (ε' : (etaleTrivialTorsorFunctor G U).comp C' ≅ A), ∃! eComp : C ≅ C', BasedCategory.whiskerLeft (etaleTrivialTorsorFunctor G U) eComp.hom ≫ ε'.hom = ε.hom",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d48783ee",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Read the item, all stmt_dep records, the new def node, both modules, and the dependency Lean (SchemeActionTorsorGroupoids, StablePointedModuliGroupoids, Mathlib BasedCategory). H_S is a coproduct cofan with unit/mul equations, which fix the group law. A bundles a and alpha (label convention gh gives the cocycle). hrel (full and faithful fibre functor) equals the node's discrete 2-fibre-product iso, non-constant labels included. hlift = etale covering sieve with arrows over b. etaleTorsorGroupoid = full subcategory of the existing torsorGroupoid by IsEtaleLocallyTrivial; the fppf field is redundant. Conclusion: equivalence via based isos with vertical components, epsilon on the whole action groupoid, unique compatible 2-iso for any C' (checked true). R_{h^-1} sign matches 04WM. Edge cases (empty, H=1, non-free, disconnected T, char | |H|, universes) OK. New node fields, no duplicate, not hollow, sorry'd law true. Item changed only in lean/stmt_deps (+new node); statement verbatim; lines <=100; docstrings and proof steps present; import is the proof_dep module. Advisory: actionGroupoid reached via the new node, as H2 forbids adding base stmt_deps. No file changed, no compile."
+ }
+}

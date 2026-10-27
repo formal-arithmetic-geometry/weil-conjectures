@@ -1,0 +1,289 @@
+{
+ "id": "lem-trf-affine-fibre-point-dimension",
+ "kind": "statement",
+ "title": "Affine fibre chart with its prime and point dimension",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $x\\in X$ and $s=f(x)$. Let $W=\\operatorname{Spec}A\\subset X$ and $V=\\operatorname{Spec}R\\subset S$ be affine open neighbourhoods [def-weil-affine-spectrum] with $f(W)\\subset V$. Assume that the induced $R$-algebra $A$ is finitely presented [def-weil-pbc-finitely-presented-algebra]. Let $\\mathfrak q\\subset A$ represent $x$ and $\\mathfrak p\\subset R$ represent $s$, so $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ for the induced ring map $\\varphi$. Set $k=\\kappa(\\mathfrak p)$, using the canonical identification $\\kappa(\\mathfrak p)\\cong\\kappa(s)$ [def-weil-residue-field, def-weil-pbc-localization-at-prime], and $F=k\\otimes_R A$ [def-weil-pbc-module-tensor-product]. The canonical morphism $j:\\operatorname{Spec}F\\to X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-scheme-fibre] is an open immersion onto the inverse image of $W$. It identifies the point of $X_s$ above $x$ with the prime $\\mathfrak Q=\\ker(F\\to\\kappa(\\mathfrak q))$, where $\\lambda\\otimes a\\mapsto\\bar\\lambda\\bar a$ and $\\kappa(\\mathfrak p)\\to\\kappa(\\mathfrak q)$ is induced by $\\varphi$. This prime contracts to $\\mathfrak q$ under $a\\mapsto1\\otimes a$. The algebra $F$ is finite type over $k$ [def-weil-pbc-finite-type-algebra], and $\\dim_{\\mathfrak Q}(\\operatorname{Spec}F)=\\dim_x(X_s)$ [def-kun-topological-dimension-at-point] is a finite nonnegative integer. More precisely, any finite presentation $A=R[t_1,\\ldots,t_n]/(h_1,\\ldots,h_m)$ induces $F\\cong k[t_1,\\ldots,t_n]/(\\bar h_1,\\ldots,\\bar h_m)$.",
+ "source": {
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01JQ (lemma-fibre-product-affines) and 01JR (lemma-open-fibre-product), specialized to the residue field; affine fibre calculation used in Morphisms Tag 01V9 (lemma-smooth-at-point)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-pc-scheme-fibre",
+  "def-weil-pbc-finite-type-algebra",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-residue-field",
+  "def-weil-open-immersion",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use Scheme.Spec.residueFieldIso to identify the affine prime residue field, and compose it with the inverse of the equality transport and the residue-field isomorphism of the open immersion iV. Residue-field point naturality gives Spec(R → κ(p)) followed by iV equal to Spec(e.hom) followed by the canonical point map of s. The induced map κ(p) → κ(q) is R-linear by Ideal.ResidueField.map_algebraMap and the scalar tower.",
+   "uses": [
+    "lem-weil-pbc-spec-residue-field-identification",
+    "lem-weil-pbc-residue-field-point-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J9 (lemma-characterize-points), affine description before the lemma and the residue-field diagram after it."
+   }
+  },
+  {
+   "text": "Apply pullbackSpecIso R κ(p) A with the residue field already as the first tensor factor. Map this affine pullback to Spec κ(s) ×_S X using Spec(e.hom), iW, and iV. The open-fibre-product lemma makes this an open immersion; its range is the intersection of the inverse images of the two ranges. Spec(e.hom) is an isomorphism and hence surjective, so its range contributes the whole space. Compose with pullback symmetry to obtain j into X_s. The two projection equations and the claimed range follow from the pullback map identities and the affine pullback isomorphism.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes), and 01JQ (lemma-fibre-product-affines)."
+   }
+  },
+  {
+   "text": "Construct ψ by Algebra.TensorProduct.productMap from the R-algebra map κ(p) → κ(q) and the canonical R-algebra map A → κ(q). Its pure-tensor formula is the defining formula of productMap. Its kernel is a prime ideal because κ(q) is a field. Evaluation on 1 ⊗ a is the canonical image of a in κ(q), which vanishes exactly when a belongs to q. Thus the kernel prime Q contracts to q.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-prime-residue-field-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section Local rings, residue fields of primes and induced maps, together with Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "By the first projection identity of j and the contraction calculation, the image of Q under the fibre projection is iW(q)=x. The fibre projection is an embedding by def-pc-scheme-fibre and also sends f.asFiber x to x. Its injectivity gives j(Q)=f.asFiber x directly, without introducing an auxiliary field-valued point.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J9 (lemma-characterize-points); Tag 01K1 (lemma-fibre-topological)."
+   }
+  },
+  {
+   "text": "For any given finite presentation P, use P.baseChange κ(p), which is already a presentation of κ(p) ⊗_R A in the required tensor order. Its relations span its evaluation kernel. Transport the quotient along that equality of ideals and use its quotientEquiv, restricted to κ(p), to get E. The base-changed generator formula proves E(X a)=1 ⊗ P.val a. Finite presentation implies finite type, and finite type is stable under tensor base change.",
+   "uses": [
+    "lem-weil-pbc-presentation-base-change",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05G3 (section-base-change), presentation formula immediately after Definition 05G4 (definition-base-change)."
+   }
+  },
+  {
+   "text": "The open immersion identifies $\\operatorname{Spec}F$ homeomorphically with $O$. Each open neighbourhood of $\\mathfrak Q$ corresponds to an open neighbourhood of $j(\\mathfrak Q)$ in $O$, with the same Krull dimension by homeomorphism invariance. Taking the minima in the definition of dimension at a point gives $\\dim_{\\mathfrak Q}\\operatorname{Spec}F=\\dim_{j(\\mathfrak Q)}O$. The open-subspace dimension lemma gives $\\dim_{j(\\mathfrak Q)}O=\\dim_{j(\\mathfrak Q)}X_s=\\dim_x(X_s)$, where step 4 identifies the point.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-homeomorphism-krull-dimension",
+    "def-kun-topological-dimension-at-point",
+    "lem-weil-pbc-dimension-at-point-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0055 (definition-Krull), part (4) and the open-neighbourhood observation following it."
+   }
+  },
+  {
+   "text": "Apply the finite-type affine point-dimension theorem to the field $k$, the finite type $k$-algebra $F$ from step 5, and its prime $\\mathfrak Q$ from step 3. It states that this topological dimension at the point is a nonnegative integer (the maximum of the dimensions of the components containing it). Together with step 6 this proves finiteness and nonnegativity on both sides. The existence of $\\mathfrak Q$ ensures that the chart and all neighbourhoods at issue are nonempty.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OT (lemma-dimension-at-a-point-finite-type-over-field)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-weil-pbc-residue-field-point-naturality",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-prime-residue-field-algebra",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-presentation-base-change",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-homeomorphism-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Tags 01I4, 01JQ, 01JR and 01K1; affine residue-field identification and point naturality around 01J9; algebra.tex Tags 05G3 and 00OT; topology.tex Tag 0055. Lean uses the residue-field-first tensor order directly and injectivity of the fibre projection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The fibre of an affine chart is the spectrum of the residue field tensor algebra, open in the scheme fibre and with the same dimension at the chosen point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Hom.asFiber, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField. Candidates supply the fibre definition and the affine fibre isomorphism only, without the open-chart comparison, kernel prime and equality and finiteness of point dimension. Read Mathlib/AlgebraicGeometry/Fiber.lean and the existing dimension nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, topologicalKrullDim",
+   "results": "0 hits: . Candidates supply the fibre definition and the affine fibre isomorphism only, without the open-chart comparison, kernel prime and equality and finiteness of point dimension. Read Mathlib/AlgebraicGeometry/Fiber.lean and the existing dimension nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "asFiber|fiber.*[Ss]pec|[Kk]rull.*[Ff]iber|[Ff]iber.*[Kk]rull",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Group/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean, Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean. Candidates supply the fibre definition and the affine fibre isomorphism only, without the open-chart comparison, kernel prime and equality and finiteness of point dimension. Read Mathlib/AlgebraicGeometry/Fiber.lean and the existing dimension nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine chart in a scheme fibre is Spec of the tensor product with the residue field, and its point dimension agrees with the full fibre and is finite for finite presentation",
+   "results": "8 hits: AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite. Candidates supply the fibre definition and the affine fibre isomorphism only, without the open-chart comparison, kernel prime and equality and finiteness of point dimension. Read Mathlib/AlgebraicGeometry/Fiber.lean and the existing dimension nodes.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberOverSpecResidueField|asFiber|topologicalKrullDimAt",
+   "results": "12 hits: Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean. Read Mathlib/AlgebraicGeometry/Fiber.lean:38-163. Hits define the fibre, its points or affine structure; none asserts all clauses including the evaluation prime, presentation and topological point dimension. Grep subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre of an affine chart of a finitely presented scheme morphism is a finite type residue field algebra and has finite dimension at its prime corresponding to a point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiber, Algebra.QuasiFinite.finite_fiber, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.IsFinite.finite_preimage_singleton, AlgebraicGeometry.Scheme.residueField. Read Mathlib/AlgebraicGeometry/Fiber.lean:38-163. Hits define the fibre, its points or affine structure; none asserts all clauses including the evaluation prime, presentation and topological point dimension. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.fiber, topologicalKrullDim",
+   "results": "0 hits: . Read Mathlib/AlgebraicGeometry/Fiber.lean:38-163. Hits define the fibre, its points or affine structure; none asserts all clauses including the evaluation prime, presentation and topological point dimension. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine open chart in a scheme fibre is the spectrum of the residue field tensor algebra, with point given by the kernel of evaluation and finite topological local dimension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField. Read Mathlib/AlgebraicGeometry/Fiber.lean:38-163. Hits define the fibre, its points or affine structure; none asserts all clauses including the evaluation prime, presentation and topological point dimension. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of an affine open neighbourhood to a residue field gives an open immersion into the fibre preserving dimension at a point",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion, AlgebraicGeometry.Scheme.fromSpecResidueField, AlgebraicGeometry.Scheme.over_def, AlgebraicGeometry.Scheme.instOverSpecResidueField, AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField, AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField. Read Mathlib/AlgebraicGeometry/Fiber.lean:38-163. Hits define the fibre, its points or affine structure; none asserts all clauses including the evaluation prime, presentation and topological point dimension. Grep subdirectory: all Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-at-point-differential-criterion",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise singular-locus calculation in the nodal-family/Fitting argument: convert the bounded-generator condition for relative differentials into smoothness at a point. Pointwise criterion proof, old step 3 (affine fibre, kernel prime and dimension).",
+   "via": [
+    "lem-trf-smooth-at-point-differential-criterion",
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-fibre-point-dimension",
+  "worker": "stage1",
+  "summary": "Constructed the open tensor fibre chart using existing general fibre-product nodes; calculated the kernel prime and its contraction; base-changed an arbitrary presentation; compared neighbourhood dimensions and used the existing finite-type point-dimension theorem. No new nodes and no statement change.",
+  "blueprint": "Realizes the affine-fibre, kernel-prime and finite point-dimension calculation in old step 3 of lem-trf-smooth-at-point-differential-criterion, under the recorded nodal-family/Fitting chain from lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-field-point-residue-field",
+    "why": "Generic affine residue-field and field-valued-point calculation; the trace-formula unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-open-subspace",
+    "why": "Generic locality of topological point dimension, used only to compare the chosen fibre chart with the fibre."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-components",
+    "why": "Generic finite-type affine dimension theorem supplies finite nonnegative point dimension, with no trace-formula input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-field-point-residue-field",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-at-point-components"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-ba87f15df",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-ba87f15df (reviewer sub-agent of L); spot-checked: Read the item's 7 steps against the statements of all 15 nodes it cites. Checked the sources: Stacks schemes 01I4/01JQ/01JR (schemes.tex 3198) and 01J9, algebra 05G3 and 00OT (algebra.tex 27787), topology 0055(4), with the tags confirmed in tags/tags. No SGA is used. This is the item's first split (live still unsplit). The statement is byte-identical to live; the only additions are the stmt_deps for open immersion and the mv-polynomial ring, both notions already in the statement. There are no new nodes. The citers' uses are covered (smooth-at-point-differential-criterion step 3, smooth-point-etale-immersion step 1). Steps 1, 4, 5, 6 and 7 are correct: residue-map compatibility via the naturality node and clause (3) uniqueness; injectivity of the fibre projection; presentation base change with no flatness; dimension preserved by the homeomorphism plus the open-subspace lemma; the 00OT node gives a nonnegative integer. One C1/C4 fault in steps 2 and 3: the tensor swap and the evaluation map e were justified only from the module tensor product, which gives F no ring structure. FIX: both steps now cite the existing Mathlib leaf lem-weil-pbc-algebra-tensor-pushout-universal-property. Clause (1) gives the ring, clause (2) builds e and the swaps, clause (3) shows the swaps are inverse. Step 3 is now non-elementary and proof_deps is the union of the uses lists. Edge cases checked: the line A^1_k at its generic and closed points (topological dim 1 while the generic stalk has dim 0), Z[t]/(2t) over the non-flat fibres at (2) and (0), k[ε]/ε², A=R. Accepted the split_report tool_uses (spec-field-point-residue-field, dimension-at-point-open-subspace, dimension-at-point-components) as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFibrePointDimension",
+  "declaration": "AlgebraicGeometry.affine_fibre_point_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFibrePointDimension.lean",
+  "statement": "theorem affine_fibre_point_dimension (X S : Scheme.{u}) (f : X ⟶ S) (x : X) (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [Algebra.FinitePresentation R A] (iW : Spec (CommRingCat.of A) ⟶ X) [IsOpenImmersion iW] (iV : Spec (CommRingCat.of R) ⟶ S) [IsOpenImmersion iV] (hφ : Spec.map (CommRingCat.ofHom (algebraMap R A)) ≫ iV = iW ≫ f) (q : PrimeSpectrum A) (p : PrimeSpectrum R) (hx : iW q = x) (hs : iV p = f x) (hp : p.asIdeal = q.asIdeal.comap (algebraMap R A)) : ∃ (e : S.residueField (f x) ≅ CommRingCat.of p.asIdeal.ResidueField) (ψ : p.asIdeal.Fiber A →+* q.asIdeal.ResidueField) (Q : PrimeSpectrum (p.asIdeal.Fiber A)) (j : Spec (CommRingCat.of (p.asIdeal.Fiber A)) ⟶ f.fiber (f x)), e.hom = (S.residueFieldCongr hs).inv ≫ iV.residueFieldMap p ≫ (Scheme.Spec.residueFieldIso (CommRingCat.of R) p).hom ∧ (∀ (l : p.asIdeal.ResidueField) (a : A), ψ (l ⊗ₜ[R] a) = Ideal.ResidueField.map p.asIdeal q.asIdeal (algebraMap R A) hp l * algebraMap A q.asIdeal.ResidueField a) ∧ Q.asIdeal = RingHom.ker ψ ∧ Q.asIdeal.comap (Algebra.TensorProduct.includeRight : A →ₐ[R] p.asIdeal.Fiber A).toRingHom = q.asIdeal ∧ IsOpenImmersion j ∧ j ≫ f.fiberι (f x) = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeRight : A →ₐ[R] p.asIdeal.Fiber A).toRingHom) ≫ iW ∧ j ≫ f.fiberToSpecResidueField (f x) = Spec.map (e.hom ≫ CommRingCat.ofHom (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber A))) ∧ Set.range j = (f.fiberι (f x)) ⁻¹' Set.range iW ∧ j Q = f.asFiber x ∧ RingHom.FiniteType (algebraMap p.asIdeal.ResidueField (p.asIdeal.Fiber A)) ∧ topologicalKrullDimAt Q = topologicalKrullDimAt (f.asFiber x) ∧ (∃ d : ℕ, topologicalKrullDimAt Q = (d : WithBot ℕ∞)) ∧ (∀ (n m : ℕ) (P : Algebra.Presentation R A (Fin n) (Fin m)), ∃ E : (MvPolynomial (Fin n) p.asIdeal.ResidueField ⧸ Ideal.span (Set.range (fun b : Fin m => MvPolynomial.map (algebraMap R p.asIdeal.ResidueField) (P.relation b)))) ≃ₐ[p.asIdeal.ResidueField] p.asIdeal.Fiber A, ∀ a : Fin n, E (Ideal.Quotient.mk _ (MvPolynomial.X a)) = 1 ⊗ₜ[R] P.val a)",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5348a3a86",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Read node, 11 stmt_dep records, Mathlib decls (Ideal.Fiber, Ideal.ResidueField.map, Spec.residueFieldIso, Hom.fiber/fiberι/fiberToSpecResidueField/asFiber, Algebra.Presentation) and topologicalKrullDimAt (side-live KrullDimension.lean:343). Only the lean record differs from side-live; lean.statement verbatim in file. All clauses rendered: open immersions iW/iV + hφ square encode W,V,f(W)⊂V,φ; FinitePresentation; hx/hs/hp (hp derivable, not stronger); e pinned to canonical residue composite; j pinned by both pullback projections, IsOpenImmersion, range = preimage of W; ψ pinned on pure tensors, Q = ker ψ, contraction to q via includeRight; j Q = asFiber x; RingHom.FiniteType; equality of topological point dims + ∃ d:ℕ; ∀ Fin n/Fin m presentation ∃ k-alg equiv with X a ↦ 1⊗P.val a. Checked compatibility of pinned projections (statement true), edge cases (empty/zero rings, generic point, non-flat base change, n=m=0, single universe u forced by Spec). No defs, sorry only, docstrings with sources/blueprint/7 steps, no duplicate notions. Second-reading section is a self-check (stated). Not recompiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261026T001633-L-16489",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

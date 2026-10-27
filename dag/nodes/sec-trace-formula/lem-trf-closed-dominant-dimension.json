@@ -31,7 +31,7 @@
    }
   },
   {
-   "text": "For the reverse inequality assume that the underlying map of $f$ is closed. Let $\\eta$ be the generic point of $U$ and let $d$ be the length of a chain $\\eta=\\overline\\xi_0\\leadsto\\overline\\xi_1\\leadsto\\cdots\\leadsto\\overline\\xi_d$ in $U$. Put $K=k(U)$ and $V_\\eta=V\\times_U\\operatorname{Spec}K$. To check the properties used below, choose affine neighbourhoods $U_0=\\operatorname{Spec}A$ of $\\eta$ and $V_0=\\operatorname{Spec}B$ of the generic point of $V$ with $f(V_0)\\subseteq U_0$. Dominance makes $A\\to B$ injective; for $S=A\\setminus\\{0\\}$, the chart of $V_\\eta$ is $\\operatorname{Spec}(S^{-1}B)$, a nonzero domain, and localization preserves finite type. Every nonempty affine chart of the fibre contains the generic point and is obtained in the same way, so $V_\\eta$ is nonempty, integral, and locally of finite type over $K$. Its generic point is the generic point of $V$, its function field is $k(V)$ because $\\operatorname{Frac}(S^{-1}B)=\\operatorname{Frac}(B)$, and the fibre projection identifies its points and specialization chains with points and chains in $V$ over $\\eta$. The statement [lem-trf-generic-fibre-closed-chain] therefore supplies a closed point $\\xi_0$ over $\\eta$ and a chain of $r$ specializations ending at $\\xi_0$, with finite residue extension over $k(U)$.",
+   "text": "For the reverse inequality form X = V ×_U Spec k(U), using the spectrum of the generic stalk of U. The projection j:X→V is a flat preimmersion. Its stalk maps are surjective by preimmersion and injective by faithful flatness of flat local maps, hence isomorphisms. Thus X is reduced. Dominance puts the generic point of V in the range of j; the embedding property makes its preimage generic in X. Consequently X is integral. The map k(V)→k(X) is an isomorphism, and naturality of the maps from generic stalks and the pullback identity show that it commutes with the structural k(U)-maps. Base change gives local finite type over k(U). Apply [lem-trf-generic-fibre-closed-chain] to X to obtain r∈ℕ, trdeg_{k(U)} k(V)=r, and a strict specialization chain of length r ending at a point x of X. Its image ξ₀=j(x) lies over the generic point of U. The embedding j preserves strictness, so this is a chain in V ending at ξ₀.",
    "uses": [
     "lem-trf-generic-fibre-closed-chain"
    ],
@@ -42,7 +42,7 @@
    }
   },
   {
-   "text": "Lift the base chain successively. Since $f$ is a closed map, [lem-trf-closed-map-specializing] gives, from a point over $\\overline\\xi_i$, a specialization to a point over $\\overline\\xi_{i+1}$. Starting with $\\xi_0$ and iterating produces $\\xi_0\\leadsto\\xi_1\\leadsto\\cdots\\leadsto\\xi_d$ with $f(\\xi_i)=\\overline\\xi_i$.",
+   "text": "Assume f is closed. Its restriction g:closure{ξ₀}→U is closed and its image contains the generic point of U, so g is surjective. By [lem-trf-closed-map-specializing], g is specializing. The existing dimension comparison for specializing surjections gives dim U≤dim closure{ξ₀}=height ξ₀ in the specialization order. This comparison is precisely successive lifting of specialization chains, so it also applies when the dimensions are infinite.",
    "uses": [
     "lem-trf-closed-map-specializing"
    ],
@@ -53,7 +53,7 @@
    }
   },
   {
-   "text": "Concatenate the generic-fibre chain of length $r$ with the lifted base chain of length $d$. This is a chain in $V$ of length $r+d$, so $\\dim V\\geq r+d$. Taking the supremum over chains beginning at the generic point of the integral scheme $U$ gives $\\dim V\\geq\\dim U+r$, proving equality. Empty schemes do not occur because integrality makes both schemes nonempty.",
+   "text": "The chain furnished by [lem-trf-generic-fibre-closed-chain] gives r≤coheight ξ₀. Step 3, using [lem-trf-closed-map-specializing], gives dim U≤height ξ₀. The order-theoretic chain-concatenation bound height ξ₀+coheight ξ₀≤dim V therefore yields dim U+r≤dim V. Combine with step 1. Mathlib expresses the concatenation bound by krullDim_eq_iSup_height_add_coheight_of_nonempty; all casts and inequalities are valid also for infinite dimensions.",
    "uses": [
     "lem-trf-generic-fibre-closed-chain",
     "lem-trf-closed-map-specializing"
@@ -182,5 +182,26 @@
   "result": "fix",
   "note": "Hypotheses/conclusions match Stacks 02JX and the node clause by clause (integral U,V; dominant, locally finite type; U locally Noetherian; inequality, closed equality, proper+finite equality; WithBot ℕ∞ allows infinity; single universe u; empty case excluded by integrality). H4: helper Scheme.closedDominantFunctionFieldMap (+ algebra/finite wrappers) duplicates existing AlgebraicGeometry.Scheme.Hom.functionFieldMap (WeilConjectures/AlgebraicGeometry/Curve/DivisorPullback.lean:64) with Scheme.Hom.apply_genericPoint_of_isDominant (FiberDegree.lean:689). Fix: fixes/ClosedDominantDimension.lean reuses them via letI, removes helpers and the existential, adds step-by-step proof docstring (H8); fixes/lem-trf-closed-dominant-dimension.lean-record.json (declarations, note); fixes/lem-trf-closed-dominant-dimension.report.md (both sections kept + fix section). nt_compile: delivered and fixed modules rc 0, no errors; negative control confirms error reporting."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261023T132022-L-2184085",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -17,88 +17,79 @@
  ],
  "proof": [
   {
-   "text": "For $j<t$, the quotient definition gives a short exact sequence of $B$-modules $0\\to V_{j+1}\\to V_j\\to W_j\\to0$. Its constant presheaf sequence is exact at every object. Apply [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] with the constant coefficient ring $B$: sheafification is exact and yields $0\\to(V_{j+1})_Y\\to(V_j)_Y\\to(W_j)_Y\\to0$. These are the constant sheaves of [def-weil-pbc-constant-sheaf], with their induced $B_Y$-actions. Restrict those actions through $\\rho$ as in [def-pc-sheaf-restrict-scalars]. This remains exact as a sequence of $\\mathcal R$-modules: restriction changes neither the underlying additive sheaves nor the maps, and kernels and sheafified cokernels carry the restricted action by their usual formulas in [def-weil-sheaf-of-modules-category].",
+   "text": "Extend P termwise to B_Y using changeOfRingsComplex. Exact restriction of scalars and the natural tensor-cancellation isomorphism identify tensoring an extended term, after restriction, with tensoring its original flat term. Restriction reflects exactness, so each extended term is flat. The siteSheafTensorRightIso comparison identifies the explicit tensor with the monoidal tensor; symmetry identifies tensorLeft and tensorRight.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-change-of-rings-complex",
+    "lem-pur-change-of-rings-tensor-cancellation",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constant module presheaves preserve finite limits and colimits sectionwise, and exact module sheafification gives an exact constant-module functor. Apply the curried tensor bifunctor to the extended complex and view the resulting complex of functors as a functor G from coefficient modules to complexes. Each degree of G is constant sheafification followed by tensorLeft with a flat extended term. Consequently G maps a short exact coefficient sequence to a degreewise short exact sequence of complexes. The comparison siteSheafTensorRightIso gives a complex isomorphism from the original filteredCoefficientTensorComplex to G(U). The already proved differential laws use preservation of zero morphisms.",
    "uses": [
     "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
     "def-weil-pbc-constant-sheaf",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category"
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-route-site-sheaf-tensor-right-preserves-zero-morphisms"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EI, lemma-sheafification-exact, specialized to the constant ring presheaf B; compare Tag 093J, lemma-constant-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the assumed exact functor $P^q\\otimes_{\\mathcal R}-$ to the sequence in step 1 for each $q\\in\\mathbf Z$. This is precisely the flatness hypothesis, rather than an assertion of flatness for any coefficient quotient [def-pc-flat-sheaf-modules]. The resulting maps are $1\\otimes\\iota_j$ and $1\\otimes\\pi_j$. They commute with $d_P^q\\otimes1$, since both composites act on local pure tensors as $p\\otimes v\\mapsto d_P^q(p)\\otimes\\iota_j(v)$ or $d_P^q(p)\\otimes\\pi_j(v)$, respectively, and extend through sheafification [def-pur-sheaf-tensor-product]. The $B_Y$-action is $b(p\\otimes v)=p\\otimes bv$; commutativity of $B_Y$ and the scalar map $\\rho$ make this well-defined, and all maps are $B_Y$-linear. Exactness is still exactness in $B_Y$-modules: the additive kernels and sheafified cokernels are those of the same maps, with the induced $B_Y$-action [def-weil-sheaf-of-modules-category]. Thus $0\\to C_{V_{j+1}}\\to C_{V_j}\\to C_{W_j}\\to0$ is degreewise short exact in the abelian category $\\mathcal A=\\operatorname{Mod}(B_Y)$ on the given small site.",
+   "text": "Package the desired assertion for a complex K as: all H^n(K) are constructible, and H^n(K) is zero when n<r or s<n. This property is invariant under complex isomorphisms. It holds for every zero complex: the constructible derived homology property contains zero by lem-weil-constructible-coefficient-homology-triangulated, and homology preserves zero. Use homologyFunctorFactors to identify derived and representative cohomology. This includes the empty scheme and the zero ring.",
    "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03EK, section-tensor-product; application of the exact tensor functors explicitly assumed in the statement"
-   }
-  },
-  {
-   "text": "Prove the assertion for all $V_j$ by descending induction on $j$, starting at $j=t$. Since $V_t=0$, the complex $C_{V_t}$ is zero: each presheaf tensor $P^q\\otimes_{\\mathcal R}0$ is zero, and its sheafification is zero [def-pur-sheaf-tensor-product]. Its cohomology is zero in every degree. The zero sheaf is constructible in [def-weil-proetale-constructible-sheaf]: the single stratum $Y$ has the constant zero module as local model, with finite zero stalks (also when $Y$ is empty). This proves the base case, including $t=0$. For the induction step fix $j<t$ and assume the whole assertion for $V_{j+1}$. The layer $C_{W_j}$ has constructible cohomology and support in $[r,s]$ by the original hypothesis.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
+    "lem-weil-constructible-coefficient-homology-triangulated",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-abstract-derived-category",
     "def-weil-proetale-constructible-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09B5, lemma-constructible-serre; agent-written descending filtration induction, zero base case"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-complex-ses-homology-long-exact] in $\\mathcal A$ to the degreewise short exact sequence of step 2. For every integer $n$ the segment $H^n(C_{V_{j+1}})\\to H^n(C_{V_j})\\to H^n(C_{W_j})$ is exact. If $n<r$ or $n>s$, both outside objects are zero by the induction hypothesis and the layer hypothesis. Hence the middle object is zero: its identity factors through its image from the zero left object, since its map to the zero right object has full kernel. This proves the same interval $[r,s]$ for $C_{V_j}$, without shifting either endpoint.",
+   "text": "For a short exact sequence of complexes, the exact same-degree homology segment implies that the middle homology is zero whenever both outside homologies vanish. For constructibility apply the middle-vertex clause of lem-weil-constructible-coefficient-homology-triangulated to the short-exact distinguished triangle and transfer using homologyFunctorFactors. This is the existing theorem for coefficients B in Type (u+1), exactly the universe of this item. The bounds remain r and s, without a shift or a boundedness argument.",
    "uses": [
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain, exactness at the middle cohomology object"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-complex-ses-triangle], the sequence in step 2 gives a distinguished triangle $Q(C_{V_{j+1}})\\to Q(C_{V_j})\\to Q(C_{W_j})\\to Q(C_{V_{j+1}})[1]$ in $D(\\mathcal A)$. Their cohomology sheaves in the sense of [def-weil-derived-cohomology-sheaves] are those of the representing complexes, since $H^n\\circ Q\\cong H^n$ [def-weil-abstract-derived-category]. Both outside vertices have constructible cohomology and only finitely many nonzero cohomology sheaves, since their common interval $[r,s]$ is finite. Apply the middle-vertex closure assertion of [lem-weil-proetale-dbc-triangulated] with $\\Lambda=B$ and this very scheme $Y$. It gives constructible cohomology for $C_{V_j}$. This theorem uses exactly the global finite-stratification constructibility in the item and allows every scheme and every finite commutative ring; no Noetherian hypothesis on $Y$ is added. Together with step 4 this completes the induction step. Descending induction gives every $0\\le j\\le t$, and $V_0=V$ gives the final assertion. The induction never enlarges $[r,s]$, so the bounds are independent of $t$.",
-   "uses": [
+    "lem-weil-pbc-complex-ses-homology-long-exact",
     "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-proetale-dbc-triangulated",
+    "lem-weil-constructible-coefficient-homology-triangulated",
     "def-weil-derived-cohomology-sheaves",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL, lemma-compare-constructible-derived, triangulated constructible-cohomology subcategory from Tag 09B5; short-exact triangle from derived.tex Tag 0152"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use Fin.reverseInduction on j. The final submodule is bottom, whose module is zero; G preserves zero. At a preceding stage, antitonicity gives the injective inclusion F(j+1) into F(j). Its cokernel is precisely F(j) modulo comap of F(j+1) along the subtype. The kernel of the quotient equals the range of the inclusion, and the quotient is surjective, giving a short exact coefficient sequence. Step 2 gives its short exact sequence of complexes, and step 4 combines the induction hypothesis and the given layer hypothesis. Transfer through the comparison in step 2 to recover each original tensor complex. Finally the linear isomorphism F(0) = top isom V and functoriality give the assertion for V. This works also for t=0; the interval is never enlarged.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "def-weil-pbc-constant-sheaf",
+  "def-pc-flat-sheaf-modules",
   "def-pc-sheaf-restrict-scalars",
   "def-weil-sheaf-of-modules-category",
-  "def-pc-flat-sheaf-modules",
+  "def-pur-change-of-rings-complex",
+  "lem-pur-change-of-rings-tensor-cancellation",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-weil-pbc-constant-sheaf",
   "def-pur-sheaf-tensor-product",
+  "lem-route-site-sheaf-tensor-right-preserves-zero-morphisms",
+  "lem-weil-constructible-coefficient-homology-triangulated",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-abstract-derived-category",
   "def-weil-proetale-constructible-sheaf",
   "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-proetale-dbc-triangulated",
-  "def-weil-derived-cohomology-sheaves",
-  "def-weil-abstract-derived-category"
+  "lem-weil-pbc-complex-ses-triangle"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Finite-filtration devissage using Tags 09B5 and 09AL, exact constant sheafification and the cohomology sequence; the filtration argument is written out here."
+  "place": "Tags 09B5 and 09AL: finite-filtration devissage. Scalar-extension flatness is implemented using the existing natural cancellation theorem (sites-modules.tex Tag 05V4); constructible closure uses the existing coefficient-universe triangulation theorem. J4, 2026-10-26."
  },
  "mathlib_searches": [
   {
@@ -229,21 +220,25 @@
   "note": "Termwise coefficient tensor is the canonical associative presentation (B_Y tensor_R P) tensor_B_Y U_Y; its balanced inverse formulas and differential are documented. The only auxiliary postponed theorem supplies the shape and square-zero proof fields of this real construction. The finite filtration uses actual submodule quotients and retains both interval endpoints."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Q5",
+  "reviewer": "COMPILER",
+  "group": "J4",
   "result": "pass",
-  "landing": "20261019T034304-L-417854",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.filteredCoefficientTensorComplex_laws",
-   "AlgebraicGeometry.Scheme.filteredCoefficientTensor_constructible_bounds"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.filteredCoefficientTensor_constructible_bounds"
-  ]
+  "landing": "20261025T211043-L-3774308",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

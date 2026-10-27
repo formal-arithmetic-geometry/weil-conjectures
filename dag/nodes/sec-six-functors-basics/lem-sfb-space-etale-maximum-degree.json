@@ -1,0 +1,391 @@
+{
+ "id": "lem-sfb-space-etale-maximum-degree",
+ "kind": "statement",
+ "title": "Bounded fibres and the maximum-degree open of an affine etale atlas",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum] and algebraic spaces [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. Give spaces the atlas topology [def-a1-space-point-topology]. For morphisms of spaces, separated means that the representable diagonal is a closed immersion on every scheme test [def-weil-closed-immersion]; quasi-compact means that inverse images of quasi-compact opens are quasi-compact; quasi-separated means that the diagonal is quasi-compact. Locally of finite type and locally of finite presentation are tested on etale scheme charts [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation]. Finite type means quasi-compact and locally of finite type; finite presentation means quasi-compact, quasi-separated, and locally of finite presentation. Proper means separated, of finite type, and universally closed, where universally closed means closed on underlying spaces after every algebraic-space base change (agreeing with the scheme convention [def-weil-proper-morphism]). Let $A$ be a commutative ring, $X$ an algebraic space separated and of finite type over $B=\\operatorname{Spec}A$, and $f:W\\to X$ a representable surjective etale morphism with $W$ affine [def-weil-etale-morphism]. Then $W\\to B$ is of finite type, and there is an integer $b\\geq0$ bounding the number of points of every geometric fibre of $f$. Here a geometric fibre means $W\\times_X\\operatorname{Spec}\\Omega$ for an algebraically closed field $\\Omega$ [def-weil-field] and a map $\\operatorname{Spec}\\Omega\\to X$. If $X$ is nonempty, there is a least such bound $d\\geq1$, and the set $U$ of points where this number is $d$ is a nonempty open subspace [def-weil-open-immersion]. The morphism $W\\times_XU\\to U$ is finite etale of constant degree $d$, meaning that on every etale scheme test its direct-image algebra is finite locally free of rank $d$. For the reduced closed subspace $T$ with support $|X|\\setminus U$ [lem-sfb-space-reduced-closed-support], the scheme $W_T=W\\times_XT$ is affine, $W_T\\to T$ is representable surjective etale, and every geometric fibre has fewer than $d$ points. If $X$ is empty, $W$ is empty and $b=0$ is permitted.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JX (lemma-bounded-fibres), implication (eta) => (delta), and Tag 07S8 (lemma-quasi-compact-reasonable-stratification), maximum-degree stratum; specialization used in spaces-cohomology.tex Tag 089J (lemma-weak-chow), first paragraph."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-etale-morphism",
+  "lem-sfb-space-reduced-closed-support",
+  "def-weil-field",
+  "def-sfb-proper-curve-moduli",
+  "def-a1-space-open-subspace",
+  "def-amb-finite-locally-free-module",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The chartwise definition of local finite type for $X\\to B$, applied to the etale source chart $f:W\\to X$ and the identity chart of $B$, says that the scheme morphism $W\\to B$ is locally of finite type. Since $W$ and $B$ are affine, the morphism $W\\to B$ is affine by the lemma on morphisms between affine schemes. Thus $W\\to B$ is quasi-compact by affine-morphism permanence, and hence of finite type. The affine schemes $W$ and $B$ are quasi-compact and quasi-separated. Also $B\\to\\operatorname{Spec}\\mathbf Z$ is separated by the affine-source separation lemma. Composing it with the given separated $X\\to B$ shows that $X$ is absolutely separated. Its absolute diagonal is therefore a closed immersion on scheme tests, hence affine by the affine characterization of a closed immersion, hence quasi-compact by affine-morphism permanence. Thus $X$ is quasi-separated in the absolute sense required below.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-sfb-space-separated-fp-composition",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), first paragraph and its finite-type observation; separation uses spaces-morphisms.tex Tag 03KQ (lemma-composition-separated)."
+   }
+  },
+  {
+   "text": "The space quasi-compactness permanence lemma applies to $W\\to X$, since $W$ is quasi-compact and $X$ is quasi-separated; hence $f$ is quasi-compact. To check its separatedness, first the scheme map $W\\to\\operatorname{Spec}\\mathbf Z$ is separated by affine-source separation. For any scheme map $H\\to W\\times_XW$, the scheme test of $\\Delta_f$ is canonically $W\\times_{W\\times_{\\mathbf Z}W}H\\to H$: an equal pair of maps into $W$ has the same image in $X$. This is the base change of the closed absolute diagonal of $W$, so is a closed immersion. This verifies separatedness of $f$ without any separatedness assumption on a test scheme. The schemes and pullbacks in this computation exist by the scheme-test representability lemma.",
+   "uses": [
+    "lem-sfb-space-qcqs-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), separatedness hypothesis; spaces-morphisms.tex Tag 073B (lemma-quasi-compact-quasi-separated-permanence)."
+   }
+  },
+  {
+   "text": "Apply the quasi-compact etale-chart fibre-bound lemma to the quasi-separated space $X$ and the affine, hence quasi-compact, scheme $W$. It gives a nonnegative bound $b$ and finite discrete geometric fibres. If $X$ is empty, the map from $W$ forces $W$ empty and $b=0$ works. Assume henceforth $X$ nonempty. Surjectivity gives a nonempty geometric fibre over every geometric point: this also follows by the scheme-test surjectivity criterion and base change. Choose the least natural bound $d$ among the bounds bounded by $b$. Then $d\\geq1$. If no fibre had $d$ points, all natural fibre cardinalities would be at most $d-1$, contradicting minimality. Thus the maximum $d$ is attained.",
+   "uses": [
+    "lem-sfb-space-qc-etale-fibre-bound",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), first paragraph, minimal choice of d; decent-spaces.tex Tags 03JX (lemma-bounded-fibres) and 03JT (lemma-U-universally-bounded)."
+   }
+  },
+  {
+   "text": "Use the closed-degree-loci lemma for the quasi-compact separated etale morphism $f$ with the bound $d$. It says that $D_{d-1}=\\{x:n(x)\\leq d-1\\}$ is closed. Its complement is exactly the locus $U=\\{x:n(x)=d\\}$, since all cardinalities are at most $d$, and it is nonempty by the preceding step. For completeness it has an open subspace structure: take the reduced closed subspace supported on $D_{d-1}$, and define its complementary subfunctor by requiring a scheme-source map to avoid that support. On every scheme test this is the complementary open of the pulled-back closed immersion, with its open subscheme structure. The sheaf condition is inherited by this local restriction, so this is a representable open subfunctor, hence an open algebraic subspace. This construction concerns an open complement and does not assert that a map with image in a closed subset factors through its reduced structure.",
+   "uses": [
+    "lem-sfb-space-etale-closed-degree-loci",
+    "lem-sfb-space-reduced-closed-support",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), closed degree filtration; spaces-properties.tex Tag 03IQ (lemma-reduced-closed-subspace)."
+   }
+  },
+  {
+   "text": "Let $V\\to U$ be any scheme test, and put $E=W\\times_XV$. The scheme-test lemma makes $E$ a scheme and $h:E\\to V$ etale. Its geometric fibres are precisely those of $f$ over the composite geometric points into $X$, hence all have $d$ points. For $v\\in V$, the etale fibre description writes $E_v$ as a disjoint union of spectra of finite separable extensions $L_j/\\kappa(v)$. Each $L_j\\otimes_{\\kappa(v)}\\Omega$ over an algebraic closure is a product of $[L_j:\\kappa(v)]$ copies of $\\Omega$, by the separable tensor lemma. Consequently there can be only finitely many $j$, since the geometric fibre has $d$ points. The fibre is affine by finite-disjoint-union affineness, and its coordinate algebra is $\\prod_jL_j$, of dimension $\\sum_j[L_j:\\kappa(v)]=d$. This also shows directly that the geometric point count is unchanged under algebraically closed field extension: each split field factor stays one factor. Thus the point count and the finite fibre degree used by scheme stratification agree, including fibres over nonclosed points.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-pc-separable-tensor-algebraic-closure",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), fibre description; decent-spaces.tex Tag 07S8 (lemma-quasi-compact-reasonable-stratification), passage to a scheme test."
+   }
+  },
+  {
+   "text": "The scheme map $h$ is flat and locally of finite presentation by the definition of etale, and is locally quasi-finite because etale implies unramified and the unramified-quasi-finite lemma applies. It is separated: a scheme test of its diagonal is a scheme test of $\\Delta_f$, already proved closed. The preceding step supplies finite fibre degrees bounded by $d$. Apply the scheme bounded stratification theorem with bound $d$. Testing its universal property on each residue-field point identifies its degree-$r$ stratum with the points of fibre degree $r$. Every point of $V$ has degree $d$, so its degree-$d$ stratum is all of $V$. Apply that universal property again, now to $\\mathrm{id}_V$, to conclude that $h:E\\to V$ is finite locally free of degree $d$. Since it is etale, it is finite etale. This argument applies to every scheme test of $U$ and also when $V$ is empty.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-flat-fp-lqf-bounded-stratification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 07S8 (lemma-quasi-compact-reasonable-stratification), scheme-test argument, using more-morphisms.tex Tag 07RY (lemma-stratify-flat-fp-lqf-universally-bounded)."
+   }
+  },
+  {
+   "text": "For the sheaf-algebra meaning of the degree assertion, apply finite-flat pushforward to $h$ and the rank-one module $\\mathcal O_E$. Its hypotheses are exactly the finiteness, flatness and local finite presentation just established. This gives $h_*\\mathcal O_E$ finite locally free. The finite-flat rank lemma identifies its rank at $v$ with $\\dim_{\\kappa(v)}\\Gamma(E_v,\\mathcal O_{E_v})$, which is $d$ by the fibre calculation. Thus the direct-image algebra on every etale scheme test is finite locally free of rank $d$, as the statement requires.",
+   "uses": [
+    "lem-pc-finite-flat-pushforward-locally-free",
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB (lemma-finite-flat) and Tag 04MH (lemma-finite-locally-free), rank of the direct-image algebra."
+   }
+  },
+  {
+   "text": "Let $T\\hookrightarrow X$ be the reduced closed subspace with support $|X|\\setminus U$. The reduced-support lemma, tested on the scheme $W\\to X$, says that $W_T\\to W$ is a closed immersion of schemes. Since $W$ is affine, the affine characterization of closed immersions writes $W_T=\\operatorname{Spec}(C/I)$ when $W=\\operatorname{Spec}C$; hence $W_T$ is affine. Base change of $f$ is representable surjective etale by the scheme-test permanence lemma. For a geometric point $\\bar t$ of $T$, associativity of the sheaf fibre product identifies $(W_T)_{\\bar t}$ with $W_{\\bar t\\to X}$. Its point in $X$ lies in the complement of $U$, so the already established natural cardinality is at most $d-1$, and is therefore less than $d$. When $d=1$, surjectivity forces $T$ empty, which is allowed. This completes all clauses.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "def-weil-closed-immersion",
+    "lem-trf-space-representable-etale-scheme-tests",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 089J (lemma-weak-chow), induction on d after the maximum-degree open; spaces-properties.tex Tag 03IQ (lemma-reduced-closed-subspace)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-sfb-space-etale-closed-degree-loci",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-def-affine-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 089J (lemma-weak-chow), first paragraph and induction on d, with decent-spaces.tex Tags 03JX and 07S8 and the scheme-test proof via more-morphisms.tex Tag 07RY."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated algebraic space has an affine etale atlas with bounded finite geometric fibres and an open locus of maximum degree",
+   "results": "8 hit(s); AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale and finite-fibre declarations are for schemes or rings; none states boundedness and the maximum-degree stratum of an algebraic-space atlas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism with bounded fibre cardinality is finite etale of maximum degree on an open stratum",
+   "results": "8 hit(s); Algebra.isOpen_etaleLocus, AlgebraicGeometry.IsEtale.of_comp, Algebra.etaleLocus_eq_univ_iff_etale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.exists_subalgebra_fg, Algebra.mem_etaleLocus_iff, Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale and finite-fibre declarations are for schemes or rings; none states boundedness and the maximum-degree stratum of an algebraic-space atlas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"finite\"",
+   "results": "12 hit(s); Algebra.Etale.finitePresentation, Algebra.FormallyEtale.instEtaleForallOfFinite, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.instIsSeparableQuotientIdealOfEssFiniteTypeOfIsPrime, AlgebraicGeometry.Scheme.instHasFiniteLimitsEtale, AlgebraicGeometry.Scheme.instPreservesFiniteLimitsEtaleOverForget, AlgebraicGeometry.Etale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale and finite-fibre declarations are for schemes or rings; none states boundedness and the maximum-degree stratum of an algebraic-space atlas."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.space|AlgebraicSpace|weak.?chow|reasonable.stratification",
+   "results": "0 hit(s); none",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale and finite-fibre declarations are for schemes or rings; none states boundedness and the maximum-degree stratum of an algebraic-space atlas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stratification by fibre cardinalities for a separated etale map to an algebraic space",
+   "results": "8 hit(s); AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSeparated.hasAffineProperty, AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, IsCoveringMap.isSeparatedMap",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale and finite-fibre declarations are for schemes or rings; none states boundedness and the maximum-degree stratum of an algebraic-space atlas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale atlas of a separated finite type algebraic space has bounded geometric fibres and a finite etale maximum degree open",
+   "results": "8 hit(s); AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.isOpen_etaleLocus, Algebra.Etale.finitePresentation, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match for this algebraic-space atlas assertion: hits are scheme/ring etale facts, general topology, or graph maximum degree; none states every clause of the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"fiber\"",
+   "results": "0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match for this algebraic-space atlas assertion: hits are scheme/ring etale facts, general topology, or graph maximum degree; none states every clause of the item"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|maximum.degree|universallyBounded",
+   "results": "3 hit(s); Mathlib/Combinatorics/SimpleGraph/Finite.lean, Mathlib/Combinatorics/SimpleGraph/Finite.lean, Mathlib/Combinatorics/SimpleGraph/Finite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for this algebraic-space atlas assertion: hits are scheme/ring etale facts, general topology, or graph maximum degree; none states every clause of the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform boundedness of geometric fibre cardinalities and the open largest degree stratum of an etale algebraic space atlas",
+   "results": "8 hit(s); Algebra.isOpen_etaleLocus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebraic.cardinalMk_le_max, AlgebraicGeometry.Scheme.Hom.discrete_fiber, Algebraic.cardinalMk_lift_le_max",
+   "date": "2026-10-23",
+   "verdict": "no match for this algebraic-space atlas assertion: hits are scheme/ring etale facts, general topology, or graph maximum degree; none states every clause of the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat separated finitely presented morphism the maximum fibre degree locus is open and the restriction is finite locally free",
+   "results": "8 hit(s); AlgebraicGeometry.UniversallyOpen.of_flat, Algebra.isOpen_smoothLocus, Algebra.isOpen_etaleLocus, Algebra.isOpen_unramifiedLocus, AlgebraicGeometry.Flat, AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.isOpenMap_of_generalizingMap",
+   "date": "2026-10-23",
+   "verdict": "no match for this algebraic-space atlas assertion: hits are scheme/ring etale facts, general topology, or graph maximum degree; none states every clause of the item"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAffine.*[Cc]ompact|[Cc]ompactSpace.*[Ii]sAffine|[Ii]sAffine.*[Ss]eparated",
+   "results": "25 hit(s); Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for this algebraic-space atlas assertion: hits are scheme/ring etale facts, general topology, or graph maximum degree; none states every clause of the item"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-weak-chow",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, first paragraph: bounded atlas fibres and the maximum-degree open.",
+   "via": [
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-etale-maximum-degree",
+  "worker": "stage1",
+  "summary": "Eight source-based steps, no new nodes: establish finite type and separated quasi-compact atlas hypotheses, reuse the existing chart fibre bound and closed degree loci, apply the existing scheme bounded stratification on scheme tests after explicitly comparing separable fibre degrees and geometric cardinalities, and finish by reduced closed support and base change. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, first paragraph: bounded atlas fibres and the maximum-degree open. Eight steps supply precisely this bounded-atlas/maximum-degree prerequisite of Tag 089J. Read the latest blueprint direct-image proof (3); no unit step is replaced. The ancestor tool returns None, so retain the inherited null ancestor and via list. Blueprint searches for maximum degree, stratify and finite locally free found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-qcqs-permanence",
+    "why": "General quasi-compactness permanence, used to check the atlas hypothesis, not to replace a unit proof route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "General scheme separation for the affine base and the absolute diagonal of the affine atlas."
+   },
+   {
+    "node": "lem-sfb-space-separated-fp-composition",
+    "why": "Generic separatedness composition, used only to obtain the absolute quasi-separatedness hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme base change for closed diagonals."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Representability of scheme tests and base-change permanence of the given etale cover."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point surjectivity and scheme-test criterion; the unit provides no point-calculus replacement."
+   },
+   {
+    "node": "lem-pc-separable-tensor-algebraic-closure",
+    "why": "Finite separable field splitting, to compare geometric point counts with scheme fibre degrees."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme local-quasi-finiteness input for the scheme stratification theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+    "why": "The scheme theorem explicitly used in the source proof of the algebraic-space stratification; a generic geometric input, not a different unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic affineness, separation and finite-disjoint-union geometry."
+   },
+   {
+    "node": "lem-pc-finite-flat-pushforward-locally-free",
+    "why": "Generic scheme finite-flat pushforward, used only to spell out the requested direct-image algebra interpretation."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic scheme fact (Stacks 01SH) that a morphism between affine schemes is affine; added by review."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-qcqs-permanence",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-sfb-space-separated-fp-composition",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-a1-space-point-open-calculus",
+  "lem-pc-separable-tensor-algebraic-closure",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-weil-pbc-flat-fp-lqf-bounded-stratification",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-pc-finite-flat-pushforward-locally-free",
+  "lem-weil-pbc-morphism-affine-schemes-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-2a8cc89b4",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-2a8cc89b4 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps in full, with each cited statement, against Stacks 089J (first paragraph), 07S8 (scheme-test proof via 07RY) and 03JX. The statement is correct, including the empty-X, d=1, T-clause and direct-image-rank clauses. Small cases checked: X empty; d=1; identity sheet plus an open G_m sheet over A^1 (sublevel set closed, maximum locus open); nonreduced base. Steps 2-8 are correct: Delta_f is checked through the monomorphism W x_X W -> W x_Z W; closed-degree-loci hypotheses come from steps 1-3; the open subspace U is built from the reduced closed support; the fibre degree sum over separable L_j equals the geometric point count; 07RY is applied on residue points and then on id_V; rank comes from finite-flat-rank-iso; W_T is closed in the affine W. One fault, repaired: step 1 justified 'a morphism between affine schemes is affine' with an inaccurate principal-open remark and no citation. It now cites the existing lem-weil-pbc-morphism-affine-schemes-affine (Stacks 01SH), which is also added to proof_deps and tool_uses. No new nodes and no duplicates found: the maximal-degree-etale-neighborhood node is scheme-local, and the closed-degree-loci and fibre-bound nodes are narrower and correctly cited. Batch-5 flags: def-a1-space-open-subspace, lem-a1-space-point-open-calculus, lem-sfb-space-separated-fp-composition and lem-trf-space-representable-etale-scheme-tests are generic algebraic-space foundations. Their closure reaches only def-trf-algebraic-space, which is already a stmt_dep of the item. They are not steps of the trace-formula or Poincare-duality proofs, so all are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleMaximumDegree",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_etale_atlas_maximum_degree",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affine_etale_atlas_finite_type_bounded",
+   "AlgebraicGeometry.AlgebraicSpace.exists_affine_etale_atlas_maximum_degree"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleMaximumDegree.lean",
+  "statement": "theorem exists_affine_etale_atlas_maximum_degree (A : Type u) [CommRing A] (X : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) (W : Over (Spec (.of (ULift.{u} ℤ)))) (g : X.obj.obj ⟶ yoneda.obj (Over.mk (specULiftZIsTerminal.from (Spec (.of A))))) (f : yoneda.obj W ⟶ X.obj.obj) (hW : IsAffine W.left) (hsep : MapToSchemeIsSeparated X (Over.mk (specULiftZIsTerminal.from (Spec (.of A)))) g) (hqc : MapIsQuasiCompact g) (hft : MapToSchemeIsLocally (@LocallyOfFiniteType) X (Over.mk (specULiftZIsTerminal.from (Spec (.of A)))) g) (he : IsEtale f) (hs : IsSurjective f) (hne : Nonempty (Point X.obj.obj)) : ∃ (d : ℕ) (U : OpenSubspace X), 1 ≤ d ∧ IsLeast {b : ℕ | ∀ (a : PointRepresentative X.obj.obj), IsAlgClosed a.K → Cardinal.mk (Point (Limits.pullback f (yonedaEquiv.symm a.value))) ≤ b} d ∧ (pointImage U.val.ι).Nonempty ∧ pointImage U.val.ι = {x | ∃ (a : PointRepresentative X.obj.obj), IsAlgClosed a.K ∧ Quot.mk _ a = x ∧ Cardinal.mk (Point (Limits.pullback f (yonedaEquiv.symm a.value))) = d} ∧ (∀ (V : Over (Spec (.of (ULift.{u} ℤ)))) (a : yoneda.obj V ⟶ U.val.toFunctor), IsEtale (a ≫ U.val.ι) → ∃ (E : Over (Spec (.of (ULift.{u} ℤ)))) (p : E ⟶ V) (q : yoneda.obj E ⟶ yoneda.obj W), IsPullback q (yoneda.map p) f (a ≫ U.val.ι) ∧ IsFinite p.left ∧ Etale p.left ∧ ((Scheme.Modules.pushforward p.left).obj (𝟙_ E.left.Modules)).IsFiniteLocallyFreeOfRank d) ∧ ∃ C : ClosedSubspace X, IsReduced (C.val : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))) ∧ pointImage C.val.arrow.hom.hom = (pointImage U.val.ι)ᶜ ∧ ∃ (WT : Over (Spec (.of (ULift.{u} ℤ)))) (p : WT ⟶ W) (q : yoneda.obj WT ⟶ (C.val : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))).obj.obj), IsPullback (yoneda.map p) q f C.val.arrow.hom.hom ∧ IsAffine WT.left ∧ IsEtale q ∧ IsSurjective q ∧ ∀ (a : PointRepresentative (C.val : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))).obj.obj), IsAlgClosed a.K → Cardinal.mk (Point (Limits.pullback q (yonedaEquiv.symm a.value))) < d",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two declarations jointly state all clauses: finite type and a finite geometric-fibre bound, including the empty case; then the least positive bound, the nonempty maximum-degree open, its finite etale tests with direct-image rank, and the affine surjective etale atlas of its reduced closed complement. Existing definitions of maps to schemes, open subspaces, finite maps and constant-rank locally free sheaves are cited by added, already-landed statement dependencies."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b1660083a",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Snapshot node differs from live only in stmt_deps (+4 landed def owners: proper-curve-moduli MapTo*, a1-space-open-subspace, amb-finite-locally-free-module, weil-finite-integral-morphism) and lean; statement/proof unchanged; 18 dep records identical to live. Lean statement verbatim, 2 sorries, no defs. Clause check vs node/Stacks 03JX/07S8/089J: hsep/hqc/hft = separated finite type over Spec A (no extra hypotheses); finite type of W→B; ∃b with Cardinal bound on Point(pullback f geometric point) and X empty ⇒ b=0 ∧ W empty; hne-only second theorem: 1≤d, IsLeast of same set, OpenSubspace U nonempty with pointImage = degree-d classes, every étale test gives actual pullback finite+Etale with p_*𝟙_ finite locally free of rank d; reduced ClosedSubspace C with complementary support (owners in closure via lem-sfb-space-reduced-closed-support stmt_deps), affine surjective étale base change, fibres < d. Edge cases X empty, d=1, empty tests, A=0, nonreduced all fine. Non-blocking: public import of proof module FinitePushforward supplies LocallyFree + Modules monoidal unit. No compile (no changes); worker compile clean."
+ }
+}

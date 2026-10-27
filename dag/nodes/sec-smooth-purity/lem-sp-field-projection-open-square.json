@@ -1,0 +1,111 @@
+{
+ "id": "lem-sp-field-projection-open-square",
+ "kind": "statement",
+ "title": "Open factor of the scalar projection square",
+ "statement": "Fix P, simultaneous models D [def-sp-field-shriek-system-models], a normalized tensor datum t [def-sp-field-projection-factor-data], an inclusion E in F and a compactification c=(j,p) of f:X to Y. For any E-derived systems K on Y and W on X, let gamma_A and gamma_B be leftOpen, beta the specified D.openIso, and mu_p and mu_f the two projectionTarget comparisons. Then C_Z(gamma_A) followed by beta at (f_A^*K tensor W) and j_{B,!}(mu_f) equals mu_p at (K,j_{A,!}W), followed by (1 tensor beta_W) and gamma_B(C_Y K,C_X W). This is an equality on the ringed sequence site of Z=c.Z before evaluation; it contains no proper direct image or proper exchange.",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-field-extension",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "stmt_deps": [
+  "def-sp-field-projection-factor-data",
+  "def-sp-field-shriek-system-models"
+ ],
+ "proof": [
+  {
+   "text": "apply open tensor normalization on the ringed sequence topoi for the\nidentity geometric square with structural coefficient map. The inverse open\nunit mate is precisely D.openIso, and the open tensor mate is the specified\nopenTensor in D.operations. The sources and targets of the two words are in\nthe essential image of the open extension. Restrict to the open. The unit\nnormalizations cancel the open factors. On flat-term K-flat representatives\nboth remaining maps send (m tensor x) tensor b to\n(m tensor b) tensor (x tensor 1), in every total summand. The ordinary geometric\ncompositors and scalar pullback comparisons preserve these sections, so the\nsame calculation includes the compositor from j^*p^* to f^*. The two signed\nswaps have identical signs on the two routes. Two-variable descent gives\nequality on the derived open restriction; its faithfulness on the open image\ngives equality before restriction. This works on whole systems, retaining all\ncoefficient transitions, and does not use faithfulness of level evaluation.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula commutes with change of coefficient ring and open extension by zero",
+   "results": "8 hits on structure-sheaf restriction, presentations and unrelated projective-resolution maps. No derived projection/scalar square.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula commutes with change of coefficient ring and open extension by zero",
+   "results": "8 hits on Profinite.NobelingProof projection/restriction maps and unrelated scalar constructions. No ringed derived coefficient square.",
+   "date": "2026-10-26",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "exchange.*[Tt]ensor|[Tt]ensor.*exchange|[Tt]ensor.*[Ss]calar",
+   "results": "25 initial hits on ordinary tensor scalar restriction and module tensor base change; no normalized proper/open field-system square.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; these are ordinary algebraic ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldProjectionSystemSquare",
+  "date": "2026-10-26",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-field-extension-towers",
+   "place": "(2), projection square, expanded as steps 1--4 of lem-sp-field-projection-system-square",
+   "via": [
+    "lem-sp-field-projection-system-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FieldProjectionOpenSquare",
+  "file": "lean/Sheaf/Paper/FieldProjectionOpenSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldShriekSystem.field_projection_open_square",
+  "statement": "theorem field_projection_open_square (t : ProjectionTensorComparisons P D)\n    (E F : Index P) (h : E ≤ F) {X Y : Scheme.{u}} {f : X ⟶ Y}\n    (c : Compactification f)\n    (K : SpTowerShriek.D P.coefficients.l E.val Y)\n    (W : SpTowerShriek.D P.coefficients.l E.val X) :\n    (D.scalars E F h c.Z).T.map (leftOpen P D t E c K W) ≫\n        (D.openIso E F h c.i).hom.app\n          ((SpTowerShriek.tensor P.coefficients.l E.val (D.base E) X).obj\n            ((SpTowerShriek.pull P.coefficients.l E.val (D.base E)\n              ((D.operations E).geometry f)).obj K, W)) ≫\n        (SpTowerShriek.openD P.coefficients.l F.val (D.base F)\n          ((D.operations F).openOp c.i)).map (projectionTarget P D t h f K W).hom =\n      (projectionTarget P D t h c.g K\n        ((SpTowerShriek.openD P.coefficients.l E.val (D.base E)\n          ((D.operations E).openOp c.i)).obj W)).hom ≫\n        (SpTowerShriek.tensor P.coefficients.l F.val (D.base F) c.Z).map\n          (Prod.mkHom (𝟙 _) ((D.openIso E F h c.i).hom.app W)) ≫\n        leftOpen P D t F c ((D.scalars E F h Y).T.obj K)\n          ((D.scalars E F h X).T.obj W)",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fb649",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261025T203038-L-2779089",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature and relocated five data declarations vs clone (identical, public re-export); three new sorried squares/constructions vs Models/Geometry/Operations pinning fields (open_unit, openTensor_mate, tensorPullback_eq, PullComparison.representative)"
+ }
+}

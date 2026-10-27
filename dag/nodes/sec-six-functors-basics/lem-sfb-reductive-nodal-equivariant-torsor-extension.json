@@ -1,0 +1,205 @@
+{
+ "id": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+ "kind": "statement",
+ "title": "Extension of reductive equivariant torsors across the nodal origin",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $\\pi$ a uniformizer and $k=A/(\\pi)$ its residue field. An $A$-group scheme means a group object in schemes over $\\operatorname{Spec}A$: the multiplication, unit and inverse diagrams of [def-sc-group-scheme], with this base in place of the field base. Write $\\mathbf G_{m,A}=\\operatorname{Spec}A[z,z^{-1}]$ with multiplication of units. Let $H$ be a smooth affine finite-type $A$-group scheme [def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Assume $H$ is reductive, meaning every geometric fibre is connected [def-weil-connected-scheme] and has no nontrivial smooth connected normal unipotent subgroup. Here unipotent means that every geometric point is a unipotent matrix in a faithful representation. Put $X=\\operatorname{Spec}A[s,t]/(st-\\pi)$, with $\\mathbf G_{m,A}$ acting by $z\\cdot(s,t)=(zs,z^{-1}t)$, and let $o=V(s,t)=\\operatorname{Spec}k$. A right $H$-torsor over an $A$-scheme $Y$ means a represented right torsor in [def-sfb-split-solvable-right-torsors], with base $\\operatorname{Spec}A$. A $\\mathbf G_m$-equivariant such torsor has a left $\\mathbf G_{m,A}$-action covering the specified action on $Y$ and commuting with the right $H$-action; isomorphisms respect both actions and the projection to $Y$. Write $U=X\\setminus\\{o\\}=D(s)\\cup D(t)$. For every $\\mathbf G_{m,A}$-equivariant right $H$-torsor $P\\to U$, there are a $\\mathbf G_{m,A}$-equivariant right $H$-torsor $\\widetilde P\\to X$ and an equivariant torsor isomorphism $\\widetilde P|_U\\simeq P$. No completeness, splitness or residue-field perfection assumption is imposed.",
+ "source": {
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "WANTED locally; read author-hosted https://sites.math.washington.edu/~jarod/papers/iwahori.pdf. Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions."
+ },
+ "stmt_deps": [
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-sc-discrete-valuation-ring",
+  "def-sfb-split-solvable-right-torsors",
+  "def-weil-connected-scheme",
+  "def-sfb-nodal-torus-chart",
+  "def-sfb-equivariant-represented-right-torsor",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose $i:H\\hookrightarrow L=\\operatorname{GL}_{n,A}$ and the affine quotient $L/H$ by [lem-sfb-dvr-reductive-linear-affine-quotient]. Apply [lem-sfb-linear-torsor-reduction-sections] to $P$ on $U$: obtain $E=P\\times^H L$, its rank-$n$ bundle $V$, and a section $\\sigma:U\\to E/H$. Naturality gives the $\\mathbf G_m$-linearization of $V$ and equivariance of $\\sigma$ from the given commuting actions.",
+   "uses": [
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-linear-torsor-reduction-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Section 2, Claim 2, first two sentences; general DVR embedding supplied by Milne VIII Aside 9.4 and quotient affineness by Alper Corollary 9.7.7."
+   }
+  },
+  {
+   "text": "By [lem-sfb-nodal-surface-flat-hartogs], $X$ is an integral regular Noetherian surface and $o$ has codimension two. Hence [lem-sfb-regular-surface-vector-bundle-extension] gives $\\widetilde V=j_*V$, finite locally free of rank $n$. On $T=\\mathbf G_m\\times_A X$, projection to $X$ is flat. The action map is projection composed with $(z,x)\\mapsto(z,zx)$, an automorphism with inverse $(z,x)\\mapsto(z,z^{-1}x)$. The two pullbacks of $\\widetilde V$ are bundles; their isomorphism over $\\mathbf G_m\\times_A U$ and its inverse extend uniquely by the Hom clause of [lem-sfb-nodal-surface-flat-hartogs]. Their composites are identities by the same injectivity. The identity and cocycle laws hold because they hold on $U$ and Hom restriction is injective on $X$ and $\\mathbf G_m^2\\times_A X$. Thus $\\widetilde V$ is linearized, and [lem-sfb-linear-torsor-reduction-sections] gives its equivariant frame torsor $\\widetilde E$, extending $E$.",
+   "uses": [
+    "lem-sfb-nodal-surface-flat-hartogs",
+    "lem-sfb-regular-surface-vector-bundle-extension",
+    "lem-sfb-linear-torsor-reduction-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Section 2, Claim 2, vector-bundle extension, with the equivariance argument made explicit by flat-base Hartogs."
+   }
+  },
+  {
+   "text": "By [lem-sfb-linear-torsor-reduction-sections], $Z=\\widetilde E/H$ is affine over $X$. The section $\\sigma$ extends uniquely to $\\widetilde\\sigma:X\\to Z$ by the affine-section clause of [lem-sfb-nodal-surface-flat-hartogs] for $T=X$. On $\\mathbf G_m\\times_A X$ the two sections expressing its equivariance agree over $\\mathbf G_m\\times_A U$, so the same clause, for this flat projection, makes them equal everywhere. Thus $\\widetilde\\sigma$ is equivariant.",
+   "uses": [
+    "lem-sfb-linear-torsor-reduction-sections",
+    "lem-sfb-nodal-surface-flat-hartogs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Section 2, Claim 2, last two sentences; uniqueness also over the action parameter."
+   }
+  },
+  {
+   "text": "Set $\\widetilde P=\\widetilde E\\times_{Z,\\widetilde\\sigma}X$. The inverse construction of [lem-sfb-linear-torsor-reduction-sections] makes it a represented right $H$-torsor. The invariant section makes this fibre product stable under the left $\\mathbf G_m$-action on $\\widetilde E$, which commutes with the right $H$-action. Over $U$ the construction recovers $(E,\\sigma)$ and hence $P$, with both actions respected, by the same equivalence. This proves the required extension for arbitrary $A$ and $k$.",
+   "uses": [
+    "lem-sfb-linear-torsor-reduction-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+    "place": "Section 2, Claim 2, reduction recovered from the extended section."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dvr-reductive-linear-affine-quotient",
+  "lem-sfb-linear-torsor-reduction-sections",
+  "lem-sfb-nodal-surface-flat-hartogs",
+  "lem-sfb-regular-surface-vector-bundle-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-halpern-leistner-heinloth-cartan-iwahori-matsumoto.pdf",
+  "place": "Section 2, Claim 2, printed p.2; the cited PDF is WANTED locally but was read on the author-hosted site. Universal flat Hartogs spells out extension of equivariance; general DVR linearity follows Milne VIII Aside 9.4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torsor for a reductive group over a punctured regular surface extends across the missing point equivariantly",
+   "results": "OnePoint.exists_mem_SL2: For any commutative domain $ A $ that is a principal ideal ring and its fraction field $ K $, every cusp $ c $ in the one-point compactification $ \\text{OnePoint}\\, K $ can be represented as $ g \\cdot; OnePoint.smul_infty_def: For any invertible $ 2 \\times 2 $ matrix $ g $ over a division ring $ K $, the action of $ g $ on the point at infinity $ \\infty $ in the one-point compactification $ \\text{OnePoint}\\, K $ corresponds; OnePoint.smul_some_eq_ite: For any invertible 2×2 matrix $ g = \\begin{pmatrix} g_{00} & g_{01} \\\\ g_{10} & g_{11} \\end{pmatrix} $ over a field $ K $ and any element $ k \\in K $, the action of $ g $ on $ k $ in the one-point com; OnePoint.smul_infty_eq_self_iff: For any invertible $ 2 \\times 2 $ matrix $ g $ over a field $ K $, the action of $ g $ on the point at infinity $ \\infty $ in the one-point compactification of $ K $ satisfies $ g \\cdot \\infty = \\inft; OnePoint.instGLAction: The general linear group $ \\mathrm{GL}(2, K) $ acts on the one-point compactification $ \\text{OnePoint}\\, K $ of a field $ K $, induced by its natural action on the projective line over $ K $. This ac; OnePoint.smul_infty_eq_ite: For any invertible $ 2 \\times 2 $ matrix $ g $ over a field $ K $, the action of $ g $ on the point at infinity in the one-point compactification of $ K $ is given by $ g_{00}/g_{10} $ if $ g_{10} \\ne; OnePoint.map_smul: For any field homomorphism $ f : K \\to L $, invertible $ 2 \\times 2 $ matrix $ g \\in \\text{GL}(2, K) $, and point $ c \\in \\text{OnePoint}(K) $, the induced map on one-point compactifications satisfies; cusps_subMulAction: For a subgroup $\\mathcal{G}$ of $\\mathrm{GL}(2, \\mathbb{R})$, this defines the submultiplicative action where the carrier set consists of all cusps (points in $\\text{OnePoint}\\, \\mathbb{R}$ fixed by p",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Torsor\"",
+   "results": "AddTorsor: An `AddTorsor G P` gives a structure to the nonempty type `P`,\nacted on by an `AddGroup G` with a transitive and free action given\nby the `+ᵥ` operation and a corresponding subtraction given by the\n`-; Torsor: A `Torsor G P` gives a structure to the nonempty type `P`,\nacted on by a `Group G` with a transitive and free action given\nby the `•` operation and a corresponding division given by the\n`/ₛ` operation; addGroupIsAddTorsor: **Alias** of `AddGroup.instAddTorsor`.\n\n---\n\nAn `AddGroup G` is a torsor for itself.; AddGroup.instAddTorsor: An `AddGroup G` is a torsor for itself.; Group.instTorsor: A `Group G` is a torsor for itself.; AddTorsor.nonempty:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : AddGroup G} [self : AddTorsor G P] : Nonempty P; Torsor.nonempty:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : Group G} [self : Torsor G P] : Nonempty P; AddTorsor.toVSub:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : AddGroup G} [self : AddTorsor G P] : VSub G P; Torsor.toSDiv:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : Group G} [self : Torsor G P] : SDiv G P; AddTorsor.subsingleton_iff:  (G : Type u_1) (P : Type u_2) [AddGroup G] [AddTorsor G P] : Subsingleton G ↔ Subsingleton P; Torsor.subsingleton_iff:  (G : Type u_1) (P : Type u_2) [Group G] [Torsor G P] : Subsingleton G ↔ Subsingleton P; AddTorsor.toAddAction:  {G : outParam (Type u_1)} {P : Type u_2} {inst✝ : AddGroup G} [self : AddTorsor G P] : AddAction G P",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|equivariant.*torsor|torsor.*extend",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match: No declaration for this group-scheme assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of principal bundles across codimension two on a regular two dimensional scheme",
+   "results": "Trivialization.codExtend_apply: For a fiber bundle with base space $B$, fiber $F$, and total space $Z$ equipped with a projection map $\\mathrm{proj}: Z \\to B$, given a non-empty open subset $s \\subseteq B$ and a trivialization $e$ o; Trivialization.codExtend'_apply: For an open set $s \\subseteq B$, projection map $\\pi: Z \\to s$, and trivialization $e$ of the fiber bundle, applying the codomain-extended trivialization $\\mathrm{codExtend}'(s, e)$ to any $z \\in Z$ y; Trivialization.codExtend: Given an open non-empty subset $ s $ of a topological space $ B $, a projection map $ Z \to s $, and a trivialization $ e $ of this projection, this constructs a trivialization of the composition $ Z \t; AlgebraicGeometry.exists_lift_of_germInjective: Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\phi: A \\to \\mathcal{F}_x$, $\\phi_{RA}: R \\to A$, and $\\phi_{RX}: R \\to \\Gamma(U, \\mathcal{F})$; AlgebraicGeometry.spread_out_of_isGermInjective': Let $X$ and $Y$ be schemes with $s_X: X \\to S$ and $s_Y: Y \\to S$ morphisms locally of finite type. For a point $x \\in X$ where the germ map at $x$ is injective, and a morphism $\\phi: \\operatorname{Sp; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t': For a sheaf $ F $ on the category of schemes with the Zariski topology and a family of open immersions $ f_i : \text{Hom}(-, X_i) \to F $, the $ t' $ morphism in the gluing data for indices $ i,j,k $ is; AlgebraicGeometry.Scheme.Cover.hom_ext: Given an open cover $\\mathcal{U}$ of a scheme $X$ and two morphisms $f_1, f_2: X \\to Y$ between schemes, if the compositions $\\mathcal{U}.f(x) \\circ f_1$ and $\\mathcal{U}.f(x) \\circ f_2$ are equal for; AlgebraicGeometry.Scheme.OpenCover.ext_elem: Let $X$ be a scheme, $U$ an open subset of $X$, and $\\mathcal{U}$ an open cover of $X$. For any two sections $f, g$ of the structure sheaf over $U$, if the induced morphisms $\\mathcal{U}.f(i)$ agree o",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reductive principal bundle extends over Spec R s t modulo st minus uniformizer",
+   "results": "AlgebraicGeometry.StructureSheaf.to_basicOpen_epi: For any commutative ring $R$ and any element $r \\in R$, the canonical ring homomorphism from $R$ to the ring of sections of the structure sheaf on $\\operatorname{Spec}(R)$ over the basic open set $D(r; AlgebraicGeometry.affine_isReduced_iff: For a commutative ring $ R $, the affine scheme $ \\operatorname{Spec}(R) $ is reduced (i.e., all its local rings have no nonzero nilpotent elements) if and only if the ring $ R $ itself is reduced (i.; AlgebraicGeometry.structureSheafInType: The sheaf of types on the prime spectrum $\\operatorname{Spec}(R)$ of a commutative ring $R$, constructed by sheafifying the local predicate that declares elements to be fractions $r/s$ with $r,s \\in R; Algebra.smoothLocus: The set of prime ideals $\\mathfrak{p} \\in \\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\mathfrak{p}}$ satisfies ; AlgebraicGeometry.StructureSheaf.toOpen_Γgerm_apply: For any prime ideal $\\mathfrak{p} \\in \\operatorname{Spec}(R)$ and element $f \\in R$, the germ at $\\mathfrak{p}$ of the global section corresponding to $f$ (via the canonical map $R \\to \\mathcal{O}(\\op; AlgebraicGeometry.Spec.locallyRingedSpaceObj: For a commutative ring $ R $, this constructs the locally ringed space $ \\operatorname{Spec}(R) $ by equipping the prime spectrum with the Zariski topology and the structure sheaf $ \\mathcal{O}_{\\oper; ModuleCat.Tilde.stalkIso_hom: For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\widetilde{M} $ at the point corresponding to $ \\mathfrak{p} $ is isomorphic ; isReduced_localizationPreserves: If $ R $ is a reduced ring, then the localization of $ R $ is also a reduced ring. In other words, the property of being reduced is preserved under localization.",
+   "date": "2026-10-24",
+   "verdict": "no match: Only general algebraic or topological torsors, ring lifting, or unrelated geometric declarations; none states this equivariant group-scheme result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-dvr-cocharacter-cartan",
+  "date": "2026-10-24",
+  "group": "Q25"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions.",
+   "via": [
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+  "worker": "stage1",
+  "summary": "Verified Claim 2 and its generality without completeness or splitness. Split the proof into linear embedding/affine quotient, vector-bundle extension, unique extension of the action and quotient section, and recovery of the reduction. Added four statement-only inputs; checked their statements and Mathlib searches. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. The four steps realize the reductive torsor extension supporting the cocharacter Cartan prerequisite; the upstream blueprint ancestor chain is already broken (ancestor command returns None), so from.node and via are retained as computed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-308759986",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-308759986 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited definition. Source check: Alper–Halpern-Leistner–Heinloth (author-hosted PDF), Section 2 Claim 2, p.2. Its proof is: embed G in GL_n; a G-torsor is the same as a GL_n-torsor plus a section of E/G; j_*V is the unique vector-bundle extension because X is regular and the origin has codimension 2; Ẽ/G is affine because G is reductive; the section extends because Γ(X,O)=Γ(X∖0,O). Neither completeness nor algebraic closure of the residue field is used there (they enter in Claim 3), so the item's generality is supported. The four steps realise this proof faithfully. Equivariance is done explicitly: the action isomorphism and its inverse extend on G_m×X along flat maps, the unit law is checked on X and the cocycle law on G_m²×X, and the extended section is equivariant by uniqueness on G_m×X. Stacks 0EBJ (lemma-reflexive-S2-extend) plus 0B3N (lemma-reflexive-over-regular-dim-2) give exactly lem-sfb-regular-surface-vector-bundle-extension. lem-sfb-nodal-surface-flat-hartogs is true: B is a regular domain of dimension 2, B = B_s ∩ B_t inside B_st, and the equalizer stays exact after flat base change, which gives the Hom and affine-section clauses with no Noetherian hypothesis on T. lem-sfb-dvr-reductive-linear-affine-quotient is true: a closed linear embedding over a DVR via a finite free subcomodule, and GL_n/H affine by Alper Cor. 9.7.7. Small cases checked: H=1, G_m, GL_n; A=Z_(p); T empty. No duplicates found: the nearest existing nodes are lem-sbc-affine-depth-two-locally-free-model (only a coherent model), lem-sfb-normal-extension-torsor-reduction (normal subgroup, over a field), Q25's lem-sfb-nodal-equivariant-torsor-rigidity and the field-only group lemmas. No new node restates the item; the nodes cite only definitions, so there is no cycle; no SGA is cited. FIX (B2/E5): the last sentence of lem-sfb-linear-torsor-reduction-sections relied on undefined notions ('linearized bundle', 'invariant section') that item steps 1, 2 and 4 use. It is replaced by a precise dictionary: a G-action on a torsor covering a and commuting with the right action is a torsor isomorphism pr^*P≅a^*P with unit and cocycle laws; under the frame equivalence this is a G-linearization pr^*V≅a^*V; under the reduction equivalence it is an equivariant E with a section σ such that φ sends pr^*σ to a^*σ. Only the statement changed; the whole node is in fixes/dag/nodes/sec-six-functors-basics/. Advisory, not changed: the item's word 'affine' has no citation (inherited from Q25). Maintainer note: blueprint.from.node is null because the ancestry chain upstream of lem-sfb-complete-dvr-cocharacter-cartan is already broken; WANTED lines for the AHLH, Milne AGS and Alper PDFs should go to literature/LIST.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ReductiveNodalEquivariantTorsorExtension",
+  "declaration": "AlgebraicGeometry.exists_reductive_nodal_equivariant_torsor_extension",
+  "declarations": [
+   "AlgebraicGeometry.exists_reductive_nodal_equivariant_torsor_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ReductiveNodalEquivariantTorsorExtension.lean",
+  "statement": "theorem exists_reductive_nodal_equivariant_torsor_extension (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (π : A) (hπ : Irreducible π) (H : Grp (Over (Spec (.of A)))) [Smooth H.X.hom] [IsAffine H.X.left] [LocallyOfFiniteType H.X.hom] [QuasiCompact H.X.hom] (hred : ∀ (k : Type u) [Field k] (b : Spec (.of k) ⟶ Spec (.of A)), ReductiveTorusCentralizer.IsReductive ((Over.pullback b).mapGrp.obj H)) (P : EquivariantRepresentedRightTorsor (NodalTorusChart.torus A) H (NodalTorusChart.openChart A π)) : ∃ Q : EquivariantRepresentedRightTorsor (NodalTorusChart.torus A) H (NodalTorusChart.chart A π), Nonempty (EquivariantRepresentedRightTorsor.RestrictionIso (NodalTorusChart.inclusion A π) P Q)",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77c135018",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Clause check passes: arbitrary DVR + irreducible π; H : Grp (Over Spec A) smooth/affine/LocallyOfFiniteType/QuasiCompact; hred = IsReductive after every field base change (equivalent to geometric-fibre reductivity); chart = landed StrictSemistableModel.nodal; action + restricted action unique-existence pinned; U = D(s)⊔D(t); EquivariantRepresentedRightTorsor with covers/commutes; conclusion ∃Q, cartesian equivariant RestrictionIso = P̃|_U≅P; statement verbatim, sorry only, docstrings ok, no extra universe/assumptions. H4: NodalTorusChart.torus duplicated landed RingGroupSchemes.multiplicative (def-sfb-split-torus-over-ring, landed 04:04 UTC, before base). FIX: fixes/NodalTorusChart.lean (import SplitTorusOverRing, abbrev torus := RingGroupSchemes.multiplicative A) + fixes/def-sfb-nodal-torus-chart.json (statement cites and stmt_deps adds def-sfb-split-torus-over-ring). nt_compile --json of fixed chart + both delivered modules: exit 0, clean."
+ }
+}

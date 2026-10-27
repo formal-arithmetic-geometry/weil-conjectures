@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-split-flag-rational-fixed-scheme",
+ "kind": "statement",
+ "title": "Rational fixed flags and scalar extension of a split Borel pair",
+ "statement": "Let $F$ be a field [def-weil-field], and let $H$ be a reductive $F$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth affine of finite type, geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after algebraic closure. Let $T\\subseteq B\\subseteq H$ with $T$ a split maximal torus [def-sfb-tori-multiplicative-type] and $B$ a split solvable Borel subgroup [def-sfb-solvable-group-structure, def-sfb-split-solvable-right-torsors]. A Borel is a smooth connected closed subgroup maximal among smooth connected solvable closed subgroups. Split solvable means that there is a finite series of smooth connected closed subgroups normal in their predecessor, with successive fppf quotients $\\mathbf G_a$ or $\\mathbf G_m$. Suppose $Q$ represents the fppf sheafification of $A\\mapsto H(A)/B(A)$ for faithfully flat finitely presented coverings of commutative $F$-algebras. For every field extension $L/F$ [def-pc-field-extension], $T_L$ is a split maximal torus of $H_L$ and $B_L$ is a split solvable Borel subgroup of $H_L$. Let $N_H(T)$ denote the subgroup scheme whose points normalize $T$ after every algebra extension, and let $W=N_H(T)/T$ be its fppf quotient. Then $W$ is a finite constant group scheme, and the map $N_H(T)(L)\\to W(L)$ is surjective for every $L/F$. Put $I=W(F)$; the map $W(F)\\to W(L)$ is a bijection. Choose $n_w\\in N_H(T)(F)$ representing each $w\\in I$. The subfunctor $Q^T$ of $Q$ whose $A$-points are those $x\\in Q(A)$ fixed by all $t\\in T(A')$ after every commutative $A$-algebra extension $A'$ is represented by the closed subscheme\n$$\\coprod_{w\\in I}\\operatorname{Spec}F\\ \\xrightarrow{\\ \\sim\\ }\\ Q^T,\\qquad w\\longmapsto n_wB.$$\nFor every $L/F$ the same points $n_{w,L}B_L$ give the entire fixed subscheme $(Q_L)^{T_L}$ as a disjoint union of reduced $L$-points. If $H=T$, then $W$ is trivial and $Q^T=Q=\\operatorname{Spec}F$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Chapter 21 standing arbitrary field, printed p.424; Proposition 21.1, p.424 (constant Weyl group and rational representatives); Summary 21.41, p.436; the fixed-scheme paragraph immediately before Proposition 21.70, p.446. Scalar-extension stability of split Borel pairs is used throughout Section 21h. The fixed-scheme assertion is scheme-theoretic, not just a statement about rational points."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sfb-tori-multiplicative-type",
+  "def-sfb-solvable-group-structure",
+  "def-sfb-split-solvable-right-torsors",
+  "def-pc-field-extension",
+  "def-sfb-field-borel-subgroup",
+  "def-sfb-split-flag-functors"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-maximal-torus-field-extension], $T_L$ is maximal for every $L/F$; the given product decomposition of $T$ base changes, so it is split. Apply [lem-sfb-split-torus-solvable-cocharacter-containment] to $V=B$, obtaining a regular $F$-cocharacter $\\lambda$ and $B\\subseteq P_\\lambda$. By [lem-sfb-reductive-cocharacter-parabolic-geometry], regularity gives $Z_\\lambda=T$ and $P_\\lambda=U_\\lambda\\rtimes T$ with $U_\\lambda$ split unipotent. Concatenate a coordinate split series of $T$ (taking preimages in $P_\\lambda$) with a split series of $U_\\lambda$; thus $P_\\lambda$ is smooth connected solvable. Maximality of $B$ forces $B=P_\\lambda$. These limit subgroups commute with field extension. The weight decomposition of the tangent representation tensors with a field extension, so the nonzero weights and regularity of $\\lambda$ are unchanged. Over an algebraic closure of any $L$, [lem-sfb-regular-cocharacter-borel-description] makes $(B_L)_{\\overline L}=P_{\\lambda_{\\overline L}}$ a Borel. To verify maximality over $L$ as maximality among smooth connected solvable closed subgroups, any smooth connected solvable $V\\supseteq B_L$ lies in some regular $P_\\mu$ by the containment input over $L$. Over $\\overline L$ the inclusion $P_\\lambda\\subseteq P_\\mu$ is an inclusion of Borels, hence equality; faithful scalar extension reflects equality of their defining ideals. Consequently $V=B_L$. The displayed split series of $P_\\lambda$ also base changes, proving the required split solvability.",
+   "uses": [
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-torus-solvable-cocharacter-containment",
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-regular-cocharacter-borel-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Chapter 21 opening, p.424; Proposition 21.29 and Theorem 21.32, pp.433-435; Theorem 13.33, pp.265-266."
+   }
+  },
+  {
+   "text": "Write $T\\simeq\\mathbf G_m^r$ for the given splitting. Apply [lem-sfb-relative-torus-centralizer-normalizer] with $S=\\operatorname{Spec}F$ and $G=H$ (smooth affine of finite type over a field, hence of finite presentation): the centralizer $C$ and the normalizer $N=N_H(T)$ are smooth closed subgroup schemes, and $N$ is covered by the open and closed subschemes $N_\\sigma$, $\\sigma\\in\\operatorname{GL}_r(\\mathbf Z)$, on which conjugation $t\\mapsto gtg^{-1}$ is the monomial automorphism $\\sigma$. Over a field distinct $\\sigma$ give distinct automorphisms, so the $N_\\sigma$ are pairwise disjoint and $N=\\coprod_\\sigma N_\\sigma$. As $N$ is of finite type over $F$, its space is Noetherian with finitely many connected components, so the set $J$ of $\\sigma$ with $N_\\sigma\\ne\\varnothing$ is finite. Conjugation by $gh$ is conjugation by $h$ followed by $g$, so $N_\\sigma N_\\tau\\subseteq N_{\\sigma\\tau}$, $N_\\sigma^{-1}=N_{\\sigma^{-1}}$, $N_1=C$, and $J$ is a subgroup of $\\operatorname{GL}_r(\\mathbf Z)$. Since $T$ is geometrically maximal (step 1), [lem-sfb-reductive-torus-self-centralizer] gives $C=T$. For $\\sigma\\in J$, $N_\\sigma$ is a nonempty open subscheme of the smooth $N$, hence smooth and surjective over $\\operatorname{Spec}F$, so faithfully flat of finite presentation; and $(d,t)\\mapsto(d,dt)$ is an isomorphism $N_\\sigma\\times_FT\\to N_\\sigma\\times_FN_\\sigma$ with inverse $(d,d')\\mapsto(d,d^{-1}d')$, because $d^{-1}d'\\in N_1=T$. Thus each $N_\\sigma$ is a right $T$-torsor. The label map $N\\to\\coprod_{\\sigma\\in J}\\operatorname{Spec}F$ is a group homomorphism, fppf locally surjective (each $N_\\sigma\\to\\operatorname{Spec}F$ is an fppf cover), and two sections with the same label differ by a unique section of $T$. Sheafifying the coset presheaf identifies $W=N/T$ with the finite constant group scheme on $J$; no scheme quotient is assumed in advance.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.1, p.424, and its definition of the Weyl group; Corollaries 12.40 and 13.10; the normalizer loci of Conrad, Reductive group schemes, Proposition 2.1.2 and Corollary B.2.7 as recorded in lem-sfb-relative-torus-centralizer-normalizer."
+   }
+  },
+  {
+   "text": "Let $L/F$. By the base-change clause of [lem-sfb-relative-torus-centralizer-normalizer], $N_L=N_{H_L}(T_L)$ with the same loci $(N_\\sigma)_L$; base change of the torsor isomorphism of step 2 makes $(N_\\sigma)_L$ a right $T_L$-torsor over $\\operatorname{Spec}L$, and $(N_\\sigma)_L\\ne\\varnothing$ exactly for $\\sigma\\in J$, as surjectivity onto the base is preserved by base change. The split torus is split solvable (its coordinate series has quotients $\\mathbf G_m$), so [lem-sfb-split-solvable-torsors-and-variety] trivializes this torsor Zariski locally. An open cover of the one-point scheme $\\operatorname{Spec}L$ has a member equal to the whole scheme. Thus $(N_\\sigma)(L)\\ne\\varnothing$, proving the surjectivity $N_H(T)(L)\\to W(L)$. Maps from the connected scheme $\\operatorname{Spec}L$ to the finite coproduct select precisely one label; hence $W(F)\\to W(L)$ is the identity on $J$, in particular bijective. Take $L=F$ and choose one point $n_w$ in each fibre. No multiplicative choice of representatives is asserted.",
+   "uses": [
+    "lem-sfb-relative-torus-centralizer-normalizer",
+    "lem-sfb-split-solvable-torsors-and-variety"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.1 proof, p.424; Proposition 16.55(c), p.344, supplies the split-torus torsor triviality (equivalently Corollary 3.47)."
+   }
+  },
+  {
+   "text": "Put $E=\\coprod_{w\\in W(F)}\\operatorname{Spec}F$, and map its $w$-component to $e_w=n_wB\\in Q(F)$. This point is fixed scheme-theoretically: for every test algebra and every $t\\in T$, $tn_wB=n_w(n_w^{-1}tn_w)B=n_wB$ because $n_w$ normalizes $T\\subseteq B$. If $n'_w$ is another lift, the torsor identity gives $n'_w=n_wt$ for $t\\in T(F)$, so its coset is the same. For any $L/F$, the quotient $Q_L$ represents the fppf quotient $H_L/B_L$: on an $L$-algebra the two coset presheaves agree, and an fppf cover by algebras over it automatically respects its $L$-structure. Likewise restricting the fixed-point condition to $L$-algebras gives exactly the $T_L$-fixed condition, since every further algebra extension is again an $L$-algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 21h, paragraph before Proposition 21.70, p.446; quotient and universal fixed-point definitions in the item."
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $K/F$. Step 1 makes $(H_K,T_K,B_K)$ a split Borel pair. Apply [lem-sfb-reductive-borel-pair-structure] to this pair to obtain its unipotent radical, positive roots and right Borel torsor. The quotient identification in step 4 and the uniqueness of the represented quotient identify $Q_K$ with the flag scheme of [lem-sfb-flag-torus-fixed-geometry]. Step 3 identifies its index $N_H(T)(K)/T(K)$ with $W(F)$, with representatives $n_{w,K}$. That node asserts that the fixed subscheme is precisely the finite disjoint union of these reduced points, on all test algebras. Thus $E_K\\to Q_K$ is a closed immersion representing the fixed functor, not merely a bijection of $K$-points. The base change $Q_K\\to Q$ is an fpqc covering: a field extension is faithfully flat, and the corresponding map of spectra is affine and surjective, as are its base changes. Apply [lem-pc-fpqc-descend-closed-immersion] to conclude that $E\\to Q$ is a closed immersion. To check that it represents all fixed points, take $x\\in Q^T(A)$. After the faithfully flat cover $A\\to A\\otimes_F K$, its restriction factors uniquely through $E_K$. The two pullbacks of this factor on the overlap agree, since their composites to $Q$ are the same and $E\\to Q$ is a monomorphism. By [lem-weil-pbc-fpqc-representable-descent], they descend uniquely to $\\operatorname{Spec}A\\to E$, whose composite is $x$ by the uniqueness part of that same descent statement. Conversely step 4 makes every point of $E$ fixed. Therefore $E\\simeq Q^T$ as functors on all commutative algebras.",
+   "uses": [
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-flag-torus-fixed-geometry",
+    "lem-pc-fpqc-descend-closed-immersion",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 21h before Proposition 21.70, p.446; algebraically closed fixed geometry uses Theorem 13.1, p.254. Descent: Stacks 02L6 (lemma-descending-property-closed-immersion) and 023Q (lemma-fpqc-universal-effective-epimorphisms), descent.tex."
+   }
+  },
+  {
+   "text": "For $L/F$, the fixed-functor identity of step 4 gives $(Q_L)^{T_L}=(Q^T)_L=E_L$. Its components are $\\operatorname{Spec}L$ and the maps are exactly $n_{w,L}B_L$; in particular they are reduced. If $H=T$, the given inclusions force $B=T$. The quotient sheaf $T/T$ is the singleton sheaf, represented by $\\operatorname{Spec}F$; the normalizer quotient is also $T/T$. Thus $W$ is trivial and $Q^T=Q=\\operatorname{Spec}F$, including rank zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 21.1 and Section 21h, pp.424,446; scalar extension and the identity coset quotient."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-maximal-torus-field-extension",
+  "lem-sfb-split-torus-solvable-cocharacter-containment",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-sfb-regular-cocharacter-borel-description",
+  "lem-sfb-relative-torus-centralizer-normalizer",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-split-solvable-torsors-and-variety",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-flag-torus-fixed-geometry",
+  "lem-pc-fpqc-descend-closed-immersion",
+  "lem-weil-pbc-fpqc-representable-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 21.1, p.424; Propositions 21.29-21.32 and Corollary 21.33, pp.433-435; Section 21h, p.446. Expanded scheme descent uses Stacks 02L6 and 023Q."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalizer.*torus|torus.*normalizer|fixed.*flag|flag.*fixed",
+   "results": "{\"t\": \"2026-10-24T04:23:03Z\", \"tool\": \"grep\", \"query\": \"normalizer.*torus|torus.*normalizer|fixed.*flag|flag.*fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.weylGroup and its reflection lemmas concern an abstract root pairing, not normalizer quotients, Borel pairs or fixed subschemes of algebraic flag schemes; the other hits concern Lie weights and abstract Galois-category decompositions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational representatives of Weyl group and torus fixed Borel subgroups over a split field",
+   "results": "{\"t\": \"2026-10-24T04:23:04Z\", \"tool\": \"leansearch\", \"query\": \"Rational representatives of Weyl group and torus fixed Borel subgroups over a split field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.weylGroupToPerm\", \"RootPairing.weylGroup_apply_root\", \"RootPairing.isSimpleModule_weylGroupRootRep_iff\", \"CoxeterSystem.simple\", \"RootPairing.weylGroup.ofIdx_smul\"], \"digest\": \"926525bf72ccf087\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.weylGroup and its reflection lemmas concern an abstract root pairing, not normalizer quotients, Borel pairs or fixed subschemes of algebraic flag schemes; the other hits concern Lie weights and abstract Galois-category decompositions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weyl\"",
+   "results": "{\"t\": \"2026-10-24T04:23:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"Weyl\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"RootPairing.reflection_mem_weylGroup\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup_toSubmonoid\", \"RootPairing.range_weylGroupToPerm\", \"RootPairing.weylGroupRootRep\", \"RootPairing.weylGroupToPerm\", \"RootPairing.weylGroupCorootRep\"], \"digest\": \"6cb6b54d224e017e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.weylGroup and its reflection lemmas concern an abstract root pairing, not normalizer quotients, Borel pairs or fixed subschemes of algebraic flag schemes; the other hits concern Lie weights and abstract Galois-category decompositions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a split reductive group the Weyl group has rational normalizer representatives and fixed points on the flag variety form a finite constant scheme",
+   "results": "{\"t\": \"2026-10-24T04:23:07Z\", \"tool\": \"leanfinder\", \"query\": \"For a split reductive group the Weyl group has rational normalizer representatives and fixed points on the flag variety form a finite constant scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.weylGroup\", \"RootPairing.weylGroup.induction\", \"RootPairing.weylGroup.ofIdx\", \"RootPairing.weylGroup.induction'\", \"RootPairing.weylGroupRootRep\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.reflection_mem_weylGroup\", \"RootPairing.range_weylGroup_weightHom\"], \"digest\": \"e5ea8ee9368532cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.weylGroup and its reflection lemmas concern an abstract root pairing, not normalizer quotients, Borel pairs or fixed subschemes of algebraic flag schemes; the other hits concern Lie weights and abstract Galois-category decompositions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme of maximal flags fixed by a split maximal torus is a finite disjoint union of rational points",
+   "results": "{\"t\": \"2026-10-24T04:24:51Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme of maximal flags fixed by a split maximal torus is a finite disjoint union of rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.EmbeddedG2.setOf_index_eq_univ\", \"LieModule.Weight.instFinite\", \"LieModule.Weight.instFintype\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"LieModule.finite_genWeightSpace_ne_bot\"], \"digest\": \"736dc83caf0a1c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootPairing.weylGroup and its reflection lemmas concern an abstract root pairing, not normalizer quotients, Borel pairs or fixed subschemes of algebraic flag schemes; the other hits concern Lie weights and abstract Galois-category decompositions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The torus fixed subscheme of the split flag variety is a finite disjoint union of rational points",
+   "results": "{\"t\": \"2026-10-24T05:02:53Z\", \"tool\": \"leanfinder\", \"query\": \"The torus fixed subscheme of the split flag variety is a finite disjoint union of rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.disjoint_opensRange_sigmaι\", \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.pointsPi_surjective_of_isAffine\"], \"digest\": \"e22b7a6096faf8e5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, abstract root pairings, or general scheme coproducts; none constructs algebraic torus transporter loci or cocharacter containment of algebraic subgroups."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-bruhat-affine-stratification",
+  "date": "2026-10-24",
+  "group": "Q145"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Brion, On Linearization of Line Bundles, Lemma 2.3 proof, printed p.118, the Pic(G/B) and root-datum paragraph, citing Iversen 1976 Proposition 5.2 and Theorem 5.3. The explicit split Schubert-boundary basis and its scalar-extension form are the geometric input unpacked here; also Milne Lemma 18.21, printed p.392, the split affine-cell argument. The statement concerns split groups over arbitrary fields, not only algebraically closed fields. Supporting geometry: the split Bruhat stratification before the boundary-divisor argument; Milne Theorems 21.73 and 21.80. Supporting input: Chapter 21 standing arbitrary field, printed p.424; Proposition 21.1, p.424 (constant Weyl group and rational representatives); Summary 21.41, p.436; the fixed-scheme paragraph immediately before Proposition 21.70, p.446. Scalar-extension stability of split Borel pairs is used throughout Section 21h. The fixed-scheme assertion is scheme-theoretic, not just a statement about rational points.",
+   "via": [
+    "lem-sfb-split-bruhat-affine-stratification",
+    "lem-sfb-split-flag-schubert-picard-lattice",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-flag-rational-fixed-scheme",
+  "worker": "stage1",
+  "summary": "Separated the regular-cocharacter containment input; derived the Weyl quotient, its constancy and rational lifts from the existing normalizer-loci node, then descended the existing algebraically closed scheme-theoretic fixed-flag theorem. No statement changes, no new Lean. (Reviewer: the transporter-loci node was dropped as a restatement of lem-sfb-relative-torus-centralizer-normalizer plus elementary consequences, now written in steps 2-3.)",
+  "blueprint": "The inherited alteration/moduli/linearization branch has blueprint.from.node=null; the exact supporting place is the final Milne 21.1/21.41/21h paragraph of blueprint.from.place. Steps 1-3 supply scalar stability and rational normalizer lifts, steps 4-6 supply the fixed scheme and scalar extension. Searched the whole imported blueprint: no corresponding Borel, torus, normalizer, cocharacter or fixed-flag node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fpqc-descend-closed-immersion",
+    "why": "General fpqc descent of a closed immersion is used to descend the rational finite fixed-flag immersion; it supplies no algebraic-group classification or replacement route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fpqc-descend-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-7ce1287ae",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-7ce1287ae (reviewer sub-agent of L); spot-checked: I read the whole split; it is mathematically sound. This is a first split (no re-split note) and the item's statement is unchanged from the base. Checked against Milne, Algebraic Groups (2017): Proposition 21.1 (p.424), Propositions 21.29/21.31, Theorem 21.32 and Corollaries 21.33/21.34 (pp.433-435), and the 21h paragraph (p.446); the report's 'containing B' should read 'containing T' source note is correct. Step 1: the maximal-torus node works in both directions for any L. The new containment node applied to V=B gives a regular λ. The parabolic-geometry node gives Z_λ=T, U_λ split, and base change, so P_λ is split solvable and B=P_λ; maximality over L is checked through P_λ ⊆ V ⊆ P_μ over L-bar. Step 5: the reductive-borel-pair and flag-torus-fixed nodes apply over K-bar for any (T,B); Q^T over K is a disjoint union of reduced points; E→Q descends as a closed immersion (02L6), and points factor through it by 023Q, with the cocycle condition coming from E→Q being a monomorphism. Steps 4 and 6 are elementary and correct, including the case H=T. The new containment node is true (proved via Milne 21.32/21.33 over k-bar, then descent) and is not a duplicate; I tested it on G=T and on GL_2. One fault, C5: the new transporter-loci node restates the existing lem-sfb-relative-torus-centralizer-normalizer (same unit; gives smooth C and N, open-closed N_σ covering N, and base change), plus a few elementary clauses (finite J, labels multiply, N_1=C, torsor). Fixed: node dropped; steps 2-3 now cite the existing node with the elementary derivations written out; proof_deps and split_report updated; no other file cites the dropped node and no cycle results. Batch-5 flags are accepted: each listed trf node is generic (02W5 descent datum, 021O, 02VL, 022C, split torus smooth projection), as are the 10 generic trf nodes the replacement citation adds; none is a trace-formula or Poincaré-duality step. The declared tool use of lem-pc-fpqc-descend-closed-immersion is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitFlagRationalFixedScheme",
+  "declaration": "AlgebraicGeometry.SplitFlag.split_flag_rational_fixed_scheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitFlagRationalFixedScheme.lean",
+  "statement": "theorem split_flag_rational_fixed_scheme {F : Type u} [Field F] (H T B : Grp (Over (Spec (.of F)))) (iT : T ⟶ H) (iB : B ⟶ H) (jB : T ⟶ B) (hTB : jB ≫ iB = iT) (hH : ReductiveTorusCentralizer.IsReductive H) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hTs : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (hB : IsFieldBorel iB) (hBs : IsSplitSolvable B) (Q : Over (Spec (.of F))) (π : H.X ⟶ Q) (hQ : IsCosetQuotient iB π) : (∀ (L : Type u) [Field L] [Algebra F L], ReductiveTorusCentralizer.IsMaximalTorus ((MultiplicativeType.baseChange (K := L)).map iT) ∧ (∃ r : ℕ, Nonempty ((MultiplicativeType.baseChange (K := L)).obj T ≅ MultiplicativeType.splitTorus L r)) ∧ IsFieldBorel ((MultiplicativeType.baseChange (K := L)).map iB) ∧ IsSplitSolvable ((MultiplicativeType.baseChange (K := L)).obj B)) ∧ ∃ (N W : Grp (Over (Spec (.of F)))) (iN : N ⟶ H) (j : T ⟶ N) (p : N ⟶ W), Mono iN.hom.hom ∧ j ≫ iN = iT ∧ (∀ (A : Type u) [CommRing A] [Algebra F A] (g : (algSpec (.of F)).obj (.op (CommAlgCat.of F A)) ⟶ H.X), Normalizes iT g ↔ ∃ n : (algSpec (.of F)).obj (.op (CommAlgCat.of F A)) ⟶ N.X, n ≫ iN.hom.hom = g) ∧ SolvableGroupStructure.IsFppfQuotient j.hom.hom p ∧ Finite (𝟙_ (Over (Spec (.of F))) ⟶ W.X) ∧ IsIso (Sigma.desc (fun w : 𝟙_ (Over (Spec (.of F))) ⟶ W.X ↦ w)) ∧ (∀ (L : Type u) [Field L] [Algebra F L], Function.Surjective (fun n : 𝟙_ (Over (Spec (.of L))) ⟶ ((MultiplicativeType.baseChange (K := L)).obj N).X ↦ n ≫ ((MultiplicativeType.baseChange (K := L)).map p).hom.hom) ∧ Function.Bijective (fun w : 𝟙_ (Over (Spec (.of F))) ⟶ W.X ↦ extendPoint (L := L) w)) ∧ ∀ n : (𝟙_ (Over (Spec (.of F))) ⟶ W.X) → (𝟙_ (Over (Spec (.of F))) ⟶ N.X), (∀ w, n w ≫ p.hom.hom = w) → RepresentsFixed iT π (Sigma.desc (fun w ↦ n w ≫ iN.hom.hom ≫ π)) ∧ (∀ (L : Type u) [Field L] [Algebra F L], RepresentsFixed ((MultiplicativeType.baseChange (K := L)).map iT) ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap F L)))).map π) (Sigma.desc (fun w ↦ extendPoint (L := L) (n w ≫ iN.hom.hom ≫ π)))) ∧ (IsIso iT → Nonempty (W ≅ Grp.trivial _) ∧ Nonempty (Q ≅ 𝟙_ (Over (Spec (.of F)))) ∧ IsIso (Sigma.desc (fun w ↦ n w ≫ iN.hom.hom ≫ π)))",
+  "branch": "sheaf-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reviewer FIX (stage 2): the uncited def-sc-gm-ga wrapper StandardGroupSchemes.affine/map is inlined as its Mathlib body (algSpec (.of F)).obj/map here and in SplitFlagFunctors; the normalizer inclusion is stated as Mono iN.hom.hom (the node's 'subgroup scheme', pinned by the A-point characterization) instead of IsClosedSubgroupScheme, whose owner def-sc-group-scheme-subgroup is not an item stmt_dep and whose closedness the node does not assert. Statement otherwise unchanged.",
+  "fixed_by": "NT-stage2-cc-4775ea586"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4775ea586",
+  "group": "Q95",
+  "result": "fix",
+  "note": "Item statement matches node clause by clause; no extra hypotheses; edge cases covered (rank 0, H=T, nonreduced test algebras, every characteristic). New nodes def-sfb-field-borel-subgroup (IsFieldBorel; IsBorelGroupScheme needs IsAlgClosed) and def-sfb-split-flag-functors (IsCosetQuotient as fppf-sheafification universal property, Normalizes, IsFixed, RepresentsFixed, extendPoint) are real definitions, not duplicates, fields correct. FIX: (1) StandardGroupSchemes.affine/map (owner def-sc-gm-ga, uncited in item and new node) inlined as algSpec obj/map in the item and SplitFlagFunctors, adding Mathlib.AlgebraicGeometry.Group.Affine and dropping the now-unused ToriMultiplicativeType import; (2) item clause IsClosedSubgroupScheme iN (owner def-sc-group-scheme-subgroup uncited; node does not assert closedness) replaced by Mono iN.hom.hom, which with the point characterization pins N. Item lean-record.json carries the verbatim new statement and a note. nt_compile --json on FieldBorel plus both fixed modules: about 15.6 s each, EXIT 0, no errors or warnings."
+ }
+}

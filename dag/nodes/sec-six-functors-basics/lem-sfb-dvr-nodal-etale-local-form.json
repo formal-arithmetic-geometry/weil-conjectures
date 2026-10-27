@@ -1,0 +1,273 @@
+{
+ "id": "lem-sfb-dvr-nodal-etale-local-form",
+ "kind": "statement",
+ "title": "Etale local equations of nodal curves over a DVR",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $k$ its residue field, and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $f:X\\to S$ be flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. Suppose every nonempty geometric fibre is reduced of pure dimension one, and each nonsmooth closed geometric fibre point over an algebraically closed field $\\Omega$ has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-geometric-fibre, def-pc-reduced-scheme, def-weil-pure-dimension, def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. For every point $x\\in X_k$ there are an etale extension of DVRs $R\\hookrightarrow R'$, a scheme $U$, a point $x'\\in U$, and etale morphisms $p:U\\to X$ and $q:U\\to\\operatorname{Spec}A$, compatible with the structural maps to $S$, with $p(x')=x$, where\n$$ A=R'[u,v]/(uv)\\quad\\text{or}\\quad A=R'[u,v]/(uv-\\pi'^n),\\qquad n\\geq0,$$\nand $\\pi'$ is a uniformizer of $R'$. The map $U\\to\\operatorname{Spec}R'$ is the composite through $q$, and $\\operatorname{Spec}R'\\to S$ is etale [def-weil-etale-morphism]. Polynomial rings are [def-weil-polynomial-ring]. No properness, connectedness, excellence or completeness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, statement; nodal hypotheses expanded using curves.tex Tag 0C5A."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-pure-dimension",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-etale-morphism",
+  "def-weil-polynomial-ring",
+  "def-sfb-nodal-geometric-fibre-local-rings",
+  "def-trf-strict-semistable-curve"
+ ],
+ "proof": [
+  {
+   "text": "First check the geometric-fibre hypothesis needed for [lem-trf-nodal-family-etale-local-model]. Local finite presentation gives finite-presentation affine charts over $R$ (a finite algebra presentation in each chart). A DVR is Noetherian by [def-sc-discrete-valuation-ring], and those charts, and their affine geometric fibres over $\\Omega$, are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. A nonclosed point of a reduced pure one-dimensional geometric fibre is a generic point of an irreducible component: any proper specialization chain has length at most one. On a finite-presentation affine geometric-fibre chart $C\\to\\operatorname{Spec}\\Omega$, all further geometric fibres are reduced by the original hypotheses, and flatness is automatic over a field. Thus [lem-trf-generic-fibre-points-smooth] says that these generic points are smooth. Consequently every nonsmooth geometric-fibre point is closed and has exactly the completed local ring required in the cited nodal-model statement. This checks its condition at all points, rather than just at the closed points specified in our hypotheses.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-generic-fibre-points-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0C59/0C5A, lemma-nodal-family and definition-nodal-family; varieties.tex Tag 056V, lemma-geometrically-reduced-dense-smooth-open"
+   }
+  },
+  {
+   "text": "Suppose first that $f$ is smooth at $x$. On the smooth locus the fibre dimension at $x$ is $1$: compute it after an algebraic closure of the residue field using [lem-sc-fibre-dimension-after-base-change], where the fibre is a pure one-dimensional curve. Equivalently use the equidimensional-fibre formulation of relative dimension in [def-sbc-smooth-morphisms]. The locally constant dimension function of [sbc-lem-smooth-relative-dimension-locally-constant] allows a smooth neighbourhood of $x$ of pure relative dimension $1$. Apply [lem-sc-standard-smooth-local-relative-dimension] with $d=1$ and then [lem-sc-standard-smooth-etale-polynomial-chart] to obtain an affine open $T\\subset X$ containing $x$ and an etale $S$-map $e:T\\to\\operatorname{Spec}R[t]$. The base affine neighbourhood supplied by the first lemma contains the closed point of $\\operatorname{Spec}R$, hence equals $S$: any open containing the closed point of a local spectrum contains every prime. The composite to $S$ is $f|_T$, by the composite identity in the polynomial-chart lemma.",
+   "uses": [
+    "lem-sc-fibre-dimension-after-base-change",
+    "def-sbc-smooth-morphisms",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-sc-standard-smooth-local-relative-dimension",
+    "lem-sc-standard-smooth-etale-polynomial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, smooth case; morphisms.tex Tags 02FY, 02G1, 054L (lemma-smooth-etale-over-affine-space)"
+   }
+  },
+  {
+   "text": "In the residue field of $e(x)$, either $t$ is nonzero, or $t=0$ and $t+1$ is nonzero. In the latter case replace $t$ by $t+1$ (an $R$-coordinate automorphism, inverse $t\\mapsto t-1$). Restrict $T$ to $U=e^{-1}(D(t))$; this is an open neighbourhood of $x$ and the restricted map $U\\to D(t)$ is the base change of $e$, hence etale by [lem-weil-pbc-etale-base-change-finite-limits]. The inclusion $p:U\\hookrightarrow X$ is etale by [lem-weil-pbc-etale-composition-cancellation](1). The explicit ring isomorphism $R[u,v]/(uv-1)\\cong R[t,t^{-1}]$, $u\\mapsto t$, $v\\mapsto t^{-1}$, with inverse $t\\mapsto u$, identifies $D(t)$ with the desired model. Take $R\\prime=R$, $n=0$, and $x\\prime=x$ viewed in $U$. This includes generic points of the special fibre and all residue characteristics.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, smooth case and the identification D(u)=Spec R[u,v]/(uv-1)"
+   }
+  },
+  {
+   "text": "Now suppose $f$ is not smooth at $x$. Step 1 checks precisely the geometric hypotheses of [lem-trf-nodal-family-etale-local-model], and flatness and local finite presentation are assumptions. Apply that node to obtain $V\\to S$, a function $h$ on $V$, etale maps $U\\to X$ and $U\\to W=\\operatorname{Spec}_V\\mathcal O_V[u,v]/(uv-h)$ over $S$, and $x\\prime\\in U$ over $x$. Put $v$ equal to the image of $x\\prime$ in $V$; its image in $S$ is the closed point since $x\\in X_k$. Choose an affine open $V_0=\\operatorname{Spec}B\\subset V$ containing $v$, and denote its prime by $\\mathfrak q$. Its structural map to $S$ is etale by [lem-weil-pbc-etale-composition-cancellation](1),(2), and $\\mathfrak q$ contracts to $\\mathfrak m_R$. Apply [lem-sfb-etale-dvr-principal-neighbourhood] to find $b\\notin\\mathfrak q$ for which $V_1=D(b)=\\operatorname{Spec}R\\prime$, $R\\prime=B[1/b]$, is a DVR with injective local etale structural map from $R$.",
+   "uses": [
+    "lem-trf-nodal-family-etale-local-model",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-etale-dvr-principal-neighbourhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, singular case, second and third proof paragraphs; curves.tex Tag 0CBY, lemma-etale-local-structure-nodal-family"
+   }
+  },
+  {
+   "text": "Replace $U$ by $U_1=U\\times_VV_1$ and $W$ by $W_1=W\\times_VV_1$. Because $v\\in V_1$, the chosen $x\\prime$ is still a point of $U_1$. The map $U_1\\to U$ is an open immersion; composing with $U\\to X$ remains etale by [lem-weil-pbc-etale-composition-cancellation](1),(2). The map $U_1\\to W_1$ is the base change of $U\\to W$ and is etale by [lem-weil-pbc-etale-base-change-finite-limits](1). If $h\\prime$ denotes the restriction of $h$ to $V_1$, then $W_1=\\operatorname{Spec}(R\\prime[u,v]/(uv-h\\prime))$: tensor the polynomial presentation along the restriction map, which sends the relation $uv-h$ to $uv-h\\prime$. Every triangle to $S$ still commutes, since both maps were restricted along the same map $V_1\\to V$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-base-change-finite-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, restriction to Spec R′ and fourth proof paragraph"
+   }
+  },
+  {
+   "text": "Choose a uniformizer $\\pi\\prime$ of the DVR $R\\prime$. If $h\\prime=0$, the displayed ring in step 5 is already $R\\prime[u,v]/(uv)$, so take this first model. If $h\\prime\\ne0$, [lem-weil-pbc-dvr-unit-times-uniformizer-power] gives $h\\prime=\\epsilon(\\pi\\prime)^n$ with $\\epsilon\\in(R\\prime)^\\times$ and $n\\ge0$; its hypotheses hold because a DVR is a Noetherian local domain with a nonzero principal maximal ideal, as recorded in [def-sc-discrete-valuation-ring]. Normalize the coordinates by $u_0=\\epsilon^{-1}u$, $v_0=v$. More explicitly the $R\\prime$-algebra map\n$$R\\prime[u_0,v_0]/(u_0v_0-(\\pi\\prime)^n)\\longrightarrow R\\prime[u,v]/(uv-h\\prime),\\quad u_0\\longmapsto\\epsilon^{-1}u,\\ v_0\\longmapsto v$$\nis well-defined because $\\epsilon^{-1}uv=(\\pi\\prime)^n$, and its inverse sends $u\\mapsto\\epsilon u_0$, $v\\mapsto v_0$. Composing the map of step 5 with the resulting $R\\prime$-scheme isomorphism gives $q$ to the second model; local finite presentation, flatness and unramifiedness defining etaleness [def-weil-etale-morphism] are preserved under this identification of the target. The structural map $U_1\\to\\operatorname{Spec}R\\prime$ is unchanged by this $R\\prime$-isomorphism. Thus $p,q,x\\prime,R\\prime$ satisfy every clause. The zero parameter covers persistent nodes and $n=0$ was already allowed in the smooth case.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, final paragraph, with corrected coordinate u_0=epsilon^{-1}u; algebra.tex Tag 00PD, lemma-characterize-dvr"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-etale-morphism",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-standard-smooth-etale-polynomial-chart",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-sfb-etale-dvr-principal-neighbourhood",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sbc-lem-smooth-relative-dimension-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/models.tex",
+  "place": "Tag 0CDD, lemma-etale-local-at-worst-nodal, proof from the general nodal-family chart Tag 0CBY, affine DVR shrinking Tag 0AP2, and the smooth chart Tag 054L; the final coordinate scaling is corrected explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nodal curve over a discrete valuation ring is etale locally uv equals zero or a power of a uniformizer",
+   "results": "{\"t\": \"2026-10-22T04:46:17Z\", \"tool\": \"leanfinder\", \"query\": \"A nodal curve over a discrete valuation ring is etale locally uv equals zero or a power of a uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"StandardEtalePair\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"Algebra.IsStandardEtale\", \"StandardEtalePair.hasMap_X\", \"PowerSeries.IsWeierstrassDivisor.of_map_ne_zero\", \"StandardEtalePair.cond\", \"StandardEtalePresentation.P\"], \"digest\": \"b51d95777be778e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and Weierstrass reduction do not give nodal-family local equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T04:46:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and Weierstrass reduction do not give nodal-family local equations."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|atWorstNodal|at_worst_nodal",
+   "results": "{\"t\": \"2026-10-22T04:46:18Z\", \"tool\": \"grep\", \"query\": \"nodal|atWorstNodal|at_worst_nodal\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and Weierstrass reduction do not give nodal-family local equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local equations for a nodal family of curves over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-22T04:46:18Z\", \"tool\": \"leansearch\", \"query\": \"Local equations for a nodal family of curves over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.toIsLocalRing\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"IsLocalRing.finrank_CotangentSpace_eq_one_iff\"], \"digest\": \"07db98c269e4a7be\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and Weierstrass reduction do not give nodal-family local equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every node in a flat finitely presented curve over a trait has etale local equation xy=0 or xy=pi^n",
+   "results": "{\"t\": \"2026-10-22T04:46:53Z\", \"tool\": \"leanfinder\", \"query\": \"Every node in a flat finitely presented curve over a trait has etale local equation xy=0 or xy=pi^n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.etaleLocus\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"39f0ecfbad31dcd4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: standard etale presentations and Weierstrass reduction do not give nodal-family local equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-persistent-node-normalization",
+  "date": "2026-10-22",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. special-fibre normal forms.",
+   "via": [
+    "lem-sfb-persistent-node-normalization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-dvr-nodal-etale-local-form",
+  "worker": "stage1",
+  "summary": "Followed 0CDD using the existing general 0CBY nodal chart and the existing standard-smooth polynomial chart. Added one general principal-DVR-neighbourhood lemma, retaining the closed-fibre hypothesis. Checked the closed-geometric-point convention and corrected the inverse unit in the final coordinate change. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2; inherited common-nodal-model prerequisite: persistent-node normalization over a trait. special-fibre normal forms. Realizes the special-fibre local normal form: smooth locus n=0, singular chart uv=h, etale DVR shrinking, and unit normalization. The ancestor command returns None for this inherited new-target chain; its existing null anchor is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic geometric or affine-algebra tool used exactly through its statement in the 0CDD local-chart argument; this unit has no corresponding general-purpose lemma."
+   },
+   {
+    "node": "lem-sc-standard-smooth-local-relative-dimension",
+    "why": "Generic geometric or affine-algebra tool used exactly through its statement in the 0CDD local-chart argument; this unit has no corresponding general-purpose lemma."
+   },
+   {
+    "node": "lem-trf-generic-fibre-points-smooth",
+    "why": "Generic geometric or affine-algebra tool used exactly through its statement in the 0CDD local-chart argument; this unit has no corresponding general-purpose lemma."
+   },
+   {
+    "node": "lem-trf-nodal-family-etale-local-model",
+    "why": "Generic geometric or affine-algebra tool used exactly through its statement in the 0CDD local-chart argument; this unit has no corresponding general-purpose lemma."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Generic geometric or affine-algebra tool used exactly through its statement in the 0CDD local-chart argument; this unit has no corresponding general-purpose lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-sc-standard-smooth-local-relative-dimension",
+  "lem-trf-generic-fibre-points-smooth",
+  "lem-trf-nodal-family-etale-local-model",
+  "sbc-lem-smooth-relative-dimension-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-9422b74eb",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-9422b74eb (reviewer sub-agent of L); spot-checked: I read the item's six steps against Stacks models.tex 0CDD, both branches. Step 1 shows that every non-closed point of a geometric fibre is a generic point and is smooth by lem-trf-generic-fibre-points-smooth, so every hypothesis of the 0CBY nodal chart holds. Smooth branch: the étale chart to R[t] has base open equal to S because it contains the closed point; restricting to D(t) or D(t+1) gives the n=0 model with R'=R. Singular branch: the 0CBY chart, an affine V0 étale over S, then the new principal-neighbourhood lemma, then restriction to D(b), which keeps x' and the étale maps. In the h'=επ'^n normalisation I checked the maps both ways (u0↦ε⁻¹u, inverse u↦εu0); the case h'=0 is handled. The new node lem-sfb-etale-dvr-principal-neighbourhood is true: Spec B is finite since both fibres are finite étale over fields, B_q is a DVR by 0AP2 and going-down, prime avoidance gives D(b) = the primes contained in q, so B[1/b]=B_q, and the flat local map from R is injective. Tested on R, R×R, R×Frac R and Frac R (where the hypothesis fails). It is not a duplicate of lem-sbc-etale-trait-stalk, lem-sbc-etale-trait-section-lift or lem-sbc-trait-etale-extension, and it does not restate a clause of the item. Batch 5: I recomputed the closure from both targets with and without the item's proof. lem-trf-nodal-family-etale-local-model (0CBY) and lem-trf-generic-fibre-points-smooth (056V) are both already in it without the item, are generic geometry, and reach no thm-trf node or nt-assume leaf. The only node the item's proof adds is the new sfb node, so both flags are accepted. No SGA is used. Maintainer note: the existing node lem-sfb-trait-nodal-etale-dvr-model (NU, unsplit) restates this item's 0CDD content plus the smooth-generic n≥1 refinement; the two existing nodes should be merged. No fixes."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DvrNodalEtaleLocalForm",
+  "declaration": "AlgebraicGeometry.exists_dvr_nodal_etale_local_form",
+  "file": "lean/Sheaf/AlgebraicGeometry/DvrNodalEtaleLocalForm.lean",
+  "statement": "theorem exists_dvr_nodal_etale_local_form (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] {X : Scheme.{u}} (f : X ⟶ Spec R) [Flat f] [LocallyOfFinitePresentation f] (hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec R), IsReduced (pullback (C := Scheme) f g) ∧ (pullback (C := Scheme) f g).IsPureDimension 1 ∧ ∀ z : pullback (C := Scheme) f g, IsClosed ({z} : Set (pullback (C := Scheme) f g)) → ¬ ((NodalFiber.projection f Ω g).stalkMap z).hom.FormallySmooth → Nonempty (NodalFiber.completedLocalRing z ≃+* NodalFiber.powerSeriesQuotient Ω)) (x : X) (hx : f x = IsLocalRing.closedPoint R) : ∃ (R' : CommRingCat.{u}) (_ : IsDomain R') (_ : IsDiscreteValuationRing R') (φ : R →+* R') (π a : R') (U : Scheme.{u}) (p : U ⟶ X) (q : U ⟶ (StrictSemistableModel.nodal a).scheme) (x' : U), Function.Injective φ ∧ IsLocalHom φ ∧ Etale (Spec.map (CommRingCat.ofHom φ)) ∧ Irreducible π ∧ (a = 0 ∨ ∃ n : ℕ, a = π ^ n) ∧ Etale p ∧ Etale q ∧ p x' = x ∧ p ≫ f = q ≫ (StrictSemistableModel.nodal a).baseMap ≫ Spec.map (CommRingCat.ofHom φ)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-999ebe108",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Re-delivery repairs the H2/§1 RETURN of 99f0d455: new def node def-sfb-nodal-geometric-fibre-local-rings (module Sheaf.AlgebraicGeometry.NodalGeometricFibreLocalRings, fresh NodalFiber.* names, bodies identical to the theorem-owned helpers: AdicCompletion of stalk at maximal ideal, MvPowerSeries (Fin 2) Ω ⧸ (X0*X1), pullback.snd) replaces lem-trf-nodal-family-etale-local-model in stmt_deps; theorem module kept as plain proof-dep import. Item diff vs live: only lean + stmt_deps gaining the new node and landed def-trf-strict-semistable-curve. Clause check vs 0CDD/0C5A: DVR, Flat/LFP, reduced + IsPureDimension 1 fibres over Ω : Type u (vacuous on empty), closed non-formally-smooth stalk points (= Mathlib smoothLocus) with completion ≃+* Ω[[u,v]]/(uv), x over closed point; R' DVR with φ injective/local/étale, Irreducible π, a=0 ∨ a=π^n via StrictSemistableModel.nodal, étale p,q, p x'=x, triangle via canonical baseMap. Edge cases fine. New node has the §5(A) fields, 4 searches, real bodies, docstrings; no clash. Statements verbatim, branch sheaf-dag, sorry only. No compile (no file changed). Notes: theorem module keeps duplicate helpers (refactor to NodalFiber); NU lem-sfb-trait-nodal-etale-dvr-model overlap."
+ }
+}

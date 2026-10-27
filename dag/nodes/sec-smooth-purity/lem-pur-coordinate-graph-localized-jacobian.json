@@ -1,0 +1,287 @@
+{
+ "id": "lem-pur-coordinate-graph-localized-jacobian",
+ "kind": "statement",
+ "title": "Localized graph Jacobian from a prescribed cotangent-fibre basis",
+ "statement": "Let $k$ be a field [def-weil-field], $r,d\\geq0$, $n=r+d$ and $P=k[y_1,\\ldots,y_n]$ [def-weil-pbc-mv-polynomial-ring]. Fix $F_1,\\ldots,F_r\\in P$, put $A=P/(F_1,\\ldots,F_r)$ and let $a_b$ be the image of $y_b$. Assume this is a standard smooth presentation [def-weil-pbc-standard-smooth-algebra], so the image of $\\det(\\partial F_a/\\partial y_b)_{a,b\\leq r}$ is a unit. Let $\\mathfrak q\\subset A$ be prime and $K=\\kappa(\\mathfrak q)$ [def-weil-pbc-localization-at-prime]. Fix $H_1,\\ldots,H_d\\in P$ with images $h_j\\in A$ such that $dh_j\\otimes1$ is a $K$-basis (a linearly independent spanning family) of $\\Omega_{A/k}\\otimes_AK$ [def-weil-pbc-kahler-differentials, def-weil-module-base-change]. Put $R=k[T_1,\\ldots,T_d]$, acting on $A$ by $T_j\\mapsto h_j$. Let $J$ be the $n\\times n$ matrix [def-weil-matrix] whose rows are the $y$-partial derivatives of $F_1,\\ldots,F_r,H_1-T_1,\\ldots,H_d-T_d$ [def-weil-pbc-polynomial-partial-derivative]. Its entries lie in $P$. Set $\\Delta=\\det J\\in P$ [def-weil-pbc-matrix-determinant] and let $\\delta\\in A$ be its image. Then $\\delta\\notin\\mathfrak q$. More precisely, partition $J$ after its first $r$ rows and columns into the upper-left, upper-right, lower-left and lower-right blocks $B,C,D,E$, respectively and put bars on matrices reduced to $K$. The matrix $\\overline B$ is invertible; relative to the basis $da_{r+1}\\otimes1,\\ldots,da_n\\otimes1$, the coefficient rows of $dh_j\\otimes1$ form the invertible matrix $S=\\overline E-\\overline D\\overline B^{-1}\\overline C$, and $\\det\\overline J=\\det\\overline B\\det S\\ne0$. For the localization $A_\\delta$ [def-weil-ring-localization-away], the map $y_b\\mapsto a_b/1$, $t\\mapsto\\delta^{-1}$ induces an isomorphism of $R$-algebras $$R[y_1,\\ldots,y_n,t]/(F_1,\\ldots,F_r,H_1-T_1,\\ldots,H_d-T_d,\\Delta t-1)\\xrightarrow{\\sim}A_\\delta.$$ The Jacobian of these $n+1$ equations in $(y_1,\\ldots,y_n,t)$ has determinant $\\Delta^2$, with unit image $\\delta^2$ in $A_\\delta$; hence the displayed isomorphism is a square Jacobian presentation [def-exc-jacobian-presentation] for the specified $R$-algebra structure. Empty matrices have determinant $1$, including when $r=0$ or $d=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00T7 (lemma-standard-smooth), part (2) and its proof solving the differential relations; morphisms.tex Tag 02GU (lemma-etale-at-point), condition (8); explicit Schur-complement calculation and inverse-determinant presentation for the chosen graph equations."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-standard-smooth-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-module-base-change",
+  "def-weil-matrix",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-ring-localization-away",
+  "def-exc-jacobian-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-standard-smooth-kahler-basis] with base $k$, $c=r$ and the given presentation: $e_i=da_{r+i}$ ($1\\leq i\\leq d$) is an $A$-basis of $M=\\Omega_{A/k}$. Its base-changed vectors are a $K$-basis: explicitly the mutually inverse coordinate maps are $M\\otimes_AK\\to K^d$, $(\\sum_i u_i e_i)\\otimes\\lambda\\mapsto(\\overline u_i\\lambda)_i$, and $K^d\\to M\\otimes_AK$, $(\\lambda_i)_i\\mapsto\\sum_i e_i\\otimes\\lambda_i$. The first is balanced and therefore defined on the tensor; the tensor relations give both composites equal to the identity. This also proves the assertion when $d=0$.",
+   "uses": [
+    "lem-weil-pbc-standard-smooth-kahler-basis",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  },
+  {
+   "text": "The polynomial differential formula of [lem-weil-pbc-polynomial-ring-kahler-basis] remains valid after evaluation $y_b\\mapsto a_b$. Indeed the $k$-derivation $P\\to\\Omega_{A/k}$ given by $G\\mapsto d(G(a))$ induces the $P$-linear map $\\Omega_{P/k}\\to\\Omega_{A/k}$ sending $dy_b$ to $da_b$, by [def-weil-pbc-kahler-differentials]. Apply it to $F_a$ and $H_j$ and tensor with $K$. Writing $u=(da_1\\otimes1,\\ldots,da_r\\otimes1)^t$, $v=(e_1\\otimes1,\\ldots,e_d\\otimes1)^t$ and $w=(dh_1\\otimes1,\\ldots,dh_d\\otimes1)^t$, we obtain $\\overline B u+\\overline C v=0$ and $w=\\overline D u+\\overline E v$. The first right-hand side is zero because $F_a(a)=0$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-kahler-basis",
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  },
+  {
+   "text": "The determinant formula [def-weil-pbc-matrix-determinant] is a finite sum of products, so it commutes with the maps $P\\to A\\to K$. Thus $\\det\\overline B$ is the image of the unit specified by [def-weil-pbc-standard-smooth-algebra] and is a unit of $K$. For $r>0$, [lem-weil-pbc-matrix-adjugate-identity] gives the two-sided inverse $(\\det\\overline B)^{-1}\\operatorname{adj}(\\overline B)$; for $r=0$ the empty identity is its own inverse. Multiplying the first relation of Step 2 by this inverse gives $u=-\\overline B^{-1}\\overline C v$. Substitution into the second gives $w=S v$ with $S=\\overline E-\\overline D\\overline B^{-1}\\overline C$. Hence these are exactly the claimed coefficient rows.",
+   "uses": [
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-standard-smooth-algebra",
+    "lem-weil-pbc-matrix-adjugate-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  },
+  {
+   "text": "Both $v_i$ and $w_j$ are $K$-bases, the former by Step 1 and the latter by hypothesis. Write $v_i=\\sum_j Q_{ij}w_j$ using the latter basis. Substituting $w=S v$ and comparing coefficients in the $v$-basis gives $QS=I$; substituting $v=Qw$ and comparing coefficients in the $w$-basis gives $SQ=I$. Thus $S$ is invertible. If $d>0$, determinant multiplicativity in [lem-sfb-matrix-cramer-determinant-identities] gives $\\det S\\det Q=1$, so $\\det S\\ne0$. If $d=0$, its determinant is $1$ by [def-weil-pbc-matrix-determinant].",
+   "uses": [
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  },
+  {
+   "text": "Put $L=\\begin{pmatrix}I_r&0\\\\-\\overline D\\overline B^{-1}&I_d\\end{pmatrix}$. Direct block multiplication gives $L\\overline J=\\begin{pmatrix}\\overline B&\\overline C\\\\0&S\\end{pmatrix}$. By [lem-weil-pbc-block-triangular-determinant], $\\det L=1$. The same lemma applied to the transpose of the latter matrix gives $\\det(L\\overline J)=\\det\\overline B\\det S$. Here $\\det M^t=\\det M$ follows directly from [def-weil-pbc-matrix-determinant]: replace the summation permutation $\\sigma$ by $\\sigma^{-1}$, reindex the finite product, and use $\\operatorname{sgn}(\\sigma^{-1})=\\operatorname{sgn}(\\sigma)$. If $n>0$, determinant multiplicativity [lem-sfb-matrix-cramer-determinant-identities] now yields $\\det\\overline J=\\det\\overline B\\det S\\ne0$; if $n=0$, every determinant is $1$. The image of $\\delta$ in $K$ is $\\det\\overline J$, again by the finite determinant formula. If $\\delta\\in\\mathfrak q$, that image would be zero under $A\\to A_{\\mathfrak q}\\to A_{\\mathfrak q}/\\mathfrak qA_{\\mathfrak q}=K$ [def-weil-pbc-localization-at-prime]. Therefore $\\delta\\notin\\mathfrak q$.",
+   "uses": [
+    "lem-weil-pbc-block-triangular-determinant",
+    "lem-sfb-matrix-cramer-determinant-identities",
+    "def-weil-pbc-matrix-determinant",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  },
+  {
+   "text": "Let $C_0$ be the displayed quotient $R[y_1,\\ldots,y_n,t]/(F,H-T,\\Delta t-1)$. Evaluation $y_b\\mapsto a_b/1$, $t\\mapsto\\delta^{-1}$ and $T_j\\mapsto h_j/1$ kills every relation, hence gives an $R$-algebra map $f:C_0\\to A_\\delta$ by the polynomial evaluation and quotient definitions. Conversely $y_b\\mapsto[y_b]$ defines $g:A=P/(F)\\to C_0$ because $F_a([y])=0$. It is $R$-linear since $[H_j]=[T_j]$. Moreover $g(\\delta)=[\\Delta]$ is a unit with inverse $[t]$. By [lem-weil-pbc-localization-away-universal-property], $g$ extends to $\\widetilde g:A_\\delta\\to C_0$. The composite $f\\widetilde g$ fixes every $a/1$ and therefore is the identity by that same uniqueness. The other composite fixes $R$ and every $[y_b]$; it fixes $[t]$ because both $\\widetilde g(\\delta^{-1})$ and $[t]$ are inverses of $[\\Delta]$, and inverses are unique. Polynomial evaluation and surjectivity of the quotient map give $\\widetilde g f=1$. These maps are therefore the specified isomorphism of $R$-algebras.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  },
+  {
+   "text": "Take partial derivatives over $R$ in exactly the ordered variables $(y_1,\\ldots,y_n,t)$ and equations $(F_1,\\ldots,F_r,H_1-T_1,\\ldots,H_d-T_d,\\Delta t-1)$. By [def-weil-pbc-polynomial-partial-derivative] the matrix is $\\begin{pmatrix}J&0\\\\ t\\,\\partial\\Delta/\\partial y_1\\ \\cdots\\ t\\,\\partial\\Delta/\\partial y_n&\\Delta\\end{pmatrix}$: $T_j$ is a coefficient, the first $n$ equations have no $t$, and $\\Delta$ has no $t$. Apply [lem-weil-pbc-block-triangular-determinant] with block sizes $n$ and $1$: the determinant is $(\\det J)\\Delta=\\Delta^2$. Under Step 6 its image is $\\delta^2$, a unit with inverse $\\delta^{-2}$ in $A_\\delta$. There are $n+1$ equations and $n+1$ variables, so the displayed isomorphism is a square Jacobian presentation by [def-exc-jacobian-presentation]. All formulas include empty blocks; if $n=0$ the last equation is $t-1$ and its derivative is $1$.",
+   "uses": [
+    "def-weil-pbc-polynomial-partial-derivative",
+    "lem-weil-pbc-block-triangular-determinant",
+    "def-exc-jacobian-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00T7 (lemma-standard-smooth), part (2) and first proof paragraph; explicit chosen-coordinate calculation following the blueprint differential criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-standard-smooth-kahler-basis",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis",
+  "def-weil-pbc-kahler-differentials",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-standard-smooth-algebra",
+  "lem-weil-pbc-matrix-adjugate-identity",
+  "lem-sfb-matrix-cramer-determinant-identities",
+  "lem-weil-pbc-block-triangular-determinant",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-weil-pbc-polynomial-partial-derivative",
+  "def-exc-jacobian-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-regular-immersion-linearization.proof.md",
+  "place": "Second paragraph, prescribed-coordinate differential criterion; expanded using Stacks 00T7 (lemma-standard-smooth), the explicit block calculation, and inverse-determinant adjoining."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Schur|det_fromBlocks|of_basis_kaehlerDifferential|StandardEtalePresentation",
+   "results": "Mathlib/NumberTheory/NumberField/CanonicalEmbedding/Basic.lean; Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean; Mathlib/NumberTheory/FrobeniusNumber.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Coeff.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume a global differential basis or an already submersive presentation, or compute only a localization Jacobian; none gives this residue-field basis criterion for the specified graph, its Schur matrix and augmented determinant-squared presentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsStandardSmooth.of_basis_kaehlerDifferential",
+   "results": "Algebra.IsStandardSmooth.of_basis_kaehlerDifferential",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume a global differential basis or an already submersive presentation, or compute only a localization Jacobian; none gives this residue-field basis criterion for the specified graph, its Schur matrix and augmented determinant-squared presentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Graph presentation of smooth algebra chosen coordinates differential basis invertible Jacobian after localization adjoining inverse determinant",
+   "results": "Algebra.PreSubmersivePresentation.localizationAway_jacobian; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.FormallySmooth.instLocalization; Algebra.SubmersivePresentation.localizationAway; Algebra.instSmoothOfIsStandardSmooth; Algebra.FormallySmooth.of_isLocalization; RingHom.Smooth.holdsForLocalizationAway; Algebra.SubmersivePresentation.invJacobianOfHasCoeffs",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume a global differential basis or an already submersive presentation, or compute only a localization Jacobian; none gives this residue-field basis criterion for the specified graph, its Schur matrix and augmented determinant-squared presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a standard smooth algebra a prescribed differential basis at a prime makes the graph Jacobian determinant nonzero and localization has a square Jacobian presentation with determinant squared",
+   "results": "Algebra.IsStandardSmooth; Algebra.SubmersivePresentation.isStandardSmooth; Algebra.Smooth.exists_span_eq_top_isStandardSmooth; Algebra.PreSubmersivePresentation.localizationAway_jacobian; RingHom.IsStandardSmooth; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume a global differential basis or an already submersive presentation, or compute only a localization Jacobian; none gives this residue-field basis criterion for the specified graph, its Schur matrix and augmented determinant-squared presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schur complement expresses prescribed differentials in standard smooth coordinates; graph equations H minus T have Jacobian nonzero at prime and adjoining inverse determinant gives square determinant",
+   "results": "Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one; Algebra.SubmersivePresentation.jacobianRelations_spec; Algebra.PreSubmersivePresentation.localizationAway_jacobiMatrix; Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs; Algebra.SubmersivePresentation.aevalDifferentialEquiv; Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs; Algebra.SubmersivePresentation.jacobian_isUnit; Algebra.SubmersivePresentation.jacobianOfHasCoeffs",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits assume a global differential basis or an already submersive presentation, or compute only a localization Jacobian; none gives this residue-field basis criterion for the specified graph, its Schur matrix and augmented determinant-squared presentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a standard smooth algebra a basis of differentials over a residue field makes the chosen coordinate graph Jacobian determinant nonzero and adjoining its inverse gives a square presentation",
+   "results": "Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; Algebra.IsStandardSmooth; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.IsStandardSmooth.out; Algebra.SubmersivePresentation.isStandardSmooth; Algebra.SubmersivePresentation.basisDeriv; RingHom.IsStandardSmooth; Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global differential-basis criteria, already submersive presentations, or separate matrix/localization calculations; none states all clauses for the prescribed residue-field coordinate basis and its fixed graph equations"
+  },
+  {
+   "tool": "grep",
+   "query": "localizationAway_jacobian|of_basis_kaehlerDifferential|isUnit_jacobian_of_cotangentRestrict_bijective",
+   "results": "Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean; Mathlib/RingTheory/Extension/Cotangent/Free.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global differential-basis criteria, already submersive presentations, or separate matrix/localization calculations; none states all clauses for the prescribed residue-field coordinate basis and its fixed graph equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue field differential basis standard smooth algebra graph Jacobian localization inverse determinant",
+   "results": "Algebra.SubmersivePresentation.invJacobianOfHasCoeffs; Algebra.SubmersivePresentation.invJacobianOfHasCoeffs.congr_simp; Algebra.SubmersivePresentation.basisDeriv; Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs; Algebra.PreSubmersivePresentation.localizationAway_jacobian; Algebra.instSmoothOfIsStandardSmooth; Algebra.IsStandardSmooth.of_basis_kaehlerDifferential; Algebra.SubmersivePresentation.jacobian_isUnit",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global differential-basis criteria, already submersive presentations, or separate matrix/localization calculations; none states all clauses for the prescribed residue-field coordinate basis and its fixed graph equations"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.PreSubmersivePresentation.localizationAway_jacobian",
+   "results": "Algebra.PreSubmersivePresentation.localizationAway_jacobian",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global differential-basis criteria, already submersive presentations, or separate matrix/localization calculations; none states all clauses for the prescribed residue-field coordinate basis and its fixed graph equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Schur complement coefficient matrix of differentials modulo smooth equations with invertible first Jacobian block and determinant squared after adding inverse variable",
+   "results": "MvPolynomial.universalFactorizationMapPresentation_jacobiMatrix; Algebra.SubmersivePresentation.jacobianRelations_spec; Algebra.SubmersivePresentation.jacobianOfHasCoeffs; Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one; Algebra.PreSubmersivePresentation.localizationAway_jacobiMatrix; Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det; Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs; Algebra.PreSubmersivePresentation.aevalDifferential_toMatrix'_eq_mapMatrix_jacobiMatrix",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global differential-basis criteria, already submersive presentations, or separate matrix/localization calculations; none states all clauses for the prescribed residue-field coordinate basis and its fixed graph equations"
+  },
+  {
+   "tool": "grep",
+   "query": "det_fromBlocks₁₁|det_fromBlocks_one₁₁|det_fromBlocks_zero₁₂",
+   "results": "Mathlib/LinearAlgebra/Matrix/SchurComplement.lean; Mathlib/LinearAlgebra/Matrix/SchurComplement.lean; Mathlib/LinearAlgebra/Matrix/SchurComplement.lean; Mathlib/LinearAlgebra/Matrix/SchurComplement.lean; Mathlib/LinearAlgebra/Matrix/SchurComplement.lean; Mathlib/LinearAlgebra/Matrix/Determinant/Basic.lean; Mathlib/LinearAlgebra/Matrix/Charpoly/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give global differential-basis criteria, already submersive presentations, or separate matrix/localization calculations; none states all clauses for the prescribed residue-field coordinate basis and its fixed graph equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-at-point-from-differentials",
+  "date": "2026-10-22",
+  "group": "Q121"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-regular-immersion-linearization",
+   "place": "proof, second paragraph: differential criterion for the prescribed coordinate map; Schur-complement nonvanishing and inverse-determinant localization (old steps 4-5 of lem-pur-etale-at-point-from-differentials)",
+   "via": [
+    "lem-pur-etale-at-point-from-differentials"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-coordinate-graph-localized-jacobian",
+  "worker": "stage1",
+  "summary": "Q42: retained the statement; supplied seven explicit steps using existing Mathlib leaves only. Wrote the base-change coordinates, differential relations, Schur coefficient matrix and inverse, determinant elimination, the two inverse R-algebra maps, and augmented determinant. No new nodes, no Lean edits or compilation.",
+  "blueprint": "Realizes the second paragraph of lem-pur-regular-immersion-linearization.proof.md, from the chosen basis df_i,dg_j to the prescribed coordinate map being etale, specifically the graph-Jacobian algebra used by lem-pur-etale-at-point-from-differentials."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-9c0288e74",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-9c0288e74 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and the seven steps are correct; there are no new nodes and no fixes. Source checks: Stacks algebra.tex lemma-standard-smooth (00T7) part (2) and its proof (naive cotangent complex), and the blueprint lem-pur-regular-immersion-linearization proof paragraph 2, identical in latest and main-20261015. The parent lem-pur-etale-at-point-from-differentials step 2 uses exactly δ∉q and the square presentation over R with determinant Δ². Step 1: the free basis from the kahler-basis leaf, with explicit inverse fibre-coordinate maps, so no flatness of K is used. Step 2: the derivation Ω_P→Ω_A gives B̄u+C̄v=0 and w=D̄u+Ēv. Step 3: the adjugate inverse gives S=Ē−D̄B̄⁻¹C̄; signs and index convention checked. Step 4: QS=SQ=I; the Cramer node is used only for d≥1. Step 5: L is lower block-triangular with det L=1, LJ̄ is upper, and the transpose argument is proved from the permutation formula, so δ∉q. Step 6: f and g̃ are mutually inverse R-algebra maps via the cited universal properties; it is marked elementary, which I accept. Step 7: the augmented Jacobian [[J,0],[t∂Δ,Δ]] has determinant Δ². Small cases checked: r=d=0 (k[t]/(t−1)); F=y₁, H=y₂², q=(y₂−1) (δ=2a₂, C₀≅k[y₂]_{y₂}); char p with H=y^p versus y+y^p. Duplicate search (Schur, Δt−1, fibre basis, 00T7, jacobian/coordinate ids) found no duplicate; the closest are localized-conormal-basis-jacobian, smooth-fibre-localized-presentation-jacobian and coordinate-differentials-affine-chart. No SGA is used. proof_deps equals the union of the step uses. Advisory only: the statement does not cite def-weil-pbc-algebra-hom-quotient for the quotient R-algebra."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CoordinateGraphLocalizedJacobian",
+  "declaration": "Algebra.coordinateGraph_localized_jacobian",
+  "declarations": [
+   "Algebra.CoordinateGraphAlgebra",
+   "Algebra.coordinateGraphImage",
+   "Algebra.coordinateGraphJacobian",
+   "Algebra.coordinateGraphDelta",
+   "Algebra.coordinateGraphResidueJacobian",
+   "Algebra.coordinateGraphSchur",
+   "Algebra.coordinateGraphFibreDifferential",
+   "Algebra.coordinateGraphLift",
+   "Algebra.coordinateGraphRelations",
+   "Algebra.CoordinateGraphLocalization",
+   "Algebra.coordinateGraphLocalizedValues",
+   "Algebra.coordinateGraphLocalizedAlgebra",
+   "Algebra.coordinateGraphAugmentedDeterminant",
+   "Algebra.coordinateGraph_localized_jacobian"
+  ],
+  "file": "lean/Sheaf/RingTheory/CoordinateGraphLocalizedJacobian.lean",
+  "statement": "theorem coordinateGraph_localized_jacobian (F : Fin r → MvPolynomial (Fin r ⊕ Fin d) k) (H : Fin d → MvPolynomial (Fin r ⊕ Fin d) k) (hstandard : IsUnit (coordinateGraphImage F (coordinateGraphJacobian F H).toBlocks₁₁.det)) (q : Ideal (CoordinateGraphAlgebra F)) [q.IsPrime] (hind : LinearIndependent q.ResidueField (fun j => coordinateGraphFibreDifferential F q (H j))) (hspan : Submodule.span q.ResidueField (Set.range (fun j => coordinateGraphFibreDifferential F q (H j))) = ⊤) [aR : Algebra (MvPolynomial (Fin d) k) (CoordinateGraphLocalization F H)] (haR : aR = coordinateGraphLocalizedAlgebra F H) : coordinateGraphImage F (coordinateGraphDelta F H) ∉ q ∧ IsUnit (coordinateGraphResidueJacobian F H q).toBlocks₁₁ ∧ (∃ b : Module.Basis (Fin d) q.ResidueField (TensorProduct (CoordinateGraphAlgebra F) q.ResidueField (KaehlerDifferential k (CoordinateGraphAlgebra F))), (∀ i, b i = coordinateGraphFibreDifferential F q (MvPolynomial.X (Sum.inr i))) ∧ (∀ j i, b.repr (coordinateGraphFibreDifferential F q (H j)) i = coordinateGraphSchur F H q j i)) ∧ IsUnit (coordinateGraphSchur F H q) ∧ (coordinateGraphResidueJacobian F H q).det = (coordinateGraphResidueJacobian F H q).toBlocks₁₁.det * (coordinateGraphSchur F H q).det ∧ (coordinateGraphResidueJacobian F H q).det ≠ 0 ∧ (∃ p : SquareJacobianPresentation (MvPolynomial (Fin d) k) (CoordinateGraphLocalization F H) ((Fin r ⊕ Fin d) ⊕ Unit), p.val = coordinateGraphLocalizedValues F H ∧ p.relation = coordinateGraphRelations F H) ∧ (∃ e : (MvPolynomial ((Fin r ⊕ Fin d) ⊕ Unit) (MvPolynomial (Fin d) k) ⧸ Ideal.span (Set.range (coordinateGraphRelations F H))) ≃ₐ[MvPolynomial (Fin d) k] CoordinateGraphLocalization F H, ∀ i, e (Ideal.Quotient.mk (Ideal.span (Set.range (coordinateGraphRelations F H))) (MvPolynomial.X i)) = coordinateGraphLocalizedValues F H i) ∧ coordinateGraphAugmentedDeterminant F H = coordinateGraphLift (coordinateGraphDelta F H) ^ 2 ∧ MvPolynomial.aeval (coordinateGraphLocalizedValues F H) (coordinateGraphAugmentedDeterminant F H) = (algebraMap (CoordinateGraphAlgebra F) (CoordinateGraphLocalization F H) (coordinateGraphImage F (coordinateGraphDelta F H))) ^ 2 ∧ IsUnit ((algebraMap (CoordinateGraphAlgebra F) (CoordinateGraphLocalization F H) (coordinateGraphImage F (coordinateGraphDelta F H))) ^ 2)",
+  "branch": "newtargets-dag",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper declarations name the particular quotient, graph equations, determinant, residue matrix, Schur matrix, cotangent-fibre vectors, localization and canonical coefficient action in this node. Their data are explicit. The only postponed proof is the main theorem. The action binder aR together with haR fixes exactly the constructed T_j ↦ h_j/1 action; there is no additional algebraic assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ad9507e5",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Read the node, all 11 stmt_dep records, SquareJacobianPresentation (side-live, SubmersivePresentation with map=id), Mathlib jacobiMatrix_apply, and the full module and report. The node is unchanged from live except the lean record; lean.statement is verbatim in the file; the declarations list matches the 14 file declarations; no coordinateGraph name clash in live; the item is not landed elsewhere. Hypotheses: A is literally P/(F); hstandard is the explicit 00T6 leading-minor unit condition for this presentation, with the (1,1) block built from F only; K is q.ResidueField; the basis hypothesis is hind+hspan in the dependency's K⊗[A]Ω order; the R action is pinned by haR to aeval T_j↦h_j/1. All 11 conclusion clauses are correct: delta∉q; B̄ unit; basis b_i=da_{r+i}⊗1 with repr rows equal to S=E−DB⁻¹C (sign and blocks checked); S unit; det J̄=det B̄·det S≠0; the square presentation is pinned by val and relation; the R-algebra iso has the generator formulas; the augmented det equals lift(Δ)² (block lower triangular, true) and its image δ² is a unit. Edge cases r=0, d=0, r=d=0, zero quotient and any characteristic are covered; universe u for k only. No hollow defs; sorry only in the main theorem; source and blueprint docstrings present; the report has both sections. No change made, so no compile; the worker reports clean compiles. Advisory: 'standard smooth' is rendered by the explicit determinant condition rather than the SubmersivePresentation record; the two are equivalent."
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-separated-representable-moduli-map",
+ "kind": "definition",
+ "title": "Separated representable maps of fibred groupoids",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention]. Let $f:\\mathcal F\\to\\mathcal G$ be a morphism of categories over $\\mathit{Sch}/S$, with the fibred-groupoid, morphism and $2$-base-change conventions of [def-sfb-stable-pointed-moduli-groupoids]. Say $f$ is separated and representable by algebraic spaces if for every $S$-scheme $T$ and map $t:h_T\\to\\mathcal G$, the $2$-fibre product $h_T\\times_{\\mathcal G}\\mathcal F$ has an algebraic-space presentation $Z$ [def-trf-algebraic-space] with its actual projection $p:Z\\to h_T$, and this projection is separated in the presheaf-diagonal sense of [def-sfb-presheaf-map-separated-diagonal]. The presentation equivalence commutes with the projections up to a $2$-isomorphism over $T$. No stack condition or atlas is imposed by this predicate.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex; literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (1), using representable morphism scheme tests; Tag 03HL (definition-separated)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "separated representable morphism of stacks algebraic spaces closed diagonal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ constructed as the pullback of $ f $ against itself is a closed immersion. This characteriz\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam →\\n    AlgebraicGeometry.IsSeparated f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is separated if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.isSeparated_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSeparated f ↔\\n    autoParam (AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f))\\n      AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal._autoParam\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, $ f $ is separated if and only if the diagonal morphism $ \\\\Delta_f: X \\\\to X \\\\times_Y X $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSeparated f],\\n  AlgebraicGeometry.IsClosedImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"For any separated morphism $ f: X \\\\to Y $ of schemes, the diagonal morphism $ X \\\\to X \\\\times_Y X $ (constructed as the pullback of $ f $ against itself) is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[X.IsSeparated] : IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any separated scheme $X$, the diagonal morphism $X \\to X \\times X$ given by the product of identity maps is a closed immersion. This follows from the definition of separatedness, which requires the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} : X.IsSeparated ↔ IsClosedImmersion (prod.lift (𝟙 X) (𝟙 X))\", \"doc\": \"For any scheme $X$, $X$ is separated if and only if the diagonal morphism $\\\\Delta: X \\\\to X \\\\times X$ defined by $\\\\Delta = \\\\text{prod.lift}(\\\\text{id}_X, \\\\text{id}_X)$ is a closed immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated g] : IsClosedImmersion (pullback.lift (𝟙 _) f (Category.id_comp (f ≫ g)))\", \"doc\": \"For any separated morphism $ g $ of schemes, the diagonal morphism induced by $ g $ is a closed immersion. This asserts that when $ g $ satisfies the separatedness condition, the canonical morphism co\"}\n  {\"name\": \"isSeparatedMap_iff_isClosed_diagonal\", \"module\": \"Mathlib.Topology.SeparatedMap\", \"type\": \"{f : X → Y} : IsSeparatedMap f ↔ IsClosed f.pullbackDiagonal\", \"doc\": \"A function $ f: X \\\\to Y $ is a separated map if and only if the diagonal subset of the pullback of $ f $ with itself is closed in the product topology.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No stack-map separatedness definition; the scheme-only and unrelated results are insufficient. Reuse existing IsSeparatedPresheafMap for the algebraic-space projections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Representable morphism of categories fibred in groupoids separated on every algebraic space scheme base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a separated morphism of schemes and $ Y' \\to Y $ is any morphism, then the base change $ \"}\n  {\"name\": \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsSeparated ⊤\", \"doc\": \"A predicate indicating that a morphism $ f: X \\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of a morphism of schemes being separated is Zariski local at the target. This means that if a morphism $ f: X \\to Y $ is separated, then for any Zariski covering sieve $ S $ on $ Y $, ther\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsFinite @AlgebraicGeometry.IsSeparated\", \"doc\": \"The composition of a finite morphism with a separated morphism is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A predicate indicating that a morphism $ f: X \\\\to Y $ of schemes is separated.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsSeparated\", \"doc\": \"The property of being a separated morphism of schemes is multiplicative; that is, the composition of two separated morphisms is again a separated morphism.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No stack-map separatedness definition; the scheme-only and unrelated results are insufficient. Reuse existing IsSeparatedPresheafMap for the algebraic-space projections."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.moduliInertia, AlgebraicGeometry.IsSeparated",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.moduliInertia'\n",
+   "date": "2026-10-24",
+   "verdict": "No stack-map separatedness definition; the scheme-only and unrelated results are insufficient. Reuse existing IsSeparatedPresheafMap for the algebraic-space projections."
+  },
+  {
+   "tool": "grep",
+   "query": "MapIsSeparated|SeparatedModuli|ModuliInertiaNeutral",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No stack-map separatedness definition; the scheme-only and unrelated results are insufficient. Reuse existing IsSeparatedPresheafMap for the algebraic-space projections."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"IsSeparatedRepresentableModuliMap|SeparatedRepresentableModuli\" lean/Sheaf lean/WeilConjectures dag/lean_names_upstream.json; rg -l separated/representable on dag/nodes; blueprint_refs.py search \"separated representable\"",
+   "results": "No declaration for separated representable fibred-groupoid maps. 0 blueprint nodes match separated representable. The definition-node search found def-sfb-presheaf-map-separated-diagonal (presheaves, reused), def-sfb-space-morphism-properties (algebraic spaces, not fibred groupoids), and def-sfb-space-absolute-quasi-separated (quasi-separatedness).",
+   "date": "2026-10-24",
+   "verdict": "New wrapper needed only for fibred-groupoid scheme base changes; no copy of presheaf separatedness."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-inertia-separated-diagonal",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Coarse-morphism input to the finite inertia-free cover argument, before composing with the finite cover. Finite-inertia categorical quotient used before deriving finite type and discrete fibres. Keel--Mori construction: Stabilizer-preserving etale local finite flat affine covers. Supporting input: Separated-source cancellation for a finite-inertia target. New supporting input: Tag 0CL0 (lemma-diagonal-diagonal), part (1), for the structure morphism to S and to Spec Z; Tag 050Q (lemma-inertia) for representability of inertia. Supporting definition: separatedness of the representable inertia projection and the first diagonal.",
+   "via": [
+    "lem-sfb-stack-inertia-separated-diagonal",
+    "lem-sfb-stack-separated-source-separated-inertia-target",
+    "lem-sfb-finite-inertia-local-affine-covers",
+    "lem-sfb-keel-mori-finite-inertia-quotient",
+    "lem-sfb-dm-coarse-proper-locally-quasifinite",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedRepresentableModuliMap",
+  "declaration": "CategoryTheory.IsSeparatedRepresentableModuliMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedRepresentableModuliMap.lean",
+  "statement": "def IsSeparatedRepresentableModuliMap {S : AlgebraicGeometry.Scheme.{u}} {F : BasedCategory.{v₁, w₁} (Over S)} {G : BasedCategory.{v₂, w₂} (Over S)} (f : BasedFunctor F G) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7579e6ab8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7579e6ab8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Q05 lem-sfb-stack-inertia-separated-diagonal 7579e6ab: five conjuncts checked against 0CL0(1)/050Q/034H: p sep ⇔ Δ_{X/S} sep (moduliRelativeDiagonal of moduliBaseStructure; the vertical comparison makes it X×_S X) ⇔ e closed (ModuliSchemeTest @IsClosedImmersion); p ⇔ Δ_{X/Z} via ofFunctor(F.p ⋙ Over.map specULiftZIsTerminal.from S); TFAE over Z (inertia unchanged since Over.map is faithful). Only hypothesis is IsDeligneMumfordModuliStack; universes independent. Earlier H2 repaired (change-to-integers theorem dep/import removed, inlined). New def node def-sfb-separated-representable-moduli-map matches Stacks 0CL0/03HL, reuses IsSeparatedPresheafMap, no live duplicate or name clash. moduliInertiaNeutral is a real canonical helper (relative neutral section + inclusion) in its own module. Item differs from live only in lean+stmt_deps (all on base except the new node); statements verbatim; one sorry; docstrings, proof steps and report sections present. No file changed, so no compile."
+ }
+}

@@ -27,10 +27,12 @@
  ],
  "proof": [
   {
-   "text": "Fix $r\\geq1$ and apply [lem-weil-point-automorphism-restriction-natural] to the scheme automorphism $g=h^r$ and $\\Lambda=A_n$. It gives $\\sigma_{r,M_n}$ on every unbounded complex, its $A_n$-linearity with the action transported through $c_n^{-1}$, and naturality for chain maps. It also identifies the insertion with the identity under $(F_rM_n)(s\\xrightarrow{\\mathrm{id}}s)\\cong M_n(s\\xrightarrow{h^r}s)$, so this is the actual restriction along $h^r$, not an arbitrarily chosen identification of fibers. The reindexing and coefficient isomorphisms used here are those of [lem-weil-proetale-isomorphism-inverse-image], applied to $h^r$.",
+   "text": "Apply [lem-trf-point-restriction-system-chain-map] with g=h^r. Its continuity and uniquely prescribed coefficient map are definitionally the ones used here, so its uniquely normalized chain map supplies chainTransport_existsUnique. Its finite coefficient naturality and the defining completed limit lift give coefficient_squares. For the finite tensor-unit comparison apply [lem-weil-finite-comparison-complex-isomorphism]; linearity of its inverse and the inverse identities give finiteComparison_inverse. The finite sigma is constructed directly from the scalar normalization and module-restriction naturality in [lem-weil-point-automorphism-restriction-natural], without an unnecessary characteristic hypothesis. The tensor-transition clause is the specialization of the fully proved arbitrary-automorphism result [lem-trf-point-system-tensor-transition], constructed by conjugating the actual completed-linear transition by the normalized finite tensor comparison. This avoids the system-wide tensor-sheafification comparison and its characteristic hypothesis.",
    "uses": [
-    "lem-weil-point-automorphism-restriction-natural",
-    "lem-weil-proetale-isomorphism-inverse-image"
+    "lem-trf-point-restriction-system-chain-map",
+    "lem-trf-point-system-tensor-transition",
+    "lem-weil-finite-comparison-complex-isomorphism",
+    "lem-weil-point-automorphism-restriction-natural"
    ],
    "elementary": false,
    "source": {
@@ -39,47 +41,11 @@
    }
   },
   {
-   "text": "For the comparison $j_{r,M_n}$ of [def-weil-inverse-image-pullback-comparison](a), define the inverse on local tensor generators by $x\\otimes a\\mapsto c_n^{-1}(a)x$. It is balanced: $(b x)\\otimes a$ and $x\\otimes c_n(b)a$ both map to $b c_n^{-1}(a)x$. It commutes with restrictions and hence sheafifies, using the sheafified tensor construction [def-pur-sheaf-tensor-product]. Its composite with $j$ sends $x$ to $x$; the other composite sends $x\\otimes a$ to $c_n^{-1}(a)x\\otimes1=x\\otimes a$. Thus $j$ is an isomorphism. A module map $f$ commutes with $j$ because $(F_rf(x))\\otimes1=(F_rf\\otimes1)(x\\otimes1)$; the same equality for $f=d^i$ proves compatibility with differentials. This checks the comparison on arbitrary representatives, without any flatness condition on $M_n$.",
-   "uses": [
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), point-factor prerequisite to whole-system transport"
-   }
-  },
-  {
-   "text": "Check the actual quotient-linear transition $v_n:M_{n+1}\\to\\operatorname{Res}_{\\rho_n}M_n$. In the reindexing model, its underlying abelian-sheaf map commutes with restriction along $h^r$, giving $v_n|_{(s,h^r)}\\operatorname{res}_{h^r}=\\operatorname{res}_{h^r}v_n|_{(s,\\mathrm{id})}$. Since insertion is the identity in that model, this is $\\Gamma(F_rv_n)\\sigma_{r,M_{n+1}}=\\sigma_{r,M_n}\\Gamma(v_n)$ on the underlying sections. The actions agree because [lem-weil-proetale-isomorphism-inverse-image](3) gives $\\rho_n c_{n+1}=c_nF_r(\\rho_n)$. In the tensor model the transition sends $x\\otimes a$ to $F_r(v_n)(x)\\otimes\\rho_n(a)$, so its composite with $j_{n+1}$ sends $x$ to $F_r(v_n)(x)\\otimes\\rho_n(1)=F_r(v_n)(x)\\otimes1$, precisely $j_nF_r(v_n)(x)$. Balancedness follows from the displayed coefficient square. For completed scalars, [def-weil-inverse-image-pullback-comparison] gives $\\pi_nc_{\\widehat R}=c_nF_r(\\pi_n)$; hence the same square is linear after restriction through $\\pi_n$. These are equalities of strict transitions, without replacing them by derived tensor equivalences.",
-   "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), point-factor prerequisite to whole-system transport"
-   }
-  },
-  {
-   "text": "Set $(u_{r,M})_n=\\sigma_{r,M_n}$ in the inverse-image model, or $\\Gamma(j_{r,M_n})\\sigma_{r,M_n}$ in its identified tensor model. Step 3 makes this a map of whole $R$-module towers, and Step 1 makes it a chain map and $R$-linear through $R\\to A_n$. Here $\\Gamma_\\bullet$ retains the original transitions exactly as in [def-trf-coefficient-tower-operations]. Strict tower maps are families commuting with the transitions, so the prescribed components determine $u_{r,M}$ uniquely. For any chain map of systems $f$, Step 1 applied to each $f_n$ gives $\\Gamma_\\bullet(G_rf)u_{r,M}=u_{r,M'}\\Gamma_\\bullet(f)$; equality here is equality of the families defining strict tower maps, before localization.",
-   "uses": [
-    "def-trf-coefficient-tower-operations",
-    "lem-weil-point-automorphism-restriction-natural"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clause (3), point-factor prerequisite to whole-system transport"
-   }
-  },
-  {
-   "text": "The source system category is abelian with componentwise exactness by [lem-coef-semilinear-derived-sections]. The functor $G_r$ is exact: each $F_r$ is an exact inverse-image equivalence by [lem-weil-proetale-isomorphism-inverse-image](2), and the coefficient identifications do not change the underlying kernels or cokernels. Restriction of scalars preserves those kernels and cokernels, and sections are exact by [lem-weil-point-proetale-sections-exact]. Therefore both $\\Gamma_\\bullet$ and $\\Gamma_\\bullet G_r$ are exact functors from systems to $R$-module towers (whose kernels and cokernels are also levelwise). Apply [lem-weil-pbc-exact-functor-derived-factorization] to these two functors: their termwise complex functors preserve quasi-isomorphisms and give the stated functors between the ordinary unbounded derived categories.",
+   "text": "The system category is abelian with componentwise exactness by [lem-coef-semilinear-derived-sections]. For pull_exact, form the product of the pro-etale postcomposition equivalence of [lem-weil-proetale-isomorphism-inverse-image] with the identity on the index category. The resulting equivalence on underlying abelian sheaves preserves finite limits and colimits; the faithful module forgetful functor reflects them. This proves exactness without imposing invertibility of l on the scheme. For sections_exact and finiteRSections_exact, use the independent-universe exact point-section proof from [lem-weil-point-automorphism-restriction-natural], which implements [lem-weil-point-proetale-sections-exact]. Scalar restriction and whiskering of towers preserve finite limits and colimits. Mathlib HomologicalComplex.quasiIso_map_of_preservesHomology now proves quasi-isomorphism preservation for both termwise functors, implementing [lem-weil-pbc-exact-functor-derived-factorization].",
    "uses": [
     "lem-coef-semilinear-derived-sections",
     "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-point-automorphism-restriction-natural",
     "lem-weil-point-proetale-sections-exact",
     "lem-weil-pbc-exact-functor-derived-factorization"
    ],
@@ -90,7 +56,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-localization-universal-property](2) with source the category of complexes of strict systems, $W$ its quasi-isomorphisms, and target $D(\\operatorname{Tow}(\\operatorname{Mod}R))$. Step 5 ensures that the two functors obtained by target localization invert $W$, and Step 4 supplies their natural transformation. This produces $I_{r,C}$ through the exact-functor factorizations, uniquely with the stated representative maps. Its naturality holds for every morphism of the derived SYSTEM category. Explicitly, if $w:X\\to Y$ is a quasi-isomorphism, $B(w)u_X=u_YA(w)$ implies $B(w)^{-1}u_Y=u_XA(w)^{-1}$, where $A=\\Gamma_\\bullet$, $B=\\Gamma_\\bullet G_r$ and all maps have been localized. Thus inverses of quasi-isomorphisms, as well as the original chain maps and their composites, satisfy naturality. This uses localization of the entire system category, not a claim that derived evaluations detect equality.",
+   "text": "Implement [lem-weil-pbc-localization-universal-property] directly by Mathlib Localization.liftNatTrans on the localization Q of whole system complexes and whiskerRight chainTransport Q. The mapDerivedCategoryFactors isomorphisms provide its two liftings. Localization.liftNatTrans_app and the inverse identities prove the prescribed representative equation. The resulting natural transformation supplies naturality for every derived system morphism. Localization.natTrans_ext, followed by cancellation of the target factorization isomorphism, proves uniqueness.",
    "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
@@ -101,10 +67,13 @@
    }
   },
   {
-   "text": "Evaluate the representative map of Step 4 at level $n$ and apply $\\Gamma(j_{r,M_n})$. It is exactly restriction along $h^r$, colimit insertion, sheafification, and tensor insertion $x\\mapsto x\\otimes1$. This is the finite-coefficient recipe of [def-weil-frobenius-point-transport], with $h^r$ in place of $g_s$, and comparison (a) of [def-weil-inverse-image-pullback-comparison]. The comparison identifies ordinary termwise module pullback with the derived pullback at this finite level. Consequently when $C_n$ lies in $D^b_c(s,A_n)$ the evaluated derived map is exactly $\\iota^{(r)}_{C_n}$. Steps 1-6 worked on all unbounded complexes with the given quotient-linear transitions: no step used cartesianness, constructibility of other levels, boundedness, finite Tor-amplitude, or derived completeness.",
+   "text": "Evaluate the representative from Step 1 at $n$ and compose with $\\Gamma(j_r)$. Its recipe is restriction, colimit insertion, sheafification and $x\\mapsto x\\otimes1$, precisely [def-weil-frobenius-point-transport] with $h^r$ in place of $g_s$. Part (a) of [def-weil-inverse-image-pullback-comparison] identifies termwise module pullback with derived pullback. System evaluation is exact by [lem-coef-semilinear-derived-sections], and tower evaluation is the exact evaluation localized in [def-trf-coefficient-tower-operations]. These evaluations preserve this representative equation; hence when $C_n$ is bounded constructible it is exactly $\\iota^{(r)}_{C_n}$. Every preceding construction used arbitrary unbounded systems and their original transitions, so none requires cartesianness or a Tor-amplitude bound. The final derived evaluation identity remains unproved in the attached Lean module. G9 proves evaluation_existsUnique by first comparing finite evaluation of the reindexed system with finite inverse image, using the prescribed coefficient components and pushforward composition/congruence. Completed scalar restriction commutes with evaluation by the generic pushforward/restriction identity. On final-object sections the completed projection of the integral constant section is the finite constant quotient section, so the source comparison is identity on carriers. Explicit associators combine these comparisons. Their identity-on-sections normalization gives uniqueness by heterogeneous equality and natural-isomorphism extensionality. tensorTransition_existsUnique is now proved from lem-trf-point-system-tensor-transition; finite_evaluation remains unproved with its existing proof plan retained. The ordinary evaluation construction is isolated as the fully proved arbitrary-automorphism lemma lem-trf-point-system-ordinary-evaluation-comparisons; specialize it to h^r. This is a compilation split, with no additional unproved statement.",
    "uses": [
     "def-weil-frobenius-point-transport",
-    "def-weil-inverse-image-pullback-comparison"
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-coef-semilinear-derived-sections",
+    "def-trf-coefficient-tower-operations",
+    "lem-trf-point-system-ordinary-evaluation-comparisons"
    ],
    "elementary": true,
    "source": {
@@ -114,21 +83,24 @@
   }
  ],
  "proof_deps": [
+  "lem-trf-point-restriction-system-chain-map",
+  "lem-trf-point-system-tensor-transition",
+  "lem-weil-finite-comparison-complex-isomorphism",
   "lem-weil-point-automorphism-restriction-natural",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-inverse-image-pullback-comparison",
-  "def-pur-sheaf-tensor-product",
-  "def-trf-coefficient-tower-operations",
   "lem-coef-semilinear-derived-sections",
+  "lem-weil-proetale-isomorphism-inverse-image",
   "lem-weil-point-proetale-sections-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
-  "def-weil-frobenius-point-transport"
+  "def-weil-frobenius-point-transport",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-coefficient-tower-operations",
+  "lem-trf-point-system-ordinary-evaluation-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "Clause (3), whole-system point-transport prerequisite; explicit argument from the cited inverse-image recipe and ordinary derived localization"
+  "place": "Clause (3), whole-system point-transport prerequisite; explicit argument from the cited inverse-image recipe and ordinary derived localization; P3: explicit Mathlib localization descent, reflected exactness through underlying sheaves, finite restriction and comparison inverse proofs (2026-10-26). G9: identity-normalized ordinary evaluation comparison, using finite pushforward congruence and completed scalar restriction; abstract exactness and chain-map extensionality proof optimizations, with the other two remaining clauses unchanged (2026-10-27). D4: tensorTransition_existsUnique specializes the fully proved arbitrary-automorphism transition construction; conjugation and the inverted coefficient square replace the system tensor-sheafification route (2026-10-27)."
  },
  "mathlib_searches": [
   {
@@ -232,20 +204,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-trf-point-system-transport-descent",
   "worker": "stage1",
-  "summary": "Q128: explicit seven-step strict-system construction and localization; reused existing automorphism restriction and localization lemmas, no new nodes. Corrected the inverse-image versus tensor-pullback codomain in the component formula by spelling out the already stipulated j identification. Verified semilinear transition squares before localization.",
+  "summary": "Q131 repairs the human-directed re-split: two comparable statement-only nodes separate the sheafified tensor inverse/reduction comparison from the simultaneous restriction/insertion chain construction. The parent statement is unchanged; its proof is a short assembly using these nodes and the existing exact-functor and localization statements. All seven old arguments are retained and mapped in report.md.",
   "blueprint": "thm-trf-l-function-euler-product proof Step 1, Global powers, naturality assertion; prerequisite point-factor construction in prop-trf-rational-frobenius-integral-model proof (3), exactly the inherited blueprint.from place.",
   "tool_uses": [
-   {
-    "node": "lem-weil-point-automorphism-restriction-natural",
-    "why": "Generic restriction/insertion and constant-scalar calculation for any point automorphism, applied to h^r; the unit has no separate arbitrary-automorphism restriction lemma."
-   },
-   {
-    "node": "lem-weil-proetale-isomorphism-inverse-image",
-    "why": "Generic exact site reindexing and coefficient-reduction naturality for a scheme isomorphism, used without changing the trace-transport route."
-   },
    {
     "node": "lem-coef-semilinear-derived-sections",
     "why": "Only its componentwise abelian-category and exactness assertions for strict varying-ring systems are used."
@@ -273,12 +237,12 @@
   "lem-weil-pbc-localization-universal-property"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q128-f3660988d",
-  "group": "Q128",
+  "reviewer": "NT-cc-Q131-05df13aac",
+  "group": "Q131",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-f3660988d (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is a first split of a node that was unsplit on base, with no repair note and no dropped ids among the item or its deps; it has 7 steps, 0 new nodes and no fixes. Statement change: on base the nth component Γ(j)σ landed in Γ((h^r)^*M_n), but the declared target Γ_•G_rM has level Γ(F_rM_n); the component is now σ, read as Γ(j)σ after j. The delivery also names D(Tow(Mod R)) and the index shift n=i+1 against def-trf-coefficient-tower-operations (A_n=R/ϖ^{n+1}). This is a type repair, not a weakening, and all 3 citers already read their maps through j_r. Hypotheses: h=Spec(Frob_q) is the g_s of def-weil-frobenius-point-transport; the restriction lemma allows any automorphism, so h^r with Λ=A_n is covered; ℓ is invertible on s; k is algebraically closed for exact sections. The coefficients are the constant B_n and the completed sheaf \\hat R_s with π_n, matching the cited definitions. Step checks: Step 2 j^{-1}(x⊗a)=c^{-1}(a)x is balanced and both composites are identities. Step 3 the transition squares hold by isomorphism-inverse-image (3) ρ_nc_{n+1}=c_nF_r(ρ_n); I rechecked tensor-model balancedness. The completed identity π_nc_{\\hat R}=c_nF_r(π_n) is stated verbatim in the comparison definition (structure isomorphism). Step 5: Γ_• and Γ_•G_r are exact since kernels and cokernels are componentwise (semilinear-derived-sections), F_r is exact by (2) and sections are exact, matching Stacks 015F(4). Step 6: localization (2) with τ=Q(u) gives naturality for all derived morphisms, without using faithfulness of the evaluations. Step 7: the level-n evaluation is Γ(κ^{h^r})σ^{h^r}=ι^{(r)}, by the h^r convention used in the other trf nodes. Edge cases: zero transitions, B_n itself, unbounded complexes, r=1. Not duplicates: lem-trf-point-exact-derived-model and lem-weil-frobenius-point-transport-natural are finite-level only. All 6 tool_uses are accepted as generic black boxes off the sk-thm-trace-transport route. Minor: the report mentions a statement-change record that is not in the node, but the change itself is named in the report."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-05df13aac (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full. This re-split answers the human's 2026-10-21 note (released 2026-10-22). The item statement is unchanged from the Q128 head that passed review. The parent proof now has 4 steps and 2,491 characters. The two new statement-only nodes are 2,350 and 2,533 characters long. Where the 7 old steps went: old steps 1 and 4, and the restriction square of step 3, are now lem-trf-point-restriction-system-chain-map, for any automorphism g. Old step 2, the tensor part of step 3 (τ_n balanced via ρ_n c_{n+1}=c_nF(ρ_n), ρ_n(1)=1, π_n c_R̂=c_nF(π_n)) and the exactness of G from step 5 are now lem-trf-automorphism-tensor-reduction-comparison. The rest of steps 5 and 6 become direct uses of the existing exact-functor factorization and localization (2) nodes; the argument for inverses of quasi-isomorphisms is kept. Step 7 becomes evaluation of the finite recipe ι=Γ(κ)σ, with κ given by x↦x⊗1. No argument was shortened. This is not D1: the descent and ι clauses stay in the parent, and the chain-level clause needs both children. Checks: the inverse x⊗a↦c_n^{-1}(a)x is balanced, both composites are the identity, and it sheafifies; τ_n is well defined by quotient-linearity and lem-weil-proetale-isomorphism-inverse-image (3); G is exact because F is an equivalence, the transported action leaves underlying kernels unchanged (stated in def-weil-inverse-image-pullback-comparison), and kernels are componentwise; restriction along g:V→U is natural for abelian-sheaf maps, which gives the transition, chain and naturality identities. Edge cases checked: g=id, zero systems, non-surjective transitions, n=1 with non-flat modules, unbounded complexes. Overlaps with lem-trf-isomorphism-multiplication-cone-descent and lem-trf-point-transport-strict-quotient are special cases, not duplicates (advisory). There is no SGA citation and no cycle. I accept the four declared generic tool_uses. Fixes: (1) the restriction child now states the index match n=i+1 with def-trf-coefficient-tower-operations, where A_i=R/ϖ^{i+1}; (2) in the tensor child, blueprint.from.place mislabelled Stacks 09A5 as section-functoriality; the tags file says proetale-section-morphism, and I corrected it.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PointSystemTransportDescent",
@@ -360,5 +324,27 @@
   "group": "Q10",
   "result": "pass",
   "note": "Re-delivery of RETURNed 7023c01703ec (H2 theorem stmt_dep). Lean file byte-identical to 7023 (sha256 5bc0ecf4), whose maths was checked clause by clause and found correct; item node differs from live only in lean and stmt_deps, statement verbatim. Repair checked: lem-weil-point-automorphism-restriction-natural moved from stmt_deps to proof_deps; new existing:true def node def-trf-point-restriction-coordinates owns the 11 plain pointRestriction* defs/instances of Sheaf.Paper.PointAutomorphismRestrictionNatural (all present, none a .choose of the theorem, lean.statement verbatim to pointRestrictionSections, statement matches Option ℕ scalars, λ constant/completion map, c_g, sectionwise G, α_g=homMk g, raw restriction, Γ_a, standard derived instance; universes independent, no extra hypotheses; no other live owner). Advisory A1 also addressed: def-pur-integral-finite-pullback, def-coef-normalized-dvr-tower, def-sf-scalar-reduction-categories-restriction cited, and their live records list the used decls. All new-node stmt_deps exist live; item not yet landed, no supersession. Advisory: the new node cites the theorem node lem-weil-proetale-isomorphism-inverse-image for isoSectionwiseModuleInverseImage (sole recorded owner, also a base stmt_dep of the item); redundant imports and duplicate HasDerivedCategory instance remain, harmless. No file changed, no compile run."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T222615-L-673735",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

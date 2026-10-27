@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-embedded-finite-heart-realization",
+ "kind": "lemma",
+ "title": "The actual finite scalar map and the heart realization",
+ "statement": "For every scheme X and finite discrete commutative topological ring A, the specified finiteScalarMap of [def-sfb-embedded-finite-coefficient-realization] is invertible. Extension along it is an equivalence. Define finiteHeartRealization to be that actual scalar extension followed by integralModelIntrinsicRealization of [def-sfb-integral-model-generator-data]. This is a literal construction with no choice of an unproved existence witness.\n\nExact Lean assertion:\ntheorem finiteScalarMap_isIso (X : Scheme.{u}) (A : Type) [CommRing A]\n    [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :\n    IsIso (finiteScalarMap.{u} X A)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "stmt_deps": [
+  "def-sfb-embedded-finite-coefficient-realization",
+  "def-sfb-integral-model-generator-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical constant-function presheaf map. A section has a finite clopen covering by its fibres; it lifts to the corresponding constant on each fibre. If unequal constants have equal images, the profinite set is empty, so its empty cover gives local injectivity. Sheafification of the locally bijective map and the sheafification counit are isomorphisms. The constant/forgetful comparison identifies their composite with exactly constantToContinuous, hence with finiteScalarPointMap after forgetting to abelian groups. Pullback gives the stated isomorphism.",
+   "uses": [
+    "def-sfb-embedded-finite-coefficient-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use Mod.comapEquivalenceOfIsIso and Mod.extendScalarsIsoComapInv to identify scalar extension along finiteScalarMap with the inverse restriction equivalence. Define finiteHeartRealization by composition with the existing intrinsic heart realization.",
+   "uses": [
+    "def-sfb-integral-model-generator-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G9",
+  "date": "2026-10-25",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, clauses (1) and (2); Stacks Tags 099L, 03ET, 00YV, 06YQ and 09AL."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules over a constant ring object and sheaves of modules is monoidal and exact",
+   "results": "{\"t\": \"2026-10-25T14:56:40Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence between internal modules over a constant ring object and sheaves of modules is monoidal and exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"CondensedMod\", \"SheafOfModules.forgetToSheafModuleCat\"], \"digest\": \"1c08b2c339e3c1ae\"}",
+   "date": "2026-10-25",
+   "verdict": "Related generic sheaf and module APIs only; no match for the specified embedded heart functor or its constructibility comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionModuleEquivalence|finiteFieldPresentation",
+   "results": "{\"t\": \"2026-10-25T14:56:41Z\", \"tool\": \"grep\", \"query\": \"sectionModuleEquivalence|finiteFieldPresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-25",
+   "verdict": "Related generic sheaf and module APIs only; no match for the specified embedded heart functor or its constructibility comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars and section-module equivalences on a site preserve tensor products and finite locally constant sheaves",
+   "results": "{\"t\": \"2026-10-25T15:16:58Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars and section-module equivalences on a site preserve tensor products and finite locally constant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"ModuleCat.restrictScalars\", \"RestrictScalars\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.preservesLimit_restrictScalars\", \"Submodule.restrictScalarsEquiv_apply\"], \"digest\": \"6986c43859501fac\"}",
+   "date": "2026-10-25",
+   "verdict": "Related generic sheaf and module APIs only; no match for the specified embedded heart functor or its constructibility comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|IsConstructibleProEtaleModuleSheaf|Monoidal",
+   "results": "{\"t\": \"2026-10-25T15:27:13Z\", \"tool\": \"grep\", \"query\": \"constantRingModuleRestriction|IsConstructibleProEtaleModuleSheaf|Monoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"cf545de878f7c7c6\"}",
+   "date": "2026-10-25",
+   "verdict": "Related generic sheaf and module APIs only; no match for the specified embedded heart functor or its constructibility comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite coefficient comparison from internal modules in abelian sheaves to intrinsic modules over a constant ring sheaf preserves and reflects constructible sheaves",
+   "results": "{\"t\": \"2026-10-25T15:27:13Z\", \"tool\": \"leansearch\", \"query\": \"A finite coefficient comparison from internal modules in abelian sheaves to intrinsic modules over a constant ring sheaf preserves and reflects constructible sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf\", \"PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf\", \"SheafOfModules.Finite.forgetPreservesFiniteLimits\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\", \"SheafOfModules.instAbelian\", \"SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf\", \"SheafOfModules.instReflectsIsomorphismsPresheafOfModulesValRingCatForget\", \"SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf\"], \"digest\": \"6485fe2df45ec63e\"}",
+   "date": "2026-10-25",
+   "verdict": "Related generic sheaf and module APIs only; no match for the specified embedded heart functor or its constructibility comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical constant-function scalar extension and intrinsic associated-module-sheaf realization form a monoidal equivalence on finite-coefficient module sheaves",
+   "results": "{\"t\": \"2026-10-25T15:27:14Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical constant-function scalar extension and intrinsic associated-module-sheaf realization form a monoidal equivalence on finite-coefficient module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"PresheafOfModules.monoidalCategory\", \"FGModuleCat.tensorUnit_obj\"], \"digest\": \"18800cfe963e50e8\"}",
+   "date": "2026-10-25",
+   "verdict": "Related generic sheaf and module APIs only; no match for the specified embedded heart functor or its constructibility comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EmbeddedFiniteFieldPresentation",
+  "date": "2026-10-25",
+  "group": "G9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-integral-models",
+   "place": "Proof, first paragraph: finite constant-coefficient presentation before the field Tor-dimension argument.",
+   "via": [
+    "lem-sfb-embedded-finite-field-presentation"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EmbeddedFiniteHeartRealization",
+  "file": "lean/Sheaf/Paper/EmbeddedFiniteHeartRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.finiteScalarMap_isIso",
+  "statement": "theorem finiteScalarMap_isIso (X : Scheme.{u}) (A : Type) [CommRing A]\n    [TopologicalSpace A] [IsTopologicalRing A] [Finite A] [DiscreteTopology A] :\n    IsIso (finiteScalarMap.{u} X A)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-25",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.finiteScalarMap_isIso",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.finiteScalarExtension_isEquivalence",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.finiteHeartRealization"
+  ]
+ },
+ "proof_deps": [
+  "def-sfb-embedded-finite-coefficient-realization",
+  "def-sfb-integral-model-generator-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T162527-L-470718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261025T162527-L-470718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

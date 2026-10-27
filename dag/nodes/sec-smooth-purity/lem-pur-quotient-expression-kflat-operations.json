@@ -1,0 +1,216 @@
+{
+ "id": "lem-pur-quotient-expression-kflat-operations",
+ "kind": "statement",
+ "title": "Normalization and operation adjoint laws for strict quotient expressions",
+ "statement": "theorem quotientExpressionKFlatOperations\n    {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)\n    (r : ℕ) (N : Fin r → Complex l E Y)\n    (P : Fin r → CochainComplex (scalarReductionSource l E Y) ℤ)\n    (κ : ∀ (i : Fin r) (n : ℕ), level l E (N i) n ≅\n      ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj (P i))\n    (hκ : ∀ (i : Fin r) {m n : ℕ} (hmn : n ≤ m),\n      transition l E (N i) hmn ≫\n          ((normalizedDVRModuleRes l E Y hmn).mapHomologicalComplex (.up ℤ)).map\n            (κ i n).hom =\n        (κ i m).hom ≫\n          (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E Y hmn)\n            (.up ℤ)).app (P i))\n    (hgood : ∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K →\n      ∀ n : ℕ, Good l E K n) :\n    (∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K →\n      IsNormalizedCoefficientSequence l E W (DerivedCategory.Q.obj K) ∧\n      (∀ (S : CoefficientDerivedSystemTensors l E W)\n        (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m),\n        ∃ hK : CochainComplex.IsKFlatIndependentCoefficients\n          (R := integralCoefficientCommRingSheaf l E W m) (level l E K m),\n          AdjointModel l E K S D hmn hK)) ∧\n    (∀ (W : Scheme.{t}) (U V : Complex l E W),\n      Generated l E h f N W U → Generated l E h f N W V →\n      TensorTransitions l E U V ∧\n      (∀ (n : ℕ) (S : CoefficientDerivedSystemTensors l E W),\n        ∃ (hU : Good l E U n) (hV : Good l E V n)\n          (e : DerivedCategory.Q.obj (level l E (total l E U V) n) ≅\n            (S.finiteClosed n).tensor.obj\n              (DerivedCategory.Q.obj (level l E U n), DerivedCategory.Q.obj (level l E V n))),\n          e.hom = DerivedCategory.Q.map (coefficientEvaluationTensorIso l E W n U V).hom ≫\n            ((S.finiteTensorModel n).iso (Scheme.ProEt.topology W)\n              (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n)\n              (level l E U n) (level l E V n) hU.1 hV.1).hom) ∧\n      (∀ (S : CoefficientDerivedSystemTensors l E W)\n        (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m)\n        (hUm : Good l E U m) (hVm : Good l E V m)\n        (hUn : Good l E U n) (hVn : Good l E V n),\n        TensorAdjointEquation l E U V S D hmn hUm hVm hUn hVn)) ∧\n    (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g →\n      ∀ K : Complex l E W, Generated l E h f N W K →\n        PullbackTransitions l E g K ∧\n        (∀ n : ℕ, PullbackModel l E g K n ∧ PullbackComputes l E g K n) ∧\n        (∀ (SW : CoefficientDerivedSystemTensors l E W)\n          (DW : CoefficientFiniteQuotientCalculus l E W SW)\n          (SV : CoefficientDerivedSystemTensors l E V)\n          (DV : CoefficientFiniteQuotientCalculus l E V SV) {m n : ℕ} (hmn : n ≤ m),\n          PullbackAdjointEquation l E g K SW DW SV DV hmn))",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+ },
+ "stmt_deps": [
+  "def-pur-strict-quotient-expressions",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "For an input, use κ and hκ degreewise. The adjunct of the actual ordinary quotient is the comparison between two left adjoints to the same restriction functor, hence invertible by uniqueness of adjoints.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+   }
+  },
+  {
+   "text": "Induct on Generated: units use the unit adjunct, tensor expressions use the tensor constructor and the two induction hypotheses, and inverse images use the pullback equation and cancellation of its evaluation comparison.",
+   "uses": [
+    "lem-pur-strict-unit-ordinary-adjoint",
+    "lem-pur-strict-tensor-adjoint-constructor",
+    "lem-pur-strict-pullback-adjoint-constructor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+   }
+  },
+  {
+   "text": "Use ordinary and derived adjunction units and the calculus unit_model equality to identify alpha with the K-flat quotient model followed by Q of the ordinary adjunct. Evaluation localization factors identify it with the adjunct of the actual sequence derived transition. Precomposition with its isomorphism followed by the adjunction Hom equivalence proves the required bijectivity. Evaluate the ordinary unit equation on sections to obtain the forward and inverse AdjointModel formulas.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pur-strict-quotient-expressions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+   }
+  },
+  {
+   "text": "Use the constructor transition and adjunct identities directly, and choose the specified tensorComparison for the finite derived tensor model.",
+   "uses": [
+    "lem-pur-strict-tensor-adjoint-constructor",
+    "lem-pur-strict-pullback-adjoint-constructor",
+    "def-pur-strict-quotient-expressions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-strict-unit-ordinary-adjoint",
+  "lem-pur-strict-tensor-adjoint-constructor",
+  "lem-pur-strict-pullback-adjoint-constructor",
+  "def-pur-strict-quotient-expressions"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Constructor induction, uniqueness of composite left adjoints for inputs, and the normalized calculus unit_model identity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient expression K-flat normalized tower",
+   "results": "No exact match in Mathlib or existing Sheaf modules.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat quotient expression derived transition adjoint",
+   "results": "Only generic flatness and change-of-rings lemmas; no exact match.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict quotient expression tensor pullback normalization",
+   "results": "Only generic module flatness results; no exact match.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientExpressionKFlatNormalization",
+  "date": "2026-10-26",
+  "group": "M4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-quotient-expression-kflat-normalization",
+   "place": "Strict K-flat model and operation-normalization subargument.",
+   "via": [
+    "lem-pur-quotient-expression-kflat-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientExpressionKFlatOperations",
+  "declaration": "WeilConjectures.StrictQuotient.quotientExpressionKFlatOperations",
+  "declarations": [
+   "WeilConjectures.StrictQuotient.quotientExpressionKFlatOperations"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientExpressionKFlatOperations.lean",
+  "statement": "theorem quotientExpressionKFlatOperations\n    {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y)\n    (r : ℕ) (N : Fin r → Complex l E Y)\n    (P : Fin r → CochainComplex (scalarReductionSource l E Y) ℤ)\n    (κ : ∀ (i : Fin r) (n : ℕ), level l E (N i) n ≅\n      ((scalarReductionExtension l E Y n).mapHomologicalComplex (.up ℤ)).obj (P i))\n    (hκ : ∀ (i : Fin r) {m n : ℕ} (hmn : n ≤ m),\n      transition l E (N i) hmn ≫\n          ((normalizedDVRModuleRes l E Y hmn).mapHomologicalComplex (.up ℤ)).map\n            (κ i n).hom =\n        (κ i m).hom ≫\n          (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E Y hmn)\n            (.up ℤ)).app (P i))\n    (hgood : ∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K →\n      ∀ n : ℕ, Good l E K n) :\n    (∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K →\n      IsNormalizedCoefficientSequence l E W (DerivedCategory.Q.obj K) ∧\n      (∀ (S : CoefficientDerivedSystemTensors l E W)\n        (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m),\n        ∃ hK : CochainComplex.IsKFlatIndependentCoefficients\n          (R := integralCoefficientCommRingSheaf l E W m) (level l E K m),\n          AdjointModel l E K S D hmn hK)) ∧\n    (∀ (W : Scheme.{t}) (U V : Complex l E W),\n      Generated l E h f N W U → Generated l E h f N W V →\n      TensorTransitions l E U V ∧\n      (∀ (n : ℕ) (S : CoefficientDerivedSystemTensors l E W),\n        ∃ (hU : Good l E U n) (hV : Good l E V n)\n          (e : DerivedCategory.Q.obj (level l E (total l E U V) n) ≅\n            (S.finiteClosed n).tensor.obj\n              (DerivedCategory.Q.obj (level l E U n), DerivedCategory.Q.obj (level l E V n))),\n          e.hom = DerivedCategory.Q.map (coefficientEvaluationTensorIso l E W n U V).hom ≫\n            ((S.finiteTensorModel n).iso (Scheme.ProEt.topology W)\n              (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n)\n              (level l E U n) (level l E V n) hU.1 hV.1).hom) ∧\n      (∀ (S : CoefficientDerivedSystemTensors l E W)\n        (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m)\n        (hUm : Good l E U m) (hVm : Good l E V m)\n        (hUn : Good l E U n) (hVn : Good l E V n),\n        TensorAdjointEquation l E U V S D hmn hUm hVm hUn hVn)) ∧\n    (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g →\n      ∀ K : Complex l E W, Generated l E h f N W K →\n        PullbackTransitions l E g K ∧\n        (∀ n : ℕ, PullbackModel l E g K n ∧ PullbackComputes l E g K n) ∧\n        (∀ (SW : CoefficientDerivedSystemTensors l E W)\n          (DW : CoefficientFiniteQuotientCalculus l E W SW)\n          (SV : CoefficientDerivedSystemTensors l E V)\n          (DV : CoefficientFiniteQuotientCalculus l E V SV) {m n : ℕ} (hmn : n ≤ m),\n          PullbackAdjointEquation l E g K SW DW SV DV hmn))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261026T023531-L-574447",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-31f2e",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261026T065545-L-3078776",
+  "kind": "interface",
+  "note": "independent cc review: STATEMENT-DISPUTED +P/κ/hκ checked against StrictQuotientExpressions defs (counterexample with zero transitions holds) and Models/Towers output; original Normalization fails against the new Operations at 152:70 and the adapted one compiles; sandbox --all compile OK; axioms propext/sorryAx/choice/Quot.sound; three new constructor statements read as true"
+ },
+ "statement_change": {
+  "date": "2026-10-26",
+  "by": "E5 stage 3",
+  "old_statement": "theorem quotientExpressionKFlatOperations {Z X Y : Scheme.{t}} (h : Z ⟶ X) (f : X ⟶ Y) (r : ℕ) (N : Fin r → Complex l E Y) (hgood : ∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K → ∀ n : ℕ, Good l E K n) : (∀ (W : Scheme.{t}) (K : Complex l E W), Generated l E h f N W K → IsNormalizedCoefficientSequence l E W (DerivedCategory.Q.obj K) ∧ (∀ (S : CoefficientDerivedSystemTensors l E W) (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m), ∃ hK : CochainComplex.IsKFlatIndependentCoefficients (R := integralCoefficientCommRingSheaf l E W m) (level l E K m), AdjointModel l E K S D hmn hK)) ∧ (∀ (W : Scheme.{t}) (U V : Complex l E W), Generated l E h f N W U → Generated l E h f N W V → TensorTransitions l E U V ∧ (∀ (n : ℕ) (S : CoefficientDerivedSystemTensors l E W), ∃ (hU : Good l E U n) (hV : Good l E V n) (e : DerivedCategory.Q.obj (level l E (total l E U V) n) ≅ (S.finiteClosed n).tensor.obj (DerivedCategory.Q.obj (level l E U n), DerivedCategory.Q.obj (level l E V n))), e.hom = DerivedCategory.Q.map (coefficientEvaluationTensorIso l E W n U V).hom ≫ ((S.finiteTensorModel n).iso (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n) (S.finiteClosed n) (level l E U n) (level l E V n) hU.1 hV.1).hom) ∧ (∀ (S : CoefficientDerivedSystemTensors l E W) (D : CoefficientFiniteQuotientCalculus l E W S) {m n : ℕ} (hmn : n ≤ m) (hUm : Good l E U m) (hVm : Good l E V m) (hUn : Good l E U n) (hVn : Good l E V n), TensorAdjointEquation l E U V S D hmn hUm hVm hUn hVn)) ∧ (∀ {V W : Scheme.{t}} (g : V ⟶ W), AllowedArrow h f g → ∀ K : Complex l E W, Generated l E h f N W K → PullbackTransitions l E g K ∧ (∀ n : ℕ, PullbackModel l E g K n ∧ PullbackComputes l E g K n) ∧ (∀ (SW : CoefficientDerivedSystemTensors l E W) (DW : CoefficientFiniteQuotientCalculus l E W SW) (SV : CoefficientDerivedSystemTensors l E V) (DV : CoefficientFiniteQuotientCalculus l E V SV) {m n : ℕ} (hmn : n ≤ m), PullbackAdjointEquation l E g K SW DW SV DV hmn))",
+  "what": "The previous split dropped the hypothesis that inputs have their actual quotient transitions. Levelwise Good does not imply normalization: take a rank-one coefficient module in degree zero at each level and zero nonidentity horizontal maps. All finite expressions remain levelwise K-flat with flat terms, but a transition adjunct is zero between nonzero rank-one modules. Restore the already available P, κ and quotient-transition compatibility hκ. The sole parent obtains precisely these data from quotientExpressionKFlatModels; its statement is unchanged.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 0G7E, 07A2, 07A4 and 07A6; extracted strict-expression normalization argument."
+  },
+  "citers": [
+   {
+    "id": "lem-pur-quotient-expression-kflat-normalization",
+    "holds": true,
+    "note": "The parent has P as an input and obtains κ and hκ from quotientExpressionKFlatModels. Pass these data to the repaired theorem; its own statement is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-pur-quotient-expression-strict-kflat-towers",
+   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+   "lem-pur-quotient-operation-adjoint-factorizations",
+   "lem-sfb-successive-derived-quotient-normalization",
+   "def-coef-normalized-dvr-tower"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply the strict quotient-expression tower construction and then perform structural induction on the finite expression constructors. The remaining tensor and pullback identities are transported through the normalized scalar adjunctions.",
+    "uses": [
+     "lem-pur-quotient-expression-strict-kflat-towers",
+     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+     "lem-pur-quotient-operation-adjoint-factorizations",
+     "lem-sfb-successive-derived-quotient-normalization",
+     "def-coef-normalized-dvr-tower"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tags 0G7E, 07A2, 07A4 and 07A6."
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-quotient-expression-strict-kflat-towers",
+   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+   "lem-pur-quotient-operation-adjoint-factorizations",
+   "lem-sfb-successive-derived-quotient-normalization",
+   "def-coef-normalized-dvr-tower"
+  ]
+ }
+}

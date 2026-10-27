@@ -1,0 +1,149 @@
+{
+ "id": "lem-zl-integral-composition-coefficient-square",
+ "kind": "statement",
+ "title": "The integral normalized compact-support compositor square for two coefficient fields",
+ "statement": "Fix a finite-field datum D, a prime l distinct from its characteristic, composable separated finite-type morphisms f:X→Y and g:Y→Z of finite-type D.k-schemes, and compactifications cf,cg,cfg [def-weil-finite-field-fiber; def-weil-scheme-morphism-properties; def-weil-compactifications-refinements]. Let E,L be finite extensions of Q_l and ι:E→L a Q_l-algebra embedding [def-weil-rationalization-karoubi]. Let AE and AL be natural integral compact-support compositors for these three compactifications over E and L, satisfying SfIntegralCompositionSpec [def-zl-field-shriek-composition-normalization]. Let bf,bg,bfg be the three integral scalar comparison natural isomorphisms satisfying SfCompactSupportIntegralBetaSpec [def-weil-compact-support-coefficient-action]. Writing T_W for the completed integral coefficient extension on W and F_c,E for the integral compact-support functor [def-weil-compact-support-finite-action], every integral constructible K satisfies T_Z(AE_K);bfg_K = bg_(F_cf,E K);F_cg,L(bf_K);AL_(T_X K). This is an equality in the integral constructible category; no rationalization, algebraic closure, stage systems or localization hypotheses occur.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-rationalization-karoubi",
+  "def-zl-field-shriek-composition-normalization",
+  "def-weil-compact-support-finite-action"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, displayed proper/open formula and independence of choices; field-coefficient extension using Bhatt--Scholze Definition 6.7.6 and lem-fix-operation-reduction, final paragraph.",
+  "external": [
+   {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+    "place": "Final paragraph: field-coefficient comparisons respect composition, units, counits and evaluation maps."
+   },
+   {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-comp-composition/thm-sf-comp-composition.proof.md",
+    "place": "Construction: inverse open adjunct of the proper/open restriction map, outer proper pushforward, and proper/open compositors; independence of choices."
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "Choose a compatible compactification tower dominating cf,cg,cfg. Expand AE and AL by SfIntegralCompositionSpec. The scalar mates preserve the open unit, proper counit and pullback compositor defining Lambda; transposing identifies the scalar square of its inverse open adjunct Gamma. Whisker with outer proper and open functors and paste proper/open compositor squares, using scalar tensor associativity. On constant-coefficient strict towers the central pasted square is already the declared PurStrictScalar.scalar_compactification_composition; transport it through the fixed constant/completed comparisons.",
+   "uses": [
+    "lem-cbc-compactifiable-compatible-tower",
+    "lem-fix-operation-reduction",
+    "lem-weil-scalar-extension-composition",
+    "lem-pur-compact-support-strict-scalar-refinement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized refinement comparisons commute with the prescribed scalar mates. Cancel their inverse pairs and use projection-normalized qcqs realization to identify the resulting square with the recorded integral functors. The supplied beta finite tensor-unit equations identify reductions of the two composites. Apply the constructible mapping-limit argument of integralConstructibleReductionHom: shifted Hom groups into restricted finite reductions are finite, so the Milnor lim-one term vanishes and reduction detects equality for these constructible maps. Extend the separated-scheme finiteness calculation to the present qcqs schemes by a finite affine cover: intersections are quasicompact separated finite-type schemes, and boundedness makes the Cech spectral sequence finite in the fixed Hom degree. This supplies the required injectivity without asserting faithfulness of finite evaluation on arbitrary derived maps.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-sp-compactification-refinement-coherence",
+    "lem-sf-integral-constructible-reduction-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-fix-operation-reduction",
+  "lem-pur-compact-support-integral-coefficient-comparison",
+  "lem-pur-compact-support-strict-scalar-refinement",
+  "lem-sf-integral-constructible-reduction-hom",
+  "lem-sp-compactification-refinement-coherence",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition, displayed proper/open formula and independence of choices; field-coefficient extension using Bhatt--Scholze Definition 6.7.6 and lem-fix-operation-reduction, final paragraph. Integral two-field part of the coefficient-square proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The compact support composition natural isomorphism commutes with extension of coefficient fields",
+   "results": "ModuleCat.extendScalarsComp and moduleCatExtendScalarsPseudofunctor_mapComp concern ordinary module scalar functors; other hits concern continuous maps. No integral compact-support compositor square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral compact support composition isomorphism commutes with extension of scalars",
+   "results": "ModuleCat.ExtendScalars.map'_comp, extendScalarsComp, extendScalars_id_comp and polynomial-law scalar composition, but no integral compact-support composition.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp gives preservation of an already established equality under localization; it does not establish the integral square.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek.*compo|compactSupport.*compo in Mathlib/CategoryTheory and Mathlib/Geometry",
+   "results": "No matches. Whole imported blueprint search for composition coefficient returned no node with this integral two-field statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FieldShriekCompositionCoefficientSquare",
+  "date": "2026-10-26",
+  "group": "C9"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "Integral proper/open scalar square before rationalization: first proof step and integral part of second proof step of lem-zl-field-shriek-composition-coefficient-square.",
+   "via": [
+    "lem-zl-field-shriek-composition-coefficient-square",
+    "lem-zl-field-shriek-composition-qcqs",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCompositionCoefficientSquare",
+  "file": "lean/Sheaf/Paper/IntegralCompositionCoefficientSquare.lean",
+  "declaration": "WeilConjectures.sfIntegralComposition_coefficient_comm",
+  "statement": "theorem sfIntegralComposition_coefficient_comm\n    (AE : sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cf E ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cg E ≅\n      sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cfg E)\n    (AL : sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cf L ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cg L ≅\n      sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cfg L)\n    (hAE : SfIntegralCompositionSpec l E D.k (coefficientPrimeUnit l D hl) cf cg cfg AE)\n    (hAL : SfIntegralCompositionSpec l L D.k (coefficientPrimeUnit l D hl) cf cg cfg AL)\n    (bf : sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cf E ⋙\n        sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          E L ι Y ≅\n      sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          E L ι X ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cf L)\n    (bg : sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cg E ⋙\n        sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          E L ι Z ≅\n      sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          E L ι Y ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cg L)\n    (bfg : sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cfg E ⋙\n        sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          E L ι Z ≅\n      sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n          E L ι X ⋙\n        sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cfg L)\n    (hbf : SfCompactSupportIntegralBetaSpec l D.k (coefficientPrimeUnit l D hl) cf E L ι bf)\n    (hbg : SfCompactSupportIntegralBetaSpec l D.k (coefficientPrimeUnit l D hl) cg E L ι bg)\n    (hbfg : SfCompactSupportIntegralBetaSpec l D.k (coefficientPrimeUnit l D hl) cfg\n      E L ι bfg)\n    (K : sfIntegralConstructibleCategory l E X) :\n    (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))\n        E L ι Z).map (AE.hom.app K) ≫ bfg.hom.app K =\n      bg.hom.app\n          ((sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl)\n            cf E).obj K) ≫\n        (sfCompactSupportFiniteIntegralFunctor l D.k (coefficientPrimeUnit l D hl) cg L).map\n          (bf.hom.app K) ≫\n        AL.hom.app\n          ((sfConstructibleIntegralScalarExtension 0 l\n            (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι X).obj K)",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T001153-L-4172976",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T001153-L-4172976",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

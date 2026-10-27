@@ -1,0 +1,116 @@
+{
+ "id": "lem-cbc-tower-square-unit-sections",
+ "kind": "statement",
+ "title": "Canonical compositor squares preserve iterated module unit sections",
+ "statement": "For any commutative ring B and any commutative square a ≫ j = j′ ≫ g of schemes, the canonical inverse-image compositor square sends the two iterated module-adjunction unit sections to one another after restriction along the inverse projection-preserving site-square isomorphism. The precise directions, test object and section are the displayed Lean statement. This uses the canonical operations of [def-cbc-strict-constant-tower-operations] and [def-weil-pbc-proetale-operations], with no open-immersion hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0, localization of morphisms of ringed sites; sites-cohomology.tex Tag 07A7, adjunction base-change construction. The explicit unit-section equation is agent-formulated from canonical conjugate compositors."
+ },
+ "stmt_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the inverse-image square under the two composite module adjunctions. The compositor definition identifies its conjugate with the upper direct-image compositor, equality transport, and the inverse lower compositor. Apply the conjugate unit identity and evaluate at a section. Each direct-image compositor is restriction along the canonical fibre-product pasting isomorphism. Functoriality combines the three restrictions into the inverse site square, proving the formula.",
+   "uses": [
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 04J0 and the conjugate-unit identity; extracted from the unit-section step of lem-cbc-open-square-section-restriction-mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exchange mate of inverse image compositor square equals sectionwise restriction for open immersion",
+   "results": "Generic site and adjunction results only; no canonical constant-ring unit-section formula.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Generic conjugate and unit equations; used in proof plan.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_conjugateEquiv|mateEquiv.*cube",
+   "results": "Generic conjugate-unit and cube-of-mates APIs; no module section specialization.",
+   "date": "2026-10-25",
+   "verdict": "generic ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TowerOpenBetaNormalization",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-open-square-section-restriction-mate",
+   "place": "Compute the compositor mate on adjunction-unit sections.",
+   "via": [
+    "lem-cbc-tower-open-beta-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TowerSquareUnitSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/TowerSquareUnitSections.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.StrictTower.towerSquare_unit_sections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StrictTower.towerUnitSection",
+   "AlgebraicGeometry.ProEtale.StrictTower.towerSiteSquare",
+   "AlgebraicGeometry.ProEtale.StrictTower.towerSquare_unit_sections"
+  ],
+  "statement": "theorem towerSquare_unit_sections {U' U X' X : Scheme.{u}}\n    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)\n    (w : a ≫ j = j' ≫ g) (M : Modules B X) (V : X.ProEt)\n    (m : M.val.obj (op V)) :\n    ((moduleSquareG B a j' j g w).inv.app M).val.app\n      (op ((Scheme.proEtaleBaseChange a).obj ((Scheme.proEtaleBaseChange j).obj V)))\n      (towerUnitSection B a ((modulePullback B j).obj M)\n        ((Scheme.proEtaleBaseChange j).obj V) (towerUnitSection B j M V m)) =\n    ((modulePullback B j').obj ((modulePullback B g).obj M)).val.map\n      ((towerSiteSquare a j' j g w).inv.app V).op\n      (towerUnitSection B j' ((modulePullback B g).obj M)\n        ((Scheme.proEtaleBaseChange g).obj V) (towerUnitSection B g M V m))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261025T163959-L-929130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261025T204710-L-2995907",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.StrictTower.towerSquare_unit_sections"
+  ],
+  "sorry_after": []
+ }
+}

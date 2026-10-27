@@ -1,0 +1,225 @@
+{
+ "id": "lem-trf-space-etale-source-atlas-detection",
+ "kind": "statement",
+ "title": "Detection of etaleness through a representable source cover",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with algebraic spaces over $S$ and representable maps in the sense of [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. A representable map is etale, respectively surjective, if every scheme base change is etale [def-weil-etale-morphism], respectively surjective [def-weil-surjective-morphism]. A morphism $f:X\\to Y$ of algebraic spaces is called chartwise etale if $f\\circ a:h_W\\to Y$ is representable etale for every representable etale $a:h_W\\to X$ with $W$ a scheme. (1) Let $Y$ be an algebraic space, $W,V$ $S$-schemes, $q:h_W\\to Y$ a morphism, and $p:V\\to W$ a surjective etale scheme morphism. If $q\\circ h_p$ is representable etale, then $q$ is representable etale. (2) Let $X,Y,R$ be algebraic spaces, $f:X\\to Y$ a morphism and $p:R\\to X$ a representable surjective etale morphism. If $f\\circ p$ is representable etale, then $f$ is chartwise etale. The source $R$ need not be a scheme. (3) For every representable surjective etale atlas $p:h_U\\to X$ with $U$ an $S$-scheme, $f$ is chartwise etale if and only if $f\\circ p$ is representable etale. Such an atlas exists for every $X$. All fibre products are the sheaf fibre products of [lem-trf-space-fibre-products-etale-covers], with scheme fibre products as in [def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03EC (lemma-etale-over-space), part (3), and Tag 03FS (lemma-etale-local), (1) iff (2); part (2) is the same source-descent scheme-test argument for a representable cover with arbitrary algebraic-space source. Descent input: descent.tex Tag 036W (lemma-etale-etale-local-source). Extracts returned steps 4,6,8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-weil-surjective-morphism",
+  "def-pc-fibre-product",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof": [
+  {
+   "text": "For (1), represent the scheme test of q by A using scheme-source representability in [lem-trf-space-representable-etale-scheme-tests]. That node makes h_p representable surjective etale. Test h_p over A to obtain B with an etale projection d:B→A. The separately supplied surjective test gives the same property for d: any two representing pullback squares are uniquely isomorphic, Yoneda lifts this isomorphism to schemes, and surjectivity is invariant under isomorphisms. Paste the test of h_p with the test of q. The resulting square tests h_p followed by q, so the same uniqueness argument gives etaleness of B→A→T from the hypothesis. Apply [lem-trf-etale-descent-through-source-cover] to obtain etaleness of A→T. This constructs every test required by [def-trf-algebraic-space].",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-trf-algebraic-space",
+    "lem-trf-etale-descent-through-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03EC (lemma-etale-over-space), proof of (3), with descent.tex Tag 036W (lemma-etale-etale-local-source) for the scheme-source cancellation."
+   }
+  },
+  {
+   "text": "For (2), take the etale scheme test of the representable cover p:R→X along a:h_W→X, obtaining a scheme V, d:V→W and b:h_V→R. Transfer surjectivity from the surjective scheme test to this test by uniqueness of representing squares, as in step 1. To prove b etale, base change the etale scheme-test predicate of a along p: for a scheme test, represent the outer rectangle, use the existing pullback universal property to lift its map, and cancel the right pullback square. This directly proves representable base-change stability from [def-trf-algebraic-space], with no algebraic-space fibre-product construction. Compose b with p followed by f using isEtale_comp of that definition module. The pullback equation identifies this with h_d followed by a followed by f. Apply step 1 to descend to a followed by f. The proof applies to arbitrary presheaf sources and hence does not require R to be a scheme.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FS (lemma-etale-local), source pullback argument of (4) implies (1), using Tag 03EC (3); the same argument uses an arbitrary representable source cover."
+   }
+  },
+  {
+   "text": "For (3), choose an atlas $p:h_U\\to X$ from [def-trf-algebraic-space], which states its existence and representable surjective etaleness. If $f$ is chartwise etale, apply its defining condition to the chart $p$ to see that $f\\circ p$ is representable etale. Conversely, if $f\\circ p$ is representable etale, apply (2), proved in Step 2, with $R=h_U$. Thus the equivalence holds for every such atlas, and one exists for every $X$.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FS (lemma-etale-local), equivalence (1) iff (2); spaces.tex Tag 025Y (definition-algebraic-space) for existence of an atlas."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-trf-algebraic-space",
+  "lem-trf-etale-descent-through-source-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03EC (lemma-etale-over-space), proof of (3), and 03FS (lemma-etale-local), source-pullback proof; the same scheme-test argument proves (2) for arbitrary representable source covers. Formalization by Y8 uses pullback-square cancellation directly for step 2 and uniqueness of representing scheme tests, rather than constructing bundled algebraic-space fibre products."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of algebraic spaces, it is enough to check etaleness after one surjective etale scheme atlas of the source",
+   "results": "{\"t\": \"2026-10-22T06:10:26Z\", \"tool\": \"leanfinder\", \"query\": \"For a morphism of algebraic spaces, it is enough to check etaleness after one surjective etale scheme atlas of the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"ff45083697e7a7cb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Etale/of_comp/base-change and ring-locality results do not state source-cover detection for morphisms of algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map of sheaves represented by algebraic spaces is etale on all scheme charts if its composite with one representable surjective etale scheme cover is etale",
+   "results": "{\"t\": \"2026-10-22T06:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"A map of sheaves represented by algebraic spaces is etale on all scheme charts if its composite with one representable surjective etale scheme cover is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"47f59c794511d42f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Etale/of_comp/base-change and ring-locality results do not state source-cover detection for morphisms of algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is chartwise etale if its composite with a representable surjective etale cover, whose source may be an algebraic space, is representable etale",
+   "results": "{\"t\": \"2026-10-22T06:13:39Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces is chartwise etale if its composite with a representable surjective etale cover, whose source may be an algebraic space, is representable etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"f350a708d2055ca4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Etale/of_comp/base-change and ring-locality results do not state source-cover detection for morphisms of algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T06:10:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Etale/of_comp/base-change and ring-locality results do not state source-cover detection for morphisms of algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157."
+  },
+  {
+   "tool": "grep",
+   "query": "IsChartwiseEtale|etale.*atlas|atlas.*etale",
+   "results": "{\"t\": \"2026-10-22T06:10:49Z\", \"tool\": \"grep\", \"query\": \"IsChartwiseEtale|etale.*atlas|atlas.*etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme Etale/of_comp/base-change and ring-locality results do not state source-cover detection for morphisms of algebraic spaces. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etaleness of a morphism of algebraic spaces is detected by a single surjective etale scheme presentation of its source",
+   "results": "{\"t\": \"2026-10-22T06:11:15Z\", \"tool\": \"leansearch\", \"query\": \"Etaleness of a morphism of algebraic spaces is detected by a single surjective etale scheme presentation of its source\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|chartwise.*[Ee]tale|[Ee]tale.*atlas",
+   "results": "{\"t\": \"2026-10-22T07:14:29Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|chartwise.*[Ee]tale|[Ee]tale.*atlas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or ring maps, not algebraic-space source-cover detection. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; Etale.of_comp cancels the other arrow and requires a scheme target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etaleness descends from a surjective etale scheme cover of the source of a map to an algebraic space",
+   "results": "{\"t\": \"2026-10-22T07:14:29Z\", \"tool\": \"leansearch\", \"query\": \"Etaleness descends from a surjective etale scheme cover of the source of a map to an algebraic space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsStandardEtale.of_surjective\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\", \"Algebra.FormallyEtale.iff_of_surjective\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\"], \"digest\": \"80e9fae097457517\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or ring maps, not algebraic-space source-cover detection. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; Etale.of_comp cancels the other arrow and requires a scheme target."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-22T07:14:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicSpace\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or ring maps, not algebraic-space source-cover detection. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; Etale.of_comp cancels the other arrow and requires a scheme target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic spaces is etale on every scheme chart if it becomes representable etale after a representable surjective etale cover of its source",
+   "results": "{\"t\": \"2026-10-22T07:14:38Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of algebraic spaces is etale on every scheme chart if it becomes representable etale after a representable surjective etale cover of its source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"2bc748dc4dc30c64\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or ring maps, not algebraic-space source-cover detection. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; Etale.of_comp cancels the other arrow and requires a scheme target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a scheme to an algebraic space is representable etale if its composite with a surjective etale scheme morphism is representable etale",
+   "results": "{\"t\": \"2026-10-22T07:19:52Z\", \"tool\": \"leanfinder\", \"query\": \"A map from a scheme to an algebraic space is representable etale if its composite with a surjective etale scheme morphism is representable etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"1fb395cf57414d17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern scheme morphisms or ring maps, not algebraic-space source-cover detection. Read Mathlib/AlgebraicGeometry/Morphisms/Etale.lean:39-157; Etale.of_comp cancels the other arrow and requires a scheme target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-chartwise-etale-permanence",
+  "date": "2026-10-22",
+  "group": "Q118"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Section-algebra and adjunction-map paragraphs of the polarized ampleness descent input (Stacks 0D3C), through the section-algebra etale-base-change step: present the small etale ringed topoi by enlarged etale sites before applying ringed-site localization. Historical imported ancestry retained. Basic chartwise etale permanence and covering base change needed to construct the enlarged etale site. Re-split of lem-trf-space-chartwise-etale-permanence: Returned steps 4,6,8: descent of scheme-source etaleness through a surjective etale scheme cover and detection after a representable source cover; this supplies the omitted atlas verification.",
+   "via": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-space-etale-source-atlas-detection",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Prove scheme-source detection by testing on arbitrary schemes and using the existing scheme source-descent theorem. For an arbitrary algebraic-space source cover pull back each scheme chart to a scheme, compose representable etale maps, and apply the first clause. The atlas equivalence and existence then follow directly. All needed lemmas already exist; no new nodes.",
+  "blueprint": "Retains the historical ancestry and exact place in blueprint.from: the returned atlas-verification steps 4,6,8 of lem-trf-space-chartwise-etale-permanence below the polarized-descent helper. Steps 1-3 supply scheme-source descent, detection through any representable source cover, and the atlas criterion. No change to the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-37cbb06c4",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-37cbb06c4 (reviewer sub-agent of L); spot-checked: Read the item and its full 3-step proof in full. No new nodes; statement and stmt_deps are byte-identical to the side-live unsplit node. The item is not in route-pivot-dropped and has no repair note of its own (the 2026-10-21 re-split note belongs to its parent, lem-trf-space-chartwise-etale-permanence, which cites this item; there is no cycle). Read Stacks spaces-properties.tex at lemma-etale-over-space 03EC (lines 2019-2090) and lemma-etale-local 03FS (lines 2111-2160). Clause (1) is 03EC(3). Clause (2) is the 03FS (4)⇒(1) argument with a representable source that need not be a scheme. Clause (3) is 03FS (1)⇔(2) plus the existence of an atlas. The delivery writes out the details Stacks omits; no hypothesis is added. Step 1: the scheme tests A=T×_YW and B=T×_YV are schemes (lem-trf-space-representable-etale-scheme-tests); pasting of pullbacks makes B→A the scheme test of h_p, so it is surjective étale; B→A→T is the test of q∘h_p; lem-trf-etale-descent-through-source-cover applies, with all hypotheses checked. Step 2: P=R×_Xh_W≅h_V via the representability of p, giving a surjective étale d:V→W; b is the base change of a, so representable étale; composition plus p∘b=a∘h_d, then clause (1). Step 3: the chartwise definition at the atlas, and the converse via (2) with R=h_U. Every proof dependency is in unit sk-i-curve-zero; there are no tool_uses and no SGA. Edge cases: empty W, empty X, and the necessity of surjectivity. A DAG search for 03EC/03FS/036W/chartwise found no node stating these clauses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceEtaleSourceAtlasDetection",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_source_atlas_detection",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceEtaleSourceAtlasDetection.lean",
+  "statement": "theorem etale_source_atlas_detection {S : Scheme.{u}} : (∀ (Y : AlgebraicSpace S) (W V : Over S) (q : yoneda.obj W ⟶ Y.obj.obj) (p : V ⟶ W), Etale p.left → Surjective p.left → IsEtale (yoneda.map p ≫ q) → IsEtale q) ∧ (∀ (X Y R : AlgebraicSpace S) (f : X ⟶ Y) (p : R ⟶ X), IsEtale p.hom.hom → IsSurjective p.hom.hom → IsEtale (p.hom.hom ≫ f.hom.hom) → ∀ (W : Over S) (a : yoneda.obj W ⟶ X.obj.obj), IsEtale a → IsEtale (a ≫ f.hom.hom)) ∧ (∀ (X Y : AlgebraicSpace S) (f : X ⟶ Y) (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj), IsEtale p → IsSurjective p → ((∀ (W : Over S) (a : yoneda.obj W ⟶ X.obj.obj), IsEtale a → IsEtale (a ≫ f.hom.hom)) ↔ IsEtale (p ≫ f.hom.hom))) ∧ (∀ X : AlgebraicSpace S, ∃ (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj), IsEtale p ∧ IsSurjective p)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The four conjuncts give clauses (1), (2), (3), and atlas existence. Chartwise etaleness is expanded verbatim as its scheme-chart condition, without redefining the existing downstream IsChartwiseEtale or introducing a dependency cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34d946812",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Item lean record only changed vs side-live node. Lean theorem etale_source_atlas_detection checked clause by clause against node and Stacks 03EC(3)/03FS: (1) Etale p.left, Surjective p.left, IsEtale (yoneda.map p ≫ q) → IsEtale q; (2) arbitrary-space R, representable surjective etale p, chartwise conclusion; (3) iff for every atlas; (4) atlas existence. IsEtale/IsSurjective are the recorded def-trf-algebraic-space declarations (representability included); chartwise formula is verbatim the live IsChartwiseEtale body, inlined to avoid a DAG cycle (no H4). Universe u matches AlgebraicSpace; no extra hypotheses; edge cases (empty W/V/X, non-scheme R, surjectivity necessary) covered. Single sorry, no defs, docstrings with source and blueprint and the 3 proof steps, statement verbatim, no line over 100 chars, no name clash. Advisory: proof-only private import EtaleDescentThroughSourceCover and unused public fibre-product/HasPullback imports follow landed ChartwiseEtalePermanence precedent; Second reading section is the standard deliver2 placeholder. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261023T132458-L-2283666",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

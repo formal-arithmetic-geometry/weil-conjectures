@@ -294,20 +294,37 @@
   "module": "Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation",
   "declaration": "AlgebraicGeometry.excellent_normalization_preparation",
   "file": "lean/Sheaf/AlgebraicGeometry/ExcellentNormalizationPreparation.lean",
-  "statement": "theorem excellent_normalization_preparation (X : Scheme.{u}) [IsReduced X] [IsLocallyNoetherian X] [CompactSpace X] (hExcellent : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) : IsFinite X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ IsLocallyNoetherian X.reducedNormalization ∧ CompactSpace X.reducedNormalization ∧ (∀ V : X.reducedNormalization.affineOpens, IsExcellent Γ(X.reducedNormalization, V)) ∧ (∀ x : X.reducedNormalization, IsDomain (X.reducedNormalization.presheaf.stalk x) ∧ IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk x)) ∧ ∃ U : X.Opens, Dense (U : Set X) ∧ (∀ Z : irreducibleComponents X, ∀ x : X, IsGenericPoint x Z.1 → x ∈ U) ∧ IsIso (X.fromReducedNormalization ∣_ U)",
+  "statement": "theorem excellent_normalization_preparation (X : Scheme.{u}) [IsReduced X] [IsLocallyNoetherian X] [CompactSpace X] (hX : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) : IsFinite X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ IsLocallyNoetherian X.reducedNormalization ∧ CompactSpace X.reducedNormalization ∧ (∀ V : X.reducedNormalization.affineOpens, IsExcellent Γ(X.reducedNormalization, V)) ∧ (∀ x : X.reducedNormalization, IsDomain (X.reducedNormalization.presheaf.stalk x) ∧ IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk x)) ∧ ∃ U : X.Opens, Dense (U : Set X) ∧ (∀ Z ∈ irreducibleComponents X, ∀ η : X, IsGenericPoint η Z → η ∈ U) ∧ IsIso (X.fromReducedNormalization ∣_ U)",
   "branch": "newtargets-dag",
-  "by": "Q10",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation deleted (dead: no target reaches it); this node is not reached either."
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/ExcellentNormalizationPreparation.lean",
+  "module": "Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation",
+  "declaration": "AlgebraicGeometry.excellent_normalization_preparation",
+  "reason": "module deleted as dead (no target reaches it; this node is not reached either); the declaration exists nowhere else in lean/, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-40ad904d9",
-  "group": "Q10",
+  "reviewer": "NT-stage2-cc-d5f64e236",
+  "group": "NB",
   "result": "pass",
-  "note": "Every clause of the Lean statement matches the node and Stacks 035S/035Q/0BAJ (+07QV/07QU). Hypotheses: [IsReduced X] [IsLocallyNoetherian X] [CompactSpace X] and IsExcellent of Γ on every affine open; nothing stronger, one universe. Conclusions: IsFinite and Surjective of fromReducedNormalization, IsLocallyNoetherian and CompactSpace of the normalization, IsExcellent on every affine open of it, every stalk IsDomain and IsIntegrallyClosed, ∃ U : X.Opens dense, containing every IsGenericPoint of each irreducible component, with IsIso (ν ∣_ U). Empty X allowed. Uses the landed reducedNormalization/fromReducedNormalization construction and the IsExcellent def; lean.statement verbatim; node otherwise identical to live; docstrings carry source and blueprint; sorry only. nt_compile --json: exit 0, no warnings, 1.9 s; probe confirmed Surjective = AlgebraicGeometry.Surjective and ∣_ = morphismRestrict, and a deliberate failing line errored as expected. Advisory: Mathlib Surjective is also the declaration recorded for node def-weil-surjective-morphism, which is not in stmt_deps; same declaration, maintainer note only."
+  "note": "Restoration of the statement after the dead-module deletion (lean_removed 8a6a58ff1c5). The node is again reached (stage-2 queue, distance 1). Node diff vs live: only lean. Statement identical to the version passed on 2026-10-18 (Q10). Checked clause by clause: IsReduced, IsLocallyNoetherian+CompactSpace, IsExcellent on every affine open; the canonical reducedNormalization/fromReducedNormalization (Sigma of component normalizations, 0CDV); IsFinite, Surjective; normalization Noetherian, quasi-compact and excellent on every affine open; stalks IsDomain∧IsIntegrallyClosed; ∃ dense U containing all component generic points with IsIso (ν ∣_ U). Empty X covered. lean.statement verbatim. All 9 stmt_dep records and declarations exist in side-live. Public imports are the stmt_dep modules; proof-dep modules are present. Docstrings carry source places, blueprint id and 8 proof steps; sorry only; no new definitions. No duplicate (ComponentwiseNormalizationProperties is a different node). Report has Worker report and Second reading by NB. Not recompiled per instruction; worker reports a clean compile. Advisory: Surjective is shared with def-weil-surjective-morphism, which is not in stmt_deps; maintainer note only."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

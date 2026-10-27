@@ -1,0 +1,255 @@
+{
+ "id": "lem-per-perfect-affinoid-local-jacobian-chart",
+ "kind": "statement",
+ "title": "Local Jacobian charts of a regular affinoid over a perfect field",
+ "statement": "Let $F$ be a field complete for a nontrivial real-valued nonarchimedean absolute value, and let $r,s\\geq0$. Write $T=F\\langle x_1,\\ldots,x_r\\rangle$ for the ring of series $\\sum_{\\nu\\in\\mathbf N^r}a_\\nu x^\\nu$ such that for every $\\epsilon>0$ only finitely many coefficients have $|a_\\nu|\\geq\\epsilon$, with coefficientwise addition and Cauchy multiplication. Choose $f_1,\\ldots,f_s\\in T$, put $I=(f_1,\\ldots,f_s)$ and $B=T/I$, and write bars for images in $B$. For $E\\subseteq\\{1,\\ldots,s\\}$ and $U\\subseteq\\{1,\\ldots,r\\}$ with $|E|=|U|$, put $I_E=(f_j:j\\in E)$ and $D_{E,U}=\\det(\\partial f_j/\\partial x_i)_{i\\in U,j\\in E}$, ordering both subsets increasingly; partial derivatives are termwise derivatives and determinant is [def-weil-pbc-matrix-determinant]. Set $(I_E:I)=\\{a\\in T:aI\\subseteq I_E\\}$. The empty determinant is $1$ and $I_\\varnothing=0$. Suppose $F$ is perfect (every finite algebraic extension of $F$ is separable) and $B$ is regular Noetherian [def-weil-regular-scheme]. For every maximal ideal $\\mathfrak m$ of $B$, there exist such $E,U$ and $a\\in(I_E:I)$ with $\\bar a\\,\\bar D_{E,U}\\notin\\mathfrak m$. No equidimensionality assumption is imposed. For $B=0$ the assertion is vacuous.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Temkin, Proposition 3.3.1 proof, printed p.19 (perfect-field regularity implies analytic smoothness), and Proposition 3.3.2 proof, printed p.21 (choice of relation subset, minor, and colon element); Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1 (regular point with separable residue field is smooth)."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-pbc-matrix-determinant"
+ ],
+ "proof": [
+  {
+   "text": "If $B=0$ the assertion is vacuous. Otherwise fix a maximal ideal $\\mathfrak m\\subset B$, put $\\mathfrak n\\subset T$ to be its inverse image under $T\\to B$, and identify $\\kappa=T/\\mathfrak n=B/\\mathfrak m$. Put $P=F[x_1,\\ldots,x_r]$ and $\\mathfrak p=P\\cap\\mathfrak n$. Apply [lem-trf-affinoid-polynomial-closed-point-comparison] with its polynomial ideal $J=0$. It says that $T$ is Noetherian, $\\mathfrak p$ is maximal, and the induced map of completions $\\widehat{P_{\\mathfrak p}}\\to\\widehat{T_{\\mathfrak n}}$ is an isomorphism. The field $F$ is Noetherian since each of its ideals is $0$ or $F$. Hence $P$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], and both localizations are Noetherian by [lem-weil-pbc-localization-noetherian]. By [lem-weil-pbc-local-completion-local-ring], completing either local ring preserves its residue field. The completion isomorphism, being induced by $P_{\\mathfrak p}\\to T_{\\mathfrak n}$, therefore identifies $P/\\mathfrak p$ with $T/\\mathfrak n=\\kappa$ as $F$-algebras. For these maximal ideals, identifying the residue field of the localization with the quotient sends $g/u$ to $(u\\bmod\\mathfrak p)^{-1}(g\\bmod\\mathfrak p)$, and likewise for $T$. Finally [lem-weil-pbc-zariski-lemma] makes $P/\\mathfrak p$ finite-dimensional over $F$, since it is a field quotient of a polynomial algebra. Thus $\\kappa/F$ is finite.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://www.numdam.org/article/AIF_1999__49_2_473_0.pdf",
+    "place": "Conrad, Irreducible components of rigid spaces, section 1.1, printed pp.477--478, algebraic/analytic completed local comparison; proof of Lemma 1.1.5, p.483, finite residue fields. Explicit deduction from the existing comparison node and algebra nodes."
+   }
+  },
+  {
+   "text": "The finite extension $\\kappa/F$ of Step 1 is separable by the stated perfectness hypothesis. The definition [def-weil-regular-scheme] makes $B_{\\mathfrak m}$ regular local. Therefore [lem-per-separable-regular-affinoid-residual-conormal] applies and gives injectivity of $d_{\\mathfrak n}:I/\\mathfrak n I\\to\\kappa^r$. This uses neither a discrete value group nor regularity after scalar extension.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-per-separable-regular-affinoid-residual-conormal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+   }
+  },
+  {
+   "text": "The classes $[f_j]$ span $I/\\mathfrak n I$: reduce the coefficients in any expression $g=\\sum_jb_jf_j$ modulo $\\mathfrak n$. By [lem-weil-span-independent-subfamily], choose $E\\subseteq\\{1,\\ldots,s\\}$ whose classes are a basis. Injectivity in Step 2 shows that the matrix with columns $d_{\\mathfrak n}([f_j])$, $j\\in E$ in increasing order, defines an injective map $\\kappa^E\\to\\kappa^r$: a vector in its kernel gives a zero basis combination in $I/\\mathfrak n I$, so all its coordinates vanish.",
+   "uses": [
+    "lem-weil-span-independent-subfamily"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+   }
+  },
+  {
+   "text": "Put $S=T\\setminus\\mathfrak n$, $R=T_{\\mathfrak n}$, and $M=S^{-1}I$, using [def-weil-pbc-localization-at-prime] and [def-weil-pbc-module-localization]. The maximal ideal of $R$ is $\\mathfrak nR$, and $M$ is finitely generated by the $f_j/1$. The formula $g/u\\mapsto(u\\bmod\\mathfrak n)^{-1}[g]$ induces an isomorphism $M/\\mathfrak nRM\\simeq I/\\mathfrak n I$. Indeed, a fraction equality becomes the same equality after reducing modulo $\\mathfrak n$, since its witnessing multiplier is outside $\\mathfrak n$; the formula kills $\\mathfrak nRM$. Its inverse is $[g]\\mapsto[g/1]$: if $v\\in T$ lifts $(u\\bmod\\mathfrak n)^{-1}$, then $1-vu\\in\\mathfrak n$ and $g/u-vg/1=(1-vu)g/u$ vanishes modulo $\\mathfrak nRM$. The two composites are consequently identities. The basis in Step 3 spans this quotient. By [lem-weil-pbc-nakayama-local-generators], $f_j/1$, $j\\in E$, generate $M$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-module-localization",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+   }
+  },
+  {
+   "text": "For each $l\\in\\{1,\\ldots,s\\}$ express $f_l/1=\\sum_{j\\in E}(b_{lj}/u_{lj})(f_j/1)$ in $M$, with $u_{lj}\\notin\\mathfrak n$. Set $v_l=\\prod_{j\\in E}u_{lj}$. Multiplying gives an element $g_l=v_lf_l-\\sum_{j\\in E}c_{lj}f_j\\in I$ whose localization is zero, with $c_{lj}\\in T$. The zero criterion in [def-weil-pbc-module-localization] supplies $w_l\\notin\\mathfrak n$ with $w_lg_l=0$. Thus $h_l=w_lv_l\\notin\\mathfrak n$ and $h_lf_l\\in I_E$. The finite product $a=\\prod_{l=1}^s h_l$ lies outside $\\mathfrak n$, since $T/\\mathfrak n$ is a field, and satisfies $af_l\\in I_E$ for every $l$. By the definition of $I$ this gives $aI\\subseteq I_E$, hence $a\\in(I_E:I)$. All products over empty sets mean $1$.",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor] to the injective $r\\times|E|$ matrix of Step 3. It supplies a subset $U\\subseteq\\{1,\\ldots,r\\}$ of size $|E|$ with nonzero determinant in $\\kappa$. The Leibniz formula in [def-weil-pbc-matrix-determinant] commutes with reduction modulo $\\mathfrak n$, term by term in its finite sum. The determinant in question is therefore $D_{E,U}\\bmod\\mathfrak n$, so $D_{E,U}\\notin\\mathfrak n$. This also covers $E=U=\\varnothing$, whose determinant is $1$.",
+   "uses": [
+    "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+    "def-weil-pbc-matrix-determinant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+   }
+  },
+  {
+   "text": "In the field $\\kappa=T/\\mathfrak n=B/\\mathfrak m$, both the image of $a$ from Step 5 and that of $D_{E,U}$ from Step 6 are nonzero. Their product is nonzero, giving $\\bar a\\,\\bar D_{E,U}\\notin\\mathfrak m$. The choices are made separately at each maximal ideal, so $|E|$ may vary from point to point and no equidimensionality is used. If $I=0$, the basis may be empty, the colon element is $1$, and the argument gives the empty determinant. If $r=0$, the injection into $\\kappa^0$ forces that same empty-basis case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+    "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-matrix-determinant",
+  "def-weil-pbc-module-localization",
+  "def-weil-regular-scheme",
+  "lem-per-separable-regular-affinoid-residual-conormal",
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-weil-span-independent-subfamily"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.huji.ac.il/~temkin/papers/Excellent_Desingularization.pdf",
+  "place": "Proposition 3.3.2 proof, printed pp.20--21; coefficient-field regularity input explained in Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1, printed p.510. Agent reconstruction with the analytic inputs separately stated; archival PDFs WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "At every maximal ideal of a regular Tate algebra quotient over a perfect field there is a nonvanishing Jacobian minor whose equations generate the relation ideal locally",
+   "results": "{\"t\": \"2026-10-24T05:17:16Z\", \"tool\": \"leanfinder\", \"query\": \"At every maximal ideal of a regular Tate algebra quotient over a perfect field there is a nonvanishing Jacobian minor whose equations generate the relation ideal locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\"], \"digest\": \"752cbda657ba226d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients; source read: Mathlib/RingTheory/Smooth/Local.lean:26-55 and Smooth/StandardSmoothOfFree.lean:55-79"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"jacobian\", \"IsRegularLocalRing\"",
+   "results": "{\"t\": \"2026-10-24T05:17:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"jacobian\\\", \\\"IsRegularLocalRing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients; source read: Mathlib/RingTheory/Smooth/Local.lean:26-55 and Smooth/StandardSmoothOfFree.lean:55-79"
+  },
+  {
+   "tool": "grep",
+   "query": "jacobian|isRegularLocalRing",
+   "results": "{\"t\": \"2026-10-24T05:17:09Z\", \"tool\": \"grep\", \"query\": \"jacobian|isRegularLocalRing\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\"], \"digest\": \"3f5a82a7ad7be277\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients; source read: Mathlib/RingTheory/Smooth/Local.lean:26-55 and Smooth/StandardSmoothOfFree.lean:55-79",
+   "subdirectory": "RingTheory/Smooth"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Analytic Jacobian criterion at closed points of a regular affinoid algebra over a perfect field",
+   "results": "{\"t\": \"2026-10-24T05:17:09Z\", \"tool\": \"leansearch\", \"query\": \"Analytic Jacobian criterion at closed points of a regular affinoid algebra over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AnalyticAt\", \"AnalyticAt.fderiv\", \"AnalyticAt.deriv\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_iff_aevalDifferential_bijective\", \"AnalyticAt.hasStrictFDerivAt\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"closure_closedPoints\"], \"digest\": \"15c3ec23180905d1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients; source read: Mathlib/RingTheory/Smooth/Local.lean:26-55 and Smooth/StandardSmoothOfFree.lean:55-79"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local regularity and separable residue field imply a standard smooth local presentation for restricted power series quotients",
+   "results": "{\"t\": \"2026-10-24T05:17:18Z\", \"tool\": \"leanfinder\", \"query\": \"Local regularity and separable residue field imply a standard smooth local presentation for restricted power series quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.isStandardSmooth_holdsForLocalizationAway\", \"RingHom.Smooth.locally_isStandardSmooth\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"Algebra.IsStandardSmooth.localization_away\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"Algebra.IsStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\"], \"digest\": \"a1442b6e40e1c199\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern polynomial presentations and ordinary Kahler differentials, manifold analyticity, or perfectoid completions; none states the analytic criterion for restricted-series quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every regular affinoid algebra over a perfect complete nonarchimedean field has at each maximal ideal a nonvanishing Jacobian minor and a colon ideal certificate for its defining equations",
+   "results": "{\"t\": \"2026-10-24T07:09:50Z\", \"tool\": \"leanfinder\", \"query\": \"Every regular affinoid algebra over a perfect complete nonarchimedean field has at each maximal ideal a nonvanishing Jacobian minor and a colon ideal certificate for its defining equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.SubmersivePresentation.jacobian_isUnit\", \"Algebra.IsStandardSmooth\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_linearIndependent_of_span_eq_top\", \"Algebra.SubmersivePresentation.isStandardSmooth\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelations\"], \"digest\": \"510e184359c974ea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits are submersive polynomial presentations; the source grep finds no TateAlgebra, affinoid, or RestrictedPowerSeries. Read Mathlib/RingTheory/Smooth/Local.lean:34--55; ordinary algebraic smoothness cannot replace the analytic input."
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|affinoid|RestrictedPowerSeries",
+   "results": "{\"t\": \"2026-10-24T07:06:14Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|affinoid|RestrictedPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the semantic hits are submersive polynomial presentations; the source grep finds no TateAlgebra, affinoid, or RestrictedPowerSeries. Read Mathlib/RingTheory/Smooth/Local.lean:34--55; ordinary algebraic smoothness cannot replace the analytic input."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-affinoid-complete-field-extension",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited ancestor Step 3 formal-resolution supporting branch (absent as a separate sentence in the latest ancestor); Temkin, Proposition 3.3.1 proof, printed p.19 (perfect-field regularity implies analytic smoothness), and Proposition 3.3.2 proof, printed p.21 (choice of relation subset, minor, and colon element); Conrad, Irreducible components of rigid spaces, proof of Lemma 3.3.1 (regular point with separable residue field is smooth).",
+   "via": [
+    "lem-per-regular-affinoid-complete-field-extension",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-perfect-affinoid-local-jacobian-chart",
+  "worker": "stage1",
+  "summary": "Statement retained exactly. One statement-only analytic input isolates residual continuous conormal injectivity at a separable regular point. Finite residue fields are deduced from existing polynomial/affinoid completed-local comparison and algebra nodes. The proof supplies equation selection, Nakayama, explicit denominator/colon calculation, and nonzero-minor selection. No completed Lean declaration or Mathlib match for the analytic assertion was found.",
+  "blueprint": "Retains the inherited formal-resolution support branch below lem-per-artin-gabber-affine-curve Step 3; the latest Step 3 has no separate affinoid sentence. Supplies the perfect-field local-Jacobian input to lem-per-regular-affinoid-complete-field-extension without altering its route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+    "why": "Generic finite-dimensional matrix tool selecting a full-column nonzero minor; this unit has no substitute and its analytic route is unchanged."
+   },
+   {
+    "node": "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "why": "Generic comparison of polynomial and Tate-algebra local completions, used only with polynomial ideal zero to establish finite closed-point residue fields. This reuses existing analytic infrastructure without replacing the assigned perfect-field Jacobian route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-field-injective-matrix-nonzero-maximal-minor",
+  "lem-trf-affinoid-polynomial-closed-point-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NG-3fd6832e7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-3fd6832e7 (reviewer sub-agent of L); spot-checked: PASS, no fixes. The item's statement is unchanged; Steps 1-7 cite nodes that say what each step uses. The proof is the selection of a basis subfamily, Nakayama, an explicit denominator/colon calculation in Step 5, and an injective-matrix minor. The new unsplit node lem-per-separable-regular-affinoid-residual-conormal (regular B_m plus finite separable residue field gives an injective residual Jacobian map I/nI->kappa^r) is true by my own check: the J=0 completion comparison gives T_n regular of dimension r with n/n^2 = p/p^2; separability makes the polynomial Jacobian an isomorphism; regularity of the quotient makes I/nI->n/n^2 injective. Tested on r=0, s=0, x^2-p over Q_p, x(x-1), and a repeated equation; the imperfect x^p-c and the non-regular x^2 are correctly excluded. It is not a duplicate: lem-per-affinoid-residual-conormal-injective needs regularity after every field extension, lem-per-geometric-affinoid-jacobian-unit is the global unit-ideal statement, and the trf/pbc smoothness nodes are algebraic or scheme-theoretic. Its form passes B1-B4, and it does not restate the item. Temkin and Conrad are not in literature/ (marked WANTED), so I checked the mathematics directly instead of the sources. Batch-5 finding: lem-trf-affinoid-polynomial-closed-point-comparison is a generic comparison of polynomial and Tate-algebra local completions. Its 35-node closure is Weierstrass division, norms and DVR/pbc leaves, with no trace-formula or Poincare-duality statement, and Step 1 uses it only with J=0 to get finite residue fields. It is outside the assumed statements, so no RETURN. Accepted tool_uses: the field-injective-matrix minor lemma and that trf comparison, both generic black boxes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PerfectAffinoidLocalJacobianChart",
+  "declaration": "RestrictedSeries.perfect_affinoid_local_jacobian_chart",
+  "file": "lean/Sheaf/RingTheory/PerfectAffinoidLocalJacobianChart.lean",
+  "statement": "theorem perfect_affinoid_local_jacobian_chart (F : Type u) [NormedField F] [IsUltrametricDist F] [CompleteSpace F] [PerfectField F] (hF : ∃ c : F, c ≠ 0 ∧ ‖c‖ ≠ 1) (r s : ℕ) (f : Fin s → ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))) [IsRegularRing (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ Ideal.span (Set.range f))] (m : Ideal (↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ))) ⧸ Ideal.span (Set.range f))) [m.IsMaximal] : ∃ (E : Finset (Fin s)) (U : Finset (Fin r)) (h : U.card = E.card) (a D : ↥(MvPowerSeries.IsRestricted.subring (R := F) (fun _ : Fin r ↦ (1 : ℝ)))), (∀ b ∈ Ideal.span (Set.range f), a * b ∈ Ideal.span (f '' (E : Set (Fin s)))) ∧ D.val = Matrix.det (fun i j : Fin E.card ↦ MvPowerSeries.pderiv F (U.orderEmbOfFin h i) (f (E.orderEmbOfFin rfl j)).val) ∧ Ideal.Quotient.mk (Ideal.span (Set.range f)) a * Ideal.Quotient.mk (Ideal.span (Set.range f)) D ∉ m",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ec38f49b",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Clause-by-clause check of RestrictedSeries.perfect_affinoid_local_jacobian_chart against the node. The field is complete, ultrametric, with a nontrivial norm (hF). T = IsRestricted.subring with weight 1, i.e. coefficients tend to 0 cofinitely. PerfectField and IsRegularRing (the Mathlib ring clause of def-weil-regular-scheme) render the hypotheses. The colon condition is literally aI ⊆ I_E. D is pinned by D.val = det(pderiv F (U i) (f (E j))), rows U and columns E, both enumerated increasingly, so it is not arbitrary; membership in T holds in the ultrametric case. The final clause is mk a * mk D ∉ m, with witnesses depending on m. Edge cases B=0, s=0, I=0, r=0 and the empty determinant are covered; no extra assumptions; universe u arbitrary. lean.statement verbatim; node changed only in lean; docstrings give source and blueprint and follow all 7 steps; proof is sorry; imports exist in side-live; no duplicate found. No file changed, so no compile run (worker reports a clean scompile)."
+ }
+}

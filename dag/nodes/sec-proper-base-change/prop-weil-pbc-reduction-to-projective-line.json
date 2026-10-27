@@ -195,7 +195,42 @@
    ]
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction",
+     "lines": [
+      116,
+      143
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.hasTorsionBaseChange_of_projectiveLine_of_isProper_of_isAddTorsion",
+     "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Reduction",
+     "lines": [
+      88,
+      114
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-reduction",
  "split_report": {
@@ -221,30 +256,28 @@
   "result": "pass"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Assume that $\\mathbf P^1_S\\to S$ satisfies $\\mathrm{PBC}$ in the sense of\n[def-weil-pbc-property] for every scheme $S$. Then every proper morphism of\nschemes satisfies $\\mathrm{PBC}$. No finite-presentation hypothesis is\nneeded, because the Chow factorization [lemma-weil-pbc-chow-factorization]\nholds for every proper morphism over an affine base.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring which is torsion as an abelian group, and use\ntorsion base change over $\\Lambda$ as in [lemma-weil-pbc-target-locality]. Assume\nthat $\\mathbf P^1_S\\to S$ has torsion base change over $\\Lambda$ for every scheme\n$S$. Then every proper morphism of schemes has torsion base change over\n$\\Lambda$. No finite-presentation hypothesis is needed, because the Chow\nfactorization [lemma-weil-pbc-chow-factorization] holds for every proper morphism\nover an affine base.",
   "proof": [
    {
-    "text": "By [lemma-weil-pbc-target-locality] the assertion is local on the target, so we\nwork over an affine $Y$, where [lemma-weil-pbc-chow-factorization] supplies $\\pi$, $i_Y$, and\nthe two closed embeddings $i_Y$ and $i_X$ of\n[lem-weil-pbc-projective-embedding]. At every use of composition or\ncancellation below, first convert all $\\mathrm{PBC}$ inputs to $\\mathrm{IA}$,\napply the lemma, and convert back. The projective-space projections $\\mathbf\nP^n_S\\to S$ have $\\mathrm{PBC}$ by\n[lem-weil-pbc-reduction-projective-space]. The Chow map factors as $\\pi=q_X\\circ\ni_X$, where $i_X$ is finite and hence has $\\mathrm{PBC}$ by\n[prop-weil-pbc-finite-morphism], and $q_X:\\mathbf P^n_X\\to X$ has\n$\\mathrm{PBC}$; composition by [prop-weil-pbc-composition-stability] gives\n$\\mathrm{PBC}$ for $\\pi$. Likewise $f\\pi=q_Y\\circ i_Y$ has $\\mathrm{PBC}$.\nSince $\\pi$ is proper and surjective, [lemma-weil-pbc-cancellation] applied to\n$\\pi$ and $f$ gives $\\mathrm{PBC}$ for $f$.",
+    "text": "Let $f:X\\to Y$ be proper. By [lemma-weil-pbc-target-locality] it suffices to treat\nthe restrictions of $f$ over the affine opens of $Y$, which are again proper; so\nlet $Y$ be affine. [lemma-weil-pbc-chow-factorization] supplies a proper\nsurjection $\\pi:\\widetilde X\\to X$ and a closed immersion\n$i_Y:\\widetilde X\\hookrightarrow\\mathbf P^n_Y$ over $Y$ with $f\\pi=q_Yi_Y$, where\n$q_Y:\\mathbf P^n_Y\\to Y$ is the projection. The projections $\\mathbf P^n_S\\to S$\nhave torsion base change by [lem-weil-pbc-reduction-projective-space]. Closed\nimmersions are finite and so have torsion base change by\n[prop-weil-pbc-finite-morphism]. Hence $f\\pi=q_Y\\circ i_Y$ has torsion base\nchange by [prop-weil-pbc-composition-stability] (1). The morphism\n$i_X=(\\pi,i_Y):\\widetilde X\\to\\mathbf P^n_X$ is a closed immersion\n([lem-weil-pbc-projective-embedding], $f$ being separated) and\n$\\pi=q_X\\circ i_X$, so $\\pi$ has torsion base change by the same argument. Since\n$\\pi$ is surjective, [lemma-weil-pbc-cancellation] (2) applied to $\\pi$ and $f$\ngives torsion base change for $f$.",
     "uses": [
      "lemma-weil-pbc-target-locality",
      "lemma-weil-pbc-chow-factorization",
-     "lem-weil-pbc-projective-embedding",
      "lem-weil-pbc-reduction-projective-space",
      "prop-weil-pbc-finite-morphism",
      "prop-weil-pbc-composition-stability",
+     "lem-weil-pbc-projective-embedding",
      "lemma-weil-pbc-cancellation"
-    ],
-    "elementary": false
-   },
-   {
-    "text": "Use target locality and the Chow factorization. The closed immersion\n$X'\\hookrightarrow\\mathbf P^n_Y$ is proper and finite onto its image, so\nfinite base change plus composition reduces $X'\\to Y$ to\n$\\mathbf P^n_Y\\to Y$. The finite surjective map $\\sigma_n$ and cancellation\nreduce this projection to $(\\mathbf P^1_Y)^n\\to Y$. Repeated base change and\ncomposition reduce the product projection to the one-dimensional projection.\nFinally cancellation along $\\pi$ transfers the property from $X'$ and\n$X'\\to Y$ to $X\\to Y$. Every comparison used is the named exchange map of\nDefinition [def-weil-pbc-derived-exchange].",
-    "uses": [
-     "def-weil-pbc-derived-exchange"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

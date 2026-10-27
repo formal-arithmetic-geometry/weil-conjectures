@@ -18,61 +18,30 @@
  ],
  "proof": [
   {
-   "text": "Base change the finite morphism to the fixed algebraic closure of the finite field. The rational finite-direct-image statement [lem-zl-finite-adic-direct-image] applies to this base change: the direct image of a constructible Qbar sheaf is in the constructible heart, the finite direct-image functor is exact, and for every geometric point y the stalk is naturally the direct sum of the stalks over the finite geometric fibre. Its naturality for semilinear automorphisms identifies the Weil/Frobenius operator on the direct-image stalk with the operator that permutes the fibre stalks.",
+   "text": "A finite morphism is separated, locally quasi-finite, locally finite type, quasi-compact and proper. The separated structure morphism of Y gives quasi-separatedness. Apply the already-proved native punctual upper-bound theorem recorded in [lem-zl-native-quasi-finite-punctual-weights] to f. The isomorphism lowerStarIsoHigherLowerShriekZero f F, obtained by proper coincidence [lem-sf-native-weil-proper-shriek-star] and degree-zero derived direct image, embeds f_*F into R⁰f!F. HasWeightsAtMost.of_mono transports the bound along its hom.",
    "uses": [
-    "lem-zl-finite-adic-direct-image"
+    "lem-zl-native-quasi-finite-punctual-weights",
+    "lem-sf-native-weil-proper-shriek-star"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
-    "place": "Finite stalk formula and Frobenius cycles, with relative residue degree and point transport made explicit"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a closed point y of Y_0 and view the finite fibre over Spec kappa(y) as a finite scheme over that finite field. Apply [lem-a1-finite-weil-sections-decomposition] to the restriction of G to this fibre. Under the stalk identification of Step 1, the fibre decomposition is a direct sum of Frobenius-stable cyclic blocks. If x is a closed point of the fibre and e=[kappa(x):kappa(y)], the geometric Frobenius at y cyclically permutes the e stalk summands and its e-th power on each summand is the local Frobenius F_x. The same statement records that the geometric points in the block are exactly the lifts of x, so no reducedness or etaleness hypothesis is being added.",
+   "text": "For purity apply the already-proved source IsPunctuallyPureOfWeight.lowerStar_of_isFinite. Its proof uses exactly the purity calculation of [lem-zl-native-quasi-finite-punctual-weights] and the same proper comparison [lem-sf-native-weil-proper-shriek-star], transporting purity along the isomorphism hom by IsPunctuallyPureOfWeight.of_mono. Pair the two independent implications. No etaleness or nonempty-fibre hypothesis is required.",
    "uses": [
-    "lem-zl-finite-adic-direct-image",
-    "lem-a1-finite-weil-sections-decomposition"
+    "lem-zl-native-quasi-finite-punctual-weights",
+    "lem-sf-native-weil-proper-shriek-star"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
-    "place": "Finite stalk formula and Frobenius cycles, with relative residue degree and point transport made explicit"
-   }
-  },
-  {
-   "text": "Let μ be an eigenvalue of the direct-image Frobenius on a nonzero cyclic block, and choose an eigenvector. A nonzero stalk component of that eigenvector has the same eigenvalue after taking the e-th power, so μ^e is an eigenvalue of F_x. Since the residue-field extension has degree e, q_x=q_y^e. If G has all local eigenvalues of weight at most w, then |ι(μ)|^e=|ι(μ^e)|≤q_x^{w/2}=q_y^{ew/2}; taking the nonnegative e-th root gives |ι(μ)|≤q_y^{w/2}. If G is punctually ι-pure of weight w, the inequality is an equality throughout and gives |ι(μ)|=q_y^{w/2}.",
-   "uses": [
-    "def-weil-punctual-weights",
-    "lem-a1-finite-weil-sections-decomposition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
-    "place": "Displayed absolute-value calculation; elementary eigenvector argument on cyclic blocks"
-   }
-  },
-  {
-   "text": "The argument applies to every closed y and every eigenvalue μ of the direct-image local Frobenius. By the definitions in [def-weil-punctual-weights], these inequalities are exactly the punctual upper-weight assertion, and the equalities are exactly punctual ι-purity of weight w. If a fibre or stalk is zero there are no eigenvalues and the assertion is vacuous.",
-   "uses": [
-    "def-weil-punctual-weights"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
-    "place": "Final two sentences: mixed sheaf bound and the cohomological definition of D_le_w"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-punctual-weights",
-  "lem-a1-finite-weil-sections-decomposition",
-  "lem-zl-finite-adic-direct-image"
+  "lem-zl-native-quasi-finite-punctual-weights",
+  "lem-sf-native-weil-proper-shriek-star"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
-  "place": "Finite stalk formula and Frobenius-cycle calculation, specialized to a finite morphism and a sheaf"
+  "document": "lean/WeilConjectures/DeligneLaumon/Reduction/FiniteDirectImage.lean",
+  "place": "lowerStarIsoHigherLowerShriekZero and IsPunctuallyPureOfWeight.lowerStar_of_isFinite, combined with the proved native upper-bound theorem in QuasiFiniteWeights.lean; G4 2026-10-22"
  },
  "mathlib_searches": [
   {
@@ -161,10 +130,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-zl-finite-adic-direct-image",
-  "lem-a1-finite-weil-sections-decomposition"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -191,5 +157,26 @@
   "result": "pass",
   "note": "Matched every hypothesis and both independent conclusion clauses against the node: separated finite-type X,Y over a finite field k0, IsFinite f over the base, F : WeilSheaf k0 l X (the type the recorded punctual-weights predicates use; landed precedent lem-a1-finite-map-purity), (lowerStar f).obj F (WeilSheaf.lowerStar, exact for finite f), iota an isomorphism to C. Nothing stronger is assumed; empty-fibre and zero-stalk cases are vacuous and not excluded; the single universe comes from the weight predicates. lean.statement is verbatim, the node differs from base only in lean, nothing is hollow, the only proof is sorry, docstrings carry the source, the blueprint tag and the proof steps, and the Worker report and Second reading sections are real. nt_compile --json exit 0, 3.1 s, no diagnostics. Non-blocking: the report missed the existing sorry-backed IsPunctuallyPureOfWeight.lowerStar_of_isFinite (the purity clause); a probe compile showed each clause follows in one line from existing declarations, which review.md records for stage 3; no existing declaration states the two-clause conclusion, so the module is kept. The report also names ProEtaleWeilSheaf.lowerStar where WeilSheaf.lowerStar is the declaration used."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261022T143632-L-1259111",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -28,7 +28,7 @@
  ],
  "proof": [
   {
-   "text": "Apply comparison_counit to both vertical edges, and comparison_square to the pullback square. A private categorical transport lemma transposes both exchange composites under the bottom pro-etale adjunction, precomposes with the invertible vertical pullback comparison, and uses naturality to move the direct-image target comparison through the counit. The two mateEquiv_counit identities identify the remaining transposes. Square coherence then rewrites one route into the other; the first vertical counit equation closes the calculation. Injectivity of the adjunction hom-equivalence and cancellation of the comparison isomorphism give the equality. Specialize the generic lemma to the exact Plus-to-unbounded comparison functors and unfold only the endpoint comparisons and the fixed Etale.baseChange unit-square-counit formula.",
+   "text": "Apply comparison_counit to both vertical edges, and comparison_square to the pullback square. A private categorical transport lemma transposes both exchange composites under the bottom pro-etale adjunction, precomposes with the invertible vertical pullback comparison, and uses naturality to move the direct-image target comparison through the counit. The two mateEquiv_counit identities identify the remaining transposes. Square coherence then rewrites one route into the other; the first vertical counit equation closes the calculation. Injectivity of the adjunction hom-equivalence and cancellation of the comparison isomorphism give the equality. Specialize the generic lemma to the exact Plus-to-unbounded comparison functors and unfold only the endpoint comparisons and the fixed Etale.baseChange unit-square-counit formula. The counit and square lemmas are provided by lower Core modules in namespace AlgebraicGeometry.ProEtale.ComparisonCore, with the fixed comparisons expanded to their unchanged defining formulas. This avoids importing the post-sync upstream module from a proof dependency. The generic transport helper remains private in the upstream module.",
    "uses": [
     "stage3-proetale-comparison-counit",
     "stage3-proetale-comparison-square"
@@ -43,7 +43,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/categories.tex",
-  "place": "Tag 0B65, parent proof steps 2, 4, 5; categorical two-transpose calculation proved by G1, leaving only counit normalization and square coherence."
+  "place": "Tag 0B65, parent proof steps 2, 4, 5; categorical two-transpose calculation proved by G1 (recovered from 438e3d04508 and adapted by K2 on 2026-10-24 to use the counit and square arguments through the lower Core interfaces)."
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -64,7 +64,32 @@
   "def-weil-pbc-site-comparison-morphism"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.comparison_derivedBaseChangeMap",
+     "module": "WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange",
+     "lines": [
+      141,
+      167
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -110,13 +135,34 @@
   "note": "Existing upstream declaration, explicitly tagged with this blueprint id. Read its full signature and the definitions of both endpoint comparison isomorphisms: their factors are the specified pullback comparison and the canonical derived direct-image base-change mate, with Plus-to-unbounded compatibility maps. The pro-etale derivedBaseChangeMap is literally mateEquiv of the canonical derived square comparison under the derived adjunctions. This is the constant-coefficient module-sheaf presentation of the stated finite discrete commutative coefficient assertion; no arbitrary comparison isomorphism is chosen. The existing declaration also applies to commutative rings without finiteness. Its proof remains sorry; existing does not claim proved."
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "X-bf717",
-  "group": "G1",
-  "result": "pass",
-  "landing": "20261016T135931-L-3400934",
+  "reviewer": "C-d6751",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261024T204623-L-3807184",
   "kind": "interface",
-  "note": "independent Codex review: Delivered packet, Lean files, DAG nodes, change record, report, and compilation matched the stage-3 review requirements; all delivered modules compiled successfully and mechanical findings were empty."
+  "note": "independent cc review: item proof + 5 Core copies + verbatim PathsCore relocation vs published ComparisonSquarePaths/helper modules, node lean records vs Core signatures, lambda expansions vs item defs; sandbox compile of delivery + both direct importers of ComparisonSquarePaths + downstream originals all OK; axioms only inherited sorryAx from rightDerivedLowerStarComparisonIso'"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring. For a cartesian square\n[def-weil-pbc-cartesian-square] in which $f$ and $f'$ are quasi-compact and\nquasi-separated, and $L\\in\\Dplus(X_{\\Et},\\Lambda)$, use the natural comparison isomorphisms\n\n$$\n \\nu_{X'}^*g'_{\\Et}{}^{-1}\\simeq\n g'_{\\Proet}{}^{-1}\\nu_X^*,\n \\qquad\n \\nu_Y^*Rf_{\\Et,*}L\\simeq Rf_{\\Proet,*}\\nu_X^*L,\n$$\n\nand their analogues for the other sides. Conjugating the etale exchange map\n[def-weil-pbc-derived-exchange] by these isomorphisms gives the pro-etale\nunit--counit exchange map\n\n$$\n g_{\\Proet}^{-1}Rf_{\\Proet,*}\\nu_X^*L\n \\longrightarrow\n Rf'_{\\Proet,*}g_{\\Proet}'{}^{-1}\\nu_X^*L\n$$\n\nof [def-weil-pbc-ambient-ringed-exchange].",
+  "proof": [
+   {
+    "text": "Expanding the unit--$\\theta_\\square$--counit composite of\n[def-weil-pbc-derived-exchange] and conjugating each arrow through the\ncomparison isomorphisms of [lem-weil-pbc-comparison-pullback] and\n[prop-weil-pbc-comparison-direct-image] (the latter applies to $f$ and $f'$,\nwhich are quasi-compact and quasi-separated) gives exactly the mate of the ambient\nringed exchange; naturality of the two comparison adjunctions makes the\nresulting square commute.",
+    "uses": [
+     "def-weil-pbc-derived-exchange",
+     "lem-weil-pbc-comparison-pullback",
+     "prop-weil-pbc-comparison-direct-image"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

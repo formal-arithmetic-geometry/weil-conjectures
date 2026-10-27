@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-homeomorphism-separated-etale-equivalence",
+ "kind": "statement",
+ "title": "Etale algebraic spaces descend along separated universal homeomorphisms",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $r:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space]. Fibre products are sheaf fibre products [lem-trf-space-fibre-products-etale-covers], and point spaces have the atlas topology [def-a1-space-point-topology]. Assume that $X$ and $Y$ are quasi-separated: their absolute diagonals over $\\operatorname{Spec}\\mathbf Z$ are quasi-compact on scheme tests, where quasi-compact for a scheme morphism means that inverse images of quasi-compact opens are quasi-compact. Assume that $r$ is separated, meaning that its diagonal is a representable closed immersion [def-weil-closed-immersion], and that for every algebraic space $T\\to Y$ the map $|X\\times_YT|\\to|T|$ is a homeomorphism. For an algebraic space $H$, let $\\operatorname{Et}(H)$ be the category of chartwise etale morphisms $E\\to H$ from quasi-separated algebraic spaces and all morphisms over $H$. Chartwise etale means that after composing with any representable etale scheme chart of $E$ the resulting map to $H$ is representable etale, with scheme etaleness as in [def-weil-etale-morphism]; $E\\to H$ itself need not be representable. Let $\\operatorname{Et}_{\\mathrm{sep}}(H)$ be the full subcategory whose objects have closed-immersion relative diagonal. Then base change along $r$ induces equivalences\n$$\\operatorname{Et}(Y)\\simeq\\operatorname{Et}(X),\\qquad \\operatorname{Et}_{\\mathrm{sep}}(Y)\\simeq\\operatorname{Et}_{\\mathrm{sep}}(X).$$\nIn particular every separated etale object over $X$ is isomorphic over $X$ to the pullback of a separated etale object over $Y$.",
+ "source": {
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Rydh, Submersions and effective descent of etale morphisms, author version 2010-03-03, Theorem (5.21), printed p.24, including its E_sep restriction; quasi-separated convention on printed p.4. Author PDF read at https://davidrydh.se/papers/submersion20100305.pdf; local copy WANTED.",
+  "url": "https://davidrydh.se/papers/submersion20100305.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-space-chartwise-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Every base change of $r$ has a homeomorphic point map, hence is open and surjective. Apply [lem-sfb-space-open-surjection-etale-descent] to $p=r$: the functor $\\operatorname{Et}(Y)\\to\\operatorname{Desc}(r)$ is an equivalence. In particular the pullback objects are quasi-separated and chartwise etale. It remains to show that forgetting the datum is an equivalence $\\operatorname{Desc}(r)\\to\\operatorname{Et}(X)$, and to check the separated subcategories.",
+   "uses": [
+    "lem-sfb-space-open-surjection-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.19)(i), Remark (5.2); assembly for (5.21)"
+   }
+  },
+  {
+   "text": "Put $X_2=X\\times_YX$ and $d=\\Delta_r:X\\to X_2$. Its first projection $p_1:X_2\\to X$ is a base change of $r$, so its point map is a homeomorphism. Since $p_1d=\\mathrm{id}$, the continuous point map of $d$ is its inverse. The assumed separatedness makes $d$ a representable closed immersion. It is therefore a thickening. By [lem-sfb-space-thickening-base-change] every base change of $d$ is a thickening. On scheme tests these are scheme universal homeomorphisms, so [lem-trf-universally-homeomorph-integral] makes them integral, universally injective and surjective. Consequently [lem-sfb-space-integral-radicial-etale-invariance] applies to $d$ and to every base change of $d$: their pullback functors on all chartwise etale algebraic spaces are fully faithful (indeed equivalences). The fibre products and the continuous point maps used here are supplied by the cited space-calculus statements.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-space-thickening-base-change",
+    "lem-trf-universally-homeomorph-integral",
+    "lem-sfb-space-integral-radicial-etale-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.21), diagonal nil-immersion; Stacks 05ZH for its etale invariance"
+   }
+  },
+  {
+   "text": "For $V\\in\\operatorname{Et}(X)$, the two objects $p_1^*V,p_2^*V$ over $X_2$ are chartwise etale by [lem-trf-space-chartwise-etale-permanence]. Their pullbacks along $d$ are both $V$. Full faithfulness from step 2 uniquely lifts $\\mathrm{id}_V$ to a morphism $\\theta_V:p_1^*V\\to p_2^*V$; lifting the reverse identity shows it is invertible, since the composites restrict to identities and pullback is faithful. It is normalized by construction. Over $X_3=X\\times_YX\\times_YX$, pull back the proposed cocycle identity along $e:X_2\\to X_3$, $(x,z)\\mapsto(x,x,z)$. This is a base change of $d$, so step 2 gives faithful pullback along $e$. Under $e$, $\\theta_{12}$ is the identity and both $\\theta_{23}$ and $\\theta_{13}$ become $\\theta_V$. Thus the two composites agree after $e$ and hence before $e$. This constructs a normalized cocycle for every $V$; any normalized cocycle must equal this one by faithfulness along $d$.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-sfb-space-integral-radicial-etale-invariance",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.21), unique descent datum; expanded normalization and triple-overlap check"
+   }
+  },
+  {
+   "text": "Every $X$-morphism $a:V\\to W$ respects the constructed data. Indeed the maps $p_2^*a\\circ\\theta_V$ and $\\theta_W\\circ p_1^*a$ both pull back along $d$ to $a$, so they agree by full faithfulness in step 2. Thus the forgetful functor from $\\operatorname{Desc}(r)$ has exactly one datum over each object and all the morphisms of $\\operatorname{Et}(X)$; its inverse assigns $V\\mapsto(V,\\theta_V)$. Composing with the effective-descent equivalence of step 1 gives precisely the claimed base-change equivalence $\\operatorname{Et}(Y)\\simeq\\operatorname{Et}(X)$.",
+   "uses": [
+    "lem-sfb-space-open-surjection-etale-descent",
+    "lem-sfb-space-integral-radicial-etale-invariance"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorems (5.19)(i), (5.21), full faithfulness and essential surjectivity"
+   }
+  },
+  {
+   "text": "Separatedness is preserved by pullback: a scheme test of the new diagonal is a base change of a scheme test of the old diagonal, so [lem-weil-pbc-closed-immersion-base-change] applies. To reflect it, let $g:E\\to Y$ be an etale object and suppose $E_X\\to X$ is separated. For any algebraic space $T\\to E\\times_YE$, put $D=E\\times_{E\\times_YE}T$ and $T'=T\\times_YX$. The pullback $D'=D\\times_YX\\to T'$ is a base change of $\\Delta_{E_X/X}$, hence a closed immersion and universally closed by [lem-sfb-space-closed-subspace-proper]. The vertical maps $D'\\to D$ and $T'\\to T$ are base changes of $r$, hence homeomorphisms on point spaces. The point map $|D|\\to|T|$ is the conjugate of the closed map $|D'|\\to|T'|$, so is closed. This holds for every $T$, proving universal closedness of $\\Delta_g$. Now [lem-sfb-space-separated-diagonal-closed] implies that $g$ is separated. Therefore the equivalence restricts to the full separated subcategories: a preimage of a separated object is separated by reflection, and the same bijections on morphisms apply. The final existence assertion is its essential surjectivity.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-closed-subspace-proper",
+    "lem-sfb-space-separated-diagonal-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/rydh-submersions-effective-descent.pdf",
+    "place": "Theorem (5.21), E_sep restriction; (1.7)(ii), (5.4), with the topological separatedness argument expanded"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-open-surjection-etale-descent",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-space-thickening-base-change",
+  "lem-trf-universally-homeomorph-integral",
+  "lem-sfb-space-integral-radicial-etale-invariance",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-closed-subspace-proper",
+  "lem-sfb-space-separated-diagonal-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/rydh-submersions-effective-descent.pdf",
+  "place": "Theorem (5.21), using the general (5.19)(i) descent theorem in place of its quasi-compact gluing reduction. Author PDF read online; requested local document absent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated universal homeomorphism between algebraic spaces induces an equivalence on categories of etale algebraic spaces by base change",
+   "results": "{\"t\": \"2026-10-23T12:06:54Z\", \"tool\": \"leanfinder\", \"query\": \"A separated universal homeomorphism between algebraic spaces induces an equivalence on categories of etale algebraic spaces by base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.of_equiv\"], \"digest\": \"729ba7366eb51b61\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme etaleness and scheme etale categories; none states descent of chartwise etale algebraic spaces. Two semantic phrasings were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms of algebraic spaces descend along separated universal homeomorphisms",
+   "results": "{\"t\": \"2026-10-23T12:06:55Z\", \"tool\": \"leansearch\", \"query\": \"Etale morphisms of algebraic spaces descend along separated universal homeomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"c9089645cf1ee580\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme etaleness and scheme etale categories; none states descent of chartwise etale algebraic spaces. Two semantic phrasings were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"IsUniversalHomeomorph\"",
+   "results": "{\"t\": \"2026-10-23T12:06:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"IsUniversalHomeomorph\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme etaleness and scheme etale categories; none states descent of chartwise etale algebraic spaces. Two semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|homeomorph.*[Ee]tale|[Ee]tale.*homeomorph",
+   "results": "{\"t\": \"2026-10-23T12:06:55Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|homeomorph.*[Ee]tale|[Ee]tale.*homeomorph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme etaleness and scheme etale categories; none states descent of chartwise etale algebraic spaces. Two semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topological invariance of categories of etale algebraic spaces under pullback along a radicial integral surjective morphism",
+   "results": "{\"t\": \"2026-10-23T12:14:29Z\", \"tool\": \"leanfinder\", \"query\": \"Topological invariance of categories of etale algebraic spaces under pullback along a radicial integral surjective morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"8c9ed64a77936b89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme etaleness and scheme etale categories; none states descent of chartwise etale algebraic spaces. Two semantic phrasings were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a separated universal homeomorphism of quasi separated algebraic spaces is an equivalence of separated etale algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T12:21:26Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback along a separated universal homeomorphism of quasi separated algebraic spaces is an equivalence of separated etale algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsSeparated.instFstScheme\", \"AlgebraicGeometry.IsSeparated.instSndScheme\", \"AlgebraicGeometry.IsSeparated.instRespectsIsoScheme\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"AlgebraicGeometry.IsSeparated.instMap\"], \"digest\": \"428bd8dcdb295809\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern scheme etaleness and scheme etale categories; none states descent of chartwise etale algebraic spaces. Two semantic phrasings were read."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale",
+   "results": "{\"t\": \"2026-10-23T13:53:03Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|[Ee]tale.*[Dd]escent|[Dd]escent.*[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\"], \"digest\": \"9768c84a3b8914bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale algebraic spaces descend effectively along universally open surjections",
+   "results": "{\"t\": \"2026-10-23T13:53:03Z\", \"tool\": \"leansearch\", \"query\": \"Etale algebraic spaces descend effectively along universally open surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"Algebra.etaleLocus_eq_univ_iff\", \"AlgebraicGeometry.universallyOpen_iff\"], \"digest\": \"d605ddac5c47fcfa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"Descent\"",
+   "results": "{\"t\": \"2026-10-23T13:53:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"Descent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A universally open surjective morphism of quasi-separated algebraic spaces is effective descent for chartwise etale algebraic spaces with descent data",
+   "results": "{\"t\": \"2026-10-23T13:53:08Z\", \"tool\": \"leanfinder\", \"query\": \"A universally open surjective morphism of quasi-separated algebraic spaces is effective descent for chartwise etale algebraic spaces with descent data\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\"], \"digest\": \"03efd16b89f7a4b1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a universal homeomorphism induces an equivalence of categories of separated etale algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T13:55:04Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback along a universal homeomorphism induces an equivalence of categories of separated etale algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"c16a2e3ea16a693b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally open surjections are effective descent morphisms for the fibered category of etale algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T13:55:05Z\", \"tool\": \"leanfinder\", \"query\": \"Universally open surjections are effective descent morphisms for the fibered category of etale algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.UniversallyOpen\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.descendsAlong_universallyInjective_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"1bebab45e1c40dcf\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism-property descent under flatness, scheme etale categories, or ring-algebra descent; none gives effective descent of chartwise etale algebraic spaces along arbitrary universally open surjections."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-separated-space-homeomorphism-affine",
+  "date": "2026-10-23",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine. Rydh Corollary (5.22), proof: descend the separated etale scheme presentation using Theorem (5.21).",
+   "via": [
+    "lem-sfb-separated-space-homeomorphism-affine",
+    "lem-sfb-stein-submersive-reduced-descent",
+    "lem-sfb-adequate-locally-separated-universality",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-homeomorphism-separated-etale-equivalence",
+  "worker": "stage1",
+  "summary": "Q16 constructs the unique normalized descent datum via the thickening diagonal, checks its cocycle and all morphism compatibilities, and applies general universally-open effective descent. Separatedness is reflected by conjugating diagonal tests through homeomorphisms. One general effective-descent input is created; existing 05ZH and diagonal criteria are reused. Statement unchanged.",
+  "blueprint": "Alper Proposition 7.1.1 proof, Hom exactness; expanded Rydh Theorem (7.4) graph construction, printed p.29, as a prerequisite of the inherited det-thm-sf-ctf-stability-direct-images alteration/moduli route. Supporting input: Separated universal homeomorphisms of algebraic spaces are affine. Rydh Corollary (5.22), proof: descend the separated etale scheme presentation using Theorem (5.21). Latest blueprint direct-images proof (3) is unchanged; this supplies the inherited Rydh (5.21) prerequisite of the supporting (5.22) affineness argument.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence and base-change calculus of algebraic-space fibre products; no six-functor route is replaced."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic continuity of algebraic-space point maps for the thickening diagonal; no node of the six-functor unit supplies it."
+   },
+   {
+    "node": "lem-trf-universally-homeomorph-integral",
+    "why": "Generic scheme universal-homeomorphism criterion on scheme tests of a thickening; no coefficient or six-functor theorem is used."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic base-change stability of chartwise etaleness, used only to form the two pullbacks in the descent datum; the six-functor unit has no replacement for this space-calculus tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-point-open-calculus",
+  "lem-trf-universally-homeomorph-integral",
+  "lem-trf-space-chartwise-etale-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-8038e23c5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-8038e23c5 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-space-open-surjection-etale-descent and every cited node's statement in full; no fixes. The item statement is unchanged. Rydh (5.19)(i)/(5.21) is not under literature/ and the report records it as WANTED; the item already cited it on the base and stays marked agent-written, so I checked every step independently. Step 1: the new node applies with p=r (X and Y quasi-separated; point maps universally homeomorphic, hence open and surjective), and its pullbacks are quasi-separated. Step 2: d=Δ_r is a representable closed immersion with |d|=|p_1|^{-1}, i.e. a thickening; by 09ZX every base change of d is a thickening, 04DF makes these integral, universally injective and surjective on scheme tests, and 05ZH then gives full faithfulness. Representability is used only for d, never r, so there is no cycle with the parent affineness lemma. Step 3: e=(x,x,z) is the base change of d along p_12; I checked p_12e=dp_1 and p_23e=p_13e=id, which give the cocycle; uniqueness follows by faithfulness along d. Step 4 is elementary. Step 5: preservation by closed-immersion base change; for reflection I checked D'=D×_YX is a base change of Δ_{E_X/X} (04XZ gives universally closed), conjugated by the homeomorphisms coming from r, which yields 04Y0. New node: B1-B9 hold, with four kinds of Mathlib search recorded. Small cases agree: identity, disjoint-union cover, a field extension of any kind (0383 plus separated étale objects over a field), empty source. It is not a restatement (the item's work is building the unique cocycle and reflecting separatedness), and scanning the whole DAG found no duplicate; the single-cover, 05ZH, 05ZS, scheme-site and fppf-separated nodes are different. Batch-5: def-trf-algebraic-space is a definition; trf fibre-products (02X2), chartwise-étale (03FR-03FV) and universally-homeomorph-integral (04DF) are generic space/scheme calculus; the a1/sfb citations reach sec-trace-formula only through that definition. None is a step of the trace formula or Poincaré duality, so all are accepted. The declared tool_uses (4 generic space-calculus nodes) are accepted. No SGA anywhere."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedHomeomorphismEtaleEquivalence",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separatedHomeomorphism_etale_equivalence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedHomeomorphismEtaleEquivalence.lean",
+  "statement": "theorem separatedHomeomorphism_etale_equivalence {S : Scheme.{u}} {X Y : AlgebraicSpace S} (r : X ⟶ Y) (hX : IsAbsolutelyQuasiSeparated X) (hY : IsAbsolutelyQuasiSeparated Y) (hsep : MapIsSeparated r) (hr : ∀ (T : AlgebraicSpace S) (g : T ⟶ Y), IsHomeomorph (mapPoint (Limits.pullback.snd r.hom g.hom).hom)) : (∀ separated : Bool, ∃ e : ObjectProperty.FullSubcategory (fun E : Over Y ↦ IsChartwiseEtale E.hom ∧ IsAbsolutelyQuasiSeparated E.left ∧ (separated = true → MapIsSeparated E.hom)) ≌ ObjectProperty.FullSubcategory (fun E : Over X ↦ IsChartwiseEtale E.hom ∧ IsAbsolutelyQuasiSeparated E.left ∧ (separated = true → MapIsSeparated E.hom)), Nonempty (e.functor ⋙ ObjectProperty.ι _ ⋙ Over.post (ObjectProperty.ι (IsAlgebraicSpace (S := S))) ≅ ObjectProperty.ι _ ⋙ Over.post (ObjectProperty.ι (IsAlgebraicSpace (S := S))) ⋙ Over.pullback r.hom)) ∧ (∀ E : Over X, IsChartwiseEtale E.hom → IsAbsolutelyQuasiSeparated E.left → MapIsSeparated E.hom → ∃ F : Over Y, IsChartwiseEtale F.hom ∧ IsAbsolutelyQuasiSeparated F.left ∧ MapIsSeparated F.hom ∧ Nonempty (Over.mk E.hom.hom ≅ (Over.pullback r.hom).obj (Over.mk F.hom.hom)))",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The Boolean indexes exactly the all-etale and separated-etale full subcategories. The forward equivalence is identified naturally, on all objects and morphisms, with actual sheaf base change via Over.pullback r.hom; the final conjunct spells out separated essential surjectivity. Adds already-landed statement dependencies for absolute quasi-separatedness, separatedness, the canonical mapPoint, and def-sfb-space-chartwise-etale-morphism (existing IsChartwiseEtale in EnlargedEtaleRingedSite). Repair of return at 32e0471cfbf3: chartwise-etale permanence remains a proof dependency only; its theorem constructs nothing used by this statement. No Lean source or mathematical statement changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2a924456",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 32e0471cfbf3, repaired as instructed. stmt_dep lem-trf-space-chartwise-etale-permanence is replaced by def-sfb-space-chartwise-etale-morphism (existing:true IsChartwiseEtale, EnlargedEtaleRingedSite:47, Q98; record identical to side-live and now on the base); the permanence theorem stays in proof_deps and step 3; lean.note and report updated. Diff vs the returned snapshot: Lean tree and lean.statement byte-identical; the only node changes are stmt_deps and lean.note. The item has no lean record in side-live, so this is not a rebind. Re-checked every clause: IsAbsolutelyQuasiSeparated X/Y; MapIsSeparated r (diagonal only); hr over all T using sheaf-pullback mapPoint; Et/Et_sep full subcategories via Bool; equivalence pinned to Over.pullback r.hom; final essential-surjectivity conjunct. Edge cases: identity, empty spaces, non-qs S, universes. Gates hold: sorry only, docstrings and blueprint tags present, no hollow definitions, report has Worker report and Second reading by Q04. No compile run because no file changed."
+ }
+}

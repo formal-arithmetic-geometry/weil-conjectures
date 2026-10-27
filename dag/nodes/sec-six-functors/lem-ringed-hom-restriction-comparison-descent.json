@@ -1,0 +1,178 @@
+{
+ "id": "lem-ringed-hom-restriction-comparison-descent",
+ "kind": "statement",
+ "title": "Normalized descent and uniqueness of an ordinary Hom comparison",
+ "statement": "Let R and S be commutative ring sheaves on small sites, and fix unbounded derived categories in one localization universe [def-weil-abstract-derived-category]. Let T be an additive exact functor of module sheaves preserving K-injective complexes. Suppose a is a natural isomorphism from T applied termwise to the ordinary internal Hom complex to the internal Hom complex of the two restricted inputs [def-pur-hom-complex]. There is a natural derived Hom comparison e whose equation on L and K-injective I is obtained by conjugating a by the canonical augmentations from ordinary to derived Hom and by the exact-functor localization factorizations [def-pur-derived-internal-hom]. This equation determines e uniquely. In addition, for any Hom bifunctors H, HU, HV, exact or ordinary functors F,G,V and c:F composed with G isomorphic to V, the componentwise successive-comparison equation is equivalent to equality of the transported composite comparison with the direct comparison. The canonical augmentation is defined by the fixed functorial K-injective resolution and the localization factorization used in derivedInternalHom, not by an arbitrary choice of an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "On a K-injective target the augmentation is an isomorphism: the chosen resolution map is a quasi-isomorphism between K-injectives, so ordinary internal Hom sends it to a quasi-isomorphism.",
+   "uses": [
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+   }
+  },
+  {
+   "text": "Precompose with Q in the contravariant variable and with the K-injective inclusion followed by Q in the covariant variable. Both are localizations. Conjugate the ordinary natural comparison by the invertible augmentations and the exact-functor factorizations. Fully faithful precomposition along their product descends the natural isomorphism. Its component equation gives the required normalization.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+   }
+  },
+  {
+   "text": "For uniqueness, precompose with these same localizations and cancel the invertible augmentation and the restriction factorizations. Fully faithful precomposition reflects equality. For the auxiliary compatibility equivalence, compose the displayed component equality with c inverse and cancel its hom and inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7, 0A95 and 08JB; the construction of internal Hom and its restriction comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-rhom-well-defined",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JB, expanded using the construction of Tags 08J7 and 0A95"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localizing a natural isomorphism of internal Hom bifunctors along exact functors preserving K-injective complexes",
+   "results": "CategoryTheory.Localization.liftNatIso and lift₂NatIso, localization factorizations.",
+   "date": "2026-10-25",
+   "verdict": "General descent is used in the proof, but no augmentation-normalized comparison or uniqueness theorem is stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom commutes with restriction to a slice site naturally and compatibly with composition",
+   "results": "sheafHom, sheaf Hom equivalences, general exact-derived-functor factorization comparisons",
+   "date": "2026-10-25",
+   "verdict": "No direct statement; use the general localization machinery."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext, fullyFaithfulWhiskeringLeft and liftNatIso",
+   "date": "2026-10-25",
+   "verdict": "General descent and extensionality only; no internal-Hom normalization or coherent restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Rr]estrict|[Rr]estrict.*homComplex",
+   "results": "No Mathlib match; project ElementRestrictionHom provides a private ordinary comparison without a coherence equation, InternalHomOverNaturality gives the sheaf factor naturality.",
+   "date": "2026-10-25",
+   "verdict": "No complete match for the new statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RingedInternalHomExactRestriction",
+  "date": "2026-10-25",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-dualizable-hom",
+   "via": [
+    "lem-route-ringed-internal-hom-restriction",
+    "lem-sf-ringed-rhom-derived-complete",
+    "lem-sf-rational-thick-evaluation"
+   ],
+   "place": "prop-sf-dualizable-hom.proof.md first paragraph: local Hom computation via ambient derived-Hom restriction in lem-sf-ringed-rhom-derived-complete"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-dualizable-biduality",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedHomRestrictionComparison",
+  "file": "lean/Sheaf/Algebra/Homology/RingedHomRestrictionComparison.lean",
+  "declaration": "CategoryTheory.RingedHomRestriction.comparison_exists",
+  "statement": "theorem comparison_exists\n    {C D : Type u} [SmallCategory C] [SmallCategory D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    (R : Sheaf J CommRingCat.{u}) (S : Sheaf K CommRingCat.{u})\n    [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules S)]\n    (T : Modules R ⥤ Modules S) [T.Additive]\n    [PreservesFiniteLimits T] [PreservesFiniteColimits T]\n    (hT : ∀ I : Complex R, I.IsKInjective →\n      CochainComplex.IsKInjective ((T.mapHomologicalComplex (.up ℤ)).obj I))\n    (a : ordinary R ⋙ T.mapHomologicalComplex (.up ℤ) ≅\n      ((T.mapHomologicalComplex (.up ℤ)).op.prod\n        (T.mapHomologicalComplex (.up ℤ))) ⋙ ordinary S) :\n    ∃ e : derivedInternalHom.{u, w} J R ⋙ T.mapDerivedCategory ≅\n      (T.mapDerivedCategory.op.prod T.mapDerivedCategory) ⋙ derivedInternalHom.{u, w} K S,\n      Normalized R S T a e",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.RingedHomRestriction.Rings",
+   "CategoryTheory.RingedHomRestriction.Modules",
+   "CategoryTheory.RingedHomRestriction.Complex",
+   "CategoryTheory.RingedHomRestriction.ordinary",
+   "CategoryTheory.RingedHomRestriction.pairIso",
+   "CategoryTheory.RingedHomRestriction.composite",
+   "CategoryTheory.RingedHomRestriction.Compatible",
+   "CategoryTheory.RingedHomRestriction.compatible_iff",
+   "CategoryTheory.RingedHomRestriction.augmentation",
+   "CategoryTheory.RingedHomRestriction.Normalized",
+   "CategoryTheory.RingedHomRestriction.comparison_exists",
+   "CategoryTheory.RingedHomRestriction.comparison_unique"
+  ]
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-ringed-hom-restriction-comparison-descent",
+  "worker": "stage3-U9",
+  "summary": "Proved normalized descent and uniqueness in Lean. No holes remain in this infrastructure module.",
+  "blueprint": [
+   "prop-sf-dualizable-hom.proof.md first paragraph via ambient derived Hom restriction"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Quasi-isomorphism inversion makes the canonical augmentation invertible on K-injective targets; this is generic representative infrastructure."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T164521-L-1029987",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T164521-L-1029987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

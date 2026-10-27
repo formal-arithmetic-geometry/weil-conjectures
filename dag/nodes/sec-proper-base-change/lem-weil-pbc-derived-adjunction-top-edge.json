@@ -24,135 +24,57 @@
  ],
  "proof": [
   {
-   "text": "First record naturality of the edge as defined in the statement. For a derived morphism $t:E\\to E'$ on $T$, naturality of the local-class map and of the local derived-sections comparison gives, on every open $V\\subseteq S$,\n$\\Theta^{E'}_{g^{-1}V}\\lambda_{g,E',V}H^q(V,Rg_*t)=\\Gamma(g^{-1}V,H^q(t))\\Theta^E_{g^{-1}V}\\lambda_{g,E,V}$.\nSheafify this equality. The universal property of module sheafification gives\n$e^q_{g,E'}H^q(Rg_*t)=g_*H^q(t)e^q_{g,E}$.\nAll maps are module-linear: on $V$ their scalar action is restricted along $g^\\sharp_V$.",
+   "text": "For R=Rg_*K form P=tau_{<=q} R and its inclusion i:P -> R. Define e explicitly from the ordinary transpose of the derived transpose d0 of i, precomposed with inverse H^q(i), as in the truncated-counit edge definition. The local calculation gives the required sheafification equation.",
    "uses": [
-    "lem-pc-ringed-space-sheafification-cohomology",
-    "lem-trf-unbounded-direct-image-section-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pc-module-pullback-adjunction"
+    "def-weil-pbc-truncated-counit-edge",
+    "lem-weil-pbc-truncated-counit-local-class"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 0BKJ (lemma-sheafification-cohomology) and 0D5X (lemma-unbounded-describe-higher-direct-images); naturality and sheafification"
+    "place": "Tags 079W, 0BKJ, 0D5X"
    }
   },
   {
-   "text": "For any $\\mathcal O_T$-module $M$, write $u_{g,M,q}:(g_*M)[-q]\\to Rg_*(M[-q])$ for the canonical single direct-image comparison, shifted from degree zero using the recorded direct-image shift structure. Its edge normalization is\n$e^q_{g,M[-q]}H^q(u_{g,M,q})=\\mathrm{id}_{g_*M}$.\nHere is the local calculation specifying this equality. Choose a K-injective resolution $r:M[-q]\\to I$. On this model the comparison is $g_*r$, and a section $m\\in M(g^{-1}V)$ goes to the cocycle $r^q(m)$ in $I^q(g^{-1}V)$. Under the local comparison $\\lambda$ this is the same cocycle, and $\\Theta$ takes its class to the image of $m$ under $H^q(r):M\\xrightarrow{\\sim}H^q(I)$. Identifying back along $H^q(r)$ gives $m$. This proves the identity on every section of $g_*M$ and hence on the sheaf. Shifting both complexes only changes differentials by a common sign, which changes neither this cycle nor its quotient class.",
-   "uses": [
-    "lem-pc-canonical-single-direct-image-comparison",
-    "def-pc-ringed-spaces-derived-direct-image",
-    "lem-trf-unbounded-direct-image-section-presheaf",
-    "lem-pc-ringed-space-sheafification-cohomology",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 079W (lemma-adjoint: K-injective construction), 0D5X and 0BKJ, with the explicit single direct-image comparison"
-   }
-  },
-  {
-   "text": "Put $A=Lg^*C$, $N=H^q(C)$, $M=H^q(K)$, and $J=\\tau_{\\ge q}K$, with projection $j:K\\to J$. Thus $H^q(j)$ is the identity after the canonical identification $H^q(J)=M$. Good truncation gives a canonical $i:M[-q]\\to J$ inducing that same identity: $\\tau_{\\le q}J$ is canonically quasi-isomorphic to $M[-q]$, and $i$ is its inclusion into $J$. Indeed, in a complex representing $J$ with no terms below $q$, this is the inclusion of $\\ker(d_J^q)$ in degree $q$. The canonical triangle at $q+1$ gives\n$M[-q]\\xrightarrow{i}J\\to J_1\\to M[-q+1]$, where $J_1=\\tau_{\\ge q+1}J\\in D^{\\ge q+1}$.\nThe pullback top-cohomology theorem gives $A\\in D^{\\le q}$. Its canonical triangle at $q$ is\n$A_0\\to A\\xrightarrow{\\tau_A}H^q(A)[-q]\\to A_0[1]$, with $A_0=\\tau_{\\le q-1}A\\in D^{\\le q-1}$. These identifications follow from the displayed kernels and cokernels in good truncation and hold for unbounded derived objects.",
-   "uses": [
-    "def-kun-truncations",
-    "lem-sf-derived-truncation-triangle",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-derived-pullback-top-cohomology"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), at a=q-1 and a=q; Homology Tag 0118 (section-truncations)"
-   }
-  },
-  {
-   "text": "For any $h:A\\to J$, orthogonality gives $\\operatorname{Hom}(A_0,J)=0$, since $A_0\\le q-1$ and $J\\ge q$. Exactness of contravariant Hom on the source triangle of step 3 therefore gives $h=\\ell\\tau_A$ for some $\\ell:H^q(A)[-q]\\to J$. Orthogonality also gives $\\operatorname{Hom}(H^q(A)[-q],J_1)=0$, since the bounds are $q$ and $q+1$. Exactness of covariant Hom on the target triangle gives $\\ell=i b'$ with $b':H^q(A)[-q]\\to M[-q]$.",
-   "uses": [
-    "lem-pc-derived-tstructure-orthogonality",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "lem-weil-pbc-hom-into-triangle-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0149 (lemma-representable-homological), applied to the two triangles of step 3; standard t-structure orthogonality"
-   }
-  },
-  {
-   "text": "Full faithfulness of the single-complex embedding, shifted by $-q$, writes $b'=b[-q]$ for a unique module map $b:H^q(A)\\to M$. Applying $H^q$ to $h=i b[-q]\\tau_A$ shows $b=H^q(h)$, because both $i$ and $\\tau_A$ induce the canonical identity in degree $q$. Consequently two morphisms $A\\to J$ with the same $H^q$ are equal. This is just the two factorizations of step 4 and full faithfulness; it makes no assertion that cohomology is faithful on the whole derived category.",
-   "uses": [
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XS (lemma-negative-exts), part (2), and the shift convention of the derived category"
-   }
-  },
-  {
-   "text": "Let $a=H^q(d)\\kappa_{g,C}^{-1}:g^*N\\to M$, and let $b:N\\to g_*M$ be its ordinary adjunct. Define\n$v:Lg^*C\\xrightarrow{Lg^*\\tau_C}Lg^*(N[-q])\\xrightarrow{c_{g,N}[-q]}(g^*N)[-q]$,\nwhere the displayed second arrow includes the canonical pullback shift comparison. By the normalized formula for $\\kappa_{g,C}$, $H^q(v)=\\kappa_{g,C}$. Thus $jd$ and $i a[-q]v$ are morphisms $A\\to J$ with the same degree-$q$ map, namely $H^q(d)$ under $H^q(J)=M$. Step 5 gives\n$jd=i a[-q]v$.",
+   "text": "For any d:Lg*C -> K and alpha=adj(d), the upper bound C<=q factors alpha as f followed by i through P, by the universal property of upper truncation. Adjunction naturality identifies d with Lg*(f) followed by d0. Naturality of the already proved top-pullback comparison gives H^q(Lg*f) kappa_P = kappa_C g*H^q(f). Cancel the invertible kappas and apply ordinary adjunction naturality. This gives ordinary_adj(kappa_C^{-1} H^q(d)) = H^q(f) ordinary_adj(kappa_P^{-1} H^q(d0)). Substitute the definition of e and cancel H^q(i) with its inverse, obtaining H^q(alpha) e.",
    "uses": [
     "lem-weil-pbc-derived-pullback-top-cohomology",
+    "lem-sf-derived-truncation-triangle",
     "lem-pc-module-pullback-adjunction",
-    "lem-pc-pinned-pullback-counit-shifts"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TC (lemma-negative-vanishing), dual top-degree truncation comparison; Cohomology Tag 0D5S for the pinned pullback shifts"
-   }
-  },
-  {
-   "text": "Transpose the last equation under the selected derived adjunction. To identify the comparison maps precisely, apply the single-module transpose theorem with the identity of $g^*N$: its pullback comparison has transpose the ordinary unit followed by the single direct-image comparison. This is also the defining normalization of $c_{g,N}$ in the top-cohomology theorem. Injectivity of the adjunction bijection therefore identifies these two pullback comparisons. The single-module transpose theorem says that the adjunct of $a[0]c_{g,N}$ is $u_{g,M,0}b[0]$. The pinned derived adjunction commutes with shifts, and the pullback counit commutes with those same shifts, so the shifted equality says that the adjunct of $a[-q]c_{g,N}[-q]$ is $u_{g,M,q}b[-q]$. Bifunctoriality of the adjunction, first with the source map $\\tau_C$ and then with the target map $i$, now gives the explicit equation\n$Rg_*(j)\\alpha=Rg_*(i)\\,u_{g,M,q}\\,b[-q]\\,\\tau_C$.\nThis uses the fixed single-module normalization in the statement; it does not choose a new adjunction.",
-   "uses": [
-    "lem-pc-canonical-single-adjunction-transpose",
-    "lem-pc-pinned-derived-adjunction-shifts",
-    "lem-pc-pinned-pullback-counit-shifts",
-    "lem-pc-ringed-spaces-derived-adjoint",
-    "lem-weil-pbc-derived-pullback-top-cohomology"
+    "def-weil-pbc-truncated-counit-edge"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 079W (lemma-adjoint); normalized single-module transpose and its pinned integer-shift compatibility"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5: upper truncation universal property; cohomology.tex Tag 079W: adjunction naturality"
    }
   },
   {
-   "text": "Apply $H^q$ to step 7 and compose with $e^q_{g,J}$. By step 1 with $t=j$, the left side is $g_*H^q(j)e^q_{g,K}H^q(\\alpha)$, identified with $e^q_{g,K}H^q(\\alpha)$. By step 1 with $t=i$ and step 2, the first two factors on the right satisfy\n$e^q_{g,J}H^q(Rg_*i)H^q(u_{g,M,q})=g_*H^q(i)e^q_{g,M[-q]}H^q(u_{g,M,q})=\\mathrm{id}_{g_*M}$.\nAlso $H^q(\\tau_C)$ is the canonical identity on $N$. The resulting equality is therefore $e^q_{g,K}H^q(\\alpha)=b$, exactly the ordinary adjunct required. Every use of an identification here has its degree-$q$ map specified in steps 2, 3 and 6.",
-   "uses": [],
+   "text": "If e and eprime satisfy the local equation, their underlying abelian-sheaf morphisms agree after precomposing with Theta. Theta is the sheafification unit followed by the specified sheafification isomorphism. The sheafification adjunction Hom bijection makes this precomposition injective. Cancel the isomorphism and use faithfulness of forgetting modules to deduce e=eprime.",
+   "uses": [
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 0BKJ and 0D5X: the naturality and local cocycle normalization established in steps 1 and 2"
+    "place": "Tag 0BKJ; uniqueness in sheafification"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-ringed-space-sheafification-cohomology",
-  "lem-trf-unbounded-direct-image-section-presheaf",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pc-module-pullback-adjunction",
-  "lem-pc-canonical-single-direct-image-comparison",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "def-weil-abstract-derived-category",
-  "def-kun-truncations",
-  "lem-sf-derived-truncation-triangle",
+  "def-weil-pbc-truncated-counit-edge",
+  "lem-weil-pbc-truncated-counit-local-class",
   "lem-weil-pbc-derived-pullback-top-cohomology",
-  "lem-pc-derived-tstructure-orthogonality",
-  "lem-weil-pbc-hom-out-of-triangle-exact",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-pc-pinned-pullback-counit-shifts",
-  "lem-pc-canonical-single-adjunction-transpose",
-  "lem-pc-pinned-derived-adjunction-shifts",
-  "lem-pc-ringed-spaces-derived-adjoint"
+  "lem-sf-derived-truncation-triangle",
+  "lem-pc-module-pullback-adjunction",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tags 0BKJ and 0D5X (local class and local Leray); derived.tex Tags 08J5, 0149 and 06XS. Adjunct equality assembled from the existing normalized single-module transpose."
+  "place": "Tags 079W, 0BKJ, 0D5X; derived.tex Tag 08J5. Explicit upper-truncation counit, factorization of every adjunct, naturality of kappa, and sheafification uniqueness."
  },
  "mathlib_searches": [
   {
@@ -311,16 +233,9 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-ringed-space-sheafification-cohomology",
   "lem-trf-unbounded-direct-image-section-presheaf",
   "lem-pc-module-pullback-adjunction",
-  "lem-pc-canonical-single-direct-image-comparison",
-  "def-pc-ringed-spaces-derived-direct-image",
-  "lem-sf-derived-truncation-triangle",
-  "lem-pc-pinned-pullback-counit-shifts",
-  "lem-pc-canonical-single-adjunction-transpose",
-  "lem-pc-pinned-derived-adjunction-shifts",
-  "lem-pc-ringed-spaces-derived-adjoint"
+  "lem-sf-derived-truncation-triangle"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -334,15 +249,6 @@
   "module": "Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge",
   "declaration": "AlgebraicGeometry.derivedAdjunction_topEdge",
   "declarations": [
-   "AlgebraicGeometry.RingedSpace.topEdgeResolution",
-   "AlgebraicGeometry.RingedSpace.topEdgeResolutionIso",
-   "AlgebraicGeometry.RingedSpace.topEdgeLocalModel",
-   "AlgebraicGeometry.RingedSpace.topEdgeLocalClass",
-   "AlgebraicGeometry.RingedSpace.topEdgeDirectImageComparison",
-   "AlgebraicGeometry.RingedSpace.topEdgeInverseModel",
-   "AlgebraicGeometry.RingedSpace.topEdgeLocalLeray",
-   "AlgebraicGeometry.RingedSpace.topEdgeInverseLocalClass",
-   "AlgebraicGeometry.topEdgePullbackInverse",
    "AlgebraicGeometry.derivedAdjunction_topEdge"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/DerivedAdjunctionTopEdge.lean",
@@ -351,7 +257,7 @@
   "by": "NI",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The edge is specified by its unique sheafification equation on all opens. Canonical K-injective model comparisons transport the local Leray isomorphism to the shared scheme direct image; no arbitrary map, resolution-normalization assumption, or replacement adjunction is introduced."
+  "note": "Statement unchanged. Resolution/local-class definitions move verbatim to DerivedAdjunctionTopEdgeData and are publicly re-exported. Complete proof from the explicit truncated-counit local formula, upper truncation and top-pullback naturality."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -360,5 +266,27 @@
   "group": "NI",
   "result": "pass",
   "note": "Only the item lean record changed; statement verbatim; 11 stmt_dep records identical to live. Clauses match the node: pinnedDerivedAdjunction unfolds to the canonicalSingleAdjunctionTranspose adjunction; κ⁻¹ uses IsIso from derivedPullback_topCohomology; ordinary adjunction is the unit-pinned tensorPullback ⊣ pushforward; e is ∃! by the sheafification equation Θ_RgK ≫ Γ(V,e) = λ ≫ Θ^K_{g⁻¹V} on every open; λ = symm of trf e, pinned by e.hom = localHypercohomologyComparison, transported by derived-unit isos on one K-injective representative; Θ = sheafification unit ≫ normalized localHypercohomologySheafificationAt. The trf theorem stmt_dep is genuine (.choose used). Edge cases q≤0, zero objects, empty open, non-flat g, K not in D≥q covered. No hollow defs or duplicates; docstrings carry source/blueprint and all 8 steps. nt_compile --json clean 52.6 s at load 174 (first run timed out at 60 s, load 178). Advisories: 0BKJ node declaration not used directly; pinnedDerivedAdjunction from a non-stmt_dep module equals the stmt_dep term; proof-only imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-35b98",
+  "group": "F5",
+  "result": "fix",
+  "landing": "20261025T100951-L-3644939",
+  "kind": "interface",
+  "note": "independent cc review: derivedAdjunction_topEdge proof and new topEdgeTruncatedCounit_localClass vs node lem-weil-pbc-derived-adjunction-top-edge, new nodes def-weil-pbc-truncated-counit-edge and lem-weil-pbc-truncated-counit-local-class, moved defs diffed against the clone, DerivedSquareLocalClasses importer compiled"
  }
 }

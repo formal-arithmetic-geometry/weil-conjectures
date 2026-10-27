@@ -1,0 +1,230 @@
+{
+ "id": "lem-trf-flat-localized-field-descent",
+ "kind": "statement",
+ "title": "A field localization upstairs identifies the base localization with its residue field",
+ "statement": "Let $\\varphi:R\\to S$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map]. Let $\\mathfrak p\\subset R$ be maximal and $\\mathfrak q\\subset S$ prime with $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$. Put $A=R_{\\mathfrak p}$ and $B=S_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. The canonical homomorphism $f:A\\to B$, $r/s\\mapsto\\varphi(r)/\\varphi(s)$, is well defined, flat, local (it maps $\\mathfrak pA$ into $\\mathfrak qB$), faithfully flat [def-weil-pbc-faithfully-flat-ring-map], and injective. If $B$ is a field, then $\\mathfrak pA=0$ and the canonical residue homomorphism $\\rho:A\\to R/\\mathfrak p$, $r/s\\mapsto\\bar r/\\bar s$, is an isomorphism of $R$-algebras. No Noetherian, finite type, or field-extension hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HT (lemma-flat-localization), parts (1),(2); Tag 00HR (lemma-local-flat-ff); Tag 05CK (lemma-faithfully-flat-universally-injective), zero-ideal case. Application to a field upstairs is the local-ring argument of Curves lemma-nodal, arbitrary-field descent paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The equality $\\varphi^{-1}(\\mathfrak q)=\\mathfrak p$ ensures $\\varphi(s)\\notin\\mathfrak q$ whenever $s\\notin\\mathfrak p$. Apply [lem-weil-pbc-flat-local-ring-maps] to the given flat map and these primes: it gives exactly the well-defined map $f(r/s)=\\varphi(r)/\\varphi(s)$, its flatness, and locality $f(\\mathfrak pA)\\subseteq\\mathfrak qB$. The local rings and their maximal ideals are those of [def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-weil-pbc-flat-local-ring-maps",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization, part (6); Tag 00HR, lemma-local-flat-ff; Tag 05CK, lemma-faithfully-flat-universally-injective."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-local-hom-faithfully-flat] to this flat local map of local rings. Thus $f$ is faithfully flat. Apply [lem-weil-pbc-faithfully-flat-ideal-contraction] with the zero ideal of $A$: $f^{-1}(0)=0$, so $f$ is injective.",
+   "uses": [
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT, lemma-flat-localization, part (6); Tag 00HR, lemma-local-flat-ff; Tag 05CK, lemma-faithfully-flat-universally-injective."
+   }
+  },
+  {
+   "text": "Now suppose $B$ is a field. Its proper maximal ideal $\\mathfrak qB$ is zero: any nonzero element of an ideal in a field is a unit and would force the ideal to contain $1$. Locality gives $f(\\mathfrak pA)=0$, and injectivity gives $\\mathfrak pA=0$. Here [def-weil-pbc-localization-at-prime] identifies $\\mathfrak qB$ and $\\mathfrak pA$ as the maximal ideals; no dimension or finiteness argument is used.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary local-ring and fraction arguments completing the field case; compare literature/stacks-project/curves.tex, Tag 0C4D, lemma-nodal, arbitrary-field descent paragraph."
+   }
+  },
+  {
+   "text": "For $s\\notin\\mathfrak p$, maximality gives $(s)+\\mathfrak p=R$, so $us+v=1$ for some $u\\in R$, $v\\in\\mathfrak p$; hence $\\bar s$ is invertible in $R/\\mathfrak p$. Define $\\rho(r/s)=\\bar r\\bar s^{-1}$. If $r/s=r^{\\prime}/s^{\\prime}$, the fraction relation of [def-weil-pbc-localization-at-prime] gives $t(rs^{\\prime}-r^{\\prime}s)=0$ with $t\\notin\\mathfrak p$; reduction and cancellation of $\\bar t$ proves independence of representatives. The fraction addition and multiplication formulas prove that $\\rho$ is a ring map and $\\rho(r/1)=\\bar r$, so it respects the $R$-actions. It is surjective since $\\bar r=\\rho(r/1)$. If $\\rho(r/s)=0$, then $r\\in\\mathfrak p$, whence $r/1\\in\\mathfrak pA=0$ and $r/s=0$. Thus $\\rho$ is bijective and its inverse is an $R$-algebra homomorphism, giving the asserted canonical isomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary local-ring and fraction arguments completing the field case; compare literature/stacks-project/curves.tex, Tag 0C4D, lemma-nodal, arbitrary-field descent paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-local-ring-maps",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HT, lemma-flat-localization, part (6); Tag 00HR, lemma-local-flat-ff; Tag 05CK, lemma-faithfully-flat-universally-injective."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ii]sField.*[Ff]lat|[Ff]lat.*[Ii]sField|[Ff]ield.*[Ff]aithfullyFlat|[Ff]aithfullyFlat.*[Ff]ield",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"grep\", \"query\": \"[Ii]sField.*[Ff]lat|[Ff]lat.*[Ii]sField|[Ff]ield.*[Ff]aithfullyFlat|[Ff]aithfullyFlat.*[Ff]ield\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RingHom/Flat.lean\", \"Mathlib/RingTheory/LinearDisjoint.lean\"], \"digest\": \"54b8d2e35cb15ea1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat.lean:108), instFlatAtPrime, and Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60) supply flatness or faithful flatness separately. IsLocalHom.isField (Mathlib/Algebra/Field/Equiv.lean:23) additionally requires injectivity and does not identify the canonical residue map. No one-line specialization gives all clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local map to a field is injective and the domain is its residue field",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"leansearch\", \"query\": \"A flat local map to a field is injective and the domain is its residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.toAlgebra_injective\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_lTensor_injective\", \"Ideal.injective_algebraMap_quotient_residueField\", \"IsLocalRing.residue\", \"isField_of_isIntegral_of_isField\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"IsLocalHom.isField\"], \"digest\": \"754d0fe00a46aa0a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat.lean:108), instFlatAtPrime, and Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60) supply flatness or faithful flatness separately. IsLocalHom.isField (Mathlib/Algebra/Field/Equiv.lean:23) additionally requires injectivity and does not identify the canonical residue map. No one-line specialization gives all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat, IsField",
+   "results": "{\"t\": \"2026-10-22T06:11:30Z\", \"tool\": \"loogle\", \"query\": \"RingHom.Flat, IsField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingHom.Flat.of_isField\"], \"digest\": \"04d58375db1afb60\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat.lean:108), instFlatAtPrime, and Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60) supply flatness or faithful flatness separately. IsLocalHom.isField (Mathlib/Algebra/Field/Equiv.lean:23) additionally requires injectivity and does not identify the canonical residue map. No one-line specialization gives all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "local.*[Ff]aithfullyFlat|[Ff]aithfullyFlat.*local|AtPrime|isField",
+   "results": "{\"t\": \"2026-10-22T06:11:54Z\", \"tool\": \"grep\", \"query\": \"local.*[Ff]aithfullyFlat|[Ff]aithfullyFlat.*local|AtPrime|isField\", \"sub\": \"RingTheory/Flat/FaithfullyFlat\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean\"], \"digest\": \"5b990bb57ec1ece1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat.lean:108), instFlatAtPrime, and Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60) supply flatness or faithful flatness separately. IsLocalHom.isField (Mathlib/Algebra/Field/Equiv.lean:23) additionally requires injectivity and does not identify the canonical residue map. No one-line specialization gives all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ring map R to S and prime q above a maximal p the localized map R_p to S_q is flat local faithfully flat and injective; if S_q is a field the residue map R_p to R/p is bijective.",
+   "results": "{\"t\": \"2026-10-22T06:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat ring map R to S and prime q above a maximal p the localized map R_p to S_q is flat local faithfully flat and injective; if S_q is a field the residue map R_p to R/p is bijective.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.localRingHom\", \"RingHom.Flat.ofLocalizationPrime\", \"instFlatAtPrime\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Algebra.HasGoingDown.of_flat\", \"Module.flat_of_isLocalized_maximal\", \"Module.flat_of_localized_maximal\", \"RingHom.Flat.ofLocalizationSpanTarget\"], \"digest\": \"e79bf561e637d2b1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat.lean:108), instFlatAtPrime, and Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60) supply flatness or faithful flatness separately. IsLocalHom.isField (Mathlib/Algebra/Field/Equiv.lean:23) additionally requires injectivity and does not identify the canonical residue map. No one-line specialization gives all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a flat algebra at a prime above a maximal ideal is faithfully flat over the base localization, and a field target forces the canonical residue map of the base localization to be an isomorphism.",
+   "results": "{\"t\": \"2026-10-22T06:12:21Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of a flat algebra at a prime above a maximal ideal is faithfully flat over the base localization, and a field target forces the canonical residue map of the base localization to be an isomorphism.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrime\", \"RingHom.Flat.localRingHom\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.ofLocalizationPrime\", \"Algebra.HasGoingDown.of_flat\", \"Module.flat_of_isLocalized_maximal\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"Module.flat_of_localized_maximal\"], \"digest\": \"ab5320d4226b48d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: RingHom.Flat.localRingHom (Mathlib/RingTheory/RingHom/Flat.lean:108), instFlatAtPrime, and Module.FaithfullyFlat.of_flat_of_isLocalHom (Mathlib/RingTheory/Flat/FaithfullyFlat/Algebra.lean:60) supply flatness or faithful flatness separately. IsLocalHom.isField (Mathlib/Algebra/Field/Equiv.lean:23) additionally requires injectivity and does not identify the canonical residue map. No one-line specialization gives all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "localRingHom|of_flat_of_isLocalHom|comap_map_eq_self_of_faithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T04:31:25Z\", \"tool\": \"grep\", \"query\": \"localRingHom|of_flat_of_isLocalHom|comap_map_eq_self_of_faithfullyFlat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"Mathlib/RingTheory/Unramified/LocalRing.lean\"], \"digest\": \"f4bda7bfaba67e52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a flat local homomorphism to a field the source is a field and its canonical residue map is an isomorphism.",
+   "results": "{\"t\": \"2026-10-23T04:31:26Z\", \"tool\": \"leansearch\", \"query\": \"For a flat local homomorphism to a field the source is a field and its canonical residue map is an isomorphism.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.residue\", \"IsLocalRing.residue_def\", \"AlgebraicGeometry.Scheme.residue\", \"IsLocalRing.isLocalHom_residue\", \"IsLocalRing.ResidueField.field\", \"IsLocalRing.ResidueField.map\", \"IsLocalRing.instIsLocalHomResidueFieldRingHomResidue\", \"IsLocalRing.residue_surjective\"], \"digest\": \"56e16c86d488dc84\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat ring map localized at primes over one another is local faithfully flat and injective; if the target localization is a field then the source at a maximal ideal is canonically the quotient by that ideal.",
+   "results": "{\"t\": \"2026-10-23T04:31:27Z\", \"tool\": \"leanfinder\", \"query\": \"A flat ring map localized at primes over one another is local faithfully flat and injective; if the target localization is a field then the source at a maximal ideal is canonically the quotient by that ideal.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFlatAtPrime\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.localRingHom\", \"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat.propertyIsLocal\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.flat_of_isLocalized_maximal\"], \"digest\": \"e7f190373ede823d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.Flat, IsField",
+   "results": "{\"t\": \"2026-10-23T04:31:29Z\", \"tool\": \"loogle\", \"query\": \"RingHom.Flat, IsField\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RingHom.Flat.of_isField\"], \"digest\": \"04d58375db1afb60\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  },
+  {
+   "tool": "grep",
+   "query": "localRingHom",
+   "results": "{\"t\": \"2026-10-23T04:32:59Z\", \"tool\": \"grep\", \"query\": \"localRingHom\", \"sub\": \"RingTheory/RingHom/Flat.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"102\", \"104\", \"108\", \"110\", \"112\"], \"digest\": \"cfaff2fb4f17d552\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  },
+  {
+   "tool": "grep",
+   "query": "of_flat_of_isLocalHom|comap_map_eq_self_of_faithfullyFlat",
+   "results": "{\"t\": \"2026-10-23T04:32:59Z\", \"tool\": \"grep\", \"query\": \"of_flat_of_isLocalHom|comap_map_eq_self_of_faithfullyFlat\", \"sub\": \"RingTheory/Flat/FaithfullyFlat/Algebra.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"35\", \"60\", \"107\", \"129\"], \"digest\": \"783f5ffabbecf57a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective local ring homomorphism from A to a field forces the maximal ideal of A to vanish; a localization at a maximal ideal then equals the original residue quotient.",
+   "results": "{\"t\": \"2026-10-23T04:33:01Z\", \"tool\": \"leanfinder\", \"query\": \"An injective local ring homomorphism from A to a field forces the maximal ideal of A to vanish; a localization at a maximal ideal then equals the original residue quotient.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"injective_of_isLocalization_isMaximal\", \"IsLocalRing.isLocalHom_residue\", \"quotMapEquivQuotMapMaximalIdealOfIsLocalization\", \"Ideal.injective_algebraMap_quotient_residueField\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"IsLocalRing.instIsLocalHomResidueFieldRingHomResidue\", \"IsLocalization.AtPrime.algebraMap_equivQuotMaximalIdeal_symm_apply\"], \"digest\": \"6abd067cf38f419d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide localization flatness, flat-local faithful flatness, or general residue maps separately. The item additionally proves the canonical R-algebra residue identification by an explicit fraction argument. RingHom.Flat.of_isField has the field hypothesis on the source, not the target."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometric-field-stalk-descent",
+  "date": "2026-10-22",
+  "group": "Q152"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Curves 0C4D arbitrary-field descent paragraph, sentence \"In particular, Z is reduced at x, hence Z = Spec(kappa(x)) in a neighbourhood of x\": flat local injectivity and the canonical residue identification, original steps 5-6 of lem-trf-geometric-field-stalk-descent.",
+   "via": [
+    "lem-trf-geometric-field-stalk-descent",
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-flat-localized-field-descent",
+  "worker": "stage1",
+  "summary": "Q19 proves the localization and flat/local/faithful/injective assertions using existing Mathlib leaves, then gives the elementary vanishing-of-maximal-ideal and explicit canonical residue-map argument. No statement change, no new nodes, no added finiteness assumptions.",
+  "blueprint": "The inherited lem-trf-local-term-locality ancestor is reached through the recorded specialization/nearby-cycle/nodal-geometry chain. This split supplies the flat-local injectivity and canonical residue identification used in steps 5-6 of lem-trf-geometric-field-stalk-descent, underlying Curves Tag 0C4D, lemma-nodal, arbitrary-field descent paragraph. No unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-34e1ae739",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-34e1ae739 (reviewer sub-agent of L); spot-checked: Read the item in full and judged it on its own merits. Zero new nodes; one commit with the item and its report, base 5fbd63d. Statement, stmt_deps, source and blueprint are byte-identical to the version created in the Q152 parent delivery. The statement is true. Tested cases: field identity; k×k→k projection, where pA=0 and A=k; Z→Q, excluded because p=0 is not maximal; p=(2) in Z, where the field clause does not apply; zero ring, vacuous. The only citer, lem-trf-geometric-field-stalk-descent step 4, uses exactly the field clause. Step 1: lem-weil-pbc-flat-local-ring-maps (leaf RingHom.Flat.localRingHom) has the identical hypothesis p=φ⁻¹(q) and gives the map, flatness and locality. Step 2: lem-weil-pbc-flat-local-hom-faithfully-flat (00HR) gives faithful flatness; lem-weil-pbc-faithfully-flat-ideal-contraction (05CK) explicitly states injectivity. Steps 3–4 are correctly marked elementary: qB=0 in a field, so locality plus injectivity give pA=0; the explicit residue map is well defined, an R-algebra map, surjective and injective. Read Stacks algebra.tex 00HT (part 6), 00HR and 05CK, and curves.tex 0C4D (arbitrary-field paragraph). proof_deps equals the union of uses. Every cited node is a Mathlib leaf, so there is no route issue and no tool_uses. No SGA. Duplicate search with rg -L over dag/nodes found no node stating this lemma. Searches are recorded with real hits. Advisory only: the inherited node-level source names 00HT (1),(2) while the steps use (6). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatLocalizedFieldDescent",
+  "declaration": "RingHom.flat_localized_field_descent",
+  "file": "lean/Sheaf/RingTheory/FlatLocalizedFieldDescent.lean",
+  "statement": "theorem flat_localized_field_descent {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : φ.Flat) (p : Ideal R) [p.IsMaximal] (q : Ideal S) [q.IsPrime] (hpq : p = q.comap φ) : (Localization.localRingHom p q φ hpq).Flat ∧ IsLocalHom (Localization.localRingHom p q φ hpq) ∧ (Localization.localRingHom p q φ hpq).FaithfullyFlat ∧ Function.Injective (Localization.localRingHom p q φ hpq) ∧ (IsField (Localization.AtPrime q) → p.map (algebraMap R (Localization.AtPrime p)) = ⊥ ∧ ∃ e : Localization.AtPrime p ≃ₐ[R] R ⧸ p, e.toRingHom = (IsLocalization.AtPrime.equivQuotMaximalIdeal p (Localization.AtPrime p)).symm.toRingHom.comp (Ideal.Quotient.mk (IsLocalRing.maximalIdeal (Localization.AtPrime p))))",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5751c16b3",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node: flat φ, maximal p, prime q with hpq : p = q.comap φ; f is the constructed Localization.localRingHom; flat / IsLocalHom / RingHom.FaithfullyFlat / injective; field clause as an implication giving p.map(algebraMap) = ⊥ and an R-algebra equivalence whose underlying ring hom is the pinned canonical ρ ((equivQuotMaximalIdeal p A).symm ∘ quotient mod 𝔪_A; Mathlib l.590 gives r/s ↦ r̄ s̄⁻¹). No extra hypotheses; independent universes u, v. Only the lean field differs from the live node; lean.statement matches the file verbatim; stmt_deps are recorded Mathlib leaves; no new definitions; proof is sorry only; docstrings carry source, blueprint tag and proof steps. Edge cases checked: zero ring, field identity, Z at (2), k×k→k. The citer geometric-field-stalk-descent step 4 is served. Not recompiled (no change); worker reports a clean scompile and an OK dry run. Advisory: inherited node source names 00HT (1),(2) while the proof uses (6)."
+ }
+}

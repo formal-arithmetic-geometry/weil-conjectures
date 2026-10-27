@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-finite-georeduced-etale",
+ "kind": "statement",
+ "title": "Finite geometrically reduced schemes over fields are etale",
+ "statement": "Let $k$ be a field and let $T\\to\\operatorname{Spec}k$ be a finite morphism of schemes. Assume $T$ is geometrically reduced over $k$: $T\\times_k L$ is reduced for every field extension $L/k$. Then $T\\to\\operatorname{Spec}k$ is etale. The empty scheme is allowed. No perfectness assumption on $k$ is imposed.\n\nThe notions used are [def-weil-field], [def-pc-scheme], [def-weil-affine-spectrum], [def-weil-finite-integral-morphism], [def-pc-field-extension], [def-pc-base-change], [def-pc-geometrically-irreducible] and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GL, lemma-etale-over-field, combined with algebra.tex Tag 030W, lemma-characterize-separable-field-extensions: reduced Artinian components are fields and geometric reducedness makes their finite residue extensions separable. Agent synthesis."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-pc-geometrically-irreducible",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-finite-integral-morphism], write $T=\\operatorname{Spec}A$ over $k$, where $A$ is finite-dimensional over $k$. Apply geometric reducedness to $L=k$ to see that $T$ is reduced. By [def-pc-reduced-scheme], its global section ring $A$ is reduced. By [lem-weil-pbc-finite-dim-algebra-artinian], $A$ is Artinian.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-finite-dim-algebra-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), reduction to an affine coordinate algebra; Algebra Tag 00J6, finite-dimensional algebras are Artinian"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-reduced-artinian-residue-product] to $A$. Enumerate its finitely many maximal ideals by $1,\\ldots,n$, and put $K_i=A/\\mathfrak m_i$, with $k$-structure given by the quotient. The resulting isomorphism $A\\cong\\prod_i K_i$ respects $k$ because its components are precisely these quotient maps. By [lem-weil-pbc-spec-finite-product-fields], the spectra of the projections identify $\\operatorname{Spec}K_i$ with pairwise disjoint open singletons covering $T$. Thus $T\\cong\\coprod_i\\operatorname{Spec}K_i$ over $k$: gluing the displayed isomorphisms of disjoint open subschemes gives the isomorphism, with inverse defined on each open summand.",
+   "uses": [
+    "lem-sfb-reduced-artinian-residue-product",
+    "lem-weil-pbc-spec-finite-product-fields"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02GL (lemma-etale-over-field); Artinian structure theorem, Algebra Tag 00JB"
+   }
+  },
+  {
+   "text": "Each $K_i$ is finite-dimensional over $k$: the images of a finite $k$-basis of $A$ span its quotient $K_i$. The structural map $k\\to K_i$ is injective, since its kernel is an ideal of the field $k$ and cannot contain $1$ in the nonzero field $K_i$. Consequently every $K_i/k$ is a finite field extension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), finite residue extensions"
+   }
+  },
+  {
+   "text": "Choose an algebraic closure $\\bar k/k$, whose existence is included in [def-weil-algebraic-closure]. Apply [lem-sbc-finite-affine-tensor-base-change] with base ring $k$, extension ring $\\bar k$, and the decomposition in step 2. It identifies $T_{\\bar k}$ with $\\coprod_i\\operatorname{Spec}(K_i\\otimes_k\\bar k)$. By hypothesis $T_{\\bar k}$ is reduced. Each summand is open, and [def-pc-reduced-scheme] says the sections on every open are reduced. Hence $K_i\\otimes_k\\bar k$ is reduced. Apply [lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable] to conclude that each finite $K_i/k$ is separable. In the terminology of [def-weil-pbc-separable-field-extension], take the finitely generated subextension to be $K_i$ itself (a finite vector-space basis generates it as a field); its transcendence basis is empty because it is algebraic. Thus this is separable algebraic, as needed for the next step.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "lem-sbc-finite-affine-tensor-base-change",
+    "def-pc-reduced-scheme",
+    "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), separability of finite residue extensions; Algebra Tag 030W and the finite-extension algebraic-closure test"
+   }
+  },
+  {
+   "text": "By [lem-exc-etale-coproduct-etale], the coproduct of the spectra of the finite separable extensions $K_i/k$ is etale over $k$. Under the isomorphism over $k$ of step 2 this is exactly $T\\to\\operatorname{Spec}k$, proving the claim. If $A=0$, its maximal-ideal set is empty and the coproduct is empty; the same cited coproduct statement permits an empty index set. No perfectness of $k$ entered any step.",
+   "uses": [
+    "lem-exc-etale-coproduct-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), disjoint unions of separable field spectra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-sfb-reduced-artinian-residue-product",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "def-weil-algebraic-closure",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+  "def-weil-pbc-separable-field-extension",
+  "lem-exc-etale-coproduct-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02GL (lemma-etale-over-field), with algebra.tex Artinian decomposition and the existing finite-extension tensor-reducedness test; explicit assembly by Q84."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|isSeparable.*[Rr]educed|[Rr]educed.*isSeparable",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\", \"Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the product-of-separable-fields criterion does not itself obtain separability from geometric reducedness of a finite scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite geometrically reduced algebra over a field is etale.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.FormallyEtale.instFormallySmooth\", \"AlgebraicGeometry.IsEtale\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.IsStandardEtale\", \"Algebra.Etale.finitePresentation\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the product-of-separable-fields criterion does not itself obtain separability from geometric reducedness of a finite scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale, Algebra.IsSeparable",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.FormallyEtale.instIsSeparableQuotientIdealOfEssFiniteTypeOfIsPrime\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the product-of-separable-fields criterion does not itself obtain separability from geometric reducedness of a finite scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite-dimensional algebra over a field whose tensor product with every extension field is reduced is a product of finite separable field extensions.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.IsGeometricallyReduced\", \"Algebra.isGeometricallyReduced_iff\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.FormallyUnramified.isSeparable\", \"Algebra.IsGeometricallyReduced.isReduced_algebraicClosure_tensorProduct\", \"Algebra.FormallyUnramified.iff_isSeparable\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the product-of-separable-fields criterion does not itself obtain separability from geometric reducedness of a finite scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite geometrically reduced scheme over a field is finite etale, including the empty scheme.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.IsGeometricallyReduced\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.IsEtale\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"]}",
+   "date": "2026-10-23",
+   "verdict": "no match: the product-of-separable-fields criterion does not itself obtain separability from geometric reducedness of a finite scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|of_isReduced_of_perfectField",
+   "results": "{\"t\": \"2026-10-23T09:35:59Z\", \"tool\": \"grep\", \"query\": \"GeometricallyReduced|of_isReduced_of_perfectField\", \"sub\": \"RingTheory/Etale\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale product criterion requires separability, not supplied by geometric reducedness without the present argument."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite geometrically reduced algebra over a field is etale.",
+   "results": "{\"t\": \"2026-10-23T09:35:59Z\", \"tool\": \"leansearch\", \"query\": \"A finite geometrically reduced algebra over a field is etale.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.FormallyEtale.instFormallySmooth\", \"AlgebraicGeometry.IsEtale\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.IsStandardEtale\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"06b15a4f1ca050df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale product criterion requires separability, not supplied by geometric reducedness without the present argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsGeometricallyReduced, Algebra.Etale",
+   "results": "{\"t\": \"2026-10-23T09:35:59Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsGeometricallyReduced, Algebra.Etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale product criterion requires separability, not supplied by geometric reducedness without the present argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite geometrically reduced scheme over a field is etale.",
+   "results": "{\"t\": \"2026-10-23T09:36:09Z\", \"tool\": \"leanfinder\", \"query\": \"A finite geometrically reduced scheme over a field is etale.\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.etaleLocus_eq_univ_iff\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"148e741d2effc30d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned etale product criterion requires separability, not supplied by geometric reducedness without the present argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-marked-generic-normalization",
+  "date": "2026-10-23",
+  "group": "Q135"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong, Families of curves and alterations (1997), §§2.7--2.10, printed pp.603--605: invariant purely inseparable generic normalization, equivariant Chow preparation and simultaneous flattening. The marking flattening is also ILO X Theorem 3.4 Step 2, p.160. Retained flat-curve preparation Steps 1–4: smooth normalization, reduction of the marking, invariant compositum, separability and tensor-product function field. Subargument: convert the geometrically reduced finite marked subscheme to an etale subscheme",
+   "via": [
+    "lem-sfb-invariant-marked-generic-normalization",
+    "lem-sfb-equivariant-flat-curve-preparation",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-georeduced-etale",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Decompose the finite reduced coordinate ring using an exact Mathlib leaf, deduce finite separability of each residue field from the reduced algebraic-closure base change using existing nodes, and apply the existing etale coproduct lemma. Checked zero algebra and imperfect fields.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3), geometric input used below its open-direct-image finiteness branch; inherited marked generic-normalization prerequisite recorded in blueprint.from.place. Steps supply precisely the conversion of a geometrically reduced finite marking into an etale marking. The ancestor tool returns None, retained faithfully.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-finite-product-fields",
+    "why": "Generic description of the spectrum of a product of fields; produces the disjoint open components, not any alteration route. No node in this unit states this generic fact."
+   },
+   {
+    "node": "lem-sbc-finite-affine-tensor-base-change",
+    "why": "Generic tensor formula for base change of a finite affine coproduct; needed to identify each marked component after extension. No node in this unit states this generic fact."
+   },
+   {
+    "node": "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+    "why": "Generic finite-field separability test; applies to each residue field without assuming the base perfect. No node in this unit states this generic fact."
+   },
+   {
+    "node": "lem-exc-etale-coproduct-etale",
+    "why": "Generic etaleness of a disjoint union of finite separable field spectra; completes the field-level marking argument. No node in this unit states this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-sbc-finite-affine-tensor-base-change",
+  "lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable",
+  "lem-exc-etale-coproduct-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-518419c4e",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-518419c4e (reviewer sub-agent of L); spot-checked: Read the item, the new node and every cited statement. The item statement is unchanged: Stacks 02GL with the 030W idea, true including empty T and imperfect k. It is not superseded: live and side-live still show it unsplit with no proof, and no repair note exists. Step 1: def-weil-finite-integral-morphism gives T=Spec A with A finite over k; L=k gives reduced; def-pc-reduced-scheme puts reducedness on O(T); lem-weil-pbc-finite-dim-algebra-artinian gives Artinian, hypotheses exact. Step 2: the new leaf IsArtinianRing.equivPi (Mathlib Artinian/Module.lean:633) is exact; equivPi_apply :638 gives quotient components, so the isomorphism is over k; finite MaximalSpectrum :525; field :603. lem-weil-pbc-spec-finite-product-fields clauses 1-3 give a disjoint open singleton cover, so T≅∐Spec K_i over k. Step 3 is elementary: finite and injective. Step 4: lem-sbc-finite-affine-tensor-base-change (B=k, A=kbar, E_i=K_i, Fin n) gives T_kbar≅∐Spec(K_i⊗kbar), and reducedness passes to each affine open summand. lem-pc-finite-extension-tensor-algebraic-closure-reduced-separable holds in all characteristics (correctly avoiding the char-p 030W node). def-weil-pbc-separable-field-extension(2), with K'=K_i and an empty transcendence basis, gives separable algebraic. Step 5: lem-exc-etale-coproduct-etale takes any index set, including empty, and étaleness transfers along the k-isomorphism. New node checked on R=0, a field, k×k and the dual numbers (excluded). It is self-contained, statement-only, strictly smaller than the item, and no duplicate was found over all snapshot statements and mathlib_match fields (normalization-chart nodes only use equivPi in their proofs). No item duplicate either: the 02GL/030W hits are the converse, single-field or perfect-field variants. The four tool_uses are generic algebra/étale tools and I accept them. No SGA. Advisory only: steps 1-2 put Tag 02GL under document algebra.tex (it is in morphisms.tex); the new node does not cite def-weil-field. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteGeometricallyReducedEtale",
+  "declaration": "AlgebraicGeometry.etale_of_isFinite_of_geometricallyReduced",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteGeometricallyReducedEtale.lean",
+  "statement": "theorem etale_of_isFinite_of_geometricallyReduced (k : Type u) [Field k] (T : Scheme.{u}) (f : T ⟶ Spec (CommRingCat.of k)) [IsFinite f] [GeometricallyReduced f] : Etale f",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5d3fd0c3",
+  "group": "NA",
+  "result": "pass",
+  "note": "Lean matches node: (k:Type u)[Field k], f:T⟶Spec k, [IsFinite f], [GeometricallyReduced f] (Mathlib geometrically IsReduced = every field extension via geometrically_iff_of_commRing), conclusion Etale f. Empty T allowed, no PerfectField, universe u forced by Spec and only weakens the hypothesis. Item node changed only in its new lean record; lean.statement matches the file verbatim; docstrings give 02GL/030W, blueprint tag and all five proof steps; proof is sorry only; no new nodes or dependency records; all imports exist in side-live. No existing statement in Mathlib or project trees (etale_of_isFinite_of_isReduced needs PerfectField); no name collision. No compile run: no changes."
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "lem-sf-normalized-common-evaluation-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized common-stage evaluation",
+ "statement": "Let l be prime, Ω an algebraic closure of Q_l, and X a scheme on whose residue fields l is invertible. Use the common-stage category C, tensor T, permitted-pair predicate J, and internal-Hom functor H of [def-weil-algebraically-closed-coefficients, def-weil-derived-pullback-tensor-hom]. Let S be partial closed data [def-pod-partial-closed-interfaces] satisfying the finite rational normalization of [def-sf-adic-closed-reindexing-maps]. For permitted pairs P=(M,N), Q=(M′,N′) and any pair arrow g=(v^op,w):P→Q, right evaluation satisfies T(H(g),1_M′) ≫ ev_Q = T(1_H(P),v) ≫ ev_P ≫ w. This is an equation of actual common-stage classes and holds for all pair morphisms, including representatives with denominators.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Lemma 3.4.11, Proposition 6.8.14 and Remark 6.8.15; agent-written common-field representative argument, refining step 6 of lem-sf-adic-common-stage-hom-transpose."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pod-partial-closed-interfaces",
+  "def-sf-adic-closed-reindexing-maps"
+ ],
+ "proof": [
+  {
+   "text": "Evaluation is inverse transpose of the identity. Use the given normalization to represent both evaluations at one common finite field containing the pair entries, tensor objects, Hom objects and both components of g. The defining common-stage functor formulas express tensor and Hom maps using the rational maps conjugated by their specified comparisons. Apply normalized rational evaluation naturality at that field and cancel adjacent comparisons. Equality of representatives implies equality of classes. The normalization holds after every further enlargement, so the formula uses the specified evaluations and no transition map need be injective.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-sf-adic-closed-reindexing-maps",
+    "lem-coef-normalized-rational-evaluation-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-adic-closed-reindexing-maps",
+  "lem-coef-normalized-rational-evaluation-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Repair of returned head 2523e272ce8: retain the original common-field argument under a distinct module/declaration name; the concurrent canonical naturality landing is not yet an importable published dependency."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Naturality of evaluation and symmetry for tensor internal Hom in a filtered colimit of categories",
+   "results": "CategoryTheory.ihom.ev_naturality; CategoryTheory.ihom.ev; CategoryTheory.Limits.colimitIsoFlipCompColim.",
+   "date": "2026-10-25",
+   "verdict": "No match: generic closed-category counits do not identify the normalized operations on the specified common-stage category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the normalized evaluation counit on permitted internal Hom pairs in the common finite coefficient stage category",
+   "results": "CategoryTheory.ihom.ev_naturality; CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.ev_naturality_app; CategoryTheory.expComparison_ev.",
+   "date": "2026-10-25",
+   "verdict": "No match: general counit naturality requires the common-stage comparison/descent argument."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|ev_naturality in Mathlib/CategoryTheory/Monoidal",
+   "results": "Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean:121, CategoryTheory.BraidedCategory.braiding_naturality; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean: counit naturality.",
+   "date": "2026-10-25",
+   "verdict": "No match: these require existing monoidal/closed structures whose maps agree with the prescribed common-stage maps; that identification is part of this obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCommonStageHomTranspose",
+  "date": "2026-10-25",
+  "group": "Q5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native refinement of lem-sf-adic-common-stage-hom-transpose, proof step 6: Naturality of normalized common-stage evaluation. The ancestor query returns None.",
+   "via": [
+    "lem-sf-adic-common-stage-hom-transpose",
+    "lem-sf-adic-qbar-constructible-realization",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedCommonEvaluationForStructure",
+  "file": "lean/Sheaf/Paper/NormalizedCommonEvaluationForStructure.lean",
+  "declaration": "WeilConjectures.normalizedCommonEvaluationForStructure_naturality",
+  "statement": "theorem normalizedCommonEvaluationForStructure_naturality (S : PodPartialClosed (commonStageDerivedTensor l Ω X) (commonStageHomPairs l Ω X) (commonStageDerivedInternalHom l Ω X)) (hS : PodCommonTransposeNormalization l Ω X S) (P Q : (commonStageHomPairs l Ω X).FullSubcategory) (g : P ⟶ Q) : (commonStageDerivedTensor l Ω X).map (Prod.mkHom ((commonStageDerivedInternalHom l Ω X).map g) (𝟙 Q.obj.1.unop)) ≫ S.evaluation Q = (commonStageDerivedTensor l Ω X).map (Prod.mkHom (𝟙 ((commonStageDerivedInternalHom l Ω X).obj P)) g.hom.1.unop) ≫ S.evaluation P ≫ g.hom.2",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T143744-L-1081556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261025T143744-L-1081556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

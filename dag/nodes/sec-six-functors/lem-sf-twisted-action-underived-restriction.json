@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-twisted-action-underived-restriction",
+ "kind": "statement",
+ "title": "Coherence of specified ordinary action-site tensor and Hom restriction",
+ "statement": "Let C be a small site with topology J, let s be a continuous site autoequivalence whose inverse is continuous, let R be a sheaf of commutative rings, and let a identify inverse-translation of R with R. Fix a twisted action-site Presentation P [def-sf-twisted-action-presentation-data]. Put U = P.modules.functor followed by forgetPairs(sigma J s R a). There exists a RingedForgetTensorTransposition.Underived structure on U [def-sf-ringed-forget-tensor-transposition-data] whose Hom comparison at each pair (M,N) has forward map exactly P.hom(M,N).hom. The proposed construction assembles P.tensor and P.hom using their naturality and uses P.unit, but extra tensor/unit equalities are not asserted. This asserts coherence and evaluation for specified maps, without any native Frobenius realization or existence of sites.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "Assemble the components P.tensor and P.hom into natural isomorphisms by NatIso.ofComponents, using P.tensor_naturality and P.hom_naturality. Take P.unit as the unit comparison.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+   }
+  },
+  {
+   "text": "For associativity precompose by the two inverse tensor comparisons. Maps out of a triple sheaf tensor are determined by local pure triples: cancel the sheafified tensor of the sheafification units, apply the sheafification adjunction, and use tensor induction three times. Apply P.tensor_pure twice, restriction naturality and the pure-triple associator formula. Both paths give x tensor (y tensor z). For the two unit equations apply the two-variable pure tensor criterion and P.unit_sections. Coefficient restriction is a ring isomorphism, so both paths multiply the module section by the same coefficient. P.symmetry gives the symmetry equation.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+   }
+  },
+  {
+   "text": "The pure-tensor characterization IsSheafEvaluation uniquely determines right evaluation by the sheafification adjunction and sectionwise tensor induction. The canonical right evaluation is braiding followed by the ordinary left evaluationMap. Substitute P.evaluation and P.symmetry. Tensor naturality moves P.hom through the braiding and gives the displayed Underived evaluation equation for every pair of evaluations satisfying that characterization. All data are fixed; zero modules, empty sites and zero rings satisfy the same calculations.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "def-sf-ringed-forget-tensor-transposition-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-pur-module-tensor-generator-calculus",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "J2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary action-site coherence, isolated from step 2 of lem-sf-native-weil-tensor-ringed-bridge; Tags 03EK, 03EL, 03EO."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules along an action site has tensor and internal Hom comparisons preserving associativity units symmetry and evaluation",
+   "results": "8 hits, including PresheafOfModules.monoidalCategory, Sheaf.monoidalCategory and scalarRestriction.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for the specified action-site comparison maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "results": "12 hits, including CoreMonoidal and its toMonoidal/toLaxMonoidal constructors.",
+   "date": "2026-10-27",
+   "verdict": "Generic structure constructors do not supply the normalized local formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "CoreMonoidal|rightAdjointLaxMonoidal|sheafPushforward.*Monoidal",
+   "results": "25 hits, including presheaf PushforwardZeroMonoidal, localization functorCoreMonoidalOfComp and module scalar restriction.",
+   "date": "2026-10-27",
+   "verdict": "No exact action-site sheaf restriction coherence theorem; the sheafification and pure-tensor APIs supply the proposed proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorRingedBridge",
+  "date": "2026-10-27",
+  "group": "J2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Nearest blueprint ancestor lookup for lem-sf-native-weil-tensor-ringed-bridge returns None. Source paragraph: cor-coef-verdier-weil-equivariance, internal Hom/evaluation and normalized action-site restriction. Tags 03EK, 03EL and 03EO: sheaf tensor, associativity, unit and internal Hom evaluation; twisted action-site presentation tensor/evaluation steps 9--13.",
+   "via": [
+    "lem-sf-native-weil-tensor-ringed-bridge",
+    "lem-sf-native-weil-tensor-geometry",
+    "lem-sf-native-weil-ringed-tensor-model",
+    "lem-sf-native-weil-tensor-constraint-lifts",
+    "lem-sf-native-weil-tensor-coherence",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionUnderivedRestriction",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionUnderivedRestriction.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.underived_restriction",
+  "statement": "theorem underived_restriction (P : Presentation J s R a) :\n    letI := P.category\n    let U := P.modules.functor ⋙ forgetPairs (sigma J s R a)\n    ∃ d : RingedForgetTensorTransposition.Underived.{u, u, u, u, u, u}\n        P.topology P.coefficient J R U,\n      ∀ M N : Modules P.coefficient,\n        d.hom.hom.app (op M, N) = (P.hom M N).hom",
+  "branch": "sheaf-dag",
+  "by": "J2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-3a85c",
+  "group": "J2",
+  "result": "fix",
+  "landing": "20261027T135426-L-3704573",
+  "kind": "interface",
+  "note": "independent cc review: delivered BridgeData structure+attributes vs published item (byte-identical); underived_restriction vs Presentation fields (tensor_pure/unit_sections/evaluation/symmetry) and Underived/TensorCoherence; new node records vs Lean; 2 direct importers compiled OK against delivery"
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "id": "def-sf-published-system-ambient-presentation",
+ "kind": "definition",
+ "title": "Ambient sequence pullback data with published category types",
+ "statement": "PublishedSystemAmbientData records, in coefficientSequenceDerived, a pullback functor for each scheme morphism, its tensor comparison, and a compositor. publishedSystemAmbientData is the actual sequence-site ambient derivedPull, tensorData.mu, and derivedComp with systemClosed and systemTensorModel from pullbackTensorCalculus. It makes no new choices. Its pull field equals pullbackTensorSequenceDerived by sequence_derived_eq. The specified identification isomorphism publishedSystemAmbientPullIso is eqToIso of that proved equality. [lem-sf-system-pullback-compositor-identification] [lem-sf-ambient-pullback-tensor-coherence]",
+ "stmt_deps": [
+  "lem-sf-system-pullback-compositor-identification",
+  "lem-sf-ambient-pullback-tensor-coherence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7; the actual sequence-site constructions of AmbientPullbackTensor and sequence_derived_eq."
+ },
+ "proof": [
+  {
+   "text": "Record derivedPull, the tensorData comparison with the published systemClosed structures and systemTensorModel models, and derivedComp. Their sequence-site categories are definitionally the coefficientSequenceDerived categories. Apply sequence_derived_eq to prove the pull-field identification. No witness is selected from an existence theorem.",
+   "uses": [
+    "lem-sf-system-pullback-compositor-identification",
+    "lem-sf-ambient-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-system-pullback-compositor-identification",
+  "lem-sf-ambient-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 and 07A7; the actual sequence-site constructions of AmbientPullbackTensor and sequence_derived_eq."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback functors with tensor comparison and composition isomorphisms on sheaves of modules",
+   "results": "8 hits, including SheafOfModules.pullbackComp, conjugateEquiv_pullbackComp_inv and Scheme.Modules.pullback.",
+   "date": "2026-10-27",
+   "verdict": "Use the already constructed ambient sequence-site data; no new ordinary pullback construction is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bundle derived pullback functor tensor comparison and composition isomorphisms on sequence site",
+   "results": "8 hits, including SheafOfModules.pullbackComp, pullbackIso and conjugateEquiv_pullbackComp_inv.",
+   "date": "2026-10-27",
+   "verdict": "Related ordinary constructions, no packaging of the project sequence-site comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits, including mapDerivedCategory, mapDerivedCategoryCompIso, and NatTrans.mapDerivedCategory.",
+   "date": "2026-10-27",
+   "verdict": "The project ambient data already use this API; record those actual constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "publishedSystemAmbientData|PublishedSystemAmbientData",
+   "results": "0 hits.",
+   "date": "2026-10-27",
+   "verdict": "New typed record for the existing ambient data; not a new mathematical construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.PublishedSystemTensorComposition",
+  "date": "2026-10-27",
+  "group": "U2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Composition/refinement sentence of fix-prop-projection-formula, via ambient proper/open pasting: Recording the actual sequence-site ambient constructions with published category types",
+   "via": [
+    "lem-sf-published-system-tensor-composition",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-sf-composition-projection-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.PublishedSystemAmbientPresentation",
+  "file": "lean/Sheaf/SixFunctors/PublishedSystemAmbientPresentation.lean",
+  "declaration": "WeilConjectures.publishedSystemAmbientData",
+  "statement": "def publishedSystemAmbientData : PublishedSystemAmbientData l E",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-8070c",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235944-L-1473419",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (only explicit .{u} universe annotations, same elaborated type) and vs SystemTensorComposition; 2 new sorry identifications vs Compositors (sections/conjugate/pullComp_model) and ambient pushComp/comp/derivedComp/tensorData normalizations; node records vs Lean; direct importer AmbientProperOpenPasting compiled against the 6 delivered modules (rc 0); #print axioms (transport sorry-free, sorryAx only from the 2 new holes and upstream holes)"
+ }
+}

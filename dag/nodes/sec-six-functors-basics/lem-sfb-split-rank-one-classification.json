@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-split-rank-one-classification",
+ "kind": "statement",
+ "title": "Explicit matrix models for reductive groups of semisimple rank one",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Use reductivity, maximal tori, and scheme-theoretic centralizer points as in [def-sfb-reductive-torus-centralizer-terminology]. A torus is a group isomorphic to $\\mathbf G_m^r$ for an integer $r\\geq0$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Let $H$ be reductive, let $T\\subseteq H$ be a maximal torus, and let $R\\subseteq H$ be the largest smooth connected solvable normal subgroup, and assume that the fppf quotient $H/R$ has maximal tori of dimension one. Here solvable means that successive commutator subgroup schemes eventually become trivial, and the quotient is the represented fppf quotient of [lem-sfb-affine-normal-quotient-geometry]. Then the pair $(H,T)$ is isomorphic over $F$ to one of the pairs $$\\bigl(\\mathbf G_m^r\\times\\operatorname{SL}_2,\\mathbf G_m^r\\times D_{\\mathrm{SL}}\\bigr),\\quad \\bigl(\\mathbf G_m^r\\times\\operatorname{PGL}_2,\\mathbf G_m^r\\times D_{\\mathrm{PGL}}\\bigr),\\quad \\bigl(\\mathbf G_m^r\\times\\operatorname{GL}_2,\\mathbf G_m^r\\times D_{\\mathrm{GL}}\\bigr)$$ for some integer $r\\geq0$. Here $\\operatorname{GL}_2(A)$ is the invertible $2\\times2$ matrices, $\\operatorname{SL}_2(A)$ the determinant-one matrices, and $\\operatorname{PGL}_2$ the fppf sheaf quotient of $\\operatorname{GL}_2$ by scalar matrices; fppf sheafification is for faithfully flat finitely presented coverings of commutative $F$-algebras. The subgroups $D_{\\mathrm{SL}}$, $D_{\\mathrm{PGL}}$, and $D_{\\mathrm{GL}}$ are respectively the diagonal determinant-one matrices, the images of diagonal invertible matrices, and all diagonal invertible matrices. Under these isomorphisms the derived subgroup $H^{\\mathrm{der}}$ is respectively $1\\times\\operatorname{SL}_2$, $1\\times\\operatorname{PGL}_2$, and $1\\times\\operatorname{SL}_2\\subseteq\\mathbf G_m^r\\times\\operatorname{GL}_2$. The derived subgroup means the smallest closed subgroup through which the commutator morphism factors. The classification holds in every characteristic, including characteristic two.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.33 and Corollary 20.34, printed pp.418--419; Proposition 20.24 (perfectness of SL2 and PGL2), printed p.416; Proposition 20.32 (derived group), printed pp.418--419. Theorem 20.33 is read with its semisimple-rank-one hypothesis, as the errata specify; the derived-group cases are corrected to agree with the displayed products."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-sc-gm-ga",
+  "lem-sfb-affine-normal-quotient-geometry"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{SL}_{2,F}$. By [lem-sfb-sl2-universal-multiplicative-cover] it is semisimple and its scalar quotient is the universal multiplicative covering of $\\operatorname{PGL}_2$. We first verify that $S$ is perfect, without using any general root-datum theorem. An algebraically closed field is infinite (a finite field would make $\\prod_{c\\in F}(X-c)-1$ a polynomial with no root); choose $a\\ne0$ with $a^2\\ne1$. Apply [lem-sfb-sl2-field-commutator-generation]. By [lem-sfb-smooth-connected-derived-subgroup], $S^{\\mathrm{der}}(F)=[S(F),S(F)]=S(F)$. The coordinate ring $F[x,y,z,w]/(xw-yz-1)$ is reduced: the opens where $x$ or $z$ is invertible cover it, since $xw-yz=1$, and each is a Laurent polynomial ring over $F$. Every function in the ideal of $S^{\\mathrm{der}}$ therefore vanishes on all $F$-points and is zero by [lem-wf-affine-nullstellensatz-vanishing]. Thus $S^{\\mathrm{der}}=S$ as schemes.",
+   "uses": [
+    "lem-sfb-sl2-universal-multiplicative-cover",
+    "lem-sfb-sl2-field-commutator-generation",
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 20.24 and 20.31, pp.416,418; the point-to-scheme argument of 20.24 is supplied explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rank-one-adjoint-projective-linear] to $H$: the assumed rank of $H/R$ is exactly its hypothesis, so $H/Z(H)\\simeq\\operatorname{PGL}_2$. Transport the covering from step 1 along this isomorphism. Apply [lem-sfb-reductive-central-pushout-reconstruction] with this perfect semisimple $S$. We obtain a diagonalizable $D=Z(H)$, a homomorphism $\\varphi:\\mu_2\\to D$ with torus cokernel, and $$H\\simeq(S\\times D)/\\{(\\epsilon I_2,\\varphi(\\epsilon)^{-1}):\\epsilon^2=1\\}.$$ The image of $S$ in this quotient is precisely $H^{\\mathrm{der}}$. All kernels and quotients here are schematic/fppf; in characteristic two none is replaced by its set of field points.",
+   "uses": [
+    "lem-sfb-rank-one-adjoint-projective-linear",
+    "lem-sfb-reductive-central-pushout-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Remark 19.30, pp.404--405, and the opening of the proof of Theorem 20.33, p.419; use the noninjective version of the centre map."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-multiplicative-character-antiduality]. Write $D=D_F(M)$ and $\\alpha=\\varphi^*:M\\to\\mathbf Z/2\\mathbf Z$, since $\\mu_2=D_F(\\mathbf Z/2\\mathbf Z)$. Contravariant equivalence takes the cokernel of $\\varphi$ to the kernel $K=\\ker\\alpha$; explicitly a character factors through $D/\\operatorname{im}\\varphi$ exactly when its restriction to $\\mu_2$ is zero. That cokernel is a torus, so $K$ is free of finite rank. Its finite basis can equivalently be chosen using [lem-trf-fg-torsionfree-group-free]. There are two possibilities for $\\alpha$: zero, or surjective. No surjectivity is presumed in advance.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-trf-fg-torsionfree-group-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9 and the character calculation in the proof of Theorem 20.33, p.419, corrected to allow alpha = 0."
+   }
+  },
+  {
+   "text": "If $\\alpha=0$, then $M=K$ and $D\\simeq\\mathbf G_m^r$; antiduality says $\\varphi$ is the trivial homomorphism. The quotient of step 2 is consequently $\\mathbf G_m^r\\times(S/\\mu_2)=\\mathbf G_m^r\\times\\operatorname{PGL}_2$, using [lem-sfb-projective-matrix-central-cover] with matrix size two. The image of $S$ is exactly the second factor, so the derived subgroup has the required description.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-projective-matrix-central-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The second character case of Theorem 20.33, p.419, and the scalar quotient of Example 5.49."
+   }
+  },
+  {
+   "text": "Now suppose $\\alpha$ is onto and choose $m\\in M$ with $\\alpha(m)=1$. Then $M$ is generated by $K$ and $m$, with its sole extra relation $2m=k_0$ for $k_0\\in K$: every relation has an even coefficient of $m$ and reduces to this one. Choose a basis of the finite free group $K$. If $k_0\\in2K$, replace $m$ by $m-k_0/2$; then $M=K\\oplus\\langle m\\rangle$ with $2m=0$ and $\\alpha$ the projection to $\\mathbf Z/2$. Otherwise the coordinate vector of $k_0$ is nonzero modulo two. Swap a nonzero coordinate to the first position, and subtract that coordinate from every other odd coordinate by integral basis operations. The vector is now $(1,0,\\ldots,0)$ modulo two. Replacing $m$ by $m+k$ changes $k_0$ by $2k$, so arrange $2m=e_1$. Eliminating $e_1$ gives $M=\\mathbf Zm\\oplus\\bigoplus_{i>1}\\mathbf Ze_i$, with $\\alpha(m)=1$ and $\\alpha(e_i)=0$. This exhaustive calculation also handles $K=0$, where only the first case occurs.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The two nonzero character cases of Theorem 20.33, p.419; the finite-lattice calculation is written out."
+   }
+  },
+  {
+   "text": "In the case $M=K\\oplus\\mathbf Z/2$, character antiduality identifies $D$ with $\\mathbf G_m^r\\times\\mu_2$ and $\\varphi$ with the inclusion into the last factor. The map $$(s,t,z)\\longmapsto(t,zs)$$ identifies the quotient in step 2 with $\\mathbf G_m^r\\times S$: it has inverse $(t,s)\\mapsto[(s,t,1)]$, and its kernel is exactly $(\\epsilon I_2,1,\\epsilon^{-1})$. These formulas work on all algebra-valued points, including nilpotents. The image of $S$ is $1\\times S$.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The first character case of Theorem 20.33, p.419; the quotient isomorphism is explicit."
+   }
+  },
+  {
+   "text": "In the remaining case $M=N\\oplus\\mathbf Zm$ with $\\alpha$ reduction on $m$, antiduality identifies $D$ with $D_F(N)\\times\\mathbf G_m=\\mathbf G_m^r\\times\\mathbf G_m$ and $\\varphi(\\epsilon)=(1,\\epsilon)$. The map $$(s,t,z)\\longmapsto(t,zs)\\in\\mathbf G_m^r\\times\\operatorname{GL}_2$$ has kernel exactly $(\\epsilon I_2,1,\\epsilon^{-1})$. It is fppf locally surjective: for an invertible matrix $g$ over an algebra $B$, adjoining an invertible root $z$ of $z^2=\\det g$ is a finite free faithfully flat cover of rank two; then $s=z^{-1}g$ has determinant one. Thus the represented quotient [lem-sfb-affine-normal-quotient-geometry] identifies this quotient with $\\mathbf G_m^r\\times\\operatorname{GL}_2$. The image of $S$ is exactly the determinant-one subgroup in the second factor. This calculation uses no division by two.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality",
+    "lem-sfb-affine-normal-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "The third character case of Theorem 20.33, p.419; Example 19.28, p.405; scalar multiplication as in Example 19.24, p.404."
+   }
+  },
+  {
+   "text": "Let $f:H\\simeq G$ be the resulting matrix-model isomorphism and let $D_G\\subseteq G$ be the displayed diagonal subgroup ($\\mathbf G_m^r$ times $D_{\\mathrm{SL}}$, $D_{\\mathrm{PGL}}$ or $D_{\\mathrm{GL}}$). The image $f(T)$ is a maximal torus, since an isomorphism preserves inclusions of torus subgroups. The subgroup $D_G$ is a torus, isomorphic to $\\mathbf G_m^{r+1}$, $\\mathbf G_m^{r+1}$ (by $[\\operatorname{diag}(a,b)]\\mapsto a/b$, using [lem-sfb-projective-matrix-central-cover]) and $\\mathbf G_m^{r+2}$. It is maximal. Let $j:S\\to G$ be a closed torus inclusion and $D_G\\to S$ a homomorphism compatible with the inclusions. Since $S$ is commutative, every $x\\in S(F)$ commutes with $D_G(F)$. Write the matrix component of $x$ as $X=(x_{ij})$, a matrix over $F$; for $\\operatorname{PGL}_2$ this is a lift, which exists and is unique up to $F^\\times$ because $\\operatorname{GL}_2\\to\\operatorname{PGL}_2$ is a $\\mathbf G_m$-torsor [lem-sfb-projective-matrix-central-cover] whose fibre over an $F$-point is a nonempty finite type $F$-scheme, hence has an $F$-point [lem-wf-affine-nullstellensatz-vanishing]. Choose $a\\in F$ with $a\\neq0$, $a^2\\neq1$ as in step 1. Commuting with $\\operatorname{diag}(a,a^{-1})$ (for $\\operatorname{SL}_2$) or with $\\operatorname{diag}(a,1)$ (for $\\operatorname{GL}_2$) gives $a^{\\pm2}x_{12}=x_{12}$, resp. $a^{\\pm1}x_{12}=x_{12}$, and the same for $x_{21}$, so $X$ is diagonal. For $\\operatorname{PGL}_2$, $\\operatorname{diag}(a,1)X\\operatorname{diag}(a,1)^{-1}=\\lambda X$ with $\\lambda\\in F^\\times$, i.e. $x_{11}=\\lambda x_{11}$, $x_{22}=\\lambda x_{22}$, $ax_{12}=\\lambda x_{12}$, $a^{-1}x_{21}=\\lambda x_{21}$. If $x_{11}$ or $x_{22}$ is nonzero then $\\lambda=1$ and $x_{12}=x_{21}=0$; otherwise $x_{12},x_{21}\\ne0$ by invertibility and $\\lambda=a=a^{-1}$, contradicting $a^2\\neq1$. Hence $S(F)\\subseteq D_G(F)$. The coordinate ring of $S\\simeq\\mathbf G_m^s$ is a Laurent polynomial ring, hence reduced, so by [lem-wf-affine-nullstellensatz-vanishing](3) the closed immersion $j$ factors through the closed subgroup $D_G$. Thus $D_G\\subseteq S\\subseteq D_G$ as closed subschemes of $G$, and $D_G\\to S$ is an isomorphism. Apply [lem-sfb-borel-maximal-torus-conjugacy] in the smooth connected group $G$ to obtain $g\\in G(F)$ with $gf(T)g^{-1}=D_G$ as subgroup schemes. The isomorphism $\\operatorname{inn}(g)\\circ f$ is now an isomorphism of the required pairs. The derived subgroup descriptions from steps 4,6,7 persist under this conjugation, because a commutator subgroup is invariant under every inner automorphism.",
+   "uses": [
+    "lem-sfb-projective-matrix-central-cover",
+    "lem-wf-affine-nullstellensatz-vanishing",
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 20.34 and its preceding diagonalization paragraph, p.419; Theorem 17.10 for conjugacy."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sl2-universal-multiplicative-cover",
+  "lem-sfb-sl2-field-commutator-generation",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-wf-affine-nullstellensatz-vanishing",
+  "lem-sfb-rank-one-adjoint-projective-linear",
+  "lem-sfb-reductive-central-pushout-reconstruction",
+  "lem-sfb-multiplicative-character-antiduality",
+  "lem-trf-fg-torsionfree-group-free",
+  "lem-sfb-projective-matrix-central-cover",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-borel-maximal-torus-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 20.33 and Corollary 20.34, p.419, through Remark 19.30 and Proposition 19.27, pp.404--405; corrected character cases and explicit quotient maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A split reductive algebraic group of semisimple rank one is a product of a split torus with SL2, PGL2, or GL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V],\\n  Module.finrank R V = 1 → Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_eq_bot_of_subsingleton\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] [Subsingleton n],\\n  Subgroup.center (Matrix.SpecialLinearGroup n R) = ⊥\", \"doc\": \"If $ n $ is a subsingleton (i.e., a type with at most one element), then the center of the special linear group $ \\\\text{SL}(n, R) $ is the trivial subgroup containing only the identity matrix.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"{n : Type u} →\\n  [inst : DecidableEq n] →\\n    [inst_1 : Fintype n] →\\n      {R : Type v} →\\n        [inst_2 : CommRing R] →\\n          ↥(Subgroup.center (Matrix.SpecialLinearGroup n R)) ≃* ↥(rootsOfUnity (max (Fintype.card n) 1) R)\", \"doc\": \"For a finite type $n$ with cardinality $\\\\#n$ and commutative ring $R$, there is a canonical group isomorphism between the center of the special linear group $\\\\text{SL}(n, R)$ and the group of $\\\\max(\\\\#\"}\n  {\"name\": \"MulAction.IwasawaStructure.isSimpleGroup\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] [Nontrivial M],\\n  commutator M = ⊤ →\\n    ∀ [MulAction.IsQuasiPreprimitive M α] (IwaS : MulAction.IwasawaStructure M α), FaithfulSMul M α → IsSimpleGroup M\", \"doc\": \"For a non-trivial group $ M $ with a perfect commutator subgroup, if $ M $ acts quasi-preprimitively and faithfully on a type $ \\\\alpha $ equipped with an Iwasawa structure, then $ M $ is a simple grou\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification split rank one reductive algebraic groups as products multiplicative group SL2 PGL2 GL2 in every characteristic",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.IsArithmetic.is_commensurable\", \"module\": \"Mathlib.NumberTheory.ModularForms.ArithmeticSubgroups\", \"type\": \"∀ {𝒢 : Subgroup (GL (Fin 2) ℝ)} [self : 𝒢.IsArithmetic], 𝒢.Commensurable (Matrix.SpecialLinearGroup.mapGL ℝ).range\", \"doc\": \"Every arithmetic subgroup $\\\\mathcal{G}$ of the general linear group $\\\\mathrm{GL}(2, \\\\mathbb{R})$ is commensurable with the special linear group $\\\\mathrm{SL}(2, \\\\mathbb{Z})$, meaning their intersection\"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"[Module.Free R V] (d1 : Module.finrank R V = 1) : Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(h : Module.finrank R V ≤ 1) : Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsParabolic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \"(g : GL (Fin 2) R) : Prop\", \"doc\": \"A 2×2 invertible matrix over a semiring $ R $ is parabolic if it is not a scalar matrix (i.e., not a scalar multiple of the identity matrix) and its characteristic polynomial has zero discriminant.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(d1 : Module.finrank R V ≤ 1) (g : Subgroup.center (SpecialLinearGroup R V)) : centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"ModularGroup.SL_to_GL_tower\", \"module\": \"Mathlib.Analysis.Complex.UpperHalfPlane.MoebiusAction\", \"type\": \": IsScalarTower SL(2, ℤ) GL(2, ℝ)⁺ ℍ\", \"doc\": \"The scalar actions of $\\\\mathrm{SL}(2, \\\\mathbb{Z})$ on $\\\\mathrm{GL}(2, \\\\mathbb{R})^+$, $\\\\mathrm{GL}(2, \\\\mathbb{R})^+$ on the upper half-plane $\\\\mathbb{H}$, and $\\\\mathrm{SL}(2, \\\\mathbb{Z})$ on $\\\\mathbb{\"}\n  {\"name\": \"Matrix.GeneralLinearGroup.IsElliptic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.FinTwo\", \"type\": \"[Preorder R] (g : GL (Fin 2) R) : Prop\", \"doc\": \"A matrix $ g $ in the general linear group $ \\\\mathrm{GL}(2, R) $ is called elliptic if the discriminant of its characteristic polynomial is negative.\"}\n  {\"name\": \"Subgroup.IsArithmetic.isFiniteRelIndexSL\", \"module\": \"Mathlib.NumberTheory.ModularForms.ArithmeticSubgroups\", \"type\": \"(𝒢 : Subgroup (GL (Fin 2) ℝ)) [IsArithmetic 𝒢] : 𝒢.IsFiniteRelIndex 𝒮ℒ\", \"doc\": \"Every arithmetic subgroup of the general linear group $\\\\mathrm{GL}(2, \\\\mathbb{R})$ has finite relative index in the special linear group $\\\\mathrm{SL}(2, \\\\mathbb{R})$.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Matrix.SpecialLinearGroup.«term_ᵀ»\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" : Lean.TrailingParserDescr\", \"doc\": \"The transpose of a matrix in `SL(n, R)`\"}\n  {\"name\": \"Matrix.SpecialLinearGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" (n : Type u) [DecidableEq n] [Fintype n] (R : Type v) [CommRing R] : Type (max 0 u v)\", \"doc\": \"`SpecialLinearGroup n R` is the group of `n` by `n` `R`-matrices with determinant equal to 1.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasInv\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Inv (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasMul\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Mul (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.hasOne\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : One (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instGroup\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Group (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instInhabited\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Inhabited (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.monoid\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Monoid (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instPowNat\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] : Pow (Matrix.SpecialLinearGroup n R) ℕ\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instDecidableEq\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [DecidableEq R] : DecidableEq (Matrix.SpecialLinearGroup n R)\", \"doc\": \"If `R` and `n` have decidable equality then so does `SL(n, R)`.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.instFinite\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [Finite R] : Finite (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.subsingleton_of_subsingleton\", \"module\": \"Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup\", \"type\": \" {n : Type u} [DecidableEq n] [Fintype n] {R : Type v} [CommRing R] [Subsingleton n] : Subsingleton (Matrix.SpecialLinearGroup n R)\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]ank[Oo]ne|semisimple.rank|PGL2|[Rr]eductive",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern abstract groups, Lie algebras, topological tori, or matrix definitions; none asserts the algebraic-group-scheme theorem in all characteristics"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected reductive algebraic group of semisimple rank one over an algebraically closed field is a product of a torus with SL2 PGL2 or GL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {K : Type u_2} {M : Type u_3} {N : Type u_4} [inst : Field K] [inst_1 : CharZero K]\\n  [inst_2 : DecidableEq ι] [inst_3 : Fintype ι] [inst_4 : AddCommGroup M] [inst_5 : Module K M]\\n  [inst_6 : AddCommGroup N] [inst_7 : Module K N] {P : RootPairing ι K M N} [P.IsRootSystem]\\n  [inst_9 \", \"doc\": \"The Lie algebra constructed via the Geck construction from a root pairing over an algebraically closed field has a trivial radical, hence is semisimple. Specifically, the Lie subalgebra of the matrix \"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V],\\n  Module.finrank R V = 1 → Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"Matrix.SpecialLinearGroup.center_eq_bot_of_subsingleton\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] [Subsingleton n],\\n  Subgroup.center (Matrix.SpecialLinearGroup n R) = ⊥\", \"doc\": \"If $ n $ is a subsingleton (i.e., a type with at most one element), then the center of the special linear group $ \\\\text{SL}(n, R) $ is the trivial subgroup containing only the identity matrix.\"}\n  {\"name\": \"MulAction.IwasawaStructure.isSimpleGroup\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"∀ {M : Type u_1} [inst : Group M] {α : Type u_2} [inst_1 : MulAction M α] [Nontrivial M],\\n  commutator M = ⊤ →\\n    ∀ [MulAction.IsQuasiPreprimitive M α] (IwaS : MulAction.IwasawaStructure M α), FaithfulSMul M α → IsSimpleGroup M\", \"doc\": \"For a non-trivial group $ M $ with a perfect commutator subgroup, if $ M $ acts quasi-preprimitively and faithfully on a type $ \\\\alpha $ equipped with an Iwasawa structure, then $ M $ is a simple grou\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup V] →\\n        [inst_2 : Module R V] →\\n          [Module.Free R V] →\\n            [Module.Finite R V] →\\n              ↥(Subgroup.center (SpecialLinearGroup R V)) ≃* ↥(rootsOfUnity (max (Module.finrank R V) 1) R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $, where $ n $ i\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Reductive\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple.rank|reductive.*group|PGL2",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Classification of split reductive algebraic groups of rank one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"[Module.Free R V] (d1 : Module.finrank R V = 1) : Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"Subalgebra.rank_eq_one_iff\", \"module\": \"Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition\", \"type\": \"[Nontrivial E] [Module.Free F S] : Module.rank F S = 1 ↔ S = ⊥\", \"doc\": \"For a non-trivial type $ E $ and a free $ F $-module $ S $, the rank of $ S $ as an $ F $-module is equal to 1 if and only if $ S $ is the trivial subalgebra $ \\\\bot $ (the smallest subalgebra under in\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib.LinearAlgebra.SpecialLinearGroup\", \"type\": \"(d1 : Module.finrank R V ≤ 1) (g : Subgroup.center (SpecialLinearGroup R V)) : centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"Valuation.RankOne.casesOn\", \"module\": \"Mathlib.RingTheory.Valuation.RankOne\", \"type\": \"{R : Type u_1} →\\n  [inst : Ring R] →\\n    {Γ₀ : Type u_2} →\\n      [inst_1 : LinearOrderedCommGroupWithZero Γ₀] →\\n        {v : Valuation R Γ₀} →\\n          {motive : v.RankOne → Sort u} →\\n            (t : v.RankOne) →\\n              ([toIsNontrivial : v.IsNontrivial] →\\n                  (hom : Γ₀ →*₀ NN\", \"doc\": \"A function that performs case analysis on a rank one valuation $ v $, decomposing it into its constructor components: a non-trivial valuation, a monoid homomorphism from $ \\\\Gamma_0 $ to the non-negati\"}\n  {\"name\": \"Valuation.IsRankOneDiscrete.instIsCyclicSubtypeUnitsMemSubgroupValueGroup\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \": IsCyclic <| valueGroup v\", \"doc\": \"The value group of a rank one discrete valuation is a cyclic group.\"}\n  {\"name\": \"ValuativeRel.IsRankLeOne.casesOn\", \"module\": \"Mathlib.RingTheory.Valuation.ValuativeRel.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [inst_1 : ValuativeRel R] →\\n      {motive : ValuativeRel.IsRankLeOne R → Sort u} →\\n        (t : ValuativeRel.IsRankLeOne R) →\\n          ((nonempty : Nonempty (ValuativeRel.RankLeOneStruct R)) → motive ⋯) → motive t\", \"doc\": \"A case analysis principle for the property that a valuative relation on a commutative ring has rank at most one, allowing proofs by considering the case where the associated rank-one structure is non-\"}\n  {\"name\": \"Valuation.RankOne.noConfusionType\", \"module\": \"Mathlib.RingTheory.Valuation.RankOne\", \"type\": \"Sort u →\\n  {R : Type u_1} →\\n    [inst : Ring R] →\\n      {Γ₀ : Type u_2} →\\n        [inst_1 : LinearOrderedCommGroupWithZero Γ₀] →\\n          {v : Valuation R Γ₀} →\\n            v.RankOne →\\n              {R' : Type u_1} →\\n                [inst' : Ring R'] →\\n                  {Γ₀' : Type u_2} →\\n         \", \"doc\": \"A type that ensures uniqueness of representations for rank one valuations between a ring $ R $ and a linearly ordered commutative group with zero $ \\\\Gamma_0 $, facilitating case analysis and equality \"}\n  {\"name\": \"Valuation.IsRankOneDiscrete\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{Γ : Type u_1} → [inst : LinearOrderedCommGroupWithZero Γ] → {A : Type u_2} → [inst_1 : Ring A] → Valuation A Γ → Prop\", \"doc\": \"The valuation $ v $ is of rank one and discrete, meaning its value group $ \\\\Gamma $ is a linearly ordered commutative group with zero satisfying additional rank-one discreteness conditions.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classification of algebraic group schemes with adjoint quotient PGL2",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MatrixGroups.termPSL(_,_)\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"Lean.ParserDescr\", \"doc\": \"The projective special linear group $ \\\\text{PSL}(m, n) $ is defined as the quotient group $ \\\\text{SL}(m, n)/Z(\\\\text{SL}(m, n)) $, where $ Z(\\\\text{SL}(m, n)) $ denotes the center of the special linear \"}\n  {\"name\": \"Matrix.ProjectiveSpecialLinearGroup\", \"module\": \"Mathlib/LinearAlgebra/Matrix/ProjectiveSpecialLinearGroup\", \"type\": \"(n : Type u) → [DecidableEq n] → [Fintype n] → (R : Type v) → [CommRing R] → Type (max (max u v) v u)\", \"doc\": \"The projective special linear group $\\\\text{PSL}(n, R)$ is defined as the quotient of the special linear group $\\\\text{SL}(n, R)$ by its center subgroup, which consists of scalar matrices in $\\\\text{SL}(\"}\n  {\"name\": \"BrauerGroup\", \"module\": \"Mathlib/Algebra/BrauerGroup/Defs\", \"type\": \"(K : Type u) → [Field K] → Type (max u (u_1 + 1))\", \"doc\": \"The Brauer group of a field $ K $ is defined as the quotient of the set of central simple algebras over $ K $ by the equivalence relation of Brauer equivalence. This quotient is constructed using the \"}\n  {\"name\": \"Matrix.SpecialLinearGroup.subsingleton_of_subsingleton\", \"module\": \"Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup\", \"type\": \"∀ {n : Type u} [inst : DecidableEq n] [inst_1 : Fintype n] {R : Type v} [inst_2 : CommRing R] [Subsingleton n],\\n  Subsingleton (Matrix.SpecialLinearGroup n R)\", \"doc\": \"The special linear group of $ n \\times n $ matrices over a commutative ring $ R $ is equipped with a commutative ring structure.\"}\n  {\"name\": \"SpecialLinearGroup.subsingleton_of_finrank_eq_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V],\\n  Module.finrank R V = 1 → Subsingleton (SpecialLinearGroup R V)\", \"doc\": \"If $ V $ is a free $ R $-module of finite rank 1, then the special linear group $ \\\\text{SL}(V) $ is trivial, meaning it contains only the identity element.\"}\n  {\"name\": \"SpecialLinearGroup.center_eq_bot_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V] [Module.Free R V]\\n  [Module.Finite R V], Module.finrank R V ≤ 1 → Subgroup.center (SpecialLinearGroup R V) = ⊥\", \"doc\": \"If the finite rank of an $ R $-module $ V $ over a commutative ring $ R $ satisfies $ \\\\dim_R(V) \\\\leq 1 $, then the center of the special linear group $ \\\\text{SL}(V) $ is the trivial subgroup containin\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V],\\n  Module.finrank R V ≤ 1 →\\n    ∀ (g : ↥(Subgroup.center (SpecialLinearGroup R V))), SpecialLinearGroup.centerEquivRootsOfUnity g = 1\", \"doc\": \"If the finite rank of the $ R $-module $ V $ is at most 1, then every element in the center of the special linear group $ \\\\text{SL}(V) $ is mapped to the multiplicative identity $ 1 $ under the isomor\"}\n  {\"name\": \"SpecialLinearGroup.instGroup\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"{R : Type u_1} →\\n  {V : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup V] → [inst_2 : Module R V] → Group (SpecialLinearGroup R V)\", \"doc\": \"The special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and $ R $-module $ V $ forms a group under composition of linear transformations, with the group operations defined such that th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract matrix groups, Lie algebras or unrelated quotient constructions, not this assertion about affine algebraic group schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-reductive-rank-one-reflections",
+  "date": "2026-10-23",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Construct the finite integral root datum from rank-one SL2 coroots, normalizer reflections and finite W, rather than presupposing the root datum. Supporting lemma: Explicit matrix models for reductive groups of semisimple rank one.",
+   "via": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-rank-one-classification",
+  "worker": "stage1",
+  "summary": "Split the rank-one matrix classification through the adjoint PGL2 quotient and its universal SL2 covering, followed by the general central-pushout reconstruction. Proved scheme perfectness using a verified Mathlib abstract SL2 leaf and the existing Nullstellensatz statement. Wrote the entire three-case character calculation and both nontrivial quotient isomorphisms, including nilpotent mu2 in characteristic two; used existing maximal-torus conjugacy. Four new nodes, one Mathlib leaf. Kept the corrected item statement.",
+  "blueprint": "Inherited supporting chain below det-thm-sf-ctf-stability-direct-images, proof (3): the algebraic-group input to the Haboush/Steinberg construction. Read the current latest blueprint unit and direct-images proof. The inherited ancestor is null (as blueprint_refs.py ancestor reports); no imported blueprint node states this classification. The steps realize the explicit rank-one-model input named in the inherited from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic reduced affine vanishing principle converts equality of field points into equality of the closed derived subgroup; no algebraic-group route or root-datum theorem is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-8efabbf49",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-8efabbf49 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 printed pp.404-405 (Def 19.26, Prop 19.27, Rem 19.30) and pp.414-419 (20.22, 20.24, 20.31-20.34), plus Mathlib SpecialLinearGroup.lean lines 788-809. The item statement matches 20.33 with the semisimple-rank-one hypothesis. The worker's source-error note is right: φ is not injective in the PGL2 case, and Milne swaps the derived groups. Steps 1-7 check out. Step 1: SL2 is reduced (charts D(x), D(z)), its F-points are perfect by the Mathlib leaf for a with a^2≠1, and the Nullstellensatz then gives S^der=S; the generic Nullstellensatz tool_use is accepted. Step 2: the adjoint node and the cover node feed the reconstruction with kernel μ2=Z(S). Step 3: X*(coker φ)=ker α, which is free. Steps 4-7: I checked each kernel against the graph and the fppf surjectivity through B[z]/(z^2-det g), with no division by 2. The lattice reduction holds on K=0, k0=0, k0=2e1 and k0=e1+e2. FIX: in step 8, maximality of the diagonal torus rested on an unwritten scheme-theoretic centralizer computation for PGL2 (E5), which over non-reduced rings in characteristic 2 is not a few-line check. I rewrote it on F-points: explicit matrix entries computed with a from step 1, PGL2 lifts up to F^× from the G_m-torsor, then Nullstellensatz (3) since a torus is reduced. Nullstellensatz is added to the step's uses. New nodes: adjoint-projective-linear (20.22), sl2-universal-multiplicative-cover (20.31/18.8) and reductive-central-pushout-reconstruction (Rem 19.30 + 19.27) are true, self-contained and not duplicates of the existing reductive-centre, semisimple-cover or central-torus nodes; sl2-field-commutator-generation exactly matches Matrix.SL2.commutator_eq_top (line 804). No cycles. Batch-5: lem-trf-fg-torsionfree-group-free and the trf nodes reached through the cited nodes (scheme-cover descent, Proj Sym, a geometric-connectedness criterion, exterior/dual base change) are generic algebra and geometry, not trace-formula or Poincaré statements or steps of their proofs, so they are accepted. No SGA citation.; 1 file(s) fixed by the reviewer"
+ }
+}

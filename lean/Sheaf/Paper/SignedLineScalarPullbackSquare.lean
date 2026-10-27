@@ -6,13 +6,13 @@ Authors: SHEAF group Q57
 module
 
 public import Sheaf.Paper.SignedLineScalarTensorTower
+public import Sheaf.Paper.SignedLinePullbackNormalization
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackExistsOfUniverses
 public import Sheaf.CategoryTheory.RingedToposMorphism
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackLocalizationOfUniverses
+import Sheaf.Paper.SignedLinePullbackExistence
+import Sheaf.Paper.SignedLineScalarPullbackNaturality
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackPairingTransfer
 
 /-! # Pullback of the signed line scalar square
 
@@ -51,15 +51,70 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   [HasWeakSheafify J AddCommGrpCat.{max u v w}]
   [HasWeakSheafify K AddCommGrpCat.{max u v w}]
 
-/-- Unit, degree one, positive tensor recursion, and negative evaluation normalization.
-Source: Stacks 03EL and 0GMX; node proof steps 1, 3--5.
-(blueprint: lem-pur-signed-line-scalar-pullback-square)
-The last equation is the pulled evaluation pairing on generators. Since the positive
-map is invertible it says exactly that the negative map is the transpose of that pairing
-followed by precomposition with the inverse positive map. All source objects V are tested,
-including after restriction; bilinearity and the module adjunction extend it to the
-entire tensor product of the pullbacks. -/
-def SignedLinePullbackNormalized
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify J AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify K AddCommGrpCat.{max u v w}] in
+private theorem pullback_section_ext
+    {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
+    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
+      (U.sheafPushforwardContinuous RingCat J K).obj
+        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))
+    (M : ringedSiteModules.{max u v w}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    {N : ringedSiteModules.{max u v w}
+      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R')}
+    (f g : (ringedSitePullbackFunctor a
+      (module_pushforward_isRightAdjoint_of_universes a)).obj M ⟶ N)
+    (h : ∀ (V : C) (x : M.val.obj (op V)),
+      f.val.app (op (U.obj V))
+        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
+          M V x) =
+      g.val.app (op (U.obj V))
+        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
+          M V x)) : f = g := by
+  let := module_pushforward_isRightAdjoint_of_universes a
+  apply ((pullbackPushforwardAdjunction a).homEquiv M N).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext x
+  exact h V.unop x
+
+omit [K.WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
+  [HasWeakSheafify K AddCommGrpCat.{max u v w}] in
+private theorem pullback_tensor_section_ext
+    {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
+    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
+      (U.sheafPushforwardContinuous RingCat J K).obj
+        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))
+    (M N : ringedSiteModules.{max u v w}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
+    {H : ringedSiteModules.{max u v w}
+      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R')}
+    (f g : (ringedSitePullbackFunctor a
+      (module_pushforward_isRightAdjoint_of_universes a)).obj
+        ((siteSheafTensorRight N).obj M) ⟶ H)
+    (h : ∀ (V : C) (x : M.val.obj (op V)) (y : N.val.obj (op V)),
+      f.val.app (op (U.obj V))
+        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
+          ((siteSheafTensorRight N).obj M) V (siteSheafTensorTmul M N (op V) x y)) =
+      g.val.app (op (U.obj V))
+        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
+          ((siteSheafTensorRight N).obj M) V (siteSheafTensorTmul M N (op V) x y))) :
+    f = g := by
+  let := module_pushforward_isRightAdjoint_of_universes a
+  apply ((pullbackPushforwardAdjunction a).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply scalarTensor_hom_ext M N
+  intro V x y
+  exact h V.unop x y
+
+private theorem signedLinePullbackNormalized_unique
+    [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
+    (hcover : CoverPreserving J K U)
+    [∀ V : C, (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v w}]
     {R : Sheaf J CommRingCat.{max u v w}} {R' : Sheaf K CommRingCat.{max u v w}}
     (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
       (U.sheafPushforwardContinuous RingCat J K).obj
@@ -70,80 +125,58 @@ def SignedLinePullbackNormalized
       ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))
     (p : (ringedSitePullbackFunctor a
       (module_pushforward_isRightAdjoint_of_universes a)).obj L ≅ L')
-    (P : ∀ m : ℤ, (ringedSitePullbackFunctor a
+    (P Q : ∀ m : ℤ, (ringedSitePullbackFunctor a
       (module_pushforward_isRightAdjoint_of_universes a)).obj
-        (signedLinePower.{u, v, w} L m) ≅ signedLinePower.{u, v, w} L' m) : Prop :=
-  (∀ (V : C) (r : R.obj.obj (op V)),
-    (P 0).hom.val.app (op (U.obj V))
-      (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-        (signedLinePower.{u, v, w} L 0) V r) = a.hom.app (op V) r) ∧
-  (P 1).hom = p.hom ∧
-  (∀ (n : ℕ) (V : C) (x : (scalarTensorPower R L (n + 1)).val.obj (op V))
-    (y : L.val.obj (op V)),
-    (P (.ofNat (n + 2))).hom.val.app (op (U.obj V))
-      (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-        (scalarTensorPower R L (n + 2)) V
-          (siteSheafTensorTmul (scalarTensorPower R L (n + 1)) L (op V) x y)) =
-      siteSheafTensorTmul (scalarTensorPower R' L' (n + 1)) L' (op (U.obj V))
-        ((P (.ofNat (n + 1))).hom.val.app (op (U.obj V))
-          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-            (scalarTensorPower R L (n + 1)) V x))
-        (p.hom.val.app (op (U.obj V))
-          (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-            L V y))) ∧
-  (∀ (n : ℕ) (V : C)
-    (φ : (signedLinePower.{u, v, w} L (.negSucc n)).val.obj (op V))
-    (x : (scalarTensorPower R L (n + 1)).val.obj (op V)),
-    (((P (.negSucc n)).hom.val.app (op (U.obj V))
-      (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-        (signedLinePower.{u, v, w} L (.negSucc n)) V φ)).app
-          (op (Over.mk (𝟙 (U.obj V)))))
-      ((P (.ofNat (n + 1))).hom.val.app (op (U.obj V))
-        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-          (scalarTensorPower R L (n + 1)) V x)) =
-      a.hom.app (op V) (φ.app (op (Over.mk (𝟙 V))) x))
-
-/-- The actual scalar/pullback square, tested on its canonical local generators.
-Source: Stacks 03EL, tensor balancing; blueprint first-line square; node proof steps 2, 8.
-(blueprint: lem-pur-signed-line-scalar-pullback-square)
-Under Θ, the pulled image of x tensor s is (pulled x tensor 1) tensor b(s).
-Thus this equation is exactly q F_S(c) = c' (p tensor 1) Θ. Equality on these
-sections determines the two morphisms by scalar-extension and pullback adjunctions.
-No surjectivity of the sectionwise sheafification unit is assumed. -/
-def SignedLineScalarPullbackSquare
-    {R S : Sheaf J CommRingCat.{max u v w}}
-    {R' S' : Sheaf K CommRingCat.{max u v w}} (ι : R ⟶ S) (ι' : R' ⟶ S')
-    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶
-      (U.sheafPushforwardContinuous RingCat J K).obj
-        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))
-    (b : (sheafCompose J (forget₂ CommRingCat RingCat)).obj S ⟶
-      (U.sheafPushforwardContinuous RingCat J K).obj
-        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S'))
-    (L : ringedSiteModules.{max u v w}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-    (N : ringedSiteModules.{max u v w}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
-    (L' : ringedSiteModules.{max u v w}
-      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj R'))
-    (N' : ringedSiteModules.{max u v w}
-      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S'))
-    (c : changeOfRingsOfUniverses ι L ≅ N)
-    (c' : changeOfRingsOfUniverses ι' L' ≅ N')
-    (p : (ringedSitePullbackFunctor a
-      (module_pushforward_isRightAdjoint_of_universes a)).obj L ≅ L')
-    (q : (ringedSitePullbackFunctor b
-      (module_pushforward_isRightAdjoint_of_universes b)).obj N ≅ N') : Prop :=
-  ∀ (V : C) (x : L.val.obj (op V)) (s : S.obj.obj (op V)),
-    q.hom.val.app (op (U.obj V))
-      ((ringedSitePullbackFunctor b (module_pushforward_isRightAdjoint_of_universes b)).map
-        c.hom |>.val.app (op (U.obj V))
-          (ringedSitePullbackSection b (module_pushforward_isRightAdjoint_of_universes b)
-            (changeOfRingsOfUniverses ι L) V (scalarExtensionSection ι L (op V) s x))) =
-      c'.hom.val.app (op (U.obj V))
-        (scalarExtensionSection ι' L' (op (U.obj V)) (b.hom.app (op V) s)
-          (p.hom.val.app (op (U.obj V))
-            (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)
-              L V x)))
+        (signedLinePower.{u, v, w} L m) ≅ signedLinePower.{u, v, w} L' m)
+    (hP : SignedLinePullbackNormalized a L L' p P)
+    (hQ : SignedLinePullbackNormalized a L L' p Q) : P = Q := by
+  have hpos : ∀ n : ℕ, (P (.ofNat n)).hom = (Q (.ofNat n)).hom := by
+    intro n
+    induction n with
+    | zero =>
+      apply pullback_section_ext a
+      intro V r
+      exact (hP.1 V r).trans (hQ.1 V r).symm
+    | succ n ih =>
+      cases n with
+      | zero => exact hP.2.1.trans hQ.2.1.symm
+      | succ n =>
+        apply pullback_tensor_section_ext a (scalarTensorPower R L (n + 1)) L
+        intro V x y
+        have he := congrArg (fun f ↦
+          siteSheafTensorTmul (scalarTensorPower R' L' (n + 1)) L' (op (U.obj V))
+            (f.val.app (op (U.obj V))
+              (ringedSitePullbackSection a
+                (module_pushforward_isRightAdjoint_of_universes a)
+                (scalarTensorPower R L (n + 1)) V x))
+            (p.hom.val.app (op (U.obj V))
+              (ringedSitePullbackSection a
+                (module_pushforward_isRightAdjoint_of_universes a) L V y))) ih
+        exact (hP.2.2.1 n V x y).trans (he.trans (hQ.2.2.1 n V x y).symm)
+  funext m
+  apply Iso.ext
+  cases m with
+  | ofNat n => exact hpos n
+  | negSucc n =>
+    let := module_pushforward_isRightAdjoint_of_universes a
+    let (V : C) : HasSheafify (J.over V) AddCommGrpCat.{max u v w} :=
+      (coefficientSheafification.{max u v, v, max u v w} (J.over V)).1
+    obtain ⟨d, hd, unique⟩ := exists_pullback_pairing_transfer.{u, v, w} a hcover
+      (module_pushforward_isRightAdjoint_of_universes a)
+      (scalarTensorPower R L (n + 1)) (signedLinePower.{u, v, w} L (.negSucc n)) (𝟙 _)
+    have hcomp :
+        (P (.negSucc n)).hom ≫ homObjMap (P (.ofNat (n + 1))).hom (𝟙 (unit _)) =
+        (Q (.negSucc n)).hom ≫ homObjMap (P (.ofNat (n + 1))).hom (𝟙 (unit _)) := by
+      apply (unique _ ?_).trans (unique _ ?_).symm
+      · intro V φ x
+        exact hP.2.2.2 n V φ x
+      · intro V φ x
+        rw [hpos (n + 1)]
+        exact hQ.2.2.2 n V φ x
+    have hinv : IsIso (homObjMap (P (.ofNat (n + 1))).hom (𝟙 (unit _))) := by
+      refine ⟨⟨homObjMap (P (.ofNat (n + 1))).inv (𝟙 (unit _)), ?_, ?_⟩⟩
+      all_goals simp [homObjMap_comp_homObjMap, homObjMap_id]
+    exact (cancel_mono _).1 hcomp
 
 /-- Unique normalized signed pullbacks and compatibility with the scalar square in every
 integer degree. Source: blueprint prop-weil-twist-preserves.proof.md, first/final sentences;
@@ -235,6 +268,19 @@ theorem existsUnique_signedLineScalarPullbackSquare
         (signedLinePower.{u, v, w} L m) (signedLinePower.{u, v, w} N m)
         (signedLinePower.{u, v, w} L' m) (signedLinePower.{u, v, w} N' m)
         (B m) (B' m) (PQ.1 m) (PQ.2 m) := by
-  sorry
+  obtain ⟨P, hP⟩ := exists_signedLinePullbackNormalized.{u, v, w}
+    _hcover a L L' _hL p
+  obtain ⟨Q, hQ⟩ := exists_signedLinePullbackNormalized.{u, v, w}
+    _hcover b N N' _hN q
+  refine ⟨(P, Q), ⟨hP, hQ, ?_⟩, ?_⟩
+  · exact signedLineScalarPullbackSquare_of_normalized.{u, v, w}
+      _hcover ι ι' a b _hab L N L' N' _hL _hN _hL' _hN' c c' p q _hc
+      B B' _hB _hB' P Q hP hQ
+  · intro PQ hPQ
+    apply Prod.ext
+    · exact signedLinePullbackNormalized_unique.{u, v, w}
+        _hcover a L L' p PQ.1 P hPQ.1 hP
+    · exact signedLinePullbackNormalized_unique.{u, v, w}
+        _hcover b N N' q PQ.2 Q hPQ.2.1 hQ
 
 end SheafOfModules

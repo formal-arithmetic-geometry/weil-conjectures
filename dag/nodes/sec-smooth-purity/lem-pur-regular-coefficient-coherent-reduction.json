@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-regular-coefficient-coherent-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-sp-tate-twist-locally-free",
+   "place": "Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage.",
+   "via": [
+    "lem-pur-common-stage-tensor-line-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The regular completed coefficient reduces to the coherent tensor unit",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme X with l invertible. Let S be the prescribed derived coefficient calculus [def-pur-completed-pullback-tensor-comparison, def-coef-derived-system-calculus-data]. The image under S.reduction of the completed regular coefficient in degree zero [def-weil-constant-coefficient-objects] is isomorphic, in the coherent system derived category, to S.systemClosed.monoidal.tensorUnit. This is an isomorphism of coherent systems, not only of their separate evaluations.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage.",
+  "also": [
+   {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), final sentence: inverse tensor functors at the algebraically closed coefficient stage."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-completed-pullback-tensor-comparison",
+  "def-coef-derived-system-calculus-data",
+  "def-weil-constant-coefficient-objects"
+ ],
+ "proof": [
+  {
+   "text": "Compare the ordinary integral monoidal unit with the normalized ringed-site unit, using uniqueness of left adjoints to the same fixed internal Hom. Its unitIso and the single-complex localization comparison identify that unit with the regular completed coefficient in degree zero.",
+   "uses": [
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let V be the reconstructed integral tensor unit. Its reduction is the system unit by the invertible coherent counit. Write S for the ordinary integral monoidal structure, T for the system structure, and F for reduction. Then F(1_S) is isomorphic to T(F(1_S),1_T), to T(F(1_S),F(V)), to F(S(1_S,V)), to F(V), and to 1_T. These are respectively the inverse right unitor, tensor of the counit inverse, inverse reduction tensor comparison, image of the left unitor, and counit. Compose with the image of the regular-coefficient identification.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 07A4 and 0941; categorical assembly of the normalized coefficient models."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coefficientSequence.*unit|regular.*[Rr]eduction|[Rr]eduction.*regular",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the prescribed project-specific derived coefficient operations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived reduction of a regular module over a complete ring is the system of its quotient regular modules",
+   "results": "AdicCompletion; Hausdorffification; FGModuleRepr.repr; Submodule.Quotient.module; AdicCompletion.module; AdicCompletion.instModuleQuotientIdealHSMulTopSubmodule; AdicCompletion.eval; RingTheory.Sequence.isRegular_cons_iff",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the prescribed project-specific derived coefficient operations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived reduction of the completed regular coefficient module sheaf is the coherent inverse system of quotient regular modules",
+   "results": "localCohomology.diagram; AdicCompletion.of_apply; CondensedMod.ofSheafProfinite; localCohomology.ofDiagram; AdicCompletion; LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat; localCohomology; AdicCompletion.mk_apply_coe",
+   "date": "2026-10-26",
+   "verdict": "No exact match for the prescribed project-specific derived coefficient operations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStageTensorLineCoherence",
+  "date": "2026-10-26",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RegularCoefficientCoherentReduction",
+  "file": "lean/Sheaf/Paper/RegularCoefficientCoherentReduction.lean",
+  "declaration": "WeilConjectures.regularCoefficient_coherentReduction",
+  "statement": "theorem regularCoefficient_coherentReduction\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]\n    [FiniteDimensional (Padic l) E] (X : Scheme.{u})\n    [∀ x : X, Invertible (l : X.residueField x)] :\n    Nonempty ((pullbackTensorCalculus l E X).reduction.obj\n      (integralConstantCoefficientObject l E X) ≅\n        (pullbackTensorCalculus l E X).systemClosed.monoidal.tensorUnit)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T203509-L-2823223",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T203509-L-2823223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

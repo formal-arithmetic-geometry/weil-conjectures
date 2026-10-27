@@ -1,0 +1,129 @@
+{
+  "chapter": "sec-zeta-weil",
+  "unit": "sk-prop-smooth-proper-purity",
+  "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+  },
+  "id": "lem-zl-component-derived-tensor-lifts",
+  "kind": "statement",
+  "title": "Normalized derived tensors on the component square",
+  "statement": "For a commutative condensed ring Λ and any OrdinarySystem s Λ [def-zl-component-derived-square-data], there is a TensorSystem Λ s: every ordinary component, slice and scheme module inverse image has its normalized strong symmetric derived tensor structure, the localization factorization is monoidal and the derived square Square.theta respects tensor and coefficient unit. This asserts no derived identity/composition equation and no dualizability statement.",
+  "stmt_deps": [
+    "def-zl-component-derived-square-data"
+  ],
+  "proof": [
+    {
+      "text": "Equip the four site morphisms of the supplied OrdinarySystem with their structural coefficient maps. The coefficient equation of each Square (Square.coefficient, with Corner.coefficient_eq and Slice.coefficient_eq) is the ring-map compatibility required for the specified geometric 2-isomorphism Square.abelian. The ringed-derived-monoidal-comparisons theorem now makes their derived pullbacks symmetric strong monoidal and makes the induced 2-isomorphism monoidal, including its unit. Exactness identifies these pullbacks with the termwise derived functors by the exact-derived-functor theorem; the representative formulas identify its 2-isomorphism with the localized termwise comparison Square.theta of Square.ordinary. Consequently, writing $A=f^*\\pi_X^*$, $B=\\pi_Y^*h^*$ and $t_A,t_B$ for their tensor comparisons, $t_B\\theta_{K\\otimes^L L}=(\\theta_K\\otimes^L\\theta_L)t_A$. At the unit the equation is $e_B\\theta_{\\Lambda_P}=e_A$, where $e_A,e_B$ are the canonical coefficient identifications Corner.coefficient and Slice.coefficient. These are ordinary derived tensors, with no completion.",
+      "uses": [
+        "lem-sfb-ringed-derived-monoidal-comparisons",
+        "lem-weil-pbc-exact-functor-derived-functor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+        "place": "Construction (4.1) before Proposition 4.3, pp. 8-9; naturality implicit in Corollary 4.4(2), expanded by the worker"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-exact-functor-derived-functor"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 pullback paragraph, Construction (4.1) and Corollary 4.4(2); explicit ordinary-derived mate argument expanding the implicit naturality"
+  },
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "A strong monoidal functor preserves dualizable objects",
+      "results": "8 hits; ['CategoryTheory.hasRightDualOfEquivalence', 'CategoryTheory.hasLeftDualOfEquivalence', 'CategoryTheory.Monoidal.functorHasRightDual', 'CategoryTheory.Monoidal.functorHasLeftDual', 'CategoryTheory.exactPairingOfFaithful', 'CategoryTheory.ExactPairing.ofFaithful', 'CategoryTheory.rigidCategoryOfEquivalence', 'CategoryTheory.Monoidal.rigidFunctorCategory']",
+      "date": "2026-10-25",
+      "verdict": "Generic exact-functor localization and monoidal-duality APIs found. None supplies the component-specific normalized ordinary construction or its complete tensor descent."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Functor.mapDerivedCategory",
+      "results": "12 hits; ['CategoryTheory.Functor.mapDerivedCategory', 'CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt', 'CategoryTheory.Functor.mapDerivedCategoryIdIso', 'CategoryTheory.Functor.mapDerivedCategorySingleFunctor', 'CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory', 'CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory', 'CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt', 'CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId']",
+      "date": "2026-10-25",
+      "verdict": "Generic exact-functor localization and monoidal-duality APIs found. None supplies the component-specific normalized ordinary construction or its complete tensor descent."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Exact inverse image functors induce coherent symmetric monoidal functors on unbounded derived categories",
+      "results": "8 hits; ['CategoryTheory.symmetricCategoryOfFullyFaithful', 'CategoryTheory.MorphismProperty.instIsMonoidalInverseImageOfMonoidalOfRespectsIso', 'CategoryTheory.Equivalence.IsTriangulated.instIsTriangulatedFunctorSymmOfInverse', 'AddCommGrpCat.leftExactFunctorForgetEquivalence.inverseAux', 'CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_μIso_inv', 'CategoryTheory.Monoidal.MonFunctorCategoryEquivalence.inverse_obj', 'CategoryTheory.Monoidal.instMonoidalTransportedFunctorEquivalenceTransported', 'CategoryTheory.Equivalence.monoidalOfPrecompInverse']",
+      "date": "2026-10-25",
+      "verdict": "Generic exact-functor localization and monoidal-duality APIs found. None supplies the component-specific normalized ordinary construction or its complete tensor descent."
+    },
+    {
+      "tool": "grep",
+      "query": "componentTests|mapDerivedCategory.*Monoidal|IsDualizable.map",
+      "results": "Searched Mathlib, WeilConjectures and Sheaf. Found IsDualizable.map, MapDerivedCategoryMate coherence, and generic ringed derived tensor comparisons.",
+      "date": "2026-10-25",
+      "verdict": "No duplicate of the three component-specific steps. Blueprint search component square found no node; derived composition found only pur713-def-pull-composition-module-underived, which is an underived convention."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "Sheaf.Paper.ComponentDerivedPullbackSquare",
+    "group": "D9",
+    "date": "2026-10-25"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-zl-smooth-proper-relative-purity",
+      "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Corollary 4.4(1)-(2). Re-split: old Step 5, coefficient-compatible isomorphism of actual inverse images, with the ordinary derived monoidal comparison used in old Steps 4 and 6. Stage-3 decomposition: Normalized derived tensors on the component square",
+      "via": [
+        "lem-zl-component-derived-pullback-square",
+        "lem-zl-condensed-henselian-lisse-rigidity",
+        "lem-zl-condensed-dualizable-local-perfect-models",
+        "lem-zl-t-admissible-dualizable-truncations",
+        "lem-zl-adic-hom-tensor-lisse-criterion"
+      ]
+    },
+    "same_as": []
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none"
+    },
+    "slopmaster2": {
+      "state": "none"
+    }
+  },
+  "lean": {
+    "existing": false,
+    "module": "Sheaf.Paper.ComponentDerivedTensorLifts",
+    "file": "lean/Sheaf/Paper/ComponentDerivedTensorLifts.lean",
+    "declaration": "AlgebraicGeometry.ProEtale.ComponentDerivedSquare.component_derived_tensor_lifts",
+    "statement": "theorem component_derived_tensor_lifts\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (s : OrdinarySystem Λ) :\n    Nonempty (TensorSystem Λ s)",
+    "branch": "sheaf-dag",
+    "by": "D9",
+    "date": "2026-10-25"
+  },
+  "reviewed": {
+    "date": "2026-10-25",
+    "by": "L",
+    "reviewer": "C-012c7",
+    "group": "D9",
+    "result": "fix",
+    "landing": "20261025T100935-L-3640985",
+    "kind": "interface",
+    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-25",
+    "by": "L",
+    "reviewer": "C-012c7",
+    "group": "D9",
+    "result": "fix",
+    "landing": "20261025T100935-L-3640985",
+    "kind": "interface",
+    "note": "independent cc review: delivered ComponentDerivedSquareData vs published ComponentDerivedPullbackSquare (moved block byte-identical); split statements OrdinarySystem/TensorSystem vs original System fields (all data pinned, ordinary eqns equivalent to derived ones); nodes vs Lean; importers compiled against delivery"
+  }
+}

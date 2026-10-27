@@ -1,0 +1,312 @@
+{
+ "id": "lem-sfb-space-dense-open-stacked-valuation",
+ "kind": "statement",
+ "title": "Stacked valuation configuration through a dense open of an algebraic space",
+ "statement": "Work over $\\operatorname{Spec}\\mathbf Z$ with schemes [def-pc-scheme, def-weil-affine-spectrum], algebraic spaces [def-trf-algebraic-space], and universes [def-weil-size-convention]. Use sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and the atlas topology [def-a1-space-point-topology]. A valuation ring is as in [def-trf-valuation-ring]; an extension of valuation rings means an injective local ring homomorphism, where local means that the maximal ideal contracts to the maximal ideal. Let $p:H\\to X$ be any morphism of algebraic spaces, and let $h:V\\hookrightarrow H$ be a quasi-compact open immersion [def-weil-open-immersion] with dense image. Here quasi-compact means quasi-compact on affine scheme tests: the pullback to each affine scheme mapping to the target is a quasi-compact algebraic space. Let $A$ be a valuation ring with fraction field $K$, and let $a:\\operatorname{Spec}A\\to X$, $\\eta:\\operatorname{Spec}K\\to H$ satisfy $p\\eta=a|_{\\operatorname{Spec}K}$. There exist a valuation ring $C$, a prime ideal $\\mathfrak q\\subset C$, an extension $A\\hookrightarrow E=C/\\mathfrak q$ of valuation rings, and morphisms $b:\\operatorname{Spec}C\\to X$, $\\alpha:\\operatorname{Spec}D\\to H$, $u:\\operatorname{Spec}L\\to V$, where $D=C_{\\mathfrak q}$ is localization at $C\\setminus\\mathfrak q$ and $L=\\operatorname{Frac}(C)=\\operatorname{Frac}(D)$, with the following properties. The ring $D$ is a valuation ring, its residue field is $F=\\operatorname{Frac}(E)$, and the inclusion $A\\hookrightarrow E$ induces $K\\hookrightarrow F$. Writing $j_D:\\operatorname{Spec}D\\to\\operatorname{Spec}C$, $i_E:\\operatorname{Spec}E\\to\\operatorname{Spec}C$, and $s_F:\\operatorname{Spec}F\\to\\operatorname{Spec}D$ for the canonical maps, one has $$p\\alpha=bj_D,\\qquad \\alpha|_{\\operatorname{Spec}L}=hu,\\qquad \\alpha s_F=\\eta\\operatorname{Spec}(K\\hookrightarrow F),\\qquad bi_E=a\\operatorname{Spec}(A\\hookrightarrow E).$$ No separatedness, finite-type, quasi-compactness of $p$, or valuation lifting hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089G (lemma-refined-valuative-criterion-universally-closed), proof from equation-start-with through the definition of C, before invoking assumption (4); affine-chart reduction uses Tag 089F, valuation probe Tag 089B, flat scheme-image base change Tag 089E, and stacking Tag 088Z (algebra-lemma-stack-valuation-rings)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-trf-valuation-ring",
+  "def-weil-open-immersion",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-sfb-space-reduced-closed-support] with closed support $|H|$ to form $r:H_0=H_{\\mathrm{red}}\\hookrightarrow H$, and put $V_0=V\\times_HH_0$. This is a quasi-compact open subspace of $H_0$, with the same dense point image as $V$; quasi-compactness follows directly on affine tests. Since $\\operatorname{Spec}K$ is reduced, [lem-sfb-space-reduced-map-closed-factorization] factors $\\eta$ through $H_0$. Set $p_0=pr$. The inclusion $j_0:V_0\\hookrightarrow H_0$ is schematically dominant in the closed-subspace sense: if it factors through a closed subspace $Z\\hookrightarrow H_0$, closedness and density give $|Z|=|H_0|$. The same factorization lemma, applied to the identity of the reduced space $H_0$, factors that identity through $Z$, making this subobject all of $H_0$. We will construct the diagram for $V_0,H_0$ and then compose with their maps to $V,H$.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-space-reduced-map-closed-factorization",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, paragraph after equation-start-with; Tag 03JJ and reduction Tag 03IQ."
+   }
+  },
+  {
+   "text": "Choose an affine etale chart $e:\\operatorname{Spec}R\\to X$ whose point image contains $a(\\mathfrak m_A)$, by choosing a point of an atlas and an affine neighbourhood [def-trf-algebraic-space]. The pullback $T=\\operatorname{Spec}A\\times_X\\operatorname{Spec}R$ is a scheme etale over $\\operatorname{Spec}A$ [lem-trf-space-fibre-products-etale-covers]. Its point image contains the closed point: representatives of $a(\\mathfrak m_A)$ and the chosen chart point agree after a common field extension, giving a field point of this pullback [def-a1-algebraic-space-point-classes]. Since etale scheme maps are flat by [def-weil-etale-morphism], apply [lem-a1-flat-valuation-lifting] to $T\\to\\operatorname{Spec}A$ and the identity base map. This yields an injective local map $A\\hookrightarrow A_1$ and $a_1:\\operatorname{Spec}A_1\\to\\operatorname{Spec}R$ over $X$. Set $K_1=\\operatorname{Frac}(A_1)$. The generic equality gives $\\eta_1:\\operatorname{Spec}K_1\\to H_1=H_0\\times_X\\operatorname{Spec}R$. Put $V_1=V_0\\times_X\\operatorname{Spec}R$. The projection $H_1\\to H_0$ is etale, hence flat by [lem-sfb-stack-chartwise-smooth-etale-calculus]. The scheme-theoretic image of $V_0\\to H_0$ is all of $H_0$, by step 1 and the minimality statement of [lem-sfb-stack-schematic-image-qc]. Its flat-base-change clause gives scheme-theoretic image $H_1$ for $V_1\\to H_1$. The latter is a quasi-compact open immersion by the original affine-test hypothesis. Write $p_1:H_1\\to\\operatorname{Spec}R$ for the projection.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-a1-algebraic-space-point-classes",
+    "def-weil-etale-morphism",
+    "lem-a1-flat-valuation-lifting",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-stack-schematic-image-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, Reduction to the case Y affine; Tags 089F and 089E."
+   }
+  },
+  {
+   "text": "Choose an affine etale chart $\\operatorname{Spec}B\\to H_1$ whose image contains the point represented by $\\eta_1$. The atlas and the definition of point equivalence give a field extension $K_1\\hookrightarrow K_2$ and a lift $\\operatorname{Spec}K_2\\to\\operatorname{Spec}B$ of $\\eta_1$ after this extension: the two representatives of this point agree over a common field [def-trf-algebraic-space, def-a1-algebraic-space-point-classes]. Extend $A_1$ to a valuation subring $A_2\\subseteq K_2$ with fraction field $K_2$ dominating $A_1$, by [lemma-nagata-valuation-ring-extension]. It inherits $R\\to A_1\\to A_2$, and its generic map to $H_1$ is the composite through $\\operatorname{Spec}B$. This explicitly preserves the original generic diagram and keeps the composite $A\\hookrightarrow A_2$ injective and local.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-a1-algebraic-space-point-classes",
+    "lemma-nagata-valuation-ring-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, first paragraph after reducing Y to Spec(R), enlarging K and its valuation ring."
+   }
+  },
+  {
+   "text": "As a $B$-algebra $K_2$ has the explicit surjective presentation $P=B[T_x\\mid x\\in K_2]\\twoheadrightarrow K_2$, $T_x\\mapsto x$. Let $z\\in\\operatorname{Spec}P$ be its kernel point, whose residue field is exactly $K_2$. The map $\\operatorname{Spec}P\\to\\operatorname{Spec}B$ is flat by [lem-nagata-polynomial-projection-flat]. The etale map $\\operatorname{Spec}B\\to H_1$ is flat, and their composite $t:\\operatorname{Spec}P\\to H_1$ is flat, by the flatness, composition and scheme-base-change clauses of [lem-sfb-stack-chartwise-smooth-etale-calculus], applied to algebraic spaces as discrete stacks. All maps between algebraic spaces are representable by algebraic spaces: each scheme test gives the sheaf fibre product [lem-trf-space-fibre-products-etale-covers]. Apply the flat-base-change clause of [lem-sfb-stack-schematic-image-qc] to $V_1\\to H_1$ and $t$: the projection $W=V_1\\times_{H_1}\\operatorname{Spec}P\\to\\operatorname{Spec}P$ has scheme-theoretic image all of $\\operatorname{Spec}P$. It is a quasi-compact open immersion, being the pullback of $V\\hookrightarrow H$ to this affine test, and $W$ is a scheme because open immersions are representable by open immersions of schemes. Thus the scheme valuation-probe result applies.",
+   "uses": [
+    "lem-nagata-polynomial-projection-flat",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-schematic-image-qc",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, Choose a polynomial algebra P over B and a B-algebra surjection P to K; Tag 089E."
+   }
+  },
+  {
+   "text": "Take the chosen scheme valuation probe [def-nagata-dense-valuation-probe, lemma-nagata-dense-valuation-probe] of $W\\to\\operatorname{Spec}P$ at $z$. Its hypotheses hold: the target is affine, the map is quasi-compact, and its scheme-theoretic image is the whole target by step 4. It gives a valuation ring $D_0$ with fraction field $L$, a map $d:\\operatorname{Spec}D_0\\to\\operatorname{Spec}P$ centred at $z$, and a compatible $\\operatorname{Spec}L\\to W$. Put $F=D_0/\\mathfrak m_{D_0}$. Since the closed point maps to the kernel of $P\\twoheadrightarrow K_2$, the composite $P\\to D_0\\to F$ factors uniquely as $P\\twoheadrightarrow K_2\\hookrightarrow F$; the second map is injective because it is a unital map of fields. Let $\\alpha_0:\\operatorname{Spec}D_0\\to H_1\\to H_0\\to H$ be the composite of $d$, and let $u:\\operatorname{Spec}L\\to W\\to V$ be the generic map. Then $\\alpha_0|_{\\operatorname{Spec}L}=hu$. Its closed-fibre map $\\operatorname{Spec}F\\to H$ is exactly the original $\\eta$ after $K\\hookrightarrow K_1\\hookrightarrow K_2\\hookrightarrow F$, since both are induced by the displayed factorization of $P\\to F$.",
+   "uses": [
+    "def-nagata-dense-valuation-probe",
+    "lemma-nagata-dense-valuation-probe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, application of Tag 089B to the closed point Spec(K) in Spec(P), giving the B-algebra map into the residue field."
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-valuation-ring-extension] to $A_2\\subseteq K_2$ and $K_2\\hookrightarrow F$, obtaining a valuation subring $E\\subseteq F$ with fraction field $F$ dominating $A_2$. Define $C=\\{x\\in D_0:\\overline{x}\\in E\\}$. By [lemma-nagata-composite-valuation-ring], $C$ is a valuation ring with fraction field $L$, $\\mathfrak q=\\mathfrak m_{D_0}\\subseteq C$, and the residue restriction gives $C/\\mathfrak q\\cong E$. In particular $\\mathfrak q$ is prime. Use this canonical isomorphism to regard $E$ as $C/\\mathfrak q$. The composite $A\\hookrightarrow A_1\\hookrightarrow A_2\\hookrightarrow E$ is injective and local, since contracting the maximal ideal successively gives the maximal ideals of $A_2,A_1,A$.",
+   "uses": [
+    "lemma-nagata-valuation-ring-extension",
+    "lemma-nagata-composite-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, choose the residue-field valuation A double-prime and define C; algebra.tex Tag 088Z."
+   }
+  },
+  {
+   "text": "The inclusion $C\\subseteq D_0$ identifies $C_{\\mathfrak q}$ with $D_0$ by the following fraction calculation. Every $t\\in C\\setminus\\mathfrak q$ has nonzero residue in $F$, hence is a unit in $D_0$. Conversely, given $x\\in D_0$, write its residue as $a/s$ with $a,s\\in E$ and $s\\ne0$, using $\\operatorname{Frac}(E)=F$. Choose a residue lift $t\\in D_0$ of $s$. Then $t\\in C\\setminus\\mathfrak q$ and $tx\\in C$, since their residues are $s$ and $a$. Thus $x=(tx)/t\\in C_{\\mathfrak q}$. The maps are injective inside $L$, so this is an equality there. Set $D=C_{\\mathfrak q}=D_0$ and transport $\\alpha_0$ to $\\alpha:\\operatorname{Spec}D\\to H$. Its residue field is $F=\\operatorname{Frac}(E)$ and its fraction field is $L$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, the statement that A prime is the localization of C at its maximal ideal (immediately after the construction of C); explicit denominator argument supplied."
+   }
+  },
+  {
+   "text": "The $R$-algebra structure $R\\to P\\to D_0$ has residue $R\\to K_2\\to F$. On $R$ this equals $R\\to A_1\\to A_2\\to E\\hookrightarrow F$, by the preserved generic diagram of steps 2 and 3. Hence $R\\to D_0$ lands in $C$, defining $b:\\operatorname{Spec}C\\to\\operatorname{Spec}R\\to X$. Restriction along $C\\to D$ gives $p\\alpha=bj_D$, since both maps to $X$ factor through the original map $\\operatorname{Spec}D_0\\to\\operatorname{Spec}P\\to\\operatorname{Spec}R$. Reduction along $C\\twoheadrightarrow E$ gives $bi_E=a\\operatorname{Spec}(A\\hookrightarrow E)$, because on $R$ the residue restriction is exactly $R\\to A_1\\to E$. Finally step 5 gives $\\alpha s_F=\\eta\\operatorname{Spec}(K\\hookrightarrow F)$ and $\\alpha|_{\\operatorname{Spec}L}=hu$. These four equalities are equalities of the displayed morphisms, not merely of their underlying points.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089G, As C is an R-algebra with fraction field K prime, before invoking assumption (4); compatibility checks expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-nagata-dense-valuation-probe",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "lem-a1-flat-valuation-lifting",
+  "lem-nagata-polynomial-projection-flat",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-reduced-map-closed-factorization",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-schematic-image-qc",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lemma-nagata-composite-valuation-ring",
+  "lemma-nagata-dense-valuation-probe",
+  "lemma-nagata-valuation-ring-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089G (lemma-refined-valuative-criterion-universally-closed), proof from equation-start-with through the construction of C, before assumption (4). Universal schematic dominance replaces naming the intermediate scheme-theoretic images; the denominator calculation and diagram equalities are expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given a valuation diagram for a map of algebraic spaces and a dense open in the source construct a composite valuation with a prime whose localization has generic point in the open and residue valuation dominates the original diagram",
+   "results": "{\"t\": \"2026-10-23T12:18:30Z\", \"tool\": \"leanfinder\", \"query\": \"Given a valuation diagram for a map of algebraic spaces and a dense open in the source construct a composite valuation with a prime whose localization has generic point in the open and residue valuation dominates the original diagram\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq\", \"AlgebraicGeometry.ValuativeCommSq.R\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence\"], \"digest\": \"4803519b585db43f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88,237-240,341-345; all candidates concern schemes, and no candidate constructs this algebraic-space configuration or states the extended algebraic-space criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ValuativeCommSq",
+   "results": "{\"t\": \"2026-10-23T12:19:45Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ValuativeCommSq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq.R\", \"AlgebraicGeometry.ValuativeCommSq.commRing\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.ValuativeCommSq.i₂\", \"AlgebraicGeometry.ValuativeCommSq.domain\"], \"digest\": \"365a289534b039b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88,237-240,341-345; all candidates concern schemes, and no candidate constructs this algebraic-space configuration or states the extended algebraic-space criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a field valued point of an algebraic space and a dense quasi compact open construct a valuation whose residue field extends the given field and whose generic point lies in the open",
+   "results": "{\"t\": \"2026-10-23T12:19:45Z\", \"tool\": \"leansearch\", \"query\": \"Given a field valued point of an algebraic space and a dense quasi compact open construct a valuation whose residue field extends the given field and whose generic point lies in the open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq.K\", \"Valuation.HasExtension.ofComapInteger\", \"Valuation.HasExtension.mk\", \"AlgebraicGeometry.ValuativeCommSq.mk\", \"Valuation.HasExtension\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"AlgebraicGeometry.Scheme.evaluation.congr_simp\", \"AlgebraicGeometry.ValuativeCommSq.field\"], \"digest\": \"4ac9b83be1d60a6e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88,237-240,341-345; all candidates concern schemes, and no candidate constructs this algebraic-space configuration or states the extended algebraic-space criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Specializing a point in a dense open algebraic space to a prescribed field valued point with residue field extension and then composing valuation rings",
+   "results": "{\"t\": \"2026-10-23T12:19:47Z\", \"tool\": \"leanfinder\", \"query\": \"Specializing a point in a dense open algebraic space to a prescribed field valued point with residue field extension and then composing valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.ValuativeCommSq.i₁\"], \"digest\": \"adbb10a15a27c2c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88,237-240,341-345; all candidates concern schemes, and no candidate constructs this algebraic-space configuration or states the extended algebraic-space criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every valuation diagram for an algebraic space with dense quasi compact open admits a stacked valuation: a valuation C, a prime q, a generic map through the open on C localized at q, and residue valuation C/q dominating the original valuation",
+   "results": "{\"t\": \"2026-10-23T12:19:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every valuation diagram for an algebraic space with dense quasi compact open admits a stacked valuation: a valuation C, a prime q, a generic map through the open on C localized at q, and residue valuation C/q dominating the original valuation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCommSq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\"], \"digest\": \"9b674ce75cd5a185\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88,237-240,341-345; all candidates concern schemes, and no candidate constructs this algebraic-space configuration or states the extended algebraic-space criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "ValuativeCommSq|dense|residue",
+   "results": "{\"t\": \"2026-10-23T12:25:16Z\", \"tool\": \"grep\", \"query\": \"ValuativeCommSq|dense|residue\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/PullbackCarrier.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Integral.lean\"], \"digest\": \"b384c1eb5874b48c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88,237-240,341-345; all candidates concern schemes, and no candidate constructs this algebraic-space configuration or states the extended algebraic-space criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct stacked valuation rings extending a valuation diagram for algebraic spaces with generic point in a dense quasi compact open",
+   "results": "{\"t\": \"2026-10-23T21:11:02Z\", \"tool\": \"leanfinder\", \"query\": \"Construct stacked valuation rings extending a valuation diagram for algebraic spaces with generic point in a dense quasi compact open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.ValuativeCommSq\", \"AlgebraicGeometry.ValuativeCommSq.R\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.Existence\"], \"digest\": \"4bc1d16f4081e319\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ValuativeCommSq",
+   "results": "{\"t\": \"2026-10-23T21:11:03Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.ValuativeCommSq\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCommSq\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"AlgebraicGeometry.ValuativeCommSq.R\", \"AlgebraicGeometry.ValuativeCommSq.commRing\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"AlgebraicGeometry.ValuativeCommSq.i₂\", \"AlgebraicGeometry.ValuativeCommSq.domain\"], \"digest\": \"365a289534b039b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|stack.*valuation|valuation.*stack",
+   "results": "{\"t\": \"2026-10-23T21:11:03Z\", \"tool\": \"grep\", \"query\": \"AlgebraicSpace|stack.*valuation|valuation.*stack\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compose a valuation with a valuation of its residue field to pass a field point of an algebraic space through a dense open",
+   "results": "{\"t\": \"2026-10-23T21:11:03Z\", \"tool\": \"leansearch\", \"query\": \"Compose a valuation with a valuation of its residue field to pass a field point of an algebraic space through a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.comap\", \"ValuationSubring.mapOfLE_comp_valuation\", \"AlgebraicGeometry.ValuativeCommSq.K\", \"Valued.valuation_isClosedMap\", \"AlgebraicGeometry.Scheme.germ_residue\", \"Valuation.comap_apply\", \"Valued.extension\", \"ValuativeExtension.compatible_comap\"], \"digest\": \"a27b67e4b32f83cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected the returned types and scheme-only candidates in Mathlib/AlgebraicGeometry/ValuativeCriterion.lean:53-88, Morphisms/ClosedImmersion.lean:210-218 and Morphisms/SchemeTheoreticallyDominant.lean:38-78; none states this algebraic-space assertion. Extending a scheme theorem by etale descent is not a one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-dense-open-valuative-proper",
+  "date": "2026-10-23",
+  "group": "Q133"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 08K1 (lemma-eventually-proper), in Situation 084W (situation-descent-property), specialized to a finitely presented space over an affine base; persistence at later stages: spaces-morphisms.tex, Tag 04WP (lemma-base-change-proper). Supporting input to Tag 08K1: Tag 089J (lemma-weak-chow); H-quasi-projectivity is the quasi-compact immersion in morphisms.tex Tag 01VW (definition-quasi-projective), (2). Universal surjectivity uses spaces-morphisms.tex Tag 03MH (lemma-base-change-surjective). Supporting input to Tag 089J, proof of the properness claim: refined valuative criterion. Tag 089G (lemma-refined-valuative-criterion-universally-closed), proof from equation-start-with through the definition of C, before invoking assumption (4); affine-chart reduction uses Tag 089F, valuation probe Tag 089B, flat scheme-image base change Tag 089E, and stacking Tag 088Z (algebra-lemma-stack-valuation-rings).",
+   "via": [
+    "lem-sfb-space-dense-open-valuative-proper",
+    "lem-sfb-space-weak-chow",
+    "lem-sfb-space-eventually-proper",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-dense-open-stacked-valuation",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all statement dependencies. Followed the construction in Stacks 089G before invoking assumption (4). Reused the existing scheme flat-valuation lifting, stack schematic-image flat-base-change, closed scheme-probe, valuation-extension and composite-valuation nodes; the one new statement-only node is reduced-source factorization through closed subspaces. Wrote the polynomial presentation, localization denominators, residue field embedding and all four map equalities explicitly. The probe itself does not assert a prescribed residue-field map: that map is forced using the closed point of Spec(P).",
+  "blueprint": "Current latest blueprint, det-thm-sf-ctf-stability-direct-images proof (3), is the historical direct-image/alteration helper recorded in the inherited from.place and via chain. This split only refines its existing Tag 089G valuative-configuration prerequisite; it does not alter the unit route. blueprint_refs.py ancestor returns None for this inherited created-node chain, which is retained exactly, including the full via list.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-space-reduced-closed-support",
+    "why": "Generic algebraic-space reduced closed-support existence; used only as the stated black box to construct the valuative diagram, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space sheaf fibre products and etale chart base changes; used only as the stated black box to construct the valuative diagram, with no replacement of the unit route."
+   },
+   {
+    "node": "lem-a1-flat-valuation-lifting",
+    "why": "Generic flat scheme-morphism lifting applied to the etale scheme pullback of the target chart over Spec(A). This implements the 089F affine-chart reduction of 089G using an existing scheme input, without replacing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-space-reduced-closed-support",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-flat-valuation-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-20631c3c8",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-20631c3c8 (reviewer sub-agent of L); spot-checked: Read the full item (8 steps), the new node, every cited statement (including the probe and valuation-extension blueprint_updates) and Stacks 089G (from equation-start-with to C) and 03JJ. The statement and stmt_deps are unchanged and match 089G up to the point where assumption (4) is used; p correctly has no quasi-compactness. Steps: (1) reduction to H_red, with dense V_0 schematically dominant via the new 03JJ node applied to eta and to id_{H_0}. (2) 089F chart reduction via lem-a1-flat-valuation-lifting on the etale scheme T = Spec A x_X Spec R (closed point lifted through a common-field point), with flat base change of the image (schematic-image-qc). (3) chart of eta_1 and A_2 dominating A_1. (4) P = B[T_x] presentation and flat base change, with W = V x_H Spec P quasi-compact open. (5) the probe, with the residue embedding K_2 into F derived from ker = z. (6) stacked C via the composite-valuation lemma. (7) C_q = D_0 by an explicit denominator lift; this is a gap Stacks leaves, now filled. (8) all four map equalities recomputed: on R, R->B->K_2 equals R->A_1->K_2, and A_1 is over X. New node = Stacks 03JJ plus uniqueness (monomorphism). The nilpotent counterexample shows reducedness is needed. The pbc scheme 0356 nodes, the singleton-field node and reduced-closed-support are not duplicates. Four search kinds are recorded. Batch-5 flags (def-trf-algebraic-space, space point classes/topology, flat valuation lifting, reduced closed support, stack chartwise calculus, schematic image) are generic space/valuation foundations, not steps of the trace-formula or Poincare-duality proofs: accepted. Nagata nodes are Lean-closed. tool_uses accepted: fibre products, flat lifting, reduced-closed-support (same unit). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceDenseOpenStackedValuation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_denseOpen_stackedValuation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.stackedValuationSpec",
+   "AlgebraicGeometry.AlgebraicSpace.exists_denseOpen_stackedValuation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceDenseOpenStackedValuation.lean",
+  "statement": "theorem exists_denseOpen_stackedValuation {H X V : AlgebraicSpace (Spec (.of (ULift.{u} ℤ)))} (p : H ⟶ X) (h : V ⟶ H) (hh : IsRepresentableWith (fun _ _ f ↦ IsOpenImmersion f.left) h.hom.hom) (hqc : MapIsQuasiCompact h.hom.hom) (hd : Dense (pointImage h.hom.hom)) (A : Type u) [CommRing A] [IsDomain A] [ValuationRing A] (K : Type u) [Field K] [Algebra A K] [IsFractionRing A K] (a : yoneda.obj (stackedValuationSpec.obj (op (.of A))) ⟶ X.obj.obj) (η : yoneda.obj (stackedValuationSpec.obj (op (.of K))) ⟶ H.obj.obj) (hη : η ≫ p.hom.hom = yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom (algebraMap A K)).op) ≫ a) : ∃ (C : Type u) (_ : CommRing C) (_ : IsDomain C) (_ : ValuationRing C) (q : Ideal C) (_ : q.IsPrime) (_ : ValuationRing (C ⧸ q)) (ι : A →+* C ⧸ q) (hι : Function.Injective ι) (_ : IsLocalHom ι) (_ : ValuationRing (Localization.AtPrime q)) (ρ : IsLocalRing.ResidueField (Localization.AtPrime q) ≃+* FractionRing (C ⧸ q)), IsFractionRing (Localization.AtPrime q) (FractionRing C) ∧ (ρ.toRingHom.comp (IsLocalRing.residue (Localization.AtPrime q))).comp (algebraMap C (Localization.AtPrime q)) = (algebraMap (C ⧸ q) (FractionRing (C ⧸ q))).comp (Ideal.Quotient.mk q) ∧ ∃ (b : yoneda.obj (stackedValuationSpec.obj (op (.of C))) ⟶ X.obj.obj) (α : yoneda.obj (stackedValuationSpec.obj (op (.of (Localization.AtPrime q)))) ⟶ H.obj.obj) (v : yoneda.obj (stackedValuationSpec.obj (op (.of (FractionRing C)))) ⟶ V.obj.obj), α ≫ p.hom.hom = yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom (algebraMap C (Localization.AtPrime q))).op) ≫ b ∧ yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom (algebraMap (Localization.AtPrime q) (FractionRing C))).op) ≫ α = v ≫ h.hom.hom ∧ yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom (ρ.toRingHom.comp (IsLocalRing.residue (Localization.AtPrime q)))).op) ≫ α = yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom (IsFractionRing.lift (A := A) (K := K) (g := (algebraMap (C ⧸ q) (FractionRing (C ⧸ q))).comp ι) ((IsFractionRing.injective (C ⧸ q) (FractionRing (C ⧸ q))).comp hι))).op) ≫ η ∧ yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom (Ideal.Quotient.mk q)).op) ≫ b = yoneda.map (stackedValuationSpec.map (CommRingCat.ofHom ι).op) ≫ a",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The helper is the existing spectrum functor composed with the canonical equivalence to the slice over Spec Z. The theorem uses the actual quotient and localization, canonical fraction fields and their induced embedding, and a residue-field isomorphism normalized by its restriction to C. Quasi-compactness uses the already landed affine-test predicate MapIsQuasiCompact from def-sfb-proper-curve-moduli; this landed definition node is added to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b89f5aa5",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Item clauses match node/Tag 089G: H,X,V AlgebraicSpace over Spec ULift Z at u; p arbitrary; h open immersion via IsRepresentableWith IsOpenImmersion; qc via landed MapIsQuasiCompact (affine tests, def-sfb-proper-curve-moduli added stmt_dep, landed 10-22, no cycle); Dense pointImage; A valuation ring with any fraction-field model K; C valuation, q prime, E=C/q valuation, ι injective IsLocalHom, D=Localization.AtPrime valuation, L=FractionRing C with canonical instAlgebraLocalizationAtPrime, ρ residue iso pinned on C, K→F canonical IsFractionRing.lift; four equalities pα=bj_D, α|L=hu, αs_F=η·Spec(K→F), bi_E=a·Spec ι exact. No extra hypotheses; one universe, autoImplicit false. Statement verbatim in file; helper stackedValuationSpec real data (Spec ⋙ terminal-slice equivalence), not duplicated; sorry-only proof, docstrings with source and 8 steps; no H4 duplicate; not landed by another group. Not recompiled (no change)."
+ }
+}

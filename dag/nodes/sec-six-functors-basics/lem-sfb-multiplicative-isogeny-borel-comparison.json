@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-multiplicative-isogeny-borel-comparison",
+ "kind": "statement",
+ "title": "Borel quotients and Borel characters under a multiplicative isogeny",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Write $X^*(G)=\\operatorname{Hom}_{F\\text{-grp}}(G,\\mathbf G_m)$ for the abelian group of characters, with addition given by multiplication of values, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]. Write $\\operatorname{Pic}(G)$ for the abelian group of isomorphism classes of invertible $\\mathcal O_G$-modules, with tensor product as addition; zero is the class of $\\mathcal O_G$, and an invertible module is an $\\mathcal O_G$-module locally isomorphic to $\\mathcal O_G$. A multiplicative isogeny is a homomorphism $f:G\\to H$ for which $F[H]\\to F[G]$ is faithfully flat and whose scheme-theoretic kernel is finite and diagonalizable. Faithfully flat means that extension of scalars is exact and detects zero modules. Finite means finite-dimensional coordinate algebra. Diagonalizable means isomorphic to $D(M)=\\operatorname{Spec}F[M]$ for a finite abelian group $M$, where $F[M]$ has basis $e^m$, multiplication $e^me^n=e^{m+n}$, comultiplication $e^m\\mapsto e^m\\otimes e^m$, counit $e^m\\mapsto1$ and antipode $e^m\\mapsto e^{-m}$. Let $f:G_1\\to G_0$ be a multiplicative isogeny between smooth connected groups and let $N=\\ker f$. A Borel subgroup means a maximal smooth connected solvable closed subgroup; solvable means that its iterated derived subgroup schemes eventually become trivial, where the derived subgroup is the smallest closed subgroup through which the commutator morphism factors. For every Borel subgroup $B_0\\subseteq G_0$, its scheme-theoretic inverse image $B_1=f^{-1}(B_0)$ is a Borel subgroup of $G_1$. The induced map of quotient schemes $$\\bar f:G_1/B_1\\longrightarrow G_0/B_0$$ is an isomorphism, sending the coset of $g$ to the coset of $f(g)$. The restriction $f_B:B_1\\to B_0$ is faithfully flat with kernel $N$, and the following sequence of abelian groups is exact: $$0\\longrightarrow X^*(B_0)\\xrightarrow{f_B^*}X^*(B_1)\\xrightarrow{\\mathrm{res}_N}X^*(N)\\longrightarrow0.$$ Exactness here includes injectivity of the first map and surjectivity of the last map. Both quotients mean the fppf sheafification of right cosets, where fppf coverings are jointly surjective flat finitely presented maps of $F$-schemes.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proof of Proposition 18.18, printed p.391: inverse-image Borel, flag-quotient isomorphism and the middle exact row of the displayed diagram, specialized to finite diagonalizable kernel."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-pc-scheme",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-finite-diagonalizable-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The kernel $N$ is stable under conjugation, since $f(gng^{-1})=1$ on every test algebra. Conjugation is an action of the smooth connected group $G_1$ by automorphisms of the diagonalizable group $N$. By [lem-sfb-connected-action-multiplicative-type-rigidity] it is trivial. Hence $N$ is central scheme-theoretically. Apply [lem-sfb-borel-quotient-lifting] to choose a Borel $B\\subseteq G_1$ with $h=f|_B:B\\to B_0$ faithfully flat and finitely presented. Every $n\\in N(A)$ centralizes $B$ after every extension of $A$, so [lem-sfb-borel-scheme-normalizer] gives $n\\in B(A)$. Thus $N\\subseteq B$, without replacing $N$ by its reduced subgroup.",
+   "uses": [
+    "lem-sfb-connected-action-multiplicative-type-rigidity",
+    "lem-sfb-borel-quotient-lifting",
+    "lem-sfb-borel-scheme-normalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 18.18, p.391, inverse-image Borel assertion, expanded using Corollary 12.38, p.244; Proposition 17.20, pp.357--358; Theorem 17.48, p.367."
+   }
+  },
+  {
+   "text": "We now identify $B$ with the full inverse image $B_1$. The inclusion $B\\subseteq B_1$ follows from $f(B)\\subseteq B_0$. If $g\\in B_1(A)$, lift $f(g)\\in B_0(A)$ locally along the fppf cover $h:B\\to B_0$, using base change of coverings [lem-trf-fppf-covering-base-change]. On that cover choose $b$ with $f(b)=f(g)$; then $gb^{-1}\\in N\\subseteq B$, whence $g\\in B$ locally. The local maps to $B$ agree because $B\\hookrightarrow G_1$ is a monomorphism, and descend by [lem-weil-pbc-fpqc-representable-descent]. Their composites with $B\\hookrightarrow G_1$ equal $g$ by the same uniqueness. Thus $B_1=B$ on all test algebras. It is a Borel, and $f_B=h$ is faithfully flat with kernel $N$ by the defining fibre product of the kernel.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 18.18, p.391: inverse-image Borel; sheaf-local lift calculation. Descent is Stacks descent.tex, Tag 023Q, lemma-fpqc-universal-effective-epimorphisms."
+   }
+  },
+  {
+   "text": "By [lem-sfb-homogeneous-orbit-quotient-geometry], the fppf quotients $Q_i=G_i/B_i$ are represented by schemes. The formula $gB_1\\mapsto f(g)B_0$ is well-defined. We may lift a section of $Q_0$ locally to $y\\in G_0$, and then lift $y$ locally to $g\\in G_1$. For this second lift, [lem-sfb-algebraic-group-homomorphism-factorization] applied to $f$ gives a faithfully flat finitely presented factor $G_1\\to I$ and a closed immersion $I\\to G_0$. Its defining ideal is the kernel of $F[G_0]\\to F[G_1]$, which is zero since that map is faithfully flat; hence $I=G_0$. The local class $gB_1$ is independent of choices: if $f(g)B_0=f(g\\prime)B_0$, then $f(g^{-1}g\\prime)\\in B_0$ and so $g^{-1}g\\prime\\in B_1$. The sheaf condition glues these classes to a natural inverse $Q_0\\to Q_1$. By [lem-galois-yoneda-fully-faithful], these mutually inverse sheaf maps give mutually inverse scheme morphisms. This proves precisely the stated quotient isomorphism.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 18.18, p.391: G/B isomorphic to G\\prime/B\\prime; quotient universal property of Chapter 5, especially Theorem 5.39 and Corollary 5.27."
+   }
+  },
+  {
+   "text": "We prove left exactness using [lem-sfb-faithfully-flat-group-quotient-universal] for $f_B$. If $\\chi_0\\circ f_B$ is trivial, uniqueness of descent gives $\\chi_0=0$, proving injectivity. A character pulled back from $B_0$ is trivial on $N$. Conversely, if $\\chi_1:B_1\\to\\mathbf G_m$ restricts trivially to $N$ as a scheme morphism, the cited universal property gives a unique character $\\chi_0:B_0\\to\\mathbf G_m$ with $\\chi_1=\\chi_0\\circ f_B$. These implications give exactness at $X^*(B_1)$ and at $X^*(B_0)$.",
+   "uses": [
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 18.18, p.391: left and middle exactness of the character row; quotient property of Chapter 5."
+   }
+  },
+  {
+   "text": "For surjectivity onto $X^*(N)$, use [lem-sfb-lie-kolchin-triangular-embedding] to embed the smooth connected solvable group $B_1$ into an upper triangular matrix group. The derived series in the hypothesis is a finite subnormal series with commutative quotients, so it satisfies that lemma's solvability convention. By [lem-sfb-triangular-diagonal-kernel], its diagonal homomorphism $d:B_1\\to D$ has unipotent kernel $V$ and a diagonalizable quotient $D$ that is smooth and connected. Put $K=N\\cap V$. It is unipotent: the inclusion into the unitriangular group restricts to a closed immersion of $K$. Apply [lem-sfb-unipotent-to-multiplicative-trivial] to $K\\to N$; this inclusion must be trivial. Thus $K=1$ as a subgroup scheme, even for nonreduced $N$. Consequently $d|_N:N\\to D$ is injective on every test algebra and is a closed immersion by [lem-sfb-algebraic-group-monomorphism-closed-immersion].",
+   "uses": [
+    "lem-sfb-lie-kolchin-triangular-embedding",
+    "lem-sfb-triangular-diagonal-kernel",
+    "lem-sfb-unipotent-to-multiplicative-trivial",
+    "lem-sfb-algebraic-group-monomorphism-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 18.18, p.391: right exactness of the character row; Theorem 16.30 and Proposition 16.2, pp.324--325,334--335; Corollary 14.18(a), p.284."
+   }
+  },
+  {
+   "text": "The closed-immersion clause of [lem-sfb-multiplicative-character-antiduality], over the algebraically closed field $F$, applies to $d|_N:N\\hookrightarrow D$ and gives a surjection $X^*(D)\\to X^*(N)$. Given $\\eta\\in X^*(N)$, choose $\\widetilde\\eta\\in X^*(D)$ restricting to $\\eta$. Then $\\chi=\\widetilde\\eta\\circ d\\in X^*(B_1)$ has $\\chi|_N=\\eta$. This proves surjectivity of the required restriction, and together with step 4 finishes the short exact character sequence.",
+   "uses": [
+    "lem-sfb-multiplicative-character-antiduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Proposition 18.18, p.391: final surjection in the character row; Theorems 12.8--12.9, pp.232--234."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-connected-action-multiplicative-type-rigidity",
+  "lem-sfb-borel-quotient-lifting",
+  "lem-sfb-borel-scheme-normalizer",
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-sfb-faithfully-flat-group-quotient-universal",
+  "lem-sfb-lie-kolchin-triangular-embedding",
+  "lem-sfb-triangular-diagonal-kernel",
+  "lem-sfb-unipotent-to-multiplicative-trivial",
+  "lem-sfb-algebraic-group-monomorphism-closed-immersion",
+  "lem-sfb-multiplicative-character-antiduality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 18.18, proof and middle exact row, printed p.391, with the supporting results in Chapters 5,12,14,16,17 explicitly cited in the steps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Under a finite multiplicative isogeny the inverse image of a Borel subgroup is Borel and flag varieties are isomorphic and restriction of characters onto the kernel is surjective",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (L : FiniteGaloisIntermediateField k K), IsOpen (⇑(InfiniteGalois.mulEquivToLimit k K) '' ↑L.fixingSubgroup)\", \"doc\": \"In an infinite Galois extension $ K/k $, the image of the fixing subgroup of a finite Galois intermediate field $ L $ under the isomorphism to the inverse limit of profinite Galois groups is an open s\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] {F : CategoryTheory.Functor C FintypeCat}\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  (V : OpenSubgroup (CategoryTheory.Aut F)),\\n  ∃ X,\\n    Nonempty\\n      ((CategoryTheory.PreGaloisCatego\", \"doc\": \"For any open subgroup $V$ of the automorphism group $\\\\mathrm{Aut}(F)$ of a functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, there exists an object $X \\\\in \\\\mathcal{C}$ such that the action of $\\\\mathrm{\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"module\": \"Mathlib/CategoryTheory/Galois/EssSurj\", \"type\": \"∀ {G : Type u_1} [inst : Group G] [inst_1 : TopologicalSpace G] [inst_2 : IsTopologicalGroup G]\\n  [inst_3 : CompactSpace G] (X : Action FintypeCat G) [inst_4 : TopologicalSpace X.V.carrier]\\n  [DiscreteTopology X.V.carrier] [ContinuousSMul G X.V.carrier],\\n  ∃ ι,\\n    ∃ (x : Finite ι),\\n      ∃ f,\\n     \", \"doc\": \"For a compact topological group $G$ and an open subgroup $H$, the quotient group $G/H$ is finite.\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat) (G : Type u_1)\\n  [inst_1 : Group G] [inst_2 : (X : C) → MulAction G (F.obj X).carrier]\\n  [inst_3 : CategoryTheory.PreGaloisCategory.IsNaturalSMul F G] [inst_4 : CategoryTheory.GaloisCategory C]\\n  [C\", \"doc\": \"Let $\\\\mathcal{C}$ be a pre-Galois category equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, and let $G$ be a compact topological group acting continuously on $F(X)$ for all $X \\\\i\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"module\": \"Mathlib/CategoryTheory/Galois/Topology\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  {H : Set (CategoryTheory.Aut F)},\\n  1 ∈ H →\\n    IsOpen H →\\n      ∃ I x,\\n        (∀ X ∈ I, CategoryThe\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat}$, if $H \\\\subseteq \\\\mathrm{Aut}(F)$ is an open subset containing the identity automorphism, then there\"}\n  {\"name\": \"MonoidHom.transferSylow_restrict_eq_pow\", \"module\": \"Mathlib/GroupTheory/Transfer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {p : ℕ} (P : Sylow p G) (hP : (↑P).normalizer ≤ Subgroup.centralizer ↑P)\\n  [Fact (Nat.Prime p)] [Finite (Sylow p G)] [inst_3 : (↑P).FiniteIndex],\\n  ⇑((MonoidHom.transferSylow P hP).restrict ↑P) = fun x => x ^ (↑P).index\", \"doc\": \"Let $G$ be a group and $P$ be a Sylow $p$-subgroup of $G$ for some prime $p$. Assume that $P$ has finite index in $G$ and that the normalizer of $P$ is contained in its centralizer. Let $\\\\text{transfe\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.toAut_bijective\", \"module\": \"Mathlib/CategoryTheory/Galois/IsFundamentalgroup\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.GaloisCategory C] (G : Type u_1) [inst_2 : Group G]\\n  [inst_3 : (X : C) → MulAction G (F.obj X).carrier] [CategoryTheory.PreGaloisCategory.FiberFunctor F]\\n  [inst_5 : Topo\", \"doc\": \"The group homomorphism from $ G $ to the automorphism group $ \\\\mathrm{Aut}(F) $ of a functor $ F : \\\\mathcal{C} \\\\to \\\\text{FintypeCat} $, constructed by mapping each element $ g \\\\in G $ to the natural a\"}\n  {\"name\": \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"module\": \"Mathlib/RingTheory/Invariant/Profinite\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {G : Type u_3}\\n  [inst_3 : Group G] [inst_4 : MulSemiringAction G B] [inst_5 : SMulCommClass G A B] [inst_6 : TopologicalSpace G]\\n  [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [i\", \"doc\": \"Let $ A \\\\subseteq B $ be commutative rings with $ B $ equipped with a profinite group $ G $-action preserving the $ A $-algebra structure. For a prime ideal $ Q \\\\subseteq B $ lying over $ P = Q \\\\cap A\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central diagonalizable isogeny induces isomorphism on flag varieties and exact sequence of characters of Borel subgroups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RootPairing.Equiv.weightEquiv\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₂ : Type u_5} \", \"doc\": \"Given an equivalence $ e $ between root pairings $ P $ and $ Q $ over a commutative ring $ R $, this constructs the $ R $-linear equivalence between the underlying modules $ M $ and $ M_2 $ induced by\"}\n  {\"name\": \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_4} [inst : CommRing R] {V : Type u_5} [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] {ι : Type u_6} [inst_5 : Fintype ι] [inst_6 : DecidableEq ι]\\n  (b : Module.Basis ι R V) (g : ↥(Subgroup.center (Matrix.SpecialLinearGroup ι R)\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"RootPairing.Equiv.comp\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {M : Type u_3} →\\n      {N : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : Module R M] →\\n              [inst_3 : AddCommGroup N] →\\n                [inst_4 : Module R N] →\\n                  {ι₁ : Type u_8} \", \"doc\": \"Given equivalences of root pairings $f: P \\\\to P_1$ and $g: P_1 \\\\to P_2$, this defines their composition $g \\\\circ f$ as an equivalence from $P$ to $P_2$. The composition is constructed by composing the\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))),\\n  ↑↑↑g = SpecialLinearGroup.centerEquivRootsOfUnity g • LinearMap.id\", \"doc\": \"Every element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and finite free $ R $-module $ V $ of rank $ n $ satisfies $ g = r \\\\cdot \\\\text{id}_V $, whe\"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (g : ↥(Subgroup.center (SpecialLinearGroup R V))) (x : V),\\n  SpecialLinearGroup.centerEquivRootsOfUnity g • x = (fun x => ↑↑g x) x\", \"doc\": \"For any element $ g $ in the center of the special linear group $ \\\\text{SL}(V) $ over a commutative ring $ R $ and any vector $ x \\\\in V $, the isomorphism between the center and the group of $ n $-th \"}\n  {\"name\": \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"module\": \"Mathlib/LinearAlgebra/SpecialLinearGroup\", \"type\": \"∀ {R : Type u_1} {V : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup V] [inst_2 : Module R V]\\n  [inst_3 : Module.Free R V] [inst_4 : Module.Finite R V] (r : ↥(rootsOfUnity (max (Module.finrank R V) 1) R)),\\n  ↑↑↑(SpecialLinearGroup.centerEquivRootsOfUnity.symm r) = r • LinearMap.id\", \"doc\": \"For a commutative ring $ R $ and a finite free $ R $-module $ V $ of rank $ n $, the center of the special linear group $ \\\\text{SL}(V) $ is isomorphic to the group of $ n $-th roots of unity in $ R $.\"}\n  {\"name\": \"RootPairing.Equiv.weightEquiv_mul\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] {P : RootPairing ι R M N} (x y : P.Equiv P),\\n  RootPairing.Equiv.weightEquiv P P x * RootPairing.Equiv.weightEquiv P P y\", \"doc\": \"For any two equivalences $x$ and $y$ between root pairings $P$ and $Q$ over a commutative ring $R$, the product of their induced $R$-linear equivalences on the underlying modules satisfies $x \\\\cdot y \"}\n  {\"name\": \"RootPairing.Equiv.weightHom_apply\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/Hom\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : Module R M] [inst_3 : AddCommGroup N] [inst_4 : Module R N] (P : RootPairing ι R M N) (e : P.Equiv P),\\n  (RootPairing.Equiv.weightHom P) e = RootPairing.Equiv.weightEquiv P P e\", \"doc\": \"For any root pairing $ P $ over a commutative ring $ R $, and for any automorphism $ e $ of $ P $, the application of the weight homomorphism to $ e $ yields the $ R $-linear equivalence between the u\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"isogeny\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|diagonalizable|BorelSubgroup",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplicative isogeny Borel subgroups quotient flag variety character lattice exact sequence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.IsComplement'.QuotientMulEquiv\", \"module\": \"Mathlib.GroupTheory.Complement\", \"type\": \"[K.Normal] (h : H.IsComplement' K) : G ⧸ K ≃* H\", \"doc\": \"If $ K $ is a normal subgroup of $ G $ and $ H $ is a complement of $ K $ in $ G $, then the quotient group $ G/K $ is multiplicatively isomorphic to $ H $. This isomorphism is induced by restricting \"}\n  {\"name\": \"Subgroup.IsComplement'.QuotientMulEquiv_apply\", \"module\": \"Mathlib.GroupTheory.Complement\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H K : Subgroup G} [inst_1 : K.Normal] (h : H.IsComplement' K) (a : G ⧸ K),\\n  h.QuotientMulEquiv a = (Subgroup.IsComplement.leftQuotientEquiv h) a\", \"doc\": \"If $ K $ is a normal subgroup of $ G $ and $ H $ is a complement of $ K $ in $ G $, then the quotient group $ G/K $ is multiplicatively isomorphic to $ H $. This isomorphism is induced by restricting \"}\n  {\"name\": \"MulAutMultiplicative\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \"[AddGroup G] : MulAut (Multiplicative G) ≃* AddAut G\", \"doc\": \"There is a canonical group isomorphism between the multiplicative automorphism group of $\\\\text{Multiplicative}\\\\ G$ and the additive automorphism group of $G$. This isomorphism is established by conver\"}\n  {\"name\": \"AddSubgroup.toSubgroup\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Lattice\", \"type\": \": AddSubgroup A ≃o Subgroup (Multiplicative A)\", \"doc\": \"There exists a canonical order isomorphism between the lattice of additive subgroups of an additive group $A$ and the lattice of multiplicative subgroups of the corresponding multiplicative group $\\\\te\"}\n  {\"name\": \"groupCohomology.H1InfRes\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality\", \"type\": \": ShortComplex (ModuleCat k)\", \"doc\": \"A short complex in the category of modules over a commutative ring $ k $, consisting of the first group cohomology modules $ H^1(G/S, A^S) $, $ H^1(G, A) $, and $ H^1(S, A) $ for a group $ G $, its no\"}\n  {\"name\": \"GroupExtension.Equiv.instMulEquivClass\", \"module\": \"Mathlib.GroupTheory.GroupExtension.Defs\", \"type\": \": MulEquivClass (S.Equiv S') E E'\", \"doc\": \"The type of equivalences between two group extensions with the same normal subgroup $N$ and quotient group $G$ is equipped with a multiplicative equivalence structure. This means each equivalence is a\"}\n  {\"name\": \"AddAutAdditive\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \"[Group G] : AddAut (Additive G) ≃* MulAut G\", \"doc\": \"The group of additive automorphisms on the additive structure $\\\\text{Additive}\\\\, G$ is isomorphic to the group of multiplicative automorphisms on $G$, with the isomorphism given by the equivalence $\\\\t\"}\n  {\"name\": \"MulChar.mulEquivToUnitHom\", \"module\": \"Mathlib.NumberTheory.MulChar.Basic\", \"type\": \": MulChar R R' ≃* (Rˣ →* R'ˣ)\", \"doc\": \"There is a monoid isomorphism between the multiplicative characters from a commutative monoid $ R $ to a commutative monoid with zero $ R' $ and the monoid homomorphisms from the group of units $ R^\\ti\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ring Picard groups, abstract groups, Lie/root systems or measurable Borel spaces; none gives the algebraic-group-scheme assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Central diagonalizable isogeny induces isomorphism on flag varieties and exact sequence of characters of Borel subgroups",
+   "results": "{\"t\": \"2026-10-23T14:57:28Z\", \"tool\": \"leanfinder\", \"query\": \"Central diagonalizable isogeny induces isomorphism on flag varieties and exact sequence of characters of Borel subgroups\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.Equiv.weightEquiv\", \"SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq\", \"RootPairing.Equiv.comp\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply\", \"SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply\", \"RootPairing.Equiv.weightEquiv_mul\", \"RootPairing.Equiv.weightHom_apply\"], \"digest\": \"a1e7c23a684cb8f1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: root pairing equivalences, abstract group complements, multiplicative characters and diagonalizable linear operators do not state this assertion for affine algebraic group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"isogeny\"",
+   "results": "{\"t\": \"2026-10-23T14:57:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"isogeny\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: root pairing equivalences, abstract group complements, multiplicative characters and diagonalizable linear operators do not state this assertion for affine algebraic group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|diagonalizable|BorelSubgroup",
+   "results": "{\"t\": \"2026-10-23T14:57:18Z\", \"tool\": \"grep\", \"query\": \"isogeny|diagonalizable|BorelSubgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\"], \"digest\": \"e7bee25b54c4fef3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: root pairing equivalences, abstract group complements, multiplicative characters and diagonalizable linear operators do not state this assertion for affine algebraic group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multiplicative isogeny Borel subgroups quotient flag variety character lattice exact sequence",
+   "results": "{\"t\": \"2026-10-23T14:57:18Z\", \"tool\": \"leansearch\", \"query\": \"Multiplicative isogeny Borel subgroups quotient flag variety character lattice exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsComplement'.QuotientMulEquiv\", \"Subgroup.IsComplement'.QuotientMulEquiv_apply\", \"MulAutMultiplicative\", \"AddSubgroup.toSubgroup\", \"groupCohomology.H1InfRes\", \"GroupExtension.Equiv.instMulEquivClass\", \"AddAutAdditive\", \"MulChar.mulEquivToUnitHom\"], \"digest\": \"c9d5e45ba631b4c9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: root pairing equivalences, abstract group complements, multiplicative characters and diagonalizable linear operators do not state this assertion for affine algebraic group schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-character-picard-isogeny-sequence",
+  "date": "2026-10-23",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny.",
+   "via": [
+    "lem-sfb-character-picard-isogeny-sequence",
+    "lem-sfb-semisimple-multiplicative-universal-cover",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-multiplicative-isogeny-borel-comparison",
+  "worker": "stage1",
+  "summary": "Expanded Milne 18.18 into scheme-theoretic centrality and Borel containment, fppf-local inverse-image and flag-quotient calculations, quotient descent of characters, and diagonal character extension. Two new independent supporting nodes: lifting Borels through arbitrary faithfully flat quotients and the full normalizer theorem. Reused triangularization, diagonal-kernel structure, unipotent-to-multiplicative vanishing and character antiduality; statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplicative simply connected covering of a semisimple algebraic group. Supporting Milne construction: Proposition 18.18, sequence (129), printed p.391, specialized to finite multiplicative kernel; all connected groups are split over the algebraically closed F. Supporting step in Milne Proposition 18.18: Borel quotients and Borel characters under a multiplicative isogeny. The six steps realize the inverse-image Borel, flag-quotient isomorphism and middle character row in Milne 18.18, supporting the imported direct-image alteration prerequisite chain. The current latest direct-images proof (3) has been read; this item is a previously created algebraic-group prerequisite, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Generic permanence of fppf coverings used to pull back B to B_0 along a test section; no trace or duality result is used."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic fpqc descent for morphisms to the closed subgroup B; needed to turn local membership into a scheme-theoretic equality."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Generic representable Yoneda identifies inverse sheaf maps with inverse scheme maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fppf-covering-base-change",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-ad7cf4f55",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-ad7cf4f55 (reviewer sub-agent of L); spot-checked: Read Milne Prop. 18.18 (printed p.391), Prop. 17.20 (pp.357-358) and Lemma 17.47 with Thm 17.48 (pp.366-367) via pdftotext. The item statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so there is no supersession and no re-split note applies. The 6 steps check out against the cited statements: (1) rigidity makes the diagonalizable kernel N central, the lifting node gives a Borel B mapping faithfully flat onto B0, and the normalizer theorem puts N inside B scheme-theoretically; (2) a local lift on the fppf base change of B->B0, using gb^-1 in N inside B, plus monomorphism uniqueness and fpqc descent gives B equal to f^-1(B0), with kernel of f_B equal to N; (3) the flag quotients are representable and the inverse is built from sheaf-local lifts, where f is fppf because the closed-immersion factor of the factorization lemma has zero ideal, then Yoneda; (4) quotient universality gives injectivity and the middle exactness; (5) Lie-Kolchin and the triangular-diagonal kernel V, with N meet V unipotent, hence trivial into multiplicative N, so d restricted to N is injective and a closed immersion; (6) antiduality turns the closed immersion into a surjection on characters. New nodes are lem-sfb-borel-quotient-lifting (Milne 17.20) and lem-sfb-borel-scheme-normalizer (Milne 17.48). Both are true, faithful to the source, self-contained and statement-only, and are more general than any clause of the item. Tested on SL2->PGL2, Gm x Ga->Gm, GL2 with upper triangular B, solvable G with B=G, and t->t^p with a mu_p kernel. Not duplicates of general-borel-flag-variety (that node identifies the action with conjugation only on G(k)) or central-isogeny-borel-root-compatibility (that node needs a reductive target). No cycle and no SGA. The 3 tool_uses are generic Mathlib leaves and are accepted. Batch-5: lem-trf-fppf-covering-base-change is a generic site-theory leaf, and the closure paths through homogeneous-orbit, factorization and Lie-Kolchin reach only generic scheme and space foundation nodes of sec-trace-formula, none of which is the trace formula, Poincare duality or a step of their proofs, so the citations are legitimate. Remark: the unused Pic definition in the statement is inherited from the base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MultiplicativeIsogenyBorelComparison",
+  "declaration": "AlgebraicGeometry.multiplicativeIsogeny_borel_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MultiplicativeIsogenyBorelComparison.lean",
+  "statement": "theorem multiplicativeIsogeny_borel_comparison {F : Type u} [Field F] [IsAlgClosed F] (G₁ G₀ : Grp (Over (Spec (.of F)))) [IsAffine G₁.X.left] [IsAffine G₀.X.left] [LocallyOfFiniteType G₁.X.hom] [QuasiCompact G₁.X.hom] [LocallyOfFiniteType G₀.X.hom] [QuasiCompact G₀.X.hom] [Smooth G₁.X.hom] [ConnectedSpace G₁.X.left] [Smooth G₀.X.hom] [ConnectedSpace G₀.X.left] (f : G₁ ⟶ G₀) (hf : f.hom.hom.left.appTop.hom.FaithfullyFlat) [IsFinite (GrpObj.ker f.hom.hom).hom] (hN : IsFiniteDiagonalizableGroupScheme (GrpObj.ker f.hom.hom)) (B₀ : Grp (Over (Spec (.of F)))) (i₀ : B₀ ⟶ G₀) (hB₀ : IsBorelGroupScheme i₀.hom.hom) : ∃ (B₁ : Grp (Over (Spec (.of F)))) (i₁ : B₁ ⟶ G₁) (fB : B₁ ⟶ B₀) (n : Grp.mk (GrpObj.ker f.hom.hom) ⟶ B₁), IsPullback i₁.hom.hom fB.hom.hom f.hom.hom i₀.hom.hom ∧ IsBorelGroupScheme i₁.hom.hom ∧ fB.hom.hom.left.appTop.hom.FaithfullyFlat ∧ n.hom.hom ≫ i₁.hom.hom = GrpObj.kerι f.hom.hom ∧ IsPullback n.hom.hom (toUnit (GrpObj.ker f.hom.hom)) fB.hom.hom η[B₀.X] ∧ Function.Injective (fun χ : B₀ ⟶ Grp.mk (StandardGroupSchemes.multiplicative F) ↦ fB ≫ χ) ∧ (∀ χ : B₁ ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), n.hom.hom ≫ χ.hom.hom = toUnit (GrpObj.ker f.hom.hom) ≫ η[StandardGroupSchemes.multiplicative F] ↔ ∃ ψ : B₀ ⟶ Grp.mk (StandardGroupSchemes.multiplicative F), fB ≫ ψ = χ) ∧ Function.Surjective (fun χ : B₁ ⟶ Grp.mk (StandardGroupSchemes.multiplicative F) ↦ n ≫ χ) ∧ ∃ (Q₁ Q₀ : Over (Spec (.of F))) (q₁ : G₁.X ⟶ Q₁) (q₀ : G₀.X ⟶ Q₀), Presheaf.IsSheaf (Scheme.fppfTopology.over (Spec (.of F))) (yoneda.obj Q₁) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over (Spec (.of F))) (yoneda.obj Q₀) ∧ (∃ η₁ : coequalizer (yoneda.map (fst G₁.X B₁.X)) (yoneda.map (lift (fst G₁.X B₁.X) (snd G₁.X B₁.X ≫ i₁.hom.hom) ≫ μ[G₁.X])) ⟶ yoneda.obj Q₁, coequalizer.π _ _ ≫ η₁ = yoneda.map q₁ ∧ ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun a : yoneda.obj Q₁ ⟶ Z.obj ↦ η₁ ≫ a)) ∧ (∃ η₀ : coequalizer (yoneda.map (fst G₀.X B₀.X)) (yoneda.map (lift (fst G₀.X B₀.X) (snd G₀.X B₀.X ≫ i₀.hom.hom) ≫ μ[G₀.X])) ⟶ yoneda.obj Q₀, coequalizer.π _ _ ≫ η₀ = yoneda.map q₀ ∧ ∀ Z : Sheaf (Scheme.fppfTopology.over (Spec (.of F))) (Type u), Function.Bijective (fun a : yoneda.obj Q₀ ⟶ Z.obj ↦ η₀ ≫ a)) ∧ ∃ e : Q₁ ≅ Q₀, q₁ ≫ e.hom = f.hom.hom ≫ q₀",
+  "branch": "sheaf-dag",
+  "by": "Q120",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed Borel and finite-diagonalizable definitions, added to stmt_deps. Inverse image and kernel are cartesian squares; quotient presentations have the fppf coset-sheafification universal property and the isomorphism commutes with the quotient maps. The character row is expressed by injectivity, trivial restriction iff descent, and surjectivity of the actual precomposition maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75b03900d",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_dep records, the module, the report, and the live IsBorelGroupScheme, IsFiniteDiagonalizableGroupScheme, StandardGroupSchemes.multiplicative and the HomogeneousOrbitQuotientGeometry quotient convention. Node changed only in lean and in stmt_deps (+2 landed def nodes, allowed by brief-stage2 §5); lean.statement verbatim in the file. Hypotheses match the node (alg. closed F in universe u; affine, finite-type, smooth, connected G1 and G0; appTop FaithfullyFlat; ker finite and diagonalizable; Borel B0). Conclusions: IsPullback inverse image with legs checked, B1 Borel, fB faithfully flat, ker fB = N by a cartesian square with the kerι embedding, character row as injective / trivial-on-N iff descends / surjective, fppf right-coset quotients written as in the landed exists_homogeneous_fppf_quotient, and an iso Q1≅Q0 commuting with the quotient maps. Edge cases checked: identity, solvable G, SL2→PGL2, t↦t^p in char p. Proof only sorry, docstrings with source and blueprint, 6 steps, landed proof_dep imports, no cycle, report sections present. No compile because no file changed. Advisory: IsFinite on the kernel is redundant with hN."
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "id": "def-pur-finite-smooth-gamma-constructions",
+ "kind": "definition",
+ "title": "Existing rank-zero deformation factors and finite smooth tensor map",
+ "statement": "For a finite commutative ring $A$ and a quasi-compact separated compactifiable morphism $f:X\\to Y$, use the ordinary derived categories and exceptional adjoint [def-weil-pbc-derived-categories, thm-amb-etale-exceptional-adjoint]. The actual Rees deformation and normal cone of its diagonal define the family and normalized comparison [lem-pur-noetherian-etale-section-specialization]. FiniteSmoothGammaData consists of an isomorphism property for the actual normal projection, compactifiability of the Rees projection, a family comparison and its specified normalization at one. finiteSmoothNormalInvariant is the section invariant of the actual normal projection. finiteSmoothDeformationFactor is the specified zero-fibre specialization. With graph-normalized coordinates [def-pur-finite-smooth-comparison-coordinates], finiteSmoothNormalCoordinates is the section coordinate isomorphism for this normal projection. finiteSmoothRankZeroFactor transports the identity-adjunction trace through the normal projection and its zero section using the exceptional base-change mate [prop-asd-smooth-base-change, def-amb-vector-integration]. Finally, for an orientation $\\alpha:\\omega_f\\simeq A_X$, finiteSmoothGammaMap is the right tensor unitor inverse, then tensor with $\\alpha^{-1}$, then the canonical smooth tensor map [thm-asd-smooth-tensor]. These are existing constructions with all formulas unchanged; this node asserts no normalization theorem.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-pur-noetherian-etale-section-specialization",
+  "def-pur-finite-smooth-comparison-coordinates",
+  "prop-asd-smooth-base-change",
+  "def-amb-vector-integration",
+  "thm-asd-smooth-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Three-factor formula at relative dimension zero; expanded in the existing proof steps of lem-pur-finite-smooth-gamma-normalization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale smooth purity dimension zero canonical right adjoint tensor map sum counit normalization",
+   "results": "8 hits, all generic etale/smooth algebra results; first Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero. No comparison of the specified derived maps.",
+   "date": "2026-10-27",
+   "verdict": "No matching finite smooth coordinate normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits, including rightAdjointUniq, homEquiv_symm_rightAdjointUniq_hom_app and rightAdjointUniq_inv_app. Their source Mathlib/CategoryTheory/Adjunction/Unique.lean was read.",
+   "date": "2026-10-27",
+   "verdict": "Use these for the formal final counit calculation; the geometric and tensor coordinate equations remain."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSmoothGammaMap|finite_smooth_gamma_normalization|finiteSmoothRankZeroFactor",
+   "results": "0 Mathlib hits. Local rg finds the definitions and the single postponed normalization theorem in the assigned module; no alternate proof.",
+   "date": "2026-10-27",
+   "verdict": "No existing normalization to apply."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale separated diagonal normal cone rank zero deformation specialization tensor orientation",
+   "results": "8 hits: IsSeparated.isSeparated_eq_diagonal_isClosedImmersion, IsEtale, diagonal_Spec_map, Scheme.Etale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, Algebra.Etale.formallyEtale, FormallyUnramified.isOpenImmersion_diagonal, Algebra.FormallyEtale.instTensorProduct.",
+   "date": "2026-10-27",
+   "verdict": "The diagonal clopen geometry has Mathlib inputs, already recorded in the parent DAG. No specified Rees-specialization or tensor-coordinate equation."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteSmoothGammaNormalization",
+  "date": "2026-10-27",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Three-factor formula at relative dimension zero; expanded in the existing proof steps of lem-pur-finite-smooth-gamma-normalization.",
+   "via": [
+    "lem-pur-finite-smooth-gamma-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteSmoothGammaConstructions",
+  "file": "lean/Sheaf/Paper/FiniteSmoothGammaConstructions.lean",
+  "declaration": "AlgebraicGeometry.Etale.FiniteSmoothDeformationComparisons",
+  "statement": "def FiniteSmoothDeformationComparisons (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]\n    (hc : HasCompactification\n      (Scheme.Hom.deformationSpaceProj (pullback.fst f f) (pullback.diagonal f)))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.FiniteSmoothDeformationComparisons",
+   "AlgebraicGeometry.Etale.FiniteSmoothDeformationNormalized",
+   "AlgebraicGeometry.Etale.FiniteSmoothGammaData",
+   "AlgebraicGeometry.Etale.finiteSmoothNormalInvariant",
+   "AlgebraicGeometry.Etale.finiteSmoothDeformationFactor",
+   "AlgebraicGeometry.Etale.finiteSmoothNormalCoordinates",
+   "AlgebraicGeometry.Etale.finiteSmoothRankZeroFactor",
+   "AlgebraicGeometry.Etale.finiteSmoothGammaMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8bfa2",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261027T131504-L-2945560",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-8bfa2",
+  "group": "R3",
+  "result": "fix",
+  "landing": "20261027T131504-L-2945560",
+  "kind": "interface",
+  "note": "independent cc review: 16 moved defs byte-identical to the published item module; item statement unchanged; 3 holes = verbatim conjuncts of the item; direct importer FiniteSmoothPurityMaps compiled OK against the delivered files; axioms checked"
+ }
+}

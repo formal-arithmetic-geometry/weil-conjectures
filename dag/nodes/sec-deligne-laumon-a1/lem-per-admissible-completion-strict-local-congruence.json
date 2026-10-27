@@ -1,0 +1,137 @@
+{
+ "id": "lem-per-admissible-completion-strict-local-congruence",
+ "kind": "statement",
+ "title": "Congruence of canonical strict-local maps at one admissible blowup",
+ "statement": "Let (A,I) be a henselian pair with I finitely generated [def-weil-pbc-henselian-terminology]. Let Ω be an algebraically closed field and let S be an AdmissibleCompletionPointSystem I Ω [def-per-admissible-completion-point-system]. For any index J of S and any n ≥ 1, write H_J = S.rings.obj J, H'_J = S.completedRings.obj J, b_J = S.base.app J and u_J = S.comparison.app J. Then the actual induced map H_J/(I^n).map b_J → H'_J/(((I^n).map b_J).map u_J) is bijective. These are the canonical pointed strict-local maps and structural maps specified by S, not arbitrary ring maps.",
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-per-admissible-completion-point-system"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 2.4.4 proof, printed p.365; XX 4.4 final Note, printed p.374; Stacks algebra.tex, Tag 05WS (lemma-quotient-strict-henselization)."
+ },
+ "proof": [
+  {
+   "text": "Apply [lem-per-admissible-completion-fiber-iso] at the ideal of J and the integer n. The two geometric points factor through the infinitesimal fibres: S.closed and n≥1 give the first factorization, and S.comparison_point and the structural square give the second. The fibre isomorphism identifies their ordinary local rings and their chosen residue embeddings in Ω.",
+   "uses": [
+    "lem-per-admissible-completion-fiber-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the geometric strict-local rings with the algebraic pointed-etale colimits using [lem-weil-pbc-etale-local-ring-triples] and [lem-sbc-etale-triples-localized-strict-henselization]. The map from each ordinary local ring to its fibre ring is the quotient by I^n, with kernel in the maximal ideal. Apply [lem-sbc-strict-henselization-surjective-quotient-core] to get their quotient strict henselizations. Use the same separable residue closure inside Ω and the universal pointed-colimit definition [def-sc-ring-strict-henselization] to identify these quotients.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-sbc-etale-triples-localized-strict-henselization",
+    "lem-sbc-strict-henselization-surjective-quotient-core",
+    "def-sc-ring-strict-henselization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The pointed uniqueness of [lem-weil-pbc-strict-henselization-functoriality] identifies the isomorphism just constructed with the reduction of the actual strict-local pullback. Transport by S.rings_obj, S.completedRings_obj, S.base_app and S.comparison_app. Thus the displayed quotient map is bijective; the statement does not merely assert existence of an unrelated ring equivalence.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-per-admissible-completion-fiber-iso",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-sbc-etale-triples-localized-strict-henselization",
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "def-sc-ring-strict-henselization",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 2.4.4 proof, printed p.365; XX 4.4 final Note, printed p.374; Stacks algebra.tex, Tag 05WS (lemma-quotient-strict-henselization)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization of a local ring commutes with quotient by an ideal, compatibly with the canonical pointed map",
+   "results": "{\"t\": \"2026-10-26T06:44:38Z\", \"tool\": \"leanfinder\", \"query\": \"Strict henselization of a local ring commutes with quotient by an ideal, compatibly with the canonical pointed map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"PreTilt.mk_comp_untilt_eq_coeff_zero\", \"Ideal.quotientToQuotientRangePowQuotSucc_mk\", \"IsAdicComplete.StrictMono.mk_comp_liftRingHom\", \"Ideal.powQuotSuccInclusion_apply_coe\", \"IsAdicComplete.StrictMono.mk_liftRingHom\", \"Ideal.quotientToQuotientRangePowQuotSuccAux\", \"AdicCompletion.factor_eval\\u2090_eq_eval\"], \"digest\": \"891ead8aa10f1b4f\"}",
+   "date": "2026-10-26",
+   "verdict": "No match: returned quotient-map and completion formulae do not compare canonical strict-local maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsStrictHenselization\"",
+   "results": "{\"t\": \"2026-10-26T06:44:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsStrictHenselization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No match: Loogle reports no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization.*quotient|quotient.*strictHenselization",
+   "results": "{\"t\": \"2026-10-26T06:49:27Z\", \"tool\": \"grep\", \"query\": \"strictHenselization.*quotient|quotient.*strictHenselization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No match: no occurrence in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AdmissibleModificationCompletionDensity",
+  "date": "2026-10-26",
+  "group": "A2"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical ancestor proof Step 3 through the completion/purity chain; original completion-density proof steps 4–5: identify the actual strict-local quotient map before taking colimits, ILO XX 2.4.4 proof.",
+   "via": [
+    "lem-per-admissible-modification-completion-density",
+    "lem-per-admissible-modification-valuative-stalks",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AdmissibleCompletionStrictLocalCongruence",
+  "file": "lean/Sheaf/AlgebraicGeometry/AdmissibleCompletionStrictLocalCongruence.lean",
+  "declaration": "AlgebraicGeometry.admissibleCompletion_strictLocal_congruence",
+  "statement": "theorem admissibleCompletion_strictLocal_congruence\n    {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I] (hI : I.FG)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (S : AdmissibleCompletionPointSystem I Ω) (J : AdmissibleBlowupIndex I)\n    (n : ℕ) (hn : 1 ≤ n) :\n    Function.Bijective\n      (Ideal.quotientMap (((I ^ n).map (S.base.app J).hom).map (S.comparison.app J).hom)\n        (S.comparison.app J).hom Ideal.le_comap_map)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T080730-L-1534591",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261026T080730-L-1534591",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-alteration-cartier-subboundary",
+ "kind": "statement",
+ "title": "Regular alteration preserving a Cartier subboundary",
+ "statement": "Let $k$ be a field [def-weil-field], let $B$ be a nonempty integral separated finite-type $k$-scheme [def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism], and let $\\mathcal I,\\mathcal J\\subseteq\\mathcal O_B$ be effective Cartier ideals [def-nagata-effective-cartier-ideal] with $V(\\mathcal J)\\subseteq V(\\mathcal I)$. There exist a nonempty regular integral separated finite-type $k$-scheme $Y$ [def-weil-regular-scheme], a proper dominant $k$-morphism $a:Y\\to B$ [def-weil-proper-morphism] inducing a finite extension $k(Y)/k(B)$ [def-sc-function-field, def-pc-field-extension], and a reduced strict normal crossings boundary $D=\\bigcup_{i\\in A}D_i$ on $Y$ [def-trf-strict-normal-crossings-boundary], with $A$ finite, such that the extended ideals $\\mathcal I\\mathcal O_Y$ and $\\mathcal J\\mathcal O_Y$ are effective Cartier and\n$$V(\\mathcal I\\mathcal O_Y)=|D|,\\qquad V(\\mathcal J\\mathcal O_Y)=\\bigcup_{i\\in A_{\\rm out}}|D_i|$$\nfor some $A_{\\rm out}\\subseteq A$. In particular each of the two inverse-image complements is precisely the complement of the displayed support. Empty divisors, the unit ideal, and equal supports are allowed; no separability of $k(Y)/k(B)$ is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "X Theorem 2.1, printed p.149, and VIII Remark 4.2.2(i); integral-component selection followed by local Cartier-subboundary factorization. The latter uses literature/stacks-project/more-algebra.tex, Tag 0AG0 (lemma-regular-local-UFD). Agent consequence comprising the returned parent proof, original steps 3--4, whose complete argument is retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-regular-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-sfb-dominant-function-field-map"
+ ],
+ "proof": [
+  {
+   "text": "The Cartier support misses the generic point: a local regular generator cannot vanish in a domain. Every nonempty open contains the generic point, so the support has empty interior. Choose the prime 2 or 3 different from the characteristic and apply [lem-sfb-gabber-global-snc-alteration]. Retain the proper surjection a0:P→B, regularity of P, the SNC inverse-image ideal D0, and the generic residue-field finiteness clause.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-nagata-effective-cartier-ideal",
+    "lem-sfb-gabber-global-snc-alteration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 2.1, printed p.149; agent application to the Cartier support"
+   }
+  },
+  {
+   "text": "Properness over the finite-type base makes P finite type and quasi-compact over k, hence Noetherian. Regular stalks are integrally closed domains. Apply [rem-pc-regular-normal](2) to obtain finitely many clopen integral irreducible components. Surjectivity of a0 supplies a point and the open cover supplies a nonempty component Y. Its inclusion is both open and closed, hence proper, and stalk isomorphisms give regularity of Y. The generic-point clause of the alteration makes a:Y→B dominant. The open inclusion induces residue-field isomorphisms, so composition preserves the generic residue-field finiteness. The proved source lemma Scheme.Hom.finrank_stalk_eq_finrank_residueField identifies the finite positive generic residue degree with the degree of the canonical dominantFunctionFieldAlgebra, giving finiteness of that algebra. Composition gives the stated separatedness and finite-type conditions.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-sc-function-field",
+    "def-sfb-dominant-function-field-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 2.1; integral-component selection using Stacks 033M, 01T6 and proper closed inclusions"
+   }
+  },
+  {
+   "text": "Restrict D0 along the clopen inclusion f:Y→P. Any integral component meeting its clopen range lies wholly in it, by connectedness of its irreducible support. Index the surviving components by a finite subtype and enumerate it by Fin m. Pullbacks have nonempty integral subschemes because their maps to the original components are open immersions. Stalk isomorphisms give regularity. Their supports stay distinct because the original supports lie in the range of f. Restriction preserves the Cartier condition by flat pullback, and radicality by the affine appIso and Ideal.comap_radical. The support union equality follows from finite closed unions and preimages. For an intersection indexed by s, pullback commutes with the ideal sums, using the comap/map Galois connection. Its natural map to the original intersection is an open immersion, so stalk isomorphisms preserve regularity and the dimension equality. The injective reindexing preserves s.card. This checks the SNC boundary definition directly, including s empty; it uses no parameter criterion.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "def-weil-open-immersion",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 4.2.2(i), printed pp.118--119; clopen restriction of X Theorem 2.1"
+   }
+  },
+  {
+   "text": "An invertible ideal on an integral scheme is nonzero. Its pullback along a dominant map of integral schemes is locally principal and nonzero: a zero pullback would imply the ideal is contained in the kernel of that map, while schematic dominance makes the kernel zero. The proved nonzero locally-principal criterion therefore makes both pulled-back ideals Cartier. Support-comap, support-radical and support-vanishingIdeal identify the first support with D and give containment of the second.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Integral-scheme generic-stalk calculation; agent local-generator argument (no flatness assumption)"
+   }
+  },
+  {
+   "text": "Select exactly the indices i with support(C_i) contained in the smaller support. For a point x of the smaller support, its stalk has positive dimension: dimension zero on an integral scheme forces x to be generic, whereas a Cartier support misses the generic point. Apply the already proved [lem-sbc-locally-principal-support-dimension-one] to find a generalization y in the same support with ambient stalk dimension one. The finite closed union covering D puts y in some C_i. Lift y to z on that integral component. The singleton-intersection dimension equality in the SNC predicate gives dim O_(C_i,z)=0, hence z is its generic point. Closedness of the smaller support then contains the whole C_i. Closedness of C_i and specialization y→x put x in the same selected component. This proves the equality with the selected finite union. This uses only the generic dimension-one detection lemma, not any smooth-base-change theorem or unit proof step.",
+   "uses": [
+    "lem-sbc-locally-principal-support-dimension-one",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BJG and 0BJH, dimension-one detection for locally principal support; SNC singleton codimension and specialization give the subboundary consequence."
+   }
+  },
+  {
+   "text": "Take complements of the support-comap and selected-union equalities to obtain the last two assertions. The argument allows empty supports and an empty family: if no component is selected then the same pointwise argument forces the smaller support empty. Unit ideals, equal supports, characteristic 2 and inseparable generic extensions require no separate assumptions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent globalization of local Cartier factorization after X Theorem 2.1; empty-boundary conventions of VIII 4.2.2(i)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "lem-sfb-gabber-global-snc-alteration",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-sc-function-field",
+  "def-sfb-dominant-function-field-map",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-open-immersion",
+  "lem-sbc-locally-principal-support-dimension-one"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf; Stacks Project",
+  "place": "V8: ILO X Theorem 2.1, clopen integral component selection, direct restriction of the SNC boundary definition, and dimension-one detection (Stacks 0BJG/0BJH) instead of local UFD factorization. All glue is proved by private Lean helpers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated integral variety with two effective Cartier divisors with nested supports admits a regular integral alteration with a strict normal crossings boundary and the smaller divisor pulls back to a union of boundary components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber regular alteration for a Cartier divisor with a second Cartier divisor supported inside it gives a normal crossings subdivisor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsDominant f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.normalization.OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": (iU ≫ f).normalization ⨿ (iV ≫ f).normalization ≅ f.normalization\", \"doc\": \"Let $f: X \\\\to Y$ be a quasi-compact and quasi-separated morphism of schemes. Suppose $X$ is the coproduct of two schemes $U$ and $V$ via open immersions $i_U: U \\\\to X$ and $i_V: V \\\\to X$, which are al\"}\n  {\"name\": \"DividedPowers.SubDPIdeal.mk.congr_simp\", \"module\": \"Mathlib.RingTheory.DividedPowers.SubDPIdeal\", \"type\": \"∀ {A : Type u_1} [inst : CommSemiring A] {I : Ideal A} {hI : DividedPowers I} (carrier carrier_1 : Ideal A)\\n  (e_carrier : carrier = carrier_1) (isSubideal : carrier ≤ I)\\n  (dpow_mem : ∀ (n : ℕ), n ≠ 0 → ∀ j ∈ carrier, hI.dpow n j ∈ carrier),\\n  { carrier := carrier, isSubideal := isSubideal, dpow_me\", \"doc\": \"If two subideals of an ideal $ I $ in a commutative semiring $ A $ have the same underlying subset, are contained in $ I $, and their divided power operations $ \\\\gamma_n $ (for $ n \\\\neq 0 $) map eleme\"}\n  {\"name\": \"normalize_dvd_iff\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \"{a b : α} : normalize a ∣ b ↔ a ∣ b\", \"doc\": \"For any elements $a$ and $b$ in a commutative monoid with zero equipped with a normalization structure, the normalized form of $a$ divides $b$ if and only if $a$ divides $b$, i.e., $\\\\text{normalize}(a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"IsProper\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \" {X : SSet} {A : X.Subcomplex} {P : A.Pairing} [self : P.IsRegular] : P.IsProper\", \"doc\": \"\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PairingCore\", \"type\": \" {X : SSet} {A : X.Subcomplex} {h : A.PairingCore} [self : h.IsRegular] : h.IsProper\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|strictNormalCrossing|strict_normal_crossing",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the displayed hits do not give this geometric assertion or a one-line specialization; normalization, properness and field-theory ingredients alone do not give the combined conclusion"
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|strictNormalCrossing|strict_normal_crossing",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization or integrality and simplicial-set regularity do not assert a regular SNC alteration with nested Cartier supports"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral scheme over a field has a regular alteration with simple normal crossings boundary preserving a Cartier subdivisor",
+   "results": "8 hits: AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.IsIntegral.component_integral, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegral.casesOn, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization or integrality and simplicial-set regularity do not assert a regular SNC alteration with nested Cartier supports"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"IsProper\"",
+   "results": "2 hits: SSet.Subcomplex.Pairing.IsRegular.toIsProper, SSet.Subcomplex.PairingCore.IsRegular.toIsProper",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization or integrality and simplicial-set regularity do not assert a regular SNC alteration with nested Cartier supports"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular proper generically finite alteration of an integral variety making two nested Cartier supports unions of strict normal crossings components",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization or integrality and simplicial-set regularity do not assert a regular SNC alteration with nested Cartier supports"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nested-open-regular-alteration",
+  "date": "2026-10-22",
+  "group": "Q100"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), coefficient-independent alteration/tame-boundary reduction; original steps 3--4: global SNC alteration, integral-component selection and Cartier-subboundary identification. No imported blueprint ancestor exists.",
+   "via": [
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-alteration-cartier-subboundary",
+  "worker": "stage1",
+  "summary": "Reused the existing global Gabber alteration, normal-component decomposition, and regular-local boundary-unit factorization. Wrote the integral-component restriction, Cartier pullback without flatness, and globalization to a fixed subset of components. Statement unchanged; no new nodes.",
+  "blueprint": "Realizes det-thm-sf-ctf-stability-direct-images proof (3), the coefficient-independent alteration/tame-boundary reduction; original parent steps 3--4. No imported blueprint ancestor exists.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic tool for component selection, scheme finiteness/properness, or integral/local algebra; it supplies no replacement for the unit alteration route."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic tool for component selection, scheme finiteness/properness, or integral/local algebra; it supplies no replacement for the unit alteration route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic tool (Stacks 056S, Lean-closed): smoothness of the alteration source over k' gives regularity of P; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-4428325d3",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-4428325d3 (reviewer sub-agent of L); spot-checked: Read the whole item; the delivery has no new nodes, and the statement and stmt_deps are unchanged. Not a 2026-10-21 re-split. Source checked: ILO X Thm 2.1 at printed p.149 (PDF p.155) needs k a field, ℓ ≠ char k, X separated of finite type and Z nowhere dense, and gives X̃ smooth and quasi-projective over k′. lem-sfb-gabber-global-snc-alteration states this, with the generic-point clause and the regular-parameter clause added. Step 1 holds: a Cartier generator is a non-zero-divisor in a domain, so V(I) misses the generic point and is nowhere dense. Step 3 holds: an integral H_i lies in exactly one clopen component, and every SNC-boundary condition is local. Step 4 holds: k(B)→k(Y) is injective and ρ_y is injective by lem-sc-integral-scheme-stalks-in-function-field(2), so the pulled-back ideals are Cartier without flatness, and local stalk maps give V(I O_Y)=a⁻¹V(I). Step 5 holds: near y, V(g) ⊆ V(T), so the Nullstellensatz gives T^N=gh, and lem-trf-regular-local-ufd-boundary-factorization (r≥0) gives g=u∏t_j^{e_j}. Step 6 holds: A_out = {i : η_i ∈ V(J O_Y)} works globally by closedness and irreducibility. Edge cases checked: I or J the unit ideal, equal supports, B the spectrum of a field, I=(t²) with J=(t³), and an inseparable k(Y)/k(B). FIX for two C-faults in step 2. (1) 'P is regular by the alteration theorem': the cited node says P is smooth over k′, not regular, so the step now cites lem-weil-pbc-smooth-scheme-over-field-regular (Stacks 056S, Lean pass), added to tool_uses. (2) Separatedness over k used an uncited diagonal factorization; it now reads: a is proper, hence separated (def-weil-proper-morphism), and the composite is separated by lem-weil-pbc-proper-fp-permanence(e). uses and proof_deps were updated, and proof_deps equals the union of the step uses. Batch 5: both cited nodes are outside the assumptions. lem-sfb-gabber-global-snc-alteration reaches sec-trace-formula only through the definition def-trf-projective-bundle-morphism and generic geometry/algebra nodes, with no step of the trace-formula or Poincaré-duality proofs and no sk-thm-trace-transport → accepted. lem-trf-regular-local-ufd-boundary-factorization is the commutative-algebra fact Stacks 0AG0, not a step of either proof → accepted. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlterationCartierSubboundary",
+  "declaration": "AlgebraicGeometry.exists_alteration_cartier_subboundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlterationCartierSubboundary.lean",
+  "statement": "theorem exists_alteration_cartier_subboundary (k : Type u) [Field k] (B : Scheme.{u}) [IsIntegral B] (b : B ⟶ Spec (.of k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (I J : B.IdealSheafData) (hI : I.IsInvertible) (hJ : J.IsInvertible) (hJI : J.support ≤ I.support) : ∃ (Y : Scheme.{u}) (a : Y ⟶ B) (_ : IsIntegral Y) (_ : IsDominant a), IsRegularScheme Y ∧ IsSeparated (a ≫ b) ∧ LocallyOfFiniteType (a ≫ b) ∧ QuasiCompact (a ≫ b) ∧ IsProper a ∧ (@algebraMap B.functionField Y.functionField _ _ a.dominantFunctionFieldAlgebra).Finite ∧ ∃ (D : Y.IdealSheafData) (n : ℕ) (C : Fin n → Y.IdealSheafData) (Aout : Finset (Fin n)), IsStrictNormalCrossingsBoundary D ∧ Function.Injective (fun i ↦ (C i).support) ∧ (∀ i, IsIntegral (C i).subscheme ∧ IsRegularScheme (C i).subscheme) ∧ D.support = ⨆ i, (C i).support ∧ (∀ s : Finset (Fin n), ∀ z : (⨆ i ∈ s, C i).subscheme, IsRegularScheme ((⨆ i ∈ s, C i).subscheme) ∧ ringKrullDim (Y.presheaf.stalk ((⨆ i ∈ s, C i).subschemeι z)) = ringKrullDim ((⨆ i ∈ s, C i).subscheme.presheaf.stalk z) + (s.card : ℕ)) ∧ (I.comap a).IsInvertible ∧ (J.comap a).IsInvertible ∧ (I.comap a).support = D.support ∧ (J.comap a).support = ⨆ i ∈ Aout, (C i).support ∧ a ⁻¹' (I.support : Set B)ᶜ = (D.support : Set Y)ᶜ ∧ a ⁻¹' (J.support : Set B)ᶜ = ((⨆ i ∈ Aout, (C i).support : TopologicalSpace.Closeds Y) : Set Y)ᶜ",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06f51ba1e",
+  "group": "Q119",
+  "result": "pass",
+  "note": "Item node vs Lean checked clause by clause: k field; B integral (nonempty), separated + LOFT + QC over Spec k; I,J IsInvertible with J.support ≤ I.support; ∃ Y integral regular, a proper dominant, a≫b separated/finite type, RingHom.Finite of the canonical dominantFunctionFieldAlgebra; D an IsStrictNormalCrossingsBoundary with an exposed witness (n,C) whose clauses copy the live SNC definition verbatim; comap (= I·O_Y, Mathlib Functorial.lean:39) Cartier, supports = D.support and ⨆_{Aout} C_i, plus both complement equalities. Edge cases: n=0, Aout=∅, unit ideals, equal or non-reduced supports, s=∅ intersection, char 2, inseparable extension; single universe u. Only lean and the added stmt_dep def-sfb-dominant-function-field-map (landed def node, existing:true) differ from the live node; statement verbatim; one sorry; docstrings carry source, blueprint tag and six steps; report has Worker report + Second reading. No file changed, no compile. Advisory: Morphisms.Finite import has no evident proof-node use."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261023T152108-L-444336",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

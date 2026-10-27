@@ -1,0 +1,137 @@
+{
+ "id": "lem-sp-finite-level-projection-criterion",
+ "kind": "statement",
+ "title": "Single finite-level projection invertibility from normalized comparisons",
+ "statement": "Fix ell, E and Base b as in def-sp-tower-shriek-data, Operations o, ComparisonLevels levels and StrictFiniteCoordinates coordinates satisfying StrictFiniteProjectionComparisons of def-sp-strict-compactification-comparison-interfaces. Let k be a finite-field datum with ell different from its characteristic, let f:X->Y be a morphism of separated finite-type k-schemes, and fix any compactification c of f. For one index n and bounded-below strict towers K,L, suppose their n-th levels have retained Origin witnesses and satisfy GoodLevel. Then comparisonLevelProjection at the evaluated K_n,L_n is an isomorphism in the finite coefficient derived category. Only one n is involved; the result makes no assertion about invertibility on the tower derived category.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2)"
+ },
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Use b.ideals n to transport the intrinsic GoodLevel predicates to the positive uniformizer-power quotient by the identity of the ring of integers. Through the exact canonical coefficient realization and the retained origin isomorphisms, transport cohomology support and constructibility to the fixed-scalar origins. Fully faithful site comparison reflects bounded constructibility of the bounded-below etale antecedents; comparison Tor amplitude (ii) reflects the Tor interval. The unequal residue characteristic makes ell invertible.",
+   "uses": [
+    "lem-sf-comparison-tor-amplitude",
+    "lem-sf-bounded-below-ctf-reflection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the witnessed finite compact projection formula to the same compactification and these two antecedents. Its projection map is invertible. The equation in StrictFiniteProjectionComparisons transports its image through the canonical tensor, compact-support and pullback comparison isomorphisms to comparisonLevelProjection at the fixed-scalar realizations. Naturality transports along each retained Origin.realization; cancelling the isomorphisms gives the claim. This uses no conservativity on towers and requires no equations between witnesses at distinct levels.",
+   "uses": [
+    "lem-weil-finite-compact-projection-formula",
+    "def-sp-strict-compactification-comparison-interfaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-comparison-tor-amplitude",
+  "lem-sf-bounded-below-ctf-reflection",
+  "lem-weil-finite-compact-projection-formula",
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "paragraph (2); explicit transport argument in the Lean docstring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact evaluation jointly reflects isomorphisms on unbounded derived categories of sequence site modules",
+   "results": "Eight generic results about exact functors, Ext, bounded-below representatives and condensed abelian categories. None supplies the normalized finite projection or the strict open-closed localization.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.ReflectsIsomorphisms",
+   "results": "Generic reflection and functor isomorphism lemmas; no coefficient tower geometric construction.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Rr]eflect|isIso_iff.*homology",
+   "results": "Only ModuleCat.Topology.Homology hit. Local source search found Data.detects, strict comparison realization, and semilinearOpenClosedComplexSequence, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed decomposition ringed site distinguished localization triangle of module sheaf complexes",
+   "results": "Eight scheme ring localization and GammaSpec results; no strict system localization triangle.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "projection formula compactification scheme morphism finite coefficient constructible complexes finite Tor amplitude",
+   "results": "Eight scheme affine limit and Spec factorization results; no finite derived compactification formula. The existing source-library formula and normalized strict comparison dependency are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES_distinguished|projection.*[Ff]ormula",
+   "results": "Mathlib triangleOfSES_distinguished found at Algebra/Homology/DerivedCategory/ShortExact.lean:92 and generic SES applications; projection formula hits concern Witt vectors. The SES triangle is reused, but it does not identify the normalized strict open/closed functors and maps.",
+   "date": "2026-10-25",
+   "verdict": "generic tool only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerShriekLevels",
+  "date": "2026-10-25",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "Operations proof (2a): apply finite compact-support projection invertibility at one positive coefficient level before joint conservativity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityFiniteLevelProjectionCriterion",
+  "file": "lean/Sheaf/Paper/SmoothPurityFiniteLevelProjectionCriterion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.finite_level_projection_criterion",
+  "statement": "theorem finite_level_projection_criterion (b : Base l E) (o : Operations l E b) (levels : ComparisonLevels l E b o) (coordinates : StrictFiniteCoordinates l E b) (_comparison : StrictFiniteProjectionComparisons l E b o levels coordinates) (k : FiniteFieldDatum.{u}) (_hlp : l ≠ k.p) (X Y : Over (Spec (CommRingCat.of k.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) (c : Compactification f.left) (n : ℕ) (K : DerivedCategory.Plus (S l E X.left)) (L : DerivedCategory.Plus (S l E Y.left)) (_wK : Origin l E b X.left n K.obj) (_wL : Origin l E b Y.left n L.obj) (_hK : GoodLevel l E b X.left n K.obj) (_hL : GoodLevel l E b Y.left n L.obj) : IsIso (comparisonLevelProjection l E b o levels c n ((Ev l E X.left n).obj K.obj) ((Ev l E Y.left n).obj L.obj))",
+  "branch": "sheaf-dag",
+  "by": "S2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d3de1",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261025T203044-L-2779831",
+  "kind": "interface",
+  "note": "independent cc review: delivered SmoothPurityTowerShriekData vs live item lines 39-620 (only blueprint tags differ); residual statements vs Laws fields and ComparisonData interfaces; new/item nodes vs Lean; 6 ComparisonData importers + CoefficientTowerShriekCalculus compiled rc 0"
+ }
+}

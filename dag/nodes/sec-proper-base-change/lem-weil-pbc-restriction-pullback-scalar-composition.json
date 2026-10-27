@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-restriction-pullback-scalar-composition",
+ "kind": "statement",
+ "title": "Successive scalar restrictions commute coherently with geometric pullback",
+ "statement": "Let f:Y→X be a morphism of schemes. On X let RX→SX→TX have maps aX,bX and specified composite cX with aX bX=cX, and similarly on Y with aY,bY,cY. Let eR,eS,eT identify the inverse images of the three coefficient rings with their counterparts on Y, with all three coefficient squares commuting. For any M in D(Mod(TX)), the inverse canonical derived restriction/pullback comparison for c, followed by inverse scalar restriction composition on Y, equals pullback at R of inverse scalar restriction composition on X, followed by the inverse comparison for a applied to Res_bX M and Res_aY of the inverse comparison for b applied to M. All comparisons are the published normalized ones [def-weil-pbc-ring-restriction-pullback-comparison, def-weil-pbc-bounded-constructible-tower]. No flatness assumption on the coefficient maps is made.",
+ "stmt_deps": [
+  "def-weil-pbc-ring-restriction-pullback-comparison",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-adjoint-push-pull-modules; Tag 03EL, lemma-tensor-product-pullback; Tag 06YY, lemma-derived-base-change; mates composition and adjoint uniqueness. The stated equation specializes these constructions to the published coefficient maps. Also literature/stacks-project/sites-cohomology.tex and Mathlib/CategoryTheory/Adjunction/Mates.lean."
+ },
+ "proof": [
+  {
+   "text": "The ordinary scalar restriction compositor and both restriction/direct-image comparisons are identity on sections. The inverse of the scalar compositor is also identity, by its inverse law. Consequently the two direct-image paths for successive coefficient changes agree on sections.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transpose through the geometric module adjunction for the initial coefficient ring. Naturality of its unit moves the scalar compositor outside the transpose. The unit-mate formula and mateEquiv_vcomp identify the transpose of the pasted inverse-image squares with the direct-image paths of the preceding step. Injectivity of the adjunction bijection proves the ordinary pullback identity.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the exact-square composition theorem to the three exact restriction functors and three geometric inverse-image functors, with inverse scalar compositors. Its factorization identities identify the descended scalar compositors and square maps with the published pbcDerivedRestrictComp and proEtaleRingRestrictionDerivedPullback inverses. Reverse the resulting equality. The argument applies to every derived object and uses no boundedness or nonzero hypothesis.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition",
+    "def-weil-pbc-ring-restriction-pullback-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pod-derived-exact-square-composition",
+  "def-weil-pbc-ring-restriction-pullback-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Existing normalized scalar and geometric adjunction constructions, with the cited Stacks proofs",
+  "place": "Proof of the normalization clause in step 4 of lem-weil-pbc-stratum-completion-unit-restriction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The mate of the composition isomorphism of extension of scalars is inverse restriction of scalars composition",
+   "results": "ModuleCat.homEquiv_extendScalarsComp and seven related ordinary module adjunction results.",
+   "date": "2026-10-27",
+   "verdict": "The ordinary ring-module formula is relevant but does not identify the published derived ringed-site normalization; use the generic mates API and the existing normalized-adjunction lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv",
+   "results": "Twelve hits including conjugateEquiv, conjugateIsoEquiv_apply_hom, the identity and unitor laws.",
+   "date": "2026-10-27",
+   "verdict": "The generic mates equivalence is used. No specialized coherence theorem for the chosen pro-etale scalar and geometric adjunctions was returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mates of natural transformations commute with composition and restriction of scalars",
+   "results": "Eight hits, including ModuleCat.restrictScalarsComp'App_hom_naturality and naturality of presheaf module morphisms.",
+   "date": "2026-10-27",
+   "verdict": "These are ordinary naturality results. The ringed-site derived comparison still requires the stated specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratumCompletionUnitRestriction",
+  "date": "2026-10-27",
+  "group": "B4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-stratum-completion-unit-restriction",
+   "place": "Proof step 4: quotient-normalization compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictionPullbackScalarComposition",
+  "file": "lean/Sheaf/Paper/RestrictionPullbackScalarComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRestrictionPullback_scalarComposition",
+  "statement": "theorem proEtaleRestrictionPullback_scalarComposition\n    (M : reductionDerivedCategory X TX) :\n    (proEtaleRingRestrictionDerivedPullback f RX TX RY TY cX cY eR eT hc).inv.app M ≫\n        (pbcDerivedRestrictComp aY bY cY hY).inv.app\n          ((proEtaleRingDerivedPullback f TX TY eT).obj M) =\n      (proEtaleRingDerivedPullback f RX RY eR).map\n          ((pbcDerivedRestrictComp aX bX cX hX).inv.app M) ≫\n        (proEtaleRingRestrictionDerivedPullback f RX SX RY SY aX aY eR eS ha).inv.app\n          ((reductionDerivedRestrict X bX).obj M) ≫\n        (reductionDerivedRestrict Y aY).map\n          ((proEtaleRingRestrictionDerivedPullback f SX TX SY TY bX bY eS eT hb).inv.app M)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T034620-L-3666198",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261027T034620-L-3666198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

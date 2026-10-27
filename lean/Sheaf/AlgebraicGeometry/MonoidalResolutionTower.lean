@@ -5,6 +5,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.ChartedFanResolutionProcedure
+import Sheaf.AlgebraicGeometry.LogBlowupExtensionTerminalStalk
+import Sheaf.AlgebraicGeometry.FunctorialFanDesingularization
+import Sheaf.AlgebraicGeometry.FunctorialLogBlowupEtaleDescent
+import Mathlib.Algebra.Group.Equiv.TypeTags
+import Mathlib.Algebra.Group.Finsupp
+import Mathlib.Algebra.Group.ULift
 
 /-!
 # Monoidal resolution tower for fine saturated log schemes
@@ -67,6 +74,22 @@ theorem exists_monoidal_resolution_tower {X : FineSaturatedLogScheme.{u}}
               Nonempty
                 (((T.level ⟨T.length, by omega⟩).logStructure.characteristic t).carrier ≃*
                   ULift.{u} (Multiplicative (Fin r →₀ ℕ))) := by
-  sorry
+  obtain ⟨R⟩ := FineFan.exists_smoothFunctorialDesingularization.{u}
+  obtain ⟨P, hP⟩ := exists_charted_fan_resolution_procedure R
+  obtain ⟨E, _, hCompare, _⟩ := functorial_log_blowup_etale_descent P
+  have hX : IsLogBlowupInput X :=
+    ⟨inferInstance, fun Ω _ _ t g n hn ↦ hTorsionFree Ω t g n (Nat.ne_of_gt hn)⟩
+  refine ⟨(E.tower X hX).tower.length, (E.tower X hX).tower, rfl,
+    (E.tower X hX).initial, ?_⟩
+  intro Ω _ _ t
+  obtain ⟨Y, hY, s, ⟨e⟩⟩ := log_blowup_extension_terminal_stalk P E hCompare X hX Ω t
+  obtain ⟨F, c, hc⟩ := hP Y hY
+  obtain ⟨e', _⟩ := hc Ω s
+  obtain ⟨r, ⟨e''⟩⟩ := (R.resolution F).smooth (c.map.hom.base (s default))
+  let freeModel : Multiplicative (Fin r → ℕ) ≃*
+      ULift.{u} (Multiplicative (Fin r →₀ ℕ)) :=
+    (AddEquiv.toMultiplicative
+      (Finsupp.addEquivFunOnFinite (ι := Fin r) (M := ℕ)).symm).trans MulEquiv.ulift.symm
+  exact ⟨r, ⟨((e.trans e'.symm).trans e'').trans freeModel⟩⟩
 
 end AlgebraicGeometry

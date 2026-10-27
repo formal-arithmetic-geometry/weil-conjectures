@@ -1,0 +1,278 @@
+{
+ "id": "lem-fix-bounded-projective-tensor-complete",
+ "kind": "statement",
+ "title": "Canonical completeness of bounded projective sheaf tensors",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. For a quasi-compact quasi-separated scheme $T$ on which $\\ell$ is invertible [def-pc-scheme, def-weil-quasi-separated-morphism], work on its small pro-etale site [def-weil-pbc-proetale-site], put $B_T=\\varprojlim_n(A_n)_T$ [def-weil-completed-integral-coefficients], and use $D(B_T)$, the unbounded derived category of $B_T$-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nFor $H\\in D(B_T)$ put $C_T(H)=R\\varprojlim_n\\operatorname{Res}_n(H\\otimes^L_{B_T}(A_n)_T)$, with strict quotient transitions, restriction of scalars along $B_T\\to(A_n)_T$, and the functorial product mapping-fiber model [def-pc-sheaf-restrict-scalars, lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Write $\\eta_H:H\\to C_T(H)$ for the canonical quotient augmentation (zero shifted-product coordinate) [def-pur-integral-derived-operations].\n\nThe functor $C_T:D(B_T)\\to D(B_T)$ is additive and exact as a functor of triangulated categories, with its natural unit $\\eta$, and $\\eta_{B_T[0]}$ is an isomorphism. For every bounded complex $P$ of $B_T$-module sheaves whose terms are direct summands of finite sums of $B_T$, the map $\\eta_{[P]}$ is an isomorphism. Here a direct summand is specified by an inclusion into $B_T^{\\oplus r}$ and a retraction with identity composite.\n\nFor any two such bounded complexes $P,Q$, their direct-sum total tensor $V=\\operatorname{Tot}(P\\otimes_{B_T}Q)$ [def-pc-tensor-complex-sheaves] is bounded and again has terms of this form. Its terms are flat and $P,Q,V$ are K-flat [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Consequently $[V]$ represents the ordinary derived tensor $[P]\\otimes^L_{B_T}[Q]$ [lem-weil-pbc-site-derived-tensor-descent], and $\\eta_{[V]}$ is an isomorphism. These conclusions apply to sheaf summands and arbitrary sheaf-linear differentials, without requiring constant projective $R$-module models.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5, pp. 49–50, finite-projective devissage; Definition 3.4.10 and Proposition 3.5.1. Explicit completed-ring-sheaf version of returned item steps 5 and 6. Also Stacks proetale.tex Tag 099M, lemma-naive-completion, and sites-cohomology.tex Tag 0941, lemma-derived-limit-is-ok."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-integral-derived-operations",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Use normalized quotient-completion exactness with its shift-compatible actual unit, and the separate rank-one coefficient calculation. These give an additive exact endofunctor F and shift-compatible eta with eta at B[0] invertible.",
+   "uses": [
+    "lem-sf-integral-quotient-completion-exact",
+    "lem-sf-completed-coefficient-unit-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5, pp. 49-50; parent former steps 3-6"
+   }
+  },
+  {
+   "text": "Finite products of B identify with finite biproducts and hence are flat. Flatness is closed under retracts. The specified splittings therefore make every term of P and Q flat. The bounded-above-flat K-flat theorem makes both complexes K-flat, with no constant module presentation.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5 finite-projective reduction; Stacks Tag 06YQ"
+   }
+  },
+  {
+   "text": "The iso locus of eta is closed under finite products and retracts. Naturality on the specified inclusion and projection proves invertibility for every term in degree zero. Apply the existing proved source theorem DerivedCategory.isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE_of_prop (WeilConjectures.CategoryTheory.DerivedCategory.FlatDevissage). Its brutal-truncation induction and shift compatibility prove invertibility for P. The arbitrary differentials and the cases of empty support and zero ranks are covered.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5; bounded stupid-truncation devissage, source library FlatDevissage"
+   }
+  },
+  {
+   "text": "Tensor the specified splittings termwise, distribute tensor over finite biproducts and use the unitors. Thus P^p tensor Q^q is a retract of a finite product of B. In degree k the total tensor is a finite biproduct: keep precisely pairs (p,q) with p+q=k and p in the finite interval supporting P; the remaining summands are zero. Explicit inclusions into the totalization and its universal desc map give inverse composites. Summing the finite splittings gives the required finite-product retract for each total term. The usual total-tensor support bounds give [a+c,b+d].",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.5 tensor finite-projective reduction; finite totalization"
+   }
+  },
+  {
+   "text": "Apply the existing K-flat total tensor model to P,Q: its conclusions provide flat total terms, K-flatness of the total tensor, and its derived tensor representative isomorphism. Finally apply the same bounded iso-locus devissage to the total tensor, using the bounds and finite retracts just constructed.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A2 and 07A4; bounded-complex devissage as in Lemma 6.5.5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-quotient-completion-exact",
+  "lem-sf-completed-coefficient-unit-complete",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-total-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.5 finite-projective devissage. D9 implements the finite-retract and finite-totalization argument, uses the proved adopted FlatDevissage, and separates the native normalized exactness and rank-one calculation into two source obligations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a proetale site bounded complexes of finite projective completed coefficient module sheaves and their ordinary derived tensor products are canonically derived complete",
+   "results": "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduction tower completion functor for sheaves is exact and fixes bounded complexes of retracts of finite sums of its complete coefficient unit",
+   "results": "Profinite.NobelingProof.succ_exact; Condensed.hasExactLimitsOfShape; Condensed.hasExactColimitsOfShape; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod; Condensed.instAB5CondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; Condensed.profiniteSolid",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded complexes of finite projective module sheaves over the completed integral proetale coefficient sheaf are derived complete and their total tensor is K flat",
+   "results": "Module.Flat.of_projective; Module.Flat.rTensor_shortComplex_exact; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; Module.Flat.lTensor_shortComplex_exact; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; HomologicalComplex.HasTensor; SheafOfModules.Finite.hasFiniteLimits",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"KFlat\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|KFlat|bounded.*flat",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state canonical derived quotient-tower completion or bounded projective sheaf charts on qcqs pro-etale sites; ordinary module completion and unrelated categorical results are insufficient"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|KFlat|kFlat|proetale",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern coefficient sheaves, ordinary adic modules, unrelated derived projectivity, or exact functors; none states the completed-coefficient quotient-Roos functor and canonical bounded sheaf-retract tensor completeness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of quotient reductions is an exact functor and bounded complexes of finite free module sheaf summands are derived complete",
+   "results": "CategoryTheory.exactFunctor; CategoryTheory.ExactFunctor.of; CategoryTheory.ExactFunctor; AdicCompletion; CategoryTheory.exactFunctor_iff; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor; SheafOfModules.mapFree; Profinite.asLimit'",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern coefficient sheaves, ordinary adic modules, unrelated derived projectivity, or exact functors; none states the completed-coefficient quotient-Roos functor and canonical bounded sheaf-retract tensor completeness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"completion\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern coefficient sheaves, ordinary adic modules, unrelated derived projectivity, or exact functors; none states the completed-coefficient quotient-Roos functor and canonical bounded sheaf-retract tensor completeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived completion map for bounded complexes of finite projective sheaves over a proetale completed coefficient ring is invertible",
+   "results": "BDeRhamPlus; CondensedMod.IsSolid.isIso_solidification_map; BDeRham; CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective; CochainComplex.IsKProjective.Qh_map_bijective; DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective; CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'; CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern coefficient sheaves, ordinary adic modules, unrelated derived projectivity, or exact functors; none states the completed-coefficient quotient-Roos functor and canonical bounded sheaf-retract tensor completeness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-constructible-tensor-completion",
+  "date": "2026-10-22",
+  "group": "Q134"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": ordinary-to-completed integral tensor comparison for evaluation.",
+   "via": [
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-fix-bounded-projective-tensor-complete",
+  "worker": "stage1",
+  "summary": "Q87: proved all clauses using existing nodes only. Explicit finite-sheaf-summand splittings, exact derived quotient-Roos functor with its canonical augmentation, completed-unit calculation, naturality for retracts, and descending brutal-truncation induction. No constant projective R-module model is required.",
+  "blueprint": "Realizes the ordinary-to-completed tensor comparison needed in lem-fix-weil-operations, proof paragraph For an admissible exceptional adjoint, sentence Evaluation is natural in the two Weil maps and their inverses, so its square commutes; via lem-fix-constructible-tensor-completion, returned steps 5 and 6.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 1; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 2, 6; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 2, 4; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-pe-roos-cone-calculus",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 3, 4, 5; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 4, 5; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 4; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 4; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-pe-kflat-scalar-tower-realization",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 4; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Generic ringed-site homological algebra used exactly as stated in proof steps 6; the unit has no replacement result, and the completed finite-projective devissage route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pe-roos-cone-calculus",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-proetale-surjective-tower-derived-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-4ea2d91e1",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-4ea2d91e1 (reviewer sub-agent of L); spot-checked: PASS with no fixes and no dropped nodes. The item is a statement-only node created on 2026-10-22 by Q134; it is not a re-split item, since no repair note exists. The statement is kept verbatim and the delivery adds 8 steps and no new nodes. Source: Bhatt–Scholze Lemma 6.5.5, pp. 49–50, which reduces through direct summands of finite free complexes; the item is the agent-written sheaf-retract version of that step. Coefficients are B_T = lim (A_n)_T on the pro-étale site in the unbounded D(Mod B_T). This agrees with def-weil-completed-integral-coefficients and with the citer lem-fix-constructible-tensor-completion, which uses the same product mapping-fiber model with zero shifted coordinate. Step 1: summand flatness via retracts of exact sequences, and the tensor retract onto B^{rs}, both checked. Step 2: the bounded-flat K-flat lemma and the tensor-descent representative isomorphism. Step 3: I recomputed the homotopy formula H(h) = (hv, -hu); it works because h commutes with s. Step 4: the hypotheses of lem-pur-left-derived-from-kflat-class come from the K-flat resolution lemma and lem-pur-derived-change-of-rings (1) plus the Roos lemma; lem-pe-kflat-scalar-tower-realization supplies the units and transitions, and the unit descends by the localization universal property. Step 5: Roos augmentation, cone and shift clauses; reduction to good cone triangles via a roof plus a K-flat resolution; the cone of good complexes is good via the tensor-cone iso and the acyclic-cone criterion; then two-out-of-three. Step 6: I computed H of a degree-0 surjective tower (kernel lim, cokernel 0), using the free-cell ordinary-limit lemma with r=1, d=0 and the surjective-tower lemma (1). Step 7: both composites of q η^{-1} C_T(j) verified. Step 8: brutal-truncation descending induction. Small cases checked: empty T, r=0, the zero complex, P=[B -ϖ-> B]. Duplicate search found nothing that states the item: lem-sf-perfect-tensor-roos-completion has constant models; lem-sfb-ringed-complete-triangulated is about the Koszul Λ functor; lem-a1-quotient-unit-shift-completeness covers shifts only. Tool uses: the 9 declared ones are accepted; the undeclared off-unit citations are Lean-closed or Mathlib nodes. No SGA source anywhere."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedProjectiveTensorComplete",
+  "declaration": "WeilConjectures.bounded_projective_tensor_complete",
+  "file": "lean/Sheaf/Paper/BoundedProjectiveTensorComplete.lean",
+  "statement": "theorem bounded_projective_tensor_complete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t}) [CompactSpace T] [QuasiSeparatedSpace T] (_hl : ∀ x : T, IsUnit (l : T.residueField x)) : (completion l E T none).Additive ∧ (∃ (_ : (completion l E T none).CommShift ℤ), (completion l E T none).IsTriangulated ∧ NatTrans.CommShift (completionUnit l E T none) ℤ) ∧ IsIso ((completionUnit l E T none).app ((DerivedCategory.singleFunctor (Mod l E T none) 0).obj (SheafOfModules.unit (rings l E T none)))) ∧ ∀ P : Cx l E T none, (∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (P.X k)) → (∀ k : ℤ, ∃ r : ℕ, ∃ i : P.X k ⟶ ∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit (rings l E T none)), ∃ p : (∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit (rings l E T none))) ⟶ P.X k, i ≫ p = 𝟙 (P.X k)) → (∀ k : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology T none) (R := ring l E T none) (P.X k)) ∧ CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := ring l E T none) P ∧ IsIso ((completionUnit l E T none).app (DerivedCategory.Q.obj P)) ∧ ∀ Q : Cx l E T none, (∃ c d : ℤ, ∀ k : ℤ, k < c ∨ d < k → IsZero (Q.X k)) → (∀ k : ℤ, ∃ r : ℕ, ∃ i : Q.X k ⟶ ∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit (rings l E T none)), ∃ p : (∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit (rings l E T none))) ⟶ Q.X k, i ≫ p = 𝟙 (Q.X k)) → ∀ V : Cx l E T none, V = (coefficientTotalTensor.{u, t + 1, t} (topology T none) (ring l E T none)).obj (P, Q) → (∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (V.X k)) ∧ (∀ k : ℤ, ∃ r : ℕ, ∃ i : V.X k ⟶ ∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit (rings l E T none)), ∃ p : (∏ᶜ (fun _ : Fin r ↦ SheafOfModules.unit (rings l E T none))) ⟶ V.X k, i ≫ p = 𝟙 (V.X k)) ∧ (∀ k : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology T none) (R := ring l E T none) (V.X k)) ∧ CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := ring l E T none) Q ∧ CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := ring l E T none) V ∧ Nonempty (DerivedCategory.Q.obj V ≅ (siteDerivedTensorIndependentCoefficients.{t + 1, t, max u (t + 1), (max u (t + 1)) + 1} (topology T none) (ring l E T none)).obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ∧ IsIso ((completionUnit l E T none).app (DerivedCategory.Q.obj V))",
+  "branch": "sheaf-dag",
+  "by": "Q133",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the existing global-site IntegralOnSlice completion and its normalized quotient unit. Finite-free retracts are explicit inclusions and retractions of module sheaves. Adds the already landed def-coef-ringed-tensor-hom-model only to cite its actual total-tensor alias. Independent site and coefficient sizes are retained; generic universe-ambiguous sheafification instance search is disabled in favor of the existing coefficient-universe instances."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85d885bb0",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Statement matches node: canonical IntegralOnSlice completion/completionUnit (pinned by completion_exists and completionUnit_existsUnique); additive and ∃CommShift with IsTriangulated and NatTrans.CommShift η (no canonical shift in the dependency; existing project pattern, not vacuous); η iso at B[0]; bounded P with explicit finite-product retracts; flatness, K-flatness and η iso for P, Q and V=coefficientTotalTensor(P,Q), which is the same mapBifunctor total tensor as def-pc-tensor-complex-sheaves; bounded and retract clauses for V; Nonempty(Q V ≅ siteDerivedTensor(Q P,Q Q)) is the most the recorded descent interface gives (itself only Nonempty natural). stmt_deps gains only the landed def-coef-ringed-tensor-hom-model (allowed); node otherwise unchanged except lean; statement verbatim; imports exist; docstrings with source, blueprint and 8 steps; sorry only; universes t,u independent; edge cases empty T, rank 0, zero complex and a>b admitted. No changes, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261024T204542-L-3793492",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

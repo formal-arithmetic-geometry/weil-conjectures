@@ -1,0 +1,150 @@
+{
+ "id": "lem-pur-root-tower-preservation",
+ "kind": "statement",
+ "title": "Preservation of the root-of-unity inverse limit",
+ "statement": "Let $h:X\\to Y$ be a morphism of schemes [def-weil-proetale-inverse-image] and $\\ell$ a prime invertible in every residue field of $X$ and $Y$. On the small pro-etale site of $Y$, let $M:\\mathbf N^{\\mathrm{op}}\\to\\operatorname{Sh}(Y_{\\mathrm{proet}},\\mathbf{Ab})$ have $M_n=\\mu_{\\ell^{n+1},Y}$, the kernel of the $(\\ell^{n+1})$-power map on the unit sheaf, and successor transition $z\\mapsto z^\\ell$ [def-pur-roots-of-unity-sheaf]. Then the abelian-sheaf inverse image $h^{-1}$ preserves the limit of $M$: the canonical map $h^{-1}\\varprojlim_n M_n\\to\\varprojlim_n h^{-1}M_n$ is an isomorphism. No preservation of arbitrary infinite limits is asserted. Site objects have universe $u+1$, site morphisms universe $u$, and abelian values universe $u+1$, as in the recorded inverse-image definition.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and Integral twist paragraphs."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Use the pro-etale cover with compatible primitive roots; these give compatible bases of each root module over its finite constant ring.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Weakly etale localization identifies the covering slices with the pro-etale sites of the covering schemes. The normalized slice inverse-image maps transport the bases.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On small site models apply the compatible-free-tower theorem. Its coefficient comparison is invertible by the normalized base-completion result. The resulting underlying-set module comparison is therefore invertible. Raise values by ULift when passing to the small model; the canonical fully faithful lifted sheaf and inverse-image comparisons preserve the relevant limits and reflect invertibility. Descend the comparison back to the original value universe.",
+   "uses": [
+    "lem-pur-inverse-image-compatible-free-tower",
+    "lem-pur-base-completion-pullback-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport back to the original sites; the forgetful functors preserve limits and reflect isomorphisms. The comparison-isomorphism criterion is precisely preservation of the displayed root-tower limit. The base-changed cover covers X, including the empty case.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-def-sp-tate-twist-locally-free",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-inverse-image-compatible-free-tower",
+  "lem-pur-base-completion-pullback-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Roots of unity and Integral twist paragraphs. W3 stage-3 reduction, following the existing unit route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the completed integral Tate twist sheaf commutes with scalar extension",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.pre",
+   "results": "12 hits: CategoryTheory.Limits.limit.pre, CategoryTheory.Limits.limit.lift_pre, CategoryTheory.Limits.limit.pre_π, CategoryTheory.Limits.limit.id_pre, CategoryTheory.Limits.limit.pre_id, CategoryTheory.Limits.limit.pre_pre, CategoryTheory.Limits.limit.pre_π_assoc, CategoryTheory.Limits.limit.inv_pre_π",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesLimit.*[Rr]ootsOfUnity|purIntegralTwist|integralCompletedScalarMap",
+   "results": "0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image on the pro-etale site preserves the inverse limit of the finite constant rings ZMod (p^n) and of the roots of unity sheaves",
+   "results": "8 hits: PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, ProfiniteGrp.isIso_toLimit, PresheafOfModules.evaluation_preservesFiniteLimits, AddCommGrpCat.leftExactFunctorForgetEquivalence.instPreservesFiniteLimitsObjLeftExactFunctorTypeFunctorInverseAux, Profinite.lim",
+   "date": "2026-10-26",
+   "verdict": "No exact completed integral-line inverse-image theorem; use the existing specialized APIs and categorical limit/tensor universal properties."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralTwistLineInverseImage",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "prop-weil-twist-preserves",
+   "place": "Proof final sentence on levelwise integral scalar extension, realized through the Roots of unity and Integral twist paragraphs of the Cartesian coefficient-twists proof: Preservation of the root-of-unity inverse limit.",
+   "via": [
+    "lem-weil-integral-twist-base-change",
+    "lem-pur-integral-twist-line-inverse-image"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurRootTowerPreservation",
+  "file": "lean/Sheaf/Paper/PurRootTowerPreservation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pur_root_tower_preservation",
+  "statement": "theorem pur_root_tower_preservation\n    {X Y : Scheme.{u}} (h : X ⟶ Y) (l : ℕ) [Fact l.Prime]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    PreservesLimit (proEtaleRootsOfUnityTower Y l (Fact.out : l.Prime))\n      (proEtaleSheafInverseImage h AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6da90",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203613-L-2832800",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6da90",
+  "group": "W3",
+  "result": "fix",
+  "landing": "20261025T203613-L-2832800",
+  "kind": "interface",
+  "note": "independent cc review: item proof + 3 new modules/nodes against node lem-pur-integral-twist-line-inverse-image, unit sk-prop-sf-existence (realized empty; qlbar-colimit unit not on its route), library ProfiniteCoefficientInverseImage, 6 importers compiled"
+ }
+}

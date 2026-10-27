@@ -59,29 +59,11 @@
  ],
  "proof": [
   {
-   "text": "A field is Noetherian: its ideals are zero and the whole field. Thus $S$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The same holds for the finite-type schemes in the vector-bundle coordinate towers and their projective compactifications; finite type is checked in the finite affine trivializing cover, where the algebras are polynomial algebras or their standard projective charts. Every trivializing open and every overlap is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; overlaps need not be affine. By [def-weil-proper-morphism], every proper map is separated and finite type: it is quasi-compact, and its diagonal is a closed immersion, hence quasi-compact. Thus these maps are quasi-separated as well, and the named direct-image comparison applies. Every input to that comparison will be bounded below.\n\nWrite $C_T=\\nu_T^*$. By [lem-sf-comparison-pullback-exact], $C_T$ is exact and additive, identifies constant rings, and commutes with cohomology. By [lem-weil-pbc-comparison-pullback] it commutes with scheme inverse images, with their identity and composition constraints. The natural derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives $C_T(F\\otimes_A^LG)\\cong C_TF\\otimes_A^LC_TG$. The unital and shift-compatible structures are those of [lem-weil-pbc-ringed-projection-mate-exact]. We use these specified comparisons throughout; additivity identifies finite biproducts and exactness identifies shifts.",
+   "text": "Use [lem-amb-finite-tate-site-descent] for the root-projection comparison, all pullbacks and exponent transitions, including $d=0$. The finite-type schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian); [lem-sf-comparison-pullback-exact] gives exactness of $C$. Thus the stipulated finite-level coefficients and bounded-below witnesses apply without flatness of $A$. The completed twistCompatibility proof unfolds the fixed twistComparison and projects the normalization, pullback and exponent-transition clauses of finite_tate_site_descent. The completed finiteTypeSiteComparison derives Noetherianity from the structure morphism, derives invertibility of ell from coefficientPrime_isUnit_stalk using the local unit criterion, and assembles the generic projective, integration and tensor comparison clauses without changing the coefficient index.",
    "uses": [
+    "lem-amb-finite-tate-site-descent",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-proper-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099R, section-comparison; coefficient and tensor bookkeeping for the finite-level comparison"
-   }
-  },
-  {
-   "text": "Put $R=\\mathbf Z/\\ell^r$ and $M_T=\\varprojlim_s\\mu_{\\ell^s,T}^{\\mathrm{proet}}$. Clauses (1) and (2) of [lem-pur-twist-sheaf-locally-free] give a rank-one $R$-line $\\mu_{\\ell^r}$ and the projection-induced identification $M_T/\\ell^rM_T\\cong\\mu_{\\ell^r,T}^{\\mathrm{proet}}$. Tensor associativity in [def-coefficient-twists-detailed] gives, using $\\ell^rA=0$,\n$$A_T(1)=M_T\\otimes_{(\\mathbf Z_\\ell)_T}A_T\n\\cong(M_T/\\ell^rM_T)\\otimes_{R_T}A_T\n\\cong\\mu_{\\ell^r,T}^{\\mathrm{proet}}\\otimes_{R_T}A_T.$$\nThe comparison of the etale roots with these pro-etale roots is the one in [lem-amb-cartier-kummer-map]. Its inverse projection identification is precisely $\\tau_T:C_TL_T\\to A_T(1)$. There is no higher derived tensor contribution: $\\mu_{\\ell^r}^{\\mathrm{et}}$ is locally free of rank one by [lem-asd-etale-finite-twist-pullback], so it, rather than $A$, is the flat factor.\n\nFor $w:T'\\to T$, pullback of a compatible root sequence sends its $s$th coordinate $z_s$ to the pulled-back root $w^*z_s$; hence $w^*p_r=p_r w^*$ for the projection $p_r$. The root comparison of [lem-asd-etale-finite-twist-pullback] is an isomorphism for every such $w$. Applying the displayed quotient-and-tensor formulas proves naturality of $\\tau$, and taking tensor powers proves it for $d\\geq0$. In degree $d=0$ these are the constant-ring unit comparisons. If $s\\geq r$ also kills $A$, then $p_r=(z\\mapsto z^{\\ell^{s-r}})p_s$. Tensoring this equality with $A$ proves equality of the two identifications under the transition isomorphism in [lem-asd-etale-finite-twist-pullback]. Any two annihilating exponents have a common larger exponent. This proves independence of $r$ without commuting inverse image with an infinite limit and without assuming $A$ flat over $R$.",
-   "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "def-coefficient-twists-detailed",
-    "lem-amb-cartier-kummer-map",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-sf-comparison-pullback-exact"
    ],
    "elementary": false,
    "source": {
@@ -90,164 +72,84 @@
    }
   },
   {
-   "text": "For a quasi-compact quasi-separated $u:U\\to T$, put $l=u_e^*$, $r_u=Ru_{e,*}$, $p=Lu_p^*$ and $s_u=Ru_{p,*}$, and write $a:C_Ul\\cong pC_T$. By [lem-weil-pbc-comparison-direct-image-canonical-mate], $\\beta_u:C_Tr_u\\to s_uC_U$ is the mate with counit equation\n$$\\varepsilon^p\\,p(\\beta_u)\\,a=C_U(\\varepsilon^e).$$\nConsequently for every $v:lB\\to F$ with adjunct $\\widehat v:B\\to r_uF$, the adjunct of $C_U(v)a_B^{-1}$ is $\\beta_{u,F}C_T(\\widehat v)$. Indeed $v=\\varepsilon_F^e\\,l(\\widehat v)$; substitute this expression and the displayed counit equation and then use naturality of $a$. The resulting expression is $\\varepsilon^p_{C_UF}\\,p(\\beta_{u,F}C_T\\widehat v)$, which is the inverse Hom-bijection formula. Taking $v=1_{lB}$ gives the corresponding unit equation. This argument uses only the explicit mate bijection [def-weil-pbc-adjunction-mate], and compares the actual units, classes and maps.",
+   "text": "For arbitrary Noetherian S with ell invertible, use lem-pur-supported-projective-chern-comparison to identify the supported infinity Chern arrow before adjunction. Prove the mate-adjunct equation from mate naturality and Mathlib unit_mateEquiv. The bounded directImage hom equals geoP1PushComparison by its Plus normalization (the private pushComparison_plus API of the proved GeoP1Cohomology module). Apply this to the shifted-line pullback and the ordinary Chern adjunct; constant-unit comparison identifies the latter with projectiveH. Comparison preserves biproducts, so the two component identities give the projective decomposition square. Cancel the compared ordinary decomposition and the supported decomposition inverse to get the trace equation. The second injection gives H followed by trace equal to the identity. Separately, the unchanged openCounitComparison transposes through the adjunction using the proved extension-unit mate normalization, naturality, and the triangle identities. No finite-field restriction is required for either clause.",
    "uses": [
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "def-weil-pbc-adjunction-mate"
+    "lem-pur-supported-projective-chern-comparison",
+    "sk-lem-geo-p1-cohomology",
+    "def-pur-supported-projective-site-arrows",
+    "lem-sf-comparison-open-tensor-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; explicit Hom-bijection calculation for the specified square"
+    "place": "Tag 0B65, mate unit/counit formulas; blueprint def-amb-p1-trace and supported Cartier Kummer comparison. Agent-written two-component biproduct and inverse calculation."
    }
   },
   {
-   "text": "Apply Step 3 to $u=q:\\mathbf P^1_S\\to S$. The infinity divisor is Cartier: on the chart at infinity its ideal is generated by the polynomial coordinate, a nonzerodivisor in a polynomial ring over any base ring. The transition of its dual ideal is the transition of $\\mathcal O(1)$. The statement of [lem-amb-cartier-kummer-map] identifies the composite $A_P\\to i_*A_S\\to A_P(1)[2]$ with the scalar-extended etale Kummer first Chern class of $\\mathcal O_P(1)$ under $C_P$ and $\\tau_P$. Its adjoint is therefore $\\beta_qC_S(h_q^e)=h_q^p$ by Step 3. The same step's unit equation identifies the other component, the shifted twisted unit. Thus, comparing both biproduct components,\n$$\\beta_qC_S(b_q^e)=b_q^p.$$\nBy [def-amb-p1-trace], $b_q^e$ is invertible and $t_q^e=\\operatorname{pr}_2(b_q^e)^{-1}$. Applying a functor preserves both inverse equations, so $b_q^p$ is invertible. Inverting the preceding equality and composing with $\\operatorname{pr}_2$ gives $t_q^p\\beta_q=C_S(t_q^e)$. Finally $h_q^p=b_q^p\\iota_2$ gives $t_q^ph_q^p=\\operatorname{pr}_2\\iota_2=1$. These are equations between the Kummer-normalized maps; no choice of a decomposition or scalar is made.",
+   "text": "Use orderedIntegration_comparison from [lem-pur-ordered-integration-comparison] on every trivializing open. Opens of a Noetherian scheme are Noetherian, and ell remains invertible there. Unfold localIntegration and chartPrefix: functoriality of comparison identifies each actual local trace with comparison of vectorIntegrationLocalTrace. Naturality of the canonical pullback comparison, followed by its constant-unit component, identifies the comparison of a normalized ordinary global integration with these local pro-etale traces. The actual ordinary vectorBundleIntegration has VectorIntegrationNormalization by existsUnique_vectorIntegrationGluing. Hence vectorSite.hom followed by its comparison has VectorNormalization. Uniqueness in existsUniqueVectorIntegration identifies this candidate with vectorIntegration. Cancel vectorSite.inv followed by vectorSite.hom to obtain the actual global trace comparison; the defining choose_spec gives its normalization clause. This is valid for every Noetherian base with ell invertible, including rank zero and the empty base. No separate finite-type affine-tower or frame-descent theorem is needed for this clause.",
    "uses": [
-    "lem-amb-cartier-kummer-map",
-    "def-amb-p1-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.md",
-    "place": "Projective-line normalization via sk-prop-sf-cbc/def-amb-p1-trace; combine the two components using Steps 2–3"
-   }
-  },
-  {
-   "text": "Let $j:U\\hookrightarrow T$ be an open immersion. The canonical map $e_j:C_Tj_!^e\\cong j_!^pC_U$ of [lem-cbc-proetale-extension-zero-comparison] is the adjoint comparison, as Stacks Tag 09AF constructs it. Explicitly, after restriction to $U$, it is the identity on $C_UF$ under $j^*j_!F=F$. The counit $j_!j^*G\\to G$ is likewise the adjoint of $1_{j^*G}$: on sections lying in $U$ it is the identity, as [lem-weil-pbc-extension-by-zero-adjunction] specifies. The pro-etale adjunction is [lem-weil-extension-by-zero-adjunction]. Thus, under the pullback comparison $a_j$, both routes from $C_Tj_!^ej_e^*G$ to $C_TG$ have the same adjunct, the identity of $j_p^*C_TG$, and are equal. Exactness of $C$ and of both extensions by zero [lem-weil-pbc-extension-by-zero-exact, lem-weil-extension-by-zero-exact] gives the identical equation termwise on complexes and after localization. In particular, for $U=\\mathbf A^1_S$, $T=P$, naturality of $\\beta_q$ and Step 4 identify $Rq_*j_!j^*L_P[2]\\to Rq_*L_P[2]\\xrightarrow{t_q}A_S$ on the two sites. This proves the asserted comparison of restricted line traces, including the counit used for the restriction.",
-   "uses": [
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison, proof by the two left adjoints; the sectionwise counit normalization"
-   }
-  },
-  {
-   "text": "For a chosen compactification $f=\\bar f j$, set\n$$B_f=R\\bar f_{p,*}(e_j)\\circ\\beta_{\\bar f,j_!}:C_YR\\bar f_{e,*}j_!^e\\longrightarrow R\\bar f_{p,*}j_!^pC_X.$$\nFor the projective completion of $V$ this is exactly $\\beta_\\pi$ in the statement. Apply [lem-pur-compact-support-site-coherence]: Step 1 supplies the finite-type Noetherian schemes, every map compactified here is separated and finite type, and all inputs have bounded-below etale witnesses. Its refinement, composition and open-restriction identities therefore apply to the coordinate towers and their projective completions. In particular,\n$$B_{gf}C(\\alpha^e_{g,f})=\\alpha^p_{g,f}(Rg_!^pB_f)(B_gRf_!^e).$$\nThus the ordered tower can be used to calculate integration and then compared with the projective completion, and the comparison commutes with restriction to any trivializing open. The helper includes the normalized non-Cartesian proper/open interchanges; no Cartesian hypothesis is inserted for a merely commutative tower square.",
-   "uses": [
-    "lem-pur-compact-support-site-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 099R (section-comparison) and 09AF (lemma-jshriek-comparison); canonical compactification comparisons and mate pasting, agent-written verification"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the ringed square with horizontal site comparisons and vertical maps $\\bar\\pi_p,\\bar\\pi_e$. The rings are constant $A$, with inverse-image identifications from Step 1; Step 3 identifies its exchange with the counit-mate $\\beta_{\\bar\\pi}$. Hence it compares the actual proper projection arrows.\n\nFor the open piece apply [lem-pur-open-projection-site-transport] with $j=j_V$, $F=L_V(d)[2d]$ and $G=\\bar\\pi_e^*K$. By Step 2 the unshifted $F$ is a rank-one local system; exact pullback makes $G$ bounded below. That lemma compares both the unit-adjunct inverse projection and its canonical forward inverse, including the unbounded intermediate comparison and boundedness reflection. The compact-support projection transformation is the composite of these proper and open arrows [def-exchange-projection]; the ordinary proper arrow is the counit-mate map of [def-kun-projection-formula-map]. Pasting the two compared squares therefore identifies the actual compact-support projection maps via $B_\\pi$. Their invertibility on the stated inputs is [lem-weil-finite-compact-projection-formula]: $K$ is bounded constructible with finite Tor amplitude and the twist is a finite rank-one local system. Inverting the equality compares the projection maps in the direction used by $a_K$.",
-   "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-pur-open-projection-site-transport",
-    "def-exchange-projection",
-    "def-kun-projection-formula-map",
-    "lem-weil-finite-compact-projection-formula"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0944, lemma-projection-formula, preceding equation-projection-formula-map, and remark-compatible-with-diagram; fill in the omitted diagram check using the cited ringed-exchange tensor-coherence statement"
-   }
-  },
-  {
-   "text": "We compare the ordered affine-space traces by induction on $d$. For $d=0$, compact support is the identity and the trace is $1_A$, on both sites. For $d=1$, the equality is Step 5. Suppose it holds for $d-1$. In the coordinate tower write $p_d=p_{d-1}u$, with $u$ the last affine-line projection. The composite-counit formula [def-weil-pbc-composite-adjunction] says that its counit is the outer counit composed with the outer left adjoint applied to the inner counit. This is exactly how [lem-amb-affine-space-top-trace] specifies the ordered integration. Apply $C$ to this two-factor composite. For the inner line counit with the remaining twist-and-shift as coefficient, the projection comparison already proved in Step 7 identifies its projection factor; its trace factor is the line trace from Step 5. The coefficient is a finite rank-one local system with a shift, so it satisfies the bounded constructible finite-Tor hypotheses of Step 7. Step 5 compares the inner line trace, the inductive hypothesis compares the outer trace, and Step 6 compares the intervening compact-support composition maps. The tensor and pullback identifications from Steps 1–2 identify the sum of the twists and shifts. Hence\n$$t_{p_d}^p B_{p_d}=C_S(t_{p_d}^e).$$\nThe etale trace is an isomorphism by [lem-amb-affine-space-top-trace]; therefore so is the pro-etale trace. This also proves that its source has cohomology only in degree zero, where it is $A_S$.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
-    "lem-amb-affine-space-top-trace"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/lem-amb-affine-space-top-trace.md",
-    "place": "Ordered coordinate tower; identity adjunction at d=0 and explicit induction using the composite counit"
-   }
-  },
-  {
-   "text": "Choose a finite open cover $\\{U_i\\}$ of $S$ trivializing $V$. By [def-asd-vector-bundle-zero-section] the coordinate changes on $U_{ij}$ are invertible matrices, and [lem-amb-linear-trace-invariance] fixes the etale coordinate trace under each change. Such a matrix $G$ extends to projective completion by $[x_0:x]\\mapsto[x_0:Gx]$, with inverse defined by $G^{-1}$. Thus Step 6's direct-image and refinement compatibilities compare its compact-support action; Step 8 identifies the two pro-etale coordinate traces with the same etale trace. They agree on overlaps.\n\nPut $M^e=R\\pi_!^eL_V(d)[2d]$ and $M^p=R\\pi_!^pA_V(d)[2d]$. By Step 6's restriction compatibility and Step 8, both restrict to $A_{U_i}[0]$. Apply [lem-pur-degree-zero-derived-map-gluing] to $(M^e,A_S[0])$ on the etale site and $(M^p,A_S[0])$ on the pro-etale site. Its hypotheses hold on this same cover; no affineness of overlaps is needed. It identifies the sources with their degree-zero cohomology sheaves and glues the agreeing local traces uniquely. By [def-amb-vector-integration] the etale result is $t_\\pi^e$; the pro-etale result defines the required $t_\\pi^p$. Apply the same lemma's uniqueness to the two maps with source $C_SM^e$: exactness in Step 1 and the local trace isomorphisms give its local degree-zero concentration. Step 8 makes their restrictions equal, hence\n$$t_\\pi^p\\beta_\\pi=C_S(t_\\pi^e).$$",
-   "uses": [
-    "def-asd-vector-bundle-zero-section",
-    "lem-amb-linear-trace-invariance",
-    "lem-pur-degree-zero-derived-map-gluing",
+    "lem-pur-ordered-integration-comparison",
+    "def-pur-proetale-frame-integration",
+    "def-pur-proetale-vector-integration",
     "def-amb-vector-integration"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.md",
-    "place": "Frame invariance and gluing paragraph; supplied truncation argument making the degree-zero sheaf descent explicit"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+    "place": "Whole proof: local normalized maps glue as degree-zero sheaf maps; uniqueness of the existing two global constructions. Agent-written comparison by naturality and the already proved ordered-integration comparison."
    }
   },
   {
-   "text": "Set $J=\\pi_e^*K\\otimes_A^LL_V(d)[2d]$. It is bounded below, and Steps 1–2 identify $C_VJ$ with $L\\pi_p^*C_SK(d)[2d]$. Step 7 compares the projection factors and Step 9 compares the trace factors. Bifunctoriality of tensor gives\n$$a_{C_SK}^pB_{\\pi,J}=C_S(a_K^e).$$\nApply [lem-pur-bounded-site-adjunction-transpose] with $f=\\pi$ and the chosen projective completion. The projection is separated and finite type and the completion is proper over $S$. Its total space is finite type over $k$, so [lem-kun-dimension-finite-type] gives an integer bound $D\\geq0$ for $\\dim\\overline V$, independently of the rank $d$. For the empty base use $D=0$. The inputs $J,K$ are bounded below. Moreover [thm-amb-vector-bundle-purity] identifies $\\pi^{\\times,e}K$ with $J$, verifying the helper's last boundedness hypothesis. Its normalized transpose formula applied to the displayed equality yields\n$$\\eta_{C_SK}^p=\\rho_K C_V(\\eta_K^e).$$\nHere $\\rho_K:C_V\\pi^{\\times,e}K\\cong R\\pi^!C_SK$ is exactly the comparison-unit identification specified in the statement. This proves the claimed equality under that identification, using the bounded etale-origin adjunction.",
+   "text": "For the tensor clause on every Noetherian base, use lem-pur-vector-tensor-projection-comparison to obtain boundedness and the actual projection isomorphisms with their comparison square. Define ae and ap by the prescribed inverse projections, tensors of the two normalized global traces and right unitors. The proved private tensor_integration_square cancels the ordinary projection inverse and pastes the tensor naturality square with the already proved global integration equality. This gives the integration square. Apply the proved generic boundedSiteTranspose_compatible calculation (without the finite-field restrictions of the public bounded-adjunction package) to obtain the transpose square with rho. The existing purityAtModulus gives ordinary_purity for the same pe, since its inverse determines it uniquely. Finally lem-pur-vector-tensor-ordinary-normalization gives the required normalized gamma identity with the explicit signed symmetry. No parent statement or definition is changed.",
    "uses": [
+    "lem-pur-vector-tensor-projection-comparison",
+    "lem-pur-vector-tensor-ordinary-normalization",
     "lem-pur-bounded-site-adjunction-transpose",
-    "lem-kun-dimension-finite-type",
     "thm-amb-vector-bundle-purity"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; explicit transported Hom-bijection; sk-prop-an/thm-amb-vector-bundle-purity"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+    "place": "First two paragraphs; Stacks categories.tex Tag 0B65 for the adjunction transpose. Agent-written categorical pasting of the actual projection and trace equations."
    }
   },
   {
-   "text": "The map $\\eta_K^e$ is invertible by [thm-amb-vector-bundle-purity]. Apply $C_V$ to its two inverse equations. Step 10 identifies its image with $\\eta_{C_SK}^p$, so that map is invertible and its inverse is the transported inverse of the integration adjoint. This is precisely the vector-bundle identification named in the statement: [cor-pur-vector-bundle-purity] is used with the integration-adjoint normalization specified by the ordinary vector-bundle theorem and the definition of the transported exceptional inverse image. The equality has been proved for the maps themselves before taking inverses.\n\nStep 2 shows equality of the twist comparisons for two annihilating exponents after passage to a common larger one, and [lem-amb-cartier-kummer-map] gives the same independence for the Kummer class. Thus the two $h_q$ are equal. The other component is the unit, so the two $b_q$ are equal, their inverses and traces are equal, and their restrictions are equal by Step 5. Induction in Step 8 makes the affine-space maps equal. Uniqueness for the sheaf gluing in Step 9 makes the vector integrations equal. Finally the projection maps and the Hom-bijection in Steps 7 and 10 use no exponent, so their composites and transposes are equal. This proves every claimed exponent independence. The identity case $d=0$, the empty base, and ramified $A$ with $e(E/\\mathbf Q_\\ell)\\nmid n$ require no change: only the existence of an annihilating $\\ell^r$ and the flatness of the root line, not freeness or flatness of $A$ over $\\mathbf Z/\\ell^r$, entered the proof.",
+   "text": "For vectorExponentIndependence, apply lem-pur-vector-local-trace-exponent on each frame. The proved private ordinary_integration_transition combines these equations with VectorIntegrationNormalization. Its uniqueness lemma uses fullness of the degree-zero single functor to write an arbitrary normalized derived morphism as the chosen gluing isomorphism followed by a sheaf map; uniqueness of the gluing pair identifies that map with the chosen one. This gives the ordinary global trace transition. Package the pulled-back baseExponentComparison as a morphism of bounded-below coefficients using vectorCoefficient_plus. Naturality of compactSupportSiteComparison gives its square. Cancel the comparison isomorphisms, use vectorIntegrationSiteComparison at the two exponents, and functoriality transports the ordinary equality to the stated pro-etale equality. These categorical calculations are complete Lean proofs.",
    "uses": [
-    "thm-amb-vector-bundle-purity",
-    "cor-pur-vector-bundle-purity",
-    "lem-amb-cartier-kummer-map"
+    "lem-pur-vector-local-trace-exponent",
+    "def-amb-vector-integration",
+    "def-pur-proetale-vector-integration",
+    "lem-amb-finite-tate-site-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-vector-bundle-purity.md",
-    "place": "Proof first paragraph, inverse of the etale integration adjoint and its comparison-class transport; exponent independence by the explicit constructions above"
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/def-amb-vector-integration.proof.md",
+    "place": "Local degree-zero maps glue uniquely; root transition and ordered traces as in integration-exponent-transpose-transport Steps 6--10. Agent-written uniqueness and natural-isomorphism pasting calculation."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "def-weil-proper-morphism",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-coefficient-twists-detailed",
-  "lem-amb-cartier-kummer-map",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "def-weil-pbc-adjunction-mate",
-  "def-amb-p1-trace",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
-  "lem-pur-compact-support-site-coherence",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-pur-open-projection-site-transport",
-  "def-exchange-projection",
-  "def-kun-projection-formula-map",
-  "lem-weil-finite-compact-projection-formula",
-  "def-weil-pbc-composite-adjunction",
-  "lem-amb-affine-space-top-trace",
-  "def-asd-vector-bundle-zero-section",
-  "lem-amb-linear-trace-invariance",
-  "lem-pur-degree-zero-derived-map-gluing",
   "def-amb-vector-integration",
+  "def-pur-proetale-frame-integration",
+  "def-pur-proetale-vector-integration",
+  "def-pur-supported-projective-site-arrows",
+  "lem-amb-finite-tate-site-descent",
   "lem-pur-bounded-site-adjunction-transpose",
-  "lem-kun-dimension-finite-type",
-  "thm-amb-vector-bundle-purity",
-  "cor-pur-vector-bundle-purity"
+  "lem-pur-ordered-integration-comparison",
+  "lem-pur-supported-projective-chern-comparison",
+  "lem-pur-vector-local-trace-exponent",
+  "lem-pur-vector-tensor-ordinary-normalization",
+  "lem-pur-vector-tensor-projection-comparison",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-lem-geo-p1-cohomology",
+  "thm-amb-vector-bundle-purity"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099R and 09AF; categories.tex Tag 0B65; agent-written comparison of the particular normalized maps, using the existing DAG lemmas"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/thm-amb-vector-bundle-purity.proof.md",
+  "place": "Q4 completes vectorTensorComparison by the generic coefficient-first projection square, naturality of the canonical tensor comparison, the proved generic bounded transpose calculation, and ordinary integration normalization. The earlier projective, global integration, exponent and finite-type wrapper proofs are preserved."
  },
  "mathlib_searches": [
   {
@@ -373,10 +275,10 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-smooth-purity",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "lem-pur-vector-integration-site-comparison",
   "worker": "stage1",
-  "summary": "Repair of the human re-split return: extracted the four non-elementary arguments of Steps 6, 7, 9 and 10 into statement-only general helpers for compact-support site coherence, normalized open projection transport, degree-zero derived-map gluing and bounded etale-origin transpose normalization. Preserved the exact statement, Lean/audit record and all seven other proof steps. Each replacement now cites the helper and verifies its hypotheses; no step exceeds 2000 characters. All new helpers were searched in the current DAG, whole blueprint, source project and Mathlib with logged msearch calls.",
+  "summary": "Repair of the 14294-character proof: four independent statement-only nodes distribute supported projective normalization, coordinate-tower induction, frame descent, and exponent/tensor/adjoint transport. Existing finite Tate descent and generic coherence lemmas are reused, not duplicated. Parent statement and all Lean/audit/review metadata retained. All eleven original arguments are preserved verbatim with ownership in the report.",
   "blueprint": "cor-pur-dualizing-object-purity: normalization sentence and inverse diagonal identification, specifically the normalized vector-bundle integration at the normal-bundle endpoint. This supplies the map comparison used in its Steps 3 and 5; the vector-bundle route sk-prop-an is retained.",
   "tool_uses": [
    {
@@ -384,48 +286,8 @@
     "why": "Noetherian hypothesis for finite-type bases; a general geometric tool, not another smooth-purity route. No result of the item’s unit supplies this generic statement."
    },
    {
-    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "why": "Ensures trivializing opens and overlaps satisfy the existing Noetherian lemmas. No result of the item’s unit supplies this generic statement."
-   },
-   {
     "node": "lem-sf-comparison-pullback-exact",
     "why": "Exact constant-coefficient site comparison is needed before taking finite sums and cohomology. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "The canonical comparison square for scheme inverse images is a generic site tool. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Monoidal pullback comparison is a generic ringed-topos tool. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Unit and shift constraints for the specified derived tensor comparisons. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Counit normalization of the canonical site direct-image comparison. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "def-weil-pbc-adjunction-mate",
-    "why": "Explicit mate formula used to compare the actual unit and class adjuncts. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "Generic square of ringed topoi compares the proper projection morphisms. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "def-kun-projection-formula-map",
-    "why": "Specifies the ordinary etale proper-piece projection arrow by its counit mate. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-weil-finite-compact-projection-formula",
-    "why": "Invertibility of the compact projection map on the stated finite-Tor constructible inputs. No result of the item’s unit supplies this generic statement."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Finite absolute dimension of the finite-type projective completion supplies an integer compactification bound for the bounded-etale-origin adjunction; this is a generic dimension tool, not a replacement of the vector-bundle route."
    }
   ]
  },
@@ -450,14 +312,25 @@
   "lem-kun-dimension-finite-type"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q22-0924b2967",
-  "group": "Q22",
+  "reviewer": "NT-cc-Q89-e3c4499f8",
+  "group": "Q89",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-0924b2967 (reviewer sub-agent of L); spot-checked: Read the item, all 11 steps, the four new statement-only helpers, the unit and chapter records, the cited statements and the Stacks sources (09AF, 0GL1, 06XS, 0F7C/D/F, 03EM, 04TQ, 0B65). Steps 6, 7, 9 and 10, flagged by the return, now each cite a general helper and check its hypotheses. (1) lem-pur-bounded-site-adjunction-transpose is true. The bounded adjunction of thm-sf-ambient-adjoint-class Step 5 is built from lem-sf-class-compact-support-comparison, which is b_p^{-1}∘Rp_*(e_j^{-1}), i.e. B^{-1}. Unwinding Φ^{-1}(1) by naturality of B and ε^e and the ν triangle identity gives ε^p F_p(ρ_K) B = C_Y(ε^e_K), and the transpose formula follows. It generalizes the closed case lem-coef-site-closed-counit-transport and is not a duplicate. (2) lem-pur-open-projection-site-transport is true: γκ=1 by adjuncts, γ is invertible by 0GL1, j_!L is flat so both sides are in D^+, and C is compatible through the unit-normalized e_j. It is the derived extension of the sheaf-level normalization nodes. (3) lem-pur-compact-support-site-coherence is invertible on D^+, and its refinement, composition and restriction identities type-check and hold. It partly overlaps a clause of lem-sp-et-proet-coefficient-compatibility, but that node assumes separated schemes and ctf inputs and has no restriction clause, so this is not a duplicate. (4) lem-pur-degree-zero-derived-map-gluing is true: local vanishing of the cohomology sheaves, then truncation, then 06XS(1) with a=b=0, then sheaf-Hom gluing; the empty cover is fine. Step hypotheses checked: F=L_V(d)[2d] with t=1 and G=π̄^*K in D^+ (Step 7); finite cover, local concentration and a third use for uniqueness on C_S M^e (Step 9); dim of the completion finite by lem-kun-dimension-finite-type, D=0 for empty S, and π^× K≅J bounded by vector-bundle purity, so η^p=ρ_K C_V(η^e) as the statement says (Step 10). The four new nodes have the right shape (unsplit, no proof, created.item, blueprint.from/via, three search kinds), are in the item's own unit and restate no clause of the item. No new off-unit citation; the earlier tool uses stand. The statement is not weakened, the coefficient categories stay ordinary constant-A on both sites, and no SGA is cited. No fixes written. One remark for whoever later splits the transpose helper: it will need the construction in lem-sf-class-compact-support-comparison Step 5. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-e3c4499f8 (reviewer sub-agent of L); spot-checked: FIX with two repairs; the re-split itself is sound and nothing is weakened. I diffed the item against the side-live base (the reviewed 11-step proof of 2026-10-17, 14294 chars): only proof, proof_deps, proof_origin and split_report changed; the statement, stmt_deps, lean and reviewed fields are identical. Live has no competing re-split and the item is not on the dropped list. Every old step moved into a cited place: step 1 → new Step 1 plus the conclusions of lem-pur-affine-tower-integration-site-transport. Step 2 → the existing lem-amb-finite-tate-site-descent (sk-prop-an, on route), which states the root-projection τ, its tensor powers, pullback and r-transitions without ramification divisibility; no cycle. Steps 3-5 → lem-pur-p1-kummer-trace-site-transport. Steps 6, 7 (line part) and 8 → the tower node. Step 9 → lem-pur-vector-frame-integration-site-descent. Steps 7 (global part), 10 and 11 → lem-pur-integration-exponent-transpose-transport. The parent is now a 5-step assembly of 1887 chars (2056 after my edit), and the four statement-only nodes are of comparable size. The p1 node matches the item's P1 clause, but it is a real lemma whose output Step 3 needs as the tower node's restricted-line hypothesis, so it is not D1. The hand-offs chain correctly: the p1 node gives t_u^p B_u = C(t_u^e) with B = Rp_*(e_j)∘β; the tower node gives isomorphisms on every open, restriction compatibility and A_S[0]; these are exactly the frame node's hypotheses, and Step 5's η^p = ρ_K C_V(η^e) typechecks. Sources read: blueprint main-20261015 sk-prop-an lem-amb-affine-space-top-trace.proof.md and def-amb-vector-integration.proof.md, the statement of lem-amb-cartier-kummer-map, def-amb-p1-trace, compact-support-site-coherence and degree-zero-derived-map-gluing. Cases tested: S empty, d=0, d=1 (H^2_c(A^1)(1)=A), ramified A=O_E/ϖ (the root line has finite Tor amplitude, A need not be flat) and non-affine overlaps. No SGA, no added separatedness, no e|n hypothesis, no duplicates. Fault 1 (B3/B2): the four new statements describe in prose the pro-etale arrows h^p, b^p, t_q^p, the line counit, the ordered, frame and glued integrations, the projection/transpose/ρ arrows and the transition. 17 existing Lean-stated def-pur-* nodes in the item's own stmt_deps already define exactly these, and the new nodes did not cite them, which would also block their stage 2 (H2/H12). I added these citations and stmt_deps to each node with the index shift n'=n-1, r'=r-1, and fixed the tower node's hypothetical trace to the actual supported-Kummer restricted counit, the only one the parent uses; no conclusion changed and there is no cycle. Fault 2 (C4): the frame node assumes the coherence of lem-pur-compact-support-site-coherence and parent Step 4 did not discharge it; Step 4 now cites it (same unit) and proof_deps is updated. The tool_uses finite-type-over-noetherian and comparison-pullback-exact are accepted; both nodes are on the route anyway, so the declaration is redundant. Fixed files: fixes/dag/nodes/sec-smooth-purity/ — the four new nodes and the item.; 5 file(s) fixed by the reviewer"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.VectorIntegrationSiteComparison",
   "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.finiteTypeSiteComparison",
@@ -488,5 +361,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Re-delivery of RETURNed 7845f3f7. Only VectorTensorSiteEquations.lean changed (new ordinary_normalization field); the other 12 modules are identical. F1/F2 fixed: existing:true def nodes def-pur-open-site-comparison-arrows (openProjectionExtension/RestrictionComparison), def-pur-bounded-site-transpose-arrows (boundedSiteTranspose/Rho) and def-pur-vector-integration-adjunction-arrows (5 Etale.vectorBundlePurity* defs), signatures verbatim to the live source, node texts match the bodies; compactSupportSiteComparison cited via def-sf-compact-support-site-comparison-construction. F3 fixed: ∃ γ with VectorPurityGammaNormalized (unique: integration counit plus invertible projection) and adjunct = derivedTensorSymmetry ≫ γ.app K; the HEq sides have definitionally equal types (same letI instances, same rightDerivedUpperShriekAdjunction), so it is an Eq; the signed symmetry matches the coefficient-first projection convention. Mechanical finding: finite_tate_site_descent is used via .choose/choose_spec (twistComparison, exponent transition), constructed objects; lem-kun-tensor-sym's own recorded declaration is the def derivedTensorSymmetry; both genuine, PASS on that point. Item statement and proof equal live; not landed by another group. Advisory: boilerplate theorem stmt_deps in the retained new nodes; Nagata compactification instead of the projective completion; second readings are self-checks. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

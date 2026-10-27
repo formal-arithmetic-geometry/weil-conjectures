@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-adic-graded-residue-tensor-comparison",
+ "kind": "statement",
+ "title": "The actual graded kernel and its residue tensor comparison",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ a commutative ring in the independent coefficient universe, $J$ an ideal, $N$ an actual constant-$A$ pro-etale derived object [lem-sfb-adic-finite-reduction-data], and $n\\geq0$. Put $B=A/J^{n+2}$, $C=A/J$, and $I=\\ker(B\\to A/J^{n+1})$, the actual graded kernel of [lem-sfb-adic-coefficient-filtration-triangle]. The kernel of the surjection $r:B\\to C$ annihilates $I$. Descend its multiplication action along the kernel-quotient equivalence of $r$ to construct the $C$-module $I_C$ on the same additive group. Its restriction to $B$ is canonically the original $I$. If $A$ is Noetherian [def-weil-pbc-noetherian-ring], then $I_C$ is finitely generated over $C$ [def-weil-finitely-generated-module]. There is an isomorphism $L_n\\cong\\operatorname{Res}_r(N_0\\otimes_C^{\\mathbf L}\\underline{I_C}[0])$ in the actual constant-$B$ pro-etale derived category, where $L_n$ is the concretely defined graded layer and the residue tensor uses [lem-sfb-coefficient-constructible-constant-tensor]. The isomorphism has no Noetherianity, constructibility, completeness or boundedness assumptions.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BR, lemma-compare-truncations-constructible, second displayed isomorphism; derived balancing in sites-cohomology.tex Tags 06YY and 06YU."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-sfb-adic-coefficient-filtration-triangle",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-coefficient-constructible-constant-tensor",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "Lift a scalar in ker(r) and an element of I to elements of J and J^(n+1). Their product lies in J^(n+2), so multiplication vanishes in B. Use Module.IsTorsionBySet.module and the inverse kernel-quotient equivalence of the surjective r to construct the C-action. The identity semilinear map proves agreement with the B-action. When A is Noetherian, I is a finite ideal of B, and Module.Finite.of_surjective on that identity semilinear map proves C-finiteness.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For B=A/J^(n+2), C=A/J and r:B→C, constant realization commutes with restriction of scalars. Construct the comparison from the C-module sheafification unit precomposed by r; naturality of the ring sheafification unit proves B-linearity. The C-module sheafification unit is locally bijective. Its adjunction factorization through the B-module sheafification unit shows that the comparison is locally bijective on underlying additive sheaves, hence invertible. Apply this to the constructed residue module and the already proved identity restriction isomorphism of the kernel.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a K-flat resolution P of a representative of N_(n+1), over B itself. Extension of P along r is K-flat with no termwise-flatness requirement. The scalar-extension computation gives Q_C(change_r P)≅Lextend_r(N_(n+1)). The K-flat single-tensor comparison computes tensor with an arbitrary module in degree zero by termwise ordinary tensor on P, and likewise on change_r P.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings-all-independent",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix the constant C-module M associated with the residue kernel. Ordinary tensor cancellation and the two braidings give a natural isomorphism (- tensor_B Res_r M)≅change_r(-) tensor_C M followed by restriction. Applying its components in every degree gives an isomorphism of the termwise tensor complexes; naturality is exactly compatibility with their differentials. Localize it and compose with the two single-tensor computations and exact restriction factorization. This proves the derived single-module projection comparison without a flatness assumption on M.",
+   "uses": [
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-sf-ringed-kflat-single-tensor-comparison",
+    "lem-sfb-adic-finite-reduction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map the constant kernel restriction isomorphism through the single-complex functor, localization and derived tensor. Compose with the projection comparison and then tensor the canonical repeated-reduction isomorphism adicFiniteRho: Lextend_r(N_(n+1))≅N_0 with the constant residue module. This is the required isomorphism, with its B-action retained throughout.",
+   "uses": [
+    "lem-sfb-adic-finite-reduction-data",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "lem-sfb-adic-finite-reduction-data",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BR, lemma-compare-truncations-constructible, second displayed isomorphism; derived balancing in sites-cohomology.tex Tags 06YY and 06YU.",
+  "note": "Y3: resolve the larger-quotient object once, use the existing one-sided K-flat single-tensor computation and natural ordinary cancellation, then repeated reduction. All glue is proved in Lean; no new obligation is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived scalar extension tensor restricted module projection formula associativity",
+   "results": "8 algebraic tensor tower and scalar-extension comparison hits, including ModuleCat.extendScalarsComp_hom_app_one_tmul; no derived sheaf graded-layer comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; only ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient.factor, Function.Surjective",
+   "results": "1 hit: Ideal.Quotient.factor_surjective; used in the construction.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; only ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*restrictScalars|restrictScalars.*tensor",
+   "results": "25 Mathlib tensor tower and restriction-of-scalars hits; no derived sheaf comparison.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; only ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of successive ideal power quotients is a module over the residue quotient and derived tensor factors through that quotient",
+   "results": "8 hits, including Ideal.powQuotPowSuccLinearEquivMapMkPowSuccPow and Ideal.Quotient.factorPowSucc. Algebraic ingredients only.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; only ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicGradedLayerConstructibility",
+  "date": "2026-10-26",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Tag 09BR second displayed isomorphism: identify the graded layer with the residue tensor before applying constructibility; integral-models proof step (1).",
+   "via": [
+    "lem-sfb-adic-graded-layer-constructibility",
+    "lem-sfb-adic-finite-reduction-constructibility",
+    "lem-sfb-adic-finite-etale-origins",
+    "lem-sfb-adic-constructible-finite-reductions",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicGradedResidueTensorComparison",
+  "file": "lean/Sheaf/Paper/AdicGradedResidueTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicFiniteGradedLayer_residueTensor",
+  "statement": "theorem adicFiniteGradedLayer_residueTensor (X : Scheme.{u})\n    {A : Type (max v (u + 1))} [CommRing A] (J : Ideal A)\n    (N : adicFiniteAmbient.{u, v} X A) (n : ℕ) :\n    Nonempty (adicFiniteGradedLayer.{u, v} X J N n ≅\n      (dres (adicFiniteConstantMap (adicFiniteFactor J (Nat.zero_le (n + 1)))\n        (coefficientProEtaleModelTopology.{u, v} X))).obj\n          (coefficientConstantTensor.{u, v} X (adicFiniteCoeff J 0)\n            (adicFiniteReduction.{u, v} X J N 0) (adicFiniteResidueGradedModule J n)))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicFiniteGradedModule_torsion",
+   "AlgebraicGeometry.Scheme.adicFiniteResidueGradedModule",
+   "AlgebraicGeometry.Scheme.adicFiniteResidueGradedModule_smul",
+   "AlgebraicGeometry.Scheme.adicFiniteResidueGradedModule_restrictIso",
+   "AlgebraicGeometry.Scheme.adicFiniteResidueGradedModule_finite",
+   "AlgebraicGeometry.Scheme.adicFiniteGradedLayer_residueTensor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261026T152456-L-1130979",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T203341-L-3520570",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

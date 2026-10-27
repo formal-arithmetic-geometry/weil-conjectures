@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-finite-normal-domain-norm-prime",
+ "kind": "statement",
+ "title": "Field norm on a finite domain algebra over a normal domain and contraction of primes",
+ "statement": "Let $B\\hookrightarrow A$ be an inclusion of commutative integral domains, meaning nonzero commutative rings without zero divisors, with $A$ a finite $B$-module [def-weil-finitely-generated-module]. Let $L\\hookrightarrow K$ be a finite-dimensional field extension [def-pc-field-extension], with embeddings $B\\hookrightarrow L$ and $A\\hookrightarrow K$ whose square commutes and makes $L$ a field of fractions of $B$ and $K$ a field of fractions of $A$ (every field element is a quotient of images with nonzero denominator). Suppose $B$ is integrally closed in $L$ [def-weil-pbc-normal-ring]. Put $d=\\dim_LK\\geq1$ [def-weil-vector-space-dimension], and define $N_{K/L}(x)=\\det_L(z\\mapsto xz\\mid K)$ [def-weil-endomorphism-determinant]. There is a unique map $n:A\\to B$ whose image in $L$ is $N_{K/L}(a)$ for each $a\\in A$; it preserves multiplication and $1$, and $n(b)=b^d$ for $b\\in B$. For every $a\\in A$ there is a monic $Q_a(T)\\in B[T]$ [def-weil-polynomial-ring] with $Q_a(a)=0$ whose coefficientwise image in $L[T]$ is the monic polynomial of least degree annihilating $a\\in K$. If $m=\\deg Q_a\\geq1$ and $e=\\dim_{L(a)}K\\geq1$, where $L(a)$ is the smallest subfield of $K$ containing $L$ and $a$, then $n(a)=((-1)^mQ_a(0))^e$. For every prime ideal $\\mathfrak q\\subset A$ and every $a\\in\\mathfrak q$, one has $n(a)\\in\\mathfrak q\\cap B$. Here prime means a proper ideal such that $xy\\in\\mathfrak q$ implies $x\\in\\mathfrak q$ or $y\\in\\mathfrak q$; contraction uses the specified inclusion. No normality of $A$, Noetherian, flatness or separability hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), restriction of the fraction-field norm in the first paragraph and the prime-ideal argument in the final paragraph; with Algebra Tag 00H7 (algebra-lemma-minimal-polynomial-normal-domain) and Fields Tag 0BIH (fields-lemma-trace-and-norm-from-minimal-polynomial)."
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-pc-field-extension",
+  "def-weil-pbc-normal-ring",
+  "def-weil-vector-space-dimension",
+  "def-weil-endomorphism-determinant",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a\\in A$. By [lem-weil-pbc-finite-algebra-is-integral], module-finiteness of $A$ over $B$ implies that $a$ is integral over $B$. Apply [lem-sfb-integral-minpoly-fraction-descent] to $B\\hookrightarrow A$: the base $B$ is integrally closed and both rings are domains. It gives a monic $Q_a\\in B[T]$ with $Q_a(a)=0$ whose image is the minimal polynomial $P_a$ over $L$. The specified fraction fields are the fraction fields used by that lemma: the identification sends $b/c$ to the quotient of the specified images, and similarly for $A$ and $K$. These identifications commute with the inclusions because the given square commutes; hence the lemma applies to the specified extension, not a different embedding.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-sfb-integral-minpoly-fraction-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GK (algebra-lemma-finite-is-integral) and 00H7 (algebra-lemma-minimal-polynomial-normal-domain)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-field-norm-minpoly] to the given finite extension $L\\hookrightarrow K$ and the image of $a$. Since coefficientwise inclusion is injective, the monic polynomials $Q_a$ and $P_a$ have the same degree $m$. The cited statement gives $m\\geq1$, $e=\\dim_{L(a)}K\\geq1$, and $N_{K/L}(a)=((-1)^mP_a(0))^e$. Therefore this norm is the image of the element $((-1)^mQ_a(0))^e\\in B$. Define $n(a)$ to be that element. As $a$ was arbitrary, this defines $n:A\\to B$ with the required comparison and formula. Any other such map agrees pointwise after the injective embedding $B\\hookrightarrow L$, so equals $n$.",
+   "uses": [
+    "lem-sfb-finite-field-norm-minpoly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), first paragraph; signed formula from Fields Tag 0BIH (fields-lemma-trace-and-norm-from-minimal-polynomial)."
+   }
+  },
+  {
+   "text": "By [lem-sfb-finite-field-norm-minpoly], the field norm preserves multiplication and $1$ and takes each scalar $b\\in L$ to $b^d$. Thus the images in $L$ of $n(aa')$ and $n(a)n(a')$ coincide, as do those of $n(1)$ and $1$, and those of $n(b)$ and $b^d$ for $b\\in B$. Injectivity of $B\\hookrightarrow L$ gives each asserted equality in $B$.",
+   "uses": [
+    "lem-sfb-finite-field-norm-minpoly"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BIF (fields-definition-trace-norm), paragraph immediately after the definition; Divisors Tag 0BD3, property (1)."
+   }
+  },
+  {
+   "text": "Let $a\\in\\mathfrak q$, put $c_0=Q_a(0)$, and write $Q_a(T)=c_0+T R_a(T)$ with $R_a\\in B[T]$ by shifting the positive-degree coefficients. The equality $Q_a(a)=0$ gives $c_0=-aR_a(a)$ in $A$. Closure of the ideal $\\mathfrak q$ under multiplication and subtraction implies that the image of $c_0$ belongs to $\\mathfrak q$. The formula from step 2 and $e\\geq1$ then imply that the image of $n(a)=((-1)^m c_0)^e$ belongs to $\\mathfrak q$. Since $n(a)\\in B$, it belongs to $\\mathfrak q\\cap B$ by the definition of contraction. This argument includes $a=0$ and $m=1$, and uses only the ideal axioms; primality is more than is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), final paragraph, with constant coefficient c_0 and the sign retained."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-sfb-integral-minpoly-fraction-descent",
+  "lem-sfb-finite-field-norm-minpoly"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD3 (divisors-lemma-norm-in-normal-case), affine norm construction and prime-ideal argument; Algebra Tags 00GK, 00H7 and Fields Tags 0BIF, 0BIH supply the three existing cited leaves."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "norm.*mem|mem.*norm|intNorm",
+   "results": "{\"t\": \"2026-10-22T06:09:48Z\", \"tool\": \"grep\", \"query\": \"norm.*mem|mem.*norm|intNorm\", \"sub\": \"RingTheory/Norm\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.intNorm and its comparison lemmas require an integrally closed source algebra or an integral-closure algebra; Ideal.relNorm_le_comap additionally assumes Dedekind-domain hypotheses. The present statement allows a nonnormal finite source domain and includes its signed minpoly formula and prime-contraction property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Field norm of an integral element over an integrally closed domain belongs to that domain and maps prime ideal elements into the contracted prime ideal",
+   "results": "{\"t\": \"2026-10-22T06:09:49Z\", \"tool\": \"leansearch\", \"query\": \"Field norm of an integral element over an integrally closed domain belongs to that domain and maps prime ideal elements into the contracted prime ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intNormAux\", \"Algebra.intNorm\", \"Algebra.isIntegral_norm\", \"RingOfIntegers.norm\", \"Ideal.intNorm_mem_spanNorm\", \"Algebra.algebraMap_intNorm_fractionRing\", \"RingOfIntegers.dvd_norm\", \"Algebra.map_intNormAux\"], \"digest\": \"839b8b17defbf422\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.intNorm and its comparison lemmas require an integrally closed source algebra or an integral-closure algebra; Ideal.relNorm_le_comap additionally assumes Dedekind-domain hypotheses. The present statement allows a nonnormal finite source domain and includes its signed minpoly formula and prime-contraction property."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, Ideal.IsPrime",
+   "results": "{\"t\": \"2026-10-22T06:09:49Z\", \"tool\": \"loogle\", \"query\": \"Algebra.norm, Ideal.IsPrime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.intNorm and its comparison lemmas require an integrally closed source algebra or an integral-closure algebra; Ideal.relNorm_le_comap additionally assumes Dedekind-domain hypotheses. The present statement allows a nonnormal finite source domain and includes its signed minpoly formula and prime-contraction property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite inclusion of domains over an integrally closed domain, the fraction field norm restricts to a multiplicative ring-valued map and sends each prime ideal into its contraction",
+   "results": "{\"t\": \"2026-10-22T06:10:00Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite inclusion of domains over an integrally closed domain, the fraction field norm restricts to a multiplicative ring-valued map and sends each prime ideal into its contraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.relNorm_le_comap\", \"Ideal.relNorm_algebraMap'\", \"Algebra.algebraMap_intNorm_fractionRing\", \"Ideal.relNorm_algebraMap\", \"Ideal.absNorm_algebraMap\", \"Algebra.intNorm_eq_of_isLocalization\", \"Ideal.spanIntNorm_localization\", \"Algebra.intNormAux\"], \"digest\": \"121d9015212c039c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.intNorm and its comparison lemmas require an integrally closed source algebra or an integral-closure algebra; Ideal.relNorm_le_comap additionally assumes Dedekind-domain hypotheses. The present statement allows a nonnormal finite source domain and includes its signed minpoly formula and prime-contraction property."
+  },
+  {
+   "tool": "grep",
+   "query": "intNormAux|map_intNormAux|relNorm_le_comap|norm.*mem.*[Ii]deal|norm.*[Pp]rime",
+   "results": "{\"t\": \"2026-10-22T06:11:04Z\", \"tool\": \"grep\", \"query\": \"intNormAux|map_intNormAux|relNorm_le_comap|norm.*mem.*[Ii]deal|norm.*[Pp]rime\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Inertia.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegrallyClosed.lean\", \"Mathlib/RingTheory/ChainOfDivisors.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\"], \"digest\": \"c8cfdcc3d0fd9f25\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.intNorm and its comparison lemmas require an integrally closed source algebra or an integral-closure algebra; Ideal.relNorm_le_comap additionally assumes Dedekind-domain hypotheses. The present statement allows a nonnormal finite source domain and includes its signed minpoly formula and prime-contraction property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The norm of a finite extension Frac S over Frac R for finite domain inclusion R into S with R normal lies in R and belongs to the contraction of every prime of S containing the element",
+   "results": "{\"t\": \"2026-10-22T06:11:23Z\", \"tool\": \"leanfinder\", \"query\": \"The norm of a finite extension Frac S over Frac R for finite domain inclusion R into S with R normal lies in R and belongs to the contraction of every prime of S containing the element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.algebraMap_intNorm\", \"Algebra.algebraMap_intNorm_fractionRing\", \"Algebra.map_intNormAux\", \"Algebra.intNormAux\", \"Ideal.relNorm_algebraMap'\", \"Algebra.intNorm_eq_of_isLocalization\", \"Ideal.spanIntNorm_localization\", \"Ideal.relNorm_algebraMap\"], \"digest\": \"d21305551f4c8453\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Algebra.intNorm and its comparison lemmas require an integrally closed source algebra or an integral-closure algebra; Ideal.relNorm_le_comap additionally assumes Dedekind-domain hypotheses. The present statement allows a nonnormal finite source domain and includes its signed minpoly formula and prime-contraction property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite domain algebra over an integrally closed domain the fraction field norm restricts to the base and sends prime ideal elements into the contracted prime",
+   "results": "{\"t\": \"2026-10-23T09:57:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite domain algebra over an integrally closed domain the fraction field norm restricts to the base and sends prime ideal elements into the contracted prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.relNorm_algebraMap'\", \"Algebra.algebraMap_intNorm\", \"Algebra.algebraMap_intNorm_fractionRing\", \"Ideal.spanNorm_le_comap\", \"Ideal.relNorm_le_comap\", \"Ideal.relNorm\", \"Ideal.spanIntNorm_localization\", \"Ideal.absNorm_algebraMap\"], \"digest\": \"34784e74e7298a8d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: intNorm and ideal-norm comparison hits assume an integrally closed source or integral-closure algebra; the item permits a nonnormal A. Norm/minpoly formula hits cover only the existing leaf lem-sfb-finite-field-norm-minpoly. The prime contraction argument and restriction to B are written in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.norm, minpoly",
+   "results": "{\"t\": \"2026-10-23T09:57:40Z\", \"tool\": \"loogle\", \"query\": \"Algebra.norm, minpoly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Algebra.PowerBasis.norm_gen_eq_coeff_zero_minpoly\", \"Algebra.PowerBasis.norm_gen_eq_prod_roots\", \"Algebra.norm_eq_prod_embeddings_gen\", \"IntermediateField.AdjoinSimple.norm_gen_eq_prod_roots\", \"Algebra.norm_eq_prod_roots\", \"Algebra.discr_powerBasis_eq_norm\"], \"digest\": \"e9ec6150f151b612\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: intNorm and ideal-norm comparison hits assume an integrally closed source or integral-closure algebra; the item permits a nonnormal A. Norm/minpoly formula hits cover only the existing leaf lem-sfb-finite-field-norm-minpoly. The prime contraction argument and restriction to B are written in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "norm_eq.*minpoly|norm_eq_pow|map_intNormAux",
+   "results": "{\"t\": \"2026-10-23T09:57:40Z\", \"tool\": \"grep\", \"query\": \"norm_eq.*minpoly|norm_eq_pow|map_intNormAux\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Norm/Transitivity.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/AbsNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\"], \"digest\": \"7487e718e5d20255\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: intNorm and ideal-norm comparison hits assume an integrally closed source or integral-closure algebra; the item permits a nonnormal A. Norm/minpoly formula hits cover only the existing leaf lem-sfb-finite-field-norm-minpoly. The prime contraction argument and restriction to B are written in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite algebra over a commutative ring is integral every element satisfies a monic polynomial",
+   "results": "{\"t\": \"2026-10-23T10:06:32Z\", \"tool\": \"leansearch\", \"query\": \"A finite algebra over a commutative ring is integral every element satisfies a monic polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isIntegral_def\", \"Algebra.IsIntegral\", \"Algebra.IsIntegral.of_finite\", \"Algebra.IsIntegral.isIntegral\", \"integralClosure.AlgebraIsIntegral\", \"Algebra.IsAlgebraic.isIntegral\", \"Algebra.isAlgebraic_iff_isIntegral\", \"IsIntegral.of_finite\"], \"digest\": \"baee471e971d19dc\"}",
+   "date": "2026-10-23",
+   "verdict": "Supporting match only: finite-implies-integral is already the Mathlib leaf lem-weil-pbc-finite-algebra-is-integral; reuse it. This does not state the norm or prime-contraction conclusion of the item."
+  },
+  {
+   "tool": "grep",
+   "query": "isIntegral_of_finite|isIntegral_of_noetherian",
+   "results": "{\"t\": \"2026-10-23T10:06:32Z\", \"tool\": \"grep\", \"query\": \"isIntegral_of_finite|isIntegral_of_noetherian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\", \"Mathlib/RingTheory/RingHom/QuasiFinite.lean\"], \"digest\": \"5f2ab61eac7988f5\"}",
+   "date": "2026-10-23",
+   "verdict": "Supporting match only: finite-implies-integral is already the Mathlib leaf lem-weil-pbc-finite-algebra-is-integral; reuse it. This does not state the norm or prime-contraction conclusion of the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a module finite extension of domains with integrally closed base the determinant norm lies in the base and norm of an element of any ideal belongs to its contraction even if the upper domain is not normal",
+   "results": "{\"t\": \"2026-10-23T10:10:22Z\", \"tool\": \"leansearch\", \"query\": \"In a module finite extension of domains with integrally closed base the determinant norm lies in the base and norm of an element of any ideal belongs to its contraction even if the upper domain is not normal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.norm_mem_relNorm\", \"Ideal.intNorm_mem_spanNorm\", \"Algebra.intNorm_eq_norm\", \"Algebra.norm\", \"Ideal.norm_mem_spanNorm\", \"Ideal.relNorm_singleton\", \"Ideal.relNorm_le_comap\", \"Ring.instIsIntegrallyClosedNormalClosure\"], \"digest\": \"24c4b9f602e050e7\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: intNorm and ideal-norm comparison hits assume an integrally closed source or integral-closure algebra; the item permits a nonnormal A. Norm/minpoly formula hits cover only the existing leaf lem-sfb-finite-field-norm-minpoly. The prime contraction argument and restriction to B are written in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Norm of an integral element expressed by the constant coefficient of its minimal polynomial lies in the base integrally closed domain and in each contracted prime containing that element",
+   "results": "{\"t\": \"2026-10-23T10:10:34Z\", \"tool\": \"leanfinder\", \"query\": \"Norm of an integral element expressed by the constant coefficient of its minimal polynomial lies in the base integrally closed domain and in each contracted prime containing that element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.algebraMap_intNorm\", \"Algebra.isIntegral_norm\", \"Algebra.intNorm_intNorm\", \"Algebra.intNorm\", \"Algebra.map_intNormAux\", \"Algebra.intNormAux\", \"Algebra.intNorm_eq_of_isLocalization\", \"Ideal.intNorm_mem_spanNorm\"], \"digest\": \"92c2e7c70ed4b9b1\"}",
+   "date": "2026-10-23",
+   "verdict": "No match for the whole item: intNorm and ideal-norm comparison hits assume an integrally closed source or integral-closure algebra; the item permits a nonnormal A. Norm/minpoly formula hits cover only the existing leaf lem-sfb-finite-field-norm-minpoly. The prime contraction argument and restriction to B are written in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-integral-finite-sheaf-norm",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree. Auxiliary input: Existence of an ample invertible sheaf descends through a finite cover of a normal integral scheme. Tag 0BD3 (divisors-lemma-norm-in-normal-case); the norm of positive degree is defined in Section 0BCX (divisors-section-norms), conditions (1) and (2). Re-split: Tag 0BD3 (divisors-lemma-norm-in-normal-case), restriction of the fraction-field norm in the first paragraph and the prime-ideal argument in the final paragraph; with Algebra Tag 00H7 (algebra-lemma-minimal-polynomial-normal-domain) and Fields Tag 0BIH (fields-lemma-trace-and-norm-from-minimal-polynomial).",
+   "via": [
+    "lem-sfb-normal-integral-finite-sheaf-norm",
+    "lem-sfb-finite-normal-ample-descent",
+    "lem-sfb-semilinear-sylow-good-components",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-normal-domain-norm-prime",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused three existing Mathlib leaves for finite-implies-integral, minimal-polynomial descent, and the finite-field norm formula. Four steps construct the map, prove its laws by injectivity, and prove prime contraction by the explicit polynomial factorization Q(T)=Q(0)+TR(T). No new nodes, no Lean changes or compiles. Reviewed the signed formula, arbitrary specified fraction-field embeddings, inseparable extensions and nonnormal source domains.",
+  "blueprint": "Inherited auxiliary algebra input below det-thm-sf-ctf-stability-direct-images proof (3), through the existing finite-normal ample-descent and sheaf-norm chain. blueprint_refs.py ancestor returns None; inherited from.node=null and via are preserved. Steps 1-2 realize the coefficient descent and norm restriction in 0BD3 first paragraph, step 3 its degree law, step 4 its final prime-ideal paragraph. Latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3) and the unit were read; no chapter or unit route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-9d7a1123c",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-9d7a1123c (reviewer sub-agent of L); spot-checked: I read the item in full. The statement, stmt_deps, source and blueprint are byte-identical to the live unsplit node, there are no new nodes and there is no repair note. Sources read: Stacks 0BD3 (divisors.tex 3826-3867), 00H7 (algebra.tex 8499) and 0BIH (fields.tex 2426). 0BD3's b_0 slip and missing sign are named under 'Source error'; the item's signed formula ((-1)^m Q(0))^e = (-1)^[K:L] a_d^e matches 0BIH. Step 1: the finite-is-integral leaf (00GK) and the minpoly-descent leaf (00H7) both apply. B is integrally closed and both rings are domains, and the specified L and K are identified with Frac(B) and Frac(A) by quotients of images, compatibly with the commuting square. Step 2: the field-norm leaf gives m,e>=1 and the signed formula; deg Q = deg P because Q is monic and B->L is injective; n is defined explicitly and is unique by injectivity. Step 3: the multiplicativity, 1 and b^d laws pass through the injective B->L. Step 4 (elementary): Q = c0 + T R(T) gives c0 = -aR(a) in q, so n(a) = ±c0^e lies in q∩B with e>=1. I checked a=0, B=A, the scalar law, the inseparable case F_p(t^{1/p}) including p=2, the non-normal Z[2i] over Z, and q=0; all hold. The rg search for 0BD3, 00H7 and 0BIH turned up no duplicate. The parent sheaf-norm node uses exactly the unchanged clauses, and there is no cycle. All cited nodes are Mathlib leaves, so no tool_uses are needed, and there is no SGA citation. No fixes."
+ }
+}

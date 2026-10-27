@@ -1,0 +1,222 @@
+{
+ "id": "def-sf-derived-argument-first-evaluation",
+ "kind": "definition",
+ "title": "Argument-first evaluation convention for derived Hom",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $C$ be a preadditive category, $T:C\\times C\\to C$ a tensor bifunctor, $J$ a predicate on $C^{\\mathrm{op}}\\times C$, and $H:J\\to C$ a permitted internal-Hom functor. Let $S$ be partial closed data with Hom-first evaluation $\\operatorname{ev}_{M,N}:T(H(M,N),M)\\to N$ [def-pod-partial-closed-interfaces]. For a specified family of symmetry isomorphisms $\\beta_{U,V}:T(U,V)\\xrightarrow{\\sim}T(V,U)$, define argument-first evaluation at each permitted pair $(M,N)$ to be $\\beta_{M,H(M,N)}$ followed by $\\operatorname{ev}_{M,N}$, a map $T(M,H(M,N))\\to N$. No naturality or symmetry identities beyond the supplied isomorphisms are required for this definition.",
+ "stmt_deps": [
+  "def-pod-partial-closed-interfaces"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX (remark-pullback-internal-hom), evaluation paragraph immediately following the remark; derived convention from sites-cohomology.tex Tag 08J9 (lemma-internal-hom), as recorded in podArgumentFirstEvaluation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "CommonLifts|commonFrobenius|commonModelTensor|commonModelPullbackComponent|podArgumentFirstEvaluation",
+   "results": {
+    "t": "2026-10-24T17:12:16Z",
+    "tool": "grep",
+    "query": "CommonLifts|commonFrobenius|commonModelTensor|commonModelPullbackComponent|podArgumentFirstEvaluation",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "No Mathlib hits; reuse the published project declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common-stage constructible Frobenius lifts of pullback direct image compact support exceptional pullback tensor with normalized mate maps",
+   "results": {
+    "t": "2026-10-24T17:12:16Z",
+    "tool": "leansearch",
+    "query": "Common-stage constructible Frobenius lifts of pullback direct image compact support exceptional pullback tensor with normalized mate maps",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.frobeniusMorphism_mate",
+     "CategoryTheory.frobeniusMorphism",
+     "PerfectRing.lift_apply",
+     "Perfection.lift_apply_apply_coe",
+     "PerfectRing.liftAux_apply",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.g",
+     "Perfection.lift",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift"
+    ],
+    "digest": "dedf811e525ab477"
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib hits supply no exact project interface; reuse the published project declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Argument-first evaluation from partial tensor Hom transposition and the symmetry of the tensor product",
+   "results": {
+    "t": "2026-10-24T17:12:17Z",
+    "tool": "leanfinder",
+    "query": "Argument-first evaluation from partial tensor Hom transposition and the symmetry of the tensor product",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.rTensorHomToHomRTensor",
+     "LinearMap.rTensor_comm",
+     "LinearMap.lTensor_comm",
+     "LinearMap.rTensor_comp_flip_mk",
+     "rTensorHomEquivHomRTensor_apply",
+     "homTensorHomEquiv_apply",
+     "LinearMap.rTensor_comp_comm",
+     "homTensorHomEquiv"
+    ],
+    "digest": "c13aec6fec58e7d0"
+   },
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib hits supply no exact project interface; reuse the published project declarations."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "CommonLifts|commonFrobenius|commonModelTensor|commonModelPullbackComponent|podArgumentFirstEvaluation; blueprint searches common-stage lift / argument-first evaluation",
+   "results": "No hits in lean/WeilConjectures. Exact definitions are in Sheaf/Paper/ConstructibleMateCoherence and Sheaf/Paper/DerivedAutomorphismHomEvaluation. DAG declaration-name search found only theorem owners for these definitions; existing partial-closed and Weil-lift owner nodes do not own them. Both blueprint searches returned 0 nodes.",
+   "date": "2026-10-24",
+   "verdict": "Add definition-node ownership of the existing declarations, with no new Lean definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-chosen-duality-exchange",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Argument-first evaluation used in the internal-Hom transposition.",
+   "via": [
+    "lem-sf-weil-chosen-duality-exchange",
+    "lem-sf-weil-upper-shriek-verdier-conjugate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedAutomorphismHomEvaluation",
+  "declaration": "WeilConjectures.podArgumentFirstEvaluation",
+  "declarations": [
+   "WeilConjectures.podArgumentFirstEvaluation"
+  ],
+  "statement": "def podArgumentFirstEvaluation {C : Type a} [Category.{b} C] [Preadditive C]\n    {T : C × C ⥤ C} {J : ObjectProperty (Cᵒᵖ × C)} {H : J.FullSubcategory ⥤ C}\n    (S : PodPartialClosed T J H)\n    (β : ∀ M N : C, T.obj (M, N) ≅ T.obj (N, M)) (P : J.FullSubcategory)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Existing published declaration in Sheaf.Paper.DerivedAutomorphismHomEvaluation. This owner is added for the plain argument-first evaluation construction; the theorem derivedAutomorphismHomEvaluation remains a proof dependency only."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4851a5d6e",
+  "group": "NX",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4851a5d6e",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at aaa17dc6. Lean module byte-identical to aaa17dc6, whose maths was already found correct. Item node changes only stmt_deps and lean.note: lem-pur-derived-pullback-tensor-iso replaced by def-sf-rational-common-tensor-symmetries (owns pullbackTensorCommonBraiding and its _existsUnique lemma, used at line 196); added def-weil-frobenius-square-exchange (geometricCompactification, lines 246-248) and def-sf-operation-stages (SixFunctorCommonStages, line 237). All three are split definition nodes present in the snapshot, so on the base. Statement, proof, source and lean.statement verbatim and unchanged. Report has Worker report, Second reading by NX and an accurate repair section. No file changed, no compile run. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T180423-L-3989163",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.podArgumentFirst_common",
+   "WeilConjectures.podArgumentFirst_integral_rational",
+   "WeilConjectures.podCommonClosed_existsUnique",
+   "WeilConjectures.podCommonHomComparison_comp",
+   "WeilConjectures.podCommonHomComparison_laws",
+   "WeilConjectures.podCompletedModuleComp_existsUnique",
+   "WeilConjectures.podCompletedToTower_laws",
+   "WeilConjectures.podDerivedHomShift_existsUnique",
+   "WeilConjectures.podFiniteHomComparison_comp",
+   "WeilConjectures.podFiniteHomComparison_laws",
+   "WeilConjectures.podFiniteHomComparison_shift",
+   "WeilConjectures.podFiniteRestrictionOrdinary_existsUnique",
+   "WeilConjectures.podHomComplexShift_existsUnique",
+   "WeilConjectures.podHomReductionSquare",
+   "WeilConjectures.podIntegralHomComparison_comp",
+   "WeilConjectures.podIntegralHomComparison_laws",
+   "WeilConjectures.podIntegralPullbackComp_normalization",
+   "WeilConjectures.podIntegralRationalHomComparison_shift",
+   "WeilConjectures.podIntegralReindexedHom_shift",
+   "WeilConjectures.podLimitReindexing_existsUnique",
+   "WeilConjectures.podOrdinaryLimitReindexing_existsUnique",
+   "WeilConjectures.podRationalClosed_existsUnique",
+   "WeilConjectures.podRationalHomComparison_comp",
+   "WeilConjectures.podRationalHomComparison_laws",
+   "WeilConjectures.podReductionReindexingMap_laws",
+   "WeilConjectures.podSystemHomComparison_fiber",
+   "WeilConjectures.podSystemHomComparison_laws",
+   "WeilConjectures.podSystemNormalized"
+  ],
+  "sorry_after": [
+   "WeilConjectures.podArgumentFirst_common",
+   "WeilConjectures.podArgumentFirst_integral_rational",
+   "WeilConjectures.podCommonClosed_existsUnique",
+   "WeilConjectures.podCommonHomComparison_comp",
+   "WeilConjectures.podCommonHomComparison_laws",
+   "WeilConjectures.podCompletedModuleComp_existsUnique",
+   "WeilConjectures.podDerivedHomShift_existsUnique",
+   "WeilConjectures.podFiniteHomComparison_comp",
+   "WeilConjectures.podFiniteHomComparison_laws",
+   "WeilConjectures.podFiniteHomComparison_shift",
+   "WeilConjectures.podFiniteRestrictionOrdinary_existsUnique",
+   "WeilConjectures.podHomReductionSquare",
+   "WeilConjectures.podIntegralHomComparison_comp",
+   "WeilConjectures.podIntegralHomComparison_laws",
+   "WeilConjectures.podIntegralPullbackComp_normalization",
+   "WeilConjectures.podIntegralRationalHomComparison_shift",
+   "WeilConjectures.podIntegralReindexedHom_shift",
+   "WeilConjectures.podLimitReindexing_existsUnique",
+   "WeilConjectures.podOrdinaryLimitReindexing_existsUnique",
+   "WeilConjectures.podRationalClosed_existsUnique",
+   "WeilConjectures.podRationalHomComparison_comp",
+   "WeilConjectures.podRationalHomComparison_laws",
+   "WeilConjectures.podReductionReindexingMap_laws",
+   "WeilConjectures.podSystemHomComparison_fiber",
+   "WeilConjectures.podSystemHomComparison_laws",
+   "WeilConjectures.podSystemNormalized"
+  ]
+ }
+}

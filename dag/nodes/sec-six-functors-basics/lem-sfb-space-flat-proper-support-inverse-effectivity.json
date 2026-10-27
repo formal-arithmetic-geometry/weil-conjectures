@@ -1,0 +1,208 @@
+{
+ "id": "lem-sfb-space-flat-proper-support-inverse-effectivity",
+ "kind": "statement",
+ "title": "Effectiveness of flat proper-support modules over inverse ring sequences",
+ "statement": "Let $(A_n)_{n\\geq1}$ be an inverse sequence of commutative rings with surjective transition maps whose kernels are locally nilpotent (every element of each kernel is nilpotent), and put $A=\\varprojlim_n A_n$. Let $X\\to\\operatorname{Spec}A$ be a separated finitely presented algebraic space [def-pc-scheme, def-trf-algebraic-space, def-sfb-space-morphism-properties, def-weil-affine-spectrum] in the universes of [def-weil-size-convention], and put $X_n=X\\times_A\\operatorname{Spec}A_n$ [lem-trf-space-fibre-products-etale-covers]. Let $M_n$ be finitely presented quasi-coherent $\\mathcal O_{X_n}$-modules, flat over $A_n$, with support proper over $A_n$, and specified isomorphisms $M_n\\otimes_{A_n}A_{n-1}\\simeq M_{n-1}$ for $n\\geq2$. Finite presentation means etale locally a cokernel between finite rank free modules. Relative flatness is stalkwise flatness on etale charts over base local rings [def-pc-scheme-module-flat-over]. Proper support means $M_n\\simeq i_*N$ for a closed immersion $i:Z\\hookrightarrow X_n$ with $Z\\to\\operatorname{Spec}A_n$ proper and $N$ finite type quasi-coherent [def-sfb-space-proper-quot-functor]. Tensor pullback and quasi-coherent modules use [def-trf-space-etale-module-functors, def-trf-space-quasi-coherent-module]. Then there exists a finitely presented quasi-coherent module $M$ on $X$, flat over $A$ with support proper over $A$, and isomorphisms $M\\otimes_A A_n\\simeq M_n$ compatible with every specified transition isomorphism. No flatness of $X$ over $A$ and no Noetherian hypothesis on the rings is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tags 0CX4 (situation-existence), 0CXB (theorem-existence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "def-pc-scheme-module-flat-over",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-inverse-modules-near-special-fibre] to the specified system. It gives an open $W$ containing the common infinitesimal locus $X_0$, a finitely presented quasi-coherent $F$ on $W$, and compatible isomorphisms $F\\otimes_A A_n\\simeq M_n$. In particular every $X_n$ factors through $W$.",
+   "uses": [
+    "lem-sfb-space-inverse-modules-near-special-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CXB, first paragraph; local realization supplied by Tags 0CX5--0CX9."
+   }
+  },
+  {
+   "text": "The first reduction of $F$ is $M_1$, whose support is proper. Apply [lem-sfb-space-inverse-module-proper-shrinking] to this local model and replace $W$ by the resulting $W'$. The restrictions of all the isomorphisms in Step 1 still have the same domains $X_n$, since $|X_n|=X_0\\subseteq W'$. Now $F$ has proper support over $A$.",
+   "uses": [
+    "lem-sfb-space-inverse-module-proper-shrinking"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CXA, as used in the first paragraph of 0CXB."
+   }
+  },
+  {
+   "text": "Choose a proper closed carrier $i:Z\\hookrightarrow W$ and $G$ with $F\\simeq i_*G$, using the proper-support convention of [def-sfb-space-proper-quot-functor]. The composite $k:Z\\to X$ is a closed immersion: its graph in $Z\\times_A X$ is closed by separatedness of $X/A$, and the projection $Z\\times_A X\\to X$ is closed after every base change by properness of $Z/A$ [def-sfb-space-morphism-properties]. Thus $k$ has closed image $C$. It is already a closed immersion over the open $W$ and has empty preimage over $X\\setminus C$, so the two opens $W$ and $X\\setminus C$ prove the closed-immersion assertion locally. Define $M=j_*F$ for $j:W\\hookrightarrow X$ [def-trf-space-etale-module-functors]. On $W$ it is $F$; on $X\\setminus C$ it is zero, since $F$ is carried by $Z$. These restrictions show that $M$ is quasi-coherent and finitely presented: use a finite presentation of $F$ on each etale chart over $W$ and the zero presentation off $C$ [def-trf-space-quasi-coherent-module]. Also $M=k_*G$, so it has a proper closed carrier on $X$. Since each $X_n$ lies in $W$, the original compatible isomorphisms give $M\\otimes_A A_n\\simeq M_n$.",
+   "uses": [
+    "def-sfb-space-proper-quot-functor",
+    "def-sfb-space-morphism-properties",
+    "def-trf-space-etale-module-functors",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CXB, last paragraph (performed before flattening); open-cover verification of extension."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-proper-support-universal-flattening] to $X/A$ and $M$. Its hypotheses hold: $X/A$ is separated and finitely presented, and Step 3 made $M$ finitely presented with proper support. Obtain a scheme monomorphism $h:T\\to\\operatorname{Spec}A$ of finite presentation which represents flatness of tensor pullback. For every $n$, the reduction $M\\otimes_A A_n\\simeq M_n$ is flat over $A_n$ by hypothesis. The stated universal property therefore gives a unique factorization $\\operatorname{Spec}A_n\\to T$.",
+   "uses": [
+    "lem-sfb-space-proper-support-universal-flattening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CXB, universal-flattening paragraph, using 0CVI and 0CX2."
+   }
+  },
+  {
+   "text": "The monomorphism $h$ is locally of finite type because it is of finite presentation: on affine charts its finitely many algebra generators and relations in particular give finitely many generators. Apply [lem-sfb-nilpotent-tower-monomorphism-rigidity] to the factorizations for every $n$. It makes $h$ an isomorphism. The identity of $\\operatorname{Spec}A$ now factors through $h$, so the universal property of [lem-sfb-space-proper-support-universal-flattening] says that $M$ itself is flat over $A$. Together with Step 3 this gives the required module and all the specified transition compatibilities.",
+   "uses": [
+    "lem-sfb-nilpotent-tower-monomorphism-rigidity",
+    "lem-sfb-space-proper-support-universal-flattening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-flat.tex",
+    "place": "Tag 0CXB, application of More on Flatness Tag 0CTJ and conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-inverse-modules-near-special-fibre",
+  "lem-sfb-space-inverse-module-proper-shrinking",
+  "def-sfb-space-proper-quot-functor",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-etale-module-functors",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-proper-support-universal-flattening",
+  "lem-sfb-nilpotent-tower-monomorphism-rigidity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-flat.tex",
+  "place": "Tag 0CXB (theorem-existence), with proper-supported extension placed before universal flattening."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compatible inverse system of finitely presented flat modules with proper support over surjective locally nilpotent ring quotients comes from a module over the inverse limit ring on a separated finitely presented algebraic space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"Module.Flat.exists_factorization_of_isFinitelyPresented\", \"module\": \"Mathlib/RingTheory/Flat/EquationalCriterion\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  {P : Type u_3} [inst_4 : AddCommGroup P] [inst_5 : Module R P] [Module.FinitePresentation R P] (h₁ : P →ₗ[R] M),\\n  ∃ k h₂ h₃, h₁ = h₃ ∘ₗ h₂\", \"doc\": \"For a flat module $ M $ over a commutative semiring $ R $, and a finitely presented $ R $-module $ P $, every linear map $ h_1 : P \\\\to M $ can be factored as the composition of a linear map $ h_2 : P \"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"Hausdorffification\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"For a commutative ring `R`, an ideal `I` of `R`, and an `R`-module `M`, the `Hausdorffification` of `M` with respect to `I` is the quotient module $M / (\\\\bigcap_{n \\\\in \\\\mathbb{N}} I^n M)$.\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strong Grothendieck existence for flat proper support modules along inverse sequences of rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.Flat.finsupp\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"(ι : Type v) : Flat R (ι →₀ R)\", \"doc\": \"For any index type $\\\\iota$, the module of finite support functions $\\\\iota \\\\to_0 R$ is flat over the commutative semiring $R$.\"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"Module.Flat.iff_rTensor_exact\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔\\n    ∀ ⦃N N' N'' : Type (max u v)⦄ [AddCommGroup N] [AddCommGroup N'] [AddCommGroup N''] [Module R N] [Module R N']\\n      [Module R N''] ⦃f : N →ₗ[R] N'⦄ ⦃g : N' →ₗ[R] N''⦄,\\n      Function.Exact f g → Function.Exact (f.rTensor M) (g.rTensor M)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if for every exact sequence of $ R $-modules $ N \\\\xrightarrow{f} N' \\\\xrightarrow{g} N'' $, the induced sequence $ N \\\\otimes_R M \\\\xr\"}\n  {\"name\": \"Module.Flat.dfinsupp_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \": Flat R (Π₀ i, M i) ↔ ∀ i, Flat R (M i)\", \"doc\": \"The module of dependent finite support functions $\\\\Pi₀(i : \\\\iota), M(i)$ is flat over the commutative semiring $R$ if and only if every component module $M(i)$ is flat over $R$.\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \": Flat R M ↔ ∀ (C : ShortComplex <| ModuleCat R) (_ : C.Exact), (C.map (tensorRight M) |>.Exact)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.FaithfullyFlat.toFlat\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} {inst : CommRing R} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  [self : Module.FaithfullyFlat R M], Module.Flat R M\", \"doc\": \"If $ M $ is a faithfully flat module over a commutative ring $ R $, then $ M $ is flat over $ R $. Faithful flatness implies flatness as a module property.\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"limit\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \" {R : Type u} [CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] : CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorRightOfCarrier\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \" {R : Type u} [CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] : CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorRight M)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \" {R : Type u} [CommRing R] (M : ModuleCat R) : Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"\"}\n  {\"name\": \"Module.Flat.iff_preservesFiniteLimits_tensorRight\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \" {R : Type u} [CommRing R] (M : ModuleCat R) : Module.Flat R ↑M ↔ CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorRight M)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \" {A B : Type u} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.Flat) : CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \" {A B : Type u} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.Flat) : CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj ↧B))\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesFiniteColimits_of_coflat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyCoflat F] : CategoryTheory.Limits.PreservesFiniteColimits F\", \"doc\": \"Representably coflat functors preserve finite colimits.\"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_of_flat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat F] : CategoryTheory.Limits.PreservesFiniteLimits F\", \"doc\": \"Representably flat functors preserve finite limits.\"}\n  {\"name\": \"CategoryTheory.coflat_of_preservesFiniteColimits\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Limits.HasFiniteColimits C] (F : CategoryTheory.Functor C D) [CategoryTheory.Limits.PreservesFiniteColimits F] : CategoryTheory.RepresentablyCoflat F\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.flat_of_preservesFiniteLimits\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Limits.HasFiniteLimits C] (F : CategoryTheory.Functor C D) [CategoryTheory.Limits.PreservesFiniteLimits F] : CategoryTheory.RepresentablyFlat F\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.preservesFiniteColimits_iff_coflat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Limits.HasFiniteColimits C] (F : CategoryTheory.Functor C D) : CategoryTheory.RepresentablyCoflat F ↔ CategoryTheory.Limits.PreservesFiniteColimits F\", \"doc\": \"If `C` is finitely cocomplete, then `F : C ⥤ D` is representably coflat iff it preserves\\nfinite colimits.\"}\n  {\"name\": \"CategoryTheory.preservesFiniteLimits_iff_flat\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Limits.HasFiniteLimits C] (F : CategoryTheory.Functor C D) : CategoryTheory.RepresentablyFlat F ↔ CategoryTheory.Limits.PreservesFiniteLimits F\", \"doc\": \"If `C` is finitely complete, then `F : C ⥤ D` is representably flat iff it preserves\\nfinite limits.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*support.*inverse|strong.*effectiv|Grothendieck.*[Ee]xistence",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/EffectiveEpi/Basic.lean\", \"line\": \"105\", \"text\": \"instance (priority := 100) strongEpi_of_effectiveEpi {X Y : C} (f : X ⟶ Y) [EffectiveEpi f] :\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern scheme morphisms, abstract sheaves or modules, ordinary categorical limits, or ring completion; none states this assertion for algebraic-space families or representable morphisms of fibred groupoids"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-stack-general",
+  "date": "2026-10-23",
+  "group": "Q65"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence).",
+   "via": [
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-flat-proper-support-inverse-effectivity",
+  "worker": "stage1",
+  "summary": "Checked Stacks 0CX4--0CXB and split local realization, proper-support shrinking, universal flattening and inverse-ring monomorphism rigidity into four statement-only helpers. Wrote out extension across the complement on an open cover and kept the specified inverse-system isomorphisms. No statement change, no Noetherian or ambient-flatness assumption. The proper-support shrinking helper uses underlying support and does not assert arbitrary base change of annihilator ideals.",
+  "blueprint": "Supports the existing det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through coherent-family algebraicity; realizes the strong effectivity input of 09DS along 0CXB. The ancestor command reports None because created.item eventually names a Lean module rather than a blueprint node; retained the inherited null ancestor and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-063db9967",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-063db9967 (reviewer sub-agent of L); spot-checked: FIX for one B3 fault: the universal-flattening node used 'monomorphism' in its conclusion without defining it. I added the inline meaning (Hom(B,T)→Hom(B,Spec R) injective for every scheme B), as the rigidity node already does. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-proper-support-universal-flattening.json. The mathematics is correct and was read in full. Source: Stacks spaces-flat 0CX4–0CXB, flat 0CTJ, 0CX2(1)+0CVI(1), spaces-more-morphisms 0CWI, more-algebra 0CT7; tags checked against tags/tags. The item statement and stmt_deps are unchanged from Q65's version, and live and side-live still show the item unsplit, so no other group superseded it. The item proof is a five-step assembly. (1) Local realization near X_0 (0CX5–0CX9). (2) Proper-support shrinking (0CXA); it needs only n=1: henselian pair by 0CT7, Nakayama on underlying supports, and properness depends only on the reduction, so 0CWI applies. (3) Elementary extension: Z→X is a closed immersion via the separated-diagonal base change and universal closedness, checked on the cover {W', X∖C}; j_*F = k_*G, and the reduction isomorphisms come by restriction since X_n ⊆ W'. (4) Universal flattening applied with B=Spec A_n. (5) 0CTJ rigidity makes h an isomorphism, so M is flat. No step uses a cited node's proof. Each of the four new nodes is self-contained, statement-only and true. Tested cases: zero/empty systems; R=k[t] with F=R/(t), whose flat locus is Spec k ⊔ D(t); Spec k→Spec k[[t]] factors only at level 1; the worker's annihilator counterexample to 0CXA's identification checks out. No duplicates found: the tag/keyword grep hits only the delivery itself; 0CWI, 0463, 0828 and 0E7R nodes are different statements. Batch-5: all six listed citations (def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors, def-sfb-space-proper-quot-functor, def-sfb-space-morphism-properties) are general foundational definitions, already in the item's base stmt_deps, and are not the trace formula, Poincaré duality, or steps of their proofs, so they are accepted. No SGA citation, no new tool_uses; blueprint.from.node null is inherited from the base.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFlatProperSupportInverseEffectivity",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.flat_properSupport_inverse_effectivity",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.inverseEffectivityBase",
+   "AlgebraicGeometry.AlgebraicSpace.inverseEffectivityTest",
+   "AlgebraicGeometry.AlgebraicSpace.inverseEffectivityStep_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseEffectivityTestStep_w",
+   "AlgebraicGeometry.AlgebraicSpace.inverseEffectivityTestStep",
+   "AlgebraicGeometry.AlgebraicSpace.flat_properSupport_inverse_effectivity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFlatProperSupportInverseEffectivity.lean",
+  "statement": "theorem flat_properSupport_inverse_effectivity (D : ℕᵒᵖ ⥤ CommRingCat.{u}) (hsurj : ∀ n : ℕ, Function.Surjective (D.map (homOfLE (Nat.le_succ n)).op).hom) (hnil : ∀ (n : ℕ) (x : D.obj (op (n + 1))), (D.map (homOfLE (Nat.le_succ n)).op).hom x = 0 → IsNilpotent x) (X : AlgebraicSpace (Spec (limit D))) (a : X ⟶ inverseEffectivityBase D) (hsep : MapIsSeparated a) (hfp : ProperQuotFinitePresentation a) (Mn : ∀ n : ℕ, (properQuotFibre a (inverseEffectivityTest D n)).Modules) (hqc : ∀ n : ℕ, (Mn n).IsQuasicoherent) (hmfp : ∀ n : ℕ, (Mn n).IsFinitePresentation) (hflat : ∀ (n : ℕ) (U : (properQuotFibre a (inverseEffectivityTest D n)).EtaleSite), ((schemeRestriction _ U).obj (Mn n)).IsFlatOver (yoneda.preimage (U.obj.hom ≫ (properQuotSnd a (inverseEffectivityTest D n)).hom.hom)).left) (hsupp : ∀ n : ℕ, ∃ (Z : AlgebraicSpace (Spec (limit D))) (i : Z ⟶ properQuotFibre a (inverseEffectivityTest D n)), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ properQuotSnd a (inverseEffectivityTest D n)) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ Mn n)) (transition : ∀ n : ℕ, (moduleTensorPullback (properQuotFibreMap a (inverseEffectivityTestStep D n))).obj (Mn (n + 1)) ≅ Mn n) : ∃ M : X.Modules, M.IsQuasicoherent ∧ M.IsFinitePresentation ∧ (∀ U : X.EtaleSite, ((schemeRestriction X U).obj M).IsFlatOver (yoneda.preimage (U.obj.hom ≫ a.hom.hom)).left) ∧ (∃ (Z : AlgebraicSpace (Spec (limit D))) (i : Z ⟶ X), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom ∧ MapIsProper (i ≫ a) ∧ ∃ G : Z.Modules, G.IsQuasicoherent ∧ G.IsFiniteType ∧ Nonempty ((moduleDirectImage i).obj G ≅ M)) ∧ ∃ e : ∀ n : ℕ, (moduleTensorPullback (properQuotFst a (inverseEffectivityTest D n))).obj M ≅ Mn n, ∀ n : ℕ, (properQuotSourceIso a M (inverseEffectivityTestStep D n)).hom ≫ (e n).hom = (moduleTensorPullback (properQuotFibreMap a (inverseEffectivityTestStep D n))).map (e (n + 1)).hom ≫ (transition n).hom",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical tests and adjacent test maps are built from Spec of the actual limit projections and ring transitions. The two named proof obligations express only their commuting triangles; all definitions have explicit data. The conclusion retains the supplied module transition isomorphisms through properQuotSourceIso, the existing tensor-normalized associator."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59143c87d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Checked against Stacks 0CX4/0CXB. Ring tower: surjective maps, elementwise nilpotent kernels; base is Spec of the actual limit ring. X: MapIsSeparated plus ProperQuotFinitePresentation, no flatness of X. M_n conditions (qc/fp/chartwise IsFlatOver/proper carrier) are verbatim the landed ProperQuotient fields on properQuotFibre over Spec(limit.pi). Transitions are pullbacks along Spec of the actual ring transitions. Conclusion: exists M with the same four conditions over Spec A, and e_n with properQuotSourceIso.hom >> e_n = step^*(e_{n+1}) >> transition_n; types and direction correct, the supplied isomorphisms are retained. Helpers carry real data; the two sorried triangle theorems are true by limit.w and have proof docstrings. Statement verbatim in file; stmt_deps unchanged versus live; all used declarations come from recorded stmt_deps; universe u bound; no added hypotheses. Private import of the NilpotentTowerMonomorphismRigidity proof-dep module is harmless. No compile run (no file changed); the worker reports a clean compile."
+ }
+}

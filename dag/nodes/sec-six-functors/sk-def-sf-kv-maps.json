@@ -117,7 +117,22 @@
  ],
  "chapter": "sec-six-functors",
  "unit": "sk-def-sf-kv-maps",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.HasKunnethComparisons"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.HasKunnethComparisons"
+   ]
+  }
+ },
  "split_report": {
   "date": "2026-10-21",
   "item": "sk-def-sf-kv-maps",
@@ -141,5 +156,15 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-3c52b16ba (reviewer sub-agent of L); spot-checked: I read the sketch source (main-20261015 sk-def-sf-kv-maps/_section.md, order 2511), the expanded def-sf-kv-maps (order 2567, reviewed PASS by NZ), all four statement dependencies and the report. The delivery has no new nodes, and the unit record changes only realized/realized_by. The item keeps clauses (i)-(iv) with the same maps, directions and D^b_ctf categories at all four stages. Its additions (the explicit T,U,V,u,v,t_i,a_i,W, the two Ex_! inverses, the reassociation and evaluation for beta, the alpha inputs for kappa) all match def-sf-kv-maps. Restricting to separated schemes is a genuine source error: sk-thm-sf-kunneth-relative needs a separated base, and the doubled-origin line Y_1 with Y_2=Spec k gives a non-separated T. This is the same correction already accepted for def-sf-kv-maps; it is recorded in split_report.unit_statement_error, and the unit statement is untouched. Clause checks: (i) the squares (a_1,u;f_1,t_1) and (a_2,v;f_2,t_2) are Cartesian, Ex_! has the direction of sk-def-sf-exchanges, and the target is Rf_1!B_1 boxtimes Rf_2!B_2. (ii) alpha is the transpose under the constructible adjunction of sk-def-sf-operations(vi). (iii) beta comes from the symmetry and monoidality of Lt_i^*, then ev_1 tensor ev_2, then the transpose. (iv) beta on (Lambda_X,M),(N,omega_Y) is followed by RHom(1,alpha_{id_X,a_Y}), and alpha lands in Rp_X^!M on X x s = X. I checked identity maps over Spec k, an empty factor, zero complexes and shifts. There is no cycle. sk-def-sf-admissible was dropped from stmt_deps; the source uses it only in a negative remark. Batch-5 check: citing def-sf-kv-maps adds only def-sf-kv-maps, thm-sf-biduality-class and thm-weil-six-operations to the closure. These are general six-functor foundations, not steps of the trace formula or of Poincare duality. The flagged lem-trf-right-fraction-dense-subcategory is already reached through the other stmt_deps and is pure category theory (calculus of fractions), so the citation is accepted. Advisory: the citer lem-sf-kv-affine-locality uses alpha of this item for non-separated Y and Z through its own compactification-formula reading, so its wording should be checked. Record the separated-target correction in HUMAN.md. Tooling: the dagsnap e3ececac behind the snapshot's chapter symlinks disappeared during the review; the closure had already been computed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For $i=1,2$ let $f_i:X_i\\to Y_i$ be separated of finite type between\nfinite-type $k$-schemes, with $Rf_i^!$ the constructible exceptional adjoints\nof [det-def-sf-operations](vi) (no admissibility datum of\n[sk-def-sf-admissible] is assumed), put $f=f_1\\times f_2$, and let\n$L_i\\in\\Dctf(Y_i,\\Lambda)$, $B_i\\in\\Dctf(X_i,\\Lambda)$.\n\n1. **(i)** The $!$-Künneth\n$\\mathrm{Ku}_!:Rf_!(B_1\\boxtimes B_2)\\xrightarrow{\\ \\sim\\ } Rf_{1!}B_1\\boxtimes Rf_{2!}B_2$ is [sk-thm-sf-kunneth-relative] for the base\n$B=Y_1\\times Y_2$, using\n$X_1\\times X_2=(X_1\\times Y_2)\\times_B(Y_1\\times X_2)$. It is an isomorphism.\n1. **(ii)** The *exceptional Künneth*\n$\\alpha:Rf_1^!L_1\\boxtimes Rf_2^!L_2\\to Rf^!(L_1\\boxtimes L_2)$ is the\nexceptional adjoint of\n$$\nRf_!\\bigl(Rf_1^!L_1\\boxtimes Rf_2^!L_2\\bigr)\n\\xrightarrow{\\ \\mathrm{Ku}_!\\ }\nRf_{1!}Rf_1^!L_1\\boxtimes Rf_{2!}Rf_2^!L_2\n\\xrightarrow{\\ \\varepsilon_1\\boxtimes\\varepsilon_2\\ }\nL_1\\boxtimes L_2 ,\n$$\nwhere the $\\varepsilon_i$ are the counits of $Rf_{i!}\\dashv Rf_i^!$.\n1. **(iii)** For $E_i\\in\\Dctf(Y_i,\\Lambda)$, on the same scheme $Y_i$ as\n$L_i$, the *external Hom* map\n$$\n\\beta:\\RHom(E_1,L_1)\\boxtimes\\RHom(E_2,L_2)\n\\longrightarrow\\RHom\\bigl(E_1\\boxtimes E_2,L_1\\boxtimes L_2\\bigr)\n$$\nis the tensor–Hom transpose of the two evaluations, with the tensor symmetry\nand its Koszul signs.\n1. **(iv)** For separated finite-type $k$-schemes $X,Y$, with the structure\nmorphism $a_Y$ and the product projection\n$p_X=\\operatorname{id}_X\\times a_Y:X\\times Y\\to X$ (whose constructible\nexceptional adjoints $Ra_Y^!$, $Rp_X^!$ are the inputs for\n$\\omega_Y=Ra_Y^!\\Lambda$ and $\\mathbb D_Y$, for $Rp_X^!$, and for\n$\\alpha_{\\operatorname{id}_X,a_Y}$; no admissibility datum is assumed),\nand for $M\\in\\Dctf(X,\\Lambda)$ and $N\\in\\Dctf(Y,\\Lambda)$, with\n$p_X,p_Y$ the projections of $X\\times Y$, the *Künneth–Verdier* map is\n$$\n\\begin{aligned}\n\\kappa_{M,N}:M\\boxtimes\\mathbb D_YN\n&\\xrightarrow{\\ \\beta\\ }\\RHom\\bigl(p_Y^*N,M\\boxtimes\\omega_Y\\bigr)\\\\\n&\\xrightarrow{\\ \\RHom(1,\\alpha_{\\operatorname{id}_X,a_Y})\\ }\n\\RHom\\bigl(p_Y^*N,Rp_X^!M\\bigr),\n\\end{aligned}\n$$\nusing the unit identifications $\\RHom(\\Lambda_X,M)=M$ and\n$\\Lambda_X\\boxtimes N=p_Y^*N$; here $\\beta$ is applied to the pairs\n$(E_1,L_1)=(\\Lambda_X,M)$ on $X$ and $(E_2,L_2)=(N,\\omega_Y)$ on $Y$.\n\nOnly $\\mathrm{Ku}_!$ is built from isomorphisms; invertibility of\n$\\alpha,\\beta,\\kappa$ is the content of [sk-thm-sf-kunneth-verdier].",
+  "proof": [],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

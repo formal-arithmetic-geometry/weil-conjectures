@@ -1,0 +1,147 @@
+{
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-restricted-coefficient-nat-roof",
+ "kind": "statement",
+ "title": "Restricted coefficient maps on a natural indexed injective roof",
+ "statement": "Let v:Z→X, φ:F→v_*G, and injective resolutions I of F and J of G be given. Let L be a nonnegative complex of injectives on X, ell:v_*J→L a quasi-isomorphism, and beta:I→L with Iota_I beta=φ v_*(Iota_J) ell in degree zero. For U open in X, let R and R-prime be the prescribed restricted resolutions on U and v inverse U [def-weil-pbc-flat-base-change-open-choices]. Write a_I,a_J for the usual classical-to-resolution-section comparisons followed by R.sections and R-prime.sections [def-weil-pbc-flat-base-change-open-choices]; use ell and beta without extension. Then moduleCohomologyFMap(v restricted to U, restrictedDirectImageMap φ,q);a_J;H^q Γ(U,ell) equals a_I;H^q Γ(U,beta). This involves one scheme morphism and no total derived functor.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB: restriction of resolutions and the cohomology roof formula"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-pbc-derived-square-local-models"
+ ],
+ "proof": [
+  {
+   "text": "Restrict L to U. Exact open restriction preserves injectives. The restriction/direct-image pullback isomorphism, and the prescribed comparison of J on v inverse U, give a local denominator into L restricted to U. Restrict beta and use both augmentation equations and naturality of the pullback isomorphism to verify its coefficient augmentation.",
+   "uses": [
+    "lem-weil-pbc-module-open-restriction-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use these arrows and the canonical top-section comparison as ModuleCohomologyFMapData. Its denominator induces isomorphisms on sections because it is a quasi-isomorphism from a direct image of injectives to injectives. The independence theorem permits this choice.",
+   "uses": [
+    "def-weil-pbc-module-cohomology-fmap",
+    "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The degreewise restriction-adjunction computation and R.components identify the numerator and denominator with sections on U of beta and ell. Postcompose the data-map formula and cancel the inverse denominator.",
+   "uses": [
+    "lem-weil-restriction-resolution-lift-sections",
+    "def-weil-pbc-flat-base-change-open-choices",
+    "def-weil-pbc-restricted-roof-section-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-open-restriction-injectives",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-module-pushforward-injectives-sections-quasi-iso",
+  "lem-weil-pbc-module-cohomology-fmap-functorial",
+  "lem-weil-restriction-resolution-lift-sections",
+  "def-weil-pbc-flat-base-change-open-choices",
+  "def-weil-pbc-restricted-roof-section-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 and 01FB: explicit restriction and independence calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of local hypercohomology comparison for a coefficient map and derived direct image composition",
+   "results": "Eight generic sheaf-global-section, hypercover and homology naturality hits; no normalized comparison for the project coefficient square. Project rg found the exact comparison definitions and the classical cohomology roof implementation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorOfQuasiIsoResolutionsObjIso\"",
+   "results": "No Mathlib hits. This is a project API; its definition and naturality calculation were read in the source.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localLerayComparison|rightDerivedFunctorOfQuasiIsoResolutionsObjIso",
+   "results": "No Mathlib hits. Local rg found UnboundedDirectImageSectionPresheaf, DerivedAdjunctionTopEdgeData, ModuleCohomologyFMap and its independence theorem. These give the ingredients, but do not state the new comparison equations.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SquareLocalHypercohomology",
+  "date": "2026-10-26",
+  "group": "V6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison. Local hypercohomology of a normalized coefficient square; Restricted coefficient maps on an injective roof; natural indexed restriction calculation",
+   "via": [
+    "lem-weil-pbc-restricted-coefficient-roof",
+    "lem-weil-pbc-square-local-hypercohomology",
+    "lem-weil-pbc-derived-square-local-classes",
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RestrictedCoefficientNatRoof",
+  "file": "lean/Sheaf/AlgebraicGeometry/RestrictedCoefficientNatRoof.lean",
+  "declaration": "AlgebraicGeometry.restrictedCoefficient_natRoof",
+  "declarations": [
+   "AlgebraicGeometry.restrictedCoefficient_natRoof"
+  ],
+  "statement": "theorem restrictedCoefficient_natRoof {X Z : Scheme.{u}} (v : Z ⟶ X)\n    (F : X.Modules) (G : Z.Modules) (φ : F ⟶ (pushforward v).obj G)\n    (I : InjectiveResolution F) (J : InjectiveResolution G)\n    (L : CochainComplex X.Modules ℕ) (hL : ∀ n : ℕ, Injective (L.X n))\n    (ell : ((pushforward v).mapHomologicalComplex (ComplexShape.up ℕ)).obj J.cocomplex ⟶ L)\n    (hell : QuasiIso ell) (beta : I.cocomplex ⟶ L)\n    (hbeta : I.ι.f 0 ≫ beta.f 0 = φ ≫ (pushforward v).map (J.ι.f 0) ≫ ell.f 0)\n    (U : X.Opens) (R : RestrictedResolutionSections I U)\n    (R' : RestrictedResolutionSections J (v ⁻¹ᵁ U)) (q : ℕ) :\n    letI := RingedSpace.globalSectionsFunctor_additive U.toScheme.toRingedSpace\n    letI := RingedSpace.globalSectionsFunctor_additive (v ⁻¹ᵁ U).toScheme.toRingedSpace\n    let Γ := (RingedSpace.openModuleSections X.toRingedSpace U).mapHomologicalComplex\n      (ComplexShape.up ℕ)\n    let H := HomologicalComplex.homologyFunctor AddCommGrpCat.{u} (ComplexShape.up ℕ) q\n    let rI := (forget₂ _ AddCommGrpCat.{u}).mapIso\n      ((show InjectiveResolution (C := SheafOfModules.{u}\n          (moduleRings U.toScheme.toRingedSpace)) ((restrictFunctor U.ι).obj F) from\n          R.resolution).isoRightDerivedObj\n        (RingedSpace.globalSectionsFunctor U.toScheme.toRingedSpace) q) ≪≫\n      (((RingedSpace.globalSectionsComplex R.resolution).sc q).mapHomologyIso\n        (forget₂ _ AddCommGrpCat.{u})).symm\n    let rJ := (forget₂ _ AddCommGrpCat.{u}).mapIso\n      ((show InjectiveResolution (C := SheafOfModules.{u}\n          (moduleRings (v ⁻¹ᵁ U).toScheme.toRingedSpace))\n            ((restrictFunctor (v ⁻¹ᵁ U).ι).obj G) from R'.resolution).isoRightDerivedObj\n        (RingedSpace.globalSectionsFunctor (v ⁻¹ᵁ U).toScheme.toRingedSpace) q) ≪≫\n      (((RingedSpace.globalSectionsComplex R'.resolution).sc q).mapHomologyIso\n        (forget₂ _ AddCommGrpCat.{u})).symm\n    moduleCohomologyFMap (v.resLE U (v ⁻¹ᵁ U) le_rfl)\n      (restrictedDirectImageMap v φ U) q ≫ rJ.hom ≫ H.map R'.sections.hom ≫ H.map (Γ.map ell) =\n      rI.hom ≫ H.map R.sections.hom ≫ H.map (Γ.map beta)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261026T111935-L-1782906",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

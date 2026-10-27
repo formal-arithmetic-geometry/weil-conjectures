@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "The finite-type-algebra Noetherian theorem [lem-weil-pbc-finite-type-algebra-noetherian] applied to $R\\to P$ makes $P$ Noetherian: it is generated as an $R$-algebra by the $n$ displayed variables. The given surjection makes $A$ a cyclic $P$-module. Indeed, for $a\\in A$ choose $p\\in P$ mapping to $a$; then $a=p\\cdot1$. Thus $A[0]$ is a bounded complex of finitely generated $P$-modules.",
+   "text": "The map $R\\to P$ is of finite type: the identity presentation $R[x_1,\\ldots,x_n]\\twoheadrightarrow P$ has kernel zero, including $n=0$. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $P$ Noetherian. If $\\pi:P\\twoheadrightarrow A$ is the given presentation, then for each $a\\in A$ choose $f\\in P$ with $\\pi(f)=a$; one has $a=f\\cdot1$. Hence $A$ is a cyclic, in particular finitely generated, $P$-module, and $A[0]$ is bounded with finite terms.",
    "uses": [
     "lem-weil-pbc-finite-type-algebra-noetherian"
    ],
@@ -30,76 +30,41 @@
    }
   },
   {
-   "text": "By [def-weil-pbc-flat-ring-map], the degree-zero complex $A[0]$ is a bounded-above complex of flat $R$-modules (zero terms are flat since their tensor functor is zero). By [lem-pc-module-bounded-flat-kflat] it is K-flat. By [lem-pc-source-kflat-module-tensor-model], for any $R$-module $L$ the derived tensor $A\\otimes_R^{\\mathbf L}L$ is represented by $(A\\otimes_RL)[0]$, so it has cohomology only in degree zero. This proves the additional finite-Tor assertion over $R$, with interval $[0,0]$. To express the same information using nonnegative Tor, apply [lem-pc-flat-resolution-tor-comparison] to the nonnegative chain complex consisting of $A$ in degree zero and zero elsewhere, augmented by its identity to $A$. Its tensor with $L$ has zero homology in every positive degree; hence $\\operatorname{Tor}^R_j(A,L)=0$ for $j>0$.",
+   "text": "By [def-weil-pbc-flat-ring-map], $A$ is flat over $R$ via the given map $\\varphi:R\\to A$. The presentation $\\pi:P\\twoheadrightarrow A$ is an $R$-algebra map, so its restricted module action is $r\\cdot a=\\pi(r\\cdot1_P)a=\\varphi(r)a$. Thus [lem-trf-base-flat-polynomial-tor-bound] applies to $M=A$. It gives $\\operatorname{Tor}^P_j(A,N)=0$ for every $P$-module $N$ and $j>n$. It also identifies $A[0]\\otimes_R^{\\mathbf L}L[0]$ with $(A\\otimes_RL)[0]$ for every $R$-module $L$. This degree-zero complex has zero cohomology in every other degree, proving the finite-Tor assertion over $R$ with $a=b=0$.",
    "uses": [
     "def-weil-pbc-flat-ring-map",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-source-kflat-module-tensor-model",
-    "lem-pc-flat-resolution-tor-comparison"
+    "lem-trf-base-flat-polynomial-tor-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 064K (lemma-derived-tor-quasi-isomorphism), 06XY (derived tensor); algebra.tex Tags 00LY and 00M3 (flat resolutions)."
+    "place": "Tags 068X (lemma-perfect-over-polynomial-ring), 0658 (lemma-perfect), 066Q (lemma-perfect-module), assembled on the given polynomial presentation."
    }
   },
   {
-   "text": "Apply [lem-pc-polynomial-tor-bound] with base ring $R$, polynomial module $A$ and $d=0$. Step 2 gives its vanishing hypothesis for every base module, with exactly the first-variable Tor convention in that node. It follows that $\\operatorname{Tor}^P_j(A,N)=0$ for every $P$-module $N$ and every $j>n$. This is the polynomial-extension homological bound underlying Tag 068X; neither a regularity nor a local complete-intersection assumption on $A$ is used.",
+   "text": "Apply [lem-trf-finite-module-tor-projective-resolution] with $S=P$, $M=A$ and $d=n$. Step 1 gives its Noetherian and finite-generation hypotheses; Step 2 gives its ordinary first-variable Tor hypothesis for every $P$-module. The resulting $E^\\bullet\\simeq A[0]$ has finitely generated projective terms and support in $[-n,0]$, so [def-pc-perfect-ring-complex] gives perfectness. For $n>0$, the stated augmentation and exactness equations give $0\\to E^{-n}\\to\\cdots\\to E^0\\to A\\to0$: at the left endpoint, $\\ker d_E^{-n}=\\operatorname{im}d_E^{-n-1}=0$ because $E^{-n-1}=0$. For $n=0$, the cited augmentation is an isomorphism $E^0\\cong A$, giving the resolution $0\\to E^0\\to A\\to0$.",
    "uses": [
-    "lem-pc-polynomial-tor-bound"
+    "lem-trf-finite-module-tor-projective-resolution",
+    "def-pc-perfect-ring-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 068X, lemma-perfect-over-polynomial-ring: polynomial extension transfers a finite base Tor bound; quantitative ordinary-module input supplied by the cited general node."
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-finite-free-resolution-noetherian], applied to the Noetherian ring $P$ and cyclic module $A$ of Step 1, choose an augmented finite-free resolution $F_\\bullet\\to A$. Put $F_j$ in cochain degree $-j$ and zero in positive degrees, keeping the differentials. Exactness of the augmentation gives $F^\\bullet\\simeq A[0]$. Its terms are flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat], so [lem-pc-module-bounded-flat-kflat] makes $F^\\bullet$ K-flat. The tensor model [lem-pc-source-kflat-module-tensor-model] computes $A\\otimes_P^{\\mathbf L}N$ by $F^\\bullet\\otimes_PN$. By [lem-pc-flat-resolution-tor-comparison] its degree $-j$ cohomology is $\\operatorname{Tor}^P_j(A,N)$ for $j\\ge0$ (the cochain indexing is exactly the reversal of the chain indexing). Therefore Step 3 gives vanishing below $-n$; vanishing above zero holds because the representing complex has zero terms there. Hence $A[0]$ has Tor amplitude in $[-n,0]$ over $P$.",
-   "uses": [
-    "lem-weil-pbc-finite-free-resolution-noetherian",
-    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-source-kflat-module-tensor-model",
-    "lem-pc-flat-resolution-tor-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 068X and Tag 0658, bounded-above free models and transfer of the Tor interval; algebra.tex Tags 00LP and 00M3."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-bounded-finite-tor-perfect] over $P$ to $A[0]$ and the interval $[-n,0]$. Step 1 verifies Noetherianity, boundedness and finite generation, and Step 4 gives its derived-tensor vanishing for every $P$-module. Thus there is a finite-projective complex $E^\\bullet$ supported in $[-n,0]$ isomorphic to $A[0]$ in $D(P)$, which is perfectness in the sense of [def-pc-perfect-ring-complex]. The isomorphism induces $H^0(E)\\cong A$ and $H^i(E)=0$ for $i\\ne0$. Since $E^1=0$, compose $E^0\\to E^0/\\operatorname{im}d^{-1}=H^0(E)$ with this isomorphism to obtain an augmentation $E^0\\to A$. It is surjective with kernel $\\operatorname{im}d^{-1}$; in every negative degree vanishing cohomology gives exactness, by [def-weil-abstract-derived-category]. The augmented finite complex is the required bounded resolution by finitely generated projective $P$-modules. This includes $n=0$, when the model has only a degree-zero term.",
-   "uses": [
-    "lem-weil-bounded-finite-tor-perfect",
-    "def-pc-perfect-ring-complex",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0658, lemma-perfect, and Tag 066Q, lemma-perfect-module; explicit augmentation of the model in degrees [-n,0]."
+    "place": "Tags 068X (lemma-perfect-over-polynomial-ring), 0658 (lemma-perfect), 066Q (lemma-perfect-module), assembled on the given polynomial presentation."
    }
   }
  ],
  "proof_deps": [
   "def-pc-perfect-ring-complex",
-  "def-weil-abstract-derived-category",
   "def-weil-pbc-flat-ring-map",
-  "lem-pc-flat-resolution-tor-comparison",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-polynomial-tor-bound",
-  "lem-pc-source-kflat-module-tensor-model",
-  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
-  "lem-weil-bounded-finite-tor-perfect",
-  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-trf-base-flat-polynomial-tor-bound",
+  "lem-trf-finite-module-tor-projective-resolution",
   "lem-weil-pbc-finite-type-algebra-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Explicit ordinary-module assembly of the polynomial-chart argument of Tags 068X, 068Y and 0658, using the existing general polynomial Tor bound and flat-resolution comparison."
+  "place": "Same ordinary-module proof route as the returned split: Tags 068X, 068Y, 0658 and 066Q, now assembled from two separately queued arguments."
  },
  "mathlib_searches": [
   {
@@ -213,37 +178,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-flat-polynomial-quotient-perfect",
   "worker": "stage1",
-  "summary": "Corrected the imported scheme-flatness and coefficient-sheaf Tor references to ordinary ring-module notions, without changing any hypothesis or conclusion. Derived Tor vanishing over R from flatness, transferred the bound using the existing general polynomial Tor node, identified cohomological amplitude [-n,0] on a finite-free resolution, and applied the existing Noetherian perfectness criterion. No new nodes.",
-  "blueprint": "The steps realize the flat finite-type polynomial-chart perfectness calculation in the ancestor proof of lem-trf-local-term-locality.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-polynomial-tor-bound",
-    "why": "The generic polynomial extension Tor bound supplies the homological dimension step in the polynomial-chart argument; the trace-formula unit has no ring-theoretic version."
-   },
-   {
-    "node": "lem-pc-flat-resolution-tor-comparison",
-    "why": "Generic ordinary-module Tor computation on a flat augmented resolution; needed to use the first-variable Tor convention and to identify the negative cohomology of derived tensor."
-   },
-   {
-    "node": "lem-pc-module-bounded-flat-kflat",
-    "why": "Generic ordinary-module bounded-above flat K-flatness, for A[0] and the finite-free P-resolution; no trace-formula-unit statement supplies it."
-   },
-   {
-    "node": "lem-pc-source-kflat-module-tensor-model",
-    "why": "Generic ordinary-module derived tensor computation on a K-flat first complex, used to establish the actual Tor-amplitude hypotheses."
-   },
-   {
-    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
-    "why": "Generic finite-free resolution theorem for finite modules over a Noetherian ring, used for the cyclic P-module A."
-   },
-   {
-    "node": "lem-weil-bounded-finite-tor-perfect",
-    "why": "Generic Noetherian bounded-complex perfectness criterion applied only after deriving the required interval [-n,0]."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 re-split return. Statement and hypotheses unchanged. Two new statement-only arguments separate base-flat polynomial Tor bounds (old steps 2--3) from finite-module Tor-to-derived-amplitude and augmented finite-projective models (old steps 4--5). The finite-type Noetherian/cyclic argument of old step 1 remains explicit. The report preserves all five original steps and the generalized proof plans; neither new node is proved in this delivery. Repaired the landing return at head 652e91a87f5 against current main: all retained dependency records were re-read and compared with that head, with no changes found. Step 2 now explicitly verifies compatibility of the restricted R-action with the original flat ring map before using the new module lemma. The prior split, statements, searches, citations and full argument are retained. On the next landing-return continuation, compared the retained delivery with current main eba978612f432209ee74bf1db86922243038a7fd: all cited records remain unchanged and both new nodes remain absent. The assembly now writes out the identity polynomial presentation used for Noetherianity, the action equality pi(r*1)=phi(r), and the exact augmented sequence, with its n=0 interpretation. No statement, dependency, source or search question changed. Renewed landing-return repair on 2026-10-23 against current main 2f04d8ba32a82c379904e84797fa399ce9ae6693: all seventeen retained input records are unchanged from the returned head and were re-read; both new nodes remain absent. Step 3 now verifies injectivity at the left endpoint from the supplied exactness equation and separates the n=0 augmented resolution explicitly. The report records the current comparison and preserves the prior work.",
+  "blueprint": "Same polynomial-chart perfection input in the nearby-cycle/relative-duality branch below lem-trf-local-term-locality. New nodes refine the inherited polynomial-chart calculation, without changing the chapter or unit route.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-pc-polynomial-tor-bound",
@@ -254,12 +194,12 @@
   "lem-weil-bounded-finite-tor-perfect"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q34-30108ce96",
-  "group": "Q34",
+  "reviewer": "NT-cc-Q54-9cbdd60e2",
+  "group": "Q54",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-30108ce96 (reviewer sub-agent of L); spot-checked: Read the complete item, report, chapter/unit route, all cited DAG statements, and Stacks Tags 067J, 068Y, 068X, 0658, 066Q, 00FN, 00LP, 00LY/00M3, and 0BZW. The five steps correctly derive R-Tor amplitude from flatness, transfer the bound over the polynomial ring, and obtain the finite projective resolution. Edge cases A=0, zero base, n=0, redundant variables, polynomial A, and a singular base were checked. No new nodes, duplicates, circularity, long-step issues, forbidden SGA citations, or route-pivot machinery were found. Corrected ordinary ring/module dependency typing is sound. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-9cbdd60e2 (reviewer sub-agent of L); spot-checked: This is the 4th delivery of the re-split, after PASSes at 652e91a8, eb33681b and 6ce58bfe. Live and side-live still hold the old 5-step proof and neither new node is there, so the delivery is not superseded. By sha256, both new nodes are byte-identical to the prior heads. In the item, the statement, stmt_deps, proof_deps, sources and tool_uses are unchanged; only the step-3 wording changed. It now gets left-end injectivity from the node's clause ker d^i = im d^{i-1} at i=-n<0 with E^{-n-1}=0, and handles n=0 by the augmentation iso. Both follow directly from the statement of lem-trf-finite-module-tor-projective-resolution. Steps re-read: (1) lem-weil-pbc-finite-type-algebra-noetherian makes P Noetherian and A is cyclic over P. (2) The R-algebra presentation gives r·a=φ(r)a, so node 1 applies: Tor^P_{>n}=0 and the derived tensor over R sits in degree 0, giving a=b=0. (3) Node 2 with S=P, M=A, d=n gives a finite projective model in [-n,0] and the augmented resolution. Node 1 is true: M flat over R makes M[0] K-flat, and lem-pc-polynomial-tor-bound with d=0 needs no finiteness. Checked n=0, M=0, the zero ring, and R=k[ε]. Node 2 is true: the d-th syzygy is finitely presented and flat, hence projective. Checked Z/m over Z (d=1 holds, d=0 fails), d=0 and M=0. Node 2's overlap with lem-pc-finite-projective-dimension-of-tor-bound composed with lem-weil-pbc-bounded-finite-projective-resolution was accepted at the earlier heads. A duplicate scan of nodes created from 2026-10-21 on found no duplicate. Sources read: Stacks more-algebra 068X (l.20175), 0658 (l.18889), 066Q (l.18917) and 068Y (l.21774). No SGA is cited; the only SGA string is inside an old review note. No changes made."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FlatPolynomialQuotientPerfect",
@@ -279,5 +219,16 @@
   "result": "pass",
   "note": "Read node, 8 stmt deps and their Lean records, IsPerfectRingComplex, torAmplitudeIn, BoundedFiniteTorPerfect consumer, report (Worker report + Second reading present), module. Every hypothesis matches (CommRing/IsNoetherianRing R and A, RingHom.Flat, RingHom.FiniteType, surjective p : MvPolynomial (Fin n) R →+* A with p.comp C = φ). Conclusions: IsPerfectRingComplex of A[0] via Module.compHom A p, and ∃ a ≤ b with torAmplitudeIn over R via Module.compHom A φ; not narrowed to [0,0]. Independent localization universes wR/wP; R and A share u, which ModuleCat.{u} forces and which loses no case. Edge cases n=0, A=0, R=0 and a=b allowed. No hollow definition, sorry only, source/blueprint docstrings with the 5 proof steps, lean.statement verbatim. nt_compile --json: exit 0 in 3.6 s, no diagnostics; a probe copy confirmed the tool reports errors. Axioms: propext, sorryAx, Classical.choice, Quot.sound. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

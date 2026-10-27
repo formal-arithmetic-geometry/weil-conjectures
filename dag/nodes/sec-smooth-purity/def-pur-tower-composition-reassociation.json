@@ -1,0 +1,99 @@
+{
+ "id": "def-pur-tower-composition-reassociation",
+ "title": "Canonical tower pullback and tensor reassociation",
+ "kind": "definition",
+ "status": "split",
+ "import_flags": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-transport-integral-counit-realization",
+  "date": "2026-10-26",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Steps 1–2, the actual whole-tower composition and Cartesian source/counit words before realization",
+   "via": [
+    "lem-pur-transport-integral-counit-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, the ordinary strict coefficient-tower derived categories, tensor and section-normalized geometric pullbacks $(b,o)$ of [def-sp-tower-shriek-data], with their inverse-image compositor from [def-sp-coefficient-tower-shriek-interfaces]. Let $X\\xrightarrow fY\\xrightarrow gZ$ and $h:X\\to Z$ be quasi-compact compactifiable morphisms of Noetherian schemes, presented by open/proper factorizations $f=p_f\\circ j_f$, $g=p_g\\circ j_g$, $h=p_h\\circ j_h$, and a specified equality $gf=h$. For $K\\in D(Z)$, $M\\in D(Y)$ and $N\\in D(X)$, define towerReassociate to be the canonical isomorphism\n$$h^*K\\otimes(f^*M\\otimes N)\\xrightarrow{\\sim}f^*(g^*K\\otimes M)\\otimes N.$$\nIt is, in order, transport along $gf=h$ followed by the inverse of the specified inverse-image compositor on $K$, the inverse tensor associator, and the inverse tensor-pullback comparison for $f$ on $(g^*K,M)$, tensored with the identity of $N$. The tensor is ordinary derived tensor on strict varying-coefficient systems, not completed tensor. This records the existing towerReassociate definition, without asserting any purity composition equation or choosing a new comparison.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-coefficient-tower-shriek-interfaces"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/sk-prop-sp-composition-factors.md",
+  "place": "Clause (2) and its gamma consequence, under the canonical inverse-image and tensor reassociations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical tensor reassociation and normalized shifted Tate line splitting for smooth purity coefficient towers",
+   "results": "{\"t\": \"2026-10-26T20:38:07Z\", \"tool\": \"leansearch\", \"query\": \"Canonical tensor reassociation and normalized shifted Tate line splitting for smooth purity coefficient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.assoc\", \"TensorProduct.tensorTensorTensorComm_comp_map\", \"TensorProduct.tensorTensorTensorComm_symm\", \"TensorProduct.tensorTensorTensorComm_tmul\", \"Mathlib.Tactic.Monoidal.normalizeIsoComp\", \"TensorProduct.tensorTensorTensorComm\", \"TensorProduct.leftComm\", \"TensorProduct.Algebra.mul'_comp_tensorTensorTensorComm\"], \"digest\": \"99001338febb983a\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib construction; use the existing project definitions without redeclaring them"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical tensor reassociation and normalized shifted Tate line splitting for smooth purity coefficient towers",
+   "results": "{\"t\": \"2026-10-26T20:38:09Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical tensor reassociation and normalized shifted Tate line splitting for smooth purity coefficient towers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"Algebra.Extension.tensorH1Cotangent\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"Algebra.Extension.tensorCotangent\", \"Algebra.Extension.tensorCotangentInvFun\", \"Algebra.FormallyUnramified.one_tmul_mul_elem\"], \"digest\": \"851764ced9733bb6\"}",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib construction; use the existing project definitions without redeclaring them"
+  },
+  {
+   "tool": "grep",
+   "query": "towerReassociate|TowerSplitNormalized|TowerPurityAt|towerUnitExchange in Mathlib CategoryTheory; rg in lean/WeilConjectures, lean/Sheaf and dag/nodes; tools/blueprint_refs.py search tower purity words",
+   "results": "{\"t\": \"2026-10-26T20:38:22Z\", \"tool\": \"grep\", \"query\": \"towerReassociate|TowerSplitNormalized|TowerPurityAt|towerUnitExchange\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No upstream WeilConjectures hit. Exact existing declaration: SmoothPurityCompositionFactors.lean:300. DAG record det-sp-composition-factors lists it; no definition node does. def-sp-composition-orientation-arrow-data already owns TowerSplitNormalized and is cited separately, not duplicated. Blueprint search returned 0 matching nodes.",
+   "date": "2026-10-26",
+   "verdict": "existing project definitions need a data-only DAG record, not a new Lean definition"
+  }
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCompositionFactors",
+  "declaration": "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerReassociate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpCompositionFactors.towerReassociate"
+  ],
+  "statement": "def towerReassociate (hcomp : (jf ≫ pf) ≫ (jg ≫ pg) = jh ≫ ph)\n    (K : SpTowerShriek.D l E Z) (M : SpTowerShriek.D l E Y)\n    (N : SpTowerShriek.D l E X)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-26",
+  "existing": true,
+  "note": "Data-only record of the existing actual pullback/tensor word. The finite and towers theorems in this source module are not statement dependencies and are not invoked. TowerSplitNormalized is already owned by def-sp-composition-orientation-arrow-data and is cited through that node."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff34d10bf",
+  "group": "NG",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff34d10bf",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after 816f RETURN (H2). Lean bodies byte-identical to 816f (diffed); only imports changed plus a local hasSheafify instance priority. Item stmt_deps: the three theorem nodes (composition-factors, purity-bc-factors, normalized-reconstruction calculus) are replaced by definition owners: new existing:true def-pur-tower-composition-reassociation (towerReassociate) and def-pur-tower-purity-base-change-words (nine words), reused def-sp-composition-orientation-arrow-data for TowerSplitNormalized, plus six live def owners. Both new node statements match the source defs, and their lean.statement is verbatim. The det-sp-unique-adjoint-coefficients record rewrite and CounitCoefficientMate are removed. Proof-only imports are dropped. Second reading by NG is a real 13-point reading. Main theorem spot-checked: M/R/T/A/C existentials before for-all E; gammaT against the specified adjunction; trace-transpose and extendedTrace equations; uniformizer clause for every n; scalar, chart and whole-system coherence clauses. All owners are in the stmt_dep closure. Compile: worker dry run OK and two-file compile clean (37.4 s / 45.5 s); not recompiled because no file was changed. Advisory: S3 M4 def-sp-purity-base-change-tower-maps (proving lane) will duplicate the base-change-words owner when the trees merge; docstring prose mentions reconstruction calculus, which is not in proof_deps."
+ }
+}

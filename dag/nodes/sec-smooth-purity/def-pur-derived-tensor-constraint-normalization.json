@@ -1,0 +1,127 @@
+{
+ "id": "def-pur-derived-tensor-constraint-normalization",
+ "kind": "definition",
+ "title": "Representative normalization predicate for derived tensor constraints",
+ "status": "split",
+ "statement": "Let $(\\mathcal C,R)$ be a ringed site small relative to the universe of ordinary $R$-module sheaves [def-weil-sheaf-of-modules-category], with $R$ commutative. Write $D(R)$ for their unbounded derived category, $Q$ for cochain localization and $[a]$ for integer cochain shifts [def-weil-abstract-derived-category]. Let $\\mathcal P$ be the full category of K-flat complexes with flat terms [def-pc-kflat-complex], [def-pc-flat-sheaf-modules]. Write $T(E,F)$ for the signed direct-sum total tensor [def-pc-tensor-complex-sheaves], and fix the actual derived tensor bifunctor $B$ and representative isomorphisms $r_{E,F}:QT(E,F)\\cong B(QE,QF)$ of [lem-weil-pbc-site-derived-tensor-descent]. The bundled total and shift models use the resolving closure assertions of [lem-pur-kflat-total-tensor-model], [lem-weil-pbc-kflat-fixed-tensor-triangulated].\n\nDefine bifunctors $B^{a,b}_{\\rm in}(X,Y)=B(X[a],Y[b])$, $B^{a,b}_{\\rm out}(X,Y)=B(X,Y)[a+b]$, $B^{\\rm op}(X,Y)=B(Y,X)$, and trifunctors $B_L((X,Y),Z)=B(B(X,Y),Z)$ and $B_R((X,Y),Z)=B(X,B(Y,Z))$. Define $\\ell_{E,F,G}:QT(T(E,F),G)\\cong B_L((QE,QF),QG)$ by $r_{T(E,F),G}$ followed by $B(r_{E,F},1)$, and $\\rho_{E,F,G}:QT(E,T(F,G))\\cong B_R((QE,QF),QG)$ by $r_{E,T(F,G)}$ followed by $B(1,r_{F,G})$.\n\nFor integers $a,b$, let $c_{E,F}^{a,b}:T(E[a],F[b])\\cong T(E,F)[a+b]$ extract the second shift $b$ first and the first shift $a$ second, followed by the canonical shift-addition identification; the first extraction has coefficient $(-1)^{bp}$ in shifted first-factor degree $p$ and the second is unsigned. Define $s_{E,F}^{a,b}:B(QE[a],QF[b])\\cong B(QE,QF)[a+b]$ as the composite of the inverse localization shift comparisons, $r_{E[a],F[b]}^{-1}$, $Q(c_{E,F}^{a,b})$, the localization shift comparison for $T(E,F)$, and $r_{E,F}[a+b]$.\n\nFor given natural isomorphisms $t_{a,b}:B^{a,b}_{\\rm in}\\cong B^{a,b}_{\\rm out}$, $\\alpha:B_L\\cong B_R$, and $\\sigma:B\\cong B^{\\rm op}$, define $\\operatorname{IsNormalized}(t,\\alpha,\\sigma)$ to be the conjunction of the following three equalities for all resolving inputs and all integers $a,b$: $t_{a,b}(QE,QF)=s_{E,F}^{a,b}$; $\\alpha((QE,QF),QG)=\\rho_{E,F,G}\\circ Q(A_{E,F,G})\\circ\\ell_{E,F,G}^{-1}$, where $A$ is unsigned total reassociation; and $\\sigma(QE,QF)=r_{F,E}\\circ Q(\\beta_{E,F})\\circ r_{E,F}^{-1}$, where $\\beta$ is the Koszul total braiding with coefficient $(-1)^{pq}$ in original degrees $(p,q)$. This is a predicate on the specified natural isomorphisms, with no existence, uniqueness, additivity, faithfulness or boundedness assertion.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT (lemma-symmetric-monoidal-derived), usual constraints on the derived tensor of Tag 06YU (definition-derived-tor); more-algebra.tex section-sign-rules, item-shift-tensor and item-flip-tensor-product. Definition records the existing representative-conjugation predicate, including its right-then-left auxiliary shift convention."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Definition of representative normalization for derived tensor associativity Koszul symmetry and simultaneous integer shifts on flat term K flat complexes",
+   "results": "{\"t\": \"2026-10-22T12:50:18Z\", \"tool\": \"leansearch\", \"query\": \"Definition of representative normalization for derived tensor associativity Koszul symmetry and simultaneous integer shifts on flat term K flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.associator\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'\", \"TensorProduct.tensorTensorTensorAssoc\", \"Associates.normalize_out\", \"Mathlib.Tactic.Monoidal.normalizeIsoComp\", \"DoldKan.termN[_]\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoAux\"], \"digest\": \"b7adf9f711018cfa\"}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib predicate for this normalization. Reuse SheafOfModules.DerivedTensorConstraints.IsNormalized and its helpers already published in Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A predicate specifying that derived tensor associator symmetry and shift natural isomorphisms equal the conjugates of their signed chain maps under K flat representative isomorphisms",
+   "results": "{\"t\": \"2026-10-22T12:50:19Z\", \"tool\": \"leanfinder\", \"query\": \"A predicate specifying that derived tensor associator symmetry and shift natural isomorphisms equal the conjugates of their signed chain maps under K flat representative isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.leftUnitor'_inv_comm_assoc\", \"HomologicalComplex.leftUnitor'_inv_comm\", \"HomologicalComplex.HasTensor\", \"HomologicalComplex.associator\"], \"digest\": \"57e339680fb17096\"}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib predicate for this normalization. Reuse SheafOfModules.DerivedTensorConstraints.IsNormalized and its helpers already published in Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints."
+  },
+  {
+   "tool": "grep",
+   "query": "IsNormalized|shiftRepresentative|leftRepresentative|rightRepresentative",
+   "results": "{\"t\": \"2026-10-22T12:50:17Z\", \"tool\": \"grep\", \"query\": \"IsNormalized|shiftRepresentative|leftRepresentative|rightRepresentative\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No Mathlib predicate for this normalization. Reuse SheafOfModules.DerivedTensorConstraints.IsNormalized and its helpers already published in Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-resolving-tensor-signed-coherence",
+  "date": "2026-10-22",
+  "group": "Q25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Representative normalization of the reassociation and Koszul symmetry used in the transported tensor comparison; the auxiliary shift component only witnesses the existing normalization predicate.",
+   "via": [
+    "lem-pur-resolving-tensor-signed-coherence",
+    "lem-pur-exact-pullback-signed-comparison",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorAdditiveConstraints",
+  "declaration": "SheafOfModules.DerivedTensorConstraints.IsNormalized",
+  "declarations": [
+   "SheafOfModules.DerivedTensorConstraints.Modules",
+   "SheafOfModules.DerivedTensorConstraints.Complex",
+   "SheafOfModules.DerivedTensorConstraints.complexMonoidal",
+   "SheafOfModules.DerivedTensorConstraints.complexMonoidalStruct",
+   "SheafOfModules.DerivedTensorConstraints.resolvingComplex",
+   "SheafOfModules.DerivedTensorConstraints.Model",
+   "SheafOfModules.DerivedTensorConstraints.D",
+   "SheafOfModules.DerivedTensorConstraints.tensor",
+   "SheafOfModules.DerivedTensorConstraints.totalModel",
+   "SheafOfModules.DerivedTensorConstraints.shiftModel",
+   "SheafOfModules.DerivedTensorConstraints.representative",
+   "SheafOfModules.DerivedTensorConstraints.chainShift",
+   "SheafOfModules.DerivedTensorConstraints.shiftedSource",
+   "SheafOfModules.DerivedTensorConstraints.shiftedTarget",
+   "SheafOfModules.DerivedTensorConstraints.leftAssociated",
+   "SheafOfModules.DerivedTensorConstraints.rightAssociated",
+   "SheafOfModules.DerivedTensorConstraints.swapped",
+   "SheafOfModules.DerivedTensorConstraints.shiftRepresentative",
+   "SheafOfModules.DerivedTensorConstraints.leftRepresentative",
+   "SheafOfModules.DerivedTensorConstraints.rightRepresentative",
+   "SheafOfModules.DerivedTensorConstraints.IsNormalized"
+  ],
+  "statement": "def IsNormalized\n    (t : ∀ a b : ℤ, shiftedSource R a b ≅ shiftedTarget R a b)\n    (α : leftAssociated R ≅ rightAssociated R) (σ : tensor R ≅ swapped R) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Existing definition and representative helper interface, recorded without duplicating or moving any declaration, as requested by the independent return at immutable head 027ab8fc312a. This node owns the normalization notion needed to state the consumer; the existence/uniqueness and finite-variable descent theorem remains only a proof dependency of that consumer. The auxiliary shift convention is explicitly right-then-left and does not replace the consumer theorem’s first-then-second shift composite."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c444b92f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c444b92f",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN at 027ab8fc312a. The Lean module is byte-identical. The only item change swaps theorem stmt_dep lem-pur-derived-tensor-additive-constraints for the new existing:true def node def-pur-derived-tensor-constraint-normalization (theorem kept in proof_deps). Checked the new node against live DerivedTensorAdditiveConstraints.lean l.158-317. IsNormalized matches the node statement clause by clause: t = shiftRepresentative, α = ℓ⁻¹ Q(A) ρ, σ = r⁻¹ Q(β) r. chainShift removes the second shift first, sign (−1)^{bp} in shifted degree, as the node states. lean.statement is verbatim. All 21 declarations exist. Co-recording on the unchanged theorem module overwrites no other group's record, and no other def node owns DerivedTensorConstraints.*. Source 0FPT/06YU, SGA-free; blueprint chain, chapter and unit equal the item's. Item clauses were checked in the previous review and are unchanged; H2 is now resolved. Advisory: the new node uses KFlatFixedTensor.representativeIso without citing def-sf-ringed-kflat-tensor-representative-data (new node's stmt_deps, NK 04a724cf precedent). Second reading was done by the same worker. No compile (no file changed); worker reports scompile clean 38.1/40.5 s and a passing dry run."
+ }
+}

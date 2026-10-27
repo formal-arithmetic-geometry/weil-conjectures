@@ -9,7 +9,7 @@ public import Sheaf.Paper.RingedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ScalarExtension
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Paper.FiniteCoefficientExchangeTransport
 
 /-!
@@ -134,7 +134,16 @@ theorem finiteLevelProEtaleBaseChange [IsProper f]
     (proEtaleRingRestrictScalars_properties a).2.1
   letI : (proEtaleRingRestrictScalars a).ReflectsIsomorphisms :=
     (proEtaleRingRestrictScalars_properties a).2.2
-  letI : (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms := inferInstance
+  letI : (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms :=
+    { reflects := fun f _ ↦ by
+        rw [DerivedCategory.isIso_iff]
+        intro n
+        have : IsIso ((proEtaleRingRestrictScalars a).map
+            ((DerivedCategory.homologyFunctor _ n).map f)) :=
+          (NatIso.isIso_map_iff
+            ((proEtaleRingRestrictScalars a).mapDerivedCategoryHomologyFunctorIso n) f).2
+              (by rw [Functor.comp_map]; infer_instance)
+        exact isIso_of_reflects_iso _ (proEtaleRingRestrictScalars a) }
   have hmap := finiteOriginToConstant_map_ambientExchange_isIso Λ sq
     (finiteCoefficientRingIso Λ f) (finiteCoefficientRingIso Λ g)
     (finiteCoefficientRingIso Λ g') (finiteCoefficientRingIso Λ f')

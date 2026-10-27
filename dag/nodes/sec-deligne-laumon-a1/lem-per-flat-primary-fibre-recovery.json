@@ -1,0 +1,249 @@
+{
+ "id": "lem-per-flat-primary-fibre-recovery",
+ "kind": "statement",
+ "title": "Recovery of a flatly extended primary ideal on its radical fibre",
+ "statement": "Let $f:R\\to S$ be a flat homomorphism [def-weil-pbc-flat-ring-map] of commutative Noetherian rings [def-weil-pbc-noetherian-ring]. Let $q\\subset R$ be a primary ideal: $q\\ne R$ and $ab\\in q$, $a\\notin q$ imply $b^h\\in q$ for some $h\\ge1$. Put $\\mathfrak p=\\sqrt q=\\{a\\in R:a^h\\in q\\text{ for some }h\\ge1\\}$. For each prime $\\mathfrak Q\\subset S$ with $f^{-1}(\\mathfrak Q)=\\mathfrak p$, let $S_{\\mathfrak Q}$ be its prime localization [def-weil-pbc-localization-at-prime] and $\\lambda_{\\mathfrak Q}:S\\to S_{\\mathfrak Q}$ the canonical map. For any ideal $H\\subseteq S$, write $HS_{\\mathfrak Q}$ for its extension. Then\n$$qS=\\bigcap_{\\mathfrak Q\\cap R=\\mathfrak p}\\lambda_{\\mathfrak Q}^{-1}(qS_{\\mathfrak Q}).$$\nThe empty intersection means $S$. Neither faithful flatness nor reducedness of $S/\\mathfrak pS$ is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0312 (lemma-bourbaki) and 0311 (lemma-zero-at-ass-zero), applied to S/qS; localization on the whole fibre replaces the minimal-prime-only argument of Rotthaus Theorem 3 (4.3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=qS$ and $M=S/I$. For $a\\notin\\mathfrak p$, multiplication by $a$ on $R/q$ is injective: if $ab\\in q$ and $b\\notin q$, primaryness gives $a^h\\in q$, contrary to $a\\notin\\sqrt q$. Thus $ab\\in q$ forces $b\\in q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0312 (lemma-bourbaki), contraction argument, specialized to a primary quotient; primaryness calculation written out"
+   }
+  },
+  {
+   "text": "Tensor this injection with the flat $R$-module $S$, using [lem-weil-pbc-flat-tensor-exact]. By [lem-weil-pbc-tensor-over-quotient-ring](1), $(R/q)\\otimes_RS\\cong S/qS$, via $\\bar r\\otimes s\\mapsto f(r)s\\bmod I$. On these generators, the tensor of multiplication by $a$ becomes multiplication by $f(a)$. Consequently $f(a)$ acts injectively on $M$ for every $a\\notin\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00HD (lemma-flat), 00DF (lemma-tensor-product-exact), and the nonzerodivisor argument in Tag 0312 (lemma-bourbaki)"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak Q$ be an associated prime of $M$, meaning $\\mathfrak Q=\\operatorname{Ann}_S(z)$ for some $z\\in M$. Since $\\mathfrak Q$ is proper, $z\\ne0$. The ideal $I$ kills all of $M$, hence $q\\subseteq f^{-1}(\\mathfrak Q)$; primality implies $\\sqrt q\\subseteq f^{-1}(\\mathfrak Q)$. Conversely, if $a\\notin\\mathfrak p$, Step 2 makes $f(a)z\\ne0$, so $f(a)\\notin\\mathfrak Q$. Therefore $f^{-1}(\\mathfrak Q)=\\mathfrak p$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0312 (lemma-bourbaki), contraction argument in the primary-quotient case"
+   }
+  },
+  {
+   "text": "The inclusion of $I$ in the asserted intersection follows by extending each of its elements. Conversely, take $x$ in that intersection. For each associated prime $\\mathfrak Q$ of $M$, Step 3 puts $\\mathfrak Q$ in its indexing set, so $x/1\\in IS_{\\mathfrak Q}$. A finite sum of fractions with numerators in $I$ is $y/t$ with $y\\in I$, $t\\notin\\mathfrak Q$. By the fraction equivalence relation [def-weil-pbc-localization-at-prime], $x/1=y/t$ gives $u(tx-y)=0$ for some $u\\notin\\mathfrak Q$. Thus $s=ut\\notin\\mathfrak Q$ and $sx=uy\\in I$, or $s\\bar x=0$ in $M$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Section 00CM (section-localization), fraction construction; Tag 0311 (lemma-zero-at-ass-zero), kernel argument"
+   }
+  },
+  {
+   "text": "Apply the equivalent annihilator criterion in [lem-weil-pbc-module-injects-localizations-associated-primes] to the $S$-module $M$; $S$ is Noetherian by hypothesis. Step 4 supplies its required annihilator outside every associated prime. Hence $\\bar x=0$, so $x\\in I=qS$. This proves equality, including an empty fibre: in that case Step 3 implies there are no associated primes and the same criterion forces $M=0$, hence $qS=S$.",
+   "uses": [
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0311 (lemma-zero-at-ass-zero), statement and proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0312 (lemma-bourbaki), nonzerodivisor/contraction argument, and 0311 (lemma-zero-at-ass-zero). The primary-quotient specialization avoids the general Bourbaki formula; denominator argument expanded from Section 00CM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "primary.*flat|flat.*primary|map.*iInf|iInf.*map",
+   "results": "{\"t\": \"2026-10-24T07:07:49Z\", \"tool\": \"grep\", \"query\": \"primary.*flat|flat.*primary|map.*iInf|iInf.*map\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Lasker.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\"], \"digest\": \"9d18eaf580489d74\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat going down, localization of prime ideals, or primary decomposition uniqueness; none recovers a flatly extended primary ideal from the whole radical fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A primary ideal extended by a flat algebra is determined by its localizations at primes whose contraction is the radical of the primary ideal",
+   "results": "{\"t\": \"2026-10-24T07:07:49Z\", \"tool\": \"leansearch\", \"query\": \"A primary ideal extended by a flat algebra is determined by its localizations at primes whose contraction is the radical of the primary ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.comap_map_eq_map\", \"Ideal.under_map_of_isLocalizationAtPrime\", \"PrimeSpectrum.instLiesOverAsIdealComapAlgebraMap\", \"IsLocalization.isLocalization_isLocalization_atPrime_isLocalization\", \"IsLocalization.minimalPrimes_map\", \"Algebra.HasGoingDown.of_flat\", \"IsLocalization.localizationLocalizationAtPrimeIsoLocalization\", \"RingHom.Flat.ofLocalizationPrime\"], \"digest\": \"6075c89eb6b76cad\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat going down, localization of prime ideals, or primary decomposition uniqueness; none recovers a flatly extended primary ideal from the whole radical fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"IsPrimary\"",
+   "results": "{\"t\": \"2026-10-24T07:07:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"IsPrimary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat going down, localization of prime ideals, or primary decomposition uniqueness; none recovers a flatly extended primary ideal from the whole radical fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-primary-fibre-recovery: For a flat ring map R to S and a p-primary ideal q of R, qS is recovered as the intersection of its contractions from S localized at all primes over p",
+   "results": "{\"t\": \"2026-10-24T07:07:54Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-primary-fibre-recovery: For a flat ring map R to S and a p-primary ideal q of R, qS is recovered as the intersection of its contractions from S localized at all primes over p\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"RingHom.Flat.ofLocalizationPrime\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"instFlatAtPrime\", \"Ideal.under_map_of_isLocalizationAtPrime\", \"IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"RingHom.Flat.localRingHom\"], \"digest\": \"9c4bb4e2b711cd24\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat going down, localization of prime ideals, or primary decomposition uniqueness; none recovers a flatly extended primary ideal from the whole radical fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "isPrimary|associatedPrimes|comap_localized",
+   "results": "{\"t\": \"2026-10-24T07:16:47Z\", \"tool\": \"grep\", \"query\": \"isPrimary|associatedPrimes|comap_localized\", \"sub\": \"RingTheory/Lasker.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"40\", \"62\", \"63\", \"64\", \"73\"], \"digest\": \"84f4089d311b98ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat going down, localization of prime ideals, or primary decomposition uniqueness; none recovers a flatly extended primary ideal from the whole radical fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-primary-fibre-recovery: A primary ideal extended along a flat map of Noetherian rings is recovered from localizations at the minimal primes of the extended radical, when that radical extension is reduced",
+   "results": "{\"t\": \"2026-10-24T07:16:48Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-primary-fibre-recovery: A primary ideal extended along a flat map of Noetherian rings is recovered from localizations at the minimal primes of the extended radical, when that radical extension is reduced\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"instFlatAtPrime\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"RingHom.Flat.ofLocalizationPrime\", \"Ideal.exists_comap_eq_of_mem_minimalPrimes\", \"RingHom.Flat.generalizingMap_comap\", \"RingHom.Flat.localRingHom\", \"Algebra.HasGoingDown\"], \"digest\": \"5b9e618ee755d587\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits give flat going down, localization of prime ideals, or primary decomposition uniqueness; none recovers a flatly extended primary ideal from the whole radical fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "primary.*flat|flat.*primary|comap.*iInf|iInf.*comap",
+   "results": "{\"t\": \"2026-10-24T07:38:21Z\", \"tool\": \"grep\", \"query\": \"primary.*flat|flat.*primary|comap.*iInf|iInf.*comap\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Ideal/Maps.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\", \"Mathlib/RingTheory/Localization/Ideal.lean\"], \"digest\": \"2ead5dbae9cfc213\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat going down and localization recovery for an already primary ideal do not state recovery for an arbitrary flat extension; Lasker gives primary decomposition uniqueness, not this flat-extension formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat extension of a primary ideal is determined by localization at all primes contracting to its radical",
+   "results": "{\"t\": \"2026-10-24T07:38:21Z\", \"tool\": \"leansearch\", \"query\": \"Flat extension of a primary ideal is determined by localization at all primes contracting to its radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"Module.flat_of_isLocalized_span\", \"IsLocalization.AtPrime.comap_map_eq_map\", \"RingHom.Flat.holdsForLocalizationAway\", \"RingHom.Flat.localRingHom\", \"Module.flat_iff_of_isLocalization\", \"RingHom.Flat.ofLocalizationPrime\", \"RingHom.Flat.propertyIsLocal\"], \"digest\": \"fcb1a83ea046da2c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat going down and localization recovery for an already primary ideal do not state recovery for an arbitrary flat extension; Lasker gives primary decomposition uniqueness, not this flat-extension formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Flat\", \"IsPrimary\"",
+   "results": "{\"t\": \"2026-10-24T07:38:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"Flat\\\", \\\"IsPrimary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat going down and localization recovery for an already primary ideal do not state recovery for an arbitrary flat extension; Lasker gives primary decomposition uniqueness, not this flat-extension formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-primary-fibre-recovery: A primary ideal extended by a flat algebra is the intersection of its contractions from localizations at primes over its radical",
+   "results": "{\"t\": \"2026-10-24T07:38:24Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-primary-fibre-recovery: A primary ideal extended by a flat algebra is the intersection of its contractions from localizations at primes over its radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"instFlatAtPrime\", \"IsLocalization.comap_map_of_isPrimary_disjoint\", \"RingHom.Flat.generalizingMap_comap\", \"RingHom.Flat.ofLocalizationPrime\", \"IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"Ideal.comap_map_eq_self_of_faithfullyFlat\"], \"digest\": \"c9008963af680135\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat going down and localization recovery for an already primary ideal do not state recovery for an arbitrary flat extension; Lasker gives primary decomposition uniqueness, not this flat-extension formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-flat-primary-fibre-recovery: Intersection of extended ideal contractions at prime localizations, when every associated prime of the quotient lies over one fixed prime of the base ring",
+   "results": "{\"t\": \"2026-10-24T07:38:55Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-flat-primary-fibre-recovery: Intersection of extended ideal contractions at prime localizations, when every associated prime of the quotient lies over one fixed prime of the base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"Ideal.exists_isPrime_liesOver_of_faithfullyFlat\", \"IsLocalization.AtPrime.liesOver_comap_of_liesOver\", \"instFlatAtPrime\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"IsLocalization.AtPrime.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"IsLocalization.coe_primeSpectrumOrderIso_symm_apply_asIdeal\", \"Ideal.comap_map_eq_self_of_faithfullyFlat\"], \"digest\": \"0f29d348835a4cd0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: flat going down and localization recovery for an already primary ideal do not state recovery for an arbitrary flat extension; Lasker gives primary decomposition uniqueness, not this flat-extension formula."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-compatible-formal-ideal-adic-descent",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor Step 3, regular local model and purity, through the small-singular-locus / ideal-adic G-ring lifting chain; Rotthaus Theorem 3 Claim 4, equations (4.1)–(4.3). Tags 0312 (lemma-bourbaki) and 0311 (lemma-zero-at-ass-zero), applied to S/qS; localization on the whole fibre replaces the minimal-prime-only argument of Rotthaus Theorem 3 (4.3).",
+   "via": [
+    "lem-per-compatible-formal-ideal-adic-descent",
+    "lem-per-local-g-ring-adic-lifting",
+    "lem-per-qe-minimal-formal-defect",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-flat-primary-fibre-recovery",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split it into five steps. Primaryness and flat tensor exactness show all associated primes of S/qS contract to the radical; the existing associated-prime detection theorem then proves recovery after an explicit denominator calculation. No new nodes or statement changes. Mathlib searches, project attachment search, edge cases, sources and citation statements checked.",
+  "blueprint": "Latest blueprint lem-per-artin-gabber-affine-curve, Step 3 (duality/purity route), through the existing regular-model and formal ideal-descent chain named in blueprint.from. This split supplies the primary-ideal recovery input to lem-per-compatible-formal-ideal-adic-descent; it changes no unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic flat-module exactness, used to preserve one multiplication injection; the perverse unit has no commutative-algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-over-quotient-ring",
+    "why": "Generic quotient/tensor identification, used to identify the tensor injection with multiplication on S/qS."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Generic Noetherian module detection at associated primes (0311); the perverse unit has no such algebra lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-16b337bcf",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-16b337bcf (reviewer sub-agent of L); spot-checked: PASS, no changes; I read the whole item. The statement matches the side-live unsplit copy. This is a first split with five steps and no new nodes. Step 1: primaryness makes multiplication by a injective on R/q for a∉√q. Step 2: lem-weil-pbc-flat-tensor-exact and clause (1) of lem-weil-pbc-tensor-over-quotient-ring turn this into injectivity of multiplication by f(a) on S/qS; I checked that the identification r̄⊗s↦f(r)s intertwines the two maps. Step 3: every associated prime Ann(z) of S/qS contracts exactly to p. Step 4: the common-denominator fraction calculation via the u(rs'−r's)=0 relation of def-weil-pbc-localization-at-prime gives s∉Q with sx∈qS. Step 5: the 'Equivalently' annihilator criterion of lem-weil-pbc-module-injects-localizations-associated-primes (Stacks 0311, read at algebra.tex l.15496) over Noetherian S finishes the proof, and the empty fibre gives M=0, matching the convention. I read Stacks 0312 lemma-bourbaki (l.15774): the delivery uses only the flat-injection idea, specialized. Edge cases checked: Z→Q with q=(4) (empty fibre); k[x,y]→k[x,y][t] with q=(x²,y) (infinite fibre); nonreduced Z[e]/(e²); the non-flat k[t]→k[t]/(t), which shows flatness is necessary. No cycle. The rg -L duplicate search found only alternative tools (pbc associated-primes-flat-base-change / -flat-quotient, trf associated-primes-fibre-bound), none restating the item. I accept the three generic sk-thm-p1 tool_uses; the worker wrote them itself, against C8, but they are accurate."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatPrimaryFibreRecovery",
+  "declaration": "Ideal.flat_primary_map_eq_iInf_comap_localization",
+  "file": "lean/Sheaf/RingTheory/FlatPrimaryFibreRecovery.lean",
+  "statement": "theorem flat_primary_map_eq_iInf_comap_localization {R : Type u} {S : Type v} [CommRing R] [CommRing S] [IsNoetherianRing R] [IsNoetherianRing S] (f : R →+* S) (hf : f.Flat) (q : Ideal R) (hq : q.IsPrimary) : q.map f = ⨅ (Q : PrimeSpectrum S) (_ : Q.asIdeal.comap f = q.radical), Ideal.comap (algebraMap S (Localization.AtPrime Q.asIdeal)) (q.map ((algebraMap S (Localization.AtPrime Q.asIdeal)).comp f))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3f084048",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every hypothesis and the conclusion match the node: f.Flat, Noetherian R and S, Ideal.IsPrimary q, primes of S contracting to q.radical, Localization.AtPrime, extension along the composite R→S→S_Q, the full equality, and an empty intersection equal to ⊤. No extra assumptions; universes u and v independent. The mathematics is correct: flatness makes f(a) a nonzerodivisor on S/qS, every associated prime lies over √q, and Stacks 0311 via injective_pi_localization_associatedPrimes finishes. Edge cases checked: empty fibre, zero ring, nonreduced fibre, non-prime primary ideal. lean.statement is verbatim (checked mechanically); stmt_deps are unchanged existing Mathlib records; imports exist; docstrings carry the source, the blueprint tag and five steps; the proof is sorry only. No duplicate in Mathlib or the project. No findings."
+ }
+}

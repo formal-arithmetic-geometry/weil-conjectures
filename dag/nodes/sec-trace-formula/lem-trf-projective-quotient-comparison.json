@@ -1,0 +1,286 @@
+{
+ "id": "lem-trf-projective-quotient-comparison",
+ "kind": "statement",
+ "title": "Immersion comparison for projective-bundle line quotients",
+ "statement": "Let $g:Z\\to X$ be a morphism of schemes [def-pc-scheme], let $F$ be a quasi-coherent $\\mathcal O_X$-module [pqf-def-coherent], and let $N$ be an invertible $\\mathcal O_Z$-module [def-sc-invertible-module]. Suppose $q:g^*F\\twoheadrightarrow N$ is a surjective sheaf homomorphism, and let $r:Z\\to\\mathbf P_X(F)$ be its classifying morphism over $X$, using tensor pullback [def-pc-module-pullback] and the tautological quotient and classification of [def-per-projective-bundle-quotient-data, lem-trf-projective-bundle-quotient-geometry]. Let $(V_j)_{j\\in J}$ be an open covering of $X$, put $Z_j=g^{-1}(V_j)$ and $g_j=g|_{Z_j}$, and suppose there are quasi-coherent $\\mathcal O_{V_j}$-modules $E_j$ and maps $\\alpha_j:E_j\\to F|_{V_j}$ such that $q_j=q|_{Z_j}\\circ g_j^*\\alpha_j$ is surjective and its classifying map $i_j:Z_j\\to\\mathbf P_{V_j}(E_j)$ is an immersion [def-weil-closed-immersion]. Put $P_j=\\mathbf P_{V_j}(F|_{V_j})$ with projection $p_j$. Let $U_j$ be the subset of $P_j$ where the composite $p_j^*E_j\\xrightarrow{p_j^*\\alpha_j}p_j^*(F|_{V_j})\\to\\mathcal O_{P_j}(1)$ is surjective on stalks. Then $U_j$ is open, the quotient on $U_j$ classifies a morphism $h_j:U_j\\to\\mathbf P_{V_j}(E_j)$, and $r|_{Z_j}$ factors through $\\widetilde r_j:Z_j\\to U_j$ with $h_j\\circ\\widetilde r_j=i_j$. In particular $r$ is an immersion. There is no quasi-compactness or finite-type hypothesis on $g$, $E_j$ or $F$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open U_j, omitted verification of the factorization, and immersion conclusion; formulated for an arbitrary quotient q, independent of its evaluation origin."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-pc-scheme",
+  "def-per-projective-bundle-quotient-data",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "pqf-def-coherent"
+ ],
+ "proof": [
+  {
+   "text": "Put $P=\\mathbf P_X(F)$ and let $p:P\\to X$ be its projection. By [lem-trf-projective-bundle-quotient-geometry], $p^{-1}(V_j)$ with its quotient is $P_j$, these opens cover $P$, and the restriction $r_j:Z_j\\to P_j$ classifies $q|_{Z_j}$. In particular there is a quotient-compatible isomorphism $r_j^*\\mathcal O_{P_j}(1)\\simeq N|_{Z_j}$. Write $Q_j=\\mathcal O_{P_j}(1)$ and $\\beta_j:p_j^*E_j\\to Q_j$ for the composite in the statement. Functoriality of tensor pullback [def-pc-module-pullback] and this isomorphism identify $r_j^*\\beta_j$ with $q_j$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open and omitted factorization verification; using Constructions Tags 01OA/01OB for quotient classification."
+   }
+  },
+  {
+   "text": "We check openness directly, without a finiteness hypothesis on the source of $\\beta_j$. For $y\\in U_j$, trivialize $Q_j$ near $y$ with frame $l$, using [def-sc-invertible-module]. Surjectivity at $y$ gives a germ $e_y$ with $\\beta_{j,y}(e_y)=l_y$. Represent $e_y$ by a section $e$ on a smaller neighbourhood and shrink once more so that $\\beta_j(e)=l$ there. On that neighbourhood the map $a l\\mapsto a e$ is a right inverse to $\\beta_j$, so every point lies in $U_j$. Thus $U_j$ is open; $\\beta_j|_{U_j}$ is surjective as a sheaf map by [lem-weil-pbc-locally-surjective-iff-stalks].",
+   "uses": [
+    "def-sc-invertible-module",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open and omitted factorization verification; using Constructions Tags 01OA/01OB for quotient classification."
+   }
+  },
+  {
+   "text": "Apply the quotient classification of [lem-trf-projective-bundle-quotient-geometry] over $V_j$ to the invertible quotient $\\beta_j|_{U_j}:(p_j|_{U_j})^*E_j\\twoheadrightarrow Q_j|_{U_j}$. It gives a morphism $h_j:U_j\\to\\mathbf P_{V_j}(E_j)$ over $V_j$ and a quotient-compatible identification of its pulled tautological quotient with $\\beta_j|_{U_j}$.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open and omitted factorization verification; using Constructions Tags 01OA/01OB for quotient classification."
+   }
+  },
+  {
+   "text": "For $z\\in Z_j$ put $y=r_j(z)$, $A=\\mathcal O_{P_j,y}$ and $B=\\mathcal O_{Z_j,z}$. The stalk homomorphism $A\\to B$ is local [def-weil-locally-ringed-space-morphism]. By [lem-weil-pbc-module-stalk-pullback], naturally in the module, $(r_j^*\\beta_j)_z$ is $\\beta_{j,y}\\otimes_A B$. If $y\\notin U_j$, choose a frame $Q_{j,y}\\simeq A$. The image of $\\beta_{j,y}$ is a proper ideal $I\\subset A$, hence $I\\subseteq\\mathfrak m_A$: an element outside $\\mathfrak m_A$ is a unit and would make $I=A$. Every image of a pure tensor under $\\beta_{j,y}\\otimes_A B$ then lies in $\\mathfrak m_AB\\subseteq\\mathfrak m_B$, and finite sums do too. Thus this tensor map cannot hit $1\\in B$. But step 1 identifies it with the surjective stalk map $(q_j)_z$; stalk surjectivity follows from [lem-weil-pbc-locally-surjective-iff-stalks]. This contradiction proves $r_j(Z_j)\\subseteq U_j$.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-weil-pbc-locally-surjective-iff-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open and omitted factorization verification; using Constructions Tags 01OA/01OB for quotient classification."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-morphism-factors-through-open-subscheme], the inclusion just proved gives a unique $\\widetilde r_j:Z_j\\to U_j$ with composite $r_j$. Pull back the quotient classified by $h_j$ along $\\widetilde r_j$. By the arbitrary-pullback naturality of [lem-trf-projective-bundle-quotient-geometry], $h_j\\circ\\widetilde r_j$ classifies $r_j^*\\beta_j$, which is $q_j$ under the quotient-compatible isomorphism of step 1. The given $i_j$ classifies the same quotient. Injectivity of that classification bijection therefore gives $h_j\\circ\\widetilde r_j=i_j$.",
+   "uses": [
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open and omitted factorization verification; using Constructions Tags 01OA/01OB for quotient classification."
+   }
+  },
+  {
+   "text": "Since $h_j\\circ\\widetilde r_j=i_j$ is an immersion, [lem-zl-immersion-cancellation] implies that $\\widetilde r_j$ is an immersion. By [def-weil-closed-immersion], factor it as a closed immersion into an open subscheme $W_j\\subset U_j$, followed by the inclusion. The set $W_j$ is also open in $P_j$, and its structure sheaf is the restriction of that of $P_j$: restriction through two nested opens is restriction to the smaller open [def-weil-open-immersion]. The same closed immersion followed by $W_j\\hookrightarrow P_j$ is $r_j$, so $r_j$ is an immersion. The opens $P_j\\subset P$ cover $P$, and $r^{-1}(P_j)=Z_j$. Apply [lem-zl-immersion-near-image-locality] to this cover to conclude that $r$ is an immersion.",
+   "uses": [
+    "lem-zl-immersion-cancellation",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "lem-zl-immersion-near-image-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VR (lemma-relatively-very-ample), proof (2) implies (4), comparison open and omitted factorization verification; using Constructions Tags 01OA/01OB for quotient classification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-weil-pbc-locally-surjective-iff-stalks",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-zl-immersion-cancellation",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "lem-zl-immersion-near-image-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01VR (lemma-relatively-very-ample), omitted comparison verification, expanded using quotient classification 01OA/01OB and the elementary maximal-ideal argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Given quasi coherent modules E and F a map E to F and a line quotient of pullback F whose composite from E defines an immersion then the map to projective bundle P F is an immersion",
+   "results": "{\"hits\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.IsImmersion.instHasOfPostcompPropertySchemeTopMorphismProperty\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"AlgebraicGeometry.IsImmersion.instToImage\", \"AlgebraicGeometry.IsImmersion.instMapDescScheme\", \"AlgebraicGeometry.IsImmersion.instSndScheme\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\"], \"n_hits\": 8, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of projective bundle quotient morphisms by the open surjectivity locus of a map into the tautological invertible sheaf",
+   "results": "{\"hits\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.basicOpenToSpec_SpecMap_awayMap\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.SpecMap_awayMap_awayι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\"], \"n_hits\": 8, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Proj",
+   "results": "{\"hits\": [], \"n_hits\": 0, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveBundle|ProjectiveBundle|[Ii]mmersion.*quotient|quotient.*[Ii]mmersion",
+   "results": "{\"hits\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"n_hits\": 3, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective bundle quotient comparison morphism is an immersion when its composite induced by a map of modules is an immersion",
+   "results": "{\"hits\": [\"AlgebraicGeometry.IsImmersion.of_comp\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"Projectivization.map\", \"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion\", \"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\"], \"n_hits\": 8, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|theorem of_comp",
+   "results": "{\"hits\": [\"30\", \"443\", \"459\", \"460\", \"466\"], \"n_hits\": 5, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma of_comp|theorem of_comp|isZariskiLocalAtTarget|IsZariskiLocalAtTarget",
+   "results": "{\"hits\": [\"111\", \"112\", \"115\", \"184\", \"218\"], \"n_hits\": 5, \"note\": \"\", \"assessment\": \"IsImmersion.of_comp supplies cancellation only after a comparison morphism and its open domain have been constructed; fromOfGlobalSections concerns a graded ring mapping to structure-sheaf sections, not relative projective bundles and line quotients.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Proj",
+   "results": "{\"t\": \"2026-10-23T04:08:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Proj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: absolute Proj.fromOfGlobalSections and its restrictions do not state the relative arbitrary-module quotient comparison. IsImmersion.of_comp and target locality supply only the final immersion calculus, reused through existing DAG leaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line quotient of a quasi coherent sheaf defines an immersion into its projective bundle if locally it is induced by a line quotient defining an immersion into another projective bundle",
+   "results": "{\"t\": \"2026-10-23T04:08:10Z\", \"tool\": \"leanfinder\", \"query\": \"A line quotient of a quasi coherent sheaf defines an immersion into its projective bundle if locally it is induced by a line quotient defining an immersion into another projective bundle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsOpenImmersionAwayι\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.awayι\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\"], \"digest\": \"7deb1807656f4832\"}; Read the hits: absolute Proj.fromOfGlobalSections and its restrictions do not state the relative arbitrary-module quotient comparison. IsImmersion.of_comp and target locality supply only the final immersion calculus, reused through existing DAG leaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveBundle|projectiveBundle|[Ii]mmersion.*quotient|quotient.*[Ii]mmersion",
+   "results": "{\"t\": \"2026-10-23T04:08:11Z\", \"tool\": \"grep\", \"query\": \"ProjectiveBundle|projectiveBundle|[Ii]mmersion.*quotient|quotient.*[Ii]mmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"7216213b5e97e663\"}; Read the hits: absolute Proj.fromOfGlobalSections and its restrictions do not state the relative arbitrary-module quotient comparison. IsImmersion.of_comp and target locality supply only the final immersion calculus, reused through existing DAG leaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective bundle quotient comparison morphism is an immersion when the induced quotient from another module defines an immersion",
+   "results": "{\"t\": \"2026-10-23T04:08:12Z\", \"tool\": \"leansearch\", \"query\": \"Projective bundle quotient comparison morphism is an immersion when the induced quotient from another module defines an immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.mk\", \"AlgebraicGeometry.IsImmersion.instToImage\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsPreimmersion.mk\", \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.instIsClosedImmersionInclusion\"], \"digest\": \"97fd889d4ab37841\"}; Read the hits: absolute Proj.fromOfGlobalSections and its restrictions do not state the relative arbitrary-module quotient comparison. IsImmersion.of_comp and target locality supply only the final immersion calculus, reused through existing DAG leaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comparison of projective bundle quotient morphisms on the open locus where the tautological line sheaf is generated by the image of another quasi coherent module",
+   "results": "{\"t\": \"2026-10-23T04:09:09Z\", \"tool\": \"leanfinder\", \"query\": \"Comparison of projective bundle quotient morphisms on the open locus where the tautological line sheaf is generated by the image of another quasi coherent module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app\", \"AlgebraicGeometry.Proj.awayMap_awayToSection_assoc\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι_assoc\", \"AlgebraicGeometry.Proj.awayMap_awayToSection\"], \"digest\": \"9bc1f4f6ccb756c3\"}; Read the hits: absolute Proj.fromOfGlobalSections and its restrictions do not state the relative arbitrary-module quotient comparison. IsImmersion.of_comp and target locality supply only the final immersion calculus, reused through existing DAG leaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fromOfGlobalSections|lemma of_comp|of_range_subset_iSup",
+   "results": "{\"t\": \"2026-10-23T04:11:06Z\", \"tool\": \"grep\", \"query\": \"fromOfGlobalSections|lemma of_comp|of_range_subset_iSup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Integral.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean\"], \"digest\": \"17bf1c1f961291a5\"}; Read the hits: absolute Proj.fromOfGlobalSections and its restrictions do not state the relative arbitrary-module quotient comparison. IsImmersion.of_comp and target locality supply only the final immersion calculus, reused through existing DAG leaves.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-relative-ample-very-ample",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Auxiliary relative-ampleness argument: returned proof of lem-trf-relative-ample-very-ample, old steps 3. Immersion comparison for projective-bundle line quotients.",
+   "via": [
+    "lem-trf-relative-ample-very-ample",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-projective-quotient-comparison",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-quotient comparison in six explicit steps, using existing quotient classification, stalk pullback, open-factorization and immersion-calculus nodes. Openness is a direct local-frame argument; image containment is proved through the local homomorphism of stalk rings, without finite presentation or flatness. No new nodes or Lean files. Statement unchanged.",
+  "blueprint": "The historical ancestor lem-trf-local-term-locality, fibrewise ampleness-to-projectivity helper, through lem-trf-relative-ample-very-ample: realizes the comparison-open and omitted-factorization argument of Stacks 01VR used there. The whole-blueprint search found no statement equivalent to this arbitrary-quotient comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic Zariski module tensor-pullback stalk formula, used in step 4 to identify the pulled map with scalar extension; the unit has no substitute for this general ringed-space computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-de3923f28",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-de3923f28 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its six steps and every cited statement. The split is one commit with no new nodes. Statement, stmt_deps and source are unchanged against live (I diffed them), and the item is still unsplit in both live clones, so no parallel group got there first. Source checked: Stacks 01VR proof (2)=>(4), comparison open U_j and the omitted verification. For Sym(alpha_j), the U(psi) of lemma-morphism-relative-proj is the stalk-surjectivity locus the item defines. Step 1: quotient-geometry gives the open identification, pullback naturality and the quotient-compatible iso; with (hg)^* = g^*h^* this gives r_j^*beta_j = q_j. Step 2 (elementary): openness via a locally lifted frame, then the Mathlib stalk criterion; no finiteness used. Step 3: classification over V_j with T=U_j gives h_j. Step 4: the stalk map is local; stalk-pullback naturality gives beta_y tensor B; a proper image ideal lies in m_A, so the image lies in m_B, which contradicts surjectivity of (q_j)_z. Step 5: IsOpenImmersion.lift, then naturality and injectivity of the classification give h_j r~_j = i_j. Step 6: IsImmersion.of_comp, composition with an open, r^{-1}(P_j)=Z_j, then target-locality over an arbitrary cover. Edge cases checked: empty Z_j, E_j=0, alpha_j=id, infinite rank, a field. No duplicate in the DAG: I searched 01VR, relative-proj and very-ample, and the trf line-quotient chart nodes and sfb very-ample nodes state different things. No SGA. proof_deps equals the union of the step uses. I accept the declared tool use lem-weil-pbc-module-stalk-pullback as a generic black box, to be recorded by the maintainer. One harmless mismatch: the report mentions a citations.json that is not in the commit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveQuotientComparison",
+  "declaration": "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.projective_quotient_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.restrictedLineQuotient",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.inducedLocalLineQuotient",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.comparisonLineMap",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.HasQuotientOpenComparison",
+   "AlgebraicGeometry.ProjectiveBundleQuotientGeometry.projective_quotient_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveQuotientComparison.lean",
+  "statement": "theorem projective_quotient_comparison {Z X : Scheme.{u}} (g : Z ⟶ X) (F : X.Modules) [F.IsQuasicoherent] (N : Z.Modules) [N.IsInvertible] (q : (tensorPullback g).obj F ⟶ N) [Epi q] (D : TautologicalQuotient F) (r : Z ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData F).relProj) (hr : Classifies D g N q r) (J : Type v) (V : J → X.Opens) (hV : iSup V = ⊤) (E : (j : J) → (V j).toScheme.Modules) [∀ j, (E j).IsQuasicoherent] (α : (j : J) → E j ⟶ (tensorPullback (V j).ι).obj F) (DE : (j : J) → TautologicalQuotient (E j)) (i : (j : J) → (g ⁻¹ᵁ V j).toScheme ⟶ (SymmetricAlgebraSheaf.gradedAlgebraData (E j)).relProj) (hqi : ∀ j, Epi (inducedLocalLineQuotient g F N q (V j) (E j) (α j))) (hi : ∀ j, Classifies (DE j) (g ∣_ V j) ((tensorPullback (g ⁻¹ᵁ V j).ι).obj N) (inducedLocalLineQuotient g F N q (V j) (E j) (α j)) (i j)) (himm : ∀ j, IsImmersion (i j)) : (∀ j, HasQuotientOpenComparison g F N q D r (V j) (E j) (α j) (DE j) (i j)) ∧ IsImmersion r",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary maps are explicit composites of the recorded section-normalized tensor pullbacks. HasQuotientOpenComparison unfolds to the exact open-locus and classifying factorization conclusions over one base open, including the quotient-compatible base restriction identification. No finiteness, quasi-compactness or local freeness of F or E is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-095266726",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement field, stmt_deps and proof are unchanged against side-live; only the lean record is new, and lean.statement is verbatim in the file. Clause-by-clause match with the node and Stacks 01VR (2)=>(4): F and E_j quasi-coherent with no finiteness, N invertible, q Epi, r classifies q (any chart-normalized D), arbitrary cover J : Type v, q_j built from canonical tensor-pullback comparisons, hqi/hi/himm, P_j identified by IsPullback plus a quotient-compatible line iso (same shape as HasOpenCompatibility), U_j pinned by an iff with stalk surjectivity of beta_j, h_j classifies the restricted beta_j, lift with both factorization equations, IsImmersion r. Edge cases: empty J, empty Z_j, E_j=0, F=0, infinite rank, independent index universe. No hollow defs, sorry only, docstrings and 6-step proof present, imports allowed, lines <=100, no name clashes. Advisories: A1 uncited def owners def-pc-module-stalk-functor and def-weil-pbc-tensor-pullback-ordinary-comparison (precedents Q12, Q21); A2 stage 3 must prove uniqueness up to iso of arbitrary tautological data. No compile run because no file was changed."
+ }
+}

@@ -1,0 +1,255 @@
+{
+ "id": "lem-trf-formal-node-axes-total-fractions",
+ "kind": "statement",
+ "title": "Axes and total fractions of the formal split node",
+ "statement": "Let $k$ be a field [def-weil-field]. Put $T=k[[u,v]]$, $R=T/(uv)$ [def-weil-pbc-algebra-hom-quotient], and $P=k[[u]]\\times k[[v]]$, using formal power series [def-weil-pbc-multivariate-power-series]. Let $S=\\{(f,g)\\in P:f(0)=g(0)\\}$ with its induced ring structure. The axis map $T\\to P$, $h\\mapsto(h(u,0),h(0,v))$, has kernel $(uv)$ and image $S$, and therefore induces a $k$-algebra isomorphism $R\\cong S$. Under this isomorphism an element of $R$ is a non-zero-divisor (multiplication by it is injective) if and only if both its components in $P$ are nonzero. In particular $s=(u,v)\\in S$ is a non-zero-divisor. Let $Q(R)$ mean the localization at all non-zero-divisors [def-weil-pbc-essentially-finite-type-algebra]. The axis map extends to an isomorphism $Q(R)\\cong k((u))\\times k((v))$, where Laurent series are [def-weil-pbc-laurent-series], compatible with the inclusions of $R$ and $P$ into the displayed product.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), proof Case I: explicit algebra of the split completed node."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-laurent-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-essentially-finite-type-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Write $h=\\sum_{i,j\\geq0}a_{ij}u^iv^j$. By the coefficientwise addition and Cauchy product, $\\alpha(h)=(\\sum_i a_{i0}u^i,\\sum_j a_{0j}v^j)$ is a $k$-algebra map: for the coefficient of $u^n$ in a product only pairs of terms with both $v$-exponents zero contribute, and likewise on the other axis. Its kernel consists precisely of series with $a_{i0}=a_{0j}=0$ for all $i,j$. Such a series equals $uv\\sum_{i,j\\geq0}a_{i+1,j+1}u^iv^j$. Conversely multiplication by $uv$ makes every axis coefficient zero. Thus $\\ker\\alpha=(uv)$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I q=xy; explicit coefficient details supplied by N7."
+   }
+  },
+  {
+   "text": "Both components of $\\alpha(h)$ have constant coefficient $a_{00}$, so its image is contained in $S$. If $(f,g)\\in S$ has common constant $c$, the bivariate series $f(u)+g(v)-c$ maps to $(f,g)$. Because the kernel is $(uv)$, the assignment $[h]\\mapsto\\alpha(h)$ on the quotient is well defined and is a $k$-algebra map. Its inverse is $(f,g)\\mapsto[f(u)+g(v)-c]$: the first composite is the identity by the displayed axis formula, and the second is the identity because $h-(h(u,0)+h(0,v)-a_{00})$ has both axis restrictions zero, hence is in $(uv)$ by Step 1. This gives the asserted isomorphism $R\\cong S$.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I q=xy; explicit coefficient details supplied by N7."
+   }
+  },
+  {
+   "text": "The power-series-domain node, with $A=k$ and $d=1$, says that both branch rings are domains. If $f\\neq0$ and $g\\neq0$, an equality $(f,g)(a,b)=0$ in $S$ forces $a=b=0$, so $(f,g)$ is a non-zero-divisor. If $f=0$, the nonzero element $(u,0)\\in S$ annihilates $(f,g)$; if $g=0$, use $(0,v)\\in S$. These witnesses are nonzero because the coefficient of their variable is $1\\neq0$ in the field $k$. This includes $(f,g)=0$. Thus exactly the pairs with two nonzero components are non-zero-divisors, and $s=(u,v)$ is one. The isomorphism of Step 2 preserves this property, since it preserves multiplication and zero. Products of such pairs again have both components nonzero, and $(1,1)$ is such a pair; hence they form the multiplicative set used to define $Q(R)$.",
+   "uses": [
+    "def-weil-field",
+    "def-weil-pbc-multivariate-power-series",
+    "lem-weil-pbc-power-series-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I q=xy; explicit coefficient details supplied by N7."
+   }
+  },
+  {
+   "text": "Put $L=k((u))\\times k((v))$ and let $j:R\\hookrightarrow L$ be Step 2 followed by the two coefficientwise inclusions of power series in Laurent series. These inclusions are injective by the Laurent-series definition node. By the Laurent-series-field node both factors of $L$ are fields. Therefore the image of every non-zero-divisor $t\\in R$ is a unit in $L$: if its components are $(f,g)$, its inverse there is $(f^{-1},g^{-1})$ by Step 3. Apply the localization universal property with $A=R$, $C=L$, and $U$ the multiplicative set in Step 3. It gives the unique extension $\\Phi:Q(R)\\to L$, $r/t\\mapsto j(r)j(t)^{-1}$. If $\\Phi(r/t)=0$, multiplication by the unit $j(t)$ gives $j(r)=0$, so $r=0$ by injectivity of $j$; then $r/t=0$. Thus $\\Phi$ is injective (apply this to a difference for two equal images). It respects the $k$-algebra structures because it agrees with $j$ on constants.",
+   "uses": [
+    "def-weil-pbc-laurent-series",
+    "lem-weil-pbc-laurent-series-field",
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I q=xy; explicit coefficient details supplied by N7."
+   }
+  },
+  {
+   "text": "For any $(a,b)\\in L$, the two Laurent series have supports bounded below by the Laurent-series definition, say by integers $A,B$; these bounds exist also for the zero series. Choose an integer $N\\geq1$ with $N+A\\geq1$ and $N+B\\geq1$. Multiplication by $u^N$ shifts the coefficient in degree $i$ of $a$ to degree $i+N$, and similarly for $v^Nb$. Hence $u^Na\\in u k[[u]]$ and $v^Nb\\in v k[[v]]$, with both constants zero. The numerator $r_N=(u^Na,v^Nb)$ therefore belongs to $S$, and the denominator $s^N=(u^N,v^N)$ is a non-zero-divisor by Step 3. Regard $r_N$ and $s$ as elements of $R$ through Step 2. The fraction $r_N/s^N$ has image $(a,b)$ under $\\Phi$, by coordinatewise cancellation in the two Laurent fields. This proves surjectivity. Together with Step 4 it gives the required isomorphism. For $(f,g)\\in P$, taking $N=1$ represents its image by $(uf,vg)/s$, which maps to exactly the coefficientwise inclusion of $(f,g)$ into $L$. This embeds $P$ into $Q(R)$ through $\\Phi^{-1}$, restricts to $r\\mapsto r/1$ on $R$, and proves the stated compatibility for both inclusions.",
+   "uses": [
+    "def-weil-pbc-laurent-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4A (lemma-2-branches-delta-1), proof of (1) implies (2), Case I q=xy; explicit coefficient details supplied by N7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-field",
+  "lem-weil-pbc-power-series-domain",
+  "def-weil-pbc-laurent-series",
+  "lem-weil-pbc-laurent-series-field",
+  "lem-weil-pbc-ring-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4A (lemma-2-branches-delta-1), Case I q=xy: expansion of the omitted explicit algebra, with localization as in algebra.tex Tag 00CP."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(MvPowerSeries|PowerSeries).*(axis|node|fiber[Pp]roduct|fibre[Pp]roduct)|quotient.*(mul_X|X_mul)|LaurentSeries.*Prod",
+   "results": "{\"t\": \"2026-10-22T06:37:11Z\", \"tool\": \"grep\", \"query\": \"(MvPowerSeries|PowerSeries).*(axis|node|fiber[Pp]roduct|fibre[Pp]roduct)|quotient.*(mul_X|X_mul)|LaurentSeries.*Prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Polynomial/GroupRingAction.lean\"], \"digest\": \"bb53593fee1e0036\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "total ring of fractions of the formal node k[[x,y]]/(xy) is k((x)) times k((y))",
+   "results": "{\"t\": \"2026-10-22T06:37:11Z\", \"tool\": \"leansearch\", \"query\": \"total ring of fractions of the formal node k[[x,y]]/(xy) is k((x)) times k((y))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Localization.subalgebra.isFractionRing\", \"LaurentSeries.instIsFractionRingPowerSeries\", \"Localization.subalgebra.instIsFractionRingSubtypeMemSubalgebra\", \"IsFractionRing.instAtPrimeFractionRing\", \"FractionRing.algEquiv\", \"IsFractionRing.isFractionRing_of_isLocalization\", \"RatFunc.instIsFractionRingPolynomial\", \"Algebra.QuasiFinite.instOfIsFractionRing\"], \"digest\": \"4bc76a6c9c239376\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsFractionRing",
+   "results": "{\"t\": \"2026-10-22T06:37:11Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "axis restriction of k[[u,v]] modulo uv equals equal constant pairs of power series and its total quotient ring is product Laurent series",
+   "results": "{\"t\": \"2026-10-22T06:37:12Z\", \"tool\": \"leanfinder\", \"query\": \"axis restriction of k[[u,v]] modulo uv equals equal constant pairs of power series and its total quotient ring is product Laurent series\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeriesEquivSubring\", \"LaurentSeries.powerSeriesEquivSubring_apply\", \"LaurentSeries.of_powerSeries_localization\", \"LaurentSeries.powerSeries_ext_subring\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.LaurentSeriesRingEquiv_def\", \"LaurentSeries.powerSeriesEquivSubring_coe_apply\"], \"digest\": \"da625289957c4715\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "node|equal.constant|fiber[Pp]roduct|fibre[Pp]roduct",
+   "results": "{\"t\": \"2026-10-22T06:37:41Z\", \"tool\": \"grep\", \"query\": \"node|equal.constant|fiber[Pp]roduct|fibre[Pp]roduct\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantCoeff\", \"ker\"",
+   "results": "{\"t\": \"2026-10-22T06:37:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"constantCoeff\\\", \\\"ker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Polynomial.ker_constantCoeff\", \"WittVector.ker_constantCoeff\"], \"digest\": \"c86312983dd80cc1\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fiber product of two formal power series rings over their residue field has total quotient ring the product of the two fraction fields",
+   "results": "{\"t\": \"2026-10-22T06:37:52Z\", \"tool\": \"leanfinder\", \"query\": \"fiber product of two formal power series rings over their residue field has total quotient ring the product of the two fraction fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.residueFieldMapCAlgEquiv\", \"PowerSeries.residueFieldOfPowerSeries\", \"PrimeSpectrum.coe_preimageHomeomorphFiber_apply_asIdeal\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"Polynomial.fiberEquivQuotient\", \"Ideal.fiberIsoOfBijectiveResidueField\", \"Ideal.comap_fiberIsoOfBijectiveResidueField_apply\", \"instIsFractionRingQuotientIdealResidueField\"], \"digest\": \"942eafbe36777263\"}. Read the hits: LaurentSeries.instIsFractionRingPowerSeries and of_powerSeries_localization concern one branch only; neither supplies the two-axis kernel/image or the total fractions of the equal-constant subring. The polynomial/Witt constant-coefficient kernels and unrelated polynomial group action also do not state this result.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(MvPowerSeries|PowerSeries).*(axis|node|fiber[Pp]roduct)|LaurentSeries.*Prod",
+   "results": "{\"t\": \"2026-10-23T04:26:44Z\", \"tool\": \"grep\", \"query\": \"(MvPowerSeries|PowerSeries).*(axis|node|fiber[Pp]roduct)|LaurentSeries.*Prod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. No two-axis or product-Laurent result was found.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of the two axis restriction map on bivariate formal power series is the ideal generated by xy",
+   "results": "{\"t\": \"2026-10-23T04:26:44Z\", \"tool\": \"leansearch\", \"query\": \"The kernel of the two axis restriction map on bivariate formal power series is the ideal generated by xy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.ker_mapAlgHom\", \"Polynomial.ker_constantCoeff\", \"PowerSeries.maximalIdeal_eq_span_X\", \"RingHom.ker\", \"MvPolynomial.ker_eval₂Hom_universalFactorizationMap\", \"AlgebraicIndependent.repr_ker\", \"MvPolynomial.ker_map\", \"PowerSeries.idealX\"], \"digest\": \"261407a58ecbf9d3\"}. The polynomial kernels (Polynomial/Ideal.lean:50; Polynomial/Basic.lean:995,1002) concern polynomials or coefficient maps, not simultaneous restriction of bivariate series to the two axes. PowerSeries.maximalIdeal_eq_span_X (PowerSeries/Inverse.lean:294) is a one-branch ideal theorem. None states this item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPowerSeries, IsFractionRing",
+   "results": "{\"t\": \"2026-10-23T04:26:45Z\", \"tool\": \"loogle\", \"query\": \"MvPowerSeries, IsFractionRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. No hits. This does not identify the nodal quotient with a localization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total quotient ring of k[[x,y]]/(xy) is k((x)) times k((y)), via restriction to the two axes",
+   "results": "{\"t\": \"2026-10-23T04:26:55Z\", \"tool\": \"leanfinder\", \"query\": \"The total quotient ring of k[[x,y]]/(xy) is k((x)) times k((y)), via restriction to the two axes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.ratfuncAdicComplRingEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.ratfuncAdicComplRingEquiv_apply\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.instIsFractionRingPowerSeries\", \"LaurentSeries.RatFuncAdicCompl\", \"LaurentSeries.coe_X_compare\"], \"digest\": \"c814ac8a4cbd467f\"}. Read LaurentSeries.of_powerSeries_localization (LaurentSeries.lean:273), the returned fraction-ring instance and the completion equivalences. They concern one branch or its valuation completion. They do not give the kernel/image for the nodal quotient or the product total-fraction isomorphism. These are ingredients, not a one-line specialization of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fiber product of two power series rings over their constant coefficient field has total quotient ring the product of their Laurent series fields",
+   "results": "{\"t\": \"2026-10-23T04:27:50Z\", \"tool\": \"leanfinder\", \"query\": \"The fiber product of two power series rings over their constant coefficient field has total quotient ring the product of their Laurent series fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.instIsFractionRingPowerSeries\", \"LaurentSeries.of_powerSeries_localization\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.ratfuncAdicComplRingEquiv\", \"LaurentSeries.powerSeries_ext_subring\", \"LaurentSeries.RatFuncAdicCompl\"], \"digest\": \"0c14d6de35c70029\"}. Read LaurentSeries.of_powerSeries_localization (LaurentSeries.lean:273), the returned fraction-ring instance and the completion equivalences. They concern one branch or its valuation completion. They do not give the kernel/image for the nodal quotient or the product total-fraction isomorphism. These are ingredients, not a one-line specialization of the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-normalization-quotient",
+  "date": "2026-10-22",
+  "group": "Q85"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Numerical exceptional-fibre normalization calculation in the descendant lem-trf-nodal-normalization-quotient: old proof step 2, the two-axis embedding and its total fraction ring.",
+   "via": [
+    "lem-trf-nodal-normalization-quotient",
+    "lem-trf-nodal-curve-normalization-euler",
+    "lem-trf-nodal-contraction-euler-defect",
+    "lem-trf-smooth-target-modification-exceptional-tree",
+    "lem-trf-valuation-marking-semistable-separation",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-formal-node-axes-total-fractions",
+  "worker": "stage1",
+  "summary": "Computed the axis homomorphism coefficientwise, supplied an explicit inverse on the quotient, characterized all non-zero-divisors using the existing power-series-domain leaf, and proved injectivity and surjectivity of the canonical total-fraction map using the existing Laurent field and localization leaves. No new nodes or statement changes; only definition references and an inline meaning of non-zero-divisor added.",
+  "blueprint": "Realizes the explicit two-axis/total-fractions calculation in old step 2 of lem-trf-nodal-normalization-quotient, the exceptional-fibre normalization calculation below lem-trf-local-term-locality. The imported blueprint itself contains no separate node for this algebra."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N7-dd8e90882",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-dd8e90882 (reviewer sub-agent of L); spot-checked: I read the item and all 5 steps in full; there are no new nodes. Live and side-live still show the item unsplit with no repair note. The statement is the same mathematics as before; the delivery only adds the citations def-weil-pbc-algebra-hom-quotient and def-weil-pbc-essentially-finite-type-algebra (also in stmt_deps) and the parenthetical defining non-zero-divisor. The parent lem-trf-nodal-normalization-quotient step 2 still gets exactly what it uses. Source: Stacks curves.tex 0C4A lemma-2-branches-delta-1, Case I (q=xy, A'=k[[x,y]]/(x)×k[[x,y]]/(y), 'by hand'); proof_origin=agent is honest; no SGA. Steps: (1) the Cauchy product makes axis restriction multiplicative, and the kernel is uv·Σa_{i+1,j+1}u^iv^j, which is elementary. (2) The inverse f(u)+g(v)-c checks out with both composites, in any characteristic. (3) The domain lemma with A=k, d=1 gives that both-nonzero pairs are non-zero-divisors; the witnesses (u,0) and (0,v) lie in S, the zero element is covered, and the set is multiplicative. (4) j is injective, units go to units in a product of fields, the localization universal-property hypotheses all hold, and injectivity of Φ is checked directly. (5) Shifting by N with N+ord≥1, zero series included, gives r_N∈S and r_N/s^N↦(a,b); N=1 gives the P-compatibility. Hand checks: (u^{-3},0)=(u,0)/s^4 and 1+u+v↦(1+u,1+v). proof_deps equals the union of the step uses, with no cycles. Duplicate search: only one clause of the unsplit lem-sfb-nodal-completed-normalization-model overlaps, inside a much larger geometric statement. It is not a duplicate. Maintainer note: that node could cite this item when it is split. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalNodeAxesTotalFractions",
+  "declaration": "MvPowerSeries.formalNode_axes_totalFractions",
+  "declarations": [
+   "MvPowerSeries.formalNodeIdeal",
+   "MvPowerSeries.FormalNodeRing",
+   "MvPowerSeries.formalNodeAxisMap",
+   "MvPowerSeries.formalNodeAxesSubalgebra",
+   "MvPowerSeries.formalNodeBranchesToLaurent",
+   "MvPowerSeries.formalNode_axes_totalFractions"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalNodeAxesTotalFractions.lean",
+  "statement": "theorem formalNode_axes_totalFractions (k : Type u) [Field k] : RingHom.ker (formalNodeAxisMap k).toRingHom = formalNodeIdeal k ∧ Set.range (formalNodeAxisMap k) = (formalNodeAxesSubalgebra k : Set (PowerSeries k × PowerSeries k)) ∧ ∃ e : FormalNodeRing k ≃ₐ[k] formalNodeAxesSubalgebra k, (∀ h : MvPowerSeries (Fin 2) k, (e (Ideal.Quotient.mk (formalNodeIdeal k) h) : PowerSeries k × PowerSeries k) = formalNodeAxisMap k h) ∧ (∀ r : FormalNodeRing k, Function.Injective (fun x : FormalNodeRing k ↦ r * x) ↔ (e r).val.1 ≠ 0 ∧ (e r).val.2 ≠ 0) ∧ (∃ s : formalNodeAxesSubalgebra k, (s : PowerSeries k × PowerSeries k) = (PowerSeries.X, PowerSeries.X) ∧ Function.Injective (fun x : formalNodeAxesSubalgebra k ↦ s * x)) ∧ ∃ Φ : FractionRing (FormalNodeRing k) ≃ₐ[k] LaurentSeries k × LaurentSeries k, (∀ r : FormalNodeRing k, Φ (algebraMap (FormalNodeRing k) (FractionRing (FormalNodeRing k)) r) = formalNodeBranchesToLaurent k (e r).val) ∧ ∃ ι : PowerSeries k × PowerSeries k →ₐ[k] FractionRing (FormalNodeRing k), Function.Injective ι ∧ (∀ p : PowerSeries k × PowerSeries k, Φ (ι p) = formalNodeBranchesToLaurent k p) ∧ (∀ r : FormalNodeRing k, ι (e r).val = algebraMap (FormalNodeRing k) (FractionRing (FormalNodeRing k)) r)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary declarations give the explicit nodal ideal, quotient, axis homomorphism, equal-constant subalgebra and Laurent inclusion. The theorem includes the quotient isomorphism with its axis formula, regular elements, (u,v), and the total-fraction isomorphism compatible with both R and P."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c193a43a8",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: ker = (uv) and range = S via killCompl axis map (Mathlib Rename.lean:241); R≃ₐS pinned on representatives; non-zero-divisor iff for every r; s=(X,X)∈S regular; FractionRing R ≃ₐ k((u))×k((v)) pinned by Φ(r/1)=incl(e r); injective ι:P→Q(R) with Φ∘ι=incl on all of P and ι(e r)=r/1. No extra hypotheses or universe restriction. 5 helpers are real data and listed in declarations. Docstrings carry source place, blueprint tag and the 5 proof steps; proof is sorry only. lean.statement verbatim. Node differs from side-live only in lean; no stmt_dep dropped; all 5 stmt_deps are mathlib nodes. No name clash in Mathlib or the project trees; first S2 delivery. Agrees with Stacks curves.tex 0C4A Case I. Not recompiled (no file changed)."
+ }
+}

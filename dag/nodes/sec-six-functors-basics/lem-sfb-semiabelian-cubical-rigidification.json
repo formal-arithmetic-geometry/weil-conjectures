@@ -1,0 +1,227 @@
+{
+ "id": "lem-sfb-semiabelian-cubical-rigidification",
+ "kind": "statement",
+ "title": "Canonical cubical structure on a rigidified line",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $p:G\\to S$ a smooth separated commutative group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], with geometrically connected fibres and identity $e$. The group operations satisfy the commutative group identities, and separated means that the diagonal is a closed immersion. Assume either (a) $p$ is proper [def-weil-proper-morphism], so that $G$ is an abelian scheme, or (b) $S$ is normal (all local rings are integrally closed domains [def-weil-pbc-normal-ring]) and every geometric fibre is semiabelian: over an algebraically closed residue-field extension $k$ it is an extension, exact as fppf sheaves, $1\\to(\\mathbf G_{m,k})^r\\to G_k\\to A_k\\to1$, with $r\\geq0$, $\\mathbf G_{m,k}=\\operatorname{Spec}k[t,t^{-1}]$, and $A_k$ a proper smooth geometrically connected $k$-group scheme. For every invertible module $L$ on $G$ [def-sc-invertible-module] and every rigidification $r:e^*L\\simeq\\mathcal O_S$ (tensor inverse image [def-pc-module-pullback]), there is exactly one cubical structure compatible with $r$ [def-sfb-cubical-rigidified-line]. Every rigidification-preserving isomorphism between such lines preserves their cubical structures. These structures commute with restriction of the base and with pullback by group-scheme homomorphisms whenever both groups satisfy (a) or (b).",
+ "source": {
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I 2.6 (relative theorem of the cube). Local original WANTED. Online cross-check: Lan, revised thesis, Proposition 3.2.3.1, printed p.68, cases (1) and (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-normal-ring",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-sfb-cubical-rigidified-line",
+  "def-sfb-semiabelian-geometric-fibres"
+ ],
+ "proof": [
+  {
+   "text": "Form $C=\\Theta_3(L)$ as in [def-sfb-cubical-rigidified-line]. Inserting $e$ in coordinate $i$ pairs each factor $m_I^*L$ not involving $i$ with the inverse factor indexed by $I\\cup\\{i\\}$; evaluate $e^*L$ with $r$. Evaluation of a line against its dual gives a canonical face trivialization $c_i$ of $C$. On intersections the same pairings give the same section: locally their coefficient is the product of the same units and their inverses. Apply [lem-sfb-relative-picard-cube-face-detection] with all three factors equal to $G$, $M=C$. Its proper alternative holds in (a), and its normal semiabelian alternative holds in (b). It gives a nowhere vanishing section $t$ of $C$, initially with no normalization.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-sfb-relative-picard-cube-face-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+   }
+  },
+  {
+   "text": "Write $f_i=j_i^*t/c_i$, a unit on the face $x_i=e$. Their restrictions to face intersections agree. Denote the common restriction to $x_i=x_j=e$ by $f_{ij}$, and to the all-identity section by $f_{123}$. Regard each of these functions on $G^3$ by forgetting the coordinates set equal to $e$. Define\n$$\\tau=t\\,f_1^{-1}f_2^{-1}f_3^{-1}f_{12}f_{13}f_{23}f_{123}^{-1}.$$\nFor example, on $x_1=e$ the scalar factor multiplying $c_1$ is\n$$f_1 f_1^{-1}f_{12}^{-1}f_{13}^{-1}f_{12}f_{13}f_{123}f_{123}^{-1}=1.$$\nThe other two substitutions give the same cancellation. Thus $\\tau$ is nowhere vanishing and has exactly the three required face restrictions.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+   }
+  },
+  {
+   "text": "We will use [lem-sfb-relative-group-unit-axis-factorization] on $G^3$ and $G^4$. Its proper alternative applies in (a). In (b) normality implies reducedness: each local ring is a domain and hence has no nonzero nilpotents. If $\\tau'$ is another nowhere vanishing cube section with the prescribed face restrictions, its quotient $u=\\tau'/\\tau$ is a unit on $G^3$ equal to $1$ on each identity face, and hence on each identity axis. The cited factorization gives $u=1$. This proves uniqueness even before symmetry and the cocycle condition are imposed.",
+   "uses": [
+    "lem-sfb-relative-group-unit-axis-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+   }
+  },
+  {
+   "text": "A permutation of the coordinates permutes the factors of $\\Theta_3(L)$ and the canonical face sections $c_i$. The permuted $\\tau$ therefore has the same face restrictions as $\\tau$, so the uniqueness just proved makes it equal to $\\tau$. For the cocycle, expand the four copies of $\\Theta_3(L)$ in the displayed identity of [def-sfb-cubical-rigidified-line] and cancel the factors indexed by equal sums. The quotient\n$$v=\\frac{\\tau(x,y,z)\\tau(x+y,w,z)}{\\tau(y,w,z)\\tau(x,y+w,z)}$$\nis consequently a unit on $G^4$. On each of its four identity axes every displayed triple has at least one identity coordinate, so all four sections evaluate to their canonical unit sections; thus each axis restriction of $v$ is $1$. The factorization of [lem-sfb-relative-group-unit-axis-factorization] for $n=4$ gives $v=1$. This proves the cocycle condition and hence existence of a compatible cubical structure.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-sfb-relative-group-unit-axis-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+   }
+  },
+  {
+   "text": "For a rigidification-preserving isomorphism $\\alpha:L\\simeq L'$, the tensor product of its eight pullbacks sends $\\Theta_3(L)$ to $\\Theta_3(L')$. The cancellation on every identity face commutes with $\\alpha$ because $\\alpha$ preserves $r$. Thus $\\Theta_3(\\alpha)(\\tau_L)$ and $\\tau_{L'}$ have the same face restrictions; their quotient is $1$ by step 3. Therefore every such isomorphism preserves the cube sections.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "lem-sfb-relative-group-unit-axis-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+   }
+  },
+  {
+   "text": "Pullback along a base restriction, or a group-scheme homomorphism, carries every partial-sum map in $\\Theta_3$ to the corresponding partial-sum map and carries $e$ to $e$. Tensor inverse image preserves the evaluation pairings of a line and its dual (locally this is multiplication of a unit and its inverse). It therefore carries the face normalization, permutation equality and cocycle equality of $\\tau$ to the same equalities for the pulled-back line. Whenever the new group satisfies (a) or (b), its unique structure from steps 1--4 must equal this pulled-back structure. This proves the stated compatibilities, including identity and iterated pullbacks.",
+   "uses": [
+    "def-sfb-cubical-rigidified-line",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+    "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-cubical-rigidified-line",
+  "lem-sfb-relative-picard-cube-face-detection",
+  "lem-sfb-relative-group-unit-axis-factorization",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/moret-bailly-pinceaux-varietes-abeliennes-Asterisque129-1985.pdf",
+  "place": "I 2.6, geometric theorem-of-the-cube input; original local copy WANTED. Lan, revised thesis, Proposition 3.2.3.1 confirms the group-scheme hypotheses. This pointed triple-product Picard formulation is an agent-extracted geometric prerequisite, not a quotation of the cubical-category equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every rigidified invertible sheaf on a semiabelian scheme over a normal base has a unique functorial cubical structure",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instBraidedCategoryScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"CategoryTheory.BraidedCategory AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes is endowed with the structure of a braided category. This structure is derived from its Cartesian monoidal structure, where the braiding isomorphism for two schemes $X$ and $Y$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n      CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) →\\n    (∀ (i : n),\\n        (CategoryTheory\", \"doc\": \"If two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over $S$ agree on their composition with the structure morphism $\\\\mathbb{A}^n_S \\\\to S$ and induce identical maps on all coordina\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.hom_ext_iff\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X : AlgebraicGeometry.Scheme} {f g : X ⟶ AlgebraicGeometry.AffineSpace n S},\\n  f = g ↔\\n    CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace n S ↘ S) =\\n        CategoryTheory.CategoryStruct.comp g (AlgebraicGeometry.AffineSpace n S ↘ S) ∧\\n      ∀ (i : n),\\n        \", \"doc\": \"Two morphisms from a scheme $X$ to the affine space $\\\\mathbb{A}^n_S$ over a base scheme $S$ are equal if and only if (1) their compositions with the canonical morphism $\\\\mathbb{A}^n_S \\\\to S$ are equal\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Theorem of the cube equivalence between cubical line bundles and rigidified line bundles on an abelian scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Pretrivialization.linearEquivAt.congr_simp\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"∀ (R : Type u_1) {B : Type u_2} {F : Type u_3} {E : B → Type u_4} [inst : Semiring R] [inst_1 : TopologicalSpace F]\\n  [inst_2 : TopologicalSpace B] [inst_3 : AddCommMonoid F] [inst_4 : Module R F]\\n  [inst_5 : (x : B) → AddCommMonoid (E x)] [inst_6 : (x : B) → Module R (E x)]\\n  (e e_1 : Pretrivializa\", \"doc\": \"For a vector bundle over a base space $B$ with fiber $F$, given two linear pretrivializations $e$ and $e_1$ that are equal, the induced linear equivalences between the fiber $E_b$ and $F$ at any base \"}\n  {\"name\": \"WeierstrassCurve.c_relation_of_char_two\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.c₄ ^ 3 = W.c₆ ^ 2\", \"doc\": \"For a Weierstrass curve $ W $ over a ring of characteristic two, the cube of the $ c_4 $-invariant equals the square of the $ c_6 $-invariant, i.e., $ c_4^3 = c_6^2 $.\"}\n  {\"name\": \"Trivialization.linearEquivAt.congr_simp\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.LocalFrame\", \"type\": \"∀ (R : Type u_1) {B : Type u_2} {F : Type u_3} {E : B → Type u_4} [inst : Semiring R] [inst_1 : TopologicalSpace F]\\n  [inst_2 : TopologicalSpace B] [inst_3 : TopologicalSpace (Bundle.TotalSpace F E)] [inst_4 : AddCommMonoid F]\\n  [inst_5 : Module R F] [inst_6 : (x : B) → AddCommMonoid (E x)] [inst_7 \", \"doc\": \"If two linear trivializations $ e $ and $ e_1 $ are equal, then the linear equivalence between the fiber $ E_b $ and $ F $ at a point $ b $ (in the base set of $ e $) induced by $ e $ coincides with t\"}\n  {\"name\": \"WeierstrassCurve.c_relation_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.c₄ ^ 3 = W.c₆ ^ 2\", \"doc\": \"For a Weierstrass curve over a ring of characteristic three, the cube of the $ c_4 $ invariant equals the square of the $ c_6 $ invariant, i.e., $ c_4^3 = c_6^2 $.\"}\n  {\"name\": \"Algebra.TensorProduct.comm_toLinearEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": (Algebra.TensorProduct.comm R A B).toLinearEquiv = _root_.TensorProduct.comm R A B\", \"doc\": \"The linear equivalence obtained by converting the algebra commutativity equivalence between $ A \\\\otimes_R B $ and $ B \\\\otimes_R A $ is equal to the standard commutativity isomorphism for tensor produc\"}\n  {\"name\": \"Cubic.mk.inj\", \"module\": \"Mathlib.Algebra.CubicDiscriminant\", \"type\": \"∀ {R : Type u_1} {a b c d a_1 b_1 c_1 d_1 : R},\\n  { a := a, b := b, c := c, d := d } = { a := a_1, b := b_1, c := c_1, d := d_1 } →\\n    a = a_1 ∧ b = b_1 ∧ c = c_1 ∧ d = d_1\", \"doc\": \"If two cubic polynomials over a ring $ R $ constructed with coefficients $ a, b, c, d $ and $ a_1, b_1, c_1, d_1 $ are equal, then $ a = a_1 $, $ b = b_1 $, $ c = c_1 $, and $ d = d_1 $.\"}\n  {\"name\": \"Cubic\", \"module\": \"Mathlib.Algebra.CubicDiscriminant\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The type of cubic polynomials over a ring $R$.\"}\n  {\"name\": \"WeierstrassCurve.c₄_of_isCharThreeJNeZeroNF_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.c₄ = W.a₂ ^ 2\", \"doc\": \"For a Weierstrass curve over a commutative ring of characteristic three with non-zero $j$-invariant, the $c_4$ invariant satisfies $c_4 = a_2^2$.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"cube\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.of.the.cube|cubical|rigidifi",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read all returned names and types; none defines cubical invertible sheaves or states the required group-scheme cube, symmetric extension, or ampleness theorem. Generic sheaf restriction/fullness, cocycles, Picard groups of rings, affine-space and valuative declarations do not specialize to this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The theorem of the cube on rigidified invertible sheaves over abelian schemes gives a unique cubical structure",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Cubic\", \"module\": \"Mathlib.Algebra.CubicDiscriminant\", \"type\": \"Type u_1 → Type u_1\", \"doc\": \"The type of cubic polynomials over a ring $R$.\"}\n  {\"name\": \"WeierstrassCurve.c_relation_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.c₄ ^ 3 = W.c₆ ^ 2\", \"doc\": \"For a Weierstrass curve over a ring of characteristic three, the cube of the $ c_4 $ invariant equals the square of the $ c_6 $ invariant, i.e., $ c_4^3 = c_6^2 $.\"}\n  {\"name\": \"WeierstrassCurve.c_relation_of_char_two\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.c₄ ^ 3 = W.c₆ ^ 2\", \"doc\": \"For a Weierstrass curve $ W $ over a ring of characteristic two, the cube of the $ c_4 $-invariant equals the square of the $ c_6 $-invariant, i.e., $ c_4^3 = c_6^2 $.\"}\n  {\"name\": \"WeierstrassCurve.c₄_of_isCharThreeJNeZeroNF_of_char_three\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.c₄ = W.a₂ ^ 2\", \"doc\": \"For a Weierstrass curve over a commutative ring of characteristic three with non-zero $j$-invariant, the $c_4$ invariant satisfies $c_4 = a_2^2$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"WeierstrassCurve.c₄_of_isCharThreeJNeZeroNF\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.NormalForms\", \"type\": \": W.c₄ = 16 * W.a₂ ^ 2\", \"doc\": \"For a Weierstrass curve $W$ over a commutative ring of characteristic three with non-zero $j$-invariant in normal form, the $c_4$ invariant satisfies $c_4 = 16 a_2^2$, where $a_2$ is the $a_2$ coeffic\"}\n  {\"name\": \"CFC.nnrpow_three\", \"module\": \"Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.Basic\", \"type\": \"∀ {A : Type u_1} [inst : PartialOrder A] [inst_1 : NonUnitalRing A] [inst_2 : TopologicalSpace A] [inst_3 : StarRing A]\\n  [inst_4 : Module ℝ A] [inst_5 : SMulCommClass ℝ A A] [inst_6 : IsScalarTower ℝ A A] [inst_7 : StarOrderedRing A]\\n  [inst_8 : NonUnitalContinuousFunctionalCalculus ℝ A IsSelfAdjoi\", \"doc\": \"For any non-negative element $ a $ in a non-unital ring $ A $ equipped with a continuous functional calculus, the cube of $ a $ is equal to the product of $ a $ with itself three times, i.e., $ a^3 = \"}\n  {\"name\": \"WeierstrassCurve.j_eq_zero_iff'\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Weierstrass\", \"type\": \": W.j = 0 ↔ W.c₄ ^ 3 = 0\", \"doc\": \"The j-invariant of a Weierstrass curve is zero if and only if the cube of its $ c_4 $ invariant is zero.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem.of.the.cube|theoremOfCube|cubist|cubical|Picard",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"24\", \"text\": \"the special case where `S` is the spectrum of some commutative ring `R` whose Picard group is zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"50\", \"text\": \"elliptic curves over the spectrum `Spec(R)` of `R` in the case that `R` has trivial Picard group\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned types; ring Picard groups, abstract product-monoid units, scheme points, affine adjunction units and Weierstrass invariants do not give the stated relative geometric result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symmetric-ample-power-extension",
+  "date": "2026-10-24",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms",
+   "via": [
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-cubical-rigidification",
+  "worker": "stage1",
+  "summary": "Separated the relative Picard face theorem from relative unit rigidity; wrote the normalization, symmetry, cocycle, isomorphism and pullback arguments explicitly. No statement change. Original source unavailable locally; Lan I 3.2.3.1 read online as a hypothesis cross-check.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: the relative theorem of the cube, including compatibility of isomorphisms; steps 1--6 supply precisely the compatible functorial cubical structure needed in the symmetric ample extension prerequisite."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NV-60ecc7f39",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-60ecc7f39 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, def-sfb-cubical-rigidified-line and every cited definition. I made no changes. Shape: one commit; the report has a Review-by-NV section; the statement is unchanged from base; there is no repair note, so the re-split rule does not apply; the delivery cites no SGA; all cited ids exist; proof_deps equals the union of the uses; there is no cycle. Steps: step 1 pairs each m_I with m_{I∪{i}}, which have opposite sign, and the face sections agree on overlaps because the swap on a rank-one module is trivial; the Picard node's hypotheses match (a) and (b). Step 2 is a correct elementary normalization; I recomputed the x1=e cancellation. Step 3: the ratio of two cube sections is a unit equal to 1 on the axes, and the unit node for n=3 gives 1; in (b) normal implies reduced. Step 4: symmetry follows from uniqueness; in the cocycle every argument triple on each of the four axes has an identity coordinate, so the unit node for n=4 gives v=1. Steps 5 and 6 follow from naturality of the evaluation pairings plus uniqueness, and the item's (a)/(b) qualifier is respected. New node unit-axis-factorization: in the proper case it follows from Stacks 0E0L (Γ(P_n,O)=Γ(S,O) universally); in the reduced case from Milne iAG Prop. 12.48, identity (79) (I checked the text) on geometric fibres, since a function u/RHS with u/RHS−1 in every maximal ideal is nilpotent and the product is reduced. I tested n=1, split tori and a counterexample over k[ε], so the reduced hypothesis is needed. New node picard-cube-face-detection: it follows from the item's own source MB I 2.6 applied to G1×G2×G3 (pull Θ_3(M) back along the axis embedding), so it is no stronger than the source and strictly smaller than the item; its own split must prove it geometrically, without going through the item. Duplicates: the existing cube and Rosenlicht nodes (lem-sc-general-theorem-of-cube, lem-sc-cube-*, thm-sc-theorem-of-cube, lem-sfb-rosenlicht-product-unit-factorization) are over a field, and lem-sc-proper-flat-global-sections and lem-sc-picard-fiber-triviality-closed state different things. Each new node records all three kinds of Mathlib search. Everything stays in the same unit and the cited nodes are only definitions, so no tool_uses are needed. Moret-Bailly is not in literature/, so the WANTED entry and proof_origin=agent are correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianCubicalRigidification",
+  "declaration": "AlgebraicGeometry.CubicalRigidifiedLine.existsUnique_compatible",
+  "declarations": [
+   "AlgebraicGeometry.CubicalRigidifiedLine.existsUnique_compatible",
+   "AlgebraicGeometry.CubicalRigidifiedLine.canonicalSection",
+   "AlgebraicGeometry.CubicalRigidifiedLine.canonical",
+   "AlgebraicGeometry.CubicalRigidifiedLine.iso_preserves_cube",
+   "AlgebraicGeometry.CubicalRigidifiedLine.pullback_eq_canonical",
+   "AlgebraicGeometry.CubicalRigidifiedLine.baseChange_eq_canonical"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianCubicalRigidification.lean",
+  "statement": "theorem existsUnique_compatible {S : Scheme.{u}} (G : Over S) [CommGrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] [GeometricallyConnected G.hom] (hbase : IsProper G.hom ∨ ((∀ x : S, IsDomain (S.presheaf.stalk x) ∧ IsIntegrallyClosed (S.presheaf.stalk x)) ∧ HasSemiabelianGeometricFibres (Grp.mk G))) (L : G.left.Modules) (hL : L.IsInvertible) (r : (Scheme.Modules.tensorPullback (η[G]).left).obj L ≅ 𝟙_ S.Modules) : ∃! τ : 𝟙_ (CubicalLine.cube G).left.Modules ≅ CubicalLine.theta G L, CubicalLine.Compatible τ",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The declarations jointly state existence and uniqueness, preservation by rigidified isomorphisms, and compatibility with group-homomorphism pullback and subscheme restriction. canonicalSection and canonical select only the uniquely determined cube section. The already-landed semiabelian-fibres definition is added to stmt_deps and reused without duplication."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dd68dda8",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Node = live except lean + stmt_deps gaining landed def-sfb-semiabelian-geometric-fibres (allowed by the STMT_DEPS MAY GAIN LANDED NODES rule; used in the Lean). lean.statement verbatim. Clauses match: CommGrpObj G over S; Smooth/IsSeparated/LFP+QuasiCompact (exact finite presentation)/GeometricallyConnected; (a) IsProper ∨ (b) stalks are integrally closed domains ∧ HasSemiabelianGeometricFibres; L IsInvertible, r : e^*L≅O. ∃! τ with Compatible (symmetry, identity-slice normalization, cocycle); the normalization does not depend on r because paired factors cancel. canonicalSection = choose of the ∃! (pinned). iso_preserves_cube hypothesis/conclusion = Iso.rigidification/Iso.cube. pullback_eq_canonical for an IsMonHom h with (a)/(b) on both groups; baseChange_eq_canonical for an IsImmersion g (subscheme restriction as in the def node), with (a)/(b) for the restricted group. Edge cases (G=S, rank 0, empty base, characteristic, single universe u) are fine. Not hollow; four theorems sorry; docstrings carry source, blueprint tag and steps 1-6; no duplicate; report sections present. No changes, so no compile."
+ }
+}

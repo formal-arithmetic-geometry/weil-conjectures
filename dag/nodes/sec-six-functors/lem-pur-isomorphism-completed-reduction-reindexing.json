@@ -1,0 +1,295 @@
+{
+ "id": "lem-pur-isomorphism-completed-reduction-reindexing",
+ "kind": "statement",
+ "title": "Completed-module and strict-reduction reindexing under scheme isomorphisms",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, $A=\\mathcal O_E$, $I=(\\varpi_E)$ and $P_n=A/I^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. For a scheme $T$ on which $\\ell$ is invertible put $A_T=\\varprojlim_n(P_n)_T$, using the small pro-etale sites, completed-ring module categories and strict tower categories $\\operatorname{Tow}_A(T)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(A_T))$ of [def-weil-pbc-adic-coefficient-datum]. Let $u:T'\\xrightarrow{\\sim}T$ be any underlying-scheme isomorphism, not assumed linear over an additional base. Use the canonical ring identifications $u^{-1}A_T\\cong A_{T'}$ respecting every quotient projection and transition [lem-weil-pbc-profinite-coefficient-inverse-image]. Write $G_u$ for inverse-image reindexing on completed-ring modules and its termwise action on strict towers [lem-weil-proetale-isomorphism-inverse-image]. These are exact equivalences and induce equivalences on the unbounded derived categories, with inverse given by reverse reindexing.\n\nFor every strict tower $C_\\bullet$ there is a natural isomorphism\n$$G_uR\\lim C_\\bullet\\xrightarrow{\\sim}R\\lim G_uC_\\bullet$$\ninduced by inverse images of the tower projections, where $R\\lim$ is the functor on the derived strict-tower category [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. For every derived $I$-complete $K$ [def-weil-pbc-intrinsic-completion], this gives a canonical isomorphism\n$$Lu^*_{\\mathrm{comp}}K=R\\lim G_uK_\\bullet\\xrightarrow{\\sim}G_uR\\lim K_\\bullet\\xrightarrow{\\sim}G_uK.$$\nIts inverse is exactly the specified ordinary-to-completed pullback map of [def-weil-pbc-completed-pullback], using the quotient-tower completion unit of [prop-weil-pbc-koszul-reconstruction].\n\nPut $Q_{T,\\bullet}=((P_n)_T)_n$, $\\Delta$ for the constant diagram functor, and $\\mathcal R_T(F)=\\Delta F\\otimes^L_{\\Delta A_T}Q_{T,\\bullet}$ on the small ringed diagram sites used in [def-cbc-completed-exchange-map]. The specified tensor comparison\n$$t_{u,F}:\\mathcal R_{T'}(G_uF)\\xrightarrow{\\sim}G_u\\mathcal R_T(F)$$\nis the reindexing comparison in the derived category of actual strict towers. On flat tensor representatives it sends a relabeled $x\\otimes a$ to the same $x\\otimes a$, and for $P_{n+1}\\to P_n$ its two transition composites send this tensor to $x\\otimes\\bar a$, compatibly with the completed module actions.\n\nMore generally, for a commutative scheme square $p:\\overline X\\to Y$, $p':\\overline X'\\to Y'$, $g:Y'\\xrightarrow{\\sim}Y$, $v:\\overline X'\\xrightarrow{\\sim}\\overline X$, with $pv=gp'$, the specified ordinary completed-ring direct-image mate and the specified diagram-site direct-image mate are respectively the reindexing comparisons $G_gRp_*\\simeq Rp'_*G_v$ and $G_gRp_*^{\\operatorname{Tow}}\\simeq Rp'_*^{\\operatorname{Tow}}G_v$, for the canonical adjunctions of [def-weil-pbc-proetale-operations].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-pur-weil-equivariance-compatibilities.proof.md",
+  "place": "Constituent-compatibility assembly paragraph; agent-extracted auxiliary argument, original reviewed lem-pur-weil-semilinear-exchange-reindexing steps 9,10,11."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-koszul-reconstruction",
+  "def-cbc-completed-exchange-map",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-strict-tower-operations",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-pur-completed-module-section-reindexing for the section-normalized ordinary module equivalence with the actual reverse pullback. Change its functor and inverse along its literal functor equalities. A generic proved helper using Mathlib Equivalence.congrRight applies it to strict diagrams. The ordinary exactness instances give finite limit and finite colimit preservation. A separate generic proved helper using Equivalence.mapDerivedCategory gives both derived equivalences, with precisely d.pull and d.towerPull and their reverse pullbacks.",
+   "uses": [
+    "lem-pur-completed-module-section-reindexing",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-completed-reindexing-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take beta and b from lem-pur-reindexing-limit-unit-normalization. For TowerComplete K the specified completionUnit(K) is invertible by definition. Compose b inverse on the strict reduction tower with the inverse of d.pull u applied to completionUnit(K). The lemma's augmentation equality identifies its inverse with ordinaryToCompleted. Cancelling the latter pulled unit proves the second normalization equation exactly. The inverse/cancellation calculation is checked generically before substituting the completed derived functors.",
+   "uses": [
+    "lem-pur-reindexing-limit-unit-normalization",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The defining existsUnique characterization of reductionTowerPullbackIso supplies IsCompletedReductionPullbackComparison. The existing proved pure-tensor formula levelPullIso_tensor gives the local tensor clause, and completedReductionLevelPullbackIso_transition gives every index-arrow equation. These are exactly the remaining reduction clauses, with no additional K-flat model construction required here.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A commutative square with v and g invertible is a pullback by Mathlib IsPullback.of_horiz_isIso. Choose its canonical isoPullback, retaining both projection equations. Apply lem-pur-reindexing-ordinary-mate-sections for invertibility and the section formula. Whiskering that invertible natural transformation proves the ordinary tower mate invertible. Apply lem-pur-reindexing-derived-mate-localization for both derived invertibilities and both K-injective normalization equations. Assemble the conjunctions, specializing d to pbcPadicCoefficientDatum l E.",
+   "uses": [
+    "lem-pur-reindexing-ordinary-mate-sections",
+    "lem-pur-reindexing-derived-mate-localization",
+    "def-pur-completed-reindexing-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-module-section-reindexing",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-reindexing-limit-unit-normalization",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-pur-reindexing-ordinary-mate-sections",
+  "lem-pur-reindexing-derived-mate-localization",
+  "def-pur-completed-reindexing-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "Lean reduction by W2 (2026-10-25), following the extracted eight-step source argument; four strictly smaller normalization steps remain as named public theorems, with the equivalence, completion inverse, transition and Cartesian assembly proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scheme isomorphism exact inverse image on completed coefficient modules and strict reduction diagrams commutes with derived inverse limit and identifies completed pullback with inverse image using quotient projections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).inv (I.comap f).subschemeι =\\n    CategoryTheory.Limits.pullback.fst f I.subschemeι\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the composition of the inverse of the isomorphism between the closed subsch\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.snd f I.subschemeι) =\\n    (I.comap f).subschemeMap I f ⋯\", \"doc\": \"Given a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and a morphism $f: X \\\\to Y$, the homomorphism component of the isomorphism between the comap subscheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom (CategoryTheory.Limits.pullback.fst f I.subschemeι) =\\n    (I.comap f).subschemeι\", \"doc\": \"For a scheme $ Y $ with ideal sheaf data $ \\\\mathcal{I} $ defining a closed subscheme $ Z \\\\subset Y $, and a morphism $ f: X \\\\to Y $, the composition of the homomorphism component of the isomorphism be\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {J : Type w} [inst : CategoryTheory.Category.{v, w} J] (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme)\\n  [inst_1 : ∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)]\\n  [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] [Quiver.IsThin J] {i j : J}\\n  (k₁ k₂ : (k \", \"doc\": \"For a diagram involving open immersions of schemes and their pullbacks, the composition of the first projection with the inverse isomorphism of one open immersion equals the composition of the second \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme}\\n  (h : I.subscheme ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.snd f I.subschemeι) h) =\\n    CategoryTheory.\", \"doc\": \"For schemes $X,Y$, ideal sheaf data $\\\\mathcal{I}$ on $Y$, morphism $f:X\\\\to Y$, and any morphism $h$ from the closed subscheme defined by $\\\\mathcal{I}$ to a scheme $Z$, the composition of the comap iso\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  (i : (CategoryTheory.Precoverage.ZeroHypercover.pullback₁ f 𝒰.affineRefinement.openCover).I₀),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso f 𝒰 i).inv\\n      ((CategoryTh\", \"doc\": \"For a morphism $ f : X ⟶ Y $, an open cover $ \\\\mathcal{U} $ of $ Y $, and an index $ i $, the inverse of the isomorphism between pullback constructions satisfies $ (\\\\mathcal{U}.\\\\text{pullbackCoverAffi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (h : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).inv (CategoryTheory.CategoryStruct.comp (I.comap f).subschemeι h) =\\n    CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pull\", \"doc\": \"For schemes $X,Y$ with ideal sheaf data $\\\\mathcal{I}$ defining a closed subscheme $Z \\\\subset Y$, and morphism $f: X \\\\to Y$, the composition of the inverse of the comap isomorphism $(\\\\mathcal{I}.\\\\text{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (h : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (I.comapIso f).hom\\n      (CategoryTheory.CategoryStruct.comp (CategoryTheory.Limits.pullback.fst f I.subschemeι) h) =\\n    CategoryTheory.CategoryStru\", \"doc\": \"For schemes $X$ and $Y$, ideal sheaf data $\\\\mathcal{I}$ on $Y$ defining a closed subscheme $Z \\\\subset Y$, a morphism $f: X \\\\to Y$, and any morphism $h: X \\\\to Z'$, the composition of the isomorphism $\\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence of ringed sites commutes with derived inverse limits of strict quotient towers and completion unit",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Limits.PreservesLimits",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]omplet.*[Pp]ullback|[Ss]trict.*[Tt]ower|[Dd]erived.*[Ll]imit",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"63\", \"text\": \"lemma HasPointwiseRightDerivedFunctorAt.hasColimit\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"line\": \"64\", \"text\": \"lemma HasPointwiseLeftDerivedFunctorAt.hasLimit\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of sheaf module categories preserves K injective resolutions so commutes with derived limit of quotient diagrams including their transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the component of the natural transformation from $ F $ to its 0th right-derived functor $\"}\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n  {\"name\": \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [CategoryTheory.Limits.PreservesFiniteLimits F] {\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, there exists a canonical morphism from $ F(X) \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] (X : C) [inst_5 : CategoryTheory.Injective X],\\n  \", \"doc\": \"For an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and an injective object $ X $ in an abelian category $ \\\\mathcal{C} $, the canonical morphism from $ F(X) $ to the 0th cycles of the cochain c\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, there exists an isomorphism in $\\\\mathcal{D}$ between \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$ with injective resolutions $I$ and $J$, and a morphism $\\\\\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the specified pro-etale reindexing/strict-tower/coefficient/refinement comparison; generic categorical infrastructure alone is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompleted.*[Pp]ullback|[Ss]trict.*[Tt]ower|[Rr]eindex.*[Cc]omplet",
+   "results": "25 hits; returned names/files: Mathlib/NumberTheory/RamificationInertia/Basic.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/Algebra/Algebra/RestrictScalars.lean, Mathlib/LinearAlgebra/Matrix/ToLin.lean, Mathlib/Analysis/Normed/Unbundled/AlgebraNorm.lean, Mathlib/LinearAlgebra/Span/Basic.lean, Mathlib/LinearAlgebra/Quotient/Basic.lean, Mathlib/LinearAlgebra/Quotient/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reindexing sheaves of modules under an isomorphism of schemes preserves strict derived quotient towers and canonical derived direct image base change mates",
+   "results": "8 hits; returned names/files: AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits; returned names/files: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image under a scheme isomorphism commutes with derived inverse limit of strict completed coefficient module towers and identifies the specified completion unit",
+   "results": "8 hits; returned names/files: AdicCompletion.congr_symm_apply, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, AdicCompletion.congr_apply, AdicCompletion.of_ofAlgEquiv_symm, AdicCompletion.ofAlgEquiv_symm_of, AdicCompletion.of_ofLinearEquiv_symm",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  },
+  {
+   "tool": "grep",
+   "query": "completedUpperStar|strictTower|derivedInverseLimit|reindexing",
+   "results": "11 hits; returned names/files: Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/Pi/Basic.lean, Mathlib/CategoryTheory/Presentable/IsCardinalFiltered.lean, Mathlib/CategoryTheory/Limits/MonoCoprod.lean, Mathlib/CategoryTheory/Limits/IsLimit.lean, Mathlib/CategoryTheory/Limits/IsLimit.lean, Mathlib/CategoryTheory/Limits/Cones.lean, Mathlib/CategoryTheory/Limits/Cones.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of ringed sites identifies the canonical derived base change mate with relabeling and commutes with the derived tensor quotient diagram",
+   "results": "8 hits; returned names/files: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardCongr, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackComp, SheafOfModules.pullbackIso",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  },
+  {
+   "tool": "grep",
+   "query": "def pullbackIso|conjugateEquiv_pullbackComp_inv",
+   "results": "2 hits; returned names/files: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern ordinary module/ring completion, general adjunctions, or ordinary limits; none states the joint completed-coefficient strict-tower comparison with the specified unit and mates"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-weil-semilinear-exchange-reindexing",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-weil-equivariance-compatibilities",
+   "place": "Constituent-compatibility assembly paragraph: semilinear compact-support exchange; extracted argument of lem-pur-weil-semilinear-exchange-reindexing, reviewed proof steps 9,10,11.",
+   "via": [
+    "lem-pur-weil-semilinear-exchange-reindexing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-isomorphism-completed-reduction-reindexing",
+  "worker": "stage1",
+  "summary": "Q62 retains the statement and splits its three extracted arguments into eight explicit steps, reusing existing exact-equivalence, K-injective tower, derived tensor, reconstruction and adjunction interfaces. The proof fixes the projection-induced derived-limit comparison, checks the strict tensor transition formula, proves equality with the specified completion unit, and computes both specified mates on representative complexes. No new nodes are needed.",
+  "blueprint": "The constituent-compatibility assembly paragraph of prop-pur-weil-equivariance-compatibilities: extracted original steps 9 (completed pullback), 10 (strict reduction), and 11 (ordinary and diagram-site mates).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic inverse image along an isomorphism of schemes on the pro-etale site used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic compatible inverse image of profinite coefficient sheaves used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-exact-adjoint-tower-models",
+    "why": "Generic simultaneous exact-adjoint k-injective tower and normalized roos models used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic strict tower homotopy limit used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic strict diagrams as modules on a small site used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor comparison for arbitrary ringed topoi used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of k-flat resolutions on a ringed site used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic koszul and quotient reconstruction used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of k-injective resolutions of sheaves of modules used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic a right adjoint of an exact functor preserves k-injective complexes used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic pre-derived adjunction from essentially constant derived systems used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic composition of derived pro-etale module pullbacks used on the specified completed-ring or ringed diagram categories; the package unit has no separate statement of this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-exact-adjoint-tower-models",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pc-kflat-resolution",
+  "prop-weil-pbc-koszul-reconstruction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-e2c56241f",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-e2c56241f (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. There are no new nodes. The statement and stmt_deps are byte-identical to the live node and to the Q156 node that created it; only split-owned fields changed. There is no re-split repair note for this item. Old steps 9-11 (from the Q156 report) are fully expanded in new Steps 1-8, with nothing dropped. proof_deps equal the union of the step uses, steps are 770-1548 characters, and no SGA is cited. Step checks: (1) c_u from lem-weil-pbc-profinite-coefficient-inverse-image is an isomorphism compatible with composition, so the transported action makes G_u an exact equivalence on A_T-modules and on towers; the constant-ring clause (2) of the isomorphism-inverse-image node is rightly not used. (2) The exact-functor factorization and localization universal property give the derived equivalences; Lu*_Tow equals termwise G_u because pullback is exact, and the c_g of def-weil-pbc-completed-pullback equals c_u. (3) The exact-adjoint tower-models node applies with F=G_{u^-1} adjoint to G=G_u, F exact; lambda_n beta = G(lambda_n) gives b, natural on localized maps. (4) The tensor comparison on the diagram site has the same direction as t in def-cbc-completed-exchange-map; Delta P is K-flat levelwise; the x tensor a and transition formulas are correct. (5) I verified b_{Delta P} G_u zeta_P = zeta_{G_u P} on K-injective tower resolutions; naturality for e then gives exactly the completed-pullback construction, so the inverse claim holds. (6) The section map along (v,1) has inverse (v^-1,1) by cancelling g, so the square is Cartesian; the transpose is G_v eps_p o theta, as in Stacks 07A7 remark-base-change. (7) K-injectives, the right-adjoint-preserves-K-injective node, exact pullbacks and the 0FND fraction formula give Ex^R = Q(r_I). (8) The same argument works termwise on the diagram site; advisory: the diagram-site theta has no citation of its own, but it is the levelwise case. Edge cases checked: u=id, K=0, non-Mittag-Leffler towers, unbounded complexes. All Stacks labels were checked in the .tex files. The 12 tool_uses of generic pbc/pc infrastructure are accepted. FIX (B5): Step 1 gave Tag 09A5 the label 'section-functoriality', but in proetale.tex 09A5 is label section-morphism; corrected item file in fixes/dag/nodes/sec-six-functors/, no other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurCompletedReductionReindexing",
+  "declaration": "AlgebraicGeometry.Scheme.purCompletedReductionReindexing",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.purCompletedReductionReindexing"
+  ],
+  "file": "lean/Sheaf/Paper/PurCompletedReductionReindexing.lean",
+  "statement": "theorem purCompletedReductionReindexing (l : ℕ) [Fact l.Prime] (E : Type (t + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∀ (T' T : Scheme.{t}) (u : T' ⟶ T) [IsIso u], (∀ x : T, IsUnit (l : T.presheaf.stalk x)) → PurCompletedReindexingAt (pbcPadicCoefficientDatum l E) u) ∧ (∀ (X' X Y' Y : Scheme.{t}) (v : X' ⟶ X) (p' : X' ⟶ Y') (p : X ⟶ Y) (g : Y' ⟶ Y) [IsIso v] [IsIso g], (∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) → v ≫ p = p' ≫ g → ∃ sq : ChosenCartesianSquare v p' p g, PurCompletedReindexingSquare (pbcPadicCoefficientDatum l E) sq)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper predicates expand all clauses of this one statement. The theorem specializes to the published unlifted pbcPadicCoefficientDatum, with Scheme universe t, small-site object universe t+1 and Hom universe t, and coefficient universe t+1. The actual ordinary pullback is identified on sections with reindexing; its inverse and the derived/tower inverses are the reverse canonical pullbacks. The limit comparison is normalized on K-injective complexes by an ordinary projection equation. Tensor comparison uses the specified strict reduction isomorphism and its K-flat representative formula. The two specified derived mates are normalized by localization of the sectionwise ordinary mate. No boundedness, constructibility, additional base-linearity or arbitrary comparison map is assumed. Return repair: the completed-pullback dependency record is retained unchanged; the general recorded module pullback is used directly, the limit comparison is pinned by its K-injective equation, and the completed ringed square is specialized as real structure data in this module. W2 stage 3: the seven unchanged concrete definitions are relocated verbatim to Sheaf.Paper.PurCompletedReindexingData, recorded on def-pur-completed-reindexing-data, and publicly re-exported from this module. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39038fb07",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Re-delivery after c536 RETURN. R1: every dependency node incl. def-weil-pbc-completed-pullback is json-identical to live; the item changes only stmt_deps (+5, none removed) and a complete lean record. R2: stratumModulePull expanded verbatim to proEtaleRingModulePullback (abbrev body, StratumCompletionUnitRestriction:61); stratumRlimComparison conjunct dropped, b still pinned by the K-injective localization equation; purReindexingRingedSquare is a real StrictTowerRingedSquare identical to integralTowerRingedSquare; both plain-def theorem stmt_deps removed. Mechanical finding: prop-weil-pbc-direct-image-limits genuine (reductionTowerPullbackIso = existsUnique.choose) -> PASS on that point. R3/H11: second reading now goes clause by clause. Maths, edge cases (u=id, empty scheme, K=0, n=0, unbounded towers) and universes unchanged from the accepted c536 analysis; only sorry is the main proof; docstrings and line lengths OK. No file changed, nothing compiled. Advisory: four-corners owner (integralRingIso/pull/push) not in stmt_deps; duplicate ringed square; TowerComplete vs intrinsic completeness."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6471a",
+  "group": "W2",
+  "result": "fix",
+  "landing": "20261025T203551-L-2828711",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 4 split statements + relocated Data defs against the clone's old item module, the CompletedPullback/CompletedPullbackInterface definitions, the node JSONs and the 3 direct importers (all compiled against the delivered modules)"
+ }
+}

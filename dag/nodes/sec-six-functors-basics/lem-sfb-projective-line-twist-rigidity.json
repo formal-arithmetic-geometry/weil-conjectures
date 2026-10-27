@@ -1,0 +1,199 @@
+{
+ "id": "lem-sfb-projective-line-twist-rigidity",
+ "kind": "statement",
+ "title": "Rigidity of the positive twist under an absolute isomorphism of projective lines",
+ "statement": "Let $k$ and $l$ be fields [def-weil-field]. Write $P=\\mathbf P^1_k$ and $Q=\\mathbf P^1_l$, with their line bundles $\\mathcal O_P(1)$ and $\\mathcal O_Q(1)$ [def-sc-p1-standard, def-sc-invertible-module]. Let $u:P\\xrightarrow{\\sim}Q$ be an isomorphism of schemes; no identification of $k$ with $l$ is specified. Let $\\phi:u^*\\mathcal O_Q(1)\\to\\mathcal O_P(1)$ be an $\\mathcal O_P$-linear morphism [def-pc-module-pullback, def-weil-sheaf-of-modules-category]. If the map induced by $\\phi$ at the generic point of the integral scheme $P$ is nonzero [def-sc-generic-point, def-pc-integral-scheme], then $\\phi$ is an isomorphism of $\\mathcal O_P$-modules.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R (resolve-lemma-proper-birational-regular-surfaces), conormal degree-1 argument; supported by divisors.tex Tag 0BXJ (divisors-lemma-Pic-projective-space-UFD), n=1, and the standard-chart calculation of sections from def-sc-p1-standard. This formulation permits different residue fields."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-p1-standard",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-generic-point",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "For any field $K$, apply [lem-sc-p1-twist-sections]. If $d<0$, the equality $p(t)=t^d q(1/t)$ forces $p=q=0$, because the left side has only nonnegative powers and the right side only strictly negative powers. If $d\\geq0$, the solutions have basis $(t^j,s^{d-j})$ for $0\\leq j\\leq d$: comparison of Laurent coefficients writes each solution uniquely as a $K$-linear combination of these pairs. Thus $\\Gamma(\\mathbf P^1_K,\\mathcal O(d))$ has dimension $d+1$ for $d\\geq0$ and is zero otherwise. In degree zero the chart bases glue to identify $\\mathcal O(0)$ with the structure sheaf [def-sc-p1-standard]; its global functions are exactly the constant pairs $(c,c)$. This identifies $\\Gamma(\\mathbf P^1_K,\\mathcal O)$ with $K$ as rings, since addition and multiplication are componentwise. In degree one there are exactly two basis sections.",
+   "uses": [
+    "lem-sc-p1-twist-sections",
+    "def-sc-p1-standard"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-coherence/lem-sc-p1-twist-sections.md",
+    "place": "Statement, followed by Laurent-coefficient comparison; standard charts from def-sc-p1-standard."
+   }
+  },
+  {
+   "text": "The inverse scheme map to $u$ gives an inverse to its map on global functions, so Step 1 identifies $u^\\sharp$ with a field isomorphism $\\sigma:l\\xrightarrow{\\sim}k$. Put $L=u^*\\mathcal O_Q(1)$. Explicitly, for an open $U\\subseteq P$, the inverse-image colimit has the terminal neighbourhood $u(U)$, since $u$ is a homeomorphism. Hence inverse image has sections $\\mathcal O_Q(1)(u(U))$. In [def-pc-module-pullback], the ring map $\\mathcal O_Q(u(U))\\to\\mathcal O_P(U)$ is an isomorphism, so the tensor presheaf has these same sections with scalars transported by this ring isomorphism. The map is $m\\mapsto1\\otimes m$; its inverse sends $a\\otimes m$ to $(u^\\sharp_U)^{-1}(a)m$. Their composites send $m$ to $m$ and $a\\otimes m$ to $1\\otimes (u^\\sharp_U)^{-1}(a)m=a\\otimes m$, using the tensor balancing relation. They commute with restriction and are inverse on the tensor presheaf. Its identified target is already a sheaf, so sheafification preserves the inverse maps and gives the asserted identification of $L(U)$. In particular they give an additive bijection $T:\\Gamma(Q,\\mathcal O_Q(1))\\to\\Gamma(P,L)$ satisfying $T(am)=\\sigma(a)T(m)$. A basis of the source maps to a $k$-basis: span follows by applying $T$ to an expansion, and independence follows by writing each coefficient as $\\sigma(a)$ and using injectivity of $T$. Consequently $\\dim_k\\Gamma(P,L)=2$. The same local formula transports each local basis of $\\mathcal O_Q(1)$ to a local basis of $L$. On each such open $L$ is the structure sheaf, so it is locally quasi-coherent as well as locally free of rank one, hence invertible [def-sc-invertible-module].",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, resolve-lemma-proper-birational-regular-surfaces, conormal degree-1 argument; detailed argument using the standard-chart section formula."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-line-invertible-classification] over $k$ to the invertible module $L$ from Step 2. Choose an isomorphism $e:L\\xrightarrow{\\sim}\\mathcal O_P(d)$ for the resulting integer $d$. Its map on global sections is $k$-linear and bijective, since $e$ and its inverse are morphisms of $\\mathcal O_P$-modules. Steps 1 and 2 give $2=\\dim_k\\Gamma(P,\\mathcal O_P(d))$. Negative $d$ would give zero; for nonnegative $d$ this dimension is $d+1$, forcing $d=1$. We therefore have $e:L\\xrightarrow{\\sim}\\mathcal O_P(1)$.",
+   "uses": [
+    "lem-sfb-projective-line-invertible-classification",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BXJ, divisors-lemma-Pic-projective-space-UFD, n=1; dimension calculation in Steps 1 and 2."
+   }
+  },
+  {
+   "text": "Let $\\psi=\\phi\\circ e^{-1}$, an endomorphism of $\\mathcal O_P(1)$. On each standard chart, its generator $g_i$ gives a unique regular function $a_i$ with $\\psi(g_i)=a_i g_i$, by linearity [def-weil-sheaf-of-modules-category]. On the overlap $g_0=t^{-1}g_1$ [def-sc-p1-standard], so $a_0t^{-1}g_1=t^{-1}a_1g_1$; cancelling the unit $t^{-1}$ and the basis $g_1$ gives $a_0=a_1$. The sheaf gluing axiom gives a global regular function $a$ restricting to both. Step 1 says $a=c$ for some $c\\in k$. Hence $\\psi=c\\,\\mathrm{id}$ on both charts and therefore on $P$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-sc-p1-standard"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, resolve-lemma-proper-birational-regular-surfaces, conormal degree-1 argument; detailed argument using the standard-chart section formula."
+   }
+  },
+  {
+   "text": "If $c=0$, then $\\psi=0$ and $\\phi=\\psi\\circ e=0$, contradicting the assumed nonzero map at the generic point. Thus $c\\neq0$. Multiplication by $c^{-1}\\in k$ is an inverse of $\\psi$, and $e^{-1}\\circ(c^{-1}\\mathrm{id})$ is an inverse of $\\phi$. This proves the asserted isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5R, resolve-lemma-proper-birational-regular-surfaces, conormal degree-1 argument; detailed argument using the standard-chart section formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-p1-twist-sections",
+  "def-sc-p1-standard",
+  "def-pc-module-pullback",
+  "def-sc-invertible-module",
+  "lem-sfb-projective-line-invertible-classification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0C5R, degree-one conormal-map sentence; expanded via Tag 0BXJ and standard-chart sections to handle different coefficient fields."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an isomorphism between projective lines over fields every nonzero morphism from the pullback of O(1) to O(1) is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  (f_deg : f ∈ 𝒜 m) →\\n                 \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f).base\", \"doc\": \"For a homogeneous element $ f $ of positive degree $ m $ in a graded ring $ A $, the continuous base map underlying the morphism from the basic open set $ D_+(f) \\\\subseteq \\\\operatorname{Proj}(A) $ to \"}\n  {\"name\": \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] (f : A) {m : ℕ},\\n  f ∈ 𝒜 m → 0 < m → CategoryTheory.IsIso (AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec 𝒜 f)\", \"doc\": \"The morphism of locally ringed spaces from the basic open set $ D_+(f) $ in the projective spectrum $ \\\\text{Proj}(A) $ to the affine spectrum $ \\\\text{Spec}(A_f) $ is an isomorphism, induced by the $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, composing the inverse of the pullback isomorphism $\\\\operatorname{Spec}(\\\\\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g),\\n  CategoryTheory.CategoryStruct\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the pullback of the inclusion morphisms $\\\\operatorname{Spec}(\\\\mathcal{A}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme} (\", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees $m, m' > 0$, the pullback of the inclusion morphisms $\\\\operatorname{Spec}\"}\n  {\"name\": \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"∀ {σ : Type u_1} {A : Type u} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m) {m' : ℕ} {g : A} (g_deg : g ∈ 𝒜 m')\\n  (hm' : 0 < m') {x : A} (hx : x = f * g) {Z : AlgebraicGeometry.Scheme}\\n \", \"doc\": \"For a graded ring $\\\\mathcal{A}$ and homogeneous elements $f \\\\in \\\\mathcal{A}_m$, $g \\\\in \\\\mathcal{A}_{m'}$ with positive degrees, the composition of the inverse of the pullback isomorphism $\\\\operatornam\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj/pullback isomorphisms and mentions of Picard groups for Weierstrass curves do not classify the positive line bundle on the projective line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback by an absolute scheme isomorphism P1 over k to P1 over l preserves the positive generator of the Picard group and any nonzero map of these line bundles is invertible",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_fst\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i : 𝒰.I₀) : (pullbackP1Iso 𝒰 f g i).hom ≫ pullback.fst _ _ = pullback.snd _ _\", \"doc\": \"For each index $i$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, the composition of the isomorphism $\\\\text{pullbackP1Iso}(\\\\mathcal{U}, f, g, i)$'s forward morphism with the f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_hom_snd\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"(i : 𝒰.I₀) : (pullbackP1Iso 𝒰 f g i).hom ≫ pullback.snd _ _ = pullback.fst _ _ ≫ p2 𝒰 f g\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and an index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the isomorphism $\\\\text{pullbackP1Iso}(\\\\mathcal{U}, f,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackCongr\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"{f g : X ⟶ Y} (hf : f = g) : pullback f ≅ pullback g\", \"doc\": \"Given two morphisms $ f, g : X \\\\to Y $ of schemes, if $ f = g $, then the pullback functors $ f^* $ and $ g^* $ from the category of sheaves of modules over $ Y $'s structure sheaf to the category of \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsIso f] (U) : IsIso (f.app U)\", \"doc\": \"For any isomorphism $ f : X \\to Y $ of schemes, and for every open subset $ U $ of $ Y $, the induced ring homomorphism $ f_{\\\\#}(U) : \\\\mathcal{O}_Y(U) \\to \\\\mathcal{O}_X(f^{-1}(U)) $ is an isomorphism of\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instFstScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ S) (g : Y ⟶ S) [IsProper g] : IsProper (Limits.pullback.fst f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\to Z $ and $ g : Y \\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all cosp\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.pullbackP1Iso_inv_fst_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (i : 𝒰.I₀)\\n  {Z_1 : AlgebraicGeometry.Scheme} (h : (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).glued ⟶ Z_1),\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and an index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the inverse of the pullback isomorphism $\\\\text{pull\"}\n  {\"name\": \"CategoryTheory.IsPullback.of_iso'\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic\", \"type\": \"(h : IsPullback fst snd f g) {P' X' Y' Z' : C} {fst' : P' ⟶ X'} {snd' : P' ⟶ Y'} {f' : X' ⟶ Z'} {g' : Y' ⟶ Z'}\\n  (e₁ : P' ≅ P) (e₂ : X' ≅ X) (e₃ : Y' ≅ Y) (e₄ : Z' ≅ Z) (commfst : e₁.hom ≫ fst = fst' ≫ e₂.hom)\\n  (commsnd : e₁.hom ≫ snd = snd' ≫ e₃.hom) (commf : e₂.hom ≫ f = f' ≫ e₄.hom) (commg : e₃.\", \"doc\": \"Given a pullback square in a category $\\\\mathcal{C}$ and isomorphisms between the corresponding objects and morphisms of another square that satisfy commutativity conditions with the original square, t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj/pullback isomorphisms and mentions of Picard groups for Weierstrass curves do not classify the positive line bundle on the projective line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Picard\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj/pullback isomorphisms and mentions of Picard groups for Weierstrass curves do not classify the positive line bundle on the projective line."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|picard|twist.*[Ii]so|[Ii]so.*twist",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"24\", \"text\": \"the special case where `S` is the spectrum of some commutative ring `R` whose Picard group is zero\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"50\", \"text\": \"elliptic curves over the spectrum `Spec(R)` of `R` in the case that `R` has trivial Picard group\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean\", \"line\": \"361\", \"text\": \"accurate for certain rings whose Picard group has trivial 12-torsion, such as a field or a PID. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj/pullback isomorphisms and mentions of Picard groups for Weierstrass curves do not classify the positive line bundle on the projective line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An absolute scheme isomorphism between projective lines over two fields preserves O(1) and any generically nonzero morphism between them is invertible",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective, WeierstrassCurve.Projective.Point.toAffine_of_equiv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart isomorphisms and stalkwise isomorphism criteria do not identify the two line bundles. Schur applies to simple objects, whereas an invertible sheaf on a projective line is not a simple object of the module-sheaf category."
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*[Ii]so|[Ii]so.*twist|Picard",
+   "results": "Search succeeded; 3 hits: Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart isomorphisms and stalkwise isomorphism criteria do not identify the two line bundles. Schur applies to simple objects, whereas an invertible sheaf on a projective line is not a simple object of the module-sheaf category."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every generically nonzero morphism between degree one invertible sheaves on projective lines identified by a scheme isomorphism is an isomorphism",
+   "results": "Search succeeded; 8 hits: CategoryTheory.isIso_iff_nonzero, AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.IsClosedImmersion.instOfIsIsoScheme, AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage, AlgebraicGeometry.isIso_iff_stalk_iso, AlgebraicGeometry.Scheme.Hom.isIso_toPshHom. ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart isomorphisms and stalkwise isomorphism criteria do not identify the two line bundles. Schur applies to simple objects, whereas an invertible sheaf on a projective line is not a simple object of the module-sheaf category."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"twist\"",
+   "results": "Search succeeded; 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj chart isomorphisms and stalkwise isomorphism criteria do not identify the two line bundles. Schur applies to simple objects, whereas an invertible sheaf on a projective line is not a simple object of the module-sheaf category."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited 0C5R exceptional-fibre argument, sentence beginning Since the source and target are invertible modules of degree 1, and the map is nonzero.",
+   "via": [
+    "lem-sfb-point-exceptional-isomorphism-neighbourhood",
+    "lem-sfb-proper-birational-surface-factorization",
+    "lem-sfb-common-regular-surface-resolution",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-line-twist-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the absolute-isomorphism statement unchanged. Classified its pullback line bundle using one new general input, then determined its twist from semilinear transport of its two-dimensional global-section space. Wrote the local scalar/gluing and generic-nonzero arguments explicitly. Reused the existing standard-chart section lemma, with no algebraic-closedness assumption. Repair of the 2026-10-22 landing return: compared the retained delivery with the current unsplit DAG item and re-read all current cited statements; clarified that the inverse tensor maps are constructed before sheafification, then descend to sheaves. The delivery tool rebases this split over current origin/sheaf-dag. The resumed repair explicitly verifies quasi-coherence on the transported trivializing opens before applying classification. Rebased repair on 2026-10-23: all current cited statements and eight verbatim quotations were re-read and matched; the initial dry run passed at 40cdfa39b6b. Expanded the inverse-image colimit and tensor balancing identities in Step 2; statement and dependency route remain unchanged.",
+  "blueprint": "The inherited Stacks 0C5R exceptional-fibre conormal argument, sentence beginning Since the source and target are invertible modules of degree 1, and the map is nonzero. The item has no imported blueprint ancestor (from.node remains null); it is a tool beneath the inherited ctf-stability alteration route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-c15e1ff6a",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-c15e1ff6a (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, all six cited statements, and both sources: Stacks 0C5R (resolve.tex lines 4947-4955) and 0BXJ (divisors.tex line 7255). Mathematics: Step 1's section and dimension count and Gamma(O)=K hold for every field and match the sign convention g0=t^{-d}g1. Step 2's pullback under an isomorphism (inverse image at u(U), tensor collapse via balancing, sigma-semilinear T, dim_k=2, invertible) is correct. Step 3 forces d=1 by the dimension count, Step 4 gives psi=c*id by chart glueing (a0=a1), and Step 5's c!=0 from the generic-stalk hypothesis and the explicit inverse are right. proof_deps equals the union of uses. New node: Pic(P^1_k)=Z over any field, uniqueness of d only. It is true by 0BXJ with R=k, n=1, the O(1) convention is Serre's, and it does not restate the item or its parent. rg -L found no duplicate (0BXJ, Pic of P, O(d) classification, all p1- nodes); the nearest nodes cover A^1/G_m or algebraically closed curves only. No SGA, no blueprint_update, every step under 2000 characters, no changes. The item and new node are identical to the earlier heads 37f16d/888f09/952e9d except for the Step 2 text and split_report. The live and side-live item is still unsplit and the classification node is absent, so the item is not superseded. The repeated deliveries are a landing loop, not a mathematical fault."
+ }
+}

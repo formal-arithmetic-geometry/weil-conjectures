@@ -21,123 +21,68 @@
  ],
  "proof": [
   {
-   "text": "The structure map of $X$ is of finite type by [def-weil-proper-morphism]. A field is Noetherian (its ideals are $0$ and $(1)$), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian; [lem-weil-pbc-noetherian-finite-components] gives finitely many irreducible components. Give each its reduced induced closed structure using [lem-weil-pbc-reduced-induced-closed-subscheme]. Each is integral, since it is reduced and irreducible, by [def-pc-integral-scheme]. These components cover $X$, and their dimensions are at most one: a chain of irreducible closed subsets of a closed subspace is such a chain in $X$ [def-kun-topological-krull-dimension]. Write the one-dimensional components as $C_1,\\ldots,C_t$. Every remaining component is zero-dimensional and hence a single closed point: the generic point provided by [lem-weil-pbc-scheme-sober] would otherwise specialize along a chain of length one. It is isolated because it is disjoint from all other components, a finite closed union. Denote these reduced point components by $P_1,\\ldots,P_r$.",
+   "text": "Apply [lem-trf-proper-curve-normalized-component-cover] to $X$: write $f:Z\\to X$ for the finite surjective map from the finite disjoint union of the normalized one-dimensional reduced components $\\widetilde C_i$ and the isolated reduced point components $P_j$. It supplies that $Z$ is proper over $k$, every $\\widetilde C_i$ is integral and proper of dimension one, and every $P_j$ is integral of dimension zero. The reduced induced components are exactly those of $X_{\\mathrm{red}}$ occurring in the statement.",
    "uses": [
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finite-components",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-pc-integral-scheme",
-    "def-weil-irreducible-components",
-    "def-kun-topological-krull-dimension",
-    "lem-weil-pbc-scheme-sober",
-    "def-weil-pbc-noetherian-ring"
+    "lem-trf-proper-curve-normalized-component-cover"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components, component enumeration; Tag 01OV and finite-type Noetherianity"
+    "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components, proof: finite surjective component cover (details omitted); replace each curve component by its normalization using Tag 0BXR, lemma-normalization-locally-algebraic."
    }
   },
   {
-   "text": "The inclusions of these reduced components into $X$ are closed immersions, hence finite by [lem-weil-pbc-closed-immersion-finite], proper by [lem-weil-pbc-finite-proper], and proper over $k$ by [lem-weil-pbc-proper-composition]. In particular each $C_i$ is an integral finite-type proper curve. Apply [lem-sc-normalization-exists] to $\\nu_i:\\widetilde C_i\\to C_i$: it is finite and surjective, $\\widetilde C_i$ is proper over $k$, and $\\dim\\widetilde C_i=1$. It is integral directly from [def-sc-normalization]: on a nonempty affine $\\operatorname{Spec}A\\subset C_i$ its ring is the integral closure of the domain $A$ in $k(C_i)$, hence a domain, and the generic points on these charts agree in the same function field. Thus the proper integral curve criterion will apply to $\\widetilde C_i$ over the original field $k$, even when $k$ is imperfect.",
+   "text": "A field is Noetherian: its only ideals are $(0)$ and $(1)$, both finitely generated [def-weil-pbc-noetherian-ring]. Thus [lem-trf-finite-surjective-ample-reflection] applies over $R=k$ to the finite surjective $k$-morphism $f$ between the proper $k$-schemes $Z$ and $X$. It gives $\\mathcal M$ ample on $X$ if and only if $f^*\\mathcal M$ is ample on $Z$.",
    "uses": [
-    "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-proper",
-    "lem-weil-pbc-proper-composition",
-    "lem-sc-normalization-exists",
-    "def-sc-normalization",
-    "def-pc-integral-scheme"
+    "def-weil-pbc-noetherian-ring",
+    "lem-trf-finite-surjective-ample-reflection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 0B5Y and 0BXR, lemma-normalization-locally-algebraic; replace component schemes by their finite normalizations"
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample."
    }
   },
   {
-   "text": "Form $Z=(\\coprod_{i=1}^t\\widetilde C_i)\\amalg(\\coprod_{j=1}^rP_j)$ and the induced map $f:Z\\to X$. Each normalized component map to $X$ is finite by [lem-weil-pbc-finite-composition]; the point-component maps are finite by Step 2. Repeated application of the binary [lem-weil-pbc-finite-coproduct] makes $f$ finite. It is surjective because its component images cover $X$ and each $\\nu_i$ is surjective. Finiteness implies properness by [lem-weil-pbc-finite-proper], so $Z$ is proper over $k$ by [lem-weil-pbc-proper-composition]. For an empty family, $X=Z=\\varnothing$ and the conclusion holds directly: the affine-locus condition and positivity condition are both vacuous. Otherwise apply [lem-trf-finite-surjective-ample-reflection] to $f$ over $R=k$, which is Noetherian as noted in Step 1. It gives $\\mathcal M$ ample on $X$ if and only if $f^*\\mathcal M$ ample on $Z$.",
-   "uses": [
-    "lem-weil-pbc-finite-composition",
-    "lem-weil-pbc-finite-coproduct",
-    "lem-weil-pbc-finite-proper",
-    "lem-weil-pbc-proper-composition",
-    "lem-trf-finite-surjective-ample-reflection",
-    "def-weil-pbc-ample-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5Y, finite-surjective cover argument, with the normalized component cover; Coherent Tag 0B5V, lemma-surjective-finite-morphism-ample"
-   }
-  },
-  {
-   "text": "For a finite disjoint union, the affine nonvanishing-locus definition [def-weil-pbc-ample-invertible-module] makes ampleness equivalent to ampleness on every summand. Indeed, in the forward direction restrict a witnessing section to a summand. Its nonvanishing locus is the inverse image of the original affine nonvanishing locus under a closed immersion; [lem-weil-pbc-closed-immersion-finite] says that immersion is affine, so this inverse image is affine. Each summand is quasi-compact because it is closed in the quasi-compact union. Conversely, extend a witnessing section on one summand by zero on the others, using the sheaf gluing axiom on this disjoint open cover. Its nonvanishing locus is the same affine open, and a finite union of quasi-compact summands is quasi-compact. Hence this verifies both directions directly from the definition.",
-   "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "lem-weil-pbc-closed-immersion-finite"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01PS, definition-ample, applied componentwise to a finite disjoint union"
-   }
-  },
-  {
-   "text": "Every $P_j$ is the spectrum of a field: choose an affine neighbourhood in its singleton space; its ring $A$ is a nonzero domain with only the prime $(0)$, so any nonunit would lie in a maximal ideal and hence be zero, and $A$ is a field. An invertible module on $P_j$ is a one-dimensional vector space by [def-sc-invertible-module]; choose a nonzero basis section. With exponent $1$ its nonvanishing locus is all of the affine scheme $P_j$. Thus this restriction is ample by [def-weil-pbc-ample-invertible-module], and there is no condition on point components.",
-   "uses": [
-    "def-pc-integral-scheme",
-    "def-sc-invertible-module",
-    "def-weil-pbc-ample-invertible-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5Y, isolated point summands, checked from the definition of ampleness"
-   }
-  },
-  {
-   "text": "Let $h_i:\\widetilde C_i\\to X$ be the composite of the normalization map and the component inclusion. By [lem-weil-pbc-invertible-pullback-tensor], $h_i^*\\mathcal M$ is invertible, and the canonical pullback-composition isomorphism identifies it with the restriction of $f^*\\mathcal M$ to that summand. Step 2 gives that $\\widetilde C_i$ is integral, proper over $k$, and one-dimensional. Applying [lem-trf-proper-integral-curve-ample-degree] gives that $h_i^*\\mathcal M$ is ample exactly when $\\deg_k(h_i^*\\mathcal M)>0$. By [def-pc-degree-line-bundle] this is precisely the degree on the normalization specified in the item. The finite-union equivalence of Step 4, the point-summand check of Step 5, and the finite-surjective equivalence of Step 3 now prove both directions of the claimed criterion. In particular no degree pullback formula, smoothness assertion, or field extension is required.",
+   "text": "By [lem-weil-pbc-invertible-pullback-tensor], $f^*\\mathcal M$ is invertible. Apply [lem-trf-finite-coproduct-ample-with-points] to $Z$: its ampleness is equivalent to ampleness on every $\\widetilde C_i$, with the point restrictions automatically ample. If $h_i:\\widetilde C_i\\to X$ is the normalization followed by the component inclusion, the same pullback theorem identifies the restriction of $f^*\\mathcal M$ to this summand with $h_i^*\\mathcal M$, and supplies its invertibility.",
    "uses": [
     "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-trf-finite-coproduct-ample-with-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01PS, definition-ample, applied to a finite disjoint union; the isolated-point summands in Varieties Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-proper-integral-curve-ample-degree] to each proper integral dimension-one $k$-scheme $\\widetilde C_i$ and its invertible module $h_i^*\\mathcal M$. Its ampleness is equivalent to $\\deg_k(h_i^*\\mathcal M)>0$, exactly the normalization degree [def-pc-degree-line-bundle] in the statement. Composing the equivalences proves both implications. When there are no curve components the condition is vacuous; the point-summand result still applies. When $X$ is empty so is $Z$, and the affine-locus definition [def-weil-pbc-ample-invertible-module] and the degree condition are both vacuous.",
+   "uses": [
     "lem-trf-proper-integral-curve-ample-degree",
-    "def-pc-degree-line-bundle"
+    "def-pc-degree-line-bundle",
+    "def-weil-pbc-ample-invertible-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B5X, lemma-ample-curve, on each normalized component; Tag 0B5Y, conclusion"
+    "place": "Tag 0B5X, lemma-ample-curve; Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components, conclusion."
    }
   }
  ],
  "proof_deps": [
-  "def-kun-topological-krull-dimension",
   "def-pc-degree-line-bundle",
-  "def-pc-integral-scheme",
-  "def-sc-invertible-module",
-  "def-sc-normalization",
-  "def-weil-irreducible-components",
   "def-weil-pbc-ample-invertible-module",
   "def-weil-pbc-noetherian-ring",
-  "def-weil-proper-morphism",
-  "lem-sc-normalization-exists",
+  "lem-trf-finite-coproduct-ample-with-points",
   "lem-trf-finite-surjective-ample-reflection",
+  "lem-trf-proper-curve-normalized-component-cover",
   "lem-trf-proper-integral-curve-ample-degree",
-  "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-finite-composition",
-  "lem-weil-pbc-finite-coproduct",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "lem-weil-pbc-noetherian-finite-components",
-  "lem-weil-pbc-proper-composition",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-scheme-sober"
+  "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0B5Y, lemma-ampleness-in-terms-of-degrees-components: its finite-surjective cover argument is applied directly to normalized components using 0BXR and Coherent 0B5V, then 0B5X. The elementary cover and disjoint-union details are written out."
+  "place": "Tags 0B5Y and 0BXR: finite normalized-component cover and finite-coproduct ampleness are now separate statement-only work items; assemble these with Coherent Tag 0B5V and Varieties Tag 0B5X."
  },
  "mathlib_searches": [
   {
@@ -234,22 +179,25 @@
   "is": null
  },
  "merged_into": null,
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-fibre-degree-ample-criterion",
   "worker": "stage1",
-  "summary": "Wrote the finite normalized-component cover, including zero-dimensional components and the empty case, and reduced ampleness through finite-surjective descent to the proper integral curve degree criterion. Reused the existing normalization and finite-map nodes. Added two statement-only supporting nodes, with real logged Mathlib searches; clarified definition citations in the statement without changing its hypotheses or conclusion.",
-  "blueprint": "Realizes the inherited fibrewise ampleness-to-projectivity place recorded in blueprint.from: positivity on normalized geometric-fibre components gives absolute ampleness. The existing historical ancestry is retained.",
+  "summary": "Repair of the 2026-10-22 re-split return: extract the finite normalized-component cover and the finite-coproduct ampleness theorem with integral point summands as two statement-only nodes. Retain the full six-step returned argument verbatim in report.md with an exact allocation of each argument; the item is the short assembly using the new nodes and the existing finite-surjective and integral-curve degree theorems. Its statement is unchanged.",
+  "blueprint": "Realizes the inherited fibrewise ampleness-to-projectivity place recorded in blueprint.from: positivity on normalized geometric-fibre components gives absolute ampleness. The existing historical ancestry is retained. The two new nodes distribute returned Steps 1-3 (cover geometry) and Steps 4-5 (disjoint-union and point arguments); the item only assembles them with the existing descent and degree criteria.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "why": "The generic reduced closed-subscheme construction gives reduced integral component schemes; no node of this unit provides it."
-   },
-   {
-    "node": "lem-sc-normalization-exists",
-    "why": "The generic normalization theorem supplies finiteness, surjectivity, properness, and dimension equality for each integral curve."
-   },
    {
     "node": "lem-weil-pbc-invertible-pullback-tensor",
     "why": "The generic pullback theorem supplies invertibility and composition of the component pullbacks."
@@ -262,12 +210,12 @@
   "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NX-98ce92222",
-  "group": "NX",
+  "reviewer": "NT-cc-Q75-2ee99270d",
+  "group": "Q75",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-98ce92222 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Stacks 0B5V, 0B5X, 0B5Y, and 0BXR, hypotheses, edge cases, duplicates, and dependency closure. The normalized-component cover proves the unchanged criterion. Accepted three declared geometry tool uses; no fixes needed. Full findings in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-2ee99270d (reviewer sub-agent of L); spot-checked: Re-split checked against the base 6-step proof in clones/side-live and the human re-split note (2026-10-22). Every old argument is accounted for. Old Steps 1-2 and the cover-construction part of Step 3 are now the statement of lem-trf-proper-curve-normalized-component-cover. Old Steps 4-5 are now lem-trf-finite-coproduct-ample-with-points. The 0B5V application and old Step 6 stay as explicit item Steps 2-4. The item proof is 1944 chars. The new nodes carry about 2.8k and 1.4k chars of old argument: comparable, distinct arguments, statement-only, neither restating the item nor using degrees. Both are true. Cover node: point components are isolated singletons by maximality and finiteness; normalization is finite, surjective and of dimension 1 over any field (0BXR); f is finite and surjective, Z is proper. Tested on Spec k[e]/e^2, two crossing lines, an imperfect field and the empty X. Coproduct node checked against def 01PS: closed summands of a quasi-compact scheme are quasi-compact, X_s cut with a summand is affine, sections extend by zero, an integral 0-dimensional scheme is Spec of a field. Tested on empty I and J, empty Y_i and non-quasi-compact Y_i. Item steps match cited statements: 0B5V hypotheses verified in coherent.tex 4548; pullback-tensor (2) gives a_i^*f^*M = h_i^*M; the proper-integral-curve degree criterion applies with the same degree. Duplicates checked: lem-weil-pbc-normalization-projective-components needs projectivity, which comes later in the route; the componentwise-normalization, dense-open coproduct, degree-weighted, zero-dim affine and ample-positive-degree nodes are all different. Batch-5: both flagged citations are this delivery's new nodes, generic scheme theory (0B5Y/0BXR/01PS) with no proof deps, outside both assumptions; accepted. Tool use lem-weil-pbc-invertible-pullback-tensor accepted. Advisory: the transport of ampleness across a_i^*f^*M = h_i^*M is elementary and uncited (lem-sc-ample-iso is in another unit), as in the base proof. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

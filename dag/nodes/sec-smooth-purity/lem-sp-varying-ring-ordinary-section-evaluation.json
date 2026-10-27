@@ -1,0 +1,126 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-section-evaluation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs: ordinary realization normalization, steps 4 of lem-sp-varying-ring-ordinary-clopen-evaluation.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary realization of the clopen section factor",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let R_n be arbitrary commutative rings with transitions and n a natural number. For any commutative proper/open square k:V→W, r:V→S, p:W→T, i:S→T with k,i quasi-compact open and r,p proper, put P=W×_T S, b:P→W, q:P→S and s=(k,r):V→P. The sectionArrow factor (q^* then b_! to r^* then k_!) is the clopen projector for s followed by the outgoing pullback and open composition identifications, as in def-sp-varying-ring-clopen-arrow-factors. For the explicit ordinary realization and comparisons of [lem-sp-varying-ring-ordinary-evaluation-comparisons], E_W(moduleSectionArrow_N); j_k(r^*N); J_k(g_r,N) equals j_b(q^*N); J_b(g_q,N); strictSectionArrow_(E_S N). This statement does not include the cartesian beta factor.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; Stacks 03DI and 09AE for open adjunctions, 0F7B for the intrinsic clopen construction. This normalization is an agent-formulated consequence."
+ },
+ "stmt_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "def-sp-varying-ring-clopen-arrow-factors"
+ ],
+ "proof": [
+  {
+   "text": "Apply the bare clopen-projector realization equation to s=squareLift(k,r), at q^*N with q=pullback.snd p i. Apply b_! with b=pullback.fst p i. The ordinary open-composition normalization identifies the resulting s_!,b_! composite with k_!. The inverse of the ordinary pullback-composition normalization identifies s^*q^* with r^*. Naturality of the open comparisons moves the realized section and pullback compositor through the open comparison; naturality of strict jComp moves the pullback comparisons through its compositor. Substitute the projector equation, then use naturality of strict pi with the q^* comparison. Equality elimination for s≫b=k and s≫q=r accounts for both congruence isomorphisms. Associators have identity components, so their component expressions are exactly moduleSectionArrow and strictSectionArrow.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+    "lem-sp-varying-ring-ordinary-comparison-normalization",
+    "def-sp-varying-ring-clopen-arrow-factors",
+    "lem-sp-varying-ring-ordinary-clopen-projector-evaluation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons",
+  "lem-sp-varying-ring-ordinary-comparison-normalization",
+  "def-sp-varying-ring-clopen-arrow-factors",
+  "lem-sp-varying-ring-ordinary-clopen-projector-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open-immersion clopen projection construction; explicit categorical transport of its section factor, using the existing compositor normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Component evaluation constant tower degree zero embedding preserves normalized adjunction mates and open base change clopen projection",
+   "results": "msearch.py returned generic constantPresheafAdj, constantSheafAdj and evaluation preserves zero morphisms; none concerns the normalized varying-ring ordinary realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"; \"mapDerivedCategorySingleFunctor\"",
+   "results": "Generic mateEquiv_hcomp and exact-single functor coherence. Inspected Mathlib CategoryTheory/Adjunction/Mates and the adopted source LeftDerivedFunctor/SingleFunctor. None states the scheme/coefficient realization normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic tools, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSingle.*comp|ordinary.*[Cc]artesian|ordinary.*[Ss]ectionEvaluation|single.*mate",
+   "results": "msearch.py found no Mathlib matches. Local rg found VaryingRingOpenBaseChangeEvaluation and VaryingRingClopenSectionEvaluation, whose conclusions concern derived coefficient evaluation to a single module category. They do not state the present ordinary-system to derived-constant-tower comparisons. The former imports the original item only for its already proved ordinaryModuleEvalG_comp.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate ordinary realization normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinarySectionEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinarySectionEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.ordinarySectionEvaluation",
+  "statement": "theorem ordinarySectionEvaluation (n : ℕ) {V W S T : Scheme.{u}}\n    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)\n    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]\n    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :\n    OrdinarySquareComparison\n      (EA := ordinaryRealization R φ n V) (EB := ordinaryRealization R φ n W)\n      (EC := ordinaryRealization R φ n S)\n      (ED := ordinaryRealization R φ n (pullback p i))\n      (R₀ := pull R φ r) (P₀ := extension R φ (pullback.fst p i))\n      (K := extension R φ k) (I := pull R φ (pullback.snd p i))\n      (r := StrictTower.G (R n) r) (p := StrictTower.J (R n) (pullback.fst p i))\n      (k := StrictTower.J (R n) k) (i := StrictTower.G (R n) (pullback.snd p i))\n      (ordinaryPullComparison R φ n V S r)\n      (ordinaryOpenComparison R φ n (pullback p i) W (pullback.fst p i))\n      (ordinaryOpenComparison R φ n V W k)\n      (ordinaryPullComparison R φ n (pullback p i) S (pullback.snd p i))\n      (moduleSectionArrow R φ k r p i h) (strictSectionArrow (R n) k r p i h)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261027T112331-L-1571942",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

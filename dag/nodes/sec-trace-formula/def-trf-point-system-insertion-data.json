@@ -1,0 +1,183 @@
+{
+ "id": "def-trf-point-system-insertion-data",
+ "kind": "definition",
+ "title": "The fixed data for point-system insertion",
+ "statement": "Let k be a field, h an automorphism of Spec k, l a prime, and E a finite extension of Q_l [def-weil-l-adic-coefficient-extension]. Use the small pro-etale site and the actual coefficient ringed sequence site [def-weil-pbc-proetale-site, def-coef-ringed-sequence-site]. For r,n in N, positive powers and quotient exponents are r+1 and n+1. Define reindexing by h^(r+1) on the site coordinate and identity on the index; define its uniquely constant-normalized inverse coefficient map, the induced system functor G, finite or completed module inverse image F, completed tower action FTow, and ring compositor by the specified site reindexing comparison [lem-weil-proetale-isomorphism-inverse-image, def-weil-inverse-image-pullback-comparison]. Define sections by completed scalar restriction followed by final-object sections levelwise [lem-coef-derived-system-evaluation-calculus, def-trf-coefficient-tower-operations]. Retain the actual tensor pullback, adjunction-normalized tensor compositor, finite unit, conjugated transition and termwise complex insertion [lem-pur-proetale-module-pullback-composition]. Maps is the record of natural comparisons d,t,b,j and natural insertions u,I with the original types. CoefficientLaws, SectionLaws, RestrictionCompositionLaws, TensorLaws, TransitionLaws, StrictInsertionLaws and DerivedInsertionLaws are precisely the seven original predicates on these data: no existence of normalized comparisons or insertions is included in their definitions. The inverse coefficient map is uniquely fixed on every level and section. The functor G is additive and preserves finite limits and finite colimits; the same is true of sections when k is algebraically closed. All definitions and support theorems are the previously existing constructions, relocated verbatim to a separate module.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-trf-coefficient-tower-operations",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-frobenius-point-transport",
+  "lem-trf-point-sheaf-insertion-calculus",
+  "def-coef-ringed-sequence-site",
+  "def-trf-point-restriction-coordinates",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-pur-integral-finite-pullback",
+  "def-sf-scalar-reduction-categories-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+ },
+ "proof": [
+  {
+   "text": "Constant-coefficient naturality makes the inverse finite maps a morphism of the coefficient sequence. Evaluate that morphism on the product site. Extensionality on every level and object gives uniqueness of the coefficient map. Reindexing is continuous by the site equivalence of [lem-weil-proetale-isomorphism-inverse-image].",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  },
+  {
+   "text": "The functor G is reindexing followed by action transport. The underlying sheaf functor is an equivalence, so creation and reflection of kernels and cokernels prove its exactness. Final-object sections at the algebraically closed point are exact; restriction of scalars and tower evaluation preserve this. Use [lem-weil-point-proetale-sections-exact] and [lem-coef-semilinear-derived-sections].",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 03CB and 0H7J; the explicit sectionwise coefficient-system refinement in the proof of lem-trf-point-system-insertion-composition (steps 1–6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along a scheme isomorphism has normalized module tensor unit and compositor compatible with coefficient restriction of towers",
+   "results": "Eight scheme pullback carrier tensorCongr and pullbackSpecIso results. These concern scheme pullbacks, not normalized comparisons of quotient-linear module systems. Existing project APIs in IsoSectionwiseInverseImage, InverseImagePullbackComparisonDerived and PointSheafInsertionCalculus were read and reused.",
+   "date": "2026-10-26",
+   "verdict": "no direct Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "Seven hits: pushforwardComp, pushforward_id_comp, pushforward_comp_id, pushforward_assoc and component equations. Read PushforwardContinuous.lean:139–151: these are the ordinary module reindexing compositors, useful ingredients but not the coefficient-system normalization or point insertion assertion.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pointSheafInsertion|mapHomologicalComplexCompIso",
+   "results": "Twenty-five Mathlib hits, including module-sheaf pushforwardComp and presheaf composition. Local rg found the point-specific one-level insertion calculus in Sheaf.AlgebraicGeometry.PointSheafInsertionCalculus; its theorem fixes the coefficient universe to the site universe and has no entire quotient-linear system. No direct theorem for the present independent universes and whole systems.",
+   "date": "2026-10-26",
+   "verdict": "no direct Mathlib match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of sheaves along a scheme isomorphism preserves exact sequences and coefficient reduction on towers",
+   "results": "Eight hits on scheme isomorphism section maps, including Scheme.Modules.inv_app and Scheme.Hom.inv_app. The displayed types concern ordinary section isomorphisms, not the fixed coefficient-sequence reindexing data. The existing project constructions are retained verbatim.",
+   "date": "2026-10-26",
+   "verdict": "ingredients only; no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSystemInsertionComposition",
+  "date": "2026-10-26",
+  "group": "R1"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-system-insertion-composition",
+   "place": "Separation of the existing data and the sheaf-level steps from the coefficient and localization arguments."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointSystemInsertionData",
+  "file": "lean/Sheaf/Paper/PointSystemInsertionData.lean",
+  "declaration": "WeilConjectures.PointSystemInsertion.Maps",
+  "statement": "structure Maps [IsAlgClosed k]",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-26",
+  "declarations": [
+   "WeilConjectures.PointSystemInsertion.reindex",
+   "WeilConjectures.PointSystemInsertion.reindexContinuous",
+   "WeilConjectures.PointSystemInsertion.sequenceRing",
+   "WeilConjectures.PointSystemInsertion.coefficient_existsUnique",
+   "WeilConjectures.PointSystemInsertion.coefficient",
+   "WeilConjectures.PointSystemInsertion.G",
+   "WeilConjectures.PointSystemInsertion.G_exact",
+   "WeilConjectures.PointSystemInsertion.GAdditive",
+   "WeilConjectures.PointSystemInsertion.GLimits",
+   "WeilConjectures.PointSystemInsertion.GColimits",
+   "WeilConjectures.PointSystemInsertion.F",
+   "WeilConjectures.PointSystemInsertion.FTow",
+   "WeilConjectures.PointSystemInsertion.ringF",
+   "WeilConjectures.PointSystemInsertion.c",
+   "WeilConjectures.PointSystemInsertion.ringCompositor",
+   "WeilConjectures.PointSystemInsertion.sections",
+   "WeilConjectures.PointSystemInsertion.sections_exact",
+   "WeilConjectures.PointSystemInsertion.sectionsAdditive",
+   "WeilConjectures.PointSystemInsertion.sectionsLimits",
+   "WeilConjectures.PointSystemInsertion.sectionsColimits",
+   "WeilConjectures.PointSystemInsertion.towerDerived",
+   "WeilConjectures.PointSystemInsertion.tensorPull",
+   "WeilConjectures.PointSystemInsertion.tensorCompositor",
+   "WeilConjectures.PointSystemInsertion.complexInsertion",
+   "WeilConjectures.PointSystemInsertion.Maps",
+   "WeilConjectures.PointSystemInsertion.inverseImageEvaluationSection_eq",
+   "WeilConjectures.PointSystemInsertion.finiteUnit",
+   "WeilConjectures.PointSystemInsertion.tensorTransition",
+   "WeilConjectures.PointSystemInsertion.CoefficientLaws",
+   "WeilConjectures.PointSystemInsertion.SectionLaws",
+   "WeilConjectures.PointSystemInsertion.towerCompositor",
+   "WeilConjectures.PointSystemInsertion.RestrictionCompositionLaws",
+   "WeilConjectures.PointSystemInsertion.TensorLaws",
+   "WeilConjectures.PointSystemInsertion.TransitionLaws",
+   "WeilConjectures.PointSystemInsertion.StrictInsertionLaws",
+   "WeilConjectures.PointSystemInsertion.DerivedInsertionLaws"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-acb6c",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261026T070715-L-3644835",
+  "kind": "interface",
+  "note": "independent cc review: published PointSystemInsertionComposition.lean vs delivered PointSystemInsertionData.lean (verbatim extraction, only 9 private imports dropped); item proof vs node proof_deps; the two new sorry statements vs the item's existing Section/RestrictionComposition/Tensor/Transition/StrictInsertion conjuncts; sandbox compile of the 4 modules + importer LocalNormalizationStrictRealization + #print axioms"
+ }
+}

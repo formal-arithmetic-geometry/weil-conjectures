@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-cocontinuous-ringed-tensor-restriction",
+ "kind": "statement",
+ "title": "Explicit tensorator for cocontinuous module-sheaf restriction",
+ "statement": "For a continuous functor F:(C,J)→(D,K) between small sites, commutative coefficient sheaves R on D and S on C and an isomorphism c:F*R≅S, construct the tensorator tensorPushMap from the sheafified sectionwise scalar-restriction tensorator. If the canonical restriction/sheafification comparison is invertible for every R-module presheaf, tensorPushMap is invertible. The latter condition holds when F is cocontinuous. The tensorator sends sheafified pure tensors to pure tensors and is natural in both factors. The coefficient isomorphism gives the normalized rank-one unit comparison. The tensor and sheafification constructions are those of [def-pur-sheaf-tensor-product] and [def-weil-presheaf-modules-sheafification].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "section-tensor-product (03EK), and section-sheafification (03CY); explicit module-sheafification comparison and sectionwise scalar restriction"
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the restricted sheafification unit along the source sheafification adjunction. Its composite with that unit is the restricted target unit. Cocontinuity preserves local injectivity and local surjectivity, so the transpose is an isomorphism of sheaves.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define tensorPushMap by the canonical tensor/sheafification isomorphism, sheafification of the presheaf scalar-restriction tensorator, the transpose just constructed, and the inverse target tensor/sheafification isomorphism. Tensor the semilinear identity equivalences associated to c to prove sectionwise invertibility of the presheaf tensorator. Functoriality of sheafification and composition prove tensorPushMap invertible.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the unit equation on elementary tensors to get the normalized tensorator formula. Maps out of a sheaf tensor are determined on these tensors by the adjunction and tensor extensionality; this proves naturality. The coefficient isomorphism and its inverse define the rank-one unit equivalence sectionwise, with linearity from preservation of multiplication. All constructions also apply to the zero ring and empty sites.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "03CY and 03EK, explicit canonical maps using module-sheafification adjunction; proved helpers extracted from the assigned tensor-comparisons proof for the per-file compile limit"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of modules along an action site preserves tensor products with diagonal action and pure tensors",
+   "results": "Generic presheaf tensor and scalar restriction constructions were found. The explicit normalized tensorator below is constructed from these primitives and the module-sheafification adjunction.",
+   "date": "2026-10-27",
+   "verdict": "primitives found; explicit tensor comparison constructed here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsCocontinuous",
+   "results": "Generic cocontinuity and cover lifting APIs, including cocontinuity of identities, composites and inverse equivalences. Local bijectivity of the restricted sheafification unit supplies the needed canonical isomorphism.",
+   "date": "2026-10-27",
+   "verdict": "generic API used"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCocontinuous|isCocontinuous in the Sites APIs and TwistedAction modules",
+   "results": "Read the generic module-sheafification and tensor interfaces, SemilinearDerivedCalculus, RingedCocontinuousMonoidal and RingedSiteEquivalenceTensor. The universal-property helpers are reused; this module constructs the normalized tensorator explicitly.",
+   "date": "2026-10-27",
+   "verdict": "existing primitives and proof helpers reused"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionTensorComparisons",
+  "date": "2026-10-27",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 1--2 and tensor portion of step 5 (original action-site steps 9--10 and 13); sites-modules.tex, section-tensor-product and lemma-sheafification-tensor. Substep: generic normalized module tensorator for continuous cocontinuous restriction.",
+   "via": [
+    "lem-sf-twisted-action-tensor-comparisons",
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionTensorRestriction",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionTensorRestriction.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorPushMap_isIso",
+  "declarations": [
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictionSheafificationMap",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictionSheafificationMap_unit",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictionSheafificationMap_unit_apply",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.pushforward_four_comp_apply",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.sheaf_iso_inv_hom_apply",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.sheafification_unit_naturality_apply",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorComparison_unit_apply",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictionSheafificationMap_isIso",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictScalars_mu_bijective",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictScalars_mu_isIso",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.iso_section_injective",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorIso_natural",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.pure_ext",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.pure_map",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.pure_restrict",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorIso_braiding",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.pure_braiding",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.coefficientMap",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictionFunctor",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorPushMap",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorPushMap_pure",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorPushMap_isIso",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.tensorPushMap_natural",
+   "CategoryTheory.TwistedActionRingedSite.TensorRestriction.restrictionUnitIso"
+  ],
+  "statement": "theorem tensorPushMap_isIso\n    (h : ∀ Q : PresheafOfModules.{u} (ring R).obj,\n      IsIso (restrictionSheafificationMap (coefficientMap F R S c) Q))\n    (M N : Modules R) : IsIso (tensorPushMap F R S c M N)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T094344-L-217471",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261027T094344-L-217471",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

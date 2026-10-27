@@ -1,0 +1,389 @@
+{
+ "id": "lem-sp-cofinal-quotient-kflat-bisystem",
+ "kind": "statement",
+ "title": "Simultaneous K-flat realization of a commuting two-family scalar diagram",
+ "statement": "Let $\\mathcal C$ be a site small in the coefficient universe [def-weil-size-convention], $R$ a sheaf of commutative rings, and $(B_N)_{N\\geq1}$ and $(D_j)_{j\\geq1}$ inverse systems of commutative ring sheaves with transition maps $b_{N,M}$ and $d_{j,k}$ [def-weil-inverse-system]. Fix $e\\geq1$, maps $\\beta_N:R\\to B_N$, $\\delta_j:R\\to D_j$, and $q_{N,j}:B_N\\to D_j$ for $eN\\geq j$. Assume $q_{N,j}\\beta_N=\\delta_j$, $b_{N,M}\\beta_N=\\beta_M$, $d_{j,k}\\delta_j=\\delta_k$, $q_{M,j}b_{N,M}=q_{N,j}$ when $N\\geq M$ and $eM\\geq j$, and $d_{j,k}q_{N,j}=q_{N,k}$ when $j\\geq k$.\n\nUse the ordinary unbounded derived categories of module sheaves, scalar restriction, sheaf tensor, and K-flat derived change of rings [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-pc-sheaf-restrict-scalars, def-pur-sheaf-tensor-product, lem-pur-derived-change-of-rings]. Let $P$ be any K-flat $R$-complex [def-pc-kflat-complex]. The complexes $U_N=P\\otimes_RB_N$ and $V_j=P\\otimes_RD_j$ are K-flat over their respective coefficient sheaves. Their transitions $p\\otimes x\\mapsto p\\otimes b_{N,M}(x)$ and $p\\otimes y\\mapsto p\\otimes d_{j,k}(y)$ are semilinear chain maps. For every $eN\\geq j$ there is a $D_j$-linear chain isomorphism\n$$\\theta_{N,j}:(U_N\\otimes_{B_N}D_j)\\xrightarrow{\\sim}V_j,\\qquad(p\\otimes x)\\otimes y\\longmapsto p\\otimes q_{N,j}(x)y,$$\nwith inverse $p\\otimes y\\mapsto(p\\otimes1)\\otimes y$. These chain isomorphisms commute with the semilinear transitions in both indices and with every chain map of K-flat $R$-complexes.\n\nIf $P$ has flat terms and represents $K\\in D(R)$, localization of $\\theta_{N,j}$ under the canonical K-flat computation isomorphisms is exactly the normalized target-valued comparison\n$$(K\\otimes_R^LB_N)\\otimes_{B_N}^LD_j\\xrightarrow{\\sim}K\\otimes_R^LD_j$$\nof [lem-sfb-successive-derived-quotient-normalization]. Consequently these derived comparisons are independent of the flat-term K-flat representative, natural in $K$, and compatible with every further reduction in either index. Neither flatness of the coefficient maps, nor boundedness or completeness of $P$ or $K$, is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E (lemma-pullback-K-flat) and Tag 0D6D (lemma-derived-pullback-composition), specialized to scalar maps; agent refinement of returned proof steps 2–3 to simultaneous commuting quotient systems. Ordinary cancellation: sites-modules.tex Tag 05V4 (lemma-flat-change-of-rings)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-kflat-complex",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the family of ordinary and derived presentations p and its normalization ν from lem-sfb-successive-derived-quotient-normalization. Apply lem-pur-kflat-change-of-rings-all-independent separately to every beta_N and delta_j, using the object/map equations and additive instance of each presentation. This gives K-flatness without termwise flatness.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-kflat-change-of-rings-all-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composable a,b with a followed by b=c define coefficientStep by the ordinary adjunction unit for b whiskered by p(a), followed by restriction of the normalized cancellation theta. Its section formula is nu.ordinary_unit followed by nu.ordinary_hom at outer scalar 1. Define b and d by these coefficient steps. Define s by theta_Nj followed by the inverse of theta_Mj. Define t by the coefficient step from q_Nj to q_Nk whiskered by p(beta_N). All are actual natural transformations, so their degreewise lifts commute with differentials.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Equality transport of nu.ordinary_hom and nu.ordinary_inv gives precisely the forward and inverse tensor formulas for the given target delta_j. The s formula follows by applying theta_Mj to both proposed values: the cancellation formulas and q_Mj b_NM=q_Nj make them equal, and its inverse cancels. The t formula is coefficientStep_sections. The s comparison square follows directly by isomorphism cancellation. To prove the t square, use the two ordinary adjunction hom-equivalences to reduce equality of maps from the double extension to the tensors 1 tensor (1 tensor z). More generally its pure-tensor calculation uses q_Nj followed by d_jk=q_Nk and multiplicativity of d_jk.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict each coefficient step back to R using nu.restrictionComp, whose sections are the identity. Pure tensors detect maps from this restricted extension: transport by p.obj_eq, use the sheafification hom-ext property, then tensor induction. On pure tensors composition of two restricted steps is the step for the composite coefficient map, and the identity coefficient map acts identically. The functor laws of B and D now give all four identity/composition clauses on arbitrary sections. For the mixed square use double-extension extensionality and the established s and t formulas; both composites have value d(y) tensor (b(x) tensor z).",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Chain-map naturality is the naturality of the specified lifted natural isomorphism cofinalQuotientChainTheta. Substitute the equality beta_N followed by q_Nj=delta_j in nu.representative. The resulting representative identity is exactly the final clause, since cofinalQuotientTheta reduces to nu.ordinary for the composite. This retains the canonical derived computation and all universes and imposes no boundedness or coefficient flatness.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EK and 03CY: scalar units, cancellation and sheafification uniqueness; Tags 0G7E and 0D6D through the existing K-flat preservation and normalized successive-extension declarations. Lean proof by V5, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|[Ss]calar.*[Aa]ssoc",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"tensor\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous strict complex models for derived change of rings in a commuting diagram of quotient coefficient ring sheaves",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "RingHom.Flat.isStableUnderBaseChange",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "KaehlerDifferential.tensorKaehlerEquiv",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "RingHom.FormallySmooth.isStableUnderBaseChange",
+     "KaehlerDifferential.tensorKaehlerEquivBase",
+     "RingHom.QuasiFinite.isStableUnderBaseChange"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A single K flat resolution realizes two compatible inverse systems of derived scalar extensions with commuting chain tensor associativity maps",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.FaithfullyFlat",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.trans",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.Flat.iff_lTensor_exact'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|tensor.*[Aa]ssoc|extendScalars",
+   "results": {
+    "subdirectory": "Algebra/Category/ModuleCat/Sheaf",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\"",
+   "results": {
+    "subdirectory": "",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in both coefficient ring maps of the tensor reassociation isomorphism on an unbounded K flat complex of sheaves",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc",
+     "HomologicalComplex.mapBifunctorFlipIso_hom_naturality",
+     "HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc",
+     "HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc",
+     "HomologicalComplex.ι_mapBifunctorFlipIso_hom",
+     "HomologicalComplex₂.ιTotal_totalFlipIso_f_hom_assoc",
+     "HomologicalComplex.HasGoodTensor₁₂",
+     "HomologicalComplex.HasGoodTensor₂₃"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary flat module scalar extension and generic homological-complex reassociation do not provide simultaneous sheaf coefficient K-flat models or their normalized target-valued derived comparison squares."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|scalar.*assoc|extendScalars",
+   "results": {
+    "subdirectory": "Algebra/Category/ModuleCat/Sheaf",
+    "count": 0,
+    "hits": [],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar associativity and presheaf tensor definitions do not state simultaneous unbounded K-flat SHEAF models or identify the normalized target-valued derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat sheaf complexes change of rings composition natural derived tensor associativity",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "ModuleCat.extendScalars_assoc'",
+     "SheafOfModules.comp_val_assoc",
+     "TensorProduct.tensorTensorTensorAssoc",
+     "RingHom.Flat.comp",
+     "HomologicalComplex.associator",
+     "RingHom.Flat.stableUnderComposition",
+     "SheafOfModules.pushforward_assoc",
+     "RingHom.Flat.isStableUnderBaseChange"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar associativity and presheaf tensor definitions do not state simultaneous unbounded K-flat SHEAF models or identify the normalized target-valued derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": {
+    "subdirectory": "",
+    "count": 10,
+    "hits": [
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.tensorObj_obj",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft",
+     "PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorObjMap",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar associativity and presheaf tensor definitions do not state simultaneous unbounded K-flat SHEAF models or identify the normalized target-valued derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K flat complex of sheaves admits compatible ordinary scalar extensions along two inverse systems of ring maps and natural tensor reassociation chain isomorphisms",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CategoryTheory.compatiblePreservingOfFlat",
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "Module.Flat.of_flat_tensorProduct",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.iff_rTensor_exact'",
+     "Module.Flat.iff_lTensor_exact'"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar associativity and presheaf tensor definitions do not state simultaneous unbounded K-flat SHEAF models or identify the normalized target-valued derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|IsKFlat|KFlat",
+   "results": {
+    "subdirectory": "Algebra/Category/ModuleCat",
+    "count": 6,
+    "hits": [
+     "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+     "Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar associativity and presheaf tensor definitions do not state simultaneous unbounded K-flat SHEAF models or identify the normalized target-valued derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves arbitrary K flat sheaf complexes and the derived composition is computed by the ordinary tensor cancellation map",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+     "Module.Flat.lTensor_shortComplex_exact",
+     "Module.Flat.rTensor_shortComplex_exact",
+     "Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+     "Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+     "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+     "Module.Flat.rTensor_exact",
+     "Module.Flat.lTensor_exact"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary ModuleCat scalar associativity and presheaf tensor definitions do not state simultaneous unbounded K-flat SHEAF models or identify the normalized target-valued derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-cofinal-finite-reduction-constructibility",
+  "date": "2026-10-22",
+  "group": "NA"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof final integral-constructibility sentence: simultaneous K-flat models, target-linear associator, and both-index quotient compatibilities (old item steps 2–3).",
+   "via": [
+    "lem-sp-cofinal-finite-reduction-constructibility"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-cofinal-quotient-kflat-bisystem",
+  "worker": "stage1",
+  "summary": "Q108: retained the statement; reused arbitrary-K-flat scalar extension and normalized derived composition from existing nodes; wrote the balanced inverse, both-index transition equations and chain-map naturality explicitly. No new nodes or Mathlib leaves.",
+  "blueprint": "sk-lem-sp-tower proof, final integral-constructibility sentence: this item supplies simultaneous quotient models and their normalized two-index comparisons for lem-sp-cofinal-finite-reduction-constructibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kflat-change-of-rings-all-independent",
+    "why": "Generic preservation of arbitrary K-flat sheaf complexes under scalar extension; the tower unit supplies no such general change-of-rings theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic unbounded K-flat computation and canonical representative comparison, already used by the statement; no replacement of the tower reconstruction route."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic target-valued derived composition normalization already named in the statement; identifies the explicit chain maps, rather than replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kflat-change-of-rings-all-independent",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-11166c71a",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-11166c71a (reviewer sub-agent of L); spot-checked: Read the item's full 5-step proof, every cited statement, Stacks 0G7E (l.3508, needs flat terms, hence the stronger DAG lemma), 0D6D (l.3658) and the unit sk-lem-sp-tower. No new nodes, no fixes. The statement is unchanged against live and side-live, where the item is still unsplit; it has no repair note of its own, so the re-split rule does not apply. proof_deps equals the union of the step uses, there is no cycle (BFS over 247 nodes), and there is no SGA citation. Step 1: lem-pur-kflat-change-of-rings-all-independent states preservation of any K-flat complex under any scalar extension, with no flat terms and no flat ring map, and the item's site hypothesis is met. Steps 2-4 are elementary, and I re-checked them: R-balancing of the transitions via b∘β=β and d∘δ=δ; the R- and B_N-balancing of θ and the R-balancing of ι; both composites; and the first-index transition, well defined via q_{M,j}b=q_{N,j}. The second-index transition needs eN≥j≥k and d∘q_{N,j}=q_{N,k}; the mixed square's common value is p⊗q_{N,k}(x)d(y). Naturality holds for any chain map. 'Extension in each tensor factor' is the scalar-restriction adjunction plus the sheafification universal property, which counts as elementary. Step 5: lem-sfb-successive-derived-quotient-normalization (arbitrary R→S→T on a small site) represents its comparison on flat-term K-flat models by exactly θ and ι, and gives naturality in K and in the ring maps. lem-pur-derived-change-of-rings gives K-flat computation; U_N is K-flat by step 1. Edge cases: Z→Z/4→Z/2 with P=Z; D=0; the contractible complex Z/2→Z/2, which has non-flat terms (the chain clause holds, and the derived clause is correctly restricted to flat-term P); identity indices. Duplicate search for mixed-ring sheaf-tensor transitivity found no node to cite (the trilinear-universal node is single-ring). The three declared tool_uses are accepted as generic black boxes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CofinalQuotientKFlatBisystem",
+  "declaration": "SheafOfModules.cofinal_quotient_kflat_bisystem",
+  "declarations": [
+   "SheafOfModules.cofinalQuotientTheta",
+   "SheafOfModules.cofinalQuotientChainTheta",
+   "SheafOfModules.cofinalQuotientDerivedTheta",
+   "SheafOfModules.cofinal_quotient_kflat_bisystem"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/CofinalQuotientKFlatBisystem.lean",
+  "statement": "theorem cofinal_quotient_kflat_bisystem (R : Sheaf J CommRingCat.{r}) (B D : ℕ+ᵒᵖ ⥤ Sheaf J CommRingCat.{r}) (e : ℕ+) (β : ∀ N : ℕ+, R ⟶ B.obj (op N)) (δ : ∀ j : ℕ+, R ⟶ D.obj (op j)) (q : ∀ (N j : ℕ+) (_h : j ≤ e * N), B.obj (op N) ⟶ D.obj (op j)) (hq : ∀ (N j : ℕ+) (h : j ≤ e * N), β N ≫ q N j h = δ j) (hβ : ∀ (N M : ℕ+) (h : M ≤ N), β N ≫ B.map (homOfLE h).op = β M) (hδ : ∀ (j k : ℕ+) (h : k ≤ j), δ j ≫ D.map (homOfLE h).op = δ k) (hqb : ∀ (N M j : ℕ+) (h : M ≤ N) (hN : j ≤ e * N) (hM : j ≤ e * M), B.map (homOfLE h).op ≫ q M j hM = q N j hN) (hqd : ∀ (N j k : ℕ+) (h : k ≤ j) (hj : j ≤ e * N) (hk : k ≤ e * N), q N j hj ≫ D.map (homOfLE h).op = q N k hk) : ∃ (p : ∀ {A A' : Sheaf J CommRingCat.{r}} (a : A ⟶ A'), Presentation a) (ν : Normalization p), (∀ (P : CochainComplex (Modules R) ℤ), CochainComplex.IsKFlatIndependentCoefficients P → (∀ N : ℕ+, CochainComplex.IsKFlatIndependentCoefficients (((p (β N)).ordinary.mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ j : ℕ+, CochainComplex.IsKFlatIndependentCoefficients (((p (δ j)).ordinary.mapHomologicalComplex (.up ℤ)).obj P))) ∧ ∃ (b : ∀ (N M : ℕ+) (h : M ≤ N), (p (β N)).ordinary ⟶ (p (β M)).ordinary ⋙ restriction (B.map (homOfLE h).op)) (d : ∀ (j k : ℕ+) (h : k ≤ j), (p (δ j)).ordinary ⟶ (p (δ k)).ordinary ⋙ restriction (D.map (homOfLE h).op)) (s : ∀ (N M j : ℕ+) (_h : M ≤ N) (hN : j ≤ e * N) (hM : j ≤ e * M), (p (β N)).ordinary ⋙ (p (q N j hN)).ordinary ⟶ (p (β M)).ordinary ⋙ (p (q M j hM)).ordinary) (t : ∀ (N j k : ℕ+) (h : k ≤ j) (hj : j ≤ e * N) (hk : k ≤ e * N), (p (β N)).ordinary ⋙ (p (q N j hj)).ordinary ⟶ ((p (β N)).ordinary ⋙ (p (q N k hk)).ordinary) ⋙ restriction (D.map (homOfLE h).op)), (∀ (N M : ℕ+) (h : M ≤ N) (A : Modules R) (U : Cᵒᵖ) (x : (B.obj (op N)).obj.obj U) (z : A.val.obj U), ((b N M h).app A).val.app U (sectionTensor (p (β N)) A U x z) = sectionTensor (p (β M)) A U ((B.map (homOfLE h).op).hom.app U x) z) ∧ (∀ (j k : ℕ+) (h : k ≤ j) (A : Modules R) (U : Cᵒᵖ) (y : (D.obj (op j)).obj.obj U) (z : A.val.obj U), ((d j k h).app A).val.app U (sectionTensor (p (δ j)) A U y z) = sectionTensor (p (δ k)) A U ((D.map (homOfLE h).op).hom.app U y) z) ∧ (∀ (N j : ℕ+) (h : j ≤ e * N) (A : Modules R) (U : Cᵒᵖ) (x : (B.obj (op N)).obj.obj U) (y : (D.obj (op j)).obj.obj U) (z : A.val.obj U), ((cofinalQuotientTheta p ν (β N) (q N j h) (δ j) (hq N j h)).hom.app A).val.app U (sectionTensor (p (q N j h)) ((p (β N)).ordinary.obj A) U y (sectionTensor (p (β N)) A U x z)) = sectionTensor (p (δ j)) A U ((q N j h).hom.app U x * y) z) ∧ (∀ (N j : ℕ+) (h : j ≤ e * N) (A : Modules R) (U : Cᵒᵖ) (y : (D.obj (op j)).obj.obj U) (z : A.val.obj U), ((cofinalQuotientTheta p ν (β N) (q N j h) (δ j) (hq N j h)).inv.app A).val.app U (sectionTensor (p (δ j)) A U y z) = sectionTensor (p (q N j h)) ((p (β N)).ordinary.obj A) U y (sectionTensor (p (β N)) A U 1 z)) ∧ (∀ (N M j : ℕ+) (h : M ≤ N) (hN : j ≤ e * N) (hM : j ≤ e * M) (A : Modules R) (U : Cᵒᵖ) (x : (B.obj (op N)).obj.obj U) (y : (D.obj (op j)).obj.obj U) (z : A.val.obj U), ((s N M j h hN hM).app A).val.app U (sectionTensor (p (q N j hN)) ((p (β N)).ordinary.obj A) U y (sectionTensor (p (β N)) A U x z)) = sectionTensor (p (q M j hM)) ((p (β M)).ordinary.obj A) U y (sectionTensor (p (β M)) A U ((B.map (homOfLE h).op).hom.app U x) z)) ∧ (∀ (N j k : ℕ+) (h : k ≤ j) (hj : j ≤ e * N) (hk : k ≤ e * N) (A : Modules R) (U : Cᵒᵖ) (y : (D.obj (op j)).obj.obj U) (z : ((p (β N)).ordinary.obj A).val.obj U), ((t N j k h hj hk).app A).val.app U (sectionTensor (p (q N j hj)) ((p (β N)).ordinary.obj A) U y z) = sectionTensor (p (q N k hk)) ((p (β N)).ordinary.obj A) U ((D.map (homOfLE h).op).hom.app U y) z) ∧ (∀ (N M j : ℕ+) (h : M ≤ N) (hN : j ≤ e * N) (hM : j ≤ e * M) (A : Modules R), (s N M j h hN hM).app A ≫ (cofinalQuotientTheta p ν (β M) (q M j hM) (δ j) (hq M j hM)).hom.app A = (cofinalQuotientTheta p ν (β N) (q N j hN) (δ j) (hq N j hN)).hom.app A) ∧ (∀ (N j k : ℕ+) (h : k ≤ j) (hj : j ≤ e * N) (hk : k ≤ e * N) (A : Modules R), (t N j k h hj hk).app A ≫ (restriction (D.map (homOfLE h).op)).map ((cofinalQuotientTheta p ν (β N) (q N k hk) (δ k) (hq N k hk)).hom.app A) = (cofinalQuotientTheta p ν (β N) (q N j hj) (δ j) (hq N j hj)).hom.app A ≫ (d j k h).app A) ∧ (∀ (N M L : ℕ+) (hNM : M ≤ N) (hML : L ≤ M) (A : Modules R) (U : Cᵒᵖ) (x : ((p (β N)).ordinary.obj A).val.obj U), ((b M L hML).app A).val.app U (((b N M hNM).app A).val.app U x) = ((b N L (hML.trans hNM)).app A).val.app U x) ∧ (∀ (N : ℕ+) (A : Modules R) (U : Cᵒᵖ) (x : ((p (β N)).ordinary.obj A).val.obj U), ((b N N le_rfl).app A).val.app U x = x) ∧ (∀ (j k l : ℕ+) (hjk : k ≤ j) (hkl : l ≤ k) (A : Modules R) (U : Cᵒᵖ) (x : ((p (δ j)).ordinary.obj A).val.obj U), ((d k l hkl).app A).val.app U (((d j k hjk).app A).val.app U x) = ((d j l (hkl.trans hjk)).app A).val.app U x) ∧ (∀ (j : ℕ+) (A : Modules R) (U : Cᵒᵖ) (x : ((p (δ j)).ordinary.obj A).val.obj U), ((d j j le_rfl).app A).val.app U x = x) ∧ (∀ (N M j k : ℕ+) (hNM : M ≤ N) (hjk : k ≤ j) (hNj : j ≤ e * N) (hMj : j ≤ e * M) (hNk : k ≤ e * N) (hMk : k ≤ e * M) (A : Modules R), (s N M j hNM hNj hMj).app A ≫ (t M j k hjk hMj hMk).app A = (t N j k hjk hNj hNk).app A ≫ (restriction (D.map (homOfLE hjk).op)).map ((s N M k hNM hNk hMk).app A)) ∧ (∀ (N j : ℕ+) (h : j ≤ e * N) (P P' : CochainComplex (Modules R) ℤ) (f : P ⟶ P'), (((p (β N)).ordinary.mapHomologicalComplex (.up ℤ) ⋙ (p (q N j h)).ordinary.mapHomologicalComplex (.up ℤ)).map f) ≫ (cofinalQuotientChainTheta p ν (β N) (q N j h) (δ j) (hq N j h)).hom.app P' = (cofinalQuotientChainTheta p ν (β N) (q N j h) (δ j) (hq N j h)).hom.app P ≫ ((p (δ j)).ordinary.mapHomologicalComplex (.up ℤ)).map f) ∧ (∀ (N j : ℕ+) (h : j ≤ e * N) (P : CochainComplex (Modules R) ℤ), CochainComplex.IsKFlatIndependentCoefficients P → (∀ n : ℤ, IsFlatOnSite (R := R) (P.X n)) → ((ν.derived (β N) (q N j h)).hom.app (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) ≫ eqToHom (congrArg (fun a ↦ (p a).derived.obj (DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ _).obj P))) (hq N j h)) ≫ (p (δ j)).counit.app ((HomotopyCategory.quotient _ _).obj P) = (p (q N j h)).derived.map ((p (β N)).counit.app ((HomotopyCategory.quotient _ _).obj P)) ≫ (p (q N j h)).counit.app (((p (β N)).ordinary.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj P)) ≫ DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso (cofinalQuotientTheta p ν (β N) (q N j h) (δ j) (hq N j h)) (.up ℤ)).hom.app ((HomotopyCategory.quotient _ _).obj P)))",
+  "branch": "sheaf-dag",
+  "by": "Q102",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helpers are explicit transports of the recorded Normalization ordinary and derived comparisons, and the functorial lift to complexes. Positive indices are PNat. Natural transformations into restriction of scalars supply actual semilinear chain maps; their section formulas, identity/composition laws, both-index compatibility, mixed square, and normalized localization equation are stated explicitly. No additional notion, dependency repair, or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be6859c84",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement verbatim; node unchanged except lean; no parallel landing. All hypotheses match (hqb/hqd extra range args implied; no coefficient flatness/boundedness; flat terms only in final clause; universes u,v,r,w independent). Clauses checked: K-flat U_N,V_j for any K-flat P; b,d semilinear nat trans into restriction with pure-tensor formulas + id/comp laws; θ forward/inverse formulas; s/t source transitions with both squares and mixed square (re-verified q_{N,k}(x)d(y)⊗z); chain-map naturality; final clause = ν.representative transported along hq into D(D_j); derived independence/naturality/reductions via pinned ∃ν fields. Edge cases e=1, j=eN, identities, Z→Z/4→Z/2, contractible non-flat-term P. No duplicate found. Advisories: cofinalQuotientDerivedTheta unused in statement; data owner def-weil-pbc-successive-derived-quotient-data and def-pc-flat-sheaf-modules not in stmt_deps (S2 cannot fix); second reading by same worker. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261025T144233-L-1218055",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

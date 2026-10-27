@@ -1,0 +1,148 @@
+{
+ "id": "lem-coef-normalized-dvr-strict-coefficient-adjoint",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-normalized-dvr-effectivity",
+   "place": "Regular principal quotient augmentation, before passing to homotopy limits.",
+   "via": [
+    "lem-coef-normalized-dvr-roos-augmentation",
+    "lem-coef-normalized-dvr-bounded-free-cone",
+    "lem-coef-normalized-dvr-adic-cone-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "kind": "statement",
+ "title": "Finite strict coefficient-map formula for the DVR scalar cone",
+ "statement": "For the completed integral coefficient sheaf and any positive exponent n+1 and chosen actual derived scalar extension/restriction adjunction [lem-weil-derived-scalar-extension-restriction-adjunction], there is one natural isomorphism from restricted derived extension to the linear scalar cone [def-coef-linear-scalar-cone]. For every strict completed-coefficient complex P, finite-coefficient complex N in the category of [def-coef-normalized-dvr-tower], and strict map f:P -> Res(N) killed by the (n+1)-st uniformizer power, this isomorphism identifies the restricted derived adjoint of Q(f) with the localized cone map (0,f), followed by the canonical exact-restriction factor. No inverse limit or tower appears in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6; normalized tensor adjunction on K-flat resolutions"
+ },
+ "stmt_deps": [
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-coef-linear-scalar-cone",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof": [
+  {
+   "text": "The actual uniformizer power and completed projection form the regular quotient short exact sequence. Apply the existing normalized regular quotient cone augmentation to its universal cochain model.",
+   "uses": [
+    "lem-pur-integral-principal-cone-quotient-augmentation",
+    "lem-cbc-regular-quotient-cone-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sectionwise scalar equality gives an isomorphism of arrow functors and therefore of their strict cones. Localization uniqueness identifies the localized cone functors and the two exact restriction lifts, retaining their representative factorization equations.",
+   "uses": [
+    "def-coef-linear-scalar-cone",
+    "lem-cbc-regular-quotient-cone-augmentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the strict quotient-cone adjoint formula to every f. Conjugate by the restriction localization comparison, then by the unique isomorphism between the left adjoints of that same restriction. The resulting natural coefficient comparison has the asserted component formula.",
+   "uses": [
+    "lem-cbc-regular-quotient-cone-adjoint",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-principal-cone-quotient-augmentation",
+  "lem-cbc-regular-quotient-cone-augmentation",
+  "def-coef-linear-scalar-cone",
+  "lem-cbc-regular-quotient-cone-adjoint",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A6; explicit cone coordinates and localization naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical cone augmentation of multiplication by a regular section computes the derived tensor adjoint of a strict map into a quotient module complex",
+   "results": "8 hits: rTensor.inverse_of_rightInverse, lTensor.inverse_of_rightInverse, Algebra.Extension.tensorCotangentInvFun, sectionOfRetractionKerToTensorAux, sectionOfRetractionKerToTensor, lTensor.inverse_apply, rTensor.inverse_apply, lTensor.linearEquiv_of_rightInverse",
+   "date": "2026-10-26",
+   "verdict": "No matching strict quotient-cone derived adjoint formula; ordinary adjunction and mapping-cone APIs are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"cone\"",
+   "results": "3 hits: CategoryTheory.Presheaf.coconeCompShrinkYonedaHomEquiv, CategoryTheory.Presheaf.coconeCompShrinkYonedaHomEquiv_apply_coe, CategoryTheory.Presheaf.coconeCompShrinkYonedaHomEquiv_symm_apply",
+   "date": "2026-10-26",
+   "verdict": "No matching strict quotient-cone derived adjoint formula; ordinary adjunction and mapping-cone APIs are used in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "RegularQuotientCone|cone.*adjoint|adjoint.*cone",
+   "results": "21 hits: Mathlib/AlgebraicTopology/CechNerve.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/Limits.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean",
+   "date": "2026-10-26",
+   "verdict": "No matching strict quotient-cone derived adjoint formula; ordinary adjunction and mapping-cone APIs are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules the cone of multiplication by a regular section computes derived extension to the quotient compatibly with the adjunction unit",
+   "results": "8 hits: CategoryTheory.Sheaf.coneΓ, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.sheafificationAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.unitHomEquiv_comp_apply",
+   "date": "2026-10-26",
+   "verdict": "No matching strict quotient-cone derived adjoint formula; ordinary adjunction and mapping-cone APIs are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedDVRRoosAugmentation",
+  "date": "2026-10-26",
+  "group": "W3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedDVRStrictCoefficientAdjoint",
+  "file": "lean/Sheaf/Paper/NormalizedDVRStrictCoefficientAdjoint.lean",
+  "declaration": "WeilConjectures.normalizedDVR_strict_coefficient_adjoint",
+  "statement": "theorem normalizedDVR_strict_coefficient_adjoint (n : ℕ)\n    (adj : scalarReductionDerivedExtension l E X n ⊣\n      scalarReductionDerivedRestriction l E X n) :\n    ∃ A : scalarReductionDerivedExtension l E X n ⋙\n        scalarReductionDerivedRestriction l E X n ≅\n      CochainComplex.LinearScalarCone.derived\n        (A := completedIntegralModuleSheaves l E X D hl)\n        (normalizedDVRUniformizer l E X ^ (n + 1)),\n    ∀ (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)\n      (N : CochainComplex (normalizedDVRModules l E X n) ℤ)\n      (f : P ⟶ ((completedIntegralRestrictScalars l E X D hl n).mapHomologicalComplex\n        (.up ℤ)).obj N)\n      (hf : (normalizedDVRUniformizer l E X ^ (n + 1) • 𝟙 P) ≫ f = 0),\n      (scalarReductionDerivedRestriction l E X n).map\n        ((adj.homEquiv (DerivedCategory.Q.obj P)\n          ((@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).obj N)).symm\n          (DerivedCategory.Q.map f ≫\n            (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app N)) =\n      A.hom.app (DerivedCategory.Q.obj P) ≫\n        (CochainComplex.LinearScalarCone.comparison\n          (normalizedDVRUniformizer l E X ^ (n + 1))).hom.app P ≫\n        DerivedCategory.Q.map (CochainComplex.mappingCone.desc\n          (normalizedDVRUniformizer l E X ^ (n + 1) • 𝟙 P) 0 f (by simp [hf])) ≫\n        (completedIntegralRestrictScalars l E X D hl n).mapDerivedCategoryFactors.inv.app N",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b4d4",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T003059-L-144950",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b4d4",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261026T003059-L-144950",
+  "kind": "interface",
+  "note": "independent cc review: item lem-coef-normalized-dvr-roos-augmentation (STATEMENT-DISPUTED repair, Bockstein counterexample verified) and new nodes lem-cbc-regular-quotient-cone-adjoint / lem-coef-normalized-dvr-strict-coefficient-adjoint against delivered Lean; adapted unclaimed BoundedFreeCone/AdicConeModel against clone (adic statement byte-identical); sandbox --all build of 5 delivered modules + importer RoosFiniteReduction compiled; item axioms clean"
+ }
+}

@@ -1,0 +1,281 @@
+{
+ "id": "lem-sfb-two-term-derived-hom-boundary",
+ "kind": "statement",
+ "title": "Derived Hom and the boundary of a two-term complex",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with derived category [def-weil-abstract-derived-category], let $d:M\\to F$ be a morphism, and let $G$ be an object of $\\mathcal A$. Regard $K=[M\\xrightarrow d F]$ as a cochain complex in degrees $-1,0$, and objects of $\\mathcal A$ as complexes in degree zero. Write $\\operatorname{Ext}^n(K,G)=\\operatorname{Hom}_{D(\\mathcal A)}(K,G[n])$. The quotient chain map $q:K\\to M[1]$ induces an additive map\n$$\\partial:\\operatorname{Hom}_{\\mathcal A}(M,G)\\longrightarrow\\operatorname{Ext}^1(K,G),\\qquad \\delta\\longmapsto\\delta[1]\\circ q.$$\nThe sequence\n$$\\operatorname{Hom}_{\\mathcal A}(F,G)\\xrightarrow{\\theta\\mapsto\\theta d}\\operatorname{Hom}_{\\mathcal A}(M,G)\\xrightarrow{\\partial}\\operatorname{Ext}^1(K,G)$$\nis exact at its middle term. These maps commute with postcomposition by $G\\to G'$ and with the induced maps from commutative squares between differentials $d$. Moreover the canonical chain map $K\\to\\operatorname{coker}(d)[0]$ induces a natural additive isomorphism $\\operatorname{Hom}_{\\mathcal A}(\\operatorname{coker}(d),G)\\xrightarrow{\\sim}\\operatorname{Ext}^0(K,G)$. No projectivity or injectivity assumption on $M,F,G$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0149 (lemma-representable-homological) applied to the triangle F[0] -> K -> M[1] -> F[1], and Tag 06XS (lemma-negative-exts), clause (1), for Ext^0."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the cone convention of [def-weil-abstract-derived-category]. The cone of $d:M[0]\\to F[0]$ is exactly $K$: its only nonzero differential is $d$ in degree $-1$. Its distinguished cone triangle is $M[0]\\xrightarrow d F[0]\\xrightarrow i K\\xrightarrow{-q}M[1]$. By TR2 of [def-weil-triangulated-category], rotating gives $(F[0],K,M[1];i,-q,-d[1])$. The identity on the first two vertices and $-1$ on the third identify this triangle with $F[0]\\xrightarrow i K\\xrightarrow q M[1]\\xrightarrow{d[1]}F[1]$. Thus the latter triangle is distinguished. This sign calculation fixes the quotient $q$ occurring in the statement, rather than an unspecified connecting map.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014Q (definition-distinguished-triangle), 0145 (definition-triangulated-category), TR2"
+   }
+  },
+  {
+   "text": "Suppose $\\partial(\\delta)=\\delta[1]q=0$. Apply clause (ii) of [lem-weil-pbc-hom-out-of-triangle-exact] to the distinguished triangle of step 1 and $W=G[1]$. It gives $k:F[1]\\to G[1]$ with $\\delta[1]=k\\,d[1]$. The shift is an autoequivalence, and [lem-weil-pbc-derived-single-fully-faithful] identifies maps $F[0]\\to G[0]$ with actual morphisms of $\\mathcal A$. Hence $k=\\theta[1]$ for a unique $\\theta:F\\to G$, and faithfulness of shift and of the single-complex embedding gives $\\delta=\\theta d$. Conversely, $d[1]q:K\\to F[1]$ is null-homotopic: the only nonzero homotopy component is $h^0=1_F:K^0\\to F[1]^{-1}$; its degree $-1$ component $h^0d=d$ is precisely that of $d[1]q$, and all remaining components are zero. It is therefore zero in $D(\\mathcal A)$, so $\\partial(\\theta d)=0$. This proves exactness. Shift and composition are additive, so $\\partial$ is additive.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 (lemma-representable-homological), with the cone and homotopy-category localization conventions"
+   }
+  },
+  {
+   "text": "Put $C=\\operatorname{coker}(d)$, $I=\\operatorname{im}(d)$, and $L=[M\\twoheadrightarrow I]$ in degrees $-1,0$. The componentwise kernel of the canonical map $p:K\\to C[0]$ is $L$, so $0\\to L\\to K\\xrightarrow p C[0]\\to0$ is degreewise short exact: in degree zero it is $0\\to I\\to F\\to C\\to0$, and in degree $-1$ it is $0\\to M\\xrightarrow1 M\\to0\\to0$. By [lem-weil-pbc-complex-ses-triangle] this yields a distinguished triangle $L\\to K\\xrightarrow p C[0]\\to L[1]$. No splitting of $M\\twoheadrightarrow I$ or $F\\twoheadrightarrow C$ is required.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor)"
+   }
+  },
+  {
+   "text": "The differential $M\\twoheadrightarrow I$ is epic, so $H^j(L)=0$ for every $j\\ge0$; also $H^j(L[1])=H^{j+1}(L)=0$ for $j\\ge-1$. Consequently $L\\in D(\\mathcal A)^{\\le-1}$ and $L[1]\\in D(\\mathcal A)^{\\le-2}\\subset D(\\mathcal A)^{\\le-1}$, while $G[0]\\in D(\\mathcal A)^{\\ge0}$. The standard t-structure of [def-sbc-standard-tstructure-derived-category] and shifted orthogonality axiom (2) of [def-weil-t-structure] give $\\operatorname{Hom}(L,G[0])=\\operatorname{Hom}(L[1],G[0])=0$. Explicitly for $U=L$ or $L[1]$, take $A=U[-1]\\in D^{\\le0}$ and $B=G[0]\\in D^{\\ge0}$ in $\\operatorname{Hom}(A,B[-1])=0$ and shift both arguments by $[1]$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS (lemma-negative-exts), clause (1), vanishing argument via the standard t-structure"
+   }
+  },
+  {
+   "text": "Apply clause (i) of [lem-weil-pbc-hom-out-of-triangle-exact] to the triangle of step 3: since every $L\\to G[0]$ is zero, every $a:K\\to G[0]$ factors as $b p$ with $b:C[0]\\to G[0]$. If $b p=b\\prime p$, clause (ii) applied to $b-b\\prime$ factors this difference through $L[1]$, and the second vanishing of step 4 makes it zero. Thus $p^*$ is a bijection $\\operatorname{Hom}_{D}(C[0],G[0])\\to\\operatorname{Hom}_{D}(K,G[0])$. It is additive, and [lem-weil-pbc-derived-single-fully-faithful] identifies its source with $\\operatorname{Hom}_{\\mathcal A}(C,G)$; this is exactly the asserted map induced by the canonical chain map $p$. A bijective additive map has additive inverse, giving the required additive isomorphism.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0149 (lemma-representable-homological) and 06XS (lemma-negative-exts)"
+   }
+  },
+  {
+   "text": "For $g:G\\to G\\prime$, associativity and functoriality of shift give $g[1](\\delta[1]q)=(g\\delta)[1]q$. For a commutative square $b d=d\\prime a$ with $a:M\\to M\\prime$, $b:F\\to F\\prime$, its chain map $u:K\\to K\\prime$ has components $a,b$ and satisfies $q\\prime u=a[1]q$. Hence $\\partial_d(\\delta\\prime a)=\\partial_{d\\prime}(\\delta\\prime)u$, while $(\\theta\\prime b)d=\\theta\\prime d\\prime a$ proves naturality of the preceding arrow. The induced cokernel map $c:C\\to C\\prime$ is characterized by $c\\pi=\\pi\\prime b$, so $p\\prime u=c[0]p$ componentwise. For $\\gamma:C\\prime\\to G$, this gives $(\\gamma c)[0]p=\\gamma[0]p\\prime u$, and postcomposition likewise gives $g[0]\\gamma[0]p=(g\\gamma)[0]p$. These equations prove naturality of the additive isomorphism, including its inverse by uniqueness. All constructions used only abelianness and the derived-category structure, never enough projectives or injectives.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E and 06XS, functoriality of chain maps, shift and cokernels"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "def-sp-abelian",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Explicit assembly from Tags 014E, 014Q, 0145, 0149, 0152, 06XS; the proof writes the cone signs and naturality formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a two term complex M to F in an abelian category the sequence Hom F G to Hom M G to Ext one K G is exact and Hom K G is Hom cokernel G",
+   "results": "8 hits; top results: CategoryTheory.Abelian.Ext.covariantSequence_exact, CategoryTheory.Abelian.Ext.contravariantSequence_exact, CategoryTheory.ShortComplex.ShortExact.extClass, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁, CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃, CategoryTheory.Abelian.Ext.covariant_sequence_exact₂', CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂', CategoryTheory.Abelian.Ext.covariant_sequence_exact₁",
+   "date": "2026-10-23",
+   "verdict": "No exact or one-line match: Triangle.yoneda_exact2 (source Unicode subscript 2) gives Hom exactness for a supplied distinguished triangle, not the two-term triangle construction and its degree-zero truncation identification together. Read Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:244-256. The Ext.contravariantSequence_exact hits concern Ext between heart objects for a short exact sequence, not Ext from the two-term complex K."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangle\", \"coyoneda\"",
+   "results": "4 hits; top results: CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply",
+   "date": "2026-10-23",
+   "verdict": "No exact or one-line match: Triangle.yoneda_exact2 (source Unicode subscript 2) gives Hom exactness for a supplied distinguished triangle, not the two-term triangle construction and its degree-zero truncation identification together. Read Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:244-256. The Ext.contravariantSequence_exact hits concern Ext between heart objects for a short exact sequence, not Ext from the two-term complex K."
+  },
+  {
+   "tool": "grep",
+   "query": "coyoneda.*exact|hom.*single.*(zero|bijective)|single.*hom.*(zero|bijective)",
+   "results": "25 hits; top results: Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact or one-line match: Triangle.yoneda_exact2 (source Unicode subscript 2) gives Hom exactness for a supplied distinguished triangle, not the two-term triangle construction and its degree-zero truncation identification together. Read Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:244-256. The Ext.contravariantSequence_exact hits concern Ext between heart objects for a short exact sequence, not Ext from the two-term complex K."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms from a two term complex to an object in degree zero equal maps from its cokernel",
+   "results": "8 hits; top results: CategoryTheory.ShortComplex.RightHomologyData.ofHasCokernel, CategoryTheory.ShortComplex.LeftHomologyMapData.compatibilityOfZerosOfIsColimitCokernelCofork_φH, CochainComplex.fromSingle₀Equiv, CategoryTheory.ShortComplex.opcyclesIsoCokernel, CochainComplex.toSingle₀Equiv, CategoryTheory.ShortComplex.f_pOpcycles, CategoryTheory.ShortComplex.LeftHomologyData.ofHasCokernel, CochainComplex.ConnectData.d₀",
+   "date": "2026-10-23",
+   "verdict": "No exact or one-line match: Triangle.yoneda_exact2 (source Unicode subscript 2) gives Hom exactness for a supplied distinguished triangle, not the two-term triangle construction and its degree-zero truncation identification together. Read Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:244-256. The Ext.contravariantSequence_exact hits concern Ext between heart objects for a short exact sequence, not Ext from the two-term complex K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two term complex derived Hom connecting homomorphism kernel is maps through its differential without projectivity assumptions",
+   "results": "8 hits; top results: CategoryTheory.ShortComplex.ShortExact.δ_apply, CategoryTheory.ShortComplex.ShortExact.δ_apply', CategoryTheory.ShortComplex.ShortExact.δ_eq', CategoryTheory.ShortComplex.ShortExact.δ_eq, CategoryTheory.ShortComplex.ShortExact.δ, CategoryTheory.ShortComplex.SnakeInput.δ_apply, CategoryTheory.kernelCokernelCompSequence.δ_fac, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply",
+   "date": "2026-10-23",
+   "verdict": "No exact or one-line match: Triangle.yoneda_exact2 (source Unicode subscript 2) gives Hom exactness for a supplied distinguished triangle, not the two-term triangle construction and its degree-zero truncation identification together. Read Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean:244-256. The Ext.contravariantSequence_exact hits concern Ext between heart objects for a short exact sequence, not Ext from the two-term complex K."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv|homology.*[Ee]quiv|[Ee]quiv.*homology|isLE.*isGE",
+   "results": "20 hits; top results: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for the full two-term statement. The Ext.homEquiv hit compares Ext of two heart objects with a shifted derived Hom. DerivedCategory subsingleton and right-fraction results are ingredients for the degree-zero truncation argument; they do not state the two-term boundary exactness with its natural cokernel identification. Inspected DerivedCategory/TStructure.lean:100-190 and Pretriangulated.lean:244-273."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DerivedCategory maps from a complex with cohomology in degrees at most zero to a single object are equivalent to maps from degree zero homology",
+   "results": "8 hits; top results: CategoryTheory.Abelian.Ext.homEquiv, DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom, CategoryTheory.hasExt_of_hasDerivedCategory, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.InjectiveResolution.extMk_hom",
+   "date": "2026-10-23",
+   "verdict": "No match for the full two-term statement. The Ext.homEquiv hit compares Ext of two heart objects with a shifted derived Hom. DerivedCategory subsingleton and right-fraction results are ingredients for the degree-zero truncation argument; they do not state the two-term boundary exactness with its natural cokernel identification. Inspected DerivedCategory/TStructure.lean:100-190 and Pretriangulated.lean:244-273."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda_exact|toSingle.*[Ee]quiv|hom.*[Cc]oker|[Cc]oker.*hom",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Inspected Pretriangulated.lean:248-256, FullyFaithful.lean:37-65, TStructure.lean:40-78, and Ext/ExactSequences.lean:8-19. Generic Hom exactness and single-embedding results are already represented by existing DAG leaves; the short-exact-sequence Ext hits are for heart objects, and cochain Hom/cokernel hits do not state derived Hom from K."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms in the derived category from a complex in degrees minus one and zero to an object in degree zero correspond to maps from its cokernel",
+   "results": "8 hits; CochainComplex.fromSingle₀Equiv, ChainComplex.fromSingle₀Equiv, ChainComplex.toSingle₀Equiv, CategoryTheory.ShortComplex.descOpcycles, CategoryTheory.ShortComplex.HasLeftHomology.of_hasCokernel, CochainComplex.toSingle₀Equiv, CategoryTheory.ShortComplex.Exact.desc, CategoryTheory.ShortComplex.opcyclesIsoCokernel",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Inspected Pretriangulated.lean:248-256, FullyFaithful.lean:37-65, TStructure.lean:40-78, and Ext/ExactSequences.lean:8-19. Generic Hom exactness and single-embedding results are already represented by existing DAG leaves; the short-exact-sequence Ext hits are for heart objects, and cochain Hom/cokernel hits do not state derived Hom from K."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangle\", \"yoneda_exact\"",
+   "results": "5 hits; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂, CategoryTheory.Pretriangulated.Triangle.yoneda_exact₂, CategoryTheory.Pretriangulated.Triangle.yoneda_exact₃, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₃, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Inspected Pretriangulated.lean:248-256, FullyFaithful.lean:37-65, TStructure.lean:40-78, and Ext/ExactSequences.lean:8-19. Generic Hom exactness and single-embedding results are already represented by existing DAG leaves; the short-exact-sequence Ext hits are for heart objects, and cochain Hom/cokernel hits do not state derived Hom from K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a two term cochain complex M to F in degrees minus one and zero maps to G in the derived category are Hom cokernel d G and the quotient K to M shifted gives the Hom Ext exact sequence",
+   "results": "8 hits; CategoryTheory.ShortComplex.ShortExact.extClass_hom, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext, CategoryTheory.Abelian.Ext.covariant_sequence_exact₁', CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁', CategoryTheory.Abelian.Ext.covariant_sequence_exact₃', CategoryTheory.Abelian.Ext.contravariant_sequence_exact₂'",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Inspected Pretriangulated.lean:248-256, FullyFaithful.lean:37-65, TStructure.lean:40-78, and Ext/ExactSequences.lean:8-19. Generic Hom exactness and single-embedding results are already represented by existing DAG leaves; the short-exact-sequence Ext hits are for heart objects, and cochain Hom/cokernel hits do not state derived Hom from K."
+  },
+  {
+   "tool": "grep",
+   "query": "yoneda_exact|subsingleton_hom_of_isStrictlyLE|singleFunctor C n",
+   "results": "25 hits; Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Inspected Pretriangulated.lean:248-256, FullyFaithful.lean:37-65, TStructure.lean:40-78, and Ext/ExactSequences.lean:8-19. Generic Hom exactness and single-embedding results are already represented by existing DAG leaves; the short-exact-sequence Ext hits are for heart objects, and cochain Hom/cokernel hits do not state derived Hom from K."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every derived morphism from a complex in nonpositive degrees to an object in degree zero factors uniquely through the cokernel of its last differential",
+   "results": "8 hits; HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff, HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff', HomologicalComplex.descOpcycles, HomologicalComplex.extend.leftHomologyData.cokernelCofork, HomologicalComplex.extend.rightHomologyData.cokernelCofork, HomologicalComplex.descOpcycles', HomologicalComplex.extend.leftHomologyData.isColimitCokernelCofork, HomologicalComplex.extend.rightHomologyData.isColimitCokernelCofork",
+   "date": "2026-10-23",
+   "verdict": "No match for the full item. Inspected Pretriangulated.lean:248-256, FullyFaithful.lean:37-65, TStructure.lean:40-78, and Ext/ExactSequences.lean:8-19. Generic Hom exactness and single-embedding results are already represented by existing DAG leaves; the short-exact-sequence Ext hits are for heart objects, and cochain Hom/cokernel hits do not state derived Hom from K."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-algebra-extension-ext",
+  "date": "2026-10-23",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 0GQ5 (lemma-extensions-of-relative-ringed-topoi), 0GQ6 (remark-extensions-of-relative-ringed-topoi), 0GQ7 (lemma-extensions-of-relative-ringed-topoi-functorial), 0GQ8 (remark-extensions-of-relative-ringed-topoi-functorial), and 08UG (lemma-huge-diagram-ringed-topoi), clause (2), with identity underlying topos. Supporting input: Derived Hom and the boundary of a two-term complex.",
+   "via": [
+    "lem-sfb-etale-algebra-extension-ext",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-two-term-derived-hom-boundary",
+  "worker": "stage1",
+  "summary": "Reused existing Mathlib leaves for Hom exactness, the single embedding, short-exact-sequence triangles and the standard t-structure. Wrote the cone signs, exactness, kernel-complex orthogonality, unique cokernel factorization and both naturality formulas. No new nodes and no change to the statement.",
+  "blueprint": "Current latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md (3), the inherited alteration/deformation prerequisite chain recorded in blueprint.from.place. This auxiliary derived-Hom calculation supports the etale algebra-extension Ext identification; no change to the unit route. Searched all blueprint nodes for negative-exts, homological and two-term; no equivalent blueprint statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-68a79df20",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-68a79df20 (reviewer sub-agent of L); spot-checked: I read all of it, with no fixes. The delivery changes only the item: it adds a proof to a node that had none, keeps the statement, and adds no new nodes. Step 1: the cone of d:M[0]→F[0] with the def-weil-abstract-derived-category convention is exactly K. Rotating by TR2 gives (i,−q,−d[1]), and the triangle isomorphism (1,1,−1) gives the distinguished triangle F[0]→K→q M[1]→d[1] F[1], with the signs checked. Step 2: clause (ii) of hom-out-of-triangle-exact with W=G[1], plus the shift autoequivalence and single fully-faithful, gives δ=θd. For the converse I checked the null-homotopy h^0=1_F: its degree −1 component is d, and it is zero in D through K(A). Step 3: ker(K→C[0]) is L=[M↠im d], degreewise short exact, so complex-ses-triangle applies with no splitting. Step 4: H^{≥0}(L)=0, so L∈D^{≤−1} and L[1]∈D^{≤−2}; t-structure axiom (2), shifted, gives Hom(L,G)=Hom(L[1],G)=0. Step 5: clause (i) gives existence and clause (ii) plus the L[1] vanishing gives uniqueness, so γ↦γ[0]p is an additive bijection. Step 6: the naturality equations q′u=a[1]q and p′u=c[0]p are written explicitly. This agrees with Stacks 0149 and 06XS(1) (a=b=0, H^0K=coker d). I tested d=0, d=1, M=0 and F=0. There is no projectivity or injectivity assumption and no SGA. rg -L found no node that duplicates the item. The citer etale-algebra-extension-ext uses exactly the clauses proved."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TwoTermDerivedHomBoundary",
+  "declaration": "DerivedCategory.twoTermBoundary_exact",
+  "declarations": [
+   "DerivedCategory.twoTermCokernelProjection",
+   "DerivedCategory.twoTermSquareMap",
+   "DerivedCategory.twoTermQuotient",
+   "DerivedCategory.twoTermBoundary",
+   "DerivedCategory.twoTermCokernelHom",
+   "DerivedCategory.twoTermBoundary_exact",
+   "DerivedCategory.twoTermCokernelHom_bijective",
+   "DerivedCategory.twoTermCokernelHomEquiv",
+   "DerivedCategory.twoTermDerivedHom_postcomp",
+   "DerivedCategory.twoTermDerivedHom_square"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/TwoTermDerivedHomBoundary.lean",
+  "statement": "theorem twoTermBoundary_exact {M F : A} (d : M ⟶ F) (G : A) : Function.Exact (Preadditive.leftComp G d) (twoTermBoundary d G)",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db11c7912",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Item changed only in lean; lean.statement verbatim (lines 161-162); no new nodes or dep modules; report has Worker report and Second reading by Q72. Every clause matches the node and is true: K = Mathlib mappingCone of single(d), differential +d; q = -triangle.mor₃ composed with Q.commShiftIso, positive by inl_v_triangle_mor₃_f = -id; ∂ is a real AddMonoidHom δ↦q≫δ[1]; Function.Exact(leftComp G d, ∂) gives middle exactness; Hom(coker d,G)≃+Hom_D(K,G[0]) via descShortComplex (0 on M[1], π on F) and AddEquiv.ofBijective of a named sorry theorem, not hollow; naturality in G and under squares uses mappingCone.map and cokernel.map, checked u≫q'=q≫a[1] and u≫p'=p≫c[0]. Universes u,v,w independent; no extra hypotheses; edge cases d=0, d=id, M=0, F=0, G=0 fine. H8 docstrings complete; H9 clean (plain imports = proof_dep modules); no pro-etale substitute, no SGA. No file changed, so no compile (worker reports clean). Advisory: theorem-owned monoCokernelComplex/Augmentation in FiniteFreeMonoCokernelKFlat are the same Mathlib terms."
+ }
+}

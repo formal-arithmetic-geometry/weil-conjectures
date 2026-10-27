@@ -1,0 +1,256 @@
+{
+ "id": "lem-sf-finite-span-module-derived-comparison",
+ "kind": "statement",
+ "title": "Finite-span coefficient transport of ordinary module-derived operations",
+ "statement": "Let $\\ell$ be prime, let $\\Omega=\\overline{\\mathbf Q}_\\ell$ carry the extended $\\ell$-adic topology, and use small representatives of small pro-etale sites in a common larger module universe [def-weil-pbc-proetale-site; def-weil-size-convention]. Let $C$ be the condensed ring of continuous functions on profinite sets taking values in a finite subextension of $\\Omega/\\mathbf Q_\\ell$, and put $A_Z=p_Z^*C$ for every scheme $Z$ [sk-def-sfb-qlbar-condensed; sk-def-sfb-pulled-back-coefficients]. Let $\\mathcal R_Z$ be the sheafification of $V\\mapsto\\{f\\in C(|V|,\\Omega):\\text{every point has an open neighbourhood on which }\\operatorname{span}_{\\mathbf Q_\\ell}f\\text{ is finite dimensional}\\}$, with pointwise operations. For $v:Z\\to W$ let $\\rho_v:v^{-1}\\mathcal R_W\\to\\mathcal R_Z$ be adjoint to precomposition with $|V\\times_W Z|\\to|V|$. Write $\\alpha_v:v^{-1}A_W\\xrightarrow{\\sim}A_Z$ for the coefficient comparison [sk-prop-sfb-cartesian-coefficients].\n\nLet $c_Z:A_Z\\xrightarrow{\\sim}\\mathcal R_Z$ be the ring-sheaf isomorphism $\\theta_Z$ of [lem-sf-locally-finite-coefficient-ring-realization], induced by the finite-extension continuous charts and characterized on every finite coefficient subextension by postcomposition into $\\Omega$. Then\n$$c_Z\\alpha_v=\\rho_v\\,v^{-1}c_W.$$\nIn particular $\\rho_v$ is invertible, and these identities respect composition of scheme morphisms. Reconstruct sectionwise modules from internal $A_Z$-modules and transport their action through $c_Z$ [def-weil-pbc-internal-abelian-sheaf-module-equivalence; lem-sf-locally-finite-coefficient-ring-realization]. The resulting functor $E_Z$ is an exact equivalence onto $\\operatorname{Mod}(\\mathcal R_Z)$, preserves underlying abelian sheaves and all restrictions identically, and preserves finite free local trivializations.\n\nFor every $v:Z\\to W$, the identity on underlying abelian sheaves gives natural comparisons\n$$E_Wv_*^A\\cong v_*^{\\mathcal R}E_Z,\\qquad E_Zv_A^*\\cong v_{\\mathcal R}^*E_W,$$\nwhere direct image on the right uses precisely the precomposition coefficient action, and inverse image transports the action by $\\alpha_v^{-1}$ or $\\rho_v^{-1}$. These comparisons identify ordinary adjunction units, counits and inverse-image composition maps. Both equivalences preserve K-injective complexes [def-pur-kinjective-complex], and induce comparisons of the ordinary total right derived direct images in unbounded derived categories [def-weil-abstract-derived-category; def-sfb-right-derived-functor]. If the schemes are separated of finite type over a field of positive characteristic different from $\\ell$ [sk-def-sfb-dc-setting], the induced comparisons identify the canonical module-object derived adjunction with the sectionwise ringed-topos derived adjunction for each such $v$, namely the derived adjunction $v_{\\mathcal R}^*\\dashv Rv_*^{\\mathcal R}$ obtained by deriving the ordinary module adjunction $v_{\\mathcal R}^*\\dashv v_*^{\\mathcal R}$, that is, the adjunction for which the Hom transpose of the class of every chain map $v_{\\mathcal R}^*L\\to I$ into a K-injective complex $I$ is the class of its ordinary transpose $L\\to v_*^{\\mathcal R}I$, including units, counits and pullback composition maps. Consequently they carry the unit--square--counit exchange for any Cartesian square of such schemes to the derived counit mate on sectionwise modules over the actual inverse-image coefficient rings. This is equality of the specified morphisms under the comparisons, for every complex, with no constructibility or properness hypothesis.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.1, 6.8.3; Lemma 6.8.2; Remark 6.8.15. Agent expansion of returned proof steps 1--3 and the comparison part of step 8, using the finite-subextension convention and the existing ring-realization and module/ringed-topos comparison nodes. This source is not a claim that all of these comparison equalities are literal statements of the paper."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
+  "sk-def-sfb-dc-setting",
+  "def-pc-fibre-product",
+  "def-sf-finite-span-module-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply locallyFiniteCoefficientRing_realization to obtain theta, its ring-hom structure, its finite-field chart equation and its coefficient square. Transpose the coefficient square under upperStarLowerStarAdjunction: homEquiv naturality on the left and right identifies its transpose with the inverse coefficient square. Since the pullback image of theta and condensedPullbackHom are invertible, cancelling the former proves IsIso rho. Apply lem-sf-finite-span-scalar-transport to the supplied theta and direct-image square. Its equality d.theta = theta lets the chart, direct coefficient square and transposed square fill three omitted clauses; the fourth omitted clause is the proved IsIso rho. Assemble all seventeen clauses of Properties.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sf-finite-span-scalar-transport",
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize ordinary_composition using mapDerivedCategorySquareIso_comp. Evaluate the resulting equality of natural isomorphisms and simplify only whiskering and associators. Precompose and postcompose with compositor inverses to obtain the reversed equation. Apply square_pasting with index type X prime to Y and the equality s.w.symm to paste these two equations with the middle equality isomorphism. This proves comparison_square for every derived object.",
+   "uses": [
+    "lem-pod-derived-exact-square-composition",
+    "lem-sfb-compatible-square-components"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the field_normalization clause for f and f prime to identify the derived mates of the two pullback comparison inverses with the two specified derived pushforward comparisons. Cancel the pullback comparison inverses in comparison_square to obtain the inverse-image cube. Apply exchangeMate_cube to the four derived adjunctions and this cube, then rewrite its two vertical mates using field_normalization. This is exactly ExchangeProperty, with no restriction on K and no claim of exchange invertibility. The canonical derived operations are bundled once. State the mate and pullback-exchange conditions for an abstract bundle, and extract commutativity from the pullback there before specializing, so proof-valued site instances and commutativity proofs are shared; expanding the bundle recovers the specified original equations.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-exchange-mate-cube"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "lem-pod-derived-exact-square-composition",
+  "lem-sf-finite-span-scalar-transport",
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "lem-sfb-compatible-square-components",
+  "lem-weil-pbc-exchange-mate-cube",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7; scalar transport from the supplied coefficient square (Modules on Sites, Tags 03D6 and 03D7), exact localization of compositor equations, and the proved mate-cube pasting theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence between internal modules over pulled back condensed Qbar l and sectionwise modules over locally finite span continuous functions identifies ordinary derived pushforward and adjunction counit mates",
+   "results": "[leanfinder] OK 8 hit(s); CondensedMod.LocallyConstant.adjunction; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; LightCondMod.LocallyConstant.adjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardSections_unitHomEquiv; LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of ordinary derived module direct image and pullback along natural isomorphisms of continuous l-adic coefficient sheaves",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardNatIso; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardNatIso_inv; SheafOfModules.pushforward; SheafOfModules.pullbackIso; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"equivalence\"",
+   "results": "[loogle] OK 3 hit(s); SheafOfModules.pushforwardPushforwardEquivalence; SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app; SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteSpan|locallyFiniteFunctions|condensed.*[Mm]odule|[Mm]odule.*condensed",
+   "results": "[grep] OK 25 hit(s); Mathlib/LinearAlgebra/Reflection.lean:15: public import Mathlib.LinearAlgebra.FiniteSpan; Mathlib/Condensed/Module.lean:18: # Condensed `R`-modules; Mathlib/Condensed/Module.lean:20: This file defines condensed modules over a ring `R`.; Mathlib/Condensed/Module.lean:24: * Condensed `R`-modules form an abelian category.; Mathlib/Condensed/Module.lean:26: * The forgetful functor from condensed `R`-modules to condensed sets has a left adjoint, sending a; Mathlib/Condensed/Module.lean:27:   condensed set to the corresponding *free* condensed `R`-module.; Mathlib/Condensed/AB.lean:15: # AB axioms in condensed modules; Mathlib/Condensed/AB.lean:17: This file proves that the category of condensed modules over a ring satisfies Grothendieck's axioms; Mathlib/Condensed/Solid.lean:16: This file contains the definition of a solid `R`-module: `CondensedMod.isSolid R`. Solid modules; Mathlib/Condensed/Solid.lean:21: * `CondensedMod.IsSolid R`: the predicate on condensed `R`-modules describing the property of; Mathlib/Condensed/Solid.lean:40: /-- The free condensed `R`-module on a finite set. -/; Mathlib/Condensed/Solid.lean:44: /-- The free condensed `R`-module on a profinite space. -/; Mathlib/Condensed/Solid.lean:48: /-- The functor sending a profinite space `S` to the condensed `R`-module `R[S]^\\solid`. -/; Mathlib/Condensed/Epi.lean:12: public import Mathlib.Condensed.Module; Mathlib/Condensed/Epi.lean:17: This file characterises epimorphisms of condensed sets and condensed `R`-modules for any ring `R`,; Mathlib/Condensed/Discrete/Module.lean:10: public import Mathlib.Condensed.Light.Module; Mathlib/Condensed/Discrete/Module.lean:11: public import Mathlib.Condensed.Module; Mathlib/Condensed/Discrete/Module.lean:15: # Discrete condensed `R`-modules; Mathlib/Condensed/Discrete/Module.lean:17: This file provides the necessary API to prove that a condensed `R`-module is discrete if and only; Mathlib/Condensed/Discrete/Module.lean:20: That is, it defines the functor `CondensedMod.LocallyConstant.functor` which takes an `R`-module to; Mathlib/Condensed/Discrete/Characterization.lean:9: public import Mathlib.Condensed.Discrete.Module; Mathlib/Condensed/Discrete/Characterization.lean:12: # Characterizing discrete condensed sets and `R`-modules.; Mathlib/Condensed/Discrete/Characterization.lean:14: This file proves a characterization of discrete condensed sets, discrete condensed `R`-modules over; Mathlib/Condensed/Discrete/Characterization.lean:15: a ring `R`, discrete light condensed sets, and discrete light condensed `R`-modules over a ring `R`.; Mathlib/Condensed/Discrete/Characterization.lean:29: The analogues for light condensed sets, condensed `R`-modules over any ring, and light",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adjunction compatible equivalence of internal modules and sectionwise sheaves of modules with continuous Qbar l coefficients",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; PresheafOfModules.unitHomEquiv; CategoryTheory.constantSheafΓAdj; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.freeAdjunction; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; SheafOfModules.freeHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state this continuous-coefficient module-derived comparison, normalized exchange localization, or global stratification assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact equivalence of sheaf module categories induced by natural ring sheaf isomorphisms identifies unbounded derived direct image and adjunction units counits",
+   "results": "OK 8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom",
+   "date": "2026-10-22",
+   "verdict": "no match: read the ordinary SheafOfModules equivalence/adjunction declarations and general derived functor API; none supplies the finite-span realization and all specified internal/section comparison normalizations in one declaration or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence internal modules sectionwise sheaf modules compatible ring isomorphism derived pullback pushforward adjunction",
+   "results": "OK 8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: read the ordinary SheafOfModules equivalence/adjunction declarations and general derived functor API; none supplies the finite-span realization and all specified internal/section comparison normalizations in one declaration or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of derived adjunction under an exact equivalence of abelian categories preserving K injective resolutions",
+   "results": "OK 8 hits: CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Adjunction.derived'",
+   "date": "2026-10-22",
+   "verdict": "no match: read the ordinary SheafOfModules equivalence/adjunction declarations and general derived functor API; none supplies the finite-span realization and all specified internal/section comparison normalizations in one declaration or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"equivalence\"",
+   "results": "OK 3 hits: SheafOfModules.pushforwardPushforwardEquivalence, SheafOfModules.pushforwardPushforwardEquivalence_unit_app_val_app, SheafOfModules.pushforwardPushforwardEquivalence_counit_app_val_app",
+   "date": "2026-10-22",
+   "verdict": "no match: read the ordinary SheafOfModules equivalence/adjunction declarations and general derived functor API; none supplies the finite-span realization and all specified internal/section comparison normalizations in one declaration or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardEquivalence|pushforwardCongr|pullbackPushforwardAdjunction",
+   "results": "OK 16 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. Grep subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: read the ordinary SheafOfModules equivalence/adjunction declarations and general derived functor API; none supplies the finite-span realization and all specified internal/section comparison normalizations in one declaration or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-continuous-adic-proper-base-change-restriction",
+  "date": "2026-10-22",
+  "group": "Q40"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Continuous-module proper exchange realization for prop-functor-package clause 2: returned proof steps 1--3 and the exchange comparison in 8 of lem-sf-continuous-adic-proper-base-change-restriction; independent finite-span coefficient transport of ordinary module-derived operations argument.",
+   "via": [
+    "lem-sf-continuous-adic-proper-base-change-restriction",
+    "lem-sf-weil-open-immersion-compact-image-extension-by-zero"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-span-module-derived-comparison",
+  "worker": "stage1",
+  "summary": "Kept the complete statement. Reused normalized coefficient-ring realization, ordinary internal/section operation transport and unbounded derived normalization. Wrote explicit scalar actions, chain-transpose and resolution comparisons, and the exchange formula. No new nodes; all searches logged; no Lean or compilation.",
+  "blueprint": "The seeded ancestor query returns None: this item descends through lem-sf-continuous-adic-proper-base-change-restriction and lem-sf-weil-open-immersion-compact-image-extension-by-zero. Its recorded place realizes six-operations package clause (2), the continuous-module exchange comparison. Steps 1--4 supply ordinary coefficient/adjunction transport; steps 5--7 supply unbounded derived transport; step 8 identifies the actual exchange mate. Existing blueprint provenance is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "General ordinary internal/section-module comparison and exactness; used before scalar relabelling, not to replace the finite-span realization."
+   },
+   {
+    "node": "def-pd-section-module-operations-data",
+    "why": "Retains the geometric compositor and its uniquely mate-normalized pullback comparison; no new operation data are chosen."
+   },
+   {
+    "node": "lem-pd-section-derived-pushpull-normalization",
+    "why": "Generic unbounded internal/section adjunction normalization, applied to the condensed ring C before the explicit scalar relabelling."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small-ringed-site K-injective resolutions, valid in the item module universe."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic naturality and resolution-independence of total right-derived functors."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic K-injective Hom computation needed for the equality of specified derived transposes."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "General mate formula specifies the exchange composite."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic termwise localization of an exact functor, applied to the equivalence and inverse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "def-pd-section-module-operations-data",
+  "lem-pd-section-derived-pushpull-normalization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-03f5a0ab7",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-03f5a0ab7 (reviewer sub-agent of L); spot-checked: I read the item in full (8 steps, no new nodes), every cited node's statement, the parent's citing steps, the unit, and Stacks 09T5/070I/070Y/03D7 by tag. The statement and stmt_deps are byte-identical to all earlier snapshots, so no target is weakened. No SGA is cited and there is no repair note. Step 1 (adjuncts of the ring-realization square give c_Zα=ρ v^{-1}c_W, and ρ is invertible) is correct. So are step 2 (scalar relabelling equivalence, exact, preserves free trivializations), step 3 (both action equations rechecked), step 4 (Hom-bijection and compositor normalization), steps 5–6 (K-injectives under an exact equivalence on the small site; resolution-independent Rv_* comparison) and step 8 (unit–square–counit mate via def-weil-pbc-adjunction-mate; no invertibility claimed). One gap, C4/E6 in step 7: no cited node said that the B-side canonical derived adjunction from lem-pd is chain transposition. FIX: I added lem-sc-derived-adjunction-from-underived (Mathlib leaf, Stacks 09T5): its counit is induced by the ordinary counit, ε is invertible because the pullback is exact, and β is invertible on K-injective I. Uses and proof_deps are updated, and the step is 1965 characters. Batch-5 flags: def-pd-section-module-operations-data is a pure definition alias (closure 371 nodes, no PD theorem) and is accepted. lem-pd-section-derived-pushpull-normalization is the general internal/section push-pull normalization for any condensed ring (closure 726 nodes; its pd/trf members are generic sheaf/tensor algebra, with no nt-target, trace transport or PD pairing), and it is also cited by about 10 sfb nodes. It is accepted, as in the Q03 precedent. Together the two citations add 44 generic nodes to the item's closure (12026→12071). No duplicate was found among the B_T/finite-span nodes. The declared tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSpanModuleDerivedComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteSpanComparison.finiteSpanModuleDerivedComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteSpanComparison.finiteSpanModuleDerivedComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteSpanModuleDerivedComparison.lean",
+  "statement": "theorem finiteSpanModuleDerivedComparison (l : ℕ) [Fact l.Prime] : ∃ d : Data.{u} l, @Properties.{u} l _ d ∧ @ExchangeProperty.{u} l _ d",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The witness data are accompanied by the complete section, ordinary-mate, compositor, total-right-derived-unit, chain-transpose, and exchange normalizations. The equivalence itself is explicitly scalar restriction along theta inverse followed by the recorded section-module equivalence. No data are selected from the existence theorem. The native pointwise ring is read through the existing sectionRingSheaf reconstruction. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-affa946c1",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Read the full module against the node and all 14 stmt_dep records plus the dependency sources in side-live. Every clause is rendered. theta is fixed by the realization dependency's chart equation; coefficient_square and inverse_coefficient_square give c_Z alpha = rho v^-1 c_W; rho is invertible and respects composition; E = comap theta.inv followed by sectionModuleEquivalence (underlying equality, finite bases with the same vectors); push/pull comparisons with the exact displayed types, fixed by push_identity and ordinary_mate; both composition maps fixed (sections equation, leftAdjointCompIso); K-injective preservation in both directions; total derived push comparison fixed by right-derived units; field setting (k : Type u, CharP p, p != l, LOFT+QC+separated over Spec k) with the derived mate equation and chain-transpose clause; exchange for every IsPullback square and every K, mate directions checked. All Data fields are Props or fixed by equations; the only free choice is the HasDerivedCategory model, and every assertion is invariant under it. Edge cases: empty scheme, identities, Fin 0, l = char not excluded outside the field setting, no extra universe restriction. The only sorry is the main theorem; docstrings carry source, blueprint tag and the 8 steps; lean.statement verbatim; only the lean field changed vs side-live; no line over 100 chars. Not recompiled (no FIX); worker reports a clean compile. Advisory: ring duplicates Q49 LocallyFiniteAdicRealization.ringSheaf (same sectionRingSheaf, no def owner); upstream rightDerivedFunctor used instead of the recorded rightDerivedFunctorOfQuasiIsoResolutions (same universal pair); framework upperStar = recorded proEtaleSheafInverseImage construction; def-pur-kinjective-complex has no lean record; unused public import of CartesianCoefficients; Second reading section is a short self-review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e73a5",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261026T222606-L-671605",
+  "kind": "interface",
+  "note": "independent cc review: Item finiteSpanModuleDerivedComparison (statement unchanged) and the new hole finiteSpanScalarTransport against node lem-sf-finite-span-module-derived-comparison, the new nodes and the change record; moved data module diffed against the clone; DerivedNormalization equal to the original by Iff.rfl, ExchangeEquation equal after delta (elaborator; kernel timeout on instance terms); delivered set and all 3 direct importers compiled OK in a sandbox; axioms only propext/Classical.choice/Quot.sound plus sorryAx from the named hole"
+ }
+}

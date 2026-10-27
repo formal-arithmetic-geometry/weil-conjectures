@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-etale-affine-coordinate-monomorphism",
+ "kind": "statement",
+ "title": "Finite coordinate monomorphisms for affine etale objects after arbitrary base change",
+ "statement": "Work in [def-weil-size-convention]. Let $S$ be any scheme [def-pc-scheme], let $v:V\\to S$ be etale with $V$ affine, and use the small etale site [def-weil-pbc-etale-site]. Put $\\mathcal O_S(T)=\\Gamma(T,\\mathcal O_T)$ and $h_V(T)=\\operatorname{Hom}_S(T,V)$, which is a sheaf [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. There exist an integer $n\\geq0$ and sections $c_1,\\ldots,c_n\\in\\Gamma(V,\\mathcal O_V)$ such that, for every morphism of schemes $a:X\\to S$, the map of sheaves on $X_{\\mathrm{et}}$\n$$e_a:h_{X\\times_SV}\\longrightarrow\\mathcal O_X^n,\\qquad (u:T\\to X\\times_SV)\\longmapsto((\\operatorname{pr}_V u)^*c_j)_{j=1}^n$$\nis a monomorphism. Here the fibre product is [def-pc-fibre-product] and $h_{X\\times_SV}(T)=\\operatorname{Hom}_X(T,X\\times_SV)$. Let $a_{\\mathrm{et}}^{-1}\\dashv a_{\\mathrm{et},*}$ be the inverse and direct image on sheaves of sets and rings [lem-weil-pbc-etale-inverse-image-algebraic-structures], with $(a_{\\mathrm{et},*}\\mathcal F)(T)=\\mathcal F(X\\times_ST)$, and let $a^\\sharp:a_{\\mathrm{et}}^{-1}\\mathcal O_S\\to\\mathcal O_X$ be the adjunct of the map $\\mathcal O_S\\to a_{\\mathrm{et},*}\\mathcal O_X$ sending $s\\in\\Gamma(T,\\mathcal O_T)$ to $\\operatorname{pr}_T^*s\\in\\Gamma(X\\times_ST,\\mathcal O)$. Let $\\iota_V:a_{\\mathrm{et}}^{-1}h_V\\xrightarrow{\\sim}h_{X\\times_SV}$ be the isomorphism of [lem-galois-inverse-image-representable] normalized as follows: its adjunct $h_V\\to a_{\\mathrm{et},*}h_{X\\times_SV}$ sends $u:T\\to V$ to $\\mathrm{id}_X\\times_Su:X\\times_ST\\to X\\times_SV$. If $e:h_V\\to\\mathcal O_S^n$ is the map for $a=\\mathrm{id}_S$, then $e_a\\circ\\iota_V=(a^\\sharp)^n\\circ a_{\\mathrm{et}}^{-1}e$, where $a_{\\mathrm{et}}^{-1}(\\mathcal O_S^n)=(a_{\\mathrm{et}}^{-1}\\mathcal O_S)^n$ by finite-limit preservation; in particular $(a^\\sharp)^n\\circ a_{\\mathrm{et}}^{-1}e$ is a monomorphism. No quasi-compactness or separation condition is imposed on $S$ or $X$.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04II (lemma-quasi-affine-finite-type-over-S), applied to affine V etale over S; Tag 04IJ (lemma-2-morphism), proof paragraphs 1-2, coordinate injection and its base-change formula; schemes.tex Tag 01JY (lemma-base-change-immersion)."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-pc-fibre-product",
+  "lem-galois-inverse-image-representable",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "def-weil-etale-morphism",
+  "def-sc-etale-additive-structure-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The affine scheme $V$ is quasi-affine by [lemma-nagata-affine-finite-type-is-quasi-affine], using its first assertion, which has no finite-type hypothesis. By [def-weil-etale-morphism] the etale morphism $v$ is unramified, and by [def-weil-unramified-morphism] an unramified morphism is locally of finite type in the sense of [def-weil-finite-type-morphism]: for every affine open $\\operatorname{Spec}A$ of $S$, the preimage $v^{-1}(\\operatorname{Spec}A)$ is covered by affine opens $\\operatorname{Spec}B$ with $B$ a finitely generated $A$-algebra. No assertion that $v$ is quasi-compact over $S$ is needed.",
+   "uses": [
+    "lemma-nagata-affine-finite-type-is-quasi-affine",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 04II (lemma-quasi-affine-finite-type-over-S), hypotheses; etale implies unramified and hence locally of finite type"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-quasi-affine-immersion-affine-space-exists] to $v$, obtaining $n\\geq0$ and an immersion $i:V\\to\\mathbf A^n_S$ over $S$. By [def-sbc-affine-space], $\\mathbf A^n_S=S\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}\\mathbb Z[x_1,\\ldots,x_n]$; let $t_j$ be the pullback of $x_j$ along the second projection and set $c_j=i^*t_j$. For an $S$-scheme $T$, an $S$-map $g:T\\to\\mathbf A^n_S$ is by [def-pc-fibre-product] the same as a morphism $T\\to\\operatorname{Spec}\\mathbb Z[x_1,\\ldots,x_n]$ (the compatibility over $\\operatorname{Spec}\\mathbb Z$ is automatic, since $\\operatorname{Mor}(T,\\operatorname{Spec}\\mathbb Z)=\\operatorname{Hom}(\\mathbb Z,\\Gamma(T,\\mathcal O_T))$ is a point by [lem-weil-pbc-morphism-into-affine-scheme]), and by [lem-weil-pbc-morphism-into-affine-scheme] such a morphism is the same as a ring map $\\mathbb Z[x_1,\\ldots,x_n]\\to\\Gamma(T,\\mathcal O_T)$, i.e. the tuple of images of the $x_j$, which is $(g^*t_j)_j$. So $g\\mapsto(g^*t_j)_j$ is injective on $S$-maps $T\\to\\mathbf A^n_S$. For an $S$-map $w:T\\to V$, functoriality of pullback of global functions gives $(iw)^*t_j=w^*c_j$. In particular the tuple $(w^*c_j)_j$ defines a natural transformation $e:h_V\\to\\mathcal O_S^n$, natural because pullback commutes with composition. The representable presheaf is a sheaf by [lem-weil-pbc-small-etale-representable-presheaf-sheaf].",
+   "uses": [
+    "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+    "def-sbc-affine-space",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04II (lemma-quasi-affine-finite-type-over-S); Tag 04IJ (lemma-2-morphism), first proof paragraph, coordinate injection"
+   }
+  },
+  {
+   "text": "Write $i=j\\circ k$ with $k$ a closed immersion and $j$ an open immersion, by [def-weil-closed-immersion]. The forward implication of [lem-pc-proper-monomorphism-closed] makes $k$ a monomorphism, and [lem-weil-pbc-open-immersion-monomorphism] makes $j$ one. Therefore $i$ is left-cancellable: cancel $j$ and then $k$ in any equality $i r=i s$. Fix an arbitrary $a:X\\to S$, an etale $T\\to X$, and two $X$-maps $u,w:T\\to X\\times_SV$ with equal displayed coordinate tuples. Their composites $i\\operatorname{pr}_V u$ and $i\\operatorname{pr}_V w$ are $S$-maps from the same $S$-scheme $T$; their coordinate tuples are $((\\operatorname{pr}_Vu)^*c_j)_j=((\\operatorname{pr}_Vw)^*c_j)_j$ by step 2, so the injectivity of step 2 (from [def-pc-fibre-product] and [lem-weil-pbc-morphism-into-affine-scheme]) makes them equal. Cancellation gives $\\operatorname{pr}_V u=\\operatorname{pr}_V w$. Their $X$-projections are already the given map $T\\to X$, so [def-pc-fibre-product] gives $u=w$. Pullback of functions commutes with restriction, so the maps $e_a$ are morphisms of sheaves (the representable is a sheaf by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]). Each component is injective, hence $e_a$ is a monomorphism: any two sheaf maps equal after $e_a$ are equal at every object and section.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-pc-proper-monomorphism-closed",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/etale-cohomology.tex",
+    "place": "lemma-immersions-monomorphisms; Tag 04IJ (lemma-2-morphism), first proof paragraph; elementary cancellation in a fibre product replaces invoking Tag 01JY"
+   }
+  },
+  {
+   "text": "The normalized representable comparison can be obtained without an arbitrary choice of automorphism. Write $L=a_{\\mathrm{et}}^{-1}$ and $R=a_{\\mathrm{et},*}$, with the adjunction of [lem-weil-pbc-etale-inverse-image-algebraic-structures], and $P=X\\times_SV$, which is an object of $X_{\\mathrm{et}}$ by [lem-galois-inverse-image-representable]. For every sheaf $F$ on $X_{\\mathrm{et}}$, adjunction and [lem-galois-yoneda-hom-bijection] give natural bijections\n$$\\operatorname{Hom}(Lh_V,F)\\cong\\operatorname{Hom}(h_V,RF)\\cong (RF)(V)=F(P)\\cong\\operatorname{Hom}(h_P,F).$$\nApply [lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection] and invert its isomorphism to obtain $\\iota_V:Lh_V\\xrightarrow{\\sim}h_P$. Under these bijections the identity of $h_P$ corresponds to the identity section of $h_P(P)$, so the adjunct of $\\iota_V$ sends $\\mathrm{id}_V$ to $\\mathrm{id}_P$. Yoneda naturality then says that at $u:T\\to V$ it sends $u$ to $\\mathrm{id}_X\\times_Su$. This is the stipulated normalization.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "lem-galois-inverse-image-representable",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/categories.tex",
+    "place": "Tag 04IJ (lemma-2-morphism), representable comparison in first proof paragraph; Tag 001P (lemma-yoneda), adjunction and Yoneda computation of its normalization"
+   }
+  },
+  {
+   "text": "Let $\\beta:\\mathcal O_S\\to R\\mathcal O_X$ be the pullback-of-functions map in the statement, whose adjunct is $a^\\sharp$. By finite-limit preservation in [lem-weil-pbc-etale-inverse-image-algebraic-structures], $L(\\mathcal O_S^n)\\cong(L\\mathcal O_S)^n$ via the projections, including $n=0$. Compare the two maps $Lh_V\\to\\mathcal O_X^n$ by the adjunction and then their $j$-th projections. The adjunct of the $j$-th projection of $e_a\\iota_V$, evaluated at $u:T\\to V$, is\n$$ (\\operatorname{pr}_V\\circ(\\mathrm{id}_X\\times_Su))^*c_j=(u\\circ\\operatorname{pr}_T)^*c_j=\\operatorname{pr}_T^*(u^*c_j). $$\nThe adjunct of $a^\\sharp\\circ L(e_j)$ is $\\beta\\circ e_j$: explicitly, if $\\eta$ is the unit, naturality gives $RL(e_j)\\eta_{h_V}=\\eta_{\\mathcal O_S}e_j$, and $R(a^\\sharp)\\eta_{\\mathcal O_S}=\\beta$ is the definition of adjunct. Its value at $u$ is again $\\operatorname{pr}_T^*(u^*c_j)$. Thus all projections agree, hence the two product maps agree; for $n=0$ both maps to the terminal sheaf are unique. Finally $e_a$ is monic by step 3 and $\\iota_V$ is an isomorphism by step 4, so their composite is monic. The same $n$ and $c_j$ were chosen before $a$, with no condition on $S$ or $X$.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04IJ (lemma-2-morphism), first proof paragraph, equality labelled verification omitted: explicit adjunct and coordinate calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-nagata-affine-finite-type-is-quasi-affine",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-finite-type-morphism",
+  "lemma-nagata-quasi-affine-immersion-affine-space-exists",
+  "def-sbc-affine-space",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "def-weil-closed-immersion",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-galois-inverse-image-representable",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04IJ (lemma-2-morphism), first proof paragraph, expanded using Tag 04II and the adjunction/Yoneda normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quasiAffine.*[Ii]mmersion|[Ii]mmersion.*quasiAffine|exists.*[Ii]mmersion.*[Aa]ffine",
+   "results": "[grep] OK 4 hit(s). Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: quasi-affine immersion into Spec of global sections, etale base-change stability and affine-space finiteness do not give finitely many coordinates over an arbitrary base with the stated sheaf comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi affine locally finite type morphism admits immersion into affine space over the base scheme",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.mk; AlgebraicGeometry.IsImmersion.mk; AlgebraicGeometry.IsImmersion; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom; AlgebraicGeometry.Scheme.IsQuasiAffine.recOn; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion",
+   "date": "2026-10-23",
+   "verdict": "No match: quasi-affine immersion into Spec of global sections, etale base-change stability and affine-space finiteness do not give finitely many coordinates over an arbitrary base with the stated sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"AffineSpace\"",
+   "results": "[loogle] OK 0 hit(s). No hits.",
+   "date": "2026-10-23",
+   "verdict": "No match: quasi-affine immersion into Spec of global sections, etale base-change stability and affine-space finiteness do not give finitely many coordinates over an arbitrary base with the stated sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme etale over any scheme embeds into finite relative affine space and its representable sheaf injects into a finite power of the structure sheaf after every base change",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass; AlgebraicGeometry.IsEtale.instIsSmooth",
+   "date": "2026-10-23",
+   "verdict": "No match: quasi-affine immersion into Spec of global sections, etale base-change stability and affine-space finiteness do not give finitely many coordinates over an arbitrary base with the stated sheaf comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite global coordinate functions separate all relative points of an affine etale scheme over a non affine base after any base change",
+   "results": "[leanfinder] OK 8 hit(s). Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; Algebra.Etale.exists_subalgebra_fg; AlgebraicGeometry.Scheme.Etale; Algebra.isOpen_etaleLocus; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-23",
+   "verdict": "No match: quasi-affine immersion into Spec of global sections, etale base-change stability and affine-space finiteness do not give finitely many coordinates over an arbitrary base with the stated sheaf comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "immersion.*affineSpace|affineSpace.*immersion|coordinate.*[Mm]ono",
+   "results": "[grep] OK 2 hit(s). Mathlib/Geometry/Manifold/VectorField/Pullback.lean; Mathlib/Geometry/Manifold/VectorField/Pullback.lean",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits do not state the uniform finite-coordinate injection with its normalized inverse-image compatibility; the relative immersion existence theorem is a project declaration already represented by lemma-nagata-quasi-affine-immersion-affine-space-exists."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite global coordinate functions of an affine etale scheme induce a monomorphism of etale sheaves into a finite power of the structure sheaf",
+   "results": "[leansearch] OK 8 hit(s). AlgebraicGeometry.AffineSpace.coord; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsFinite.toIsAffineHom; AlgebraicGeometry.AffineSpace.isoOfIsAffine; AlgebraicGeometry.AffineScheme.Γ; TopCat.Presheaf.instMonoCommRingCatToTotalQuotientPresheafPresheaf",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits do not state the uniform finite-coordinate injection with its normalized inverse-image compatibility; the relative immersion existence theorem is a project declaration already represented by lemma-nagata-quasi-affine-immersion-affine-space-exists."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsImmersion\", \"AffineSpace\"",
+   "results": "[loogle] OK 0 hit(s). ",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits do not state the uniform finite-coordinate injection with its normalized inverse-image compatibility; the relative immersion existence theorem is a project declaration already represented by lemma-nagata-quasi-affine-immersion-affine-space-exists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale scheme over an arbitrary scheme admits finitely many global functions that separate all relative points after every base change",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsEtale; AlgebraicGeometry.FormallyUnramified; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Algebra.Etale.finitePresentation; Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits do not state the uniform finite-coordinate injection with its normalized inverse-image compatibility; the relative immersion existence theorem is a project declaration already represented by lemma-nagata-quasi-affine-immersion-affine-space-exists."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi affine scheme locally of finite type over any base immerses into finite dimensional relative affine space",
+   "results": "[leanfinder] OK 8 hit(s). AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion; AlgebraicGeometry.Scheme.IsQuasiAffine; AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace; AlgebraicGeometry.IsImmersion.instLocallyOfFiniteType",
+   "date": "2026-10-23",
+   "verdict": "No match: the hits do not state the uniform finite-coordinate injection with its normalized inverse-image compatibility; the relative immersion existence theorem is a project declaration already represented by lemma-nagata-quasi-affine-immersion-affine-space-exists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-ringed-etale-reconstruction",
+  "date": "2026-10-23",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, reconstruct the scheme morphism attached to each (U,V,s); Tags 04M6 and 04KK, scheme uniqueness and rigidity input. Rigidity prerequisite: coordinate monomorphism used in the proof of scheme Tag 04IJ.",
+   "via": [
+    "lem-sfb-scheme-ringed-etale-reconstruction",
+    "lem-sfb-space-locally-ringed-etale-topos-reconstruction",
+    "lem-sfb-space-square-zero-ringed-realization",
+    "lem-sfb-flat-space-split-deformation-ext",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-affine-coordinate-monomorphism",
+  "worker": "stage1",
+  "summary": "Reused the existing 04II immersion theorem and affine-space coordinate bijection; proved injectivity by immersion cancellation and the fibre-product universal property. Constructed the normalized representable comparison by adjunction/Yoneda and supplied the omitted 04IJ coordinate compatibility computation. No new nodes or statement correction.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tag 0D17 (lemma-deform-spaces), split thickening Y=Spec K in Y_M; trivial origin and linear operations as in quot.tex Tag 0D1K (lemma-spaces-tangent-space), and artin.tex sections tangent-spaces and inf. Supporting step of Tag 0D17: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps). Maps clause: Tag 05ZN, first proof paragraph, reconstruction by Properties of Spaces Theorem 04KL and locality of the original morphism (04KJ). Supporting input: Tag 04KL, reconstruct the scheme morphism attached to each (U,V,s); Tags 04M6 and 04KK, scheme uniqueness and rigidity input. Rigidity prerequisite: coordinate monomorphism used in the proof of scheme Tag 04IJ. The split realizes precisely this coordinate-monomorphism prerequisite; the imported ancestor chain currently terminates without a blueprint id, retained as supplied.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-yoneda-hom-bijection",
+    "why": "Generic adjunction, Yoneda or finite-limit input for the normalized coordinate comparison; the unit contains no replacement for this sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+    "why": "Generic adjunction, Yoneda or finite-limit input for the normalized coordinate comparison; the unit contains no replacement for this sheaf-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Generic adjunction, Yoneda or finite-limit input for the normalized coordinate comparison; the unit contains no replacement for this sheaf-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-coyoneda-iso-of-natural-hom-bijection",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-af363b982",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-af363b982 (reviewer sub-agent of L); spot-checked: I read the item, its five steps, every cited statement, Stacks 04IJ (etale-cohomology.tex l.5227, proof paragraph 1, whose 'verification omitted' equality the delivery now writes out) and 04II (morphisms.tex). The statement is unchanged from the base and live record. The only stmt_deps change is the addition of def-weil-etale-morphism, which is right. There are no new nodes and the item is still unsplit live, so this is no supersession or re-split case. Mechanical finding: confirmed. Steps 2 and 3 cited the dropped lem-per-affine-space-global-functions (route-pivot-dropped l.1401, Mathlib homOverEquiv) for Hom_S(T,A^n_S)=Γ(T)^n. That is a generic clause, and none of the forbidden Artin–Gabber/Q̄ℓ inputs is involved. FIX: I re-derived it from live nodes (A^n_S=S×_{Spec ℤ}Spec ℤ[x] by def-sbc-affine-space, the def-pc-fibre-product universal property, and the Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme, which also makes Mor(T,Spec ℤ) a point), and the injectivity of the tuple map is now spelled out. Second fault (C2/E5): step 1 took local finite type from def-sbc-locally-finite-presentation, which gives only some affine target, while def-weil-finite-type-morphism quantifies over every affine open (the 01T2 locality lemma). FIX: etale ⇒ unramified ⇒ locally of finite type, by def-weil-etale-morphism and def-weil-unramified-morphism. Steps 3–5 are correct. Step 3: immersion = closed∘open, both monomorphisms (lem-pc-proper-monomorphism-closed ⇒ direction, lem-weil-pbc-open-immersion-monomorphism), then cancellation and fibre-product uniqueness. Step 4: the adjunction/Yoneda/coyoneda chain gives ι_V^♭(id_V)=id_P and hence u↦id_X×u. Step 5: adjuncts are compared on each projection; I checked pr_T^*(u^*c_j) on both sides, using the ring/set adjunction agreement of node (2). Edge cases checked: n=0, V=∅, T=∅, a=id_S, non-quasi-compact or non-quasi-separated S and X. The three generic tool_uses are accepted. After the fix the proof closure (202 nodes) contains no dropped id. The corrected item is in fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Sites.EtaleAffineCoordinateMonomorphism",
+  "declaration": "AlgebraicGeometry.exists_etaleAffineCoordinateMonomorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/EtaleAffineCoordinateMonomorphism.lean",
+  "statement": "theorem exists_etaleAffineCoordinateMonomorphism (S : Scheme.{u}) (V : S.Etale) [IsAffine V.left] : ∃ (n : ℕ) (c : Fin n → Γ(V.left, ⊤)), ∀ (X : Scheme.{u}) (a : X ⟶ S), ∃ (β : (sheafForget (D := AddCommGrpCat.{u + 1}) S.smallEtaleTopology).obj S.etaleAdditiveSheaf ⟶ (a.Etale.sheafPushforwardContinuous (Type (u + 1)) S.smallEtaleTopology X.smallEtaleTopology).obj ((sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).obj X.etaleAdditiveSheaf)) (ι : (Scheme.etaleSetPullback a).obj (S.smallEtaleTopology.uliftYoneda.{u + 1}.obj V) ≅ X.smallEtaleTopology.uliftYoneda.{u + 1}.obj (a.Etale.obj V)), (∀ (T : S.Etale) (s : Γ(T.left, ⊤)), (β.hom.app (op T) ⟨s⟩).down = (pullback.fst T.hom a).appTop s) ∧ (∀ (T : S.Etale) (z : T ⟶ V), (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous a.Etale (Type (u + 1)) S.smallEtaleTopology X.smallEtaleTopology).homEquiv _ _ ι.hom).hom.app (op T) ⟨z⟩).down = a.Etale.map z) ∧ Mono (Pi.lift (fun j : Fin n ↦ (X.smallEtaleTopology.uliftYonedaEquiv.{u + 1} (X := a.Etale.obj V) (F := (sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).obj X.etaleAdditiveSheaf)).symm ⟨(pullback.fst V.hom a).appTop (c j)⟩)) ∧ ι.hom ≫ Pi.lift (fun j : Fin n ↦ (X.smallEtaleTopology.uliftYonedaEquiv.{u + 1} (X := a.Etale.obj V) (F := (sheafForget (D := AddCommGrpCat.{u + 1}) X.smallEtaleTopology).obj X.etaleAdditiveSheaf)).symm ⟨(pullback.fst V.hom a).appTop (c j)⟩) = (Scheme.etaleSetPullback a).map (Pi.lift (fun j : Fin n ↦ (S.smallEtaleTopology.uliftYonedaEquiv.{u + 1} (X := V) (F := (sheafForget (D := AddCommGrpCat.{u + 1}) S.smallEtaleTopology).obj S.etaleAdditiveSheaf)).symm ⟨c j⟩)) ≫ piComparison (Scheme.etaleSetPullback a) (fun _ : Fin n ↦ (sheafForget (D := AddCommGrpCat.{u + 1}) S.smallEtaleTopology).obj S.etaleAdditiveSheaf) ≫ Limits.Pi.map (fun _ : Fin n ↦ ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous a.Etale (Type (u + 1)) S.smallEtaleTopology X.smallEtaleTopology).homEquiv _ _).symm β) ∧ Mono ((Scheme.etaleSetPullback a).map (Pi.lift (fun j : Fin n ↦ (S.smallEtaleTopology.uliftYonedaEquiv.{u + 1} (X := V) (F := (sheafForget (D := AddCommGrpCat.{u + 1}) S.smallEtaleTopology).obj S.etaleAdditiveSheaf)).symm ⟨c j⟩)) ≫ piComparison (Scheme.etaleSetPullback a) (fun _ : Fin n ↦ (sheafForget (D := AddCommGrpCat.{u + 1}) S.smallEtaleTopology).obj S.etaleAdditiveSheaf) ≫ Limits.Pi.map (fun _ : Fin n ↦ ((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous a.Etale (Type (u + 1)) S.smallEtaleTopology X.smallEtaleTopology).homEquiv _ _).symm β))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ebd46a08",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read node, Stacks 04IJ (etale-cohomology.tex l.5227) and 04II, the module, report and dep declarations (etaleSetPullback = sheafPullback of Over.pullback = a.Etale; etaleAdditiveSheaf sections ULift Γ with pullback restriction; uliftYonedaEquiv). Every clause matches: uniform n,c before ∀ X a; e_a = Pi.lift of uliftYonedaEquiv.symm (pr_V^* c_j), Mono; β pinned sectionwise to pr_T^* s, a^♯ = sheafAdjunctionContinuous.homEquiv.symm β; ι pinned by adjunct z ↦ a.Etale.map z (id_X×z); equation via piComparison and Pi.map a^♯; final Mono. No extra hypotheses, Scheme.{u}/Type(u+1) universes, n=0 and empty cases fine. Statement verbatim; vs live only stmt_deps (+ landed def-sc-etale-additive-structure-restriction, used) and lean changed. Docstrings carry source place, blueprint id, 5 proof steps; only sorry; no hollow defs; report has Worker report and Second reading sections. Not recompiled (no file changed)."
+ }
+}

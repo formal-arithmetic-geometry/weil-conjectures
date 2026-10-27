@@ -1,0 +1,264 @@
+{
+ "id": "lem-a1-directed-algebra-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor comparison from elementwise directed algebra presentations",
+ "statement": "Let $R\\to T$ be a homomorphism of commutative rings, and let $J$ be a small nonempty directed preorder. Let $(A_i,a_{ij})$ be a directed diagram of commutative $R$-algebras and $(B_i,b_{ij})$ a directed diagram of commutative $T$-algebras, for $i\\le j$ [def-weil-pbc-algebra-hom-quotient]. Let $C$ be a commutative $R$-algebra and $D$ a commutative $T$-algebra, with compatible algebra cocone maps $\\rho_i:A_i\\to C$ and $\\sigma_i:B_i\\to D$. Suppose every element of $C$ lies in some $\\rho_i(A_i)$, and whenever $\\rho_i(x)=\\rho_i(y)$ there is $j\\ge i$ with $a_{ij}(x)=a_{ij}(y)$. Impose the corresponding two conditions on $D$, $\\sigma_i$ and $b_{ij}$. Regard all $T$-algebras as $R$-algebras through $R\\to T$. Suppose $p:C\\to D$ and $p_i:A_i\\to B_i$ are $R$-algebra maps satisfying $p\\rho_i=\\sigma_i p_i$ and $b_{ij}p_i=p_j a_{ij}$. Suppose the canonical $T$-algebra maps\n$$\\varphi_i:A_i\\otimes_RT\\longrightarrow B_i,\\qquad x\\otimes t\\longmapsto p_i(x)t$$\nare isomorphisms [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Then $(C,\\rho_i)$ and $(D,\\sigma_i)$ are colimit cocones of the underlying $R$-module diagrams [def-weil-pbc-category-colimit]; $(C\\otimes_RT,\\rho_i\\otimes1)$ is a colimit cocone for the underlying $R$-module diagram $(A_i\\otimes_RT,a_{ij}\\otimes1)$. There is a unique $R$-linear isomorphism $\\Phi:C\\otimes_RT\\to D$ satisfying\n$$\\Phi\\circ(\\rho_i\\otimes1)=\\sigma_i\\circ\\varphi_i.$$\nThis $\\Phi$ is the canonical $T$-algebra isomorphism characterized by\n$$\\Phi(c\\otimes t)=p(c)t\\qquad(c\\in C,\\ t\\in T).$$\nAll tensor products here are algebra tensor products, with scalar structure through the right-hand factor $T$ [def-weil-module-base-change].",
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0APJ, lemma-affine-base-change proof: final sentence, algebraic assembly of the stagewise comparisons using equation-sections-of-intersection; general algebraic formulation extracted by the worker"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-category-colimit",
+  "def-weil-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Reduce the two module colimit assertions to the hypotheses of [lem-weil-pbc-filtered-colimit-modules-criterion]. The small nonempty directed preorder $J$, viewed as a category with one arrow $i\\to j$ for each $i\\le j$, is a small filtered category [def-weil-pbc-category-colimit]: it is nonempty, two objects have a common upper bound, and parallel arrows are equal. Every $a_{ij}$ and every $\\rho_i$ is an $R$-algebra map, hence $R$-linear; every $b_{ij}$ and every $\\sigma_i$ is a $T$-algebra map, hence $R$-linear for the $R$-module structures through $R\\to T$. So $(A_i,a_{ij})$ and $(B_i,b_{ij})$ are diagrams of $R$-modules and $(C,\\rho_i)$, $(D,\\sigma_i)$ are cocones on them. The exhaustion hypotheses are clause (1) of that node, and the same-stage eventual-equality hypotheses (if $\\rho_i(x)=\\rho_i(y)$, then $a_{ij}(x)=a_{ij}(y)$ for some $j\\ge i$; likewise for $\\sigma_i$, $b_{ij}$) are its clause (2), with $f$ the arrow $i\\to j$. No transition map is assumed injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00D6, lemma-directed-colimit: representative relation; the converse criterion here is checked directly from the hypotheses"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-colimit-modules-criterion] to the cocone $(C,\\rho_i)$ on $(A_i,a_{ij})$ and to the cocone $(D,\\sigma_i)$ on $(B_i,b_{ij})$, both in $R$-modules, with the hypotheses checked in step 1. It gives that both are colimit cocones of the underlying $R$-module diagrams in the sense of [def-weil-pbc-category-colimit]: for every compatible family of $R$-linear maps $f_i:A_i\\to M$ (resp. $B_i\\to M$) there is exactly one $R$-linear map $f$ from $C$ (resp. $D$) with $f\\rho_i=f_i$ (resp. $f\\sigma_i=f_i$). These are the first two asserted module colimits and the universal properties used in steps 4 and 5.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-criterion",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00D6, lemma-directed-colimit; Tag 00DA, lemma-homomorphism-limit (the elementwise description of a directed colimit of modules)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-tensor-commutes-with-colimits] to the module colimit $(C,\\rho_i)$ from step 2 and the fixed $R$-module $T$. Since $J$ is small, this gives a colimit with vertex $C\\otimes_RT$ and legs $\\lambda_i=\\rho_i\\otimes1$ for the diagram with transition maps $\\alpha_{ij}=a_{ij}\\otimes1$. These are the underlying linear maps of the algebra tensor maps: on pure tensors both send $x\\otimes t$ to $\\rho_i(x)\\otimes t$ or $a_{ij}(x)\\otimes t$, respectively [def-weil-module-base-change].",
+   "uses": [
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DD, lemma-tensor-products-commute-with-limits, including its specified coprojections"
+   }
+  },
+  {
+   "text": "The stage maps form a compatible isomorphism of module diagrams: on $x\\otimes t$, $b_{ij}\\varphi_i(x\\otimes t)=b_{ij}(p_i(x)t)=p_j(a_{ij}(x))t=\\varphi_j\\alpha_{ij}(x\\otimes t)$ because $b_{ij}$ is a $T$-algebra map. Equality extends by the defining linearity of the tensor product. Therefore $\\varphi_j\\alpha_{ij}=b_{ij}\\varphi_i$, and composing with inverses gives $\\varphi_j^{-1}b_{ij}=\\alpha_{ij}\\varphi_i^{-1}$. The colimit properties [def-weil-pbc-category-colimit] of steps 2 and 3 now give unique $R$-linear maps $\\Phi:C\\otimes_RT\\to D$ and $\\Psi:D\\to C\\otimes_RT$ with $\\Phi\\lambda_i=\\sigma_i\\varphi_i$ and $\\Psi\\sigma_i=\\lambda_i\\varphi_i^{-1}$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DA, lemma-homomorphism-limit: induced map; inverse compatibility written explicitly"
+   }
+  },
+  {
+   "text": "For each $i$, $\\Psi\\Phi\\lambda_i=\\Psi\\sigma_i\\varphi_i=\\lambda_i\\varphi_i^{-1}\\varphi_i=\\lambda_i$, while $\\Phi\\Psi\\sigma_i=\\Phi\\lambda_i\\varphi_i^{-1}=\\sigma_i$. The uniqueness clause of the two colimit universal properties [def-weil-pbc-category-colimit] implies $\\Psi\\Phi=1$ and $\\Phi\\Psi=1$. Thus $\\Phi$ is an $R$-linear isomorphism, and the same uniqueness clause gives the required uniqueness among maps satisfying its displayed compatibility.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DA, lemma-homomorphism-limit; two inverse identities verified on the cocone legs"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-algebra-tensor-pushout-universal-property], clause (2), to $p:C\\to D$ and the structure map $T\\to D$. It gives an $R$-algebra map $h:C\\otimes_RT\\to D$ with $h(c\\otimes t)=p(c)t$. On pure tensors $h\\lambda_i(x\\otimes t)=p(\\rho_i(x))t=\\sigma_i(p_i(x))t=\\sigma_i\\varphi_i(x\\otimes t)$, since $\\sigma_i$ is a $T$-algebra map. Hence $h=\\Phi$ by the module colimit uniqueness. Moreover $h(1\\otimes t)=t$, so it is a $T$-algebra map for the right-factor scalar structure [def-weil-module-base-change]. For $d,e\\in D$ and $t\\in T$, the identities $h(\\Psi(d)\\Psi(e))=de=h(\\Psi(de))$, $h(1)=1=h(\\Psi(1))$, and $h(t\\Psi(d))=td=h(\\Psi(td))$ imply, by injectivity of $h$, that $\\Psi$ preserves products, unit and $T$-scalars. It is already additive by step 4. Thus this same $\\Phi$ is the claimed canonical $T$-algebra isomorphism with the stated formula.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-category-colimit",
+    "def-weil-module-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes proof: tensor-product universal property; explicit identification of the comparison from Tag 0APJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-filtered-colimit-modules-criterion",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "def-weil-module-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0APJ, lemma-affine-base-change, final colimit assembly; explicit algebraic argument using Tags 00DD and 01I4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "colimit.*[Tt]ensor|[Tt]ensor.*colimit|[Ii]sColimit.*[Aa]lgebra|[Aa]lgebra.*[Ii]sColimit",
+   "subdirectory": "Algebra",
+   "results": "16 hits: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: directLimitLeft is a module equivalence for the constructed direct limit; it does not identify both supplied elementwise algebra cocones and their canonical T-algebra comparison. Tensor congruences also lack this directed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct, CategoryTheory.Limits.IsColimit",
+   "subdirectory": "",
+   "results": "0 hits: ; loogle: unknown identifier 'Algebra.TensorProduct'",
+   "date": "2026-10-22",
+   "verdict": "invalid namespace query; repeated with valid identifiers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If two directed algebra cocones exhaust all elements with equality witnessed at a later stage, a compatible family of tensor isomorphisms induces a tensor product algebra isomorphism",
+   "subdirectory": "",
+   "results": "8 hits: Algebra.TensorProduct.congr_apply, TensorProduct.AlgebraTensorModule.congr, Algebra.TensorProduct.congr_refl, MonoidAlgebra.tensorEquiv, Algebra.TensorProduct.congr_trans, Algebra.TensorProduct.congr, Subalgebra.LinearDisjoint.mulMapLeftOfSupEqTop, Algebra.TensorProduct.lmulEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: directLimitLeft is a module equivalence for the constructed direct limit; it does not identify both supplied elementwise algebra cocones and their canonical T-algebra comparison. Tensor congruences also lack this directed comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible stagewise tensor product isomorphisms of directed systems of commutative algebras induce an isomorphism on algebras presented by representatives and eventual equality",
+   "subdirectory": "",
+   "results": "8 hits: TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitRight_symm_of_tmul, TensorProduct.fromDirectLimit, TensorProduct.fromDirectLimit_of_tmul, TensorProduct.directLimitLeft, TensorProduct.directLimitRight, TensorProduct.toDirectLimit, TensorProduct.directLimitLeft_rTensor_of",
+   "date": "2026-10-22",
+   "verdict": "no match: directLimitLeft is a module equivalence for the constructed direct limit; it does not identify both supplied elementwise algebra cocones and their canonical T-algebra comparison. Tensor congruences also lack this directed comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, CategoryTheory.Limits.IsColimit",
+   "subdirectory": "",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: directLimitLeft is a module equivalence for the constructed direct limit; it does not identify both supplied elementwise algebra cocones and their canonical T-algebra comparison. Tensor congruences also lack this directed comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*(iff|of)|directLimitLeft|preservesColimits",
+   "subdirectory": "Algebra/Category/ModuleCat",
+   "results": "{\"t\": \"2026-10-22T07:04:25Z\", \"tool\": \"grep\", \"query\": \"isColimit.*(iff|of)|directLimitLeft|preservesColimits\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean\", \"Mathlib/Algebra/Category/ModuleCat/Topology/Homology.lean\", \"Mathlib/Algebra/Category/ModuleCat/Topology/Basic.lean\", \"Mathlib/Algebra/Category/ModuleCat/Kernels.lean\", \"Mathlib/Algebra/Category/ModuleCat/Kernels.lean\", \"Mathlib/Algebra/Category/ModuleCat/Kernels.lean\", \"Mathlib/Algebra/Category/ModuleCat/Kernels.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Abelian.lean\"], \"digest\": \"824338f50b936f32\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: directLimitLeft concerns the constructed module direct limit; tensor congruences and algebra pushouts do not also identify both supplied cocones from their elementwise hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, CategoryTheory.Limits.IsColimit",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:04:25Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, CategoryTheory.Limits.IsColimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: directLimitLeft concerns the constructed module direct limit; tensor congruences and algebra pushouts do not also identify both supplied cocones from their elementwise hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An elementwise directed algebra colimit commutes with tensor product and compatible stagewise algebra tensor isomorphisms induce the canonical isomorphism on colimits",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:04:35Z\", \"tool\": \"leanfinder\", \"query\": \"An elementwise directed algebra colimit commutes with tensor product and compatible stagewise algebra tensor isomorphisms induce the canonical isomorphism on colimits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.toDirectLimit_tmul_of\", \"TensorProduct.directLimitLeft_tmul_of\", \"TensorProduct.fromDirectLimit_of_tmul\", \"TensorProduct.directLimitRight\", \"TensorProduct.directLimitRight_tmul_of\", \"TensorProduct.directLimitLeft\", \"TensorProduct.directLimitLeft_symm_of_tmul\"], \"digest\": \"79fca617264604bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: directLimitLeft concerns the constructed module direct limit; tensor congruences and algebra pushouts do not also identify both supplied cocones from their elementwise hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product comparison of two supplied directed colimit cocones of algebras given by representatives and eventual equality",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:04:57Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product comparison of two supplied directed colimit cocones of algebras given by representatives and eventual equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.directLimitLeft_rTensor_of\", \"TensorProduct.directLimitLeft_tmul_of\", \"TensorProduct.toDirectLimit\", \"CommRingCat.pushoutCoconeIsColimit\", \"Algebra.TensorProduct.congr_trans\", \"Algebra.TensorProduct.congr_apply\", \"Submodule.FG.rTensor.directLimit\", \"Submodule.FG.lTensor.directLimit_apply\"], \"digest\": \"6ec6b21801535d48\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: directLimitLeft concerns the constructed module direct limit; tensor congruences and algebra pushouts do not also identify both supplied cocones from their elementwise hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module cocone is a colimit if its maps are jointly surjective and any equality of elements is witnessed at a later stage",
+   "subdirectory": "",
+   "results": "{\"t\": \"2026-10-22T07:05:07Z\", \"tool\": \"leanfinder\", \"query\": \"A module cocone is a colimit if its maps are jointly surjective and any equality of elements is witnessed at a later stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.HasColimit.isColimitColimitCocone\", \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"ModuleCat.coproductCoconeIsColimit\", \"ModuleCat.HasColimit.colimitCocone\", \"ModuleCat.directLimitIsColimit\", \"ModuleCat.FilteredColimits.colimitCocone\", \"ModuleCat.FilteredColimits.M.mk_surjective\", \"ModuleCat.directLimitCocone\"], \"digest\": \"36c2ae8fd38ef3ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: these results construct particular module colimits, not the supplied elementwise algebra cocones and canonical T-algebra comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "isColimit.*(joint|surject|exist|iff)|isColimit_of|directLimitLeft",
+   "subdirectory": "Algebra/Category/ModuleCat/FilteredColimits.lean",
+   "results": "{\"t\": \"2026-10-22T07:05:42Z\", \"tool\": \"grep\", \"query\": \"isColimit.*(joint|surject|exist|iff)|isColimit_of|directLimitLeft\", \"sub\": \"Algebra/Category/ModuleCat/FilteredColimits.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: these results construct particular module colimits, not the supplied elementwise algebra cocones and canonical T-algebra comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-intersection-sections-flat-base-change",
+  "date": "2026-10-22",
+  "group": "Q54"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, the two displayed identifications of sections over E times X and X times E, including their compatibility over the triple product. Extracted from lem-a1-intersection-sections-flat-base-change: old step 3 (elementwise module colimits, tensor-colimit assembly, canonical formula and algebra-map identification)",
+   "via": [
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-directed-algebra-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Obtained both module colimits from the elementwise hypotheses through the existing Mathlib leaf lem-weil-pbc-filtered-colimit-modules-criterion (reviewer FIX of a29a9961, re-applied on 9b856e79); reused the existing tensor-colimit and algebra-pushout Mathlib leaves; constructed both inverse module comparison maps and identified the result with the canonical T-algebra map. No new nodes are needed. Repair of the returned side-project delivery: rechecked the unchanged live statement and all five current dependency statements, verified every citation quote, and made the inverse algebra-map identities explicit before rebasing the delivery onto the current live DAG.",
+  "blueprint": "Makes explicit the tensor/colimit assembly of Tag 0APJ used in the Gabber descent chain recorded in blueprint.from, ultimately supporting the Loc_X-to-Cov_X input under lem-a1-affine-hc0. No change to the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-9b856e791",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-9b856e791 (reviewer sub-agent of L); spot-checked: FIX, the second time for this item. This head (9b856e79) re-delivers a29a9961 after the landing refusal. I gave a29a9961 a FIX, and that fix has been lost: the new head is built on the text from before the fix. Statement, stmt_deps, source, ancestry and steps 3-5 are byte-identical to my earlier fix file. There are no new nodes and no SGA citation. Steps 1-2 again prove by hand the existing Mathlib leaf lem-weil-pbc-filtered-colimit-modules-criterion (C5). That leaf takes a small filtered J and a module cocone that is jointly surjective with same-stage eventual equality, which are exactly the item's hypotheses. The hand argument is correct but duplicates the leaf. Repair: in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-directed-algebra-tensor-comparison.json I put back the earlier steps 1-2 word for word. Step 1 checks that the directed J is filtered, that the a/rho and b/sigma maps are R-linear, and that the item's hypotheses are clauses (1)-(2). Step 2 applies the leaf to (C,rho) and (D,sigma). proof_deps gains the criterion and equals the union of the step uses. The summary sentence is updated. I kept the worker's improved step 6: the identities h(Psi d Psi e)=de=h(Psi(de)), h(1)=h(Psi 1) and h(t Psi d)=h(Psi(td)) are correct because h is injective and h Psi=1. I re-read Stacks 0APJ (more-groupoids.tex) and every cited statement in this snapshot. Step 3 uses tensor-commutes-with-colimits with N=T. Step 4 gets b_ij phi_i=phi_j(a_ij tensor 1) from T-linearity and b_ij p_i=p_j a_ij. Step 5 gets the two-sided inverse from colimit uniqueness. Step 6 uses pushout clause (2) with p and T->D; h lambda_i=sigma_i phi_i gives h=Phi. Edge cases checked: a one-object J, non-injective transition maps, the zero ring and T=R. The only citer is the parent intersection-sections-flat-base-change. No tool_uses: every cited node outside the unit is a Mathlib leaf or a definition. Maintainer: this fix has already been lost once on a re-delivery; please apply it on top of this head.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DirectedAlgebraTensorComparison",
+  "declaration": "Algebra.TensorProduct.directedAlgebraTensorComparison",
+  "file": "lean/Sheaf/RingTheory/DirectedAlgebraTensorComparison.lean",
+  "statement": "theorem directedAlgebraTensorComparison (R T : Type u) [CommRing R] [CommRing T] [Algebra R T] (J : Type u) [Preorder J] [Nonempty J] [IsDirected J (· ≤ ·)] (A B : J ⥤ CommAlgCat.{u} R) (C : Cocone A) (D : Cocone B) [∀ i : J, Algebra T (B.obj i)] [∀ i : J, IsScalarTower R T (B.obj i)] [Algebra T D.pt] [IsScalarTower R T D.pt] (b_T : ∀ (i j : J) (f : i ⟶ j) (t : T), (B.map f).hom (algebraMap T (B.obj i) t) = algebraMap T (B.obj j) t) (sigma_T : ∀ (i : J) (t : T), (D.ι.app i).hom (algebraMap T (B.obj i) t) = algebraMap T D.pt t) (hC_surj : ∀ c : C.pt, ∃ (i : J) (x : A.obj i), (C.ι.app i).hom x = c) (hC_eq : ∀ (i : J) (x y : A.obj i), (C.ι.app i).hom x = (C.ι.app i).hom y → ∃ (j : J) (h : i ≤ j), (A.map (homOfLE h)).hom x = (A.map (homOfLE h)).hom y) (hD_surj : ∀ d : D.pt, ∃ (i : J) (x : B.obj i), (D.ι.app i).hom x = d) (hD_eq : ∀ (i : J) (x y : B.obj i), (D.ι.app i).hom x = (D.ι.app i).hom y → ∃ (j : J) (h : i ≤ j), (B.map (homOfLE h)).hom x = (B.map (homOfLE h)).hom y) (p : C.pt →ₐ[R] D.pt) (p_stage : ∀ i : J, A.obj i →ₐ[R] B.obj i) (hp : ∀ i : J, p.comp (C.ι.app i).hom = (D.ι.app i).hom.comp (p_stage i)) (hp_stage : ∀ (i j : J) (f : i ⟶ j), (B.map f).hom.comp (p_stage i) = (p_stage j).comp (A.map f).hom) (hphi : ∀ i : J, Function.Bijective (productMap (p_stage i) (IsScalarTower.toAlgHom R T (B.obj i)))) : Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) (AlgCat.{u} R) ⋙ forget₂ (AlgCat.{u} R) (ModuleCat.{u} R)).mapCocone C)) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) (AlgCat.{u} R) ⋙ forget₂ (AlgCat.{u} R) (ModuleCat.{u} R)).mapCocone D)) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} R) (AlgCat.{u} R) ⋙ forget₂ (AlgCat.{u} R) (ModuleCat.{u} R) ⋙ tensorRight (ModuleCat.of R T)).mapCocone C)) ∧ ∃ Φ : C.pt ⊗[R] T ≃ₗ[R] D.pt, (∀ i : J, Φ.toLinearMap.comp ((C.ι.app i).hom.toLinearMap.rTensor T) = (D.ι.app i).hom.toLinearMap.comp (productMap (p_stage i) (IsScalarTower.toAlgHom R T (B.obj i))).toLinearMap) ∧ (∀ Ψ : C.pt ⊗[R] T ≃ₗ[R] D.pt, (∀ i : J, Ψ.toLinearMap.comp ((C.ι.app i).hom.toLinearMap.rTensor T) = (D.ι.app i).hom.toLinearMap.comp (productMap (p_stage i) (IsScalarTower.toAlgHom R T (B.obj i))).toLinearMap) → Ψ = Φ) ∧ ∃ e : @AlgEquiv T (C.pt ⊗[R] T) D.pt _ _ _ (rightAlgebra (R := R) (A := C.pt) (B := T)) _, (∀ z : C.pt ⊗[R] T, e z = Φ z) ∧ ∀ (c : C.pt) (t : T), e (c ⊗ₜ[R] t) = p c * algebraMap T D.pt t",
+  "branch": "sheaf-dag",
+  "by": "Q126",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4da16b30a",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Node unchanged vs side-live except the new lean field; lean.statement is verbatim in the file. Clause by clause: R,T,J in Type u (small nonempty directed preorder, no antisymmetry); A,B : J ⥤ CommAlgCat R with T-algebra structure on B and D via Algebra/IsScalarTower instances plus b_T and sigma_T (exactly T-algebra maps, no instance diamond); exhaustion and later-stage equality for C and D are exact; p, p_stage, hp, hp_stage; stage isomorphism = bijective productMap (canonical map from the pushout record, automatically T-linear, so not stronger). Conclusions: Nonempty IsColimit of the forget₂-to-ModuleCat images of C and D and of C ⊗ T via tensorRight (legs rTensor); ∃ Φ linear equiv with compatibility and uniqueness among compatible equivs; T-algebra equiv for rightAlgebra equal to Φ pointwise with e(c⊗t)=p c * algebraMap t. Edge cases: empty J excluded, one-object J, zero rings, T=R, C=T (rightAlgebra fixes the instance ambiguity); single universe u matches the citer. No definitions, sorry only, source and blueprint docstrings present, six proof steps in the docstring, no existing Mathlib match, stmt_deps used through their recorded declarations. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261023T102654-L-2947221",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Algebra.TensorProduct.directedAlgebraTensorComparison"
+  ],
+  "sorry_after": []
+ }
+}

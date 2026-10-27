@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-discrete-real-submodule-finite",
+ "kind": "statement",
+ "title": "Discrete integer submodules of finite real vector spaces are finite",
+ "statement": "Let $V$ be a finite-dimensional real normed vector space [def-weil-finite-dimensional-subspace], and let $L\\subseteq V$ be a $\\mathbf Z$-submodule, namely an additive subgroup with the induced integer scalar action. Suppose the topology on $L$ induced from $V$ is discrete, meaning that every singleton is open in $L$. Then $L$ is finitely generated as a $\\mathbf Z$-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Theorem 10.15, printed p.49, the discrete-subgroup finiteness assertion cited there as ANT 4.15; precise normed-space formulation in the Mathlib declaration below."
+ },
+ "stmt_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fg_of_discrete|fg.*[Dd]iscrete|[Dd]iscrete.*fg|fg_of_isClosed|[Dd]iscrete.*[Ff]inite",
+   "results": "18 hits; searched Topology/Algebra; logged results: Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean, Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean, Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean, Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean, Mathlib/Topology/Algebra/IsUniformGroup/DiscreteSubgroup.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean, Mathlib/Topology/Algebra/Valued/LocallyCompact.lean",
+   "date": "2026-10-22",
+   "verdict": "no match to this query; the later exact-name searches identify the Mathlib leaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AddSubgroup\", \"fg\", \"discrete\"",
+   "results": "0 hits; searched all Mathlib / remote service; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match to this query; the later exact-name searches identify the Mathlib leaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A discrete subgroup of a finite dimensional real vector space is finitely generated",
+   "results": "8 hits; searched all Mathlib / remote service; logged results: ZLattice.FG, Zlattice.FG, ZLattice.module_finite, instModuleFinite_of_discrete_submodule, instModuleFree_of_discrete_submodule, instCountable_of_discrete_submodule, ZSpan.instDiscreteTopologySubtypeMemAddSubgroupToAddSubgroupIntSpanRangeCoeBasisRealOfFinite, ZLattice.module_free",
+   "date": "2026-10-22",
+   "verdict": "match: instModuleFinite_of_discrete_submodule"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every discrete additive subgroup of a finite dimensional real vector space is finitely generated",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "fg|[Ff]inite|[Ff]ree",
+   "results": "0 hits; searched Analysis/Normed/Group/DiscreteSubgroup.lean; logged results: none",
+   "date": "2026-10-22",
+   "verdict": "no match to this query; the later exact-name searches identify the Mathlib leaf"
+  },
+  {
+   "tool": "grep",
+   "query": "instModuleFinite_of_discrete_submodule",
+   "results": "1 hits; searched Algebra/Module/ZLattice/Basic.lean; logged results: 488",
+   "date": "2026-10-22",
+   "verdict": "match: instModuleFinite_of_discrete_submodule; exact declaration read at Mathlib/Algebra/Module/ZLattice/Basic.lean:488–490"
+  },
+  {
+   "tool": "loogle",
+   "query": "instModuleFinite_of_discrete_submodule",
+   "results": "1 hits; searched all Mathlib / remote service; logged results: instModuleFinite_of_discrete_submodule",
+   "date": "2026-10-22",
+   "verdict": "match: instModuleFinite_of_discrete_submodule"
+  },
+  {
+   "tool": "grep",
+   "query": "instModuleFinite_of_discrete_submodule",
+   "results": "1 hits; searched Algebra/Module/ZLattice; logged results: Mathlib/Algebra/Module/ZLattice/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "match: instModuleFinite_of_discrete_submodule; exact declaration read at Mathlib/Algebra/Module/ZLattice/Basic.lean:488–490"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "instModuleFinite_of_discrete_submodule",
+  "file": "Mathlib/Algebra/Module/ZLattice/Basic.lean",
+  "line": 488,
+  "how": "exact: lines 488–490 quantify a finite-dimensional real normed vector space E, a Submodule ℤ E, and DiscreteTopology L, and conclude Module.Finite ℤ L; the induced topology is the subtype topology."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-hom-finite-free",
+  "date": "2026-10-22",
+  "group": "Q41"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Theorem 10.15, printed p.49 (finite free Hom conclusion); §10 endomorphism-ring convention, printed pp.42–43. Supporting argument: Chapter I, proof of Theorem 10.15, printed p.49, the discrete-subgroup finiteness assertion cited there as ANT 4.15; precise normed-space formulation in the Mathlib declaration below.",
+   "via": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

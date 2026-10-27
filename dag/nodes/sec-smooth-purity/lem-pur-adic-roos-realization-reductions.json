@@ -1,0 +1,271 @@
+{
+ "id": "lem-pur-adic-roos-realization-reductions",
+ "kind": "statement",
+ "title": "Roos realization with prescribed quotient-linear reductions",
+ "statement": "Fix the finite-field coefficient datum of [def-weil-completed-integral-coefficients], with characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$. Let $W$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site]. Put $B_n=(\\mathcal O_E/\\varpi_E^n)_W$ for $n\\geq1$ and $R=\\lim_n B_n$. Write $\\operatorname{red}_n=-\\otimes_R^L B_n$ and $\\operatorname{Res}_n$ for derived extension and restriction of scalars along $R\\to B_n$ [def-weil-integral-derived-reduction, def-weil-integral-derived-restriction-of-scalars], and use the ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $P\\in D(R)$ be derived complete in the Roos-triangle sense [def-weil-derived-complete]. Let $\\mathcal S_\\bullet$ be its strict reduction tower [def-weil-integral-reduction-tower], with finite-level evaluations identified with objects $S_n\\in D(B_n)$ by specified quotient-compatible isomorphisms $b^S_n:\\operatorname{red}_nP\\xrightarrow{\\sim}S_n$. Set $c^S_n=\\operatorname{Res}_n(b^S_n)\\circ\\eta_{n,P}$, where $\\eta_{n,P}:P\\to\\operatorname{Res}_n\\operatorname{red}_nP$ is the scalar-extension unit of [lem-weil-derived-scalar-extension-restriction-adjunction]. Let $\\mathcal T_\\bullet$ be a normalized DVR tower with finite-level objects $T_n$ [def-coef-normalized-dvr-tower], and let $G:\\mathcal S_\\bullet\\to\\mathcal T_\\bullet$ be a morphism in the derived category of strict $R$-module towers whose evaluation is $\\operatorname{Res}_n(g_n)$ for specified isomorphisms $g_n:S_n\\xrightarrow{\\sim}T_n$. Use the total derived inverse-limit functor with its natural Roos triangles and projections [def-weil-pbc-derived-inverse-limit, def-weil-derived-limit, lem-weil-pbc-ringed-strict-tower-homotopy-limit], and put $L_S=R\\lim\\mathcal S_\\bullet$ and $L_T=R\\lim\\mathcal T_\\bullet$.\n\nThere exists an isomorphism $e:P\\xrightarrow{\\sim}L_S$ satisfying $p^S_n\\circ e=c^S_n$ for every $n$, and $F=R\\lim G:L_S\\to L_T$ is an isomorphism. For $\\gamma=F\\circ e$, the scalar-extension adjoints $b^T_n:\\operatorname{red}_n L_T\\to T_n$ of the actual projections $p^T_n$ are isomorphisms, compatible with all quotient normalizations, and\n$$p^T_n\\circ\\gamma=\\operatorname{Res}_n(g_n)\\circ c^S_n,\\qquad b^T_n\\circ\\operatorname{red}_n(\\gamma)=g_n\\circ b^S_n.$$ The projection equality is in $D(R)$; the reduction equality is in $D(B_n)$.\nNo uniqueness of $e$ or $G$ is asserted. No boundedness, constructibility, or common integral local model is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-adic-reconstruction.proof.md",
+  "place": "Proof, final sentence \"realization ... displayed isomorphism ... compatibility with the reductions\"; retained returned proof steps 4-5: comparison of Roos triangles, isomorphy, projection equation and completed-coefficient adjunction."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "def-weil-integral-derived-reduction",
+  "def-weil-integral-derived-restriction-of-scalars",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-pbc-derived-inverse-limit",
+  "def-weil-derived-limit",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Derived completeness supplies a K-flat resolution q:K→H, an identification QH≅P, and an augmented reduction Roos triangle. Put eK=Q(q) followed by this identification. The universal scalar-extension counit is invertible on K. Its exact-restriction comparison gives a_n:Res_n(red_n P)≅Q(integralTowerComplex_n K). The normalized derived adjunction identifies unit_n followed by a_n with eK.inv followed by the localized tensor unit: this follows from the counit compatibility in the recorded adjunction and the pure-tensor characterization of integralTowerUnit. The declared K-flat transition theorem identifies the adjacent transitions under a_n. Conjugating by Siso_n and Res_n(bS_n.inv) therefore gives a levelwise isomorphism from the evaluated S tower to the integral reduction tower. Product extensionality conjugates 1-s; transport the distinguished completeness triangle through the product isomorphism. Its first arrow has components c_n=unit_n followed by Res_n(bS_n.hom) followed by Siso_n.inv.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-coef-normalized-dvr-kflat-transition",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, definition-derived-limit; TR1 invariance under isomorphism; applied to the completeness triangle specified in def-weil-derived-complete"
+   }
+  },
+  {
+   "text": "Compare the triangle from Step 1 with the specified Roos triangle of $L_S$. Rotate both once so that $1-s_S:A_S\\to A_S$ is the first arrow. The identity maps on these two terms commute with that arrow. TR3 supplies the third component; rotate back to obtain a triangle morphism $(e,1_{A_S},1_{A_S})$ with $e:P\\to L_S$. Both $P$ and $L_S$ are derived limits of the same system and the evaluated tower map is the identity. The Roos-triangle isomorphism criterion makes $e$ an isomorphism. The first square says $\\iota_S e=c^S$, hence $p^S_n e=c^S_n$ after the $n$th product projection. TR3 gives existence, with no uniqueness claim.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-derived-limit-levelwise-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, paragraph following definition-derived-limit (TR3 comparison); Tag 014A, lemma-third-isomorphism-triangle"
+   }
+  },
+  {
+   "text": "The equation hG identifies every evaluation of G with a composite of the specified isomorphisms Siso_n, Res_n(g_n), and T.evaluationIso_n.inv, so each evaluation is invertible. Exact evaluation on strict towers commutes with derived homology (Mathlib Functor.mapDerivedCategoryHomologyFunctorIso). Hence every component of every homology map of G is invertible. A natural transformation with invertible components is invertible; DerivedCategory.isIso_iff then gives IsIso G. Any functor preserves isomorphisms, so RF.map G is invertible. Use the assumed projection naturality, project with Pi.π_n and substitute hG and the projection equation of Step 2. This gives the asserted projection identity for gamma=e.hom followed by RF.map G. No naturality of the connecting maps is needed.",
+   "uses": [
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Cohomology detects isomorphisms in a derived category; exact evaluation commutes with cohomology. Implemented with Mathlib DerivedCategory.isIso_iff and Functor.mapDerivedCategoryHomologyFunctorIso. Projection naturality is an explicit unchanged hypothesis."
+   }
+  },
+  {
+   "text": "Let $b^T_n:\\operatorname{red}_nL_T\\to T_n$ be the adjoint of $p^T_n$ under $\\operatorname{red}_n\\dashv\\operatorname{Res}_n$. By naturality of this Hom bijection in its source, the adjoint of $p^T_n\\gamma$ is $b^T_n\\operatorname{red}_n(\\gamma)$. By naturality in its target and the unit formula, the adjoint of $\\operatorname{Res}_n(g_n)c^S_n=\\operatorname{Res}_n(g_nb^S_n)\\eta_{n,P}$ is $g_nb^S_n$. Applying the bijection to Step 3 thus proves $b^T_n\\operatorname{red}_n(\\gamma)=g_nb^S_n$ in $D(B_n)$. In particular $b^T_n=(g_nb^S_n)\\operatorname{red}_n(\\gamma)^{-1}$ is an isomorphism. This proves quotient-linearity directly in the target-ring derived category; it does not infer equality there from faithfulness of restriction.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, bifunctorial Hom bijection and unit for identity underlying topoi"
+   }
+  },
+  {
+   "text": "First derive the adjacent cone equation from p followed by (1-s)=0 in the distinguished Roos triangle, by composing with a product projection. Induct on n≤m, using composition and identity of the localized evaluation transformations, to obtain p_m followed by the evaluated transition m→n equals p_n for every quotient. The tower_tau equation identifies that transition with Res_m(T.tau) and the canonical restriction-composition isomorphism. Apply the completed scalar adjunction at m to the claimed equation reduction_m followed by T.tau = quotientUnit followed by Res_(m,n)(reduction_n). Naturality in the target identifies its left transpose with p_m followed by the restricted tau. By the definition of quotientUnit as the transpose of unit_n followed by the inverse restriction-composition isomorphism, naturality of that isomorphism and the unit formula identify the right transpose with p_n. The cone equation equates them; injectivity of the Hom equivalence proves the result. This works also for m=n and does not use a separate scalar-associator theorem or faithfulness of restriction.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint); the adjoint form quotientUnit in the unchanged Lean statement; cone identity from the Roos triangle (Stacks derived.tex, Tag 08TC)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-coef-normalized-dvr-kflat-transition",
+  "def-weil-triangulated-category",
+  "lem-weil-derived-limit-levelwise-iso",
+  "def-coef-normalized-dvr-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 2, integral normalized-tower realization; explicit K-flat unit/transition comparison, transport and rotated TR3, detection of derived isomorphisms by evaluated homology, and direct completed-adjunction proof of the adjoint-form quotient equation. Sources: Stacks Tags 08TC, 014A and 07A6, and the existing K-flat transition node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A complete complex and a normalized DVR tower with a coherent levelwise isomorphism have isomorphic derived limits and exactly the prescribed quotient linear reductions",
+   "results": "{\"t\": \"2026-10-22T06:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"A complete complex and a normalized DVR tower with a coherent levelwise isomorphism have isomorphic derived limits and exactly the prescribed quotient linear reductions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.of_comp_lift\"], \"digest\": \"e18309111d44f83c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃\"], \"digest\": \"7c5e65fab84046ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full statement: the triangle criterion is only one ingredient, already represented by lem-weil-derived-limit-levelwise-iso"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|homotopyLimit|derived.*[Ll]imit.*[Ii]so|scalar.*[Aa]djunction",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"grep\", \"query\": \"Roos|homotopyLimit|derived.*[Ll]imit.*[Ii]so|scalar.*[Aa]djunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"0858721044ec5817\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transpose a derived inverse limit projection identity under extension restriction of scalars to prove equality of finite coefficient reductions",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"leansearch\", \"query\": \"Transpose a derived inverse limit projection identity under extension restriction of scalars to prove equality of finite coefficient reductions\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphism of Roos triangles and derived tensor restriction adjunction identify finite reductions of the isomorphism induced on homotopy limits",
+   "results": "{\"t\": \"2026-10-22T06:04:36Z\", \"tool\": \"leanfinder\", \"query\": \"Morphism of Roos triangles and derived tensor restriction adjunction identify finite reductions of the isomorphism induced on homotopy limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.mapTrianglehIso\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Tor'_obj_map\", \"CochainComplex.mappingCone.mapTriangleIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso'\", \"CochainComplex.mappingCone.mapHomologicalComplexIso\"], \"digest\": \"2bd8b2387bf409a4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso₁_of_isIso₂₃|homEquiv_naturality|extendRestrictScalarsAdj",
+   "results": "{\"t\": \"2026-10-22T06:04:25Z\", \"tool\": \"grep\", \"query\": \"isIso₁_of_isIso₂₃|homEquiv_naturality|extendRestrictScalarsAdj\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\"], \"digest\": \"4b4930432d2aa4a2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf-tower assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|derivedComplete.*[Rr]eduction|homEquiv_naturality",
+   "results": "{\"t\": \"2026-10-22T06:57:13Z\", \"tool\": \"grep\", \"query\": \"Roos|derivedComplete.*[Rr]eduction|homEquiv_naturality\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"ae91f37e5a9037c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary adic completion, presheaf pullback, generic adjunction naturality or projective derived functors; none states this strict sheaf-tower realization and quotient-linear reduction assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of quotient coefficient sheaf towers with prescribed scalar extension adjoints of projections",
+   "results": "{\"t\": \"2026-10-22T06:57:14Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse limit of quotient coefficient sheaf towers with prescribed scalar extension adjoints of projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.of_comp_lift\", \"PresheafOfModules.pullback\", \"AdicCompletion.instModuleOfIsScalarTower.congr_simp\", \"InverseSystem.invLimEquiv_apply_coe\", \"Profinite.lim\", \"AdicCompletion.instModuleOfIsScalarTower\", \"Profinite.asLimitCone\", \"Profinite.asLimit\"], \"digest\": \"fd7e48e4e5f581de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary adic completion, presheaf pullback, generic adjunction naturality or projective derived functors; none states this strict sheaf-tower realization and quotient-linear reduction assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃",
+   "results": "{\"t\": \"2026-10-22T06:57:14Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.isIso₁_of_isIso₂₃\"], \"digest\": \"7c5e65fab84046ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: triangle-isomorphism ingredient only, already the Mathlib leaf lem-weil-derived-limit-levelwise-iso"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete sheaf complex realizes its strict reduction tower and prescribed quotient-linear isomorphisms by the actual inverse limit projections",
+   "results": "{\"t\": \"2026-10-22T06:57:24Z\", \"tool\": \"leanfinder\", \"query\": \"A derived complete sheaf complex realizes its strict reduction tower and prescribed quotient-linear isomorphisms by the actual inverse limit projections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.StrictMono.lift\", \"AdicCompletion.pi_apply_coe\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"IsAdicComplete.StrictMono.of_comp_lift\", \"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\"], \"digest\": \"18da1accd7c4c21c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary adic completion, presheaf pullback, generic adjunction naturality or projective derived functors; none states this strict sheaf-tower realization and quotient-linear reduction assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|Roos|homotopyLimit",
+   "results": "{\"t\": \"2026-10-22T06:58:37Z\", \"tool\": \"grep\", \"query\": \"derivedComplete|Roos|homotopyLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary adic completion, presheaf pullback, generic adjunction naturality or projective derived functors; none states this strict sheaf-tower realization and quotient-linear reduction assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism between homotopy limits induces the prescribed finite quotient maps by naturality of the derived tensor restriction adjunction",
+   "results": "{\"t\": \"2026-10-22T06:58:45Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism between homotopy limits induces the prescribed finite quotient maps by naturality of the derived tensor restriction adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc\", \"ComplexShape.Embedding.extendHomotopyFunctorFactors\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.Functor.mapHomotopyCategoryFactors\", \"HomotopyCategory.singleFunctorPostcompQuotientIso\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality_assoc\"], \"digest\": \"920bba13ffedb5ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern ordinary adic completion, presheaf pullback, generic adjunction naturality or projective derived functors; none states this strict sheaf-tower realization and quotient-linear reduction assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-adic-reconstruction",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Proof, final sentence \"realization ... displayed isomorphism ... compatibility with the reductions\"; retained returned proof steps 4-5: comparison of Roos triangles, isomorphy, projection equation and completed-coefficient adjunction.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-adic-roos-realization-reductions",
+  "worker": "stage1",
+  "summary": "Constructed the comparison with the specified total-limit object by rotated TR3 and the Roos-triangle isomorphism criterion. Used the actual strict-tower functor for F and its projection identity, then transposed that identity in D(B_n). Proved normalization by a composite-adjunction calculation, retaining all original hypotheses. Reused existing nodes throughout; no new nodes. Added the existing ringed strict-tower theorem as the explicit source of the total-limit functor used by the statement.",
+  "blueprint": "thm-pur-adic-reconstruction.proof.md, final sentence: realizes the displayed integral isomorphism and the asserted finite-reduction compatibility; unit sk-thm-purity-transport Step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic total right derived inverse limit and its natural Roos triangle on strict module towers; the purity unit does not construct this functor."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic scalar-associator and composite-unit normalization for arbitrary sheaf ring maps; used to compute adjoints of the two quotient comparison maps."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-87e79ed02",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-87e79ed02 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It is one commit with 0 new nodes, and the item was unsplit with no proof on the base. It answers no re-split note and the item is not on the dropped list. The only statement change adds the existing node lem-weil-pbc-ringed-strict-tower-homotopy-limit to the R lim clause, because def-weil-pbc-derived-inverse-limit and def-weil-derived-limit define a property, not a functor. No hypothesis or conclusion changed. Steps: (1) The triangle of def-weil-derived-complete is transported through prod Res_n(b^S_n). The conjugation of 1-s is exactly the quotient compatibility, and the unit equals c_n (x->x⊗1) by the reduction-tower and adjunction nodes; TR1 does the transport. (2) Rotate (TR2), apply TR3 with (1,1) and rotate back: iota[1]h=c[1] gives p_n e=c^S_n. Then lem-weil-derived-limit-levelwise-iso with identity levels makes e an isomorphism. (3) The ringed strict-tower lemma applies (small pro-etale skeleton, sheaf of commutative rings R, Tow_R the same category). The natural Roos triangle of G has levels Res_n(g_n), so F is an isomorphism and p^T_n F=Res_n(g_n)p^S_n. (4) Recomputed: the adjoint of Res(f)eta is f, so b^T_n red_n(gamma)=g_n b^S_n and b^T_n is invertible. (5) Recomputed both transposes: Res_m(tau)p^T_m=p^T_n by (1-s)iota=0 and the composite-unit identity of lem-sfb-successive-derived-quotient-normalization; no flatness is used. Edge cases checked: zero, m=n, non-flat B_2->B_1, unbounded P. Sources checked: Stacks 08TC (derived.tex 10442 and the TR1/TR3 paragraph after it), 014A, 0941 (sites-cohomology 5067), 07A6, 0D6D, 0G7E; blueprint main-20261015 thm-pur-adic-reconstruction final sentence; unit sk-thm-purity-transport Step 2. No SGA, no cycle, and proof_deps equals the step uses. Accepted tool_use: lem-sfb-successive-derived-quotient-normalization, off-route, a generic scalar associator. The ringed-lemma entry is in route and superfluous. Duplicate check: lem-pur-normalized-actual-reconstruction-maps, lem-coef-normalized-dvr-effectivity and lem-pur-integral-operation-roos-effectivity are not duplicates (different category or scope). Advisory: the worker wrote tool_uses itself (C8)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicRoosRealizationReductions",
+  "declaration": "WeilConjectures.AdicRoos.realization_reductions",
+  "declarations": [
+   "WeilConjectures.AdicRoos.adjunction",
+   "WeilConjectures.AdicRoos.quotientUnit",
+   "WeilConjectures.AdicRoos.evaluated",
+   "WeilConjectures.AdicRoos.projection",
+   "WeilConjectures.AdicRoos.reduction",
+   "WeilConjectures.AdicRoos.realization_reductions"
+  ],
+  "file": "lean/Sheaf/Paper/AdicRoosRealizationReductions.lean",
+  "statement": "theorem realization_reductions (P : completedIntegralDerivedCategory l E W D hl) (_hcomplete : IsDerivedComplete l E W D hl P) (S : normalizedDVRDerivedTowers l E W D hl) (Sfinite : ∀ n : ℕ, normalizedDVRDerived l E W n) (Siso : ∀ n : ℕ, (normalizedDVRTowerEvaluation l E W D hl n).obj S ≅ (normalizedDVRResCompleted l E W D hl n).obj (Sfinite n)) (bS : ∀ n : ℕ, (scalarReductionDerivedExtension l E W n).obj P ≅ Sfinite n) (_hbS : ∀ {m n : ℕ} (h : n ≤ m), (Siso m).inv ≫ (normalizedDVRTowerTransition l E W D hl h).app S ≫ (Siso n).hom = (normalizedDVRResCompleted l E W D hl m).map ((bS m).inv ≫ quotientUnit l E W D hl P h ≫ (normalizedDVRRes l E W h).map (bS n).hom) ≫ (normalizedDVRResCompletedComp l E W D hl h).hom.app (Sfinite n)) (T : NormalizedDVRTower l E W D hl) (G : S ⟶ T.tower) (g : ∀ n : ℕ, Sfinite n ≅ T.M n) (_hG : ∀ n : ℕ, (normalizedDVRTowerEvaluation l E W D hl n).map G ≫ (T.evaluationIso n).hom = (Siso n).hom ≫ (normalizedDVRResCompleted l E W D hl n).map (g n).hom) (RF : normalizedDVRDerivedTowers l E W D hl ⥤ completedIntegralDerivedCategory l E W D hl) (η : (lim : (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E W D hl) ⥤ completedIntegralModuleSheaves l E W D hl).mapHomologicalComplex (.up ℤ) ⋙ (@DerivedCategory.Q (completedIntegralModuleSheaves l E W D hl) _ _ (HasDerivedCategory.standard _)) ⟶ (@DerivedCategory.Q (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E W D hl) _ _ (HasDerivedCategory.standard _)) ⋙ RF) (_hRF : RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ completedIntegralModuleSheaves l E W D hl) (.up ℤ))) [HasCountableProducts (completedIntegralDerivedCategory l E W D hl)] (p : ∀ Z, RF.obj Z ⟶ ∏ᶜ (fun n : ℕ ↦ (evaluated l E W D hl Z).obj (op n))) (δ : ∀ Z, (∏ᶜ (fun n : ℕ ↦ (evaluated l E W D hl Z).obj (op n))) ⟶ (RF.obj Z)⟦(1 : ℤ)⟧) (_hroos : ∀ Z, IsDerivedLimitTriangle (fun n : ℕ ↦ (evaluated l E W D hl Z).map (homOfLE (Nat.le_succ n)).op) (RF.obj Z) (p Z) (δ Z)) (_hnatural : ∀ {Z Z' : normalizedDVRDerivedTowers l E W D hl} (v : Z ⟶ Z'), RF.map v ≫ p Z' = p Z ≫ Limits.Pi.map (fun n : ℕ ↦ (normalizedDVRTowerEvaluation l E W D hl n).map v)) : IsIso (RF.map G) ∧ ∃ e : P ≅ RF.obj S, (∀ n : ℕ, e.hom ≫ p S ≫ Limits.Pi.π _ n ≫ (Siso n).hom = (adjunction l E W D hl n).unit.app P ≫ (normalizedDVRResCompleted l E W D hl n).map (bS n).hom) ∧ (∀ n : ℕ, IsIso (reduction l E W D hl RF p T n)) ∧ (∀ n : ℕ, (e.hom ≫ RF.map G) ≫ projection l E W D hl RF p T n = (adjunction l E W D hl n).unit.app P ≫ (normalizedDVRResCompleted l E W D hl n).map (bS n).hom ≫ (normalizedDVRResCompleted l E W D hl n).map (g n).hom) ∧ (∀ n : ℕ, (scalarReductionDerivedExtension l E W n).map (e.hom ≫ RF.map G) ≫ reduction l E W D hl RF p T n = (bS n).hom ≫ (g n).hom) ∧ (∀ {m n : ℕ} (h : n ≤ m), reduction l E W D hl RF p T m ≫ T.tau h = quotientUnit l E W D hl (RF.obj T.tower) h ≫ (normalizedDVRRes l E W h).map (reduction l E W D hl RF p T n))",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e8514fd5e",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Single-module S2 delivery (Sheaf.Paper.AdicRoosRealizationReductions); node change is only the lean field; all 12 stmt_dep records are byte-identical to side-live; lean.statement is verbatim. Hypotheses checked against the node: P with IsDerivedComplete (published global predicate, equivalent to the recorded IntegralOnSlice.IsComplete none since the D-datum is ignored); S, Siso, bS and _hbS pin the evaluated transitions to Res_m(quotientUnit) = transpose of eta_n then comp^-1 (the [id⊗rho] map on K-flat models), which generalizes the strict reduction tower and is still true because Steps 1-2 use only the evaluated system; T is a NormalizedDVRTower; _hG says ev_n G = Res_n(g_n); RF, eta, p, delta, Roos triangle and natural p unpack ringedStrictTowerHomotopyLimitIndependentCoefficients (inhabited, as in NormalizedErrorTowerVanishing; delta-naturality dropped makes the statement stronger, and IsIso(RF.map G) transfers via rightDerivedUnique). The adjunction is .choose of a unit-pinned theorem. Conclusions: IsIso F; e with p_S e = c^S_n; b^T_n = adjoint of the actual projection is an iso; projection equation in D(R); red(gamma) then b^T_n = bS then g in D(B_n); the all-pairs quotient normalization was recomputed by double transpose using tower_tau and the cone property. Edge cases checked: exponent n+1, m=n, non-flat quotients, unbounded objects, empty W, independent universes d t u. Helpers are real, docstrings carry source and blueprint tags, proof is sorry, Mathlib Scheme.ProEt is used. Maintainer notes: adjunction, quotientUnit and reduction duplicate the NormalizedDVREffectivity helpers owned by the theorem node lem-coef-normalized-dvr-effectivity (not citable; suggest a def node); some public imports look unused; the second reading was a self-pass. No compile run (no FIX); relying on the worker's clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261024T190540-L-4099734",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

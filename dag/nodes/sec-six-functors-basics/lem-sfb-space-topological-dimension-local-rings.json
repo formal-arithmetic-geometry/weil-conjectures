@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-space-topological-dimension-local-rings",
+ "kind": "statement",
+ "title": "Topological dimension of a quasi-separated algebraic space as a supremum of local-ring dimensions",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space], with its atlas topology [def-a1-space-point-topology]. Assume that $X$ is quasi-separated, meaning that its diagonal $X\\to X\\times_SX$ is quasi-compact on scheme tests (inverse images of quasi-compact opens are quasi-compact). For an algebraic space $Z$ and a point $z\\in|Z|$, write $\\delta_Z(z)$ for the dimension of its local ring, namely the common value $\\dim\\mathcal O_{W,w}$ for an etale morphism $W\\to Z$ from a scheme and a point $w$ above $z$; $\\mathcal O_{W,w}$ is the stalk of the structure sheaf. Ring dimension is [def-weil-pbc-krull-dimension-ring] and etale morphisms are [def-weil-etale-morphism]. Then $$\\dim|X|=\\sup_{x\\in|X|}\\delta_X(x),$$ where topological dimension is [def-kun-topological-krull-dimension] and the supremum is in $\\{-\\infty,0,1,2,\\ldots,\\infty\\}$, so both sides are $-\\infty$ for the empty space. No quasi-compactness, Noetherian, finite-dimensionality, or equidimensionality hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JX, lemma-bounded-fibres (quasi-separated implies decent), with definition-very-reasonable; Tag 0A4J, lemma-dimension-decent-space (2); spaces-properties.tex, Tag 0BAN, lemma-dimension (1)=(2), with Tag 04NA, definition-dimension-local-ring."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-space-local-dimension-chart-invariance"
+ ],
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $a:U\\to X$ from a scheme, as provided by [def-trf-algebraic-space]. Surjectivity on field-valued point classes means that every $x\\in|X|$ has a preimage $u\\in U$ [def-trf-algebraic-space-jointly-surjective-family].",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 025Y, definition-algebraic-space; spaces-properties.tex, Tag 03BU, definition-points"
+   }
+  },
+  {
+   "text": "For completeness, the common value defining $\\delta_X(x)$ is independent of its chart. Given etale scheme charts $(W,w)$ and $(V,v)$ over $x$, [lem-a1-space-fibre-product-point] supplies a point $t\\in W\\times_X V$ projecting to $w,v$. Both projections are etale scheme maps by the definition of representable etale [def-trf-algebraic-space]. Apply the dimension equality of [lem-sfb-etale-stalk-invariants] to each projection at $t$: $\\dim\\mathcal O_{W,w}=\\dim\\mathcal O_{W\\times_X V,t}=\\dim\\mathcal O_{V,v}$. Taking $(W,w)=(U,u)$ yields $\\delta_X(a(u))=\\dim\\mathcal O_{U,u}$ for all $u$.",
+   "uses": [
+    "lem-a1-space-fibre-product-point",
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-stalk-invariants"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAM, lemma-pre-dimension-local-ring; Tag 03H4, lemma-points-cartesian; descent.tex, lemma-dimension-local-ring-local"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-quasiseparated-space-sober] to $X$ and [lem-sc-scheme-sober] to $U$. In a sober space a strict chain of irreducible closed subsets is precisely a strict chain of specializations of their generic points (in reverse order): inclusion of the closures is equivalent to specialization, and uniqueness of generic points makes strictness equivalent to distinct points. Thus [def-kun-topological-krull-dimension] computes dimension as the supremum of lengths of strict specialization chains in both spaces. By [lem-sfb-quasiseparated-space-etale-specializations], $a$ sends a strict chain in $U$ to a strict chain in $|X|$: continuity preserves specializations, and the noncollapse clause prevents equal adjacent images. Conversely, take a chain $x_d\\leadsto\\cdots\\leadsto x_0$ in $|X|$, choose $u_0$ above $x_0$ by step 1, and successively apply its lifting clause to obtain $u_i\\leadsto u_{i-1}$ above $x_i$. Distinct images force distinct adjacent lifts. The possible finite chain lengths therefore coincide, so $\\dim|X|=\\dim|U|$, including empty and unbounded cases.",
+   "uses": [
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sc-scheme-sober",
+    "def-kun-topological-krull-dimension",
+    "lem-sfb-quasiseparated-space-etale-specializations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 0A4J, lemma-dimension-decent-space, proof; point comparisons Tags 03K6, 03IL and 03K5."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-scheme-dimension-local-rings] to $U$, obtaining $\\dim|U|=\\sup_{u\\in U}\\dim\\mathcal O_{U,u}$. There is no Noetherian or quasi-compactness hypothesis on this scheme comparison.",
+   "uses": [
+    "lem-pc-scheme-dimension-local-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 04MU, lemma-dimension (1)=(2)"
+   }
+  },
+  {
+   "text": "Put $D=\\sup_{x\\in|X|}\\delta_X(x)$ and $E=\\sup_{u\\in U}\\dim\\mathcal O_{U,u}$. Step 2 gives $\\dim\\mathcal O_{U,u}=\\delta_X(a(u))\\leq D$ for every $u$, hence $E\\leq D$. Conversely, for each $x$ choose $u$ above it by step 1; then $\\delta_X(x)=\\dim\\mathcal O_{U,u}\\leq E$, hence $D\\leq E$. Steps 3 and 4 now give $\\dim|X|=E=D$. If $X$ is empty, so is $U$, and both suprema are $-\\infty$. The same upper-bound argument covers infinite dimension without any finite supremum being attained.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0BAN, lemma-dimension, proof reindexing along a surjective etale atlas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "lem-a1-space-fibre-product-point",
+  "lem-sfb-etale-stalk-invariants",
+  "lem-sfb-quasiseparated-space-sober",
+  "lem-sc-scheme-sober",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-quasiseparated-space-etale-specializations",
+  "lem-pc-scheme-dimension-local-rings"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0BAN, lemma-dimension, proof; atlas comparison from decent-spaces.tex Tags 03JX and 0A4J; chart independence from Tag 0BAM."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The topological dimension of a quasi separated algebraic space equals the supremum of the dimensions of its etale local rings",
+   "results": "OK 8 hits; AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, Algebra.etaleLocus, Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus, AlgebraicGeometry.Scheme.Etale, Algebra.etaleLocus_eq_univ_iff_etale",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dimension of a decent algebraic space is the supremum of local ring dimensions and equals dimension of its underlying topological space",
+   "results": "OK 8 hits; AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Module.supportDim_self_eq_ringKrullDim, Algebra.IsStandardSmoothOfRelativeDimension.out, topologicalKrullDim, Algebra.Presentation.localizationAway_dimension_zero, Algebra.IsStandardSmooth.relativeDimension, AlgebraicGeometry.Scheme.height_of_isClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDim\", \"iSup\"",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*iSup|iSup.*topologicalKrullDim|[Aa]lgebraic[Ss]pace",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a quasi separated algebraic space the supremum of the dimensions of etale local rings equals the topological Krull dimension",
+   "results": "OK 8 hits; topologicalKrullDim, Ideal.sup_height_eq_ringKrullDim, Ideal.sup_primeHeight_eq_ringKrullDim, Ideal.sup_primeHeight_of_maximal_eq_ringKrullDim, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, Order.krullDim_eq_iSup_height",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, or order results do not state the algebraic-space assertion or specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?space|ringKrullDim.*[Ee]tale|[Ee]tale.*ringKrullDim",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, ring spectra, or definitions, not the comparison for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Topological dimension of a quasi separated algebraic space is the supremum of etale chart local ring dimensions",
+   "results": "OK 8 hits: topologicalKrullDim, QuasiSeparatedSpace, PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, PrimeSpectrum.instQuasiSeparatedSpace, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, ring spectra, or definitions, not the comparison for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"Etale\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, ring spectra, or definitions, not the comparison for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic space the dimensions of scheme local rings in etale charts above the same point are equal",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, RingHom.Etale.propertyIsLocal, Algebra.etaleLocus, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.mem_etaleLocus_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, ring spectra, or definitions, not the comparison for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*(stalk|iSup)|ringKrullDim_stalk|algebraic.?space",
+   "results": "OK 2 hits: Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/AlgebraicGeometry/Properties.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, ring spectra, or definitions, not the comparison for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of the topological space of a quasi-separated algebraic space equals the supremum of stalk dimensions on a surjective etale scheme atlas",
+   "results": "OK 8 hits: PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, topologicalKrullDim, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, ring spectra, or definitions, not the comparison for algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasifinite-source-dimension-bound",
+  "date": "2026-10-22",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN.",
+   "via": [
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-topological-dimension-local-rings",
+  "worker": "stage1",
+  "summary": "Proved chart independence and both supremum inequalities using existing etale stalk invariance and scheme dimension comparison. The atlas comparison is proved directly by matching finite specialization chains, using two new statement-only prerequisites for sobriety and etale specialization lifting/noncollapse of quasi-separated spaces. Removed a citation to the atlas-dimension node after the live DAG added a reverse dependency. Original statement unchanged.",
+  "blueprint": "Supports the chart local-ring bounds in Tag 0ADD in the descendant branch recorded in blueprint.from.place: the atlas comparison and scheme supremum formula realize the dimension conversion. The latest direct-images proof (3) was read; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-fibre-product-point",
+    "why": "Generic point lifting over an algebraic space supplies a common etale refinement point; this unit has no replacement for that point-set tool."
+   },
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic scheme dimension comparison used on the atlas; this unit supplies the algebraic-space comparison but no separate scheme theorem."
+   },
+   {
+    "node": "def-trf-algebraic-space-jointly-surjective-family",
+    "why": "Definition of surjectivity on point classes used to reindex the atlas supremum."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic sobriety theorem for the scheme atlas, needed to interpret its dimension by chains of points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-fibre-product-point",
+  "lem-pc-scheme-dimension-local-rings",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "lem-sc-scheme-sober"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-59d87583d",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-59d87583d (reviewer sub-agent of L); spot-checked: PASS with no changes. Full review in review.md. Item statement unchanged. Its relative quasi-separatedness over S gives (zeta) Zariski-locally quasi-separated, so X is decent by Stacks 03JX (lemma-bounded-fibres); the target is not weakened. Step 1: the surjective atlas gives surjectivity on |X|, a two-line argument from def-trf-algebraic-space and the jointly-surjective definition, so 'elementary' is fair. Step 2: chart independence from lem-a1-space-fibre-product-point (03H4) plus the dimension clause of lem-sfb-etale-stalk-invariants applied to both etale projections; that node has no Noetherian hypothesis. Step 3: the chain argument of 0A4J (decent-spaces.tex), which I read in source. Sobriety of X (new node) and of U (lem-sc-scheme-sober, 01IS) turn strict closed-irreducible chains into chains of distinct specializations. Images of U-chains stay strict by noncollapse (03K5); X-chains lift step by step through the lifting clause (03IL), with the same direction as Stacks. Step 4: lem-pc-scheme-dimension-local-rings (04MU). Step 5: two elementary sup inequalities, empty case included. New node lem-sfb-quasiseparated-space-sober matches 03K6 proposition-reasonable-sober. New node lem-sfb-quasiseparated-space-etale-specializations matches 03IL and 03K5 lemma-decent-no-specializations-map-to-same-point exactly; its continuity clause follows from the final topology. Both are statement-only, self-contained and strictly smaller than the item. Duplicate search: the existing atlas-dimension nodes (Q83 and Q33 lem-sfb-space-etale-atlas-topological-dimension) state dim|Y|=dim|U| but depend on this item, so citing them would make a cycle. No node states sobriety or specialization lifting for algebraic spaces; the finite-groupoid incomparability node needs finite s,t. My script over the snapshot found no cycle. Batch-5: def-trf-algebraic-space, def-a1-space-point-topology and def-trf-algebraic-space-jointly-surjective-family are general definitions; lem-a1-space-fibre-product-point is the point-set lemma 03H4. None is a step of the trace formula or Poincare duality. The item's whole closure contains only those two sec-trace-formula definitions and no sec-poincare-duality node. The split_report tool_uses (fibre-product point, scheme sobriety, scheme dimension, jointly-surjective definition) are generic and accepted. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceTopologicalDimensionLocalRings",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.topologicalKrullDim_eq_iSup_etaleLocalRingDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceTopologicalDimensionLocalRings.lean",
+  "statement": "theorem topologicalKrullDim_eq_iSup_etaleLocalRingDimension {S : Scheme.{u}} (X : AlgebraicSpace S) (hqs : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 X.obj.obj) (𝟙 X.obj.obj))) : topologicalKrullDim (Point X.obj.obj) = ⨆ x : Point X.obj.obj, ((etaleChart_localDimension X x).2.2.exists.choose : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The local-ring dimension is the unique ENat value of the landed etaleChart_localDimension theorem (lem-sfb-space-local-dimension-chart-invariance), chosen directly and coerced to WithBot ENat. Its unique specification determines this value independently of the etale chart. The original statement and proof split are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c09b9827",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: S, X : AlgebraicSpace S, Point topology, hqs = relative diagonal qc on scheme tests (same idiom as IsAlgebraicSpace), δ_X(x) = unique ∃! value of landed etaleChart_localDimension (04NA stalk ringKrullDim), topologicalKrullDim = ⨆ x in WithBot ℕ∞. Mechanical theorem-stmt_dep finding: the dep module holds only the theorem (no defs) and the item uses its constructed ∃! value, so the statement genuinely depends on the conclusion → PASS on that point; etaleLocalDimension (topologicalKrullDimAt) is a different notion. Relative qs ⇒ Zariski-locally qs ⇒ decent (03JX ζ), so 0A4J(2)+0BAN give the claim. Edge cases (empty ⇒ ⊥, field, generic point, ∞, universes) OK. Node diff vs side-live: only lean + added landed stmt_dep (Q64 S2 PASS 2026-10-23). Statement verbatim, sorry only, docstrings with source/blueprint/5 steps, report sections present. No compile (no change)."
+ }
+}

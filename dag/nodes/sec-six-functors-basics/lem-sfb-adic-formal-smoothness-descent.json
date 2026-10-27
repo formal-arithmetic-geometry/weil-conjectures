@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-adic-formal-smoothness-descent",
+ "kind": "statement",
+ "title": "Adic formal smoothness ascends and descends through a smooth complete local map",
+ "statement": "Let $R\\to C\\to H$ be local homomorphisms of commutative Noetherian local rings [def-weil-pbc-noetherian-ring]; local means having a unique maximal ideal and sending the source maximal ideal into the target maximal ideal. Assume that $C$ and $H$ are complete for their maximal-ideal-adic topologies [def-weil-pbc-adic-completion] and that $C\\to H$ is formally smooth for the $\\mathfrak m_H$-adic topology [def-weil-pbc-formally-smooth-adic]. No completeness assumption on $R$ and no separability assumption on residue field extensions is imposed. Then $R\\to C$ is formally smooth for the $\\mathfrak m_C$-adic topology if and only if $R\\to H$ is formally smooth for the $\\mathfrak m_H$-adic topology.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PM, proposition-fs-regular, (1) iff (4), Tag 07NT, lemma-regular-permanence, and Tag 07ED, lemma-formally-smooth-completion. This is the algebraic argument in stacks-geometry.tex Tag 0DZS, lemma-characterize-smoothness, second paragraph; ascending direction is lemma-compose-formally-smooth."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [
+  {
+   "text": "For ascent write $i:C\\to H$. In a square-zero lifting problem $\\alpha:R\\to D$, $J^2=0$, $g:H\\to D/J$ with $g(\\mathfrak m_H^n)=0$, locality gives $gi(\\mathfrak m_C^n)=0$. Formal smoothness of $C/R$ gives a lift $a:C\\to D$ of $gi$, with $a|_R=\\alpha$. Make $D$ a $C$-algebra by $a$; then $g$ is a $C$-algebra map. Formal smoothness of $H/C$ gives a $C$-algebra lift $b:H\\to D$. Thus $b|_R=\\alpha$ and $qb=g$, proving ascent directly from the lifting definition. No new composition lemma is needed.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "lemma-compose-formally-smooth, its diagram hint, expanded for local adic maps; Definition 07NI and Lemma 07EC."
+   }
+  },
+  {
+   "text": "For descent assume $R\\to H$ is adically formally smooth. Put $A=\\widehat R$, with canonical map $c:R\\to A$. The completion is Noetherian by lem-weil-pbc-adic-completion-noetherian, local with maximal ideal $\\mathfrak m_RA$ by lem-weil-pbc-local-completion-local-ring, and complete for that ideal by lem-weil-pbc-adic-completion-mod-ideal. The local maps $R\\to C,H$ induce compatible maps on quotients by each maximal-ideal power, hence maps from $A$ to $\\widehat C,\\widehat H$. Identify these last two completions with $C,H$ by their assumed completeness. This defines local maps $f:A\\to C$ and $h:A\\to H$: the generators from $\\mathfrak m_R$ map into the respective maximal ideals. If $i:C\\to H$ is the given map, then $if=h$, since their coordinates modulo every $\\mathfrak m_H^n$ agree, and completeness includes injectivity into the inverse limit. By lem-weil-pbc-fs-adic-complete-source-target applied to $R\\to H$, $h$ is formally smooth for the $\\mathfrak m_H$-adic topology. The identification $\\widehat H=H$ takes the extended maximal ideal to $\\mathfrak m_H$.",
+   "uses": [
+    "def-weil-pbc-adic-completion",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-fs-adic-complete-source-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07ED (lemma-formally-smooth-completion), 07PM (proposition-fs-regular), 07NT (lemma-regular-permanence); the descent argument of stacks-geometry.tex Tag 0DZS (lemma-characterize-smoothness), second paragraph."
+   }
+  },
+  {
+   "text": "Apply lem-weil-pbc-formally-smooth-complete-local-regular to $h:A\\to H$; both rings are now complete Noetherian local rings, so $h$ is regular. The given adic formal smoothness of $i:C\\to H$ implies flatness by lem-weil-pbc-fs-adic-local-flat. Since $i$ is local, lem-weil-pbc-flat-local-hom-faithfully-flat supplies surjectivity of $\\operatorname{Spec}H\\to\\operatorname{Spec}C$. Thus lem-weil-pbc-regular-permanence applies to $A\\to C\\to H$ and proves that $f:A\\to C$ is regular.",
+   "uses": [
+    "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "lem-weil-pbc-fs-adic-local-flat",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-regular-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07ED (lemma-formally-smooth-completion), 07PM (proposition-fs-regular), 07NT (lemma-regular-permanence); the descent argument of stacks-geometry.tex Tag 0DZS (lemma-characterize-smoothness), second paragraph."
+   }
+  },
+  {
+   "text": "Let $k=A/\\mathfrak m_A$ and $B=C/\\mathfrak m_AC$. By the definition of a regular ring map, $f$ is flat and its closed fibre $B=C\\otimes_Ak$ is Noetherian and geometrically regular over $k$. It is local with maximal ideal the image of $\\mathfrak m_C$, since it is a quotient of the local ring $C$ by the proper ideal $\\mathfrak m_AC\\subseteq\\mathfrak m_C$. Apply lem-sfb-geometrically-regular-local-field-adic-smooth to this $k$-algebra $B$. Its conclusion is exactly adic formal smoothness of the closed fibre required by lem-weil-pbc-flat-formally-smooth-closed-fibre-adic, which therefore proves adic formal smoothness of $f:A\\to C$. In particular no separability condition on $k\\to C/\\mathfrak m_C$ is inserted.",
+   "uses": [
+    "def-weil-pbc-g-ring",
+    "lem-sfb-geometrically-regular-local-field-adic-smooth",
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07ED (lemma-formally-smooth-completion), 07PM (proposition-fs-regular), 07NT (lemma-regular-permanence); the descent argument of stacks-geometry.tex Tag 0DZS (lemma-characterize-smoothness), second paragraph."
+   }
+  },
+  {
+   "text": "Return to an arbitrary lifting problem for $R\\to C$: let $\\alpha:R\\to D$, $J^2=0$, and $g:C\\to D/J$ with $g(\\mathfrak m_C^n)=0$ and $q\\alpha=gfc$. Locality gives $\\alpha(\\mathfrak m_R^n)\\subseteq J$, hence $\\alpha(\\mathfrak m_R^{2n})=0$. Factor $\\alpha$ through $R/\\mathfrak m_R^{2n}$ and compose with the coordinate projection of $A$ to define $\\widehat\\alpha:A\\to D$. By lem-weil-pbc-adic-completion-mod-power this extends $\\alpha$ and kills $\\mathfrak m_R^{2n}A=\\mathfrak m_A^{2n}$. Also $gf$ kills $\\mathfrak m_A^n$, since $f$ is local. Consequently $q\\widehat\\alpha$ and $gf$ both factor through $A/\\mathfrak m_A^{2n}\\cong R/\\mathfrak m_R^{2n}$ and agree there: every class has a representative in $R$, where the original square commutes. Give $D$ its $A$-algebra structure via $\\widehat\\alpha$. The adic formal smoothness of $f$ from the preceding step gives an $A$-algebra lift $b:C\\to D$ of $g$. Its restriction to $R$ is $\\widehat\\alpha c=\\alpha$. This solves every original lifting problem and proves descent.",
+   "uses": [
+    "def-weil-pbc-formally-smooth-adic",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07ED (lemma-formally-smooth-completion), 07PM (proposition-fs-regular), 07NT (lemma-regular-permanence); the descent argument of stacks-geometry.tex Tag 0DZS (lemma-characterize-smoothness), second paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-fs-adic-local-flat",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-regular-permanence",
+  "def-weil-pbc-g-ring",
+  "lem-sfb-geometrically-regular-local-field-adic-smooth",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-weil-pbc-adic-completion-mod-power"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 07ED (lemma-formally-smooth-completion), 07PM (proposition-fs-regular), 07NT (lemma-regular-permanence); the descent argument of stacks-geometry.tex Tag 0DZS (lemma-characterize-smoothness), second paragraph."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*[Aa]dic|[Aa]dic.*FormallySmooth|IsSmoothAt",
+   "results": "[grep] OK 17 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"385\", \"text\": \"      Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial (R := R) (p := m.asIdeal)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"28\", \"text\": \"- `IsSmoothAt.exists_notMem_isStandardSmooth`: If `S` is `R`-smooth at a prime `p`,\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"104\", \"text\": \"theorem IsSmoothAt.exists_notMem_isStandardSmooth [FinitePresentation R S] (p : Ideal S) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"105\", \"text\": \"    [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"109\", \"text\": \"  · obtain ⟨g, hg, hsm⟩ := IsSmoothAt.exists_notMem_smooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree.lean\", \"line\": \"157\", \"text\": \"  choose f hf₁ hf₂ using IsSmoothAt.exists_notMem_isStandardSmooth R (S := S)\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"33\", \"text\": \"- `Algebra.IsSmoothAt.exists_isStandardEtale_mvPolynomial`:\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"387\", \"text\": \"theorem IsSmoothAt.exists_isStandardEtale_mvPolynomial\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"388\", \"text\": \"    {p : Ideal S} [p.IsPrime] [FinitePresentation R S] [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalStructure.lean\", \"line\": \"392\", \"text\": \"  obtain ⟨f, hfp, H⟩ := IsSmoothAt.exists_notMem_isStandardSmooth R p\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"46\", \"text\": \"abbrev IsSmoothAt (p : Ideal A) [p.IsPrime] : Prop :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"51\", \"text\": \"def smoothLocus : Set (PrimeSpectrum A) := { p | IsSmoothAt R p.asIdeal }\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"150\", \"text\": \"lemma IsSmoothAt.exists_notMem_smooth [FinitePresentation R A] (p : Ideal A) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Locus.lean\", \"line\": \"151\", \"text\": \"    [IsSmoothAt R p] :\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"194\", \"text\": \"lemma IsSmoothAt.of_formallySmooth_fiber\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"line\": \"197\", \"text\": \"    Algebra.IsSmoothAt R q := by\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*completion|completion.*formallySmooth|FormallySmoothAdic",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If B to C is an adically formally smooth homomorphism of complete Noetherian local rings then R to B is adically formally smooth if and only if R to C is",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"RingHom.FormallySmooth.stableUnderComposition\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.StableUnderComposition @RingHom.FormallySmooth\", \"doc\": \"The composition of two formally smooth ring homomorphisms between commutative semirings is itself a formally smooth ring homomorphism.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.HoldsForLocalizationAway @RingHom.FormallySmooth\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth, then the canonical homomorphism from $ R $ to the localization of $ S $ at any element $ r $ also satisfies for\"}\n  {\"name\": \"Algebra.FormallySmooth.comp\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u_5) [inst_1 : CommRing A] [inst_2 : Algebra R A] (B : Type u_6)\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallySmooth R A]\\n  [Algebra.FormallySmooth A B], Algebra.FormallySmooth R B\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $ and $ B $ is a formally smooth algebra over $ A $, then $ B $ is a formally smooth algebra over $ R $.\"}\n  {\"name\": \"RingHom.FormallySmooth.localizationPreserves\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.LocalizationPreserves @RingHom.FormallySmooth\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then for any submonoid $ M \\\\subseteq R $, the induced homomorphism between localizations $ R_M \\\\to S_{f(M)} $ i\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal smoothness for the maximal ideal adic topology descends and ascends along a formally smooth local map of complete Noetherian local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.HoldsForLocalizationAway @RingHom.FormallySmooth\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth, then the canonical homomorphism from $ R $ to the localization of $ S $ at any element $ r $ also satisfies for\"}\n  {\"name\": \"RingHom.FormallySmooth.localizationPreserves\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.LocalizationPreserves @RingHom.FormallySmooth\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then for any submonoid $ M \\\\subseteq R $, the induced homomorphism between localizations $ R_M \\\\to S_{f(M)} $ i\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_base\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {Rₘ : Type u_6} {Sₘ : Type u_7} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallySmooth R Sₘ], Algebra.Forma\", \"doc\": \"If $ S $ is a formally smooth $ R $-algebra, then the localization $ S_m $ is a formally smooth $ R_m $-algebra, where $ R_m $ and $ S_m $ denote the localizations of $ R $ and $ S $ at a multiplicati\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_map\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {A : Type u_5} {Rₘ : Type u_6} {Sₘ : Type u_7} [inst : CommRing R] [inst_1 : CommRing A]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R A] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra A Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the localization of $ A $ at a submonoid $ M $ is a formally smooth algebra over the localization of $ R $ at $ M $. This mean\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness for the maximal ideal adic topology descends and ascends along a formally smooth local map of complete Noetherian local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} [IsAdicComplete I S] (f : A →ₐ[R] S ⧸ I) : ∃ (g : A →ₐ[R] S), (Ideal.Quotient.mkₐ _ _).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange @FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}\n  {\"name\": \"RingHom.FormallySmooth.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": RespectsIso @FormallySmooth\", \"doc\": \"For commutative rings $R, S, T$, if a ring homomorphism $f : R → S$ is formally smooth, then the composition of $f$ with a ring isomorphism $e : S ≅ T$ yields a formally smooth homomorphism $R → T$. S\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"AdicCompletion\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {S : Type u_3} [CommRing S] [Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I) : ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"If `A` is formally smooth over `R`, any map `A →ₐ[R] S ⧸ I` lifts\\nto `A →ₐ[R] AdicCompletion I S`.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give scheme or discrete ring formal smoothness, completion lifting, or unrelated universal constructions; none states this stack/formal-deformation or maximal-ideal-adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal smoothness for the maximal ideal adic topology descends and ascends along a formally smooth local map of complete Noetherian local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.HoldsForLocalizationAway @RingHom.FormallySmooth\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth, then the canonical homomorphism from $ R $ to the localization of $ S $ at any element $ r $ also satisfies for\"}\n  {\"name\": \"RingHom.FormallySmooth.localizationPreserves\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"RingHom.LocalizationPreserves @RingHom.FormallySmooth\", \"doc\": \"If $ f : R \\\\to S $ is a formally smooth ring homomorphism between commutative semirings, then for any submonoid $ M \\\\subseteq R $, the induced homomorphism between localizations $ R_M \\\\to S_{f(M)} $ i\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_base\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {Rₘ : Type u_6} {Sₘ : Type u_7} [inst : CommRing R] [inst_1 : CommRing Rₘ] [inst_2 : CommRing Sₘ]\\n  (M : Submonoid R) [inst_3 : Algebra R Sₘ] [inst_4 : Algebra R Rₘ] [inst_5 : Algebra Rₘ Sₘ] [IsScalarTower R Rₘ Sₘ]\\n  [IsLocalization M Rₘ] [Algebra.FormallySmooth R Sₘ], Algebra.Forma\", \"doc\": \"If $ S $ is a formally smooth $ R $-algebra, then the localization $ S_m $ is a formally smooth $ R_m $-algebra, where $ R_m $ and $ S_m $ denote the localizations of $ R $ and $ S $ at a multiplicati\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_map\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {A : Type u_5} {Rₘ : Type u_6} {Sₘ : Type u_7} [inst : CommRing R] [inst_1 : CommRing A]\\n  [inst_2 : CommRing Rₘ] [inst_3 : CommRing Sₘ] (M : Submonoid R) [inst_4 : Algebra R A] [inst_5 : Algebra R Sₘ]\\n  [inst_6 : Algebra A Sₘ] [inst_7 : Algebra R Rₘ] [inst_8 : Algebra Rₘ Sₘ] [IsSca\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the localization of $ A $ at a submonoid $ M $ is a formally smooth algebra over the localization of $ R $ at $ M $. This mean\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {B : Type u_1} →\\n            [inst_3 : CommRing B] →\\n              [inst_4 : Algebra R B] →\\n                [Algebra.FormallySmooth R A] → (I : Ideal B) → IsNilpotent I \", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_lift\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {B : Type u_1}\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallySmooth R A] (I : Ideal B),\\n  IsNilpotent I → ∀ (g : A →ₐ[R] B ⧸ I), ∃ f, (Ideal.Quotient.mkₐ R I).comp f = g\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ a formally smooth $ R $-algebra, $ B $ a ring with a nilpotent ideal $ I $, and $ g: A \\\\to B/I $ an $ R $-algebra homomorphism. Then there exists an $ R $-algebr\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal smoothness for the maximal ideal adic topology descends and ascends along a formally smooth local map of complete Noetherian local rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.FormallySmooth\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth if the induced algebra structure on $ S $ over $ R $ satisfies the formal smoothness lifting property for algebra h\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} [IsAdicComplete I S] (f : A →ₐ[R] S ⧸ I) : ∃ (g : A →ₐ[R] S), (Ideal.Quotient.mkₐ _ _).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"(p : Ideal A) [p.IsPrime] : Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"RingHom.FormallySmooth.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": IsStableUnderBaseChange @FormallySmooth\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a ring homomorphism $ R \\\\to S $ is formally smooth, then the base changed homomorphism $ R' \\\\t\"}\n  {\"name\": \"RingHom.FormallySmooth.respectsIso\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": RespectsIso @FormallySmooth\", \"doc\": \"For commutative rings $R, S, T$, if a ring homomorphism $f : R → S$ is formally smooth, then the composition of $f$ with a ring isomorphism $e : S ≅ T$ yields a formally smooth homomorphism $R → T$. S\"}\n  {\"name\": \"Algebra.FormallySmooth.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \": FormallySmooth R Rₘ\", \"doc\": \"If $ R $ is a commutative ring and $ R_m $ denotes its localization at a multiplicative set, then the natural algebra structure of $ R_m $ over $ R $ is formally smooth. In other words, the localizati\"}\n  {\"name\": \"Algebra.FormallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The algebra $ A $ over the commutative ring $ R $ is formally smooth, meaning it satisfies the formal smoothness lifting property for algebra homomorphisms.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"AdicCompletion\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \" {R : Type u_1} {A : Type u_2} [CommRing R] [CommRing A] [Algebra R A] {S : Type u_3} [CommRing S] [Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I) : ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"If `A` is formally smooth over `R`, any map `A →ₐ[R] S ⧸ I` lifts\\nto `A →ₐ[R] AdicCompletion I S`.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*completion|completion.*formallySmooth|FormallySmoothAdic",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"line\": \"92\", \"text\": \"See `Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq` for a version\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern discrete formal smoothness, finite-presentation smoothness, or completion lifts; none gives adic formal smoothness from geometric regularity for an arbitrary Noetherian local field algebra"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-artinian-smoothness-criterion",
+  "date": "2026-10-23",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Smooth points of the stack of curves detected by unobstructed deformations. Supporting input for Tag 0DZU: the final application of the general smoothness criterion after identifying the two deformation groupoids. Supporting input: Adic formal smoothness ascends and descends through a smooth complete local map.",
+   "via": [
+    "lem-sfb-stack-artinian-smoothness-criterion",
+    "lem-sfb-curve-smooth-locus-deformation-test",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-adic-formal-smoothness-descent",
+  "worker": "stage1",
+  "summary": "Followed the Stacks 0DZS regularity descent argument with the indispensable completion of the possibly noncomplete source. Expanded composition and reverse completion as square-zero lifting diagrams; reused all available completion/flatness/descent nodes; added only the reverse geometric-regularity-to-adic-smoothness field lemma (07EL). Statement unchanged.",
+  "blueprint": "Realizes the inherited direct-image alteration supporting chain through the stack Artinian smoothness criterion; specifically its use of 0DZS to compare adic formal smoothness across a smooth complete local map. The current blueprint direct-image proof has a different compactification presentation; this split changes no unit route. The ancestor command returns None, retained faithfully with its inherited via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input in the Stacks 0DZS descent/completion argument; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-complete-source-target",
+    "why": "Generic commutative-algebra input in the Stacks 0DZS descent/completion argument; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-formally-smooth-complete-local-regular",
+    "why": "Generic commutative-algebra input in the Stacks 0DZS descent/completion argument; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-local-flat",
+    "why": "Generic commutative-algebra input in the Stacks 0DZS descent/completion argument; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-permanence",
+    "why": "Generic commutative-algebra input in the Stacks 0DZS descent/completion argument; the six-functor unit has no replacement for this algebraic statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "why": "Generic commutative-algebra input in the Stacks 0DZS descent/completion argument; the six-functor unit has no replacement for this algebraic statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-fs-adic-complete-source-target",
+  "lem-weil-pbc-formally-smooth-complete-local-regular",
+  "lem-weil-pbc-fs-adic-local-flat",
+  "lem-weil-pbc-regular-permanence",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q111-8b7dec94a",
+  "group": "Q111",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-8b7dec94a (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and the new node in full against 0DZS (second paragraph), 07ED, 07EL, 07NQ, 07PM and 07NT in Stacks. Item statement unchanged; no SGA cited; not a re-split (no repair note). Step 1 (ascent) is two lifts from the definition, elementary and checked. Step 2: A=R^ is Noetherian local with m_A=m_R A and complete (the noetherian, local-completion and mod-ideal nodes). f and h come from the quotient maps, and if=h because H is separated. 07ED gives h formally smooth for m_H. Step 3: 07PM(4)=>(1) applies to h because both rings are complete; 07NP gives i flat and 00HR gives surjectivity on Spec; 07NT gives f regular. Step 4: the regular closed fibre C/m_A C at p=m_A is local and geometrically regular. The new node (07EL (1)=>(2)) supplies the fibre hypothesis of flat-formally-smooth-closed-fibre-adic (07NQ (2)=>(3)), which gives f formally smooth. This is the 07PM (1)=>(4) route. Step 5: alpha kills m_R^{2n}, alpha^ comes from pi_{2n} (mod-power kernel m_A^{2n}), and the two maps agree on representatives c(r); the A-lift restricts to alpha. All checked. New node: the reverse field implication of 07EL, true in both characteristics (in char 0 geometric regularity gives regularity via k'=k). Statement only (B1-B5 fine). The DAG has only the forward direction (fs-adic-field-geometrically-regular / regular-local / closed-fibre nodes); rg -L for 07EL/07PM/07NQ/07EJ/regular-implies-fs plus a statement scan found no duplicate, and there is no Lean or Mathlib reverse declaration. Small cases: k[[x]] holds; F_p(t)(t^{1/p}) and k[eps] are excluded by the hypothesis. blueprint_refs returns no ancestor and no match, so from.node=null is inherited. Tool uses: the split_report.tool_uses entries for the generic sk-thm-p1 commutative-algebra nodes are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicFormalSmoothnessDescent",
+  "declaration": "Algebra.formallySmoothAdic_iff_of_smoothCompleteLocalMap",
+  "file": "lean/Sheaf/RingTheory/AdicFormalSmoothnessDescent.lean",
+  "statement": "theorem formallySmoothAdic_iff_of_smoothCompleteLocalMap (R : Type u) (C : Type v) (H : Type w) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] [CommRing C] [IsLocalRing C] [IsNoetherianRing C] [CommRing H] [IsLocalRing H] [IsNoetherianRing H] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [IsAdicComplete (IsLocalRing.maximalIdeal H) H] (f : R →+* C) [IsLocalHom f] (g : C →+* H) [IsLocalHom g] : @FormallySmoothAdic C H _ _ g.toAlgebra (IsLocalRing.maximalIdeal H) → (@FormallySmoothAdic R C _ _ f.toAlgebra (IsLocalRing.maximalIdeal C) ↔ @FormallySmoothAdic R H _ _ (g.comp f).toAlgebra (IsLocalRing.maximalIdeal H))",
+  "by": "Q71",
+  "date": "2026-10-24",
+  "existing": false,
+  "branch": "sheaf-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4563b03e9",
+  "group": "Q71",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: R,C,H CommRing+IsLocalRing+IsNoetherianRing in independent universes u,v,w; f,g with IsLocalHom; IsAdicComplete (maximalIdeal C/H) for C,H only; FormallySmoothAdic C H via g.toAlgebra as premise; iff between FormallySmoothAdic R C (f.toAlgebra, m_C) and FormallySmoothAdic R H ((g.comp f).toAlgebra, m_H), fully parenthesised. Only the lean field changed versus live; the lean record is complete and the statement is verbatim in the file. No duplicate (AdicSmoothFixedResidueLifting is a different criterion). sorry only; docstrings carry source, blueprint id and the 5 node proof steps; lines under 100 characters; proof_dep imports all exist on side-live. Advisory: FormallySmoothAdic's D universe is max of the source and target universes, so stage 3 needs a small-subring universe-invariance lemma; the statement is still provable as written. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,434 @@
+{
+ "id": "lem-sfb-norm-algcl-evaluated-bar-augmentation",
+ "kind": "statement",
+ "title": "Canonical evaluated norm-algebraic-closure bar augmentation for finite-rank actions",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, a finite intermediate field $E$, an integer $d\\geq0$, and a profinite group $G$ (compact Hausdorff and totally disconnected). Let $\\rho:G\\to\\mathrm{GL}_d(E)$ define a jointly continuous linear action on $E^d$. Put $B(S)=C(S,\\Omega)$ on the small coherent profinite site [def-sfb-continuous-map-condensed-ring, def-weil-size-convention]. Let $N=B^d$, with the internal $G$-action given by $\\rho$ extended to $B$ [def-sfb-condensed-action-module, sk-def-sfb-module-objects]. Use ordinary derived categories and ordinary total right derived invariants $R\\Gamma_G$ [sk-def-sfb-derived-categories, lem-sfb-condensed-derived-invariant-bar]. Let $\\operatorname{ev}_*$ evaluate at the one-point profinite set and forget scalars.\n\nDefine the nonnegative cochain complex $U_B^\\bullet$ of internal $B$-modules by $U_B^n(S)=C(S\\times G^n,\\Omega^d)$ and\n$$(df)(s;g_1,\\ldots,g_{n+1})=\\rho(g_1)f(s;g_2,\\ldots,g_{n+1})+\\sum_{a=1}^n(-1)^af(s;g_1,\\ldots,g_ag_{a+1},\\ldots,g_{n+1})+(-1)^{n+1}f(s;g_1,\\ldots,g_n).$$\nFor $n=0$ this is $dv(s;g)=\\rho(g)v(s)-v(s)$. Write $B[\\underline G^n]$ for the free internal module. Evaluation identifies $U_B^n$ with the underived internal Hom from $B[\\underline G^n]$ to $N$. Its canonical resolution comparisons into the derived internal Homs, using compatible nonnegative resolutions, define an augmentation from $U_B^\\bullet$ to the derived bar totalization. Compose its localization with the inverse of the evaluation-normalized bar isomorphism of [lem-sfb-condensed-derived-invariant-bar] and apply $\\operatorname{ev}_*$. This specifies a morphism\n$$j_{B,\\rho}:Q(C^\\bullet_{\\mathrm{cts}}(G,\\Omega^d))\\longrightarrow\\operatorname{ev}_*R\\Gamma_G(N[0])$$\nin $D(\\mathbf{Ab})$, where $C^\\bullet_{\\mathrm{cts}}(G,\\Omega^d)=U_B^\\bullet(*)$ and $Q$ is localization at quasi-isomorphisms [def-weil-abstract-derived-category]. The morphism $j_{B,\\rho}$ is an isomorphism. Its specification is independent of compatible resolution choices, is natural in continuous $E$-linear equivariant maps of finite-dimensional representations, and has degree-zero normalization equal to the inclusion of invariant vectors. No assertion that each individual $U_B^n\\to R\\underline{\\operatorname{Hom}}_B(B[\\underline G^n],N[0])$ is invertible is included. The coefficient field remains the incomplete norm-topological $\\Omega$; all its continuous functions are retained.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient topology: old item steps 2 and 4, norm-coefficient bar comparison after point evaluation. Replaces the unsupported application of finite complete-field column acyclicity to Omega. Agent-formulated obligation; exact reference WANTED."
+ },
+ "stmt_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose one nonnegative equivariant injective resolution $N\\to I^\\bullet$ and its compatible bar double complex. By [lem-sfb-profinite-free-hom-resolution-evaluation], its evaluation has terms $D^{p,q}=I^q(G^p)$ with the same augmentation and restriction maps. In resolution degree zero, left exactness gives $\\ker d_v=N(G^p)=C(G^p,\\Omega^d)$; the cofaces are exactly those in the item. Evaluation at $*$ is exact by [lem-zl-contractible-derived-sections-tensor], since the point is extremally disconnected, so it takes the internal bar total to this finite-diagonal total.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-profinite-free-hom-resolution-evaluation",
+    "lem-zl-contractible-derived-sections-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), evaluated norm-coefficient bar comparison, agent expansion"
+   }
+  },
+  {
+   "text": "For $q>0$, take a horizontal cocycle $x$ of the vertical-cohomology row. By [lem-sfb-evaluated-positive-bar-row-local-effacement], its class restricts to zero for an open subgroup $H$. Apply [lem-sfb-evaluated-positive-bar-row-transfer]: $[G:H][x]=\\operatorname{cor}\\operatorname{res}[x]=0$. The index is a positive integer and the row cohomology is a $\\mathbf Q$-vector space, so $[x]=0$. This proves $H_h^pH_v^q(D)=0$ for every $p\\geq0,q>0$; it does not prove columnwise acyclicity.",
+   "uses": [
+    "lem-sfb-evaluated-positive-bar-row-local-effacement",
+    "lem-sfb-evaluated-positive-bar-row-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), evaluated norm-coefficient bar comparison, agent expansion"
+   }
+  },
+  {
+   "text": "Apply [thm-sp-double-complex-spectral-sequences] to $D$: $E_1^{p,q}=H_v^q(D^{p,\\bullet})$, $E_2^{p,q}=H_h^pH_v^q(D)$, with finite filtration and convergence in every total degree. By [lem-weil-pbc-first-quadrant-row-collapse], step 2 makes the edge $H^n(C_{\\mathrm{cts}}^\\bullet)\\to H^n(\\operatorname{Tot}D)$ an isomorphism. This edge is induced by the actual map $C^p_{\\mathrm{cts}}=\\ker d_v^{p,0}\\hookrightarrow D^{p,0}$, hence is the resolution augmentation, not an unspecified cohomological identification. Its localization is an isomorphism by the definition of the derived category.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "lem-weil-pbc-first-quadrant-row-collapse",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), evaluated norm-coefficient bar comparison, agent expansion"
+   }
+  },
+  {
+   "text": "Compose this localized augmentation with the inverse of the normalized bar isomorphism of [lem-sfb-condensed-derived-invariant-bar] and evaluate. These are precisely the operations specifying $j_{B,\\rho}$, so $j_{B,\\rho}$ is invertible. For any equivariant coefficient map choose a chain lift between resolutions. Postcomposition commutes with each map from the underived Hom, so the augmentation square commutes. [lem-sfb-condensed-bar-total-naturality] identifies all such lifts and changes of resolution after localization, giving the required independence and naturality.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar",
+    "lem-sfb-condensed-bar-total-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), evaluated norm-coefficient bar comparison, agent expansion"
+   }
+  },
+  {
+   "text": "The degree-zero kernel is $\\{v\\in\\Omega^d:\\rho(g)v=v\\text{ for every }g\\in G\\}$. The comparison sends such a vector through $N\\to I^0$ in bar degree zero. The normalized bar augmentation identifies its inverse image with that same invariant vector, yielding the invariant-inclusion normalization. Rank zero gives zero complexes; for $G=1$ the usual alternating constant complex has degree-zero cohomology $\\Omega^d$ and vanishes above zero. Every construction used the unchanged all-continuous coefficient sheaf $B$.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), evaluated norm-coefficient bar comparison, agent expansion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-sfb-profinite-free-hom-resolution-evaluation",
+  "lem-zl-contractible-derived-sections-tensor",
+  "lem-sfb-evaluated-positive-bar-row-local-effacement",
+  "lem-sfb-evaluated-positive-bar-row-transfer",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-first-quadrant-row-collapse",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-bar-total-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), arithmetic coefficient topology, evaluated norm-coefficient bar comparison; agent expansion: spectral-sequence assembly; formal double-complex input from Stacks Tags 0130 and 0132; analytic effacement is a new obligation, not asserted by the blueprint"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The continuous cochain complex of a profinite group with coefficients in a finite dimensional representation over an incomplete normed algebraic closure computes ordinary condensed derived invariants after evaluation at the point",
+   "results": {
+    "t": "2026-10-22T11:24:34Z",
+    "tool": "leanfinder",
+    "query": "The continuous cochain complex of a profinite group with coefficients in a finite dimensional representation over an incomplete normed algebraic closure computes ordinary condensed derived invariants after evaluation at the point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteFree",
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "Condensed.profiniteSolid",
+     "continuousCohomology",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.MultiInd.complex",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.LocallyConstant.functorIsoDiscreteAux₂"
+    ],
+    "digest": "a8a27f64642b5d32"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuousCohomology and its zeroIso define topological continuous cochains and identify degree zero only. No hit compares their entire complex with ordinary internal condensed derived invariants for noncomplete norm coefficients. Discrete Rep bar resolutions and BDeRhamPlus do not specialize to this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "results": {
+    "t": "2026-10-22T11:24:31Z",
+    "tool": "loogle",
+    "query": "\"continuousCohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.cocycles",
+     "ContinuousCohomology.π",
+     "ContinuousCohomology.cocyclesMap_id",
+     "ContinuousCohomology.map_id",
+     "ContinuousCohomology.cocyclesMap",
+     "ContinuousCohomology.map",
+     "ContinuousCohomology.resolutionMap_id"
+    ],
+    "digest": "d0b4f6d4782fce60"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuousCohomology and its zeroIso define topological continuous cochains and identify degree zero only. No hit compares their entire complex with ordinary internal condensed derived invariants for noncomplete norm coefficients. Discrete Rep bar resolutions and BDeRhamPlus do not specialize to this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(continuousCohomology|Condensed).*(bar|invariant|derived)|(bar|invariant|derived).*continuousCohomology",
+   "results": {
+    "t": "2026-10-22T11:24:30Z",
+    "tool": "grep",
+    "query": "(continuousCohomology|Condensed).*(bar|invariant|derived)|(bar|invariant|derived).*continuousCohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean"
+    ],
+    "digest": "0ec26592e3a1699d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuousCohomology and its zeroIso define topological continuous cochains and identify degree zero only. No hit compares their entire complex with ordinary internal condensed derived invariants for noncomplete norm coefficients. Discrete Rep bar resolutions and BDeRhamPlus do not specialize to this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical augmentation from continuous group cochains into derived condensed group cohomology for noncomplete norm coefficients",
+   "results": {
+    "t": "2026-10-22T11:24:30Z",
+    "tool": "leansearch",
+    "query": "Canonical augmentation from continuous group cochains into derived condensed group cohomology for noncomplete norm coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "groupCohomology",
+     "ContinuousCohomology.MultiInd.d",
+     "continuousCohomology",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousAlternatingMap.instNormedAddCommGroup",
+     "ContinuousCohomology.I_obj_V_isAddCommGroup",
+     "ContinuousCohomology.I_obj_V_carrier"
+    ],
+    "digest": "aa6e5e4d81171f5b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuousCohomology and its zeroIso define topological continuous cochains and identify degree zero only. No hit compares their entire complex with ordinary internal condensed derived invariants for noncomplete norm coefficients. Discrete Rep bar resolutions and BDeRhamPlus do not specialize to this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at the terminal profinite set of right derived fixed points agrees with the norm continuous inhomogeneous bar complex for finite rank algebraic p adic coefficient representations",
+   "results": {
+    "t": "2026-10-22T11:24:56Z",
+    "tool": "leanfinder",
+    "query": "Evaluation at the terminal profinite set of right derived fixed points agrees with the norm continuous inhomogeneous bar complex for finite rank algebraic p adic coefficient representations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "Condensed.profiniteSolidCounit",
+     "Condensed.profiniteSolid",
+     "Rep.barComplex.isoStandardComplex",
+     "Condensed.profiniteFree",
+     "LightCondMod.LocallyConstant.functorIsoDiscreteAux₁",
+     "Profinite.NobelingProof.Nobeling_aux",
+     "Rep.FiniteCyclicGroup.resolution.π_f"
+    ],
+    "digest": "141fcab411698529"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: continuousCohomology and its zeroIso define topological continuous cochains and identify degree zero only. No hit compares their entire complex with ordinary internal condensed derived invariants for noncomplete norm coefficients. Discrete Rep bar resolutions and BDeRhamPlus do not specialize to this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous group cochains with incomplete normed algebraic closure coefficients compute derived invariants in condensed modules after evaluation at a point",
+   "results": {
+    "t": "2026-10-23T04:15:34Z",
+    "tool": "leanfinder",
+    "query": "Continuous group cochains with incomplete normed algebraic closure coefficients compute derived invariants in condensed modules after evaluation at a point",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.invariants",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.const",
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.I",
+     "ContinuousCohomology.MultiInd.functor",
+     "ContinuousCohomology.continuousCohomologyZeroIso"
+    ],
+    "digest": "cd30d86343bd535d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: continuousCohomology defines topological cochain cohomology and zeroIso only identifies degree zero; it does not compare to ordinary condensed derived invariants for incomplete norm coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(continuousCohomology|Condensed).*(bar|invariant|derived)|(bar|invariant|derived).*continuousCohomology",
+   "results": {
+    "t": "2026-10-23T04:16:14Z",
+    "tool": "grep",
+    "query": "(continuousCohomology|Condensed).*(bar|invariant|derived)|(bar|invariant|derived).*continuousCohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean"
+    ],
+    "digest": "0ec26592e3a1699d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: continuousCohomology defines topological cochain cohomology and zeroIso only identifies degree zero; it does not compare to ordinary condensed derived invariants for incomplete norm coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous group cochains compute ordinary derived invariants for incomplete normed algebraic closure coefficients in condensed modules",
+   "results": {
+    "t": "2026-10-23T04:16:14Z",
+    "tool": "leansearch",
+    "query": "Continuous group cochains compute ordinary derived invariants for incomplete normed algebraic closure coefficients in condensed modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.MultiInd.d",
+     "continuousCohomology",
+     "groupCohomology",
+     "ContinuousCohomology.MultiInd.d_comp_d_assoc",
+     "ContinuousCohomology.homogeneousCochains",
+     "ContinuousCohomology.I_obj_V_carrier",
+     "ContinuousCohomology.continuousCohomologyZeroIso"
+    ],
+    "digest": "c1e95cb565bb303b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: continuousCohomology defines topological cochain cohomology and zeroIso only identifies degree zero; it does not compare to ordinary condensed derived invariants for incomplete norm coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "results": {
+    "t": "2026-10-23T04:16:15Z",
+    "tool": "loogle",
+    "query": "\"continuousCohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "continuousCohomology",
+     "ContinuousCohomology.cocycles",
+     "ContinuousCohomology.π",
+     "ContinuousCohomology.cocyclesMap_id",
+     "ContinuousCohomology.map_id",
+     "ContinuousCohomology.cocyclesMap",
+     "ContinuousCohomology.map",
+     "ContinuousCohomology.resolutionMap_id"
+    ],
+    "digest": "d0b4f6d4782fce60"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: continuousCohomology defines topological cochain cohomology and zeroIso only identifies degree zero; it does not compare to ordinary condensed derived invariants for incomplete norm coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectral sequence comparing continuous cochains and condensed derived group cohomology for noncomplete p adic vector spaces",
+   "results": {
+    "t": "2026-10-23T04:23:18Z",
+    "tool": "leanfinder",
+    "query": "Spectral sequence comparing continuous cochains and condensed derived group cohomology for noncomplete p adic vector spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "ContinuousCohomology.homogeneousCochains",
+     "continuousCohomology",
+     "ContinuousCohomology.MultiInd.d",
+     "ContinuousCohomology.MultiInd.d_succ",
+     "ContinuousCohomology.MultiInd.d_comp_d_assoc",
+     "groupCohomology.isoShortComplexH2_hom",
+     "groupCohomology.isoShortComplexH1_hom"
+    ],
+    "digest": "f4478fba6090c2d0"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: continuousCohomology defines topological cochain cohomology and zeroIso only identifies degree zero; it does not compare to ordinary condensed derived invariants for incomplete norm coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a profinite group and finite rank norm algebraic closure coefficients, the positive resolution degree rows of the evaluated internal Hom bar bicomplex are exact",
+   "results": {
+    "t": "2026-10-23T04:30:49Z",
+    "tool": "leanfinder",
+    "query": "For a profinite group and finite rank norm algebraic closure coefficients, the positive resolution degree rows of the evaluated internal Hom bar bicomplex are exact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "Profinite.NobelingProof.CC_exact",
+     "groupCohomology.shortComplexH0_exact",
+     "groupHomology.shortComplexH0_exact",
+     "Rep.standardComplex.x_projective",
+     "groupCohomology.mapShortComplex₃_exact",
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "Algebra.H1Cotangent.exact_map_δ"
+    ],
+    "digest": "06415934fc7bc879"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: continuousCohomology defines topological cochain cohomology and zeroIso only identifies degree zero; it does not compare to ordinary condensed derived invariants for incomplete norm coefficients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-algcl-derived-invariants-comparison",
+  "date": "2026-10-22",
+  "group": "Q27"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), arithmetic coefficient topology: old item steps 2 and 4, norm-coefficient bar comparison after point evaluation. Replaces the unsupported application of finite complete-field column acyclicity to Omega.",
+   "via": [
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-norm-algcl-evaluated-bar-augmentation",
+  "worker": "stage1",
+  "summary": "Kept the original statement and actual normalized augmentation. Separated finite-coset transfer on vertical-cohomology rows and noncomplete norm-coefficient local effacement; combined them by rational index cancellation, then used the first-quadrant spectral sequence. Did not use the false global Omega-valued Cech exactness or the finite complete-field column lemma.",
+  "blueprint": "Paragraph (3), arithmetic coefficient topology: norm-coefficient bar comparison after point evaluation, the exact place already recorded in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-contractible-derived-sections-tensor",
+    "why": "Generic exact section evaluation on the extremally disconnected one-point profinite set."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic finite-diagonal first-quadrant spectral sequence and its functorial convergence."
+   },
+   {
+    "node": "lem-weil-pbc-first-quadrant-row-collapse",
+    "why": "Generic edge isomorphism when positive rows vanish; no different geometric route is substituted."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-contractible-derived-sections-tensor",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-first-quadrant-row-collapse"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-6935ff5b9",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-6935ff5b9 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, all cited statements and the parent's use of the item; statement and stmt_deps are unchanged, proof_deps equals the union of uses, and no SGA source is used. Step 1 (evaluation of D at the point, with ker d_v^{p,0}=C(G^p,Omega^d)), step 3 (Stacks 0130/0132 spectral sequence plus row collapse, the edge being the actual augmentation), step 4 (bar-total-naturality) and step 5 (G=1 complex has d=0 in even degrees and id in odd degrees, rank 0 is zero) are correct. The transfer node is a generic finite-coset construction, true, and not covered by lem-sfb-continuous-cochain-finite-index-transfer or the split-coset induction node. The local-effacement node: p=0 is vacuous and finite G works with H=1. At p=1 a coset translation argument (lambda_g^* x = g·x|_H) shows it is exactly E_2^{1,q}=0, so the open subgroup adds nothing there. For G=Z_l with trivial action it is equivalent to the item's own H^2 claim, using Q'=C(-,Omega)/C_fin. So it is not a restatement of the item and not stronger than it in the base case, but it carries the whole analytic content and its reference is WANTED: I could neither prove nor refute it. Positive E_1 entries do exist (H^1(Z_l,Omega) is nonzero by the Cech counterexample). Maintainer note: lem-sfb-evaluated-positive-bar-row-local-effacement is the item's open analytic core. tool_uses accepted: contractible evaluation, double-complex spectral sequences, row collapse."
+ }
+}

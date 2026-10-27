@@ -1,0 +1,342 @@
+{
+ "id": "lem-per-etale-relative-principal-parts-coordinates",
+ "kind": "statement",
+ "title": "Relative principal parts in etale polynomial coordinates",
+ "statement": "Let $R_0$ be a commutative ring, $n,t\\ge0$, $S=R_0[z_1,\\ldots,z_n]$, and $S\\to R$ a homomorphism such that $\\operatorname{Spec}R\\to\\operatorname{Spec}S$ is etale [def-weil-pbc-mv-polynomial-ring, def-weil-affine-spectrum, def-weil-etale-morphism]. Put $\\mathcal D=\\ker(R\\otimes_{R_0}R\\to R)$ and $P^t_{R/R_0}=(R\\otimes_{R_0}R)/\\mathcal D^{t+1}$, with the first-factor $R$-algebra structure [def-trf-diagonal-jets]. There is a canonical $R$-algebra isomorphism\n$$R[Y_1,\\ldots,Y_n]/(Y)^{t+1}\\simeq P^t_{R/R_0},\\qquad Y_j\\longmapsto 1\\otimes z_j-z_j\\otimes1.$$\nLet $T_t:R\\to R[Y]/(Y)^{t+1}$ be $h\\mapsto1\\otimes h$ under its inverse; thus $T_t(z_j)=z_j+Y_j$ and $T_t(h)\\bmod(Y)=h$. These isomorphisms are compatible with truncation in $t$. For every ring map $R_0\\to R'_0$, set $R'=R\\otimes_{R_0}R'_0$. The canonical map $P^t_{R/R_0}\\otimes_{R_0}R'_0\\to P^t_{R'/R'_0}$ is an isomorphism and identifies the displayed coordinate bases and the maps $T_t$ after base change [def-weil-module-base-change]. If $C$ is any commutative $R_0$-algebra and $\\tau:R\\to C[[Z_1,\\ldots,Z_n]]$ is an $R_0$-algebra homomorphism with $\\tau(z_j)=Z_j$ [def-weil-pbc-multivariate-power-series], applying $\\tau$ to the coefficients of $T_t(h)$ gives\n$$\\tau(h)(Z+Y)\\bmod(Y)^{t+1}\\in C[[Z]][Y]/(Y)^{t+1}.$$\nHere the right side is the continuous formal translation fixing $C$, defined coefficientwise by binomial expansion; no field, flatness, characteristic, ideal, supported basis, diagram or minor-ideal hypothesis is required. The assertions include $n=0$, $t=0$ and zero rings.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0H93 (lemma-formally-etale-omega), the diagonal-power quotient isomorphism, not only its final differential assertion; Tag 0H90 (lemma-principal-parts-diagonal); Tag 0H8Z (lemma-principal-parts-base-change). Polynomial diagonal calculation and compatibility with formal translation by the unique infinitesimal etale lift."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-trf-diagonal-jets",
+  "def-weil-module-base-change",
+  "def-weil-pbc-multivariate-power-series"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=R\\otimes_{R_0}S$ and $B=R\\otimes_{R_0}R$, with multiplication of pure tensors factorwise. The polynomial and tensor universal properties identify $A$ with $R[X_1,\\ldots,X_n]$: $r\\otimes f(z)$ maps to $r f(X)$ and the inverse sends $r$ to $r\\otimes1$ and $X_j$ to $1\\otimes z_j$. The augmentation $e:A\\to R$, $r\\otimes s\\mapsto rs$, is evaluation at $X_j=z_j$. The mutually inverse polynomial substitutions $Y_j=X_j-z_j$ and $X_j=Y_j+z_j$ identify $\\ker e$ with $(Y_1,\\ldots,Y_n)$. Indeed evaluation at $Y=0$ kills exactly the polynomials with zero constant coefficient, each a sum of multiples of the $Y_j$. Consequently $A/(\\ker e)^{t+1}=R[Y]/(Y)^{t+1}$, freely spanned over $R$ by the monomials $Y^\\alpha$ with $|\\alpha|\\le t$: the discarded ideal consists exactly of sums of monomials of degree at least $t+1$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H93, lemma-formally-etale-omega, polynomial case of its diagonal quotient; explicit polynomial substitutions."
+   }
+  },
+  {
+   "text": "Let $\\varphi:A\\to B$ send $r\\otimes s$ to $r\\otimes s|_R$. It is the base change of $S\\to R$ along $S\\to A$, $s\\mapsto1\\otimes s$: the identification $A\\otimes_SR\\simeq B$ sends $(r\\otimes s)\\otimes u$ to $r\\otimes su$, with inverse $r\\otimes u\\mapsto(r\\otimes1)\\otimes u$. Both formulas respect the balancing relations and their composites fix pure tensors, which generate the tensor modules. Apply [lem-weil-pbc-etale-ring-base-change] with base ring $S$, etale algebra $R$, and new base algebra $A$. Thus $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is etale; there is no finiteness or flatness assumption on $R_0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H93, lemma-formally-etale-omega, proof: base change of the etale map; Tag 00U2, lemma-etale, base-change assertion."
+   }
+  },
+  {
+   "text": "Let $J=\\mathcal D=\\ker(B\\to R)$. Multiplication $B\\to R$ is onto, since $r\\otimes1\\mapsto r$, so $B/J=R$. The composite $A\\to B/J$ is the surjection $e$ of Step 1 and has kernel $I=\\ker e$. The etale case of [lem-sfb-augmented-etale-associated-graded] applies to exactly $\\varphi,A,B,I,J$; at exponent $t+1\\ge1$ it gives $A/I^{t+1}\\xrightarrow{\\sim}B/J^{t+1}$. By [def-trf-diagonal-jets] the latter ring is $P^t_{R/R_0}$. Combine with Step 1 to obtain the required $R$-algebra isomorphism $\\Phi_t$. Its formula is $Y_j\\mapsto1\\otimes z_j-z_j\\otimes1$, because $Y_j=X_j-z_j$ in $A$. This also identifies the displayed finite monomial basis with the corresponding coordinate-difference monomials in principal parts.",
+   "uses": [
+    "lem-sfb-augmented-etale-associated-graded",
+    "def-trf-diagonal-jets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H93, lemma-formally-etale-omega, diagonal-power quotient assertion and proof via Tag 0H1D, lemma-formally-etale-lift-infinitesimal; Tag 0H90, lemma-principal-parts-diagonal."
+   }
+  },
+  {
+   "text": "The map $h\\mapsto1\\otimes h$ followed by the quotient is an $R_0$-algebra homomorphism, so $T_t=\\Phi_t^{-1}(1\\otimes-)$ is one too. The formula for $\\Phi_t$ gives $T_t(z_j)=z_j+Y_j$. Reducing $\\Phi_t$ modulo $(Y)$ is multiplication $B\\to R$, hence $T_t(h)\\bmod(Y)=h$. For $s\\le t$, the two maps from $R[Y]/(Y)^{t+1}$ to $P^s_{R/R_0}$ obtained by truncating either side send $r\\in R$ to $r\\otimes1$ and $Y_j$ to the same coordinate difference. They are equal by polynomial evaluation and the quotient definition. Applying the inverse isomorphisms to $1\\otimes h$ proves truncation compatibility for $T_t$ as well.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-trf-diagonal-jets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H93, lemma-formally-etale-omega, canonical quotient maps; Tag 0H90, lemma-principal-parts-diagonal, second-factor universal map."
+   }
+  },
+  {
+   "text": "Fix $R_0\\to R'_0$ and put $S'=R'_0[z]$, $R'=R\\otimes_{R_0}R'_0$. Tensor balancing identifies $S'\\otimes_SR$ with $R'$ by $f(z)\\otimes r\\mapsto\\sum_\\alpha(z^\\alpha r)\\otimes a_\\alpha$ for $f=\\sum a_\\alpha z^\\alpha$, with inverse $r\\otimes a\\mapsto a\\otimes r$. Thus [lem-weil-pbc-etale-ring-base-change] applied to $S\\to R$ and $S\\to S'$ makes $R'$ etale over $S'$. Steps 1--3 apply to these primed rings, giving $\\Phi'_t:R'[Y]/(Y)^{t+1}\\simeq P^t_{R'/R'_0}$ with the same formula for $Y_j$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-etale-ring-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00U2, lemma-etale, base change; Tag 0H93, lemma-formally-etale-omega, applied over the changed base."
+   }
+  },
+  {
+   "text": "The canonical map $\\theta_t:P^t_{R/R_0}\\otimes_{R_0}R'_0\\to P^t_{R'/R'_0}$ sends $[r\\otimes u]\\otimes a$ to $[(r\\otimes a)\\otimes_{R'_0}(u\\otimes1)]$. It is well defined: the tensor balancing relations are preserved, and a diagonal-kernel element maps to a diagonal-kernel element, so products of $t+1$ such elements map to zero. The finite monomial expansion of Step 1 identifies the source, via $\\Phi_t$, with $R'[Y]/(Y)^{t+1}$: its map sends $(rY^\\alpha)\\otimes a$ to $(r\\otimes a)Y^\\alpha$ and its inverse sends each coefficient $(r\\otimes a)Y^\\alpha$ to $(rY^\\alpha)\\otimes a$, extended additively. These formulas are balanced and inverse on generators. Under this identification and $\\Phi'_t$, $\\theta_t$ fixes every coefficient in $R'$ and every $Y_j$, and is therefore the identity. This proves its bijectivity and the basis assertion without tensoring an exact sequence. Finally, $\\theta_t([1\\otimes h]\\otimes a)$ is the class of $1\\otimes(h\\otimes a)$, so the maps $T_t$ after base change agree on all $h\\otimes a$, which additively generate $R'$.",
+   "uses": [
+    "def-weil-module-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-trf-diagonal-jets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H8Z, lemma-principal-parts-base-change, here verified on the finite coordinate basis; Tag 0H90, lemma-principal-parts-diagonal."
+   }
+  },
+  {
+   "text": "Write $E_t=C[[Z]][Y]/(Y)^{t+1}$. For $f=\\sum_\\nu c_\\nu Z^\\nu$, define its formal translation $\\delta_t(f)\\in E_t$ by\n$$[Z^\\alpha Y^\\beta]\\delta_t(f)=\\binom{\\alpha+\\beta}{\\beta}c_{\\alpha+\\beta}\\quad(|\\beta|\\le t),\\qquad \\binom{\\nu}{\\beta}=\\prod_j\\binom{\\nu_j}{\\beta_j}.$$\nThere are finitely many allowed $\\beta$, and each displayed coefficient is one element of $C$, so this defines an element of $E_t$ over every commutative ring, including rings of positive characteristic. It fixes constant series, is additive, sends $Z_j$ to $Z_j+Y_j$, and reduces to the identity modulo $(Y)$. It is continuous: a monomial of total degree at least $q+t$ contributes only terms with $Z$-degree at least $q$, since its $Y$-degree is at most $t$. Thus $\\delta_t((Z)^{q+t})\\subseteq (Z)^qE_t$, which gives continuity for the coefficient-variable adic topology, and hence also for the topology generated by all variables. This is precisely the coefficientwise binomial expansion meant in the statement.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H93, lemma-formally-etale-omega, compatibility with a chosen power-series realization: explicit coefficientwise translation calculation supplied here."
+   }
+  },
+  {
+   "text": "The map $\\delta_t$ is multiplicative, as follows directly from convolution. For $f=\\sum f_uZ^u$, $g=\\sum g_vZ^v$ and $|\\beta|\\le t$, the coefficient of $Z^\\alpha Y^\\beta$ in $\\delta_t(f)\\delta_t(g)$ is\n$$\\sum_{u+v=\\alpha+\\beta} f_ug_v\\sum_{b+c=\\beta,\\ b\\le u,\\ c\\le v}\\binom ub\\binom vc\n=\\binom{\\alpha+\\beta}{\\beta}\\sum_{u+v=\\alpha+\\beta}f_ug_v.$$\nAll sums are finite. The inner identity is the coefficient of $X^\\beta$ in $\\prod_j(1+X_j)^{u_j}(1+X_j)^{v_j}=\\prod_j(1+X_j)^{u_j+v_j}$, so it holds over $\\mathbf Z$ and after mapping to $C$. The last expression is the coefficient in $\\delta_t(fg)$. Terms discarded modulo $(Y)^{t+1}$ cannot contribute to a coefficient with $|\\beta|\\le t$. Thus $\\delta_t$ is a $C$-algebra homomorphism. This calculation is only the finite multiplication formula of power series and the polynomial binomial identity, not an appeal to a substitution theorem with additional hypotheses.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Coefficient calculation for the formal-translation compatibility following Tag 0H93; polynomial binomial expansion and the defining convolution product."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-etale-ring-map-iff-etale-affine] applied to $S\\to R$, $\\Omega_{R/S}=0$. The implication (2)$\\Rightarrow$(1) of [lem-weil-pbc-formally-unramified-ring-iff-kahler-zero] therefore gives uniqueness of $S$-algebra lifts to any square-zero extension. It gives uniqueness also modulo powers of a nilpotent ideal: if two $S$-algebra maps $R\\to E_t$ agree modulo $K=(Y)$, induct on $k=1,\\ldots,t$. The quotient map $E_t/K^{k+1}\\to E_t/K^k$ has kernel $K^k/K^{k+1}$ with square zero because $2k\\ge k+1$. If the maps agree at level $k$, the cited uniqueness applied to this square-zero ideal makes them agree at level $k+1$. At $k=t+1$ the ideal power is zero. This argument compares existing maps, so no lifting existence or completeness assumption is being inserted.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U1, definition-etale, and 00UO, lemma-characterize-formally-unramified; the successive square-zero uniqueness argument also used in Tag 0H1D."
+   }
+  },
+  {
+   "text": "Now let $\\tau$ be as in the statement, and apply it coefficientwise to $T_t$ to obtain $F:R\\to E_t$. Polynomial evaluation makes $F$ a ring homomorphism, and $G=\\delta_t\\circ\\tau:R\\to E_t$ is another by Step 8. Give $E_t$ its $S=R_0[z]$-algebra structure by $z_j\\mapsto Z_j+Y_j$ and the given map $R_0\\to C$. Both $F$ and $G$ respect this structure, since $T_t(z_j)=z_j+Y_j$, $\\tau(z_j)=Z_j$, and $\\tau$ is an $R_0$-algebra map. Both reduce to $\\tau$ modulo $(Y)$. The uniqueness proved in Step 9 gives $F=G$, which is the required identity $\\tau(T_t(h))=\\tau(h)(Z+Y)\\bmod(Y)^{t+1}$ for every $h$. For $t=0$ this comparison is already equality modulo $(Y)=0$; for $n=0$ all polynomial and series variable sets are empty and the coordinate ring in Step 1 is $R$. All formulas and the cited lemmas allow zero rings. No factorial is inverted, no ideal of $R$ is chosen, and no flatness of a coefficient change is used.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0H93, lemma-formally-etale-omega, uniqueness of infinitesimal coordinate lifts; explicit comparison with the formal translation constructed above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-sfb-augmented-etale-associated-graded",
+  "def-trf-diagonal-jets",
+  "def-weil-module-base-change",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-weil-pbc-formally-unramified-ring-iff-kahler-zero"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 0H93, 0H1D, 0H90 and 0H8Z: mixed diagonal quotient argument, with explicit polynomial, base-change and coefficientwise binomial calculations and square-zero uniqueness for the translation clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "principal[Pp]arts|principal_parts|FormallyEtale.*lift|lift.*FormallyEtale",
+   "results": "{\"t\": \"2026-10-24T12:16:39Z\", \"tool\": \"grep\", \"query\": \"principal[Pp]arts|principal_parts|FormallyEtale.*lift|lift.*FormallyEtale\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Basic.lean\"], \"digest\": \"82cd75bd393025cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; infinitesimal lifting and first-order differentials, smooth Jacobian relations and monomial-support bases do not give the asserted higher principal-parts coordinate comparison or relative jet-minor equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-etale-relative-principal-parts-coordinates principal parts of an etale coordinate algebra commute with arbitrary base change and Taylor expansion",
+   "results": "{\"t\": \"2026-10-24T12:16:39Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-etale-relative-principal-parts-coordinates principal parts of an etale coordinate algebra commute with arbitrary base change and Taylor expansion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Unramified.baseChange\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.FormallyEtale.comp\"], \"digest\": \"3ea968773747cc2f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; infinitesimal lifting and first-order differentials, smooth Jacobian relations and monomial-support bases do not give the asserted higher principal-parts coordinate comparison or relative jet-minor equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-etale-relative-principal-parts-coordinates etale algebra over polynomial ring has truncated principal parts equal truncated polynomial ring in coordinate differences with base change",
+   "results": "{\"t\": \"2026-10-24T12:16:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-etale-relative-principal-parts-coordinates etale algebra over polynomial ring has truncated principal parts equal truncated polynomial ring in coordinate differences with base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.toPresentation_σ'\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePresentation.hasMap\", \"StandardEtalePair.instEtaleRing\", \"StandardEtalePresentation.toPresentation_relation\", \"StandardEtalePresentation.toPresentation_algebra_algebraMap_apply\"], \"digest\": \"d5e859207666ad8b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; infinitesimal lifting and first-order differentials, smooth Jacobian relations and monomial-support bases do not give the asserted higher principal-parts coordinate comparison or relative jet-minor equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-etale-relative-principal-parts-coordinates diagonal ideal powers for etale polynomial coordinates identify infinitesimal neighborhoods with truncated polynomials and centered formal translation",
+   "results": "{\"t\": \"2026-10-24T12:17:21Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-etale-relative-principal-parts-coordinates diagonal ideal powers for etale polynomial coordinates identify infinitesimal neighborhoods with truncated polynomials and centered formal translation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.P\", \"StandardEtalePair.hasMap_X\", \"StandardEtalePresentation.toPresentation_σ'\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePresentation.hasMap\"], \"digest\": \"e3d07efc1a16fe14\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; infinitesimal lifting and first-order differentials, smooth Jacobian relations and monomial-support bases do not give the asserted higher principal-parts coordinate comparison or relative jet-minor equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale",
+   "results": "{\"t\": \"2026-10-24T13:20:43Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallyEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.inst\", \"Algebra.FormallyEtale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallyEtale.instFormallyUnramified\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"4273f1bb104667cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale algebra over a polynomial ring has higher principal parts isomorphic to truncated polynomials in coordinate differences",
+   "results": "{\"t\": \"2026-10-24T13:20:44Z\", \"tool\": \"leanfinder\", \"query\": \"Etale algebra over a polynomial ring has higher principal parts isomorphic to truncated polynomials in coordinate differences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePresentation.toPresentation\", \"StandardEtalePresentation.toPresentation_val\", \"StandardEtalePair.instEtaleRing\", \"Algebra.instIsStandardEtale\", \"Algebra.instIsStandardEtaleRing\", \"StandardEtalePresentation.P\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"46b01c44d2a520e1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "principal[Pp]arts|principal_parts|iff_comp_bijective|comp_bijective_of",
+   "results": "{\"t\": \"2026-10-24T13:22:46Z\", \"tool\": \"grep\", \"query\": \"principal[Pp]arts|principal_parts|iff_comp_bijective|comp_bijective_of\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/Basic.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Extension/Cotangent/Free.lean\", \"Mathlib/RingTheory/Etale/Field.lean\", \"Mathlib/RingTheory/Etale/Field.lean\"], \"digest\": \"18bfec6f99839e7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale polynomial coordinates identify infinitesimal diagonal quotients with truncated polynomial algebras and commute with arbitrary base change",
+   "results": "{\"t\": \"2026-10-24T13:22:47Z\", \"tool\": \"leansearch\", \"query\": \"Etale polynomial coordinates identify infinitesimal diagonal quotients with truncated polynomial algebras and commute with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.instIsStandardEtaleRing\", \"Algebra.FormallyEtale.iff_unramified_and_smooth\"], \"digest\": \"c7e0c86185294362\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "HasSubst|def subst|theorem.*subst|lemma.*subst",
+   "results": "{\"t\": \"2026-10-24T13:27:26Z\", \"tool\": \"grep\", \"query\": \"HasSubst|def subst|theorem.*subst|lemma.*subst\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Rename.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\"], \"digest\": \"179007023f6ee620\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Power series in finitely many variables admit continuous substitution Z by Z plus nilpotent variables with binomial coefficients over arbitrary commutative ring",
+   "results": "{\"t\": \"2026-10-24T13:27:27Z\", \"tool\": \"leanfinder\", \"query\": \"Power series in finitely many variables admit continuous substitution Z by Z plus nilpotent variables with binomial coefficients over arbitrary commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.hasSubst_of_constantCoeff_nilpotent\", \"PowerSeries.HasSubst\", \"PowerSeries.HasSubst.hasEval\", \"MvPowerSeries.HasSubst\", \"MvPowerSeries.hasSubst_def\", \"PowerSeries.subst\", \"MvPowerSeries.subst\", \"MvPowerSeries.HasSubst.hasEval\"], \"digest\": \"e443e27ce9836ff1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "hasse|binomial|Taylor|taylor|substAlgHom",
+   "results": "{\"t\": \"2026-10-24T13:27:56Z\", \"tool\": \"grep\", \"query\": \"hasse|binomial|Taylor|taylor|substAlgHom\", \"sub\": \"RingTheory/MvPowerSeries\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Substitution.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\", \"Mathlib/RingTheory/MvPowerSeries/Expand.lean\"], \"digest\": \"2ed23f77ad90105a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinitesimal neighborhoods of the diagonal of an etale polynomial algebra are truncated polynomial rings and Taylor homomorphisms uniquely lift along nilpotent ideals",
+   "results": "{\"t\": \"2026-10-24T13:29:53Z\", \"tool\": \"leanfinder\", \"query\": \"Infinitesimal neighborhoods of the diagonal of an etale polynomial algebra are truncated polynomial rings and Taylor homomorphisms uniquely lift along nilpotent ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.Etale.formallyEtale\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePresentation\", \"Algebra.instIsStandardEtaleRing\", \"StandardEtalePair.lift\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"09f9f09c9b31eb7a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits give etale lifting/base change or general series substitution, not the higher diagonal coordinate isomorphism together with its arbitrary scalar-change and Taylor compatibility assertions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-relative-supported-jet-minors",
+  "date": "2026-10-24",
+  "group": "Q26"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Imported resolution prerequisite of ancestor proof Step 3: supported formal coefficient charts. Relative principal-parts coordinates justify the generator-independent finite determinantal equations after centered Taylor expansion; this is the geometric compatibility clause of the relative jet calculation.",
+   "via": [
+    "lem-per-relative-supported-jet-minors",
+    "lem-per-supported-exceptional-chart-packet",
+    "lem-per-retained-test-boundary-regularity",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-etale-relative-principal-parts-coordinates",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Reused the existing augmented-etale infinitesimal quotient theorem and etale base-change and formal-unramifiedness nodes. Wrote polynomial substitutions, all base-change maps, coefficientwise translation and its finite convolution proof, and the square-zero uniqueness comparison explicitly. No new nodes: the remaining calculations are elementary from the cited definitions. No attachment in the live WeilConjectures source.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, proof Step 3: imported resolution prerequisite for supported formal coefficient charts, via the existing supported-jet-minors chain. Steps 1--6 supply principal-parts coordinates and scalar-change compatibility; Steps 7--10 supply the centered translation comparison. The current latest ancestor and unit were read; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-augmented-etale-associated-graded",
+    "why": "Generic commutative-algebra comparison of ideal-power quotients under an augmented etale map, used with A=R tensor_R0 S and B=R tensor_R0 R. The perverse unit supplies no such algebra lemma; this implements the existing imported resolution prerequisite rather than replacing a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-augmented-etale-associated-graded"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-d3ff05d24",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-d3ff05d24 (reviewer sub-agent of L); spot-checked: There are no new nodes and the statement is unchanged; the delivery is one commit on base b84c6ee with only the item and the report. Source check: Stacks 0H93 (lemma-formally-etale-omega, read with its proof via 0H1D), taking R=R_0, S=R_0[z], S'=R, gives the diagonal-power quotient isomorphism; 0H90 and 0H8Z give the principal-parts base change. Steps 1-3: R⊗S≅R[X]; the augmentation kernel is (X-z)=(Y); B≅A⊗_S R is étale by the étale ring base-change Mathlib leaf; lem-sfb-augmented-etale-associated-graded (statement only, étale case, n=t+1) gives R[Y]/(Y)^{t+1}≅P^t with the first-factor structure and Y_j↦1⊗z_j−z_j⊗1, sign checked. Step 4 (T_t(z_j)=z_j+Y_j, reduction, truncation) checked. Steps 5-6: the base change S'⊗_S R≅R' is correct; θ_t is the identity in monomial coordinates, checked through multiplicativity on Φ_t(rY^α)⊗a. Steps 7-8: the coefficient of Z^αY^β is binom(α+β,β)c_{α+β}; multiplicativity reduces to Vandermonde under the reindexing u=α1+β1, v=α2+β2; there is no factorial and it holds in characteristic p. Steps 9-10: the square-zero induction uses only uniqueness (formally-unramified leaf ⇐ Ω_{R/S}=0); F and G agree on the z_j and on R_0 (δ fixes C) and both reduce to τ. Edge cases t=0, n=0, zero ring, Z^p in characteristic p and z^{-1} on R_0[z,z^{-1}] checked. No cycle: the tool's proof_deps do not reach the item. A DAG search for principal parts, 0H93 and 0H1D found no duplicate: the Ω-only and field-only Taylor nodes are weaker. I accept the declared tool_use of lem-sfb-augmented-etale-associated-graded (generic algebra, black box; the unit has no such node). No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EtalePrincipalPartsCoordinates",
+  "declaration": "DiagonalJets.etale_relative_principalParts_coordinates",
+  "declarations": [
+   "DiagonalJets.coordinateRing",
+   "DiagonalJets.coordinateMk",
+   "DiagonalJets.principalMk",
+   "DiagonalJets.rightJet",
+   "DiagonalJets.coordinateTaylor",
+   "DiagonalJets.coordinateTruncate",
+   "DiagonalJets.principalTruncate",
+   "DiagonalJets.etale_relative_principalParts_coordinates"
+  ],
+  "file": "lean/Sheaf/RingTheory/EtalePrincipalPartsCoordinates.lean",
+  "statement": "theorem etale_relative_principalParts_coordinates (R₀ : Type u) (R : Type v) [CommRing R₀] [CommRing R] [Algebra R₀ R] (n : ℕ) (φ : MvPolynomial (Fin n) R₀ →ₐ[R₀] R) (hφ : φ.toRingHom.Etale) : ∃ e : ∀ t : ℕ, coordinateRing R n t ≃ₐ[R] principalParts R₀ R t, (∀ (t : ℕ) (j : Fin n), e t (coordinateMk R n t (MvPolynomial.X j)) = principalMk R₀ R t ((1 : R) ⊗ₜ[R₀] φ (MvPolynomial.X j) - φ (MvPolynomial.X j) ⊗ₜ[R₀] (1 : R))) ∧ (∀ (t : ℕ) (j : Fin n), coordinateTaylor R₀ R n t (e t) (φ (MvPolynomial.X j)) = coordinateMk R n t (MvPolynomial.C (φ (MvPolynomial.X j)) + MvPolynomial.X j)) ∧ (∀ (t : ℕ) (h : R) (p : MvPolynomial (Fin n) R), coordinateMk R n t p = coordinateTaylor R₀ R n t (e t) h → MvPolynomial.constantCoeff p = h) ∧ (∀ (s t : ℕ) (hst : s ≤ t) (q : coordinateRing R n t), principalTruncate R₀ R hst (e t q) = e s (coordinateTruncate R n hst q)) ∧ (∀ (s t : ℕ) (hst : s ≤ t) (h : R), coordinateTruncate R n hst (coordinateTaylor R₀ R n t (e t) h) = coordinateTaylor R₀ R n s (e s) h) ∧ (∀ t : ℕ, ∃ b : Module.Basis {β : Fin n →₀ ℕ // β.sum (fun _ k ↦ k) ≤ t} R (principalParts R₀ R t), ∀ β, b β = e t (coordinateMk R n t (MvPolynomial.monomial β.val 1))) ∧ (∀ (R₀' : Type w) [CommRing R₀'] [Algebra R₀ R₀'], ∃ (e' : ∀ t : ℕ, coordinateRing (R₀' ⊗[R₀] R) n t ≃ₐ[R₀' ⊗[R₀] R] principalParts R₀' (R₀' ⊗[R₀] R) t) (θ : ∀ t : ℕ, (R₀' ⊗[R₀] principalParts R₀ R t) ≃ₐ[R₀'] principalParts R₀' (R₀' ⊗[R₀] R) t), (∀ (t : ℕ) (j : Fin n), e' t (coordinateMk (R₀' ⊗[R₀] R) n t (MvPolynomial.X j)) = principalMk R₀' (R₀' ⊗[R₀] R) t ((1 : R₀' ⊗[R₀] R) ⊗ₜ[R₀'] ((1 : R₀') ⊗ₜ[R₀] φ (MvPolynomial.X j)) - ((1 : R₀') ⊗ₜ[R₀] φ (MvPolynomial.X j)) ⊗ₜ[R₀'] (1 : R₀' ⊗[R₀] R))) ∧ (∀ (t : ℕ) (a : R₀') (r h : R), θ t (a ⊗ₜ[R₀] principalMk R₀ R t (r ⊗ₜ[R₀] h)) = principalMk R₀' (R₀' ⊗[R₀] R) t ((a ⊗ₜ[R₀] r) ⊗ₜ[R₀'] ((1 : R₀') ⊗ₜ[R₀] h))) ∧ (∀ (t : ℕ) (a : R₀') (p : MvPolynomial (Fin n) R), θ t (a ⊗ₜ[R₀] e t (coordinateMk R n t p)) = e' t (coordinateMk (R₀' ⊗[R₀] R) n t (MvPolynomial.C (a ⊗ₜ[R₀] (1 : R)) * MvPolynomial.map Algebra.TensorProduct.includeRight.toRingHom p))) ∧ (∀ (t : ℕ) (a : R₀') (h : R) (p : MvPolynomial (Fin n) R), coordinateMk R n t p = coordinateTaylor R₀ R n t (e t) h → coordinateTaylor R₀' (R₀' ⊗[R₀] R) n t (e' t) (a ⊗ₜ[R₀] h) = coordinateMk (R₀' ⊗[R₀] R) n t (MvPolynomial.C (a ⊗ₜ[R₀] (1 : R)) * MvPolynomial.map Algebra.TensorProduct.includeRight.toRingHom p))) ∧ (∀ (C : Type x) [CommRing C] [Algebra R₀ C] (τ : R →ₐ[R₀] MvPowerSeries (Fin n) C), (∀ j : Fin n, τ (φ (MvPolynomial.X j)) = MvPowerSeries.X j) → ∀ (t : ℕ) (h : R) (p : MvPolynomial (Fin n) R), coordinateMk R n t p = coordinateTaylor R₀ R n t (e t) h → ∀ (α β : Fin n →₀ ℕ), β.sum (fun _ k ↦ k) ≤ t → MvPowerSeries.coeff α (τ (MvPolynomial.coeff β p)) = (∏ j : Fin n, Nat.choose (α j + β j) (β j)) • MvPowerSeries.coeff (α + β) (τ h))",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2455274e",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 0H93/0H90/0H8Z. Coordinate isos e_t pinned on Y_j ↦ [1⊗z_j−z_j⊗1] (canonical). T_t = e⁻¹∘(1⊗−): T(z_j)=z_j+Y_j; mod-(Y) clause via constantCoeff of every representative. Truncation stated for e and T; monomial basis indexed by |β|≤t. Base change over any R₀' (no flatness): θ pinned on a⊗[r⊗h], e' pinned on generators; coefficient/basis and Taylor formulas checked. Formal translation coefficientwise: coeff_α τ(p_β) = ∏C(α+β,β)•coeff_{α+β}τ(h) for |β|≤t, which fixes the class mod (Y)^{t+1} by mem_pow_idealOfVars_iff'; hand example n=1, h=z², t=2 checked. Edge cases n=0, t=0, zero rings, char p checked; universes u,v,w,x independent. No duplicate: reuses DiagonalJets.principalParts and MvPolynomial.idealOfVars; JetDiagramHilbertControl (field, CharZero) and DiagonalTaylorFaithfulFlatness (residue point) are different statements. Helpers have real data and docstrings; lean.statement verbatim; only the theorem's proof is sorry; report sections present. Note: RingHom.Etale used instead of AlgebraicGeometry.Etale on Spec.map; equivalent by HasRingHomProperty.Spec_iff and keeps the universes of R₀ and R independent. Not recompiled (no changes)."
+ }
+}

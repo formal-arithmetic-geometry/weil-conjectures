@@ -1,0 +1,334 @@
+{
+ "id": "lem-pur-exact-adjunction-unit-shift-descent",
+ "kind": "statement",
+ "title": "The fixed unit of an exact-derived adjunction commutes with cochain shifts",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with ordinary unbounded derived categories and localization functors $Q_{\\mathcal A},Q_{\\mathcal B}$ [def-weil-abstract-derived-category]. Let $L:\\mathcal A\\to\\mathcal B$ and $P:\\mathcal B\\to\\mathcal A$ be additive exact functors with a specified adjunction $L\\dashv P$, unit $\\eta$ and counit $\\varepsilon$. Let $C(L),C(P)$ denote termwise application on cochain complexes, and $L_D,P_D$ their exact-derived functors with the standard localization and shift comparisons [lem-weil-pbc-exact-functor-derived-factorization]. Use the specified adjunction $L_D\\dashv P_D$ obtained by localizing the degreewise adjunction [def-weil-exact-derived-adjunction], rather than an arbitrarily chosen adjunction between the same functors. For every $a\\in\\mathbf Z$ let $e_L^{(a)}:C(L)(X[a])\\to C(L)(X)[a]$ and $e_P^{(a)}:C(P)(Y[a])\\to C(P)(Y)[a]$ be the identity in every degree. These are natural isomorphisms of complexes with the canonical compatibility under $[a][b]\\cong[a+b]$ and $[0]\\cong\\mathrm{id}$: their degree-$m$ terms are $L(X^{m+a})$, respectively $P(Y^{m+a})$, and their differentials are $(-1)^aL(d_X^{m+a})=L((-1)^ad_X^{m+a})$, respectively the analogous expression for $P$. The degreewise unit is a cochain map whose degree-$m$ component at $X[a]$ is $\\eta_{X^{m+a}}$, and satisfies\n$$C(\\eta)_X[a]=e_{P,C(L)X}^{(a)}\\,C(P)(e_{L,X}^{(a)})\\,C(\\eta)_{X[a]}.$$\nWrite $\\eta^D$ for the localized unit and $\\bar e_L,\\bar e_P$ for the fixed induced comparisons. Then, as an equality of natural transformations on the entire derived category,\n$$\\eta^D_X[a]=\\bar e_{P,L_DX}^{(a)}\\,P_D(\\bar e_{L,X}^{(a)})\\,\\eta^D_{X[a]}.$$\nThe assertion uses the fixed termwise right comparison, with no monoidal, boundedness, K-injective-preservation or resolution hypothesis beyond the stated existence of the derived categories.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "fix-prop-coherence.proof.md paragraph 2, adjunction units and counits: old open-adjunction proof step 2, signed degreewise unit computation and its descent to the system derived category; agent-extracted obligation, not a verbatim blueprint theorem"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a\\in\\mathbf Z$. For either $F=L$ or $F=P$, additivity gives $F((-1)^a d)=(-1)^aF(d)$. Thus the identity on $F(X^{m+a})$ is a cochain isomorphism $e_F^{(a)}$ with inverse the same degreewise identity. Its naturality is the equality $F(f^{m+a})=F(f^{m+a})$. The zero comparison is the identity, and under the canonical reindexing $(X[a])[b]\\cong X[a+b]$ both composites for the addition comparison are identities on $F(X^{m+a+b})$; their differentials agree since $(-1)^a(-1)^b=(-1)^{a+b}$. These are exactly the termwise comparisons of [lem-weil-pbc-exact-functor-derived-factorization], not newly chosen comparisons.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph on adjunction units and counits; agent expansion, step 1"
+   }
+  },
+  {
+   "text": "Write $H=C(P)C(L)$ and $u_X=C(\\eta)_X:X\\to HX$. Naturality of the given abelian unit at $d_X^m$ says $P(L(d_X^m))\\eta_{X^m}=\\eta_{X^{m+1}}d_X^m$, which is precisely the cochain-map condition. At $X[a]$ the same equation holds with differential $(-1)^a d_X^{m+a}$, by additivity. Put $e_X=e_{P,C(L)X}^{(a)}\\circ C(P)(e_{L,X}^{(a)})$. Both $u_X[a]$ and $e_Xu_{X[a]}$ have degree-$m$ component $\\eta_{X^{m+a}}$, because the two comparisons are identities and $P$ preserves identities. Hence $u_X[a]=e_Xu_{X[a]}$ as cochain maps. For a cochain map $f$, naturality of $u$ is the original naturality of $\\eta$ at each $f^m$; therefore this is an equality of natural transformations, before localization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph on adjunction units and counits; agent expansion, step 2"
+   }
+  },
+  {
+   "text": "Let $Q=Q_{\\mathcal A}$, $H_D=P_DL_D$ and $t_X:Q(X[a])\\xrightarrow{\\sim}(QX)[a]$ be the localization shift comparison. Let $\\varphi_{L,X}:L_DQX\\cong Q_{\\mathcal B}C(L)X$ and $\\varphi_{P,Y}:P_DQ_{\\mathcal B}Y\\cong QC(P)Y$ be the fixed comparisons of [lem-weil-pbc-exact-functor-derived-factorization], and define $\\kappa_X=\\varphi_{P,C(L)X}\\circ P_D(\\varphi_{L,X}):H_DQX\\cong QHX$. The specified localized adjunction [def-weil-exact-derived-adjunction] has precisely the localized degreewise unit; in these coordinates this says $\\kappa_X\\eta^D_{QX}=Q(u_X)$. In particular this formula concerns the given unit, not merely a unit for some adjunction on the same pair of functors.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph on adjunction units and counits; agent expansion, step 3"
+   }
+  },
+  {
+   "text": "Put $s_Z=\\bar e_{P,L_DZ}^{(a)}\\circ P_D(\\bar e_{L,Z}^{(a)})$. Clause (2) of [lem-weil-pbc-exact-functor-derived-factorization], applied to $P$ at $C(L)X$ and to $L$ at $X$, gives\n$$\\kappa_X[a]\\,s_{QX}\\,H_D(t_X)=t_{HX}\\,Q(e_X)\\,\\kappa_{X[a]}.$$\nHere is the composition check: first use naturality of $\\bar e_P$ at $\\varphi_{L,X}$ to move $P_D(\\varphi_{L,X})[a]$ past $\\bar e_P$; the $L$ shift equation replaces $\\varphi_{L,X}[a]\\bar e_{L,QX}L_D(t_X)$ by $t^{\\mathcal B}_{C(L)X}Q_{\\mathcal B}(e_{L,X})\\varphi_{L,X[a]}$. Next use the $P$ shift equation at $C(L)X$, replacing $\\varphi_{P,C(L)X}[a]\\bar e_{P,Q_{\\mathcal B}C(L)X}P_D(t^{\\mathcal B}_{C(L)X})$ by $t_{HX}Q(e_{P,C(L)X})\\varphi_{P,(C(L)X)[a]}$. Finally naturality of $\\varphi_P$ at $e_{L,X}$ replaces $\\varphi_{P,(C(L)X)[a]}P_DQ_{\\mathcal B}(e_{L,X})$ by $QC(P)(e_{L,X})\\varphi_{P,C(L)(X[a])}$. The remaining factors are exactly $Q(e_X)$ and $\\kappa_{X[a]}$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph on adjunction units and counits; agent expansion, step 4"
+   }
+  },
+  {
+   "text": "Naturality of $\\eta^D$ at $t_X$ gives $\\eta^D_{(QX)[a]}t_X=H_D(t_X)\\eta^D_{Q(X[a])}$. Therefore steps 2--4 and naturality of $t$ at $u_X$ give the following typed chain:\n$$\\begin{aligned}\n\\kappa_X[a]s_{QX}\\eta^D_{(QX)[a]}t_X\n&=t_{HX}Q(e_X)\\kappa_{X[a]}\\eta^D_{Q(X[a])}\\\\\n&=t_{HX}Q(e_Xu_{X[a]})\\\\\n&=t_{HX}Q(u_X[a])\\\\\n&=Q(u_X)[a]t_X\\\\\n&=\\kappa_X[a](\\eta^D_{QX})[a]t_X.\n\\end{aligned}$$\nCancel the isomorphisms $\\kappa_X[a]$ and $t_X$ to obtain the requested equation at every object $QX$. The two sides are natural transformations from $[a]$ to $[a]\\circ H_D$ (composition of functors read right to left). Clause (3) of [lem-weil-pbc-localization-universal-property], for the cochain localization $Q$ at quasi-isomorphisms of [def-weil-abstract-derived-category], now makes them equal on all of $D(\\mathcal A)$. Exactness is used only through the cited exact-functor factorization; no boundedness or resolution assumption occurs.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph on adjunction units and counits; agent expansion, step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "adjunction units and counits: explicit signed cochain computation and localization comparison cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.mapHomologicalComplex",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_mapHomologicalComplex_unit|mapDerivedCategoryAdjunction|semilinear.*[Aa]djunction [directory Mathlib/CategoryTheory]",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unit of an additive adjunction extended degreewise to unbounded cochain complexes commutes with all integer shifts using the canonical termwise shift isomorphisms",
+   "results": "CategoryTheory.Adjunction.shift_unit_app; CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app; CategoryTheory.Adjunction.CommShift.compatibilityUnit_isoAdd; CategoryTheory.Adjunction.unit_app_shift_commShiftIso_inv_app; CategoryTheory.Adjunction.CommShift.CompatibilityUnit; CategoryTheory.Adjunction.CommShift.commShift_unit; CategoryTheory.Adjunction.CommShift.compatibilityUnit_right; CategoryTheory.Adjunction.shift_unit_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex.*[Aa]dj|commShift.*unit|unit.*commShift [directory Mathlib/Algebra/Homology]",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CochainComplex",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degreewise cochain adjunction of two additive functors has a unit commuting with the usual signed integer shifts without assuming shift compatibility",
+   "results": "CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app; CategoryTheory.Adjunction.unit_app_shift_commShiftIso_inv_app; CategoryTheory.Adjunction.CommShift.CompatibilityUnit; CategoryTheory.Adjunction.RightAdjointCommShift.compatibilityUnit_iso; CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso; CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right; CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app_assoc; CategoryTheory.Adjunction.shift_unit_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex_unit|mapHomologicalComplex.*[Aa]djunction|commShift_mapDerivedCategoryAdjunction",
+   "results": "No hits",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "shift_unit_app|unit_app_commShiftIso_hom_app [directory Mathlib/CategoryTheory/Shift]",
+   "results": "Mathlib/CategoryTheory/Shift/Adjunction.lean; Mathlib/CategoryTheory/Shift/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans.CommShift",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.CommShift.commShift_counit",
+     "CategoryTheory.Adjunction.CommShift.commShift_unit",
+     "CategoryTheory.Adjunction.CommShift.mk'",
+     "CategoryTheory.Adjunction.CommShift.mk"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/localization interfaces or exact functor comparisons; none supplies the specified localized degreewise unit compatibility without the cochain computation and comparison cancellation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of the degreewise adjunction of exact functors unit compatible with canonical shifts",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.localization_unit_app",
+     "CategoryTheory.Adjunction.CommShift.CompatibilityUnit",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.shift_unit_app",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.derived'"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/localization interfaces or exact functor comparisons; none supplies the specified localized degreewise unit compatibility without the cochain computation and comparison cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed degreewise adjunction of additive exact functors has a unit commuting with integer cochain shifts and its localization to the unbounded derived category",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+     "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Adjunction.derived_unit"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/localization interfaces or exact functor comparisons; none supplies the specified localized degreewise unit compatibility without the cochain computation and comparison cancellation"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Cc]ommShift|[Cc]ommShift.*mapDerivedCategory|natTrans_ext|full_whiskeringLeft",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Center/Localization.lean",
+     "Mathlib/CategoryTheory/Quotient.lean",
+     "Mathlib/CategoryTheory/Quotient.lean",
+     "Mathlib/CategoryTheory/Quotient.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Bifunctor.lean",
+     "Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/localization interfaces or exact functor comparisons; none supplies the specified localized degreewise unit compatibility without the cochain computation and comparison cancellation"
+  },
+  {
+   "tool": "grep",
+   "query": "shift_unit_app|CompatibilityUnit|mapHomologicalComplex_commShiftIso_hom_app_f",
+   "results": {
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+     "Mathlib/CategoryTheory/Triangulated/Adjunction.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/localization interfaces or exact functor comparisons; none supplies the specified localized degreewise unit compatibility without the cochain computation and comparison cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation commuting with signed cochain shifts descends along localization and remains compatible with the fixed induced shift comparisons",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Functor.commShiftOfLocalization",
+     "CategoryTheory.NatTrans.commShift_iso_hom_of_localization",
+     "CategoryTheory.LocalizerMorphism.commShift",
+     "CategoryTheory.LocalizerMorphism.natTransCommShift_hom",
+     "CategoryTheory.LocalizerMorphism.instCommShiftLocalizationHomFunctorIsoFunctorQLocalizedFunctor",
+     "CategoryTheory.LocalizerMorphism.instCommShiftLocalizedFunctor",
+     "CategoryTheory.LocalizerMorphism.smallShiftedHomMap_mk",
+     "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: generic shift/localization interfaces or exact functor comparisons; none supplies the specified localized degreewise unit compatibility without the cochain computation and comparison cancellation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-open-adjunction-shift",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "fix-prop-coherence.proof.md paragraph 2, adjunction units and counits: old open-adjunction proof step 2, signed degreewise unit computation and its descent to the system derived category",
+   "via": [
+    "lem-pur-open-adjunction-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-exact-adjunction-unit-shift-descent",
+  "worker": "stage1",
+  "summary": "Computed signs, naturality and zero/addition coherence degreewise; expanded the composite factorization comparison and cancelled it in the localized unit equation; used the existing localization universal-property Mathlib leaf for equality on the entire derived category. No new nodes or altered hypotheses. Repair of returned head 8d47cecc2fb: compared against the current unsplit live item, re-read all four cited statements, verified all seven quotes and the fixed comparison orientations, and retained the approved argument on the current base; updated the partial Lean-match assessment without adding hypotheses.",
+  "blueprint": "fix-prop-coherence.proof.md paragraph on adjunction units and counits, via the existing open-adjunction-shift ancestry; termwise unit computation and descent.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-ND-f42828adf",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f42828adf (reviewer sub-agent of L); spot-checked: This re-delivers 8d47cecc2fba, which was PASSed and then returned at landing because the side completion was never promoted to live. A field-by-field diff of the item JSON shows only split_report changed: the statement, all five steps, proof_deps, proof_origin, searches and source are identical. The four cited nodes and the parent lem-pur-open-adjunction-shift are byte-identical in both snapshots. 0 new nodes, no tool_uses, no repair note, so this is not a 10-21 re-split. I re-read everything in full. Step 1: the identity tau is a cochain iso by additivity, and zero/addition compatibility follows from the signs; checked a=0, a=+-1, char 2 and the zero complex. Step 2: in degree m both sides have component eta_{X^{m+a}}. Step 3: kappa_X eta^D_{QX} = Q(u_X) is the defining normalization of def-weil-exact-derived-adjunction. Step 4: the composite is typed H_D Q(X[a]) -> (QHX)[a]; I re-derived it from naturality of e_P, clause (2) of the factorization node for L and for P, and naturality of phi_P. Step 5: the chain cancels only the isos kappa_X[a] and t_X, never eta, and clause (3) of lem-weil-pbc-localization-universal-property extends the equality to all of D(A). No boundedness or resolution hypothesis is used. Duplicate scan of the 642 node files new since the prior snapshot: lem-sfb-abstract-derived-unit-factorization is the unshifted unit factorization, so it is not a duplicate. Source is the blueprint main-20261015 fix-prop-coherence units/counits paragraph, the proof is agent-written and marked as such, and no SGA is cited. No changes. Maintainer: promote this on landing rather than re-dispatching it."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactDerivedAdjunctionUnitShift",
+  "declaration": "CategoryTheory.Adjunction.mapExactDerivedCategory_unit_commShift",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedAdjunctionUnitShift.lean",
+  "statement": "theorem mapExactDerivedCategory_unit_commShift {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B] [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B] {L : A ⥤ B} {P : B ⥤ A} [L.Additive] [P.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L] [PreservesFiniteLimits P] [PreservesFiniteColimits P] (a : L ⊣ P) : NatTrans.CommShift (a.mapHomologicalComplex (ComplexShape.up ℤ)).unit ℤ ∧ NatTrans.CommShift a.mapExactDerivedCategory.unit ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q116",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc318f188",
+  "group": "Q116",
+  "result": "pass",
+  "note": "Single sorry theorem mapExactDerivedCategory_unit_commShift = CommShift of cochain unit ∧ CommShift of a.mapExactDerivedCategory.unit over ℤ; shift_comm expands (id/comp commShiftIso lemmas) to the node's η_X[a]=e_P·P(e_L)·η_{X[a]} at both levels. Shift instances are the fixed ones (commShiftMapCochainComplex identity comparisons; mapDerivedCategory commShiftOfLocalization compatible with mapDerivedCategoryFactors, per the factorization node's mathlib_match); adjunction is the specified localization owned by def-weil-exact-derived-adjunction. Hypotheses exactly additive+exact L,P and a; six independent universes bound. Item diff vs live = lean only; dep records byte-identical; statement verbatim. Only private analogues exist (CondensedOpenAdjunctionLocalization, Paper/DerivedAdjunctionShift), no public duplicate. Docstrings carry source, blueprint id and the 5 steps. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "F7",
+  "result": "pass",
+  "landing": "20261024T185246-L-3492770",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.Adjunction.mapExactDerivedCategory_unit_commShift"
+  ],
+  "sorry_after": []
+ }
+}

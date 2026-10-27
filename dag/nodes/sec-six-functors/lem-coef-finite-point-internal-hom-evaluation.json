@@ -22,101 +22,48 @@
  ],
  "proof": [
   {
-   "text": "Write $A=A_n$, $B=A_s$, $G=A_{s,\\mathrm{et}}$ and $\\nu=\\nu_s$. The absolute value of $E$ extending $|\\cdot|_\\ell$ is nonarchimedean by the extension-absolute-value theorem, and the valuation-ring theorem makes $R$ a DVR with finite residue field; the finite-quotient theorem, clause (2), then makes $A=R/\\varpi^n$ a finite ring. For the identity compactification on the etale point, $R\\operatorname{id}_!^{\\mathrm{et}}=R\\operatorname{id}_*\\operatorname{id}_!=\\operatorname{id}$ by the compact-support definition. Its right adjoint is canonically the identity: its adjunction bijections are $\\operatorname{Hom}(U,V)=\\operatorname{Hom}(U,V)$. The finite exceptional-inverse-image definition therefore gives $\\omega_{s,n}=\\nu^*R\\nu_*B$. The constant-ring comparison identifies $B=\\nu^*G$. Let $\\eta$ and $\\epsilon$ be the unit and counit of $\\nu^*\\dashv R\\nu_*$. The bounded-below site-comparison theorem makes $\\eta_G$ invertible, since $G$ is in degree zero. The triangle identity $\\epsilon_{\\nu^*G}\\circ\\nu^*(\\eta_G)=1_{\\nu^*G}$ now shows that $\\epsilon_B$ is the inverse of $\\nu^*(\\eta_G)$. Thus the normalization $\\alpha:\\omega_{s,n}\\xrightarrow{\\sim}B$ is precisely the counit required in the statement, not an arbitrary unit identification.",
+   "text": "Apply [lem-coef-finite-point-counit-unit-normalization] with the given finite-field and coefficient datum. It makes $A=A_n$ finite and identifies $\\omega_{s,n}$ with $\\nu_s^*R\\nu_{s,*}(A_n)_s$ for the identity compactification. Its isomorphism $\\alpha=\\epsilon_{(A_n)_s}$ is precisely the normalization required here; its inverse is $\\nu_s^*(\\eta_{(A_n)_{s,\\mathrm{et}}})$.",
    "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-amb-etale-compact-support",
-    "def-weil-exceptional-inverse-image",
-    "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison"
+    "lem-coef-finite-point-counit-unit-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Opening sentence: identity compact support and its right adjoint; finite transported normalization made explicit."
+    "place": "Opening sentence: identity compact support and its right adjoint; finite comparison counit normalization (old item step 1)."
    }
   },
   {
-   "text": "Put $L(M)=B\\otimes_{\\underline A}\\underline M=\\underline M$ for an $A$-module $M$. A short exact sequence of modules gives a sectionwise short exact sequence of constant presheaves. Exact module-presheaf sheafification therefore makes $L$ exact. The sections functor $\\Gamma=\\Gamma(s,-)$ is exact on all $B$-modules by point-sections exactness. Since $s$ is nonempty, connected, separated and of finite type over $k$, clause (1) of the connected constant-$H^0$ lemma gives $A\\xrightarrow{\\sim}\\Gamma B$, $a\\mapsto a\\cdot1$. The adjunction used in point reconstruction is exactly $L\\dashv\\Gamma$: its maps send $h:LM\\to F$ to $m\\mapsto h_s(1\\otimes m)$ and send $t:M\\to\\Gamma F$ to $b\\otimes m\\mapsto b\\,t(m)|_U$. Thus all the exactness and constant-value hypotheses of that reconstruction statement hold. Its natural counit $e_C:Lc\\to C$, where $c=\\Gamma C$, is an isomorphism, since $C$ is bounded constructible. The fibre definition places $c$ in the bounded finite-cohomology module category. Denote the derived adjunction unit by $u_c:c\\to\\Gamma Lc$; its triangle identity is $\\Gamma(e_C)u_c=1_c$.",
+   "text": "Apply [lem-coef-finite-point-reconstructed-hom-model] to the given bounded constructible $C$ and target $B=(A_n)_s$. It supplies exact realization and sections, $\\Gamma B=A_n$, the natural reconstruction counit $e_C$, and the resolving-model isomorphism $Q_{C,B}$. Therefore $\\beta_C=Q_{C,B}\\circ\\Gamma R\\mathcal Hom(C,\\alpha)$ is an isomorphism: its first factor is $Q_{C,B}$ and its second is the image of the isomorphism $\\alpha$ under the derived Hom and sections functors. All objects and maps here are in the ambient derived categories.",
    "uses": [
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-pod-connected-constant-h0",
-    "lem-pod-point-sections-reconstruction",
-    "def-weil-finite-coefficient-point"
+    "lem-coef-finite-point-reconstructed-hom-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: reconstruct the bounded constructible point complex from its module of sections."
+    "place": "Second sentence: compute point internal Hom over coefficients; exact realization, reconstruction and arbitrary-target resolution model (old item steps 2 and 3)."
    }
   },
   {
-   "text": "Choose a K-flat flat-term module complex $P$ representing $c$, by the K-flat-resolution lemma on the one-object ringed site, and a K-injective resolution $B\\to I$ as in the definition of derived internal Hom. Apply the finite case $(R,B)=(A,A_s)$ of the point-derived-Hom-evaluation lemma, whose hypotheses were verified in Step 2. It gives a K-injective module resolution $A\\to\\Gamma I$ and the natural isomorphism of complexes\n$$q_{P,I}:\\Gamma\\mathcal Hom_B^\\bullet(LP,I)\\xrightarrow{\\sim}\\operatorname{Hom}_A^\\bullet(P,\\Gamma I),\\qquad h\\mapsto(x\\mapsto h(1\\otimes x)).$$\nBoth sides use the same Hom differential $dh=d_Ih-(-1)^{\\deg h}hd_P$. Consequently it induces an isomorphism $q_c:\\Gamma R\\mathcal Hom_B(Lc,B)\\xrightarrow{\\sim}R\\operatorname{Hom}_A(c,A)$. Composing the target change by $\\alpha$ of Step 1, precomposition with $e_C$ of Step 2, and $q_c$, gives an isomorphism\n$$\\beta_C:\\Gamma R\\mathcal Hom_B(C,\\omega_{s,n})\\longrightarrow R\\operatorname{Hom}_A(c,A).$$\nHere $\\operatorname{Fib}_s$ on the internal-Hom object is the ambient termwise-sections functor of the point-exactness lemma; no assumption that the pro-etale topos itself is the category of sets is used.",
+   "text": "Apply [lem-coef-finite-point-reconstructed-evaluation-square] with $V=\\omega_{s,n}$ and the specified $\\alpha$. It puts $H=R\\mathcal Hom(C,\\omega_{s,n})$ in $D^b_{ctf}$, so the stipulated fibre tensor comparison is defined, and gives exactly $\\operatorname{ev}_c(\\beta_C\\otimes1_c)=\\operatorname{Fib}_s(\\alpha\\operatorname{ev}_{C,V})\\mu$. The same node identifies $\\beta_C$ as the coefficient tensor-Hom transpose of that pairing, so the evaluation transpose $\\kappa_C$ equals $\\beta_C$. Thus it is invertible and has the required evaluation characterization. The derived naturality square in the same node, with the fixed $\\alpha$ independent of $C$, gives the asserted contravariant naturality for every morphism $C\\to C'$.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "lem-pod-point-derived-hom-evaluation",
-    "lem-weil-point-proetale-sections-exact"
+    "lem-coef-finite-point-reconstructed-evaluation-square"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: compute point internal Hom over the coefficient ring on K-flat/K-injective models."
-   }
-  },
-  {
-   "text": "Identify the map, retaining $\\alpha$ as the specified normalization. First, the point-fibre tensor comparison applies to the pair $(R\\mathcal Hom_B(C,\\omega_{s,n}),C)$: the constant sheaf $B$ is constructible on the single stratum $s$ with finite stalk $A$ and has Tor amplitude $[0,0]$, since $B\\otimes^L_AM=M$; so the finite-coefficient internal-Hom corollary, applied on $s_{\\mathrm{proet}}$ to the separated finite-type $k$-scheme $s$ with $d=0$, puts $R\\mathcal Hom_B(C,B)$ in $D^b_{ctf}(s,A)$, and $\\alpha$ of Step 1 transports this to $R\\mathcal Hom_B(C,\\omega_{s,n})$. The point-derived-Hom-evaluation lemma says that $q_c$ carries sheaf evaluation to module evaluation under the canonical sections-tensor balancing map. For the convention with factors ordered $P\\otimes\\operatorname{Hom}$, both maps on $x\\in P^i$ and homogeneous $h$ of degree $j$ give $(-1)^{ij}h(1\\otimes x)$; symmetry gives the corresponding equality with Hom first as in the statement. Precomposition with $e_C$ evaluates this formula on $\\Gamma(e_C)u_c(x)$, which is $x$ by Step 2. Thus after the point-fibre tensor and unit comparisons, evaluation composed with $\\beta_C\\otimes1_c$ is exactly the fibre of sheaf evaluation followed by $\\Gamma\\alpha$. Those tensor and unit comparisons are the ones of the point-fibre-derived-tensor lemma: at finite level they are the canonical balancing maps just used. By uniqueness of the tensor-Hom transpose this identifies $\\beta_C=\\kappa_C$. In particular the actual specified map, rather than merely its source and target objects, is invertible.",
-   "uses": [
-    "lem-pod-point-derived-hom-evaluation",
-    "lem-sf-point-fibre-derived-tensor",
-    "lem-pod-point-sections-reconstruction",
-    "cor-weil-finite-constructible-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: identify the isomorphism by the signed evaluation pairing."
-   }
-  },
-  {
-   "text": "For a morphism $f:C\\to C'$, naturality of reconstruction gives $f e_C=e_{C'}L(\\Gamma f)$. Precomposition with this equality and naturality of $q$ give\n$$R\\operatorname{Hom}_A(\\Gamma f,A)\\,\\kappa_{C'}=\\kappa_C\\,\\Gamma\\bigl(R\\mathcal Hom_B(f,\\omega_{s,n})\\bigr).$$\nThe equality is in the derived category: $q$ is the natural comparison of derived functors in the cited evaluation lemma, and $e$ is the natural derived counit in reconstruction, so it applies to derived morphisms, including inverses of quasi-isomorphisms. The normalization $\\alpha$ is fixed independently of $C$. This proves the asserted contravariant naturality.",
-   "uses": [
-    "lem-pod-point-sections-reconstruction",
-    "lem-pod-point-derived-hom-evaluation"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-    "place": "Second sentence: naturality of the point identification in the complex."
+    "place": "Second sentence: the displayed point-duality identification uses signed evaluation; reconstructed evaluation and derived naturality (old item steps 4 and 5)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "def-amb-etale-compact-support",
-  "def-weil-exceptional-inverse-image",
-  "lem-sf-comparison-pullback-exact",
-  "thm-weil-pbc-site-comparison",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-pod-connected-constant-h0",
-  "lem-pod-point-sections-reconstruction",
-  "def-weil-finite-coefficient-point",
-  "lem-pc-kflat-resolution",
-  "def-pur-derived-internal-hom",
-  "lem-pod-point-derived-hom-evaluation",
-  "lem-sf-point-fibre-derived-tensor",
-  "cor-weil-finite-constructible-hom"
+  "lem-coef-finite-point-counit-unit-normalization",
+  "lem-coef-finite-point-reconstructed-hom-model",
+  "lem-coef-finite-point-reconstructed-evaluation-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
-  "place": "Opening paragraph, expanded using the existing exact reconstruction and signed Hom-evaluation lemmas; finite transported exceptional normalization by the comparison counit."
+  "place": "Opening paragraph, assembled from three statement-only worker tasks carrying the full returned argument."
  },
  "mathlib_searches": [
   {
@@ -203,57 +150,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-coef-finite-point-internal-hom-evaluation",
   "worker": "stage1",
-  "summary": "Five-step finite-point comparison: normalize the transported exceptional identity by its comparison counit, verify exact constant realization and point sections, apply existing reconstruction and Hom-complex evaluation, identify the evaluation transpose and prove derived naturality. No statement correction and no new nodes. The etale-only Lean comparison remains sorry and is not attached. Maintainer reader FIX: Step 1 cites the nonarchimedean extension-absolute-value leaf required by the finite-quotient theorem; Step 4 verifies, by cor-weil-finite-constructible-hom (same unit), that the internal-Hom object lies in D^b_ctf so the point-fibre tensor lemma applies, and is no longer marked elementary.",
-  "blueprint": "prop-coef-integral-dualizing.proof.md, second paragraph, the finite-level derived mapping-complex adjunction transported through the point identification, as specified in the inherited blueprint.from.place. The point calculation is expanded from lem-pod-point-dualizing-complex.proof.md, opening paragraph.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic coefficient-ring structure supplies the DVR and finite residue field required for finite quotients."
-   },
-   {
-    "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "Generic finite-quotient assertion verifies that the coefficient ring is finite before invoking site comparison."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Generic constant-ring comparison identifies the finite coefficient unit on the two sites."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Generic bounded-below comparison unit gives invertibility of the specified counit on the constant coefficient sheaf."
-   },
-   {
-    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "why": "Generic exact sheafification proves exactness of finite constant-module realization; this is not a replacement of a geometric proof step."
-   },
-   {
-    "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Generic exactness of point sections verifies the input hypothesis of the evaluation calculation and interprets ambient evaluation."
-   },
-   {
-    "node": "lem-pod-connected-constant-h0",
-    "why": "Only finite clause (1), on the point, identifies A with sections of its constant unit by the actual constant-value map; no higher cohomology or finiteness theorem is used."
-   },
-   {
-    "node": "lem-pod-point-sections-reconstruction",
-    "why": "Generic exact extension/sections counit gives the actual constant realization of the input complex and its naturality."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic resolving-model existence supplies the module representative required by the Hom-evaluation calculation."
-   },
-   {
-    "node": "lem-pod-point-derived-hom-evaluation",
-    "why": "Generic Hom-complex computation with its signed evaluation normalization applies after checking exactness and sections of the coefficient unit; no finite exceptional functor enters this tool."
-   },
-   {
-    "node": "lem-sf-point-fibre-derived-tensor",
-    "why": "Generic monoidal point-fibre comparison supplies the tensor and unit maps stipulated in the item."
-   }
-  ]
+  "summary": "Q147 repair of the 5723-character proof: three comparable statement-only tasks isolate finite counit normalization, exact reconstruction and arbitrary-target resolving Hom models, and signed evaluation/derived naturality. Parent statement unchanged; parent proof is a short assembly. All old arguments preserved verbatim and assigned to tasks in report.md.",
+  "blueprint": "prop-coef-integral-dualizing.proof.md, second paragraph, finite derived mapping-complex adjunction via point identification; expanded by the opening paragraph of lem-pod-point-dualizing-complex.proof.md. Three tasks retain old steps 1, 2-3, and 4-5 respectively.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
@@ -269,12 +171,12 @@
   "lem-sf-point-fibre-derived-tensor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q05-9e8a37ec4",
-  "group": "Q05",
+  "reviewer": "NT-cc-Q147-4f4c2f7f8",
+  "group": "Q147",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9e8a37ec4 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, its parent lem-coef-finite-mapping-adjunction, the statement of every cited node, the proofs of the three main tool lemmas, the blueprint sources lem-pod-point-dualizing-complex.proof.md (whole paragraph) and prop-coef-integral-dualizing.proof.md (second paragraph), and the unit and chapter. The statement is unchanged and the delivery creates no new nodes. The normalization is correct and is checked against def-weil-exceptional-inverse-image (nu^* f^x Rnu_*, the main-20261015 form): with the identity compactification f^x = id, B = nu^*G by lem-sf-comparison-pullback-exact, and the triangle identity makes the counit eps_B the inverse of nu^*eta_G, with eta_G invertible by thm-weil-pbc-site-comparison. Steps 2, 3 and 5 meet the exact hypotheses of the reconstruction and Hom-evaluation lemmas: L and Gamma are exact, and Gamma(B)=A by clause (1) of the connected constant-H0 lemma for Y=s. I recomputed Step 4's evaluation identity and the sign (-1)^{ij}. Small cases checked: C=0, C=B, C=B[-r], and [A -varpi-> A]. Two repairable faults, both fixed in fixes/: (1) E1/C1: the finite-quotient leaf needs a nonarchimedean absolute value, so Step 1 now also cites the leaf lem-weil-l-adic-extension-absolute-value. (2) E1: Step 4 applied lem-sf-point-fibre-derived-tensor, which is stated only for D^b_ctf inputs, to RHom(C,omega) without showing that object is ctf. Step 4 now proves it with the same-unit node cor-weil-finite-constructible-hom (X=s, d=0, L=B with Tor amplitude [0,0], transported by alpha); that node has no cycle back to the item, and the step is no longer marked elementary. I accept the eleven declared tool_uses as generic black boxes; the unit has no realized steps. No SGA source is used and the target is not weakened.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-4f4c2f7f8 (reviewer sub-agent of L); spot-checked: Legitimate re-split under the human's note of 2026-10-22: live and side still hold the old 5-step proof, nothing is landed meanwhile, and the item is not on the drop list. All five old steps appear verbatim in the report, and each argument becomes a clause of a new statement-only node: step 1 goes to counit-unit-normalization; steps 2 and 3 go to reconstructed-hom-model (exact L and Γ, ΓB=A, adjunction formulas, e_C iso, c in D^b_fin, K-flat/K-injective q, Γ(e_C)u_c=1); steps 4 and 5 go to reconstructed-evaluation-square (ctf typing via cor-weil-finite-constructible-hom with X=s, d=0, transported by α; the μ pairing equation; the (−1)^{ij} sign; the transpose identification; derived naturality). The node workloads are 1244/2283/2196 characters. The parent proof is a 3-step assembly of 1640 characters, with proof_deps equal to the union of the uses and no cycle. Checked against def-weil-exceptional-inverse-image (ν^* f^× Rν_*, identity compactification gives f^×=id), thm-weil-pbc-site-comparison (finite ring, D^+ unit iso), lem-sf-comparison-pullback-exact(1), lem-pod-point-derived-hom-evaluation, lem-pod-point-sections-reconstruction, lem-sf-point-fibre-derived-tensor (ctf inputs) and def-coef-ringed-tensor-hom-model. The arbitrary-V Hom model is true: Γ is right adjoint to the exact L, so it preserves K-injectives (Stacks 08BJ), and exact Γ gives ΓV→ΓJ a quasi-isomorphism. Small cases checked: C=0, C=B (β=Γα, pairing v⊗a ↦ Γα(v)a), C=B[−r] signs, V=0 and B[r], rescaling α by a unit, n=1. The duplicate scan over the point, normalization and evaluation nodes found no match. The form checks B1–B9 pass (LeanSearch recorded as unavailable for two nodes, allowed by B7), and no SGA source is used. Advisories: the arbitrary-V generality is unused; the square node's statement depends on the Hom-model lemma for Q, so stage 2 should realize Q as a definition; the item's maintainer-owned tool_uses still lists the 11 tools of the old proof."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -303,5 +205,16 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

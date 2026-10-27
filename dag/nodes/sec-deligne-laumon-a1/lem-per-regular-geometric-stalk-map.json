@@ -1,0 +1,321 @@
+{
+ "id": "lem-per-regular-geometric-stalk-map",
+ "kind": "statement",
+ "title": "Flat geometric-stalk map with regular closed fibre for a regular morphism",
+ "statement": "Let $g:Y\\to X$ be a regular morphism [def-per-regular-scheme-morphism] of locally Noetherian schemes [def-pc-scheme, pqf-def-locnoeth]. Let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point [def-weil-geometric-point] and put $\\bar x=g\\bar y$. Write $A=\\mathcal O^{\\mathrm{sh}}_{X,\\bar x}$ and $C=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$ for the geometric strict local rings [def-weil-pbc-strict-henselization-limit], identified with the geometric stalks of the etale structure sheaves. Let $h:A\\to C$ be the canonical local ring map of [lem-weil-pbc-strict-henselization-functoriality], with the residue-field embeddings into the same $\\Omega$. Then $A,C$ are Noetherian local rings, $h$ is flat [def-weil-pbc-flat-ring-map], and the closed fibre $C/\\mathfrak m_A C$ is a regular local ring [def-weil-regular-scheme], where $\\mathfrak m_A$ is the maximal ideal of $A$. No excellence or finite-type hypothesis is imposed on $g$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 04HX (etale-cohomology.tex: geometric stalk as strict henselization), 06LJ and 06LN (more-algebra.tex: Noetherianity and regularity of strict henselizations), 05VL (flat.tex: flatness over strict henselization), 07QM (more-algebra.tex: maximal ideal extension), and 05WS (algebra.tex: quotient strict henselization). Combine these for the canonical map; the complete intended argument is recorded in report.md."
+ },
+ "stmt_deps": [
+  "def-per-regular-scheme-morphism",
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-regular-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $x=g(y)$, $R=\\mathcal O_{X,x}$ and $B=\\mathcal O_{Y,y}$. Choose affine neighbourhoods of $x,y$ from the Noetherian affine covers in [pqf-def-locnoeth]. By [lem-weil-pbc-affine-open-stalk-localization] their localizations at the point primes are $R,B$; [lem-weil-pbc-localization-noetherian] makes these Noetherian. Apply [lem-exc-affine-strict-local-ring-comparison] on these charts: $A\\cong R^{\\mathrm{sh}}$ and $C\\cong B^{\\mathrm{sh}}$, as algebras with the prescribed residue embeddings in $\\Omega$. They are local, and [lem-sc-strict-henselization-noetherian] makes both Noetherian. The structural-map identity of [lem-weil-pbc-strict-henselization-functoriality] gives the commutative square $R\\to B$, $A\\xrightarrow h C$: first check it on chart sections, then on fractions, whose denominators are units. Thus the $R$-action on $C$ is the one restricted along $R\\to A\\xrightarrow h C$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring; Tag 06LJ, lemma-henselization-noetherian; algebra.tex Tag 00FN, lemma-Noetherian-permanence"
+   }
+  },
+  {
+   "text": "Regularity includes flatness by [def-per-regular-scheme-morphism]. By [def-weil-flat-morphism], $B$ is flat over $R$. The structural map $B\\to C=B^{\\mathrm{sh}}$ is faithfully flat by [lem-sc-strict-henselization-faithfully-flat], so in particular flat. Apply [lem-pc-module-flat-transitive] to conclude that $C$ is flat as an $R$-module. Now apply [lem-sfb-strict-henselization-module-flatness] with local ring $R$, strict henselization $A$, and $A$-module $C$ via the actual map $h$. Its flatness equivalence gives that $C$ is flat over $A$, which is the required flatness of $h$.",
+   "uses": [
+    "def-per-regular-scheme-morphism",
+    "def-weil-flat-morphism",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-pc-module-flat-transitive",
+    "lem-sfb-strict-henselization-module-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05VL, lemma-flat-up-down-henselization, equivalence (1) and (3); more-algebra.tex Tag 07QM, lemma-dumb-properties-henselization (1)"
+   }
+  },
+  {
+   "text": "Write $\\mathfrak m_R$ for the maximal ideal of $R$. On the chosen affine chart $\\operatorname{Spec}D\\subset X$, let $\\mathfrak p$ be the prime of $x$. By [lem-weil-pbc-strict-henselization-chart-maximal-ideal], $\\mathfrak m_A=\\mathfrak p A$. The localization description in [lem-weil-pbc-affine-open-stalk-localization] gives $R=D_{\\mathfrak p}$ and $\\mathfrak m_R=\\mathfrak pD_{\\mathfrak p}$. Since the elements of $D\\setminus\\mathfrak p$ become units in $A$, the ideals generated by $\\mathfrak p$ and $\\mathfrak m_R$ in $A$ coincide. Thus $\\mathfrak m_A=\\mathfrak m_R A$. Extending to $C$ through the commuting square of Step 1 gives $\\mathfrak m_A C=\\mathfrak m_R C$. This is just equality of the ideals generated by the same images.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QM, lemma-dumb-properties-henselization (2); etale-cohomology.tex Tag 04HX and algebra.tex Tag 04GP"
+   }
+  },
+  {
+   "text": "Set $I=\\mathfrak m_RB$. The ordinary stalk map $R\\to B$ is local, so $I\\subseteq\\mathfrak m_B$. Taking the identity finite extension of $\\kappa(x)$ in [def-per-regular-scheme-morphism] shows that the ordinary fibre $Y_x$ is regular. By [lem-sbc-scheme-fibre-stalk-quotient], $B/I\\cong\\mathcal O_{Y_x,y'}$ for the point $y'$ over $y$. By [def-weil-regular-scheme] every local ring of a regular scheme is regular local; hence $B/I$ is a Noetherian regular local ring. Only regularity of this ordinary fibre is needed here.",
+   "uses": [
+    "def-per-regular-scheme-morphism",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 0HA1, lemma-local-ring-fibre; algebra.tex Tag 0H9M, remark-local-ring-fibre"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-strict-henselization-surjective-quotient] to $B$, its strict henselization $C$, and the surjection $B\\to B/I$. This supplies an algebraic strict-henselization structure on the explicit quotient $C/IC$ over $B/I$, relative to a separable closure of its residue field. Its kernel hypothesis holds by $I\\subseteq\\mathfrak m_B$. Since $B/I$ is Noetherian regular local by Step 4, [lem-sc-strict-henselization-regular] implies that $C/IC$ is regular local. Finally $IC=\\mathfrak m_R C=\\mathfrak m_A C$ by Step 3 and associativity of taking the ideal generated by images. Consequently the required closed fibre $C/\\mathfrak m_A C$ is regular local. The cited theorems impose neither excellence nor finite type on $g$.",
+   "uses": [
+    "lem-sbc-strict-henselization-surjective-quotient",
+    "lem-sc-strict-henselization-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05WS, lemma-quotient-strict-henselization; Tag 06LN, lemma-henselization-regular"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-per-regular-scheme-morphism",
+  "def-weil-flat-morphism",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-pc-module-flat-transitive",
+  "lem-sfb-strict-henselization-module-flatness",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "def-weil-regular-scheme",
+  "lem-sbc-strict-henselization-surjective-quotient",
+  "lem-sc-strict-henselization-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex; literature/stacks-project/algebra.tex; literature/stacks-project/more-algebra.tex; literature/stacks-project/etale-cohomology.tex; literature/stacks-project/schemes.tex",
+  "place": "Assembly of Tags 04HX, 06LJ, 05VL, 07QM, 0HA1, 05WS and 06LN for the canonical compatible map."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strict.*hensel|hensel.*regular|regular.*hensel",
+   "results": "{\"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover flat ordinary Zariski stalk maps, localizations and base change; none constructs the compatible strict-henselization map or proves regularity of its closed fibre. No strict-henselization declaration was found by either spelling."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\", \"Flat\"",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover flat ordinary Zariski stalk maps, localizations and base change; none constructs the compatible strict-henselization map or proves regularity of its closed fibre. No strict-henselization declaration was found by either spelling."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat local homomorphism of Noetherian local rings with geometrically regular fibres stays regular on compatible strict henselizations",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat\", \"RingHom.Flat.localRingHom\", \"RingHom.Flat.propertyIsLocal\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"RingHom.Flat.ofLocalizationSpanTarget\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover flat ordinary Zariski stalk maps, localizations and base change; none constructs the compatible strict-henselization map or proves regularity of its closed fibre. No strict-henselization declaration was found by either spelling."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-geometric-stalk-map: For a regular morphism of locally Noetherian schemes the induced local map between compatible geometric strict local rings is flat with regular closed fibre without excellence",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasRingHomProperty.stalkMap\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.HasRingHomProperty.of_stalkMap\", \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover flat ordinary Zariski stalk maps, localizations and base change; none constructs the compatible strict-henselization map or proves regularity of its closed fibre. No strict-henselization declaration was found by either spelling."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictHensel|strictHensel|strict_hensel|GeometricallyRegular",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover flat ordinary Zariski stalk maps, localizations and base change; none constructs the compatible strict-henselization map or proves regularity of its closed fibre. No strict-henselization declaration was found by either spelling."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-regular-geometric-stalk-map: Geometric etale stalks of a regular map of locally Noetherian schemes form a flat local map with regular closed fibre",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits cover flat ordinary Zariski stalk maps, localizations and base change; none constructs the compatible strict-henselization map or proves regularity of its closed fibre. No strict-henselization declaration was found by either spelling."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictHensel|strictHensel|strict_hensel|GeometricallyRegular",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Zariski stalk flatness and smoothness hits do not give the strict-henselization map or its regular closed fibre; strict-henselization grep and Loogle searches returned zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular morphism induces flat local homomorphisms of strict henselizations with regular closed fibre",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"RingHom.Flat\", \"RingHom.Flat.localRingHom\", \"AlgebraicGeometry.flat_iff\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Zariski stalk flatness and smoothness hits do not give the strict-henselization map or its regular closed fibre; strict-henselization grep and Loogle searches returned zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"StrictHenselization\", \"Flat\"",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Zariski stalk flatness and smoothness hits do not give the strict-henselization map or its regular closed fibre; strict-henselization grep and Loogle searches returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a regular morphism of locally Noetherian schemes the map on geometric strict local rings is flat with regular closed fibre",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.Flat.of_stalkMap\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Zariski stalk flatness and smoothness hits do not give the strict-henselization map or its regular closed fibre; strict-henselization grep and Loogle searches returned zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*regular|regular.*hensel|strict.*hensel",
+   "results": "{\"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Zariski stalk flatness and smoothness hits do not give the strict-henselization map or its regular closed fibre; strict-henselization grep and Loogle searches returned zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local maps on etale structure sheaf stalks for morphisms with geometrically regular fibres",
+   "results": "{\"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.mem_etaleLocus_iff\"]}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Zariski stalk flatness and smoothness hits do not give the strict-henselization map or its regular closed fibre; strict-henselization grep and Loogle searches returned zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-log-regular-pair-regular-pullback",
+  "date": "2026-10-24",
+  "group": "Q157"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Newest blueprint lem-per-artin-gabber-affine-curve.proof.md, Step 3, Verdier-duality branch, inherited regular-pullback input in the regular-neighbourhood/ordinary weak-uniformization route (ILO VII 3.2). This node supplies only the ordinary local algebra needed at a geometric point for the log-stratum argument, without excellence: Stacks Tags 04HX, 06LJ, 05VL, 07QM, 05WS and 06LN.",
+   "via": [
+    "lem-per-log-regular-pair-regular-pullback",
+    "lem-per-complete-local-nodal-dimension-reduction",
+    "lem-per-qe-weak-uniformization-cover",
+    "lem-per-qe-alteration-regular-neighbourhood",
+    "lem-per-qe-complete-pair-lifting",
+    "lem-per-small-divisor-formal-completion",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-regular-geometric-stalk-map",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Five-step local-algebra assembly using existing DAG nodes only: ordinary/strict local comparison and Noetherianity, flatness transfer, extended-maximal-ideal equality, ordinary fibre quotient, and regularity of its strict henselization. No new nodes, no Mathlib leaf, no excellence or finite-type assumption. Searches, hypotheses, citations, and small cases checked in report.md.",
+  "blueprint": "Realizes the inherited ordinary local-algebra input of lem-per-artin-gabber-affine-curve.proof.md Step 3 through the existing regular-pullback chain; latest Step 3 contains Verdier exchange and does not state a strict-local algebra lemma. Existing blueprint provenance retained, no unit route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "General local algebra or strict-henselization comparison used as a black box; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "General local algebra or strict-henselization comparison used as a black box; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "General local algebra or strict-henselization comparison used as a black box; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "General local algebra or strict-henselization comparison used as a black box; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-sfb-strict-henselization-module-flatness",
+    "why": "Transfers flatness of the actual A-module C from R to its strict henselization A."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+    "why": "General local algebra or strict-henselization comparison used as a black box; no statement of this unit supplies it."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Identifies the ordinary fibre local ring with B/m_R B."
+   },
+   {
+    "node": "lem-sbc-strict-henselization-surjective-quotient",
+    "why": "Identifies the explicit quotient C/IC as a strict henselization of B/I."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "General local algebra or strict-henselization comparison used as a black box; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sfb-strict-henselization-module-flatness",
+  "lem-weil-pbc-strict-henselization-chart-maximal-ideal",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-sbc-strict-henselization-surjective-quotient",
+  "lem-sc-strict-henselization-regular"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O2-881454533",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-881454533 (reviewer sub-agent of L); spot-checked: I read the whole item, the statements of all 16 cited proof nodes and 8 statement nodes, and the Stacks sources: flat.tex 05VL (l.183), algebra.tex 05WS (l.43703) and more-algebra.tex 06LN (l.11195). The delivery is one commit with no new nodes. The statement is unchanged and adds no excellence or finite-type hypothesis. Step 1: Noetherian charts and the localization lemma make R and B Noetherian. The 04HX comparison gives A≅R^sh and C≅B^sh, and 06LJ makes both Noetherian. The square R→B→C = R→A→C follows from j_X∘Spec h=g∘j_Y (functoriality (3)) by taking stalk maps at the closed points. Step 2: B is flat over R because g is regular, and C is flat over B by 07QM, so C is flat over R by transitivity. The module-flatness node is the 05VL equivalence (1)⇔(3) for every R^sh-module, so it applies to C through h, and h is flat. Step 3: the chart node gives m_A=pA, so m_A C=m_R C. This two-line calculation is correctly marked elementary. Step 4: taking K=κ(x) shows the fibre Y_x is regular. The 0HA1 node gives B/m_R B≅O_{Y_x,y'}, which is regular local, and I⊆m_B because R→B is local. Step 5: by 05WS, C/IC is a strict henselization of B/I, so 06LN makes it regular local. Small cases tested: the identity, field extensions, affine-space projections, and singular bases; all are consistent. No duplicate node and no cycle. I accept the nine declared tool uses as generic local algebra. Batch-5 check: the cited lem-sfb-strict-henselization-module-flatness reaches lem-trf-etale-local-ring-flatness. That node is Stacks 05BA, a general flatness fact about modules over the local ring of an étale morphism that only sits in the trace-formula chapter. Neither the trace formula nor Poincaré duality gives it, and it is not a step specific to either proof, so the citation stands. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularGeometricStalkMap",
+  "declaration": "AlgebraicGeometry.regular_geometric_stalk_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularGeometricStalkMap.lean",
+  "statement": "theorem regular_geometric_stalk_map {Y X : Scheme.{u}} (g : Y ⟶ X) [IsLocallyNoetherian Y] [IsLocallyNoetherian X] (hg : IsRegularSchemeMorphism g) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Y) : ∃ (_ : IsLocalRing (Scheme.strictHenselizationRing (barY ≫ g))) (_ : IsLocalRing (Scheme.strictHenselizationRing barY)), IsNoetherianRing (Scheme.strictHenselizationRing (barY ≫ g)) ∧ IsNoetherianRing (Scheme.strictHenselizationRing barY) ∧ RingHom.Flat (Spec.preimage (Scheme.strictHenselizationMap g barY)).hom ∧ IsRegularLocalRing (Scheme.strictHenselizationRing barY ⧸ (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing (barY ≫ g))).map (Spec.preimage (Scheme.strictHenselizationMap g barY)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The ring map is the preimage under the fully faithful spectrum functor of Scheme.strictHenselizationMap g barY, the existing uniquely pointed canonical map. Local-ring structures are conclusions, not added hypotheses; the quotient uses the maximal ideal of the source extended through this actual canonical ring map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74abd76c9",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: IsRegularSchemeMorphism g with IsLocallyNoetherian Y/X; geometric point barY with x̄ = barY ≫ g in the same Ω; A, C = strictHenselizationRing; IsLocalRing as ∃ Prop binders (no global instance); both IsNoetherianRing; RingHom.Flat of Spec.preimage (strictHenselizationMap g barY), which is pinned by ∃! (over g, compatible with point evaluation), not an arbitrary map, and points in the right direction A→C; IsRegularLocalRing (C ⧸ m_A.map h). No excellence/finite-type/extra hypotheses. strictHenselizationMap is owned by theorem node lem-weil-pbc-strict-henselization-functoriality via a stage-1 base stmt_dep, used the same way by landed reviewed nodes (lem-trf-finite-base-strict-localization) → PASS. The mathematics is true (05WS/06LN/05VL). Node unchanged except the new lean field; nothing recorded live yet, so nothing overwritten. lean.statement matches the file verbatim. All imports exist in side-live. Docstrings have source place, blueprint tag and 5 proof steps; proof is sorry only. Edge cases: empty Y vacuous, identity, field base, arbitrary characteristic, single universe u forced by the API. Not recompiled per instructions."
+ }
+}

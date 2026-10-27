@@ -1,0 +1,128 @@
+{
+ "id": "def-coef-etale-support-projection-map",
+ "kind": "definition",
+ "title": "Coefficient-first étale support projection map",
+ "status": "split",
+ "statement": "Let $X,Y$ be schemes and $f:X\\to Y$ a morphism with compactification $c=(X\\xrightarrow{j}Z\\xrightarrow{p}Y)$ [def-weil-compactifications-refinements]. On the small étale sites [def-weil-pbc-etale-site], let $A$ be a symmetric closed monoidal Grothendieck abelian coefficient category with additive tensor and functorial flat resolutions [def-weil-derived-tensor]; assume étale inverse images preserve flat objects, and equip $A$ with a concrete forgetful functor to sets reflecting isomorphisms and preserving filtered colimits, with sheaf composition on every small étale site. Work in the ordinary unbounded derived categories [def-weil-abstract-derived-category]. Put $F=Rp_*j_!$, and let $\\mathrm{PF}_c$ be the canonical compactification projection [sk-def-sf-exchanges]. Define the bifunctors $S_c(K,L)=L\\otimes^L FK$ and $T_c(K,L)=F(f^*L\\otimes^L K)$. With $\\sigma$ the signed derived tensor symmetry [lem-kun-tensor-sym], define their natural transformation by $S_c\\xrightarrow{\\sigma_Y^{-1}}(FK\\otimes^LL)\\xrightarrow{\\mathrm{PF}_c}F(K\\otimes^Lf^*L)\\xrightarrow{F(\\sigma_X)}T_c$. This is a definition of the actual map, with no assertion of invertibility, shift coherence or unit coherence.",
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-etale-site",
+  "def-weil-derived-tensor",
+  "def-weil-abstract-derived-category",
+  "sk-def-sf-exchanges",
+  "lem-kun-tensor-sym"
+ ],
+ "source": {
+  "document": "Zheng, Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks; Stacks Tags 0B56 and 0GL1",
+  "place": "The coefficient-first projection construction in Theorem 2.18(2), printed p. 12, and Construction 2.26, printed p. 15."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supportProjection(Source|Target|Map)|projectionMapOfCompactification",
+   "results": "{\"t\": \"2026-10-24T03:44:13Z\", \"tool\": \"grep\", \"query\": \"supportProjection(Source|Target|Map)|projectionMapOfCompactification\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib construction; reuse the published project definitions in Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient first compact support projection natural transformation using tensor symmetry proper counit and open extension",
+   "results": "{\"t\": \"2026-10-24T03:44:13Z\", \"tool\": \"leansearch\", \"query\": \"Canonical coefficient first compact support projection natural transformation using tensor symmetry proper counit and open extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.ranCounit\", \"CategoryTheory.Functor.pointwiseRightKanExtensionCounit\", \"CompHausLike.LocallyConstant.incl_of_counitAppApp\", \"CategoryTheory.Functor.rightKanExtensionCounit\", \"Pi.comul_comp_finsuppLcoeFun\", \"CategoryTheory.Abelian.LeftResolution.karoubi.π'\", \"TestFunction.coe_ofSupportedIn\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\"], \"digest\": \"16951efbcd4b8dbd\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib construction; reuse the published project definitions in Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"supportProjectionMap\"",
+   "results": "{\"t\": \"2026-10-24T03:44:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"supportProjectionMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching Mathlib construction; reuse the published project definitions in Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l supportProjectionSource|supportProjectionTarget|supportProjectionMap dag/nodes; rg -n same names lean/WeilConjectures lean/Sheaf; tools/blueprint_refs.py search coefficient-first support projection",
+   "results": "DAG: only lem-pur-etale-support-projection-shift-unit records these helpers, as part of its theorem. WeilConjectures: no hits. Sheaf: EtaleSupportProjectionShiftUnit.lean lines 65, 73, 111 give the existing definitions. Blueprint search: zero nodes. The tensor-conjugated definition is reused, no module written.",
+   "date": "2026-10-24",
+   "verdict": "existing definitions found; separate definition node requested by the independent reviewer"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-system-compact-support-projection",
+  "date": "2026-10-24",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Second proof paragraph, first RHom term: the ordinary compact-support projection in coefficient-first order used by the strict-system evaluation.",
+   "via": [
+    "lem-coef-system-compact-support-projection",
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit",
+  "declaration": "AlgebraicGeometry.Etale.supportProjectionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportProjectionSource",
+   "AlgebraicGeometry.Etale.supportProjectionTarget",
+   "AlgebraicGeometry.Etale.supportProjectionMap"
+  ],
+  "statement": "def supportProjectionMap :\n    supportProjectionSource A c ⟶ supportProjectionTarget A c",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the canonical coefficient-first source, target and map already declared in Sheaf.AlgebraicGeometry.EtaleSupportProjectionShiftUnit. The map is the inverse tensor symmetry, the published projectionMapOfCompactification, then tensor symmetry; the theorem lem-pur-etale-support-projection-shift-unit remains a proof dependency only."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-063b2d7fe",
+  "group": "Q31",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-063b2d7fe",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery after the 320e29509b58 landing refusal. The only substantive change is that the item's proof_deps drops lem-pur-etale-support-projection-shift-unit; the union of step uses now equals proof_deps (17), matching the live record. All 7 Lean files are byte-identical to f9e9/320e. The new nodes and modules are absent from live (no clash). def-coef-etale-support-projection-map existing:true owns supportProjectionSource/Target/Map in live EtaleSupportProjectionShiftUnit; statement starts at the def keyword; proof_deps empty. Re-read every clause: FiniteFieldDatum, l≠p, finite E/Q_l, quotientTower R/varpi^(n+1); X, Y, f sep/LFT/QC with Compactification; F exact (CommShift ∧ IsTriangulated) and preserving coproducts for all I : Type (u+1), empty included; pi pinned to d.word (proper-counit transpose then inverse adjunction-pinned open projection), IsIso pi, projectionLaw against supportProjectionMap; IsIso compactScalarMap; cocycle = singlePath; transition formula via TransitionEvaluation.reduction. No boundedness or flatness assumption, universes bound, single sorry, docstrings and both report sections present. Advisories: base field unused; existential CommShift; redundant direct import. No change, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-b734b",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261026T002138-L-60288",
+  "kind": "interface",
+  "note": "independent cc review: SupportProjectionCoherent new abbrev (BifunctorProjectionCoherent + UnitA/UnitB) unfolded against old def body: identical conjuncts and instances; item theorem signature vs clone 7c3c838 unchanged; both importers compiled against delivered modules; axioms clean",
+  "sorry_before": [
+   "AlgebraicGeometry.Etale.etaleSupportProjectionShiftUnit"
+  ],
+  "sorry_after": []
+ }
+}

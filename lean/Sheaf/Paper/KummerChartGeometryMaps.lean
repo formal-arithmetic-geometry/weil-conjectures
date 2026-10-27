@@ -46,7 +46,7 @@ theorem kummerChartOpen_commutes (p : ℕ) (D : Y.IdealSheafData)
     (c : TameRootExtensionChart C I) :
     c.openInclusion p D ≫ c.towerMap p =
       c.toPuncturedBase p D ≫ kummerChartOpen D c := by
-  sorry
+  exact (pullback.lift_fst _ _ _).symm
 
 /-- The punctured coefficient pullback agrees with the original restriction to W.
 Source: direct-image proof (3), actual open restriction
@@ -56,6 +56,6 @@ unfold toPuncturedBase and toOpen, and use the pullback lift projection equation
 theorem kummerChartToOpen_commutes (p : ℕ) (D : Y.IdealSheafData)
     (c : TameRootExtensionChart C I) :
     c.toPuncturedBase p D ≫ kummerChartToOpen D c = c.toOpen p D := by
-  sorry
+  exact pullback.lift_snd _ _ _
 
 end AlgebraicGeometry.ProEtale.CondensedRing

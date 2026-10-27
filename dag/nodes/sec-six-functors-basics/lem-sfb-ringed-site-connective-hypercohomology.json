@@ -1,0 +1,332 @@
+{
+ "id": "lem-sfb-ringed-site-connective-hypercohomology",
+ "kind": "statement",
+ "title": "Connective hypercohomology on a ringed site",
+ "statement": "Let $\\mathcal C$ be a site small in the coefficient universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], and let $\\mathcal O$ be a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived category $D(\\mathcal O)$ [def-weil-abstract-derived-category], with cohomology sheaves [def-weil-derived-cohomology-sheaves]. Let $E\\in D(\\mathcal O)$ satisfy $\\mathcal H^i(E)=0$ for $i<0$. Write $R\\Gamma(\\mathcal C,-)$ for global sections derived on K-injective resolutions, and $H^0(\\mathcal C,E)=H^0R\\Gamma(\\mathcal C,E)$ [def-pur-ringed-site-zeroth-hypercohomology]. The canonical map induced by $\\mathcal H^0(E)[0]\\to E$ gives a natural isomorphism\n$$\\Gamma(\\mathcal C,\\mathcal H^0(E))\\xrightarrow{\\sim}H^0(\\mathcal C,E).$$\nMoreover $H^iR\\Gamma(\\mathcal C,E)=0$ for $i<0$. The same assertions hold on each localized ringed site $\\mathcal C/U$ [def-pur-localized-ringed-site], and the isomorphisms commute with restriction in $U$. If $E=Q(P^\\bullet)$ for a complex zero in negative degrees, this identifies $H^0(\\mathcal C,E)$ with $\\ker(\\Gamma(\\mathcal C,P^0)\\to\\Gamma(\\mathcal C,P^1))$. These identifications are natural in $E$. For a morphism of ringed topoi $f:(\\mathcal C',\\mathcal O')\\to(\\mathcal C,\\mathcal O)$ [def-weil-pbc-ringed-topos-morphism], when also $Lf^*E$ has no negative cohomology, they identify pullback on hypercohomology with the map on sections induced by $\\mathcal H^0(E)\\to f_*\\mathcal H^0(Lf^*E)$ coming from the derived adjunction unit $E\\to Rf_*Lf^*E$. Derived tensor pullback uses K-flat resolutions [def-pc-kflat-complex]. No upper cohomological bound is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 071J, section-derived-functors, resolution functor and derived evaluation; Tag 07A5, section-unbounded, comparison with K-injective derived sections. The connective degree-zero consequence used in quot.tex Tag 08JX, first sentence of the proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\Mod(\\mathcal O)$. By [lem-weil-pbc-ring-sheaves-grothendieck] and [lem-sp-grothendieck-enough-injectives], $\\mathcal A$ is abelian with enough injectives. The assumed lower cohomological bound puts $E$ in $D^+(\\mathcal A)$ [def-weil-pbc-bounded-derived-subcategories]. Apply [lem-weil-pbc-dplus-injective-representative] with $n=0$: choose a complex $I$ of injectives with $I^r=0$ for $r<0$ and $\\alpha:QI\\cong E$. It is K-injective, also for the unbounded category. By [prop-pur-kinjective-resolutions-exist] every complex has a K-injective resolution, so [def-sfb-right-derived-functor] applies to the additive global-section and evaluation functors on all of $D(\\mathcal O)$, and computes them on this $I$ by applying the functors termwise. There is no upper bound on $I$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective); sites-cohomology.tex Tags 071J (section-derived-functors), 07A5 (section-unbounded)"
+   }
+  },
+  {
+   "text": "Set $Z=\\ker(d_I^0:I^0\\to I^1)$. Since $I^{-1}=0$, [def-weil-derived-cohomology-sheaves] identifies $Z$ with $\\mathcal H^0(QI)$. Kernels of module sheaves are sectionwise [def-weil-sheaf-of-modules-category]. Global sections also preserve this kernel: a morphism $\\mathcal O\\to I^0$ factors through $Z$ exactly when its composite with $d_I^0$ is zero. Hence\n$$\\Gamma(\\mathcal C,Z)=\\ker(\\Gamma(\\mathcal C,I^0)\\to\\Gamma(\\mathcal C,I^1))=H^0(\\Gamma(\\mathcal C,I)).$$\nThere are no degree-zero boundaries and all negative terms of this section complex vanish. Thus [def-weil-abstract-derived-category] gives negative cohomology zero, and [def-pur-ringed-site-zeroth-hypercohomology] and $\\alpha$ give the required degree-zero isomorphism.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-pur-ringed-site-zeroth-hypercohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 071J (section-derived-functors), 07A5 (section-unbounded); quot.tex Tag 08JX (lemma-cohomology-perfect-complex), opening proof sentence"
+   }
+  },
+  {
+   "text": "The isomorphism just obtained has the asserted normalization. The canonical truncation map $\\mathcal H^0(QI)[0]\\to QI$ is represented by $Z[0]\\hookrightarrow I$: this is the explicit truncation complex of [def-sbc-standard-tstructure-derived-category]. Write $\\eta$ for the derived-global-section unit of [def-sfb-right-derived-functor]. Apply its naturality to $Z[0]\\hookrightarrow I$. On $I$, $\\eta_I$ is invertible, so the map from ordinary sections of $Z$ into $H^0R\\Gamma(QI)$ is the map induced by inclusion of the same zero-cycles into $\\Gamma(I)$. It is exactly the isomorphism in step 2. Applying step 2 to the degree-zero sheaf $Z[0]$ identifies its derived degree zero with $\\Gamma(Z)$, so this also verifies that the map is the one induced by the canonical derived truncation arrow, then transported by $\\alpha$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RR (section-derived-categories), standard truncations; sites-cohomology.tex Tag 071J (section-derived-functors), R^0F=F"
+   }
+  },
+  {
+   "text": "For two such models $QI\\cong E$, $QJ\\cong E'$ and a derived map $v:E\\to E'$, [lem-weil-pbc-kinjective-hom-derived] represents the transported map by $a:I\\to J$, uniquely up to homotopy. The unit naturality of [def-sfb-right-derived-functor] computes its derived-section map by $\\Gamma(a)$. Both the cohomology-sheaf map and the section-complex map send a zero-cycle $s$ to $a^0(s)$. They therefore give the same map under step 2. If $a,b$ are homotopic, [def-pur-kinjective-complex] gives $a^0-b^0=d_J^{-1}h^0+h^1d_I^0$, which vanishes on $\\ker d_I^0$ because $J^{-1}=0$. This proves naturality and, taking $v=1_E$ between two models, independence of choices.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-sfb-right-derived-functor",
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), (3), and 070H (definition-K-injective)"
+   }
+  },
+  {
+   "text": "For every object $U$, restriction to $\\mathcal C/U$ is exact [def-weil-pbc-ringed-derived-restriction], so it identifies $\\mathcal H^0(E)|_U$ with $\\mathcal H^0(E|_U)$. By [lem-pur-kinjective-restrict-localized], $I|_U$ is K-injective; it is zero in negative degrees. The sectionwise formula of [def-pur-localized-ringed-site] gives $\\Gamma(\\mathcal C/U,I|_U)=I(U)$. Thus the same calculation in step 2 computes derived sections on the slice and identifies its degree zero with $\\ker(I^0(U)\\to I^1(U))$. For $a:V\\to U$, the actual restriction chain map sends a cycle $s$ to $s|_V$. Both kernel identifications have that same formula. The derived restriction is computed by this chain map, by the derived-unit equation [def-sfb-right-derived-functor] on these K-injective representatives. Hence the isomorphisms commute with restriction for every arrow, including iterated localization.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-localized-ringed-site",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 08FJ (lemma-adjoint-lower-shriek-restrict), and 07A5 (section-unbounded); sites-modules.tex Tag 04IX (definition-localize-ringed-site)"
+   }
+  },
+  {
+   "text": "If $P^r=0$ for $r<0$, then $\\mathcal H^0(QP)=\\ker(d_P^0:P^0\\to P^1)$ by [def-weil-derived-cohomology-sheaves]. Applying $\\Gamma=\\operatorname{Hom}_{\\mathcal O}(\\mathcal O,-)$ to this kernel gives precisely $\\ker(\\Gamma(P^0)\\to\\Gamma(P^1))$, by the factorization property of a kernel and [def-weil-sheaf-of-modules-category]. Compose this equality with steps 2 and 3. The construction sends a section cycle to its own degree-zero cohomology class under the derived-section unit, and step 4 proves its naturality. This does not assert that ordinary sections of $P$ compute higher hypercohomology.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 071J (section-derived-functors); quot.tex Tag 08JX (lemma-cohomology-perfect-complex), connective degree-zero calculation"
+   }
+  },
+  {
+   "text": "Put $F=Lf^*E$, assumed connective. Use the canonical derived adjunction of [lem-weil-pbc-ringed-projection-mate-exact], and represent $F$ by a nonnegative K-injective $J$ as in step 1. Then $Rf_*F=Q(f_*J)$ by [def-sfb-right-derived-functor]. Since $f_*$ is a right adjoint on modules [lem-weil-pbc-ringed-topoi-module-adjunction], it preserves kernels: maps into a kernel correspond under the adjunction to maps whose composite with its defining arrow is zero. Consequently $f_*J$ has zero negative terms and\n$$\\mathcal H^0(Rf_*F)=\\ker(f_*d_J^0)=f_*\\ker(d_J^0)=f_*\\mathcal H^0(F).$$\nApply steps 2--4 to the derived unit $u:E\\to Rf_*F$. They identify $H^0R\\Gamma(u)$ with sections of $\\mathcal H^0(u)$ under this kernel equality. Finally the derived direct-image composition of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], applied also to the global-section ringed morphism from $\\operatorname{Sh}(\\mathcal C)$ to the point with ring $\\Gamma(\\mathcal C,\\mathcal O)$, identifies $R\\Gamma(\\mathcal C,Rf_*F)$ with $R\\Gamma(\\mathcal C',F)$ (forget scalars). In degree zero its normalized resolution map is ordinary $\\Gamma(\\mathcal C,f_*\\ker d_J^0)=\\Gamma(\\mathcal C',\\ker d_J^0)$: the resolution map on $f_*J$ induces its cohomology map, and steps 2--4 identify that map with the same kernel sections. Thus pullback, defined by this derived unit followed by the composition comparison, is exactly the section map stated in the item. K-flat resolutions enter only to define $Lf^*$; neither $E$ nor $F$ needs an upper bound.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A5 (section-unbounded), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition); derived.tex Tag 0FND (lemma-pre-derived-adjoint-functors-general)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-weil-pbc-dplus-injective-representative",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-sfb-right-derived-functor",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-pur-kinjective-complex",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit connective kernel argument expanding Tags 071J and 07A5 and quot.tex Tag 08JX; restriction by 08FI and pullback normalization by 07A6 and 0D6E."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On any ringed site the zeroth hypercohomology of a connective complex is the global sections of its zeroth cohomology sheaf",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CochainComplex.ConnectData.X_zero\", \"module\": \"Mathlib/Algebra/Homology/Embedding/Connect\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {K : ChainComplex C ℕ} {L : CochainComplex C ℕ}, CochainComplex.ConnectData.X K L 0 = L.X 0\", \"doc\": \"For the connecting data of cochain complexes $ K $ and $ L $, the object at index $ 0 $ is equal to the zeroth object of complex $ L $, i.e., $ X(K, L, 0) = L^0 $.\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"CategoryTheory.Sheaf.instAddCommGroupH\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (F : CategoryTheory.Sheaf J AddCommGrpCat) →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [inst_2 : CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommG\", \"doc\": \"For any natural number $ n $, the $ n $-th sheaf cohomology group $ H^n(F) $ of a sheaf $ F $ is equipped with a canonical additive commutative group structure. This follows from the abelian category \"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_H_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  ↑(CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).H = CochainComplex.HomComplex.CohomologyClass K L m\", \"doc\": \"The cohomology class in degree $ m $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ is equal to the quotient of the cocycle subgroup $ \\\\text{Cocycle}(K, L, m) $ by the coboundary subgroup $ \\\\text{Co\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData_H_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n : ℤ),\\n  ↑(CochainComplex.HomComplex.leftHomologyData K L n).H = CochainComplex.HomComplex.CohomologyClass K L n\", \"doc\": \"For any cochain complexes $ K $ and $ L $ in a preadditive category $ C $, and for any integer $ n $, the homology group $ H $ of the left homology data of the homomorphism complex $ \\\\text{Hom}(K, L) \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) {Y : C} (R : CategoryTheory.InjectiveResolution Y) (n : ℕ),\\n  R.extEquivCohomologyClass 0 = 0\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with an injective resolution $R$ of $Y$, the natural equivalence between the $n$-th Ext group $\\\\mathrm{Ext}^n(X,Y)$ and the $n$-th cohomolo\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: rightDerivedZeroIsoSelf treats a sheaf in degree zero, not a connective complex and restriction/pullback compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"homologyFunctor\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: rightDerivedZeroIsoSelf treats a sheaf in degree zero, not a connective complex and restriction/pullback compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*rightDerived|rightDerived.*homology|hypercohomology",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"25\", \"text\": \"`F.rightDerivedToHomotopyCategory` with the homology functors on the homotopy category.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"111\", \"text\": \"  F.rightDerivedToHomotopyCategory ⋙ HomotopyCategory.homologyFunctor D _ n\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"330\", \"text\": \"      (CochainComplex.isoHomologyπ₀ _).hom ≫ (I.isoRightDerivedObj F 0).inv := by\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: rightDerivedZeroIsoSelf treats a sheaf in degree zero, not a connective complex and restriction/pullback compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived functor of a left exact functor on a complex with no negative cohomology agrees in degree zero with the functor on zeroth cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerived\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] (n : ℕ) : C ⥤ D\", \"doc\": \"Given an additive functor $ F : C \\\\to D $ between abelian categories and a natural number $ n $, the $ n $-th right-derived functor is constructed by first taking injective resolutions in $ C $, apply\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.up ℕ)\", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is constr\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is constr\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \": F.rightDerivedZeroIsoSelf.hom ≫ F.toRightDerivedZero = 𝟙 _\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is given \"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is given \"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \": F.rightDerived 0 ≅ F\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the 0th right-derived functor $ R^0F $ is isomorphic to $ F $. This isomorphism is given \"}\n  {\"name\": \"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] (n : ℕ) (X : C) [Injective X] : IsZero ((F.rightDerived (n + 1)).obj X)\", \"doc\": \"For any additive functor $ F : C \\\\to D $ between abelian categories, natural number $ n $, and injective object $ X $ in $ C $, the $(n+1)$-th right-derived functor of $ F $ evaluated at $ X $ yields \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: rightDerivedZeroIsoSelf treats a sheaf in degree zero, not a connective complex and restriction/pullback compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero derived global sections of a nonnegative complex equals the kernel of its first differential on sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.i_cyclesMk\", \"module\": \"Mathlib/Algebra/Homology/ConcreteCategory\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {FC : C → C → Type u_1} {CC : C → Type v}\\n  [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] [inst_2 : CategoryTheory.ConcreteCategory C FC]\\n  [inst_3 : CategoryTheory.HasForget₂ C Ab] [inst_4 : CategoryTheory.Abelian C]\\n  [inst_5 : (Cate\", \"doc\": \"For a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms, given an index $ i $, an element $ x $ in the underlying abelian group of $ K_i $, and a proof that the differential \"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.isKernel\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplex\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] →\\n      (K L : CochainComplex C ℤ) →\\n        (n m : ℤ) →\\n          (hm : n + 1 = m) →\\n            CategoryTheory.Limits.IsLimit\\n              (CategoryTheory.Limits.KernelFork.ofι\\n               \", \"doc\": \"In the category of additive commutative groups, the canonical inclusion map from the subgroup of cocycles in degree $n$ of the homomorphism complex $\\\\text{Hom}(K,L)$ to the cochain group is a kernel o\"}\n  {\"name\": \"HomologicalComplex.cyclesMk\", \"module\": \"Mathlib/Algebra/Homology/ConcreteCategory\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {FC : C → C → Type u_1} →\\n      {CC : C → Type v} →\\n        [inst_1 : (X Y : C) → FunLike (FC X Y) (CC X) (CC Y)] →\\n          [inst_2 : CategoryTheory.ConcreteCategory C FC] →\\n            [inst_3 : CategoryTheory.HasForget₂ C Ab] →\\n   \", \"doc\": \"Given a homological complex $ K $ in a category $ \\\\mathcal{C} $ with zero morphisms, an index $ i $, an element $ x $ in the underlying abelian group of $ K_i $, and a proof that the differential $ d_\"}\n  {\"name\": \"HomologicalComplex.kernel_from_eq_kernel\", \"module\": \"Mathlib/Algebra/Homology/HomologicalComplex\", \"type\": \"∀ {ι : Type u_1} {V : Type u} [inst : CategoryTheory.Category.{v, u} V]\\n  [inst_1 : CategoryTheory.Limits.HasZeroMorphisms V] {c : ComplexShape ι} (C : HomologicalComplex V c)\\n  [inst_2 : CategoryTheory.Limits.HasKernels V] {i j : ι},\\n  c.Rel i j → CategoryTheory.Limits.kernelSubobject (C.dFrom i) =\", \"doc\": \"In a category $ V $ with kernels, for a homological complex $ C $ with shape $ c $ over an index type $ \\\\iota $, if indices $ i $ and $ j $ are related by the complex shape (i.e., $ j $ is the success\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData'_K_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n m p : ℤ) (hm : n + 1 = m) (hp : m + 1 = p),\\n  ↑(CochainComplex.HomComplex.leftHomologyData' K L n m p hm hp).K = CochainComplex.HomComplex.Cocycle K L m\", \"doc\": \"In the homomorphism complex $\\\\text{Hom}(K, L)$ of cochain complexes $K$ and $L$ in a preadditive category, the $K$ object in the left homology data at degree $m$ coincides with the cocycle subgroup $\\\\\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData_K_coe\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n : ℤ),\\n  ↑(CochainComplex.HomComplex.leftHomologyData K L n).K = CochainComplex.HomComplex.Cocycle K L n\", \"doc\": \"For cochain complexes $K$ and $L$ in the category of additive commutative groups, the kernel $K$ in the left homology data of their homomorphism complex $\\\\text{Hom}(K,L)$ at degree $n$ coincides with \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: rightDerivedZeroIsoSelf treats a sheaf in degree zero, not a connective complex and restriction/pullback compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-connective-perfect-sections-affine",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TU, quot-proposition-quot. Supporting input: Tag 08K6, proposition-hom, with situation-hom. Supporting input: Tag 08JY (quot-lemma-noetherian-hom), the Noetherian finite-type-module case used in the last paragraph of Tag 08K6. In the proof of Tag 08JY: application of Tag 08JX after proving universal absence of negative cohomology. Supporting input: Connective hypercohomology on a ringed site.",
+   "via": [
+    "lem-sfb-space-connective-perfect-sections-affine",
+    "lem-sfb-noetherian-module-hom",
+    "lem-sfb-space-module-hom-affine",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-connective-hypercohomology",
+  "worker": "stage1",
+  "summary": "Expanded connective hypercohomology using existing nonnegative injective representatives, sectionwise kernels, K-injective comparison, localized restriction, and the derived-unit/Leray normalization. Statement and statement dependencies unchanged. No new nodes; all non-elementary inputs already exist.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3) along the existing recorded via chain, specifically the connective degree-zero input of quot.tex Tag 08JX in the affine Hom-representability reduction. Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/_section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. Ancestor command returns None for the pre-existing created.item chain ending at Sheaf.SixFunctors.CtfStabilityDirectImages; preserved the supplied blueprint.from record.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic small-site module-category input for enough injectives; no stability-unit replacement."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic unbounded K-injective existence for derived evaluation."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic chain-map realization of maps into K-injectives for naturality."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic localized-site resolution comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only its canonical unbounded ringed derived adjunction is used to specify the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Ordinary module pushforward is right adjoint, hence preserves kernels."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic canonical Leray comparison for global sections and its normalized resolution map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-2999c5695",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-2999c5695 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 7 steps and every cited statement (24 ids). I checked them against Stacks quot 08JX (statement and first sentence of the proof) and sites-cohomology 071J, 07A5, 07A6, 08FI and 0D6E. There are no new nodes. I diffed the item against the Q24 snapshot: the statement, stmt_deps, blueprint and searches are unchanged, so nothing is weakened. proof_deps equals the union of the uses, there is no cycle, there is no SGA, and the off-unit inputs are declared in tool_uses and are generic. Step 1 builds a nonnegative injective K-injective model from the D^+ representative (n=0); prop-pur-kinjective-resolutions-exist makes RΓ defined and η_I invertible. Step 2: since I^{-1}=0, H^0=ker d^0, Γ=Hom(O,-) preserves the kernel, and H^{<0}Γ(I)=0. Step 3: the τ_{≤0} subcomplex is Z[0], and η-naturality shows the map is canonical. Step 4: homotopies vanish on ker d^0 because J^{-1}=0. Step 5: restriction is exact, I|_U is K-injective, Γ(C/U,-) is evaluation at the terminal object id_U, and relocalization covers iterated restriction. Step 6 gives ker(ΓP^0→ΓP^1) without claiming anything about higher cohomology. Step 7: f_* is a right adjoint, so H^0Rf_*F=f_*H^0F; the global-section morphism to the point together with the κ normalization (resolution j:f_*J→J', which may be chosen nonnegative) gives Γ(C,f_*H^0F)=Γ(C',H^0F). The hypothesis that Lf^*E is connective is kept and used. Edge cases checked: 0, M[0], M[-1], the empty site, identity f, O-a->O, and non-flat f with Tor_1 (excluded by the hypothesis). Not a duplicate: lem-trf-connective-hypercohomology-sheaf covers only the site of opens of a ringed space and has no pullback clause, and the ringed-site global-module, slice-evaluation and unit/counit nodes state different things. Advisory: (1) the inherited blueprint.from.node is null, a base-node matter; (2) the statement has no stmt_dep for Lf^*⊣Rf_* because no ringed-topos 07A6 definition node exists; projection-mate-exact is used only for its fixed adjunction; (3) ring-sheaves-grothendieck in step 1 is redundant with prop-pur-kinjective-resolutions-exist. All 7 tool_uses are accepted."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteConnectiveHypercohomology",
+  "declaration": "CategoryTheory.RingedSiteConnective.connective_hypercohomology",
+  "declarations": [
+   "CategoryTheory.RingedSiteConnective.modules",
+   "CategoryTheory.RingedSiteConnective.ringModule",
+   "CategoryTheory.RingedSiteConnective.sections",
+   "CategoryTheory.RingedSiteConnective.abDerived",
+   "CategoryTheory.RingedSiteConnective.abHomology",
+   "CategoryTheory.RingedSiteConnective.derivedSections",
+   "CategoryTheory.RingedSiteConnective.hypercohomology",
+   "CategoryTheory.RingedSiteConnective.connective",
+   "CategoryTheory.RingedSiteConnective.complexComparison",
+   "CategoryTheory.RingedSiteConnective.ordinaryOnConnective",
+   "CategoryTheory.RingedSiteConnective.derivedOnConnective",
+   "CategoryTheory.RingedSiteConnective.sheafComparison",
+   "CategoryTheory.RingedSiteConnective.evaluation",
+   "CategoryTheory.RingedSiteConnective.evaluation_additive",
+   "CategoryTheory.RingedSiteConnective.evaluationHypercohomology",
+   "CategoryTheory.RingedSiteConnective.evaluationRestriction",
+   "CategoryTheory.RingedSiteConnective.evaluationComplexComparison",
+   "CategoryTheory.RingedSiteConnective.evaluationSheafComparison",
+   "CategoryTheory.RingedSiteConnective.restriction",
+   "CategoryTheory.RingedSiteConnective.restrictionHomology",
+   "CategoryTheory.RingedSiteConnective.underlyingSets",
+   "CategoryTheory.RingedSiteConnective.globalElement",
+   "CategoryTheory.RingedSiteConnective.derive",
+   "CategoryTheory.RingedSiteConnective.deriveUnit",
+   "CategoryTheory.RingedSiteConnective.deriveSheafComparison",
+   "CategoryTheory.RingedSiteConnective.cycleToSheaf",
+   "CategoryTheory.RingedSiteConnective.connective_hypercohomology",
+   "CategoryTheory.RingedSiteConnective.connective_hypercohomology_localization",
+   "CategoryTheory.RingedSiteConnective.sectionsUnit",
+   "CategoryTheory.RingedSiteConnective.moduleUnit",
+   "CategoryTheory.RingedSiteConnective.IsCanonicalComparison",
+   "CategoryTheory.RingedSiteConnective.IsDirectImageCanonicalComparison",
+   "CategoryTheory.RingedSiteConnective.IsPullbackUnitNormalized",
+   "CategoryTheory.RingedSiteConnective.IsOrdinarySectionsComparisonNormalized",
+   "CategoryTheory.RingedSiteConnective.IsSectionsCompositionNormalized",
+   "CategoryTheory.RingedSiteConnective.connective_hypercohomology_pullback"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteConnectiveHypercohomology.lean",
+  "statement": "theorem connective_hypercohomology {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (modules R)] : ∃ e : ordinaryOnConnective R ≅ derivedOnConnective R, (∀ E : (connective R).FullSubcategory, ∃! t : (DerivedCategory.singleFunctor (modules R) 0).obj ((DerivedCategory.homologyFunctor (modules R) 0).obj E.obj) ⟶ E.obj, (DerivedCategory.singleFunctorCompHomologyFunctorIso (modules R) 0).inv.app ((DerivedCategory.homologyFunctor (modules R) 0).obj E.obj) ≫ (DerivedCategory.homologyFunctor (modules R) 0).map t = 𝟙 _ ∧ e.hom.app E = (sheafComparison R).hom.app ((DerivedCategory.homologyFunctor (modules R) 0).obj E.obj) ≫ (hypercohomology R 0).map t) ∧ (∀ (E : DerivedCategory (modules R)), connective R E → ∀ i : ℤ, i < 0 → IsZero ((hypercohomology R i).obj E)) ∧ ∀ (P : CochainComplex (modules R) ℤ), (∀ n : ℤ, n < 0 → IsZero (P.X n)) → ∃ hP : connective R (DerivedCategory.Q.obj P), ∃ k : kernel ((sections R).map (P.d 0 1)) ≅ (ringedSiteZerothHypercohomologyOfUniverses.{u, u, u, w} J R).obj (DerivedCategory.Q.obj P), (∀ (x : ↥(kernel ((sections R).map (P.d 0 1)) : AddCommGrpCat.{u})) (a : ringModule R ⟶ P.X 0) (ha : a ≫ P.d 0 1 = 0), (kernel.ι ((sections R).map (P.d 0 1))) x = a → k.hom x = e.hom.app ⟨DerivedCategory.Q.obj P, hP⟩ (cycleToSheaf R P a ha)) ∧ ∀ (a : ringModule R ⟶ P.X 0) (ha : a ≫ P.d 0 1 = 0) (c : (((sections R).mapHomologicalComplex (.up ℤ)).obj P).cycles 0), ((((sections R).mapHomologicalComplex (.up ℤ)).obj P).iCycles 0) c = a → (complexComparison R).app P (((((sections R).mapHomologicalComplex (.up ℤ)).obj P).homologyπ 0) c) = e.hom.app ⟨DerivedCategory.Q.obj P, hP⟩ (cycleToSheaf R P a ha)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Three theorem statements together render the global, localized/restriction, and ringed-topos pullback clauses. Other declarations are transparent aliases, canonical maps, and normalization predicates belonging to this same notion; all have real definitions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-99fb7f489",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_dep records, the 670-line module, report (Worker report + Second reading by Q25, same-worker but real) and the upstream declarations (ringedSiteZerothHypercohomologyOfUniverses, RingedToposMorphism, IsKFlatIndependentCoefficients, locallyFreeDerivedComparison, singleFunctorCompRightDerivedFunctorCompHomologyFunctorZeroIso, RingedToposMorphism.exists_derivedLeftAdjoint). Main theorem: canonical natural iso on the connective full subcategory, normalised by sheafComparison ≫ H0RΓ(t) with H0(t)=id; negative vanishing; kernel iso k normalised on section cycles via cycleToSheaf and complexComparison. Localization: per-U comparison with derived-restriction squares for every a:V→U, slice connectivity and negative vanishing, b fixed via the canonical slice comparison and evaluation at id_U on 1. Pullback: F⊣f.modules, L left derived and invertible on flat K-flat complexes, adjunction unit, t, kappa (derived-level) and d all fixed by equations; final equation uses exactly hLE. Universes u throughout as the deps require; w free; no extra assumptions. lean.statement verbatim; dep records identical to live; only the lean field changed; derivedSections is the same construction as the recorded H0; no existing ringed Lf^* definition node. Edge cases checked: 0, M[0], M[-1], empty site, identity f, Tor case. Gates: 3 sorry only, real definitions, docstrings with source/blueprint/proof steps, lines ≤100, no pro-etale substitute. Not recompiled (no change). Advisory: ∃! t, P∧eq in the main theorem is still true and pinning (t is unique); the ∀-form would be cleaner."
+ }
+}

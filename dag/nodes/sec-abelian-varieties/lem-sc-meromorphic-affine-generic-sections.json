@@ -1,0 +1,131 @@
+{
+ "id": "lem-sc-meromorphic-affine-generic-sections",
+ "kind": "statement",
+ "title": "Affine sections calculation for generic meromorphic modules",
+ "statement": "Let X be a scheme [def-pc-scheme] such that every weakly associated point is generic in an irreducible component [def-sc-weakly-associated-primes, def-sc-generic-point]. Let F be a quasi-coherent module [pqf-def-coherent] and U an affine open with finitely many irreducible components [def-weil-irreducible-components]. Let P(U) be the localization of F(U) at the sections regular in every stalk, the defining presheaf of the meromorphic module [def-sc-meromorphic-module]. For each generic point eta let j_eta: Spec(O_X,eta) -> X. Any O_X(U)-linear map phi from P(U) to the sections on U of product_eta j_eta,* tilde(F_eta) that sends m/1 in every factor eta in U to tilde.toOpen of the germ m_eta is an isomorphism of O_X(U)-modules. Factors outside U are zero. No global finiteness hypothesis is required.",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sc-hilbert-polynomial",
+   "place": "proof, induction step: the affine calculation of meromorphic sections used in the generic-point product description (Stacks Tag 0EMF)",
+   "via": [
+    "lem-sc-meromorphic-weakass-generic-product"
+   ]
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0EMF, proof of lemma-meromorphic-weakass-finite: affine open Spec(A), Q(A) = product A_q; the module clause follows by finite-product tensoring"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components",
+  "pqf-def-coherent",
+  "def-weil-pbc-module-stalk",
+  "def-sc-meromorphic-module",
+  "def-sc-weakly-associated-primes"
+ ],
+ "proof": [
+  {
+   "text": "Write the affine open U as Spec(A), using its canonical affine isomorphism. The homeomorphism identifies its finitely many irreducible components with the finitely many minimal primes q_i of A. Weak association commutes with localization by lem-sc-weakass-localization. Its application to the ring module A identifies weak association of q_i with weak association of the maximal ideal in the corresponding stalk. Consequently hweak makes every weakly associated prime of A minimal. This includes the empty spectrum, with no minimal primes.",
+   "uses": [
+    "lem-sc-weakass-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The denominator submonoid on U is exactly the non-zero-divisors of A. For the forward direction, a section annihilated by a denominator has zero germ everywhere, hence is zero by the sheaf axiom. Conversely a non-zero-divisor stays regular in every prime localization: if (a/1)(m/s)=0, some t outside the prime kills am, regularity of a gives tm=0 and hence m/s=0. The affine stalk localization identifies this with regularity in the scheme stalk. Apply lem-sc-affine-totalquotient-minimal-product to obtain the canonical A-algebra equivalence S^{-1}A with the product of A_{q_i}.",
+   "uses": [
+    "lem-sc-affine-totalquotient-minimal-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let M be the module of sections of F on U. The affine quasi-coherent equivalence and the tilde stalk localization identify F_eta with M_{q_i}. Tensor the finite product algebra equivalence from Step 2 with M. Tensor commutes with finite products (equivalently finite direct sums), and (S^{-1}A) tensor_A M = S^{-1}M while A_q tensor_A M = M_q. This gives the canonical module equivalence S^{-1}M with product_i F_eta_i, including M=0 and an empty finite product.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a generic point eta in U, the canonical map from Spec(O_X,eta) has constant underlying point eta: a generalization of a generic point must equal it. Thus the inverse image of U is the whole spectrum, and the associated module has sections F_eta. For eta outside U the inverse image is empty, and the section module is zero. Evaluation of sheaves of modules preserves products, so the categorical product in the statement has precisely the section module computed in Step 3. Its canonical map sends m/1 to tilde.toOpen of the germ. The assumption h_phi specifies that same map on every nonzero factor. Each denominator acts invertibly in the factors, since in a zero-dimensional local ring every regular element is a unit. Hence localization uniqueness forces phi to be the computed bijective map, proving IsIso phi.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-weakass-localization",
+  "lem-sc-affine-totalquotient-minimal-product",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0EMF, proof of lemma-meromorphic-weakass-finite: affine open Spec(A), Q(A) = product A_q; the module clause follows by finite-product tensoring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "meromorphic sections on affine scheme equal product of stalks at finitely many minimal primes",
+   "results": "8 hits: MeromorphicAt, Meromorphic, ModuleCat.Tilde.isFraction, MeromorphicAt.prod, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.StructureSheaf.const, MeromorphicOn.fun_prod, MeromorphicAt.fun_prod; no affine meromorphic product calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an affine scheme the meromorphic sections of a quasi-coherent module are the finite product of its stalks at generic points when all weakly associated primes are minimal",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, ModuleCat.Tilde.sectionsSubmodule, AlgebraicGeometry.isLocalization_away_of_isAffine, AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.functionField_isFractionRing_of_isAffineOpen, AlgebraicGeometry.Scheme.germToFunctionField, AlgebraicGeometry.instFieldCarrierFunctionField; no affine meromorphic product calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "meromorphic|generic_product|generic.*stalk.*product",
+   "results": "0 hits: ; no affine meromorphic product calculation.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-def-av-ample-degree",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.MeromorphicGenericProduct",
+  "date": "2026-10-23",
+  "group": "B5"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.MeromorphicGenericAffine",
+  "file": "lean/Sheaf/AlgebraicGeometry/MeromorphicGenericAffine.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.meromorphic_affine_generic_sections_isIso",
+  "statement": "theorem meromorphic_affine_generic_sections_isIso (X : Scheme.{u}) (F : X.Modules)\n    [F.IsQuasicoherent]\n    (hweak : ∀ x : X, IsLocalRing.maximalIdeal (X.presheaf.stalk x) ∈\n      Ideal.WeakAss (X.presheaf.stalk x) → x ∈ genericPoints X)\n    (U : X.Opens) (hU : IsAffineOpen U) (hfinite : (irreducibleComponents U).Finite)\n    (φ : (meromorphicPresheaf X F).obj (op U) ⟶\n      (∏ᶜ (fun η : {x : X // x ∈ genericPoints X} ↦\n        (pushforward (X.fromSpecStalk η.val)).obj\n          (tilde (ModuleCat.of (X.presheaf.stalk η.val)\n            (F.presheaf.stalk η.val))))).val.obj (op U))\n    (hφ : ∀ (η : {x : X // x ∈ genericPoints X}) (hη : η.val ∈ U) (m : Γ(F, U)),\n      (φ ≫ (Pi.π (fun ξ : {x : X // x ∈ genericPoints X} ↦\n        (pushforward (X.fromSpecStalk ξ.val)).obj\n          (tilde (ModuleCat.of (X.presheaf.stalk ξ.val) (F.presheaf.stalk ξ.val))))\n        η).val.app (op U)).hom (LocalizedModule.mk m 1) =\n        tilde.toOpen (ModuleCat.of (X.presheaf.stalk η.val) (F.presheaf.stalk η.val))\n          (X.fromSpecStalk η.val ⁻¹ᵁ U) (F.presheaf.germ U η.val hη m)) :\n    IsIso φ",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261023T230428-L-3425328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261023T230428-L-3425328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-etale-scalar-pullback-unit-coherence",
+ "kind": "lemma",
+ "title": "Scalar/pullback unit compatibility",
+ "statement": "Let \\(A,B\\) be commutative rings, \\(\\varphi:A\\to B\\) a unital map, and \\(f:X\\to Y\\) a scheme morphism [def-pc-scheme]. Use ordinary unbounded small-etale derived module categories [def-weil-pbc-derived-categories], normalized scalar functors \\(Q_Y,Q_X\\), scalar units \\(e_Y,e_X\\) [def-pur-exceptional-coefficient-normalizations], geometric derived pullbacks \\(L_A,L_B\\) with unit comparisons \\(l_A:L_A1_A\\simeq1_A\\), \\(l_B:L_B1_B\\simeq1_B\\), and the normalized comparison \\(a:Q_Y;L_B\\simeq L_A;Q_X\\) [lem-pur-etale-scalar-mate-projection]. Then \\(a_{1_A};Q_X(l_A);e_X=L_B(e_Y);l_B\\), where semicolon denotes composition in application order. There are no finiteness, properness, flatness, or boundedness assumptions.",
+ "stmt_deps": [
+  "def-pur-exceptional-coefficient-normalizations",
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; agent extraction of normalized tensor and unit coherence used in more-etale.tex Tag 0GL6"
+ },
+ "proof": [
+  {
+   "text": "The composite tensor comparisons for Q_Y followed by B-pullback and for A-pullback followed by Q_X satisfy left unitality by composite_left_unit, using scalar left unitality and the published geometric left-unit laws. Their binary tensor compatibility is etaleScalarPullback_tensor. Apply tensorIso_preserves_unit to the invertible scalar/pullback comparison. Unfold the two composite unit identifications; its conclusion is the desired equation.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-tensor-coherence",
+    "lem-pur-scalar-left-unit",
+    "lem-pur-composite-left-unit-coherence",
+    "lem-pur-tensor-iso-unit-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-scalar-pullback-tensor-coherence",
+  "lem-pur-scalar-left-unit",
+  "lem-pur-composite-left-unit-coherence",
+  "lem-pur-tensor-iso-unit-coherence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "X8",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4; normalized representative descent and elementary categorical unit calculations"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An invertible natural transformation between strong monoidal functors that preserves tensor products also preserves the monoidal unit",
+   "results": "Functor.Monoidal.ofLaxMonoidal; CoreMonoidal.ofLaxMonoidal; Monoidal.transport_ε; NatTrans.IsMonoidal.of_cartesianMonoidalCategory; Iso.instIsMonoidalInvFunctor; Monoidal.εIso; Monoidal.ofBifunctor; Monoidal.coreMonoidalTransport",
+   "date": "2026-10-25",
+   "verdict": "No direct match for the normalized scalar comparisons or the required tensor-only implication; ordinary monoidal unit laws are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom",
+   "results": "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom in Mathlib.CategoryTheory.Monoidal.Functor",
+   "date": "2026-10-25",
+   "verdict": "Underlying ordinary unit law; representative transport and site descent remain necessary."
+  },
+  {
+   "tool": "grep",
+   "query": "left_unitality|IsMonoidal.of|unit.*tensor",
+   "results": "ModuleCat.Monoidal.Adjunction ordinary left_unitality; Monoidal.Category tensor/unit constructions; no scalar derived representative or pullback normalization square. Local source search also found ScalarRightUnitTransport and ExceptionalCoefficientUnitCoherence; their proved right-unit arguments guide the left-unit proof.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the new normalized left-unit or scalar/pullback tensor statements."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleCompactScalarCoherence",
+  "date": "2026-10-25",
+  "group": "X8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; scalar binary tensor comparison and coefficient-unit normalization",
+   "via": [
+    "lem-pur-etale-compact-scalar-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarPullbackUnitCoherence",
+  "file": "lean/Sheaf/Paper/EtaleScalarPullbackUnitCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleScalarPullback_unit",
+  "statement": "theorem etaleScalarPullback_unit\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    (scalarPullbackIso φ f).hom.app (𝟙_ (DerivedCategoryModule A Y)) ≫\n      (scalarExtension φ X).map (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f).hom ≫\n      (ExceptionalCoefficients.unitIso φ X).hom =\n    (upperStar (ModuleCat.{u + 1} B) f).leftDerivedFunctor.map\n        (ExceptionalCoefficients.unitIso φ Y).hom ≫\n      (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} B) f).hom",
+  "branch": "sheaf-dag",
+  "by": "X8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261025T203723-L-2845980",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

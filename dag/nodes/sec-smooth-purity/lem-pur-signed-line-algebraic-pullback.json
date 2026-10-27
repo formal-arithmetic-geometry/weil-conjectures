@@ -1,0 +1,105 @@
+{
+ "id": "lem-pur-signed-line-algebraic-pullback",
+ "kind": "statement",
+ "title": "Signed line algebraic pullback",
+ "statement": "Let F be the specified module pullback for a:R→U_*S. Given compatible unit presentations identifying S with the set inverse image of R and identifying the underlying sets of F with the set inverse image, there exists an AlgebraicInverseImage whose module functor is F, whose ring-underlying comparison is the inverse ring presentation, and whose module-underlying comparison is the given one. Its additive and scalar operation comparisons satisfy the defining graph equations. All fields are constructed from these presentations.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-signed-line-derived-action-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03EL and 0FNY; for derived localization use derived.tex Tags 06YU, 07A4 and 015F. Specialization of the Powers and duals paragraph of the current blueprint."
+ },
+ "proof": [
+  {
+   "text": "Choose precisely the given module functor and given underlying comparison, and choose the inverse ring presentation. Pullback-unit naturality and hom_ext prove compatibility with zero and addition. Apply binary_graph to addition and scalar multiplication and constant_graph to zero, using the actual module-unit section formulas. These operations supply every field of AlgebraicInverseImage.",
+   "uses": [
+    "lem-pur-signed-line-unit-presentation-graphs"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-signed-line-unit-presentation-graphs"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Powers and duals, including unit, positive tensor recursion, evaluation, and unbounded derived action. The component proof is given below and in the attached Lean module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback invertible module sheaves extends to all signed tensor powers and derived tensor products",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategory",
+   "results": "0 hits; loogle: unknown identifier 'Functor.mapDerivedCategory'",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "signed_line_derived_base_change|SignedLinePullbackNormalized",
+   "results": "0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "No complete match; use the published component APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SignedLineDerivedBaseChange",
+  "date": "2026-10-24",
+  "group": "V1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-signed-line-derived-base-change",
+   "place": "The corresponding strict component of its proof.",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SignedLineAlgebraicPullback",
+  "file": "lean/Sheaf/CategoryTheory/SignedLineAlgebraicPullback.lean",
+  "declaration": "SheafOfModules.SignedLineDerivedBaseChange.algebraic_pullback_of_presentations",
+  "declarations": [
+   "SheafOfModules.SignedLineDerivedBaseChange.algebraic_pullback_of_presentations"
+  ],
+  "statement": "theorem algebraic_pullback_of_presentations\n    (a : (sheafCompose J (forget₂ CommRingCat RingCat)).obj R ⟶\n      (U.sheafPushforwardContinuous RingCat J K).obj\n        ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S))\n    (pr : SheafPullbackUnitPresentation (F := U)\n      ((sheafCompose J (CategoryTheory.forget CommRingCat)).obj R)\n      ((sheafCompose K (CategoryTheory.forget CommRingCat)).obj S))\n    (hr : pr.unit = (sheafCompose J (CategoryTheory.forget RingCat)).map a)\n    (em : pull a ⋙ toSheaf _ ⋙ sheafCompose K\n        (CategoryTheory.forget AddCommGrpCat.{max u v w}) ≅\n      (toSheaf _ ⋙ sheafCompose J (CategoryTheory.forget AddCommGrpCat.{max u v w})) ⋙\n        sheafPullback U (Type (max u v w)) J K)\n    (he : ∀ (M : KFlatFixedTensor.Modules R) (V : Cᵒᵖ) (x : M.val.obj V),\n      (em.hom.app M).hom.app (U.op.obj V)\n        (ringedSitePullbackSection a (module_pushforward_isRightAdjoint_of_universes a)\n          M V.unop x) =\n        ((sheafAdjunctionContinuous U (Type (max u v w)) J K).unit.app\n          ((toSheaf _ ⋙ sheafCompose J\n            (CategoryTheory.forget AddCommGrpCat.{max u v w})).obj M)).hom.app V x) :\n    ∃ I : AlgebraicInverseImage (sheafPullback U (Type (max u v w)) J K) R S,\n      I.modules = pull a ∧ I.ringUnderlying = pr.iso.symm ∧ HEq I.moduleUnderlying em",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfce3",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261025T124047-L-1930969",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published statement (byte-identical); relocated Data definitions vs published bodies (structure/inductive repackaging, same content, change record); 18 delivered modules + 3 direct importers compiled together in a sandbox (no errors; CartesianCoefficientTwists 84 s vs 81 s for the published file, so its slowness was already there); #print axioms only propext/choice/Quot.sound plus sorryAx from cited open library statements"
+ }
+}

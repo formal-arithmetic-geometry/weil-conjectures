@@ -1,0 +1,232 @@
+{
+ "id": "lem-a1-affine-groupoid-constant-rank-norm-annihilator",
+ "kind": "statement",
+ "title": "The constant-rank groupoid norm polynomial and its evaluation",
+ "statement": "Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum], with maps $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] satisfying the groupoid laws [def-a1-scheme-groupoid-laws]. Write $\\sigma=s^\\sharp$, $\\tau=t^\\sharp:A\\to B$, and $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$. Assume $A\\ne0$ and that both $s,t$ are finite locally free of the same constant degree $r\\ge1$ [def-pc-finite-locally-free]. For $a\\in A$, let $\\sigma[T],\\tau[T]:A[T]\\to B[T]$ be the coefficientwise polynomial extensions fixing $T$ [def-weil-polynomial-ring], and set\n$$\nP_a(T)=N_{\\sigma[T]}(T-\\tau(a))\\in A[T].\n$$\nHere $N_{\\sigma[T]}$ is the finite locally free norm [lem-pd-finite-locally-free-norm-charts]: on each local free chart it is the determinant of multiplication by the input element, and these determinants are glued. The norm polynomial has the form\n$$\nP_a(T)=T^r+\\sum_{j<r}p_jT^j,\\qquad\n\\sigma(p_j)=\\tau(p_j)\\quad(j<r).\n$$\nIn particular $P_a\\in C[T]$ is monic of degree $r$. Its construction also satisfies\n$$\nP_a=N_{\\sigma[T]}(\\tau[T](T-a)),\\qquad\n\\bigl(\\sigma[T](P_a)\\bigr)(\\tau(a))=0.\n$$\nWith $p_r=1$, its evaluation comparison is\n$$\n\\tau(P_a(a))=\\sum_{j=0}^r\\tau(p_j)\\tau(a)^j\n=\\sum_{j=0}^r\\sigma(p_j)\\tau(a)^j\n=\\bigl(\\sigma[T](P_a)\\bigr)(\\tau(a))=0.\n$$\nThe identity map induces $\\epsilon=e^\\sharp:B\\to A$ with $\\epsilon\\circ\\tau=\\operatorname{id}_A$ and\n$$\nP_a(a)=\\epsilon(\\tau(P_a(a)))=0.\n$$\nNo global free basis of $B$ over $A$, reducedness, or Noetherian hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), second paragraph: the specific norm polynomial, invariant coefficients, Cayley-Hamilton, and descent of its root. Norm invariance is Tag 03BH (groupoids-lemma-determinant-trick), Cayley-Hamilton is Tag 00DX (algebra-lemma-charpoly); the identity section gives the left inverse used here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-a1-scheme-groupoid-laws",
+  "def-pc-finite-locally-free",
+  "def-weil-polynomial-ring",
+  "lem-pd-finite-locally-free-norm-charts"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-a1-finite-locally-free-norm-characteristic-polynomial] to σ, r and τ(a). The defining unique-existence assertion identifies the polynomial norm selected for σ[T] with the polynomial norm in the theorem: each satisfies IsLocallyFreeDeterminantNorm and uniqueness equates them. This gives monicity, degree r and evaluation at τ(a) equal to zero. Monic.as_sum gives the expansion using the actual coefficients P.coeff j; the coefficient in degree r is one. Coefficientwise polynomial extension fixes X, so the specified norm of X-C(τ(a)) is also the norm of τ[T](X-C(a)).",
+   "uses": [
+    "lem-a1-finite-locally-free-norm-characteristic-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), second paragraph: monicity and the precise Cayley-Hamilton assertion; Tag 00DX (algebra-lemma-charpoly) via the cited local norm-polynomial lemma"
+   }
+  },
+  {
+   "text": "Use full faithfulness of Spec to identify σ and τ with the ring maps extracted from their spectrum morphisms. Apply [lem-a1-affine-groupoid-canonical-norm-charts] directly to the extracted coefficientwise source map and the extracted target image of X-C(a). Uniqueness and the preceding identification show that its canonical norm value is P. This supplies precisely the affine-open section norm chart formula, with the same dependent scalar structures, required by the polynomial invariance theorem.",
+   "uses": [
+    "lem-a1-affine-groupoid-canonical-norm-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/exercises.tex; literature/stacks-project/groupoids.tex",
+    "place": "Tags 02DU(1), 02DV(1),(3), and 03BJ, second paragraph: identify the local determinant norm with the scheme norm used by Tag 03BH."
+   }
+  },
+  {
+   "text": "Construct the groupoid on points directly from [def-a1-scheme-groupoid-laws]: objects are maps H→U and arrows x→y are maps a:H→R with a≫s=x and a≫t=y. Identity, inverse and composition are induced by e, i and pullback.lift followed by c. Endpoint, unit, inverse and associativity axioms give the Groupoid structure; the arrow equivalences are identities. Apply [lem-a1-affine-groupoid-polynomial-norm-invariant] to F=X-C(a), P, this point groupoid and the chart formula from the preceding step. It gives σ[T](P)=τ[T](P). Comparing coefficients gives σ(P.coeff j)=τ(P.coeff j) for every j, hence in particular j<r. The coefficient criterion for Polynomial.lifts puts P in the polynomial ring over the equalizer subring.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws",
+    "lem-a1-affine-groupoid-polynomial-norm-invariant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), second paragraph, application of Tag 03BH (groupoids-lemma-determinant-trick) to the polynomial groupoid"
+   }
+  },
+  {
+   "text": "Put $p_r=1$. Applying the ring homomorphism $\\tau$ to the finite sum defining $P_a(a)$, then replacing each $\\tau(p_j)$ by $\\sigma(p_j)$ using step 3, gives $\\tau(P_a(a))=\\sum_{j=0}^r\\tau(p_j)\\tau(a)^j=\\sum_{j=0}^r\\sigma(p_j)\\tau(a)^j=(\\sigma[T](P_a))(\\tau(a))=0$, where the last equality is step 1. These are just preservation of sums, products and powers by a ring map and the definition of polynomial evaluation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), second paragraph: invariant coefficients imply target pullback of the evaluation is zero"
+   }
+  },
+  {
+   "text": "The identity law $t\\circ e=\\operatorname{id}_U$ in [def-a1-scheme-groupoid-laws] gives $\\epsilon\\circ\\tau=\\operatorname{id}_A$ for $\\epsilon=e^\\sharp$. Apply $\\epsilon$ to the equality of step 4: $P_a(a)=\\epsilon(\\tau(P_a(a)))=\\epsilon(0)=0$. This uses the specified identity section, and hence does not require a separate faithful-flatness assertion.",
+   "uses": [
+    "def-a1-scheme-groupoid-laws"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0231 (definition-groupoid), identity axiom; Tag 03BJ (groupoids-lemma-integral-over-invariants), final descent of the root, here using the given identity section"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+  "lem-a1-affine-groupoid-canonical-norm-charts",
+  "def-a1-scheme-groupoid-laws",
+  "lem-a1-affine-groupoid-polynomial-norm-invariant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
+  "place": "Tag 03BJ, second paragraph, with Tags 02DU(1), 02DV(1),(3) for the principal-localization/affine-open determinant comparison, and the identity section of Tag 0231 for descent of the root."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In a constant rank finite locally free affine scheme groupoid the polynomial norm of T minus the target pullback of a is monic with invariant coefficients and vanishes at a by the identity section",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (p q : Polynomial R),\\n  (AdjoinRoot.of W'.polynomial)\\n      ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)) =\\n    (WeierstrassCurve.Affine.CoordinateRing.mk W')\\n      ((Polyn\", \"doc\": \"For an affine Weierstrass curve over a commutative ring $ R $, the norm map $ \\\\mathrm{Norm}_{R[X]} $ applied to an element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring $ R[X,Y]/(Y^2 + a_1XY + a_3Y\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (p q : Polynomial R),\\n  (Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X) =\\n    p ^ 2 - p * q * (Polynomial.C W'.a₁ * Polynomial.X + Polynomial.C W'.a₃) -\\n      q ^ 2 *\\n        (\", \"doc\": \"For any polynomials $ p, q \\\\in R[X] $, the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of the affine Weierstrass curve is given by $ p^2 - p q (a_1 X + a_3) - q^2 (X^3 + a_2 X\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"Polynomial.exists_image_comap_of_monic\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (f g : Polynomial R),\\n  g.Monic →\\n    ∃ t,\\n      PrimeSpectrum.comap Polynomial.C '' (PrimeSpectrum.zeroLocus {g} \\\\ PrimeSpectrum.zeroLocus {f}) =\\n        (PrimeSpectrum.zeroLocus ↑t)ᶜ\", \"doc\": \"For any polynomials $f, g \\\\in R[X]$ with $g$ monic, there exists a finite subset $t \\\\subseteq R$ such that the image of the complement of the zero locus of $\\\\{f\\\\}$ in the zero locus of $\\\\{g\\\\}$ under t\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.exists_smul_basis_eq\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} (x : W'.CoordinateRing),\\n  ∃ p q, p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X = x\", \"doc\": \"Let $W$ be an affine Weierstrass curve over a commutative ring $R$, and let $A(W)$ be its coordinate ring. Any element $x \\\\in A(W)$ can be expressed as $x = p + qY$, where $p$ and $q$ are polynomials \"}\n  {\"name\": \"Polynomial.exists_monic_aeval_eq_zero_forall_mem_pow_of_mem_map\", \"module\": \"Mathlib/RingTheory/IntegralClosure/Algebra/Ideal\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsIntegral R S] {I : Ideal R} {x : S},\\n  x ∈ Ideal.map (algebraMap R S) I →\\n    ∃ p, p.Monic ∧ (Polynomial.aeval x) p = 0 ∧ ∀ (i : ℕ), p.coeff i ∈ I ^ (p.natDegree - i)\", \"doc\": \"Let $ R \\\\subseteq S $ be an integral extension of commutative rings. If $ x \\\\in S $ lies in the image of an ideal $ I \\\\subseteq R $ under the canonical algebra homomorphism $ R \\\\to S $, then there exi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-group action polynomials and finite-module Cayley-Hamilton do not supply this specific locally free groupoid norm polynomial or its invariant coefficients and section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The characteristic norm polynomial of an affine finite flat groupoid has equal source and target coefficients and its evaluation vanishes after applying the identity section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.eval_charpoly\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.Basic\", \"type\": \"(t : R) : f.charpoly.eval t = (algebraMap _ _ t - f).det\", \"doc\": \"For any scalar $t \\\\in R$, the evaluation of the characteristic polynomial of a linear map $f$ at $t$ is equal to the determinant of the endomorphism $t \\\\cdot \\\\text{id}_M - f$.\"}\n  {\"name\": \"LinearMap.polyCharpoly_coeff_eval\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Polynomial\", \"type\": \"(x : L) (i : ℕ) : MvPolynomial.eval (b.repr x) ((polyCharpoly φ b).coeff i) = (φ x).charpoly.coeff i\", \"doc\": \"For any element $ x $ in the module $ L $ and natural number $ i $, the evaluation of the $ i $-th coefficient of the characteristic polynomial of the linear map $ \\\\varphi $ (with respect to basis $ b\"}\n  {\"name\": \"MulSemiringAction.eval_charpoly\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(b : B) : (charpoly G b).eval b = 0\", \"doc\": \"For any element $ b $ in $ B $, the characteristic polynomial of $ b $ (with respect to the multiplicative semiring action of $ G $) evaluated at $ b $ is zero, i.e., $ (\\\\operatorname{charpoly}(G, b))\"}\n  {\"name\": \"map_eq_zero_iff_eq_one\", \"module\": \"Mathlib.Algebra.Order.Hom.Basic\", \"type\": \": f x = 0 ↔ x = 1\", \"doc\": \"For a group norm $ f $ on a group $ G $, $ f(x) = 0 $ if and only if $ x $ is the identity element of $ G $.\"}\n  {\"name\": \"MulSemiringAction.charpoly_eq\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(b : B) : charpoly G b = ∏ g : G, (X - C (g • b))\", \"doc\": \"For any element $ b \\\\in B $, the characteristic polynomial $ \\\\text{charpoly}_G(b) $ is equal to the product over all $ g \\\\in G $ of $ (X - C(g \\\\cdot b)) $, where $ C $ denotes the constant polynomial \"}\n  {\"name\": \"MulSemiringAction.monic_charpoly\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(b : B) : (charpoly G b).Monic\", \"doc\": \"For any element $ b $ in the semiring $ B $, the characteristic polynomial associated with the multiplicative semiring action of $ G $ on $ B $ is monic, i.e., its leading coefficient is equal to 1.\"}\n  {\"name\": \"MulSemiringAction.smul_coeff_charpoly\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(b : B) (n : ℕ) (g : G) : g • (charpoly G b).coeff n = (charpoly G b).coeff n\", \"doc\": \"For any element $ b \\\\in B $, natural number $ n $, and group element $ g $, the scalar multiplication by $ g $ leaves the $ n $-th coefficient of the characteristic polynomial of $ b $ unchanged, i.e.\"}\n  {\"name\": \"MulSemiringAction.charpoly_eq_prod_smul\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(b : B) : charpoly G b = ∏ g : G, g • (X - C b)\", \"doc\": \"For any element $ b \\\\in B $, the constant polynomial $ C(b) $ is equal to the product over all $ g \\\\in G $ of the action of $ g $ on $ (X - C(b)) $, i.e., $ C(b) = \\\\prod_{g \\\\in G} g \\\\cdot (X - C(b)) $\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-group action polynomials and finite-module Cayley-Hamilton do not supply this specific locally free groupoid norm polynomial or its invariant coefficients and section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"charpoly\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-group action polynomials and finite-module Cayley-Hamilton do not supply this specific locally free groupoid norm polynomial or its invariant coefficients and section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(?:norm|polynomial)|(?:norm|polynomial).*groupoid|eqLocus.*(?:norm|charpoly)|(?:norm|charpoly).*eqLocus",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\", \"line\": \"37\", \"text\": \"Our definition of `IsFreeGroupoid` is nonstandard. Normally one would require that functors\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/ConformalGroupoid.lean\", \"line\": \"14\", \"text\": \"In this file we define the groupoid of conformal maps on normed spaces.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear.lean\", \"line\": \"242\", \"text\": \"/-- For `B` a manifold and `F` a normed space, the groupoid on `B × F` consisting of local\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"23\", \"text\": \"* the notion of normality of subgroupoids and its stability under intersection and preimage;\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"32\", \"text\": \"* `CategoryTheory.Subgroupoid.IsNormal` is the property that the subgroupoid is stable under\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"48\", \"text\": \"* Equivalent inductive characterization of generated (normal) subgroupoids.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"49\", \"text\": \"* Characterization of normal subgroupoids as kernels.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"line\": \"303\", \"text\": \"/-- A subgroupoid is normal if it is wide and satisfies the expected stability under conjugacy. -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-group action polynomials and finite-module Cayley-Hamilton do not supply this specific locally free groupoid norm polynomial or its invariant coefficients and section comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cayley Hamilton for multiplication on a finite projective algebra gives a monic norm polynomial, whose root descends from target pullback using equal coefficients and a ring retraction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearMap.exists_monic_and_aeval_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/LinearMap\", \"type\": \"∀ {M : Type u_2} [inst : AddCommGroup M] (R : Type u_3) [inst_1 : CommRing R] [inst_2 : Module R M] [Module.Finite R M]\\n  (f : Module.End R M), ∃ p, p.Monic ∧ (Polynomial.aeval f) p = 0\", \"doc\": \"Let $R$ be a commutative ring and let $M$ be a finitely generated $R$-module. For any $R$-module endomorphism $f: M \\\\to M$, there exists a monic polynomial $p \\\\in R[X]$ such that $p(f) = 0$, where $p(\"}\n  {\"name\": \"Algebra.PowerBasis.norm_gen_eq_prod_roots\", \"module\": \"Mathlib/RingTheory/Norm/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S] {F : Type u_6}\\n  [inst_3 : Field F] [inst_4 : Algebra R F] (pb : PowerBasis R S),\\n  (Polynomial.map (algebraMap R F) (minpoly R pb.gen)).Splits →\\n    (algebraMap R F) ((Algebra.norm R) pb.gen) = ((minpoly R \", \"doc\": \"For a power basis $\\\\{1, \\\\alpha, \\\\alpha^2, \\\\dots, \\\\alpha^{n-1}\\\\}$ of an $R$-algebra $S$ with generator $\\\\alpha$, if the minimal polynomial of $\\\\alpha$ over $R$ splits in a field $F$, then the norm $\\\\ma\"}\n  {\"name\": \"Algebra.norm_eq_prod_roots\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"∀ {L : Type u_6} {K : Type u_7} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (F : Type u_8)\\n  [inst_3 : Field F] [inst_4 : Algebra K F] {x : L},\\n  (Polynomial.map (algebraMap K F) (minpoly K x)).Splits →\\n    (algebraMap K F) ((Algebra.norm K) x) = ((minpoly K x).aroots F).prod ^ Module\", \"doc\": \"For an element $ x $ in $ L $, if the minimal polynomial of $ x $ over $ K $ splits in $ F $, then the norm of $ x $ from $ K $ to $ F $ satisfies $ \\\\operatorname{N}_{K}^{F}(x) = \\\\left(\\\\prod_{\\\\alpha} \"}\n  {\"name\": \"charpoly_leftMulMatrix\", \"module\": \"Mathlib/LinearAlgebra/Matrix/Charpoly/Minpoly\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type u_1} [inst_1 : Ring S] [inst_2 : Algebra R S] (h : PowerBasis R S),\\n  ((Algebra.leftMulMatrix h.basis) h.gen).charpoly = minpoly R h.gen\", \"doc\": \"For a power basis $ h $ of an $ R $-algebra $ S $, the characteristic polynomial of the left multiplication matrix of the generator $ h.\\text{gen} $ is equal to the minimal polynomial of $ h.\\text{gen} \"}\n  {\"name\": \"Algebra.norm_eq_prod_embeddings_gen\", \"module\": \"Mathlib/RingTheory/Norm/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : Ring S] [inst_2 : Algebra R S] (F : Type u_6)\\n  [inst_3 : Field F] [inst_4 : Algebra R F] (pb : PowerBasis R S),\\n  (Polynomial.map (algebraMap R F) (minpoly R pb.gen)).Splits →\\n    IsSeparable R pb.gen → (algebraMap R F) ((Algebra.norm R)\", \"doc\": \"Let $\\\\alpha$ be the generator of a power basis for an $R$-algebra $S$. If the minimal polynomial of $\\\\alpha$ over $R$ splits in a field $F$ and $\\\\alpha$ is separable over $R$, then the norm of $\\\\alpha\"}\n  {\"name\": \"minpoly.rootsOfMinPolyPiType\", \"module\": \"Mathlib/FieldTheory/Minpoly/Field\", \"type\": \"(F : Type u_3) →\\n  (E : Type u_4) →\\n    (K : Type u_5) →\\n      [inst : Field F] →\\n        [inst_1 : Ring E] →\\n          [inst_2 : CommRing K] →\\n            [inst_3 : IsDomain K] →\\n              [inst_4 : Algebra F E] →\\n                [inst_5 : Algebra F K] →\\n                  [inst_6 : FiniteDimens\", \"doc\": \"Given an $ F $-algebra homomorphism $ \\\\phi : E \\\\to K $ and a basis element $ x $ of the finite free $ F $-module $ E $, this function returns the image $ \\\\phi(x) $ as a root of the minimal polynomial \"}\n  {\"name\": \"IntermediateField.AdjoinSimple.norm_gen_eq_prod_roots\", \"module\": \"Mathlib/RingTheory/Norm/Basic\", \"type\": \"∀ {K : Type u_4} {L : Type u_5} {F : Type u_6} [inst : Field K] [inst_1 : Field L] [inst_2 : Field F]\\n  [inst_3 : Algebra K L] [inst_4 : Algebra K F] (x : L),\\n  (Polynomial.map (algebraMap K F) (minpoly K x)).Splits →\\n    (algebraMap K F) ((Algebra.norm K) (IntermediateField.AdjoinSimple.gen K x)) =\", \"doc\": \"For an element $ x $ in $ L $, if the minimal polynomial $ \\\\minpoly_K(x) $ splits in $ F $, then the image of the norm $ \\\\mathrm{Norm}_{K(x)/K}(x) $ under the algebra homomorphism $ K \\\\to F $ equals t\"}\n  {\"name\": \"sum_smul_minpolyDiv_eq_X_pow\", \"module\": \"Mathlib/FieldTheory/Minpoly/MinpolyDiv\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] (E : Type u_1)\\n  [inst_3 : Field E] [inst_4 : Algebra K E] [IsAlgClosed E] [inst_6 : FiniteDimensional K L] [Algebra.IsSeparable K L]\\n  {x : L},\\n  Algebra.adjoin K {x} = ⊤ →\\n    ∀ {r : ℕ},\\n      r < Module.fin\", \"doc\": \"For a finite separable field extension $L/K$ with $E$ algebraically closed, and $x \\\\in L$ generating $L$ over $K$, the sum over all $K$-algebra homomorphisms $\\\\sigma: L \\\\to E$ of $\\\\left(\\\\frac{x^r}{\\\\te\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: finite-group action polynomials and finite-module Cayley-Hamilton do not supply this specific locally free groupoid norm polynomial or its invariant coefficients and section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*(norm|charpoly)|(norm|charpoly).*groupoid",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Mathlib/Geometry/Manifold/VectorBundle/FiberwiseLinear.lean\", \"Mathlib/Geometry/Manifold/ConformalGroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean\", \"Mathlib/GroupTheory/FreeGroup/NielsenSchreier.lean\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected finite-group action characteristic polynomials in Mathlib/RingTheory/Invariant/Basic.lean and linear-map characteristic polynomials in Mathlib/LinearAlgebra/Charpoly/Basic.lean; these do not give the specified locally free scheme-groupoid norm, its invariant coefficients, or the section evaluation comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free groupoid has a monic invariant norm polynomial that vanishes at an element by Cayley Hamilton and the identity retraction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"LinearMap.charpoly_monic\", \"map_eq_zero_iff_eq_one\", \"prodXSubSMul.monic\", \"FixedPoints.minpoly.monic\", \"FreeGroup.norm_eq_zero\", \"Representation.leftRegular_norm_apply\", \"Rep.norm\", \"Representation.norm_comp_self\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected finite-group action characteristic polynomials in Mathlib/RingTheory/Invariant/Basic.lean and linear-map characteristic polynomials in Mathlib/LinearAlgebra/Charpoly/Basic.lean; these do not give the specified locally free scheme-groupoid norm, its invariant coefficients, or the section evaluation comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"norm\", \"charpoly\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected finite-group action characteristic polynomials in Mathlib/RingTheory/Invariant/Basic.lean and linear-map characteristic polynomials in Mathlib/LinearAlgebra/Charpoly/Basic.lean; these do not give the specified locally free scheme-groupoid norm, its invariant coefficients, or the section evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free affine scheme groupoid the norm polynomial of T minus target pullback has invariant coefficients and annihilates the original element using the identity section",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Algebra.IsInvariant.charpoly_mem_lifts\", \"WeierstrassCurve.Affine.CoordinateRing.coe_norm_smul_basis\", \"WeierstrassCurve.Affine.CoordinateRing.norm_smul_basis\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"ChevalleyThm.chevalley_polynomialC\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected finite-group action characteristic polynomials in Mathlib/RingTheory/Invariant/Basic.lean and linear-map characteristic polynomials in Mathlib/LinearAlgebra/Charpoly/Basic.lean; these do not give the specified locally free scheme-groupoid norm, its invariant coefficients, or the section evaluation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "charpoly_monic|eval_charpoly|aeval_self_charpoly|norm.*charpoly|charpoly.*norm",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"Mathlib/RingTheory/Invariant/Galois.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Norm/Transitivity.lean\", \"Mathlib/RingTheory/Norm/Basic.lean\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected finite-group action characteristic polynomials in Mathlib/RingTheory/Invariant/Basic.lean and linear-map characteristic polynomials in Mathlib/LinearAlgebra/Charpoly/Basic.lean; these do not give the specified locally free scheme-groupoid norm, its invariant coefficients, or the section evaluation comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial determinant norm for a finite projective commutative algebra with source and target ring maps has invariant coefficients and root descends along a ring retraction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"Algebra.SubmersivePresentation.invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.map_invJacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.SubmersivePresentation.aeval_invJacobianOfHasCoeffs\", \"Algebra.discr\", \"Algebra.Norm.Transitivity.eval_zero_det_det\"], \"note\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected finite-group action characteristic polynomials in Mathlib/RingTheory/Invariant/Basic.lean and linear-map characteristic polynomials in Mathlib/LinearAlgebra/Charpoly/Basic.lean; these do not give the specified locally free scheme-groupoid norm, its invariant coefficients, or the section evaluation comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-integral-invariants",
+  "date": "2026-10-22",
+  "group": "NL"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical supporting affine-quotient expansion beneath the lissity/support argument of lem-a1-affine-hc0. Precise current use: lem-a1-affine-groupoid-integral-invariants, old proof steps 3, 4 and 5; the norm polynomial, invariant coefficients and identity-section evaluation (Stacks 03BJ, second paragraph). The current main-20261015 ancestor has the support proof; no fourth paragraph is claimed.",
+   "via": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-groupoid-constant-rank-norm-annihilator",
+  "worker": "stage1",
+  "summary": "Q47 checked Stacks 03BJ/03BH/00DX and reused the existing polynomial norm invariance and finite locally free norm characteristic-polynomial lemmas. Four steps retain every displayed formula and use the identity section to descend the root. No statement change or new node.",
+  "blueprint": "Historical affine-quotient supporting branch under lem-a1-affine-hc0, through lem-a1-affine-groupoid-integral-invariants: its step 2 uses exactly this constant-rank norm argument. The current main-20261015 ancestor proof is the lisse-support proof, not an affine-quotient fourth paragraph; the inherited explicit historical provenance is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-15bedf21a",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-15bedf21a (reviewer sub-agent of L); spot-checked: Read the item and all 4 steps against Stacks groupoids.tex 03BJ (lemma-integral-over-invariants, second paragraph). The delivery has no new nodes, the statement is unchanged from the unsplit base, there is no repair note, and proof_deps is exactly the union of the step uses. Step 1: lem-a1-finite-locally-free-norm-characteristic-polynomial with phi=sigma (which is s, of degree r) and b=tau(a) gives the form T^r+sum p_j T^j, monicity for A≠0 and (sigma[T]P)(tau a)=0; its norm uses the same local-determinant characterization as lem-pd-finite-locally-free-norm-charts. Step 2: lem-a1-affine-groupoid-polynomial-norm-invariant with F=T-a, using tau[T](T-a)=T-tau(a), gives P_a in C[T]. Step 3: elementary, since ring maps preserve the evaluation. Step 4: t∘e=id_U from def-a1-scheme-groupoid-laws gives eps∘tau=id_A, which replaces the source's faithful-flatness step; this is valid and simpler. Tested on the identity groupoid, a trivial order-r action over Z/4Z (giving (T-a)^r), and Z/2 acting on k[x] by x↦-x (giving T^2-x^2). No duplicate in the DAG or blueprint (rg -L 03BJ and Cayley; blueprint_refs search finds 0). No cycle, everything stays in unit sk-p-real-rankin so no tool_uses are needed, no SGA is cited, and the parent integral-invariants step 2 uses exactly these conclusions."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidConstantRankNormAnnihilator",
+  "declaration": "AlgebraicGeometry.affineGroupoid_constantRank_norm_annihilator",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidConstantRankNormAnnihilator.lean",
+  "statement": "theorem affineGroupoid_constantRank_norm_annihilator (A B : CommRingCat.{u}) [Nontrivial A] (σ τ : A →+* B) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) ⟶ Spec B) (hG : Scheme.IsGroupoid (Spec.map (CommRingCat.ofHom σ)) (Spec.map (CommRingCat.ofHom τ)) e i c) (r : ℕ) (hr : 1 ≤ r) (hσ : (Spec.map (CommRingCat.ofHom σ)).IsFiniteLocallyFreeOfDegree r) (hτ : (Spec.map (CommRingCat.ofHom τ)).IsFiniteLocallyFreeOfDegree r) (a : A) (P : Polynomial A) (hP : P = Algebra.finiteLocallyFreeNormPolynomial σ r hσ (τ a)) : P = Polynomial.X ^ r + ∑ j ∈ Finset.range r, Polynomial.C (P.coeff j) * Polynomial.X ^ j ∧ (∀ j : ℕ, j < r → σ (P.coeff j) = τ (P.coeff j)) ∧ P ∈ Polynomial.lifts (σ.eqLocus τ).subtype ∧ P.Monic ∧ P.natDegree = r ∧ P.coeff r = 1 ∧ P = Algebra.finiteLocallyFreeDeterminantNorm (Polynomial.mapRingHom σ) r (Algebra.finiteLocallyFree_norm_characteristicPolynomial σ r hσ).1 (Polynomial.map τ (Polynomial.X - Polynomial.C a)) ∧ (Polynomial.map σ P).eval (τ a) = 0 ∧ τ (P.eval a) = ∑ j ∈ Finset.range (r + 1), τ (P.coeff j) * τ a ^ j ∧ (∑ j ∈ Finset.range (r + 1), τ (P.coeff j) * τ a ^ j) = ∑ j ∈ Finset.range (r + 1), σ (P.coeff j) * τ a ^ j ∧ (∑ j ∈ Finset.range (r + 1), σ (P.coeff j) * τ a ^ j) = (Polynomial.map σ P).eval (τ a) ∧ τ (P.eval a) = 0 ∧ (Spec.preimage e).hom.comp τ = RingHom.id A ∧ P.eval a = (Spec.preimage e).hom (τ (P.eval a)) ∧ (Spec.preimage e).hom (τ (P.eval a)) = 0 ∧ P.eval a = 0",
+  "branch": "sheaf-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-660ef03ce",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the item, all 7 stmt_dep records, the side FiniteLocallyFreeNormCharacteristicPolynomial module (canonical uniquely characterized norm; P pinned via hP), the IsGroupoid dep and the 03BJ/03BH/0231/00DX source places. Hypotheses match exactly: Spec.map σ/τ presentation is exhaustive, Nontrivial A, 1≤r, both maps finite locally free of degree r, single universe, nothing stronger. All 14 conclusion conjuncts are correct and true: expansion with p_j = P.coeff j, invariance, lifts over eqLocus, monic/natDegree/p_r=1, N_{σ[T]}(τ[T](T−a)), Cayley–Hamilton zero, evaluation sums over range(r+1), ε=(Spec.preimage e).hom with ε∘τ=id, descent to P(a)=0. Statement field verbatim; proof sorry only; docstrings carry source, blueprint id and 4 steps; first S2 delivery, lean-only node diff, no new nodes. Advisories: the norm-polynomial decls are Classical.choose of a non-stmt_dep proof_dep theorem (genuine, S2 cannot add theorem stmt_deps); the lem-pd norm-charts stmt_dep module is imported but unused. No recompile per the 2026-10-21 rule (worker reports clean 7.5 s / 3.7 s); no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T080951-L-1738681",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

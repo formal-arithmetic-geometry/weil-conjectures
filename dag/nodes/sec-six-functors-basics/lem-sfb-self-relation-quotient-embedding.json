@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-self-relation-quotient-embedding",
+ "kind": "statement",
+ "title": "The quotient of a self-relation embeds in its target stack",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Stacks in groupoids, their morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. An algebraic stack is an fppf stack in groupoids with diagonal representable by algebraic spaces and a smooth surjective scheme atlas [def-pc-fppf-site, def-sbc-smooth-morphisms]. A morphism is representable by algebraic spaces if every scheme base change is an algebraic space. For representable maps, flatness, local finite presentation and local finite type are tested after scheme base change on etale scheme charts [def-weil-flat-morphism, def-sbc-locally-finite-presentation, def-weil-finite-type-morphism]. Surjectivity means that every field-valued target object lifts, up to isomorphism, after some field extension [def-weil-field]. Let $\\mathcal X$ be an algebraic stack over $S$, let $U$ be an algebraic space over $S$ and let $a:U\\to\\mathcal X$ be a morphism. Then $R=U\\times_{\\mathcal X}U$ is an algebraic space. The source and target projections, identities, inverse and composition of isomorphisms in $\\mathcal X(T)$ make $(U,R)$ a groupoid in algebraic spaces: an arrow over $T$ is a triple $(u,v,\\alpha)$ with $\\alpha:a(u)\\xrightarrow{\\sim}a(v)$. Let $q:U\\to[U/R]$ be the object map to its fppf stackification [lem-sfb-groupoid-stackification-local-description]. There is a morphism $i:[U/R]\\to\\mathcal X$, with a specified 2-isomorphism $i q\\simeq a$, which is fully faithful on each fibre groupoid over an $S$-scheme $T$. If $[U/R]$ is an algebraic stack, then $i$ is representable by algebraic spaces. Here fully faithful means bijective on all sets of arrows between two objects; in particular $i$ is a monomorphism in this sense.",
+ "source": {
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04T4 (lemma-map-space-into-stack), parts (1), (4), (5), (6), and Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site",
+  "def-sbc-smooth-morphisms",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-algebraic-moduli-stack"
+ ],
+ "proof": [
+  {
+   "text": "The diagonal of $\\mathcal X$ is representable by hypothesis, so [lem-sfb-stack-diagonal-space-source-representability] applied to $a:U\\to\\mathcal X$ makes $a$ representable by algebraic spaces. Apply [lem-sfb-representable-pullback-over-space] with $\\mathcal F=U$, $\\mathcal G=\\mathcal X$ and $Z=U$ to obtain the algebraic space $R$. Its test-scheme points are triples $(u,v,\\alpha:a(u)\\to a(v))$, by the 2-fibre-product definition [def-sfb-stable-pointed-moduli-groupoids]; since $U$ is discrete there are no further identifications between such triples. Set $s(u,v,\\alpha)=u$, $t(u,v,\\alpha)=v$, $e(u)=(u,u,1)$, $j(u,v,\\alpha)=(v,u,\\alpha^{-1})$, and $c((u,v,\\alpha),(v,w,\\beta))=(u,w,\\beta\\alpha)$. These operations commute with pullback (using its canonical comparison isomorphisms), hence are natural transformations, thus morphisms of algebraic spaces [def-trf-algebraic-space]. Their laws are exactly identity, associativity and inverse laws in $\\mathcal X(T)$.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "lem-sfb-representable-pullback-over-space",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), proof of (1), (4), (5), (6)."
+   }
+  },
+  {
+   "text": "Let $\\mathcal P(T)$ have objects $U(T)$ and arrows the triples above. The functor $F:\\mathcal P\\to\\mathcal X$ sends $u$ to $a(u)$ and $(u,v,\\alpha)$ to $\\alpha$; the displayed composition formula proves functoriality. The big fppf site is taken in the larger universe of the statement. Apply the extension clause of [lem-sfb-groupoid-stackification-local-description] to $F$ and the fppf stack $\\mathcal X$. It supplies $i:[U/R]\\to\\mathcal X$ and an invertible transformation $iq\\cong a$.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), proof of (1), (4), (5), (6)."
+   }
+  },
+  {
+   "text": "For $u,v\\in U(T)$, the arrow presheaf $\\operatorname{Isom}_{\\mathcal P}(u,v)$ is exactly $\\operatorname{Isom}_{\\mathcal X}(a(u),a(v))$, by the triple description. It is already an fppf sheaf, since $\\mathcal X$ is a stack. The isomorphism-sheaf clause of [lem-sfb-groupoid-stackification-local-description] identifies $\\operatorname{Isom}(q(u),q(v))$ with its sheafification. The universal property of sheafification [def-weil-pbc-sheafification] makes the unit an isomorphism for an already sheaf: extend the identity to a retraction, and use uniqueness to show its other composite is the identity. Under $iq\\cong a$, the map induced by $i$ composes with that unit to the identity of the original arrow sheaf, so it is its inverse. Thus $i$ induces the required bijections between arrows of original objects.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), proof of (1), (4), (5), (6)."
+   }
+  },
+  {
+   "text": "For arbitrary $b,c\\in[U/R](T)$, choose a common fppf covering on which both are isomorphic to original objects, using the local-essential-image clause of [lem-sfb-groupoid-stackification-local-description]. By Step 3 and conjugation with these isomorphisms, the map on their isomorphism sheaves is bijective on each cover member and every restriction of it. Given an arrow $i(b)\\to i(c)$ over $T$, lift it uniquely on these members. The lifts agree on overlaps because their images agree and the local maps are injective. The sheaf condition for $\\operatorname{Isom}(b,c)$ glues them to one arrow over $T$. Two global lifts are equal because their restrictions agree. This proves full faithfulness on every fibre, using only the two stack sheaf conditions and the local representatives.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04T4 (lemma-map-space-into-stack), proof of (1), (4), (5), (6)."
+   }
+  },
+  {
+   "text": "Now assume $\\mathcal Q=[U/R]$ is algebraic. Fix a scheme $T$ and $x\\in\\mathcal X(T)$. The discrete $h_T$ is an algebraic stack: [def-trf-scheme-algebraic-space] supplies its fppf sheaf condition, its representable diagonal and identity atlas; the identity is smooth and surjective. By [lem-sfb-algebraic-stack-fibre-products], $\\mathcal W=h_T\\times_{\\mathcal X}\\mathcal Q$ is algebraic. Over $V\\to T$, an object is $(b,\\phi:x|_V\\xrightarrow{\\sim}i(b))$. An arrow to $(c,\\psi)$ must be an arrow $\\gamma:b\\to c$ with $i(\\gamma)\\phi=\\psi$. Step 4 makes $\\gamma$ uniquely determined (indeed it lifts $\\psi\\phi^{-1}$). Hence each fibre of $\\mathcal W$ has at most one arrow between any two objects. Apply [lem-sfb-algebraic-stack-setoid-space] to obtain an algebraic space representing $\\mathcal W$. This works for every $T,x$, so it is exactly representability of $i$ by algebraic spaces. No algebraicity of $\\mathcal Q$ was used before this step.",
+   "uses": [
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-algebraic-stack-setoid-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraic.tex",
+    "place": "Tag 04Y5 (lemma-characterize-representable-by-algebraic-spaces), implication (2) to (3), using Tag 04SZ (proposition-algebraic-stack-no-automorphisms) and Tag 04T2 (lemma-2-fibre-product)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-sfb-representable-pullback-over-space",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-weil-pbc-sheafification",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-algebraic-stack-setoid-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraic.tex",
+  "place": "Tag 04T4 (lemma-map-space-into-stack), proof of (1), (4), (5), (6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a map U to an algebraic stack X the quotient by the groupoid U times X U maps fully faithfully into X and is representable when algebraic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Faithful\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is faithful. This means that for any two étale morphisms $f, g : Y \\to X$ and any morphism $h : \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"∀ {F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} {ι : Type u}\\n  {X : ι → AlgebraicGeometry.Scheme} {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val},\\n  (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n    ∀\\n      [CategoryTheory.Presheaf.IsLocallySu\", \"doc\": \"The functor $ F $ is representable, meaning there exists an object $ X $ in the category of schemes such that $ F $ is naturally isomorphic to the Hom functor $ \\\\mathrm{Hom}(-, X) $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.representableBy\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (hf : ∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) →\\n          [CategoryThe\", \"doc\": \"The functor $ F $ is representable by the scheme constructed from Zariski gluing data $ \\\\text{glueData} $ and condition $ hf $, establishing a natural isomorphism between $ F $ and the Yoneda embeddin\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.forgetToScheme_full\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.forgetToScheme.Full\", \"doc\": \"The inclusion functor from the category of affine schemes to the category of schemes is full, meaning that every morphism between affine schemes in the category of schemes is already a morphism in the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.Full\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The quotient stack of the self relation of a morphism from an algebraic space embeds fully faithfully in the target algebraic stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Quotient.full_functor\", \"module\": \"Mathlib.CategoryTheory.Quotient\", \"type\": \": (functor r).Full\", \"doc\": \"The canonical functor from a category $\\\\mathcal{C}$ to its quotient category $\\\\mathcal{C}/R$ is full. This means that for any two objects $X, Y$ in $\\\\mathcal{C}$, every morphism between their images i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": (Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pushforward f).Full\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instQuasiSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[IsSeparated f] : QuasiSeparated f\", \"doc\": \"Any separated morphism $ f: X \\to Y $ of schemes automatically satisfies the quasi-separated condition, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [QuasiSeparatedSpace X] : QuasiSeparated f\", \"doc\": \"If $ X $ is a quasi-separated topological space and $ f : X \\to Y $ is a morphism of schemes, then $ f $ is a quasi-separated morphism. This follows because the quasi-separatedness of $ X $ ensures the\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"Quotient.outRelEmbedding\", \"module\": \"Mathlib.Order.RelIso.Basic\", \"type\": \"{_ : Setoid α} {r : α → α → Prop} (H : ∀ (a₁ b₁ a₂ b₂ : α), a₁ ≈ a₂ → b₁ ≈ b₂ → r a₁ b₁ = r a₂ b₂) :\\n  Quotient.lift₂ r H ↪r r\", \"doc\": \"Given a setoid $\\\\sim$ on $\\\\alpha$ and a relation $r : \\\\alpha \\\\to \\\\alpha \\\\to \\\\mathrm{Prop}$ compatible with $\\\\sim$ (i.e., $a_1 \\\\sim a_2$ and $b_1 \\\\sim b_2$ imply $r(a_1,b_1) = r(a_2,b_2)$), the canonic\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory\", \"FullyFaithful\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.id\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" (C : Type u₁) [CategoryTheory.Category.{v₁, u₁} C] : (CategoryTheory.Functor.id C).FullyFaithful\", \"doc\": \"The identity functor is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) : Type (max (max u₁ v₁) v₂)\", \"doc\": \"Structure containing the data of inverse map `(F.obj X ⟶ F.obj Y) → (X ⟶ Y)` of `F.map`\\nin order to express that `F` is a fully faithful functor.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.instSubsingleton\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} : Subsingleton F.FullyFaithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.faithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) : F.Faithful\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.full\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) : F.Full\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) [F.Full] [F.Faithful] : F.FullyFaithful\", \"doc\": \"A `FullyFaithful` structure can be obtained from the assumption the `F` is both\\nfull and faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {G : CategoryTheory.Functor C D} (e : F ≅ G) : G.FullyFaithful\", \"doc\": \"If `F` is fully faithful and `F ≅ G`, then `G` is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimageIso\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} (e : F.obj X ≅ F.obj Y) : X ≅ Y\", \"doc\": \"The unique isomorphism `X ≅ Y` which induces an isomorphism `F.obj X ≅ F.obj Y`\\nwhen `hF : F.FullyFaithful`.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.isoEquiv\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} : (X ≅ Y) ≃ (F.obj X ≅ F.obj Y)\", \"doc\": \"The equivalence `(X ≅ Y) ≃ (F.obj X ≅ F.obj Y)` given by `h : F.FullyFaithful`.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.comp\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {G : CategoryTheory.Functor D E} (hG : G.FullyFaithful) : (F.comp G).FullyFaithful\", \"doc\": \"Fully faithful functors are stable by composition.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.ofCompFaithful\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u_1} [CategoryTheory.Category.{v_1, u_1} E] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D E} [G.Faithful] (hFG : (F.comp G).FullyFaithful) : F.FullyFaithful\", \"doc\": \"If `F ⋙ G` is fully faithful and `G` is faithful, then `F` is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.preimage\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (self : F.FullyFaithful) {X Y : C} (f : F.obj X ⟶ F.obj Y) : X ⟶ Y\", \"doc\": \"The inverse map `(F.obj X ⟶ F.obj Y) → (X ⟶ Y)` of `F.map`.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|AlgebraicStack|representable.*[Ff]aithful",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"line\": \"64\", \"text\": \"  representable morphisms, formulated internally to `C`. We assume that `F` is fully faithful here.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme, ring, ordinary-category and topological results do not assert this algebraic-space/stack result; the stack/chart comparison is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient stack of the self relation U times X U maps fully faithfully to the algebraic stack X",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fullyFaithfulForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is fully faithful, meaning it induces a bijection between hom-sets of schemes and hom-sets of their underlyi\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.fullyFaithfulForgetToPresheafedSpace\", \"module\": \"Mathlib/Geometry/RingedSpace/SheafedSpace\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] → AlgebraicGeometry.SheafedSpace.forgetToPresheafedSpace.FullyFaithful\", \"doc\": \"The forgetful functor from sheafed spaces to presheafed spaces over a category $\\\\mathcal{C}$ is fully faithful, meaning it induces a bijection between hom-sets $\\\\text{Hom}(X,Y)$ in the category of she\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Spec.fullyFaithfulToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Spec.toLocallyRingedSpace.FullyFaithful\", \"doc\": \"The functor $\\\\operatorname{Spec}$ from the opposite category of commutative rings to locally ringed spaces is fully faithful, as established by the fact that the counit of the $\\\\Gamma$-$\\\\operatorname{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.fullyFaithfulToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).FullyFaithful\", \"doc\": \"The forgetful functor that maps sheaves of modules over the structure sheaf of a scheme $X$ to their underlying presheaves of modules is fully faithful. This means that for any two sheaves of modules \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.forgetToScheme_full\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.AffineScheme.forgetToScheme.Full\", \"doc\": \"The inclusion functor from the category of affine schemes to the category of schemes is full, meaning that every morphism between affine schemes in the category of schemes is already a morphism in the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullLocallyRingedSpaceForgetToLocallyRingedSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme.forgetToLocallyRingedSpace.Full\", \"doc\": \"The forgetful functor from the category of schemes to the category of locally ringed spaces is full, meaning that for any two schemes, every morphism between their underlying locally ringed spaces ari\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stackification of the groupoid of objects in an algebraic space with arrows all isomorphisms in a target stack embeds in that stack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Pseudofunctor.IsStack.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.Descent.IsStack\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C]\\n  {F : CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete Cᵒᵖ) CategoryTheory.Cat}\\n  {J : CategoryTheory.GrothendieckTopology C} [toIsPrestack : F.IsPrestack J],\\n  (∀ {S : C}, ∀ R ∈ J S, (F.toDescentData fun f => f.obj.hom).EssSurj) \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a pseudofunctor $F: \\\\text{LocallyDiscrete}(\\\\mathcal{C}^\\\\text{op}) \\\\to \\\\mathsf{Cat}$ that is a prestack with respect to $J$. If for ever\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.inclusion_comp_embedding\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"{S T : Subgroupoid C} (h : S ≤ T) : inclusion h ⋙ T.hom = S.hom\", \"doc\": \"For subgroupoids $\\\\mathcal{S}$ and $\\\\mathcal{T}$ of a groupoid $\\\\mathcal{C}$ with $\\\\mathcal{S} \\\\subseteq \\\\mathcal{T}$, the composition of the inclusion functor $\\\\mathcal{S} \\\\to \\\\mathcal{T}$ with the e\"}\n  {\"name\": \"Topology.IsOpenEmbedding.singleton_hasGroupoid\", \"module\": \"Mathlib.Geometry.Manifold.HasGroupoid\", \"type\": \"{f : α → H} (h : IsOpenEmbedding f) (G : StructureGroupoid H) [ClosedUnderRestriction G] :\\n  @HasGroupoid _ _ _ _ h.singletonChartedSpace G\", \"doc\": \"Given a topological space $\\\\alpha$ and a model space $H$, if $f : \\\\alpha \\\\to H$ is an open embedding and $G$ is a structure groupoid on $H$ closed under restriction, then the charted space structure o\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.im\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \"(hφ : Function.Injective φ.obj)\", \"doc\": \"Given an injective-on-objects functor $\\\\phi: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ between groupoids, this constructs the subgroupoid of $\\\\mathcal{D}$ consisting of all morphisms whose image under $\\\\phi$ lies \"}\n  {\"name\": \"CategoryTheory.Subgroupoid.coe\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \": Groupoid S.objs\", \"doc\": \"For any subgroupoid $\\\\mathcal{S}$ of a groupoid $\\\\mathcal{C}$, the set of objects $\\\\mathcal{S}.\\text{objs}$ (those objects in $\\\\mathcal{C}$ with non-empty isotropy in $\\\\mathcal{S}$) forms a groupoid un\"}\n  {\"name\": \"CategoryTheory.Subgroupoid.hom\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Subgroupoid\", \"type\": \": S.objs ⥤ C\", \"doc\": \"The inclusion functor from a subgroupoid $\\\\mathcal{S}$ to its parent groupoid $\\\\mathcal{C}$, mapping each object and morphism in $\\\\mathcal{S}$ to its corresponding object and morphism in $\\\\mathcal{C}$\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.stalkMap.isIso\", \"module\": \"Mathlib.Geometry.RingedSpace.Stalks\", \"type\": \"{X Y : PresheafedSpace.{_, _, v} C} (α : X ⟶ Y) [IsIso α] (x : X) : IsIso (α.stalkMap x)\", \"doc\": \"For any isomorphism $\\\\alpha: X \\\\to Y$ of presheafed spaces over a category $\\\\mathcal{C}$ and any point $x \\\\in X$, the induced stalk map $\\\\mathcal{F}_{Y, \\\\alpha(x)} \\\\to \\\\mathcal{F}_{X, x}$ between the \"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(f : X ⟶ Y.toPresheafedSpace) [H : IsOpenImmersion f] : SheafedSpace C\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ where $ Y $ is a sheafed space, the presheafed space $ X $ inherits the structure of a sheafed space because its presheaf satisfies the sheaf condition by restr\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stackification\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientStack|quotient_stack|AlgebraicStack|algebraic_stack",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: these hits concern schemes, ordinary categories or topological groupoids, not algebraic stacks; no exact result or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-type-point-residual-substack",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Locally finite type residual substack at a finite-type point. Quotient construction: The quotient of a self-relation embeds in its target stack.",
+   "via": [
+    "lem-sfb-finite-type-point-residual-substack",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-self-relation-quotient-embedding",
+  "worker": "stage1",
+  "summary": "Checked Stacks 04T4 and 04Y5; constructed operations on the self-relation and the functor from stackification, proved full faithfulness by arrow sheafification and explicit local gluing, and proved representability through setoid algebraic fibres. Reused the existing representability, stackification and algebraic fibre-product nodes; added only the general 04SZ setoid criterion, as a statement-only node. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Locally finite type residual substack at a finite-type point. Quotient construction: The quotient of a self-relation embeds in its target stack. Steps 1--4 construct the residual quotient embedding; Step 5 supplies its conditional representability. The current latest direct-image proof (3) remains the ancestor route; no unit or chapter changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O4-9beec9e0b",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-9beec9e0b (reviewer sub-agent of L); spot-checked: Base item was unsplit and has no re-split note. Its statement and stmt_deps are unchanged; it is now split into 5 steps that follow Stacks 04T4 (1),(4),(5),(6) and 04Y5, both read in algebraic.tex at l.2033 and l.1829. Step 1: 045G and 0300 nodes give R; its fibres are discrete triples; s,t,e,j,c are written out explicitly. Step 2: the stackification extension clause gives i and iq≅a. Step 3 (elementary): Isom_P(u,v)=Isom_X(au,av) is already a sheaf, so the sheafification unit is an isomorphism, and naturality makes i its inverse. Step 4 (elementary): local representatives plus gluing and separatedness of Isom sheaves give full faithfulness. Step 5: h_T is algebraic (def-trf-scheme-algebraic-space); the 04T2 node makes h_T×_X Q algebraic; Step 4 makes its fibres setoids; the new node then gives an algebraic space. This is exactly the 04Y5 proof. New node lem-sfb-algebraic-stack-setoid-space states 04SZ (1)⇒(3) (l.1554) correctly as a statement only and is self-contained. It is not a clause of the item and duplicates nothing: dm-geometric-inertia-trivial needs a DM stack, inertia-free-finite-cover-coarse needs a coarse space with a finite cover, and the bootstrap node concludes a stack, not a space. Tested on schemes, the empty stack and BG; tested the item on U=∅, pt→BG and a=id. No cycle, no SGA, no doubled backslashes. Batch-5 flags: def-trf-algebraic-space, def-trf-scheme-algebraic-space and def-sfb-stable-pointed-moduli-groupoids are general definitions; the 045G, 0300 and 04T2 stack lemmas reach sec-trace-formula only through the definition of an algebraic space. None is a step of the trace formula or of Poincaré duality, so all are accepted. def-trf-scheme-algebraic-space (unit sk-i-curve-zero) is a definition used as a tool, for the maintainer to record. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SelfRelationQuotientEmbedding",
+  "declaration": "CategoryTheory.self_relation_quotient_embedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/SelfRelationQuotientEmbedding.lean",
+  "statement": "theorem self_relation_quotient_embedding {S : Scheme.{u}} (X : BasedCategory.{v₁, w₁} (Over S)) (hX : IsAlgebraicModuliStack X) (U : AlgebraicSpace S) (a : BasedFunctor (discreteModuli U.obj.obj) X) : ∃ (R : AlgebraicSpace S) (s t : R.obj.obj ⟶ U.obj.obj) (e : U.obj.obj ⟶ R.obj.obj) (j : R.obj.obj ⟶ R.obj.obj) (c : pullback s t ⟶ R.obj.obj) (η : ModuliTwoIso ((discreteModuliMap s).comp a) ((discreteModuliMap t).comp a)), AlgebraicSpace.IsPresheafGroupoid s t e j c ∧ (∀ (T : Over S) (x y : yoneda.obj T ⟶ U.obj.obj) (β : a.obj (CostructuredArrow.mk x) ⟶ a.obj (CostructuredArrow.mk y)), X.p.IsHomLift (𝟙 T) β → ∃! r : {r : yoneda.obj T ⟶ R.obj.obj // r ≫ s = x ∧ r ≫ t = y}, spaceGroupoidPresentationArrow s t a η x y r = β) ∧ (∀ (T : Over S) (x y z : yoneda.obj T ⟶ U.obj.obj) (r : {r : yoneda.obj T ⟶ R.obj.obj // r ≫ s = x ∧ r ≫ t = y}) (q : {q : yoneda.obj T ⟶ R.obj.obj // q ≫ s = y ∧ q ≫ t = z}) (d : {d : yoneda.obj T ⟶ R.obj.obj // d ≫ s = x ∧ d ≫ t = z}) (p : yoneda.obj T ⟶ pullback s t), p ≫ pullback.fst s t = q.val → p ≫ pullback.snd s t = r.val → p ≫ c = d.val → spaceGroupoidPresentationArrow s t a η x y r ≫ spaceGroupoidPresentationArrow s t a η y z q = spaceGroupoidPresentationArrow s t a η x z d) ∧ (∀ (Q : BasedCategory.{v₂, w₂} (Over S)) (q : BasedFunctor (discreteModuli U.obj.obj) Q) (hQ : SpaceGroupoidQuotientPresentation s t e j c Q q), ∃ (i : BasedFunctor Q X) (θ : ModuliTwoIso (q.comp i) a), (∀ (T : Over S) (r : yoneda.obj T ⟶ R.obj.obj), i.map (hQ.arrows.val.hom.app (CostructuredArrow.mk r)) ≫ θ.val.hom.app (CostructuredArrow.mk (r ≫ t)) = θ.val.hom.app (CostructuredArrow.mk (r ≫ s)) ≫ η.val.hom.app (CostructuredArrow.mk r)) ∧ (∀ (T : Over S) (b d : Functor.Fiber Q.p T), Function.Bijective ((moduliFiberMap i T).map (X := b) (Y := d))) ∧ (IsAlgebraicModuliStack Q → IsRepresentableByAlgebraicSpaces i))",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The self-relation is specified by its natural tautological isomorphism and unique vertical-arrow lifting on all test schemes, with composition fixed to composition in the target. The conclusion applies to any fppf quotient presentation, retaining the canonical arrow comparison and the specified two-isomorphism iq ≅ a. Algebraicity of the quotient is used only in the final conditional representability clause. Uses the existing groupoid, quotient-presentation, and algebraic-stack predicates; no new notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae0de3abc",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read node, Stacks 04T4 (algebraic.tex l.2033) and 04Y5, module, report and dep declarations (SpaceGroupoidQuotientPresentation, spaceGroupoidPresentationArrow, IsPresheafGroupoid, IsAlgebraicModuliStack, ModuliTwoIso, moduliFiberMap, IsRepresentableByAlgebraicSpaces). The ∃! vertical-arrow clause with natural vertical η pins R to the true 2-fibre product U×_X U (triples); the composition clause plus groupoid laws fix c/e/j; the quotient is quantified over all fppf presentations; i comes with θ:iq≅a compatible with η, is bijective on every fibre hom set, and is representable only under IsAlgebraicModuliStack Q. No extra hypotheses or universe equalities. Edge cases: U=∅, pt→BG, non-algebraic quotient. lean.statement is verbatim in the file; added stmt_deps are 3 landed def nodes; only declaration is the sorried theorem; docstrings have source, blueprint id and proof steps; no import cycle; live node lean is null. Not recompiled (no change). Minor note: docstring step 2 cites lem-sfb-etale-smooth-atlas-fppf-descent, which is not in proof_deps (it only explains the convention bridge)."
+ }
+}

@@ -1,0 +1,277 @@
+{
+ "id": "lem-sf-weil-open-immersion-compact-image-extension-by-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-morphism-open-closed-reduction",
+   "place": "the Lean proof of this node's declaration uses AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (found by the 2026-10-22 maintainer audit of the batch sorry route); in blueprint terms: clause 2 (compactification comparisons for $Rf_!=R\\bar f_*j_!$ are independent of the refinement), applied to the compactification $U\\to X\\to X$ of an open immersion $j$; with def-weil-extension-by-zero (prop-functor-package)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compactly supported direct image along an open immersion is extension by zero, for Weil sheaves",
+ "statement": "Let $k_0$ be a finite field, $k$ an algebraic closure of $k_0$, and $\\ell\\ne\\operatorname{char}(k_0)$ a prime; put $\\Omega=\\overline{\\mathbf Q}_\\ell$ with its $\\ell$-adic topology [def-weil-l-adic-numbers; def-weil-algebraic-closure]. For a $k_0$-scheme $T$, put $\\bar T=T\\times_{k_0}k$ and let $F_T$ be its geometric Galois Frobenius automorphism [def-weil-frobenius-detailed]. On $\\bar T_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], let $\\mathcal R_{\\bar T}$ be the sheafification of the ring presheaf sending $V$ to the continuous functions $|V|\\to\\Omega$ whose values locally span a finite-dimensional $\\mathbf Q_\\ell$-subspace, with pointwise operations and restriction by precomposition. Let $\\mathcal A_T=\\operatorname{Mod}(\\mathcal R_{\\bar T})$ [def-weil-sheaf-of-modules-category], and let $\\mathcal W_T=\\mathcal A_T^{F_T^*}$ be the category of fixed pairs [def-weil-endofunctor-fixed-pair-category]: objects are $(M,\\theta:F_T^*M\\xrightarrow{\\sim}M)$ and morphisms commute with $\\theta$. A module is constructible if Zariski locally it admits a finite partition by locally closed subschemes on which its restriction is pro-etale locally finite free over the restricted coefficient sheaf. Write $\\mathrm{WC}_{\\mathrm{der}}(T)$ for the full subcategory of $D(\\mathcal W_T)$ [def-weil-abstract-derived-category] on bounded objects with constructible underlying cohomology sheaves, and $\\mathrm{WS}(T)$ for the full subcategory of $\\mathcal W_T$ on constructible modules. Here $G[0]$ means the image in $D(\\mathcal W_T)$ of the cochain complex equal to $G$ in degree zero and zero elsewhere. These are the upstream Lean categories `ProEtaleWeilSheaf`, `WeilComplex` and `WeilSheaf`; this definition forms fixed pairs before deriving.\n\nFor an open $k_0$-immersion $a:S\\hookrightarrow T$, let $a_{\\mathrm W!}:\\mathcal W_S\\to\\mathcal W_T$ be extension by zero of modules on the geometric fibers, with structure $F_T^*\\bar a_!M\\cong\\bar a_!F_S^*M\\xrightarrow{\\bar a_!\\theta}\\bar a_!M$; the first isomorphism is reindexing the extension-by-zero construction along the Frobenius automorphisms. Denote its termwise functor on derived categories by $D(a_{\\mathrm W!})$. For a $k_0$-morphism $u:S\\to T$, $u_{\\mathrm W*}$ is the ordinary direct image of these module sheaves, with the corresponding Frobenius structure, and $Ru_{\\mathrm W*}$ denotes its total right derived functor on $D(\\mathcal W_S)$.\n\nLet $j:U\\hookrightarrow X$ be a quasi-compact open $k_0$-immersion, with $X$ quasi-compact, quasi-separated [def-weil-quasi-separated-morphism] and locally of finite type over $k_0$. For a compactification $c=(U\\xrightarrow{a}Z\\xrightarrow{p}X)$ [def-nagata-compactification], set $Rj_{\\mathrm W!}^{c}=Rp_{\\mathrm W*}\\,D(a_{\\mathrm W!})$. Let $Rj_{\\mathrm W!}$ be this functor for the compactification selected in the upstream `WeilComplex.derivedLowerShriek`, restricted to $\\mathrm{WC}_{\\mathrm{der}}(U)$. For every $G\\in\\mathrm{WS}(U)$ there is an isomorphism in $\\mathrm{WC}_{\\mathrm{der}}(X)$,\n$$\nRj_{\\mathrm W!}(G[0])\\ \\cong\\ (j_{\\mathrm W!}G)[0].\n$$\nThus this is precisely the assertion of `AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion` for its actual upstream categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.md",
+  "place": "prop-functor-package: clause 2 (compactification comparisons for $Rf_!=R\\bar f_*j_!$ are independent of the refinement), applied to the compactification $U\\to X\\to X$ of an open immersion $j$; with def-weil-extension-by-zero; Lean: upstream file lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean, declaration AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (module WeilConjectures.WeilSheaf.LowerShriekFunctoriality, lines 154-161, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category",
+  "def-nagata-compactification",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-quasi-separated-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Let c be the compactification selected by derivedLowerShriek for j. Its open map c.i is quasi-compact by Compactification.quasiCompact_openImmersion, since j is quasi-compact. The structure maps of U and c.Z are finite type by composition with j and the proper map c.g. All maps are over k_0 by Compactification.over and its existing IsOver instances. Thus the square with top c.i, bottom j, left identity of U and right c.g satisfies every hypothesis of the native proper/open interchange; its commutativity is c.comm.",
+   "uses": [
+    "def-sf-native-weil-derived-framework",
+    "def-nagata-compactification",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (2), open compactification comparison; native realization through the existing proved proper/open interchange."
+   }
+  },
+  {
+   "text": "Apply native proper/open interchange to obtain a natural isomorphism from inclusion followed by R(id_U)_* and D(j_!) to inclusion followed by D(c.i_!) and R(c.g)_*. The latter composite is the chosen compact-support functor followed by inclusion, definitionally. The identity comparison in nativeWeilBasicComparisons removes R(id_U)_*. This proves the private nonempty_openShriekComparison, valid on every native Weil complex on U.",
+   "uses": [
+    "lem-sf-native-weil-open-proper-interchange",
+    "lem-sf-native-weil-basic-comparisons",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (2), open compactification comparison; native realization through the existing proved proper/open interchange."
+   }
+  },
+  {
+   "text": "Evaluate the inverse of this comparison at G[0]. Compose with the exact-functor single-object comparison mapDerivedCategorySingleFunctor for the native extensionByZero. Its target is the degree-zero complex of WeilSheaf.extensionByZero j G, by the definitions of the two full-subcategory lifts. ObjectProperty.isoMk regards the resulting ambient isomorphism as an isomorphism of native Weil complexes. The statement prescribes no comparison morphism, so these components give exactly its Nonempty witness.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (2), open compactification comparison; native realization through the existing proved proper/open interchange."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-nagata-compactification",
+  "def-weil-proper-morphism",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-sf-native-weil-open-proper-interchange",
+  "lem-sf-native-weil-basic-comparisons",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (2), open compactification comparison; native realization through the existing proved proper/open interchange. Lean proof by F4 in LowerShriekFunctoriality.lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "distinguished triangle j_! j^* K → K → i_* i^* K open closed recollement",
+   "results": "Pretriangulated.distinguishedTriangles, ShortComplex.ShortExact.singleTriangle_distinguished, DerivedCategory.triangleOfSES_distinguished: generic triangulated-category facts, no sheaf recollement",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedLowerShriek\" (name substring)",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'recollement|openClosed|extensionByZero ; upperShriek|lowerShriek|LowerShriek' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compactly supported derived direct image along an open immersion of schemes is extension by zero for constructible Weil sheaves",
+   "results": "AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply; AlgebraicGeometry.Scheme.Hom.appIso_hom; AlgebraicGeometry.Scheme.Modules.restrict; AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom; AlgebraicGeometry.IsOpenImmersion.ΓIso; AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state a proper/open comparison on derived pro-etale Weil sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state a proper/open comparison on derived pro-etale Weil sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedLowerShriek|ProEtaleWeilSheaf|WeilComplex|extensionByZero",
+   "results": "none",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state a proper/open comparison on derived pro-etale Weil sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support along an open immersion is the exact extension by zero on Weil sheaves",
+   "results": "HasCompactSupport.extend_zero; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; HasCompactSupport.tsupport_extend_zero; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace_isOpenImmersion; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state a proper/open comparison on derived pro-etale Weil sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor Rj shriek agrees with the termwise functor j shriek for a quasi-compact open immersion in the derived category of Frobenius equivariant pro-etale adic sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.pushforward; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: these hits do not state a proper/open comparison on derived pro-etale Weil sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|IsAdicConstructibleSheaf|ProEtaleWeilSheaf",
+   "results": "0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: no theorem for the stated continuous pro-etale module comparison; generic sheaf/category or scheme results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "0 hits; none",
+   "date": "2026-10-22",
+   "verdict": "no match: no theorem for the stated continuous pro-etale module comparison; generic sheaf/category or scheme results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact extension by zero functor on fixed pairs preserves constructibility and sends a degree zero complex to the extension in degree zero",
+   "results": "8 hits; CategoryTheory.ShortComplex.Exact.map, CategoryTheory.Functor.preservesRightHomology_of_zero_f, CategoryTheory.Functor.preservesLeftHomology_of_zero_f, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.ShortComplex.ShortExact.map_of_exact, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.ShortComplex.LeftHomologyData.exact_map_iff, CategoryTheory.Functor.mapZeroObject",
+   "date": "2026-10-22",
+   "verdict": "no match: no theorem for the stated continuous pro-etale module comparison; generic sheaf/category or scheme results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero preserves constructible Frobenius equivariant pro-etale sheaves and induces a termwise derived functor",
+   "results": "8 hits; CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Abelian.Ext.mapExactFunctor, Condensed.profiniteSolid, localCohomology.diagram, Condensed.profiniteSolidification, CategoryTheory.Abelian.Ext.mapExactFunctor_zero, Condensed.profiniteSolidCounit, Condensed.lanSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: no theorem for the stated continuous pro-etale module comparison; generic sheaf/category or scheme results only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": null,
+  "date": "2026-10-22",
+  "why": "upstream sorried declaration on the batch-5 stage-3 sorry route without a DAG node (maintainer audit 2026-10-22, approved by the human); recorded so that stage 1 splits it"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion"
+   ]
+  },
+  "slopmaster2": {
+   "state": "sorry_here",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+     "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+     "lines": [
+      149,
+      161
+     ],
+     "kind": "theorem",
+     "sorry": true
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
+  "file": "lean/WeilConjectures/WeilSheaf/LowerShriekFunctoriality.lean",
+  "declaration": "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion"
+  ],
+  "statement": "theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ X)\n    [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (CommRingCat.of k₀))]\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l U) :\n    Nonempty ((derivedLowerShriek k₀ l j).obj (WeilSheaf.toComplex.obj G) ≅\n      WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) :=\n  sorry",
+  "branch": "slopmaster2",
+  "by": "maintainer",
+  "date": "2026-10-22",
+  "note": "upstream declaration (verbatim in live), proof still `sorry`; on the batch-5 own sorry route (local/sorry-route*.json) with no node recording it before 2026-10-22"
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-weil-open-immersion-compact-image-extension-by-zero",
+  "worker": "stage1",
+  "group": "Q24",
+  "summary": "Repair of the human re-split request. The item is the special case p'=1_U, U'=U, X'=Z, j'=a of the existing reviewed (Lean-bearing) lem-sf-native-weil-open-proper-interchange, whose eleven steps already carry returned steps 4-7 (clopen section, open adjunction lift, K-injective section computation, fixed-pair forgetting, continuous-adic proper base change at the boundary, truncation induction, localization cone detection). The three delivered new nodes repeated those steps and were dropped by the Q24 reader (count-0 waiver: every old argument has a carrier). Returned steps 1-2 are carried by lem-sf-native-weil-open-exact-constructible, step 3 is compactification bookkeeping, step 8 the final assembly. Statement unchanged; five-step assembly below 3000 characters.",
+  "blueprint": "lem-zl-morphism-open-closed-reduction, open-immersion reduction through prop-functor-package clause 2 (compactification comparisons independent of refinement): the refinement c -> c_0=(U,j,1_X) comparison is the interchange node applied to p'=1_U. Returned steps 1-2 -> lem-sf-native-weil-open-exact-constructible (item step 1); step 3 -> item step 2; steps 4-7 -> lem-sf-native-weil-open-proper-interchange (item steps 3-4); step 8 -> item step 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic localization of an exact abelian functor, applied only to the single complex G[0]; this unit has no separate exact-functor lemma."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type composition and base change, verifying the finite-type bases in the new open/boundary calculations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-proper-open-section",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-1ea53d7f6",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-1ea53d7f6 (reviewer sub-agent of L); spot-checked: FIX with a count-0 waiver. All three new nodes are true (checked: clopen V=s(U)⊔V' gives (a_!M)|_V=(M,0); the Frobenius equation types correctly; the boundary vanishes by d^{-1}a_!M=0 plus PBC; edge cases U=∅ and the fold Z=X⊔X). They duplicate the existing node lem-sf-native-weil-open-proper-interchange (reviewed PASS by NV, with Lean). That node proves J_jRp'_*≅Rp_*J_{j'} on WC^der for any commutative square with p,p' proper and j,j' qc open, Cartesian or not. Its steps 1-6 are the comparison-map and section-restriction content, step 7 is fixed-pair forgetting, and steps 8-11 are the boundary-detection content. The item is its special case U'=U, X'=Z, j'=a, p'=1_U (no cycle). The report never compared the item with that node. Item proof rewritten (statement unchanged, 2882 chars): (1) open exact/constructible + exact-functor factorization; (2) compactification bookkeeping, with X, Z, U finite type and 1_U proper; (3) apply the interchange node, whose framework is identical to the item's, with J_a=D(a_W!); (4) R(1_U)_*(G[0])≅G[0] by K-injective resolution, so Rj_W!(G[0])≅(j_W!G)[0]; (5) lift the isomorphism into the full subcategory WC_der(X). Every old step has a carrier: old 1-2 → open-exact-constructible, old 3 → step 2, old 4-7 → interchange, old 8 → step 5. Route is prop-functor-package clause 2 (main-20261015), refinement independence. No SGA. Batch-5: the lem-trf-geometric-inverse-image-exact flag is the generic exactness of a geometric morphism's inverse image, not a trace-formula or PD step: accepted. The new citation of the interchange node adds no trf/pd node beyond the closure of lem-sf-continuous-adic-proper-base-change-restriction (set difference empty), which the base item already cited and N8/NV accepted. Neither assumption leaf is reached. Maintainer: the new-node count is 0 because the work is already spread over the interchange node's split.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261026T222552-L-669106",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerShriek_iso"
+  ],
+  "sorry_after": []
+ }
+}

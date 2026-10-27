@@ -1,0 +1,190 @@
+{
+ "id": "lem-sfb-dc-lower-star-single-constructible",
+ "kind": "statement",
+ "title": "Constructibility of higher direct images of one constructible sheaf",
+ "statement": "Fix a prime ell, a characteristic-p field k with p prime and p != ell, and separated finite-type k-schemes X and Y with a k-morphism f:X -> Y, in [sk-def-sfb-dc-setting]. Let Lambda be one of the following condensed coefficient rings: a finite normed ell-adic extension, its integer ring (embedded or closed unit ball), the algebraic closure, or a finite discrete ring killed by an ell-power. Let F be a constructible Lambda_X module, using [sk-def-sfb-bounded-constructible] for constructible module objects and [sk-def-sfb-module-derived-pushpull] for Rf_*. For every integer q, H^q(Rf_*(F[0])) is a constructible Lambda_Y-module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-open-coefficients/lem-sfb-dc-lower-star-preserves.md",
+  "place": "Single-sheaf specialization of integral completion, rationalization and finite-stage descent; finite discrete case: SGA 4½, Th. finitude 1.1; Bhatt--Scholze §§6.7--6.8"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Put K=F[0]. The single-complex homology formula gives bounded constructibility. The structure maps make X,Y Noetherian; their morphism f is qcqs. The integer-ring realization maps are constructed from the normed scalar ring equivalences and continuous postcomposition. Transport constructibility along coefficient isomorphisms and their exact restriction functors. Reuse the proved continuous ring isomorphisms and constructibility transport helpers in the proper-cohomology module; no proper direct-image assertion or properness assumption is used here.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-model-proof-api",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-noetherian-proper-constructible-cohomology",
+    "lem-sfb-adic-constructibility-predicate-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For finite discrete coefficients T killed by ell^n, take the inverse of the fixed sectionwise coefficient equivalence. Constructible cohomology and boundedness give an etale bounded constructible origin. The finite-type etale direct-image theorem applies because ell^n is positive and invertible in k, including n=0 and the zero ring. The bounded-below unbounded direct-image comparison and the derived exact coefficient equivalence identify the actual internal direct image with the encoded etale image. Their homology isomorphisms and internal finite-presentation encoding prove constructibility in every degree.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "lem-sfb-finite-discrete-internal-constructible-kernels",
+    "lem-sf-proetale-constructible-origin",
+    "lem-sfb-unbounded-direct-image-bounded-below",
+    "thm-dg-finite-type-constructibility",
+    "lem-weil-pbc-finite-discrete-restriction-encoding",
+    "lem-weil-pbc-internal-module-ab-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the actual integer coefficient ring, apply the integral residue criterion to K. Its first residue ring is a finite field killed by ell. Use the fixed normalized encoding and the finite-type etale result to obtain bounded constructibility of the residue direct image. Any bounded constructible complex over a field has finite Tor amplitude: devissage into degree-zero objects, flatness of every field module, the etale/proetale tensor comparison and the normalized coefficient tensor equivalence prove this. Integral direct image preserves derived completeness and its finite reduction is the residue direct image. Apply the reverse residue criterion, then transport back to the original integral or closed-unit-ball coefficients.",
+   "uses": [
+    "lem-sfb-internal-integral-residue-criterion",
+    "lem-sfb-internal-integral-direct-image-limits",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-sf-finite-discrete-encoding-tensor-tor",
+    "lem-sf-finite-discrete-encoding-compactification",
+    "lem-sf-proetale-constructible-origin",
+    "thm-dg-finite-type-constructibility"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite normed ell-adic field take a bounded constructible integral model. The qcqs integral-to-rational scalar/direct-image comparison identifies the rational direct image with exact scalar extension of the integral image. Scalar extension preserves constructibility of each homology module.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-model",
+    "lem-weil-pbc-continuous-integral-push-comparison",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the algebraic closure descend the bounded constructible input through the finite-subextension cocone. Use the bounded-below qcqs direct-image/scalar comparison, the finite normed field case, and exact scalar extension to obtain constructible homology of the prescribed algebraic-closure direct image.",
+   "uses": [
+    "lem-sfb-constructible-cocone-obj",
+    "lem-sfb-qlbar-direct-image-comparison",
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-finite-discrete-encoding-compactification",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-sf-finite-discrete-encoding-tensor-tor",
+  "lem-sf-proetale-constructible-origin",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-constructible-cocone-obj",
+  "lem-sfb-finite-discrete-internal-constructible-kernels",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-internal-integral-direct-image-limits",
+  "lem-sfb-internal-integral-residue-criterion",
+  "lem-sfb-noetherian-proper-constructible-cohomology",
+  "lem-sfb-qlbar-direct-image-comparison",
+  "lem-sfb-unbounded-direct-image-bounded-below",
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-weil-pbc-condensed-finite-model-proof-api",
+  "lem-weil-pbc-continuous-constructible-integral-model",
+  "lem-weil-pbc-continuous-integral-push-comparison",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-finite-discrete-restriction-encoding",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "thm-dg-finite-type-constructibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "N4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 5.4 and 6.7-6.8; residue criterion with finite field Tor amplitude, actual coefficient/direct-image mates"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward of bounded constructible complexes along finite type morphisms over a field preserves bounded constructibility for l-adic coefficients",
+   "results": "Eight generic sheaf pushforward and condensed module hits; no finiteness theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bounded\", \"rightDerived\"",
+   "results": "0 hits",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images of constructible sheaves on finite type schemes are constructible and vanish in sufficiently high degrees for l adic coefficients",
+   "results": "Scheme.Hom.isConstructible_preimage, isLocallyConstructible_image, isConstructible_image; SheafOfModules.IsFiniteType; generic pushforward instances and condensed locally constant functor.",
+   "date": "2026-10-25",
+   "verdict": "no match: constructible subsets and finite-type modules are different notions"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*rightDerived|rightDerived.*constructible|finite.*cohomological.*dimension in Mathlib/AlgebraicGeometry/Sites and Mathlib/CategoryTheory/Sites",
+   "results": "No matches. Project search finds the general truncation induction and coefficient comparison interfaces, but the latter have import paths back to the item.",
+   "date": "2026-10-25",
+   "verdict": "no exact usable acyclic declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "tools/blueprint_refs.py search higher direct image constructible; search direct image bounded above",
+   "date": "2026-10-25",
+   "results": "Both searches returned 0 blueprint nodes.",
+   "verdict": "No duplicate blueprint statement found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-25",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-lower-star-preserves",
+   "place": "proof, first paragraph: integral completeness and residue finiteness; second paragraph: rationalization and finite-stage descent, specialized to a constructible sheaf in degree zero",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-open-coefficients",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeDirectImageSingleConstructible.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.finiteTypeDirectImage_single_constructible",
+  "statement": "theorem finiteTypeDirectImage_single_constructible\n    (F : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj Λ X.left))\n    (hF : IsConstructibleModuleObject (condensedRingObj Λ X.left) F) :\n    ∀ q : ℤ, IsConstructibleModuleObject (condensedRingObj Λ Y.left)\n      ((DerivedCategory.homologyFunctor _ q).obj\n        ((R((f.left)_*⟦Λ⟧)).obj ((DerivedCategory.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-46b2a",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261025T101203-L-3669421",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261026T023624-L-587203",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

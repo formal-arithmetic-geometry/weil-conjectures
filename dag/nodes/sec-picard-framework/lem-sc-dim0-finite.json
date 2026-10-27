@@ -37,7 +37,32 @@
  "blueprint_order": 685,
  "blueprint_uses": [],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero",
+     "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
+     "lines": [
+      246,
+      289
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
@@ -50,5 +75,32 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a Noetherian $T_0$ topological space, for instance the\nunderlying space of a scheme of finite type over a field $k$. A closed\nsubset $Z\\subseteq X$ of dimension at most zero is a finite set of\nclosed points.",
+  "proof": [
+   {
+    "text": "(The underlying space of a scheme of finite type over a field is\nNoetherian, by Hilbert's basis theorem on an affine cover, and $T_0$, as\nis every scheme.)",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "First, every point $z\\in Z$ is closed in $Z$. Let $y$ lie in the\nclosure of $\\{z\\}$ in $Z$. The closures of $\\{y\\}$ and $\\{z\\}$ in $Z$\nare irreducible closed subsets of $Z$ with\n$\\overline{\\{y\\}}\\subseteq\\overline{\\{z\\}}$. A strict inclusion would be\na chain of irreducible closed subsets of length one, contradicting\n$\\dim Z\\le0$, so $\\overline{\\{y\\}}=\\overline{\\{z\\}}$. The points $y$ and\n$z$ then have the same closure, hence are equal since $X$ is $T_0$. Thus\n$\\{z\\}$ is closed in $Z$, hence in $X$ because $Z$ is closed.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Next, every irreducible component of $Z$ is a single point: if $C$ is an\nirreducible component containing $z$, then $\\{z\\}\\subseteq C$ is an\ninclusion of irreducible closed subsets of $Z$, hence an equality by\n$\\dim Z\\le0$ as above. The subspace $Z$ of the Noetherian space $X$ is\nNoetherian, so it has finitely many irreducible components, and every\npoint lies in one of them. Hence $Z$ is finite.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

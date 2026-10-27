@@ -1,0 +1,257 @@
+{
+ "id": "lem-trf-polynomial-diagonal-dual-base-change",
+ "kind": "statement",
+ "title": "Polynomial diagonal dual base change and graph tensor cancellation",
+ "statement": "Let $R\\to A$ be a flat finitely presented map of commutative Noetherian rings [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra, def-weil-pbc-noetherian-ring]. Fix a surjection $P=R[x_1,\\ldots,x_n]\\twoheadrightarrow A$ [def-weil-pbc-mv-polynomial-ring]. Distinguish copies $A_1,A_2$ of $A$, put $S=A_1\\otimes_RP=A_1[x_1,\\ldots,x_n]$ and $B=A_1\\otimes_RA_2$, and let $q:S\\twoheadrightarrow B$ be the induced surjection. Let $\\mu:B\\to A$ be multiplication and $e=\\mu q:S\\to A$. Work in ordinary module derived categories [def-weil-abstract-derived-category], with derived tensor [lem-pc-derived-tensor-second-factor-functor] and Hom [def-pur-derived-internal-hom]. For a ring map $f$, let $C_f$ denote derived coinduction with precomposition action [def-trf-derived-coinduction]. Put $D=C_{P\\to A_2}(P[0])\\in D(A_2)$ and $E=C_q(S[0])\\in D(B)$. Then $P,S$ are Noetherian, $P\\to S$ and both coprojections $A_i\\to B$ are flat, and $B[0]$ and the restriction of $E$ are perfect over $S$ [def-pc-perfect-ring-complex]. There is an isomorphism\n$$E\\cong B\\otimes_{A_2}^{\\mathbf L}D\\quad\\text{in }D(B).$$\nThe canonical $S$-linear bidual map $B\\to R\\operatorname{Hom}_S(E,S)$ is an isomorphism in $D(S)$. Moreover there is an isomorphism\n$$\\operatorname{Res}_q(A\\otimes_B^{\\mathbf L}E)\\cong\\operatorname{Res}_eD\\quad\\text{in }D(S),$$\nwhere $A$ has its multiplication $B$-action on the left, and $D$ is viewed as an $A$-object via $A_2=A$ on the right. In particular, for $s=a\\otimes p\\in S$ the action on the right is multiplication by $a\\bar p=e(s)$; the base change uses the second coprojection.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Agent polynomial base-change and graph-action argument: Tags 068X (lemma-perfect-over-polynomial-ring), 0A6A (lemma-base-change-RHom), 08YU (lemma-double-base-change); coinduction enhancement supplied by the algebraic-shriek-calculus flat-base-change comparison. Former steps 2, 3 and 6 of lem-trf-polynomial-diagonal-rhom-reduction; complete retained argument in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pur-derived-internal-hom",
+  "def-trf-derived-coinduction",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "The monomial generators give finite-type presentations of $P$ over $R$, $S=A_1[x_1,\\ldots,x_n]$ over $A_1$, and $B$, a quotient of $S$, over $A_1$. Thus the finite-type Noetherian permanence lemma gives that $P,S,B$ are Noetherian. For an injection $U\\to V$ of $P$-modules, the identification $U\\otimes_PS=U\\otimes_RA_1$ (and similarly for $V$) identifies its scalar extension with an injection by flat tensor exactness for $A_1/R$. Hence $P\\to S$ is flat. For an injection of $A_1$-modules use $U\\otimes_{A_1}B=U\\otimes_RA_2$ and flatness of $A_2/R$; interchanging the copies proves flatness of the second coprojection as well. Explicitly, $U\\otimes_PS\\to U\\otimes_RA_1$ sends $u\\otimes(a\\otimes p)$ to $pu\\otimes a$, with inverse $u\\otimes a\\mapsto u\\otimes(a\\otimes1)$; $U\\otimes_{A_1}B\\to U\\otimes_RA_2$ sends $u\\otimes(a\\otimes b)$ to $au\\otimes b$, with inverse $u\\otimes b\\mapsto u\\otimes(1\\otimes b)$; the case of the second coprojection is symmetric.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 00HD (lemma-flat); explicit balanced-tensor identification for base change"
+   }
+  },
+  {
+   "text": "Apply the flat polynomial quotient perfectness lemma first to $R\\to A_2$ with presentation $P\\twoheadrightarrow A_2$. Finite presentation supplies finite type, and both rings are Noetherian by hypothesis. It gives that $A_2[0]$ is perfect over $P$. Apply the same lemma to $A_1\\to B$ with presentation $S=A_1[x_1,\\ldots,x_n]\\twoheadrightarrow B$: step 1 supplies Noetherianity, flatness and finite type. This gives that $B[0]$ is perfect over $S$.",
+   "uses": [
+    "lem-trf-flat-polynomial-quotient-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068X (lemma-perfect-over-polynomial-ring), polynomial quotient consequence; Tags 067J (lemma-flat-finite-presentation-perfect), 068Y (lemma-perfect-ring-map)"
+   }
+  },
+  {
+   "text": "By the definition of coinduction, the restriction of $E=C_q(S[0])$ is $R\\operatorname{Hom}_S(B,S)$. The closed symmetric monoidal structure on the ordinary module derived category is furnished by the one-object ringed-site instance of the cited monoidal lemma (this site is small); in particular it is braided. Apply perfect-complex biduality over $S$ to the perfect object $B[0]$ from step 2, using a localization universe equal to the coefficient universe as in that lemma. Its dual, namely the restriction of $E$, is perfect, and its canonical evaluation is precisely $B\\to R\\operatorname{Hom}_S(E,S)$, so that map is an isomorphism. These are assertions in $D(S)$.",
+   "uses": [
+    "def-trf-derived-coinduction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-trf-perfect-complex-derived-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07VI (lemma-dual-perfect-complex), applied to B over S"
+   }
+  },
+  {
+   "text": "There is a canonical algebra identification $A_2\\otimes_PS\\cong B$: $b\\otimes(a\\otimes p)\\mapsto a\\otimes b\\bar p$, with inverse $a\\otimes b\\mapsto b\\otimes(a\\otimes1)$. Apply coinduction flat quotient base change to $P\\twoheadrightarrow A_2$, the flat map $P\\to S$ of step 1, and $M=P[0]$. Its hypotheses hold: $P$ is Noetherian and $P[0]\\in D^+(P)$. The resulting isomorphism is $D\\otimes_{A_2}^{\\mathbf L}B\\cong C_q(S[0])=E$ in $D(B)$, where the structure map $A_2\\to B$ is $b\\mapsto1\\otimes b$. Write its left side as $B\\otimes_{A_2}^{\\mathbf L}D$: the degree-zero algebra factor contributes no sign. Thus this comparison retains the full $B$-action; it is not just an underlying $S$-linear isomorphism.",
+   "uses": [
+    "lem-trf-coinduction-flat-quotient-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0BZM (lemma-flat-bc-surjection), 0E2A (lemma-check-base-change-is-iso); explicit algebra identification"
+   }
+  },
+  {
+   "text": "Choose a K-flat complex $Q$ of flat $A_2$-modules representing $D$. The cited resolution lemma supplies it; change of rings makes $B\\otimes_{A_2}Q$ a K-flat complex of flat $B$-modules. The derived tensor computation therefore represents $B\\otimes_{A_2}^{\\mathbf L}D$ by this complex, and represents $A\\otimes_B^{\\mathbf L}(B\\otimes_{A_2}^{\\mathbf L}D)$ by $A\\otimes_B(B\\otimes_{A_2}Q)$, computing in the K-flat factor using the cited derived symmetry; its sign is trivial on the degree-zero ring factor. The balanced chain isomorphism $a\\otimes(b\\otimes z)\\mapsto a\\mu(b)\\otimes z$, with inverse $a\\otimes z\\mapsto a\\otimes(1\\otimes z)$, identifies this with $A\\otimes_{A_2}Q$. Since the composite $A_2\\to B\\xrightarrow{\\mu}A$ is the specified identification $A_2=A$, multiplication identifies the last complex with $Q$. The formulas respect differentials since the ring factors are in degree zero. Combining with step 4 gives the required cancellation after restriction along $q$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08YU (lemma-double-base-change), explicit K-flat proof; sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat)"
+   }
+  },
+  {
+   "text": "On the cancellation model, $s=a_1\\otimes p\\in S$ acts on the $A$ factor through $\\mu q(s)=a_1\\bar p$. The chain map in step 5 sends $a\\otimes(b\\otimes z)$ to $a\\mu(b)z$, so sends $s$ times this tensor to $(a_1\\bar p)a\\mu(b)z$. This is exactly the action on $Q$ after restriction along $e$. Consequently the cancellation is $S$-linear and yields $\\operatorname{Res}_q(A\\otimes_B^{\\mathbf L}E)\\cong\\operatorname{Res}_eD$ in $D(S)$. In particular it uses the second coprojection $A_2\\to B$, as asserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08YU (lemma-double-base-change); explicit action check, mindful of remark-warning-compute-base-change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "def-trf-derived-coinduction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-trf-perfect-complex-derived-biduality",
+  "lem-trf-coinduction-flat-quotient-base-change",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Assembly of Tags 068X, 07VI, 08YU with dualizing.tex Tags 0BZM, 0E2A; explicit second-coprojection and graph action calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "base.change.*(RHom|derivedHom)|polynomial.*dual|dual.*polynomial",
+   "results": "3 hits; top=['Mathlib/Algebra/Polynomial/Eval/Coeff.lean', 'Mathlib/Analysis/Complex/PhragmenLindelof.lean', 'Mathlib/RingTheory/MvPolynomial/Basic.lean']; note=; digest=afd1f411f379e609; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary cotangent/module dual base change and flat tensor exactness do not give the derived coinduction B-object or diagonal cancellation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of derived Hom for a perfect polynomial quotient and tensoring back along multiplication",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "results": "1 hits; top=['ModuleCat.restrictCoextendScalarsAdj']; note=; digest=4b167a90eb1d92c5; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary cotangent/module dual base change and flat tensor exactness do not give the derived coinduction B-object or diagonal cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented algebra with polynomial presentation the derived dual of its flat base changed quotient is the base change of its dual with diagonal tensor cancellation",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.tensorH1Cotangent', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'IsBaseChange.toDualBaseChange_tmul', 'Algebra.Extension.tensorCotangentSpace', 'IsBaseChange.dual', 'Algebra.Generators.CotangentSpace.compEquiv_symm_inr']; note=; digest=67d941abb923f81e; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary cotangent/module dual base change and flat tensor exactness do not give the derived coinduction B-object or diagonal cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex duals commute with flat scalar extension and derived tensor of induced modules cancels change of scalars",
+   "results": "8 hits; top=['Module.Dual.baseChange_baseChange', 'IsBaseChange.toDualBaseChange_tmul', 'TensorProduct.AlgebraTensorModule.dualDistrib', 'Module.Dual.baseChange', 'ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat', 'Module.Flat.rTensor_shortComplex_exact', 'ModuleCat.preservesFiniteLimits_extendScalars_of_flat', 'Module.Flat.lTensor_shortComplex_exact']; note=; digest=11d436b2d2255cb3; directory=Mathlib/",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary cotangent/module dual base change and flat tensor exactness do not give the derived coinduction B-object or diagonal cancellation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat base change of derived coinduction for a perfect polynomial quotient with diagonal derived tensor cancellation",
+   "results": "{\"t\": \"2026-10-23T14:45:31Z\", \"tool\": \"leanfinder\", \"query\": \"Flat base change of derived coinduction for a perfect polynomial quotient with diagonal derived tensor cancellation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"Rep.Tor_map\", \"Algebra.Extension.tensorH1Cotangent\", \"Rep.Tor_obj\", \"Algebra.Extension.tensorCotangent\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\"], \"digest\": \"983c8d1cc631c062\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, cotangent complexes, ordinary scalar adjunctions or flat tensor exactness; none states the derived coinduction and graph cancellation package"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCoinduction|polynomial.*dual|dual.*polynomial",
+   "results": "{\"t\": \"2026-10-23T14:45:57Z\", \"tool\": \"grep\", \"query\": \"derivedCoinduction|polynomial.*dual|dual.*polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Basic.lean\", \"Mathlib/Algebra/Polynomial/Eval/Coeff.lean\", \"Mathlib/Analysis/Complex/PhragmenLindelof.lean\"], \"digest\": \"cde43e41d6780a3d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, cotangent complexes, ordinary scalar adjunctions or flat tensor exactness; none states the derived coinduction and graph cancellation package"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj",
+   "results": "{\"t\": \"2026-10-23T14:45:57Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"4b167a90eb1d92c5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, cotangent complexes, ordinary scalar adjunctions or flat tensor exactness; none states the derived coinduction and graph cancellation package"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom dual of a polynomial quotient commutes with flat base change and tensor along the diagonal",
+   "results": "{\"t\": \"2026-10-23T14:46:39Z\", \"tool\": \"leansearch\", \"query\": \"Derived Hom dual of a polynomial quotient commutes with flat base change and tensor along the diagonal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.toDualBaseChange\", \"IsBaseChange.dual\", \"Module.Dual.baseChange\", \"IsBaseChange.toDual_apply\", \"IsBaseChange.toDual\", \"Module.Dual.baseChange_baseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"dualTensorHomEquiv\"], \"digest\": \"4e03af7972086ebb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, cotangent complexes, ordinary scalar adjunctions or flat tensor exactness; none states the derived coinduction and graph cancellation package"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complex duals commute with flat extension of scalars and derived tensor of induced modules cancels restriction of scalars",
+   "results": "{\"t\": \"2026-10-23T14:46:40Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect complex duals commute with flat extension of scalars and derived tensor of induced modules cancels restriction of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.baseChange_baseChange\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"TensorProduct.AlgebraTensorModule.dualDistrib\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Dual.baseChange\", \"CharacterModule.dual_rTensor_conj_homEquiv\", \"Module.Flat.rTensor_shortComplex_exact\"], \"digest\": \"4465017ab33f4bfb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern ordinary module duals, cotangent complexes, ordinary scalar adjunctions or flat tensor exactness; none states the derived coinduction and graph cancellation package"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polynomial-diagonal-rhom-reduction",
+  "date": "2026-10-22",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Re-split component: Polynomial diagonal dual base change and graph tensor cancellation (former steps 2, 3, 6).",
+   "via": [
+    "lem-trf-polynomial-diagonal-rhom-reduction",
+    "lem-trf-algebraic-relative-dualizing-isomorphism",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-polynomial-diagonal-dual-base-change",
+  "worker": "stage1",
+  "summary": "Q117 splits the polynomial diagonal dual base-change package into six steps using existing DAG nodes only. Explicitly checks flatness by balanced tensors, both polynomial quotient perfectness applications, canonical biduality, the B-valued coinduction comparison along the second coprojection, K-flat tensor cancellation and its graph S-action. No statement or inherited field changed. Existing searches retained and fresh logged searches appended.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Re-split component: Polynomial diagonal dual base change and graph tensor cancellation (former steps 2, 3, 6). Realizes the algebraic polynomial-chart auxiliary with flat base change, duality and graph cancellation. The current latest ancestor proof was read; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat representatives with flat terms for the explicit cancellation; this is a generic tensor tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "K-flat scalar extension ensures B tensor Q computes the iterated derived tensor."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Computes tensors on K-flat representatives, including the K-flat second factor by exchanging the displayed factors."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The one-object ringed-site case supplies the braided structure required by the existing biduality statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-bcece3099",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-bcece3099 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, and Stacks 068X/067J/068Y/07VI/08YU (more-algebra), 0BZM/0E2A (dualizing), 00FN/00HD (algebra) and 06YS/0G7E (sites-cohomology); no SGA. The statement and stmt_deps are byte-identical to the record Q28 created, and there are no new nodes. Old rhom-reduction steps 2, 3 and 6 are fully carried. Step 2 applies flat-polynomial-quotient-perfect twice: to R→A_2, and to A_1→B, whose flatness, Noetherianity and finite type come from step 1. Step 3 is biduality for B[0] over S (Res_q E = RHom_S(B,S)), with the braided structure from the one-object ringed-site lemma. Step 4 is coinduction-flat-quotient-base-change for P↠A_2, P→S flat and M=P[0] ∈ D^+(P). I checked the isomorphism A_2⊗_P S ≅ B (b⊗(a⊗p) ↦ a⊗b·p̄, inverse a⊗b ↦ b⊗(a⊗1)): it carries S to q and A_2 to the second coprojection, so the result holds in D(B). Steps 5-6 are the K-flat cancellation of 08YU, using μ∘p_2 = id, and the graph action e(s) = a_1·p̄. No cycle (DFS over 731 dependencies). No duplicate found by grep. Small cases n=0, A=0 and A=R pass. The generic K-flat and monoidal tool_uses are accepted. FIX: step 1's formula u⊗(a⊗t) ↦ au⊗t is ill-typed for the U⊗_P S ≅ U⊗_R A_1 identification. The fix replaces it with the explicit maps u⊗(a⊗p) ↦ pu⊗a and u⊗(a⊗b) ↦ au⊗b, with their inverses; only the step-1 text changes.; 1 file(s) fixed by the reviewer"
+ }
+}

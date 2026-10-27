@@ -1,0 +1,155 @@
+{
+ "id": "lem-trf-standard-affine-section-orientation",
+ "kind": "statement",
+ "title": "The existing standard affine section counit theorem and its fixed-presentation square",
+ "statement": "For N>0, finite commutative A with NA=0, normalized Tate transport t, and a specified family D of normalized projective-line data, let T be Noetherian with N invertible. For every d, there are normalized affine adjunctions over T and A1(T) whose raw section comparison restricts at one to the actual standard affine sectionMap, as defined in [def-trf-section-local-comparison-data], [def-trf-coordinate-counit-arrows] and [def-pur-noetherian-section-specialization-arrows]. This is the unchanged existing declaration sectionCoordinateCounit_standard, formerly in SectionCoordinateCounitNormalization. Consequently any two prescribed normalized adjunctions have the same affine dualizing isomorphisms as these witnesses. Their affineSectionIso maps satisfy i1*(oF), followed by inverse Tate pullback and the section compositor, equals standardFibreMap of [def-trf-section-coordinate-chart-maps] followed by oC.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+ },
+ "stmt_deps": [
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-trf-section-local-comparison-data",
+  "def-trf-coordinate-counit-arrows",
+  "def-trf-section-coordinate-chart-maps"
+ ],
+ "proof": [
+  {
+   "text": "Use the ordered affine tower adjunction and its compact-support comparison. The normalized projective-line family has base change by uniqueness. Transpose pullback of its counit through exchange and use trace base change. Adjunction injectivity gives the standard exceptional comparison equation. Pull back to the zero section along i1 and insert the canonical Tate and section compositors. This is the original proof plan of sectionCoordinateCounit_standard, moved without changing its signature or proof obligation.",
+   "uses": [
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-affine-trace-tower-counit-base-change",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "prop-asd-smooth-base-change",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-ordinary-finite-p1-datum-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  },
+  {
+   "text": "Normalization equates the inverse affineDualizingIso maps with the same standardAdjoint. Iso.ext_inv therefore identifies the prescribed isomorphisms with the witnesses. Unfold affineSectionIso, restrictionAtOne and rawComparison. Compose on the right with the source orientation, use section-compositor naturality and cancel its inverse to obtain standardAffineSectionOrientation_one.",
+   "uses": [
+    "def-trf-coordinate-counit-arrows",
+    "def-trf-section-local-comparison-data",
+    "def-trf-section-coordinate-chart-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-affine-trace-tower-counit-base-change",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "prop-asd-smooth-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-amb-ordinary-finite-p1-datum-uniqueness",
+  "def-trf-coordinate-counit-arrows",
+  "def-trf-section-local-comparison-data",
+  "def-trf-section-coordinate-chart-maps"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Counit normalized etale locality of dualizing complexes commutes with the one fibre map in deformation to the normal cone",
+   "results": "Eight general localization counit and algebraic etale locality results; none gives the actual section comparison diagram.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of a counit normalized affine space orientation commutes with restriction to fibre at one of the deformation to the normal cone",
+   "results": "AffineSpace.isPullback_map and AffineSpace.map_over give geometric ingredients. No derived section orientation square.",
+   "date": "2026-10-27",
+   "verdict": "geometric ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "The named generic adjunction naturality lemma exists; it does not supply the Rees or affine orientation diagram.",
+   "date": "2026-10-27",
+   "verdict": "generic ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionMap|sectionLocality|affineSectionIso|standardAdjoint",
+   "results": "No matches in Mathlib/AlgebraicGeometry or Mathlib/CategoryTheory/Sites. Project search finds the existing standard assertion sectionCoordinateCounit_standard in its parent module, extracted unchanged to avoid an import cycle.",
+   "date": "2026-10-27",
+   "verdict": "reuse the project standard case; no Mathlib replacement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionCoordinateOrientationSquare",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local construction, standard affine model, etale Rees maps and restriction at t=1.",
+   "via": [
+    "lem-trf-section-coordinate-orientation-square",
+    "lem-trf-section-coordinate-counit-normalization",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StandardAffineSectionOrientation",
+  "file": "lean/Sheaf/Paper/StandardAffineSectionOrientation.lean",
+  "declaration": "AlgebraicGeometry.Etale.sectionCoordinateCounit_standard",
+  "statement": "theorem sectionCoordinateCounit_standard (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),\n      OrdinaryFiniteP1Datum A N hA t T hT)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :\n    ∃ (adjC : rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n        (AffineSpace (ULift.{u} (Fin d)) S ↘ S) ⊣ affineRight A N hA S d)\n      (adjF : rightDerivedLowerShriek (ModuleCat.{u + 1} A)\n        (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin 1)) S) ↘ _) ⊣\n          affineRight A N hA (AffineSpace (ULift.{u} (Fin 1)) S) d),\n      CoordinateCounitArrows.IsNormalized N hN A hA t D S hS d adjC ∧\n      @CoordinateCounitArrows.IsNormalized N hN A _ _ hA t D\n        (AffineSpace (ULift.{u} (Fin 1)) S)\n        (noetherianSource (AffineSpace (ULift.{u} (Fin 1)) S ↘ S))\n        (invertibleOnSource N (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) hS) d adjF ∧\n      (restrictionAtOne A S\n        (rawComparison A N hN hA S hS d _ _\n          (affineSectionIso A N hN hA S hS d\n            (AffineSpace.zeroSection (ULift.{u} (Fin d)) S) adjC)\n          (@affineSectionIso A _ _ N hN hA (AffineSpace (ULift.{u} (Fin 1)) S)\n            (noetherianSource (AffineSpace (ULift.{u} (Fin 1)) S ↘ S))\n            (invertibleOnSource N (AffineSpace (ULift.{u} (Fin 1)) S ↘ S) hS) d\n            (AffineSpace.zeroSection (ULift.{u} (Fin d)) _) adjF))).hom =\n        sectionMap A\n          (AffineSpace (ULift.{u} (Fin d)) (AffineSpace (ULift.{u} (Fin 1)) S) ↘ _)\n          (AffineSpace (ULift.{u} (Fin d)) S ↘ S)\n          (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)\n          (AffineSpace.map (ULift.{u} (Fin d))\n            (AffineSpace.oneSection (ULift.{u} (Fin 1)) S))\n          (AffineSpace.isPullback_map _)\n          (AffineSpace.zeroSection (ULift.{u} (Fin d)) _)\n          (AffineSpace.zeroSection (ULift.{u} (Fin d)) S)\n          (AffineSpace.zeroSection_comp_map _)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sectionCoordinateCounit_standard",
+   "AlgebraicGeometry.Etale.standardAffineSectionOrientation_one"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf585",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T021319-L-2756451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-bf585",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261027T021319-L-2756451",
+  "kind": "interface",
+  "note": "independent cc review: item + 3 new modules + parent extraction vs clone 7dea68d and their DAG nodes; sandbox compile of 5 delivered modules + AffineDiagonalTraceRestriction (43.3 s OK) + #print axioms"
+ }
+}

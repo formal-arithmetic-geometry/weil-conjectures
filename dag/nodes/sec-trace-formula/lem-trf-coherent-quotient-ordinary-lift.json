@@ -1,0 +1,122 @@
+{
+ "id": "lem-trf-coherent-quotient-ordinary-lift",
+ "kind": "statement",
+ "title": "Ordinary reconstruction from a strict quotient-unit tower",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W, and an ordinary quotient tensor/limit model M [def-trf-completion-unit-models]. For any complexes P over the completed coefficient sheaf and C over the coefficient sequence site, let kappa_n identify evaluation_n(C) with termwise finite tensor reduction of P. Suppose b is a strict chain map from the constant tower on P to the restricted tower of C, and at every level, degree and section it sends x to kappa_n inverse applied to 1 tensor x, through the canonical underlying-section identifications [def-trf-integral-comparison-realization-models]. Then there is a strict isomorphism a:M(P) -> C. Its ordinary tensor/limit transpose equals the constant/limit transpose of b, and evaluation_n(a) followed by kappa_n equals M.evaluation_n for every n. No derived comparison or flatness assumption is needed.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ordinary tensor/restriction adjunction (03D7), derived adjunction (06YY) and strict tower limit normalization (0941); indicated subargument of lem-trf-coherent-quotient-reduction-comparison."
+ },
+ "proof": [
+  {
+   "text": "Transpose b through the termwise constant/limit adjunction and invert the termwise M tensor/limit Hom bijection. This defines a strict chain map a. Evaluate the transposition equality on each degree and limit projection. Naturality of the restriction/evaluation identification computes its finite scalar adjunct.",
+   "uses": [
+    "def-trf-completion-unit-models",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The section formulas for b and M.unit_tensor identify that adjunct, after composition with kappa, with the finite tensor unit. The scalar Hom bijection and cancellation of M.evaluation show evaluation(a) followed by kappa equals M.evaluation. Both named section transports are inverse underlying-type casts.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every finite evaluation of a is an isomorphism. At each degree, evaluate further on every object of W.ProEt: this gives a bijection of the underlying modules at every object (n,V) of the sequence site. Assemble these section isomorphisms into a presheaf isomorphism and reflect through the fully faithful sheaf forgetful functor. Componentwise isomorphisms then give a strict complex isomorphism. Zero objects and n=0 require no separate argument.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-completion-unit-models",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-realization-models",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "proof_origin": {
+  "by": "K8 stage 3",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Proved subargument of the coherent quotient comparison, separated after profiling the complete file and simplifying its section and adjunction calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of complexes of sheaves on a product site is an isomorphism if all its evaluations are isomorphisms",
+   "results": "Eight generic sheaf-isomorphism and localization results; no normalized strict coefficient-system reconstruction theorem.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.Hom.isIso_of_components",
+   "results": "One exact generic componentwise isomorphism lemma, used after proving the module-sheaf components invertible.",
+   "date": "2026-10-26",
+   "verdict": "generic ingredient used"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentQuotientOrdinaryLift|coherentQuotientModelComparison",
+   "results": "No existing declarations with these names; repository inspection finds only the assigned comparison obligation.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoherentQuotientReductionComparison",
+  "date": "2026-10-26",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-coherent-quotient-reduction-comparison",
+   "place": "Ordinary reconstruction from a strict quotient-unit tower",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoherentQuotientOrdinaryLift",
+  "file": "lean/Sheaf/Paper/CoherentQuotientOrdinaryLift.lean",
+  "declaration": "WeilConjectures.coherentQuotientOrdinaryLift",
+  "statement": "theorem coherentQuotientOrdinaryLift (W : Scheme.{t})\n    (M : CompletionUnit.OrdinaryModel l E W)\n    (P : CochainComplex (scalarReductionSource l E W) ℤ)\n    (C : CochainComplex (coefficientSequenceModules l E W) ℤ)\n    (κ : ∀ n : ℕ,\n      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅\n        (unrestrictedIntegralFiniteComplex l E W n).obj P)\n    (b : ((Functor.const ℕᵒᵖ : scalarReductionSource l E W ⥤\n        ℕᵒᵖ ⥤ scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj P ⟶\n      (CompletionUnit.tower l E W).obj C)\n    (hb : ∀ (n : ℕ) (i : ℤ) (V : W.ProEtᵒᵖ) (x : (P.X i).val.obj V),\n      (((b.f i).app (op n)).val.app V) x =\n        integralComparisonRestrictedSection l E W (C.X i) n V\n          (integralComparisonSequenceSection l E W (C.X i) n V\n            (((κ n).inv.f i).val.app V\n              (unrestrictedIntegralTensorSection l E W n (P.X i) V 1 x)))) :\n    ∃ a : (M.quotient l E W).obj P ≅ C,\n      ((M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv P C) a.hom =\n        ((constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E W)).mapHomologicalComplex\n          (.up ℤ)).homEquiv P ((CompletionUnit.tower l E W).obj C) b ∧\n      ∀ n : ℕ,\n        ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).mapIso a ≪≫\n          (κ n) =\n            (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T100316-L-4178483",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261026T100316-L-4178483",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "id": "def-sf-proetale-locally-finite-free-module",
+ "kind": "definition",
+ "title": "Pro-etale locally finite free modules over arbitrary ring objects",
+ "status": "split",
+ "statement": "Let $X$ be a scheme with its small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]. Let $R$ be any unital associative ring object in abelian sheaves on this site, and let $P$ be an internal left $R$-module [def-weil-sheaf-of-modules-category]: its action $R\\otimes P\\to P$ satisfies the unital and associative module laws. For a scheme morphism $f:Y\\to X$, let $f^{-1}R$ and $f^{-1}P$ denote abelian inverse image with the induced ring and module actions [def-sf-proetale-ring-sheaf-operations]. The module $P$ is pro-etale locally finite free if there is a pro-etale scheme cover $\\{f_i:U_i\\to X\\}_{i\\in I}$ such that for each $i$ there is an integer $n_i\\geq0$ and an isomorphism of internal $f_i^{-1}R$-modules $f_i^{-1}P\\simeq\\bigoplus_{j<n_i}f_i^{-1}R$, where the summands are the regular modules. The finite ranks may vary with $i$ and may be zero. No commutativity, condensed-coefficient presentation, noetherianity, nonemptiness or finite-type hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-proetale-ring-sheaf-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite locally free modules on a ringed site (definition-site-local, item (2)); Tag 03DN, lemma-local-final-object, item (2); Tag 03DO, lemma-local-pullback. Pro-etale scheme-cover specialization used in Bhatt--Scholze Section 6.8 and the native refinement step 5 of cor-coef-verdier-weil-equivariance."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LocallyFree|IsLisseCoefficientModule [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition of the arbitrary-ring-object scheme-cover predicate; finite generation or finite presentation differs from local finite freeness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module over an arbitrary ring object in pro etale abelian sheaves is locally finite free if a pro etale scheme cover makes it a finite direct sum of the regular module",
+   "results": "8 hits: SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.mk, AlgebraicGeometry.Scheme.Modules, SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFiniteType.casesOn, Module.free_of_flat_of_isLocalRing",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition of the arbitrary-ring-object scheme-cover predicate; finite generation or finite presentation differs from local finite freeness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal module over a ring object on the pro etale site is locally finite free on a pro etale scheme cover, allowing locally varying finite rank and zero rank",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.Presentation.IsFinite, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib definition of the arbitrary-ring-object scheme-cover predicate; finite generation or finite presentation differs from local finite freeness."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n LocallyFree|IsLisseCoefficientModule lean/WeilConjectures/CategoryTheory lean/WeilConjectures/SixFunctors/ProEtale",
+   "results": "No definition of the general scheme-cover predicate in the upstream source; only an import mentioning a locally-free tower.",
+   "date": "2026-10-24",
+   "verdict": "No upstream match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n LocallyFree|IsLisseCoefficientModule lean/Sheaf; grep -rl CondensedRing.LocallyFree dag/nodes",
+   "results": "Exact predicate at Sheaf/Paper/ContinuousLocallyFreePullback.lean:31, AlgebraicGeometry.ProEtale.CondensedRing.LocallyFree. Other DAG occurrences are theorem uses or special coefficient nodes; no definition node records this declaration. IsLisseCoefficientModule only accepts condensedRingObj coefficients.",
+   "date": "2026-10-24",
+   "verdict": "Reuse this existing general declaration, with a new definition node as required by the maintainer H2/H12 return; do not move or duplicate it."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "locally finite free",
+   "results": "94 blueprint matches. Includes Zariski locally free modules, finite locally free morphisms, finite/condensed-coefficient specializations and constructible-strata statements; no blueprint node for local finite freeness over an arbitrary internal pro-etale ring object.",
+   "date": "2026-10-24",
+   "verdict": "No matching existing definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-frobenius-action-resolutions",
+  "date": "2026-10-24",
+  "group": "Q50"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Native refinement step 5 of cor-coef-verdier-weil-equivariance.proof.md: local finite-free restrictions of underlying cohomology on each stratum; the inherited ancestry has no blueprint id (ancestor command prints None).",
+   "via": [
+    "lem-sf-weil-frobenius-action-resolutions",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ContinuousLocallyFreePullback",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.LocallyFree",
+  "statement": "abbrev LocallyFree {X : Scheme.{u}}\n    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]\n    (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "note": "Exact existing scheme-cover predicate for an arbitrary ring object R. Mod.IsFree means a finite biproduct of regular modules, including rank zero. New definition-node attachment requested by H2/H12 return on 2ad1093ac536; declaration stays in its proved owning module and is not moved or copied."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0ced0056",
+  "group": "Q50",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0ced0056",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Re-delivery after the H2/H12 return of 2ad1093ac536. The theorem stmt_dep lem-weil-pbc-continuous-locally-free-pullback is replaced by the new definition node def-sf-proetale-locally-finite-free-module, with an existing:true record on AlgebraicGeometry.ProEtale.CondensedRing.LocallyFree (Sheaf.Paper.ContinuousLocallyFreePullback:31). The record's statement is the verbatim abbrev header; the node content matches the Lean (pro-etale scheme cover, Mod.IsFree = some finiteFree n, rank zero and varying ranks allowed, arbitrary MonObj R); its cited inverse image ringSheafInverseImage = (upperStar Ab f).mapMod is literally the functor LocallyFree uses; no node in live or side-live already owns the declaration. The item statement change is citation-only: old_statement and the 14 old_stmt_deps are verbatim from live, and the 5-citer audit holds. The added def deps internal-abelian-sheaf-module-equivalence and constructible-stratification are definition nodes on live. The Lean module is byte-identical to the returned head except one Constructible docstring line. My independent clause-by-clause re-reading is ok: hypotheses; AsSmall orbit-closed model with translation = postcompose g^-1; coefficient = sectionRingSheaf(padicAlgClSheaf) with a pinned on generators; recorded Presentation; unbounded mapDerivedCategory triangulated and conservative; stratification constructibility; K-flat, flat terms and functorial K-injective; preservation clauses; universes wA/wB only for localization; edge cases. Gates: no hollow defs, single sorry, docstrings present, lean.statement verbatim, both report sections present. Advisories: Nonempty cohomology iso not pinned; LocallyFree docstring still names the old theorem node. No compile (no file changed)."
+ }
+}

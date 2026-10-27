@@ -1,0 +1,205 @@
+{
+ "id": "lem-trf-charted-log-map-local-right-inverse",
+ "kind": "statement",
+ "title": "A charted log map with invertible stalk has a local right inverse",
+ "statement": "Let $X$ be a locally Noetherian scheme [pqf-def-locnoeth], let $\\bar x$ be a geometric point [def-weil-geometric-point], and let $(N,\\alpha_N)$ and $(M,\\alpha_M)$ be log structures on $X$ [def-trf-fs-log-blowup]. Let $f:N\\to M$ be a homomorphism of sheaves of monoids with $\\alpha_M f=\\alpha_N$; thus it is a homomorphism of log structures over the identity of $X$ and fixes $\\mathcal O_X^\\times$. Let $Q$ be a finitely generated commutative monoid and let $q:Q\\to M(X)$ be a chart [def-trf-fs-log-blowup]. Suppose the induced homomorphism $f_{\\bar x}:N_{\\bar x}\\to M_{\\bar x}$ of geometric stalks [def-weil-pbc-geometric-stalks] is an isomorphism. Then there is an affine pointed etale neighbourhood $(V,\\bar v)\\to(X,\\bar x)$ [def-weil-etale-morphism, def-weil-pbc-geometric-stalks] and a monoid homomorphism $k:Q\\to N(V)$ such that\n$$\\alpha_N k=\\alpha_M(q|_V),\\qquad (f|_V)k=q|_V,\\qquad k_{\\bar v}=f_{\\bar x}^{-1}q_{\\bar x}.$$\nThere is a unique homomorphism of log structures $g:M|_V\\to N|_V$ over the identity of $V$ with $g(q|_V)=k$, and it satisfies\n$$(f|_V)g=\\mathrm{id}_{M|_V},\\qquad g_{\\bar v}=f_{\\bar x}^{-1}.$$\nThe stalk equalities use the canonical identifications along the pointed etale map. Neither a finite chart on $N$ nor finite generation of the unit sheaves is assumed, and $Q$ need not be integral or saturated.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI, 1.1 (printed p. 69) and 3.7(a) (printed p. 75), final chart-extension sentence; agent extraction of the finite chart-generator inverse lift and associated-log extension (old chart-spreading proof steps 4--5), not a separately stated theorem in the source."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-etale-morphism",
+  "def-trf-fs-log-blowup"
+ ],
+ "proof": [
+  {
+   "text": "Put $h=f_{\\bar x}^{-1}q_{\\bar x}:Q\\to N_{\\bar x}$. Apply the finite-monoid stalk-data spreading lemma with $P=Q$, $F=N$ and initial pointed neighbourhood $(X,\\bar x)$. Its lifting clause gives an affine pointed etale refinement $(U,\\bar u)$ and a monoid homomorphism $k_0:Q\\to N(U)$ with germ $h$. Its restriction-stalk compatibility identifies this germ with $h$ under all subsequent pointed refinements. The lemma applies to arbitrary finitely generated commutative $Q$ and does not require a chart on $N$.",
+   "uses": [
+    "lem-trf-finite-monoid-stalk-data-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p. 69, and 3.7(a), printed p. 75, final chart-extension sentence; agent-written details of its finite-chart inverse lift."
+   }
+  },
+  {
+   "text": "The homomorphisms $f_Uk_0,q|_U:Q\\to M(U)$ have the same germ, since $f_{\\bar x}h=q_{\\bar x}$. Apply the equality clause of the same finite-monoid lemma with $F=M$. On a further affine pointed refinement $(V,\\bar v)$ they agree. Set $k=k_0|_V$; then $(f|_V)k=q|_V$ and $k_{\\bar v}=h$. Since $f$ respects structure maps, $\\alpha_Nk=\\alpha_M(f|_V)k=\\alpha_M(q|_V)$. This derives the structure-map equality without any finiteness assertion about units. The refinement is locally Noetherian by the same lemma.",
+   "uses": [
+    "lem-trf-finite-monoid-stalk-data-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p. 69, and 3.7(a), printed p. 75, final chart-extension sentence; agent-written details of its finite-chart inverse lift."
+   }
+  },
+  {
+   "text": "Write $\\beta=\\alpha_M(q|_V)$. By the associated-log restriction and chart clauses, $q|_V$ identifies $M|_V$ with $L_V(Q,\\beta)$. The universal-property bijection for this associated log structure, with target $N|_V$, applies to $k$ because $\\alpha_Nk=\\beta$. It gives exactly one homomorphism of log structures $g:M|_V\\to N|_V$ over $V$ with $g(q|_V)=k$; it fixes $\\mathcal O_V^\\times$.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p. 69, and 3.7(a), printed p. 75, final chart-extension sentence; agent-written details of its finite-chart inverse lift."
+   }
+  },
+  {
+   "text": "The two log homomorphisms $(f|_V)g$ and $\\mathrm{id}_{M|_V}$ agree on $q|_V$, because $(f|_V)g(q|_V)=(f|_V)k=q|_V$. Injectivity of the same universal-property bijection, now with target $M|_V$, makes them equal. On the marked stalk this gives $f_{\\bar x}g_{\\bar v}=\\mathrm{id}$ under the identifications fixed in step 1. Composing with $f_{\\bar x}^{-1}$ gives $g_{\\bar v}=f_{\\bar x}^{-1}$. Together with $k_{\\bar v}=h$ from step 2, these are all the required clauses.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 1.1, printed p. 69, and 3.7(a), printed p. 75, final chart-extension sentence; agent-written details of its finite-chart inverse lift."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-finite-monoid-stalk-data-spreading",
+  "lem-trf-associated-log-universal-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p. 69, and 3.7(a), printed p. 75, final chart-extension sentence; agent-written details of its finite-chart inverse lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "LogStructure|PrelogStructure|log_structure|logarithmic.*chart",
+   "results": "[grep] OK 0 hit(s); No log-structure chart splitting theorem; hits concern standard etale rings, ordinary locally ringed spaces, or unit lifting in individual monoids, not log sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "[loogle] OK 0 hit(s); No log-structure chart splitting theorem; hits concern standard etale rings, ordinary locally ringed spaces, or unit lifting in individual monoids, not log sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift the finitely many generators and relations of a chart of a log structure along a monoid sheaf morphism that is invertible at one geometric stalk, to obtain a local splitting fixing units.",
+   "results": "[leansearch] OK 8 hit(s); returned: isUnit_of_map_unit, IsUnit.of_map, IsUnit.liftRight, Submonoid.LocalizationMap.AwayMap.lift, instCanLiftUnitsValIsUnit, IsLocalHom.mk, Submonoid.LocalizationMap.lift₀_apply, AddSubmonoid.LocalizationMap.AwayMap.lift; No log-structure chart splitting theorem; hits concern standard etale rings, ordinary locally ringed spaces, or unit lifting in individual monoids, not log sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of logarithmic structures whose map at a geometric stalk is an isomorphism, a finite monoid chart on the target allows lifting the inverse to a right inverse on a pointed etale neighborhood.",
+   "results": "[leanfinder] OK 8 hit(s); returned: StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv, StandardEtalePair.lift_X, AlgebraicGeometry.SpecToEquivOfLocalRing_symm_apply, AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom_apply, AlgebraicGeometry.LocallyRingedSpace.stalkMap_hom_inv_apply, AlgebraicGeometry.LocallyRingedSpace.stalkMap_hom_inv, AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom; No log-structure chart splitting theorem; hits concern standard etale rings, ordinary locally ringed spaces, or unit lifting in individual monoids, not log sheaves.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-23T04:05:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary locally ringed-space stalk maps and their locality, number-field logarithms, manifold sheaves, and presentations or localizations of individual monoids do not construct a local right inverse of logarithmic sheaves. PresentedMonoid.lift was inspected at Mathlib/Algebra/PresentedMonoid/Basic.lean:127; it has no etale-neighbourhood, stalk or associated-log assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of log structures which is an isomorphism at a geometric stalk admits a local right inverse when its target has a finitely generated monoid chart",
+   "results": "{\"t\": \"2026-10-23T04:06:00Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism of log structures which is an isomorphism at a geometric stalk admits a local right inverse when its target has a finitely generated monoid chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.stalkwiseIsLocalAtTarget_of_respectsIso\", \"AlgebraicGeometry.isIso_SpecMap_stakMap_localization\", \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom_apply\", \"AlgebraicGeometry.LocallyRingedSpace.stalkMap_hom_inv_apply\", \"AlgebraicGeometry.localRingHom_comp_stalkIso_apply'\", \"AlgebraicGeometry.stalkwise_isLocalAtSource_of_respectsIso\", \"AlgebraicGeometry.stalkwise_respectsIso\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\"], \"digest\": \"b4cb5a78ff06f0fe\"}; Read the returned signatures: ordinary locally ringed-space stalk maps and their locality, number-field logarithms, manifold sheaves, and presentations or localizations of individual monoids do not construct a local right inverse of logarithmic sheaves. PresentedMonoid.lift was inspected at Mathlib/Algebra/PresentedMonoid/Basic.lean:127; it has no etale-neighbourhood, stalk or associated-log assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|PrelogStructure|log_structure|logarithmic.*chart",
+   "results": "{\"t\": \"2026-10-23T04:06:27Z\", \"tool\": \"grep\", \"query\": \"LogStructure|PrelogStructure|log_structure|logarithmic.*chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned signatures: ordinary locally ringed-space stalk maps and their locality, number-field logarithms, manifold sheaves, and presentations or localizations of individual monoids do not construct a local right inverse of logarithmic sheaves. PresentedMonoid.lift was inspected at Mathlib/Algebra/PresentedMonoid/Basic.lean:127; it has no etale-neighbourhood, stalk or associated-log assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a lift of a finitely generated monoid chart to a homomorphism of logarithmic structures using the associated log structure universal property",
+   "results": "{\"t\": \"2026-10-23T04:06:28Z\", \"tool\": \"leansearch\", \"query\": \"Extend a lift of a finitely generated monoid chart to a homomorphism of logarithmic structures using the associated log structure universal property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresentedMonoid.lift\", \"AddMonoidAlgebra.lift_of\", \"AddSubmonoid.LocalizationMap.AwayMap.lift_eq\", \"Submonoid.LocalizationMap.AwayMap.lift_comp\", \"Submonoid.LocalizationMap.lift_eq\", \"FreeAddMonoid.lift\", \"AddMonoidAlgebra.lift\", \"Submonoid.LocalizationMap.lift_apply\"], \"digest\": \"22dcd67fede77198\"}; Read the returned signatures: ordinary locally ringed-space stalk maps and their locality, number-field logarithms, manifold sheaves, and presentations or localizations of individual monoids do not construct a local right inverse of logarithmic sheaves. PresentedMonoid.lift was inspected at Mathlib/Algebra/PresentedMonoid/Basic.lean:127; it has no etale-neighbourhood, stalk or associated-log assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmic structure associated to a monoid chart has the universal property that compatible maps from the chart extend uniquely fixing the sheaf of units",
+   "results": "{\"t\": \"2026-10-23T04:06:30Z\", \"tool\": \"leanfinder\", \"query\": \"A logarithmic structure associated to a monoid chart has the universal property that compatible maps from the chart extend uniquely fixing the sheaf of units\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.logMap\", \"NumberField.Units.logEmbedding\", \"NumberField.mixedEmbedding.logMap_eq_logEmbedding\", \"AlgebraicGeometry.LocallyRingedSpace.comp_ring_hom_ext\", \"NumberField.Units.logEmbeddingQuot_apply\", \"NumberField.Units.logEmbeddingEquiv_apply\", \"NumberField.mixedEmbedding.logMap_unit_smul\", \"StructureGroupoid.LocalInvariantProp.section_spec\"], \"digest\": \"fa8e4deafdd5640a\"}; Read the returned signatures: ordinary locally ringed-space stalk maps and their locality, number-field logarithms, manifold sheaves, and presentations or localizations of individual monoids do not construct a local right inverse of logarithmic sheaves. PresentedMonoid.lift was inspected at Mathlib/Algebra/PresentedMonoid/Basic.lean:127; it has no etale-neighbourhood, stalk or associated-log assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-log-stalk-chart-spreading",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) of lem-trf-local-term-locality, monoidal-resolution ancestry via the sharp log chart; ILO VI 3.7(a), final chart-extension sentence: lift the inverse on finitely many generators of an existing chart and extend across the unit pushout (old spreading steps 4--5).",
+   "via": [
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-free-characteristic-regular-boundary",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-charted-log-map-local-right-inverse",
+  "worker": "stage1",
+  "summary": "Retained the statement and all its hypotheses. Reused finite-monoid stalk-data spreading to lift the inverse chart map and enforce fk=q after one affine pointed refinement. Derived structure compatibility from fk=q, then reused the associated-log universal property for unique extension and for fg=id; the stalk inverse follows by cancellation. No new nodes or Mathlib leaves. Read ILO VI 1.1 and 3.7(a), the actual cited statements, and the current blueprint; no finished project declaration or Mathlib match was found.",
+  "blueprint": "Supports the established lem-trf-local-term-locality proof (1)--(2) monoidal-resolution ancestry, through lem-trf-fine-log-stalk-chart-spreading. Precisely realizes the finite chart-generator inverse lift and associated-log extension in the ILO VI 3.7(a) final chart-extension sentence (old spreading steps 4--5). The chapter/unit route and existing blueprint.from are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-ND-0ddb0efd3",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-0ddb0efd3 (reviewer sub-agent of L); spot-checked: I read the item and both cited nodes in full; the item proof is correct. Step 1: the lifting clause of lem-trf-finite-monoid-stalk-data-spreading applies with P=Q, F=N and (X,x̄) as its own neighbourhood. All its hypotheses hold: X is locally Noetherian, a log structure is a sheaf of commutative monoids on the small étale site, and Q may be any finitely generated monoid. Step 2: its equality clause with F=M gives fk=q on an affine pointed refinement V, because the germs agree (f_x̄h=q_x̄); α_Nk=α_Mq follows from α_Mf=α_N. Step 3: the restriction and chart clauses of lem-trf-associated-log-universal-stalks identify M|_V with L_V(Q,β), and the universal bijection with target N|_V gives the unique g with g(q|_V)=k. Step 4: injectivity of the same bijection with target M|_V gives fg=id, and the stalk equation gives g_v̄=f_x̄^{-1}. The item supplies every clause that the parent lem-trf-fine-log-stalk-chart-spreading uses in its step 3. Source: ILO VI 1.1 (PDF p.75) and 3.7(a) (PDF p.81, final sentence 'la restriction de s à Q est, au voisinage de x, une carte'); the lemma is an agent extraction and is correctly marked by:agent; no SGA. All cited nodes are in unit sk-i-curve-zero, so no tool use is needed. There is no cycle, no new node, and proof_deps equals the union of the uses. The DAG search found no duplicate (closest: log-morphism-fixed-map-etale-lifting, fan-chart-local-monoid-lift). Edge cases checked: Q=0, ℕ, a monoid with an idempotent, a group, and f=id; none needs integrality or finite generation of the unit sheaf. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChartedLogMapLocalRightInverse",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.exists_local_rightInverse_of_chart",
+  "declarations": [
+   "AlgebraicGeometry.EtalePrelogStructure.mapStalk",
+   "AlgebraicGeometry.EtaleLogStructure.restrictGlobalChart",
+   "AlgebraicGeometry.EtaleLogStructure.exists_local_rightInverse_of_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ChartedLogMapLocalRightInverse.lean",
+  "statement": "theorem EtaleLogStructure.exists_local_rightInverse_of_chart {X : Scheme.{max u v}} [IsLocallyNoetherian X] (N M : EtaleLogStructure X) (f : N.monoidSheaf ⟶ M.monoidSheaf) (hf : f.hom ≫ M.alpha = N.alpha) {Ω : Type (max u v)} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X) {Q : Type v} [CommMonoid Q] (hQ : Monoid.FG Q) (q : Q →* M.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 X)))) (hq : M.IsChart (Scheme.Etale.mk (𝟙 X)) (q.comp (MulEquiv.ulift : ULift.{u, v} Q ≃* Q).toMonoidHom)) [IsIso (N.toEtalePrelogStructure.mapStalk M.toEtalePrelogStructure f t)] : ∃ (V : X.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj V) (k : Q →* N.monoidSheaf.obj.obj (op V)), IsAffine V.left ∧ (N.alpha.app (op V)).hom.comp k = (M.alpha.app (op V)).hom.comp (M.restrictGlobalChart q V) ∧ (f.hom.app (op V)).hom.comp k = M.restrictGlobalChart q V ∧ (N.toEtalePrelogStructure.germ t V w).hom.comp k = (inv (N.toEtalePrelogStructure.mapStalk M.toEtalePrelogStructure f t)).hom.comp ((M.toEtalePrelogStructure.germ t V w).hom.comp (M.restrictGlobalChart q V)) ∧ ∃ g : (Over.forget V).op ⋙ M.monoidSheaf.obj ⟶ (Over.forget V).op ⋙ N.monoidSheaf.obj, (g ≫ Functor.whiskerLeft (Over.forget V).op N.alpha = Functor.whiskerLeft (Over.forget V).op M.alpha) ∧ (g.app (op (Over.mk (𝟙 V)))).hom.comp (M.restrictGlobalChart q V) = k ∧ (∀ g' : (Over.forget V).op ⋙ M.monoidSheaf.obj ⟶ (Over.forget V).op ⋙ N.monoidSheaf.obj, g' ≫ Functor.whiskerLeft (Over.forget V).op N.alpha = Functor.whiskerLeft (Over.forget V).op M.alpha → (g'.app (op (Over.mk (𝟙 V)))).hom.comp (M.restrictGlobalChart q V) = k → g' = g) ∧ g ≫ Functor.whiskerLeft (Over.forget V).op f.hom = 𝟙 _ ∧ ∀ (W : X.Etale) (a : W ⟶ V) (z : (Scheme.pointSmallEtale t).fiber.obj W), (Scheme.pointSmallEtale t).fiber.map a z = w → ∀ s : M.monoidSheaf.obj.obj (op W), N.toEtalePrelogStructure.germ t W z (g.app (op (Over.mk a)) s) = inv (N.toEtalePrelogStructure.mapStalk M.toEtalePrelogStructure f t) (M.toEtalePrelogStructure.germ t W z s)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The restricted log morphism is a structure-compatible natural transformation on the slice Over V of the small etale site. Its stalk value under the canonical pointed-restriction identification is specified on all pointed section representatives. Q has its independent universe v and is canonically ULifted only for the recorded IsChart interface; the common site universe is max u v."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a3a5ce7f",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_dep records/modules (FineSaturatedLogBlowup IsChart/stalk/germ, PointedEtaleStalk diagram/germ, IsLocallyNoetherian, inline geometric point, Etale), AssociatedLogUniversalStalks and the parent FineLogStalkChartSpreading. lean.statement verbatim = file signature; the live node differs only in lean=null and no live module exists, so the delivery is not superseded. Clause match: hypotheses X locally Noetherian, N/M EtaleLogStructure, f with f.hom≫α_M=α_N, Q:Type v FG, recorded IsChart via canonical ULift, IsIso of mapStalk (colimMap on the recorded stalk diagram, canonical). Conclusions: affine pointed V; k with α-, f- and germ equations in the original stalk; g as an α-compatible natural transformation on Over V (= étale site of V.left), chart value k, uniqueness over all compatible g', f∘g=id, germ formula on all pointed representatives. Helpers mapStalk/restrictGlobalChart are real, canonical and have no duplicate in lean/Sheaf or Mathlib. Docstrings carry source, blueprint and the 4 proof steps; the plain import is the proof_dep module. Edge cases: trivial/group/non-integral Q, f=id, empty X vacuous; universes follow the max u v convention. No files changed, no compile needed. No findings."
+ }
+}

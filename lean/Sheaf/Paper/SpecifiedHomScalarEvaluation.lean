@@ -10,23 +10,7 @@ public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Sheaf.SixFunctors.RingedFiniteFreeHomBaseChange
 
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.Paper.CoefficientRingedTensorHomModel
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.SfRationalizationKaroubi
 /-! # The specified Hom comparison and scalar-extended evaluation
 
 Source: current Weil blueprint, sec-proetale-coefficients/sk-def-sf-operations,
@@ -64,17 +48,28 @@ def specifiedHomIdentified (X : Scheme.{u})
       ((scalarCompletionIso l E L ι X M hM).hom.op)
       ((scalarCompletionIso l E L ι X N hN).inv))
 
+private theorem specifiedHomIdentified_eq (X : Scheme.{u})
+    (M N : DerivedCategory (integralTowerModules l E X))
+    (hM : IsSfDerivedComplete l E X M) (hN : IsSfDerivedComplete l E X N) :
+    specifiedHomIdentified l E L ι X M N hM hN =
+      scalarHomOrdinary l E L ι X M N := by
+  simp only [specifiedHomIdentified, scalarHomCompleteInputs, scalarHomCompleted,
+    scalarCompletionIso, Iso.op_symm, Iso.trans_hom, Iso.symm_hom, asIso_inv,
+    asIso_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.op_inv, op_inv, Category.assoc,
+    ← Functor.map_comp, prod_comp, IsIso.inv_hom_id, IsIso.hom_inv_id,
+    Bifunctor.map_id, IsIso.hom_inv_id_assoc]
+  exact Category.comp_id _
+
 /-- Completeness and the equality with extended evaluation for the specified maps.
 Source: blueprint common-stage paragraph; Stacks 08J9, 03EO
 (blueprint: lem-zl-specified-hom-scalar-evaluation).
 Proof: (1) completeness of N implies completeness of its ambient internal Hom with M,
 by lem-pur-integral-operations-scalar-extension. (2) Finite free completion gives the
 three invertible quotient-map units of lem-weil-finite-free-completed-scalar-comparison.
-(3) The representative calculation in specifiedHomScalarChain below identifies the
-ordinary chain-Hom comparison with the transpose of extended evaluation, hence with
-lem-sf-ringed-finite-free-hom-base-change. (4) Insert the inverse Hom-output unit and
-the inverse first-input/direct second-input units used by scalarHomCompleted. Cancel
-the output unit to obtain the displayed equality. (5) Apply the inverse closed Hom
+(3) Unfold scalarHomCompleted: it is defined by conjugating the ordinary
+comparison by the three canonical completion isomorphisms. Cancel the output
+unit to obtain the first equality; cancel the two input units to identify
+specifiedHomIdentified with scalarHomOrdinary. (4) Apply the inverse closed Hom
 equivalence to obtain the evaluation composite. The API orders Hom before its input;
 exchanging them gives the Koszul sign (-1)^(degree(input)*degree(Hom)) in the node. -/
 theorem specifiedHomScalarEvaluation
@@ -105,7 +100,14 @@ theorem specifiedHomScalarEvaluation
           ((integralDerivedInternalHom l E X).obj (op M, N), M) ≫
         (integralOrdinaryDerivedScalar l E L ι X).map
           ((scalarIntegralClosed l E X).evaluation M N) := by
-  sorry
+  have hH := scalarInternalHom_complete l E X M N hN.1
+  refine ⟨hH, ?_, ?_, ?_, ?_, ?_⟩
+  · exact (scalarCompletion_existsUnique l E L ι X).exists.choose_spec.2 M hM.1
+  · exact (scalarCompletion_existsUnique l E L ι X).exists.choose_spec.2 N hN.1
+  · exact (scalarCompletion_existsUnique l E L ι X).exists.choose_spec.2 _ hH
+  · simp [scalarHomCompleteInputs, scalarHomCompleted, scalarCompletionIso]
+  · rw [specifiedHomIdentified_eq]
+    exact Equiv.symm_apply_apply _ _
 
 /-- The augmentation of the fixed K-injective replacement used by the recorded Hom.
 Source: Stacks 079P, 0A95 (blueprint: lem-zl-specified-hom-scalar-evaluation). -/
@@ -215,7 +217,12 @@ theorem specifiedHomScalarCoherence (X : Scheme.{u})
       (integralOrdinaryDerivedScalarComp l E L ι X F j).hom.app
           ((integralDerivedInternalHom l E X).obj (op M, N)) ≫
         specifiedHomIdentified l E F (j.comp ι) X M N hM.1 hN.1) := by
-  sorry
+  constructor
+  · rw [specifiedHomIdentified_eq]
+    exact (scalarOperationsOrdinary_unit l E (𝟙 X) X).2.2 M N
+  · intro F _ _ _ j
+    rw [specifiedHomIdentified_eq, specifiedHomIdentified_eq]
+    exact (scalarOperationsOrdinary_tower l E L ι F j (𝟙 X) X).2.2 M N
 
 /-- Raw rationalization retains the specified comparison and its naturality for
 arbitrary localized arrows in both inputs. No restriction to integral lifts or
@@ -299,11 +306,10 @@ output is constructible. The right side is the localized conjugate of the ordina
 evaluation-transpose map, using exactly the three canonical completion units.
 Source: blueprint rational/common-stage paragraph
 (blueprint: lem-zl-specified-hom-scalar-evaluation).
-Proof: apply the integral comparison identity, then cancel the invertible Hom-output
-completion unit. Lift that equality through the faithful full integral subcategory.
-Rational localization preserves the composite, inverses and equality. Its specified
-coefficient comparison is the localization of integralHomScalarComparison, giving
-this formula for the actual rationalHomScalarComparison, not a newly chosen map. -/
+Proof: unfold integralHomScalarComparison, the full-subcategory lift of
+scalarHomCompleted. Its hom is definitionally the displayed conjugation by the
+inverse output, inverse first-input and direct second-input completion units.
+Applying the same rational localization functor to these equal maps gives reflexivity. -/
 theorem specifiedHomScalarRationalEvaluation (X : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E X).FullSubcategory) :
     (sfRationalConstructibleLocalization l L X).map
@@ -321,6 +327,6 @@ theorem specifiedHomScalarRationalEvaluation (X : Scheme.{u})
           (integralDerivedInternalHom l L X).map (Prod.mkHom
             ((scalarCompletionIso l E L ι X P.obj.1.unop.obj P.obj.1.unop.property.1).inv.op)
             ((scalarCompletionIso l E L ι X P.obj.2.obj P.obj.2.property.1).hom)))) := by
-  sorry
+  rfl
 
 end WeilConjectures

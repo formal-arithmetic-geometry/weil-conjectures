@@ -1,0 +1,292 @@
+{
+ "id": "lem-sp-ctf-tower-pullback-reconstruction",
+ "kind": "statement",
+ "title": "Uniform tower pullback domains and the completed reconstruction counit",
+ "statement": "Fix the global datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. Put $A_n=\\mathcal O_E/\\ell^n$ for $n\\geq1$. All schemes are separated finite-type $k$-schemes and all maps are $k$-morphisms [sk-def-sfb-dc-setting]. Write $\\mathcal C_T=\\Dctf(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^\\bullet)$ for the ordinary derived category of strict varying-coefficient towers restricted to constructible levels with common finite cohomological and Tor intervals [sk-def-sp-coefficient-towers, sk-def-sp-normalized-towers]. Write $r^D_{n,m}:D_n\\otimes^L_{A_n}A_m\\to D_m$ for its derived reduction map, $m\\leq n$ [det-sp-coefficient-towers-abelian]; normalized means all these maps are invertible.\n\nFor every $h:U\\to V$ between these schemes, let $h_\\bullet^*$ be exact finite constant-ring pullback levelwise [def-weil-pbc-proetale-operations, prop-weil-pbc-proetale-constant-exact]. Then $U,V$ are Noetherian, every $D\\in\\mathcal C_V$ is bounded below in the ordinary tower derived category, and every finite evaluation $D_n$ admits bounded constructible etale origin [def-weil-pbc-etale-origin-witness]. The functor $h_\\bullet^*$ preserves $\\mathcal C_V$, each common cohomological interval and each common Tor interval. There are canonical isomorphisms\n$$h_m^*(D_n\\otimes^L_{A_n}A_m)\\simeq(h_n^*D_n)\\otimes^L_{A_n}A_m,$$\nnatural in $D$ and in successive quotients, under which\n$$r^{h_\\bullet^*D}_{n,m}=h_m^*(r^D_{n,m}).$$\nIn particular $h_\\bullet^*$ preserves normalized towers.\n\nFor $E=\\mathbf Q_\\ell$ let $R_T=\\varprojlim_n(\\mathbf Z/\\ell^n)_T$ be the completed coefficient sheaf and $\\mathcal I_T=\\Dbc(T,\\mathbf Z_\\ell)$ the derived-complete constructible category [def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed]. Write $r_T=\\operatorname{red}_T$, $L_T=R\\varprojlim$, with unit $\\iota_T$ and counit $\\kappa_T:r_TL_T\\to\\mathrm{id}$, for [det-sp-normalized-equivalence]. Completed pullback $h^*_{\\mathbf Z_\\ell}$ means [def-pur-integral-derived-operations]. For every $K\\in\\mathcal I_V$, $C_K=h_\\bullet^*r_VK$ is normalized constructible, $h^*_{\\mathbf Z_\\ell}K=L_UC_K$ under the definition's single-resolution quotient-tower identification, and $h^*_{\\mathbf Z_\\ell}K\\in\\mathcal I_U$. The canonical natural comparison of actual derived towers is\n$$\\alpha_{h,K}:r_Uh^*_{\\mathbf Z_\\ell}K=r_UL_UC_K\\xrightarrow{\\kappa_{U,C_K}}C_K=h_\\bullet^*r_VK,$$\nand it is invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
+  "place": "Proof (1), domains and etale-origin input; (2), pullback of reductions; (3), whole-tower pullback reduction comparisons"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "sk-def-sp-coefficient-towers",
+  "sk-def-sp-normalized-towers",
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-exact",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "det-sp-normalized-equivalence",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $0$ and $k$, so ascending chains stabilize. Hence $\\operatorname{Spec}k$ is Noetherian and the finite-type-over-Noetherian lemma applies to $U$ and $V$. Choose common cohomological bounds $[a,b]$ for $D$. Exact evaluation commutes with cohomology, so $(\\mathcal H^iD)_n=\\mathcal H^i(D_n)=0$ for $i<a$. A tower sheaf whose every level is zero is zero, since its objects and maps are levelwise. Thus $D\\in D^{\\ge a}(\\operatorname{Tow}(V,\\mathcal O_E))$. Each $D_n$ is bounded intrinsically constructible. Apply clause (ii) of the constructible-origin equivalence to obtain a bounded constructible etale $L_n$ and an isomorphism $\\nu_V^*L_n\\simeq D_n$. Its coefficient convention uses uniformizer powers: if $e$ is the ramification index, $(\\ell^n)=(\\varpi_E^{en})$, so its index is $en\\ge1$. This supplies precisely the required etale-origin witness.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-def-sp-normalized-towers",
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL (lemma-compare-constructible-derived); morphisms.tex Tag 01T6; levelwise cohomology argument"
+   }
+  },
+  {
+   "text": "Use the canonical constant-section identifications at every $A_n$. They commute with quotient maps: both composites send the constant section $a$ to its residue class, and sheafification determines the resulting maps uniquely. Exact finite-ring pullback therefore sends a strict semilinear tower to a strict semilinear tower. Kernels and cokernels are levelwise, so it is an exact tower functor and its termwise derived functor is $h_\\bullet^*$. Its evaluation is $h_n^*D_n$. The uniform-tower clause of [lem-sp-proetale-ctf-pullback-domains] applies with $v=h$ and $K_\\bullet=D$, without normalization: the schemes, finite rings and ordinary constant-ring derived categories are exactly its hypotheses. It gives constructible levels and preserves each chosen common cohomological interval and Tor interval, hence $h_\\bullet^*D\\in\\mathcal C_U$.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "det-sp-coefficient-towers-abelian",
+    "lem-sp-proetale-ctf-pullback-domains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
+    "place": "Proof (1)-(2), finite pullback domains and levelwise construction"
+   }
+  },
+  {
+   "text": "For $A_n\\to A_m$ apply the unbounded coefficient-pullback model to $K=D_n$. Invert its canonical isomorphism to obtain $h_m^*(D_n\\otimes^L_{A_n}A_m)\\simeq h_n^*D_n\\otimes^L_{A_n}A_m$ in the $A_m$ derived category. This is natural in $D_n$, hence in $D$. The stated model is the identity on local pure tensors after the constant-ring identifications. For $j\\le m\\le n$, both successive-quotient comparisons, under tensor associativity, send a generator $(x\\otimes a)\\otimes b$ to $x\\otimes\\bar a b$. Thus they agree, including $m=n$, where the map is the unit identification. This proves compatibility in the quotients without requiring a quotient map to be flat.",
+   "uses": [
+    "lem-exc-unbounded-coefficient-pullback-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat), coefficient-pullback application; balanced tensor calculation"
+   }
+  },
+  {
+   "text": "Represent $D$ by a complex of strict towers $C_\\bullet$ and write $t:C_n\\to\\operatorname{Res}C_m$ for its composite transition. Take a flat-term K-flat resolution $P\\to C_n$. The reduction $r^D_{n,m}$ is the derived adjunct of $t$; the normalized scalar adjunction computes it by $P\\otimes_{A_n}A_m\\to C_m$, $x\\otimes a\\mapsto a\\,t(x)$, where $t$ includes $P\\to C_n$. Exact $h_n^*$ carries this resolution to a flat-term K-flat representative of $h_n^*D_n$. For the pulled-back transition, the same adjunct formula is $x\\otimes a\\mapsto a\\,h^*t(x)$. The coefficient comparison of step 3 identifies this with $h_m^*$ of the first formula. Therefore $r^{h_\\bullet^*D}_{n,m}=h_m^*(r^D_{n,m})$ under the asserted isomorphism. This is an equality of derived arrows computed on representatives, not an inference from equality of their cohomology maps. If $D$ is normalized, every right-hand map is invertible; hence so is every reduction of $h_\\bullet^*D$, which proves normalization preservation.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-pc-kflat-resolution",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-exc-unbounded-coefficient-pullback-model",
+    "prop-weil-pbc-proetale-constant-exact",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0G7E (lemma-pullback-K-flat), 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "Now take $E=\\mathbf Q_\\ell$ and $K\\in\\mathcal I_V$. The constructible restriction of the reduction/limit equivalence applies because $V$ is Noetherian by step 1 and $\\ell$ is invertible on a $k$-scheme. It gives $r_VK\\in\\mathcal C_V$ normalized. Steps 2 and 4 then give $C_K=h_\\bullet^*r_VK\\in\\mathcal C_U$ normalized. Applying the constructible restriction of $L_U$ gives $L_UC_K\\in\\mathcal I_U$, since $U$ is also Noetherian.",
+   "uses": [
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.md",
+    "place": "Statement, normalized constructible restriction of red and R lim"
+   }
+  },
+  {
+   "text": "Choose one flat-term K-flat resolution $P\\to K$ as in the definition of integral pullback. By the strict coefficient-tensor descent (with $R=R_V$, $S_n=(\\mathbf Z/\\ell^n)_V$), which supplies the reduction functor of the reduction-tower statement, $r_VK$ is represented in the ordinary tower derived category by the strict complex tower $P_n=P\\otimes_{R_V}(\\mathbf Z/\\ell^n)_V$, with the actual quotient-induced transitions $x\\otimes c\\mapsto x\\otimes\\bar c$, naturally in $K$ and independently of $P$. Exact levelwise pullback, applied termwise, therefore represents $C_K$ by the strict complex tower $Q=(h_n^*P_n)_n$, with those same pulled-back transitions. By definition the completed pullback is the product-cone model $\\mathsf C(\\operatorname{Res}Q)=\\operatorname{Cone}(1-s)[-1]$ of precisely this tower after restricting scalars to $R_U$. Countable products of $R_U$-modules on $U_{\\mathrm{proét}}$ are exact, so the strict Roos comparison gives the natural isomorphism $\\rho:\\mathsf C(\\operatorname{Res}Q)\\xrightarrow{\\sim}R\\lim\\operatorname{Res}Q$, normalized through a K-injective tower resolution and compatible with the projections to the levels. The right side is $L_UC_K$ under the adjunction's definition of $L_U$ (forget scalars to $R_U$, then total derived limit). Thus the single-resolution identification $h^*_{\\mathbf Z_\\ell}K=L_UC_K$ is $\\rho$, at the level of actual derived objects and with their whole tower; no claim that separately chosen finite-level representatives determine a derived tower is used. Resolution independence and functoriality of the integral construction are those of the well-definedness statement for integral operations, and $\\rho$ and the descent comparisons are natural for derived morphisms, so the identification is natural in $K$.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "det-sp-reduction-tower-normalized",
+    "lem-sp-strict-coefficient-tensor-descent",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "det-sp-normalized-equivalence",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 3.5.2-3.5.3, Lemma 3.5.7; single-resolution formula in def-pur-integral-derived-operations"
+   }
+  },
+  {
+   "text": "Under step 6 apply the counit of $r_U\\dashv L_U$ to $C_K$: its source is $r_UL_UC_K=r_Uh^*_{\\mathbf Z_\\ell}K$ and its target is $C_K=h_\\bullet^*r_VK$. This defines the displayed $\\alpha_{h,K}$ as a morphism in the ordinary derived category of strict coefficient towers. The counit is an isomorphism on normalized towers, and $C_K$ is normalized by step 5, so $\\alpha_{h,K}$ is invertible. Counit naturality, composed with the functors $h_\\bullet^*r_V$ and the single-resolution identification, gives the asserted natural comparison in $K$. Step 5 and step 6 also give $h^*_{\\mathbf Z_\\ell}K\\in\\mathcal I_U$.",
+   "uses": [
+    "det-sp-normalized-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower-equivalence.md",
+    "place": "Statement, counit on normalized towers; Bhatt-Scholze Lemma 3.5.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sp-normalized-towers",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-proetale-constructible-origin",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-sp-proetale-ctf-pullback-domains",
+  "lem-exc-unbounded-coefficient-pullback-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "det-sp-normalized-equivalence",
+  "def-pur-integral-derived-operations",
+  "det-sp-reduction-tower-normalized",
+  "lem-pur-integral-operations-well-defined",
+  "lem-sp-strict-coefficient-tensor-descent",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-tower.proof.md",
+  "place": "Expansion of (1)-(3): uniform pullback domains, actual reduction adjuncts, and the normalized reconstruction counit; Stacks and Bhatt-Scholze inputs are cited per step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of varying finite coefficient sheaf towers preserves uniform constructible Tor bounds and normalized towers",
+   "results": "[leanfinder] OK 8 hit(s); Profinite.NobelingProof.succ_exact; Condensed.hasExactLimitsOfShape; CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; Condensed.hasExactColimitsOfShape; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat; Condensed.instAB4CondensedMod; Condensed.instAB4StarCondensedMod",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback, adjunction, completion or base-change results do not state this geometric varying-coefficient tower comparison and its specified normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reconstruction counit identifies reduction of completed pullback with pullback of the entire normalized coefficient tower",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.ChosenPullbacksAlong.fst'; CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit; CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_fst_app; CategoryTheory.Adjunction.functorialityCounit_app_hom; CategoryTheory.ChosenPullbacksAlong.isoInv_mapPullbackAdj_counit_app_left; CategoryTheory.ChosenPullbacksAlong.pullbackId_hom_counit; CategoryTheory.ExponentiableMorphism.ev; Condensed.profiniteSolidCounit",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback, adjunction, completion or base-change results do not state this geometric varying-coefficient tower comparison and its specified normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "[loogle] OK 12 hit(s); SheafOfModules.pullbackId; SheafOfModules.pullback; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackComp; SheafOfModules.pullback_comp_id; SheafOfModules.pullback_id_comp; SheafOfModules.pullbackIso; SheafOfModules.sheafificationCompPullback; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.pullback_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback, adjunction, completion or base-change results do not state this geometric varying-coefficient tower comparison and its specified normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*tower|tower.*pullback|proetale",
+   "results": "[grep] OK 11 hit(s); Mathlib/AlgebraicGeometry/Group/Affine.lean:407; Mathlib/AlgebraicGeometry/Sites/Proetale.lean:34; Mathlib/AlgebraicGeometry/Sites/Proetale.lean:50; Mathlib/AlgebraicGeometry/Sites/Proetale.lean:52; Mathlib/AlgebraicGeometry/Sites/Proetale.lean:57; Mathlib/AlgebraicGeometry/Sites/Proetale.lean:58; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:11; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:39; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:61; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:65; Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:66",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback, adjunction, completion or base-change results do not state this geometric varying-coefficient tower comparison and its specified normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived reduction commutes with completed inverse image for constructible l adic sheaves",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.transitionMap_comp_reduceModIdeal; IsAdicComplete.of_comp_lift; localCohomology.diagramComp; IsAdicComplete.StrictMono.of_comp_lift; IsAdicComplete.of_lift; LightCondensed.ihomPoints_symm_comp; AdicCompletion.map_val_apply; IsAdicComplete.StrictMono.of_lift",
+   "date": "2026-10-22",
+   "verdict": "no match: general pullback, adjunction, completion or base-change results do not state this geometric varying-coefficient tower comparison and its specified normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback of sheaf coefficient towers preserves constructible Tor bounds normalized reduction maps and the reconstruction counit",
+   "results": "{\"t\": \"2026-10-22T12:05:02Z\", \"tool\": \"leanfinder\", \"query\": \"Exact pullback of sheaf coefficient towers preserves constructible Tor bounds normalized reduction maps and the reconstruction counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"ca916bd347c0f901\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf pullback, categorical pullback, or algebraic adic-completion facts do not give the geometric strict derived tower and its reconstruction counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"t\": \"2026-10-22T12:05:17Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"digest\": \"646c13e3272a1a2c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf pullback, categorical pullback, or algebraic adic-completion facts do not give the geometric strict derived tower and its reconstruction counit"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*tower|tower.*pullback|reconstruction.*counit",
+   "results": "{\"t\": \"2026-10-22T12:05:17Z\", \"tool\": \"grep\", \"query\": \"normalized.*tower|tower.*pullback|reconstruction.*counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/FieldTheory/NormalizedTrace.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"47d2abf4e1168278\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf pullback, categorical pullback, or algebraic adic-completion facts do not give the geometric strict derived tower and its reconstruction counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of completed pullback is naturally isomorphic to pullback of a normalized derived coefficient tower",
+   "results": "{\"t\": \"2026-10-22T12:05:41Z\", \"tool\": \"leansearch\", \"query\": \"Reduction of completed pullback is naturally isomorphic to pullback of a normalized derived coefficient tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.mkNatIso\", \"CategoryTheory.toOverPullbackIsoToOver\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.ChosenPullbacksAlong.pullbackComp\", \"PresheafOfModules.pullback_comp_id\", \"CategoryTheory.NatTrans.PullbackShift.natIsoComp\", \"CategoryTheory.Limits.instIsIsoPullbackComparison\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback\"], \"digest\": \"01946be91b1c1c17\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf pullback, categorical pullback, or algebraic adic-completion facts do not give the geometric strict derived tower and its reconstruction counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image commutes with change of finite coefficients and normalized adic reconstruction",
+   "results": "{\"t\": \"2026-10-22T12:05:46Z\", \"tool\": \"leanfinder\", \"query\": \"Derived inverse image commutes with change of finite coefficients and normalized adic reconstruction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.factor_eval_eq_evalₐ\", \"AdicCompletion.transitionMap_comp_eval_apply\", \"AdicCompletion.transitionMap_comp_reduceModIdeal\", \"AdicCompletion.factor_evalₐ_eq_eval\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"IsAdicComplete.StrictMono.mkQ_comp_lift\", \"AdicCompletion.eval_comp_of\"], \"digest\": \"d86bca38422b2df7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned ordinary sheaf pullback, categorical pullback, or algebraic adic-completion facts do not give the geometric strict derived tower and its reconstruction counit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-exceptional-bc",
+  "date": "2026-10-22",
+  "group": "Q129"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-exceptional-bc",
+   "place": "Proof (1), domains and etale-origin input; (2), pullback of reductions; (3), whole-tower pullback reduction comparisons",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-ctf-tower-pullback-reconstruction",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Seven-step assembly using only existing nodes: verify Noetherian and bounded-below domains, etale origins, uniform pullback bounds, the coefficient comparison with its actual reduction adjunct, and the single-resolution completed pullback. The final comparison is the whole-tower reconstruction counit. No new nodes.",
+  "blueprint": "det-sp-tower-exceptional-bc proof (1)-(2): pullback domains and reduction compatibility; proof (3): whole-tower integral pullback comparisons via the normalized reconstruction equivalence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence proves the hypotheses of the reconstruction equivalence; no geometric route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-bounded-below",
+    "why": "Generic exact-evaluation/cohomology compatibility justifies boundedness in the ordinary derived tower category."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "The finite coefficient bounded constructible site equivalence supplies the etale-origin witness at each level; no same-unit node states that equivalence."
+   },
+   {
+    "node": "lem-exc-unbounded-coefficient-pullback-model",
+    "why": "Generic inverse-image/change-of-ring comparison, with its pure-tensor normalization, supplies the coefficient square for arbitrary finite quotient rings."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of a flat-term K-flat resolution computes a derived coefficient adjunct at one level."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic derived scalar adjunction with its prescribed generator formula identifies the actual pulled-back reduction arrow."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Generic resolution independence for the exact single-resolution definition of completed pullback; used only to identify that construction with the limit of the whole quotient tower."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-sf-proetale-constructible-origin",
+  "lem-exc-unbounded-coefficient-pullback-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-c7ade6912",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-c7ade6912 (reviewer sub-agent of L); spot-checked: I read the delivery in full. Statement unchanged; 7 steps; no new nodes; no repair note, so the re-split rules do not apply. Source is blueprint main-20261015 sk-prop-sp-purity-bc-tower.proof.md (1)-(3): the item is the reduction formula for inverse image red(u^*K) ≃ u_•^* red K used in (3), stated as the counit α, plus the domain facts (1)-(2) need. The coefficient category (ordinary D(Tow) restricted as in sk-def-sp-normalized-towers) and the completed pullback (def-pur-integral-derived-operations) match the parent det-sp-tower-exceptional-bc. Step 1: Noetherian permanence over Spec k; bounded below via exact evaluation; lem-sf-proetale-constructible-origin(ii) uses intrinsic constructibility, and the index en for ramified E checks out. Step 2: constant-section compatibility of c with q_n; the tower clause of lem-sp-proetale-ctf-pullback-domains is exactly the preservation claim. Step 3: lem-exc-unbounded-coefficient-pullback-model needs no flatness; pure-tensor coherence for j≤m≤n checked. Step 4: the reduction map is the adjunct of the transition, as in det-sp-coefficient-towers-abelian's construction; lem-pur-sheaf-ring-derived-coefficient-adjunction(2) gives the formula x⊗a↦a·g(x); identity under t_P checked. Step 5: Noetherian and ℓ-invertible hypotheses of det-sp-normalized-equivalence hold. Step 7: the counit is invertible on normalized towers. Fault (C3/C4, repaired): step 6 used the strict representative P⊗(Z/ℓ^n) of red_V K, which the statement of det-sp-reduction-tower-normalized does not give but lem-sp-strict-coefficient-tensor-descent does. It also identified the product-cone model of the completed pullback with L_U = K-injective R lim; a derived limit (def-weil-derived-limit) is only non-canonically unique, so this needs lem-weil-strict-roos-comparison and its exact-products hypothesis lem-weil-proetale-countable-products-exact. FIX rewrites step 6 to cite all three (all on base, all in the unit's route) and adds them to proof_deps. Edge cases checked: D=0, empty schemes, h=id, m=n, ramified E, non-flat quotient maps. No duplicates: the lem-fd whole-tower comparisons cover only scheme isomorphisms and framework/PBC identities. The seven declared generic tool uses are accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

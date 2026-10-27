@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-ringed-site-section-functors",
+ "kind": "definition",
+ "title": "Section functors and structural module maps on small ringed sites",
+ "status": "split",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small in the common module universe [def-weil-size-convention] [def-weil-pbc-sites-and-cohomology]. For a sheaf of rings $R$ on $\\mathcal C$, use the category $\\operatorname{Mod}(R)$ of module sheaves [def-weil-sheaf-of-modules-category] with its canonical small-site Grothendieck abelian structure. For $V\\in\\mathcal C$, define $\\Gamma_{\\mathrm{Ab}}(V,-):\\operatorname{Mod}(R)\\to\\operatorname{Ab}$ by $M\\mapsto M(V)$, forgetting the $R(V)$-action, and by evaluation on morphisms. For a continuous functor $u:\\mathcal D\\to\\mathcal C$, ring sheaves $S$ on $\\mathcal D$ and $R$ on $\\mathcal C$, and a structural map $a:S\\to u_*R$, use the canonical additive module direct image $M\\mapsto (V\\mapsto M(u(V)))$, with $S(V)$-action restricted along $a_V:S(V)\\to R(u(V))$, and with sectionwise action on morphisms. When $S,R$ are commutative ring sheaves, its underlying structural map of ring sheaves is obtained by forgetting commutativity in $a$; no scalar map is chosen independently.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0D6H (lemma-Leray-unbounded), evaluation and module direct image in the second assertion; Tag 04J0 (lemma-localize-morphism-ringed-sites), sectionwise structural ring map."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of module sheaves on a small ringed site forgetting scalars and additive continuous direct image induced by a morphism of ring sheaves",
+   "results": "{\"t\": \"2026-10-23T19:23:48Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation of module sheaves on a small ringed site forgetting scalars and additive continuous direct image induced by a morphism of ring sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.evaluation\", \"SheafOfModules.forget\", \"SheafOfModules.pushforward\", \"SheafOfModules.forget_obj\", \"SheafOfModules.forgetToSheafModuleCat\", \"PresheafOfModules.evaluation\", \"SheafOfModules.unitToPushforwardObjUnit\", \"SheafOfModules.toSheaf\"], \"digest\": \"3125ac320e6999ab\"}",
+   "date": "2026-10-23",
+   "verdict": "found"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, SheafOfModules.pushforward",
+   "results": "{\"t\": \"2026-10-23T19:23:48Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.evaluation, SheafOfModules.pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no_match"
+  },
+  {
+   "tool": "grep",
+   "query": "def evaluation|abbrev evaluation|pushforward.*Additive|ringedSiteModuleMap",
+   "results": "{\"t\": \"2026-10-23T19:23:47Z\", \"tool\": \"grep\", \"query\": \"def evaluation|abbrev evaluation|pushforward.*Additive|ringedSiteModuleMap\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no_match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-unbounded-leray-sections",
+  "date": "2026-10-23",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward. Supporting input: 08FA proof of (2): the derived equality R Gamma(V, Rf_*E) = R Gamma(V times_Y X, E). Definition interface for the section functors and structural module map in the objectwise Leray comparison.",
+   "via": [
+    "lem-sfb-ringed-site-unbounded-leray-sections",
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RingedSiteSectionFunctors",
+  "declaration": "CategoryTheory.RingedSiteSectionFunctors.sectionEvaluation",
+  "declarations": [
+   "CategoryTheory.RingedSiteSectionFunctors.sectionEvaluation",
+   "CategoryTheory.RingedSiteSectionFunctors.modulesGrothendieck",
+   "CategoryTheory.RingedSiteSectionFunctors.pushforwardAdditive",
+   "CategoryTheory.RingedSiteSectionFunctors.sectionModuleMap"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/RingedSiteSectionFunctors.lean",
+  "statement": "abbrev sectionEvaluation {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u}) (V : C) : ringedSiteModules.{u} R ⥤ AddCommGrpCat.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Transparent aliases owning the unchanged ordinary definitions/instances previously available only in theorem-node modules; independent H2 return on immutable head 6a12d5851d01. No theorem conclusion is used."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-447e6195d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-447e6195d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (6a12d5851d01). Item module diff vs 6a12: only alias renames (evaluation→sectionEvaluation, ringedSiteModuleMap→sectionModuleMap), import swap to new public import Sheaf.CategoryTheory.Sites.RingedSiteSectionFunctors plus plain import of the proof_dep module LocalizeRingedSiteMorphismGeneral, and rewrapping; mathematics unchanged and re-checked vs 0D6H (small sites, comm ring sheaves, continuous u, structural a, PreservesFiniteLimits pullback; ∃! natural isos Rf_*⋙RΓ(V)≅RΓ(uV) pinned by derived-unit HEq on every K-injective I; restriction squares ∀ v; edge cases u=𝟭, empty D, zero ring, non-flat a). Item vs side-live changes only lean+stmt_deps; stmt_deps = 5 base defs + new def-sfb-ringed-site-section-functors; three theorem nodes removed; localize theorem stays in proof_deps. New node meets H12 fields (prefix, chapter, kind, status, self-contained TeX citing defs, source, 3 searches, created, blueprint.from/via, lean_audit, lean record, import_flags []); no existing owner in side-live. Its module = 4 transparent abbrevs of the unchanged live evaluation/modulesGrothendieck/pushforwardAdditive/ringedSiteModuleMap, with docstrings (0D6H/04J0 + blueprint id). Both lean.statements verbatim; no line >100; only sorry is the theorem. Report sections present. No compile (no file changed)."
+ }
+}

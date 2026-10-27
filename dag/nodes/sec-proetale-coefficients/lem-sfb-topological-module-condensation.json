@@ -15,91 +15,67 @@
  ],
  "proof": [
   {
-   "text": "Put $B(S)=C(S,R)$, the ring sheaf of [sk-def-sfb-condensed-ring], and $P_M(S)=C(S,M)$ with precomposition restrictions. Addition and negation of sections are continuous by the hypotheses on $M$, and the abelian group identities hold at each $s\\in S$. For a finite jointly surjective family $q_i:S_i\\to S$ and compatible sections $h_i$, let $D=\\coprod_i S_i$ and $q:D\\to S$. The map $H:D\\to M$ given by the $h_i$ is continuous. Compatibility on $S_i\\times_S S_j$ says exactly that $H$ is constant on every fibre of $q$, so there is a unique function $h:S\\to M$ with $hq=H$. The finite disjoint union $D$ is compact: restrict any open cover to each of its finitely many compact components and combine their finite subcovers. Since $S$ is Hausdorff, [lem-sfb-compact-hausdorff-surjection-quotient] makes $q$ a quotient map. For an open $V\\subset M$, $q^{-1}(h^{-1}V)=H^{-1}V$ is open, hence $h^{-1}V$ is open; thus $h$ is continuous. This proves existence and uniqueness of gluing on the finite covering families defining the coherent topology. On the empty profinite set there is one section, so the empty covering also satisfies the sheaf axiom. Therefore $P_M$ is an abelian sheaf. No separation hypothesis on $M$ was used.",
+   "text": "Put $B(S)=C(S,R)$ as in [sk-def-sfb-condensed-ring]. Apply [lem-sfb-continuous-abelian-profinite-sheaf] to the additive topological group of each $M$, obtaining the abelian sheaf $P_M(S)=C(S,M)$. The natural pointwise tensor action $\\beta_M$ of [lem-sfb-continuous-module-presheaf-coordinates] has the unit and associativity identities required for lifting. All these constructions have the same precomposition restrictions.",
    "uses": [
     "sk-def-sfb-condensed-ring",
-    "lem-sfb-compact-hausdorff-surjection-quotient"
+    "lem-sfb-continuous-abelian-profinite-sheaf",
+    "lem-sfb-continuous-module-presheaf-coordinates"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "First two sentences, underlying continuous-function sheaf; quotient-map descent expanded using the cited topology lemma"
+    "place": "First two sentences; assembly from extracted lemmas, repair of original six-step proof"
    }
   },
   {
-   "text": "Use the objectwise tensor of [sk-def-sfb-sheaf-tensor]. For $a\\in B(S)$ and $h\\in P_M(S)$ set $(ah)(s)=a(s)h(s)$. This is continuous, being the composite of $s\\mapsto(a(s),h(s))$ with the continuous scalar action. Pointwise distributivity gives $(a+a')h=ah+a'h$ and $a(h+h')=ah+ah'$. Consequently the assignment $a\\otimes h\\mapsto ah$ defines an abelian-group homomorphism $\\beta_S:B(S)\\otimes_{\\mathbf Z}P_M(S)\\to P_M(S)$: extend the formula additively on the generators and note that the two displayed identities respect the defining bilinearity relations of the tensor product. It commutes with restriction along $u:S'\\to S$, because $(ah)\\circ u=(a\\circ u)(h\\circ u)$. Hence $\\beta:B\\otimes_pP_M\\to P_M$ is a presheaf morphism. With $\\mu^p(a\\otimes b)=ab$ and $e^p(n)=n\\cdot1$, its presheaf module identities are $\\beta(e^p(n)\\otimes h)=nh$ and $\\beta(ab\\otimes h)=\\beta(a\\otimes\\beta(b\\otimes h))$. These follow respectively from $1h=h$ and $(a(s)b(s))h(s)=a(s)(b(s)h(s))$; additivity extends them from pure tensors to all tensors.",
+   "text": "Apply the first clause of [lem-sfb-section-action-internal] to the continuous commutative coefficient sheaf and the sheaf P_M from step 1. Its unital and associative hypotheses follow by evaluating beta on pure tensors and applying the sectionwise module laws from [lem-sfb-continuous-module-presheaf-coordinates]. Choose the uniquely normalized lift as the action of C_R(M). Naturality of the lax monoidal tensor comparison identifies the restrictions of the two internal linearity composites with the two presheaf composites; their equality is the action-commuting assertion of [lem-sfb-continuous-module-presheaf-coordinates]. Tensor restriction detects equality. Thus the unchanged postcomposition maps define an additive functor. The same restriction identity gives the pointwise action formula. For uniqueness, the displayed pointwise formula, the injectivity of the section coordinates and generation by pure tensors identify the restricted action with beta; tensor restriction then identifies the original sheaf action.",
    "uses": [
-    "sk-def-sfb-sheaf-tensor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "First two sentences, pointwise linearity before passage to condensed modules"
-   }
-  },
-  {
-   "text": "Let $a$ denote abelian sheafification and $\\epsilon_P:aP\\xrightarrow{\\sim}P$ its canonical isomorphism for a sheaf $P$. By [def-weil-pbc-sheafification], $\\beta$ extends uniquely to $\\gamma_M=\\epsilon_{P_M}\\circ a(\\beta):a(B\\otimes_pP_M)\\to P_M$. This is the required action on $B\\otimes P_M$ of [sk-def-sfb-sheaf-tensor], and its restriction is exactly $a\\otimes h\\mapsto(s\\mapsto a(s)h(s))$. Apply the strong monoidal functor $a$ of that node to the two presheaf identities in step 2. Its structural isomorphisms identify $a(B\\otimes_pP_M)$ with $aB\\otimes aP_M$ and $a(\\underline{\\mathbf Z})$ with the sheaf unit, and its associativity and unit coherence identify the images of the presheaf associator and unitor with the sheaf ones. The isomorphism $\\epsilon_B:aB\\to B$ identifies the sheafified multiplication and unit with those of the given ring sheaf by [det-def-sfb-ring-object-sheaf]. Conjugating the resulting identities by $\\epsilon_B$ and $\\epsilon_{P_M}$ gives precisely $\\gamma_M\\circ(\\eta\\otimes P_M)=\\lambda_{P_M}$ and $\\gamma_M\\circ(\\mu\\otimes P_M)=\\gamma_M\\circ(B\\otimes\\gamma_M)\\circ\\alpha_{B,B,P_M}$. Thus $(P_M,\\gamma_M)$ is an internal $B$-module by [sk-def-sfb-module-objects]. This argument uses sheafification and its monoidal comparison, rather than any formula identifying sections of a sheaf tensor with tensors of sections.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "sk-def-sfb-sheaf-tensor",
-    "det-def-sfb-ring-object-sheaf",
-    "sk-def-sfb-module-objects"
+    "lem-sfb-continuous-module-presheaf-coordinates",
+    "lem-sfb-section-action-internal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "First two sentences, passage from pointwise scalar action to an internal condensed module"
+    "place": "First two sentences; assembly from extracted lemmas, repair of original six-step proof"
    }
   },
   {
-   "text": "For a continuous $R$-linear $f:M\\to N$, define $P_f(S)(h)=f\\circ h$. It is continuous as a composite, additive, and natural in $S$ since $f\\circ(h\\circ u)=(f\\circ h)\\circ u$. On pure tensors $P_f(ah)(s)=f(a(s)h(s))=a(s)f(h(s))$, so $P_f\\beta_M=\\beta_N(\\mathrm{id}_B\\otimes_pP_f)$ on all tensors by their defining additive generators. Sheafifying this equality, or equivalently using the uniqueness in [def-weil-pbc-sheafification], yields $P_f\\gamma_M=\\gamma_N(\\mathrm{id}_B\\otimes P_f)$. This is exactly the morphism condition of [sk-def-sfb-module-objects]. Evaluation gives $P_{\\mathrm{id}}(h)=h$, $P_{gf}(h)=g\\circ(f\\circ h)$, and $P_{f+g}(h)(s)=f(h(s))+g(h(s))$. The sum $f+g$ is continuous by continuity of addition in $N$. Sums of the resulting sheaf maps are internal-linear: add the two action-commutation equations, using additivity of tensor on morphisms (objectwise and then sheafified) and of composition of abelian-group maps. These identities establish the functor and its additivity.",
+   "text": "Use the limiting finite-coordinate cone in presheaf modules supplied by [lem-sfb-continuous-module-presheaf-coordinates]. The forgetful functor to abelian presheaves preserves this limit. The sheaf inclusion reflects limits, and Mod.forget reflects limits by [lem-sfb-modobj-forget-creates], so the same cone on the lifted objects is a product of internal modules. Its unique comparison with the chosen product is an isomorphism. Its composites with projections are the given images of continuous linear projections, so the forward section formula follows from the postcomposition formula. The inverse isomorphism followed by each original projection equals the chosen product projection; evaluating this equality gives the inverse section formula. The argument applies also to the empty finite index type.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor"
+    "lem-sfb-continuous-module-presheaf-coordinates",
+    "lem-sfb-modobj-forget-creates"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "First two sentences, continuous linear coordinate maps and their inverses pass functorially to internal modules"
+    "place": "First two sentences; assembly from extracted lemmas, repair of original six-step proof"
    }
   },
   {
-   "text": "For a finite family put $M=\\prod_iM_i$ with its product topology and coordinatewise operations. Those operations are continuous because each coordinate is the corresponding continuous operation on $M_i$. A map $h:S\\to M$ is continuous exactly when all $\\operatorname{pr}_ih$ are: preimages of the basic opens, which impose open conditions on finitely many coordinates, are finite intersections of open preimages. Thus $h\\mapsto(\\operatorname{pr}_ih)_i$ and $(h_i)_i\\mapsto(s\\mapsto(h_i(s))_i)$ are inverse additive bijections, commute with restriction, and respect the pointwise action of every $a:S\\to R$. They therefore identify $P_M$ with the sectionwise product of the $P_{M_i}$ as abelian sheaves, with the action of step 3. This is also the internal-module product: for any internal module $K$ and module maps $v_i:K\\to P_{M_i}$, the sectionwise tuple defines a unique natural additive map $v:K\\to P_M$. Each projection of $v\\gamma_K$ equals the same projection of $\\gamma_M(\\mathrm{id}_B\\otimes v)$ by linearity of $v_i$ and of the projections; projections separate sections, so these two sheaf maps agree. Thus $v$ is a module map by [sk-def-sfb-module-objects]. This proves the product universal property and the stated isomorphism with its specified inverse. For $I=\\varnothing$, the topological product is the zero module, $C(S,0)$ is a singleton for every $S$, and the same construction is the terminal internal module.",
+   "text": "Use the regular presheaf-module isomorphism and its normalized section formula from [lem-sfb-continuous-module-presheaf-coordinates]. Forgetting to abelian presheaves makes it an isomorphism of the unchanged underlying sheaves. The chosen lifted action restricts to beta, and the prescribed coefficient multiplication restricts to pointwise multiplication by [det-def-sfb-ring-object-sheaf]. Naturality of the tensor comparison and the presheaf regular action equation therefore show that this isomorphism is internal-linear. Its section formula is precisely the presheaf formula, giving the required regular normalization.",
    "uses": [
-    "sk-def-sfb-module-objects"
+    "lem-sfb-continuous-module-presheaf-coordinates",
+    "det-def-sfb-ring-object-sheaf"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "First two sentences, finite coordinate product of condensed modules and its inverse"
-   }
-  },
-  {
-   "text": "Finally take $M=R$ with its regular action. Then $P_R=B$ as abelian sheaves, including the restrictions. The presheaf action $\\beta_R$ is $a\\otimes b\\mapsto(s\\mapsto a(s)b(s))$, the objectwise multiplication of the ring sheaf. By [det-def-sfb-ring-object-sheaf], the internal ring multiplication $\\mu:B\\otimes B\\to B$ is its unique extension to the sheaf tensor. By the same uniqueness for $\\gamma_R$ in step 3, $\\gamma_R=\\mu$. Hence $\\mathscr C_R(R)$ is the regular internal module in the sense of [sk-def-sfb-module-objects].",
-   "uses": [
-    "det-def-sfb-ring-object-sheaf",
-    "sk-def-sfb-module-objects"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "First two sentences, normalization when the topological module is the scalar ring"
+    "place": "First two sentences; assembly from extracted lemmas, repair of original six-step proof"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-condensed-ring",
-  "lem-sfb-compact-hausdorff-surjection-quotient",
-  "sk-def-sfb-sheaf-tensor",
-  "def-weil-pbc-sheafification",
-  "det-def-sfb-ring-object-sheaf",
-  "sk-def-sfb-module-objects"
+  "lem-sfb-continuous-abelian-profinite-sheaf",
+  "lem-sfb-continuous-module-presheaf-coordinates",
+  "lem-sfb-section-action-internal",
+  "lem-sfb-modobj-forget-creates",
+  "det-def-sfb-ring-object-sheaf"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-  "place": "First two sentences; expanded continuous-function construction, using quotient descent and strong monoidal sheafification"
+  "place": "First two sentences; Lean assembly using abelian sheaf descent, normalized action lifting, finite-limit reflection, and the regular presheaf isomorphism."
  },
  "mathlib_searches": [
   {
@@ -195,28 +171,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-topological-module-condensation",
   "worker": "stage1",
-  "summary": "Constructed the continuous-function abelian sheaf by quotient descent, its tensor-presheaf action by bilinearity, and its internal action by strong monoidal sheafification. Checked functoriality and additivity, the explicit product comparison including the empty product, and the regular module. Reused existing DAG tools; no new nodes or statement changes.",
-  "blueprint": "Realizes the first two sentences of lem-sfb-subfield-flat.proof.md, specifically the passage of continuous linear coordinate maps and inverse maps to internal condensed modules and coordinate products.",
-  "tool_uses": [
-   {
-    "node": "det-def-sfb-ring-object-sheaf",
-    "why": "Identifies sheafified pointwise multiplication and unit with those of the given ring sheaf; a generic ring-object normalization tool absent from this unit."
-   }
-  ]
+  "summary": "Repair of batch5 re-split return: extracted three independent statement-only work items for abelian sheaf descent, continuous-module presheaf actions and coordinates, and normalized internal action lifting. All six original arguments are retained verbatim and allocated in report.md. The unchanged statement is assembled in four short steps; no Lean or builds.",
+  "blueprint": "First two sentences of lem-sfb-subfield-flat.proof.md, realizing the continuous coordinate isomorphism as an internal condensed-module isomorphism.",
+  "tool_uses": []
  },
  "tool_uses": [
   "det-def-sfb-ring-object-sheaf"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q22-ec9da0676",
-  "group": "Q22",
+  "reviewer": "NT-cc-N6-3008cab4e",
+  "group": "N6",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-ec9da0676 (reviewer sub-agent of L); spot-checked: I read the item and its six steps in full. There are no new nodes. Statement, stmt_deps, blueprint, import_flags and lean_audit are unchanged from side-live, where the item is unsplit and unreviewed; it is not on the dropped list and has no repair note. The source is lem-sfb-subfield-flat.proof.md (main-20261015), whose first two sentences assert that the coordinate isomorphism C(-,F)≅C(-,E)^n is an isomorphism of E̲-modules; the item is the general construction behind that sentence, with proof_origin agent and no SGA. Step 1: compatible sections are constant on the fibres of D=⊔S_i→S; D is compact and S Hausdorff, so the cited Mathlib leaf (IsQuotientMap.of_surjective_continuous) applies and the glued function is continuous. The empty cover is checked and no separation on M is used. The step does not spell out the reduction from covering sieves to the generating finite families; that is the standard sheaf-for-a-coverage fact, accepted without a node. Step 2: the presheaf action uses the joint continuity of the scalar action that the statement assumes. Step 3: γ=ε∘a(β) is the unique extension; the strong monoidal sheafification of sk-def-sfb-sheaf-tensor and the counit normalization of det-def-sfb-ring-object-sheaf give exactly the unit and associativity identities of sk-def-sfb-module-objects. Step 4: linearity of f gives the morphism condition by sheafifying a presheaf equality; sums are pointwise, and id⊗(−) is additive. Step 5: a map into a product is continuous iff its coordinates are; the product universal property follows because the projections are module maps (step 4) and jointly monic; I=∅ gives the terminal module. Step 6: γ_R=μ because both are the unique extension of objectwise multiplication. Edge cases tested: zero ring, discrete R, non-Hausdorff M, M=R and E^n (what the citer lem-sfb-condensed-subfield-basis needs), empty profinite set, empty product. An rg -L search of the DAG for topological modules, C(S,M) and internal modules (def-pod-internal-module, lem-weil-pbc-integral-matrix-coefficient-transport, among others) found no duplicate. Accepted tool use: det-def-sfb-ring-object-sheaf, a generic ring-object normalization used as a black box. No changes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-3008cab4e (reviewer sub-agent of L); spot-checked: Re-split delivery that follows the repair note of the human (2026-10-21, released 2026-10-22). I diffed the item against side-live: only proof, proof_deps and split_report changed. The statement, stmt_deps, source, blueprint and lean are identical. The item is not on the dropped lists and no other group has re-split it live. Source: lem-sfb-subfield-flat.proof.md (main-20261015), first two sentences; no SGA is cited. The six old steps (6569 chars) are spread over three self-contained statement-only unsplit nodes (950/1951/2184 chars). (1) lem-sfb-continuous-abelian-profinite-sheaf takes old step 1: unique gluing on finite jointly surjective covers through the compact-to-Hausdorff quotient, P(∅)=0, no separation on G, plus the additive postcomposition part of step 4. (2) lem-sfb-continuous-module-presheaf-coordinates takes the presheaf work: the pointwise action from joint continuity and β on ⊗_Z with unit and associativity (step 2), P_fβ=β(id⊗P_f) and sums (step 4), the product topology and inverse B(S)-linear coordinate maps with the empty family (step 5), and β_R=μ^p (step 6). (3) lem-sfb-section-action-internal works over a general site: γ=ε∘a(β) is unique and satisfies the module identities through the strong monoidal sheafification of sk-def-sfb-sheaf-tensor and the counit normalization of det-def-sfb-ring-object-sheaf (step 3). It also gives the criterion 'commutes with actions iff internal-linear', additivity, the internal finite product with arbitrary source K and terminal empty product, and the regular normalization (steps 4-6). No old argument was dropped or blurred. No node restates the item: (2) is at presheaf level and (3) is a general-site lifting lemma. I checked every cited stmt_dep statement. I tested small cases: indiscrete and discrete G, S=∅, R=0, I=∅, B=0 (which forces P=0) and P=B. All three statements are true. Not duplicates: def-weil-pbc-internal-abelian-sheaf-module-equivalence gives only an equivalence that preserves underlying sheaves, without the normalized lift, the criterion or the products. Mathlib's TopCat.toSheafCompHausLike is Type-valued. Both are advisory tools for the later proofs, as are lem-sfb-compact-hausdorff-surjection-quotient and lem-sfb-modobj-forget-creates. The assembly is 4 steps totalling 1850 chars. Each step's hypotheses are met: B is a commutative ring sheaf by sk-def-sfb-condensed-ring, P_M is a sheaf by node 1, and β is unital and associative by node 2. Every step cites only same-unit new nodes plus a definition. Each new node records three kinds of Mathlib search, and its blueprint.from (lem-sfb-subfield-flat, via the item and lem-sfb-condensed-subfield-basis), same_as [] and created fields are correct. Note for the maintainer: the item's tool_uses still lists det-def-sfb-ring-object-sheaf, which is now only in node 3's stmt_deps; harmless. No fixes."
  },
  "lean": {
   "module": "Sheaf.Topology.TopologicalModuleCondensation",
@@ -240,5 +211,27 @@
   "group": "N9",
   "result": "pass",
   "note": "Checked every clause against the node and source (lem-sfb-subfield-flat.proof.md, first two sentences): TopModuleCat hypotheses; coherent Profinite.{u} site with Ab.{u+1}; additive functor; AddEquiv sections ≃ C(S,M), natural in S and M; action formula plus uniqueness over all g, via the canonical lax tensorator μ of sheafToPresheaf (sheafification unit then an iso, so uniqueness holds); map formula f∘h; finite-product iso pinned by p.hom ≫ π_i = F.map proj_i, with section and inverse formulas, I = ∅ included; regular module iso that is the identity on sections. Node diff vs side-live is the lean field only; not dropped; statement verbatim; single sorry; docstrings with source and blueprint tag. No duplicate in Mathlib or the project. Advisories: unneeded plain import of Hausdorff; R tied to the site universe, so the citer subfield-basis (E : Type) needs ULift or a continuousMap comparison at stage 3; def-sfb-continuous-map-condensed-ring duplicates the coefficient ring in the base. Not recompiled (no FIX); worker reports clean compiles."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T060947-L-2388820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

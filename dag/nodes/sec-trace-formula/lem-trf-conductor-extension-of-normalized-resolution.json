@@ -1,0 +1,224 @@
+{
+ "id": "lem-trf-conductor-extension-of-normalized-resolution",
+ "kind": "statement",
+ "title": "Extending a normalized resolution rule by an initial conductor blowup",
+ "statement": "Let $N$ assign to every normal reduced finite-type $\\mathbf Q$-scheme $S$, including finite disjoint unions, a finite tower of normalized blowups [def-trf-normalized-blowup] starting at $S$, with coherent ideals whose zero schemes are nonempty and nowhere dense and with regular terminal scheme [def-weil-regular-scheme]. Normal means that the local rings are integrally closed domains [def-weil-pbc-normal-ring]. Suppose that $N$ has canonical comparisons for every smooth morphism of such schemes [def-sbc-smooth-morphisms]: the tower on the source is the recursively pulled-back tower on the target with exactly its unit-ideal stages deleted, retaining the other extended ideals in order. Assume these comparisons respect identities and composition, and delete no stage for a surjective morphism. Assume $N(\\varnothing)$ is trivial.\n\nFor any reduced finite-type $\\mathbf Q$-scheme $X$ [def-pc-reduced-scheme, def-weil-finite-type-morphism], let $\\nu:X^\\nu\\to X$ be componentwise normalization [def-weil-pbc-reduced-normalization] and set\n$$D_X=\\operatorname{Ann}_{\\mathcal O_X}\\operatorname{coker}(\\mathcal O_X\\longrightarrow\\nu_*\\mathcal O_{X^\\nu}),\\qquad P(X)=\\operatorname{Bl}_{D_X}(X)^\\nu.$$\nHere the cokernel is [def-trf-conductor-cokernel], and annihilator consists of local functions killing all local sections. Define $H_N(X)$ to be $P(X)\\to X$ followed by $N(P(X))$, omitting the first stage exactly when $D_X=\\mathcal O_X$. Then $D_X$ is coherent with nowhere dense zero scheme, $D_X=\\mathcal O_X$ exactly when $X$ is normal, and $P(X)$ is normal, reduced and of finite type. This formula defines a finite normalized blowup tower for every $X$, with nonempty nowhere dense centers and regular terminal scheme, and $H_N(\\varnothing)$ is trivial.\n\nFor every smooth $h:Y\\to X$ between reduced finite-type $\\mathbf Q$-schemes, $D_Y=D_X\\mathcal O_Y$ and $P(Y)\\simeq P(X)\\times_XY$ canonically, with smooth induced map to $P(X)$. The resulting comparisons identify $H_N(Y)$ with $(h^*H_N(X))^c$, preserving ordered extended ideals and respecting identities and composition; a unit-ideal stage is omitted only when its normalized blowup is an isomorphism. If $h$ is surjective, no stage is contracted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 2.2.3--2.2.9, 2.3.4--2.3.5(i) and 2.3.12(i), printed pp.90--93; agent conductor-prepending refinement of the retained proof. The conductor comparison uses Stacks Tag 07T8 (algebra.tex, lemma-annihilator-flat-base-change) through lem-trf-conductor-smooth-base-change; the tag alone does not assert this extension of a resolution rule."
+ },
+ "stmt_deps": [
+  "def-trf-normalized-blowup",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-reduced-normalization",
+  "def-trf-conductor-cokernel",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-weil-surjective-morphism",
+  "def-trf-smooth-normalized-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Use the conductor geometry and smooth preparation square, whose unchanged proofs and concrete input definitions are now in the preparation module. They are derived from the same conductor and normalized-blowup calculus as before.",
+   "uses": [
+    "def-trf-conductor-resolution-preparation",
+    "lem-trf-conductor-smooth-base-change",
+    "lem-trf-normalized-blowup-calculus",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define T(X) as the explicit conductor extension of N(P(X)). Its normalized resolution fields and exact extension specification are given by the tower construction. Choose the smooth comparisons from their characterization unique on all downstream index and map data.",
+   "uses": [
+    "lem-trf-conductor-resolution-tower",
+    "lem-trf-conductor-resolution-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the identity comparison explicitly with unchanged tower, identity maps and identity contraction. The uniqueness clauses of the conductor comparison give both identity laws. Apply the generic comparison laws to fill composition and surjectivity fields of the smooth rule. On an empty X, stalkwise normality is vacuous, so the conductor is unit. P(X) is empty because it maps to X. N.empty gives its tail length zero, and the unit construction preserves length. Assemble the rule with the pointwise exact extension witness.",
+   "uses": [
+    "def-trf-conductor-resolution-preparation",
+    "lem-trf-conductor-resolution-tower",
+    "lem-trf-normalized-resolution-comparison-laws"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-trf-conductor-resolution-preparation",
+  "lem-trf-conductor-resolution-comparison",
+  "lem-trf-conductor-resolution-tower",
+  "lem-trf-conductor-smooth-base-change",
+  "lem-trf-normalized-blowup-calculus",
+  "lem-trf-normalized-resolution-comparison-laws",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, 2.2.3--2.2.9 and 2.3.2--2.3.5(i), printed pp.90--93; agent formalization of the conductor-prepending refinement in the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-conductor-extension-of-normalized-resolution: Extend a normalized resolution rule on normal schemes to reduced finite type rational schemes by first blowing up the conductor and normalizing",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Alge\", \"doc\": \"The normalization morphism associated with a scheme morphism $ f: X \\to Y $, constructed via the colimit diagram involving the affine Zariski site of $ Y $ and the Spec functor, is an integral morphism\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and its hom-ext lemmas do not prepend a conductor blowup or extend a resolution rule; the source grep found no conductor-resolution construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-conductor-extension-of-normalized-resolution: The conductor ideal defines a functorial preliminary normalized blowup compatible with smooth pullback and contraction of resolution towers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Y\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $, constructed as the universal morphism induced by the colimit definition of normalization in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and its hom-ext lemmas do not prepend a conductor blowup or extend a resolution rule; the source grep found no conductor-resolution construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-conductor-extension-of-normalized-resolution: Prepending the normalized blowup of the conductor extends a smooth functorial desingularization from normal schemes to reduced schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(f₁ f₂ : f.normalization ⟶ T) (g : T ⟶ Y) [IsAffineHom g] (H₁ : f.toNormalization ≫ f₁ = f.toNormalization ≫ f₂)\\n  (hf₁ : f₁ ≫ g = f.fromNormalization) (hf₂ : f₂ ≫ g = f.fromNormalization) : f₁ = f₂\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization ≫ f.fromNormalization = f\", \"doc\": \"The composition of the canonical morphism from a scheme $ X $ to the normalization of a morphism $ f: X \\\\to Y $ and the canonical morphism from the normalization to $ Y $ equals the original morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ f₁_1 : X ⟶ T) (e_f₁ : f₁ = f₁_1)\\n  (f₂ f₂_1 : T ⟶ Y) (e_f₂ : f₂ = f₂_1) [inst_2 : AlgebraicGeometry.IsIntegralHom f₂]\\n  (H : f =\", \"doc\": \"Given schemes $X, Y, T$ and morphisms $f: X \\\\to Y$, $f_1, f_1': X \\\\to T$, $f_2, f_2': T \\\\to Y$ such that $f_1 = f_1'$, $f_2 = f_2'$, and $f = f_1 \\\\circ f_2 = f_1' \\\\circ f_2'$, with $f$ quasi-compact, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization.ker = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization f)\\n      (CategoryTheory.CategoryStr\", \"doc\": \"For a quasi-compact and quasi-separated scheme morphism $ f: X \\to Y $, the composition of the canonical morphism from $ X $ to the normalization of $ f $, followed by the canonical morphism from the n\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and its hom-ext lemmas do not prepend a conductor blowup or extend a resolution rule; the source grep found no conductor-resolution construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conductor\", \"blowup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and its hom-ext lemmas do not prepend a conductor blowup or extend a resolution rule; the source grep found no conductor-resolution construction"
+  },
+  {
+   "tool": "grep",
+   "query": "conductor.*(blow.?up|resolution)|normaliz.*(resolution|desingular)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: relative normalization and its hom-ext lemmas do not prepend a conductor blowup or extend a resolution rule; the source grep found no conductor-resolution construction"
+  },
+  {
+   "tool": "grep",
+   "query": "def normalizationDesc",
+   "date": "2026-10-22",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"377\", \"line\": \"def normalizationDesc (H \", \"text\": \" f = f₁ ≫ f₂) : f.normalization ⟶ T := by\"}\nThe single-file query printed a line-number-only rg prefix, so msearch parsed the location as file=377; source reading identifies Mathlib/AlgebraicGeometry/Normalization.lean:377.",
+   "verdict": "no match: this is relative normalization factorization, not a normalized resolution tower or conductor extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a smooth functorial normalized resolution rule on normal schemes to reduced schemes by prepending the normalized blowup of the conductor ideal",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern relative normalization, reducedness or its functorial maps, not a resolution rule with ordered conductor-stage contractions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conductor\", \"blowup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern relative normalization, reducedness or its functorial maps, not a resolution rule with ordered conductor-stage contractions"
+  },
+  {
+   "tool": "grep",
+   "query": "conductor.*(resolution|blowup)|normalizedBlowup|normalized_blowup",
+   "results": "[grep] OK 0 hit(s); searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern relative normalization, reducedness or its functorial maps, not a resolution rule with ordered conductor-stage contractions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extend a normalized desingularization on normal schemes to all reduced schemes using a conductor blowup compatible with smooth base change",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.IsReduced",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern relative normalization, reducedness or its functorial maps, not a resolution rule with ordered conductor-stage contractions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of desingularization towers by deleting empty centers under smooth pullback and prepending the annihilator of the normalization quotient",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern relative normalization, reducedness or its functorial maps, not a resolution rule with ordered conductor-stage contractions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-toric-normalized-desingularization",
+  "date": "2026-10-22",
+  "group": "Q26"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Re-split of the retained toric-resolution proof, steps 3--4: Expose VIII, 2.2.3--2.2.9, 2.3.4--2.3.5(i) and 2.3.12(i), printed pp.90--93; agent conductor-prepending refinement of the retained proof. The conductor comparison uses Stacks Tag 07T8 (algebra.tex, lemma-annihilator-flat-base-change) through lem-trf-conductor-smooth-base-change; the tag alone does not assert this extension of a resolution rule.",
+   "via": [
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-conductor-extension-of-normalized-resolution",
+  "worker": "stage1",
+  "summary": "Split the conductor-prepending extension using existing DAG nodes only. Verified the quasi-compactness required by the conductor comparison, constructed the finite tower with explicit empty and unit cases, compared the initial stage and the normal-input tail, checked ordered contractions and composition, and proved no deletion under surjective pullback. Statement unchanged; no new nodes.",
+  "blueprint": "Historical retained toric-resolution branch of lem-trf-local-term-locality through lem-trf-toric-normalized-desingularization, retained steps 3--4; conductor-prepending refinement of ILO VIII 2.2.3--2.2.9 and 2.3.4--2.3.5(i). The latest blueprint replaces that historical local-term route by the contracting-correspondence argument; this item is a smaller support lemma, not a claim that the current blueprint uses conductor resolution.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NE-7de1a79f7",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-7de1a79f7 (reviewer sub-agent of L); spot-checked: I read the item and all 8 steps in full, with the full statement of every node they cite, and ILO Exposé VIII 2.2.1–2.3.5 (printed pp.90–92). The delivery adds no new nodes, and the statement is identical to the live unsplit node. The three added stmt_deps (coherent, fibre product, surjective) are used in the statement. Step 1: quasi-compactness of smooth h comes from Spec Q being Noetherian, finite-type-over-noetherian and noetherian-open-subscheme, and the conductor comparison needs it. Steps 2 and 4: the conductor node gives a coherent, nowhere-dense D that is unit exactly when X is normal, and D_Y = D_X O_Y. These meet the hypotheses of the normalized-blowup calculus, which gives P(X) normal, reduced and of finite type, B_O(S) = S for normal S, and P(Y) ≅ P(X) ×_X Y with h̄ smooth. Step 5: the conductor stage is deleted only when D_Y is unit; then Y is normal and that stage is an isomorphism. Step 6: the induction has an explicit base and step, and every deleted source level is normal. Step 7: composition and identities follow from the cited statements' compatibility clauses, and the retained-index argument is written out. Step 8: the local stalk map keeps D_Y proper above V(D_X), and surjective base change makes h̄ surjective, which matches ILO 2.3.5(i). I tested: the empty scheme, a normal X, the cusp, the inclusion of the normal locus, a surjective double cover, and a nonunit center whose normalized blowup is an isomorphism. The duplicate search found only the parent, which uses every clause, and the sibling normal-inputs node, which supplies N and is not a duplicate. The route stays in unit sk-i-curve-zero plus pbc Mathlib leaves and definitions. No tool_uses or SGA. Remarks only: '^c' is defined through the wording of the N hypothesis, and the item has no lean_audit field; both are inherited from Q26."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConductorNormalizedResolutionExtension",
+  "declaration": "AlgebraicGeometry.conductor_normalizedResolution_extension",
+  "declarations": [
+   "AlgebraicGeometry.conductor_normalizedResolution_extension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConductorNormalizedResolutionExtension.lean",
+  "statement": "theorem conductor_normalizedResolution_extension (N : SmoothNormalizedResolutionRule NormalRationalResolutionInput.{u} (fun X ↦ X.val.scheme)) : ∃ H : SmoothNormalizedResolutionRule RationalResolutionInput.{u} (fun X ↦ X.scheme), ∀ X : RationalResolutionInput.{u}, Nonempty (IsRationalConductorResolutionExtension X (N.tower (normalConductorPreparedRationalInput X)) (H.tower X))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a74f5665",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read item node, all 12 stmt_dep records, both delivered modules, the live QENormalizedResolutionRule (tower and comparison types), NormalizedContraction, RationalResolutionInput, conductorCokernel/conductorIdeal, Mathlib IdealSheafData.comap (= extended ideal), and the landed sibling QEConductorNormalizedResolutionExtension. Every clause matches: the normal-stalk subtype, a tower with coherent nonempty nowhere-dense centers and a regular last level, cartesian comparisons deleting exactly unit stages (each an isomorphism), identity/composition/surjective/empty laws, D_X coherent and nowhere dense and unit iff normal, P(X) as the actual normalized blowup with normal/reduced/finite-type fields, the exact prepend/omit spec (stage count 0/1, unitBase, conductorStage), and smooth base change (comap equality plus unique cartesian smooth k; the uniqueness is true). The new node SmoothNormalizedResolutionRule is the smooth analogue of the landed regular rule; the regular rule would be a stronger hypothesis, the toric rule covers fewer inputs, and no duplicate was found. Both lean.statement fields are verbatim; docstrings and sorry-only proofs are in order; the report sections are present. Edge cases checked: empty, normal, cusp, normal-locus inclusion, invertible proper center, disconnected inputs, universes. No compile because nothing changed. Remarks only: QENormalizedResolutionTower reaches def-per-qe-normalized-resolution-rule only through the new node rather than a direct stmt_dep; conductorIdeal's docstring names lem-trf-conductor-smooth-base-change, but it lives in the def-trf-conductor-cokernel module and is used the same way in the landed sibling."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d6715",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261026T093016-L-3494238",
+  "kind": "interface",
+  "note": "independent cc review: item signature vs clone (identical); moved preparation section vs clone (verbatim); new sorry leaves vs NormalizedContraction/QENormalizedResolutionComparison definitions (true); node lean records vs Lean declarations"
+ }
+}

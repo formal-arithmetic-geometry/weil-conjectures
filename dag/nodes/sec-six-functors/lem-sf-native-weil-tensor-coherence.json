@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-native-weil-tensor-coherence",
+ "kind": "statement",
+ "title": "Monoidal coherence on an already represented native tensor",
+ "statement": "Fix the finite field $k_0$, prime $\\ell\\ne\\operatorname{char}(k_0)$,\nseparated finite-type scheme $X$, native and ordinary derived categories $\\mathcal D,\\mathcal E$,\nforgetful functor $F$, Hom models $M$, representative-compatible $\\eta$, and normalized\nordinary closed symmetric structure $(S,\\beta)$ as in [lem-sf-native-weil-tensor-adjoints],\nusing [def-sf-native-weil-closed-models, def-coef-ringed-tensor-hom-model].\nLet $T:\\mathcal D\\times\\mathcal D\\to\\mathcal D$, adjunctions\n$a_K:T(-,K)\\dashv M.weilHom(K,-)$, their counit naturality in $K$, and\n$\\tau:TF\\simeq(F\\times F)S.tensor$ satisfy exactly that node's displayed\nunit-mate formula. There exist a monoidal structure $m$ on $\\mathcal D$ with\n$h_T:m.tensor=T$, a symmetry $\\gamma$ for $m$, coefficient-unit isomorphisms\n$\\delta:m.unit\\simeq single_0(adicConstant)$ and\n$\\epsilon:S.unit\\simeq single_0(ordinaryUnit)$, and\nTensorCoherence $c$ [def-sf-ringed-forget-tensor-transposition-data] for\n$(m,S.monoidal,\\gamma,\\beta,F)$ and the comparison obtained from $\\tau$ by\n$h_T$. Its unit is\n$$c.unit=F(\\delta)\\,mapDerivedCategorySingleFunctor_0(adicConstant)\\,\\epsilon^{-1}.$$\nThe equality $h_T$ is equality of tensor functors, including maps. This assertion\nconstructs no adjunction and asserts no transposition law for arbitrary arrows.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom/evaluation/transposition paragraph; associator, unit and symmetry descent in native tensor lift step 2. Stacks 06YS and 0FPT (lemma-symmetric-monoidal-derived)."
+ },
+ "stmt_deps": [
+  "lem-sf-native-weil-tensor-adjoints",
+  "def-sf-native-weil-closed-models",
+  "def-coef-ringed-tensor-hom-model",
+  "def-sf-ringed-forget-tensor-transposition-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain raw tensor constraints with their faithful-model and forgetful inducing data. Their unit is the literal degree-zero native coefficient object. This step supplies no monoidal or braided coherence axioms for T.",
+   "uses": [
+    "lem-sf-native-weil-tensor-constraint-lifts"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Monoidal.induced to the faithful model functor and its inducing data. This proves tensor functoriality, whiskering axioms, naturality, pentagon and triangle. The operations use exactly T.map, so structure eta and proof irrelevance give tensor=T, including maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply Mathlib BraidedCategory.ofFaithful using the model swap equation. This proves both braiding naturalities and both hexagons. For involutivity apply faithfulness, precompose by the invertible model tensorator, rewrite twice using the swap equation, and use symmetry in the model category.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Turn forgetData into a CoreMonoidal structure. Its oplax associativity gives the TensorCoherence associativity equation for the supplied τ. Its two inducing unitor formulas directly give left_unit and right_unit; the supplied raw swap equation gives symmetry. Take delta=Iso.refl U, epsilon=ordinaryUnit, and c.unit=forgetData.εIso.symm. The raw unit normalization and mapIso_refl prove the exact required equality. Normalize eqToIso of tensor=T and compose with τ. Forgetting is never assumed faithful.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-native-weil-tensor-constraint-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Faithful induction of the raw structural lifts: Monoidal.induced, BraidedCategory.ofFaithful, explicit involutivity cancellation, and CoreMonoidal oplax associativity. Geometric lifts remain isolated in lem-sf-native-weil-tensor-constraint-lifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor Hom adjunction preserved by exact forgetting Frobenius equivariant sheaves invertible tensor mate",
+   "results": "Eight hits, including CategoryTheory.frobeniusMorphism_mate and frobeniusMorphism_iso_of_expComparison_iso (Cartesian monoidal hypotheses), condensed closed structures, and rigid tensor adjunctions. None supplies the native unbounded tensor adjoints or action-site comparison.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.leftAdjointUniq\"",
+   "results": "Eleven hits including leftAdjointUniq and its counit and transitivity identities. These compare already constructed adjoints and do not supply native tensor adjoints or monoidal coherence.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "native_weil_tensor_adjoints|native_weil_tensor_coherence|TensorCoherence|ringedDerived_closed_symmetric_monoidal",
+   "results": "msearch Mathlib grep: zero hits. Local rg found the existing ringed closed structure, ringed tensor descent and native ordinary tensor identification; the latter identifies an already supplied ordinary closed tensor and does not construct the native tensor.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeWeilTensorLift",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Internal-Hom/evaluation/transposition paragraph; associator, unit and symmetry descent in native tensor lift step 2. Stacks 06YS and 0FPT (lemma-symmetric-monoidal-derived).",
+   "via": [
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeWeilTensorCoherence",
+  "file": "lean/Sheaf/Paper/NativeWeilTensorCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_weil_tensor_coherence",
+  "statement": "theorem native_weil_tensor_coherence\n    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]\n    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]\n    [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]\n    (M : NativeClosedHomModels k₀ l X)\n    (η : M.weilHom ⋙ nativeForget k₀ l X ≅\n      (nativeForget k₀ l X).op.prod (nativeForget k₀ l X) ⋙ M.ordinaryHom)\n    (hη : NativeHomRepresentativeCompatibility (ihomBifunctor k₀ l X)\n      (ordinaryIhomBifunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)\n      M.weilHom M.ordinaryHom M.weilRepresentatives M.ordinaryRepresentatives\n      (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) η)\n    (S : CoefficientClosedStructure M.ordinaryHom)\n    (β : @SymmetricCategory _ _ S.monoidal)\n    (hmonoidal : S.monoidal = (inferInstance : MonoidalCategory\n      (DerivedCategory (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber))))\n    (hS : NativeOrdinaryTensorModels l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber\n      M.ordinaryHom M.ordinaryRepresentatives S β)\n    (T : (DerivedCategory (ProEtaleWeilSheaf k₀ l X)) ×\n      DerivedCategory (ProEtaleWeilSheaf k₀ l X) ⥤\n        DerivedCategory (ProEtaleWeilSheaf k₀ l X))\n    (a : ∀ K : DerivedCategory (ProEtaleWeilSheaf k₀ l X),\n      Prod.sectL _ K ⋙ T ⊣ Prod.sectR (op K) _ ⋙ M.weilHom)\n    (ha : ∀ (K K' L : DerivedCategory (ProEtaleWeilSheaf k₀ l X)) (f : K' ⟶ K),\n        T.map (X := (M.weilHom.obj (op K, L), K'))\n            (Y := (M.weilHom.obj (op K', L), K'))\n            (M.weilHom.map (X := (op K, L)) (Y := (op K', L)) (f.op, 𝟙 L), 𝟙 K') ≫\n              (a K').counit.app L =\n          T.map (X := (M.weilHom.obj (op K, L), K'))\n            (Y := (M.weilHom.obj (op K, L), K))\n            (𝟙 (M.weilHom.obj (op K, L)), f) ≫ (a K).counit.app L)\n    (τ : T ⋙ nativeForget k₀ l X ≅\n        (nativeForget k₀ l X).prod (nativeForget k₀ l X) ⋙ S.tensor)\n    (hτ : ∀ A K : DerivedCategory (ProEtaleWeilSheaf k₀ l X),\n        τ.inv.app (A, K) =\n          (S.transpose ((nativeForget k₀ l X).obj A) ((nativeForget k₀ l X).obj K)\n            ((nativeForget k₀ l X).obj (T.obj (A, K)))).symm\n              ((nativeForget k₀ l X).map ((a K).unit.app A) ≫\n                η.hom.app (op K, T.obj (A, K)))) :\n    ∃ m : MonoidalCategory (DerivedCategory (ProEtaleWeilSheaf k₀ l X)),\n    ∃ hT : @MonoidalCategory.tensor _ _ m = T,\n    ∃ γ : @SymmetricCategory _ _ m,\n    ∃ δ : m.tensorUnit ≅ (DerivedCategory.singleFunctor _ 0).obj (adicConstant k₀ l X),\n    ∃ ε : S.monoidal.tensorUnit ≅ (DerivedCategory.singleFunctor _ 0).obj\n      (ProEtale.AdicSheaf.unit l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber),\n    ∃ c : RingedForgetTensorTransposition.TensorCoherence\n        m S.monoidal γ β (nativeForget k₀ l X)\n        (eqToIso (congrArg (fun T' ↦ T' ⋙ nativeForget k₀ l X) hT) ≪≫ τ),\n      c.unit =\n        ((nativeForget k₀ l X).mapIso δ ≪≫\n          (Functor.mapDerivedCategorySingleFunctor\n            (Endofunctor.IsoAlgebra.forget (WeilSheaf.frobeniusPullback k₀ l X)) 0).app\n              (adicConstant k₀ l X) ≪≫ ε.symm)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T222708-L-683289",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A9",
+  "result": "pass",
+  "landing": "20261026T235830-L-1458723",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

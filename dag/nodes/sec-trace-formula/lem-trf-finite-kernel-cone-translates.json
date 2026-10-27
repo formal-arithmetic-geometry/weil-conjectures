@@ -1,0 +1,176 @@
+{
+ "id": "lem-trf-finite-kernel-cone-translates",
+ "kind": "statement",
+ "title": "Finite translates of a rational cone under a finite-kernel quotient",
+ "statement": "Let $G$ be an abelian group, let $L$ be a free abelian group of finite rank (an abelian group with a finite $\\mathbf Z$-basis [def-weil-pbc-free-module], for the canonical action by integer multiples), and let $\\pi:G\\to L$ be a surjective group homomorphism with finite kernel $K=\\{g\\in G:\\pi(g)=0\\}$. Choose a finite list $p_1,\\ldots,p_r\\in G$, allowing $r=0$; it is not required to generate $G$ as a group. Set\n$$P=\\left\\{\\sum_{i=1}^r n_i p_i:n_i\\in\\mathbf N\\right\\},\\qquad C=\\left\\{\\sum_{i=1}^r q_i\\pi(p_i):q_i\\in\\mathbf Q_{\\ge0}\\right\\}\\subseteq L\\otimes_{\\mathbf Z}\\mathbf Q,$$\nand identify $L$ with its image under $\\ell\\mapsto\\ell\\otimes1$. Define $Q=\\{g\\in G:\\pi(g)\\in C\\}$. There exists a finite subset $F\\subseteq Q$ such that\n$$Q=\\bigcup_{f\\in F}(f+P),\\qquad f+P=\\{f+p:p\\in P\\}.$$\nNo sharpness of $P$, pointedness of $C$, or torsion-freeness of $G$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, 3.2.9 proof, printed p. 104 (finite toric saturation input); agent expansion: Gordan finite translates in the lattice followed by the finite-kernel lifting argument of the returned parent proof, Step 1."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Put $v_i=\\pi(p_i)$ and $P_L=\\{\\sum_i n_i v_i:n_i\\in\\mathbf N\\}$. Since $L$ has a finite $\\mathbf Z$-basis and the list $v_i$ is finite, [lem-trf-gordan-rational-cone-finite] applies, including $r=0$. It supplies a finite $E\\subseteq C\\cap L$ with $C\\cap L=\\bigcup_{e\\in E}(e+P_L)$. The cone and lattice embedding are precisely those of the item. Moreover $P_L=\\pi(P)$: applying $\\pi$ to $\\sum_i n_i p_i$ gives $\\sum_i n_i v_i$, and every expression on the latter side has the former lift.",
+   "uses": [
+    "lem-trf-gordan-rational-cone-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 proof, printed p.104, finite toric saturation assertion; agent expansion by the existing lattice finite-translate lemma and explicit finite-fibre lifting."
+   }
+  },
+  {
+   "text": "Define $F=\\pi^{-1}(E)\\subseteq G$. For each $e\\in E$, surjectivity gives $a_e\\in G$ with $\\pi(a_e)=e$. Its fibre is exactly $a_e+K$: for $g$ in that fibre, $\\pi(g-a_e)=e-e=0$, whereas for $k\\in K$, $\\pi(a_e+k)=e$. Thus $F=\\bigcup_{e\\in E}(a_e+K)$ is a finite union of images of the finite set $K$, hence finite. Since $E\\subseteq C$, its full inverse image $F$ is contained in $Q$. No choice of an additive splitting of $\\pi$ is involved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 proof, printed p.104, finite toric saturation assertion; agent expansion by the existing lattice finite-translate lemma and explicit finite-fibre lifting."
+   }
+  },
+  {
+   "text": "For $g\\in Q$, Step 1 writes $\\pi(g)=e+\\sum_i n_i v_i$ with $e\\in E$ and $n_i\\in\\mathbf N$. Put $p=\\sum_i n_i p_i\\in P$ and $f=g-p$. Then $\\pi(f)=e$, so $f\\in F$ and $g=f+p$. Hence $Q\\subseteq\\bigcup_{f\\in F}(f+P)$. Conversely, if $f\\in F$ and $p\\in P$, then $\\pi(f)\\in E\\subseteq C$ and $\\pi(p)\\in P_L\\subseteq C$. Adding their nonnegative rational coefficient expressions shows $\\pi(f+p)\\in C$, so $f+p\\in Q$. This proves the asserted equality. The proof uses neither generation of $G$ by the $p_i$, nor pointedness, nor absence of torsion in $G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VIII, Lemma 3.2.9 proof, printed p.104, finite toric saturation assertion; agent expansion by the existing lattice finite-translate lemma and explicit finite-fibre lifting."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-gordan-rational-cone-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII, Lemma 3.2.9 proof, printed p.104, finite toric saturation assertion; agent expansion by the existing lattice finite-translate lemma and explicit finite-fibre lifting."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Gordan|gordan|cone.*[Ff]inite|[Ff]inite.*translate|finite.*ker",
+   "results": "[grep] OK 22 hit(s): Mathlib/GroupTheory/Descent.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/Sylow.lean, Mathlib/GroupTheory/SpecificGroups/Cyclic.lean, Mathlib/GroupTheory/SpecificGroups/Cyclic.lean, Mathlib/GroupTheory/QuotientGroup/Finite.lean, Mathlib/GroupTheory/QuotientGroup/Finite.lean. Hits give cone preimages, semilinearity, group finiteness, or finite generation of submodules; these do not give finite translates by this prescribed monoid P. The equalizer form of Gordan in GroupTheory/Finiteness.lean:628 requires an additional argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a finite translate cover of lattice points in a rational cone along a surjective group homomorphism with finite kernel",
+   "results": "[leansearch] OK 8 hit(s): QuotientGroup.lift_mk', AddMonoidHom.liftOfSurjective, QuotientAddGroup.lift_surjective_of_surjective, QuotientAddGroup.lift_mk, Con.lift_surjective_of_surjective, Con.kerLift_mk, QuotientAddGroup.kerLift_mk, AlgHom.liftOfSurjective. Hits give cone preimages, semilinearity, group finiteness, or finite generation of submodules; these do not give finite translates by this prescribed monoid P. The equalizer form of Gordan in GroupTheory/Finiteness.lean:628 requires an additional argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddSubmonoid, AddMonoidHom.ker, Set.Finite",
+   "results": "[loogle] OK 0 hit(s): none. Hits give cone preimages, semilinearity, group finiteness, or finite generation of submodules; these do not give finite translates by this prescribed monoid P. The equalizer form of Gordan in GroupTheory/Finiteness.lean:628 requires an additional argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjective homomorphism of abelian groups with finite kernel to a lattice, the inverse image of a rational cone is a finite union of translates of the monoid generated by lifts of cone generators",
+   "results": "[leanfinder] OK 8 hit(s): ZLattice.comap_span_top, PointedCone.mem_comap, IsSemilinearSet.preimage, ProperCone.mem_comap, ConvexCone.mem_comap, PointedCone.comap, ZLattice.comap_toAddSubgroup, PointedCone.coe_comap. Hits give cone preimages, semilinearity, group finiteness, or finite generation of submodules; these do not give finite translates by this prescribed monoid P. The equalizer form of Gordan in GroupTheory/Finiteness.lean:628 requires an additional argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gordan lemma with torsion: preimage of the cone generated by the image of a finitely generated additive submonoid under a finite-kernel lattice quotient is finite as a module over that submonoid",
+   "results": "[leanfinder] OK 8 hit(s): IsLocalizedModule.finsetIntegerMultiple, Submodule.fg_of_fg_map_of_fg_inf_ker, NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion, Submodule.finiteQuotientOfFreeOfRankEq, IsLocalizedModule.exist_integer_multiples_of_finite, Submodule.fg_of_fg_map, FGModuleRepr.S, Submodule.finiteQuotient_iff. Hits give cone preimages, semilinearity, group finiteness, or finite generation of submodules; these do not give finite translates by this prescribed monoid P. The equalizer form of Gordan in GroupTheory/Finiteness.lean:628 requires an additional argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*translate|translate.*finite|cone.*lattice|lattice.*cone|rational.*cone",
+   "results": "[grep] OK 6 hit(s): Mathlib/Geometry/Convex/Cone/Pointed.lean, Mathlib/Geometry/Convex/Cone/Pointed.lean, Mathlib/Geometry/Convex/Cone/Basic.lean, Mathlib/Geometry/Convex/Cone/Basic.lean, Mathlib/Geometry/Convex/Cone/Basic.lean, Mathlib/Geometry/Convex/Cone/Basic.lean. Hits give cone preimages, semilinearity, group finiteness, or finite generation of submodules; these do not give finite translates by this prescribed monoid P. The equalizer form of Gordan in GroupTheory/Finiteness.lean:628 requires an additional argument.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite family of elements of an abelian group mapping to a finite rank free abelian group with finite kernel, the preimage of their nonnegative rational cone is a finite union of translates of the additive monoid they generate",
+   "results": "{\"t\": \"2026-10-23T10:46:31Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite family of elements of an abelian group mapping to a finite rank free abelian group with finite kernel, the preimage of their nonnegative rational cone is a finite union of translates of the additive monoid they generate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.mixedEmbedding.fundamentalCone.mixedEmbedding_preimageOfMemIntegerSet\", \"NumberField.mixedEmbedding.fundamentalCone.preimageOfMemIntegerSet_mixedEmbedding\", \"NumberField.mixedEmbedding.fundamentalCone.integerSet\", \"NumberField.mixedEmbedding.fundamentalCone.normAtAllPlaces_normLeOne\", \"PointedCone.comap\", \"NumberField.mixedEmbedding.fundamentalCone.normLeOne_eq_preimage\", \"NumberField.mixedEmbedding.fundamentalCone\", \"PointedCone.mem_comap\"], \"digest\": \"5c8c4a249c6ddb4a\"}; The two semantic phrasings return number-field fundamental-cone results, cone preimages, affine-monoid finite generation and semilinearity; none states finite translates by the prescribed generators under a finite-kernel quotient.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective additive group homomorphism with finite kernel lifts a finite translate decomposition of a rational polyhedral cone to a finite translate decomposition by the prescribed generators",
+   "results": "{\"t\": \"2026-10-23T10:47:06Z\", \"tool\": \"leansearch\", \"query\": \"A surjective additive group homomorphism with finite kernel lifts a finite translate decomposition of a rational polyhedral cone to a finite translate decomposition by the prescribed generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidHom.liftOfSurjective\", \"QuotientAddGroup.lift_surjective_of_surjective\", \"AddGroup.fg_of_surjective\", \"AddMonoidHom.fiberEquivKer\", \"QuotientAddGroup.lift_mk\", \"AddMonoidHom.fiberEquivKerOfSurjective\", \"AddMonoidHom.liftOfRightInverse\", \"AddGroup.fintypeOfKerOfCodom\"], \"digest\": \"acba58302dbbcf0b\"}; The hits include AddMonoidHom.fiberEquivKer and fiberEquivKerOfSurjective (only the elementary fibre identification), liftOfSurjective and finite-group lemmas. They do not supply the cone translate conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AddMonoidHom.ker, Set.Finite",
+   "results": "{\"t\": \"2026-10-23T10:47:06Z\", \"tool\": \"loogle\", \"query\": \"AddMonoidHom.ker, Set.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Gordan|gordan|finite.*translate|translate.*finite",
+   "results": "{\"t\": \"2026-10-23T10:47:06Z\", \"tool\": \"grep\", \"query\": \"Gordan|gordan|finite.*translate|translate.*finite\", \"sub\": \"GroupTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/Finiteness.lean\", \"Mathlib/GroupTheory/GroupAction/Blocks.lean\", \"Mathlib/GroupTheory/GroupAction/Blocks.lean\", \"Mathlib/GroupTheory/GroupAction/Blocks.lean\"], \"digest\": \"10e5b28983290c0c\"}; Read Mathlib/GroupTheory/Finiteness.lean:618-628. AddSubmonoid.fg_eqLocusM is finite generation of an equalizer in a well-quasi-ordered monoid; deriving this prescribed-monoid translate cover is not a one-line specialization. The other hits concern intersections of group-action blocks.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gordan lemma finite module over an affine monoid: finite kernel preimage of the cone generated by a finite family is covered by finitely many translates of its natural number combinations",
+   "results": "{\"t\": \"2026-10-23T10:47:07Z\", \"tool\": \"leanfinder\", \"query\": \"Gordan lemma finite module over an affine monoid: finite kernel preimage of the cone generated by a finite family is covered by finitely many translates of its natural number combinations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAffineMonoid.toFG\", \"IsAffineAddMonoid.toFG\", \"IsProperLinearSet\", \"IsLocalizedModule.exist_integer_multiples_of_finite\", \"finite_of_span_finite_eq_top_finsupp\", \"IsLocalizedModule.finsetIntegerMultiple\", \"isProperLinearSet_iff\", \"IsSemilinearSet.of_finite\"], \"digest\": \"6172d4d6e5e71e29\"}; The two semantic phrasings return number-field fundamental-cone results, cone preimages, affine-monoid finite generation and semilinearity; none states finite translates by the prescribed generators under a finite-kernel quotient.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-fine-monoid-finite-saturation",
+  "date": "2026-10-22",
+  "group": "Q156"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), historical nearby-duality alteration reduction: finite toric saturation in ILO VIII 3.2.9 proof, printed p.104; Gordan finite-translate set and lifting all finite torsion fibres.",
+   "via": [
+    "lem-trf-fine-monoid-finite-saturation",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-kernel-cone-translates",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused the existing Gordan finite-translate node, then proved the finite-fibre and translate-lifting arguments explicitly. No new nodes: fibre translation and the two inclusions are elementary. Read the source, current blueprint, cited statements and Lean; searched Mathlib with two phrasings. Checked empty lists, zero rank, torsion, nonspanning generators and cones with lines.",
+  "blueprint": "Historical auxiliary finite-toric-saturation input under lem-trf-local-term-locality proof (1)--(2), through the ancestry recorded in blueprint.from: ILO VIII 3.2.9 p.104. Step 1 reuses the lattice translate decomposition; Steps 2--3 lift it through finite torsion fibres. The latest blueprint local-term proof follows contracting correspondences and does not itself contain this auxiliary lattice assertion; no alteration of the current unit route is claimed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-db7386767",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-db7386767 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and there are no new nodes. Step 1 cites the same-unit, already-split lem-trf-gordan-rational-cone-finite. Its statement (finite Z-basis, r=0 allowed, same cone C in L⊗Q and same natural-combination monoid) gives a finite E with C∩L=⋃(e+P_L), and P_L=π(P) follows in one line. Step 2 is elementary: F=π⁻¹(E) is a finite union of the fibres a_e+K, using surjectivity and the finite kernel, and F⊆Q. Step 3 is elementary: both inclusions are correct and use only additivity of C. proof_deps equals the union of the steps' uses, and there is no cycle. I tested r=0 (F=K), Z⊕Z/2 with generator (2,0) (full fibres are needed), a cone that is a whole line, and a generator that does not span L; the statement holds in each. The parent fine-monoid-finite-saturation uses exactly this form, with π:G→G/T and Q=P^sat. Source: ILO VIII 3.2.9, printed p.104, states only finiteness of S[F^sat]→S[F], so proof_origin=agent is honest. No SGA is cited. My DAG grep found no duplicate; lem-sfb-finite-kernel-group-fibres is about group schemes and is unrelated. No repair note applies and no tool_uses are needed."
+ }
+}

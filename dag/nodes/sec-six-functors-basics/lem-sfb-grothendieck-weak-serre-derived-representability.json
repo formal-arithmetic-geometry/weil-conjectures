@@ -1,0 +1,292 @@
+{
+ "id": "lem-sfb-grothendieck-weak-serre-derived-representability",
+ "kind": "statement",
+ "title": "Cohomological representability for a Grothendieck weak-Serre derived subcategory",
+ "statement": "Fix one universe $U$ for the small sets, coproducts and Hom groups below [def-weil-size-convention]. Let $\\mathcal B$ be a Grothendieck abelian category relative to $U$ [def-sp-grothendieck-abelian] and let $\\mathcal A\\subseteq\\mathcal B$ be a full replete subcategory containing zero, closed under kernels and cokernels of morphisms between its objects, and under extensions of its objects computed in $\\mathcal B$. Suppose $\\mathcal A$ is itself Grothendieck abelian with its induced exact structure and is closed under $U$-small coproducts in $\\mathcal B$. In the ordinary unbounded derived category [def-weil-abstract-derived-category], put $\\mathcal Q=D_{\\mathcal A}(\\mathcal B)=\\{K\\in D(\\mathcal B):H^q(K)\\in\\mathcal A\\text{ for all }q\\in\\mathbf Z\\}$. Then $\\mathcal Q$ is a locally $U$-small triangulated full subcategory [def-weil-triangulated-category], closed under all $U$-small ambient coproducts, and those coproducts are represented by the termwise coproducts of complexes in $\\mathcal B$. For every additive functor $H:\\mathcal Q^{\\mathrm{op}}\\to\\operatorname{Ab}_U$ which carries distinguished triangles to long exact sequences and carries $U$-small coproducts to products, there are $R\\in\\mathcal Q$ and an isomorphism of functors $\\operatorname{Hom}_{\\mathcal Q}(-,R)\\cong H$.",
+ "source": {
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Hall--Neeman--Rydh, arXiv:1405.1888v2, Appendix A, Theorem A.3, with the localizing-subcategory observation immediately after it, and Brown representability for well-generated triangulated categories (Neeman, Triangulated Categories, Theorem 8.3.3; see also the Brown application in HNR Lemma A.1). Archives WANTED; read HNR online. No Stacks tag supplies the well-generation assertion."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sp-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply functorial K-injective existence to $\\mathcal B$, then derived local smallness: $D(\\mathcal B)$ has $U$-small Hom sets, as does its full subcategory $\\mathcal Q$. The weak-Serre triangulated-subcategory lemma applies because all its zero, repleteness, kernel, cokernel and extension hypotheses are explicitly assumed. Thus $\\mathcal Q$ is triangulated with the inherited structure.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence",
+    "lem-pc-derived-category-locally-small",
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory; injectives.tex, Tag 079P, theorem-K-injective-embedding-grothendieck; derived local-smallness Hom computation preceding Tag 07D9"
+   }
+  },
+  {
+   "text": "The termwise-coproduct lemma gives ambient $U$-small derived coproducts. Coproducts in $\\mathcal B$ are exact: express each as the filtered colimit over finite subsets of the index set of finite direct sums, and use exact filtered colimits in the Grothendieck definition. With the K-injective resolutions from step 1, cohomology therefore preserves these coproducts. Hence $H^q(\\bigoplus_i K_i)\\cong\\bigoplus_iH^q(K_i)$ lies in $\\mathcal A$ when all $K_i\\in\\mathcal Q$. Fullness restricts the ambient coproduct universal property to $\\mathcal Q$, including the empty family.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-sp-grothendieck-abelian",
+    "src-weil-derived-homology-preserves-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, lemma-derived-products, clauses (1)-(2); cohomology compatibility in lean/WeilConjectures/CategoryTheory/DerivedCategory/HomologyCoproducts.lean"
+   }
+  },
+  {
+   "text": "The small-generators lemma applies to the given pair $(\\mathcal A,\\mathcal B)$: both categories are Grothendieck in $U$, the induced inclusion is exact by the assumed kernel/cokernel conditions, and it preserves $U$-small coproducts by the closure assumption and fullness. Obtain a $U$-small family $P$ with $\\mathcal Q=\\operatorname{Loc}_{D(\\mathcal B)}(P)$.",
+   "uses": [
+    "lem-sfb-weak-serre-derived-small-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Appendix A, Theorem A.3, its proof, and Lemma A.1"
+   }
+  },
+  {
+   "text": "Apply the set-generated-derived solution-set theorem to $D(\\mathcal B)$, $P$ and $\\mathcal Q$. Its minimality hypothesis is exactly step 3; the ambient Hom universe and the coproducts are those of steps 1-2. For the given cohomological, coproduct-to-product functor $H$, obtain a $U$-small family $(B_j,b_j)$ such that every $z\\in H(Z)$ equals $H(f)(b_j)$ for some $f:Z\\to B_j$.",
+   "uses": [
+    "lem-sfb-set-generated-derived-solution-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "Brown step: existing set-generated-derived solution-set theorem, specialized to the Hall--Neeman--Rydh generators"
+   }
+  },
+  {
+   "text": "Countable coproducts from step 2 split idempotents in $\\mathcal Q$. Apply cohomological solution-set representability using this, local smallness and the family of step 4. It gives $R\\in\\mathcal Q$ and natural bijections $\\alpha_Z:\\operatorname{Hom}_{\\mathcal Q}(Z,R)\\to H(Z)$ of underlying sets.",
+   "uses": [
+    "lem-countable-coproducts-idempotent-complete",
+    "lem-sfb-cohomological-solution-set-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QW, lemma-projectors-have-images-triangulated; solution-set-to-representation step recorded in lem-sfb-cohomological-solution-set-representability"
+   }
+  },
+  {
+   "text": "Put $r=\\alpha_R(\\mathrm{id}_R)$. Naturality for $f:Z\\to R$ gives $\\alpha_Z(f)=H(f)(r)$. Since $H$ is additive, $H(f+g)=H(f)+H(g)$ as homomorphisms $H(R)\\to H(Z)$, so $\\alpha_Z(f+g)=\\alpha_Z(f)+\\alpha_Z(g)$ and $\\alpha_Z(0)=0$. Thus each bijection is an abelian-group isomorphism, and the already established naturality gives $\\operatorname{Hom}_{\\mathcal Q}(-,R)\\cong H$ as the asserted group-valued functors.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://arxiv.org/html/1405.1888",
+    "place": "Elementary additive upgrade of the Brown representing bijections; explicit naturality calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-pc-derived-category-locally-small",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-sp-grothendieck-abelian",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-weak-serre-derived-small-generators",
+  "lem-sfb-set-generated-derived-solution-set",
+  "lem-countable-coproducts-idempotent-complete",
+  "lem-sfb-cohomological-solution-set-representability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://arxiv.org/html/1405.1888",
+  "place": "Assembly following Appendix A Theorem A.3 and Lemma A.1, with existing DAG solution-set Brown theorems and Stacks Tags 06UQ, 07D9, 079P and 05QW. HNR archive unavailable locally; online text read."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Brown cohomological representability for the derived subcategory of a Grothendieck weak Serre subcategory closed under coproducts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Grothendieck weak Serre subcategory closed under coproducts has well generated derived category with representable cohomological functors",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.hasExt_of_enoughProjectives\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives\", \"type\": \"[LocallySmall.{w} C] [EnoughProjectives C] : HasExt.{w} C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small and has enough projective objects, then the derived category of $\\\\mathcal{C}$ has well-defined hom-sets between single-term cochain complexes concentrated \"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.ab4OfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": AB4OfSize.{w} C\", \"doc\": \"Every Grothendieck abelian category satisfies the AB4 axiom, which requires that the category has all coproducts and that coproducts preserve exact sequences (i.e., coproducts are exact functors).\"}\n  {\"name\": \"CategoryTheory.hasExt_of_enoughInjectives\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives\", \"type\": \"[LocallySmall.{w} C] [EnoughInjectives C] : HasExt.{w} C\", \"doc\": \"If a category $\\\\mathcal{C}$ is locally small (has small hom-sets) and has enough injectives, then the derived category of $\\\\mathcal{C}$ has well-defined small localized hom-sets between cochain comple\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsSerreClassTop\", \"module\": \"Mathlib.CategoryTheory.Abelian.SerreClass.Basic\", \"type\": \": (⊤ : ObjectProperty C).IsSerreClass\", \"doc\": \"The class of all objects in an abelian category is a Serre class. This means that it is closed under subobjects, quotients, extensions, and finite direct sums.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C}\\n  [self : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C],\\n  CategoryTheory.Limits.HasFilteredColimitsOfSize.{w, w, v, u} C\", \"doc\": \"A Grothendieck abelian category $ \\\\mathcal{C} $ admits filtered colimits of size $ w $, meaning every filtered diagram in $ \\\\mathcal{C} $ indexed by a small category has a colimit in $ \\\\mathcal{C} $.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasLimits\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": HasLimitsOfSize.{w, w} C\", \"doc\": \"Every Grothendieck abelian category has all small limits, meaning that for any small diagram indexed by a small category, the limit of the diagram exists within the category.\"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasFiniteCoproducts\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"[HasFiniteCoproducts D] : HasFiniteCoproducts (Sheaf J D)\", \"doc\": \"If a category $\\\\mathcal{D}$ has finite coproducts, then the category of sheaves on a site (with respect to a Grothendieck topology $J$) with values in $\\\\mathcal{D}$ also has finite coproducts.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasColimits\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic\", \"type\": \": HasColimitsOfSize.{w, w} C\", \"doc\": \"Every Grothendieck abelian category has all small colimits.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsGrothendieckAbelian\", \"representable\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "grep",
+   "query": "wellGenerated|well_generated|weakSerre.*(represent|Brown)|[Bb]rown",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Covering/Basic.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2022 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Covering/Basic.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning\"}\n  {\"file\": \"Mathlib/Topology/IsLocalHomeomorph.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2021 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/IsLocalHomeomorph.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning\"}\n  {\"file\": \"Mathlib/NumberTheory/ArithmeticFunction/Liouville.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2026 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/NumberTheory/ArithmeticFunction/Liouville.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning\"}\n  {\"file\": \"Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2026 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/NumberTheory/ArithmeticFunction/LFunction.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/CompactOpen.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2022 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/CompactOpen.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning, Nailin Guan\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2020 Thomas Browning, Patrick Lutz. All rights reserved.\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning, Patrick Lutz\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2020 Thomas Browning, Patrick Lutz. All rights reserved.\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning, Patrick Lutz\"}\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/Int.lean\", \"line\": \"4\", \"text\": \"Authors: Koundinya Vajjha, Thomas Browning\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2020 Thomas Browning, Patrick Lutz. All rights reserved.\"}\n  {\"file\": \"Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning, Patrick Lutz\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Extension.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2026 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Group/Extension.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning\"}\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/Defs.lean\", \"line\": \"4\", \"text\": \"Authors: Koundinya Vajjha, Thomas Browning\"}\n  {\"file\": \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2020 Thomas Browning, Patrick Lutz. All rights reserved.\"}\n  {\"file\": \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning, Patrick Lutz\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ContinuousMonoidHom.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2022 Thomas Browning. All rights reserved.\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ContinuousMonoidHom.lean\", \"line\": \"4\", \"text\": \"Authors: Thomas Browning, Nailin Guan\"}\n  {\"file\": \"Mathlib/Topology/Algebra/PontryaginDual.lean\", \"line\": \"2\", \"text\": \"Copyright (c) 2022 Thomas Browning. All rights reserved.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded derived category with cohomology in a Grothendieck weak Serre subcategory is well generated Hall Neeman Rydh",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.instIsGEObjSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : C) (n : ℤ), ((DerivedCategory.singleFunctor C n).obj X).IsGE n\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the image of $X$ under the single-term complex functor concentrated in degree $n$ (mapping to the derived category) satisfies t\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned declarations concern ordinary constant-target functor categories, sheaf definitions, AB4/AB5, or derived-category constructions; none states this result for the stated categories."
+  },
+  {
+   "tool": "grep",
+   "query": "well.?generated|[Bb]rown representability|weak.?Serre",
+   "results": "[grep] OK 0 hit(s); subdirectory CategoryTheory",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Grothendieck weak Serre subcategory closed under coproducts has a derived subcategory generated as a localizing subcategory by a small set",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW\", \"doc\": \"The derived category is obtained by localizing the homotopy category of integer-indexed chain complexes at the class of quasi-isomorphisms, which corresponds to the morphism property $\\\\mathrm{trW}$ de\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.locallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/Basic\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C}\\n  [self : CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.LocallySmall.{w, v, u} C\", \"doc\": \"Every Grothendieck abelian category is locally small, meaning its hom-sets are small types and its class of objects is small.\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: derived-category existence, Ext and local smallness do not supply a small family generating the weak-Serre derived subcategory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The full derived subcategory of complexes with homology in a Grothendieck weak Serre subcategory has a set of localizing generators",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"HasDerivedCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] → [CategoryTheory.Abelian C] → Type (max (max ((max u v) + 1) v) (w + 1))\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))\", \"doc\": \"The functor $ Q_h $ from the homotopy category of integer-indexed chain complexes to the derived category is a localization with respect to quasi-isomorphisms. This means $ Q_h $ universally inverts q\"}\n  {\"name\": \"HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso\", \"module\": \"Mathlib.Algebra.Homology.Localization\", \"type\": \": HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c)\", \"doc\": \"The canonical functor from the homotopy category of chain complexes to the derived category is a localization at quasi-isomorphisms. This means that quasi-isomorphisms become isomorphisms in the deriv\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": CochainComplex C ℤ ⥤ DerivedCategory C\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n  {\"name\": \"DerivedCategory.instCategory\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Category.{w} (DerivedCategory C)\", \"doc\": \"The derived category of an abelian category $ \\\\mathcal{C} $, formed by localizing the category of chain complexes at quasi-isomorphisms, is equipped with a canonical category structure. This means tha\"}\n  {\"name\": \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \"{D : Type*} [Category* D] : ((Functor.whiskeringLeft _ _ D).obj (Qh (C := C))).Full\", \"doc\": \"The canonical functor $ Q^h $ from the homotopy category of integer-indexed chain complexes to the derived category is full. This means that for any two chain complexes $ A $ and $ B $, every morphism\"}\n  {\"name\": \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": Qh.IsLocalization (HomotopyCategory.subcategoryAcyclic C).trW\", \"doc\": \"The derived category is obtained by localizing the homotopy category of integer-indexed chain complexes at the class of quasi-isomorphisms, which corresponds to the morphism property $\\\\mathrm{trW}$ de\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits construct the ambient derived category and its localization functors; none gives generators for the cohomology-constrained subcategory."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"generator\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "well.?generated|weak.?Serre|localizing.*generat",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Over.lean\", \"line\": \"544\", \"text\": \"/-- The Grothendieck topology on `Over X`, obtained from localizing the topology generated\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the only hit, Sites/Over.lean:544, concerns localizing a Grothendieck topology, not generation of a derived subcategory. Searched CategoryTheory."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomological functors taking coproducts to products are representable on the derived category with cohomology in a Grothendieck subcategory",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [X.IsGE n] [X.IsLE n],\\n  ∃ Y, Nonempty (X ≅ (DerivedCategory.singleFunctor C n).obj Y)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ is cohomologically supported in degree $ n $ (i.e., satisfies both $ \\\\mathcal{G}_n $ and \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"DerivedCategory.Q\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Functor (CochainComplex C ℤ) (DerivedCategory C)\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category, obtained by localizing at quasi-isomorphisms (morphisms inducing isomorphisms on all homology\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: bounded t-structure representatives, localization and Ext do not give weak-Serre Brown representability or localizing generators."
+  },
+  {
+   "tool": "grep",
+   "query": "well.?generated|Brown|weak.?Serre",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits in Algebra/Homology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-levelwise-quasicoherent-brown",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Ordinary Brown input for arbitrary schemes and noncartesian levelwise quasi-coherent total systems; independent of properness and adjoint locality. Input: Cohomological representability for a Grothendieck weak-Serre derived subcategory.",
+   "via": [
+    "lem-sfb-levelwise-quasicoherent-brown",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-grothendieck-weak-serre-derived-representability",
+  "worker": "stage1",
+  "group": "Q13",
+  "summary": "Kept the statement and statement dependencies. Proved local smallness, triangulatedness and ambient coproduct closure from existing nodes; isolated the Hall--Neeman--Rydh small localizing-generators input in one statement-only node; reused solution-set Brown and explicitly upgraded set representation to additive representation. Checked the universe and weak-Serre hypotheses without imposing a Serre condition or identifying D(A) with D_A(B).",
+  "blueprint": "The inherited ancestry has from.node=null (confirmed by blueprint_refs.py ancestor). The recorded place serves det-thm-sf-ctf-stability-direct-images proof (3), through levelwise-quasicoherent-brown: ordinary unbounded Brown for the levelwise quasi-coherent weak-Serre subcategory. This split supplies that generic Brown input without changing the chapter or unit route. Whole-blueprint searches found no node stating this item or the new generator lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Functorial K-injective replacement. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "lem-pc-derived-category-locally-small",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Local smallness of a derived category with K-injective resolutions. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Cohomology in a weak Serre class gives a triangulated subcategory. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Termwise coproducts in a Grothendieck derived category. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "def-sp-grothendieck-abelian",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Grothendieck abelian categories. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "src-weil-derived-homology-preserves-coproducts",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Derived cohomology preserves exact coproducts. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "lem-sfb-set-generated-derived-solution-set",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Small solution sets on a set-generated localizing derived subcategory. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "lem-countable-coproducts-idempotent-complete",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: Countable coproducts imply idempotent completeness. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   },
+   {
+    "node": "lem-sfb-cohomological-solution-set-representability",
+    "why": "Generic categorical tool for the weak-Serre Brown assembly: A cohomological functor with a small solution set is representable. No geometric route is replaced; the unit supplies no more specific version for an arbitrary Grothendieck pair."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-pc-derived-category-locally-small",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-sp-grothendieck-abelian",
+  "src-weil-derived-homology-preserves-coproducts",
+  "lem-sfb-set-generated-derived-solution-set",
+  "lem-countable-coproducts-idempotent-complete",
+  "lem-sfb-cohomological-solution-set-representability"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-e7165720e",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-e7165720e (reviewer sub-agent of L); spot-checked: I read the item, its 6 steps and the new node lem-sfb-weak-serre-derived-small-generators in full. Source: HNR arXiv:1405.1888 Appendix A, read online. Theorem A.3 says that if M ⊆ A is a weak Serre subcategory closed under coproducts and M is Grothendieck, then D_M(A) is well generated; Lemma A.1 and Remark A.2 cover localizing subcategories of D(A) with a set of generators. Its hypotheses match the item's and the new node's one for one, with no Serre condition added and no D(A)=D_A(B) identification. The new node's conclusion, Q = Loc_{D(B)}(P) for a small set P, follows from A.3, Lemma A.1 and the standard Brown/orthogonality argument. It asserts set generation only, not representability, so it does not restate the item, and the DAG search found no duplicate. Steps 1-2: K-injective existence, local smallness, the weak-Serre triangulated subcategory, termwise coproducts, and AB4 written out so that cohomology commutes with coproducts and A's coproduct closure applies; the empty family is included. Step 4: the hypotheses of set-generated-derived-solution-set are met exactly. Step 5: idempotent completeness from countable coproducts and solution-set representability. Step 6: the additive Yoneda upgrade is correct. Test cases A=B, A=0 and the empty coproduct work. I accept the 9 generic categorical tool_uses. No SGA source is used, and no fixes were needed."
+ }
+}

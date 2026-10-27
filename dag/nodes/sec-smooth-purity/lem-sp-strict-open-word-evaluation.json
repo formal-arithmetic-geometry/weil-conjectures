@@ -1,0 +1,122 @@
+{
+ "id": "lem-sp-strict-open-word-evaluation",
+ "kind": "statement",
+ "title": "Open normalization and evaluation of the complete compactification words",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and Base and Operations coordinates $b,o$ on their actual strict quotient towers. Assume StrictSystemComparisons for these coordinates [def-sp-strict-compactification-comparison-interfaces]. Then there exist OpenExchange coordinates $x$ and ComparisonLevels $a$ with StrictWordComparisons: the canonical compactification projection is natural in both derived inputs, its evaluation equals the finite proper-counit/open-tensor/pullback-compositor word, and evaluation of the compactification exchange equals the finite proper-unit/square/counit/open word, through the specified tensor, pullback and compact-support evaluation comparisons. The assertions hold on the whole unbounded categories, for any separated finite-type quasi-compact map with chosen compactification and any base-change square. The inverse open maps and finite tensor pullback comparison have the exact normalizations in ComparisonLevels. No finite fixed-scalar realization assertion or bounded-below comparison is included.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps"
+ },
+ "stmt_deps": [
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "apply openTensorNormalization to the sequence-site open square. The inverse\nopen comparison is the transpose of pullback of the open unit followed by the\npullback compositor, so it defines OpenExchange with its required mate equation.\nAt every finite coefficient level use the same construction. The tensor pullback\nmap is the transported generic levelTensorPullback; its HEq normalization follows\nfrom Geometry.coefficients, target, and the constant-section inverse-image model.\nThe resulting open tensor and exchange inverses satisfy the displayed finite\ntranspose equations. These determine the maps by the adjunction bijections.\nNaturality of the proper projection transpose, of open tensor, and of the\npullback compositor proves projection naturality. Evaluate the proper transpose\nusing the unit and counit evaluation equations of the geometric calculus. Evaluate\nthe open tensor map using its inverse-transpose characterization and the same open\nadjunction equations; compose with Operations.comp_evaluation. This is exactly the\nfinite proper-counit/open-tensor/compositor word in comparisonLevelProjection.\nFor exchange, apply evaluation_mate to the proper pullback square, using the same\ncomp_evaluation for its square. Follow this by the evaluated open exchange. The\nresult is the identical finite unit--square--counit--open word, hence the stated\nexchange equation. All equations compare actual maps; joint conservativity is\nnever used to infer equality of derived morphisms.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "def-exchange-projection",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pur-co-smooth-exchange-transport",
+    "def-cbc-exchange-map",
+    "thm-cbc-finite-level-proetale",
+    "lem-pc-separated-quasi-separated",
+    "lemma-nagata-open-immersion-qc-over-separated-target",
+    "def-sp-strict-compactification-comparison-interfaces"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-semilinear-derived-sections",
+  "def-exchange-projection",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pur-co-smooth-exchange-transport",
+  "def-cbc-exchange-map",
+  "thm-cbc-finite-level-proetale",
+  "lem-pc-separated-quasi-separated",
+  "lemma-nagata-open-immersion-qc-over-separated-target",
+  "def-sp-strict-compactification-comparison-interfaces"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps; expansion of the parent proof steps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "evaluation preserves open tensor adjunction transpose compactification base change projection composite",
+   "results": "8 hits: LightCondensed.ihomPoints_symm_comp, CategoryTheory.coev_expComparison, CategoryTheory.MonoidalClosed.id_tensor_pre_app_comp_ev, CategoryTheory.exp.ev_coev, CategoryTheory.ihom.ev_coev, CategoryTheory.ExponentiableMorphism.coev_ev, CategoryTheory.prod_map_pre_app_comp_ev, CategoryTheory.ExponentiableMorphism.ev_coev",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical/algebraic tools only; the project-specific normalized comparison is not stated in Mathlib."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "1 hits: CategoryTheory.mateEquiv_hcomp",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical/algebraic tools only; the project-specific normalized comparison is not stated in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "strictOpenWord|StrictWordComparisons|evaluation_mate",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "Generic categorical/algebraic tools only; the project-specific normalized comparison is not stated in Mathlib."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityStrictCompactificationComparisonRealization",
+  "date": "2026-10-25",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-shriek-levels",
+   "place": "(2), transposes of the units and counits, tensor associativity, and evaluation to finite maps",
+   "via": [
+    "lem-sp-strict-compactification-comparison-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityStrictOpenWordEvaluation",
+  "file": "lean/Sheaf/Paper/SmoothPurityStrictOpenWordEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerShriek.strictOpenWordEvaluation",
+  "statement": "theorem strictOpenWordEvaluation (b : Base l E) (o : Operations l E b)\n    (hsystem : StrictSystemComparisons l E b o) :\n    ∃ x : OpenExchange l E b o, ∃ levels : ComparisonLevels l E b o,\n      StrictWordComparisons l E b o x levels",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-44687",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T143221-L-967072",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-44687",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T143221-L-967072",
+  "kind": "interface",
+  "note": "independent cc review: Data module vs clone's item module (diff: only blueprint tag, removed proof imports and removed theorem); item theorem signature byte-identical; 3 new sorried statements vs their nodes and the pinned Base/Operations/ComparisonLevels fields; delivered modules plus importer TowerAdjointCompositorRealization compiled in sandbox (exit 0); #print axioms sorryAx traced to published proEtaleCanonicalPullbackComposition inside the Operations type and to the 3 residual statements"
+ }
+}

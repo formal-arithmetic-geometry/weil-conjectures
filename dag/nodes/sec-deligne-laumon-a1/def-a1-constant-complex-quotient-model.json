@@ -1,0 +1,134 @@
+{
+ "id": "def-a1-constant-complex-quotient-model",
+ "kind": "definition",
+ "title": "Constant quotient-complex and normalized reduction data",
+ "status": "split",
+ "statement": "For a scheme $W$, a commutative ring $R$ and an ideal $I\\subseteq R$, use the small pro-etale site [def-weil-pbc-proetale-site], constant sheaves [def-weil-pbc-constant-sheaf], inverse limits [def-pur-sheaf-inverse-limit], sheaf tensor products and change of rings [def-pur-sheaf-tensor-product], the ordinary constant-coefficient pro-etale pullback and its adjunction [def-weil-pbc-proetale-operations], the constant module realization [def-sfb-site-derived-constant-module-functor], restriction of scalars [def-pc-sheaf-restrict-scalars] and inverse-system towers [def-weil-inverse-system]. Define the quotient rings $A_n=R/I^{n+1}$ ($n\\ge0$), the tower of constant ring sheaves $\\underline{A_n}_W$ with its consecutive quotient maps, and its limit $B_W$. Define extension of scalars of module sheaves along a map of ring sheaves (the sheafified sectionwise change of rings) and its local pure tensor sections, the constant scalar-module realization with its constant sections, the finite complexes $D_{W,n}^\\bullet=\\underline{A_n}_W\\otimes_{\\underline R_W}\\underline{P^\\bullet}_W$ with the original differential, and the image of a section under the unit of the ordinary pullback. Define strict quotient-transition data $D_{W,n+1}^\\bullet\\to D_{W,n}^\\bullet$ normalized on local tensor generators by $a\\otimes p\\mapsto q_{n+1,n}(a)\\otimes p$, and the resulting strict tower of complexes over $\\underline R_W$. For bounded finite-projective scalar complexes $P^\\bullet$ define the completed complexes $B_W\\otimes_{\\underline R_W}\\underline{P^\\bullet}_W$ and reduction data: balanced finite reductions $\\underline{A_n}_W\\otimes_{B_W}(B_W\\otimes\\underline{P^\\bullet}_W)\\cong D_{W,n}^\\bullet$, quotient units, the reduction tower of $B_W$-modules through the limit projections, and the product map of the reductions into the product of that tower, the input of the strict Roos cone [def-sf-strict-roos-functor]. Each datum comes with its normalization predicate on local tensor generators; no inverse image of $B_W$, no inverse of a coefficient map and no finite-free splitting is used.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-inverse-system",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sf-strict-roos-functor",
+  "def-sfb-site-derived-constant-module-functor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL, section-tensor-product and lemma-tensor-product-pullback; Tag 08TC for the strict Roos cone."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Strict quotient tower of constant sheaf tensor complexes and normalized completed reductions",
+   "results": "[leansearch] OK 8 hit(s); no exact comparison-data declaration.",
+   "date": "2026-10-24",
+   "verdict": "No exact existing notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict tower of constant sheaf tensor quotient complexes over R I powers with balanced completed coefficient reduction maps and normalized quotient units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"Hausdorffification\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"For a commutative ring `R`, an ideal `I` of `R`, and an `R`-module `M`, the `Hausdorffification` of `M` with respect to `I` is the quotient module $M / (\\\\bigcap_{n \\\\in \\\\mathbb{N}} I^n M)$.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, applying the inverse of the linear equivalence between $ \\\\hat{R} \\\\otimes_R M $ and the $ I $-adic \"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}\n  {\"name\": \"IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (\", \"doc\": \"For natural numbers $m \\\\leq n$, the composition of the canonical factor map $M/I^nM \\\\to M/I^mM$ (induced by $I^nM \\\\subseteq I^mM$) with the linear map $f_n$ equals the linear map $f_m$, where $I$ is a\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M] (x : TensorProduct R (AdicCompletion I R) M),\\n  (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) x = (AdicCompletion.o\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ (over $ R $) is isomorphic to \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_2) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (r : AdicCompletion I R) (x : M), (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"For any element $ r $ in the $ I $-adic completion of a commutative ring $ R $ and any element $ x $ in an $ R $-module $ M $, the canonical linear map from the tensor product $ (\\\\varprojlim R/I^nR) \\\\\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact existing notion; only adic completion and unrelated tensor constructions."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.constantSheaf, SheafOfModules.restrictScalars",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "No exact declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Rr]eduction|[Rr]eduction.*constant in Mathlib CategoryTheory",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-constant-complex-strict-base-change",
+  "date": "2026-10-24",
+  "group": "Q80"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph and returned parent Step 5: finite-projective scalar models, balanced tensor identification and strict tower compatibility.",
+   "via": [
+    "lem-a1-constant-complex-strict-base-change",
+    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantComplexQuotientModel",
+  "declaration": "AlgebraicGeometry.ConstantComplexBaseChange.FiniteTower",
+  "declarations": [
+   "AlgebraicGeometry.ConstantComplexBaseChange.Quotient",
+   "AlgebraicGeometry.ConstantComplexBaseChange.coefficientTower",
+   "AlgebraicGeometry.ConstantComplexBaseChange.completed",
+   "AlgebraicGeometry.ConstantComplexBaseChange.finiteComplex",
+   "AlgebraicGeometry.ConstantComplexBaseChange.FiniteTower",
+   "AlgebraicGeometry.ConstantComplexBaseChange.ReductionData",
+   "AlgebraicGeometry.ConstantComplexBaseChange.ReductionData.tower"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantComplexQuotientModel.lean",
+  "statement": "structure FiniteTower (W : Scheme.{u}) {R : Type u} [CommRing R] (I : Ideal R)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08afe2be6",
+  "group": "Q80",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08afe2be6",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Q80 lem-a1-constant-complex-strict-base-change 08afe2be. Mathematics correct and pinned: FiniteTower/ReductionData/FiniteComparison/GeometricReduction/RoosAugmentation are fixed by generator, limit-projection and naturality equations; beta is a chain map into mappingCocone(1-s) with fst = productMap and snd = 0; no g^{-1}B_T ≅ B_T' assumed; exactness clause and derived factorization present; index n = R/I^(n+1); the hfinite hypothesis is kept; edge cases P=0, I=R, I=0, non-flat g are covered; completedPullback is needed because proEtaleRingModulePullback requires an iso. FIX F1: item module used integralOperationsRoos/integralOperationsTowerStep (recorded only under the theorem node lem-pur-integral-operations-well-defined) -> integralOperationsRoosFunctor.obj and explicit C.map (homOfLE _).op (defeq, 2 lines); nt_compile --json rc 0, no warnings (def 21.1 s, item 10.3 s). FIX F2: new-node statement described RoosAugmentation/GeometricReduction/FiniteComparison, which live in the item module -> statement rewritten to its module's contents, same stmt_deps. Advisory A1: inverseSection is owned by landed def-sfb-proetale-inverse-image-unit-section, not in stmt_deps (a reviewer fix cannot add it); moving the helpers into the def module compiled at 47.9-56.9 s vs 35.3 s delivered, too close to the 60 s cap, so the move was dropped; the group should add the stmt_dep at the next touch. A2: Prop-valued integralOperationsAb* instances come from the theorem module; unused Modules abbrev; brief second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T111839-L-1751617",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ }
+}

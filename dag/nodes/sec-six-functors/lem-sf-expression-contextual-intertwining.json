@@ -1,0 +1,279 @@
+{
+ "id": "lem-sf-expression-contextual-intertwining",
+ "kind": "statement",
+ "title": "Transport of generator coefficient equations through finite expression contexts",
+ "statement": "Let $I$ be a set of indices. For each $s\\in I$ let $\\mathcal C_s,\\mathcal D_s$ be categories [def-nagata-category] and let $R_s:\\mathcal C_s\\rightleftarrows\\mathcal D_s:L_s$ be an adjoint equivalence with its specified unit $u$ and counit $e$. Choose a typed collection of unary functors $A:\\mathcal D_s\\to\\mathcal D_t$ and binary functors $B:\\mathcal D_s\\times\\mathcal D_t\\to\\mathcal D_v$, together with corresponding functors $\\bar A,\\bar B$ on the $\\mathcal C$ categories and natural isomorphisms $d_A:L_tAR_s\\cong\\bar A$, $d_B:L_vB(R_s-,R_t-)\\cong\\bar B$. These data may be restricted to full subcategories closed under all expressions under consideration.\n\nFor an input family $K_i\\in\\mathcal C_{s_i}$ and a finite typed expression $V$, put $M_V=V(RK_i)$ and let $\\bar V$ be its evaluation in $\\bar A,\\bar B$. Use\n$$a_A(M)=d_A(LM)(LA(e_M))^{-1},\\qquad\n a_B(M,N)=d_B(LM,LN)(LB(e_M,e_N))^{-1}.$$\nSuppose natural isomorphisms $c_V:LM_V\\to\\bar V(K_i)$ are given by $c_{K_i}=u_{K_i}^{-1}$, $c_{AV}=\\bar A(c_V)a_A(M_V)$ and $c_{B(V,T)}=\\bar B(c_V,c_T)a_B(M_V,M_T)$. Let $r_V:R\\bar V(K_i)\\to M_V$ satisfy $r_V=e_{M_V}R(c_V^{-1})$.\n\nFor a natural transformation of expressions $\\tau:V\\to T$ and an independently specified natural transformation $\\bar\\tau:\\bar V\\to\\bar T$, the whole-category coefficient equation\n$$\\tau_{RK_i}r_V=r_TR(\\bar\\tau_{K_i})$$\nimplies\n$$c_TL(\\tau_{RK_i})=\\bar\\tau_{K_i}c_V.$$\nThis latter equation persists under every finite unary and binary outer expression context, including changing either binary slot, changing both slots, repeated inputs, and composites and identities of transformations. Invertible transformations may also be inverted. Explicitly the context equation for $H$ is\n$$c_{H[T]}L(H[\\tau]_{RK_i})=\\bar H[\\bar\\tau]_{K_i}c_{H[V]}.$$\nConsequently every equality between composites of these generators and their contexts is taken by $L$ and conjugation with the prescribed $c$ to the corresponding equality between the independently specified barred transformations. The comparisons used for both routes are the recursive ones with the same parentheses. No faithfulness assumption on evaluation functors, no lifting of component arrows, and no invertibility of $\\tau$ are required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Adjunction cancellation and closure under outer contexts, extracted from old step 5 final paragraph and step 6; the same coefficient-comparison and inherited-equations sentences. Agent-formulated obligation, not a theorem claimed to be stated in the blueprint."
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-sf-finite-functor-expressions"
+ ],
+ "proof": [
+  {
+   "text": "Write composition right to left and suppress sort subscripts only when uniquely typed. In the specified adjoint equivalence $R:\\mathcal C\\to\\mathcal D$, $L:\\mathcal D\\to\\mathcal C$, the natural isomorphisms have types $u_X:X\\to LRX$ and $e_M:RLM\\to M$. Functors preserve identities and composition; a natural transformation $b:F\\to G$ means $G(h)b_X=b_YF(h)$. An inverse isomorphism satisfies both inverse equations. We use precisely these defining equations, and associativity and identity laws from [def-nagata-category]. In particular a functor carries an inverse to an inverse, since applying it to the two inverse equations gives the two required identities.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "Put $h=\\tau_{RK_i}:M_V\\to M_T$ and $k=\\bar\\tau_{K_i}:\\bar V(K_i)\\to\\bar T(K_i)$. Substitute the assumed formulas for $r_V,r_T$ into the coefficient equation. Naturality of $e$ at $h$ gives $h e_{M_V}=e_{M_T}RL(h)$, so that equation becomes\n$$e_{M_T}R(L(h)c_V^{-1})=e_{M_T}R(c_T^{-1}k).$$\nCompose on the left with $e_{M_T}^{-1}$ to obtain $R(L(h)c_V^{-1})=R(c_T^{-1}k)$. Both arguments of $R$ are arrows $\\bar V(K_i)\\to LM_T$ in the same category $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "For arrows $f,g:X\\to Y$ in $\\mathcal C$, naturality of the invertible unit gives $f=u_Y^{-1}LR(f)u_X$ and $g=u_Y^{-1}LR(g)u_X$. Thus $R(f)=R(g)$ implies $f=g$ by applying $L$ and these formulas. Apply this calculation to the two arrows from step 2. It gives $L(h)c_V^{-1}=c_T^{-1}k$; multiplying by $c_T$ on the left and $c_V$ on the right yields $c_TL(h)=kc_V$. This derives the generator equation without assuming that $h$ is invertible or that any evaluation functor detects equality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "For a unary symbol $A:\\mathcal D_s\\to\\mathcal D_t$, put $E_A(M)=L_tA(e_{s,M})$. If $h:M\\to N$, naturality of $e_s$, followed by $L_tA$, gives\n$$L_tA(h)E_A(M)=E_A(N)L_tAR_sL_s(h).$$\nNaturality of $d_A$ gives $d_A(L_sN)L_tAR_sL_s(h)=\\bar A(L_s(h))d_A(L_sM)$. Multiply the first equality by inverses of $E_A(N)$ and $E_A(M)$ and insert the second. The result is\n$$a_A(N)L_tA(h)=\\bar A(L_s(h))a_A(M).$$\nAll inverses exist because $e_s$ and $d_A$ are natural isomorphisms; this is exactly naturality of the $a_A$ prescribed in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "For a binary symbol $B:\\mathcal D_s\\times\\mathcal D_t\\to\\mathcal D_v$, write $P=(M,N)$, $P'=(M',N')$, $q=(h,j):P\\to P'$ and $E_B(P)=L_vB(e_{s,M},e_{t,N})$. The pair of counit naturality equations, after applying the functor $L_vB$ on the product category, reads\n$$L_vB(h,j)E_B(P)=E_B(P')L_vB(R_sL_s(h),R_tL_t(j)).$$\nNaturality of $d_B$ reads\n$$d_B(L_sM',L_tN')L_vB(R_sL_s(h),R_tL_t(j))=\\bar B(L_s(h),L_t(j))d_B(L_sM,L_tN).$$\nAs in step 4, multiplying by the two $E_B$ inverses gives\n$$a_B(P')L_vB(h,j)=\\bar B(L_s(h),L_t(j))a_B(P).$$\nThis is a single naturality calculation on the product category, so it allows arbitrary arrows in both slots.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "We now induct on the finite outer expression context, permitting several occurrences of its hole. The inductive assertion for a pair of evaluated expressions $V,T$ and arrows $h:M_V\\to M_T$, $k:\\bar V\\to\\bar T$ is $c_TL(h)=kc_V$. At a hole it is step 3. At an unchanged input or unchanged subexpression take $h=1$ and $k=1$; the assertion is $c_V=c_V$ by functoriality. At a unary constructor, assuming the assertion for its child, step 4 and the prescribed recursion give\n$$c_{AT}L(A(h))=\\bar A(c_T)a_A(M_T)L(A(h))=\\bar A(c_TL(h))a_A(M_V)=\\bar A(k)\\bar A(c_V)a_A(M_V)=\\bar A(k)c_{AV}.$$\nThe middle equality uses the child's assertion and the functor composition law.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "At a binary constructor take child arrows $h:M_V\\to M_T$, $j:M_W\\to M_U$ and barred arrows $k:\\bar V\\to\\bar T$, $l:\\bar W\\to\\bar U$, with $c_TL_s(h)=kc_V$ and $c_UL_t(j)=lc_W$. Step 5 and the recursion give\n$$\\begin{aligned}c_{B(T,U)}L_vB(h,j)&=\\bar B(c_T,c_U)a_B(M_T,M_U)L_vB(h,j)\\\\&=\\bar B(c_TL_s(h),c_UL_t(j))a_B(M_V,M_W)\\\\&=\\bar B(k,l)\\bar B(c_V,c_W)a_B(M_V,M_W)\\\\&=\\bar B(k,l)c_{B(V,W)}.\\end{aligned}$$\nOne unchanged slot is the identity case of step 6; two changed slots use both child assertions. Distinct occurrences of a repeated input or repeated hole use the same arrow in each occurrence. The pair $(h,h)$ is a valid morphism in a product category, so no disjointness condition is used. These are all constructors of a finite typed context, completing the induction and proving the displayed context equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "The relation also closes under composition: if $c_TL(h)=kc_V$ and $c_UL(j)=lc_T$, then\n$$c_UL(jh)=c_UL(j)L(h)=lc_TL(h)=lkc_V.$$\nIdentities satisfy $c_VL(1)=1c_V$. Applying the same calculation to any finite composable list proves the relation for all composites, with the specified endpoint comparisons.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "If $h$ is invertible, the established relation says $k=c_TL(h)c_V^{-1}$. Its inverse is therefore $c_VL(h^{-1})c_T^{-1}$: multiplying either way and using the functor image of $hh^{-1}=1=h^{-1}h$ gives the identity. Consequently $c_VL(h^{-1})=k^{-1}c_T$, the relation for the inverse transformation. Applied componentwise to an invertible natural transformation, this uses its natural inverse; that inverse is natural by multiplying the original naturality square by the component inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "For a generator, context, identity, composite or allowed inverse $p:V\\to W$ with independently specified barred expression-map $\\bar p$, steps 3 and 6–9 give\n$$\\bar p_{K_i}=c_WL(p_{RK_i})c_V^{-1}.$$\nIf two such composites $p,q:V\\to W$ are equal as transformations, evaluate the equality at $RK_i$, apply $L$, and multiply by these same endpoint comparisons. The displayed formula gives $\\bar p_{K_i}=\\bar q_{K_i}$ for every input family, which is equality of the barred natural transformations by their definition as component families. The induction always used the recursive $c$ for the exact parenthesized syntax tree, so both routes use those prescribed comparisons. No reassociation identification is inserted.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  },
+  {
+   "text": "Every calculation is componentwise in the chosen categories and uses only the stipulated functors, their natural transformations, and inverses of the comparison components. In a restriction to full subcategories on which these data and the expressions are defined, the same arrows and equations remain in the same Hom sets, so the calculations apply verbatim. Empty categories give vacuous component assertions; an empty collection of operation symbols leaves the hole/input and composite cases. At no point is an arrow lifted from a component evaluation, and the only equality detection in step 3 was proved from the given unit itself. Thus the final qualifications of the statement require no extra hypotheses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 001J (definition-equivalence-categories), 0037 (definition-adjoint); explicit agent calculations implementing fix-prop-coherence, coefficient-comparison and inherited-equations sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Explicit unit/counit cancellation and naturality induction filling the coefficient-comparison and inherited-equations sentences; foundational defining equations read in Stacks Tags 001B, 001I, 001J and 0037."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An adjoint equivalence transports commuting generator squares to all unary and binary functor expression contexts",
+   "results": "{\"t\": \"2026-10-22T06:02:35Z\", \"tool\": \"leanfinder\", \"query\": \"An adjoint equivalence transports commuting generator squares to all unary and binary functor expression contexts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CommSq.right_adjoint\", \"CategoryTheory.CommSq.left_adjoint\", \"CategoryTheory.CatCommSq.vInvEquiv\", \"CategoryTheory.CommSq.leftAdjointLiftStructEquiv\", \"CategoryTheory.CommSq.rightAdjointLiftStructEquiv\", \"CategoryTheory.CatCommSq.hInvEquiv\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.CatCommSq.vInv_vInv\"], \"digest\": \"c400e14f00255e5b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of conjugating isomorphisms extends intertwining of transformations under whiskering tensor and composition",
+   "results": "{\"t\": \"2026-10-22T06:02:34Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of conjugating isomorphisms extends intertwining of transformations under whiskering tensor and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Monoidal.naturality_comp\", \"CategoryTheory.HalfBraiding.naturality\", \"Mathlib.Tactic.Monoidal.naturality_tensorHom\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.conjugateEquiv_whiskerLeft\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_whiskerRight\"], \"digest\": \"2b1daddc4c84e6ca\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"whisker\"",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"NatTrans\\\", \\\"whisker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.NatTrans.hcomp_eq_whiskerLeft_comp_whiskerRight\", \"CategoryTheory.Functor.NatTrans.hcomp_eq_whiskerRight_comp_whiskerLeft\", \"CategoryTheory.NatTrans.leftOpWhiskerRight\", \"CategoryTheory.NatTrans.rightOpWhiskerRight\", \"CategoryTheory.NatTrans.unop_whiskerLeft\", \"CategoryTheory.NatTrans.unop_whiskerRight\", \"CategoryTheory.NatTrans.op_whiskerLeft\", \"CategoryTheory.NatTrans.op_whiskerRight\"], \"digest\": \"0ac81982ce4ce040\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "intertwin|whisker.*conjug|conjug.*whisker|expression.*context",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"grep\", \"query\": \"intertwin|whisker.*conjug|conjug.*whisker|expression.*context\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Util/Notation3.lean\", \"Mathlib/NumberTheory/LSeries/Deriv.lean\", \"Mathlib/Analysis/CStarAlgebra/Multiplier.lean\", \"Mathlib/Analysis/CStarAlgebra/Multiplier.lean\", \"Mathlib/Analysis/CStarAlgebra/Fuglede.lean\", \"Mathlib/Analysis/CStarAlgebra/Fuglede.lean\", \"Mathlib/Analysis/CStarAlgebra/Fuglede.lean\", \"Mathlib/Analysis/CStarAlgebra/Fuglede.lean\"], \"digest\": \"5ac553335456de65\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Intertwining natural transformations through adjoint equivalence under tensor and whiskering",
+   "results": "{\"t\": \"2026-10-22T06:02:23Z\", \"tool\": \"leansearch\", \"query\": \"Intertwining natural transformations through adjoint equivalence under tensor and whiskering\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.whiskerLeft_app_tensor_app\", \"CategoryTheory.NatTrans.whiskerRight_app_tensor_app\", \"CategoryTheory.TwoSquare.whiskerLeft\", \"CategoryTheory.Adjunction.whiskerLeft\", \"CategoryTheory.TwoSquare.whiskerRight\", \"CategoryTheory.Functor.whiskerLeft_comp_whiskerRight\", \"Mathlib.Tactic.Monoidal.naturality_tensorHom\", \"CategoryTheory.NatTrans.whiskerLeft_app_tensor_app_assoc\"], \"digest\": \"76dbc83e14b99aa6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_whisker|intertwin|contextual",
+   "results": "{\"t\": \"2026-10-22T06:52:58Z\", \"tool\": \"grep\", \"query\": \"conjugateEquiv_whisker|intertwin|contextual\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Preadditive/HomOrthogonal.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Hopf_.lean\"], \"digest\": \"bce00466b33e1c26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjoint equivalence transports natural transformation equations through functor composition and bifunctors",
+   "results": "{\"t\": \"2026-10-22T06:52:58Z\", \"tool\": \"leansearch\", \"query\": \"An adjoint equivalence transports natural transformation equations through functor composition and bifunctors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_comp\", \"CategoryTheory.ReflQuiv.adj.homEquiv_naturality_right\", \"CategoryTheory.Equivalence.trans_toAdjunction\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans\", \"CategoryTheory.Equivalence.asNatTrans\", \"CategoryTheory.Equivalence.comp_asNatTrans\", \"Bifunctor.mapEquiv\", \"CategoryTheory.Adjunction.comp_homEquiv\"], \"digest\": \"0eeec8d096259caa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp",
+   "results": "{\"t\": \"2026-10-22T06:52:59Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.NatTrans.naturality, CategoryTheory.Functor.map_comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport of commuting natural transformation squares along an equivalence extends to finite unary binary functor expressions by naturality",
+   "results": "{\"t\": \"2026-10-22T06:53:09Z\", \"tool\": \"leanfinder\", \"query\": \"Transport of commuting natural transformation squares along an equivalence extends to finite unary binary functor expressions by naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.vInvEquiv\", \"CategoryTheory.TwoSquare.EquivalenceJ.functor_map\", \"CategoryTheory.CatCommSq.hInvEquiv\", \"CategoryTheory.CatCommSq.iso_hom_naturality\", \"CategoryTheory.CatCommSq.hInv\", \"CategoryTheory.NatTrans.mapSquare\", \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\"], \"digest\": \"efd34cc410a88593\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv_whisker\"",
+   "results": "{\"t\": \"2026-10-22T06:54:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"conjugateEquiv_whisker\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_whiskerLeft\", \"CategoryTheory.conjugateEquiv_whiskerRight\", \"CategoryTheory.Bicategory.conjugateEquiv_whiskerLeft\", \"CategoryTheory.Bicategory.conjugateEquiv_whiskerRight\"], \"digest\": \"fff8a9f71d143e68\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A recursively defined comparison for unary functors and bifunctors intertwines maps by structural induction on expression trees",
+   "results": "{\"t\": \"2026-10-22T06:54:05Z\", \"tool\": \"leanfinder\", \"query\": \"A recursively defined comparison for unary functors and bifunctors intertwines maps by structural induction on expression trees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvFunctor.LiftR\", \"MvFunctor.LiftR'\", \"Mathlib.Meta.FunProp.instBEqMorApplication.beq\", \"Lean.Expr.le?\", \"Mathlib.Deriving.Traversable.nestedMap\", \"Mathlib.Meta.FunProp.instBEqMorApplication\", \"MvQPF.Comp.map\", \"MvQPF.Comp.map'\"], \"digest\": \"50a6b8873c6b087b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-compactification-system-realization",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Adjunction cancellation and closure under outer contexts, extracted from old step 5 final paragraph and step 6; the same coefficient-comparison and inherited-equations sentences.",
+   "via": [
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-expression-contextual-intertwining",
+  "worker": "stage1",
+  "summary": "Preserved the statement and its category definition dependency. Expanded coefficient cancellation using the given counit and unit, proved unary/binary comparison naturality explicitly, and carried out structural induction on contexts plus composition/inverse/equality transport. Every argument is an elementary defining-equation calculation; no new nodes or Mathlib leaves. Searches and candidate inspection found only mate/whiskering results, not the statement with arbitrary prescribed recursive comparisons.",
+  "blueprint": "Realizes the coefficient-comparison and inherited-equations sentences of fix-prop-coherence.proof.md: old realization step 5 final cancellation and step 6 outer-context closure, for the compatibility unit clause (7)."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-a00dfc064",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-a00dfc064 (reviewer sub-agent of L); spot-checked: First split of an NV-created statement node (empty proof on base). The statement, stmt_deps, source and blueprint are byte-identical to the NV run snapshot, so the 2026-10-21 re-split rules do not apply. There are 0 new nodes and the only cited node is def-nagata-category, a definition, so there are no tool uses. No SGA source. Stacks tags 001B/001I/001J/0037 checked in tags/tags. Searches cover LeanSearch, LeanFinder, Loogle and grep, each with results; the verdict no match is correct. I checked the typing by hand: u:X->LRX, e:RLM->M, a_A, c_V and r_V all type-check. All 11 steps were rederived and each is correct. Step 2 uses counit naturality and cancels e_{M_T}. Step 3 gets faithfulness of R from unit naturality, f=u^{-1}LR(f)u, giving c_T L(h)=k c_V with no invertibility of h. Steps 4-5 prove naturality of a_A and a_B from naturality of LA(e) and d. Steps 6-7 carry out the context induction in full; the binary case covers either slot, both slots and (h,h). Steps 8-10 handle composition, inverses and equality transport via p̄=c_W L(p) c_V^{-1}. Step 11 covers the restricted domains. No candidate is a duplicate: lem-pur-adjoint-equivalence-conjugation-calculus, lem-pur-natural-comparison-strict-intertwiners, lem-pur-natural-comparison-functor-transport and lem-pur-integral-realization-recursion state other things. The Q-vector-space test (u=2, e=1/2, d=3) reproduces the conclusion. The citer lem-sf-integral-compactification-system-realization, steps 4-5, uses exactly the transport and equality clauses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExpressionContextualIntertwining",
+  "declaration": "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining",
+  "declarations": [
+   "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining",
+   "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining_isIso",
+   "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining_eq"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExpressionContextualIntertwining.lean",
+  "statement": "theorem expression_contextual_intertwining {a : S} {V T : Expression O loc a} {h : V.evalD ⟶ T.evalD} {k : V.evalC ⟶ T.evalC} (p : Paired O loc V T h k) (K : ∀ i, C (loc i)) : (E a).inverse.map (h.app ((reducedInputs (E := E) loc).obj K)) ≫ (Expression.comparison O loc T K).hom = (Expression.comparison O loc V K).hom ≫ k.app K",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2b2a3032",
+  "group": "Q112",
+  "result": "pass",
+  "note": "First S2 delivery; live lean null. Item changes only lean plus stmt_deps += new §1(A) def node def-sf-finite-functor-expressions, which has all §5 fields (cites [def-nagata-category], blueprint via has item in front, searches of all kinds). Clause check: E : C a ≌ D a (functor=R, inverse=L, unit X→LRX, counit RLM→M); Operations dA/dB = LAR≅Ā, LB(R-,R-)≅B̄; unary/binaryComparison = (LA e)^-1≫d = a_A/a_B; Expression.comparison = recursive c (u^-1, a≫Ā(c), a≫B̄(c,c)); coefficientComparison = R(c^-1)≫e = r_V; Paired.generator = whole-category equation r_V≫h = R(k)≫r_T with independent k; constructors give unary/binary (both slots, repeated holes), identity, comp, inverse; conclusion L(h)≫c_T = c_V≫k matches; _isIso (no inverse cases lost) and _eq (equality transport) cover node steps 9-10; all three theorems verified true by hand. Edge cases: empty S/J/symbols/categories, repeated inputs, non-invertible generator; universes s,j,w,u1,u2,v1,v2 independent. Statements verbatim, lines <=100, JSON layout OK, docstrings with source/blueprint/proof steps, no hollow defs, only sorry proofs. Grep of side-live Sheaf/WeilConjectures finds only scheme-specific expression syntaxes, so no duplicate; citer uses item in proof_deps only. Direct-delivery Second-reading wording accepted. No recompile (no file changed); worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261022T143926-L-1445288",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining",
+   "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining_eq",
+   "CategoryTheory.FiniteFunctorExpressions.expression_contextual_intertwining_isIso"
+  ],
+  "sorry_after": []
+ }
+}

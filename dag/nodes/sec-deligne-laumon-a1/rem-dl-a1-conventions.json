@@ -109,7 +109,61 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-d-dl-a1-setup",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsGeometricallyConstant",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsUnramifiedAtInfinity",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsIrreducibleLisse",
+    "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+    "AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity",
+    "AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed_part",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsGeometricallyConstant",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Defs",
+     "lines": [
+      63,
+      75
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity",
+     "module": "WeilConjectures.DeligneLaumon.AffineLine.Defs",
+     "lines": [
+      77,
+      102
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse",
+     "module": "WeilConjectures.WeilSheaf.Category",
+     "lines": [
+      335,
+      346
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [
+    "AlgebraicGeometry.LAdicWeilSheaf.IsGeometricallyConstant",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsUnramifiedAtInfinity",
+    "AlgebraicGeometry.LAdicWeilSheaf.IsIrreducibleLisse"
+   ],
+   "open": []
+  }
+ },
  "split_report": {
   "date": "2026-10-17",
   "item": "rem-dl-a1-conventions",
@@ -167,5 +221,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Existing delivery: three upstream slopmaster2 definitions (AffineLine/Defs.lean:72 IsGeometricallyConstant, :94 IsUnramifiedAtInfinity, WeilSheaf/Category.lean:342 IsIrreducibleLisse), identical in the side clone. Every clause matches the node: irreducible lisse = lisse, nonzero, lisse monos are 0 or iso, no Simple assumption; unramified at infinity forces W = U0 ∪ {∞}, G lisse, iso along the canonical IsOpenImmersion.lift, same shape as lem-dl-a1-lisse-extension-inertia; geometric constancy = finite biproduct of AdicSheaf.unit on every connected open of the geometric fibre, Weil structure forgotten. Edge cases (F=0, empty V, disconnected fibre, U0 empty, j=id, universes) checked. lean.statement occurs verbatim exactly once; only lean changed; the report has Worker report and the accepted placeholder Second reading by NL. nt_compile probe (#check, #print axioms) clean in 6.3 s; no sorryAx. Observation, not a fault: the def-weil-weil-sheaf-complex and def-pod-lisse records were moved under §1(B) to the Sheaf.Paper sf presentation, while these predicates use upstream pro-étale WeilSheaf. This is consistent with the item's own inertia, twist and fundamental-representation dependencies and with earlier PASS reviews in this chapter (Q37, Q43, Q88). No fixes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix $k_0=\\mathbf F_q$, its algebraic closure $k$, a prime $\\ell\\ne \\operatorname{char}(k_0)$, and a field embedding $\\iota:\\DLAQ\\hookrightarrow\\mathbf C$. Write\n$A_0=\\mathbf A^1_{k_0}$, $A=A_0\\otimes k$, and use a prime to denote the\ndual affine line. All cohomology is geometric, with geometric Frobenius\n([def-weil-frobenius-detailed]).\nA *Weil sheaf* on a $k_0$-scheme $U_0$, with $U=U_0\\otimes k$, is a constructible\n$\\overline{\\mathbf Q}_{\\ell,U}$-module $F$ on $U_{\\mathrm{proét}}$ with a Weil structure $\\operatorname{Fr}_U^*F\\xrightarrow{\\sim}F$ ([sk-lem-coefficient-heart], [sk-def-sf-weil-complexes]); it is *lisse* if $F$ is locally free of finite rank for the pro-étale topology.\nA lisse Weil sheaf is *pure of weight $w$* if every eigenvalue\n$\\alpha$ at a closed point $x$ satisfies\n$|\\iota\\alpha|=q_x^{w/2}$; replace equality by $\\leq$ for an upper bound\n([def-weil-punctual-weights]).\nThe twist $(-1)$ raises weights by two ([def-wf-tate-twist]).\nA Weil sheaf $F$ is *irreducible lisse* (an *irreducible lisse Weil\nsheaf*) if it is lisse and nonzero and every lisse Weil subsheaf of $F$\nis $0$ or $F$: it is a simple object of the category of lisse Weil\nsheaves. On a connected normal scheme such as a dense open of $A_0$, this\nsays that the Weil group acts irreducibly on the geometric generic stalk.\nIt is weaker than simplicity in the category of all Weil sheaves, which\nnever holds for a nonzero lisse sheaf on a curve: for a closed point $x$,\nthe extension by zero of the restriction to the complement of $x$ is a\nnonzero proper subsheaf.\n\nFor a dense open $j:U_0\\hookrightarrow A_0$, $j_*F$ denotes the\n*ordinary* sheaf direct image. Its stalks at missing points are\ninertia invariants; its curve perverse intermediate extension is\n$j_{!*}(F[1])=(j_*F)[1]$ ([def-wf-middle-extension]). A lisse Weil sheaf $F$ on $U_0$ is *unramified at infinity* if it\nextends to a lisse Weil sheaf on the open $U_0\\cup\\{\\infty\\}$ of\n$\\mathbf P^1_{k_0}$ (with $A_0\\subset\\mathbf P^1_{k_0}$ the standard chart);\nequivalently, inertia\nat $\\infty\\in\\mathbf P^1_k$ acts trivially on the geometric generic fiber.\nA Weil sheaf on $U_0$ is *geometrically constant* if its underlying\n$\\overline{\\mathbf Q}_{\\ell,U}$-module on $U_{\\mathrm{proét}}$ ([sk-lem-coefficient-heart]) is\nconstant on every connected open $V$ of $U=U_0\\otimes k$, that is, isomorphic there to\n$\\overline{\\mathbf Q}_{\\ell,V}\\otimes_{\\Qlb}W=p_V^*\\underline W$ for a finite-dimensional\n$\\Qlb$-vector space $W$; for $U$ connected this means that the geometric fundamental group\nacts trivially, while its Frobenius module may be nontrivial.",
+  "proof": [],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
  }
 }

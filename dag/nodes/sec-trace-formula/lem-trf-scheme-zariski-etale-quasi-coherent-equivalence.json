@@ -20,164 +20,70 @@
  ],
  "proof": [
   {
-   "text": "Write $L_T=\\epsilon_T^*$ and $R_T=\\epsilon_{T,*}$. By [lem-trf-zariski-etale-tensor-sections], $R_T$ is restriction to open subschemes and $L_TM$ is the sheafification of tensor sections, naturally in arbitrary $M$. For quasi-coherent $F$, [lem-sc-etale-qcoherent-descent] says that this presheaf already is a sheaf; hence $L_TF=F_{\\mathrm{et}}$, with precisely the specified maps. The tensor formula gives $L_T\\mathcal O_T=\\mathcal O_{T,\\mathrm{et}}$: the scalar multiplication map has inverse $r\\mapsto r\\otimes1$. By [lem-weil-pbc-ringed-topoi-module-adjunction], $L_T\\dashv R_T$. Consequently $L_T$ preserves coproducts and cokernels: maps out of $L_T\\operatorname{colim} M_i$ are, by adjunction, compatible families of maps $M_i\\to R_TG$, equivalently compatible families $L_TM_i\\to G$.",
+   "text": "Write $L_T=\\epsilon_T^*$ and $R_T=\\epsilon_{T,*}$. By [lem-trf-etale-extension-free-presentations-hom], $L_TF$ is the specified tensor-sections sheaf, is site quasi-coherent, is fully faithful on quasi-coherent modules, and its unit is the identity on open sections. By [lem-trf-etale-presented-module-effective-recovery], every site quasi-coherent $G$ has quasi-coherent $R_TG$ and invertible counit, also the identity on open sections. Thus these restricted adjoint functors are inverse equivalences, with the stated normalization.",
    "uses": [
-    "lem-trf-zariski-etale-tensor-sections",
-    "lem-sc-etale-qcoherent-descent",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-trf-etale-extension-free-presentations-hom",
+    "lem-trf-etale-presented-module-effective-recovery"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "070S(2), lemma-compare-sites; 03FH(1), remark-change-topologies-ringed-sites; proof of 03DV, lemma-quasi-coherent-gives-quasi-coherent"
+    "place": "03DV, 0GN7 and 03DX(2): assembly of local presentations and effective recovery."
    }
   },
   {
-   "text": "For an etale $u:V\\to T$ and quasi-coherent $F$, the restriction of $L_TF$ to $V_{\\mathrm{et}}$ is $L_V(u^*F)$. Indeed at $v:W\\to V$ the two values are $\\Gamma(W,(u\\circ v)^*F)$ and $\\Gamma(W,v^*u^*F)$; [lem-pc-module-pullback-identity-composition] identifies these and their restriction maps. The module $u^*F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. This also applies to open immersions.",
+   "text": "The invertible-module assertion is [lem-trf-scheme-etale-invertible-comparison]: its functor $A_T(L)=L_{\\mathrm{et}}$, with $A_T(h)_u=\\Gamma(U,u^*h)$, is an equivalence from ordinary invertible modules [def-sc-invertible-module], with all module maps, onto the modules on $T_{\\mathrm{et}}$ that become isomorphic to $\\mathcal O_{T,\\mathrm{et}}$ on the localized sites of a jointly surjective etale family, which are exactly the line modules of [def-trf-algebraic-space] for the scheme $T$. An invertible module is quasi-coherent by definition, so [lem-trf-etale-extension-free-presentations-hom] identifies $L_TL$ with $L_{\\mathrm{et}}=A_T(L)$, and $L_Th$ with $A_T(h)$. Hence $L_T$ sends invertible modules to line modules, and every line module is isomorphic to some $L_TL$. Both classes are full subcategories, so the equivalence of step 1 restricts to the claimed equivalence between invertible modules and line modules.",
    "uses": [
-    "lem-pc-module-pullback-identity-composition",
-    "lem-weil-pbc-module-pullback-quasi-coherent"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "03FH(2), remark-change-topologies-ringed-sites, restricted to etale maps"
-   }
-  },
-  {
-   "text": "Choose an affine open cover of $T$. On $V=\\operatorname{Spec}A$, write $F|_V=\\widetilde M$ by [lem-weil-pbc-affine-tilde-gamma-adjunction]. Choose a free-module presentation $A^{(I)}\\to A^{(J)}\\to M\\to0$: take generators indexed by the elements of $M$ and relations indexed by the kernel of the resulting free surjection. The same affine tilde adjunction preserves all small colimits, so it gives $\\mathcal O_V^{(I)}\\to\\mathcal O_V^{(J)}\\to F|_V\\to0$; $\\widetilde A=\\mathcal O_V$ by the localization description [lem-weil-pbc-spec-module-tilde-sections]. Apply the colimit-preserving $L_V$ of step 1 and the restriction identification of step 2. This supplies a free presentation of $L_TF$ on each $V_{\\mathrm{et}}$, exactly the site quasi-coherence predicate [def-trf-space-quasi-coherent-module]. Thus $L_T$ takes quasi-coherent Zariski modules to quasi-coherent etale modules.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-trf-space-quasi-coherent-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "03DV, lemma-quasi-coherent-gives-quasi-coherent, proof of part (2)"
-   }
-  },
-  {
-   "text": "For every open $W\\subseteq T$, $(R_TL_TF)(W)=\\Gamma(W,F|_W)=F(W)$. These identifications respect restrictions and identify the adjunction unit with the identity. For quasi-coherent $F,H$ the adjunction therefore reads $\\operatorname{Hom}(L_TF,L_TH)=\\operatorname{Hom}(F,R_TL_TH)=\\operatorname{Hom}(F,H)$. This proves full faithfulness, also with $T$ replaced by any scheme appearing in the following descent argument.",
-   "uses": [
-    "lem-trf-zariski-etale-tensor-sections",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "0GN7, lemma-fully-faithful-associated, proof"
-   }
-  },
-  {
-   "text": "Let $G$ be a quasi-coherent module on $T_{\\mathrm{et}}$. By [def-trf-space-quasi-coherent-module], choose a jointly surjective etale family $u_i:V_i\\to T$ with a presentation $\\mathcal O^{(I_i)}\\to\\mathcal O^{(J_i)}\\to G|_{V_i}\\to0$. The Zariski modules $K_i=\\mathcal O_{V_i}^{(I_i)}$ and $P_i=\\mathcal O_{V_i}^{(J_i)}$ are quasi-coherent by [lem-weil-pbc-quasi-coherent-module-coproduct-closure]. Step 1 identifies their images with the two displayed free etale modules; full faithfulness in step 4 lifts the presentation arrow uniquely to $h_i:K_i\\to P_i$. Put $F_i=\\operatorname{Coker}(h_i)$, quasi-coherent by [lem-weil-pbc-quasi-coherent-module-cokernel-image]. Preservation of cokernels in step 1 gives an isomorphism $b_i:L_{V_i}F_i\\simeq G|_{V_i}$.",
-   "uses": [
-    "def-trf-space-quasi-coherent-module",
-    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
-    "lem-weil-pbc-quasi-coherent-module-cokernel-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "03DX, proposition-equivalence-quasi-coherent, local presentation paragraph"
-   }
-  },
-  {
-   "text": "On $V_{ij}=V_i\\times_TV_j$, step 2 and the $b_i$ identify $L_{V_{ij}}(p_i^*F_i)$ and $L_{V_{ij}}(p_j^*F_j)$ with the same restriction of $G$. Full faithfulness in step 4 lifts $b_j^{-1}b_i$ uniquely to an isomorphism $\\phi_{ij}:p_i^*F_i\\to p_j^*F_j$. On triple products its images satisfy $(b_k^{-1}b_j)(b_j^{-1}b_i)=b_k^{-1}b_i$; faithfulness gives the cocycle equation for $\\phi_{ij}$, including repeated indices. By [lem-weil-pbc-fpqc-finer-than-etale] this etale covering is fpqc. Apply clause (1) of [lem-pc-fpqc-descent] to obtain a quasi-coherent $F$ on $T$ and compatible isomorphisms $u_i^*F\\simeq F_i$.",
-   "uses": [
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "lem-pc-fpqc-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "03DX, proposition-equivalence-quasi-coherent, overlap and effectivity paragraphs; 023T, proposition-fpqc-descent-quasi-coherent"
-   }
-  },
-  {
-   "text": "The resulting maps $L_TF|_{V_i}\\simeq G|_{V_i}$ agree on pairwise overlaps. They glue to an isomorphism $b:L_TF\\simeq G$: for an etale object $W\\to T$, restrict a section to the cover $W\\times_TV_i\\to W$, apply these local maps, and take the unique glued section of $G$. The inverse local maps give the inverse construction. Uniqueness in the sheaf equalizer [lem-weil-pbc-site-sheaf-sets-limits-sectionwise] proves compatibility with restriction and module operations. Hence $L_T$ is essentially surjective. Restricting $b$ to opens identifies $R_TG$ with $F$, so $R_T$ is its quasi-coherent inverse. The unit was the identity on open sections in step 4; the triangle identity says $R_T(\\mathrm{counit}_G)$ is its inverse and therefore also the identity under these identifications. This proves the claimed normalization.",
-   "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "03DX, proposition-equivalence-quasi-coherent, final gluing paragraph; 0GN7, lemma-fully-faithful-associated, restriction inverse"
-   }
-  },
-  {
-   "text": "For any scheme morphism $a:U\\to T$ and any etale module $G$ on $U$, the two direct images $R_Ta_{\\mathrm{et},*}G$ and $a_*R_UG$ agree: at an open $W\\subseteq T$ both are $G(a^{-1}W\\hookrightarrow U)$ with the same ring action. The evaluation formula for small etale direct image is [lem-trf-space-etale-module-pushforward-restriction]. Using the two ringed-topos adjunctions [lem-weil-pbc-ringed-topoi-module-adjunction] and scheme adjunction [lem-pc-module-pullback-adjunction], one obtains\n$$\\operatorname{Hom}(a_{\\mathrm{et}}^*L_TF,G)=\\operatorname{Hom}(F,R_Ta_{\\mathrm{et},*}G)=\\operatorname{Hom}(a^*F,R_UG)=\\operatorname{Hom}(L_Ua^*F,G).$$\nThe natural representing-object comparison is therefore an isomorphism. This is the canonical comparison, because all three bijections use the specified units and counits. By [lem-weil-pbc-module-pullback-quasi-coherent], $a^*F$ is quasi-coherent, so step 1 identifies its left side with the specified tensor-sections sheaf. This proves $(a^*F)_{\\mathrm{et}}\\simeq a_{\\mathrm{et}}^*F_{\\mathrm{et}}$ naturally for arbitrary $a$.",
-   "uses": [
-    "lem-trf-space-etale-module-pushforward-restriction",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-pc-module-pullback-adjunction",
-    "lem-weil-pbc-module-pullback-quasi-coherent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "03FH(2), remark-change-topologies-ringed-sites; 03LC(1), proposition-equivalence-quasi-coherent-functorial"
-   }
-  },
-  {
-   "text": "If $F$ is Zariski locally free of rank one [def-sc-invertible-module], steps 1 and 2 send each trivialization to a trivialization of $L_TF$ by $\\mathcal O_{T,\\mathrm{et}}$, so it is a line module [def-trf-algebraic-space]. Conversely a line module is site quasi-coherent (use the free presentation $0\\to\\mathcal O\\to G\\to0$ on a trivializing etale cover). By steps 5--7 write it as $L_TF$. On that cover, step 2 and full faithfulness give $u_i^*F\\simeq\\mathcal O_{V_i}$. The cover is fpqc by [lem-weil-pbc-fpqc-finer-than-etale]; clause (2) of [lem-pc-fpqc-descent], with rank $r=1$, makes $F$ Zariski locally free of rank one. Since the categories of line modules are full subcategories, the established equivalence restricts to the claimed equivalence of invertible modules.",
-   "uses": [
+    "lem-trf-scheme-etale-invertible-comparison",
+    "lem-trf-etale-extension-free-presentations-hom",
     "def-sc-invertible-module",
-    "def-trf-algebraic-space",
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "lem-pc-fpqc-descent"
+    "def-trf-algebraic-space"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "05VG, lemma-equivalence-quasi-coherent-properties, finite locally free case"
+    "place": "05VG, lemma-equivalence-quasi-coherent-properties, finite locally free case (rank one), via the existing rank-one comparison node"
    }
   },
   {
-   "text": "Finally let $a:U\\to T$ be quasi-compact and separated in the statement's sense. By [lem-trf-space-qc-separated-etale-local] these agree with the ordinary scheme properties; [lem-pc-separated-quasi-separated] gives quasi-separatedness. Thus $a_*H$ is quasi-coherent by [pqf-lem-pushforward-qcoh]. For any etale $v:V\\to T$, form $U_V=U\\times_TV$, with maps $a_V:U_V\\to V$ and $v':U_V\\to U$. Since $v$ is flat [def-weil-etale-morphism], degree zero of [lem-pc-flat-base-change-cohom] gives the canonical isomorphism $v^*a_*H\\simeq a_{V,*}v'^*H$. Taking sections over $V$ identifies $(a_*H)_{\\mathrm{et}}(V)$ with $\\Gamma(U_V,v'^*H)$, which is $(a_{\\mathrm{et},*}H_{\\mathrm{et}})(V)$ by [lem-trf-space-etale-module-pushforward-restriction]. These are the canonical base-change maps, hence are natural in $V$ and $H$ and give the required sheaf isomorphism. Its source is site quasi-coherent by step 3, so the target is too. On an open $V=W\\subseteq T$, base change is restriction to $a^{-1}W$ and the displayed section comparison is the identity of $\\Gamma(a^{-1}W,H)$. This proves also the required normalization of direct image.",
+   "text": "For arbitrary $a:U\\to T$, [lem-trf-zariski-etale-functor-comparison-square] gives the canonical natural isomorphism $L_Ua^*F\\simeq a_{\\mathrm{et}}^*L_TF$. The module $a^*F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. The tensor-sections identifications of [lem-trf-etale-extension-free-presentations-hom] therefore turn this into $(a^*F)_{\\mathrm{et}}\\simeq a_{\\mathrm{et}}^*F_{\\mathrm{et}}$, as claimed.",
    "uses": [
-    "lem-trf-space-qc-separated-etale-local",
-    "lem-pc-separated-quasi-separated",
-    "pqf-lem-pushforward-qcoh",
-    "def-weil-etale-morphism",
-    "lem-pc-flat-base-change-cohom",
-    "lem-trf-space-etale-module-pushforward-restriction"
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-trf-etale-extension-free-presentations-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/descent.tex",
-    "place": "03LC(3), proposition-equivalence-quasi-coherent-functorial, proof; 02KH, coherent.tex lemma-flat-base-change-cohomology, degree 0"
+    "place": "03FH(2) and 03LC(1): specialize the canonical module-functor comparison."
+   }
+  },
+  {
+   "text": "For quasi-compact separated $a$ and quasi-coherent $H$, [lem-trf-zariski-etale-functor-comparison-square] gives quasi-coherent $a_*H$ and the canonical sectionwise isomorphism $L_T(a_*H)\\simeq a_{\\mathrm{et},*}L_UH$, natural in $H$ and equal to the identity on open sections. By [lem-trf-etale-extension-free-presentations-hom] its source is site quasi-coherent. The isomorphic target is therefore site quasi-coherent as well. Replacing both $L$-images by their tensor-sections descriptions yields exactly the required direct-image isomorphism and normalization.",
+   "uses": [
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "lem-trf-etale-extension-free-presentations-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "03LC(3): apply the section comparison and transfer site quasi-coherence."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-zariski-etale-tensor-sections",
-  "lem-sc-etale-qcoherent-descent",
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pc-module-pullback-identity-composition",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-trf-space-quasi-coherent-module",
-  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
-  "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "lem-pc-fpqc-descent",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-trf-space-etale-module-pushforward-restriction",
-  "lem-pc-module-pullback-adjunction",
+  "lem-trf-etale-extension-free-presentations-hom",
+  "lem-trf-etale-presented-module-effective-recovery",
+  "lem-trf-scheme-etale-invertible-comparison",
   "def-sc-invertible-module",
   "def-trf-algebraic-space",
-  "lem-trf-space-qc-separated-etale-local",
-  "lem-pc-separated-quasi-separated",
-  "pqf-lem-pushforward-qcoh",
-  "def-weil-etale-morphism",
-  "lem-pc-flat-base-change-cohom"
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-weil-pbc-module-pullback-quasi-coherent"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/descent.tex",
-  "place": "Proofs of Tags 03DV, 0GN7, 03DX(2), 05VG and 03LC(1),(3), with the cocycle, gluing, and adjunction comparisons written out."
+  "place": "Tags 03DV, 0GN7, 03DX(2), 05VG, 03FH(2), 03LC(1),(3), assembled from the three statement-only work packages."
  },
  "mathlib_searches": [
   {
@@ -270,70 +176,14 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
   "worker": "stage1",
-  "summary": "Derived the equivalence by free presentations and fpqc descent, including the cocycle and gluing argument, and proved pullback and qc separated direct-image comparisons with their open-section normalizations. Added only the general arbitrary-module change-of-topology tensor-sections lemma (070S); reused affine, cokernel, descent, and base-change nodes. No statement change.",
+  "summary": "Repair of the human re-split return: retained the statement verbatim; distributed old steps 1-4, 5-7, and 8+10 into three balanced statement-only nodes; retained the rank-one argument in the parent. Full original arguments and ownership map are preserved in report.md. Reviewer FIX (2026-10-22): the rank-one clause (old step 9) now cites the existing reviewed node lem-trf-scheme-etale-invertible-comparison instead of repeating its descent argument in the parent.",
   "blueprint": "Historical ancestry through lem-trf-local-term-locality retained, as in the imported item: section-algebra comparison in polarized ampleness descent (Stacks 0D3C), below the normal-cone specialization chain. The current main-20261015 local-term proof does not directly mention this generic input; no unit or chapter route is changed.",
   "tool_uses": [
    {
-    "node": "lem-sc-etale-qcoherent-descent",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-pc-module-pullback-identity-composition",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
     "node": "lem-weil-pbc-module-pullback-quasi-coherent",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-spec-module-tilde-sections",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-module-cokernel-image",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-fpqc-finer-than-etale",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-pc-fpqc-descent",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-pc-module-pullback-adjunction",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-pc-separated-quasi-separated",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "pqf-lem-pushforward-qcoh",
-    "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
-   },
-   {
-    "node": "lem-pc-flat-base-change-cohom",
     "why": "Generic module/descent/site tool used only for its stated interface in the Stacks 03DX/03LC comparison proof; not a replacement for a trace-formula unit step."
    }
   ]
@@ -356,12 +206,12 @@
   "lem-pc-flat-base-change-cohom"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q77-c51146638",
-  "group": "Q77",
+  "reviewer": "NT-cc-Q106-b45abbab9",
+  "group": "Q106",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-c51146638 (reviewer sub-agent of L); spot-checked: Read both nodes and all ten steps; checked cited statements, Stacks sources, canonical flat base-change map, module categories, duplicates, edge cases, and route constraints. No repairs needed. review.md records full findings and my prohibited read-only git invocation."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-b45abbab9 (reviewer sub-agent of L); spot-checked: I read the re-split against the base 10-step proof (live item, Q77 PASS) and the repair note. Old steps 1-4 now sit verbatim in lem-trf-etale-extension-free-presentations-hom, steps 5-7 in lem-trf-etale-presented-module-effective-recovery, and steps 8 and 10 in lem-trf-zariski-etale-functor-comparison-square. The three nodes are comparable in size (about 2.2-2.5k characters each), statement-only, and each records three kinds of search. Each new statement matches Stacks descent.tex: 03FH(1,2), 03DV, 0GN7, the 03DX(2) proof paragraphs, and 03LC(1,3) restricted to separated morphisms. In the flat base-change node, v is etale and therefore flat, and separated gives quasi-separated, so 02KH applies in degree 0. On an open W, the etale direct image is G(a^{-1}W) because that chart is terminal. In the recovery node the phi_ij direction and the cocycle are correct, and the node does not assume the item. Edge cases checked: empty base, zero module and empty index sets, non-finite modules, and the identity and open-immersion maps. One fault: the parent kept old step 9, the rank-one descent argument, which goes against the note's every-argument-in-a-node rule. It also used N1's Hom bijection on u_i^*F without citing pullback quasi-coherence (C1). The existing reviewed node lem-trf-scheme-etale-invertible-comparison (same unit sk-i-curve-zero, closure free of the item) already states that A_T(L)=L_et is an equivalence from invertible modules onto line modules. The FIX makes step 2 cite it, together with N1's identification L_T L = L_et. proof_deps is recomputed, so the fpqc tools drop out of the item. split_report.tool_uses keeps only lem-weil-pbc-module-pullback-quasi-coherent, which I accept. The statement is unchanged and no SGA is cited. After the fix the parent is a 2447-character pure assembly.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -405,5 +255,35 @@
   "existing": false,
   "note": "Canonical ringed-site module pullbacks are Mathlib SheafOfModules.pullback for the explicit inclusion/base-change functors and regular-function maps. The theorem states their adjoint equivalence on quasi-coherent full subcategories by invertibility of the specified unit and counit, with section, scalar, line-module and canonical mate normalizations. Contexts contain only continuity/right-adjoint-existence proofs; no arbitrary functor or comparison is chosen. Slice sheafification helper statements retain the original coefficient and section universe."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T081356-L-1941788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.Scheme.Modules.scheme_zariski_etale_quasiCoherent_equivalence",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverHasWeakSheafify",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModuleOverWEqualsLocallyBijective",
+   "AlgebraicGeometry.Scheme.Modules.smallEtaleModulePresheaf_isSheaf"
+  ],
+  "sorry_after": [
+   "AlgebraicGeometry.Scheme.Modules.scheme_zariski_etale_quasiCoherent_equivalence"
+  ]
+ }
 }

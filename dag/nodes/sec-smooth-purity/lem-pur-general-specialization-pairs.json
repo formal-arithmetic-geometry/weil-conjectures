@@ -1,0 +1,211 @@
+{
+ "id": "lem-pur-general-specialization-pairs",
+ "kind": "statement",
+ "title": "Equality specialization fixes pairs, representatives and Hom transports",
+ "statement": "Fix a finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and any scheme $Y$ with no structure map to $k$; its universe is independent of that of $\\Omega$. Let $I$ be the directed finite coefficient subfields [def-weil-finite-subextension-directed-set]. On the fixed intrinsic rational stages $C_E=\\mathrm{sfRationalConstructibleCategory}(\\ell,\\mathrm{Shrink}(E),Y)$, obtained by raw rationalization of the intrinsic integral category [def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi], let $S$ and $S_D$ be the normalized scalar systems with proof parameters $0$ and $p$, respectively [lem-general-algebraically-closed-coefficient-stages]. These two stage systems are equal: for all $E\\le L$ in $I$ their transition functors $S.T_{EL}$ and $S_D.T_{EL}$ coincide, and for all $E\\le L\\le M$, including identity and repeated fields, their associators $S.a_{ELM}$ and $S_D.a_{ELM}$ coincide under that identification (heterogeneous equality). Let $\\eta:S=S_D$ be this equality, and set $P=S.\\mathrm{PairCategory}$, $P_D=S_D.\\mathrm{PairCategory}$ [def-sf-directed-common-stage-data]. Let $e:P\\simeq P_D$ be equality transport, namely $\\mathrm{Pi.eqToEquivalence}(T\\mapsto T.\\mathrm{PairCategory},\\eta)$; this specifies the functor, not an arbitrary equivalence.\n\nFor every $E\\in I$ and $K\\in C_E$, $e(E,K)=(E,K)$. If $A=(E,K),B=(F,H)$, $L\\ge E,F$, and maps $u:S.T_{EL}K\\to S.T_{FL}H$ and $u_D:S_D.T_{EL}K\\to S_D.T_{FL}H$ agree under the equality transports determined by $\\eta$ (heterogeneous equality), then\n$$e([L,u])=[L,u_D].$$\nFor every $M\\ge L$, the actual associator-conjugated transports $S.\\mathrm{tr}_{LM}(u)$ and $S_D.\\mathrm{tr}_{LM}(u_D)$ agree under those same equality transports. This comparison retains each coefficient label and each finite representative, including identity and repeated fields.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Old owning proof arguments 11 and 12; GeneralAlgebraicallyClosedCoefficients.lean:700-893 (stage_equality_pairs, stage_equality_transport, normalized_comp_parameter_independent, normalized_unit_parameter_independent, specialization_comparisons, specialization_pairs, specialization_transport).",
+  "note": "Construction material from old argument 11 (retained verbatim): For specialization_pairs, apply equality induction to the equality of normalized stage systems in a private abstract-category lemma. The transported equivalence then reduces to the identity. Its object formula is reflexivity; its representative-map formula is reflexivity after replacing the two heterogeneous-equal finite maps. For specialization_transport, the same equality induction identifies the stage transport operations, after which heterogeneous equality of the input maps gives heterogeneous equality of their transported outputs. Present the concrete transport as StageSystem.tr before applying the abstract lemma, avoiding repeated expansion of the scalar-extension data. Prerequisite construction from old argument 12 (retained verbatim, used to identify the canonical eta, not reasserted as a new scalar-stage theorem): For specialization_comparisons, use the normalized associator specification to replace the general associator by scalarAssociator. Unfold the two scalar comparisons and their uniquely normalized rational constructions. The characteristic parameter occurs only in preservation proofs for the identical scalar functor, so proof irrelevance identifies the comparison specifications and their chosen isomorphisms. The same argument identifies the unit, including identity and repeated coefficient fields. Replace the sealed general associator by its specified tensor value. Unfold the integral restrictions; p occurs only in preservation proofs of the same completed functor, so proof irrelevance identifies those restrictions. The ordinary balanced associator and multiplication unit contain no p; their unique integral component specifications, followed by unique rational localization specifications, identify the comparisons. Substitution through coefficientInclusion_laws covers all triples, including repeated fields. The cocycle field is a proof, hence the same data specifies eta. In an abstract lemma eliminate eta, then eliminate the input HEq. Pi.eqToEquivalence becomes the identity; both object and representative formulas are reflexivity. Write concrete transport as StageSystem.tr before using the same equality induction."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof": [
+  {
+   "text": "The intrinsic categories $C_E$ and the specified small coefficient fields are the same for the two parameters. Apply the parameter independence of [lem-general-algebraically-closed-coefficient-stages] to the transitions, with parameters $0,p$; the required inequalities are $\\ell\\ne0$ (primality) and the given $\\ell\\ne p$. This gives $S.T_{EL}=S_D.T_{EL}$ for every inclusion, including an identity. Neither the integral predicate nor the raw rationalization changes with the parameter.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Retained order-1462 scalar-stage construction and old owning proof argument 12, transition equality; GeneralAlgebraicallyClosedCoefficientStages.lean:228-242,339-355."
+   }
+  },
+  {
+   "text": "Compare the specified tensor isomorphisms, rather than choosing new ones. Unfold sfRationalScalarComp, sfRationalScalarExtension and sfIntegralScalarComp, then sfConstructibleIntegralScalarExtension. The last functor is the same ambient completed scalar extension restricted to the fixed full intrinsic subcategories: its parameter occurs only in the proof that its image satisfies the intrinsic predicate. Proof irrelevance identifies these proof fields. The proposition specifying the chosen integral associator is then literally the same: its ordinary-to-completed comparisons and ordinary balanced tensor associator have no parameter. Its existence proofs are proofs of that same proposition, so their chosen witnesses coincide. The rational specification is likewise the same after this replacement: it prescribes the localized integral component on every unchanged integral object. Proof irrelevance again identifies the proofs fed to the choice operation. Thus the two normalized rational composition isomorphisms are heterogeneously equal. For the unit, unfold sfRationalScalarUnit and sfIntegralScalarUnit instead; the same computation applies with the parameter-free ordinary multiplication unit. These are computations with the specified definitions, not a claim that an arbitrary associator is parameter independent.",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old owning proof argument 12, normalized composition and unit; GeneralAlgebraicallyClosedCoefficients.lean:735-770; SfScalarExtensionComposition.lean:823-875,974-1062."
+   }
+  },
+  {
+   "text": "Each stage associator is its specified rational tensor composition isomorphism followed by equality transport along the actual coefficient-inclusion composition law. These field maps and their composition equality are identical for both parameters: the conjugated inclusions are $s_L^{-1}\\circ\\iota_{EL}\\circ s_E$, so intermediate $s_Ls_L^{-1}$ cancel. Substituting Step 2 therefore identifies $S.a_{ELM}$ and $S_D.a_{ELM}$, also when fields repeat. The same substitution in the inclusion identity law identifies the specified units. By [lem-general-algebraically-closed-coefficient-stages], the transitions and these given associators uniquely specify the stage system; hence $S=S_D$. Equivalently these are all its data fields, and its cocycle field is a proof. Denote this equality by $\\eta$; proof irrelevance makes the subsequent equality transport independent of its proof witness.",
+   "uses": [
+    "lem-general-algebraically-closed-coefficient-stages",
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old owning proof argument 12, substitution through coefficientInclusion_laws and equality of complete stage systems; GeneralAlgebraicallyClosedCoefficients.lean:772-835."
+   }
+  },
+  {
+   "text": "Prove the pair assertions first for arbitrary equal stage systems on a fixed family $C_E$: eliminate their equality $\\eta$. By the definition of Pi.eqToEquivalence, $e$ is now the identity equivalence. Its object map sends the literal pair $(E,K)$ to itself, so the object assertion is reflexivity. For the representative assertion, the pair objects and the two finite Hom types now coincide. Convert the assumed heterogeneous equality of $u,u_D$ into equality and substitute $u_D=u$. The map assertion becomes $[L,u]=[L,u]$, again reflexivity. In particular neither the label $L$ nor either source coefficient label was replaced by a larger field. Instantiate this equality-induction argument with the equality from Step 3.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old owning proof argument 11, stage_equality_pairs and specialization_pairs; GeneralAlgebraicallyClosedCoefficients.lean:712-733,853-869; Mathlib/CategoryTheory/Pi/Basic.lean:302."
+   }
+  },
+  {
+   "text": "Write the concrete transition as the operation $S.\\mathrm{tr}_{LM}$ of [def-sf-directed-common-stage-data]. For $A=(E,K),B=(F,H)$ its value is $a_{FLM,H}\\circ T_{LM}(u)\\circ a_{ELM,K}^{-1}$. Eliminate $\\eta$ in the comparison of this operation for the two systems, and then eliminate the now homogeneous equality $u=u_D$. The two displayed expressions are identical, including their endpoints, so heterogeneous equality is reflexivity. Apply this argument for every $M\\ge L$. No strict inequality or distinctness of fields was used in Steps 2--5; identities and repeated fields are included.",
+   "uses": [
+    "def-sf-directed-common-stage-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+    "place": "Old owning proof argument 11, stage_equality_transport and specialization_transport; GeneralAlgebraicallyClosedCoefficients.lean:700-710,877-893."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-general-algebraically-closed-coefficient-stages",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition",
+  "def-sf-directed-common-stage-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/_section.md",
+  "place": "Retained old owning arguments 11--12, made explicit by the defining computations and equality-induction arguments in Sheaf/Paper/GeneralAlgebraicallyClosedCoefficients.lean:700-893."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Equality of normalized coefficient stage systems induces an equivalence fixing literal finite field pairs and representative maps and intertwining associator conjugated Hom transports",
+   "results": "[leanfinder] OK 8 hit(s); Mathlib.Tactic.CC.CCNormalizer.mk.inj, Mathlib.Tactic.RingNF.instBEqConfig, Mathlib.Tactic.RingNF.instBEqConfig.beq, Mathlib.Tactic.Ring.ExtractCoeff.mk.inj, Mathlib.Tactic.FieldSimp.NF.eval_cons_eq_eval_of_eq_of_eq, Mathlib.Tactic.BicategoryLike.Normalize.Result.mk.inj, Mathlib.Tactic.Abel.NormalExpr.nterm.inj, Mathlib.Meta.NormNum.NormNumExt.mk.inj",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pi.eqToEquivalence",
+   "results": "[loogle] OK 10 hit(s); CategoryTheory.Pi.eqToEquivalence, CategoryTheory.Pi.evalCompEqToEquivalenceFunctor, CategoryTheory.Pi.eqToEquivalenceFunctorIso, CategoryTheory.Pi.evalCompEqToEquivalenceFunctor_hom, CategoryTheory.Pi.eqToEquivalenceFunctorIso_hom, CategoryTheory.Pi.evalCompEqToEquivalenceFunctor_inv, CategoryTheory.Pi.eqToEquivalenceFunctorIso_inv, CategoryTheory.Pi.equivalenceOfEquiv_functor, CategoryTheory.Pi.equivalenceOfEquiv_counitIso, CategoryTheory.Pi.equivalenceOfEquiv_unitIso",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "stage_equality_pairs|stage_equality_transport|specialization_pairs",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality induction for the category of pairs of equal directed stage systems identifies representative maps and transition transports",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Pairwise.pair.noConfusion, CategoryTheory.InducedCategory.hom_ext_iff, CategoryTheory.Over.mapCongr, CategoryTheory.Limits.parallelPair.eqOfHomEq.congr_simp, CategoryTheory.Limits.parallelPairIsoMk.congr_simp, CategoryTheory.Limits.Pi.map'_eq, CategoryTheory.Limits.Sigma.map'_eq, CategoryTheory.Pairwise.pair.inj",
+   "date": "2026-10-27",
+   "verdict": "No exact or one-line match: the hits do not identify this specified coefficient-system normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "def eqToEquivalence|eqToEquivalence.*rfl",
+   "results": "Mathlib/CategoryTheory/Pi/Basic.lean:302 defines Pi.eqToEquivalence by equality induction; read lines 298--302. It supplies the definition used in the elementary computation, not the coefficient-system equality.",
+   "date": "2026-10-27",
+   "verdict": "No match for the whole item: generic equality transport does not identify the specified normalized scalar systems."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proof irrelevance identifies choices from the same proposition and equality induction reduces transport to reflexivity",
+   "results": "Lean.Meta.instFastSubsingleton, uniqueProp, Eq.rec_eq_cast, heq_rec_iff_heq, Equiv.propEquivPUnit, rec_heq_iff_heq, Mathlib.Tactic.ITauto.Proof.orImpR.inj, Mathlib.Tactic.ITauto.IProp.imp.injEq; generic proof irrelevance, casts and identity equivalences, no coefficient-system theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match for the whole item: generic equality transport does not identify the specified normalized scalar systems."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pi.eqToEquivalence",
+   "results": "CategoryTheory.Pi.eqToEquivalence and its evaluation/reindexing comparisons, in Mathlib.CategoryTheory.Pi.Basic; read the constructor at line 302. No coefficient normalization theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match for the whole item: generic equality transport does not identify the specified normalized scalar systems."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equality transport Pi.eqToEquivalence reduces to the identity equivalence when the equality proof is reflexivity",
+   "results": "Equiv.piCongrLeft_refl, Equiv.piCongrLeft'_refl, Equiv.piCongrRight_refl, Equiv.cast_refl, ComplexShape.Embedding.AreComplementary.desc.aux, Equiv.arrowCongr'_refl, Equiv.arrowCongr_refl, Equiv.psigmaCongrRight_refl; generic proof irrelevance, casts and identity equivalences, no coefficient-system theorem.",
+   "date": "2026-10-27",
+   "verdict": "No match for the whole item: generic equality transport does not identify the specified normalized scalar systems."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-weil-algebraically-closed-coefficients",
+  "date": "2026-10-27",
+  "group": "ND"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-algebraically-closed-coefficients",
+   "place": "Retained order-1462 common-stage construction, old owning arguments 11--12: canonical specialization on literal pairs, finite representatives and actual Hom transitions; normalized associator and unit parameter independence.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "lem-pur-general-specialization-pairs",
+  "worker": "stage1",
+  "summary": "Read the live statement, current blueprint clause (4), retained source arguments and the named Lean definitions. Reused the datum-free scalar-stage theorem and common-stage definition. Proved equality of the normalized comparisons by unfolding their proof-only parameter dependence, assembled equality of stage systems, and gave equality-induction proofs of literal pair, representative and Hom-transport formulas. No new nodes: the additional computations are elementary; no statement change.",
+  "blueprint": "Ancestor def-weil-algebraically-closed-coefficients: old owning argument 12 is realized by Steps 1--3, and old owning argument 11 by Steps 4--5; these implement the fixed finite coefficient diagram underlying current sk-thm-sfb-qlbar-two-colimit clause (4)."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-cc-NU-a32699f23",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-a32699f23 (reviewer sub-agent of L); spot-checked: I read the item, all five proof_deps statements, the blueprint place (sk-thm-sfb-qlbar-two-colimit clause (4), via parent def-weil-algebraically-closed-coefficients args 11-12) and the Lean source GeneralAlgebraicallyClosedCoefficients.lean:700-893. The delivery has no new nodes, the statement is unchanged (the citers hom-additivity and coefficient-specialization still match), all deps are in unit sk-def-sf-operations, there is no cycle and no tool_uses. Step 1: the parameter-independence clause of lem-general-algebraically-closed-coefficient-stages applies with l!=0 from primality and l!=p from the hypothesis, giving the transitions. Step 2: p enters the cited definitions only through the hypothesis l!=p, and the canonical iso of lem-weil-scalar-extension-composition carries no datum; this matches normalized_comp/unit_parameter_independent (unfold; rfl) and is accepted as elementary. Step 3: the coefficientInclusion_laws substitution and the uniqueness clause (or data fields plus the Prop cocycle) give eta, matching specialization_stageSystem. Steps 4-5: equality induction (Pi.eqToEquivalence becomes the identity, Mathlib Pi/Basic.lean:302); the transport formula a_FLM o T_LM(u) o a_ELM^-1 matches def-sf-directed-common-stage-data. Edge cases E=L=M and L=M, identities, zero objects and Y with no map to k are all covered. The coefficient category is the raw rationalization as defined; there is no seeded comparison and no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients",
+  "declaration": "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_pairs",
+  "declarations": [
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_transition",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_comparisons",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_stageSystem",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_pairs",
+   "WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_transport"
+  ],
+  "statement": "theorem specialization_pairs :\n    (∀ (E : AlgebraicallyClosedCoefficients.Index l Ω) (K : Stage l Ω Y E),\n      (specialization D l hl Ω Y).functor.obj ⟨E, K⟩ = ⟨E, K⟩) ∧\n    (∀ (A B : Pair l Ω Y) (L : AlgebraicallyClosedCoefficients.Index l Ω)\n      (hA : A.stage ≤ L) (hB : B.stage ≤ L)\n      (f : StageHom A B ⟨L, hA, hB⟩)\n      (g : SfAlgebraicallyClosedCoefficients.StageHom\n        (⟨A.stage, A.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)\n        (⟨B.stage, B.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) ⟨L, hA, hB⟩),\n      HEq f g → HEq ((specialization D l hl Ω Y).functor.map (ofHom A B L hA hB f))\n        (SfAlgebraicallyClosedCoefficients.ofHom\n          (⟨A.stage, A.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y)\n          (⟨B.stage, B.obj⟩ : SfAlgebraicallyClosedCoefficients.Pair D l hl Ω Y) L hA hB g))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "Existing-declaration attachment: specialization_stageSystem identifies the complete normalized systems; specialization is exactly Pi.eqToEquivalence of this equality; specialization_pairs fixes literal pairs and finite representatives; specialization_transport identifies their actual associator-conjugated transports. specialization_transition and specialization_comparisons supply the component transition and associator equalities. The transition theorem is publicly imported from GeneralAlgebraicallyClosedCoefficientStages. No new module or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b1365510",
+  "group": "NE",
+  "result": "pass",
+  "note": "Lean-only existing:true attachment to the proved live GeneralAlgebraicallyClosedCoefficients.specialization_pairs (+transition/comparisons/stageSystem/specialization/transport); lean.statement verbatim. Stage = sfRationalConstructibleCategory l (Shrink E) Y, and D.sfRationalCategory is an abbrev of it; S/S_D carry parameters 0/D.p; eta = specialization_stageSystem via the uniqueness clause; e = Pi.eqToEquivalence literally; object clause, HEq representative clause and associator-conjugated transport for all L<=M match the node; universes d/u/v independent, no hypotheses on Y, <= bounds cover identities and repeated fields. Advisory only: Pair/StageHom/ofHom/specialization/Sf* are owned by the parent def-weil-algebraically-closed-coefficients (uncitable, cycle; dual listing; precedent NB 8c0f); specialization_transition is in the publicly imported Stages module. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,211 @@
+{
+ "id": "lem-sp-p1-kummer-derived-scalar",
+ "kind": "statement",
+ "title": "Derived scalar transitivity preserves the specified projective-line Kummer morphism",
+ "statement": "Let $S$ be a Noetherian scheme (one admitting a finite affine cover by spectra of Noetherian rings), let $N\\geq1$ be invertible on $S$, and let $\\varphi:A\\to B$ be a unital map of finite commutative rings with $NA=NB=0$. Put $\\Lambda=\\mathbf Z/N$, $P=\\mathbf P^1_S$, and let $\\mathcal O_P(1)$ have transition $g_0=(x_1/x_0)^{-1}g_1$ on the standard affine charts. Use the ordinary etale derived categories of constant-ring module sheaves [def-weil-pbc-derived-categories]. For $R=\\Lambda,A,B$ put $R_P(1)=\\mu_{N,P}\\otimes_{\\Lambda_P}R_P$, with the roots-of-unity sheaf and its power action as in [lem-asd-finite-etale-twist-line], and let $E_{\\Lambda R}=-\\otimes^L_{\\Lambda_P}R_P$ and $E=-\\otimes^L_{A_P}B_P$ [lem-pur-derived-change-of-rings].\n\nLet $c_\\Lambda:\\Lambda_P\\to\\mu_{N,P}[2]$ be the Kummer first Chern morphism of the fixed $\\mathcal O_P(1)$: the Kummer connecting class of its line-bundle class, in the module-derived interpretation used by [lem-asd-ordinary-finite-p1-adjunction]. Let $c_R:R_P\\to R_P(1)[2]$ for $R=A,B$ be the image $E_{\\Lambda R}(c_\\Lambda)$ under the canonical unit and degree-zero Tate identifications; thus its adjunct for $q:P\\to S$ is the specified Kummer component $h_R$ of that node.\n\nLet $\\alpha:E E_{\\Lambda A}\\xrightarrow\\sim E_{\\Lambda B}$ be the canonical composition comparison of derived coefficient extension [lem-sfb-ringed-derived-monoidal-comparisons]. Its components on $\\Lambda_P$ and $\\mu_{N,P}[2]$, under the preceding identifications, are respectively the multiplication map $\\theta^0:E(A_P)\\xrightarrow\\sim B_P$ and the shifted balanced map $\\theta^1[2]:E(A_P(1)[2])\\xrightarrow\\sim B_P(1)[2]$ induced by $(z\\otimes a)\\otimes b\\mapsto z\\otimes\\varphi(a)b$. With the canonical shift comparison understood,\n$$\\theta^1[2]\\circ E(c_A)=c_B\\circ\\theta^0.$$\nThis is an equality in the derived category, for arbitrary $\\varphi$; no flatness of either coefficient extension is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: 'the Kummer and diagonal classes over B are the images of those over A (they come from Z/ell^n)'; the Kummer portion, retained splitting Step 2"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-sp-p1-kummer-scalar-endpoints"
+ ],
+ "proof": [
+  {
+   "text": "Apply normalized endpoint existence to the residue-to-A, composite residue-to-B and A-to-B maps on P. Apply the scalar Chern theorem to the same fixed residue arrow and each residue endpoint.",
+   "uses": [
+    "lem-sp-p1-kummer-scalar-endpoint-existence",
+    "lem-sp-p1-kummer-chern-scalar"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply endpoint composition to obtain the unit and shifted Tate-line equations for the specified canonical composition comparison.",
+   "uses": [
+    "lem-sp-p1-kummer-scalar-endpoint-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply naturality of the canonical composition isomorphism to the fixed residue Chern arrow. Precompose by extension of the unit endpoint isomorphism, expand chernImage, substitute the two component equations and cancel all inverse pairs. This gives the last derived equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-p1-kummer-scalar-endpoint-existence",
+  "lem-sp-p1-kummer-chern-scalar",
+  "lem-sp-p1-kummer-scalar-endpoint-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: the Kummer classes over B are images from residue coefficients; normalized unit and Tate-line comparisons",
+  "group": "U1",
+  "date": "2026-10-24"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finiteEtaleTate|kummer.*scalar|scalar.*kummer|chernClass",
+   "results": "{\"t\": \"2026-10-22T05:55:26Z\", \"tool\": \"grep\", \"query\": \"finiteEtaleTate|kummer.*scalar|scalar.*kummer|chernClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of coefficient rings preserves the Kummer Chern class of the projective line",
+   "results": "{\"t\": \"2026-10-22T05:55:27Z\", \"tool\": \"leansearch\", \"query\": \"Derived change of coefficient rings preserves the Kummer Chern class of the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Unramified.baseChange\", \"WeierstrassCurve.Projective.baseChange_polynomialY\", \"KaehlerDifferential.mapBaseChange.congr_simp\", \"WeierstrassCurve.Projective.baseChange_polynomial\", \"WeierstrassCurve.map_c₄\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"KaehlerDifferential.tensorKaehlerEquiv\", \"Algebra.PreSubmersivePresentation.baseChange_ring\"], \"digest\": \"b35340a4eb0e70c3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "{\"t\": \"2026-10-22T05:55:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension preserves the Kummer first Chern morphism of O(1) via the canonical composition of change of rings",
+   "results": "{\"t\": \"2026-10-22T05:55:38Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension preserves the Kummer first Chern morphism of O(1) via the canonical composition of change of rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"CommRingCat.KaehlerDifferential.map\", \"CommRing.Pic.mapAlgebra_mapAlgebra\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"CommRing.Pic.mapAlgebra\", \"CommRing.Pic.mapAlgebra_comp_mapAlgebra\", \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"KaehlerDifferential.map_liftBaseChange_smul\"], \"digest\": \"fd297d6926a59ff9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transitivity of derived change of rings identifies the two scalar images of a fixed etale Kummer Chern arrow including the unit and Tate target identifications",
+   "results": "{\"t\": \"2026-10-22T05:55:52Z\", \"tool\": \"leanfinder\", \"query\": \"Transitivity of derived change of rings identifies the two scalar images of a fixed etale Kummer Chern arrow including the unit and Tate target identifications\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePresentation.mapEquiv\", \"Algebra.Etale.comp\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.HasMap.map\", \"StandardEtalePair.hom_ext_iff\", \"Algebra.IsStandardEtale.of_equiv\"], \"digest\": \"18e2cd4927b8c4e5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary algebraic base change, roots in rings, free module pullback, or presheaf tensor; none states the specified ordinary-etale derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*scalar|scalar.*kummer|chern.*class|derived.*pullbackComp",
+   "results": "{\"t\": \"2026-10-22T06:26:16Z\", \"tool\": \"grep\", \"query\": \"kummer.*scalar|scalar.*kummer|chern.*class|derived.*pullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no hits for the scalar/Kummer/derived-composition pattern"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transitivity of derived scalar extension for the Kummer class in etale cohomology",
+   "results": "{\"t\": \"2026-10-22T06:26:17Z\", \"tool\": \"leansearch\", \"query\": \"Transitivity of derived scalar extension for the Kummer class in etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsScalarTower.AlgEquiv.restrictNormalHom_comp\", \"Algebra.IsSeparable.trans\", \"IntermediateField.extendScalars\", \"Algebra.isSeparable_tower_bot_of_isSeparable\", \"IntermediateField.extendScalars_restrictScalars\", \"IntermediateField.extendScalars_top\", \"IsSeparable.of_algebra_isSeparable_of_isSeparable\", \"Algebra.IsAlgebraic.tower_top\"], \"digest\": \"40ed4519baa6dcd6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: normal/separable field-extension scalar towers, not module-sheaf derived extension or a Kummer Chern morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"t\": \"2026-10-22T06:26:17Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"6d62dd74aaeb25fe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary SheafOfModules.pullbackComp and its coherence, not derived Kummer-class scalar compatibility; PullbackContinuous.lean:167-174 read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of coefficient rings preserves the Kummer first Chern morphism by naturality of the composition isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:26:29Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of coefficient rings preserves the Kummer first Chern morphism by naturality of the composition isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map_d\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"CommRingCat.KaehlerDifferential.map_d\", \"CommRingCat.KaehlerDifferential.map\", \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"Algebra.Generators.H1Cotangent.δ_map\", \"PresheafOfModules.Derivation.d_map\", \"PresheafOfModules.DifferentialsConstruction.derivation'\"], \"digest\": \"aab4d94475662047\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Kaehler differential naturality and cotangent connecting maps only; no etale Kummer or derived coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullbackAssoc|kummerClass",
+   "results": "{\"t\": \"2026-10-22T06:26:39Z\", \"tool\": \"grep\", \"query\": \"pullbackComp|pullbackAssoc|kummerClass\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"daaea333ed416dc8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary SheafOfModules.pullbackComp and its coherence, not derived Kummer-class scalar compatibility; PullbackContinuous.lean:167-174 read"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of derived change of rings composition and its degree zero locally free tensor comparison",
+   "results": "{\"t\": \"2026-10-22T06:26:50Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of derived change of rings composition and its degree zero locally free tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.freeHomEquiv_comp_apply\"], \"digest\": \"3fd9fa0cce372715\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf free-object pullback and free-map naturality only, not the derived coefficient comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-p1-splitting-scalar",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: 'the Kummer and diagonal classes over B are the images of those over A (they come from Z/ell^n)'; the Kummer portion, retained splitting Step 2",
+   "via": [
+    "lem-sp-p1-splitting-scalar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-p1-kummer-derived-scalar",
+  "worker": "stage1",
+  "summary": "Q77: no new nodes. Checked the ordinary-etale fixed Kummer arrow against the live project, derived ringed-topos composition and flat Tate statements. Expanded flat degree-zero K-flatness, the balanced representative components, and the naturality equation with all endpoint conjugations. Preserved the statement and earlier searches.",
+  "blueprint": "det-sp-reduction-exceptional, Charts sentence that Kummer classes over B are images from Z/ell^n: Steps 1-3 identify the derived coefficient comparison, Step 4 proves the fixed-arrow square. Unit sk-lem-sp-reduction Step 2; no change of route.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Flatness of the specified ordinary-etale Tate line, needed to evaluate scalar extension on its degree-zero representative; the current unit has no independent definition or flatness theorem for this line."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic construction of coefficient extension on K-flat module sheaves, as already named in the item; no unit-specific replacement supplies this homological-algebra construction."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical composition comparison for derived pullbacks, already specified in the item; naturality and its representative normalization, not a different geometric proof route."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-45ba56163",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-45ba56163 (reviewer sub-agent of L); spot-checked: I read the item and all 4 steps in full, every cited statement (twist-line, def-pc-kflat-complex, lem-pur-derived-change-of-rings, lem-sfb-ringed-derived-monoidal-comparisons, def-weil-pbc-derived-categories, lem-asd-ordinary-finite-p1-adjunction, and the ringed pullback and topos-morphism nodes they rest on), the unit sk-lem-sp-reduction, the blueprint main-20261015 Charts paragraph and the parent lem-sp-p1-splitting-scalar. Shape: one commit with the item and its report; no new nodes. The statement and stmt_deps are identical to the node Q08 created. The node is still unsplit in live and side-live, so nothing supersedes it. Step 1: the twist line applies on P because N is pulled back from S; it gives flatness of A_P(1), and of mu_N by the unitor; the degree-zero flat ⇒ K-flat argument by splicing the cycle sequences is correct. Step 2: identity geometric morphisms with Lambda_P→A_P→B_P are valid ringed-topos morphisms. Their pullbacks are the derived change of rings up to the degree-0 symmetry, and the comparison c_{f,g} needs no flatness of the ring maps. The orientation alpha=c^{-1} is right, and I checked the balanced formula and its inverse. Step 3: the endpoints are theta^0 and theta^1[2], computed on the L[2] representative with no sign. Step 4: I recomputed the conjugation and cancellation, and the derived equation is correct. Edge cases N=1, S empty, phi=id and the non-flat map Z/4→Z/2 over Q all hold. Duplicate search: I read the candidates; lem-pur-kummer-coefficient-base-change, lem-asd-supported-kummer-boundary-scalar and the Kummer-class definition and representability nodes are different statements. det-sp-scalar-extension-functor clause 4 gives transitivity only on the pro-étale site, while this item is ordinary étale. So I accept the three declared tool_uses (twist-line, change-of-rings, monoidal comparisons). No SGA is cited. Minor: the report mislabels Stacks 06YY, which is lemma-derived-base-change; the node cites no tag, so nothing changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.P1KummerDerivedScalar",
+  "declaration": "AlgebraicGeometry.Etale.p1KummerDerivedScalar",
+  "file": "lean/Sheaf/Paper/P1KummerDerivedScalar.lean",
+  "statement": "theorem p1KummerDerivedScalar (S : Scheme.{u}) [IsNoetherian S] (N : ℕ) (hN : 0 < N) (hS : IsUnit (N : Γ(S, ⊤))) (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (hA : (N : A) = 0) (hB : (N : B) = 0) (c : ordinaryFiniteUnit (p1KummerResidue.{u} N) (ProjectiveLine S) ⟶ (ordinaryFiniteLine (p1KummerResidue.{u} N) N (congrArg (ULift.up : ZMod N → p1KummerResidue.{u} N) (ZMod.natCast_self N)) (ProjectiveLine S))⟦(2 : ℤ)⟧) (hc : ordinaryFiniteP1ChernSpec (p1KummerResidue.{u} N) N (congrArg (ULift.up : ZMod N → p1KummerResidue.{u} N) (ZMod.natCast_self N)) S (ordinaryFiniteP1_isUnit N S hS) c) : ∃ (eA : P1KummerScalarEndpoints (p1KummerResidueMap N A hA) N (congrArg (ULift.up : ZMod N → p1KummerResidue.{u} N) (ZMod.natCast_self N)) hA (ProjectiveLine S)) (eB : P1KummerScalarEndpoints (φ.comp (p1KummerResidueMap N A hA)) N (congrArg (ULift.up : ZMod N → p1KummerResidue.{u} N) (ZMod.natCast_self N)) hB (ProjectiveLine S)) (e : P1KummerScalarEndpoints φ N hA hB (ProjectiveLine S)), ordinaryFiniteP1ChernSpec A N hA S (ordinaryFiniteP1_isUnit N S hS) (eA.chernImage c) ∧ ordinaryFiniteP1ChernSpec B N hB S (ordinaryFiniteP1_isUnit N S hS) (eB.chernImage c) ∧ ((scalarExtension φ (ProjectiveLine S)).map eA.unitIso.hom ≫ e.unitIso.hom = (ProEtale.pbcFixedScalarExtensionComp (ProjectiveLine S).smallEtaleTopology (p1KummerResidueMap N A hA) φ (φ.comp (p1KummerResidueMap N A hA)) rfl).hom.app (ordinaryFiniteUnit (p1KummerResidue.{u} N) (ProjectiveLine S)) ≫ eB.unitIso.hom) ∧ ((scalarExtension φ (ProjectiveLine S)).map eA.shiftedLineIso.hom ≫ e.shiftedLineIso.hom = (ProEtale.pbcFixedScalarExtensionComp (ProjectiveLine S).smallEtaleTopology (p1KummerResidueMap N A hA) φ (φ.comp (p1KummerResidueMap N A hA)) rfl).hom.app ((ordinaryFiniteLine (p1KummerResidue.{u} N) N (congrArg (ULift.up : ZMod N → p1KummerResidue.{u} N) (ZMod.natCast_self N)) (ProjectiveLine S))⟦(2 : ℤ)⟧) ≫ eB.shiftedLineIso.hom) ∧ ((scalarExtension φ (ProjectiveLine S)).map (eA.chernImage c) ≫ e.shiftedLineIso.hom = e.unitIso.hom ≫ eB.chernImage c)",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Ordinary ModuleCat-valued etale derived categories. The published pbcFixedScalarExtensionComp is the canonical adjunction-compatible composition. Endpoint records fix ordinary maps on generators and their derived maps by scalar adjunction; the conclusion gives both component identities and the Chern square. The lifted residue coefficients and the composite residue-to-B map are canonically the specified Z/N and its unique unital map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df4cc10b2",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: Noetherian S, N≥1 invertible, finite A,B killed by N, arbitrary φ, no flatness; the conclusion has Chern-spec conjuncts for c_A/c_B, the α component equations at Λ_P and L[2] (step-3 orientation) and the derived square. The P1KummerScalarEndpoints record has at most one value: insertions fixed on toSheafify generators (a, a⊗z), isos forced to be the adjunction transposes, shift from the actual adjunction's LeftAdjointCommShift. So the ∃ only asserts the canonical isos exist (true by flatness). ChernSpec determines c uniquely (forget+generator is the canonical Ext²≅H²). pbcFixedScalarExtensionComp is site-generic (leftAdjointCompIso of the actual adjunctions) and used on the small étale site, so no pro-étale substitute. Edge cases N=1, empty S, id, Z/4→Z/2 hold; coefficient universe u+1 as in the deps. Statements verbatim; the 5 original dep records byte-identical to side-live; only stmt_dep added is a new def node; no hollow defs, only the item theorem is sorry, docstrings OK. Not recompiled (no file changed; delivery dry run OK). Advisories: pbcFixedScalarExtensionComp (witness-compatibility) and ordinaryFiniteP1ChernSpec (def-asd-ordinary-finite-p1-kummer-class) owners not in stmt_deps; parent P1SplittingScalar theorem module has duplicate helpers p1ScalarSingleMap/p1ScalarShiftedLine that should reuse the new def node; KFlatIndependentCoefficients import is proof-only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261024T191330-L-308566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

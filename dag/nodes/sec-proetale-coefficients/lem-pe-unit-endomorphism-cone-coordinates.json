@@ -1,0 +1,84 @@
+{
+ "id": "lem-pe-unit-endomorphism-cone-coordinates",
+ "kind": "statement",
+ "title": "Signed tensor model for a cone of a unit endomorphism",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with a monoidal structure [def-sfb-monoidal-category] whose tensor is additive in each variable and with countable coproducts. Use unbounded integer cochain complexes, localization $Q$, and the cone convention of [def-weil-abstract-derived-category], and the direct-sum total tensor of [def-sfb-preserves-kflat-quasi-iso]. Fix any endomorphism $a:\\mathbf1\\to\\mathbf1$ and put $P_a=\\operatorname{Cone}(a[0]:\\mathbf1[0]\\to\\mathbf1[0])$. For an object $M$ put\n$$a^R_M=\\rho_M\\circ(1_M\\otimes a)\\circ\\rho_M^{-1},\\qquad a^L_M=\\lambda_M\\circ(a\\otimes1_M)\\circ\\lambda_M^{-1}.$$\nThey act termwise on a complex $C$. There are isomorphisms in $D(\\mathcal A)$\n$$Q\\operatorname{Tot}(C\\otimes P_a)\\cong Q\\operatorname{Cone}(a^R_C),\\qquad Q\\operatorname{Tot}(P_a\\otimes C)\\cong Q\\operatorname{Cone}(a^L_C),$$\nnatural in chain maps $f:C\\to C'$, with the following specified chain-isomorphism representatives $\\phi^R_C,\\phi^L_C$. In degree $n$, identify both tensor totals with $C^n\\oplus C^{n+1}$ by the unitors, ordering the summand from $P_a^0$ first and that from $P_a^{-1}$ second. Their differentials, expressed as biproduct matrices, are\n$$d_R^n=\\begin{pmatrix}d_C^n&(-1)^{n+1}a^R_{C^{n+1}}\\\\0&d_C^{n+1}\\end{pmatrix},\\qquad d_L^n=\\begin{pmatrix}d_C^n&a^L_{C^{n+1}}\\\\0&-d_C^{n+1}\\end{pmatrix}.$$\nThe representatives are $\\phi_C^{R,n}=\\operatorname{diag}(1,(-1)^{n+1})$ and $\\phi_C^{L,n}=\\operatorname{diag}(1,1)$, each its own inverse in these coordinates. On a map $f$ each total map and each cone map is $\\operatorname{diag}(f^n,f^{n+1})$ in the corresponding coordinates, so\n$$\\phi^R_{C'}\\circ\\operatorname{Tot}(f\\otimes1_{P_a})=\\operatorname{Cone}(f,f)\\circ\\phi^R_C,\\qquad\n\\phi^L_{C'}\\circ\\operatorname{Tot}(1_{P_a}\\otimes f)=\\operatorname{Cone}(f,f)\\circ\\phi^L_C.$$\nBoth representatives preserve the inclusion of the unshifted copy of $C$.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/TensorMappingCone.lean",
+  "place": "tensorScalarConeIso', lines 103–116, and its naturality, lines 120–134; generalized to an arbitrary unit endomorphism using FromJoel/Algebra/Homology/BifunctorMappingCone.lean, mapBifunctorMappingCone₁Iso (251–255) and mapBifunctorMappingCone₂Iso (493–497). Blueprint latest, sk-lem-pe-derived-nakayama-resolution.proof.md, On X, natural cone calculation."
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-lem-pe-derived-nakayama",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sfb-monoidal-category",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In an additive monoidal abelian category tensoring a complex with the cone of an endomorphism of the tensor unit gives the cone of its action with a degree dependent sign on the right and is natural",
+   "results": "8 hits: HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.ιTensorObj, HomologicalComplex.instHasTensorXTensorUnit, HomologicalComplex.monoidalCategory, HomologicalComplex.monoidalCategoryStruct, HomologicalComplex.rightUnitor', HomologicalComplex.rightUnitor'_inv_comm. Logged digest 9284b8c4ce29ccd5.",
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib has total tensor, unitors and additive termwise-functor cone comparisons, not these two signed total-tensor cone identifications for an arbitrary unit endomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, HomologicalComplex.tensorObj",
+   "results": "0 hits: . Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib has total tensor, unitors and additive termwise-functor cone comparisons, not these two signed total-tensor cone identifications for an arbitrary unit endomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorMappingCone|tensorScalarCone|scalarCone|tensor.*[Cc]one",
+   "results": "25 hits: Mathlib/Algebra/Category/Ring/Constructions.lean, Mathlib/Algebra/Category/Ring/Under/Property.lean, Mathlib/Algebra/Category/Ring/Under/Limits.lean, Mathlib/Algebra/Category/Ring/Under/Limits.lean, Mathlib/Algebra/Category/Ring/Under/Limits.lean, Mathlib/CategoryTheory/Sites/Point/Monoidal.lean, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean, Mathlib/CategoryTheory/Monoidal/Limits/Colimits.lean. Logged digest e3595e2628c35efd.",
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib has total tensor, unitors and additive termwise-functor cone comparisons, not these two signed total-tensor cone identifications for an arbitrary unit endomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product with a two term complex of tensor units is the cone of the induced endomorphism naturally in every unbounded cochain complex",
+   "results": "8 hits: HomologicalComplex.tensor_unit_d₂, HomologicalComplex.tensorObj, HomologicalComplex.unit_tensor_d₁, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.rightUnitor', HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.tensorHom, HomologicalComplex.rightUnitor. Logged digest a5a951e741f89264.",
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib has total tensor, unitors and additive termwise-functor cone comparisons, not these two signed total-tensor cone identifications for an arbitrary unit endomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]one|[Mm]appingCone",
+   "results": "0 hits: . Logged digest 4f53cda18c2baa0c. Subdirectory: Algebra/Homology/Monoidal.lean.",
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib has total tensor, unitors and additive termwise-functor cone comparisons, not these two signed total-tensor cone identifications for an arbitrary unit endomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any endomorphism of the monoidal unit the two term cone tensored on either side with a cochain complex identifies naturally with the cone of its left or right action",
+   "results": "8 hits: HomologicalComplex.rightUnitor', HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor', HomologicalComplex.leftUnitor, CochainComplex.mappingCone.id, CochainComplex.mappingCone.map_id, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.id_X. Logged digest 80996cff045bd660.",
+   "date": "2026-10-25",
+   "verdict": "no match: Mathlib has total tensor, unitors and additive termwise-functor cone comparisons, not these two signed total-tensor cone identifications for an arbitrary unit endomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pe-scalar-cone-tensor-model",
+  "date": "2026-10-25",
+  "group": "NI"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-pe-derived-nakayama-resolution",
+   "place": "On X: “It is a resolution ... hence K-flat” and “Tensoring K with it gives ... naturally in K”.",
+   "via": [
+    "lem-pe-scalar-cone-tensor-model"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

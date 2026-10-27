@@ -1,0 +1,432 @@
+{
+ "id": "lem-sfb-relative-nodal-perfect-duality-trace",
+ "kind": "statement",
+ "title": "Relative coherent duality and trace for perfect images between nodal families",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Let $p:Y\\to S$ and $q:Z\\to S$ be proper, flat morphisms of finite presentation [def-weil-proper-morphism, def-weil-flat-morphism, def-sbc-locally-finite-presentation] with nonempty connected reduced nodal geometric fibres pure of dimension one [def-trf-nodal-geometric-fibres]. No marking, genus or contraction condition is imposed. Let $c:Y\\to Z$ be a proper $S$-morphism. Use the canonical relative dualizing lines $\\omega_{Y/S},\\omega_{Z/S}$ with the adjunction normalization [def-trf-nodal-dualizing-datum]. Let $F$ be a perfect complex on $Y$, and suppose $Rc_*F$ is perfect on $Z$ [def-pc-perfect-complex]. There is a canonical trace-duality isomorphism in the derived category of quasi-coherent modules [def-pc-derived-category, def-pc-derived-direct-image]\n$$Rc_*R\\mathcal Hom_Y(F,\\omega_{Y/S}[1])\\xrightarrow{\\sim}R\\mathcal Hom_Z(Rc_*F,\\omega_{Z/S}[1]).$$\nHere $R\\mathcal Hom$ is derived internal Hom [def-pur-derived-internal-hom], and $[1]$ denotes the cohomological shift of complexes. The map is induced by evaluation followed by the relative trace $Rc_*\\omega_{Y/S}[1]\\to\\omega_{Z/S}[1]$, where that trace is the counit under the canonical identification $c^!\\omega_{Z/S}[1]\\simeq\\omega_{Y/S}[1]$ and $c^!$ denotes the right adjoint to $Rc_*$. On any open of $Z$ over which $c$ is an isomorphism this is the usual identification, using the adjunction normalization of the dualizing lines. The isomorphism is natural in $F$ and in isomorphisms of the diagram. It commutes with every base change $S_{new}\\to S$ under canonical derived base-change maps and the canonical base-change identifications of the relative dualizing complexes; for the new diagram take $F_{new}=Lg_Y^*F$ [def-pc-derived-pullback]. These compatibilities respect composition of base changes.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0A9Q (lemma-iso-on-RSheafHom) and 0GEV (remark-iso-on-RSheafHom), perfect source and perfect direct image; relative form with traces from spaces-duality.tex Tags 0E5X (definition-relative-dualizing-proper-flat) and 0E6C (lemma-base-change-relative-dualizing); nodal identification moduli-curves.tex Tag 0E6R (lemma-gorenstein-dualizing). Agent formulation combining these statements, with proper Y/S and Z/S, not a claim that c is flat."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-nodal-geometric-fibres",
+  "def-trf-nodal-dualizing-datum",
+  "def-pc-perfect-complex",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-pur-derived-internal-hom",
+  "def-pc-derived-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $K_Y=\\omega_{Y/S}[1]$ and $K_Z=\\omega_{Z/S}[1]$. Apply [lem-sfb-gorenstein-curve-relative-dualizing] to $p,q$: their dualizing complexes are these invertible lines shifted by one, hence perfect and locally bounded. The completed rings in the nodal hypothesis can be taken as completed algebras by [lem-trf-rational-nodal-completion-algebra], on finite-type affine neighbourhoods in each geometric fibre. Therefore [lem-sfb-proper-nodal-dualizing-base-change] identifies these with the specified adjunction-normalized lines, including their canonical base-change identifications. The relative traces $\\tau_p:Rp_*K_Y\\to\\mathcal O_S$ and $\\tau_q:Rq_*K_Z\\to\\mathcal O_S$ are those of [lem-sfb-proper-flat-space-derived-duality]; on affine bases they are precisely the coherent-adjunction counits under the Zariski-etale comparison stated there.",
+   "uses": [
+    "lem-sfb-gorenstein-curve-relative-dualizing",
+    "lem-trf-rational-nodal-completion-algebra",
+    "lem-sfb-proper-nodal-dualizing-base-change",
+    "lem-sfb-proper-flat-space-derived-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E5X, 0E6C, 0E6E in spaces-duality.tex and 0E6R in moduli-curves.tex: adjunction normalization and arbitrary-base trace pairs."
+   }
+  },
+  {
+   "text": "The new locality theorem [lem-sfb-proper-flat-families-coherent-adjoint-locality] supplies $c^!$, and also $p^!,q^!$ by using the flat identity family $S\\to S$. The hypotheses are properness of these maps and flat local finite presentation of their source and target over $S$; no flatness of $c$ is used. Apply locality to $p^!\\mathcal O_S,q^!\\mathcal O_S$: on affine opens of $S$ these are the normalized trace pairs from step 1. Uniqueness of the relative dualizing trace pair therefore identifies them globally with $K_Y,K_Z$, including counits. Derived pushforward composition [lem-pc-derived-direct-image-composition] identifies $Rp_*$ with $Rq_*Rc_*$. Right-adjoint composition [lem-cat-right-adjoint-composition] then gives the canonical identification $i:K_Y=p^!\\mathcal O_S\\xrightarrow{\\sim}c^!q^!\\mathcal O_S=c^!K_Z$. Define $t:Rc_*K_Y\\to K_Z$ as $\\varepsilon_c\\circ Rc_*i$. The pasted-counit clause says exactly $\\tau_q\\circ Rq_*t=\\tau_p$, with the direct-image composition comparison understood. Thus the trace is fixed by adjunction, rather than by an identification of line bundles alone.",
+   "uses": [
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-pc-derived-direct-image-composition",
+    "lem-cat-right-adjoint-composition",
+    "lem-sfb-proper-flat-space-derived-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Composition of adjunctions, normalized relative dualizing pairs, and Tag 0A9P locality."
+   }
+  },
+  {
+   "text": "Write $D=R\\mathcal Hom_Y(F,K_Y)$ and $H=Rc_*F$. Both $D$ and $R\\mathcal Hom_Z(H,K_Z)$ are quasi-coherent by [lem-sc-rhom-supported-qcoherent-perfect-part], using respectively the two separate hypotheses that $F$ and $H$ are perfect. Properness makes $c$ quasi-compact and quasi-separated, so [lem-pc-derived-direct-image-preserves-qcoh] puts $Rc_*D$ in the same category. Use the concrete counit-defined pairing $q_c$ of [def-sc-mixed-direct-image-tensor-pairing]. Under [lem-sc-derived-internal-hom-adjunction], define $d:Rc_*D\\to R\\mathcal Hom_Z(H,K_Z)$ as the transpose of\n$$Rc_*D\\otimes^LH\\xrightarrow{q_c}Rc_*(D\\otimes^LF)\\xrightarrow{Rc_*\\mathrm{ev}}Rc_*K_Y\\xrightarrow{t}K_Z.$$\nThis specifies the actual evaluation-and-trace map in the statement.",
+   "uses": [
+    "lem-sc-rhom-supported-qcoherent-perfect-part",
+    "lem-pc-derived-direct-image-preserves-qcoh",
+    "def-sc-mixed-direct-image-tensor-pairing",
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A9Q: evaluation/projection followed by the sheafy trace; Tag 0GEV: perfect coefficient and perfect image."
+   }
+  },
+  {
+   "text": "Check invertibility over an affine open $W\\subset S$. The schemes $Y_W,Z_W$ are qcqs, since they are proper over the affine scheme $W$; the restricted $c_W$ is proper and hence qcqs. The locality theorem identifies the restriction of $c^!K_Z$ and its counit with $c_W^!(K_Z|_{Z_W})$. Derived direct image restricts by [lem-pc-restrict-derived-direct-image-open], and internal Hom restricts by the evaluation comparison of [lem-pc-open-restriction-evaluation-mate-is-iso]. Thus $d|_{Z_W}$ is the sheafy counit comparison of [lem-pc-qcqs-sheaf-rhom-adjunction] with $L=F|_{Y_W}$ and $K=K_Z|_{Z_W}$; its coherator is invertible. Both its endpoints are quasi-coherent by step 3. The inclusion in [lem-pc-dq-coherator-adjunction] is a full subcategory, so the counit $DQ(E)\\to E$ is invertible for such endpoints, by the adjunction bijection and Yoneda. Hence $d|_{Z_W}$ itself is invertible. These opens cover $Z$: every cohomology sheaf of the cone vanishes on the cover and therefore vanishes. This proves $d$ invertible globally without assuming $S$ qcqs.",
+   "uses": [
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "lem-pc-dq-coherator-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0A9Q and 0GEV; localization to affine opens of S, then erase the coherator on its full image."
+   }
+  },
+  {
+   "text": "All arrows in step 3 are functorial, so transposing evaluation proves naturality in $F$ (contravariantly, as required for the dual). For an isomorphism of the diagram, transport each adjunction and its counit by that isomorphism. The unique counit-preserving comparisons of [lem-sfb-coherent-right-adjoint-comparisons] identify the resulting $i,t$ with those in step 2 and respect composition. Evaluation and the natural tensor-Hom bijection then identify $d$. On an open $V\\subset Z$ where $c$ is an isomorphism, use the locality theorem at the locally bounded-below $K_Z$, and restriction of pushforward and internal Hom as in step 4. The adjunction for the equivalence $c_V$ identifies $c_V^!$ with its inverse and its counit with evaluation of that inverse. The counit equation for $i$ therefore makes $t|_V$ the usual identification; the transpose in step 3 is the usual internal-Hom identification. This also covers the identity map and empty opens.",
+   "uses": [
+    "lem-sfb-coherent-right-adjoint-comparisons",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Naturality of the adjunction comparison in Tag 0A9Q; canonical adjunction comparisons and restriction."
+   }
+  },
+  {
+   "text": "Fix an arbitrary $a:S'\\to S$, and use primes for its base changes and $u:Y'\\to Y$, $v:Z'\\to Z$. By [lem-sfb-flat-families-tor-independent] the square for $c$ is Tor independent, since $Y$ and $Z$ are flat over $S$. It follows that the canonical $\\beta_E:Lv^*Rc_*E\\to Rc'_*Lu^*E$ is invertible for every $E\\in D_{\\mathrm{QCoh}}(Y)$: restrict to affine opens in $Z$ and then affine opens in their inverse images in $Z'$, apply [lem-pc-tor-independent-perfect-tensor-base-change] with $P=\\mathcal O$ and $K=E$, and use [lem-pc-restrict-derived-direct-image-open]. The restriction identifies the canonical maps because their defining adjunction units restrict to the same units; the pasting identity [lem-pc-derived-base-change-horizontal-pasting] gives the same identification for the two successive open restrictions. Invertibility can be checked on this open cover. The same argument applies to $p,q$ using the flat identity family $S\\to S$. In particular $H'=Rc'_*F'\\simeq Lv^*H$. Since derived pullback preserves perfect complexes [lem-pc-derived-pullback-perfect], both $F'=Lu^*F$ and $H'$ are perfect, so the new diagram satisfies the coefficient hypotheses.",
+   "uses": [
+    "lem-sfb-flat-families-tor-independent",
+    "lem-pc-tor-independent-perfect-tensor-base-change",
+    "lem-pc-restrict-derived-direct-image-open",
+    "lem-pc-derived-base-change-horizontal-pasting",
+    "lem-pc-derived-pullback-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 08IB, localized via the common-base Tor-independence criterion; never apply a flat-morphism theorem to c."
+   }
+  },
+  {
+   "text": "For clarity specify the right-adjoint base-change arrow globally as the transpose of\n$$Rc'_*Lu^*c^!K\\xrightarrow{\\beta_{c^!K}^{-1}}Lv^*Rc_*c^!K\\xrightarrow{Lv^*\\varepsilon_{c,K}}Lv^*K.$$\nThe mate bijection [def-weil-pbc-adjunction-mate] makes this an unambiguous map $\\alpha_c(K):Lu^*c^!K\\to c'^!Lv^*K$. On qcqs charts it is precisely [def-sc-duality-equation-base-change-map], and its defining counit equation is\n$$\\varepsilon_{c',Lv^*K}\\circ Rc'_*(\\alpha_c(K))\\circ\\beta_{c^!K}=Lv^*\\varepsilon_{c,K}.$$\nIdentify $Y'=Y\\times_SS'$ with $Y\\times_ZZ'$, so that the square for $p$ is the square for $c$ stacked on the square for $q$. By [lem-sfb-derived-base-change-vertical-pasting], under the composition identifications $Rp_*\\simeq Rq_*Rc_*$ and $Rp'_*\\simeq Rq'_*Rc'_*$ the base-change map $\\beta_p$ is the paste $Rq'_*(\\beta_c)\\circ\\beta_{q,Rc_*}$; hence $\\beta_p^{-1}$ is the paste of the inverse squares $\\beta_c^{-1}$ and $\\beta_q^{-1}$. The generic mate-pasting identity [lem-weil-pbc-mate-pasting] (part 2), applied to these inverse base-change squares for $Rc_*$ and $Rq_*$ and the pasted composite adjunction, therefore says that $\\alpha_p(\\mathcal O_S)$ is the composite of $\\alpha_c(K_Z)$ with $c'^!\\alpha_q(\\mathcal O_S)$ under the comparison $i$. This is a global adjunction calculation; no gluing of equality of arbitrary derived morphisms is being assumed.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-sc-duality-equation-base-change-map",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-derived-base-change-vertical-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Equation-base-change-map; Tag 0ATQ and generic pasting of adjunction mates. Explicit counit equation for the second mate. Vertical composition of base-change maps: cohomology.tex Tag 0ATL (remark-compose-base-change)."
+   }
+  },
+  {
+   "text": "For $p$ and $q$, [lem-sfb-proper-flat-space-derived-duality] identifies the canonical pullback of the dualizing trace pair with the new trace pair for every $S'\\to S$, including the structural counit. Thus its complex comparison is the transpose defining $\\alpha_p(\\mathcal O_S)$ and $\\alpha_q(\\mathcal O_S)$ in step 7; this follows directly from that transpose bijection and the trace-preserving equation. On qcqs bases its invertibility also follows from [lem-sc-proper-flat-right-adjoint-basechange], applied only to $p,q$, which are flat and finitely presented. Write these canonical identifications as $k_Y:Lu^*K_Y\\xrightarrow{\\sim}K_{Y'}$ and $k_Z:Lv^*K_Z\\xrightarrow{\\sim}K_{Z'}$; they are the line-bundle identifications of step 1. Pasting in step 7 now gives\n$$c'^!(k_Z)\\circ\\alpha_c(K_Z)\\circ Lu^*i=i'\\circ k_Y.$$\nSubstitute this into the counit equation, then use naturality of $\\varepsilon_{c'}$ and of $\\beta$. The result is the trace square\n$$t'\\circ Rc'_*(k_Y)\\circ\\beta_{K_Y}=k_Z\\circ Lv^*t.$$\nIn particular this proves the required trace compatibility even when $c$ is not flat.",
+   "uses": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sc-proper-flat-right-adjoint-basechange",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0E6C, 0E6E and 0B6J: relative trace pairs and the trace/counit base-change square; no flatness assertion for c."
+   }
+  },
+  {
+   "text": "Put $D'=R\\mathcal Hom_{Y'}(F',K_{Y'})$. The evaluation-mate comparison [lem-sc-mixed-perfect-internal-hom-pullback-isIso], followed by $k_Y$, gives $h_Y:Lu^*D\\xrightarrow{\\sim}D'$, since $F$ is perfect. The same theorem for the perfect $H$ gives $h_Z:Lv^*R\\mathcal Hom_Z(H,K_Z)\\xrightarrow{\\sim}R\\mathcal Hom_{Z'}(Lv^*H,K_{Z'})$. Define\n$$A=Rc'_*(h_Y)\\circ\\beta_D,\\qquad B=R\\mathcal Hom_{Z'}(\\beta_F^{-1},1)\\circ h_Z.$$\nTheir targets are $Rc'_*D'$ and $R\\mathcal Hom_{Z'}(H',K_{Z'})$, respectively. In particular both canonical endpoint comparisons are isomorphisms, and the required base-change assertion has the precise form $d'\\circ A=B\\circ Lv^*d$.",
+   "uses": [
+    "lem-sc-mixed-perfect-internal-hom-pullback-isIso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0A6H: perfect internal Hom pullback is the invertible evaluation mate; comparison maps with their variance made explicit."
+   }
+  },
+  {
+   "text": "Prove the last equation by applying the tensor-Hom bijection of [lem-sc-derived-internal-hom-adjunction], and identify $H'$ with $Lv^*H$ by $\\beta_F$. The definition of $h_Y$ identifies evaluation for $D',F'$ with the pullback of evaluation for $D,F$, followed by $k_Y$. Apply [lem-sc-mixed-tensor-pairing-base-change] with $f=c$, $g=v$, $A=D$, $B=F$, $C=K_Y$ and $a=\\mathrm{ev}:D\\otimes^LF\\to K_Y$. Its displayed equation identifies the base change of $q_c;Rc_*\\mathrm{ev}$ with $(\\beta_D\\otimes\\beta_F);q_{c'};Rc'_*\\mathrm{ev}'$, including the pullback tensorators. Composing with the trace square of step 8 identifies the two resulting pairings into $K_{Z'}$. The bijection is injective, so their transposes agree. This proves $d' A=B Lv^*d$ with the canonical maps of step 9, rather than only some isomorphism of the two complexes.",
+   "uses": [
+    "lem-sc-derived-internal-hom-adjunction",
+    "lem-sc-mixed-tensor-pairing-base-change",
+    "lem-sc-mixed-perfect-internal-hom-pullback-isIso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0B6J combined with the counit-defined tensor-pairing base-change identity; equality after taking evaluation transposes."
+   }
+  },
+  {
+   "text": "For successive $S''\\to S'\\to S$, ordinary $\\beta$ satisfies the explicit pasting equation [lem-pc-derived-base-change-horizontal-pasting]. The canonical mate bijection and [lem-weil-pbc-mate-pasting] therefore give the same pasting equation for $\\alpha$; on qcqs charts this is also [lem-sc-right-adjoint-mate-successive-base-change]. The dualizing-pair comparisons $k_Y,k_Z$ satisfy composition and identity by [lem-sfb-proper-flat-space-derived-duality]. For the internal-Hom comparisons $h_Y,h_Z$, transpose their composite: by their defining evaluation formula its transpose is evaluation pulled back twice, followed by the composite $k$. Associativity and the identity comparison of derived pullback [lem-pc-ringed-spaces-derived-pullback-composition] identify this with the single composite-base-change transpose, so injectivity of the tensor-Hom bijection identifies the maps. Consequently the two composites of $A$ and $B$ in step 9 equal the comparisons for $S''\\to S$, and the equation in step 10 respects composition and identity. All constructions also respect isomorphisms of diagrams by step 5.",
+   "uses": [
+    "lem-pc-derived-base-change-horizontal-pasting",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sc-right-adjoint-mate-successive-base-change",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-sc-derived-internal-hom-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tags 0ATR, 0ATQ and 0E6C; canonical pasting, pullback associativity and uniqueness of evaluation transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-gorenstein-curve-relative-dualizing",
+  "lem-trf-rational-nodal-completion-algebra",
+  "lem-sfb-proper-nodal-dualizing-base-change",
+  "lem-sfb-proper-flat-space-derived-duality",
+  "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+  "lem-pc-derived-direct-image-composition",
+  "lem-cat-right-adjoint-composition",
+  "lem-sc-rhom-supported-qcoherent-perfect-part",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "def-sc-mixed-direct-image-tensor-pairing",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-open-restriction-evaluation-mate-is-iso",
+  "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "lem-pc-dq-coherator-adjunction",
+  "lem-sfb-coherent-right-adjoint-comparisons",
+  "lem-sfb-flat-families-tor-independent",
+  "lem-pc-tor-independent-perfect-tensor-base-change",
+  "lem-pc-derived-base-change-horizontal-pasting",
+  "lem-pc-derived-pullback-perfect",
+  "def-weil-pbc-adjunction-mate",
+  "def-sc-duality-equation-base-change-map",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sfb-derived-base-change-vertical-pasting",
+  "lem-sc-proper-flat-right-adjoint-basechange",
+  "lem-sc-mixed-perfect-internal-hom-pullback-isIso",
+  "lem-sc-mixed-tensor-pairing-base-change",
+  "lem-sc-right-adjoint-mate-successive-base-change",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Assembly of Tags 0A9Q, 0GEV, 0B6J and the canonical mate identities, with spaces-duality.tex Tags 0E5X/0E6C/0E6E and moduli-curves.tex 0E6R. Arbitrary-base locality and common-base Tor independence are isolated prerequisites, not assumed flatness of c."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relativeDualizing|sheafyTrace|gorenstein|dualizingSheaf",
+   "results": "Actual search returned 1 hits: Mathlib/GroupTheory/Focal.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Grothendieck duality trace for a proper morphism of Gorenstein curve families and perfect complexes",
+   "results": "UNAVAILABLE: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"dualizing\"",
+   "results": "Actual search returned 0 hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative coherent duality for a proper map between flat Gorenstein curve families identifies the pushforward of the dual of a perfect complex with the dual of its pushforward",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardNatIso_inv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The trace map gives relative Serre Grothendieck duality for a proper map of nodal curves with perfect direct image and commutes with base change",
+   "results": "Actual search returned 8 hits: Algebra.intTraceAux, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst. ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned general derived-category, module-adjunction, normalization, or quasicoherence declarations do not state this geometric theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck coherent duality for a proper morphism and perfect complexes with perfect direct image, including its counit trace and base change",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, Condensed.profiniteSolidCounit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Actual search: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "GrothendieckDuality|dualizingSheaf|sheafyTrace|relativeDualizing",
+   "results": "Actual search: 0 hits; . ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Serre duality trace between proper flat nodal curve families with perfect coefficients",
+   "results": "Actual search: 8 hits; Algebra.trace, map_equiv_traceDual, Algebra.traceForm, Submodule.traceDual, Submodule.mem_traceDual, LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract', Algebra.intTrace.congr_simp. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative coherent Serre duality along a proper map of Gorenstein curves, with both the coefficient complex and its direct image perfect",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived module adjunctions, flatness, scalar tensor identities or generic category theory, and do not give this geometric derived theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elementary-nodal-contraction-direct-image",
+  "date": "2026-10-22",
+  "group": "Q72"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality.",
+   "via": [
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-nodal-perfect-duality-trace",
+  "worker": "stage1",
+  "summary": "Kept every hypothesis and clause. Constructed the exact evaluation/trace map, erased the coherator using both perfectness assumptions, and proved its arbitrary-base-change square through counit mates and the tensor-pairing identity. Added two general unsplit prerequisites, not restatements of relative nodal duality.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-rational-nodal-completion-algebra",
+    "why": "Generic coherent derived-category/adjunction tool: Coefficient-compatible presentation of a rational split-node completion. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-composition",
+    "why": "Generic coherent derived-category/adjunction tool: Composition of derived direct images. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sc-rhom-supported-qcoherent-perfect-part",
+    "why": "Generic coherent derived-category/adjunction tool: Perfect internal Hom quasi-coherence. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-derived-direct-image-preserves-qcoh",
+    "why": "Generic coherent derived-category/adjunction tool: Derived direct image along a qcqs morphism preserves quasi-coherent cohomology. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sc-derived-internal-hom-adjunction",
+    "why": "Generic coherent derived-category/adjunction tool: Derived internal-Hom adjunction on a scheme. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-restrict-derived-direct-image-open",
+    "why": "Generic coherent derived-category/adjunction tool: Derived direct image commutes with restriction to opens. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-open-restriction-evaluation-mate-is-iso",
+    "why": "Generic coherent derived-category/adjunction tool: Invertibility of the mixed-universe restricted evaluation mate. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-qcqs-sheaf-rhom-adjunction",
+    "why": "Generic coherent derived-category/adjunction tool: Coherated sheaf derived Hom adjunction for a qcqs pushforward. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-dq-coherator-adjunction",
+    "why": "Generic coherent derived-category/adjunction tool: Coherator adjunction and detection by global sections. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sfb-coherent-right-adjoint-comparisons",
+    "why": "Generic coherent derived-category/adjunction tool: Counit-normalized comparisons for a coherent family of chosen adjunctions. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-tor-independent-perfect-tensor-base-change",
+    "why": "Generic coherent derived-category/adjunction tool: Tor-independent base change for a perfect tensor factor. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-derived-base-change-horizontal-pasting",
+    "why": "Generic coherent derived-category/adjunction tool: Horizontal composition of ordinary derived base-change maps. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-derived-pullback-perfect",
+    "why": "Generic coherent derived-category/adjunction tool: Derived pullback preserves perfect complexes. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sc-proper-flat-right-adjoint-basechange",
+    "why": "Generic coherent derived-category/adjunction tool: Base change for the right adjoint of a proper flat derived pushforward. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sc-mixed-perfect-internal-hom-pullback-isIso",
+    "why": "Generic coherent derived-category/adjunction tool: Perfect evaluation-mate internal Hom pullback without global scalars. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sc-mixed-tensor-pairing-base-change",
+    "why": "Generic coherent derived-category/adjunction tool: Base change transports an arbitrary direct-image tensor pairing. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-sc-right-adjoint-mate-successive-base-change",
+    "why": "Generic coherent derived-category/adjunction tool: Right-adjoint mate pasting on a genuine iterated pullback. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   },
+   {
+    "node": "lem-pc-ringed-spaces-derived-pullback-composition",
+    "why": "Generic coherent derived-category/adjunction tool: Composition of derived pullbacks. Used only for the indicated canonical map or its stated hypotheses; the unit has no replacement and its alteration/nodal-contraction route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-rational-nodal-completion-algebra",
+  "lem-pc-derived-direct-image-composition",
+  "lem-sc-rhom-supported-qcoherent-perfect-part",
+  "lem-pc-derived-direct-image-preserves-qcoh",
+  "lem-sc-derived-internal-hom-adjunction",
+  "lem-pc-restrict-derived-direct-image-open",
+  "lem-pc-open-restriction-evaluation-mate-is-iso",
+  "lem-pc-qcqs-sheaf-rhom-adjunction",
+  "lem-pc-dq-coherator-adjunction",
+  "lem-sfb-coherent-right-adjoint-comparisons",
+  "lem-pc-tor-independent-perfect-tensor-base-change",
+  "lem-pc-derived-base-change-horizontal-pasting",
+  "lem-pc-derived-pullback-perfect",
+  "lem-sc-proper-flat-right-adjoint-basechange",
+  "lem-sc-mixed-perfect-internal-hom-pullback-isIso",
+  "lem-sc-mixed-tensor-pairing-base-change",
+  "lem-sc-right-adjoint-mate-successive-base-change",
+  "lem-pc-ringed-spaces-derived-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-07c6a0127",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-07c6a0127 (reviewer sub-agent of L); spot-checked: First split of the item. Statement and stmt_deps are unchanged against live and side-live, there is no cycle, and the commit shape is fine. I read all 11 steps against every cited statement and checked the sources: Stacks duality 0A9E, 0A9P with its footnote on proper pseudo-coherent maps, 0A9Q/0GEV, the equation-base-change-map, 0ATQ, and cohomology 0ATL. One fault, C1/C4 at step 7. The claim that alpha_p is alpha_c pasted with c'^!alpha_q needs the base-change map of p=q∘c to be the vertical paste of beta_c and beta_q under Rp_* ≅ Rq_*Rc_*. Mate pasting gives only the mate of the pasted square. No DAG node states this composition: the horizontal-pasting nodes compose successive base changes, and the 0ATL nodes on base are underived. Stacks omits the verification, so it is not elementary. FIX: I added the unsplit statement node lem-sfb-derived-base-change-vertical-pasting (cohomology 0ATL, qcqs f and g, created.by reviewer). Step 7 now identifies Y×_S S' with Y×_Z Z', cites the new node, and then applies mate-pasting part 2; uses and proof_deps are updated. Other checks. Step 1: the nodal ring-to-algebra bridge is cited correctly. Step 2: gluing p^!O with K_Y is elementary because K_Y is a shifted line bundle. Step 4: the coherator is removed only on QCoh endpoints, over affine W⊂S. Step 6: Tor-independent base change is applied on affine charts W''⊂v^{-1}W', and I checked Y'|W''=Y×_Z W''. Steps 8–11: the trace square, the h/A/B maps and composition are correct. New nodes. adjoint-locality is true: f is pseudo-coherent by 0695 and 0683, and the result is in the 0A9P footnote's scope for D^+, extended over non-qcqs bases by affine localization. It does not duplicate restriction-open, which needs f flat and qcqs bases. flat-families-tor-independent is true: for R→B→A and R→R', a free resolution P of R' gives the flat resolution B⊗P, and A⊗_R P is acyclic. It does not duplicate flat-pullback-tor-independent, which is Tor over O_S. Neither new node restates a clause of the item. Small cases checked: c=id, c an isomorphism on an open, empty base, c not flat. Batch-5: the five flagged citations (gorenstein-curve → trf nodal lci criterion; trf rational-nodal-completion-algebra, which is commutative algebra; proper-nodal-dualizing → def-trf-nodal-dualizing-datum; proper-flat-space-duality → def-trf-algebraic-space; sc-proper-flat-right-adjoint-basechange → def-trf-schematically-dense-open) are all generic coherent algebra, geometry or definitions. None is a step of the trace formula or Poincaré duality, so all are accepted; the last one is redundant in step 8. I accept the generic coherent and categorical tool_uses in the split_report. Fixes: fixes/dag/nodes/sec-six-functors-basics/{lem-sfb-relative-nodal-perfect-duality-trace, lem-sfb-derived-base-change-vertical-pasting}.json.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ }
+}

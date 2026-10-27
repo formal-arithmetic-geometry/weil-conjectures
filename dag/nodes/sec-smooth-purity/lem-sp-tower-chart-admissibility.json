@@ -1,0 +1,338 @@
+{
+ "id": "lem-sp-tower-chart-admissibility",
+ "kind": "statement",
+ "title": "Admissibility and precise uniform bounds for smooth chart towers",
+ "statement": "Fix a field $k$ of characteristic $p>0$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [sk-def-sfb-dc-setting, def-weil-l-adic-coefficient-extension]. All schemes below are separated of finite type over $k$, and all morphisms are $k$-morphisms. Put $A_n=\\mathcal O_E/\\ell^n$ for $n\\ge1$. For a scheme $T$ use the ordinary derived category $D(\\operatorname{Tow}(T,\\mathcal O_E))$ of strict varying-coefficient towers [sk-def-sp-coefficient-towers, det-sp-coefficient-towers-abelian]. Write $\\mathcal C_T$ for its full subcategory whose levels have bounded intrinsically constructible cohomology and finite Tor amplitude, in common intervals independent of $n$ [sk-def-sp-normalized-towers, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. No normalization is required. At level $n$ write $\\mathcal C_{T,n}=D^b_{ctf}(T_{\\mathrm{proet}},A_n)$ in the ordinary constant-ring module derived category. For each separated finite-type map $h$ choose a coefficient-independent compactification and write $F_h=Rh_{!,\\bullet}$ and $F_{h,n}=Rh_{!,A_n}$ [det-sp-tower-shriek-levels].\n\nLet $f:X\\to Y$ be smooth of pure relative dimension $d\\ge0$ [def-sbc-smooth-morphisms]. Let $K\\in\\mathcal C_Y$ have cohomology in $[a,b]$ and Tor amplitude in $[u,v]$ at every level. Then the following assertions hold.\n\n(1) All schemes here and their opens are Noetherian and qcqs. Writing $\\ell=t\\varpi_E^e$ with $t$ a unit gives $A_n=\\mathcal O_E/\\varpi_E^{en}$, a finite Noetherian ring. Every object of $\\mathcal C_{T,n}$ has an etale-origin representative, meaning it is isomorphic to $\\nu_T^*L$ for $L\\in D^b_{ctf}(T_{\\mathrm{et}},A_n)$, where $\\nu_T$ is the etale/pro-etale comparison [det-pe-finite-tor-comparison-noetherian]. Every specified Tor interval can be retained for $L$. These witnesses are separate levelwise witnesses, with no compatibility assumption. The tower $K$ is bounded below in the ordinary derived tower category.\n\n(2) For every coordinate chart $f|_U=p_de$ with $e:U\\to\\mathbf A^d_Y$ separated etale of finite type and $p_d:\\mathbf A^d_Y\\to Y$, the actual derived tower $H_UK=e_\\bullet^*p_{d,\\bullet}^*K(d)[2d]$ has intrinsically constructible levels, cohomological interval $[a-2d,b-2d]$ and Tor interval $[u-2d,v-2d]$. Twists mean [def-coefficient-twists-detailed]. Each intermediate inverse image, twist and shift in the ordered affine projections has the corresponding shifted intervals. Thus these objects are in the required $\\mathcal C_T$ and bounded-below etale-origin-level domains.\n\n(3) Every open restriction $f|_Z$ is smooth of pure relative dimension $d$, also after geometric-point base change. Each $F_{f|_Z}$ preserves $\\mathcal C_Z$; levels of an input with common Tor interval $[s,t]$ have output Tor interval and cohomological support in $[s,t+2d]$ [det-sp-tower-bound-uniform]. The same assertions apply to all intermediate affine-line projections and open or etale extensions used in the chart construction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Uniformity paragraph and Local pairs domain checks; agent-stated extraction of the retained nineteen-step proof, steps 2, 3, 4"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "sk-def-sp-normalized-towers",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-tower-shriek-levels",
+  "def-sbc-smooth-morphisms",
+  "det-pe-finite-tor-comparison-noetherian",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-bound-uniform",
+  "def-sp-ell-twist-quotient-data",
+  "def-sp-tower-shriek-realization",
+  "def-weil-cohomological-support",
+  "def-sp-finite-coefficient-intrinsic-derived-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field is Noetherian and qcqs; opens have compact underlying spaces and are locally Noetherian. The actual ell-power coefficients are finite by the existing spEllQuotientFinite instance and hence Noetherian.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "sk-def-sp-normalized-towers"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite level use finiteRing_constructibleDerived_origin to obtain the etale bounded constructible representative. Its interval reflection retains the specified cohomological interval. comparison_torAmplitudeIn_iff and the derived-composition isomorphism retain the precise Tor interval. This proves origins without requiring finite-level compatibility.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply domain_of_level_bounds to each object once its bounds are known, using the finite origins proved above. This supplies the uniform subcategory, bounded-below tower, and separate level-origin fields.",
+   "uses": [
+    "lem-sp-level-bounds-tower-domain"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the pullback and twist clauses of elementary_tower_bounds for each cumulative affine pullback and its r-th Tate tensor, then its shift clause for [2r]. Prove the ordered-stage assertion by induction: zero is affine zero-space pullback; a successor pulls back along projection, twists by 1 and shifts by 2. Integer arithmetic gives (a-2r)-2=a-2(r+1), and likewise for all endpoints. Apply the same clauses before the twist and shift. At a chart apply pullback first along p_d, then along e, twist by d, shift by 2d.",
+   "uses": [
+    "lem-sp-elementary-tower-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The reindex_succ projection has relative dimension 1. Opens have dimension 0, etale charts dimension 0, and composition of an open with f has dimension d. Base change gives the geometric-point clause. Apply smooth_tower_compact_bounds to each individual map and compactification. Use step 3 with its output bounds to obtain the domain of every compact-support output.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sp-smooth-tower-compact-bounds"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-def-sp-normalized-towers",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-exc-comparison-tor-interval",
+  "lem-sp-level-bounds-tower-domain",
+  "lem-sp-elementary-tower-bounds",
+  "sbc-lem-affine-space-smooth",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sp-smooth-tower-compact-bounds"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity, assembled in Lean using three elementary operation/domain interfaces",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For ordinary strict varying finite coefficient towers on a smooth scheme, pullback Tate twist and shift preserve constructibility and uniform Tor amplitude, and finite etale origin witnesses exist levelwise",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"For each index $ j $ in the zeroth component of the affine refinement cover $ \\\\mathcal{U}_D $, this constructs a cone over the diagram $ A.D'(j) $ by first applying the pullback functor along the affi\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is stable under base change. That is, if $ f: X \\to Y $ is a formally unramified morphism of schemes, then any base change (pullback) of $ f $ also satisfies t\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor D C) : Type (max (max (max u₁ u₂) v₁) v₂)\", \"doc\": \"`F ⊣ G` represents the data of an adjunction between two functors\\n`F : C ⥤ D` and `G : D ⥤ C`. `F` is the left adjoint and `G` is the right adjoint.\\n\\nWe use the unit-counit definition of an adjunction\"}\n  {\"name\": \"CategoryTheory.Adjunction.isLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) : F.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.isRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : G ⊣ F) : F.IsRightAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.mk'\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquivUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction from the data of a `CoreHomEquivUnitCounit`, i.e. a hom set\\nequivalence, unit and counit natural transformations together with proofs of the equalities\\n`homEquiv_unit` and `hom\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreHomEquiv F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between `F` and `G` out of a natural bijection between each\\n`F.obj X ⟶ Y` and `X ⟶ G.obj Y`.\"}\n  {\"name\": \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : CategoryTheory.Adjunction.CoreUnitCounit F G) : F ⊣ G\", \"doc\": \"Construct an adjunction between functors `F` and `G` given a unit and counit for the adjunction\\nsatisfying the triangle identities.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (left : CategoryTheory.Functor C D) [left.IsLeftAdjoint] : left ⊣ left.rightAdjoint\", \"doc\": \"The adjunction associated to a functor known to be a left adjoint.\"}\n  {\"name\": \"CategoryTheory.Adjunction.ofIsRightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (right : CategoryTheory.Functor C D) [right.IsRightAdjoint] : right.leftAdjoint ⊣ right\", \"doc\": \"The adjunction associated to a functor known to be a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Functor.adjunction\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (E : CategoryTheory.Functor C D) [E.IsEquivalence] : E ⊣ E.inv\", \"doc\": \"An equivalence `E` is left adjoint to its inverse.\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftAdjoint.exists_rightAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {left : CategoryTheory.Functor C D} [self : left.IsLeftAdjoint] : ∃ right, Nonempty (left ⊣ right)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftAdjoint.mk\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {left : CategoryTheory.Functor C D} (exists_rightAdjoint : ∃ right, Nonempty (left ⊣ right)) : left.IsLeftAdjoint\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsRightAdjoint.exists_leftAdjoint\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Basic\", \"type\": \" {C : Type u₁} {inst✝ : CategoryTheory.Category.{v₁, u₁} C} {D : Type u₂} {inst✝¹ : CategoryTheory.Category.{v₂, u₂} D} {right : CategoryTheory.Functor D C} [self : right.IsRightAdjoint] : ∃ left, Nonempty (left ⊣ right)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*(Tor|constructib)|constructib.*tower",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/SplittingField/Construction.lean\", \"line\": \"156\", \"text\": \"    IsScalarTower K (AdjoinRoot f.factor) (SplittingFieldAux n f.removeFactor) :=\"}\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"line\": \"92\", \"text\": \"    [IsScalarTower 𝒪 K L] [IsScalarTower 𝒪 𝒪' L] [IsTorsionFree 𝒪 𝒪'] [Free ℤ 𝒪']\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Tower.lean\", \"line\": \"161\", \"text\": \"    @IsScalarTower R A B _ f.toRingHom.toAlgebra.toSMul _ :=\"}\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Basic.lean\", \"line\": \"535\", \"text\": \"instance Factors.isScalarTower (P : (factors (map (algebraMap R S) p)).toFinset) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Matrix/Basis.lean\", \"line\": \"152\", \"text\": \"    [Algebra R₂ S] [Module S M₂] [IsScalarTower R₂ S M₂] [IsDomain R₂] [IsTorsionFree R₂ S]\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Basic.lean\", \"line\": \"460\", \"text\": \"    [IsScalarTower S R A] [IsTorsionFree S A] : IsTorsionFree S R :=\"}\n  {\"file\": \"Mathlib/Algebra/Algebra/Basic.lean\", \"line\": \"465\", \"text\": \"    [Module A M] [Module R M] [IsTorsionFree A M] [IsScalarTower R A M] : IsTorsionFree R M :=\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"192\", \"text\": \"      ((IsScalarTower.toAlgHom F K₂ E).comp ϕ).toRingHom.toAlgebra _ _ _ _ <|\"}\n  {\"file\": \"Mathlib/FieldTheory/Normal/Basic.lean\", \"line\": \"195\", \"text\": \"        ((IsScalarTower.toAlgHom F K₂ E).comp ϕ).toRingHom.toAlgebra _\"}\n  {\"file\": \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"line\": \"82\", \"text\": \"  [IsScalarTower S R N] [IsTorsionFree S R] [Nontrivial R]\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/Algebra/Basic.lean\", \"line\": \"93\", \"text\": \"    [Module A M] [IsScalarTower R A M] [Module.IsTorsionFree A M] (N : Submodule R M) (hN : N ≠ ⊥)\"}\n  {\"file\": \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"line\": \"213\", \"text\": \"    (AlgHom.equivFieldRange (IsScalarTower.toAlgHom K E L)).toRingEquiv.symm fun ⟨_, ⟨x, rfl⟩⟩ ↦ ?_\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/Operations.lean\", \"line\": \"404\", \"text\": \"    [IsScalarTower R S A] [IsTorsionFree R A] {I : Submodule S A} : IsTorsionFree R I :=\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"line\": \"363\", \"text\": \"lemma isTorsionFree [Module R A] [IsScalarTower R A B] [IsTorsionFree R B] : IsTorsionFree R A := by\"}\n  {\"file\": \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"line\": \"543\", \"text\": \"/-- Let `T / S / R` be a tower of algebras, `T` is non-trivial and is a torsion free `S`-module,\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/Basic.lean\", \"line\": \"506\", \"text\": \"theorem bijective_of_isScalarTower [IsTorsionFree K L] [Algebra.IsAlgebraic K L]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Basis/Submodule.lean\", \"line\": \"162\", \"text\": \"variable [IsScalarTower R S M] [IsTorsionFree R S] (b : Basis ι S M)\"}\n  {\"file\": \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"line\": \"582\", \"text\": \"  specialize h2 (le_antisymm ?_ (smul_le_self_of_tower a (torsionBy R M b)))\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"line\": \"291\", \"text\": \"    algebraize [(e.symm.toAlgHom.comp (IsScalarTower.toAlgHom R (AdjoinRoot 𝓟.f) _)).toRingHom]\"}\n  {\"file\": \"Mathlib/RingTheory/RingHom/Flat.lean\", \"line\": \"260\", \"text\": \"      (IsScalarTower.toAlgHom R S A)).toRingHom\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"79\", \"text\": \"    [Algebra A C] [IsScalarTower A B C] [Module.IsTorsionFree B C]\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"89\", \"text\": \"  [IsScalarTower A B C] [Module.IsTorsionFree B C] [Module.IsTorsionFree A C]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Complex/Module.lean\", \"line\": \"207\", \"text\": \"instance IsScalarTower.complexToReal {M E : Type*} [AddCommGroup M] [Module ℂ M] [AddCommGroup E]\"}\n  {\"file\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber.lean\", \"line\": \"159\", \"text\": \"      (IsScalarTower.toAlgHom _ _ _) fun _ _ ↦ .all _ _).toRingHom, RingHom.ker_isPrime _⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Generators.lean\", \"line\": \"244\", \"text\": \"/-- If `R → S → T` is a tower of algebras, a family of generators `R[X] → T`\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniformly bounded constructible proetale coefficient towers remain bounded after smooth pullback tensor an invertible Tate line; compact support has uniform Tor bound",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.exists_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1 x_2 x_3 x_4,\\n    Function.Injective ⇑(algebraMap A₀ A) ∧\\n      Algebra.FiniteType R A₀ ∧ Algebra.Smooth A₀ B₀ ∧ No\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-algebra $ A_0 $, an injective $ R $-algebra homomorphism $ A_0 \\\\to A $, and a smooth $ A_0 $-algebra\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A],\\n  Algebra.FormallyEtale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Smooth.exists_subalgebra_finiteType\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Smooth A B],\\n  ∃ A₀ B₀ x x_1, Algebra.FiniteType R ↥A₀ ∧ Algebra.Smooth (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any smooth algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $ and a smooth $ A_0 $-algebra $ B_0 $ such that $ B $ is isomorphic to\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For ordinary strict varying finite coefficient towers on a smooth scheme, pullback Tate twist and shift preserve constructibility and uniform Tor amplitude, and finite etale origin witnesses exist levelwise",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.TwistShiftData.Category\", \"module\": \"Mathlib.CategoryTheory.Shift.Twist\", \"type\": \"(_ : TwistShiftData C A) : Type u\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a shift operation parameterized by an additive monoid $A$, the category of twist and shift data is defined as the original category $\\\\mathcal{C}$ itself, structured\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": (pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"CategoryTheory.TwistShiftData.instCategoryCategory\", \"module\": \"Mathlib.CategoryTheory.Shift.Twist\", \"type\": \": Category t.Category\", \"doc\": \"The category of twist and shift data is equipped with a canonical category structure induced by the original category $\\\\mathcal{C}$.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \": PreservesFiniteLimits (sheafPullback G A J K)\", \"doc\": \"The sheaf pullback functor, constructed by converting a sheaf to its underlying presheaf, applying the left Kan extension along the opposite functor, and sheafifying the result, preserves finite limit\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @LocallyOfFinitePresentation\", \"doc\": \"The property of a morphism of schemes being locally of finite presentation is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes that is locally of finite presentation, then \"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \": IsStableUnderBaseChange @IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, AlgebraicGeometry.IsSmooth",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-22",
+   "verdict": "no match: Loogle reports an unknown identifier; the other recorded successful queries and source grep were used."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|constructible.*[Pp]ullback|[Pp]ullback.*constructible",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic categorical adjunction, ordinary evaluation, site gluing, scheme geometry and algebraic scalar-extension infrastructure do not give this geometric strict varying-coefficient derived tower assertion with its domains, uniform bounds and specified counits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict varying finite coefficient towers on schemes: chart inverse image Tate twist shift preserves intrinsic constructibility and specified uniform Tor intervals, and compact support has relative dimension bounds",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible strict coefficient towers on schemes have etale origin levelwise and inverse image and Tate twists preserve uniform Tor amplitude",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Exact, CategoryTheory.Sheaf",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Functor.Exact'\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|TateTwist|CoefficientTower|constructibleComparison",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.PreservesFiniteLimits",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.PreservesFiniteLimits\", \"CategoryTheory.Limits.instPreservesFiniteProductsOfPreservesFiniteLimits\", \"CategoryTheory.Limits.PreservesLimits.preservesFiniteLimits\", \"CategoryTheory.Limits.PreservesLimitsOfSize.preservesFiniteLimits\", \"CategoryTheory.Limits.PreservesLimitsOfSize0.preservesFiniteLimits\", \"CategoryTheory.Limits.preservesFiniteLimits_of_preservesFiniteLimitsOfSize\", \"CategoryTheory.Limits.preservesLimitsOfShapeOfPreservesFiniteLimits\", \"CategoryTheory.Limits.PreservesFiniteLimits.preservesFiniteLimits\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image and tensor by a locally constant rank one sheaf are exact and preserve constructible complexes with Tor amplitude in a specified interval",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"Condensed.instAB4CondensedMod\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"Condensed.instAB4StarCondensedMod\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.internallyProjective_iff_tensor_condition'\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "TorAmplitude|TateTwist|CoefficientTower|StrictTower",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme/condensed/category infrastructure does not state the strict varying-coefficient chart admissibility assertion; grep found no requested specialized declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-tower-gluing",
+  "date": "2026-10-22",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Uniformity paragraph and Local pairs domain checks",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-tower-chart-admissibility",
+  "worker": "stage1",
+  "summary": "Expanded all three admissibility clauses using existing nodes only: Noetherian schemes and finite rings, interval-preserving separate etale witnesses, exact evaluation detection of tower bounds, finite Tate-line identification, explicit signed chart intervals, and relative-dimension compact-support bounds. Preserved the arbitrary characteristic-p base field and the ordinary non-normalized strict-tower domain. No new nodes or statement change.",
+  "blueprint": "det-sp-tower-gluing proof: Local pairs (the affine-line/etale composite and its actual tower domain) and Uniformity (chart bounds shifted by 2d, and det-sp-tower-bound-uniform for compact support).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic the valuation ring of a finite extension of $\\mathbf q_\\ell$ is a discrete valuation ring with finite residue field used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Generic tor amplitude under comparison for noetherian coefficients used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic constructible derived comparison for arbitrary finite rings used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Generic the abelian category of coefficient towers used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-amb-root-tower-finite-tensor",
+    "why": "Generic root tower projections and normalized finite tensor reduction used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived tensor comparison for pullback of modules on ringed topoi used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic finite torsion tate twists are etale locally free lines used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sp-etale-scalar-flat-model",
+    "why": "Generic bounded constructible flat models under arbitrary finite scalar extension used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sp-etale-pullback-line-flat-model",
+    "why": "Generic termwise flat constructible pullback-and-line models with their tor interval used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic inverse image of etale sheaves of modules over a constant ring is exact used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-fd-flat-constructible-tensor",
+    "why": "Generic tensor with a flat constructible étale sheaf preserves bounded constructibility used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison inverse image commutes with scheme pullback used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-pe-constructible-comparison-flat-pullback",
+    "why": "Generic flatness of coefficient-model comparison pullback used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness of the pro-etale inverse image for constant coefficients used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "det-sp-tower-shriek-levels",
+    "why": "Generic compactly supported direct image of towers is computed levelwise used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic an etale morphism is smooth with zero-dimensional fibres used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic base change and composition of smooth morphisms of fixed relative dimension used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic affine space is smooth used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   },
+   {
+    "node": "det-sp-tower-bound-uniform",
+    "why": "Generic uniform tor bound for compactly supported direct images used only for the explicit domain/interval checks; it does not replace the local adjunction or gluing route, and this unit has no separate statement of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ac685f68f",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ac685f68f (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, and the statement, stmt_deps and unit are unchanged. Every cited statement and the blueprint gluing proof (Local pairs, Uniformity) were read. There is no cycle (closure 13219), proof_deps equals the union of the step uses, there is no SGA and there is no re-split note. Steps: (1) ℓ=tϖ^e with e≥1 by integers-dvr (5), so A_n=A_{E,en} is finite by finite-quotients, and the schemes are Noetherian and qcqs via the Mathlib leaves. (2) det-pe-finite-tor gives essential surjectivity and the Tor iff; derived-origin reflects cohomological intervals; witnesses are levelwise only. (3) Exact evaluation gives H^i(K)_n=H^i(K_n), so K is in D^{≥a}; the elementary mark is justified. (4) The twist equals Z_ℓ(1)⊗A by associativity; lem-amb-root-tower with B=R and r=n gives μ_{ℓ^n}⊗R; the étale-local trivialization (lem-asd) compares it with ν^* of the étale twist. (5) The flat model P_n, with pullback-line-flat-model for E=R(d) and r=2d, gives Tor [u-2d,v-2d]; the cohomological interval comes from exact pullback, the cohomology leaf and lem-fd-flat-constructible-tensor; the comparison to pro-étale uses comparison-pullback and comparison-flat-pullback. (6) Termwise pullback and twist are exact on Tow; the induction over d affine-line stages is set up with signs correct. (7) Smooth permanence allows arbitrary schemes including geometric points; A^r→A^{r-1} has relative dimension 1; opens are qc, hence of finite type. (8) shriek-levels (1) and tower-bound-uniform over an arbitrary char-p field give [s,t+2d], which is membership in C_Y. Edge cases checked: empty schemes, d=0, n=1 ramified, non-normalized towers. lem-sp-twisted-pullback-tower-domain and proetale-ctf-pullback-domains are not usable (they need F̄_q, and the former would create a cycle). The 19 generic tool_uses are accepted for maintainer recording."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerChartAdmissibility",
+  "declaration": "AlgebraicGeometry.ProEtale.SpChartAdmissibility.tower_chart_admissibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpChartAdmissibility.tower_chart_admissibility"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerChartAdmissibility.lean",
+  "statement": "theorem tower_chart_admissibility (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hlp : l ≠ p) (base : SpTowerShriek.Base l E) (ops : SpTowerShriek.Operations l E base) (X Y : Over (Spec (.of k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left] (K : SpTowerShriek.D l E Y.left) (a b s t : ℤ) (_hab : a ≤ b) (_hst : s ≤ t) (_hK : bounds l E Y.left K a b s t) : ∀ w : ∀ T : Over (Spec (.of k)), Twists l E T.left, (∀ T : Over (Spec (.of k)), IsSeparated T.hom → LocallyOfFiniteType T.hom → QuasiCompact T.hom → IsNoetherian T.left ∧ CompactSpace T.left ∧ QuasiSeparatedSpace T.left ∧ (∀ U : T.left.Opens, IsNoetherian U.toScheme ∧ CompactSpace U.toScheme ∧ QuasiSeparatedSpace U.toScheme) ∧ origins l E T.left) ∧ (∀ n : ℕ, IsNoetherianRing (SpTowerShriek.R l E n) ∧ Finite (SpTowerShriek.R l E n)) ∧ domain l E base Y.left K ∧ intermediate l E base ops Y w K d a b s t ∧ (∀ (U : X.left.Opens) (e : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin d)) Y.left), Etale e → IsSeparated e → LocallyOfFiniteType e → QuasiCompact e → e ≫ (AffineSpace (ULift.{u} (Fin d)) Y.left ↘ Y.left) = U.ι ≫ f.left → bounds l E U.toScheme (chart l E base ops e (AffineSpace (ULift.{u} (Fin d)) Y.left ↘ Y.left) (w (Over.mk (U.ι ≫ X.hom))) K d) (a - 2 * (d : ℤ)) (b - 2 * (d : ℤ)) (s - 2 * (d : ℤ)) (t - 2 * (d : ℤ)) ∧ domain l E base U.toScheme (chart l E base ops e (AffineSpace (ULift.{u} (Fin d)) Y.left ↘ Y.left) (w (Over.mk (U.ι ≫ X.hom))) K d) ∧ ∀ c : Compactification e, compact l E base ops c 0) ∧ (∀ U : X.left.Opens, SmoothOfRelativeDimension d (U.ι ≫ f.left) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y.left), SmoothOfRelativeDimension d (pullback.snd (U.ι ≫ f.left) y)) ∧ (∀ c : Compactification (U.ι ≫ f.left), compact l E base ops c d) ∧ ∀ c : Compactification U.ι, compact l E base ops c 0)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair H2/H3: definition owners supply the existing quotient Tate-line data, ordinary tower realization, and intrinsic finite-coefficient derived comparison. No data are chosen from a postponed theorem. The conclusion quantifies universally over the specified Twists family, whose finite levels and normalized transitions fix its isomorphism class. Mathematical node text and proof are unchanged; the finite-ring origin theorem remains a proof dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-005fd1b38",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery repairs both faults of the prior return (808318107987). H2: theorem stmt_deps (retagging, sk-lem-sp-tower-bound, finite-ring origin) replaced by definition owners: new existing:true def-sp-ell-twist-quotient-data (6 plain spEllTwist* defs; text matches Lean; deps live), live def-sp-tower-shriek-realization, new existing:true def-sp-finite-coefficient-intrinsic-derived-comparison (comparisonUpperStar ⋙ intrinsic realization, mapDerivedCategory; module now imported publicly). The theorems stay in proof_deps; no other def node owns these decls; item not landed elsewhere. H3: conclusion now ∀ w over Twists. Snapshot diff vs the prior delivery: only imports, docstring and ∃→∀ in the module; only stmt_deps in the node. Re-checked clauses (1)-(3): chart [a-2d,b-2d]/[s-2d,t-2d], compact support [s,t+2d] for both intervals, separate levelwise origins with ν^*L≅M, K.IsGE, geometric points over any algebraically closed Ω, recursive affine stages; edge cases d=0, r=0, empty schemes. One sorry; docstrings OK; no compile (no file changed). Advisory: w-independent clauses are also under ∀ w and no theorem asserts Nonempty Twists. Not hollow: Twists is mathematically inhabited and its HEq codomains are propositionally equal; splitting those clauses out is a later lean-only refinement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "independent cc review: 13 relocated chart data decls byte-identical to live (SmoothPurityTowerChartData, public re-export from item); tower_chart_admissibility signature unchanged; domain_of_level_bounds/elementary_tower_bounds checked true against SpTowerShriek.Base/Geometry/Data pinning; 5 delivered modules + 7 direct importers compile in sandbox; node proof fields match the Lean"
+ }
+}

@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-smooth-section-divisor-intersection",
+ "kind": "statement",
+ "title": "A divisorial closed subset meets a smooth section in codimension at most one",
+ "statement": "Let $T,W$ be schemes [def-pc-scheme]. Assume $T$ is normal Noetherian: it is locally Noetherian [pqf-def-locnoeth] and quasi-compact, and every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Let $q:W\\to T$ be smooth [def-sbc-smooth-morphisms] and let $a:T\\to W$ satisfy $q\\circ a=\\operatorname{id}_T$. Assume $W$ is nonempty, integral [def-pc-integral-scheme], normal and Noetherian. Let $F\\subseteq |W|$ be closed. Suppose each irreducible component $C$ of $F$ has generic point $\\xi_C$ with $\\dim\\mathcal O_{W,\\xi_C}=1$ [def-weil-irreducible-components, def-sc-generic-point, def-weil-pbc-krull-dimension-ring]. If $a^{-1}(F)$ is nonempty, there is a point $z\\in a^{-1}(F)$ with $\\dim\\mathcal O_{T,z}\\leq1$. Equivalently, a closed subset of pure codimension one which avoids the section over all points of local-ring dimension at most one avoids the entire section. Empty $F$ and relative dimension zero are allowed; neither separatedness of $q$ nor constant relative dimension is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116), dimension inequality for the divisorial boundary intersected with the diagonal, extracted for a section of a smooth morphism. Supporting Stacks Tag 067R, divisors.tex, label lemma-section-smooth-regular-immersion; the local smooth-section rather than the group-law input is used. Primary scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-pc-integral-scheme",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $E=a^{-1}(F)$, a nonempty closed subset of $T$. By [lem-sc-noetherian-closed-subset-finite-components] it has an irreducible component, and by [lem-sc-scheme-sober] choose its generic point $z$. There is no strict generalization of $z$ in $E$: its closure inside $E$ would be an irreducible closed subset properly containing that component. Put $x=a(z)$. Apply the finite-component statement to $F\\subset W$ and choose a component $C$ containing $x$, with generic point $\\xi$. Every open neighbourhood of $x$ contains $\\xi$ since $x\\in\\overline{\\{\\xi\\}}$.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0FCC (lemma-depth-localization), 00KW (lemma-one-equation), 090R (lemma-depth-drops-by-one); local algebra expansion of BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-smooth-section-regular-immersion] at $z$. On an affine neighbourhood $U=\\operatorname{Spec}B$ of $x$, the section is the quotient $\\operatorname{Spec}(B/(f_1,\\ldots,f_r))\\hookrightarrow\\operatorname{Spec}B$, with $f_1,\\ldots,f_r$ a regular sequence. Let $P$ be the prime of $x$ and $p_0\\subseteq P$ that of $\\xi$. Using [lem-weil-pbc-affine-open-stalk-localization], put $A=B_P=\\mathcal O_{W,x}$ and $R=\\mathcal O_{T,z}=A/I$, where $I=(f_1/1,\\ldots,f_r/1)$. The quotient identification sends $(b\\bmod(f))/s$ to $(b/s)\\bmod I$; its inverse is given by the same fraction, so it respects germs. By [lem-weil-pbc-weakly-regular-sequence-localization-prime] this is an $A$-regular sequence. Let $p=p_0A$. Localizing fractions twice gives $A_p=B_{p_0}=\\mathcal O_{W,\\xi}$, hence $\\dim A_p=1$ by hypothesis.",
+   "uses": [
+    "lem-sfb-smooth-section-regular-immersion",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0FCC (lemma-depth-localization), 00KW (lemma-one-equation), 090R (lemma-depth-drops-by-one); local algebra expansion of BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116)."
+   }
+  },
+  {
+   "text": "We claim $\\sqrt{p+I}=\\mathfrak m_A$. Primes of $A$ containing $p+I$ correspond to primes $Q\\subseteq P$ of $B$ containing $p_0$ and all $f_i$. Their points belong to $C\\cap U$ and to the section, and generalize $x$. Under the quotient description of the section these give generalizations of $z$ in $a^{-1}(C)\\subseteq E$. Step 1 forces their section point to be $z$, hence $Q=P$. Thus the only prime containing $p+I$ is $\\mathfrak m_A$, proving the claim. These correspondences are explicit: contract a prime under $B\\to B_P$, or extend it by fractions; primes of $B/(f)$ are exactly primes of $B$ containing $(f)$. In particular $(A/p)/I(A/p)$ is a nonzero local ring with only one prime, of dimension zero.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0FCC (lemma-depth-localization), 00KW (lemma-one-equation), 090R (lemma-depth-drops-by-one); local algebra expansion of BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-noetherian-height-quotient-bound] in the Noetherian local ring $A/p$ to its maximal prime and the images of the $r$ generators of $I$. The maximal prime of the quotient has height zero by step 3. Therefore $\\dim(A/p)\\leq r$; height of the maximal ideal is the dimension because every prime chain is contained in it. The same depth bound [lem-weil-pbc-depth-le-support-dimension], applied to the nonzero ring $A_p$ as module over itself, gives $\\operatorname{depth}(A_p)\\leq\\dim A_p=1$ (its support is its entire spectrum). Applying [lem-sfb-depth-localization-dimension-bound] to $M=A$ and $p$ now yields $$\\operatorname{depth}(A)\\leq\\operatorname{depth}(A_p)+\\dim(A/p)\\leq1+r.$$",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-sfb-depth-localization-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0FCC (lemma-depth-localization), 00KW (lemma-one-equation), 090R (lemma-depth-drops-by-one); local algebra expansion of BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116)."
+   }
+  },
+  {
+   "text": "For $0\\leq i\\leq r$ set $A_i=A/(f_1/1,\\ldots,f_i/1)$, so $A_0=A$ and $A_r=R$. Every $A_i$ is nonzero Noetherian local, and each next generator is in its maximal ideal and acts injectively, by regularity. Apply [lem-weil-pbc-depth-drops-by-one] to $M=A_i$ over $A_i$, and [lem-weil-pbc-depth-over-quotient-ring] to its quotient by that next generator. This gives $\\operatorname{depth}(A_i)=1+\\operatorname{depth}(A_{i+1})$. Iteration gives $\\operatorname{depth}(A)=r+\\operatorname{depth}(R)$, with the identity also valid for $r=0$. Step 4 implies $\\operatorname{depth}(R)\\leq1$. But $R=\\mathcal O_{T,z}$ is a Noetherian normal local domain. If $\\dim R\\geq2$, [lem-weil-pbc-normal-local-depth-two] would give $\\operatorname{depth}(R)\\geq2$. Therefore $\\dim\\mathcal O_{T,z}\\leq1$, as required.",
+   "uses": [
+    "lem-weil-pbc-depth-drops-by-one",
+    "lem-weil-pbc-depth-over-quotient-ring",
+    "lem-weil-pbc-normal-local-depth-two"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0FCC (lemma-depth-localization), 00KW (lemma-one-equation), 090R (lemma-depth-drops-by-one); local algebra expansion of BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116)."
+   }
+  },
+  {
+   "text": "The chosen $z$ lies in $a^{-1}(F)$. Contraposition gives the stated avoidance criterion, and the converse is immediate. If $F$ is empty the antecedent fails. The argument allows $r=0$ and chooses its neighbourhood separately at $x$, so it imposes neither constant relative dimension nor separatedness of $q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 0FCC (lemma-depth-localization), 00KW (lemma-one-equation), 090R (lemma-depth-drops-by-one); local algebra expansion of BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-sfb-smooth-section-regular-immersion",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-sfb-depth-localization-dimension-bound",
+  "lem-weil-pbc-depth-drops-by-one",
+  "lem-weil-pbc-depth-over-quotient-ring",
+  "lem-weil-pbc-normal-local-depth-two"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit depth-theoretic proof of the BLR §4.4 p.110 section-intersection inequality, using Stacks 0FCC, 00KW, 090R and divisors.tex 067R. BLR primary scan read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational map from a smooth scheme over a normal Noetherian base extends near a section if it agrees there with a morphism and is defined at section points of codimension at most one",
+   "results": "{\"t\": \"2026-10-24T08:43:27Z\", \"tool\": \"leanfinder\", \"query\": \"A rational map from a smooth scheme over a normal Noetherian base extends near a section if it agrees there with a morphism and is defined at section points of codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\"], \"digest\": \"d183daa5ba2109e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "section.*codimension|codimension.*section|section.*[Dd]ivisor|[Dd]ivisor.*section",
+   "results": "{\"t\": \"2026-10-24T08:49:50Z\", \"tool\": \"grep\", \"query\": \"section.*codimension|codimension.*section|section.*[Dd]ivisor|[Dd]ivisor.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth section cannot meet a divisor only over a subset of codimension two in a normal noetherian base",
+   "results": "{\"t\": \"2026-10-24T08:49:51Z\", \"tool\": \"leansearch\", \"query\": \"A smooth section cannot meet a divisor only over a subset of codimension two in a normal noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffSection.mk.inj\", \"ContMDiffSection.ext\", \"ContMDiffSection.coe_injective\", \"ContMDiffSection.mk.injEq\", \"ContMDiffSection\", \"ContMDiffWithinAt.neg_section\", \"ContMDiffSection.ctorIdx\", \"smoothSheaf.contMDiff_section\"], \"digest\": \"9bd26b8e1ad658ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one or not at all",
+   "results": "{\"t\": \"2026-10-24T08:49:54Z\", \"tool\": \"leanfinder\", \"query\": \"A pure codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one or not at all\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.mem_zeroLocus_iff\", \"AlgebraicGeometry.Scheme.zeroLocus_singleton\"], \"digest\": \"cc5758e01a8bc34b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of a Weil divisor along the zero section of a smooth morphism has support in codimension at most one on a normal base",
+   "results": "{\"t\": \"2026-10-24T08:49:58Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of a Weil divisor along the zero section of a smooth morphism has support in codimension at most one on a normal base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MeromorphicNFOn.zero_set_eq_divisor_support\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_comap\", \"AlgebraicGeometry.Scheme.zeroLocus_map\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.image_zeroLocus\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\"], \"digest\": \"4dfb9ec24e89b84a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*immersion|codimension|smooth.*section",
+   "results": "{\"t\": \"2026-10-24T09:02:11Z\", \"tool\": \"grep\", \"query\": \"regular.*immersion|codimension|smooth.*section\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/OrderOfVanishing.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"5fbba5235fd66871\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a pure codimension one subset of a smooth scheme over a normal Noetherian base meets a smooth section, it meets the section over a point of base codimension at most one",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"leansearch\", \"query\": \"If a pure codimension one subset of a smooth scheme over a normal Noetherian base meets a smooth section, it meets the section over a point of base codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"e49c96a45f19f366\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, IsRegularImmersion, codimension",
+   "results": "{\"t\": \"2026-10-24T09:02:12Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsSmooth, IsRegularImmersion, codimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one",
+   "results": "{\"t\": \"2026-10-24T09:02:14Z\", \"tool\": \"leanfinder\", \"query\": \"A codimension one closed subset of a smooth scheme over a normal Noetherian base meets a section in codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.IdealSheafData.zeroLocus_inter_subset_supportSet\", \"AlgebraicGeometry.Scheme.zeroLocus_univ\", \"AlgebraicGeometry.Scheme.Hom.range_subset_ker_support\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"a9d4bae7a929f0a6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives and domains, smooth charts, zero loci and analytic meromorphic divisors do not assert the normal-scheme affine indeterminacy theorem or the smooth-section codimension intersection bound."
+  },
+  {
+   "tool": "grep",
+   "query": "codimension.*section|section.*codimension|section.*regularImmersion",
+   "results": "{\"t\": \"2026-10-24T09:30:39Z\", \"tool\": \"grep\", \"query\": \"codimension.*section|section.*codimension|section.*regularImmersion\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness, zero loci and immersion domains do not give this intersection bound."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pure codimension one closed subset meets a section of a smooth morphism over a normal noetherian scheme in codimension at most one",
+   "results": "{\"t\": \"2026-10-24T09:30:41Z\", \"tool\": \"leanfinder\", \"query\": \"A pure codimension one closed subset meets a section of a smooth morphism over a normal noetherian scheme in codimension at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.coborderRange\", \"AlgebraicGeometry.instIsDominant\\u03b9CoborderRange\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\"], \"digest\": \"f139df6f39540b32\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness, zero loci and immersion domains do not give this intersection bound."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Weil divisor of pure codimension one on a smooth scheme intersects a section in codimension at most one on a normal Noetherian base",
+   "results": "{\"t\": \"2026-10-24T09:41:19Z\", \"tool\": \"leansearch\", \"query\": \"A Weil divisor of pure codimension one on a smooth scheme intersects a section in codimension at most one on a normal Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegral.component_integral\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.Scheme.germToFunctionField_injective\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.Scheme.basicOpen_appLE\"], \"digest\": \"24f8f676534c7001\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness, zero loci and immersion domains do not give this intersection bound."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"section\", \"codimension\"",
+   "results": "{\"t\": \"2026-10-24T09:48:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"section\\\", \\\"codimension\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: scheme smoothness, zero loci and immersion domains do not give this intersection bound."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-section-rational-extension",
+  "date": "2026-10-24",
+  "group": "Q09"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Supporting extension step: BLR §10.1 Proposition 2, converse, invokes §4.4 Theorem 1 to extend the fibrewise dense rational map across codimension at least two. BLR §4.4 Theorem 1, diagonal-reduction paragraph: regularity near a smooth section from regularity at its codimension-at-most-one points and agreement with a given morphism along the section. Supporting input: BLR §4.4 proof of Theorem 1, printed p.110 (PDF p.116), dimension inequality for the divisorial boundary intersected with the diagonal, extracted for a section of a smooth morphism. Supporting Stacks Tag 067R, divisors.tex, label lemma-section-smooth-regular-immersion; the local smooth-section rather than the group-law input is used.",
+   "via": [
+    "lem-sfb-smooth-section-rational-extension",
+    "lem-sfb-relative-group-weil-extension",
+    "lem-sfb-neron-dvr-point-criterion",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-section-divisor-intersection",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave an explicit local regular-sequence and depth proof without any catenarity assumption. Reused existing geometry, height, localization and depth nodes; added only Stacks 0FCC as a statement-only commutative-algebra input.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), through the inherited Néron/BLR prerequisite chain: supplies the local dimension inequality in BLR §4.4 proof of Theorem 1. Ancestor utility returns None; inherited null ancestor and via are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic local commutative-algebra depth bound used to justify the BLR dimension inequality; this unit has no alternative node for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-depth-drops-by-one",
+    "why": "Generic local commutative-algebra depth bound used to justify the BLR dimension inequality; this unit has no alternative node for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-depth-over-quotient-ring",
+    "why": "Generic local commutative-algebra depth bound used to justify the BLR dimension inequality; this unit has no alternative node for this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-normal-local-depth-two",
+    "why": "Generic local commutative-algebra depth bound used to justify the BLR dimension inequality; this unit has no alternative node for this general fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-depth-drops-by-one",
+  "lem-weil-pbc-depth-over-quotient-ring",
+  "lem-weil-pbc-normal-local-depth-two"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-2a85294b1",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-2a85294b1 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited node statement, Stacks 0FCC (algebra.tex 18022-18045) and 067R (divisors.tex 5601). Statement unchanged: the item's statement, stmt_deps and source are byte-identical to the unsplit version in the Q09 snapshot; no repair note, so the re-split rule does not apply. The depth proof is correct. Steps 1-3: z is the generic point of a component of a^{-1}(F), so p+I is m_A-primary in A=O_{W,x}. Step 4: Krull's height bound (00KW node) in A/p gives dim(A/p)<=r, and 0FCC gives depth A<=1+r. Step 5: the localized regular sequence gives depth A=r+depth R, so depth R<=1, and the normal-local-depth-two node excludes dim R>=2. All hypotheses hold (f_i in P, nonzero local quotients, Noetherian, normal); there is no catenarity assumption. New node lem-sfb-depth-localization-dimension-bound is exactly Stacks 0FCC (B1-B5 ok). It holds on small cases: field, DVR, k[[x,y]], M_p=0 and M=0. Grepping 0FCC and depth-localization through the DAG found no duplicate. I accept the 4 sk-thm-p1 depth tool_uses as generic local algebra. BLR is not available locally (WANTED), but the proof does not depend on it. No changes."
+ }
+}

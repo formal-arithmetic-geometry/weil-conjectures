@@ -1,0 +1,250 @@
+{
+ "id": "lem-sfb-flat-projective-hilbert-polynomial-locality",
+ "kind": "statement",
+ "title": "Local constancy and base change of projective fibre Hilbert polynomials",
+ "statement": "Let $T$ be any scheme [def-pc-scheme], let $n\\geq0$, and let $Z\\hookrightarrow\\mathbf P^n_T$ be a closed immersion [def-weil-closed-immersion] such that $Z\\to T$ is flat [def-weil-flat-morphism] and finitely presented, meaning locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated. For $t\\in T$, let $P_t\\in\\mathbf Q[x]$ be the unique polynomial eventually equal to the dimensions of the homogeneous pieces of the homogeneous coordinate ring of $Z_{\\overline{\\kappa(t)}}$ for its induced projective embedding. This polynomial exists, is numerical, has degree at most $n$ when nonzero, and equals $d\\mapsto\\chi(Z_{\\overline{\\kappa(t)}},\\mathcal O_Z(d))$, where $\\chi$ denotes the alternating sum of the dimensions of coherent cohomology. The map $t\\mapsto P_t$ is locally constant. For every morphism $h:T'\\to T$ and every $t'\\in T'$, the polynomial of $(Z\\times_TT')_{\\overline{\\kappa(t')}}$ is $P_{h(t')}$. This includes $Z=\\varnothing$, whose polynomial is zero; a projective scheme over a field has zero Hilbert polynomial if and only if it is empty.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0B9T (lemma-chi-locally-constant-geometric), applied to twists; varieties.tex Tags 08AC (lemma-hilbert-polynomial) and 08AE (lemma-hilbert-polynomial-H0). Constancy of the polynomial follows from n+1 Euler characteristics; the field-polynomial comparison is Serre vanishing."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-relative-projective-space",
+  "def-weil-geometric-fibre",
+  "def-weil-residue-field",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-pc-euler-characteristic",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-projective-twist-base-change-data] to obtain properness of $f:Z\\to T$ and finitely presented base-flat twists $\\mathcal F_d$, with their base-change identifications. For every $d\\in\\mathbf Z$, [lem-sfb-proper-flat-sheaf-euler-local-constancy] therefore gives a locally constant function $E_d(t)=\\chi(Z_{\\kappa(t)},\\mathcal O(d))$. Its base-change clause gives $E_d(t)=\\chi(Z_K,\\mathcal O_{Z_K}(d))$ for every field-valued point $\\operatorname{Spec}K\\to T$ with image $t$, including geometric points and composites from any other base.",
+   "uses": [
+    "lem-sfb-flat-projective-twist-base-change-data",
+    "lem-sfb-proper-flat-sheaf-euler-local-constancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T (lemma-chi-locally-constant-geometric); returned steps 1--3"
+   }
+  },
+  {
+   "text": "For each such field point, [lem-sfb-projective-field-coordinate-euler-polynomial] gives the unique numerical polynomial $Q_{Z_K}$, its homogeneous coordinate presentation $A$, and eventual equality with $\\dim_K A_d$. Apply [lem-sfb-graded-coordinate-polynomial-degree-emptiness] to this presentation: $\\deg Q_{Z_K}\\leq n$ when nonzero, and $Q_{Z_K}=0$ exactly when $Z_K=\\varnothing$. Put $P_t=Q_{Z_{\\overline{\\kappa(t)}}}$. Step 1 gives $P_t(d)=E_d(t)$ for every integer $d$. This proves all the asserted fibre-polynomial, numerical, degree and zero-polynomial clauses; the two cited results also apply directly to every projective scheme embedded over any field.",
+   "uses": [
+    "lem-sfb-projective-field-coordinate-euler-polynomial",
+    "lem-sfb-graded-coordinate-polynomial-degree-emptiness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0BEM (lemma-numerical-polynomial-from-euler), 08AE (lemma-hilbert-polynomial-H0), 08AC (lemma-hilbert-polynomial); returned steps 4--6"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$. For each $d=0,\\ldots,n$ choose an open neighbourhood $U_d$ of $t$ on which $E_d$ is constant, using step 1. On $U=\\bigcap_{d=0}^nU_d$, the polynomial $P_u-P_t$ has degree at most $n$ and the $n+1$ distinct roots $0,\\ldots,n$; the polynomial root bound forces it to be zero. Thus $u\\mapsto P_u$ is constant on $U$. Zero polynomials and $n=0$ are included. No uniform Serre-vanishing bound on the family is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T plus elementary finite interpolation; returned step 7"
+   }
+  },
+  {
+   "text": "For $h:T'\\to T$, $t'\\in T'$ and $K'=\\overline{\\kappa(t')}$, the fibre-product universal property [def-pc-fibre-product] identifies $(Z\\times_TT')_{K'}$ with the pullback of $Z$ at the composite $\\operatorname{Spec}K'\\to T'\\to T$. Step 1 identifies its twists and gives Euler values $E_d(h(t'))$; step 2 constructs its coordinate polynomial, which consequently agrees with $P_{h(t')}$ at every integer $d$. Their difference has infinitely many roots, so they are equal. This proves arbitrary base change without comparing chosen algebraic closures.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/perfect.tex",
+    "place": "Tag 0B9T, arbitrary-base-change clause, and fibre-product universal property; returned step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-sfb-flat-projective-twist-base-change-data",
+  "lem-sfb-graded-coordinate-polynomial-degree-emptiness",
+  "lem-sfb-projective-field-coordinate-euler-polynomial",
+  "lem-sfb-proper-flat-sheaf-euler-local-constancy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0B9T assembled with three separate statement-only prerequisites extracted from the returned proof; final finite interpolation and geometric fibre-product assembly retained explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert polynomial of a flat finitely presented closed subscheme of projective space is locally constant and invariant under arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:03:35Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert polynomial of a flat finitely presented closed subscheme of projective space is locally constant and invariant under arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat\", \"ChevalleyThm.chevalley_mvPolynomialC\"], \"digest\": \"5eb3212929f4f103\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk concerns a module, not the cohomology of projective fibres; Polynomial.hilbertPoly is a different polynomial construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hilbertPolynomial\"",
+   "results": "{\"t\": \"2026-10-22T04:03:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"hilbertPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk concerns a module, not the cohomology of projective fibres; Polynomial.hilbertPoly is a different polynomial construction."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPolynomial|HilbertPolynomial|eulerCharacteristic",
+   "results": "{\"t\": \"2026-10-22T04:03:36Z\", \"tool\": \"grep\", \"query\": \"hilbertPolynomial|HilbertPolynomial|eulerCharacteristic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk concerns a module, not the cohomology of projective fibres; Polynomial.hilbertPoly is a different polynomial construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constancy of Hilbert polynomials in projective flat families over arbitrary schemes",
+   "results": "{\"t\": \"2026-10-22T04:03:36Z\", \"tool\": \"leansearch\", \"query\": \"Constancy of Hilbert polynomials in projective flat families over arbitrary schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.hilbertPoly_linearMap\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat\", \"Module.isLocallyConstant_rankAtStalk\", \"Polynomial.hilbertPoly_smul\", \"Polynomial.hilbertPoly_succ\"], \"digest\": \"c4147da2835b1ea3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk concerns a module, not the cohomology of projective fibres; Polynomial.hilbertPoly is a different polynomial construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Euler characteristic of twists in a proper flat finitely presented family is locally constant on the base",
+   "results": "{\"t\": \"2026-10-22T04:03:47Z\", \"tool\": \"leanfinder\", \"query\": \"The Euler characteristic of twists in a proper flat finitely presented family is locally constant on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"AlgebraicGeometry.Flat\", \"Profinite.exists_locallyConstant_finite_aux\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"ModuleCat.Tilde.res_const\"], \"digest\": \"6a4043f7ff2d96ab\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: rankAtStalk concerns a module, not the cohomology of projective fibres; Polynomial.hilbertPoly is a different polynomial construction."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPolynomial|HilbertPolynomial|eulerChar",
+   "results": "{\"t\": \"2026-10-22T04:21:49Z\", \"tool\": \"grep\", \"query\": \"hilbertPolynomial|HilbertPolynomial|eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.hilbertPoly constructs polynomials from rational power series, not fibre cohomology; source read at Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18--44. Module.isLocallyConstant_rankAtStalk concerns a single module, not proper direct images; source read at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:224--228."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristics of twists of a flat projective family form a locally constant numerical polynomial",
+   "results": "{\"t\": \"2026-10-22T04:21:50Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristics of twists of a flat projective family form a locally constant numerical polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"IncidenceAlgebra.eulerChar\", \"IncidenceAlgebra.eulerChar_prod\", \"AlgebraicGeometry.Flat.instMorphismRestrict\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\", \"IsPoly.const\"], \"digest\": \"48ffd57e553b0df5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.hilbertPoly constructs polynomials from rational power series, not fibre cohomology; source read at Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18--44. Module.isLocallyConstant_rankAtStalk concerns a single module, not proper direct images; source read at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:224--228."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hilbertPoly\"",
+   "results": "{\"t\": \"2026-10-22T04:21:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"hilbertPoly\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Polynomial.preHilbertPoly\", \"Polynomial.hilbertPoly\", \"Polynomial.natDegree_preHilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.leadingCoeff_preHilbertPoly\", \"Polynomial.hilbertPoly_zero_left\", \"Polynomial.preHilbertPoly_eq_choose_add_sub\", \"Polynomial.preHilbertPoly_eq_choose_sub_add\"], \"digest\": \"373e42d56614798b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.hilbertPoly constructs polynomials from rational power series, not fibre cohomology; source read at Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18--44. Module.isLocallyConstant_rankAtStalk concerns a single module, not proper direct images; source read at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:224--228."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hilbert polynomial of projective flat finitely presented schemes is locally constant and commutes with arbitrary base change",
+   "results": "{\"t\": \"2026-10-22T04:22:00Z\", \"tool\": \"leanfinder\", \"query\": \"Hilbert polynomial of projective flat finitely presented schemes is locally constant and commutes with arbitrary base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.Flat.instIsMultiplicativeScheme\"], \"digest\": \"c7c87a1515884dba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.hilbertPoly constructs polynomials from rational power series, not fibre cohomology; source read at Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18--44. Module.isLocallyConstant_rankAtStalk concerns a single module, not proper direct images; source read at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:224--228."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Euler characteristic of each tensor power of a line bundle in a proper flat family is locally constant on the base",
+   "results": "{\"t\": \"2026-10-22T04:22:17Z\", \"tool\": \"leanfinder\", \"query\": \"The Euler characteristic of each tensor power of a line bundle in a proper flat family is locally constant on the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.isLocallyConstant_rankAtStalk\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"ModuleCat.Tilde.res_const\", \"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"AlgebraicGeometry.StructureSheaf.const_mul_cancel'\"], \"digest\": \"b266ff6dd78bc20d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Polynomial.hilbertPoly constructs polynomials from rational power series, not fibre cohomology; source read at Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18--44. Module.isLocallyConstant_rankAtStalk concerns a single module, not proper direct images; source read at Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean:224--228."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-hilbert-polynomial-representability",
+  "date": "2026-10-22",
+  "group": "NV"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Local constancy and base change of projective fibre Hilbert polynomials",
+   "via": [
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-flat-projective-hilbert-polynomial-locality",
+  "worker": "stage1",
+  "summary": "Q42 repairs the 5691-character returned proof by extracting three comparable independent arguments as new statement-only unsplit nodes: flat-projective twist preparation, field coordinate/Euler polynomial construction, and graded degree/emptiness bounds. Parent statement and existing Lean metadata retained verbatim. All old arguments accounted for in report; parent assembly is below 3000 characters.",
+  "blueprint": "The existing from.place traces the Hilbert representability prerequisite under the direct-image alteration reduction. Steps 1--4 establish the fibre polynomial by the Euler route; steps 5--6 handle its degree and empty fibres; steps 7--8 give the locality and base-change input used in step 1 of lem-sfb-projective-hilbert-polynomial-representability. The imported from.node is null and tools/blueprint_refs.py ancestor reports None; the inherited via chain and place are retained. No blueprint node found with this combined statement. Q42 re-split: returned steps 1--2 are partitioned between twist preparation and field preparation; step 4 goes to field polynomial construction; steps 5--6 to graded degree/emptiness; the existing Euler theorem carries step 3 and assembly retains steps 7--8. Inherited null ancestor and via chain retained; whole-blueprint searches found no duplicate.",
+  "tool_uses": []
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-c87556412",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-c87556412 (reviewer sub-agent of L); spot-checked: I read the re-split note (released, 2026-10-22, 5691 characters in 8 steps). The live node is still the NR 8-step base: no other group has re-split it, the item is not on the dropped list, and the statement, stmt_deps and lean record are unchanged. Accounting: old step 1 is split between the twist node (properness and induced closed embedding) and the field node (Noetherian, coherent). Old step 2 goes to the twist node and old step 4 to the field node. Old steps 5 and 6 go to the graded node (Q=0 ⇔ A_d eventually 0 ⇔ Proj empty, checked both ways through the D_+(z_i) charts and nilpotence). Old step 3 is parent step 1, citing the existing Euler node. Old steps 7 and 8 are kept with their content as parent steps 3 and 4 (interpolation and fibre-product uniqueness). The assembly is 2188 characters, and the new nodes are about 1.1k, 1.7k and 1.2k characters of old argument, so they are comparable in size. No new node restates the item or one of its family clauses. Sources read: perfect.tex 0B9T l.7962, varieties.tex 0BEM l.10195, 08AC/08AE l.6770-6840, constructions.tex 03GL l.2989, coherent.tex 0AG7 l.3862. Each step uses only what the cited statements say: the Euler node with S'=Spec K plus the twist base change; the field node supplying the J presentation the graded node needs; the fibre-product universal property for the composite point. Small cases checked: n=0, J=0, J=(z^a), J=(1), a double point in P^1, d<0, T or Z empty, non-Noetherian T. All three new nodes are statement-only, self-contained, with searches from four tools and the inherited blueprint record. Advisory: the existing unsplit lem-sfb-projective-hilbert-polynomial-dimension overlaps the field and graded nodes for nonempty X; it is not a duplicate, since the new nodes add existence, the empty case, every defining J and uniqueness, and need no dimension theory. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProjectiveHilbertPolynomialLocality",
+  "declaration": "AlgebraicGeometry.ProjectiveHilbertPolynomial.flat_projective_hilbert_polynomial_locality",
+  "declarations": [
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.equations",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.coordinatePiece",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.coordinateDimension",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.IsCoordinatePolynomial",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.baseChangeEmbedding",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.geometricPoint",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.twistEuler",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.flat_projective_hilbert_polynomial_locality",
+   "AlgebraicGeometry.ProjectiveHilbertPolynomial.projective_field_hilbert_polynomial"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatProjectiveHilbertPolynomialLocality.lean",
+  "statement": "theorem flat_projective_hilbert_polynomial_locality {T Z : Scheme.{u}} (n : ℕ) (i : Z ⟶ RelativeProjectiveSpace.scheme T n) [IsClosedImmersion i] [Flat (i ≫ RelativeProjectiveSpace.π T n)] [LocallyOfFinitePresentation (i ≫ RelativeProjectiveSpace.π T n)] [QuasiCompact (i ≫ RelativeProjectiveSpace.π T n)] [QuasiSeparated (i ≫ RelativeProjectiveSpace.π T n)] : ∃ P : T → Polynomial ℚ, IsLocallyConstant P ∧ ∃ e : RelativeProjectiveSpace.scheme T n ≅ ℙ(ULift.{u} (Fin (n + 1)); T), e.hom ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T) = RelativeProjectiveSpace.π T n ∧ (∀ t : T, (∀ Q : Polynomial ℚ, IsCoordinatePolynomial (AlgebraicClosure (T.residueField t)) n (baseChangeEmbedding n (i ≫ e.hom) (geometricPoint T t)) Q ↔ Q = P t) ∧ (∀ d : ℤ, ∃ z : ℤ, (P t).eval (d : ℚ) = (z : ℚ)) ∧ ((P t) ≠ 0 → (P t).natDegree ≤ n) ∧ (∀ d : ℤ, (P t).eval (d : ℚ) = (twistEuler (AlgebraicClosure (T.residueField t)) n (baseChangeEmbedding n (i ≫ e.hom) (geometricPoint T t)) d : ℚ)) ∧ (P t = 0 ↔ IsEmpty ↥ (pullback ((i ≫ e.hom) ≫ (ℙ(ULift.{u} (Fin (n + 1)); T) ↘ T)) (geometricPoint T t)))) ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T) (t' : T') (Q : Polynomial ℚ), IsCoordinatePolynomial (AlgebraicClosure (T'.residueField t')) n (baseChangeEmbedding n (baseChangeEmbedding n (i ≫ e.hom) h) (geometricPoint T' t')) Q ↔ Q = P (h t'))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The main theorem uses the recorded relative-Proj space. An over-isomorphism with the upstream polynomial-coordinate model is supplied in the conclusion, without any extra hypothesis or data selected from a mere existence theorem. Coordinate pieces are quotients by the actual chartwise equations; canonical fibre embeddings and integer-twist Euler characteristics are explicit helpers. The second theorem records the field and zero-polynomial clauses. All theorem proofs are sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de017fccf",
+  "group": "NO",
+  "result": "pass",
+  "note": "All node clauses rendered faithfully: flat+lfp+qc+qs closed subscheme of RelativeProjectiveSpace.scheme T n; geometric-fibre coordinate polynomial exists uniquely (∀Q, IsCoordinatePolynomial ↔ Q = P t), numerical, natDegree ≤ n if nonzero, equals twistEuler at all d:ℤ, IsLocallyConstant P, arbitrary base change via actual iterated pullbacks (liftBaseChange), zero ⇔ empty geometric fibre, plus separate field theorem with P=0 ↔ IsEmpty X. equations = saturated-ideal degree-d part via chartRingEquiv∘dehomogenizeX vanishing on all standard charts; no hollow helpers. ∃ e over-iso RelPS ≅ ℙ(ULift(Fin(n+1));T) pinned over T is choice-independent (fibrewise PGL preserves coordinate dims and O(d)) and exists (same ∃ e as the private relativePolynomialChart in ProjectiveBundleCoordinateSubschemes.lean) → accepted. Added stmt_dep def-nagata-projective-space-base-change is a landed node (allowed). Dep nodes unchanged; statement verbatim; 9 declarations listed; imports resolve. Edge cases T/Z empty, n=0, negative d, nonreduced, non-Noetherian, universes OK. No duplicate coordinate-ring notion (HasProjectiveFibreHilbertPolynomial is the Euler predicate, different). Advisory: proof-only imports; coordinatePiece unused. No recompile per 2026-10-21 rule."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

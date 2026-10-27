@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-comparison-pullback-restriction-coherence",
+ "kind": "statement",
+ "title": "Restriction coherence of the fixed derived site comparison",
+ "statement": "Let P be the finite purity setting [def-pur-conventions], j:U→X a morphism, W⊆X and O⊆U opens, k:O→W a morphism with k≫W.ι=O.ι≫j, and M a derived etale coefficient object on X. The composite of k* of the site comparison for W.ι, the site comparison for k, and the site-comparison image of the etale inverse-image square compositor [lem-trf-section-exceptional-fibre-coherence] equals the specified restrictionAlong isomorphism [def-pur-diagonal-counit-comparison-data] followed by the site comparison for O.ι at j*M. No Cartesian hypothesis on this square is required; empty opens are permitted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2 and final canonicity paragraph; orientation-charts proof Step 3"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-diagonal-counit-comparison-data",
+  "lem-trf-section-exceptional-fibre-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Substitute the name of the common composite into pullComparison_comp. This gives comparison compatibility for each factorization k≫W.ι and O.ι≫j, including the equality-congruence isomorphism.",
+   "uses": [
+    "lem-pur-comparison-pullback-derived-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Cancel the pro-etale pullback compositor. Expand the etale square compositor and cancel the image of its inverse/compositor pair under the comparison functor. Apply the second composition identity. Expand restrictionAlong and comparisonPull and cancel the remaining pro-etale compositor with its inverse.",
+   "uses": [
+    "lem-trf-section-exceptional-fibre-coherence",
+    "def-pur-diagonal-counit-comparison-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-comparison-pullback-derived-coherence",
+  "lem-trf-section-exceptional-fibre-coherence",
+  "def-pur-diagonal-counit-comparison-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/thm-pur-diagonal-dualizing-object.proof.md",
+  "place": "Steps 1--2: composition coherence of restriction and the fixed site comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived site comparison commutes with a square of inverse images and their composition isomorphisms",
+   "results": "Eight hits on generic derived-functor comparisons and site plus-construction coherence. None states this project-specific inverse-image restriction identity.",
+   "date": "2026-10-27",
+   "verdict": "The existing project composition theorem is used directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.hom_inv_id_app_assoc",
+   "results": "One hit: categorical compositor cancellation.",
+   "date": "2026-10-27",
+   "verdict": "Used in the proved restriction coherence theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pullComparison_comp|restrictionAlong",
+   "results": "Zero Mathlib hits.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project comparison composition theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalEtaleRhoUnitSquare",
+  "date": "2026-10-27",
+  "group": "K6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-diagonal-dualizing-object",
+   "place": "Steps 1--2: restriction coherence of the fixed site comparison",
+   "via": [
+    "lem-pur-diagonal-etale-rho-unit-square",
+    "lem-pur-diagonal-etale-source-dualizing-square",
+    "lem-pur-diagonal-etale-dnc-dualizing-square",
+    "lem-pur-diagonal-dnc-etale-naturality-twist-square",
+    "lem-pur-diagonal-dnc-etale-naturality",
+    "lem-pur-diagonal-affine-counit-restriction",
+    "lem-pur-diagonal-ordinary-orientation-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ComparisonPullbackRestrictionCoherence",
+  "file": "lean/Sheaf/Paper/ComparisonPullbackRestrictionCoherence.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalEtaleComparison_restriction",
+  "statement": "theorem diagonalEtaleComparison_restriction (P : PurityFiniteSetting.{u})\n    {U X : Scheme.{u}} (j : U ⟶ X) (W : X.Opens) (O : U.Opens)\n    (k : O.toScheme ⟶ W.toScheme) (hk : k ≫ W.ι = O.ι ≫ j)\n    (M : Etale.DerivedCategoryModule P.Coefficient X) :\n    (OrientationRefinement.pull P k).map (Dnc.pullComparison P W.ι M).hom ≫\n      (Dnc.pullComparison P k\n        ((Etale.ordinaryFinitePullback P.Coefficient W.ι).obj M)).hom ≫\n      (ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} P.Coefficient) O.toScheme).mapDerivedCategory.map\n        (Etale.sectionCoherencePullbackIso P.Coefficient k W.ι O.ι j hk M).hom =\n    ((OrientationCounit.restrictionAlong P j W O k hk).app M).hom ≫\n      (Dnc.pullComparison P O.ι\n        ((Etale.ordinaryFinitePullback P.Coefficient j).obj M)).hom",
+  "branch": "sheaf-dag",
+  "by": "K6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T094437-L-227565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K6",
+  "result": "pass",
+  "landing": "20261027T094437-L-227565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

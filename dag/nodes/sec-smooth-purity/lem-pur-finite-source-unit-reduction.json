@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-finite-source-unit-reduction",
+ "kind": "statement",
+ "title": "Unit coordinate of the finite purity-source reduction",
+ "statement": "For any scheme morphism f, every tensor power d, comparable positive ell-power levels b+1 and a+1, and a generator-normalized root coefficient comparison r, scalar extension of unitSource_b inverse followed by proLambda_r at the unit and the source functor applied to unitReduction equals proTwistMap_r followed by unitSource_a inverse. This equality involves the actual source/scalar/site maps and does not use or assert a purity orientation. Uses [def-pur-condensed-tate-integral-tower-data], [def-pur-finite-smooth-coefficient-arrows], [def-pur-finite-smooth-canonical-maps].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Step 2, common local models, normalized finite tower and adic reconstruction"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-finite-smooth-canonical-maps"
+ ],
+ "proof": [
+  {
+   "text": "Package the scalar/tensor, scalar/pullback, and root-line isomorphisms as a natural isomorphism of ordinary purity-source functors. Its naturality is tensor-comparison naturality, scalar/pullback naturality, and tensor interchange. The sourceAtOriginIso components form a natural isomorphism by their specified site/pullback and tensor constructions. At the coefficient unit, comparison has invertible counit: its unit is invertible on the bounded-below ordinary coefficient unit, and the adjunction triangle and the comparison-unit isomorphism give this counit assertion.",
+   "uses": [
+    "def-pur-finite-smooth-coefficient-arrows",
+    "def-pur-finite-smooth-canonical-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove the transport identity in arbitrary categories. For a comparison adjunction F ⊣ R and e:F(K0)≅K, put i=eta(K0);R(e.hom). The triangle and counit naturality give e.hom;epsilon(K)^(-1)=F(i). Naturality of the source and site/scalar comparisons moves i across the transported balancing map. The defining originReductionMap transpose satisfies G(m);epsilonB=s^(-1);T(epsilonA). Naturality of the second source comparison and s then cancels i and e.inv, leaving the ordinary balancing map between the two specified source comparisons.",
+   "uses": [
+    "def-pur-finite-smooth-coefficient-arrows",
+    "def-pur-finite-smooth-canonical-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalar/pullback unit coherence and scalar tensor left unitality to the ordinary balancing map, allowing an arbitrary line isomorphism U(L)≅M. Tensor-comparison naturality moves the inverse pullback-unit map through the tensor comparison. Tensor interchange moves the line isomorphism past the two unit maps. Scalar/pullback unit coherence replaces those unit maps, and scalar left unitality cancels the remaining unitors. The result is precisely the line isomorphism.",
+   "uses": [
+    "lem-pur-etale-scalar-pullback-unit-coherence",
+    "lem-pur-scalar-left-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize the categorical transport identity to the actual quotient functors, sourceAtOriginIso, pbcComparisonReduction and r.tensorPower d. Expand unitSource and unitReduction, cancel the target comparison-unit isomorphism and use source naturality to combine the transported identity with the ordinary unit calculation. Postcompose with unitSource at the lower level, then cancel this isomorphism. The remaining composite is exactly proTwistMap. No orientation, smoothness, Noetherian condition, positive tensor degree, or strict quotient inequality is used.",
+   "uses": [
+    "def-pur-condensed-tate-integral-tower-data",
+    "def-pur-finite-smooth-coefficient-arrows",
+    "def-pur-finite-smooth-canonical-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-pur-finite-smooth-canonical-maps",
+  "lem-pur-etale-scalar-pullback-unit-coherence",
+  "lem-pur-scalar-left-unit",
+  "def-pur-condensed-tate-integral-tower-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Finite coefficient source balancing at the unit, proved by categorical transport and the existing scalar/pullback and scalar tensor unit coherence lemmas; H3, 2026-10-27."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse limit root of unity line tensor powers have normalized strict quotient towers and common local models",
+   "results": "BDeRhamPlus; generic adic completion tensor equivalences and quotient transition formulas",
+   "date": "2026-10-25",
+   "verdict": "No theorem on normalized pro-etale derived towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor.map_comp and presheaf composition formulas",
+   "date": "2026-10-25",
+   "verdict": "Composition tools only; no tower reconstruction or source unit coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorIso.*unit|unit.*tensorIso|adic.*reconstruction|root.*tower",
+   "results": "Generic scalar-tower and root polynomial lemmas; no matching sheaf theorem. Also searched both project roots.",
+   "date": "2026-10-25",
+   "verdict": "Use project declarations for the relevant geometric and categorical ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized inverse system of roots of unity sheaves has a complete constructible derived limit with canonical finite coefficient reductions",
+   "results": "InverseSystem.limit, InverseSystem.mk, SheafOfModules.hasLimitsOfShape, ProfiniteGrp.isIso_toLimit, instHasLimitsCondensedMod",
+   "date": "2026-10-25",
+   "verdict": "Only generic limits, inverse systems and profinite results. None proves the specified root projection, unit coherence or constructible-complete reconstruction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars commutes with the tensor left unitor and with pullback of the coefficient unit",
+   "results": "TensorProduct.lid; ModuleCat extend-scalars constructors; extendRestrictScalarsAdj_unit_app_apply; extendScalarsComp_hom_app_one_tmul; extendScalarsId_hom_app_one_tmul",
+   "date": "2026-10-25",
+   "verdict": "Ordinary module balancing ingredients only, not the specified sheaf derived source and origin comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CondensedTateIntegralTower",
+  "date": "2026-10-25",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2, common local models, normalized finite tower and adic reconstruction",
+   "via": [
+    "lem-pur-condensed-tate-integral-tower",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePuritySourceUnitReduction",
+  "file": "lean/Sheaf/Paper/FinitePuritySourceUnitReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.finitePuritySourceUnitReduction",
+  "statement": "theorem finitePuritySourceUnitReduction\n    (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)\n    (b a : ℕ) (hab : a ≤ b)\n    (r : CoefficientLineComparison\n      (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n      (ell ^ (b + 1)) (ell ^ (a + 1))\n      (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) X) :\n    (proScalar (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1)) X).map\n        (unitSource ell b f d).inv ≫\n      proLambda f d r (𝟙_ _) ≫\n      (finiteProSource ell (a + 1) f d).map (unitReduction Y ell b a hab).hom =\n        proTwistMap d r ≫ (unitSource ell a f d).inv",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-feced",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261025T002531-L-3126547",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261027T094417-L-223268",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

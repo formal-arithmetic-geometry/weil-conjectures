@@ -1,0 +1,220 @@
+{
+ "id": "lem-sfb-scheme-lqf-fpqc-descent",
+ "kind": "statement",
+ "title": "Local quasi-finiteness of scheme morphisms descends along fpqc coverings",
+ "statement": "Let $f:X\\to T$ be a morphism of schemes [def-pc-scheme], and let $\\{u_i:T_i\\to T\\}_{i\\in I}$ be an fpqc covering family [def-weil-pbc-fpqc-covering]. For every $i\\in I$ let $f_i:X\\times_T T_i\\to T_i$ be the second projection [def-pc-fibre-product]. If every $f_i$ is locally quasi-finite in the scheme sense of [pqf-def-quasifinite], then $f$ is locally quasi-finite in the same sense, including local finite type. No quasi-compactness, separatedness or Noetherian hypothesis on $f$ is imposed; an fpqc family is not required to consist of quasi-compact morphisms.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02VI, lemma-descending-property-quasi-finite, locally quasi-finite assertion, descending direction."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "For each $i$, apply [lem-weil-pbc-lqf-locally-finite-type] to $f_i$, which is locally quasi-finite by hypothesis in the sense of [pqf-def-quasifinite]. Thus every $f_i$ is locally of finite type. Apply [lem-weil-pbc-fpqc-descend-locally-finite-type] to the given fpqc family and these second projections. It follows that $f$ is locally of finite type. This establishes the hypothesis needed for pointwise base-change reflection in step 3.",
+   "uses": [
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-fpqc-descend-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VI (lemma-descending-property-quasi-finite), proof of the locally quasi-finite assertion."
+   }
+  },
+  {
+   "text": "Write $a_i:X\\times_TT_i\\to X$ for the first projections. By [lem-galois-fpqc-covering-base-change], applied to the given family along $f:X\\to T$, the family $\\{a_i\\}$ is an fpqc covering of $X$. In particular it is jointly surjective by [def-weil-pbc-fpqc-covering]. Given any $x\\in X$, choose an affine neighbourhood $V$ of $x$; the finite affine opens in that definition have images covering $V$, so one contains a point $x_i$ with $a_i(x_i)=x$. This uses no surjectivity or quasi-compactness of any individual $u_i$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 022D (lemma-fpqc), part (3), and Tag 022B (definition-fpqc-covering); the covering-point choice implicit in Tag 02VI."
+   }
+  },
+  {
+   "text": "Fix $x$ and its lift $x_i$ from step 2. Local quasi-finiteness of $f_i$ means that $f_i$ is quasi-finite at $x_i$ by [pqf-def-quasifinite]. Since $f$ is locally of finite type by step 1, [lem-sfb-scheme-quasifinite-at-base-change] applies to $f$, $u_i$, and $x_i$. Its reverse implication gives that $f$ is quasi-finite at $a_i(x_i)=x$. As $x$ was arbitrary, [pqf-def-quasifinite] gives local quasi-finiteness of $f$, with the same local finite-type requirement. If $X$ is empty there are no points to check, and this conclusion is the same universal statement.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-sfb-scheme-quasifinite-at-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TM (lemma-base-change-quasi-finite), part (1), used by Tag 02VI; Tag 01TD (definition-quasi-finite), part (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-pbc-fpqc-covering",
+  "lem-sfb-scheme-quasifinite-at-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02VI (lemma-descending-property-quasi-finite), proof of the locally quasi-finite assertion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If scheme morphisms become locally quasi finite after a faithfully flat cover then they are locally quasi finite",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.LocallyQuasiFinite, RingHom.QuasiFinite.propertyIsLocal, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give quasi-finite scheme classes, base-change or composition results, but not fpqc descent with the Stacks local finite-type condition; both source grep patterns and the Loogle query returned no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"descends\"",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give quasi-finite scheme classes, base-change or composition results, but not fpqc descent with the Stacks local finite-type condition; both source grep patterns and the Loogle query returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "([Dd]escend.*[Qq]uasiFinite|[Qq]uasiFinite.*[Dd]escend|[Qq]uasiFinite.*[Ss]urjective)",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give quasi-finite scheme classes, base-change or composition results, but not fpqc descent with the Stacks local finite-type condition; both source grep patterns and the Loogle query returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local quasi finiteness including locally finite type of scheme morphisms descends along fpqc covering families",
+   "results": "OK; 8 hits; AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteCompScheme, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give quasi-finite scheme classes, base-change or composition results, but not fpqc descent with the Stacks local finite-type condition; both source grep patterns and the Loogle query returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "QuasiFinite.*(Faithful|Flat|descend)|quasiFinite.*(faithful|flat|descend)",
+   "results": "OK; 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give quasi-finite scheme classes, base-change or composition results, but not fpqc descent with the Stacks local finite-type condition; both source grep patterns and the Loogle query returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The property that a morphism of schemes has discrete fibres and is locally of finite type is fpqc local on its target",
+   "results": "OK; 8 hits; AlgebraicGeometry.Scheme.Hom.discrete_fiber, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.of_comp, AlgebraicGeometry.IsFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+   "date": "2026-10-24",
+   "verdict": "no match: semantic hits give quasi-finite scheme classes, base-change or composition results, but not fpqc descent with the Stacks local finite-type condition; both source grep patterns and the Loogle query returned no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The property that a morphism of schemes is locally of finite type with discrete fibres is local on the target for faithfully flat quasi compact coverings",
+   "results": "OK; 8 hits; AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.LocallyQuasiFinite.of_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern composition, base-change stability, or generic descent assuming the required DescendsAlong instance; none states fpqc descent of Stacks local quasi-finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite|DescendsAlong",
+   "results": "OK; 5 hits; 20, 22, 24, 26, 28",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern composition, base-change stability, or generic descent assuming the required DescendsAlong instance; none states fpqc descent of Stacks local quasi-finiteness."
+  },
+  {
+   "tool": "grep",
+   "query": "instance.*LocallyQuasiFinite|LocallyQuasiFinite.*DescendsAlong|DescendsAlong.*LocallyQuasiFinite",
+   "results": "OK; 6 hits; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: results concern composition, base-change stability, or generic descent assuming the required DescendsAlong instance; none states fpqc descent of Stacks local quasi-finiteness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-lqf-calculus-descent",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: The stabilizer-preserving etale cover preceding the local invariant-ring quotients. Supporting proof input: first sentence of Tag 0DUE: choose the pointwise affine groupoid chart from Tag 0DU4. Supporting split input: Tag 0DU4 (lemma-etale-local-quasi-DM-at-x), first proof paragraph and the first part of lemma-etale-local-quasi-DM to which it refers: preparation of the flat locally quasi-finite scheme self-relation. Inputs: Tag 0CL0 (lemma-diagonal-diagonal), parts (1),(5); Tag 06MF (theorem-quasi-DM); spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme). Supporting input: Tag 06MF (theorem-quasi-DM), equivalence (1)--(2); relative over S, as in the chapter conventions; quasi-DM expanded as locally quasi-finite diagonal. Auxiliary input: Tag 04XD (lemma-check-property-covering), P = locally quasi-finite; spaces-descent.tex Tag 0427 (lemma-descending-property-quasi-finite), locally quasi-finite assertion; spaces-morphisms.tex Tags 03XK (lemma-composition-quasi-finite), 03XL (lemma-base-change-quasi-finite), 03XN (lemma-permanence-quasi-finite). Open-source locality follows from the etale-chart definition. Scheme input: Tag 0427 proof: after taking a scheme atlas of the source, descend its scheme map over an fpqc scheme cover. This is below the space and stack descent being proved in the item. Q71 split: Tag 02VI proof, first descend local finite type by 02KX, then use the pointwise reflection of 01TM(1) over a lifted point. This supports the scheme descent input in the recorded alteration/moduli chain of det-thm-sf-ctf-stability-direct-images proof (3).",
+   "via": [
+    "lem-sfb-representable-lqf-calculus-descent",
+    "lem-sfb-quasidm-flat-locally-quasifinite-atlas",
+    "lem-sfb-finite-inertia-flat-quasifinite-presentation",
+    "lem-sfb-finite-inertia-pointwise-groupoid-chart",
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-scheme-lqf-fpqc-descent",
+  "worker": "stage1",
+  "summary": "Checked Tag 02VI against the scheme Stacks notion. All inputs already exist: local finite type descends by 02KX; base-changed fpqc families cover the source; 01TM(1) reflects quasi-finiteness at each lifted point. No new nodes and no statement change. Verified the finite-type distinction from Mathlib and all cited statements.",
+  "blueprint": "Supports the recorded scheme descent prerequisite in the chain below det-thm-sf-ctf-stability-direct-images, proof (3). The current blueprint proof (3) assembles proper and open direct images through compactification; the existing ancestor chain records the alteration/moduli input below that step. The local ancestor command returns None because the creation chain ends at a module name, so the existing null from.node and via are retained, with this exact support place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme lemma: Stacks local quasi-finiteness includes local finite type, required before descent; the same-unit pointwise base-change lemma assumes local finite type and cannot supply this implication."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-type",
+    "why": "Generic scheme descent of local finite type (02KX), explicitly invoked by 02VI. No same-unit node states this scheme result; algebraic-space descent would replace the scheme route with a higher-level result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-fpqc-descend-locally-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-aeb1d686b",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-aeb1d686b (reviewer sub-agent of L); spot-checked: The item proves, in three steps, that local quasi-finiteness of scheme morphisms descends along fpqc coverings. The proof is exactly the Stacks proof of Tag 02VI (descent.tex line 6117). Step 1 shows f is locally of finite type, first for each f_i by lem-weil-pbc-lqf-locally-finite-type and then for f by lem-weil-pbc-fpqc-descend-locally-finite-type (02KX); the objects and hypotheses of that lemma match the item exactly. Step 2 uses the 022D(3) leaf lem-galois-fpqc-covering-base-change with U=X and g=f, so the first projections a_i form an fpqc covering of X; joint surjectivity from def-weil-pbc-fpqc-covering then lifts each point x to some x_i. Step 3 applies the reverse direction of lem-sfb-scheme-quasifinite-at-base-change (01TM(1); f locally of finite type by step 1, any base change; reviewed PASS by NV) at x_i, so f is quasi-finite at every x. The statement is unchanged and still unsplit in live and side-live. There are no new nodes, proof_deps equals the union of the step uses, and there is no cycle (210-node closure). The two declared tool_uses are generic scheme lemmas from sk-thm-p1 (01TD remark and 02KX) that no node of this unit states, and I accept them. A search for 02VI and quasi-finite plus fpqc/fppf/descent finds only algebraic-space and stack results, so there is no scheme-level duplicate. No SGA source is used. Edge cases checked: empty X, empty cover, non-quasi-compact u_i, and an infinite disjoint union of points (locally quasi-finite but not quasi-finite). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.IsLocallyQuasiFiniteOfFpqcCover",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_of_fpqcCover",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/IsLocallyQuasiFiniteOfFpqcCover.lean",
+  "statement": "theorem isLocallyQuasiFinite_of_fpqcCover {X T : Scheme.{u}} (f : X ⟶ T) {I : Type v} (T' : I → Scheme.{u}) (g : ∀ i : I, T' i ⟶ T) (hcover : Presieve.ofArrows T' g ∈ Scheme.fpqcPrecoverage T) (h : ∀ i : I, (pullback.snd f (g i)).IsLocallyQuasiFinite) : f.IsLocallyQuasiFinite",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5637ee477",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement matches node/02VI clause by clause: Scheme.{u} f, I : Type v family with Presieve.ofArrows ∈ fpqcPrecoverage (family-level qc, no per-map qc/surjectivity), pullback.snd base changes, the project's Stacks IsLocallyQuasiFinite (includes FiniteType) in hypothesis and conclusion; no extra hypotheses; same shape as landed locallyOfFiniteType_of_fpqcCover. Only the lean field changed and the statement is verbatim. No duplicate in Mathlib/project. Edge cases (empty X/I, non-qc u_i, infinite discrete) covered. Docstrings give source + 3 proof steps; proof is sorry; no defs. Two proof-only deps have no Lean record yet (acceptable at stage 2). Report sections present. Not recompiled (no change)."
+ }
+}

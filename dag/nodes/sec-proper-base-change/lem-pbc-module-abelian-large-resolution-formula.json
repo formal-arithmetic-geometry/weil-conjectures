@@ -1,0 +1,121 @@
+{
+ "id": "lem-pbc-module-abelian-large-resolution-formula",
+ "kind": "statement",
+ "title": "Resolution formula for the large module/abelian comparison",
+ "statement": "For a scheme X [def-pc-scheme], a module F [def-weil-sheaf-of-modules-category], degree q and module-cohomology element x, moduleAbelianCohomologyLarge(X,F,q)(x) [def-pbc-canonical-coherent-etale-comparison] equals moduleAbelianUniverseMap(X,F,q) [def-pbc-module-abelian-universe-equiv] applied to the fixed moduleCohomologyExtResolutionEquiv(X,F,q)(x) [new-module-cohomology-ext-resolution-naturality]. This evaluates the constructed comparison, without a scheme map or functoriality assertion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "new-module-cohomology-ext-resolution-naturality",
+  "def-pbc-module-abelian-universe-equiv"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD; fixed common-resolution comparison, component formula"
+ },
+ "proof": [
+  {
+   "text": "Apply the existing moduleAbelianCohomologyLarge_component formula. A generic component identity identifies the component homomorphism evaluated at x with moduleComparisonEquiv evaluated at x. Unfold moduleCohomologyExtResolutionEquiv and the cached moduleAbelianUniverseMap, and apply coherentExtUniverseEquiv to that component equality. This uses the existing large comparison theorem without unfolding its construction.",
+   "uses": [
+    "def-pbc-canonical-coherent-etale-comparison",
+    "new-module-cohomology-ext-resolution-naturality",
+    "def-pbc-module-abelian-universe-equiv"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pbc-canonical-coherent-etale-comparison",
+  "new-module-cohomology-ext-resolution-naturality",
+  "def-pbc-module-abelian-universe-equiv"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FD; evaluation of the recorded common-resolution construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparison module sheaf cohomology underlying abelian sheaf cohomology natural under morphism ringed spaces",
+   "results": "Generic sheaf cohomology and module forgetful APIs; no formula for this project-specific comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing component formula and prove the packaging equality directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext.chgUniv\"",
+   "results": "Ext.chgUniv found; it supplies universe transport, not the comparison component formula.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing component formula and prove the packaging equality directly."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleCohomologyExtResolutionEquiv_edge|moduleCohomology_transport_coefficient",
+   "results": "msearch no hits; direct rg found existing edge comparison and coefficient transport, but no exposed equality of the large comparison and fixed resolution equivalence.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing component formula and prove the packaging equality directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentModuleAbelianFMap",
+  "date": "2026-10-27",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Evaluation formula extracted from lem-pbc-module-abelian-hmap: fixed module/abelian resolution comparison followed by Ext universe change.",
+   "via": [
+    "lem-pbc-module-abelian-hmap",
+    "lem-weil-pbc-qcoherent-normalized-pullback-square",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ModuleAbelianLargeResolutionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleAbelianLargeResolutionFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_resolutionFormula",
+  "statement": "theorem moduleAbelianCohomologyLarge_resolutionFormula (X : Scheme.{u}) (F : X.Modules) (q : ℕ)\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :\n    moduleAbelianCohomologyLarge X F q x =\n      moduleAbelianUniverseMap X F q (moduleCohomologyExtResolutionEquiv X F q x)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182407-L-3553549",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T182407-L-3553549",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

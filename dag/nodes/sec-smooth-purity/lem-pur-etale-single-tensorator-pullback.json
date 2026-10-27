@@ -1,0 +1,124 @@
+{
+ "id": "lem-pur-etale-single-tensorator-pullback",
+ "kind": "statement",
+ "title": "Tensor equation for the canonical single/pullback comparison",
+ "statement": "Let B be a symmetric closed monoidal Grothendieck abelian coefficient category with additive tensor and functorial flat resolutions. Let v:X′→X be a scheme morphism whose exact inverse image U preserves flat objects. Let L,M be B-valued sheaves on X with L flat. Write S,S′ for degree-zero inclusion, D for the derived inverse image, γ for exactly singleFunctorCompLeftDerivedUpperStarIso.hom, μ for singleFunctorObjTensorIso.hom, δU for ordinary oplax tensor comparison, and δD for leftDerivedUpperStarTensorComparison. Then D(μ(L,M));γ(L tensor M);S′(δU(L,M))=δD(SL,SM);(γ(L) tensor γ(M));μ(UL,UM). Flatness of UL follows from that of L. No arbitrary pairing square or comparison maps to other sheaves occur; M need not be flat. The notions are those of [def-kun-derived-tensor], [def-weil-abstract-derived-category], [def-pc-flat-sheaf-modules]. Exact inverse image is that of [prop-weil-pbc-inverse-image-modules-exact].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ (lemma-bounded-flat-K-flat) and 06YU (definition-derived-tor and signed symmetry immediately following it); degree-zero specialization of the canonical tensor localization. For inverse image: lemma-pullback-tensor-product, and the upstream derived tensor/counit equation in Derived.UpperStarMonoidal.Comparison."
+ },
+ "stmt_deps": [
+  "def-kun-derived-tensor",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved homotopy single tensor square, the proved canonical single/pullback counit identity, and the proved homotopy factorization of the source and target flat single tensorators. Naturality of the single/Qh comparison gives the counit identity after the ordinary oplax comparison as well. A categorical transport calculation moves the canonical isomorphisms through the derived tensor comparison, uses Qh tensorator naturality and the derived tensor/counit square, and reduces the desired equality to the homotopy single tensor square. The calculation cancels the single/Qh isomorphisms, retaining exactly the prescribed single/pullback maps.",
+   "uses": [
+    "lem-pur-etale-single-homotopy-tensor-pullback",
+    "lem-pur-etale-single-pullback-counit",
+    "lem-pur-etale-single-tensorator-homotopy-factorization",
+    "lem-kun-inverse-image-monoidal",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-single-homotopy-tensor-pullback",
+  "lem-pur-etale-single-pullback-counit",
+  "lem-pur-etale-single-tensorator-homotopy-factorization",
+  "lem-kun-inverse-image-monoidal",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 06YU and 07A4; explicit single-complex component computation and categorical transport of the existing upstream tensor/counit square, written by N1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The degree zero single functor into the derived category preserves tensor associativity and symmetry for flat objects",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctors, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.Qh_obj_singleFunctors_obj, DerivedCategory.singleFunctorIsoCompQ. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"single\", \"tensor\"",
+   "results": "12 hits: TensorProduct.single_tmul, TensorProduct.tmul_single, TensorProduct.finsuppScalarLeft_symm_apply_single, TensorProduct.finsuppRight_tmul_single, TensorProduct.finsuppScalarRight_symm_apply_single, finsuppTensorFinsuppLid_single_tmul_single, finsuppTensorFinsuppRid_single_tmul_single, TensorProduct.finsuppRight_symm_apply_single. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "single.*(monoidal|associativ|braiding)|map₂HomologicalComplexObjSingleIso",
+   "results": "25 hits: Mathlib/Algebra/SkewPolynomial/Basic.lean, Mathlib/Algebra/SkewPolynomial/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Single.lean, Mathlib/Algebra/SkewMonoidAlgebra/Support.lean, Mathlib/Algebra/SkewMonoidAlgebra/Support.lean, Mathlib/Algebra/SkewMonoidAlgebra/Support.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean, Mathlib/Algebra/SkewMonoidAlgebra/Basic.lean. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor placing an object in degree zero in a derived category preserves tensor associativity and braiding and commutes with exact monoidal pullback",
+   "results": "8 hits: CategoryTheory.Functor.Braided.toMonoidal, CategoryTheory.shiftFunctorZero, CategoryTheory.shiftFunctorZero', CategoryTheory.HasShift.Induced.zero, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.CommShift.isoZero'. None states the specified canonical single tensorator equation. The generic monoidal naturality and braided-functor lemmas are used as proof tools, not as a match for the whole statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility",
+  "date": "2026-10-27",
+  "group": "F2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Unit multiples, permutations and elementary shears: canonical derived tensor coherence needed for the degree-zero supported pairing and its pullback; Tensor equation for the canonical single/pullback comparison.",
+   "via": [
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "lem-pur-etale-closed-constant-tensor",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingleTensoratorPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingleTensoratorPullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.singleFunctorObjTensorIso_pullback",
+  "statement": "theorem singleFunctorObjTensorIso_pullback\n    {X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)\n    [(upperStar B v).PreservesFlat]\n    (L M : Sheaf X.smallEtaleTopology B) (hL : ObjectProperty.flat L) :\n    (upperStar B v).leftDerivedFunctor.map (singleFunctorObjTensorIso L M hL).hom ≫\n      (singleFunctorCompLeftDerivedUpperStarIso B v).hom.app (L ⊗ M) ≫\n      (DerivedCategory.singleFunctor _ 0).map\n        (Functor.OplaxMonoidal.δ (upperStar B v) L M) =\n    ((leftDerivedUpperStarTensorComparison B v).app\n        ((DerivedCategory.singleFunctor _ 0).obj L)).app\n        ((DerivedCategory.singleFunctor _ 0).obj M) ≫\n      ((singleFunctorCompLeftDerivedUpperStarIso B v).hom.app L ⊗ₘ\n        (singleFunctorCompLeftDerivedUpperStarIso B v).hom.app M) ≫\n      (singleFunctorObjTensorIso ((upperStar B v).obj L) ((upperStar B v).obj M)\n        (Functor.PreservesFlat.flat_obj hL)).hom",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-40375",
+  "group": "F2",
+  "result": "fix",
+  "landing": "20261026T222639-L-677900",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261026T235923-L-1469189",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

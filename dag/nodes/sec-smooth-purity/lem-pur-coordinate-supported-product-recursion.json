@@ -1,0 +1,177 @@
+{
+ "id": "lem-pur-coordinate-supported-product-recursion",
+ "kind": "statement",
+ "title": "Supported coordinate product and proper projection recursion",
+ "statement": "Fix a finite coefficient datum $P$ and $n\\in\\mathbb N$, with $A=A_{E,n+1}$ as in [def-pur-conventions]. Let $B$ be a separated finite-type $k$-scheme with structure morphism $a_B$. Use the ordered affine tower, coordinate Cartier boundaries of [def-pur-affine-space-coordinate-boundaries], and actual ordered supported cup product and its exceptional adjunct of [def-pur-affine-space-thom-map]. Let $C_r:Rz_{r,!}(A_B)\\to W_r$ be this product in its compact-support source, as defined in [def-pur-coordinate-section-arrows]. Let $a_r:Rs_{r,!}(W_r)\\to W_{r+1}$ be the last-coordinate Cartier arrow tensored with the pulled-back $W_r$, using the inverse specified proper projection and normalized Tate multiplication. Then $C_0$ is the specified compact-support identity. For every $r\\in\\mathbb N$, $C_{r+1}$ is the specified compact-support composition identification followed by $Rs_{r,!}(C_r)$ and $a_r$. Only the supported-arrow equations are asserted here; the exceptional-adjunct equations are not assumptions.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Ordered exterior product and projection-formula sentence; parent expanded proof Steps 1--5."
+ },
+ "stmt_deps": [
+  "def-pur-coordinate-section-arrows",
+  "def-pur-affine-space-thom-map",
+  "def-pur-affine-space-coordinate-boundaries",
+  "def-pur-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Work first with ordinary etale witnesses, writing $Y=X_r$, $T=X_{r+1}$, $q=q_r$, $s=s_r$, $z=z_r$, $N=z_*A_B$, $R=s_*A_Y$ and $L=A_T(1)[2]$. Each coordinate is a nonzerodivisor over any base: multiplication by $t_i$ shifts polynomial coefficients injectively, and quotienting by any other coordinates leaves a polynomial ring. The inverse image of $V(t_i)$ under $q$ for $i\\le r$ is the corresponding coordinate divisor on $T$. Their intersection with $s(Y)$ has ideal $(t_1,\\ldots,t_{r+1})$ and is exactly $z_{r+1}(B)$. Thus every Cartier pullback used below is allowed. The finite twists are locally free rank one; in particular $q^*W_r$ is bounded constructible, of finite Tor amplitude, and the finite compact projection formula applies to $s$ with inputs $A_Y$ and $q^*W_r$.",
+   "uses": [
+    "def-pur-affine-space-coordinate-boundaries",
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "Put $P=q^*N$, using the normalized closed-constant exchange, and put $\\alpha=q^*C_r:P\\to q^*W_r$. The supported cup pullback law and Cartier naturality identify the ordered product of the first $r$ coordinate factors on $T$ with this actual arrow $\\alpha$, not just its source and target. In the cup definition let $\\mu:P\\otimes^L R\\xrightarrow{\\sim}s_*N=z_{r+1,*}A_B$ be restriction and multiplication on the intersection. Consequently the definition of the next ordered product is\n$$C_{r+1}=m\\circ(\\alpha\\otimes c_{s,A})\\circ\\mu^{-1},$$\nwhere $m:q^*W_r\\otimes L\\xrightarrow{\\sim}W_{r+1}$ is the specified shifted twist multiplication. This uses the same scheme-theoretic support transport as the Thom-map definition.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality",
+    "lem-amb-cartier-kummer-map",
+    "def-pur-supported-cup",
+    "def-pur-affine-space-thom-map",
+    "def-pur-supported-class-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "For an object $M$ on $Y$, denote by\n$$\\pi_M:R\\otimes q^*M\\longrightarrow s_*M$$\nthe counit-defined proper projection map, followed by $s^*q^*M=M$ and the tensor unitor. For $M=N$ all coefficient sources are flat degree-zero closed-constant sheaves. The map $\\pi_N$ is exactly $\\mu\\circ\\sigma$, where $\\sigma:R\\otimes P\\to P\\otimes R$ is symmetry: on any site object both maps restrict the two locally constant sections to the intersection and send $a\\otimes b$ to $ab$. The counit in the definition of the projection map is restriction, so this also checks its normalization. The equality passes to the derived category using these same flat degree-zero models. Thus $\\pi_N$ is invertible because $\\mu$ is; no general projection-formula theorem for $N$ is needed.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-pur-etale-closed-constant-tensor",
+    "def-pur-supported-cup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "Naturality of the counit-defined projection map in its second argument gives\n$$\\pi_{W_r}\\circ(1_R\\otimes\\alpha)=s_*C_r\\circ\\pi_N.$$\nIndeed substitute $q^*C_r$ into its defining pullback-tensor comparison and counit; their naturality gives this square, and $s^*q^*C_r=C_r$. The map $\\pi_{W_r}$ is the specified projection isomorphism of Step 1. Substitute the square and $\\pi_N=\\mu\\sigma$ into Step 2, moving $R$ to the first tensor position. This yields\n$$C_{r+1}=m'\\circ(c_{s,A}\\otimes1)\\circ\\pi_{W_r}^{-1}\\circ s_*C_r,$$\nwith $m':L\\otimes q^*W_r\\cong W_{r+1}$. The shift comparison in this reordering contributes $(-1)^{2\\cdot2r}=1$; normalized Tate multiplication is the same on the two orders. This is precisely the displayed supported-map recursion in the statement, with its specified projection map.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-pur-supported-cup-functoriality",
+    "def-pur-supported-class-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  },
+  {
+   "text": "At c=0 the intersection, closed immersion and tensor unit are B, the identity of B and A_B, respectively. The Thom-map definition makes the empty product the identity. Cancelling its exceptional Hom bijection with the inverse in compactProduct, and applying the normalized proper closed comparison, gives the specified equality C_0 = coordinateIdentity.",
+   "uses": [
+    "def-pur-affine-space-thom-map",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "\"Iterating the affine-line adjunctions, the corresponding section classes are the ordered product of these Cartier maps\"; \"Finally the rank-one orientations commute with base change\" and subsequent Cartier-map sentence. Old proof Steps 5 and 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-affine-space-coordinate-boundaries",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-pur-supported-cup-functoriality",
+  "def-pur-supported-cup",
+  "def-pur-affine-space-thom-map",
+  "def-pur-supported-class-operations",
+  "def-kun-projection-formula-map",
+  "lem-pur-etale-closed-constant-tensor",
+  "def-weil-pbc-composite-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Y8 isolates the supported-map part of the parent expanded Steps 1--5; exceptional transposition is proved in the parent module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported product of coordinate Cartier classes equals the recursive proper projection map",
+   "results": "8 hits: Function.mulSupport_curry, LinearMap.pi_proj, Function.Embedding.coe_prodMap, AffineMap.proj_pi, IsProperMap.prodMap, IsProperMap.pi_map, CategoryTheory.Limits.Pi.map'_comp_π, MulHom.prodMap_def. None concerns supported Cartier maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The supported product of coordinate Cartier classes equals the recursive proper projection map",
+   "results": "8 hits concerning Profinite.NobelingProof products and basis projections. None states a supported Cartier product identity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate_supported_product_recursion|coordinate_section_product_recursion",
+   "results": "0 hits in Mathlib. Repository search finds only the parent theorem with the exceptional equations as well.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoordinateSectionProductRecursion",
+  "date": "2026-10-25",
+  "group": "Y8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "The ordered exterior product and projection-formula sentence.",
+   "via": [
+    "lem-pur-coordinate-section-product-recursion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateSupportedProductRecursion",
+  "file": "lean/Sheaf/Paper/CoordinateSupportedProductRecursion.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.AffineZeroPurity.coordinate_supported_product_recursion",
+  "statement": "theorem coordinate_supported_product_recursion (P : PurityFiniteSetting.{u}) (n : ℕ)\n    (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k))\n    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] :\n    compactProduct P n B aB 0 = coordinateIdentity P n B ∧\n    (∀ r : ℕ, compactProduct P n B aB (r + 1) =\n      (coordinateComposition P n B r).hom ≫\n        (rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient)\n          (lastSection B r)).map (compactProduct P n B aB r) ≫ sectionArrow P n B aB r)",
+  "branch": "sheaf-dag",
+  "by": "Y8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203840-L-2862507",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261025T203840-L-2862507",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

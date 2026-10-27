@@ -54,6 +54,8 @@ Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
 instance siteSmall : EssentiallySmall.{max u (t + 1)} W.ProEt :=
   essentiallySmallSelf.{u} _
 
+attribute [local instance 20000] principalKoszulHasSheafCompose
+
 /-- Canonical additive sheafification at the actual coefficient size.
 Source: Stacks 099L (blueprint: lem-a1-principal-koszul-strict-replacement). -/
 instance (priority := 4000) abSheafify :
@@ -479,6 +481,7 @@ theorem completed_exact (n : ℕ) :
     hs.gIsCokernel).hom
   infer_instance
 
+
 private lemma koszul_flat (n : ℕ) :
     ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)}
       (R := completedIntegralCommRingSheafUnrestricted l E W) ((koszul l E W n).X i) := by
@@ -489,7 +492,7 @@ private lemma koszul_flat (n : ℕ) :
   let A := Modules l E W
   let U := SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W)
   let D := (CochainComplex.singleFunctor A 0).obj U
-  let f := (CochainComplex.singleFunctor A 0).map (multiplication l E W n)
+  let f := principalKoszulScalarComplex R (uniformizer l E W) n
   have hu : ObjectProperty.flat U := ObjectProperty.prop_unit ObjectProperty.flat
   intro i
   have hf : ObjectProperty.flat ((koszul l E W n).X i) := by
@@ -515,6 +518,7 @@ private lemma koszul_flat (n : ℕ) :
   exact (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso R _).symm hf.2
 
+
 private lemma koszul_bounded (n : ℕ) : (koszul l E W n).IsStrictlyLE 0 := by
   rw [CochainComplex.isStrictlyLE_iff]
   intro i hi
@@ -522,22 +526,37 @@ private lemma koszul_bounded (n : ℕ) : (koszul l E W n).IsStrictlyLE 0 := by
   exact ⟨HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ _ (by omega),
     HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 _ _ (by omega)⟩
 
-private lemma augmentation_quasiIso (n : ℕ) : QuasiIso (augmentation l E W n) := by
-  obtain ⟨hs, hq⟩ := completed_exact l E W n
-  have hm := hs.mono_f
-  let F := CochainComplex.singleFunctor (Modules l E W) 0
-  let f := multiplication l E W n
+
+private theorem principalAugmentationQuasiIso
+    {C : Type (t + 1)} [Category.{t} C] [EssentiallySmall.{max u (t + 1)} C]
+    {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{max u (t + 1)}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u (t + 1)}]
+    (R : Sheaf J CommRingCat.{max u (t + 1)})
+    (a : (SheafOfModules.unit
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)).sections) (n : ℕ)
+    [Mono (endoPow (globalSectionMultiplication R a) (n + 1))] :
+    QuasiIso (principalAugmentation R a n) := by
+  let F := CochainComplex.singleFunctor
+    (SheafOfModules.{max u (t + 1)}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) 0
+  let f := endoPow (globalSectionMultiplication R a) (n + 1)
   let S := ShortComplex.mk f (cokernel.π f) (cokernel.condition f)
   have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel f }
   have : PreservesFiniteLimits F :=
     inferInstanceAs (PreservesFiniteLimits (HomologicalComplex.single _ (.up ℤ) 0))
   have : PreservesFiniteColimits F :=
     inferInstanceAs (PreservesFiniteColimits (HomologicalComplex.single _ (.up ℤ) 0))
-  have : QuasiIso (principalAugmentation
-      (completedIntegralCommRingSheafUnrestricted l E W) (uniformizer l E W) n) :=
-    CochainComplex.mappingCone.quasiIso_descShortComplex (hS.map_of_exact F)
+  exact CochainComplex.mappingCone.quasiIso_descShortComplex (hS.map_of_exact F)
+
+private lemma augmentation_quasiIso (n : ℕ) : QuasiIso (augmentation l E W n) := by
+  obtain ⟨hs, hq⟩ := completed_exact l E W n
+  have := hs.mono_f
+  have := principalAugmentationQuasiIso.{t, u}
+    (completedIntegralCommRingSheafUnrestricted l E W) (uniformizer l E W) n
   unfold augmentation
   infer_instance
+
 
 private lemma quasiIso_conjugate {A : Type*} [Category A] [Abelian A]
     {X X' Y Y' : CochainComplex A ℤ} (e₁ : X ≅ X') (e₂ : Y ≅ Y')
@@ -581,6 +600,7 @@ private lemma tensor_replacement {C : Type (t + 1)} [Category.{t} C]
   · intro H hH
     exact fun i ↦ (hQ _ (hP H hH) i).of_iso (HomologicalComplex.associator H P Q)
 
+
 /-- Principal Koszul tensor levels are flat-term K-flat replacements of actual reductions.
 Source: Stacks 093M, 06YQ, 06YP, 07A2, 099L
 (blueprint: lem-a1-principal-koszul-strict-replacement).
@@ -609,8 +629,14 @@ theorem principal_koszul_strict_replacement
   have hQ := SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
     (completedIntegralCommRingSheafUnrestricted l E W) (koszul l E W n) 0
     (koszul_flat l E W n)
-  exact tensor_replacement (completedIntegralCommRingSheafUnrestricted l E W)
-    P (koszul l E W n) _ (augmentation l E W n) hP hQ hflat (koszul_flat l E W n)
+  dsimp only [comparison, NatTrans.ofOpSequence_app, sourceTower, Functor.comp_obj,
+    principalKoszulTower, Functor.ofOpSequence_obj, tensorWith]
+  exact tensor_replacement.{t, u} (C := W.ProEt)
+    (J := AlgebraicGeometry.Scheme.ProEt.topology W)
+    (completedIntegralCommRingSheafUnrestricted l E W)
+    P (koszul l E W n)
+    ((CochainComplex.singleFunctor (Modules l E W) 0).obj (residue l E W n))
+    (augmentation l E W n) hP hQ hflat (koszul_flat l E W n)
     (augmentation_quasiIso l E W n)
 
 /-- The strict source-tower map induced by f tensor identity.
@@ -647,7 +673,9 @@ theorem comparison_naturality
   apply NatTrans.ext
   funext n
   dsimp only [NatTrans.comp_app, sourceTowerMap, targetTowerMap,
-    Functor.whiskerLeft_app, comparison, NatTrans.ofOpSequence_app]
+    Functor.whiskerLeft_app, comparison, NatTrans.ofOpSequence_app, tensorWith,
+    sourceTower, targetTower, Functor.comp_obj, principalKoszulTower,
+    Functor.ofOpSequence_obj, Functor.ofSequence_obj]
   exact ((SheafOfModules.KFlatTotalTensorModel.tensor
     (completedIntegralCommRingSheafUnrestricted l E W)).map₂CochainComplex.map f).naturality
       (augmentation l E W n.unop) |>.symm

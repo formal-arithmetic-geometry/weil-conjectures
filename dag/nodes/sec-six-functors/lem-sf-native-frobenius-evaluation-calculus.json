@@ -1,0 +1,156 @@
+{
+ "id": "lem-sf-native-frobenius-evaluation-calculus",
+ "kind": "statement",
+ "title": "Sectionwise evaluation calculus for native and translated internal Hom",
+ "statement": "For native adic modules over any scheme, morphisms into internal Hom are determined by evaluation on every pair of sections. Evaluation commutes with restriction and with precomposition or postcomposition of internal Hom. For a scheme isomorphism g, the inverse native pushforward Hom comparison preserves sectionwise evaluation, identifying evaluation over V after inverse pushforward with evaluation over its pullback along g.inv. For the fixed ordinary model [def-sf-native-frobenius-model-data], every twisted presentation [def-sf-twisted-action-presentation-data] has sigmaHom whose identity-slice evaluation is exactly translated identity-slice evaluation. These are the six formulas realized by the declarations of the attached module.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+ },
+ "stmt_deps": [
+  "def-sf-native-frobenius-model-data",
+  "lem-sf-adic-module-hom-comparison-core",
+  "def-sf-twisted-action-presentation-data"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry morphisms into native internal Hom by the tensor-Hom adjunction. Forget module actions and use tensor sheaf extensionality and pure tensor generation to prove the evaluation criterion. Apply naturality of native evaluation and its precomposition identity on pure tensors for the two functoriality formulas. Naturality of the tensor-comparison/evaluation composite gives restriction compatibility.",
+   "uses": [
+    "lem-sf-adic-module-hom-comparison-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+   }
+  },
+  {
+   "text": "Apply the already proved source identities Mod.μ_comp_map_evaluation and Functor.μ_sheafToPresheaf_app_comp_μ_sheafPushforwardContinuous_app to a pure tensor of sections. Tensor-comparison naturality turns their equality into the displayed section evaluation formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+   }
+  },
+  {
+   "text": "Use the ordinary tensor-Hom bijection and sheafification adjunction to identify evaluation of a pure tensor with applying the local map on the identity slice. Evaluate P.sigmaHom_evaluation on a pure tensor. Apply P.sigmaTensor_pure and naturality of module pure tensors. Both sides reduce to the claimed identity-slice formula.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-adic-module-hom-comparison-core",
+  "def-sf-twisted-action-presentation-data",
+  "lem-pur-module-tensor-generator-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Internal-Hom comparison and naturality of evaluation paragraph; ordinary small-site restriction and Frobenius translation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "pullbackIsoMap|pullbackIso.*map|map.*pullbackIso|pushforwardCongr",
+   "results": "16 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-27",
+   "verdict": "No complete native comparison. Reuse the existing library comparison and equivalence calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty.Over.pullback",
+   "results": "0 hits: ; loogle: unknown identifier 'MorphismProperty.Over.pullback'",
+   "date": "2026-10-27",
+   "verdict": "No complete native comparison. Reuse the existing library comparison and equivalence calculus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction along a site equivalence commutes with internal Hom of sheaves of modules and pushforward along a scheme isomorphism",
+   "results": "8 hits: SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardCongr_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardNatIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardCongr_symm",
+   "date": "2026-10-27",
+   "verdict": "No complete native comparison. Reuse the existing library comparison and equivalence calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of sheaves of modules preserves evaluation and internal Hom, with its unit and counit",
+   "results": "8 hits: CategoryTheory.evalEquiv.congr_simp, CategoryTheory.evalEquiv_apply, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongrPrecoherent, CategoryTheory.Equivalence.sheafCongr.functor_map_val_app, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.unitHomEquiv, CategoryTheory.Equivalence.sheafCongr.counitIso",
+   "date": "2026-10-27",
+   "verdict": "No complete native comparison. Reuse the existing library comparison and equivalence calculus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeFrobeniusComparison",
+  "date": "2026-10-27",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-coef-verdier-weil-equivariance",
+   "place": "Native and ordinary evaluation identities in the second proof step.",
+   "via": [
+    "lem-sf-native-frobenius-comparison",
+    "lem-sf-native-frobenius-ringed-model",
+    "lem-sf-native-weil-ringed-presentation",
+    "lem-sf-native-weil-hom-closed-structure",
+    "lem-sf-native-weil-hom-right-adjoint",
+    "lem-sf-native-weil-tensor-adjoints",
+    "lem-sf-native-weil-tensor-lift",
+    "lem-sf-weil-native-tensor-transport",
+    "lem-sf-weil-native-closed-forgetful"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeFrobeniusEvaluationCalculus",
+  "file": "lean/Sheaf/Paper/NativeFrobeniusEvaluationCalculus.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.NativeFrobenius.pushforward_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.pushforward_evaluation",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.evaluation_ext",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.evaluation_map_source",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.evaluation_map_target",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.evaluation_restriction",
+   "AlgebraicGeometry.ProEtale.NativeFrobenius.translated_evaluation"
+  ],
+  "statement": "theorem pushforward_evaluation (Y : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (g : Y ≅ Y) (M N : AdicSheaf l Y) (V : Y.ProEtᵒᵖ)\n    (z : ((adicLowerStar l g.inv).obj ((AdicSheaf.ihom M).obj N)).X.obj.obj V)\n    (x : ((adicLowerStar l g.inv).obj M).X.obj.obj V) :\n    adicComparisonEval ((adicLowerStar l g.inv).obj M) ((adicLowerStar l g.inv).obj N) V\n      (((adicLowerStarCompIhomIso l g.inv M).inv.app N).hom.hom.app V z) x =\n        adicComparisonEval M N ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g.inv).op.obj V)\n          z x",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T112344-L-1575197",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261027T112344-L-1575197",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

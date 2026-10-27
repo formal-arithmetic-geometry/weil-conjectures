@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-smooth-presentation-closed-subsets",
+ "kind": "statement",
+ "title": "Topology and closed subsets of a smooth stack presentation",
+ "statement": "Let $k$ be a field [def-weil-field] and $\\mathcal X$ an algebraic stack over $k$ [def-sfb-algebraic-moduli-stack]. Its points are maps $\\operatorname{Spec}L\\to\\mathcal X$ from fields modulo isomorphism after common field extension. For a smooth surjective scheme atlas $q:V\\to\\mathcal X$, give $|\\mathcal X|$ the quotient topology from $|V|$ [def-pc-scheme, def-sbc-smooth-morphisms]. This topology is independent of the atlas, every stack morphism induces a continuous map, and $|q|$ is an open surjection. Put $R=V\\times_{\\mathcal X}V$, with projections $s,t$. The fibres of $|q|$ are exactly the equivalence classes given by the image of $(|s|,|t|):|R|\\to|V|\\times|V|$. Inverse image by $|q|$ bijects closed subsets of $|\\mathcal X|$ with closed subsets $D\\subseteq|V|$ satisfying $|s|^{-1}D=|t|^{-1}D$. Each closed subset $C\\subseteq|\\mathcal X|$ is the underlying subset of a unique reduced closed substack (a full substack whose pullback to every scheme is a closed subscheme, with reduced smooth charts). Finally, for any two morphisms of algebraic stacks $\\mathcal A\\to\\mathcal B$ and $\\mathcal C\\to\\mathcal B$, the map $|\\mathcal A\\times_{\\mathcal B}\\mathcal C|\\to|\\mathcal A|\\times_{|\\mathcal B|}|\\mathcal C|$ is surjective. In particular set-theoretic images commute with base change: the image of $|\\mathcal A\\times_{\\mathcal B}\\mathcal C|\\to|\\mathcal C|$ is the inverse image of the image of $|\\mathcal A|\\to|\\mathcal B|$. All fibre products here are 2-fibre products.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04XH (lemma-points-cartesian), 04XJ (lemma-points-presentation), 04XL (lemma-topology-points), and 0509 (lemma-reduced-closed-substack). Closed-subset correspondence is the closed-set formulation of the quotient topology and the presentation equivalence relation."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-algebraic-moduli-stack",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-closed-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "First prove the point assertion for arbitrary $\\mathcal A\\to\\mathcal B\\leftarrow\\mathcal C$. These 2-fibre products are algebraic stacks by the cited fibre-product node. Represent a pair of point classes with equal image by objects $a$ over a field $K$ and $c$ over a field $L$. Equality of the images means, by the point equivalence relation, that some common extension $M$ carries an isomorphism between their images in $\\mathcal B(M)$. The triple $(a_M,c_M,\\alpha)$ is exactly an object of the 2-fibre product over $M$, by its defining groupoid. Its point maps to the prescribed pair. Consequently a point of $\\mathcal C$ is in the base-changed image precisely when its image in $\\mathcal B$ is represented by some point of $\\mathcal A$: both implications follow by projecting this triple. This proves surjectivity and the image/base-change assertion, without any injectivity claim.",
+   "uses": [
+    "lem-sfb-algebraic-stack-fibre-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XH (lemma-points-cartesian), field-triple proof; last assertion by projecting the pair."
+   }
+  },
+  {
+   "text": "The topology node gives atlas independence, continuity of every induced map, and the quotient-topology criterion. Smoothness of $q$ implies flatness and local finite presentation by the chartwise calculus, so the openness clause of the topology node applies to $V\\to\\mathcal X$. Surjectivity follows from the field-extension local lifting clause of the calculus applied to the surjective atlas: every representative of a stack point lifts after a field extension. Thus $|q|$ is an open surjection. Taking complements in the open-set criterion gives the same criterion for closed sets.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points); Tag 04XI (lemma-characterize-surjective)."
+   }
+  },
+  {
+   "text": "A point of $R=V\\times_{\\mathcal X}V$ gives two points with equal image in $|\\mathcal X|$. Conversely step 1 applied to this square lifts every pair with equal image to $|R|$. Therefore the image relation of $(|s|,|t|)$ is precisely equality of the $|q|$-images, hence an equivalence relation whose classes are the fibres of $|q|$. A subset $D$ satisfies $|s|^{-1}D=|t|^{-1}D$ exactly when membership is constant on these fibres: one implication tests a lift of each pair, and the other uses $|q||s|=|q||t|$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XJ (lemma-points-presentation), kernel-relation argument."
+   }
+  },
+  {
+   "text": "For a closed subset $C$ its inverse image is closed by continuity and is saturated by step 3. Conversely, for a closed invariant $D$, set $C=|q|(D)$. Saturation gives $|q|^{-1}C=D$, so $C$ is closed by the quotient criterion in the topology node. Surjectivity gives $|q|(|q|^{-1}C)=C$, proving that the two operations are inverse. This includes the empty and full subsets.",
+   "uses": [
+    "lem-sfb-stack-point-topology-flat-lfp-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tags 04XL and 04XJ, elementary closed-set reformulation."
+   }
+  },
+  {
+   "text": "Fix closed $C$ and let $D=|q|^{-1}C$. Give $D\\subseteq|V|$ its unique reduced closed subspace structure $Z\\subseteq V$ by the reduced-support node. Since a closed subspace of a scheme is representable by a closed subscheme, $Z$ is a scheme. The same node says that the closed subspaces $Z_s=R\\times_{s,V}Z$ and $Z_t=R\\times_{t,V}Z$ have supports $|s|^{-1}D$ and $|t|^{-1}D$. The two projections $R\\to V$ are smooth base changes of the atlas by the chartwise calculus; hence $Z_s\\to Z$ and $Z_t\\to Z$ are smooth. Both pullbacks are reduced by smooth ascent of reducedness. Their supports agree by step 4; uniqueness of the reduced closed subspace of $R$ now gives $Z_s=Z_t$ as closed subspaces, including their scheme structures. This is the necessary stronger invariance, rather than only set-theoretic invariance.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-space-smooth-reduced-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0509 (lemma-reduced-closed-substack), construction of Z and equality of its two pullbacks; spaces-descent.tex Tag 0GB3."
+   }
+  },
+  {
+   "text": "Apply invariant closed-subspace descent to this $Z\\subseteq V$ and the equality just proved. It gives a strictly full algebraic closed substack $\\mathcal Z\\subseteq\\mathcal X$ with $\\mathcal Z\\times_{\\mathcal X}V=Z$ and smooth surjective atlas $Z\\to\\mathcal Z$. Since $Z$ is reduced, this is a reduced smooth chart. To check every other smooth scheme chart $W\\to\\mathcal Z$, take $P=W\\times_{\\mathcal Z}Z$. Its projection to $Z$ is smooth and its projection to $W$ is smooth surjective, by the chartwise calculus. Smooth ascent makes $P$ reduced and smooth surjective descent makes $W$ reduced. Thus the constructed substack is reduced in the intrinsic smooth-chart sense. Its underlying image is $C$: points of $\\mathcal Z$ lift after a field extension to the atlas $Z$, whose image in $|\\mathcal X|$ is exactly $|q|(D)=C$.",
+   "uses": [
+    "lem-sfb-invariant-closed-substack-descent",
+    "lem-sfb-space-smooth-reduced-locality",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0509, descent and reducedness; missing chart-independence argument expanded using spaces-descent.tex Tag 0GB3."
+   }
+  },
+  {
+   "text": "For uniqueness, suppose $\\mathcal Z'$ is another reduced closed substack with underlying subset $C$. Its pullback $Z'=V\\times_{\\mathcal X}\\mathcal Z'$ is a closed subscheme of $V$ and a smooth scheme chart of $\\mathcal Z'$, hence reduced. Step 1 identifies its support with $|q|^{-1}C=D$. The reduced-support uniqueness gives $Z'=Z$ as closed subspaces of $V$. Injectivity of the closed-substack descent bijection now gives $\\mathcal Z'=\\mathcal Z$. Strict fullness is understood throughout, so this is uniqueness as a substack rather than uniqueness of a chosen presentation.",
+   "uses": [
+    "lem-sfb-space-reduced-closed-support",
+    "lem-sfb-invariant-closed-substack-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 0509, omitted uniqueness expanded using Tag 0507 and spaces-properties.tex Tag 03IQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-invariant-closed-substack-descent",
+  "lem-sfb-space-reduced-closed-support",
+  "lem-sfb-space-smooth-reduced-locality",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-point-topology-flat-lfp-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tags 04XH, 04XJ, 04XL and 0509; omitted uniqueness and smooth-chart independence supplied explicitly with Tags 0507, 03IQ and 0GB3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth surjective atlas of an algebraic stack is a topological quotient with closed subsets corresponding to closed subsets invariant under its groupoid",
+   "results": "Read actual hits: AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.Scheme.GlueData.ι_jointly_surjective, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.instSurjectiveDescI₀SchemeF, AlgebraicGeometry.SurjectiveOnStalks.instIsMultiplicativeScheme, AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks; 8 hits; digest 422c9e265c3c45ee",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme quotient maps and abstract topological group quotients do not state the topology or reduced closed substacks of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a group scheme action the smooth quotient stack atlas induces a quotient topology and invariant closed subsets correspond to reduced closed substacks",
+   "results": "Read actual hits: t2Space_quotient_mulAction_of_properSMul, MulAction.isClosedMap_quotient, CategoryTheory.PreGaloisCategory.has_decomp_quotients, isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul, IsQuotientCoveringMap, isQuotientCoveringMap_iff, t2Space_of_properlyDiscontinuousSMul_of_t2Space, IsQuotientCoveringMap.isCancelSMul; 8 hits; digest c39b9f0689abfa97",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme quotient maps and abstract topological group quotients do not state the topology or reduced closed substacks of algebraic stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "Read actual hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme quotient maps and abstract topological group quotients do not state the topology or reduced closed substacks of algebraic stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "closedSubstack|closed_substack|quotientStack|quotient_stack|atlas",
+   "results": "Read actual hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme quotient maps and abstract topological group quotients do not state the topology or reduced closed substacks of algebraic stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth atlas algebraic stack quotient topology invariant closed subsets reduced closed substacks",
+   "results": "Read actual hits: AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsSmooth.casesOn, LibraryNote.Design_choices_about_smooth_algebraic_structures, restr_mem_maximalAtlas, SmoothPartitionOfUnity.exists_isSubordinate_chartAt_source_of_isClosed; 8 hits; digest 853dc200efc32ca7",
+   "date": "2026-10-22",
+   "verdict": "No match: scheme quotient maps and abstract topological group quotients do not state the topology or reduced closed substacks of algebraic stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth surjective atlas quotient topology invariant closed subsets algebraic stack",
+   "results": "Read returned hits: AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.isClosedImmersion_iff, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.LocallyRingedSpace.GlueData.ι_jointly_surjective, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget, AlgebraicGeometry.surjectiveOnStalks_iff; 8 hits; digest 5aa663a4a564d3fd",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme quotient-map and reducedness lemmas do not cover the algebraic-stack statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic stack field points topology fibre product surjective and reduced closed substacks",
+   "results": "Read returned hits: AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.instIsPreimmersionFiberι, AlgebraicGeometry.IsDominant, AlgebraicGeometry.finite_appTop_of_universallyClosed; 8 hits; digest a8c0a13b6b843197",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme quotient-map and reducedness lemmas do not cover the algebraic-stack statements."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Stack\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme quotient-map and reducedness lemmas do not cover the algebraic-stack statements."
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic.?stack|closedSubstack|closed_substack|quotientStack",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme quotient-map and reducedness lemmas do not cover the algebraic-stack statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic stack smooth atlas topology and reduced closed substack",
+   "results": "Read returned hits: AlgebraicGeometry.IsReduced.of_openCover, AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.IsReduced.mk, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.IsSmooth; 8 hits; digest 378d81a364c0a90f",
+   "date": "2026-10-23",
+   "verdict": "No match: scheme quotient-map and reducedness lemmas do not cover the algebraic-stack statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-pgl-quotient-orbit-topology",
+  "date": "2026-10-22",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient.",
+   "via": [
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-presentation-closed-subsets",
+  "worker": "stage1",
+  "summary": "Q27 read Stacks 04XH, 04XJ, 04XL, 0509 and the cited input statements. Reused topology and reduced-space support nodes; proved the common-field triple, kernel relation, saturated closed-set bijection, and image base-change directly. Extracted only scheme-theoretic invariant closed-substack descent and smooth reducedness for spaces. Wrote the omitted uniqueness and smooth-chart independence arguments. Corrected the algebraic-stack definition citation without changing its mathematical meaning. Checked empty/full supports, empty stack, identity atlas, nonreduced stack and nontrivial stabilizers.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient. The current latest direct-images proof (3) is the inherited high-level route; these are generic stack-topology foundations for the already-created affine-PGL quotient input, not a replacement of a six-functor step."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-036a27df9",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-036a27df9 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the Stacks sources: stacks-properties 04XH, 04XJ, 04XL, 04YM, 0507 (closed case, with proof) and 0509 (whose proof omits uniqueness), plus spaces-descent 0GB3. The item is still unsplit in live and side-live, the two new ids are not in live, and there is no repair note. The only statement change replaces the def-sfb-adequate-moduli-space citation with def-sfb-algebraic-moduli-stack; this is a correct definition citation, and the report names it. Steps: 1 is the common-extension triple from lem-sfb-algebraic-stack-fibre-products and is elementary. 2 gets the topology, continuity and openness from the topology node; smooth gives flat and lfp, and field-extension surjectivity comes from the chartwise calculus. 3 and 4 are the elementary kernel-relation and saturated-closed-set arguments. 5 follows the Stacks 0509 proof: it uses reduced-support uniqueness, with smoothness of the base changes Z_s and Z_t making them reduced through the new 0GB3 node. It does not assume that closed base change preserves reducedness. 6 descends via the new 0507 closed-case node, and the P=W×_𝒵Z argument shows that every smooth chart is reduced. 7 fills in the omitted uniqueness using only statements: reduced-support uniqueness, then injectivity of the descent bijection. The new nodes match 0507 and 0GB3, are self-contained, are strictly smaller than the item and are not duplicates. The open-descent node, the DM topology node and the scheme-level lem-trf-etale-reduced-* nodes do not cover them. I tested empty and full sets, the identity atlas, BG_m, and the need for both smoothness and surjectivity. Batch-5 check: the flagged citations (def-trf-algebraic-space, def-sfb-algebraic-moduli-stack, def-sfb-stable-pointed-moduli-groupoids, def-a1-space-point-topology, and the general lemma lem-sfb-stack-chartwise-smooth-etale-calculus) are general definitions or stack foundations, not steps of the trace-formula or Poincaré-duality proofs, so I accept them. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPresentationClosedSubsets",
+  "declaration": "CategoryTheory.smooth_presentation_closed_subsets",
+  "declarations": [
+   "CategoryTheory.moduliSmoothPointTopology",
+   "CategoryTheory.moduliSchemePoint",
+   "CategoryTheory.moduliAtlasPointMap",
+   "CategoryTheory.smooth_presentation_closed_subsets"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPresentationClosedSubsets.lean",
+  "statement": "theorem smooth_presentation_closed_subsets (k : Type u) [Field k] (F : BasedCategory.{v, w} (Over (Spec (.of k)))) (hF : IsAlgebraicModuliStack F) : (∀ (U : Over (Spec (.of k))) (q : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U q → moduliSmoothPointTopology F = TopologicalSpace.coinduced (moduliAtlasPointMap q) inferInstance ∧ @IsOpenMap _ _ inferInstance (moduliSmoothPointTopology F) (moduliAtlasPointMap q) ∧ Function.Surjective (moduliAtlasPointMap q) ∧ (∀ x y : U.left, moduliAtlasPointMap q x = moduliAtlasPointMap q y ↔ ∃ r : ModuliPoints (moduliTwoFiberProduct q q), moduliPointMap (moduliTwoFiberFst q q) r = moduliSchemePoint U x ∧ moduliPointMap (moduliTwoFiberSnd q q) r = moduliSchemePoint U y) ∧ (∃ e : {C : Set (ModuliPoints F) // @IsClosed _ (moduliSmoothPointTopology F) C} ≃ {D : Set U.left // IsClosed D ∧ moduliPointMap (moduliTwoFiberFst q q) ⁻¹' (moduliSchemePoint U '' D) = moduliPointMap (moduliTwoFiberSnd q q) ⁻¹' (moduliSchemePoint U '' D)}, ∀ C, (e C).val = moduliAtlasPointMap q ⁻¹' C.val)) ∧ (∀ (G : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))), IsAlgebraicModuliStack G → ∀ f : BasedFunctor F G, @Continuous _ _ (moduliSmoothPointTopology F) (moduliSmoothPointTopology G) (moduliPointMap f)) ∧ (∀ C : Set (ModuliPoints F), @IsClosed _ (moduliSmoothPointTopology F) C → ∃! W : ClosedModuliSubstack F, Set.range (moduliPointMap W.inclusion) = C ∧ ∀ (T : Over (Spec (.of k))) (a : BasedFunctor (discreteModuli (yoneda.obj T)) W.category), IsSmoothModuliAtlas W.category T a → AlgebraicGeometry.IsReduced T.left) ∧ (∀ (A : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (B : BasedCategory.{v₂, w₂} (Over (Spec (.of k)))) (C : BasedCategory.{v₃, w₃} (Over (Spec (.of k)))), IsAlgebraicModuliStack A → IsAlgebraicModuliStack B → IsAlgebraicModuliStack C → ∀ (a : BasedFunctor A B) (c : BasedFunctor C B), (∀ (x : ModuliPoints A) (y : ModuliPoints C), moduliPointMap a x = moduliPointMap c y → ∃ z : ModuliPoints (moduliTwoFiberProduct a c), moduliPointMap (moduliTwoFiberFst a c) z = x ∧ moduliPointMap (moduliTwoFiberSnd a c) z = y) ∧ Set.range (moduliPointMap (moduliTwoFiberSnd a c)) = moduliPointMap c ⁻¹' Set.range (moduliPointMap a))",
+  "branch": "sheaf-dag",
+  "by": "Q142",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the landed field-object quotient, point maps and closed substacks. Three concrete helpers construct the smooth-atlas topology and the canonical scheme/atlas point maps belonging to this statement; no closed-set predicate restricted to DM stacks is used. Statement dependencies gain the two existing landed definition nodes under brief-stage2 section 5."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-264c6dc36",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean (live null) and stmt_deps (+def-sfb-dm-stack-morphism-properties, +def-sfb-closed-moduli-substack, landed def nodes, allowed by brief-stage2 §5). Clause by clause: ModuliPoints = Quot of field objects (stabilizers kept); moduliSmoothPointTopology = generateFrom of sets open on every smooth atlas, not the étale-only ModuliPointIsClosed, equal to coinduced for every atlas (quotient + independence); continuity for every algebraic G; IsOpenMap and Surjective; fibres ↔ ∃ r in the genuine 2-fibre product with both projections; closed bijection pinned to q⁻¹, invariance via the bijective moduliSchemePoint; ∃! ClosedModuliSubstack (predicate + Prop fields) with range = C and every smooth atlas reduced (non-vacuous, closed substack algebraic); lifting and range(snd) = c⁻¹ range(a) for arbitrary A, B, C with independent universes. Edge cases (empty, full, identity atlas, non-reduced, stabilizers, any characteristic, universes) OK. No duplicate topology or scheme-point map in Sheaf; helpers have real data; one sorry; docstrings with source, blueprint and 7 steps; lines ≤96; statement verbatim; declarations match. Advisory: 2-fibre product decls owned by def nodes reached transitively; no copyright header. No compile (no file changed)."
+ }
+}

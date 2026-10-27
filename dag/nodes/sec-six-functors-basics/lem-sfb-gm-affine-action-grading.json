@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-gm-affine-action-grading",
+ "kind": "statement",
+ "title": "A multiplicative-group action on an affine scheme gives an integer grading",
+ "statement": "Let $R$ be a commutative ring and $C$ a commutative $R$-algebra. For every commutative ring $A$, write $A[z,z^{-1}]$ for the ring of finite formal sums $\\sum_{n\\in\\mathbf Z}a_nz^n$, with unique coefficients $a_n\\in A$ and multiplication $z^nz^m=z^{n+m}$. Put $X=\\operatorname{Spec}C$ and $G=\\operatorname{Spec}R[z,z^{-1}]$ [def-weil-affine-spectrum], with $G(B)=B^\\times$ and multiplication of units for every commutative $R$-algebra $B$. Suppose an $R$-morphism $a:G\\times_R X\\to X$ [def-pc-fibre-product] satisfies the action identities $a_B(1,x)=x$ and $a_B(t,a_B(u,x))=a_B(tu,x)$ on all commutative $R$-algebras $B$, where $X(B)=\\operatorname{Hom}_{R\\text{-alg}}(C,B)$. Then there are $R$-submodules $C_n\\subseteq C$, for $n\\in\\mathbf Z$, such that every $c\\in C$ has a unique finite decomposition $c=\\sum_n c_n$ with $c_n\\in C_n$, the image of $R$ and $1_C$ lie in $C_0$, and $C_mC_n\\subseteq C_{m+n}$. For every such $B$, every $x\\in X(B)$, every $t\\in B^\\times$, and every $c\\in C_n$, one has $a_B(t,x)(c)=t^n x(c)$. No finiteness, flatness, smoothness, field, or Noetherian hypothesis on $R$ or $C$ is required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0EKK, lemma-complete-reducibility-Gm, with the action formula of Tag 0EKJ, example-Gm-on-affine. Relative version: the structural image of R has weight zero because the action is over Spec R."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-sfb-split-torus-over-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $L=C[z,z^{-1}]$, and let $i:C\\to L$ be the constant inclusion. By [def-weil-affine-spectrum], $i$ gives an $L$-point of $X$; the pair $(z,i)$ gives an $L$-point of $G\\times_R X$ by [def-pc-fibre-product]. Set $\\rho=a_L(z,i):C\\to L$, an $R$-algebra map. For any $R$-algebra map $h:L\\to B$, composition of the corresponding maps of spectra with $a$ gives $h\\circ\\rho=a_B(h(z),h\\circ i)$. In particular, the substitution $h_{t,x}(\\sum c_nz^n)=\\sum x(c_n)t^n$ is an $R$-algebra map for $t\\in B^\\times$ and $x:C\\to B$, and $a_B(t,x)=h_{t,x}\\circ\\rho$. This naturality identity follows directly by precomposing the $L$-point with $\\operatorname{Spec}h$; no representability comparison is being assumed.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+   }
+  },
+  {
+   "text": "For $c\\in C$, define $p_n(c)$ to be the coefficient of $z^n$ in $\\rho(c)$, so $\\rho(c)=\\sum_n p_n(c)z^n$ with finite support. Uniqueness of coefficients and $R$-linearity of $\\rho$ imply that each $p_n:C\\to C$ is $R$-linear. Apply the preceding substitution formula with $B=C$, $x=\\mathrm{id}_C$ and $t=1$. The identity-action hypothesis gives $\\sum_n p_n(c)=c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+   }
+  },
+  {
+   "text": "Take $D=C[w,w^{-1}][z,z^{-1}]$ and the constant inclusion $j:C\\to D$. Apply $a_D(z,a_D(w,j))=a_D(zw,j)$ and the substitution formula of step 1. The left side, evaluated at $c$, is $\\sum_n\\sum_m p_m(p_n(c))w^mz^n$: indeed the inner point sends $d$ to $\\sum_m p_m(d)w^m$, and the outer action substitutes that point on each coefficient of $\\rho(c)$. The right side is $\\sum_n p_n(c)w^nz^n$. Comparing the coefficient of $z^n$ first and then that of $w^m$ proves $p_m(p_n(c))=0$ for $m\\ne n$, and $p_n(p_n(c))=p_n(c)$. Each double sum is finite since the outer sum has finite support and each coefficient has a finite Laurent expansion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+   }
+  },
+  {
+   "text": "Define $C_n=\\{c\\in C:\\rho(c)=cz^n\\}$. These are $R$-submodules: both maps $c\\mapsto\\rho(c)$ and $c\\mapsto cz^n$ are $R$-linear. The coefficient identities of step 3 give $\\rho(p_n(c))=p_n(c)z^n$, so $p_n(c)\\in C_n$. Step 2 therefore gives a finite decomposition of every $c$. If $\\sum_n d_n=0$ is any finite sum with $d_n\\in C_n$, applying $\\rho$ gives $\\sum_n d_nz^n=0$, and coefficient uniqueness gives every $d_n=0$. Subtracting two decompositions proves uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+   }
+  },
+  {
+   "text": "Because $\\rho$ is an $R$-algebra map, $\\rho(1_C)=1_C$ and $\\rho(r\\cdot1_C)=r\\cdot1_C$ for every $r\\in R$, so $1_C$ and the structural image of $R$ belong to $C_0$. If $c\\in C_m$ and $d\\in C_n$, then $\\rho(cd)=\\rho(c)\\rho(d)=(cz^m)(dz^n)=cdz^{m+n}$; hence $cd\\in C_{m+n}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+   }
+  },
+  {
+   "text": "For any commutative $R$-algebra $B$, $x:C\\to B$, $t\\in B^\\times$ and $c\\in C_n$, step 1 yields $a_B(t,x)(c)=h_{t,x}(\\rho(c))=h_{t,x}(cz^n)=x(c)t^n=t^nx(c)$. The substitutions and coefficient comparisons used only finite formal Laurent sums and the two given action identities; they imposed no further hypothesis on $R$ or $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0EKK, lemma-complete-reducibility-Gm, coefficient proof; Tag 0EKJ, example-Gm-on-affine, action formula. Relative version over R."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "coaction|Gm.*grad|grad.*Gm|multiplicative.*group.*grad",
+   "results": "{\"t\": \"2026-10-24T04:15:20Z\", \"tool\": \"grep\", \"query\": \"coaction|Gm.*grad|grad.*Gm|multiplicative.*group.*grad\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|[Cc]omodule|weight.*decompos",
+   "results": "{\"t\": \"2026-10-24T04:15:20Z\", \"tool\": \"grep\", \"query\": \"coaction|[Cc]omodule|weight.*decompos\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\"], \"digest\": \"dd2e916d97216f7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Actions of the multiplicative group on affine schemes correspond to Z graded algebras",
+   "results": "{\"t\": \"2026-10-24T04:15:20Z\", \"tool\": \"leansearch\", \"query\": \"Actions of the multiplicative group on affine schemes correspond to Z graded algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedMonoid.GMulAction\", \"GradedAlgebra\", \"GradedMonoid.GMulAction.toMulAction\", \"GradedMonoid.GMulAction.mk\", \"GradedMonoid.GMulAction.casesOn\", \"SetLike.gmulAction\", \"GradedMonoid.GMulAction.noConfusionType\", \"GradedMonoid.GMulAction.recOn\"], \"digest\": \"76f42f2842c644cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaurentPolynomial\", \"GradedAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T04:15:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaurentPolynomial\\\", \\\"GradedAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An action of the multiplicative group scheme on an affine scheme over a commutative ring gives an integer graded coordinate algebra",
+   "results": "{\"t\": \"2026-10-24T04:15:23Z\", \"tool\": \"leanfinder\", \"query\": \"An action of the multiplicative group scheme on an affine scheme over a commutative ring gives an integer graded coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.smul_mem\", \"AlgebraicGeometry.AffineSpace.coord\", \"ProjectiveSpectrum\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"AlgebraicGeometry.AffineSpace.toSpecMvPoly\", \"AlgebraicGeometry.Proj.toSpecZero\", \"GradedMonoid.GradeZero.mulAction\"], \"digest\": \"26dacb4e87632f41\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Comodule over the Laurent polynomial Hopf algebra decomposes into integer weight submodules with homogeneous multiplication",
+   "results": "{\"t\": \"2026-10-24T04:15:25Z\", \"tool\": \"leanfinder\", \"query\": \"Comodule over the Laurent polynomial Hopf algebra decomposes into integer weight submodules with homogeneous multiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instHopfAlgebra\", \"LaurentPolynomial.comul_C_mul_T_self\", \"LaurentPolynomial.comul_C_mul_T\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.instIsCocomm\", \"LaurentPolynomial.instCoalgebra\", \"LaurentPolynomial.antipode_C_mul_T\", \"LaurentPolynomial.comul_C\"], \"digest\": \"12ef87ab10af38e0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "grep",
+   "query": "comul_C_mul_T_self|theorem comul_T|Comodule|coaction",
+   "results": "{\"t\": \"2026-10-24T04:19:07Z\", \"tool\": \"grep\", \"query\": \"comul_C_mul_T_self|theorem comul_T|Comodule|coaction\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/MonoidAlgebra.lean\"], \"digest\": \"db4ec025cd07c703\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: GradedAlgebra assumes a grading; weightedDecomposition constructs one only for polynomial rings; LaurentPolynomial Hopf and coalgebra formulas do not construct the grading of an arbitrary algebra from a group-scheme action"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|[Cc]omodule|weight.*decompos",
+   "results": "{\"t\": \"2026-10-24T04:41:59Z\", \"tool\": \"grep\", \"query\": \"coaction|[Cc]omodule|weight.*decompos\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/Homogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\", \"Mathlib/RingTheory/MvPolynomial/WeightedHomogeneous.lean\"], \"digest\": \"dd2e916d97216f7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits assume a given grading, construct the grading of a polynomial/monoid algebra only, or state the Laurent Hopf structure; none constructs weights for an arbitrary affine action"
+  },
+  {
+   "tool": "grep",
+   "query": "coaction|Gm.*grad|grad.*Gm|multiplicative.*group.*grad",
+   "results": "{\"t\": \"2026-10-24T04:41:59Z\", \"tool\": \"grep\", \"query\": \"coaction|Gm.*grad|grad.*Gm|multiplicative.*group.*grad\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits assume a given grading, construct the grading of a polynomial/monoid algebra only, or state the Laurent Hopf structure; none constructs weights for an arbitrary affine action"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coaction of the Laurent polynomial Hopf algebra on an algebra gives a direct sum decomposition into integer weight submodules",
+   "results": "{\"t\": \"2026-10-24T04:41:59Z\", \"tool\": \"leansearch\", \"query\": \"A coaction of the Laurent polynomial Hopf algebra on an algebra gives a direct sum decomposition into integer weight submodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.decompose'\", \"MvPolynomial.weightedDecomposition.decompose'_apply\", \"MvPolynomial.decomposition\", \"LaurentPolynomial.instIsCocomm\", \"DirectSum.decomposeAlgEquiv\", \"LaurentPolynomial.instCoalgebra\", \"MvPolynomial.weightedHomogeneousComponent_directSum\", \"LaurentPolynomial.comul_T\"], \"digest\": \"584d48c7d3207daa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits assume a given grading, construct the grading of a polynomial/monoid algebra only, or state the Laurent Hopf structure; none constructs weights for an arbitrary affine action"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaurentPolynomial\", \"GradedAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T04:41:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaurentPolynomial\\\", \\\"GradedAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits assume a given grading, construct the grading of a polynomial/monoid algebra only, or state the Laurent Hopf structure; none constructs weights for an arbitrary affine action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient projections of a Laurent polynomial coaction are orthogonal idempotents and give a graded algebra",
+   "results": "{\"t\": \"2026-10-24T04:42:04Z\", \"tool\": \"leanfinder\", \"query\": \"Coefficient projections of a Laurent polynomial coaction are orthogonal idempotents and give a graded algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentPolynomial.instCoalgebra\", \"LaurentPolynomial.instIsCocomm\", \"LaurentPolynomial.comul_T\", \"LaurentPolynomial.comul_C_mul_T_self\", \"LaurentPolynomial.counit_C_mul_T\", \"LaurentPolynomial.counit_T\", \"LaurentPolynomial.comul_C_mul_T\", \"AddMonoidAlgebra.grade.gradedAlgebra\"], \"digest\": \"2676a32ad3c2d72f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits assume a given grading, construct the grading of a polynomial/monoid algebra only, or state the Laurent Hopf structure; none constructs weights for an arbitrary affine action"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An action of the multiplicative group scheme on an arbitrary affine scheme over a commutative ring gives an integer grading of its coordinate algebra",
+   "results": "{\"t\": \"2026-10-24T04:42:05Z\", \"tool\": \"leanfinder\", \"query\": \"An action of the multiplicative group scheme on an arbitrary affine scheme over a commutative ring gives an integer grading of its coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum\", \"AlgebraicGeometry.AffineSpace\", \"GradedMonoid.GradeZero.mulAction\", \"SetLike.GradedMul.toGradedSMul\", \"GradedMonoid.GMonoid.toGMulAction\", \"GradedMonoid.GMulAction\", \"SetLike.toGSMul\"], \"digest\": \"d9062671c5592d47\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits assume a given grading, construct the grading of a polynomial/monoid algebra only, or state the Laurent Hopf structure; none constructs weights for an arbitrary affine action"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gm-fixed-square-zero-lifting",
+  "date": "2026-10-24",
+  "group": "Q60"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Infinitesimal step for the twisted left-right multiplicative-group action on the smooth affine group; this statement applies to arbitrary smooth affine schemes and square-zero test extensions, with no torus-conjugacy conclusion. Supporting input: the integer grading of the coordinate algebra used before projecting an ordinary infinitesimal lift to weight zero.",
+   "via": [
+    "lem-sfb-gm-fixed-square-zero-lifting",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-gm-affine-action-grading",
+  "worker": "stage1",
+  "summary": "Read Stacks 0EKK and 0EKJ and expanded their finite Laurent coefficient proof over an arbitrary commutative base ring, using the universal point instead of an uncited affine tensor-product comparison. Verified naturality, orthogonal coefficient projections, finite unique decomposition, multiplication, scalar weight zero and the formula on all test algebras. No new nodes or statement changes.",
+  "blueprint": "Supporting integer-grading input before projecting an infinitesimal lift to weight zero in lem-sfb-gm-fixed-square-zero-lifting; inherited chain originates at det-thm-sf-ctf-stability-direct-images, proof (3), as recorded in blueprint.from.place. Current latest blueprint read; the argument refines the existing supporting route below the unit."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-4f3f354f2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-4f3f354f2 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It adds no new nodes, and the item statement, stmt_deps and blueprint match clones/live; no repair note exists. I checked the proof against Stacks groupoids.tex: example-Gm-on-affine at l.2303 (tag 0EKJ) and lemma-complete-reducibility-Gm at l.2340 (tag 0EKK). It follows the Stacks proof. Over a base R it takes rho=a_L(z,i) for L=C[z^±] instead of an uncited tensor-product comparison. Step 1 (naturality h∘rho=a_B(h z,h∘i)) uses only def-weil-affine-spectrum and the uniqueness part of def-pc-fibre-product, so both citations are exact. Step 2: the p_n are R-linear and sum to the identity by the unit axiom. Step 3: I recomputed the expansion in D=C[w^±][z^±] and get p_m p_n=δ p_n. Step 4: the C_n are equalizers and the decomposition exists and is unique. Step 5: 1 and the image of R lie in C_0, and C_m C_n⊆C_{m+n}. Step 6 gives the formula on every B, nonreduced ones included. All steps are correctly marked elementary, and proof_deps equals the union of uses. Edge cases C=0, the trivial action, R[x] with rho(x)=xz^{±1} and R=Z/4 all behave as stated. Duplicate search: the unsplit lem-sfb-group-algebra-coaction-grading (Q69) states the coaction form for any group M and overlaps this item in substance. It is not a node of this delivery, and linking the two would also need Γ(G×X)≅C⊗R[z^±], so I accept the item's self-contained proof and leave a maintainer note in review.md. No fixes, no tool_uses, no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.GmAffineActionGrading",
+  "declaration": "AlgebraicGeometry.exists_grading_of_gm_affine_action",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/GmAffineActionGrading.lean",
+  "statement": "theorem exists_grading_of_gm_affine_action (R C : Type u) [CommRing R] [CommRing C] [Algebra R C] [ModObj (RingGroupSchemes.multiplicative R).X ((algSpec (.of R)).obj (op (CommAlgCat.of R C)))] : ∃ W : ℤ → Submodule R C, (∀ c : C, ∃! d : ℤ →₀ C, (∀ n : ℤ, d n ∈ W n) ∧ d.sum (fun _ v ↦ v) = c) ∧ (1 : C) ∈ W 0 ∧ (∀ r : R, algebraMap R C r ∈ W 0) ∧ (∀ (m n : ℤ) (c d : C), c ∈ W m → d ∈ W n → c * d ∈ W (m + n)) ∧ ∀ (B : Type u) [CommRing B] [Algebra R B] (x : C →ₐ[R] B) (t : (algSpec (.of R)).obj (op (CommAlgCat.of R B)) ⟶ (RingGroupSchemes.multiplicative R).X) (n : ℤ) (c : C), c ∈ W n → (Spec.preimage (t • (algSpec (.of R)).map (CommAlgCat.ofHom x).op).left : CommRingCat.of C ⟶ CommRingCat.of B).hom c = (Spec.preimage t.left : CommRingCat.of (LaurentPolynomial R) ⟶ CommRingCat.of B).hom (LaurentPolynomial.T n) * x c",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e40e9e781",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Item diff vs side-live: only the lean record and the added stmt_dep def-sfb-split-torus-over-ring (landed Q74, on base); statement, proof, source and blueprint unchanged; lean.statement verbatim equals the file signature. Clause check: R and C arbitrary commutative (no extra instances); G = RingGroupSchemes.multiplicative R (owner node, no copy); action = [ModObj G X] over Spec R, equivalent to the point identities on all R-algebras; ∃ W : ℤ → Submodule R C with ∃! finsupp decomposition; 1 and algebraMap in W 0; W m * W n ⊆ W (m+n); (t • x) coordinate map at c = t(T n) * x c for all B : Type u, all x : C →ₐ[R] B and all B-points t (= units), negative n included. Single universe u as in the consumer GmFixedSquareZeroLifting. Edge cases R=0, C=0, B=0, trivial action, R[x] weights ±1 checked. No duplicate in side-live or Mathlib (TrivialTorusCoherentWeightDecomposition and GmRepresentationWeightBasis are field-only; coaction-grading node unsplit with no lean). Gates: sorry only, source and blueprint docstrings, 6-step plan, minimal public imports, no stronger assumption. No file changed, no compile."
+ }
+}

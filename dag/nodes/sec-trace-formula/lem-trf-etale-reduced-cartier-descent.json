@@ -17,78 +17,59 @@
  ],
  "proof": [
   {
-   "text": "Let $i:D\\hookrightarrow X$ be the reduced induced closed immersion with ideal sheaf $I_D=\\mathcal I_Z$, and let $v:W\\to X$ be étale. In the fibre product $D\\times_XW$ with projections $p:D\\times_XW\\to D$ and $q:D\\times_XW\\to W$, the projection $q$ is a closed immersion with ideal $\\operatorname{im}(v^*I_D\\to\\mathcal O_W)$ by the base-change ideal formula; since $v$ is flat (an étale morphism is flat by definition) this arrow is injective and $q$ has ideal $v^*I_D$. The other projection $p$ is the base change of the étale morphism $v$ along $i$, hence étale by stability of étale morphisms under base change (Tag 02GO). As $D$ is reduced (clause (2) of the reduced-induced lemma), $D\\times_XW$ is reduced by the étale-reducedness proposition applied to $p$; here $D$ is locally Noetherian, being a closed subscheme of the locally Noetherian $X$, so the Noetherian-local form of Tag 025O also applies. Image of $q$: by the description of points of a fibre product, a point $w\\in W$ lies in $q(D\\times_XW)$ iff there is $d\\in D$ with $i(d)=v(w)$ and $\\kappa(d)\\otimes_{\\kappa(v(w))}\\kappa(w)\\ne0$; since $i$ is a closed immersion with image $Z$, $\\kappa(d)=\\kappa(v(w))$ and the tensor product is $\\kappa(w)\\ne0$, so $q(D\\times_XW)=v^{-1}(Z)$. Thus $q$ is a closed immersion with reduced source and image $v^{-1}(Z)$, and the uniqueness clause (3) of the reduced-induced lemma identifies $D\\times_XW$ with the reduced induced closed subscheme on $v^{-1}(Z)$ (its ideal is $\\mathcal I_{v^{-1}(Z)}$).",
+   "text": "Let I be the vanishing ideal of Z and i its closed immersion. The reduced-induced-closed-subscheme theorem makes its source reduced. For an etale v:W→X, the projection pullback.snd v i is etale by base change, so its source is reduced by etale reducedness. Mathlib Pullback.range_fst and the image assertion for i identify the image of pullback.fst v i with v⁻¹(Z). Apply the uniqueness clause of the reduced-induced-closed-subscheme theorem on W. It identifies the kernel of this projection with the vanishing ideal of v⁻¹(Z) and gives the required isomorphism over W. This avoids the stronger tensor-ideal assertion of reduced-flat-pullback recognition.",
    "uses": [
-    "lem-pc-closed-imm-base-change",
-    "def-weil-etale-morphism",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
     "lem-weil-pbc-etale-scheme-base-change",
     "etale-proposition-etale-reduced",
-    "lem-weil-pbc-fibre-product-points",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-base-change-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/etale.tex",
-    "place": "Tags 01JY (base change of a closed immersion), 02GO (morphisms-lemma-base-change-etale), 01JT (points of a fibre product), 025O (etale-proposition-etale-reduced; cf. Descent 034E), 01J3 (schemes-lemma-reduced-closed-subscheme, uniqueness)"
+    "document": "literature/stacks-project/schemes.tex; literature/stacks-project/descent.tex",
+    "place": "Tags 01J3, 01JT and 034E: uniqueness of the reduced closed structure, image of a pullback, and reducedness under etale base change."
    }
   },
   {
-   "text": "If $D$ is an effective Cartier divisor, its ideal $I_D$ is an effective Cartier ideal, meaning that it has a generator which is a non-zero-divisor on an open cover. Every étale morphism is flat, so the flat pullback theorem applies to $v$ and shows that the pullback ideal $I_D\\mathcal O_W$ is an effective Cartier ideal; by the first step this is the ideal of $D\\times_XW$. Thus every member of any jointly surjective étale covering has effective Cartier pullback.",
+   "text": "An etale morphism is flat. Apply IsInvertible.comap_of_flat to the vanishing ideal of Z. Its comap is by definition the kernel of pullback.fst v i; rewrite it using the equality proved in step 1. This gives invertibility of the reduced preimage ideal for every covering member.",
    "uses": [
-    "def-nagata-effective-cartier-ideal",
-    "lem-pc-flat-pullback-effective-cartier-ideal",
     "def-weil-etale-morphism",
-    "lem-pc-closed-imm-base-change"
+    "lem-pc-flat-pullback-effective-cartier-ideal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/divisors.tex; literature/stacks-project/morphisms.tex",
-    "place": "Tags 02OO (flat pullback of effective Cartier divisors) and 02GI/02GV (étale morphisms are flat)"
+    "place": "Tags 02OO and 02GV: flat pullback of effective Cartier ideals and flatness of etale morphisms."
    }
   },
   {
-   "text": "Conversely, suppose $D\\times_XW_i$ is effective Cartier for every member of a jointly surjective étale family $\\{v_i:W_i\\to X\\}$. This family is a covering of $X$ in the small étale site of $X$, hence an fpqc covering of $X$ by the comparison lemma (each $v_i$ is flat, and every affine open of $X$ is a finite union of images of affine opens of the $W_i$). Since each $v_i$ is flat, the base-change ideal formula identifies the ideal of $D\\times_XW_i$ with $v_i^*I_D$. By the effective-Cartier/invertible-ideal lemma these ideals are invertible, i.e. each $v_i^*I_D$ is finite locally free of rank one. Clause (2) of fpqc descent for quasi-coherent modules (reflection of finite local freeness of rank $r=1$) applied to the quasi-coherent $\\mathcal O_X$-module $I_D$ shows that $I_D$ is finite locally free of rank one, i.e. an invertible ideal. The invertible-ideal/effective-Cartier lemma then shows that $I_D$ is an effective Cartier ideal, so $D$ is an effective Cartier divisor. With step 2 this proves the equivalence; for $Z=\\emptyset$ both sides hold, the ideal being $\\mathcal O_X$ (generated by the non-zero-divisor $1$).",
+   "text": "Joint surjectivity and the flat, locally finitely presented nature of the etale arrows give membership of their presieve in the fppf precoverage by Mathlib ofArrows_mem_precoverage_iff. Apply the Mathlib fppf-to-fpqc inclusion. Pullback symmetry identifies the kernel of pullback.snd i (v a) with that of pullback.fst (v a) i, hence by step 1 with the reduced preimage ideal. The assumed invertibility of those ideals is therefore precisely the hypothesis of fpqc_cartier_ideal_reflection. Its last conclusion makes i.ker invertible, and ker_subschemeι identifies this ideal with the original vanishing ideal. Together with step 2 this proves the equivalence. No choice of a covering index is made, so the empty family and empty scheme cases are included; the unit ideal also remains allowed.",
    "uses": [
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-fpqc-finer-than-etale",
-    "def-weil-pbc-fpqc-covering",
     "def-weil-etale-morphism",
-    "lem-pc-closed-imm-base-change",
-    "lemma-nagata-effective-cartier-is-invertible",
-    "def-nagata-invertible-ideal",
-    "lem-pc-fpqc-descent",
-    "lemma-nagata-invertible-ideal-is-effective-cartier"
+    "lem-trf-fppf-covering-is-fpqc",
+    "lem-trf-fpqc-cartier-ideal-reflection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/topologies.tex; literature/stacks-project/descent.tex",
-    "place": "Tag 083C (spaces-divisors-lemma-characterize-effective-Cartier-divisor), equivalence (1)-(3) specialized to schemes; Tag 022C (an etale covering is an fpqc covering); Descent Tag 023T and Section 35.7 (descent of finite local freeness)"
+    "document": "literature/stacks-project/topologies.tex; literature/stacks-project/spaces-divisors.tex",
+    "place": "Tags 022C and 083C: fppf covers are fpqc and descent of the effective Cartier condition."
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-effective-cartier-ideal",
-  "def-nagata-invertible-ideal",
-  "def-pc-fibre-product",
   "def-weil-etale-morphism",
-  "def-weil-pbc-etale-site",
-  "def-weil-pbc-fpqc-covering",
   "etale-proposition-etale-reduced",
-  "lem-pc-closed-imm-base-change",
   "lem-pc-flat-pullback-effective-cartier-ideal",
-  "lem-pc-fpqc-descent",
+  "lem-trf-fppf-covering-is-fpqc",
+  "lem-trf-fpqc-cartier-ideal-reflection",
+  "lem-weil-pbc-base-change-image",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-fibre-product-points",
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lemma-nagata-effective-cartier-is-invertible",
-  "lemma-nagata-invertible-ideal-is-effective-cartier"
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/spaces-divisors.tex",
-  "place": "Tag 083C, lemma-characterize-effective-Cartier-divisor, conditions (1)--(3), specialized to schemes; reduced pullback uses Tags 034E and 01J3"
+  "by": "worker",
+  "document": "literature/stacks-project/spaces-divisors.tex; literature/stacks-project/schemes.tex; literature/stacks-project/descent.tex",
+  "place": "Tag 083C with reduced pullback from 01J3, 01JT and 034E. U3 Lean assembly uses reduced-structure uniqueness, flat ideal comap, the Mathlib fppf-to-fpqc inclusion, and the existing fpqc Cartier reflection statement."
  },
  "mathlib_searches": [
   {
@@ -149,10 +130,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-etale-reduced-cartier-descent",
   "worker": "stage1",
-  "summary": "Audited the imported statement against Stacks Tags 083C, 034E and 01J3. No finished project declaration or duplicate DAG node states it. The proof now has three steps: reduced induced structures commute with étale pullback by base-change ideals, étale reducedness and uniqueness; effective Cartier pulls back along the flat étale maps; and the converse follows by affine refinement to an fpqc covering, effective-Cartier/invertible-ideal equivalence and fpqc descent of finite locally free rank one. The empty divisor is covered by the unit ideal. Maintainer reader (S1 review, 2026-10-18): step 1 corrected to name the etale projection D x_X W -> D (the closed immersion q is not etale) and to cite etale base change (02GO) and the points of a fibre product for the image v^{-1}(Z); step 3 now cites the etale-to-fpqc comparison (022C) instead of the incorrect 'flat and quasi-compact' reason, and uses the flat clause of the base-change ideal formula explicitly.",
+  "summary": "Q153 stage-1 repair retaining the exact statement and existing proof route. The reduced flat-pullback ideal/support recognition and fpqc reflection of the specified Cartier ideal are extracted as two independent statement-only unsplit nodes. The parent checks etale base change and reducedness, applies flat Cartier pullback, and converts the etale covering to an fpqc covering before reflection. Rechecked the current-DAG return, released repair note, all cited statements and retained verbatim quotations; no cited statement drifted. Step 1 now explicitly verifies the closed-image and defining-ideal inputs to recognition, and cites Descent 034E for general scheme reducedness rather than the narrower local-ring Tag 025O. Both extracted statements and their logged searches are retained unchanged. The report preserves every original argument and records the return-specific review; the delivery tool rebases the overlay on current origin/sheaf-dag.",
   "blueprint": "Realizes lem-trf-free-characteristic-regular-boundary proof step 10 (descent of reduced local parameter equations and effective Cartier property from étale charts).",
   "tool_uses": [
    {
@@ -190,22 +171,17 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-fpqc-descent",
   "lem-pc-flat-pullback-effective-cartier-ideal",
-  "lem-weil-pbc-fpqc-finer-than-etale",
-  "lem-pc-closed-imm-base-change",
   "etale-proposition-etale-reduced",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lemma-nagata-effective-cartier-is-invertible",
-  "lemma-nagata-invertible-ideal-is-effective-cartier"
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-NR-bd35fc665",
-  "group": "NR",
+  "reviewer": "NT-cc-Q153-e30b85c2c",
+  "group": "Q153",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-bd35fc665 (reviewer sub-agent of L); spot-checked: I read the item, every cited node's statement and Stacks 083C, 025O, 034E, 01J3, 02OO and 023T at the cited places. The statement is true and is not weakened. It covers what parent lem-trf-free-characteristic-regular-boundary uses in step 10. I tested it on Z empty, Z=X, V(xy) and the origin in A^2, and v an open immersion. No duplicate exists in the DAG and there are no new nodes. There were three repairable faults, all corrected in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-reduced-cartier-descent.json. (1) Step 1 called the closed immersion q:DxW->W etale; the etale map is p:DxW->D, the base change of v. It also cited no node for etale base change; it now cites lem-weil-pbc-etale-scheme-base-change (02GO). (2) The claim that the image of q is v^{-1}(Z) cited only the universal property; it now cites lem-weil-pbc-fibre-product-points and writes out the residue-field argument. (3) Step 3 justified the fpqc covering by 'flat and quasi-compact', which is the wrong reason; it now cites lem-weil-pbc-fpqc-finer-than-etale (022C) with def-weil-pbc-etale-site, and uses the flat clause of the base-change ideal formula for ideal = v_i^*I_D. Step 2 (flat pullback 02OO(6)) is correct as delivered. The descent of rank-one local freeness is correct as delivered. proof_deps is recomputed and the graph is acyclic. Accepted tool uses: lem-pc-fpqc-descent, lem-pc-flat-pullback-effective-cartier-ideal, lem-weil-pbc-fpqc-finer-than-etale, lem-pc-closed-imm-base-change, etale-proposition-etale-reduced, lem-weil-pbc-reduced-induced-closed-subscheme, lemma-nagata-effective-cartier-is-invertible, lemma-nagata-invertible-ideal-is-effective-cartier. No SGA source is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-e30b85c2c (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the 4th delivery of the Q153 re-split. Heads 9667edd6, 57fbf101 and d5d66548 each got a PASS, then landing refused them as side completions that were not promoted to the live DAG (svc.log 2026-10-23 00:44:49). clones/live and clones/side-live still carry the old 3098-character proof, and neither new id is present, so the delivery is not superseded. By sha256, the new nodes lem-trf-reduced-flat-pullback-recognition and lem-trf-fpqc-cartier-ideal-reflection are byte-identical to the earlier heads. In the item, statement, stmt_deps, source, blueprint, lean and tool_uses are unchanged. Re-read deltas: step 1 now checks i(D)=Z, D reduced and the quasi-coherent ideal I_D through reduced-induced clauses (1)-(2), which matches that node and is exactly the recognition node's hypothesis set. Step 1 states the conclusion e with i∘e=q. Step 1's source replaces 025O (local rings) with Descent 034E lemma-reduced-local-smooth (descent.tex:4952). Tag-label pairs 01J3/01JT/01JY/02GO/034E were checked in tags. Step 2 names the kernel ideal J_i, which is the conclusion of lem-pc-flat-pullback-effective-cartier-ideal. Step 3 cites reduced-induced clause (1) for quasi-coherence and adds that node to its uses. It adds the empty-index case: joint surjectivity gives X=∅, so the statement is trivially true. Z=∅ gives the unit ideal. I re-read both new nodes and they are true: 01JY+01JT+01J3(3) for recognition, reducedness needed (k→k[ε]/ε²); flat pullback, Cartier⇔invertible and rank-1 descent 05B2/023T for reflection. Neither restates the item, the assembly is 2201 characters, and no SGA is cited. The 8 accepted tool_uses are unchanged. Maintainer note: promote this split to the live DAG, or landing will refuse it a 5th time."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -226,5 +202,26 @@
   "existing": false,
   "fixed_by": "NT-stage2-cc-6bcc747eb"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T083154-L-2287615",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,0 +1,146 @@
+{
+ "id": "lem-pur-coordinate-line-counit-tensor",
+ "kind": "statement",
+ "title": "Tensor normalization of the coordinate-line counit",
+ "statement": "For every finite commutative coefficient ring A killed by a positive integer N, every Noetherian scheme B on which N is invertible, and every constructible complex K of finite Tor amplitude, the canonical coordinate-line compact-support projection of [def-pur-coordinate-line-adjunction-maps] is invertible. The actual counit of the composite open/projective adjunction is its inverse followed by K tensor the restricted normalized projective trace and the right unitor: CounitNormalization A N hA B hN hB K.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "First two sentences and final comparison paragraph, expanded coordinate-line calculation"
+ },
+ "stmt_deps": [
+  "def-pur-coordinate-line-adjunction-maps"
+ ],
+ "proof": [
+  {
+   "text": "Compose the standard open adjunction with the trace-normalized projective-line adjunction. Transport by rightComparison. Expand the composite counit as proper image of the open counit followed by the projective counit.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  },
+  {
+   "text": "The unit-defined open projection followed by tensor of the open counit equals open image of the inverse tensorator followed by the counit: apply Adjunction.projectionMap_app_app_comp_map_counit. Pullback preserves the canonical symmetry. Naturality of the open counit moves this symmetry past the counit and gives the coefficient-first version.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-asd-derived-pullback-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  },
+  {
+   "text": "Expand compact-support projection into proper projection, inverse open projection and pullback compositor. Naturality of the symmetry cancels the compositor against its inverse in rightComparison. Substitute the preceding open identity, then use proper-projection naturality at the open counit. Apply the normalized projective counit equation. The composite trace is exactly integration.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  },
+  {
+   "text": "Finite-coefficient proper projection is invertible, as are the open projection and the compositor. Take asIso of their canonical composite. Cancel its hom in the preceding equation to obtain the inverse-projection formula. All identities apply to zero coefficients and the empty base.",
+   "uses": [
+    "lem-etale-proper-projection-formula-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Ordinary affine-line composite adjunction and its final site-comparison paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-asd-derived-pullback-symmetry",
+  "lem-etale-proper-projection-formula-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Coordinate-line adjunction and normalized integration argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projection formula and extension by zero identify the affine line adjunction counit with tensor of its integration trace",
+   "results": "ModuleCat scalar extension/restriction adjunction counits and algebraic trace; none concerns derived etale open/projective counits.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula and extension by zero identify the affine line adjunction counit with tensor of its integration trace",
+   "results": "ModuleCat.RestrictionCoextensionAdj.counit′_app, ModuleCat.ExtendRestrictScalarsAdj.counit_app, TensorProduct.counit_def and tensor cotangent formulas; no derived etale open/projective counit.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap.*counit|counit.*projectionMap",
+   "results": "Mathlib source has no equation for these project-defined derived etale/pro-etale maps.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoordinateLineAdjunction",
+  "date": "2026-10-25",
+  "group": "G9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-affine-space-zero-section-purity",
+   "place": "First ordinary affine-line adjunction sentence and final paragraph identifying gamma as its transpose",
+   "via": [
+    "lem-pur-coordinate-line-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoordinateLineCounitTensor",
+  "file": "lean/Sheaf/Paper/CoordinateLineCounitTensor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CoordinateLine.coordinate_line_counit_tensor",
+  "statement": "theorem coordinate_line_counit_tensor\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (B : Scheme.{u}) [IsNoetherian B] (hN : 0 < N) (hB : IsUnit (N : Γ(B, ⊤)))\n    (K : Etale.DerivedCategoryModule A B)\n    (_hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) B K) :\n    CounitNormalization A N hA B hN hB K",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T023240-L-534017",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261026T023240-L-534017",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

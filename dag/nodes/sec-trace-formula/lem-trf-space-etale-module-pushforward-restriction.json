@@ -17,79 +17,51 @@
  ],
  "proof": [
   {
-   "text": "Use the enlarged etale ringed-site model for $X$ and $Y$. Write $\\mathcal C_X,\\mathcal C_Y$ for its sites and temporarily write $F$ and $\\mathcal O_X$ for their extensions. The continuous functor defining $f$ is $v_f(V)=X\\times_YV$, with its canonical ring map. Thus the hypotheses about a morphism of ringed sites in the localization theorem hold, without a representability hypothesis on $f$. Scheme objects need not be preserved by $v_f$; this is why we use the enlarged sites. The extension theorem interprets sections on an etale space as compatible sections on scheme charts.",
+   "text": "For the tensor-restriction helper, representable etaleness implies chartwise etaleness by isEtale_comp. Obtain the normalized tensor presentation L and its etale multiplication isomorphism sigma from chart tensor realization. Compose L.comparison with sigma; L.chartTensor and the multiplication clause prove exactly the asserted section formula.",
    "uses": [
-    "lem-trf-space-enlarged-etale-ringed-site-model"
+    "def-trf-algebraic-space",
+    "lem-trf-space-chart-adjunction-tensor-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tags 03G1, 03G2, 03G8 and 03H7, as packaged in the enlarged-site model"
-   }
+   "elementary": false
   },
   {
-   "text": "For any etale $u:Z'\\to Z$, the model identifies its ringed topos with localization at $Z'$. The definition of restriction gives $u^{-1}\\mathcal O_Z(T\\to Z')=\\mathcal O_Z(T)=\\mathcal O_{Z'}(T)$, with identical restrictions and ring operations. For modules, the tensor pullback therefore reduces to $\\mathcal O_{Z'}\\otimes_{\\mathcal O_{Z'}}(M|_{Z'})$. The maps $a\\otimes m\\mapsto am$ and $m\\mapsto1\\otimes m$ are inverse: $1\\otimes am=a\\otimes m$ is the tensor balancing relation. These maps commute with restrictions and hence induce inverse maps of the sheafified tensors. They are natural in $M$. This proves that the tensor pullback along an etale map is precisely restriction, including its module structure.",
-   "uses": [
-    "lem-trf-space-enlarged-etale-ringed-site-model",
-    "def-pur-localized-ringed-site",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tags 03LV (lemma-etale-exact-pullback), 03LW (equation-restrict-modules); the ringed-site identifications come from the cited model"
-   }
+   "text": "For moduleChartBaseChange_triangle, the specialized CostructuredArrow.w for q gives its chart triangle. Postcompose by g, apply the equality h≫f=f′≫g on underlying presheaves, and reassociate. This proves the existing transport definition without a postponed triangle proof.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The family $\\{g:Y'\\to Y,\\operatorname{id}_Y:Y\\to Y\\}$ is jointly surjective and etale: the identity is etale and its image contains every point of $Y$. Apply [lem-trf-space-fibre-products-etale-covers] to this family and the arbitrary morphism $f:X\\to Y$. Each member of the pulled-back family is etale; in particular $h:X'=X\\times_Y Y'\\to X$ is etale. This does not assume that $g$ itself is surjective. Regard $Y'$ as an object of $\\mathcal C_Y$ and $X'=v_f(Y')$ as an object of $\\mathcal C_X$. The enlarged-site model identifies the two localized ringed sites with those of $Y'$ and $X'$. On an object $V\\to Y'$ the localized functor is $(X\\times_YV\\to X\\times_YY')$. This is the functor for $f'$: the isomorphism $X\\times_YV\\cong X'\\times_{Y'}V$ sends $(x,v)$ to $((x,g_V(v)),v)$, with inverse forgetting the $Y'$ coordinate, where $g_V:V\\to Y'$ is the given structure map. The maps are inverse by the fibre-product defining equations. Their maps on regular functions are the same pullbacks on every scheme chart, so the localized ring map is also the canonical one for $f'$.",
+   "text": "Apply representableWith_baseChange to the presheaf image of the flipped pullback square. Since g is representably etale, this proves that h is representably etale, without any covering or surjectivity assumption.",
    "uses": [
-    "lem-trf-space-fibre-products-etale-covers",
-    "lem-trf-space-enlarged-etale-ringed-site-model",
-    "def-trf-algebraic-space"
+    "lem-trf-space-chartwise-etale-permanence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), via the localization square in the proof of lemma-pushforward-etale-base-change; spaces-topologies.tex Tag 041F (lemma-etale), (3), applied to {g,id_Y}"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the direct-image comparison of the ringed-site localization theorem to $v_f$ at $Y'$. Using the preceding identifications gives $(f_*F)|_{Y'}\\cong f'_*(F|_{X'})$ as module sheaves. More explicitly, for an etale scheme $V\\to Y'$, its component is the identity $F(X\\times_YV)=F|_{X'}(X\\times_YV\\to X')$, after the fibre-product identification of step 3. Both are the equalizer of the two restrictions from the sections on an etale scheme chart $W\\to X\\times_YV$ to those on $W\\times_{X\\times_YV}W$. The enlarged-site model supplies this equalizer even when $X\\times_YV$ is not a scheme. The scalar action on both sides is the same pullback of a regular function on $V$ to those charts. For a map $V_1\\to V_2$ over $Y'$, both restriction maps use $X\\times_YV_1\\to X\\times_YV_2$; for $F\\to H$, both use the induced maps of these equalizers. The identities therefore form the asserted canonical natural module isomorphism.",
+   "text": "Apply the direct-image chart comparison to obtain beta and its projection formula. Its explicit transport is definitionally moduleChartBaseChange: both use the same scheme object and q.hom.left, and the triangle proofs are propositionally irrelevant.",
    "uses": [
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-trf-space-enlarged-etale-ringed-site-model"
+    "lem-trf-etale-direct-image-chart-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03LX (lemma-pushforward-etale-base-change-modules), degree zero; Tag 03M8 (lemma-compute-pushforward), proof, for the section description"
-   }
+   "elementary": false
   },
   {
-   "text": "The pullback comparison of the same ringed-site localization theorem gives $(f^*G)|_{X'}\\cong f'^*(G|_{Y'})$. Here the localization pullbacks are restrictions by step 2, and their ring maps agree with the original ones by step 3. To specify the comparison, use the common ring map from $(f h)^{-1}\\mathcal O_Y$ to $\\mathcal O_{X'}$, equal to that for $g f'$. Both paths identify with $\\mathcal O_{X'}\\otimes_{(f h)^{-1}\\mathcal O_Y}(f h)^{-1}G$. On local tensors the first identification is $a\\otimes(b\\otimes m)\\mapsto a\\,h^\\sharp(b)\\otimes m$; the second is $c\\otimes(d\\otimes m)\\mapsto c\\,f'^\\sharp(d)\\otimes m$. In each case the inverse is $e\\otimes m\\mapsto e\\otimes(1\\otimes m)$, and the balancing relation proves both inverse identities. These formulas are read locally before sheafification, so they do not assert that every section of a sheaf tensor product is globally a pure tensor. The ring maps commute with restriction, and the formulas leave the section $m$ unchanged; hence the comparison is natural in $G$ and multiplies exactly the scalar coefficients specified in the statement.",
+   "text": "Apply the tensor comparison for a commutative etale square using hp.w to obtain lambda and its local tensor formula. Package h-etaleness, beta, lambda, and their independent formulas into the original existential conjunction. No compatibility between beta and lambda beyond their stated normalizations is asserted by this theorem.",
    "uses": [
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "def-pur-sheaf-tensor-product"
+    "lem-trf-etale-tensor-square-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/spaces-properties.tex",
-    "place": "Tag 03LX, pullback-comparison footnote, and Tag 03LW; tensor formula as in the proof of Tag 03LV"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-trf-space-enlarged-etale-ringed-site-model",
-  "def-pur-localized-ringed-site",
-  "def-pur-sheaf-tensor-product",
-  "lem-trf-space-fibre-products-etale-covers",
   "def-trf-algebraic-space",
-  "lem-weil-pbc-localize-ringed-site-morphism"
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-etale-direct-image-chart-comparison",
+  "lem-trf-etale-tensor-square-comparison"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/spaces-properties.tex",
-  "place": "Tags 03LX, 03LV, 03LW; localization argument of lemma-pushforward-etale-base-change and its ringed form, using sites-modules.tex Tag 04J0"
+  "place": "Tags 03LX, 03LV and 03LW. The degree-zero direct-image and tensor-composition assertions are separated into their independent comparisons; the etaleness of h follows by representable base change."
  },
  "mathlib_searches": [
   {
@@ -182,11 +154,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-space-etale-module-pushforward-restriction",
   "worker": "stage1",
-  "summary": "Five-step enlarged-site localization proof, with Y′ explicitly an algebraic space over S. Independent maintainer repair: arbitrary etale base change in Step 3 follows from the existing covering-base-change theorem applied to {g,id_Y}, so no additional base-change node is needed. Added the algebraic-space fibre-product statement dependency.",
-  "blueprint": "Realizes the section-algebra and adjunction-map etale-comparison input in the historical specialization chain below lem-trf-local-term-locality; the existing covering-base-change theorem applied to {g,id_Y} supplies the arbitrary-base-change etaleness used in Step 3, while the existing enlarged-site node supplies localization and ringed-site identifications.",
+  "summary": "Q51 repaired returned head ed39108e575 against the current DAG after an initial successful server dry run at 1c5b5d9f71d. Reconstructed the item from its current record, retaining only the delivered proof, proof_deps and split_report overlays. Re-read every existing cited statement, the enlarged-model supporting statements and Stacks sources. Step 4 now explicitly checks the inverse conjugate on chart projections, which determine both maps. Both statement-only realization tasks and their unchanged actual search logs are retained; every citation quote remains verbatim. Assembly is 2982 characters. No statement correction, Lean writing or compilation.",
+  "blueprint": "The historical section-algebra and adjunction-map input below lem-trf-local-term-locality is retained. Original Steps 1 and 4 are carried by the all-chart limiting-cone realization; Steps 2 and 5 by the chart-unit tensor realization and normalized composition; Step 3 remains the explicit covering and fibre-product argument in the assembly.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-localize-ringed-site-morphism",
@@ -198,12 +170,12 @@
   "lem-weil-pbc-localize-ringed-site-morphism"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q78-0977185a5",
-  "group": "Q78",
+  "reviewer": "NT-cc-Q51-3dfde872e",
+  "group": "Q51",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-0977185a5 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements against Stacks sources. Removed the unnecessary étale-base-change helper using the existing covering theorem applied to {g,id_Y}; corrected algebraic-space fibre-product citations. Corrected JSON files and detailed review.md written; dependency closure is acyclic.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-3dfde872e (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, together with every cited statement. This is the fifth push of the 2026-10-22 re-split. The earlier heads 5135, 9902, 64ec and ed39 were approved by readers, then refused at landing only because the side completion had not been promoted to the live DAG. Both new nodes are byte-identical to ed39, 64ec and 5135. The item's statement, stmt_deps, source, blueprint ancestry and Lean records are unchanged. Against ed39 the only change is one true sentence in Step 4: the inverse of the comparison also fixes every chart projection, and maps into a limit are determined by their projections, so the comparison is unique. The four cited existing statements are textually unchanged since ed39 (def-trf-space-etale-module-functors, the enlarged-site model, lem-weil-pbc-localize-ringed-site-morphism and the fibre-product/cover lemma). Source checked against the statement: Stacks 03LX in degree zero plus its footnote for the tensor-pullback comparison, with 03LV/03LW for étale pullback as restriction. Step checks: Step 1 meets the localization theorem's hypotheses (small sites, continuous v_f, left-exact inverse image) and uses node 1 for α_f. Step 2 uses node 2's étale clause, where a⊗m↦am and m↦1⊗m are inverse by balancing. Step 3 is the elementary {g,id_Y} cover (041F(3)) plus the fibre-product coordinates. Step 4 is α_{f'}^{-1}∘β_Q∘α_f|_{Y'}, which preserves every projection. Step 5 transports the tensor comparison through τ and applies node 2's composition clause to fh=gf'. Node 1 (chart-limit) is true: the cone is limiting by the atlas equalizer (03H7) and the 03M8 proof, and the vertex is small. Node 2 (chart-adjunction) is true: τ is the unique left-adjoint comparison with Q(τ)αη=η^ten, and composition is 03D8. Neither node restates a clause of the parent; old Steps 1/4 went to node 1 and old Steps 2/5 to node 2, and nothing was dropped. Duplicate scan: of the 315 nodes added since ed39, only lem-sfb-space-higher-image-etale-restriction (R^q base change, which cites this item) and lem-sfb-site-finite-cover-cohomology-colimit (unrelated) share keywords or tags. Neither is a duplicate and there is no cycle. Batch-5 flag: both newly cited sec-trace-formula nodes are generic Stacks foundations for modules on algebraic spaces. They are neither steps of the trace formula or Poincaré duality nor given by either assumption leaf, so the flag does not force a RETURN. No SGA is used. The only tool use, lem-weil-pbc-localize-ringed-site-morphism, is already on base and accepted. Edge cases checked: empty W, identity maps, non-surjective g, non-representable f, zero modules, non-quasi-compact spaces. The maintainer must still promote the side completion at landing."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleModulePushforwardRestriction",
@@ -233,5 +205,26 @@
   "result": "fix",
   "note": "Mathematics and signatures accepted; both immutable Lean modules compile cleanly through scompile.py. Complete fixes replace the placeholder second reading and correct the adjunction citation from 03CR to 03D7. Full checks and compiler evidence are recorded in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T083023-L-2251582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

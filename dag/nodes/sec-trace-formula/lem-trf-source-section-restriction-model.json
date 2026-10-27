@@ -1,0 +1,120 @@
+{
+ "id": "lem-trf-source-section-restriction-model",
+ "kind": "statement",
+ "title": "Restriction isomorphism and ordinary derived descent",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and the finite-field datum $D$, with algebraically closed field $k$ and $\\ell\\ne D.p$ [def-trf-coefficient-conventions]. For every field automorphism $\\alpha$ and $g=\\operatorname{Spec}(\\alpha)$, there are isomorphisms $\\sigma:\\Gamma(s,-)\\simeq\\Gamma(s,g^{-1}-)$ on integral modules and $\\rho:\\operatorname{Fib}_s\\simeq\\operatorname{Fib}_s g^{-1}$ on the ambient derived category. The section function of $\\sigma$ is exactly pointRestrictionRaw, and $\\rho$ has the localization component equation written in [def-trf-source-section-stalk-cone-data], with the canonical exact-sections factorization. No constructibility or boundedness restriction is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0F4F (lemma-point-functor): restriction/insertion germ formula, combined with the specified completion normalization; agent extraction of original Steps 9--10; blueprint thm-trf-l-function-euler-product.proof.md, Step 1, Local powers, input (b)."
+ },
+ "stmt_deps": [
+  "def-trf-source-section-stalk-cone-data",
+  "def-trf-coefficient-conventions",
+  "def-weil-inverse-image-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Specialize point_automorphism_sections_inverse to completed coefficients, obtaining the section isomorphism. Use its forward-map identity and the restriction-natural theorem to pin its values.",
+   "uses": [
+    "lem-weil-point-automorphism-derived-transport-inverse"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derive this section isomorphism using mapDerivedCategoryNatIso, then the canonical mapDerivedCategoryCompIso, in the exact derived-category dictionaries used by the point fibre. Their factorization equations give the displayed localization equation after cancelling the identity mapHomologicalComplexCompIso. The section equality gives the required heterogeneous equality.",
+   "uses": [
+    "lem-weil-point-automorphism-restriction-natural"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-automorphism-derived-transport-inverse",
+  "lem-weil-point-automorphism-restriction-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Stages 3 extraction of source-section proof, steps 1--7; Stacks Tags 0F4F, 05V1 and the specified strict completion model."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of source sections along a field automorphism agrees with geometric stalk reparametrization on both coordinates of a Roos cone",
+   "results": "8 hits, beginning AlgebraicGeometry.opensCone_π_app and AlgebraicGeometry.Scheme.Hom.resLEStalkMap; these concern open restrictions and ordinary scheme stalks.",
+   "date": "2026-10-26",
+   "verdict": "No match for the normalized completed quotient-cone construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCocone.hom_ext",
+   "results": "0 hits; unknown identifier 'CochainComplex.mappingCocone.hom_ext'.",
+   "date": "2026-10-26",
+   "verdict": "No matching declaration found by this query."
+  },
+  {
+   "tool": "grep",
+   "query": "sourceSection|SourceSection|inverseImageRoosComparisonComplex_naturality",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A source section comparison with inverse image on a geometric point commutes with the two coordinates of the completed quotient tower Roos complex",
+   "results": "8 hits, including Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint and ΓSpecIso_hom_stalkClosedPointIso_inv. These concern ordinary structure-sheaf stalk maps.",
+   "date": "2026-10-26",
+   "verdict": "No match for the specified completed quotient tower or either normalization construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SourceSectionStalkConeComparison",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Local powers (b); source-section comparison, Restriction isomorphism and ordinary derived descent"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SourceSectionRestrictionModel",
+  "file": "lean/Sheaf/Paper/SourceSectionRestrictionModel.lean",
+  "declaration": "WeilConjectures.trfSourceSectionRestrictionModel",
+  "declarations": [
+   "WeilConjectures.trfSourceSectionRestrictionModel"
+  ],
+  "statement": "theorem trfSourceSectionRestrictionModel (hl : l ≠ D.p) (α : D.k ≃+* D.k) :\n    ∃ (σ : pointIntegralSections l E D.k ≅\n      inverseImageIntegralModules l E (Spec.map (CommRingCat.ofHom α.toRingHom)) ⋙\n        pointIntegralSections l E D.k)\n      (ρ : pointFibreIntegralAmbient D l E ≅\n        inverseImageIntegralDerived l E (Spec.map (CommRingCat.ofHom α.toRingHom)) ⋙\n          pointFibreIntegralAmbient D l E),\n    (∀ (M : integralTowerModules l E (Spec (.of D.k)))\n        (x : M.val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k)))))),\n        HEq (σ.hom.app M x) (pointRestrictionRaw l E\n          (Spec.map (CommRingCat.ofHom α.toRingHom)) none M x)) ∧\n    (∀ P : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ,\n        ρ.hom.app (DerivedCategory.Q.obj P) ≫\n            (pointFibreIntegralAmbient D l E).map\n              (X := (inverseImageIntegralDerived l E\n                (Spec.map (CommRingCat.ofHom α.toRingHom))).obj (DerivedCategory.Q.obj P))\n              (Y := DerivedCategory.Q.obj\n                (((inverseImageIntegralModules l E\n                  (Spec.map (CommRingCat.ofHom α.toRingHom))).mapHomologicalComplex (.up ℤ)).obj P))\n              ((inverseImageIntegralModules l E\n                (Spec.map (CommRingCat.ofHom α.toRingHom))).mapDerivedCategoryFactors.hom.app P) ≫\n            (trfIntegralSectionsFactors l E D).hom.app\n              (((inverseImageIntegralModules l E\n                (Spec.map (CommRingCat.ofHom α.toRingHom))).mapHomologicalComplex (.up ℤ)).obj P) =\n          (trfIntegralSectionsFactors l E D).hom.app P ≫\n            (trfIntegralModuleQ l E).map\n              (X := ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj P)\n              (Y := ((inverseImageIntegralModules l E\n                (Spec.map (CommRingCat.ofHom α.toRingHom)) ⋙\n                  pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj P)\n              ((NatTrans.mapHomologicalComplex σ.hom (.up ℤ)).app P))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-66786",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T071338-L-3917727",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof and three new modules vs clone item module (five declarations moved verbatim) and node lem-trf-source-section-stalk-cone-comparison; two sorry statements vs the item's original Normalized clauses"
+ }
+}

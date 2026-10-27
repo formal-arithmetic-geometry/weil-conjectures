@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-constant-scalar-quotient-comparison",
+ "kind": "lemma",
+ "title": "Constant scalar restriction and one ordinary finite quotient",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix a prime l and a finite extension E of Q_l, with valuation ring R and its fixed uniformizer t [def-weil-l-adic-coefficient-extension]. For a scheme T and one index n >= 0, use the completed coefficient ring and its projection to the constant R/(t^(n+1)) sheaf [def-weil-completed-integral-coefficients]. Let F be ordinary restriction along constant R to completed coefficients, followed by the fixed small-site equivalence [lem-sf-cbc-extension-zero-completion]. Let I be the lifted ideal (t) in ULift R. The map F(unit_n(M)) is epic for every completed-coefficient module M. There is a natural isomorphism between completed scalar reduction at n followed by F and F followed by constant scalar reduction at n [lem-weil-derived-scalar-extension-restriction-adjunction, lem-weil-pbc-constant-completion-equivalence]. Its composite with F(unit_n(M)) is exactly the nth component of the constant reduction unit. The assertion is ordinary and finite-level: it includes neither transitions between different n nor localization of complexes.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093M (lemma-completion-flat) and Tag 03EK (section-tensor-product); also literature/stacks-project/proetale.tex, Tag 099L (section-derived-completion-noetherian); finite-quotient part of Step 5 of lem-sf-constant-semilinear-generator-comparison."
+ },
+ "proof": [
+  {
+   "text": "The valuation ring is a DVR, hence a principal ideal ring and Noetherian, by lem-weil-l-adic-extension-integers-dvr. Put R = O_E and I = (the fixed uniformizer). Use the completed constant algebra finite-quotient assertions of lem-weil-pbc-constant-completion-equivalence and the projection equations of def-weil-completed-integral-coefficients. They identify the completed projection with the quotient by I^(n+1), with the same constants as the constant quotient. Transport to and from the published small-site model using the fixed constant-ring comparison of lem-sf-cbc-extension-zero-completion. All coefficient identifications are induced by the actual quotient homomorphism.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-completed-integral-coefficients",
+    "lem-sf-cbc-extension-zero-completion",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar extension along the completed projection, with the unit of lem-weil-derived-scalar-extension-restriction-adjunction, is the ordinary sheaf quotient M/I^(n+1)M. Its unit is locally surjective, hence epic; this is the quotient-unit argument of lem-weil-pbc-ordinary-common-quotient-tower at one level. Exact restriction to constant scalars leaves the underlying abelian sheaf unchanged, and the fixed small-site equivalence preserves epimorphisms, so the displayed restricted unit is epic.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-weil-pbc-ordinary-common-quotient-tower",
+    "lem-sf-cbc-extension-zero-completion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant quotient of the restricted module has the same universal property. Tensor reassociation, or the finiteComparison construction of lem-weil-pbc-constant-completion-equivalence with the coefficient identifications of Step 1, gives a map sending the class of m to itself in both directions. The quotient universal property proves they are inverse and natural in M. Both units send m to the class of m, proving the displayed unit equation. This is a finite-level result and contains no tower-transition or derived-localization assertion.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-completed-integral-coefficients",
+  "lem-sf-cbc-extension-zero-completion",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ordinary-common-quotient-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "The finite ordinary quotient argument extracted from parent Step 5, with the published coefficient and small-site transports made explicit."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanFinder",
+   "query": "Restriction from a completed coefficient ring to the constant ring commutes with the ordinary quotient of a module by a uniformizer power; the quotient unit is an epimorphism",
+   "results": "Eight AdicCompletion hits concern algebraic modules over rings, not module sheaves or the published small-site transport.",
+   "date": "2026-10-26",
+   "verdict": "No exact statement; retain finite sheaf quotient comparison."
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "The componentwise isomorphism constructor glues already compatible isomorphisms; it supplies no finite quotient comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use for parent strict-tower assembly only."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*restrictScalars|restrictScalars.*quotient",
+   "results": "Mathlib search plus project rg: existing ConstantCompletion.finiteComparison and reductionTowerComparison, OrdinaryCommonQuotientTower, and completed-quotient transport. None states the prescribed scalarReductionExtension comparison after sfCbcModelModules with its specified unit.",
+   "date": "2026-10-26",
+   "verdict": "Reuse these mathematical ingredients; isolate the remaining finite-level coordinate comparison."
+  },
+  {
+   "tool": "blueprint_refs.py",
+   "query": "search constant quotient; search scalar quotient",
+   "results": "One unrelated geometric coinvariants node for constant quotient and zero nodes for scalar quotient.",
+   "date": "2026-10-26",
+   "verdict": "No blueprint node states this finite ordinary quotient coordinate comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ConstantSemilinearGeneratorComparison",
+  "date": "2026-10-26",
+  "group": "G5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-sf-identification",
+   "place": "Normalized comparison sentence, via the finite ordinary scalar quotient calculation in Step 5 of lem-sf-constant-semilinear-generator-comparison.",
+   "via": [
+    "lem-sf-constant-semilinear-generator-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-identification",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ConstantScalarQuotientComparison",
+  "file": "lean/Sheaf/SixFunctors/ConstantScalarQuotientComparison.lean",
+  "declaration": "WeilConjectures.GeneratorReduction.ordinaryScalarQuotientComparison",
+  "statement": "theorem ordinaryScalarQuotientComparison (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (T : Scheme.{u}) (n : ℕ) :\n    let F := SheafOfModules.restrictScalars (integralConstantToCompletionOfUniverses l E T) ⋙\n      sfCbcModelModules T (Padic.coefficientExtensionIntegers l E)\n    let I := (Ideal.span {Padic.coefficientExtensionUniformizer l E}).map\n      (ULift.ringEquiv.symm.toRingHom :\n        Padic.coefficientExtensionIntegers l E →+*\n          ULift.{u + 1} (Padic.coefficientExtensionIntegers l E))\n    (∀ M : scalarReductionSource l E T,\n      Epi (F.map ((scalarReductionExtension_adjunction l E T n).choose.unit.app M))) ∧\n    ∃ e : sfReductionRestricted l E T n ⋙ F ≅\n        F ⋙ ConstantCompletion.reduction (proEtaleModelTopology T)\n          (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) I false n,\n      ∀ M : scalarReductionSource l E T,\n        F.map ((scalarReductionExtension_adjunction l E T n).choose.unit.app M) ≫\n          e.hom.app M =\n        ((ConstantCompletion.reductionUnit (proEtaleModelTopology T)\n          (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) I false).app\n            (F.obj M)).app (op n)",
+  "branch": "sheaf-dag",
+  "by": "G5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T001646-L-19758",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T001646-L-19758",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

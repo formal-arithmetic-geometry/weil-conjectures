@@ -1,0 +1,395 @@
+{
+ "id": "lem-sfb-sheaf-dg-open-extension-calculus",
+ "kind": "statement",
+ "title": "Open extension by zero and restriction for sheaf dg modules",
+ "statement": "Fix universes as in [def-weil-size-convention]. Let $X$ be a topological space, $\\mathcal S$ a sheaf of commutative rings, and $\\mathcal C$ a sheaf dg $\\mathcal S$-algebra. Use the left modules, signed shifts, cone triangles and localizations $K_X(\\mathcal C)$ and $D_X(\\mathcal C)$ of [def-sfb-sheaf-dg-module-localization]. Let $j:U\\hookrightarrow X$ be any open inclusion. Degreewise extension by zero of the underlying module sheaves has a canonical dg $\\mathcal C$-action extending the given action on $U$, with zero stalk outside $U$. Together with degreewise restriction $j^*$ it preserves dg homotopies and underlying quasi-isomorphisms and induces additive functors\n$$j_!:D_U(\\mathcal C|_U)\\rightleftarrows D_X(\\mathcal C):j^*.$$\nBoth functors preserve the specified signed shifts and distinguished cone triangles (including their isomorphic localized images). There is a natural adjunction\n$$\\operatorname{Hom}_{D_X(\\mathcal C)}(j_!P,Q)\\simeq\\operatorname{Hom}_{D_U(\\mathcal C|_U)}(P,j^*Q),$$\nwhose unit $P\\to j^*j_!P$ is the canonical isomorphism and whose counit $j_!j^*Q\\to Q$ restricts to the identity on $U$ under that isomorphism.\nFor every open inclusion $k:V\\hookrightarrow X$, put $T=U\\cap V$, $j':T\\hookrightarrow V$ and $k':T\\hookrightarrow U$. There is a canonical natural isomorphism\n$$k^*j_!\\simeq j'_!k'^*.$$\nFor nested opens $W\\xrightarrow{i}U\\xrightarrow{j}X$ there is a canonical natural isomorphism $(ji)_!\\simeq j_!i_!$. These identifications are induced by degreewise extension by zero and restriction, commute with the adjunction units and counits, and are coherent under further open restrictions and compositions: all iterated identifications with the same degreewise sheaf map agree. No boundedness, flatness, quasi-coherence or perfectness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRA (lemma-extension-by-zero-graded), 0FRV (section-localize-dg) and 0FRW (lemma-extension-by-zero-dg), specialized to opens of a topological space and transported from right to signed left modules; exactness uses modules.tex Tag 01AK (lemma-j-shriek-exact). The localized adjunction and restriction/coherence assertions are independent consequences to be proved, not assertions that the cited Hom formula alone already supplies them."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-sheaf-dg-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Write $J=j_!$ and $R=j^*$. Apply [lem-sfb-sheaf-dg-open-extension-adjunction] with $\\mathcal A=\\mathcal C$ and $\\mathcal O=\\mathcal S$: its degreewise sheafified presheaf construction gives the left dg action, differential, functor $J$ and ordinary dg adjunction $J\\dashv R$. Its underlying degreewise module sheaves are the ordinary extensions by zero, since the defining presheaf in each degree is the extension-by-zero presheaf. Thus [lem-sc-module-extension-by-zero-stalk-maps](1) gives $(JP)^n_x=P^n_x$ for $x\\in U$ and zero otherwise. The adjunction map sends $f:JP\\to Q$ to $R(f)\\eta_P$, with $\\eta$ induced by the identity of $P$ on opens contained in $U$. Consequently $\\eta_P:P\\to RJP$ is degreewise the identity under the canonical restriction identification. The counit $\\varepsilon_Q:JRQ\\to Q$ restricts to the identity on $U$, because its transpose is $1_{RQ}$. These are dg maps by the cited dg adjunction.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-adjunction",
+    "lem-sc-module-extension-by-zero-stalk-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRA (lemma-extension-by-zero-graded), 0FRW (lemma-extension-by-zero-dg); sheaves.tex Tag 00A7 (lemma-j-shriek-modules)"
+   }
+  },
+  {
+   "text": "Both degreewise module functors are additive and exact by [lem-sc-derived-open-restriction-adjunction-exact]; here $(X,\\mathcal S)$ is a ringed space, with no local-ring hypothesis. They preserve underlying quasi-isomorphisms: exactness identifies the image of each kernel and image of a differential with the kernel and image of the transported differential, hence identifies $F(H^nM)$ with $H^n(FM)$ for $F=J,R$. Applying $F$ to the cohomology isomorphisms of a quasi-isomorphism therefore again gives cohomology isomorphisms, for every integer $n$. This argument uses no boundedness or flatness.",
+   "uses": [
+    "lem-sc-derived-open-restriction-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01AK (lemma-j-shriek-exact); sheaves.tex Tag 00A7 (lemma-j-shriek-modules)"
+   }
+  },
+  {
+   "text": "A signed degree $r$ graded map $h$ on $U$ extends degreewise by zero: before sheafification it is $h$ on opens contained in $U$ and zero on the other opens. Thus $J(h)(am)=(-1)^{r|a|}aJ(h)(m)$; this is an identity of presheaf maps and hence of their induced sheaf maps. Restriction has the same property. Applying either additive degreewise functor $F=J,R$ to $f-g=d h+h d$ gives $Ff-Fg=d(Fh)+(Fh)d$, so it preserves dg homotopies and induces an additive functor on $K$. For the adjunction of step 1, a homotopy $h:JP\\to Q$ transposes to $Rh\\circ\\eta_P$, still signed degree $-1$, and a homotopy $t:P\\to RQ$ transposes to $\\varepsilon_Q\\circ Jt$. Their boundaries transpose in the same way since $\\eta,\\varepsilon$ are chain maps. The two inverse ordinary dg Hom bijections therefore induce inverse Hom bijections on homotopy classes, giving $J\\dashv R$ on $K$ with the same unit and counit.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization",
+    "lem-sfb-sheaf-dg-open-extension-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FRW (lemma-extension-by-zero-dg), compatibility with differentials; signed homotopies as defined in the item"
+   }
+  },
+  {
+   "text": "For either $F=J,R$, the degreewise identity $F(M[k])\\cong(FM)[k]$ respects differentials $(-1)^kd$ and actions $(-1)^{k|a|}a m$. Additivity gives $F(N\\oplus M[1])\\cong FN\\oplus(FM)[1]$. In these coordinates the cone differential on both sides is $(n,m)\\mapsto(dn+F(f)m,-dm)$, and the left action on the second summand has the same factor $(-1)^{|a|}$. This identifies $F(C(f))$ with $C(Ff)$ as dg modules. It also sends inclusion $i$ to $i$ and the specified final map $-p$ to $-p$. Hence the cone triangles and shifts specified in [def-sfb-sheaf-dg-module-localization] are preserved, as are triangles isomorphic to them.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tag 0FS5 (definition-cone), with the left signed shifts fixed in def-sfb-sheaf-dg-module-localization"
+   }
+  },
+  {
+   "text": "To apply the right-module homotopy-system theorem to the chosen left convention, form the graded opposite dg algebra $\\mathcal C^{\\mathrm{op}}$ with $a*b=(-1)^{|a||b|}ba$ and the same differential. Give a left module $M$ the right action $m*a=(-1)^{|m||a|}am$. Associativity follows since the total sign in either $(m*a)*b$ or $m*(a*b)$ is $|m|(|a|+|b|)+|a||b|$ before the term $ba m$. The Leibniz rule gives $d(m*a)=dm*a+(-1)^{|m|}m*da$. A signed degree $r$ left map satisfies $h(m*a)=(-1)^{|m||a|+r|a|}a h(m)=h(m)*a$, so it is an ordinary right graded map. The inverse construction is $am=(-1)^{|m||a|}m*a$. On $M[k]$, the two signs $(-1)^{(|m|-k)|a|}$ and $(-1)^{k|a|}$ cancel to give the unchanged right action; cone actions consequently match as well. Thus this identity on underlying complexes identifies exactly the homotopies, shifts, cones and quasi-isomorphisms of the two conventions.",
+   "uses": [
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FRI (definition-dgm), 0FS5 (definition-cone); explicit left/right graded-opposite calculation"
+   }
+  },
+  {
+   "text": "The open site of $X$ (and of each open subspace) is small in the universes fixed in the item. Apply [lem-sfb-sheaf-dg-homotopy-system] to $\\mathcal C^{\\mathrm{op}}$ on that site and use the explicit identification of step 5. Thus each chosen left-module $K$ is triangulated with exactly the signed cone triangles, and its underlying quasi-isomorphisms form a compatible multiplicative system. Apply [lem-pur-localization-triangles-05r6] to this system: the word localization $D$ of the item has the triangulated structure with additive exact localization functor $Q$, and its distinguished triangles are exactly the isomorphic images of the specified cone triangles. This uses the compatible-system assertion of the homotopy-system node, rather than claiming triangulatedness from the definition alone.",
+   "uses": [
+    "lem-sfb-sheaf-dg-homotopy-system",
+    "lem-pur-localization-triangles-05r6",
+    "def-sfb-sheaf-dg-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sdga.tex",
+    "place": "Tags 0FS7 (proposition-homotopy-category-triangulated), 0FT4 (lemma-qis); derived.tex Tag 05R6 (proposition-construct-localization)"
+   }
+  },
+  {
+   "text": "By steps 2 and 3, $Q_XJ$ and $Q_UR$ invert quasi-isomorphisms. The factorization assertion of [lem-weil-pbc-localization-universal-property] induces functors $\\bar J:D_U\\to D_X$ and $\\bar R:D_X\\to D_U$ with their canonical factorizations. For the word presentation these functors send a word to the word of images, including $w^{-1}\\mapsto F(w)^{-1}$. Each is additive by [lem-pur-additive-localization-descent], applied with source $K$, localization $Q$, additive functor $QF$ and target the other $D$: all categories are additive by step 6, $Q$ is additive, and every object of the word localization is already a $Q$-image. The shift isomorphisms of step 4 descend by the natural-transformation assertion of the localization universal property. Step 4 also shows directly that localized cone triangles go to localized cone triangles; the functors preserve their isomorphic images because functors preserve isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-additive-localization-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization); natural-transformation universal property as stated by the cited node"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adjunction-localization] to the adjunction on $K$ from step 3 and the two functor factorizations from step 7. It supplies $\\bar J\\dashv\\bar R$ on the entire unbounded localized categories, with unit and counit the images of the original unit and counit under these factorizations. The unit is an isomorphism since step 1 made it an actual dg isomorphism; the restricted counit is still the identity by step 1 and functoriality of localization. This proves the requested derived Hom bijection, without assuming that a dg Hom formula by itself computes derived Hom.",
+   "uses": [
+    "lem-sfb-adjunction-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+    "place": "CategoryTheory.Adjunction.localization (line 89), localization_unit_app (118), localization_counit_app (125); categories.tex Tag 04VG for localization"
+   }
+  },
+  {
+   "text": "For $T=U\\cap V$ and a dg module $P$ on $U$, construct a dg map $b_P:j'_!(P|_T)\\to(JP)|_V$ using the ordinary dg adjunction for $j'$ from [lem-sfb-sheaf-dg-open-extension-adjunction]. Its transpose is the canonical identity $P|_T\\to(JP)|_T$ induced by $\\eta_P$. It is natural in $P$. By [lem-sc-module-extension-by-zero-stalk-maps](1), at $x\\in T$ both complexes have stalk $P_x$ and $b_P$ is the identity; at $x\\in V\\setminus T$ both are zero. Thus in every degree $b_P$ is a stalkwise bijection, hence a sheaf isomorphism by [lem-weil-pbc-sets-sheaf-iso-on-stalks]. Its degreewise inverse is module-linear, commutes with differentials and actions by multiplying the corresponding commutative equations by the inverse maps. Thus $b$ is a dg natural isomorphism. Its inverse, followed by localization, is exactly the asserted $k^*j_!\\simeq j'_!k'^*$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-adjunction",
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00A7 (lemma-j-shriek-modules), 007T (lemma-points-exactness); sdga.tex Tag 0FRW (lemma-extension-by-zero-dg)"
+   }
+  },
+  {
+   "text": "For $W\\xrightarrow{i}U\\xrightarrow{j}X$, the ordinary dg adjunction for $ji$ gives a canonical map $c_P:(ji)_!P\\to j_!i_!P$ whose transpose is the identity identification $P\\to(j_!i_!P)|_W$ from the two units. The stalk formula of [lem-sc-module-extension-by-zero-stalk-maps](1) makes $c_P$ the identity at every point of $W$ and the unique map between zero modules elsewhere, degree by degree. The stalk criterion [lem-weil-pbc-sets-sheaf-iso-on-stalks] makes it a degreewise sheaf isomorphism; as in step 9 its inverse is a dg map. This natural dg isomorphism induces the required composition isomorphism in $D$.",
+   "uses": [
+    "lem-sfb-sheaf-dg-open-extension-adjunction",
+    "lem-sc-module-extension-by-zero-stalk-maps",
+    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sheaves.tex",
+    "place": "Tags 00A7 (lemma-j-shriek-modules), 007T (lemma-points-exactness); sdga.tex Tag 0FRW (lemma-extension-by-zero-dg)"
+   }
+  },
+  {
+   "text": "The maps of steps 9 and 10 are normalized to the identity on the open where the original module is defined, as are the unit and the restricted counit of step 1. In a diagram comparing these identifications with a unit or counit, or comparing iterated restriction and composition identifications, its source stalk is either that original module stalk, where both paths are the identity, or zero, where the two paths are the unique map from zero. Hence the degreewise sheaf maps along the two paths agree: for a section, equality of all image germs gives an open cover on which its images coincide, and the sheaf separation axiom gives equality of sections. This proves the underived coherence including identities, triple compositions and further open restrictions. These are equalities of dg maps, so remain equalities on $K$ and after localization. Naturality against a formal inverse follows from naturality against $w$ by composing with the inverses of its two images. Equivalently, the uniqueness assertion for localized natural transformations in [lem-weil-pbc-localization-universal-property] propagates the same equalities to all localized morphisms. All constructions used only degreewise sheaf maps and finite sums, so impose none of the excluded finiteness, boundedness or flatness conditions.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization), with the natural-transformation assertion of the cited node; sheaf separation axiom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-sheaf-dg-open-extension-adjunction",
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "def-sfb-sheaf-dg-module-localization",
+  "lem-sfb-sheaf-dg-homotopy-system",
+  "lem-pur-localization-triangles-05r6",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-additive-localization-descent",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sdga.tex",
+  "place": "Tags 0FRA, 0FRW with explicit homotopy, signed-cone, localization and coherence arguments; supporting module and localization statements as cited in each step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and restriction of differential graded module sheaves are exact adjoint functors on unbounded derived categories and commute with open restriction",
+   "results": "{\"t\": \"2026-10-24T08:12:52Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero and restriction of differential graded module sheaves are exact adjoint functors on unbounded derived categories and commute with open restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\"], \"digest\": \"cbea6788940bb2ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme restriction/pushforward, generic derived adjunctions, and extension along an embedding of complex shapes do not construct extension by zero with a sheaf dg action. The broad grep also matches edge/AdGroup substrings; the focused Algebra grep has zero hits. None is a one-line specialization to the stated dg functors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint extension by zero for sheaves of dg modules preserves quasi isomorphisms signed mapping cones and restriction to another open",
+   "results": "{\"t\": \"2026-10-24T08:14:58Z\", \"tool\": \"leanfinder\", \"query\": \"Left adjoint extension by zero for sheaves of dg modules preserves quasi isomorphisms signed mapping cones and restriction to another open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.quasiIsoAt_extendMap_iff\", \"HomologicalComplex.instQuasiIsoExtendMap\", \"HomologicalComplex.quasiIso_extendMap_iff\", \"CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism\"], \"digest\": \"71657e5ab8e4b694\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme restriction/pushforward, generic derived adjunctions, and extension along an embedding of complex shapes do not construct extension by zero with a sheaf dg action. The broad grep also matches edge/AdGroup substrings; the focused Algebra grep has zero hits. None is a one-line specialization to the stated dg functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extensionByZero\"",
+   "results": "{\"t\": \"2026-10-24T08:14:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"extensionByZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme restriction/pushforward, generic derived adjunctions, and extension along an embedding of complex shapes do not construct extension by zero with a sheaf dg action. The broad grep also matches edge/AdGroup substrings; the focused Algebra grep has zero hits. None is a one-line specialization to the stated dg functors."
+  },
+  {
+   "tool": "grep",
+   "query": "dg.*(extension|restrict)|extension.*dg|DifferentialGraded|DGModule",
+   "results": "{\"t\": \"2026-10-24T08:14:55Z\", \"tool\": \"grep\", \"query\": \"dg.*(extension|restrict)|extension.*dg|DifferentialGraded|DGModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/Combinatorics/SimpleGraph/Density.lean\", \"Mathlib/Combinatorics/Graph/Delete.lean\", \"Mathlib/Combinatorics/Graph/Delete.lean\", \"Mathlib/Combinatorics/Graph/Delete.lean\", \"Mathlib/Combinatorics/Graph/Delete.lean\", \"Mathlib/Combinatorics/Graph/Delete.lean\", \"Mathlib/GroupTheory/GroupExtension/Basic.lean\", \"Mathlib/GroupTheory/GroupExtension/Defs.lean\"], \"digest\": \"ef18613f0d49369f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme restriction/pushforward, generic derived adjunctions, and extension along an embedding of complex shapes do not construct extension by zero with a sheaf dg action. The broad grep also matches edge/AdGroup substrings; the focused Algebra grep has zero hits. None is a one-line specialization to the stated dg functors."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|DGModule|DgModule|dgModule|extensionByZero|extension_by_zero",
+   "results": "{\"t\": \"2026-10-24T08:16:28Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|DGModule|DgModule|dgModule|extensionByZero|extension_by_zero\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme restriction/pushforward, generic derived adjunctions, and extension along an embedding of complex shapes do not construct extension by zero with a sheaf dg action. The broad grep also matches edge/AdGroup substrings; the focused Algebra grep has zero hits. None is a one-line specialization to the stated dg functors."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for differential graded module sheaves induces an adjunction of derived categories",
+   "results": "{\"t\": \"2026-10-24T08:14:56Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero for differential graded module sheaves induces an adjunction of derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"DerivedCategory.instHasZeroObject\", \"HomologicalComplex.extend.d_none_eq_zero'\", \"CategoryTheory.Abelian.Ext.mk₀\", \"CategoryTheory.Adjunction.homAddEquiv_symm_zero\"], \"digest\": \"87eda59df9247e57\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme restriction/pushforward, generic derived adjunctions, and extension along an embedding of complex shapes do not construct extension by zero with a sheaf dg action. The broad grep also matches edge/AdGroup substrings; the focused Algebra grep has zero hits. None is a one-line specialization to the stated dg functors."
+  },
+  {
+   "tool": "grep",
+   "query": "DifferentialGraded|dgModule|DGModule|DgModule",
+   "results": "{\"t\": \"2026-10-24T08:45:33Z\", \"tool\": \"grep\", \"query\": \"DifferentialGraded|dgModule|DGModule|DgModule\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic exact-functor derived constructions, ordinary scheme module restriction/pushforward and ordinary mapping-cone homotopies do not construct sheaf dg extension by zero with its signed action and open coherence. The focused dg grep and Loogle search have no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extensionByZero\"",
+   "results": "{\"t\": \"2026-10-24T08:45:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"extensionByZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic exact-functor derived constructions, ordinary scheme module restriction/pushforward and ordinary mapping-cone homotopies do not construct sheaf dg extension by zero with its signed action and open coherence. The focused dg grep and Loogle search have no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero restriction sheaf differential graded module derived adjunction",
+   "results": "{\"t\": \"2026-10-24T08:45:33Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero restriction sheaf differential graded module derived adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"CategoryTheory.constantSheafΓAdj\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"CategoryTheory.Adjunction.derived\", \"stalkSkyscraperSheafAdjunction\", \"ModuleCat.extendRestrictScalarsAdj\"], \"digest\": \"3fb7fe66b11c5eb5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic exact-functor derived constructions, ordinary scheme module restriction/pushforward and ordinary mapping-cone homotopies do not construct sheaf dg extension by zero with its signed action and open coherence. The focused dg grep and Loogle search have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open sheaf differential graded modules signed cone homotopy quasi isomorphism extension by zero",
+   "results": "{\"t\": \"2026-10-24T08:45:37Z\", \"tool\": \"leanfinder\", \"query\": \"Open sheaf differential graded modules signed cone homotopy quasi isomorphism extension by zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.liftHomotopy\", \"CochainComplex.cm5b.homotopyEquiv\", \"CochainComplex.mappingCone.descHomotopy\", \"CochainComplex.mappingCone.ext_from\", \"CochainComplex.mappingCone.mapHomologicalComplexXIso_eq\", \"CochainComplex.mappingCone.rotateHomotopyEquiv\", \"CochainComplex.mappingCone.mapOfHomotopy\", \"CochainComplex.cm5b.p\"], \"digest\": \"cb71cf9e8bc2f1a3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic exact-functor derived constructions, ordinary scheme module restriction/pushforward and ordinary mapping-cone homotopies do not construct sheaf dg extension by zero with its signed action and open coherence. The focused dg grep and Loogle search have no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero and restriction of sheaves of differential graded modules induce additive adjoint functors on unbounded derived categories",
+   "results": "{\"t\": \"2026-10-24T08:45:38Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero and restriction of sheaves of differential graded modules induce additive adjoint functors on unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Adjunction.derived\", \"DerivedCategory.instLinearCochainComplexIntQ\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"06da8682ac9d86cb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: generic exact-functor derived constructions, ordinary scheme module restriction/pushforward and ordinary mapping-cone homotopies do not construct sheaf dg extension by zero with its signed action and open coherence. The focused dg grep and Loogle search have no hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-sheaf-dg-binary-gluing",
+  "date": "2026-10-24",
+  "group": "O1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: locality on affine opens for the proper map between the two curve families, without asserting that this map is flat. Independent prerequisite: Pseudo-coherent perfect direct images between flat finitely presented families. Kiehl finiteness input: the unnumbered general relative-pseudo-coherence assertion following Stacks lemma-flat-proper-pseudo-coherent-direct-image-general. Finite-degree Noetherian descente input for the Kiehl finiteness assertion. Independent prerequisite: Relative sheaf descente on a prescribed Noetherian envelope. Two-open gluing prerequisite, conditional on approximation on both opens and their intersection, uniform in a supplied finite coefficient stage. Single-degree induction step: cancel finite polynomial-chart top obstructions globally while retaining the prescribed scalar-action normalization. Mayer--Vietoris subproblem for one degree: given a global coherent witness at cutoff n+1 and witnesses on two opens at cutoff n, obtain a global witness at cutoff n. The supplied global witness is part of the hypothesis. Independent input: finite coherent factorization of a cohomologically surjective perfect dg arrow to an ordinary scheme complex, with cohomologically surjective first factor. Uniform Mayer--Vietoris locality step: the predicate on each open covers all perfect sources, ordinary targets, integer cutoffs and arrows surjective on cohomology above the cutoff; conditional on this full predicate on both opens and their intersection. Independent prerequisite: finite coefficient descent of the perfect sheaf dg source, before transposing the arrow to an ordinary coherent object. Binary gluing of finite-stage dg objects and a map to the restricted original object; no coefficient descent is asserted here. Independent input: extension by zero of sheaf dg modules, its derived adjunction, and open restriction/base-change coherence; used to construct the signed overlap cone.",
+   "via": [
+    "lem-sfb-sheaf-dg-binary-gluing",
+    "lem-sfb-perfect-sheaf-dg-finite-stage-descent",
+    "lem-sfb-perfect-arrow-coherent-factorization-locality",
+    "lem-sfb-perfect-coefficient-arrow-finite-realization",
+    "lem-sfb-global-witness-one-degree-binary-patching",
+    "lem-sfb-sheaf-single-degree-coefficient-cancellation",
+    "lem-sfb-relative-coefficient-window-two-open-locality",
+    "lem-sfb-prescribed-envelope-relative-sheaf-descente",
+    "lem-sfb-relative-complex-noetherian-cohomology-approximation",
+    "lem-sfb-kiehl-relative-pseudocoherent-direct-image",
+    "lem-sfb-flat-family-perfect-direct-image-pseudocoherent",
+    "lem-sfb-proper-flat-families-coherent-adjoint-locality",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sheaf-dg-open-extension-calculus",
+  "worker": "stage1",
+  "summary": "Retained the full statement; split into eleven explicit steps, reusing existing dg adjunction, sheaf exactness/stalk, homotopy-system and localization nodes. No new nodes or Mathlib leaves. Checked signed left/right conversion, -p cone convention, unbounded adjunction, units/counits and open-square/composition coherence. Noted the adjoint-direction typo in Stacks prose without changing the correct item statement.",
+  "blueprint": "Read latest sk-thm-sf-ctf-stability unit and det-thm-sf-ctf-stability-direct-images proof (3). This item serves the inherited signed-overlap-cone prerequisite in binary dg gluing; no unit/chapter route changes. blueprint_refs.py ancestor reports None; retained the inherited null ancestor, exact place and via list. Whole-blueprint searches extension by zero, differential graded, open extension, restriction and 0FRW found no equivalent sheaf dg calculus statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-derived-open-restriction-adjunction-exact",
+    "why": "Ordinary sheaf-module exactness on an arbitrary ringed space is a generic tool; the dg node of this unit states the adjunction but not exactness."
+   },
+   {
+    "node": "lem-sc-module-extension-by-zero-stalk-maps",
+    "why": "Ordinary module extension stalks identify the zero and identity stalks used in the dg base-change and composition maps; no dg adjunction alone states these stalk formulas."
+   },
+   {
+    "node": "lem-pur-localization-triangles-05r6",
+    "why": "Generic triangulated localization supplies additive localization and the isomorphic-image description, after the same-unit dg homotopy-system theorem verifies its hypotheses."
+   },
+   {
+    "node": "lem-pur-additive-localization-descent",
+    "why": "Generic additive-localization descent proves additivity of the two factored dg functors, after the actual additive localization has been constructed."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "The generic localization universal property descends the actual dg functors and transformations; it replaces no geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-sets-sheaf-iso-on-stalks",
+    "why": "The sheaf-of-sets stalk criterion on an arbitrary space proves the constructed degreewise maps are invertible; scheme-only module versions would not apply."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-derived-open-restriction-adjunction-exact",
+  "lem-sc-module-extension-by-zero-stalk-maps",
+  "lem-pur-localization-triangles-05r6",
+  "lem-pur-additive-localization-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-848b64a32",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-848b64a32 (reviewer sub-agent of L); spot-checked: I read the item in full: all 11 steps, plus the statement of every cited node. The delivery creates no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit; all 6 old mathlib_searches are kept and 5 new ones added. There is no cycle: the closure has 178 nodes and does not contain the item. Stacks sdga.tex 0FRV prose says j_! is 'right adjoint to j_*'. That is a typo, as the report says: the 0FRW lemma gives j_! left adjoint to j^*, and the item follows the lemma. The 0FRA presheaf construction is the same as the special case of def-weil-extension-by-zero-presheaf, so step 1's identification with ordinary j_! is correct. I recomputed the signs in step 5 (graded-opposite algebra, right associativity and Leibniz, right-linearity of degree-r maps, unchanged right action on M[k]); they match the convention of lem-sfb-sheaf-dg-homotopy-system exactly. Step 3's homotopy transposition and step 4's cone and shift compatibility (including -p) are checked. The word localization satisfies the universal-property definition used by 05r6. The hypotheses of the additive descent in step 7 hold. In step 8 the unit is Q(eta), which is an isomorphism. Step 9's stalk claim is compressed but correct: b|_T∘eta = eta|_T, and both units are the identity. Edge cases checked: U empty, U=X, disjoint opens, nested opens, and odd a with k=1. I accept the six declared tool uses as generic (ordinary j_!, localization, and the sheaf-of-sets stalk criterion). Batch 5: the only trace-formula node in the closure is lem-trf-triangulated-subcategory-cone-system. It is a mathlib leaf (Stacks 05RG, Verdier cone multiplicative system) and a general triangulated-category fact, not part of the trace formula or Poincaré duality, so it does not trigger a RETURN. The null blueprint.from.node was inherited from the O1 creation, so it is a base issue and not this delivery's fault."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SheafDgOpenExtensionCalculus",
+  "declaration": "CategoryTheory.SheafDg.open_extension_calculus",
+  "declarations": [
+   "CategoryTheory.SheafDg.openModuleExtension",
+   "CategoryTheory.SheafDg.openModuleExtension_additive",
+   "CategoryTheory.SheafDg.openModuleExtension_preservesZero",
+   "CategoryTheory.SheafDg.openComplexExtension",
+   "CategoryTheory.SheafDg.openExtensionGenerator",
+   "CategoryTheory.SheafDg.IsOpenExtensionAction",
+   "CategoryTheory.SheafDg.existsUnique_openExtensionAction",
+   "CategoryTheory.SheafDg.openExtend",
+   "CategoryTheory.SheafDg.openExtendMap_linear",
+   "CategoryTheory.SheafDg.openExtensionMap",
+   "CategoryTheory.SheafDg.existsUnique_openExtension",
+   "CategoryTheory.SheafDg.openExtension",
+   "CategoryTheory.SheafDg.IsOpenAdjunction",
+   "CategoryTheory.SheafDg.existsUnique_openAdjunction",
+   "CategoryTheory.SheafDg.openAdjunction",
+   "CategoryTheory.SheafDg.existsUnique_derivedOpenExtension",
+   "CategoryTheory.SheafDg.derivedOpenExtension",
+   "CategoryTheory.SheafDg.existsUnique_openDerivedPreadditive",
+   "CategoryTheory.SheafDg.openDerivedPreadditive",
+   "CategoryTheory.SheafDg.existsUnique_derivedOpenAdjunction",
+   "CategoryTheory.SheafDg.derivedOpenAdjunction",
+   "CategoryTheory.SheafDg.open_extension_calculus",
+   "CategoryTheory.SheafDg.openExtension_preserves_signed_triangles",
+   "CategoryTheory.SheafDg.relativeOpenExtension",
+   "CategoryTheory.SheafDg.derivedRelativeOpenExtension",
+   "CategoryTheory.SheafDg.openBaseChangeInv",
+   "CategoryTheory.SheafDg.derivedOpenBaseChangeInv",
+   "CategoryTheory.SheafDg.openBaseChangeInv_isIso",
+   "CategoryTheory.SheafDg.derivedOpenBaseChangeInv_isIso",
+   "CategoryTheory.SheafDg.derivedOpenBaseChange",
+   "CategoryTheory.SheafDg.openCompositionInv",
+   "CategoryTheory.SheafDg.derivedOpenCompositionInv",
+   "CategoryTheory.SheafDg.openCompositionInv_isIso",
+   "CategoryTheory.SheafDg.derivedOpenCompositionInv_isIso",
+   "CategoryTheory.SheafDg.derivedOpenComposition",
+   "CategoryTheory.SheafDg.openComparison_coherence",
+   "CategoryTheory.SheafDg.derivedOpenComparison_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SheafDgOpenExtensionCalculus.lean",
+  "statement": "theorem open_extension_calculus (A : Algebra S) (U : Opens X) : (openExtension.{u, w} A U).Additive ∧ (restriction A U).Additive ∧ (∀ (P P' : LeftModule (restrictAlgebra A U)) (f g : P ⟶ P'), homotopyRel (restrictAlgebra A U) f g → homotopyRel A ((openExtension.{u, w} A U).map f) ((openExtension.{u, w} A U).map g)) ∧ (∀ (M M' : LeftModule A) (f g : M ⟶ M'), homotopyRel A f g → homotopyRel (restrictAlgebra A U) ((restriction A U).map f) ((restriction A U).map g)) ∧ (∀ (P P' : LeftModule (restrictAlgebra A U)) (f : P ⟶ P'), QuasiIso f.hom → QuasiIso ((openExtension.{u, w} A U).map f).hom) ∧ (∀ (M M' : LeftModule A) (f : M ⟶ M'), QuasiIso f.hom → QuasiIso ((restriction A U).map f).hom) ∧ (∀ (P : LeftModule (restrictAlgebra A U)) (n : ℤ) (x : X), x ∉ U → Subsingleton (↥(colimit ((OpenNhds.inclusion x).op ⋙ ((openExtend.{u, w} A U P).X.X n).val.presheaf) : AddCommGrpCat.{max u w}))) ∧ IsIso (openAdjunction.{u, w} A U).unit ∧ (∀ M : LeftModule A, (openAdjunction.{u, w} A U).unit.app ((restriction A U).obj M) ≫ (restriction A U).map ((openAdjunction.{u, w} A U).counit.app M) = 𝟙 _) ∧ IsIso (derivedOpenAdjunction.{u, w} A U).unit ∧ (∀ M : Derived A, (derivedOpenAdjunction.{u, w} A U).unit.app ((derivedRestriction A U).obj M) ≫ (derivedRestriction A U).map ((derivedOpenAdjunction.{u, w} A U).counit.app M) = 𝟙 _)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8443aff41",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read the node (unchanged apart from lean), def-sfb-sheaf-dg-module-localization's module, the delivered SheafDgOpenExtensionCalculus.lean in full, the report, and the citers (open-tensor-projection, binary-gluing, Mayer-Vietoris). Clause by clause: degreewise extension = extensionByZeroPresheaf ⋙ sheafification, with the action pinned by ∃! on generators; homotopy and quasi-iso preservation both ways; zero stalk off U (explicit neighbourhood colimit); derived functors are unique factorizations, additive; ordinary adjunction pinned by its unit formula, derived adjunction pinned by moduleQ images of unit and counit; unit IsIso; base-change and nested composition are counit whiskerings with IsIso (stalk check: on T both P_x, elsewhere 0); no extra hypotheses (EssentiallySmall holds automatically via essentiallySmallSelf). Statement field matches the signature; all 17 theorems sorry; docstrings and line lengths ok; I did not recompile (no change; worker compile clean, landing recompiles). Advisories: A1 relative j'_!/k'^* encoded through ambient X; A2 ∃ CommShift not pinned to the degreewise identity (sign twist excluded by the cone-triangle clause); A3 new global Preadditive (Derived A) instance, to be reused; A4 extensionByZeroPresheaf/sheafification owners (def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification) not in stmt_deps, which a stage-2 fix cannot add, so the maintainer may add them; the coherence theorems are tautologies, as the node's wording allows."
+ }
+}

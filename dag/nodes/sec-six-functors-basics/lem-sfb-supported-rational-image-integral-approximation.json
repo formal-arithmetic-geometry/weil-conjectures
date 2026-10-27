@@ -1,0 +1,484 @@
+{
+ "id": "lem-sfb-supported-rational-image-integral-approximation",
+ "kind": "statement",
+ "title": "Integral approximation of supported rational image section complexes",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "statement": "Let $X$ be an affine scheme [def-pc-scheme]. Use the small étale and pro-étale sites in the small indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. A support chain over $X$ means a finite chain $S=T_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}T_0=X$, where each arrow is a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. For a condensed coefficient ring $R$, put $R_T=p_T^*R$ and $\\mathcal A_{R,T}=\\operatorname{Mod}_{R_T}$. Write $J_R=J_{R,1}\\circ\\cdots\\circ J_{R,r}$, where $J_{R,t}=(a_t)_!$ in the open case and $J_{R,t}=(a_t)_*$ in the closed case [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. For an affine pro-étale object $v:U\\to X$, set $F_{R,v}=v^*J_R$. The empty chain has $J_R=\\mathrm{id}$. All derived categories and $R\\Gamma$ are the ordinary uncompleted module-derived ones, with section complexes valued in abelian groups [sk-def-sfb-module-derived-pushpull].\n\nFix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and $B=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Give $B$ and $E=B[1/\\ell]$ their norm topologies, and use their all-continuous condensed rings [sk-def-localizing-closure, def-weil-pbc-continuous-integral-coefficients].\n\nA finite scalar local model means a module which on a pro-étale cover has the form $R_T\\otimes_{\\underline{R(*)}}\\underline P$, where $P$ is a finitely presented scalar $R(*)$-module, that is, a cokernel of a map between finite free scalar modules [sk-def-sfb-constructible]. The scalar modules and covers may differ for different terms. For any actual module map $f:L\\to M$ between such modules on $S$, write $I_f=\\operatorname{im}f$ in the abelian module category, not the closure of a topological image.\n\nFor every support chain, every such $E_S$-linear map $f$, and every affine pro-étale $v:U\\to X$, the object $R\\Gamma(U,F_{E,v}(I_f)[0])$ of $D(\\mathbf{Ab})$ belongs to the class $\\mathcal R_X$ defined as follows. $\\mathcal R_X$ is the smallest class of objects of $D(\\mathbf{Ab})$ that is closed under isomorphisms, is closed under extensions (if $K'\\to K\\to K''\\to K'[1]$ is a distinguished triangle with $K',K''\\in\\mathcal R_X$, then $K\\in\\mathcal R_X$), and contains every $C[1/\\ell]$, where $C=R\\Gamma(U,F_{B,v}(I_g)[0])$ and $g$ is an actual map between finite scalar local-model integral modules on a support chain over the same original $X$. These integral chains and maps may vary. Scalar $B$ acts on section complexes by constant sections, and $C[1/\\ell]=C\\otimes_B^L E$ is ordinary scalar localization of the complex. No direct-sum decomposition and no filtered diagram of integral complexes is asserted; finitely many extension steps are allowed. No torsion-cd hypothesis, Noetherianity, constant-matrix condition, or global integral local-model lattice for the chosen $L,M,f$ is assumed. The comparison concerns the actual rational image, not its closure. Zero maps and the case $E=\\mathbf Q_\\ell$ are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 7.2, Theorem 7.7 and Corollary 6.13, integral-to-field rationalization and stratified lattices; Section 8 proof of Lemma 8.6. Agent derived integral image section-complex approximation obligation. Reference for this precise filtered derived presentation on arbitrary affine X is WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-localizing-closure",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-sfb-qcqs-open-closed-tree",
+  "def-sfb-condensed-module-sections"
+ ],
+ "proof": [
+  {
+   "text": "All schemes in the given support chain are qcqs. Indeed an affine scheme has a finite affine cover with quasi-compact affine intersections; an open subscheme inherits the affine-intersection criterion for quasi-separatedness, and a closed subscheme does also, by intersecting affine charts with the closed subscheme. A quasi-compact open of a quasi-compact scheme is quasi-compact, and a closed subscheme of a quasi-compact scheme is quasi-compact. Induct along the given finite chain. A finite scalar model over the field $E$ is finite free: choose a basis of the finitely presented $E$-vector space $P$ and tensor that basis with $E_T$. Thus $L,M$ are lisse, allowing varying finite ranks. Write $I=\\operatorname{im}f$.",
+   "uses": [
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "def-weil-closed-immersion",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 7.2; elementary geometry of the support chain and finite-dimensional scalar models"
+   }
+  },
+  {
+   "text": "Apply the qcqs stratified-lattice theorem in its finite-extension case to $L$ on $S$. Starting with the one-vertex tree, apply the refinement clause of the constructible lattice-tree theorem to its finite constructible lattice partition. This gives a finite open–closed tree on whose leaves $L$ has integral lisse lattices. On each such leaf apply the same two results to $M$ and attach the resulting finite trees. The previous $L$-lattices pull back to lisse lattices: coefficient pullback is exact, preserves their inclusions, and commutes with scalar extension. We obtain one finite tree $\\mathscr T$ with root $S$ and, on every nonempty leaf $W$, embeddings $A_W\\subset L|_W$, $B_W\\subset M|_W$ of lisse $B_W^{\\mathrm{coeff}}=p_W^*B$-modules whose rationalizations are $L|_W,M|_W$. (Here $B_W$ denotes the lattice in $M$, and $B_W^{\\mathrm{coeff}}$ the ring.) Every refinement uses the actual factoring scheme morphisms supplied by the tree theorem. All vertices are qcqs and every new edge has precisely the support-chain form. Empty leaves receive zero lattices.",
+   "uses": [
+    "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+    "lem-sfb-qcqs-constructible-integral-lattice-tree",
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-internal-extension-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Stratified lattices; qcqs tree refinements are the two cited existing generalizations"
+   }
+  },
+  {
+   "text": "Fix a nonempty leaf $W$. Take a common pro-étale trivializing cover of the two lattices, by pulling back the two covers. The finite affine refinement lemma gives finitely many affine charts $V_a\\to W$ refining it. On each chart the chosen bases identify $f|_{V_a}$ with a map from the rationalization of a standard finite free integral module to another. Apply the compact finite-free denominator lemma on $V_a$: there are $n_a\\geq0$ and an integral matrix map whose rationalization is $\\ell^{n_a}f|_{V_a}$. Put $N=\\max_a n_a$ and multiply each numerator by $\\ell^{N-n_a}$. These maps agree on all overlaps, since their composites with the embedded target lattice inclusion agree with the single map $\\ell^Nf$, and that inclusion is monic. The sheaf condition therefore glues them to an actual integral module map $g_W:A_W\\to B_W$. Its rationalization is $\\ell^Nf|_W$. This proves the uniform numerator assertion without a Noetherian hypothesis or a constant-matrix hypothesis on $f$.",
+   "uses": [
+    "lem-sfb-finite-affine-cover-refinement-general",
+    "lem-weil-pbc-continuous-finite-free-denominators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.8, compact continuous coefficient localization; finite affine refinement uses Stacks Tags 0989/098A"
+   }
+  },
+  {
+   "text": "Put $H_W=\\operatorname{im}g_W$ in the integral abelian module category. Exact coefficient pullback identifies $I|_W$ with $\\operatorname{im}(f|_W)$. Exact integral rationalization identifies $H_W[1/\\ell]$ with $\\operatorname{im}(\\ell^Nf|_W)$: apply the exact functor to the kernel-cokernel definition of image. Multiplication by $\\ell^N$ is an automorphism of the rational target, and its image is the same submodule as the image of $f|_W$. Hence $I|_W\\cong H_W[1/\\ell]$. The lattices are finite scalar local models, since locally they are finite free. For an empty leaf use $g_W:0\\to0$.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-integral-rationalization-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 7.2, localization at ell; the image calculation is elementary from exactness"
+   }
+  },
+  {
+   "text": "For any support chain $\\mathscr P$ from a leaf $W$ to the original $X$, let $G_R=v^*J_R^{\\mathscr P}$. These functors are exact: open and allowed closed edge functors are exact by ringed open–closed recollement, and $v^*$ is exact by Cartesian coefficients. They preserve the repeated-$\\ell$ colimit: $v^*$ and $j_!$ are left adjoints, and closed $i_*$ preserves filtered colimits because every ambient vertex is qcqs. The underlying sheaf constructions commute with forgetting the $E$-action to $B$: open extension by zero and direct image have the same underlying abelian functors for both coefficients, and inverse image has the Cartesian coefficient identification. The continuous coefficient inclusion is localization at $\\ell$ on compact profinite sets; its pullback remains this localization, since inverse image preserves its colimit. The scalar-localization module-colimit theorem thus gives, with its normalized legs, an isomorphism\n$$\\operatorname{Res}G_E(H_W[1/\\ell])\\cong\\varinjlim(G_BH_W\\xrightarrow{\\ell}G_BH_W\\xrightarrow{\\ell}\\cdots).$$\nThe $n$th leg is the unit followed by multiplication by $\\ell^{-n}$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-module-open-lower-shriek",
+    "def-sfb-module-lower-star",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-weil-pbc-scalar-localization-module-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BM/09AH (exact edge functors), 0738 (filtered colimits); continuous localization and normalized module telescope as cited"
+   }
+  },
+  {
+   "text": "Set $C_W=R\\Gamma(U,G_BH_W[0])$. The sheaf telescope in step 5 is a strict diagram with every term concentrated in degree zero. Apply the derived-global-sections clause of qcqs pushforward continuity on the affine scheme $U$, with common lower bound zero. Its normalized comparison identifies the termwise colimit of bounded-below representatives of $C_W\\xrightarrow{\\ell}C_W\\to\\cdots$ with $R\\Gamma(U,\\operatorname{Res}G_E(H_W[1/\\ell])[0])$. The complex-localization colimit theorem, also on the one-object site with scalar ring $B$, identifies that colimit with $C_W[1/\\ell]$; scalar localization is exact, so this is $C_W\\otimes_B^L E$. Restriction of scalars does not change the resulting abelian section complex, by restriction-sections acyclicity. Consequently\n$$C_W[1/\\ell]\\cong R\\Gamma(U,G_E(I|_W)[0])\\quad\\text{in }D(\\mathbf{Ab}).$$\nThis uses only uniformly bounded-below diagrams, not a finite cohomological dimension bound.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-scalar-localization-complex-colimit",
+    "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "lem-coef-restriction-sections-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1) and the first paragraph of its proof (derived global sections); normalized scalar telescope"
+   }
+  },
+  {
+   "text": "At each vertex $T$ of $\\mathscr T$ apply condensed open–closed recollement to $(I|_T)[0]$. It gives the triangle with outer terms $j_!(I|_{T_{\\rm open}})[0]$ and $i_*(I|_{T_{\\rm closed}})[0]$. Compose with the path edge functors from $T$ to $S$, the original $J_E$, and $v^*$. They are exact by step 5, so their termwise derived functors preserve this triangle. Apply the triangulated functor $R\\Gamma(U,-)$. The resulting middle term is the section complex for the path ending at $T$; its outer terms are the corresponding section complexes for the two children. For a leaf the path is the original support chain with that tree branch appended, so step 6 places its section complex in $\\mathcal R_X$.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3), (3.4), Lemma 3.4; finite open–closed devissage"
+   }
+  },
+  {
+   "text": "Induct upwards on the finite tree. A leaf section complex is isomorphic to the rationalization of the integral image section complex for $g_W$, on an allowed chain over the same original $X$, and is therefore a generator of $\\mathcal R_X$. At a binary vertex the two child terms lie in $\\mathcal R_X$ by induction, so its middle term lies there by extension closure. At the root this middle term is $R\\Gamma(U,F_{E,v}(I_f)[0])$, as required. The zero object is itself a generator, using $0\\to0$ on the empty support chain; thus empty schemes, empty leaves and zero maps cause no exception. A one-vertex tree and the empty original support chain are included. No splitting of any connecting map has been used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Finite extension induction, following Lemma 3.4 and the stratified-lattice route"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "def-weil-closed-immersion",
+  "sk-def-sfb-constructible",
+  "lem-sfb-qcqs-lisse-stratified-integral-lattices",
+  "lem-sfb-qcqs-constructible-integral-lattice-tree",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-internal-extension-inverse-image",
+  "lem-sfb-finite-affine-cover-refinement-general",
+  "lem-weil-pbc-continuous-finite-free-denominators",
+  "lem-sfb-integral-rationalization-exact",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-module-lower-star",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "lem-weil-pbc-scalar-localization-module-colimit",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-scalar-localization-complex-colimit",
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-coef-restriction-sections-acyclic",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Assembly of Lemma 3.4, Lemma 5.3(1), Corollary 6.13 and Section 7.2, following the maintainer repair note of 2026-10-25. The precise supported image assertion is proved here, not claimed as a theorem of the paper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An image of a map between finite locally constant ell adic rational scalar sheaves has a filtered presentation by images of integral local models after inverting ell compatible with supported derived global sections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (X : LightCondSet)\\n  (h :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.val.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}\n  {\"name\": \"LightCondMod.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → CategoryTheory.Functor (ModuleCat R) (LightCondMod R)\", \"doc\": \"The functor that maps each left $ R $-module to the light condensed $ R $-module of locally constant functions on light profinite spaces, with morphisms induced by precomposition. This constructs shea\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{F : CategoryTheory.Functor ℕᵒᵖ FintypeCat} →\\n  (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toLightProfinite)) →\\n    (X : Type u) →\\n      CategoryTheory.Limits.IsLimit c →\\n        [∀ (i : ℕᵒᵖ), CategoryTheory.Epi (c.π.app i)] →\\n          CategoryTheory.Limits.IsColimit ((LightCondensed.locall\", \"doc\": \"The presheaf of locally constant functions on the opposite category of light profinite spaces, constructed from a diagram of finite types, satisfies the universal property of a colimit. Specifically, \"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rational local system sheaf images admit integral lattices and cohomology commutes with localization and filtered colimits on quasi compact pro etale objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"module\": \"Mathlib/Condensed/Discrete/Characterization\", \"type\": \"∀ (X : LightCondSet)\\n  (h :\\n    (S : LightProfinite) →\\n      CategoryTheory.Limits.IsColimit (X.val.mapCocone (CategoryTheory.Limits.coconeRightOpOfCone S.asLimitCone))),\\n  LightCondSet.LocallyConstant.functor.essImage X\", \"doc\": \"For any light condensed set $ X $, if for every light profinite space $ S $, the cocone obtained by applying the functor to the right opposite of $ S $'s limit cone is a colimit, then $ X $ lies in th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived cohomology of rational ell adic sheaf images is a filtered colimit of localized integral sheaf image cohomology",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [inst_1 : CategoryTheory.IsFiltered J] →\\n      (F : CategoryTheory.Functor J AddCommGrpCat) →\\n        CategoryTheory.Limits.IsColimit (AddCommGrpCat.FilteredColimits.colimitCocone F)\", \"doc\": \"For any filtered diagram $F : \\\\mathcal{J} \\\\to \\\\text{AddCommGrpCat}$ indexed by a small filtered category $\\\\mathcal{J}$, the cocone with apex the filtered colimit $\\\\varinjlim F$ satisfies the universal\"}\n  {\"name\": \"AddGrpCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [inst_1 : CategoryTheory.IsFiltered J] →\\n      (F : CategoryTheory.Functor J AddGrpCat) →\\n        CategoryTheory.Limits.IsColimit (AddGrpCat.FilteredColimits.colimitCocone F)\", \"doc\": \"For any filtered diagram $F : \\\\mathcal{J} \\\\to \\\\text{AddGrpCat}$ indexed by a small filtered category $\\\\mathcal{J}$, the cocone with apex the filtered colimit $\\\\varinjlim F$ satisfies the universal pro\"}\n  {\"name\": \"CommRingCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.Ring.FilteredColimits\", \"type\": \": CommRingCat.{max v u}\", \"doc\": \"The filtered colimit of a diagram of commutative rings in the category of commutative rings, constructed by first forming the colimit in the category of additive groups via the forgetful functor and t\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": ModuleCat.{max v u, u} R\", \"doc\": \"For any ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, this constructs the filtered colimit of $ F $ in the category of $ R $-modules by f\"}\n  {\"name\": \"ModuleCat.FilteredColimits.colimitCoconeIsColimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.FilteredColimits\", \"type\": \": IsColimit (colimitCocone F)\", \"doc\": \"For a ring $ R $, small filtered category $ \\\\mathcal{J} $, and functor $ F : \\\\mathcal{J} \\\\to \\\\text{ModuleCat}_R $, the filtered colimit cocone $ (\\\\varinjlim F, \\\\iota) $ satisfies the universal propert\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject\", \"type\": \"[IsFiltered J] (c : Cocone (F ⋙ MonoOver.forget _)) [Mono c.pt.hom]\\n  (h : Subobject.mk c.pt.hom = ⨆ j, Subobject.mk (F.obj j).obj.hom) : IsColimit ((Over.forget _).mapCocone c)\", \"doc\": \"In a Grothendieck abelian category $\\\\mathcal{C}$, for any small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{MonoOver}\\\\, X$ (the category of monomorphisms into an object $X\"}\n  {\"name\": \"AddGrpCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [CategoryTheory.IsFiltered J] → (F : CategoryTheory.Functor J AddGrpCat) → CategoryTheory.Limits.Cocone F\", \"doc\": \"Given a filtered diagram $ F : \\\\mathcal{J} \\\\to \\\\text{AddGrpCat} $ where $ \\\\mathcal{J} $ is a small filtered category, this constructs the cocone with apex the filtered colimit $ \\\\varinjlim F $ and mor\"}\n  {\"name\": \"AddCommGrpCat.FilteredColimits.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.Grp.FilteredColimits\", \"type\": \"{J : Type v} →\\n  [inst : CategoryTheory.SmallCategory J] →\\n    [CategoryTheory.IsFiltered J] → (F : CategoryTheory.Functor J AddCommGrpCat) → CategoryTheory.Limits.Cocone F\", \"doc\": \"Given a small filtered category $\\\\mathcal{J}$ and a functor $F : \\\\mathcal{J} \\\\to \\\\text{AddCommGrpCat}$, this constructs the cocone with apex the filtered colimit $\\\\varinjlim F$ and morphisms $\\\\iota_j \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"localization\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_2} [CategoryTheory.Category.{v_2, u_2} A] [CategoryTheory.HasWeakSheafify J A] : (CategoryTheory.presheafToSheaf J A).IsLocalization J.W\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instIsLocalizationSheafOfModulesSheafificationInverseImageFunctorOppositeAbWToPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurjective J α] [J.WEqual\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.Localizations\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \" {R : Type u} (M : Type u) [CommRing R] [AddCommGroup M] [Module R M] (P : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) : Type u\", \"doc\": \"The type family over `PrimeSpectrum R` consisting of the localization over each point.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \" (R : Type u) [CommRing R] (p : PrimeSpectrum R) : IsLocalization.AtPrime (↑((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalk p)) p.asIdeal\", \"doc\": \"Stalk of the structure sheaf at a prime p as localization of R\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.Localizations.comapFun\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \" {R M : Type u} [CommRing R] [AddCommGroup M] [Module R M] {S : Type u} [CommRing S] {N : Type u} [AddCommGroup N] [Module S N] {σ : R →+* S} (f : M →ₛₗ[σ] N) (y : ↑(AlgebraicGeometry.PrimeSpectrum.Top S)) : AlgebraicGeometry.StructureSheaf.Localizations M (PrimeSpectrum.comap σ y) →ₛₗ[σ] AlgebraicG\", \"doc\": \"The map `M_{f y} ⟶ N_{y}` used to build maps between structure sheaves.\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \" (R : Type u) [CommRing R] (r : R) : IsLocalization.Away r ↑((AlgebraicGeometry.Spec.structureSheaf R).obj.obj (Opposite.op (PrimeSpectrum.basicOpen r)))\", \"doc\": \"Sections of the structure sheaf of Spec R on a basic open as localization of R\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.Localizations.comapFun_mk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \" {R M : Type u} [CommRing R] [AddCommGroup M] [Module R M] {S : Type u} [CommRing S] {N : Type u} [AddCommGroup N] [Module S N] {σ : R →+* S} (f : M →ₛₗ[σ] N) (y : ↑(AlgebraicGeometry.PrimeSpectrum.Top S)) (a : M) (b : ↥(PrimeSpectrum.comap σ y).asIdeal.primeCompl) : (AlgebraicGeometry.StructureShea\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} {F : TopCat.Presheaf CommRingCat X} (G : F.SubmonoidPresheaf) : TopCat.Presheaf CommRingCat X\", \"doc\": \"The localization of a presheaf of `CommRing`s with respect to a `SubmonoidPresheaf`.\"}\n  {\"name\": \"TopCat.Presheaf.epi_toLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} {F : TopCat.Presheaf CommRingCat X} (G : F.SubmonoidPresheaf) : CategoryTheory.Epi G.toLocalizationPresheaf\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} {F : TopCat.Presheaf CommRingCat X} (G : F.SubmonoidPresheaf) : F ⟶ G.localizationPresheaf\", \"doc\": \"The map into the localization presheaf.\"}\n  {\"name\": \"TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} {F : TopCat.Presheaf CommRingCat X} (G : F.SubmonoidPresheaf) (U : (TopologicalSpace.Opens ↑X)ᵒᵖ) : IsLocalization (G.obj U) ↑(G.localizationPresheaf.obj U)\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.instAlgebraCarrierObjOppositeOpensCarrierCommRingCatLocalizationPresheaf\", \"module\": \"Mathlib.Topology.Sheaves.CommRingCat\", \"type\": \" {X : TopCat} {F : TopCat.Presheaf CommRingCat X} (G : F.SubmonoidPresheaf) (U : (TopologicalSpace.Opens ↑X)ᵒᵖ) : Algebra ↑(F.obj U) ↑(G.localizationPresheaf.obj U)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "(lattice|invert|localiz).*(cohomolog|[Ii]mage)|cohomolog.*(lattice|localiz)",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"line\": \"336\", \"text\": \"lemma PreservesLocalization.colimitDesc_preimage (F : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Limits.lean\", \"line\": \"473\", \"text\": \"      convert! (isCompl_range_inl_inr X Y).map (CompleteLatticeHom.setPreimage f)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"98\", \"text\": \"    exact isLocalization_basicOpen_of_qcqs (f.isCompact_preimage U.2.isCompact)\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the displayed declarations concern scalar adic completion, ordinary sheaf constructions, finite-field algebra or generic exactness, and do not state this pro-etale coefficient comparison or estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections of a rational ell adic sheaf image are a filtered colimit of localized integral supported image section complexes",
+   "results": "{\"t\": \"2026-10-23T21:29:12Z\", \"tool\": \"leanfinder\", \"query\": \"Derived sections of a rational ell adic sheaf image are a filtered colimit of localized integral supported image section complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"BDeRhamPlus\", \"localCohomology.ofDiagram\", \"localCohomology.diagram\", \"localCohomology.hasColimitDiagram\", \"localCohomology\", \"localCohomology.ofSelfLERadical\", \"SheafOfModules.Presentation.isColimit\"], \"digest\": \"1ec42a578e1857e9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the actual returned names and types concern period rings, spectral norm structures and scalar norm inequalities; they do not state the image coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*lattice|rationali[sz].*sheaf|locali[sz].*cohomology",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "Condensed"
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational ell adic sheaf images on quasi compact schemes are generated under finite extensions by integral models and derived sections commute with localization",
+   "results": {
+    "top": [
+     "SheafOfModules.GeneratingSections.IsFiniteType",
+     "AlgebraicGeometry.Γ_restrict_isLocalization",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+     "SheafOfModules.GeneratingSections.ofEpi_s",
+     "ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop",
+     "Module.Finite.instLocalizationLocalizedModule",
+     "AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp",
+     "SheafOfModules.GeneratingSections"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, CategoryTheory.Triangulated",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'CategoryTheory.Triangulated'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported rational image section complexes are finite extensions of rationalized integral image section complexes on a qcqs scheme",
+   "results": {
+    "top": [
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation",
+     "AlgebraicGeometry.finite_appTop_of_universallyClosed",
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated",
+     "AlgebraicGeometry.IsFinite.finite_app"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattices on a finite stratification and localization of derived global sections for continuous ell adic sheaves",
+   "results": {
+    "top": [
+     "BDeRhamPlus",
+     "localCohomology.ofDiagram",
+     "localCohomology",
+     "localCohomology.diagram",
+     "localCohomology.ofSelfLERadical",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "localCohomology.hasColimitDiagram",
+     "Hausdorffification"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, IsIso",
+   "results": {
+    "top": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'IsIso'",
+    "subdirectory": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed, CategoryTheory.IsIso",
+   "results": {
+    "top": [
+     "CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+     "CondensedSet.isDiscrete_tfae",
+     "CondensedMod.isDiscrete_tfae"
+    ],
+    "n_hits": 3,
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-25",
+   "verdict": "no match: returned signatures concern structure-sheaf denominators, discrete condensed modules, abstract derived localization or local cohomology, not supported continuous rational images and finite integral-extension generation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-supported-three-term-scalar-cd",
+  "date": "2026-10-24",
+  "group": "ND"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms in det-sf-comp-coherence-cocycle.proof.md: descendant supported heart-bound input, through the recorded via chain. Finite-extension integral approximation is not itself stated in that paragraph.",
+   "via": [
+    "lem-sfb-supported-three-term-scalar-cd",
+    "lem-sfb-finite-constructible-complex-heart-cd",
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "L maintenance (over-strong statement)",
+  "old_statement": "Let $X$ be an affine scheme [def-pc-scheme]. Use the small étale and pro-étale sites in the small indexing universe [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention]. A support chain over $X$ means a finite chain $S=T_r\\xrightarrow{a_r}\\cdots\\xrightarrow{a_1}T_0=X$, where each arrow is a quasi-compact open immersion or a closed immersion with quasi-compact open complement [def-weil-open-immersion, def-weil-closed-immersion, def-weil-finite-type-morphism]. For a condensed coefficient ring $R$, put $R_T=p_T^*R$ and $\\mathcal A_{R,T}=\\operatorname{Mod}_{R_T}$. Write $J_R=J_{R,1}\\circ\\cdots\\circ J_{R,r}$, where $J_{R,t}=(a_t)_!$ in the open case and $J_{R,t}=(a_t)_*$ in the closed case [def-sfb-module-open-lower-shriek, def-sfb-module-lower-star]. For an affine pro-étale object $v:U\\to X$, set $F_{R,v}=v^*J_R$. The empty chain has $J_R=\\mathrm{id}$. All derived categories and $R\\Gamma$ are the ordinary uncompleted module-derived ones, with section complexes valued in abelian groups [sk-def-sfb-module-derived-pushpull].\n\nFix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and $B=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Give $B$ and $E=B[1/\\ell]$ their norm topologies, and use their all-continuous condensed rings [sk-def-localizing-closure, def-weil-pbc-continuous-integral-coefficients].\n\nA finite scalar local model means a module which on a pro-étale cover has the form $R_T\\otimes_{\\underline{R(*)}}\\underline P$, where $P$ is a finitely presented scalar $R(*)$-module, that is, a cokernel of a map between finite free scalar modules [sk-def-sfb-constructible]. The scalar modules and covers may differ for different terms. For any actual module map $f:L\\to M$ between such modules on $S$, write $I_f=\\operatorname{im}f$ in the abelian module category, not the closure of a topological image.\n\nFor every support chain, every such $E_S$-linear map $f$, and every affine pro-étale $v:U\\to X$, there exist a small filtered category $I$ [def-weil-pbc-category-colimit], a functor $i\\mapsto C_i$ from $I$ to cochain complexes of $B$-modules, and an isomorphism in $D(\\mathbf{Ab})$\n$$\\varinjlim_{i\\in I}(C_i\\otimes_B^L E)\\xrightarrow{\\sim}R\\Gamma(U,F_{E,v}(I_f)[0]).$$\nEach $C_i$ is quasi-isomorphic, as a complex of $B$-modules, to a finite direct sum of complexes $R\\Gamma(U,F_{B,v}(I_g)[0])$, where $g$ is an actual map between finite scalar local-model integral modules on a support chain over the same original $X$. These integral chains and maps may vary with the summands and $i$. Scalar $B$ acts on section complexes by constant sections; the tensor is ordinary scalar localization, $C_i\\otimes_B^L E=C_i[1/\\ell]$, and the colimit is the termwise filtered colimit of the complexes $C_i[1/\\ell]$, which computes their derived filtered colimit. No torsion-cd hypothesis, Noetherianity, constant-matrix condition, or global integral local-model lattice for the chosen $L,M,f$ is assumed. The comparison concerns the actual rational image, not its closure. Zero maps and the case $E=\\mathbf Q_\\ell$ are included.",
+  "what": "Over-strong form corrected (L maintenance, 2026-10-25). Seven stage-1 workers abandoned the old form on 10-24/25: it asked for a filtered diagram of complexes each quasi-isomorphic to a finite DIRECT SUM of integral image section complexes. The available lattice results (lem-sfb-qcqs-lisse-stratified-integral-lattices, lem-sfb-qcqs-constructible-integral-lattice-tree) give integral lattices only on the strata of a finite open-closed refinement; gluing strata gives finite EXTENSIONS (distinguished triangles with arbitrary connecting maps), not sums, and a rational local system without a global lattice (e.g. monodromy multiplication by l around a node) has no global integral model. The only citer, lem-sfb-supported-three-term-scalar-cd step 4, needs just the vanishing of H^q above d+1, which is closed under extensions by the long exact sequence. The conclusion is now membership in the extension-closed class generated by rationalized integral image section complexes. The proof step of the citer was adjusted in the same commit.",
+  "source": {
+   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+   "place": "Corollary 6.13 (stratified lattices) and Section 7.2; finite stratification gives triangles, not sums"
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-supported-three-term-scalar-cd",
+    "holds": true,
+    "note": "step 4 rewritten: the upper bound H^q=0 for q>d+1 passes to scalar localizations (exact) and to extensions (long exact sequence)"
+   }
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sfb-supported-rational-image-integral-approximation",
+  "worker": "stage1",
+  "summary": "Followed the released maintenance repair: finite common embedded lattice tree, compact affine matrix denominators glued by monicity, exact localization of actual images, normalized localization telescope under supported functors and qcqs derived sections, and finite open-closed extension induction. Reused existing nodes only; the corrected statement is unchanged.",
+  "blueprint": "Realizes the supported scalar heart-bound descendant of det-sf-comp-coherence-cocycle through its recorded ancestry; follows current blueprint sk-lem-stratified-lattice and its qcqs generalizations. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-locally-free-pullback",
+    "why": "Generic input for 2; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic input for 2, 4, 5; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-sfb-internal-extension-inverse-image",
+    "why": "Generic input for 2; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-sfb-finite-affine-cover-refinement-general",
+    "why": "Generic input for 3; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-finite-free-denominators",
+    "why": "Generic input for 3; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-sfb-integral-rationalization-exact",
+    "why": "Generic input for 4; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic input for 5; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-module-colimit",
+    "why": "Generic input for 5; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Generic input for 6; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-complex-colimit",
+    "why": "Generic input for 6; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "why": "Generic input for 6; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-coef-restriction-sections-acyclic",
+    "why": "Generic input for 6; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Generic input for 7; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic input for 7; its statement supplies the exact geometric, coefficient, continuity or derived-functor tool used there, which the compactification-coherence unit does not state."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-internal-extension-inverse-image",
+  "lem-sfb-finite-affine-cover-refinement-general",
+  "lem-weil-pbc-continuous-finite-free-denominators",
+  "lem-sfb-integral-rationalization-exact",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-scalar-localization-module-colimit",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-scalar-localization-complex-colimit",
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-coef-restriction-sections-acyclic",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-pc-right-derived-functor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NF-42962bf10",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-42962bf10 (reviewer sub-agent of L); spot-checked: Read the item in full: the L-repaired extension-closed statement, kept verbatim, and 8 steps with no new nodes. Removing the unused def-weil-pbc-category-colimit stmt_dep is correct. Statement citations match stmt_deps, step uses equal proof_deps, and there is no cycle. Every hypothesis of every cited statement is met. S1: the qcqs closure uses the affine-intersection criterion; a finitely presented E-model is free, so L and M are lisse. S2: the qcqs lattice theorem (F=E, L=M) plus the refinement clause of the lattice tree. The one-vertex tree is admissible because lisse means constructible for the trivial stratification. Tree edges are qc open immersions and closed immersions with qc open complement. The embedding B_W⊂M|_W is pulled back from the submodule of the lattice theorem. S3: refinement to finitely many affine charts (W nonempty and qc), then the compact finite-free denominator lemma, a common max N, and gluing by monicity of B_W→M|_W (O_E→E is injective). S4: exact rationalization on the two SES that define the image, so H_W[1/ℓ]≅I|_W. S5: from ringed open-closed, j_! is a left adjoint and j_!, i_* are exact; i_* commutes with filtered colimits on qcqs vertices. v^* is a left adjoint and exact. Commutation with Res comes from the underlying-sheaf clauses. E_W=B_W[1/ℓ] comes from the compact localization clause, and the module telescope lemma applies. S6: the RΓ clause of qcqs continuity on affine U with lower bound 0, the complex telescope on the one-object site (localization exact), and restriction-sections-acyclic. S7: condensed recollement on D^+, exact termwise functors are triangulated, and RΓ is triangulated. S8: upward induction; 0 is a generator. Small cases checked: point/identity, a local system with no global lattice, and zero/empty. Sources: HRS Lemma 3.4 and (3.3)-(3.4), Lemma 5.3(1) with its proof, Cor 6.13 (the common-denominator argument) and Thm 7.7 were read; Stacks 09BM/09AH/0738/0989/098A exist; no SGA. No duplicate was found in the DAG. The tool_uses the worker recorded are accepted: all are generic tools from other units. Batch-5 flag: lem-sfb-integral-rationalization-exact reaches def-pod-l-adic-representations only through the definition stmt_dep def-sfb-monodromy-realization-data. That is a general definition, not part of the trace-formula or Poincaré-duality proofs, so it is OK. Advisory: item source.place still says 'filtered derived presentation'; L may refresh it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedRationalImageIntegralApproximation",
+  "declaration": "AlgebraicGeometry.ProEtale.supported_rational_image_integral_approximation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.abelianPrimeLocalization",
+   "AlgebraicGeometry.ProEtale.supportedImageSections",
+   "AlgebraicGeometry.ProEtale.supportedIntegralImageGenerator",
+   "AlgebraicGeometry.ProEtale.supportedIntegralImageExtensionClosure",
+   "AlgebraicGeometry.ProEtale.supported_rational_image_integral_approximation"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedRationalImageIntegralApproximation.lean",
+  "statement": "theorem supported_rational_image_integral_approximation (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u}) [IsAffine X] {S : Scheme.{u}} (tree : QcqsOpenClosedTree X) (p : tree.Path S) (L M : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) S)) (hL : HasFiniteConstantLocalModel (Profinite.continuousMapRingObj E) S L) (hM : HasFiniteConstantLocalModel (Profinite.continuousMapRingObj E) S M) (f : L ⟶ M) (U : X.ProEt) [IsAffine U.left] : supportedIntegralImageExtensionClosure ℓ E X U (supportedImageSections (Profinite.continuousMapRingObj E) p U f)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-25",
+  "existing": false,
+  "note": "Repair of returned head 58b58cce656c: the generator and closure take the same fixed U as the theorem. All integral chains and actual maps vary over X, while U stays fixed. Global-section notation is owned by the landed definition node def-sfb-condensed-module-sections; the continuity theorem remains a proof dependency. Other helpers and the mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eba9697f9",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after 58b58cce RETURN: H3 repaired (fixed U in generator and closure, only chains/modules/maps vary), H2 repaired (def-sfb-condensed-module-sections and def-sfb-qcqs-open-closed-tree stmt_deps, both landed; continuity theorem proof-only). Checked: tree paths match support chains both ways (QuasiCompact edges, complementary ranges, qcqs vertices, root path = empty chain); continuousIntegers = O_E for the multiplicative extension norm; HasFiniteConstantLocalModel separate for L and M; actual image; RΓ via condensedModuleSections.rightDerivedFunctor at U.left after upperStar U.hom; abelianPrimeLocalization = K-injective derived functor of exact -⊗Z[1/ℓ], i.e. termwise C[1/ℓ] = C⊗_B E; closure = intersection of IsClosedUnderIsomorphisms + IsTriangulatedClosed₂ classes = extension closure. Edge cases (empty, zero map, E=Q_ℓ, root path) covered; one sorry; statement verbatim; docstrings and 8-step proof present; no hollow defs. Advisory: upperStar/condensedRingObj owners uncited (family precedent). No file changed, so no compile."
+ }
+}

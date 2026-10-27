@@ -1,0 +1,687 @@
+{
+ "id": "lem-coef-free-insertion-compact-support-coherence",
+ "kind": "statement",
+ "title": "Free-insertion comparison detects exceptional quotient mates",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$ and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be separated finite type between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties], with compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}Y$ [def-weil-compactifications-refinements]. For $W=X,Y,\\overline X$ and $\\tau=\\mathrm{et},\\mathrm{proet}$ [def-weil-pbc-etale-site, def-weil-pbc-proetale-site], let $\\mathscr S_W^\\tau$ be the category of strict systems of $(A_n)_W$-module sheaves with semilinear quotient transitions and componentwise morphisms [lem-pur-coefficient-system-derived-comparison]; use its ordinary unbounded derived category [def-weil-abstract-derived-category], exact evaluations $e_n$ and, for $m\\ge n\\ge1$, derived quotient functors $T^W_{m,n}=-\\otimes^L_{A_m}A_n$ [def-weil-derived-tensor]. Write $t^M_{m,n}:T^W_{m,n}M_m\\to M_n$ for the scalar-extension adjunct of the actual transition. \nWork on the etale sites. Put $F=Rp_{*,\\bullet}j_{!,\\bullet}$, and let $F\\dashv G$ and $F_n\\dashv G_n$ be the ordinary etale adjunctions [lem-pur-etale-coefficient-system-adjoint]. Use the canonical $e_nF\\cong F_ne_n$ and invertible compact-support quotient comparisons $q_{m,n}:T^Y_{m,n}F_m\\to F_nT^X_{m,n}$. Let $L_n^W\\dashv e_n$ be derived free insertion [lem-pur-coefficient-evaluation-derived-left-adjoint]: $(L_nK)_r=K\\otimes^L_{A_n}A_r$ for $r\\le n$ and zero otherwise. Let $\\sigma^W_{m,n}:L_n^WT^W_{m,n}\\to L_m^W$ be the canonical truncation map. Define $a_n:L_n^YF_n\\to FL_n^X$ as the $L_n^Y\\dashv e_n$ transpose of $1_{F_n}=e_nFL_n^X$.\nThen $a_n$ is invertible; at $r\\le n$ its evaluation is $q_{n,r}$, and it satisfies\n$$F(\\sigma^X_{m,n})a_{n,T^X_{m,n}}=a_m\\sigma^Y_{m,n,F_m}L_n^Y(q_{m,n}^{-1}).$$\nThe natural representing bijections\n$$\\operatorname{Hom}(K,e_nGN)\\cong\\operatorname{Hom}(FL_nK,N)\\cong\\operatorname{Hom}(F_nK,N_n)$$\nfix a counit-compatible isomorphism $e_nG\\cong G_ne_n$. Under precisely these identifications the evaluated unit and counit are those of $F_n\\dashv G_n$, and\n$$t^{GN}_{m,n}=G_n(t^N_{m,n})b_{m,n,N_m},\\quad b_{m,n}=G_n(T^Y_{m,n}\\epsilon_m)G_n(q_{m,n,G_m}^{-1})\\eta_{n,T^X_{m,n}G_m}.$$\nThese formulas are unchanged under the unique counit-compatible change of the chosen right adjoints. Mates have the convention of [def-weil-pbc-adjunction-mate]. They are assertions about actual derived-system maps, for arbitrary unbounded inputs.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-compactifications-refinements",
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "Apply the Brown-construction statement with $O=R$ and $t=\\varpi$. Its left extension $L_n$ is the one of the strict-system level-extension lemma; that lemma and the free-insertion lemma both give $L_n$ as the total left derived functor of the same strict free insertion, left adjoint to $e_n$, with the same evaluation formulas computed on flat-term K-flat representatives. Hence the unique unit-compatible isomorphism of left adjoints identifies the two, compatibly with these evaluation formulas, and we use it tacitly. On such a representative the unit $P\\to P\\otimes_{A_n}A_n$ of the free insertion adjunction is $x\\mapsto x\\otimes1$. Brown then gives an actual natural isomorphism $c_n:L_n^YF_n\\xrightarrow{\\sim}FL_n^X$, namely the inverse of its displayed $FL_n^X\\cong L_n^YF_n$; for $r\\le n$, $e_rc_n=q_{n,r}$. The identity-ring clause of the coefficient-projection theorem gives $q_{n,n}=1$ under tensor-unit identifications. Thus $e_nc_n=1_{F_n}$. The unit of $L_n^Y\\dashv e_n$ is the identity under $e_nL_n^Y=1$, by its explicit free-insertion formula. Consequently the adjunction bijection sends $c_n$ to $1_{F_n}$, so its injectivity gives $c_n=a_n$. This proves invertibility and every requested evaluated component without constructing a derived-system map from a family of components. All four cited results apply to ordinary unbounded derived categories, and the Brown theorem permits the separated finite-type schemes in the statement.",
+   "uses": [
+    "lem-pur-etale-system-brown-construction",
+    "lem-pur-etale-system-coefficient-projection",
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+   }
+  },
+  {
+   "text": "Fix $m\\ge n$ and an object $K$ at coefficient level $m$. Both sides of the claimed truncation equation have source $L_n^YF_nT^X_{m,n}K$ and target $FL_m^XK$. Compare their adjuncts under $L_n^Y\\dashv e_n$, rather than compare all evaluations. For the left side, $e_na_{n,TK}=1$, and the explicit truncation formula gives $e_n\\sigma^X_{m,n,K}=1_{T^X_{m,n}K}$; the canonical natural evaluation comparison for $F$ therefore makes its adjunct $1_{F_nT^X_{m,n}K}$. For the right side, $e_nL_n^Y(q_{m,n,K}^{-1})=q_{m,n,K}^{-1}$, $e_n\\sigma^Y_{m,n,F_mK}=1$, and Step 1 gives $e_na_{m,K}=q_{m,n,K}$. Its adjunct is $q_{m,n,K}\\circ q_{m,n,K}^{-1}=1$. Injectivity of this single Hom adjunction proves the equation as an equality of actual derived-system maps. The calculation is natural in $K$.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-etale-system-brown-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+   }
+  },
+  {
+   "text": "Use the evaluation-bound theorem with the given adjunction $F\\dashv G$, the given finite adjunctions $F_n\\dashv G_n$, and $t=\\varpi$. Its hypotheses are precisely the canonical evaluation and left-extension comparisons supplied by the Brown theorem. Step 1 identified that left-extension comparison with the transpose-defined $a_n$. The theorem's representing bijection is therefore exactly the composite in the question: its middle arrow is precomposition by $a_n$, followed by $L_n^Y\\dashv e_n$. It gives the natural isomorphism $\\theta_n:e_nG\\cong G_ne_n$ and identifies the evaluated counit and unit with $\\epsilon_n$ and $\\eta_n$ under these particular identifications. No amplitude hypothesis is used: that hypothesis is needed only for the last, cohomological-bound clause of the cited theorem.",
+   "uses": [
+    "lem-pur-etale-system-evaluation-bound",
+    "lem-pur-etale-system-brown-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+   }
+  },
+  {
+   "text": "The transition clause of the same evaluation-bound theorem now applies under exactly these $\\theta_n$. It identifies the transition of the actual $GN$ with $G_n(t^N_{m,n})\\circ b_{m,n,N_m}$, where $b$ is the $F_n\\dashv G_n$ transpose of $T^Y_{m,n}\\epsilon_m\\circ q_{m,n,G_m}^{-1}$. By the specified mate convention, this transpose is\n$$G_n(T^Y_{m,n}\\epsilon_m)\\circ G_n(q_{m,n,G_m}^{-1})\\circ\\eta_{n,T^X_{m,n}G_m},$$\nwhich is the displayed formula. In particular this is the inherited transition of $G$, not a replacement transition assigned to its evaluated objects. The theorem states this transition identification on unbounded systems, including compatibility through three indices.",
+   "uses": [
+    "lem-pur-etale-system-evaluation-bound",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+   }
+  },
+  {
+   "text": "Let $G'$ and $G_n'$ be other chosen right adjoints. The unique-right-adjoint theorem gives the unique counit-compatible isomorphisms $\\gamma:G\\cong G'$ and $\\gamma_n:G_n\\cong G_n'$, characterized by $\\epsilon'F(\\gamma)=\\epsilon$ and $\\epsilon_n'F_n(\\gamma_n)=\\epsilon_n$. Under the representing Hom bijections of Step 3, these counit equations identify the two maps on every Hom set, so $\\theta_n'e_n\\gamma=\\gamma_ne_n\\,\\theta_n$. The mate convention characterizes $b$ as the unique transpose of its counit composite. Substituting the same counit equations in that composite therefore gives $b'\\,T^X\\gamma_m=\\gamma_nT^Y\\,b$. The transition formula of Step 4 is consequently preserved by these isomorphisms, and its unit identification is preserved too, since the unit is the transpose of the identity. This proves independence under the stipulated unique counit-compatible changes.",
+   "uses": [
+    "det-sp-unique-right-adjoint",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+    "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6. Agent-formulated ordinary-system refinement; argument allocation and the complete retained argument are in the worker report."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-system-brown-construction",
+  "lem-pur-etale-system-coefficient-projection",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-etale-system-evaluation-bound",
+  "def-weil-pbc-adjunction-mate",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-system-level-left-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-coef-integral-exceptional-adjoint.proof.md",
+  "place": "Second and final proof paragraphs, refined by ordinary-system adjunctions; Zheng Construction 4.1 and Lemmas 5.16 and 5.22 supply the literature route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived left adjoints of level evaluation commute with compact support on coefficient systems and these comparisons intertwine truncation sigma maps and exceptional reduction mates",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.Adjunction.derivedε_fac_app",
+      "module": "Mathlib/CategoryTheory/Functor/Derived/Adjunction",
+      "type": "∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {",
+      "doc": "For any object $X_2$ in category $\\mathcal{C}_2$, the composition of $G'$ applied to $\\beta_{X_2}$ with the derived counit $\\varepsilon'$ evaluated at $L_2(X_2)$ equals the composition of $\\alpha_{F(X"
+     },
+     {
+      "name": "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+      "module": "Mathlib/CategoryTheory/Functor/Derived/Adjunction",
+      "type": "∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {",
+      "doc": "Given categories $\\mathcal{C}_1, \\mathcal{C}_2, \\mathcal{D}_1, \\mathcal{D}_2$ and functors $G, F$ forming an adjunction $G \\dashv F$, with localizations $L_1, L_2$ respecting a morphism property $W_2$"
+     },
+     {
+      "name": "CompHausLike.LocallyConstant.adjunction_left_triangle",
+      "module": "Mathlib/Condensed/Discrete/LocallyConstant",
+      "type": "∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\n  (hs :\n    ∀ ⦃X Y : CompHausLike P",
+      "doc": "The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\text{functorToPresheaves.ma"
+     },
+     {
+      "name": "LightCondMod.LocallyConstant.adjunction",
+      "module": "Mathlib/Condensed/Discrete/Module",
+      "type": "(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)",
+      "doc": "For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using"
+     },
+     {
+      "name": "CondensedMod.LocallyConstant.adjunction",
+      "module": "Mathlib/Condensed/Discrete/Module",
+      "type": "(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)",
+      "doc": "For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig"
+     },
+     {
+      "name": "CategoryTheory.Adjunction.derived'_counit",
+      "module": "Mathlib/CategoryTheory/Functor/Derived/Adjunction",
+      "type": "∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {",
+      "doc": "Given categories $\\mathcal{C}_1, \\mathcal{C}_2, \\mathcal{D}_1, \\mathcal{D}_2$ with an adjunction $G \\dashv F$ between $\\mathcal{C}_1$ and $\\mathcal{C}_2$, and localization functors $L_1: \\mathcal{C}_1"
+     },
+     {
+      "name": "CategoryTheory.Adjunction.derivedη_fac_app",
+      "module": "Mathlib/CategoryTheory/Functor/Derived/Adjunction",
+      "type": "∀ {C₁ : Type u_1} {C₂ : Type u_2} {D₁ : Type u_3} {D₂ : Type u_4} [inst : CategoryTheory.Category.{v_1, u_1} C₁]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁]\n  [inst_3 : CategoryTheory.Category.{v_4, u_4} D₂] {G : CategoryTheory.Functor C₁ C₂} {",
+      "doc": "For any object $X_1$ in category $\\mathcal{C}_1$, the composition of the derived unit transformation $\\eta'$ evaluated at $L_1(X_1)$ followed by $F'$ applied to $\\alpha_{X_1}$ equals the composition o"
+     },
+     {
+      "name": "CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction",
+      "module": "Mathlib/Condensed/TopCatAdjunction",
+      "type": "CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit",
+      "doc": "The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: evaluationLeftAdjoint and mateEquiv are ingredients; they do not state the free-insertion compact-support isomorphism, its sigma equation or its counit-normalized exceptional transition formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free insertion of a single coefficient level into strict derived towers commutes with compactly supported direct image coherently under quotient maps",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "IsAdicComplete.StrictMono.factorPow_comp_extend",
+      "module": "Mathlib/RingTheory/AdicCompletion/Basic",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (",
+      "doc": "For natural numbers $ m \\leq n $, the composition of the factor map $ M/I^nM \\to M/I^mM $ with the extension of a linear map $ f $ at level $ n $ equals the extension of $ f $ at level $ m $. This est"
+     },
+     {
+      "name": "Profinite.NobelingProof.CC_exact",
+      "module": "Mathlib/Topology/Category/Profinite/Nobeling/Successor",
+      "type": "∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\n  IsClosed C →\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\n      {f : LocallyConstant ↑C ℤ},\n      (Profinite.NobelingProof.Linea",
+      "doc": "In Nobeling's profinite construction, for any locally constant $\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\text{Linear}_{C\\to C'}(f) = 0$ (where $\\text{Linear}_{C\\to C'}$ denotes the $\\mathbb"
+     },
+     {
+      "name": "IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq",
+      "module": "Mathlib/RingTheory/AdicCompletion/Basic",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\n  (∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f (",
+      "doc": "For natural numbers $m \\leq n$, the composition of the canonical factor map $M/I^nM \\to M/I^mM$ (induced by $I^nM \\subseteq I^mM$) with the linear map $f_n$ equals the linear map $f_m$, where $I$ is a"
+     },
+     {
+      "name": "Profinite.NobelingProof.GoodProducts.square_commutes",
+      "module": "Mathlib/Topology/Category/Profinite/Nobeling/Successor",
+      "type": "∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.",
+      "doc": "The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No"
+     },
+     {
+      "name": "Profinite.NobelingProof.CC_comp_zero",
+      "module": "Mathlib/Topology/Category/Profinite/Nobeling/Successor",
+      "type": "∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\n  (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\n  (y : LocallyConstant ↑(Profinite.NobelingProof.π C fun x => Profinite.NobelingProof.ord ",
+      "doc": "The ℤ-linear map from the space of locally constant ℤ-valued functions on $ C $ to the space of locally constant ℤ-valued functions on $ C' $, defined as the difference between the ℤ-linear map induce"
+     },
+     {
+      "name": "IsAdicComplete.StrictMono.mkQ_comp_lift",
+      "module": "Mathlib/RingTheory/AdicCompletion/Basic",
+      "type": "∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.factorPow I N ⋯ ∘ₗ f",
+      "doc": "Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $, a strictly monotonic sequence $ a : \\mathbb{N} \\to \\mathbb{N} $, and a compatible family of $ R $-linear maps $ f_n : M \\"
+     },
+     {
+      "name": "DiscreteQuotient.map_comp_ofLE",
+      "module": "Mathlib/Topology/DiscreteQuotient",
+      "type": "∀ {X : Type u_2} {Y : Type u_3} [inst : TopologicalSpace X] [inst_1 : TopologicalSpace Y] {f : C(X, Y)}\n  {A A' : DiscreteQuotient X} {B : DiscreteQuotient Y} (cond : DiscreteQuotient.LEComap f A B) (h : A' ≤ A),\n  DiscreteQuotient.map f cond ∘ DiscreteQuotient.ofLE h = DiscreteQuotient.map f ⋯",
+      "doc": "If $A' \\leq A$ is a coarser discrete quotient of $X$ and $B \\leq B'$ is a coarser discrete quotient of $Y$, then $A'$ is coarser than the pullback discrete quotient of $B'$ along the continuous map $f"
+     },
+     {
+      "name": "Profinite.NobelingProof.GoodProducts.smaller_factorization",
+      "module": "Mathlib/Topology/Category/Profinite/Nobeling/ZeroLimit",
+      "type": "∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] (o : Ordinal.{u}),\n  (fun p => ↑p) ∘ (Profinite.NobelingProof.GoodProducts.range_equiv_smaller C o).toFun =\n    ⇑(Profinite.NobelingProof.πs C o) ∘ fun p => ↑p",
+      "doc": "The theorem establishes a bijection between the image of the Nobeling projection restricted to ordinal level $ o $ and the set of locally constant $ \\mathbb{Z} $-valued functions on $ C $ whose values"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: evaluationLeftAdjoint and mateEquiv are ingredients; they do not state the free-insertion compact-support isomorphism, its sigma equation or its counit-normalized exceptional transition formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived left adjoints of level evaluation commute with compact support on coefficient systems and these comparisons intertwine truncation sigma maps and exceptional reduction mates",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.evaluationLeftAdjoint",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": "(c : C) : D ⥤ C ⥤ D",
+      "doc": "For a fixed object $c$ in category $\\mathcal{C}$, this constructs a left adjoint to the evaluation functor at $c$. It maps an object $d$ in $\\mathcal{D}$ to the coproduct $\\coprod_{f:c\\to t} d$ indexe"
+     },
+     {
+      "name": "CategoryTheory.evaluationIsLeftAdjoint",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": "(c : C) : ((evaluation _ D).obj c).IsLeftAdjoint",
+      "doc": "For any object $ c $ in a category $ \\mathcal{C} $, the evaluation functor at $ c $ (which maps a functor $ F : \\mathcal{C} \\to \\mathcal{D} $ to its value $ F(c) $) is a left adjoint functor in the fu"
+     },
+     {
+      "name": "CategoryTheory.evaluationAdjunctionRight",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": "(c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c",
+      "doc": "For a fixed object $c$ in category $\\mathcal{C}$, if category $\\mathcal{D}$ admits coproducts indexed by every hom-set $\\mathrm{Hom}_{\\mathcal{C}}(c, t)$ for objects $t \\in \\mathcal{C}$, then the eval"
+     },
+     {
+      "name": "CategoryTheory.Adjunction.derived",
+      "module": "Mathlib.CategoryTheory.Functor.Derived.Adjunction",
+      "type": "[G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\n  [(G' ⋙ F').IsLeftDerivedFunctor ((Functor.associator _ _ _).inv ≫ whiskerRight α F') W₁]\n  [(F' ⋙ G').IsRightDerivedFunctor (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂] : G' ⊣ F'",
+      "doc": "Given categories $\\mathcal{C}_1, \\mathcal{C}_2, \\mathcal{D}_1, \\mathcal{D}_2$ with an adjunction $G \\dashv F$ between $\\mathcal{C}_1$ and $\\mathcal{C}_2$, and localization functors $L_1: \\mathcal{C}_1"
+     },
+     {
+      "name": "CategoryTheory.evaluationLeftAdjoint_obj_map",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) (d : D) {X Y : C} (f : X ⟶ Y),\n  ((CategoryTheory.evaluationLeftAdjoint D c).obj d).map f =\n ",
+      "doc": "For a fixed object $c$ in category $\\mathcal{C}$, the left adjoint to the evaluation functor at $c$ maps a morphism $f: X \\to Y$ in $\\mathcal{C}$ to the morphism constructed by composing each morphism"
+     },
+     {
+      "name": "CategoryTheory.Adjunction.derived'",
+      "module": "Mathlib.CategoryTheory.Functor.Derived.Adjunction",
+      "type": "{C₁ : Type u_1} →\n  {C₂ : Type u_2} →\n    {D₁ : Type u_3} →\n      {D₂ : Type u_4} →\n        [inst : CategoryTheory.Category.{v_1, u_1} C₁] →\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} C₂] →\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} D₁] →\n              [inst_3 : CategoryThe",
+      "doc": "Given categories $\\mathcal{C}_1, \\mathcal{C}_2, \\mathcal{D}_1, \\mathcal{D}_2$ with an adjunction $G \\dashv F$ between $\\mathcal{C}_1$ and $\\mathcal{C}_2$, and localization functors $L_1: \\mathcal{C}_1"
+     },
+     {
+      "name": "CategoryTheory.evaluationLeftAdjoint_map_app",
+      "module": "Mathlib.CategoryTheory.Adjunction.Evaluation",
+      "type": "∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] (D : Type u₂) [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  [inst_2 : ∀ (a b : C), CategoryTheory.Limits.HasCoproductsOfShape (a ⟶ b) D] (c : C) {x d₂ : D} (f : x ⟶ d₂)\n  (x_1 : C),\n  ((CategoryTheory.evaluationLeftAdjoint D c).map f).app",
+      "doc": "For any morphism $ f : x \to d_2 $ in $ \\mathcal{D} $, the application of the left adjoint to the evaluation functor at object $ c $ maps $ f $ to a natural transformation whose component at $ x_1 $ is"
+     },
+     {
+      "name": "Condensed.discreteUnderlyingAdj",
+      "module": "Mathlib.Condensed.Discrete.Basic",
+      "type": ": discrete C ⊣ underlying C",
+      "doc": "The discrete functor $\\text{discrete}_C$, which embeds a category $C$ into condensed objects via constant sheaves, is left adjoint to the underlying functor $\\text{underlying}_C$, which extracts the v"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: evaluationLeftAdjoint and mateEquiv are ingredients; they do not state the free-insertion compact-support isomorphism, its sigma equation or its counit-normalized exceptional transition formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": {
+    "summary": "[loogle] OK 12 hit(s)",
+    "hits": [
+     {
+      "name": "CategoryTheory.mateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "Suppose we have a square of functors (where the top and bottom are adjunctions `L₁ ⊣ R₁`\nand `L₂ ⊣ R₂` respectively).\n\n```\n      C ↔ D\n    G ↓   ↓ H\n      E ↔ F\n```\n\nThen we have a bijection between n"
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_counit",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_counit_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the inverse mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.unit_mateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.unit_mateEquiv_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": "A component of a transposed version of the inverse mates correspondence."
+     },
+     {
+      "name": "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor ",
+      "doc": "The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor ",
+      "doc": "The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_vcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, ",
+      "doc": "The mates equivalence commutes with vertical composition."
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_hcomp",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, ",
+      "doc": "The mates equivalence commutes with horizontal composition of squares."
+     },
+     {
+      "name": "CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo",
+      "doc": "When all four functors in a square are left adjoints, the mates operation can be iterated:\n\n```\n         L₁                  R₁                  R₁\n      C --→ D             C ←-- D             C ←-- "
+     },
+     {
+      "name": "CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo",
+      "doc": ""
+     },
+     {
+      "name": "CategoryTheory.mateEquiv_apply",
+      "module": "Mathlib.CategoryTheory.Adjunction.Mates",
+      "type": " {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor ",
+      "doc": ""
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: evaluationLeftAdjoint and mateEquiv are ingredients; they do not state the free-insertion compact-support isomorphism, its sigma equation or its counit-normalized exceptional transition formula."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationLeftAdjoint|mateEquiv|freeInsertion",
+   "results": {
+    "summary": "[grep] OK 23 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "119",
+      "text": "section mateEquiv"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "148",
+      "text": "def mateEquiv : (g ≫ l₂ ⟶ l₁ ≫ h) ≃ (r₁ ≫ g ⟶ h ≫ r₂) :="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "151",
+      "text": "lemma mateEquiv_eq_iff (α : g ≫ l₂ ⟶ l₁ ≫ h) (β : r₁ ≫ g ⟶ h ≫ r₂) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "152",
+      "text": "    mateEquiv adj₁ adj₂ α = β ↔"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "line": "155",
+      "text": "  rw [mateEquiv_apply, Equiv.symm_apply_apply]"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "94",
+      "text": "lemma toNatTrans_mateEquiv {C D E F : Cat}"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "98",
+      "text": "    (Bicategory.mateEquiv adj₁ adj₂ f).toNatTrans ="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "99",
+      "text": "      CategoryTheory.mateEquiv (Adjunction.ofCat adj₁) (Adjunction.ofCat adj₂) f.toNatTrans := by"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "101",
+      "text": "  simp [mateEquiv, Adjunction.homEquiv₁, Adjunction.homEquiv₂]"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+      "line": "112",
+      "text": "  rw [toNatTrans_mateEquiv]"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+      "line": "38",
+      "text": "def evaluationLeftAdjoint (c : C) : D ⥤ C ⥤ D where"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+      "line": "54",
+      "text": "def evaluationAdjunctionRight (c : C) : evaluationLeftAdjoint D c ⊣ (evaluation _ _).obj c :="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Evaluation.lean",
+      "line": "65",
+      "text": "              evaluationLeftAdjoint_obj_map, colimit.ι_desc_assoc,"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "53",
+      "text": "section mateEquiv"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "84",
+      "text": "def mateEquiv : TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂ where"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "123",
+      "text": "theorem mateEquiv_counit (α : TwoSquare G L₁ L₂ H) (d : D) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "124",
+      "text": "    L₂.map ((mateEquiv adj₁ adj₂ α).app _) ≫ adj₂.counit.app _ ="
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+      "line": "128",
+      "text": "theorem mateEquiv_counit_symm (α : TwoSquare R₁ H G R₂) (d : D) :"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+      "line": "82",
+      "text": "  mateEquiv (ihom.adjunction A) (ihom.adjunction (F.obj A)) (prodComparisonNatIso F A).inv"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+      "line": "88",
+      "text": "  convert! mateEquiv_counit _ _ (prodComparisonNatIso F A).inv B using 2"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+      "line": "97",
+      "text": "  convert! unit_mateEquiv _ _ (prodComparisonNatIso F A).inv B using 3"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+      "line": "112",
+      "text": "  have vcomp1 := mateEquiv_conjugateEquiv_vcomp"
+     },
+     {
+      "file": "Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean",
+      "line": "115",
+      "text": "  have vcomp2 := conjugateEquiv_mateEquiv_vcomp"
+     }
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: evaluationLeftAdjoint and mateEquiv are ingredients; they do not state the free-insertion compact-support isomorphism, its sigma equation or its counit-normalized exceptional transition formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free insertion at one coefficient level commutes with derived compact support and its truncation maps identify transitions of the right adjoint",
+   "results": {
+    "summary": "8 hits",
+    "top": [
+     "ContDiffMapSupportedIn.structureMapLM_eq",
+     "TestFunction.coe_ofSupportedInCLM",
+     "TestFunction.coe_ofSupportedInLM",
+     "ContDiffMapSupportedIn.structureMapLM_apply_withOrder",
+     "ContDiffMapSupportedIn.structureMapCLM_apply_withOrder",
+     "ContDiffMapSupportedIn.structureMapLM",
+     "TestFunction.ofSupportedInCLM",
+     "ContDiffMapSupportedIn.iteratedFDerivWithOrderLM"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and the general mate correspondence do not state the unbounded varying-coefficient compact-support/free-insertion comparison with its truncation and exceptional-transition equations."
+  },
+  {
+   "tool": "grep",
+   "query": "evaluationLeftAdjoint|mateEquiv|freeInsertion",
+   "results": {
+    "summary": "23 hits",
+    "top": [
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean",
+     "Mathlib/CategoryTheory/Bicategory/Adjunction/Cat.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and the general mate correspondence do not state the unbounded varying-coefficient compact-support/free-insertion comparison with its truncation and exceptional-transition equations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support commutes with free insertion in coefficient systems and determines right adjoint quotient transitions",
+   "results": {
+    "summary": "8 hits",
+    "top": [
+     "HasCompactSupport.deriv",
+     "HasCompactSupport.comp_isClosedEmbedding",
+     "HasCompactSupport.fderiv",
+     "TestFunction.coe_ofSupportedIn",
+     "CompactlySupported.term_→C_c_",
+     "DFinsupp.comul_comp_lsingle",
+     "TestFunction.coe_ofSupportedInCLM",
+     "Condensed.free"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and the general mate correspondence do not state the unbounded varying-coefficient compact-support/free-insertion comparison with its truncation and exceptional-transition equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": {
+    "summary": "12 hits",
+    "top": [
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.unit_mateEquiv",
+     "CategoryTheory.unit_mateEquiv_symm",
+     "CategoryTheory.conjugateEquiv_mateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_conjugateEquiv_vcomp",
+     "CategoryTheory.mateEquiv_vcomp"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and the general mate correspondence do not state the unbounded varying-coefficient compact-support/free-insertion comparison with its truncation and exceptional-transition equations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at a coefficient level has a derived left adjoint compatible with proper direct image and extension by zero",
+   "results": {
+    "summary": "8 hits",
+    "top": [
+     "CondensedMod.LocallyConstant.adjunction",
+     "LightCondensed.freeForgetAdjunction",
+     "Condensed.freeForgetAdjunction",
+     "LightCondMod.LocallyConstant.adjunction",
+     "Condensed.setAbAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+     "CategoryTheory.evaluationAdjunctionRight",
+     "LightCondSet.LocallyConstant.adjunction"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "No match: ordinary functor-category evaluation and the general mate correspondence do not state the unbounded varying-coefficient compact-support/free-insertion comparison with its truncation and exceptional-transition equations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-cartesian-section-adjoint-mates",
+  "date": "2026-10-22",
+  "group": "NF"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-exceptional-adjoint",
+   "place": "Second proof paragraph, middle finite adjunction and final paragraph, units and counits: free-insertion and quotient-mate identification; returned steps 4-6.",
+   "via": [
+    "lem-coef-cartesian-section-adjoint-mates",
+    "lem-coef-finite-adjunction-diagram-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-coef-free-insertion-compact-support-coherence",
+  "worker": "stage1",
+  "summary": "Reused the existing unbounded Brown/free-insertion comparison and evaluation/transition theorem. Identified the prescribed transpose by its single-level adjunct and proved the sigma equation by that Hom bijection. Retained the statement unchanged; no new nodes or Lean changes.",
+  "blueprint": "Second paragraph of prop-coef-integral-exceptional-adjoint.proof.md: finite adjunction in the Hom calculation; final paragraph: finite units, counits and transition compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-system-brown-construction",
+    "why": "Generic unbounded strict-system compact-support/free-insertion comparison; no biduality assertion is used."
+   },
+   {
+    "node": "lem-pur-etale-system-coefficient-projection",
+    "why": "Generic coefficient-projection identity normalization for the identity ring map."
+   },
+   {
+    "node": "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "why": "Generic derived evaluation/free-insertion adjunction and explicit truncation components."
+   },
+   {
+    "node": "lem-pur-etale-system-evaluation-bound",
+    "why": "Generic unbounded representing Hom bijections and actual right-adjoint transition formula; no constructibility or biduality is used."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Generic derived left extension along level evaluation, used only to identify the Brown theorem's L_n with derived free insertion; no biduality assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-system-brown-construction",
+  "lem-pur-etale-system-coefficient-projection",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-etale-system-evaluation-bound",
+  "lem-pur-system-level-left-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-ad9a9ce22",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-ad9a9ce22 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery has no new nodes; the statement and stmt_deps are identical to the live node, which is still unsplit. There is no re-split note and no cycle. Sources read: the blueprint prop-coef-integral-exceptional-adjoint proof (second and final paragraphs) and Zheng 1006.3810 Construction 4.1, (5.16.2) and Lemma 5.22. Zheng is the route the item formalizes; proof_origin=agent is right because the blueprint only treats the bounded integral case. Step 1: Brown gives level maps q^{-1}, so the inverse c_n has components q_{n,r}, and the directions match the item. The identity-ring clause gives q_{n,n}=1, so the adjunct of c_n is 1 and c_n=a_n. Step 2: types checked; the adjuncts of both sides are F_n(e_n sigma)=1 and q q^{-1}=1, and injectivity of the single Hom bijection finishes it, so elementary is justified. Steps 3-4: evaluation-bound accepts arbitrary F_A -| G_A and finite adjunctions, its amplitude hypothesis is used only in its last clause, and its b is the transpose of T eps_m o q^{-1}, which matches the item's three-factor formula and the mate convention. Step 5: I checked theta' e_n gamma = gamma_n e_n theta and b' T gamma_m = gamma_n b by hand, so elementary is justified. Edge cases m=n, r>n, empty X and zero input are consistent. The only near-duplicate is lem-per-finite-exceptional-system-adjunction, which is the bounded ctf analogue in another unit, so not a duplicate. FIX (C3/C4): Step 1 used Brown's L_n (from lem-pur-system-level-left-extension) as if it were the item's LE_n (from lem-pur-coefficient-evaluation-derived-left-adjoint) without saying so. The corrected item JSON identifies them through the unique unit-compatible isomorphism of left adjoints (same derived free insertion, same evaluation formulas), makes the unit x->x(x)1 explicit, and adds lem-pur-system-level-left-extension to uses and proof_deps plus a tool_uses entry. Statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FreeInsertionCompactSupportCoherence",
+  "declaration": "AlgebraicGeometry.freeInsertionCompactSupportCoherence",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleFreeInsertion",
+   "AlgebraicGeometry.strictEtaleRightEvaluationMate",
+   "AlgebraicGeometry.strictEtaleQuotientMate",
+   "AlgebraicGeometry.strictEtaleAdjointTransition",
+   "AlgebraicGeometry.freeInsertionCompactSupportCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/FreeInsertionCompactSupportCoherence.lean",
+  "statement": "theorem freeInsertionCompactSupportCoherence (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) c) (H : StrictEtaleExceptionalAdjoint _ _ c S) (G : DerivedCategory (strictEtaleCoefficientSystem Y (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E)) ⥤ DerivedCategory (strictEtaleCoefficientSystem X (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E))) (adj : S.functor ⊣ G) (Gn : ∀ n : ℕ, DerivedCategory (strictEtaleLevel Y (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) n) ⥤ DerivedCategory (strictEtaleLevel X (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) n)) (adjN : ∀ n : ℕ, S.levelFunctor n ⊣ Gn n) : (∀ n : ℕ, IsIso (strictEtaleFreeInsertion S n)) ∧ (∀ (n r : ℕ) (h : r ≤ n) K, (S.PY.evaluation r).map ((strictEtaleFreeInsertion S n).app K) ≫ (S.evaluation r).hom.app ((S.PX.derivedExtension n).obj K) ≫ (S.levelFunctor r).map ((S.PX.derivedBelow h).hom.app K) = (S.PY.derivedBelow h).hom.app ((S.levelFunctor n).obj K) ≫ (H.val.quotientProjection h).inv.app K) ∧ (∀ (m n : ℕ) (h : n ≤ m) K, (strictEtaleFreeInsertion S n).app ((S.PX.scalar h).derived.obj K) ≫ S.functor.map ((S.PX.sigma h).app K) = (S.PY.derivedExtension n).map ((H.val.quotientProjection h).hom.app K) ≫ (S.PY.sigma h).app ((S.levelFunctor m).obj K) ≫ (strictEtaleFreeInsertion S m).app K) ∧ (∀ n : ℕ, IsIso (strictEtaleRightEvaluationMate adj adjN n)) ∧ (∀ (n : ℕ) K N (h : K ⟶ (S.PX.evaluation n).obj (G.obj N)), (S.PY.derivedAdj n).homEquiv _ _ ((strictEtaleFreeInsertion S n).app K ≫ (adj.homEquiv _ _).symm (((S.PX.derivedAdj n).homEquiv _ _).symm h)) = ((adjN n).homEquiv _ _).symm (h ≫ (strictEtaleRightEvaluationMate adj adjN n).app N)) ∧ (∀ (n : ℕ) M, (S.PX.evaluation n).map (adj.unit.app M) ≫ (strictEtaleRightEvaluationMate adj adjN n).app (S.functor.obj M) ≫ (Gn n).map ((S.evaluation n).hom.app M) = (adjN n).unit.app ((S.PX.evaluation n).obj M)) ∧ (∀ (n : ℕ) N, (S.levelFunctor n).map ((strictEtaleRightEvaluationMate adj adjN n).app N) ≫ (adjN n).counit.app ((S.PY.evaluation n).obj N) = (S.evaluation n).inv.app (G.obj N) ≫ (S.PY.evaluation n).map (adj.counit.app N)) ∧ (∀ (m n : ℕ) (h : n ≤ m) M, (strictEtaleQuotientMate H adjN h).app M = (adjN n).unit.app ((S.PX.scalar h).derived.obj ((Gn m).obj M)) ≫ (Gn n).map ((H.val.quotientProjection h).hom.app ((Gn m).obj M)) ≫ (Gn n).map ((S.PY.scalar h).derived.map ((adjN m).counit.app M))) ∧ (∀ (m n : ℕ) (h : n ≤ m) N, strictEtaleAdjointTransition S.PX h (G.obj N) ≫ (strictEtaleRightEvaluationMate adj adjN n).app N = (S.PX.scalar h).derived.map ((strictEtaleRightEvaluationMate adj adjN m).app N) ≫ (strictEtaleQuotientMate H adjN h).app ((S.PY.evaluation m).obj N) ≫ (Gn n).map (strictEtaleAdjointTransition S.PY h N)) ∧ (∀ (G' : DerivedCategory (strictEtaleCoefficientSystem Y (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E)) ⥤ DerivedCategory (strictEtaleCoefficientSystem X (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E))) (adj' : S.functor ⊣ G') (Gn' : ∀ n : ℕ, DerivedCategory (strictEtaleLevel Y (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) n) ⥤ DerivedCategory (strictEtaleLevel X (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) n)) (adjN' : ∀ n : ℕ, S.levelFunctor n ⊣ Gn' n), (∀ (n : ℕ) N, (S.PX.evaluation n).map ((adj.rightAdjointUniq adj').hom.app N) ≫ (strictEtaleRightEvaluationMate adj' adjN' n).app N = (strictEtaleRightEvaluationMate adj adjN n).app N ≫ ((adjN n).rightAdjointUniq (adjN' n)).hom.app ((S.PY.evaluation n).obj N)) ∧ (∀ (m n : ℕ) (h : n ≤ m) M, (S.PX.scalar h).derived.map (((adjN m).rightAdjointUniq (adjN' m)).hom.app M) ≫ (strictEtaleQuotientMate H adjN' h).app M = (strictEtaleQuotientMate H adjN h).app M ≫ ((adjN n).rightAdjointUniq (adjN' n)).hom.app ((S.PY.scalar h).derived.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Q83",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the strict ordinary unbounded system categories and the canonical compact-support quotient projection from the recorded etale adjoint construction. The theorem permits independent arbitrary choices of system and level right adjoints. All comparison maps are actual adjunction mates, and the conclusion identifies their representing Hom bijections, units, counits, transitions and transport under unique right-adjoint changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-191f4bd5d",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Only the lean field changed; the live node has no lean (status split); lean.statement matches the file exactly; one sorry, on the theorem; the 4 helper defs are real mateEquiv mates or a homEquiv adjunct with source/blueprint docstrings. Hypotheses match the node, including separated X and Y; Lean level n is paper level n+1. q = H.val.quotientProjection.inv, which H's coherence (quotientOpen/quotientProper mates with S's derivedTensor, plus quotientProjection_def) determines from S alone; G, Gn and their adjunctions are arbitrary and independent of H. All 10 clauses checked by type and composition order: a_n is the inverse mate of ev^-1 (transpose = 1); e_r a_n = q_{n,r}; the sigma equation; theta is the mate of ev^-1 and is iso; the Hom-bijection clause, checked by hand to follow from the counit clause; unit and counit; b = eta . G_n(q^-1) . G_n(T eps); t^{GN} = G_n(t^N) b; invariance under rightAdjointUniq. For H's own adjoints theta and b equal H.evaluation and H.quotientComparison, so the transition clause is the dependency's. Edge cases m=n, n=0, empty X, unbounded inputs and universes are fine. No duplicates; brown-construction and evaluation-bound have no Lean. No compile, no files changed. Advisory: q could be built from S alone."
+ }
+}

@@ -1,0 +1,412 @@
+{
+ "id": "lem-sfb-solvable-homogeneous-proper-subschemes",
+ "kind": "statement",
+ "title": "Proper subschemes of solvable homogeneous quotients have dimension zero",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine group scheme of finite type over $k$ [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism], and suppose $G$ is solvable, meaning that the iterated scheme-theoretic commutator subgroups eventually equal the trivial subgroup. Let $K\\subseteq G$ be any closed subgroup scheme [def-sc-group-scheme-subgroup], with no smoothness or connectedness assumption on $K$. Let $Q$ be a separated finite-type $k$-scheme and $q:G\\to Q$ a faithfully flat morphism (flat and surjective), invariant under right multiplication by $K$, for which\n$$G\\times_k K\\longrightarrow G\\times_QG,\\qquad (g,b)\\longmapsto(g,gb)$$\nis an isomorphism of schemes. Morphism properties and fibre products are as in [def-pc-morphism-conventions, def-pc-fibre-product]. Thus these are explicit quotient data for $G/K$. Every nonempty closed $k$-subscheme $Z\\subseteq Q$ that is proper over $k$ has topological Krull dimension $0$ [def-kun-topological-krull-dimension]. In particular, if $Q$ itself is proper over $k$, then $K=G$ as closed subgroup schemes.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.1, printed p.352 (PDF page 364), including its final assertion H=G when G/H is complete; quotient data as in Propositions 5.24--5.25 and 7.11, printed pp.104--105 and 141--142. No smoothness assumption on the subgroup."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-pc-morphism-conventions",
+  "def-pc-fibre-product",
+  "def-kun-topological-krull-dimension",
+  "def-sfb-semisimple-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "First identify the given $Q$ with the canonical $G/K$. Both maps out of $G$ are quasi-compact: apply finite-type cancellation to their separated finite-type targets over $k$. On the fpqc cover $G\\to Q$, the canonical map $G\\to G/K$ has equal pullbacks to $G\\times_QG=G\\times K$, by its right-$K$ invariance, hence descends uniquely to $Q\\to G/K$. In the other direction descend $q$ along $G\\to G/K$, using its kernel pair $G\\times K$. The composites become identities after these covers, hence are identities by uniqueness of descent. These isomorphisms respect the quotient maps. Base change preserves this fpqc cover, so the same descent applies over $G\\times(G/K)$. Left multiplication defines the action on $G/K$: locally $a\\cdot(gK)=(ag)K$, and changing $g$ to $gb$ changes $ag$ to $agb$, so the local maps glue. The same formula verifies the action identities and the stabilizer at $eK$ is precisely $K$, on every test scheme.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-galois-fpqc-covering-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Propositions 5.21, 5.24--5.25 and 7.11, printed pp.104--105, 141--142; fpqc gluing: Stacks descent.tex Tag 023Q"
+   }
+  },
+  {
+   "text": "The orbit-quotient statement identifies the reduced orbit of $eK$ with $G/K$, since its scheme-theoretic stabilizer is $K$. Combined with Step 1 this identifies $Q$ with that reduced orbit. The smooth-orbit statement therefore makes $Q$ smooth and reduced; the identity-component statement makes $G$ irreducible, so its surjective image $Q$ is irreducible and nonempty. Thus $Q$ is integral. We will prove the first assertion by strong induction on the nonnegative integer $d=\\dim G$, simultaneously for every smooth connected solvable affine group of that dimension and every closed subgroup, including nonreduced or disconnected ones. The group-dimension statement supplies finiteness and nonnegativity. For $d=0$, $G$ is integral by the identity-component statement, hence is $\\operatorname{Spec}k$ by the zero-dimensional integral-point theorem. Its only subgroup is itself: a closed subgroup has coordinate ring $k/I$ and its identity section forces $I=0$. Its quotient is a point, so every nonempty closed subscheme of the quotient has dimension zero.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-smooth-group-orbit-geometry",
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "lem-sfb-solvable-normal-subgroup-products",
+    "lem-weil-pbc-zero-dim-integral-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1, induction setup, printed p.352; group identity component: Stacks groupoids.tex Tag 0B7R; zero dimension: varieties.tex Tag 06LH"
+   }
+  },
+  {
+   "text": "Fix $d>0$ and assume the assertion already proved in every smaller group dimension, for arbitrary closed subgroups. Put $H=(K^0)_{\\mathrm{red}}$. The nested-quotient lemma gives a smooth connected $H$ and a finite faithfully flat surjection $v:G/H\\to G/K$. If $Z\\subseteq G/K$ is nonempty closed and proper, then $W=Z\\times_{G/K}(G/H)$ is closed in $G/H$ by closed-immersion base change. The map $W\\to Z$ is finite and surjective, being the base change of the finite surjective $v$ (surjectivity is stable under base change), so $W$ is proper and nonempty and $\\dim W=\\dim Z$. Here properness follows from the finite-morphism permanence statement, and equality of dimensions from the finite-surjective dimension statement. It is enough to show $\\dim W=0$, with the same $G$ and with the now smooth connected subgroup $H$.",
+   "uses": [
+    "lem-sfb-nested-homogeneous-quotient-geometry",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sc-finite-surjective-dimension",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 opening reduction, supplemented by Remark 7.16(b), printed pp.352, 143; Stacks morphisms.tex Tags 01WL and 01JY, algebra.tex Tag 00OK"
+   }
+  },
+  {
+   "text": "Replace $W$ by $W_{\\mathrm{red}}$. The reduction is a closed immersion inducing a homeomorphism, so dimension is unchanged and properness follows from closed-immersion properness. The proper reduced global-functions statement gives finitely many open and closed connected components $C$ of $W_{\\mathrm{red}}$ and identifies their constant sections with $k$. Each such $C$ is reduced, nonempty, closed in $G/H$, and proper, with $\\Gamma(C,\\mathcal O_C)=k$. It suffices to show $\\dim C=0$ for every component: an irreducible subset of a finite disjoint open-and-closed union lies in one member, so every chain counted by dimension lies in a single component. No scheme-theoretic factorization of a nonreduced $W$ through a point is being asserted.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-reduced-algclosed-global-sections-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 reduction to connected Z, printed p.352; Stacks varieties.tex Tag 0BUG, lemma-proper-geometrically-reduced-global-sections (1)--(3), and morphisms.tex Tag 054M"
+   }
+  },
+  {
+   "text": "Let $D=D_G$. The derived-subgroup statement supplies a smooth connected affine normal closed subgroup of finite type. It is proper: write the solvable normal series as $G=G_0\\supseteq\\cdots\\supseteq G_m=1$ with commutative successive quotients. Inductively the $i$th derived subgroup lies in $G_i$, since its commutators die in $G_i/G_{i+1}$. Thus the derived series terminates. If $D=G$, every iterate instead equals $G$, forcing $G=1$, excluded by $d>0$. The strict dimension statement gives $\\dim D<d$. Subgroups of $G$ that are smooth and connected are solvable: their successive derived subgroups lie in the corresponding derived subgroups of $G$, because restricting the commutator morphism preserves this containment, and the smallest-closed-subgroup property then preserves it at every iteration. They therefore become trivial when the derived series of $G$ does. This applies both to $D$ and to the smooth connected subgroup constructed next.",
+   "uses": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 derived subgroup, printed p.352; Corollary 6.19, Proposition 6.27 and Proposition 6.30, printed pp.129--132"
+   }
+  },
+  {
+   "text": "Construct the product without assuming $H$ normal. Form $a:G\\to A=G/D$ by the affine normal-quotient statement. Factor $a|_H$ as the faithfully flat homomorphism $r:H\\to I$ followed by a closed immersion $I\\hookrightarrow A$. Its kernel is $L=D\\cap H$, so $I$ represents $H/L$. The subgroup $L$ is normal in $H$, since $D$ is normal in $G$. Apply the affine normal-quotient statement to $H/L$: it is smooth and connected, since $H$ is smooth and geometrically connected (over the algebraically closed $k$, connectedness is already geometric in the specified algebraic-closure test). Put $N=G\\times_A I$. The inverse-image clause of the same statement makes $N$ a smooth connected affine closed subgroup of finite type, since both $D$ and $I$ are smooth and connected. It contains $H$ and $D$. This uses the image factorization and the inverse-image clauses exactly, rather than invoking the normal-product lemma with a nonnormal $H$.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), product construction and Proposition 5.54, printed pp.111--112; Lemma 6.41, printed p.134"
+   }
+  },
+  {
+   "text": "Here $N=DH$ as fppf sheaves: a section $n$ of $N$ has $a(n)\\in I$; lift it locally through $r$ to $h\\in H$. Then $nh^{-1}\\in D$, giving $n=dh$. Conversely $dh$ maps into $I$. The group $A=G/D$ is commutative: lift two of its sections locally to $g_1,g_2\\in G$, whose commutator lies in $D$, and descend the resulting commutativity identity. Thus every subgroup $I$ of $A$ is normal, and the inverse-image normality clause makes $N$ normal in $G$. By the preceding derived-series containment, $N$ is solvable. If $N\\ne G$, its dimension is strictly less than $d$ by the strict dimension statement.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-algebraic-group-homomorphism-factorization",
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-solvable-normal-subgroup-products"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 5(f), product description, printed p.111; Theorem 17.1 contrary case, printed p.352"
+   }
+  },
+  {
+   "text": "If $N=G$, the map $D/(D\\cap H)\\to G/H$, $d(D\\cap H)\\mapsto dH$, is an isomorphism of schemes. Indeed $G=DH$ gives local surjectivity on the quotient sheaves. Two sections $d,d'$ have the same image precisely when $d^{-1}d'\\in H$; since both lie in $D$, this is precisely membership in $D\\cap H$. These local bijections and their inverses are compatible with pullback and glue by the sheaf property. Both sheaves are represented by the stated homogeneous-quotient schemes, so the natural maps are inverse scheme morphisms. The closed proper $C\\subseteq G/H$ becomes a closed proper subscheme of this quotient of $D$. The induction hypothesis for $D$, whose dimension is smaller, gives $\\dim C=0$. The subgroup $D\\cap H$ may be nonreduced or disconnected; the induction hypothesis was deliberately stated to allow this.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 case G=G′H, printed p.352; coset argument of Theorem 5.52, printed p.112"
+   }
+  },
+  {
+   "text": "Suppose $N\\ne G$. It is normal, so form the affine quotient $B=G/N$ using the affine normal-quotient statement. Apply the nested-quotient statement to $H\\subseteq N\\subseteq G$ to obtain $b:G/H\\to G/N$. Restrict it to $C$. Since $B$ is affine and $\\Gamma(C,\\mathcal O_C)=k$, the morphism-into-affine-scheme bijection says that $b|_C$ factors as $C\\to\\operatorname{Spec}k\\xrightarrow{y}B$, with $y$ the $k$-point defined by the map on global sections. The homogeneous-quotient rational-lift clause supplies $g\\in G(k)$ mapping to $y$. The translated-fibre clause of the nested-quotient statement identifies the scheme fibre $b^{-1}(y)$ with $N/H$ by $nH\\mapsto gnH$. The universal property of the fibre product therefore gives a factorization $C\\to b^{-1}(y)$. This is a closed immersion: its pullback description is $C\\times_{G/H}b^{-1}(y)=C$, and closed immersions are stable under base change.",
+   "uses": [
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-nested-homogeneous-quotient-geometry",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 affine quotient and fibre step, printed p.352; Proposition 7.15 Cartesian square and Remark 7.16(a), printed pp.142--143; affine morphism bijection: Stacks schemes.tex Tag 01I1"
+   }
+  },
+  {
+   "text": "We now have $C$ as a closed subscheme of $N/H$, proper over $k$. The ambient group $N$ is smooth, connected, affine, solvable and of finite type by Steps 6--7, and $\\dim N<d$. Thus the induction hypothesis applied to $N$ and its closed subgroup $H$ gives $\\dim C=0$. Together with Step 8 this handles every component of $W_{\\mathrm{red}}$; Step 4 gives $\\dim W=0$, and Step 3 gives $\\dim Z=0$. This completes the strong induction for the first assertion. The alternatives $D=1$, $H=1$, and $H=G$ are included: no positive dimension or smoothness of an intersection was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 final induction step, printed p.352"
+   }
+  },
+  {
+   "text": "Finally suppose $Q$ is proper. It is nonempty because $q$ is surjective and $G$ has its identity point. The proved assertion applied to $Z=Q$ gives $\\dim Q=0$. Step 2 showed that this original $Q$, with the original arbitrary $K$, is integral; the zero-dimensional integral-point theorem therefore gives $Q\\simeq\\operatorname{Spec}k$. Its quotient point $q(e)$ is consequently the entire scheme $Q$. Pull back the specified isomorphism $G\\times K\\simeq G\\times_QG$ along $e:\\operatorname{Spec}k\\to G$ in the first coordinate. The result identifies the given inclusion $K\\hookrightarrow G$ with the fibre $q^{-1}(q(e))\\hookrightarrow G$. Since $q(e)$ is all of $Q$, that fibre inclusion is the identity of $G$. Hence $K=G$ as closed subgroup schemes, including their infinitesimal structure.",
+   "uses": [
+    "lem-weil-pbc-zero-dim-integral-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.1 final assertion, printed p.352; Proposition 5.24 kernel-pair identity, printed p.104"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sc-finite-surjective-dimension",
+  "lem-sfb-affine-normal-quotient-geometry",
+  "lem-sfb-algebraic-group-homomorphism-factorization",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-sfb-nested-homogeneous-quotient-geometry",
+  "lem-sfb-smooth-connected-derived-subgroup",
+  "lem-sfb-smooth-group-orbit-geometry",
+  "lem-sfb-solvable-normal-subgroup-products",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-zero-dim-integral-point",
+  "lemma-nagata-finite-type-to-separated-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.1, printed p.352, following its dimension-induction route; repaired its omitted connected-subgroup reduction using Remark 7.16(b), and expanded quotient comparisons and fibre factorizations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(solvable|IsSolvable).*(quotient|proper|homogeneous)|(quotient|proper|homogeneous).*(solvable|IsSolvable)",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological group quotients, affine-space integrality, torsors, and projective homogeneous localization do not state this solvable algebraic-group quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete quotient variety of a connected solvable linear algebraic group by a closed subgroup is a point",
+   "results": "[leansearch] OK 8 hit(s); QuotientAddGroup.completeSpace', QuotientGroup.completeSpace', solvable_quotient_of_solvable, QuotientGroup.borelSpace, QuotientGroup.instT2Space, QuotientGroup.subsingleton_iff, QuotientAddGroup.fintype, QuotientGroup.completeSpace",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological group quotients, affine-space integrality, torsors, and projective homogeneous localization do not state this solvable algebraic-group quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"AlgebraicGeometry\"",
+   "results": "[loogle] OK 0 hit(s); ",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological group quotients, affine-space integrality, torsors, and projective homogeneous localization do not state this solvable algebraic-group quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous space of a smooth connected solvable affine algebraic group contains no positive dimensional proper subscheme",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.AffineSpace.not_isIntegralHom, AddTorsor.connectedSpace, AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty, AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.irreducibleSpace_of_isIntegral, AlgebraicGeometry.instIsAffineTerminalScheme, AlgebraicGeometry.IsAffineOpen.of_subsingleton, isSimplyConnected_smul_set_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological group quotients, affine-space integrality, torsors, and projective homogeneous localization do not state this solvable algebraic-group quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*(scheme|space)|Borel.*fixed|solvable.*algebraic.group",
+   "results": "[grep] OK 5 hit(s); Mathlib/Geometry/Manifold/DerivationBundle.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/LinearAlgebra/AffineSpace/AffineSubspace/Defs.lean, Mathlib/LinearAlgebra/AffineSpace/AffineMap.lean, Mathlib/Algebra/Torsor/Defs.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological group quotients, affine-space integrality, torsors, and projective homogeneous localization do not state this solvable algebraic-group quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a solvable connected algebraic group has a proper homogeneous quotient G over H then H equals G",
+   "results": "[leanfinder] OK 8 hit(s); solvable_quotient_of_solvable, CategoryTheory.PreGaloisCategory.has_decomp_quotients, MulAction.IwasawaStructure.isSimpleGroup, MulAction.IsQuasiPreprimitive.isPretransitive_of_normal, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, Subgroup.quotient_finite_of_isOpen, Subgroup.quotient_finite_of_isOpen'",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract or topological group quotients, affine-space integrality, torsors, and projective homogeneous localization do not state this solvable algebraic-group quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected solvable algebraic group homogeneous quotient contains no positive dimensional proper closed subscheme",
+   "results": "{\"t\": \"2026-10-23T20:54:42Z\", \"tool\": \"leanfinder\", \"query\": \"A connected solvable algebraic group homogeneous quotient contains no positive dimensional proper closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDominantToSpecΓOfCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"Submodule.connectedComponentIn_eq_self_of_one_lt_codim\", \"isConnected_compl_of_one_lt_codim\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\"], \"digest\": \"34b5afe514cbfeb7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the scheme-theoretic solvable homogeneous quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "solvable.*(homogeneous|proper)|homogeneous.*solvable|Borel.*fixed",
+   "results": "{\"t\": \"2026-10-23T20:57:10Z\", \"tool\": \"grep\", \"query\": \"solvable.*(homogeneous|proper)|homogeneous.*solvable|Borel.*fixed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the scheme-theoretic solvable homogeneous quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complete homogeneous space for a connected solvable affine algebraic group is a point",
+   "results": "{\"t\": \"2026-10-23T20:57:10Z\", \"tool\": \"leansearch\", \"query\": \"A complete homogeneous space for a connected solvable affine algebraic group is a point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"LieAlgebra.ofAbelianIsSolvable\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"CommGroup.isSolvable\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"IsRightUniformAddGroup.completeSpace_of_weaklyLocallyCompactSpace\", \"LieAlgebra.instIsSolvableSubtypeMemLieSubalgebraTop\", \"Matrix.instCompleteSpace\"], \"digest\": \"0580186a43d3d02f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the scheme-theoretic solvable homogeneous quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T20:57:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the scheme-theoretic solvable homogeneous quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A solvable linear algebraic group has no positive dimensional complete subvariety in any coset variety",
+   "results": "{\"t\": \"2026-10-23T20:57:11Z\", \"tool\": \"leanfinder\", \"query\": \"A solvable linear algebraic group has no positive dimensional complete subvariety in any coset variety\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSolvable\", \"IsSolvable.commutator_lt_top_of_nontrivial\", \"IsSolvable.solvable\", \"isSolvable_of_top_eq_bot\", \"isSolvable_def\", \"isSolvable_of_subsingleton\", \"not_solvable_of_mem_derivedSeries\", \"IsSolvable.commutator_lt_of_ne_bot\"], \"digest\": \"3c7e82107ef36c30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the scheme-theoretic solvable homogeneous quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nested algebraic group homogeneous quotients G/H to G/J have fibres J/H and are finite if H and J have equal dimension",
+   "results": "{\"t\": \"2026-10-23T21:05:47Z\", \"tool\": \"leanfinder\", \"query\": \"Nested algebraic group homogeneous quotients G/H to G/J have fibres J/H and are finite if H and J have equal dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.FintypeCat.quotientToQuotientOfLE\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"Subgroup.finite_quotient_of_finite_quotient_of_index_ne_zero\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Subgroup.finite_quotient_of_pretransitive_of_index_ne_zero\", \"MulAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"Subgroup.quotient_finite_of_isOpen'\"], \"digest\": \"ae7c4079479666d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits do not state the scheme-theoretic solvable homogeneous quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-solvable-proper-fixed-point",
+  "date": "2026-10-23",
+  "group": "NH"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Conjugate an arbitrary Borel into the maximum-dimensional one by its action on the already proper quotient. Supporting geometric input: Milne Theorem 17.1, used after the minimum-dimensional orbit has been proved closed.",
+   "via": [
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-reductive-borel-pair-structure",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-solvable-homogeneous-proper-subschemes",
+  "worker": "stage1",
+  "summary": "Q11: retained the full arbitrary-subgroup statement and wrote the derived-subgroup dimension induction. One new statement-only node supplies nested-quotient fibres and finite equal-dimension maps. Pass first to the reduced identity component of K; this repairs the unsupported connectedness of G′K in Milne 17.1. Products with a nonnormal H are constructed from existing quotient/image statements. Reductions of Z, constant maps to affine quotients and the final equality of subgroup schemes are explicit.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Borel-pair structure and proper flag quotient supporting the rho section modules in the Steinberg endomorphism detection input. Supporting step: Conjugate an arbitrary Borel into the maximum-dimensional one by its action on the already proper quotient. Supporting geometric input: Milne Theorem 17.1, used after the minimum-dimensional orbit has been proved closed. Steps 1--11 realize precisely the Milne 17.1 geometric input supporting the already-closed minimum orbit; the current blueprint direct-image route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-sc-finite-surjective-dimension",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lem-weil-pbc-zero-dim-integral-point",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic scheme geometry used exactly as quoted in the proof (fpqc gluing, finite morphisms/dimension, reduction, proper global functions or affine maps); it does not replace the unit route and no node of this unit supplies this general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-covering-base-change",
+  "lem-sc-finite-surjective-dimension",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-zero-dim-integral-point",
+  "lemma-nagata-finite-type-to-separated-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-332285648",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-332285648 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement and Milne iAG2017. Item: the statement is unchanged from the base, and the item is still unsplit live, so nothing supersedes it. There is no repair note, so this is a first split. Theorem 17.1 (printed p.352): the 11 steps follow Milne's route. That route is induction on dim G with the derived group D: if DH=G then G/H≅D/(D∩H); otherwise N=DH is normal, G/N is affine, each component C maps to a point and lies in a fibre ≅N/H. Milne's proof has a real gap: it makes H only smooth, then calls N=G'H connected (6.41). This fails for disconnected H: with G=G_m and H=μ_n, G'=1 and N=μ_n is disconnected. The worker's repair is correct: replace K by H=(K^0)_red, using the finite faithfully flat map G/H→G/K from 7.16(b). Step checks: step 1 identifies Q with G/K by descent along fpqc covers and computes the stabilizer as K. Step 2 gets Q integral from the reduced-orbit and smooth-orbit clauses, states the strong induction explicitly, and handles the base case with zero-dim-integral-point. In step 4 the proper reduced global-sections node applies only after reduction, which gives Γ(C)=k. Step 6 builds N=G×_{G/D}I through the image factorization and the inverse-image clause, so it never needs H normal. Step 7 gets A commutative, so N is normal. Step 9 uses Hom into affine schemes, the rational lift and the translated-fibre clause, and C→b^{-1}(y) is a closed immersion. Step 11 pulls back the kernel pair to get K=G as schemes. Every cited clause says what its step uses. New node lem-sfb-nested-homogeneous-quotient-geometry: it is true. After pulling back along q_J, π becomes G×(J/H)→G, and when dim J/H=0 the fibre J/H is finite. This matches Milne 7.15 (square)/7.16(b); the second sentence of 7.15 prints the arrow reversed, as the worker reported. I tested H=J, μ_p⊂J, J=G and μ_2⊂G_m. The node meets B1–B7 and does not restate the item. I checked it against borel-quotient-proper-geometry, zero-dimensional-stabilizer-finite-orbit, the homogeneous/orbit/affine-normal quotient nodes and group-neutral-component-translates; none is a duplicate. There is no cycle and no SGA. Batch-5: all five sec-trace-formula nodes reached are generic and outside both assumptions (def-trf-scheme-algebraic-space, def-trf-scheme-cover-descent-datum, lem-trf-fppf-covering-base-change, lem-trf-connected-point-geometrically-connected, def-trf-schematically-dense-open). None is a step of the trace formula or Poincaré duality proofs. I accept the 11 generic tool_uses. FIX (C1): step 3 used surjectivity of W→Z without citing a node. I added the Mathlib leaf lem-weil-pbc-surjective-base-change to step 3 and to proof_deps; this is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-solvable-homogeneous-proper-subschemes.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SolvableHomogeneousProperSubschemes",
+  "declaration": "AlgebraicGeometry.solvable_homogeneous_proper_subschemes",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SolvableHomogeneousProperSubschemes.lean",
+  "statement": "theorem solvable_homogeneous_proper_subschemes {k : Type u} [Field k] [IsAlgClosed k] (G K : Over (Spec (.of k))) [GrpObj G] [GrpObj K] [Smooth G.hom] [ConnectedSpace G.left] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (hsolv : IsSolvableGroupScheme G) (i : K ⟶ G) [IsClosedSubgroupScheme i] (Q : Over (Spec (.of k))) [IsSeparated Q.hom] [LocallyOfFiniteType Q.hom] [QuasiCompact Q.hom] (q : G ⟶ Q) [Flat q.left] [Surjective q.left] (hinv : fst G K ≫ q = lift (fst G K) (snd G K ≫ i) ≫ μ[G] ≫ q) (e : G ⊗ K ≅ pullback q q) (he₁ : e.hom ≫ pullback.fst q q = fst G K) (he₂ : e.hom ≫ pullback.snd q q = lift (fst G K) (snd G K ≫ i) ≫ μ[G]) : (∀ (Z : Over (Spec (.of k))) (j : Z ⟶ Q), IsClosedImmersion j.left → Nonempty Z.left → IsProper Z.hom → topologicalKrullDim Z.left = 0) ∧ (IsProper Q.hom → IsIso i)",
+  "branch": "sheaf-dag",
+  "by": "Q20",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the landed scheme-theoretic derived-series definition from def-sfb-semisimple-group-scheme. The two projection identities specify the canonical kernel-pair isomorphism. IsIso i expresses K = G as closed subgroup schemes, including nonreduced structure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c48e60fe2",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Matches node and Milne 17.1. G is a smooth connected affine finite-type GrpObj over alg-closed k; solvability is IsSolvableGroupScheme (landed derived series, not hollow); K is any closed subgroup, no extra assumptions. e: G⊗K≅pullback q q has both projection identities, so it is the canonical (g,b)->(g,gb) map; hinv is redundant. Conclusions: topologicalKrullDim Z.left = 0 for every nonempty proper closed Z ⊆ Q, and IsProper Q.hom -> IsIso i (K=G scheme-theoretically). Vs live, only lean and stmt_deps changed; added stmt_dep def-sfb-semisimple-group-scheme is landed and owns IsSolvableGroupScheme (brief §177 allows it). lean.statement verbatim; docstrings carry source, blueprint tag and 11 steps; proof is sorry; plain imports are proof_dep modules; no pro-etale substitute. Not compiled (no file changed). Advisory: pre-existing second notion IsSolvable (def-sfb-solvable-group-structure); second reading is self-described as the worker's own."
+ }
+}

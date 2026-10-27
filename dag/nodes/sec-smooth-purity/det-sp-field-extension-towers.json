@@ -27,189 +27,69 @@
   "det-sp-reduction-direct-image",
   "det-sp-reduction-exceptional",
   "def-weil-rationalization-karoubi",
-  "def-coefficient-twists-detailed"
+  "def-coefficient-twists-detailed",
+  "def-sp-field-extension-integral-models",
+  "def-sp-field-extension-strict-limits",
+  "def-sp-field-extension-integral-comparisons",
+  "def-sp-field-extension-integral-coordinates",
+  "def-sp-field-extension-system-coordinates",
+  "def-sp-field-extension-reduction-limits",
+  "def-sp-field-extension-limit-equations",
+  "def-sp-field-extension-rational-models",
+  "def-sp-field-extension-rational-comparisons",
+  "def-sp-field-extension-composition",
+  "def-sp-field-shriek-system-models",
+  "def-sp-field-scalar-normalized-data",
+  "def-sp-field-shriek-system-laws",
+  "def-sp-field-extension-source-normalization",
+  "def-sp-field-extension-canonical-source-word"
  ],
  "proof": [
   {
-   "text": "Write $A_n=R/\\ell^n$, $B_n=S/\\ell^n$, and $r=[F:E]$. By [lem-weil-finite-free-completed-scalar-comparison], $S_T$ is finite free of rank $r$ over $R_T$, and ordinary derived tensor on derived-complete objects agrees naturally with the strict-tower integral scalar extension. Applying [lem-weil-integral-scalar-extension-constructible] therefore proves constructible preservation in (1). Powers of $\\ell$ can be used in these two nodes: if $\\ell=u\\varpi_E^h$, with $u$ a unit and $h\\geq1$, then $(\\ell^n)=(\\varpi_E^{hn})$, a cofinal family of the uniformizer powers; Over $F$ write $\\ell=v\\varpi_F^{h_F}$ with $v$ a unit and $h_F\\geq1$; then $(\\ell^n)=(\\varpi_F^{h_Fn})$, again a cofinal family. The reductions of an integral constructible object are normalized with uniform Tor bounds by [det-sp-reduction-tower-normalized]. These are exactly the domains required for the finite comparisons, not merely arbitrary bounded finite-coefficient complexes. In the current reduction statement this is the ordinary derived category of modules over the completed sheaf $R_T$: the quotient maps are isomorphisms for every $1\\leq m\\leq n$, and any Tor interval $[a,b]$ of the integral input also bounds both Tor amplitude and cohomological support at every level. Thus no extra site comparison or level-dependent bound is being assumed.",
+   "text": "Finite freeness gives invertibility of the completed comparison on complete inputs. Transfer intrinsic completeness to the legacy K-flat definition using an auxiliary characteristic distinct from ell, apply the finite-free comparison theorem, and transport scalar-extended constructibility back across its inverse. This proves ordinaryCompleted and ordinaryClosed without new holes.",
    "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-weil-integral-scalar-extension-constructible",
-    "det-sp-reduction-tower-normalized"
+    "lem-sf-derived-complete-legacy-comparison",
+    "lem-weil-integral-constructible-triangulated"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (1), finite freeness, constructibility and the finite-Tor domains"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose an $R_T$-module basis of $S_T$ using the finite-free completed-sheaf theorem in step 1. The quotient identifications in [lem-weil-pbc-constant-completion-equivalence], applied to the complete discrete valuation rings $R$ and $S$ and the ideal $(\\ell)$, identify $R_T/\\ell^n$ with $(A_n)_T$ and $S_T/\\ell^n$ with $(B_n)_T$. Reducing this single sheaf-module basis therefore gives compatible bases $(B_n)_T\\cong(A_n)_T^{\\oplus r}$. Forgetting the target coefficient action, $C_T$ is the functor $K\\mapsto K^{\\oplus r}$. Countable products of pro-etale module sheaves are exact by [lem-weil-proetale-countable-products-exact] and represent derived products by [lem-weil-derived-limit-products-core]. Thus the canonical product/tensor comparison is the reindexing $\\prod_n(K_n^{\\oplus r})\\cong(\\prod_nK_n)^{\\oplus r}$. It commutes with $1-s$, since its $n$-th component carries $x_n-t_nx_{n+1}$ to that same expression in each of the $r$ coordinates. For functoriality, use the total derived limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], not a choice of morphism between triangulated cones. Let $I_\\bullet$ be a K-injective $R_T$-tower representative. Its finite sum $I_\\bullet^{\\oplus r}$ is K-injective: the Hom complex from an acyclic tower is a finite sum of acyclic Hom complexes. The ringed-topos identity morphism with structural map $R_T\\to S_T$ has direct image restriction of scalars. Applying [lem-weil-ringed-tower-pushforward-limit-comparison] to it identifies restriction of $R\\lim$ of an $S_T$-tower with $R\\lim$ of its restricted tower, compatibly with the projections. Restriction of scalars is exact and detects quasi-isomorphisms, so its derived functor reflects isomorphisms. The restricted coefficient-extended tower is $I_\\bullet^{\\oplus r}$, already K-injective over $R_T$ by the preceding Hom calculation; no K-injectivity over $S_T$ is needed for this computation. After this identification and the chosen basis, the canonical comparison $C_TR\\lim I_\\bullet\\to R\\lim C_TI_\\bullet$ is the ordinary map $(\\lim I_\\bullet)^{\\oplus r}\\to\\lim(I_\\bullet^{\\oplus r})$, an isomorphism. This proves the canonical derived comparison is invertible, including on morphisms; the product/$(1-s)$ calculation above describes the same comparison in its Roos triangle. It is $S_T$-linear since multiplication by any local section $s$ of $S_T$ acts by the same $R_T$-matrix on every level and on both products. Its definition by tensor and product projections is independent of the basis. For the reduction formula choose a flat-term K-flat representative $P$ by [lem-pc-kflat-resolution]; [lem-pur-derived-change-of-rings, lem-pur-kflat-change-of-rings] compute its successive derived changes of rings. Both sides of (1) are represented by $P\\otimes_{R_T}(B_n)_T$; the identification sends $(x\\otimes a)\\otimes b$ to $x\\otimes ab$, with inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. These formulas commute with the quotient maps and with differentials, so they identify the whole reduction towers, including their morphisms.",
+   "text": "Use compactness of X to make f quasi-compact and compactness of Y with its quasi-separatedness to apply Nagata, giving Nonempty (Compactification f). For each chosen compactification apply the exceptional whole-system comparison to its composite to obtain simultaneous D, b, domains, adjunctions and laws.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-pc-kflat-resolution"
+    "lem-sp-field-exceptional-system-comparison",
+    "thm-nagata-compactification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (1), derived limits and the displayed reduction identity"
-   }
+   "elementary": false
   },
   {
-   "text": "On coefficient towers let $C_\\bullet$ be extension along $A_\\bullet\\to B_\\bullet$. It is already exact on the abelian categories: the compatible basis above identifies its underlying complexes with a fixed finite sum, including transitions. The same finite-sum description preserves the common cohomological bounds. It preserves normalized constructible towers: for $m\\leq n$ tensor balancing identifies $(D_n\\otimes^L_{A_n}B_n)\\otimes^L_{B_n}B_m$ with $(D_n\\otimes^L_{A_n}A_m)\\otimes^L_{A_m}B_m$, and [det-sp-scalar-extension-functor] preserves the common Tor interval and constructibility. Form the compact-support coefficient map $b_\\bullet:C_{Y,\\bullet}Rf_{!,A,\\bullet}\\to Rf_{!,B,\\bullet}C_{X,\\bullet}$ by the proper-direct-image coefficient projection map followed by the open-extension tensor identification. The simultaneous section models in [lem-coef-semilinear-derived-sections] provide this specified composite as a morphism in the derived category of semilinear coefficient systems, not a choice of lifts of finite maps. The tower operations and their evaluations are those of [det-sp-tower-shriek-levels]. The evaluated composite is precisely the tensor comparison $b_n$ of [det-sp-reduction-direct-image]. For $n\\geq m$, the two paths $A_n\\to B_n\\to B_m$ and $A_n\\to A_m\\to B_m$ induce the same balanced tensor map: $((x\\otimes a)\\otimes b)\\mapsto x\\otimes\\bar a b$. The coefficient-composition law of that node identifies the two composites of $b$. Thus these evaluations have the stated reduction compatibility. Each $b_n$ is an isomorphism, so $b_\\bullet$ is an isomorphism by the detection assertion of [det-sp-tower-shriek-levels]. The current scalar-extension statement uses ordinary module sheaves over finite constant rings and the intrinsic finite-stratification constructibility condition. Our $A_n,B_n$ are precisely such constant coefficients, and $\\ell$ is invertible on the standing schemes, as required for its Tate-line comparison.",
+   "text": "Choose the canonical reduction comparison for each inclusion, scheme and pair of presentations. Integral descent supplies simultaneous integral models, integral comparisons, their scalar-reduction normalizations, total-limit equations and coefficient cocycle. Apply rational descent to that same family and cocycle. Use the completed strict-limit lemma for the remaining independent strict-limit field, and assemble all these data in Result.",
    "uses": [
-    "det-sp-scalar-extension-functor",
-    "lem-coef-semilinear-derived-sections",
-    "det-sp-tower-shriek-levels",
-    "det-sp-reduction-direct-image"
+    "lem-sp-field-extension-reduction-descent",
+    "lem-sp-field-extension-integral-descent",
+    "lem-sp-field-extension-rational-descent",
+    "lem-sp-field-extension-completed-strict-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (2), construction of the direct-image map of towers"
-   }
-  },
-  {
-   "text": "Write $P_A=Rf_{!,A,\\bullet}$ and $G_A=f^!_{A,\\bullet}$, and similarly for $B$. The adjunctions $P_A\\dashv G_A$ with their specified counits $\\epsilon_A$ are provided by [det-sp-tower-gluing]. Define $c_\\bullet:C_{X,\\bullet}G_A\\to G_BC_{Y,\\bullet}$ to be the $P_B\\dashv G_B$ transpose of $C_{Y,\\bullet}\\epsilon_A\\circ b_{\\bullet,G_A}^{-1}$. This is an actual tower morphism. Evaluation preserves these counits and adjunction transposes by [det-sp-tower-gluing, lem-coef-semilinear-derived-sections], so its evaluation is the unique $c_{A_n,B_n}$ characterized in [det-sp-reduction-exceptional]. In particular it is an isomorphism at every level, hence an isomorphism of towers by [det-sp-tower-shriek-levels]. The quotient transitions of $G_A$ and $G_B$ are explicitly the quotient coefficient mates by [det-sp-tower-gluing](3). Applying [det-sp-reduction-compatibilities](2) to the two paths from $A_n$ to $B_m$ identifies the two composites with $c_{A_n,B_m}$, proving the claimed reduction compatibility for $c$. The current compatibility statement applies here: all four quotient rings are finite commutative rings annihilated by powers of $\\ell$, both mixed paths are unital maps, and the input at level $n$ has constructible cohomology and finite Tor amplitude by step 1. The separated finite-type scheme and smoothness hypotheses are precisely those fixed in the item.",
-   "uses": [
-    "det-sp-tower-gluing",
-    "lem-coef-semilinear-derived-sections",
-    "det-sp-reduction-exceptional",
-    "det-sp-tower-shriek-levels",
-    "det-sp-reduction-compatibilities"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (2), exceptional comparison as the tower counit transpose"
-   }
-  },
-  {
-   "text": "The counit equation holds in the tower category by the definition just given:\n$$\\epsilon_B\\circ P_Bc=C_Y\\epsilon_A\\circ b_{G_A}^{-1}.$$\nFor the unit equation transpose $G_B(b_M)c_{P_AM}C_X(\\eta_{A,M})$ under $P_B\\dashv G_B$. Naturality of $\\epsilon_B$, the displayed counit equation, and naturality of $b$ turn its transpose into\n$$b_M\\, C_Y(\\epsilon_{A,P_AM}\\circ P_A\\eta_{A,M})\\,b_M^{-1}=1_{P_BC_XM}.$$\nThe last equality is the triangle identity in [det-sp-tower-gluing]; the transpose of $\\eta_{B,C_XM}$ is the same identity. The adjunction bijection therefore proves the unit equation as a tower equality. For $R\\subset S\\subset U=\\mathcal O_L$, the two direct-image comparison composites agree on the coherent models: both use the proper counit and the multiplication $(x\\otimes s)\\otimes u\\mapsto x\\otimes su$, then the open identification. The associativity coherences in [lem-coef-semilinear-derived-sections] give that equality before evaluation. Taking the counit transpose shows that the composite of the two exceptional comparisons is the exceptional comparison for $R\\subset U$; this is exactly the mate-pasting formula [lem-weil-pbc-mate-pasting](1). Identity extensions give identities by its identity clause. This proves unit, counit and coefficient-composition compatibilities in the tower category itself.",
-   "uses": [
-    "det-sp-tower-gluing",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (2), tower transposition arguments and composition of coefficient extensions"
-   }
-  },
-  {
-   "text": "Here is a justification of the purity identity that uses levelwise equality only between shifted degree-zero objects. Put $J_{A,T}=((A_n)_T)_n$ for $T=X,Y$, write $J_A=J_{A,Y}$, and put $\\omega_A=G_AJ_A$; the source of the orientation below is $J_{A,X}(d)[2d]$. By [det-sp-tower-gamma](1) the tower orientation $a_{A,\\bullet}:J_{A,X}(d)[2d]\\xrightarrow{\\sim}\\omega_A$ is an isomorphism in the derived tower category whose level $n$ is the finite diagonal orientation for $\\mathcal O_E/\\ell^n=A_n$; with the evaluation identification of [det-sp-tower-gluing](3) this identifies $(\\omega_A)_n$ with $(A_n)_X(d)[2d]$. Thus all evaluated cohomology groups outside degree $-2d$ vanish. Exact evaluation and levelwise kernels and cokernels in [det-sp-coefficient-towers-abelian] show that $\\omega_A$ itself has cohomology only in degree $-2d$ in the coefficient-system category. By [lem-sf-derived-concentrated-single] it is its degree-$(-2d)$ sheaf placed in that degree. The finite orientations $\\gamma_{f,A_n}(A_n):A_n(d)[2d]\\to G_{A_n}A_n$ commute with quotient changes by [det-sp-reduction-compatibilities](3). Together with the transition description in [det-sp-tower-gluing](3), these give a morphism of the degree-$(-2d)$ coefficient sheaves. By [lem-weil-pbc-derived-single-fully-faithful] and shifting, it gives a uniquely specified isomorphism $o_A:J_{A,X}(d)[2d]\\to\\omega_A$ in the derived tower category. It equals $a_{A,\\bullet}$: both are maps between shifted single-sheaf towers, and their levels agree, since by [det-sp-tower-gamma](2) at the unit (whose tensor map is the identity, step 7) the level $n$ of $a_{A,\\bullet}$ is $\\gamma_{f,A_n}(A_n)$. For $B$, [det-sp-tower-gamma](1) over $F$ identifies $(G_BJ_B)_n$ with $(B_n)_X(d)[2d]$, so exact conservative evaluation makes $G_BJ_B$ concentrated in degree $-2d$. Its degree-$(-2d)$ cohomology sheaf receives the compatible finite orientation maps from the twist sheaf: their quotient compatibility is [det-sp-reduction-compatibilities](3) and the target transitions are [det-sp-tower-gluing](3). Concentration and single-complex full faithfulness therefore yield the uniquely specified isomorphism $o_B:J_{B,X}(d)[2d]\\to\\omega_B=G_BJ_B$, equal to the orientation $a_{B,\\bullet}$ of [det-sp-tower-gamma](1) over $F$ by the same comparison of levels. Twists commute with coefficient extension by [det-sp-scalar-extension-functor](3). The two maps $c_{J_A}C_X(o_A)$ and $o_B$ (with the twist source identification) have shifted degree-zero source and target, since $C_\\bullet$ is exact. Their evaluations agree by [det-sp-reduction-compatibilities](3) at the unit object. Full faithfulness of the single-complex embedding reduces equality to equality of morphisms of coefficient sheaves; such morphisms are compatible families and their equality is componentwise. Hence $c_{J_A}C_X(o_A)=o_B$ as actual derived tower morphisms. No faithfulness claim for evaluation on general derived objects is made. In these two applications of finite purity compatibility the input is the coefficient unit, which is constructible and has Tor amplitude $[0,0]$. The quotient maps and $A_n\\to B_n$ need not be flat: the current statement permits every unital map of finite $\\ell$-power-torsion rings. Its specified diagonal/DNC orientations are the finite orientations used here.",
-   "uses": [
-    "det-sp-tower-gluing",
-    "det-sp-coefficient-towers-abelian",
-    "lem-sf-derived-concentrated-single",
-    "det-sp-reduction-compatibilities",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "det-sp-scalar-extension-functor",
-    "det-sp-tower-gamma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (2), orientation comparison of rank-one tower sheaves"
-   }
-  },
-  {
-   "text": "The current projection statement [det-sp-tower-shriek-levels](2a) has two finite-Tor inputs and requires specified etale-origin witnesses. These hypotheses hold here, rather than being automatic for arbitrary tower complexes. The normalized tower $K_\\bullet$ has uniform cohomological and Tor bounds by definition. Step 6 identifies $\\omega_A$ with the rank-one twist tower $J_{A,X}(d)[2d]$, so it is bounded, constructible levelwise, and each level has Tor amplitude $[-2d,-2d]$. By [lem-weil-pbc-finite-ring-constructible-derived-origin] choose bounded constructible etale-origin witnesses, retaining their comparison isomorphisms, for every $K_n$ and $(\\omega_A)_n$. Their finite Tor intervals hold on the etale site by [lem-sf-comparison-tor-amplitude](ii); the rings $A_n=A_{E,hn}$, with $h$ as in step 1, are within that statement's domain. For the $B$-inputs, step 3 gives bounded constructible levels of $C_YK$ with the original Tor interval, and $\\omega_B\\simeq J_{B,X}(d)[2d]$ has Tor interval $[-2d,-2d]$. Choose bounded constructible etale complexes realizing these two families of levels by [lem-weil-pbc-finite-ring-constructible-derived-origin]. Clause (ii) of [lem-sf-comparison-tor-amplitude], now with $B_n=A_{F,h_Fn}$ from step 1, gives the specified intervals on these etale witnesses. If $w_n:\\nu_X^*W_n\\xrightarrow{\\sim}(\\omega_B)_n$ is the chosen witness isomorphism, a witness for $(C_X\\omega_A)_n$ is the explicit composite $\\nu_X^*W_n\\xrightarrow{w_n}(\\omega_B)_n\\xrightarrow{(c_{J_A})_n^{-1}}(C_X\\omega_A)_n$, using step 4 and $C_YJ_A=J_B$. This witness has Tor interval $[-2d,-2d]$ as well. Thus all projection inverses used below have both required finite-Tor witnesses. The current tower theorem requires witnesses levelwise, not a compatible tower of witnesses.\n\nFor an arbitrary normalized constructible $K_\\bullet$, construct the tower tensor map $\\tau_A:f_A^*K_\\bullet\\otimes^L\\omega_A\\to G_AK_\\bullet$ as the transpose of\n$$P_A(f_A^*K_\\bullet\\otimes^L\\omega_A)\\simeq K_\\bullet\\otimes^LP_A\\omega_A\\xrightarrow{1\\otimes\\epsilon_{A,J_A}}K_\\bullet.$$\nThe projection formula is a tower transformation by [det-sp-tower-shriek-levels](2), and the adjunction is [det-sp-tower-gluing]. The specified finite tensor map is exactly this counit transpose by [def-pur-co-smoothness](2). At the coefficient unit it is the identity of $G_AJ_A$, since its transpose is $\\epsilon_{A,J_A}$, with the tensor unit constraints. Thus the orientations $o_A$ constructed from the unit purity maps in step 6 are the finite diagonal orientations. Define $\\gamma_{A,\\bullet}=\\tau_A\\circ(1\\otimes o_A)$ with twist reassociation. Its evaluations are the finite purity maps by [def-pur-smooth-purity-map] and the specified tensor-map definition just cited. In particular it is an isomorphism by levelwise detection. This is the tower purity map $\\gamma_{f,\\bullet}(K_\\bullet)$ of [det-sp-tower-gamma](2), whose derived limit is the integral purity map of [det-sp-integral-adjunction-bijection]: that node defines it as $t_{K_\\bullet}\\circ(1\\otimes a_\\bullet)$ with $t_{K_\\bullet}$ the counit transpose of the same projection-formula composite as $\\tau_A$, and $o_A=a_{A,\\bullet}$ by step 6.\n\nHere is the coefficient calculation before evaluation. Write $\\pi_A(K,W):K\\otimes^LP_AW\\to P_A(f_A^*K\\otimes^LW)$ for the tower projection map, including tensor symmetry, and similarly for $B$. Coefficient extension is monoidal and commutes with inverse image and shifts on the simultaneous models of [lem-coef-semilinear-derived-sections]. With those source and target identifications, the projection maps satisfy\n$$b_{f_A^*K\\otimes^LW}\\circ C_Y\\pi_A(K,W)=\\pi_B(C_YK,C_XW)\\circ(1\\otimes b_W).$$\nFor the proper piece this is [lem-weil-pbc-ringed-exchange-tensor-coherence] on the tower ringed topoi: the horizontal morphisms are the identity topoi with the coefficient-ring maps, and the vertical morphisms are the proper direct image and its exact inverse image. No Cartesian-square or coefficient flatness hypothesis is needed there. The projection and exchange transformations are the counit-defined ones in [def-exchange-projection], with the simultaneous tower models of [lem-coef-semilinear-derived-sections]. For the open piece its tensor identification commutes with coefficient extension: on the open the two maps send $(x\\otimes y)\\otimes s$ to $(x\\otimes s)\\otimes(y\\otimes1)$, and off the open both are zero. These formulas give the displayed equation for their compact-support composite. The equalities are in the tower category, not inferred from their evaluations.\n\nLet $T_A=f_A^*K\\otimes^L\\omega_A$, identifying $C_XT_A$ with $f_B^*C_YK\\otimes^LC_X\\omega_A$. Under $P_B\\dashv G_B$, the transpose of $c_KC_X\\tau_A$ is, by the counit equation of step 5 and naturality of $b$,\n$$C_Y\\bigl((1\\otimes\\epsilon_{A,J_A})\\circ\\pi_A(K,\\omega_A)^{-1}\\bigr)\\circ b_{T_A}^{-1}.$$\nThe transpose of $\\tau_B(1\\otimes c_{J_A})$ is, by naturality of the projection map and the same counit equation,\n$$(1\\otimes(C_Y\\epsilon_{A,J_A}\\circ b_{\\omega_A}^{-1}))\\circ\\pi_B(C_YK,C_X\\omega_A)^{-1}.$$\nInverting the displayed projection-compatibility square identifies these two composites. Adjunction therefore gives $c_KC_X\\tau_A=\\tau_B(1\\otimes c_{J_A})$. Composing with $C_X(o_A)$ and using step 6 proves\n$$c_KC_X(\\gamma_{A,\\bullet}(K))=\\gamma_{B,\\bullet}(C_YK)$$\nwith the pullback/twist source comparison. This proves purity compatibility for arbitrary complexes as an equality of tower morphisms.",
-   "uses": [
-    "det-sp-tower-shriek-levels",
-    "det-sp-tower-gluing",
-    "def-pur-smooth-purity-map",
-    "lem-coef-semilinear-derived-sections",
-    "def-pur-co-smoothness",
-    "def-exchange-projection",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "det-sp-integral-adjunction-bijection",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "det-sp-tower-gamma"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (2), purity: projection-formula tensor map and the orientation comparison"
-   }
-  },
-  {
-   "text": "Apply these tower constructions to $\\operatorname{red}_XM$ and $\\operatorname{red}_YK$. The reduction identity of (1) identifies their $B$-extensions with the reduction towers of $C_XM$ and $C_YK$. By [det-sp-integral-direct-image-tower](2), the derived limits of the direct-image towers are $Rf_{!,R}M$ and $Rf_{!,S}C_XM$. By [det-sp-integral-adjunction-bijection], those of the exceptional towers are $H_{f,R}K$ and $H_{f,S}C_YK$. Using the canonical commutation with limits established in (1), $R\\lim b_\\bullet$ and $R\\lim c_\\bullet$ therefore have exactly the sources and targets in (2). They are isomorphisms because they are the image of tower isomorphisms under the functor [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. The same integral-adjunction node says that the integral units, counits and purity maps are the derived limits of the tower ones. Applying this functor to the actual tower equations proved above gives the integral unit, counit and purity equations. The tensor associator commutes with this passage: on strict representatives its two composites send $((x\\otimes s)\\otimes u)$ to $x\\otimes su$, and the limit comparison is defined by the same product projections. Thus the tower composition equation gives the integral coefficient-composition equation as well. The current direct-image statement takes the derived limit after restriction from $A_{n,Y}$ to the pulled-back completed sheaf $R_Y$ (and similarly for $S_Y$); these are exactly the restrictions fixed in the item. The compactification here is the coefficient-independent one fixed in the tower construction, so its stated comparison applies to both fields.",
-   "uses": [
-    "det-sp-integral-direct-image-tower",
-    "det-sp-integral-adjunction-bijection",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (2), derived limits and the integral adjunction/purity identifications"
-   }
-  },
-  {
-   "text": "Use [def-weil-rationalization-karoubi]: its raw scalar localization has the same objects as the integral category, and its Hom groups are the integral Hom groups tensored with $E$. Thus every rational object has an integral representative. If $U$ is any integral $R$-linear functor, define its localized action on morphisms by $U_E(u\\otimes a)=U(u)\\otimes a$ and extend additively. Balancing follows from $R$-linearity; functoriality follows from $(v\\otimes b)(u\\otimes a)=vu\\otimes ba$. The same formula localizes the components and naturality equations of integral natural transformations. An integral inverse localizes to an inverse. Applying this to integral coefficient extension gives precisely the rational extension defined in that node. Here $S[1/\\ell]=F$: for $x\\in F$, the valuation of $\\ell^mx$ is nonnegative for sufficiently large $m$, so $\\ell^mx\\in S$. Tensor balancing gives $S\\otimes_RE=F$, including for ramified extensions.\n\nThe rational compact-support functor on integral representatives is explicitly the localized integral compact-support functor in [def-weil-integral-rational-qbar-compact-support]; its integral limit is the functor identified in step 8. Its action on morphisms is the unique linear extension just described, since every localized morphism is a sum of pure tensors. Rational pullback and tensor are explicitly the localized integral operations of [def-weil-derived-pullback-tensor-hom]. Rational twists in these categories are the images of the integral twists by [def-coefficient-twists-detailed]; this is the rationalized convention fixed in the statement. Consequently localizing the two integral comparison isomorphisms of step 8 gives exactly the displayed functors of (3).\n\nFinally the integral adjunction Hom bijections are $R$-linear: a transpose is the composite of the $R$-linear functor on a morphism with the fixed counit, and its inverse is composition with the fixed unit followed by the $R$-linear right adjoint. Both functors are $R$-linear on the tower models and remain so after the derived limit. Hence these are mutually inverse $R$-module maps, and we can tensor them with $E$. Their integral inverses, naturality equations and composition identities localize by the same pure-tensor formula, so the resulting bijections define the rational adjunction; its unit and counit are the images of the integral ones. The localized integral purity isomorphism identifies its right adjoint with $f_E^*(-)(d)[2d]$. Localizing the integral unit, counit, purity and coefficient-composition equations therefore proves every stated rational compatibility.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-coefficient-twists-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-    "place": "paragraph (3), inverting ell on integral models and localized Hom groups"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-integral-scalar-extension-constructible",
-  "det-sp-reduction-tower-normalized",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-products-core",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
-  "lem-pc-kflat-resolution",
-  "det-sp-scalar-extension-functor",
-  "lem-coef-semilinear-derived-sections",
-  "det-sp-tower-shriek-levels",
-  "det-sp-reduction-direct-image",
-  "det-sp-tower-gluing",
-  "det-sp-reduction-exceptional",
-  "det-sp-reduction-compatibilities",
-  "lem-weil-pbc-mate-pasting",
-  "det-sp-coefficient-towers-abelian",
-  "lem-sf-derived-concentrated-single",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "det-sp-tower-gamma",
-  "def-pur-smooth-purity-map",
-  "def-pur-co-smoothness",
-  "def-exchange-projection",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "det-sp-integral-adjunction-bijection",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-sf-comparison-tor-amplitude",
-  "det-sp-integral-direct-image-tower",
-  "def-weil-rationalization-karoubi",
-  "def-weil-integral-rational-qbar-compact-support",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-coefficient-twists-detailed"
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sp-field-exceptional-system-comparison",
+  "thm-nagata-compactification",
+  "lem-sp-field-extension-reduction-descent",
+  "lem-sp-field-extension-integral-descent",
+  "lem-sp-field-extension-rational-descent",
+  "lem-sp-field-extension-completed-strict-limit"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
-  "place": "paragraphs (1)–(3); expanded strict-tower, counit-transpose and degree-zero orientation arguments"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+  "place": "paragraphs (1)--(3); M3 Lean assembly with four explicit descent obligations"
  },
  "mathlib_searches": [
   {
@@ -360,103 +240,43 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-field-extension",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "det-sp-field-extension-towers",
   "worker": "stage1",
-  "summary": "Reused existing finite-free completed-scalar and constructibility results. Expanded the finite comparison argument to actual coherent section maps and tower counit transposes, proved compatibility identities before taking limits, restricted the use of levelwise equality to shifted sheaves, and localized the resulting integral equations. Made the blueprint standing scheme/coefficient hypotheses explicit; no new nodes or Lean changes. Independent second reading supplied direct K-flat and projection-transpose citations, justified the canonical limit comparison via scalar restriction, and expanded the purity compatibility to a typed projection square and its two transposes. Removed the redundant alternative integral-models citation: the exact reduction-tower statement already supplies every uniform finite-Tor bound used here. Return repair: revalidated current finite compatibility domains in steps 4 and 6; replaced the rational step's now ambient-category citations with the existing definitions for the explicitly chosen raw localization, localized compact support and rationalized twists. Final return repair also revalidates the tightened tower projection domain: step 7 explicitly supplies bounded constructible etale-origin witnesses and reflects the finite Tor intervals using existing nodes. The revised citation inventory is checked against the current delivery-base mirror. Current independent second reading fixes the unbound ramification index in step 7 and writes the R-linearity needed to tensor the adjunction Hom bijection in step 9. Landing-return repair: rebased citations to the current DAG, reread the expanded normalized-reduction, finite scalar-extension, exceptional-comparison and integral-direct-image statements, and made the ordinary coefficient-sheaf domains, uniform level bounds and restriction before derived limit explicit in steps 1, 3 and 8. Independent return second reading expands the F-cofinality calculation, the B-orientation construction and the B-input etale witnesses, including the explicit inverse-comparison composite for the extended dualizing tower. Maintainer reading (2026-10-17): steps 6-7 now cite the existing on-route det-sp-tower-gamma, which defines the tower orientation and the tower purity map whose derived limit is the integral purity map; this replaces the undeclared off-route use of thm-pur-finite-coefficient-smooth-purity and supplies the citation for the identification of the constructed gamma with that map.",
-  "blueprint": "Steps 1–2 realize proof paragraph (1); steps 3–8 realize paragraph (2), with explicit coherent constructions and the orientation/tensor-map calculation; step 9 realizes paragraph (3). This is a detail node of sk-lem-sp-field-extension, not that unit key node.",
+  "summary": "Repair of the human re-split return: eight independently stated unsplit work items replace the long strict-limit, normalized-system, coherent comparison, orientation projection/transpose arguments; the raw-rationalization argument is carried by the existing semilinear scalar-localization lemma (reviewer FIX dropped the duplicate new node lem-sp-field-raw-localization-diagrams). The statement is unchanged. The complete former nine-step argument is preserved verbatim in report.md with its allocation and source review; no new node has proof steps. Existing results supply finite freeness, constructibility, integral realization and linear localization.",
+  "blueprint": "Proof (1): new strict-limit and normalized-system nodes. Proof (2): six new coherent comparison, orientation, witness and projection/transpose nodes; parent assembles their actual tower equations and takes derived limits. Proof (3): raw linear localization with the existing localized-adjunction result. Proof (3) is carried by lem-pur-semilinear-scalar-localization (semilinear extension of functors, transformations and all equations to raw scalar localizations).",
   "tool_uses": [
    {
     "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Identifies the completed coefficient extension with the integral strict-tower extension and supplies finite freeness, including ramification."
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
    },
    {
     "node": "lem-weil-integral-scalar-extension-constructible",
-    "why": "Supplies preservation of the existing integral bounded constructible categories; no alternate smooth-purity argument is used."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Supplies exact countable products for the canonical Roos comparison on pro-etale module sheaves."
-   },
-   {
-    "node": "lem-weil-derived-limit-products-core",
-    "why": "Supplies the identification of termwise products with derived products used in the explicit finite-sum comparison."
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
    },
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Supplies a genuine derived-limit functor and its functorial Roos presentation, so equations survive taking limits."
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
    },
    {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic K-flat derived change of sheaf coefficient rings, used for the explicit reduction calculation."
-   },
-   {
-    "node": "lem-pur-kflat-change-of-rings",
-    "why": "Generic preservation of flat-term K-flat resolutions under sheaf coefficient extension."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Supplies simultaneous coherent models of the specified tensor, proper direct-image and open-extension maps; the unit proof needs actual tower morphisms, not arbitrary lifts."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Generic adjunction algebra for the coefficient-composition identity, after the tower comparison has been constructed."
-   },
-   {
-    "node": "lem-sf-derived-concentrated-single",
-    "why": "Identifies the shifted tower dualizing object with its only cohomology sheaf, to justify the restricted levelwise equality argument."
-   },
-   {
-    "node": "lem-weil-pbc-derived-single-fully-faithful",
-    "why": "Permits equality to be checked on component sheaf maps only after both objects have been identified as shifted degree-zero towers."
-   },
-   {
-    "node": "def-pur-smooth-purity-map",
-    "why": "Uses the specified orientation/tensor-map definition of finite purity to identify evaluations of the constructed tower purity transformation."
-   },
-   {
-    "node": "def-weil-derived-pullback-tensor-hom",
-    "why": "Uses only its explicit rational operation definitions for the localization step."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Its explicit completed-sheaf quotient identifications give compatible finite-level bases from one finite-free completed coefficient sheaf basis; no abstract scalar-ring freeness assertion is inferred from a sheaf theorem."
-   },
-   {
-    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "Its projection-normalized derived comparison for restriction of coefficient scalars justifies the canonical limit comparison, without choosing maps of triangulated cones."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Supplies the flat-term K-flat representative used to compute the reduction identity."
-   },
-   {
-    "node": "def-pur-co-smoothness",
-    "why": "Defines the finite tensor map by its projection-formula and counit transpose, needed to identify the purity maps."
-   },
-   {
-    "node": "def-exchange-projection",
-    "why": "Defines the counit-normalized proper projection and its compact-support open-extension composite."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "why": "Generic compatibility of ringed exchange with the projection map on the tower topoi proves the projection square used in the explicit transpose calculation."
+    "node": "def-weil-rationalization-karoubi",
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
    },
    {
     "node": "def-weil-integral-rational-qbar-compact-support",
-    "why": "Defines rational compact support on the same raw localized integral representatives used in the item, avoiding an identification with ambient condensed rational sheaves."
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
    },
    {
     "node": "def-coefficient-twists-detailed",
-    "why": "Defines the rationalized twists as images of integral twists, as required by the item's explicitly rationalized coefficient categories."
+    "why": "Generic coefficient, strict-limit or raw linear-localization interface used only for its stated construction; retains the finite comparison → tower → limit → rationalization route."
    },
    {
-    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "why": "Supplies bounded constructible etale-origin witnesses for both inputs of the current tower projection formula; a generic comparison tool, not a replacement purity route."
-   },
-   {
-    "node": "lem-sf-comparison-tor-amplitude",
-    "why": "Reflects the finite Tor intervals to the etale-origin witnesses required by the current tower projection formula; its uniformizer-power coefficient hypotheses hold for the cofinal ell-power levels."
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic semilinear raw scalar-localization lemma (unit sk-thm-purity-transport): extends the R-linear adjoints, the semilinear coefficient extension, b, c and all their integral equations to the rational categories; no node of the unit gives it."
    }
   ]
  },
@@ -483,15 +303,60 @@
   "def-weil-integral-rational-qbar-compact-support",
   "def-coefficient-twists-detailed",
   "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-sf-comparison-tor-amplitude"
+  "lem-sf-comparison-tor-amplitude",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NF-5e86c6258",
-  "group": "NF",
+  "reviewer": "NT-cc-Q62-9ae75d094",
+  "group": "Q62",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-5e86c6258 (reviewer sub-agent of L); spot-checked: I read the item in full: the corrected statement, 9 steps, all 35 proof dependencies and all statement dependencies. I also read the blueprint item and proof (1)-(3), the unit, the tower-gamma source, det-sp-tower-gamma, det-sp-normalized-equivalence, det-sp-rational-localized-hom and the key node sk-lem-sp-field-extension. The STATEMENT-DISPUTED domain correction only writes out the chapter's standing setting (separated finite type, ell != p, finite-field datum); it is not a weakening. The integral category is the completed R_T category, and the rational category is the raw localization, the same as in the key node. C_T is related to the strict-tower extension by the chi isomorphism, not identified silently. Steps 1-5, 8 and 9 hold: cofinal ell-powers including the ramified case, the K-injective finite-sum argument, the b-cocycle on the quotient paths, c as the counit transpose characterized by det-sp-reduction-exceptional, the unit and composition equations by triangle identities and mate-pasting, limits through the strict-tower functor, and R-linear localization of the adjunction. Two repairable faults, both fixed in fixes/dag/nodes/sec-smooth-purity/det-sp-field-extension-towers.json. (1) C8/route: step 6 used thm-pur-finite-coefficient-smooth-purity (unit sk-thm-smooth-purity, off route, not declared in tool_uses). It is replaced by the on-route det-sp-tower-gamma(1), with o_A=a_{A,bullet} and o_B=a_{B,bullet} shown by comparing levels. (2) C1/C4: step 7 identified its constructed tower gamma with the gamma_{f,bullet} of det-sp-integral-adjunction-bijection, which that node's statement does not define. The citation now goes to det-sp-tower-gamma(2), which defines it as t∘(1⊗a). The report wrongly said this node is missing. Only proof, proof_deps and split_report.summary changed. There are no new nodes, and the dependency closure of det-sp-tower-gamma does not reach the item. The remaining declared tool_uses are accepted as generic tools. No SGA source is cited, and the purity orientation is the diagonal/DNC one.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-9ae75d094 (reviewer sub-agent of L); spot-checked: I read the re-split note (at least 7 nodes, proof of at most 3000 characters), the blueprint item and its proof (1)-(3), the old 9-step proof kept verbatim in the report, the item and all 9 new nodes in full, and the cited statements: tower-gluing, tower-shriek-levels(2a,3), tower-gamma(1-3), reduction-direct-image, reduction-exceptional, reduction-compatibilities(1-3), scalar-extension-functor(2-4), reduction-tower-normalized, semilinear-derived-sections and rationalization-karoubi. The statement is unchanged. Every old step has a carrier node. The new nodes are true tower-level sub-arguments of comparable size, none restating an item clause. Checks: the finite-sum/K-injective strict limit; the reduction formula, which holds for all K in D(R_T) by associativity; b by the cocycle of det-sp-reduction-direct-image; c as counit transpose (G_A preserves normalized towers by tower-gamma(3)) with the unit equation typed; the orientation equality via concentration in degree -2d and single-sheaf full faithfulness; per-level etale witnesses and Tor intervals; tau = t of tower-gamma(2). Small cases: E=F, d=0, ramified h_F != h_E, K=0. Route is diagonal/DNC, no SGA. One fault (C5 duplicate): lem-sp-field-raw-localization-diagrams restates the existing split node lem-pur-semilinear-scalar-localization. That node gives the semilinear extension of functors and transformations to raw localizations and keeps every equation true. With phi=id, the triangle identities give the localized adjunctions. With phi:R->S, the image of varpi_E is invertible in F, so it covers b, c and all their equations. The report compared the new node only with lem-weil-pbc-completed-localized-adjunction-square and missed this one. FIX in fixes/dag/nodes/sec-smooth-purity/det-sp-field-extension-towers.json: step 6 now cites lem-pur-semilinear-scalar-localization, and says the semilinear functor is the strict-tower extension identified with C_T by chi of step 1. I also updated proof_deps, the split_report summary and blueprint text, and declared the new cite in split_report.tool_uses: it is generic and off-route (unit sk-thm-purity-transport), with no cycle (its 54-node closure misses the item). After the fix there are 8 new nodes and the proof is 2318 characters. Advisory: lem-coef-ramified-scalar-system-transpose (NH, same day) builds parallel b/c in the coef pi^n-system framework, not the det-sp-tower-gluing adjunction, so it is not dropped. The report's allocation line for old step 9 is now stale. The other tool_uses are accepted as generic.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldExtensionTowers",
+  "declaration": "AlgebraicGeometry.ProEtale.FieldExtensionTowers.Result",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FieldExtensionTowers.Result",
+   "AlgebraicGeometry.ProEtale.FieldExtensionTowers.field_extension_towers"
+  ],
+  "statement": "structure Result",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-25",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/FieldExtensionTowers.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c8eb57fe",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery after the 256e8a LAND refusal for duplicate InvertibilityLaw/Laws/iso. diff -r against the PASSed 256e8a snapshot: only the extracted FieldShriekSystemLaws.lean and the replacement FieldShriekSystemComparison.lean are dropped, IntegralModels now imports the published Sheaf.Paper.FieldShriekSystemComparison, and def-sp-field-shriek-system-laws is existing:true on that module (verbatim Laws signature, lines 63-64; statement matches the published defs; stmt_deps models/normalized/mixed/coherence all in live). No delivered module redeclares the names. The item cites the def owner, not the theorem (H2 ok; existing:true def-owner precedent). The other 11 modules and records are byte-identical to the reviewed head. The item record differs from live only in lean and added stmt_deps; the new IDs and modules are absent from live. Re-checked the hypotheses, clauses (1)-(3), the source/strict-limit/purity pinning and the edge cases. Single sorry. Advisory: H11 same-worker second reading; transitive-only scalar citations; theorem record also lists the law names. No compile run (no change); the report's last OK dry run predates the ownership repair, and the landing compiles it again."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T070248-L-3503399",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

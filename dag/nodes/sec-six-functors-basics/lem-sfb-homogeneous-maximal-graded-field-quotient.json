@@ -1,0 +1,231 @@
+{
+ "id": "lem-sfb-homogeneous-maximal-graded-field-quotient",
+ "kind": "statement",
+ "title": "A proper homogeneous ideal admits a graded-field quotient",
+ "statement": "Let $M$ be an abelian group written additively and $A$ a commutative ring with additive subgroups $A_n$ such that every element has a unique finite homogeneous expansion, $1\\in A_0$, and $A_nA_r\\subseteq A_{n+r}$. Call an ideal homogeneous if it contains every homogeneous component of each of its elements. For every proper homogeneous ideal $L\\subsetneq A$ there is a proper homogeneous ideal $H$ containing $L$, maximal among proper homogeneous ideals. The quotient ring $D=A/H$ [def-weil-pbc-algebra-hom-quotient], with quotient map $q:A\\to D$, is nonzero and is graded by $D_n=q(A_n)$. Every nonzero $d\\in D_n$ has an inverse $e\\in D_{-n}$ with $de=1$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00JM (section-proj), opening definition of homogeneous ideals, generalized from the displayed grading to an arbitrary abelian group. The maximal homogeneous quotient and inverse assertion are agent-written auxiliary results; their complete Zorn argument is retained in the Q112 report, not asserted to be a theorem of 00JM."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathcal S$ be the set of proper homogeneous ideals of $A$ containing $L$, ordered by inclusion. It contains $L$. For a nonempty chain $\\mathcal C$, its union $U$ is an ideal: any two elements lie in a common member, where subtraction and multiplication by $A$ preserve membership. Each component of an element of $U$ lies in that same member, so $U$ is homogeneous. It contains $L$ and is proper, since $1\\in U$ would imply $1$ belongs to a proper member. The empty chain has upper bound $L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JM (section-proj), opening componentwise definition of homogeneous ideals; agent-written argument for arbitrary abelian group gradings, retained in coord/reports/Q112/lem-sfb-graded-stabilizer-strong-products.md, Complete proof retained for the new node."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-zorn-lemma] with $X=A$ and the family $\\mathcal S$ of step 1. Every chain, including the empty chain, has an upper bound in $\\mathcal S$. Obtain a maximal member $H$. Any proper homogeneous ideal containing $H$ also contains $L$, hence belongs to $\\mathcal S$ and equals $H$. This is the required maximality among proper homogeneous ideals.",
+   "uses": [
+    "lem-weil-pbc-zorn-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JM (section-proj), opening componentwise definition of homogeneous ideals; agent-written argument for arbitrary abelian group gradings, retained in coord/reports/Q112/lem-sfb-graded-stabilizer-strong-products.md, Complete proof retained for the new node."
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-algebra-hom-quotient] to form the surjective ring map $q:A\\to D=A/H$ with kernel $H$. Put $D_r=q(A_r)$, additive subgroups. Surjectivity and the finite homogeneous expansions in $A$ show they span $D$. For distinct degrees $r$ and lifts $a_r\\in A_r$, the relation $\\sum_r q(a_r)=0$ implies $\\sum_r a_r\\in H$; homogeneity then gives $a_r\\in H$ for each $r$. Thus all $q(a_r)=0$, proving uniqueness of the finite expansion in $D$. Also $1_D=q(1)\\in D_0$ and $D_rD_s\\subseteq D_{r+s}$. Since $1\\notin H=\\ker q$, $1_D\\ne0$.",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JM (section-proj), opening componentwise definition of homogeneous ideals; agent-written argument for arbitrary abelian group gradings, retained in coord/reports/Q112/lem-sfb-graded-stabilizer-strong-products.md, Complete proof retained for the new node."
+   }
+  },
+  {
+   "text": "Fix $0\\ne d\\in D_n$ and lift it to $a\\in A_n$. Then $a\\notin H$. The set $J=H+(a)=\\{h+ax:h\\in H,\\ x\\in A\\}$ is an ideal: it is closed under subtraction and multiplication by any element of $A$. For every $r\\in M$, the degree-$r$ component of $h+ax$ is $h_r+a x_{r-n}$. Indeed, multiplication sends the finite expansion of $x$ to degrees $n+s$, which are distinct because translation by $n$ in $M$ is injective. Since $h_r\\in H$, every component belongs to $J$, so $J$ is homogeneous. It strictly contains $H$ because $a\\in J\\setminus H$. Thus maximality of $H$ forces $J=A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JM (section-proj), opening componentwise definition of homogeneous ideals; agent-written argument for arbitrary abelian group gradings, retained in coord/reports/Q112/lem-sfb-graded-stabilizer-strong-products.md, Complete proof retained for the new node."
+   }
+  },
+  {
+   "text": "Write $1=h+ax$ with $h\\in H$ and $x\\in A$, using $J=A$. Taking the degree-zero component of this equality gives $1=h_0+a x_{-n}$, with $h_0\\in H$. The quotient map therefore satisfies $1_D=q(a)q(x_{-n})=d q(x_{-n})$. Set $e=q(x_{-n})\\in D_{-n}$. Then $de=1_D$ as required (and $ed=1_D$ by commutativity).",
+   "uses": [
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00JM (section-proj), opening componentwise definition of homogeneous ideals; agent-written argument for arbitrary abelian group gradings, retained in coord/reports/Q112/lem-sfb-graded-stabilizer-strong-products.md, Complete proof retained for the new node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-zorn-lemma",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00JM (section-proj) supplies only the componentwise homogeneous-ideal convention. Complete independent proof from the Q112 retained argument, with Zorn supplied by lem-weil-pbc-zorn-lemma; no graded-field assertion is attributed to Stacks."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every proper homogeneous ideal in a commutative ring graded by an abelian group is contained in a homogeneous maximal ideal whose quotient has invertible nonzero homogeneous elements",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (q :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"The homogeneous ideal of elements with zero zeroth component (the irrelevant ideal) is not contained within the homogeneous ideal defined by the condition that all homogeneous fractions $\\\\frac{(\\\\text{\"}\n  {\"name\": \"ProjectiveSpectrum.not_irrelevant_le\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubmonoidClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] (self : ProjectiveSpectrum 𝒜), ¬HomogeneousIdeal.irrelevant 𝒜 ≤ self.asHomogeneousIdeal\", \"doc\": \"For any graded ring $ A $, the irrelevant ideal consisting of elements with zero zeroth component is not contained in any homogeneous prime ideal corresponding to a point in the projective spectrum $ \"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] {𝒜 : ℕ → σ}\\n  [inst_3 : GradedRing 𝒜] {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m) (hm : 0 < m)\\n  (q :\\n    ↑↑(AlgebraicGeometry.Spec.locallyRingedSpaceObj\\n            { carrier := HomogeneousLocalization.\", \"doc\": \"The ideal in the graded ring $ A $ consisting of all elements $ a $ such that for every natural number $ i $, the homogeneous fraction $ \\\\frac{(\\\\text{proj}_i(a))^m}{f^i} $ lies in the prime ideal $ q \"}\n  {\"name\": \"HomogeneousIdeal.instTop\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal\", \"type\": \"{ι : Type u_1} →\\n  {σ : Type u_2} →\\n    {A : Type u_3} →\\n      [inst : Semiring A] →\\n        [inst_1 : DecidableEq ι] →\\n          [inst_2 : AddMonoid ι] →\\n            [inst_3 : SetLike σ A] →\\n              [inst_4 : AddSubmonoidClass σ A] → {𝒜 : ι → σ} → [inst_5 : GradedRing 𝒜] → Top (HomogeneousIde\", \"doc\": \"The entire ring, considered as the top ideal in the lattice of homogeneous ideals, is homogeneous with respect to the grading $\\\\mathcal{A}$. This means that for every element in the ideal and every gr\"}\n  {\"name\": \"HomogeneousIdeal.mem_irrelevant_of_mem\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal\", \"type\": \"∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [inst_4 : CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] {x : A} {i : ι}, 0 < i →\", \"doc\": \"If an element $x$ belongs to the graded component $A_i$ of a graded ring $A$ for some $i > 0$, then $x$ is contained in the irrelevant ideal $A_+$. This follows from the definition of the irrelevant i\"}\n  {\"name\": \"Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Radical\", \"type\": \"∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : CommRing A] [inst_1 : AddCommMonoid ι] [inst_2 : LinearOrder ι]\\n  [IsOrderedCancelAddMonoid ι] [inst_4 : SetLike σ A] [inst_5 : AddSubmonoidClass σ A] {𝒜 : ι → σ}\\n  [inst_6 : GradedRing 𝒜] {I : Ideal A},\\n  Ideal.IsHomogeneous 𝒜 I →\\n    I ≠ ⊤ →\\n \", \"doc\": \"Let $ I $ be a homogeneous ideal in a graded ring $ A $ with respect to a grading $ \\\\mathcal{A} $. If $ I $ is not the entire ring $ A $, and for any homogeneous elements $ x, y \\\\in A $, the product $\"}\n  {\"name\": \"Ideal.IsHomogeneous.top\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Ideal\", \"type\": \"∀ {ι : Type u_1} {σ : Type u_2} {A : Type u_3} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddMonoid ι]\\n  [inst_3 : SetLike σ A] [inst_4 : AddSubmonoidClass σ A] (𝒜 : ι → σ) [inst_5 : GradedRing 𝒜], Ideal.IsHomogeneous 𝒜 ⊤\", \"doc\": \"The top ideal (the entire ring) is homogeneous with respect to the grading $\\\\mathcal{A}$, meaning that for every element in the ideal and every index, its homogeneous component of that index is also c\"}\n  {\"name\": \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asHomogeneousIdeal\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          {𝒜 : ℕ → σ} →\\n            [inst_3 : GradedRing 𝒜] →\\n              {f : A} →\\n                {m : ℕ} →\\n                  f ∈ 𝒜 m →\\n                    0 < m\", \"doc\": \"The homogeneous ideal in the graded ring $\\\\mathcal{A}$ consisting of all elements $a$ such that for every natural number $i$, the homogeneous fraction $\\\\frac{(\\\\text{proj}_i(a))^m}{f^i}$ lies in the pr\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideal and localization structures, prime criteria, and ordinary maximal-ideal field quotients do not give a maximal homogeneous quotient with homogeneous inverses for arbitrary abelian group gradings."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomogeneousIdeal\", \"maximal\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideal and localization structures, prime criteria, and ordinary maximal-ideal field quotients do not give a maximal homogeneous quotient with homogeneous inverses for arbitrary abelian group gradings."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*maximal|maximal.*homogeneous|graded.?field|graded.?division",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideal and localization structures, prime criteria, and ordinary maximal-ideal field quotients do not give a maximal homogeneous quotient with homogeneous inverses for arbitrary abelian group gradings."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A maximal homogeneous ideal quotient of a group graded commutative ring is a graded field",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.Quotient.maximal_ideal_iff_isField_quotient\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Basic\", \"type\": \"{R} [CommRing R] (I : Ideal R) : I.IsMaximal ↔ IsField (R ⧸ I)\", \"doc\": \"An ideal $ I $ in a commutative ring $ R $ is maximal if and only if the quotient ring $ R/I $ is a field.\"}\n  {\"name\": \"Ideal.Quotient.maximal_of_isField\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Basic\", \"type\": \"{R} [CommRing R] (I : Ideal R) (hqf : IsField (R ⧸ I)) : I.IsMaximal\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $ of $ R $, if the quotient ring $ R/I $ is a field, then $ I $ is a maximal ideal.\"}\n  {\"name\": \"IsArtinianRing.fieldOfSubtypeIsMaximal\", \"module\": \"Mathlib.RingTheory.Artinian.Module\", \"type\": \"(I : MaximalSpectrum R) : Field (R ⧸ I.asIdeal)\", \"doc\": \"For any commutative ring $ R $ and a maximal ideal $ I $ in its maximal spectrum, the quotient ring $ R/I $ forms a field. This follows from the maximality of $ I $, which ensures every nonzero elemen\"}\n  {\"name\": \"Ideal.Quotient.field\", \"module\": \"Mathlib.RingTheory.Ideal.Quotient.Basic\", \"type\": \"{R} [CommRing R] (I : Ideal R) [I.IsMaximal] : Field (R ⧸ I)\", \"doc\": \"For any commutative ring $ R $ and a maximal ideal $ I $ of $ R $, the quotient ring $ R/I $ is a field. This follows because the maximality of $ I $ ensures that every nonzero element in $ R/I $ has \"}\n  {\"name\": \"Ideal.Quotient.field.congr_simp\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \"∀ {R : Type u_5} [inst : CommRing R] (I : Ideal R) [inst_1 : I.IsMaximal],\\n  Ideal.Quotient.field I = Ideal.Quotient.field I\", \"doc\": \"For any commutative ring $ R $ and a maximal ideal $ I $ of $ R $, the quotient ring $ R/I $ is a field. This follows because the maximality of $ I $ ensures that every nonzero element in $ R/I $ has \"}\n  {\"name\": \"IsLocalRing.ResidueField.field\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": Field (ResidueField R)\", \"doc\": \"For any commutative local ring $ R $, the residue field obtained by quotienting $ R $ by its unique maximal ideal (the set of all non-units) is a field. This follows because the maximality of the idea\"}\n  {\"name\": \"HomogeneousIdeal.irrelevant\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal\", \"type\": \": HomogeneousIdeal 𝒜\", \"doc\": \"The homogeneous ideal in a graded ring $\\\\mathcal{A}$ consisting of all elements whose zeroth homogeneous component is zero. This ideal is defined as the kernel of the ring homomorphism projecting $\\\\ma\"}\n  {\"name\": \"Algebra.FormallyUnramified.isField_quotient_map_maximalIdeal\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \"[FormallyUnramified R S] : IsField (S ⧸ (maximalIdeal R).map (algebraMap R S))\", \"doc\": \"If $ S $ is a formally unramified $ R $-algebra, then the quotient ring $ S / \\\\mathfrak{m}_R S $ is a field, where $ \\\\mathfrak{m}_R $ denotes the maximal ideal of the local ring $ R $.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideal and localization structures, prime criteria, and ordinary maximal-ideal field quotients do not give a maximal homogeneous quotient with homogeneous inverses for arbitrary abelian group gradings."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero commutative group graded ring has a quotient graded ring in which every nonzero homogeneous element is a unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomogeneousLocalization\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} → {σ : Type u_3} → [inst : CommRing A] → [SetLike σ A] → (ι → σ) → Submonoid A → Type (max u_1 u_2)\", \"doc\": \"The type representing the quotient of homogeneous fractions (with numerator and denominator in the submonoid $ x $) by the equivalence relation induced by their equality in the localization $ A_x $, w\"}\n  {\"name\": \"HomogeneousLocalization.homogeneousLocalizationCommRing\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] →\\n        [inst_1 : SetLike σ A] →\\n          [inst_2 : AddSubgroupClass σ A] →\\n            [inst_3 : AddCommMonoid ι] →\\n              [inst_4 : DecidableEq ι] →\\n                {𝒜 : ι → σ} → [GradedRing 𝒜] → {x : Subm\", \"doc\": \"The homogeneous localization of a graded algebra at a submonoid, consisting of equivalence classes of homogeneous fractions with denominators in the submonoid, is equipped with a commutative ring stru\"}\n  {\"name\": \"HomogeneousLocalization.Away\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} → {A : Type u_2} → {σ : Type u_3} → [CommRing A] → [SetLike σ A] → (ι → σ) → A → Type (max u_1 u_2)\", \"doc\": \"The homogeneous localization of a graded algebra $ A $ at the submonoid generated by the powers of an element $ f $, consisting of homogeneous fractions where numerators and denominators are homogeneo\"}\n  {\"name\": \"HomogeneousLocalization.Away.mk\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] →\\n        [inst_1 : SetLike σ A] →\\n          [inst_2 : AddSubgroupClass σ A] →\\n            [inst_3 : AddCommMonoid ι] →\\n              [inst_4 : DecidableEq ι] →\\n                (𝒜 : ι → σ) →\\n                  [GradedR\", \"doc\": \"Given a graded algebra $\\\\mathcal{A}$ over an additive monoid $\\\\iota$, an element $f \\\\in \\\\mathcal{A}_d$ for some degree $d \\\\in \\\\iota$, a natural number $n$, and an element $x \\\\in \\\\mathcal{A}_{n \\\\cdot d\"}\n  {\"name\": \"HomogeneousLocalization.instOne\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] →\\n        [inst_1 : SetLike σ A] →\\n          [inst_2 : AddSubgroupClass σ A] →\\n            [inst_3 : AddCommMonoid ι] →\\n              [inst_4 : DecidableEq ι] →\\n                {𝒜 : ι → σ} → [GradedRing 𝒜] → (x : Subm\", \"doc\": \"The homogeneous localization of a graded algebra at a submonoid has a multiplicative identity given by the equivalence class of $1/1$, where both numerator and denominator are homogeneous elements of \"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg.instOne\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : CommRing A] →\\n        [inst_1 : SetLike σ A] →\\n          [inst_2 : AddSubmonoidClass σ A] →\\n            {𝒜 : ι → σ} →\\n              (x : Submonoid A) →\\n                [inst_3 : AddCommMonoid ι] →\\n                  [inst_4 : Deci\", \"doc\": \"In the homogeneous localization of a graded ring with respect to a submonoid, where numerators and denominators are homogeneous elements of the same degree, the multiplicative identity is given by the\"}\n  {\"name\": \"HomogeneousLocalization.Away.mk_surjective\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] (𝒜 : ι → σ)\\n  [inst_5 : GradedRing 𝒜] {f : A} {d : ι} (hf : f ∈ 𝒜 d) (x : HomogeneousLocalization.Away 𝒜 f),\\n  ∃ n a, ∃ (ha \", \"doc\": \"For any element $x$ in the homogeneous localization $\\\\mathcal{A}_{(f)}$ of a graded algebra $\\\\mathcal{A}$ at an element $f$ of degree $d$, there exists a natural number $n$ and a homogeneous element $\"}\n  {\"name\": \"HomogeneousLocalization.zero_eq\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/HomogeneousLocalization\", \"type\": \"∀ {ι : Type u_1} {A : Type u_2} {σ : Type u_3} [inst : CommRing A] [inst_1 : SetLike σ A]\\n  [inst_2 : AddSubgroupClass σ A] [inst_3 : AddCommMonoid ι] [inst_4 : DecidableEq ι] {𝒜 : ι → σ}\\n  [inst_5 : GradedRing 𝒜] (x : Submonoid A), 0 = Quotient.mk'' 0\", \"doc\": \"In the homogeneous localization of a graded algebra at a submonoid, the additive identity (zero) is equal to the equivalence class of the pair consisting of zero and any element from the submonoid.\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: homogeneous ideal and localization structures, prime criteria, and ordinary maximal-ideal field quotients do not give a maximal homogeneous quotient with homogeneous inverses for arbitrary abelian group gradings."
+  },
+  {
+   "tool": "grep",
+   "query": "homogeneous.*maximal|maximal.*homogeneous|graded.?field|graded.?division",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary maximal-ideal quotients, ordered grading prime criteria, irrelevant ideals and localizations do not give this group-graded quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A maximal homogeneous ideal quotient is a graded division ring",
+   "results": "Ideal.Quotient.divisionRing; Ideal.Quotient.maximal_of_isField; IsArtinianRing.fieldOfSubtypeIsMaximal; Ideal.Quotient.maximal_ideal_iff_isField_quotient; Ideal.Quotient.field; HomogeneousIdeal.irrelevant; Ideal.Quotient.field.congr_simp; HomogeneousIdeal",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary maximal-ideal quotients, ordered grading prime criteria, irrelevant ideals and localizations do not give this group-graded quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomogeneousIdeal, IsMax",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary maximal-ideal quotients, ordered grading prime criteria, irrelevant ideals and localizations do not give this group-graded quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every proper homogeneous ideal in an abelian group graded commutative ring is contained in a maximal homogeneous ideal and every nonzero homogeneous element of the quotient has a homogeneous inverse",
+   "results": "HomogeneousIdeal.mem_irrelevant_of_mem; HomogeneousIdeal.instTop; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top; Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem; HomogeneousLocalization.Away.mk_surjective; ProjectiveSpectrum.not_irrelevant_le; HomogeneousIdeal.irrelevant",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary maximal-ideal quotients, ordered grading prime criteria, irrelevant ideals and localizations do not give this group-graded quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "zorn_le_nonempty|zorn_subset_nonempty|exists_maximal_of_chains_bounded",
+   "results": "Mathlib/Order/PrimeSeparator.lean; Mathlib/Order/TeichmullerTukey.lean; Mathlib/Order/CompactlyGenerated/Basic.lean; Mathlib/Order/Zorn.lean; Mathlib/Order/Zorn.lean; Mathlib/Order/Zorn.lean; Mathlib/Order/Zorn.lean; Mathlib/Order/Zorn.lean",
+   "date": "2026-10-24",
+   "verdict": "match for the Zorn step only; reuse existing lem-weil-pbc-zorn-lemma, not a match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal maximal among homogeneous ideals has an inverse of opposite degree for every homogeneous element outside it",
+   "results": "HomogeneousIdeal.mem_irrelevant_of_mem; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.denom_notMem; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant; HomogeneousIdeal.irrelevant_le; HomogeneousIdeal.mem_irrelevant_iff; HomogeneousIdeal.toIdeal_irrelevant_le; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal; AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.ne_top",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary maximal-ideal quotients, ordered grading prime criteria, irrelevant ideals and localizations do not give this group-graded quotient theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-graded-stabilizer-strong-products",
+  "date": "2026-10-24",
+  "group": "Q112"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Affine-chart quotient input: the homogeneous-unit argument; maximal homogeneous quotient used to test whether opposite-degree products generate one.",
+   "via": [
+    "lem-sfb-graded-stabilizer-strong-products",
+    "lem-sfb-affine-free-split-torus-invariants",
+    "lem-sfb-relatively-ample-subtorus-quotient-schematicity",
+    "lem-sfb-normal-semiabelian-generic-torus-quotient",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-homogeneous-maximal-graded-field-quotient",
+  "worker": "stage1",
+  "summary": "Retained the statement and historical searches. Reused the Q112 complete Zorn and component proof; cited the existing Zorn Mathlib leaf and quotient definition. Verified chain bounds including the empty chain, quotient directness, the homogeneous principal-ideal extension and extraction of an opposite-degree inverse. No new nodes and no statement correction.",
+  "blueprint": "The item has no imported blueprint ancestor (ancestor prints None); it is the affine-chart homogeneous-unit input recorded in blueprint.from.place, beneath lem-sfb-graded-stabilizer-strong-products. Steps 1-2 construct the maximal homogeneous ideal, step 3 the quotient grading, and steps 4-5 the homogeneous inverse. The latest sk-thm-sf-ctf-stability unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-c45786448",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-c45786448 (reviewer sub-agent of L); spot-checked: I read the whole item. Against clones/live, the statement, source, blueprint, stmt_deps and created fields are unchanged. The delivery only adds five proof steps, proof_deps, proof_origin, appended searches and split_report, and creates no new nodes. There is no repair note, so this is not a re-split. Stacks algebra.tex section-proj (00JM, line 13365) supplies only the homogeneous-ideal convention, and the item writes the grading for an arbitrary abelian group M explicitly. Step 1: the proper homogeneous ideals containing L contain L; the union of a nonempty chain is a homogeneous ideal and proper because 1 is in no member; the empty chain is bounded by L. Step 2: lem-weil-pbc-zorn-lemma (Mathlib leaf zorn_subset, Zorn.lean:143) fits exactly, and maximality among all proper homogeneous ideals follows because they contain L. Step 3: def-weil-pbc-algebra-hom-quotient, with R=D=A, gives a surjective map with kernel H. The expansion in D is unique: the components of the sum of the lifts are the lifts themselves, so each lies in H by homogeneity; also 1_D is nonzero. Step 4: the component of h+ax in degree r is h_r+a x_{r-n}, using that translation by n is injective even for torsion M. So H+(a) is homogeneous and strictly larger than H, hence equal to A. Step 5: the degree-0 part of 1=h+ax gives an inverse q(x_{-n}) in D_{-n}. proof_deps equals the union of uses, there is no cycle and nothing uncited. I tested A=0 (vacuous), M=0, n=0, k[t,t^-1] (D is not a field, consistent with the statement) and F_2[C_2] (no primality claimed). A regex search of all DAG statements finds no duplicate. No SGA source is used. The parent Q112 uses exactly the stated clauses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HomogeneousMaximalGradedFieldQuotient",
+  "declaration": "Ideal.exists_homogeneous_maximal_gradedField_quotient",
+  "file": "lean/Sheaf/RingTheory/HomogeneousMaximalGradedFieldQuotient.lean",
+  "statement": "theorem exists_homogeneous_maximal_gradedField_quotient {M : Type u} [AddCommGroup M] [DecidableEq M] {A : Type v} [CommRing A] (𝒜 : M → AddSubgroup A) [GradedRing 𝒜] (L : Ideal A) (hL : L.IsHomogeneous 𝒜) (hL_proper : L ≠ ⊤) : ∃ H : Ideal A, L ≤ H ∧ H ≠ ⊤ ∧ H.IsHomogeneous 𝒜 ∧ (∀ J : Ideal A, H ≤ J → J ≠ ⊤ → J.IsHomogeneous 𝒜 → J = H) ∧ Nontrivial (A ⧸ H) ∧ Nonempty (GradedRing (fun n : M ↦ (𝒜 n).map (Ideal.Quotient.mk H).toAddMonoidHom)) ∧ ∀ (n : M) (d : A ⧸ H), d ∈ (𝒜 n).map (Ideal.Quotient.mk H).toAddMonoidHom → d ≠ 0 → ∃ e : A ⧸ H, e ∈ (𝒜 (-n)).map (Ideal.Quotient.mk H).toAddMonoidHom ∧ d * e = 1",
+  "branch": "sheaf-dag",
+  "by": "Q41",
+  "date": "2026-10-24",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-cbafd86e1"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbafd86e1",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Mathematics correct; one signature fix. Node changes only lean (diffed vs live/side-live); no new nodes. Every clause matches: M abelian group, [GradedRing 𝒜], IsHomogeneous, L ≠ ⊤, H ⊇ L proper homogeneous, maximal among proper homogeneous ideals, canonical A ⧸ H with Ideal.Quotient.mk (def-weil-pbc-algebra-hom-quotient leaf), Nontrivial quotient, Nonempty GradedRing on the actual images, inverse in the image of 𝒜(-n) with d*e=1. Nothing extra assumed or claimed; statement verbatim; universes bound; docstrings carry source/blueprint and all 5 steps; proof sorry only; report has both required sections. Edge cases A=0, M=0, n=0, torsion M, k[t,t^-1], empty chain all fine. FIX: open Classical in baked the classical DecidableEq M into the GradedRing/IsHomogeneous instance args, so citers with their own instance (e.g. ℤ) could not apply it directly; replaced by a [DecidableEq M] binder (strictly more general). fixes/HomogeneousMaximalGradedFieldQuotient.lean (full module) + fixes/lem-sfb-homogeneous-maximal-graded-field-quotient.lean-record.json (verbatim statement; refit_record: no notes or refusals). nt_compile --json on the fixed file: exit 0, 1.0 s, clean; control without the binder fails 'failed to synthesize DecidableEq M'."
+ }
+}

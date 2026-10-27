@@ -6,6 +6,11 @@ Authors: SHEAF group S1
 module
 
 public import Sheaf.AlgebraicGeometry.CondensedLisseEvaluationModel
+import Sheaf.Algebra.Homology.CochainDerivedAdjunction
+import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.RingedKFlatWordComparisonDescent
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientSliceBaseChange
 
 /-! # Scalar associativity for condensed realization on a profinite slice
 
@@ -17,6 +22,58 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory
+open CategoryTheory.Limits
+
+private instance coefficientRestrictionLimits
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R B : Sheaf J CommRingCat.{u + 1}} (f : R ⟶ B) :
+    PreservesFiniteLimits (SheafOfModules.restrictScalars.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map f)) :=
+  (SheafOfModules.sheafRingCoefficientOrdinaryAdjunction.{u + 1, u + 1, u} f).choose
+
+private instance coefficientRestrictionColimits
+    {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
+    {R B : Sheaf J CommRingCat.{u + 1}} (f : R ⟶ B) :
+    PreservesFiniteColimits (SheafOfModules.restrictScalars.{u + 1}
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map f)) :=
+  (SheafOfModules.sheafRingCoefficientOrdinaryAdjunction.{u + 1, u + 1, u} f).choose_spec.choose
+
+private theorem cochainScalarAdjunction
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    {J : GrothendieckTopology C} {R B : Sheaf J CommRingCat.{u + 1}}
+    [HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u} J R))]
+    [HasDerivedCategory.{u + 2} (SheafOfModules.{u + 1}
+      (SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u} J B))]
+    (f : R ⟶ B)
+    (M : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2} f) :
+    Nonempty (M.T ⊣ (SheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map f)).mapDerivedCategory) :=
+    by
+  obtain ⟨hl, hc, ha⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction.{u + 1, u + 1, u} f
+  let := hl
+  let := hc
+  obtain ⟨a, _⟩ := ha M.E M.obj_eq M.map_eq
+  let := M.universal
+  obtain ⟨d, _⟩ := Functor.exists_cochainDerivedAdjunction M.E _ a M.T M.ε
+    (fun P ↦ P.IsKFlatIndependentCoefficients) (fun K ↦ by
+      obtain ⟨P, p, hp, _, hq, _⟩ :=
+        CochainComplex.exists_isKFlatResolutionIndependentCoefficients K
+      exact ⟨P, p, hp, hq⟩) M.computes
+  exact ⟨d⟩
+
+private noncomputable def constantScalarModelIso
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) {R B : Type (u + 1)} [CommRing R] [CommRing B]
+    [HasDerivedCategory.{u + 2} (realizationModules J R)]
+    [HasDerivedCategory.{u + 2} (realizationModules J B)]
+    (f : R →+* B)
+    (M : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
+      ((constantSheaf J CommRingCat.{u + 1}).map (CommRingCat.ofHom f))) :
+    M.T ≅ ConstantScalarRealization.derivedExtension J f :=
+  (cochainScalarAdjunction _ M).some.leftAdjointUniq
+    (ConstantScalarRealization.derivedAdjunction J f)
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Realization on a profinite slice factors through its actual section ring.
@@ -43,6 +100,47 @@ so both sides are zero, as the same formulas require. -/
 theorem condensed_profinite_scalar_compatibility
     (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (S : Profinite.{u}) :
     profiniteScalarClause Λ.X S := by
-  sorry
+  let J := coherentTopology Profinite.{u}
+  let K := J.over S
+  let R := condensedScalarRing Λ.X
+  let O := profiniteCoefficient Λ.X S
+  let A := Evaluation.A K O (Over.mk (𝟙 S))
+  let q := profiniteScalarMap Λ.X S
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence K O
+  let := Functor.additive_of_preserves_binary_products e.inverse
+  let a := (constantSheaf K CommRingCat.{u + 1}).map (CommRingCat.ofHom q)
+  let b := Evaluation.scalarMap K O (Over.mk (𝟙 S)) Over.mkIdTerminal
+  let Ma : SheafOfModules.DerivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2}
+      a :=
+    SheafOfModules.canonicalDerivedChangeOfRingsModel a
+  let Mb := Evaluation.extensionModel K O (Over.mk (𝟙 S)) Over.mkIdTerminal
+  let Mc := profiniteDirectScalarModel Λ S
+  obtain ⟨_, _, assoc, _, _⟩ := CategoryTheory.RingedKFlatWord.scalar_associator a b Ma Mb Mc
+  obtain ⟨slice⟩ := profinite_coefficient_slice_base_change Λ S
+  obtain ⟨constants⟩ := commutative_constant_slice_restriction J R S
+  let := (commutativeSiteConstantModuleFunctor_exact J R).1
+  let := (commutativeSiteConstantModuleFunctor_exact J R).2.1
+  let := (commutativeSiteConstantModuleFunctor_exact J R).2.2
+  let := (commutativeSiteConstantModuleFunctor_exact K R).1
+  let := (commutativeSiteConstantModuleFunctor_exact K R).2.1
+  let := (commutativeSiteConstantModuleFunctor_exact K R).2.2
+  let constantsD := (Functor.mapDerivedCategoryCompIso
+    (commutativeSiteConstantModuleFunctor J R)
+    (commutativeConstantSliceRestriction J R S)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso constants
+  let cJ := commutativeSiteDerivedConstantModuleFunctor J R
+  let cK := commutativeSiteDerivedConstantModuleFunctor K R
+  let cA := commutativeSiteDerivedConstantModuleFunctor K A
+  let E := e.inverse.mapDerivedCategory
+  let compare := ConstantScalarRealization.comparisonIso K q
+  refine ⟨?_⟩
+  change profiniteScalarRealization Λ.X S ≅
+    RingDerivedScalarExtension.moduleDerivedExtension q ⋙ (cA ⋙ Mb.T ⋙ E)
+  exact Functor.isoWhiskerLeft cJ slice ≪≫
+    Functor.isoWhiskerRight constantsD (Mc.T ⋙ E) ≪≫
+    Functor.isoWhiskerLeft cK (Functor.isoWhiskerRight assoc.symm E) ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft cK (constantScalarModelIso K q Ma)) (Mb.T ⋙ E) ≪≫
+    Functor.isoWhiskerRight compare (Mb.T ⋙ E)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

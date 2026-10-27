@@ -153,7 +153,18 @@
   "thm-sp-if-e1"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
  "lead_note": "16:11 UTC: construction clause added to the statement by L (reviewer R-gdc of J1's lem-pc-grothendieck-ss-double-complex-model: the item needs which spectral sequence it is, the statement only asserted existence); Stacks 015N proof; the Cartan-Eilenberg resolution is described inline (no node defines it; Stacks 015G) and a definition node is wanted.",
@@ -226,5 +237,60 @@
   "landing": "20261012T063520-L-3159660",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A\\xrightarrow{F}\\mathcal B\\xrightarrow{G}\\mathcal C$ be left\nexact additive functors with $\\mathcal A$, $\\mathcal B$ Grothendieck abelian\nand $\\mathcal C$ abelian, such that $F$ sends injectives to $G$-acyclics (as\nfor a composable pair [def-sp-composite-acyclicity]). For every $X\\in\\mathcal A$ there is a\nfunctorial first-quadrant spectral sequence whose $E_2$-page is\n\n$$\n E_2^{p,q}=R^pG\\bigl(R^qF(X)\\bigr)\n$$\n\nand which converges to $R^{p+q}(G\\circ F)(X)$; its edge maps in degree $n$\nhave directions $R^nG(F(X))\\to R^n(G\\circ F)(X)\\to G(R^nF(X))$, and the\nspectral sequence depends functorially on $X$.",
+  "proof": [
+   {
+    "text": "Choose an injective resolution $X\\to I^\\bullet$\n([def-sp-injective-resolutions]) and put $K^\\bullet=F(I^\\bullet)$, a\ncomplex in $\\mathcal B$ concentrated in degrees $\\geq0$ with\n$\\mathcal H^q(K^\\bullet)=R^qF(X)$ ([def-sp-left-exact-additive]).",
+    "uses": [
+     "def-sp-injective-resolutions",
+     "def-sp-left-exact-additive"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The $E_2$-page.* Apply the truncation couple [def-sp-truncation-couple] to\n$v=G$ and $K^\\bullet$ (only the source $\\mathcal B$ of $G$ needs injective\nresolutions). By the shift and agreement parts (3) and (2) of\n[lem-sp-kinjective-computes],\n\n$$\n E_2^{p,q}=\\mathcal H^{p+q}\\bigl(RG(\\mathcal H^q(K^\\bullet)[-q])\\bigr)\n \\cong\\mathcal H^p\\bigl(RG(R^qF(X)[0])\\bigr)\\cong R^pG\\bigl(R^qF(X)\\bigr).\n$$\n\nThese vanish unless $p\\geq0$ and $q\\geq0$, and $D^{p,q}=0$ for $q<0$, so\n[thm-sp-half-plane-convergence] (with $a=0$) shows that the spectral\nsequence of the couple is first-quadrant and converges\n([def-sp-convergence]) to $A^n=D^{0,n}=\\mathcal H^n(RG(\\tau_{\\leq n}\nK^\\bullet))$, with the image filtration\n$F^pA^n=\\operatorname{im}(D^{p,n-p}\\to A^n)$ ([def-sp-image-filtration]).\nSince $RG(\\tau_{>n}K^\\bullet)$ has no cohomology in degrees $\\leq n$, the map\n$A^n\\to\\mathcal H^n(RGK^\\bullet)$ is an isomorphism.",
+    "uses": [
+     "def-sp-truncation-couple",
+     "lem-sp-kinjective-computes",
+     "thm-sp-half-plane-convergence",
+     "def-sp-convergence",
+     "def-sp-image-filtration"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The abutment.* Each $K^s=F(I^s)$ is $G$-acyclic, by the hypothesis on $F$\n([def-sp-composite-acyclicity]). In the spectral sequence of [thm-sp-if-e1]\nfor $v=G$ and $K^\\bullet$, $E_1^{r,s}=R^rG(K^s)$ therefore vanishes for\n$r\\neq0$, so it is concentrated in a single row. The differentials $d_k$,\n$k\\geq2$, join different rows, so they vanish, $E_2=E_\\infty$, and in each\ntotal degree $n$ the abutment filtration has a single nonzero graded piece;\nthis is the edge collapse of [lem-sp-edge-collapse], with the two indices\nexchanged, and the edge map is an isomorphism\n\n$$\n \\mathcal H^n(RGK^\\bullet)\\cong E_2^{0,n}=\\mathcal H^n\\bigl(G(K^\\bullet)\\bigr)\n =\\mathcal H^n\\bigl(GF(I^\\bullet)\\bigr)=R^n(G\\circ F)(X),\n$$\n\nthe last equality by [def-sp-left-exact-additive], $G\\circ F$ being left\nexact. Hence the spectral sequence converges to $R^{p+q}(G\\circ F)(X)$.",
+    "uses": [
+     "def-sp-composite-acyclicity",
+     "thm-sp-if-e1",
+     "lem-sp-edge-collapse",
+     "def-sp-left-exact-additive"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Edge maps.* In degree $n$ the entry $E_2^{n,0}=R^nG(F(X))$ receives no\ndifferentials, so it surjects onto $E_\\infty^{n,0}=F^nA^n\\subseteq A^n$, and\n$A^n\\to A^n/F^1A^n=E_\\infty^{0,n}$ lands in $E_2^{0,n}=G(R^nF(X))$, since no\ndifferentials leave $(0,n)$; these are the edge maps\n$R^nG(F(X))\\to R^n(G\\circ F)(X)\\to G(R^nF(X))$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Functoriality.* A morphism $X\\to X'$ extends to a morphism of injective\nresolutions, unique up to homotopy, hence to a morphism $K^\\bullet\\to\nK'^\\bullet$; since $RG$ is functorial (part (1) of\n[lem-sp-kinjective-computes]) and truncations are functorial, it induces a\nmorphism of truncation couples, hence of spectral sequences\n([lem-sp-couple-morphism]), compatible with the abutment filtrations.\n\n(*References: Weibel, An Introduction to Homological Algebra, Theorem 5.8.3;\nStacks Project, Lemma 13.22.1 (Tag\n[015M](https://stacks.math.columbia.edu/tag/015M)) identifies the acyclicity\ncondition with the canonical map $R(G\\circ F)\\to RG\\circ RF$ being an\nisomorphism, and Lemma 13.22.2 (Tag\n[015N](https://stacks.math.columbia.edu/tag/015N)) is the bounded, converging\nspectral sequence with finite induced filtration. The relative Leray form\n$E_2^{p,q}=R^pg_*(R^qf_*\\mathcal F)\\Rightarrow R^{p+q}(g\\circ f)_*\\mathcal\nF$, functorial in $\\mathcal F$ and available for bounded-below complexes, is\nLemma 20.13.8 (Tag [01F6](https://stacks.math.columbia.edu/tag/01F6)); the\ntopoi (site) form is Lemma 21.14.6, see the dictionary\n[def-sp-etale-dictionary] for the specialization.*)",
+    "uses": [
+     "lem-sp-kinjective-computes",
+     "lem-sp-couple-morphism",
+     "def-sp-etale-dictionary"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
  }
 }

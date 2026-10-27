@@ -1,0 +1,18 @@
+# global build 2026-10-24T12:11:04Z of 88e47bf50e: Sheaf.AlgebraicGeometry.StrictLocalSmallModel.NeighbourhoodGeometry failed
+error: Sheaf/AlgebraicGeometry/StrictLocalSmallModel/NeighbourhoodGeometry.lean:93:20: Unknown constant `AlgebraicGeometry.Scheme.smallStrictHenselizationDiagram`
+error: Sheaf/AlgebraicGeometry/StrictLocalSmallModel/NeighbourhoodGeometry.lean:91:37: unsolved goals
+X S : Scheme
+f : X ⟶ S
+Ω : Type v
+inst✝¹ : Field Ω
+inst✝ : IsAlgClosed Ω
+s : Spec (CommRingCat.of Ω) ⟶ S
+Q : StrictLocalNeighbourhoodGeometry f s
+i : SmallModel.{v, v, v + 1} (Scheme.strictHenselizationNeighbourhoods s)
+⊢ Q.smallModelLegs.app i ≫ pullback.fst ((strictLocalNeighbourhoods s).obj i).hom f =
+    pullback.snd f (Scheme.strictHenselizationStructuralMap s) ≫
+      (Scheme.strictHenselizationCone s).π.app (op (op i)) ≫
+        Spec.map
+          (Scheme.ΓSpecIso
+              (unop ((equivSmallModel (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj i).fst.left)).inv
+error: Lean exited with code 1

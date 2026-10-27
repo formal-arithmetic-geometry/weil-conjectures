@@ -1,0 +1,153 @@
+{
+ "id": "lem-pur-signed-integral-coefficient-twist-constructible",
+ "kind": "statement",
+ "title": "Signed completed integral Tate lines are bounded constructible and derived complete",
+ "statement": "Let l be prime, E a finite-dimensional extension of Q_l, W a scheme on which l is invertible, D an auxiliary finite-field datum with l different from D.p, and m an integer. Form the signed completed root line integralCoefficientTwist D l hl E W m in degree zero as in def-coefficient-twists-detailed. This object satisfies boundedConstructibleDerivedCompleteIntegral: its canonical augmented reduction tower is a derived-limit tower and all positive derived reductions are constructible in one common finite cohomological interval. The construction and the predicate are those of def-weil-completed-integral-coefficients and def-weil-derived-complete-integral-detailed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Integral root line, its signed tensor powers and internal duals; the existing integralCoefficientTwist_constructible declaration in Sheaf.Paper.CoefficientTwistsDetailed."
+ },
+ "stmt_deps": [
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed"
+ ],
+ "proof": [
+  {
+   "text": "The existing pur_twist_sheaf_locally_free theorem gives rank one for the completed first root line. Apply the rank field of OrdinaryLineScalar.exists_lineData to obtain rank one for every signed tensor power. Integer cases identify its generic signedLinePower with the published coefficientTwistLine, including exponent zero and internal duals at negative exponents.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-pur-ordinary-line-derived-scalar-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply completedLine_derived to this rank-one completed line. Its second clause gives completeness for the actual augmented integral reduction tower; its first clause identifies each derived reduction with the degree-zero single of ordinary change of rings along the actual completed coefficient projection.",
+   "uses": [
+    "lem-pur-completed-line-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use scalarExtensionDual_localIsomorphism to see that each ordinary reduction is still invertible, hence rank one. The generic finiteLocallyFreeLine_models theorem over the positive finite quotient ring gives constructibility of this sheaf. This argument needs no identification with a separately constructed finite Tate line.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-local-iso",
+    "lem-pur-finite-locally-free-line-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constructible_single_support using the canonical derived-reduction isomorphism from the second step. It gives finite cohomological support, constructible homology in every degree, and support contained in {0}. These are exactly intrinsic finite-torsion constructibility and the common interval [0,0]. Pair these with completeness to prove the unchanged integral predicate. The empty scheme has empty support, so the same interval works there too.",
+   "uses": [
+    "lem-pur-constructible-single-support"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-pur-ordinary-line-derived-scalar-comparison",
+  "lem-pur-completed-line-derived",
+  "lem-sp-scalar-extension-dual-local-iso",
+  "lem-pur-finite-locally-free-line-models",
+  "lem-pur-constructible-single-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "R2",
+  "date": "2026-10-26",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/def-coefficient-twists-detailed.md",
+  "place": "Signed tensor powers and duals of the integral root line; reuse the existing general completed-line and finite-line theorems, with the same [0,0] interval."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "IsSfDerivedComplete",
+   "results": "loogle: unknown identifier 'IsSfDerivedComplete'",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem about the project Tate line and its completed constructible predicate. Reuse the existing library theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rank one completed integral Tate twist is bounded constructible and derived complete",
+   "results": "BDeRhamPlus, BDeRham, Condensed.profiniteSolid, CondensedMod.IsSolid, IsDedekindDomain.instDFunLikeFiniteAdeleRingHeightOneSpectrumAdicCompletion, IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, LaurentSeries.algebraMap_C_mem_adicCompletionIntegers, instCommRingBDeRhamPlus",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem about the project Tate line and its completed constructible predicate. Reuse the existing library theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "integralCoefficientTwist|completed.*line.*constructible|sfIntegralConstructible",
+   "results": "No hits",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem about the project Tate line and its completed constructible predicate. Reuse the existing library theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral Tate twist is bounded constructible and derived complete",
+   "results": "Condensed.instAB4CondensedMod, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, IsAdicComplete.recOn, Condensed.instAB4StarCondensedMod, IsAdicComplete",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib theorem about the project Tate line and its completed constructible predicate. Reuse the existing library theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntrinsicCoefficientTwists",
+  "date": "2026-10-26",
+  "group": "E1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "via": [],
+   "place": "Membership of signed integral coefficient lines in the completed bounded constructible category."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.CoefficientTwistsDetailed",
+  "declaration": "WeilConjectures.integralCoefficientTwist_constructible",
+  "statement": "theorem integralCoefficientTwist_constructible (m : ℤ) :\n    boundedConstructibleDerivedCompleteIntegral D ℓ hℓ E S\n      (integralCoefficientTwist D ℓ hℓ E S m)",
+  "branch": "sheaf-dag",
+  "by": "E1",
+  "date": "2026-10-26",
+  "note": "Existing named public theorem and existing sorry; this delivery attaches its proof dependency, without changing or adding any Lean declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261025T201658-L-2601603",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261026T065042-L-2679916",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.coefficientTwistStageComparison_coherent",
+   "WeilConjectures.integralComplexTwist_constructible",
+   "WeilConjectures.rationalTwistScalarComparison_unit",
+   "WeilConjectures.twistLineScalarIso_existsUnique",
+   "WeilConjectures.twistScalarMaps_existsUnique",
+   "WeilConjectures.twistSheafScalarComparison_existsUnique"
+  ],
+  "sorry_after": [
+   "WeilConjectures.twistLineScalarIso_existsUnique",
+   "WeilConjectures.twistScalarMaps_existsUnique"
+  ]
+ }
+}

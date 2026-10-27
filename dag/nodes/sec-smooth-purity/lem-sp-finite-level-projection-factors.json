@@ -1,0 +1,369 @@
+{
+ "id": "lem-sp-finite-level-projection-factors",
+ "kind": "statement",
+ "title": "Finite-level proper and open projection factors with coefficient transport",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $X,\\overline X,Y$ be separated finite-type $k$-schemes, $j:X\\hookrightarrow\\overline X$ an open immersion and $p_0:\\overline X\\to Y$ proper, and put $f=p_0j$ [sk-def-sfb-dc-setting, def-weil-compactifications-refinements]. Let $A$ be a finite commutative ring killed by a power of $\\ell$, and write $A_T$ for its constant ring sheaf on the small pro-étale site of $T$. Use ordinary unbounded derived categories of $A_T$-module sheaves, K-flat derived tensor, exact inverse image with $u^{-1}A_T=A_{T'}$, and the canonical adjunctions $u^{-1}\\dashv Ru_*$ and $j_!\\dashv j^{-1}$ [def-weil-pbc-proetale-modules, def-weil-derived-tensor, def-weil-pbc-proetale-operations, def-weil-extension-by-zero]. Let $C\\in D(X_{\\mathrm{proét}},A)$ and $B\\in D(Y_{\\mathrm{proét}},A)$ have bounded constructible cohomology and finite Tor amplitude [def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Define\n$$\\rho_{p_0}:Rp_{0,*}j_!C\\otimes_A^LB\\longrightarrow Rp_{0,*}(j_!C\\otimes_A^Lp_0^{-1}B)$$\nas the transpose of $\\varepsilon_{j_!C}\\otimes1$ under $p_0^{-1}\\dashv Rp_{0,*}$, after the pullback/tensor identification. Define\n$$\\rho_j:j_!(C\\otimes_A^Lj^{-1}p_0^{-1}B)\\longrightarrow j_!C\\otimes_A^Lp_0^{-1}B$$\nas the transpose of $\\eta_C\\otimes1$ under $j_!\\dashv j^{-1}$. Then both $\\rho_{p_0}$ and $\\rho_j$ are isomorphisms, natural in $C,B$, and $j_!C$ is bounded constructible of finite Tor amplitude. The inverse of $\\rho_j$ is the canonical open projection comparison $j_!C\\otimes_A^LL\\to j_!(C\\otimes_A^Lj^{-1}L)$ at $L=p_0^{-1}B$.\n\nMoreover, the exact section-action equivalence from internal modules over $p_T^*\\underline A$ to ordinary $A_T$-modules [def-weil-pbc-internal-abelian-sheaf-module-equivalence, lem-sf-module-object-ordinary-coefficient-equivalence] identifies the unbounded derived tensor products, all Tor intervals, and the bounded constructible finite-Tor subcategories of [sk-def-sfb-constructible] with these ordinary ones. For finite $A$, the finite constant local models are precisely locally constant finite $A$-modules. Under its canonical operation comparisons, it identifies the derived adjunction units and counits, the two displayed projection maps and the compactification composite $Rp_{0,*}j_!$ in the internal and ordinary presentations. No algebraic closure or finiteness of $k$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), finite projection factors and finite-discrete coefficient interpretation; Stacks Tag 0F0G (etale-cohomology-lemma-projection-formula-proper-mod-n); Bhatt–Scholze Section 5.3"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-derived-tensor",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof": [
+  {
+   "text": "For the ordinary finite-level assertion, finite type over the field makes X, Z and Y Noetherian. Apply exceptionalTransport_constructible_comparison [new-etale-proetale-exceptional-object-comparison] to C and B. Convert explicit etale cohomology vanishing bounds to canonical t-structure boundedness, and use isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf to identify the two etale constructibility conventions. This gives C in the source bounded-constructible category with its original Tor interval, and a bounded etale origin B0 of B.",
+   "uses": [
+    "new-etale-proetale-exceptional-object-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing source theorem constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek to C and the quasi-compact open j. Translate bounded constructibility back to the intrinsic fixed-module convention using the comparison of the preceding step. Apply torAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek to preserve the original ordered Tor interval [a,b]. This proves both admissibility conclusions for j!C, retaining the open-extension route of the unit. The adopted source proof reduces bounded constructibility and finite Tor to the etale open-extension theorem [lem-trf-open-ctf] via its fixed finite-coefficient comparison; it does not invoke the condensed localizing theorem.",
+   "uses": [
+    "new-etale-proetale-exceptional-object-comparison",
+    "lem-trf-open-ctf",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing source theorem isIso_rightDerivedLowerStarProjectionMap_app_app_of_bounded (ProjectionFormulaBounded) to the proper p0, the same open j, C and B0. It already assembles the etale projection formula, comparison of the canonical projection maps, and the tensor cohomology bound from finite Tor amplitude of C. Transport its IsIso conclusion along the origin isomorphism comparison(B0) ≅ B by NatTrans.isIso_app_iff_of_iso. This uses neither finite Tor amplitude of B nor a field extension.",
+   "uses": [
+    "lem-kun-0f0g",
+    "lem-sf-source-tensor-cohomology-interval",
+    "lem-sfb-projection-comparison-etale-proetale"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The source instance isIso_derivedOpenImmersionLowerShriekProjectionMap gives invertibility of the actual open unit-transpose map for arbitrary inputs. derivedTensorOpenImmersionLowerShriekIso is its specified inverse; its inverse-hom identity and uniqueness of inverses prove the displayed inverse formula. Combine this with the preceding conclusions using conjunction introduction. Naturality is already encoded by the source bifunctor natural transformation.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For scalarMap_existsUnique and encoding_properties at the actual scalar universe, compose the constant-abelian-sheaf unit with the monoidal constantSchemeIso [lem-weil-pbc-finite-discrete-scheme-ring-constant]. Its compatibility with unit and multiplication makes its section maps ring homomorphisms. The sheafification adjunction extends this map uniquely to the reconstructed commutative section-ring sheaf. Forgetting to abelian sheaves identifies the extension, via constantCommuteCompose, with constantSchemeIso, so the ring map is invertible. Compose the section-action equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], restriction along the two ring isomorphisms, and the constant-ring restriction equivalence [lem-cbc-constant-ring-module-sheaves]. Restriction along a ring isomorphism has inverse restriction along its inverse, with identity component maps. All four factors retain the underlying additive maps, so their composite is additive. This construction uses A in Type (u+1) directly, without a scalar universe lift or a finite-ring hypothesis.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-cbc-constant-ring-module-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tags 00YV and 03CY; constant-section normalization in the blueprint integral direct-image proof (3)"
+   }
+  },
+  {
+   "text": "For the retained internal-coefficient comparison clauses: Apply [lem-sf-module-object-ordinary-coefficient-equivalence] to the discrete finite ring $A$ on each scheme. The resulting exact unbounded derived equivalences identify $p_T^*\\underline A$ with $A_T$, derived tensors and every Tor interval. By [lem-pe-finite-coefficient-model-comparison] they identify finite-constant-model constructibility with intrinsic finite-stalk constructibility, with the same cohomological intervals. The Noetherian-scheme hypothesis follows from [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. All these schemes are also qcqs: quasi-compactness is part of finite type [def-weil-finite-type-morphism], and quasi-separatedness follows from [lem-weil-pbc-locally-noetherian-quasi-separated]. For the local models, a finitely presented $A$-module is finite since it is a quotient of a finite power of $A$; conversely a finite module has a presentation $A^r\\twoheadrightarrow M$ whose kernel is finite and hence finitely generated. Thus its finite constant models are exactly locally constant finite $A$-modules.",
+   "uses": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-pe-finite-coefficient-model-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), finite-discrete coefficient interpretation"
+   }
+  },
+  {
+   "text": "For the retained internal-coefficient comparison clauses: Use [lem-pd-module-ringed-topos-derived-comparison] with $\\Lambda=\\underline A$. It identifies the actual derived pullbacks, direct images, open extensions, tensorators, and both adjunctions including units and counits with their ordinary ringed-topos versions. Consequently the proper transpose of $(\\varepsilon_{j_!C}\\otimes1)\\circ\\delta_{p_0}$ is carried to the displayed $\\rho_{p_0}$. For the open map, its transpose is $\\mu_j\\circ(\\eta_C\\otimes1)$; the same comparison identifies each of these two factors, hence identifies its adjunct with the displayed $\\rho_j$. Composing the operation comparisons identifies $Rp_{0,*}D(j_!)$ with $Rp_{0,*}j_!$. These are identifications of the specified maps, not just of their endpoints.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); internal-module comparison in the cited node"
+   }
+  },
+  {
+   "text": "For the retained internal-coefficient comparison clauses: Tensor, the adjunction bijections, and their units and counits are natural. Therefore the two maps defined in the statement are natural in $C,B$; the componentwise inverses of a natural isomorphism are natural by multiplying its naturality square by the two inverses. The comparisons of step 2 carry those same units, counits and tensorators, so also carry both projection maps, their inverses and their compactification composite. Together with steps 1 and 3 this proves every clause, without imposing any further assumption on $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+    "place": "Paragraph (3), finite projection factors and coefficient interpretation"
+   }
+  },
+  {
+   "text": "The proper adjunction comparison is the conjunction of its unit and counit components, supplied by the two named split statements.",
+   "uses": [
+    "new-sp-proper-adjunction-unit",
+    "new-sp-proper-adjunction-counit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-kun-0f0g",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pe-finite-coefficient-model-comparison",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-source-tensor-cohomology-interval",
+  "lem-sfb-projection-comparison-etale-proetale",
+  "lem-trf-open-ctf",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "new-etale-proetale-exceptional-object-comparison",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "new-sp-proper-adjunction-unit",
+  "new-sp-proper-adjunction-counit"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-direct-image.proof.md",
+  "place": "Paragraph (3), proper adjunction comparison split into unit and counit components."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|derived.*[Pp]rojection|[Pp]rojection.*[Dd]erived",
+   "results": "2 hits: Mathlib/CategoryTheory/Monad/Algebra.lean, Mathlib/CategoryTheory/Monad/Algebra.lean",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"projection\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The proper counit projection map and the open unit projection map for finite torsion constructible sheaves on proetale sites are isomorphisms",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr.counitIso_hom_app_val_app, CategoryTheory.instIsIsoFunctorOppositeValAppSheafCounitSheafificationAdjunction, CategoryTheory.Equivalence.sheafCongrPrecoherent_counitIso_hom_app_val_app, CategoryTheory.Equivalence.sheafCongrPreregular_counitIso_hom_app_val_app, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counit_app_val, CondensedSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite primary coefficient sheaves on proetale sites: transport derived proper and open projection adjunction mates from condensed module objects to ordinary modules and prove both projection factors invertible",
+   "results": "8 hits: CondensedMod.ofSheafProfinite, Condensed.profiniteSolid, Condensed.profiniteFree, Condensed.finFree, LightCondMod.ofSheafLightProfinite, CondensedMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence from internal modules to ordinary sheaves preserves derived tensor, derived adjunctions and their proper and open projection maps with finite coefficients",
+   "results": "8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The proper counit projection and open unit projection for finite torsion constructible sheaves on the proetale site are invertible and compatible with the internal module to ordinary module equivalence",
+   "results": "8 hits: Condensed.profiniteSolidCounit, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.counit_app_val, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteSolid; read returned signatures: no finite pro-etale proper/open projection theorem or internal-module derived operation comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence between internal ring module objects and ordinary module sheaves preserves derived tensor adjunction units counits and open and proper projection formulas",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, ModuleCat.monoidalClosedHomEquiv, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.unit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, PresheafOfModules.unitHomEquiv; read returned signatures: no finite pro-etale proper/open projection theorem or internal-module derived operation comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of finite coefficient constructible complexes satisfies the derived tensor projection formula on proetale sites over an arbitrary positive characteristic field",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', SheafOfModules.pushforwardComp_hom_app_val_app; read returned signatures: no finite pro-etale proper/open projection theorem or internal-module derived operation comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-tower-compact-support-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q59"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-integral-direct-image-tower",
+   "place": "Proof paragraph (3), 'The tower projection formula (an isomorphism of towers, being levelwise the finite projection formula)': finite proper/open factors, their units/counits and finite-discrete coefficient interpretation",
+   "via": [
+    "lem-sp-tower-compact-support-projection-formula"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-finite-level-projection-factors",
+  "worker": "stage1",
+  "summary": "Split into seven steps using existing nodes only. Preserved the statement and arbitrary base field. Audited internal/ordinary derived operation normalization, finite local models, open finite-Tor constructibility, exact inverse open projection, etale origins and explicit tensor bounds, and the canonical proper projection comparison. No new nodes, no Lean changes, no attachment.",
+  "blueprint": "det-sp-integral-direct-image-tower proof paragraph (3): expand the finite projection formula underlying the tower projection formula; retain its open/proper compactification route.",
+  "tool_uses": [
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Reflects the finite Tor interval of the etale-origin proper input."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "The finite proper etale projection formula is the finite-level input required by the blueprint."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Identifies the actual internal/ordinary units, counits and tensorators, hence the named projection maps."
+   },
+   {
+    "node": "lem-pe-finite-coefficient-model-comparison",
+    "why": "Identifies finite constant scalar models with intrinsic finite-stalk constructibility."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic finite coefficient presentation equivalence, tensor/Tor intervals and compactification comparison; no replacement of the unit route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed open projection isomorphism with the exact inverse-adjunct normalization."
+   },
+   {
+    "node": "lem-sf-source-tensor-cohomology-interval",
+    "why": "Generic tensor estimate proves the comparison input is bounded below."
+   },
+   {
+    "node": "lem-sfb-open-extension-zero-constructible-finite-tor",
+    "why": "Open extension preserves constructibility and each Tor interval over the arbitrary standing field."
+   },
+   {
+    "node": "lem-sfb-projection-comparison-etale-proetale",
+    "why": "Transports the precise counit-defined projection across the finite-site comparison."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Invertibility and counit normalization of the qcqs direct-image comparison, valid over arbitrary schemes."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Supplies bounded etale origins for arbitrary finite coefficient rings."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact ordinary etale inverse image preserves the cohomological interval needed for the tensor estimate."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks the Noetherian and qcqs scheme hypotheses for finite-model and finite-Tor site comparison without any restriction on the base field."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Checks the Noetherian and qcqs scheme hypotheses for finite-model and finite-Tor site comparison without any restriction on the base field."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-kun-0f0g",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pe-finite-coefficient-model-comparison",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-source-tensor-cohomology-interval",
+  "lem-sfb-open-extension-zero-constructible-finite-tor",
+  "lem-sfb-projection-comparison-etale-proetale",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-c3aaf05bb",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-c3aaf05bb (reviewer sub-agent of L); spot-checked: FIX for one TeX fault; the mathematics is sound and I read all of it. Ordinary 7-step split with no new nodes. Statement and stmt_deps are unchanged from Q59's creation, proof_deps equals the union of the step uses, and no SGA is cited. Route: blueprint det-sp-integral-direct-image-tower ¶(3) ('levelwise the finite projection formula'); all off-unit tools are declared and accepted. Step checks: (1) lem-sf-module-object-ordinary-coefficient-equivalence plus lem-pe-finite-coefficient-model-comparison; Noetherian and qcqs follow from finite type over a field; finite ⇔ finitely presented over a finite ring. (2) lem-pd-module-ringed-topos-derived-comparison: its independently specified adjunction, δ/μ and α_{K,L} identify ρ_{p0} and ρ_j and Rp_*D(j_!). (3) lem-sfb-open-extension-zero-constructible-finite-tor holds for any condensed Λ with char k≠ℓ and keeps both intervals. (4) lem-sf-open-tensor-normalization: γ^{-1} is the adjunct of u⊗1, which is exactly ρ_j. (5) finite-ring étale origin; det-pe-finite-tor-comparison-noetherian (finite ring Noetherian, qcqs); exact inverse image; tensor interval [a+c,b+d], so E_0, L_0 ∈ D^+. (6) Stacks 0F0G (etale-cohomology.tex l.20193: proper f, torsion Λ, arbitrary E, K) matches lem-kun-0f0g. The etale-proetale projection identity and the D^+ mate b invertibility give ρ_{p0} = R_p(h) b_L F(π_e) t^{-1}(b^{-1}⊗1), a product of isomorphisms. (7) naturality, elementary. Edge cases checked: zero C or B, empty X, j or p_0 the identity, A=0, A=Z/ℓ^2, k=F_p. Batch-5 flags: lem-kun-0f0g is the general 0F0G projection formula and adds no PD/trf node beyond the existing closure; its chain ends in the generic lem-pod-lisse-module-sheaves-as-module-objects. Accepted. lem-pd-module-ringed-topos-derived-comparison is the foundational internal-vs-ringed comparison, also cited by about 15 sfb/sf nodes. It adds 22 generic pd-section normalization nodes and no target node. Accepted, as in the Q03 and NJ reviews, unlike the PD proof step RETURNed in O2. Not duplicates: lem-sp-finite-ring-compact-support-projection (k=F̄_q only), lem-pd-compactification-projection-inverse (Q̄_ℓ), lem-cbc-extension-zero-projection-formula (open clause only). FIX (B4): in step 6 the JSON '$F_T=\\nu_T^*$' had a single backslash, so it decoded as a newline followed by 'u_T^*'. The corrected whole item is in fixes/dag/nodes/sec-smooth-purity/lem-sp-finite-level-projection-factors.json; no other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteLevelProjectionFactors",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_level_projection_factors",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.coefficient",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.coefficient_comm",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.Internal",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.sectionRing",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.scalarMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.scalarMap",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.encoding",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.encoding_properties",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.derivedEncoding",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.monoidal_existsUnique",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.monoidal",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.encoding_preservesFlat",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.tensorIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.pushMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.pushMap",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.pushMap_isIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.pullIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.openIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.derivedPushIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.derivedPullIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.derivedOpenIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.derivedRestrictionIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.compactificationIso",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.proper_adjunction_comparison",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.open_adjunction_comparison",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.proper_projection_comparison",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.open_projection_comparison",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.coefficient_models",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.proper_adjunction_comparison_unit",
+   "AlgebraicGeometry.ProEtale.FiniteLevelComparison.proper_adjunction_comparison_counit",
+   "AlgebraicGeometry.ProEtale.finite_level_projection_factors"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteLevelProjectionFactors.lean",
+  "statement": "theorem finite_level_projection_factors (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ) (A : Type (u + 1)) [CommRing A] [Finite A] (_hA : ∃ n : ℕ, 0 < n ∧ (ℓ ^ n : A) = 0) {X Z Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (j : X ⟶ Z) [IsOpenImmersion j.left] (p₀ : Z ⟶ Y) [IsProper p₀.left] (C : DerivedCategory (Sheaf (Scheme.ProEt.topology X.left) (ModuleCat.{u + 1} A))) (B : DerivedCategory (Sheaf (Scheme.ProEt.topology Y.left) (ModuleCat.{u + 1} A))) (_hCc : DerivedCategory.TStructure.t.bounded C ∧ ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X.left A ((DerivedCategory.homologyFunctor _ i).obj C)) (_hCt : ∃ a b : ℤ, Scheme.HasFixedCoefficientProEtaleTorAmplitude X.left A C a b) (_hBc : DerivedCategory.TStructure.t.bounded B ∧ ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf Y.left A ((DerivedCategory.homologyFunctor _ i).obj B)) (_hBt : ∃ a b : ℤ, Scheme.HasFixedCoefficientProEtaleTorAmplitude Y.left A B a b) : IsIso (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) p₀.left).app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j.left).mapDerivedCategory.obj C)).app B) ∧ IsIso (((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} A) j.left).app C).app ((upperStar (ModuleCat.{u + 1} A) p₀.left).leftDerivedFunctor.obj B)) ∧ inv (((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} A) j.left).app C).app ((upperStar (ModuleCat.{u + 1} A) p₀.left).leftDerivedFunctor.obj B)) = (derivedTensorOpenImmersionLowerShriekIso (ModuleCat.{u + 1} A) j.left C ((upperStar (ModuleCat.{u + 1} A) p₀.left).leftDerivedFunctor.obj B)).hom ∧ (DerivedCategory.TStructure.t.bounded ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j.left).mapDerivedCategory.obj C) ∧ ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf Z.left A ((DerivedCategory.homologyFunctor _ i).obj ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j.left).mapDerivedCategory.obj C))) ∧ (∃ a b : ℤ, Scheme.HasFixedCoefficientProEtaleTorAmplitude Z.left A ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j.left).mapDerivedCategory.obj C) a b)",
+  "branch": "sheaf-dag",
+  "by": "Q118",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned dc74ed12fc53: all recorded declarations are owned by this module. The Moreover clause is now stated for A : Type (u+1) and the item's actual fixed-scalar maps. The section-action encoding is constructed using the constant condensed ring, the uniquely constant-section-normalized scalarMap and the existing sectionModuleEquivalence. Canonical non-Nonempty operation isomorphisms are obtained by adjoint uniqueness and localization. Explicit proper/open unit and counit equations and projection-map equations connect directly to rightDerivedLowerStarProjectionMap and derivedOpenImmersionLowerShriekProjectionMap; compactificationIso composes these comparisons. coefficient_models states Tor, local-model and bounded constructible finite-Tor identifications. No theorem owned by a proof-dependency node is claimed in declarations. Reviewer FIX (5154c762): monoidal_existsUnique inlines the pure-tensor body (Mod.tensorObjπ after the lax sheafToPresheaf μ) instead of citing comparison_internalTmul, a def owned by the theorem node lem-pe-internal-section-tensor-comparison, which is not a stmt_dep.",
+  "fixed_by": "NT-stage2-cc-5154c762a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5154c762a",
+  "group": "Q118",
+  "result": "fix",
+  "note": "Re-delivery of dc74ed12 (my RETURN H3+H2/H4) repairs both points. The Moreover clause is now stated at A:Type(u+1) with the actual section-action encoding (sectionModuleEquivalence plus a scalarMap pinned on constant sections) and canonical comparisons (pushMap = identity on sections, pullIso/openIso by leftAdjointUniq, localized derived isos, compactificationIso). It has explicit unit/counit equations, projection equations identifying rightAdjointProjectionMap with rightDerivedLowerStarProjectionMap and openImmersionProjectionComparison' with derivedOpenImmersionLowerShriekProjectionMap, a tensorIso, and coefficient_models (Tor intervals, local models, ctf). Types checked by hand; nothing hollow; declarations list only this module's 29 declarations; main theorem unchanged and correct. FIX (H2): monoidal_existsUnique cited comparison_internalTmul, a def owned by theorem node lem-pe-internal-section-tensor-comparison that the item does not cite; replaced by its definitional body (Mod.tensorObjπ after the lax sheafToPresheaf μ). Complete module and lean-record note in fixes/. nt_compile --json exit 0, clean, 56 s against the 60 s limit at load about 85 (landing timeout risk from load). Advisory: constantSchemeIso, constantRingModuleRestriction and the CondensedRing operations have owners reachable through the stmt_dep closure; the Tor clause covers only a≤b."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261026T022920-L-503999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

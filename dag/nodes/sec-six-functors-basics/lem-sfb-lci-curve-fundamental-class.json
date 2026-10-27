@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-lci-curve-fundamental-class",
+ "kind": "statement",
+ "title": "Presentation-compatible fundamental class for a flat lci curve",
+ "statement": "Let $S$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme], and let $f:X\\to S$ be flat [def-weil-flat-morphism] and finitely presented (locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact [def-weil-finite-type-morphism] and quasi-separated [def-weil-quasi-separated-morphism]), with nonempty geometric fibres pure of dimension one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Assume $X$ is covered by regular affine curve presentations: affine opens $U=\\operatorname{Spec}B\\subset X$ above $V=\\operatorname{Spec}R\\subset S$, with an $R$-algebra isomorphism $B=R[x_0,\\ldots,x_c]/(f_1,\\ldots,f_c)$ whose ordered relations $f_1,\\ldots,f_c$ form a regular sequence [def-weil-pbc-regular-sequence] in $R[x_0,\\ldots,x_c]$. Let $K_{X/S}$ be the adjunction line, with its canonical presentation comparisons, of [lem-trf-flat-lci-canonical-adjunction]. There is a morphism $\\alpha:\\Omega^1_{X/S}\\to K_{X/S}$ of $\\mathcal O_X$-modules, where differentials are [def-weil-pbc-kahler-differentials], with the following formula in every regular affine curve presentation as above (whether or not it belongs to the given cover). Let $e_0:\\Gamma(U,K_{X/S})\\simeq B$ be the trivialization of the adjunction line of this presentation given by the basis $(\\bar f_1\\wedge\\cdots\\wedge\\bar f_c)^\\vee\\otimes(dx_0\\wedge\\cdots\\wedge dx_c)$. There is a sign $\\epsilon_c\\in\\{1,-1\\}$, depending only on $c$ (fixed by the sign conventions of the canonical comparisons of the cited adjunction lemma), such that $e=\\epsilon_c e_0$ satisfies $e(\\alpha(d\\bar a))=\\overline{\\det(\\partial(f_1,\\ldots,f_c,a)/\\partial(x_0,\\ldots,x_c))}$ for every polynomial $a\\in R[x_0,\\ldots,x_c]$, bars denoting images in $B$. Thus the local maps given by these signed Jacobian formulas agree under the canonical adjunction comparisons, including on arbitrary overlaps, and determine $\\alpha$. The map $\\alpha$ is an isomorphism exactly on the relative smooth locus [def-sbc-smooth-morphisms]. The map and these descriptions commute with restriction to open subschemes, isomorphisms of $S$-schemes, and arbitrary base change $S'\\to S$, using the canonical base-change comparison for $K$ in the cited adjunction lemma. No properness, nodal hypothesis, marking, positivity, or reconstruction assertion is part of this lemma.",
+ "source": {
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E9Y (lemma-determinant), displayed wedge formula, and 0E9Z (lemma-fundamental-class-lci), conormal-sequence construction. Agent-formulated presentation/base-change compatibility with the specified adjunction determinant line; not a claim that 0E9Z states all these compatibilities verbatim."
+ },
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-regular-sequence",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "def-weil-pbc-kahler-differentials",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-trf-nodal-dualizing-datum",
+  "def-sc-sheaf-exterior-power",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "On each regular chart apply [lem-sfb-affine-conormal-jacobian-realization]: its conormal complex represents the intrinsic cotangent complex, and its wedge map has the stated augmented Jacobian formula. By [lem-sfb-adjunction-cotangent-determinant-normalization], the exterior-model line is the specified adjunction line, with its determinant comparisons. The relation-first normalization gives $e=e_0$; an equivalent shifted convention is absorbed in the fixed sign $\\epsilon_c$.",
+   "uses": [
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "lem-sfb-adjunction-cotangent-determinant-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), displayed wedge formula and omitted well-definedness check; cotangent.tex Tags 08SJ, 08SL, conormal model. Extracts old proof steps 1-3 and local transport in step 7; agent-formulated combined local realization."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-virtual-rank-one-cofactor-descent] to $L_{X/S}$ and the models of step 1. Its overlap equality glues the local maps, works for every further regular presentation, and is natural under restrictions and isomorphisms. Transport $w_L$ from $\\det L$ to $K$ by [lem-sfb-adjunction-cotangent-determinant-normalization]. The chart formula from step 1 is therefore the required formula for the resulting $\\alpha$. It determines $\\alpha$ uniquely since the $d\\bar x_j$ generate differentials on each chart.",
+   "uses": [
+    "lem-sfb-virtual-rank-one-cofactor-descent",
+    "lem-sfb-adjunction-cotangent-determinant-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), wedge map; more-algebra.tex Tag 0FJM (lemma-determinant-two-term-complexes), intrinsic good-diagram comparison. Agent-formulated sheaf descent of the cofactor naturality statement. Extracts old proof step 4 and the comparison/restriction argument of step 7."
+   }
+  },
+  {
+   "text": "On a regular chart $U=\\operatorname{Spec}B\\to V=\\operatorname{Spec}R$, the ring map $R\\to B$ is flat by [lem-weil-pbc-flat-morphism-affine-criterion], and the geometric fibres of $U\\to V$ are open in those of $X\\to S$, hence (when nonempty) pure of dimension one. The stalk of the glued map is, in this chart, the wedge map in [lem-sfb-curve-cofactor-smooth-criterion], followed by an isomorphism of lines. That criterion gives both implications: its invertibility locus is exactly the smooth locus, including the case $c=0$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-curve-cofactor-smooth-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Z (lemma-fundamental-class-lci), both smooth-locus implications; morphisms.tex Tag 02G1; algebra.tex Tags 00T6, 00T7, 00T8. Extracts old proof steps 5-6, including the explicit zh-1 presentation."
+   }
+  },
+  {
+   "text": "Restriction and transport through an $S$-isomorphism carry each regular presentation and its conormal comparison $E\\simeq L$, with its degree-zero identification, to the corresponding data of the restricted or transported presentation by [lem-sfb-affine-conormal-jacobian-realization]. Hence restriction and transport preserve the cofactor map by [lem-sfb-virtual-rank-one-cofactor-descent]. The canonical normalized comparisons of [lem-sfb-adjunction-cotangent-determinant-normalization] identify its target with $K$; uniqueness in step 2 gives the corresponding equalities for $\\alpha$.",
+   "uses": [
+    "lem-sfb-affine-conormal-jacobian-realization",
+    "lem-sfb-virtual-rank-one-cofactor-descent",
+    "lem-sfb-adjunction-cotangent-determinant-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/duality.tex",
+    "place": "Tag 0E9Y (lemma-determinant), wedge map; more-algebra.tex Tag 0FJM (lemma-determinant-two-term-complexes), intrinsic good-diagram comparison. Agent-formulated sheaf descent of the cofactor naturality statement. Extracts old proof step 4 and the comparison/restriction argument of step 7."
+   }
+  },
+  {
+   "text": "For $S'\\to S$, work on affine charts $R\\to R'$. The quotient $B$ is $R$-flat by [lem-weil-pbc-flat-morphism-affine-criterion]. Apply [lem-sfb-flat-curve-cofactor-scalar-extension] to identify the pulled-back differential and wedge maps, including their intrinsic determinant comparison. By [lem-sfb-adjunction-cotangent-determinant-normalization] this is the stipulated comparison for $K$. The equality glues over affine charts of $S'$; step 2 compares it with every other presentation. Composition holds by the scalar-extension lemma and the normalization. Neither flatness of $S'\\to S$ nor Noetherianity of $S'$ is needed.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-sfb-flat-curve-cofactor-scalar-extension",
+    "lem-sfb-adjunction-cotangent-determinant-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), Tor-independent form; perfect.tex Tag 0FJY; duality.tex Tag 0E9Y wedge formula. Extracts old proof step 8, including the derived model and coefficientwise compatibility, rather than asserting compatibility only for flat base changes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adjunction-cotangent-determinant-normalization",
+  "lem-sfb-affine-conormal-jacobian-realization",
+  "lem-sfb-curve-cofactor-smooth-criterion",
+  "lem-sfb-flat-curve-cofactor-scalar-extension",
+  "lem-sfb-virtual-rank-one-cofactor-descent",
+  "lem-weil-pbc-flat-morphism-affine-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/duality.tex",
+  "place": "Tags 0E9Y and 0E9Z, conormal wedge construction and smooth-locus proof, extended using the intrinsic cotangent complex and kernel-first determinant comparisons (more-algebra.tex Tag 0FJM; perfect.tex Tags 0FJX, 0FJY)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat local complete intersection morphism of relative dimension one the exterior determinant of the conormal differential defines the canonical Jacobian map from differentials to the adjunction determinant line, independent of presentation",
+   "results": "{\"t\": \"2026-10-22T04:03:52Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat local complete intersection morphism of relative dimension one the exterior determinant of the conormal differential defines the canonical Jacobian map from differentials to the adjunction determinant line, independent of presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\", \"StandardEtalePresentation.toSubmersivePresentation_jacobian\", \"Algebra.PreSubmersivePresentation.localizationAway_jacobian\", \"Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs\"], \"digest\": \"bbcd843c0cb1d9e0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe a Jacobian determinant or a presentation of differentials for a fixed algebra presentation. The source read at Mathlib/RingTheory/Extension/Presentation/Submersive.lean:110-157 contains no global map to the adjunction line, no comparison between regular presentations, and no sheaf gluing/base-change compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"ExteriorPower\"",
+   "results": "{\"t\": \"2026-10-22T04:03:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"KaehlerDifferential\\\", \\\"ExteriorPower\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe a Jacobian determinant or a presentation of differentials for a fixed algebra presentation. The source read at Mathlib/RingTheory/Extension/Presentation/Submersive.lean:110-157 contains no global map to the adjunction line, no comparison between regular presentations, and no sheaf gluing/base-change compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "fundamentalClass|fundamental.class|conormal.*determinant|determinant.*conormal",
+   "results": "{\"t\": \"2026-10-22T04:03:53Z\", \"tool\": \"grep\", \"query\": \"fundamentalClass|fundamental.class|conormal.*determinant|determinant.*conormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe a Jacobian determinant or a presentation of differentials for a fixed algebra presentation. The source read at Mathlib/RingTheory/Extension/Presentation/Submersive.lean:110-157 contains no global map to the adjunction line, no comparison between regular presentations, and no sheaf gluing/base-change compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fundamental class of a local complete intersection curve is the Jacobian map from relative differentials to the determinant of its cotangent complex",
+   "results": "{\"t\": \"2026-10-22T04:03:53Z\", \"tool\": \"leansearch\", \"query\": \"The fundamental class of a local complete intersection curve is the Jacobian map from relative differentials to the determinant of its cotangent complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobian_eq_det_aevalDifferential\", \"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.PreSubmersivePresentation.isUnit_jacobian_of_cotangentRestrict_bijective\", \"Algebra.Presentation.differentials.hom₁\", \"WeierstrassCurve.Jacobian\", \"Algebra.PreSubmersivePresentation.jacobian_eq_jacobiMatrix_det\", \"Algebra.Generators.H1Cotangent.δ\", \"Algebra.H1Cotangent.δ\"], \"digest\": \"ef32eae874d82973\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe a Jacobian determinant or a presentation of differentials for a fixed algebra presentation. The source read at Mathlib/RingTheory/Extension/Presentation/Submersive.lean:110-157 contains no global map to the adjunction line, no comparison between regular presentations, and no sheaf gluing/base-change compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Presentation independent conormal determinant fundamental class map for relative local complete intersection curves, given by wedges of differentials of relations",
+   "results": "{\"t\": \"2026-10-22T04:04:16Z\", \"tool\": \"leanfinder\", \"query\": \"Presentation independent conormal determinant fundamental class map for relative local complete intersection curves, given by wedges of differentials of relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.PreSubmersivePresentation.jacobian\", \"Algebra.SubmersivePresentation.basisKaehler_apply\", \"Algebra.PreSubmersivePresentation.aevalDifferential\", \"Algebra.SubmersivePresentation.aevalDifferentialEquiv\", \"Algebra.Presentation.differentialsSolution_isPresentation\", \"Algebra.SubmersivePresentation.jacobianOfHasCoeffs\", \"Algebra.SubmersivePresentation.jacobianRelations\", \"Algebra.SubmersivePresentation.jacobianRelations_spec\"], \"digest\": \"700db38a082aa884\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe a Jacobian determinant or a presentation of differentials for a fixed algebra presentation. The source read at Mathlib/RingTheory/Extension/Presentation/Submersive.lean:110-157 contains no global map to the adjunction line, no comparison between regular presentations, and no sheaf gluing/base-change compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "jacobian_eq_det_aevalDifferential|determinant.*differential|differential.*determinant",
+   "results": "{\"t\": \"2026-10-22T04:04:16Z\", \"tool\": \"grep\", \"query\": \"jacobian_eq_det_aevalDifferential|determinant.*differential|differential.*determinant\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\", \"Mathlib/RingTheory/Extension/Presentation/Submersive.lean\"], \"digest\": \"f9a730811c12c15d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits describe a Jacobian determinant or a presentation of differentials for a fixed algebra presentation. The source read at Mathlib/RingTheory/Extension/Presentation/Submersive.lean:110-157 contains no global map to the adjunction line, no comparison between regular presentations, and no sheaf gluing/base-change compatibility."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-log-canonical-reconstruction",
+  "date": "2026-10-22",
+  "group": "O2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument",
+   "via": [
+    "lem-sfb-nodal-log-canonical-reconstruction",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-lci-curve-fundamental-class",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split order: unchanged statement; four independent statement-only tasks extract the affine conormal/Jacobian realization (old 1-3), derived comparison and sheaf descent (old 4 and 7), both smoothness implications (old 5-6), and arbitrary scalar extension (old 8). The parent is a five-step assembly. The report retains every returned argument verbatim and describes its new owner. Landing-return repair: rebased the retained four-task split onto the current live DAG record, retaining all current statement, source, Lean and review metadata. Re-read the current normalization and affine-flatness statements and the algebraic cofactor/determinant interfaces; all ten step citations remain exact and all assembly hypotheses still hold. The live record agrees with the saved returned record outside the retained split delta, so no mathematical route or statement correction is needed. Current-DAG repair on 2026-10-23: reapplied only split-owned fields to the current live record; opened the newly added 08SJ Koszul augmentation node and recorded the exact nonduplication distinction. Made the affine-flatness prerequisite of assembly step 3 explicit with its own verbatim citation, in addition to step 5. All four extracted tasks and their logged searches are retained.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Log dualizing polarization and reconstruction of marked nodal families; local adjunction normalization: the conormal determinant fundamental class, before the marking twist or any ampleness argument; local adjunction-normalization prerequisite: old steps 1-3 are extracted to affine conormal realization, 4 and 7 to virtual-rank-one cofactor descent, 5-6 to the smooth criterion, and 8 to arbitrary scalar extension. The parent assembles these four statement-only tasks without changing its statement or its ancestor unit/chapter route. No identical blueprint statement was found.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Supplies R-flatness of B for arbitrary, rather than only flat, base changes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-trf-flat-lci-canonical-adjunction",
+  "lem-trf-lci-cotangent-presentation",
+  "lem-trf-two-term-perfect-determinant",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-standard-smooth-is-smooth"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q133-2749ecdce",
+  "group": "Q133",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-2749ecdce (reviewer sub-agent of L); spot-checked: Third push of the re-split (after d7069e0e and 2bf66d09, both FIX). It is not superseded: live and side-live still hold the old 8-step, 7435-character split, and none of the new nodes is live. The four new nodes (affine-conormal-jacobian-realization, virtual-rank-one-cofactor-descent, curve-cofactor-smooth-criterion, flat-curve-cofactor-scalar-extension) are byte-identical to the previous pushes. Each old step has an owner: 1-3 and part of 7 go to the affine node, 4 and the rest of 7 to descent, 5-6 to the criterion, 8 to scalar extension. The node sizes are comparable, none restates the item, and the assembly has 5 steps and 2727 characters. Of the three earlier repairs the head keeps only the flatness citation in step 3; the rest was lost, so I re-applied all of it in fixes/. (1) Step 3: the smooth criterion also assumes that the chart's geometric fibres are pure of dimension one; added that they are open in those of X/S (C3). (2) Step 4: restriction and transport of the presentations and their conormal comparisons need the last clause of the affine node; restored that citation (C3). (3) Scalar-extension statement: L_{B/R} and L_{B'/R'} were used without a citation; added lem-trf-lci-cotangent-presentation to the text and stmt_deps, defined D(E'), and replaced the garbled orientation sentence with an explicit formula for δ (B2/B3). Cited statements I read: adjunction-cotangent-determinant-normalization (θ, transitions det(λ_j⁻¹λ_i), arbitrary base change), two-term-cofactor-naturality (kernel-first, no injectivity), two-term-perfect-determinant, lci-cotangent-presentation (Koszul model, Tor-independent base change, smooth gives Ω[0]), flat-lci-canonical-adjunction, and flat-morphism-affine-criterion. Sources: Stacks duality.tex 0E9Y (l.7510) and 0E9Z (l.7557, the rank-m Jacobian argument and 00T8). Hand checks: the Jacobian expansion gives det ∂(f,a)/∂x. The (f, zh−1) presentation has Jacobian [[J_sel,0],[z∂h,h]], with determinant h². Surjective ⇒ a unit minor, because the coefficients are the signed minors. B flat over R ⇒ f' is Koszul-regular, so 08QQ applies for any R'. Edge cases: c=0; xy gives w(dx)=−x and w(dy)=y; x² in characteristic 2 is nowhere smooth. The rg -L duplicate search found only generic wedge, Koszul and minor lemmas. No SGA is cited. Accepted tool_use: lem-weil-pbc-flat-morphism-affine-criterion.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LCICurveFundamentalClass",
+  "declaration": "AlgebraicGeometry.existsUnique_lciCurveFundamentalClass",
+  "declarations": [
+   "AlgebraicGeometry.flatLCICurveFundamentalSign",
+   "AlgebraicGeometry.FlatLCIPresentation.IsCurveCofactorMap",
+   "AlgebraicGeometry.FlatLCIPresentation.IsCurveJacobianMap",
+   "AlgebraicGeometry.FlatLCIAdjunctionSystem.IsCurveFundamentalClass",
+   "AlgebraicGeometry.existsUnique_lciCurveFundamentalClass"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LCICurveFundamentalClass.lean",
+  "statement": "theorem existsUnique_lciCurveFundamentalClass {X S : Scheme.{u}} (p : X ⟶ S) [IsNoetherian S] [Flat p] [LocallyOfFinitePresentation p] [QuasiCompact p] [QuasiSeparated p] (hpure : HasPureFlatLCIGeometricFibres p 1) (hcharts : ∀ x : X, ∃ A : NodalCanonicalPresentation p, x ∈ A.U.1) (F : FlatLCIAdjunctionSystem p 1) (hF : F.IsNormalized) : ∃! α : ∀ B : FlatLCIBaseChange p, B.p'.relativeDifferentials ⟶ F.line B, F.IsCurveFundamentalClass α",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "H3/H13 repair: imports the same owning adjunction module with the kernel-first rank factor (-1)^(a*(b+1)), making the determinant comparisons composition-consistent and IsNormalized nonvacuous. The formula now displays flatLCICurveFundamentalSign C.c, explicitly +1 under the repaired convention; the negative conormal cone inclusion and the rank correction cancel. Both wedge and scalar Jacobian formulas use this sign. All other hypotheses and conclusions are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90975fd71",
+  "group": "NE",
+  "result": "pass",
+  "note": "H13 dependency repair: an in-place correction of FlatLCICanonicalAdjunction (factor (-1)^(a*(b+1)) in IsFlatLCIDeterminantComparison, same module and declarations, record differs only in lean; the live module is unchanged since base, so no competing repair). An exact-rational script on random quasi-isos: composition 0/400 failures (old sign 43/400), stabilize-then-project round trip 0/300, IsSmoothComparison consistent because the (-1)^c from the cone cancels the new rank sign, so IsNormalized is now inhabitable. Cofactor gluing with flatLCICurveFundamentalSign = +1: 0/400 failures (old sign 74/394); the Jacobian form equals det d(f,a)/dx. Apart from the new sign function, the two sign factors and docstrings, the item is byte-identical to 754bdaac, whose clause table was already checked. Statements verbatim, sorry only, docstrings and source places present. Of the four live importers, two (statement users) are audited in the report; the other two only import the module. Advisory: those two are missing from the report's consumer audit. No compile run (no FIX).; reverted the delivery's change of existing node(s) lem-trf-flat-lci-canonical-adjunction (--revert-nodes; kept as on sheaf-dag)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

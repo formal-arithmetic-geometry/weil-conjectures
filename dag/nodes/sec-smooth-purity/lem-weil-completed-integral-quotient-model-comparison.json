@@ -17,34 +17,38 @@
  ],
  "proof": [
   {
-   "text": "Identify each target principal cokernel with the actual constant residue module using the completed exact sequence. This identifies the quotient map and transition morphisms, so it is a comparison of the specified quotient presentations.",
+   "text": "Identify the categorical principal cokernel with the actual residue module by completed_exact. Its cokernel projection followed by this isomorphism is the specified residue projection, which sends one to one.",
    "uses": [
     "lem-a1-principal-koszul-strict-replacement"
    ],
    "elementary": false
   },
   {
-   "text": "On an input module use tensor associativity and the scalar normalization to identify the target quotient of its ordinary extension with its direct actual scalar reduction. The maps on local pure tensors are (s tensor x) tensor z -> residue(s) z tensor x and z tensor x -> (1 tensor x) tensor z. Tensor balancing proves the inverse identities. Sheafification extends the identities to all sections and establishes naturality.",
+   "text": "Construct restriction/sheafification and tensor/sheafification comparisons at independent site and coefficient universes. The normalized scalar-extension adjunctions and identity-on-sections restriction-composition comparison give successive scalar-extension associativity. On pure generators the level isomorphism sends the quotient of s tensor x to residue(s) tensor x. The termwise tensor unitor is identified using lax monoidal unitality.",
    "uses": [
     "def-pur-sheaf-tensor-product",
+    "def-pur-cochain-coefficient-arrows",
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
     "lem-weil-integral-scalar-extension-well-defined"
    ],
    "elementary": false
   },
   {
-   "text": "Apply these isomorphisms in every complex degree and quotient level. The formulas commute with differentials and quotient transitions. Thus they give a strict tower isomorphism. Its product and signed-cone isomorphisms preserve both coordinates of the canonical augmentation, including the zero shifted coordinate.",
+   "text": "The single-complex tensor comparison identifies each quotient augmentation degree with the cokernel projection tensored with the input. Tensor preserves colimits, so these maps are epimorphic in every degree. Use the given beta quotient coordinates and the level isomorphisms to factor its product projections. Epimorphic cancellation proves compatibility with differentials, successive quotient transitions and every input cochain map. This gives a natural strict tower isomorphism. Apply the product cone functor, compare its mapping-cone and mapping-cocone presentations, and check both biproduct coordinates against C.coordinates and the zero shifted coordinate of beta.",
    "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-principal-quotient-completion-exists",
     "def-weil-strict-roos-model",
-    "lem-pur-quotient-scalar-comparison-descent"
+    "lem-weil-integral-scalar-extension-well-defined"
    ],
    "elementary": false
   },
   {
-   "text": "Ordinary scalar extension preserves K-flatness. On the flat-term K-flat resolving category, use F and C counits to identify the composite derived functor with the strict tower just constructed. Localize that natural isomorphism and compare with the specified integral scalar extension descent. Their normalized unit equations agree on representatives by the two cone coordinates. The localization universal property gives the natural isomorphism and the full displayed counit equation on every resolving representative.",
+   "text": "Ordinary scalar extension preserves K-flatness, so F.epsilon and C.counit are invertible on the good representatives. Their composite with the strict Roos comparison yields the resolving isomorphism for F.T followed by C.completion. The uniqueness clause of integralScalarExtensionWellDefined compares it with the specified integral scalar extension. Naturality of C.unit, C.unit_computes and the augmentation identity prove the required equation.",
    "uses": [
     "lem-pur-kflat-change-of-rings-all-independent",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-weil-integral-scalar-extension-well-defined"
    ],
    "elementary": false
   }
@@ -52,17 +56,22 @@
  "proof_deps": [
   "lem-a1-principal-koszul-strict-replacement",
   "def-pur-sheaf-tensor-product",
+  "def-pur-cochain-coefficient-arrows",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
   "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-principal-quotient-completion-exists",
   "def-weil-strict-roos-model",
-  "lem-pur-quotient-scalar-comparison-descent",
-  "lem-pur-kflat-change-of-rings-all-independent",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-pur-kflat-change-of-rings-all-independent"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
+  "group": "F3",
+  "date": "2026-10-22",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10 and Proposition 3.5.1, pp. 22,24; Stacks Tags 03EK, 06YT, 08TC and 093M. This is the balanced-tensor and normalized-descent argument of parent proof step 5."
+  "place": "Definition 3.4.10 and Proposition 3.5.1, pp. 22,24; Stacks Tags 03EK, 06YT, 08TC and 093M. This is the balanced-tensor and normalized-descent argument of parent proof step 5.",
+  "note": "Explicit independent-universe tensor comparison, epimorphic assembly of strict towers, signed Roos coordinates and descent by the existing scalar-extension uniqueness clause."
  },
  "mathlib_searches": [
   {
@@ -137,10 +146,22 @@
   "date": "2026-10-22",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261022T013407-L-3561985",
+  "landing": "20261022T040201-L-2827864",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

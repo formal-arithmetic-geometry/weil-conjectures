@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.OverSquare
 
 public import Sheaf.Paper.ContinuousIntegralComparisons
 import Sheaf.Paper.ContinuousIntegralPullComposition
+public import Sheaf.SixFunctors.ModCondensedCachedInstances
 
 /-! # Coherence of integral localization and the specified exchange map -/
 
@@ -177,6 +178,10 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
+attribute [local irreducible] derivedUpperStarLowerStarAdjunction
+  Mod.derivedExtendMapDerivedCategoryAdjunction derivedComapLowerStarIso
+  Adjunction.pushHomOfComapIso Adjunction.pullIsoOfComapIso Adjunction.restrictFullyFaithful
+
 private lemma bounded_counit_hom
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] [IsFinitenessCoefficient ℓ Λ]
@@ -236,9 +241,9 @@ private lemma integralPull_counit
         (integralScalarExtension ℓ E T).map
           (((boundedConstructibleUpperStarLowerStarAdjunction (integralCoeff ℓ E) ℓ (h.asOver (Spec
             (.of k)))).counit.app K).hom)
-  rw [bounded_counit_hom (ℓ := ℓ) (k := k)
-      (Λ := Profinite.continuousMapRingObj E) (h := h),
-    bounded_counit_hom (ℓ := ℓ) (k := k) (Λ := integralCoeff ℓ E) (h := h)]
+  simp only [bounded_counit_hom (ℓ := ℓ) (k := k)
+      (Λ := Profinite.continuousMapRingObj E) (h := h) (K := (integralScalarConstructible ℓ E T).obj K),
+    bounded_counit_hom (ℓ := ℓ) (k := k) (Λ := integralCoeff ℓ E) (h := h) (K := K)]
   exact
       push_pull_counit
         (Mod.derivedExtendMapDerivedCategoryAdjunction
@@ -339,8 +344,7 @@ private lemma integralPull_square_cube_iso
   have h₁ := integralConstructiblePullIso_comp ℓ E k g' f M
   have h₂ := integralConstructiblePullIso_comp ℓ E k f' g M
   have he := integralPull_eq ℓ E k (f' ≫ g) (g' ≫ f) sq.w.symm M
-  rw [boundedConstructiblePullbackSquareComparison_app,
-    boundedConstructiblePullbackSquareComparison_app]
+  simp only [boundedConstructiblePullbackSquareComparison_app]
   exact mapped_iso_rectangle (integralScalarConstructible ℓ E X')
       ((boundedConstructibleUpperStarComp (integralCoeff ℓ E) ℓ (f'.asOver (Spec (.of k))) (g.asOver
         (Spec (.of k)))).app M)

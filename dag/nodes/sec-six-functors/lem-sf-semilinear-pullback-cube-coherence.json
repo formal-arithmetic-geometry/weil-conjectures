@@ -1,0 +1,131 @@
+{
+ "id": "lem-sf-semilinear-pullback-cube-coherence",
+ "kind": "statement",
+ "title": "Ordinary inverse-image compositor coherence around a commutative cube",
+ "statement": "For arbitrary strict semilinear coefficient systems and any commutative cube of schemes, the two composites from k1-star p1-star h-star to r1-star c-star i-star built from the specified moduleSquareG comparisons agree. This requires only the six face commutativity equalities, with no properness, openness or pullback assumption; the operations are those of [def-sp-varying-ring-operations] and [def-sp-varying-ring-proper-open-arrows].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D8 and 07A7, normalized inverse-image composition; compositor calculation used in more-etale.tex Tag 0F7F, extended to strict semilinear systems"
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Prove section-normalized direct-image associativity by the coefficientwise formula of modulePComp_existsUnique: the two composites restrict along the same map of iterated fibre products. Use the already proved site_pasting and restriction_pasting helpers from StrictTowerDirectImageCoherence to identify these maps. Apply Adjunction.leftAdjointCompIso_assoc and mate_transport to obtain ordinary associativity for exactly moduleGComp. This reproduces the proved ordinary_coherence calculation of SemilinearCompositorCoherence locally, avoiding that module's unrelated proof imports. Invert its natural-isomorphism equation and transport along supplied equalities to obtain cubeComposition_assoc for independently named composites.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-pc-fibre-product",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-trf-adjoint-composition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand a forward square into the forward comparison to its named composite followed by the inverse comparison for the other path. Choose the common total j followed by iU followed by f. Apply the three-arrow associativity equation to the six paths j,iU,f; j,f0,iV; f0prime,g0,iV; iUprime,gprime,f; iUprime,fprime,g; and f0prime,iVprime,g. Postcompose with the invertible comparison from iUprime,gprime,f to the common total; successive inverse-hom cancellations identify the two three-face cube paths. The six face equalities supply all needed transports, whose proofs agree by proof irrelevance.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Identify each forward square with moduleSquareG.inv, and each reversed square with moduleSquareG.hom, using moduleSquareG_eq. Apply the preceding three-face cube equation with f=i, fprime=i1, g=h, gprime=c, iU=r, iUprime=r1, iV=p, iVprime=p1, f0=k, f0prime=k1, g0=a and j=d. Cancel the inverse of the whiskered a,p1,p,h face comparison on the left. This gives exactly the displayed two-face versus four-face equality.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-pc-fibre-product",
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-trf-adjoint-composition-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7F, compositor cube calculation; existing ordinary associativity from SemilinearCompositorCoherence and the six-path normalization calculation in WeilConjectures.AlgebraicGeometry.SingleComplexOpenPullbackCube, adapted to semilinear module pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of the clopen alpha open extension inverse image map equals the inverse open adjunction unit",
+   "results": "8 hits: topological Opens adjunction and inclusion identities; no match for the intrinsic moduleAlpha restriction formula.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "1 hit: CategoryTheory.Adjunction.leftAdjointCompIso_assoc, Mathlib.CategoryTheory.Adjunction.CompositionIso.",
+   "date": "2026-10-24",
+   "verdict": "partial: supplies adjoint composition coherence once section-normalized direct-image associativity is proved; does not directly state the moduleSquareG cube"
+  },
+  {
+   "tool": "grep",
+   "query": "moduleSquareG.*cube|moduleAlpha.*restriction",
+   "results": "0 hits in the search service. Local rg finds moduleSquareG_eq and moduleBetaInvApp, but no existing public alpha restriction or ordinary cube-coherence theorem.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse image composition isomorphisms around a commutative cube agree by associativity of adjoint composition",
+   "results": "8 hits concerning image isomorphisms, pullback associativity, ComposableArrows.isoMk4, and CatCommSq naturality. None states coherence of the specified moduleSquareG comparisons on semilinear module systems.",
+   "date": "2026-10-24",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SemilinearAlphaPullback",
+  "date": "2026-10-24",
+  "group": "R7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": "lem-sf-semilinear-alpha-pullback",
+   "place": "Proof, step 5",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SemilinearPullbackCubeCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemilinearPullbackCubeCoherence.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.moduleSquareG_cube",
+  "statement": "theorem moduleSquareG_cube\n    {U V W Z U₁ V₁ W₁ Z₁ : Scheme.{u}}\n    (k : U ⟶ V) (i : W ⟶ Z) (r : U ⟶ W) (p : V ⟶ Z)\n    (k₁ : U₁ ⟶ V₁) (i₁ : W₁ ⟶ Z₁) (r₁ : U₁ ⟶ W₁) (p₁ : V₁ ⟶ Z₁)\n    (a : V₁ ⟶ V) (h : Z₁ ⟶ Z) (c : W₁ ⟶ W) (d : U₁ ⟶ U)\n    (w : k ≫ p = r ≫ i) (w₁ : k₁ ≫ p₁ = r₁ ≫ i₁)\n    (wk : d ≫ k = k₁ ≫ a) (wi : c ≫ i = i₁ ≫ h)\n    (wp : a ≫ p = p₁ ≫ h) (wr : d ≫ r = r₁ ≫ c) (M : Modules R φ Z) :\n    (moduleSquareG R φ k₁ r₁ p₁ i₁ w₁).inv.app ((pull R φ h).obj M) ≫\n        (pull R φ r₁).map ((moduleSquareG R φ c i₁ i h wi).hom.app M) =\n      (pull R φ k₁).map ((moduleSquareG R φ a p₁ p h wp).hom.app M) ≫\n        (moduleSquareG R φ d k₁ k a wk).hom.app ((pull R φ p).obj M) ≫\n        (pull R φ d).map ((moduleSquareG R φ k r p i w).inv.app M) ≫\n        (moduleSquareG R φ d r₁ r c wr).inv.app ((pull R φ i).obj M)",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261024T020102-L-2538403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261027T050620-L-245264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

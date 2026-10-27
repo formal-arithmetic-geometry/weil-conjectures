@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-stack-big-etale-derived-base-change",
+ "kind": "statement",
+ "title": "Derived base change on the big etale ringed sites of stacks",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme] and an algebraic stack $\\mathcal Z/S$ [def-sfb-algebraic-moduli-stack], its big etale site has all objects and arrows of the fibred category in [def-sfb-stack-quasi-coherent-algebra], with coverings lying over jointly surjective etale scheme maps. Its structure sheaf is $\\mathcal O_{\\mathcal Z}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$. Use module sheaves [def-weil-sheaf-of-modules-category]. For $h:\\mathcal A\\to\\mathcal Z$, direct image has value $(h_*N)(z)=\\Gamma(\\mathcal A\\times_{\\mathcal Z}U,N|_{\\mathcal A\\times_{\\mathcal Z}U})$; restrictions are induced by base change, and pullback of a module along a stack morphism means precomposition. Higher direct images are computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. Let $f:\\mathcal X\\to\\mathcal Y$ and $b:\\mathcal Y^{\\prime}\\to\\mathcal Y$ be arbitrary morphisms of algebraic stacks over $S$. Form $\\mathcal X^{\\prime}=\\mathcal Y^{\\prime}\\times_{\\mathcal Y}\\mathcal X$, with projections $a:\\mathcal X^{\\prime}\\to\\mathcal X$ and $f^{\\prime}:\\mathcal X^{\\prime}\\to\\mathcal Y^{\\prime}$, using [def-sfb-stable-pointed-moduli-groupoids]. For every module sheaf $F$ on $\\mathcal X$, placed in degree zero, precomposition $b^*$ and $a^*$ are exact functors on module sheaves, and the canonical base-change morphism is a natural isomorphism $b^*Rf_*F\\xrightarrow{\\sim}Rf^{\\prime}_*(a^*F)$ in $D(\\operatorname{Mod}(\\mathcal O_{\\mathcal Y^{\\prime}}))$ [def-weil-abstract-derived-category]. Precomposition on complexes is termwise. Neither morphism need be representable, smooth, flat or qcqs, and $F$ need not be quasi-coherent.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075H, lemma-base-change-higher-direct-images, etale module case."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-fibred-site-functor-continuity] to each of $f,f',a,b$, with base the big etale site of $S$-schemes: every arrow of a category fibred in groupoids is cartesian, so these functors over $\\mathit{Sch}/S$ preserve cartesian arrows, and the coverings of the statement are exactly the families lying over etale coverings. They are continuous and cocontinuous, so [lem-weil-pbc-continuous-cocontinuous-topos-adjunction] gives morphisms of topoi whose inverse image is precomposition. The section rings agree, $\\Gamma(T,\\mathcal O_T)$ on both sides at an object over $T$, with the same restrictions; hence [lem-weil-pbc-continuous-cocontinuous-ringed-restriction] makes them ringed-topos morphisms with identity structural map, and the tensor pullback $\\mathcal O\\otimes_{\\mathcal O}(-)$ is precomposition via $r\\otimes m\\mapsto rm$. By the unconditional clauses of [lem-sfb-stack-representable-module-injective-transport] this precomposition is exact on module sheaves and left adjoint to the section-formula direct image, which is therefore the module direct image of these morphisms. Thus $a,b,f,f'$ give flat ringed-topos morphisms even when the stack morphisms are not flat. The $2$-isomorphism $\\varphi:f\\circ a\\Rightarrow b\\circ f'$ of the $2$-cartesian square gives the commutation isomorphism $H(\\varphi_{x'}):H(b(f'(x')))\\to H(f(a(x')))$ of inverse images; it is the identity on structure rings because $\\varphi_{x'}$ lies over an identity scheme map. Actions on complexes are termwise. No representability clause of the cited node is applied to $a$ or $b$.",
+   "uses": [
+    "lem-sfb-fibred-site-functor-continuity",
+    "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "lem-sfb-stack-representable-module-injective-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tags 06TS (lemma-functoriality-sheaves), 06TW (lemma-functoriality-structure-sheaf), remark-flat, and section-modules"
+   }
+  },
+  {
+   "text": "For $y'\\in\\mathcal Y'(V)$ put $C=\\mathcal X\\times_{\\mathcal Y}(\\mathit{Sch}/V)$ using $b(y')$, and $C'=\\mathcal X'\\times_{\\mathcal Y'}(\\mathit{Sch}/V)$ using $y'$. Expand the $2$-fibre products by [def-sfb-stable-pointed-moduli-groupoids]. An object of $C'$ over $T$ is $(t:T\\to V,z',x,\\alpha:f(x)\\simeq b(z'),\\beta:z'\\simeq t^*y')$. Send it to $(t,x,b(\\beta)\\alpha)$ in $C$. The inverse sends $(t,x,\\delta)$ to $(t,t^*y',x,\\delta,\\mathrm{id})$. One composite is the identity; the other is isomorphic to the identity by $(\\beta,\\mathrm{id}_x)$. These formulas also define the arrows and commute with their composition. They retain the scheme $T$, its maps, coverings, and section rings, and identify both coefficient restrictions with $F(x)$. For an arrow of test objects, both ways of restricting these formulas compose the same isomorphism $f(x)\\to b(y')$ with that arrow. The direct-image section formula therefore gives a natural underived isomorphism $e_M:b^*f_*M\\simeq f'_*a^*M$, linear over $\\Gamma(V,\\mathcal O_V)$. It is the adjunction mate: the direct-image counit evaluates a compatible family at the object above $x$, and restriction along the displayed functor performs exactly that evaluation.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075B (lemma-base-change), including its omitted restriction compatibility, and equation-pushforward (Tag 06W6)"
+   }
+  },
+  {
+   "text": "Use the resolution-existence clause of [lem-sfb-module-resolution-derived-presheaf-comparison] on the two small ringed sites to choose nonnegative module-injective resolutions $r:F[0]\\hookrightarrow I$ and $s:a^*F[0]\\hookrightarrow J$. Exactness from Step 1 and the homology comparison of [lem-sp-exact-functor-preserves-homology] make $a^*r$ a degreewise monomorphic quasi-isomorphism. Apply [lem-weil-pbc-lift-along-injective-quasi-iso] to $a^*r$ with target $J$ and map $s$: there is $u:a^*I\\to J$ satisfying $u(a^*r)=s$. Hence there is a chain map $v=f'_*(u)\\circ e_I:b^*f_*I\\to f'_*J$.",
+   "uses": [
+    "lem-sfb-module-resolution-derived-presheaf-comparison",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075H (lemma-base-change-higher-direct-images); sites-cohomology.tex Tag 0736 (lemma-base-change-map-flat-case), injective-resolution construction"
+   }
+  },
+  {
+   "text": "The complex map $v$ represents the canonical derived base-change arrow. Indeed bounded-below injective complexes $I,J$ are K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective], so their resolution units are isomorphisms by [def-sfb-right-derived-functor]. Apply [lem-sfb-flat-ringed-exchange-resolution-unit] to $P=I$ and the exact horizontal pullbacks of Step 1: its equality identifies the canonical mate followed by the source resolution unit with $\\eta^{f'}_{a^*I}\\,Q(e_I)$. Naturality of this resolution unit for $u$ gives $Rf'_*(Q(u))\\eta^{f'}_{a^*I}=\\eta^{f'}_J Q(f'_*(u))$. Since $u(a^*r)=s$, the identifications by $r,s$ turn this equality into the assertion that the mate on $F[0]$ is $Q(v)$. Thus we have identified the prescribed morphism, before checking invertibility.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-sfb-right-derived-functor",
+    "lem-sfb-flat-ringed-exchange-resolution-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075H; sites-cohomology.tex Tags 0736 (lemma-base-change-map-flat-case), 07A7 (remark-base-change)"
+   }
+  },
+  {
+   "text": "Fix $y'$ and identify $C'$ with $C$ by Step 2. The test-fibre projection $p:C\\to\\mathcal X$ pulls $I$ to an injective resolution $p^*I$ of $p^*F$ by [lem-sfb-stack-test-fibre-restriction-injectives] and [lem-sp-exact-functor-preserves-homology]. The same node, applied to $f'$ and $y'$, makes $q^*J$ an injective resolution of the same module on $C'$. It remains injective after the equivalence: a lifting problem along a monomorphism is carried by the inverse equivalence to one for $q^*J$, and the resulting extension is carried back. The restriction $u_{y'}:p^*I\\to q^*J$ preserves the common augmentation. By [lem-weil-pbc-lift-along-injective-quasi-iso] the augmentation into $q^*J$ admits a reverse comparison into $p^*I$. Both composites are homotopic to the respective identities by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy], since they agree on the common module in degree zero. Global sections carry these homotopies to homotopies by [lem-weil-pbc-homotopic-maps-equal-cohomology]. Under the section formula and $e_I$, $v(y')$ is exactly $\\Gamma(C,u_{y'})$; it is therefore a homotopy equivalence and in particular a quasi-isomorphism. This uses injective preservation only for the two test-fibre projections, never for arbitrary $a$.",
+   "uses": [
+    "lem-sfb-stack-test-fibre-restriction-injectives",
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075G (lemma-pushforward-restriction), injective-restriction argument used by Tag 075H; derived.tex Tags 013P (lemma-morphisms-lift), 013S (lemma-morphisms-equal-up-to-homotopy)"
+   }
+  },
+  {
+   "text": "Since Step 5 applies to every object of $\\mathcal Y'$, [lem-pur-quasi-iso-of-sections] makes $v$ a quasi-isomorphism of module-sheaf complexes. All sites and modules are taken in the common small-skeleton universe of the statement. Localization therefore inverts $v$ by [def-weil-abstract-derived-category]. Step 4 identifies this isomorphism with the canonical base-change morphism, which is natural in $F$ as the derived adjunction mate of [lem-sfb-flat-ringed-exchange-resolution-unit]. This proves the derived assertion as well as the exactness already established in Step 1, with all stated unrestricted hypotheses.",
+   "uses": [
+    "lem-pur-quasi-iso-of-sections",
+    "def-weil-abstract-derived-category",
+    "lem-sfb-flat-ringed-exchange-resolution-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 075H (lemma-base-change-higher-direct-images), final quasi-isomorphism conclusion; sites-cohomology.tex Tag 0A95 (lemma-RHom-well-defined), sectionwise quasi-isomorphism test"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-sfb-fibred-site-functor-continuity",
+  "lem-sfb-stack-representable-module-injective-transport",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-module-resolution-derived-presheaf-comparison",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-sfb-flat-ringed-exchange-resolution-unit",
+  "lem-sfb-stack-test-fibre-restriction-injectives",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology",
+  "lem-pur-quasi-iso-of-sections",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 075H (lemma-base-change-higher-direct-images), expanded using the injective-restriction proof of Tag 075G and the resolution construction of sites-cohomology.tex Tag 0736."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of algebraic stacks precomposition on big etale module sheaves is exact and the canonical derived direct image base change is an isomorphism for every module sheaf",
+   "results": "{\"t\": \"2026-10-23T19:58:06Z\", \"tool\": \"leanfinder\", \"query\": \"For a cartesian square of algebraic stacks precomposition on big etale module sheaves is exact and the canonical derived direct image base change is an isomorphism for every module sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"KaehlerDifferential.exact_mapBaseChange_map\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"Algebra.H1Cotangent.exact_δ_mapBaseChange\"], \"digest\": \"e6da34d4cfc46a91\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf pullback composition, Kan extension base change and scheme module adjunctions do not assert derived base change for the big ringed sites of arbitrary algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T19:58:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicStack\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf pullback composition, Kan extension base change and scheme module adjunctions do not assert derived base change for the big ringed sites of arbitrary algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|precomposition.*base.change|base.change.*precomposition",
+   "results": "{\"t\": \"2026-10-23T19:58:20Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|precomposition.*base.change|base.change.*precomposition\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf pullback composition, Kan extension base change and scheme module adjunctions do not assert derived base change for the big ringed sites of arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a cartesian square of algebraic stacks precomposition on big etale module sheaves is exact and the canonical derived direct image base change is an isomorphism for every module sheaf",
+   "results": "{\"t\": \"2026-10-23T19:58:41Z\", \"tool\": \"leansearch\", \"query\": \"For a cartesian square of algebraic stacks precomposition on big etale module sheaves is exact and the canonical derived direct image base change is an isomorphism for every module sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose\", \"CategoryTheory.TwoSquare.instIsIsoFunctorLanBaseChangeOfGuitartExact\", \"CategoryTheory.TwoSquare.isIso_lanBaseChange_app\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\"], \"digest\": \"08b56e1c09f20c38\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf pullback composition, Kan extension base change and scheme module adjunctions do not assert derived base change for the big ringed sites of arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley isomorphism for derived direct images of sheaves on fibred groupoid big sites using exact restriction by precomposition",
+   "results": "{\"t\": \"2026-10-23T19:59:24Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley isomorphism for derived direct images of sheaves on fibred groupoid big sites using exact restriction by precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"CategoryTheory.sheafComposeNatIso\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"CategoryTheory.sheafComposeIso_inv_fac\", \"SheafOfModules.pullbackComp\"], \"digest\": \"28b813f4010d7a52\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic sheaf pullback composition, Kan extension base change and scheme module adjunctions do not assert derived base change for the big ringed sites of arbitrary algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived base change for arbitrary algebraic stacks on their big etale ringed sites with pullback by precomposition",
+   "results": "{\"t\": \"2026-10-23T22:12:15Z\", \"tool\": \"leanfinder\", \"query\": \"Derived base change for arbitrary algebraic stacks on their big etale ringed sites with pullback by precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\"], \"digest\": \"31521c69651729a9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism properties, ordinary continuous-functor composition, or categorical pullbacks; none gives the derived module comparison for arbitrary algebraic stacks on big etale sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-23T22:12:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism properties, ordinary continuous-functor composition, or categorical pullbacks; none gives the derived module comparison for arbitrary algebraic stacks on big etale sites."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|precomposition.*base.change|base.change.*precomposition",
+   "results": "{\"t\": \"2026-10-23T22:12:16Z\", \"tool\": \"grep\", \"query\": \"AlgebraicStack|precomposition.*base.change|base.change.*precomposition\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism properties, ordinary continuous-functor composition, or categorical pullbacks; none gives the derived module comparison for arbitrary algebraic stacks on big etale sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact inverse image by precomposition on big sites of categories fibred in groupoids commutes with derived pushforward in a two cartesian square",
+   "results": "{\"t\": \"2026-10-23T22:12:17Z\", \"tool\": \"leansearch\", \"query\": \"Exact inverse image by precomposition on big sites of categories fibred in groupoids commutes with derived pushforward in a two cartesian square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuousComp_inv_app_val_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_obj_obj_iso_inv_app\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_inv_app_fst_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_obj_map_snd_app\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformPrecomposeObjSquare_iso_hom_comp\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_id\"], \"digest\": \"495a6616122979d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism properties, ordinary continuous-functor composition, or categorical pullbacks; none gives the derived module comparison for arbitrary algebraic stacks on big etale sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley derived pushforward for sheaves on categories fibred in groupoids and exact restriction to big etale sites",
+   "results": "{\"t\": \"2026-10-23T22:12:18Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley derived pushforward for sheaves on categories fibred in groupoids and exact restriction to big etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.sheafPushforwardContinuousComp\", \"CategoryTheory.Functor.sheafPushforwardCocontinuous\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app\", \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app\"], \"digest\": \"df4865a1a3d6dd55\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern scheme morphism properties, ordinary continuous-functor composition, or categorical pullbacks; none gives the derived module comparison for arbitrary algebraic stacks on big etale sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting target-localization input to the smooth descent criterion: derived big-etale base change, without representability.",
+   "via": [
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-big-etale-derived-base-change",
+  "worker": "stage1",
+  "summary": "Retained the statement; expanded Stacks 075H into exact pullback, the explicit test-fibre equivalence and its restriction compatibility, a canonical resolution-level mate, and the objectwise homotopy-equivalence test. Reused existing DAG inputs; no new nodes. Repaired the inherited null blueprint ancestor to its documented det-thm-sf-ctf-stability-direct-images anchor.",
+  "blueprint": "latest blueprint sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3), supporting big-etale localization below the inherited alteration/moduli/coarse-space route; no change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General uniqueness of comparison maps between bounded-below injective resolutions; the unit has no replacement for this homological algebra tool."
+   },
+   {
+    "node": "lem-pur-quasi-iso-of-sections",
+    "why": "General ringed-site test that a sectionwise quasi-isomorphism is a quasi-isomorphism, independent of purity; used on the big-etale module-sheaf complexes in the common universe."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+    "why": "General geometric morphism attached to a continuous cocontinuous site functor; makes the stack-morphism precompositions inverse images of topos morphisms."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "why": "General ringed-topos structure of such a morphism with identity structural ring map; needed for the ringed-topos square of the exchange-unit node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-pur-quasi-iso-of-sections",
+  "lem-weil-pbc-continuous-cocontinuous-topos-adjunction",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NF-655cecc02",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-655cecc02 (reviewer sub-agent of L); spot-checked: Read the item's six steps, every cited statement and Stacks 075B, 075G, 075H, 06TS, 06TW, 06TX and 06TM. There are no new nodes and the statement is unchanged; it matches 075H for étale Mod(O_X), not weakened. One fault (C1-type): Step 1 said 'thus flat morphisms of ringed topoi' with only a module-level citation. Step 4's lem-sfb-flat-ringed-exchange-resolution-unit needs a ringed-topos square (set-level topos morphisms plus a commutation isomorphism), and no big-étale node in the DAG states that. Fixed by citing the generic nodes lem-sfb-fibred-site-functor-continuity, lem-weil-pbc-continuous-cocontinuous-topos-adjunction and lem-weil-pbc-continuous-cocontinuous-ringed-restriction, and by writing the commutation isomorphism H(φ_{x'}) from the 2-isomorphism (Stacks 06TM). Added proof_deps and tool_uses to match. Checked the remaining steps: Step 2's explicit equivalence C'≃C and mate; Step 3's lift u(a^*r)=s; Step 4's identification β_F=η_J Q(v), using K-injectivity and the exchange-unit equation; Step 5's test-fibre injectives for (f,b(y')) and (f',y') giving a sectionwise homotopy equivalence; Step 6's sectionwise quasi-isomorphism test. Edge cases b=id, f=id, empty X, and closed-immersion b (flat as a ringed topos, not as a stack morphism) are fine. Batch-5: def-trf-topos-derived-base-change-map, reached via the exchange-unit node, is a general definition of the base-change mate with no trace-formula or Poincaré content, so it is accepted. No duplicates: the 075H higher-image and representable-restriction nodes depend on this item. No SGA.; 1 file(s) fixed by the reviewer"
+ }
+}

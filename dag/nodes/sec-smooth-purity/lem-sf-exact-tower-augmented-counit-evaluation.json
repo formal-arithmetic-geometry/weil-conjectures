@@ -1,0 +1,314 @@
+{
+ "id": "lem-sf-exact-tower-augmented-counit-evaluation",
+ "kind": "statement",
+ "title": "Normalized exact tower augmentation and coherent counit evaluation",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites with sheaves of commutative rings $R,S$, and put $\\mathcal A=\\operatorname{Mod}(R)$, $\\mathcal B=\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category]. For $\\mathcal E=\\mathcal A,\\mathcal B$, use strict towers $\\operatorname{Tow}(\\mathcal E)=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{\\mathrm{op}},\\mathcal E)$, with levelwise exactness [def-weil-inverse-system, lem-weil-tower-category-levelwise-abelian], and unbounded derived categories [def-weil-abstract-derived-category]. Let $F:\\mathcal A\\to\\mathcal B$ be additive and exact, and let $H:D(\\mathcal A)\\to D(\\mathcal B)$, $\\widetilde H:D(\\operatorname{Tow}(\\mathcal A))\\to D(\\operatorname{Tow}(\\mathcal B))$ be its termwise derived functors with their canonical localization comparisons [lem-weil-pbc-exact-functor-derived-factorization]. Write $\\Delta,\\Delta'$ for derived constant towers, $e_n,e'_n$ for derived evaluations, and $d_{m,n}:e_m\\to e_n$, $d'_{m,n}:e'_m\\to e'_n$ for the transformations induced by the unique index arrow, for $m\\ge n$.\n\nLet $j:\\widetilde H\\Delta\\xrightarrow{\\sim}\\Delta'H$, $t_n:e'_n\\widetilde H\\xrightarrow{\\sim}He_n$, $s_n:e_n\\Delta\\xrightarrow{\\sim}\\mathrm{id}$, and $s'_n:e'_n\\Delta'\\xrightarrow{\\sim}\\mathrm{id}$ be the canonical exact-localization isomorphisms induced respectively by the ordinary constant/pullback, evaluation/pullback, and constant/evaluation identities. Fix the canonical adjunction $\\Delta'\\dashv L'$ where $L'=R\\lim$ is computed by K-injective tower resolutions, which exist for complexes of strict towers of module sheaves on a small site [lem-weil-pbc-ringed-strict-tower-homotopy-limit], with unit $v'$ and counit $\\varepsilon'$ [lem-coef-derived-tower-counit-projections]. Let $\\pi'_{n,N}:L'N\\to e'_nN$ be its specified K-injective limit projections, using $s'_n$ to identify evaluation of a constant tower with its input.\n\nThe following simultaneous coherence identities hold for all derived $K,M$:\n$$t_{n,\\Delta K}\\,e'_n(j_K^{-1})\\,(s'_{n,HK})^{-1}=H(s_{n,K}^{-1}),\\qquad t_{n,M}d'_{m,n,\\widetilde HM}=H(d_{m,n,M})t_{m,M}.$$\nFor any morphism $i:\\Delta K\\to M$ in the derived strict tower category, put\n$$a=\\widetilde H(i)j_K^{-1},\\quad b=L'(a)v'_{HK},\\quad q_n=e_n(i)s_{n,K}^{-1},\\quad p_n=t_{n,M}\\pi'_{n,\\widetilde HM}.$$\nThen\n$$\\varepsilon'_{\\widetilde HM}\\Delta'(b)=a,\\qquad t_{n,M}e'_n(a)(s'_{n,HK})^{-1}=H(q_n),\\qquad p_nb=H(q_n),\\qquad H(d_{m,n,M})p_m=p_n.$$\nFor $m\\ge n\\ge r$ one has\n$$H(d_{n,r,M})H(d_{m,n,M})p_m=H(d_{m,r,M})p_m=p_r,$$\nand $d_{n,n}=\\mathrm{id}$ gives the identity-index formula. These are natural identities: for $f:K\\to K'$ and $u:M\\to M'$ with $ui=i'\\Delta(f)$ one has $L'\\widetilde H(u)b_i=b_{i'}H(f)$, together with the corresponding naturality squares for $q_n$ and $p_n$. No product preservation by $F$ or invertibility of $b$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6 / immersion comparison Step 5; old parent proof Steps 4–5, normalized evaluation of the augmented target counit and all quotient transitions, extracted for arbitrary derived strict augmentations. Agent-written exact-localization coherence refinement; underlying derived adjunction: Stacks derived.tex, Tag 09T5 (lemma-derived-adjoint-functors), with K-injective tower model sites-cohomology.tex, Tag 0941 (lemma-derived-limit-is-ok)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-tower-counit-projections",
+  "def-sbc-tower-derived-evaluation-interchange",
+  "def-coef-tower-derived-evaluation-transition",
+  "def-sf-derived-constant-tower-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Use right-to-left composition throughout. The ordinary constant functor is exact because its kernels and cokernels are constant levelwise; postcomposition by $F$ is exact levelwise, and evaluations are exact. Hence all the functors defining $j,t_n,s_n,s'_n$ act termwise on complexes and preserve quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Fix their factorization isomorphisms $a_G:D(G)Q\\xrightarrow{\\sim}QC(G)$. For a composite use the iterated factorization: for $G_2G_1$ the normalization of $D(G_2)D(G_1)Q$ is $a_{G_2,C(G_1)(-)}D(G_2)(a_{G_1})$. This specifies all the comparisons below without using a product comparison. Reuse the proved factorization API towerInterchange_fac and towerTransition_fac from the existing tower normalization module, and rct_eval_fac and rct_pull_fac from the existing constant-tower normalization module. Their proofs are shared in their original modules rather than copied.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; levelwise kernels and cokernels"
+   }
+  },
+  {
+   "text": "Apply clauses (2) and (3) of [lem-weil-pbc-localization-universal-property] to the source localization $Q_{\\mathcal A}$. A comparison induced by an ordinary identity $U=V$ has component $\\alpha_V^{-1}\\alpha_U$ on $QK$, where $\\alpha_U,\\alpha_V$ are the iterated factorizations of Step 1 into the common termwise complex. In the composite\n$$t_{n,\\Delta K}\\,e'_n(j_K^{-1})\\,(s'_{n,HK})^{-1}$$\nthe successive ordinary operations are constant, $F$, and evaluation; either order gives exactly $C(F)K$. Substitute these factorization formulas. Naturality of each $a_G$ moves a whiskered comparison to the common termwise target; every intermediate $\\alpha\\alpha^{-1}$ cancels. The remaining comparison is the one induced by the identity from $F$ to $F e_n\\Delta$, namely $H(s_{n,K}^{-1})$. Thus the first coherence identity holds on every $Q_{\\mathcal A}K$ and hence everywhere by clause (3). The same calculation for $e_n\\Delta$ and the ordinary identity transitions of a constant tower gives\n$$d_{m,n,\\Delta K}s_{m,K}^{-1}=s_{n,K}^{-1},\\qquad d'_{m,n,\\Delta'X}(s'_{m,X})^{-1}=(s'_{n,X})^{-1}.$$\nHere equality of transformations is detected by localization, not by testing evaluations of arbitrary derived towers.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation version in Localization.Predicate, liftNatTrans_app and natTrans_ext; explicit agent calculation"
+   }
+  },
+  {
+   "text": "For a strict tower complex $T$ and its actual index arrow $T_m\\to T_n$, ordinary evaluation/postcomposition gives the equality $F(T_m\\to T_n)=(F^{\\rm Tow}T)_m\\to(F^{\\rm Tow}T)_n$, in every degree. Apply localization clause (2) to this natural transformation, with the normalization of Step 1. Its component formula conjugates both sides by the same source and target factorizations, giving\n$$t_{n,M}d'_{m,n,\\widetilde HM}=H(d_{m,n,M})t_{m,M}$$\nfor $M=QT$. Clause (3) gives the identity on all $M$. The ordinary identity law for index arrows similarly descends to $d_{n,n}=1$, using liftNatTrans_id. The composite-index conclusion below follows directly from projection compatibility, without needing a separate composition law for derived transitions. All indices here are arbitrary $m\\ge n\\ge r\\ge1$, not just consecutive indices.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-inverse-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation descent and strict index functor law"
+   }
+  },
+  {
+   "text": "Set $X=HK$ and $N=\\widetilde HM$. The adjunction and counit normalization are those of [lem-coef-derived-tower-counit-projections]. By naturality of $\\varepsilon'$ at $a:\\Delta'X\\to N$, and the left triangle identity of this adjunction,\n$$\\varepsilon'_N\\Delta'(b)=\\varepsilon'_N\\Delta'L'(a)\\Delta'(v'_X)=a\\varepsilon'_{\\Delta'X}\\Delta'(v'_X)=a.$$\nThus this is the actual specified counit, rather than a replacement map having the same level maps.",
+   "uses": [
+    "lem-coef-derived-tower-counit-projections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; adjunction naturality and defining left triangle identity"
+   }
+  },
+  {
+   "text": "Naturality of $t_n$ at $i$ and Step 2 give\n$$t_{n,M}e'_n(a)(s'_{n,HK})^{-1}=H(e_n i)t_{n,\\Delta K}e'_n(j_K^{-1})(s'_{n,HK})^{-1}=H(e_n i)H(s_{n,K}^{-1})=H(q_n).$$\nThis uses naturality for the given derived arrow $i$; it does not choose a strict representative for that arrow.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation using naturality of the specified localization comparison and Step 2"
+   }
+  },
+  {
+   "text": "The counit projection formula of [lem-coef-derived-tower-counit-projections], with its constant/evaluation identification written explicitly, is\n$$\\pi'_{n,N}=e'_n(\\varepsilon'_N)(s'_{n,L'N})^{-1}.$$\nNaturality of $s'_n$ at $b:X\\to L'N$ therefore gives\n$$\\pi'_{n,N}b=e'_n(\\varepsilon'_N)e'_n(\\Delta'b)(s'_{n,X})^{-1}=e'_n(a)(s'_{n,X})^{-1}.$$\nThe last equality is Step 4. Multiply by $t_{n,M}$ and use Step 5 to obtain $p_nb=H(q_n)$.",
+   "uses": [
+    "lem-coef-derived-tower-counit-projections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 via the cited counit-projection statement; Tag 0941, lemma-derived-limit-is-ok, for its specified tower model"
+   }
+  },
+  {
+   "text": "Naturality of the transition transformation $d'_{m,n}$ at $\\varepsilon'_N$ and the constant-tower identity of Step 2 imply\n$$d'_{m,n,N}\\pi'_{m,N}=d'_{m,n,N}e'_m(\\varepsilon'_N)(s'_{m,L'N})^{-1}=e'_n(\\varepsilon'_N)d'_{m,n,\\Delta'L'N}(s'_{m,L'N})^{-1}=\\pi'_{n,N}.$$\nUsing Step 3 now yields\n$$H(d_{m,n,M})p_m=t_{n,M}d'_{m,n,N}\\pi'_{m,N}=t_{n,M}\\pi'_{n,N}=p_n.$$\nNo faithfulness of the family of evaluations is used: the first equality is naturality of transformations already defined on the derived tower category.",
+   "uses": [
+    "lem-coef-derived-tower-counit-projections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 via counit projection normalization; transition naturality and Steps 2–3"
+   }
+  },
+  {
+   "text": "For $m\\ge n\\ge r$, apply Step 7 first to $(m,n)$ and then to $(n,r)$ to obtain $H(d_{n,r,M})H(d_{m,n,M})p_m=p_r$. Apply Step 7 directly to $(m,r)$ to identify $H(d_{m,r,M})p_m=p_r$. These give both composite-index equalities. For the identity-index formula, Step 3 gives $d_{n,n}=1$; apply $H(1)=1$ and the categorical identity law.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation from Step 7, plus the localized identity index law of Step 3"
+   }
+  },
+  {
+   "text": "Write $N'=\\widetilde HM'$ and assume $ui=i'\\Delta f$. Naturality of $j$ gives $\\widetilde H(u)a_i=a_{i'}\\Delta'H(f)$, by substituting $a_i=\\widetilde H(i)j_K^{-1}$. Naturality of $v'$ consequently gives\n$$L'\\widetilde H(u)b_i=L'(a_{i'})L'\\Delta'H(f)v'_{HK}=L'(a_{i'})v'_{HK'}H(f)=b_{i'}H(f).$$\nNaturality of $s_n$ and $ui=i'\\Delta f$ gives $e_n(u)q_{n,i}=q_{n,i'}f$. Finally the naturality in $N$ of the specified projections in [lem-coef-derived-tower-counit-projections], followed by naturality of $t_n$, gives\n$$H(e_nu)p_{n,M}=t_{n,M'}e'_n\\widetilde H(u)\\pi'_{n,N}=t_{n,M'}\\pi'_{n,N'}L'\\widetilde H(u)=p_{n,M'}L'\\widetilde H(u).$$\nThese are precisely the requested naturality squares. None of Steps 1–9 requires preservation of infinite products or invertibility of $b$.",
+   "uses": [
+    "lem-coef-derived-tower-counit-projections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 via natural counit projections; agent calculation of all three naturality squares"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-inverse-system",
+  "lem-coef-derived-tower-counit-projections",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-weil-pbc-constant-tower-pushforward-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Exact-localization coherence subargument extracted from localization; Stacks Tags 015F, 04VG, 09T5, 0941 and the cited DAG statements; A9 Lean proof 2026-10-23: normalized comparisons checked by factorization and localization natural-transformation extensionality, actual supplied adjunction and hπ used directly; composite-index formula uses projection compatibility twice; A9 returned-delivery repair 2026-10-24: remove seven duplicate helpers and reuse four existing factorization lemmas accessed through proof-only import all."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Dd]erived.*[Tt]ower|[Tt]ower.*[Ee]valuation|[Ee]valuation.*[Cc]ounit",
+   "results": "1 hits: Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normalized exact derived tower functor carries augmented counit projections to the specified level maps naturally and compatibly with transitions",
+   "results": "8 hits: CategoryTheory.Idempotents.DoldKan.N_map, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.FreeMonoidalCategory.normalizeObj', CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Abelian.DoldKan.N, AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Limits.constLimAdj",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "exact functor on derived strict towers has coherent evaluations of an augmented counit under constant tower inverse limit adjunction including all transition maps",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived functor of an exact functor commutes with evaluation and constant diagrams so adjoint augmentation projections respect composite inverse sequence transitions",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|mapDerivedCategoryNatIso|mapDerivedCategoryIdIso",
+   "results": "0 hits: none (subdirectory Algebra/Homology/DerivedCategory)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategoryCompIso",
+   "results": "7 hits: CategoryTheory.Functor.mapDerivedCategoryCompIso, CategoryTheory.Functor.instCommShiftDerivedCategoryHomMapDerivedCategoryCompIsoInt, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_comp_mapDerivedCategorySingleFunctor_hom_app_assoc, CategoryTheory.Functor.mapDerivedCategorySingleFunctor_inv_app_comp_mapDerivedCategoryCompIso_inv_app_assoc, CategoryTheory.Functor.mapDerivedCategoryCompIso_hom_app_Q_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: generic exact descent and derived adjunction formulas do not state the simultaneous constant/evaluation coherence and its augmented tower counit identities"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso|mapDerivedCategoryNatTrans|mapDerivedCategoryNatIso",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact localization and derived adjunction APIs cover ingredients; none states the simultaneous tower comparison, augmentation and transition formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact derived functor on towers commutes with evaluation and constant diagrams and preserves adjoint augmentation projections",
+   "results": "{\"top\": [\"CategoryTheory.constantPresheafAdj\", \"CategoryTheory.exactFunctor\", \"CategoryTheory.leftExactFunctor\", \"CategoryTheory.constantSheafAdj\", \"CategoryTheory.Limits.evaluationPreservesLimits\", \"HomologicalComplex.instPreservesLimitsOfShapeEvalOfHasLimitsOfShape\", \"CategoryTheory.Limits.limitObjIsoLimitCompEvaluation\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact localization and derived adjunction APIs cover ingredients; none states the simultaneous tower comparison, augmentation and transition formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans, CategoryTheory.Adjunction.counit",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact localization and derived adjunction APIs cover ingredients; none states the simultaneous tower comparison, augmentation and transition formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor on derived inverse sequences commutes with constant diagrams and evaluation, and carries an augmented constant diagram to the counit-normalized inverse limit projections",
+   "results": "{\"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"localCohomology.diagramComp\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.LocalizerMorphism.guitartExact_of_isRightDerivabilityStructure\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact localization and derived adjunction APIs cover ingredients; none states the simultaneous tower comparison, augmentation and transition formulas"
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans_app|natTrans_ext|left_triangle_components|counit_naturality",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Adjunction.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\", \"Mathlib/CategoryTheory/Localization/Trifunctor.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact localization and derived adjunction APIs cover ingredients; none states the simultaneous tower comparison, augmentation and transition formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical localization comparisons for exact functors preserve natural transformations between evaluation functors and constant diagrams; adjunction transpose evaluates to limit cone maps",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.Localization.ε_app\", \"CategoryTheory.Adjunction.Localization.η_app\", \"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Adjunction.localization_counit_app\", \"CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj_counit_app\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact localization and derived adjunction APIs cover ingredients; none states the simultaneous tower comparison, augmentation and transition formulas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-completed-pullback-mate-factorization",
+  "date": "2026-10-22",
+  "group": "Q79"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization proof Step 6 / old immersion-comparison Step 5; old factorization Steps 4–5: normalized evaluation of the augmented counit, strict transitions, their composites and naturality",
+   "via": [
+    "lem-sf-completed-pullback-mate-factorization",
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exact-tower-augmented-counit-evaluation",
+  "worker": "stage1",
+  "summary": "Nine steps prove the simultaneous localization comparisons, actual augmented counit, all level maps, transitions, composite indices and naturality, reusing existing localization and counit nodes. No new nodes and no statement changes. Exactness is levelwise; no product preservation or faithfulness of derived evaluations is assumed.",
+  "blueprint": "Realizes prop-sf-localization-all-stages, completed immersion comparison subargument: returned localization Step 6 / old immersion comparison Step 5, namely normalized augmented counit evaluations and every quotient transition.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-tower-counit-projections",
+    "why": "Generic derived constant/limit adjunction with specified K-injective projection normalization and naturality; the localization unit does not construct it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-tower-counit-projections"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-3c159cc70",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-3c159cc70 (reviewer sub-agent of L); spot-checked: PASS. Only the item JSON and the report change; there are no new nodes. The statement, stmt_deps, source and blueprint fields match the earlier copies of the item in Q156, Q99 and N5. It was unsplit in all of them, so no other group's split supersedes it. It is not a re-split and cites no SGA source; proof_deps equals the union of the step uses. All composites of the statement typecheck with right-to-left composition. Steps 2–3 follow from clauses (2) and (3) of lem-weil-pbc-localization-universal-property: all compared functors agree strictly on complexes (constant, F^Tow, evaluation), so on Q-objects every comparison is a conjugate of factorization isomorphisms, and lifting respects composition and identities. Steps 4–9 are naturality and triangle-identity calculations that I checked line by line, in particular π'=e'_n(ε')s'^{-1} from lem-coef-derived-tower-counit-projections and d'π'_m=π'_n through the identity transitions of a constant tower. The hypotheses of the counit node hold: Mod(R) on a small site has countable limits and D(A), D(T) exist, and K-injective tower resolutions come from lem-weil-pbc-ringed-strict-tower-homotopy-limit. Small cases F=id, i=0, K=0, m=n, nonconstant M and F without product preservation all behave correctly. No duplicate found: lem-sf-exact-pullback-tower-counit-comparison, lem-cbc-derived-tower-evaluation-normalization and lem-weil-pbc-sequential-tower-evaluation-full state different things. I accept the tool_use lem-coef-derived-tower-counit-projections, the generic derived constant/Rlim adjunction that the localization unit does not construct. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactTowerAugmentedCounitEvaluation",
+  "declaration": "CategoryTheory.ExactTowerAugmentedCounit.exact_tower_augmented_counit_evaluation",
+  "declarations": [
+   "CategoryTheory.ExactTowerAugmentedCounit.augmentation",
+   "CategoryTheory.ExactTowerAugmentedCounit.transpose",
+   "CategoryTheory.ExactTowerAugmentedCounit.level",
+   "CategoryTheory.ExactTowerAugmentedCounit.projection",
+   "CategoryTheory.ExactTowerAugmentedCounit.exact_tower_augmented_counit_evaluation",
+   "CategoryTheory.ExactTowerAugmentedCounit.interchange_transition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactTowerAugmentedCounitEvaluation.lean",
+  "statement": "theorem exact_tower_augmented_counit_evaluation {C : Type uC} [Category.{vC} C] [EssentiallySmall.{rA} C] {D : Type uD} [Category.{vD} D] [EssentiallySmall.{rB} D] {J : GrothendieckTopology C} {J' : GrothendieckTopology D} [HasSheafify J AddCommGrpCat.{rA}] [J.WEqualsLocallyBijective AddCommGrpCat.{rA}] [HasSheafify J' AddCommGrpCat.{rB}] [J'.WEqualsLocallyBijective AddCommGrpCat.{rB}] (R : Sheaf J RingCat.{rA}) (S : Sheaf J' RingCat.{rB}) (_hR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_hS : ∀ (U : Dᵒᵖ) (a b : S.obj.obj U), a * b = b * a) [HasDerivedCategory.{wA} (ringedSiteModules.{rA} R)] [HasDerivedCategory.{wB} (ringedSiteModules.{rB} S)] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S)] (F : ringedSiteModules.{rA} R ⥤ ringedSiteModules.{rB} S) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] [HasLimitsOfShape ℕᵒᵖ (ringedSiteModules.{rB} S)] (L : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S) ⥤ DerivedCategory (ringedSiteModules.{rB} S)) (κ : (lim : (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S) ⥤ ringedSiteModules.{rB} S).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L) [L.IsRightDerivedFunctor κ (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S) (.up ℤ))] (_hκ : ∀ I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S) ℤ, I.IsKInjective → IsIso (κ.app I)) (adj : (Functor.const ℕᵒᵖ : ringedSiteModules.{rB} S ⥤ _).mapDerivedCategory ⊣ L) (_hadj : ∀ I : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S) ℤ, I.IsKInjective → (Functor.const ℕᵒᵖ : ringedSiteModules.{rB} S ⥤ _).mapDerivedCategory.map (κ.app I) ≫ adj.counit.app (DerivedCategory.Q.obj I) = (Functor.const ℕᵒᵖ : ringedSiteModules.{rB} S ⥤ _).mapDerivedCategoryFactors.hom.app (((lim : (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S) ⥤ ringedSiteModules.{rB} S).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map (((constLimAdj : (Functor.const ℕᵒᵖ : ringedSiteModules.{rB} S ⥤ _) ⊣ lim).mapHomologicalComplex (.up ℤ)).counit.app I)) (π : ∀ n : ℕ, L ⟶ ((evaluation ℕᵒᵖ (ringedSiteModules.{rB} S)).obj (op n)).mapDerivedCategory) (hπ : ∀ (n : ℕ) (N : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rB} S)), ((evaluation ℕᵒᵖ (ringedSiteModules.{rB} S)).obj (op n)).mapDerivedCategory.map (adj.counit.app N) = (ringedConstantTowerEvaluation (ringedSiteModules.{rB} S) (op n)).hom.app (L.obj N) ≫ (π n).app N) : (∀ (n : ℕ) (K : DerivedCategory (ringedSiteModules.{rA} R)), (ringedConstantTowerEvaluation (ringedSiteModules.{rB} S) (op n)).inv.app (F.mapDerivedCategory.obj K) ≫ ((evaluation ℕᵒᵖ (ringedSiteModules.{rB} S)).obj (op n)).mapDerivedCategory.map ((ringedConstantTowerPullback F).inv.app K) ≫ (towerDerivedEvaluationInterchange F (op n)).hom.app ((Functor.const ℕᵒᵖ : ringedSiteModules.{rA} R ⥤ _).mapDerivedCategory.obj K) = F.mapDerivedCategory.map ((ringedConstantTowerEvaluation (ringedSiteModules.{rA} R) (op n)).inv.app K)) ∧ (∀ (m n : ℕ) (h : n ≤ m) (M : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)), (towerDerivedEvaluationTransition (ringedSiteModules.{rB} S) (homOfLE h).op).app (((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory.obj M) ≫ (towerDerivedEvaluationInterchange F (op n)).hom.app M = (towerDerivedEvaluationInterchange F (op m)).hom.app M ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (homOfLE h).op).app M)) ∧ (∀ (K : DerivedCategory (ringedSiteModules.{rA} R)) (M : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)) (i : (Functor.const ℕᵒᵖ : ringedSiteModules.{rA} R ⥤ _).mapDerivedCategory.obj K ⟶ M), ((Functor.const ℕᵒᵖ : ringedSiteModules.{rB} S ⥤ _).mapDerivedCategory.map (transpose F adj i) ≫ adj.counit.app (((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory.obj M) = augmentation F i) ∧ (∀ n : ℕ, (ringedConstantTowerEvaluation (ringedSiteModules.{rB} S) (op n)).inv.app (F.mapDerivedCategory.obj K) ≫ ((evaluation ℕᵒᵖ (ringedSiteModules.{rB} S)).obj (op n)).mapDerivedCategory.map (augmentation F i) ≫ (towerDerivedEvaluationInterchange F (op n)).hom.app M = F.mapDerivedCategory.map (level i n)) ∧ (∀ n : ℕ, transpose F adj i ≫ projection F π n M = F.mapDerivedCategory.map (level i n))) ∧ (∀ (m n : ℕ) (h : n ≤ m) (M : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)), projection F π m M ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (homOfLE h).op).app M) = projection F π n M) ∧ (∀ (m n r : ℕ) (hnm : n ≤ m) (hrn : r ≤ n) (M : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)), (projection F π m M ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (homOfLE hnm).op).app M) ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (homOfLE hrn).op).app M) = projection F π m M ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (homOfLE (hrn.trans hnm)).op).app M)) ∧ (projection F π m M ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (homOfLE (hrn.trans hnm)).op).app M) = projection F π r M)) ∧ (∀ (n : ℕ) (M : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)), ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (𝟙 (op n))).app M = 𝟙 _) ∧ (projection F π n M ≫ F.mapDerivedCategory.map ((towerDerivedEvaluationTransition (ringedSiteModules.{rA} R) (𝟙 (op n))).app M) = projection F π n M)) ∧ (∀ (K K' : DerivedCategory (ringedSiteModules.{rA} R)) (M M' : DerivedCategory (ℕᵒᵖ ⥤ ringedSiteModules.{rA} R)) (f : K ⟶ K') (u : M ⟶ M') (i : (Functor.const ℕᵒᵖ : ringedSiteModules.{rA} R ⥤ _).mapDerivedCategory.obj K ⟶ M) (i' : (Functor.const ℕᵒᵖ : ringedSiteModules.{rA} R ⥤ _).mapDerivedCategory.obj K' ⟶ M') (_hu : i ≫ u = (Functor.const ℕᵒᵖ : ringedSiteModules.{rA} R ⥤ _).mapDerivedCategory.map f ≫ i'), (transpose F adj i ≫ L.map (((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory.map u) = F.mapDerivedCategory.map f ≫ transpose F adj i') ∧ (∀ n : ℕ, level i n ≫ ((evaluation ℕᵒᵖ (ringedSiteModules.{rA} R)).obj (op n)).mapDerivedCategory.map u = f ≫ level i' n) ∧ (∀ n : ℕ, projection F π n M ≫ F.mapDerivedCategory.map (((evaluation ℕᵒᵖ (ringedSiteModules.{rA} R)).obj (op n)).mapDerivedCategory.map u) = L.map (((Functor.whiskeringRight ℕᵒᵖ _ _).obj F).mapDerivedCategory.map u) ≫ projection F π n M'))",
+  "branch": "sheaf-dag",
+  "by": "NW",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing canonical ringedConstantTowerPullback, ringedConstantTowerEvaluation, towerDerivedEvaluationInterchange and towerDerivedEvaluationTransition. The supplied derived-limit, adjunction and projection data carry exactly the K-injective/counit normalizations specified by lem-coef-derived-tower-counit-projections. The four helper definitions are the displayed a, b, q and p of this node, with real composite-map data. H2 repair: comparison/transition ownership is cited through def-sbc-tower-derived-evaluation-interchange, def-coef-tower-derived-evaluation-transition, and def-sf-derived-constant-tower-comparisons; neither normalization theorem is a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd647c885",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 0b1df570. The Lean module is byte-identical, and on the item only stmt_deps and lean.note text changed. Both theorem stmt_deps are dropped. The item now cites def-sbc-tower-derived-evaluation-interchange and def-coef-tower-derived-evaluation-transition (both landed existing:true owners) and the new def-sf-derived-constant-tower-comparisons, an existing:true record on the unchanged RingedConstantTowerPushforwardNormalization. Checked against live source l.44-83: s_n = compIso.symm ≫ NatIso(constCompEvaluationObj) ≫ IdIso and j_F = compIso.symm ≫ NatIso(compConstIso.symm) ≫ compIso match the node's composites and directions; they are explicit defs, not .choose. lean.statement is verbatim and declarations lists all 3. The node's stmt_deps exist; §5 fields are present with 3 search tools. No competing owner: side-live dag grep finds none, and def-pur-derived-constant-pullback-comparison and def-cbc-strict-constant-tower-operations are other notions. Mathematics re-read and unchanged: canonical j, t, s, d; L', counit and π pinned by IsRightDerivedFunctor, _hκ, _hadj, hπ; real helpers; all clauses, chains, identity and naturality squares; no product or IsIso assumption; universes independent. Advisory H9: two plain imports are justified as stmt_dep/proof_dep modules. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c11d8",
+  "group": "N1",
+  "result": "fix",
+  "landing": "20261026T082532-L-2187271",
+  "kind": "interface",
+  "note": "independent cc review: delivered item/ExactTower Lean and node JSONs against clone sheaf-dag versions and node_fields.check_statement_change; fixed item compiled with ExactTower in one sandbox; 6 importers/consumers compiled against it"
+ }
+}

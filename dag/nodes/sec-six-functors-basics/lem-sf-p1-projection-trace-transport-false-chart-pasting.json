@@ -1,0 +1,100 @@
+{
+ "id": "lem-sf-p1-projection-trace-transport-false-chart-pasting",
+ "kind": "statement",
+ "title": "False projection chart-pasting prefix",
+ "statement": "For the fixed false projection, the intermediate comparison followed by projection exchange, ordinary projective-line exchange, and shifted-line pushforward equals the intermediate comparison followed by the diagonal chart map [lem-sf-p1-chart-exchange].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "the paragraph identifying each projection with base change of the projective-line projection"
+ },
+ "stmt_deps": [
+  "def-sf-p1-integral-transport-data",
+  "lem-sf-p1-chart-exchange"
+ ],
+ "proof": [
+  {
+   "text": "The theorem is the chartExchange equality precomposed by the intermediate comparison and transported through the pullback functor.",
+   "uses": [
+    "lem-sf-p1-chart-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-p1-chart-exchange"
+ ],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "false projective-line chart exchange factorization",
+   "results": "Found chartExchange; no existing specialized false-projection prefix declaration.",
+   "date": "2026-10-27",
+   "verdict": "Use chartExchange."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.map_comp IsIso inverse cancellation",
+   "results": "Only generic functor and inverse cancellation lemmas were found.",
+   "date": "2026-10-27",
+   "verdict": "Generic ingredient only."
+  },
+  {
+   "tool": "grep",
+   "query": "falseProjectionChartFactor SfP1ProjectionTraceFalse",
+   "results": "No prior declaration in the project.",
+   "date": "2026-10-27",
+   "verdict": "This delivery introduces the split statements."
+  }
+ ],
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceTransportFalse",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-p1-projection-trace-transport-false",
+   "place": "False projection component of the projective-line adjunction transport calculation.",
+   "via": [
+    "lem-sf-p1-projection-trace-transport-false"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfP1ProjectionTraceFalseMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfP1ProjectionTraceFalseChartPasting.lean",
+  "declaration": "AlgebraicGeometry.Etale.SfP1Transport.falseProjectionChartPasting",
+  "statement": "theorem falseProjectionChartPasting (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f) (hS : IsUnit (N : Γ(S, ⊤))) : middleComparison A N hA t f i hi hS false ≫ (ordinaryFinitePullback A i.hom).map (projectionExchange A N hA t S hS false) ≫ (ordinaryFinitePullback A i.hom).map (ordinaryFiniteP1Exchange A (ProjectiveLine S ↘ S) ((ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)) ≫ (ordinaryFinitePullback A i.hom).map ((ordinaryFinitePushforward A (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).map (ordinaryFiniteShiftedLinePullback A N hA t (ProjectiveSpace.map (ULift.{u} (Fin 2)) (ProjectiveLine S ↘ S)) (finiteP1_unitOnPullback N (ProjectiveLine S ↘ S) hS)).hom) = middleComparison A N hA t f i hi hS false ≫ (ordinaryFinitePullback A i.hom).map (ordinaryFiniteP1DiagonalChartMap A N hA t S hS false)",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T194612-L-2430027",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T194612-L-2430027",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

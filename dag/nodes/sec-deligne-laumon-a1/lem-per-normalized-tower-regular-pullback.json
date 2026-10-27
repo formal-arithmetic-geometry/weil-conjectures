@@ -1,0 +1,413 @@
+{
+ "id": "lem-per-normalized-tower-regular-pullback",
+ "kind": "statement",
+ "title": "Normalization of centered towers and regular pullback",
+ "statement": "Let $X$ be a reduced Noetherian quasi-excellent scheme [def-pc-reduced-scheme], [pqf-def-locnoeth], [def-exc-excellent-ring]. Let $X_n\\to\\cdots\\to X_0=X$ be an ordinary blowup tower with coherent centers $I_i$ having nonempty nowhere dense zero schemes [def-nagata-global-blowup]. Put $Y_0=X$, $Y_i=X_i^\\nu$ for $i\\geq1$ and $K_i=I_i\\mathcal O_{Y_i}$, where for $i=0$ the structure map is the identity and $\\nu$ denotes componentwise normalization [def-weil-pbc-reduced-normalization]. These data form a normalized blowup tower with\n$$Y_{i+1}\\simeq\\operatorname{Bl}_{K_i}(Y_i)^\\nu.$$\nIts centers are coherent with nonempty nowhere dense zero schemes; if $X_n$ is regular [def-weil-regular-scheme] then $Y_n=X_n$ canonically. A length-zero tower with regular input stays unchanged.\n\nFor a regular morphism $h:T\\to S$ between reduced Noetherian schemes, meaning flat with geometrically regular fibres, normalization commutes with base change:\n$$T^\\nu\\simeq S^\\nu\\times_S T.$$\nConsequently every finite normalized blowup tower on $S$ whose intermediate schemes are Noetherian has a scheme-theoretic recursive pullback to $T$; its centers are the extended ideals. These identifications respect identities and composition. For an ordinary tower as in the first paragraph, normalizing its regular pullback agrees with pulling back its normalized tower. Deleting a unit-center stage whose normalized blowup is an isomorphism commutes with these identifications; a nonidentity normalization at a unit-center stage is retained. Noetherian schemes here admit finite affine covers by spectra of Noetherian rings. Here Noetherian means locally Noetherian and quasi-compact [def-weil-pbc-quasi-compact-scheme]; extended ideals are [def-nagata-extended-ideal], and coherent means [pqf-def-coherent]. Fibre products are [def-pc-fibre-product]; regular morphisms mean flat morphisms [def-weil-flat-morphism] with geometrically regular fibres, with the regular-ring-map convention of [def-weil-pbc-g-ring].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Proposition 2.2.4(ii), 2.2.6, Lemma 2.2.9, Remark 2.3.3(i) and Remark 2.3.12(i), printed pp.90--94 No Stacks tag states this combined result; the cited place is in the archived ILO volume."
+ },
+ "stmt_deps": [
+  "def-pc-reduced-scheme",
+  "pqf-def-locnoeth",
+  "def-exc-excellent-ring",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-nagata-extended-ideal",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-g-ring",
+  "def-trf-ordinary-resolution-rule",
+  "def-trf-monoscheme-toric-realization",
+  "def-per-normalized-tower-descent-data",
+  "def-per-regular-scheme-morphism",
+  "def-per-ordinary-tower-cartesian-map"
+ ],
+ "proof": [
+  {
+   "text": "First check finiteness in the ordinary-tower paragraph. Ordinary blowups are proper, hence finite type, so the finite-type stability of quasi-excellence keeps every $X_i$ quasi-excellent and Noetherian. On an affine $\\operatorname{Spec}A\\subset X_i$, quasi-excellence implies Nagata. Each $A/\\mathfrak p$ for a minimal prime is therefore Japanese; taking its own fraction field in the N-2 definition shows that its integral closure is a finite module. The affine normalization formula is the finite product of these closures, so normalization is finite. Its coordinate rings are finite-type over $A$, hence Noetherian; finite affine covers give quasi-compactness. Thus all $Y_i$ are Noetherian, and extended finite-type quasi-coherent ideals are coherent by the cited coherence criterion.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.1, 2.2.6 and Remark 2.3.3(i), pp.90--91; Stacks 07QU, 07QV (via cited nodes)"
+   }
+  },
+  {
+   "text": "For one ordinary step $W=\\operatorname{Bl}_J S$, let $N=W^\\nu$. The component-dominating normalization lift gives $N\\to S^\\nu$. Compare $N$ and $M=(\\operatorname{Bl}_{J\\mathcal O_{S^\\nu}}S^\\nu)^\\nu$: both are normal, component-dominating, and principalize $J$. The normalization lift followed by normalized-blowup finality over $S^\\nu$ gives $N\\to M$, and finality over $S$ gives $M\\to N$. The composites are identities by uniqueness in finality. The extended center on $S^\\nu$ is nowhere dense because generic points correspond, and is coherent by Step 1, so both applications meet their hypotheses. For the first tower step use $Y_0=X$, with no initial normalization. For $i\\ge1$ the displayed comparison applied to $S=X_i$ gives exactly $Y_{i+1}\\simeq\\operatorname{Bl}_{I_i\\mathcal O_{Y_i}}(Y_i)^\\nu$. This constructs every stage and every connecting map by induction.",
+   "uses": [
+    "lem-per-noetherian-normalized-blowup-finality",
+    "lem-sfb-component-dominant-normalization-lift",
+    "lem-sfb-componentwise-normalization-generic-properties"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Proposition 2.2.4(ii) and 2.2.6, p.90"
+   }
+  },
+  {
+   "text": "The zero scheme of $I_i\\mathcal O_{Y_i}$ is the inverse image of $V(I_i)$. Surjectivity of normalization makes this nonempty; the generic-point bijection makes it nowhere dense. If $X_n$ is regular it is normal, so its normalization is canonically itself. For length zero the construction sets $Y_0=X$ and has no step; hence regular input is unchanged.",
+   "uses": [
+    "def-nagata-extended-ideal",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "rem-pc-regular-normal",
+    "lem-sfb-normalization-normal-locally-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 2.3.3(i), p.91"
+   }
+  },
+  {
+   "text": "We give the normality argument without assuming finite normalization. On affine opens a regular map is $A\\to R$ with both rings Noetherian. Popescu supplies $R=\\varinjlim R_\\lambda$ with smooth $A$-algebras. For any normal $A$-algebra $B$, each $B\\otimes_A R_\\lambda$ is smooth over $B$ by smooth base change, hence normal even when $B$ is not Noetherian. The tensor universal property identifies their filtered ring colimit with $B\\otimes_A R$: maps out of either ring are precisely compatible pairs of maps out of $B$ and the $R_\\lambda$ agreeing on $A$. Filtered colimits of normal rings are normal. Thus $B\\otimes_A R$ is normal for every normal $B$, and the same argument applies after arbitrary base change of $A\\to R$.",
+   "uses": [
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-filtered-colimit-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "VIII Lemma 2.2.9, p.91, normality input expanded by Stacks 07GC, 033C and 037D"
+   }
+  },
+  {
+   "text": "Write $B=\\overline A\\subseteq Q(A)$ for the affine normalization of a reduced Noetherian base and take $R$ from Step 4. That step makes $C=R\\otimes_A B$ normal. The flat integral total-fraction lemma identifies $C$ with the integral closure of $R$ in $Q(R)$; the affine normalization formula therefore identifies $\\operatorname{Spec}C$ with $(\\operatorname{Spec}R)^\\nu$. This is precisely $T^\\nu\\simeq S^\\nu\\times_S T$ on the chosen opens. The formulas send $r\\otimes b$ to $rQ(f)(b)$, so restriction to smaller affines gives the same map. They consequently glue to the canonical scheme comparison. This proves the assertion even for nonfinite normalization.",
+   "uses": [
+    "lem-sfb-normalization-affine-total-fractions",
+    "lem-per-flat-integral-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Lemma 2.2.9, p.91"
+   }
+  },
+  {
+   "text": "Now induct on the length of a normalized tower, keeping $Z_i=X_i\\times_S T$ and the extended center. At stage zero $Z_0=T$. Ordinary blowup commutes with flat base change, with center ideals identified by its chartwise comparison. Apply the normalization calculation of Steps 4--5 to this square to obtain the next normalized stage. Here no unproved Noetherianity of $Z_i$ is needed: the projection to the original Noetherian $X_i$ is a base change of $h$, so its tensor algebras are filtered colimits of smooth algebras as in Step 4. Reducedness is also explicit: for an affine original stage with ring $D$, flat tensor exactness embeds its pullback ring $E$ into $E\\otimes_D\\overline D$, which is normal by Step 4, so $E$ is reduced. The source has locally finitely many components: by flat going-down its generic points lie over those of $X_i$; the generic fibres are the fibres of $T$ over the corresponding generic points of $S$, because each blowup and normalization preserves those generic fields. These fibres are localizations of Noetherian affine rings of $T$, with finitely many components. Blowup charts and integral intermediate total-fraction algebras preserve this generic description. Thus the affine normalization formula still applies. This completes the recursive pullback induction.",
+   "uses": [
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-sc-flat-going-down",
+    "lem-per-noetherian-normalized-blowup-finality",
+    "lem-sfb-componentwise-normalization-generic-properties",
+    "lem-sfb-normalization-affine-total-fractions",
+    "lem-per-flat-integral-total-fractions",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.7--2.2.9, pp.90--91"
+   }
+  },
+  {
+   "text": "Identity and composite comparison maps agree on pure tensors: along $A\\to R\\to R'$, both send $r\\otimes b$ to its image $r\\,Q(A\\to R')(b)$. On blowup charts both send $x/a$ to the corresponding extended fraction. The tensor and localization defining relations then give equality of the ring maps, and their compatible affine gluings give equality of scheme maps. Applying these equations successively at every stage proves identity and composition compatibility. Applying the same one-step equations to an ordinary tower, and inducting from its unchanged stage zero, identifies normalization after regular pullback with regular pullback after normalization, including the extended ideal centers.",
+   "uses": [
+    "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "lem-per-flat-integral-total-fractions",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.6--2.2.9 and Remark 2.3.12(i), pp.90--94"
+   }
+  },
+  {
+   "text": "For a unit center, the ordinary blowup is an isomorphism, so its normalized blowup is the normalization map. An isomorphism stage remains an isomorphism after pullback, since pulling back its inverse gives an inverse. Deleting that stage simply composes its adjacent arrows, and the composition equations of Step 7 identify both resulting towers with their remaining centers. If the normalization map is not an identity/isomorphism stage, retain it; the construction never deletes a stage merely because its ideal is the unit ideal. Finally choose the affine cover by spectra of Noetherian rings supplied by local Noetherianity; quasi-compactness gives a finite subcover.",
+   "uses": [
+    "cor-nagata-blowup-cartier-iso",
+    "def-weil-pbc-quasi-compact-scheme",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.2.3, 2.3.4--2.3.5 and Remark 2.3.12(i), pp.90--94"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-extended-ideal",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-proper-morphism",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-flat-integral-total-fractions",
+  "lem-per-noetherian-normalized-blowup-finality",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-sc-flat-going-down",
+  "lem-sfb-component-dominant-normalization-lift",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-flat-pullback-blowup-chart-restrictions",
+  "lem-sfb-normalization-affine-total-fractions",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lemma-nagata-blowup-proper",
+  "pqf-def-locnoeth",
+  "pqf-lem-coherent-ft-locnoeth",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Proposition 2.2.4, 2.2.6, Lemma 2.2.9, Remark 2.3.3(i) and Remark 2.3.12(i), pp.90--94; normality input expanded via existing Stacks 07GC/033C/037D nodes rather than the unarchived Matsumura reference"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalized-tower-regular-pullback: Normalization of an ordinary blowup tower over a reduced quasi excellent scheme commutes with regular base change and preserves ordered ideal centers",
+   "results": "{\"t\": \"2026-10-24T01:30:27Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-normalized-tower-regular-pullback: Normalization of an ordinary blowup tower over a reduced quasi excellent scheme commutes with regular base change and preserves ordered ideal centers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\"], \"digest\": \"a1a0afbda37fbeec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-normalized-tower-regular-pullback: Integral closure and normalized blowups commute with flat maps with geometrically regular fibres",
+   "results": "{\"t\": \"2026-10-24T01:30:28Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-normalized-tower-regular-pullback: Integral closure and normalized blowups commute with flat maps with geometrically regular fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.tower_top\", \"IsLocalization.integralClosure\", \"IsLocalization.Away.integralClosure\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"Ring.instFiniteNormalClosure\", \"Ring.instIsIntegrallyClosedNormalClosure\"], \"digest\": \"1806fe446539c740\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalization",
+   "results": "{\"t\": \"2026-10-24T01:30:29Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"d48a5d2f8710c873\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*regular|regular.*normalization|normalized.*blow",
+   "results": "{\"t\": \"2026-10-24T01:30:29Z\", \"tool\": \"grep\", \"query\": \"normalization.*regular|regular.*normalization|normalized.*blow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalized-tower-regular-pullback: Integral closure and normalized blowups commute with flat maps with geometrically regular fibres",
+   "results": "{\"t\": \"2026-10-24T01:30:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-normalized-tower-regular-pullback: Integral closure and normalized blowups commute with flat maps with geometrically regular fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\"], \"digest\": \"8ab38a4677d35b10\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected hits; none states the asserted resolution, log geometry, or regular base-change theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-normalized-tower-regular-pullback: normalization of a reduced Noetherian scheme commutes with a flat morphism with geometrically regular fibers and normalized blowup towers pull back regularly",
+   "results": "{\"t\": \"2026-10-24T02:11:09Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-normalized-tower-regular-pullback: normalization of a reduced Noetherian scheme commutes with a flat morphism with geometrically regular fibers and normalized blowup towers pull back regularly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"a33deb1d57b48db1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-normalized-tower-regular-pullback: integral closure and normalization commute with regular base change",
+   "results": "{\"t\": \"2026-10-24T02:12:18Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-normalized-tower-regular-pullback: integral closure and normalization commute with regular base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.of_isIntegrallyClosed\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"IsIntegralClosure.tower_top\", \"IsLocalization.integralClosure\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"isIntegrallyClosed_iff_isIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Ring.NormalClosure\"], \"digest\": \"fb312a8cf7e9de62\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: relative normalization factorization and tensor integral-closure comparisons do not assert this statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-characteristic-zero-log-resolution-independence",
+  "date": "2026-10-24",
+  "group": "Q129"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII Proposition 2.2.4(ii), 2.2.6, Lemma 2.2.9, Remark 2.3.3(i) and Remark 2.3.12(i), printed pp.90--94",
+   "via": [
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-normalized-tower-regular-pullback",
+  "worker": "stage1",
+  "summary": "Expanded one-step universal-property comparison and the two inductions. Corrected the definition citation for componentwise normalization; preserved all mathematical clauses. Added two independent statement-only supporting facts after whole-DAG and Mathlib searches. Regular pullback normality uses Popescu plus existing smooth normality and filtered-colimit tools, without finiteness of normalization.",
+  "blueprint": "Ancestor proof Step 3 (regular finite-torsion local model and purity), geometric equivariant-modification input through XVI 3.7: VIII Lemma 5.5.2 and proof, printed pp.127--128; characteristic-zero independence used there is Theorem 3.4.15, printed pp.113--114. VIII Theorem 2.3.10 and Remarks 2.3.11--2.3.12, pp.93--94 (existence and normalized regular functoriality); 3.2.19 and Theorem 3.4.15 with its proof and Remark 3.4.16(i), pp.106,113--114 (induced rule, independence, and synchronization). Supporting input: VIII Proposition 2.2.4(ii), 2.2.6, Lemma 2.2.9, Remark 2.3.3(i) and Remark 2.3.12(i), printed pp.90--94",
+  "tool_uses": [
+   {
+    "node": "cor-nagata-blowup-cartier-iso",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-sfb-component-dominant-normalization-lift",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-sfb-componentwise-normalization-generic-properties",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-sfb-flat-pullback-blowup-chart-restrictions",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-sfb-normalization-affine-total-fractions",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-sfb-normalization-normal-locally-finite",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-normal-ring",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-popescu-smoothing",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-normal-ring-normal",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic scheme/commutative-algebra tool for the normalization or blowup calculation, used only for the precise quoted statement; it does not replace the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Flat tensoring preserves the injection into normalization, establishing reducedness of pullbacks; this is a generic algebra tool absent from the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-nagata-blowup-cartier-iso",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-sc-flat-going-down",
+  "lem-sfb-component-dominant-normalization-lift",
+  "lem-sfb-componentwise-normalization-generic-properties",
+  "lem-sfb-flat-pullback-blowup-chart-restrictions",
+  "lem-sfb-normalization-affine-total-fractions",
+  "lem-sfb-normalization-normal-locally-finite",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-smooth-over-normal-ring-normal",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lemma-nagata-blowup-proper",
+  "pqf-lem-coherent-ft-locnoeth",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-flat-tensor-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-cb3918350",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-cb3918350 (reviewer sub-agent of L); spot-checked: First split; the base was unsplit. The item is not on route-pivot-dropped.txt and is reached from nt-target-weil-conjectures via char-zero-log-resolution-independence → dropped complete-local-rigidification-comparison → gabber-absolute-equivariant-modification → lem-sfb-field-log-smooth-gabber-modification (Q36 exception), so I judged the maths on its merits. Maintainer note: the item is reached only through dropped nodes. Mechanical findings: (1) Batch-5: lem-per-quasi-excellent-finite-type-stability → lem-trf-g-ring-affine-cover is generic G-ring algebra, outside both assumed statements and their proofs. The node is already in the b5 closure through the sfb chain, so this is accepted. (2) The dropped cites lem-per-componentwise-normalization-affine-charts (l.1472) and quasi-excellent-finite-type-stability (l.1832) are used only in Step 1, for generic algebra: the 035P product chart and finite-type stability. Neither is forbidden Artin–Gabber machinery, the item is not artin-gabber-affine-curve or one of its children, and BFS shows both are already reached in side-live. Accepted per Q43/Q23. No SGA cited; tool_uses are generic. Source: ILO VIII 2.2.1–2.2.10, pp.90–91, read; the statement matches 2.2.4(ii)/2.2.6/2.2.9. The only statement change is the componentwise-normalization def plus explicit conventions; nothing is weakened. Steps 1–8 checked: Step 2 two-way finality with lift uniqueness; Step 4 Popescu + smooth-normal + filtered colimit, with no finiteness of normalization; Step 6 non-Noetherian fibre products handled through base-changed smooth colimits, reducedness via the flat embedding into the normal E⊗D̄, finitely many components via going-down and generic-field preservation; Steps 7–8 elementary. New nodes are both true (proofs checked, Stacks 0808/0BFM/0806/035Q/00HB/02JK/034M verified). Small cases tested: unit ideal, empty scheme, nonfaithful projection k×k→k, localization. noetherian-normalized-blowup-finality strictly generalizes lem-trf-normalized-blowup-finality (finite type over Q); flat-integral-total-fractions removes the finiteness of B from lem-trf-flat-birational-normalization-comparison. Neither restates an item clause. Advisory: Step 6 cites finality for generic-field preservation, which assumes nowhere-dense centers. That holds for the towers of paragraph 1 and of the only citer, and in general 0BFM gives it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalizedTowerRegularPullback",
+  "declaration": "AlgebraicGeometry.ordinaryTower_normalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedTowerRegularPullback.lean",
+  "statement": "theorem ordinaryTower_normalization (X : Scheme.{u}) [IsReduced X] [IsNoetherian X] (hQE : ∀ U : X.affineOpens, IsQuasiExcellent Γ(X, U)) (A : OrdinaryBlowupTower X) (hCenters : ∀ i : Fin A.length, (∀ U : (A.level i.castSucc).affineOpens, ((A.center i).ideal U).FG) ∧ Set.Nonempty ((A.center i).support : Set (A.level i.castSucc)) ∧ IsNowhereDense ((A.center i).support : Set (A.level i.castSucc))) : ∃ D : OrdinaryTowerNormalization A, (∀ i : Fin (A.length + 1), IsNoetherian (D.tower.level i)) ∧ (∀ i : Fin A.length, Set.Nonempty ((D.tower.center i).support : Set (D.tower.level i.castSucc)) ∧ IsNowhereDense ((D.tower.center i).support : Set (D.tower.level i.castSucc))) ∧ (IsRegularScheme (A.level (Fin.last A.length)) → IsIso (D.map (Fin.last A.length)))",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.OrdinaryTowerNormalization",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.UnitStageDeletion",
+   "AlgebraicGeometry.ordinaryTower_normalization",
+   "AlgebraicGeometry.reducedNormalization_regular_pullback",
+   "AlgebraicGeometry.reducedNormalization_regular_functoriality",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.regular_pullback",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.regular_pullback_functoriality",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.delete_unit_stage",
+   "AlgebraicGeometry.Monoscheme.NormalizedTower.regular_pullback_unit_deletion",
+   "AlgebraicGeometry.ordinaryTower_normalization_regular_pullback",
+   "AlgebraicGeometry.noetherian_finite_affine_cover"
+  ],
+  "note": "The clauses are separate named theorems, each with the source and full corresponding proof steps; comparison records specify the actual tower maps. IsRegularSchemeMorphism is the landed def-per-regular-scheme-morphism (NY: Flat plus regular fibres after every finite residue-field extension); the delivered affine-chart RingHom.IsRegular rewrite of that module was reverted to the live text by the reviewer. Existing ordinary and normalized tower notions and center maps are reused. UnitStageDeletion allows a selected unit-center isomorphism to be removed while retaining newly trivial stages after pullback; it is not a second definition of maximal NormalizedContraction. All theorem proofs are sorry. Maintenance Q73: the unchanged OrdinaryTowerCartesianMap structure is now owned by def-per-ordinary-tower-cartesian-map in its own publicly imported module, as required by the d65efc968eb1 H13 return. This node owns only its remaining declarations; its theorem statements and existing provenance are unchanged.",
+  "fixed_by": "NT-stage2-cc-205f3f084"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-205f3f084",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Item NormalizedTowerRegularPullback is correct in substance: all 11 node clauses match the live OrdinaryBlowupTower, NormalizedTower/IsNormalizedBlowup and CenterMap/IsCartesian declarations; normalization maps, extended centers, the ∃! cartesian T^ν≅S^ν×_S T, identity/composition equations, the ordinary comparison, selective UnitStageDeletion (≠ NormalizedContraction: → instead of ↔) and finite affine covers all checked; edge cases n=0, empty schemes, unit centers with non-iso normalization, single universe u; no theorem stmt_deps, nothing hollow, sorry only, docstrings and both report sections present. H13/H4 fault fixed: the delivery is rebased over NY's landed def-per-regular-scheme-morphism (LAND 11:53, a52c7d39; Flat ∧ geometrically regular fibres, imported by SmallSingularLocusResolutionRule) but rewrote the same module to an affine-chart RingHom.IsRegular definition and rebound the record to Q15. FIX: fixes/RegularSchemeMorphism.lean = live NY text byte-identical; item lean-record.json keeps the statement verbatim and corrects the note. nt_compile --json of the fixed dep plus the unchanged item: rc 0, clean (1.7 s and 4.8 s). Maintainer: the dep record's by/branch stay Q15/sheaf-dag; --revert-nodes def-per-regular-scheme-morphism would restore NY's record exactly."
+ }
+}

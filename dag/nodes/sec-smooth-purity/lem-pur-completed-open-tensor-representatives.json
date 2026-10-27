@@ -1,0 +1,195 @@
+{
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); agent refinement for the augmented strict quotient system and completed realization, extracted from original item step 10.",
+  "note": "The source proves the ordinary open tensor map; the completion-unit and strict-system normalization is the additional extracted argument."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-pur-integral-derived-operations",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-sf-open-semilinear-tensor-model-data",
+  "def-pur-completed-open-tensor-representative-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GL1 and 0E8I; J9 decomposition of original Context construction and ordinary descent, with direct Lean proofs of strict scalar-unit normalization and whole-system pasting using the existing augmented-computation theorem."
+ },
+ "id": "lem-pur-completed-open-tensor-representatives",
+ "title": "Compatible augmented representatives for the strict open tensor map",
+ "statement": "Fix a prime l, a finite extension E of Q_l [def-weil-l-adic-coefficient-extension], and a quasi-compact open immersion j:U→V of schemes on which l is invertible [def-weil-scheme-morphism-properties]. Use the small pro-etale sites [def-weil-pbc-proetale-site], the completed integral coefficients [def-weil-completed-integral-coefficients], the module categories and ordinary unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Site and coefficient universes are independent. There are compatible reduction/total-limit calculi with their coherence, exact localized open operations, the ordinary scalar reductions, and strict open comparisons, collected in CompletedOpenTensor.Context, with reduction/total-limit calculus [lem-coef-derived-system-evaluation-calculus], open operations [lem-sf-integral-open-reduction-comparison], and strict semilinear data [def-sf-open-semilinear-tensor-model-data]. The integral closed structures equal those of IntegralOnSlice.duality [def-pur-integral-derived-operations]. Completion and restriction-completion comparisons satisfy the actual-unit equations [lem-weil-pbc-constant-completion-equivalence, lem-weil-pbc-ringed-koszul-completion-reflector, lem-sf-immersion-completed-pullback-comparison], the ordinary open unit is its adjunction unit, and the strict all-input reduction comparison restricts to the complete-object comparison. There is a natural isomorphism gamma from j_!K tensor N to j_!(K tensor j^*N), computed on all flat-term K-flat representatives by the summand-normalized total-complex chain map [lem-sf-open-tensor-normalization]. For every such pair P,Q, restriction and both total tensors are K-flat, and there are simultaneous reduction Computations aV,aU satisfying the ordinary localization square, the scalar-unit augmentation equation in every degree and coefficient level on every local section, and the whole-system localization square of RepresentativeLaws. This is the construction before completed realization; it asserts no completed comparison, uniqueness, or total-limit realization identity.",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedOpenTensorSystemRealization",
+  "date": "2026-10-25",
+  "group": "U8"
+ },
+ "mathlib_match": null,
+ "proof": [
+  {
+   "text": "Choose compatible models C using lem-pur-completed-open-tensor-context and gamma with its ordinary localization square using the proved lem-pur-open-tensor-ordinary-descent. The proved open restriction good-complex theorem gives flat-term K-flat restriction. Extension preserves flat terms and K-flatness by C.strictOpen; kFlat_total_tensor_model makes both total tensors good representatives.",
+   "uses": [
+    "lem-pur-completed-open-tensor-context",
+    "lem-pur-open-tensor-ordinary-descent",
+    "lem-pur-kflat-total-tensor-model",
+    "def-sf-open-semilinear-tensor-model-data",
+    "lem-sf-open-restriction-good-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); agent refinement for the augmented strict quotient system and completed realization, extracted from original item step 10.",
+    "note": "The source proves the ordinary open tensor map; the completion-unit and strict-system normalization is the additional extracted argument."
+   }
+  },
+  {
+   "text": "Apply ordinaryReductionAugmentedComputation to both coefficient calculi and their OrdinaryReduction functors. The resulting representative isomorphisms are natural on the good-complex categories. Two Computations with the same complex and ordinary evaluation are equal on their iso.hom: their AugmentedPresentation chain maps agree on every degree, coefficient level and local section, and the adjunction homEquiv is injective. Thus the computations in the strict open model square can be replaced by these natural computations.",
+   "uses": [
+    "lem-sf-ordinary-reduction-augmented-computation",
+    "def-sf-open-semilinear-tensor-model-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); agent refinement for the augmented strict quotient system and completed realization, extracted from original item step 10.",
+    "note": "The source proves the ordinary open tensor map; the completion-unit and strict-system normalization is the additional extracted argument."
+   }
+  },
+  {
+   "text": "Evaluate strictChain degreewise and use the given semilinear Comparison.components. Naturality of the ordinary evaluation comparison gives its component formula. Apply it to the inverse evaluation followed by the scalar unit. Inverse/hom cancellation and naturality of coefficientOrdinaryScalarAdjunction.unit give the exact local scalar-unit equation of RepresentativeLaws, without using any faithfulness of derived evaluations.",
+   "uses": [
+    "def-sf-open-semilinear-tensor-model-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); agent refinement for the augmented strict quotient system and completed realization, extracted from original item step 10.",
+    "note": "The source proves the ordinary open tensor map; the completion-unit and strict-system normalization is the additional extracted argument."
+   }
+  },
+  {
+   "text": "Paste the ordinary localization square, the strictOpen.model representative square, and naturality of the ambient augmented computation at TotalComparison.chain. Naturality of strictOpen.r moves the open representative across it; functoriality and qU hom/inv cancellation remove the interior tensor presentation. The resulting equation is exactly the required whole-system square. All pasting is in the whole derived system category.",
+   "uses": [
+    "def-sf-open-semilinear-tensor-model-data",
+    "lem-sf-ordinary-reduction-augmented-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), with sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor); agent refinement for the augmented strict quotient system and completed realization, extracted from original item step 10.",
+    "note": "The source proves the ordinary open tensor map; the completion-unit and strict-system normalization is the additional extracted argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-open-semilinear-tensor-model-data",
+  "lem-pur-completed-open-tensor-context",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-open-tensor-ordinary-descent",
+  "lem-sf-open-restriction-good-complex",
+  "lem-sf-ordinary-reduction-augmented-computation"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "CategoryTheory.Adjunction.id, CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk'",
+   "date": "2026-10-24",
+   "verdict": "No match for compatible augmented strict coefficient models and the unbounded open tensor map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflective derived complete subcategory and extension restriction adjunction determine the completed open tensor comparison from its augmentation",
+   "results": "CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.bijection, CategoryTheory.Monoidal.Reflective.isIso_tfae, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-24",
+   "verdict": "No match for compatible augmented strict coefficient models and the unbounded open tensor map."
+  },
+  {
+   "tool": "grep",
+   "query": "completedOpenTensor|completionUnit.*Bijective|reduction_normalized",
+   "results": "No matches",
+   "date": "2026-10-24",
+   "verdict": "No match for compatible augmented strict coefficient models and the unbounded open tensor map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible strict coefficient reduction and completion models for an open immersion and the open tensor projection formula",
+   "results": "AdicCompletion.pi_apply_coe, AlgebraicGeometry.Scheme.Hom.app_appIso_inv, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.restrict_map, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict",
+   "date": "2026-10-25",
+   "verdict": "No match for compatible augmented strict coefficient models and the unbounded open tensor map."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-operation-reduction",
+   "place": "lem-fix-operation-reduction.proof.md, paragraph 2: extension by zero in the compact-support comparison; final paragraph: tensor and adjunction preservation. Construction of the compatible strict quotient representatives, before completed realization.",
+   "via": [
+    "lem-pur-completed-open-tensor-system-realization",
+    "lem-fix-compactification-completed-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedOpenTensorRepresentatives",
+  "file": "lean/Sheaf/Paper/CompletedOpenTensorRepresentatives.lean",
+  "declaration": "WeilConjectures.CompletedOpenTensor.completedOpenTensorRepresentatives",
+  "declarations": [
+   "WeilConjectures.CompletedOpenTensor.completedOpenTensorRepresentatives"
+  ],
+  "statement": "theorem completedOpenTensorRepresentatives [QuasiCompact j]\n    (hlV : IsUnit (l : Γ(V, ⊤))) (hlU : IsUnit (l : Γ(U, ⊤))) :\n    ∃ (C : Context l E j) (γ : OrdinaryMap l E j C),\n      RepresentativeLaws l E j C γ",
+  "branch": "sheaf-dag",
+  "by": "U8",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-884f0",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261025T051946-L-26897",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-963d6",
+  "group": "J9",
+  "result": "fix",
+  "landing": "20261027T135432-L-3706677",
+  "kind": "interface",
+  "note": "independent cc review: Data module's 21 decls diffed verbatim against clone item module; item signature unchanged; 4 direct importers compiled OK against delivered files (Cochains after sandbox-compiling 3 missing-olean deps); new Context hole is weaker than the original item; #print axioms on proved lemmas checked (sorryAx is upstream, from OpenSemilinearTensor.Comparison)"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "id": "lem-sf-open-quotient-roos-normalization",
+ "kind": "statement",
+ "title": "Pure-section uniqueness of the first Roos tensor coordinate",
+ "statement": "For a prime l, a finite extension E/Q_l, a scheme W and a normalized Tensor l E W [def-sf-tensor-completion-comparison], every Augmentation a [def-sf-open-tensor-quotient-data] on any pair P,Q of unbounded completed-coefficient complexes satisfies RoosNormalization: at every finite quotient level and cochain degree, its map equals the first coordinate of the specified tensor-completion chain map.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, unbounded total tensor comparison; the first Roos coordinate is the scalar-unit normalization of Bhatt--Scholze Definition 3.4.10, retained in Tensor.canonical."
+ },
+ "stmt_deps": [
+  "def-sf-open-tensor-quotient-data",
+  "def-sf-tensor-completion-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Maps out of the signed total tensor are determined on each homogeneous direct-sum summand. Tensor and sheafification extensionality reduce equality there to pure sections. The sections field of a and the first clause of Tensor.canonical give the same value, namely the total tensor of the two scalar-unit sections. Thus the chain maps agree at each quotient level, and evaluating in every cochain degree gives the required HEq. The proof works for arbitrary, zero, and unbounded complexes.",
+   "uses": [
+    "def-sf-tensor-completion-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-tensor-completion-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, unbounded total tensor comparison; the first Roos coordinate is the scalar-unit normalization of Bhatt--Scholze Definition 3.4.10, retained in Tensor.canonical."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "restriction of scalars extension by zero natural scalar unit compatibility for quotient towers",
+   "results": "Eight ordinary module restriction/scalar-tower results; no ringed-site strict tower compatibility.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero strict coefficient tensor augmentation chain map scalar restriction",
+   "results": "Generic complex tensor and ModuleCat scalar-unit results; no sheafified open quotient tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.whiskerRight_comp",
+   "results": "Found whiskerRight_comp in Mathlib.CategoryTheory.Whiskering; used for composing the scalar-unit square.",
+   "date": "2026-10-27",
+   "verdict": "generic composition API only"
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarCompatibility|RoosNormalization; extensionByZero|restrictScalars",
+   "results": "No matching strict-system comparison; generic restriction of scalar APIs only. Repository search found normalizedIntegralTensorTower and fully faithful scalar restriction constructions.",
+   "date": "2026-10-27",
+   "verdict": "use project balancing and generic fully faithful lifting"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenTensorQuotientCochains",
+  "date": "2026-10-27",
+  "group": "Z5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Base-change paragraph, open factor and finite-reduction compatibility: scalar restriction and normalized strict quotient tensor cochains.",
+   "via": [
+    "lem-sf-open-quotient-normalized-cochains",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientRoosNormalization",
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientRoosNormalization.lean",
+  "declaration": "WeilConjectures.OpenTensorQuotient.augmentation_roos_normalized",
+  "statement": "theorem augmentation_roos_normalized (W : Scheme.{u})\n    (t : OpenFactorCoherence.Tensor l E W)\n    (P Q : CochainComplex (scalarReductionSource l E W) ℤ)\n    (a : Augmentation l E W P Q) : RoosNormalization l E W t P Q a",
+  "branch": "sheaf-dag",
+  "by": "Z5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261027T094550-L-243433",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

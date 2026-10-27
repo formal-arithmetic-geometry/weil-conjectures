@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-relative-module-stonean-epi",
+ "kind": "statement",
+ "title": "Stonean tests detect epimorphisms of relative continuous module sheaves",
+ "statement": "Use the universes of [def-weil-size-convention]. Let $P$ be a profinite space and $T$ a topological commutative ring. On the site $\\operatorname{Prof}/P$ with finite jointly surjective coverings let $R_T(Q\\to P)=C(Q,T)$, as in [def-sfb-relative-finite-bundle-model]. For a morphism $f:M\\to N$ of ordinary $R_T$-module sheaves [def-weil-sheaf-of-modules-category], $f$ is an epimorphism if and only if $M(Q)\\to N(Q)$ is surjective for every $Q\\to P$ whose profinite domain is extremally disconnected (the closure of every open subset is open). There is no finiteness condition on $M$, $N$, or their scalar actions.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CN (lemma-abelian-abelian), 03DA and 03DB; topology.tex Tag 08YN. Parent relative Roos argument steps 1--2."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-sfb-relative-finite-bundle-model",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The faithful exact forgetful functor to abelian sheaves preserves and reflects epimorphisms: cokernels and their vanishing can be detected after forgetting. Use the local-surjectivity criterion for epimorphisms of abelian sheaves.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Suppose f is epic and fix a section over a Stonean test S. Local surjectivity gives lifts on a finite jointly surjective covering S_j -> S. Its finite disjoint union V is profinite and V -> S is surjective. The covering by disjoint clopen summands has empty pairwise intersections; the sheaf condition identifies sections on V with the product of sections on S_j, including the fact that sections on the empty test form the zero group. Thus the local lifts give a section b on V with f(b) the restriction of the original section.",
+   "uses": [
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Stonean projectivity supplies a continuous section sigma of V -> S. Since V -> P is the composite through S, sigma is also a morphism over P. Restrict b along sigma and use naturality to obtain a lift on S.",
+   "uses": [
+    "det-pe-stonean-projective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely fix a section over any Q -> P. The Stonean-cover theorem gives a surjective continuous S -> Q with S Stonean. Compose with Q -> P to put S in the slice. The hypothesized surjectivity on S gives a local lift of the original section. This is local surjectivity on every test, hence the abelian sheaf map and then f are epic. The construction includes empty tests and zero module sheaves.",
+   "uses": [
+    "det-pe-stonean-cover",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "det-pe-stonean-projective",
+  "det-pe-stonean-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CN (lemma-abelian-abelian), 03DA and 03DB; topology.tex Tag 08YN. Parent relative Roos argument steps 1--2.; explicit relative argument expanded from the parent node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Epimorphisms of sheaves of modules on a profinite slice are precisely the maps surjective on sections over extremally disconnected profinite test spaces",
+   "results": "{\"t\": \"2026-10-25T15:18:17Z\", \"tool\": \"leansearch\", \"query\": \"Epimorphisms of sheaves of modules on a profinite slice are precisely the maps surjective on sections over extremally disconnected profinite test spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.epi_iff_surjective\", \"PresheafOfModules.epi_of_surjective\", \"Profinite.epi_iff_surjective\", \"PresheafOfModules.surjective_of_epi\", \"LightProfinite.epi_iff_surjective\", \"CondensedMod.epi_iff_surjective_on_stonean\", \"ModuleCat.epi_iff_surjective\", \"LightCondMod.epi_iff_locallySurjective_on_lightProfinite\"], \"digest\": \"ed37f248c138e378\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match: CondensedMod.epi_iff_surjective_on_stonean treats fixed discrete scalar modules on CompHaus, not modules over the continuous-function ring sheaf on Prof/P. The local-surjectivity and projectivity ingredients are reused in the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "epi_iff_surjective_on_stonean|[Ss]tonean.*[Ee]pi",
+   "results": "{\"t\": \"2026-10-25T15:18:17Z\", \"tool\": \"grep\", \"query\": \"epi_iff_surjective_on_stonean|[Ss]tonean.*[Ee]pi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Equivalence.lean\", \"Mathlib/Condensed/Equivalence.lean\", \"Mathlib/Condensed/Equivalence.lean\", \"Mathlib/Condensed/Equivalence.lean\", \"Mathlib/Condensed/Equivalence.lean\", \"Mathlib/Condensed/Epi.lean\", \"Mathlib/Condensed/Epi.lean\", \"Mathlib/Condensed/Epi.lean\"], \"digest\": \"ade7a0a8366f689f\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match: CondensedMod.epi_iff_surjective_on_stonean treats fixed discrete scalar modules on CompHaus, not modules over the continuous-function ring sheaf on Prof/P. The local-surjectivity and projectivity ingredients are reused in the proof plan."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"epi_iff_surjective_on_stonean\"",
+   "results": "{\"t\": \"2026-10-25T15:18:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"epi_iff_surjective_on_stonean\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CondensedSet.epi_iff_surjective_on_stonean\", \"Condensed.epi_iff_surjective_on_stonean\", \"CondensedMod.epi_iff_surjective_on_stonean\"], \"digest\": \"c96e72511b34b9c2\"}",
+   "date": "2026-10-25",
+   "verdict": "No exact match: CondensedMod.epi_iff_surjective_on_stonean treats fixed discrete scalar modules on CompHaus, not modules over the continuous-function ring sheaf on Prof/P. The local-surjectivity and projectivity ingredients are reused in the proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.RelativeFiniteBundleRoos",
+  "date": "2026-10-25",
+  "group": "T6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms paragraph, via det-sf-comp-coherence-refinement (2), first paragraph: descendant closed-fibre heart comparison; local continuous relation-kernel input before applying closed-pair restriction. Auxiliary Roos exactness for finite continuous module bundles on a profinite slice. Local lifting and detection lemma, parent steps 1--2.",
+   "via": [
+    "lem-sfb-relative-finite-bundle-roos",
+    "lem-sfb-profinite-constant-model-relation-hull",
+    "lem-sfb-supported-image-bounded-derived-generation",
+    "lem-sfb-supported-image-rigidity-from-model-comparisons",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.RelativeModuleStoneanEpi",
+  "file": "lean/Sheaf/Topology/RelativeModuleStoneanEpi.lean",
+  "declaration": "Profinite.relativeContinuousRing_epi_iff_stonean",
+  "statement": "theorem relativeContinuousRing_epi_iff_stonean\n    (P : Profinite.{u}) (T : Type v) [TopologicalSpace T] [CommRing T]\n    [IsTopologicalRing T]\n    {M N : SheafOfModules.{max u v + 1} (relativeContinuousRing P T)} (f : M ⟶ N) :\n    Epi f ↔ ∀ (Q : Over P) [ExtremallyDisconnected Q.left],\n      Function.Surjective (f.val.app (op Q))",
+  "branch": "sheaf-dag",
+  "by": "T6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T164352-L-1005196",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261025T164352-L-1005196",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

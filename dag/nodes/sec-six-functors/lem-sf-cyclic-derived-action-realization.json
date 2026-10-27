@@ -1,0 +1,301 @@
+{
+ "id": "lem-sf-cyclic-derived-action-realization",
+ "kind": "statement",
+ "title": "Realizing a single derived invertible action by equivariant complexes",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian category [def-sp-grothendieck-abelian], $P:\\mathcal A\\to\\mathcal A$ an additive exact autoequivalence, $\\mathcal B=\\mathcal A^P$ the fixed-pair category [def-weil-endofunctor-fixed-pair-category], and $U:\\mathcal B\\to\\mathcal A$ its forgetful functor. Use ordinary derived categories and their cohomology [def-weil-abstract-derived-category]. For $M\\in D(\\mathcal B)$ write $\\theta_M:D(P)D(U)M\\xrightarrow{\\sim}D(U)M$ for the isomorphism induced by the structure maps of a representing complex.\n\nFor every $N\\in D(\\mathcal A)$ with bounded cohomology and every isomorphism $v:D(P)N\\xrightarrow{\\sim}N$, there exist $M\\in D(\\mathcal B)$ and an isomorphism $e:D(U)M\\xrightarrow{\\sim}N$ such that\n$$e\\theta_M=vD(P)(e).$$\nThe cohomology of $M$ is bounded in the same interval as that of $N$. If $\\mathcal S$ is any isomorphism-invariant class of objects of $\\mathcal A$ and every $H^i(N)$ lies in $\\mathcal S$, then every underlying cohomology object $U H^i(M)$ lies in $\\mathcal S$. No functorial choice of $M$ or equivalence of derived categories with fixed-pair categories is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Last sentence, realizing the ordinary exceptional output with its mate Frobenius structure in the native derived category Agent-formulated native-derived foundation; the blueprint does not prove this assertion."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-weil-endofunctor-fixed-pair-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex representing N and a K-injective resolution I, using lem-sfb-grothendieck-k-injective. Let a:QI≅N. Exact derivation identifies Q(PI) with D(P)(QI). By lem-weil-pbc-kinjective-hom-derived, lift the morphism Q(PI)→D(P)(QI)→D(P)N→N→QI to a chain map f:PI→I. Its image under Q is invertible, so f is a quasi-isomorphism by def-weil-abstract-derived-category. Exact faithful forgetting for fixed pairs is already supplied by the adopted IsoAlgebra source library; no right-derived-forgetting comparison is used.",
+   "uses": [
+    "lem-sfb-grothendieck-k-injective",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, (1) implies (3); injectives.tex Tag 079P, theorem-K-injective-embedding-grothendieck; agent application to the prescribed morphism"
+   }
+  },
+  {
+   "text": "Choose a quasi-inverse $R$ of $P$ with unit $\\eta:\\mathrm{id}\\xrightarrow{\\sim}RP$ and counit $\\epsilon:PR\\xrightarrow{\\sim}\\mathrm{id}$ satisfying the triangle identities. Put $g=R(f)\\eta_I:I\\to RI$, $X_n=R^nI$ and $g_n=R^n(g):X_n\\to X_{n+1}$ for $n\\geq0$. These are actual complexes and chain maps. An equivalence preserves kernels and cokernels by [lem-galois-equivalence-preserves-limits], hence $R$ is exact. Consequently all $g_n$ are quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Let $C=\\operatorname{colim}_{n\\in\\mathbf N}X_n$ degreewise, with legs $j_n$. These colimits exist by [def-sp-grothendieck-abelian]. The equations $d_{X_{n+1}}g_n=g_nd_{X_n}$ give a differential on $C$ by [def-weil-pbc-category-colimit]; its square is zero since it is zero after every $j_n$. The indexing category is the nonempty directed poset $\\mathbf N$, so its colimits are filtered.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sp-grothendieck-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Agent construction supplying the native derived realization implicit in the final exceptional-adjunction sentence"
+   }
+  },
+  {
+   "text": "Filtered colimits in $\\mathcal A$ are exact by [def-sp-grothendieck-abelian]. Applying [src-weil-homology-preserves-exact-colimits] gives $H^q(C)\\cong\\operatorname{colim}_nH^q(X_n)$, with cocone legs $H^q(j_n)$. Every transition is an isomorphism. To check the initial leg is invertible, let $h_n:H^q(I)\\to H^q(X_n)$ be the composite of the first $n$ transition maps, with $h_0=1$. The inverses $h_n^{-1}$ form a cocone and induce an inverse to the initial leg: one composite is the identity at $n=0$, and the other is the identity after each colimit leg since $h_{n+1}=H^q(g_n)h_n$. The colimit universal property [def-weil-pbc-category-colimit] proves both equalities. Thus $j_0:I\\to C$ is a quasi-isomorphism.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "src-weil-homology-preserves-exact-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/DegreewiseLimits.lean",
+    "place": "Lines 76-89 and 142-144 (exact-colimit homology); agent calculation of the initial cocone leg"
+   }
+  },
+  {
+   "text": "For the chain-complex equivalence P with inverse R, set g=η_I followed by R(f) and D_n=R^n I with transition R^n(g). Let Y=colim D. The maps R^n(g) followed by R(j_n) define a cocone to RY. Its induced map σ:Y→RY is invertible: the maps j_(n+1):R(D_n)→Y induce its inverse because R preserves colimits. On j_n, the first composite is R^n(g) followed by j_(n+1), hence j_n; on R(j_n), the other composite is R(R^n(g)) followed by R(j_(n+1)), hence R(j_n). Colimit uniqueness gives both inverse equations.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Agent construction supplying the native derived realization implicit in the final exceptional-adjunction sentence"
+   }
+  },
+  {
+   "text": "Put τ=P(σ) followed by ε_Y:PY≅Y. The equation j_0 σ=g R(j_0), counit naturality, and the triangle identity give P(j_0) τ=f j_0. This constructs an invertible chain action directly. Its components and the differentials of Y define a complex B of fixed pairs, because τ is a chain map. The square-zero and shape identities are checked by faithful forgetting.",
+   "uses": [
+    "lem-galois-equivalence-preserves-limits",
+    "def-weil-pbc-category-colimit",
+    "def-weil-endofunctor-fixed-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Agent construction supplying the native derived realization implicit in the final exceptional-adjunction sentence"
+   }
+  },
+  {
+   "text": "Take $M=Q_{\\mathcal B}\\widetilde C$. Exactness of $U$ and [lem-weil-pbc-exact-functor-derived-factorization] identify $D(U)M$ with $QC$, and the induced structure $\\theta_M$ with $Q(\\tau)$. Put $e=aQ(j_0)^{-1}:QC\\xrightarrow{\\sim}N$. The actual chain equality $\\tau P(j_0)=j_0f$ becomes $Q(\\tau)D(P)(Q(j_0))=Q(j_0)Q(f)$. Multiplying on the left by $e$ gives $eQ(\\tau)D(P)(Q(j_0))=aQ(f)=vD(P)(a)$. Cancel the invertible $D(P)(Q(j_0))$ on the right to obtain $e\\theta_M=vD(P)(e)$, with the termwise-to-derived identifications just specified.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Agent construction supplying the native derived realization implicit in the final exceptional-adjunction sentence"
+   }
+  },
+  {
+   "text": "Exactness and faithfulness of the source-library forgetful functor U give UH^q(M)≅H^q(D(U)M)≅H^q(N), using mapDerivedCategoryHomologyFunctorIso. A faithful exact functor reflects zero homology, so every interval of vanishing for N is one for M. Any isomorphism-invariant object property transports along the same composite cohomology isomorphism. Neither boundedness nor closure of the property under colimits is needed for these conclusions.",
+   "uses": [
+    "def-weil-endofunctor-fixed-pair-category",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+    "place": "Agent construction supplying the native derived realization implicit in the final exceptional-adjunction sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
+  "lem-galois-equivalence-preserves-limits",
+  "def-sp-grothendieck-abelian",
+  "def-weil-pbc-category-colimit",
+  "src-weil-homology-preserves-exact-colimits",
+  "def-weil-endofunctor-fixed-pair-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "G5 formalization of the existing sequential-colimit construction: shift isomorphism Y≅RY and counit produce the strict action. K-injective input is Stacks 079P/070I; exact-colimit homology is src-weil-homology-preserves-exact-colimits. No fixed-pair right-derived comparison is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived object with an automorphism can be represented by a complex with a strict invertible chain action of the infinite cyclic group",
+   "results": "{\"t\": \"2026-10-22T04:29:20Z\", \"tool\": \"leanfinder\", \"query\": \"A derived object with an automorphism can be represented by a complex with a strict invertible chain action of the infinite cyclic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.singleFunctors\", \"DerivedCategory.Q\", \"HomologicalComplex.dgoEquivHomologicalComplex\", \"DerivedCategory.singleFunctor\", \"DerivedCategory\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"HasDerivedCategory.standard\", \"DerivedCategory.instHasShiftInt\"], \"digest\": \"8c63a385616be76b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived localization and fractions hits do not strictify a derived invertible action."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Action\"",
+   "results": "{\"t\": \"2026-10-22T04:29:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"Action\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\"], \"digest\": \"bc9f5ef5c2cdf179\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived localization and fractions hits do not strictify a derived invertible action."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|rectif|homotopyFixed|equivariant",
+   "results": "{\"t\": \"2026-10-22T04:29:27Z\", \"tool\": \"grep\", \"query\": \"strictif|rectif|homotopyFixed|equivariant\", \"sub\": \"Algebra/Homology/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived localization and fractions hits do not strictify a derived invertible action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize an automorphism in a derived category by a complex with an invertible chain map using a mapping telescope",
+   "results": "{\"t\": \"2026-10-22T04:29:28Z\", \"tool\": \"leansearch\", \"query\": \"Realize an automorphism in a derived category by a complex with an invertible chain map using a mapping telescope\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HasDerivedCategory.standard\", \"HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso\", \"DerivedCategory.Q_map_eq_of_homotopy\", \"HomologicalComplexUpToQuasiIso.Q\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences\", \"HomotopyCategory.isoOfHomotopyEquiv\"], \"digest\": \"742f935e0f8622b0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: derived localization and fractions hits do not strictify a derived invertible action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism from an exact autoequivalence of a derived object to itself can be represented by a complex with an invertible structure chain map",
+   "results": "{\"t\": \"2026-10-22T05:20:21Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism from an exact autoequivalence of a derived object to itself can be represented by a complex with an invertible structure chain map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangleIso\", \"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"DerivedCategory.singleFunctorIsoCompQ\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZero\"], \"digest\": \"b8e6e7aa2555c155\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization, truncation and exact induced functor hits do not realize a derived fixed pair by a strict complex; SingleObj fixed-point hits concern sets only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Fixed\"",
+   "results": "{\"t\": \"2026-10-22T05:20:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"Fixed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization, truncation and exact induced functor hits do not realize a derived fixed pair by a strict complex; SingleObj fixed-point hits concern sets only."
+  },
+  {
+   "tool": "grep",
+   "query": "strictif|rectif|homotopyFixed|equivariant",
+   "results": "{\"t\": \"2026-10-22T05:20:36Z\", \"tool\": \"grep\", \"query\": \"strictif|rectif|homotopyFixed|equivariant\", \"sub\": \"Algebra/Homology/\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization, truncation and exact induced functor hits do not realize a derived fixed pair by a strict complex; SingleObj fixed-point hits concern sets only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize an invertible twisted endomorphism in a derived category using a sequential colimit of quasi-isomorphisms",
+   "results": "{\"t\": \"2026-10-22T05:20:36Z\", \"tool\": \"leansearch\", \"query\": \"Realize an invertible twisted endomorphism in a derived category using a sequential colimit of quasi-isomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsIsoMapCochainComplexIntQ\", \"HasDerivedCategory\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"HomologicalComplexUpToQuasiIso.isIso_Q_map_iff_mem_quasiIso\", \"HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso\", \"HasDerivedCategory.standard\", \"DerivedCategory.instCategory\", \"HomologicalComplexUpToQuasiIso\"], \"digest\": \"96568f94ebb2bac8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization, truncation and exact induced functor hits do not realize a derived fixed pair by a strict complex; SingleObj fixed-point hits concern sets only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictify a quasi-isomorphism P I to I for an exact autoequivalence by the filtered direct limit I to P inverse I to P inverse squared I",
+   "results": "{\"t\": \"2026-10-22T05:20:47Z\", \"tool\": \"leanfinder\", \"query\": \"Strictify a quasi-isomorphism P I to I for an exact autoequivalence by the filtered direct limit I to P inverse I to P inverse squared I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"DerivedCategory.right_fac_of_isStrictlyLE\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism\"], \"digest\": \"21e2207cc913783d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization, truncation and exact induced functor hits do not realize a derived fixed pair by a strict complex; SingleObj fixed-point hits concern sets only."
+  },
+  {
+   "tool": "grep",
+   "query": "FixedPoints|fixedPair|strictif|rectif",
+   "results": "{\"t\": \"2026-10-22T05:20:47Z\", \"tool\": \"grep\", \"query\": \"FixedPoints|fixedPair|strictif|rectif\", \"sub\": \"CategoryTheory/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/SingleObj.lean\"], \"digest\": \"5aa4f55d6bb7a3ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: localization, truncation and exact induced functor hits do not realize a derived fixed pair by a strict complex; SingleObj fixed-point hits concern sets only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-native-exceptional-forgetful",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Final sentence: \"The same units and counits as in [lem-fix-weil-operations] give the exceptional-adjunction assertion.\" Supplies the native derived realization used by lem-sf-weil-native-exceptional-forgetful; the created-item chain has no imported blueprint ancestor (blueprint_refs.py ancestor returns None).",
+   "via": [
+    "lem-sf-weil-native-exceptional-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cyclic-derived-action-realization",
+  "worker": "stage1",
+  "summary": "Retained the statement and supplied an explicit seven-step sequential-colimit construction. Represent v by a quasi-isomorphism into a K-injective target, form its inverse-twisted sequential colimit, construct an invertible chain structure and verify the required equivariance equation. Reused existing nodes for every non-elementary input; no new nodes. Boundedness and class membership follow from exact conservative forgetting.",
+  "blueprint": "Supplies the unproved native-derived realization behind the final exceptional-adjunction sentence of cor-coef-verdier-weil-equivariance.proof.md. No imported ancestor exists in the created-item chain; neither the chapter nor unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-fixed-pair-derived-forget-comparison",
+    "why": "Only its generic first paragraph is used: the fixed-pair category is abelian and U exact and conservative; it does not assume the realization proved here."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic existence of a K-injective resolution; this unit has no replacement for the resolution theorem."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic Hom computation into a K-injective target represents the specified derived morphism by a chain map."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact termwise derivation identifies the actual chain maps with their derived images."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic exact-colimit homology identifies the cohomology of the sequential colimit with the colimit of cohomologies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-48f8a27eb",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-48f8a27eb (reviewer sub-agent of L); spot-checked: Read the item and every cited statement in full: lem-sf-fixed-pair-derived-forget-comparison (first paragraph only, specialised to C=D=A, F=H=P, L=id), lem-sfb-grothendieck-k-injective, lem-weil-pbc-kinjective-hom-derived, lem-weil-pbc-exact-functor-derived-factorization, lem-galois-equivalence-preserves-limits, def-sp-grothendieck-abelian, def-weil-pbc-category-colimit, src-weil-homology-preserves-exact-colimits, def-weil-endofunctor-fixed-pair-category (theta: TX->X, the same direction as tau and theta_M) and def-weil-abstract-derived-category. The sequential-colimit construction is correct. f: PI->I comes from K-injectivity of the target only. g = R(f)eta_I. eps_0 P(g_0) = f follows from naturality of eps plus the triangle identity. eps_{n+1}P(g_{n+1}) = g_n eps_n is naturality, since g_{n+1} = R(g_n). The cocone equations and tau hold. The inverse s exists, with the n=0 leg covered by P(j_0) = P(j_1)P(g_0). j_0 is a quasi-isomorphism by AB5 and the inverse cocone of transition isomorphisms. e = aQ(j_0)^{-1} gives e theta = v D(P)(e) after cancelling D(P)Q(j_0). The interval and S-membership clauses follow from exact, conservative U and isomorphism invariance. Edge cases checked: P=id with v=-1 on Z[0] gives tau=-1; N=0; a nonidentity P such as the swap on Ab x Ab. This is a first delivery with no new nodes, an unchanged statement, no repair note and no SGA. proof_origin=agent is honest: the last sentence of cor-coef-verdier-weil-equivariance.proof.md does not prove the realization. The transitive dependency closure (104 nodes) does not contain the item. Duplicate search: my first attempt was a malformed grep that the time limit stopped, so I did not restart it. I replaced it with a scan of every DAG node that cites the fixed-pair definition or mentions realize/strictify near automorphism/action. No duplicate: lem-sf-free-derived-weil-resolution and lem-sf-cyclic-derived-hom-exact-sequence state the free resolution and a Hom sequence, not essential surjectivity. All five declared tool_uses are accepted as generic black boxes outside the unit's geometric route."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CyclicDerivedActionRealization",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.exists_cyclicDerivedActionRealization",
+  "file": "lean/Sheaf/CategoryTheory/CyclicDerivedActionRealization.lean",
+  "statement": "theorem exists_cyclicDerivedActionRealization {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] (F : C ⥤ C) [F.Additive] [F.IsEquivalence] [HasDerivedCategory.{w} C] [HasDerivedCategory.{wF} (IsoAlgebra F)] (N : DerivedCategory C) (hN : DerivedCategory.TStructure.t.bounded N) (vN : F.mapDerivedCategory.obj N ≅ N) : ∃ (M : DerivedCategory (IsoAlgebra F)) (e : (forget F).mapDerivedCategory.obj M ≅ N), ((Functor.mapDerivedCategoryCompIso (forget F) F).symm ≪≫ Functor.mapDerivedCategoryNatIso (F := forget F ⋙ F) (G := forget F) (NatIso.ofComponents (fun (K : IsoAlgebra F) ↦ K.str) (fun f ↦ f.hom.h))).hom.app M ≫ e.hom = F.mapDerivedCategory.map e.hom ≫ vN.hom ∧ (∀ a b : ℤ, (∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor C i).obj N)) → ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (IsoAlgebra F) i).obj M)) ∧ (∀ S : ObjectProperty C, S.IsClosedUnderIsomorphisms → (∀ i : ℤ, S ((DerivedCategory.homologyFunctor C i).obj N)) → ∀ i : ℤ, S ((forget F).obj ((DerivedCategory.homologyFunctor (IsoAlgebra F) i).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "H2 repair: inlines the canonical exact-functor composition comparison followed by localization of the natural isomorphism with components K.str. Restores the original three stmt_deps; no dependence on the cyclic-derived-Hom exact-sequence theorem or its module. All cohomology intervals and every isomorphism-invariant class are preserved by the same realization, with independent universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2158969d3",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of dd74661e27fe; takes the authorized inline option. Node diff vs side-live: only lean added, statement/proof/source unchanged, stmt_deps back to base three defs (def-sp-grothendieck-abelian, def-weil-endofunctor-fixed-pair-category, def-weil-abstract-derived-category); theorem node lem-sf-cyclic-derived-hom-exact-sequence and its module no longer cited/imported. Inlined term matches live cyclicDerivedStructure (CyclicDerivedHomExactSequence.lean l.59-64): mapDerivedCategoryCompIso.symm ≪≫ mapDerivedCategoryNatIso(NatIso.ofComponents K.str), adding only explicit (F := forget F ⋙ F) (G := forget F); direction D(P)D(U)M→D(U)M, equation θ≫e = D(P)e≫v correct. Clauses (Grothendieck A, additive equivalence F, IsoAlgebra/forget, t.bounded N, interval and iso-invariant S clauses inside the ∃, independent universes u v w wF) and edge cases unchanged and correct. lean.statement verbatim, no long lines, sorry only, docstrings with source and (blueprint: …) and 7 steps, no new defs. Advisory: IsoAlgebra.strNatIso is literally the same NatIso. No file changed, no compile; worker reports clean 8.5 s/6.6 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261023T102751-L-2969060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

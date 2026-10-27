@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-space-thickening-base-change",
+ "kind": "statement",
+ "title": "Arbitrary algebraic-space thickenings remain thickenings under base change",
+ "statement": "Let $B$ be a scheme [def-pc-scheme], and use algebraic spaces over $B$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with fibre products [lem-trf-space-fibre-products-etale-covers]. A closed immersion of algebraic spaces means a representable map whose every base change to a scheme is a closed immersion of schemes [def-weil-closed-immersion]. Give the point spaces their quotient topology from surjective etale scheme atlases [def-a1-space-point-topology], with field-valued point classes as in [def-a1-algebraic-space-point-classes]. Let $i:Z\\to W$ be a closed immersion inducing a homeomorphism $|Z|\\to|W|$; such a map is called a thickening. Then $i$ is a monomorphism (for every algebraic space $H$ and maps $a,b:H\\to Z$, $ia=ib$ implies $a=b$). For every morphism $T\\to W$ of algebraic spaces, the projection $Z\\times_WT\\to T$ is again a thickening, and in particular induces a homeomorphism on point spaces. There is no finite order or finite type assumption.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 09ZX (lemma-base-change-thickening); monomorphism assertion: spaces-morphisms.tex, Tag 042R (lemma-immersions-monomorphisms), applied to a closed immersion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "First consider any representable closed immersion $j:E\\to F$ of algebraic spaces, without assuming surjectivity. Fix a scheme $R$ and two sections $e_1,e_2\\in E(R)$ with common image $c\\in F(R)$. By [def-trf-algebraic-space], the sheaf $P=h_R\\times_FE$ is represented by a scheme; its projection $q:P\\to R$ is a closed immersion by the hypothesis on $j$. The sections $(\\operatorname{id}_R,e_1)$ and $(\\operatorname{id}_R,e_2)$ give two scheme sections of $q$. By the forward implication of [lem-pc-proper-monomorphism-closed], $q$ is a monomorphism, so these sections agree and $e_1=e_2$. Thus $E(R)\\to F(R)$ is injective for every $R$. For algebraic-space maps $a,b:H\\to E$ with $ja=jb$, evaluate on every $h\\in H(R)$ and apply this injectivity; every component of $a$ equals that of $b$, so the natural transformations agree. Apply this to $i$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 042R (lemma-immersions-monomorphisms), with scheme monomorphism supplied by etale.tex Tag 04XV (lemma-characterize-closed-immersion), (1) implies (2)."
+   }
+  },
+  {
+   "text": "Fix $t:T\\to W$ and form $P=Z\\times_WT$ with projection $p:P\\to T$, using [lem-trf-space-fibre-products-etale-covers]. For every scheme $R\\to T$, the universal property identifies $P\\times_TR$ with $Z\\times_WR$, compatibly with projection to $R$: on sections, $((z,u),r)$ corresponds to $(z,r)$ with $u$ the image of $r$. Because $i$ is representable and a closed immersion on all scheme tests, $Z\\times_WR$ is a scheme closed in $R$. Consequently $p$ is a representable closed immersion. Step 1, which was proved for every such immersion, also makes $p$ a monomorphism and makes its maps on scheme sections injective.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 09ZX (lemma-base-change-thickening), closed-immersion clause, verified directly on scheme tests."
+   }
+  },
+  {
+   "text": "The homeomorphism hypothesis on $i$ makes $|i|$ surjective. For any point $x\\in|T|$, choose a representative $\\operatorname{Spec}K\\to T$. Choose a point of $Z$ above its image in $|W|$, represented by $\\operatorname{Spec}L\\to Z$. By [def-a1-algebraic-space-point-classes], there is a common field extension $M$ on which their maps to $W$ agree. The resulting pair is a section of the sheaf fibre product $P$ over $\\operatorname{Spec}M$ [lem-trf-space-fibre-products-etale-covers], giving a point above $x$. Hence $|p|$ is surjective. If two point classes of $P$ have the same image in $|T|$, the same point-class definition gives a common field extension on which their images as sections of $T$ agree. Injectivity on scheme sections from step 2 then makes their sections of $P$ agree. Thus their point classes agree, proving that $|p|$ is bijective.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), explicit common-field proof; injectivity is the same point-class argument with the monomorphism from step 2."
+   }
+  },
+  {
+   "text": "For every scheme $R\\to T$, step 2 makes $P\\times_TR\\to R$ a closed immersion of schemes. It is finite by [lem-weil-pbc-closed-immersion-finite]. Thus $p$ is finite on scheme tests, exactly the hypothesis of [lem-sfb-finite-space-morphism-topology]. That node gives continuity and closedness of $|p|$ for the atlas topologies. A continuous closed bijection is a homeomorphism: if $C\\subseteq|P|$ is closed, its inverse image under the inverse bijection is $|p|(C)$, which is closed. Together with step 2, this proves that $p$ is a thickening. No step used finite order, finite type, or any nilpotence bound.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-sfb-finite-space-morphism-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081Y (lemma-closed-immersion-finite), checked on scheme tests using morphisms.tex Tag 035C; Tag 0415 (lemma-integral-universally-closed). This fills the omitted proof of spaces-more-morphisms.tex Tag 09ZX."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-pc-proper-monomorphism-closed",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-algebraic-space-point-classes",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-sfb-finite-space-morphism-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 09ZX (lemma-base-change-thickening) has an omitted proof; expanded using spaces-morphisms.tex Tags 042R and 0415, scheme closed-immersion facts, and the common-field proof in spaces-properties.tex Tag 03H4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A thickening of algebraic spaces is a monomorphism and a universal homeomorphism and stays a thickening after every base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (CategoryTheory.MorphismProperty.monomorphisms AlgebraicGeometry.Scheme)\", \"doc\": \"The property of being a monomorphism in the category of schemes is Zariski local at the target. This means that for any monomorphism $ f : X \\to Y $ of schemes and any Zariski covering sieve $ S $ on $\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f], CategoryTheory.Mono f\", \"doc\": \"Every preimmersion between schemes is a monomorphism in the category of schemes, meaning that for any pair of morphisms $ Z \\to X $ with a common domain, if their compositions with the preimmersion $ f\"}\n  {\"name\": \"AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {U X Y : P.Over ⊤ S}\\n  (f : U ⟶ X) (g : U ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f.left] [AlgebraicGeometry.IsOpenImmersion g.left]\\n  (i : CategoryTheory.Limits.WalkingPair),\\n  CategoryTheory.Mono\\n    ((\", \"doc\": \"Given schemes $ S $, $ X $, $ Y $, and an object $ U $ in the over-category over $ S $, if the morphisms $ f: U \\to X $ and $ g: U \\to Y $ are open immersions, then the induced morphism in the span diag\"}\n  {\"name\": \"AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {U X Y : AlgebraicGeometry.Scheme} (f : U ⟶ X) (g : U ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f]\\n  [AlgebraicGeometry.IsOpenImmersion g] (i : CategoryTheory.Limits.WalkingPair),\\n  CategoryTheory.Mono\\n    (((CategoryTheory.Limits.span f g).comp AlgebraicGeometry.Scheme.forget).map\\n      (CategoryTh\", \"doc\": \"Given schemes $U,X,Y$ with open immersions $f:U\\\\to X$ and $g:U\\\\to Y$, the morphism induced by the span diagram $U\\\\rightrightarrows X,Y$ through the forgetful functor to types is a monomorphism. Specif\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.Mono f], AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"Every monomorphism in the category of schemes is universally injective. That is, if $ f : X \\to Y $ is a monomorphism (i.e., a left-cancellative morphism in the category of schemes), then for every bas\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion ≤ CategoryTheory.MorphismProperty.monomorphisms AlgebraicGeometry.Scheme\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes, i.e., the property of being an open immersion is contained within the property of being a monomorphism for morphisms in th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_of_mono\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.Mono f], AlgebraicGeometry.IsSeparated f\", \"doc\": \"Every monomorphism of schemes is a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.mono\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) [H : AlgebraicGeometry.IsOpenImmersion f], CategoryTheory.Mono f\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a surjective closed immersion of algebraic spaces induces a homeomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.Surjective\", \"doc\": \"The property of being a surjective morphism of schemes is stable under base change. That is, if $ f: X \\to Y $ is a surjective morphism of schemes and $ g: Z \\to Y $ is any morphism of schemes, then the\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f) →\\n    AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map f)\", \"doc\": \"For commutative rings $R$ and $S$, if the ring homomorphism $f : R \\to S$ is surjective, then the induced morphism of schemes $\\\\operatorname{Spec}(S) \\to \\\\operatorname{Spec}(R)$ is a closed immersion. T\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsClosedImmersion\", \"doc\": \"The property of being a closed immersion of schemes is stable under base change. That is, if $ f: X \\to Y $ is a closed immersion of schemes, then for any base change $ Y' \\to Y $, the induced morphism \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.SurjectiveOnStalks\", \"doc\": \"The property of a morphism of schemes being surjective on stalks is stable under base change. That is, if $ f: X \\to Y $ is a morphism of schemes with surjective induced maps on stalks, then any base c\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyClosed.of_comp_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.UniversallyClosed (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.Surjective f],\\n  AlgebraicGeometry.UniversallyClosed g\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ g \\\\circ f $ is universally closed and $ f $ is surjective, then $ g $ is universally closed.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y),\\n  Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f)) →\\n    AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"If $ X $ and $ Y $ are affine schemes and the morphism $ f : X \\to Y $ induces a surjective map on global sections, then $ f $ is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsPreimmersion\", \"doc\": \"The property of being a preimmersion of schemes is stable under base change; that is, any base change (pullback) of a preimmersion is also a preimmersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Surjective\", \"IsClosedImmersion\"",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.SurjectiveOnStalks f\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] [AlgebraicGeometry.Surjective f] [AlgebraicGeometry.IsReduced Y] : CategoryTheory.IsIso f\", \"doc\": \"A surjective closed immersion is an isomorphism when the target is reduced.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.spec_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {R S : CommRingCat} (f : R ⟶ S) (h : Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) : AlgebraicGeometry.IsClosedImmersion (AlgebraicGeometry.Spec.map f)\", \"doc\": \"Given two commutative rings `R S : CommRingCat` and a surjective morphism\\n`f : R ⟶ S`, the induced scheme morphism `specObj S ⟶ specObj R` is a\\nclosed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y) (h : Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))) : AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"Any morphism between affine schemes that is surjective on global sections is a\\nclosed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine Y] (f : X ⟶ Y) [AlgebraicGeometry.IsClosedImmersion f] : AlgebraicGeometry.IsAffine X ∧ Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"If `f` is a closed immersion with affine target, the source is affine and\\nthe induced map on global sections is surjective.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Ss]urjective.*[Cc]losed[Ii]mmersion|[Cc]losed[Ii]mmersion.*[Mm]ono",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"393\", \"text\": \"lemma IsClosedImmersion.iff_isProper_and_mono :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"394\", \"text\": \"    IsClosedImmersion f ↔ IsProper f ∧ Mono f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"396\", \"text\": \"  rw [IsClosedImmersion.iff_isFinite_and_mono, IsFinite.iff_isProper_and_locallyQuasiFinite]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"399\", \"text\": \"lemma IsClosedImmersion.eq_proper_inf_monomorphisms :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"400\", \"text\": \"    @IsClosedImmersion = ↑@IsProper ⊓ MorphismProperty.monomorphisms Scheme := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"124\", \"text\": \"lemma _root_.AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"125\", \"text\": \"    IsClosedImmersion f ↔ IsFinite f ∧ Mono f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"140\", \"text\": \"lemma _root_.AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"141\", \"text\": \"    @IsClosedImmersion = (@IsFinite ⊓ monomorphisms Scheme : MorphismProperty _) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite.lean\", \"line\": \"142\", \"text\": \"  ext; exact IsClosedImmersion.iff_isFinite_and_mono _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"122\", \"text\": \"    (h : Function.Surjective (f.appTop)) : IsClosedImmersion f := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"line\": \"319\", \"text\": \"theorem isAffine_surjective_of_isAffine [IsClosedImmersion f] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any surjective closed immersion of algebraic spaces is a universal homeomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[IsClosedImmersion f] : UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsImmersion f\", \"doc\": \"Any closed immersion between schemes is an immersion. Specifically, if $ f: X \\to Y $ is a closed immersion of schemes (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with a su\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"(f : X ⟶ Y) [IsClosedImmersion f] : IsFinite f\", \"doc\": \"Every closed immersion of schemes is a finite morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset o\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.SurjectiveOnStalks f ∧ Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is a closed immersion if and only if the induced maps on stalks are surjective and the underlying continuous map is a closed embedding.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsClosedImmersion f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\to Y $ is a closed immersion of schemes, then the underlying continuous map $ f: X \\to Y $ is a closed embedding in the topological sense, meaning it induces a homeomorphism of $ X $ onto a c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or topological spaces, not morphisms of algebraic spaces; their specialization cannot supply this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|[Tt]hickening|[Cc]losed[Ii]mmersion.*[Mm]ono",
+   "results": "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: available hits concern schemes, ring base change, or scheme representability; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change preserves arbitrary thickenings of algebraic spaces, without a finite order assumption",
+   "results": "RingHom.IsStableUnderBaseChange; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; IsBaseChange.finitePow; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange; Algebra.Smooth.baseChange; AlgebraicGeometry.isSmooth_isStableUnderBaseChange; AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: available hits concern schemes, ring base change, or scheme representability; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsClosedImmersion\", \"Mono\"",
+   "results": "AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono; AlgebraicGeometry.IsClosedImmersion.eq_isFinite_inf_mono; AlgebraicGeometry.IsClosedImmersion.iff_isProper_and_mono; AlgebraicGeometry.IsClosedImmersion.eq_proper_inf_monomorphisms",
+   "date": "2026-10-23",
+   "verdict": "no match: available hits concern schemes, ring base change, or scheme representability; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A representable surjective closed immersion of fppf sheaves induces a homeomorphism on points after pullback",
+   "results": "AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.pullbackComparison_forget_surjective; AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion; AlgebraicGeometry.Scheme.Pullback.forget_comparison_surjective; AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite; AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback; AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective",
+   "date": "2026-10-23",
+   "verdict": "no match: available hits concern schemes, ring base change, or scheme representability; none states this algebraic-space assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary thickening of algebraic spaces is a monomorphism and remains a thickening after any base change",
+   "results": "AlgebraicGeometry.instMonoObjWalkingSpanCompOverSchemeTopMorphismPropertySpanOverForgetForgetForgetNoneWalkingPairSomeMapInitOfIsOpenImmersionLeftDiscretePUnit; AlgebraicGeometry.instMonoObjWalkingSpanCompSchemeSpanForgetNoneWalkingPairSomeMapInitOfIsOpenImmersion; AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme; AlgebraicGeometry.IsPreimmersion.instMonoScheme; AlgebraicGeometry.IsOpenImmersion.le_monomorphisms; AlgebraicGeometry.IsOpenImmersion.mono; AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme; AlgebraicGeometry.IsSeparated.isSeparated_of_mono",
+   "date": "2026-10-23",
+   "verdict": "no match: available hits concern schemes, ring base change, or scheme representability; none states this algebraic-space assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-thickening-topological-properties",
+  "date": "2026-10-22",
+  "group": "Q89"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Properness recovery inside the Tag 0D1J input to Tag 0D56: use Tag 09ZY with local finite presentation already known, without a finite-order assumption. Supporting input to Tag 09ZY: base changes of thickenings and cancellation of their monomorphisms.",
+   "via": [
+    "lem-sfb-space-thickening-topological-properties",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-thickening-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the omitted arbitrary-thickening base-change proof of Stacks 09ZX. Proved cancellation on scheme sections, checked representable closed immersions after base change directly on scheme tests, wrote common-field point lifting and injectivity, and used existing finite-space topology to obtain a homeomorphism. Reused every supporting node, with no new nodes and no finite-order assumption. Added explicit point-class and topology definition dependencies without changing the assertion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Properness recovery inside the Tag 0D1J input to Tag 0D56: use Tag 09ZY with local finite presentation already known, without a finite-order assumption. Supporting input to Tag 09ZY: base changes of thickenings and cancellation of their monomorphisms. Steps 1-4 provide precisely this base-change and cancellation prerequisite; they do not replace the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products; used only as foundational geometry, not as a trace-formula input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-b9b37b8af",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-b9b37b8af (reviewer sub-agent of L); spot-checked: Read in full against the base item (unsplit, empty proof in live and side-live; no repair note, so not a re-split). The statement is unchanged apart from added citations to def-a1-space-point-topology and def-a1-algebraic-space-point-classes. Source: Stacks 09ZX (proof omitted; only the thickening clause is claimed, not first/finite order), definition-thickening, 042R, and 03H4/section-points in spaces-properties.tex, all read. Step 1: the scheme test P=h_R×_F E is a closed immersion, which is a monomorphism by the Mathlib leaf lem-pc-proper-monomorphism-closed; two sections of q are therefore equal, giving componentwise cancellation. Step 2: (Z×_W T)×_T R = Z×_W R through the scheme test R→T→W, so p is a representable closed immersion and, by step 1, a monomorphism. Step 3: surjectivity is the common-field argument of 03H4; injectivity uses the restrictions to a common field M and injectivity of P(M)→T(M). This needs transitivity of the point relation, which is elementary and holds for any presheaf by amalgamating field extensions. Step 4: closed immersions are finite (Mathlib leaf), which is exactly the hypothesis of lem-sfb-finite-space-morphism-topology; it gives continuity and closedness, and a continuous closed bijection is a homeomorphism. Edge cases checked: identity, empty T, the nil but not nilpotent thickening Spec k → Spec k[x_n]/(x_n^{n+1}), and a non-surjective closed immersion, which fails only the surjectivity half of step 3. The parent's universal-homeomorphism use is covered. No algebraic-space duplicate exists (only scheme-level 09ZU analogues) and there is no cycle. The tool_use lem-trf-space-fibre-products-etale-covers (generic fibre products) is accepted. Batch-5: def-a1-space-point-topology and def-a1-algebraic-space-point-classes are general definitions, and lem-sfb-finite-space-morphism-topology is a generic topology lemma for finite maps of spaces. All three reach sec-trace-formula only through the definition def-trf-algebraic-space, with no trace-formula, Poincaré or nt-assume node in their closure, so they lie outside the assumptions and are accepted. No SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceThickeningBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.thickening_mono_and_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceThickeningBaseChange.lean",
+  "statement": "theorem thickening_mono_and_baseChange {B : Scheme.{u}} (Z W : AlgebraicSpace B) (i : Z ⟶ W) (hi : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) i.hom.hom) (hiTop : IsHomeomorph (mapPoint i.hom.hom)) : Mono i ∧ ∀ (T : AlgebraicSpace B) (t : T ⟶ W), IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.snd i.hom t.hom).hom ∧ IsHomeomorph (mapPoint (Limits.pullback.snd i.hom t.hom).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing canonical mapPoint from def-sfb-proper-curve-moduli, added as a landed statement dependency. Closed immersions are expressed with the shared scheme-test predicate, and the base change is the existing fppf sheaf pullback, known to be an algebraic space by fibreProduct_isAlgebraicSpace."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30d04330c",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 09ZX/042R clause by clause: hi = IsRepresentableWith (IsClosedImmersion p.left) (shared space closed-immersion idiom), hiTop = IsHomeomorph (mapPoint) with global atlas pointTopologicalSpace, Mono i in AlgebraicSpace B, ∀ T t: sheaf-pullback projection (algebraic space by fibreProduct_isAlgebraicSpace) is again a representable closed immersion and a point homeomorphism; no finite-order or extra hypotheses, universe u throughout. lean.statement verbatim (diffed). Added stmt_dep def-sfb-proper-curve-moduli is the mapPoint owner, present on the base, acyclic (closure DFS). No duplicate declaration; only delivery of the item. No defs, single sorry, source+blueprint docstrings with the four proof steps, report has both sections. No compile needed (no change)."
+ }
+}

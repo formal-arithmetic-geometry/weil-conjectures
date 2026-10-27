@@ -1,0 +1,157 @@
+{
+ "id": "lem-sf-supported-first-extraction",
+ "kind": "statement",
+ "title": "First supported coordinate extraction before a trace",
+ "statement": "Let A be a finite commutative ring, f:X→Y proper, p1,p2 the self-product projections, and B,M arbitrary objects of the unbounded etale module derived category. Use [def-sf-supported-diagonal-calculus]. Write F=Rf!, U=Rp1!, E=p2*B and β1:P(FB)≅U(E) for exchangeFirst. Let Q_f(B,K): FB⊗K≅F(B⊗P K) be projectionIso, let π1:M⊗U(E)≅U(p1*M⊗E) be orderedProjection, and let C_B(M), D be comparison and directComparison. Then the following maps from Rp2!(p1*M⊗p2*B) followed by F to FB⊗FM agree:\nF(C_B(M));Q_f(B,FM)^(-1) = D;F(π1^(-1);(1_M⊗β1^(-1)));Q_f(M,FB)^(-1);swap(FM,FB).\nNo trace, diagonal, line condition or shift is part of the hypotheses.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "First supported coordinate extraction before a trace; the coordinate triangle computation before applying its scalar trace"
+ },
+ "stmt_deps": [
+  "def-sf-supported-diagonal-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Normalize each of the two supported relative Kunneth routes to the independently defined ordinary Kunneth map, using the proper comparisons. Naturality of tensor braiding with respect to the tensor of these comparisons and the native Kunneth tensor-symmetry theorem give the inverse-route identity. Cancel the proper comparison and the two relative Kunneth isomorphisms to obtain symmetry of the supported relative Kunneth isomorphism.",
+   "uses": [
+    "lem-sf-proper-relative-kunneth-supports",
+    "lem-sf-native-kunneth-tensor-symmetry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the explicitly constructed proper-supported Kunneth route for the self-product and its flipped square. The second-coordinate inner map is comparison, since the inverse reversed braiding is the forward braiding. Naturality of the specified compositor moves the kernel swap inside the direct images. The first-coordinate inner map following that swap is orderedProjection inverse followed by the inverse exchange, by braiding naturality and involutivity.",
+   "uses": [
+    "def-sf-supported-diagonal-calculus",
+    "lem-kun-tensor-sym",
+    "def-sf-proper-supported-kunneth-route"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The second compositor followed by directComparison is the first compositor, directly from their specified definitions and cancellation. Cancel the second compositor from the expanded supported symmetry identity, cancel the two final swaps on the other side, and combine the two maps inside push f by functoriality. This is exactly firstExtraction, with B arbitrary.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-proper-relative-kunneth-supports",
+  "lem-sf-native-kunneth-tensor-symmetry",
+  "def-sf-supported-diagonal-calculus",
+  "lem-kun-tensor-sym",
+  "def-sf-proper-supported-kunneth-route"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "U3: one-route proper normalization, native mixed-counit tensor symmetry, and explicit inverse/compositor algebra"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical tensor projection map commutes with proper base change and composition of derived direct images",
+   "results": "TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; LinearMap.baseChange_comp; IsBaseChange.of_comp. None states this identity of derived coordinate maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exchange and projection formula reassociation for a coefficient with identity self braiding before applying a trace",
+   "results": "CategoryTheory.MonoidalCategory.tensorδ; tensorμ; tensorδ_tensorμ; BraidedCategory.yang_baxter. These are tensor coherence, without the derived exchange/projection maps.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "Kunneth|kunneth|exchange.*projection|projection.*exchange in Mathlib/CategoryTheory/Monoidal; firstExtraction|secondExtraction|extractionShuffle in lean/Sheaf and lean/WeilConjectures",
+   "results": "No exact match. Existing project coordinateKunnethFactorization has ordinary supports and a pulled-back coefficient. Existing secondCoordinateContraction is after the scalar trace.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate pretrace supported identity. Blueprint search coordinate Kunneth and exchange tensor found zero imported blueprint nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SfSupportedTraceContractions",
+  "date": "2026-10-27",
+  "group": "M3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "First supported coordinate extraction before a trace before the trace; inherited null ancestor.",
+   "via": [
+    "lem-sf-supported-trace-contractions",
+    "lem-sf-diagonal-kernel-integral-triangles",
+    "lem-sf-affine-base-p1-trace-adjunction",
+    "lem-sf-affine-line-canonical-duality",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SfSupportedFirstExtraction",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfSupportedFirstExtraction.lean",
+  "declaration": "AlgebraicGeometry.Etale.SupportedTrace.firstExtraction",
+  "statement": "theorem firstExtraction {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]\n    (B M : DerivedCategoryModule A X) :\n    (push A f).map (comparison A f B M).hom ≫\n        (projectionIso A f B).inv.app ((push A f).obj M) =\n      (directComparison A f).hom.app (kernel A f B M) ≫\n        (push A f).map\n          ((orderedProjection A (pullback.fst f f) M\n              ((CoordinateTrace.pull A (pullback.snd f f)).obj B)).inv ≫\n            ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map\n              ((SfDiagonalKernel.exchangeFirst A f).inv.app B)) ≫\n        (projectionIso A f M).inv.app ((push A f).obj B) ≫\n        (CoordinateTrace.swap A Y ((push A f).obj M) ((push A f).obj B)).hom",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-27"
+ },
+ "split_report": {
+  "blueprint": "The first coordinate computation before applying the trace.",
+  "tool_uses": [
+   {
+    "node": "def-sp-unbounded-proper-shriek-star-comparison",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-asd-source-proper-projection-coincidence",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-ringed-kunneth-factorizations",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Generic canonical tensor, projection, exchange or proper-support comparison used solely to compute the specified coordinate maps; the unit route is unchanged."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261026T235918-L-1468120",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261027T135445-L-3710236",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,261 @@
+{
+ "id": "lem-sfb-galois-limit-nerve-faces",
+ "kind": "statement",
+ "title": "Passage from finite Galois coordinates to the profinite Cech nerve and its faces",
+ "statement": "Let $k$ be a field, $\\Omega/k$ a separable closure [def-pd-separable-closure], and $G=\\operatorname{Aut}_k(\\Omega)$ with its Krull topology. For each finite Galois intermediate field $E$ put $Q_E=\\operatorname{Aut}_k(E)$. Assume the maps\n$$\\theta_{E,q}:\\Omega\\otimes_k E^{\\otimes_k q}\\longrightarrow\\Omega^{Q_E^q},\\quad (a_0\\otimes\\cdots\\otimes a_q)(g_1,\\ldots,g_q)=a_0g_1(a_1)\\cdots(g_1\\cdots g_q)(a_q)$$\nare $\\Omega$-algebra isomorphisms compatible with inclusions of $E$ and restriction of automorphisms, for all $q\\geq0$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Write $\\Omega[G^q]=\\varprojlim_E\\coprod_{Q_E^q}\\operatorname{Spec}\\Omega$, equivalently the profinite test object of [def-sfb-profinite-test-objects]. There are canonical identifications\n$$\\Omega^{\\otimes_k(q+1)}\\cong\\varinjlim_E\\Omega^{Q_E^q}\\cong LC(G^q,\\Omega),\\qquad W_q:=(\\operatorname{Spec}\\Omega)^{q+1}_{/k}\\cong\\Omega[G^q],$$\nwhere $LC$ denotes locally constant functions with pointwise operations and the first tensor factor gives the structure over $\\operatorname{Spec}\\Omega$ [def-pc-fibre-product]. Every continuous map from $G^q$ to a finite discrete set factors through some $Q_E^q$. Write group multiplication as composition of field automorphisms: $(gh)(a)=g(h(a))$. The following coordinate convention specifies the vertices and all faces, including the change of base vertex. On a component labelled $(g_1,\\ldots,g_q)\\in G^q$, and for a ring-valued base point $x:\\Omega\\to B$, the vertices are the ring maps\n$$x,\\quad x\\circ g_1,\\quad x\\circ(g_1g_2),\\quad\\ldots,\\quad x\\circ(g_1\\cdots g_q).$$\nThus $xg:=x\\circ g$ on ring maps; on scheme-valued points $t:\\operatorname{Spec}B\\to\\operatorname{Spec}\\Omega$ this means $tg=\\operatorname{Spec}(g)\\circ t$. For $q\\geq1$, deleting vertex zero replaces the base point by $xg_1$ and drops $g_1$; deleting vertex $i$, $0<i<q$, replaces $(g_i,g_{i+1})$ by $g_ig_{i+1}$; deleting vertex $q$ drops $g_q$. On coordinate rings the first face is the $k$-algebra map\n$$d_0^*:LC(G^{q-1},\\Omega)\\longrightarrow LC(G^q,\\Omega),\\qquad (d_0^*f)(g_1,\\ldots,g_q)=g_1\\bigl(f(g_2,\\ldots,g_q)\\bigr).$$\nThe other faces are precomposition with the displayed increment maps. Repeating vertex $i$, $0\\leq i\\leq q$, inserts $1$ after the first $i$ increments. These formulas specify scheme morphisms, not merely maps on points. For an identification $\\varepsilon_{01}$ from vertex 1 to vertex 0, the descent cocycle convention is $\\varepsilon_{02}=\\varepsilon_{01}\\circ\\varepsilon_{12}$, with each identification pulled back to the triple overlap. In a constant coefficient fibre trivialization, where the base-vertex change acts trivially on the coefficient values, this reads $c(gh)=c(g)c(h)$; without that triviality the pullback along the moved base vertex is retained.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent expansion of Stacks fields.tex Tag 0BU2 (lemma-infinite-galois-limit), algebra.tex Tag 00DD (lemma-tensor-products-commute-with-limits), limits.tex Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); explicit cumulative-vertex substitution. Returned item proof steps 3–4."
+ },
+ "stmt_deps": [
+  "def-pd-separable-closure",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-sfb-profinite-test-objects",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois], $\\Omega/k$ is Galois. Apply [lem-exc-galois-krull-finite-limit]: the finite Galois intermediate fields form a nonempty directed set $I$, and restriction identifies $G$ with $\\varprojlim_E Q_E$ as a profinite group. By [lem-weil-pbc-finite-set-in-finite-galois-subextension] every finite subset of $\\Omega$ lies in one $E$, so $\\Omega$ is their directed union. By [lem-weil-pbc-normal-subextension-automorphism-extends], every automorphism of $E$ extends to $\\Omega$: both extensions over $k$ are normal. Hence $G\\to Q_E$ and its $q$-fold product are surjective. Taking the group-limit coordinates in each of the $q$ positions gives $G^q=\\varprojlim_E Q_E^q$ as profinite spaces: a compatible family gives one element of $G$ in each position, and both this correspondence and its inverse are continuous by the coordinate topology. For $q=0$ this is the singleton system.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-galois-krull-finite-limit",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-weil-pbc-normal-subextension-automorphism-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 0BU2 (lemma-infinite-galois-limit), 0BMK (lemma-galois-infinite), 09I2 (lemma-galois-goes-up), and 09DT/0EXM (normal closure)."
+   }
+  },
+  {
+   "text": "Put $B_{E,q}=\\Omega\\otimes_k E^{\\otimes_k q}$ and $T_q=\\Omega^{\\otimes_k(q+1)}$. Their natural maps exhibit $T_q=\\varinjlim_E B_{E,q}$ as $\\Omega$-algebras. Here is the universal property explicitly. Given a compatible cocone $f_E:B_{E,q}\\to C$ into a commutative $\\Omega$-algebra, for $1\\leq j\\leq q$ send $a\\in\\Omega$ to $f_E(1\\otimes\\cdots\\otimes a\\otimes\\cdots\\otimes1)$ with $a$ in slot $j$, choosing $E$ containing $a$. A common upper stage makes this independent of the choice. Taking a stage containing $a,b$ verifies addition and multiplication, so these are $k$-algebra maps $\\Omega\\to C$. Together with the specified zeroth map they extend uniquely to $T_q\\to C$ by the tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property]. The extension agrees with every $f_E$ on every tensor factor, hence on $B_{E,q}$; the same factorwise uniqueness proves uniqueness on $T_q$. The assumed compatible $\\theta_{E,q}$ therefore give $T_q\\cong\\varinjlim_E\\Omega^{Q_E^q}$. At $q=0$ all maps are the identity of $\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DD (lemma-tensor-products-commute-with-limits), explicit universal-property argument using common finite stages; algebra tensor universal property as in schemes.tex Tag 01I4."
+   }
+  },
+  {
+   "text": "Pullback along $G^q\\to Q_E^q$ defines compatible $\\Omega$-algebra maps $\\Omega^{Q_E^q}\\to LC(G^q,\\Omega)$. Apply [lem-weil-pbc-profinite-limit-function-factorization] to the small cofiltered diagram $E\\mapsto Q_E^q$ and the limiting cone from step 1. Every locally constant $\\Omega$-valued function is the pullback of a function on one finite stage, so the induced map from the colimit is surjective. If two finite-stage functions have the same pullback, pass to a common upper stage $E''$; surjectivity of $G^q\\to Q_{E''}^q$ implies their pullbacks on that stage are equal. This proves injectivity and hence the claimed ring identification. A continuous map to a finite discrete set is locally constant, so the very same cited factorization, with that set as codomain, proves the finite-map clause. In particular each finite quotient partition of $G^q$ is refined by a $Q_E^q$-partition.",
+   "uses": [
+    "lem-weil-pbc-profinite-limit-function-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 08ZZ (lemma-profinite-refine-open-covering); precise factorization in Mathlib/Topology/Category/Profinite/CofilteredLimit.lean:191."
+   }
+  },
+  {
+   "text": "Iterating [lem-weil-pbc-fibre-product-affine-spectra] identifies $W_q$ with $\\operatorname{Spec}T_q$, with its $j$-th projection induced by the $j$-th tensor inclusion. By [lem-weil-pbc-spec-small-colimit-limit], the colimit of step 2 makes this spectrum the scheme limit of $\\operatorname{Spec}\\Omega^{Q_E^q}$. By [lem-weil-pbc-finite-affine-coproduct-spectrum] each stage is the disjoint union of copies of $\\operatorname{Spec}\\Omega$ indexed by $Q_E^q$, with the stated evaluation projections. The transitions are those induced by restriction, because the $\\theta_{E,q}$ are compatible by hypothesis. This is exactly the inverse limit defining $\\Omega[G^q]$. It agrees with [def-sfb-profinite-test-objects]: step 3 shows that these partitions refine every finite quotient partition, and a cone over these stages extends uniquely to any finite quotient by choosing a refinement; two choices agree after a common upper stage. Thus the limits have the same universal property. All comparison maps preserve the zeroth tensor inclusion, so this is an identification over $\\operatorname{Spec}\\Omega$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-small-colimit-limit",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); schemes.tex Tag 01I4 (lemma-fibre-product-affine-schemes); finite coproduct formula Mathlib/AlgebraicGeometry/Limits.lean:604-647."
+   }
+  },
+  {
+   "text": "For $a\\in\\Omega$ choose a finite Galois $E$ containing it and evaluate the assumed formula on the tensor with $a$ in slot $j$ and $1$ elsewhere. The resulting vertex coordinate is $a\\mapsto(g_1\\cdots g_j)(a)$, with the empty product for $j=0$. At a ring-valued base point $x:\\Omega\\to B$, composition gives $x\\circ(g_1\\cdots g_j)$. Contravariance of $\\operatorname{Spec}$ turns this into $\\operatorname{Spec}(g_1\\cdots g_j)\\circ t$ on scheme-valued base points $t$, explaining the precise order in the corrected statement. This is equality of the projection ring homomorphisms from step 4, using the tensor-factor uniqueness in [lem-weil-pbc-algebra-tensor-pushout-universal-property], rather than an inference from geometric points alone.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), continuous-coefficient open direct image; agent expansion of the generic-field Cech coordinate subargument of lem-sfb-field-separable-cech-coordinates, using the assumed tensor formula."
+   }
+  },
+  {
+   "text": "Deleting vertex $i$ pulls a pure tensor in $T_{q-1}$ back to the tensor in $T_q$ with $1$ inserted in slot $i$. For $i=0$, evaluating gives\n$$g_1(a_0)(g_1g_2)(a_1)\\cdots(g_1\\cdots g_q)(a_{q-1})=g_1\\bigl(a_0g_2(a_1)\\cdots(g_2\\cdots g_q)(a_{q-1})\\bigr).$$\nThis is exactly the stated $d_0^*$, with the new base map $x\\circ g_1$. For $0<i<q$, inserting $1$ discards the $i$-th cumulative product; the increments between the retained vertices are $g_1,\\ldots,g_{i-1},g_ig_{i+1},g_{i+2},\\ldots,g_q$. Inserting $1$ last simply drops $g_q$. These equalities on tensor factors determine the ring homomorphisms by [lem-weil-pbc-algebra-tensor-pushout-universal-property], and hence the scheme morphisms. To check that the first formula sends locally constant functions to locally constant functions, write any such function at stage $E$ by step 3; its finite list of values lies in a finite Galois $E'$ by step 1. The formula then depends only on restrictions of all increments to a common upper field of $E,E'$. Thus it too is locally constant. In degree one the two faces on constants $a\\in\\Omega$ are $a\\mapsto(g\\mapsto g(a))$ and $a\\mapsto(g\\mapsto a)$; the first is a $k$-algebra map, generally not an $\\Omega$-algebra map.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), continuous-coefficient open direct image; agent expansion of the generic-field Cech coordinate subargument of lem-sfb-field-separable-cech-coordinates, using the assumed tensor formula."
+   }
+  },
+  {
+   "text": "Repeating vertex $i$ pulls a tensor in $T_{q+1}$ back by multiplying the entries in slots $i,i+1$. Under evaluation this repeats the $i$-th cumulative product, so its increments are $g_1,\\ldots,g_i,1,g_{i+1},\\ldots,g_q$. Equality follows directly from $p(a_i a_{i+1})=p(a_i)p(a_{i+1})$ for the cumulative automorphism $p=g_1\\cdots g_i$. Tensor-factor uniqueness [lem-weil-pbc-algebra-tensor-pushout-universal-property] again proves equality of ring maps. This includes $i=0$ and $i=q$; for $q=0$ the diagonal inserts the single increment $1$. Faces and degeneracies are the actual vertex deletions and repetitions, so their simplicial identities are inherited from those operations.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), continuous-coefficient open direct image; agent expansion of the generic-field Cech coordinate subargument of lem-sfb-field-separable-cech-coordinates, using the assumed tensor formula."
+   }
+  },
+  {
+   "text": "On a triple the vertex labels are $(x,xg,xgh)$. Its three edge labels, with their bases, are $(x,g)$ for $01$, $(xg,h)$ for $12$, and $(x,gh)$ for $02$. An identification from the later fibre to the earlier fibre composes as $\\varepsilon_{02}=\\varepsilon_{01}\\circ\\varepsilon_{12}$ by the definition of the descent cocycle written in the statement. Thus the order is first the $h$ arrow and then the $g$ arrow. In constant coefficient fibre coordinates the two matrices or automorphisms are $c(g),c(h)$, giving $c(gh)=c(g)c(h)$. Generally the $12$ identification is pulled back along the moved base; for structure-ring matrix coefficients its value is $g(c(h))$, and the equation is $c(gh)=c(g)g(c(h))$. This explains why the coefficient action cannot be silently dropped, while giving exactly the untwisted convention used for constant coefficients by the parent item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), continuous-coefficient open direct image; agent expansion of the generic-field Cech coordinate subargument of lem-sfb-field-separable-cech-coordinates, using the assumed tensor formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-profinite-limit-function-factorization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-sfb-profinite-test-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 0BU2 combined with algebra.tex Tag 00DD, limits.tex Tag 01YW, topology.tex Tags 08ZY/08ZZ, and explicit tensor-coordinate calculations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Cech nerve of the separable closure cover is the inverse limit of finite Galois products with face maps multiplying adjacent group increments",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.cechNerveTerminalFrom\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [CategoryTheory.Limits.HasFiniteProducts C] → C → CategoryTheory.SimplicialObject C\", \"doc\": \"For a category $\\\\mathcal{C}$ with finite products and an object $X \\\\in \\\\mathcal{C}$, this defines the Cech nerve simplicial object where: \\n- The $n$-th object is the product of $X$ with itself $n+1$ t\"}\n  {\"name\": \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    (f : CategoryTheory.Arrow C) →\\n      [inst_1 : ∀ (n : ℕ), CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom] →\\n        CategoryTheory.SplitEpi f.hom →\\n          (n : ℕ) →\\n            f.cechNerve.obj (\", \"doc\": \"For a morphism $ f : X \\to Y $ in a category $\\\\mathcal{C}$ with existing wide pullbacks and a split epimorphism $ S $, this defines a family of morphisms $ s_n $ from the $ n $-th level to the $ (n+1) \"}\n  {\"name\": \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_succ\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (f : CategoryTheory.Arrow C)\\n  [inst_1 : ∀ (n : ℕ), CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (S : CategoryTheory.SplitEpi f.hom) (n : ℕ) (i : Fin (n + 1)),\\n  CategoryTheory.CategoryStruct.comp (Ca\", \"doc\": \"For a morphism $f: X \\to Y$ in a category $\\\\mathcal{C}$ with wide pullbacks and a split epimorphism $S$, the composition of the $n$-th extra degeneracy map $s_n$ with the projection $\\\\pi_{i+1}$ from th\"}\n  {\"name\": \"classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve\", \"module\": \"Mathlib/RepresentationTheory/Homological/Resolution\", \"type\": \"(G : Type u) →\\n  [Monoid G] → (CategoryTheory.Arrow.mk (CategoryTheory.Limits.terminal.from G)).augmentedCechNerve.ExtraDegeneracy\", \"doc\": \"For a monoid $G$, this constructs an extra degeneracy structure on the augmented Čech nerve of the terminal morphism $G \\to \\top$ in the category of types. The structure provides additional degeneracy m\"}\n  {\"name\": \"CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s_comp_π_0\", \"module\": \"Mathlib/AlgebraicTopology/ExtraDegeneracy\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (f : CategoryTheory.Arrow C)\\n  [inst_1 : ∀ (n : ℕ), CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  (S : CategoryTheory.SplitEpi f.hom) (n : ℕ),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.Arrow\", \"doc\": \"For any natural number $n$, the composition of the $n$-th extra degeneracy map $s_n$ with the first projection $\\\\pi_0$ from the wide pullback equals the composition of the base morphism $f$ and the se\"}\n  {\"name\": \"CategoryTheory.Arrow.cechNerve\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (f : CategoryTheory.Arrow C) →\\n      [∀ (n : ℕ), CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom] →\\n        CategoryTheory.SimplicialObject C\", \"doc\": \"For a category $\\\\mathcal{C}$ and a morphism $f: X \\\\to Y$ in $\\\\mathcal{C}$, the Čech nerve is a simplicial object in $\\\\mathcal{C}$ where the $n$-th object is the $(n+1)$-fold wide pullback of $f$ along\"}\n  {\"name\": \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop)\\n  {L₁ L₂ : FiniteGaloisIntermediateField k K} (h : L₁ ⟶ L₂),\\n  (CategoryTheory.ConcreteCategory.hom ((finGaloi\", \"doc\": \"For any element $g$ in the inverse limit profinite Galois group of a Galois extension $K/k$, and for any morphism $h:L_1 \\\\to L_2$ between finite Galois intermediate fields, applying the Galois group f\"}\n  {\"name\": \"CategoryTheory.Arrow.cechNerve_map\", \"module\": \"Mathlib/AlgebraicTopology/CechNerve\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (f : CategoryTheory.Arrow C)\\n  [inst_1 : ∀ (n : ℕ), CategoryTheory.Limits.HasWidePullback f.right (fun x => f.left) fun x => f.hom]\\n  {X Y : SimplexCategoryᵒᵖ} (g : X ⟶ Y),\\n  f.cechNerve.map g =\\n    CategoryTheory.Limits.WidePullback.lift (Cat\", \"doc\": \"For a category $\\\\mathcal{C}$ and a morphism $f: X \\\\to Y$ in $\\\\mathcal{C}$, the Čech nerve map induced by a morphism $g: X \\\\to Y$ in the opposite simplex category $\\\\Delta^\\\\text{op}$ is defined using th\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the abstract Cech nerve and Krull group limit do not identify the affine tensor-coordinate nerve or its base-vertex move"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum of tensor powers of a separable closure is the profinite absolute Galois group nerve with cumulative product vertex maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (K : Type u_2) (R : Type u_3) (S : Type u_4) [inst : Field K] [inst_1 : CommRing R] [inst_2 : CommRing S]\\n  [inst_3 : Algebra R K] [inst_4 : Algebra R S] (L : Type u_5) [inst_5 : Field L] [inst_6 : Algebra R L]\\n  [inst_7 : Algebra K L] [inst_8 : IsScalarTower R K L] [IsPurelyInseparable K L],\\n  Is\", \"doc\": \"Let $ R $ be a commutative semiring, $ K $ and $ S $ be $ R $-algebras, and $ L $ be a field extending $ K $ as a purely inseparable field extension. The map induced by the tensor product $ K \\\\otimes_\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/Homeomorph\", \"type\": \"∀ (k : Type u_1) (K : Type u_2) (R : Type u_3) [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  [inst_3 : CommRing R] [inst_4 : Algebra k R] [IsPurelyInseparable k K],\\n  IsHomeomorph (PrimeSpectrum.comap (algebraMap R (TensorProduct k R K)))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"InfiniteGalois.algEquivToLimit\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_3) →\\n  (K : Type u_4) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          Gal(K/k) →* ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop\", \"doc\": \"The monoid homomorphism from the Galois group $\\\\text{Gal}(K/k)$ to the limit of the profinite Galois group functor, which maps each automorphism $\\\\sigma$ to the compatible family of its restrictions t\"}\n  {\"name\": \"InfiniteGalois.asProfiniteGaloisGroupFunctor\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_3) →\\n  (K : Type u_4) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] → CategoryTheory.Functor (FiniteGaloisIntermediateField k K)ᵒᵖ ProfiniteGrp.{u_4}\", \"doc\": \"The functor from the opposite category of finite Galois intermediate fields in a Galois extension $K/k$ to the category of profinite groups, obtained by composing the finite Galois group functor (whic\"}\n  {\"name\": \"InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop)\\n  {L₁ L₂ : FiniteGaloisIntermediateField k K} (h : L₁ ⟶ L₂),\\n  (CategoryTheory.ConcreteCategory.hom ((finGaloi\", \"doc\": \"For any element $g$ in the inverse limit profinite Galois group of a Galois extension $K/k$, and for any morphism $h:L_1 \\\\to L_2$ between finite Galois intermediate fields, applying the Galois group f\"}\n  {\"name\": \"InfiniteGalois.limitToAlgEquiv\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"{k : Type u_3} →\\n  {K : Type u_4} →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          [IsGalois k K] →\\n            ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop → Gal(K/k)\", \"doc\": \"The function constructs an algebra equivalence (field automorphism) of $ K $ induced by an element $ g $ of the profinite Galois group $ \\\\text{Gal}(K/k) $, which fixes the base field $ k $ and preserv\"}\n  {\"name\": \"InfiniteGalois.mk_toAlgEquivAux\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"∀ {k : Type u_3} {K : Type u_4} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] [inst_3 : IsGalois k K]\\n  (g : ↑(ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)).toProfinite.toTop) (x : K)\\n  (L : FiniteGaloisIntermediateField k K) (hx' : InfiniteGalois.toAlgEquivAux✝\", \"doc\": \"For any element $g$ in the profinite Galois group $\\\\mathrm{Gal}(K/k)$, any $x \\\\in L$ where $L$ is a finite Galois intermediate field, and any $x \\\\in L$, the automorphism of $K$ induced by $g$ evaluate\"}\n  {\"name\": \"InfiniteGalois.profiniteGalGrpIsoLimit\", \"module\": \"Mathlib/FieldTheory/Galois/Profinite\", \"type\": \"(k : Type u_3) →\\n  (K : Type u_4) →\\n    [inst : Field k] →\\n      [inst_1 : Field K] →\\n        [inst_2 : Algebra k K] →\\n          [inst_3 : IsGalois k K] →\\n            InfiniteGalois.profiniteGalGrp k K ≅ ProfiniteGrp.limit (InfiniteGalois.asProfiniteGaloisGroupFunctor k K)\", \"doc\": \"For an infinite Galois extension $ K/k $, the profinite Galois group $ \\\\text{Gal}(K/k) $ is continuously isomorphic to the inverse limit of the profinite Galois groups of its finite Galois subextensio\"}",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the abstract Cech nerve and Krull group limit do not identify the affine tensor-coordinate nerve or its base-vertex move"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CechNerve\", \"Galois\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the abstract Cech nerve and Krull group limit do not identify the affine tensor-coordinate nerve or its base-vertex move"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]ech|cechNerve).*(Galois|profinite)|Galois.*([Cc]ech|cechNerve)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no exact match: the abstract Cech nerve and Krull group limit do not identify the affine tensor-coordinate nerve or its base-vertex move"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois Cech nerve identification with profinite powers and face degeneracy maps",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(cechNerve|[Cc]ech).*(Galois|profinite)|Galois.*(cechNerve|[Cc]ech)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Cech nerves, the Galois group limit, and locally constant algebra structures do not give the tensor-coordinate scheme identification with its semilinear first face"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor powers of a separable closure as locally constant functions on powers of the absolute Galois group with Cech face maps",
+   "results": "OK 8 hits: LocallyConstant.instPow, separableClosure, LocallyConstant.instCommGroup, Field.absoluteGaloisGroup, Field.instGroupAbsoluteGaloisGroup, Condensed.locallyConstantPresheaf, Condensed.lanSheafProfinite, IsSepClosure.isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Cech nerves, the Galois group limit, and locally constant algebra structures do not give the tensor-coordinate scheme identification with its semilinear first face"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CechNerve\", \"Galois\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Cech nerves, the Galois group limit, and locally constant algebra structures do not give the tensor-coordinate scheme identification with its semilinear first face"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Cech nerve of a separable closure is the profinite absolute Galois nerve with adjacent multiplication face maps",
+   "results": "OK 8 hits: classifyingSpaceUniversalCover.extraDegeneracyAugmentedCechNerve, CategoryTheory.cechNerveTerminalFrom, CategoryTheory.SimplicialObject.cechNerve, CategoryTheory.SimplicialObject.cechNerve_obj, CategoryTheory.Arrow.cechNerve, CategoryTheory.SimplicialObject.cechNerveEquiv_apply, CategoryTheory.SimplicialObject.augmentedCechNerve, CategoryTheory.Arrow.AugmentedCechNerve.ExtraDegeneracy.s",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Cech nerves, the Galois group limit, and locally constant algebra structures do not give the tensor-coordinate scheme identification with its semilinear first face"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spectrum of tensor powers of a separable closure equals inverse limit of finite Galois disjoint unions with cumulative vertex maps",
+   "results": "OK 8 hits: InfiniteGalois.algEquivToLimit, InfiniteGalois.limitToAlgEquiv, PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable, PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable, InfiniteGalois.mulEquivToLimit, InfiniteGalois.limitToAlgEquiv_apply, InfiniteGalois.asProfiniteGaloisGroupFunctor, InfiniteGalois.proj",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract Cech nerves, the Galois group limit, and locally constant algebra structures do not give the tensor-coordinate scheme identification with its semilinear first face"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-separable-cech-coordinates",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), open direct image for continuous coefficients: generic-field Cech coordinates used by lem-sfb-normal-continuous-algcl-monodromy before finite coefficient models; field-coordinate subargument: Agent expansion of Stacks fields.tex Tag 0BU2 (lemma-infinite-galois-limit), algebra.tex Tag 00DD (lemma-tensor-products-commute-with-limits), limits.tex Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit); explicit cumulative-vertex substitution. Returned item proof steps 3–4.",
+   "via": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-galois-limit-nerve-faces",
+  "worker": "stage1",
+  "summary": "Q45: reused existing Galois-limit, normal-extension, finite-subextension, profinite-factorization and affine-spectrum Mathlib leaves. Wrote the tensor-colimit universal property and all coordinate formulas explicitly, including degree zero. Corrected the ring/scheme composition order in the base-vertex notation and made the coefficient twist of face zero explicit; the untwisted cocycle convention is specified for constant coefficient fibres. No new nodes or Lean files.",
+  "blueprint": "Continuous-coefficient generic-field Cech subargument of det-thm-sf-ctf-stability-direct-images proof (3), through lem-sfb-field-separable-cech-coordinates; finite-coordinate to profinite-coordinate passage and the faces/degeneracies. Blueprint searches for profinite Cech, cumulative, tensor powers, Galois limit, locally constant functions found no equivalent blueprint node. Existing blueprint.from ancestry retained as supplied."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-0d92ddac3",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-0d92ddac3 (reviewer sub-agent of L); spot-checked: Read the delivery in full: one commit containing the item and the Q45 report, no new nodes, no repair note (so the re-split rule does not apply); the base item was unsplit with no proof. Two statement changes, both named in the report and neither a weakening. (1) The base's '$xg$ = precompose by $\\operatorname{Spec}g$' becomes the ring-point convention $xg=x\\circ g$, $tg=\\operatorname{Spec}(g)\\circ t$. Checked with $\\theta$: the j-th projection ring map is $a\\mapsto(g_1\\cdots g_j)(a)$, so the cumulative vertex labels are unchanged. (2) The base's undefined '$c(gh)=c(g)c(h)$' becomes $\\varepsilon_{02}=\\varepsilon_{01}\\circ\\varepsilon_{12}$, with the untwisted form for constant coefficient fibres. The twist is real: for $\\mathbb R\\subset\\mathbb C$, $d_0^*a=(g\\mapsto g(a))$ but $d_1^*a=(g\\mapsto a)$. The parent lem-sfb-field-separable-cech-coordinates is still correct: its $R_A$ coefficients have a trivial base-vertex action by lem-sfb-galois-continuous-section-naturality (its step 3). Maintainer note: the parent's step 2 should say 'in constant coefficient fibres'. Checked every cited statement: the Krull limit needs Galois (from separable-closure-exists-galois (2)); normal-subextension extension needs $\\Omega/k$ and $E/k$ normal; the factorization leaf needs a small cofiltered diagram in Prof, any set A, locally constant h; fibre product, Spec colimit-limit, finite coproduct; def-sfb-profinite-test-objects $X[S]=\\lim\\coprod_{S_i}X$, with cofinality written out. All proof citations are Mathlib leaves or definitions, so no tool_uses are needed. Recomputed face 0 ($g_1(f(g_2,\\dots))$), interior faces ($g_ig_{i+1}$), the last face, degeneracies (inserted 1, $p(a_ia_{i+1})$) and the cocycle with base $xg$ on edge 12. Small cases: q=0, G=1, $\\mathbb R\\subset\\mathbb C$, $S_3$ order. Duplicates: the pointed-limit-cover Čech nodes concern a different object (a limit T over general X, with $\\pi_1$, and no ring formulas or semilinear $d_0^*$), so they do not duplicate the item. Stacks 0BU2 and 00DD read at the cited labels; no SGA. Details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GaloisLimitNerveFaces",
+  "declaration": "AlgebraicGeometry.ProEtale.galois_limit_nerve_faces",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.galois_limit_nerve_faces",
+   "AlgebraicGeometry.ProEtale.galois_limit_nerve_constant_cocycle"
+  ],
+  "file": "lean/Sheaf/Paper/GaloisLimitNerveFaces.lean",
+  "statement": "theorem galois_limit_nerve_faces (k Ω : Type u) [Field k] [Field Ω] [Algebra k Ω] [IsSepClosure k Ω] (θ : ∀ (E : FiniteGaloisIntermediateField k Ω) (q : ℕ), (Ω ⊗[k] (⨂[k] _ : Fin q, E)) ≃ₐ[Ω] ((Fin q → (E ≃ₐ[k] E)) → Ω)) (hθ : ∀ (E : FiniteGaloisIntermediateField k Ω) (q : ℕ) (a₀ : Ω) (a : Fin q → E) (g : Fin q → (E ≃ₐ[k] E)), θ E q (a₀ ⊗ₜ[k] PiTensorProduct.tprod k a) g = a₀ * ∏ j : Fin q, (((List.ofFn g).take (j.val + 1)).prod (a j) : Ω)) (hθcompat : ∀ (E F : FiniteGaloisIntermediateField k Ω) (h : E ≤ F) (q : ℕ) (a₀ : Ω) (a : Fin q → E) (g : Fin q → (F ≃ₐ[k] F)), θ F q (a₀ ⊗ₜ[k] PiTensorProduct.tprod k (fun j ↦ (⟨(a j : Ω), h (a j).property⟩ : F))) g = θ E q (a₀ ⊗ₜ[k] PiTensorProduct.tprod k a) (fun j ↦ finGaloisGroupMap (homOfLE h).op (g j))) : ∃ e : ∀ q : ℕ, (Ω ⊗[k] (⨂[k] _ : Fin q, Ω)) ≃ₐ[Ω] LocallyConstant (Fin q → (Ω ≃ₐ[k] Ω)) Ω, (∀ (q : ℕ) (a₀ : Ω) (a : Fin q → Ω) (g : Fin q → (Ω ≃ₐ[k] Ω)), e q (a₀ ⊗ₜ[k] PiTensorProduct.tprod k a) g = a₀ * ∏ j : Fin q, ((List.ofFn g).take (j.val + 1)).prod (a j)) ∧ (∀ q : ℕ, ∃ (D : FiniteGaloisIntermediateField k Ω ⥤ CommAlgCat.{u} Ω) (o : ∀ E : FiniteGaloisIntermediateField k Ω, D.obj E ≅ CommAlgCat.of Ω ((Fin q → (E ≃ₐ[k] E)) → Ω)) (ι : D ⟶ (Functor.const _).obj (CommAlgCat.of Ω (LocallyConstant (Fin q → (Ω ≃ₐ[k] Ω)) Ω))), (∀ (E F : FiniteGaloisIntermediateField k Ω) (h : E ≤ F) (f : (Fin q → (E ≃ₐ[k] E)) → Ω) (g : Fin q → (F ≃ₐ[k] F)), ((o F).hom.hom ((D.map (homOfLE h)).hom ((o E).inv.hom f))) g = f (fun j ↦ finGaloisGroupMap (homOfLE h).op (g j))) ∧ (∀ (E : FiniteGaloisIntermediateField k Ω) (f : (Fin q → (E ≃ₐ[k] E)) → Ω) (g : Fin q → (Ω ≃ₐ[k] Ω)), (@id (LocallyConstant (Fin q → (Ω ≃ₐ[k] Ω)) Ω) ((ι.app E).hom ((o E).inv.hom f))) g = f (fun j ↦ AlgEquiv.restrictNormalHom E (g j))) ∧ Nonempty (IsColimit (Cocone.mk _ ι)) ∧ Nonempty (IsLimit (Scheme.Spec.mapCone (((forget₂ (CommAlgCat Ω) CommRingCat).mapCocone (Cocone.mk _ ι)).op)))) ∧ (∀ (q : ℕ) (A : Type v) [Fintype A] [TopologicalSpace A] [DiscreteTopology A] (f : C((Fin q → (Ω ≃ₐ[k] Ω)), A)), ∃ (E : FiniteGaloisIntermediateField k Ω) (fE : (Fin q → (E ≃ₐ[k] E)) → A), ∀ g : Fin q → (Ω ≃ₐ[k] Ω), f g = fE (fun j ↦ AlgEquiv.restrictNormalHom E (g j))) ∧ ∃ (r : ∀ q : ℕ, (Arrow.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).cechNerve.obj (op ⦋q⦌) ≅ Spec (.of (Ω ⊗[k] (⨂[k] _ : Fin q, Ω)))) (c : ∀ q : ℕ, Spec (.of (LocallyConstant (Fin q → (Ω ≃ₐ[k] Ω)) Ω)) ≅ ((profiniteToProEtOf (Spec (.of Ω))).obj (Profinite.of (Fin q → (Ω ≃ₐ[k] Ω)))).left) (s : ∀ q : ℕ, (Arrow.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).cechNerve.obj (op ⦋q⦌) ≅ ((profiniteToProEtOf (Spec (.of Ω))).obj (Profinite.of (Fin q → (Ω ≃ₐ[k] Ω)))).left) (F : ∀ (n m : ℕ) (_α : SimplexCategory.mk n ⟶ SimplexCategory.mk m), LocallyConstant (Fin n → (Ω ≃ₐ[k] Ω)) Ω →ₐ[k] LocallyConstant (Fin m → (Ω ≃ₐ[k] Ω)) Ω), (∀ q : ℕ, (c q).inv ≫ Spec.map (CommRingCat.ofHom (e q).toRingHom) ≫ (r q).inv = (s q).inv) ∧ (∀ q : ℕ, (c q).hom ≫ ((profiniteToProEtOf (Spec (.of Ω))).obj (Profinite.of (Fin q → (Ω ≃ₐ[k] Ω)))).hom = Spec.map (CommRingCat.ofHom LocallyConstant.constRingHom)) ∧ (∀ q : ℕ, (c q).hom ≫ pullback.fst (toSpecZ ((profiniteToProEt.obj (Profinite.of (Fin q → (Ω ≃ₐ[k] Ω)))).left)) (toSpecZ (Spec (.of Ω))) = Spec.map (CommRingCat.ofHom (LocallyConstant.mapRingHom (Int.castRingHom Ω)))) ∧ (∀ q : ℕ, (r q).inv ≫ WidePullback.π (fun _ : Fin (q + 1) ↦ Spec.map (CommRingCat.ofHom (algebraMap k Ω))) 0 = Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.includeLeft : Ω →ₐ[Ω] Ω ⊗[k] (⨂[k] _ : Fin q, Ω)).toRingHom)) ∧ (∀ (q : ℕ) (j : Fin q), (r q).inv ≫ WidePullback.π (fun _ : Fin (q + 1) ↦ Spec.map (CommRingCat.ofHom (algebraMap k Ω))) j.succ = Spec.map (CommRingCat.ofHom ((Algebra.TensorProduct.includeRight : (⨂[k] _ : Fin q, Ω) →ₐ[k] Ω ⊗[k] (⨂[k] _ : Fin q, Ω)).comp (PiTensorProduct.singleAlgHom (R := k) j)).toRingHom)) ∧ (∀ (q : ℕ) (B : Type u) [CommRing B] (x : Ω →+* B) (g : Fin q → (Ω ≃ₐ[k] Ω)) (j : Fin (q + 1)), Spec.map (CommRingCat.ofHom (x.comp (LocallyConstant.evalRingHom g))) ≫ (c q).hom ≫ (s q).inv ≫ WidePullback.π (fun _ : Fin (q + 1) ↦ Spec.map (CommRingCat.ofHom (algebraMap k Ω))) j = Spec.map (CommRingCat.ofHom (x.comp (((List.ofFn g).take j.val).prod).toRingHom))) ∧ (∀ (n m : ℕ) (α : SimplexCategory.mk n ⟶ SimplexCategory.mk m) (f : LocallyConstant (Fin n → (Ω ≃ₐ[k] Ω)) Ω) (g : Fin m → (Ω ≃ₐ[k] Ω)), F n m α f g = ((List.ofFn g).take (α.toOrderHom 0).val).prod (f (fun j ↦ (((List.ofFn g).take (α.toOrderHom j.castSucc).val).prod)⁻¹ * ((List.ofFn g).take (α.toOrderHom j.succ).val).prod))) ∧ (∀ (n m : ℕ) (α : SimplexCategory.mk n ⟶ SimplexCategory.mk m), (s m).inv ≫ (Arrow.mk (Spec.map (CommRingCat.ofHom (algebraMap k Ω)))).cechNerve.map α.op ≫ (s n).hom = (c m).inv ≫ Spec.map (CommRingCat.ofHom (F n m α).toRingHom) ≫ (c n).hom) ∧ (∀ f : LocallyConstant (Fin 1 → (Ω ≃ₐ[k] Ω)) Ω, F 1 2 (SimplexCategory.δ (1 : Fin 3)) f = F 1 2 (SimplexCategory.δ (2 : Fin 3)) f * F 1 2 (SimplexCategory.δ (0 : Fin 3)) f ↔ ∀ g h : Ω ≃ₐ[k] Ω, f (fun _ ↦ g * h) = f (fun _ ↦ g) * g (f (fun _ ↦ h)))",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b03446250",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Only the lean field changed; statement verbatim; report has Worker report + Second reading. Checked every clause: IsSepClosure, Krull group with composition mul; θ pinned by hθ (hθcompat redundant); e pinned by cumulative formula; D/o/ι fixed to restriction with IsColimit plus Spec IsLimit; finite-map factorization in its own universe v. r, c, s forced by wide-pullback projections, both test-object pullback legs (profiniteToProEtOf read in side-live ModuleObject/Basic.lean:381/204) and s.inv = c.inv ≫ Spec e ≫ r.inv. Vertex x∘(g1⋯gj) verified; F formula recomputed: d0 = g1(f(g2..)) k-linear only, interior faces gi gi+1, last face drops gq, degeneracies insert 1; agrees with parent face_coordinates/reindex. Twisted cocycle f(gh)=f(g)g(f(h)) and constant cocycle c(gh)=c(g)c(h) both in the node's ε02=ε01∘ε12 order. Edge cases q=0, trivial G, empty A, zero ring B covered. No defs, only sorry, docstrings carry the source place, blueprint tag and 8 steps. k/Ω share universe u (forced by the test-object API, harmless). No duplicate (parent module is downstream, GaloisCech treats a different form). No compile (no changes)."
+ }
+}

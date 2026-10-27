@@ -1,0 +1,252 @@
+{
+ "id": "lem-sf-etale-proper-open-tensor-square",
+ "kind": "statement",
+ "title": "Cartesian proper/open interchange and its tensor square on arbitrary etale bases",
+ "statement": "Let $A$ be a finite commutative ring, and let\n$$\\begin{array}{ccc}U&\\xrightarrow{k}&V\\\\ r\\downarrow&&\\downarrow p\\\\ W&\\xrightarrow{i}&Z\\end{array}$$\nbe a Cartesian square of arbitrary schemes [def-pc-fibre-product], where $p$ is proper [def-weil-proper-morphism] and $i$ is an open immersion [def-weil-open-immersion]. Thus $r$ is proper and $k$ is open. Use ordinary unbounded constant-$A$ module derived categories [def-weil-pbc-derived-categories]. Write $P_a=a^*$ for exact inverse image, $R_a=Ra_*$ for its canonically adjoint derived direct image [def-kun-projection-formula-map], and $J_j=Dj_!$ for exact extension by zero [lem-weil-pbc-extension-by-zero-exact]. Let $\\beta:P_pJ_i\\xrightarrow{\\sim}J_kP_r$ be the canonical degreewise open base-change isomorphism: on the inverse image of $W$ it is the pullback identification, and outside it both sheaves are zero. Define\n$$\\Gamma_M=R_p(J_k\\varepsilon_{r,M})\\circ R_p(\\beta_{R_rM})\\circ\\eta_{p,J_iR_rM}:J_iR_rM\\longrightarrow R_pJ_kM.$$\nThen $\\Gamma$ is a natural isomorphism. Write $\\pi_a$ for the counit-defined projection of [def-kun-projection-formula-map] and $\\delta_j:J_jB\\otimes_A^LN\\xrightarrow{\\sim}J_j(B\\otimes_A^LP_jN)$ for the canonical open tensor map [lem-pur-etale-open-derived-tensor]. For every $M\\in D(U_{\\mathrm{et}},A)$ and $N\\in D(Z_{\\mathrm{et}},A)$,\n$$R_p(\\delta_{k;M,P_pN})\\circ\\pi_{p;J_kM,N}\\circ(\\Gamma_M\\otimes1_N)=\\Gamma_{M\\otimes P_rP_iN}\\circ J_i(\\pi_{r;M,P_iN})\\circ\\delta_{i;R_rM,N}.$$\nInsert the canonical tensor and pullback-composition identifications, including $P_rP_iN\\cong P_kP_pN$ [lem-sfb-ringed-derived-monoidal-comparisons]. This is an equality of the specified morphisms in the unbounded derived category; no quasi-compactness of $i,k$, Noetherianity, constructibility, Tor-amplitude or invertibility of the projection maps is required.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, lemma-shriek-proper-and-open, torsion-ring case (b), Cartesian open specialization. Tensor equation is the additional agent mate calculation, using sites-cohomology.tex Tag 0E48, remark-compatible-with-diagram, and Tag 0GL1, lemma-j-shriek-and-tensor. Its beta/unit/counit normalization is also OpenImmersionLowerShriekLowerStarExchange.lean lines 97-126; it is not a claim that 0F7B states the tensor equation."
+ },
+ "stmt_deps": [
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sfb-ringed-derived-monoidal-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "A finite ring is additively torsion (Mathlib isAddTorsion_of_finite). Apply the already proved source theorem AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring to the given Cartesian square. This theorem implements the proper-base-change support argument: open restriction of the specified mate is invertible by the open units; on the closed complement its source is zero by extension-by-zero vanishing and its target is zero by unbounded torsion-ring proper base change [lem-kun-proper-base-change-torsion-ring]. Open-closed conservativity gives invertibility, componentwise and hence naturally. This replaces the separate stalk/cone/full-faithfulness reconstruction, with the very same exchange map.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/OpenImmersionLowerShriekLowerStarExchange.lean",
+    "place": "isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring; Stacks more-etale.tex Tag 0F7B(b)"
+   }
+  },
+  {
+   "text": "Apply AlgebraicGeometry.Etale.mixed_projection from Sheaf.AlgebraicGeometry.CompactificationProjectionComposition to B = ModuleCat A, the given square, and arbitrary M,N; take its symmetry. This existing private theorem, accessed through Lean import all without changing its original module, is the unrestricted open tensor/base-change mate calculation: it uses the canonical left-derived pullback adjunctions [def-weil-pbc-adjunction-mate], the counit-defined projection maps [def-kun-projection-formula-map], and the open tensor/base-change identity [lem-asd-open-projection-exchange]. Its explicit last factor is derivedSquareUpperStarIso.hom. The four generic mate helpers and mixed_projection are reused in place, not copied. No properness or coefficient finiteness is required for this tensor equality.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-kun-projection-formula-map",
+    "lem-asd-open-projection-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/Sheaf/AlgebraicGeometry/CompactificationProjectionComposition.lean",
+    "place": "AlgebraicGeometry.Etale.mixed_projection (private, accessed through import all); existing fully proved generic mixed square; Stacks sites-cohomology.tex Tags 0GL1, 0B56"
+   }
+  },
+  {
+   "text": "Pair the invertibility from step 1 with the symmetric mixed projection identity from step 2, for every M,N. This is exactly the original conjunction; no projection map is inverted.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-proper-base-change-torsion-ring",
+  "def-weil-pbc-adjunction-mate",
+  "def-kun-projection-formula-map",
+  "lem-asd-open-projection-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B(b), applying the proved source torsion-ring interchange theorem; tensor calculation by import all and direct application of the existing private mixed_projection theorem in Sheaf.AlgebraicGeometry.CompactificationProjectionComposition (Stacks sites-cohomology.tex Tags 0GL1 and 0B56). E1 repair removes all five duplicate helpers; the original module is unchanged. No new statements or holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|properOpen|shriek.*[Ee]xchange|exchange.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T08:00:07Z\", \"tool\": \"grep\", \"query\": \"openImmersionLowerShriek|properOpen|shriek.*[Ee]xchange|exchange.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\"], \"digest\": \"99284e23a908bde4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The proper open interchange isomorphism for etale sheaves over a torsion ring commutes with the projection formula",
+   "results": "{\"t\": \"2026-10-22T08:00:07Z\", \"tool\": \"leansearch\", \"query\": \"The proper open interchange isomorphism for etale sheaves over a torsion ring commutes with the projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.appIso\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.res_π\", \"AlgebraicGeometry.Scheme.Hom.appIso_inv_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\", \"RingHom.Etale.respectsIso\", \"AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc\"], \"digest\": \"949b239f37aebd97\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"projection\"",
+   "results": "{\"t\": \"2026-10-22T08:00:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"projection\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of arbitrary schemes with proper vertical maps and open horizontal maps, extension by zero and unbounded derived pushforward interchange compatibly with derived tensor projection maps",
+   "results": "{\"t\": \"2026-10-22T08:00:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a cartesian square of arbitrary schemes with proper vertical maps and open horizontal maps, extension by zero and unbounded derived pushforward interchange compatibly with derived tensor projection maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pushforwardComp\"], \"digest\": \"1db447e549e36377\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula maps commute with the mate of open extension by zero base change along a proper map",
+   "results": "{\"t\": \"2026-10-22T08:12:44Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula maps commute with the mate of open extension by zero base change along a proper map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"Profinite.NobelingProof.iso_map\", \"Profinite.IndexFunctor.map_comp_π_app\", \"Profinite.NobelingProof.projRestricts_eq_comp\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\"], \"digest\": \"eb7067c1ba7c820c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the returned signatures; these are ordinary structure-sheaf pushforward/restriction or unrelated algebra/topology, not the stated unbounded etale construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "{\"t\": \"2026-10-22T13:49:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"mateEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv and its unit/counit/pasting identities are generic categorical ingredients; none states proper/open invertibility or its derived tensor equation."
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek|properOpen|shriek.*[Ee]xchange|exchange.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-22T13:49:06Z\", \"tool\": \"grep\", \"query\": \"openImmersionLowerShriek|properOpen|shriek.*[Ee]xchange|exchange.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Enriched/Ordinary/Basic.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Enriched/FunctorCategory.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\"], \"digest\": \"2e61dc92905f95ac\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: 13 hits concern monoidal whisker exchange and localization; none is the etale proper/open construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward commutes with open extension by zero on unbounded derived etale sheaves over a finite ring",
+   "results": "{\"t\": \"2026-10-22T13:49:07Z\", \"tool\": \"leansearch\", \"query\": \"Proper pushforward commutes with open extension by zero on unbounded derived etale sheaves over a finite ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward\", \"SheafOfModules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"PresheafOfModules.pushforward₀_obj\", \"PresheafOfModules.pushforward₀\", \"SheafOfModules.pushforwardSections\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"357a907237cf120f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned sheaf/module pushforward definitions and compositors are underived and contain no etale proper/open interchange."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper pushforward of unbounded etale sheaves with finite coefficients commutes with open extension by zero and projection formula maps",
+   "results": "{\"t\": \"2026-10-22T13:49:07Z\", \"tool\": \"leanfinder\", \"query\": \"Proper pushforward of unbounded etale sheaves with finite coefficients commutes with open extension by zero and projection formula maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"SheafOfModules.pushforward_map_val\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\"], \"digest\": \"de0e21cf9907523f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme module compositors, scalar adjunction computations or rigid-category mates do not state this unbounded etale comparison and tensor equality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula transformations commute with the adjunction mate of extension by zero base change",
+   "results": "{\"t\": \"2026-10-22T13:51:00Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula transformations commute with the adjunction mate of extension by zero base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.homEquiv_extendScalarsComp\", \"LightCondensed.ihomPoints_symm_comp\", \"CategoryTheory.leftAdjointMate_comp\", \"ModuleCat.extendRestrictScalarsAdj_homEquiv_apply\", \"CategoryTheory.coevaluation_comp_leftAdjointMate_assoc\", \"CategoryTheory.coevaluation_comp_leftAdjointMate\", \"CategoryTheory.leftAdjointMate_comp_evaluation\", \"CategoryTheory.tensorLeftHomEquiv_tensor\"], \"digest\": \"8c799643dd1b1959\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme module compositors, scalar adjunction computations or rigid-category mates do not state this unbounded etale comparison and tensor equality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-compact-projection-coherence",
+  "date": "2026-10-22",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Unit step 3, smooth case; thm-asd-smooth-tensor.proof.md paragraph 3, projection formula followed by the composite counit. The proper/open generator in the graph-factorization projection calculation. Computed ancestor is null: created.item stops at the maintainer-created smooth-dualizing node; the unit named above is the conceptual source, not a repaired provenance edge.",
+   "via": [
+    "lem-sf-etale-compact-projection-coherence",
+    "lem-sf-exceptional-tensor-transitivity",
+    "lem-sf-smooth-dualizing-complex-invertible"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-etale-proper-open-tensor-square",
+  "worker": "stage1",
+  "summary": "Six-step split with no new nodes. Prove open full faithfulness and proper pushforward support on arbitrary schemes; apply the existing fully-faithful mate-image theorem to the specified beta, then assemble its tensor equation from existing ordinary etale open-base-change tensor coherence and generic tensor-square mate transfer. Statement and provenance retained; no Noetherian or quasi-compact-open specialization.",
+  "blueprint": "Conceptual source: sk-prop-sf-rf-shriek-preservation step 3 and sk-prop-cohsm/thm-asd-smooth-tensor.proof.md, paragraph beginning By its definition as the transpose. This is the proper/open generator in the compact projection/counit calculation. The computed blueprint ancestor is null; preserve the inherited null from.node and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact localized module open adjunction, specialized to the small etale site; a foundational tool for the proper/open generator."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Specified termwise descent fixes the derived open adjunction units and counits."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Open-extension stalk formula for arbitrary schemes and opens; used degreewise for support."
+   },
+   {
+    "node": "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "why": "Exact open base change on complexes, including the empty pullback; a support tool without quasi-compactness assumptions."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Unbounded torsion-ring proper base change to geometric points; supplies support of the derived pushforward, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-kun-stalk-as-pullback",
+    "why": "Identifies geometric-point inverse image with the derived stalk used in the support test."
+   },
+   {
+    "node": "lem-weil-pbc-fully-faithful-mate-image",
+    "why": "Generic categorical invertibility criterion applied after independently proving support; no interchange node in this unit has this unrestricted domain."
+   },
+   {
+    "node": "lem-asd-open-projection-exchange",
+    "why": "Ordinary etale open tensor/base-change equality on arbitrary unbounded inputs; fixes the left-square tensor action before mating."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic monoidal composition coherence for the canonical pullback identifications, specialized to constant rings."
+   },
+   {
+    "node": "lem-sf-tensor-square-mate-transfer",
+    "why": "Generic categorical mixed-action mate identity; proves the required projection equation from the independently cited left-square identity."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Definition fixing the actual counit-transpose projection maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-asd-open-projection-exchange",
+  "def-kun-projection-formula-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-495e10e0c",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-495e10e0c (reviewer sub-agent of L); spot-checked: I read the item in full: six steps, no new nodes. The statement, stmt_deps, source and blueprint are identical to the live node. Live is still unsplit with no proof, so this is not a parallel supersession. There is no repair note, so this is a first split and not a re-split. No SGA is cited. I found no cycle: the 9844-node closure of its deps does not contain the item. Step 1: the exact j_!⊣j^* adjunction (pur site node on C/U=U_et) and the localized units (def-weil-exact-derived-adjunction) give a unit that is the identity, so J_j is fully faithful. The ebz-stalks clause 2, applied degreewise with exact stalks (sf stalk test, unbounded), gives zero stalks off the open. Step 2: for z̄∉W, U×_V V_z̄ = W×_Z SpecΩ = ∅. sbc 03S6 on complexes gives P_vJ_kM=0, and kun proper base change (any E, finite A is torsion with n=|A|, n=1 for the zero ring) gives P_z̄E=0. kun stalk-as-pullback identifies this with the stalk. This matches Stacks 0F0C (etale-cohomology l.18887) and 0F7B(b) (more-etale l.2460). Step 3: by the triangle identity the counit is invertible on W; off W both stalks are 0; so the cone is acyclic by the stalk test. Step 4: I matched fully-faithful-mate-image slot by slot (L1=P_r, L2=P_p, G=J_i, H=J_k, iso β). The def-weil-pbc-adjunction-mate component is exactly Γ_M, and a Yoneda check confirms the lemma. Step 5: asd-open-projection-exchange with (C,j,a,u,j')=(A,i,p,r,k) has β equal to the sbc termwise isomorphism and γ equal to δ. Its equation is the mate-transfer hypothesis. Advisory: the kun and sfb monoidal comparisons are the same canonical K-flat maps for constant rings. Step 6: sf-tensor-square-mate-transfer has g=Γ, and its π_h equals PF of def-kun-projection-formula-map. Its two composites are the item's two sides. Edge cases W=∅, i=id and p=id behave as expected, and no quasi-compactness is used. Batch-5 flag on lem-kun-proper-base-change-torsion-ring: proper base change is a general theorem, used here only for support. It is not an assumed statement or a trace-formula/PD proof step. Its closure contains only 9 generic pod/trf nodes (lisse-module objects, ring scalar extension, schematic density, affine limit, etc.), so I accept it, as for Q158. No duplicate nodes; all tool_uses accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleProperOpenTensorSquare",
+  "declaration": "AlgebraicGeometry.Etale.etaleProperOpenTensorSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProperOpenTensorSquare.lean",
+  "statement": "theorem etaleProperOpenTensorSquare (A : Type (u + 1)) [CommRing A] [Finite A] {U V W Z : Scheme.{u}} {r : U ⟶ W} {k : U ⟶ V} {i : W ⟶ Z} {p : V ⟶ Z} [IsProper p] [IsOpenImmersion i] [IsOpenImmersion k] (sq : IsPullback r k i p) : IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq) ∧ ∀ (M : DerivedCategoryModule A U) (N : DerivedCategoryModule A Z), ((-⊗ᴸ-(Z)[ModuleCat.{u + 1} A]).map ((openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq).app M)).app N ≫ ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) p).app (D((k)_!open[ModuleCat.{u + 1} A]).obj M)).app N ≫ R((p)_*[ModuleCat.{u + 1} A]).map (((derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} A) k).inv.app M).app (L((p)^*[ModuleCat.{u + 1} A]).obj N)) ≫ R((p)_*[ModuleCat.{u + 1} A]).map (D((k)_!open[ModuleCat.{u + 1} A]).map (((-⊗ᴸ-(U)[ModuleCat.{u + 1} A]).obj M).map ((derivedSquareUpperStarIso (ModuleCat.{u + 1} A) sq.toCommSq).hom.app N))) = ((derivedOpenImmersionLowerShriekProjectionIso (ModuleCat.{u + 1} A) i).inv.app (R((r)_*[ModuleCat.{u + 1} A]).obj M)).app N ≫ D((i)_!open[ModuleCat.{u + 1} A]).map (((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} A) r).app M).app (L((i)^*[ModuleCat.{u + 1} A]).obj N)) ≫ (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} A) sq).app (((-⊗ᴸ-(U)[ModuleCat.{u + 1} A]).obj M).obj (L((r)^*[ModuleCat.{u + 1} A]).obj (L((i)^*[ModuleCat.{u + 1} A]).obj N)))",
+  "branch": "sheaf-dag",
+  "by": "Q33",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the published normalized openImmersionLowerShriekLowerStarExchange (termwise exact inverse images) and the existing counit-defined projection and open tensor maps (canonical left-derived presentations of those same exact inverse images). The last left-hand factor explicitly inserts the canonical P_k P_p N to P_r P_i N identification. IsOpenImmersion k is the base-change consequence of sq and IsOpenImmersion i, exposed for the published open-extension API; it imposes no extra mathematical restriction. Both natural-isomorphism and tensor-square clauses are stated together, with arbitrary unbounded inputs and arbitrary schemes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bdd7f8b7",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, module, report and upstream sources. Γ = openImmersionLowerShriekLowerStarExchange (mate of inverse degreewise open base-change iso; _app lemma = unit_p, R_p(β), R_pJ_k(counit_r)); IsIso of whole NatTrans = 'natural isomorphism'. Tensor equation: π = rightDerivedLowerStarProjectionMap (counit transpose), δ = inverse of derivedOpenImmersionLowerShriekProjectionIso (direction checked), explicit derivedSquareUpperStarIso.hom (P_kP_p→P_rP_i) inserted as node permits; L vs D adjunction/composition isos compatible by upstream mapDerivedUpperStarLowerStarAdjunction_eq and conjugateEquiv_leftDerivedUpperStarComp_hom. Same equation proved sorry-free in private mixed_projection (CompactificationProjectionComposition.lean:307). Finite A : Type (u+1) per recorded convention; arbitrary schemes, unbounded, no qc/Noetherian; edge cases W=∅, i=id, p=id, zero ring OK. Only lean field changed; statement verbatim; sorry only; docstrings with source, blueprint and 6 steps; lines ≤97; no name clash; plain imports = proof_dep modules. Advisories: redundant [IsOpenImmersion k] instance needed by the API; IsIso conjunct immediate from upstream isIso_..._of_isAddTorsion_ring; sfb monoidal-comparison stmt_dep rendered by the canonical étale derivedSquareUpperStarIso. Not recompiled (no FIX)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261024T014510-L-2207051",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

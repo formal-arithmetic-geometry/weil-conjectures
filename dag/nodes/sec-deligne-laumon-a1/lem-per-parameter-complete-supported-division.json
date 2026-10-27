@@ -1,0 +1,272 @@
+{
+ "id": "lem-per-parameter-complete-supported-division",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Put $C=L[[Z]]$. Apply [lem-trf-homogeneous-continuous-formal-division] to the finite family $f_{i,0}=\\bar f_i$ in $C$: its order, homogeneous forms, diagram and indexed basis hypothesis are exactly the ones assumed here. Denote its supported quotient maps by $Q_i:C\\to C$ and remainder by $R:C\\to C$. Thus $g=\\sum_iQ_i(g)f_{i,0}+R(g)$ uniquely with the prescribed supports. They are $L$-linear, and, writing $\\operatorname{ord}_Z(0)=+\\infty$, satisfy $\\operatorname{ord}_Z Q_i(g)\\ge\\operatorname{ord}_Z g-d_i$ and $\\operatorname{ord}_Z R(g)\\ge\\operatorname{ord}_Z g$. Negative lower bounds impose no condition. Only the division and order clauses of the cited node are used.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "By the coefficient-family definition [def-weil-pbc-multivariate-power-series], an element of $B$ is equally a family of scalars indexed by $(a,\\gamma)\\in\\mathbf N^m\\times\\mathbf N^n$. Regroup it as $\\sum_a W^a g_a(Z)$ with $g_a\\in C$. Multiplication in this notation has coefficient $(gh)_a=\\sum_{b\\le a}g_bh_{a-b}$: this follows by regrouping the finite decompositions of a fixed pair $(a,\\gamma)$. In particular write $f_i=\\sum_aW^af_{i,a}$ and $h=\\sum_aW^ah_a$. The constraints on $Z$-support hold for a series exactly when they hold for each $W$-coefficient. Every family $(g_a)_a$ defines an element of $B$; no convergence in $Z$ of the family as $a$ varies is required.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "Construct $q_{i,a},r_a\\in C$ by induction on $|a|$. Once all smaller parameter degrees have been constructed, set\n$$e_a=h_a-\\sum_i\\sum_{0<b\\le a}q_{i,a-b}f_{i,b},\\qquad q_{i,a}=Q_i(e_a),\\quad r_a=R(e_a).$$\nThe inner sum is finite, and every $a-b$ in it has smaller total degree. For $a=0$ it is empty, so the initial values are $Q_i(h_0),R(h_0)$. The fibre division identity gives $h_a=\\sum_i\\sum_{b\\le a}q_{i,a-b}f_{i,b}+r_a$. Define $q_i=\\sum_aW^aq_{i,a}$ and $r=\\sum_aW^ar_a$ using Step 2. That coefficient identity for every $a$ proves $h=\\sum_iq_if_i+r$. Each coefficient has the required support by Step 1, so the whole series has it. This is a construction by parameter degree, not a claim that a chosen algebraic or regular coefficient lift exists.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "For uniqueness subtract two supported expressions for the same $h$ and induct on parameter degree. If all lower coefficient differences vanish, the degree-$a$ equation reduces to $0=\\sum_i u_{i,a}f_{i,0}+v_a$, since every other summand contains a lower coefficient difference. Fibre uniqueness in [lem-trf-homogeneous-continuous-formal-division] forces $u_{i,a}=v_a=0$. This starts at $a=0$ and proves equality coefficientwise. Adding expressions, or multiplying an expression by any $c\\in A$, preserves $Z$-supports (each coefficient outside a support stays zero). Uniqueness therefore proves $A$-linearity of all quotient and remainder maps. Their reductions modulo $(W)$ are $Q_i(h_0),R(h_0)$ by the base case of Step 3. If $v$ is already supported outside $D$, its unique expression is $v=\\sum_i0f_i+v$; hence $r(v)=v$ and in particular $r^2=r$.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "For continuity assume the vertex family nonempty and put $c=\\max_i d_i$, $\\lambda=c+1$. Give $W^aZ^\\gamma$ weight $\\lambda|a|+|\\gamma|$. Suppose $h$ has no monomial of weight $<T$. Induct in Step 3 to prove\n$$\\operatorname{ord}_Z q_{i,a}\\ge T-\\lambda|a|-d_i,\\qquad \\operatorname{ord}_Z r_a\\ge T-\\lambda|a|.$$\nIndeed $h_a$ has order at least $T-\\lambda|a|$. For $0<b\\le a$, the induction bound on $q_{i,a-b}$ and the nonnegative order of $f_{i,b}$ give a product order at least $T-\\lambda|a|+\\lambda|b|-d_i\\ge T-\\lambda|a|+1$. The fibre estimates in Step 1 applied to $e_a$ now give the displayed bounds, including when their right sides are negative. Thus $q_i$ has weight at least $T-d_i$ and $r$ weight at least $T$. For a monomial of total degree $u$, its weight lies between $u$ and $\\lambda u$. Consequently input of total order at least $T$ gives $q_i$ of total order at least $\\max(0,\\lceil(T-d_i)/\\lambda\\rceil)$ and $r$ of total order at least $\\lceil T/\\lambda\\rceil$. These bounds tend to infinity and prove continuity for $(W,Z)$-adic topology. No assertion that $f_i$ has total order $d_i$ is used.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "Assume now $B/J$ is flat over $A$. We first prove $J\\cap\\mathfrak nB=\\mathfrak nJ$ directly from [lem-weil-pbc-flat-equational-criterion]. If $u\\in J\\cap\\mathfrak nB$, choose $b_j\\in B$ with $u=\\sum_{j=1}^mW_jb_j$. The images $[b_j]\\in B/J$ satisfy $\\sum_jW_j[b_j]=0$. Flatness and the cited trivial-relation criterion give finitely many $y_\\ell\\in B/J$, $a_{j\\ell}\\in A$ with $[b_j]=\\sum_\\ell a_{j\\ell}y_\\ell$ and $\\sum_jW_ja_{j\\ell}=0$. Choose lifts $t_\\ell\\in B$. Then $v_j=b_j-\\sum_\\ell a_{j\\ell}t_\\ell$ lies in $J$, and $u=\\sum_jW_jv_j$ since the other finite sum is zero. This proves the nontrivial inclusion; the converse is immediate from $J$ being an ideal. Neither finite generation of $J$ as an $A$-module nor a Noetherian intersection theorem has been assumed.",
+   "uses": [
+    "lem-weil-pbc-flat-equational-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HK, lemma-flat-eq and the preceding definition of a trivial relation; explicit application to the relation with coefficients W_j."
+   }
+  },
+  {
+   "text": "For $h\\in J$, the identity of Step 3 shows $r(h)\\in J$. Its reduction is $R(\\bar h)$ by Step 4. Here $\\bar h\\in\\bar J$, so the assumed supported expression for every element of $\\bar J$, together with fibre uniqueness, gives $R(\\bar h)=0$. Thus $r(J)\\subseteq J\\cap\\mathfrak nB=\\mathfrak nJ$. For $v=r(h)$ write $v=\\sum_jW_jh_j$ with $h_j\\in J$ using Step 6. Since $r(v)=v$ and $r$ is $A$-linear, $v=\\sum_jW_jr(h_j)\\in\\mathfrak n r(J)$. Iteration gives $r(J)\\subseteq\\mathfrak n^kB$ for every $k\\ge0$. A series in $\\mathfrak n^kB$ has all coefficients of parameter degree $<k$ zero, by finite convolution. Hence $\\bigcap_k\\mathfrak n^kB=0$ by the coefficient-family definition. Therefore $r(h)=0$ for all $h\\in J$, which gives the required supported sums, including $h=Z^\\beta f_i\\in J$.",
+   "uses": [
+    "lem-trf-homogeneous-continuous-formal-division",
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "Let $\\varphi:A\\to A'=L'[[W']]$ be the given continuous local coefficient homomorphism, and define $\\Phi:B\\to A'[[Z]]$ by $\\Phi(\\sum_\\gamma a_\\gamma Z^\\gamma)=\\sum_\\gamma\\varphi(a_\\gamma)Z^\\gamma$. It preserves sums and products: for a fixed $Z$-exponent the convolution sum is finite, and a ring homomorphism preserves that finite sum. It preserves any $Z$-support restriction because zero coefficients stay zero. Applying $\\Phi$ to a whole-series identity therefore gives $\\Phi(h)=\\sum_i\\Phi(q_i)\\Phi(f_i)+\\Phi(r)$, and in particular preserves all zero-remainder identities. This conclusion needs no claim that the substituted quotient is flat or that the substituted homogeneous family still satisfies the basis hypothesis. Coefficients stay in the completed rings throughout.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  },
+  {
+   "text": "If the vertex family is empty, then $D=\\varnothing$, the sum is empty, and the unique division is $r(h)=h$, with no quotients. It is $A$-linear, continuous and compatible with reduction. Here $J=0$, so the ideal assertion is vacuous. If $m=0$, Step 3 has only parameter exponent $0$ and is exactly the fibre division; $\\mathfrak n=0$ makes the intersection and remainder argument immediate. If $n=0$, there is no positive-degree exponent $\\alpha_i\\in\\mathbf N^0$, so the family is empty and the first case applies. Thus all stated empty-variable and empty-family cases are covered.",
+   "uses": [
+    "def-weil-pbc-multivariate-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-homogeneous-continuous-formal-division",
+  "def-weil-pbc-multivariate-power-series",
+  "lem-weil-pbc-flat-equational-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (resolution context only). Agent-written complete-parameter extension of supported field division; BM 1997 Chapter III, Lemmas 7.3--7.7 is WANTED, not read. Flatness input read in Stacks algebra.tex, Tag 00HK, lemma-flat-eq."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-supported-exceptional-chart-packet",
+  "date": "2026-10-24",
+  "group": "Q115"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "title": "Supported division over complete parameter coefficients and the flat fibre criterion",
+ "statement": "Let $L$ be a field, $A=L[[W_1,\\ldots,W_m]]$, $\\mathfrak n=(W)$, and $B=A[[Z_1,\\ldots,Z_n]]$ [def-weil-field, def-weil-pbc-multivariate-power-series]. Fix ordered transverse vertices $\\alpha_i$, degrees $d_i=|\\alpha_i|>0$, their orthant diagram $D$, and first-vertex quotient supports $\\Delta_i$ [def-trf-supported-homogeneous-division]. Let $f_i\\in B$ and write $\\bar f_i\\in L[[Z]]$ for reduction modulo $\\mathfrak n$. Suppose $\\bar f_i$ has order $d_i$ and initial homogeneous form $H_i$, and, for every degree $t$, the indexed family $\\{Z^\\beta H_i:\\beta\\in\\Delta_i,\\ |\\beta|+d_i=t\\}\\amalg\\{Z^\\gamma:\\gamma\\notin D,\\ |\\gamma|=t\\}$ is an $L$-basis. Then every $h\\in B$ has a unique expression\n$$h=\\sum_iq_i f_i+r,\\qquad \\operatorname{supp}_Z q_i\\subseteq\\Delta_i,\\quad\\operatorname{supp}_Z r\\subseteq\\mathbf N^n\\setminus D.$$\nThe coefficients of $q_i,r$ belong to the complete ring $A$; the maps are $A$-linear, continuous for the $(W,Z)$-adic topology, and commute with reduction modulo $(W)$. Let $J=(f_i)\\subset B$ and suppose $B/J$ is flat over $A$, meaning tensoring preserves exact sequences [def-weil-pbc-flat-ring-map]. If every element of $\\bar J=(\\bar f_i)\\subset L[[Z]]$ is a supported sum $\\sum\\bar q_i\\bar f_i$, then every element of $J$ is a supported sum $\\sum q_i f_i$. In particular this holds for every $Z^\\beta f_i$. For a continuous local coefficient homomorphism $A\\to A'=L'[[W']]$ and the induced homomorphism fixing $Z$, each such whole-series identity is preserved. The empty family is included. No algebraicity of a coefficient in $A$ over a ring of regular parameter functions is part of the assertion.",
+ "source": {
+  "document": "literature/bierstone-milman-temkin/Canonical-desingularization-1997.pdf",
+  "place": "Agent complete-parameter extension of BM Chapter III, Lemmas 7.5--7.7; weighted formal division and the flat closed-fibre criterion. Journal PDF read online; archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-supported-homogeneous-division",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-per-parameter-complete-supported-division relative formal standard basis normal forms with flat quotient and specialization",
+   "results": "{\"t\": \"2026-10-24T10:21:11Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-parameter-complete-supported-division relative formal standard basis normal forms with flat quotient and specialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivision.elim\", \"IsLocalRing.basisQuotient_apply\", \"Ideal.ringBasis\", \"PowerSeries.IsWeierstrassDivision.unique\", \"instFiniteDimensionalQuotientPolynomialIdealSpanSingletonSetSmithCoeffs\", \"Filter.HasBasis.div\", \"Module.Flat.finsupp\", \"Ideal.quotientEquivDirectSum\"], \"digest\": \"92029872f1d38a40\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-parameter-complete-supported-division multivariate formal division over complete parameter power series ring with monomial quotient supports",
+   "results": "{\"t\": \"2026-10-24T10:21:15Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-parameter-complete-supported-division multivariate formal division over complete parameter power series ring with monomial quotient supports\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.weierstrassDiv\", \"MvPowerSeries.X_pow_dvd_iff\", \"MvPowerSeries.X_dvd_iff\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.add_weierstrassDiv\", \"PowerSeries.divXPowOrder\"], \"digest\": \"7699dd62eae558f8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-parameter-complete-supported-division flat quotient and unique normal form on the closed fibre imply supported basis over complete local coefficients",
+   "results": "{\"t\": \"2026-10-24T10:21:16Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-parameter-complete-supported-division flat quotient and unique normal form on the closed fibre imply supported basis over complete local coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_span_of_flat\", \"PowerSeries.exists_isWeierstrassDivision\", \"Module.exists_basis_of_basis_baseChange\", \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"IsLocalRing.basisQuotient\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"Ideal.adic_basis\", \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\"], \"digest\": \"0be2650b6ad7ef1b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PowerSeries\", \"IsWeierstrassDivisorAt\"",
+   "results": "{\"t\": \"2026-10-24T09:35:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"PowerSeries\\\", \\\"IsWeierstrassDivisorAt\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt\", \"PowerSeries.IsWeierstrassDivisorAt.seq\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.IsWeierstrassDivisorAt.mod\", \"PowerSeries.IsWeierstrassDivisorAt.seq_zero\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\", \"PowerSeries.IsWeierstrassDivisorAt.div_zero\", \"PowerSeries.IsWeierstrassDivisorAt.mod_zero\"], \"digest\": \"5e1788b7c2a2ef88\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Hironaka|supported.*division|parameter.*division|standard[Bb]asis",
+   "results": "{\"t\": \"2026-10-24T10:21:11Z\", \"tool\": \"grep\", \"query\": \"Hironaka|supported.*division|parameter.*division|standard[Bb]asis\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read returned declarations; ordinary flatness/localization, single-variable Weierstrass division, coefficient maps or Jacobian relations do not assert this multivariate completed-family statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-per-parameter-complete-supported-division lift unique supported formal division from residue field to complete local power series ring",
+   "results": "{\"t\": \"2026-10-24T12:14:55Z\", \"tool\": \"leansearch\", \"query\": \"lem-per-parameter-complete-supported-division lift unique supported formal division from residue field to complete local power series ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivision.unique\", \"PowerSeries.IsWeierstrassDivision.elim\", \"PowerSeries.add_weierstrassDiv\", \"PowerSeries.isWeierstrassDivision_weierstrassDiv_weierstrassMod\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.weierstrassDiv.congr_simp\", \"PowerSeries.IsWeierstrassDivision.isWeierstrassFactorization\"], \"digest\": \"4025920bbc608241\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Weierstrass division or scalar series inversion does not supply multivariate indexed supported division, complete-parameter continuity and the flat ideal criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-parameter-complete-supported-division multivariate formal supported division over complete parameter power series coefficients with flat quotient",
+   "results": "{\"t\": \"2026-10-24T12:14:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-parameter-complete-supported-division multivariate formal supported division over complete parameter power series coefficients with flat quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PowerSeries.IsWeierstrassDivisorAt.coeff_div\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"MvPowerSeries.inv.aux\", \"MvPowerSeries.X_pow_dvd_iff\", \"PowerSeries.IsWeierstrassDivisionAt\", \"MvPowerSeries.X_dvd_iff\", \"PowerSeries.IsWeierstrassDivisorAt.isWeierstrassDivisionAt_div_mod\"], \"digest\": \"abf085e0bc6d6954\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Weierstrass division or scalar series inversion does not supply multivariate indexed supported division, complete-parameter continuity and the flat ideal criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "Hironaka|supported.*division|formal.*division",
+   "results": "{\"t\": \"2026-10-24T12:15:39Z\", \"tool\": \"grep\", \"query\": \"Hironaka|supported.*division|formal.*division\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.IsWeierstrassDivision, MvPowerSeries",
+   "results": "{\"t\": \"2026-10-24T12:15:39Z\", \"tool\": \"loogle\", \"query\": \"PowerSeries.IsWeierstrassDivision, MvPowerSeries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-per-parameter-complete-supported-division invert continuous multivariate power series division by lifting parameter degree and closed fibre standard basis",
+   "results": "{\"t\": \"2026-10-24T12:15:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-per-parameter-complete-supported-division invert continuous multivariate power series division by lifting parameter degree and closed fibre standard basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPowerSeries.inv.aux\", \"PowerSeries.IsWeierstrassDivisorAt.div\", \"PowerSeries.weierstrassDiv\", \"PowerSeries.IsWeierstrassDivision\", \"PowerSeries.IsWeierstrassDivisionAt\", \"PowerSeries.IsWeierstrassDivisorAt.coeff_div\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.Inv_divided_by_X_pow_order\"], \"digest\": \"ccc3098d740466be\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: univariate Weierstrass division or scalar series inversion does not supply multivariate indexed supported division, complete-parameter continuity and the flat ideal criterion"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Imported resolution prerequisite of ancestor proof Step 3: formal supported coefficient charts; repair of E2 uses completed coefficients, finite coherent generation and relative jet determinants rather than regular supported quotients.",
+   "via": [
+    "lem-per-supported-exceptional-chart-packet",
+    "lem-per-retained-test-boundary-regularity",
+    "lem-per-hilbert-test-component-retention",
+    "lem-per-scheme-normalized-hilbert-head",
+    "lem-per-generically-reduced-rational-invariant-calculus",
+    "lem-per-rig-variety-strong-resolution",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-parameter-complete-supported-division",
+  "worker": "stage1",
+  "summary": "Constructed the complete-parameter division coefficientwise using existing homogeneous field division; proved uniqueness, A-linearity and reduction, an explicit weighted continuity bound, and the flat closed-fibre criterion by trivial relations and parameter separation. No new nodes and no statement change. BM is WANTED; this extension is agent-written.",
+  "blueprint": "The inherited auxiliary complete-coefficient chart branch of lem-per-artin-gabber-affine-curve Step 3: parameter-supported certificates used by lem-per-supported-exceptional-chart-packet. Latest blueprint ancestor and unit read; no direct blueprint duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-homogeneous-continuous-formal-division",
+    "why": "Generic field-valued supported formal division, reused coefficientwise; the perverse unit has no division theorem."
+   },
+   {
+    "node": "lem-weil-pbc-flat-equational-criterion",
+    "why": "Generic flatness criterion applied to the parameter relation in B/J; the perverse unit has no commutative-algebra flatness criterion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-homogeneous-continuous-formal-division",
+  "lem-weil-pbc-flat-equational-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-d735e726c",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-d735e726c (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item's 9 steps in full and checked each against the full statements of the cited nodes. Step 1 applies the field division lemma lem-trf-homogeneous-continuous-formal-division to the reduced series in L[[Z]]; its hypotheses match the item's and its Delta_i equals the one in def-trf-supported-homogeneous-division. I verified Step 2's coefficient regrouping and convolution formula, Step 3's recursion, which gives the W^a coefficient identity, and Step 4's uniqueness by induction on parameter degree, A-linearity, reduction and r^2=r. In Step 5 the weighted bound (lambda=max d_i+1, so lambda|b|-d_i>=1) gives (W,Z)-adic continuity without assuming f_i has total order d_i. Step 6 gets J∩nB=nJ from the full trivial-relation output of Stacks 00HK (algebra.tex 8995, read). Step 7 shows r(h) lies in J∩nB=nJ and is contained in n·r(J), then in every n^k·B, hence zero. Step 8 (coefficientwise substitution) and Step 9 (empty family, m=0, n=0) are correct. Small cases: f=Z-W gives q=1, r=W. In the non-flat example (Y^2, XY+WY, X^2) I recomputed Y f3 - X f2 + W f2 = W^2 Y, which shows the flatness hypothesis is needed. ILO VIII 2.3.11-2.3.13 (PDF pp.99-100), read: context only, as proof_origin says. No new nodes. A DAG search for supported division found no complete-coefficient duplicate. Batch-5 citation of lem-trf-homogeneous-continuous-formal-division: accepted. It is pure formal-power-series algebra that neither assumption gives. Its full closure is mathlib-status generic nodes only (def-weil-field, def-weil-finite-dimensional-subspace, def-weil-pbc-multivariate-power-series, def-weil-vector-space-dimension, lem-sfb-independent-family-spanning-cardinality), so it imports no trace-formula or duality proof. It is also already a proof_dep and accepted tool_use of the parent lem-per-supported-exceptional-chart-packet. Tool uses accepted: that lemma as a black-box generic tool, and lem-weil-pbc-flat-equational-criterion, which is a mathlib-status leaf."
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-trf-primitive-quotient-scalar-model-existence",
+ "kind": "statement",
+ "title": "Primitive quotient scalar model existence",
+ "statement": "For a prime $\\ell$, finite coefficient fields $E\\subset L$ with embedding $\\iota$, scheme $W$, ",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099N(2),(5), 06YS, 0G7E and 0941; pullback/scalar model existence split from lem-trf-primitive-quotient-realization-comparisons"
+ },
+ "stmt_deps": [
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "proof": [
+  {
+   "text": "Construct the scalar realization by the coherent finite quotient extension model. Use semilinear derived sections, identify its system map with the canonical scalar map, compare the two derived scalar models by the universal left-derived comparison, and use the completion isomorphism from the coherent reduction model.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-pur-coefficient-extension-reduction-model",
+    "def-sfb-derived-change-of-rings-cochain-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099N(2),(5), 06YS, 0G7E and 0941; pullback/scalar model existence split from lem-trf-primitive-quotient-realization-comparisons"
+   }
+  },
+  {
+   "text": "Apply the separately stated quotient-generator normalization theorem to the constructed realization and package the realization and normalization into the scalar-model structure.",
+   "uses": [
+    "lem-trf-primitive-quotient-scalar-model-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099N(2),(5), 06YS, 0G7E and 0941; pullback/scalar model existence split from lem-trf-primitive-quotient-realization-comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-semilinear-derived-sections",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-pur-coefficient-extension-reduction-model",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-trf-primitive-quotient-scalar-model-normalization"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Realization from coherent quotient scalar extension, with normalization split off as a strictly smaller theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "existence of normalized primitive quotient pullback/scalar realization model",
+   "results": "No existing declaration gives the corresponding normalized IntegralComparison model for arbitrary supplied calculus and Roos model.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntegralComparisonPullbackModel IntegralComparisonScalarModel Nonempty",
+   "results": "No matching theorem found.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Nonempty (IntegralComparisonPullbackModel|IntegralComparisonScalarModel)",
+   "results": "Only the parent theorem and unrelated downstream sorries; no reusable constructor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PrimitiveQuotientRealizationComparisons",
+  "date": "2026-10-26",
+  "group": "S6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Final sentence of prop-trf-karoubi-independence: common-stage Frobenius transport; integral normalized comparison construction. This refinement carries former model-existence steps 3, 4. Ancestor was removed from latest blueprint; current trace-transport proof uses sk-thm-tf-uniform-formula; no rerouting.",
+   "via": [
+    "lem-trf-effective-comparison-realization-models",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PrimitiveQuotientScalarModelExistence",
+  "declaration": "WeilConjectures.primitiveQuotientScalarModelExistence",
+  "file": "lean/Sheaf/Paper/PrimitiveQuotientScalarModelExistence.lean",
+  "statement": "theorem primitiveQuotientScalarModelExistence\n    (W : Scheme.{t})\n    (_hlW : ∀ x : W, IsUnit (l : W.residueField x))\n    (SW : CoefficientDerivedSystemCalculus l E W)\n    (ρW : IntegralComparisonRoosModel l L W) :\n    Nonempty (IntegralComparisonScalarModel l E L ι W SW ρW)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261026T002659-L-107679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261026T114207-L-2272853",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

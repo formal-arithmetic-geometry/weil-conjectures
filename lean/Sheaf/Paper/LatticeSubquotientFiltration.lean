@@ -12,20 +12,14 @@ public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.Paper.StratifiedLattice
-import Sheaf.Paper.IntegralRationalizationExact
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Paper.CoefficientHeartCommonStratification
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.SixFunctors.ScalarSixPullback
-import Sheaf.Paper.CoefficientHeartFiltration
-import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
-import Sheaf.Paper.ContinuousRingUniverseRealization
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+import Sheaf.Paper.LocallyClosedOrderedFiltration
+import Sheaf.Paper.OrderedSpectralLattices
+import Sheaf.Paper.CondensedLocallyClosedScalarExtension
 
 /-!
 # Integral lattice subquotients of a lisse extension by zero
@@ -42,6 +36,8 @@ inclusions. Filtration terms are subobjects of the specified locally closed exte
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option cleanup.letToHave false
+set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 universe u
@@ -119,6 +115,85 @@ def LatticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime]
       toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }
   LatticeSubquotientFiltrationData A B c a
 
+attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
+  monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
+  coefficientHeartLocallyClosedExtension
+  CondensedRing.upperStar CondensedRing.lowerStar
+  CondensedRing.upperStarLowerStarAdjunction
+  CondensedRing.openImmersionLowerShriek
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+-- Compose quotient comparisons over abstract coefficients to keep their structures shared.
+private theorem lattice_filtration_assembly
+    (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c] {S X : Scheme.{u}}
+    [IsNoetherian S] [IsNoetherian X] (a : S ⟶ X) [IsImmersion a]
+    (L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj B S))
+    (R : S.FiniteLocallyClosedStratification)
+    (ho : ∀ b : Fin (R.n + 1),
+      IsOpen (⋃ i : Fin R.n, ⋃ (_ : i.val < b.val), R.stratum i))
+    (M : ∀ b : Fin R.n,
+      Mod (Sheaf (Scheme.ProEt.topology (R.domain b)) Ab.{u + 1})
+        (condensedRingObj A (R.domain b)))
+    (he : ∀ b : Fin R.n, Nonempty
+      ((Mod.extendScalars ((upperStarFromPoint (R.domain b)).map c)).obj (M b) ≅
+        (CondensedRing.upperStar B (R.immersion b)).obj L)) :
+    ∃ F : Fin (R.n + 1) →
+        Subobject ((coefficientHeartLocallyClosedExtension B a inferInstance).obj L),
+      F 0 = ⊥ ∧ F (Fin.last R.n) = ⊤ ∧
+      ∃ h : ∀ b : Fin R.n, F b.castSucc ≤ F b.succ,
+        ∀ b : Fin R.n,
+          letI : IsImmersion (R.immersion b) := R.isImmersion b
+          Nonempty (cokernel (Subobject.ofLE (F b.castSucc) (F b.succ) (h b)) ≅
+            (Mod.extendScalars ((upperStarFromPoint X).map c)).obj
+              ((coefficientHeartLocallyClosedExtension A (R.immersion b ≫ a)
+                inferInstance).obj (M b))) := by
+  obtain ⟨F, h0, hn, h, hq⟩ := exists_locallyClosedOrderedFiltration B a L R ho
+  refine ⟨F, h0, hn, h, fun b ↦ ?_⟩
+  have : IsImmersion (R.immersion b) := R.isImmersion b
+  obtain ⟨e₀⟩ := hq b
+  obtain ⟨e₁⟩ := he b
+  obtain ⟨e₂⟩ := condensedLocallyClosedExtension_scalar A B c (R.immersion b ≫ a) (M b)
+  exact ⟨e₀ ≪≫
+    (coefficientHeartLocallyClosedExtension B (R.immersion b ≫ a) inferInstance).mapIso
+      e₁.symm ≪≫ e₂⟩
+
+private theorem lattice_filtration_from_lattices
+    (A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj A] [IsCommMonObj A] [MonObj B] [IsCommMonObj B]
+    (c : A ⟶ B) [IsMonHom c] {S X : Scheme.{u}}
+    [IsNoetherian S] [IsNoetherian X] (a : S ⟶ X) [IsImmersion a]
+    (hlat :
+  ∀ L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj B S),
+    IsLisseCoefficientModule B L →
+    ∃ R : S.FiniteLocallyClosedStratification,
+      (∀ b : Fin (R.n + 1),
+        IsOpen (⋃ i : Fin R.n, ⋃ (_ : i.val < b.val), R.stratum i)) ∧
+      ∃ M : ∀ b : Fin R.n,
+        Mod (Sheaf (Scheme.ProEt.topology (R.domain b)) Ab.{u + 1})
+          (condensedRingObj A (R.domain b)),
+        ∀ b : Fin R.n, IsLisseCoefficientModule A (M b) ∧
+          ∃ ι : M b ⟶ (Mod.comap ((upperStarFromPoint (R.domain b)).map c)).obj
+              ((CondensedRing.upperStar B (R.immersion b)).obj L),
+            Mono ι ∧ IsIso
+              (((Mod.extendRestrictAdjunction ((upperStarFromPoint (R.domain b)).map c)).homEquiv
+                (M b) ((CondensedRing.upperStar B (R.immersion b)).obj L)).symm ι)) :
+    LatticeSubquotientFiltrationData A B c a := by
+  unfold LatticeSubquotientFiltrationData
+  intro L hL
+  obtain ⟨R, ho, M, hM⟩ := hlat L hL
+  refine ⟨R, ho, M, hM, ?_⟩
+  apply lattice_filtration_assembly A B c a L R ho M
+  intro b
+  obtain ⟨_, ι, _, hi⟩ := hM b
+  have := hi
+  exact ⟨asIso (((Mod.extendRestrictAdjunction
+    ((upperStarFromPoint (R.domain b)).map c)).homEquiv
+      (M b) ((CondensedRing.upperStar B (R.immersion b)).obj L)).symm ι)⟩
+
 /-- A lisse field-coefficient sheaf has stratified integral lattices whose rationalized
 extensions are the successive quotients of its extension by zero. Ranks may vary and
 filtration inclusions need not be strict, including for empty strata or zero sheaves.
@@ -126,31 +201,15 @@ filtration inclusions need not be strict, including for empty strata or zero she
 Source: blueprint main-20261015, integral-models-generators, proof (1)
 (blueprint: lem-sfb-lattice-subquotient-filtration).
 
-Proof plan:
-1. Finite type over a field gives Noetherian S and X (pqf-lem-locnoeth-lft).
-Apply sk-lem-stratified-lattice to L to obtain finitely many lisse integral lattices;
-no global lattice or constant-rank hypothesis is needed.
-2. Identify the pulled condensed coefficient rings and inclusion with continuous-function
-coefficients by lem-sfb-continuous-ring-universe-realization. Then
-lem-sfb-integral-rationalization-exact gives exactness of ordinary rationalization on
-all module sheaves. sk-def-sfb-coefficient-change and sk-def-sfb-derived-categories
-identify derived rationalization with the termwise exact functor.
-3. Use det-lem-coefficient-heart-common-stratification to refine and order the strata
-with open prefixes. Restrict the lattices using sk-prop-sfb-cartesian-coefficients;
-exact pullback preserves their inclusions and local bases. The pullback comparison of
-det-prop-scalar-six-pullback identifies their rationalizations with the restrictions of L.
-4. The characterization in sk-lem-coefficient-heart makes L constructible. Apply
-det-lem-coefficient-heart-filtration on S to obtain its subobject filtration by the
-open-prefix extension counits, with quotients the extensions of its lisse restrictions.
-5. Apply exact locally closed extension along a. The exactness and composition comparison
-of lem-sfb-locally-closed-extension-coherence preserve the filtration and identify each
-quotient with extension along the composite immersion R.immersion b followed by a.
-6. det-prop-scalar-six-pullback commutes scalar change with this extension. Step 2
-identifies both derived scalar changes with ordinary ones; degree-zero cohomology
-therefore identifies the quotient with rationalization of the integral extension.
-sk-def-sfb-module-lower-shriek and sk-lem-coefficient-heart identify this extension
-with the recorded i_* u_!. Empty S permits n = 0. Empty strata and rank zero give
-repeated filtration terms and zero quotients, which the non-strict inequalities allow. -/
+Proof. Choose ordered integral lattice inclusions by `exists_orderedSpectralLattices`.
+The general ordered filtration theorem constructs actual subobjects of a_! L by pushing
+forward the open-prefix filtration. For each stratum the invertible lattice adjoint
+identifies its rational restriction with the scalar extension of its integral lattice.
+Map this isomorphism through extension by zero and compose with the ordinary
+scalar/locally-closed-extension comparison. The resulting cokernel is exactly the
+rationalization of the integral extension along the composite stratum immersion.
+Finite type over k supplies Noetherian S and X. Empty sources, empty strata and rank zero
+allow repeated terms and zero quotients, as the non-strict inequalities require. -/
 theorem exists_latticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpℓ : p ≠ ℓ)
@@ -161,6 +220,35 @@ theorem exists_latticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime]
     [IsSeparated (X ↘ Spec (.of k))]
     (a : S ⟶ X) [a.IsOver (Spec (.of k))] [IsImmersion a] :
     LatticeSubquotientFiltration ℓ E k a := by
-  sorry
+  have hlat := exists_orderedSpectralLattices ℓ E p k _hpℓ S
+  let := spectralNorm.nontriviallyNormedField ℚ_[ℓ] E
+  let A := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+      (Profinite.continuousMapRingSheafOfUniverse.{u, u}
+        (Padic.coefficientExtensionIntegers ℓ E))
+  let B := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
+      (Profinite.continuousMapRingSheafOfUniverse.{u, u} E)
+  let c := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+      (Profinite.continuousMapRingSheafMapOfUniverse.{u, u}
+        (Padic.coefficientExtensionIntegers ℓ E).subtype continuous_subtype_val)
+  have : IsCommMonObj A := Sheaf.isCommMonObj_sheafCompose_obj _
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u}
+      (Padic.coefficientExtensionIntegers ℓ E))
+      (fun U (a b : ULift.{u + 1} C(U.unop, Padic.coefficientExtensionIntegers ℓ E)) ↦
+        mul_comm a b)
+  have : IsCommMonObj B := Sheaf.isCommMonObj_sheafCompose_obj _
+    (Profinite.continuousMapRingSheafOfUniverse.{u, u} E)
+      (fun U (a b : ULift.{u + 1} C(U.unop, E)) ↦ mul_comm a b)
+  have : IsNoetherian X :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }
+  have : IsNoetherian S :=
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (S ↘ Spec (.of k))
+      toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (S ↘ Spec (.of k)) }
+  have result := @lattice_filtration_from_lattices _ _ _ _ _ _ _ _ S X
+    inferInstance inferInstance a inferInstance hlat
+  exact result
 
 end AlgebraicGeometry.ProEtale

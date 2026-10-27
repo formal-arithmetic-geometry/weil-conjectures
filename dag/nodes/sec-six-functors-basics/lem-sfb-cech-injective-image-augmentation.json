@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-cech-injective-image-augmentation",
+ "kind": "statement",
+ "title": "Exact injective Cech rows and the direct-image total augmentation",
+ "statement": "Let $\\mathcal X,\\mathcal Y$ be topoi presented by small sites in fixed larger coefficient universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], with sheaves of commutative rings $R_X,R_Y$ and module categories [def-weil-sheaf-of-modules-category]. Let $f:(\\mathcal X,R_X)\\to(\\mathcal Y,R_Y)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] with exact module inverse image. Let $V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, $V_n=V^{\\times(n+1)}$, and $v_n:\\mathcal X/V_n\\to\\mathcal X$ the slice localizations with rings $v_n^*R_X$ [def-pur-localized-ringed-site, lem-weil-pbc-ringed-sheaf-slice-adjunction]. All diagrams are small. Use ordinary unbounded module derived categories with localization functor $Q$ [def-weil-abstract-derived-category], and finite-diagonal total complexes with differential $d_{\\mathrm{Cech}}+(-1)^n d_I$ in Cech degree $n$ [def-sp-double-complex-total]. Let $I^\\bullet$ be any nonnegative complex of injective $R_X$-modules [def-sp-injective-resolutions]. Set $B^{n,q}=(fv_n)_*v_n^*I^q$ with alternating restriction differential horizontally and $d_I$ vertically. Let $b:f_*I\\to\\operatorname{Tot}B$ be the localization-unit augmentation with components into the $(0,q)$ summands. For each object $W$ of the chosen site of $\\mathcal Y$, let $A=f^{-1}(h_W^\\#)$, where $h_W^\\#$ is the sheafification of the representable presheaf of sets [def-weil-pbc-sheafification]. In $\\mathcal X/A$, put $V_A=V\\times A\\to A$. The sheaf $I^q|_A$ is injective, and direct-image adjunction identifies $B^{n,q}(W)$ with its sections over $V_A^{\\times_A(n+1)}$, compatibly with the faces and augmentation. The section complex\n$$0\\longrightarrow (f_*I^q)(W)\\longrightarrow B^{0,q}(W)\\longrightarrow B^{1,q}(W)\\longrightarrow\\cdots$$\nis exact: its degree-zero kernel is exactly the restriction image of $(f_*I^q)(W)$, and its higher Cech cohomology vanishes. This includes arbitrary topos objects $A,V_A$, without a representability assumption on the original site. Thus the augmented rows are exact as complexes of module sheaves, and the specified $b$ is a quasi-isomorphism. In particular $Q(b)$ is an isomorphism in $D(\\operatorname{Mod}(R_Y))$. Under transposition of the two double-complex degrees, multiplication on bidegree $(n,q)$ by $(-1)^{nq}$ is a chain isomorphism between the two signed total conventions and is the identity on the augmentation summands $n=0$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FC (lemma-injective-module-trivial-cech), including injective-presheaf acyclicity and degree-zero gluing; homology.tex Tag 0133 (lemma-double-complex-gives-resolution), second-variable variant; agent extension to arbitrary slice objects, returned proof steps 3-4."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "def-weil-abstract-derived-category",
+  "def-sp-double-complex-total",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-sheafification",
+  "def-sfb-coherent-cech-image-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the canonical elementModuleExtension adjunction to elementModulePullback. The presheaf extension theorem proves finite-limit preservation of the presheaf left adjoint; compose with module sheafification and use the pullback comparison isomorphism to obtain finite-limit preservation of elementModuleExtension. Adjunction.map_injective then proves that every specified element-site restriction of I.X q is injective.",
+   "uses": [
+    "lem-weil-pbc-element-module-extension-adjunction",
+    "lem-weil-pbc-element-presheaf-extension",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE (lemma-localize-ringed-topos), 04J4 (lemma-relocalize-ringed-topos); extension-by-zero exactness, lemma-extension-by-zero-exact"
+   }
+  },
+  {
+   "text": "Construct the section comparison as a composite of Yoneda, sheafification, the geometric adjunction, the free-module adjunction, imageIso, and the localization adjunction. To pass the free module through restriction, restrict its sheafification unit: it stays locally bijective because the element projection is cocontinuous. Maps from its sheafification to a module sheaf are therefore equivalent to maps from the restricted free presheaf. Sections on the element site over B correspond explicitly to maps A times B into the underlying module sheaf, by evaluating at (U,b) on a. Verify the resulting comparison on generators. Naturality in the module and D.restriction give a cosimplicial isomorphism; D.unit gives the specified augmentation formula. Additivity follows from naturality with respect to biproduct projections and their sum.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-sheafification",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-element-site-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE and 04J4; categories.tex Tag 001P (lemma-yoneda)"
+   }
+  },
+  {
+   "text": "Use injectivity of I.X q on the original site directly. Its underlying module presheaf is injective by the existing sheaf-to-presheaf injectivity theorem. The cosimplicial section object over A times V_n is isomorphic to the Hom complex on the presheaf Cech nerve of A times V to A: products with A identify the sheaf nerves, and the sheaf forget functor preserves finite limits. Apply the existing injective-presheaf nerve acyclicity theorem to this presheaf arrow. Transport vanishing through the nerve isomorphism and then through the section comparison. Thus no separate element-site nerve comparison or representability hypothesis is needed.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "lem-sc-injective-presheaf-module-nerve-acyclic",
+    "def-sc-presheaf-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FB (lemma-injective-module-injective-presheaf), 03FC (lemma-injective-module-trivial-cech), presheaf nerve form"
+   }
+  },
+  {
+   "text": "Local surjectivity of V to 1 gives local preimages of each section of A under A times V to A: pair the restricted section of A with a local section of V, using the explicit product-evaluation isomorphism. Thus A times V_0 to A is epimorphic, using the explicit V_0 isomorphism to V. It is an effective epimorphism because set sheaves form a regular epi category. A zero cocycle is exactly a map from A times V_0 to the underlying module sheaf agreeing after the two cofaces. For any pair g,h with the same A-coordinate, construct their comparison map into A times V_1 by the universal property of the wide pullback, putting their V coordinates in the two slots. The cocycle equality gives g b = h b. EffectiveEpi.desc supplies a unique descended map from A, proving kernel equals augmentation image; cancellation of the epi proves injectivity. Transport these assertions through the section comparison.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00WM (definition-sheaves-injective-surjective), 00WN (lemma-mono-epi-sheaves), 086K (lemma-coequalizer-surjection)"
+   }
+  },
+  {
+   "text": "Use the faithful additive functor from module sheaves to presheaves of abelian groups. Exactness is pointwise in this functor category, and any faithful zero-preserving functor between abelian categories reflects exactness. The sectionwise exactness proves the augmented degree-zero short complex exact and its first arrow monic. Higher vanishing proves exactness at every positive degree by the same reflection argument. Construct the canonical map from the complex concentrated in degree zero with fromSingle0Equiv. The short-complex quasi-isomorphism criterion for zero incoming differentials proves it is a quasi-isomorphism at zero; positive exactness handles the other degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CS (presheaves of modules), 03EI (lemma-sheafification-exact)"
+   }
+  },
+  {
+   "text": "The localization unit commutes with $d_I$, and the first horizontal differential kills it: the two restrictions of a section from $A$ to $A\\times V\\times V$ both forget the $V$ coordinates and therefore agree. Consequently the components into $(0,q)$ give a chain map $b$, since the vertical sign at horizontal degree zero is $+1$. The double complex is first-quadrant: $n\\geq0$ by construction and $I^q=0$ for $q<0$. There are only $k+1$ summands on each nonnegative total diagonal. Apply lem-sc-first-quadrant-column-augmentation to $B$, $A^\\bullet=f_*I^\\bullet$, its just-verified unit chain map and the row quasi-isomorphisms of Step 5 (the lemma calls these the resolution columns $B.\\mathrm{flip}.X\\,q$). Its component hypothesis is exactly our specified $(0,q)$ augmentation. It yields that this $b$ is a quasi-isomorphism, without applying $f_*$ to an arbitrary exact sequence.",
+   "uses": [
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), second-variable variant"
+   }
+  },
+  {
+   "text": "By the definition of the derived localization, $Q$ inverts this quasi-isomorphism, hence $Q(b)$ is an isomorphism. Finally let $T$ multiply the summand $B^{n,q}$ by $(-1)^{nq}$ and transpose indices. The transposed total differential is $d_I+(-1)^q d_{\\mathrm{Cech}}$. On horizontal arrows the coefficient of $T d$ is $(-1)^{(n+1)q}=(-1)^{nq+q}$, equal to that of $d'T$; on vertical arrows it is $(-1)^n(-1)^{n(q+1)}=(-1)^{nq}$, also equal to that of $d'T$. Thus $T$ is a chain map. Applying it twice gives the identity since $(-1)^{2nq}=1$, so it is a chain isomorphism. At $n=0$ its multiplier is $1$, proving compatibility with the specified augmentation.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Total-complex sign convention; derived.tex Tag 05RU (definition-derived-category)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-element-module-extension-adjunction",
+  "lem-weil-pbc-element-presheaf-extension",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-sheafification",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+  "lem-sc-injective-presheaf-module-nerve-acyclic",
+  "def-sc-presheaf-cech-complex",
+  "lem-sc-first-quadrant-column-augmentation",
+  "def-sp-double-complex-total",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "X6",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FC, with original-site presheaf nerve of A times V to A; sites-modules.tex Tags 04IE and 04J4; homology.tex Tag 0133. Explicit adjunction, generator, nerve, descent and total-sign calculations in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Augmented Cech direct image double complex of injective module sheaves is a quasi isomorphism for an epimorphic topos cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (K L : CochainComplex C ℤ),\\n  CochainComplex.degreewiseEpiWithInjectiveKernel (CochainComplex.cm5b.p K L)\", \"doc\": \"For any cochain complexes $K$ and $L$ in an abelian category with enough injectives, the morphism $p$ is a degree-wise epimorphism. This means that for every integer $i$, the component $p_i$ is an epi\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), CategoryTheory.Epi S.shortComplex.g\", \"doc\": \"In the category of sheaves on a Grothendieck topology with values in additive commutative groups, the differential $ g $ from the second to third object in the Mayer-Vietoris short complex is an epimo\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.instQuasiIsoIntι'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Extend\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {X : C}\\n  (R : CategoryTheory.InjectiveResolution X), QuasiIso R.ι'\", \"doc\": \"The morphism $\\\\iota'$ constructed from an injective resolution $R$ is a quasi-isomorphism between the extended single-term cochain complex (concentrated at degree 0 with object $X$) and the cochain co\"}\n  {\"name\": \"CategoryTheory.coherentTopology.epi_π_app_zero_of_epi\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preregular C]\\n  [inst_2 : CategoryTheory.FinitaryExtensive C] [inst_3 : CategoryTheory.Limits.HasLimitsOfShape ℕᵒᵖ C],\\n  (∀ (G : CategoryTheory.Functor ℕᵒᵖ C),\\n      (∀ (n : ℕ), CategoryTheory.EffectiveEpi (G.map (Cate\", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a coherent Grothendieck topology, given a sheaf-valued functor $F : \\\\mathbb{N}^{\\\\text{op}} \\\\to \\\\text{Sh}(\\\\mathcal{C}, \\\\text{Type}\\\\, v)$ and a limit cone $c$ o\"}\n  {\"name\": \"CochainComplex.degreewiseEpiWithInjectiveKernel\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/Basic\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → CategoryTheory.MorphismProperty (CochainComplex C ℤ)\", \"doc\": \"A morphism between cochain complexes in category $ C $ has this property if for every integer $ i $, the component $ \\\\phi_i $ is an epimorphism and its kernel is an injective object in $ C $.\"}\n  {\"name\": \"CochainComplex.cm5b.instQuasiIsoIntP\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ}, QuasiIso (CochainComplex.cm5b.p K L)\", \"doc\": \"The projection morphism $ p $ from the mapping cone of the identity morphism on an injective cochain complex $ I K $ (with zero differentials) and a cochain complex $ L $ to $ L $ is a quasi-isomorphi\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.quasiIso\", \"module\": \"Mathlib/CategoryTheory/Preadditive/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] {Z : C} (self : CategoryTheory.InjectiveResolution Z),\\n  QuasiIso self.ι\", \"doc\": \"In a category with a zero object and zero morphisms, the inclusion morphism from the single-term cochain complex (with object $Z$ at degree 0) to the cochain complex associated with an injective resol\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions, CM5 factorization and Mayer-Vietoris facts do not prove sectionwise exact Cech rows for arbitrary epimorphic topos covers or their specified total augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech rows of a sheaf injective resolution on slice topoi are exact and its total augmentation is a quasi isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.self\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"[Injective Z] : InjectiveResolution Z\", \"doc\": \"Given an injective object $Z$ in a category $\\\\mathcal{C}$ with zero object and zero morphisms, this constructs an injective resolution of $Z$ by taking the cochain complex that places $Z$ at index $0$\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.quasiIso\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroMorphisms C] {Z : C} (self : CategoryTheory.InjectiveResolution Z),\\n  QuasiIso self.ι\", \"doc\": \"In a category with a zero object and zero morphisms, the inclusion morphism from the single-term cochain complex (with object $Z$ at degree 0) to the cochain complex associated with an injective resol\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{u_2, u_1} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.EnoughInjectives C] → (Z : C) → CategoryTheory.InjectiveResolution Z\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n  {\"name\": \"CategoryTheory.injectiveResolutions\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \": C ⥤ HomotopyCategory C (ComplexShape.up ℕ)\", \"doc\": \"The functor from an abelian category $\\\\mathcal{C}$ to its homotopy category of cochain complexes, which assigns to each object its injective resolution's cochain complex and to each morphism the homot\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"(n : ℕ) : I.cocomplex.ExactAt (n + 1)\", \"doc\": \"For every natural number $ n $, the cochain complex associated with an injective resolution is exact at the index $ n + 1 $.\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.exact_succ\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Resolution\", \"type\": \"(n : ℕ) : (ShortComplex.mk _ _ (I.cocomplex.d_comp_d n (n + 1) (n + 2))).Exact\", \"doc\": \"In a category with a zero object and zero morphisms, for any injective resolution, the associated cochain complex indexed by natural numbers has the property that for every natural number $n$, the sho\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.of_def\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{u_2, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] (Z : C),\\n  CategoryTheory.InjectiveResolution.of Z =\\n    { cocomplex := CategoryTheory.InjectiveResolution.ofCocomplex Z, injective := ⋯, hasHomology := ⋯\", \"doc\": \"Given an object $ Z $ in an abelian category $ \\\\mathcal{C} $ that has enough injectives, this function constructs an injective resolution of $ Z $, which is a cochain complex where each term is an inj\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Resolution\", \"type\": \"(n : ℕ) : (ofCocomplex Z).ExactAt (n + 1)\", \"doc\": \"In an abelian category with enough injectives, for any natural number $n$, the injective resolution constructed by `ofCocomplex Z` is exact at the index $n + 1$. This means the image of the differenti\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions, CM5 factorization and Mayer-Vietoris facts do not prove sectionwise exact Cech rows for arbitrary epimorphic topos covers or their specified total augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiIso\", \"total\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions, CM5 factorization and Mayer-Vietoris facts do not prove sectionwise exact Cech rows for arbitrary epimorphic topos covers or their specified total augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_of_column|cech.*[Ii]njective|[Ii]njective.*cech",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Topology/Compactification/StoneCech.lean\", \"line\": \"25\", \"text\": \"injective, so one cannot always think of `α` as being “inside” its compactification `StoneCech α`.\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"264\", \"text\": \"lemma injective_stoneCechUnit_of_t35Space [T35Space X] :\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"265\", \"text\": \"    Function.Injective (stoneCechUnit : X → StoneCech X) := by\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"274\", \"text\": \"  injective := injective_stoneCechUnit_of_t35Space\"}\n  {\"file\": \"Mathlib/Topology/Separation/CompletelyRegular.lean\", \"line\": \"279\", \"text\": \"  injective := injective_stoneCechUnit_of_t35Space\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic injective resolutions, CM5 factorization and Mayer-Vietoris facts do not prove sectionwise exact Cech rows for arbitrary epimorphic topos covers or their specified total augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*cech|cech.*injective|quasiIso.*total",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Mayer-Vietoris squares, generic injective resolutions or local injectivity; none gives this arbitrary-sheaf Cech section augmentation and signed total comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cech descent injective module sheaf epimorphism arbitrary topos objects section complex exact",
+   "results": "8 hits: SheafOfModules.GeneratingSections.mk.inj, CochainComplex.degreewiseEpiWithInjectiveKernel, CategoryTheory.ShortComplex.Exact.descToInjective, AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi, PresheafOfModules.epi_of_surjective, PresheafOfModules.IsLocallyInjective, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective, SheafOfModules.GeneratingSections.epi",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Mayer-Vietoris squares, generic injective resolutions or local injectivity; none gives this arbitrary-sheaf Cech section augmentation and signed total comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Injective\", \"cech\"",
+   "results": "1 hits: injective_stoneCechUnit_of_t35Space",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Mayer-Vietoris squares, generic injective resolutions or local injectivity; none gives this arbitrary-sheaf Cech section augmentation and signed total comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective module presheaf is acyclic for the nerve of any map of presheaves of sets",
+   "results": "8 hits: CategoryTheory.Presheaf.isLocallyInjective_of_injective, CochainComplex.cm5b.instInjectiveXIntI, CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, PresheafOfModules.IsLocallyInjective, CategoryTheory.InjectiveResolution.injective, CategoryTheory.Presheaf.isLocallyInjective_forget, CategoryTheory.injective_of_preservesFiniteColimits_preadditiveYonedaObj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Mayer-Vietoris squares, generic injective resolutions or local injectivity; none gives this arbitrary-sheaf Cech section augmentation and signed total comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective sheaves of modules have exact augmented Cech section complexes for epimorphisms of arbitrary sheaf objects and first quadrant total augmentation",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex, CategoryTheory.InjectiveResolution.ofCocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.cocomplex_exactAt_succ, CategoryTheory.InjectiveResolution.exact₀, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern Mayer-Vietoris squares, generic injective resolutions or local injectivity; none gives this arbitrary-sheaf Cech section augmentation and signed total comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-cech-image-totalization",
+  "date": "2026-10-22",
+  "group": "Q71"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; Normalized derived Cech descent followed by exact inverse image; Returned proof steps 3-4: slice-section row exactness, first-quadrant total quasi-isomorphism, and transpose-sign compatibility.",
+   "via": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-cech-injective-image-augmentation",
+  "worker": "stage1",
+  "summary": "Q158: retained the statement and derived Cech route; proved injective restriction by exact extension adjunction, positive row acyclicity using the existing presheaf nerve theorem, degree-zero by kernel-pair descent, and the specified total quasi-isomorphism by the existing first-quadrant augmentation theorem. Wrote the evaluation, face, unit and transpose signs explicitly. No new nodes.",
+  "blueprint": "Inherited paragraph (3), open direct image, expanded through normalized derived Cech descent: the returned parent's steps 3-4 (slice-section exactness, total augmentation, transpose signs). Nearest blueprint ancestor is null in the live created-node chain; preserved that provenance.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "why": "Exact extension adjunction and small element-site presentation for arbitrary sheaf slices; generic localization tool, not a replacement for the unit direct-image route."
+   },
+   {
+    "node": "lem-sc-injective-presheaf-module-nerve-acyclic",
+    "why": "Positive Cech acyclicity for arbitrary presheaf nerves, avoiding any representability or site pullback assumption; generic ringed-site tool."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Generic finite-diagonal total-augmentation comparison; applies after establishing the Cech rows, with no competing geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-injective-module-injective-presheaf",
+    "why": "Stacks 03FB: an injective module sheaf is injective as a module presheaf, applied on the element site of an arbitrary sheaf slice; generic ringed-site tool (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-sc-injective-presheaf-module-nerve-acyclic",
+  "lem-sc-first-quadrant-column-augmentation",
+  "lem-weil-pbc-ringed-site-injective-module-injective-presheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q158-366c8867c",
+  "group": "Q158",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q158-366c8867c (reviewer sub-agent of L); spot-checked: Read the item and its 7 steps in full; there are no new nodes, and the statement is byte-identical to the one the Q71 re-split created. Source checks: Stacks 03FB and 03FC with their proofs, homology 0133 including its second-variable variant, and tags 04IE/04J4/00WN/086K/03EI/05RU checked against tags/tags; no SGA. The mathematics is correct. Step 1: an exact left adjoint j_{A!} makes I^q|_A injective. Step 2: the identification with Hom_X(A×V_n,U(I)) is sound, and faces and unit match. Step 3: the nerve-acyclic lemma applies on the element site with P=V_A and Q=1, without pullbacks. Step 4: local surjectivity lifts to C/A, and the kernel-pair coequalizer gives degree 0. Step 5: sectionwise exactness becomes sheaf exactness by exact sheafification. Step 6: hypotheses of lem-sc-first-quadrant-column-augmentation match, with K.X n=B^{n,•}. Step 7: I recomputed both cross-sign equations. Small cases V=1, A=∅ and I=0 all check. Tool uses accepted: slice adjunction, presheaf-nerve acyclicity, first-quadrant augmentation. No duplicate: the 03FC node lem-weil-pbc-ringed-site-injective-module-cech-acyclic covers only representable coverings. Two fixes: (1) C5: Step 3 now cites the existing Lean-closed 03FB node lem-weil-pbc-ringed-site-injective-module-injective-presheaf, added to uses, proof_deps and tool_uses. (2) B3/C4: def-pur-localized-ringed-site only localizes at a site object, but X/V_n is a slice at a sheaf. The statement now also cites lem-weil-pbc-ringed-sheaf-slice-adjunction and it is added to stmt_deps; the content is unchanged and there is no cycle. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-cech-injective-image-augmentation.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CechInjectiveImageAugmentation",
+  "declaration": "CategoryTheory.CechInjectiveImage.cech_injective_image_augmentation",
+  "declarations": [
+   "CategoryTheory.CechInjectiveImage.testObject",
+   "CategoryTheory.CechInjectiveImage.evaluate",
+   "CategoryTheory.CechInjectiveImage.freeAbelian",
+   "CategoryTheory.CechInjectiveImage.sections",
+   "CategoryTheory.CechInjectiveImage.sectionsMap",
+   "CategoryTheory.CechInjectiveImage.freeModule",
+   "CategoryTheory.CechInjectiveImage.generator",
+   "CategoryTheory.CechInjectiveImage.linearize",
+   "CategoryTheory.CechInjectiveImage.transpose",
+   "CategoryTheory.CechInjectiveImage.row",
+   "CategoryTheory.CechInjectiveImage.sliceRow",
+   "CategoryTheory.CechInjectiveImage.rowComplex",
+   "CategoryTheory.CechInjectiveImage.augment",
+   "CategoryTheory.CechInjectiveImage.localizedTranspose",
+   "CategoryTheory.CechInjectiveImage.ExactAugmentation",
+   "CategoryTheory.CechInjectiveImage.cech_injective_image_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CechInjectiveImageAugmentation.lean",
+  "statement": "theorem cech_injective_image_augmentation {R : Sheaf J RingCat.{u}} {S : Sheaf K RingCat.{u}} [HasDerivedCategory.{w} (ringedSiteModules.{u} S)] (f : RingedToposMorphism R S) (fInverse : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) [fInverse.Additive] [PreservesFiniteLimits fInverse] [PreservesFiniteColimits fInverse] (_fAdj : fInverse ⊣ f.modules) (_commR : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) (_commS : ∀ (U : Xᵒᵖ) (a b : S.obj.obj U), a * b = b * a) (D : CoherentCechImageModel R) (V : Sheaf J (Type u)) [Epi (terminal.from V)] (I : CochainComplex (ringedSiteModules.{u} R) ℕ) (_injective : ∀ q : ℕ, Injective (I.X q)) : ExactAugmentation f D V I",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the landed def-sfb-coherent-cech-image-model for the actual localization bicomplex and unit normalization. ExactAugmentation spells out every sectionwise, sheafwise, total and transpose-sign clause. Section identifications are fixed on free generators by the geometric and localization adjunctions; no arbitrary comparison or chosen existence-only object is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f03d50655",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: cosimplicial section iso pinned on free generators by localizedTranspose (adjunction composite), sectionwise injective/exact/higher vanishing, sheaf rows quasi-iso, total b fully pinned by IsAugmentation with QuasiIso and Q(b) iso in the unbounded DerivedCategory, transpose sign (-1)^(nq) consistent with Mathlib ιTotal_totalFlipIso_f_inv and up-ℕ σ, identity at n=0. Hypotheses: IsIso ringMap, exact left adjoint fInverse, Epi V→1, injective terms; nothing stronger. D: the landed def-sfb-coherent-cech-image-model, unique up to unique iso. Records: dependency nodes byte-identical to side-live; stmt_deps gains only that landed node (allowed); statement verbatim; report sections present; docstrings carry Source/blueprint and the 7 proof steps; only sorry is the theorem proof. No compile (no change); worker's clean compiles and dry run. Advisories: unused proof-only imports; element* decls owned by def-sfb-element-site-localization, reached only indirectly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-8a512",
+  "group": "V4",
+  "result": "fix",
+  "landing": "20261025T164550-L-1034685",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 8a5121f0 vs passed 724afe8f (Lean and node files byte-identical; dependency modules unchanged in clone b0070fa); change records vs #check binder evidence of the earlier review"
+ },
+ "statement_change": {
+  "date": "2026-10-25",
+  "by": "V4 stage 3",
+  "old_statement": "Let $\\mathcal X,\\mathcal Y$ be topoi presented by small sites in fixed larger coefficient universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], with sheaves of commutative rings $R_X,R_Y$ and module categories [def-weil-sheaf-of-modules-category]. Let $f:(\\mathcal X,R_X)\\to(\\mathcal Y,R_Y)$ be a morphism of ringed topoi [def-weil-pbc-ringed-topos-morphism] with Cartesian coefficient identification and exact module inverse image. Let $V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, $V_n=V^{\\times(n+1)}$, and $v_n:\\mathcal X/V_n\\to\\mathcal X$ the slice localizations with rings $v_n^*R_X$ [def-pur-localized-ringed-site, lem-weil-pbc-ringed-sheaf-slice-adjunction]. All diagrams are small. Use ordinary unbounded module derived categories with localization functor $Q$ [def-weil-abstract-derived-category], and finite-diagonal total complexes with differential $d_{\\mathrm{Cech}}+(-1)^n d_I$ in Cech degree $n$ [def-sp-double-complex-total]. Let $I^\\bullet$ be any nonnegative complex of injective $R_X$-modules [def-sp-injective-resolutions]. Set $B^{n,q}=(fv_n)_*v_n^*I^q$ with alternating restriction differential horizontally and $d_I$ vertically. Let $b:f_*I\\to\\operatorname{Tot}B$ be the localization-unit augmentation with components into the $(0,q)$ summands. For each object $W$ of the chosen site of $\\mathcal Y$, let $A=f^{-1}(h_W^\\#)$, where $h_W^\\#$ is the sheafification of the representable presheaf of sets [def-weil-pbc-sheafification]. In $\\mathcal X/A$, put $V_A=V\\times A\\to A$. The sheaf $I^q|_A$ is injective, and direct-image adjunction identifies $B^{n,q}(W)$ with its sections over $V_A^{\\times_A(n+1)}$, compatibly with the faces and augmentation. The section complex\n$$0\\longrightarrow (f_*I^q)(W)\\longrightarrow B^{0,q}(W)\\longrightarrow B^{1,q}(W)\\longrightarrow\\cdots$$\nis exact: its degree-zero kernel is exactly the restriction image of $(f_*I^q)(W)$, and its higher Cech cohomology vanishes. This includes arbitrary topos objects $A,V_A$, without a representability assumption on the original site. Thus the augmented rows are exact as complexes of module sheaves, and the specified $b$ is a quasi-isomorphism. In particular $Q(b)$ is an isomorphism in $D(\\operatorname{Mod}(R_Y))$. Under transposition of the two double-complex degrees, multiplication on bidegree $(n,q)$ by $(-1)^{nq}$ is a chain isomorphism between the two signed total conventions and is the identity on the augmentation summands $n=0$.",
+  "what": "Remove the unused Cartesian coefficient assumption. Every helper in the existing complete proof already treats an arbitrary structural ring map, and the proof compiles unchanged without IsIso f.ringMap. This is needed for the arbitrary-ring-map augmented pushforward model.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tag 03FC (lemma-injective-module-trivial-cech), including injective-presheaf acyclicity and degree-zero gluing; homology.tex Tag 0133 (lemma-double-complex-gives-resolution), second-variable variant; agent extension to arbitrary slice objects, returned proof steps 3-4."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-derived-cech-image-totalization",
+    "holds": true,
+    "note": "The stronger augmentation theorem still applies to its Cartesian special case."
+   },
+   {
+    "id": "lem-sfb-cech-pushforward-augmented-model",
+    "holds": true,
+    "note": "Now applies directly to f, avoiding the separate finite-total derived comparison."
+   }
+  ]
+ }
+}

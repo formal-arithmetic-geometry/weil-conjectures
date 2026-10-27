@@ -1,0 +1,144 @@
+{
+ "id": "lem-u9-proetale-abelian-specialization-universes",
+ "kind": "statement",
+ "title": "Abelian specialization units with independent coefficient and scheme universes",
+ "statement": "Let $X,Z$ be schemes in universe $t$ [def-pc-scheme], $i:Z\\to X$ a closed immersion [def-weil-closed-immersion], and $V$ an affine object of the small pro-etale site [def-weil-pbc-proetale-site]. Fix any coefficient universe $u$ and put $w=\\max(u,t+1)$. Assume evaluation at $V$ sends every epimorphism of sheaves valued in $\\mathrm{Type}(w)$ to a surjection. Assume every point of $V$ specializes to a point of $V\\times_X Z$ [def-pc-fibre-product]. For any functor $B$ on abelian sheaves valued in $\\mathrm{AddCommGrpCat}(w)$ equipped with an adjunction $B\\dashv i_*$ to the actual sectionwise direct image [def-weil-proetale-inverse-image], and every abelian sheaf $M$, the unit component $M(V)\\to (BM)(V\\times_X Z)$ is bijective. No coefficient ring, scalar extension, or completeness hypothesis occurs.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC, lemma-compute-i-star; Tag 09BL, lemma-closed-immersion-affines-apply (1),(2)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Construct sheafification in the coefficient universe on essentially small models, and left Kan extension using essentially small comma categories. Transport the supplied projective evaluation and specialization conditions to the identity affine basis object by splitting a cover using the large-universe Yoneda identity. The quotient is the actual kernel quotient of the closed-fibre global sections map.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-affine-proetale-single-cover-local-surjectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the fully faithful affine closed-lift adjunction. Its counit has invertible closed base change. Hence its image contains the closed fibre; flat generalization lifting and the specialization condition make it surjective. The representable cover is epi, so projectivity splits it. Adjunction injectivity makes the other composite the identity.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Covers of the closed fibre lift to covers of the lifted object. Split them there by projectivity and descend their sections through full faithfulness. For precomposition by the lift, equality after sheafification descends by separatedness after lifting covers. Local preimages glue over the finite disjoint-union cover, and its splitting gives a global preimage. Thus the sheafification unit on the closed fibre is bijective, including for an empty affine.",
+   "uses": [
+    "lem-weil-pbc-affine-closed-site-functor-properties",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-affine-proetale-single-cover-local-surjectivity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Forgetting abelian groups commutes with sheafification. Across the affine basis equivalences the inverse mate of the commuting direct-image square is invertible. Its unit equation identifies the actual affine unit with the preceding bijection composed with restriction along the invertible counit. For weakly etale localization, compute the rotated site mate as the composite of pullback composition isomorphisms. Conjugating adjunctions shows its inverse mate invertible; the mate unit equation transports the affine computation back to V. Compare with the supplied adjunction by unit_leftAdjointUniq_hom_app.",
+   "uses": [
+    "lem-stage3-inverse-mate-equivalences",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "U9 stage 3; coefficient-universe generalization of the proved specialization coordinate, counit, sheafification, and unit-comparison arguments",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09AC and Tag 09BL (1),(2). All local helper proofs are included in the new Lean module."
+ },
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-affine-proetale-single-cover-local-surjectivity",
+  "lem-weil-pbc-affine-closed-site-functor-properties",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-stage3-inverse-mate-equivalences"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image adjunction unit bijective sections weakly contractible affine closed immersion specialization",
+   "results": "AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine; AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv; AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen; AlgebraicGeometry.ΓSpec.adjunction; AlgebraicGeometry.Spec.reflective; AlgebraicGeometry.Spec.fullyFaithful; AlgebraicGeometry.isIso_SpecMap_iff; AlgebraicGeometry.Scheme.kerAdjunction",
+   "date": "2026-10-27",
+   "verdict": "No direct independent-universe specialization theorem; use the affine-site proof and the adjunction unit uniqueness equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "results": "CategoryTheory.Adjunction.unit_leftAdjointUniq_hom_app",
+   "date": "2026-10-27",
+   "verdict": "No direct independent-universe specialization theorem; use the affine-site proof and the adjunction unit uniqueness equation."
+  },
+  {
+   "tool": "grep",
+   "query": "Sheaf.*[Uu]niverse|[Ss]pecialization.*[Uu]nit",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/Algebra/Star/Unitary.lean; Mathlib/LinearAlgebra/Determinant.lean; Mathlib/CategoryTheory/Sites/Canonical.lean; Mathlib/CategoryTheory/Category/Basic.lean; Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/SheafOfTypes.lean; Mathlib/CategoryTheory/Sites/Continuous.lean",
+   "date": "2026-10-27",
+   "verdict": "No direct independent-universe specialization theorem; use the affine-site proof and the adjunction unit uniqueness equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.OrdinaryCompletedSpecializationUnit",
+  "date": "2026-10-27",
+  "group": "U9"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison. The complementary open-closed localization argument. The abelian inverse-image computation on the closed specialization neighbourhood, before transporting any module action.",
+   "via": [
+    "lem-fix-ordinary-completed-specialization-unit",
+    "lem-fix-ordinary-completed-open-closed-detection",
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAbelianSpecializationOfUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAbelianSpecializationOfUniverses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_abelian_unit_bijective_of_specialization",
+  "statement": "theorem proEtale_abelian_unit_bijective_of_specialization\n    {X Z : Scheme.{t}} (i : Z ⟶ X) [IsClosedImmersion i]\n    (V : X.ProEt) [IsAffine V.left]\n    (hweak : ∀ (P Q : Sheaf (ProEt.topology X) (Type (max u (t + 1)))) (φ : P ⟶ Q),\n      Epi φ → Function.Surjective (φ.hom.app (op V)))\n    (hspec : ∀ x : V.left, ∃ z : ↥(pullback V.hom i),\n      Specializes x ((pullback.fst V.hom i) z))\n    (B : Sheaf (ProEt.topology X) AddCommGrpCat.{max u (t + 1)} ⥤\n      Sheaf (ProEt.topology Z) AddCommGrpCat.{max u (t + 1)})\n    (aB : B ⊣ (proEtaleBaseChange i).sheafPushforwardContinuous\n      AddCommGrpCat.{max u (t + 1)} (ProEt.topology X) (ProEt.topology Z))\n    (M : Sheaf (ProEt.topology X) AddCommGrpCat.{max u (t + 1)}) :\n    Function.Bijective ((aB.unit.app M).hom.app (op V))",
+  "branch": "sheaf-dag",
+  "by": "U9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T034757-L-3685820",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261027T034757-L-3685820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

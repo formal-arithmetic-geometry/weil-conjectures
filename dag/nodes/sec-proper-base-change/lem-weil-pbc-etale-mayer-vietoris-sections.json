@@ -124,5 +124,59 @@
   "kind": "interface",
   "note": "independent Codex review: Matched all five Lean signatures and proofs with their DAG records, source arguments, unchanged existing interface, clean compilation, and axiom results."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.etale_mayerVietoris_sections"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.etale_mayerVietoris_sections",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSections",
+     "lines": [
+      133,
+      183
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme [def-pc-scheme], $U,V\\subseteq X$ open subschemes with $U\\cup V=X$, and $F$ an abelian sheaf on the small étale site $X_{\\Et}$ [def-weil-pbc-etale-site]. Let $a:F(X)\\to F(U)\\oplus F(V)$, $a(s)=(s|_U,s|_V)$, and $b:F(U)\\oplus F(V)\\to F(U\\cap V)$, $b(s,t)=s|_{U\\cap V}-t|_{U\\cap V}$, all restrictions being along the open immersions. Then $a$ is injective and $\\ker b=\\operatorname{im}a$, i.e. $0\\to F(X)\\xrightarrow{a}F(U)\\oplus F(V)\\xrightarrow{b}F(U\\cap V)$ is exact. No injectivity assumption on $F$ is needed.",
+  "proof": [
+   {
+    "text": "The inclusions $U\\to X$ and $V\\to X$ are open immersions, hence etale, and their images $U$ and $V$ cover $X$; so they form a covering of $X$ in the small etale site [def-weil-pbc-etale-site]. The fibre product of the two open immersions is $U\\cap V$ with its two inclusions, and $U\\times_XU=U$, $V\\times_XV=V$ because open immersions are monomorphisms.",
+    "uses": [
+     "def-weil-pbc-etale-site"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The sheaf condition for this covering says that $F(X)\\to F(U)\\times F(V)\\rightrightarrows F(U\\times_XU)\\times F(U\\times_XV)\\times F(V\\times_XU)\\times F(V\\times_XV)$ is an equalizer. The components indexed by equal indices impose no condition, since $U\\times_XU=U$ and the two restrictions to it agree; the components indexed by different indices compare the restrictions to $U\\cap V$. Hence $s\\mapsto(s|_U,s|_V)$ identifies $F(X)$ with the set of pairs $(s,t)\\in F(U)\\times F(V)$ with $s|_{U\\cap V}=t|_{U\\cap V}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "This says exactly that $a$ is injective and that every pair with $b(s,t)=0$ is $a(r)$ for some $r\\in F(X)$. Conversely $b\\circ a=0$, since the restrictions of a global section to $U\\cap V$ through $U$ and through $V$ agree by functoriality of restriction. So $0\\to F(X)\\xrightarrow{a}F(U)\\oplus F(V)\\xrightarrow{b}F(U\\cap V)$ is exact.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

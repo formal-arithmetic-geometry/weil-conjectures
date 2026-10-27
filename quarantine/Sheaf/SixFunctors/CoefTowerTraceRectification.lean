@@ -22,7 +22,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
-import Sheaf.Paper.SemilinearDerivedSections
 
 /-!
 # Finite counits on the dualizing compact-support tower
@@ -45,7 +44,6 @@ module towers before localization. No inverse limit occurs in this construction.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option warn.sorry false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
@@ -98,7 +96,54 @@ theorem coefTraceConstantScalars_exact (W : Scheme.{u}) :
     (coefTraceConstantScalars l E W).Additive ∧
       PreservesFiniteLimits (coefTraceConstantScalars l E W) ∧
       PreservesFiniteColimits (coefTraceConstantScalars l E W) := by
-  sorry
+  let J := ProEt.topology W
+  let V := forget₂ (ModuleCat.{u + 1} (coefTraceRing l E)) AddCommGrpCat.{u + 1}
+  let U := sheafCompose J V
+  have : PreservesFiniteLimits U := by
+    have : PreservesFiniteLimits (U ⋙ sheafToPresheaf J AddCommGrpCat.{u + 1}) := by
+      change PreservesFiniteLimits (sheafToPresheaf J _ ⋙
+        (Functor.whiskeringRight W.ProEtᵒᵖ
+          (ModuleCat.{u + 1} (coefTraceRing l E)) AddCommGrpCat.{u + 1}).obj V)
+      have : PreservesFiniteLimits ((Functor.whiskeringRight W.ProEtᵒᵖ
+          (ModuleCat.{u + 1} (coefTraceRing l E)) AddCommGrpCat.{u + 1}).obj V) :=
+        ⟨fun _ _ _ ↦ inferInstance⟩
+      infer_instance
+    exact preservesFiniteLimits_of_reflects_of_preserves _
+      (sheafToPresheaf J AddCommGrpCat.{u + 1})
+  have : J.PreservesSheafification V := by
+    constructor
+    intro P Q f hf
+    change J.W (Functor.whiskerRight f V)
+    have : Presheaf.IsLocallyInjective J f := hf.isLocallyInjective
+    have : Presheaf.IsLocallySurjective J f := hf.isLocallySurjective
+    apply (J.W_iff_isLocallyBijective _).mpr
+    constructor
+    · exact ⟨fun x y h ↦ Presheaf.equalizerSieve_mem J f x y h⟩
+    · exact ⟨fun x ↦ Presheaf.imageSieve_mem J f x⟩
+  have : PreservesFiniteColimits U := by
+    constructor
+    intro K _ _
+    rw [(sheafificationAdjunction J
+      (ModuleCat.{u + 1} (coefTraceRing l E))).preservesColimitsOfShape_iff]
+    have : PreservesColimitsOfShape K ((Functor.whiskeringRight W.ProEtᵒᵖ
+          (ModuleCat.{u + 1} (coefTraceRing l E)) AddCommGrpCat.{u + 1}).obj V) :=
+      inferInstance
+    exact preservesColimitsOfShape_of_natIso
+      (sheafComposeNatIso J V
+        (sheafificationAdjunction J (ModuleCat.{u + 1} (coefTraceRing l E)))
+        (sheafificationAdjunction J AddCommGrpCat.{u + 1}))
+  have : U.ReflectsIsomorphisms := inferInstance
+  have : ReflectsFiniteLimits U := ⟨fun _ _ _ ↦ inferInstance⟩
+  have : ReflectsFiniteColimits U := reflectsFiniteColimitsOfReflectsIsomorphisms U
+  have : PreservesFiniteLimits (coefTraceConstantScalars l E W ⋙ U) :=
+    inferInstanceAs (PreservesFiniteLimits (SheafOfModules.toSheaf
+      (completedIntegralCoefficientSheafUnrestricted l E W)))
+  have : PreservesFiniteColimits (coefTraceConstantScalars l E W ⋙ U) :=
+    inferInstanceAs (PreservesFiniteColimits (SheafOfModules.toSheaf
+      (completedIntegralCoefficientSheafUnrestricted l E W)))
+  refine ⟨?_, preservesFiniteLimits_of_reflects_of_preserves _ U,
+    preservesFiniteColimits_of_reflects_of_preserves _ U⟩
+  exact { map_add := by intros; rfl }
 
 /-- Additive constant scalar restriction.
 Source: blueprint finite counit tower (blueprint: lem-coef-tower-trace-rectification). -/
@@ -154,7 +199,14 @@ cokernels are computed on each vertical slice and restriction changes only actio
 theorem coefTraceSystemRestriction_exact (W : Scheme.{u}) :
     PreservesFiniteLimits (coefTraceSystemRestriction l E W) ∧
       PreservesFiniteColimits (coefTraceSystemRestriction l E W) := by
-  sorry
+  have : PreservesFiniteLimits
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (coefTraceConstantScalars l E W)) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : PreservesFiniteColimits
+      ((Functor.whiskeringRight ℕᵒᵖ _ _).obj (coefTraceConstantScalars l E W)) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  unfold coefTraceSystemRestriction
+  exact ⟨inferInstance, inferInstance⟩
 
 /-- Left exactness follows levelwise from exact scalar restriction.
 Source: blueprint finite counit tower (blueprint: lem-coef-tower-trace-rectification). -/
@@ -207,7 +259,11 @@ Source: Stacks 0941 (blueprint: lem-coef-tower-trace-rectification).
 Proof: sections and tower morphisms add componentwise. -/
 @[instance] theorem coefTraceSections_additive (S : Scheme.{u}) :
     (coefTraceSections l E S).Additive := by
-  sorry
+  have : ((sheafSections (ProEt.topology S)
+      (ModuleCat.{u + 1} (coefTraceRing l E))).obj
+        (op (ProEt.mk (𝟙 S)))).Additive := ⟨by intros; rfl⟩
+  unfold coefTraceSections
+  infer_instance
 
 /-- Exactness of levelwise open extension.
 Source: Stacks 0941 (blueprint: lem-coef-tower-trace-rectification).
@@ -216,7 +272,8 @@ are computed levelwise. -/
 theorem coefTraceOpen_exact {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     PreservesFiniteLimits (coefTraceOpen l E j) ∧
       PreservesFiniteColimits (coefTraceOpen l E j) := by
-  sorry
+  unfold coefTraceOpen
+  exact ⟨⟨fun _ _ _ ↦ inferInstance⟩, ⟨fun _ _ _ ↦ inferInstance⟩⟩
 
 /-- Left exact open extension on towers.
 Source: Stacks 0941 (blueprint: lem-coef-tower-trace-rectification). -/
@@ -270,7 +327,8 @@ Proof: both sides send the lift of r to its residue class at level n+1. -/
 theorem coefTraceQuotient_comp {m n : ℕ} (h : n ≤ m) :
     coefTraceQuotient l E n =
       (finiteDualizingQuotient l E h).comp (coefTraceQuotient l E m) := by
-  sorry
+  ext x
+  rfl
 
 /-- Derived evaluation from the derived category of strict module towers.
 Source: Stacks 0941 (blueprint: lem-coef-tower-trace-rectification). -/
@@ -440,7 +498,9 @@ theorem coefTraceQuotient_linear {m n : ℕ} (h : n ≤ m)
     (r : coefTraceRing l E) (x : coefTraceQuotientModule l E m) :
     finiteDualizingQuotient l E h (r • x : coefTraceQuotientModule l E m) =
       r • (finiteDualizingQuotient l E h x : coefTraceQuotientModule l E n) := by
-  sorry
+  rcases x with ⟨x⟩
+  obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+  rfl
 
 /-- The genuine quotient A_m to A_n as an R-linear map.
 Source: blueprint proof paragraph 2 (blueprint: lem-coef-tower-trace-rectification). -/

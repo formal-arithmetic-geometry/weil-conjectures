@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-native-principal-cone-criterion",
+ "kind": "statement",
+ "title": "Native Principal Cone Criterion",
+ "status": "split",
+ "statement": "For a site of object size c and arrow size v, a commutative ring sheaf of size q=max(c,v,r), and the displayed global and slice sheafification, derived-category and countable-product hypotheses on the site and its AsSmall model, the principal cone completion of any scalar chain endomorphism μ is principally locally complete. Q(P) is principally locally complete if and only if the specified principal cone unit is invertible. No site-universe identification, regularity, K-flatness or boundedness is used. Dependencies: [lem-pur-native-ringed-restriction-slices], [lem-pur-native-ringed-restriction-localization], [def-pur-ringed-principal-local-tests], [def-pur-principal-cone-tower].",
+ "stmt_deps": [
+  "lem-pur-native-ringed-restriction-slices",
+  "lem-pur-native-ringed-restriction-localization",
+  "def-pur-ringed-principal-local-tests",
+  "def-pur-principal-cone-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step."
+ },
+ "proof": [
+  {
+   "text": "The principal cone completion satisfies the local criterion before shrinking the site. Restrict the complex and scalar to AsSmall and apply the small-site criterion. The additive-equivalence comparison identifies its cone completion and its specified unit with the restriction of the native ones. Transfer local completeness by the small-model equivalence. For the unit criterion use the derived comparison square, cancel its two isomorphisms, and reflect invertibility through the derived equivalence. Source: Stacks 03A0, 03CH, 03DA, 03DG, 0999, 099B, 0A0E and 0941.",
+   "uses": [
+    "lem-pur-native-ringed-restriction-slices",
+    "lem-pur-native-ringed-restriction-localization",
+    "def-pur-ringed-principal-local-tests",
+    "def-pur-principal-cone-tower",
+    "lem-pur-native-principal-completeness-small-model",
+    "lem-pur-principal-cone-exact-equivalence",
+    "lem-pur-principal-cone-small-site-criterion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-native-ringed-restriction-slices",
+  "lem-pur-native-ringed-restriction-localization",
+  "def-pur-ringed-principal-local-tests",
+  "def-pur-principal-cone-tower",
+  "lem-pur-native-principal-completeness-small-model",
+  "lem-pur-principal-cone-exact-equivalence",
+  "lem-pur-principal-cone-small-site-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites.tex Tags 03A0 and 03CH for equivalent sites and slices; sites-modules.tex Tags 03DA and 03DG for abelian module categories and intrinsic properties; sites-cohomology.tex Tags 08J7, 0A95 and 0941 for Hom and strict Roos comparisons. See the declaration docstrings for the particular step.",
+  "note": "Fully proved in Lean by H4; no new sorry. This supplies the stated principal-cone argument, retaining the unit route."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a site of object size c and arrow size v, a commutative ring sheaf of size q=max(c,v,r), and the displayed global and slice sheafification, derived-category and countable-product hypotheses on the site and its AsSmall model, the principal cone completion of any scalar chain endomorphism μ is principally locally complete. Q(P) is principally locally complete if and only if the specified principal cone unit is invertible. No site-universe identification, regularity, K-flatness or boundedness is used.",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Presheaf.isLocallySurjective_toSheafify'\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallySurjective\", \"type\": \"{D : Type*} [Category* D] {FD : D → D → Type*} {CD : D → Type (max u v)} [∀ X Y, FunLike (FD X Y) (CD X) (CD Y)]\\n  [ConcreteCategory.{max u v} D FD] (P : Cᵒᵖ ⥤ D) [HasWeakSheafify J D] [J.HasSheafCompose (forget D)]\\n  [J.PreservesSheafification (forget D)] : IsLocallySurjective J (toSheafify J P)\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $ \\\\mathcal{C} $, a concrete category $ \\\\mathcal{D} $ with forgetful functor to types, and a presheaf $ P: \\\\mathcal{C}^\\\\text{op} \\\\to \\\\mathcal{D} $, the\"}\n  {\"name\": \"CategoryTheory.Sheaf.isColimitSheafifyCocone\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) (hE : IsColimit E) : IsColimit (sheafifyCocone E)\", \"doc\": \"Let $F : \\\\mathcal{K} \\\\to \\\\text{Sh}(J, \\\\mathcal{D})$ be a functor representing a diagram of sheaves on a site $(\\\\mathcal{C}, J)$ with values in a category $\\\\mathcal{D}$. Let $E$ be a cocone for the dia\"}\n  {\"name\": \"CategoryTheory.Sheaf.coneΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) : Cone F.val\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this constructs a cone over the underlying presheaf $ F $ with apex given by the global sections $\\\\Gamma(F)$ of $ F $. The c\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLimitConeΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] (F : Sheaf J A) : IsLimit F.coneΓ\", \"doc\": \"For a sheaf $ F $ on a category $\\\\mathcal{C}$ with a Grothendieck topology $ J $, the cone over the underlying presheaf $ F $ with apex given by the global sections $\\\\Gamma(F)$ is a limit cone. This m\"}\n  {\"name\": \"PresheafOfModules.sheafify\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafify\", \"type\": \": SheafOfModules.{v} R\", \"doc\": \"Given a presheaf of modules $M_0$ over a presheaf of rings $R_0$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs the sheafification of $M_0$ as a sheaf of modules over the \"}\n  {\"name\": \"CategoryTheory.Sheaf.sheafifyCocone\", \"module\": \"Mathlib.CategoryTheory.Sites.Limits\", \"type\": \"{F : K ⥤ Sheaf J D} (E : Cocone (F ⋙ sheafToPresheaf J D)) : Cocone F\", \"doc\": \"Given a cocone $ E $ in the category of presheaves over a diagram obtained by composing a functor $ F $ to sheaves with the inclusion functor to presheaves, this constructs the corresponding cocone in\"}\n  {\"name\": \"CommRingCat.limitConeIsLimit\", \"module\": \"Mathlib.Algebra.Category.Ring.Limits\", \"type\": \": IsLimit (limitCone.{v, u} F)\", \"doc\": \"For any functor $ F : \\\\mathcal{J} \\\\to \\\\text{CommRingCat} $, the constructed limit cone in the category of commutative rings satisfies the universal property of a limit. This follows from the fact that\"}\n  {\"name\": \"SheafOfModules.hasLimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimitsOfSize.{v₂, v} (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits for diagrams indexed by categories\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"map\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.map_isIso\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] (F : CategoryTheory.Functor C D) (f : X ⟶ Y) [CategoryTheory.IsIso f] : CategoryTheory.IsIso (F.map f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsIso.hom_inv_id_map\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y) [I : CategoryTheory.IsIso f] {D : Type u_1} [_instD : CategoryTheory.Category.{u_2, u_1} D] (F : CategoryTheory.Functor C D) : CategoryTheory.CategoryStruct.comp (F.map f) (F.map (CategoryTheory.inv f)) = CategoryTheory.CategoryS\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsIso.inv_hom_id_map\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y) [I : CategoryTheory.IsIso f] {D : Type u_1} [_instD : CategoryTheory.Category.{u_2, u_1} D] (F : CategoryTheory.Functor C D) : CategoryTheory.CategoryStruct.comp (F.map (CategoryTheory.inv f)) (F.map f) = CategoryTheory.CategoryS\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsIso.hom_inv_id_map_assoc\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y) [I : CategoryTheory.IsIso f] {D : Type u_1} [_instD : CategoryTheory.Category.{u_2, u_1} D] (F : CategoryTheory.Functor C D) {Z : D} (h : F.obj X ⟶ Z) : CategoryTheory.CategoryStruct.comp (F.map f) (CategoryTheory.CategoryStruct.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.IsIso.inv_hom_id_map_assoc\", \"module\": \"Mathlib.CategoryTheory.Iso\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {X Y : C} (f : X ⟶ Y) [I : CategoryTheory.IsIso f] {D : Type u_1} [_instD : CategoryTheory.Category.{u_2, u_1} D] (F : CategoryTheory.Functor C D) {Z : D} (h : F.obj Y ⟶ Z) : CategoryTheory.CategoryStruct.comp (F.map (CategoryTheory.inv f)) (CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.NatIso.isIso_map_iff\", \"module\": \"Mathlib.CategoryTheory.NatIso\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F₁ F₂ : CategoryTheory.Functor C D} (e : F₁ ≅ F₂) {X Y : C} (f : X ⟶ Y) : CategoryTheory.IsIso (F₁.map f) ↔ CategoryTheory.IsIso (F₂.map f)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.FullyFaithful.isIso_of_isIso_map\", \"module\": \"Mathlib.CategoryTheory.Functor.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {F : CategoryTheory.Functor C D} (hF : F.FullyFaithful) {X Y : C} (f : X ⟶ Y) [CategoryTheory.IsIso (F.map f)] : CategoryTheory.IsIso f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.isIso_of_coyoneda_map_bijective\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : C} (f : X ⟶ Y) (hf : ∀ (T : C), Function.Bijective fun x => CategoryTheory.CategoryStruct.comp f x) : CategoryTheory.IsIso f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.isIso_of_yoneda_map_bijective\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : C} (f : X ⟶ Y) (hf : ∀ (T : C), Function.Bijective fun x => CategoryTheory.CategoryStruct.comp x f) : CategoryTheory.IsIso f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.isIso_iff_coyoneda_map_bijective\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : C} (f : X ⟶ Y) : CategoryTheory.IsIso f ↔ ∀ (T : C), Function.Bijective fun x => CategoryTheory.CategoryStruct.comp f x\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.isIso_iff_yoneda_map_bijective\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : C} (f : X ⟶ Y) : CategoryTheory.IsIso f ↔ ∀ (T : C), Function.Bijective fun x => CategoryTheory.CategoryStruct.comp x f\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.isIso_iff_isIso_coyoneda_map\", \"module\": \"Mathlib.CategoryTheory.Yoneda\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {X Y : C} (f : X ⟶ Y) : CategoryTheory.IsIso f ↔ ∀ (c : C), CategoryTheory.IsIso ((CategoryTheory.coyoneda.map f.op).app c)\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n (isIso_iff_of_reflects_iso|isIso_comp_right_iff) Mathlib/ (local read-only Mathlib source)",
+   "results": "43 matching source lines. First matches:\nMathlib/CategoryTheory/Subobject/MonoOver.lean:145:  (isIso_iff_of_reflects_iso _ (MonoOver.forget X ⋙ Over.forget _)).symm\nMathlib/CategoryTheory/Subobject/ArtinianObject.lean:104:    simpa [isIso_op_iff, isIso_iff_of_reflects_iso, PartialOrder.isIso_iff_eq]\nMathlib/CategoryTheory/Subobject/NoetherianObject.lean:100:    simpa [← MonoOver.isIso_iff_isIso_hom_left, isIso_iff_of_reflects_iso,\nMathlib/CategoryTheory/Simple.lean:65:    rw [← isIso_iff_of_reflects_iso g F, Simple.mono_isIso_iff_nonzero (F.map g),\nMathlib/CategoryTheory/Localization/LocalizerMorphism.lean:326:    rw [← isIso_iff_of_reflects_iso  _ F]\nMathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean:49:lemma isIso_iff_of_reflects_iso {A B : C} (f : A ⟶ B) (F : C ⥤ D) [F.ReflectsIsomorphisms] :\nMathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean:73:    rw [← isIso_iff_of_reflects_iso _ (F ⋙ G)]\nMathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean:82:    rw [← isIso_iff_of_reflects_iso _ F]\nMathlib/CategoryTheory/Functor/ReflectsIso/Basic.lean:89:    rw [← isIso_iff_of_reflects_iso _ F, ← NatIso.naturality_2 α f]\nMathlib/CategoryTheory/Functor/ReflectsIso/Balanced.lean:43:    rw [← isIso_iff_of_reflects_iso (F := F)]\nMathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:126:  rw [← isIso_comp_right_iff (α₁.app X)\nMathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:128:    rightDerivedFunctorComparison_fac_app, isIso_comp_right_iff]",
+   "date": "2026-10-22",
+   "verdict": "Not the full statement. Results give individual categorical/sheaf constructions or unrelated completions; the required independent-universe comparisons and specified unit compatibility are proved explicitly in the delivery."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "date": "2026-10-22",
+  "group": "H4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-integral-principal-cone-local-criterion",
+   "place": "Independent-universe restriction, localization tests and normalized singleton cone comparison in the proof of the principal local criterion.",
+   "via": [
+    "lem-pur-integral-principal-cone-local-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NativePrincipalConeCriterion",
+  "file": "lean/Sheaf/CategoryTheory/NativePrincipalConeCriterion.lean",
+  "declaration": "CategoryTheory.NativeRestriction.nativePrincipalConeCriterion",
+  "statement": "theorem nativePrincipalConeCriterion\n    (a : (R.obj ⋙ forget CommRingCat).sections)\n    (P : CochainComplex (NativeModules.{max c v r, c, v} R) ℤ) (μ : End P)\n    (hμ : ∀ (q : ℤ) (U : Cᵒᵖ) (x : (P.X q).val.obj U),\n      (μ.f q).val.app U x = @SMul.smul _ _ ((P.X q).val.obj U).isModule.toSMul (a.val U) x) :\n    principalLocallyComplete.{c, v, r, w} R a\n        (DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ)) ∧\n      (principalLocallyComplete.{c, v, r, w} R a (DerivedCategory.Q.obj P) ↔\n        IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)))",
+  "declarations": [
+   "CategoryTheory.NativeRestriction.nativePrincipalConeCriterion"
+  ],
+  "branch": "sheaf-dag",
+  "by": "H4",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H4",
+  "result": "pass",
+  "landing": "20261022T114029-L-514678",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

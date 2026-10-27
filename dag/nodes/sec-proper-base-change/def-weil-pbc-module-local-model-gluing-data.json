@@ -1,0 +1,122 @@
+{
+ "id": "def-weil-pbc-module-local-model-gluing-data",
+ "kind": "definition",
+ "title": "Gluing data for prescribed local module families",
+ "status": "split",
+ "statement": "Let $X$ be a ringed topological space, with module sheaves as in [def-weil-sheaf-of-modules-category]. Fix a universe containing its points and ring sections. For every open $U$ fix an index set $I_U$ in that universe and a family $B_{U,t}$ of $\\mathcal O_X|_U$-module sheaves with sections in that universe. Define $D(X,I,B)$ to consist of a subset $\\mathcal U\\subseteq\\operatorname{Op}(X)$ covering $X$, labels $t_U\\in I_U$ for $U\\in\\mathcal U$, and isomorphisms $\\varphi_{UV}:B_{U,t_U}|_{U\\cap V}\\xrightarrow{\\sim}B_{V,t_V}|_{U\\cap V}$ for all $U,V\\in\\mathcal U$, including equal pairs, satisfying $\\varphi_{UT}|_W=\\varphi_{VT}|_W\\circ\\varphi_{UV}|_W$ for every $U,V,T\\in\\mathcal U$ and open $W\\subseteq U\\cap V\\cap T$. Restrictions retain the original section maps and module structures. No finiteness or separation hypothesis is part of this definition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 01BC, lemma-set-isomorphism-classes-finite-type-modules, proof: the collection of gluing data and injectively indexed open coverings"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GluingData|GlueData|gluing.*[Ss]et|glueing.*[Ss]et [Mathlib/Algebra/Category/ModuleCat/Sheaf]",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not encode all cover subsets, prescribed model labels, and their module isomorphisms satisfying the cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"glue\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not encode all cover subsets, prescribed model labels, and their module isomorphisms satisfying the cocycle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The collection of cocycle gluing data for prescribed local sheaves of modules on all open covers is small and every datum has a compatible glued module",
+   "results": "[leanfinder] OK 8 hit(s)\nSheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections\nSheafOfModules.LocalGeneratorsData.X\nSheafOfModules.LocalGeneratorsData.I\nSheafOfModules.LocalGeneratorsData\nSheafOfModules.QuasicoherentData\nSheafOfModules.IsQuasicoherent.nonempty_quasicoherentData\nSheafOfModules.Presentation\nSheafOfModules.QuasicoherentData.I",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not encode all cover subsets, prescribed model labels, and their module isomorphisms satisfying the cocycle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cocycle gluing data for sheaves of modules on an open cover of a ringed space",
+   "results": "[leansearch] OK 8 hit(s)\nAlgebraicGeometry.LocallyRingedSpace.GlueData\nAlgebraicGeometry.SheafedSpace.GlueData\nTopCat.GlueData.ofOpenSubsets\nAlgebraicGeometry.Scheme.Cover.gluedCover\nAlgebraicGeometry.Scheme.Pullback.gluing\nAlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion\nAlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\nTopCat.Sheaf.interUnionPullbackConeLift",
+   "date": "2026-10-23",
+   "verdict": "no match: the results do not encode all cover subsets, prescribed model labels, and their module isomorphisms satisfying the cocycle"
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleLocalModelGluingData|module_local_model_gluing_data_set|lem-weil-pbc-module-local-model-gluing-data-set in Mathlib, lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json",
+   "results": "No hits in the read-only sources or upstream name table. The general-site ModuleGlueData in Sheaf.CategoryTheory.SiteModuleCompatibleTuples permits varying local sheaves and uses all test spans; it does not parametrize cover subsets and labels in prescribed local families. The module gluing theorem accepts a single cover and transitions, without defining the collection D.",
+   "date": "2026-10-23",
+   "verdict": "no existing declaration for the required collection"
+  },
+  {
+   "tool": "grep",
+   "query": "gluing data / glueing data in dag/nodes; tools/blueprint_refs.py search \"gluing data\"",
+   "results": "blueprint search: lem-pc-fpqc-descent (1 blueprint node match). DAG search finds the item and its parent finite-presentation-representatives, formal-gluing nodes, and def-weil-pbc-site-module-compatible-tuples. None defines the cover-and-label collection D for prescribed module families.",
+   "date": "2026-10-23",
+   "verdict": "no existing definition node for D"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-module-local-model-gluing-data-set",
+  "date": "2026-10-23",
+  "group": "Q23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-h1-constructible-representation",
+   "place": "The set of coverings and effective gluing data used in Tag 01BC, below the finite-pushforward step of lemma-weil-pbc-h1-constructible-representation, paragraph 2.",
+   "via": [
+    "lem-weil-pbc-module-local-model-gluing-data-set",
+    "lem-weil-pbc-module-finite-presentation-representatives",
+    "lem-weil-pbc-module-filtered-colimit-finite-presentation",
+    "lem-weil-pbc-module-directed-colimit-finite-presentation",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-weil-pbc-constructible-module-finite-pushforward-noetherian",
+    "lem-weil-pbc-constructible-module-finite-pushforward-embedding"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.Topology.ModuleLocalModelGluingData",
+  "declaration": "AlgebraicGeometry.ModuleLocalModelGluingData",
+  "file": "lean/Sheaf/Topology/ModuleLocalModelGluingData.lean",
+  "statement": "structure ModuleLocalModelGluingData (X : RingedSpace.{u}) (I : Opens X → Type u) (B : ∀ U : Opens X, I U → ringedSiteModules.{u} ((moduleRings X).over U)) : Type u",
+  "branch": "sheaf-dag",
+  "by": "Q23",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e0983563",
+  "group": "Q23",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e0983563",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Item clauses match the Lean: subset cover with ⨆=⊤, labels, overMap transitions for all pairs incl. diagonal with correct orientation, componentwise triple cocycle (U→T)=(U→V)≫(V→T), Small.{u} D, a simultaneous family Φ with θ iso to the local models, and θ_U≫φ_UV=θ_V; shapes are literally those of clause (3) of glue_sheaves_of_modules (I=cover, v=u). New def node has the §5 fields and its TeX matches the structure; the item differs from live only in lean and in stmt_deps (+ the new def node); lean.statement verbatim in both records; imports correct (plain proof_dep import of the GlueSheavesOfModules module). Edge cases: empty X, {X}, {∅,X}, empty I_U/empty D, infinite covers; single universe u. No duplicate (ModuleGlueData is a fixed-cover general-site notion). Advisory: Small conjunct is immediate from the Type u typing, which is exactly the node's 'D is a set', so not a tautology fault; moduleRings is the encoding the brief requires. No compile run (no file changed)."
+ }
+}

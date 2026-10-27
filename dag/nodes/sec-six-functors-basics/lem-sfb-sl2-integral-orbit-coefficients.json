@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-sl2-integral-orbit-coefficients",
+ "kind": "statement",
+ "title": "Integral polynomial orbit coefficients for a lowest-weight SL2 vector",
+ "statement": "Let $B$ be a commutative ring, $q\\geq0$ an integer, and $V=\\bigoplus_{i=0}^q V_i$ a finite free $B$-module with specified finite free summands [def-weil-pbc-free-module, def-weil-pbc-direct-sum-modules]. Let $\\rho$ be a representation of $\\operatorname{SL}_{2,B}$ on $V$: for every commutative $B$-algebra $C$ it gives a group homomorphism $\\rho_C:\\{g\\in\\operatorname{Mat}_2(C):\\det g=1\\}\\to\\operatorname{Aut}_C(C\\otimes_B V)$, natural in $C$, whose matrix entries are regular functions in $B[a,b,c,d]/(ad-bc-1)$. Tensor products have the meaning of [def-weil-pbc-module-tensor-product]. Put $x_+(z)=I_2+zE_{12}$, $x_-(z)=I_2+zE_{21}$, $h(t)=\\operatorname{diag}(t,t^{-1})$, and $w=x_+(1)x_-(-1)x_+(1)$, where $I_2$ is the identity matrix and $E_{ij}$ has its only nonzero entry $1$ at position $(i,j)$. Assume $\\rho_C(h(t))$ acts on $C\\otimes_B V_i$ as multiplication by $t^{2i-q}$ for every $C$ and every unit $t\\in C$. Let $v\\in V_0$ be fixed by every $\\rho_C(x_-(z))$ after scalar extension.\n\nThere are unique vectors $v_i\\in V_i$, with $v_0=v$, such that $\\rho_{B[z]}(x_+(z))v=\\sum_{i=0}^q z^i v_i$. For all $C$, all $z\\in C$ and $0\\leq i\\leq q$, they satisfy\n$$\\rho_C(x_+(z))v_i=\\sum_{j=0}^{q-i}\\binom{i+j}{j}z^jv_{i+j},\\qquad\n\\rho_C(x_-(z))v_i=\\sum_{j=0}^{i}\\binom{q-i+j}{j}z^jv_{i-j},\\qquad\n\\rho_C(w)v_i=(-1)^i v_{q-i}.$$\nHere vectors on the right are mapped to $C\\otimes_B V$. In particular the coefficient of $z$ in $\\rho(x_+(z))v_i$ is $(i+1)v_{i+1}$ when $i<q$. The identities commute with arbitrary and successive base changes. No nonzero, spanning or primitivity condition is imposed on the $v_i$, and no factorial is inverted.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Propositions 22.14 and 22.15, printed pp.466--467, motivate polynomial orbit coefficients and Weyl reversal. The arbitrary-ring binomial identities are an agent generalization proved by coefficient comparison in the SL2 Gauss identity, not a quotation of these field statements."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-module-tensor-product",
+  "def-sfb-regular-sl2-representation"
+ ],
+ "proof": [
+  {
+   "text": "Choose the union of bases of the specified summands as a basis of $V$. Substitute $a=d=1$, $b=T$, $c=0$ in the regular matrix entries of $\\rho$. Applied to $v$, this gives a finite polynomial $P(T)=\\sum_{n\\geq0}T^n a_n$ with $a_n\\in V$. Here and below $V[T]$ means finite formal sums with coefficients in $V$; the basis identifies it with $B[T]\\otimes_B V$, so coefficients are unique. Naturality gives $\\rho_C(x_+(z))(1\\otimes v)=\\sum_n z^n(1\\otimes a_n)$ for every $B$-algebra $C$ and $z\\in C$. Evaluation at $T=0$ gives $a_0=v$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-direct-sum-modules",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.466, paragraph preceding Proposition 22.14: polynomial expansion; arbitrary-ring version by substitution in the given matrix entries."
+   }
+  },
+  {
+   "text": "Write $a_n=\\sum_{i=0}^q a_{n,i}$ in the given direct sum. Over $B[T,U,U^{-1}]$, the matrix identity $h(U)x_+(T)=x_+(U^2T)h(U)$ and the weight of $v$ give\n$$\\sum_{n,i}T^nU^{2i-q}a_{n,i}=\\sum_{n,i}T^nU^{2n-q}a_{n,i}.$$\nCompare the $i$-th component and then Laurent coefficients. If $i\\ne n$, the coefficient of $T^nU^{2i-q}$ says $a_{n,i}=0$. Laurent coefficients are independent over any $B$: multiplying a finite Laurent sum by a large power of $U$ gives an ordinary polynomial with the same coefficients. Thus $a_n\\in V_n$ for $n\\leq q$ and $a_n=0$ for $n>q$. Set $v_i=a_i$.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.466, Proposition 22.14, conjugation and weight comparison, performed at a universal unit instead of points of a field."
+   }
+  },
+  {
+   "text": "Any list in the assertion must give the polynomial $P(T)$ after taking $C=B[T]$ and $z=T$; equality of formal coefficients makes that list equal to $(v_i)_{i=0}^q$. The expansion from the preceding steps therefore proves existence and uniqueness, with $v_0=v$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed p.466, Proposition 22.14, constant term and uniqueness in the universal-polynomial formulation."
+   }
+  },
+  {
+   "text": "Over $B[S,T]$, the identity $x_+(S)x_+(T)=x_+(S+T)$ gives\n$$\\sum_{i=0}^q T^i\\rho(x_+(S))v_i=\\sum_{k=0}^q(S+T)^k v_k.$$\nApply the cited binomial expansion in the commutative ring $B[S,T]$. The coefficient of $T^i$ on the right is $\\sum_{k=i}^q\\binom{k}{i}S^{k-i}v_k$. Put $k=i+j$; the integer equality $\\binom{i+j}{i}=\\binom{i+j}{j}$ follows by interchanging the two factorials in its defining formula. This is the asserted upper-root formula over $B[S]$.",
+   "uses": [
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent supplement to Proposition 22.14: upper-root addition and polynomial coefficient comparison."
+   }
+  },
+  {
+   "text": "Put $A=B[S,T]$ and $u=1+ST$. In $A[u^{-1}]$, direct multiplication gives\n$$x_-(S)x_+(T)=x_+(T/u)h(u^{-1})x_-(S/u).$$\nIndeed the first two factors on the right have rows $(u^{-1},T)$ and $(0,u)$, so the complete product has rows $(1,T)$ and $(S,u)$, as does the left side. The rightmost factor fixes $v$ by hypothesis, and $h(u^{-1})v=u^qv$. Hence in this algebra the representation identity becomes\n$$\\sum_{i=0}^qT^i\\rho(x_-(S))v_i=\\sum_{k=0}^q T^k u^{q-k}v_k.$$\nAll exponents $q-k$ are nonnegative; both displayed sides are vector polynomials already over $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent SL2 Gauss matrix calculation supplementing Proposition 22.14; all fixed-vector and torus hypotheses applied over the displayed B-algebra."
+   }
+  },
+  {
+   "text": "The map $V[S,T]\\longrightarrow A[u^{-1}]\\otimes_B V$ is injective. To see this explicitly, multiplication by $u$ on any vector polynomial $F=\\sum_{r\\geq0}T^r f_r(S)$ is injective: the equation $uF=0$ gives $f_0=0$ and $f_r+Sf_{r-1}=0$ for $r\\geq1$, so induction gives every $f_r=0$. Every power of $u$ is consequently injective. In a basis of $V$, vanishing after localization means each of its finitely many polynomial coordinates is killed by a power of $u$ (the equality criterion for fractions); a common power kills $F$, whence $F=0$. Thus the identity of the preceding step holds in $V[S,T]$. This argument assumes no domain or reducedness property of $B$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent elementary denominator check for the preceding Gauss identity: coefficient recursion for multiplication by 1+ST."
+   }
+  },
+  {
+   "text": "Expand $(1+ST)^{q-k}$ using the cited binomial formula. The coefficient of $T^i$ in $T^k(1+ST)^{q-k}$ is zero for $k>i$, and is $\\binom{q-k}{i-k}S^{i-k}$ for $k\\leq i$. Comparing $T^i$ coefficients in the identity now proved over $A$ yields\n$$\\rho(x_-(S))v_i=\\sum_{k=0}^i\\binom{q-k}{i-k}S^{i-k}v_k.$$\nWriting $j=i-k$ gives exactly $\\sum_{j=0}^i\\binom{q-i+j}{j}S^jv_{i-j}$, the lower-root formula. No coefficient or factorial was cancelled.",
+   "uses": [
+    "lem-pur-commutative-ring-binomial-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent supplement to Proposition 22.14: lower-root Gauss identity, binomial expansion and coefficient comparison."
+   }
+  },
+  {
+   "text": "The definition of $w$ gives the matrix with rows $(0,1)$ and $(-1,0)$. Over $B[T,T^{-1}]$ one has\n$$w x_+(T)=x_+(-T^{-1})h(-T^{-1})x_-(T^{-1}).$$\nIndeed the product on the right has rows $(0,1)$ and $(-1,-T)$, equal to those of the left side. Apply the representation to $v$: the last factor fixes $v$, and the middle factor acts on $v$ by $(-T^{-1})^{-q}=(-T)^q$. Consequently\n$$\\sum_{i=0}^qT^i\\rho(w)v_i=(-T)^qP(-T^{-1})=\\sum_{k=0}^q(-1)^{q+k}T^{q-k}v_k.$$\nComparing Laurent coefficients at $T^i$ gives $\\rho(w)v_i=(-1)^{2q-i}v_{q-i}=(-1)^iv_{q-i}$, since the two sign exponents differ by $2(q-i)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Printed pp.466–467, Lemma 22.15 motivates reversal; agent explicit Weyl factorization fixes the sign over arbitrary rings."
+   }
+  },
+  {
+   "text": "Evaluate the polynomial upper- and lower-root identities at $S=z$ under the $B$-algebra homomorphism $B[S]\\to C$ for any $C$ and $z\\in C$. Naturality of $\\rho$ identifies their left sides with the requested actions over $C$ and their coefficients with $1\\otimes v_i$. The same naturality applies to the constant matrix $w$. In the upper-root formula, the coefficient of $S$ when $i<q$ is $\\binom{i+1}{1}v_{i+1}=(i+1)v_{i+1}$, since $\\binom{i+1}{1}=i+1$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent specialization of the universal identities; Proposition 22.14 polynomial-orbit interpretation."
+   }
+  },
+  {
+   "text": "For $B\\to D$, apply the map $b\\mapsto b\\cdot1_D$ to every polynomial coordinate constructed above. The orbit becomes $\\sum_i T^i(1\\otimes v_i)$; uniqueness of its coefficients shows that these are precisely the vectors constructed for the scalar-extended representation and the specified summands $D\\otimes_B V_i$. For $B\\to D\\to E$, the tensor comparison sends $e\\otimes(d\\otimes v_i)$ to $ed\\otimes v_i$, as follows from the bilinear universal property. Thus one-step and successive base changes give the same coefficients, and each displayed identity maps to the corresponding identity over the new base. This uses no injectivity or flatness of $B\\to D$. Zero vectors and vanishing binomial coefficients cause no change to any coefficient comparison.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Agent arbitrary and successive base-change check, using only coordinate substitution and the tensor universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-direct-sum-modules",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pur-commutative-ring-binomial-expansion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Printed pp.466--467, preliminary paragraph, Proposition 22.14 and Lemma 22.15 motivate the method. The arbitrary-ring proof is the explicit universal coefficient and SL2 matrix calculation in the steps, not a quotation of a field theorem."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite free rank one weight string with a primitive lowest vector orbit satisfying SL2 Gauss relation has binomial action matrices",
+   "results": "{\"t\": \"2026-10-24T12:45:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free rank one weight string with a primitive lowest vector orbit satisfying SL2 Gauss relation has binomial action matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.f\", \"EisensteinSeries.vecMul_SL2_mem_gammaSet\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_eq_zero\", \"FixedDetMatrices.reps\", \"ModularGroup.g_eq_of_c_eq_one\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_ne_zero\", \"FixedDetMatrices.reps_one_id\", \"FixedDetMatrices.induction_on\"], \"digest\": \"2e5968c73e54bfe2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial orbit coefficient identities for a lowest weight vector in an SL2 representation over any commutative ring from the Gauss relation",
+   "results": "{\"t\": \"2026-10-24T12:46:54Z\", \"tool\": \"leanfinder\", \"query\": \"Polynomial orbit coefficient identities for a lowest weight vector in an SL2 representation over any commutative ring from the Gauss relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.lie_e_pow_succ_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h_pow_toEnd_f\", \"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\", \"IsSl2Triple.HasPrimitiveVectorWith.pow_toEnd_f_eq_zero_of_eq_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"Matrix.GeneralLinearGroup.fixpointPolynomial\", \"LieModule.chainBotCoeff\"], \"digest\": \"48ea40f913abb3d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "SL2 representation polynomial orbit coefficients binomial matrices Weyl element over a commutative ring",
+   "results": "{\"t\": \"2026-10-24T12:45:31Z\", \"tool\": \"leansearch\", \"query\": \"SL2 representation polynomial orbit coefficients binomial matrices Weyl element over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.SpecialLinearGroup.isCoprime_col\", \"RootPairing.span_orbit_eq_top\", \"RootPairing.weylGroupCorootRep\", \"IsCoprime.exists_SL2_row\", \"IsCoprime.exists_SL2_col\", \"RootPairing.weylGroupRootRep\", \"Matrix.GeneralLinearGroup.fixpointPolynomial\", \"Matrix.SpecialLinearGroup.instCoeFun\"], \"digest\": \"aa2b63ef72cafc5a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "SL2 lowest weight vector orbit coefficients transform by binomial coefficients and Weyl reversal over a ring",
+   "results": "{\"t\": \"2026-10-24T12:46:54Z\", \"tool\": \"leansearch\", \"query\": \"SL2 lowest weight vector orbit coefficients transform by binomial coefficients and Weyl reversal over a ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.choose\", \"Ring.multichoose\", \"BinomialRing.multichoose\", \"RootPairing.InvariantForm.apply_weylGroup_smul\", \"EisensteinSeries.eisSummand_SL2_apply\", \"ModularForm.SL_smul_slash\", \"RootPairing.weylGroupRootRep\", \"LieAlgebra.IsKilling.chainBotCoeff_of_eq_zsmul_add\"], \"digest\": \"97f8ebce035399c9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SL2\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-24T12:45:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"SL2\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasPrimitiveVectorWith\"",
+   "results": "{\"t\": \"2026-10-24T12:50:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"HasPrimitiveVectorWith\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.ne_zero\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_e\", \"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"IsSl2Triple.HasPrimitiveVectorWith.lie_h\", \"IsSl2Triple.exists_hasPrimitiveVectorWith\", \"IsSl2Triple.HasPrimitiveVectorWith.mk\", \"IsSl2Triple.HasPrimitiveVectorWith.mk'\"], \"digest\": \"0b48bc72d9286ccf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|lowest.*weight|highest.*orbit",
+   "results": "{\"t\": \"2026-10-24T12:45:31Z\", \"tool\": \"grep\", \"query\": \"Gauss|lowest.*weight|highest.*orbit\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "HasPrimitiveVectorWith|lowest.*weight|Gauss",
+   "results": "{\"t\": \"2026-10-24T12:50:32Z\", \"tool\": \"grep\", \"query\": \"HasPrimitiveVectorWith|lowest.*weight|Gauss\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\"], \"digest\": \"7ccfc0fe3ffe64b9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits in Mathlib/Algebra/Lie/Sl2.lean:144--192 concern powers of Lie operators, not polynomial coefficients of group actions or Weyl reversal over arbitrary rings. GeckConstruction constructs a characteristic-zero Lie algebra. Neither supplies the stated identities, even by one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Gauss|lowest.weight|HasPrimitiveVectorWith",
+   "results": "{\"t\": \"2026-10-24T13:21:47Z\", \"tool\": \"grep\", \"query\": \"Gauss|lowest.weight|HasPrimitiveVectorWith\", \"sub\": \"Algebra/Lie\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\"], \"digest\": \"7ccfc0fe3ffe64b9\"} Search directory: Mathlib/Algebra/Lie",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "SL2 lowest weight vector unipotent orbit coefficients binomial formulas over arbitrary rings",
+   "results": "{\"t\": \"2026-10-24T13:21:47Z\", \"tool\": \"leansearch\", \"query\": \"SL2 lowest weight vector unipotent orbit coefficients binomial formulas over arbitrary rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ring.choose_natCast\", \"Ring.multichoose\", \"PowerSeries.binomialSeries_coeff\", \"Ring.choose\", \"Ring.choose_add_smul_choose\", \"BinomialRing.multichoose\", \"LieAlgebra.IsKilling.chainBotCoeff_zero_right\", \"IsSl2Triple.HasPrimitiveVectorWith.mk\"], \"digest\": \"8fb74d343ed514ee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SpecialLinearGroup\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-24T13:21:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"SpecialLinearGroup\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral polynomial orbit coefficients of a lowest weight vector in a representation of SL2 over a commutative ring",
+   "results": "{\"t\": \"2026-10-24T13:21:48Z\", \"tool\": \"leanfinder\", \"query\": \"Integral polynomial orbit coefficients of a lowest weight vector in a representation of SL2 over a commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSl2Triple.HasPrimitiveVectorWith.exists_nat\", \"Matrix.GeneralLinearGroup.fixpointPolynomial\", \"IsIntegral.coeff_of_exists_smul_mem_lifts\", \"IsIntegral.coeff\", \"EisensteinSeries.vecMul_SL2_mem_gammaSet\", \"ModularGroup.c_eq_zero\", \"IsAlmostIntegral.coeff\", \"IsIntegral.coeff_of_isFractionRing\"], \"digest\": \"f526eb87a9a48b3f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "grep",
+   "query": "SpecialLinearGroup|unipotent|divided[Pp]ower",
+   "results": "{\"t\": \"2026-10-24T13:22:44Z\", \"tool\": \"grep\", \"query\": \"SpecialLinearGroup|unipotent|divided[Pp]ower\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Search directory: Mathlib/RepresentationTheory",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational representation of the special linear group over a ring divided power root operators weight string Weyl element",
+   "results": "{\"t\": \"2026-10-24T13:22:45Z\", \"tool\": \"leansearch\", \"query\": \"Rational representation of the special linear group over a ring divided power root operators weight string Weyl element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SpecialLinearGroup\", \"Matrix.SpecialLinearGroup\", \"SpecialLinearGroup.instGroup\", \"Matrix.SpecialLinearGroup.instCoeFun\", \"SpecialLinearGroup.instCoeFunForall\", \"MatrixGroups.term𝒮ℒ\", \"Matrix.SpecialLinearGroup.instGroup\", \"MatrixGroups.termSL(_,_)\"], \"digest\": \"010fe62ee0228600\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gauss decomposition of SL2 gives binomial action formulas and Weyl reversal on coefficients of a polynomial unipotent orbit",
+   "results": "{\"t\": \"2026-10-24T13:22:46Z\", \"tool\": \"leanfinder\", \"query\": \"Gauss decomposition of SL2 gives binomial action formulas and Weyl reversal on coefficients of a polynomial unipotent orbit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_ne_zero\", \"Matrix.GeneralLinearGroup.fixpointPolynomial\", \"ModularGroup.g_eq_of_c_eq_one\", \"ModularGroup.smul_eq_lcRow0_add\", \"UpperHalfPlane.exists_SL2_smul_eq_of_apply_zero_one_eq_zero\", \"EisensteinSeries.gammaSetEquiv\", \"ModularGroup.T_inv_mul_apply_one\", \"ModularGroup.T_pow_mul_apply_one\"], \"digest\": \"dbe882c580106195\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: primitive-vector Lie algebra identities in Mathlib/Algebra/Lie/Sl2.lean:82--91,144--224 do not state polynomial group-scheme orbits over arbitrary rings and some require characteristic zero. SL matrix definitions, modular/upper-half-plane actions, integrality of polynomial coefficients and fixpointPolynomial (FinTwo.lean:229) do not give the item."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem add_pow|lemma add_pow|theorem Commute.add_pow",
+   "results": "{\"t\": \"2026-10-24T13:25:38Z\", \"tool\": \"grep\", \"query\": \"theorem add_pow|lemma add_pow|theorem Commute.add_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/Algebra/Ring/Divisibility/Lemmas.lean\", \"Mathlib/Algebra/Ring/Divisibility/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\", \"Mathlib/Algebra/CharP/Lemmas.lean\"], \"digest\": \"67be9321d4f42589\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: add_pow (Mathlib/Data/Nat/Choose/Sum.lean:76) is the binomial input only; reused existing leaf lem-pur-commutative-ring-binomial-expansion. Source lines 30--84 read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Binomial theorem in a commutative semiring sum of natural binomial coefficients",
+   "results": "{\"t\": \"2026-10-24T13:25:38Z\", \"tool\": \"leansearch\", \"query\": \"Binomial theorem in a commutative semiring sum of natural binomial coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"add_pow\", \"Fin.sum_pow_mul_eq_add_pow\", \"Commute.add_pow'\", \"Commute.add_pow\", \"Fintype.sum_pow_mul_eq_add_pow\", \"Finset.sum_pow_mul_eq_add_pow\", \"Polynomial.coeff_one_add_X_pow\", \"Ring.add_choose_eq\"], \"digest\": \"c62fac834a24b066\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: add_pow (Mathlib/Data/Nat/Choose/Sum.lean:76) is the binomial input only; reused existing leaf lem-pur-commutative-ring-binomial-expansion. Source lines 30--84 read."
+  },
+  {
+   "tool": "loogle",
+   "query": "add_pow",
+   "results": "{\"t\": \"2026-10-24T13:25:39Z\", \"tool\": \"loogle\", \"query\": \"add_pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"add_pow\"], \"digest\": \"c1dab1e071dcc348\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: add_pow (Mathlib/Data/Nat/Choose/Sum.lean:76) is the binomial input only; reused existing leaf lem-pur-commutative-ring-binomial-expansion. Source lines 30--84 read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Binomial theorem expansion of a sum to a natural power in a commutative semiring",
+   "results": "{\"t\": \"2026-10-24T13:25:40Z\", \"tool\": \"leanfinder\", \"query\": \"Binomial theorem expansion of a sum to a natural power in a commutative semiring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"add_pow\", \"Fin.sum_pow_mul_eq_add_pow\", \"Fintype.sum_pow\", \"Polynomial.powAddExpansion\", \"Finset.sum_pow'\", \"Commute.add_pow\", \"Commute.add_pow'\", \"Fintype.sum_pow_mul_eq_add_pow\"], \"digest\": \"5aadc17c4801f023\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: add_pow (Mathlib/Data/Nat/Choose/Sum.lean:76) is the binomial input only; reused existing leaf lem-pur-commutative-ring-binomial-expansion. Source lines 30--84 read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rank-two-integral-positive-adjoint-model",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Theorem 9.7.5, reductive-to-geometrically-reductive direction, reductions preceding the final determinant argument, printed p.527; use Lemma 9.2.5(2),(5), Proposition 9.3.1 (base change and descent), Proposition 9.5.1 (quotients and extensions). The result is the conditional reduction, not the geometric reductivity theorem itself; no SGA source is invoked. Supporting input: Theorem 9.7.5 reduction paragraph: etale splitting followed by descent from split groups over the integers. Supporting input: Theorem 6.1.16(2), printed p.196, and Theorem 6.1.17 (Isomorphism Theorem), p.197; pinnings as in Definition 6.1.1, p.186; supporting input for Theorem 6.1.17: Central-isogeny lifting and adjoint-torus ambiguity over arbitrary rings; supporting input: Normalized root homomorphisms in semisimple rank at most two. Supporting input: Theorem 4.1.4 (canonical root groups), Corollary 5.1.9 and Remark 5.1.10 (rank-one Weyl representatives), Proposition 5.1.16 (positive ordered products), and Lemma 6.2.8 with Steps 2--4 of the Isogeny Theorem, printed pp.205--209 (universal rank-two constants). The last Weyl-word formula is an agent-explicit formulation of the normalizer relator (6.2.3) required in Step 4, using the coroot word for the square of a longest Weyl representative; it is not asserted to be a quotation of Lemma 6.2.8; Section 6.2, Isogeny Theorem Step 2 (rank-two lists and signed root vectors), Step 3, Lemma 6.2.8 and Example 6.2.9, printed pp.205--209; restricted to the listed simple-root pairs. The two isolated signs are the A2 and B2 root-string computations with the displayed normalizations. Supporting input: Section 6.2, Step 2 and Lemma 6.2.8, printed pp.205--208; Example 6.2.9 fixes the G2 signed vectors. Auxiliary integral linear-action formulation by Q90; the arbitrary-ring adjoint matrices and string identification are an explicit separate proof obligation, not a quotation of the omitted case calculations. Read online; local archival copy WANTED. No Stacks tag states this result. Supporting polynomial coefficient calculation: lowest-weight SL2 orbit, before identifying the signed rank-two vectors. No separate current blueprint statement was found.",
+   "via": [
+    "lem-sfb-rank-two-integral-positive-adjoint-model",
+    "lem-sfb-rank-two-root-string-seed-calculus",
+    "lem-sfb-low-rank-universal-root-coordinates",
+    "lem-sfb-low-rank-pinned-root-hom",
+    "lem-sfb-split-central-isogeny-lifting",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-sl2-integral-orbit-coefficients",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Ten explicit steps construct the coefficients, select their weights, compare the upper addition and lower Gauss identities, justify localization injectivity over arbitrary rings, compute the Weyl sign, and check arbitrary and successive base changes. Reused the existing arbitrary-ring binomial Mathlib leaf; no new nodes. All matrix, Laurent and localization arguments are written out, with no step above 2000 characters.",
+  "blueprint": "Read latest/main-20261024 det-thm-sf-ctf-stability-direct-images proof (3) and the unit route; this is the supporting lowest-weight SL2 coefficient input in the inherited rank-two signed-vector branch. Retained inherited from.place and via; blueprint_refs.py ancestor reports None because the inherited chain has no surviving imported ancestor. Whole imported blueprint searches SL2, lowest, Gauss, Laurent and binomial, and latest blueprint searches, give no equivalent statement. No unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-2493ad052",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-2493ad052 (reviewer sub-agent of L); spot-checked: The statement, stmt_deps, source and blueprint are unchanged from the Q54-created node (compared with the Q54 185d4b6f snapshot); the delivery has no new nodes. The statement is true: on the standard representation (q=1) the formulas give v1=e1, wv0=v1, wv1=-v0. For Sym^q with v=e2^q, v_i=C(q,i)e1^ie2^(q-i); the upper and lower formulas reduce to the identities C(q,i)C(q-i,j)=C(q,i+j)C(i+j,j) and C(q,i)C(i,j)=C(q,i-j)C(q-i+j,j), and w v_i=(-1)^i v_(q-i). In characteristic 2, Sym^2 has v1=0 with v2 nonzero. I multiplied out all four matrix identities: the torus conjugation h(U)x+(T)h(U)^-1=x+(U^2T), x+(S)x+(T)=x+(S+T), the Gauss identity x-(S)x+(T)=x+(T/u)h(u^-1)x-(S/u) with u=1+ST giving [[1,T],[S,u]], and w x+(T)=x+(-T^-1)h(-T^-1)x-(T^-1). The weight factors u^q and (-T)^q are right. The non-zero-divisor recursion for u in step 6 needs no domain hypothesis. The sign exponent 2q-i has the parity of i, which holds in characteristic 2. The only non-elementary input is the Mathlib leaf lem-pur-commutative-ring-binomial-expansion (add_pow), cited in steps 4 and 7. The three cited definitions (free module, direct sum, tensor product) are Mathlib leaves and say what the steps use. Milne pp.466-467 checked: Prop 22.14 is the torus-conjugation coefficient argument that step 2 adapts; Lemma 22.15 is Weyl transport of weight spaces. The proof is correctly marked agent-written. The inherited source.place calls 22.15 a 'Proposition'; this is cosmetic and left unchanged. No duplicate in the DAG: sl2-lattice-integration is the converse construction over Z, and sl2-highest-orbit-polynomial assumes an algebraically closed field and works with differentials. Three kinds of Mathlib search are recorded. No other-unit statement is cited, tool_uses is empty, and no SGA source is cited. The citer rank-two-integral-positive-adjoint-model uses only clauses this item proves. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.SL2IntegralOrbitCoefficients",
+  "declaration": "RepresentationTheory.exists_unique_sl2_integral_orbit_coefficients",
+  "file": "lean/Sheaf/RepresentationTheory/SL2IntegralOrbitCoefficients.lean",
+  "statement": "theorem exists_unique_sl2_integral_orbit_coefficients (B : Type u) [CommRing B] (q : ℕ) (V : Type v) [AddCommGroup V] [Module B V] [Module.Free B V] [Module.Finite B V] (W : Fin (q + 1) → Submodule B V) (hW : DirectSum.IsInternal W) [∀ i, Module.Free B (W i)] [∀ i, Module.Finite B (W i)] (ρ : RegularSL2Representation B V) (hweight : ∀ (C : Type u) [CommRing C] [Algebra B C] (t : Cˣ) (i : Fin (q + 1)) (a : W i), ρ.app C (sl2Torus t) (1 ⊗ₜ[B] (a : V)) = ((t ^ (2 * (i.val : ℤ) - (q : ℤ)) : Cˣ) : C) • (1 ⊗ₜ[B] (a : V))) (v : W 0) (hfixed : ∀ (C : Type u) [CommRing C] [Algebra B C] (z : C), ρ.app C (sl2Lower z) (1 ⊗ₜ[B] (v : V)) = 1 ⊗ₜ[B] (v : V)) : ∃ a : ∀ i : Fin (q + 1), W i, a 0 = v ∧ ρ.app (Polynomial B) (sl2Upper Polynomial.X) (1 ⊗ₜ[B] (v : V)) = ∑ i : Fin (q + 1), (Polynomial.X : Polynomial B) ^ i.val • (1 ⊗ₜ[B] (a i : V)) ∧ (∀ b : ∀ i : Fin (q + 1), W i, ρ.app (Polynomial B) (sl2Upper Polynomial.X) (1 ⊗ₜ[B] (v : V)) = ∑ i : Fin (q + 1), (Polynomial.X : Polynomial B) ^ i.val • (1 ⊗ₜ[B] (b i : V)) → b = a) ∧ (∀ (C : Type u) [CommRing C] [Algebra B C] (z : C) (i : Fin (q + 1)), ρ.app C (sl2Upper z) (1 ⊗ₜ[B] (a i : V)) = ∑ k : Fin (q + 1), if i.val ≤ k.val then ((Nat.choose k.val (k.val - i.val) : C) * z ^ (k.val - i.val)) • (1 ⊗ₜ[B] (a k : V)) else 0) ∧ (∀ (C : Type u) [CommRing C] [Algebra B C] (z : C) (i : Fin (q + 1)), ρ.app C (sl2Lower z) (1 ⊗ₜ[B] (a i : V)) = ∑ k : Fin (q + 1), if k.val ≤ i.val then ((Nat.choose (q - k.val) (i.val - k.val) : C) * z ^ (i.val - k.val)) • (1 ⊗ₜ[B] (a k : V)) else 0) ∧ (∀ (C : Type u) [CommRing C] [Algebra B C] (i : Fin (q + 1)), ρ.app C (sl2Weyl C) (1 ⊗ₜ[B] (a i : V)) = (-1 : C) ^ i.val • (1 ⊗ₜ[B] (a ⟨q - i.val, by omega⟩ : V))) ∧ (∀ (i : Fin (q + 1)) (hi : i.val < q), (TensorProduct.lid B V) ((Polynomial.lcoeff B 1).rTensor V (ρ.app (Polynomial B) (sl2Upper Polynomial.X) (1 ⊗ₜ[B] (a i : V)))) = (i.val + 1) • (a ⟨i.val + 1, by omega⟩ : V)) ∧ (∀ (D : Type u) [CommRing D] [Algebra B D] (c : Fin (q + 1) → D ⊗[B] V), (ρ.app (Polynomial D) (sl2Upper Polynomial.X) (1 ⊗ₜ[B] (v : V)) = ∑ i : Fin (q + 1), (Polynomial.X : Polynomial D) ^ i.val • (TensorProduct.AlgebraTensorModule.cancelBaseChange B D (Polynomial D) (Polynomial D) V) (1 ⊗ₜ[D] c i)) ↔ c = fun i ↦ 1 ⊗ₜ[B] (a i : V)) ∧ (∀ (D : Type u) [CommRing D] [Algebra B D], ρ.app (Polynomial D) (sl2Upper Polynomial.X) (1 ⊗ₜ[B] (v : V)) = ∑ i : Fin (q + 1), (Polynomial.X : Polynomial D) ^ i.val • (1 ⊗ₜ[B] (a i : V))) ∧ (∀ (D E : Type u) [CommRing D] [CommRing E] [Algebra B D] [Algebra B E] [Algebra D E] [IsScalarTower B D E] (e : E) (d : D) (i : Fin (q + 1)), (TensorProduct.AlgebraTensorModule.cancelBaseChange B D E E V) (e ⊗ₜ[D] (d ⊗ₜ[B] (a i : V))) = (d • e) ⊗ₜ[B] (a i : V))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e509d05e8",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion against the node. x+/x- are Mathlib transvections at (0,1)/(1,0); w=[[0,1],[-1,0]]; the sl2Torus root word multiplies out to diag(t,t^-1) over any ring. Weight hypothesis on 1⊗a (a∈W i) is equivalent by C-linearity. Upper formula C(k,k-i)=C(i+j,j) and lower formula C(q-k,i-k)=C(q-i+j,j) reindex correctly; Weyl sign (-1)^i a_{q-i}; degree-one clause (i+1)•a_{i+1} via lcoeff 1. Uniqueness is slightly stronger than the node's (no v_0=v needed for competitors) and true. Base-change clauses use canonical cancelBaseChange. Node diff vs side-live: only lean added and stmt_deps gains the new def node (§1(A)); lean.statement verbatim. New def node def-sfb-regular-sl2-representation: all §5 fields present, five existing Mathlib-leaf stmt_deps, real data (natural group homomorphisms into C-linear automorphisms of C⊗V, naturality, regularity as existence), no sorry. No duplicate: NaturalRepresentation is field-only, IsCoordinateCoaction is a coaction, LinearGroupSchemes and Sl2RationalPolynomialModel are field/Lie only, and no sibling sl2 node has landed a definition. Edge cases covered: q=0, zero ring, zero summands, v=0, char 2. Docstrings carry source and blueprint; one sorry; 10-step proof plan present. Advisory only: successive-base-change clause is just cancelBaseChange_tmul; regular field is redundant given naturality."
+ }
+}

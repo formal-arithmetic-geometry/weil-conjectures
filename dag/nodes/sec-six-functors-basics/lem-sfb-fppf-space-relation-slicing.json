@@ -1,0 +1,345 @@
+{
+ "id": "lem-sfb-fppf-space-relation-slicing",
+ "kind": "statement",
+ "title": "Slicing flat equivalence relations without changing their fppf quotient",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. For $S$-schemes $V,R$, an equivalence relation $j=(s,t):R\\to V\\times_SV$ [def-pc-fibre-product] means that $j$ is injective on sections over every $S$-scheme $T$ and identifies $R(T)$ with an equivalence relation on $V(T)$. Write $V/R$ for the sheafification [def-weil-pbc-sheafification] on the big fppf site [def-pc-fppf-site] of $T\\mapsto V(T)/R(T)$. Assume $s,t$ are flat [def-weil-flat-morphism] and locally of finite presentation [def-sbc-locally-finite-presentation]. There exist $S$-schemes $V',R'$, an equivalence relation $(s',t'):R'\\to V'\\times_SV'$, and a morphism $g:V'\\to V$ carrying $R'$ into $R$, such that the induced map $V'/R'\\to V/R$ is an isomorphism of fppf sheaves and both $s',t'$ are flat, locally of finite presentation and locally quasi-finite [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0489 (lemma-slice-equivalence-relation). The printed conclusion has R to U instead of R-prime to U-prime; the intended source and target are explicit in the proof."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-pc-fibre-product",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-flat-relation-cm-open] to obtain $W\\subseteq V$ and $R_W=W\\times_{V,t}R\\times_{s,V}W$. The saturation $h_W$ is surjective, flat and locally finitely presented. Thus [lem-sfb-relation-restriction-quotient] gives $W/R_W\\simeq V/R$. It remains to slice the Cohen--Macaulay relation on $W$; the final morphism to $V$ will be the composite through $W$.",
+   "uses": [
+    "lem-sfb-flat-relation-cm-open",
+    "lem-sfb-relation-restriction-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), Step 1; Tags 0460 and 02VH"
+   }
+  },
+  {
+   "text": "For every finite type point $w\\in W$, apply [lem-sfb-cm-relation-point-slice] to $(W,R_W)$: choose $g_w:A_w\\to W$ and $a_w\\in A_w$ with $g_w(a_w)=w$. Put $H_w=A_w\\times_{g_w,W,t}R_W$ and $h_w=s\\operatorname{pr}_{R_W}:H_w\\to W$. Each $h_w$ is flat, locally finitely presented and locally quasi-finite. The identity arrow at $w$ paired with $a_w$ gives a point of $H_w$ mapping to $w$.",
+   "uses": [
+    "lem-sfb-cm-relation-point-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), Step 2 and beginning of Step 3; Tag 04N0"
+   }
+  },
+  {
+   "text": "Let $I$ be the set of finite type points of $W$. Form $A=\\coprod_{w\\in I}A_w$ using [lem-weil-pbc-scheme-coproduct-family], with $g:A\\to W$ induced by the $g_w$, and set $D=A\\times_{g,W,t}R_W\\times_{s,W,g}A$. For every test scheme $T$, its sections are triples $(a,r,b)$ with $t(r)=g(a)$ and $s(r)=g(b)$. For given $(b,a)$ there is at most one $r$; reflexivity, symmetry and transitivity follow from those of $R_W(T)$ by pulling back along $g$. Hence $D\\rightrightarrows A$, with $s_D(a,r,b)=b$ and $t_D(a,r,b)=a$, is an equivalence relation carrying into $R_W$. This verification uses the fibre-product universal property [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), Step 3; restriction as in groupoids-lemma-restrict-relation"
+   }
+  },
+  {
+   "text": "The inverse images of the disjoint open components $A_w\\subseteq A$ give $H=A\\times_{g,W,t}R_W=\\coprod_w H_w$ and $h=s\\operatorname{pr}_{R_W}:H\\to W$ restricts to $h_w$ on $H_w$. Thus $h$ is flat, locally finitely presented and locally quasi-finite: any point is in one open component, where its stalk map is that of $h_w$, and affine neighbourhoods witnessing finite presentation and quasi-finiteness there remain affine open neighbourhoods in $H$. These are exactly the pointwise conditions in [def-weil-flat-morphism], [def-sbc-locally-finite-presentation], and [pqf-def-quasifinite].",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), Step 3, coproduct of h_w; locality checked directly"
+   }
+  },
+  {
+   "text": "The scheme $D$ is $H\\times_{h,W,g}A$ and $s_D:D\\to A$ is the base change of $h$. Flatness follows from [lem-weil-pbc-flat-morphism-base-change], local finite presentation from clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], and local quasi-finiteness from clause (2) of [lem-weil-pbc-separated-lqf-base-change]. Swapping $a,b$ and taking the unique reverse relation arrow gives an involution $D\\simeq D$ exchanging $s_D$ and $t_D$; its square is the identity because relation arrows with fixed endpoints are unique. Thus both projections have all three properties.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-lqf-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), Step 3, displayed fibre-product formula and projection argument"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-lfp-open], the image $O=h(H)$ is open in $W$. Step 2 shows that $O$ contains every finite type point of $W$. Apply [lem-sfb-finite-type-points-detect-open] to conclude $O=W$, so $h$ is surjective. Explicitly, a nonempty closed complement would contain a finite type point outside $O$, a contradiction. Therefore $\\{h\\}$ is an fppf covering by [def-pc-fppf-site]; no quasi-compactness or Jacobson hypothesis on $W$ is needed.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sfb-finite-type-points-detect-open",
+    "def-pc-fppf-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), last paragraph, using the full conclusion of Tag 02J4 and openness from Tag 01UA"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relation-restriction-quotient] to $g:A\\to W$ and the surjective flat locally finitely presented map $h$ of steps 4 and 6. It gives $A/D\\simeq W/R_W$. Compose with the isomorphism of step 1 to obtain $A/D\\simeq V/R$, induced by $A\\xrightarrow{g}W\\hookrightarrow V$. Take $V\\prime=A$, $R\\prime=D$. By construction $D$ carries into $R_W$ and then $R$, and step 5 supplies the required properties of both projections.",
+   "uses": [
+    "lem-sfb-relation-restriction-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), conclusion of Step 3"
+   }
+  },
+  {
+   "text": "All constructions remain in the chosen universes [def-weil-size-convention]. The index $I$ is a subset of $|W|$, not a proper class; the individual affine slices are schemes in the scheme universe and their set-indexed disjoint union is the scheme of [lem-weil-pbc-scheme-coproduct-family]. The finite fibre products defining $H$ and $D$ lie in the same universe. Choose their representatives in the fixed larger-universe site skeleton. If $W$ is empty, $I,A,H,D$ are empty and the arguments above hold with vacuous local conditions and the empty covering of the empty scheme.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/bootstrap.tex",
+    "place": "Tag 0489 (lemma-slice-equivalence-relation), Step 3, size footnote; universes as in the statement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-flat-relation-cm-open",
+  "lem-sfb-relation-restriction-quotient",
+  "lem-sfb-cm-relation-point-slice",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-pc-fibre-product",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-sfb-finite-type-points-detect-open",
+  "def-pc-fppf-site",
+  "def-weil-size-convention"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/bootstrap.tex",
+  "place": "Tag 0489 (lemma-slice-equivalence-relation), Steps 1--3, with the stronger finite-type-point detector of Tag 02J4 made explicit in the surjectivity argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A flat locally finitely presented equivalence relation on schemes can be replaced by one with locally quasi-finite projections and the same fppf sheaf quotient",
+   "results": {
+    "t": "2026-10-23T09:51:39Z",
+    "tool": "leanfinder",
+    "query": "A flat locally finitely presented equivalence relation on schemes can be replaced by one with locally quasi-finite projections and the same fppf sheaf quotient",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation"
+    ],
+    "digest": "ca997e6057f6be98"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"Groupoid\", \"Flat\"",
+   "results": {
+    "t": "2026-10-23T09:56:43Z",
+    "tool": "loogle",
+    "query": "\"Scheme\", \"Groupoid\", \"Flat\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "slice.equivalence|quasi.splitting|flat.*equivalence.relation",
+   "results": {
+    "t": "2026-10-23T09:56:42Z",
+    "tool": "grep",
+    "query": "slice.equivalence|quasi.splitting|flat.*equivalence.relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Basic.lean",
+     "Mathlib/CategoryTheory/Comma/Over/Basic.lean"
+    ],
+    "digest": "ed827daa0661c526"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Slicing a flat locally finitely presented scheme equivalence relation preserves its sheaf quotient and makes it locally quasi finite",
+   "results": {
+    "t": "2026-10-23T09:56:42Z",
+    "tool": "leansearch",
+    "query": "Slicing a flat locally finitely presented scheme equivalence relation preserves its sheaf quotient and makes it locally quasi finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict",
+     "AlgebraicGeometry.LocallyQuasiFinite.recOn",
+     "AlgebraicGeometry.LocallyQuasiFinite.mk",
+     "AlgebraicGeometry.instLocallyQuasiFiniteResLE",
+     "AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite",
+     "AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict",
+     "Algebra.QuasiFiniteAt.comap_algEquiv",
+     "AlgebraicGeometry.LocallyQuasiFinite"
+    ],
+    "digest": "6d2262c51e54c977"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of quasi finite flat scheme presentations for fppf quotients by flat equivalence relations",
+   "results": {
+    "t": "2026-10-23T09:56:53Z",
+    "tool": "leanfinder",
+    "query": "Existence of quasi finite flat scheme presentations for fppf quotients by flat equivalence relations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.isQuotientMap_of_surjective",
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "AlgebraicGeometry.UniversallyOpen.of_flat",
+     "AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+     "AlgHom.FinitePresentation",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth"
+    ],
+    "digest": "8e5c7db10fe75879"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: scheme morphism permanence and ordinary slice categories do not construct new equivalence-relation presentations or their quotient isomorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fppf-space-atlas-bootstrap",
+  "date": "2026-10-23",
+  "group": "Q101"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489).",
+   "via": [
+    "lem-sfb-fppf-space-atlas-bootstrap",
+    "lem-sfb-space-finite-type-fppf-effectivity",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fppf-space-relation-slicing",
+  "worker": "stage1",
+  "summary": "Follows Tag 0489: Cohen--Macaulay open reduction, local slices at finite type points, disjoint-union restriction, projection properties by base change, surjectivity using openness and the existing finite-type-point detector, quotient comparison. Three strictly smaller statement-only inputs. Statement unchanged; source conclusion typo already repaired in the imported node. Ordinary density alone does not prove the final surjectivity; the full 02J4 locally-closed detection statement does.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: Effectivity step in quot-lemma-curves-stack via quot-lemma-spaces-stack; finite-type part (2) of bootstrap-lemma-descend-algebraic-space. Supporting input: theorem-final-bootstrap (3), applied after constructing a representable fppf cover of the descended sheaf. Subdivision of the final bootstrap: slicing the schematic kernel equivalence relation (Tag 0489).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "General existence and open components of arbitrary set-indexed scheme coproducts, needed for assembling local slices; no such geometric coproduct statement in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Only clause (2), preservation of locally quasi-finite morphisms in the Stacks sense under arbitrary base change, is used for the sliced projection; a generic scheme-theoretic permanence tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q142-e0e96cc63",
+  "group": "Q142",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-e0e96cc63 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full, against Stacks 0489 (bootstrap.tex lemma-slice-equivalence-relation), 0460 (lemma-make-CM), 04N0 (lemma-max-slice-quasi-finite) with 04MY, 02VH (lemma-quotient-groupoid-restrict), 045R (definition-CM) and 02J4 (lemma-enough-finite-type-points). The item statement is unchanged from the base and correctly fixes the source's R->U typo to R'->U'. New nodes: (1) flat-relation-cm-open is 0460 clauses (4) and (5) for an equivalence relation; h_W is s restricted to the open t^{-1}(W), so it is flat and locally finitely presented; the inline CM definition agrees with 045R. (2) cm-relation-point-slice is 04N0 clauses (2)-(4); its stabilizer hypothesis is automatic because the stabilizer of an equivalence relation is the identity V. (3) relation-restriction-quotient is 02VH for fppf with an arbitrary g, and the surjective flat lfp hypothesis on h is exactly an fppf covering. I tested all three on the trivial relation Delta_V and on V empty. None duplicates an existing node: lem-trf-etale-relation-restriction-quotient needs etale maps and surjective g, lem-trf-etale-relation-finding-opens needs flat g, the fppf-generator comparison needs etale g, and the CM-locus and CM-chart nodes concern a single morphism. Steps: step 2's point over w exists because a_w and e(w) have the same image; in step 5, D = H x_{h,W,g} A, so local quasi-finiteness follows from clause (2) of the separated/lqf base-change node alone; in step 6, image openness plus the same-unit 02J4 detector gives surjectivity; step 8 handles sizes and the empty case. Steps 3 and 4 are genuinely elementary. The declared tool_uses (scheme coproduct, Mathlib leaf; separated/lqf base change clause (2)) are generic and accepted. stmt_deps and proof_deps are consistent, there is no SGA citation, no cycle and no repair note. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfRelationSlicing",
+  "declaration": "AlgebraicGeometry.exists_fppf_relation_slicing",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfRelationSlicing.lean",
+  "statement": "theorem exists_fppf_relation_slicing {S : Scheme.{u}} {V R : Over S} (s t : R ⟶ V) (hinj : ∀ T : Over S, Function.Injective (fun r : T ⟶ R ↦ (r ≫ s, r ≫ t))) (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ V ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Flat s.left] [Flat t.left] [LocallyOfFinitePresentation s.left] [LocallyOfFinitePresentation t.left] : ∃ (V' R' : Over S) (s' t' : R' ⟶ V') (g : V' ⟶ V) (r : R' ⟶ R) (F F' : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (η' : coequalizer (yoneda.map s') (yoneda.map t') ⟶ F'.obj) (e : F' ≅ F), (∀ T : Over S, Function.Injective (fun a : T ⟶ R' ↦ (a ≫ s', a ≫ t'))) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ V' ↦ ∃ q : T ⟶ R', q ≫ s' = a ∧ q ≫ t' = b)) ∧ r ≫ s = s' ≫ g ∧ r ≫ t = t' ≫ g ∧ Flat s'.left ∧ Flat t'.left ∧ LocallyOfFinitePresentation s'.left ∧ LocallyOfFinitePresentation t'.left ∧ Scheme.Hom.IsLocallyQuasiFinite s'.left ∧ Scheme.Hom.IsLocallyQuasiFinite t'.left ∧ (∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F.obj ⟶ G.obj ↦ η ≫ k)) ∧ (∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F'.obj ⟶ G.obj ↦ η' ≫ k)) ∧ (coequalizer.π (yoneda.map s') (yoneda.map t') ≫ η') ≫ e.hom.hom = yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e26edfd47",
+  "group": "NA",
+  "result": "pass",
+  "note": "Stacks 0489 (bootstrap.tex l.1120) read; node R'->U' typo fix followed. Clause check: Over S schemes; hinj/hrel = sectionwise injective equivalence relation; Flat/LFP on s,t; conclusion has V',R',s',t' relation, g and r with both carry equations, Flat/LFP/IsLocallyQuasiFinite (pqf record, Stacks 01TD with finite type) for s',t'; fppf quotients by the sheafification universal property (same interface as landed relation_restriction_quotient), e pinned by the quotient-map equation, so it is the induced iso. No extra hypotheses or universe restriction; empty case non-vacuous. lean.statement verbatim; proof sorry; docstrings have source, blueprint id and 8 steps; stmt_dep records read; proof-dep imports exist live (CohenMacaulayRelationPointSlice landed 2026-10-24). No findings; no compile since no change."
+ }
+}

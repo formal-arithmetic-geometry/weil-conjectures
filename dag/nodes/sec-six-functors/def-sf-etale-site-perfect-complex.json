@@ -1,0 +1,102 @@
+{
+ "id": "def-sf-etale-site-perfect-complex",
+ "kind": "definition",
+ "title": "Perfect complex on the small etale coefficient site",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring in universe $u+1$, $X$ a scheme in universe $u$, and $K\\in D(X_{\\mathrm{et}},R)$ in the ordinary unbounded derived category [def-weil-pbc-derived-categories]. Call $K$ site-perfect if there is an etale cover $\\{f_i:U_i\\to X\\}$ such that each canonical derived inverse image $Lf_i^*K$ [def-kun-projection-formula-map] is isomorphic to $\\mathsf QP_i$ for a cochain complex $P_i$ and integers $a_i,b_i$ with $P_i$ strictly zero below $a_i$ and above $b_i$, and with each term $P_i^q$ a retract of the constant sheaf $(R^{m_{i,q}})_{U_i}$ for some natural number $m_{i,q}$. Bounds and ranks may depend on the covering member and degree, respectively; rank zero and empty schemes are included. No finiteness or invertibility assumption on $R$ or $X$ is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-projection-formula-map"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Perfect/SitePerfect.lean",
+  "place": "AlgebraicGeometry.Etale.DerivedCategory.IsSitePerfect and its full ambient binders; thm-coef-finite-hom proof paragraphs 2–3"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsSitePerfect|IsBoundedFlatComplex|bounded.*flat.*complex [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "{\"t\": \"2026-10-22T12:04:07Z\", \"tool\": \"grep\", \"query\": \"IsSitePerfect|IsBoundedFlatComplex|bounded.*flat.*complex\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing upstream definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Site perfect complex etale locally bounded complex retracts of finite free constant sheaves",
+   "results": "{\"t\": \"2026-10-22T12:04:18Z\", \"tool\": \"leanfinder\", \"query\": \"Site perfect complex etale locally bounded complex retracts of finite free constant sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"CochainComplex.IsKProjective\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"5085ed4f0c6e3fd3\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing upstream definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Site perfect complex locally bounded complex finite projective sheaves on small etale site",
+   "results": "{\"t\": \"2026-10-22T12:05:14Z\", \"tool\": \"leansearch\", \"query\": \"Site perfect complex locally bounded complex finite projective sheaves on small etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"CategoryTheory.hasLimitsEssentiallySmallSite\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\", \"SheafOfModules.Finite.hasFiniteLimits\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"HomologicalComplex.locallySmall\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"4dbdac195a742d33\"}",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing upstream definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsSitePerfect|IsBoundedFlatComplex lean/WeilConjectures lean/Sheaf; rg -l IsSitePerfect|IsBoundedFlatComplex dag/nodes; blueprint_refs.py search site-perfect",
+   "results": "Upstream Derived/Perfect/SitePerfect.lean:68 defines DerivedCategory.IsSitePerfect. lem-sf-source-etale-site-perfect-dualizable owns only its dualizability theorem. def-weil-site-perfect-complex and def-pod-perfect-complex-on-x are pro-etale coefficient-stage notions, not this ordinary small-etale definition.",
+   "date": "2026-10-22",
+   "verdict": "Create only an existing:true owning definition record; no new Lean declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-etale-lisse-hom-reduction",
+  "date": "2026-10-22",
+  "group": "Q143"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "The small-etale site-perfect clause for the degree-zero lisse first argument",
+   "via": [
+    "lem-coef-etale-lisse-hom-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect",
+  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.IsSitePerfect",
+  "statement": "def DerivedCategory.IsSitePerfect\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop",
+  "branch": "slopmaster2",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Exact existing upstream small-etale definition, not the pro-etale coefficient-stage predicates of def-weil-site-perfect-complex. The ambient binders are universe u, {Λ : Type (u + 1)} [CommRing Λ] and {X : Scheme.{u}}. Each cover member has its own bounded complex, bounds and termwise finite-free retracts. The owning definition is separate from its dualizability theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586601c33",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Re-delivery after the 20565c32 RETURN (H2, three ownership points), all repaired. (1) The item and def-sf-finite-free-hom-local-calculation cite the existing:true owner def-pur-etale-scalar-pullback-iso instead of the theorem lem-pur-etale-scalar-mate-projection. (2) lem-sf-flat-model is replaced by the new existing:true def-sf-etale-bounded-flat-complex; its statement matches FlatModel.lean IsBoundedFlatComplex (Λ in u+1, X in u, arbitrary a,b, IsZero outside, flat terms), and the local-calculation module adds the public import, the only Lean change. (3) New existing:true def-sf-etale-site-perfect-complex matches SitePerfect.lean IsSitePerfect (étale cover, per-member bounds, retracts of constant Fin m → Λ, L f^* K ≅ Q P). No other DAG node owns either declaration (scan of live and side-live). New nodes' stmt_deps equal their citations; lean.statement fields are verbatim. The item changes only lean and stmt_deps (adds 6 def nodes, loses none, adds no theorem). The other changed dep records equal side-live (Q84/Y7 base movement). Theorem and coordinate modules are byte-identical to the returned head, whose mathematics was checked clause by clause and re-read: index shift, projective L, Tor intervals [a,b+2dX+1] and [a-2dS,b+2dX+1+2dS], both ctf endpoints, IsIso of the canonical etaleFiniteHomCanonical, local evaluation identity including t=0, restriction square. sorry only in the theorem; no hollow defs; no pro-étale substitute. Not compiled (no file changed). Advisory: Lean-file source.document on the ownership nodes; the item imports the old Hom/change-of-rings modules, which the rebound Q84 modules re-export; the unused inherited def-weil-site-perfect-complex stmt_dep; the second reading was by the same worker."
+ }
+}

@@ -1,0 +1,354 @@
+{
+ "id": "lem-sf-semilinear-slice-scalar-generators",
+ "kind": "statement",
+ "title": "Strict semilinear scalar comparison on extension generators",
+ "statement": "Let $\\mathcal C$ be a small Grothendieck site, $O$ a sheaf of commutative rings, $V\\in\\mathcal C$, and $j^*$ restriction to its localized ringed site [def-weil-pbc-sites-and-cohomology, def-pur-localized-ringed-site]. Let $B_1\\leftarrow B_2\\leftarrow\\cdots$ be sheaves of commutative $O$-algebras with unital $O$-algebra transitions $q_{m,n}:B_m\\to B_n$ for $m\\ge n$, satisfying identity and composition. Put $B_{n,V}=j^*B_n$. Let $\\mathscr S(B)$ be the category of module sheaves $M_n$ over $B_n$ with $B_{n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{B_{n+1}\\to B_n}M_n$ and compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars]. Define $\\mathscr S(B_V)$ similarly, and let $J$ be termwise localized extension $j_{B_n!}$ [lem-pur-site-restriction-module-adjunction-exact]. For an $O_V$-module sheaf $G$ put $A_VG=(G\\otimes_{O_V}B_{n,V})_n$, and for an $O$-module sheaf $H$ put $A_XH=(H\\otimes_OB_n)_n$, with the strict maps $1\\otimes q_{m,n}$ [def-pur-sheaf-tensor-product].\n\nThe generator-normalized ordinary comparison of [lem-sf-ringed-slice-tensor-generators], for $H=B_n$, has a canonical $B_n$-linear realization\n$$a_{G,n}:(j_{O!}G)\\otimes_OB_n\\xrightarrow{\\sim}j_{B_n!}(G\\otimes_{O_V}B_{n,V}).$$\nHere the underlying $O$-module identification between the two coefficient extensions is the unique identification preserving every extension-presheaf summand [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification]. These component maps give a natural isomorphism $a_G:A_Xj_{O!}G\\xrightarrow{\\sim}JA_VG$ in $\\mathscr S(B)$, before scalar restriction. At every test object its component formula is $[x]_f\\otimes b\\mapsto[x\\otimes b|_{(W,f)}]_f$. Every transition square is the equality\n$$[x\\otimes q_{m,n}(b)|_{(W,f)}]_f=[x\\otimes q_{m,n}(b|_{(W,f)})]_f.$$\nAfter forgetting to strict $O$-module towers, the square between extension and both scalar-unit augmentations commutes; its two composites on $[x]_f$ are $[x\\otimes1]_f$. For a module map $v:G\\to G'$, both naturality composites on $[x]_f\\otimes b$ are $[v(x)\\otimes b|_{(W,f)}]_f$. All these are equalities after bilinear sheafification, and the inverse component maps also commute with all transitions. Applying this natural isomorphism degreewise to any unbounded cochain complex gives a natural chain isomorphism of strict semilinear systems with the same transition, generator and augmentation identities [def-pc-cochain-complex-modules]. No flatness, surjectivity or completeness hypothesis on the coefficient system is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I (lemma-j-shriek-and-tensor); agent generator and coefficient refinement of the ringed-slice projection formula."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pur-sheaf-tensor-product",
+  "lem-sf-ringed-slice-tensor-generators",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-cochain-complex-modules",
+  "def-pur-system-level-left-extension-basic",
+  "def-sf-semilinear-slice-scalar-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain AX and AV from scalar-tower construction and the extension functor from strict-system extension construction. Obtain the coefficient-linear component maps and forward compatibility squares from the level-comparison lemma.",
+   "uses": [
+    "lem-sf-slice-scalar-tower-construction",
+    "lem-sf-slice-system-extension-construction",
+    "lem-sf-slice-scalar-level-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Package the transported component maps as strict-system morphisms using their transition equations. Their naturality holds componentwise. Each component is invertible, being a composite of object equality maps, a component isomorphism and a functor image of an equality map. The componentwise invertibility criterion gives an isomorphism of strict systems, and NatIso.ofComponents packages its naturality. Apply the inverse component to its forward generator equation and cancel hom followed by inv to prove inverse_generator.",
+   "uses": [
+    "def-pur-system-level-left-extension-basic",
+    "lem-sf-slice-scalar-level-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Retain the normalized scalar identification and uniqueness from the level comparison. To prove augmentation, use injectivity of the localized adjunction Hom correspondence to test the equality on original extension summands. The AX unit, the component generator formula, functoriality of extension on summands, the AV unit and the scalar-identification generator formula show both sides send [x] to [x tensor 1]. Apply NatIso.mapHomologicalComplex to the constructed strict natural isomorphism. Its hom and inverse components in degree i are definitionally the original strict comparison and its inverse, so both chain degree equations are reflexivity. This is degreewise and imposes no boundedness condition.",
+   "uses": [
+    "lem-sf-slice-scalar-level-comparison",
+    "def-pc-cochain-complex-modules",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-slice-scalar-tower-construction",
+  "lem-sf-slice-system-extension-construction",
+  "lem-sf-slice-scalar-level-comparison",
+  "def-pur-system-level-left-extension-basic",
+  "def-pc-cochain-complex-modules",
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03CY, 03EK, 03CZ and 0E8I; scalar tower and extension constructed by normalized adjunctions, then strict-system and unbounded-chain assembly in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "semilinear.*[Ss]ystem|[Ss]ystem.*semilinear|jShriek|extensionByZero",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "sub": "Algebra/Category/ModuleCat"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict semilinear inverse systems of module sheaves extension by zero tensor coefficient comparison preserves quotient transitions and scalar insertion units",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SMulCon.instSMulZeroClassQuotient",
+     "ModuleCon.instSMulWithZeroQuotient",
+     "SMulCon.instSMulWithZeroQuotient",
+     "DirectLimit.instSMulWithZeroOfMulActionHomClassOfZeroHomClass",
+     "SheafOfModules.restrictScalars",
+     "PresheafOfModules.Sheafify.zero_smul",
+     "ModuleCon.instSMulZeroClassQuotient",
+     "ModuleCat.ExtendRestrictScalarsAdj.unit"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PresheafOfModules\", \"tensorHom\"",
+   "results": {
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom",
+     "PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+     "PresheafOfModulesOfCommRing.tensorHom_app"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an inverse system of sheaves of algebras extension by zero scalar tensor comparisons form a natural isomorphism of semilinear module systems compatible with scalar unit augmentations",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+     "LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+     "LightCondensed.instMonoidalLightCondSetLightCondModFree",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "AdicCompletion.ofTensorProduct_naturality",
+     "TensorProduct.directLimitLeft_symm_of_tmul"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification pure tensor extension formula is linear for varying coefficient rings and commutes with all quotient transitions and tensor insertion of one",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.Monoidal.tensorObjMap",
+     "PresheafOfModules.Monoidal.tensorObj",
+     "PresheafOfModules.Sheafify.add_smul",
+     "PresheafOfModules.Monoidal.tensorObj_map_tmul",
+     "PresheafOfModules.Sheafify.mul_smul",
+     "TensorProduct.toDirectLimit",
+     "PresheafOfModules.Sheafify.smul_add",
+     "TensorProduct.fromDirectLimit"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero|extension_by_zero|semilinear.*system",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "sub": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed site slice extension by zero tensor coefficient algebra comparison compatible with coefficient transition maps and insertion of one",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Function.ExtendByZero.linearMap",
+     "TrivSqZeroExt.inl",
+     "AlgebraicGeometry.RingedSpace.res_zero",
+     "TensorAlgebra.algebraMapInv",
+     "Algebra.Extension.instIsScalarTowerRing",
+     "TrivSqZeroExt.inlAlgHom",
+     "Algebra.Extension.Cotangent.of_zero",
+     "TensorPower.algebraMap₀"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, SheafOfModules",
+   "results": {
+    "ok": true,
+    "n_hits": 4,
+    "note": "",
+    "top": [
+     "SheafOfModules.restrictScalars",
+     "SheafOfModules.instAdditiveRestrictScalars",
+     "SheafOfModules.restrictScalars_obj_val",
+     "SheafOfModules.restrictScalars_map_val"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on a ringed site commutes with extension of scalars as a natural isomorphism of strict semilinear inverse systems, preserving pure tensor generators and units",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.ExtendRestrictScalarsAdj.unit",
+     "ModuleCat.extendScalars_comp_id_assoc",
+     "ModuleCat.extendScalars_comp_id",
+     "ModuleCat.extendScalars_id_comp",
+     "ModuleCat.extendScalars_id_comp_assoc",
+     "ModuleCat.homEquiv_extendScalarsComp",
+     "ModuleCat.ExtendRestrictScalarsAdj.counit",
+     "ModuleCat.ExtendRestrictScalarsAdj.Unit.map"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|jShriek|sheafification.*restrictScalars|restrictScalars.*sheafification",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean"
+    ],
+    "sub": "Algebra/Category/ModuleCat"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula for localization of a ringed site is linear over an algebra sheaf and commutes with every algebra homomorphism on coefficients and its scalar extension unit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ModuleCat.Tilde.openToLocalization",
+     "ModuleCat.Tilde.toOpen",
+     "TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf",
+     "TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf_app",
+     "ModuleCat.Tilde.sections_smul_localizations_def",
+     "ModuleCat.Tilde.const",
+     "ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+     "IsLocalizedModule.map_linearMap_of_isLocalization"
+    ],
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-semilinear-tensor-model",
+  "date": "2026-10-22",
+  "group": "Q86"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”; open coefficient factor: original step 5 of lem-sf-open-semilinear-tensor-model, coefficient linearity, all quotient and scalar-unit squares before localization",
+   "via": [
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-semilinear-slice-scalar-generators",
+  "worker": "stage1",
+  "summary": "Q67: expanded the ordinary normalized tensor comparison into a coefficient-linear isomorphism of strict semilinear systems; constructed the underlying scalar identification from the common direct-sum presheaf and checked all transition, inverse, naturality, scalar-unit and unbounded chain identities. Reused existing sheafification local-section and underlying-set results rather than creating generator lemmas. Statement unchanged; no new nodes.",
+  "blueprint": "fix-prop-coherence proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”: the open coefficient-generator and scalar-unit part, reached through lem-sf-open-semilinear-tensor-model.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representation of sections in associated sheaves justifies checking coefficient formulas after successive sheafifications on an arbitrary small site; the present unit supplies no such general sheafification lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-8bafb5fc0",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-8bafb5fc0 (reviewer sub-agent of L); spot-checked: I read the item in full. The statement is byte-identical to the one Q86 created and stmt_deps are unchanged; the delivery has 8 steps, no new nodes and no fixes. I read every cited statement. Source: Stacks 0E8I (lemma-j-shriek-and-tensor) in sites-modules.tex, a Yoneda proof, so proof_origin 'agent' is correct; 03DI, 03CY and sites 00WK are cited correctly. No SGA, and no node in the 131-node closure reaches the item, so there is no cycle. proof_deps equals the union of the step uses. Step checks: (1) the extension presheaf over B_n and the one over O_V after scalar restriction share the abelian presheaf and the O-action, and the uniqueness of the extended action identifies the sheafifications; the same holds for q_{m,n}, which defines J. (2) 00WK plus the underlying-set Mathlib leaf make every tensor section locally a finite sum of [x]_f⊗h after finite refinements; tool use lem-weil-pbc-site-sheafification-sections-local is accepted as generic. (3) a = κ^{-1}∘ψ_{G,B_n}, using only the statement of lem-sf-ringed-slice-tensor-generators. (4) B_n-linearity is checked on generators via B_{n,V}(W,f)=B_n(W); the inverse is linear by injectivity. (5) both transition composites give [x⊗q(b)]_f, and the inverse square follows by cancellation. (6) naturality holds summandwise and in the first factor. (7) both augmentation composites give [x⊗1]_f by unitality, and sheafification uniqueness extends this. (8) the complex case is degreewise, so it holds unbounded. Small cases: a one-object site, G=0, B_n=0, O→O/I and t↦t², objects with no map to V, several arrows W→V. The citer lem-sf-open-semilinear-tensor-model Step 4 gets exactly the clauses it uses. MAINTAINER NOTE: lem-sf-cbc-slice-tensor-generator-coherence (sk-prop-sf-cbc, unsplit, created by NG, landed 14:25:09) is a later duplicate of this item (created by Q86, landed 14:15:56). It has the same κ/η generator formulas, tower transitions and scalar-unit squares, plus naturality in algebra-tower maps. Merge it into this item or have its split cite this item, and watch for a reverse 2-cycle. The other overlap candidates (cbc-ringed-open-strict-reduction, the cbc derived nodes, sp-open-scalar-*) are derived, specialized or data-only."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SemilinearSliceScalarGenerators",
+  "declaration": "SheafOfModules.exists_semilinearSliceScalarGenerators",
+  "declarations": [
+   "SheafOfModules.exists_semilinearSliceScalarGenerators"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SemilinearSliceScalarGenerators.lean",
+  "statement": "theorem exists_semilinearSliceScalarGenerators (O : Sheaf J CommRingCat.{max c v r}) (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) : Nonempty (SemilinearSliceScalarGenerators.{c, v, r} B U O α)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae1e21ed3",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_deps and their declarations (RingedSliceTensorGenerators, LocalizedModuleExactForSystems, SystemLevelLeftExtensionBasic StrictRingSystem, Mathlib Sheaf.over = overPullback.obj), the module and report. Only the item node changed vs side-live; stmt_deps gains landed owner def-pur-system-level-left-extension-basic (allowed, no cycle); lean.statement verbatim; docstrings/source/blueprint/8 proof steps present; lines <=100; proof-dep plain imports required by brief. Every clause rendered: B as functor N^op => CommRing sheaves with alpha: const O => B (O-algebra unital transitions); A_X/A_V/J presentations pinned by obj_eq/map_eq and generator transitions (determined, not free); component B_n-linear Iso with forward/inverse generator formulas and uniqueness; unique summand-preserving scalarIdentification; comparison natural iso in StrictRingSystem B pinned by component_eq (transition, inverse and naturality squares); augmentation a genuine O-module equality; unbounded chain iso pinned degreewise. No extra hypotheses; universe max c v r is the deps' convention. Edge cases G=0, zero rings, no/multiple maps to V, m=n, non-flat transitions, all degrees covered. No H4 duplicate (cbc slice-tensor coherence is a different node on ordinary towers; maintainer note). Advisory: realization link to exists_ringedSliceTensorGenerators expressed via identical generator formula plus uniqueness. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bd4d0",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261026T222543-L-667293",
+  "kind": "interface",
+  "note": "independent cc review: item exists_semilinearSliceScalarGenerators proved from two fully proved constructions (tower, system extension) + one true sorry hole exists_sliceScalarLevelComparison; moved data decls verbatim vs clone and the change record; node proof_deps vs owners of the declarations used; #print axioms on scratch compile"
+ }
+}

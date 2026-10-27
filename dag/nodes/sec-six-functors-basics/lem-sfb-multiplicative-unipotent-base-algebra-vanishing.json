@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-multiplicative-unipotent-base-algebra-vanishing",
+ "kind": "statement",
+ "title": "Multiplicative-to-unipotent vanishing over every base algebra",
+ "statement": "Let $k$ be a field [def-weil-field]. All groups are affine $k$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Unipotent means admitting a closed group immersion [def-weil-closed-immersion] into some $\\mathcal U_{n,k}\\subseteq\\operatorname{GL}_{n,k}$, $n\\geq1$ [def-sc-general-linear-group], where $\\mathcal U_{n,k}(A)$ consists of upper triangular matrices with diagonal entries $1$ for every commutative $k$-algebra $A$. A group is of multiplicative type if after extension to an algebraic closure of $k$ it admits a closed subgroup inclusion into $\\mathbf G_m^r$ for some $r\\geq0$ [def-sfb-tori-multiplicative-type, def-weil-algebraic-closure, def-sc-gm-ga]. Let $D$ be of multiplicative type and let $U$ be unipotent. For every commutative $k$-algebra $R$, every homomorphism of $R$-group schemes $f:D_R\\to U_R$ is trivial. Scalar extension here means fibre product with $\\operatorname{Spec}R$ [def-pc-base-change, def-weil-affine-spectrum]. Equivalently, for every commutative $R$-algebra $A$ and every $d\\in D_R(A)$, one has $f_A(d)=1$. Neither $R$ nor $A$ is required to be reduced, and neither group is required to be smooth or connected.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 15.18, printed p.312; Theorem 14.5, pp.281--282, for the unitriangular meaning of unipotent."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-weil-closed-immersion",
+  "def-sc-general-linear-group",
+  "def-sfb-tori-multiplicative-type",
+  "def-weil-algebraic-closure",
+  "def-sc-gm-ga",
+  "def-pc-base-change",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\bar k$ and $S=R\\otimes_kK$. The map $R\\to S$ is faithfully flat by [lem-weil-pbc-field-extension-base-change-faithfully-flat]. By [lem-weil-pbc-fibre-product-affine-spectra], scalar extension of the affine schemes and their maps is tensor extension of their coordinate algebras. For $B=\\Gamma(D_R,\\mathcal O)$, [lem-weil-pbc-faithfully-flat-universally-injective] makes $B\\to B\\otimes_RS$ injective. Consequently two maps from the coordinate algebra of $U_R$ to $B$ are equal if their scalar extensions to $S$ are equal: subtract their values on each element and use this injection. The uniqueness assertion in [def-weil-affine-spectrum] then implies equality of the corresponding scheme morphisms. Thus it suffices to show that $f_S$ is the identity-valued morphism. If $R$ is the zero ring this conclusion also holds, since all the coordinate algebras after base change are zero.",
+   "uses": [
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.18, p.312, conclusion; elementary faithfully flat scalar-extension reduction added by the worker."
+   }
+  },
+  {
+   "text": "By the multiplicative-type hypothesis $D_K$ is a closed subgroup of $\\mathbf G_{m,K}^r$. Apply [lem-sfb-split-torus-subgroups-diagonalizable] over the algebraically closed field $K$: there is a finitely generated abelian group $M$ with $D_K\\simeq\\operatorname{Spec}K[M]$, with basis $e_m$ and coproduct $e_m\\mapsto e_m\\otimes e_m$. Extending from $K$ to $S$, [lem-weil-pbc-fibre-product-affine-spectra] identifies its coordinate ring with $S\\otimes_KK[M]=S[M]$. Explicitly $s\\otimes\\sum_m a_me_m\\mapsto\\sum_m(sa_m)e_m$ has inverse $\\sum_m s_me_m\\mapsto\\sum_m s_m\\otimes e_m$; the tensor relations show these are inverse ring maps, preserving the displayed coproduct. Hence $D_S=D_S(M)$ with exactly the operations in [def-sfb-ring-diagonalizable-group]. No assertion about geometric points is used in this identification.",
+   "uses": [
+    "lem-sfb-split-torus-subgroups-diagonalizable",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sfb-ring-diagonalizable-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorems 12.8 and 12.9(c), pp.233--234; explicit scalar extension of their group-algebra description."
+   }
+  },
+  {
+   "text": "For any commutative ring $S$, a primitive element $z=\\sum_m a_me_m\\in S[M]$ is zero. Indeed, apply the two coefficient projections at $m$ to $\\Delta z=z\\otimes1+1\\otimes z$, using the coproduct of [def-sfb-ring-diagonalizable-group]. For $m\\ne0$, the coefficient at $(m,m)$ gives $a_m=0$; the coefficient at $(0,0)$ gives $a_0=2a_0$, hence $a_0=0$ by subtraction. These projections are $S$-linear, so their tensor product evaluates the equality in $S\\otimes_SS=S$; no domain assumption is involved. A group morphism $h:D_S(M)\\to\\mathbf G_{a,S}$ has coordinate map $S[t]\\to S[M]$. By [def-sc-gm-ga] and the affine-product identification [lem-weil-pbc-fibre-product-affine-spectra], its multiplication compatibility is precisely $\\Delta h^*(t)=h^*(t)\\otimes1+1\\otimes h^*(t)$. Thus $h^*(t)=0$, and [def-weil-affine-spectrum] says $h$ is the zero homomorphism. This proves additive vanishing over the entire ring $S$, including its nilpotents.",
+   "uses": [
+    "def-sfb-ring-diagonalizable-group",
+    "def-sc-gm-ga",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.18, p.312, additive vanishing input; direct coefficient proof supplied by the worker using the Hopf algebra of Theorem 12.8, p.233."
+   }
+  },
+  {
+   "text": "Choose the given closed group immersion $U\\hookrightarrow\\mathcal U_{n,k}$. Apply [lem-sfb-unitriangular-coordinate-filtration] to this unitriangular group: $U^{(0)}=\\mathcal U_n$, $U^{(m)}=1$, and $p_r:U^{(r-1)}\\to\\mathbf G_a$ has scheme-theoretic kernel $U^{(r)}$, where $m=n(n-1)/2$. Base change these diagrams to $S$. The universal property of [def-pc-fibre-product], with [def-pc-base-change], identifies the new kernels with $U^{(r)}_S$: both are the same iterated fibre product along the identity section. Inductively construct group morphisms $g_r:D_S(M)\\to U^{(r)}_S$ through which $g_0=(U_S\\hookrightarrow\\mathcal U_{n,S})\\circ f_S$ factors. The base $g_0$ is given. If $g_{r-1}$ is constructed, Step 3 makes $p_{r,S}g_{r-1}$ zero. The kernel fibre-product property gives a unique factor $g_r$. It is a group morphism because its composite with the kernel inclusion preserves multiplication and the inclusion is injective on points (it is the zero locus of the first $r$ coordinates). This gives the induction step. At $r=m$ the target is $1$, so $g_0$ is trivial; when $n=1$ this is already the base case.",
+   "uses": [
+    "lem-sfb-unitriangular-coordinate-filtration",
+    "def-pc-fibre-product",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Example 6.49(a)--(c), pp.136--137, unitriangular filtration; Proposition 15.18, p.312, reduction to additive homomorphisms, realized by this finite induction."
+   }
+  },
+  {
+   "text": "For every commutative $S$-algebra $A$, the original closed subgroup inclusion $U(A)\\hookrightarrow\\mathcal U_n(A)$ is injective by [def-sc-group-scheme-subgroup]. Base change has the same points on $S$-algebras. Step 4 therefore gives $f_{S,A}(d)=1$ for every $d\\in D_S(A)$, so $f_S$ is the trivial morphism. Step 1 descends its equality with the identity-valued morphism to $R$. The asserted formula on every $R$-algebra $A$ follows by evaluating this equality. All coefficient comparisons and subgroup injections were made on all algebra-valued points, so no reducedness, smoothness or connectedness was imposed.",
+   "uses": [
+    "def-sc-group-scheme-subgroup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 15.18, p.312, final conclusion; cancellation of the given subgroup immersion and the scalar-extension reduction of Step 1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "def-weil-affine-spectrum",
+  "lem-sfb-split-torus-subgroups-diagonalizable",
+  "def-sfb-ring-diagonalizable-group",
+  "def-sc-gm-ga",
+  "lem-sfb-unitriangular-coordinate-filtration",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 15.18, p.312, proved here by a group-algebra coefficient calculation and the filtration of Example 6.49, pp.136--137, instead of the source's rational-cohomology proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every homomorphism from a diagonalizable group scheme to an upper unitriangular group remains trivial over arbitrary base algebras",
+   "results": "{\"t\": \"2026-10-24T07:38:12Z\", \"tool\": \"leanfinder\", \"query\": \"Every homomorphism from a diagonalizable group scheme to an upper unitriangular group remains trivial over arbitrary base algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonalHomEquiv_apply\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"Rep.diagonalHomEquiv\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"AlgebraicGeometry.diagonal_Spec_map\", \"Matrix.SpecialLinearGroup.scalar_eq_coe_self_center\"], \"digest\": \"30f4dbcba3e89b13\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract-group, Lie, matrix, representation or scheme-morphism facts do not state this assertion about affine group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsUnipotent\", \"hom\"",
+   "results": "{\"t\": \"2026-10-24T07:38:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsUnipotent\\\", \\\"hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract-group, Lie, matrix, representation or scheme-morphism facts do not state this assertion about affine group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "diagonalizable.*unipotent|unipotent.*diagonalizable|GroupScheme",
+   "results": "{\"t\": \"2026-10-24T07:38:10Z\", \"tool\": \"grep\", \"query\": \"diagonalizable.*unipotent|unipotent.*diagonalizable|GroupScheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract-group, Lie, matrix, representation or scheme-morphism facts do not state this assertion about affine group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of group schemes from a multiplicative type group to a unipotent group vanish after any base algebra change",
+   "results": "{\"t\": \"2026-10-24T07:38:11Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms of group schemes from a multiplicative type group to a unipotent group vanish after any base algebra change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GrpCat.Hom.hom'\", \"MulHom\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"SpecialLinearGroup.baseChange\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AffineEquiv.homothetyUnitsMulHom\"], \"digest\": \"6c475e6507628d87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; abstract-group, Lie, matrix, representation or scheme-morphism facts do not state this assertion about affine group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Primitive elements in a group algebra over a commutative ring vanish by comparison of the group basis coefficients",
+   "results": "{\"t\": \"2026-10-24T08:14:26Z\", \"tool\": \"leanfinder\", \"query\": \"Primitive elements in a group algebra over a commutative ring vanish by comparison of the group basis coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.of'_modOf\", \"AddMonoidAlgebra.of'_mul_modOf\", \"AddMonoidAlgebra.mul_of'_modOf\", \"MonoidAlgebra.single_eq_zero\", \"AddMonoidAlgebra.single_eq_zero\", \"MonoidAlgebra.single_ne_zero\", \"MonoidAlgebra.single_apply\", \"SkewMonoidAlgebra.single_left_inj\"], \"digest\": \"af34eb4d127eee08\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; the coefficient/comultiplication lemmas do not assert primitive-element vanishing, and the other hits concern abstract groups, ordinary representations or unrelated scheme diagonals, not this group-scheme statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comul\", \"MonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-24T08:14:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"comul\\\", \\\"MonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.comul_single\", \"MonoidAlgebra.comul_single\", \"AddMonoidAlgebra.comul_def\", \"MonoidAlgebra.comul_def\", \"AddMonoidAlgebra.comulAlgHom_comp_mapRingHom\", \"MonoidAlgebra.comulAlgHom_comp_mapRingHom\"], \"digest\": \"9e2de72096acd8a0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; the coefficient/comultiplication lemmas do not assert primitive-element vanishing, and the other hits concern abstract groups, ordinary representations or unrelated scheme diagonals, not this group-scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "primitive|IsUnipotent|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T08:14:58Z\", \"tool\": \"grep\", \"query\": \"primitive|IsUnipotent|diagonalizable\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Sl2.lean\", \"Mathlib/Algebra/Lie/Weights/Killing.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\", \"Mathlib/Algebra/Lie/Weights/RootSystem.lean\"], \"digest\": \"39009a2da465a529\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; the coefficient/comultiplication lemmas do not assert primitive-element vanishing, and the other hits concern abstract groups, ordinary representations or unrelated scheme diagonals, not this group-scheme statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms from groups of multiplicative type to unipotent group schemes over arbitrary base algebras are trivial",
+   "results": "{\"t\": \"2026-10-24T08:14:59Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms from groups of multiplicative type to unipotent group schemes over arbitrary base algebras are trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulHom\", \"groupCohomology.mem_cocycles₁_of_addMonoidHom\", \"MulChar.trivial\", \"MonoidHom.ker_eq_top_iff\", \"CategoryTheory.CommGrp.uniqueHomFromTrivial\", \"MulChar.toUnitHom_eq\", \"CategoryTheory.Grp.uniqueHomFromTrivial\", \"MulChar.toUnitHom\"], \"digest\": \"875487b960c4e6da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; the coefficient/comultiplication lemmas do not assert primitive-element vanishing, and the other hits concern abstract groups, ordinary representations or unrelated scheme diagonals, not this group-scheme statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrimitive|primitive|IsUnipotent|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T08:15:48Z\", \"tool\": \"grep\", \"query\": \"IsPrimitive|primitive|IsUnipotent|diagonalizable\", \"sub\": \"RingTheory/Coalgebra\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Coalgebra/CoassocSimps.lean\"], \"digest\": \"0c0f49905d245a34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; the coefficient/comultiplication lemmas do not assert primitive-element vanishing, and the other hits concern abstract groups, ordinary representations or unrelated scheme diagonals, not this group-scheme statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a diagonalizable affine group scheme to the upper triangular matrices with diagonal entries one is trivial over any commutative base ring",
+   "results": "{\"t\": \"2026-10-24T08:15:49Z\", \"tool\": \"leanfinder\", \"query\": \"A morphism from a diagonalizable affine group scheme to the upper triangular matrices with diagonal entries one is trivial over any commutative base ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"Rep.diagonalHomEquiv_apply\", \"Matrix.SpecialLinearGroup.scalar_eq_coe_self_center\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"Rep.diagonalOneIsoLeftRegular\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso\", \"SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one\", \"Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply\"], \"digest\": \"250148bd2ee518f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned hits; the coefficient/comultiplication lemmas do not assert primitive-element vanishing, and the other hits concern abstract groups, ordinary representations or unrelated scheme diagonals, not this group-scheme statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nilpotent-unipotent-centre",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Integral Euler character of arbitrary flag line bundles. Section 22d, proof of Theorem 22.50, p.480: general fixed-point input, stated here in its integral equivariant form; Example 22.36, pp.473--474, for formal characters. WANTED: Nielsen 1974 general fixed-point theorem and Iversen 1976, 9.4; neither document is present. The integral formulation is an agent-supplied supporting statement. Supporting input: Section 22d, proof of Theorem 22.50, p.480: agent-supplied concentration prerequisite, not the numerical fixed-point formula itself. WANTED: Thomason, Une formule de Lefschetz en K-theorie equivariante algebrique, Duke Math. J. 53 (1986), concentration theorem; not present locally. No proof of concentration is claimed to occur in Milne. Supporting step: The concentration theorem's nonfixed-locus annihilation argument in the proof of the item. Geometric input to nonfixed-locus annihilation: invariant affine strata of the reduction, before the Laurent-coefficient and localization arguments. Supporting normal-case neighbourhood input used after passing to the invariant smooth locus, before removing one affine open in the Noetherian induction. Supporting proof input: Linearize the normal quasi-projective neighborhood by an immersion into projective space of a rational representation. Supporting line-bundle prerequisite: replace an ample invertible module by a positive tensor power carrying an algebraic G-linearization, before choosing invariant sections. Supporting Picard input: a tensor exponent uniform over the generic residue fields of all normal components, before applying the generic-line pullback criterion. Supporting base-change input: Brion Lemma 2.3, pullback Pic(G) to Pic(G_K), specialized using Remark 2.2(v). Supporting substep: Milne, Algebraic Groups, Theorem 18.15, sequence (128), printed p.390, and section 18.f, pp.395-396; the split-group standing assumptions, B/ B_u and characteristic line bundle on p.390. Scalar-extension compatibility of the associated-bundle construction is made explicit. Also Brion Lemma 2.3, equation (2), printed p.118. Supporting prerequisite: Milne Theorem 17.82, printed p.379 (maximal torus if and only if its scalar extension is maximal); the theorem allows all group varieties, and is used here only for smooth connected affine groups. Supporting step in Milne Theorem 17.82: Proposition 17.81 and its proof, printed pp.378–379; Theorem 14.5, printed pp.281–282, for the unitriangular-immersion meaning of unipotence. The finite-field part of the proof invokes Proposition 17.99, printed pp.383–384. Supporting proof input for Proposition 17.81: Theorem 16.47(a),(c), printed p.341, as used in the first case of the proof of Proposition 17.81, p.379; Theorem 14.5(a),(b), pp.281–282. Quotient by the central smooth torus is the represented fppf quotient (Theorem 5.28, p.110). Supporting input for this split: Lemma 16.46, printed pp.340–341; Theorem 14.5 and Corollary 14.9, pp.281–282, for the closed unitriangular realization over k. Supporting input: Proposition 15.18, printed p.312; Theorem 14.5, pp.281--282, for the unitriangular meaning of unipotent.",
+   "via": [
+    "lem-sfb-nilpotent-unipotent-centre",
+    "lem-sfb-nilpotent-central-torus-quotient",
+    "lem-sfb-torus-free-implies-unipotent-arbitrary-field",
+    "lem-sfb-maximal-torus-field-extension",
+    "lem-sfb-split-reductive-characteristic-sequence",
+    "lem-sfb-affine-group-picard-field-invariance",
+    "lem-sfb-affine-group-picard-stable-exponent",
+    "lem-sfb-normal-line-bundle-power-linearization",
+    "lem-sfb-normal-quasiprojective-equivariant-immersion",
+    "lem-sfb-sumihiro-normal-torus-affine-neighbourhood",
+    "lem-sfb-torus-invariant-affine-filtration",
+    "lem-sfb-torus-nonfixed-complement-annihilation",
+    "lem-sfb-torus-coherent-concentration",
+    "lem-sfb-torus-coherent-fixed-point-formula",
+    "lem-sfb-flag-line-euler-alternant",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-multiplicative-unipotent-base-algebra-vanishing",
+  "worker": "stage1",
+  "summary": "Kept the statement and all its hypotheses. Reused the existing split-torus subgroup theorem and unitriangular coordinate filtration. Supplied faithful-flat reduction, explicit group-algebra scalar extension, the elementary primitive-coefficient calculation, finite kernel induction and cancellation of the original subgroup inclusion. No new nodes or Mathlib leaves. Searched project Lean, whole DAG and blueprint and recorded actual Mathlib search results.",
+  "blueprint": "Supporting input beneath the stored det-thm-sf-ctf-stability-direct-images ancestry, at Milne Proposition 15.18 as used in Lemma 16.46. The current latest direct-images proof (3) is the compactification/open-coefficient route; this supporting group-theoretic item has no blueprint.is and blueprint_refs ancestor reports None. Retain that provenance without inventing an imported ancestor. Steps 1--5 realize the existing from.place supporting input through additive vanishing and the unitriangular filtration. Whole-blueprint searches diagonalizable, multiplicative unipotent, primitive, unitriangular and group algebra found no equivalent statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-31675aaca",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-31675aaca (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged; the split has 5 steps, no new nodes and no tool_uses. The source matches Milne iAG2017 Prop. 15.18, p.312, which I read in the PDF; Milne proves it by rational cohomology, so proof_origin 'agent' is right. Step 1: R→R⊗k̄ is faithfully flat (field-extension leaf, used within its hypotheses), B→B⊗_R S is injective, and Spec uniqueness lets equality over S descend to R. Step 2: lem-sfb-split-torus-subgroups-diagonalizable applies over k̄ with nonreduced subgroups allowed, and base change gives S[M] with the coproduct of def-sfb-ring-diagonalizable-group. Step 3: the coefficient argument for primitive elements is correct, including a_0=2a_0 ⇒ a_0=0. I checked it in characteristic 2, with nilpotents and with torsion M such as μ_p; a homomorphism to G_a is the same as a primitive h*(t). Step 4: the filtration node supplies p_r with scheme-theoretic kernel U^{(r)}. Kernels commute with base change, and the induction stays a group map because the kernel inclusion is a monomorphism. Step 5: points inject into U_n(A), so f_S is trivial, and Step 1 descends this to R. I tested n=1, M=0, R=0 and nilpotent S. Existing node lem-sfb-diagonalizable-to-unipotent-trivial (Q46) is the special case R=k, D=D_k(M) over a field. It cannot be cited for the ring S, so the item generalizes it rather than duplicating it; the report should have mentioned it, but that is not a fault. I found no other duplicate. proof_deps equals the union of the steps' uses, and no SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MultiplicativeUnipotentBaseAlgebraVanishing",
+  "declaration": "AlgebraicGeometry.multiplicative_unipotent_base_algebra_vanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MultiplicativeUnipotentBaseAlgebraVanishing.lean",
+  "statement": "theorem multiplicative_unipotent_base_algebra_vanishing {k : Type u} [Field k] (D U : Grp (Over (Spec (.of k)))) [IsAffine D.X.left] [LocallyOfFiniteType D.X.hom] [QuasiCompact D.X.hom] [IsAffine U.X.left] [LocallyOfFiniteType U.X.hom] [QuasiCompact U.X.hom] (hD : MultiplicativeType.IsMultiplicativeType D) (hU : ∃ (n : ℕ), 1 ≤ n ∧ ∃ r : U.X ⟶ GeneralLinearGroup (ULift.{u} (Fin n)) k, IsClosedSubgroupScheme r ∧ ∀ (B : Type u) [CommRing B] [Algebra k B] (x : (Spec (.of B)).asOver (Spec (.of k)) ⟶ U.X), (∀ i j : ULift.{u} (Fin n), j.down < i.down → (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k B (x ≫ r)).val i j = 0) ∧ (∀ i : ULift.{u} (Fin n), (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k B (x ≫ r)).val i i = 1)) (R : Type u) [CommRing R] [Algebra k R] (f : ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).mapGrp).obj D ⟶ ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).mapGrp).obj U) : f.hom.hom = 1 ∧ ∀ (A : Type u) [CommRing A] [Algebra R A] (d : (Spec (.of A)).asOver (Spec (.of R)) ⟶ (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k R)))).mapGrp).obj D).X), d ≫ f.hom.hom = 1",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Unipotence uses the node's explicit closed unitriangular embedding condition on every algebra-valued point, without the smoothness imposed by SolvableGroupStructure.IsUnipotent. Scalar extension to arbitrary commutative rings uses Over.pullback.mapGrp directly. Both morphism equality and its algebra-point formula are stated; no field, reducedness, smoothness or connectedness assumption is imposed on the base algebras or groups."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40804e4a3",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Read the item node, the stmt-dep records (IsMultiplicativeType, GeneralLinearGroup/homMulEquiv, IsClosedSubgroupScheme, Over.pullback base change), the delivered module, the report and Milne Prop 15.18 / Thm 14.5. Every clause matches: affine finite-type k-groups; recorded multiplicative-type predicate over AlgebraicClosure k; unipotence inline as a closed subgroup scheme in GL_n with zeros below the diagonal and ones on it at every algebra point (equivalent to a closed immersion into U_n; the smooth-only SolvableGroupStructure.IsUnipotent is correctly avoided and no other unipotence def exists); arbitrary commutative R and A in Type u with no reduced/nontrivial assumption; conclusion f.hom.hom = 1 plus the pointwise form. The node changes only in lean; lean.statement is verbatim; no defs; proof is sorry only; source/blueprint docstrings and proof plan present; report has both sections. Edge cases R=0, nilpotents, n=1, trivial D, mu_p/alpha_p are all fine. Not recompiled per instructions; no files changed."
+ }
+}

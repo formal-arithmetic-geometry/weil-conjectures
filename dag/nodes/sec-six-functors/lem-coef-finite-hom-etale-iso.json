@@ -1,0 +1,143 @@
+{
+ "id": "lem-coef-finite-hom-etale-iso",
+ "kind": "statement",
+ "title": "Etale finite coefficient Hom change by thick generation",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell$ distinct from its characteristic, a finite extension $E/\\mathbf Q_\\ell$, and a separated finite-type scheme $X$ over its algebraically closed field [def-weil-finite-field-fiber, def-weil-l-adic-coefficient-extension]. For $n\\ge m\\ge0$, the actual etaleFiniteHomCanonical at positive exponents $n+1,m+1$ [def-sf-etale-finite-coefficient-hom-arrow] is an isomorphism for every pair of finite-Tor bounded constructible etale complexes $K,M$ [def-weil-finite-tor-amplitude]. No endpoint-domain assertion or formal-coherence clause is bundled into this statement.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sf-etale-finite-coefficient-hom-arrow",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Middle paragraphs: normalized comparison on locally closed generators and exactness in the first argument."
+ },
+ "proof": [
+  {
+   "text": "The finite-type source over a field is Noetherian. The evaluation-defined family of etale comparisons has a thick isomorphism locus for each fixed M. Its transpose characterization identifies its components with the ordinary evaluationComparison. Turn its zero, shift, cone and retract clauses into a triangulated retract-stable object property on the opposite category, then pass to the unop property.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-coef-etale-hom-thick-locus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Middle paragraphs: normalized comparison on locally closed generators and exactness in the first argument."
+   }
+  },
+  {
+   "text": "For a locally closed generator, obtain finite-projective constant trivializations of its lisse sheaf. The published normalizedComparison supplies seven invertible arrows and their exact six-factor equality to evaluationComparison; the composite is invertible. Exact open extension and exact closed direct image commute with the degree-zero embedding, identifying this derived-shriek generator with the sheaf generator in thick generation.",
+   "uses": [
+    "lem-coef-lisse-projective-constant-models",
+    "lem-coef-locally-closed-hom-generator",
+    "det-sf-flat-model-generation",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Middle paragraphs: normalized comparison on locally closed generators and exactness in the first argument."
+   }
+  },
+  {
+   "text": "Apply triangEnvelope_le_iff to the retract-stable triangulated locus and the generator assertion. The flat-model generation equality puts the given K in that envelope. Finally identify its ordinary transpose with etaleFiniteHomCanonical by the normalization theorem.",
+   "uses": [
+    "det-sf-flat-model-generation",
+    "lem-coef-finite-hom-ordinary-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+    "place": "Middle paragraphs: normalized comparison on locally closed generators and exactness in the first argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-coef-etale-hom-thick-locus",
+  "lem-coef-lisse-projective-constant-models",
+  "lem-coef-locally-closed-hom-generator",
+  "det-sf-flat-model-generation",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-coef-finite-hom-ordinary-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-finite-hom.proof.md",
+  "place": "Middle paragraphs: normalized comparison on locally closed generators and exactness in the first argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom commutes with change of finite coefficients for constructible complexes of finite Tor amplitude",
+   "results": "8 hits about derived-category fractions and Ext; no constructible internal-Hom coefficient change theorem.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "0 hits",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Hh]om.*[Cc]oefficient|[Hh]om.*[Cc]hange",
+   "results": "25 hits in general Hom/derived infrastructure; no etale finite-Tor statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientHomChange",
+  "date": "2026-10-26",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Middle paragraphs: normalized comparison on locally closed generators and exactness in the first argument."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteHomEtaleIso",
+  "file": "lean/Sheaf/Paper/FiniteHomEtaleIso.lean",
+  "declaration": "WeilConjectures.finiteHomEtale_isIso",
+  "statement": "theorem finiteHomEtale_isIso\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]\n    [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    {n m : ℕ} (h : m ≤ n) (K M : finiteHomEtale l E X n)\n    (hK : finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X K)\n    (hM : finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X M) :\n    IsIso (etaleFiniteHomCanonical l E X h K M)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ff606",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T070125-L-3398793",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-ff606",
+  "group": "K1",
+  "result": "fix",
+  "landing": "20261026T070125-L-3398793",
+  "kind": "interface",
+  "note": "independent cc review: item proof + FiniteHomEtaleIso/LisseProjectiveConstantModels against thm-coef-finite-hom plan, new sorry statements against their nodes, the 14 direct importers compiled against the delivered modules, the 5 unit-route modules still in the transitive import closure"
+ }
+}

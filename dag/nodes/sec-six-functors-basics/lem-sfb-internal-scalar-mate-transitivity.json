@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-internal-scalar-mate-transitivity",
+ "kind": "statement",
+ "title": "Successive internal coefficient mates and normalized scalar units",
+ "statement": "Let $\\Lambda_0\\xrightarrow a\\Lambda_1\\xrightarrow b\\Lambda_2$ be maps of commutative condensed rings [sk-def-sfb-condensed-ring] and let $f:X\\to Y$ be any scheme morphism with small pro-etale sites [def-weil-pbc-proetale-site]. Put $R_{i,T}=p_T^*\\Lambda_i$ for $i=0,1,2$, $T=X,Y$ [sk-def-sfb-pulled-back-coefficients]. Use ordinary unbounded internal-module derived categories and their specified $L_{f,i}\\dashv F_{f,i}$ [sk-def-sfb-module-derived-pushpull]. For $ij=01,12,02$ let $D_{ij,T}$ be uncompleted derived scalar extension [lem-pur-derived-change-of-rings], with normalized pullback balancing $\\lambda^{ij}:L_{f,j}D_{ij,Y}\\cong D_{ij,X}L_{f,i}$ [lem-sfb-internal-scalar-pullback-normalization]. Let $\\rho^{ij}:D_{ij,Y}F_{f,i}\\to F_{f,j}D_{ij,X}$ be its mate under these specified adjunctions [def-sfb-internal-derived-scalar-comparisons].\n\nThere exist natural isomorphisms $\\beta_T:D_{12,T}D_{01,T}\\xrightarrow{\\sim}D_{02,T}$ satisfying the successive universal computation-counit normalization of [def-sfb-internal-derived-scalar-comparisons]. On flat-term K-flat representatives $\\beta_T$ sends $(x\\otimes s)\\otimes t$ to $x\\otimes b(s)t$, with inverse $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$. It identifies the composite scalar-extension units with the unit for $ba$. These isomorphisms satisfy the pullback identity\n$$\\beta_XL_{f,0}\\circ D_{12,X}(\\lambda^{01})\\circ(\\lambda^{12}D_{01,Y})=\\lambda^{02}\\circ L_{f,2}(\\beta_Y),$$\nwhere the displayed common target is $D_{02,X}L_{f,0}$ and the common source is $L_{f,2}D_{12,Y}D_{01,Y}$. For every $K\\in D(R_{0,X})$ the corresponding direct-image identity is\n$$\\rho^{02}_K\\circ\\beta_{Y,F_{f,0}K}=F_{f,2}(\\beta_{X,K})\\circ\\rho^{12}_{D_{01,X}K}\\circ D_{12,Y}(\\rho^{01}_K)$$\nin $D(R_{2,Y})$. The unit compatibility is for the normalized adjunctions with representative unit $x\\mapsto x\\otimes1$, and thus also fixes the corresponding reduction-unit transposes. For an identity coefficient map these comparisons are the canonical identity comparisons. No flatness of either coefficient map and no invertibility of the direct-image mates on arbitrary inputs are asserted or required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), canonical-map compatibility through repeated uniformizer reduction; extracted old step 6. Stacks sites-cohomology.tex Tags 0D6D (lemma-derived-pullback-composition), 0G7E (lemma-pullback-K-flat), 07A6 (lemma-adjoint)."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-internal-scalar-pullback-normalization",
+  "def-sfb-internal-derived-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "For each scheme T, form the canonical exact-restriction compositor from Mod.comapComp and coefficientMap_comp. Transport the composite specified scalar adjunction along this compositor and take leftAdjointUniq with the specified adjunction for the composite coefficient map. This constructs beta_T without choosing data from an unproved existence theorem. The unit_leftAdjointUniq identity gives exactly the two unit equations. Naturality of the restriction compositor and homEquiv_leftAdjointUniq give the transpose equations.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4."
+   }
+  },
+  {
+   "text": "The derived-adjunction unit factorization, followed by the exact-restriction localization isomorphism, identifies the transpose of the scalar computation counit with the ordinary scalar unit on every homotopy-category representative. The ordinary successive balancing comparison is the ordinary left-adjoint uniqueness comparison: its unit identity follows by unfolding ordinaryComp and Mod.extendScalarsComp. Apply normalizedAdjunction_composition and normalizedAdjunction_uniqueness from lem-pur-normalized-adjunction-composition, with the exact restriction factorization, to obtain SuccessiveNormalized. Thus beta_T is normalized by the fixed ordinary balancing isomorphism on whole complexes.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-pur-normalized-adjunction-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4."
+   }
+  },
+  {
+   "text": "Prove the ordinary pullback rectangle by conjugating its left-adjoint isomorphisms to right-adjoint isomorphisms. The conjugate of ordinaryComp is the restriction compositor by the unit equation; the conjugate of pullIso is comapLowerStarIso by its definition. Both right-adjoint pastings have the same underlying module map: after Mod.hom_ext their maps are identities. ConjugateIsoEquiv injectivity gives the ordinary rectangle. Apply additive functors to complexes degree by degree and pass to homotopy classes; the comparison with a composite functor is transported with its canonical target compositor.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4."
+   }
+  },
+  {
+   "text": "Compose the two derived rectangle maps with the scalar and geometric computation counits. Naturality of these counits, SuccessiveNormalized, the three PullNormalized hypotheses, and the ordinary rectangle give equality on every homotopy representative. To deduce equality of natural transformations, cancel the given normalized pullback isomorphism and use a K-flat left resolution of a homotopy representative: its localization is invertible, and the scalar computation counit is invertible on that resolving object. Cancellation and naturality give equality after arbitrary postcomposition. The remaining geometric computation counit is invertible because geometric module pullback is exact. This proves pullback pasting without asserting preservation of K-flatness by a scalar word.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4."
+   }
+  },
+  {
+   "text": "Transpose both direct-image pastings under the specified final geometric adjunction. The mate-counit equation rewrites each rho. Naturality of the second balancing map and beta_X moves the first geometric counit to the boundary; the pullback rectangle identifies the resulting transposes. Injectivity of the Hom equivalence yields the direct-image equation. This calculation never requires a direct-image mate to be invertible.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4."
+   }
+  },
+  {
+   "text": "For an identity coefficient map, use ordinary and derived left-adjoint uniqueness against the identity adjunction transported along the corresponding restriction unitor. The same normalized transpose calculation identifies the derived scalar unitor with its ordinary computation-counit normalization. Conjugating the ordinary scalar compositor shows that either identity factor is the appropriate whiskered unitor. Conjugating the ordinary geometric square shows it is the square of ordinary unitors. Lift these identities degree by degree and use computation-counit naturality and the absolute uniqueness argument of step 4. This gives betaLeft, betaRight and the formula for the identity pullback comparison. Transposition under the geometric adjunction gives its direct-image mate. The identity scalar unit equation is the unit_leftAdjointUniq equation. The argument applies without any nonzero-ring or flatness hypothesis.",
+   "uses": [
+    "def-sfb-internal-derived-scalar-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+    "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "lem-pur-normalized-adjunction-composition",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (3), compatibility of canonical maps with repeated coefficient reduction; direct internal-module proof by J4. Canonical adjunction uniqueness, exact restriction normalization, ordinary conjugate rectangles, absolute K-flat derivability, and the mate-counit formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For composable homomorphisms of condensed coefficient rings the unbounded derived scalar direct image mates compose under normalized balanced tensor associativity and scalar units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondensed.ihomPoints_symm_comp\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (B P : LightCondMod R) (S S' : LightProfinite) (π : S ⟶ S')\\n  (f : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S'.toCondensed) ⟶ B),\\n  (LightCondensed.ihomPoints R P B S).symm\\n      (CategoryTheory.CategoryStruct.comp\\n        (Cat\", \"doc\": \"Let $R$ be a commutative ring, and let $P, B$ be light condensed $R$-modules. For any light profinite space $T$, there is a canonical isomorphism of $R$-modules, denoted $\\\\Phi_T$, between the sections\"}\n  {\"name\": \"CondensedMod.hom_naturality_apply\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] {X Y : CondensedMod R} (f : X ⟶ Y) {S T : CompHausᵒᵖ} (g : S ⟶ T)\\n  (x : ↑(X.val.obj S)),\\n  (CategoryTheory.ConcreteCategory.hom (f.val.app T)) ((CategoryTheory.ConcreteCategory.hom (X.val.map g)) x) =\\n    (CategoryTheory.ConcreteCategory.hom (Y.val.map g)) ((Cat\", \"doc\": \"For any morphism $ f : X \\to Y $ between condensed modules over a ring $ R $, and for any morphism $ g : S \\to T $ in the opposite category of compact Hausdorff spaces, the diagram commutes: applying $ \"}\n  {\"name\": \"LightCondensed.instMonoidalCategoryLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalCategory (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal category. This structure is defined by equipping the category of sheaves on light profinite spaces (compa\"}\n  {\"name\": \"LightCondMod.hom_naturality_apply\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] {X Y : LightCondMod R} (f : X ⟶ Y) {S T : LightProfiniteᵒᵖ} (g : S ⟶ T)\\n  (x : ↑(X.val.obj S)),\\n  (CategoryTheory.ConcreteCategory.hom (f.val.app T)) ((CategoryTheory.ConcreteCategory.hom (X.val.map g)) x) =\\n    (CategoryTheory.ConcreteCategory.hom (Y.val.map g)) ((Cat\", \"doc\": \"For any morphism $ f: X \\to Y $ in the category of light condensed $ R $-modules and any morphism $ g: S \\to T $ in the opposite category of light profinite spaces, the following naturality condition ho\"}\n  {\"name\": \"LightCondensed.instMonoidalClosedLightCondMod\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) → [inst : CommRing R] → CategoryTheory.MonoidalClosed (LightCondMod R)\", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj P ((LightCondensed.free R).obj S.toCondensed) ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light condensed $R$-module. $P$ is an internally projective object if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any ligh\"}\n  {\"name\": \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"module\": \"Mathlib/Condensed/Light/Monoidal\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (CategoryTheory.presheafToSheaf (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)).Monoidal\", \"doc\": \"The sheafification functor from presheaves to sheaves on the coherent topology of light profinite spaces (compact, Hausdorff, totally disconnected, second-countable topological spaces) with values in \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"vcomp\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with vertical composition.\"}\n  {\"name\": \"CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Mate\", \"type\": \" {B : Type u} [CategoryTheory.Bicategory B] {a b c d : B} {g : a ⟶ c} {h : b ⟶ d} {l₁ : a ⟶ b} {r₁ : b ⟶ a} {l₂ : a ⟶ b} {r₂ : b ⟶ a} {l₃ : c ⟶ d} {r₃ : d ⟶ c} (adj₁ : CategoryTheory.Bicategory.Adjunction l₁ r₁) (adj₂ : CategoryTheory.Bicategory.Adjunction l₂ r₂) (adj₃ : CategoryTheory.Bicategory.Ad\", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Mate\", \"type\": \" {B : Type u} [CategoryTheory.Bicategory B] {a b c d : B} {g : a ⟶ c} {h : b ⟶ d} {l₁ : a ⟶ b} {r₁ : b ⟶ a} {l₂ : c ⟶ d} {r₂ : d ⟶ c} {l₃ : c ⟶ d} {r₃ : d ⟶ c} (adj₁ : CategoryTheory.Bicategory.Adjunction l₁ r₁) (adj₂ : CategoryTheory.Bicategory.Adjunction l₂ r₂) (adj₃ : CategoryTheory.Bicategory.Ad\", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.Bicategory.mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Bicategory.Adjunction.Mate\", \"type\": \" {B : Type u} [CategoryTheory.Bicategory B] {a b c d e f : B} {g₁ : a ⟶ c} {g₂ : c ⟶ e} {h₁ : b ⟶ d} {h₂ : d ⟶ f} {l₁ : a ⟶ b} {r₁ : b ⟶ a} {l₂ : c ⟶ d} {r₂ : d ⟶ c} {l₃ : e ⟶ f} {r₃ : f ⟶ e} (adj₁ : CategoryTheory.Bicategory.Adjunction l₁ r₁) (adj₂ : CategoryTheory.Bicategory.Adjunction l₂ r₂) (adj\", \"doc\": \"The mates equivalence commutes with vertical composition.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv.*comp",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"139\", \"text\": \"  simp only [id_obj, comp_obj, mateEquiv, Equiv.coe_fn_mk, comp_app, rightUnitor_inv_app,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"159\", \"text\": \"section mateEquivVComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"170\", \"text\": \"theorem mateEquiv_vcomp (α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"195\", \"text\": \"end mateEquivVComp\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"line\": \"197\", \"text\": \"section mateEquivHComp\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive derived change of rings commutes with pullback balancing and the associated direct image mates satisfy the scalar extension composition identity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendScalarsComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R₁ R₂ R₃ : Type u₁} →\\n  [inst : CommRing R₁] →\\n    [inst_1 : CommRing R₂] →\\n      [inst_2 : CommRing R₃] →\\n        (f₁₂ : R₁ →+* R₂) →\\n          (f₂₃ : R₂ →+* R₃) →\\n            ModuleCat.extendScalars (f₂₃.comp f₁₂) ≅ (ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)\", \"doc\": \"Given commutative rings $ R_1, R_2, R_3 $ and ring homomorphisms $ f_{12} : R_1 → R_2 $, $ f_{23} : R_2 → R_3 $, the extension of scalars functor for the composite homomorphism $ f_{23} ∘ f_{12} $ is \"}\n  {\"name\": \"LinearEquiv.baseChange_trans\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"(e : M ≃ₗ[R] N) (f : N ≃ₗ[R] P) : (e.trans f).baseChange R A M P = (e.baseChange R A M N).trans (f.baseChange R A N P)\", \"doc\": \"For modules over a commutative semiring $ R $, the base change operation with respect to a ring homomorphism $ R \\\\to A $ commutes with composition of linear equivalences. Specifically, applying base c\"}\n  {\"name\": \"RingHom.IsStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHomProperties\", \"type\": \": Prop\", \"doc\": \"For any commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if a property $ P $ holds for the canonical ring homomorphism $ R \\\\to S $, then $ P $ also ho\"}\n  {\"name\": \"ModuleCat.extendScalars_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \":\\n  (extendScalarsComp (RingHom.id R₁) f₁₂).hom ≫\\n      Functor.whiskerRight (extendScalarsId R₁).hom _ ≫ (Functor.leftUnitor _).hom =\\n    𝟙 _\", \"doc\": \"For any commutative ring $ R $ and ring homomorphism $ f : R \\to S $, the composition of the extension of scalars functor for the identity homomorphism $ \\text{id}_R $ followed by $ f $ is naturally iso\"}\n  {\"name\": \"ModuleCat.extendScalars_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \":\\n  (extendScalarsComp (f₂₃.comp f₁₂) f₃₄).hom ≫ Functor.whiskerRight (extendScalarsComp f₁₂ f₂₃).hom _ =\\n    (extendScalarsComp f₁₂ (f₃₄.comp f₂₃)).hom ≫\\n      Functor.whiskerLeft _ (extendScalarsComp f₂₃ f₃₄).hom ≫ (Functor.associator _ _ _).inv\", \"doc\": \"Given commutative rings $ R_1, R_2, R_3, R_4 $ and ring homomorphisms $ f_{12} : R_1 → R_2 $, $ f_{23} : R_2 → R_3 $, $ f_{34} : R_3 → R_4 $, the associator natural isomorphism establishes coherence b\"}\n  {\"name\": \"LinearMap.baseChange_baseChange\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \"{A B : Type*} [CommSemiring A] [Algebra R A] [Semiring B] [Algebra R B] [Algebra A B] [IsScalarTower R A B]\\n  (f : M →ₗ[R] N) :\\n  ((f.baseChange A).baseChange B) =\\n    (cancelBaseChange R A B B N).symm ∘ₗ (f.baseChange B) ∘ₗ (cancelBaseChange R A B B M)\", \"doc\": \"For any $ R $-linear map $ f : M \\\\to N $, the composition of base changes $ (f.\\\\text{baseChange}(A)).\\\\text{baseChange}(B) $ equals the composition of the inverse cancelBaseChange isomorphism for $ N $\"}\n  {\"name\": \"PolynomialLaw.comp_toFun'\", \"module\": \"Mathlib.RingTheory.PolynomialLaw.Basic\", \"type\": \"(S : Type u) [CommSemiring S] [Algebra R S] : (g.comp f).toFun' S = (g.toFun' S).comp (f.toFun' S)\", \"doc\": \"For any commutative semiring $ R $, $ R $-modules $ M, N, P $, polynomial laws $ f : M \\\\to N $ and $ g : N \\\\to P $, and any $ R $-algebra $ S $, the scalar extension of the composition $ g \\\\circ f $ t\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquiv\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] : B ⊗[A] Ω[A⁄R] ≃ₗ[B] Ω[B⁄S]\", \"doc\": \"Let $R, S, A, B$ be commutative rings. Let $R \\\\to S$ and $R \\\\to A$ be ring homomorphisms giving $S$ and $A$ the structure of $R$-algebras. If $B$ is the pushout of $S$ and $A$ over $R$ (i.e., $B$ is i\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of coefficient extension and pushforward comparison along a tower of ring sheaves using K-flat associativity and pasting adjunction mates",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_inv_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $, object $ U $ in $ \\\\mathcal{C}^\\\\mathrm{op} $, and element $ x $ in the module $ M(U) $, applying the inverse natural isomorphism of the composed pushforward functors $ \\\\\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.Sh\", \"doc\": \"For any sheaf $ M $ of modules over a ring sheaf $ R $, the counit of the adjunction between the pushforward functors $ F_* $ and $ G_* $ evaluated at $ M $, an object $ U $ in the site $ \\\\mathcal{C} \"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given continuous functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, and a morphism $ \\\\ph\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans_app_val_app_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural transformation $\\\\alpha: F \\\\Rightarrow G$, and\"}\n  {\"name\": \"SheafOfModules.pushforwardNatTrans_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G H : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, natural transformations $\\\\alpha : F \\\\Rightarrow \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*comp|comp.*extendScalars|scalar.*[Cc]ompos",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Action/Continuous.lean\", \"line\": \"113\", \"text\": \"/-- Restricting scalars along a composition is naturally isomorphic to restricting scalars twice. -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Linear/Basic.lean\", \"line\": \"50\", \"text\": \"  /-- compatibility of the scalar multiplication with the post-composition -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Linear/Basic.lean\", \"line\": \"53\", \"text\": \"  /-- compatibility of the scalar multiplication with the pre-composition -/\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are constituent ordinary module or formal mate constructions; they do not state this normalized unbounded internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv.*comp",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean. Subdirectory: CategoryTheory/Adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed mateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean:170-193) and extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1008). They supply constituent formal mate pasting or ordinary ring-module scalar composition, not the unbounded internal-module statement and its specified counit normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"vcomp\"",
+   "results": "6 hits: CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp, CategoryTheory.Bicategory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.Bicategory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed mateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean:170-193) and extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1008). They supply constituent formal mate pasting or ordinary ring-module scalar composition, not the unbounded internal-module statement and its specified counit normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Successive derived change of rings commutes with pullback balancing and the associated direct image mates satisfy the scalar extension composition identity",
+   "results": "8 hits: ModuleCat.extendScalarsComp, LinearEquiv.baseChange_trans, RingHom.IsStableUnderBaseChange, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_assoc, LinearMap.baseChange_baseChange, PolynomialLaw.comp_toFun', KaehlerDifferential.tensorKaehlerEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed mateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean:170-193) and extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1008). They supply constituent formal mate pasting or ordinary ring-module scalar composition, not the unbounded internal-module statement and its specified counit normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable homomorphisms of condensed coefficient rings the unbounded derived scalar direct image mates compose under normalized balanced tensor associativity and scalar units",
+   "results": "8 hits: CondensedMod.hom_naturality_apply, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.ihomPoints_symm_comp, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihom_map_val_app, LightCondMod.hom_naturality_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed mateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean:170-193) and extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1008). They supply constituent formal mate pasting or ordinary ring-module scalar composition, not the unbounded internal-module statement and its specified counit normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of coefficient extension and pushforward comparison along a tower of ring sheaves using K-flat associativity and pasting adjunction mates",
+   "results": "8 hits: SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardNatTrans_app_val_app, SheafOfModules.pushforwardNatTrans_app_val_app_apply, SheafOfModules.pushforwardNatTrans_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: reviewed mateEquiv_vcomp (Mathlib/CategoryTheory/Adjunction/Mates.lean:170-193) and extendScalarsComp (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:984-1008). They supply constituent formal mate pasting or ordinary ring-module scalar composition, not the unbounded internal-module statement and its specified counit normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-quotient-direct-image-comparison",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Paragraph (3), canonical-map compatibility through repeated uniformizer reduction; extracted old step 6.",
+   "via": [
+    "lem-sfb-integral-quotient-direct-image-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-scalar-mate-transitivity",
+  "worker": "stage1",
+  "summary": "Reuse existing successive scalar normalization, finite-word K-flat comparison descent and mate pasting. Prove the ordinary pullback square on local tensor generators, descend it with the specified computation counits, and transpose it using the actual adjunctions. Explicitly check units, transposes and identity coefficient changes. Statement unchanged; no new nodes.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral.proof.md paragraph (3), canonical reduction-map compatibility, including repeated reduction and the units used in the cone/reduction argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic unbounded scalar-tower associator and its normalized scalar units, used for the coefficient tower at each site; it does not replace any geometric finiteness or base-change step."
+   },
+   {
+    "node": "lem-trf-ringed-kflat-word-comparison-descent",
+    "why": "Generic normalization/descent tool for finite words of ringed-topos pullbacks; it justifies lifting the explicit ordinary balancing square without a flatness assumption. No same-unit node supplies this finite-word uniqueness statement."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic representative-normalized scalar tensor/restriction adjunction, needed to identify the actual scalar units and their transposes."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic sheafified balanced tensor definition, used to justify testing ordinary maps on local pure-tensor generators."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic categorical pasting of adjunction mates, applied to the two coefficient squares; no same-unit statement supplies this formal calculation."
+   },
+   {
+    "node": "def-weil-pbc-adjunction-mate",
+    "why": "Generic mate transpose formula and Hom bijection, used explicitly for the two beta boundary transformations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-b08ce39a9",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-b08ce39a9 (reviewer sub-agent of L); spot-checked: Stage-1 split of lem-sfb-internal-scalar-mate-transitivity with no new nodes and the statement unchanged. Source checked: blueprint main-20261015 sk-thm-sfb-proper-base-change-integral.proof.md (3). The item generalizes the canonical-map compatibility under repeated reduction from O_E to arbitrary commutative condensed rings, which does not weaken anything. Route: lem-sfb-successive-derived-quotient-normalization is on route through sk-lem-integral-models. The declared tool_uses (pur scalar adjunction, sheaf tensor definition, the two Mathlib-leaf mate nodes, the trf word lemma) are generic and accepted. Batch 5: lem-trf-ringed-kflat-word-comparison-descent is generic K-flat derived-word descent; its closure holds only lem-trf-localization-essentially-surjective, and it is already in the batch-5 closure through lem-trf-quotient-system-mixed-coherence, so the new edge adds no node. It is neither a trace-formula nor a Poincare-duality step, and it is kept. Steps 1-6 hold: the section models are identified with units and counits; beta_T is the unique counit-normalized lift, and the intermediate complexes stay K-flat without flatness of a or b; the unit composite is (x⊗1)⊗1 -> x⊗1 and the successive adjunct b(s)t g(x) was recomputed; the ordinary square was checked on local generators through naturality of alpha_f; the equality descends under whiskering and composition; clause 1 of mate pasting plus the transpose computation and naturality of beta give the direct-image identity with no invertibility used. No cycle. Duplicate candidates read (lem-sp-finite-tower-scalar-mates, lem-sfb-derived-scalar-mate-composition, lem-pur-etale-direct-image-scalar-composition and others): none states the item. Edge cases checked: K=0, f=id, zero rings, the non-flat tower Z->Z/4->Z/2. FIX for step 7: clause 4 of mate pasting covers identity functors only, while D_ii is only isomorphic to the identity through a unitor. I added mate naturality in G and H from the component formula of def-weil-pbc-adjunction-mate, which gives mate(lambda^ii) = (F u_X^-1)(u_Y F) = id, and added that node to step 7's uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalScalarMateTransitivity",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.internal_scalar_mate_transitivity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarRestrictionComp",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarRestrictionId",
+   "AlgebraicGeometry.ProEtale.QuotientChange.scalarExtensionId",
+   "AlgebraicGeometry.ProEtale.QuotientChange.internal_scalar_mate_transitivity",
+   "AlgebraicGeometry.ProEtale.QuotientChange.internal_scalar_identity_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/InternalScalarMateTransitivity.lean",
+  "statement": "theorem internal_scalar_mate_transitivity (a : Λ₀ ⟶ Λ₁) [IsMonHom a] (b : Λ₁ ⟶ Λ₂) [IsMonHom b] {X Y : Scheme.{u}} (f : X ⟶ Y) (l01 : D a Y ⋙ L Λ₁ f ≅ L Λ₀ f ⋙ D a X) (l12 : D b Y ⋙ L Λ₂ f ≅ L Λ₁ f ⋙ D b X) (l02 : D (a ≫ b) Y ⋙ L Λ₂ f ≅ L Λ₀ f ⋙ D (a ≫ b) X) (h01 : PullNormalized a f l01) (h12 : PullNormalized b f l12) (h02 : PullNormalized (a ≫ b) f l02) : ∃ (betaX : D a X ⋙ D b X ≅ D (a ≫ b) X) (betaY : D a Y ⋙ D b Y ≅ D (a ≫ b) Y), SuccessiveNormalized a b (a ≫ b) rfl X betaX ∧ SuccessiveNormalized a b (a ≫ b) rfl Y betaY ∧ (∀ K : DerivedCategory (Modules Λ₀ X), (scalarAdj a X).unit.app K ≫ (V a X).map ((scalarAdj b X).unit.app ((D a X).obj K)) ≫ (V a X).map ((V b X).map (betaX.hom.app K)) ≫ (scalarRestrictionComp a b X).hom.app ((D (a ≫ b) X).obj K) = (scalarAdj (a ≫ b) X).unit.app K) ∧ (∀ K : DerivedCategory (Modules Λ₀ Y), (scalarAdj a Y).unit.app K ≫ (V a Y).map ((scalarAdj b Y).unit.app ((D a Y).obj K)) ≫ (V a Y).map ((V b Y).map (betaY.hom.app K)) ≫ (scalarRestrictionComp a b Y).hom.app ((D (a ≫ b) Y).obj K) = (scalarAdj (a ≫ b) Y).unit.app K) ∧ (∀ (K : DerivedCategory (Modules Λ₀ X)) (H : DerivedCategory (Modules Λ₂ X)) (g : K ⟶ (V (a ≫ b) X).obj H), ((scalarAdj a X).comp (scalarAdj b X)).homEquiv K H (betaX.hom.app K ≫ ((scalarAdj (a ≫ b) X).homEquiv K H).symm g) = g ≫ (scalarRestrictionComp a b X).inv.app H) ∧ (∀ (K : DerivedCategory (Modules Λ₀ Y)) (H : DerivedCategory (Modules Λ₂ Y)) (g : K ⟶ (V (a ≫ b) Y).obj H), ((scalarAdj a Y).comp (scalarAdj b Y)).homEquiv K H (betaY.hom.app K ≫ ((scalarAdj (a ≫ b) Y).homEquiv K H).symm g) = g ≫ (scalarRestrictionComp a b Y).inv.app H) ∧ (∀ K : DerivedCategory (Modules Λ₀ Y), l12.hom.app ((D a Y).obj K) ≫ (D b X).map (l01.hom.app K) ≫ betaX.hom.app ((L Λ₀ f).obj K) = (L Λ₂ f).map (betaY.hom.app K) ≫ l02.hom.app K) ∧ (∀ K : DerivedCategory (Modules Λ₀ X), betaY.hom.app ((F Λ₀ f).obj K) ≫ (rho (a ≫ b) f l02).app K = (D b Y).map ((rho a f l01).app K) ≫ (rho b f l12).app ((D a X).obj K) ≫ (F Λ₂ f).map (betaX.hom.app K))",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Both theorem declarations together state the scalar-tower, normalized scalar units and transpose clauses, the pullback and direct-image equations, and the identity-coefficient cases. The three helper definitions are the canonical exact-restriction comparisons and identity scalar unitor, built from the existing restriction/localization and specified scalar adjunction; they introduce no new scalar functor. No statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdaa4285e",
+  "group": "Q127",
+  "result": "pass",
+  "note": "All node clauses rendered faithfully: β_X/β_Y with SuccessiveNormalized (ordinaryComp carries (x⊗s)⊗t↦x⊗b(s)t), unit and transpose clauses via canonical scalarRestrictionComp, pullback identity and direct-image identity with correct order/source/target, identity-coefficient theorem covering both positions plus λ and ρ under canonical unitors. Quantifying over PullNormalized l_ij is equivalent to the node because the normalization pins λ uniquely on K-flat representatives; existence from internal_scalar_pullback_normalization. Helpers canonical (comapComp/comapId/leftAdjointUniq of the specified scalarAdj), docstrings with source and blueprint place, statement verbatim, stmt_deps unchanged, only sorry, no extra hypotheses or universe restrictions. Advisory: one identity-theorem unit clause holds by definition; parallel condensedScalarId/condensedScalarComp exist on a separate condensedScalar, not reusable for D."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261024T190129-L-3952326",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

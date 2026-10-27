@@ -1,0 +1,129 @@
+{
+ "id": "lem-sfb-diagonal-trace-finite-splitting",
+ "kind": "statement",
+ "title": "Finite evaluation of the normalized projective-line splitting",
+ "statement": "Let l be prime, let X and S be Noetherian schemes with the derived localization choices of [def-sfb-diagonal-trace-models], f:X→S, and p a Presentation for E=Q_l in the sense of [def-sfb-diagonal-trace-presentation]. Assume l is invertible on S. For each n≥0, evaluation at level n+1 sends the actual specified unit/Chern map p.model.bq to an isomorphism. The finite coefficient ring is the level n+1 quotient, the section class is the positive Kummer class of the pullback of O(1), and no assertion about twisting components or a system trace is part of the conclusion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), components of the twisted unit/chern splitting"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-presentation",
+  "def-sp-tower-class-finite"
+ ],
+ "proof": [
+  {
+   "text": "Apply the cohomological criterion for isomorphisms to the actual evaluated biproduct-desc map. Exact evaluation preserves cohomology vanishing. The coefficient unit is a degree-zero single object, so its evaluated H² vanishes. The inverse Tate line is also a degree-zero single object, so its shift by minus two has evaluated cohomology zero in every degree other than two.",
+   "uses": [
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-sfb-diagonal-trace-models",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree two apply the finite Chern-component theorem with p.finiteX. In every other degree apply the finite coefficient-unit theorem with p.model.model, over_eq and coefficientPullback. For an additive functor F, when F(V) is zero, F(inl):F(U)→F(U⊞V) is an isomorphism: F(fst) is its inverse by the biproduct total identity. Thus invertibility of F(a) implies invertibility of F(desc(a,b)); use the symmetric argument when F(U) is zero. These are the two proved private categorical helpers in the delivered module. This proves invertibility in every degree, hence the required derived isomorphism.",
+   "uses": [
+    "lem-sfb-diagonal-trace-finite-unit-cohomology",
+    "lem-sfb-diagonal-trace-finite-chern-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-sfb-diagonal-trace-models",
+  "det-sp-coefficient-towers-abelian",
+  "lem-sfb-diagonal-trace-finite-unit-cohomology",
+  "lem-sfb-diagonal-trace-finite-chern-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1); U2 cohomology assembly of the separate unit and Chern components of (G2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "the tensor pullback comparison commutes with the unit isomorphism",
+   "results": "Eight hits, including SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal and generic monoidal unit constructions. None concerns the section-normalized strict Tate-line comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem; use the existing normalized pullbacks and exact localization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The positive twist of a unit and Chern projective line decomposition has components the twisted unit and Chern adjoint",
+   "results": "Eight unrelated group-unit hits. A second query for tensor pullback and unitors found generic cartesian pullback formulas, not this strict coefficient-system comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteChernNormalization|IsIso.*bq|positivePullback_unit|retwist_shift in Mathlib, WeilConjectures and Sheaf; blueprint_refs search positive pullback unit and finite projective line splitting",
+   "results": "Only the existing Presentation fields, Model definitions, and the parent obligation. GeoP1Cohomology is the ordinary finite decomposition. Blueprint searches found no exact nodes.",
+   "date": "2026-10-27",
+   "verdict": "The two comparison steps need their own statements; the categorical assembly is proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceTwistedSplittingComponents",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1)",
+   "via": [
+    "lem-sfb-diagonal-trace-twisted-splitting-components",
+    "lem-sfb-diagonal-trace-presentation-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceFiniteSplitting",
+  "file": "lean/Sheaf/Paper/DiagonalTraceFiniteSplitting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.diagonalTrace_finite_splitting",
+  "statement": "theorem diagonalTrace_finite_splitting\n    (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}}\n    [IsNoetherian X] [IsNoetherian S]\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    {f : X ⟶ S} (p : Presentation l (ULift.{u} (Padic l)) f)\n    (hS : IsUnit (l : Γ(S, ⊤))) (n : ℕ) :\n    IsIso ((SpTowerShriek.Ev l (ULift.{u} (Padic l)) S n).map\n      (p.model.bq l (ULift.{u} (Padic l))))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261026T222613-L-673599",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261026T235943-L-1473292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

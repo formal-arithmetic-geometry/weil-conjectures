@@ -1,0 +1,123 @@
+{
+ "id": "lem-sf-exceptional-proper-open-origin-comparison",
+ "kind": "statement",
+ "title": "Proper and open comparison on bounded origins",
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "statement": "Let O be a commutative ring and ell in O with all O/(ell^(n+1)) finite. Fix a compactification X --j--> Z --p--> Y of a morphism f, a strict etale compact-support package S, and its exceptional right adjunction G [def-sf-strict-etale-exceptional-adjoint-interfaces]. Fix actual site comparison packages CX,CY,CZ at S.PX,S.PY,S.PZ satisfying the bounded-origin equivalence clauses [def-pur-exceptional-system-transport-interfaces]. There exist an actual strict pro-etale compact-support package P and its proper/open comparison R [def-coef-system-site-transport-interfaces]. The comparison C_Y S -> P C_X is invertible on bounded-below etale systems. P preserves system origin and its finite operation preserves finite origin. The finite source-counit version of R is invertible on finite origin. For every n and finite origin N at Y, G_n(V_Y,n N) is bounded below. Evaluation of R followed by P's evaluation comparison and the image of CX's inverse-evaluation comparison equals CY's inverse-evaluation comparison followed by CY,n of S's evaluation comparison and then the finite R. This is an equality of actual derived morphisms, for every n and input, not merely equality on cohomology.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 5.15 and Lemmas 4.10, 5.16 and 5.22; Stacks 0B65."
+ },
+ "stmt_deps": [
+  "def-pur-exceptional-system-transport-interfaces",
+  "def-coef-system-site-transport-interfaces",
+  "def-sf-strict-etale-exceptional-adjoint-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "lift the open restriction and proper inverse image to ordinary strict\nsystems. Their levelwise section maps commute with restriction of scalars. The\nleft adjoint of open restriction is extension by zero, constructed by sheafifying\nthe direct sum of sections over open lifts; kernels and cokernels are termwise.\nExact localization gives its derived adjunction and representative factors.\nConstruct the inverse-image square on ordinary sections and localize it, with\nits evaluation square retained. Take the proper mate and compose with the open\ncomparison. The finite proper mate is invertible for the quasi-compact,\nquasi-separated proper factor on bounded-below inputs. Exact evaluation preserves\nthese bounds and detects isomorphisms, so the system map is invertible. The source\nsite counit identifies its origin version. This gives left stability on origins,\non systems and at each finite level. For the finite right bound, realize an arbitrary bounded-below finite input by a bounded-below system concentrated at that level, with every other level zero and zero transitions. Exact evaluation of the etale system bound, followed by G.evaluation, gives the finite bound; no flat singleton extension is needed. The direct site image preserves lower bounds. No absolute separatedness is used. Evaluating the actual\nmate word gives the displayed comparison equation by the recorded unit/counit\nidentities and the open evaluation square.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-pur-system-derived-evaluation",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-pur-system-derived-evaluation",
+  "lem-pur-etale-coefficient-system-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Separated portion of system-transport steps 2–8: Proper and open comparison on bounded origins"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "bounded below etale proetale site comparison on derived strict coefficient systems with fixed evaluation packages",
+   "results": "8 hits: Scheme.Etale.forget, smallEtalePretopology, etalePretopology, smallEtaleTopology, etaleTopology, instCategoryEtale, IsEtale.instHasOfPostcompPropertyScheme, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology. No strict-system comparison or transport theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use the existing project comparison and mate interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.mateEquiv",
+   "results": "12 hits: mateEquiv, mateEquiv_counit, mateEquiv_counit_symm, unit_mateEquiv, unit_mateEquiv_symm, mateEquiv_vcomp, mateEquiv_hcomp and iterated/conjugate mate identities.",
+   "date": "2026-10-25",
+   "verdict": "Generic mate identities only; no geometric system construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*comparison|adjunction.*evaluation|origin.*adjunction",
+   "results": "8 Mathlib hits: Adjunction.Evaluation, evaluationAdjunctionLeft/Right, and unrelated comparison references; no strict coefficient-system theorem.",
+   "date": "2026-10-25",
+   "verdict": "No equivalent result in Mathlib."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale comparison on bounded below strict coefficient systems, transporting exceptional compact support adjunction and evaluation",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, Adjunction.derivedε and its congr_simp; SheafOfModules.PullbackConstruction.adjunction; CompHausLike.LocallyConstant.adjunction, adjunction_unit, counit_app_val; LightCondSet.LocallyConstant.adjunction. None states site-origin equivalence or exceptional strict-system transport.",
+   "date": "2026-10-25",
+   "verdict": "Existing generic derived-adjunction tools do not construct the needed geometric packages or evaluation mate words."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExceptionalSystemTransport",
+  "date": "2026-10-25",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-exceptional-system-transport",
+   "place": "Proper and open comparison on bounded origins",
+   "via": [
+    "lem-sf-exceptional-system-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExceptionalProperOpenOriginComparison",
+  "file": "lean/Sheaf/Paper/ExceptionalProperOpenOriginComparison.lean",
+  "declaration": "AlgebraicGeometry.exceptionalProperOpenOriginComparison",
+  "statement": "theorem exceptionalProperOpenOriginComparison [∀ n : ℕ, Finite (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1))] (hX : ExceptionalSystemSiteEquivalence CX) (hY : ExceptionalSystemSiteEquivalence CY) (hZ : ExceptionalSystemSiteEquivalence CZ) : ∃ (P : ExceptionalProCompactSupport O ell c CX.proEvaluation CY.proEvaluation CZ.proEvaluation) (R : ExceptionalSystemCompactificationComparison S CX CY CZ P), (∀ M, (∃ a : ℤ, M.IsGE a) → IsIso ((exceptionalSystemComparison R).app M)) ∧ (∀ M, CX.origin M → CY.origin ((exceptionalProSupport P).obj M)) ∧ (∀ n M, CX.levelOrigin n M → CY.levelOrigin n ((P.val.levelDerivedOpen n ⋙ (P.val.properDerived.level n).direct).obj M)) ∧ (∀ n M, CX.levelOrigin n M → IsIso ((exceptionalSystemLevelOriginComparison R n).app M)) ∧ (∀ n N, CY.levelOrigin n N → ∃ a : ℤ, ((G.levelRight n).obj ((CY.image.level n).direct.obj N)).IsGE a) ∧ (∀ n M, (CY.proEvaluation.evaluation n).map ((exceptionalSystemComparison R).app M) ≫ (exceptionalProSupportEvaluation P n).hom.app (CX.image.system.inverse.obj M) ≫ (P.val.levelDerivedOpen n ⋙ (P.val.properDerived.level n).direct).map ((CX.image.inverseEvaluation n).hom.app M) = (CY.image.inverseEvaluation n).hom.app (S.functor.obj M) ≫ (CY.image.level n).inverse.map ((S.evaluation n).hom.app M) ≫ (exceptionalSystemLevelComparison R n).app ((S.PX.evaluation n).obj M))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfec7",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261025T013903-L-4030217",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-dfec7",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261025T013903-L-4030217",
+  "kind": "interface",
+  "note": "independent cc review: item exceptionalSystemTransport (statement and kernel type hash unchanged vs published) with its 4 new sorry leaves + Interfaces relocation (49 moved decls: verbatim text; type-hash diffs only in Prop instance proofs); 6 delivered modules + 9 direct importers compiled clean in sandbox"
+ }
+}

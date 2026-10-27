@@ -32,57 +32,50 @@
  ],
  "proof": [
   {
-   "text": "Write $A_E=Lg_E^*Rf_{*,E}$ and $B_E=Rf\\prime_{*,E}Lg\\prime_E^*$ and let $c_E:A_E\\to B_E$ be the finite-stage exchange transformation. By [prop-weil-pbc-scalar-extension], its scalar extension, after the specified comparison isomorphisms, is $c_M$ for $E\\subset M$. Thus [prop-weil-pbc-descent-functors] descends this family to $c:A\\to B$ on $\\Dbc(-,\\Qlb)=\\mathcal P_{-}$ of [def-weil-pbc-qbar-category]. At $(E,K_E)$ its component is represented at $E$ by $c_E(K_E)$; at $M\\supset E$ it is represented by $c_M(T_{M/E}K_E)$ with the same comparison isomorphisms.",
+   "text": "Properness is stable under the specified Cartesian base change. Apply actual-coefficient constructible preservation on identity-horizontal squares for the two proper direct images; finite dimensionality of proper fibers supplies the bound, and the canonical DVR uniformizer kills l in the first coefficient quotient. Use the recorded integral completed-pullback preservation for the other two operations.",
    "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "prop-weil-pbc-descent-functors",
-    "def-weil-pbc-qbar-category"
+    "lem-weil-pbc-actual-coefficient-constructible-preservation",
+    "def-weil-pbc-completed-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-    "place": "## Proof, 1"
-   }
+   "elementary": false
   },
   {
-   "text": "By [thm-weil-pbc-finite-extension], $c_E(K_E)$ has an inverse $d_E$ because $f$ is proper and the square is cartesian; there is no extra restriction on $g$. Regard $d_E$ as a morphism class at stage $E$. By [def-weil-pbc-finite-stage-pair-category], identities and composites of these classes are computed at $E$. Hence $[E,d_E]\\circ[E,c_E(K_E)]=[E,\\mathrm{id}]$ and $[E,c_E(K_E)]\\circ[E,d_E]=[E,\\mathrm{id}]$. These equations give an inverse to the descended component. The common-stage equality criterion of [prop-weil-pbc-common-stage-calculus] gives the same equations if the component is written at a larger stage.",
+   "text": "Apply pbcDescentOperations to these four preservation witnesses. It returns exactly the four canonically normalized coherent families and compatible localized actual exchange required by the presentation.",
    "uses": [
-    "thm-weil-pbc-finite-extension",
-    "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-common-stage-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-    "place": "## Proof, 2"
-   }
-  },
-  {
-   "text": "For two overfields $M,N\\supset E$, choose a common finite overfield $P$. The scalar compatibility in [prop-weil-pbc-scalar-extension] identifies both transported exchange maps with $c_P(T_{P/E}K_E)$; the equivalence relation of [def-weil-pbc-finite-stage-pair-category] therefore identifies their classes. If another pair $(F,L_F)$ represents $K$ through an isomorphism $h:(E,K_E)\\to(F,L_F)$, naturality of the descended transformation in [prop-weil-pbc-descent-functors] gives $B(h)\\circ c_{(E,K_E)}=c_{(F,L_F)}\\circ A(h)$. Since functors carry an inverse of $h$ to an inverse, this is precisely equality of the two maps after identifying their source and target with $A(K),B(K)$. Changing the morphism representative of $h$ leaves these classes unchanged by the same pair-category equivalence relation. This proves independence of $E$, the common stage, and the representative, without asserting that two different pairs are literally equal.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-pbc-finite-stage-pair-category",
     "prop-weil-pbc-descent-functors"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-    "place": "## Proof, 3"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For every finite coefficient field and integral representative, compare actual completed exchange with strict completed exchange. The complete-pro-etale theorem makes the latter invertible, since the integral stage retains intrinsic completeness and compatible etale origins. Reflect invertibility through the full-subcategory inclusion and preserve it through scalar localization. The specified heterogeneous equality and the four finite-stage functor equalities identify the resulting isomorphism with the presentation exchange component.",
+   "uses": [
+    "lem-weil-pbc-actual-completed-exchange-transport",
+    "thm-weil-pbc-complete-proetale",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic stage-system isomorphism-of-descent theorem and composition isomorphisms give descended invertibility. Generic proved stage-inclusion and beta-compatibility identities give the finite-overfield formula. Naturality gives representative-isomorphism independence. The two presentation definitions factor through exactly these generic constructions, with their original formulas and unchanged mathematical values.",
+   "uses": [
+    "prop-weil-pbc-descent-functors",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-completed-pullback",
   "def-weil-pbc-finite-stage-pair-category",
-  "def-weil-pbc-qbar-category",
-  "prop-weil-pbc-common-stage-calculus",
+  "lem-weil-pbc-actual-coefficient-constructible-preservation",
+  "lem-weil-pbc-actual-completed-exchange-transport",
   "prop-weil-pbc-descent-functors",
-  "prop-weil-pbc-scalar-extension",
-  "thm-weil-pbc-finite-extension"
+  "thm-weil-pbc-complete-proetale"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/thm-weil-pbc-qbar.md",
-  "place": "## Proof"
+  "by": "worker G1",
+  "document": "lean/Sheaf/Paper/QbarProperBaseChange.lean",
+  "place": "Actual coefficient preservation, strict-tower exchange comparison, and the existing generic stage-system descent formulas. Unit-level proper-base-change route unchanged."
  },
  "mathlib_searches": [
   {
@@ -187,7 +180,18 @@
    "where": "statement"
   }
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
@@ -206,21 +210,36 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-c2a60c455 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements and sources, and unit/chapter route in full. Scalar compatibility, inverse equations, and naturality justify all three steps; small cases pass. No new nodes or repairs. review.md records checks and the outstanding comparison with the exact upstream condensed-coefficient target, which this split does not claim to establish."
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $f:X\\to Y$ be proper, let $g:Y'\\to Y$ be arbitrary, and let\n$K\\in\\Dbc(X,\\Qlb)$. The descended exchange transformation of\n[prop-weil-pbc-descent-functors] is an isomorphism\n$$\n Lg^*Rf_*K\\xrightarrow{\\sim}Rf'_*Lg'^*K\n \\quad\\text{in }\\Dbc(Y',\\Qlb).\n$$\nIf $K$ is represented by a pair $(E,K_E)$ with $K_E\\in\\Dbc(X,E)$, this map\nis represented after a finite overfield $M$ by the $M$-coefficient exchange\nisomorphism of [thm-weil-pbc-finite-extension] applied to $T_{M/E}K_E$. The\nresult is independent of $E$, $M$, and the representative.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber]\nand a prime $\\ell\\neq p$, and use Weil sheaves and Weil complexes with\ncoefficients $\\Lambda=\\Qlb$ as in [def-weil-weil-sheaf-complex]. Let\n\n$$\n\\begin{array}{ccc}\nX'_0 & \\xrightarrow{\\;h'_0\\;} & X_0\\\\\n{\\scriptstyle f'_0}\\downarrow & & \\downarrow{\\scriptstyle f_0}\\\\\nY'_0 & \\xrightarrow{\\;h_0\\;} & Y_0\n\\end{array}\n$$\n\nbe a cartesian square of $k_0$-schemes with $f_0$ proper and $h_0$ arbitrary,\nwhere $Y_0$ and $Y'_0$ are of finite type over $k_0$\n([def-weil-scheme-morphism-properties]). Write $X=X_0\\times_{k_0}k$, and\nsimilarly $X'$, $Y$, $Y'$, for the geometric fibres, $f,f',h,h'$ for the\ninduced morphisms (again a cartesian square, with $f$ and $f'$ proper), and\n$g_X,g_{X'},g_Y,g_{Y'}$ for the geometric Frobenius automorphisms of\n[def-weil-frobenius-detailed], which commute with $f,f',h,h'$.\n\nOn Weil modules, the pullback $h^*(M,\\theta)$ is the module pullback $h^*M$\n([det-def-sfb-module-pushforward-pullback]) with the Weil structure\n$g_{Y'}^*h^*M\\cong h^*g_Y^*M\\xrightarrow{h^*\\theta}h^*M$, and the pushforward\n$f_*(M,\\theta)$ is $f_*M$ with the Weil structure\n$g_Y^*f_*M\\cong f_*g_X^*M\\xrightarrow{f_*\\theta}f_*M$ (the first isomorphism\nholds because $g_X,g_Y$ are automorphisms with $fg_X=g_Yf$); likewise for\n$h'$ and $f'$. Write $h^*$ for the functor induced by the exact pullback on\nderived categories of Weil modules, and $Rf_*$ for the right derived functor\nof the pushforward.\n\n1. For every Weil complex $K$ on $X_0$, the objects $h^*Rf_*K$ and\n   $Rf'_*h'^*K$ are Weil complexes on $Y'_0$, and the base change morphism\n   $$\n   \\mathrm{BC}_K\\colon h^*Rf_*K\\xrightarrow{\\ \\sim\\ }Rf'_*h'^*K,\n   $$\n   formed by the formula of [sk-def-sfb-base-change-morphism] from the\n   derived adjunctions $f^*\\dashv Rf_*$ and $f'^*\\dashv Rf'_*$ of Weil modules\n   and the pullback comparison $f'^*h^*\\cong h'^*f^*$, is an isomorphism of\n   Weil complexes.\n2. For every Weil sheaf $\\mathcal F$ on $X_0$ and every $i\\geq0$, with\n   $R^if_*\\mathcal F=\\mathcal H^i(Rf_*\\mathcal F)$, there is an isomorphism of\n   Weil sheaves on $Y'_0$\n   $$\n   h^*R^if_*\\mathcal F\\cong R^if'_*h'^*\\mathcal F .\n   $$",
   "proof": [
    {
-    "text": "The scalar-compatible family of finite-extension exchange maps descends to a\nnatural transformation by [prop-weil-pbc-descent-functors]; at every finite\nstage it is an isomorphism by [thm-weil-pbc-finite-extension], and the\ndescent formula preserves this property through the common-stage colimit of\n[def-weil-pbc-qbar-category]. Independence of the representatives is the\nindependence statement of [thm-weil-pbc-finite-extension] together with the\nequivalence relation of [def-weil-pbc-finite-stage-pair-category].",
+    "text": "*Forgetting the Weil structure.* Let $\\operatorname{For}$ denote the forgetful\nfunctor from Weil modules to modules, and also the induced functor on derived\ncategories ([def-weil-weil-sheaf-complex]). The unit and counit of the module\nadjunction $f^*\\dashv f_*$ commute with the Weil structures defined in the\nstatement (they are natural and compatible with the composition isomorphisms\nfor $fg_X=g_Yf$), so $f^*\\dashv f_*$ lifts to Weil modules, and likewise for\n$f'$; $\\operatorname{For}$ carries these adjunctions, and the pullback\ncomparison, to the module ones. On Weil modules over $T$, $\\operatorname{For}$\nhas the exact left adjoint $M\\mapsto\\bigoplus_{n\\in\\mathbf Z}(g_T^n)^*M$, with\nthe Weil structure permuting the summands, so $\\operatorname{For}$ preserves\nK-injective complexes. As it commutes with the underived $f_*$, it follows that\n$\\operatorname{For}\\circ Rf_*\\cong Rf_*\\circ\\operatorname{For}$, compatibly\nwith units and counits, and trivially $\\operatorname{For}\\circ h^*=\nh^*\\circ\\operatorname{For}$. Hence\n$\\operatorname{For}(\\mathrm{BC}_K)$ is the base change morphism\n$\\mathrm{BC}_{\\operatorname{For}K}$ of [sk-def-sfb-base-change-morphism] for\nthe square $X',X,Y',Y$ over $k$ and $\\operatorname{For}K\\in\\Dbc(X,\\Qlb)$.",
     "uses": [
-     "prop-weil-pbc-descent-functors",
-     "thm-weil-pbc-finite-extension",
-     "def-weil-pbc-qbar-category",
-     "def-weil-pbc-finite-stage-pair-category"
+     "def-weil-weil-sheaf-complex",
+     "sk-def-sfb-base-change-morphism"
     ],
     "elementary": false
+   },
+   {
+    "text": "*Constructibility and the isomorphism.* The schemes $X,X',Y,Y'$ are of finite\ntype over $k$, and $Y,Y'$ are quasi-compact. Both assertions below are local on\n$Y$, resp. $Y'$: restriction to an open subscheme commutes with derived direct\nimages ([Tag 0D6G](https://stacks.math.columbia.edu/tag/0D6G)), with inverse\nimages, units and counits, hence carries $\\mathrm{BC}$ to the base change\nmorphism of the restricted square. Cover $Y$ by finitely many affine opens\n$V$, and $Y'$ by finitely many affine opens $V'$ each mapping into some\naffine open $V$ of $Y$; then $V,V'$, and $f^{-1}V$,\n$f'^{-1}V'$ (proper over them), are separated and of finite type over $k$.\nInverse images and, for $\\Lambda=\\Qlb$, direct images preserve bounded\nconstructible complexes between such schemes ([sk-def-sfb-dc-restricted-functors];\nfor the proper direct images also [det-thm-sfb-proper-base-change-rational]\n(2)). Applying this on the finitely many affine opens involved,\n$Rf_*\\operatorname{For}K$, $h^*Rf_*\\operatorname{For}K$ and\n$Rf'_*h'^*\\operatorname{For}K$ are bounded with constructible cohomology; since\n$\\operatorname{For}$ commutes with $Rf_*$, $Rf'_*$, $h^*$, $h'^*$ and with\ncohomology objects, $h^*Rf_*K$ and $Rf'_*h'^*K$ are Weil complexes. By\n[det-thm-sfb-proper-base-change-rational] (3) for $\\Lambda=\\Qlb$ and the\nrestricted squares, $\\mathrm{BC}_{\\operatorname{For}K}=\n\\operatorname{For}(\\mathrm{BC}_K)$ is an isomorphism. A morphism of complexes\nof Weil modules is a quasi-isomorphism if and only if the underlying morphism\nof complexes of modules is one, since cohomology of Weil modules is computed\non the underlying modules; so $\\mathrm{BC}_K$ is an isomorphism, and it is an\nisomorphism of Weil complexes because these form a full subcategory of the\nderived category of Weil modules. This proves (1).",
+    "uses": [
+     "sk-def-sfb-dc-restricted-functors",
+     "det-thm-sfb-proper-base-change-rational"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Weil sheaves.* Apply (1) to $K=\\mathcal F[0]$. The pullbacks $h^*$, $h'^*$ are\ninduced by exact functors of Weil modules, so they commute with\n$\\mathcal H^i$ and $h'^*(\\mathcal F[0])=(h'^*\\mathcal F)[0]$. Taking\n$\\mathcal H^i$ of $\\mathrm{BC}_{\\mathcal F[0]}$ gives\n$h^*R^if_*\\mathcal F\\cong R^if'_*h'^*\\mathcal F$ as Weil sheaves, which is (2).",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -237,7 +256,9 @@
    "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation",
    "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation.exchange",
    "AlgebraicGeometry.Scheme.PbcQbarExchangePresentation.atStage",
-   "AlgebraicGeometry.Scheme.qbar_properBaseChange"
+   "AlgebraicGeometry.Scheme.qbar_properBaseChange",
+   "AlgebraicGeometry.Scheme.pbcExchangeOfStageSystems",
+   "AlgebraicGeometry.Scheme.pbcExchangeAtStage"
   ],
   "file": "lean/Sheaf/Paper/QbarProperBaseChange.lean",
   "statement": "theorem qbar_properBaseChange [IsProper f] : ∃ P : PbcQbarExchangePresentation l Ω sq, (∀ K : pbcQbarCategory l Ω X, IsIso ((P.exchange).app K)) ∧ (∀ (M : Padic.FiniteCoefficientFields l Ω) (K : pbcStageCategory l Ω X M), IsIso ((P.Ex.τ M).app K)) ∧ (∀ (K : pbcQbarCategory l Ω X) (M : Padic.FiniteCoefficientFields l Ω) (h : K.stage ≤ M), (P.exchange).app K = PbcQbarExchangePresentation.atStage l Ω sq P K M h) ∧ (∀ (K L : pbcQbarCategory l Ω X) (h : K ≅ L), (P.Rf.base.functor ⋙ P.Lg.base.functor).map h.hom ≫ (P.exchange).app L = (P.exchange).app K ≫ (P.Lg'.base.functor ⋙ P.Rf'.base.functor).map h.hom)",
@@ -245,5 +266,15 @@
   "by": "Q27",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261024T014827-L-2277720",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

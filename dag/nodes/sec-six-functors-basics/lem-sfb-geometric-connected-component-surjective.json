@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-geometric-connected-component-surjective",
+ "kind": "statement",
+ "title": "A geometric connected component covers a connected locally algebraic scheme",
+ "statement": "Let $k$ be a field [def-weil-field], let $K/k$ be an algebraic closure [def-weil-algebraic-closure], and let $X$ be a nonempty connected scheme [def-pc-scheme, def-weil-connected-scheme] locally of finite type over $k$ [def-weil-finite-type-morphism], with finitely many irreducible components [def-weil-irreducible-components]. Put $Z=(X\\times_k\\operatorname{Spec}K)_{\\mathrm{red}}$, using affine spectra [def-weil-affine-spectrum], the fibre product [def-pc-fibre-product] and scheme reduction [def-weil-pbc-scheme-reduction]. A connected component means a maximal nonempty connected subset. Then $Z$ has finitely many irreducible components and has a nonempty connected component. Every connected component $Y$ of $Z$ is open and closed in $Z$. With its open subscheme structure, $Y$ is a nonempty connected reduced scheme [def-pc-reduced-scheme] locally of finite type over $K$, has finitely many irreducible components, and the composite $p:Y\\hookrightarrow Z\\to X$ is surjective on underlying points.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04L7 (proposition-units-general), first paragraph of proof, geometric connected component; Tag 04KZ (lemma-galois-action-irreducible-components-locally-finite-type), (3), and Tag 038H (lemma-separably-closed-field-irreducible-components) for finiteness after algebraic closure."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-reduced-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Write $W=X\\times_k\\operatorname{Spec}K$, with projection $r$. List the finitely many irreducible components of $X$ as $T_1,\\ldots,T_m$. They cover $X$. By the finite-preimage lemma each $r^{-1}(T_i)$ is a finite nonempty union of irreducible components of $W$. Together these give a finite cover of $W$ by irreducible components. Any other irreducible component $C$ is contained in one member of this cover: intersect the finite closed cover with $C$ and use irreducibility, successively. Maximality then forces equality. Thus $W$ has only finitely many irreducible components. The reduction immersion $Z\\to W$ is a homeomorphism: it is a closed immersion and is the identity on underlying sets. Therefore the same finiteness holds for $Z$.",
+   "uses": [
+    "lem-sfb-geometric-component-finite-preimage",
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), first proof paragraph"
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is surjective; its base change $r$ is surjective as well. Since $X$ is nonempty, $W$ and hence its reduction $Z$ are nonempty.",
+   "uses": [
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), first proof paragraph"
+   }
+  },
+  {
+   "text": "Here is the finite topological argument giving the components of $Z$. Join two of its finitely many irreducible components when they meet, and partition the components by chains of such intersections. An irreducible space is connected: a nontrivial clopen partition would express it as two proper closed subsets. The union belonging to each chain class is connected, since a clopen partition would put each irreducible member on one side and intersections force the same side along every chain. Each union and its complement are finite unions of closed irreducible components, so it is clopen. These unions cover $Z$ and are disjoint; a connected subset meeting one cannot meet its complement. Consequently they are exactly the maximal nonempty connected subsets. There is at least one by nonemptiness. Fix any such component $Y$. Its irreducible components are exactly the irreducible components of $Z$ in its class: a maximal irreducible subset of $Y$ lies in an ambient component by the covering lemma, that ambient component lies wholly in this clopen $Y$, and maximality gives equality. In particular $Y$ has finitely many irreducible components.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-weil-irreducible-components",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004W (lemma-irreducible), closedness and covering; elementary finite-intersection-chain argument supplying the clopen components used in Tag 04L7"
+   }
+  },
+  {
+   "text": "Give $Y$ its open subscheme structure. The reduced-induced-subscheme theorem applied to the full closed set $|W|$ says that $Z=W_{\\mathrm{red}}$ is reduced. The local rings of an open subscheme are the same as those of its ambient scheme, so $Y$ is reduced. To verify local finite type without assuming quasi-compactness, take the affine cover $\\operatorname{Spec}A_i$ of $X$ from the definition, with each $A_i$ generated by finitely many elements over $k$. Its base change has affine charts $\\operatorname{Spec}(A_i\\otimes_k K)$. Reduction replaces each coordinate ring by $B_i=(A_i\\otimes_k K)/\\sqrt{0}$, still generated over $K$ by the images of those generators. Every point of $Y$ in this chart has a principal neighbourhood $D(f)$ contained in $Y$: write the closed complement in $\\operatorname{Spec}B_i$ as $V(I)$ and choose $f\\in I$ outside the prime of that point. Such a neighbourhood is affine with coordinate ring $(B_i)_f$, by the affine principal-open lemma. This algebra is generated by the finite generators of $B_i$ together with $f^{-1}$. These neighbourhoods cover $Y$, proving local finite type over $K$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-reduced-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), first proof paragraph"
+   }
+  },
+  {
+   "text": "The projection $r:W\\to X$ is open by the universally-open-over-a-field lemma, applied to $\\operatorname{Spec}K$ over $k$ and base scheme $X$. It is closed as well: $K/k$ is algebraic, so every element of $K$ satisfies a monic polynomial over $k$ after division by the leading coefficient. Thus $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is integral by the affine definition. Its base change $r$ is integral, hence universally closed and in particular closed. Under the reduction homeomorphism $|Z|=|W|$, the subset $Y$ is nonempty, open and closed, so $r(Y)$ is a nonempty clopen subset of $X$. Connectedness of $X$ forces $r(Y)=X$. This is exactly surjectivity of the composite $p:Y\\hookrightarrow Z\\to X$.",
+   "uses": [
+    "lem-sc-scheme-over-field-universally-open",
+    "def-weil-algebraic-closure",
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "lem-sbc-integral-morphism-base-change",
+    "pqf-lem-integral-univclosed",
+    "def-weil-proper-morphism",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04L7 (proposition-units-general), first proof paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-component-finite-preimage",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-closed-immersion",
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-pc-reduced-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-weil-ring-localization-away",
+  "lem-sc-scheme-over-field-universally-open",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "lem-sbc-integral-morphism-base-change",
+  "pqf-lem-integral-univclosed",
+  "def-weil-proper-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 04L7 (proposition-units-general), first proof paragraph, with the finite-component and affine-chart details written out"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A connected component of the reduced base change of a connected scheme locally of finite type over a field to its algebraic closure maps surjectively to the scheme and has finitely many irreducible components if the original scheme does",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; digest 2ad5461820ca9d2a",
+   "date": "2026-10-24",
+   "verdict": "no match: component homeomorphisms require geometrically connected fibres; the algebraic-closure projection can have disconnected fibres. Noetherian component finiteness does not cover a merely locally finite type non-quasi-compact scheme. None of the hits gives the stated cover."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*[Cc]omponent|[Cc]omponent.*geometric|irreducibleComponents.*[Ff]inite|[Ff]inite.*irreducibleComponents",
+   "results": "Actual search returned 13 hits: Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean; digest cf9df0c019c11498",
+   "date": "2026-10-24",
+   "verdict": "no match: component homeomorphisms require geometrically connected fibres; the algebraic-closure projection can have disconnected fibres. Noetherian component finiteness does not cover a merely locally finite type non-quasi-compact scheme. None of the hits gives the stated cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric connected component over an algebraic closure of a connected scheme locally of finite type over a field surjects onto the original scheme",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.instIsDominantOfSurjective, AlgebraicGeometry.surjective_iff, AlgebraicGeometry.surjective_eq_topologically, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant; digest 2263d7178da8344f",
+   "date": "2026-10-24",
+   "verdict": "no match: component homeomorphisms require geometrically connected fibres; the algebraic-closure projection can have disconnected fibres. Noetherian component finiteness does not cover a merely locally finite type non-quasi-compact scheme. None of the hits gives the stated cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"connectedComponent\"",
+   "results": "Actual search returned 2 hits: AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply; digest 7c6684093f1fd260",
+   "date": "2026-10-24",
+   "verdict": "no match: component homeomorphisms require geometrically connected fibres; the algebraic-closure projection can have disconnected fibres. Noetherian component finiteness does not cover a merely locally finite type non-quasi-compact scheme. None of the hits gives the stated cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a locally finite type scheme over a field with finitely many irreducible components its base change to an algebraic closure has finitely many irreducible components",
+   "results": "Actual search returned 8 hits: AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, RingHom.EssFiniteType.isStableUnderBaseChange, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; digest dbaeb98f17dd305a",
+   "date": "2026-10-24",
+   "verdict": "no match: component homeomorphisms require geometrically connected fibres; the algebraic-closure projection can have disconnected fibres. Noetherian component finiteness does not cover a merely locally finite type non-quasi-compact scheme. None of the hits gives the stated cover."
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.*[Cc]omponent|[Cc]omponent.*geometric|irreducibleComponents.*[Ff]inite|[Ff]inite.*irreducibleComponents",
+   "results": "Actual search: 20 hits; Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Noetherian.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest f9bf28c9115aec1c. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A geometric connected component over an algebraic closure of a connected scheme locally of finite type over a field surjects onto the original scheme",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.instIsDominantOfSurjective, AlgebraicGeometry.surjective_iff, AlgebraicGeometry.surjective_eq_topologically, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.SurjectiveOnStalks, AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant; digest 2263d7178da8344f. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"connectedComponent\"",
+   "results": "Actual search: 2 hits; AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph, AlgebraicGeometry.Scheme.Hom.connectedComponentsHomeomorph_apply; digest 7c6684093f1fd260. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every connected component of the reduced algebraic closure base change of a connected locally finite type scheme with finitely many irreducible components surjects onto the original scheme",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Spec.map_surjective, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.instIsDominantOfSurjective; digest 41132a3d85508e60. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection from a connected component of a scheme after algebraic closure of the ground field is open and closed, hence surjective when the original scheme is connected",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.residue_surjective, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.pointsPi_surjective_of_isAffine, AlgebraicGeometry.Surjective, AlgebraicGeometry.Surjective.surj, AlgebraicGeometry.Scheme.Hom.surjective, AlgebraicGeometry.Spec.map_surjective; digest 9b17f1a5886c6223. ",
+   "date": "2026-10-24",
+   "verdict": "no match: Noetherian component finiteness requires quasi-compactness; the geometric-component equivalence requires geometrically irreducible fibres; finite Galois prime transitivity does not give this finiteness for arbitrary locally finite type schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relatively-closed-constants-units-fg",
+  "date": "2026-10-24",
+  "group": "Q52"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, middle paragraph: identify k_a=k_b inside the global sections of the connected reduced chart T, and use that this ring is a field to inject it into the residue field at v. Supporting algebra input: 04MK, quasi-compact paragraph after replacing each ground field by its integral closure: invoke 04L7 for the quotient of global units. Input for 04L7(1): the geometric connected component and finiteness of its irreducible components.",
+   "via": [
+    "lem-sfb-relatively-closed-constants-units-fg",
+    "lem-sfb-connected-reduced-scalar-field-uniqueness",
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-geometric-connected-component-surjective",
+  "worker": "stage1",
+  "summary": "Q42 checked Stacks 04L7, 04KZ(3), 038H, 0383, 01WL, 01WM and 01J3. One new statement-only input describes the finite decomposition above a single irreducible component, without connectedness or globally finite component assumptions. The proof explicitly derives global finiteness, clopen connected components, local finite type after reduction and restriction, and the open-and-closed image argument. No quasi-compactness, reducedness of X or perfectness of k is added.",
+  "blueprint": "The supporting geometric-component replacement in the inherited provenance, under det-thm-sf-ctf-stability-direct-images proof (3), is realized by steps 1--5. The current latest blueprint has shortened proof (3); this item supplies the already-created Stacks 04L7 input below its alteration/finiteness prerequisites. Blueprint searches for geometric connected component, irreducible components, finite union of irreducible, 04KZ and 038H found no identical imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction and reducedness of reduction, needed for the geometric component scheme."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-2e3362421",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-2e3362421 (reviewer sub-agent of L); spot-checked: The item is unchanged, and the five steps match Stacks 04L7, first proof paragraph (varieties.tex l.5349ff). Step 1: finitely many components of W and Z, from the new node, the covering lemma, irreducibility, maximality, and the reduction map being a homeomorphism. Step 2: r is surjective (lem-pc-field-extension-surjective with lem-weil-pbc-surjective-base-change), so W and Z are nonempty. Step 3 (marked elementary, fairly): chain classes of intersecting components are clopen and connected, so they are exactly the connected components, and Y's irreducible components are the ambient ones in its class. Step 4: Z is reduced by reduced-induced clause (2) with T=|W|, and Y is locally of finite type through tensor charts, quotients and principal opens (affine-ideals clause (0)), with no quasi-compactness used. Step 5: r is open by 0383 and closed because algebraic implies integral, integrality is preserved by base change, and integral implies universally closed; connectedness then gives p(Y)=X. New node lem-sfb-geometric-component-finite-preimage: I checked it against 04KZ(3) (l.1789; there k-bar is the separable closure) and 038H (l.1524, bijection of components from k^sep to K). It is true, statement-only and self-contained, and it does not restate the item (no connectedness or global finiteness). It is not a duplicate: rg -L for 04KZ/038H finds field-extension-irreducible-components (union, not finite), the sbc descent lemmas (which assume finiteness), generic-components-split (finite type) and the trf count lemma. Tested on separable and inseparable point spectra, an algebraically closed base, and an infinite disjoint union of affine lines. The one tool_use, the generic lem-weil-pbc-reduced-induced-closed-subscheme, is accepted. No SGA source. The citer relatively-closed-constants-units-fg is consistent with the item."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricConnectedComponentSurjective",
+  "declaration": "AlgebraicGeometry.Scheme.geometric_connected_component_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricConnectedComponentSurjective.lean",
+  "statement": "theorem geometric_connected_component_surjective (k K : Type u) [Field k] [Field K] [Algebra k K] [IsAlgClosure k K] (X : Scheme.{u}) [ConnectedSpace X] (f : X ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType f] (hcomponents : (irreducibleComponents X).Finite) : (irreducibleComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme).Finite ∧ Nonempty (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme ∧ ∀ z : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme, ∃ U : (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme.Opens, (U : Set _) = connectedComponent z ∧ IsClosed (U : Set (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subscheme) ∧ ConnectedSpace U.toScheme ∧ IsReduced U.toScheme ∧ LocallyOfFiniteType (U.ι ≫ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) ∧ (irreducibleComponents U.toScheme).Finite ∧ Surjective (U.ι ≫ (pullback f (Spec.map (CommRingCat.ofHom (algebraMap k K)))).nilradical.subschemeι ≫ pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k K))))",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb9d741a6",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Clause-by-clause match of the theorem against the node and Stacks 04L7 (first proof paragraph), 04KZ(3), 038H: arbitrary IsAlgClosure K in Type u; ConnectedSpace X covers nonempty+connected; LocallyOfFiniteType f with no quasi-compactness; Z = (pullback f (Spec.map algebraMap)).nilradical.subscheme using the recorded dep declarations; components as ∀ z ∃ U : Opens with U = connectedComponent z, IsClosed, ConnectedSpace, IsReduced, LocallyOfFiniteType via snd, finite irreducible components, Surjective via fst. The omission of 04L7's reducedness is correct. Node identical to live apart from lean; lean.statement verbatim; module and theorem docstrings have the source, the blueprint tag and all 5 steps; only sorry, no defs; imports exist; no duplicate (rg); no dep record changes; report has Worker report and Second reading sections. No findings; no compile needed."
+ }
+}

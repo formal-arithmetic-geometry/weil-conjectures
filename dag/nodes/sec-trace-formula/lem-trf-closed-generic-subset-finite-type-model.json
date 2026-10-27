@@ -1,0 +1,244 @@
+{
+ "id": "lem-trf-closed-generic-subset-finite-type-model",
+ "kind": "statement",
+ "title": "A closed subset of a fibre has a finite-type reduced closure model",
+ "statement": "Let $f:X\\to Y$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], let $y\\in Y$, and let $A\\subseteq X_y$ be a closed subset of the scheme-theoretic fibre [def-pc-scheme-fibre]. For each $t\\in Y$ write $p_t:X_t\\to X$ for the canonical projection. Set $D=\\overline{p_y(A)}\\subseteq X$, where the bar denotes topological closure. There are a reduced scheme $Z$ [def-pc-reduced-scheme] and a closed immersion $j:Z\\hookrightarrow X$ [def-weil-closed-immersion] with image $D$, such that $h=f\\circ j:Z\\to Y$ is of finite type. For every $t\\in Y$ the canonical morphism of fibres $j_t:Z_t\\to X_t$ is a homeomorphism onto the closed subspace $p_t^{-1}(D)$ of $X_t$. In particular $p_y^{-1}(D)=A$, so $j_y$ identifies the underlying space of $Z_y$ with $A$. These are assertions about underlying spaces; no reducedness of the scheme fibres $Z_t$ is asserted. The subset $A$ may be empty; no irreducibility, Noetherianity, separatedness, or flatness hypothesis on $X$, $Y$, or $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0554 (lemma-irreducible-components-in-neighbourhood), proof: the sentence defining the reduced closed subschemes $X_i$ from the generic components, with the fibre-closure discussion immediately preceding lemma-cover-generic-fibre-neighbourhood; returned Steps 2--3"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=p_y(A)$ and $F=f^{-1}(\\{y\\})$. By the fibre homeomorphism in [def-pc-scheme-fibre], $B$ is closed in the subspace $F$. Thus $B=C\\cap F$ for an ambient closed subset $C\\subseteq X$. Since $C$ contains $B$, it contains $D=\\overline B$; hence $B\\subseteq D\\cap F\\subseteq C\\cap F=B$. Applying the injective map $p_y$ gives $p_y^{-1}(D)=A$.",
+   "uses": [
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Discussion immediately preceding Tag 054Y (lemma-cover-generic-fibre-neighbourhood); fibre topology is Tag 01K1 (schemes-lemma-fibre-topological)"
+   }
+  },
+  {
+   "text": "The subset $D$ is closed by definition of closure. Apply clause (2) of [lem-weil-pbc-reduced-induced-closed-subscheme] with $T=D$. It supplies the reduced induced closed subscheme $Z=D_{\\mathrm{red}}$ and a closed immersion $j:Z\\hookrightarrow X$ with image exactly $D$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3 (lemma-reduced-closed-subscheme), existence; Tag 01J4 (definition-reduced-induced-scheme)"
+   }
+  },
+  {
+   "text": "Clause (a) of [lem-weil-pbc-closed-immersion-proper] says in particular that the closed immersion $j$ is of finite type. Since $f$ is of finite type by hypothesis, clause (1) of [lem-sfb-finite-type-composition-base-change] applies to $Z\\xrightarrow{j}X\\xrightarrow{f}Y$ and gives that $h=f\\circ j$ is of finite type.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W5 (lemma-closed-immersion-proper) and 01T3 (lemma-composition-finite-type)"
+   }
+  },
+  {
+   "text": "Fix any $t\\in Y$ and let $q_t:Z_t\\to Z$ be the fibre projection for $h$. The fibre-product definition [def-pc-scheme-fibre] gives the canonical $j_t:Z_t\\to X_t$ with $p_tj_t=jq_t$, using the maps $jq_t$ and $Z_t\\to\\operatorname{Spec}\\kappa(t)$. The same cited node identifies $|Z_t|$ with $h^{-1}(t)$ and $|X_t|$ with $f^{-1}(t)$. By [def-weil-closed-immersion], $j$ is a homeomorphism onto $D$; its restriction is therefore a homeomorphism $h^{-1}(t)\\simeq D\\cap f^{-1}(t)$. Conjugating this restriction by the two fibre homeomorphisms gives a homeomorphism $|Z_t|\\simeq p_t^{-1}(D)$. The equation $p_tj_t=jq_t$ and injectivity of $p_t$ identify this map with $j_t$ itself. The target subspace is closed because $D$ is closed and $p_t$ is continuous. For $t=y$, Step 1 identifies it with $A$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01K0 (definition-fibre), Tag 01K1 (lemma-fibre-topological), and closed-immersion definition Tag 01IO (definition-immersion)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Discussion immediately preceding Tag 054Y (lemma-cover-generic-fibre-neighbourhood), invoked in Tag 0554 (lemma-irreducible-components-in-neighbourhood); expanded using Schemes 01J3/01K1 and Morphisms 01W5/01T3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes, the reduced closed closure of a closed subset of one fibre is finite type over the base and has exactly that subset as its fibre",
+   "results": "{\"t\": \"2026-10-22T06:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism of schemes, the reduced closed closure of a closed subset of one fibre is finite type over the base and has exactly that subset as its fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.finite_preimage\", \"AlgebraicGeometry.isClosed_singleton_iff_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\"], \"digest\": \"db41f68d89a0fb9a\"}; Read the hits: finite morphism fibres, Jacobson fibres, residue-field projections and geometric reducedness do not construct the reduced closure model with its prescribed fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "db41f68d89a0fb9a"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiber\", \"closure\"",
+   "results": "{\"t\": \"2026-10-22T06:45:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"fiber\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: finite morphism fibres, Jacobson fibres, residue-field projections and geometric reducedness do not construct the reduced closure model with its prescribed fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*(closure|reduced)|(closure|reduced).*(fiber|fibre)",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"grep\", \"query\": \"(fiber|fibre).*(closure|reduced)|(closure|reduced).*(fiber|fibre)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\"], \"digest\": \"cfa3314f73b31206\"}; Read the hits: finite morphism fibres, Jacobson fibres, residue-field projections and geometric reducedness do not construct the reduced closure model with its prescribed fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "cfa3314f73b31206"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced closed subscheme on the closure of a closed subset of a scheme fibre has that same fibre topologically and its map to the base is finite type",
+   "results": "{\"t\": \"2026-10-22T06:45:54Z\", \"tool\": \"leansearch\", \"query\": \"The reduced closed subscheme on the closure of a closed subset of a scheme fibre has that same fibre topologically and its map to the base is finite type\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a closed subset of a residue field fibre to a reduced closed subscheme of a finite type scheme family, with all fibre supports identified by the canonical fibre maps",
+   "results": "{\"t\": \"2026-10-22T06:46:05Z\", \"tool\": \"leanfinder\", \"query\": \"Extend a closed subset of a residue field fibre to a reduced closed subscheme of a finite type scheme family, with all fibre supports identified by the canonical fibre maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\"], \"digest\": \"299f2e2f3a0d8337\"}; Read the hits: finite morphism fibres, Jacobson fibres, residue-field projections and geometric reducedness do not construct the reduced closure model with its prescribed fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "299f2e2f3a0d8337"
+  },
+  {
+   "tool": "grep",
+   "query": "closure.*(fiber|fibre)|(fiber|fibre).*closure|IsClosedImmersion.*(LocallyOfFiniteType|QuasiCompact)",
+   "results": "{\"t\": \"2026-10-22T06:46:29Z\", \"tool\": \"grep\", \"query\": \"closure.*(fiber|fibre)|(fiber|fibre).*closure|IsClosedImmersion.*(LocallyOfFiniteType|QuasiCompact)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the hits: finite morphism fibres, Jacobson fibres, residue-field projections and geometric reducedness do not construct the reduced closure model with its prescribed fibre. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "(fiber|fibre).*(closure|vanishingIdeal)|(closure|vanishingIdeal).*(fiber|fibre)",
+   "results": "{\"t\": \"2026-10-23T23:39:56Z\", \"tool\": \"grep\", \"query\": \"(fiber|fibre).*(closure|vanishingIdeal)|(closure|vanishingIdeal).*(fiber|fibre)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search hits: finite-morphism fibre finiteness, Jacobson fibres, residue-field maps and closed-immersion finite type are ingredients only. Fibre.lean:103 gives the fibre homeomorphism; IdealSheaf/Basic.lean:563 describes the vanishing ideal. None states the full reduced closure model with prescribed fibre.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced induced closed subscheme on the closure of a closed subset of a scheme fibre has that subset as its fibre and is finite type over the base",
+   "results": "{\"t\": \"2026-10-23T23:39:56Z\", \"tool\": \"leansearch\", \"query\": \"The reduced induced closed subscheme on the closure of a closed subset of a scheme fibre has that subset as its fibre and is finite type over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"AlgebraicGeometry.IsFinite.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsAffineHom\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\"], \"digest\": \"f48b6029366891d6\"}; Read search hits: finite-morphism fibre finiteness, Jacobson fibres, residue-field maps and closed-immersion finite type are ingredients only. Fibre.lean:103 gives the fibre homeomorphism; IdealSheaf/Basic.lean:563 describes the vanishing ideal. None states the full reduced closure model with prescribed fibre.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "f48b6029366891d6"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiber\", \"closure\"",
+   "results": "{\"t\": \"2026-10-23T23:39:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"fiber\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read search hits: finite-morphism fibre finiteness, Jacobson fibres, residue-field maps and closed-immersion finite type are ingredients only. Fibre.lean:103 gives the fibre homeomorphism; IdealSheaf/Basic.lean:563 describes the vanishing ideal. None states the full reduced closure model with prescribed fibre.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type morphism of schemes a closed subset of a fibre has a reduced closed closure model of finite type with exactly the prescribed fibre",
+   "results": "{\"t\": \"2026-10-23T23:39:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type morphism of schemes a closed subset of a fibre has a reduced closed closure model of finite type with exactly the prescribed fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfIsClosedImmersion\"], \"digest\": \"1ad02b7bdedef4ed\"}; Read search hits: finite-morphism fibre finiteness, Jacobson fibres, residue-field maps and closed-immersion finite type are ingredients only. Fibre.lean:103 gives the fibre homeomorphism; IdealSheaf/Basic.lean:563 describes the vanishing ideal. None states the full reduced closure model with prescribed fibre.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "1ad02b7bdedef4ed"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberHomeo|isReduced.*subscheme|reduced.*[Cc]los",
+   "results": "{\"t\": \"2026-10-23T23:40:30Z\", \"tool\": \"grep\", \"query\": \"fiberHomeo|isReduced.*subscheme|reduced.*[Cc]los\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Group/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\", \"Mathlib/AlgebraicGeometry/Fiber.lean\"], \"digest\": \"a792f22cdc44c0b5\"}; Read search hits: finite-morphism fibre finiteness, Jacobson fibres, residue-field maps and closed-immersion finite type are ingredients only. Fibre.lean:103 gives the fibre homeomorphism; IdealSheaf/Basic.lean:563 describes the vanishing ideal. None states the full reduced closure model with prescribed fibre.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "a792f22cdc44c0b5"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extending a closed subset of a residue field fibre by taking its topological closure and giving it the reduced induced subscheme structure",
+   "results": "{\"t\": \"2026-10-23T23:40:31Z\", \"tool\": \"leanfinder\", \"query\": \"Extending a closed subset of a residue field fibre by taking its topological closure and giving it the reduced induced subscheme structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.fromSpecResidueField\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.Scheme.instOverSpecResidueField\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\", \"AlgebraicGeometry.Scheme.instCanonicallyOverSpecResidueField\", \"AlgebraicGeometry.Scheme.SpecMap_residue_apply\", \"AlgebraicGeometry.Scheme.Spec_map_residue_apply\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField_apply\"], \"digest\": \"7251c409d00009fa\"}; Read search hits: finite-morphism fibre finiteness, Jacobson fibres, residue-field maps and closed-immersion finite type are ingredients only. Fibre.lean:103 gives the fibre homeomorphism; IdealSheaf/Basic.lean:563 describes the vanishing ideal. None states the full reduced closure model with prescribed fibre.",
+   "date": "2026-10-23",
+   "verdict": "no match",
+   "digest": "7251c409d00009fa"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-generic-fibre-component-lower-bound",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "055A proof final paragraph: the invocation that each fibre has at least n ordinary irreducible components; In the Stacks 055A generic-constancy input to the 055B irreducible-fibre locus used by 05FH in the Noetherian-approximation branch of the blueprint proof; specifically Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FH, good irreducible-fibre locus. This input supports the constructibility proof in 055B for the irreducible-fibre locus. Subargument extracted from the returned 0554 proof: the sentence defining the reduced closed subschemes $X_i$ from the generic components, with the fibre-closure discussion immediately preceding lemma-cover-generic-fibre-neighbourhood; returned Steps 2--3",
+   "via": [
+    "lem-trf-generic-fibre-component-lower-bound",
+    "lem-trf-geometric-component-count-generic-constancy",
+    "lem-trf-geometrically-irreducible-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-closed-generic-subset-finite-type-model",
+  "worker": "stage1",
+  "summary": "Expanded the fibre-closure construction into four steps, reusing the closed reduced-subscheme theorem, closed-immersion finite-type consequence, finite-type composition, and the existing fibre homeomorphism. The statement and all its hypotheses are unchanged; no new nodes are needed. Searched project declarations, the whole DAG/blueprint and Mathlib; recorded six fresh command searches in addition to preserving the inherited searches.",
+  "blueprint": "Realizes the inherited finite-type reduced-closure subargument in the 0554 input under lem-trf-local-term-locality: the discussion before 054Y and the sentence constructing the reduced closed subschemes X_i in 0554. The latest blueprint proof of lem-trf-local-term-locality was read; this is a lower-level supporting algebraic-geometry input, not a replacement of its contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-bb42c928d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-bb42c928d (reviewer sub-agent of L); spot-checked: PASS, read in full; no fixes written. First split of an item that was unsplit with no proof on live; no re-split note applies and no other group has split it. The statement and stmt_deps are byte-identical to the live copy. The source is the Stacks more-morphisms.tex paragraph just before 054Y (lemma-cover-generic-fibre-neighbourhood): the closure of T(y), with the reduced induced structure, has T_y=T(y) set-theoretically. Step 1: the fibre homeomorphism in def-pc-scheme-fibre plus closure minimality give D∩f^{-1}(y)=p_y(A), hence p_y^{-1}(D)=A; elementary and correct. Step 2: clause (2) of lem-weil-pbc-reduced-induced-closed-subscheme with T=D gives a reduced closed subscheme with image D. That node is in another unit but is Lean-closed (slopmaster2, sorry-free reduced_induced_closed_subscheme), so it is a tool, not a route departure. Step 3: clause (a) of lem-weil-pbc-closed-immersion-proper (proper includes finite type) and clause (1) of lem-sfb-finite-type-composition-base-change; both are Mathlib leaves. Step 4: j_t comes from the fibre product; the fibre homeomorphisms for h and f and the restriction of j's homeomorphism onto D (def-weil-closed-immersion) give |Z_t|≅p_t^{-1}(D), identified with j_t via p_t j_t = j q_t and injectivity of p_t. Elementary and correct. proof_deps equal the union of the steps' uses; no tag is cited without a node. Edge cases: A empty; the whole generic fibre; k[t]→k[x], t↦x^2, where the fibre at 0 is non-reduced, which is why only homeomorphisms are claimed; non-Noetherian Y and non-closed y. Duplicate search (rg -L for the id, reduced closed subscheme with fibre and closure, 054Y/0554): nearest are lem-sbc-generic-fibre-closed-cover-spread and lem-sbc-generic-components-split, neither a duplicate. The three kinds of Mathlib search are recorded, with LeanSearch marked unavailable where it was down. Blueprint from/same_as are present. No new nodes, no tool_uses, no SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedFibreSubsetFiniteTypeModel",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_reduced_closed_fiber_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedFibreSubsetFiniteTypeModel.lean",
+  "statement": "theorem exists_reduced_closed_fiber_model {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (y : Y) (A : Set (f.fiber y)) (hA : IsClosed A) : ∃ (Z : Scheme.{u}) (j : Z ⟶ X), IsReduced Z ∧ IsClosedImmersion j ∧ Set.range j = closure ((f.fiberι y) '' A) ∧ LocallyOfFiniteType (j ≫ f) ∧ QuasiCompact (j ≫ f) ∧ (∀ t : Y, Topology.IsClosedEmbedding (fiberMap (a := j ≫ f) (b := f) j rfl (Y.fromSpecResidueField t)) ∧ Set.range (fiberMap (a := j ≫ f) (b := f) j rfl (Y.fromSpecResidueField t)) = (f.fiberι t) ⁻¹' closure ((f.fiberι y) '' A)) ∧ (f.fiberι y) ⁻¹' closure ((f.fiberι y) '' A) = A",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50f973acd",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: finite type as LocallyOfFiniteType+QuasiCompact; A closed in f.fiber y; ∃ reduced Z with closed immersion j and range = closure(fiberι y '' A); j≫f finite type; ∀ t the canonical fiberMap (a:=j≫f)(b:=f) j rfl (fromSpecResidueField t), i.e. pullback.map, is IsClosedEmbedding with range (fiberι t)⁻¹' D; final p_y⁻¹(D)=A. No extra hypotheses; single universe u. Source more-morphisms.tex paragraph before 054Y checked. Edge cases (A=∅, empty X/Y/fibre, non-closed y, non-reduced fibres) covered. Item node identical to live except new lean record; statement verbatim in file; one sorry, no defs; docstrings give source, blueprint id and the 4 proof steps; fiberMap reused upstream (precedent: landed lem-trf-finite-locally-free-multisection-connected-open); no name clash in side-live. Report has Worker report and Second reading by Q07 sections. No files changed, so no compile."
+ }
+}

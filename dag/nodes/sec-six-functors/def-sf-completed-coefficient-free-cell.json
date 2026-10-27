@@ -1,0 +1,118 @@
+{
+ "id": "def-sf-completed-coefficient-free-cell",
+ "kind": "definition",
+ "title": "Completed-coefficient finite free cells and canonical reduction maps",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $T$ be any scheme [def-pc-scheme] and work on its small pro-etale site [def-weil-pbc-proetale-site]. For $n\\in\\mathbf N$ put $C_n=(R/\\varpi^{n+1})_T$ and $B_T=\\varprojlim_n C_n$, with its actual coordinate projections $\\pi_n:B_T\\to C_n$ [def-weil-completed-integral-coefficients]. Write $\\operatorname{Mod}(B_T)$ and $\\operatorname{Mod}(C_n)$ for module-sheaf categories [def-weil-sheaf-of-modules-category], and use their unbounded derived categories with localization $Q$ [def-weil-abstract-derived-category]. Use the canonical scalar restriction $\\operatorname{Res}_n$ along $\\pi_n$, together with its termwise derived restriction [def-sf-scalar-reduction-categories-restriction], and the derived scalar extension $L_n=-\\otimes^L_{B_T}C_n$ [def-weil-integral-derived-reduction]. Define the residue module to be $\\operatorname{Res}_n(C_n)$, with $C_n$ its unit module. Define the quotient projection $q_n:B_T\\to\\operatorname{Res}_n(C_n)$ as the $B_T$-linear sheaf map sending $1$ to $1$, equivalently the coefficient projection $\\pi_n$ on sections. For every $r\\in\\mathbf N$ (including $r=0$) and $d\\in\\mathbf Z$, define the finite free cell $F_{r,d}$ as the single cochain complex in degree $d$ on $\\prod_{i\\in\\operatorname{Fin}(r)}B_T$; this finite product is the canonical finite direct sum. For $M\\in D(\\operatorname{Mod}(B_T))$, define $\\eta_n(M):M\\to\\operatorname{Res}_n(L_n M)$ to be the unit at $M$ of the normalized derived extension-restriction adjunction [lem-weil-derived-scalar-extension-restriction-adjunction], using its prescribed comparison with the ordinary unit $x\\mapsto1\\otimes x$ on K-flat representatives. No boundedness, quasi-compactness or nonempty-scheme condition is imposed, and the scheme and coefficient universes are independent.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-weil-integral-derived-reduction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final induction paragraph: completed finite free source and its coefficient reduction; normalized scalar-extension unit as in Stacks Tag 06YY, and the coefficient module quotient as in Tag 093M."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free cell over a completed coefficient sheaf placed in one degree, with the coefficient quotient map and canonical derived scalar reduction unit",
+   "results": "[leansearch] OK 8 hit(s): SheafOfModules.ιFree, PresheafOfModules.freeAdjunctionUnit_app, SheafOfModules.free, PresheafOfModules.freeAdjunction_unit_app, FreeAbelianGroup.coeff, PresheafOfModules.unit, PresheafOfModules.freeAdjunctionUnit, Condensed.profiniteSolidCounit",
+   "date": "2026-10-23",
+   "verdict": "No specialized completed-coefficient cell and normalized reduction interface in Mathlib; reuse existing project declarations without adding Lean data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free sheaf modules as single cochain complexes with quotient projection and derived extension restriction adjunction unit",
+   "results": "[leanfinder] OK 8 hit(s): SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.generatorsOfIsCokernelFree_π, SheafOfModules.ιFree, SheafOfModules.mapFree, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s",
+   "date": "2026-10-23",
+   "verdict": "No specialized completed-coefficient cell and normalized reduction interface in Mathlib; reuse existing project declarations without adding Lean data."
+  },
+  {
+   "tool": "grep",
+   "query": "CompletedCoefficientFree|quotientProjection|def freeCell",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "No specialized completed-coefficient cell and normalized reduction interface in Mathlib; reuse existing project declarations without adding Lean data."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l CompletedCoefficientFree\\.(freeCell|quotientProjection|reductionMap)|completed-coefficient-free-cell dag/nodes; rg -n CompletedCoefficientFree lean/Sheaf/SixFunctors lean/WeilConjectures; python3 tools/blueprint_refs.py search \"completed coefficient free cell\"",
+   "results": "DAG: only lem-sf-completed-coefficient-free-resolution.json records these declarations, with no definition node owning them. Project: namespace and declarations in Sheaf.SixFunctors.CompletedCoefficientFreeResolution. WeilConjectures: no matching specialized declaration. Blueprint: 0 blueprint nodes match 'completed coefficient free cell'.",
+   "date": "2026-10-23",
+   "verdict": "Add an ownership definition node with existing:true on the unchanged published module; do not duplicate the definitions."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-complete-lifted-top-cell-triangle",
+  "date": "2026-10-23",
+  "group": "Q84"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: A lifted top residue cell with a complete cone of shorter amplitude; old parent steps 5-6. Re-split: Top-generator lift and complete cone, old item proof steps 1-3; no residue cone calculation. Canonical free source reduction from old step 4. Canonical completed free cell and reduction maps used to state the lifted top-cell triangle.",
+   "via": [
+    "lem-sf-complete-lifted-top-cell-triangle",
+    "lem-sf-complete-top-residue-cell-cone",
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompletedCoefficientFreeResolution",
+  "declaration": "WeilConjectures.CompletedCoefficientFree.freeCell",
+  "declarations": [
+   "WeilConjectures.CompletedCoefficientFree.residueModule",
+   "WeilConjectures.CompletedCoefficientFree.quotientProjection",
+   "WeilConjectures.CompletedCoefficientFree.freeCell",
+   "WeilConjectures.CompletedCoefficientFree.reductionMap"
+  ],
+  "statement": "def freeCell (r : ℕ) (d : ℤ) : CochainComplex (scalarReductionSource l E T) ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 ownership repair requested by the independent immutable-head review of 2917c0bc325f. These are unchanged published definitions. reductionMap uses the conclusion of derivedScalarExtensionRestrictionAdjunction via .choose.unit.app, hence that theorem is a genuine statement dependency. The free-resolution theorem is not used to construct these data and remains only in the consumer proof_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6bb8433a",
+  "group": "Q84",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6bb8433a",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 2917c0bc325f (H2). Lean file byte-identical; item stmt_deps swap lem-sf-completed-coefficient-free-resolution for new def-sf-completed-coefficient-free-cell (existing:true on unchanged CompletedCoefficientFreeResolution: residueModule, quotientProjection, freeCell, reductionMap) plus advisory def-sf-scalar-reduction-categories-restriction and def-weil-integral-derived-reduction; theorem kept in proof_deps (step 6). New node text matches live defs (n+1 indexing, 1↦1 projection, Fin r single cell incl. r=0, normalized adjunction unit); statement field verbatim; deps all used; no competing owner node in side-live; live item has no lean record (no supersession). Mechanical finding lem-weil-derived-scalar-extension-restriction-adjunction: PASS — reductionMap is its .choose.unit and scalarReductionRestrictionLimits/Colimits are theorems of that module needed to type piComparison inverse and mapDerivedCategory single/homology isos. Mathematics unchanged and re-confirmed against Tag 09C3 (hyps, Epi+T-surjectivity, dist triangle with complete L, e pinned by unit square, H^b(f_1)=θ, r=0, a=b, T=∅). No compile (no file changed)."
+ }
+}

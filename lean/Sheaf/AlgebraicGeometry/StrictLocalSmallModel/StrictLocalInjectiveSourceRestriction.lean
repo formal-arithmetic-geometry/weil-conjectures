@@ -91,7 +91,7 @@ theorem smallModel_strictLocalInjectiveSourceIso_restriction {X S : Scheme.{v}}
   apply (cancel_mono (smallModel_strictLocalBaseChangeTargetIso f s K n).hom).1
   rw [Category.assoc]
   rw [smallModel_strictLocalInjectiveSourceIso_derivedRestriction f s K n Q J q i]
-  have h := (injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
+  have h := (smallModel_injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
   simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using
     congrArg (fun a ↦ (smallModel_strictLocalInjectiveSourceIso f s K n J q i).hom ≫ a) h
 

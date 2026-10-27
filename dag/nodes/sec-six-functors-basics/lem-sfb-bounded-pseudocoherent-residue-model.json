@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-bounded-pseudocoherent-residue-model",
+ "kind": "statement",
+ "title": "Finite-free model of a bounded-below pseudo-coherent complex near a prime",
+ "statement": "Let $R$ be a commutative ring, $\\mathfrak p\\subset R$ a prime ideal, and $K\\in D(R)$ [def-weil-abstract-derived-category] a pseudo-coherent object [def-pc-ring-pseudo-coherent-complex]. Assume $K$ is bounded below, meaning $H^i(K)=0$ for every $i<c$ for some $c\\in\\mathbf Z$. Write $\\kappa(\\mathfrak p)=\\operatorname{Frac}(R/\\mathfrak p)$ and $d_i=\\dim_{\\kappa(\\mathfrak p)}H^i(K\\otimes_R^{\\mathbf L}\\kappa(\\mathfrak p))$, where derived tensor is computed by a bounded-above finite-free representative of $K$. Suppose $a\\in\\mathbf Z$ satisfies $d_i=0$ for all $i<a$. Then all $d_i$ are finite, and there exist $f\\in R\\setminus\\mathfrak p$, $b\\ge a$, and a bounded cochain complex $F^\\bullet$ of $R_f$-modules such that $F^i=0$ for $i\\notin[a,b]$, $F^i\\cong R_f^{\\oplus d_i}$ for $a\\le i\\le b$, and $F^\\bullet\\simeq K\\otimes_R^{\\mathbf L}R_f$ in $D(R_f)$. Here $R_f=R[1/f]$.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect; finite-dimensionality and eventual upper vanishing also in Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free representative $P$ of $K$, with $P^j=0$ for $j>u$, using [def-pc-ring-pseudo-coherent-complex]. Its residue tensor has finite-dimensional terms, so each cohomology space, being a subquotient of one term, is finite-dimensional; it vanishes for $j>u$. Thus all $d_j$ are finite. Choose $c$ as in the hypothesis and put $t=\\min(a,c)-1$. Then $H^t(P\\otimes_R\\kappa(\\mathfrak p))=0$ and $H^j(P)=0$ for $j\\le t$.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field, finiteness observation; Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect, first sentence"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-free-complex-residue-degree-cancellation] to $P$ in degree $t$. It gives $s\\notin\\mathfrak p$ and a finite-free complex $Q$ over $R_s$, homotopy equivalent to $P\\otimes_RR_s$, with $Q^t=0$. The support-preservation clause gives $Q^j=0$ for $j>v=\\max(u,t)$. Because its degree-$t$ term is zero, $Q$ is the direct sum of the complexes $A=Q^{<t}$ and $B=Q^{>t}$, with the inherited differentials and zero terms elsewhere. In particular $B$ is bounded finite free in degrees $[t+1,v]$.",
+   "uses": [
+    "lem-weil-pbc-free-complex-residue-degree-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof, as used by Tag 0BYP"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-module-exact], localization preserves the cycle-image exact sequences of $P$, hence $H^j(P\\otimes_RR_s)=H^j(P)_s=0$ for $j\\le t$. Homotopy equivalence gives the same vanishing for $Q$. For $j<t$, $H^j(A)=H^j(Q)$; in the other degrees $A$ has zero terms. Thus $A$ is acyclic and projection $Q\\to B$ is a quasi-isomorphism. Consequently $B$ represents $K\\otimes_R^{\\mathbf L}R_s$. All scalar extensions here are computed on the bounded-above finite-free representative specified in the item; exact localization also preserves its representing quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect, vanishing of the lower summand; Tag 068U, lemma-cut-complex-in-two"
+   }
+  },
+  {
+   "text": "Tensor the homotopy equivalence $P_s\\simeq Q$ with $\\kappa(\\mathfrak p)$: the equations $uv-1=dh+hd$ remain such equations by tensoring. For $j>t$, the residue cohomology of $Q=A\\oplus B$ is that of $B$. For $j\\le t$, the terms of $B$ vanish and $d_j=0$ since $t<a$. Therefore $\\dim H^j(B\\otimes_{R_s}\\kappa(\\mathfrak p))=d_j$ for every $j$. This avoids tensoring the acyclic lower summand as though arbitrary tensor preserved acyclicity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 068U, lemma-cut-complex-in-two, explicit split model; Tag 0BCD, lemma-lift-perfect-from-residue-field, residue ranks"
+   }
+  },
+  {
+   "text": "Use [def-weil-pbc-localization-at-prime] to regard $R_{\\mathfrak p}$ as a local ring with residue field $\\kappa(\\mathfrak p)$. The bounded finite-free complex $B_{\\mathfrak p}$ is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex]. Its residue dimensions are the finite $d_j$ and vanish above $u$. Apply [lem-sc-perfect-local-pseudocoherent-free-model] to its derived object. Obtain a bounded-above representative $M$ over $R_{\\mathfrak p}$ with $M^j\\cong R_{\\mathfrak p}^{d_j}$. Since $d_j=0$ below $a$ and above $u$, replace the zero-rank terms by zero and transport the remaining differentials along these term isomorphisms. Taking $b=\\max(a,u)$ makes $M$ a bounded complex of the standard free modules in $[a,b]$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-sc-perfect-local-pseudocoherent-free-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCD, lemma-lift-perfect-from-residue-field, use of Tag 0BCC, lemma-lift-pseudo-coherent-from-residue-field"
+   }
+  },
+  {
+   "text": "The bounded finite-free complexes $M$ and $B_{\\mathfrak p}$ represent isomorphic derived objects. By [lem-pc-ring-derived-map-representative], represent that isomorphism and its inverse by chain maps $u:M\\to B_{\\mathfrak p}$ and $v:B_{\\mathfrak p}\\to M$. Injectivity of the same morphism bijection says their composites equal the identities in the homotopy category: choose degree-$-1$ maps $h,k$ with $vu-1=dh+hd$ and $uv-1=dk+kd$. With fixed bases, the differentials of $M$, the maps $u,v$ and the homotopies $h,k$ comprise only finitely many matrices because both complexes have finite support.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCD, lemma-lift-perfect-from-residue-field, omitted spreading details; Tag 0BCC, comparison via derived-lemma-morphisms-from-projective-complex"
+   }
+  },
+  {
+   "text": "Write each entry of these finitely many matrices as $r/q$ with $q\\notin\\mathfrak p$, using [def-weil-pbc-localization-at-prime]. Invert $s$ and the product of these denominators. This produces matrices over a principal localization of $R$ mapping to the chosen matrices over $R_{\\mathfrak p}$. The required identities are $d_M^2=0$, $d_Bu=ud_M$, $d_Mv=vd_B$, $vu-1=d_Mh+hd_M$, and $uv-1=d_Bk+kd_B$. They form a finite list of entrywise equations. For each error entry $e=r/q$ that maps to zero at $\\mathfrak p$, the fraction equality criterion supplies $w\\notin\\mathfrak p$ with $wr=0$. Inverting the product of these finitely many $w$ makes all identities hold exactly. The empty products mean $1$. Thus this is a finite fraction calculation, including both chain equations and both homotopies.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BCD, lemma-lift-perfect-from-residue-field, explicit details for the final spreading assertion"
+   }
+  },
+  {
+   "text": "Let $f$ be the product of $s$, the matrix denominators and the error-annihilators just chosen. Every factor is outside $\\mathfrak p$, so $f\\notin\\mathfrak p$. Over $R_f$, take $F^j=R_f^{d_j}$ for $a\\le j\\le b$, zero elsewhere, with the descended differential matrices. The preceding equations give a complex and a chain homotopy equivalence $F\\simeq B\\otimes_{R_s}R_f$. Homotopy equivalences induce cohomology isomorphisms by $vu-1=dh+hd$ on cycles. Exact localization [lem-weil-pbc-localization-module-exact] preserves the quasi-isomorphism $Q\\to B$ from step 3; the original homotopy equivalence localizes as well. Hence $F\\simeq K\\otimes_R^{\\mathbf L}R_f$ in $D(R_f)$ with precisely the claimed terms and bounds.",
+   "uses": [
+    "lem-weil-pbc-localization-module-exact",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect, conclusion via Tag 0BCD, lemma-lift-perfect-from-residue-field"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "lem-pc-ring-derived-map-representative",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-weil-pbc-free-complex-residue-degree-cancellation",
+  "lem-weil-pbc-localization-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BYP, lemma-lift-bounded-pseudo-coherent-to-perfect; Tag 068U, lemma-cut-complex-in-two; Tags 0BCC and 0BCD, lemma-lift-pseudo-coherent-from-residue-field and lemma-lift-perfect-from-residue-field; finite fraction spreading details expanded by Q06."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below pseudo coherent complex has near a prime a bounded finite free model with ranks the dimensions of derived residue field cohomology",
+   "results": "8 hits; Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, CochainComplex.cm5b.instIsStrictlyGEI, CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff, CochainComplex.isLE_iff, DerivedCategory.isGE_Q_obj_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]seudo.?[Cc]oherent|[Mm]inimal[Ff]ree|[Rr]esidue.*[Cc]omplex",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below pseudo coherent complex has near a prime a bounded finite free model with ranks the dimensions of derived residue field cohomology",
+   "results": "8 hits; Module.rankAtStalk_eq, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Algebra.QuasiFinite.finite_fiber, Module.rankAtStalk_eq_finrank_of_free, CochainComplex.isZero_of_isGE, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_eq_finrank_tensorProduct, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudo coherent bounded below complex locally admits a minimal finite free complex with ranks given by Betti numbers at a residue field",
+   "results": "8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CochainComplex.cm5b, DerivedCategory.isGE_Q_obj_iff, CochainComplex.cm5b.instIsStrictlyGEI, DerivedCategory.isGE_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-23",
+   "verdict": "no match: t-structure bounds and module free-locus results do not give finite-free complex models with residue cohomology ranks"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|minimal.*free.*complex",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: module free-locus/rank facts and derived bounds do not supply a finite-free residue-rank complex model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: module free-locus/rank facts and derived bounds do not supply a finite-free residue-rank complex model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below pseudo coherent complex admits near a prime a finite free model with ranks given by the derived residue field cohomology dimensions",
+   "results": "8 hits; Module.rankAtStalk_eq, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.isLocallyConstant_rankAtStalk, Module.free_of_lTensor_residueField_injective, Module.free_of_flat_of_finrank_eq, Module.FinitePresentation.exists_notMem_bijective, Module.rankAtStalk_pos_iff_mem_support, Module.rankAtStalk_eq_zero_iff_notMem_support",
+   "date": "2026-10-23",
+   "verdict": "no match: module free-locus/rank facts and derived bounds do not supply a finite-free residue-rank complex model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded below pseudo coherent complex admits near a prime a finite free model with ranks given by the derived residue field cohomology dimensions",
+   "results": "8 hits; Module.rankAtStalk_eq, Algebra.QuasiFinite.finite_fiber, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Module.isLocallyConstant_rankAtStalk_freeLocus, CochainComplex.isZero_of_isGE, Module.rankAtStalk_eq_finrank_of_free, Module.free_of_flat_of_finrank_eq, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-23",
+   "verdict": "no match: module free-locus/rank facts and derived bounds do not supply a finite-free residue-rank complex model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect complex over a commutative ring has on a principal open neighborhood of a prime a bounded finite free model whose ranks are residue field Betti numbers",
+   "results": "8 hits; Module.isLocallyConstant_rankAtStalk_freeLocus, Module.rankAtStalk_eq, Module.isLocallyConstant_rankAtStalk, Module.rankAtStalk_self, Module.isOpen_freeLocus, Module.freeLocus, Module.basicOpen_subset_freeLocus_iff, Module.projective_of_localization_maximal'",
+   "date": "2026-10-23",
+   "verdict": "no match: module free-locus/rank facts and derived bounds do not supply a finite-free residue-rank complex model"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-pseudocoherent-point-fibre-line",
+  "date": "2026-10-23",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Recognizing shifted line modules from derived geometric point fibres. Local algebra input: Stacks 0BYP, before recognizing the relative dualizing complex as a shifted line.",
+   "via": [
+    "lem-sfb-pseudocoherent-point-fibre-line",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-bounded-pseudocoherent-residue-model",
+  "worker": "stage1",
+  "summary": "Read 0BYP, 068U, 0BCC and 0BCD. Reused existing cancellation and minimal-free-model nodes; no new nodes. Expanded the finite matrix and homotopy spreading omitted in 0BCD. Preserved the original lower bound a in the final minimal model while cutting at min(a,c)-1.",
+  "blueprint": "The inherited blueprint ancestor is null (blueprint_refs.py ancestor confirms this). The inherited chain serves det-thm-sf-ctf-stability-direct-images, proof (3), through the nodal relative dualizing line prerequisite. This split supplies the explicitly recorded 0BYP local algebra input; the current latest direct-images proof was read and is not changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-free-complex-residue-degree-cancellation",
+    "why": "The existing generic 068U chain cancellation removes one residue-exact degree; no local-algebra cancellation node in this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic exactness of localization preserves the cohomological bound and the representing quasi-isomorphisms."
+   },
+   {
+    "node": "lem-sc-perfect-local-pseudocoherent-free-model",
+    "why": "The existing local-ring 0BCC theorem supplies the minimal model; this unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-pc-ring-derived-map-representative",
+    "why": "Generic bounded-above projective morphism bijection supplies finite chain comparison and homotopy data to spread."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-free-complex-residue-degree-cancellation",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-sc-perfect-local-pseudocoherent-free-model",
+  "lem-pc-ring-derived-map-representative"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-6d549c92e",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-6d549c92e (reviewer sub-agent of L); spot-checked: I read the item, all 8 proof steps and every cited statement; there are no new nodes. The statement agrees with Stacks 0BYP (more-algebra.tex:20000) and is identical to clones/live and clones/side-live, where the item is still unsplit, so nothing supersedes this delivery. The proof follows Stacks 0BYP, then 068U (lem-weil-pbc-free-complex-residue-degree-cancellation), then 0BCC (lem-sc-perfect-local-pseudocoherent-free-model), and replaces the 'details omitted' of 0BCD with an explicit spreading-out argument. Step checks: the cut degree t=min(a,c)-1 gives both H^t(P⊗κ)=0 and H^{≤t}(P)=0 in either order of a and c. Since Q^t=0, Q splits as a direct sum of complexes A⊕B. A is acyclic because localization is exact (00CS), so Q→B is a quasi-isomorphism. B has residue ranks d_j in every degree, which holds because the homotopy equivalence (not the acyclic tail) is what gets tensored with κ, and B has no terms in degrees ≤t<a. 0BCC applies to B_p, with κ(p)=Frac(R/p)≅R_p/pR_p, and gives a model bounded in [a,max(a,u)]. The K-projective bijection supplies the maps u,v and, by injectivity, the homotopies h,k. In the finite fraction descent, every identity is listed (d²=0, both chain-map equations, both homotopy equations) and each error entry is killed by an annihilator outside p. The assembly correctly uses exactness of localization. Edge cases K=0, u≤t, nonreduced rings and empty products all work. I searched the DAG (rg -L) and found only scheme-level 0BCD nodes, so there is no ring-level duplicate. There are no SGA citations. I accept the four declared tool_uses (068U, 00CS, 0BCC, Mathlib Qh_map_bijective) as generic black boxes. review_split.py reports 'no such node' for every citation; this is an artefact of the symlinked chapter directories, since every cited node exists. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BoundedPseudoCoherentResidueModel",
+  "declaration": "DerivedCategory.exists_bounded_finiteFree_residue_model",
+  "file": "lean/Sheaf/RingTheory/BoundedPseudoCoherentResidueModel.lean",
+  "statement": "theorem exists_bounded_finiteFree_residue_model {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime] [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [∀ f : R, HasDerivedCategory.{w'} (ModuleCat.{max u v} (Localization.Away f))] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (hbelow : ∃ c : ℤ, ∀ i : ℤ, i < c → IsZero ((homologyFunctor (ModuleCat.{max u v} R) i).obj K)) (a : ℤ) (hresidue : ∀ i : ℤ, i < a → IsZero (((Functor.mapHomologicalComplex (ModuleCat.extendScalars ((algebraMap (R ⧸ p) (FractionRing (R ⧸ p))).comp (Ideal.Quotient.mk p))) (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) : (∀ i : ℤ, Module.Finite (FractionRing (R ⧸ p)) (((Functor.mapHomologicalComplex (ModuleCat.extendScalars ((algebraMap (R ⧸ p) (FractionRing (R ⧸ p))).comp (Ideal.Quotient.mk p))) (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) ∧ ∃ f : R, f ∉ p ∧ ∃ b : ℤ, a ≤ b ∧ ∃ F : CochainComplex (ModuleCat.{max u v} (Localization.Away f)) ℤ, (∀ i : ℤ, i < a ∨ b < i → IsZero (F.X i)) ∧ (∀ i : ℤ, a ≤ i → i ≤ b → Nonempty (F.X i ≅ ModuleCat.of (Localization.Away f) (ULift.{v} (Fin (Module.finrank (FractionRing (R ⧸ p)) (((Functor.mapHomologicalComplex (ModuleCat.extendScalars ((algebraMap (R ⧸ p) (FractionRing (R ⧸ p))).comp (Ideal.Quotient.mk p))) (ComplexShape.up ℤ)).obj (Classical.choose hK)).homology i)) → Localization.Away f)))) ∧ Nonempty (Q.obj F ≅ Q.obj ((Functor.mapHomologicalComplex (ModuleCat.extendScalars (algebraMap R (Localization.Away f))) (ComplexShape.up ℤ)).obj (Classical.choose hK)))",
+  "branch": "newtargets-dag",
+  "by": "Q155",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-892461391",
+  "group": "Q155",
+  "result": "pass",
+  "note": "Statement checked clause by clause against the node and Stacks 0BYP (more-algebra.tex:20000): R, prime p, K in D(R) pseudo-coherent via the recorded IsPseudoCoherent, cohomological lower bound hbelow, kappa(p)=FractionRing(R/p), d_i via termwise extendScalars on Classical.choose hK (same interface as the landed exists_unique_minimalFreeModel and the cancellation lemma), hresidue stated as IsZero, finiteness of all d_i concluded, exists f not in p, b>=a, F zero outside [a,b], F^i iso ULift(Fin d_i -> R_f), derived iso Q.obj F with K tensor R_f in D(R_f). No extra hypotheses; universes u v w w' explicit; edge cases K=0 and b=a covered. lean.statement verbatim; node otherwise identical to side-live; no new nodes or definitions; sorry only; source and blueprint docstrings with all 8 steps; no name clash. Not recompiled (no file changed)."
+ }
+}

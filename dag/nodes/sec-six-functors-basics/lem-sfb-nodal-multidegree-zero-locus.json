@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-nodal-multidegree-zero-locus",
+ "kind": "statement",
+ "title": "Openness, boundedness and separation of the multidegree-zero locus",
+ "statement": "Let $S$ be a locally Noetherian scheme [def-pc-scheme] and let $f:C\\to S$ be a stable unpointed genus-$g$ family, $g\\geq2$ [def-sfb-stable-pointed-moduli-groupoids]. Suppose the relative Picard sheaf $P=\\operatorname{Pic}_{C/S}$ [sk-def-picard-pic] is represented by a group algebraic space [def-trf-algebraic-space]. For an $S$-scheme $T$, let $D(T)\\subseteq P(T)$ consist of classes whose restriction to each irreducible component of every geometric fibre $C_{\\bar t}$ has degree zero. A class can be represented fppf locally on $T$ by an invertible module $L$ [def-sc-invertible-module]; its degree on a component $Z$ is $\\chi(\\widetilde Z,\\nu_Z^*L)-\\chi(\\widetilde Z,\\mathcal O_{\\widetilde Z})$, where $\\nu_Z:\\widetilde Z\\to C_{\\bar t}$ is the normalization of that reduced component [def-weil-pbc-reduced-normalization], and $\\chi$ is the alternating sum of the dimensions of coherent cohomology [def-sc-sheaf-cohomology-functor]. This condition is independent of the local representative. The subfunctor $D\\subseteq P$ is represented by an open subgroup algebraic space, and $D\\to S$ is quasi-compact and separated.",
+ "source": {
+  "document": "literature/deligne-le-lemme-de-gabber_Asterisque-127-1985.pdf",
+  "place": "Section 2, printed p.135, paragraph constructing the open multidegree-zero subspace of the relative Picard space. Local PDF WANTED; primary Numdam PDF read online."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "sk-def-picard-pic",
+  "def-trf-algebraic-space",
+  "def-sc-invertible-module",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-sheaf-cohomology-functor"
+ ],
+ "proof": [
+  {
+   "text": "The stable-family definition makes $f$ flat, finitely presented and projective in the projective-bundle convention, with nonempty connected reduced nodal geometric fibres. Projective-bundle properness makes $f$ proper. The universal global-sections theorem gives an isomorphism of $\\mathcal O_T$-modules $(f_T)_*\\mathcal O_{C_T}\\simeq\\mathcal O_T$ for every $T\\to S$. The canonical map $\\mathcal O_T\\to(f_T)_*\\mathcal O_{C_T}$ is then an isomorphism: on an affine open $\\operatorname{Spec}R\\subseteq T$ the $R$-algebra $B=\\Gamma(C_{\\operatorname{Spec}R},\\mathcal O)$ is free of rank one with a basis $e$; writing $1=ce$ and $e^2=de$ gives $e=ce^2=cde$, hence $cd=1$, so $c$ is a unit and $r\\mapsto r\\cdot1=rce$ is bijective. Thus the relative-curve Picard theorem applies: $P$ is smooth, locally finitely presented and quasi-separated, with representable immersion diagonal. These conclusions concern the same fppf Picard sheaf as the item.",
+   "uses": [
+    "def-sfb-stable-pointed-curve",
+    "lem-trf-projective-bundle-proper",
+    "lem-sc-proper-flat-global-sections",
+    "lem-sfb-picard-space-curves-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tags 0DNI (lemma-pic-functor-qs-lfp), 0DPK (lemma-pic-functor-curves-smooth); universal sections: perfect.tex Tag 0E0L."
+   }
+  },
+  {
+   "text": "Degrees do not depend on the fppf-local line-bundle representative: two representatives become isomorphic after a further fppf refinement, and twisting by a line from the base restricts to a trivial line on every geometric fibre. Degree is unchanged by field extension. The normalized components of a nodal curve are smooth proper curves, so their field extensions remain normal and give the normalized geometric components. Tensor additivity gives $\\deg_Z(L\\otimes M)=\\deg_ZL+\\deg_ZM$, $\\deg_Z\\mathcal O=0$ and $\\deg_ZL^\\vee=-\\deg_ZL$. Thus the fibrewise condition is stable under pullback and fppf descent and defines a subgroup sheaf $D\\subset P$. The normalization $\\nu_Z:\\widetilde Z\\to Z$ of a reduced component is finite by the completed normalization model and an isomorphism over a dense open, so it is a dominant map of proper curves with function-field degree $1$; the pullback-degree theorem with $d=1$ identifies normalized-component degrees with degrees on the reduced components; the component-sum formula gives the total degree as their sum.",
+   "uses": [
+    "sk-def-picard-pic",
+    "lem-pc-degree-base-change",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-sfb-nodal-normalization-picard-sequence",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-sfb-nodal-completed-normalization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0AYU, 0AYW, 0AYX and 0AYZ; pic.tex Tag 0B9L, definition-picard-functor."
+   }
+  },
+  {
+   "text": "Work locally on $S$ on a Noetherian affine open. The structure line on an affine scheme is ample directly from the definition: the section $1$ has the whole affine scheme as its nonvanishing open. Projective-bundle projectivity becomes a closed embedding in finite projective space there; let $H=\\mathcal O_C(1)$. On each fibre the very-ample-implies-ample theorem makes $H$ ample. Its normalized component degrees $h_Z$ are positive by the fibre-degree ampleness criterion. Local constancy of the Euler characteristics of $H$ and $\\mathcal O_C$ permits a further open restriction with constant total degree $h$. The component-sum formula, with weights one on the reduced fibres, and the pullback-degree theorem with $d=1$ for each finite birational $\\widetilde Z\\to Z$ give $h=\\sum_Zh_Z$, hence $0<h_Z\\leq h$ on every geometric fibre. Set $N=h+1$. For any fppf-local representative $L$ on $C_T$, tensor additivity shows that the two lines $H_T\\otimes L^{\\otimes N}$ and $H_T\\otimes L^{\\otimes(-N)}$ have component degrees $h_Z+N d_Z$ and $h_Z-N d_Z$. Both are positive exactly when $d_Z=0$: if $d_Z\\ne0$, one is at most $h_Z-N<0$. Consequently, by the fibre-degree ampleness criterion on each geometric fibre $C_{\\bar t}$, the desired subset of $T$ is precisely the set of $t$ at which both lines are ample on the geometric fibre $C_{\\bar t}$. The relative-ample-locus theorem, applied to the proper morphism $C_T\\to T$ (a scheme, hence an algebraic space) and to each of the two lines, gives an open $A\\subseteq T$ whose points are exactly the $t$ with the line ample on $C_{\\bar t}$, with formation commuting with base change. The desired subset is the intersection of the two opens, on arbitrary test schemes $T$.",
+   "uses": [
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+    "lem-trf-degree-weighted-irreducible-components",
+    "lem-sfb-proper-curve-bundle-pullback-degree",
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-sfb-space-relative-ample-locus",
+    "lem-pc-very-ample-ample",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood (relative ample locus, checked on geometric fibres); varieties.tex Tags 0B5Y, 0AYZ, 0AYW, 0AYX; perfect.tex Tag 0B9T."
+   }
+  },
+  {
+   "text": "Take a scheme presentation of $P$, refined fppf locally so that its Picard sections have line-bundle representatives. Step 3 gives an open subscheme of that presentation representing the inverse image of $D$. Step 2 makes $D$ a sub-fppf-sheaf of $P$. The open-subfunctor descent theorem now gives, for every $T\\to P$, an open subscheme representing $T\\times_PD$, independent of the chosen representatives. An open subfunctor of an algebraic space is an algebraic space. The tensor and inverse operations already preserve $D$, so it is an open subgroup algebraic space.",
+   "uses": [
+    "lem-trf-fppf-local-open-subfunctor-descent",
+    "def-a1-space-open-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WU, lemma-finding-opens; spaces-descent.tex Tag 041X, open-immersion descent."
+   }
+  },
+  {
+   "text": "Keep a Noetherian affine base with the embedding and constant $h$ of step 3, and put $m=2g+1$, $d=mh$. The parameter theorem supplies a finite-type scheme $V_d$ of degree-$d$ divisors in the relative smooth locus and its universal divisor $E$. The line $\\mathcal O(E)\\otimes H^{-m}$ defines a morphism $a:V_d\\to P$: the divisor line commutes with pullback, and then one passes to the Picard sheaf. Let $W=V_d\\times_PD$, an open subscheme by step 4. Since $V_d$ is finite type over a Noetherian base, it is Noetherian, and so is $W$; in particular $W$ is quasi-compact. Every geometric point of $D$ lifts to $W$: over its algebraically closed field its class has a line-bundle representative, and the uniform smooth-divisor theorem supplies $E$ of degree $mh$ with $L\\otimes H^m\\simeq\\mathcal O(E)$. Thus $W\\to D$ is surjective on field-valued point classes. The algebraic space $D$, regarded as a fibred category with discrete fibres, is a Deligne--Mumford stack (its diagonal is representable by schemes, it has an etale scheme atlas, and fppf sheaves are etale sheaves), and the quasi-compact scheme $W$ maps onto it; criterion (4)$\\Rightarrow$(2) of the quasi-compact atlas theorem makes $D$ over this affine base quasi-compact. For any affine $T$ over the affine base, $W\\times T\\to D\\times T$ is still surjective with quasi-compact source, so $D\\times T$ is quasi-compact by the same criterion. Such affine neighbourhoods cover $S$ and an affine test over $S$ is covered by finitely many affine opens over them, proving $D\\to S$ quasi-compact.",
+   "uses": [
+    "lem-sfb-projective-smooth-divisor-parameter",
+    "lem-pc-recd-pullback",
+    "sk-def-picard-pic",
+    "lem-sfb-nodal-uniform-smooth-divisor",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-dm-quasicompact-atlas-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tags 0DPE and 0DPI; curves.tex Tag 0E3F, lemma-global-generation; morphisms.tex Tag 01T6; boundedness argument for Deligne Section 2 written by the worker."
+   }
+  },
+  {
+   "text": "For a geometric fibre and a multidegree-zero line $M$, a nonzero section pulls back to sections on all normalized components. On any component where it is nonzero, degree zero and the section-degree positivity theorem make it nowhere zero. Its values at every nodal branch on that component are then nonzero. In the completed nodal local model the two branch residues of a section agree after a local trivialization of $M$. Thus the nonzero residue forces the neighbouring component section to be nonzero as well. The component graph is connected (otherwise its two unions of components would disconnect the curve), so every component section is nowhere zero. Faithful local completion, or just equality of the common residue at the node, shows that the original section is nowhere zero and trivializes $M$. Conversely a trivial line has a nonzero section; the universal structure-sheaf theorem on this proper connected reduced fibre gives $h^0(\\mathcal O)=1$. Therefore $M\\simeq\\mathcal O$ if and only if $h^0(M)\\geq1$.",
+   "uses": [
+    "lem-sfb-nodal-normalization-picard-sequence",
+    "lem-trf-curve-section-degree-positivity",
+    "lem-sc-proper-flat-global-sections",
+    "lem-sfb-nodal-completed-normalization-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B40, lemma-check-invertible-sheaf-trivial, on each normalized component; curves.tex Tag 0C1M, gluing at nodes."
+   }
+  },
+  {
+   "text": "The diagonal of $D/S$ is a representable immersion: it is the restriction of the immersion diagonal of $P/S$ from step 1. Indeed base change preserves its open-then-closed factorization by the two immersion base-change lemmas. Test it over any scheme chart $T\\to D\\times_SD$, and refine $T$ by an fppf covering on which the difference of the two Picard sections is represented by a line $M$ on $C_T$. Every geometric fibre of $M$ has multidegree zero. By step 6 the set-theoretic image of the pulled-back diagonal is exactly $\\{t:h^0(C_{\\bar t},M_{\\bar t})\\geq1\\}$. Flat base change along $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(t)$ gives $\\dim_{\\kappa(t)}H^0(C_t,M_t)=\\dim_\\Omega H^0(C_{\\bar t},M_{\\bar t})$, so this is the set where the $\\kappa(t)$-fibre has $h^0\\geq1$. Upper semicontinuity makes this closed: $C_T\\to T$ is proper and finitely presented and $M$ is finitely presented and flat over $T$, since it is invertible on the flat family. No reducedness of $T$ is required for upper semicontinuity. The flat-locally-finitely-presented openness theorem makes each member of the fppf covering an open map. The complement of the diagonal image in $T$ is therefore the union of the open images of these local complements, and is open. The original immersion over $T$ has closed image, hence is a closed immersion by the immersion-with-closed-image criterion. This holds for every scheme test, so the diagonal of $D/S$ is closed, proving separatedness.",
+   "uses": [
+    "lem-sfb-picard-space-curves-smooth",
+    "det-thm-picard-semicon",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/moduli.tex",
+    "place": "Tag 0DMF, lemma-pic-functor-diagonal-qc-immersion; perfect.tex Tag 0BDN, lemma-jump-loci-geometric; schemes.tex Tag 01IQ; Tag 01UA for openness of flat locally finitely presented maps; the closed-image argument is written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-space-open-subspace",
+  "def-sfb-stable-pointed-curve",
+  "def-weil-pbc-ample-invertible-module",
+  "det-thm-picard-semicon",
+  "lem-pc-degree-base-change",
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-recd-pullback",
+  "lem-pc-very-ample-ample",
+  "lem-sc-proper-flat-global-sections",
+  "lem-sfb-dm-quasicompact-atlas-criterion",
+  "lem-sfb-nodal-completed-normalization-model",
+  "lem-sfb-nodal-normalization-picard-sequence",
+  "lem-sfb-nodal-uniform-smooth-divisor",
+  "lem-sfb-picard-space-curves-smooth",
+  "lem-sfb-projective-smooth-divisor-parameter",
+  "lem-sfb-proper-curve-bundle-pullback-degree",
+  "lem-sfb-proper-flat-sheaf-euler-local-constancy",
+  "lem-sfb-space-relative-ample-locus",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "sk-def-picard-pic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/moduli.tex",
+  "place": "An explicit argument for the assertions recorded without proof in Deligne, Le lemme de Gabber, Section 2, printed p.135; openness by the two ample twists, boundedness by smooth-support divisors, and separatedness by h^0. Stacks supporting places are specified in every step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a projective flat family of nodal connected curves the classes with degree zero on each geometric irreducible component form an open separated quasi compact subspace of the relative Picard space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], AlgebraicGeometry.IsSeparated (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜], (AlgebraicGeometry.Proj 𝒜).IsSeparated\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic\", \"type\": \"{σ : Type u_1} →\\n  {A : Type u} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] →\\n        [inst_2 : AddSubgroupClass σ A] →\\n          (𝒜 : ℕ → σ) →\\n            [inst_3 : GradedRing 𝒜] →\\n              {X : AlgebraicGeometry.Scheme} →\\n                (f : A →+* ↑(X.presheaf.obj (Opposite.op ⊤\", \"doc\": \"Given a graded ring $\\\\mathcal{A}$ and a global section $f$ satisfying certain conditions, this morphism $X \\\\to \\\\operatorname{Proj}(\\\\mathcal{A})$ is constructed by gluing local morphisms defined on ope\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsSeparated fun X x x_1 x_2 => X.IsSeparated\", \"doc\": \"For any morphism of schemes $ f: X \\to Y $ with affine target $ Y $, the property of being separated is an affine property. This means that the separatedness of $ f $ can be checked on an affine open c\"}\n  {\"name\": \"AlgebraicGeometry.Proj\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme\", \"type\": \"{A : Type u_1} →\\n  {σ : Type u_2} →\\n    [inst : CommRing A] →\\n      [inst_1 : SetLike σ A] → [inst_2 : AddSubgroupClass σ A] → (𝒜 : ℕ → σ) → [GradedRing 𝒜] → AlgebraicGeometry.Scheme\", \"doc\": \"The projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ is constructed as a scheme by equipping it with a locally ringed space structure. For every point $x \\\\in \\\\oper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Separated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → (AlgebraicGeometry.Scheme.Hom.normalization f).OpenCover\", \"doc\": \"The open cover of the normalization scheme constructed via locally directed gluing data from the affine Zariski site, formed by canonical open immersion morphisms that collectively cover the colimit s\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Multidegree zero locus in the relative Picard functor of a semistable curve is open separated and of finite type",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : Set X\", \"doc\": \"For a ringed space $ X $, given an open subset $ U $ and a set $ s $ of sections over $ U $, the zero locus $ \\\\text{ZeroLocus}(U, s) $ is the set of all points $ x \\\\in U $ such that the germ of every \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : Set X\", \"doc\": \"For an open subset $U$ of a scheme $X$ and a set $s$ of sections of the structure sheaf over $U$, this function returns the set of points in $X$ where all sections in $s$ vanish. It is defined by appl\"}\n  {\"name\": \"AlgebraicGeometry.Proj.isSeparated\", \"module\": \"Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Proper\", \"type\": \": IsSeparated (toSpecZero 𝒜)\", \"doc\": \"The canonical morphism from the projective spectrum $\\\\operatorname{Proj}(\\\\mathcal{A})$ of a graded ring $\\\\mathcal{A}$ to the affine scheme $\\\\operatorname{Spec}(\\\\mathcal{A}_0)$, where $\\\\mathcal{A}_0$ i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : X.zeroLocus s = ⋂ f ∈ s, (X.basicOpen f).carrierᶜ\", \"doc\": \"For a scheme $X$, an open subset $U$ of $X$, and a set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ is defined as the intersection of the complements of the basic open sets a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{U : X.Opens} (s : Set Γ(X, U)) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $U$ of a scheme $X$ and any set $s$ of sections of the structure sheaf over $U$, the zero locus of $s$ (the set of points in $X$ where all sections in $s$ vanish) is a closed subse\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsSeparated f] : IsSeparated (f ∣_ V)\", \"doc\": \"For any separated morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, the restriction of $ f $ to $ V $ is also a separated morphism.\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"{U : Opens X} (s : Set (X.presheaf.obj (op U))) : IsClosed (X.zeroLocus s)\", \"doc\": \"For any open subset $ U $ of a ringed space $ X $ and any set $ s $ of sections over $ U $, the zero locus of $ s $ (i.e., the set of points in $ U $ where all elements of $ s $ vanish) is a closed su\"}\n  {\"name\": \"Algebra.isOpen_smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \"[FinitePresentation R A] : IsOpen (smoothLocus R A)\", \"doc\": \"If $ A $ is a finitely presented algebra over a commutative ring $ R $, then the smooth locus of $ A $ over $ R $ is an open subset of the prime spectrum $ \\\\operatorname{Spec}(A) $ equipped with the Z\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"degree\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "multidegree|multiDegree|semistable.*[Pp]icard|nodal.*[Pp]icard",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern scheme morphism properties, ordinary normalization, abstract sheaves, or Weierstrass coordinates; none states this relative Picard or group-space theorem or specializes to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multidegree zero line bundles form an open separated quasi compact subgroup of the relative Picard space of a stable family of nodal curves",
+   "results": "Actual msearch output read: 8 hits; top=['instCommGroupPic', 'CommRing.relPic', 'WeierstrassCurve.Affine.Point.toClass_apply', 'WeierstrassCurve.Affine.Point.toClass_some', 'CommRing.Pic.instAddCommGroupAsModule', 'AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit', 'AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top', \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\"]; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Picard groups of rings, elliptic class groups and abstract open subgroups do not state a relative Picard multidegree theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "multidegree|multiDegree|semistable.*[Pp]icard|nodal.*[Pp]icard|PicardFunctor",
+   "results": "Actual msearch output read: 0 hits; top=[]; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Picard groups of rings, elliptic class groups and abstract open subgroups do not state a relative Picard multidegree theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Picard space of a semistable curve has a finite type separated open subgroup classifying numerically trivial invertible sheaves",
+   "results": "Actual msearch output read: 8 hits; top=['CommRing.relPic', 'Submodule.unitsQuotEquivRelPic_apply_coe', 'CommRing.relPic_eq_top', 'Submodule.unitsQuotEquivRelPic', 'Submodule.unitsQuotEquivRelPic_symm_apply', 'Submodule.range_unitsToPic', 'OpenSubgroup.instSubgroupClass', 'instSmallUnitsSkeletonModuleCat']; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Picard groups of rings, elliptic class groups and abstract open subgroups do not state a relative Picard multidegree theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\", \"degree\"",
+   "results": "Actual msearch output read: 0 hits; top=[]; ",
+   "date": "2026-10-23",
+   "verdict": "no match: Picard groups of rings, elliptic class groups and abstract open subgroups do not state a relative Picard multidegree theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stable-relative-picard-kummer",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Openness, boundedness and separation of the multidegree-zero locus.",
+   "via": [
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-multidegree-zero-locus",
+  "worker": "stage1",
+  "summary": "Checked the source paragraph and the current blueprint; preserved the statement. Supplied the two-ample-twists openness proof, a fixed-degree Hilbert-parameter boundedness proof and the section-theoretic separatedness proof. Reused birational degree invariance instead of creating a duplicate. Created two smaller statement-only inputs, one on a single nodal geometric curve and one on a Hilbert parameter with no Picard condition.",
+  "blueprint": "The current latest sk-thm-sf-ctf-stability-direct-images.proof.md clause (3) supplies the direct-image/compactification route; this item remains the existing auxiliary below the alteration/stable-level branch recorded in blueprint.from.place. No blueprint node states this multidegree-zero result. The inherited nearest blueprint ancestor is null, as tools/blueprint_refs.py ancestor reports; the existing via chain is preserved.",
+  "tool_uses": [
+   {
+    "node": "det-thm-picard-semicon",
+    "why": "Step 7 uses upper semicontinuity of h^0 for a proper finitely presented family and a base-flat finitely presented module, with no reduced-base hypothesis; no node of this unit supplies that coherent-cohomology tool."
+   },
+   {
+    "node": "lem-sc-proper-flat-global-sections",
+    "why": "Auxiliary lem-sc-proper-flat-global-sections is used exactly in the explicit curve proof; the unit has no equivalent statement."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "Steps 2 and 3 use integer additivity under tensor product and consequently negation under duals; no node of this unit gives that curve-degree identity."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "Step 6 uses that a nonzero section of a degree-zero line on a normalized smooth proper component is nowhere vanishing; the unit route does not supply this curve calculation."
+   },
+   {
+    "node": "lem-trf-degree-weighted-irreducible-components",
+    "why": "Steps 2 and 3 use the degree sum over components, with generic lengths one because the nodal fibres are reduced; no node in this unit states that formula."
+   },
+   {
+    "node": "lem-trf-fibre-degree-ample-criterion",
+    "why": "Step 3 uses positivity of all normalized component degrees as equivalent to fibrewise ampleness on a proper curve; this is a generic auxiliary ampleness tool."
+   },
+   {
+    "node": "lem-trf-fppf-local-open-subfunctor-descent",
+    "why": "Step 4 promotes the opens constructed on local representative charts to an open subspace of the Picard space; no node of this unit supplies open-subfunctor descent."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Step 1 converts the stable-family projective-bundle convention to properness needed by all coherent Picard tools; it is a convention bridge rather than an alternative unit route."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Step 3 obtains an actual finite projective-space embedding on an affine Noetherian base, to choose H and use fixed-polynomial Hilbert parameters; the unit does not supply this convention bridge."
+   },
+   {
+    "node": "lem-pc-very-ample-ample",
+    "why": "Step 3 takes fibre ampleness of the embedding line from this standard curve tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Step 7 uses preservation of the open-then-closed factorization under scheme base change; no equivalent statement in the unit is used."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Step 7 uses preservation of the open-then-closed factorization under scheme base change; no equivalent statement in the unit is used."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Step 7 compares h^0 on the fibre over kappa(t) with h^0 on the geometric fibre, so that upper semicontinuity (stated on kappa(t)-fibres) applies to the geometric condition of step 6; no node of this unit states flat base change of coherent cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-thm-picard-semicon",
+  "lem-sc-proper-flat-global-sections",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-curve-section-degree-positivity",
+  "lem-trf-degree-weighted-irreducible-components",
+  "lem-trf-fibre-degree-ample-criterion",
+  "lem-trf-fppf-local-open-subfunctor-descent",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-pc-very-ample-ample",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pc-flat-base-change-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-b63ac84b8",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-b63ac84b8 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the parent's use of the item. The item statement is unchanged from the base and true. Live and side-live still show the item unsplit, so the delivery is not superseded. The Deligne source is missing locally, recorded as WANTED, and proof_origin is agent. Stacks 0E3F was read; the labels of 0D2S, 0DNI, 0DPK, 0DPE, 0DPI, 0AYU, 0E0L and 0B9A/B/D were checked. FIX, five repairs in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-nodal-multidegree-zero-locus.json: (1) Steps 2-3 cited the dropped 2026-10-19 route node lem-per-birational-curve-degree-invariance; re-cited the same-unit twin lem-sfb-proper-curve-bundle-pullback-degree with d=1 (normalization is finite, dominant, function-field degree 1). (2) Step 3 (C4/E1): the fibre-degree criterion gives ampleness on the geometric fibre, but lem-trf-ample-neighbourhood needs ampleness on the kappa(t)-fibre. Replaced it with the same-unit lem-sfb-space-relative-ample-locus, whose open consists exactly of the t with ampleness on the geometric fibre and commutes with base change. (3) Step 1 (C4): lem-sc-proper-flat-global-sections gives only an abstract iso f_*O = O, while the Picard theorem needs the canonical map. Added the rank-one-algebra argument (1=ce, e^2=de give cd=1). (4) Step 5: the inference from |W| -> |D| surjective to D quasi-compact had no node. Cited lem-sfb-dm-quasicompact-atlas-criterion (4)=>(2) and wrote out the affine-test argument for D -> S. (5) Step 7: added lem-pc-flat-base-change-cohom to compare h^0 on the kappa(t)-fibre with h^0 on the geometric fibre before upper semicontinuity. The other steps hold: the N=h+1 two-twist numerics, open-subfunctor descent, the branch-residue argument for h^0 >= 1 iff trivial, and the closed-image argument for the diagonal. New nodes: lem-sfb-nodal-uniform-smooth-divisor is true via 0E3F (subcurve genus at most g, degree at least 2g+1, a section avoiding finitely many evaluation hyperplanes, E in the smooth locus with length mh). lem-sfb-projective-smooth-divisor-parameter is true (open in the constant-polynomial Hilbert scheme, Cartier by 0B9D on U). Neither is a duplicate or a restated clause. Batch 5: every flagged trf/pc/sc/sfb citation is a generic curve, ampleness, descent, cohomology or space tool, or a definition; none is a step of the trace formula or Poincare duality. The flagged lem-trf-ample-neighbourhood and lem-per-birational nodes were removed. Artin-Gabber dropped-route check: only the birational node was cited, and it is re-cited to the twin. tool_uses updated: removed those two, added lem-pc-flat-base-change-cohom.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalMultidegreeZeroLocus",
+  "declaration": "AlgebraicGeometry.exists_nodal_multidegreeZero_openSubgroup",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalMultidegreeZeroLocus.lean",
+  "statement": "theorem exists_nodal_multidegreeZero_openSubgroup {B : Scheme.{u}} {g : ℕ} (X : StablePointedModuli B g 0) [IsLocallyNoetherian X.base.left] (P : AlgebraicSpace X.base.left) (e : P.obj.obj ⋙ uliftFunctor.{u + 1, u} ≅ (picardFunctor X.projection).obj) : ∃ (D : AlgebraicSpace X.base.left) (j : D ⟶ P), AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom ∧ AlgebraicSpace.IsQuasiCompactPresheafMap (terminal.from D.obj.obj) ∧ AlgebraicSpace.IsSeparatedPresheafMap (terminal.from D.obj.obj) ∧ (∀ T : Over X.base.left, ∃ K : Subgroup ((picardFunctorGrp X.projection).obj (op T)), ∀ z : (picardFunctorGrp X.projection).obj (op T), z ∈ K ↔ (e.inv.app (op T) z).down ∈ Set.range (j.hom.hom.app (op T))) ∧ (∀ (T : Over X.base.left) (L : (pullback X.projection T.hom).Modules) (_ : L.IsInvertible), (e.inv.app (op T) ((toPicardFunctor X.projection).app (op T) (Scheme.Pic.ofIsInvertible L))).down ∈ Set.range (j.hom.hom.app (op T)) ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (a : Spec (.of Ω) ⟶ T.left) (Z : irreducibleComponents (pullback (C := Scheme.{u}) (pullback.snd (C := Scheme.{u}) X.projection T.hom) a)), @Scheme.Modules.degree Ω _ ((pullback (C := Scheme.{u}) (pullback.snd (C := Scheme.{u}) X.projection T.hom) a).reducedNormalizationComponent Z).normalization ⟨(pullback (C := Scheme.{u}) (pullback.snd (C := Scheme.{u}) X.projection T.hom) a).normalizedComponentMap Z ≫ pullback.snd (pullback.snd (C := Scheme.{u}) X.projection T.hom) a⟩ ((Scheme.Modules.tensorPullback ((pullback (C := Scheme.{u}) (pullback.snd (C := Scheme.{u}) X.projection T.hom) a).normalizedComponentMap Z ≫ pullback.fst (pullback.snd (C := Scheme.{u}) X.projection T.hom) a)).obj L) = 0)",
+  "branch": "sheaf-dag",
+  "by": "Q05",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The base S is X.base.left of the recorded StablePointedModuli family. The natural isomorphism e identifies the small representing space with the universe lift of its sections. The open subgroup is characterized on every invertible-module representative on every test scheme, which also specifies independence of fppf-local representatives. The canonical Picard group law specifies its pointwise subgroup structure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77d4bb1d8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against the node. StablePointedModuli B g 0 over a locally Noetherian X.base.left. P is an algebraic space with e : P ⋙ ulift ≅ picardFunctor; the group law is the canonical picardFunctorGrp. D is given by j represented by open immersions (same predicate as AlgebraicSpace.OpenSubspace), with a per-T subgroup preimage. Relative quasi-compactness and separation use terminal.from D. The forall T, forall L equivalence uses Scheme.Modules.degree (chi(nu*L) - chi(O)) on the normalized reduced components of all geometric fibres, Omega : Type u, over Omega via normalizedComponentMap. Mono plus sheaf plus fppf-local representatives give independence of the representative and determine D(T). Edge cases checked: empty S/T, any characteristic, reducible fibres, universes. One sorry theorem, no defs, docstrings carry all 7 steps, statement verbatim, longest line 98, no name clash, node unchanged except lean, report has both sections. Maintainer note: declarations of nodes outside stmt_deps are used (def-pc-degree-line-bundle, def-sfb-stable-pointed-curve, qc/separated predicates of lem-trf-space-qc-separated-etale-local / def-sfb-space-quasi-compact-presheaf-map). The node text cites no node for these notions and S2 cannot add existing stmt_deps; maintainer may add them. No compile (no change)."
+ }
+}

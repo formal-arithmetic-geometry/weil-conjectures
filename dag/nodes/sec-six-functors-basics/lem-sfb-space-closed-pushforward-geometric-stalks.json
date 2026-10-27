@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-space-closed-pushforward-geometric-stalks",
+ "kind": "statement",
+ "title": "Geometric stalks of closed direct image on algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $i:Z\\hookrightarrow X$ be a closed immersion of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Closed immersion means representable by closed immersions of schemes after every scheme base change [def-weil-closed-immersion]. Write $i_{\\mathrm{et},*}$ for direct image of abelian sheaves under the induced morphism of small etale topoi [def-weil-pbc-sites-and-cohomology]. A geometric point is a map from the spectrum of an algebraically closed field, and its stalk is the colimit over pointed etale scheme neighbourhoods. For every abelian sheaf $A$ on $Z_{\\mathrm{et}}$ and every geometric point $\\bar x$ of $X$ factoring as $i\\bar z$, the canonical restriction comparison is a natural isomorphism $$(i_{\\mathrm{et},*}A)_{\\bar x}\\xrightarrow{\\sim}A_{\\bar z}.$$ For a geometric point $\\bar x$ not factoring through $Z$, one has $(i_{\\mathrm{et},*}A)_{\\bar x}=0$. The comparison at $i\\bar z$ sends the germ of a section on a pointed etale neighbourhood $U\\to X$ to the germ of that same section on $U\\times_X Z$ at the induced point, and is natural in $A$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0DK1 (lemma-stalk-push-closed), with the corrected formula (i_*A)_{bar x}=A_{bar z}; Tag 04E5 (lemma-closed-immersion-push-pull), part (2), for vanishing on the complement. Scheme model: etale-cohomology.tex Tag 04FX (lemma-stalk-pushforward-closed-immersion)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-space-pointed-etale-abelian-stalk",
+  "def-sfb-space-representable-abelian-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose a surjective etale scheme atlas $p:U\\to X$ from the algebraic-space definition. Choose a point $u$ above the image of $\\bar x$. The specified-lift statement gives $\\bar u:\\operatorname{Spec}\\Omega\\to U$ with $p\\bar u=\\bar x$, over the original algebraically closed field. Set $D=U\\times_X Z$ and write $k:D\\hookrightarrow U$, $q:D\\to Z$. By the representability hypothesis on $i$, $D$ is a scheme and $k$ is a closed immersion of schemes. The etale base-change statement makes $q$ etale. If $\\bar x=i\\bar z$, the pair $(\\bar u,\\bar z)$ defines $\\bar d:\\operatorname{Spec}\\Omega\\to D$. No finite-presentation hypothesis on the closed immersion and no finiteness condition on the atlas is needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-sfb-etale-geometric-point-specified-lift",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DK1 (lemma-stalk-push-closed), proof: choice of a pointed etale scheme neighbourhood; spaces-properties.tex Tag 05VN (lemma-geometric-lift-to-usual)"
+   }
+  },
+  {
+   "text": "Compute restriction of the direct image on this chart directly. For an etale scheme $T\\to U$, it is etale over $X$ by etale composition, and $T\\times_X Z=T\\times_U D$. The definition of direct image along the base-change functor therefore gives $((i_*A)|_U)(T)=A(T\\times_X Z)=(A|_D)(T\\times_U D)=(k_*(A|_D))(T)$. Every fibre product here is a scheme: it is a base change of the representable closed immersion. Both restriction maps and a sheaf morphism $A\\to B$ act by the same restriction maps or section homomorphisms on these expressions. Thus this is a natural identification of abelian sheaves on $U$, not an appeal to a module-only base-change theorem.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DK1, proof, etale base change; spaces-properties.tex Tag 03LR (lemma-pushforward-etale-base-change), degree-zero formula"
+   }
+  },
+  {
+   "text": "Taking a stalk can be done after restriction to a fixed pointed etale scheme chart. Here is the colimit argument, for either $(U,\\bar u)\\to(X,\\bar x)$ or $(D,\\bar d)\\to(Z,\\bar z)$. Forgetting the chart structure sends pointed neighbourhoods over the chart to pointed neighbourhoods over the space. For a neighbourhood $(W,\\bar w)$ of the space, its fibre product with the chart, pointed by $(\\bar w,\\bar u)$ (respectively $(\\bar w,\\bar d)$), is terminal among chart-neighbourhoods equipped with a pointed map to $W$: the unique map to it is the pair of the given map and the chart structure map. These fibre products are etale schemes by representability and etale base change. Consequently cocones on sections over the chart extend uniquely to all neighbourhoods by restricting each section to that fibre product. Restricting back gives the original cocone by its compatibility with the two projections; the two extension operations are inverse. The colimit universal property gives $F_{\\bar x}\\cong(F|_U)_{\\bar u}$ and, in the factoring case, $A_{\\bar z}\\cong(A|_D)_{\\bar d}$. These maps send a section germ to its restriction germ. All categories are replaced by small skeletons in the fixed larger universe.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DK1, proof: the stalk is unchanged on a pointed etale neighbourhood; explicit fibre-product verification of that assertion"
+   }
+  },
+  {
+   "text": "In the factoring case apply the scheme result to $k:D\\hookrightarrow U$ and $\\bar d$ from Step 1, with abelian sheaf $A|_D$. Its initiality assertion identifies the two colimits by the base-change comparison, giving $(k_*(A|_D))_{\\bar u}\\cong(A|_D)_{\\bar d}$. Combine this with the section identity of Step 2 and the two stalk identifications of Step 3. A representative $s\\in A(W\\times_XZ)$ on $(W,\\bar w)$ first restricts to $W\\times_XU\\times_XZ$; the scheme comparison takes its germ on that closed base change. Its image in $A_{\\bar z}$ is exactly the germ of $s$ on $W\\times_X Z$, because these two representatives differ by that pointed etale refinement. Thus the composite is the canonical restriction comparison required in the statement, and is an isomorphism of abelian groups.",
+   "uses": [
+    "lemma-openclosed-stalk-lowerstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DK1 (lemma-stalk-push-closed), reduction to Tag 04FX (lemma-stalk-pushforward-closed-immersion); the scheme initiality and comparison are recorded in lemma-openclosed-stalk-lowerstar"
+   }
+  },
+  {
+   "text": "If $\\bar x$ does not factor through $Z$, then $\\bar u$ does not factor through $D$. Its underlying point is outside the closed subset $|D|\\subset U$: locally $D$ is cut out by an ideal, and a field-valued map whose image lies in its vanishing set kills that ideal and therefore factors. Let $U_0=U\\setminus|D|$. This is an open scheme neighbourhood of $\\bar u$, etale over $U$ by the open-immersion statement. For every etale $T\\to U_0$, $T\\times_U D=\\varnothing$, so the section formula of Step 2 gives $(k_*(A|_D))(T)=A(\\varnothing)=0$. The last equality follows from the sheaf equalizer axiom for the empty covering of the empty scheme: the empty product of abelian groups is zero. Restricting to this pointed neighbourhood leaves the stalk unchanged by Step 3 (now for schemes), so $(i_*A)_{\\bar x}=0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-open-immersion-etale",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 04E5 (lemma-closed-immersion-push-pull), support clause; etale-cohomology.tex Tag 04FX, proof, complement paragraph"
+   }
+  },
+  {
+   "text": "For a morphism $a:A\\to B$ the two composites from a germ represented by $s$ on $W\\times_XZ$ both give the germ of $a_{W\\times_XZ}(s)$. The comparison maps commute with $a$ since restriction commutes with section homomorphisms. They preserve sums and zero for the same reason. This proves the stated naturality and the prescribed germ formula without any choice-dependent normalization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0DK1 and etale-cohomology.tex Tag 04FX: canonical colimit comparison; naturality checked on section cocones"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-weil-pbc-sites-and-cohomology",
+  "lemma-openclosed-stalk-lowerstar",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0DK1 (lemma-stalk-push-closed), scheme reduction and Tag 04FX (lemma-stalk-pushforward-closed-immersion), with explicit chart-colimit and naturality arguments; Tag 04E5 support clause."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|stalk.*pushforward.*closed|closed.*pushforward.*stalk",
+   "results": "0 hits; top results: none. Subdirectory: AlgebraicGeometry. Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Zariski stalks, ordinary module exactness, or unrelated site sequences; none gives this geometric-stalk assertion for algebraic spaces or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalks of closed immersion direct image abelian sheaves on small etale algebraic spaces",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.IsPreimmersion.toSurjectiveOnStalks, AlgebraicGeometry.isClosedImmersion_iff, AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion, AlgebraicGeometry.PresheafedSpace.restrictStalkIso. Subdirectory: all Mathlib. Digest: 5e289ff8201148e6. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Zariski stalks, ordinary module exactness, or unrelated site sequences; none gives this geometric-stalk assertion for algebraic spaces or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pushforward\", \"IsClosedImmersion\"",
+   "results": "0 hits; top results: none. Subdirectory: all Mathlib. Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Zariski stalks, ordinary module exactness, or unrelated site sequences; none gives this geometric-stalk assertion for algebraic spaces or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of algebraic spaces the geometric stalk of direct image of an abelian sheaf equals the original stalk on the closed subspace and is zero off it",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.stalkMap_toStalk_apply, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc. Subdirectory: all Mathlib. Digest: 967431bad8fb3854. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Zariski stalks, ordinary module exactness, or unrelated site sequences; none gives this geometric-stalk assertion for algebraic spaces or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subspace small etale direct image geometric stalk identity or zero naturally compatible with sections",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.spread_out_of_isGermInjective, AlgebraicGeometry.IsEtale. Subdirectory: all Mathlib. Digest: da7bd0058c6aab84. ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, Zariski stalks, ordinary module exactness, or unrelated site sequences; none gives this geometric-stalk assertion for algebraic spaces or specializes to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|stalk.*pushforward.*closed|closed.*pushforward.*stalk",
+   "results": "0 hits; . Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: only ordinary scheme/Zariski stalks, etale loci or scheme image maps; no algebraic-space small-etale closed-direct-image geometric-stalk comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk of the direct image along a closed immersion on small etale algebraic spaces",
+   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.isClosedImmersion_iff, AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.PresheafedSpace.restrictStalkIso, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso. Digest: 03a94d3aba62ba0f. ",
+   "date": "2026-10-23",
+   "verdict": "no match: only ordinary scheme/Zariski stalks, etale loci or scheme image maps; no algebraic-space small-etale closed-direct-image geometric-stalk comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pushforward\", \"IsClosedImmersion\"",
+   "results": "0 hits; . Digest: 4f53cda18c2baa0c. ",
+   "date": "2026-10-23",
+   "verdict": "no match: only ordinary scheme/Zariski stalks, etale loci or scheme image maps; no algebraic-space small-etale closed-direct-image geometric-stalk comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of algebraic spaces the geometric stalk of direct image is the original abelian stalk on the closed subspace and zero outside it",
+   "results": "8 hits; AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk_assoc, AlgebraicGeometry.over_def, AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.stalkMap_toStalk_apply. Digest: ba18bedf16b4f725. ",
+   "date": "2026-10-23",
+   "verdict": "no match: only ordinary scheme/Zariski stalks, etale loci or scheme image maps; no algebraic-space small-etale closed-direct-image geometric-stalk comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed subspace etale sheaf extension by zero has unchanged geometric fibres on its support and trivial fibres on the complement",
+   "results": "8 hits; Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.Scheme.Etale.forget, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.exists_lift_of_germInjective_aux, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux. Digest: 6c69aa56debc39a0. ",
+   "date": "2026-10-23",
+   "verdict": "no match: only ordinary scheme/Zariski stalks, etale loci or scheme image maps; no algebraic-space small-etale closed-direct-image geometric-stalk comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+  "date": "2026-10-23",
+  "group": "Q139"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tags 05ZS (lemma-thickening-equivalence), 05ZT (lemma-first-order-thickening), and 05ZN (lemma-first-order-thickening-maps); section-thickenings for the ideal of a closed immersion. Supporting input: Stacks 03MB and 04CJ(3), applied to the defining ideal of the first-order thickening in the forward direction. Supporting input: Stacks 03MB and 04CJ(3), closed direct-image stalk computation underlying the unit and counit.",
+   "via": [
+    "lem-sfb-space-closed-immersion-quasi-coherent-modules",
+    "lem-sfb-space-first-order-ringed-description",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-closed-pushforward-geometric-stalks",
+  "worker": "stage1",
+  "summary": "Q134 reduces to a pointed etale scheme chart, writes the base-change section identity and chart-stalk colimit argument explicitly, applies the existing Lean-closed scheme comparison, and proves complement vanishing and naturality on germs. No new nodes; statement unchanged.",
+  "blueprint": "Read latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, clause (3), and latest scheme closed-stalk comparison under sk-prop-sf-cbc. This is technical support along the inherited ILO/deformation ancestry in from.place, not a replacement of a unit step. blueprint_refs.py ancestor reports a null ancestor; retain that inherited node and via list. Whole-blueprint searches closed immersion, stalk-lowerstar and etale-lifts-locally found only the existing scheme comparison, which is cited, not an algebraic-space duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-etale-geometric-point-specified-lift",
+    "why": "Generic lifting of a geometric point over a specified etale chart point, over the same algebraically closed field; no six-functor unit clause supplies it."
+   },
+   {
+    "node": "lem-trf-space-representable-etale-scheme-tests",
+    "why": "Generic algebraic-space scheme tests and etale permanence, needed only for pointed charts and their fibre products."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Generic scheme fact making the complement open a pointed etale neighbourhood."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-etale-geometric-point-specified-lift",
+  "lem-trf-space-representable-etale-scheme-tests",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-e33a22af5",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-e33a22af5 (reviewer sub-agent of L); spot-checked: I read the item in full (6 steps); the delivery adds no new nodes. The statement is byte-identical to the live and side-live copies and matches Stacks 0DK1 (the source prints z̄ and x̄ swapped; the item has the correct (i_*A)_{x̄}≅A_{z̄}), plus the complement clause of 04FX and 04E5(2). Steps: (1) The atlas, the specified-lift statement over the same Ω, the representable closed immersion D=U×_XZ and q étale by base change: checked. (2) The 03LR degree-zero identity (i_*A)|_U=k_*(A|_D) follows from the u^s formula and fibre-product pasting; this is correct for abelian sheaves, and the module-only node is rightly not cited. (3) The chart-stalk cofinality via the terminal object W×_XU in the comma category is correct; the induced map is étale by the last clause of the scheme-tests node. (4) lemma-openclosed-stalk-lowerstar is Lean-closed: lowerStarCompSheafFiberIso takes any Grothendieck abelian coefficients with IsSepClosed Ω, and its germ lemma gives the stated restriction-germ formula. (5) Off-Z vanishing: the field point is outside |D| by the affine ideal argument, U_0 is open and étale, and A(∅)=0 from the empty cover. (6) Naturality and additivity hold. Edge cases checked: X empty, Z empty, i=id, a nilpotent thickening. Tool uses accepted: specified-lift (same unit), representable-étale scheme tests (generic algebraic-space foundations), open-immersion-étale (a Mathlib leaf). Batch 5: specified-lift reaches sec-trace-formula only through the definition def-trf-algebraic-space, and lem-trf-space-representable-etale-scheme-tests is a basic Stacks spaces fact that neither the trace-formula nor the Poincaré-duality assumption supplies; both are generic and outside the assumed statements. No duplicate algebraic-space node was found (searched 0DK1, 03LR, 04E5, 04FX and stalk/space nodes). No SGA source cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedPushforwardStalks",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closed_pushforward_geometric_stalks",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.closed_pushforward_geometric_stalks"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceClosedPushforwardStalks.lean",
+  "statement": "theorem closed_pushforward_geometric_stalks {S : Scheme.{u}} {Z X : AlgebraicSpace S} (i : Z ⟶ X) (hi : (MorphismProperty.inverseImage (@IsClosedImmersion) (Over.forget S)).relative yoneda i.hom.hom) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (CommRingCat.of Ω) ⟶ S) (z : yoneda.obj (Over.mk b) ⟶ Z.obj.obj), ∃ e : representableAbelianDirectImage i hi.rep ⋙ X.abelianStalk (z ≫ i.hom.hom) ≅ Z.abelianStalk z, ∀ (A : Sheaf Z.etaleTopology AddCommGrpCat.{u + 1}) (N : X.PointedEtale (z ≫ i.hom.hom)) (v : Over.mk b ⟶ ((representableEtaleBaseChange i hi.rep).functor.obj N.right).obj.left) (hz : yoneda.map v ≫ ((representableEtaleBaseChange i hi.rep).functor.obj N.right).obj.hom = z), v ≫ (representableEtaleBaseChange i hi.rep).projection.app N.right = N.hom.left → X.abelianGerm (z ≫ i.hom.hom) N ((representableAbelianDirectImage i hi.rep).obj A) ≫ e.hom.app A = Z.abelianGerm z (StructuredArrow.mk (CostructuredArrow.homMk v hz)) A) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (b : Spec (CommRingCat.of Ω) ⟶ S) (x : yoneda.obj (Over.mk b) ⟶ X.obj.obj), (¬ ∃ z : yoneda.obj (Over.mk b) ⟶ Z.obj.obj, z ≫ i.hom.hom = x) → ∀ A : Sheaf Z.etaleTopology AddCommGrpCat.{u + 1}, IsZero ((X.abelianStalk x).obj ((representableAbelianDirectImage i hi.rep).obj A)))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa8c14e8a",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Item statement matches the node clause by clause and agrees with Stacks 0DK1 (corrected direction), 04E5(2), 04FX, 03G2(4) and 03LR. Closed immersion uses Mathlib's ∀-square MorphismProperty.relative, equivalent to the project's ∃-form IsRepresentableWith. Direct image is sheafPushforwardContinuous along a base-change functor fixed by its pullback squares and projections, so it is not an arbitrary map. The stalk is colim over pointed étale charts, the germ is the colimit cocone, and the germ equation pins the natural iso (the induced point v is unique). The complement clause gives IsZero for every point not factoring through Z. Two new definition nodes are real constructions with no duplicate (side-live has only module direct images for spaces and scheme-only geometric stalks). Coefficients are AddCommGrpCat.{u+1} per the size convention. Edge cases checked: X empty, Z empty, i = id, nilpotent thickening, zero sheaf. lean.statement is verbatim in all three records; the item differs from live only by its lean record and the two new stmt_deps; docstrings carry source and blueprint ids; only sorry proofs. Not recompiled (no change). Advisory: the ∀ vs ∃ closed-immersion forms may need a bridge for citers."
+ }
+}

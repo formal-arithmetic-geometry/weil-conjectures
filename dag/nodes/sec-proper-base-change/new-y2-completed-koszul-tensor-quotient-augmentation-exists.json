@@ -1,0 +1,129 @@
+{
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, strict augmentation argument"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulTensorQuotientAugmentation",
+  "date": "2026-10-27",
+  "group": "Y2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-koszul-tensor-quotient-augmentation",
+   "place": "strict augmentation construction and normalization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "id": "new-y2-completed-koszul-tensor-quotient-augmentation-exists",
+ "kind": "statement",
+ "title": "Existence of the finite strict completed Koszul tensor augmentation",
+ "statement": "theorem completedKoszulTensorQuotientAugmentation_exists\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :\n    ∃ β : completedKoszulTensorTower T d r a ⟶\n        (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ),\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (β.app P)).app (op n)).f (p + q) = 0)",
+ "stmt_deps": [
+  "new-y2-completed-koszul-tensor-quotient-augmentation-data",
+  "def-weil-pbc-koszul-reconstruction-models",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [
+  {
+   "text": "Identify the completed Koszul degree-zero unit as an isomorphism by the constant rank-one identification, the zeroth exterior power equivalence, and the normalized scalar-extension unit isomorphism.",
+   "uses": [
+    "lem-weil-pbc-completed-koszul-unit-zero-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the normalized degree-zero residue projection. Its composite with the incoming differential is zero because every a_i^(n+1) belongs to I^(n+1). Package it as a map to the single quotient complex. To compare successive augmentations, use the single-complex hom extensionality lemma and cancel the invertible degree-zero unit. The recorded Koszul unit transition and quotient unit transition then give the equality.",
+   "uses": [
+    "new-p6-completed-koszul-quotient-projection",
+    "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+    "def-weil-pbc-koszul-reconstruction-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the total tensor bifunctor to each coefficient augmentation and compose with the canonical total-tensor-with-single isomorphism. Naturality in both variables gives compatibility in the input complex and in the tower index. Assemble the transformation componentwise using NatTrans.ofOpSequence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compute on the degree-zero tensor summand using the total-tensor injection formula and the single-tensor collapse. Normalization becomes the specified ordinary quotient unit. In any nonzero exterior degree, the single quotient complex has zero object, so its component map and hence the tensor summand composite vanish.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-completed-koszul-unit-zero-iso",
+  "new-p6-completed-koszul-quotient-projection",
+  "lem-weil-pbc-completed-adic-koszul-unit-chain-map",
+  "def-weil-pbc-koszul-reconstruction-models"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, strict augmentation in lemma-naive-completion; direct exterior degree-zero residue construction (P6)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "completed Koszul tensor quotient augmentation strict natural transformation",
+   "results": "No direct declaration found.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans homological complex tensor augmentation",
+   "results": "Only generic natural transformation APIs.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "completedKoszulTensorQuotientAugmentation",
+   "results": "Only the assigned construction and its dependent cone theorem.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate"
+  }
+ ],
+ "status": "split",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedKoszulTensorQuotientAugmentationExists",
+  "file": "lean/Sheaf/Paper/CompletedKoszulTensorQuotientAugmentationExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientAugmentation_exists",
+  "statement": "theorem completedKoszulTensorQuotientAugmentation_exists\n    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :\n    ∃ β : completedKoszulTensorTower T d r a ⟶\n        (completedAdicOrdinaryTower T d).mapHomologicalComplex (.up ℤ),\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ),\n        completedAdicKoszulTensorUnit T d r a P n ≫\n          (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map (β.app P)).app (op n) =\n            completedQuotientTensorUnit T d P n) ∧\n      (∀ (P : CochainComplex (CompletedAdicModules T d) ℤ) (n : ℕ) (p q : ℤ) (hq : q ≠ 0),\n        completedKoszulTensorSummand T d r a P n p q ≫\n            ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map\n              (β.app P)).app (op n)).f (p + q) = 0)",
+  "branch": "sheaf-dag",
+  "by": "Y2",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedKoszulTensorQuotientAugmentation_exists"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-cba2b",
+  "group": "Y2",
+  "result": "fix",
+  "landing": "20261027T021420-L-2772620",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261027T054606-L-968321",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

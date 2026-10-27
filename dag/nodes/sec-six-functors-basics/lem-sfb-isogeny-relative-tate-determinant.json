@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-isogeny-relative-tate-determinant",
+ "kind": "statement",
+ "title": "Relative Tate determinant equals a ratio of homomorphism degrees",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $A,B$ be abelian varieties over $k$ [def-sc-abelian-variety] of the same dimension $g\\geq1$ [def-kun-topological-krull-dimension]. Let $\\lambda:A\\to B$ be an isogeny [def-sc-isogeny] and $\\mu\\in\\operatorname{Hom}_k(B,A)\\otimes_{\\mathbf Z}\\mathbf Q$ a two-sided inverse to $\\lambda$, where homomorphisms are group-scheme homomorphisms [def-sc-group-scheme] and tensor products are [def-weil-pbc-module-tensor-product]. For every group-scheme homomorphism $h:A\\to B$, put $d(h)=\\deg h$ when $h$ is an isogeny and $d(h)=0$ otherwise, with degree the order of the scheme-theoretic kernel. For every prime $\\ell\\ne\\operatorname{char}k$ one has\n$$\\det\\bigl(V_\\ell(\\mu h)\\mid V_\\ell A\\bigr)=\\frac{d(h)}{\\deg\\lambda}\\quad\\text{in }\\mathbf Q_\\ell.$$\nHere the rational Tate module and componentwise action on integral homomorphisms are [sk-def-av-tate], extended $\\mathbf Q$-linearly to rational homomorphisms; the determinant is [def-weil-endomorphism-determinant], and the rational ratio is embedded in $\\mathbf Q_\\ell$ [def-weil-l-adic-numbers].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 10.20, printed pp.50–52 (degree is the Tate determinant for endomorphisms), Remark 10.11, printed p.47 (rational degree), and the isogeny inverse construction in Remark 8.6, printed p.36. Relative form obtained by composing h and lambda with one common integral multiple of the rational inverse; multiplicativity of isogeny degree cancels that common factor. Zero is assigned to non-isogenies."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-kun-topological-krull-dimension",
+  "def-sc-isogeny",
+  "def-sc-group-scheme",
+  "def-weil-pbc-module-tensor-product",
+  "sk-def-av-tate",
+  "def-weil-endomorphism-determinant",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [
+  {
+   "text": "First establish the integral endomorphism calculation needed below. Put $R=\\operatorname{End}_k(A)$ and $E=R\\otimes\\mathbf Q$. By [lem-sfb-abelian-hom-finite-free], $E$ is a finite-dimensional unital rational algebra. Let $\\delta=d^0:E\\to\\mathbf Q$ be [lem-sfb-abelian-degree-polynomial]. It is homogeneous polynomial of degree $2g$, agrees with $d$ on $R$, and has $\\delta(0)=0$. By [lem-sfb-abelian-degree-multiplicative], $d(1)=1$ and $d(ab)=d(a)d(b)$. Write $v=j(a)/n,w=j(b)/m$ using [lem-sfb-rational-tensor-fractions]. The defining denominator formula gives $\\delta(vw)=(nm)^{-2g}d(ab)=\\delta(v)\\delta(w)$. Consequently $\\delta(1)=1$ and $E\\ne0$, since $\\delta(0)=0$. All hypotheses of the polynomial-norm theorem are now available.",
+   "uses": [
+    "lem-sfb-abelian-hom-finite-free",
+    "lem-sfb-abelian-degree-polynomial",
+    "lem-sfb-abelian-degree-multiplicative",
+    "lem-sfb-rational-tensor-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 10.11 and Proposition 10.13, printed pp.47–48; Lemma 10.22, printed p.51"
+   }
+  },
+  {
+   "text": "For an arbitrary $a\\in R$, apply [lem-sfb-multiplicative-polynomial-norm] to $E,\\delta,d=2g$. It gives a monic rational polynomial $P_a(t)=\\delta(t1-a)$ of degree $2g$ and, for its roots $a_i$ in any splitting field, $\\delta(F(a))=\\prod_iF(a_i)$ for every $F\\in\\mathbf Q[T]$. In particular $P_a(0)=\\delta(-a)=\\delta(a)=d(a)$: homogeneity from [lem-sfb-abelian-degree-polynomial] gives the factor $(-1)^{2g}=1$. This is valid for nonisogenies too.",
+   "uses": [
+    "lem-sfb-multiplicative-polynomial-norm",
+    "lem-sfb-abelian-degree-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Theorem 10.9 and Remark 10.11, pp.46–47; Lemma 10.22, p.51"
+   }
+  },
+  {
+   "text": "Fix $\\ell\\ne\\operatorname{char}k$ and put $T=V_\\ell(a)$ and $Q(X)=\\det(X1-T)$. By [prop-av-tate-rank] and [lem-weil-charpoly-monic-degree], $Q$ is monic of degree $2g$. Work in an algebraic closure of $\\mathbf Q_\\ell$. A full invariant flag from [p-linear-triangular] gives an upper triangular matrix for $T$, whose diagonal entries $b_i$ are the roots of $Q$ counted with multiplicity: its determinant polynomial is $\\prod_i(X-b_i)$. For $F\\in\\mathbf Z[T]$, the matrix $F(T)$ is upper triangular with diagonal $F(b_i)$, so $\\det F(T)=\\prod_iF(b_i)$. These determinant equalities follow directly by expanding along the triangular rows; scalar extension preserves the matrix determinant term by term. The componentwise action [sk-def-av-tate] gives $F(T)=V_\\ell(F(a))$: sums, composition, identities and integer multiples agree at each torsion coordinate, hence on the inverse limit and after tensoring. Choose the roots $a_i$ of $P_a$ in the same closure. Step 2 and [lem-sfb-abelian-degree-tate-valuation], applied to the integral endomorphism $F(a)$, give\n$$\\left|\\prod_iF(a_i)\\right|_\\ell=|d(F(a))|_\\ell=|\\det F(T)|_\\ell=\\left|\\prod_iF(b_i)\\right|_\\ell.$$\nThe two monic polynomials have the same degree and satisfy this for every integral $F$. Thus [lem-sfb-padic-resultant-rigidity] gives $P_a=Q$ in $\\mathbf Q_\\ell[X]$.",
+   "uses": [
+    "prop-av-tate-rank",
+    "lem-weil-charpoly-monic-degree",
+    "p-linear-triangular",
+    "sk-def-av-tate",
+    "lem-sfb-abelian-degree-tate-valuation",
+    "lem-sfb-padic-resultant-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.20 proof, printed p.52; Lemmas 10.21–10.22, p.51"
+   }
+  },
+  {
+   "text": "Evaluate the equality of step 3 at zero. In a $2g$-element basis, $Q(0)=\\det(-T)=(-1)^{2g}\\det T=\\det T$ by factoring $-1$ out of each row. Step 2 gives $P_a(0)=d(a)$. Hence\n$$\\det(V_\\ell(a)\\mid V_\\ell A)=d(a)$$\nfor every integral endomorphism $a$, including nonisogenies. The same calculation works for every allowable $\\ell$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.20, printed pp.50–52, constant coefficient"
+   }
+  },
+  {
+   "text": "Apply the last clause of [lem-sfb-simple-isogeny-decomposition] to $\\lambda$. It supplies an isogeny $\\nu:B\\to A$ and $n>0$ such that $\\nu\\lambda=[n]_A$ and $\\lambda\\nu=[n]_B$. In the rational homomorphism spaces, $[n]=n1$ by [def-sc-mult-n], so $\\nu/n$ is a two-sided inverse of $\\lambda$. It equals the specified $\\mu$: explicitly $\\nu/n=(\\nu/n)(\\lambda\\mu)=((\\nu/n)\\lambda)\\mu=\\mu$. Thus $\\mu h=n^{-1}\\nu h$. The componentwise Tate action [sk-def-av-tate] and its specified rational extension give $V_\\ell(\\mu h)=n^{-1}V_\\ell(\\nu h)$.",
+   "uses": [
+    "lem-sfb-simple-isogeny-decomposition",
+    "def-sc-mult-n",
+    "sk-def-av-tate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Remark 8.6, printed p.36; Remark 10.11, printed p.47"
+   }
+  },
+  {
+   "text": "The geometric lemma [lem-sfb-isogeny-postcomposition-degree] applied to $(h,\\nu)$ gives $d(\\nu h)=\\deg(\\nu)d(h)$, including $d(h)=0$. Applied to $(\\lambda,\\nu)$ it gives $\\deg(\\nu\\lambda)=\\deg(\\nu)\\deg(\\lambda)$. Since $\\nu\\lambda=[n]_A$, [lem-sc-isogeny-facts] gives\n$$\\deg(\\nu)\\deg(\\lambda)=n^{2g}.$$\nAll degrees here use scheme-theoretic kernels. In particular $\\deg\\lambda>0$: its finite kernel contains the identity point and therefore has nonzero finite-dimensional coordinate algebra.",
+   "uses": [
+    "lem-sfb-isogeny-postcomposition-degree",
+    "lem-sc-isogeny-facts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I §7, printed p.32; Theorem 7.2, p.33; Remark 8.6, p.36"
+   }
+  },
+  {
+   "text": "Use the basis of size $2g$ from [prop-av-tate-rank]. Factoring $n^{-1}$ from each row and then applying step 4 to the integral endomorphism $\\nu h$ gives\n$$\\det V_\\ell(\\mu h)=n^{-2g}\\det V_\\ell(\\nu h)=n^{-2g}d(\\nu h)=n^{-2g}\\deg(\\nu)d(h)=\\frac{d(h)}{\\deg\\lambda}.$$\nThe last equality uses step 6. Cancellation takes place in $\\mathbf Q_\\ell$, where $n$ and $\\deg\\lambda$ are nonzero by the canonical embedding of [def-weil-l-adic-numbers]. Neither integer needs to be invertible in $k$. This proves the formula also when $h$ is zero or any other nonisogeny, and when either isogeny is inseparable.",
+   "uses": [
+    "prop-av-tate-rank",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 10.20, pp.50–52, Remark 10.11, p.47, and Remark 8.6, p.36; relative cancellation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-sfb-abelian-degree-polynomial",
+  "lem-sfb-abelian-degree-multiplicative",
+  "lem-sfb-rational-tensor-fractions",
+  "lem-sfb-multiplicative-polynomial-norm",
+  "prop-av-tate-rank",
+  "lem-weil-charpoly-monic-degree",
+  "p-linear-triangular",
+  "sk-def-av-tate",
+  "lem-sfb-abelian-degree-tate-valuation",
+  "lem-sfb-padic-resultant-rigidity",
+  "lem-sfb-simple-isogeny-decomposition",
+  "def-sc-mult-n",
+  "lem-sfb-isogeny-postcomposition-degree",
+  "lem-sc-isogeny-facts",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Proposition 10.20 and proof, printed pp.50–52; Remark 10.11, p.47; Remark 8.6, p.36. Endomorphism norm comparison follows Milne; relative assembly is explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For homomorphisms h and an isogeny lambda between abelian varieties the determinant of lambda inverse h on rational Tate modules is degree h divided by degree lambda",
+   "results": "8 hits; top: FractionalIdeal.abs_det_basis_change, IsBaseChange.det_endHom, LinearEquiv.det_baseChange, LinearEquiv.det_trans, LinearMap.det_baseChange, LinearMap.det_map, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, LinearMap.det_restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern determinants of linear maps, scalar extension and lattice indices; none relates Tate determinants to geometric isogeny degrees"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative determinant of two isogenies between the same abelian varieties on rational Tate modules is the ratio of their degrees",
+   "results": "8 hits; top: IsBaseChange.det_endHom, FractionalIdeal.abs_det_basis_change, LinearEquiv.det_baseChange, LinearMap.det_eq_det_mul_det, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, LinearMap.det_baseChange, LinearMap.det_restrictScalars, Submodule.natAbs_det_basis_change",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern determinants of linear maps, scalar extension and lattice indices; none relates Tate determinants to geometric isogeny degrees"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The determinant on a rational Tate module of an abelian variety homomorphism normalized by an isogeny equals the ratio of the degrees",
+   "results": "8 hits; top: LinearMap.det, LinearEquiv.coe_det, IsBaseChange.det_endHom, LinearEquiv.det, LinearMap.detAux, LinearMap.associated_det_of_eq_comp, LinearMap.det_eq_det_mul_det, Matrix.GeneralLinearGroup.det",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern determinants of linear maps, scalar extension and lattice indices; none relates Tate determinants to geometric isogeny degrees"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isogeny\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern determinants of linear maps, scalar extension and lattice indices; none relates Tate determinants to geometric isogeny degrees"
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny.*det|det.*isogeny|tateModule.*det|det.*tateModule",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern determinants of linear maps, scalar extension and lattice indices; none relates Tate determinants to geometric isogeny degrees"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateModule\"",
+   "results": "0 hits; top: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern determinants of linear maps, scalar extension and lattice indices; none relates Tate determinants to geometric isogeny degrees"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The relative determinant of an abelian variety homomorphism on rational Tate modules normalized by an isogeny is the quotient of degrees",
+   "results": "8 hits; FractionalIdeal.abs_det_basis_change, IsBaseChange.det_endHom, LinearMap.det_restrictScalars, Ideal.natAbs_det_equiv, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, LinearEquiv.det_baseChange, Ideal.natAbs_det_basis_change, NumberField.mixedEmbedding.fundamentalCone.abs_det_completeBasis_equivFunL_symm",
+   "date": "2026-10-23",
+   "verdict": "no match: lattice indices and determinant identities do not identify geometric isogeny degree with a Tate determinant"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For maps h and lambda from one abelian variety to another, with lambda an isogeny, the determinant of lambda inverse composed with h on rational Tate modules is degree h divided by degree lambda",
+   "results": "8 hits; IsBaseChange.det_endHom, FractionalIdeal.abs_det_basis_change, LinearEquiv.det_baseChange, LinearMap.det_baseChange, LinearMap.det_comp, Algebra.discr_eq_det_embeddingsMatrixReindex_pow_two, LinearMap.associated_det_comp_equiv, LinearMap.det_eq_det_mul_det",
+   "date": "2026-10-23",
+   "verdict": "no match: lattice indices and determinant identities do not identify geometric isogeny degree with a Tate determinant"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative Tate determinant of an abelian variety homomorphism normalized by an isogeny equals the ratio of their degrees",
+   "results": "8 hits; AddSubgroup.relindex_eq_abs_det, LinearEquiv.coe_det, LinearMap.det, LinearMap.associated_det_of_eq_comp, LinearMap.det_conj, LinearEquiv.det_conj, LinearEquiv.det, LinearMap.det_dualMap",
+   "date": "2026-10-23",
+   "verdict": "no match: lattice indices and determinant identities do not identify geometric isogeny degree with a Tate determinant"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rationalTateModule\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: lattice indices and determinant identities do not identify geometric isogeny degree with a Tate determinant"
+  },
+  {
+   "tool": "grep",
+   "query": "rationalTateModule.*det|det.*rationalTateModule|isogeny.*det|det.*isogeny",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: lattice indices and determinant identities do not identify geometric isogeny degree with a Tate determinant"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-trace-intersection",
+  "date": "2026-10-23",
+  "group": "Q104"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I §14, printed p.61 (Rosati formula and involution), Theorem 14.3, printed p.62 (positive trace form); §11 p.53 (polarization isogeny); Proposition 10.20, printed pp.50–52 (trace on Tate modules). Supporting input: Chapter I, Theorem 14.3, printed p.62, displayed trace/intersection identity; Proposition 10.20, p.50, identifies its trace with Tate trace. The displayed identity is stated for alpha alpha-dagger; cyclicity of ordinary trace gives the order used here. The calculation is omitted by these notes (reference there: Milne 1986 §17). Supporting calculation: Chapter I, Proposition 10.20, printed pp.50–52 (degree is the Tate determinant for endomorphisms), Remark 10.11, printed p.47 (rational degree), and the isogeny inverse construction in Remark 8.6, printed p.36. Relative form obtained by composing h and lambda with one common integral multiple of the rational inverse; multiplicativity of isogeny degree cancels that common factor. Zero is assigned to non-isogenies.",
+   "via": [
+    "lem-sfb-abelian-trace-intersection",
+    "lem-sfb-rosati-trace-positive",
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isogeny-relative-tate-determinant",
+  "worker": "stage1",
+  "summary": "Reconstructed Milne 10.20 from the existing polynomial-degree, multiplicative-norm, valuation and resultant-rigidity nodes, rather than assuming a characteristic-polynomial node also identifies its constant coefficient with degree. Chose a common integral inverse isogeny and canceled its degree. Added only the geometric postcomposition-degree input, including the nonisogeny case. Statement unchanged.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images proof (3), through the inherited alteration, full-level rigidification and Rosati trace/intersection chain; the relative determinant is the supporting calculation for lem-sfb-abelian-trace-intersection. The ancestor tool returns null, as inherited. Latest blueprint proof (3) and unit were read.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-isogeny-facts",
+    "why": "Uses the geometric degree n^(2g) of multiplication by n to cancel the common inverse-isogeny factor; no local statement of this unit gives that formula."
+   },
+   {
+    "node": "prop-av-tate-rank",
+    "why": "Steps 3 and 7 take dim V_ell A = 2g from its statement (generic abelian-variety fact of unit sk-prop-av-tate-rank); no node of this unit states the rank."
+   },
+   {
+    "node": "p-linear-triangular",
+    "why": "Step 3 triangularizes V_ell(a) over an algebraic closure of Q_ell (generic linear algebra of unit sk-p-linear-triangular, not a trace-formula step); no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-isogeny-facts",
+  "prop-av-tate-rank",
+  "p-linear-triangular"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-6684df7a3",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-6684df7a3 (reviewer sub-agent of L); spot-checked: Read in full: the item (7 steps), the new node lem-sfb-isogeny-postcomposition-degree, and every cited statement. Sources checked: Milne AV I Prop 7.1 and the degree paragraph (p.32), Rem 8.6 (p.36), Thm 10.9 and Rem 10.11 (pp.46-47), Prop 10.20 with Lemma 10.21 (pp.50-52), and Stacks 02NZ morphisms-lemma-degree-composition. The item statement is byte-identical to live, and live still has the item unsplit with no repair note. Steps 1-4 rebuild Milne 10.20 for integral endomorphisms from existing statements; every hypothesis checks: δ is multiplicative because nm·vw=j(ab), E≠0, P_a(0)=δ(-a)=d(a), triangularization is done over Q̄_ℓ, the valuation node covers non-isogenies, and resultant rigidity gives P_a=Q. Step 5 takes the two-sided ν from simple-isogeny-decomposition, and ν/n=μ by associativity. Step 6 applies the new node to (h,ν) with C=A and to (λ,ν), plus deg[n]=n^{2g}. Step 7 is elementary in Q_ℓ. Small cases tested: h=0, h=λ, [r]/[m] on an elliptic curve, Frobenius, and a non-isogeny on E². The new node is true (Milne 7.1(c), kernel exact sequence or 02NZ tower; zero case), statement-only and self-contained, and passes B1-B7. It duplicates nothing: degree-multiplicative covers endomorphisms only, and lem-sc-isogeny-degree, the isogeny criteria, hom-image-dimension and the blueprint isogeny files state other facts. It is strictly smaller than the item. Steps 1-3 repeat the proof of tate-charpoly, which is advisory only, because charpoly does not state P(0)=deg. Batch-5: hom-finite-free, degree-polynomial, tate-rank, isogeny-facts, degree-tate-valuation and simple-isogeny-decomposition reach only generic trf nodes (rationalization injectivity, polynomial identities, forward differences, smooth composition). p-linear-triangular is generic triangularization. None is a trace-formula or Poincaré-duality step, so all are accepted. No SGA. FIX: split_report.tool_uses now also declares the off-unit tools prop-av-tate-rank and p-linear-triangular, both generic and accepted as on tate-charpoly; lem-sc-isogeny-facts was already declared and is accepted.; 1 file(s) fixed by the reviewer"
+ }
+}

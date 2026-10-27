@@ -1,0 +1,271 @@
+{
+ "id": "lem-sf-native-open-derived-tensor",
+ "kind": "statement",
+ "title": "Equivariant open derived tensor and balanced pullback composition",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$ of $k_0$, a prime $\\ell\\ne\\operatorname{char}(k_0)$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. For separated finite-type $k_0$-schemes use the coefficient sheaves $B_V$, abelian Weil-sheaf categories $\\mathcal W_V$, ambient ordinary derived categories $D(\\mathcal W_V)$, bounded constructible full subcategories $\\mathrm{WC}^{\\mathrm{der}}(V_0)$ and actual module operations of [def-sf-native-weil-derived-framework], with derived tensor as in [def-sf-derived-weil-category-and-operations].\n\nLet $j_0:U_0\\hookrightarrow Z_0$ be an open immersion, where both schemes are separated and finite type over $k_0$, and write $j:U\\hookrightarrow Z$ for geometric base change. The localized coefficient equality is $B_U=j^{-1}B_Z$. For arbitrary $M\\in D(\\mathcal W_U)$ and $N\\in D(\\mathcal W_Z)$ there is a natural isomorphism\n$$\\gamma^W_{M,N}:j_{0!}M\\otimes^L_{B_Z}N\\xrightarrow{\\sim}j_{0!}(M\\otimes^L_{B_U}j_0^*N)$$\nin $D(\\mathcal W_Z)$. It is induced by the termwise balanced open tensor comparison on equivariant K-flat resolutions, using direct-sum total tensor with differential $d_P\\otimes1+(-1)^p1\\otimes d_N$ on the $(p,q)$ summand. Equivariant restriction $j_0^*$ and extension $j_{0!}$ preserve K-flat complexes, in the categorical sense that total tensor preserves quasi-isomorphisms; hence these representatives compute the displayed derived tensors. The inverse is induced by the extension/restriction adjunction transpose of the open unit under restriction/tensor comparison. Both maps are morphisms commuting with Frobenius. Under the tensor comparison for the exact conservative functor $U_Z$ of [lem-sf-weil-native-closed-forgetful], the map $U_Z(\\gamma^W_{M,N})$ and its inverse are exactly the unit-normalized ordinary open tensor isomorphism $\\gamma$ and its inverse of [lem-sf-open-tensor-normalization], with coefficient rings $B_Z,B_U$.\n\nFor any composable $k_0$-morphism $p_0:Z_0\\to Y_0$ between separated finite-type schemes, the module pullback compositor $j_0^*p_0^*\\cong(p_0j_0)^*$ is the localization of the balanced map $b_U\\otimes(b_Z\\otimes t)\\mapsto b_Uj^*(b_Z)\\otimes t$, with inverse inserting $1$. This isomorphism respects the Frobenius actions and is natural in the derived input. No lisse, degree-zero, or boundedness hypothesis on $M,N$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived Tag 0E8I, sites-modules.tex lemma-j-shriek-and-tensor; fix-lem-tensor-adjunction.proof.md Step 1 second Hom bijection: open factor and pullback compositor; old compact-projection proof Steps 4 and 5"
+ },
+ "stmt_deps": [
+  "def-sf-native-weil-derived-framework",
+  "def-sf-derived-weil-category-and-operations",
+  "lem-sf-weil-native-closed-forgetful",
+  "lem-sf-open-tensor-normalization",
+  "def-sf-generic-open-tensor-presentation",
+  "def-sf-native-open-tensor-operations"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the normalized native sheaf adjunction, balanced sheaf maps and categorical K-flat preservation by native_open_sheaf_tensor_existence. The faithful conservative forgetful functor sends each lifted unit component to the actual ordinary open unit. That ordinary unit is invertible by lem-sf-native-adic-open-restrictions. Reflect invertibility through forgetting in Lean and construct NativeOpenTensorData with this proved unit_iso field.",
+   "uses": [
+    "lem-sf-native-open-sheaf-tensor-existence",
+    "lem-sf-native-adic-open-restrictions",
+    "lem-sf-fixed-pair-created-abelian-structure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply native_open_tensor_localization to this sheaf datum. Obtain the two natural derived comparisons and the presentation with the actual native functors, K-flat models, summand maps and comparison equalities.",
+   "uses": [
+    "lem-sf-native-open-tensor-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply native_open_tensor_normalization to this presentation to obtain the derived inverse-unit formula and ordinary forgetting data.",
+   "uses": [
+    "lem-sf-native-open-tensor-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build NativeOpenDerivedTensorData from gamma, rho, the inverse-unit formula and the ordinary forgetting data. The presentation compatibility is definitionally the eighteen equalities already obtained. The existing nativeOpenPullComp remains the localization of the balanced module compositor, with no change to its definition.",
+   "uses": [
+    "def-sf-native-open-tensor-presentation-data",
+    "def-sf-native-open-tensor-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-native-open-tensor-operations",
+  "def-sf-native-open-tensor-presentation-data",
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sf-native-adic-open-restrictions",
+  "lem-sf-native-open-sheaf-tensor-existence",
+  "lem-sf-native-open-tensor-localization",
+  "lem-sf-native-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 0GL1/0E8I, original native proof steps 1--8 factored into sheaf/K-flat data, representative localization, and unit/forgetting normalization; explicit Lean record assembly by G7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero|jShriek",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion extension by zero tensor projection isomorphism in the derived category of Weil sheaves",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.IsOpenImmersion.ΓIsoTop, AlgebraicGeometry.IsOpenImmersion.isoRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived tensor products of Frobenius equivariant module sheaves on an open immersion",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "projection|[Pp]rojection",
+   "results": "OK 0 hits; ; subdirectory=Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert a comparison in the actual derived category of Frobenius-equivariant module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero|jShriek",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations states the native equivariant unbounded open tensor isomorphism, its normalization, and balanced compositor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of equivariant K flat complexes and open immersion projection formula",
+   "results": "OK 8 hits; Module.Flat.of_isLocalizedModule, Module.Flat.localizedModule, RingHom.Flat.ofLocalizationSpanTarget, RingHom.Flat.holdsForLocalizationAway, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, AlgebraicGeometry.Flat.instOfIsOpenImmersion, AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap, RingHom.Flat.ofLocalizationPrime; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations states the native equivariant unbounded open tensor isomorphism, its normalization, and balanced compositor"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "OK 0 hits; ; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations states the native equivariant unbounded open tensor isomorphism, its normalization, and balanced compositor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived tensor in the category of Frobenius equivariant sheaves of modules",
+   "results": "OK 8 hits; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition, CategoryTheory.Tor'_map_app; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations states the native equivariant unbounded open tensor isomorphism, its normalization, and balanced compositor"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|KFlat|extensionByZero",
+   "results": "OK 0 hits; ; subdirectory=CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations states the native equivariant unbounded open tensor isomorphism, its normalization, and balanced compositor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion j the functors j shriek and j star preserve K flat complexes and the tensor projection formula is natural",
+   "results": "OK 8 hits; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; subdirectory=",
+   "date": "2026-10-22",
+   "verdict": "no match: none of the returned declarations states the native equivariant unbounded open tensor isomorphism, its normalization, and balanced compositor"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-derived-weil-compact-projection-formula",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Tag 0GL1, lemma-j-shriek-and-tensor; underived Tag 0E8I, sites-modules.tex lemma-j-shriek-and-tensor; fix-lem-tensor-adjunction.proof.md Step 1 second Hom bijection: open factor and pullback compositor; old compact-projection proof Steps 4 and 5",
+   "via": [
+    "lem-sf-derived-weil-compact-projection-formula",
+    "lem-sf-weil-verdier-exchange"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-native-open-derived-tensor",
+  "worker": "stage1",
+  "summary": "Q85 supplies a ten-step native equivariant assembly using existing nodes only: normalized balanced sheaf maps, signed total tensor, categorical K-flat tests in both directions, resolutions and localization, exact adjunction normalization, forgetting, and explicit balanced pullback composition. Statement retained verbatim. No new nodes. Repair of the return on head 98f902fde48: rechecked the retained 27 full-statement citations against all 17 current dependency statements (all identical), retained the current item statement and provenance, and expanded step 6 into both explicit short-exact-sequence flatness tests before resolving localization. Delivery is rebuilt on the current server DAG; no side-completion promotion is claimed.",
+  "blueprint": "Retains the imported provenance through lem-sf-derived-weil-compact-projection-formula and lem-sf-weil-verdier-exchange (nearest imported ancestor is null). Realizes fix-lem-tensor-adjunction.proof.md Step 1 second Hom bijection, its open factor and pullback compositor; no change to unit route.",
+  "tool_uses": [
+   {
+    "node": "def-sf-native-weil-derived-framework",
+    "why": "Generic The native derived category of pro-etale Weil sheaves and its operations used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic Localization of an exact adjunction to derived categories used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sf-fixed-pair-created-abelian-structure",
+    "why": "Generic Created limits, colimits and abelian structure on fixed pairs used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sf-native-adic-open-restrictions",
+    "why": "Generic Open restriction and disjoint pullback of native adic extension by zero used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sf-native-adic-pullback-exact-lisse",
+    "why": "Generic Exact native coefficient inverse image preserves lisse local models used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "Generic Total-tensor and K-flat representative comparison for ringed slice extension used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "Generic Generator-normalized tensor comparison for a ringed-site slice used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic Restriction to a localized site commutes with the sheaf tensor product used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic Derived tensor and K-flat representative descent on a ringed site used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used exactly as stated in the open-factor assembly; the item unit supplies no replacement for this module/localization tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-fixed-pair-created-abelian-structure",
+  "lem-sf-native-adic-open-restrictions"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-893a82934",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-893a82934 (reviewer sub-agent of L); spot-checked: This is a re-delivery of head 98f902fde485, which was PASSed; its landing was refused because the side completion was not promoted to the live DAG, which is not a mathematical fault. No repair note exists, so the re-split rule does not apply. Compared with 98f9, the statement, stmt_deps, proof_deps, source, blueprint and steps 1-5 and 7-10 are byte-identical. Only step 6 and the split_report summary changed. All 17 cited statements are byte-identical between the two snapshots, and proof_deps equals the union of the step uses. I screened the 636 base nodes added since 98f9 for j_!/tensor statements: all are ordinary constant-ring, finite-level or tower nodes, so there is no new native-Weil duplicate. The only node referencing the item is its citer lem-sf-derived-weil-compact-projection-formula, so there is no cycle. No new nodes, no SGA. Source check: Stacks 0GL1 (sites-cohomology.tex:4578, 'Details omitted') and 0E8I. The item is the unbounded equivariant version for the framework's coefficient sheaf B, with the inverse normalized as the open-unit adjunct, matching the specified gamma^{-1} in lem-sf-open-tensor-normalization. I re-read every step against the cited statements. Step 1: exact j_!/j^* with invertible unit, lifted to Weil pairs; forgetting is faithful and exact, and j_! reflects acyclicity. Step 2: psi and kappa from ringed-slice-tensor-generators, Frobenius-checked on generators. Step 3: signed direct-sum total tensor, coproducts created by the fixed-pair node. Step 4: both categorical K-flat tests hold. Step 5: the framework's locally-finite-span coefficients agree with the finite-subextension coefficients via finite compositum on quasi-compact objects. Step 6 (changed): I checked both new short-exact-sequence flatness arguments. j_!E is flat by restrict, tensor with E, extend, plus step 2; j^*H is flat by extend, tensor with H, restrict back, plus the invertible unit. Both are taken in the Weil category, which is the twisted action-site module category, so they supply the flat terms that site-derived-tensor-descent requires; the localization universal property keeps the inverse identities. Steps 7-8: the inverse is the open-unit adjunct, and U_Z(gamma^W)=gamma as specified maps, not lifted through conservativity. Steps 9-10: I checked the balancing relations, both inverse composites, Frobenius compatibility and exactness. Edge cases: empty U, U=Z, zero inputs, unbounded complexes, p_0=id. The tool_uses are generic, and the batch-5 reachability via lem-trf-geometric-inverse-image-exact is a general site fact. No fixes. Maintainer note: this is a side-promotion landing loop, and the step-6 expansion is correct."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NativeOpenDerivedTensor",
+  "declaration": "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_derived_tensor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleWeilSheaf.native_open_derived_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/NativeOpenDerivedTensor.lean",
+  "statement": "theorem native_open_derived_tensor : ∃ (s : NativeOpenTensorData k₀ l j) (d : NativeOpenDerivedTensorData k₀ l j s) (c : OpenTensorPresentation (ProEtaleWeilSheaf k₀ l U) (ProEtaleWeilSheaf k₀ l Z)), NativeOpenPresentationCompatibility k₀ l j s d c",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Actual native ambient derived categories and recorded tensor are used. Helpers retain sheaf unit normalization, every total summand, two-sided categorical K-flatness, localization squares, and the ordinary forgetful equality. The balanced compositor is the localization of the existing upperStarCompIso. No statement change, new node, or dependency repair. C4 compilation-layer extraction: the unchanged generic normalization records are in Sheaf.Paper.NativeOpenTensorPresentation, and the unchanged concrete open operations and representative/forget maps are in Sheaf.Paper.NativeOpenTensorOperations. The original module publicly re-exports both; its data records and native_open_derived_tensor remain in Sheaf.Paper.NativeOpenDerivedTensor with unchanged signatures and bodies. Reviewer (C4 1eafb83e): the relocated records and operations are owned by def-sf-generic-open-tensor-presentation and def-sf-native-open-tensor-operations (stmt_deps) and are no longer listed here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-559900329",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and the dependency sources. gamma is a NatIso on the full ambient derived product. It is pinned on K-flat representatives through summand-pinned totalGamma, with TA/TB/models HEq-pinned to nativeTensorTotal and nativeDerivedTensor_models; a rescaling of the .choose'd models moves gamma and rho consistently, so gamma is canonical relative to the dependency. Tensor order checked (tensor A B = B⊗A, flip gives M⊗N). Inverse unit-transpose holds at sheaf and derived level: adj pinned by unit_forget/counit_forget, sheaf rho by HEq to adicUpperStarTensorLeftIso (types agree), derived rho by restriction_summands and restriction_model; formula identical to OpenTensorNormalization Assertion.gamma_inverse. Two-sided NativeIsKFlat preservation for extension and restriction. Forgetful equality uses the dependency's tensorComparison, real eE/eR factorization isos and the ordinary mapExactDerivedCategory adjunction. Compositor nativeOpenPullComp localizes the canonical upperStarCompIso. No extra hypotheses (no QuasiCompact j); universes at u; no name collisions in live or side-live; node differs from side-live only in lean; statement verbatim; 23 declarations present; only the theorem is sorried; docstrings carry source and blueprint tags. Notes: the ordinary-gamma dependency is rendered by its characterizing formula on the AdicSheaf functors (its SheafOfModules declaration is not instantiated); the compositor's balanced formula is described in the docstring, not asserted; the docstring condenses 10 proof steps into 8. Not compiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-90a6f",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261027T131454-L-2940282",
+  "kind": "interface",
+  "note": "independent cc review: native_open_derived_tensor assembled from 3 new holes (sheaf existence / localization ∀s / normalization ∀ pinned ρ,γ,c) against lem-sf-native-open-derived-tensor; 3 data decls verbatim-diffed into NativeOpenTensorComparisonData with public re-export; data node lean trimmed to 3 (19 others owned by generic-presentation/operations nodes); direct importer NativeCompactProjectionFormula compiled 14.5 s vs published 14.2 s; axioms propext/sorryAx/choice/Quot.sound"
+ }
+}

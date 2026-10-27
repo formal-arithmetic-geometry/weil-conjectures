@@ -5,6 +5,7 @@ Authors: SHEAF group NV
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.DerivedSquareLocalClassModels
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTopCohomology
 public import Sheaf.Paper.HigherDirectImagePresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
@@ -133,15 +134,13 @@ def topBaseChangeAdjoint {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
     (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)
   letI : IsIso (derivedPullbackTopCohomology g (q : ℤ) C hC) :=
     (Classical.choose_spec (derivedPullback_topCohomology g (q : ℤ) C hC)).2.1
-  (Functor.homologyRightDerivedFunctorObjSingleFunctorIso
-      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) F q).inv ≫
+  (schemeSingleCohomologyComparison f F q).inv ≫
     (tensorPullbackSectionAdjunction g).homEquiv _ _
       (inv (derivedPullbackTopCohomology g (q : ℤ) C hC) ≫
         (DerivedCategory.homologyFunctor
           (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (q : ℤ)).map
             (topBaseChangeDelta f g F)) ≫
-    (pushforward g).map (Functor.homologyRightDerivedFunctorObjSingleFunctorIso
-      (RingedSpace.moduleDirectImage (pullback.fst g f).toLRSHom.toShHom)
+    (pushforward g).map (schemeSingleCohomologyComparison (pullback.fst g f)
       ((tensorPullback (pullback.snd g f)).obj F) q).hom
 
 set_option backward.isDefEq.respectTransparency true in
@@ -202,7 +201,6 @@ private theorem topBaseChangeAdjoint_eq {X S T : Scheme.{u}} (f : X ⟶ S) (g : 
               (topBaseChangeDelta f g F)) ≫
       (pushforward g).map (schemeSingleCohomologyComparison (pullback.fst g f)
         ((tensorPullback (pullback.snd g f)).obj F) q).hom := by
-  delta schemeSingleCohomologyComparison
   rfl
 
 omit [∀ Y : Scheme.{u},

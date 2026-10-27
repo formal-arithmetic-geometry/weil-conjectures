@@ -1,0 +1,382 @@
+{
+ "id": "lem-sfb-integral-orbit-finite-diagram-approximation",
+ "kind": "statement",
+ "title": "Finite Noetherian diagram around an integral descent orbit",
+ "statement": "Let $S$ and $A$ be affine schemes [def-pc-scheme], with $S$ Noetherian [pqf-def-locnoeth], and let $A\\to S$ be flat, surjective and quasi-compact [def-weil-pbc-fpqc-covering]. Let $F$ be an fpqc sheaf of sets on $S$-schemes (a contravariant functor satisfying the covering equalizer condition), represented over $A$ by a scheme $P\\to A$ locally of finite presentation [def-pc-representable-functor, def-sbc-locally-finite-presentation]. Let $T\\to S$ be integral and surjective [def-weil-finite-integral-morphism], and suppose $F_T$ is represented by $Y$. On $R=Y\\times_S T$ [def-pc-fibre-product], let $r_0,r_1:R\\rightrightarrows Y$ be the projection and the map from the canonical identification of the two restrictions of $F$. Assume every $r_1(r_0^{-1}(y))$ is contained in a quasi-affine open subscheme of $Y$, that is, an open subscheme isomorphic to a quasi-compact open subscheme of an affine scheme (for instance an affine open). For each $x\\in P$, there exist the following data:\n(1) a subfunctor $F_0\\subseteq F$ whose pullback to $A$ is represented by an open subscheme $P_0\\subseteq P$ containing $x$, and whose pullback to $T$ is represented by an open subscheme $Y_0\\subseteq Y$ [def-weil-open-immersion];\n(2) an affine scheme $B$ of finite presentation over $S$, a map $a:A\\to B$ over $S$, an affine scheme $Q$ finite and surjective over $S$, and a factorization $T\\to Q\\to S$;\n(3) a separated finitely presented $B$-scheme $X$ and a separated finitely presented $Q$-scheme $Z$, together with identifications $P_0\\simeq X\\times_B A$, $F_{0,B}\\simeq h_X$, and $F_{0,Q}\\simeq h_Z$. In particular the identification $Z_B=Z\\times_S B\\simeq X\\times_S Q$ gives a finite integral surjection $g:Z_B\\to X$. Write $v:Z_B\\to Z$ for the other projection. The canonical descent datum $D$ on $Z$ relative to $Q/S$ [def-pd-descent-datum] becomes under this identification the canonical datum on $X\\times_S Q$ relative to $Q\\times_S B/B$;\n(4) an affine scheme $L$ with a quasi-compact flat monomorphism $j:L\\to Z$ [def-weil-flat-morphism, def-weil-finite-type-morphism]. A monomorphism means that its diagonal is an isomorphism. Its image is stable under generalization (it contains every generalization of each of its points), and the two pullbacks of $j$ under $D$ agree as subfunctors. Let $j_B:L\\times_S B\\to Z_B$ be its base change. The point of $X$ which is the image of $x$ belongs to $g(j_B(L\\times_S B))$.\nHere finite presentation means locally of finite presentation, quasi-compact and quasi-separated, and separated means that the diagonal is a closed immersion [def-weil-quasi-separated-morphism, def-weil-closed-immersion]. No quasi-affine neighbourhood of $j(L)$ or representing scheme over $S$ is part of the conclusion.",
+ "source": {
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Theorem 4.1 proof, reductions 1--5, printed pp.5-18--5-20, and construction of the invariant affine semilocal monomorphism at the start of reduction 6, p.5-21; over an affine Noetherian S the final approximation of S is unnecessary. Source read at https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf; archival copy WANTED. This is the finite-diagram output, before admissibility descent, enlargement and invariant shrinking. No single Stacks tag states this simultaneous diagram assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-representable-functor",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-integral-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-pd-descent-datum",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Choose a point $y'\\in P\\times_ST$ above $x$, possible since $T\\to S$ stays surjective after base change, and write $y\\in Y$ for its other image. Choose a quasi-affine open $V\\subseteq Y$ containing the orbit of $y$. The cover $A\\times_ST\\to T$ is fpqc. Its pullback represents $F$ by $P\\times_ST$, so local finite presentation descends to $Y\\to T$. The quasi-compact separated scheme $V$ is consequently of finite presentation over the affine $T$: its morphism is quasi-compact and quasi-separated by qcqs permanence. Write $T=\\varprojlim Q_i$ with $Q_i$ finite and finitely presented over $S$ and finite transition maps. Every $Q_i\\to S$ is surjective, since the surjection $T\\to S$ factors through it. The chart-spreading lemma gives a quasi-affine finite-presentation scheme $V_i$ and an open subfunctor $h_{V_i}\\subseteq F_{Q_i}$ pulling back to $h_V$.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "lem-sfb-fpqc-chart-limit-spreading",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, reduction 3, pp.5-19--5-20; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "Put $C_j=\\operatorname{Spec}\\kappa(x)\\times_SQ_j$ for $j\\geq i$, and $C=\\operatorname{Spec}\\kappa(x)\\times_ST$. The $x$-section of $F$ gives maps $C_j\\to F_{Q_j}$, with open inverse images $E_j$ of $(V_i)_{Q_j}$. Every point of $C$ maps into $V$: its image in $Y$ is in the orbit of $y$. Indeed take a common residue-field extension with the chosen point $y'$ over $x$; the resulting pair of $T$-coordinates is an arrow of the canonical relation on $Y$, from $y$ to that image. Existence of this point is surjectivity of base change of a field spectrum, and the assertion is independent of the common extension. The affine $C_j$ are finite schemes over a field, hence Noetherian; each open $E_j$ is constructible. The limit-contained-in-constructible theorem, applied to $C_j$ and $E_i$, therefore allows us to increase $i$ so that $E_i=C_i$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-limit-contained-in-constructible",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, reduction 3, p.5-19: arrange that the finite-stage chart contains the whole fibre over the chosen point; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "Set $Q=Q_i$. On $F_Q$, write $s,t$ for the two relation maps, with domain $F_Q\\times_SQ$. These maps are finite on scheme tests, being base changes of $Q\\to S$. Define $Z=V_i\\setminus s(t^{-1}(F_Q\\setminus V_i))$: here $t^{-1}(F_Q\\setminus V_i)$ is closed in the scheme $s^{-1}(V_i)=V_i\\times_SQ$, and $s$ is finite, so its image is closed in $V_i$. Thus $Z$ is an open subscheme of $V_i$. Its points are exactly those for which every transport lands in $V_i$. Identity, inverse and the triple-overlap cocycle imply that a point and any one of its transports have the same set of further transports: compose with that arrow in one direction and with its inverse in the other. Common residue-field extensions realize the composed arrows. Hence the two inverse images of $Z$ agree on every scheme test, as open subfunctors. This argument uses the canonical transports of the sheaf, without presuming $F_Q$ is a scheme. The image $z$ of $y$ in $V_i$ lies in $Z$. To check this last assertion, pull the fibre $C_i$ back to the residue field of $y'$: all its points already lie in $V_i$ by step 2, and their images give the whole orbit of $z$, using the same common-field-extension argument. Since $Q$ is finite over Noetherian $S$, $V_i$ is Noetherian, and its open $Z$ is quasi-compact and of finite presentation over $Q$. It is quasi-affine, being a quasi-compact open of $V_i$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-surjective-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-fibre-product-points",
+    "def-weil-finite-integral-morphism",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, reduction 3: finite closed-map saturation inside the approximated chart, pp.5-19--5-20; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "In $P_Q=P\\times_SQ$, let $Z_A$ be the open induced by $h_Z\\subseteq F_Q$. The projection $g_A:P_Q\\to P$ is finite surjective. Set $P_0=P\\setminus g_A(P_Q\\setminus Z_A)$. Invariance of $Z$ makes $Z_A$ a union of entire $g_A$-fibres: two lifts of any point of $P$ acquire a common residue field and hence an arrow of the relation, so membership is the same. Therefore $g_A^{-1}P_0=Z_A$, and $x\\in P_0$ by step 2. The two pullbacks of $P_0$ to the canonical relation over $A\\times_SA$ agree: after the surjective base change by $Q$ both are the open defined by the same section of $F_Q$ and $Z$. Define $F_0(H)$ to consist of sections of $F(H)$ whose pullbacks to $H\\times_SA$ land in $P_0$. The equalizer condition shows this is a subfunctor, with $(F_0)_A=h_{P_0}$ and $(F_0)_Q=h_Z$. It is again an fpqc sheaf, as step 6 needs: if $\\{H_k\\to H\\}$ is an fpqc covering and a section of $F(H)$ restricts into $F_0(H_k)$ for all $k$, then the open of $H\\times_SA$ pulled back from $P_0$ contains the images of the $H_k\\times_SA$, which cover $H\\times_SA$ by base change of the jointly surjective covering; so it is everything, and $F_0$ inherits the equalizer condition of $F$. Its pullback to $T$ is represented by the open $Y_0=Y\\times_FF_0$: on the fpqc cover $Y\\times_SA\\to Y$ the prescribed opens agree, so open-subscheme descent applies.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, reduction 3, invariant shrinking and its pullbacks, p.5-20; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "The quasi-affine $Z$ is separated, and its morphism to the affine $Q$ is separated. Thus $Z_A\\to A$ is separated. The finite surjection $Z_A\\to P_0$ is universally closed, so separatedness of $P_0\\to A$ follows from the universally-closed-surjection separation theorem. Also $Z_A$ is quasi-compact: $Z$ and $A$ are quasi-compact over affine $S$, and $Z_A=Z\\times_SA$. Its continuous surjective image $P_0$ is quasi-compact, directly by pulling back any open cover. The open $P_0\\subseteq P$ is locally of finite presentation over $A$, and separatedness gives quasi-separatedness. Hence $P_0\\to A$ is separated and of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-surjective-universally-closed-separated",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-separated-cancellation",
+    "def-weil-open-immersion",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-separated-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, reductions 2--3, separated finite-presentation open model; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "Apply representation spreading to $F_0$, its fpqc cover $A\\to S$, and a directed presentation of the affine $A$ as an inverse limit of affine finitely presented $S$-schemes. Such a presentation is obtained by taking the quotients of finite polynomial algebras by finite sets of relations true in $\\Gamma(A,\\mathcal O_A)$, ordered by enlargement; every element and every relation occurs, so the ring colimit is $\\Gamma(A,\\mathcal O_A)$. We obtain an affine finitely presented $B\\to S$, a map $a:A\\to B$, a separated finitely presented $X\\to B$ and a representation $(F_0)_B\\simeq h_X$, whose pullback identifies $X\\times_BA$ with $P_0$. The two representations of $(F_0)_{B\\times_SQ}$ give $Z\\times_SB\\simeq X\\times_SQ$: on every test scheme this is the identity on its $F_0$-section and its ordered $B,Q$ coordinates. This formula also identifies the datum on $Z$ after base change by $B$ with the canonical datum on $X\\times_SQ$, since both transports keep the same section and change only the $Q$ coordinate. The projection $g:Z_B\\to X$ is finite integral surjective, as the base change of $Q\\to S$.",
+   "uses": [
+    "lem-sfb-fpqc-representation-limit-spreading",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, reduction 4 and compatibility (***) in reduction 5, p.5-20; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  },
+  {
+   "text": "The orbit $E$ of $z$ in $Z$ is finite: its relation has finite source map, so the fibre over $z$ is a finite set and its target image is finite. It is saturated by the orbit lemma and is contained in the quasi-affine scheme $Z$. Apply the finite-datum semilocal lemma to obtain an affine $L$ and an invariant quasi-compact flat monomorphism $j:L\\to Z$ whose image is $\\operatorname{Gen}_Z(E)$. This proves both its generalization stability and equality of its two pullbacks under $D$. The chosen point above $x$ in $P_0\\times_SQ$ maps to $z\\in E$. After its map to $Z_B\\simeq X\\times_SQ$, it lies above the image of $x$ in $X$ and has $Z$-coordinate $z\\in j(L)$. The base-change image formula therefore puts it in $j_B(L\\times_SB)$, proving the required incidence $\\operatorname{im}(x)\\in g(j_B(L\\times_SB))$. All four groups of data have now been constructed, without any quasi-affine enlargement of $j(L)$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-pd-descent-orbit-saturated",
+    "lem-sfb-finite-datum-semilocal-generalizations",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/raynaud-critere-effectivite-descente.pdf",
+    "place": "Theorem 4.1, start of reduction 6 and Lemma 4.3, pp.5-17, 5-21; adapted to the already Noetherian affine base. Scan https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "lem-sfb-fpqc-chart-limit-spreading",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-constructible-subset",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-surjective-universally-closed-separated",
+  "lem-weil-pbc-separated-cancellation",
+  "def-weil-open-immersion",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-fpqc-representation-limit-spreading",
+  "lem-pd-descent-orbit-saturated",
+  "lem-sfb-finite-datum-semilocal-generalizations",
+  "lem-weil-pbc-base-change-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/raynaud-critere-effectivite-descente.pdf",
+  "place": "Raynaud Theorem 4.1 reductions 3--4 and start of 6, pp.5-19--5-21, read from the primary scan. The base is already Noetherian: saturation of the finite-stage quasi-affine chart makes reduction 2 and approximation of the base unnecessary. Two general spreading lemmas and the invariant semilocal construction are explicit unsplit prerequisites."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud finite approximation of an fpqc scheme form with integral scheme model to a finite integral cover and an invariant affine semilocal flat monomorphism",
+   "results": "{\"t\": \"2026-10-24T13:45:08Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud finite approximation of an fpqc scheme form with integral scheme model to a finite integral cover and an invariant affine semilocal flat monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.LocallyOfFiniteType\"], \"digest\": \"84eb98132e5099c5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation and integral-morphism definitions and AffineTransitionLimit factorization statements do not simultaneously produce the invariant open subfunctor, finite integral model, compatible descent datum and affine flat monomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation approximation of an integral descent datum and a point with affine orbit neighbourhood gives a finite integral scheme diagram over a Noetherian base",
+   "results": "{\"t\": \"2026-10-24T13:47:24Z\", \"tool\": \"leanfinder\", \"query\": \"Finite presentation approximation of an integral descent datum and a point with affine orbit neighbourhood gives a finite integral scheme diagram over a Noetherian base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"bc6c2b93ad8f1ab2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation and integral-morphism definitions and AffineTransitionLimit factorization statements do not simultaneously produce the invariant open subfunctor, finite integral model, compatible descent datum and affine flat monomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite integral descent approximation over an affine Noetherian base with an affine semilocal invariant flat monomorphism and a finite presentation scheme model",
+   "results": "{\"t\": \"2026-10-24T13:54:01Z\", \"tool\": \"leanfinder\", \"query\": \"Finite integral descent approximation over an affine Noetherian base with an affine semilocal invariant flat monomorphism and a finite presentation scheme model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.IsIntegralHom\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\"], \"digest\": \"f8fe0cdf2046792c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation and integral-morphism definitions and AffineTransitionLimit factorization statements do not simultaneously produce the invariant open subfunctor, finite integral model, compatible descent datum and affine flat monomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud integral descent finite approximation of locally finitely presented fpqc scheme forms and affine orbit neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T13:47:21Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud integral descent finite approximation of locally finitely presented fpqc scheme forms and affine orbit neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.mk\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\"], \"digest\": \"bb3623bbf5474c97\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation and integral-morphism definitions and AffineTransitionLimit factorization statements do not simultaneously produce the invariant open subfunctor, finite integral model, compatible descent datum and affine flat monomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T13:47:21Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation and integral-morphism definitions and AffineTransitionLimit factorization statements do not simultaneously produce the invariant open subfunctor, finite integral model, compatible descent datum and affine flat monomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*descent|descent.*integral|orbit.*affine|affine.*orbit",
+   "results": "{\"t\": \"2026-10-24T13:47:20Z\", \"tool\": \"grep\", \"query\": \"integral.*descent|descent.*integral|orbit.*affine|affine.*orbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite-presentation and integral-morphism definitions and AffineTransitionLimit factorization statements do not simultaneously produce the invariant open subfunctor, finite integral model, compatible descent datum and affine flat monomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*descent|descent.*integral|orbit.*affine|affine.*orbit",
+   "results": "{\"t\": \"2026-10-24T15:01:51Z\", \"tool\": \"grep\", \"query\": \"integral.*descent|descent.*integral|orbit.*affine|affine.*orbit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the simultaneous integral approximation diagram, the compatible sheaf representations and invariant affine flat monomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.LocallyOfFinitePresentation",
+   "results": "{\"t\": \"2026-10-24T15:01:52Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.LocallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the simultaneous integral approximation diagram, the compatible sheaf representations and invariant affine flat monomorphism."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raynaud finite approximation diagram of locally finitely presented fpqc sheaf and integral descent datum",
+   "results": "{\"t\": \"2026-10-24T15:01:52Z\", \"tool\": \"leansearch\", \"query\": \"Raynaud finite approximation diagram of locally finitely presented fpqc sheaf and integral descent datum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.IsFinite.recOn\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.Presentation.IsFinite.casesOn\"], \"digest\": \"6ae8f34e6d0cc588\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the simultaneous integral approximation diagram, the compatible sheaf representations and invariant affine flat monomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud integral descent orbit finite diagram approximation over a Noetherian affine base",
+   "results": "{\"t\": \"2026-10-24T15:01:54Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud integral descent orbit finite diagram approximation over a Noetherian affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\"], \"digest\": \"c748e5e8855b3757\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the simultaneous integral approximation diagram, the compatible sheaf representations and invariant affine flat monomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite approximation of an fpqc scheme form under an integral cover gives compatible finite integral scheme models and an invariant affine flat monomorphism",
+   "results": "{\"t\": \"2026-10-24T15:01:55Z\", \"tool\": \"leanfinder\", \"query\": \"Finite approximation of an fpqc scheme form under an integral cover gives compatible finite integral scheme models and an invariant affine flat monomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"3fa864d922a82389\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hit states the simultaneous integral approximation diagram, the compatible sheaf representations and invariant affine flat monomorphism."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+  "date": "2026-10-24",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent input: Anantharaman Proposition 4.1.1 and Proposition 4.1.3 (scan OCR 4.1.5), printed pp.54-55: integral descent criterion and descent of affine neighbourhoods; restrict to integral covers which are also fpqc. Last property clause: Stacks Tags 02KU, 02L0, 02L2, descent.tex labels lemma-descending-property-separated, lemma-descending-property-finite-presentation, lemma-descending-property-flat. Supporting argument: invariant quasi-affine charts in the proof of the integral descent criterion; Theorem 4.1 proof, reductions 1--5, printed pp.5-18--5-20, and construction of the invariant affine semilocal monomorphism at the start of reduction 6, p.5-21; over an affine Noetherian S the final approximation of S is unnecessary. Source read at https://www.numdam.org/item/SAC_1967-1968__2__A5_0.pdf; archival copy WANTED. This is the finite-diagram output, before admissibility descent, enlargement and invariant shrinking. No single Stacks tag states this simultaneous diagram assertion.",
+   "via": [
+    "lem-sfb-integral-descent-invariant-quasiaffine-charts",
+    "lem-sfb-integral-finite-fibre-fpqc-affine-descent",
+    "lem-sfb-trait-flat-group-fpqc-effectivity",
+    "lem-sfb-trait-group-space-schematicity",
+    "lem-sfb-strict-henselian-lft-group-datum-effectivity",
+    "lem-sfb-neron-strict-local-descent-base-change",
+    "lem-sfb-split-torus-translate-hull",
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-integral-orbit-finite-diagram-approximation",
+  "worker": "stage1",
+  "summary": "Seven-step finite-diagram assembly over the already Noetherian affine base; three statement-only general prerequisites for open-chart spreading, scheme-representation spreading and invariant semilocal generalization subschemes. Statement unchanged. The proof uses constructible containment on the finite fibres over x, then finite closed saturation and fpqc descent of opens; no finite-fibre hypothesis is imposed on the original T/S.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), inherited strict-local trait descent branch; Raynaud Theorem 4.1 finite-diagram reductions, below lem-sfb-integral-descent-invariant-quasiaffine-charts. Current latest blueprint read; whole imported-blueprint searches find no equivalent node. Inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+    "why": "Generic scheme tool for finite-chart approximation: Being locally of finite presentation descends along fpqc coverings (Stacks 02KY). The inherited unit does not replace this property or construction."
+   },
+   {
+    "node": "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "why": "Generic scheme tool for finite-chart approximation: An integral morphism to a quasi-compact quasi-separated scheme is a limit of finite morphisms. The inherited unit does not replace this property or construction."
+   },
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Generic scheme tool for finite-chart approximation: A constructible set containing the image of a limit contains the image of a stage. The inherited unit does not replace this property or construction."
+   },
+   {
+    "node": "lem-pd-descent-orbit-saturated",
+    "why": "Generic scheme tool for finite-chart approximation: An orbit of a cartesian descent groupoid is saturated. The inherited unit does not replace this property or construction."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Generic scheme tool for finite-chart approximation: Fpqc descent of compatible open subschemes. The inherited unit does not replace this property or construction."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-separated",
+    "why": "Generic scheme tool for finite-chart approximation: Separatedness descends along surjective universally closed morphisms. The inherited unit does not replace this property or construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-descend-locally-finite-presentation",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-pd-descent-orbit-saturated",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-weil-pbc-surjective-universally-closed-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-511cc51c2",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-511cc51c2 (reviewer sub-agent of L); spot-checked: Read in full against Raynaud, Sém. Samuel 67/68 exp. 5: Thm 4.1/4.2, Lemma 4.3 (pp.5-17/18) and the 4.1 reductions 1°–6° (pp.5-18–5-21), using the Numdam scan, read in /tmp only. Steps 1–3 follow 3°, with two valid departures: a quasi-affine V replaces the 2° reduction to separated, and a finite closed image replaces the constructible image. Step 6 follows 4°; 5° is not needed because S is Noetherian; step 7 follows 6° and 4.3. Every step and hypothesis was checked. Step 2 gets whole-fibre containment from the common-field r_0/r_1 arrow and 05F4 on the finite C_j. In step 3, Z-membership of (σ,q) does not depend on q, so Z is invariant, and z∈Z by step 2. Step 4: P_0 is fibre-saturated and invariant, and Y_0 comes from open fpqc descent. Step 5: separatedness descends along the finite surjection Z_A→P_0 (09MQ), and P_0 is quasi-compact. Step 6: all hypotheses of representation spreading hold. Step 7: base-change image gives the incidence. The three new nodes are true and are not duplicates (rg -L over the DAG). Chart and representation spreading: F is limit-preserving because P is lfp; spread (01ZM), the open immersion or isomorphism holds at a stage after base change by A, then fpqc-local. Semilocal node: localize at the complement of ∪p_e (prime avoidance); going up along the integral r_0 gives r_0^{-1}Gen E = r_1^{-1}Gen E, and the localization subfunctor is {H: im ⊆ Gen E}, so the two pullbacks agree as subfunctors. Edge cases checked: E empty (zero ring), comparable points. No node restates the item. The six declared tool_uses are generic and accepted. FIX (E1): step 4 never verified that F_0 is an fpqc sheaf, which step 6's representation spreading requires. The fix adds the two-line check from surjective base change; it changes step 4 text only and adds no new uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralOrbitFiniteDiagramApproximation",
+  "declaration": "AlgebraicGeometry.integralOrbitFiniteDiagramApproximation",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralOrbitFiniteDiagramApproximation.lean",
+  "statement": "theorem integralOrbitFiniteDiagramApproximation {S A T : Scheme.{u}} [IsAffine S] [IsAffine A] [IsNoetherian S] (p : A ⟶ S) [Flat p] [Surjective p] [QuasiCompact p] (F : (Over S)ᵒᵖ ⥤ Type (u + 1)) (_hF : Presheaf.IsSheaf (Scheme.fpqcTopology.over S) F) (P : Over A) [LocallyOfFinitePresentation P.hom] (rP : ((Over.map p).op ⋙ F).RepresentableBy P) (t : T ⟶ S) [IsIntegralHom t] [Surjective t] (Y : Over T) (rY : ((Over.map t).op ⋙ F).RepresentableBy Y) (_horbit : ∀ y : Y.left, ∃ U : Y.left.Opens, (∃ (H : Scheme.{u}) (_ : IsAffine H) (i : U.toScheme ⟶ H), IsOpenImmersion i ∧ QuasiCompact i) ∧ rY.overDescentDatum.toHom '' (pullback.fst (Y.hom ≫ t) t ⁻¹' {y}) ⊆ (U : Set Y.left)) (x : P.left) : ∃ (F₀ : Subfunctor F) (P₀ : P.left.Opens) (Y₀ : Y.left.Opens) (hx : x ∈ P₀), (∀ (H : Over A) (f : H ⟶ P), rP.homEquiv f ∈ F₀.obj (op ((Over.map p).obj H)) ↔ Set.range f.left ⊆ (P₀ : Set P.left)) ∧ (∀ (H : Over T) (f : H ⟶ Y), rY.homEquiv f ∈ F₀.obj (op ((Over.map t).obj H)) ↔ Set.range f.left ⊆ (Y₀ : Set Y.left)) ∧ ∃ (B Q : Over S) (_ : IsAffine B.left) (_ : IsAffine Q.left) (a : A ⟶ B.left) (ha : a ≫ B.hom = p) (tQ : T ⟶ Q.left), tQ ≫ Q.hom = t ∧ LocallyOfFinitePresentation B.hom ∧ QuasiCompact B.hom ∧ QuasiSeparated B.hom ∧ IsFinite Q.hom ∧ Surjective Q.hom ∧ ∃ (X : Over B.left) (Z : Over Q.left) (rX : ((Over.map B.hom).op ⋙ F₀.toFunctor).RepresentableBy X) (rZ : ((Over.map Q.hom).op ⋙ F₀.toFunctor).RepresentableBy Z) (k : P₀.toScheme ⟶ X.left) (hk : k ≫ X.hom = (P₀.ι ≫ P.hom) ≫ a), IsSeparated X.hom ∧ LocallyOfFinitePresentation X.hom ∧ QuasiCompact X.hom ∧ QuasiSeparated X.hom ∧ IsSeparated Z.hom ∧ LocallyOfFinitePresentation Z.hom ∧ QuasiCompact Z.hom ∧ QuasiSeparated Z.hom ∧ IsPullback k (P₀.ι ≫ P.hom) X.hom a ∧ F.map (Over.homMk k (by change k ≫ (X.hom ≫ B.hom) = (P₀.ι ≫ P.hom) ≫ p rw [← Category.assoc, hk, Category.assoc, ha]) : Over.mk ((P₀.ι ≫ P.hom) ≫ p) ⟶ (Over.map B.hom).obj X).op (rX.homEquiv (𝟙 X)).val = rP.homEquiv (Over.homMk P₀.ι rfl : Over.mk (P₀.ι ≫ P.hom) ⟶ P) ∧ ∃ (g : pullback (Z.hom ≫ Q.hom) B.hom ⟶ X.left) (hg : g ≫ X.hom = pullback.snd (Z.hom ≫ Q.hom) B.hom), IsPullback g (pullback.fst (Z.hom ≫ Q.hom) B.hom ≫ Z.hom) (X.hom ≫ B.hom) Q.hom ∧ IsFinite g ∧ IsIntegralHom g ∧ Surjective g ∧ F₀.toFunctor.map (Over.homMk g (by change g ≫ (X.hom ≫ B.hom) = pullback.snd (Z.hom ≫ Q.hom) B.hom ≫ B.hom rw [← Category.assoc, hg]) : Over.mk (pullback.snd (Z.hom ≫ Q.hom) B.hom ≫ B.hom) ⟶ (Over.map B.hom).obj X).op (rX.homEquiv (𝟙 X)) = F₀.toFunctor.map (Over.homMk (pullback.fst (Z.hom ≫ Q.hom) B.hom) (pullback.condition) : Over.mk (pullback.snd (Z.hom ≫ Q.hom) B.hom ≫ B.hom) ⟶ (Over.map Q.hom).obj Z).op (rZ.homEquiv (𝟙 Z)) ∧ (∀ (H : Scheme.{u}) (w₁ w₂ : H ⟶ pullback (Z.hom ≫ Q.hom) B.hom) (he : w₁ ≫ g = w₂ ≫ g) (hq : (w₁ ≫ pullback.fst (Z.hom ≫ Q.hom) B.hom ≫ Z.hom) ≫ Q.hom = (w₂ ≫ pullback.fst (Z.hom ≫ Q.hom) B.hom ≫ Z.hom) ≫ Q.hom), (rZ.overDescentDatum.transport _ _ hq (Over.homMk (w₁ ≫ pullback.fst (Z.hom ≫ Q.hom) B.hom) rfl)).left = w₂ ≫ pullback.fst (Z.hom ≫ Q.hom) B.hom) ∧ ∃ (L : Scheme.{u}) (_ : IsAffine L) (j : L ⟶ Z.left), QuasiCompact j ∧ Flat j ∧ IsIso (pullback.diagonal j) ∧ (∀ z z' : Z.left, z' ⤳ z → z ∈ Set.range j → z' ∈ Set.range j) ∧ (∀ (H : Scheme.{u}) (q₁ q₂ : H ⟶ Q.left) (hq : q₁ ≫ Q.hom = q₂ ≫ Q.hom) (z : Over.mk q₁ ⟶ Z), (∃ l : H ⟶ L, l ≫ j = z.left) ↔ ∃ l : H ⟶ L, l ≫ j = (rZ.overDescentDatum.transport q₁ q₂ hq z).left) ∧ k ⟨x, hx⟩ ∈ g '' Set.range (pullback.map (j ≫ Z.hom ≫ Q.hom) B.hom (Z.hom ≫ Q.hom) B.hom j (𝟙 B.left) (𝟙 S) (by simp) (by simp))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb8741282",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read node (only lean field differs from side-live), all 13 stmt_dep records, the module, report (Worker report + Second reading by NH), upstream DescentDatum.lean (DescentDatum transport form, toHom, overTransport/overDescentDatum) and Mathlib fpqcTopology/over/RepresentableBy. Clause check: affine Noetherian S, fpqc p (Flat/Surjective/QuasiCompact), fpqc sheaf F in Type (u+1) (project convention), P lfp with rP, integral surjective t with rY, r0=pullback.fst, r1=overDescentDatum.toHom, quasi-affine orbit hypothesis as qc open immersion into affine H; (1) open subfunctor via range-iff clauses over all tests for P0 and Y0; (2) B affine fp, a over S, Q affine finite surjective, T->Q->S; (3) X/B, Z/Q separated fp, rX, rZ, P0 = X x_B A as IsPullback plus section equation (pins k), Z_B = X x_S Q as IsPullback plus hg and section equality (canonical), g finite integral surjective, datum compatibility via transports of w1,w2 with equal g-coordinate (hq implied, not restrictive); (4) L affine, j qc flat with diagonal iso, generalization-stable image (direction checked), subfunctor invariance over all tests, incidence via pullback.map j_B. Edge cases: empty schemes and tests, non-qc/non-separated P,Y, single universe. Gates: statement verbatim, sorry-only, no hollow defs, docstrings with source, blueprint id and 7 proof steps, lines <=100, proof-dep plain imports. Not compiled (no change). Advisory: overDescentDatum is tagged for lem-pd-canonical-descent-datum, which is not a stmt_dep; 5 landed statements do the same, tolerated. Advisory to maintainer: proof step 1 uses chart spreading without the P-quasi-separated hypothesis added by Q105 7e7f; stage-1/3 proof issue, not the statement."
+ }
+}

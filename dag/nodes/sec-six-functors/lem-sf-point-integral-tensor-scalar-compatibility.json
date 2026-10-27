@@ -1,0 +1,149 @@
+{
+ "id": "lem-sf-point-integral-tensor-scalar-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Proof, final compact-support specialization over Spec k: identifying the point tensor with derived coefficient modules.",
+   "via": [
+    "lem-sf-point-integral-completed-tensor-comparisons",
+    "lem-sf-point-fibre-derived-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Scalar square from normalized Roos coordinates",
+ "statement": "Fix D, l!=p and finite coefficient extensions E,L with an embedding i:E->L. For any integral tensor data I_E,I_L and canonical witnesses C_E,C_L [def-sf-point-fibre-tensor-models], their actual completion maps satisfy PointIntegralTensorScalarSquare [def-sf-point-integral-scalar-square]. This is a chain-coordinate identity and does not construct the tensor data or canonical witnesses.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0941, lemma-derived-limit-is-ok. For derived completeness use algebra.tex, Tag 031B, lemma-when-finite-module-complete-over-complete-ring."
+ },
+ "stmt_deps": [
+  "def-sf-point-fibre-tensor-models",
+  "def-sf-point-integral-scalar-square"
+ ],
+ "proof": [
+  {
+   "text": "evaluate both sides in each finite quotient first coordinate. The defining\nnormalization of scalarTensorTower and scalarTensorLevel sends the scalar-extended\nquotient tensor generator to the quotient tensor of the extended entries. Balance\nmoves the two scalar coefficients to their product a*b, giving equality there.\nIn the shifted coordinate both sides vanish: the source completion has zero\nshifted coordinate and the diagonal scalarRoosMap and integralOperationsRoosMap\npreserve that coordinate, including the product projection. The product projections\nare jointly monic after sections, since section evaluation and scalar restriction\npreserve products. Finally the two biproduct coordinates of mappingCocone are\njointly monic, so the two displayed sections agree. This is an identity of actual\nchain representatives, independent of the derived monoidal data.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0941, lemma-derived-limit-is-ok. For derived completeness use algebra.tex, Tag 031B, lemma-when-finite-module-complete-over-complete-ring."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 0941; concrete separation of the integral comparison chain construction, derived descent and scalar square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "PointIntegralTensorData|perfectTensorRoos|pointRingedEvaluation",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"tensor\"",
+   "results": "12 hits; AdicCompletion.ofTensorProduct, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.ofTensorProductInvOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProduct_tmul; digest 9a64c003247c7a50",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact geometric point sections compare completed derived tensor with ordinary tensor using Roos completion",
+   "results": "8 hits; AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProduct_naturality, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; digest 516ffa8368fd997d",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of a tensor completion augmentation preserves its finite quotient coordinates and zero shifted cone coordinate",
+   "results": "8 hits; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_surjective_of_finite, lTensor.toFun, MvPolynomial.rTensor_apply_tmul_apply, CochainComplex.augmentTruncate; digest 5255e1329a4ff0f9",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarTensorChain|tensorOperationUnit|scalarRoosMap",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension commutes with tensor quotient augmentation in the Roos mapping cocone",
+   "results": "8 hits; ModuleCat.extendScalars, ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj', LinearMap.extendScalarsOfIsLocalizationEquiv, TensorProduct.AlgebraTensorModule.restrictScalars_lTensor, Submodule.Quotient.isScalarTower, IsLocalizedModule.mapExtendScalars.congr_simp, LinearEquiv.extendScalarsOfIsLocalizationEquiv; digest 34d254c625a6ff13",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\", \"map\"",
+   "results": "12 hits; CochainComplex.mappingCocone.inl, CochainComplex.mappingCocone.inr, CochainComplex.mappingCocone.snd, CochainComplex.mappingCocone, CochainComplex.mappingCocone.triangle, CochainComplex.mappingCocone.triangle_obj₂, CochainComplex.mappingCocone.triangle_obj₃, CochainComplex.mappingCocone.descCochain; digest 2b038a24554a2ab6",
+   "date": "2026-10-25",
+   "verdict": "No match: these results do not give the normalized point Roos tensor augmentation, its derived descent, or its scalar square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointIntegralCompletedTensorComparisons",
+  "group": "A8",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.Paper.PointIntegralTensorScalarCompatibility",
+  "file": "lean/Sheaf/Paper/PointIntegralTensorScalarCompatibility.lean",
+  "declaration": "WeilConjectures.pointIntegralTensorScalarCompatibility",
+  "statement": "theorem pointIntegralTensorScalarCompatibility\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (ι : E →ₐ[ℚ_[l]] L)\n    (I₁ : PointIntegralTensorData D l hl E) (I₂ : PointIntegralTensorData D l hl L)\n    (C₁ : PointIntegralTensorCanonical D l hl E I₁)\n    (C₂ : PointIntegralTensorCanonical D l hl L I₂) :\n    PointIntegralTensorScalarSquare D l hl E L ι I₁ I₂ C₁ C₂",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T205850-L-3379278",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261025T205850-L-3379278",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

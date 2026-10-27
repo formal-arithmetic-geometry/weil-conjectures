@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-completed-constant-comparison-is-iso",
+ "kind": "statement",
+ "title": "Invertibility of the specified tensor-to-limit map",
+ "statement": "With X,A,I,C,H,phi as in [def-weil-pbc-completed-constant-projection-maps], let N be a finite C-module. The concrete map completedConstantComparisonMap, whose finite projections were constructed and proved compatible independently of finiteness, is an isomorphism. This statement supplies only invertibility: it neither constructs the map nor asserts any naturality or completed-scalar identities.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 093J--093M, together with more-algebra.tex Tag 0912 (lemma-limit-flat)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-completed-constant-projection-maps"
+ ],
+ "proof": [
+  {
+   "text": "The completion C is Noetherian, so the finite module N admits a finite free presentation C^m -> C^n -> N -> 0.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual additive realization and completion functors and their natural comparison. For a finite free module, its coordinate projections p_i and inclusions q_i satisfy sum(p_i q_i)=id. If the rank-one comparison is invertible, the sum G(p_i) alpha_C^(-1) F(q_i) is inverse to alpha_(C^n); naturality and additivity verify both composites. This also treats n=0.",
+   "uses": [
+    "def-weil-pbc-completed-constant-completion-functor",
+    "lem-weil-pbc-completed-constant-rank-one-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realization preserves finite colimits, and completion preserves the cokernel of the presentation by right exactness for finite modules. The comparison on its two finite free vertices is invertible by the preceding coordinate calculation. Apply the natural-transformation colimit comparison to this cokernel cocone, obtaining invertibility on N. Its component is definitionally the fixed completedConstantComparisonMap.",
+   "uses": [
+    "def-weil-pbc-completed-constant-completion-functor",
+    "lem-weil-pbc-completed-constant-completion-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "def-weil-pbc-completed-constant-completion-functor",
+  "lem-weil-pbc-completed-constant-rank-one-comparison",
+  "lem-weil-pbc-completed-constant-completion-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-presentation argument of Tag 093K, applied to the natural comparison and its actual cokernel diagrams; right exactness is the sectionwise calculation of Tags 093J--093M and More on Algebra Tag 0912"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension from constant adic completion to completed constant sheaf and limit of finite quotient modules",
+   "results": "Ordinary AdicCompletion tensor equivalences, no matching sheaf statement.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
+   "results": "Ordinary completion comparison; no canonical finite sheaf projections or sheaf tensor-to-limit comparison.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*tensor|tensor.*constant in the two project roots",
+   "results": "ConstantModuleSectionProperties supplies the ordinary constant-section tensor comparison; CompletedConstantSheafReduction supplies tensor adjunction helpers. Neither states this canonical map or its invertibility.",
+   "date": "2026-10-27",
+   "verdict": "use existing ingredients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedConstantFiniteModuleComparison",
+  "date": "2026-10-27",
+  "group": "R1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-completed-constant-finite-module-comparison",
+   "place": "finite-presentation tensor-to-limit invertibility step"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedConstantComparisonIsIso",
+  "file": "lean/Sheaf/Paper/CompletedConstantComparisonIsIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedConstantComparisonMap_isIso",
+  "statement": "theorem completedConstantComparisonMap_isIso (X : Scheme.{u})\n    {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)\n    (φ : adicLisseConstantRing X (AdicCompletion I A) ⟶ adicLisseCompletedRing X I)\n    (hφ : ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem X I) (op n) =\n      (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map\n        (CommRingCat.ofHom (AdicCompletion.evalₐ I (n + 1)).toRingHom))\n    (N : ModuleCat.{u + 1} (AdicCompletion I A))\n    (_hN : Module.Finite (AdicCompletion I A) N) :\n    IsIso (completedConstantComparisonMap X I φ hφ N)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261027T034731-L-3680206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T054604-L-967842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

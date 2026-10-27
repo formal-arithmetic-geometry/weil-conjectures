@@ -1,0 +1,184 @@
+{
+ "id": "lem-pur-regular-coordinate-fibre-dimension-formula",
+ "kind": "statement",
+ "title": "Dimension formula on a regular coordinate fibre",
+ "statement": "Let p:X→S be smooth [def-sbc-smooth-morphisms], i:Y→X a closed immersion [def-weil-closed-immersion], a,b natural numbers, h:X→A^(a+b)_S an S-map and v:Y→A^a_S etale [def-weil-etale-morphism]. Assume the square with v,i,h and the inclusion A^a_S→A^(a+b)_S setting the last b coordinates to zero is cartesian [def-pc-base-change], and the pullbacks of those b coordinates form a weakly regular sequence on every affine open of X [def-weil-pbc-regular-sequence]. For y in Y, put x=i(y), s=p(x), and let m:X_s→(A^(a+b)_S)_s be the canonical fibre map, with z the point of X_s corresponding to x. Put L=O_(X_s,z), T=O_((A^(a+b)_S)_s,m(z)), and φ=m_z^#:T→L. Then dim L = dim T + dim(L/m_T L), with Krull dimension [def-weil-pbc-krull-dimension-ring] and m_T the maximal ideal of T. This is only a numerical dimension equality; it asserts neither flatness nor etaleness.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, lemma-etale-local-structure, final paragraph, dimension comparison and finite local fibre"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-etale-morphism",
+  "def-pc-base-change",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Choose affine base and source charts at the image of y. The cartesian square identifies Y with the quotient by the last b coordinate functions. The ambient algebra is flat and finitely presented over the base because p is smooth; the quotient is flat because v is etale and affine-space projection is smooth. Localize at i(y). The equations are in the maximal ideal, so the given weak regularity is regularity. Apply relative regular-equation base change to the residue field of the base. This gives a regular sequence of length b in L, the local ring of the fibre of p, with quotient D, the local ring of the fibre of Y. Smoothness over the field makes L Noetherian regular local.",
+   "uses": [
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-pur-relative-regular-equations-base-change",
+    "lem-pc-smooth-flat",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, passage to X_s and Y_s; divisors.tex Tag 0FUD"
+   }
+  },
+  {
+   "text": "Let T be the local ring of the fibre of affine (a+b)-space at the image of the chosen fibre point. It is a localization of a polynomial ring over the residue field, hence Noetherian regular local. Its last b variables are a regular sequence, since each successive quotient is a polynomial algebra in the remaining variables and localization preserves injectivity. They lie in the maximal ideal at this point, and their quotient is Q, the local ring of affine a-space at v(y). The dimension-drop formula applied b times to the two sequences gives dim L=b+dim D and dim T=b+dim Q. For b=0 both quotient identifications are identities.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, two dimension-drop equalities; algebra.tex Tag 00KW"
+   }
+  },
+  {
+   "text": "Base change preserves etaleness of v. Apply the affine etale comparison and etale local-dimension equality to get dim D=dim Q. The two dimension-drop equalities give dim L=dim T.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE; more-algebra.tex Tag 07QP"
+   }
+  },
+  {
+   "text": "By the cartesian square, the closed fibre of T to L is the closed fibre of Q to D: the coordinate equations vanish in the residue field of T. This is a local ring of a fibre of the etale base change of v, so it is a finite separable field extension and has dimension zero. Thus dim L = dim T + dim(L/m_T L), which is precisely the displayed formula for the stalk map of the canonical pullback map. Every identification is induced by the original maps, so the ideal in the formula is the image of the actual source maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, final sentence; morphisms.tex Tag 02GL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-pur-relative-regular-equations-base-change",
+  "lem-pc-smooth-flat",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, lemma-etale-local-structure, final paragraph, dimension comparison and finite local fibre"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The dimensions of local rings on a smooth scheme and affine space agree along an etale regular coordinate fibre",
+   "results": "Found ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim and its QuotSMulTop variant, IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim, and general smooth-chart results. No scheme-level dimension comparison for a cartesian coordinate slice.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; the dimension-drop ingredient is already a dependency"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cartesian regular coordinate slice of a smooth scheme whose slice map is etale, the local fibre rings have equal Krull dimensions and zero dimensional closed fibre",
+   "results": "Found Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, standard-smooth charts and relative dimension; none compares these actual fibre-stalk rings.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ringKrullDim",
+   "results": "Found ringKrullDim, ringKrullDim_quotient_le, ringKrullDim_eq_of_ringEquiv, and finite-dimension bounds; no coordinate-slice formula.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*dimension|dimension.*coordinate",
+   "results": "Mathlib search returned only analytic/combinatorial coordinate results. Direct repository searches found the parent EtaleNearRegularCoordinateFibre and the quasi-finite PolynomialChartFibreDimensions API, which does not give the regular-coordinate quotient dimension comparison.",
+   "date": "2026-10-26",
+   "verdict": "no exact duplicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleNearRegularCoordinateFibre",
+  "date": "2026-10-26",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-smooth-pair-local-coordinates",
+   "place": "Tag 0FUE, final paragraph, dimension comparison before miracle flatness",
+   "via": [
+    "lem-pur-etale-near-regular-coordinate-fibre"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RegularCoordinateFibreDimensionFormula",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularCoordinateFibreDimensionFormula.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.fibre_dimension_formula_of_regular_coordinate_fibre",
+  "statement": "theorem Scheme.Hom.fibre_dimension_formula_of_regular_coordinate_fibre\n    {S X Y : Scheme.{u}} (p : X ⟶ S) [Smooth p] (i : Y ⟶ X)\n    [IsClosedImmersion i] (a b : ℕ)\n    (h : X ⟶ AffineSpace (ULift.{u} (Fin (a + b))) S)\n    (v : Y ⟶ AffineSpace (ULift.{u} (Fin a)) S) [Etale v]\n    (hh : h ≫ (AffineSpace (ULift.{u} (Fin (a + b))) S ↘ S) = p)\n    (H : IsPullback v i\n      (AffineSpace.homOfVector (AffineSpace (ULift.{u} (Fin a)) S ↘ S)\n        (fun j ↦ Fin.addCases (fun k ↦ AffineSpace.coord S (ULift.up k))\n          (fun _ ↦ 0) j.down)) h)\n    (hreg : ∀ W : X.affineOpens,\n      RingTheory.Sequence.IsWeaklyRegular Γ(X, W)\n        (List.ofFn (fun j : Fin b ↦\n          X.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op\n            (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j)))))))\n    (y : Y) :\n    let q := AffineSpace (ULift.{u} (Fin (a + b))) S ↘ S\n    let s := p (i y)\n    let m := pullback.map p (S.fromSpecResidueField s) q (S.fromSpecResidueField s)\n      h (𝟙 _) (𝟙 S) (by simpa only [Category.comp_id] using hh.symm) (by simp)\n    let z := p.asFiber (i y)\n    ringKrullDim ((p.fiber s).presheaf.stalk z) =\n      ringKrullDim ((q.fiber s).presheaf.stalk (m z)) +\n        ringKrullDim (((p.fiber s).presheaf.stalk z) ⧸\n          (IsLocalRing.maximalIdeal ((q.fiber s).presheaf.stalk (m z))).map\n            (m.stalkMap z).hom)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T091548-L-3353544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261026T091548-L-3353544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -3,7 +3,9 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q153
 -/
-import Sheaf.AlgebraicGeometry.LogFanChartBlowup
+module
+
+public import Sheaf.AlgebraicGeometry.LogFanChartBlowup
 
 /-!
 # Strict étale functorial log blowup procedures
@@ -19,6 +21,8 @@ All log maps, centers, and identity/composition laws are retained as data or pre
 
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
+
+@[expose] public section
 
 universe u
 

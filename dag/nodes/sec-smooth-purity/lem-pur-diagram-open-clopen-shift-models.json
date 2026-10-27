@@ -1,0 +1,273 @@
+{
+ "id": "lem-pur-diagram-open-clopen-shift-models",
+ "kind": "statement",
+ "title": "Section models for open and clopen integer-shift squares on ring diagrams",
+ "statement": "Let $C_1\\leftarrow C_2\\leftarrow\\cdots$ be an inverse sequence of commutative rings. For a scheme $W$ choose a small skeleton of its pro-etale site and put $B_{n,W}=(C_n)_W$. Let $\\mathscr S_W$ be the abelian category of strict semilinear module systems: objects are $B_{n,W}$-module sheaves $M_n$ with $B_{n+1,W}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$, and morphisms commute with transitions. Identify it with modules over $B_\\bullet$ on the simultaneous ringed diagram site and use $D(\\mathscr S_W)$, the ordinary unbounded derived category [lem-coef-semilinear-derived-sections]. For a scheme morphism $v$ let $P_v$ be exact termwise inverse image. For a complex $M$, use $M[r]^p=M^{p+r}$ with differential $(-1)^r d_M$, and give $P_v$ its termwise shift comparison.\n\nFor an open immersion $j$ use exact termwise extension by zero $J_j\\dashv P_j$, normalized by the open unit which is identity on localized sections [lem-sf-open-tensor-normalization], and equip $J_j$ with termwise shifts. For every $v$ let $S_v$ be total right-derived system direct image, with the K-injective shift comparison, equivalently the mate of the termwise shift of $P_v$ under $P_v\\dashv S_v$. For open immersions $s:U\\hookrightarrow V'$ and $b:V'\\hookrightarrow V$ set $k=b\\circ s$. Let $c:J_bJ_s\\cong J_k$ be the canonical extension compositor and let $\\beta:P_bJ_k\\cong J_s$ be the open-unit-normalized restriction identification.\n\nThere are simultaneous termwise complex representatives of $c$ and $\\beta$, compatible with every coefficient transition and every integer shift. The compositor is the canonical transitivity identification of extensions by zero, with identity restriction to $U$ and zero on the complementary open wherever that description applies. The restriction identification has identity restriction to $U$; its inverse is precisely the $J_s\\dashv P_s$ adjunct prescribed by the normalized open base-change comparison in [lem-sf-open-tensor-normalization] for $g=b$, $j=k$, $j'=s$, $g_U=1_U$. Its degree-$p$ representative on a shifted input $M[r]$ is the degree-$(p+r)$ representative on $M$.\n\nIf $s$ is also closed, put $Z=V'\\setminus s(U)$. Restriction to $U$ and $Z$ gives a product decomposition $\\mathscr S_{V'}\\simeq\\mathscr S_U\\times\\mathscr S_Z$ which extends to ordinary unbounded complexes and their derived categories. Under this decomposition $J_s$ is $N\\mapsto(N,0)$, termwise direct image is the same exact functor, and its canonical comparison $\\delta:J_s\\cong S_s$ is the localized comparison from that exact functor to its total right-derived functor. The component projection $\\pi_s:1\\to J_sP_s$ is $(x,y)\\mapsto(x,0)$. The comparison $\\delta$ and the projection $\\pi_s$ commute with the specified shifts, including the K-injective/mate normalization on $S_s$. In the proper/open square setting of [lem-sf-semilinear-proper-open-mate-pasting], these are exactly its clopen section comparison and component projection.\n\nFor $\\tau=c,\\beta,\\delta,\\pi_s$, every integer $r$, and every input $M$, one has $\\chi_G\\tau_{M[r]}=\\tau_M[r]\\chi_F$ for the composite operation shifts of its source and target. These are natural identities in the derived category of whole semilinear systems before any evaluation or scalar restriction, coherent for adding shifts and iterating open composition. They hold also for the empty open and for identity immersions; no boundedness, coefficient flatness, normalization or constructibility assumption is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence: open/clopen identifications before transposition; retains original item steps 4-6 and the intrinsic-equality part of step 7; agent-formulated chain/section-model refinement, not a theorem quoted from the blueprint"
+ },
+ "stmt_deps": [
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-semilinear-proper-open-mate-pasting"
+ ],
+ "proof": [
+  {
+   "text": "Apply the concrete witness constructed in [lem-sf-diagram-open-model-construction]. Use the existing additive exact ordinary open functors. Define the ordinary compositor by leftAdjointCompIso and the restriction by its inverse followed by the inverse open unit. The adjunction conjugacy unit identity proves both normalization formulas. Apply derivedMate_comparison with the exact-derived hom-equivalence factorization to identify the localized compositor and inverse restriction with the specified jComp and restrictionIso. All representatives are actual natural transformations of whole systems.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-pur-derived-mate-comparison",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sf-diagram-open-model-construction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Open/clopen comparisons; categorical adjunction and localization argument implemented by J5."
+   }
+  },
+  {
+   "text": "For complementary opens, use uniqueness of section gluing to show the pair of ordinary restrictions is faithful. Exactness gives reflection of monomorphisms and epimorphisms, hence joint reflection of isomorphisms. Extension restricted to the other open is zero. The inverse to the pair of restrictions is the biproduct of the two extension functors; its unit is the pair of open units followed by biproduct inclusions, and its counit is the biproduct descent of the open counits. These are isomorphisms by the triangle identities, the cross-component zero identities and joint reflection. Repeat on complexes and on derived categories, where exact derived functors jointly reflect isomorphisms. The resulting insertion is normalized by the inverse open unit on the first component and the unique zero isomorphism on the second.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "new-lem-sp-varying-ring-module-pi-complement-zero",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Open/clopen comparisons; categorical adjunction and localization argument implemented by J5."
+   }
+  },
+  {
+   "text": "Construct the ordinary map from extension to direct image from the direct-image unit and the inverse open unit. The existing clopen isomorphism and full faithfulness show this canonical map is invertible. Compare the exact-derived adjunction with the homotopy-localized adjunction by their unit factorization equations. Localization of the ordinary transpose then identifies the map with openToS followed by the canonical exact/right-derived comparison. Define the ordinary projection as the direct-image unit followed by the inverse canonical comparison. Its localization equals pi by the same unit factorization and cancellation. The adjunction triple identity gives its first component; the complementary component is uniquely zero.",
+   "uses": [
+    "lem-sf-semilinear-clopen-unit-projector",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Open/clopen comparisons; categorical adjunction and localization argument implemented by J5."
+   }
+  },
+  {
+   "text": "The degree and shifted-degree formulas of each termwise natural transformation are definitional; its chain shift square is the standard natural-transformation shift instance. The localized open adjunction units commute with the prescribed termwise shifts. The canonical right-derived adjunction commutes with the fixed K-injective shift. The explicit unit words for jComp, restrictionIso, openToS and pi therefore commute with those shifts. Use the existing compositor associativity. Prove ordinary direct-image identity laws from the uniquely normalized section formulas and the generic pullback-site identity equations. Transfer these laws to ordinary inverse images by adjunction mates, localize using the generic identity-descent lemmas, and transfer to extension identity laws through leftAdjointCompIso. No resolution is chosen and all equalities precede coefficient evaluation.",
+   "uses": [
+    "lem-pur-exact-adjunction-unit-shift-descent",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-sf-semilinear-proper-open-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+    "place": "Open/clopen comparisons; categorical adjunction and localization argument implemented by J5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-strict-tower-direct-image-coherence",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-derived-mate-comparison",
+  "lem-pur-exact-adjunction-unit-shift-descent",
+  "lem-sf-diagram-open-model-construction",
+  "lem-sf-semilinear-clopen-unit-projector",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-localization-universal-property",
+  "new-lem-sp-varying-ring-module-pi-complement-zero"
+ ],
+ "proof_origin": {
+  "by": "C2 stage 3",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md",
+  "place": "J5: explicit biproduct gluing, canonical adjunction units and localization of mates; compiled proof route.",
+  "date": "2026-10-27",
+  "note": " The original open-model record now proves openModels_nonempty in the support module; the final theorem selects that fully proved witness. Remaining constructions and statement are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Cc]lopen|[Ee]xtension[Bb]y[Zz]ero|[Ee]xtension_by_zero|[Ss]hriek",
+   "results": "No hits; searched Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "On a ringed diagram site termwise extension by zero and clopen component projection are compatible with integer derived shifts",
+   "results": "CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.toIsCompatibleWithShift; CategoryTheory.Functor.instPreservesZeroMorphismsShift; CochainComplex.shiftShortComplexFunctorIso_zero_add_hom_app; DerivedCategory.instAdditiveShiftFunctorInt; CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt; CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism; HomotopyCategory.instLinearIntUpShiftFunctor; AlgebraicGeometry.RingedSpace.res_zero",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "CategoryTheory.NatTrans.CommShift.id; CategoryTheory.NatTrans.CommShift.isoRefl_hom; CategoryTheory.NatTrans.CommShift; CategoryTheory.Functor.CommShift.ofIso_compatibility; CategoryTheory.NatTrans.CommShift.of_core; CategoryTheory.NatTrans.CommShift.leftUnitor; CategoryTheory.NatTrans.CommShift.rightUnitor; CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero composition open restriction identification and clopen direct image comparison and component projection commute with cochain shifts for strict inverse module systems",
+   "results": "CochainComplex.ConnectData.restrictionLEIso_hom_f; CochainComplex.ConnectData.restrictionGEIso_hom_f; CochainComplex.ConnectData.restrictionLEIso_inv_f; CochainComplex.ConnectData.restrictionGEIso_inv_f; CochainComplex.ConnectData.restrictionGEIso; CochainComplex.ConnectData.restrictionLEIso; ComplexShape.Embedding.homRestrict_comp_extendMap; ComplexShape.Embedding.homRestrict_comp_extendMap_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Clopen inclusion direct image is extension by zero with canonical comparison given by identity on the open component and zero elsewhere; component projection is compatible with derived shifts",
+   "results": "ComplexShape.Embedding.liftExtend.f; ComplexShape.Embedding.liftExtendfArrowIso; Profinite.Nobeling.ι; ComplexShape.Embedding.homRestrict_comp_extendMap; ComplexShape.Embedding.homRestrict.f; ComplexShape.Embedding.liftExtend.f_eq; ComplexShape.Embedding.liftExtend_homRestrict; ComplexShape.Embedding.homRestrict_comp_extendMap_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open extension by zero composition and restriction, clopen direct image and component projection commute with shifts in the derived category of strict semilinear sheaf systems",
+   "results": "8 hits: ComplexShape.Embedding.homRestrict_comp_extendMap_assoc, ModuleCat.Tilde.toOpen_res, SheafOfModules.Presentation.map_π_eq, ComplexShape.Embedding.homRestrict_comp_extendMap, TopCat.Sheaf.extend_hom_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen|extensionByZero|extension_by_zero|shriek",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open extension by zero and clopen direct image comparison commute with cochain shifts for systems of sheaves of modules",
+   "results": "8 hits: CategoryTheory.Functor.instPreservesZeroMorphismsShift, CochainComplex.HomComplex.Cochain.rightShift_zero, CochainComplex.HomComplex.Cochain.leftUnshift_zero, CochainComplex.HomComplex.Cochain.shift_zero, CochainComplex.shiftShortComplexFunctorIso_zero_add_hom_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CochainComplex.shiftFunctorZero_hom_app_f, CochainComplex.shiftFunctorZero'",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open and closed immersion of ringed sites, sheaves of modules split as a product and extension by zero equals exact direct image, compatibly with all shifts after deriving",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-system-primitive-comparison-shift",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Maps-used sentence: open/clopen identifications before transposition; retains original item steps 4-6 and the intrinsic-equality part of step 7",
+   "via": [
+    "lem-pur-system-primitive-comparison-shift",
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-pur-diagram-open-clopen-shift-models",
+  "worker": "stage1",
+  "summary": "Proved the open compositor and normalized restriction identification using ordinary system adjunctions; assembled the clopen product equivalence from existing gluing, identified the canonical derived direct-image comparison and checked its actual K-injective/mate shift. All identities descend before evaluation. Statement and statement dependencies unchanged; all required supporting lemmas already exist, so no new nodes. Checked the empty and identity opens, arbitrary coefficient maps, signed shifts, and the ordinary unbounded localization. Repair of returned head 24c70d5b872: revalidated all current cited statements and all 30 quotation entries on the current DAG; made the adjunct domain/codomain and the two different adjunction units explicit. Delivery tool rebases the retained split onto current origin/sheaf-dag for promotion to the live DAG.",
+  "blueprint": "thm-pur-rational-and-qbar-purity via the existing primitive-comparison-shift chain: maps-used sentence of fix-prop-coherence, open/clopen identifications before transposition (item source retains original primitive proof steps 4-6 and intrinsic equality in step 7).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-clopen-ringed-module-gluing",
+    "why": "Generic finite clopen gluing for arbitrary ring sheaves, used levelwise and assembled explicitly on system transitions; the unit has no competing gluing theorem."
+   },
+   {
+    "node": "lem-pur-sequence-site-open-extension",
+    "why": "Generic identification of ordinary open extension on the sequence site with termwise system extension and its coefficient-unit compatibility."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor localization computes its total derived functor on every complex; needed to identify the clopen comparison with the specified canonical one."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Generic ringed-topos theorem identifying the K-injective right-derived shift with the unique adjunction-mate shift; applied to the sequence topos, not to change the geometric proof route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of unbounded K-injective resolutions for module sheaves on any small ringed site; applies to the actual sequence-site module category."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat resolution existence for module sheaves, supplying the resolution hypothesis of the ringed-topos derived adjunction normalization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-weil-pbc-exact-functor-derived-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-161ac5cfd",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-161ac5cfd (reviewer sub-agent of L); spot-checked: FIX. The delivery is the earlier head 24c70d5b872e rebased after its landing was refused (side completion not promoted). It adds no new nodes, and the statement, stmt_deps (3), proof_deps (16), source and tool_uses are unchanged. The earlier review's FIX was lost and is re-applied here. The fault (C1): Step 3 uses lem-sf-open-tensor-normalization, whose beta is stated with the total left-derived pullbacks Lb^* and L1_U^*, but the step treats them as the exact termwise P_b and the identity without citing the comparison. I added that sentence and lem-weil-pbc-exact-functor-derived-functor (already in proof_deps and the tool_uses) to Step 3's uses. The head's own rewording of Steps 3 and 6 is correct and kept: the adjunct is now M->P_kJ_kM->P_sP_bJ_kM, and the open unit u_s (identity) is now kept apart from the direct-image unit eta_s, which is the projection (A,B)->(A,0). The old snapshot is gone, so I re-read all 16 cited statements in full in this snapshot. The open-normalization node covers arbitrary strict-system diagram topoi. The clopen gluing node allows any ring sheaf, and the transitions were checked per n. s_* has sections N(TxU), so s_*=J_s and is exact. delta=t_s by the clopen unit-projector node (transpose of id is u_s^{-1}). The proper/open mate-pasting node uses J_s=S_s and pi_s by name. The K-injective shift and the mate shift agree by the K-injective shift, derived-adjunction-shift, K-injective-resolution and K-flat-resolution nodes on the small sequence site. Descent of the equations uses clause (3) of the localization universal property. Small cases checked: U empty, Z empty, identity opens, r=0, r=-1, r+t, and the nonflat map Z/4->Z/2. There is no SGA anywhere. Duplicate search over dag/nodes (clopen, shift, compositor or extension by zero) found only nodes over finite or constant coefficients, so same_as [] stands. Batch 5: lem-trf-adjoint-composition-coherence is Mathlib adjunction associativity, and lem-pod-derived-exact-square-composition is pasting of exact-functor derived squares. Both are generic tools and neither is a step of the trace formula or Poincare duality, so both are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagramOpenClopenShiftModels",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.diagramOpenClopenShiftModels",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.pullShift",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.extensionShift",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.directShift",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.TermwiseModel",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.restrictionIso",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.OpenModels",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.ClopenModels",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.Models",
+   "AlgebraicGeometry.ProEtale.SemilinearProperOpen.DiagramShift.diagramOpenClopenShiftModels"
+  ],
+  "file": "lean/Sheaf/Paper/DiagramOpenClopenShiftModels.lean",
+  "statement": "theorem diagramOpenClopenShiftModels : Nonempty (Models C τ)",
+  "branch": "newtargets-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": " C2: unchanged structures and generic exact-localization proofs are publicly re-exported from DiagramOpenClopenShiftCore. The original concrete open-model record literal proves openModels_nonempty in DiagramOpenClopenShiftOpenSupport; the final theorem selects this fully proved witness. The original gluing calculations remain beside the final clopen model. No new hole or construction assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c215feb9",
+  "group": "Q123",
+  "result": "fix",
+  "note": "Read the item node, report, module and the dependency declarations (openToS, pi, jComp, jAdj, pComp, adj, R with its K-injective shift, rightDerivedFunctorIsoMapDerivedCategory). The record diff is lean-only and the statement is verbatim. The compositor, beta (adjunct pinned), delta (localized exact comparison composed with the canonical iso), the four NatTrans.CommShift shift identities, the adjunction shift agreement and the composition coherence are all correct. H3 fixed: the clopen insertion isos were free, so the (x,y)->(x,0) clauses only said that P_s pi is some iso. I added ordinaryInsertion_unit and derivedInsertion_unit (U-component = inverse normalized open unit), so the clauses now say exactly P_s pi = u_s; both are checked true. The statement field is unchanged. The fixed file compiles via nt_compile in 13.5 s. Advisory: unused plain import CanonicalRightDerivedAdjunctionShift."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-e213b",
+  "group": "C2",
+  "result": "fix",
+  "landing": "20261027T021259-L-2752245",
+  "kind": "interface",
+  "note": "independent cc review: 13 delivered Lean files (sandbox-compiled OK) and 32 direct importers (all compile; timings equal to published without artifact writing) against the item/graph/diagram nodes and clone originals; headers and public bodies identical; axioms checked"
+ }
+}

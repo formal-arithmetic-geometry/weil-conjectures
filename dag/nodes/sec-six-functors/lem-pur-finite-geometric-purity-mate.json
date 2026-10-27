@@ -1,0 +1,229 @@
+{
+ "id": "lem-pur-finite-geometric-purity-mate",
+ "kind": "statement",
+ "title": "Finite semilinear purity exchange is the compact-support counit mate",
+ "statement": "Fix a finite field $k_0=\\mathbf F_q$ of characteristic $p$, its algebraic closure $k$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-pur-conventions]. Let $X_0,Y_0$ be separated finite-type $k_0$-schemes, $f_0:X_0\\to Y_0$ a separated finite-type morphism, and $f:X=X_0\\times_{k_0}k\\to Y=Y_0\\times_{k_0}k$ its base change, smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms, def-weil-finite-type-morphism, def-weil-proper-morphism]. Let $g_T=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for $T=X,Y$, with $\\gamma=\\operatorname{Frob}_q$ geometric Frobenius [def-pur-scheme-geometric-frobenius]. Work on the small pro-etale sites.\n\nFix $n\\geq1$, $A=\\mathcal O_E/\\varpi_E^n$, and $K\\in D^b_{ctf}(Y,A)$. Write $P=Lg_Y^*$, $Q=Lg_X^*$, $F=Rf_!\\dashv G=Rf^!$ with counit $\\varepsilon$ [def-weil-exceptional-inverse-image], $H(K)=Lf^*K(d)[2d]$, and $\\Gamma_K=\\gamma_{f,K}:HK\\simeq GK$ [def-pur-smooth-purity-map]. Let $B_M:PFM\\to FQM$ be canonical compact-support exchange for the first Cartesian square of [def-pur-scheme-geometric-frobenius], using a compactification and its base change [def-exchange-projection]. Let $b_K:QHK\\simeq HPK$ be pullback composition, tensor and shift comparison with the roots-of-unity Tate comparison $\\tau_d:QA_X(d)\\simeq A_X(d)$ [def-weil-frobenius-coefficient-twists]. Define $e_K:QGK\\to GPK$ to be the adjoint transpose of $P(\\varepsilon_K)\\circ B_{GK}^{-1}$.\n\nThen $B$ is an isomorphism on the bounded constructible finite-Tor domain. Give the source copies of $T=X,Y$ the structural maps $\\operatorname{Spec}(\\gamma)\\circ a_T$ and denote them by $T^{\\langle\\gamma\\rangle}$. These are separated finite-type $k$-schemes, $g_T:T^{\\langle\\gamma\\rangle}\\to T$ and the retagged $f^{\\langle\\gamma\\rangle}$ are $k$-morphisms, and their square is Cartesian. Under identity of the underlying sites, the same underlying compactification, and the counit-preserving identification of right adjoints, both the diagonal orientation and the tensor-map transpose defining purity for $f^{\\langle\\gamma\\rangle}$ agree with those for $f$. The finite exceptional base change for this retagged square is $e_K$, and in $D(X_{\\mathrm{proet}},A)$ one has\n$$e_K\\circ Q(\\Gamma_K)=\\Gamma_{PK}\\circ b_K,\\qquad e_K=\\Gamma_{PK}\\circ b_K\\circ(Q\\Gamma_K)^{-1}.$$\nThe Tate comparison in this equality is the specified $\\tau_d$, with no additional scalar factor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "Current equivariance proof Step 1 and Step 2; returned proof Steps 1–2: retagging, orientation, tensor transpose and finite counit-mate identification"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-smooth-purity-map",
+  "def-exchange-projection",
+  "def-weil-frobenius-coefficient-twists",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-composition-comparisons",
+  "lem-weil-frobenius-square-cartesian",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing etale-origin proof for M and RM and transport along the specified realization units to obtain etale presentations of N(M) and N(RM). Their bounded representatives are chosen only inside this proof; no data definition chooses an arbitrary witness.",
+   "uses": [
+    "def-pur-finite-geometric-purity-coordinates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "geometricPurityMap_factors writes Gamma_M=a_M;t_M and Gamma_RM=a_RM;t_RM. Apply the tensor exchange to Q(t_M);e_M, reassociate, and apply the orientation exchange to Q(a_M);S_M;(1 tensor e_omega). This proves Q(Gamma_M);e_M=b_M;Gamma_RM.",
+   "uses": [
+    "lem-pur-finite-geometric-purity-factorization",
+    "lem-pur-finite-geometric-orientation-exchange",
+    "lem-pur-finite-geometric-tensor-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The exceptional image GM is bounded below of etale origin by the existing exceptional functor preservation theorem; the coordinate compact-support exchange theorem therefore proves B_GM invertible. The existing smooth-purity isomorphism makes Q Gamma invertible. Precompose the first equality with its inverse and cancel, proving the literal inverse-purity formula.",
+   "uses": [
+    "def-pur-finite-geometric-purity-coordinates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-geometric-purity-coordinates",
+  "lem-pur-finite-geometric-purity-factorization",
+  "lem-pur-finite-geometric-orientation-exchange",
+  "lem-pur-finite-geometric-tensor-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.md",
+  "place": "Clauses (1)--(2), with explicit fixed-scalar factorization, counit-mate invertibility and categorical cancellation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The diagonal orientation and tensor purity map are unchanged by changing the ground field structure; geometric Frobenius purity exchange equals the counit mate",
+   "results": "[leanfinder] OK 8 hit(s); IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar; PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable; TensorProduct.counit_tmul; contractLeft_assoc_coevaluation'; IsBaseChange.toDualBaseChange_tmul; IsPurelyInseparable.exists_pow_mem_range_tensorProduct; contractLeft_assoc_coevaluation; Algebra.FormallyUnramified.one_tmul_mul_elem",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor, ring Frobenius and ordinary module adjunction hits do not state semilinear etale purity or identify its canonical exchange with the compact-support counit mate"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|purity.*[Ff]robenius|semilinear.*purity",
+   "results": "[grep] OK 0 hit(s); No hits",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor, ring Frobenius and ordinary module adjunction hits do not state semilinear etale purity or identify its canonical exchange with the compact-support counit mate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity and compact support adjunction commute with geometric Frobenius",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.frobeniusMorphism; WittVector.verschiebung_frobenius_comm; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; RingHom.iterateFrobenius_comm; AlgebraicGeometry.IsSmooth.casesOn; MonoidHom.map_iterate_frobenius; RingHom.frobenius_comm; CategoryTheory.frobeniusMorphism_mate",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic tensor, ring Frobenius and ordinary module adjunction hits do not state semilinear etale purity or identify its canonical exchange with the compact-support counit mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient etale smooth purity under semilinear geometric Frobenius is the adjoint mate of compact support base change",
+   "results": "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.Etale.exists_subalgebra_fg; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.etaleLocus_eq_compl_support; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Etale.baseChange; Algebra.IsEtaleAt.comp; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul",
+   "date": "2026-10-22",
+   "verdict": "no match: commutative algebra etale presentations and Kaehler base change do not state the semilinear derived purity/counit-mate identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "Lean.Compiler.LCNF.Purity; Lean.Compiler.LCNF.tacticPurity_tac; Lean.Compiler.LCNF.Purity.impure; Lean.Compiler.LCNF.Purity.pure; Lean.Compiler.LCNF.instDecidableEqPurity; Lean.Compiler.LCNF.instHashablePurity; Lean.Compiler.LCNF.instInhabitedPurity; Lean.Compiler.LCNF.instToStringPurity; Lean.Compiler.LCNF.instHashablePurity.hash; Lean.Compiler.LCNF.Decl.castPurity!; Lean.Compiler.LCNF.Purity.withAssertPurity; Lean.Compiler.LCNF.getPurity",
+   "date": "2026-10-22",
+   "verdict": "no match: Lean compiler purity indices are unrelated to etale smooth purity"
+  },
+  {
+   "tool": "grep",
+   "query": "smoothPurity|purity.*[Ff]robenius|semilinear.*purity",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state finite derived semilinear purity with its specified orientation and compact-support counit mate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity base change is the adjoint transpose of inverse compact support exchange",
+   "results": "8 hits: TopCat.Presheaf.pushforwardToOfIso, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, Algebra.Smooth.baseChange, Algebra.IsStandardSmoothOfRelativeDimension.baseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.FormallySmooth.isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state finite derived semilinear purity with its specified orientation and compact-support counit mate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "12 hits: Lean.Compiler.LCNF.Purity, Lean.Compiler.LCNF.tacticPurity_tac, Lean.Compiler.LCNF.Purity.impure, Lean.Compiler.LCNF.Purity.pure, Lean.Compiler.LCNF.instDecidableEqPurity, Lean.Compiler.LCNF.instHashablePurity, Lean.Compiler.LCNF.instInhabitedPurity, Lean.Compiler.LCNF.instToStringPurity",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state finite derived semilinear purity with its specified orientation and compact-support counit mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite coefficient smooth etale purity commutes with geometric Frobenius via compact support counit mate",
+   "results": "8 hits: Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state finite derived semilinear purity with its specified orientation and compact-support counit mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing a scheme ground field structure preserves diagonal orientation and the tensor map defining exceptional inverse image",
+   "results": "8 hits: AlgebraicGeometry.diagonal_Spec_map, AlgebraicGeometry.diagonal_SpecMap, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal_respectsIso, AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: these results do not state finite derived semilinear purity with its specified orientation and compact-support counit mate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pur-weil-equivariance-of-purity-and-trace",
+  "date": "2026-10-22",
+  "group": "Q150"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-weil-equivariance-of-purity-and-trace",
+   "place": "Current equivariance proof Step 1 and Step 2; returned proof Steps 1–2: retagging, orientation, tensor transpose and finite counit-mate identification",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-finite-geometric-purity-mate",
+  "worker": "stage1",
+  "summary": "Expanded finite semilinear purity exchange into retagging geometry, unchanged compact-support and projection constructions, counit-preserving adjoint identification, existing diagonal-orientation invariance, finite orientation/tensor base-change identities, and explicit roots-of-unity normalization. No new nodes or statement changes.",
+  "blueprint": "thm-pur-weil-equivariance-of-purity-and-trace.proof.md Steps 1–2: the finite purity square and identification of its exceptional comparison as the compact-support counit mate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Generic The Frobenius square of a k_0-morphism is Cartesian used with its exact stated domain in this finite semilinear specialization; the package unit imports smooth purity/base change and does not replace this tool by a different route."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic Right adjoints are unique up to a unique counit-compatible isomorphism used with its exact stated domain in this finite semilinear specialization; the package unit imports smooth purity/base change and does not replace this tool by a different route."
+   },
+   {
+    "node": "det-sp-purity-bc-factors",
+    "why": "Generic Base change of the orientation and of the tensor map used with its exact stated domain in this finite semilinear specialization; the package unit imports smooth purity/base change and does not replace this tool by a different route."
+   },
+   {
+    "node": "lem-pur-roots-of-unity-inverse-image-iso",
+    "why": "Generic Roots-of-unity comparison: transition compatibility and isomorphism along isomorphisms used with its exact stated domain in this finite semilinear specialization; the package unit imports smooth purity/base change and does not replace this tool by a different route."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site used with its exact stated domain in this finite semilinear specialization; the package unit imports smooth purity/base change and does not replace this tool by a different route."
+   },
+   {
+    "node": "thm-pur-finite-coefficient-smooth-purity",
+    "why": "Generic Finite-coefficient smooth purity used with its exact stated domain in this finite semilinear specialization; the package unit imports smooth purity/base change and does not replace this tool by a different route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The valuation-ring and finite-residue-field facts justify the finite ell-power torsion hypotheses of the general finite-ring base-change tool; the package unit has no separate arithmetic coefficient lemma."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-201c9ecda",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-201c9ecda (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes, statement unchanged from the Q150 re-split node, where it carries the parent's old Steps 1–2. Sources read: sk-prop-sp-purity-bc-factors.md, its _section.md (the exceptional base change is the transpose of the pulled-back counit composed with the inverse of compact-support base change) and the parent's proof Steps 1–2. No SGA. Step checks: (1) retagging: a_T g_T = Spec(γ) a_T from lem-weil-frobenius-square-cartesian, so g_T and f^<γ> are k-morphisms and the square stays Cartesian. (2) F is literally the same functor, and det-sp-unique-right-adjoint gives ρ with ε F ρ = ε^γ. (3) The finite clause of lem-pur-orientation-ground-field-retagging with σ = γ gives Π^γ = Π r. (4) Tensor transposes hand-checked, giving ρ Γ^γ = Γ. (5) A is finite and ℓ^n A = 0 by the DVR lemma. The mate identity e = ρ e' checked by transposing. (6) The composition algebra is correct. (8) Cancellation is correct. Fault C4 at Steps 6–7: det-sp-purity-bc-factors(i) uses the det-sp-finite-general-ring twist μ_{ℓ^n}⊗A and the orientation scalar-extended from Z/ℓ^n, not A_{E,n}(d) and Π_f, but the step silently set a = Π^{-1}. FIX: Step 6 now cites lem-pur-twist-sheaf-locally-free(2),(3) for Z_ℓ(1)⊗Z/ℓ^n ≅ μ_{ℓ^n}, det-sp-finite-general-ring(2) for agreement with the direct-A diagonal orientation of thm-pur-diagonal-dualizing-object, and def-pur-co-smoothness for the tensor maps; it is now elementary false. Step 7 now cites lem-asd-etale-finite-twist-pullback for λ and uses roots-of-unity clause (1) to match the level-n projection. All four added citations are on the unit route, there is no cycle and the batch-5 closure is unchanged. Edge cases tried: d=0, K=0, empty schemes, f=id, n=1, ramified E. All seven tool_uses accepted as generic. Batch-5 flags: lem-pur-orientation-ground-field-retagging and det-sp-purity-bc-factors reach lem-trf-site-functorial-flat-resolution only through det-sp-scalar-extension-functor. That node is generic homological algebra (functorial flat resolutions of module sheaves), not part of the trace formula or Poincaré duality, so both are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteGeometricPurityMate",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteGeometricPurityMate",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteGeometricPurityMate"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteGeometricPurityMate.lean",
+  "statement": "theorem finiteGeometricPurityMate\n    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology (P.frobeniusFiber Y₀).left)\n      (ModuleCat.{u + 1} P.Coefficient)))\n    (hM : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos\n      (P.frobeniusFiber Y₀).left\n      ((Scheme.sfIntrinsicDerivedEquivalence (P.frobeniusFiber Y₀).left P.Ring).functor.obj M)) :\n    IsIso (P.geometricPurityB (P.frobeniusMap f₀) (P.frobeniusFiber Y₀).hom\n      (P.frobeniusGaloisMap X₀) (P.frobeniusGaloisMap Y₀)\n      (P.field.frobenius_square_cartesian X₀ Y₀ f₀).2.2.2.2.2.1\n      ((P.smoothPurityExceptionalOver (P.frobeniusMap f₀)\n        (P.frobeniusFiber Y₀).hom).obj M)) ∧\n    (P.smoothPurityPullback (P.frobeniusGaloisMap X₀)).map\n        (P.geometricPurityMap (P.frobeniusMap f₀) d M hM) ≫\n      P.geometricPurityMate X₀ Y₀ f₀ M hM =\n      (P.geometricPuritySource X₀ Y₀ f₀ d M).hom ≫\n        P.geometricPurityMap (P.frobeniusMap f₀) d\n          ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M)\n          (P.geometricPurityInput Y₀ M hM) ∧\n    P.geometricPurityMate X₀ Y₀ f₀ M hM =\n      ((P.smoothPurityPullback (P.frobeniusGaloisMap X₀)).mapIso\n        (P.geometricPurityIso (P.frobeniusMap f₀) d M hM)).inv ≫\n      (P.geometricPuritySource X₀ Y₀ f₀ d M).hom ≫\n        P.geometricPurityMap (P.frobeniusMap f₀) d\n          ((P.smoothPurityPullback (P.frobeniusGaloisMap Y₀)).obj M)\n          (P.geometricPurityInput Y₀ M hM)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The existing coordinate API is publicly reexported from FiniteGeometricPurityCoordinates, attached to def-pur-finite-geometric-purity-coordinates. The final assertion is assembled from independent inverse-orientation and tensor-transpose exchange identities, with explicit etale presentations and cancellation of Q Gamma."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f5cf22a5",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Clause-by-clause check against node and dependency declarations. P,Q=smoothPurityPullback along g_Y/g_X; F=rightDerivedLowerShriekOfCompactification at the chosen compactification; G=smoothPurityExceptionalOver; eps=published rightDerivedUpperShriekCounit; Gamma=recorded smoothPurityTensorMap composite conjugated by realization units; B=published proper/open base-change map plus canonical EtaleOriginIso compactification comparison; e pinned by B≫F e≫eps=P eps (equivalent to transpose of P eps∘B^-1); b pinned by root charts with gamma(zeta) target (correct: g_X^# sends a_X^#zeta to a_X^#gamma(zeta); zeta-independence holds). Both displayed equalities typed and ordered correctly; retagging clauses (Cartesian, same compactification, orientation via aY-dependent normalization, tensor map, counit) present. Mechanical finding: FrobeniusSquareCartesian module has no defs; the item passes the theorem's IsPullback and commutation proofs into geometricPurityB/PullbackSquare, so the statement genuinely depends on its conclusion: PASS on that point. No hollow defs, sorry-only proofs with docstrings, statement verbatim, all 36 declarations present, actual ProEt topology, no extra hypotheses, edge cases d=0/empty/K=0/n=1/ramified E ok. Both report sections present. No file changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6b78f",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261026T200200-L-3295475",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clone (byte-identical); FiniteGeometricPurityCoordinates vs clone FiniteGeometricPurityMate (verbatim extraction + 4 rfl private lemmas + 3 helpers made public); 4 new node lean.statements vs Lean text; two sorry statements read for truth against the parent equation and the published base-change map definitions"
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "id": "lem-trf-filtration-successor-maps-independent",
+ "kind": "statement",
+ "title": "Successor maps independent modulo preceding filtration stages have an injective sum",
+ "statement": "Let $R$ be a commutative ring, $X$ an $R$-module, $\\kappa$ a set ordinal, and $(X_\\beta)_{\\beta\\leq\\kappa}$ an increasing family of $R$-submodules of $X$. For each $\\alpha<\\kappa$ let $A_\\alpha$ be an $R$-module and $t_\\alpha:A_\\alpha\\to X_{\\alpha+1}$ an $R$-linear map. Put $D=\\bigoplus_{\\alpha<\\kappa}A_\\alpha$ using [def-weil-pbc-direct-sum-modules], and let $f:D\\to X$ be the $R$-linear map $f((a_\\alpha))=\\sum_{\\alpha\\in\\operatorname{supp}(a)}t_\\alpha(a_\\alpha)$, with each value included in $X$. Assume for every $\\alpha<\\kappa$ and $a\\in A_\\alpha$ that $t_\\alpha(a)\\in X_\\alpha$ implies $a=0$. Then $f$ is injective: for every finitely supported family $(a_\\alpha)$, the equality $\\sum_\\alpha t_\\alpha(a_\\alpha)=0$ implies $a_\\alpha=0$ for all $\\alpha<\\kappa$. This assertion does not require $X_0=0$, exhaustion $X_\\kappa=X$, continuity at limit stages, or generation of the successor stages.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058V, lemma-direct-sum-devissage, proof lines 20435–20453: injectivity from independence of each new summand from its predecessor; equivalent maximal finite-support formulation, for arbitrary maps injective modulo the preceding stage."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-direct-sum-modules], an element $a$ of $D$ has finite support $S=\\{\\alpha<\\kappa:a_\\alpha\\ne0\\}$. The displayed sum defining $f$ is linear: for addition sum over the finite union of the two supports and use additivity of every $t_\\alpha$; for scalar multiplication use the same finite support and $t_\\alpha(ra_\\alpha)=rt_\\alpha(a_\\alpha)$, allowing zero terms.",
+   "uses": [
+    "def-weil-pbc-direct-sum-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, injectivity paragraph, lines 20435–20453; finite-support reformulation."
+   }
+  },
+  {
+   "text": "Let $f(a)=0$. If $S$ is empty then all coordinates vanish. Otherwise a nonempty finite set in a linear order has a largest element: for a singleton take its element, and on adjoining one element replace the old largest element by the larger of the two. Apply this finite-set induction to the ordinal order to obtain $\\gamma=\\max S<\\kappa$, with $a_\\gamma\\ne0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, injectivity paragraph, lines 20435–20453; finite-support reformulation."
+   }
+  },
+  {
+   "text": "For every $\\alpha\\in S\\setminus\\{\\gamma\\}$, maximality gives $\\alpha<\\gamma$, hence $\\alpha+1\\le\\gamma$. Since the filtration is increasing, $t_\\alpha(a_\\alpha)\\in X_{\\alpha+1}\\subseteq X_\\gamma$. Closure of the submodule $X_\\gamma$ under addition (induct on the finite number of terms) and negation therefore gives $-\\sum_{\\alpha\\in S\\setminus\\{\\gamma\\}}t_\\alpha(a_\\alpha)\\in X_\\gamma$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, injectivity paragraph, lines 20435–20453; finite-support reformulation."
+   }
+  },
+  {
+   "text": "Separating the $\\gamma$ term in $f(a)=0$ gives $t_\\gamma(a_\\gamma)=-\\sum_{\\alpha\\in S\\setminus\\{\\gamma\\}}t_\\alpha(a_\\alpha)\\in X_\\gamma$. The assumed implication for $t_\\gamma$ forces $a_\\gamma=0$, contradicting $\\gamma\\in S$. Thus $S$ must be empty, so every coordinate of every element sent to zero is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, injectivity paragraph, lines 20435–20453; finite-support reformulation."
+   }
+  },
+  {
+   "text": "If $f(a)=f(b)$, linearity gives $f(a-b)=0$. The preceding steps give $a_\\alpha-b_\\alpha=0$ for every $\\alpha$, hence $a=b$ as families. Thus $f$ is injective. If $\\kappa=0$ there are no coordinates and the same argument applies. Only monotonicity, finite support and the stated successor implication were used; the four additional conditions excluded in the statement are unnecessary.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 058V, lemma-direct-sum-devissage, injectivity paragraph, lines 20435–20453; finite-support reformulation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-sum-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 058V, lemma-direct-sum-devissage, injectivity paragraph: replace its transfinite induction by the maximal finite-support argument for the weaker stated hypotheses."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "iSupIndep|injective.*toModule|toModule.*injective|linearIndependent.*[Oo]rdinal|[Oo]rdinal.*linearIndependent",
+   "results": "{\"t\": \"2026-10-22T06:45:16Z\", \"tool\": \"grep\", \"query\": \"iSupIndep|injective.*toModule|toModule.*injective|linearIndependent.*[Oo]rdinal|[Oo]rdinal.*linearIndependent\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/DFinsupp.lean\", \"Mathlib/LinearAlgebra/Projectivization/Independence.lean\", \"Mathlib/LinearAlgebra/Projectivization/Independence.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\"], \"digest\": \"2c480e1fc6c5553e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: iSupIndep.dfinsupp_lsum_injective and its iff require independence from the sum of ALL other submodules as an input; deriving it from the one-sided filtration hypothesis is the argument here. DirectSum.lmap_injective is about componentwise maps between direct sums; DirectSum.of_injective concerns one summand, and toAddMonoid_injective compares two maps. Nobeling declarations concern good products over Z, not arbitrary module maps. Read Mathlib/LinearAlgebra/DFinsupp.lean:480–565 and Mathlib/Algebra/DirectSum/Module.lean:505–527."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, Function.Injective",
+   "results": "{\"t\": \"2026-10-22T06:45:17Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"DirectSum.toAddMonoid_injective\", \"DirectSum.of_injective\", \"DirectSum.map_injective\", \"DirectSum.mk_injective\", \"DirectSum.lmap_injective\", \"AddChar.directSum_injective\"], \"digest\": \"3fa23831f574a53b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: iSupIndep.dfinsupp_lsum_injective and its iff require independence from the sum of ALL other submodules as an input; deriving it from the one-sided filtration hypothesis is the argument here. DirectSum.lmap_injective is about componentwise maps between direct sums; DirectSum.of_injective concerns one summand, and toAddMonoid_injective compares two maps. Nobeling declarations concern good products over Z, not arbitrary module maps. Read Mathlib/LinearAlgebra/DFinsupp.lean:480–565 and Mathlib/Algebra/DirectSum/Module.lean:505–527."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sum of module maps indexed by an ordinal is injective if the image of each map is disjoint from a submodule containing all earlier images",
+   "results": "{\"t\": \"2026-10-22T06:45:17Z\", \"tool\": \"leansearch\", \"query\": \"The sum of module maps indexed by an ordinal is injective if the image of each map is disjoint from a submodule containing all earlier images\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iSupIndep_iff_dfinsupp_lsum_injective\", \"iSupIndep_of_dfinsupp_lsum_injective\", \"DirectSum.lmap_injective\", \"iSupIndep.dfinsupp_lsum_injective\", \"iSupIndep.dfinsuppSumAddHom_injective\", \"Submodule.map_add_le\", \"DirectSum.map_injective\", \"iSupIndep_iff_dfinsuppSumAddHom_injective\"], \"digest\": \"6e8f4b336a99cefd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: iSupIndep.dfinsupp_lsum_injective and its iff require independence from the sum of ALL other submodules as an input; deriving it from the one-sided filtration hypothesis is the argument here. DirectSum.lmap_injective is about componentwise maps between direct sums; DirectSum.of_injective concerns one summand, and toAddMonoid_injective compares two maps. Nobeling declarations concern good products over Z, not arbitrary module maps. Read Mathlib/LinearAlgebra/DFinsupp.lean:480–565 and Mathlib/Algebra/DirectSum/Module.lean:505–527."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linear independence of a well ordered family of module maps when each image is disjoint from the preceding filtration stage, using the largest nonzero finite support",
+   "results": "{\"t\": \"2026-10-22T06:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"Linear independence of a well ordered family of module maps when each image is disjoint from the preceding filtration stage, using the largest nonzero finite support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.linearIndependent_comp_of_eval\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_union_smaller\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_smaller\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_sum\", \"Profinite.NobelingProof.GoodProducts.linearIndependent\", \"Profinite.NobelingProof.GoodProducts.linearIndependentAux\", \"iSupIndep.linearIndependent\", \"Profinite.NobelingProof.GoodProducts.linearIndependent_iff_range\"], \"digest\": \"b246aebaec3403b3\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: iSupIndep.dfinsupp_lsum_injective and its iff require independence from the sum of ALL other submodules as an input; deriving it from the one-sided filtration hypothesis is the argument here. DirectSum.lmap_injective is about componentwise maps between direct sums; DirectSum.of_injective concerns one summand, and toAddMonoid_injective compares two maps. Nobeling declarations concern good products over Z, not arbitrary module maps. Read Mathlib/LinearAlgebra/DFinsupp.lean:480–565 and Mathlib/Algebra/DirectSum/Module.lean:505–527."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An increasing ordinal indexed family of submodules and maps t_alpha into X_(alpha+1) such that t_alpha(a) in X_alpha implies a=0 give an injective sum map from the direct sum",
+   "results": "{\"t\": \"2026-10-22T06:45:32Z\", \"tool\": \"leanfinder\", \"query\": \"An increasing ordinal indexed family of submodules and maps t_alpha into X_(alpha+1) such that t_alpha(a) in X_alpha implies a=0 give an injective sum map from the direct sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"iSupIndep.dfinsupp_lsum_injective\", \"DirectSum.lmap_injective\", \"Module.DirectLimit.lift_injective\", \"iSupIndep_iff_dfinsupp_lsum_injective\", \"iSupIndep_of_dfinsupp_lsum_injective\", \"DirectSum.of_injective\", \"Profinite.NobelingProof.GoodProducts.maxToGood_injective\", \"Profinite.NobelingProof.GoodProducts.injective_sum_to\"], \"digest\": \"28cd22de86322eb7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: iSupIndep.dfinsupp_lsum_injective and its iff require independence from the sum of ALL other submodules as an input; deriving it from the one-sided filtration hypothesis is the argument here. DirectSum.lmap_injective is about componentwise maps between direct sums; DirectSum.of_injective concerns one summand, and toAddMonoid_injective compares two maps. Nobeling declarations concern good products over Z, not arbitrary module maps. Read Mathlib/LinearAlgebra/DFinsupp.lean:480–565 and Mathlib/Algebra/DirectSum/Module.lean:505–527."
+  },
+  {
+   "tool": "grep",
+   "query": "iSupIndep.*[Ll]inear[Oo]rder|iSupIndep.*[Ww]ell|[Ff]iltration.*[Ii]njective|[Ii]njective.*[Ff]iltration",
+   "results": "{\"t\": \"2026-10-23T10:52:13Z\", \"tool\": \"grep\", \"query\": \"iSupIndep.*[Ll]inear[Oo]rder|iSupIndep.*[Ww]ell|[Ff]iltration.*[Ii]njective|[Ii]njective.*[Ff]iltration\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: componentwise direct-sum injections and iSupIndep criteria do not derive independence from the one-sided filtration hypothesis; Nobeling and Hahn strata results have different objects and hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite sum of maps into increasing submodules is injective if each map is injective modulo all preceding submodules",
+   "results": "{\"t\": \"2026-10-23T10:52:13Z\", \"tool\": \"leansearch\", \"query\": \"A finite sum of maps into increasing submodules is injective if each map is injective modulo all preceding submodules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.lmap_injective\", \"DirectSum.map_injective\", \"iSupIndep.dfinsupp_lsum_injective\", \"Sum.map_injective\", \"iSupIndep_iff_dfinsupp_lsum_injective\", \"iSupIndep_of_dfinsupp_lsum_injective\", \"Submodule.map_add_le\", \"iSupIndep.dfinsuppSumAddHom_injective\"], \"digest\": \"63952d74c3638512\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: componentwise direct-sum injections and iSupIndep criteria do not derive independence from the one-sided filtration hypothesis; Nobeling and Hahn strata results have different objects and hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum, Function.Injective",
+   "results": "{\"t\": \"2026-10-23T10:52:13Z\", \"tool\": \"loogle\", \"query\": \"DirectSum, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"DirectSum.toAddMonoid_injective\", \"DirectSum.of_injective\", \"DirectSum.map_injective\", \"DirectSum.mk_injective\", \"DirectSum.lmap_injective\", \"AddChar.directSum_injective\"], \"digest\": \"3fa23831f574a53b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: componentwise direct-sum injections and iSupIndep criteria do not derive independence from the one-sided filtration hypothesis; Nobeling and Hahn strata results have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of the sum of maps into successive stages of an ordinal indexed filtration, each injective modulo the preceding stage",
+   "results": "{\"t\": \"2026-10-23T10:52:14Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of the sum of maps into successive stages of an ordinal indexed filtration, each injective modulo the preceding stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.GoodProducts.injective_sum_to\", \"Profinite.NobelingProof.injective_πs'\", \"Profinite.NobelingProof.injective_πs\", \"Profinite.NobelingProof.GoodProducts.maxToGood_injective\", \"Profinite.NobelingProof.succ_mono\", \"Profinite.NobelingProof.GoodProducts.injective\", \"CategoryTheory.OrthogonalReflection.iteration_map_succ_injectivity\", \"CantorScheme.Disjoint.map_injective\"], \"digest\": \"82c7469533ea07d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: componentwise direct-sum injections and iSupIndep criteria do not derive independence from the one-sided filtration hypothesis; Nobeling and Hahn strata results have different objects and hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "iSupIndep|linearIndependent.*[Oo]rdinal|[Oo]rdinal.*linearIndependent",
+   "results": "{\"t\": \"2026-10-23T10:54:11Z\", \"tool\": \"grep\", \"query\": \"iSupIndep|linearIndependent.*[Oo]rdinal|[Oo]rdinal.*linearIndependent\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dimension/Finite.lean\", \"Mathlib/LinearAlgebra/Dimension/Finite.lean\", \"Mathlib/LinearAlgebra/Dimension/Finite.lean\", \"Mathlib/LinearAlgebra/Dimension/Finite.lean\", \"Mathlib/LinearAlgebra/Dimension/Finite.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Pi.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Basic.lean\"], \"digest\": \"c4681e2271d4a86f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: componentwise direct-sum injections and iSupIndep criteria do not derive independence from the one-sided filtration hypothesis; Nobeling and Hahn strata results have different objects and hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A well ordered family of submodules is independent if every submodule is disjoint from the sum of its predecessors",
+   "results": "{\"t\": \"2026-10-23T10:54:13Z\", \"tool\": \"leanfinder\", \"query\": \"A well ordered family of submodules is independent if every submodule is disjoint from the sum of its predecessors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DirectSum.IsInternal.submodule_iSupIndep\", \"iSupIndep_iff_forall_dfinsupp\", \"iSupIndep.linearIndependent\", \"iSupIndep_iff_finset_sum_eq_zero_imp_eq_zero\", \"HahnEmbedding.ArchimedeanStrata.iSupIndep_stratum\", \"HahnEmbedding.ArchimedeanStrata.iSupIndep_stratum'\", \"IsNoetherian.disjoint_partialSups_eventually_bot\", \"iSupIndep_of_dfinsupp_lsum_injective\"], \"digest\": \"055904aaaee89814\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: componentwise direct-sum injections and iSupIndep criteria do not derive independence from the one-sided filtration hypothesis; Nobeling and Hahn strata results have different objects and hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-split-transfinite-module-filtration",
+  "date": "2026-10-22",
+  "group": "Q80"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Within the imported ancestor proof clause “In the proof of Tag 0593, Lemma 0590 reduces to countable generation by Theorem 058Y (theorem-projective-direct-sum)”: the proof of Tag 058Y invokes Theorem 058X (theorem-kaplansky-direct-sum). Tag 058V, lemma-direct-sum-devissage, lines 20409–20453, with the dévissage of Definition 058U (definition-devissage) indexed by the successor ordinal kappa+1 to include the endpoint. Re-split of lem-trf-split-transfinite-module-filtration: Tag 058V, lemma-direct-sum-devissage, proof lines 20435–20453: injectivity from independence of each new summand from its predecessor; equivalent maximal finite-support formulation, for arbitrary maps injective modulo the preceding stage.",
+   "via": [
+    "lem-trf-split-transfinite-module-filtration",
+    "lem-trf-projective-kaplansky-direct-summand",
+    "lem-trf-projective-countable-decomposition",
+    "lem-trf-projective-over-local-free",
+    "lem-trf-local-universal-injective-residue",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-filtration-successor-maps-independent",
+  "worker": "stage1",
+  "summary": "Q77 preserves the statement and its sole statement dependency. Five elementary steps construct the finite-sum map, select a maximal nonzero support index, place all earlier terms in its predecessor stage, apply the hypothesis for a contradiction, and deduce injectivity by subtraction. No new nodes or Mathlib leaves; all additional searches are logged.",
+  "blueprint": "Refines only the Tag 058V algebra helper in the inherited ancestry of lem-trf-local-term-locality, specifically the injectivity paragraph of lemma-direct-sum-devissage. The latest blueprint ancestor now follows contracting correspondences; this local algebra split neither changes that route nor reasserts the obsolete stalk argument."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-249e8801f",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-249e8801f (reviewer sub-agent of L); spot-checked: I read the item and the Stacks 058V lemma-direct-sum-devissage proof (algebra.tex ~20409-20455) in full. The statement is unchanged and true. I tested kappa=0, kappa=1, a limit kappa, a plateau X_a=X_{a+1}, and a two-equal-maps example showing the hypothesis is needed. The five elementary steps work: a finite-support maximum gamma<kappa; alpha<gamma gives alpha+1<=gamma, so by monotonicity every earlier term lies in X_gamma; the hypothesis at gamma then gives a_gamma=0, a contradiction; injectivity follows by subtraction. The only cited node, def-weil-pbc-direct-sum-modules, states finite support and componentwise operations, which is what step 1 uses. proof_deps equals the union of uses. There are no new nodes, no route or tool_uses issue and no SGA. In live and side-live the item is still unsplit with no repair note, so this is not a superseded or re-split case. The parent split-transfinite-module-filtration step 4 cites this item with matching A_a and t_a. The DAG grep found no duplicate. The Mathlib searches are genuine, and iSupIndep.dfinsupp_lsum_injective / DirectSum.lmap_injective are not one-line matches. proof_origin agent is the right label for the reorganised source argument. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.FiltrationSuccessorMapsIndependent",
+  "declaration": "Module.directSum_toModule_injective_of_filtration_successor_maps",
+  "file": "lean/Sheaf/LinearAlgebra/FiltrationSuccessorMapsIndependent.lean",
+  "statement": "theorem directSum_toModule_injective_of_filtration_successor_maps (R : Type u) [CommRing R] (X : Type v) [AddCommGroup X] [Module R X] (κ : Ordinal.{w}) (F : Set.Iic κ → Submodule R X) (hmono : Monotone F) (A : Set.Iio κ → Type z) [∀ α, AddCommGroup (A α)] [∀ α, Module R (A α)] (t : ∀ α : Set.Iio κ, A α →ₗ[R] F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩) (hind : ∀ (α : Set.Iio κ) (a : A α), (t α a : X) ∈ F ⟨α.val, le_of_lt (a := α.val) (b := κ) α.property⟩ → a = 0) : Function.Injective (DirectSum.toModule R (Set.Iio κ) X (fun α ↦ (F ⟨Order.succ α.val, Order.succ_le_of_lt (a := α.val) (b := κ) α.property⟩).subtype.comp (t α)))",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-864262cf7",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: increasing F over Set.Iic κ, maps t α into the successor stage, independence modulo the preceding stage, injective DirectSum.toModule; the four excluded conditions are absent; universes u v w z bound; lean.statement verbatim. Math checked against Stacks 058V lines 20405-20455; edge cases κ=0, κ=1, limit κ, equal adjacent stages, zero ring. No Mathlib/project duplicate (iSupIndep needs two-sided independence). Interface compatible with parent split-transfinite-module-filtration (Q91 Lean). No defs, proof sorry, docstrings and imports fine, stmt_deps unchanged, node differs from live only by lean. Nothing compiled (no file changed). Advisory: second-reading section is a placeholder under the direct-delivery policy."
+ }
+}

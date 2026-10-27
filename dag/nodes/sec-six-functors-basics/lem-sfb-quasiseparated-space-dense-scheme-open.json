@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-quasiseparated-space-dense-scheme-open",
+ "kind": "statement",
+ "title": "A dense open scheme in a relatively quasi-separated algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $Y$ an algebraic space over $S$ [def-trf-algebraic-space], with point topology [def-a1-space-point-topology]. Suppose the representable diagonal $Y\\to Y\\times_S Y$ is quasi-compact on scheme tests: its pullback along every scheme mapping to $Y\\times_S Y$ is a quasi-compact morphism of schemes, meaning that inverse images of quasi-compact opens are quasi-compact. Then there exist a scheme $V$ over $S$ and an open immersion $j:V\\to Y$ such that $|j|$ identifies $|V|$ homeomorphically with an open dense subset of $|Y|$. Here open immersion means a representable morphism whose pullback to every scheme is an open immersion [def-weil-open-immersion], and dense means that the closure is all of $|Y|$. No quasi-compactness, finite-type, or Noetherian hypothesis is imposed. The empty space is allowed.",
+ "source": {
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 086U, theorem-decent-open-dense-scheme, with Tag 03JX, lemma-bounded-fibres, and definition-very-reasonable: quasi-separated spaces are decent. Relative quasi-separatedness over a scheme is reduced over affine open subsets of the base to this absolute condition; take the union of the resulting open schematic loci."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Let $V=Y_{\\mathrm{sch}}$ be the largest schematic open given by [lem-sfb-space-largest-schematic-open]. It suffices to show that every nonempty open subset $O\\subseteq|Y|$ meets $|V|$. By [lem-a1-space-etale-open-image] the open $O$ is an open subspace $Y_O$. Apply [lem-a1-space-affine-atlas-open-cover] to $Y_O$ and choose a nonempty member $X$ with affine surjective etale atlas $a:U\\to X$ whose composite to $S$ factors through an affine open $B\\subseteq S$. Thus $U$ is nonempty, $X$ is open in $Y$, and $X\\to B$ is defined.",
+   "uses": [
+    "lem-sfb-space-largest-schematic-open",
+    "lem-a1-space-etale-open-image",
+    "lem-a1-space-affine-atlas-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tags 03JH (lemma-subscheme), 03BZ (lemma-open-subspaces), 03FY (lemma-union-of-quasi-compact); reduction in Tag 03JI."
+   }
+  },
+  {
+   "text": "Put $R=U\\times_XU$. The map $R\\to U\\times_BU$ is the pullback of the relative diagonal $\\Delta_{Y/S}$: on any test scheme both sides parametrize two sections of $U$ with equal images in $Y$. Equality in $Y$ is equality in its open subfunctor $X$, and equality of their maps to $S$ is equality to $B$. Fibre products are supplied by [lem-trf-space-fibre-products-etale-covers]. By [lem-weil-pbc-fibre-product-affine-spectra], $U\\times_BU$ is affine, hence quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. The hypothesis on $\\Delta_{Y/S}$ therefore makes $R$ quasi-compact. The projection $R\\to U$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), since $U$ is affine and quasi-separated. By [lem-sfb-space-qs-atlas-criterion], $X$ is absolutely quasi-separated.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-qs-atlas-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S4 (lemma-quasi-separated); affine-base reduction of the relative hypothesis, using the diagonal pullback formula."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-qc-etale-fibre-bound] to the affine (hence quasi-compact) scheme $U$ and the quasi-separated space $X$. It gives a bound $N$ for geometric fibre cardinalities of $a$. Also $a$ is quasi-compact by [lem-sfb-space-qcqs-permanence](1). The affine scheme $U$ is absolutely separated by [lem-weil-pbc-affine-source-morphism-separated], applied to its structure map. Hence [lem-a1-separated-etale-chart] makes $a$ separated. All hypotheses of [lem-sfb-space-etale-closed-degree-loci] are now satisfied: $D_r=\\{x:|U_{\\bar x}|\\leq r\\}$ is closed for every $r\\geq0$.",
+   "uses": [
+    "lem-sfb-space-qc-etale-fibre-bound",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-a1-separated-etale-chart",
+    "lem-sfb-space-etale-closed-degree-loci"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tags 03JX (lemma-bounded-fibres), 03JT (lemma-U-universally-bounded), 07S8 (lemma-quasi-compact-reasonable-stratification)."
+   }
+  },
+  {
+   "text": "Surjectivity and nonemptiness of $X$ imply that some geometric fibre is nonempty and every fibre is nonempty. The nonempty finite set of attained cardinalities, contained in $\\{1,\\ldots,N\\}$, has a largest member $d\\geq1$. Thus $T=|X|\\setminus D_{d-1}$ is nonempty and open, and every fibre over $T$ has exactly $d$ points. Realize $T$ as an open subspace by [lem-a1-space-etale-open-image]. Its pullback $U_T=U\\times_XT$ is an open subscheme of $U$ by the definition of open subspace. The morphism $a_T:U_T\\to T$ remains surjective etale by [lem-trf-space-fibre-products-etale-covers], and quasi-compact by [lem-sfb-space-quasicompact-affine-tests]. Its diagonal is the base change of the closed diagonal of $a$, so is closed by [lem-weil-pbc-closed-immersion-base-change].",
+   "uses": [
+    "lem-a1-space-etale-open-image",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JI (proposition-reasonable-open-dense-scheme), maximum-degree open; Tag 07S8."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-constant-degree-etale-finite] with degree $d$ to $a_T$. Its source is a scheme, it is quasi-compact separated etale, and its geometric fibres have exactly $d$ points. It is finite locally free on scheme tests. Since $U_T$ is an open subscheme of the affine scheme $U$, [lem-sfb-finite-locally-free-open-affine-cover] implies that $T$ is a scheme. It is a nonempty open subspace of $Y$ contained in $O$, so maximality of $V$ gives $T\\subseteq V$.",
+   "uses": [
+    "lem-sfb-space-constant-degree-etale-finite",
+    "lem-sfb-finite-locally-free-open-affine-cover",
+    "lem-sfb-space-largest-schematic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/decent-spaces.tex",
+    "place": "Tag 03JI (proposition-reasonable-open-dense-scheme), finite locally free maximum-degree piece; spaces-properties.tex Tag 07S6 (proposition-finite-flat-equivalence-global)."
+   }
+  },
+  {
+   "text": "Therefore every nonempty open $O$ meets $|V|$, which is exactly $\\overline{|V|}=|Y|$. By [lem-a1-space-point-open-calculus] the open immersion $j:V\\to Y$ identifies $|V|$ homeomorphically with its open image. The $S$-structure is the composite through $Y$. When $Y$ is empty its largest schematic open is empty and the same density criterion is vacuous; no positive degree is selected in that case.",
+   "uses": [
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03JH (lemma-subscheme); Tag 03BZ (lemma-open-subspaces); elementary density criterion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-largest-schematic-open",
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sfb-space-qs-atlas-criterion",
+  "lem-sfb-space-qc-etale-fibre-bound",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-a1-separated-etale-chart",
+  "lem-sfb-space-etale-closed-degree-loci",
+  "lem-sfb-space-quasicompact-affine-tests",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-sfb-space-constant-degree-etale-finite",
+  "lem-sfb-finite-locally-free-open-affine-cover",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/decent-spaces.tex",
+  "place": "Tag 03JI (proposition-reasonable-open-dense-scheme), maximum-degree finite locally free piece, applied inside each nonempty open; Tag 086U is the general decent-space result. Relative reduction supplied explicitly via affine charts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "dense.*open.*scheme|open.*dense.*scheme|schematic.locus|AlgebraicSpace",
+   "results": "OK 10 hits: Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a dense open schematic locus in an algebraic space with quasi compact diagonal",
+   "results": "OK 8 hits: AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.QuasiSeparated.mk, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.instQuasiCompactLiftSchemeIdOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated algebraic space over any scheme contains a dense open subspace represented by a scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic locus of a decent algebraic space is dense, so there is an open immersion from a scheme with dense image",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.denseRange, AlgebraicGeometry.Scheme.PartialMap.dense_domain, AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme, AlgebraicGeometry.IsDominant.denseRange, AlgebraicGeometry.dominant_eq_topologically, AlgebraicGeometry.IsDominant, AlgebraicGeometry.instIsDominantιCoborderRange",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern schemes, their diagonals, rational maps and dense images, not an open scheme in an algebraic space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A relatively quasi separated algebraic space over an arbitrary scheme has a dense open subscheme",
+   "results": "OK 8 hits: AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat, AlgebraicGeometry.quasiSeparated_over_affine_iff; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic locus in a space with quasi compact relative diagonal is dense",
+   "results": "OK 8 hits: AlgebraicGeometry.quasiSeparated_iff, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiCompact_prod_lift; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi separated algebraic space contains a dense open scheme",
+   "results": "OK 8 hits: AlgebraicGeometry.quasiSeparatedSpace_iff_affine, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated, AlgebraicGeometry.IsAffineOpen.isQuasiSeparated, QuasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\"",
+   "results": "OK 0 hits: ; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*open.*scheme|open.*dense.*scheme|AlgebraicSpace",
+   "results": "OK 10 hits: Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/Birational.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean, Mathlib/AlgebraicGeometry/Birational/RationalMap.lean; ",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only or unrelated hits; no algebraic-space assertion or one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-quasiseparated-space-sober",
+  "date": "2026-10-23",
+  "group": "Q16"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space. In Tag 03K6, the sentence applying theorem-decent-open-dense-scheme to the reduced closed subspace.",
+   "via": [
+    "lem-sfb-quasiseparated-space-sober",
+    "lem-sfb-space-topological-dimension-local-rings",
+    "lem-sfb-space-quasifinite-source-dimension-bound",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-quasiseparated-space-dense-scheme-open",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved density by showing every nonempty open contains a maximum-degree finite locally free schematic open, rather than importing the whole dense-open theorem into a new node. Explicitly reduced relative quasi-separatedness over arbitrary S to absolute quasi-separatedness on affine-chart image opens. Added three statement-only geometric inputs; reused existing atlas, fibre-bound and closed-degree-locus nodes. No Lean or compiler used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: the local-dimension bound on the points over x in the first paragraph of the proof of Tag 0ADD. Conversion of the topological dimension hypothesis to chart local-ring bounds in the proof of Tag 0ADD, first paragraph; comparison supplied by Tags 0A4J and 0BAN. Supporting point-topology input to Tag 0A4J: Sobriety of a quasi-separated algebraic space. In Tag 03K6, the sentence applying theorem-decent-open-dense-scheme to the reduced closed subspace. Realizes the supporting dense-open-scheme input; latest direct-images proof (3) read. The historical helper route is retained, with no change to the unit or chapter.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-etale-open-image",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-a1-space-affine-atlas-open-cover",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-a1-separated-etale-chart",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   },
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic scheme or algebraic-space geometry used in the Stacks dense schematic locus argument; supplies exactly the cited statement and replaces no constructible-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-etale-open-image",
+  "lem-a1-space-affine-atlas-open-cover",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-a1-separated-etale-chart",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-a1-space-point-open-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-5e7d2f176",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-5e7d2f176 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 6 steps, the 3 new nodes, the statement of every cited node, and Stacks 03JI/086U/03JX/07S8 (decent-spaces), 03JH/07S4/07S6 and the paragraph after it (spaces-properties), and more-morphisms stratify-flat-fp-lqf-universally-bounded. This is the first delivery; live and side-live still have the item unsplit with no steps, so it is not superseded, and there is no repair note. Route: the proof is 03JI restructured. Each nonempty open O contains an open X with an affine atlas U whose structure map factors through an affine open B of S. Step 2 shows U x_X U -> U x_B U is the scheme test of the relative diagonal (X->Y and B->S are monomorphisms), so R is quasi-compact, and the 07S4 criterion node makes X absolutely quasi-separated (no absolute qs of Y assumed, E1 OK). Step 3 gets the fibre bound N, a quasi-compact and a separated (via U affine, hence separated) and the closed degree loci D_r. Step 4 takes d as the maximum attained degree (d>=1), sets T = |X| minus D_{d-1}, and shows a_T is surjective etale, quasi-compact, and has a closed diagonal by base change. Step 5 gives a_T finite locally free, then 07S6 makes T a scheme, so T lies in V by maximality. Step 6 is the elementary density argument. Every cited statement says what its step uses; proof_deps equals the union of the uses; there is no cycle. New nodes: largest-schematic-open (03JH) is true and carries no density clause. constant-degree-etale-finite is true: etale gives flat, lfp and lqf, and degree d everywhere makes the maximum stratum the whole space, so the map is finite locally free; the d=0 case was tested; it is not a duplicate of lem-sfb-space-etale-maximum-degree (which needs X separated of finite type over an affine base and W affine) nor of the closed-degree-loci node. finite-locally-free-open-affine-cover is true: X = U/R as an fppf sheaf, and any finite set of points in an open of Spec A lies in some D(f), so 07S6(3) holds; it is not a duplicate of the affine-U nodes a1-finite-flat-affine-relation-quotient or sfb-divide-finite-flat-subgroupoid. All three are statement-only, self-contained, have Tag+label sources and use no SGA. Accepted tool_uses: the a1 and trf space foundations and the weil-pbc Mathlib leaves, all generic. Batch-5 flags: every one is def-trf-algebraic-space, the trf fibre-products node, or a node reaching that chapter only through def-trf-algebraic-space (general algebraic-space definition, points/opens/atlas/qcqs facts). These are not results of, or steps in, the trace formula or Poincare duality, so they are genuinely outside the assumptions. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceDenseSchemeOpen",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_dense_scheme_open",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceDenseSchemeOpen.lean",
+  "statement": "theorem exists_dense_scheme_open {S : Scheme.{u}} (Y : AlgebraicSpace S) (hqs : IsRepresentableWith (fun _ _ p ↦ QuasiCompact p.left) (prod.lift (𝟙 Y.obj.obj) (𝟙 Y.obj.obj))) : ∃ (V : Over S) (j : yoneda.obj V ⟶ Y.obj.obj), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j ∧ Topology.IsOpenEmbedding (schemePointMap j) ∧ DenseRange (schemePointMap j)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62d6515c1",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Clause-by-clause match: Y : AlgebraicSpace S; relative diagonal prod.lift(𝟙,𝟙) over Over S, quasi-compact on all scheme tests via IsRepresentableWith (existential pullback is harmless because quasi-compactness survives isomorphism); ∃ V : Over S, j : yoneda V ⟶ Y with IsRepresentableWith IsOpenImmersion, IsOpenEmbedding and DenseRange of schemePointMap j in the final point topology. No extra finiteness, nonemptiness or universe assumptions; empty Y and a non-quasi-separated base S covered. Node changed only in the lean field; statement verbatim in the file; docstrings carry the source tags, blueprint id and all 6 steps; proof is sorry only; proof-dep imports exist live; no duplicate found. Advisory: Point/schemePointMap come from def-a1-algebraic-space-point-classes, reached through def-a1-space-point-topology. No files changed, no compile run."
+ }
+}

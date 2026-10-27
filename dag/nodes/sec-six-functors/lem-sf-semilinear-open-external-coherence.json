@@ -1,0 +1,325 @@
+{
+ "id": "lem-sf-semilinear-open-external-coherence",
+ "kind": "statement",
+ "title": "Open external tensor coherence for whole semilinear systems",
+ "statement": "Let $C_1\\leftarrow C_2\\leftarrow\\cdots$ be a strict inverse sequence of commutative rings. For each scheme $Z$ use a small skeleton of $Z_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] and the category $\\mathscr S_Z$ of strict semilinear systems of $(C_n)_Z$-module sheaves: transitions are linear along $C_{n+1}\\to C_n$ and morphisms commute with transitions. Use its ordinary unbounded derived category, simultaneous exact inverse images $P_v$, total derived direct images $S_v$, $P_v\\dashv S_v$, and derived tensor over the ring system $((C_n)_Z)_n$, with the canonical tensor, composition, unit and counit maps [lem-coef-semilinear-derived-sections]. For an open immersion $j$ use exact $J_j\\dashv P_j$ with identity open unit and the normalized open base-change and tensor maps $\\beta,\\gamma$ [lem-sf-open-tensor-normalization].\nLet $\\bar X\\to B$, $\\bar Y\\to B$, $\\bar W\\to B$ be morphisms of schemes, and $j:X\\hookrightarrow\\bar X$, $k:Y\\hookrightarrow\\bar Y$, $l:W\\hookrightarrow\\bar W$ open immersions. Put $T=X\\times_BY$, $\\bar T=\\bar X\\times_B\\bar Y$, $u=j\\times_Bk$, with projections $p,q$ and $\\bar p,\\bar q$ [def-pc-fibre-product]. For arbitrary $K_\\bullet\\in D(\\mathscr S_X)$, $L_\\bullet\\in D(\\mathscr S_Y)$ set $D=P_pK_\\bullet\\otimes^LP_qL_\\bullet$ and $V=P_{\\bar p}J_jK_\\bullet\\otimes^LP_{\\bar q}J_kL_\\bullet$. Define $e_{j,k}:V\\to J_uD$ by the ordered word: factor $u=j_1k_1$ through $X\\times_B\\bar Y$, apply $\\beta$ for $j$, then $\\gamma$ for $j_1$, then inside $J_{j_1}$ apply $\\beta$ for $k$ and $\\gamma$ for $k_1$ with signed symmetry placing its extension factor first, and finally the canonical open compositor $J_{j_1}J_{k_1}\\cong J_u$.\nThis word is a natural isomorphism in the derived system category, preserves all coefficient actions and transitions, and $P_ue_{j,k}=1_D$ under the open units. The word through $\\bar X\\times_BY$ gives the same map. Transporting the reversed-factor word along the product swap gives $\\widetilde e_{k,j}$, and\n$$e_{j,k}=J_u(\\sigma)\\,\\widetilde e_{k,j}\\,\\sigma.$$\nFor arbitrary $M_\\bullet\\in D(\\mathscr S_W)$ the two iterated words $e_{j\\times k,l}(e_{j,k}\\boxtimes1)$ and $e_{j,k\\times l}(1\\boxtimes e_{k,l})$, including open compositors and tensor associators, are equal on the triple product and restrict to its canonical tensor associator. These are identities before finite evaluation or scalar restriction. No normalization, flatness of coefficient transitions, boundedness, constructibility or properness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; diagram-topos external-product and coherence application, an agent-formulated obligation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "def-pc-fibre-product",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-clopen-arrow-factors",
+  "def-sf-open-external-product-diagrams",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data"
+ ],
+ "proof": [
+  {
+   "text": "Work throughout in the ordinary derived category of whole semilinear systems. The diagram-site clause of [lem-sf-open-tensor-normalization] applies with ring system $((C_n)_Z)_n$: it gives natural invertible $\\beta,\\gamma$, invertible open units, and fully faithful $J_v$ for every open $v$. The system operations and their naturality are supplied by [lem-coef-semilinear-derived-sections]. Thus every operation and comparison below is a morphism of systems, not a chosen family of evaluated arrows. For composable opens $a,b$, the unit of $J_aJ_b\\dashv P_bP_a$ is $P_b(\\eta^a_{J_bF})\\eta^b_F$ by [def-weil-pbc-composite-adjunction]. The unique-left-adjoint comparison $c_{a,b}:J_aJ_b\\cong J_{ab}$ of [lem-weil-pbc-conjugate-iso-unit-equation] therefore satisfies $P_{ab}(c_{a,b})P_b(\\eta^a_{J_bF})\\eta^b_F=\\eta^{ab}_F$ under pullback composition. Hence its restriction is the identity under these unit identifications.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  },
+  {
+   "text": "Write $A=X\\times_B\\bar Y$, $a=j_1:A\\hookrightarrow\\bar T$, $b=k_1:T\\hookrightarrow A$, and let $r:A\\to X$, $s:A\\to\\bar Y$ be the projections. Set $F=P_rK_\\bullet$ and $H=P_sJ_kL_\\bullet$. Open base change for $j$ turns $V$ into $J_aF\\otimes^LP_{\\bar q}J_kL_\\bullet$. Applying $\\gamma^a$ turns this into $J_a(F\\otimes^LH)$. Open base change for $k$ gives $\\delta:H\\xrightarrow{\\sim}J_bP_qL_\\bullet$. Inside $J_a$, use $1\\otimes\\delta$, then $\\sigma$, then $\\gamma^b$, then $J_b(\\sigma)$, obtaining $J_aJ_b(P_bF\\otimes^LP_qL_\\bullet)$. Pullback composition identifies $P_bF=P_pK_\\bullet$; finish with $c_{a,b}$. This is exactly the specified ordered word. Every factor is natural and invertible by [lem-sf-open-tensor-normalization], the system functoriality of [lem-coef-semilinear-derived-sections], and step 1. It gives a natural system isomorphism $e:V\\xrightarrow{\\sim}J_uD$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  },
+  {
+   "text": "Let $r_u:P_uV\\xrightarrow{\\sim}D$ be restriction/tensor comparison followed by the inverse open units of $j,k$. Restrict the word of step 2 along $u=ab$. Each $\\beta$ becomes the identity under pullback composition and the corresponding open units; each $\\gamma$ becomes the identity under restriction/tensor comparison, by the explicit restriction clauses of [lem-sf-open-tensor-normalization]. The two symmetries surrounding $\\gamma^b$ become $\\sigma_{P_qL,P_pK}\\sigma_{P_pK,P_qL}=1$, the symmetry identity of the derived tensor on the ringed diagram site [lem-sf-ringed-derived-closed-symmetric-monoidal]. On homogeneous tensor terms their signs multiply to $(-1)^{ij+ji}=1$. The last compositor satisfies the unit equation of step 1. Consequently $P_ue=\\eta^u_Dr_u$, equivalently $P_ue=1_D$ with the stated identifications. These computations use the canonical system comparisons of [lem-coef-semilinear-derived-sections], so take place before evaluation.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  },
+  {
+   "text": "Restriction is injective on maps from this particular $V$ to $J_uD'$. Indeed, precompose a pair of such maps with $e^{-1}$ to get maps $h,h':J_uD\\to J_uD'$. Fullness of $J_u$ writes them $J_u(t),J_u(t')$. Naturality of its invertible unit gives $P_uJ_u(t)=\\eta^u_{D'}t(\\eta^u_D)^{-1}$, and likewise for $t'$. Equality after restriction implies $t=t'$, hence $h=h'$ and the original maps agree. This uses only the full faithfulness and unit of [lem-sf-open-tensor-normalization]; it makes no assertion about restriction on arbitrary ambient sources.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  },
+  {
+   "text": "Repeat steps 2--3 with $X,Y$ interchanged, or equivalently use the factorization through $\\bar X\\times_BY$: the same normalized $\\beta,\\gamma$ give an isomorphism with the same source and target and restriction $\\eta^u_Dr_u$. Step 4 proves it equals $e$. For the swapped-factor word, transport along the product swap and insert the input and output symmetries as in the statement. Naturality of the canonical tensor and pullback comparisons identifies its restriction with $\\eta^u_D\\sigma_{P_qL,P_pK}\\sigma_{P_pK,P_qL}r_u=\\eta^u_Dr_u$. The signs cancel as in step 3, by $\\sigma_{L,K}\\sigma_{K,L}=1$ [lem-sf-ringed-derived-closed-symmetric-monoidal]. Step 4 therefore gives $e_{j,k}=J_u(\\sigma)\\widetilde e_{k,j}\\sigma$, with the Koszul signs included.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  },
+  {
+   "text": "On the triple product put $v=j\\times k\\times l$, $H_3=J_jK\\boxtimes J_kL\\boxtimes J_lM$ and $D_3=K\\boxtimes L\\boxtimes M$, with a fixed parenthesization. Form the two iterated words using step 2. Functoriality preserves their invertibility. Restrict along $v$. For the left word the first comparison restricts to $1_{K\\boxtimes L}\\boxtimes1_M$ by step 3 and the second to $1_{D_3}$; for the right word they restrict to $1_K\\boxtimes1_{L\\boxtimes M}$ and $1_{D_3}$. The open compositors contribute the composite unit of step 1. The remaining tensor comparison is in both cases the canonical associator of the symmetric monoidal derived tensor [lem-sf-ringed-derived-closed-symmetric-monoidal]: on total tensor representatives it is $((x\\otimes y)\\otimes z)\\mapsto x\\otimes(y\\otimes z)$, with no sign. Restriction carries each of these tensor sections to the same section. This is an identity on complexes on the diagram site; the tensor localization of [lem-weil-pbc-site-derived-tensor-descent] and the total-complex convention [def-pc-tensor-complex-sheaves] carry it to the derived system category. Thus, after the stated associators, both restrictions equal $1_{D_3}$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-pc-tensor-complex-sheaves",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  },
+  {
+   "text": "One of the iterated words identifies $H_3$ with $J_vD_3$. Apply the three-line argument of step 4 with this isomorphism and $v$ in place of $e$ and $u$. The equal restrictions of step 6 imply equality of the two iterated words. Every construction was made in the whole system category and hence preserves coefficient actions and transitions. All inputs to the normalization theorem were arbitrary unbounded complexes over arbitrary ring systems; no flat transition, cartesian-system, constructibility or properness hypothesis entered the argument.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-composite-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; agent-derived diagram-topos external-product coherence argument using the normalized maps of lem-sf-open-tensor-normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Unit normalized extension by zero external tensor product for strict inverse systems of quotient ring module sheaves satisfies symmetry and triple associativity",
+   "results": "[leanfinder] OK 8 hit(s) AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitRight_symm_of_tmul, AdicCompletion.ofTensorProduct_tmul, TensorProduct.toDirectLimit, AdicCompletion.tensor_map_id_left_eq_map, TensorProduct.directLimitLeft, TensorProduct.directLimitRight. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s) . Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|semilinear.*system",
+   "results": "[grep] OK 1 hit(s) Mathlib/Algebra/Ring/CompTypeclasses.lean:20. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived external tensor of two open extensions on a ringed diagram topos is extension of their external tensor with coherent associativity",
+   "results": "[leansearch] OK 8 hit(s) Algebra.TensorProduct.assoc, PresheafOfModules.monoidalCategoryStruct, ModuleCat.extendScalars_assoc_assoc, Coalgebra.TensorProduct.assoc, TensorProduct.tensorTensorTensorAssoc, PresheafOfModules.monoidalCategory, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful derived open extension identifies external product comparisons by restriction in coefficient system categories",
+   "results": "[leanfinder] OK 8 hit(s) LightCondMod.LocallyConstant.fullyFaithfulFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'. Read the returned signatures: ordinary algebraic tensor/completion, condensed or abstract categorical results do not state this derived-system geometric assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open extension by zero external derived tensor products of semilinear systems have symmetric associative comparison maps determined by restriction",
+   "results": "8 hits: TensorProduct.tensorTensorTensorComm_comp_map, TensorProduct.directLimitRight_symm_of_tmul, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.AlgebraTensorModule.assoc, TensorProduct.ext_threefold', TensorProduct.ext_threefold, TensorProduct.prodLeft, Equiv.tensorProductAssoc_def. Read returned signatures: algebraic tensors, ordinary presheaf monoidal structures, or sheaf restriction results do not state the whole derived-system open external-product comparison and its coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|semilinear.*system",
+   "results": "1 hits: Mathlib/Algebra/Ring/CompTypeclasses.lean. Read returned signatures: algebraic tensors, ordinary presheaf monoidal structures, or sheaf restriction results do not state the whole derived-system open external-product comparison and its coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "0 hits: . Read returned signatures: algebraic tensors, ordinary presheaf monoidal structures, or sheaf restriction results do not state the whole derived-system open external-product comparison and its coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived external tensor product of extension by zero in ringed diagram topoi has coherent symmetry and associativity",
+   "results": "8 hits: PresheafOfModules.monoidalCategoryStruct, PresheafOfModules.monoidalCategory, ModuleCat.extendScalars_assoc', Algebra.TensorProduct.assoc, TensorProduct.tensorTensorTensorAssoc_symm_tmul, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft, CategoryTheory.MonoidalCategory.prodCompExternalProduct. Read returned signatures: algebraic tensors, ordinary presheaf monoidal structures, or sheaf restriction results do not state the whole derived-system open external-product comparison and its coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between objects in the image of fully faithful open extension on derived categories of systems are determined by restriction",
+   "results": "8 hits: CategoryTheory.Functor.IsLocallyFull.ext, TopCat.Sheaf.extend_hom_app, TopCat.Sheaf.restrictHomEquivHom, CategoryTheory.Functor.IsLocallyFaithful.ext, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, CategoryTheory.RanIsSheafOfIsCocontinuous.hom_ext, ComplexShape.Embedding.fullyFaithfulExtendFunctor, DerivedCategory.instFullSingleFunctor. Read returned signatures: algebraic tensors, ordinary presheaf monoidal structures, or sheaf restriction results do not state the whole derived-system open external-product comparison and its coherence.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-integral-open-product-diagram-normalization",
+  "date": "2026-10-22",
+  "group": "Q128"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "blueprint": {
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Proof sentence 'after reduction to proper f,g by the independence of the compactification': Open external tensor coherence for whole semilinear systems",
+   "via": [
+    "lem-sf-integral-open-product-diagram-normalization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-semilinear-open-external-coherence",
+  "worker": "stage1",
+  "summary": "Expands the ordered open tensor word on whole semilinear derived systems and proves its normalization and coherence using full faithfulness of open extension. Reuses the arbitrary-ring-system normalization theorem; no new node, no finite-evaluation faithfulness, no statement change.",
+  "blueprint": "lem-sf-kunneth-coherence proof: proper-reduction sentence and clauses (i)--(ii); supplies the simultaneous open external tensor comparison needed before integral realization.",
+  "tool_uses": [
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Generic ringed-site/system derived operation or categorical unit/localization tool used for the normalized open-product argument; this does not replace the relative-product unit route."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic ringed-site/system derived operation or categorical unit/localization tool used for the normalized open-product argument; this does not replace the relative-product unit route."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ringed-site/system derived operation or categorical unit/localization tool used for the normalized open-product argument; this does not replace the relative-product unit route."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed-site/system derived operation or categorical unit/localization tool used for the normalized open-product argument; this does not replace the relative-product unit route."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Generic ringed-site/system derived operation or categorical unit/localization tool used for the normalized open-product argument; this does not replace the relative-product unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site/system derived operation or categorical unit/localization tool used for the normalized open-product argument; this does not replace the relative-product unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site derived tensor structure, applied to the ring system on the diagram site: steps 3, 5 and 6 take from it the signed symmetry identity sigma_{L,K} sigma_{K,L}=1 and the associator on K-flat total tensor models; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-composite-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q159-e776e482c",
+  "group": "Q159",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-e776e482c (reviewer sub-agent of L); spot-checked: I read the whole item. Statement and 7 steps check out against the cited statements: lem-sf-open-tensor-normalization (its diagram-topos clause covers arbitrary strict ring systems and states the restrictions of beta/gamma explicitly), lem-coef-semilinear-derived-sections, def-weil-pbc-composite-adjunction, lem-weil-pbc-conjugate-iso-unit-equation and lem-weil-pbc-site-derived-tensor-descent. Base changes in step 2 are right: a is the base change of j along p-bar, A = X x_B Y-bar; b is the base change of k along s. Step 3 restriction gives eta r_u, steps 4 and 7 use full faithfulness and the unit, step 5 covers the opposite factorization and the swap, step 6 restricts the associator. Source checked: Stacks 0GL1 (sites-cohomology.tex l.4578); the coherence itself is agent-written and declared as such. Blueprint place in lem-sf-kunneth-coherence is correct. No new nodes. The finite-coefficient nodes (lem-sf-open-external-tensor-normalization, the coherence criterion, lem-pur-two-open-tensor-chain-normalization) are special cases, not duplicates. Small cases checked: identity open, empty open, odd degrees (sigma applied twice gives sign +1), non-flat transitions. No SGA citation. Item is unsplit on live; first delivery. FIX (C1): sigma_{L,K} sigma_{K,L}=1 and the derived associator had no citation. Steps 3, 5 and 6 now cite lem-sf-ringed-derived-closed-symmetric-monoidal; it is added to proof_deps and declared in split_report.tool_uses; no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SemilinearOpenExternalCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.semilinear_open_external_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.systemCoefficients",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.tensor",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.tensorMap",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.tensorIsoMap",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.sigma",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.associator",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.tensorPullIso",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.square",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TensorData.gammaInv",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.OpenTensorData",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.rho",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.shriekCongr",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.gammaMap",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.ambient",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.inside",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.comparison",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.restriction",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.oppositeComparison",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.ambientMap",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.insideMap",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.BinaryAssertion",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.tripleAmbient",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.tripleInside",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.tripleLeft",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.outerAssociator",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.innerAssociator",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.tripleRight",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.tripleRestriction",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.TripleAssertion",
+   "AlgebraicGeometry.ProEtale.SemilinearOpenExternal.semilinear_open_external_coherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SemilinearOpenExternalCoherence.lean",
+  "statement": "theorem semilinear_open_external_coherence (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n : ℕ, C (n + 1) ⟶ C n) : ∃ a : OpenTensorData C τ, ∀ {B X Y Xb Yb T Tb : Scheme.{u}} (j : X ⟶ Xb) (k : Y ⟶ Yb) [IsOpenImmersion j] [IsOpenImmersion k] (f : Xb ⟶ B) (g : Yb ⟶ B) (d : Diagram j k T Tb), IsPullback d.pb d.qb f g → IsPullback d.p d.q (j ≫ f) (k ≫ g) → ∀ (K : Derived C τ X) (L : Derived C τ Y), BinaryAssertion a d K L ∧ (∀ (K' : Derived C τ X) (L' : Derived C τ Y) (s : K ⟶ K') (t : L ⟶ L'), comparison a d K L ≫ (J C τ d.u).map (insideMap a d s t) = ambientMap a d s t ≫ comparison a d K' L') ∧ (∀ {W Wb T₂₃ Tb₂₃ T₃ Tb₃ : Scheme.{u}} (l : W ⟶ Wb) [IsOpenImmersion l] (h : Wb ⟶ B) (M : Derived C τ W) (d₂₃ : Diagram k l T₂₃ Tb₂₃) (dL : Diagram d.u l T₃ Tb₃) (dR : Diagram j d₂₃.u T₃ Tb₃) (t : Triple d d₂₃ dL dR), IsPullback d₂₃.pb d₂₃.qb g h → IsPullback d₂₃.p d₂₃.q (k ≫ g) (l ≫ h) → IsPullback dL.pb dL.qb (d.pb ≫ f) h → IsPullback dL.p dL.q (d.p ≫ j ≫ f) (l ≫ h) → IsPullback dR.pb dR.qb f (d₂₃.pb ≫ g) → IsPullback dR.p dR.q (j ≫ f) (d₂₃.p ≫ k ≫ g) → TripleAssertion a t K L M)",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing VaryingRing whole-system operations and coefficient-independent OpenExternalTensor.Diagram/Triple. The simultaneous tensor presentation is fixed by ordinary unit sections, TensorComparisonModel on whole-system K-flat complexes, and RingedDerivedTensorCoherence. Open gamma is fixed by its inverse adjunction transpose. All these canonical presentations are conclusions; no extra hypotheses on rings or objects."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b64e3f85",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of ad812ecaa573 (H2). Lean module byte-identical; only stmt_deps changed: lem-sf-ringed-derived-closed-symmetric-monoidal -> def-zl-ringed-derived-closed-symmetric-monoidal-data (live, existing:true, owns RingedDerivedTensorCoherence) and lem-sf-open-external-tensor-normalization -> new def-sf-open-external-product-diagrams (existing:true on unchanged OpenExternalTensorNormalization). New node checked field by field against live Diagram/Diagram.swap/Triple (maps, open immersions, 4 IsPullback squares, 8 equations, swap substitutions, 6 projection equations + sameOpen); coefficient-free; lean.statement verbatim; stmt_deps def-weil-open-immersion and def-pc-fibre-product exist. Item lean.statement verbatim; all additions are def nodes; no inherited dep dropped; item still unbound on live. Mathematics independently re-read clause by clause: canonical presentations pinned, no extra hypotheses, edge cases OK; one sorry; docstrings present. No fixes."
+ }
+}

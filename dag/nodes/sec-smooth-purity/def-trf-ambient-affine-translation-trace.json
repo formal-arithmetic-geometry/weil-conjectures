@@ -64,11 +64,12 @@
  "unit": "sk-thm-smooth-purity",
  "lean": {
   "existing": true,
-  "module": "Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace",
+  "module": "Sheaf.AlgebraicGeometry.AmbientAffineTranslationConstruction",
   "declaration": "AlgebraicGeometry.Etale.ambientAffineTranslation",
   "declarations": [
    "AlgebraicGeometry.Etale.ambientAffineTranslationIso",
    "AlgebraicGeometry.Etale.ambientAffineTranslation",
+   "AlgebraicGeometry.Etale.ambientAffineTranslation_lineSquare",
    "AlgebraicGeometry.Etale.ambientAffineLineRightExpansion",
    "AlgebraicGeometry.Etale.ambientAffineLineRightSquare",
    "AlgebraicGeometry.Etale.ambientAffineTranslationTateStep",
@@ -82,14 +83,19 @@
   "branch": "sheaf-dag",
   "by": "NK",
   "date": "2026-10-21",
-  "note": "Existing explicit definitions from AmbientAffineTranslationTrace. The item uses these coordinate translation, exchange, Tate, and normalized transport/data constructions; it cites the separate trace theorem only in proof_deps."
+  "note": "Existing constructions moved verbatim to their own module to break the implementation-level import cycle with UniversalTranslationMultiplier. The coordinate-square theorem is now proved using translation_over, map_over and IsPullback.of_horiz_isIso. No definition changes.",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmbientAffineTranslationConstruction.lean"
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "reviewed": {
@@ -107,5 +113,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Re-delivery after L's proof-dependency return on 60ab047e (PASSed). Lean file, Lean record, statement, stmt_deps, statement_change and the new definition node are byte-identical to 60ab047e. Only proof step 4 changed: it adds a sentence citing lem-trf-ambient-affine-translation-trace (applied on S at a and on P at the tautological coordinates), and that id is added to its uses. proof_deps now equals the union of the steps' uses exactly; step lengths 835/770/768/1066. The live trf theorem ambientAffineTranslationTrace (Noetherian S, N invertible, any a) is exactly the ordinary equation, and S and P meet its hypotheses. Lean docstring step 5 already names it. The theorem stays out of stmt_deps; the def-trf definition-only stmt_dep from the H2 repair is intact. No competing landing in side-live. Advisories from 60ab047e unchanged. No compile: no FIX, file unchanged; worker compile clean 9.0/9.1 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7fac4",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261025T123757-L-1897710",
+  "kind": "interface",
+  "note": "independent cc review: moved construction block vs clone item (byte-identical except proved lineSquare); item proof vs lem-trf-ambient-affine-translation-trace node and purUniversalTranslationMultiplier statement; delivered set + 3 direct importers compiled via lcompile; #print axioms"
  }
 }

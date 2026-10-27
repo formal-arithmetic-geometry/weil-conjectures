@@ -1,0 +1,276 @@
+{
+ "id": "lem-pur-completed-unit-pullback-tower",
+ "kind": "statement",
+ "title": "Completed coefficient units: finite Tor bounds and coherent pullback",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\Omega=\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, as in [def-pur-conventions]. Let $f:X\\to Y$ be any morphism between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. On the small pro-etale sites [def-weil-pbc-proetale-site] put $B_{W,n}=(\\mathcal O_E/\\varpi_E^n)_W$, $U_W=\\widehat{\\mathcal O}_{E,W}[0]$ for $W=X,Y$ and $n\\ge1$ [def-weil-completed-integral-coefficients]. Use completed derived pullback [def-weil-derived-pullback-tensor-hom], coherent reductions [def-weil-integral-reduction-tower] and normalized quotient systems [def-coef-normalized-dvr-tower].\n\nThe object $U_W$ belongs to $D^b_{ctf}(W,\\mathcal O_E)$ [def-weil-finite-tor-amplitude], with every reduction canonically $B_{W,n}[0]$, cohomological interval $[0,0]$ and Tor interval $[0,0]$, uniformly in $n$. Its quotient system has the single constructible stratum $W$.\n\nThe finite coefficient-unit multiplications $Lf_n^*B_{Y,n}\\xrightarrow{\\sim}B_{X,n}$ constitute an isomorphism of whole normalized derived systems, commuting with the actual quotient transitions. Under the specified derived-limit construction of completed pullback they induce an isomorphism\n$$u_f:Lf^*U_Y\\xrightarrow{\\sim}U_X.$$\nIts coherent reduction is precisely that system map, not merely an unspecified family of isomorphisms of objects. The images of $u_f$ under rationalization [def-weil-rationalization-karoubi] and the common-stage inclusion [def-weil-algebraically-closed-coefficients] are the unit identifications $Lf_E^*E_Y\\cong E_X$ and $Lf_\\Omega^*\\Omega_Y\\cong\\Omega_X$ for the pullbacks of [def-weil-derived-pullback-tensor-hom]. In particular $U_Y$ is an integral lattice presenting these two coefficient units. The integral unit here is the completed coefficient sheaf, not the discrete constant $\\mathcal O_E$-sheaf.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-cor-sp-all-coefficients/cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md",
+  "place": "proof, first sentence: apply purity to the coefficient; the completed-unit admissibility, coherent unit-pullback calculation, and its two coefficient images (returned Steps 1 and 2)"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-reduction-tower",
+  "def-coef-normalized-dvr-tower",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-ringed-sequence-site",
+  "lem-weil-constant-coefficient-objects-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Apply completedUnitAdmissible over the literal field and its canonical small model. Constructibility and the actual reduction isomorphisms come from the constant coefficient theorem. The regular single complex is a finite flat model, which gives uniform cohomological and Tor interval [0,0].",
+   "uses": [
+    "lem-pur-completed-unit-admissible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use completedUnitReduction for X and Y. Its finite identifications preserve sections, its comparison has the actual finite reduction maps, and its augmentation is the actual adjunction unit followed by limit of the strict comparison. Transfer reduction_normalized across the comparison isomorphisms.",
+   "uses": [
+    "lem-pur-completed-unit-reduction",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Mathlib pullbackObjUnitToUnit is invertible for a final base functor. Pro-etale base change and its product with identity on the coefficient levels are final, so both finite and whole-system multiplications are isomorphisms. Exact functor localization and the specified single comparison make systemMap an isomorphism. Its finite components are computed by the normalized finite adjunction mate.",
+   "uses": [
+    "lem-pur-completed-unit-multiplication-components",
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the normalized completed primitive counit realization. Compose its component with total limit of pullback of the Y comparison and systemMap, and then inverse of the X augmentation. This is the required unit isomorphism with its definitional unit_formula. The augmentation equality and the adjunction triangle identify reduction of its inverse leg with the counit. Counit naturality gives coherent_reduction as an equality of whole-system arrows.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Lift the integral unit isomorphism to the full constructible integral category, apply raw rationalization, and prepend the specified rational-source equality transport. These are all isomorphisms. The small-model scalar naturality lemma gives model_square. The common-stage map is its specified source transport followed by the inclusion functor applied to the literal-field rational map, hence it too is an isomorphism.",
+   "uses": [
+    "lem-pur-completed-unit-scalar-naturality",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-completed-unit-admissible",
+  "lem-pur-completed-unit-reduction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-completed-unit-multiplication-components",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pur-completed-unit-scalar-naturality",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Regular coefficient argument in Sections 3.5 and 6.5; uses existing constructibility and flat-model results, ordinary module pullback, and adjunction naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient units have uniform Tor amplitude zero and their derived pullbacks are coefficient units at integral rational and algebraically closed coefficient stages",
+   "results": "8 hits: Algebra.Smooth.exists_finiteType, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.IsStandardSmooth, RingHom.IsStandardSmoothOfRelativeDimension, RingHom.FormallyUnramified.ofLocalizationSpanTarget, BDeRham, Algebra.Etale",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf-unit pullback exists, but not this coherent completed quotient-system calculation with uniform finite-Tor bounds and rational/common-stage images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.Limits.IsLimit",
+   "results": "12 hits: CategoryTheory.Limits.IsLimit, CategoryTheory.Limits.IsLimit.subsingleton, CategoryTheory.Limits.IsLimit.ofRepresentableBy, CategoryTheory.Limits.IsLimit.representableBy, CategoryTheory.Limits.IsLimit.lift, CategoryTheory.Limits.IsLimit.ofIsoLimit, CategoryTheory.Limits.IsLimit.uniqueUpToIso, CategoryTheory.Limits.IsLimit.equivIsoLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf-unit pullback exists, but not this coherent completed quotient-system calculation with uniform finite-Tor bounds and rational/common-stage images"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*unit|unit.*completed|adic.*pullback|pullback.*adic",
+   "results": "14 hits: Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf-unit pullback exists, but not this coherent completed quotient-system calculation with uniform finite-Tor bounds and rational/common-stage images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback preserves completed adic coefficient units with uniformly bounded Tor amplitude",
+   "results": "8 hits: AdicCompletion.module, AdicCompletion, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, isUnit_iff_notMem_of_isAdicComplete_maximal, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, PreTilt.untilt.congr_simp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf-unit pullback exists, but not this coherent completed quotient-system calculation with uniform finite-Tor bounds and rational/common-stage images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The rank one constant quotient sheaves form a normalized system whose reconstructed integral coefficient object is the tensor unit and is preserved by completed geometric inverse image",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, CompHausLike.LocallyConstantModule.functor, LightCondAb.ofSheafLightProfinite, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, CondensedMod.ofSheafProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf-unit pullback exists, but not this coherent completed quotient-system calculation with uniform finite-Tor bounds and rational/common-stage images"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary sheaf-unit pullback exists, but not this coherent completed quotient-system calculation with uniform finite-Tor bounds and rational/common-stage images"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjUnitToUnit [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. Read the finite sheaf-unit candidate in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86-111; the other hits concern ordinary adic completions or unrelated normalization/L-functions.",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary sheaf-unit result omits completed derived reconstruction, coherent quotient systems, uniform Tor bounds and both field-stage images"
+  },
+  {
+   "tool": "grep",
+   "query": "completed.*unit|unit.*completed|adic.*pullback|pullback.*adic",
+   "results": "14 hits: Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean. Read the finite sheaf-unit candidate in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86-111; the other hits concern ordinary adic completions or unrelated normalization/L-functions.",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary sheaf-unit result omits completed derived reconstruction, coherent quotient systems, uniform Tor bounds and both field-stage images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback of the completed adic coefficient sheaf is the coefficient unit with compatible finite quotient reductions",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, AdicCompletion.module, IsAdicComplete.of_lift, SheafOfModules.pullback, AdicCompletion, SheafOfModules.pullbackObjFreeIso, IsAdicComplete.of_comp_lift. Read the finite sheaf-unit candidate in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86-111; the other hits concern ordinary adic completions or unrelated normalization/L-functions.",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary sheaf-unit result omits completed derived reconstruction, coherent quotient systems, uniform Tor bounds and both field-stage images"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjUnitToUnit",
+   "results": "6 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. Read the finite sheaf-unit candidate in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86-111; the other hits concern ordinary adic completions or unrelated normalization/L-functions.",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary sheaf-unit result omits completed derived reconstruction, coherent quotient systems, uniform Tor bounds and both field-stage images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient units have uniform Tor amplitude zero and coherent derived pullback isomorphisms of quotient towers",
+   "results": "8 hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, BDeRhamPlus, AdicCompletion.map_exact, BDeRham, instCommRingBDeRhamPlus, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq. Read the finite sheaf-unit candidate in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86-111; the other hits concern ordinary adic completions or unrelated normalization/L-functions.",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary sheaf-unit result omits completed derived reconstruction, coherent quotient systems, uniform Tor bounds and both field-stage images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The regular ring sheaf in degree zero is derived complete and its normalized finite quotient system is preserved by geometric inverse image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, BDeRham, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.normalization, BDeRhamPlus. Read the finite sheaf-unit candidate in Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean:86-111; the other hits concern ordinary adic completions or unrelated normalization/L-functions.",
+   "date": "2026-10-22",
+   "verdict": "no match: the ordinary sheaf-unit result omits completed derived reconstruction, coherent quotient systems, uniform Tor bounds and both field-stage images"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-adic-and-rational-smooth-dualizing-complexes",
+   "place": "proof, first sentence: apply purity to the coefficient; the completed-unit admissibility, coherent unit-pullback calculation, and its two coefficient images (returned Steps 1 and 2)",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-completed-unit-pullback-tower",
+  "worker": "stage1",
+  "summary": "No statement change and no new nodes. Proved actual quotient-system identification, augmented completeness, uniform rank-one Tor bounds, finite multiplication transition equations, reconstruction with a coherent counit equality, and the rational/common-stage arrow formulas. Generic facts are reused from existing DAG nodes.",
+  "blueprint": "cor-pur-adic-and-rational-smooth-dualizing-complexes.proof.md, first sentence applying purity to the coefficient: supplies completed unit admissibility and the actual coherent pullback identification before its two field images. Realizes the coefficient-unit prerequisite of sk-thm-purity-transport step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-constant-scalar-strict-unit",
+    "why": "Generic regular completed module calculation supplies K-flatness, actual quotient transitions and reduction legs; specialized to the identity extension. It does not assert completeness or the item."
+   },
+   {
+    "node": "lem-sp-ell-coefficient-fiber",
+    "why": "Generic coefficient fact supplies finiteness of the constant quotient rings; no purity theorem is used."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Generic pro-etale inverse-limit theorem supplies the normalized Roos triangle for a surjective degree-zero tower."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic functorial strict cone/total-limit comparison identifies the explicit augmentation with the chosen derived-limit model."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-ring inverse image identifies finite coefficient ring sheaves preserving constant sections."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic exactness theorem permits computing finite coefficient derived pullback on degree-zero regular modules."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic derived-system adjunction: Step 5 takes only the level-n description of the actual reduction/total-limit unit and the unit/counit identities, which the in-unit reconstruction lemma uses but does not restate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-constant-scalar-strict-unit",
+  "lem-sp-ell-coefficient-fiber",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-strict-roos-comparison",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-e63085868",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-e63085868 (reviewer sub-agent of L); spot-checked: Q37 lem-pur-completed-unit-pullback-tower e6308586. The delivery adds no new nodes and leaves the statement and stmt_deps unchanged. It is a first split: there is no repair note, and the item is still unsplit in live and side-live. I read all 6 steps and the statement of every cited node. Step 1: lem-weil-constant-scalar-strict-unit with L=E gives the K-flat unit, the u_m multiplication isomorphisms commuting with every transition, and u_m∘γ_m=π_m. Step 2: lem-weil-proetale-surjective-tower-derived-limit (Bhatt–Scholze Prop 3.1.10) plus transport along ∏u_n gives the Roos triangle with first map c, hence derived completeness. Step 3: the single stratum W, with cohomological and Tor bounds [0,0] uniformly in n; ℓ is invertible on these k-schemes; W=∅, n=1 and ramified E all check out. Step 4: prop-weil-pbc-proetale-constant-ring-map and prop-weil-pbc-proetale-constant-exact hold for arbitrary f, and the quotient square holds on constant sections. Step 5: counit naturality and the triangle identity give b_X R(u_f)=d·e, which I checked by hand. Step 6: the rational and common-stage arrow formulas follow from the definitions. FIX (C1/E5): Step 5 asserted a_X = L_X(b_X)∘u without justification, and that identity carries the coherent-reduction clause. I added the argument: by lem-coef-derived-system-evaluation-calculus the unit's level-n composite is the reduction map, and by lem-weil-strict-roos-comparison a_X has level composites π_n, so clause 3 of lem-weil-proetale-surjective-tower-derived-limit (with G=R_X) forces equality. I also cited the cone/total-limit comparison behind Lf^*U_Y=L_X(F_f𝓑_Y). In Step 4 I defined the previously undefined F_f and cited def-pur-integral-derived-operations. I recomputed proof_deps and added a tool_uses entry for the evaluation-calculus node. None of the added citations creates a cycle. Advisory: Steps 2–3 re-prove existing statements, namely lem-weil-constant-coefficient-objects-constructible (2) and the derived-completeness clause of lem-weil-constant-scalar-unit-quasi-isomorphism; these could simply be cited. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedUnitPullbackTower",
+  "declaration": "WeilConjectures.CompletedUnitPullback.completedUnitPullbackTower",
+  "declarations": [
+   "WeilConjectures.CompletedUnitPullback.completedUnitPullbackTower"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedUnitPullbackTower.lean",
+  "statement": "theorem completedUnitPullbackTower (P : PurityFiniteSetting.{u})\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]\n    [QuasiCompact (X ↘ Spec (.of P.field.k))]\n    [IsSeparated (X ↘ Spec (.of P.field.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]\n    [QuasiCompact (Y ↘ Spec (.of P.field.k))]\n    [IsSeparated (Y ↘ Spec (.of P.field.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] :\n    Nonempty (Result P f)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Completed regular coefficients and their canonical whole-system pullback map; rationalization retains the literal finite field, with the canonical algebra-equivalent small-model comparison for the recorded common-stage inclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dda648c4b",
+  "group": "N7",
+  "result": "pass",
+  "note": "First S2 delivery; node differs from live only in lean and +4 landed stmt_deps. Statement field and declarations match the file; one sorry; docstrings and both report sections present. All clauses rendered with pinned maps: Admissible (ctf membership, IsIso reduction map, [0,0] cohomological/Tor bounds uniform in n, locally constant B_{W,n}); systemUnit/systemMultiplication/systemMap whole-system multiplication with finite_iso/system_iso/finite_components; Reduction pinned (HEq identity on sections, satisfiable since the evaluation ring equality is propositional; augmentation_eq); unit pinned by unit_formula with realization pinned by PullModel; coherent_reduction a system-level equality matching the node by counit naturality; rational/common images with explicit size-model square. No added hypotheses. Theorem stmt_deps all genuine: calculus and constantCoefficientRationalScalarIso are .choose; PrimitiveCounit inverse/pull/inverseEvaluation need direct_isRightAdjoint, inverse_exact and the existsUnique theorem → PASS on the mechanical finding. Advisories: integralOperationsLevelPullback/scalarReductionDerivedExtension owners not cited; existing ConstantGeometricStalkUnit.integralUnit could get a compatibility lemma; plain PrimitiveCounit defs could move to a def node. Not compiled (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e1bb3",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261025T043201-L-1689002",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/item modules vs clone item (moved block identical, target signature identical); 5 new nodes' lean.statement vs files; sorry lemmas vs CoefficientReductionModels/PullModel pinning; importer AdicUnitTraceReductionData compiled against delivered set"
+ }
+}

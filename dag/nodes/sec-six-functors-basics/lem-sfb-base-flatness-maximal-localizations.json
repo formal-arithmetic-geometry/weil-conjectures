@@ -1,0 +1,95 @@
+{
+ "id": "lem-sfb-base-flatness-maximal-localizations",
+ "kind": "statement",
+ "title": "Base flatness detected by maximal localizations of an algebra module",
+ "statement": "Let $R\\to C$ be a homomorphism of commutative rings, and let $N$ be a $C$-module, also regarded as an $R$-module by restriction of scalars. For a maximal ideal $Q$ of $C$ (a proper ideal maximal among proper ideals), put $N_Q=(C\\setminus Q)^{-1}N$ [def-weil-pbc-module-localization]. If $N_Q$ is flat over $R$ [def-weil-pbc-flat-ring-map] for every maximal ideal $Q$ of $C$, then $N$ is flat over $R$. No finiteness, injectivity, nonzero-ring, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00HT (lemma-flat-localization), parts (2) and (7), with base flatness expressed over R rather than R_p; directly stated in Mathlib/RingTheory/Flat/Localization.lean, Module.flat_of_isLocalized_maximal, lines 53-73 (theorem line 66)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If the localizations of a module at all maximal ideals of an algebra are flat over the base ring then the module is flat over that base ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.flat_of_isLocalized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ (P : Ideal S) [P.IsMaximal], Flat R (Mₚ P)) : Module.Flat R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{p}$ of $S$, the localization $M_\\\\mathfrak{p}$ is a flat $R$-module, then $M$ is flat over $R$.\"}\n  {\"name\": \"Module.flat_of_localized_maximal\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(h : ∀ (P : Ideal R) [P.IsMaximal], Flat R (LocalizedModule P.primeCompl M)) : Flat R M\", \"doc\": \"Let $ R $ be a commutative semiring and $ M $ an $ R $-module. If for every maximal ideal $ P $ of $ R $, the localization of $ M $ at the complement of $ P $ is a flat $ R $-module, then $ M $ is fla\"}\n  {\"name\": \"Module.flat_of_isLocalized_span\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \"(H : ∀ r : s, Module.Flat R (Mₛ r)) : Module.Flat R M\", \"doc\": \"If for every element $ r $ in the set $ s $, the localized module $ M_{\\\\mathfrak{p}_r} $ is flat over $ R $, then the module $ M $ is flat over $ R $.\"}\n  {\"name\": \"Module.flat_iff_of_isLocalization\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Flat S M ↔ Flat R M\", \"doc\": \"A module $ M $ is flat over the localization $ S $ of a commutative semiring $ R $ if and only if it is flat over $ R $ itself.\"}\n  {\"name\": \"Module.FaithfullyFlat.mk\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"∀ {R : Type u} {M : Type v} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [toFlat : Module.Flat R M], (∀ ⦃m : Ideal R⦄, m.IsMaximal → m • ⊤ ≠ ⊤) → Module.FaithfullyFlat R M\", \"doc\": \"If for every maximal ideal $\\\\mathfrak{m}$ of $R$, the product $\\\\mathfrak{m} \\\\cdot M \\\\neq M$, then $M$ is a faithfully flat $R$-module.\"}\n  {\"name\": \"Module.Flat.of_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (S : Submonoid R) [IsLocalization S Rp] (f : M →ₗ[R] Mp) [h : IsLocalizedModule S f] : Flat Rp Mp\", \"doc\": \"If $ M $ is a flat $ R $-module and $ M' $ is the localization of $ M $ at a submonoid $ S $ of $ R $, then $ M' $ is a flat module over the localized ring $ R' $, where $ R' $ is the localization of \"}\n  {\"name\": \"IsLocalization.flat\", \"module\": \"Mathlib.RingTheory.Flat.Localization\", \"type\": \": Module.Flat R S\", \"doc\": \"If $ S $ is a localization of a commutative semiring $ R $, then $ S $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.projective_of_localization_maximal'\", \"module\": \"Mathlib.RingTheory.LocalProperties.Projective\", \"type\": \"(H : ∀ (I : Ideal R) (_ : I.IsMaximal), Module.Projective (Rₚ I) (Mₚ I)) [Module.FinitePresentation R M] :\\n  Module.Projective R M\", \"doc\": \"If $ M $ is a finitely presented module over a commutative semiring $ R $, and for every maximal ideal $ I $ of $ R $ the localized module $ M_I $ is projective over the localized ring $ R_I $, then $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: Module.flat_of_isLocalized_maximal, read Mathlib/RingTheory/Flat/Localization.lean:53-73; specialize to ordinary prime-localized modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module over an algebra is flat over the base ring if its localizations at every maximal ideal of the algebra are flat over the base ring",
+   "results": "OK 8 hits: Module.flat_of_isLocalized_maximal; Module.flat_of_localized_maximal; Module.flat_iff_of_isLocalization; Module.flat_of_isLocalized_span; Module.Flat.of_isLocalizedModule; instFlatAtPrime; RingHom.flat_algebraMap_iff; Module.FaithfullyFlat.of_flat_of_isLocalHom.",
+   "date": "2026-10-24",
+   "verdict": "match: Module.flat_of_isLocalized_maximal, Mathlib/RingTheory/Flat/Localization.lean:66-73"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.flat_of_isLocalized_maximal",
+   "results": "OK 1 hit: Module.flat_of_isLocalized_maximal, Mathlib.RingTheory.Flat.Localization.",
+   "date": "2026-10-24",
+   "verdict": "match: the theorem permits arbitrary algebra scalars and arbitrary modules"
+  },
+  {
+   "tool": "grep",
+   "query": "flat_of_isLocalized_maximal",
+   "results": "OK 3 hits: Mathlib/RingTheory/Flat/Localization.lean:20 (module documentation), :66 (theorem), :78 (specialization to S = R). Read lines 53-73 including all module and localization hypotheses.",
+   "date": "2026-10-24",
+   "verdict": "match: theorem at lines 66-73; canonical module localizations satisfy its IsLocalizedModule.AtPrime instance"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "Module.flat_of_isLocalized_maximal",
+  "file": "Mathlib/RingTheory/Flat/Localization.lean",
+  "line": 66,
+  "how": "specializes in one line: set S = C, M = N, Mₚ Q = LocalizedModule Q.primeCompl N, and f Q = LocalizedModule.mkLinearMap Q.primeCompl N in Module.flat_of_isLocalized_maximal (lines 53-73, theorem lines 66-73). The canonical localization maps supply IsLocalizedModule.AtPrime; the R-action is the restricted C-action, so IsScalarTower R C N and its localized versions are canonical. Rings are a special case of the theorem's commutative semirings. No finite generation is used."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-pushforward-dimension-flatness",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tags 0CX4 (situation-existence), 0CXB (theorem-existence). Supporting input in 0CXB: Tags 0CVI (lemma-proper-pure), 0CX2 (lemma-when-universal-flattening), part (1), and 0CWX (situation-flat), defining the flat base-change functor; scheme representability: spaces-morphisms.tex Tag 03XX (proposition-locally-quasi-finite-separated-over-scheme), as invoked in 0CXB (theorem-existence). Subinput: Tag 0CX1 (theorem-flat-dimension-n-representable), specialized to a scheme base and universal purity (which implies the pure hypothesis); chart formulation of flatness in dimensions at least n: Tags 0CWS (lemma-pre-flat-dimension-n) and 0CWT (definition-flat-dimension-n). Subinput of the dimension induction: Tag 05UF (lemma-flat-dimension-n-representable), with complete devissage in Tags 05HH and 05HX; chart formulation from spaces-flat.tex Tag 0CWS. Supporting proof of 05UF: induction on the length of the algebraic devissage, first finite direct image, generic-basis universal injectivity, and generic-rank strata. Algebraic stalk comparison in the finite-direct-image step: reflection of base flatness from maximal localizations.",
+   "via": [
+    "lem-sfb-finite-pushforward-dimension-flatness",
+    "lem-sfb-affine-complete-devissage-dimension-flattening",
+    "lem-sfb-space-pure-dimension-flatness-representability",
+    "lem-sfb-space-proper-support-universal-flattening",
+    "lem-sfb-space-flat-proper-support-inverse-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

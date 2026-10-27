@@ -13,9 +13,129 @@
   "def-trf-valuation-ring",
   "def-kun-transcendence-degree"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a transcendence basis $B$ of $L/K$ using [lem-exc-transcendence-basis-exists]. By [def-kun-transcendence-degree], $|B|=d$, and by [def-weil-pbc-transcendence-basis], $L$ is algebraic over $T=K(B)$. Put $U=W\\cap T$. By [lem-trf-valuation-algebraic-height], contraction identifies the prime chains of $W$ and $U$. We may therefore prove the height bound for $U$ over $R=U\\cap K$. Notice that $T/K$ is finitely generated, even though $L/K$ need not be.",
+   "uses": [
+    "lem-exc-transcendence-basis-exists",
+    "def-kun-transcendence-degree",
+    "def-weil-pbc-transcendence-basis",
+    "lem-trf-valuation-algebraic-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Lemma 2.1.2 (relative inequality); finite-transcendence-degree reduction to a finite transcendence basis, using algebraic height invariance."
+   }
+  },
+  {
+   "text": "Write $\\Gamma=T^\\times/U^\\times$ and $H=K^\\times/R^\\times$. The inclusion embeds $H$ as an ordered subgroup of $\\Gamma$: a ratio of elements of $K$ belongs to $U$ exactly when it belongs to $R$. Apply [lem-trf-abhyankar-inequality] to the finitely generated extension $T/K$: it gives $\\operatorname{rrk}(\\Gamma/H)\\le d$, after discarding the nonnegative residue transcendence degree. The prime/convex correspondence [lem-trf-valuation-prime-convex-correspondence] for $R$ bounds all convex chains in $H$ by $h$. Thus [lem-trf-relative-convex-chain-bound] bounds convex chains in $\\Gamma$ by $h+d$. Applying the same prime/convex correspondence to $U$ and then Step 1 proves the asserted height bound for $W$.",
+   "uses": [
+    "lem-trf-abhyankar-inequality",
+    "lem-trf-valuation-prime-convex-correspondence",
+    "lem-trf-relative-convex-chain-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Section 2.1, prime/convex correspondence and Lemma 2.1.2; relative convex-chain estimate."
+   }
+  },
+  {
+   "text": "For an arbitrary subring $W\\subseteq A\\subseteq L$, the alternative $x\\in W$ or $x^{-1}\\in W$ from [def-trf-valuation-ring] holds in $A$, so $A$ is a valuation ring. Let $\\mathfrak q=\\mathfrak m_A$. If $0\\ne x\\in\\mathfrak q$ were outside $W$, then $x^{-1}\\in W\\subseteq A$, contradicting $x\\in\\mathfrak m_A$. Hence $\\mathfrak q\\subseteq W$. It is an ideal of $W$ as well as of $A$. For $\\bar a\\ne0$ in $A/\\mathfrak q$, any lift $a$ is a unit of $A$, and $a$ or $a^{-1}$ lies in $W$. Consequently $W/\\mathfrak q$ satisfies the valuation-ring alternative inside the field $A/\\mathfrak q$. Finally, if $a\\bmod\\mathfrak q$ is the residue of $w\\in W$, then $a-w\\in\\mathfrak q\\subseteq W$, so $a\\in W$. This proves the inverse-image assertion.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Lemma 2.1.4(i), with the element and residue-lift arguments expanded."
+   }
+  },
+  {
+   "text": "By [lem-trf-valuation-overring-prime-localization], $A=W_{\\mathfrak q}$: the corresponding prime is $\\mathfrak q\\cap W=\\mathfrak q$ by Step 3. By [lem-weil-pbc-primes-of-localization], primes of $A$ identify with primes of $W$ contained in $\\mathfrak q$. Primes of $W/\\mathfrak q$ identify with primes of $W$ containing $\\mathfrak q$: inverse image and quotient $P\\mapsto P/\\mathfrak q$ are inverse, inclusion-preserving maps, with primality checked by multiplying representatives. All ideals of $W$ are comparable: if $a\\in I\\setminus J$ is nonzero, then for $0\\ne b\\in J$ the alternative $a/b\\in W$ would put $a\\in J$, so $b/a\\in W$ and $b\\in I$; thus $J\\subseteq I$. Hence every prime lies below or above $\\mathfrak q$. Any chain splits there, and chains in the two intervals concatenate at $\\mathfrak q$. Their maximal lengths therefore add, giving $\\operatorname{ht}(W)=\\operatorname{ht}(A)+\\operatorname{ht}(W/\\mathfrak q)$. These lengths are finite by Step 2; the same interval argument applies to any finite-height valuation ring and its overring.",
+   "uses": [
+    "lem-trf-valuation-overring-prime-localization",
+    "lem-weil-pbc-primes-of-localization",
+    "def-trf-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Composition discussion before Lemma 2.1.4: the two spectra are glued at the closed/generic point; localization prime correspondence is Stacks Tag 00E3, algebra-lemma-spec-localization."
+   }
+  },
+  {
+   "text": "Now assume $h>0$ and $(R\\setminus\\{0\\})^{-1}W=L$. The finite height bound and total ordering of primes from Step 4 imply that $W$ has finitely many primes: otherwise a selection of $h+d+2$ distinct primes gives a chain longer than $h+d$. Also $W\\ne L$, since $W=L$ would give $R=K$, of height zero. Its maximal ideal is therefore nonzero. Choose the least nonzero prime $\\mathfrak q$ and set $A=W_{\\mathfrak q}$, the valuation overring supplied by [lem-trf-valuation-overring-prime-localization]. The localization prime correspondence gives exactly two primes in $A$, namely zero and its nonzero maximal ideal, so its height is one. Step 3 identifies that maximal ideal as the same subset $\\mathfrak q\\subseteq W$. Put $R_1=A\\cap K$; it is a valuation ring by the element/inverse alternative. If $R_1=K$, then $A$ contains every inverse of an element of $R\\setminus\\{0\\}$, hence contains $(R\\setminus\\{0\\})^{-1}W=L$, contradicting its height one. Thus $R_1\\ne K$.",
+   "uses": [
+    "lem-trf-valuation-overring-prime-localization",
+    "lem-weil-pbc-primes-of-localization",
+    "def-trf-valuation-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Proof of Theorem 2.1.8, printed p. 13, choosing the induced height-one valuations after the boundedness reduction; explicit minimal-prime construction."
+   }
+  },
+  {
+   "text": "To see that $R_1$ has height one, embed $H_1=K^\\times/R_1^\\times$ as an ordered subgroup of $\\Gamma_1=L^\\times/A^\\times$ by ratios as in Step 2. By [lem-trf-valuation-prime-convex-correspondence] for $A$, the only convex subgroups of $\\Gamma_1$ are zero and $\\Gamma_1$. For $c>0$, the subgroup $C_c=\\{g:|g|\\le nc\\text{ for some integer }n\\ge0\\}$ is convex (addition uses $(n+m)c$, inverses preserve absolute value). Thus $C_c=\\Gamma_1$. Any nonzero convex subgroup $D$ of $H_1$ contains some $c>0$, so for every $x\\in H_1$ we have $|x|\\le nc$ and hence $x\\in D$. There are therefore at most two convex subgroups of $H_1$. Applying the prime/convex correspondence to $R_1$ bounds its height by one; Step 5 proved it is not a field, so its height is exactly one.",
+   "uses": [
+    "lem-trf-valuation-prime-convex-correspondence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Section 2.1, ordered value groups and prime/convex correspondence; height-one restriction is written out using principal convex subgroups."
+   }
+  },
+  {
+   "text": "Put $\\mathfrak p=\\mathfrak q\\cap K$. It is the maximal ideal of $R_1$, since an element of $R_1$ is a unit exactly when both it and its inverse are in $A\\cap K$. Also $\\mathfrak p\\subseteq R$ by Step 3. Apply the quotient and inverse-image argument of Step 3 to $R\\subseteq R_1$, and the height addition of Step 4 to this pair. We obtain that $R_0=R/\\mathfrak p$ is a valuation ring of $k=R_1/\\mathfrak p$ and $\\operatorname{ht}(R_0)=h-1$. Similarly $W_0=W/\\mathfrak q$ is a valuation ring of $E=A/\\mathfrak q$. The inclusion $R_1\\subseteq A$ induces the embedding $k\\subseteq E$, with kernel $\\mathfrak p$. If a class from $k$ belongs to $W_0$, choose representatives $r\\in R_1$ and $w\\in W$ with $r-w\\in\\mathfrak q$. Then $\\mathfrak q\\subseteq W$ gives $r\\in W\\cap K=R$. Conversely every class from $R$ belongs to both rings. Hence $W_0\\cap k=R_0$, proving compatibility of both the coarse and residual valuations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Lemma 2.1.4(i) and the height-induction paragraph of Theorem 2.1.8, p. 13; explicit residue intersection."
+   }
+  },
+  {
+   "text": "Finally let $K\\subseteq F\\subseteq L$. Set $A_F=A\\cap F$, $W_F=W\\cap F$ and $\\mathfrak q_F=\\mathfrak q\\cap F$. The element/inverse alternative makes both restricted rings valuation rings, with maximal ideal $\\mathfrak q_F$ for $A_F$. The induced map $A_F/\\mathfrak q_F\\to A/\\mathfrak q$ is injective because its kernel on $A_F$ is $\\mathfrak q_F$. Under this embedding, $(W/\\mathfrak q)\\cap(A_F/\\mathfrak q_F)=W_F/\\mathfrak q_F$: for the reverse inclusion lift a common class to $a\\in A_F$ and $w\\in W$; $a-w\\in\\mathfrak q\\subseteq W$ gives $a\\in W_F$. Thus an $a\\in A_F$ has residue in $W_F/\\mathfrak q_F$ if and only if $a\\in W_F$. This proves that restriction commutes with each inverse-image description, including the original arbitrary overring in Steps 3–4.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Lemma 2.1.4(i), applied to subfields; restriction and inverse images checked on residue representatives."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-transcendence-basis-exists",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-transcendence-basis",
+  "lem-trf-valuation-algebraic-height",
+  "lem-trf-abhyankar-inequality",
+  "lem-trf-valuation-prime-convex-correspondence",
+  "lem-trf-relative-convex-chain-bound",
+  "def-trf-valuation-ring",
+  "lem-trf-valuation-overring-prime-localization",
+  "lem-weil-pbc-primes-of-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+  "place": "Section 2.1, printed pp. 7–9: prime/overring/convex-subgroup correspondences, Lemma 2.1.2, and Lemma 2.1.4 with preceding composition discussion; boundedness at p. 10 and the proof of Theorem 2.1.8, p. 13. Author’s v3 PDF read online; local archive WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +171,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Valued.coe_valuation_eq_rankOne_hom_comp_valuation\", \"module\": \"Mathlib/Topology/Algebra/Valued/NormedValued\", \"type\": \"∀ (L : Type u_1) [inst : Field L] (Γ₀ : Type u_2) [inst_1 : LinearOrderedCommGroupWithZero Γ₀] [val : Valued L Γ₀]\\n  [hv : Valued.v.RankOne], ⇑NormedField.valuation = ⇑(Valuation.RankOne.hom Valued.v) ∘ ⇑Valued.v\", \"doc\": \"The valuation function of the normed field is equal to the composition of the rank one valuation's homomorphism from $\\\\Gamma_0$ to the non-negative real numbers $\\\\mathbb{R}_{\\\\geq 0}$ and the original \"}\n  {\"name\": \"ValuativeRel.IsRankLeOne.of_valuativeExtension\", \"module\": \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic\", \"type\": \"∀ {A : Type u_1} (B : Type u_2) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : ValuativeRel A]\\n  [inst_3 : ValuativeRel B] [inst_4 : Algebra A B] [ValuativeExtension A B] [ValuativeRel.IsRankLeOne B],\\n  ValuativeRel.IsRankLeOne A\", \"doc\": \"Given a valuative extension of commutative rings with valuative relations, if the extension has rank at most one, then the base ring also has rank at most one.\"}\n  {\"name\": \"Valuation.RankOne.ofRankLeOneStruct\", \"module\": \"Mathlib/RingTheory/Valuation/RankOne\", \"type\": \"{R : Type u_3} →\\n  [inst : CommRing R] →\\n    [inst_1 : ValuativeRel R] →\\n      [ValuativeRel.IsNontrivial R] → ValuativeRel.RankLeOneStruct R → (ValuativeRel.valuation R).RankOne\", \"doc\": \"Given a commutative ring $ R $ with a non-trivial valuative relation and a rank ≤1 valuative structure $ e $, this constructs a rank one valuation by using the canonical embedding $ e.\\text{emb} $ as t\"}\n  {\"name\": \"WithVal.instCompatibleValuation\", \"module\": \"Mathlib/Topology/Algebra/Valued/WithVal\", \"type\": \"∀ {R : Type u_1} {Γ₀ : Type u_2} [inst : LinearOrderedCommGroupWithZero Γ₀] [inst_1 : CommRing R] (v : Valuation R Γ₀),\\n  (WithVal.valuation v).Compatible\", \"doc\": \"The valuative relation on the valued ring WithVal(v) is compatible with its valuation, meaning that for any elements $x$ and $y$ in WithVal(v), if $x$ is related to $y$ by the valuative relation, then\"}\n  {\"name\": \"Valuation.instRankOneCompletion\", \"module\": \"Mathlib/RingTheory/Valuation/RankOne\", \"type\": \"{K : Type u_3} →\\n  [inst : Field K] →\\n    {Γ : Type u_4} →\\n      [inst_1 : LinearOrderedCommGroupWithZero Γ] → (v : Valuation K Γ) → [h : v.RankOne] → Valued.v.RankOne\", \"doc\": \"If $v$ is a rank one valuation on a field $K$ with values in a linearly ordered commutative group with zero $\\\\Gamma$, then its canonical extension to the completion of $K$ is also a rank one valuation\"}\n  {\"name\": \"ValuativeRel.IsRankLeOne.of_compatible_mulArchimedean\", \"module\": \"Mathlib/RingTheory/Valuation/RankOne\", \"type\": \"∀ {Γ₀ : Type u_2} [inst : LinearOrderedCommGroupWithZero Γ₀] {R : Type u_3} [inst_1 : CommRing R]\\n  [inst_2 : ValuativeRel R] [MulArchimedean Γ₀] (v : Valuation R Γ₀) [v.Compatible], ValuativeRel.IsRankLeOne R\", \"doc\": \"If $\\\\Gamma_0$ is a multiplicatively Archimedean linearly ordered commutative monoid with zero and the valuation $v$ is compatible with the valuative relation, then the valuative relation on the commut\"}\n  {\"name\": \"Valuation.Compatible.ofValuation\", \"module\": \"Mathlib/RingTheory/Valuation/ValuativeRel/Basic\", \"type\": \"∀ {S : Type u_2} {Γ : Type u_3} [inst : CommRing S] [inst_1 : LinearOrderedCommGroupWithZero Γ] (v : Valuation S Γ),\\n  v.Compatible\", \"doc\": \"Any valuation $v : S → Γ_0$ from a commutative ring $S$ to a linearly ordered commutative group with zero $Γ_0$ is compatible with the valuative relation it induces, meaning that for all $x,y ∈ S$, if\"}\n  {\"name\": \"ModP.preVal\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(K : Type u₁) →\\n  [inst : Field K] →\\n    Valuation K NNReal → (O : Type u₂) → [inst_1 : CommRing O] → [Algebra O K] → (p : ℕ) → ModP O p → NNReal\", \"doc\": \"The function assigns to each element $ x $ of the quotient ring $ O/(p) $ a non-negative real number. If $ x $ is the zero element, then $ \\\\text{preVal}(x) = 0 $. Otherwise, $ \\\\text{preVal}(x) $ is de\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valuation on a finite transcendence degree field extension has height at most base height plus transcendence degree, and bounded extensions have compatible height one coarsenings",
+   "results": "Actual search: 8 hits; Valuation.HasExtension, ValuativeRel.IsRankLeOne.of_valuativeExtension, Height.mulHeight₁_eq_mulHeight, Height.one_le_mulHeight₁, Ideal.height_le_height_add_of_liesOver, Valuation.FiniteField.algebraMap_le_one, lift_trdeg_add_le, Valuation.HasExtension.val_map_lt_one_iff. None states all clauses of the item. Value-group restriction and prime/overring results supply only supporting components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite rank valuations and height of valuation rings under a field extension of finite transcendence degree",
+   "results": "Actual search: 8 hits; Valuation.RankOne, Valuation.HasExtension.ofComapInteger, IsDiscreteValuationRing.isRankOneDiscrete, ValuativeRel.IsRankLeOne.of_valuativeExtension, Valuation.HasExtension.instIsScalarTower_valuationSubring', Valuation.HasExtension.instAlgebraInteger, Valuation.HasExtension.mk, IsTranscendenceBasis.lift_rank_eq_max_lift. None states all clauses of the item. Value-group restriction and prime/overring results supply only supporting components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|coarsen|height.*valuation|valuation.*height",
+   "results": "Actual search: 6 hits; Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/ValuationSubring.lean, Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean, Mathlib/RingTheory/Valuation/Discrete/IsDiscreteValuationRing.lean. None states all clauses of the item. Value-group restriction and prime/overring results supply only supporting components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite rank valued base field extended by finitely many transcendental elements has finite convex rank bounded by the sum of base rank and transcendence degree",
+   "results": "Actual search: 8 hits; IsTranscendenceBasis.lift_rank_eq_max_lift, Algebra.Transcendental.rank_eq_cardinalMk, IntermediateField.adjoin_rank_le_of_isAlgebraic_right, IntermediateField.adjoin_rank_le_of_isAlgebraic, IntermediateField.adjoin_rank_le_of_isAlgebraic_left, Algebra.rank_adjoin_le, IsTranscendenceBasis.lift_cardinalMk_eq_max_lift, RatFunc.finrank_ratFunc_ratFunc. None states all clauses of the item. Value-group restriction and prime/overring results supply only supporting components.",
+   "date": "2026-10-24",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -84,5 +232,31 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valuation-height-coarsening",
+  "worker": "stage1",
+  "summary": "Reuse the existing Abhyankar inequality only after passage to a finite transcendence basis and algebraic height invariance. Add the abstract relative convex-chain estimate and an exact Mathlib overring/localization leaf. Prove composition, finite-height additivity, bounded rank-one restriction and residual/intermediate-field compatibility explicitly. Statement unchanged.",
+  "blueprint": "The inherited nearby-cycle semistable-modification branch from lem-trf-local-term-locality, proof (1)–(2), uses Temkin 2.1.4 and the bounded height-induction step of Theorem 2.1.8. The latest blueprint contracting-correspondence proof was read; this item refines the inherited supporting valuation argument, not the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NX-7cdefac8f",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-7cdefac8f (reviewer sub-agent of L); spot-checked: Read the item (statement and stmt_deps unchanged from base; first split, no repair note), all 8 steps, both new nodes, and every cited statement. Temkin 0707.3953v3 is not in literature/: WANTED is recorded and proof_origin=agent, so I could not check Temkin at the cited places and instead checked each step from the cited nodes. Step 1: a transcendence basis B with |B|=d reduces to T=K(B); lem-trf-valuation-algebraic-height applies to the arbitrary algebraic L/T, so Abhyankar is never applied to a non-finitely-generated L/K. Step 2: H→Γ is an order embedding by the ratio criterion; Abhyankar for T/K gives rrk(Γ/H)≤d; convex/prime correspondence for R then the relative bound then the correspondence for U gives ≤h+d. Steps 3–4: m_A⊆W; W/q is a valuation ring of A/q and W is its inverse image; A=W_q by the leaf's inverse; heights add because the primes are totally ordered. Step 5: least nonzero prime gives a height-one A; R_1≠K by boundedness. Step 6: Γ_1 archimedean via C_c, so H_1 has at most 2 convex subgroups and ht R_1=1. Steps 7–8: ht R_0=h−1, W_0∩k=R_0 and restriction to F checked by representatives. Step 7 has uses [] but explicitly reuses Step 4's argument, whose uses cite both leaves; accepted. New node lem-trf-relative-convex-chain-bound: true (I wrote my own proof: at most h trace changes, and the x_i at unchanged transitions are rationally independent mod H by top-index and convex saturation). Tested on H=0, H=Γ, lex Z², and a dense rank-one H of large rational rank. It generalizes rather than duplicates lem-trf-convex-chain-rational-rank and is not an item clause. New node lem-trf-valuation-overring-prime-localization: exact match to Mathlib ValuationSubring.lean:383 primeSpectrumOrderEquiv (ofPrime 298, ofPrime_localization 314, idealOfLE 284, ofPrime_idealOfLE 334 all read). Not a DAG duplicate: rg found it only in search records, and lem-per-algebraic-valuation-coarsening-correspondence covers a different fact. Route stays in sk-i-curve-zero plus Mathlib leaves, so no tool_uses are needed. via/same_as/proof_deps and search records checked. Stacks 00E3 (algebra.tex:3163) checked. No fixes."
+ }
 }

@@ -1,0 +1,189 @@
+{
+ "id": "lem-sfb-kahler-normal-holomorphic-coordinates",
+ "kind": "statement",
+ "title": "Holomorphic coordinates with normalized Kähler metric first jet",
+ "statement": "Use the usual fields $\\mathbf R,\\mathbf C$ [def-weil-field]. Let $M$ be a complex manifold without boundary of complex dimension $n\\geq1$, with complex structure $J$ and a smooth positive definite Hermitian metric $h$ on $(TM,J)$. Put $g=\\operatorname{Re}h$ and $\\omega(u,v)=g(Ju,v)$, and assume $d\\omega=0$. For every $a\\in M$ there is a holomorphic coordinate chart $z=(z_1,\\ldots,z_n)$ centred at $a$ such that, writing $z_j=x_j+iy_j$ and $h_{j\\bar k}=h(\\partial_{x_j},\\partial_{x_k})$ in the convention linear in the first argument, one has $\\omega=\\frac{i}{2}\\sum_{j,k}h_{j\\bar k}\\,dz_j\\wedge d\\bar z_k$ and $$h_{j\\bar k}(a)=\\delta_{jk},\\qquad \\partial_{z_l}h_{j\\bar k}(a)=\\partial_{\\bar z_l}h_{j\\bar k}(a)=0\\quad(1\\leq j,k,l\\leq n).$$ Here $\\partial_{z_l}=\\frac12(\\partial_{x_l}-i\\partial_{y_l})$ and $\\partial_{\\bar z_l}=\\frac12(\\partial_{x_l}+i\\partial_{y_l})$ act on smooth coefficient functions, and a holomorphic coordinate chart means a biholomorphism from an open neighbourhood of $a$ to an open subset of $\\mathbf C^n$.",
+ "source": {
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Wenrui Kong, Notes on Complex Geometry (April 9, 2025), §3.3, Definition 3.18 and Theorem 3.19, printed p.7 (PDF page 7): the metric first jet in normal holomorphic coordinates WANTED locally; read online https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-hermitian-dolbeault-data",
+  "def-sfb-kahler-coordinate-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix $a$ and start with any holomorphic chart $w$ centred there. Apply [lem-sfb-finite-complex-orthonormal-basis] to $T_aM$ with inner product $\\langle v,t\\rangle=h(t,v)$; reversing the arguments converts the first-linear convention to the Mathlib convention without changing orthonormality. Let $B$ be the invertible complex matrix whose columns are the chosen basis vectors in the $w$-coordinate tangent basis. Replace $w$ by $u=B^{-1}w$. The coordinate tangent vectors $\\partial_{\\operatorname{Re}u_j}$ at $a$ are the chosen vectors, so the smooth coefficient matrix $H=(h_{j\\bar k})$ in the $u$ chart satisfies $H(0)=I$. The linear change and its inverse are holomorphic.",
+   "uses": [
+    "lem-sfb-finite-complex-orthonormal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "WANTED locally; Kong, Notes on Complex Geometry (April 9, 2025), §3.3 Definition 3.18 and Theorem 3.19, printed p.7 / PDF page 7, read online at https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The theorem is stated without proof; the coordinate calculation here is by the worker."
+   }
+  },
+  {
+   "text": "For any holomorphic coordinates, $h(Jv,t)=i h(v,t)$ gives $\\omega(v,t)=-\\operatorname{Im}h(v,t)$. Expanding on the real coordinate vectors gives $\\omega=(i/2)\\sum h_{j\\bar k}\\,du_j\\wedge d\\bar u_k$; this identity therefore also holds in the final chart. In the $u$ chart, the coefficient of $du_l\\wedge du_j\\wedge d\\bar u_k$ in $d\\omega$ is $(i/2)(\\partial_{u_l}h_{j\\bar k}-\\partial_{u_j}h_{l\\bar k})$ for $l\\ne j$. Closedness forces it to vanish; for $l=j$ the equality is tautological. Thus the constants $C^k_{jl}:=(\\partial_{u_l}h_{j\\bar k})(0)$ satisfy $C^k_{jl}=C^k_{lj}$. This uses only the coordinate definition of exterior differentiation and linear independence of the coordinate wedge forms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "WANTED locally; Kong, Notes on Complex Geometry (April 9, 2025), §3.3 Definition 3.18 and Theorem 3.19, printed p.7 / PDF page 7, read online at https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The theorem is stated without proof; the coordinate calculation here is by the worker."
+   }
+  },
+  {
+   "text": "Define a polynomial map $F:\\mathbf C^n\\to\\mathbf C^n$ by $F^k(z)=z_k-\\frac12\\sum_{j,l}C^k_{jl}z_jz_l$. It is complex analytic, $F(0)=0$, $DF(0)=I$, and $\\partial_{z_l}\\partial_{z_j}F^k(0)=-C^k_{jl}$ by the symmetry just proved. Clauses (1) and (2) of [lem-sfb-complex-analytic-inverse-toolkit] give an open partial homeomorphism with forward map $F$ and source containing 0. Clause (3) gives analyticity of its inverse at 0; clause (4) gives an open ball on which that inverse is analytic at every point. Intersect this ball with the target and with the old $u$-chart image. The result is an open neighbourhood $W$ of 0 contained in the old chart image. Its inverse image $V$ under $F$ inside the source is open. Then $F:V\\to W$ and its inverse are holomorphic. On $u^{-1}(W)$ the map $z=F^{-1}\\circ u$ is the required centred holomorphic chart, with $u=F(z)$.",
+   "uses": [
+    "lem-sfb-complex-analytic-inverse-toolkit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "WANTED locally; Kong, Notes on Complex Geometry (April 9, 2025), §3.3 Definition 3.18 and Theorem 3.19, printed p.7 / PDF page 7, read online at https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The theorem is stated without proof; the coordinate calculation here is by the worker."
+   }
+  },
+  {
+   "text": "Write $H'$ for the metric matrix in the $z$ chart. Complex linearity of the tangent change and the first-linear convention give $$h'_{a\\bar b}(z)=\\sum_{p,q}h_{p\\bar q}(F(z))\\,\\frac{\\partial F^p}{\\partial z_a}(z)\\,\\overline{\\frac{\\partial F^q}{\\partial z_b}(z)}.$$ In particular $H'(0)=I$. Differentiate this displayed formula once at 0. The derivative of the conjugated polynomial Jacobian in a $z_c$ direction is zero; the product and chain rules, $DF(0)=I$, and $H(0)=I$ give $$\\partial_{z_c}h'_{a\\bar b}(0)=\\partial_{u_c}h_{a\\bar b}(0)+\\partial_{z_c}\\partial_{z_a}F^b(0)=C^b_{ac}-C^b_{ac}=0.$$ Finally $h'_{a\\bar b}=\\overline{h'_{b\\bar a}}$, so $\\partial_{\\bar z_c}h'_{a\\bar b}(0)=\\overline{\\partial_{z_c}h'_{b\\bar a}(0)}=0$. Together with the form identity of step 2 this proves every clause, at the arbitrary point $a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "WANTED locally; Kong, Notes on Complex Geometry (April 9, 2025), §3.3 Definition 3.18 and Theorem 3.19, printed p.7 / PDF page 7, read online at https://cims.nyu.edu/~wk805/files/Complex_Geometry_Notes.pdf. The theorem is stated without proof; the coordinate calculation here is by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-complex-orthonormal-basis",
+  "lem-sfb-complex-analytic-inverse-toolkit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/kong-complex-geometry-notes.pdf",
+  "place": "Theorem 3.19 statement read online (local copy WANTED); explicit quadratic coordinate proof supplied by Q21, not claimed to be a proof in Kong."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every Kahler metric has normal holomorphic coordinates with metric coefficients identity and first derivatives zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Orientation.kahler_mul\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(a x y : E) : o.kahler x a * o.kahler a y = ‖a‖ ^ 2 * o.kahler x y\", \"doc\": \"For vectors $x, a, y$ in the space $E$, the product of the Kähler maps $o.\\\\text{kähler}(x, a)$ and $o.\\\\text{kähler}(a, y)$ equals the square of the norm of $a$ multiplied by the Kähler map $o.\\\\text{kä\"}\n  {\"name\": \"Orientation.kahler_apply_apply\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x y : E) : o.kahler x y = ⟪x, y⟫ + ω x y • Complex.I\", \"doc\": \"For any vectors $x, y$ in a two-dimensional real inner product space $E$, the Kähler structure $o.\\text{kahler}$ evaluated at $x$ and $y$ equals the real inner product $\\\\langle x, y\\\\rangle$ plus the sy\"}\n  {\"name\": \"Orientation.norm_kahler\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x y : E) : ‖o.kahler x y‖ = ‖x‖ * ‖y‖\", \"doc\": \"For any vectors $x$ and $y$ in a two-dimensional real inner product space $E$, the norm of the Kähler structure $o_{\\\\text{Kähler}}(x, y)$ constructed from the real inner product and symplectic form sa\"}\n  {\"name\": \"Orientation.kahler\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \": E →ₗ[ℝ] E →ₗ[ℝ] ℂ\", \"doc\": \"The Kähler structure is defined as a complex-linear map constructed by combining the real inner product $\\\\langle \\\\cdot, \\\\cdot \\\\rangle$ with the complex structure $i$ and symplectic form $\\\\omega$. Spec\"}\n  {\"name\": \"Orientation.kahler_comp_linearIsometryEquiv\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(φ : E ≃ₗᵢ[ℝ] E) (hφ : 0 < LinearMap.det (φ.toLinearEquiv : E →ₗ[ℝ] E)) (x y : E) : o.kahler (φ x) (φ y) = o.kahler x y\", \"doc\": \"For any orientation-preserving linear isometry $\\\\phi : E \\\\to E$ (i.e., a real linear isometry with $\\\\det(\\\\phi) > 0$) and all vectors $x, y \\\\in E$, the Kähler structure satisfies $o.\\\\text{Kähler}(\\\\phi \"}\n  {\"name\": \"Orientation.kahler_ne_zero_iff\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x y : E) : o.kahler x y ≠ 0 ↔ x ≠ 0 ∧ y ≠ 0\", \"doc\": \"The Kähler structure on a two-dimensional real inner product space does not vanish at vectors $x$ and $y$ if and only if both $x$ and $y$ are non-zero.\"}\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(w z : ℂ) : Complex.orientation.kahler w z = z * conj w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"Orientation.kahler_map_complex\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(f : E ≃ₗᵢ[ℝ] ℂ) (hf : Orientation.map (Fin 2) f.toLinearEquiv o = Complex.orientation) (x y : E) :\\n  o.kahler x y = f y * conj (f x)\", \"doc\": \"For a two-dimensional real inner product space $E$ equipped with an orientation $o$, if $f : E \\\\to\\\\cong_{\\\\mathbb{R}} \\\\mathbb{C}$ is a linear isometric equivalence such that $f$ preserves the orientati\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Orientation.kahler and Complex.kahler concern bilinear pairings on a real two-dimensional vector space; IsRiemannianManifold supplies a metric structure, not holomorphic normal coordinates or its first jet."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed positive Hermitian fundamental two form has holomorphic normal coordinates at every point",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ (w z : ℂ), (Complex.orientation.kahler w) z = z * (starRingEnd ℂ) w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"Orientation.kahler\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"{E : Type u_1} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : InnerProductSpace ℝ E] → [Fact (Module.finrank ℝ E = 2)] → Orientation ℝ E (Fin 2) → E →ₗ[ℝ] E →ₗ[ℝ] ℂ\", \"doc\": \"The Kähler structure is defined as a complex-linear map constructed by combining the real inner product $\\\\langle \\\\cdot, \\\\cdot \\\\rangle$ with the complex structure $i$ and symplectic form $\\\\omega$. Spec\"}\n  {\"name\": \"Orientation.kahler_apply_self\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (x : E), (o.kahler x) x = ↑‖x‖ ^ 2\", \"doc\": \"For any vector $x$ in a two-dimensional real inner product space $E$ equipped with a complex structure and symplectic form $\\\\omega$, the Kähler structure $o.\\\\text{kahler}$ satisfies $o.\\\\text{kahler}(x\"}\n  {\"name\": \"Orientation.kahler_mul\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (a x y : E), (o.kahler x) a * (o.kahler a) y = ↑‖a‖ ^ 2 * (o.kahler x) y\", \"doc\": \"For vectors $x, a, y$ in the space $E$, the product of the Kähler maps $o.\\\\text{kähler}(x, a)$ and $o.\\\\text{kähler}(a, y)$ equals the square of the norm of $a$ multiplied by the Kähler map $o.\\\\text{kä\"}\n  {\"name\": \"Orientation.kahler_apply_apply\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (x y : E), (o.kahler x) y = ↑(inner ℝ x y) + (o.areaForm x) y • Complex.I\", \"doc\": \"For any vectors $x, y$ in a two-dimensional real inner product space $E$, the Kähler structure $o.\\text{kahler}$ evaluated at $x$ and $y$ equals the real inner product $\\\\langle x, y\\\\rangle$ plus the sy\"}\n  {\"name\": \"instIsRiemannianManifold\", \"module\": \"Mathlib/Geometry/Manifold/Riemannian/Basic\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  (I : ModelWithCorners ℝ E H) {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M]\\n  [inst_5 : Bundle.RiemannianBundle fun x => TangentSpace I x] [inst_6 : IsMa\", \"doc\": \"A regular topological space $M$ equipped with a Riemannian metric (inducing a smoothly varying inner product on each tangent space $T_xM$) is a Riemannian manifold. This instance asserts that the comb\"}\n  {\"name\": \"Orientation.kahler_map\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) {F : Type u_2} [inst_3 : NormedAddCommGroup F] [inst_4 : InnerProductSpace ℝ F]\\n  [hF : Fact (Module.finrank ℝ F = 2)] (φ : E ≃ₗᵢ[ℝ] F) (x y : F),\\n\", \"doc\": \"For two-dimensional real inner product spaces $E$ and $F$, if $\\\\phi: E \\\\simeq F$ is a linear isometric equivalence and $o$ is an orientation on $E$, then the Kähler map associated with the pushed-forw\"}\n  {\"name\": \"Orientation.kahler_map_complex\", \"module\": \"Mathlib/Analysis/InnerProductSpace/TwoDim\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : Fact (Module.finrank ℝ E = 2)]\\n  (o : Orientation ℝ E (Fin 2)) (f : E ≃ₗᵢ[ℝ] ℂ),\\n  (Orientation.map (Fin 2) f.toLinearEquiv) o = Complex.orientation →\\n    ∀ (x y : E), (o.kahler x) y = f y * (starRingEnd ℂ) (f \", \"doc\": \"For a two-dimensional real inner product space $E$ equipped with an orientation $o$, if $f : E \\\\to\\\\cong_{\\\\mathbb{R}} \\\\mathbb{C}$ is a linear isometric equivalence such that $f$ preserves the orientati\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Orientation.kahler and Complex.kahler concern bilinear pairings on a real two-dimensional vector space; IsRiemannianManifold supplies a metric structure, not holomorphic normal coordinates or its first jet."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normal\", \"holomorphic\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Orientation.kahler and Complex.kahler concern bilinear pairings on a real two-dimensional vector space; IsRiemannianManifold supplies a metric structure, not holomorphic normal coordinates or its first jet."
+  },
+  {
+   "tool": "grep",
+   "query": "holomorphic.*normal|normal.*holomorphic|[Kk]ahler.*[Mm]anifold|[Kk]ähler.*[Mm]anifold",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: Orientation.kahler and Complex.kahler concern bilinear pairings on a real two-dimensional vector space; IsRiemannianManifold supplies a metric structure, not holomorphic normal coordinates or its first jet."
+  },
+  {
+   "tool": "grep",
+   "query": "holomorphic.*normal|normal.*holomorphic|KahlerManifold|KaehlerManifold",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned two-dimensional Kahler pairings, Riemannian chart estimates, or generic differential-form calculus, not normal holomorphic coordinates for a closed Hermitian metric."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kahler metric normal holomorphic coordinates first derivatives vanish",
+   "results": "OK 8 hits: Complex.kahler, Orientation.kahler_eq_zero_iff, Orientation.kahler_mul, eventually_enorm_mfderivWithin_symm_extChartAt_lt, VectorField.mpullbackWithin_mlieBracketWithin_of_isSymmSndFDerivWithinAt, eventually_norm_mfderivWithin_symm_extChartAt_lt, InnerProductSpace.laplacianWithin_eq_iteratedFDerivWithin_complexPlane, extDeriv_extDeriv_apply. ",
+   "date": "2026-10-24",
+   "verdict": "no match: returned two-dimensional Kahler pairings, Riemannian chart estimates, or generic differential-form calculus, not normal holomorphic coordinates for a closed Hermitian metric."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-kahler-first-order-commutators",
+  "date": "2026-10-24",
+  "group": "Q125"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: operator identity used before deducing d-closedness by adjointness; supporting first-order input: Kong Proposition 6.12, the two commutators involving the dual Lefschetz operator, before the Laplacian comparison. Supporting input: Wenrui Kong, Notes on Complex Geometry (April 9, 2025), §3.3, Definition 3.18 and Theorem 3.19, printed p.7 (PDF page 7): the metric first jet in normal holomorphic coordinates",
+   "via": [
+    "lem-sfb-kahler-first-order-commutators",
+    "lem-sfb-kahler-laplacian-identity",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-kahler-normal-holomorphic-coordinates",
+  "worker": "stage1",
+  "summary": "Checked the exact first-linear Hermitian convention against Kong Definition 3.18 and Theorem 3.19. Supplied the missing quadratic coordinate argument: linear normalization, closedness symmetry, polynomial local inverse, and explicit first-jet cancellation. Reused the existing analytic inverse Mathlib leaf; added only the finite-dimensional orthonormal-basis Mathlib leaf. Item statement unchanged. No project declaration attaches.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) supporting chain, specifically the normal-coordinate input to Kong Proposition 6.12. The current blueprint direct-image paragraph was read; this supplies only the analytic prerequisite already selected by the parent split. blueprint_refs.py ancestor returns None for this created chain; inherited null from.node is retained. Whole-blueprint searches for holomorphic, Hermitian, orthonormal basis, and inverse function found no duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-91966c01b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-91966c01b (reviewer sub-agent of L); spot-checked: There is no local copy of Kong, so I fetched the PDF read-only and read p.7. Def 3.18 sets h_ij=h(∂x_i,∂x_j) linear in the first argument, ω=−Im h=(i/2)h dz∧dz̄, g=Re h and g(Iu,v)=ω(u,v); these match the item. Thm 3.19 is stated with no proof, so proof_origin agent is correct. I checked every step by hand. Step 1: <v,t>=h(t,v) is Mathlib's convention; with u=B^{-1}w, du(b_j)=e_j, so H(0)=I. Step 2: the dz_l∧dz_j∧dz̄_k coefficient of dω is (i/2)(∂_l h_jk̄−∂_j h_lk̄), so C^k_jl is symmetric. Step 3: for F=z−½Cz z, the toolkit's clauses (1)-(4) say exactly what the step takes; W=ball∩target∩u-image and V=source∩F^{-1}W, and the chart z=F^{-1}∘u is centred at a. Step 4: h'=Σh(F)∂F·conj∂F, and ∂_{z_c}h'_ab̄(0)=C^b_ac−C^b_ac=0 because the conjugated holomorphic Jacobian has zero z-derivative; the barred derivatives follow from Hermitian symmetry. I also checked the n=1 case F=z−cz²/2 by hand. New Mathlib leaf lem-sfb-finite-complex-orthonormal-basis: stdOrthonormalBasis at PiL2.lean:1076 and exists_orthonormalBasis at :1070 are correct; it covers n=0, has no proof fields and is strictly smaller than the item. rg -L over the DAG for orthonormal/stdOrthonormalBasis/gramSchmidt found no duplicate; the ultrametric orthogonal-basis nodes are unrelated. The parent kahler-first-order-commutators uses only the item's conclusions. No SGA citation, no tool_uses needed, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Manifold.KahlerNormalHolomorphicCoordinates",
+  "declaration": "ComplexManifold.exists_kahler_normal_holomorphic_coordinates",
+  "file": "lean/Sheaf/Geometry/Manifold/KahlerNormalHolomorphicCoordinates.lean",
+  "statement": "theorem exists_kahler_normal_holomorphic_coordinates (n : ℕ) (hn : 1 ≤ n) (M : Type u) [TopologicalSpace M] [ChartedSpace (Model n) M] [IsManifold (𝓘(ℂ, Model n)) ∞ M] (h : HermitianMetric n M) (hclosed : IsKahlerMetric h) (a : M) : ∃ e : OpenPartialHomeomorph M (Model n), e ∈ IsManifold.maximalAtlas (𝓘(ℂ, Model n)) ∞ M ∧ a ∈ e.source ∧ e a = 0 ∧ (∀ z ∈ e.target, ∀ v w : Model n, (chartFundamentalForm h e z v w : ℂ) = Complex.I / 2 * ∑ j : Fin n, ∑ k : Fin n, chartHermitianCoefficient h e j k z * (v j * star (w k) - w j * star (v k))) ∧ (∀ j k : Fin n, chartHermitianCoefficient h e j k 0 = if j = k then 1 else 0) ∧ ∀ j k l : Fin n, wirtingerPartial (chartHermitianCoefficient h e j k) e.target l 0 = 0 ∧ wirtingerBarPartial (chartHermitianCoefficient h e j k) e.target l 0 = 0",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-047233346",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Item node changes only lean + stmt_deps (+def-sfb-hermitian-dolbeault-data, +def-sfb-kahler-coordinate-data); both lean.statement fields verbatim in their files. Every clause matches the Lean: centred maximal-atlas holomorphic chart; first-linear pairing (metricPair with arguments swapped); omega = Re h(iv,w); IsKahlerMetric = cyclic coordinate dω=0 in every maximal-atlas chart, equivalent not stronger; form identity checked by hand, both sides = -Im h(v,w), sign and 1/2 correct; H(0)=δ; Wirtinger and conjugate-Wirtinger signs exact, taken within the open target at 0. Edge cases: n≥1 as in node, empty M vacuous, no universe restriction, no extra T2/compact/countability assumption. New def module: 6 real formula defs, no sorry/opaque/axiom/choice, source and blueprint docstrings present; no duplicate of these notions in Mathlib, lean/Sheaf, lean/WeilConjectures or the DAG, and citing nodes have no Lean records yet. Item docstring has the 4 proof steps; proof is sorry only; plain imports = modules of the 2 Mathlib proof_deps; report sections present; no statement change, so no citer audit. No file changed, so no compile; worker reports clean per-file compiles. Advisory only: Second reading section is the stock text."
+ }
+}

@@ -1,0 +1,259 @@
+{
+ "id": "lem-sfb-compact-bundle-self-ext-full-faithfulness",
+ "kind": "statement",
+ "title": "Compact self-orthogonal vector bundles give fully faithful derived tensor",
+ "statement": "Let $A$ be a commutative ring, $X$ a quasi-compact quasi-separated $A$-scheme [def-pc-scheme], and $E$ a finite locally free $\\mathcal O_X$-module in degree zero (locally a finite rank free module). Put $B=\\operatorname{End}_{\\mathcal O_X}(E)$ with composition multiplication. Let $F_E:D(\\operatorname{Mod}\\!\\text{-}B)\\to D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be the total derived sheafified tensor $-\\otimes_B^{\\mathbf L}E$ and let $G_E=R\\operatorname{Hom}_X(E,-)$ with right $B$-action by precomposition, as constructed in [lem-sfb-bundle-endomorphism-derived-adjunction]. Assume $E$ is compact in $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ [def-pc-compact-object], and that for every integer $q\\neq0$ one has $\\operatorname{Hom}_{D(\\mathcal O_X)}(E,E[q])=0$. Then $F_E$ is fully faithful, and the unit $\\operatorname{id}\\to G_EF_E$ of that specified adjunction is a natural isomorphism. No generation assumption on $E$ is made.",
+ "source": {
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LZ, dga-lemma-fully-faithful-in-compact-case, degree-zero endomorphism specialization. Its proof uses compactness only on objects in the tensor essential image; by Tag 09M3 these are quasi-coherent, so compactness in D_QCoh suffices."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-compact-object",
+  "lem-sfb-bundle-endomorphism-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\mathcal C=D(\\operatorname{Mod}\\!\\text{-}B)$ and $\\mathcal T=D_{\\mathrm{QCoh}}(\\mathcal O_X)$. The specified adjunction supplies exact functors $F=F_E$, $G=G_E$, $F(B)\\simeq E$, and natural identifications $H^qG(K)=\\operatorname{Hom}(E,K[q])$ with precomposition action. The categories have all small coproducts: use the module direct-sum statement for $B^{\\mathrm{op}}$ and the quasi-coherent derived direct-sum statement for $X$. These are coproducts in the same fixed containing universe.",
+   "uses": [
+    "lem-sfb-bundle-endomorphism-derived-adjunction",
+    "lem-pc-derived-module-direct-sums",
+    "lem-pc-derived-qcoh-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+   }
+  },
+  {
+   "text": "For any ring $B$, the regular right module $B_B$ is projective: to lift $f:B\\to V$ through a surjection $U\\to V$, choose a preimage $u$ of $f(1)$ and use $b\\mapsto ub$. The bounded-projective representative theorem therefore computes derived maps from $B[0]$ by chain maps modulo homotopy. A chain map $B[0]\\to K[q]$ is exactly a cycle $z=f(1)\\in K^q$; the differences of homotopic maps are exactly boundaries (the possible shift sign does not change the boundary subgroup). Thus $\\operatorname{Hom}(B,M[q])=H^q(M)$ naturally. This works for noncommutative $B$, using right modules, and for every unbounded $K$.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09K1, lemma-hom-from-shift-free, degree-zero ring case; derived passage Tag 09KY, lemma-hom-derived, equivalently Tag 064B, derived-lemma-morphisms-from-projective-complex."
+   }
+  },
+  {
+   "text": "The regular object $B$ is compact and weakly generates $\\mathcal C$. Indeed the preceding explicit Hom formula identifies $\\operatorname{Hom}(B,M[q])$ with $H^q(M)$. Cohomology preserves coproducts (apply the module homology statement to $B^{\\mathrm{op}}$), so the canonical compactness map for $B$ is an isomorphism. If every shifted Hom group is zero, the cohomology criterion applied to $0\\to M$ makes $M$ zero. This verifies exactly compactness and weak generation, without assuming that $E$ generates $\\mathcal T$.",
+   "uses": [
+    "lem-pc-derived-module-homology-coproduct",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-pc-compact-object",
+    "def-pc-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+   }
+  },
+  {
+   "text": "The functor $F$ preserves coproducts: for any $N$, adjunction identifies maps $F(\\bigoplus_iM_i)\\to N$ with $\\prod_i\\operatorname{Hom}(FM_i,N)$, with the actual coprojections. For a family $K_i$ in $\\mathcal T$, let $c:\\bigoplus_iGK_i\\to G(\\bigoplus_iK_i)$ be induced by $G$ of its coprojections. In degree $q$ its underlying additive map, by the adjunction cohomology formula and module homology of sums, is precisely $\\bigoplus_i\\operatorname{Hom}(E,K_i[q])\\to\\operatorname{Hom}(E,(\\bigoplus_iK_i)[q])$. Integer shift is an equivalence and hence preserves coproducts. Compactness of $E$ makes this map bijective. All maps respect the right $B$-actions; a bijective module map has a module-linear inverse. The cohomology criterion therefore makes $c$ an isomorphism. Thus both $F$ and $G$ preserve coproducts.",
+   "uses": [
+    "lem-sfb-bundle-endomorphism-derived-adjunction",
+    "lem-pc-derived-module-homology-coproduct",
+    "def-pc-compact-object",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+   }
+  },
+  {
+   "text": "Let $\\eta:\\mathrm{id}\\to GF$ be the unit. On $B$ the tensor identification is $B\\otimes_B E\\to E$, $b\\otimes e\\mapsto b(e)$. Currying this identity gives $b\\mapsto(e\\mapsto b(e))$; after a K-injective resolution $j:E\\to I$ it is the chain map $B\\to\\operatorname{Hom}(E,I)$, $b\\mapsto j\\circ b$. Thus $H^0(\\eta_B)$ is the canonical map from ordinary endomorphisms of $E$ to derived endomorphisms, a bijection by full faithfulness of the degree-zero embedding. In every other degree its source is zero and its target is $\\operatorname{Hom}(E,E[q])=0$ by hypothesis. For $B[n]$ exactly the shifted calculation holds: $F(B[n])=E[n]$, the only potentially nonzero degree of the unit is $q=-n$, and its map there is the same endomorphism identification. The cohomology criterion shows that $\\eta_{B[n]}$ is invertible for every integer $n$.",
+   "uses": [
+    "lem-sfb-bundle-endomorphism-derived-adjunction",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+   }
+  },
+  {
+   "text": "Apply the shift-saturated isomorphism-locus lemma to $\\eta:\\mathrm{id}_{\\mathcal C}\\to GF$. Both functors are exact and preserve coproducts by the preceding steps. Its predicate $Q(M)$, invertibility of $\\eta$ on every shift of $M$, is closed under isomorphisms, triangles and coproducts, and contains $B$. The compact-generator construction applied to the singleton family $\\{B\\}$ writes every $M$ as a telescope of stages starting with a sum of shifts of $B$ and obtained by triangles with sums of such shifts. Induction puts every stage in $Q$; the telescope triangle and coproduct closure then put $M$ in $Q$. Hence every $\\eta_M$ is invertible, and naturality makes their inverses a natural inverse to $\\eta$.",
+   "uses": [
+    "lem-sc-shift-saturated-iso-locus",
+    "lem-pc-compact-generators-build-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+   }
+  },
+  {
+   "text": "For $M,N\\in\\mathcal C$, the composite bijection $\\operatorname{Hom}_{\\mathcal T}(FM,FN)\\cong\\operatorname{Hom}_{\\mathcal C}(M,GFN)\\xrightarrow{\\eta_N^{-1}\\circ-}\\operatorname{Hom}_{\\mathcal C}(M,N)$ is inverse to $f\\mapsto Ff$: its value on $Ff$ is $\\eta_N^{-1}GF(f)\\eta_M=f$ by naturality. Bijectivity proves full faithfulness. The construction uses generation only by $B$ on the source, as required.",
+   "uses": [
+    "lem-sfb-bundle-endomorphism-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bundle-endomorphism-derived-adjunction",
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-derived-module-homology-coproduct",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "def-pc-compact-object",
+  "def-pc-generators",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sc-shift-saturated-iso-locus",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dga.tex",
+  "place": "Tag 09LZ, lemma-fully-faithful-in-compact-case, proof; degree-zero endomorphism case, using its compactness argument only in D_QCoh."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor with a compact object is fully faithful when its endomorphism dg algebra computes all its self Ext groups",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instFullSingleFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (n : ℤ), (DerivedCategory.singleFunctor C n).Full\", \"doc\": \"For each integer $ n $, the functor from category $ \\\\mathcal{C} $ to its derived category that maps objects to single-term chain complexes concentrated in degree $ n $ is full. This means that for any\"}\n  {\"name\": \"CategoryTheory.hasExt_of_hasDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] [HasDerivedCategory C],\\n  CategoryTheory.HasExt C\", \"doc\": \"If an abelian category $\\\\mathcal{C}$ has a derived category, then for any objects $X$ and $Y$, the localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to qu\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {D : Type u_1} [inst_3 : CategoryTheory.Category.{v_1, u_1} D],\\n  ((CategoryTheory.Functor.whiskeringLeft (HomotopyCategory C (ComplexShape.up ℤ)) (DerivedCategory C) D).obj\", \"doc\": \"The canonical functor $ Q^h $ from the homotopy category of integer-indexed chain complexes to the derived category is full. This means that for any two chain complexes $ A $ and $ B $, every morphism\"}\n  {\"name\": \"CategoryTheory.hasExt_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C],\\n  CategoryTheory.HasExt C ↔\\n    ∀ (X Y : C) (n : ℤ),\\n      0 ≤ n →\\n        Small.{w, w'}\\n          ((DerivedCategory.singleFunctor C 0).obj X ⟶\\n            (CategoryTheory.\", \"doc\": \"For an abelian category $\\\\mathcal{C}$ with a derived category, the property $\\\\text{HasExt}$ holds if and only if for all objects $X, Y \\\\in \\\\mathcal{C}$ and non-negative integers $n$, the hom-set betwe\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C], DerivedCategory.Q.EssSurj\", \"doc\": \"The canonical localization functor from the category of cochain complexes with integer indices to the derived category is essentially surjective. This means that every object in the derived category i\"}\n  {\"name\": \"DerivedCategory.instFaithfulFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {D : Type u_1} [inst_3 : CategoryTheory.Category.{v_1, u_1} D],\\n  ((CategoryTheory.Functor.whiskeringLeft (HomotopyCategory C (ComplexShape.up ℤ)) (DerivedCategory C) D).obj\", \"doc\": \"The derived category of an abelian category $\\\\mathcal{C}$, formed by localizing the category of chain complexes at quasi-isomorphisms (morphisms inducing isomorphisms on all homology groups), is equip\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleFunctor fullness and finite-dimensional tensor duality do not give the compact self-Ext criterion for derived tensor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact vector bundle with vanishing higher self extensions induces fully faithful derived tensor from its endomorphism ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"VectorBundle\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    (F : Type u_3) →\\n      (E : B → Type u_4) →\\n        [inst : NontriviallyNormedField R] →\\n          [inst_1 : (x : B) → AddCommMonoid (E x)] →\\n            [(x : B) → Module R (E x)] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [NormedSpace \", \"doc\": \"A vector bundle over a topological space $ B $ with fibers modeled on a normed vector space $ F $ over a nontrivially normed field $ R $. It consists of a total space $ E $ equipped with a topology, w\"}\n  {\"name\": \"IsAzumaya.coe_tensorEquivEnd\", \"module\": \"Mathlib.Algebra.Azumaya.Basic\", \"type\": \": tensorEquivEnd R = AlgHom.mulLeftRight R R\", \"doc\": \"The tensor product of the commutative semiring $ R $ with its opposite ring over $ R $ is algebra-isomorphic to the endomorphism ring of $ R $ as an $ R $-module.\"}\n  {\"name\": \"VectorBundleCore.vectorBundle\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \": VectorBundle R F Z.Fiber\", \"doc\": \"A vector bundle core equipped with the canonical topology on its total space and module structures on its fibers forms a vector bundle over the base space with fibers modeled on the normed vector spac\"}\n  {\"name\": \"VectorBundle.casesOn\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"{R : Type u_1} →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : NontriviallyNormedField R] →\\n          [inst_1 : (x : B) → AddCommMonoid (E x)] →\\n            [inst_2 : (x : B) → Module R (E x)] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [ins\", \"doc\": \"Given a nontrivially normed field $ R $, a topological base space $ B $, a normed vector space $ F $ over $ R $, and a total space $ E $ over $ B $ with compatible topologies and module structures, th\"}\n  {\"name\": \"Module.End.rTensorAlgHom\", \"module\": \"Mathlib.RingTheory.TensorProduct.Maps\", \"type\": \": Module.End R M →ₐ[R] Module.End R (M ⊗[R] N)\", \"doc\": \"The function that maps each R-linear endomorphism of M to the R-linear endomorphism of M ⊗_R N obtained by tensoring with the identity map on N. This defines an algebra homomorphism between the endomo\"}\n  {\"name\": \"VectorBundleCore.fiberBundle\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \": FiberBundle F Z.Fiber\", \"doc\": \"Each fiber of a vector bundle is equipped with a topology induced by the vector bundle's structure, inherited from the canonical conversion to a fiber bundle core.\"}\n  {\"name\": \"VectorBundleCore.ctorIdx\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"{R : Type u_1} →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {inst : NontriviallyNormedField R} →\\n        {inst_1 : NormedAddCommGroup F} →\\n          {inst_2 : NormedSpace R F} → {inst_3 : TopologicalSpace B} → {ι : Type u_5} → VectorBundleCore R B F ι → ℕ\", \"doc\": \"An inductive type encapsulating the essential data for a vector bundle over a topological space $ B $, with fibers modeled on a normed vector space $ F $ over a nontrivially normed field $ R $. This i\"}\n  {\"name\": \"VectorBundle.recOn\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"{R : Type u_1} →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : NontriviallyNormedField R] →\\n          [inst_1 : (x : B) → AddCommMonoid (E x)] →\\n            [inst_2 : (x : B) → Module R (E x)] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [ins\", \"doc\": \"Given a nontrivially normed field $ R $, a topological base space $ B $, a normed vector space $ F $ over $ R $, and a total space $ E $ over $ B $ with compatible topologies and module structures, th\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleFunctor fullness and finite-dimensional tensor duality do not give the compact self-Ext criterion for derived tensor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"FullyFaithful\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: singleFunctor fullness and finite-dimensional tensor duality do not give the compact self-Ext criterion for derived tensor."
+  },
+  {
+   "tool": "grep",
+   "query": "fully.faithful.in.compact|compact.*self.Ext|self.Ext.*compact|tilting",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Tilted.lean\", \"line\": \"13\", \"text\": \"The exponential tilting of a measure `μ` on `α` by a function `f : α → ℝ` is the measure with\"}\n  {\"file\": \"Mathlib/MeasureTheory/Measure/Tilted.lean\", \"line\": \"23\", \"text\": \"* `Measure.tilted μ f`: exponential tilting of `μ` by `f`, equal to\"}\n  {\"file\": \"Mathlib/RingTheory/Perfectoid/Untilt.lean\", \"line\": \"31\", \"text\": \"Perfectoid, Tilting equivalence, Untilt\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleFunctor fullness and finite-dimensional tensor duality do not give the compact self-Ext criterion for derived tensor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Self orthogonal compact object derived tensor embedding criterion for modules over endomorphism algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FGModuleCat.rightRigidCategory\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → CategoryTheory.RightRigidCategory (FGModuleCat K)\", \"doc\": \"For any field $ K $, the category of finitely generated $ K $-modules (i.e., finite-dimensional vector spaces over $ K $) forms a right rigid category. Every object $ V $ in this category has a right \"}\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (V : FGModuleCat K) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorObj (FGModuleCat.FGModuleCatDual K V) V ⟶\\n        CategoryTheory.MonoidalCategoryStruct.tensorUnit (FGModuleCat K)\", \"doc\": \"The morphism from the tensor product of the dual module $ \\\\text{Hom}_K(V, K) $ and the module $ V $ to the identity endofunctor on the category of finitely generated $ K $-modules, constructed via the\"}\n  {\"name\": \"FGModuleCat.FGModuleCatCoevaluation_apply_one\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"∀ (K : Type u) [inst : Field K] (V : FGModuleCat K),\\n  (CategoryTheory.ConcreteCategory.hom (FGModuleCat.FGModuleCatCoevaluation K V).hom) 1 =\\n    ∑ i, (Module.Basis.ofVectorSpace K ↑V) i ⊗ₜ[K] (Module.Basis.ofVectorSpace K ↑V).coord i\", \"doc\": \"The coevaluation morphism applied to the multiplicative identity element $1$ in the base field $K$ yields the sum over the basis elements $e_i$ of the vector space $V$, each tensored with their corres\"}\n  {\"name\": \"FGModuleCat.FGModuleCatCoevaluation\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (V : FGModuleCat K) →\\n      CategoryTheory.MonoidalCategoryStruct.tensorUnit (FGModuleCat K) ⟶\\n        CategoryTheory.MonoidalCategoryStruct.tensorObj V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"The coevaluation morphism from the identity object (the base field $ K $) to the tensor product of a finitely generated $ K $-module $ V $ with its dual module $ V^* $, which is part of the monoidal s\"}\n  {\"name\": \"FGModuleCat.exactPairing\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → (V : FGModuleCat K) → CategoryTheory.ExactPairing V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"For any field $ K $ and finitely generated $ K $-module $ V $, there exists an exact pairing between $ V $ and its dual module $ \\\\text{Hom}_K(V, K) $, constructed via coevaluation and evaluation maps \"}\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"∀ (K : Type u) [inst : Field K] (V : FGModuleCat K) (f : ↑(FGModuleCat.FGModuleCatDual K V)) (x : ↑V),\\n  (ModuleCat.Hom.hom (FGModuleCat.FGModuleCatEvaluation K V).hom) (f ⊗ₜ[K] x) = f.toFun x\", \"doc\": \"The evaluation morphism maps the tensor product of the dual module $\\\\text{Hom}_K(V, K)$ and the module $V$ to the field $K$ by evaluating functionals on vectors, i.e., for $f \\\\in \\\\text{Hom}_K(V, K)$ a\"}\n  {\"name\": \"Module.Invertible.left\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} {M : Type v} {N : Type u_1} [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : AddCommMonoid N]\\n  [inst_3 : Module R M] [inst_4 : Module R N] (e : TensorProduct R M N ≃ₗ[R] R), Module.Invertible R M\", \"doc\": \"A proposition asserting that an element is invertible in the $ R $-module $ M $, where $ R $ is a commutative semiring, with respect to the module's scalar multiplication structure and the commutative\"}\n  {\"name\": \"TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero_of_rTensor_injective\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Vanishing\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_3}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] {ι : Type u_4} [inst_5 : Fintype ι] {m : ι → M} {n : ι → N},\\n  Function.Injective ⇑(LinearMap.rTensor N (Submodule.span R (Set.range m)\", \"doc\": \"Given an injective right tensor product map associated with the span of the image of $ m $, a tensor sum $ \\\\sum m_i \\\\otimes n_i $ vanishes trivially if and only if it equals zero in the tensor product\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: singleFunctor fullness and finite-dimensional tensor duality do not give the compact self-Ext criterion for derived tensor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projective-space-tilting-equivalence",
+  "date": "2026-10-23",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Flat finitely presented relative image from an acyclic section algebra. Finite-presentation argument: detect pseudo-coherence of the projective-space direct image by its finitely many derived twists (Stacks 0CSG). Proof of Stacks 0CSG (5) => (1): the equivalence from 0BQU and its RHom inverse. Full-faithfulness input of Tag 0BQU, with compactness stated in the quasi-coherent category actually used.",
+   "via": [
+    "lem-sfb-projective-space-tilting-equivalence",
+    "lem-sfb-projective-space-pseudocoherence-twist-test",
+    "lem-sfb-relative-section-image-flat-fp",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-compact-bundle-self-ext-full-faithfulness",
+  "worker": "stage1",
+  "summary": "Expanded Tag 09LZ into an explicit unit-on-the-generator and compactness argument in D_QCoh. Reused existing projective representatives, coproduct, cohomology, isomorphism-locus and compact-generator nodes; the regular-module calculation is an elementary step. No new nodes, no generation assumption on E, no change to the statement.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain through projective-space tilting: full-faithfulness part of Tag 0BQU. The created.item chain ends at a stage-3 module, so blueprint_refs ancestor returns None; retained that inherited null ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-module-direct-sums",
+    "why": "Generic derived/category-theory tool used with its stated hypotheses; this unit supplies no replacement for this basic input to the Tag 09LZ proof."
+   },
+   {
+    "node": "lem-pc-derived-qcoh-direct-sums",
+    "why": "Generic derived/category-theory tool used with its stated hypotheses; this unit supplies no replacement for this basic input to the Tag 09LZ proof."
+   },
+   {
+    "node": "lem-pc-derived-module-homology-coproduct",
+    "why": "Generic derived/category-theory tool used with its stated hypotheses; this unit supplies no replacement for this basic input to the Tag 09LZ proof."
+   },
+   {
+    "node": "lem-sc-shift-saturated-iso-locus",
+    "why": "Generic derived/category-theory tool used with its stated hypotheses; this unit supplies no replacement for this basic input to the Tag 09LZ proof."
+   },
+   {
+    "node": "lem-pc-compact-generators-build-objects",
+    "why": "Generic derived/category-theory tool used with its stated hypotheses; this unit supplies no replacement for this basic input to the Tag 09LZ proof."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-module-direct-sums",
+  "lem-pc-derived-qcoh-direct-sums",
+  "lem-pc-derived-module-homology-coproduct",
+  "lem-sc-shift-saturated-iso-locus",
+  "lem-pc-compact-generators-build-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-955c6f7e5",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-955c6f7e5 (reviewer sub-agent of L); spot-checked: I read dga.tex 09LZ and its proof. The delivery keeps the 09LZ idea but writes it out for the ring B=End(E): B is a compact weak generator, F and G preserve coproducts, the unit is an iso on B[n], and the iso locus is closed under triangles, coproducts and the telescope. That last step uses lem-sc-shift-saturated-iso-locus and lem-pc-compact-generators-build-objects with the singleton {B}. The statement and stmt_deps are identical to live, the item is still unsplit live, there is no repair note and no new nodes, and proof_deps equals the union of the uses. Cited statements checked: the module direct-sum and homology-coproduct nodes are bound to [Ring R], so applying them to B^op is legitimate for noncommutative End(E). Compactness is used only against D_QCoh objects (step 4), consistent with the item hypothesis and the parent tilting node's use of it. Step 2 is the elementary B[0] Hom/cohomology calculation via the Mathlib K-projective leaf. Step 5: H^0(eta_B) is End(E)->End_D(E), which follows from F=V_E on the projective B; it is bijective by the single-functor leaf, and the adjunction's exactness handles the shifts. Edge cases checked: E=0, E=O_X affine, matrix rings. Duplicate search (09LZ/0BQU, fully faithful+compact) found only the parent chain. All five tool_uses are generic and accepted. No SGA citations."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactBundleSelfExtFullFaithfulness",
+  "declaration": "AlgebraicGeometry.BundleEndomorphism.compact_bundle_self_ext_fullyFaithful",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactBundleSelfExtFullFaithfulness.lean",
+  "statement": "theorem compact_bundle_self_ext_fullyFaithful (X : Scheme.{u}) (A : Type a) [CommRing A] (aX : A →+* Scalars X) [CompactSpace X] [QuasiSeparatedSpace X] (E : Modules X) [E.IsFiniteLocallyFree] [HasDerivedCategory.{w} (Modules X)] [HasDerivedCategory.{wB} (ModuleCat.{u} (End E)ᵐᵒᵖ)] (hcompact : ∃ hE : schemeDerivedQCohProperty X (single X E), @IsCompactObject _ _ _ (derivedQCohDirectSums X) ⟨single X E, hE⟩) (hself : ∀ q : ℤ, q ≠ 0 → Subsingleton (single X E ⟶ (single X E)⟦q⟧)) (F : DerivedCategory (ModuleCat.{u} (End E)ᵐᵒᵖ) ⥤ schemeDerivedQCohCategory X) (eps : DerivedCategory.Qh ⋙ (F ⋙ (schemeDerivedQCohProperty X).ι) ⟶ (tensor X E).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) [(F ⋙ (schemeDerivedQCohProperty X).ι).IsLeftDerivedFunctor eps (HomotopyCategory.quasiIso _ (.up ℤ))] (adj : F ⊣ qcHom X E) : F.Full ∧ F.Faithful ∧ IsIso adj.unit",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0257232f9",
+  "group": "NE",
+  "result": "pass",
+  "note": "Node record differs from live only in lean; the 4 stmt_dep records are identical to live; lean.statement matches the file verbatim. F/eps/IsLeftDerivedFunctor copy the first clause of adjunctionStatement, so F is determined up to iso and the conclusion is iso-invariant. Unit iso does not depend on the choice of adj : F ⊣ qcHom X E (adjunctions differ by an automorphism of G). Compactness is IsCompactObject in D_QCoh via derivedQCohDirectSums (u-indexed families); hself is Subsingleton of Hom(E[0],E[0][q]) in D(O_X) for q≠0; conclusion F.Full ∧ F.Faithful ∧ IsIso adj.unit. Checked against Stacks 09LZ (dga.tex l.6122). No commutativity, generation or universe restriction added. Edge cases E=0, empty X, matrix rings, non-generating E: fine. Docstrings, proof steps, report sections present; sorry only; no new nodes. No findings."
+ }
+}

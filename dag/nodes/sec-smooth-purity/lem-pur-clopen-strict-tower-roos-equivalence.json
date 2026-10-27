@@ -1,0 +1,325 @@
+{
+ "id": "lem-pur-clopen-strict-tower-roos-equivalence",
+ "kind": "statement",
+ "title": "Strict-tower equivalence and projection-normalized Roos comparison for a clopen cover",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], let $I$ be a finite set, and let $j_i:X_i\\hookrightarrow X$ be pairwise disjoint open and closed immersions whose images cover $X$ [def-weil-open-immersion, def-weil-closed-immersion]. Use the small pro-etale sites in the fixed universes [def-weil-pbc-proetale-site], sheaves of modules [def-weil-sheaf-of-modules-category], and their unbounded derived categories and cochain complexes [def-weil-abstract-derived-category].\n\nFor a sheaf of commutative rings $R$ on $X_{\\mathrm{proet}}$ put $R_i=R|_{X_i}$ and let $r_i$ be restriction. A strict tower is a sequence of complexes $C_n$ of $R$-modules with chain maps $t_n:C_{n+1}\\to C_n$; its morphisms are families of chain maps commuting with $t_n$ [def-weil-inverse-system]. Restriction is an equivalence from strict $R$-module towers to tuples of strict $R_i$-module towers. Its inverse has\n$$G((C_{i,n})_i)^m_n(U)=\\prod_i C_{i,n}^m(U\\times_X X_i),$$\nwith componentwise differentials, transitions, module actions and tower maps. The equivalence's unit is restriction of sections and its counit is projection to the component.\n\nPut $P_C=\\prod_n C_n$ termwise, with projections $\\operatorname{pr}_n$, and let $v_C=1-s_C$ have $n$th coordinate $\\operatorname{pr}_n-t_n\\operatorname{pr}_{n+1}$ [def-weil-tower-transition-endomorphism]. The canonical comparisons\n$$\\alpha_{i,C}:r_iP_C\\xrightarrow{\\sim}\\prod_n r_iC_n$$\ncommute with differentials and every projection and satisfy $\\alpha_{i,C}r_i(v_C)=v_{r_iC}\\alpha_{i,C}$. For gluing, the corresponding comparison is the reindexing $\\prod_n\\prod_i C_{i,n}^m(U\\times_X X_i)\\cong\\prod_i\\prod_n C_{i,n}^m(U\\times_X X_i)$ fixing each $(i,n)$ coordinate.\n\nUse $H(C)=\\operatorname{Cone}(v_C)[-1]$ [def-weil-strict-roos-model] with $H(C)^m=P_C^{m-1}\\oplus P_C^m$ and $d(y,x)=(-dy-v_Cx,dx)$. There is a chain isomorphism $r_iH(C)\\cong H(r_iC)$ equal to $\\alpha_{i,C}$ on both summands. It is natural for strict tower maps, which act diagonally by $\\prod_n f_n$. It preserves the cone projection $(y,x)\\mapsto x$, its composites with every $\\operatorname{pr}_n$, and the connecting map $z\\mapsto(-z,0)$ to the shifted cone, with this signed convention. Localization gives an isomorphism in $D(R_i)$ with these same map identities. The termwise products represent derived products. A specified triangle $K\\to P_C\\xrightarrow{v_C}P_C\\to K[1]$ is distinguished if and only if all its component triangles are distinguished [def-weil-derived-limit], retaining the specified first and connecting maps under the product and shift identifications. These assertions include the empty partition: then $X$ is empty and all categories, towers and triangles are zero.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08TC, derived-definition-derived-limit; Tag 07KC, derived-lemma-products. Agent strict finite-clopen application, returned proof steps 1-4."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-strict-roos-model",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pur-clopen-ringed-module-gluing] degreewise and at each tower level. For a tuple of towers, define $G$ on differentials, transitions and morphisms by its componentwise module formula. Functoriality gives $d^2=0$, $dt=td$ and the strict-map equations in [def-weil-inverse-system]. Naturality of the gluing unit and counit applied to each differential and transition makes them isomorphisms of strict towers. Their degreewise inverses also commute with these maps. Thus they exhibit the asserted equivalence, with exactly the displayed section formula and unit/counit. No replacement of a tower by an objectwise isomorphic diagram is needed.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TS, sites-lemma-mapping-property-glue, and 04TQ/04TR, sites-lemma-glue-maps/sites-lemma-glue-sheaves; degreewise and towerwise application."
+   }
+  },
+  {
+   "text": "Use the forgetful functor to additive presheaves to show that open restriction preserves countable products: sectionwise precomposition preserves them and the forgetful functor reflects them. Evaluation of module sheaves and complexes preserves the actual product, giving productSections and its projection equation. Compose these section equivalences with the module-gluing coordinates and transpose the n and i indices. This gives tau with exactly the displayed projection normalization. The transition comparison follows by checking every product projection [def-weil-category-product] and [def-weil-tower-transition-endomorphism].",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-tower-transition-endomorphism",
+    "lem-pur-clopen-ringed-module-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, derived-lemma-products; sectionwise products and finite-clopen coordinate reindexing."
+   }
+  },
+  {
+   "text": "Apply the proved generic additive Roos comparison [lem-pur-roos-comparison-horizontal-coherence]. Its two-summand coordinate formula is the diagonal product comparison. Prove its projection equation by composing that formula with the second biproduct projection. Product projections give the evaluation equation. In the fixed shifted-cone coordinates, boundary is the negative first inclusion; composing the diagonal comparison with that inclusion proves the signed boundary equation. These coordinate computations retain the sign and the actual chain maps [def-weil-strict-roos-model]. Preservation of countable products makes the comparison an isomorphism.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "def-weil-strict-roos-model",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, derived-definition-cone, and Homology Tag 011G, definition-shift-cochain; explicit two-summand computation with the signed map fixed in the statement."
+   }
+  },
+  {
+   "text": "Apply any localization functor to the projection, evaluation and signed boundary identities of step 3. Its map_comp equations give the displayed localized identities without choosing a new cone. For triangle reflection, lift the module equivalence of [lem-pur-clopen-ringed-module-gluing] degreewise to complexes. Exact restriction jointly reflects quasi-isomorphisms by homology. Its inverse preserves quasi-isomorphisms by the counit. The universal property of localization, including localization of the product category, therefore gives an equivalence of derived categories in the exact HasDerivedCategory universe of the statement. The Lean proof reuses the existing generic private helper of [lem-pur-finite-product-derived-tensor-calculus], namely the theorem FiniteClopenTensor.derivedPi_isEquivalence from Sheaf.AlgebraicGeometry.ProEtaleFiniteClopenTensorCalculus via a proof-only import all, applied to the normalized module gluing functors, their zero-map equation, unit and counit, and joint reflection of isomorphisms. Its fully polymorphic binders retain the independent ring, module, index and derived-category universes; no commutative-ring specialization or tensor-calculus theorem is used.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-finite-product-derived-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05RU, derived-definition-unbounded-derived-category, and 015F, derived-lemma-right-derived-exact-functor; localization of the explicit chain isomorphism."
+   }
+  },
+  {
+   "text": "Generalize the proof of exact products [lem-weil-proetale-countable-products-exact] to the independent ring universe used here: an affine weakly contractible covering family [lem-weil-pbc-proetale-affine-wcontractible-covering-family] makes each component epimorphism surjective on sections, hence its countable product is locally surjective. Thus module sheaves satisfy CountableAB4Star. Apply [lem-weil-derived-countable-products-core] to the actual termwise product cone. The canonical localization preserves that cone and its projections. For a restriction functor, use its complex-level preservation of products and its canonical localization comparison; essential surjectivity of Q descends product preservation to the derived restriction. Consequently PreservesProduct.iso has hom equal to the specified piComparison. Verify conjugacy of the tower transition endomorphism after every projection [def-weil-derived-limit].",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+    "lem-weil-derived-countable-products-core",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07KC, derived-lemma-products; Tag 08TC, derived-definition-derived-limit."
+   }
+  },
+  {
+   "text": "Exact derived restriction is triangulated [lem-sf-exact-functor-derived-triangulated], so it preserves distinguished triangles. Conversely complete the first arrow of the specified triangle T to a distinguished triangle S using TR1 [def-weil-triangulated-category]. Every restricted T and S is distinguished, so the identity isomorphisms on the first two vertices extend to a componentwise triangle isomorphism. Full faithfulness of the restriction family, supplied by the derived equivalence of step 4, lifts their third components to an isomorphism in the original category. Faithfulness and the commShift isomorphisms lift the two remaining triangle equations. Thus T is isomorphic to S and distinguished. Finally conjugate the two product vertices by the projection-normalized product isomorphisms of step 5. Their transition equation and the explicit shifted last arrow give exactly the IsDerivedLimitTriangle equivalence, with no replacement of its specified arrows [def-weil-derived-limit]. The calculation of product-transition conjugacy and the three triangle equations is proved once in the private generic helper limit_triangle_descent over abstract triangulated categories, then specialized to the derived restrictions; it introduces no new hypothesis or postponed proof.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, derived-lemma-right-derived-exact-functor; Tag 0CRG, derived-lemma-products-sums-shifts-triangles (finite sums); Tag 08TC, derived-definition-derived-limit."
+   }
+  },
+  {
+   "text": "For an empty partition the covering hypothesis forces X empty. The empty-cover sheaf axiom forces every section of every module sheaf to be zero. Hence every module, strict tower and complex is zero. Essential surjectivity of the canonical localization makes every derived object zero too. Each category is equivalent to Discrete PUnit since all hom sets are singletons. The specified triangle is isomorphic to the contractible zero triangle, hence distinguished by TR1 [def-weil-triangulated-category]. This also verifies the empty-partition edge case without any nonzero or nonemptiness assumption.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 04TS, sites-lemma-mapping-property-glue, and 05RU, derived-definition-unbounded-derived-category; empty-category specialization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-clopen-ringed-module-gluing",
+  "def-weil-inverse-system",
+  "def-weil-category-product",
+  "def-weil-tower-transition-endomorphism",
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "def-weil-strict-roos-model",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-proetale-affine-wcontractible-covering-family",
+  "lem-weil-derived-countable-products-core",
+  "def-weil-derived-limit",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-triangulated-category",
+  "lem-pur-finite-product-derived-tensor-calculus"
+ ],
+ "proof_origin": {
+  "by": "C4",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 07KC, 08TC, 015F, 014E and 05RU; degreewise clopen module gluing, the proved generic Roos comparison, direct localization of the complex equivalence, exact countable products and fully faithful triangle reflection by TR1. Reuses the existing generic private FiniteClopenTensor.derivedPi_isEquivalence instead of duplicating its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction and sectionwise gluing along a finite disjoint clopen cover give an equivalence of strict towers of module complexes preserving countable products and specified Roos triangles",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Profinite.NobelingProof.CC_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2)\\n      {f : LocallyConstant ↑C ℤ},\\n      (Profinite.NobelingProof.Linea\", \"doc\": \"In Nobeling's profinite construction, for any locally constant $\\\\mathbb{Z}$-valued function $f$ on $C$ satisfying $\\\\text{Linear}_{C\\\\to C'}(f) = 0$ (where $\\\\text{Linear}_{C\\\\to C'}$ denotes the $\\\\mathbb\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"Profinite.NobelingProof.GoodProducts.square_commutes\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}}\\n  (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n  Profinite.NobelingProof.GoodProducts.SumEval C ho ∘ Sum.inl =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (ModuleCat.ofHom (Profinite.NobelingProof.\", \"doc\": \"The composition of the evaluation map for good products with the left injection into the disjoint union of good and maximal products equals the composition of the module homomorphism induced by the No\"}\n  {\"name\": \"InverseSystem.pEquivOnGlue\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"{ι : Type u_6} →\\n  {F : ι → Type u_7} →\\n    {X : ι → Type u_8} →\\n      {i : ι} →\\n        [inst : LinearOrder ι] →\\n          {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} →\\n            [inst_1 : SuccOrder ι] →\\n              {equivSucc : ⦃i : ι⦄ → ¬IsMax i → F (Order.succ i) ≃ F i × X i} →\\n                [Well\", \"doc\": \"A proof constructing the equivalence relation $\\\\mathrm{PEquivOn}$ on the lower interval $\\\\{j \\\\in \\\\iota \\\\mid j < i\\\\}$ for a directed inverse system indexed by a linearly ordered type $\\\\iota$ with succe\"}\n  {\"name\": \"InverseSystem.pEquivOnLim\", \"module\": \"Mathlib/Order/DirectedInverseSystem\", \"type\": \"{ι : Type u_6} →\\n  {F : ι → Type u_7} →\\n    {X : ι → Type u_8} →\\n      {i : ι} →\\n        [inst : LinearOrder ι] →\\n          {f : ⦃i j : ι⦄ → i ≤ j → F j → F i} →\\n            [inst_1 : SuccOrder ι] →\\n              {equivSucc : ⦃i : ι⦄ → ¬IsMax i → F (Order.succ i) ≃ F i × X i} →\\n                [Well\", \"doc\": \"For a directed inverse system indexed by a linearly ordered type $\\\\iota$ with successor structure, given a prelimit element $i$ (having no immediate predecessor) and a family of equivalences satisfyin\"}\n  {\"name\": \"CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  {Q : CompHausLike P} {Z : Type (max u w)} (r : LocallyConstant (↑Q.toTop) Z) (a : Function.Fiber ⇑r)\\n  [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  (X : CategoryTheory.Functor\", \"doc\": \"For a locally constant function $ r: Q \\to Z $ on a compact Hausdorff space $ Q $ with explicit finite coproducts, the composition of the morphism induced by the sigma isomorphism (relating the fiber s\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"Profinite.NobelingProof.spanFunctorIsoIndexFunctor\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Basic\", \"type\": \"{I : Type u} →\\n  {C : Set (I → Bool)} →\\n    [inst : (s : Finset I) → (i : I) → Decidable (i ∈ s)] →\\n      (hC : IsCompact C) → Profinite.NobelingProof.spanFunctor hC ≅ Profinite.indexFunctor hC\", \"doc\": \"Under the assumption that membership in finite subsets is decidable and given a compact set $ C $, there exists a natural isomorphism between the span functor (constructing profinite spaces via Nobeli\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone and sheaf limits are ingredients only; none gives strict clopen tower equivalence with the projection-normalized Roos triangles in both directions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"mappingCone\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.mappingCone.fst\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] : CochainComplex.HomComplex.Cocycle (CochainComplex.mappingCone φ) F 1\", \"doc\": \"The first projection from the mapping cone, as a cocycle of degree `1`.\"}\n  {\"name\": \"CochainComplex.mappingCone.snd\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] : CochainComplex.HomComplex.Cochain (CochainComplex.mappingCone φ) G 0\", \"doc\": \"The second projection from the mapping cone, as a cochain of degree `0`.\"}\n  {\"name\": \"CochainComplex.mappingCone.inl\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] : CochainComplex.HomComplex.Cochain F (CochainComplex.mappingCone φ) (-1)\", \"doc\": \"The left inclusion in the mapping cone, as a cochain of degree `-1`.\"}\n  {\"name\": \"CochainComplex.mappingCone\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] : CochainComplex C ℤ\", \"doc\": \"The mapping cone of a morphism of cochain complexes indexed by `ℤ`.\"}\n  {\"name\": \"CochainComplex.mappingCone.descCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ} {n m : ℤ} (α : CochainComplex.HomComplex.Cochain F K m) (β : CochainComplex.HomComplex.Cochain G K n) (h : m +\", \"doc\": \"Given `φ : F ⟶ G`, this is the cochain in `Cochain (mappingCone φ) K n` that is\\nconstructed from two cochains `α : Cochain F K m` (with `m + 1 = n`) and `β : Cochain F K n`.\"}\n  {\"name\": \"CochainComplex.mappingCone.liftCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ} {n m : ℤ} (α : CochainComplex.HomComplex.Cochain K F m) (β : CochainComplex.HomComplex.Cochain K G n) (h : n +\", \"doc\": \"Given `φ : F ⟶ G`, this is the cochain in `Cochain (mappingCone φ) K n` that is\\nconstructed from two cochains `α : Cochain F K m` (with `m + 1 = n`) and `β : Cochain F K n`.\"}\n  {\"name\": \"CochainComplex.mappingCone.liftCochain_snd\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ} {n m : ℤ} (α : CochainComplex.HomComplex.Cochain K F m) (β : CochainComplex.HomComplex.Cochain K G n) (h : n +\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.inl_descCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ} {n m : ℤ} (α : CochainComplex.HomComplex.Cochain F K m) (β : CochainComplex.HomComplex.Cochain G K n) (h : m +\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.inr\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] : G ⟶ CochainComplex.mappingCone φ\", \"doc\": \"The right inclusion in the mapping cone.\"}\n  {\"name\": \"CochainComplex.mappingCone.inr_descCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ} {n m : ℤ} (α : CochainComplex.HomComplex.Cochain F K m) (β : CochainComplex.HomComplex.Cochain G K n) (h : m +\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.inr_snd_assoc\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] {K : CochainComplex C ℤ} {d e : ℤ} (γ : CochainComplex.HomComplex.Cochain G K d) (he : 0 + d = e) : (CochainComplex.HomComplex.Cochain.\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.mappingCone.isZero_X_iff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.MappingCone\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v, u_1} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (φ : F ⟶ G) [HomologicalComplex.HasHomotopyCofiber φ] (i : ℤ) : CategoryTheory.Limits.IsZero ((CochainComplex.mappingCone φ).X i) ↔ CategoryTheory.Limits.IsZero (F.X (i + 1)) ∧ CategoryTheo\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone and sheaf limits are ingredients only; none gives strict clopen tower equivalence with the projection-normalized Roos triangles in both directions."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|disjoint).*(roos|tower|homotopy.limit)|roos.*(restrict|equivalence)",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"158\", \"text\": \"  A.toSubalgebra.LinearDisjoint (IsScalarTower.toAlgHom F L E).range\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"161\", \"text\": \"    A.LinearDisjoint L ↔ A.toSubalgebra.LinearDisjoint (IsScalarTower.toAlgHom F L E).range :=\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"187\", \"text\": \"theorem LinearDisjoint.symm' (H : (IsScalarTower.toAlgHom F L E).fieldRange.LinearDisjoint L') :\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"206\", \"text\": \"/-- Linear disjointness of an intermediate field with a tower of field embeddings is preserved by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone and sheaf limits are ingredients only; none gives strict clopen tower equivalence with the projection-normalized Roos triangles in both directions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of module sheaf categories on clopen components preserves strict inverse systems and mapping fibres of one minus transition",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite product decomposition of sheaf module categories lifts to strict complex towers and reflects distinguished homotopy inverse limit triangles with their projections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.isSheaf_of_isLimit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Functor Cᵒᵖ RingCat}\\n  {F : CategoryTheory.Functor D (PresheafOfModules R)}\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂\", \"doc\": \"If $\\\\mathcal{C}$ is a category equipped with a Grothendieck topology $J$, and $F: \\\\mathcal{J} \\\\to \\\\text{PresheafOfModules}(R)$ is a diagram of presheaves of modules such that each $F(j)$ is a sheaf wi\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective. If $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is a functor preserving finite products and $F : \\\\mathcal{C}^{\\\\text\"}\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A) {B : Type u₄}\\n  [inst_2 : CategoryTheory.Category.{v₄, u₄} B] (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C]\\n  [ins\", \"doc\": \"Let $\\\\mathcal{C}$ be a preregular finitary extensive category where every object is projective, and let $s : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a functor reflecting finite products. If a presheaf $F : \\\\m\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts_of_projective\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] (F : CategoryTheory.Functor Cᵒᵖ A)\\n  [inst_2 : CategoryTheory.Preregular C] [inst_3 : CategoryTheory.FinitaryExtensive C]\\n  [∀ (X : C), CategoryTheory.Projective X],\\n  Categor\", \"doc\": \"In a preregular, finitary extensive category where all objects are projective, a presheaf $ F $ satisfies the sheaf condition with respect to the coherent Grothendieck topology if and only if $ F $ pr\"}\n  {\"name\": \"CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts\", \"module\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {A : Type u₃}\\n  [inst_1 : CategoryTheory.Category.{v₃, u₃} A] {B : Type u₄} [inst_2 : CategoryTheory.Category.{v₄, u₄} B]\\n  (s : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.Preregular C] [inst_4 : CategoryTheory.FinitaryExtensiv\", \"doc\": \"If a category is preregular and finitary extensive, all its objects are projective, and a functor preserves finite products, then the coherent topology on the category satisfies the sheaf composition \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: mappingCone and sheaf limits are ingredients only; none gives strict clopen tower equivalence with the projection-normalized Roos triangles in both directions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of module sheaves to finitely many clopen components gives an equivalence on strict towers of complexes preserving projection-normalized Roos mapping fibre triangles",
+   "results": "OK; 8 hits; HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported, CochainComplex.ConnectData.restrictionGEIso, HomologicalComplex.restrictionToTruncGE'.f_eq_iso_hom_iso_inv, CochainComplex.ConnectData.restrictionGEIso_hom_f, CochainComplex.ConnectData.restrictionLEIso_hom_f, HomologicalComplex.restrictionToTruncGE'_f_eq_iso_hom_iso_inv, CochainComplex.ConnectData.restrictionLEIso, HomologicalComplex.restriction.sc'Iso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are individual mapping-cone comparisons, complex-shape restrictions, or Zariski module restrictions; none states the finite-clopen pro-etale strict-tower equivalence with specified projection and signed-boundary identities and the two-way distinguished-triangle criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "(clopen|disjoint).*(roos|tower)|roos.*(restrict|equivalence)",
+   "results": "OK; 4 hits; Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/LinearDisjoint.lean, Mathlib/FieldTheory/LinearDisjoint.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are individual mapping-cone comparisons, complex-shape restrictions, or Zariski module restrictions; none states the finite-clopen pro-etale strict-tower equivalence with specified projection and signed-boundary identities and the two-way distinguished-triangle criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"map\"",
+   "results": "OK; 12 hits; CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are individual mapping-cone comparisons, complex-shape restrictions, or Zariski module restrictions; none states the finite-clopen pro-etale strict-tower equivalence with specified projection and signed-boundary identities and the two-way distinguished-triangle criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictionGEIso|sc.Iso|mappingCone.map",
+   "results": "OK; 13 hits; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/SpectralObject/SpectralSequence.lean, Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean, Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean, Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean, Mathlib/Algebra/Homology/Embedding/RestrictionHomology.lean, Mathlib/Algebra/Homology/Embedding/Connect.lean; subdirectory Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are individual mapping-cone comparisons, complex-shape restrictions, or Zariski module restrictions; none states the finite-clopen pro-etale strict-tower equivalence with specified projection and signed-boundary identities and the two-way distinguished-triangle criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Clopen restriction of module sheaves preserves strict inverse towers and their Roos triangles with all projections",
+   "results": "OK; 8 hits; AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctor, ModuleCat.Tilde.toOpen, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.restrictScalars, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are individual mapping-cone comparisons, complex-shape restrictions, or Zariski module restrictions; none states the finite-clopen pro-etale strict-tower equivalence with specified projection and signed-boundary identities and the two-way distinguished-triangle criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive exact equivalence of abelian sheaf categories commutes with products and the mapping cone of one minus the transition endomorphism for an inverse sequence",
+   "results": "OK; 8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexIso, DerivedCategory.triangleOfSESIso",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits are individual mapping-cone comparisons, complex-shape restrictions, or Zariski module restrictions; none states the finite-clopen pro-etale strict-tower equivalence with specified projection and signed-boundary identities and the two-way distinguished-triangle criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-clopen-roos-integral-descent",
+  "date": "2026-10-22",
+  "group": "Q124"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility assertion of def-pur-section-invariant, expanded finite-clopen integral passage via lem-pur-finite-clopen-derived-decomposition old steps 7 and 9; returned lem-pur-clopen-roos-integral-descent steps 1-4 and zero-category part of step 10.",
+   "via": [
+    "lem-pur-clopen-roos-integral-descent",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-clopen-strict-tower-roos-equivalence",
+  "worker": "stage1",
+  "summary": "Lifted the existing ringed-module gluing equivalence to strict towers, verified products and transition endomorphisms coordinatewise, computed the two-summand cone comparison and its signed map identities, and assembled the specified-triangle criterion using exact pro-etale products, unbounded localization and finite sums. No new nodes or changed statement.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant: finite-clopen integral passage in lem-pur-finite-clopen-derived-decomposition, via lem-pur-clopen-roos-integral-descent step 1; realizes the strict-tower/product/cone/triangle comparison in the recorded blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact sectionwise countable products for arbitrary pro-etale ring sheaves supply the hypotheses needed to identify termwise and derived products."
+   },
+   {
+    "node": "lem-weil-derived-countable-products-core",
+    "why": "Generic exact-product theorem identifies the localized actual product cone, including projections, as a derived product cone; this is not supplied by the purity unit."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic termwise exact-functor theorem makes the zero-insertion derived functors triangulated when rebuilding a triangle from its components."
+   },
+   {
+    "node": "lem-weil-finite-sums-distinguished-triangles",
+    "why": "Generic finite-biproduct theorem reassembles distinguished component triangles while retaining all their arrows."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-countable-products-core",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-3f5c5c6c0",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-3f5c5c6c0 (reviewer sub-agent of L); spot-checked: I read the item in full; it is a first split with 0 new nodes and an unchanged statement and stmt_deps. It is a statement-only child created by Q124 for lem-pur-clopen-roos-integral-descent, whose steps 1 and 4 cite it exactly for the strict-tower, product, cone and triangle clauses. I read every cited statement: the clopen ringed-module gluing, pro-etale exact countable products (which supply the CountableAB4Star hypothesis of the derived-countable-products core lemma), the tower transition endomorphism, the strict Roos model, the unbounded derived localization, the exact-functor and finite-sums leaves, TR1, and derived limit. I recomputed step 3: beta d = d beta via alpha r_i(v) = v' alpha; the signed map delta(z) = (-z,0) is a chain map into H[1], and beta[1] delta = delta alpha. The cone coordinates and differential match def-weil-strict-roos-model. Step 5 keeps the actual product projections, so Q(v_C) is the Roos middle arrow. In step 6 the converse goes through the zero-insertion triangulated functors, the distinguished finite sum, and the iso of the sum with the identity plus TR1; the shift compatibility follows from the triangulated equivalence (minor point, acceptable). Edge cases checked: empty I, singleton, two components, zero ring sheaf, zero or identity transitions; no Mittag-Leffler hypothesis is used. Stacks tags 08TC, 07KC, 015F, 014E, 0CRG, 04TQ-04TS, 05RU and 011G exist with the cited labels; I read 07KC and 0CRG. No SGA source. No duplicate: the strict-system clopen nodes are etale/compactification statements, and lem-pe-roos-cone-calculus has no clopen comparison. lem-pur-roos-additive-comparison would give the step-3 cone iso generically, but the inline computation is short and also checks the signed map (advisory only). Tool uses accepted: the derived-countable-products core lemma is generic and off-unit; the pro-etale products node is actually on route via sk-def-sf-operations; the two mathlib leaves are not route."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClopenStrictTowerRoosEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.strict_tower_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.Modules",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.modulesAbelian",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.Towers",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictedRing",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictionAdditive",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.complexRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.towerRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.boundary",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restriction_exact",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictionLimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.restrictionColimits",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.productComparison",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.derivedRestriction",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.localization",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.strict_tower_equivalence",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.strict_roos_comparison",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.gluingProductReindex",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.derived_products",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.derived_triangle_descent",
+   "AlgebraicGeometry.Scheme.ProEt.ClopenRoos.empty_partition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClopenStrictTowerRoosEquivalence.lean",
+  "statement": "theorem strict_tower_equivalence : ∃ (G : (∀ i, Towers.{t, u, v} (Y i) (restrictedRing (j i) R)) ⥤ Towers.{t, u, v} X R) (η : 𝟭 _ ≅ Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R) ⋙ G) (ε : G ⋙ Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R) ≅ 𝟭 _), (∀ C, (Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R)).map (η.hom.app C) ≫ ε.hom.app ((Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R)).obj C) = 𝟙 _) ∧ (∀ F, η.hom.app (G.obj F) ≫ G.map (ε.hom.app F) = 𝟙 _) ∧ ∃ σ : ∀ F (p : ℤ) (n : ℕᵒᵖ) (U : X.ProEt), (((G.obj F).X p).obj n).val.obj (op U) ≃+ (∀ i, (((F i).X p).obj n).val.obj (op (clopenTestPiece (j i) U))), (∀ F p n U (a : R.obj.obj (op U)) x i, σ F p n U (a • x) i = R.obj.map (clopenTestInclusion (j i) U).op a • σ F p n U x i) ∧ (∀ F p n (U V : X.ProEt) (f : V ⟶ U) x i, σ F p n V ((((G.obj F).X p).obj n).val.map f.op x) i = (((F i).X p).obj n).val.map ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (j i)).map f).op (σ F p n U x i)) ∧ (∀ F p n m (f : n ⟶ m) U x i, σ F p m U ((((G.obj F).X p).map f).val.app (op U) x) i = (((F i).X p).map f).val.app (op (clopenTestPiece (j i) U)) (σ F p n U x i)) ∧ (∀ F p q n U x i, σ F q n U ((((G.obj F).d p q).app n).val.app (op U) x) i = (((F i).d p q).app n).val.app (op (clopenTestPiece (j i) U)) (σ F p n U x i)) ∧ (∀ F H (f : F ⟶ H) p n U x i, σ H p n U ((((G.map f).f p).app n).val.app (op U) x) i = (((f i).f p).app n).val.app (op (clopenTestPiece (j i) U)) (σ F p n U x i)) ∧ (∀ C p n U x i, σ ((Functor.pi' (fun i ↦ towerRestriction.{t, u, v} (j i) R)).obj C) p n U ((((η.hom.app C).f p).app n).val.app (op U) x) i = ((C.X p).obj n).val.map (clopenTestInclusion (j i) U).op x) ∧ (∀ F i p n (W : (Y i).ProEt) x, ((((ε.hom.app F) i).f p).app n).val.app (op W) x = (((F i).X p).obj n).val.map (clopenDiagonal (j i) W).op (σ F p n ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale (j i))).obj W) x i)) ∧ ∃ τ : ∀ F (p : ℤ) (U : X.ProEt), ((roosP (G.obj F)).X p).val.obj (op U) ≃+ (∀ i, ((roosP (F i)).X p).val.obj (op (clopenTestPiece (j i) U))), ∀ F p U x i (n : ℕ), ((Pi.π (fun n : ℕ ↦ (F i).asFunctor.obj (op n)) n).f p).val.app (op (clopenTestPiece (j i) U)) (τ F p U x i) = σ F p (op n) U (((Pi.π (fun n : ℕ ↦ (G.obj F).asFunctor.obj (op n)) n).f p).val.app (op U) x) i",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Joint statement: strict_tower_equivalence, strict_roos_comparison, derived_products, derived_triangle_descent and empty_partition. Other declarations transparently specialize the recorded restrictions, module categories, strict Roos model and localization; restriction_exact supplies the exactness interface for the canonical derived restriction. Second reader (maintainer review): the gluing-side product comparison clause is stated as τ in strict_tower_equivalence; gluingProductReindex is its coordinate reindexing.",
+  "fixed_by": "NT-stage2-cc-c47d3af8f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c47d3af8f",
+  "group": "Q99",
+  "result": "fix",
+  "note": "H3: the node's gluing-side reindexing clause was only a standalone Equiv.piComm def (gluingProductReindex), not linked to G or sigma. FIX adds inside strict_tower_equivalence: exists tau : sections of roosP(G F) ≃+ forall i, sections of roosP(F i) on U ×_X X_i, with pi_n(tau x i) = sigma (op n)(pi_n x) i. Docstring extended; lean-record.json carries the verbatim new statement (refit_record: no refusals). nt_compile --json clean 9.2 s; a control with op (n+1) fails to compile, so the clause is checked. Accepted: hypotheses and universes (max v (t+1), independent ring and index universes, hcomm); the 7 sigma clauses with unit/counit and triangle identities; alpha = piComparison (iso, projections, conjugates roosU); beta pinned via roosChi on both summands (sign (-dy-vx,dx) recomputed); roosProj/roosEval clauses; boundary = -inr then shift iso = (-z,0); localized identities; derived_products limit cones; derived_triangle_descent for arbitrary K (true generalization); empty_partition; docstrings; no hollow defs; all theorems sorry. Advisory: clopen* abbrevs owned by proof_dep theorem lem-pur-clopen-ringed-module-gluing (not in stmt_deps); restriction_exact is a sorry helper whose content is in the gluing node; lem-pur-clopen-unbounded-derived-localization has no Lean record, so Mathlib mapDerivedCategory is used."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261024T184725-L-3140892",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

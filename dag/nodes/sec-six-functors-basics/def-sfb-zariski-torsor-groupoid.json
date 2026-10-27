@@ -1,0 +1,126 @@
+{
+ "id": "def-sfb-zariski-torsor-groupoid",
+ "kind": "definition",
+ "title": "Zariski locally trivial scheme torsor groupoid",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $G$ be a group scheme over $S$, and let $J$ be an $S$-scheme with left $G$-action. Use the scheme torsor pairs, cartesian equivariant arrows and trivial-torsor construction of [def-sfb-scheme-action-torsor-groupoids]. A torsor pair $(E\\to T,u:E\\to J)$ is Zariski locally trivial if every point of $T$ belongs to the image of an open immersion $j:U\\to T$ with an equivariant morphism $t:G\\times_S U\\to E$ whose square with the projection $G\\times_S U\\to U$ and $j$ is cartesian [def-pc-fibre-product]. Define the Zariski torsor groupoid as the full subcategory on these pairs, with its existing projection to schemes over $S$. The canonical general trivial-torsor atlas uses the construction of [def-sfb-affine-action-quotient-stack]. Every trivial pair is Zariski locally trivial (the whole base is a product chart); this law supplies the proof field of the canonical trivial-torsor map $h_J\\to\\mathcal P_{\\mathrm{Zar}}$, with the existing trivial-torsor arrow maps. For $x:T\\to J$, write $P_x$ for this trivial pair as an object of the actual fibre over $T$. The discrete groupoid $h_J$ and the notion of fibred groupoid are those of [def-sfb-stable-pointed-moduli-groupoids].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-scheme-action-torsor-groupoids",
+  "def-pc-fibre-product",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-affine-action-quotient-stack"
+ ],
+ "source": {
+  "document": "literature/stacks-project/examples-stacks.tex",
+  "place": "Tag 04UV (section-group-quotient-stacks), torsor pairs, cartesian equivariant arrows and trivial-torsor functor; restrict local triviality to Zariski open neighbourhoods as stipulated in lem-sfb-zariski-torsor-categorical-coarse-descent."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Zariski locally trivial group scheme torsor equivariant maps quotient groupoid",
+   "results": "{\"t\": \"2026-10-24T13:41:23Z\", \"tool\": \"leansearch\", \"query\": \"Zariski locally trivial group scheme torsor equivariant maps quotient groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulActionHom.instAddGroup\", \"MulActionHom.instAddCommGroup\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint_source\", \"AlgebraicGeometry.Scheme.instIsLocalAtTargetIsomorphismsZariskiPrecoverage\", \"Topology.IsQuotientMap.trivializationOfVAddDisjoint_target\", \"Topology.IsQuotientMap.trivializationOfSMulDisjoint_source\", \"MulAction.orbitRel.Quotient\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\"], \"digest\": \"eff0fef229364d9a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not define the Zariski full subcategory of scheme torsor pairs; reuse SchemeAction.TorsorObject, TorsorHom and the existing trivial torsor constructions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maps from Zariski locally trivial scheme torsors with equivariant maps to J to algebraic spaces correspond to invariant morphisms from J",
+   "results": "{\"t\": \"2026-10-24T13:39:39Z\", \"tool\": \"leanfinder\", \"query\": \"Maps from Zariski locally trivial scheme torsors with equivariant maps to J to algebraic spaces correspond to invariant morphisms from J\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_symm_apply_coe\", \"AlgebraicGeometry.AffineSpace.homOfVector_over\", \"AlgebraicGeometry.AffineSpace.homOverEquiv_apply\", \"AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq\", \"AlgebraicGeometry.AffineSpace.instIsOverHomOfVectorOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineSpace.homOfVector_over_assoc\", \"AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc\"], \"digest\": \"220ff0e209e22332\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not define the Zariski full subcategory of scheme torsor pairs; reuse SchemeAction.TorsorObject, TorsorHom and the existing trivial torsor constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "ZariskiTorsor|zariskiTorsor|categorical.*coarse|CoarseModuli",
+   "results": "{\"t\": \"2026-10-24T13:39:40Z\", \"tool\": \"grep\", \"query\": \"ZariskiTorsor|zariskiTorsor|categorical.*coarse|CoarseModuli\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits do not define the Zariski full subcategory of scheme torsor pairs; reuse SchemeAction.TorsorObject, TorsorHom and the existing trivial torsor constructions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ZariskiTorsor|zariskiTorsor|categorical_coarse_descent lean/WeilConjectures lean/Sheaf; rg -l Zariski.*torsor|torsor.*Zariski dag/nodes; blueprint_refs.py search Zariski locally trivial torsor",
+   "results": "No named Zariski scheme torsor pair category or coarse descent theorem; existing SchemeAction.TorsorObject is fppf, RepresentedRightTorsor.IsZariskiLocallyTrivial is a right finitely presented torsor, and units torsors are specialized. blueprint_refs: 0 blueprint nodes match.",
+   "date": "2026-10-24",
+   "verdict": "no exact match; reuse existing fppf torsor category and specialize by a full subcategory."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-zariski-torsor-categorical-coarse-descent",
+  "date": "2026-10-24",
+  "group": "Q85"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The Zariski locally trivial torsor presentation in the coarse-descent step; det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Old item step 7 only: descend an already supplied invariant categorical geometric quotient through the Zariski locally trivial torsor presentation.",
+   "via": [
+    "lem-sfb-zariski-torsor-categorical-coarse-descent",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ZariskiTorsorGroupoid",
+  "declaration": "AlgebraicGeometry.SchemeAction.zariskiTorsorGroupoid",
+  "declarations": [
+   "AlgebraicGeometry.SchemeAction.IsZariskiTrivial",
+   "AlgebraicGeometry.SchemeAction.ZariskiTorsorObject",
+   "AlgebraicGeometry.SchemeAction.zariskiTorsorGroupoid",
+   "AlgebraicGeometry.SchemeAction.trivialObject_isZariskiTrivial",
+   "AlgebraicGeometry.SchemeAction.zariskiQuotientAtlas",
+   "AlgebraicGeometry.SchemeAction.zariskiTrivialFiber"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ZariskiTorsorGroupoid.lean",
+  "statement": "def zariskiTorsorGroupoid : BasedCategory (Over S)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-327dbf81f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-327dbf81f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Item node changes only lean + stmt_dep def-sfb-zariski-torsor-groupoid; statement/proof identical to side-live. Hypotheses match node: k field, GrpObj/ModObj over Spec k, F fibred in groupoids with free universes, e based with total-category IsEquivalence (fibrewise equivalence for fibred groupoids), hq invariance on actual product, hcat exists-unique for invariant f into every AlgebraicSpace (= Hom(Q,B) to invariant maps bijection with hq), hgeom surjectivity + fibre iff orbit for all alg-closed Omega:Type u and every a. Conclusions: pi with pullback formula and uniqueness (E->T locally split); R restriction pinned by e.comp AP = A and atlas.comp AP = discreteModuliMap f (AP exists/unique since vertical isos are identities in discrete target), R(pi.comp b) = q>>b; skeleton bijection via e, c pinned by c[P_x]=[x], pi-class = x>>q; IsCoarseModuliScheme exact recorded def. New def node: full subcategory of fppf TorsorObject by Zariski open-chart cartesian equivariant trivializations (equivalent to node; Zariski covers are fppf), real data, only sorry is stated true Prop law trivialObject_isZariskiTrivial (identity chart). No duplicate owner (TenCanonicalHilbert.Pair predicate is theorem-module local; RepresentedRightTorsor is a different notion); no parallel delivery. Docstrings/source/blueprint/proof steps present; Worker report + Second reading sections present. No compile needed (no change)."
+ }
+}

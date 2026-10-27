@@ -1,0 +1,257 @@
+{
+ "id": "lem-sfb-dm-relative-diagonal-quasifinite",
+ "kind": "statement",
+ "title": "Relative diagonals of morphisms from DM stacks are locally quasi-finite",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Stacks, Deligne--Mumford stacks, representability by algebraic spaces and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space]. An etale chart is a representable-by-algebraic-spaces etale map from a scheme, and an atlas is a surjective chart; etale and smooth are tested on scheme charts using [def-weil-etale-morphism, def-sbc-smooth-morphisms]. For every morphism $f:\\mathcal X\\to\\mathcal Y$ of Deligne--Mumford stacks over $S$, its relative diagonal $\\Delta_f:\\mathcal X\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ is locally quasi-finite as a morphism representable by algebraic spaces: for every scheme $T\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$ and every etale scheme chart $A\\to T\\times_{\\mathcal X\\times_{\\mathcal Y}\\mathcal X}\\mathcal X$, the scheme map $A\\to T$ is locally quasi-finite [pqf-def-quasifinite]. No local finite-type, separation or representability assumption on $f$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050N (lemma-separated-implies-morphism-separated), parts (2) and (6): a DM source is quasi-DM and any morphism from it is quasi-DM, i.e. has locally quasi-finite relative diagonal."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-sbc-smooth-morphisms",
+  "pqf-def-quasifinite",
+  "def-sfb-dm-stack-morphism-properties"
+ ],
+ "proof": [
+  {
+   "text": "Fix a scheme test $t:T\\to\\mathcal X\\times_{\\mathcal Y}\\mathcal X$, given by $x,y\\in\\mathcal X(T)$ and $\\alpha:f(x)\\xrightarrow{\\sim}f(y)$. Put $I=\\operatorname{Isom}_{\\mathcal X,T}(x,y)$ and $J=\\operatorname{Isom}_{\\mathcal Y,T}(f(x),f(y))$. The cited Isom-space theorem, applied separately to the two DM stacks, represents both by algebraic spaces over $T$ and makes $p:I\\to T$ and $q:J\\to T$ unramified. Applying $f$ to isomorphisms defines a $T$-map $\\phi:I\\to J$, with $q\\phi=p$; restriction commutes with this map because $f$ is a morphism of fibred groupoids. The chosen $\\alpha$ is a section $a:T\\to J$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-dm-isom-space-unramified"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050N (lemma-separated-implies-morphism-separated), DM case; Tag 06N3 (theorem-DM); Tag 04XS (lemma-properties-diagonal), equation-diagonal"
+   }
+  },
+  {
+   "text": "Regard $T$ as its representable algebraic space [def-trf-scheme-algebraic-space]. Form the algebraic space $P=I\\times_{J,\\phi,a}T$ using the fibre-product theorem. On every $v:T\\!\\,{}^{\\prime}\\to T$, its points are exactly isomorphisms $\\beta:v^*x\\xrightarrow{\\sim}v^*y$ with $f(\\beta)=v^*\\alpha$. This also describes the 2-pullback of $\\Delta_f$ along $t$: its objects are $(z,u:z\\xrightarrow{\\sim}v^*x,w:z\\xrightarrow{\\sim}v^*y)$ with $f(w)=v^*\\alpha\\circ f(u)$. Send this object to $wu^{-1}$; an inverse sends $\\beta$ to $(v^*x,1,\\beta)$. The arrow $u$ identifies each original object with this inverse image, and an arrow between two triples is uniquely determined by its compatibility with $u$ and $w$. Thus the pullback is equivalent to the discrete sheaf $P$, naturally in $T\\!\\,{}^{\\prime}$. Since $t$ was arbitrary, this proves representability of $\\Delta_f$ by algebraic spaces.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XS (lemma-properties-diagonal), equation-diagonal; algebraic.tex Tag 045G (lemma-representable-diagonal); spaces.tex Tag 02X2 (lemma-fibre-product-spaces)"
+   }
+  },
+  {
+   "text": "Apply unramified cancellation for algebraic spaces to $I\\xrightarrow{\\phi}J\\xrightarrow{q}T$: its composite is the unramified map $p$, so $\\phi$ is unramified, with no condition required on $q$. Its base change along $a:T\\to J$ is $P\\to T$, hence this map is unramified too. These applications impose no local finite-type or representability hypothesis on the original $f$.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 06G6 (lemma-permanence-unramified) and Tag 03ZJ (lemma-base-change-unramified)"
+   }
+  },
+  {
+   "text": "For every etale scheme chart $A\\to P$, the scheme composite $A\\to T$ is unramified by the chartwise meaning of the conclusion in step 3. The scheme unramified-quasi-finite theorem gives quasi-finiteness at every point of $A$, hence local quasi-finiteness in exactly the stated sense. This applies to every scheme test $T$ and every chart, including charts that are not surjective. Together with step 2 it proves the assertion.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-weil-pbc-unramified-quasi-finite-at-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02V5 (lemma-unramified-quasi-finite); spaces-morphisms.tex Tag 03ZH (definition-unramified)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-scheme-algebraic-space",
+  "lem-sfb-dm-isom-space-unramified",
+  "lem-sfb-space-unramified-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 050N (lemma-separated-implies-morphism-separated), DM case, expanded through lemma-properties-diagonal (equation-diagonal), with spaces-morphisms.tex Tags 06G6 and 03ZJ and morphisms.tex Tag 02V5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|locallyQuasiFinite_iff_isDiscrete",
+   "results": "Actual search hits: Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The diagonal of any morphism of Deligne Mumford stacks is unramified and locally quasi finite",
+   "results": "Actual search hits: AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.isSeparated_iff. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\"",
+   "results": "Actual search hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism from a Deligne Mumford stack has locally quasi finite relative diagonal",
+   "results": "Actual search hits: AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.instLocallyQuasiFiniteFstScheme. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi Deligne Mumford source makes any morphism of algebraic stacks quasi Deligne Mumford",
+   "results": "Actual search hits: AlgebraicGeometry.quasiSeparated_isStableUnderComposition, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiSeparatedTopMorphismProperty, AlgebraicGeometry.quasiCompact_isStableUnderComposition, AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiSeparated, AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|smooth.*local.*source.*target",
+   "results": "Actual search hits: . ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"locallyQuasiFinite_iff_isDiscrete_preimage_singleton\"",
+   "results": "Actual search hits: AlgebraicGeometry.locallyQuasiFinite_iff_isDiscrete_preimage_singleton. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyOfFiniteType\"",
+   "results": "Actual search hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.locallyOfFiniteType_of_comp, AlgebraicGeometry.locallyOfFiniteType_comp. ",
+   "date": "2026-10-22",
+   "verdict": "no match: only schemes, rings or ordinary categorical morphism properties; no theorem on these stack 2-fibre products"
+  },
+  {
+   "tool": "grep",
+   "query": "DeligneMumford|AlgebraicStack|relative.*diagonal",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not DM stacks or their Isom-space 2-fibre squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative diagonal of any morphism between Deligne Mumford stacks is locally quasi finite",
+   "results": "Actual logged hits: AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.locallyQuasiFinite_iff, AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact, AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not DM stacks or their Isom-space 2-fibre squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\"",
+   "results": "Actual logged hits: AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite, AlgebraicGeometry.instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not DM stacks or their Isom-space 2-fibre squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of isomorphisms compatible with a functor between stacks is an unramified algebraic space over the test scheme",
+   "results": "Actual logged hits: AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.formallyUnramified_iff",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not DM stacks or their Isom-space 2-fibre squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism from a Deligne Mumford stack has an unramified relative diagonal",
+   "results": "Actual logged hits: AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.AffineTargetMorphismProperty.diagonal, AlgebraicGeometry.IsImmersion.instDiagonalScheme, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern schemes, not DM stacks or their Isom-space 2-fibre squares"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dm-lqf-atlas-test",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Etale presentation test for intrinsic stack local quasi-finiteness. Supporting input for the etale local-quasi-finiteness test: Relative diagonals of morphisms from DM stacks are locally quasi-finite.",
+   "via": [
+    "lem-sfb-dm-lqf-atlas-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-dm-relative-diagonal-quasifinite",
+  "worker": "stage1",
+  "summary": "Expanded the Isom-space fibre-square argument for the relative diagonal. Existing DM Isom-space, algebraic-space fibre-product and unramified-permanence nodes supply all non-elementary inputs; the final scheme chart uses 02V5. No new nodes, statement changes, or Lean attachment.",
+  "blueprint": "The current latest blueprint det-thm-sf-ctf-stability-direct-images proof (3) is the inherited ancestor-place for the alteration/moduli chain: this item supplies the relative-diagonal prerequisite for lem-sfb-dm-lqf-atlas-test. The ancestor command returns node = None; its existing from.place and via chain are retained. The four steps expand the exact supporting input named at the end of from.place, not an additional blueprint claim.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic existence of fibre products of algebraic spaces, needed for the Isom-space fibre square; no unit-local replacement states this foundational closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme theorem 02V5 converting the unramified scheme charts to locally quasi-finite charts; no unit-local replacement supplies this scheme implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-unramified-quasi-finite-at-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-ffa9eed29",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ffa9eed29 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. One commit with the item and its report only; no new nodes. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so it is neither superseded nor a re-split. Source: stacks-morphisms.tex Tag 050N, parts (5)/(6). The proof reaches unramified Δ_f through the Isom fibre square in the etale-atlas DM convention, with no hypothesis on f. Step 1: lem-sfb-dm-isom-space-unramified is applied to X and to Y (both DM); φ is β↦f(β), α gives a section a, and qφ=p. Step 2: P = I×_{J,φ,a}T exists by the 02X2 node. The 2-pullback has objects (z,u,w) with f(w)=v*α∘f(u) under the def node's 2-fibre-product arrow rule; (z,u,w)↦wu⁻¹ with inverse β↦(v*x,1,β) is an equivalence onto P, and the groupoid is discrete because u is invertible. The object is X×_Y X, not X×_S X. Step 3: cancellation (06G6, no condition on q) makes φ unramified, and its base change along a is P→T. Step 4: each etale chart A→T is unramified, hence locally quasi-finite by the 02V5 node, with non-surjective charts allowed. proof_deps is exactly the union of step uses; no cycle (closure of 9955 nodes). Duplicate search over 050N, quasi-DM and DM+diagonal nodes: representable-stack-diagonal-criterion needs f representable, and separation-composition and the unramified-diagonal-etale-atlas nodes concern other statements, so none duplicates the item. Small cases: f=id gives P=T; for schemes, the diagonal immersion; for BG with G finite, the etale torsor; G infinite shows only local quasi-finiteness holds. Batch-5: def-trf-scheme-algebraic-space and lem-trf-space-fibre-products-etale-covers (02X2) are generic foundations; the Isom and permanence nodes reach sec-trace-formula only through the definition def-trf-algebraic-space. None is a step of the trace formula or Poincaré duality. Accepted tool_uses: lem-trf-space-fibre-products-etale-covers and lem-weil-pbc-unramified-quasi-finite-at-points. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DMRelativeDiagonalQuasiFinite",
+  "declaration": "CategoryTheory.dm_relativeDiagonal_locallyQuasiFinite",
+  "file": "lean/Sheaf/AlgebraicGeometry/DMRelativeDiagonalQuasiFinite.lean",
+  "statement": "theorem dm_relativeDiagonal_locallyQuasiFinite {S : Scheme.{u}} (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)) (hF : IsDeligneMumfordModuliStack F) (hG : IsDeligneMumfordModuliStack G) (f : BasedFunctor F G) : ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite (moduliRelativeDiagonal f)",
+  "branch": "sheaf-dag",
+  "by": "Q123",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30088927b",
+  "group": "Q123",
+  "result": "pass",
+  "note": "I checked the statement and found it correct. Node statement, source, proof and proof_deps match side-live; the only changes are the lean record and the stmt_dep def-sfb-dm-stack-morphism-properties, which has landed and owns moduliRelativeDiagonal and ModuliSpaceTest. lean.statement matches the file verbatim. Lean: S : Scheme.{u}; F, G with IsDeligneMumfordModuliStack and independent universes; arbitrary f with no hypotheses. Conclusion is ModuliSpaceTest @Scheme.Hom.IsLocallyQuasiFinite (moduliRelativeDiagonal f): representability via HasSpaceBaseChange over moduliTwoFiberProduct f f (over Y), and every étale chart, surjectivity not required, locally quasi-finite in the 01TD sense with finite type. This matches the node and Stacks 050N (2)/(6). Edge cases checked: empty schemes, f = id, BG, universes. No duplicate theorem found. Docstrings carry the source place, blueprint tag and the 4 proof steps; sorry only; imported modules exist and are built. I did not compile: no fixes, so I rely on the worker's clean scompile. No findings."
+ }
+}

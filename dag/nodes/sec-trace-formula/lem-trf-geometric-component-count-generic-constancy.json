@@ -32,74 +32,29 @@
    }
   },
   {
-   "text": "The generic fibre $X_\\eta$ is finite type over $k=\\kappa(\\eta)$. Apply generic component splitting to choose a field $L$ and a finite etale morphism $a:\\operatorname{Spec}L\\to\\operatorname{Spec}k$ such that every irreducible component of $G=X_\\eta\\times_k\\operatorname{Spec}L$ remains irreducible and nonempty after every extension of $L$. Base-change stability makes $G$ finite type over $L$. The spectrum of a field is Noetherian (its only ideals are zero and the whole field), so the finite-type-over-Noetherian theorem and the finite-components theorem give a finite list of distinct components $A_1,\\ldots,A_n$ covering $G$. Allow $n=0$, in which case $G$ is empty.",
+   "text": "Put $k=\\kappa(\\eta)$. Apply [lem-trf-generic-split-component-upper-bound] to $h:X\\to S$. It supplies a finite etale generic field extension $L/k$ with spectrum map $a$, a finite component count $n\\geq0$ for $G=X_\\eta\\times_k\\operatorname{Spec}L$, and an open $W$ containing $\\eta$ on which every field-extended fibre has at most $n$ components. In particular $n_{X/S}(s)\\leq n$ for $s\\in W$.",
    "uses": [
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-sbc-generic-components-split",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components"
+    "lem-trf-generic-split-component-upper-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055A, proof paragraph 2; Tag 0551, generic field splitting"
+    "place": "Tag 055A (lemma-nr-geom-irreducible-components-good), proof, generic splitting and geometric upper bound."
    }
   },
   {
-   "text": "Apply the geometric generic-cover spreading theorem to $h:X\\to S$ with the specified $L,a$ and the closed cover $(A_i)_{1\\leq i\\leq n}$. Its geometric-irreducibility hypothesis is precisely the component-splitting conclusion of Step 2. Obtain an open $W\\subseteq S$ containing $\\eta$ such that, for every $s\\in W$ and every field extension $K/\\kappa(s)$, there are a continuous surjective scheme morphism $p:Z\\to (X_s)_K$ and a cover of $Z$ by $n$ nonempty irreducible subsets $B_i$. Each $\\overline{p(B_i)}$ is irreducible and closed, and these $n$ subsets cover $(X_s)_K$. Every irreducible component $D$ of this fibre lies in one of them: apply irreducibility to the finite closed cover $D=\\bigcup_i(D\\cap\\overline{p(B_i)})$. Maximality then gives $D=\\overline{p(B_i)}$. Thus the fibre has at most $n$ components. For $n=0$, the cover forces $Z$ empty and surjectivity forces the fibre empty. In particular $n_{X/S}(s)\\leq n$ on $W$.",
+   "text": "Apply [lem-trf-etale-generic-component-lower-bound] with the same $L,a,n,G$: Step 2 supplies its finite etale field map and exactly $n$ ordinary components of $G$. It gives an irreducible scheme $T$, an etale $g:T\\to S$, a generic point $\\xi$ above $\\eta$, and an open $U$ containing $\\xi$. For $P=X\\times_S T$, the compatible residue-field isomorphism identifies $P_\\xi$ with $G$, and every field extension of every fibre over $U$ has at least $n$ components. Taking separable closures gives $n_{P/T}(t)\\geq n$ on $U$.",
    "uses": [
-    "lem-sbc-geometric-generic-cover-spread",
-    "def-weil-irreducible-components"
+    "lem-trf-etale-generic-component-lower-bound"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055A, proof final paragraph, upper bound; geometric-cover spreading is the existing Tag 055G closure-and-shrinking input"
+    "place": "Tag 055A (lemma-nr-geom-irreducible-components-good), proof, etale model and ordinary-to-geometric lower bound."
    }
   },
   {
-   "text": "Spread the specified finite etale field map $a$ using the etale generic residue-field model theorem. It gives an etale morphism $g:T\\to S$, a generic point $\\xi$ of $T$ with $g(\\xi)=\\eta$, and an isomorphism $r:\\operatorname{Spec}\\kappa(\\xi)\\simeq\\operatorname{Spec}L$ compatible with the maps to $S$. Set $P=X\\times_S T$ and $q:P\\to T$, which is finite type by base-change stability. Associating the fibre products and using $r$ identifies $P_\\xi$ with $G$: both are the pullback of $X\\to S$ along the same field-valued point of $S$. Therefore $T$ is irreducible with generic point $\\xi$, and its generic fibre has exactly $n$ ordinary irreducible components.",
-   "uses": [
-    "lem-sbc-etale-generic-residue-field-model",
-    "lem-sfb-finite-type-composition-base-change",
-    "def-pc-scheme-fibre",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055A, proof paragraph 2; the field-splitting and etale model portions of Tag 0551"
-   }
-  },
-  {
-   "text": "Apply the ordinary component lower-bound theorem to $q:P\\to T$ and $\\xi$. The hypotheses hold by Step 4, including finite type and the finite generic component count $n$. Obtain a nonempty open $U\\subseteq T$ on which every ordinary fibre $P_t$ has at least $n$ irreducible components. Because $\\xi$ is generic, $\\xi\\in U$.",
-   "uses": [
-    "lem-trf-generic-fibre-component-lower-bound"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055A, proof final paragraph, invocation of Tag 0554"
-   }
-  },
-  {
-   "text": "For $t\\in U$ and a separable closure $K$ of $\\kappa(t)$, the projection $(P_t)_K\\to P_t$ is surjective: $\\operatorname{Spec}K\\to\\operatorname{Spec}\\kappa(t)$ is surjective and surjectivity is stable under arbitrary base change. Both schemes have finitely many irreducible components, since they are finite type over fields, hence Noetherian. Write the geometric fibre as a union of $m$ irreducible components. The closures of their images are $m$ closed irreducible subsets covering $P_t$. The finite closed-cover and maximality argument of Step 3 shows that each ordinary component is one of these closures; hence the ordinary count is at most $m=n_{P/T}(t)$. Step 5 gives $n_{P/T}(t)\\geq n$. This also covers the empty case $n=0$.",
-   "uses": [
-    "lem-pc-field-extension-surjective",
-    "lem-weil-pbc-surjective-base-change",
-    "lem-sfb-finite-type-composition-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-finitely-many-components",
-    "def-weil-irreducible-components"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 055A, proof final paragraph, ordinary lower bound implies geometric lower bound"
-   }
-  },
-  {
-   "text": "Let $U_0=U\\cap g^{-1}(W)$. It contains $\\xi$, because $g(\\xi)=\\eta\\in W$, so it is nonempty and open. Etale openness shows that $V=g(U_0)$ is a nonempty open subset of $S$ contained in $W$. For every $s\\in V$ choose $t\\in U_0$ with $g(t)=s$. By base-change invariance, $n_{X/S}(s)=n_{P/T}(t)\\geq n$; by Step 3, $n_{X/S}(s)\\leq n$. Thus it equals the finite integer $n$. Step 1 identifies $V$ with a relatively open nonempty subset of the original $\\overline{\\{y\\}}$ and identifies the component-count functions there. Independence from all choices of separable closure was included in Step 1, and no flatness or Noetherian hypothesis was added.",
+   "text": "Let $U_0=U\\cap g^{-1}(W)$. It contains $\\xi$, because $g(\\xi)=\\eta\\in W$, so it is nonempty and open. Etale openness shows that $V=g(U_0)$ is a nonempty open subset of $S$ contained in $W$; it contains $\\eta=g(\\xi)$. For every $s\\in V$ choose $t\\in U_0$ with $g(t)=s$. By base-change invariance, $n_{X/S}(s)=n_{P/T}(t)\\geq n$; by Step 2, $n_{X/S}(s)\\leq n$. Thus it equals the finite integer $n$. Step 1 identifies $V$ with a relatively open nonempty subset of the original $\\overline{\\{y\\}}$ and identifies the component-count functions there. Independence from all choices of separable closure was included in Step 1, and no flatness or Noetherian hypothesis was added.",
    "uses": [
     "lem-weil-pbc-etale-morphism-open-map",
     "lem-trf-geometric-fibre-component-count-base-change"
@@ -115,17 +70,8 @@
   "lem-weil-pbc-reduced-induced-closed-subscheme",
   "lem-sfb-finite-type-composition-base-change",
   "lem-trf-geometric-fibre-component-count-base-change",
-  "lem-sbc-generic-components-split",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sbc-geometric-generic-cover-spread",
-  "def-weil-irreducible-components",
-  "lem-sbc-etale-generic-residue-field-model",
-  "def-pc-scheme-fibre",
-  "def-pc-fibre-product",
-  "lem-trf-generic-fibre-component-lower-bound",
-  "lem-pc-field-extension-surjective",
-  "lem-weil-pbc-surjective-base-change",
+  "lem-trf-generic-split-component-upper-bound",
+  "lem-trf-etale-generic-component-lower-bound",
   "lem-weil-pbc-etale-morphism-open-map"
  ],
  "proof_origin": {
@@ -253,27 +199,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-geometric-component-count-generic-constancy",
   "worker": "stage1",
-  "summary": "Seven steps realize Stacks 055A by reduced-closure reduction, finite separable component splitting, the existing geometric-cover spread for an upper bound, an etale generic field model, the ordinary generic lower bound, the explicit ordinary-to-geometric comparison, and descent through the open image. Two genuinely smaller statement-only inputs are added: 0556 and 0554. Empty generic fibre and n=0 are included; the statement is unchanged.",
-  "blueprint": "The generic-constancy input of Stacks 055A in the 055B irreducible-fibre-locus branch of 05FH in the local-term-locality proof ancestry. The steps implement 055A paragraphs 1--3; 055G is used only as the existing general geometric closed-cover spreading tool that packages the closure, cover and geometric-irreducibility shrinking of the last paragraph.",
+  "summary": "Repair of the promotion return against the current DAG. Retained Steps 2--3 become the statement-only split-generic upper-bound node; retained Steps 4--6 become the statement-only compatible etale-model lower-bound node. The parent retains closure reduction and open descent. Compared the saved baseline with the current parent field by field (identical), reread every current citation and both new statements, and checked all seven verbatim citation entries. The assembly now explicitly checks that the upper output supplies the lower lemma's finite etale map and exact ordinary generic count, and records the compatible generic fibre identification. Neither the statement nor either new obligation changed; all old arguments and logged searches remain in report.md and searches.jsonl. The authorized delivery tool prepares this retained split on its freshly fetched current DAG.",
+  "blueprint": "The generic-constancy input of Stacks 055A in the 055B irreducible-fibre-locus branch of 05FH in the local-term-locality proof ancestry. The steps implement 055A paragraphs 1--3; 055G is used only as the existing general geometric closed-cover spreading tool that packages the closure, cover and geometric-irreducibility shrinking of the last paragraph. Re-split the two middle geometric arguments into independent upper/lower-bound obligations; retain closure reduction and open-image descent.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
     "why": "Constructs the reduced closed scheme on a point closure without a Noetherian hypothesis; generic scheme tool."
-   },
-   {
-    "node": "lem-sbc-generic-components-split",
-    "why": "Splits generic components over a finite etale field extension, the generic-field part of the 0551 input in 055A."
-   },
-   {
-    "node": "lem-sbc-geometric-generic-cover-spread",
-    "why": "Spreads the supplied finite geometric component cover, exactly the upper-bound closure-and-shrinking construction of 055A; no trace-unit statement supplies this generic geometry."
-   },
-   {
-    "node": "lem-sbc-etale-generic-residue-field-model",
-    "why": "Spreads that specified finite etale field extension with its compatible generic fibre, the model part of 0551; openness of its image suffices for descent."
    }
   ]
  },
@@ -284,12 +218,12 @@
   "lem-sbc-etale-generic-residue-field-model"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q104-c1ccc5b60",
-  "group": "Q104",
+  "reviewer": "NT-cc-NO-ee5f360d2",
+  "group": "NO",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q104-c1ccc5b60 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit route, and Stacks sources 055A, 0556, and 0554. All hypotheses, component-count comparisons, base changes, edge cases, duplicate checks, and route constraints pass; no long-step or repair issue found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-ee5f360d2 (reviewer sub-agent of L); spot-checked: I read the whole delivery and made no fixes. This is the fourth reader PASS of the same re-split; it is still not promoted to live. (1) Diff against the previous PASS d6d7906b: both new nodes are identical. The item changes only in Step 3, which now states explicitly that Step 2 supplies the lower node's hypotheses (finite etale a and exactly n ordinary components of G), that T is irreducible and that P_xi is identified with G. All three match the lower node's statement. The item statement equals live. Live (clones/live and clones/side-live) still has the old 7-step proof, and neither new node exists there, so the delivery is not superseded. (2) Re-split: all 7 live steps appear verbatim in the report (substring check 7/7). Old Steps 2-3 (0551 splitting, 055G/0559 cover spreading, closed-cover maximality giving <=n) became lem-trf-generic-split-component-upper-bound (1337 characters). Old Steps 4-6 (etale residue-field model, 0554 ordinary lower bound, surjection from the field-extended fibre) became lem-trf-etale-generic-component-lower-bound (1586 characters). The nodes are comparable in size and neither restates the item. The parent is a 4-step assembly of about 2.3k characters. (3) I reread every cited statement on the current base: the reduced induced subscheme (any closed subset), finite type base change, the 0556 count base change (any morphism), etale open map, generic-components-split, geometric-generic-cover-spread (finite I, supplied L), etale-generic-residue-field-model, generic-fibre-component-lower-bound (no Noetherian hypothesis), field-extension surjective and surjective base change. Each supports its use. (4) Truth: the upper bound for every K holds because the closures of p(B_i) cover the fibre; with n=0 the fibres are empty. The lower node's 'T irreducible' is not given by the model lemma, but its future proof can shrink T: g is flat, so the generic points of an affine open T' lie over eta, and T'_eta is finite. The statement is therefore true. (5) Source: Stacks more-morphisms.tex 055A read in full; its paragraphs match the closure reduction, 0551 with etale openness, then 0554 and 0559. (6) Duplicates: rg -L over the snapshot DAG for 055A, the at-most/at-least-n wording and component nodes. The nearest candidates (pbc etale-generic-irreducible-neighbourhood, which needs a Noetherian base; the sbc fibre-component spread and neighbourhood nodes, which concern connected components; the pbc geometric-component-count-base-change and zl F_q nodes, also connected components) are not duplicates. No SGA citation, no cycle; delivery-errors B-E are clean. The tool_use lem-weil-pbc-reduced-induced-closed-subscheme is accepted."
  },
  "lean": {
   "existing": false,
@@ -309,5 +243,16 @@
   "result": "pass",
   "note": "Read the node, all 8 stmt_deps records, Stacks 055A/0556 (more-morphisms.tex l.7741, l.7453), the module and the report. Hypotheses: LocallyOfFiniteType+QuasiCompact = finite type per the dep record; nothing stronger. Fibre: pullback f (Spec.map(algebraMap κ(t) K) ≫ fromSpecResidueField t), canonically isomorphic to X_t ×_κ(t) Spec K and the same encoding as the landed 0556 sibling. Count: ENat.card irreducibleComponents = ↑n, n:ℕ (finite, n=0 allowed). ∀ K : Type u with IsSepClosure covers any choice, no universe loss. Open V with y∈V intersected with closure{y} is equivalent to a nonempty relatively open subset (y is generic); quantifier order matches. Edge cases checked: empty fibre/X, empty Y, closed y. lean.statement verbatim; node differs from live only in the lean field; docstrings carry source, blueprint and the 7-step proof; sorry only; no hollow defs. nt_compile --json on the snapshot: rc=0, no warnings. Notes: Second reading section is the standard post-2026-10-17 placeholder; def-weil-irreducible-components has lean:null (pre-existing)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

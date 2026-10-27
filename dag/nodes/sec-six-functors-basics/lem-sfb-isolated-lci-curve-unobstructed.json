@@ -1,0 +1,224 @@
+{
+ "id": "lem-sfb-isolated-lci-curve-unobstructed",
+ "kind": "statement",
+ "title": "Unobstructed deformations of a separated curve with isolated lci singularities",
+ "statement": "Let $k$ be a field [def-weil-field] and let $X$ be a separated finite-type $k$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism] of topological Krull dimension at most one [def-kun-topological-krull-dimension]. A scheme over a field is a local complete intersection if it has an affine open cover by spectra of finitely generated local-complete-intersection algebras [def-weil-pbc-complete-intersection-over-field]. Assume $X$ is a local complete intersection over $k$ and is smooth over $k$ [def-sbc-smooth-morphisms] except at finitely many points. A local ring here is a commutative ring with a unique maximal ideal; an Artinian ring is one whose ideals satisfy the descending chain condition. For a Noetherian local ring $\\Lambda$ [def-weil-pbc-noetherian-ring] with specified residue field $k$, let $\\mathcal C_{\\Lambda,k}$ be the category of Artinian local $\\Lambda$-algebras $A$ with a specified identification $A/\\mathfrak m_A\\cong k$, and local $\\Lambda$-homomorphisms inducing the identity on $k$. A deformation of a $k$-scheme $X$ over $A$ is a flat scheme $X_A\\to\\operatorname{Spec}A$ with an identification $X_A\\times_A k\\cong X$; arrows are isomorphisms compatible with these identifications. The deformation category $\\operatorname{Def}_{X,\\Lambda}$ is unobstructed if, for every surjection $A^\\prime\\twoheadrightarrow A$ in $\\mathcal C_{\\Lambda,k}$ and every deformation $X_A$, there is a flat deformation $X_{A^\\prime}$ and an isomorphism $X_{A^\\prime}\\times_{A^\\prime}A\\cong X_A$ compatible with the identified special fibres. Then $\\operatorname{Def}_{X,\\Lambda}$ is unobstructed for every such $\\Lambda$. The empty scheme and disconnected schemes are allowed; $X$ need not be proper. Flatness and base change in the deformation definition use [def-weil-flat-morphism, def-weil-affine-spectrum, def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZQ (lemma-curve-isolated-lci), with example-schemes and section-general specifying the coefficient category; here restricted to Noetherian local coefficient rings with residue field exactly k."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-complete-intersection-over-field",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-flat-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Let $W$ be the union of the open subschemes of $X$ on which $X\\to\\operatorname{Spec}k$ is smooth. Smoothness is local on the source and remains smooth upon restriction, so $W$ is smooth and its complement $P$ is the nonsmooth locus. By hypothesis $P$ is finite and it is closed by construction. The Jacobson-density statement says that the closed points of $X$ lying in $P$ are dense in $P$. There are finitely many such points, so their union is closed in $X$ and hence in $P$. Density forces this union to equal $P$. Thus every point of $P$ is closed, including when $P$ is empty.",
+   "uses": [
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZQ, lemma-curve-isolated-lci, first sentence; finite closed singular set made explicit using varieties.tex Tag 0478 (lemma-locally-finite-type-Jacobson)."
+   }
+  },
+  {
+   "text": "Apply the two-affine-cover statement to $X$ and $P$. It gives $X=U\\cup V$ with $P\\subset V$, $U\\cap P=\\varnothing$, affine $U,V,U\\cap V$, and smooth $U$ and $U\\cap V$ over $k$. All the separatedness, finite-type and dimension hypotheses are those of the item; step 1 supplied the closedness of the points. Apply affine-open locality of the local-complete-intersection property to the assumed affine lci cover of $X$, with the affine open $V$. Hence $V=\\operatorname{Spec}P_V$ for a finitely generated local-complete-intersection $k$-algebra $P_V$.",
+   "uses": [
+    "lem-sfb-isolated-curve-two-affine-cover",
+    "lem-trf-lci-affine-open-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZQ, proof: choice of U_2 and U_1 (here V and U), and application of lemma-lci-unobstructed to U_2; affine lci locality: morphisms.tex Tag 01UG and algebra.tex Tag 00SH."
+   }
+  },
+  {
+   "text": "Fix a coefficient ring $\\Lambda$, a surjection $A^\\prime\\twoheadrightarrow A$ in $\\mathcal C_{\\Lambda,k}$, and a deformation $Y=X_A$ with special-fibre identification $\\iota:Y_k\\cong X$. The maximal ideal $\\mathfrak m_A$ is nilpotent. On an affine chart $\\operatorname{Spec}B$ of $Y$, base change to $k$ gives $\\operatorname{Spec}(B/\\mathfrak m_AB)$. Every prime of $B$ contains this nilpotent ideal, and the quotient bijection matches $D(b)$ with $D(\\bar b)$, so this is a homeomorphism. The chart identifications agree on overlaps, being restrictions of the special-fibre map. Let $Y_V$ correspond to $V$ under $\\iota$. For every test scheme $T$, a morphism $T\\to Y_k$ factors through $Y_V\\times_A k$ exactly when its composite $T\\to Y$ lands in $Y_V$: the fibre-product universal property gives the unique factorization. Under $\\iota$ this is precisely factorization through $V$. Thus $(Y_V)_k\\cong V$ as schemes. Restriction to an open leaves the local-ring maps unchanged, so $Y_V$ is flat over $A$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "def-weil-flat-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZQ, last sentence: lemma-affine (Tag 0DYX) and lemma-lci-unobstructed (Tag 0DZH); restriction is lemma-open. The nilpotent-special-fibre chart calculation spells out the restriction."
+   }
+  },
+  {
+   "text": "With $P_V$ from step 2 and the flat deformation $Y_V$ from step 3, apply the affine-lci Artinian lifting statement to $A^\\prime\\twoheadrightarrow A$. Its coefficient rings and specified residue maps are those fixed in step 3, and its lci and finite-generation hypotheses are supplied by step 2. It supplies a flat affine $A^\\prime$-scheme $Z$ and an $A$-isomorphism $e:Z\\times_{A^\\prime}A\\cong Y_V$ compatible with the identified special fibre. The statement permits an arbitrary scheme deformation $Y_V$, so no affineness of $Y_V$ is assumed here.",
+   "uses": [
+    "lem-sfb-affine-lci-artinian-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZQ, last sentence: scheme/algebra equivalence Tag 0DYX (lemma-affine) and affine-lci unobstructedness Tag 0DZH (lemma-lci-unobstructed), applied to V."
+   }
+  },
+  {
+   "text": "Use the smooth-open coefficient lifting statement with the cover $X=U\\cup V$, the original deformation $Y$, and the prescribed lift $(Z,e)$ of $Y_V$. Step 2 gives precisely its affineness and smoothness hypotheses on $U$ and $U\\cap V$; it puts no lci or smoothness condition on $V$ beyond the lift obtained in step 4. The coefficient rings and residue identifications are those fixed in step 3, so this application includes mixed characteristic. We obtain a flat $A^\\prime$-scheme $Y^\\prime$, an $A$-isomorphism $\\alpha:Y^\\prime\\times_{A^\\prime}A\\cong Y$, and an $A^\\prime$-isomorphism $\\gamma:Y^\\prime_V\\cong Z$ satisfying $e\\circ\\gamma_A=\\alpha|_{Y_V}$. Here the special-fibre identification is $\\iota\\circ\\alpha_k$, and it defines the open $Y^\\prime_V$. Thus the global reduction and the chosen affine lift agree over $A$, not merely on the special fibre.",
+   "uses": [
+    "lem-sfb-smooth-open-coefficient-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZQ, penultimate sentence, using Tag 0DZN (lemma-glueing-smooth), second assertion for smooth U_1."
+   }
+  },
+  {
+   "text": "Let $\\iota:Y_k\\cong X$ be the original identification. Give $Y^\\prime$ the identification $\\iota^\\prime=\\iota\\circ\\alpha_k$ of its special fibre with $X$. Thus $\\iota\\circ\\alpha_k=\\iota^\\prime$ is precisely the compatibility required for $\\alpha$ to be an isomorphism of deformations. The chosen identification also restricts to $V$ as used by the gluing statement, since $\\alpha$ carries the corresponding opens to one another. The surjection and the deformation were arbitrary, so the stated deformation category is unobstructed. Empty opens give the same argument for the empty scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZQ, conclusion and section-unobstructed: unpacking unobstructedness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-local-on-source",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sfb-isolated-curve-two-affine-cover",
+  "lem-trf-lci-affine-open-locality",
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "lem-sfb-affine-lci-artinian-lift",
+  "lem-sfb-smooth-open-coefficient-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZQ, lemma-curve-isolated-lci, proof, with its cited affine lifting and gluing lemmas unpacked."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The deformation category of a separated finite type local complete intersection curve smooth away from finitely many points is unobstructed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"For any commutative ring $ R $ and an $ R $-algebra $ A $, $ A $ is formally étale over $ R $ if and only if it is both formally unramified and formally smooth over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every flat deformation of an isolated complete intersection curve lifts across surjections of Artinian local coefficient algebras",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"RingHom.Smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if the induced $ R $-algebra structure on $ S $ is smooth, meaning $ S $ is flat over $ R $ and the sheaf of differentials $ \\\\Omega_{S/R} $ is locally fre\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"ℕ → {R : Type u} → {S : Type v} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, this proposition asserts that $ S $ is a standard smooth algebra over $ R $ of relative dimension $ n $, where the a\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The deformation category of a separated finite type local complete intersection curve smooth away from finitely many points is unobstructed",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[hf : IsSmooth f] : LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallySmooth R A] : FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.recOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"Deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "unobstructed|DeformationCategory|deformation.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, rings, or general topology; none states this algebraic-space or moduli/deformation assertion, nor a one-line specialization of it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-smooth-open",
+  "date": "2026-10-22",
+  "group": "Q75"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-isolated-lci-curve-unobstructed",
+  "worker": "stage1",
+  "summary": "Followed Tag 0DZQ via the existing two-affine cover and affine lci locality, retaining the general-coefficient affine-lci lifting and smooth-open gluing prerequisites. Preserved the statement and inherited ancestry. For return L at 426a71f7cf8, compared the retained payload with the current unsplit live item, reread all cited statements and checked all ten verbatim quotations. The gluing step now specifies gamma and its reduction equation with the prescribed affine lift; all non-elementary applications have their hypotheses checked. Delivery is reconstructed on the freshly fetched DAG; the report retains the prior searches and repair history.",
+  "blueprint": "The inherited ancestry points to det-thm-sf-ctf-stability-direct-images, proof (3), through the isolated-lci smooth-open prerequisite. This split realizes its Tag 0DZQ unobstructedness input by the two-affine-cover, affine-lci lift, and gluing route. blueprint_refs.py ancestor returns None; preserve the inherited null root and full via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-lci-affine-open-locality",
+    "why": "Generic locality of the lci condition transfers the assumed affine lci cover to V; no input of this unit states that transfer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-lci-affine-open-locality"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-85feccbb0",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-85feccbb0 (reviewer sub-agent of L); spot-checked: This is the 5th delivery. Heads 0be6b1a1, 810b56fc, d4e83e7a and 426a71f7 all PASSed and were returned only because landing refused them with 'L promotes'. There is no repair note for this item. Compared with the 426a snapshot, both new nodes are byte-identical. In the item the statement, statement_deps, source and ancestry are unchanged. The only proof change is step 5, which now names gamma: Y'_V≅Z with e∘gamma_A=alpha|_{Y_V} and identification iota∘alpha_k. That is exactly the conclusion of lem-sfb-smooth-open-coefficient-lift; nothing was dropped. The old dagsnap has been cleaned, so I reread all 8 cited existing statements in full; each gives what its step uses. Source: Stacks examples-defos.tex 0DZQ l.2856 (statement and proof), 0DZN l.2754 (second assertion with U_1 smooth), 0DZH l.2736, 0DYX l.1383, situation-glueing l.1421 and section-general l.60. The item has exactly the hypotheses of 0DZQ. A Noetherian local Lambda→k is a finite map, so the coefficient category is a valid case of the source and the target is not weakened. Step 1 (01V6 locality and Jacobson density) shows the finite nonsmooth set consists of closed points. Step 2 uses the two-affine-cover node, with all hypotheses met, plus lci affine-open locality for V. Step 3: m_A is nilpotent, Y_V is flat and (Y_V)_k≅V via the fibre product. Step 4 is the affine-lci lift (06AD, syntomic, 0DZH). Step 5 is the 0DZN gluing. Step 6 is the definition of unobstructedness. Both new nodes are true and neither restates the item. Duplicate search (rg -L 0DZH|0DZN|0DYX|0DZQ|0DZP|unobstructed) finds the Q74 k-algebra nodes, which cannot cover Z/p²→F_p, and moduli/smoothing nodes (0DZX, 0DZU, 0E7Y, nodal) that are not the same statements. Batch-5 flag on lem-trf-lci-affine-open-locality: I accept it. It is the generic lci-locality result 01UG/00SH. Its 118-node closure is commutative algebra and scheme basics and contains no trace-formula, Poincaré-duality or batch-4 target node. Neither assumption gives it, and it is not a step of either proof. The declared tool_use is accepted. Edge cases checked: X empty, P empty, zero algebra, a disconnected non-proper nodal curve, an inseparable point and mixed characteristic. No SGA, no fixes. Maintainer: please promote or land this side completion rather than re-dispatching it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsolatedLCICurveUnobstructed",
+  "declaration": "AlgebraicGeometry.isolated_lci_curve_unobstructed",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsolatedLCICurveUnobstructed.lean",
+  "statement": "theorem isolated_lci_curve_unobstructed (k : Type u) [Field k] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] (hdim : topologicalKrullDim X ≤ (1 : WithBot ℕ∞)) (hlci : ∃ (I : Type u) (C : I → CommRingCat.{u}) (aC : ∀ i, Algebra k (C i)) (ftC : ∀ i, Algebra.FiniteType k (C i)) (φ : ∀ i, Spec (C i) ⟶ X), (∀ i, IsOpenImmersion (φ i)) ∧ (∀ i, φ i ≫ s = Spec.map (ofHom (@algebraMap k (C i) _ _ (aC i)))) ∧ (∀ x : X, ∃ i, ∃ y : Spec (C i), φ i y = x) ∧ (∀ i, @Algebra.IsLocalCompleteIntersection k (C i) _ _ (aC i) (ftC i))) (hsmooth : ∃ P : Set X, P.Finite ∧ ∀ x ∉ P, ∃ U : X.Opens, x ∈ U ∧ Smooth (U.ι ≫ s)) (Λ : Type v) [CommRing Λ] [IsNoetherianRing Λ] [IsLocalRing Λ] [Algebra Λ k] (eΛ : IsLocalRing.ResidueField Λ ≃ₐ[Λ] k) (A' A : Type u) [CommRing A'] [CommRing A] [IsArtinianRing A'] [IsLocalRing A'] [IsArtinianRing A] [IsLocalRing A] [Algebra Λ A'] [Algebra Λ A] (eA' : IsLocalRing.ResidueField A' ≃ₐ[Λ] k) (eA : IsLocalRing.ResidueField A ≃ₐ[Λ] k) (π : A' →ₐ[Λ] A) [IsLocalHom π.toRingHom] (hπ : Function.Surjective π) (hπk : (eA.toRingHom.comp (IsLocalRing.residue A)).comp π.toRingHom = eA'.toRingHom.comp (IsLocalRing.residue A')) (Y : Scheme.{u}) (f : Y ⟶ Spec (.of A)) [Flat f] (ι : pullback f (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A)))) ≅ X) (hι : ι.hom ≫ s = pullback.snd f (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))))) : ∃ (Y' : Scheme.{u}) (f' : Y' ⟶ Spec (.of A')), Flat f' ∧ ∃ (α : pullback f' (Spec.map (ofHom π.toRingHom)) ≅ Y) (hα : α.hom ≫ f = pullback.snd f' (Spec.map (ofHom π.toRingHom))) (ι' : pullback f' (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))) ≫ Spec.map (ofHom π.toRingHom)) ≅ X), ι'.hom ≫ s = pullback.snd f' (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))) ≫ Spec.map (ofHom π.toRingHom)) ∧ (pullbackLeftPullbackSndIso f' (Spec.map (ofHom π.toRingHom)) (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))))).inv ≫ pullback.map (pullback.snd f' (Spec.map (ofHom π.toRingHom))) (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A)))) f (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A)))) α.hom (𝟙 _) (𝟙 _) ((Category.comp_id _).trans hα.symm) ((Category.comp_id _).trans (Category.id_comp _).symm) ≫ ι.hom = ι'.hom",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc0465b11",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0DZQ clause by clause: IsSeparated + LocallyOfFiniteType + QuasiCompact, topologicalKrullDim ≤ 1, lci affine cover (same interface as landed lci_affine_open_locality), finite P with smooth neighbourhoods outside it (closedness not assumed); Noetherian local Λ:Type v with eΛ, Artinian local A'/A with Λ-residue isos, π local surjective with hπk; flat Y with marking ι over k; conclusion ∃ flat Y', A-iso α, k-marking ι' with α_k≫ι=ι' (pullbackLeftPullbackSndIso direction checked in Mathlib Pasting.lean:529). Encoding identical to landed exists_affine_lci_artinian_lift. lean.statement verbatim; only the lean record changed vs live; all 11 stmt_dep declarations as recorded (Smooth current name, IsLocalCompleteIntersection explicit args); no duplicate in Sheaf/WeilConjectures/Mathlib; edge cases (empty X, P empty, mixed char, imperfect k, universes) ok; docstrings carry source/blueprint/proof steps; sorry only; report sections present. No changes, so no compile."
+ }
+}

@@ -1,0 +1,314 @@
+{
+ "id": "lem-per-localized-pullback-tensor-normalization",
+ "kind": "statement",
+ "title": "Two localization-normalized derived pullback tensor identifications",
+ "statement": "Let $g:\\mathscr X'\\to\\mathscr X$ be a geometric morphism of topoi presented by sites small in the module universe, let $B$ be a sheaf of commutative rings on $\\mathscr X$, let $S$ be one on $\\mathscr X'$, and specify $c:R=g^{-1}B\\to S$ [def-weil-pbc-ringed-topos-morphism]. Let $t\\in\\Gamma(B)$, write $t'=g^{-1}t$, $s=c(t')$, $V=B[1/t]$, $R_t=R[1/t']$, and $U=S[1/s]$, using sheaf localization [def-weil-pbc-ringed-section-localization]. Use module sheaves, sheaf tensors, unbounded derived categories and ringed derived pullback [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category, lem-weil-pbc-ringed-topoi-derived-pullback]. For every $K\\in D(B)$ there are natural isomorphisms in $D(U)$\n$$a_K:U\\otimes_S^L(S\\otimes_R^L g^{-1}K)\\xrightarrow{\\sim}U\\otimes_R^L g^{-1}K,$$\n$$b_K:U\\otimes^L_{g^{-1}V}g^{-1}(V\\otimes_B^L K)\\xrightarrow{\\sim}U\\otimes_R^L g^{-1}K.$$\nHere $g^{-1}V\\cong R_t$ is the canonical localization-unit-preserving identification of [lem-weil-pbc-localization-inverse-image-coherence]; no invertibility or flatness of $c$ is assumed. More precisely, for any flat-term K-flat resolution $T^\\bullet\\to K$ [def-pc-kflat-complex, def-pc-flat-sheaf-modules], put $N=g^{-1}T^\\bullet$. The complexes $N$, $S\\otimes_RN$, $R_t\\otimes_RN$, and their scalar extensions to $U$ are flat-term K-flat over their respective coefficient sheaves. Under the canonical derived computation comparisons, $a_K$ and $b_K$ are represented by the sheafifications of the chain isomorphisms\n$$u\\otimes(v\\otimes n)\\longmapsto uv\\otimes n,\\qquad u\\otimes(r/(t')^m\\otimes n)\\longmapsto u\\,c(r)s^{-m}\\otimes n,$$\nrespectively, and both inverse maps send $u\\otimes n$ to $u\\otimes(1\\otimes n)$. These formulas include all balancing and fraction relations, commute with differentials, and determine the same derived comparisons for every choice of resolution. Both comparisons are natural for every derived morphism $K\\to L$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change), 0D6D (lemma-derived-pullback-composition): two localization-normalized scalar composites"
+ },
+ "stmt_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-successive-derived-quotient-data",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Construct the localized coefficient map sectionwise by the universal property of Localization.Away. The target localization unit makes the image of the source section invertible. Uniqueness glues the sectionwise maps; naturality of sheafification gives e and its unit equation. The universal-property formula on fractions gives the displayed equation, including zero divisors and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property",
+    "def-weil-pbc-ringed-section-localization",
+    "lem-weil-pbc-localization-inverse-image-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY, 0D6D; sites-modules.tex Tag 03EL"
+   }
+  },
+  {
+   "text": "Use the scalar-extension/inverse-image adjunction comparison on independently sized sites. Its hypotheses are precisely the commuting unit square hIt. The unit equation, inverse-image compatibility with scalar multiplication and the scalar-extension unit formula give the generalized pure-tensor equation for gamma. This uses no claim that global pure tensors generate all sections.",
+   "uses": [
+    "lem-per-independent-scalar-inverse-image",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY, 0D6D; sites-modules.tex Tag 03EL"
+   }
+  },
+  {
+   "text": "Geometric inverse image preserves K-flatness by the independent-universe pullback proof and preserves termwise flatness by its flatness theorem. Applying the ringed K-flat pullback theorem to the identity geometric inverse image gives scalar-extension preservation. These statements apply successively to all eight complexes, without flatness hypotheses on the coefficient maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY, 0D6D; sites-modules.tex Tag 03EL"
+   }
+  },
+  {
+   "text": "Localize the full subcategory of the homotopy category consisting of flat-term K-flat complexes. K-flat resolutions provide the required resolving-class localization. For the two derived composite functors, the universal scalar-extension counits and exact inverse-image comparison are isomorphisms on this subcategory. Whisker gamma with the homotopy quotient and the derived quotient, conjugate by these computation isomorphisms, and lift it through fully faithful precomposition with the resolving-class localization. Its preimage is a natural isomorphism q with the required computation equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY, 0D6D; sites-modules.tex Tag 03EL"
+   }
+  },
+  {
+   "text": "For a, whisker the existing normalized derived scalar-tower comparison by geometric inverse image. For b, first whisker q by extension along e, then compose with the same normalized scalar-tower comparison for R to R_t to U and transport along the coefficient-map equality. The scalar-tower representative equation, naturality at the exact inverse-image computation map, and naturality of the last extension counit prove both displayed representative equations. These are natural isomorphisms on the whole derived category, so naturality includes every derived morphism and resolution independence is automatic.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YY, 0D6D; sites-modules.tex Tag 03EL"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-weil-pbc-ringed-section-localization",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-per-independent-scalar-inverse-image",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-flat-algebraic-inverse-image-universes",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7E, 06YY, 0D6D; adjunction comparison and resolving-class localization, using the existing scalar-tower normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rational coefficient extension of derived module inverse image has two natural balanced tensor flattenings through localization of the pulled coefficient ring",
+   "results": "8 hits: IsLocalization.tensorProduct_isLocalizedModule, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, LinearEquiv.extendScalarsOfIsLocalizationEquiv, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensor, IsLocalizedModule.rTensor, LinearEquiv.extendScalarsOfIsLocalization, Algebra.TensorProduct.instCompatibleSMulRat. Inspected candidates give ordinary ring/module localization or underived pullback composition, not both normalized unbounded derived sheaf comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars through a localization of sheaves of rings is naturally associative with ringed topos inverse image on flat term K flat complexes",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.sheafificationCompPullback, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardNatIso, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.sheafComposeIso_inv_fac_assoc. Inspected candidates give ordinary ring/module localization or underived pullback composition, not both normalized unbounded derived sheaf comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|localization.*tensor|tensor.*localization",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. Inspected candidates give ordinary ring/module localization or underived pullback composition, not both normalized unbounded derived sheaf comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Inspected candidates give ordinary ring/module localization or underived pullback composition, not both normalized unbounded derived sheaf comparisons.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|K_flat|K.flat|pullbackComp",
+   "results": {
+    "hits": 5,
+    "top": [
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply underived pullback composition, ordinary module localization or sheafification, not both unbounded derived sheaf comparisons with their K-flat and normalization clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived pullback of sheaves of modules commutes with localization of coefficients with unit normalized tensor associativity",
+   "results": {
+    "hits": 8,
+    "top": [
+     "PresheafOfModules.pullback_assoc",
+     "AlgebraicGeometry.Scheme.Modules.pullback",
+     "SheafOfModules.pullback",
+     "IsLocalization.instIsLocalizedModuleTensorProductMap",
+     "SheafOfModules.pullback_assoc",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply underived pullback composition, ordinary module localization or sheafification, not both unbounded derived sheaf comparisons with their K-flat and normalization clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves of rings along a localization is computed by flat term K flat resolutions and has natural associative tensor flattening",
+   "results": {
+    "hits": 8,
+    "top": [
+     "SheafOfModules.IsQuasicoherent",
+     "PresheafOfModules.Sheafify.mul_smul",
+     "PresheafOfModules.Sheafify.smulCandidate",
+     "PresheafOfModules.Sheafify.module",
+     "PresheafOfModules.sheafification",
+     "PresheafOfModules.Derivation'.Universal.mk",
+     "PresheafOfModules.sheafify",
+     "CategoryTheory.Sheaf.monoidalCategory"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits supply underived pullback composition, ordinary module localization or sheafification, not both unbounded derived sheaf comparisons with their K-flat and normalization clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-realization-pullback-comparison",
+  "date": "2026-10-22",
+  "group": "Q147"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph of lem-per-smooth-pullback-t-exact: exactness of pullback via coefficient realization; localization and K-flat balanced tensor calculation (retained old item steps 4-6).",
+   "via": [
+    "lem-per-rational-realization-pullback-comparison",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-localized-pullback-tensor-normalization",
+  "worker": "Q28",
+  "summary": "Preserved the complete statement. Reused existing K-flat resolution, arbitrary ringed-topos pullback preservation/computation, localization inverse-image coherence and localization universal-property nodes. Wrote both balanced inverses and the fraction relation explicitly, then descended the natural chain comparisons along the resolving-class localization. No new nodes; no additional flatness, invertibility, boundedness or constructibility hypothesis.",
+  "blueprint": "Realizes the first proof paragraph of lem-per-smooth-pullback-t-exact, specifically the coefficient-realization justification for pullback cohomology. This is the balanced scalar/localization calculation isolated from retained parent steps 4-6; the unit and chapter routes are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General flat-term K-flat resolution existence; no perverse-specific analogue is used."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic preservation of flat-term K-flat complexes under arbitrary ringed-topos pullback, including scalar maps with no flatness hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-localization-away-universal-property",
+    "why": "Ordinary ring localization factorization used on sections to construct the coefficient map."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "General bilinear universal property to turn the explicit balanced formulas into sheaf maps."
+   },
+   {
+    "node": "lem-weil-pbc-localization-inverse-image-coherence",
+    "why": "General unit-normalized comparison of inverse image and localization, as already required by the item statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "General unbounded derived computation comparison and quasi-isomorphism preservation for ringed-topos pullback."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Only its resolving-class localization equivalence is used; this supplies representative independence without a perverse-specific construction."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "General natural-transformation descent along localization, used after the resolving-class equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-2ab9d538c",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-2ab9d538c (reviewer sub-agent of L); spot-checked: Read the whole delivery: the statement is unchanged and correct, and no new nodes are created. There is no repair note, so the re-split rule does not apply. Source: Stacks 0D6D (sites-cohomology l.3658), whose proof is the route taken here, with 06YS (l.3207), 0G7E (l.3508) and 06YY (l.3585); all tags and labels checked. Step 1: lem-pc-kflat-resolution, then lem-weil-pbc-ringed-topos-kflat-pullback for (g,id), then the identity-morphism scalar extensions R→S, R→R_t, R→U, S→U, R_t→U and B→V. That lemma needs flat terms only, never a flat ring map. Step 2: e:R_t→U via the sectionwise localization-away universal property and sheafification; the fraction relations check out even with zero divisors. Steps 3-4: I checked the inner and outer balancing, the inverses and both composites; they are elementary uses of the sheaf bilinear universal property. Step 5: localization-inverse-image-coherence gives g^{-1}(V⊗_B T)≅R_t⊗_R N with the units preserved, and ringed-topoi-derived-pullback computes all three derived sides. U⊗_R is the same R-algebra on both routes because e(r/1)=c(r). Step 6: degree-zero coefficients, so no Koszul sign; commutation with d, chain-map and homotopy naturality hold. Step 7: only the localization-equivalence clause of site-derived-tensor-descent is used, plus localization-universal-property (2)/(3) for descent, independence of resolution and naturality for all derived morphisms. proof_deps equals the union of uses. Edge cases tested: t nilpotent, t=1, g=id with c=id, R=Z with S=Z/2 and t=3 (c not flat), K=0. The 8 tool_uses are generic black boxes and are accepted. No SGA. Advisory for the maintainer: a_K and b_K are the inverses of the canonical c_{f,g} of lem-sfb-ringed-derived-monoidal-comparisons (see also lem-sfb-successive-derived-quotient-normalization), since the representatives are the same. The item adds explicit formulas and flat-term clauses, so it is not a duplicate. Stage 2/3 may realize a_K and b_K as c_{f,g}^{-1}."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizedPullbackTensorNormalization",
+  "declaration": "CategoryTheory.LocalizedPullbackTensor.localizedPullbackTensorNormalization",
+  "declarations": [
+   "CategoryTheory.LocalizedPullbackTensor.presentation",
+   "CategoryTheory.LocalizedPullbackTensor.normalization",
+   "CategoryTheory.LocalizedPullbackTensor.FlatK",
+   "CategoryTheory.LocalizedPullbackTensor.fraction",
+   "CategoryTheory.LocalizedPullbackTensor.UnitNormalized",
+   "CategoryTheory.LocalizedPullbackTensor.localizedPullbackTensorNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/LocalizedPullbackTensorNormalization.lean",
+  "statement": "theorem localizedPullbackTensorNormalization : ∃ (e : ringedLocalizationRingOfUniverses R t' ⟶ ringedLocalizationRingOfUniverses S s) (he : ringedLocalizationRingUnitOfUniverses R t' ≫ e = c ≫ ringedLocalizationRingUnitOfUniverses S s), (∀ (W : Dᵒᵖ) (r₀ : R.obj.obj W) (m : ℕ), (e.hom.app W).hom (fraction R t' W r₀ m) = fraction S s W ((c.hom.app W).hom r₀) m) ∧ ∃ gamma : (presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).ordinary ⋙ It.modules ≅ I.modules ⋙ (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses R t')).ordinary, ∃ a : (I.modules.mapDerivedCategory ⋙ (presentation (hD := hDD) c).derived) ⋙ (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses S s)).derived ≅ I.modules.mapDerivedCategory ⋙ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).derived, ∃ b : ((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).derived ⋙ It.modules.mapDerivedCategory) ⋙ (presentation (hD := hDD) e).derived ≅ I.modules.mapDerivedCategory ⋙ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).derived, (∀ (M : Modules B) (T : Sheaf J (Type r)) (v : T ⟶ (sheafCompose J (forget CommRingCat.{r})).obj (ringedLocalizationRingOfUniverses B t)) (x : T ⟶ (localizationModuleSets B).obj M) (y : T ⟶ (localizationModuleSets (ringedLocalizationRingOfUniverses B t)).obj ((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).ordinary.obj M)), (∀ (W : Cᵒᵖ) (z : T.obj.obj W), y.hom.app W z = sectionTensor (presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)) M W (v.hom.app W z) (x.hom.app W z)) → ∀ (W : Dᵒᵖ) (z : (L.obj T).obj.obj W), ((gamma.hom.app M).val.app W) ((It.moduleUnderlying.inv.app _).hom.app W ((L.map y).hom.app W z)) = sectionTensor (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses R t')) (I.modules.obj M) W (It.ringUnderlying.hom.hom.app W ((L.map v).hom.app W z)) ((I.moduleUnderlying.inv.app M).hom.app W ((L.map x).hom.app W z))) ∧ (∀ T : CochainComplex (Modules B) ℤ, FlatK T → FlatK (((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).ordinary ).mapHomologicalComplex (.up ℤ) |>.obj T) ∧ FlatK ((I.modules.mapHomologicalComplex (.up ℤ)).obj T) ∧ FlatK (((I.modules ⋙ (presentation (hD := hDD) c).ordinary ).mapHomologicalComplex (.up ℤ)).obj T) ∧ FlatK (((I.modules ⋙ (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses R t')).ordinary ).mapHomologicalComplex (.up ℤ)).obj T) ∧ FlatK (((I.modules ⋙ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).ordinary ).mapHomologicalComplex (.up ℤ)).obj T) ∧ FlatK ((((I.modules ⋙ (presentation (hD := hDD) c).ordinary) ⋙ (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses S s)).ordinary ).mapHomologicalComplex (.up ℤ)).obj T) ∧ FlatK ((((I.modules ⋙ (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses R t')).ordinary) ⋙ (presentation (hD := hDD) e).ordinary).mapHomologicalComplex (.up ℤ)).obj T) ∧ FlatK ((((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).ordinary ⋙ It.modules).mapHomologicalComplex (.up ℤ)).obj T)) ∧ (∀ T : CochainComplex (Modules B) ℤ, FlatK T → a.hom.app (DerivedCategory.Q.obj T) ≫ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).derived.map (I.modules.mapDerivedCategoryFactors.hom.app T) ≫ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).counit.app ((I.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T)) = (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses S s)).derived.map ((presentation (hD := hDD) c).derived.map (I.modules.mapDerivedCategoryFactors.hom.app T) ≫ (presentation (hD := hDD) c).counit.app ((I.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T))) ≫ (presentation (hD := hDD) (ringedLocalizationRingUnitOfUniverses S s)).counit.app (((I.modules.mapHomotopyCategory (.up ℤ)) ⋙ (presentation (hD := hDD) c).ordinary.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T)) ≫ (DerivedCategory.Qh (C := Modules (ringedLocalizationRingOfUniverses S s))).map ((Functor.mapHomotopyCategoryCompIso ((normalization (J := J') (hD := hDD)).ordinary c (ringedLocalizationRingUnitOfUniverses S s)) (.up ℤ)).hom.app ((I.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T)))) ∧ (∀ T : CochainComplex (Modules B) ℤ, FlatK T → b.hom.app (DerivedCategory.Q.obj T) ≫ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).derived.map (I.modules.mapDerivedCategoryFactors.hom.app T) ≫ (presentation (hD := hDD) (c ≫ ringedLocalizationRingUnitOfUniverses S s)).counit.app ((I.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T)) = (presentation (hD := hDD) e).derived.map (It.modules.mapDerivedCategory.map ((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).counit.app ((HomotopyCategory.quotient _ _).obj T)) ≫ It.modules.mapDerivedCategoryFactorsh.hom.app ((((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).ordinary ).mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T))) ≫ (presentation (hD := hDD) e).counit.app ((((presentation (hD := hDC) (ringedLocalizationRingUnitOfUniverses B t)).ordinary ).mapHomotopyCategory (.up ℤ) ⋙ It.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T)) ≫ (DerivedCategory.Qh (C := Modules (ringedLocalizationRingOfUniverses S s))).map ((presentation (hD := hDD) e).ordinary.mapHomotopyCategory (.up ℤ) |>.map ((Functor.mapHomotopyCategoryCompIso gamma (.up ℤ)).hom.app ((HomotopyCategory.quotient _ _).obj T))) ≫ (DerivedCategory.Qh (C := Modules (ringedLocalizationRingOfUniverses S s))).map ((Functor.mapHomotopyCategoryCompIso ((normalization (J := J') (hD := hDD)).ordinary (ringedLocalizationRingUnitOfUniverses R t') e) (.up ℤ)).hom.app ((I.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T))) ≫ eqToHom (congrArg (fun (f : R ⟶ ringedLocalizationRingOfUniverses S s) ↦ (DerivedCategory.Qh (C := Modules (ringedLocalizationRingOfUniverses S s))).obj (((presentation (hD := hDD) f).ordinary.mapHomotopyCategory (.up ℤ)).obj ((I.modules.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient _ _).obj T)))) he))",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two comparisons are natural isomorphisms in D(U), tied by explicit equations through universal computation counits to the ordinary balanced tensor comparisons. The localized inverse image is presented after the canonical localization-unit-preserving ring identification. Helpers specialize the existing universal coefficient-extension presentations and normalization laws; no alternative tensor, derived category or inverse-image construction is introduced. FlatK abbreviates the two recorded predicates, and fraction is the sheafification image of an actual Localization.Away element. Added the three already landed interface nodes used in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3252929db",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Read item node, module, all stmt_dep records and live Lean (SuccessiveDerivedQuotientData/Normalization, LocalizationInverseImageCoherence, RingedToposMorphism, RingedTopoiDerivedPullbackIndependent). Mechanical theorem-stmt_dep finding: presentation/normalization are Classical.choose/choice of the proved successive_derived_quotient_normalization existential (derived extension functors, universal counits, normalization witnesses); the def node owns only the structure types, so the statement genuinely depends on theorem-constructed objects -> PASS on that point; choices canonical (obj_eq/map_eq, universal property, ordinary_hom/inv formulas). Clauses checked: g as L⊣Lstar+PreservesFiniteLimits+AlgebraicInverseImage I, arbitrary c, ht/hs, exact ringedLocalizationRingOfUniverses, It with UnitNormalized pins g^-1V≅R_t, exactness instances implied by localization_inverseImage_exact, e pinned by real Localization.Away fraction clause, gamma pinned on generalized pure tensors, a/b NatIsos on D(B) with correct directions, FlatK clause covers N, S⊗N, R_t⊗N and U-extensions, representative equations through invertible computation counits give uv⊗n / e(q)u⊗n and insertion-of-one inverses. Edge cases t=1, t nilpotent, nonflat c, identities, K=0, independent site universes. Node diff: only lean + 3 landed stmt_deps; statement verbatim; docstrings OK; only sorry. Advisories: ringedTopoiDerivedPullbackIndependent imported but unused (faithful decomposition via exact I + Presentation); second-reading section empty of content. No fixes; no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3c27",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T094904-L-3270161",
+  "kind": "interface",
+  "note": "independent cc review: published vs delivered elaborated type of localizedPullbackTensorNormalization (identical up to level-max permutation and proof-irrelevant args; old text closed by exact new theorem); new node lean.statement vs ScalarInverseImageIndependent.lean (verbatim); axioms of both theorems clean"
+ }
+}

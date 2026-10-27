@@ -1,0 +1,196 @@
+{
+ "id": "lem-trf-lattice-retraction-prime-factor-descent",
+ "kind": "statement",
+ "title": "Descent of prime monomial factors through a lattice-support retraction",
+ "statement": "Let $D$ be a commutative domain and $R\\subset D$ a unital subring. Regard $R\\subset D$ also as an $R$-submodule [def-weil-submodule-span]. Let $r\\ge0$, let $x_1,\\ldots,x_r\\in D$ be nonzero prime nonunits, and for $a\\in\\mathbf N^r$ put $x^a=\\prod_{i=1}^r x_i^{a_i}$. Prime means that $x_i\\mid ab$ implies $x_i\\mid a$ or $x_i\\mid b$. Let $M\\subset\\mathbf Z^r$ be an additive subgroup such that $x^a\\in R$ for every $a\\in M\\cap\\mathbf N^r$. Suppose there is an $R$-linear map $\\rho:D\\to R$ restricting to the identity on $R$, satisfying $\\rho(x^a)=0$ whenever $a\\in\\mathbf N^r\\setminus M$, and satisfying $\\rho(v)\\in R^\\times$ for every $v\\in D^\\times$. Suppose there is $w\\in M\\cap\\mathbf N^r$ with all coordinates strictly positive (vacuously so if $r=0$). Then for every $s\\in M\\cap\\mathbf N^r$ and $h,h'\\in R$ with $hh'=x^s$ there exist $e\\in M\\cap\\mathbf N^r$ with $e\\le s$ coordinatewise, $v\\in D^\\times$ and $u\\in R^\\times$ such that $h=x^e v$ in $D$, $u=\\rho(v)$ and $h=x^e u$ in $R$. The zero exponent $s=0$ and the empty coordinate set $r=0$ are included; no factoriality of $R$ or $D$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VI 1.4 and 1.6(i)--(ii), printed pp. 69--70, supplies context and the complete local model presentations only. Agent-formulated auxiliary argument extracted from the returned proof of lem-trf-complete-toric-boundary-class-injectivity, original steps 9, 10, 11. No auxiliary theorem is attributed to ILO or to unread Kato."
+ },
+ "stmt_deps": [
+  "def-weil-submodule-span"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-trf-prime-product-factor-splitting] with $a=1$ and with finite index set $J=\\{(i,j):1\\le i\\le r,\\ 0\\le j<s_i\\}$, assigning $p_{(i,j)}=x_i$. Its product is $x^s$, since the $i$th block has $s_i$ copies of $x_i$. The hypotheses are exactly the assumed primality of each $x_i$ and $hh'=x^s$ in $D$. Obtain a partition $T\\sqcup U=J$, elements $b,c\\in D$ with $bc=1$, and $h=b\\prod_{(i,j)\\in T}x_i$. Put $e_i=\\#\\{j:(i,j)\\in T\\}$. Then $0\\le e_i\\le s_i$ and regrouping the finite product gives $h=x^e v$, where $v=b\\in D^\\times$ has inverse $c$. No distinctness or nonassociation of the $x_i$ was used.",
+   "uses": [
+    "lem-trf-prime-product-factor-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the lattice-retraction auxiliary extracted from original boundary-class proof steps 9--11. ILO VI 1.4/1.6, printed pp. 69--70 (PDF pp. 75--76), supplies only the model context, not this abstract lemma."
+   }
+  },
+  {
+   "text": "Put $N=\\sum_i e_i$ and $a_i=Nw_i-e_i$. Every $w_i\\ge1$, so $Nw_i\\ge N\\ge e_i$; hence $a\\in\\mathbf N^r$, $a+e=Nw$ and $x^a h=x^{Nw}v$. Also $Nw\\in M$ and $x^{Nw}\\in R$ by the hypotheses. In the group $\\mathbf Z^r$, if $e\\notin M$ then $a\\notin M$, since $a\\in M$ would imply $e=Nw-a\\in M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the lattice-retraction auxiliary extracted from original boundary-class proof steps 9--11. ILO VI 1.4/1.6, printed pp. 69--70 (PDF pp. 75--76), supplies only the model context, not this abstract lemma."
+   }
+  },
+  {
+   "text": "Suppose $e\\notin M$. Step 2 gives $a\\notin M$, so the stated support condition gives $\\rho(x^a)=0$. Because $h\\in R$ and $\\rho$ is $R$-linear, $\\rho(x^a h)=h\\rho(x^a)=0$. On the other hand, $x^{Nw}\\in R$ and the equality in step 2 give $\\rho(x^a h)=\\rho(x^{Nw}v)=x^{Nw}\\rho(v)$. This is nonzero in $D$: a finite product of powers of nonzero $x_i$ is nonzero in a domain, and $\\rho(v)$ is a unit of the subring $R$, hence also of $D$. This contradiction proves $e\\in M$. Each equality uses only scalar linearity, with its scalar explicitly in $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the lattice-retraction auxiliary extracted from original boundary-class proof steps 9--11. ILO VI 1.4/1.6, printed pp. 69--70 (PDF pp. 75--76), supplies only the model context, not this abstract lemma."
+   }
+  },
+  {
+   "text": "Now $x^e\\in R$. Apply $\\rho$ to $h=x^e v$ to obtain $h=\\rho(h)=x^e\\rho(v)$ in $R$, since $\\rho$ fixes $R$. Set $u=\\rho(v)\\in R^\\times$, using the assumed unit preservation. Together with $e\\le s$ and the equality in $D$ from step 1, this proves all clauses. If $s=0$ then $J=\\varnothing$ and $e=0$; if $r=0$, all vectors are empty, $N=0$ and every monomial is $1$. The same formulas apply in both cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent argument for the lattice-retraction auxiliary extracted from original boundary-class proof steps 9--11. ILO VI 1.4/1.6, printed pp. 69--70 (PDF pp. 75--76), supplies only the model context, not this abstract lemma."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-prime-product-factor-splitting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Agent argument for the lattice-retraction auxiliary extracted from original boundary-class proof steps 9--11. ILO VI 1.4/1.6, printed pp. 69--70 (PDF pp. 75--76), supplies only the model context, not this abstract lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent of factors of a product of prime elements along a linear subring retraction killing monomials outside a lattice and sending units to units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PrincipalIdealRing.factors_spec\", \"module\": \"Mathlib/RingTheory/PrincipalIdealDomain\", \"type\": \"∀ {R : Type u} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsPrincipalIdealRing R] (a : R),\\n  a ≠ 0 → (∀ b ∈ PrincipalIdealRing.factors a, Irreducible b) ∧ Associated (PrincipalIdealRing.factors a).prod a\", \"doc\": \"For any non-zero element $a$ in a principal ideal domain $R$, the multiset of irreducible factors of $a$ satisfies two properties: (1) every element in the multiset is irreducible, and (2) the product\"}\n  {\"name\": \"PrincipalIdealRing.ringHom_mem_submonoid_of_factors_subset_of_units_subset\", \"module\": \"Mathlib/RingTheory/PrincipalIdealDomain\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsPrincipalIdealRing R]\\n  [inst_3 : NonAssocSemiring S] (f : R →+* S) (s : Submonoid S) (a : R),\\n  a ≠ 0 → (∀ b ∈ PrincipalIdealRing.factors a, f b ∈ s) → (∀ (c : Rˣ), f ↑c ∈ s) → f a ∈ s\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ from a principal ideal domain $ R $ to a non-associative semiring $ S $, if all irreducible factors of a non-zero element $ a \\\\in R $ and all units of $ R $ are\"}\n  {\"name\": \"singleton_span_mem_normalizedFactors_of_mem_normalizedFactors\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsPrincipalIdealRing R]\\n  [inst_3 : NormalizationMonoid R] {a b : R},\\n  a ∈ UniqueFactorizationMonoid.normalizedFactors b →\\n    Ideal.span {a} ∈ UniqueFactorizationMonoid.normalizedFactors (Ideal.span {b})\", \"doc\": \"If an element $ a $ is a normalized factor of an element $ b $ in a normalization monoid $ R $, then the ideal generated by $ a $ is a normalized factor of the ideal generated by $ b $. This follows f\"}\n  {\"name\": \"normalizedFactorsEquivSpanNormalizedFactors\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsPrincipalIdealRing R] →\\n        [inst_3 : NormalizationMonoid R] →\\n          {r : R} →\\n            r ≠ 0 →\\n              ↑{d | d ∈ UniqueFactorizationMonoid.normalizedFactors r} ≃\\n                ↑{I | I ∈ UniqueF\", \"doc\": \"For any nonzero element $ r $ in a principal ideal domain $ R $, there is a bijection between the set of normalized prime factors of $ r $ and the set of normalized factors of the principal ideal $ (r\"}\n  {\"name\": \"PrincipalIdealRing.factors\", \"module\": \"Mathlib/RingTheory/PrincipalIdealDomain\", \"type\": \"{R : Type u} → [inst : CommRing R] → [IsDomain R] → [IsPrincipalIdealRing R] → R → Multiset R\", \"doc\": \"For a non-zero element $ a $ in a principal ideal domain $ R $, this function returns a finite multiset of irreducible elements whose product is associate to $ a $. If $ a = 0 $, it returns the empty \"}\n  {\"name\": \"Ideal.factors_span_eq\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {K : Type u_3} [inst : Field K] {p : Polynomial K},\\n  UniqueFactorizationMonoid.factors (Ideal.span {p}) =\\n    Multiset.map (fun q => Ideal.span {q}) (UniqueFactorizationMonoid.factors p)\", \"doc\": \"In the polynomial ring over a field, the prime ideal factorization of the principal ideal generated by a polynomial $ p $ is equal to the product of the principal ideals generated by each irreducible \"}\n  {\"name\": \"prod_normalizedFactors_eq_self\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Ideal/Lemmas\", \"type\": \"∀ {T : Type u_4} [inst : CommRing T] [inst_1 : IsDedekindDomain T] {I : Ideal T},\\n  I ≠ ⊥ → (UniqueFactorizationMonoid.normalizedFactors I).prod = I\", \"doc\": \"For any non-zero ideal $I$ in a Dedekind domain, the product of the normalized prime ideals in its unique factorization equals $I$ itself, i.e., $\\\\prod (\\\\text{normalizedFactors } I) = I$.\"}\n  {\"name\": \"Polynomial.UniversalFactorizationRing.presentation\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    {n : ℕ} →\\n      (m k : ℕ) →\\n        (hn : n = m + k) →\\n          (p : Polynomial.MonicDegreeEq R n) →\\n            Algebra.PreSubmersivePresentation R (Polynomial.UniversalFactorizationRing m k hn p) (Fin m ⊕ Fin k) (Fin n)\", \"doc\": \"The algebraic presentation defining the universal factorization ring structure over a commutative ring $ R $, which encodes the data required to universally factor a monic polynomial of degree $ n = m\"}\n\nNo match: polynomial monomial divisor lemmas apply to MvPolynomial rather than arbitrary domains and provide no lattice-retraction exponent descent. The PID factorization hits add a principal ideal hypothesis absent here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a split subring projection kills monomials outside a subgroup then prime monomial factors have subgroup exponents by a positive exponent shift",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Polynomial.Splits.monomial\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \"(n : ℕ) (a : R) : Splits (monomial n a)\", \"doc\": \"For any natural number $ n $ and element $ a $ in a semiring $ R $, the monomial polynomial $ aX^n $ splits, meaning it can be expressed as a product of constant polynomials and linear polynomials of \"}\n  {\"name\": \"MvPolynomial.uniqueFactorizationMonoid\", \"module\": \"Mathlib.RingTheory.Polynomial.UniqueFactorization\", \"type\": \": UniqueFactorizationMonoid (MvPolynomial σ D)\", \"doc\": \"For any commutative semiring $D$ and type $\\\\sigma$, the multivariate polynomial ring $D[\\\\sigma]$ is a unique factorization monoid. This means that every non-zero, non-unit polynomial in $D[\\\\sigma]$ ca\"}\n  {\"name\": \"Subsemiring.isHomogeneous_iff_forall_subset\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Subsemiring\", \"type\": \": SetLike.IsHomogeneous 𝒜 R ↔ ∀ i, (R : Set A) ⊆ GradedRing.proj 𝒜 i ⁻¹' (R : Set A)\", \"doc\": \"For a graded ring $ A $ indexed by an additive monoid $ \\\\iota $, a subsemiring $ \\\\mathcal{A} $ is homogeneous (i.e., every element's homogeneous components lie in $ \\\\mathcal{A} $) if and only if for e\"}\n  {\"name\": \"Polynomial.toSubring\", \"module\": \"Mathlib.RingTheory.Polynomial.Basic\", \"type\": \"(hp : (↑p.coeffs : Set R) ⊆ T) : T[X]\", \"doc\": \"For a polynomial $ p $ over a ring $ R $ and a subring $ T $ of $ R $, if all coefficients of $ p $ are contained in $ T $, then $ p $ is an element of the polynomial ring $ T[X] $. The function const\"}\n  {\"name\": \"Polynomial.Splits.comp_of_degree_le_one_of_monic\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \"{f g : R[X]} (hf : f.Splits) (hg : g.degree ≤ 1) (h : Monic g) : (f.comp g).Splits\", \"doc\": \"If a polynomial $ f $ splits over a semiring $ R $ and $ g $ is a monic polynomial of degree at most 1, then the composition $ f \\\\circ g $ also splits over $ R $.\"}\n  {\"name\": \"Polynomial.monomial_mem_lifts\", \"module\": \"Mathlib.Algebra.Polynomial.Lifts\", \"type\": \"{s : S} (n : ℕ) (h : s ∈ Set.range f) : monomial n s ∈ lifts f\", \"doc\": \"For any natural number $n$ and element $s$ in the image of a ring homomorphism $f : R \\to S$, the monomial polynomial $sX^n$ belongs to the subsemiring $\\\\text{lifts}(f)$ of $S[X]$, which consists of po\"}\n  {\"name\": \"Polynomial.Splits.map\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \"{f : R[X]} (hf : Splits f) {S : Type*} [Semiring S] (i : R →+* S) : Splits (map i f)\", \"doc\": \"If a polynomial $ f $ over a semiring $ R $ splits into a product of constant and linear polynomials, then for any ring homomorphism $ i : R \\\\to S $ to another semiring $ S $, the polynomial obtained \"}\n  {\"name\": \"Polynomial.Splits\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \"(f : R[X]) : Prop\", \"doc\": \"A polynomial $ f $ splits if it can be expressed as a product of constant polynomials and linear polynomials of the form $ X + a $, where $ a $ is an element of the semiring $ R $. This is defined as \"}\n\nNo match: polynomial monomial divisor lemmas apply to MvPolynomial rather than arbitrary domains and provide no lattice-retraction exponent descent. The PID factorization hits add a principal ideal hypothesis absent here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Prime, LinearMap, IsUnit",
+   "results": "[loogle] OK 0 hit(s)\n\nNo match: polynomial monomial divisor lemmas apply to MvPolynomial rather than arbitrary domains and provide no lattice-retraction exponent descent. The PID factorization hits add a principal ideal hypothesis absent here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "prime.*prod.*dvd|dvd.*prod.*prime|associated.*prod",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Algebra/GCDMonoid/FinsetLemmas.lean\", \"line\": \"31\", \"text\": \"theorem associated_lcm_prod {s : Finset ι} {f : ι → α} (h : Set.Pairwise s <| IsRelPrime.onFun f) :\"}\n  {\"file\": \"Mathlib/Algebra/GCDMonoid/FinsetLemmas.lean\", \"line\": \"32\", \"text\": \"    Associated (s.lcm f) (s.prod f) :=\"}\n  {\"file\": \"Mathlib/Algebra/GCDMonoid/FinsetLemmas.lean\", \"line\": \"33\", \"text\": \"  associated_of_dvd_dvd (s.lcm_dvd_prod f) (s.prod_dvd_of_isRelPrime h fun _ ↦ dvd_lcm)\"}\n  {\"file\": \"Mathlib/Algebra/GCDMonoid/FinsetLemmas.lean\", \"line\": \"38\", \"text\": \"  exact associated_lcm_prod h |>.eq_of_normalized (normalize_eq _) (normalize_eq _)\"}\n  {\"file\": \"Mathlib/Algebra/GCDMonoid/Basic.lean\", \"line\": \"318\", \"text\": \"  /-- The product of two elements is `Associated` with the product of their GCD and LCM. -/\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Nat.lean\", \"line\": \"197\", \"text\": \"    convert! Finset.dvd_prod_of_mem _ (mem_attach (n.primeFactors) ⟨p, hp⟩)\"}\n  {\"file\": \"Mathlib/Algebra/Order/Antidiag/Nat.lean\", \"line\": \"200\", \"text\": \"    rw [Prime.dvd_finsetProd_iff hp.1.prime]\"}\n  {\"file\": \"Mathlib/Algebra/BigOperators/Associated.lean\", \"line\": \"62\", \"text\": \"theorem Associated.prod {M : Type*} [CommMonoid M] {ι : Type*} (s : Finset ι) (f : ι → M)\"}\n  {\"file\": \"Mathlib/Algebra/BigOperators/Associated.lean\", \"line\": \"73\", \"text\": \"theorem exists_associated_mem_of_dvd_prod [CommMonoidWithZero M₀] [IsCancelMulZero M₀]\"}\n  {\"file\": \"Mathlib/Algebra/BigOperators/Associated.lean\", \"line\": \"125\", \"text\": \"    (div : ∀ a ∈ s, a ∣ n) (uniq : ∀ a, s.countP (Associated a) ≤ 1) : s.prod ∣ n := by\"}\n  {\"file\": \"Mathlib/Algebra/BigOperators/Associated.lean\", \"line\": \"221\", \"text\": \"theorem Prime.dvd_finsetProd_iff {S : Finset M₀} {p : M} (pp : Prime p) (g : M₀ → M) :\"}\n  {\"file\": \"Mathlib/Algebra/BigOperators/Associated.lean\", \"line\": \"225\", \"text\": \"@[deprecated (since := \\\"2026-04-08\\\")] alias Prime.dvd_finset_prod_iff := Prime.dvd_finsetProd_iff\"}\n\nNo match: polynomial monomial divisor lemmas apply to MvPolynomial rather than arbitrary domains and provide no lattice-retraction exponent descent. The PID factorization hits add a principal ideal hypothesis absent here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A factor of a monomial is a unit times a monomial; a coefficient retraction and a strictly positive lattice vector force its exponent into the sublattice",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.dvd_monomial_one_iff_exists\", \"module\": \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors\", \"type\": \"∀ {R : Type u_1} {σ : Type u_2} [inst : CommRing R] [NoZeroDivisors R] {p : MvPolynomial σ R} {n : σ →₀ ℕ},\\n  p ∣ (MvPolynomial.monomial n) 1 ↔ ∃ m u, m ≤ n ∧ IsUnit u ∧ p = (MvPolynomial.monomial m) u\", \"doc\": \"In the multivariate polynomial ring $ R[\\\\sigma] $ over a commutative semiring $ R $, a polynomial $ p $ divides the monomial $ X^n $ (with coefficient 1) if and only if there exists a monomial $ X^m $\"}\n  {\"name\": \"MonomialOrder.div_set\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Groebner\", \"type\": \"∀ {σ : Type u_1} {m : MonomialOrder σ} {R : Type u_2} [inst : CommRing R] {B : Set (MvPolynomial σ R)},\\n  (∀ b ∈ B, IsUnit (m.leadingCoeff b)) →\\n    ∀ (f : MvPolynomial σ R),\\n      ∃ g r,\\n        f = (Finsupp.linearCombination (MvPolynomial σ R) fun b => ↑b) g + r ∧\\n          (∀ (b : ↑B), m.toSyn (m\", \"doc\": \"Given a monomial order $ m $, a set $ B $ of multivariate polynomials over $ R $ with unit leading coefficients, and a polynomial $ f $, there exist a finite support function $ g $ and a remainder pol\"}\n  {\"name\": \"MvPolynomial.mem_ideal_span_monomial_image_iff_dvd\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Ideal\", \"type\": \"∀ {σ : Type u_1} {R : Type u_2} [inst : CommSemiring R] {x : MvPolynomial σ R} {s : Set (σ →₀ ℕ)},\\n  x ∈ Ideal.span ((fun s => (MvPolynomial.monomial s) 1) '' s) ↔\\n    ∀ xi ∈ x.support, ∃ si ∈ s, (MvPolynomial.monomial si) 1 ∣ (MvPolynomial.monomial xi) (MvPolynomial.coeff xi x)\", \"doc\": \"A multivariate polynomial $ x $ belongs to the ideal generated by monomials corresponding to a set $ s $ if and only if every monomial in the support of $ x $ is divisible by some monomial in $ s $. F\"}\n  {\"name\": \"MvPolynomial.dvd_monomial_mul_iff_exists\", \"module\": \"Mathlib/Algebra/MvPolynomial/Division\", \"type\": \"∀ {σ : Type u_1} {R : Type u_3} [inst : CommRing R] {p q : MvPolynomial σ R} [IsCancelMulZero R] {n : σ →₀ ℕ},\\n  p ∣ (MvPolynomial.monomial n) 1 * q ↔ ∃ m r, m ≤ n ∧ r ∣ q ∧ p = (MvPolynomial.monomial m) 1 * r\", \"doc\": \"In the multivariate polynomial ring $ R[\\\\sigma] $ over a commutative ring $ R $ with cancellative multiplication (i.e., $ R $ is a cancel monoid with zero), a polynomial $ p $ divides the product of t\"}\n  {\"name\": \"MvPolynomial.exists_mem_support_not_dvd_of_forall_totalDegree_le\", \"module\": \"Mathlib/FieldTheory/SeparablyGenerated\", \"type\": \"∀ {k : Type u_1} {K : Type u_2} {ι : Type u_3} [inst : Field k] [inst_1 : Field K] [inst_2 : Algebra k K] (p : ℕ),\\n  Nat.Prime p →\\n    (∀ (s : Finset K), LinearIndepOn k id ↑s → LinearIndepOn k (fun x => x ^ p) ↑s) →\\n      ∀ {a : ι → K} {F : MvPolynomial ι k},\\n        (∀ (F' : MvPolynomial ι k), F' \", \"doc\": \"Let $ R $ be a commutative semiring, $ \\\\sigma $ a type of variables, and $ p $ a prime number. If $ F \\\\in R[\\\\sigma] $ is a nonzero multivariate polynomial such that $ F(a) = 0 $ for some assignment $ \"}\n  {\"name\": \"Associates.FactorSetMem\", \"module\": \"Mathlib/RingTheory/UniqueFactorizationDomain/FactorSet\", \"type\": \"{α : Type u_1} → [inst : CommMonoidWithZero α] → Associates.FactorSet α → Associates α → Prop\", \"doc\": \"The type representing multisets of irreducible elements in the associates of a commutative monoid with zero, extended with a top element. Formally, it is the type $\\\\text{WithTop}(\\\\text{Multiset}\\\\{a : \"}\n  {\"name\": \"MonomialOrder.div\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Groebner\", \"type\": \"∀ {σ : Type u_1} {m : MonomialOrder σ} {R : Type u_2} [inst : CommRing R] {ι : Type u_3} {b : ι → MvPolynomial σ R},\\n  (∀ (i : ι), IsUnit (m.leadingCoeff (b i))) →\\n    ∀ (f : MvPolynomial σ R),\\n      ∃ g r,\\n        f = (Finsupp.linearCombination (MvPolynomial σ R) b) g + r ∧\\n          (∀ (i : ι), m.\", \"doc\": \"Given a monomial order $ m $, an $\\\\iota$-indexed family of polynomials $\\\\{b_i\\\\}$ with unit leading coefficients, and any polynomial $ f $, there exist a finite support function $ g : \\\\iota \\\\to_0 R[\\\\si\"}\n  {\"name\": \"MvPolynomial.dvd_monomial_iff_exists\", \"module\": \"Mathlib/Algebra/MvPolynomial/NoZeroDivisors\", \"type\": \"∀ {R : Type u_1} {σ : Type u_2} [inst : CommRing R] [NoZeroDivisors R] {p : MvPolynomial σ R} {n : σ →₀ ℕ} {a : R},\\n  a ≠ 0 → (p ∣ (MvPolynomial.monomial n) a ↔ ∃ m b, m ≤ n ∧ b ∣ a ∧ p = (MvPolynomial.monomial m) b)\", \"doc\": \"In the multivariate polynomial ring $ R[\\\\sigma] $ over a commutative ring $ R $, a polynomial $ p $ divides a monomial $ aX^n $ (with $ a \\\\neq 0 $) if and only if there exist a monomial $ X^m $ with $\"}\n\nNo match: polynomial monomial divisor lemmas apply to MvPolynomial rather than arbitrary domains and provide no lattice-retraction exponent descent. The PID factorization hits add a principal ideal hypothesis absent here.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of prime monomial factors through a lattice-support linear retraction from a domain onto a subring",
+   "results": "FirstOrder.Ring.mvPolynomialSupportLEEquiv; MvPolynomial.combinatorial_nullstellensatz_exists_linearCombination; MvPolynomial.basisRestrictSupport; FreeCommRing.map_subtype_val_restriction. None concerns this arbitrary-domain lattice retraction.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a cancellative commutative monoid a divisor of a finite product of prime elements is associated to a subproduct",
+   "results": "exists_associated_mem_of_dvd_prod; Multiset.prod_primes_dvd; Finset.prod_primes_dvd; Prime.dvd_prod_iff. These give prime-product tools, not lattice descent. LeanSearch found the more suitable mul_eq_mul_prime_prod, extracted as a Mathlib leaf.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Prime, LinearMap, IsUnit",
+   "results": "Zero hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Divisors of a product of primes in an integral domain are units times subproducts without unique factorization",
+   "results": "mul_eq_mul_prime_prod (read Mathlib/RingTheory/Prime.lean:24--48); exists_associated_mem_of_dvd_prod; UFD and Dedekind-domain hits. The first handles only the prime-product factorization; none states the lattice-retraction conclusion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*retraction|retraction.*lattice|monomial.*retraction|retraction.*monomial",
+   "results": "Searched RingTheory; zero hits.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-complete-toric-boundary-class-injectivity",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2) nearby-duality alteration ancestry of lem-trf-local-term-locality, through log-regular divisorial structure: Class-group input to the complete-local recognition equality: the cokernel of the primitive facet-valuation map injects into the Weil divisor class group of the completed model (the Mori-type injectivity issue in the return). Auxiliary Descent of prime monomial factors through a lattice-support retraction; original boundary-class proof steps 9, 10, 11.",
+   "via": [
+    "lem-trf-complete-toric-boundary-class-injectivity",
+    "lem-trf-complete-toric-kato-recognition",
+    "lem-trf-log-regular-divisorial-structure",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-lattice-retraction-prime-factor-descent",
+  "worker": "stage1",
+  "summary": "Q82: retain the statement and inherited searches. No exact project declaration found. Extract the exact Mathlib prime-product partition theorem as one leaf; group its indexed prime copies to obtain e <= s and a unit v, then give the explicit positive-vector shift and scalar-linear contradiction forcing e into M. Apply the retraction again to descend v to a unit in R. Checked empty coordinates, zero exponents, repeated/associated primes and absence of factoriality.",
+  "blueprint": "Retains the historical auxiliary route recorded in blueprint.from: original complete-toric-boundary-class-injectivity steps 9--11, under lem-trf-local-term-locality nearby-duality ancestry. The current latest blueprint replaces that ancestry by contracting-correspondence arguments; no current unit/chapter route is changed. This item is the existing abstract auxiliary, not a replacement proof of the current local-term statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-552ade273",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-552ade273 (reviewer sub-agent of L); spot-checked: FIX. The item's mathematics is correct, and the one fault is a citation in the new leaf. lem-trf-prime-product-factor-splitting is an exact one-line specialisation of Mathlib mul_eq_mul_prime_prod (RingTheory/Prime.lean:32-36): the Prime clauses match, IsDomain gives IsCancelMulZero, and the statement holds for S empty, a=0 and repeated or associated primes. It does not duplicate ufd-height-one, regular-local-ufd-boundary-factorization or complete-toric-monomial-factors. Item statement: unchanged from the version Q137 created (same sha in every Q137 snapshot). Step 1: the leaf with a=1 on labelled copies J gives e<=s and v=b, a unit with inverse c. Step 2: the shift a=Nw-e is nonnegative because w_i>=1, and a in M would force e in M. Step 3: the R-linearity scalars h and x^{Nw} are both in R; x^{Nw}rho(v) is nonzero in the domain, which contradicts rho(x^a)=0. Step 4: rho fixes h=x^e v, and unit preservation gives u in R^x. Edge cases s=0 and r=0 checked. Parent boundary-class step 4 uses exactly these outputs. The ILO VI pp.69-70 source is context only and no SGA is used. Mechanical finding: the leaf cites def-per-rational-surface-singularity. This is confirmed, since the id is at line 1380 of route-pivot-dropped.txt. No step justifies it: it was added only to satisfy preflight's rule that a new node cite some node, for the domain convention, and it also fails B3. Repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-prime-product-factor-splitting.json: integral domain is now defined inline (Stacks 09FE), and divisibility is written as membership of span_D{q}=qD [def-weil-submodule-span]. stmt_deps changes to [def-weil-submodule-span], and mathlib how adds Ideal.mem_span_singleton (Ideal/Span.lean:181). No other change.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LatticeRetractionPrimeFactorDescent",
+  "declaration": "RingTheory.latticeRetraction_prime_factor_descent",
+  "file": "lean/Sheaf/RingTheory/LatticeRetractionPrimeFactorDescent.lean",
+  "statement": "theorem latticeRetraction_prime_factor_descent {D : Type u} [CommRing D] [IsDomain D] (R : Subring D) (r : ℕ) (x : Fin r → D) (hx : ∀ i : Fin r, Prime (x i)) (M : AddSubgroup (Fin r → ℤ)) (hmon : ∀ a : Fin r → ℕ, (fun i ↦ (a i : ℤ)) ∈ M → (∏ i : Fin r, x i ^ a i) ∈ R) (ρ : D →ₗ[R] R) (hρ : ∀ z : R, ρ (z : D) = z) (hsupport : ∀ a : Fin r → ℕ, (fun i ↦ (a i : ℤ)) ∉ M → ρ (∏ i : Fin r, x i ^ a i) = 0) (hunits : ∀ v : Dˣ, IsUnit (ρ (v : D))) (w : Fin r → ℕ) (hw : (fun i ↦ (w i : ℤ)) ∈ M) (hwpos : ∀ i : Fin r, 0 < w i) (s : Fin r → ℕ) (hs : (fun i ↦ (s i : ℤ)) ∈ M) (h h' : R) (hh : (h : D) * (h' : D) = ∏ i : Fin r, x i ^ s i) : ∃ (e : Fin r → ℕ) (he : (fun i ↦ (e i : ℤ)) ∈ M) (v : Dˣ) (u : Rˣ), e ≤ s ∧ (h : D) = (∏ i : Fin r, x i ^ e i) * (v : D) ∧ (u : R) = ρ (v : D) ∧ h = (⟨∏ i : Fin r, x i ^ e i, hmon e he⟩ : R) * (u : R)",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d39cd919c",
+  "group": "Q79",
+  "result": "pass",
+  "note": "Item node changed only in lean; statement verbatim in file. Every clause matches the node: domain D, Subring R with its module structure, Prime x_i, AddSubgroup M, hmon, R-linear ρ with hρ, hsupport, hunits, explicit positive w (equivalent curried existential), s, hs, h, h' with the product equation in D (inclusion injective); conclusion ∃ e∈M∩N^r, e≤s, v∈Dˣ, u∈Rˣ, h=x^e v in D, u=ρ v, h=⟨x^e,hmon e he⟩·u in R. No extra assumptions. Proof plan checked (mul_eq_mul_prime_prod on labelled copies, shift Nw−e, R-scalar linearity contradiction, retraction). Edge cases r=0, s=0, repeated primes covered. Docstrings with source and blueprint id, sorry only, lines ≤100, Mathlib imports justified, name unused in Mathlib and side-live; no live binding or supersession. No compile run because no file was changed; the worker reports a clean compile."
+ }
+}

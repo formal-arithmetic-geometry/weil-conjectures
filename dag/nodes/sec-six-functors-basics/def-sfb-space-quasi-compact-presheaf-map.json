@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-space-quasi-compact-presheaf-map",
+ "kind": "definition",
+ "title": "Quasi-compact affine-test atlas predicate for presheaf morphisms",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with test schemes and universes as in [def-weil-size-convention] and [def-trf-algebraic-space]. Let $G,F$ be presheaves of sets on $(\\mathit{Sch}/S)$ and $g:G\\to F$ a natural transformation. The quasi-compact affine-test atlas predicate for $g$ means that for every affine scheme $Z$ over $S$ and map $h:h_Z\\to F$, there exist a scheme $U$ over $S$, a morphism $p:U\\to Z$, and a natural transformation $q:h_U\\to G$ with $g\\circ q=h\\circ h_p$, such that $U$ is quasi-compact [def-weil-pbc-quasi-compact-scheme] and the induced map $(q,h_p):h_U\\to G\\times_F h_Z$ is etale and surjective in the scheme-test sense of [def-trf-algebraic-space]. Here $h_Z$ and $h_U$ are the represented presheaves. On algebraic spaces this is the affine-test formulation of quasi-compactness.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03E3 (definition-quasi-compact), atlas condition; spaces-morphisms.tex Tag 03HE (definition-quasi-compact) and Tag 03KG (lemma-quasi-compact-local), condition (3), affine-test formulation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsQuasiCompactPresheafMap|quasi.compact.*presheaf",
+   "results": "{\"t\": \"2026-10-23T14:23:30Z\", \"tool\": \"grep\", \"query\": \"IsQuasiCompactPresheafMap|quasi.compact.*presheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib results concern schemes only; no presheaf atlas predicate. Reuse the existing project definition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A presheaf morphism is quasi compact when every affine scheme base change admits an etale surjection from a quasi compact scheme",
+   "results": "{\"t\": \"2026-10-23T14:23:30Z\", \"tool\": \"leansearch\", \"query\": \"A presheaf morphism is quasi compact when every affine scheme base change admits an etale surjection from a quasi compact scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.QuasiCompact.mk\", \"AlgebraicGeometry.quasiCompact_iff\", \"AlgebraicGeometry.quasiCompact_iff_isSpectralMap\", \"AlgebraicGeometry.Scheme.Hom.isCompact_preimage\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\"], \"digest\": \"f27f712c67ce098f\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib results concern schemes only; no presheaf atlas predicate. Reuse the existing project definition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiCompact\"",
+   "results": "{\"t\": \"2026-10-23T14:23:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"QuasiCompact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeQuasiCompact\", \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"AlgebraicGeometry.quasiCompact_isStableUnderComposition\", \"AlgebraicGeometry.QuasiCompact\", \"AlgebraicGeometry.quasiCompact_of_isIso\", \"AlgebraicGeometry.compactSpace_iff_quasiCompact\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_comp\"], \"digest\": \"9b012a00d58d67d2\"}",
+   "date": "2026-10-23",
+   "verdict": "Mathlib results concern schemes only; no presheaf atlas predicate. Reuse the existing project definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsQuasiCompactPresheafMap|quasi-compact-presheaf-map dag/nodes lean/WeilConjectures lean/Sheaf; blueprint_refs.py search quasi-compact presheaf; blueprint_refs.py ancestor lem-sfb-space-quasicompact-affine-tests",
+   "results": "The only defining declaration is lean/Sheaf/TraceFormula/SpaceQCSeparatedEtaleLocal.lean:38. Other occurrences are consumers and theorem records; no definition node owns the predicate. No occurrence in lean/WeilConjectures. 0 blueprint nodes match quasi-compact presheaf. Ancestor is None.",
+   "date": "2026-10-23",
+   "verdict": "Existing project definition has no owning definition node; record it with existing:true."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-quasicompact-affine-tests",
+  "date": "2026-10-23",
+  "group": "Q97"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: Representability and smoothness of the Picard space of a relative curve. Descent of the universal locally closed equality loci for arbitrary Picard sheaf sections. Supporting input: Tag 0424 proof, hypotheses (1) and (2) of 041J, using 03KG. The affine-test atlas predicate needed to state quasi-compactness in lem-sfb-space-quasicompact-affine-tests.",
+   "via": [
+    "lem-sfb-space-quasicompact-affine-tests",
+    "lem-sfb-space-quasi-compact-immersion-locality",
+    "lem-sfb-picard-space-curves-smooth",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsQuasiCompactPresheafMap",
+  "statement": "def IsQuasiCompactPresheafMap {G F : (Over S)ᵒᵖ ⥤ Type u} (g : G ⟶ F) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q97",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Owns the existing fully constructed affine-test atlas predicate; no declaration is duplicated and the etale-local theorem is not used to state the consumer."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4ec66eda",
+  "group": "Q97",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f4ec66eda",
+  "group": "Q97",
+  "result": "pass",
+  "note": "Re-delivery after RETURN fb3e6e9ab270 (H2). The only Lean change is a public import of AlgebraicSpaceJointSurjectivity; the 4 signatures, docstrings and sorry proofs are byte-identical. In stmt_deps the theorem lem-trf-space-qc-separated-etale-local is replaced by the new def node def-sfb-space-quasi-compact-presheaf-map (existing:true on SpaceQCSeparatedEtaleLocal/IsQuasiCompactPresheafMap; statement matches lines 38-44 binder for binder; lean.statement verbatim; no other owner in live dag; same pattern as def-sfb-presheaf-map-separated-diagonal), and def-trf-algebraic-space-jointly-surjective-family is added. Item statement, proof and source are verbatim vs live, and the item is still without a Lean record live. Mathematics re-checked: qc tests vs affine predicate (03KG 1<->3), open-subspace cover with Type (u+1) index and pointwise joint surjectivity (03KG 6), arbitrary base change (03HF), representable case (03HD); edge cases empty T/cover and infinite disjoint unions; no added hypotheses. No compile needed (no file changed). Advisory: other citers still cite the theorem for this predicate."
+ }
+}

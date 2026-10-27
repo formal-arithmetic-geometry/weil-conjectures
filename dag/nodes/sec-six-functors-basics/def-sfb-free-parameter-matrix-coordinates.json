@@ -1,0 +1,115 @@
+{
+ "id": "def-sfb-free-parameter-matrix-coordinates",
+ "kind": "definition",
+ "title": "Local matrices and coordinates of finite free parameter functions",
+ "status": "split",
+ "statement": "In the internal-module categories of [def-sfb-free-parameter-evaluation-data], let the rank-$r$ point module be the finite biproduct of $r$ copies of the regular $R$-module, and the local checking model the corresponding biproduct of the regular $p_V^*R$-module. For isomorphisms $e:M\\cong B^r$, $e':M'\\cong B^s$ and any local linear map $v:M\\to M'$, define its matrix by $m_{ij}=\\iota_j;e^{-1};v;e';\\pi_i\\in\\operatorname{End}_B(B)$. These are arbitrary local sections, with no point-origin restriction. For a basis $e:p_V^*R^r\\cong B^r$, define its derived coordinate map by the canonical exact-pullback/single-complex identification followed by $(e;\\pi_i)[0]$. For a local map between pullbacks of finite free point modules, define its derived arrow using the same exact-pullback/single-complex identifications at source and target. Include ranks zero.",
+ "stmt_deps": [
+  "def-sfb-free-parameter-evaluation-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J7, equation-internal-hom; Tags 07A4, 07A6, 07A7; canonical constructions in lem-sfb-free-parameter-evaluation-coherence proof steps 1–12"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Canonical free profinite parameter evaluation and relative substitution maps on unbounded derived modules",
+   "results": "OK 8 hits: Condensed.profiniteFree, ModuleCat.freeDesc_apply, LocallyConstant.freeOfProfinite, PresheafOfModules.evaluation_map, AdicCompletion.eval, Condensed.profiniteSolidification, Module.map_eval_injective, FGModuleCat.FGModuleCatEvaluation. No derived adjunction/evaluation specification for this item.",
+   "date": "2026-10-23",
+   "verdict": "No exact declaration"
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "Canonical derived evaluation for a free profinite parameter and its scalar adjunction maps",
+   "results": "OK 8 hits: LocallyConstant.freeOfProfinite, Condensed.profiniteFree, Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, AdicCompletion.coe_eval, Condensed.profiniteSolid, Profinite.NobelingProof.GoodProducts.square_commutes, Profinite.NobelingProof.Nobeling_aux.",
+   "date": "2026-10-23",
+   "verdict": "No canonical maps in the internal-module derived categories"
+  },
+  {
+   "tool": "Loogle",
+   "query": "CategoryTheory.ihom, CategoryTheory.Adjunction.homEquiv",
+   "results": "OK 7 hits: MonoidalClosed.homEquiv_apply_eq, homEquiv_symm_apply_eq, ofEquiv_curry_def, ofEquiv_uncurry_def, LightCondensed.ihomPoints_symm_apply, ihomPoints_apply, Rep.homEquiv_def.",
+   "date": "2026-10-23",
+   "verdict": "Generic closed adjunction used; no complete specialized data"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep parameterTensor|scalarPullComparison|FreeParameterEvaluation CategoryTheory; rg freeParameter|evaluationCoherence|ProfiniteFreeSlice in lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search free parameter evaluation; rg -l new node ids dag/nodes",
+   "results": "msearch: OK 0 hits. No new node ids, 0 matching blueprint nodes. Existing ProfiniteFreeSlice and PointDerivedHom provide the imported free and closed derived objects; the parent ProfiniteConstantDerivedFunctions has related downstream private maps but cannot be imported here without the returned dependency cycle. No acyclic node owns these specialized canonical map specifications.",
+   "date": "2026-10-23",
+   "verdict": "Factor the missing canonical data on the recorded dependencies; no duplicate object definition"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-free-parameter-evaluation-coherence",
+  "date": "2026-10-23",
+  "group": "Q155"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: profinite parameter functions on the closed stratum, independently of a root tower or a normal crossings boundary; normalization, variable linear maps, whole profinite families and coefficient restriction (returned proof steps 6–8)",
+   "via": [
+    "lem-sfb-free-parameter-evaluation-coherence",
+    "lem-sfb-profinite-constant-derived-functions",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.FreeParameterMatrixCoordinates",
+  "declaration": "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.coordinate",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.finiteFreePoint",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.finiteFreeLocal",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.localMatrix",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.coordinate",
+   "AlgebraicGeometry.ProEtale.FreeParameterEvaluation.localCoefficientMap"
+  ],
+  "file": "lean/Sheaf/Paper/FreeParameterMatrixCoordinates.lean",
+  "statement": "def coordinate (V : Scheme.{u}) (r : ℕ) (e : (pointPull R V).obj (finiteFreePoint R r) ≅ finiteFreeLocal R V r) (i : Fin r) : (pointPullD R V).obj ((DerivedCategory.singleFunctor (PointModules R) 0).obj (finiteFreePoint R r)) ⟶ (DerivedCategory.singleFunctor (Modules R V) 0).obj (𝟙_ (Modules R V))",
+  "branch": "sheaf-dag",
+  "by": "Q155",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6e4ba966",
+  "group": "Q155",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6e4ba966",
+  "group": "Q155",
+  "result": "fix",
+  "note": "Re-delivery for landing return L. Maths unchanged from 07d4261482bb, which was reviewed in full: 4 of 6 modules and 4 of 5 new node files are byte-identical; the item node changes only lean and +5 new-node stmt_deps. F1 (H4/C6): the L repair made FreeParameterRelativeMaps publicly import the parent module ProfiniteConstantDerivedFunctions. The parent node lists the item in proof_deps, so the stage-3 import of the item into the parent would be a cycle and the parent could never cite the item. FIXED: dropped the parent import; FreeParameterEvaluation.familyParameterMap is now a data def (same pullback lift (q,alpha(q,p'))) whose prodComparison IsIso comes from the proved profiniteToCommRingCatOp_isRightAdjoint plus Spec as a right adjoint. No new sorry and no restated theorem (import_prune rule 5 checks theorems only). restricted_whole_family uses familyParameterMap with pullback.lift_snd _ _ _ for the over-X[Q] equation. The new node json lists familyParameterMap, adds stmt_dep lem-weil-pbc-profinite-locally-constant-right-adjoint (on base, proved) and cites it in the statement; the item lean-record note is updated. F2: the lost 07d4 universe FIX is re-applied (D : Type w, Category.{v} D; the old D : Type (u+3) excluded the Type (u+2) slice derived categories). nt_compile --json on the 4 unchanged plus 2 fixed modules: all clean (26.4/11.0/34.7/5.3/14.3/19.9 s). Maintainer note: when the parent is proved in stage 3 it should reuse FreeParameterEvaluation.familyParameterMap and add the item import, which is no longer a cycle."
+ }
+}

@@ -1,0 +1,282 @@
+{
+ "id": "lem-sf-field-cohomology-perfect-descent",
+ "kind": "statement",
+ "title": "Perfect cohomology models descend to rational and common field stages",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber], an algebraic closure $\\overline{\\mathbf Q}_\\ell$, and a separated finite-type $k$-scheme $X$ with structure map $a_X:X\\to\\operatorname{Spec}k$ [def-weil-scheme-morphism-properties]. Use the raw rationalized and common finite-stage coefficient categories [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients], and ordinary and compact-support point complexes as in [def-weil-ordinary-compact-cohomology], with their ordinary module derived duals [def-pur-derived-internal-hom]. Let $E/\\mathbf Q_\\ell$ be finite with $E\\subset\\overline{\\mathbf Q}_\\ell$ [def-weil-l-adic-coefficient-extension]. For every $K_E\\in D^b_c(X,E)$ and every integral representative $K_R\\in D^b_c(X,R)$, where $R=\\mathcal O_E$ [def-weil-derived-complete-integral-detailed], $K_R$ belongs to the uniform finite-Tor category [def-weil-finite-tor-amplitude]. There exist bounded finite projective $R$-complexes $P_*,P_!$ representing $R\\Gamma(X,K_R)$ and $R\\Gamma_c(X,K_R)$ such that the rational point complexes are represented respectively by $P_*\\otimes_RE$ and $P_!\\otimes_RE$, and their duals by the finite-dimensional signed dual complexes. Consequently all four rational point complexes have bounded finite-dimensional cohomology. For every $K\\in D^b_c(X,\\overline{\\mathbf Q}_\\ell)$, there is a finite field of definition $E'\\subset\\overline{\\mathbf Q}_\\ell$, an object $K_{E'}\\in D^b_c(X,E')$ representing $K$, and bounded complexes $C'_*,C'_!$ of finite-dimensional $E'$-vector spaces representing $R\\Gamma(X,K_{E'})$ and $R\\Gamma_c(X,K_{E'})$. In the common-stage point category [def-weil-point-fd-qlbar-category], $R\\Gamma(X,K)$, $R\\Gamma_c(X,K)$ and their duals are the objects $(E',C'_*)$, $(E',C'_!)$, $(E',C_*'^{\\vee})$ and $(E',C_!'^{\\vee})$, the duals being the signed dual complexes formed at the stage $E'$. Their cohomology spaces $\\mathrm H^i(C')\\otimes_{E'}\\overline{\\mathbf Q}_\\ell$ [def-weil-coefficient-cohomology-modules] are finite-dimensional over $\\overline{\\mathbf Q}_\\ell$ and vanish outside a finite interval. No Weil structure, properness, or smoothness is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Proof Step 3: raw rationalization of integral models and common finite coefficient field; returned Step 11"
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-coefficient-cohomology-modules",
+  "def-sc-module-total-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use integral_residue_tor to put the supplied integral representative in the uniform finite-Tor category. Obtain a finite dimension bound for X. Apply integralSections_perfect_reduction to its ordinary and compact section objects.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-kun-dimension-finite-type",
+    "lem-sf-integral-sections-perfect-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, rational field models"
+   }
+  },
+  {
+   "text": "Apply the proved small_perfect_coefficient_lift to each of the two perfect section objects. This gives small bounded finite-projective complexes P_s and P_e and their canonical coefficient/carrier-lift presentations.",
+   "uses": [
+    "lem-sf-small-perfect-coefficient-lift",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, rational field models"
+   }
+  },
+  {
+   "text": "Apply sections_rational_model_comparison to each presentation and the given representative isomorphism. Obtain the ordinary and compact rational models E tensor_R P_s and E tensor_R P_e. Scalar extension preserves strict support and finite generation, and every vector space is projective.",
+   "uses": [
+    "lem-sf-sections-rational-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, rational field models"
+   }
+  },
+  {
+   "text": "For either field model apply projective_hom_evaluation_model with target the coefficient unit complex, then transport the source through its model isomorphism and the target through the derived unit comparison. This gives the two displayed signed Hom models. The existing perfect-complex theorem makes the dual of a perfect field complex perfect; its finite homology and cohomological bounds give pointFiniteDimensional for both objects and both duals.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, rational field models"
+   }
+  },
+  {
+   "text": "Keep the actual finite stage F=K.stage and its rational object K.obj. The ordinary and compact point fibres at the small Shrink coefficient field already have bounded finite-dimensional cohomology by their full-subcategory membership. Exact extension along Shrink.algEquiv preserves that property. Apply DerivedCategory.isPerfect_iff and the bounded finite-projective definition to choose ordered bounded field models C_s and C_e. The normalized object formula of pointQbarFibre identifies the two point images with these same-stage models. This uses the existing point-fibre finiteness interface rather than constructing integral models a second time.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-finite-coefficient-point",
+    "def-weil-finite-dimensional-complex-scalar-extension",
+    "lem-pod-perfect-point-complex-field",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, finite-dimensional field complexes and scalar extension"
+   }
+  },
+  {
+   "text": "The signed Hom complex into F[0] has degree i the ordinary linear dual of C^{-i}; it has finite-dimensional terms and strict bounds [-b,-a]. Apply the beta-isomorphism clause of perfect_dual_scalar_calculus for F -> Omega, the projective Hom evaluation model over Omega, and the exact scalar-extension comparison with Q. The resulting isomorphism identifies the derived dual of each realized model with the realization of its signed dual at F. Transport along the ordinary and compact point-category presentation isomorphisms.",
+   "uses": [
+    "lem-pod-perfect-dual-scalar-calculus",
+    "lem-pod-projective-hom-evaluation-model",
+    "def-weil-point-fd-qlbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, finite-dimensional field complexes and scalar extension"
+   }
+  },
+  {
+   "text": "Every one of the four stage objects has bounded finite-dimensional cohomology. The coefficientQbarCohomology object formula is exact scalar extension of its cohomology. Its existing finite-dimensionality theorem gives finiteness; extension preserves zero objects. Induct over the finite set of the four stage objects, taking the minimum lower bound and maximum upper bound, starting with [0,0] for the empty set. This gives one ordered interval and proves all the final cohomology assertions.",
+   "uses": [
+    "def-weil-coefficient-cohomology-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+    "place": "Step 3, finite-dimensional field complexes and scalar extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-residue-tor",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-integral-sections-perfect-reduction",
+  "lem-sf-small-perfect-coefficient-lift",
+  "def-pc-perfect-ring-complex",
+  "lem-sf-sections-rational-model-comparison",
+  "lem-pod-projective-hom-evaluation-model",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-dimensional-complex-scalar-extension",
+  "lem-pod-perfect-point-complex-field",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-pod-perfect-dual-scalar-calculus",
+  "def-weil-coefficient-cohomology-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/thm-pod-point-perfectness.proof.md",
+  "place": "Step 3, finite-dimensional field complexes and scalar extension",
+  "note": "Rational proof preserved. The common-stage theorem is proved by existing field perfectness, normalized stagewise point-fibre objects, signed-dual scalar calculus and finite-family support bounds. No new theorem holes or changed statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rational and algebraically closed coefficient global cohomology and compact support cohomology admit bounded finite dimensional models descended from integral perfect complexes",
+   "results": "8 hits: continuousCohomology, Rep.FiniteCyclicGroup.moduleCatCochainComplex, ContinuousCohomology.homogeneousCochains, ContinuousCohomology.MultiInd.complex, groupCohomologyIsoExt, groupCohomology, Rep.standardResolution.extIso, groupCohomologyIso. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"rational\"",
+   "results": "0 hits: . Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(rationalization|[Rr]ational).*(cohomology|[Pp]erfect)|cohomology.*[Ff]inite[Dd]imensional",
+   "results": "0 hits: . Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rational and algebraically closed coefficient global cohomology and compact support cohomology admit bounded finite dimensional models descended from integral perfect complexes",
+   "results": "8 hits: ContinuousCohomology.MultiInd.complex, AlgebraicGeometry.finite_appTop_of_universallyClosed, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, IsAlgClosed.perfectField, algebraicClosure.isIntegralClosure, Rat.instNoncompactSpace, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, AlgebraicGeometry.instPreservesLimitSchemeOppositeCommRingCatRightOpΓOfIsAffineHomMapOfCompactSpaceOfQuasiSeparatedSpaceCarrierCarrierObj. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of constructible adic cohomology through finite coefficient field stages preserves bounded finite dimensional complexes and their duals",
+   "results": "8 hits: localCohomology.isoSelfLERadical, localCohomology.diagram, localCohomology, CochainComplex.cm5b, AdicCompletion.map_exact, Rep.standardComplex.quasiIso_forget₂_εToSingle₀, CochainComplex.cm5b.instQuasiIsoIntP, localCohomology.ofDiagram. Full returned hits retained in sandbox search-results files. No hit states the full assertion; bounded representatives, ordinary adic completion, projective-module duals and site definitions do not supply it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of integral perfect etale cohomology complexes gives bounded finite dimensional models and their signed duals over finite coefficient field stages",
+   "results": "Returned 8 hits: Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.instForallOfFinite, Algebra.formallyEtale_iff, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Etale.iff_exists_algEquiv_prod. Read returned types: ring-etaleness, cotangent-complex, perfectoid or condensed-category results do not state the adic cohomology and finite-stage assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology and compact support rationalization of integral perfect complexes at finite coefficient fields",
+   "results": "Returned 8 hits: Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.of_isLocalizationAway, Algebra.Etale.finitePresentation, RingHom.Etale, AlgebraicGeometry.Scheme.etaleTopology, RingHom.Etale.propertyIsLocal, Algebra.Etale.formallyEtale, Algebra.Etale.iff_exists_algEquiv_prod. Read returned types: ring-etaleness, cotangent-complex, perfectoid or condensed-category results do not state the adic cohomology and finite-stage assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible adic cohomology with compact supports over an algebraic closure of a finite field is a perfect complex and rational coefficient objects descend to a finite extension of the ell adic numbers",
+   "results": "Returned 8 hits: BDeRhamPlus, BDeRham, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.IsSolid, Condensed.profiniteSolid, CondensedMod.ofSheafProfinite, instCommRingBDeRhamPlus, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat. Read returned types: ring-etaleness, cotangent-complex, perfectoid or condensed-category results do not state the adic cohomology and finite-stage assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-pod-point-perfectness",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-point-perfectness",
+   "place": "Proof Step 3: raw rationalization of integral models and common finite coefficient field; returned Step 11",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-field-cohomology-perfect-descent",
+  "worker": "stage1",
+  "summary": "Reused existing integral perfectness, uniform residue Tor, projective Hom, localization and signed scalar-calculus nodes. Wrote the rational and common-stage assembly with explicit signed dual models. No new node and no change to the statement. Checked empty schemes, zero and shifted complexes, torsion integral representatives, and finite coefficient stages.",
+  "blueprint": "thm-pod-point-perfectness.proof.md Step 3, using Step 2 via lem-sf-integral-sections-perfect-reduction; no Karoubi envelope is introduced.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Supplies a finite dimension bound for the integral perfectness theorem; a generic finite-type dimension fact."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Computes ordinary module derived Hom from a bounded projective model; the unit has no competing general projective Hom construction."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Identifies E with localization of its valuation ring so the existing scalar calculus preserves the chosen projective models."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type",
+  "lem-pod-projective-hom-evaluation-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-ab3df71c4",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-ab3df71c4 (reviewer sub-agent of L); spot-checked: Q135 lem-sf-field-cohomology-perfect-descent ab3df71c: zero new nodes. The statement and stmt_deps are unchanged, live is still unsplit, the item is not on the 2026-10-19 drop list, it has no repair note, and no SGA is cited. Checked against thm-pod-point-perfectness.proof.md Step 3 (main-20261015). Step 1: def-weil-rationalization-karoubi is the raw localization with the same objects, so an integral representative exists. lem-coef-integral-residue-tor needs ell invertible on X, which holds, and gives D^b_c=D^b_ctf. lem-kun-dimension-finite-type gives the d needed by lem-sf-integral-sections-perfect-reduction: def-kun-dimension and def-kun-topological-krull-dimension are the same supremum, and the empty case takes d=0. All hypotheses of that lemma were checked, and it gives perfect C_*, C_!. Step 2: the E-stage direct image is the integral one read in the rationalized category, and compact support is defined that way explicitly. Fib_s clause 3 is Gamma(s,K) tensor E, and the localization-uniformizer node plus the localization clause of lem-pod-perfect-dual-scalar-calculus carry P over. Step 3: the beta isomorphism and lem-pod-projective-hom-evaluation-model with R=E and N=E[0]; the sign d(f)=-(-1)^j f d_P matches in both nodes. Steps 4 and 6 are genuinely elementary. Step 5: the common-stage objects are pairs, Fib_s clause 4 is stagewise, and the dual is the stagewise signed dual, consistent under change of stage by the beta tower identities. Tested: empty X, K=0, torsion K_R with zero rationalization, a shift, E'=Q_l. Batch 5: the new citation of lem-pod-projective-hom-evaluation-model is accepted. It is general projective-RHom algebra with a 27-node closure containing no trace-formula, PD-theorem or nt-assume node, and the item's delivered proof adds 0 nodes to the batch-5 closure (the node was already reached through the point-biduality nodes). Tool use for that node is accepted; the residue-tor, Kunneth-dimension and localization-uniformizer units are cited by sk-thm-sf-package. Advisory: the projective-Hom node's RHom is the right adjoint of tensor while the statement names def-pur-derived-internal-hom; the DAG identifies these routinely, so no change."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldCohomologyPerfectDescent",
+  "declaration": "WeilConjectures.field_cohomology_perfect_descent_rational",
+  "declarations": [
+   "WeilConjectures.fieldCohomologyIntegralModelLift",
+   "WeilConjectures.field_cohomology_perfect_descent_rational",
+   "WeilConjectures.field_cohomology_perfect_descent_qbar"
+  ],
+  "file": "lean/Sheaf/Paper/FieldCohomologyPerfectDescent.lean",
+  "statement": "theorem field_cohomology_perfect_descent_rational (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E : Padic.FiniteCoefficientFields l Ω) (c : Compactification (X ↘ Spec (.of D.k))) (K_E : sfRationalConstructibleCategory l E.val X) (K_R : sfIntegralConstructibleCategory l E.val X) (_hrep : Nonempty ((sfRationalConstructibleLocalization l E.val X).obj K_R ≅ K_E)) : finiteTorConstructibleIntegral l E.val X K_R.obj ∧ ∃ Pₛ Pₑ : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E.val)) ℤ, (∀ P ∈ ({Pₛ, Pₑ} : Set _), (∃ a b : ℤ, a ≤ b ∧ P.IsStrictlyGE a ∧ P.IsStrictlyLE b) ∧ ∀ i : ℤ, Module.Projective (Padic.coefficientExtensionIntegers l E.val) (P.X i) ∧ Module.Finite (Padic.coefficientExtensionIntegers l E.val) (P.X i)) ∧ Nonempty ((integralOrdinarySections D l hl E.val X K_R).obj ≅ DerivedCategory.Q.{u + 1}.obj ((fieldCohomologyIntegralModelLift (Padic.coefficientExtensionIntegers l E.val)).obj Pₛ)) ∧ Nonempty ((integralCompactSections D l hl E.val X c K_R).obj ≅ DerivedCategory.Q.{u + 1}.obj ((fieldCohomologyIntegralModelLift (Padic.coefficientExtensionIntegers l E.val)).obj Pₑ)) ∧ (∀ (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E.val)) ℤ) (C : DerivedCategory.{u} (ModuleCat.{u} E.val)), (P = Pₛ ∧ C = (rationalOrdinarySections D l hl E.val X K_E).obj) ∨ (P = Pₑ ∧ C = (rationalCompactSections D l hl E.val X c K_E).obj) → Nonempty (C ≅ DerivedCategory.Q.{u}.obj (((ModuleCat.extendScalars.{u, u, u} (algebraMap (Padic.coefficientExtensionIntegers l E.val) E.val)).mapHomologicalComplex (.up ℤ)).obj P)) ∧ Nonempty ((ihom C).obj (𝟙_ _) ≅ DerivedCategory.Q.{u}.obj (CochainComplex.moduleHomComplex (((ModuleCat.extendScalars.{u, u, u} (algebraMap (Padic.coefficientExtensionIntegers l E.val) E.val)).mapHomologicalComplex (.up ℤ)).obj P) (𝟙_ _)))) ∧ ∀ C ∈ ({(rationalOrdinarySections D l hl E.val X K_E).obj, (rationalCompactSections D l hl E.val X c K_E).obj} : Set _), DerivedCategory.pointFiniteDimensional E.val C ∧ DerivedCategory.pointFiniteDimensional E.val ((ihom C).obj (𝟙_ _))",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two theorem declarations together state the rational/integral and common finite-stage clauses. Integral model comparisons include the canonical carrier and coefficient universe lift. Signed duals use the recorded moduleHomComplex into the degree-zero coefficient unit; all comparisons are derived isomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a04de5b85",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read node, Step-3 source via node proof, module, report and all stmt_dep declarations in side-live. Rational theorem: integral representative via Nonempty(loc K_R ≅ K_E) (raw localization keeps objects), finiteTorConstructibleIntegral (pro-etale integral predicate, in the dep record's declarations), bounded finite projective P_*,P_! with isos to integral RΓ/RΓ_c through the canonical ULift lift, P⊗_R E representing rational RΓ/RΓ_c respectively, duals via ihom ≅ Q(moduleHomComplex(P_E, E[0])) (correct sign convention), pointFiniteDimensional of all four. Qbar theorem: ∃ F, K_F with K ≅ ⟨F,K_F⟩, bounded fd complexes C'_*,C'_! representing stage sections after the canonical Shrink transport, PointFdQbar isos, D(Ω) duals ≅ realizations of stagewise signed duals, one interval with finite-dimensional/zero coefficientQbarCohomology. All isos are derived (§3). Dual conventions match the landed PoincarePointFiniteness. No stronger hypotheses, universes bound, statement verbatim, stmt_deps gains only the landed def-sc-module-total-hom-complex (allowed), helper is real data, sorry-only proofs, docstrings carry source place, blueprint tag and proof steps. Edge cases empty X, K=0, torsion K_R, shifts, E=Q_l ok. No duplicate found. Advisories: local HasDerivedCategory instance priority; ihom stands for RHom (accepted at stage 1). No fix, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261025T202708-L-2742634",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

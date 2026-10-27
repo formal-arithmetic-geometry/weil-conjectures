@@ -1,0 +1,138 @@
+{
+ "id": "def-sf-projection-coefficient-direct-image",
+ "kind": "definition",
+ "title": "Completed module direct image with its finite-projection scalar action",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], schemes $X,Y$ and $f:X\\to Y$. On the small pro-etale sites use completed integral coefficient sheaves $B_X,B_Y$ and their finite projections [def-weil-completed-integral-coefficients], and the base-change direct image [def-weil-proetale-inverse-image]. Define the completed coefficient map $B_Y\\to f_*B_X$ as the unique ring-sheaf map whose composite with every $f_*\\pi_n$ is $\\pi_n$ followed by the canonical constant finite-coefficient map. Define IntegralAmbient.push on module sheaves [def-weil-sheaf-of-modules-category] as the actual continuous module direct image with scalar action restricted by this map. On an object $V\\to Y$ its underlying sections are those over $X\\times_Y V$; it acts on module maps by the same precomposition. This is an ordinary construction with no derived comparison assertion and no relation between scheme and coefficient universes.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03D7: direct image of module sheaves; the scalar ring map is characterized by every projection of the completed coefficient limit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion direct image commutes with simultaneous derived reduction of strict coefficient systems preserving quotient augmentation",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc, IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.transitionMap_comp_reduceModIdeal, AlgebraicGeometry.Scheme.Hom.liftQuotient_comp, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq', AlgebraicGeometry.Scheme.Hom.liftQuotient, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib pushforward found; reuse existing IntegralAmbient.coefficientMap and IntegralAmbient.push with their precise projection-induced scalar action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed direct image commutes with simultaneous derived reduction of strict coefficient systems with quotient augmentation",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_reduceModIdeal, CategoryTheory.ObjectProperty.isoClosure_strictMap, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact, CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib pushforward found; reuse existing IntegralAmbient.coefficientMap and IntegralAmbient.push with their precise projection-induced scalar action."
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralStrictReductionModel|coefficientOrdinaryQuotient|coefficientFiniteReductionModel|coefficientMap",
+   "results": "0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib pushforward found; reuse existing IntegralAmbient.coefficientMap and IntegralAmbient.push with their precise projection-induced scalar action."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary direct image of module sheaves along a scheme proetale map with coefficient scalar action from inverse limit projections",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pushforward, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, PresheafOfModules.pushforward_map_app_apply', DirectLimit.instSMul, PresheafOfModules.pushforward_obj_obj",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib pushforward found; reuse existing IntegralAmbient.coefficientMap and IntegralAmbient.push with their precise projection-induced scalar action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "SheafOfModules pushforward with the canonical completed coefficient map characterized by all finite projections",
+   "results": "8 hits: SheafOfModules.pushforwardSections, SheafOfModules.pushforwardSections_coe, SheafOfModules.pushforward_map_val, SheafOfModules.pushforward, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardCongr, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-24",
+   "verdict": "Generic Mathlib pushforward found; reuse existing IntegralAmbient.coefficientMap and IntegralAmbient.push with their precise projection-induced scalar action."
+  },
+  {
+   "tool": "grep",
+   "query": "Scan definition lean records for IntegralAmbient.push; rg coefficientMap|def push lean/Sheaf/Paper/IntegralAmbientOperationModels.lean; blueprint_refs.py search completed direct image",
+   "results": "IntegralAmbient.push is only owned by the ambient-operation theorem. Existing def-sf-completed-module-direct-image owns completedModuleDirectImage in CompletedTowerDirectImage for a supplied pbc adic datum, not this independent-universe IntegralAmbient interface.",
+   "date": "2026-10-24",
+   "verdict": "New existing:true ownership record for the precise existing declarations, with a distinct node id."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-closed-direct-image-strict-reduction",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Integral closed-counit simultaneous quotient comparison, retaining strict systems and their augmentation before localization.",
+   "via": [
+    "lem-sf-closed-direct-image-strict-reduction",
+    "lem-sf-finite-exceptional-site-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralAmbientOperationModels",
+  "declaration": "WeilConjectures.IntegralAmbient.push",
+  "declarations": [
+   "WeilConjectures.IntegralAmbient.coefficientMap",
+   "WeilConjectures.IntegralAmbient.push"
+  ],
+  "statement": "def push {X Y : Scheme.{t}} (f : X ⟶ Y)",
+  "branch": "sheaf-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "F2 ownership record for the exact independent-universe projection-induced completed coefficient map and ordinary module pushforward. Existing def-sf-completed-module-direct-image owns a different adic-datum interface; no existing node is rebound."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20eb13f10",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3420 (H13/H4 tower rebind + cycle; H2 theorem stmt_deps). F1 fixed: def-weil-integral-reduction-tower restored byte-identical; IntegralStrictReductionModel owned by new §1(A) def-sf-integral-strict-reduction-model whose statement lists every field; DAG walk over the item's stmt_deps reaches neither the item nor its citer (no cycle). F2 fixed: theorem stmt_deps removed; plain defs owned by new existing:true def nodes def-sf-projection-coefficient-direct-image (IntegralAmbient.push/coefficientMap), def-sf-finite-reduction-computation (coefficientOrdinaryQuotient/coefficientFiniteReductionModel; theorem cite justified by asIso), def-sf-constant-tower-square (constantSquare); remaining added deps are landed def nodes (brief l.177); previously theorem-only owners, recorded signatures match the source, H12 fields ok. Item Lean byte-identical to 3420; clause-by-clause re-read ok (IsProjectionNormalized pins r, augmentation equation in D(towers), ExactImages concluded, no extra hypotheses, edge cases and independent universes ok); statement verbatim, one sorry, docstrings with 8 steps. Advisory: no node asserts existence of a model; two redundant transitive imports; scalarReductionExtension owned only by a theorem node outside stmt_deps. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-bdbf9",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261026T130259-L-3445421",
+  "kind": "interface",
+  "note": "independent cc review: delivered NormalizedIntegralPullbackTower + item against clone (moved block byte-identical except blueprint tags; pullTowerModel statement identical); 9 direct importers compiled against the delivered modules (all OK); #print axioms clean; node stmt_deps against the owners of the Lean statement's constants",
+  "sorry_before": [
+   "WeilConjectures.IntegralAmbient.pullTowerModel"
+  ],
+  "sorry_after": []
+ }
+}

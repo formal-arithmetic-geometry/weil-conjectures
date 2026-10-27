@@ -9,8 +9,8 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.Sites.CoherentTopos
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Yoneda
-import Mathlib.CategoryTheory.Sites.LocallySurjective
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.Sites.EpimorphicFamilyCoverLifts
+import Sheaf.CategoryTheory.Sites.SheafifiedArrowsCoverRefinement
 
 /-!
 # Quasi-compactness of a site object and its sheafified representable
@@ -24,11 +24,31 @@ Source: Stacks Project, `sites.tex`, Tag 0D06 and Definition 090H
 set_option autoImplicit false
 set_option warn.sorry false
 
-universe u v
+universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+private theorem quasiCompact_iso_iff {E : Type*} [Category E]
+    [HasCoproducts.{w} E] {A B : E} (e : A ≅ B) :
+    IsQuasiCompactObject.{w} A ↔ IsQuasiCompactObject.{w} B := by
+  have transfer {A B : E} (e : A ≅ B) (h : IsQuasiCompactObject.{w} A) :
+      IsQuasiCompactObject.{w} B := by
+    intro I F p hp
+    have := hp
+    have hdesc (T : Type w) (G : T → E) (q : ∀ i, G i ⟶ B) :
+        Sigma.desc (fun i ↦ q i ≫ e.inv) = Sigma.desc q ≫ e.inv := by
+      ext i
+      simp only [Sigma.ι_desc, Sigma.ι_desc_assoc]
+    have hepi : Epi (Sigma.desc (fun i ↦ p i ≫ e.inv)) := by
+      rw [hdesc]
+      infer_instance
+    obtain ⟨s, hs⟩ := h I F (fun i ↦ p i ≫ e.inv) hepi
+    refine ⟨s, ?_⟩
+    rw [hdesc] at hs
+    exact (epi_comp_iff_of_isIso _ _).mp hs
+  exact ⟨transfer e, transfer e.symm⟩
 
 /-
 The site condition is expressed using covering presieves of arrows.  The
@@ -84,6 +104,63 @@ theorem site_quasiCompact_iff_sheafifiedYoneda_quasiCompact
       IsQuasiCompactObject.{max u v}
         ((presheafToSheaf J.toGrothendieck (Type (max u v))).obj
           (uliftYoneda.{u}.obj U)) := by
-  sorry
+  classical
+  let e : uliftYoneda.{u}.obj U ≅ uliftYoneda.{max u v}.obj U :=
+    NatIso.ofComponents (fun _ ↦ (Equiv.ulift.trans Equiv.ulift.symm).toIso)
+      (by intros; rfl)
+  rw [quasiCompact_iso_iff
+    ((presheafToSheaf J.toGrothendieck (Type (max u v))).mapIso e)]
+  constructor
+  · intro hcompact I F p hepi
+    obtain ⟨A, V, a, ι, s, ha, hs⟩ :=
+      (site_epimorphic_family_iff_cover_lifts J _hJ U F p).mp hepi
+    obtain ⟨K, W, b, α, c, hα, hc, hb⟩ := hcompact A V a ha
+    let t : Finset I := (hα.image ι).toFinset
+    have ht (k : K) : ι (α k) ∈ t := by
+      simpa only [t, Set.Finite.mem_toFinset] using
+        (Set.mem_image_of_mem ι (Set.mem_range_self k))
+    refine ⟨t, (site_epimorphic_family_iff_cover_lifts J _hJ U
+      (fun i : t ↦ F i.1) (fun i : t ↦ p i.1)).mpr ?_⟩
+    refine ⟨K, W, b, (fun k ↦ ⟨ι (α k), ht k⟩),
+      (fun k ↦ (F (ι (α k))).obj.map (c k).op (s (α k))), hb, ?_⟩
+    intro k
+    have hp := ConcreteCategory.congr_hom ((p (ι (α k))).hom.naturality (c k).op) (s (α k))
+    have hη := ConcreteCategory.congr_hom (CC := fun X ↦ X)
+      ((toSheafify J.toGrothendieck (uliftYoneda.{max u v}.obj U)).naturality
+        (c k).op) (ULift.up (a (α k)))
+    dsimp at hp hη
+    rw [hp, hs (α k)]
+    rw [← hη]
+    simp [uliftYoneda_obj_map, hc k]
+  · intro hcompact I V a ha
+    let F : I → Sheaf J.toGrothendieck (Type (max u v)) := fun i ↦
+      (presheafToSheaf J.toGrothendieck (Type (max u v))).obj
+        (uliftYoneda.{max u v}.obj (V i))
+    let p : ∀ i, F i ⟶
+        (presheafToSheaf J.toGrothendieck (Type (max u v))).obj
+          (uliftYoneda.{max u v}.obj U) := fun i ↦
+      (presheafToSheaf J.toGrothendieck (Type (max u v))).map
+        (uliftYoneda.{max u v}.map (a i))
+    have hepi : Epi (Sigma.desc p) := by
+      apply (site_epimorphic_family_iff_cover_lifts J _hJ U F p).mpr
+      refine ⟨I, V, a, id, (fun i ↦
+        (toSheafify J.toGrothendieck (uliftYoneda.{max u v}.obj (V i))).app
+          (Opposite.op (V i)) (ULift.up (𝟙 (V i)))), ha, ?_⟩
+      intro i
+      have hη := ConcreteCategory.congr_hom (CC := fun X ↦ X)
+        (NatTrans.congr_app
+          (toSheafify_naturality J.toGrothendieck (uliftYoneda.{max u v}.map (a i)))
+          (Opposite.op (V i))) (ULift.up (𝟙 (V i)))
+      dsimp at hη
+      simpa only [p, id_eq, sheafifyMap, uliftYoneda_map_app,
+        TypeCat.ofHom_apply, Category.id_comp] using hη.symm
+    obtain ⟨t, ht⟩ := hcompact I F p hepi
+    obtain ⟨K, W, b, α, c, hb, hc⟩ :=
+      sheafified_arrows_cover_refinement J _hJ U
+        (fun i : t ↦ V i.1) (fun i : t ↦ a i.1) ht
+    refine ⟨K, W, b, (fun k ↦ (α k).1), c, ?_, hc, hb⟩
+    exact t.finite_toSet.subset (by
+      rintro i ⟨k, rfl⟩
+      exact (α k).2)
 
 end CategoryTheory

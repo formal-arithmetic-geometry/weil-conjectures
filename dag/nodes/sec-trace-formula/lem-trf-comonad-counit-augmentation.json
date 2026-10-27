@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-comonad-counit-augmentation",
+ "kind": "statement",
+ "title": "Counit-word augmentation and natural evaluation of a supplied simplicial resolution",
+ "statement": "Let $\\mathcal C$ be an ordinary category and $T:\\mathcal C\\to\\mathcal C$ an endofunctor, with powers $T^0=\\mathrm{id}_{\\mathcal C}$ and $T^{n+1}=T\\circ T^n$ [def-trf-endofunctor-powers]. Write $1_a$ for the identity transformation of $T^a$, including $1_0$ on the identity functor, and $\\star$ for horizontal composition: for $\\alpha:F\\to F\\prime$ and $\\beta:G\\to G\\prime$, $(\\alpha\\star\\beta)_x=\\alpha_{G\\prime x}\\circ F(\\beta_x)$. Let $e:T\\to\\mathrm{id}_{\\mathcal C}$ and $c:T\\to T^2$ be natural transformations satisfying $(e\\star1_1)\\circ c=1_1$. Suppose $B$ is a supplied simplicial object [def-weil-pbc-simplicial-object] in $\\operatorname{Fun}(\\mathcal C,\\mathcal C)$, with $B_n=T^{n+1}$, faces $d_i^n=1_i\\star e\\star1_{n-i}$ for $n\\geq1$, $0\\leq i\\leq n$, and degeneracies $s_i^n=1_i\\star c\\star1_{n-i}$ for $n\\geq0$, $0\\leq i\\leq n$. Let $A_n:T^{n+1}\\to\\mathrm{id}_{\\mathcal C}$ be the horizontal composite of $n+1$ copies of $e$. Then $A_0=e$, $A_{n-1}\\circ d_i^n=A_n$ for every $n\\geq1$ and $0\\leq i\\leq n$, and $A_{n+1}\\circ s_i^n=A_n$ for every $n\\geq0$ and $0\\leq i\\leq n$. The family $A_n$ is the component family of an augmentation $\\alpha:B\\to\\operatorname{const}(\\mathrm{id}_{\\mathcal C})$, where the constant object has every operator the identity. Moreover there is a functor $E:\\mathcal C\\to\\operatorname{SimplicialObject}^{\\mathrm{aug}}(\\mathcal C)$, where an augmented simplicial object is a simplicial object $K$ together with an object $z$ and a morphism $K\\to\\operatorname{const}(z)$; its morphisms are compatible pairs of maps. Its value $E(x)$ has terms $B_n(x)$, augmentation target $x$, and augmentation components $(A_n)_x$, with all operators evaluated at $x$. For $f:x\\to y$, $E(f)$ has degree maps $T^{n+1}(f)$ and target map $f$.",
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, final augmentation paragraph, expanded to all degrees using Tag 016B(3), lemma-characterize-simplicial-object; functorial evaluation in example-godement-functorial following 0G5N."
+ },
+ "stmt_deps": [
+  "def-trf-endofunctor-powers",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof": [
+  {
+   "text": "Put $R_0=1_0$ and $R_{k+1}=e\\circ T(R_k):T^{k+1}\\to\\mathrm{id}$. Powers have the recursion of [def-trf-endofunctor-powers]. The defining formula for horizontal composition gives $R_{k+1}=e\\star R_k$, so $R_{n+1}=A_n$ and $A_0=e$. These are natural transformations: inductively, for $f:x\\to y$, naturality of $R_k$ and then of $e$ gives $e_yT((R_k)_y)T^{k+1}(f)=e_yT(f)T((R_k)_x)=f e_xT((R_k)_x)$. Naturality of $e$ applied to $(R_k)_x:T^k x\\to x$ also gives $(R_{k+1})_x=(R_k)_x\\circ e_{T^k x}$. This includes $k=0$, where $R_0$ is the identity.",
+   "uses": [
+    "def-trf-endofunctor-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N."
+   }
+  },
+  {
+   "text": "For all $p,q\\geq0$ and all $x$, prove by induction on $p$ that $(R_{p+q+1})_x=(R_{p+q})_x\\circ T^p(e_{T^q x})$. For $p=0$ this is the last equation of Step 1 with $k=q$. If it holds for $p$, the recursion gives $e_x\\circ T((R_{p+q+1})_x)=e_x\\circ T((R_{p+q})_x)\\circ T^{p+1}(e_{T^q x})=(R_{p+q+1})_x\\circ T^{p+1}(e_{T^q x})$, which is the assertion for $p+1$. The face formula in the hypothesis evaluates to $(d_i^n)_x=T^i(e_{T^{n-i}x})$. Set $p=i$, $q=n-i$. Since $R_n=A_{n-1}$ and $R_{n+1}=A_n$, the identity just proved is $A_{n-1}\\circ d_i^n=A_n$. Equality holds at each object, hence as natural transformations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N."
+   }
+  },
+  {
+   "text": "The degeneracy formula evaluates to $(s_i^n)_x=T^i(c_{T^{n-i}x})$. Therefore $(d_i^{n+1})_x\\circ(s_i^n)_x=T^i(e_{T^{n-i+1}x}\\circ c_{T^{n-i}x})=1$, by the given equation $(e\\star1_1)\\circ c=1_1$ evaluated at $T^{n-i}x$ and functoriality of $T^i$. Step 2 at degree $n+1$ now gives $A_{n+1}\\circ s_i^n=A_n\\circ d_i^{n+1}\\circ s_i^n=A_n$. The calculation works also for $n=i=0$; no second counit identity or coassociativity was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N."
+   }
+  },
+  {
+   "text": "The constant simplicial object at $\\mathrm{id}_{\\mathcal C}$ has identity operators. Thus the equations of Steps 2 and 3 are exactly the face and degeneracy commutation equations for the family $A_n$. Apply the morphism clause of [lem-trf-simplicial-operators-reconstruction] in the ordinary category $\\operatorname{Fun}(\\mathcal C,\\mathcal C)$ to the supplied simplicial object $B$ and that constant object. It gives a morphism $\\alpha$ with these components, which is the asserted augmentation. Both simplicial objects are already supplied, so the reconstruction clause and the comonad identities used to construct $B$ are not hypotheses needed here.",
+   "uses": [
+    "lem-trf-simplicial-operators-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N."
+   }
+  },
+  {
+   "text": "For $x\\in\\mathcal C$, define $K^x_n=B_n(x)$ and $K^x(\\theta)=(B(\\theta))_x$ for each simplex arrow $\\theta:[m]\\to[n]$. Evaluation of the functor equations for $B$ gives $K^x(1)=1$ and $K^x(\\psi\\theta)=K^x(\\theta)\\circ K^x(\\psi)$, so this is a simplicial object [def-weil-pbc-simplicial-object]. Evaluating the naturality equation of $\\alpha$ at $x$ gives $(A_m)_x\\circ K^x(\\theta)=(A_n)_x$. Thus $(K^x,x,((A_n)_x)_n)$ is an augmented simplicial object, and defines $E(x)$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N."
+   }
+  },
+  {
+   "text": "For $f:x\\to y$, use degree maps $B_n(f)=T^{n+1}(f)$ and target map $f$. Since each $B(\\theta)$ is a natural transformation, $(B(\\theta))_y\\circ B_n(f)=B_m(f)\\circ(B(\\theta))_x$. Hence the degree maps form a simplicial morphism [def-weil-pbc-simplicial-object]. Step 1 gives $(A_n)_y\\circ B_n(f)=f\\circ(A_n)_x$, precisely its augmentation compatibility. Define $E(f)$ to be this pair. Every $B_n$ preserves identities and composition, as does the target assignment $f\\mapsto f$; consequently $E(1_x)=1_{E(x)}$ and $E(g\\circ f)=E(g)\\circ E(f)$ on both components of each compatible pair. This proves all claimed functoriality and component formulas.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-endofunctor-powers",
+  "lem-trf-simplicial-operators-reconstruction",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, final augmentation paragraph; Tag 016B(3), lemma-characterize-simplicial-object; example-godement-functorial following 0G5N. Explicit componentwise expansion of the source augmentation calculation and evaluation construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The horizontal product of counits augments a simplicial endofunctor resolution and evaluation gives a functor to augmented simplicial objects",
+   "results": "{\"t\": \"2026-10-22T06:43:26Z\", \"tool\": \"leanfinder\", \"query\": \"The horizontal product of counits augments a simplicial endofunctor resolution and evaluation gives a functor to augmented simplicial objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.SimplicialObject.augment_hom_app\", \"CategoryTheory.SimplicialObject.Augmented.whiskering\", \"CategoryTheory.SimplicialObject.Augmented.whiskeringObj\", \"CategoryTheory.SimplicialObject.Augmented.whiskering_obj\", \"CategoryTheory.SimplicialObject.Augmented.const\", \"CategoryTheory.SimplicialObject.Augmented\", \"classifyingSpaceUniversalCover.compForgetAugmented\"], \"digest\": \"bbff380436fa6a72\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-counit-augmentation: SimplicialObject.augment in AlgebraicTopology/SimplicialObject/Basic.lean:504-519 requires compatibility on all simplex maps. Augmented.whiskeringObj/whiskering at lines 461-485 start with an existing augmentation. Neither proves that horizontal counit words commute with the prescribed faces and degeneracies or gives the stated components and naturality in the evaluated object. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.SimplicialObject.augment\"",
+   "results": "{\"t\": \"2026-10-22T06:43:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.SimplicialObject.augment\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.const\", \"CategoryTheory.SimplicialObject.Augmented.point\", \"CategoryTheory.SimplicialObject.Augmented.rightOp\", \"CategoryTheory.SimplicialObject.augmentOfIsTerminal\", \"CategoryTheory.SimplicialObject.Augmented.toArrow\", \"CategoryTheory.SimplicialObject.Augmented.drop\", \"CategoryTheory.SimplicialObject.Augmented.rightOpLeftOpIso\"], \"digest\": \"97072e3d899aafc9\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-counit-augmentation: SimplicialObject.augment in AlgebraicTopology/SimplicialObject/Basic.lean:504-519 requires compatibility on all simplex maps. Augmented.whiskeringObj/whiskering at lines 461-485 start with an existing augmentation. Neither proves that horizontal counit words commute with the prescribed faces and degeneracies or gives the stated components and naturality in the evaluated object. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "grep",
+   "query": "augment|flip",
+   "results": "{\"t\": \"2026-10-22T06:43:14Z\", \"tool\": \"grep\", \"query\": \"augment|flip\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/DeltaZeroIter.lean\"], \"digest\": \"4d640e91e78e560f\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-counit-augmentation: SimplicialObject.augment in AlgebraicTopology/SimplicialObject/Basic.lean:504-519 requires compatibility on all simplex maps. Augmented.whiskeringObj/whiskering at lines 461-485 start with an existing augmentation. Neither proves that horizontal counit words commute with the prescribed faces and degeneracies or gives the stated components and naturality in the evaluated object. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit words commute with face and degeneracy operators and evaluate naturally to augmented simplicial objects",
+   "results": "{\"t\": \"2026-10-22T06:43:15Z\", \"tool\": \"leansearch\", \"query\": \"Counit words commute with face and degeneracy operators and evaluate naturally to augmented simplicial objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s_comp_δ\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc\", \"CategoryTheory.Comonad.ε\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self\", \"CategoryTheory.ComonObj.counit\", \"CategoryTheory.ComonObj.termε\", \"CategoryTheory.SimplicialObject.Augmented.point\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s₀_comp_δ₁\"], \"digest\": \"df1b0dead3698fed\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-counit-augmentation: SimplicialObject.augment in AlgebraicTopology/SimplicialObject/Basic.lean:504-519 requires compatibility on all simplex maps. Augmented.whiskeringObj/whiskering at lines 461-485 start with an existing augmentation. Neither proves that horizontal counit words commute with the prescribed faces and degeneracies or gives the stated components and naturality in the evaluated object. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a simplicial object of powers of a counital endofunctor its horizontal counit products give an augmentation natural in the evaluated object",
+   "results": "{\"t\": \"2026-10-22T06:43:45Z\", \"tool\": \"leansearch\", \"query\": \"Given a simplicial object of powers of a counital endofunctor its horizontal counit products give an augmentation natural in the evaluated object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.CosimplicialObject.augment\", \"CategoryTheory.SimplicialObject.augment_hom_app\", \"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.CosimplicialObject.augment_hom_app\", \"CategoryTheory.SimplicialObject.augment_hom_zero\", \"CategoryTheory.SimplicialObject.augment_left\", \"CategoryTheory.CosimplicialObject.Augmented\"], \"digest\": \"803107074c6d96e2\"}",
+   "date": "2026-10-22",
+   "verdict": "No match for lem-trf-comonad-counit-augmentation: SimplicialObject.augment in AlgebraicTopology/SimplicialObject/Basic.lean:504-519 requires compatibility on all simplex maps. Augmented.whiskeringObj/whiskering at lines 461-485 start with an existing augmentation. Neither proves that horizontal counit words commute with the prescribed faces and degeneracies or gives the stated components and naturality in the evaluated object. Two natural-language phrasings checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.SimplicialObject.augment, CategoryTheory.NatTrans.hcomp",
+   "results": "{\"t\": \"2026-10-23T14:39:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.SimplicialObject.augment, CategoryTheory.NatTrans.hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected Basic.lean:397-400,460-486,504-522. Augmented and whiskering provide the ambient category and postcomposition; augment requires equality on all vertex maps. None proves the counit-word face/degeneracy identities under the single counit equation and a supplied simplicial object. Both natural-language phrasings read; adjunction/comonad counit declarations and extra-degeneracy identities have different hypotheses and conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "augment|whiskering|hcomp",
+   "results": "{\"t\": \"2026-10-23T14:39:31Z\", \"tool\": \"grep\", \"query\": \"augment|whiskering|hcomp\", \"sub\": \"AlgebraicTopology/SimplicialObject\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Homotopy.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplicialObject/Op.lean\"], \"digest\": \"d8494b3571f40981\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected Basic.lean:397-400,460-486,504-522. Augmented and whiskering provide the ambient category and postcomposition; augment requires equality on all vertex maps. None proves the counit-word face/degeneracy identities under the single counit equation and a supplied simplicial object. Both natural-language phrasings read; adjunction/comonad counit declarations and extra-degeneracy identities have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit words commute with faces and degeneracies of a simplicial endofunctor resolution",
+   "results": "{\"t\": \"2026-10-23T14:39:31Z\", \"tool\": \"leansearch\", \"query\": \"Counit words commute with faces and degeneracies of a simplicial endofunctor resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_succ\", \"CategoryTheory.Comonad.ε\", \"CategoryTheory.ComonObj.termε\", \"CategoryTheory.CosimplicialObject.δ_comp_σ_self_assoc\", \"CategoryTheory.Bicategory.Comonad.counit\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self'\"], \"digest\": \"efea12e590e32eaa\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected Basic.lean:397-400,460-486,504-522. Augmented and whiskering provide the ambient category and postcomposition; augment requires equality on all vertex maps. None proves the counit-word face/degeneracy identities under the single counit equation and a supplied simplicial object. Both natural-language phrasings read; adjunction/comonad counit declarations and extra-degeneracy identities have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal products of a natural counit augment a supplied simplicial object of endofunctor powers, naturally in the evaluated object",
+   "results": "{\"t\": \"2026-10-23T14:39:31Z\", \"tool\": \"leanfinder\", \"query\": \"Horizontal products of a natural counit augment a supplied simplicial object of endofunctor powers, naturally in the evaluated object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.whiskering\", \"AlgebraicTopology.DoldKan.natTransPInfty_app\", \"AlgebraicTopology.DoldKan.natTransP_app\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.map\", \"CategoryTheory.SimplicialObject.Augmented.whiskeringObj\", \"AlgebraicTopology.DoldKan.natTransPInfty_f_app\", \"CategoryTheory.SimplicialObject.augment_hom_app\", \"CategoryTheory.SimplicialObject.augment\"], \"digest\": \"79b6ac1baf306dae\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected Basic.lean:397-400,460-486,504-522. Augmented and whiskering provide the ambient category and postcomposition; augment requires equality on all vertex maps. None proves the counit-word face/degeneracy identities under the single counit equation and a supplied simplicial object. Both natural-language phrasings read; adjunction/comonad counit declarations and extra-degeneracy identities have different hypotheses and conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "def augment|augment_hom|def whiskeringObj|def whiskering|def Augmented",
+   "results": "{\"t\": \"2026-10-23T14:40:11Z\", \"tool\": \"grep\", \"query\": \"def augment|augment_hom|def whiskeringObj|def whiskering|def Augmented\", \"sub\": \"AlgebraicTopology/SimplicialObject/Basic.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"221\", \"246\", \"397\", \"460\", \"474\"], \"digest\": \"a85ee1c716061aef\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected Basic.lean:397-400,460-486,504-522. Augmented and whiskering provide the ambient category and postcomposition; augment requires equality on all vertex maps. None proves the counit-word face/degeneracy identities under the single counit equation and a supplied simplicial object. Both natural-language phrasings read; adjunction/comonad counit declarations and extra-degeneracy identities have different hypotheses and conclusions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A counital endofunctor simplicial resolution admits an augmentation to the identity functor by iterated counits",
+   "results": "{\"t\": \"2026-10-23T14:40:15Z\", \"tool\": \"leanfinder\", \"query\": \"A counital endofunctor simplicial resolution admits an augmentation to the identity functor by iterated counits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.const\", \"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.drop\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const_s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\"], \"digest\": \"c1ab6850d88246da\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: inspected Basic.lean:397-400,460-486,504-522. Augmented and whiskering provide the ambient category and postcomposition; augment requires equality on all vertex maps. None proves the counit-word face/degeneracy identities under the single counit equation and a supplied simplicial object. Both natural-language phrasings read; adjunction/comonad counit declarations and extra-degeneracy identities have different hypotheses and conclusions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-comonad-simplicial-object",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Foundational construction: powers of a counital coassociative endofunctor, used in Stacks 08NC via Godement Lemma 0G5N. Re-split of foundational comonad argument: Tag 0G5N, lemma-godement, final augmentation paragraph, expanded to all degrees using Tag 016B(3), lemma-characterize-simplicial-object; functorial evaluation in example-godement-functorial following 0G5N.",
+   "via": [
+    "lem-trf-comonad-simplicial-object",
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-comonad-counit-augmentation",
+  "worker": "stage1",
+  "summary": "Read Stacks 0G5N final paragraph and functorial example, 016B(3), and 018G. Expanded the augmentation in all degrees by a componentwise induction for deleting any counit slot; the supplied single counit identity cancels each degeneracy. Reused the existing simplicial-morphism criterion, then constructed evaluation and its maps directly from naturality. No statement correction, new nodes, Lean writing, or compilation.",
+  "blueprint": "Inherited support chain from lem-trf-local-term-locality proof (1)--(2), through cotangent-resolution coherence and the adjunction/comonad simplicial construction. Realizes precisely Stacks 0G5N final augmentation paragraph and example-godement-functorial; the existing 016B morphism criterion assembles the counit-word calculations. The latest blueprint ancestor and its unit were read; no upper-level route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-c8bd5bb7d",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-c8bd5bb7d (reviewer sub-agent of L); spot-checked: Read all six steps against Stacks simplicial.tex: 0G5N lemma-godement (final augmentation paragraph d∘(1⋆d)=d∘(d⋆1)=d⋆d), example-godement-functorial and 016B(3). The statement matches parent lem-trf-comonad-simplicial-object step 4 (operators T^i e T^{n-i}, T^i c T^{n-i}; its (e⋆1_1)c=1_1 is the parent's (eT)c=1_T). It is not weakened; the hypothesis is even redundant given that B is simplicial. Step 1: R_{k+1}=e∘T(R_k)=e⋆R_k gives A_n, and both naturality and the last-slot formula follow from naturality of e at (R_k)_x. Step 2: the induction (R_{p+q+1})_x=(R_{p+q})_x∘T^p(e_{T^q x}) is well typed, with base p=0 from Step 1; setting p=i, q=n-i gives A_{n-1}d_i=A_n. Step 3: d_i^{n+1}s_i^n=T^i(e_{Tz}c_z)=1, so only the left counit law is used. Step 4: the morphism clause of lem-trf-simplicial-operators-reconstruction (same unit, reviewed pass) applies in Fun(C,C) against const(id). Steps 5-6: evaluation and naturality per def-weil-pbc-simplicial-object. Edge cases: n=0,1, i=0 and i=n, T=id, empty C. No new nodes, no duplicate (checked def-trf-comonad-standard-resolution, counit-section-right-degeneracies, face-identities, adjunction-standard-simplicial-homotopy, free-category and Godement nodes). Mathlib SimplicialObject.augment (Basic.lean:504-519) needs w as input, so it is no match. No SGA, no tool_uses, no cycle, no repair note. Advisory only: T^a∘T^b=T^{a+b} is used as an elementary equality of functors."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CounitWordAugmentation",
+  "declaration": "CategoryTheory.NaturalTransport.counit_word_augmentation",
+  "declarations": [
+   "CategoryTheory.NaturalTransport.counitWord",
+   "CategoryTheory.NaturalTransport.counit_word_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CounitWordAugmentation.lean",
+  "statement": "theorem counit_word_augmentation {C : Type u} [Category.{v} C] (T : C ⥤ C) (e : T ⟶ 𝟭 C) (c : T ⟶ T ⋙ T) (hc : c ≫ Functor.whiskerLeft T e ≫ (Functor.rightUnitor T).hom = 𝟙 T) (B : SimplicialObject (C ⥤ C)) (hB : ∀ n : ℕ, B.obj (Opposite.op (SimplexCategory.mk n)) = power T (n + 1)) (hd : ∀ (n : ℕ) (i : Fin (n + 2)), HEq (B.δ i) (Functor.whiskerLeft (power T (n + 1 - i.val)) (Functor.whiskerRight e (power T i.val)))) (hs : ∀ (n : ℕ) (i : Fin (n + 1)), HEq (B.σ i) (Functor.whiskerLeft (power T (n - i.val)) (Functor.whiskerRight c (power T i.val)))) : HEq (counitWord T e 1) e ∧ (∀ (n : ℕ) (i : Fin (n + 2)), B.δ i ≫ eqToHom (hB n) ≫ counitWord T e (n + 1) = eqToHom (hB (n + 1)) ≫ counitWord T e (n + 2)) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), B.σ i ≫ eqToHom (hB (n + 1)) ≫ counitWord T e (n + 2) = eqToHom (hB n) ≫ counitWord T e (n + 1)) ∧ ∃ α : B ⟶ (SimplicialObject.const (C ⥤ C)).obj (𝟭 C), (∀ n : ℕ, α.app (Opposite.op (SimplexCategory.mk n)) = eqToHom (hB n) ≫ counitWord T e (n + 1)) ∧ ∃ E : C ⥤ SimplicialObject.Augmented C, E ⋙ SimplicialObject.Augmented.drop = B.flip ∧ E ⋙ SimplicialObject.Augmented.point = 𝟭 C ∧ ∀ (x : C) (n : ℕ), HEq ((E.obj x).hom.app (Opposite.op (SimplexCategory.mk n))) ((counitWord T e (n + 1)).app x)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77773e8bd",
+  "group": "N0",
+  "result": "pass",
+  "note": "Node diff vs side-live: only lean field; statement verbatim; declarations counitWord (real recursive data, = node's A_n via hcomp(R_k,e)=e⋆R_k) + counit_word_augmentation (sorry only). hc = (e⋆1_1)∘c=1_1 only; hd/hs whiskerings evaluate to T^i(e_{T^{n+1-i}x}), T^i(c_{T^{n-i}x}) with Fin ranges matching node n≥1/n≥0, identical conventions to landed parent comonad_simplicial_object. Conclusions A_0=e (HEq), all face/degeneracy identities via eqToHom(hB), ∃α to const(𝟭) with components A_n, ∃E with E⋙drop=B.flip, E⋙point=𝟭, components HEq (A_n)_x: fully pinned. stmt_deps power (def-trf-endofunctor-powers) + SimplicialObject correct; no existing counit-word decl in side-live/Mathlib. Edge cases n=0, end indices, empty C, free universes ok. Docstrings with source+blueprint, 6-step plan; report has Worker report and Second reading sections. Not recompiled (no change)."
+ }
+}

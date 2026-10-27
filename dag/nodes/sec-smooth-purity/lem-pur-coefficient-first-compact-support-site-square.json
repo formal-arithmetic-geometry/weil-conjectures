@@ -1,0 +1,111 @@
+{
+ "id": "lem-pur-coefficient-first-compact-support-site-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-pur-dualizing-object-purity",
+   "place": "Tensor and transpose clause of lem-pur-vector-integration-site-comparison",
+   "via": [
+    "lem-pur-vector-integration-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coefficient-first vector compact-support site projection square",
+ "statement": "Let A be a finite commutative ring annihilated by N, S a Noetherian scheme and F a rank d vector bundle. Use the vector coefficient W, vector compactification c and actual coefficient-first projection of [def-pur-vector-integration-adjunction-arrows] in the tensor/site coordinates of [def-pur-finite-site-tensor-projection]. Let K be any ordinary derived object. Assume W and pi^*K tensor W are bounded below. Given an ordinary projection isomorphism pe with inverse equal to the actual projection, and e the canonical compact-support comparison at W [def-sf-compact-support-site-comparison-construction], there exists a pro-etale projection isomorphism pp whose inverse is comparedModuleProjection. Tensor comparison followed by tensor(CK) of e inverse and pp inverse equals C(pe inverse) followed by the inverse compact-support comparison at pi^*K tensor W. No finite Tor, constructibility, integration or adjunction assertion is included; ordinary invertibility and boundedness are inputs.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 0944, comparison of exact pullback, proper direct-image counit mates and extension by zero; agent-written coefficient-first conjugation of the proved compact_projection_square."
+ },
+ "stmt_deps": [
+  "def-pur-finite-site-tensor-projection",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-pur-vector-integration-adjunction-arrows"
+ ],
+ "proof": [
+  {
+   "text": "write W for the vector coefficient, f for the vector projection and c for its\nfixed compactification. Boundedness in the opposite tensor order follows from hM by\nsigned symmetry. Apply compact_projection_square at W and K. Its comparison at W tensor pullback K\nis the inverse proper counit mate followed by the proper direct image of the exact\nopen-extension comparison. By compact_comparison_inv_mate this is a natural transformation\non the unbounded derived category. Apply naturality to symmetry from W tensor pullback K\nto pullback K tensor W. The derived tensor comparison commutes with symmetry on both\nsites, by comparisonTensor_braiding. Naturality of pro-etale symmetry moves the pullback\ncomparison to the first factor and moves the inverse comparison at W across symmetry.\nPasting these squares gives the coefficient-first compact-support square. The tensor/\npullback comparison is tensorComparison followed by tensor of pullback, and pullback\nequals comparisonOpenDerivedPullbackIso by supportComparison_eq.\n\nDefine pp as the compact-support comparison at pullback K tensor W, followed by C(pe),\ntensorComparison at K and ordinary compact support of W, and tensor(CK) of e inverse.\nEvery factor is a specified isomorphism. Cancelling inverse pairs gives the displayed\nprojection square. Substitute hpe in the coefficient-first square, postcompose with the\ncompact-support image of the inverse tensor/pullback comparison, and cancel the tensor\ncomparison followed by tensor(CK) of e inverse. This identifies pp inverse with the actual\ncomparedModuleProjection, not merely with an unspecified isomorphism. Boundedness of these three\nobjects places the comparison components in their domains. No integration or adjunction\nis involved. The geometry is the fixed vector compactification. Zero objects and\nthe empty scheme obey exactly the same cancellation equations.",
+   "uses": [
+    "lem-pur-projection-comparison-etale-origin",
+    "lem-weil-boundary-q-defining-composite-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099R and 0944, comparison of exact pullback, proper direct-image counit mates and extension by zero; agent-written coefficient-first conjugation of the proved compact_projection_square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-projection-comparison-etale-origin",
+  "lem-weil-boundary-q-defining-composite-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099R and 0944, comparison of exact pullback, proper direct-image counit mates and extension by zero; agent-written coefficient-first conjugation of the proved compact_projection_square. The existing proper/open compact projection square, conjugated by the canonical signed symmetry and pasted with naturality of the compact-support comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The compact support etale proetale site comparison commutes with the coefficient first projection formula conjugated by signed symmetry",
+   "results": "Eight hits concerning condensed-module tensor-Hom and sheaf presentation comparisons; none states a compact-support site projection square.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.ProEtale.projectionMapOfCompactification",
+   "results": "No Mathlib hits; identifier belongs to the project source library.",
+   "date": "2026-10-27",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficientFirst.*[Ss]ite|compact.*projection.*square",
+   "results": "No Mathlib hits. Repository compact_projection_square supplies the right-coefficient square, requiring the separate symmetry conjugation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.VectorIntegrationSiteComparison",
+  "date": "2026-10-27",
+  "group": "Q4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientFirstCompactSupportSiteSquare",
+  "file": "lean/Sheaf/Paper/CoefficientFirstCompactSupportSiteSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.coefficientFirstCompactSupportSiteSquare",
+  "statement": "theorem coefficientFirstCompactSupportSiteSquare\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : ℕ) (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S]\n    (d : ℕ) (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]\n    (K : Etale.DerivedCategoryModule A S)\n    (hW : DerivedCategory.TStructure.t.plus\n      (Etale.vectorIntegrationCoefficient A N hA S d F))\n    (hM : DerivedCategory.TStructure.t.plus\n      (Etale.vectorBundlePurityTwistedPullback A N hA S d F K))\n    (pe : (Etale.vectorBundlePurityLower A S d F).obj\n        (Etale.vectorBundlePurityTwistedPullback A N hA S d F K) ≅\n      ((Etale.derivedTensor (ModuleCat.{u + 1} A) S).obj K).obj\n        (Etale.vectorIntegrationSource A N hA S d F))\n    (hpe : pe.inv = Etale.vectorBundlePurityProjectionMap A N hA S d F K)\n    (e : genericVectorSource A N hA S d F ≅\n      (comparison A S).obj (Etale.vectorIntegrationSource A N hA S d F))\n    (he : e = (compactSupportSiteComparison A\n      (Etale.vectorBundlePurityCompactification S d F)).app ⟨_, hW⟩) :\n    ∃ pp : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)\n        (Etale.vectorBundlePurityCompactification S d F)).obj\n          ((comparison A _).obj\n            (Etale.vectorBundlePurityTwistedPullback A N hA S d F K)) ≅\n      ((derivedTensor (ModuleCat.{u + 1} A) S).obj ((comparison A S).obj K)).obj\n        (genericVectorSource A N hA S d F),\n      HEq pp.inv (comparedModuleProjection A\n        (Etale.vectorBundlePurityCompactification S d F)\n        (Etale.vectorIntegrationCoefficient A N hA S d F) K) ∧\n      (tensorComparison A S K (Etale.vectorIntegrationSource A N hA S d F)).hom ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) S).obj ((comparison A S).obj K)).map\n          e.inv ≫ pp.inv =\n        (comparison A S).map pe.inv ≫\n          (compactSupportSiteComparison A\n            (Etale.vectorBundlePurityCompactification S d F)).inv.app ⟨_, hM⟩",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T222749-L-692883",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,158 @@
+{
+ "id": "lem-sfb-cartier-normalized-scalar-units",
+ "kind": "statement",
+ "title": "Normalized derived coefficient units for Cartier objects",
+ "statement": "Let $N>0$, let $R,S$ be finite commutative rings killed by $N$, let $\\varphi:R\\to S$, and let $i:D\\hookrightarrow Z$ be any closed immersion with $N$ invertible on $Z$. Using the constants, comparison Tate lines and derived scalar-unit predicate of [def-sfb-geo-cartier-interface], there exist maps $\\eta:R_D\\to\\operatorname{Res}_\\varphi S_D$ and $\\theta:R_Z(1)\\to\\operatorname{Res}_\\varphi S_Z(1)$. The first sends every constant-presheaf generator $r$ to $\\varphi(r)$; the second sends each comparison-adjunction image of a pure root tensor $r\\otimes z$ to that of $\\varphi(r)\\otimes z$. The maps $i_*\\eta$ and $\\theta$ have the unbounded derived scalar-unit universal property. No Cartier ideal or Ext class is part of this assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Finite coefficient extension paragraph and opening comparison paragraph"
+ },
+ "stmt_deps": [
+  "def-sfb-geo-cartier-interface"
+ ],
+ "proof": [
+  {
+   "text": "Construct the pro-etale constant coefficient map by the constant-sheaf/terminal-sections adjunction. Naturality of the sheafification unit gives its formula at every object. For the Tate line, compose the comparison Hom adjunction with the sheafification and roots tensor Hom equivalences. These identify maps out of the R and S lines with the same abelian roots-sheaf maps. Apply the R equivalence backwards to the S identity. The unit formula on roots with coefficient 1 and module linearity give the required formula for every coefficient. The same Hom equivalences show that this line map is an ordinary scalar-extension unit.",
+   "uses": [
+    "lem-asd-supported-kummer-scalar-maps",
+    "lem-asd-finite-etale-tate-line-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph and opening comparison paragraph"
+   }
+  },
+  {
+   "text": "The ordinary supported constant is flat by the finite geometric-stalk formula. Its ordinary scalar unit is supplied by the constant universal property and finite direct-image scalar comparison. Precompose maps with the invertible specified source comparison and apply the comparison adjunction. The mate unit equation identifies this Hom transport with the direct image of the constant coefficient map. Compatibility of constant comparison with coefficient maps follows at terminal generators from the constant comparison generator equation, and at all supported sections from the mate unit equation. Thus direct image of the constructed pro-etale constant map has the ordinary scalar-unit universal property. The mate unit equation is proved locally by the elementary Mathlib unit_mateEquiv_symm identity, without using the Cartier cycle-class theorem.",
+   "uses": [
+    "lem-asd-supported-kummer-scalar-derived-units",
+    "lem-asd-finite-ordinary-scalar-unit",
+    "lem-sfb-geo-cartier-source-comparison",
+    "lem-sp-comparison-constant-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph and opening comparison paragraph"
+   }
+  },
+  {
+   "text": "Comparison inverse image preserves flat sheaves over finite rings, so the supported pro-etale constant is flat via its source comparison. The etale Tate line has a tensor inverse; hence it is flat, as is its comparison pullback. Apply scalarUniversal_of_flat to the two constructed ordinary units. The exact-degree-zero universal-property equivalence identifies the resulting unbounded derived units with precisely GeoCartierScalarUnit. Assemble the maps, their normalization formulas and their derived universal properties. All constructions include empty schemes and zero coefficient rings.",
+   "uses": [
+    "lem-exc-constant-inverse-image-flat",
+    "lem-asd-finite-etale-tate-tensor-family",
+    "lem-asd-flat-ordinary-scalar-unit-derived",
+    "lem-sfb-geo-cartier-scalar-unit-of-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Finite coefficient extension paragraph and opening comparison paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-supported-kummer-scalar-maps",
+  "lem-asd-finite-etale-tate-line-comparison",
+  "lem-asd-supported-kummer-scalar-derived-units",
+  "lem-asd-finite-ordinary-scalar-unit",
+  "lem-sfb-geo-cartier-source-comparison",
+  "lem-sp-comparison-constant-generator",
+  "lem-exc-constant-inverse-image-flat",
+  "lem-asd-finite-etale-tate-tensor-family",
+  "lem-asd-flat-ordinary-scalar-unit-derived",
+  "lem-sfb-geo-cartier-scalar-unit-of-universal"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Finite coefficient extension paragraph and opening comparison paragraph; direct Hom-adjunction proof using existing library lemmas",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Supported constant sheaves and locally free Tate lines give derived scalar extension units for arbitrary coefficient homomorphisms",
+   "results": "Eight hits about constant sheaves and discrete condensed sheaves; no derived supported Cartier coefficient unit or boundary square.",
+   "date": "2026-10-27",
+   "verdict": "No exact result. The project has ordinary supported scalar-unit lemmas, but their comparison transport and the arbitrary-map boundary square are not stated."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of supported Cartier Kummer boundary under finite coefficient ring homomorphism",
+   "results": "Eight unrelated ring-map, perfection and cotangent-complex hits. Loogle query for Ext and mapExactFunctor found the generic Ext functoriality API.",
+   "date": "2026-10-27",
+   "verdict": "Use the Ext composition API for final cancellation; it does not construct coefficient units or prove geometric boundary naturality."
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedKummerScalar|GeoCartierScalarCompatibility|IsDerivedBaseChange|scalarUniversal_of_flat",
+   "results": "Mathlib and project source searched. SupportedKummerBoundaryScalar is only residue-to-A; SupportedKummerScalarDerived gives ordinary supported constant units, FiniteEtaleTwistLine flatness, and ScalarUnitExtComparison generic Ext transport. No exact new statement found. Blueprint searches for scalar unit and Cartier coefficient also checked.",
+   "date": "2026-10-27",
+   "verdict": "The two missing interfaces are strictly separate parts of the assigned argument; retain the existing generic dependencies for their proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierReductionScalar",
+  "date": "2026-10-27",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-cartier",
+   "place": "Finite coefficient extension paragraph and opening comparison paragraph",
+   "via": [
+    "lem-sfb-cartier-reduction-scalar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CartierNormalizedScalarUnits",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierNormalizedScalarUnits.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.geoCartier_normalized_scalar_units",
+  "statement": "theorem geoCartier_normalized_scalar_units\n    (R S : Type (u + 1)) [CommRing R] [CommRing S] [Finite R] [Finite S]\n    (N : ℕ) (hN : 0 < N) (hR : (N : R) = 0) (hS : (N : S) = 0)\n    (φ : R →+* S) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i]\n    (hZ : IsUnit (N : Γ(Z, ⊤))) :\n  ∃ (η : geoCartierConstant R D ⟶\n        (Sheaf.restrictScalars (Scheme.ProEt.topology D) φ).obj (geoCartierConstant S D))\n    (θ : geoCartierLine R N hR Z ⟶\n        (Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ).obj (geoCartierLine S N hS Z)),\n    (∀ (W : D.ProEtᵒᵖ) (a : R),\n      η.hom.app W ((toSheafify (Scheme.ProEt.topology D)\n        ((Functor.const D.ProEtᵒᵖ).obj (ModuleCat.of R R))).app W a) =\n      (toSheafify (Scheme.ProEt.topology D)\n        ((Functor.const D.ProEtᵒᵖ).obj (ModuleCat.of S S))).app W (φ a)) ∧\n    (∀ (W : Z.Etaleᵒᵖ) (a : R) (z : (Z.rootsOfUnitySheaf N).obj.obj W),\n      θ.hom.app ((Scheme.toProEt Z).op.obj W)\n        (((comparisonAdjunction (ModuleCat.{u + 1} R) Z).unit.app\n          (Scheme.finiteEtaleTateLine Z N R hR)).hom.app W\n            (Scheme.finiteEtaleTateOneGenerator R N Z hR W a z)) =\n      ((comparisonAdjunction (ModuleCat.{u + 1} S) Z).unit.app\n        (Scheme.finiteEtaleTateLine Z N S hS)).hom.app W\n          (Scheme.finiteEtaleTateOneGenerator S N Z hS W (φ a) z)) ∧\n    GeoCartierScalarUnit φ Z\n      ((lowerStar (ModuleCat.{u + 1} R) i).obj (geoCartierConstant R D))\n      ((lowerStar (ModuleCat.{u + 1} S) i).obj (geoCartierConstant S D))\n      ((lowerStar (ModuleCat.{u + 1} R) i).map η) ∧\n    GeoCartierScalarUnit φ Z (geoCartierLine R N hR Z) (geoCartierLine S N hS Z) θ",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261027T064508-L-2190268",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261027T084438-L-3681097",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

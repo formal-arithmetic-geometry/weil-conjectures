@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-torus-simple-root-isomorphism-criterion",
+ "kind": "statement",
+ "title": "Isomorphism criterion from a maximal torus and lifted simple root groups",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups are affine $F$-group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness mean [def-sbc-smooth-morphisms, def-weil-connected-scheme]. Reductive means smooth and connected with no nontrivial smooth connected normal unipotent subgroup; unipotent means that geometric points are unipotent matrices in a faithful representation. Split maximal tori, character lattices, roots, coroots, positive systems and simple-root bases are as in [lem-sfb-reductive-borel-pair-structure]. Let $H,G$ be reductive, let $S\\subseteq H$ and $T\\subseteq G$ be split maximal tori, and let $f:H\\to G$ be a surjective homomorphism on underlying spaces such that $a=f|_S:S\\xrightarrow{\\sim}T$ is an isomorphism. Fix a simple-root base $\\Delta$ for $(G,T)$ and root subgroups $U_\\gamma$ as in [lem-sfb-reductive-root-subgroup-parametrizations]. For every $\\alpha\\in\\Delta$ and $\\varepsilon\\in\\{1,-1\\}$ assume there is a smooth connected closed subgroup $V_{\\varepsilon\\alpha}\\subseteq H$, isomorphic to the additive group scheme $\\mathbf G_a$ [def-sc-gm-ga], normalized by $S$, on which $S$ acts through $a^*(\\varepsilon\\alpha)$. Explicitly, for an isomorphism $v:\\mathbf G_a\\xrightarrow{\\sim}V_{\\varepsilon\\alpha}$ one has $s v(x)s^{-1}=v((\\varepsilon\\alpha)(a(s))x)$ after every commutative $F$-algebra extension. Suppose that $f|_{V_{\\varepsilon\\alpha}}:V_{\\varepsilon\\alpha}\\xrightarrow{\\sim}U_{\\varepsilon\\alpha}$ is an isomorphism. Then $f$ is an isomorphism of group schemes. The case $\\Delta=\\varnothing$ is included. No reducedness or separability of the scheme-theoretic kernel is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Argument of 23.24 and the final paragraph completing 23.18, printed p.492, in the general form of a surjective reductive homomorphism with an isomorphism on maximal tori and lifted simple root groups; rank comparison and Weyl conjugation use 21.51 and 21.39, and the big cells use 21.84. This is a supporting criterion, not the isogeny existence theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-sfb-reductive-borel-pair-structure",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-affine-homomorphism-flat-image] to write $f=j q$ with $q:H\\to I$ faithfully flat on coordinate algebras and $j:I\\hookrightarrow G$ closed. Since $f$ is surjective on underlying spaces, so is $j$. The structural morphism of $G$ is smooth; [sbc-lem-smooth-geometrically-reduced] makes $G$ reduced. By [def-weil-closed-immersion], write $I=\\operatorname{Spec}(F[G]/J)$. Every prime of $F[G]$ contains $J$, since $j$ is surjective. Thus $J$ lies in the nilradical, which is zero by [def-pc-reduced-scheme]. Hence $j$ is an isomorphism and $f$ is faithfully flat on coordinate algebras.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.24 and Theorem 5.39: scheme-theoretic image; smoothness supplies reducedness. The affine ideal argument is written out."
+   }
+  },
+  {
+   "text": "Let $K=\\ker f$, the closed subgroup defined by the fibre over the identity. For every $F$-algebra, $f(hkh^{-1})=f(h)1f(h)^{-1}=1$, so $K$ is normal. Its scheme-theoretic intersection with $S$ is $\\ker a=1$, because $a:S\\simeq T$. This is the identity scheme, not merely a statement about geometric points. Apply [lem-sfb-reductive-normal-subgroup-torus-finiteness] to $H,S,K$. All its hypotheses hold and the intersection has coordinate algebra $F$, so $K$ has finite-dimensional coordinate algebra.",
+   "uses": [
+    "lem-sfb-reductive-normal-subgroup-torus-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "23.24, p.492: reduce the kernel and use normal-subgroup rank comparison; supporting general criterion retains nonreduced kernels."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-isogeny-root-power-laws] to $f:H\\to G$: step 1 gives faithful flatness, step 2 gives a finite scheme-theoretic kernel, and $f(S)=T$. Write $u=a^*:X^*(T)\\xrightarrow{\\sim}X^*(S)$. Obtain a bijection $b:\\Phi_H\\xrightarrow{\\sim}\\Phi_G$ and positive characteristic-exponent powers $e_\\delta$ with $u(b\\delta)=e_\\delta\\delta$ and $a_*(\\delta^\\vee)=e_\\delta(b\\delta)^\\vee$. The same node says that $K$ is central exactly when all $e_\\delta=1$. We will verify this condition without assuming separability.",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5(a),(b), pp.485--486; these results precede and do not use the isogeny existence theorem."
+   }
+  },
+  {
+   "text": "For $\\alpha\\in\\Delta$ and $\\varepsilon=\\pm1$, put $\\lambda=u(\\varepsilon\\alpha)\\ne0$. The closed immersion $V_{\\varepsilon\\alpha}\\hookrightarrow H$ injects tangent spaces: on dual-number points this follows directly from injectivity of a closed immersion. Its one-dimensional tangent space has $S$-weight $\\lambda$ by the assumed conjugation formula. Therefore $\\lambda\\in\\Phi_H$; [lem-sfb-reductive-rank-one-reflections] says that this weight space has dimension one. The uniqueness clause of [lem-sfb-reductive-root-subgroup-parametrizations] identifies $V_{\\varepsilon\\alpha}=U_\\lambda$. The equation from step 3 gives $b\\lambda=e_\\lambda\\varepsilon\\alpha$, because $u$ is injective. Reducedness of $\\Phi_G$ ([lem-sfb-reductive-rank-one-reflections]) forces $e_\\lambda=1$ and $b\\lambda=\\varepsilon\\alpha$. In particular $u\\alpha\\in\\Phi_H$ and $a_*((u\\alpha)^\\vee)=\\alpha^\\vee$ for each simple $\\alpha$.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-reductive-root-subgroup-parametrizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Final paragraph completing 23.18, p.492: identify the lifted simple root groups; Proposition 23.5 supplies the root and coroot relations."
+   }
+  },
+  {
+   "text": "To apply root induction, use the rational root system of the target root datum. Its finite Weyl group and reflections are given by [lem-sfb-reductive-rank-one-reflections]. Apply [lem-sfb-root-datum-lattice-embedding] with $M=X^*(T)$ and the coroot functionals: all its reflection, finiteness and reducedness hypotheses hold. It supplies $E=\\operatorname{span}_{\\mathbf Q}\\Phi_G$ and its restricted coroots spanning $E^\\vee$. These spaces have the perfect evaluation pairing. The root datum gives simultaneous root/coroot reflection permutations and integer pairings. The simple-root base $\\Delta$ is linearly independent, and each root or its negative is an integral nonnegative sum from it. Thus [lem-sfb-root-base-rational-integral-spans], applied to $E,E^\\vee$, supplies the corresponding coroot independence and nonnegative expansion. This makes $\\Delta$ a base of the rational root pairing in the precise sense required for reflection induction. Central torus directions have been removed, so no spanning hypothesis on $X^*(T)$ has been introduced.",
+   "uses": [
+    "lem-sfb-reductive-rank-one-reflections",
+    "lem-sfb-root-datum-lattice-embedding",
+    "lem-sfb-root-base-rational-integral-spans"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C, root-system realization and bases, pp.612--615; supports Weyl propagation in the last paragraph of 23.18, p.492."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-root-base-reflection-induction] to the target rational root pairing of step 5 and the predicate $Q(\\beta):\\ u\\beta\\in\\Phi_H$. Negation preserves $Q$ because the source root system is closed under negation. The simple roots satisfy $Q$ by step 4. If $Q(\\beta)$ and $\\alpha\\in\\Delta$, the source root reflection in $u\\alpha$ sends $u\\beta$ to $u\\beta-\\langle u\\beta,(u\\alpha)^\\vee\\rangle u\\alpha$. The character/cocharacter pairing is natural under $a$, by composition of characters and cocharacters; using step 4 this expression equals $u(\\beta-\\langle\\beta,\\alpha^\\vee\\rangle\\alpha)=u(s_\\alpha\\beta)$. Source reflections preserve roots by [lem-sfb-reductive-rank-one-reflections]. These are exactly the three hypotheses of the cited induction node. Hence $u\\beta\\in\\Phi_H$ for every $\\beta\\in\\Phi_G$. For any $\\delta\\in\\Phi_H$, step 3 now says that both $\\delta$ and $u(b\\delta)=e_\\delta\\delta$ are source roots. Source reducedness forces $e_\\delta=1$.",
+   "uses": [
+    "lem-sfb-root-base-reflection-induction",
+    "lem-sfb-reductive-rank-one-reflections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Final paragraph completing 23.18, p.492: propagation from simple roots by Weyl reflections; Appendix C.22."
+   }
+  },
+  {
+   "text": "By the centrality clause of [lem-sfb-isogeny-root-power-laws], step 6 implies that $K$ is central as a group scheme. Every element of $K(A)$ therefore commutes with all elements of $S(A\\prime)$ after every $A$-algebra extension. Apply [lem-sfb-reductive-torus-self-centralizer] to $H,S$: the field is algebraically closed, $H$ is reductive and $S$ is maximal. Its scheme-theoretic equality $C_H(S)=S$ puts $K$ inside $S$ on every test algebra. Consequently $K=K\\cap S=1$ by step 2. This rules out infinitesimal kernel factors as well as reduced ones.",
+   "uses": [
+    "lem-sfb-isogeny-root-power-laws",
+    "lem-sfb-reductive-torus-self-centralizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 23.5(b), pp.485--486; Corollary 17.84, p.379; scheme-theoretic version of the conclusion after 23.24."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-faithfully-flat-group-quotient-universal] to $q=f$ and the identity homomorphism of $H$. It kills the trivial scheme-theoretic kernel, so there is $j:G\\to H$ with $jf=\\operatorname{id}_H$. Apply the uniqueness clause of that same node with $u=f:H\\to G$: both $\\operatorname{id}_G$ and $fj$ factor $f$ through itself, hence $fj=\\operatorname{id}_G$. Therefore $f$ is an isomorphism. If $\\Delta$ is empty, root induction in step 6 still applies (the induction node explicitly allows an empty base); all exponent assertions are vacuous when the root index set is empty, and the centrality, self-centralizer and quotient arguments are unchanged. In particular the torus-only and trivial-group cases are covered.",
+   "uses": [
+    "lem-sfb-faithfully-flat-group-quotient-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Conclusion of 23.18, p.492; faithfully flat quotient universal property (Theorem 5.21/5.28) gives the global inverse."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-affine-homomorphism-flat-image",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "lem-sfb-reductive-normal-subgroup-torus-finiteness",
+  "lem-sfb-isogeny-root-power-laws",
+  "lem-sfb-reductive-rank-one-reflections",
+  "lem-sfb-reductive-root-subgroup-parametrizations",
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-root-base-rational-integral-spans",
+  "lem-sfb-root-base-reflection-induction",
+  "lem-sfb-reductive-torus-self-centralizer",
+  "lem-sfb-faithfully-flat-group-quotient-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Argument of 23.24 and completion of 23.18, p.492, reorganized using the already existing Proposition 23.5 root-power/centrality node and reflection induction; no isogeny existence theorem is used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of reductive algebraic groups that is an isomorphism on maximal tori and has isomorphic lifts of each simple root subgroup is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:33:32Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of reductive algebraic groups that is an isomorphism on maximal tori and has isomorphic lifts of each simple root subgroup is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instRespectsIsoSchemeSurjective\", \"MonoidHom.bijective_of_surjective_of_bijective_of_bijective_of_injective\", \"GrpCat.SurjectiveOfEpiAuxs.XWithInfinity\", \"MonoidHom.surjective_of_surjective_of_surjective_of_injective\", \"RootPairing.Equiv.bijective_coweightMap\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive\", \"CategoryTheory.PreGaloisCategory.autMap_surjective_of_isGalois\"], \"digest\": \"47ba0999f63d35c1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootPairing.Equiv is an equivalence of abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean); the TODO at lines 45-47 explicitly leaves isogenies undeveloped. GrpCat.forget_reflects_isos and quotientKerEquivOfSurjective concern abstract groups or rings, not inseparable scheme-theoretic kernels."
+  },
+  {
+   "tool": "grep",
+   "query": "isogeny|simple.*root.*isomorph",
+   "results": "{\"t\": \"2026-10-23T21:35:09Z\", \"tool\": \"grep\", \"query\": \"isogeny|simple.*root.*isomorph\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootPairing.Equiv is an equivalence of abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean); the TODO at lines 45-47 explicitly leaves isogenies undeveloped. GrpCat.forget_reflects_isos and quotientKerEquivOfSurjective concern abstract groups or rings, not inseparable scheme-theoretic kernels."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Surjective homomorphism of reductive algebraic groups is an isomorphism if maximal tori and simple root groups map isomorphically",
+   "results": "{\"t\": \"2026-10-23T21:35:10Z\", \"tool\": \"leansearch\", \"query\": \"Surjective homomorphism of reductive algebraic groups is an isomorphism if maximal tori and simple root groups map isomorphically\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.quotientKerAlgEquivOfSurjective.congr_simp\", \"RingHom.quotientKerEquivOfSurjective\", \"QuotientGroup.quotientKerEquivOfSurjective\", \"MonoidHom.ofInjective\", \"Con.quotientKerEquivOfSurjective\", \"IsSimpleGroup.isSimpleGroup_of_surjective\", \"MonoidHom.commGroupOfSurjective\", \"map_derivedSeries_eq\"], \"digest\": \"ed33909dfffe8684\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootPairing.Equiv is an equivalence of abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean); the TODO at lines 45-47 explicitly leaves isogenies undeveloped. GrpCat.forget_reflects_isos and quotientKerEquivOfSurjective concern abstract groups or rings, not inseparable scheme-theoretic kernels."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Equiv",
+   "results": "{\"t\": \"2026-10-23T21:35:10Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.Equiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RootPairing.Equiv.id\", \"RootPairing.Equiv.instGroup\", \"RootPairing.Equiv.instMonoid\", \"RootPairing.Equiv\", \"RootPairing.Equiv.symm\", \"RootPairing.Equiv.toHom\", \"RootPairing.Equiv.coweightEquiv\", \"RootPairing.Equiv.weightEquiv\"], \"digest\": \"05002363938506eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootPairing.Equiv is an equivalence of abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean); the TODO at lines 45-47 explicitly leaves isogenies undeveloped. GrpCat.forget_reflects_isos and quotientKerEquivOfSurjective concern abstract groups or rings, not inseparable scheme-theoretic kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isogeny of reductive groups with an isomorphism on the maximal torus and separable isomorphisms on all simple root groups is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T21:35:13Z\", \"tool\": \"leanfinder\", \"query\": \"An isogeny of reductive groups with an isomorphism on the maximal torus and separable isomorphisms on all simple root groups is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GrpCat.forget_reflects_isos\", \"RootPairing.Equiv.comp\", \"RootPairing.Equiv.mk.inj\", \"RootPairing.Equiv.bijective_coweightMap\", \"RootPairing.Equiv.bijective_weightMap\", \"mulEquivIsoGroupIso\", \"MulEquiv.toGrpIso\", \"CategoryTheory.Grp.mkIso_hom_hom\"], \"digest\": \"528f444c54d15dbc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: RootPairing.Equiv is an equivalence of abstract root pairings (Mathlib/LinearAlgebra/RootSystem/Hom.lean); the TODO at lines 45-47 explicitly leaves isogenies undeveloped. GrpCat.forget_reflects_isos and quotientKerEquivOfSurjective concern abstract groups or rings, not inseparable scheme-theoretic kernels."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of reductive algebraic group schemes that is an isomorphism on maximal tori is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T22:56:36Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective homomorphism of reductive algebraic group schemes that is an isomorphism on maximal tori is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instRespectsIsoSchemeSurjective\", \"AlgebraicGeometry.instSurjectiveOfIsIsoScheme\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.Flat.isIso_of_surjective_of_mono\", \"AlgebraicGeometry.isIso_iff_isOpenImmersion_and_surjective\", \"AlgebraicGeometry.Scheme.Hom.surjective\", \"AlgebraicGeometry.surjective_iff\"], \"digest\": \"d315e4d6191c275d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme-surjectivity, abstract-group and abstract-root-pairing declarations do not supply this reductive group-scheme criterion; scheme-theoretic infinitesimal kernels are essential. Mathlib/LinearAlgebra/RootSystem/Hom.lean:45--47 lists isogenies as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootPairing.Equiv, GroupScheme, IsIso",
+   "results": "{\"t\": \"2026-10-23T22:56:36Z\", \"tool\": \"loogle\", \"query\": \"RootPairing.Equiv, GroupScheme, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'GroupScheme'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme-surjectivity, abstract-group and abstract-root-pairing declarations do not supply this reductive group-scheme criterion; scheme-theoretic infinitesimal kernels are essential. Mathlib/LinearAlgebra/RootSystem/Hom.lean:45--47 lists isogenies as TODO. Search note: loogle: unknown identifier 'GroupScheme'"
+  },
+  {
+   "tool": "grep",
+   "query": "reductive|root subgroup|isogeny",
+   "results": "{\"t\": \"2026-10-23T22:56:36Z\", \"tool\": \"grep\", \"query\": \"reductive|root subgroup|isogeny\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme-surjectivity, abstract-group and abstract-root-pairing declarations do not supply this reductive group-scheme criterion; scheme-theoretic infinitesimal kernels are essential. Mathlib/LinearAlgebra/RootSystem/Hom.lean:45--47 lists isogenies as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A surjective reductive group homomorphism with an isomorphism on a maximal torus and simple root subgroup lifts is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T22:56:37Z\", \"tool\": \"leansearch\", \"query\": \"A surjective reductive group homomorphism with an isomorphism on a maximal torus and simple root subgroup lifts is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.liftOfSurjective_comp\", \"AlgHom.liftOfSurjective.congr_simp\", \"RingCon.lift_surjective_iff\", \"RingHom.liftOfSurjective_comp\", \"Subfield.lift_relrank_comap_comap_eq_lift_relrank_of_surjective\", \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"IsSimpleGroup.isSimpleGroup_of_surjective\", \"AlgHom.liftOfSurjective\"], \"digest\": \"5be8d0f5a3dd97b8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme-surjectivity, abstract-group and abstract-root-pairing declarations do not supply this reductive group-scheme criterion; scheme-theoretic infinitesimal kernels are essential. Mathlib/LinearAlgebra/RootSystem/Hom.lean:45--47 lists isogenies as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reductive algebraic group homomorphism that is an isomorphism on maximal tori and all root groups is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T23:03:57Z\", \"tool\": \"leansearch\", \"query\": \"A reductive algebraic group homomorphism that is an isomorphism on maximal tori and all root groups is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgEquiv.autCongr_refl\", \"RootPairing.Equiv.toEndUnit_val\", \"Algebra.IsAlgebraic.algEquivEquivAlgHom_symm_apply\", \"MulSemiringAction.toAlgAut.congr_simp\", \"Algebra.IsAlgebraic.algEquivEquivAlgHom_apply\", \"AlgebraicGeometry.instIsAffineHomOfIsIsoScheme\", \"RootPairing.Equiv.toEndUnit\", \"LinearMap.GeneralLinearGroup.generalLinearEquiv\"], \"digest\": \"ad55dd0c609c41ce\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned scheme-surjectivity, abstract-group and abstract-root-pairing declarations do not supply this reductive group-scheme criterion; scheme-theoretic infinitesimal kernels are essential. Mathlib/LinearAlgebra/RootSystem/Hom.lean:45--47 lists isogenies as TODO."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-compatible-rank-one-graph-geometry",
+  "date": "2026-10-24",
+  "group": "Q24"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.9 and Proposition 23.5: realize the explicitly verified root-datum inclusion and detect centrality and isomorphism. Supporting input: Construction 23.17 and assertions 23.19--23.24, printed pp.490--492, including the final root-subgroup and Weyl-conjugacy paragraph completing 23.18; generation in Section 2h and 21.62. The based-root-datum assertion records the roots and coroots of the displayed rank-one graphs under the first torus projection. Supporting input for the compatible-graph proof: Argument of 23.24 and the final paragraph completing 23.18, printed p.492, in the general form of a surjective reductive homomorphism with an isomorphism on maximal tori and lifted simple root groups; rank comparison and Weyl conjugation use 21.51 and 21.39, and the big cells use 21.84. This is a supporting criterion, not the isogeny existence theorem.",
+   "via": [
+    "lem-sfb-compatible-rank-one-graph-geometry",
+    "lem-sfb-root-datum-isogeny-realization",
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-simple-root-isomorphism-criterion",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Supplied eight proof steps: flat image, finite kernel, existing isogeny root powers, lifted simple-root identification, rational base preparation, reflection induction, scheme-theoretic centrality and trivial kernel, then quotient universal inverse. Created one general normal-subgroup finiteness input, statement only; reused the existing Mathlib reflection-induction and base/span leaves. Audited every cited statement, hypotheses, dependency closure, and nonreduced and empty-root edge cases.",
+  "blueprint": "Read literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). This serves the inherited alteration/moduli/PGL/root-datum chain recorded in blueprint.from.place, at the compatible rank-one graph criterion; no exact blueprint duplicate was found.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Smoothness over F makes the target coordinate ring reduced, so a surjective closed scheme-theoretic image is the whole target. This generic smoothness consequence is Lean-closed and is not a replacement of the direct-image unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-geometrically-reduced"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-5e332530f",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-5e332530f (reviewer sub-agent of L); spot-checked: I read the item, the one new node, every cited statement and Milne iAG pp.379, 441 and 492 (17.85, 21.53, 23.24 and the paragraph completing 23.18). The item statement is unchanged. The 8 steps are sound. Step 1: the flat-image factorisation is surjective onto a reduced G (sbc-lem-smooth-geometrically-reduced, a generic tool_use, accepted), so the image ideal J lies in nil=0 and f is faithfully flat. Step 2: K is normal and K∩S=ker a=1 scheme-theoretically, so the new node makes K finite. Step 3: the hypotheses of lem-sfb-isogeny-root-power-laws hold. Step 4: the tangent weight of the lift is λ=u(εα), so bλ=e_λεα, and reducedness of Φ_G gives e=1 and a_*((uα)^∨)=α^∨. Step 5: root-datum-lattice-embedding plus root-base-rational-integral-spans give the coroot side of the Base. Δ is linearly independent as a base in Milne's App. C sense, which is how borel-pair-structure uses it. Step 6: the three hypotheses of root-base-reflection-induction hold, using naturality of the pairing ⟨uβ,(uα)^∨⟩=⟨β,α^∨⟩, and reducedness of Φ_H gives all e_δ=1. Step 7: the centrality notion matches C_H(S)=S, so K=1, infinitesimal part included. Step 8: the quotient universal property gives both inverse equations. The new node lem-sfb-reductive-normal-subgroup-torus-finiteness is true: (N_red)° is normal and reductive (21.53), its maximal torus is (S∩M)_t (17.85), which is trivial, so N is finite. I tested it on the torus, Frobenius kernel, product-factor and trivial cases. It does not restate its parent and has no duplicate in the DAG (rg -L search). Batch-5: all six flagged trf nodes are generic, none a step of the trace formula or Poincaré duality, so all are accepted: fppf covering base change (2 flags), flat tensor injectivity, smooth fpqc descent, fg torsion-free abelian group is free, split torus smoothness. No SGA source is used. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusSimpleRootIsomorphismCriterion",
+  "declaration": "AlgebraicGeometry.torus_simpleRoot_isomorphism_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusSimpleRootIsomorphismCriterion.lean",
+  "statement": "theorem torus_simpleRoot_isomorphism_criterion {F : Type u} [Field F] [IsAlgClosed F] (H G S T : Grp (Over (Spec (.of F)))) (hH : ReductiveTorusCentralizer.IsReductive H) (hG : ReductiveTorusCentralizer.IsReductive G) (iS : S ⟶ H) (iT : T ⟶ G) (hS : ReductiveTorusCentralizer.IsMaximalTorus iS) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (hsplitS : ∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus F r)) (hsplitT : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus F r)) (f : H ⟶ G) (hf : Surjective f.hom.hom.left) (a : S ≅ T) (ha : iS ≫ f = a.hom ≫ iT) [IsCommMonObj T.X] [IsCommMonObj (StandardGroupSchemes.multiplicative F)] (aG : ModObj T.X G.X) (hconj : aG.smul = (iT.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X) (Φ : Finset (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T))) (base : P.Base) (hred : P.IsReduced) (hroot : ∀ α : Φ, P.root α = α.val) (hpair : ∀ (χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ T)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) (hweights : ∀ χ : Additive (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ T G aG χ.toMul ≠ ⊥) (U : Φ → Grp (Over (Spec (.of F)))) (iU : ∀ β, U β ⟶ G) (hU : ∀ β, IsClosedSubgroupScheme (iU β).hom.hom ∧ Smooth (U β).X.hom ∧ ConnectedSpace (U β).X.left ∧ @TorusCharacterTangent.IsStable F _ T G aG _ (iU β) ∧ (GrpObj.differential (iU β).hom.hom).toLinearMap.range = @TorusCharacterTangent.weightSpace F _ T G aG β.val.toMul ∧ Nonempty (Grp.mk (StandardGroupSchemes.additive F) ≅ U β)) (hlift : ∀ (α : base.support) (ε : Bool), ∃ (β : Φ), β.val = (if ε then α.val.val else -α.val.val) ∧ ∃ (V : Grp (Over (Spec (.of F)))) (iV : V ⟶ H) (v : Grp.mk (StandardGroupSchemes.additive F) ≅ V) (e : V ≅ U β), IsClosedSubgroupScheme iV.hom.hom ∧ Smooth V.X.hom ∧ ConnectedSpace V.X.left ∧ iV ≫ f = e.hom ≫ iU β ∧ ∀ (A : Type u) [CommRing A] [Algebra F A] (s : StandardGroupSchemes.affine F A ⟶ S.X) (x : A), (s ≫ iS.hom.hom) * (TorusCharacterTangent.additiveParameterPoint F x ≫ v.hom.hom.hom ≫ iV.hom.hom) * (s ≫ iS.hom.hom)⁻¹ = TorusCharacterTangent.additiveParameterPoint F (TorusCharacterTangent.multiplicativePointCoordinate F (s ≫ a.hom.hom.hom ≫ β.val.toMul.hom.hom) * x) ≫ v.hom.hom.hom ≫ iV.hom.hom) : IsIso f",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93243ab60",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Item diff vs live = lean only; statement verbatim in file. All node clauses rendered: IsAlgClosed F; H,G IsReductive (affine, finite type, smooth, connected, no unipotent normal subgroup); S,T IsMaximalTorus + split via splitTorus; f surjective on spaces; a : S≅T tied to f by iS≫f=a.hom≫iT; target root datum/base pinned exactly as in reductive_borel_pair_structure (conjugation action, composition pairing, nonzero weights, reduced); U_β exactly the parametrization node's existence clause (closed, smooth, connected, T-stable, Lie=g_β, ≅Ga; unique by its uniqueness clause); for every simple α and both signs, a closed smooth connected V≅Ga in H with f|_V = e : V≅U_β and the S-conjugation formula with character a*(εα) over every F-algebra A : Type u; conclusion IsIso f in Grp(Over Spec F). No separability, root-span or nonempty-base assumptions; IsCommMonObj instances are proof-only and follow the landed convention. Edge cases checked: empty Δ, char p and infinitesimal kernels, rank 0, universes. Docstrings carry source and blueprint tag and all 8 proof steps; proof is sorry only; no defs; no line >100; imports exist; three search kinds; Worker report and Second reading present. Advisory only: the terminology, torus and tangent-weight def nodes are reached through cited borel-pair and parametrization theorem nodes, as in landed peers. Not recompiled; no file changed."
+ }
+}

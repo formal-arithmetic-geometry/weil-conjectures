@@ -1,0 +1,259 @@
+{
+ "id": "lem-trf-valuation-normalization-localizations",
+ "kind": "statement",
+ "title": "Normalization of a valuation ring and its prolongations",
+ "statement": "Let $K\\subseteq L$ be a finite algebraic extension of fields [def-pc-field-extension], and let $V\\subseteq K$ be a valuation ring with fraction field $K$ [def-trf-valuation-ring]. Let $C=\\{x\\in L:x\\text{ satisfies a monic polynomial over }V\\}$ be the integral closure of $V$ in $L$ [def-weil-pbc-integral-closure]. Then $C$ is a nonzero integral domain integral over $V$, with fraction field $L$. Its set of maximal ideals is nonempty. For every maximal ideal $\\mathfrak n$ of $C$, the subring $C_{\\mathfrak n}\\subseteq L$ [def-weil-pbc-localization-at-prime] is a valuation ring and $C_{\\mathfrak n}\\cap K=V$. Conversely, every valuation ring $W\\subseteq L$ with $W\\cap K=V$ is $C_{\\mathfrak n}$ for a unique maximal ideal $\\mathfrak n$ of $C$. No henselian, Noetherian, separability, rank, or module-finiteness assumption on $C/V$ is made.",
+ "source": {
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Proposition 2.2.1, converse proof, printed p. 11: 'F° is the integral closure of K° in F; it is semilocal with maximal ideals m_1,...,m_n and its localizations are the valuation rings of F extending K°' (used as standard background there). Full statement: Bourbaki, Commutative Algebra VI §8.6, Proposition 6 and its corollaries (WANTED). Local Stacks algebra.tex Tag 00IA (lemma-dominate) and Tag 00IC (lemma-valuation-ring-normal) give background only. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-trf-valuation-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-localization-at-prime"
+ ],
+ "proof": [
+  {
+   "text": "Mathlib supplies the nonzero domain, integrality and fraction-field clauses for C by [lem-weil-pbc-integral-closure-algebraic-extension-normal]. Nonemptiness of MaximalSpectrum C is the standard maximal ideal existence instance for any nontrivial commutative ring.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For x in L use [lem-trf-valuation-integral-multiplication-certificate] to obtain a,b,c,d in C with b=x*a, d=x*c, a-d=1. In D=C_n, either a or -d is a unit. In the first case x=b/a belongs to D; in the second x^-1=c/d belongs to D. Thus D is a valuation subring by [def-trf-valuation-ring]. The nonzero conditions needed for division follow by mapping units to L.",
+   "uses": [
+    "lem-trf-valuation-integral-multiplication-certificate",
+    "def-weil-pbc-localization-at-prime",
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "By [lem-weil-pbc-integral-maximal-contracts-maximal], n contracts to a maximal ideal of V, hence its unique maximal ideal. The localization unit test makes V map locally into D∩K. Apply [lemma-nagata-valuation-intersection] to get D∩K=V. This needs no choice of a dominating valuation ring.",
+   "uses": [
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "def-weil-pbc-localization-at-prime",
+    "lemma-nagata-valuation-intersection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an extending valuation subring W, the containment direction of [lem-trf-integral-closure-valuation-intersection] puts C inside W. In Lean this direction is implemented using the already proved Mathlib valuation normality instance and Subring.integralClosure_le_iff, not the sorried Sheaf normality theorem. Let q be the contraction of its maximal ideal to C. For a in V, the criterion a∈nonunits iff a=0 or a^-1∉V, together with W∩K=V and preservation of inverses, identifies q∩V with the maximal ideal of V. Therefore q is maximal by [lem-weil-pbc-integral-prime-over-maximal-maximal].",
+   "uses": [
+    "lem-trf-integral-closure-valuation-intersection",
+    "lem-trf-valuation-inverse-maximal-ideal",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fractions embed D=C_q into W: denominators outside q are units of W. To reflect units, write y=r/s in D. If y is a unit of W, then r=y*s is a unit there, hence r∉q. The localization unit test makes y a unit of D too. Thus W dominates D. Since D is a valuation subring, maximality in the domination order, as used in [lemma-nagata-valuation-intersection], forces W=D.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lemma-nagata-valuation-intersection"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The localization criterion IsUnit(c/1) iff c∉n recovers n from D as an embedded subring of L. An equality of two embedded localizations gives a ring equivalence preserving c/1, so these unit tests give equality of ideals. This proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-trf-valuation-integral-multiplication-certificate",
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-valuation-ring",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lemma-nagata-valuation-intersection",
+  "lem-trf-integral-closure-valuation-intersection",
+  "lem-trf-valuation-inverse-maximal-ideal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Lean realization by R3, 2026-10-26. Polynomial-tail certificate uses Tag 090P and the original steps 4--6; maximal contraction, localization unit tests and valuation maximality complete the proof. No source statement changed. Mathlib normality replaces the holed Sheaf formulation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a valuation ring in a finite algebraic field extension has valuation rings as its localizations at maximal ideals",
+   "results": "{\"t\": \"2026-10-18T23:53:45Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a valuation ring in a finite algebraic field extension has valuation rings as its localizations at maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"Valuation.Integers.integrallyClosed\", \"Valuation.Integers.isIntegrallyClosed\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"Valuation.Integers.integralClosure\", \"instIsIntegrallyClosedSubtypeMemSubring\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\"], \"digest\": \"e65fda1aa90aac87\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, integralClosure",
+   "results": "{\"t\": \"2026-10-18T23:53:46Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"iInf_valuationSubring_superset\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"ValuationSubring.algebra\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"ValuationSubring.equiv\", \"ValuationSubring.integralClosure_algebraMap_injective\"], \"digest\": \"15b43cd1526db971\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|integral.closure|localization",
+   "results": "{\"t\": \"2026-10-18T23:53:45Z\", \"tool\": \"grep\", \"query\": \"integralClosure|integral.closure|localization\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\"], \"digest\": \"212bad8fb9482f51\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prolongations of a valuation ring to a finite algebraic extension are the localizations of its integral closure",
+   "results": "{\"t\": \"2026-10-18T23:53:45Z\", \"tool\": \"leansearch\", \"query\": \"Prolongations of a valuation ring to a finite algebraic extension are the localizations of its integral closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.ofComapInteger\", \"Valuation.Integers.isIntegrallyClosed\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"iInf_valuationSubring_superset\", \"Valuation.HasExtension.val_algebraMap\", \"ValuationSubring.integralClosure_algebraMap_injective\"], \"digest\": \"1019db960e900d32\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a valuation ring in an algebraic field extension is a Prufer domain and valuation prolongations correspond to maximal ideals",
+   "results": "{\"t\": \"2026-10-18T23:55:24Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a valuation ring in an algebraic field extension is a Prufer domain and valuation prolongations correspond to maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"NumberField.RingOfIntegers.instIsDedekindDomainWithVal\", \"instIsPrincipalIdealRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"Set.integer\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\"], \"digest\": \"1a8b8f8a4799714c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing",
+   "results": "{\"t\": \"2026-10-18T23:57:20Z\", \"tool\": \"grep\", \"query\": \"IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned integrally-closedness and intersection of valuation rings, or Dedekind/discrete valuation special cases. Read Integral.lean and ValuationSubring.lean; none classifies prolongations by maximal localizations of a general normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure (in Mathlib/RingTheory/Valuation) and ValuationSubring (in Mathlib/RingTheory)",
+   "results": "grep run 2026-10-24 by the NJ stage-1 reviewer: integralClosure hits in Valuation/AlgebraInstances.lean (isIntegral_of_mem_ringOfIntegers, integralClosure_algebraMap_injective), Valuation/Integral.lean:61 (Valuation.Integers.integralClosure), Valuation/LocalSubring.lean:220; ValuationSubring files LaurentSeries, ValuationSubring, Discrete/*, RamificationGroup, Extension, LocalSubring, AlgebraInstances, DedekindDomain/AdicValuation",
+   "date": "2026-10-24",
+   "verdict": "no match: integral-closedness, algebra instances and the intersection description only; nothing classifies the extending valuation rings by the localizations of the integral closure at its maximal ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|integral.closure|localization",
+   "results": "{\"t\": \"2026-10-24T09:03:52Z\", \"tool\": \"grep\", \"query\": \"integralClosure|integral.closure|localization\", \"sub\": \"RingTheory/Valuation\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/Integral.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\", \"Mathlib/RingTheory/Valuation/AlgebraInstances.lean\"], \"digest\": \"ee29cf9c82452432\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Valuation/Integral.lean, AlgebraInstances.lean, LocalSubring.lean and ValuationSubring.lean; hits give integral closedness, integral closure as an intersection, or discrete/Dedekind cases, not arbitrary-rank normalization/prolongation classification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prolongations of a valuation ring are the maximal ideal localizations of its integral closure in a finite field extension",
+   "results": "{\"t\": \"2026-10-24T09:03:52Z\", \"tool\": \"leansearch\", \"query\": \"Prolongations of a valuation ring are the maximal ideal localizations of its integral closure in a finite field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isIntegrallyClosed_ofLocalizationMaximal\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"Valuation.Integers.isIntegrallyClosed\", \"Valuation.HasExtension.algebraMap_mem_maximalIdeal_iff\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"Valued.maximalIdeal\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"Valuation.HasExtension.ofComapInteger\"], \"digest\": \"508dada39dfc276a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Valuation/Integral.lean, AlgebraInstances.lean, LocalSubring.lean and ValuationSubring.lean; hits give integral closedness, integral closure as an intersection, or discrete/Dedekind cases, not arbitrary-rank normalization/prolongation classification."
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, integralClosure",
+   "results": "{\"t\": \"2026-10-24T09:03:53Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring, integralClosure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"iInf_valuationSubring_superset\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\", \"ValuationSubring.algebra\", \"ValuationSubring.isIntegral_of_mem_ringOfIntegers\", \"ValuationSubring.equiv\", \"ValuationSubring.integralClosure_algebraMap_injective\"], \"digest\": \"15b43cd1526db971\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Valuation/Integral.lean, AlgebraInstances.lean, LocalSubring.lean and ValuationSubring.lean; hits give integral closedness, integral closure as an intersection, or discrete/Dedekind cases, not arbitrary-rank normalization/prolongation classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral closure of a valuation ring in a finite algebraic field extension has valuation rings as its maximal ideal localizations",
+   "results": "{\"t\": \"2026-10-24T09:03:53Z\", \"tool\": \"leanfinder\", \"query\": \"The integral closure of a valuation ring in a finite algebraic field extension has valuation rings as its maximal ideal localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal\", \"Valuation.Integers.integrallyClosed\", \"Valuation.Integers.isIntegrallyClosed\", \"Valuation.Integers.isIntegrallyClosed_integers\", \"Valuation.Integers.integralClosure\", \"instIsIntegrallyClosedSubtypeMemValuationSubring\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDiscreteValuationRing.map_algebraMap_eq_valuationSubring\"], \"digest\": \"8bb8a43fb49ef8d2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Valuation/Integral.lean, AlgebraInstances.lean, LocalSubring.lean and ValuationSubring.lean; hits give integral closedness, integral closure as an intersection, or discrete/Dedekind cases, not arbitrary-rank normalization/prolongation classification."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing",
+   "results": "{\"t\": \"2026-10-24T09:05:39Z\", \"tool\": \"grep\", \"query\": \"IsPrüfer|IsPrufer|ValuationRing.*integralClosure|integralClosure.*ValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Valuation/Integral.lean, AlgebraInstances.lean, LocalSubring.lean and ValuationSubring.lean; hits give integral closedness, integral closure as an intersection, or discrete/Dedekind cases, not arbitrary-rank normalization/prolongation classification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a valuation ring in an algebraic extension is a Prufer domain and its valuation prolongations are indexed by maximal ideals",
+   "results": "{\"t\": \"2026-10-24T09:05:41Z\", \"tool\": \"leanfinder\", \"query\": \"The normalization of a valuation ring in an algebraic extension is a Prufer domain and its valuation prolongations are indexed by maximal ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NumberField.RingOfIntegers.instIsDedekindDomainWithVal\", \"instIsDiscreteValuationRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"instIsPrincipalIdealRingSubtypeMemSubringIntegerWithZeroMultiplicativeIntValuation\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"instIsPrincipalIdealRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"Set.integer\"], \"digest\": \"1d6a5bb06721abfa\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected Valuation/Integral.lean, AlgebraInstances.lean, LocalSubring.lean and ValuationSubring.lean; hits give integral closedness, integral closure as an intersection, or discrete/Dedekind cases, not arbitrary-rank normalization/prolongation classification."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "reviewer",
+  "item": "lem-trf-separable-valued-completion-factors",
+  "date": "2026-10-24",
+  "group": "NJ"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Stable reduction over finite-height separably closed valuation fields. Input: Proposition 4.3.3, pp. 29--30; applied componentwise when the smooth generic fibre is disconnected Supporting input: Theorem 2.1.8 and Lemmas 2.1.1, 2.1.2, 2.1.6, pp. 7--10; smooth-centre formulation used in the first substantive paragraph of the proof of Proposition 4.3.3, pp. 29--30. Supporting lemma: Proposition 2.2.1 and its proof, printed p. 11; preliminary facts on completions used there; Lemma 2.1.6 for the etale terminology. Supporting decompletion input: Proposition 2.2.1, proof, printed pp. 11--12: semilocal normalization, completed tensor-product decomposition, factors f_i and henselianity of the complete field. Primary text https://arxiv.org/html/0707.3953v3#S2.SS2. Normalization/prolongation input of the semilocal normalization F° in the converse proof of Proposition 2.2.1, p. 11.",
+   "via": [
+    "lem-trf-separable-valued-completion-factors",
+    "lem-trf-valued-decompletion-etale",
+    "lem-trf-valued-curve-etale-parameter",
+    "lem-trf-valuation-strict-semistable-local-uniformization",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-valuation-normalization-localizations",
+  "worker": "stage1",
+  "summary": "Repair of return 2969acdf3d5 points (1) and (2): removed the dropped identical per-node and its rejected tool use. Wrote a nine-step algebraic proof: normalization/lying-over, domination, coefficient normalization, valuative integrality of polynomial tails, unit dichotomy, restriction, converse and uniqueness. Added only the strictly smaller Mathlib integrality-intersection leaf. All cited statements were read and quoted verbatim. Statement and current-main maintainer fields are preserved.",
+  "blueprint": "Realizes the inherited normalization/prolongation background in the Temkin decompletion component of the semistable-alteration branch under lem-trf-local-term-locality (1)--(2). The latest blueprint locality proof itself quotes Varshavsky; this repair does not change its unit route or restore the dropped perverse-purity branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "General commutative-algebra theorem (Stacks 00IC), used solely to put V-integral elements into an extending valuation ring W; no theorem within sk-i-curve-zero supplies this generic normality statement."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-982a638e6",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-982a638e6 (reviewer sub-agent of L); spot-checked: Read the item, the new leaf and every cited statement in full. Only split fields changed against returned head 2969acdf; the statement, stmt_deps, source and blueprint are unchanged. Both return points are repaired: the dropped Q09 per-node is not cited anywhere and its tool_use is gone, and the one-step relabel is replaced by a real 9-step proof. Steps: (1) integral-closure-algebraic-extension-normal with P=V gives a domain, integral, normal, Frac=L. (2) Lying-over plus prime-over-maximal gives nonemptiness; going-up from n∩V⊆m with maximality of n gives n∩V=m. (3) The localization-normal-domain and nagata-local-domain-valuation-dominates nodes give U; nagata-valuation-intersection gives U∩K=V. (4)-(6) I checked by hand the coefficient normalization, the tail identities c_i=-Σ_{j≤i}a_jx^{j-i-1} and xc_i=-Σ_{j≤i}a_jx^{j-i}, and the cases k=0, k=r and 0<k<r (c_{k-1}-xc_k=1, unit dichotomy in local D). The new leaf puts c_i and xc_i in C. (7) inverse-maximal-ideal gives C_n=U. (8) valuation-ring-normal gives C⊆W; q=m_W∩C lies over m, is maximal, and C_q⊆W is dominated, so W=C_q. (9) n is the contraction of the nonunits of C_n, giving uniqueness. New leaf lem-trf-integral-closure-valuation-intersection: Mathlib iInf_valuationSubring_superset (Valuation/LocalSubring.lean:218-227, read), one-line specialization s=R. Duplicate search over snapshot nodes (090P, the declaration name, intersection/prolongation phrases) found no existing equivalent; the dropped per-twin is not cited. Accepted tool_use lem-weil-pbc-valuation-ring-normal (00IC; already a tool of the parent). lemma-nagata-valuation-intersection is Lean-closed (ValuationSubring.comap_eq_of_toLocalSubring_le). No cycle, no SGA; Stacks 00IA/00IC/090P checked in algebra.tex. Small cases checked: V=K, L=K, higher rank, inseparable. Maintainer note: 'valuation ring W⊆L' in the item means a valuation ring of L (fraction field L); read literally, Z_(p)⊂Q(i) would be a counterexample. Both citers and step 8 use the fraction-field-L reading; consider adding 'with fraction field L' later."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ValuationNormalizationLocalizations",
+  "declaration": "ValuationSubring.integralClosure_maximal_localizations",
+  "file": "lean/Sheaf/RingTheory/ValuationNormalizationLocalizations.lean",
+  "statement": "theorem integralClosure_maximal_localizations (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L] [FiniteDimensional K L] (V : ValuationSubring K) : Nontrivial (integralClosure V L) ∧ IsDomain (integralClosure V L) ∧ Algebra.IsIntegral V (integralClosure V L) ∧ IsFractionRing (integralClosure V L) L ∧ Nonempty (MaximalSpectrum (integralClosure V L)) ∧ (∀ n : MaximalSpectrum (integralClosure V L), ∃ W : ValuationSubring L, W.toSubring = (@Localization.subalgebra.ofField (integralClosure V L) L _ n.asIdeal.primeCompl n.asIdeal.primeCompl_le_nonZeroDivisors _ _ (integralClosure.isFractionRing_of_finite_extension K L)).toSubring ∧ W.comap (algebraMap K L) = V) ∧ (∀ W : ValuationSubring L, W.comap (algebraMap K L) = V → ∃! n : MaximalSpectrum (integralClosure V L), W.toSubring = (@Localization.subalgebra.ofField (integralClosure V L) L _ n.asIdeal.primeCompl n.asIdeal.primeCompl_le_nonZeroDivisors _ _ (integralClosure.isFractionRing_of_finite_extension K L)).toSubring)",
+  "branch": "sheaf-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bd129e959",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Only the item's lean record and module are new; lean.statement appears verbatim in the file. Clause by clause: fields and FiniteDimensional K L (no separability binder), V : ValuationSubring K, integralClosure V L; Nontrivial/IsDomain/Algebra.IsIntegral/IsFractionRing L; Nonempty MaximalSpectrum; for each maximal n, a W : ValuationSubring L equal in L to Localization.subalgebra.ofField at n.primeCompl (carrier a*s^-1, isLocalization_ofField) with comap = V; the converse with ∃! n. The fraction-field argument is the Mathlib Prop proof isFractionRing_of_finite_extension, not a hypothesis. Edge cases V=K, L=K, inseparable and higher rank are covered; universes u and v are independent. No Mathlib duplicate. The per-twin lem-per-valuation-normalization-localizations has no lean and is route-dropped. Docstrings give the source place, blueprint id and all 9 proof steps; no definitions; proof is sorry; project imports exist in side-live; report has the Worker report and Second reading sections. No compile run (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261026T082828-L-2228360",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

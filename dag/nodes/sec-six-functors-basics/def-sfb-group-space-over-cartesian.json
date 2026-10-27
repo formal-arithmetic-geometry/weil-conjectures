@@ -1,0 +1,151 @@
+{
+ "id": "def-sfb-group-space-over-cartesian",
+ "kind": "definition",
+ "title": "Cartesian structure on fppf sheaves over an algebraic space",
+ "status": "mathlib",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $B$ an algebraic space over $S$, regarded as its fppf sheaf of sets [def-trf-algebraic-space]. Equip the category of fppf sheaves over $B$ with the cartesian monoidal structure whose unit is $\\mathrm{id}_B$ and whose product of $F\\to B$ and $H\\to B$ is the sheaf fibre product $F\\times_B H$. Use the pullback projections and universal property for its structural maps. This is the canonical pullback construction on an over-category; its restriction to algebraic spaces uses the sheaf fibre products of [lem-trf-space-fibre-products-etale-covers].",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "definition-group-space and Definition 04TW (definition-pseudo-torsor), fibre products over the algebraic-space base; canonical implementation Mathlib.CategoryTheory.Monoidal.Cartesian.Over, Over.cartesianMonoidalCategory."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Over.cartesianMonoidalCategory",
+  "file": "Mathlib/CategoryTheory/Monoidal/Cartesian/Over.lean",
+  "how": "specializes in one line: CategoryTheory.Over.cartesianMonoidalCategory B.obj, with C = Sheaf (Scheme.fppfTopology.over S) (Type u). The abbreviation is at lines 33–38; it chooses Over.mk (𝟙 B.obj) as unit and the pullback cone as binary product. HasPullbacks is inferred from CategoryTheory.Sheaf.hasLimitsOfSize (Mathlib/CategoryTheory/Sites/Limits.lean:168–169), with createsLimitsOfShape at lines 151–154 identifying these as sheaf limits. The same Over.lean file has tensorObj_left at 59, tensorObj_hom at 62, tensorUnit_left at 65, tensorUnit_hom at 68, lift_left at 71–72, fst_left at 75 and snd_left at 78; these give every specified structural map. Restricting the chosen products to algebraic spaces uses the already stated closure result lem-trf-space-fibre-products-etale-covers; it is not an additional choice of monoidal data."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The category of sheaves over an algebraic space has cartesian monoidal structure given by pullbacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.cartesianMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Sites.CartesianMonoidal\", \"type\": \": CartesianMonoidalCategory (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, the category of sheaves on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$ is equipped with a Cartesian monoida\"}\n  {\"name\": \"AlgebraicGeometry.instCartesianMonoidalCategoryScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"CategoryTheory.CartesianMonoidalCategory AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes is equipped with a Cartesian monoidal structure, where the tensor product is the categorical product, the unit is the terminal object, and the coherence isomorphisms are derive\"}\n  {\"name\": \"CategoryTheory.Over.associator_hom_left_fst_assoc\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasPullbacks C] {X : C}\\n  (R S T : CategoryTheory.Over X) {Z : C} (h : R.left ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (CategoryTheory.MonoidalCategoryStruct.associator R S T).hom.left\\n      (CategoryThe\", \"doc\": \"Given a category $\\\\mathcal{C}$ with pullbacks and an object $X$, the over category $\\\\mathcal{C}/X$ is equipped with a Cartesian monoidal category structure. The tensor product of two objects (morphism\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryOver\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.Over\", \"type\": \"[ChosenPullbacks C] (X : C) : CartesianMonoidalCategory (Over X)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with chosen pullbacks and an object $X \\\\in \\\\mathcal{C}$, the over category $\\\\mathcal{C}/X$ is equipped with a Cartesian monoidal category structure. This structure uses:\"}\n  {\"name\": \"CategoryTheory.Over.cartesianMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"(X : C) : CartesianMonoidalCategory (Over X)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with pullbacks and an object $X$, the over category $\\\\mathcal{C}/X$ is equipped with a Cartesian monoidal category structure. The tensor product is defined as the pullba\"}\n  {\"name\": \"CategoryTheory.Over.cartesianMonoidalCategory.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasPullbacks C] (X : C),\\n  CategoryTheory.Over.cartesianMonoidalCategory X = CategoryTheory.Over.cartesianMonoidalCategory X\", \"doc\": \"Given a category $\\\\mathcal{C}$ with pullbacks and an object $X$, the over category $\\\\mathcal{C}/X$ is equipped with a Cartesian monoidal category structure. The tensor product is defined as the fiber \"}\n  {\"name\": \"AlgebraicGeometry.instCartesianMonoidalCategoryOverScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \": CartesianMonoidalCategory (Over S)\", \"doc\": \"For any scheme $ S $, the over category $ \\text{Sch}/S $ (whose objects are schemes over $ S $) is equipped with a Cartesian monoidal category structure. The tensor product is defined as the fiber prod\"}\n  {\"name\": \"CategoryTheory.Sheaf.monoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Sites.Monoidal\", \"type\": \"[(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A] : MonoidalCategory (Sheaf J A)\", \"doc\": \"The category of sheaves on a site (a category equipped with a Grothendieck topology $J$) is endowed with a monoidal structure. This structure is obtained by localizing the monoidal category of preshea\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies the explicit Over.cartesianMonoidalCategory abbreviation; it is not a global instance. Register that construction once, moving the existing project instance to its own definition node as requested by the reviewer."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.cartesianMonoidalCategory",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Over.cartesianMonoidalCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] (X : C) : CategoryTheory.CartesianMonoidalCategory (CategoryTheory.Over X)\", \"doc\": \"A choice of finite products of `Over X` given by `Limits.pullback`.\"}\n  {\"name\": \"CategoryTheory.Over.braidedCategory\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] (X : C) : CategoryTheory.BraidedCategory (CategoryTheory.Over X)\", \"doc\": \"`Over X` is braided w.r.t. the Cartesian monoidal structure given by `Limits.pullback`.\"}\n  {\"name\": \"CategoryTheory.Over.tensorUnit_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X : C} : (CategoryTheory.MonoidalCategoryStruct.tensorUnit (CategoryTheory.Over X)).left = X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.grpObjMkPullbackSnd\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X R S : C} {f : R ⟶ X} {g : S ⟶ X} [CategoryTheory.GrpObj (CategoryTheory.Over.mk f)] : CategoryTheory.GrpObj (CategoryTheory.Over.mk (CategoryTheory.Limits.pullback.snd f g))\", \"doc\": \"The pullback of a monoid object is a monoid object.\"}\n  {\"name\": \"CategoryTheory.Over.tensorUnit_hom\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X : C} : (CategoryTheory.MonoidalCategoryStruct.tensorUnit (CategoryTheory.Over X)).hom = CategoryTheory.CategoryStruct.id X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.tensorObj_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X : C} (R S : CategoryTheory.Over X) : (CategoryTheory.MonoidalCategoryStruct.tensorObj R S).left = CategoryTheory.Limits.pullback R.hom S.hom\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.instBraidedPullback\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X R : C} {f : R ⟶ X} : (CategoryTheory.Over.pullback f).Braided\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.toUnit_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X : C} {R : CategoryTheory.Over X} : CategoryTheory.Over.Hom.left (CategoryTheory.SemiCartesianMonoidalCategory.toUnit R) = R.hom\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.monObjMkPullbackSnd\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X R S : C} {f : R ⟶ X} {g : S ⟶ X} [CategoryTheory.MonObj (CategoryTheory.Over.mk f)] : CategoryTheory.MonObj (CategoryTheory.Over.mk (CategoryTheory.Limits.pullback.snd f g))\", \"doc\": \"The pullback of a monoid object is a monoid object.\"}\n  {\"name\": \"CategoryTheory.Over.fst_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X : C} {R S : CategoryTheory.Over X} : CategoryTheory.Over.Hom.left (CategoryTheory.SemiCartesianMonoidalCategory.fst R S) = CategoryTheory.Limits.pullback.fst R.hom S.hom\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.snd_left\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X : C} {R S : CategoryTheory.Over X} : CategoryTheory.Over.Hom.left (CategoryTheory.SemiCartesianMonoidalCategory.snd R S) = CategoryTheory.Limits.pullback.snd R.hom S.hom\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Over.isCommMonObj_mk_pullbackSnd\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Cartesian.Over\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Limits.HasPullbacks C] {X R S : C} {f : R ⟶ X} {g : S ⟶ X} [CategoryTheory.MonObj (CategoryTheory.Over.mk f)] [CategoryTheory.IsCommMonObj (CategoryTheory.Over.mk f)] : CategoryTheory.IsCommMonObj (CategoryTheory.Over.mk (Categor\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies the explicit Over.cartesianMonoidalCategory abbreviation; it is not a global instance. Register that construction once, moving the existing project instance to its own definition node as requested by the reviewer."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesianMonoidalCategory CategoryTheory/Monoidal/Cartesian/Over.lean",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"17\", \"line\": \"# `CartesianMonoidalCategory` for `Over X`\", \"text\": \"\"}\n  {\"file\": \"19\", \"line\": \"We provide a `CartesianMonoidalCategory (Over X)` instance via pullbacks, and provide simp lemmas\", \"text\": \"\"}\n  {\"file\": \"28\", \"line\": \"open CategoryTheory.Functor Limits CartesianMonoidalCategory\", \"text\": \"\"}\n  {\"file\": \"33\", \"line\": \"abbrev cartesianMonoidalCategory (X \", \"text\": \" C) : CartesianMonoidalCategory (Over X) :=\"}\n  {\"file\": \"40\", \"line\": \"attribute [local instance] cartesianMonoidalCategory\", \"text\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Mathlib supplies the explicit Over.cartesianMonoidalCategory abbreviation; it is not a global instance. Register that construction once, moving the existing project instance to its own definition node as requested by the reviewer."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n groupSpaceOverCartesian lean/Sheaf lean/WeilConjectures dag/nodes; python3 tools/blueprint_refs.py search \"cartesian structure\"",
+   "results": "lean/Sheaf/AlgebraicGeometry/FreeFlatGroupSpaceQuotient.lean:43:instance groupSpaceOverCartesian {S : Scheme.{u}} (B : AlgebraicSpace S) :\ndag/nodes/sec-six-functors-basics/lem-sfb-free-flat-group-space-quotient.json names this declaration. No definition node owns it; no matching declaration in WeilConjectures.\n0 blueprint nodes match cartesian structure.",
+   "date": "2026-10-24",
+   "verdict": "Extract the existing instance without changing its name or data; remove the original declaration from the quotient module and publicly import the new owner there."
+  },
+  {
+   "tool": "grep",
+   "query": "cartesianMonoidalCategory|tensorObj_left|tensorUnit_hom|fst_left|snd_left",
+   "results": "Search ran successfully; 5 hits. Top results: 17, 19, 28, 33, 40. Mathlib subdirectory: CategoryTheory/Monoidal/Cartesian/Over.lean",
+   "date": "2026-10-25",
+   "verdict": "match: the grep hit at Over.lean:33 is the abbreviation. Read lines 30–80 and Sites/Limits.lean:145–169 to check hypotheses, chosen unit, product and projections. The command output splits single-file rg output oddly, so the source was read for the actual file and line numbers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The over category of a category with pullbacks has cartesian monoidal structure given by fibre products",
+   "results": "Search ran successfully; 8 hits. Top results: CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryOver, CategoryTheory.Over.cartesianMonoidalCategory, CategoryTheory.Over.cartesianMonoidalCategory.congr_simp, CategoryTheory.Over.associator_inv_left_fst_fst_assoc, CategoryTheory.Over.associator_hom_left_fst_assoc, AlgebraicGeometry.Scheme.monObjAsOverPullback, AlgebraicGeometry.instCartesianMonoidalCategoryOverScheme, CategoryTheory.Over.ConstructProducts.over_binaryProduct_of_pullback.",
+   "date": "2026-10-25",
+   "verdict": "match: CategoryTheory.Over.cartesianMonoidalCategory is the requested pullback construction; the sheaf instance and its algebraic-space restriction were checked separately in the cited source and existing statement dependency."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Over.cartesianMonoidalCategory",
+   "results": "Search ran successfully; 12 hits. Top results: CategoryTheory.Over.cartesianMonoidalCategory, CategoryTheory.Over.braidedCategory, CategoryTheory.Over.tensorUnit_left, CategoryTheory.Over.grpObjMkPullbackSnd, CategoryTheory.Over.tensorUnit_hom, CategoryTheory.Over.tensorObj_left, CategoryTheory.Over.instBraidedPullback, CategoryTheory.Over.toUnit_left.",
+   "date": "2026-10-25",
+   "verdict": "match: the returned abbreviation and tensor/unit/projection declarations give exactly the specified structure, by specialization to sheaves and B.obj."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The slice category of sheaves over an object has a cartesian monoidal structure with tensor product given by pullbacks and terminal object the identity",
+   "results": "Search ran successfully; 8 hits. Top results: CategoryTheory.Sheaf.cartesianMonoidalCategory, CategoryTheory.Sheaf.cartesianMonoidalCategoryLift_val, CategoryTheory.Sheaf.cartesianMonoidalCategoryFst_val, CategoryTheory.Sheaf.cartesianMonoidalCategoryWhiskerLeft_val, CategoryTheory.Sheaf.cartesianMonoidalCategoryWhiskerRight_val, CategoryTheory.Sheaf.cartesianMonoidalCategorySnd_val, CategoryTheory.sheafToPresheafMonoidal, CategoryTheory.Sheaf.over.",
+   "date": "2026-10-25",
+   "verdict": "related: returns CategoryTheory.Sheaf.cartesianMonoidalCategory (products over the terminal sheaf, rather than the slice over B) and its projection/lift lemmas. The exact slice construction was returned by Loogle and LeanSearch."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-unramified-pseudo-torsor",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Stabilizer criterion for membership in the DM locus. Atlas construction and field-point test of Tag 0DSN, supporting the infinitesimal DM-locus input. Proof steps 3 and 4: identify the descended open as the maximal open with unramified relative diagonal. Supporting general algebraic-space input for the Isom pseudo-torsor argument in Tag 0CL0(4). Shared cartesian structure used to state the group action and pseudo-torsor isomorphism over B.",
+   "via": [
+    "lem-sfb-unramified-pseudo-torsor",
+    "lem-sfb-smooth-atlas-automorphism-diagonal-test",
+    "lem-sfb-algebraic-stack-dm-point-stabilizer",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupSpaceOverCartesian",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.groupSpaceOverCartesian",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupSpaceOverCartesian.lean",
+  "statement": "instance groupSpaceOverCartesian {S : Scheme.{u}} (B : AlgebraicSpace S) :\n    CartesianMonoidalCategory (Over B.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Ownership extraction requested in the H2 return: the existing instance is moved, with identical name and data, from FreeFlatGroupSpaceQuotient. Mathlib supplies the underlying construction as an abbreviation; this module registers exactly that instance once."
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "def-sfb-group-space-over-cartesian",
+  "worker": "stage1",
+  "summary": "Checked the existing definition against Stacks 043H/04TW and the actual Mathlib pullback cartesian construction. No new lemma is necessary: the requested data is the one-line specialization Over.cartesianMonoidalCategory B.obj. Retained the statement, definition dependencies, prior searches, source and Lean ownership metadata; recorded the exact Mathlib match and current searches. No qualifying WeilConjectures attachment exists.",
+  "blueprint": "The inherited from.place records the supporting slice products for the Isom pseudo-torsor input on the direct-image branch of det-thm-sf-ctf-stability-direct-images (3). The current latest blueprint has no independent node stating this cartesian over-category definition (blueprint_refs searches cartesian monoidal and fibre products); same_as remains empty. No unit step or route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-42686975f",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-42686975f (reviewer sub-agent of L); spot-checked: This is a single-commit stage-1 delivery: the item JSON plus a report with a Review by Q01 section, and no new nodes. Compared with side-live, where the item is status split with reviewed null and so still open, only four fields change: status (split to mathlib), mathlib_match, mathlib_searches (the 4 old entries kept verbatim, 3 appended) and split_report. The statement, stmt_deps, source, blueprint and lean records are unchanged, so no target is weakened. Mathlib check: Over.cartesianMonoidalCategory is the abbrev at Monoidal/Cartesian/Over.lean:33-38; its unit is Over.mk (𝟙 X), its product is the pullback cone, and its only hypothesis is HasPullbacks. I verified every line cited in the how field: tensorObj_left 59, tensorObj_hom 62, tensorUnit_left 65, tensorUnit_hom 68, lift_left 71-72, fst_left 75, snd_left 78. HasPullbacks on Sheaf J (Type u) is an inferred instance through Sites/Limits.lean createsLimitsOfShape:151 and hasLimitsOfSize:168, and those limits are computed sectionwise. Scheme.fppfTopology exists at Fpqc.lean:53. So the match is a one-line specialization to B.obj, and the existing project instance has exactly that body. Sources: Stacks spaces-groupoids definition-group-space (l.236) and definition-pseudo-torsor (l.603) use G×_B G and G×_B X, which are these products. Of the stmt_deps, def-trf-algebraic-space is a sheaf on the big fppf site, and the first clause of lem-trf-space-fibre-products-etale-covers covers the restriction to algebraic spaces. Keeping non-Mathlib stmt_deps on a mathlib definition node has precedent (52 such nodes). Small cases agree: an empty base, a terminal base (ordinary sheaf products), the unitor B×_B H ≅ H, and the relative diagonal. Duplicate search with rg -L over dag/nodes: no other node owns this definition; the free-flat-quotient node is its citer. Searches cover three kinds (leansearch, loogle/leanfinder, grep). No changes made and no tool_uses."
+ }
+}

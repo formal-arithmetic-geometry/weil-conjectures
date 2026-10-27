@@ -1,0 +1,237 @@
+{
+ "id": "lem-sfb-strict-codegree-polygon-gap",
+ "kind": "statement",
+ "title": "Uniform strict polygon gap for integral codegrees",
+ "statement": "Work in the real field $\\mathbf R$ (a field in the sense of [def-weil-field]) with its usual order. Fix integers $N\\geq3$ and $d\\geq1$. There is a real number $\\eta(N,d)>0$ such that the following holds for every tuple of integers $e=(e_0,\\ldots,e_{N-1})$ satisfying\n$$e_0=0,\\quad e_{N-1}=d,\\quad 0\\leq e_i\\leq d\\ (0\\leq i\\leq N-1),\\quad e_i<\\frac{di}{N-1}\\ (0<i<N-1).$$\nFor every tuple of real weights $w_0\\geq\\cdots\\geq w_{N-1}=0$ with $\\sum_{i=0}^{N-1}w_i=1$, put\n$$B(e,w)=\\min_{0=i_0<i_1<\\cdots<i_h=N-1}\\ \\sum_{j=0}^{h-1}(e_{i_j}+e_{i_{j+1}})(w_{i_j}-w_{i_{j+1}}).$$\nThe minimum is over all increasing subsequences containing both endpoints. Then\n$$B(e,w)\\leq\\frac{2d}{N}-\\eta(N,d).$$\nThe number $\\eta(N,d)$ is uniform over the finitely many admissible integer tuples $e$.",
+ "source": {
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.4, Lemma 6 and Figure 2, printed pp.11--12: corrected factor-two polygon estimate and strict interior-codegree version, written by the worker; the printed positive gap at the last endpoint is not used. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340.",
+  "url": "https://arxiv.org/pdf/0810.2340"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-codegree-polygon"
+ ],
+ "proof": [
+  {
+   "text": "Put $n=N-1\\geq2$, $\\alpha=d/n>0$, $\\delta=1/n$ and $\\eta=\\delta/(Nn)=1/(Nn^2)>0$. Fix admissible $e,w$. Set $D_i=\\alpha i-e_i$. Then $D_0=D_n=0$ and, for $0<i<n$, $di-ne_i$ is a positive integer, so $D_i\\geq1/n=\\delta$. Since $0\\leq w_i\\leq w_0$ and $w_n=0$, normalization gives $1\\leq n w_0$, hence $w_0\\geq1/n$. For an endpoint-containing subsequence $I=(a_0,\\ldots,a_h)$, write $C_e(I)$ for its cost in the statement and $C_\\alpha(I)$ for the same cost with $e_i$ replaced by $\\alpha i$. There are finitely many such subsequences and at least one, so $B(e,w)\\leq C_e(I)$ for each one.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6, corrected polygon estimate; quantitative strict refinement by the worker"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-convex-minorant-chain] to the decreasing sequence $w_0,\\ldots,w_n$. It supplies an endpoint-containing subsequence $I=(a_0,\\ldots,a_h)$ and its affine interpolant $v_i\\leq w_i$, with nondecreasing adjacent differences. Write $S=\\sum_{i=0}^n v_i$. In particular $v_0=w_0$, $v_n=0$, and $S\\leq\\sum_iw_i=1$.",
+   "uses": [
+    "lem-sfb-finite-convex-minorant-chain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6 and Figure 2: choose a lower convex contact chain"
+   }
+  },
+  {
+   "text": "The adjacent differences supplied by [lem-sfb-finite-convex-minorant-chain] are nondecreasing. For $0<i<n$, each of the first $i$ differences is at most each of the last $n-i$ differences. Summing over these pairs gives $(n-i)(v_i-v_0)\\leq i(v_n-v_i)$, hence $v_i\\leq(1-i/n)w_0$. The endpoint cases are equalities. Summing gives $S\\leq Nw_0/2$, or $w_0\\geq2S/N$.",
+   "uses": [
+    "lem-sfb-finite-convex-minorant-chain"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6: the chord inequality for the finite convex interpolant"
+   }
+  },
+  {
+   "text": "For each consecutive pair $p<q$ in $I$, affine interpolation gives $\\sum_{i=p}^{q-1}(v_i+v_{i+1})=(q-p)(w_p+w_q)$. Also $(p+q)(w_p-w_q)-(q-p)(w_p+w_q)=2p w_p-2q w_q$. Summing the latter identity over $I$ telescopes to zero, since the endpoints are $0$ and $n$ and $w_n=0$. Therefore\n$$C_\\alpha(I)=\\alpha\\sum_{i=0}^{n-1}(v_i+v_{i+1})=\\alpha(2S-w_0)\\leq\\frac{2\\alpha n}{N}S\\leq\\frac{2d}{N}.$$\nThe first inequality uses Step 3; the second uses $S\\leq1$ and $\\alpha n>0$. This derives the corrected factor-two bound directly.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6, corrected polygon estimate; quantitative strict refinement by the worker"
+   }
+  },
+  {
+   "text": "First suppose $h\\geq2$, so $I$ has an interior vertex. Each edge of $I$ then has at least one interior endpoint. Thus $D_{a_j}+D_{a_{j+1}}\\geq\\delta$ for every edge. All weight differences are nonnegative, so\n$$C_\\alpha(I)-C_e(I)=\\sum_j(D_{a_j}+D_{a_{j+1}})(w_{a_j}-w_{a_{j+1}})\\geq\\delta\\sum_j(w_{a_j}-w_{a_{j+1}})=\\delta w_0\\geq\\delta/n.$$\nCombining with Step 4 and $\\eta\\leq\\delta/n$ gives $B(e,w)\\leq2d/N-\\eta$ in this case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6, corrected polygon estimate; quantitative strict refinement by the worker"
+   }
+  },
+  {
+   "text": "It remains to treat $h=1$, so $I=(0,n)$ and $v_i=(1-i/n)w_0$. Here $Nw_0/2=S\\leq1$, so set $s=2/N-w_0\\geq0$. The endpoint-only cost is $C_e(0,n)=d w_0=2d/N-ds$. If $s\\geq\\delta/(dNn)$, this cost is at most $2d/N-\\delta/(Nn)=2d/N-\\eta$, proving the claim. Hence only $0\\leq s<\\delta/(dNn)$ remains.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6, corrected polygon estimate; quantitative strict refinement by the worker"
+   }
+  },
+  {
+   "text": "For $1\\leq k\\leq n-1$ put $A_k=d w_k-\\alpha(n-k)w_0$. Since $\\sum_{k=1}^{n-1}w_k=1-w_0$ and $\\sum_{k=1}^{n-1}(n-k)=n(n-1)/2$, direct summation gives\n$$\\sum_{k=1}^{n-1}A_k=d(1-Nw_0/2)=dNs/2.$$\nThere are $n-1>0$ summands, so some $k$ satisfies $A_k\\leq dNs/(2(n-1))$: otherwise summing the $n-1$ strict reverse inequalities contradicts the displayed identity. Fix such an interior $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6, corrected polygon estimate; quantitative strict refinement by the worker"
+   }
+  },
+  {
+   "text": "Insert this $k$ between the endpoints. Expanding its cost and using $e_k=\\alpha k-D_k$ gives\n$$C_e(0,k,n)=e_k(w_0-w_k)+(e_k+d)w_k=e_k w_0+d w_k=d w_0+A_k-D_k w_0.$$\nUsing $D_k\\geq\\delta$, $w_0\\geq1/n$, $d w_0\\leq2d/N$, and Step 7, we obtain\n$$C_e(0,k,n)\\leq\\frac{2d}{N}+\\frac{dNs}{2(n-1)}-\\frac{\\delta}{n}<\\frac{2d}{N}+\\frac{\\delta}{2n(n-1)}-\\frac{\\delta}{n}\\leq\\frac{2d}{N}-\\frac{\\delta}{2n}\\leq\\frac{2d}{N}-\\eta.$$\nHere the strict inequality uses $s<\\delta/(dNn)$; the next uses $n\\geq2$, and the last uses $N\\geq3$. Since $B(e,w)\\leq C_e(0,k,n)$, this finishes the remaining case. The single positive choice $\\eta(N,d)=1/(N(N-1)^2)$ works for every admissible integral tuple, so it is uniform as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+    "place": "Lemma 6, corrected polygon estimate; quantitative strict refinement by the worker"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-convex-minorant-chain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/morrison-git-stable-curves-arXiv-0810.2340.pdf",
+  "place": "Section 2.4, Lemma 6 and Figure 2, printed pp.11--12: follows the finite lower-envelope route but replaces the misprinted estimate with explicit summation and derives a quantitative uniform gap from integrality. Source read online; local PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A strict codegree polygon bound gives a uniform gap for the minimum weighted subsequence area on decreasing normalized weights",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Behrend.map_le_of_mem_box\", \"module\": \"Mathlib/Combinatorics/Additive/AP/Three/Behrend\", \"type\": \"∀ {n d : ℕ} {x : Fin n → ℕ}, x ∈ Behrend.box n d → (Behrend.map (2 * d - 1)) x ≤ ∑ i, (d - 1) * (2 * d - 1) ^ ↑i\", \"doc\": \"For any $n$-tuple $x$ with entries in $\\\\{0, 1, \\\\ldots, d-1\\\\}$, the value of Behrend's map with base $2d-1$ evaluated at $x$ is at most $\\\\sum_{i=0}^{n-1} (d-1) \\\\cdot (2d-1)^i$.\"}\n  {\"name\": \"Behrend.sum_sq_le_of_mem_box\", \"module\": \"Mathlib/Combinatorics/Additive/AP/Three/Behrend\", \"type\": \"∀ {n d : ℕ} {x : Fin n → ℕ}, x ∈ Behrend.box n d → ∑ i, x i ^ 2 ≤ n * (d - 1) ^ 2\", \"doc\": \"For any $n$-tuple $x = (x_0, x_1, \\\\ldots, x_{n-1})$ in Behrend's box (where each coordinate $x_i$ satisfies $0 \\\\leq x_i \\\\leq d-1$), the sum of the squares of its entries satisfies $\\\\sum_{i=0}^{n-1} x_\"}\n  {\"name\": \"SzemerediRegularity.le_bound\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Regularity/Bound\", \"type\": \"∀ (ε : ℝ) (l : ℕ), l ≤ SzemerediRegularity.bound ε l\", \"doc\": \"For any positive real number $\\\\varepsilon$ and natural number $l$, the minimum partition size $l$ satisfies $l \\\\leq \\\\text{bound}(\\\\varepsilon, l)$, where $\\\\text{bound}(\\\\varepsilon, l)$ is the tower-typ\"}\n  {\"name\": \"SzemerediRegularity.initialBound_le_bound\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Regularity/Bound\", \"type\": \"∀ (ε : ℝ) (l : ℕ), SzemerediRegularity.initialBound ε l ≤ SzemerediRegularity.bound ε l\", \"doc\": \"For any positive real number ε and natural number l, the initial bound is less than or equal to the bound, i.e., initialBound(ε, l) ≤ bound(ε, l).\"}\n  {\"name\": \"Finset.exists_lt_sum_fiber_of_sum_fiber_nonpos_of_nsmul_lt_sum\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, ∑ x ∈ s with f x = y, w x ≤ 0) → t.card • b < ∑ x ∈ s, w x → ∃ y ∈ t, b < ∑ x \", \"doc\": \"Let $ s $ be a finite set, $ f $ a function on $ s $, $ t $ a finite set, and $ w : s → M $ a weight function into an additive commutative monoid $ M $. Suppose that for all $ y ∉ t $, the sum of weig\"}\n  {\"name\": \"SzemerediRegularity.le_initialBound\", \"module\": \"Mathlib/Combinatorics/SimpleGraph/Regularity/Bound\", \"type\": \"∀ (ε : ℝ) (l : ℕ), l ≤ SzemerediRegularity.initialBound ε l\", \"doc\": \"For any positive real number $\\\\varepsilon$ and natural number $l$, the value of $l$ is less than or equal to the initial bound defined as $\\\\max\\\\left(7, \\\\max\\\\left(l, \\\\left\\\\lfloor \\\\frac{\\\\log(100 / \\\\vare\"}\n  {\"name\": \"Finset.exists_sum_fiber_lt_of_sum_fiber_nonneg_of_sum_lt_nsmul\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, 0 ≤ ∑ x ∈ s with f x = y, w x) → ∑ x ∈ s, w x < t.card • b → ∃ y ∈ t, ∑ x ∈ s \", \"doc\": \"If the total sum of weights over a finite set $ s $ is less than $ |t| \\\\cdot b $, and all elements outside $ t $ have non-negative sums, then there exists an element $ y \\\\in t $ such that the sum of w\"}\n  {\"name\": \"Finset.exists_le_sum_fiber_of_sum_fiber_nonpos_of_nsmul_le_sum\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, ∑ x ∈ s with f x = y, w x ≤ 0) →\\n    t.Nonempty → t.card • b ≤ ∑ x ∈ s, w x → \", \"doc\": \"Let $s$ be a finite set, and let $f$ be a function defined on $s$. Let $t$ be a non-empty finite subset of the codomain of $f$. Let $M$ be a linearly ordered cancellative additive commutative monoid, \"}",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole inequalities, regularity bounds and Jensen inequalities do not state this finite subsequence polygon optimization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gieseker numerical lemma minimum over subsequences of sum (e_i plus e_j) times (w_i minus w_j) is strictly less than two d over N",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Finset.exists_lt_sum_fiber_of_sum_fiber_nonpos_of_nsmul_lt_sum\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, ∑ x ∈ s with f x = y, w x ≤ 0) → t.card • b < ∑ x ∈ s, w x → ∃ y ∈ t, b < ∑ x \", \"doc\": \"Let $ s $ be a finite set, $ f $ a function on $ s $, $ t $ a finite set, and $ w : s → M $ a weight function into an additive commutative monoid $ M $. Suppose that for all $ y ∉ t $, the sum of weig\"}\n  {\"name\": \"Finset.exists_sum_fiber_lt_of_sum_fiber_nonneg_of_sum_lt_nsmul\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, 0 ≤ ∑ x ∈ s with f x = y, w x) → ∑ x ∈ s, w x < t.card • b → ∃ y ∈ t, ∑ x ∈ s \", \"doc\": \"If the total sum of weights over a finite set $ s $ is less than $ |t| \\\\cdot b $, and all elements outside $ t $ have non-negative sums, then there exists an element $ y \\\\in t $ such that the sum of w\"}\n  {\"name\": \"Fintype.exists_lt_sum_fiber_of_nsmul_lt_sum\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] [inst_1 : Fintype α] [inst_2 : Fintype β] (f : α → β)\\n  {w : α → M} {b : M} [inst_3 : AddCommMonoid M] [inst_4 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  Fintype.card β • b < ∑ x, w x → ∃ y, b < ∑ x with f x = y, w x\", \"doc\": \"Let $\\\\beta$ be a finite type, and let $f : \\\\alpha \\\\to \\\\beta$ be a function. Suppose $w : \\\\alpha \\\\to M$ is a function into an additive commutative monoid $M$. If the total sum of $w(x)$ over all $x \\\\in\"}\n  {\"name\": \"Finset.exists_le_sum_fiber_of_sum_fiber_nonpos_of_nsmul_le_sum\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, ∑ x ∈ s with f x = y, w x ≤ 0) →\\n    t.Nonempty → t.card • b ≤ ∑ x ∈ s, w x → \", \"doc\": \"Let $s$ be a finite set, and let $f$ be a function defined on $s$. Let $t$ be a non-empty finite subset of the codomain of $f$. Let $M$ be a linearly ordered cancellative additive commutative monoid, \"}\n  {\"name\": \"Finset.exists_sum_fiber_le_of_sum_fiber_nonneg_of_sum_le_nsmul\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] {s : Finset α} {t : Finset β} {f : α → β} {w : α → M}\\n  {b : M} [inst_1 : AddCommMonoid M] [inst_2 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  (∀ y ∉ t, 0 ≤ ∑ x ∈ s with f x = y, w x) →\\n    t.Nonempty → ∑ x ∈ s, w x ≤ t.card • b → \", \"doc\": \"Let $ s $ be a finite set, $ f $ a function from $ s $ to some type, and $ w $ a weight function assigning non-negative values to elements of $ s $. Suppose that for every $ y $ not in a non-empty fin\"}\n  {\"name\": \"Fintype.exists_sum_fiber_lt_of_sum_lt_nsmul\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] [inst_1 : Fintype α] [inst_2 : Fintype β] (f : α → β)\\n  {w : α → M} {b : M} [inst_3 : AddCommMonoid M] [inst_4 : LinearOrder M] [IsOrderedCancelAddMonoid M],\\n  ∑ x, w x < Fintype.card β • b → ∃ y, ∑ x with f x = y, w x < b\", \"doc\": \"Let $ \\\\alpha $ and $ \\\\beta $ be finite types, $ f : \\\\alpha \\\\to \\\\beta $ a function, and $ w : \\\\alpha \\\\to M $ a weight function taking values in an additive commutative monoid $ M $. If the total sum $ \"}\n  {\"name\": \"Fintype.exists_le_sum_fiber_of_nsmul_le_sum\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] [inst_1 : Fintype α] [inst_2 : Fintype β] (f : α → β)\\n  {w : α → M} {b : M} [inst_3 : AddCommMonoid M] [inst_4 : LinearOrder M] [IsOrderedCancelAddMonoid M] [Nonempty β],\\n  Fintype.card β • b ≤ ∑ x, w x → ∃ y, b ≤ ∑ x with f x = y, w x\", \"doc\": \"Let $\\\\beta$ be a non-empty finite set, and let $b$ be an element of an additive commutative monoid. If the total sum of weights $\\\\sum_x w(x)$ is at least $\\\\#\\\\beta \\\\cdot b$, then there exists some $y \\\\\"}\n  {\"name\": \"Fintype.exists_sum_fiber_le_of_sum_le_nsmul\", \"module\": \"Mathlib/Combinatorics/Pigeonhole\", \"type\": \"∀ {α : Type u} {β : Type v} {M : Type w} [inst : DecidableEq β] [inst_1 : Fintype α] [inst_2 : Fintype β] (f : α → β)\\n  {w : α → M} {b : M} [inst_3 : AddCommMonoid M] [inst_4 : LinearOrder M] [IsOrderedCancelAddMonoid M] [Nonempty β],\\n  ∑ x, w x ≤ Fintype.card β • b → ∃ y, ∑ x with f x = y, w x ≤ b\", \"doc\": \"Let $\\\\beta$ be a finite non-empty type. If the total sum of weights $w(x)$ over all elements is at most $\\\\#\\\\beta \\\\cdot b$, then there exists an element $y \\\\in \\\\beta$ such that the sum of weights for a\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole inequalities, regularity bounds and Jensen inequalities do not state this finite subsequence polygon optimization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"convex\", \"polygon\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole inequalities, regularity bounds and Jensen inequalities do not state this finite subsequence polygon optimization."
+  },
+  {
+   "tool": "grep",
+   "query": "codegree|Gieseker|convexEnvelope|convex_envelope|subsequence.*weight",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole inequalities, regularity bounds and Jensen inequalities do not state this finite subsequence polygon optimization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict polygon inequalities imply uniform normalized weighted flag numerical stability gap",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"norm_combo_lt_of_ne\", \"module\": \"Mathlib.Analysis.Convex.StrictConvexSpace\", \"type\": \"(hx : ‖x‖ ≤ r) (hy : ‖y‖ ≤ r) (hne : x ≠ y) (ha : 0 < a) (hb : 0 < b) (hab : a + b = 1) : ‖a • x + b • y‖ < r\", \"doc\": \"In a strictly convex normed vector space over $\\\\mathbb{R}$, if $\\\\|x\\\\| \\\\leq r$, $\\\\|y\\\\| \\\\leq r$, $x \\\\neq y$, and $a, b > 0$ satisfy $a + b = 1$, then $\\\\|a x + b y\\\\| < r$.\"}\n  {\"name\": \"Real.geom_mean_lt_arith_mean_weighted_iff_of_pos\", \"module\": \"Mathlib.Analysis.MeanInequalities\", \"type\": \"(w z : ι → ℝ) (hw : ∀ i ∈ s, 0 < w i) (hw' : ∑ i ∈ s, w i = 1) (hz : ∀ i ∈ s, 0 ≤ z i) :\\n  ∏ i ∈ s, z i ^ w i < ∑ i ∈ s, w i * z i ↔ ∃ j ∈ s, ∃ k ∈ s, z j ≠ z k\", \"doc\": \"For any finite set $s$, positive weights $w_i$ summing to 1, and non-negative values $z_i$, the weighted geometric mean $\\\\prod_{i \\\\in s} z_i^{w_i}$ is strictly less than the weighted arithmetic mean $\"}\n  {\"name\": \"StrictConvexOn.map_sum_lt\", \"module\": \"Mathlib.Analysis.Convex.Jensen\", \"type\": \"(hf : StrictConvexOn 𝕜 s f) (h₀ : ∀ i ∈ t, 0 < w i) (h₁ : ∑ i ∈ t, w i = 1) (hmem : ∀ i ∈ t, p i ∈ s)\\n  (hp : ∃ j ∈ t, ∃ k ∈ t, p j ≠ p k) : f (∑ i ∈ t, w i • p i) < ∑ i ∈ t, w i • f (p i)\", \"doc\": \"Let $ f $ be a strictly convex function on a set $ s $ over a semiring $ \\\\mathbb{K} $. For any finite set $ t $ with points $ p_i \\\\in s $, positive weights $ w_i > 0 $ satisfying $ \\\\sum_{i \\\\in t} w_i \"}\n  {\"name\": \"Mathlib.Ineq.WithStrictness.le\", \"module\": \"Mathlib.Tactic.LinearCombination.Lemmas\", \"type\": \"Mathlib.Ineq.WithStrictness\", \"doc\": \"This constructor creates an instance of an inequality with strictness parameter indicating a non-strict inequality (≤).\"}\n  {\"name\": \"StrictConcaveOn.lt_map_sum\", \"module\": \"Mathlib.Analysis.Convex.Jensen\", \"type\": \"(hf : StrictConcaveOn 𝕜 s f) (h₀ : ∀ i ∈ t, 0 < w i) (h₁ : ∑ i ∈ t, w i = 1) (hmem : ∀ i ∈ t, p i ∈ s)\\n  (hp : ∃ j ∈ t, ∃ k ∈ t, p j ≠ p k) : ∑ i ∈ t, w i • f (p i) < f (∑ i ∈ t, w i • p i)\", \"doc\": \"For a strictly concave function $ f $ on a convex set $ s $ over a semiring $ \\\\mathbb{K} $, given a finite set $ t $, positive weights $ w_i $ summing to 1, and points $ p_i \\\\in s $ with at least two \"}\n  {\"name\": \"dist_affineCombination_lt_of_strictConvexSpace\", \"module\": \"Mathlib.Analysis.Convex.StrictCombination\", \"type\": \"{t : Finset ι} {w : ι → ℝ} {p₀ : P} {r : ℝ} {p : ι → P} (h0 : ∀ i ∈ t, 0 ≤ w i) (h1 : ∑ i ∈ t, w i = 1) {i j : ι}\\n  (hi : i ∈ t) (hj : j ∈ t) (hij : p i ≠ p j) (hi0 : w i ≠ 0) (hj0 : w j ≠ 0) (hp : ∀ i ∈ t, dist (p i) p₀ ≤ r) :\\n  dist (t.affineCombination ℝ p w) p₀ < r\", \"doc\": \"In a strictly convex normed vector space over $\\\\mathbb{R}$, given a finite set $t$ of indices, non-negative weights $w_i$ summing to 1, a base point $p_0 \\\\in P$, and points $p_i \\\\in P$ with $\\\\mathrm{d\"}\n  {\"name\": \"Real.geom_mean_le_arith_mean4_weighted\", \"module\": \"Mathlib.Analysis.MeanInequalities\", \"type\": \"{w₁ w₂ w₃ w₄ p₁ p₂ p₃ p₄ : ℝ} (hw₁ : 0 ≤ w₁) (hw₂ : 0 ≤ w₂) (hw₃ : 0 ≤ w₃) (hw₄ : 0 ≤ w₄) (hp₁ : 0 ≤ p₁) (hp₂ : 0 ≤ p₂)\\n  (hp₃ : 0 ≤ p₃) (hp₄ : 0 ≤ p₄) (hw : w₁ + w₂ + w₃ + w₄ = 1) :\\n  p₁ ^ w₁ * p₂ ^ w₂ * p₃ ^ w₃ * p₄ ^ w₄ ≤ w₁ * p₁ + w₂ * p₂ + w₃ * p₃ + w₄ * p₄\", \"doc\": \"For non-negative real numbers $ p_1, p_2, p_3, p_4 $ and non-negative weights $ w_1, w_2, w_3, w_4 $ summing to 1, the weighted geometric mean $ p_1^{w_1} p_2^{w_2} p_3^{w_3} p_4^{w_4} $ is less than \"}\n  {\"name\": \"dist_lt_dist_add_dist_iff\", \"module\": \"Mathlib.Analysis.Convex.StrictConvexBetween\", \"type\": \"{a b c : P} : dist a c < dist a b + dist b c ↔ ¬Wbtw ℝ a b c\", \"doc\": \"For any three points $a, b, c$ in a metric space $P$, the distance $d(a, c)$ is strictly less than $d(a, b) + d(b, c)$ if and only if $b$ does not lie on the affine segment between $a$ and $c$.\"}",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole inequalities, regularity bounds and Jensen inequalities do not state this finite subsequence polygon optimization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The minimum over subsequences of sum of codegree endpoint sums times decreasing weight differences is bounded strictly below two d over N for integral codegrees strictly below the endpoint chord",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files (logged first eight): Finset.exists_lt_sum_fiber_of_sum_fiber_nonpos_of_nsmul_lt_sum, Finset.exists_sum_fiber_lt_of_sum_fiber_nonneg_of_sum_lt_nsmul, Finset.exists_le_sum_fiber_of_sum_fiber_nonpos_of_nsmul_le_sum, Fintype.exists_lt_sum_fiber_of_nsmul_lt_sum, Finset.exists_sum_fiber_le_of_sum_fiber_nonneg_of_sum_le_nsmul, Fintype.exists_le_sum_fiber_of_nsmul_le_sum, Fintype.exists_sum_fiber_lt_of_sum_lt_nsmul, SzemerediRegularity.add_div_le_sum_sq_div_card",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole and regularity estimates do not state the codegree polygon bound; grep and Loogle found no matching declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"convex\", \"polygon\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole and regularity estimates do not state the codegree polygon bound; grep and Loogle found no matching declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "codegree|Gieseker|convexEnvelope|convex_envelope|subsequence.*weight",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "No match: pigeonhole and regularity estimates do not state the codegree polygon bound; grep and Loogle found no matching declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict integral interior codegree inequalities give a uniform positive gap for weighted polygon subsequence costs",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+  "date": "2026-10-22",
+  "group": "Q99"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.4, Theorem 5, printed pp.10--11: uniform high-degree smooth-curve stability. Local PDF WANTED; read online. Supporting input: Section 2.4, Lemma 6 and Figure 2, printed pp.11--12: corrected factor-two polygon estimate and strict interior-codegree version, written by the worker; the printed positive gap at the last endpoint is not used. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340.",
+   "via": [
+    "lem-sfb-smooth-curve-high-degree-hilbert-stability",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-strict-codegree-polygon-gap",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. One new statement-only node supplies the finite convex contact chain. The proof writes out the trapezoid/telescoping identity and all strict estimates, including the endpoint-only chain case, and gives the explicit uniform choice eta=1/(N(N-1)^2). Searches are genuine and the rate-limited LeanSearch query is recorded as unavailable.",
+  "blueprint": "Realizes the corrected strict polygon estimate in the smooth high-degree Hilbert stability prerequisite recorded in blueprint.from.place. Retains the inherited null nearest blueprint ancestor and full via chain; tools/blueprint_refs.py ancestor confirms null. No unit or chapter route change."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-7b3b1ebb0",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-7b3b1ebb0 (reviewer sub-agent of L); spot-checked: I read the item's 8 steps and the new node lem-sfb-finite-convex-minorant-chain in full. The item statement is unchanged; the diff only adds the proof. It matches its citer, lem-sfb-smooth-curve-high-degree-hilbert-stability step 4 (N≥4, integral e with a strict interior chord bound). Recomputed step by step: S1 integrality gives D_i≥1/n and w_0≥1/n. S3 summing pairs of nondecreasing differences gives v_i≤(1−i/n)w_0 and S≤Nw_0/2. S4 the trapezoid sum and telescoping identity give C_α=α(2S−w_0)≤2d/N. S5 with h≥2 every edge has an interior endpoint, so the gap is ≥δw_0. S6–S8 with h=1, ΣA_k=dNs/2; averaging and the identity C_e(0,k,n)=dw_0+A_k−D_kw_0 give a gap ≥δ/(2n)≥η=1/(Nn²), using n≥2 and N≥2. The new node is the lower convex hull with contact vertices: true (greedy minimal-slope construction), not a restatement of the item, and no duplicate found by rg -L over dag/nodes for convex minorant, lower convex, hull, envelope or Newton polygon. Small cases: by hand N=3, d=1, e=(0,0,1) gives B≤1/2≤7/12. An exact-rational brute-force run over n=2..5, d=1..6 and random weights found the bound held everywhere. N=2 and nonstrict hypotheses fail, which justifies the hypotheses. The Morrison PDF is not local (WANTED), so I could not check the cited place; the proof is self-contained and labelled as the worker's. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictCodegreePolygonGap",
+  "declaration": "Gieseker.exists_uniform_strict_codegree_polygon_gap",
+  "declarations": [
+   "Gieseker.exists_uniform_strict_codegree_polygon_gap"
+  ],
+  "file": "lean/Sheaf/Paper/StrictCodegreePolygonGap.lean",
+  "statement": "theorem exists_uniform_strict_codegree_polygon_gap (N : ℕ) (d : ℤ) (hN : 3 ≤ N) (hd : 1 ≤ d) : ∃ η : ℝ, 0 < η ∧ ∀ (e : Fin N → ℤ), e ⟨0, by omega⟩ = 0 → e ⟨N - 1, by omega⟩ = d → (∀ i : Fin N, 0 ≤ e i ∧ e i ≤ d) → (∀ i : Fin N, 0 < i.val → i.val < N - 1 → (e i : ℝ) < (d : ℝ) * (i.val : ℝ) / ((N : ℝ) - 1)) → ∀ (w : Fin N → ℝ), Antitone w → w ⟨N - 1, by omega⟩ = 0 → (∑ i : Fin N, w i) = 1 → codegreePolygonMinimum e w ≤ 2 * (d : ℝ) / (N : ℝ) - η",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Maintenance extraction for Q154 return H2: codegreePolygonCost and codegreePolygonMinimum are now owned by def-sfb-codegree-polygon and publicly imported from Sheaf.Paper.CodegreePolygon. Both definition bodies and the complete theorem with its proof docstring are unchanged. No mathematical statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe04453b9",
+  "group": "NM",
+  "result": "pass",
+  "note": "Only the lean record differs from the live node, and no other group has landed this item. Module Sheaf.Paper.StrictCodegreePolygonGap matches the node clause by clause: N≥3, d≥1 (ℤ), η>0 chosen before e and w, e:Fin N→ℤ with both endpoint values, the box bound and the strict real chord bound at interior indices only, w Antitone with last weight 0 and sum 1, conclusion min ≤ 2d/N−η. Helper defs codegreePolygonCost (sort + zip with tail = the consecutive edges) and codegreePolygonMinimum (sInf of a finite nonempty family of endpoint-containing subsets = B(e,w)) are real data, listed in lean.declarations, with docstrings. lean.statement appears verbatim in the module; single sorry with the 8-step proof docstring; Mathlib imports only; no universes. Proof re-checked with η=1/(N(N−1)²); edge cases N=3,d=1 hold and N=2 fails, so N≥3 is needed. Proof dependency without a Lean record is fine at stage 2. No recompile since no file changed. Advisory: nonstandard copyright author line. Maintenance 2026-10-25: helper definitions extracted unchanged to def-sfb-codegree-polygon; theorem and proof docstring unchanged; the new definition node is now a statement dependency."
+ }
+}

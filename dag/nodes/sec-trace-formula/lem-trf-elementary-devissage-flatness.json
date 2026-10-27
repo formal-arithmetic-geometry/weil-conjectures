@@ -29,107 +29,48 @@
  ],
  "proof": [
   {
-   "text": "Put $H=g^*\\mathcal F\\cong i_*\\mathcal G$. It is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Apply [lem-trf-etale-local-ring-flatness] to $e:S'\\to S$ and the $\\mathcal O_{S',f'(u)}$-module $H_u$, for every $u\\in X'$. This says exactly that $H_u$ is flat over $\\mathcal O_{S,ef'(u)}$ if and only if it is flat over $\\mathcal O_{S',f'(u)}$. Therefore the stalk criterion in [def-pc-scheme-module-flat-over] equates flatness of $H$ over $S$ and over $S'$ on any fixed open of $X'$. This base comparison is the etale local-ring result, not a consequence of faithful flatness alone.",
+   "text": "Apply [lem-trf-etale-closed-support-flatness] with $(U,T,Z,a)=(X',S',Z',f')$ and the given $f,g,e,i,\\mathcal F,\\mathcal G$. Both $g$ and $e$ are etale and $i$ is closed by hypothesis. The square is $fg=ef'$. Inverting the given $\\mathcal O_{X'}$-linear isomorphism $i_*\\mathcal G\\cong g^*\\mathcal F$ supplies the helper's specified isomorphism $H=g^*\\mathcal F\\cong i_*\\mathcal G$. The devissage data give $f'i=h\\pi$, so the helper's structure map $ai$ on $\\mathcal G$ is exactly $h\\pi$. Its marked points are $z',x',x,s'$, since $i(z')=x'$, $g(x')=x$, and $f'(x')=h(\\pi(z'))=s'$. Finite-type quasi-coherence supplies the required quasi-coherence of both modules. The helper's neighbourhood equivalence therefore identifies (1) and (2), through flatness of $g^*\\mathcal F$ over $S'$ near $x'$.",
    "uses": [
-    "lem-trf-etale-local-ring-flatness",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "def-pc-scheme-module-flat-over"
+    "lem-trf-etale-closed-support-flatness"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057U, use of Tags 05B9 and 05BA; preliminary base comparison."
+    "place": "Tag 057U, lemma-devissage-flat."
    }
   },
   {
-   "text": "Let (4) mean that $H$ is flat over $S$ on a neighbourhood of $x'$. Since $g$ is etale, it is flat by [def-weil-etale-morphism]. For each $u\\in X'$, [lem-trf-relative-flatness-source-cover] gives that $\\mathcal F$ is flat over $S$ at $g(u)$ exactly when $H$ is flat over $S$ at $u$; thus this also proves the marked-stalk comparison over the original base. If (1) holds on $W\\ni x$, its inverse image is a neighbourhood of $x'$ and the pointwise equivalence gives (4). Conversely, if (4) holds on $W'\\ni x'$, [lem-weil-pbc-etale-morphism-open-map] says $g(W')$ is an open neighbourhood of $x$. Every point there has a preimage in $W'$, so the same equivalence gives (1) on $g(W')$. Step 1 allows (4) to be expressed using $S'$ instead.",
+   "text": "Apply [lem-trf-finite-pushforward-flatness-singleton] with $(Y,Z)=(Y',Z')$, finite $\\pi$, quasi-coherent $\\mathcal G$, and marked points $z',y'=\\pi(z')$. Since $S'$ is affine, choose a presentation $q:S'\\xrightarrow{\\sim}\\operatorname{Spec}A$. Use $qh$ and $qh\\pi$ as the helper's structure maps. At every point $v$ of $Y'$ or $Z'$, the isomorphism on base local rings induced by $q$ identifies the two scalar actions on the same module stalk. Relabelling scalars along a ring isomorphism preserves tensor products and injectivity, hence flatness; the underlying open neighbourhoods are unchanged. Thus the helper's relative-flatness assertions over $\\operatorname{Spec}A$ give the assertions over $S'$. Its singleton-fibre hypothesis is precisely the assumed $\\pi^{-1}(\\{y'\\})=\\{z'\\}$. Its neighbourhood equivalence therefore identifies (2) and (3); with Step 1 this proves all three neighbourhood conditions equivalent.",
    "uses": [
-    "def-weil-etale-morphism",
-    "lem-trf-relative-flatness-source-cover",
-    "lem-weil-pbc-etale-morphism-open-map"
+    "lem-trf-finite-pushforward-flatness-singleton"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057U, (1) iff (4), using Morphisms Tags 02JZ and 02GW."
+    "place": "Tag 057U, lemma-devissage-flat."
    }
   },
   {
-   "text": "For every $z\\in Z'$, [lem-weil-pbc-closed-pushforward-stalks] identifies $H_{i(z)}$ with $\\mathcal G_z$, linearly over $\\mathcal O_{X',i(z)}$; restricting scalars makes this an $\\mathcal O_{S',h\\pi(z)}$-linear isomorphism because $i$ is over $S'$. Outside $i(Z')$ the stalk of $H$ is zero by the same node, hence flat: tensoring with zero sends every injection to the injection $0\\to0$. Thus relative flatness of $H$ on an open $V$ is equivalent to that of $\\mathcal G$ on $i^{-1}V$, using [def-pc-scheme-module-flat-over]. Given an open $U\\subseteq Z'$ containing $z'$, the closed embedding in [def-weil-closed-immersion] gives an open $V\\subseteq X'$ with $i^{-1}V=U$ and $x'\\in V$ (write $U=Z'\\cap V$ in the subspace topology). This proves (4) iff (2), and also identifies the two marked stalks over $S'$.",
+   "text": "For the separate stalkwise assertion, [lem-trf-etale-closed-support-flatness] with Step 1's substitution identifies (a) with (b). Its scalar actions are through $f$ and $f'i=h\\pi$, and its base point is $f'(x')=s'$. The canonical germ isomorphism of [lem-trf-finite-pushforward-flatness-singleton] is linear over $\\mathcal O_{S',h(y')}=\\mathcal O_{S',s'}$; its stalkwise equivalence identifies (b) with (c). Transitivity gives the required stalkwise equivalence. These applications use neither local finite presentation of $f$ nor any inference from flatness at one stalk to flatness on a neighbourhood.",
    "uses": [
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "def-pc-scheme-module-flat-over",
-    "def-weil-closed-immersion"
+    "lem-trf-etale-closed-support-flatness",
+    "lem-trf-finite-pushforward-flatness-singleton"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057U, closed-immersion neighbourhood and stalk comparison; topology written out."
-   }
-  },
-  {
-   "text": "For use in the affine comparison, specialize [lem-pc-affine-cover-module-tensor-flat-criterion] with $T=A$, $q=1_A$, $Y=\\operatorname{Spec}A$, and, for an affine $W$, the one-member affine cover $U_0=W$. The identity base-change pullback is the original module by the pullback universal property [def-pc-module-pullback]; multiplication identifies $A\\otimes_A A$ with $A$ and $A\\otimes_A N$ with $N$ (inverse $n\\mapsto1\\otimes n$). Consequently, for a quasi-coherent module $M$ on an affine scheme $W$ over $S'=\\operatorname{Spec}A$, flatness over $S'$ is equivalent to $A$-flatness of $\\Gamma(W,M)$. This is a direct specialization of the cited affine-cover criterion, with no finiteness or Noetherian assumption.",
-   "uses": [
-    "lem-pc-affine-cover-module-tensor-flat-criterion",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057U, affine global-sections flatness criterion."
-   }
-  },
-  {
-   "text": "Since $\\pi$ is finite, it is affine by [def-weil-finite-integral-morphism], so inverse images of affine opens are affine by [pqf-def-affine-morphism]. Also $\\pi_*\\mathcal G$ is quasi-coherent by clause (1) of [lem-weil-pbc-affine-pushforward-base-change]. Suppose (2) holds on $U\\ni z'$. By [lem-trf-finite-singleton-fibre-localization] choose $V\\ni y'$ with $\\pi^{-1}V\\subseteq U$, then shrink $V$ to an affine neighbourhood. Thus $\\mathcal G$ is flat over $S'$ on the affine $\\pi^{-1}V$. By Step 4 its sections are flat over $A=\\Gamma(S',\\mathcal O_{S'})$. By the definition of pushforward, these are precisely $\\Gamma(V,\\pi_*\\mathcal G)$ with the same $A$-action. Step 4 gives (3) on $V$. Conversely, given (3), choose an affine $V\\ni y'$ inside that flat neighbourhood. The same section equality and Step 4 imply that $\\mathcal G$ is flat on $\\pi^{-1}V\\ni z'$, proving (2).",
-   "uses": [
-    "def-weil-finite-integral-morphism",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-pushforward-base-change",
-    "lem-trf-finite-singleton-fibre-localization",
-    "def-pc-module-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057U, (2) iff (3), with Tag 05B8(1) and the omitted affine-neighbourhood details."
-   }
-  },
-  {
-   "text": "For the marked stalks, [lem-trf-relative-flatness-source-cover] applied to $g$ at $x'$ gives $\\mathcal F_x$ flat over $\\mathcal O_{S,s}$ iff $H_{x'}$ is flat over that same ring; flatness of $g$ follows from [def-weil-etale-morphism]. Apply [lem-trf-etale-local-ring-flatness] to the $\\mathcal O_{S',s'}$-module $H_{x'}$ to replace its base by $\\mathcal O_{S',s'}$. By [lem-weil-pbc-closed-pushforward-stalks], $H_{x'}\\cong\\mathcal G_{z'}$ is linear after restriction to this base ring, as checked in Step 3. Finally, [lem-trf-finite-singleton-fibre-localization] gives $(\\pi_*\\mathcal G)_{y'}\\cong\\mathcal G_{z'}$ linearly over $\\mathcal O_{Y',y'}$ and hence over $\\mathcal O_{S',s'}$ since $h(y')=s'$. Flatness is invariant under these module isomorphisms, so (a), (b), and (c) are equivalent. This uses the cited canonical stalk comparison; it makes no unsupported identification of two localized algebras.",
-   "uses": [
-    "lem-trf-relative-flatness-source-cover",
-    "def-weil-etale-morphism",
-    "lem-trf-etale-local-ring-flatness",
-    "lem-weil-pbc-closed-pushforward-stalks",
-    "lem-trf-finite-singleton-fibre-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057U, marked-stalk argument, using Tags 02JZ, 05BA and 05B8(4)."
+    "place": "Tag 057U, lemma-devissage-flat."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-pc-scheme-module-flat-over",
-  "def-weil-closed-immersion",
-  "def-weil-etale-morphism",
-  "def-weil-finite-integral-morphism",
-  "lem-pc-affine-cover-module-tensor-flat-criterion",
-  "lem-trf-etale-local-ring-flatness",
-  "lem-trf-finite-singleton-fibre-localization",
-  "lem-trf-relative-flatness-source-cover",
-  "lem-weil-pbc-affine-pushforward-base-change",
-  "lem-weil-pbc-closed-pushforward-stalks",
-  "lem-weil-pbc-etale-morphism-open-map",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "pqf-def-affine-morphism"
+  "lem-trf-etale-closed-support-flatness",
+  "lem-trf-finite-pushforward-flatness-singleton"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 057U, lemma-devissage-flat; with Tags 05BA and 05B8 explicit, the closed-embedding topology expanded, and the affine criterion specialized from the existing DAG."
+  "place": "Tag 057U, lemma-devissage-flat."
  },
  "mathlib_searches": [
   {
@@ -219,37 +160,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-elementary-devissage-flatness",
   "worker": "stage1",
-  "summary": "Repair of C1/C2 return: cite the separate etale local-ring module flatness equivalence (new 05BA node) for the base comparison and the existing source-cover node for source descent. Reuse the existing closed-pushforward stalk node with explicit restriction of scalars. Add the general finite singleton-fibre neighbourhood/stalk lemma (05B8). Expand both neighbourhood directions using the existing affine-cover flatness criterion. All substantive steps are non-elementary. Statement and its hypotheses unchanged.",
-  "blueprint": "Retains the item ancestry and realizes the Tag 057U flatness transfer in the supporting 05I7/05I6 elementary-devissage branch of lem-trf-local-term-locality.",
-  "tool_uses": [
-   {
-    "node": "def-pc-module-pullback",
-    "why": "Generic definition or structural fact used at the stated interface; no node of the unit supplies it. This is a generic tool, not a replacement of the unit route."
-   },
-   {
-    "node": "def-pc-scheme-module-flat-over",
-    "why": "Generic definition and stalk characterization of relative flatness. This is a generic tool, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-pc-affine-cover-module-tensor-flat-criterion",
-    "why": "Specialized to identity base change and a one-member affine cover to detect relative flatness on affine sections. This is a generic tool, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-affine-pushforward-base-change",
-    "why": "Only clause (1), quasi-coherence of affine pushforward, used in the affine flatness comparison. This is a generic tool, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-closed-pushforward-stalks",
-    "why": "Closed-embedding pushforward stalk comparison including linearity and zero stalks off the image. This is a generic tool, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
-    "why": "Pullback is quasi-coherent, needed for the stalk criterion and source-flatness node. This is a generic tool, not a replacement of the unit route."
-   }
-  ]
+  "summary": "Repair of the live-DAG promotion return: rebuilt the sandbox item from the current read-only live JSON, overlaying only the four split-owned fields. Re-read current dependencies and Stacks 057U, 05BA and 05B8. Step 2 now chooses an affine presentation from the affine hypothesis, spells out the base local-ring isomorphisms and the tensor-injectivity reason flatness is unchanged under this relabelling. Citation quotes now isolate each neighbourhood or stalk clause actually applied. The two independent statement-only tasks, complete retained arguments and eight logged searches are preserved. The statement, statement dependencies and maintainer-owned fields are copied unchanged from the live item; the assembly stays below 3000 characters.",
+  "blueprint": "Same supporting Tag 057U branch of lem-trf-local-term-locality, through elementary devissage; the two tasks divide its neighbourhood and stalk comparisons without changing the unit route.",
+  "tool_uses": []
  },
  "tool_uses": [
   "def-pc-module-pullback",
@@ -260,12 +176,12 @@
   "lem-weil-pbc-module-pullback-quasi-coherent"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q107-55ff486da",
-  "group": "Q107",
+  "reviewer": "NT-cc-Q65-39e3b203d",
+  "group": "Q65",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q107-55ff486da (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Stacks Tags 057U, 05BA, and 05B8, including hypotheses, scalar actions, neighbourhood and stalk arguments, edge cases, Mathlib searches, duplicates, route, and SGA/route-pivot restrictions. All six steps are explicit and under 2000 characters; no mathematical or structural faults found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-39e3b203d (reviewer sub-agent of L); spot-checked: This is the sixth delivery of the 2026-10-21 re-split. Heads e5a68c9d, 99b688d4, 33015502, b4ec4c97 and 81646dd5 were all PASSed, and their landings were refused only because the split completed in a side DAG. The live DAG still has the old six-step item and neither helper id exists there, so this delivery is not superseded. Against live, only proof, proof_deps, proof_origin and split_report differ; the statement, stmt_deps, blueprint and lean fields are unchanged. Against 81646dd5, both new nodes are byte-identical and the only change in the item is the Step 2 text. It now picks a presentation q:S'≅Spec A, uses qh and qhπ as the structure maps, and transports flatness along the induced local-ring isomorphisms. That is correct. I reread Stacks flat.tex 057U, both triples and both proof paragraphs. Node A (etale-closed-support) is true in its stated generality. Because g is flat, F_x→H_u is a faithfully flat local extension. 05BA changes the base for arbitrary modules. g is open, and preimages give the other direction. i_*G has stalk G_z on i(Z), linear through ai, and stalk 0 elsewhere. No cartesian square is needed. Node B (finite-pushforward-singleton) is true. On affine pieces, flatness over Spec A is equivalent to A-flatness of the sections, and Γ(π^{-1}V,G)=Γ(V,P). Since π is closed, V0=Y∖π(Z∖U) gives the shrinking. With a singleton fibre, C_{p_y} is local and equal to C_{q_z}, so P_y=G_z over O_{S,h(y)}. A two-point fibre shows the singleton hypothesis is needed. Assembly (2317 characters): Step 1 applies A with (U,T,Z,a)=(X',S',Z',f'); the devissage data give f'i=hπ and t=s', so (1)⇔(2). Step 2 applies B over S'≅Spec A, so (2)⇔(3). Step 3 gives (a)⇔(b)⇔(c). The old Steps 1–3 and the first stalk comparisons of Step 6 go to A; the old Steps 4–5 and the finite germ comparison go to B. Both nodes are of comparable size and independent, and neither restates the item. Candidates checked and found to be ingredients, not duplicates: finite-singleton-fibre-localization, etale-local-ring-flatness, relative-flatness-source-cover, closed-pushforward-stalks and the affine chart/cover criteria. No SGA source is cited, there are no tool_uses and no fixes. Maintainer: please promote this split into the live DAG."
  },
  "lean": {
   "module": "Sheaf.TraceFormula.ElementaryDevissageFlatness",
@@ -285,5 +201,16 @@
   "result": "pass",
   "note": "Every hypothesis and conclusion clause matches node and Stacks 057U/057S, with no extra assumptions. Dependency declarations read; edge cases covered; no duplicate found. No definitions, proof is sorry, docstrings carry source, blueprint and six proof steps; lean.statement verbatim; node differs only in lean. nt_compile on the snapshot: clean, 4.9 s, axioms propext/sorryAx/choice/Quot.sound. Second reading is a disclosed self-check, as in earlier reviews; not blocking."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

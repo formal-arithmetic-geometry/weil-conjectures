@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-space-affine-global-trace-adjunction",
+ "kind": "statement",
+ "title": "Derived global trace adjunction over an affine scheme",
+ "statement": "Work in the universes of [def-weil-size-convention]. Use schemes [def-pc-scheme], algebraic spaces with their small etale structure sheaves [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived categories [def-weil-abstract-derived-category]. Write $D_{\\mathrm{QCoh}}(\\mathcal O_Z)$ for the full subcategory with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Derived tensor is computed by K-flat resolutions and derived direct image by K-injective resolutions. A perfect complex is etale locally represented by a bounded complex of direct summands of finite free modules [def-weil-pbc-strict-perfect-coefficient-package]. Let $A$ be a commutative ring, $Y=\\operatorname{Spec}A$, and $f:X\\to Y$ a quasi-compact quasi-separated morphism of algebraic spaces. Let $a:D_{\\mathrm{QCoh}}(\\mathcal O_Y)\\to D_{\\mathrm{QCoh}}(\\mathcal O_X)$ be a supplied right adjoint of $Rf_*$, with counit $\\epsilon:Rf_*a\\to\\mathrm{id}$. Put $W=a(\\mathcal O_Y)$. For $L\\in D_{\\mathrm{QCoh}}(\\mathcal O_X)$ write $G(L)=R\\Gamma(X,L)\\in D(A)$ and $\\mathsf H_X(L,W)=R\\Gamma(X,R\\mathcal Hom_{\\mathcal O_X}(L,W))\\in D(A)$, using global sections [def-pur-ringed-site-zeroth-hypercohomology] and internal Hom [def-pur-derived-internal-hom]. Then the evaluation-and-counit pairing induces a natural isomorphism in $D(A)$, $$\\tau_L:\\mathsf H_X(L,W)\\xrightarrow{\\sim}R\\operatorname{Hom}_A(G(L),A[0]).$$ Here module derived Hom is internal Hom on the one-object ringed site of $A$. More precisely, with the trace $t:G(W)\\cong R\\Gamma(Y,Rf_*W)\\xrightarrow{R\\Gamma(\\epsilon_{\\mathcal O_Y})}A[0]$, the adjunct pairing of $\\tau_L$ is $$G(R\\mathcal Hom_X(L,W))\\otimes_A^{\\mathbf L}G(L)\\longrightarrow G(R\\mathcal Hom_X(L,W)\\otimes_{\\mathcal O_X}^{\\mathbf L}L)\\xrightarrow{G(\\mathrm{ev})}G(W)\\xrightarrow{t}A[0].$$ The first map is the canonical cup product. In every integer degree $n$, the canonical identification $H^n\\mathsf H_X(L,W)=\\operatorname{Hom}_{D(\\mathcal O_X)}(L,W[n])$ takes $H^n(\\tau_L)$ to the ordinary adjunction map, followed by the affine derived-module equivalence. Internal Hom on $X$ need not have quasi-coherent cohomology for this assertion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tag 0E58, lemma-iso-on-RSheafHom and its proof; Tag 0GG4, remark-iso-on-RSheafHom. Global form obtained by testing the coherator comparison on the structure sheaf and its shifts; affine equivalence in spaces-perfect.tex Tag 071Q, lemma-derived-quasi-coherent-small-etale-site."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-pur-derived-internal-hom",
+  "def-sfb-space-affine-global-sections",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-affine-global-hom-cohomology",
+  "def-sfb-space-derived-module-calculus",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-small-ringed-model",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Let $G_Y=R\\Gamma(Y,-)$. The derived direct-image composition comparison gives $G\\cong G_YRf_*$, naturally in the input, including $W$ and its shifts. The affine equivalence gives $G_Y(\\mathcal O_Y)\\cong A[0]$. Thus $t=G_Y(\\epsilon_{\\mathcal O_Y})$ under these comparisons is a map $G(W)\\to A[0]$. Apply the global cup/Hom comparison to $(L,W)$, and postcompose in module derived Hom with $t$. Define\n$$\\tau_L=R\\operatorname{Hom}_A(G(L),t)\\circ\\chi_{L,W}.$$\nThe tensor-Hom transpose formula says its adjunct is $t\\circ G(\\mathrm{ev})\\circ c$, exactly the pairing in the statement. This constructs an actual map in $D(A)$, natural in $L$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-ringed-global-hom-cup-comparison",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/spaces-perfect.tex",
+    "place": "equation-sheafy-trace preceding Tag 0E58; sites Tags 0D6E, 0B6C, 0B6D; spaces-perfect Tag 071Q"
+   }
+  },
+  {
+   "text": "Fix an integer $n$. By the shifted Hom normalization of $\\chi$, the degree-$n$ map of $\\tau_L$ sends $u:L\\to W[n]$ to $t[n]\\circ G(u)$. Naturality of the composition comparison identifies this with\n$$G_Y\\bigl(\\epsilon_{\\mathcal O_Y}[n]\\circ Rf_*u\\bigr):G_Y(Rf_*L)\\longrightarrow G_Y(\\mathcal O_Y)[n],$$\nwhere $Rf_*u$ includes the canonical shift comparison $Rf_*(W[n])\\cong(Rf_*W)[n]$. The target Hom identification is the one in the global cup/Hom lemma applied to the one-object ringed site of $A$. Hence this calculation proves precisely the claimed cohomology normalization.",
+   "uses": [
+    "lem-sfb-ringed-global-hom-cup-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E58 proof, adjunction equality tested on the structure sheaf and its shifts; sites Tags 08JA and 0B6D"
+   }
+  },
+  {
+   "text": "The morphism $u\\mapsto\\epsilon_{\\mathcal O_Y}[n]\\circ Rf_*u$ is the bijection of the supplied adjunction, applied to $L$ and $\\mathcal O_Y[n]$; the right-adjoint shift identification $a(\\mathcal O_Y[n])\\cong a(\\mathcal O_Y)[n]$ is the one induced by the adjunction and the shift comparison for $Rf_*$. Both $L$ and $W[n]$ lie in the full quasi-coherent subcategory, so its Hom sets are the ambient derived Hom sets. Both $Rf_*L$ and $\\mathcal O_Y[n]$ lie in the analogous subcategory on $Y$: the first because $Rf_*$ of the quasi-compact quasi-separated $f$ sends $D_{\\mathrm{QCoh}}(\\mathcal O_X)$ into $D_{\\mathrm{QCoh}}(\\mathcal O_Y)$ (here with $S=Y$), the second because $\\mathcal O_Y$ is quasi-coherent. Full faithfulness of the affine equivalence identifies its Hom sets with those of $D(A)$. Step 2 therefore shows that $H^n(\\tau_L)$ is bijective for every $n$.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-space-derived-pushforward-coproducts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E58 proof, third equality, and Tag 0E59 proof, testing on shifts; spaces-perfect Tag 071Q"
+   }
+  },
+  {
+   "text": "A morphism in $D(A)$ inducing isomorphisms in every cohomological degree is invertible: represent it by a roof of module complexes $C\\xleftarrow{s}B\\xrightarrow{h}D$ with $s$ a quasi-isomorphism. Since $H^n(s)$ and the cohomology maps of the roof are invertible, every $H^n(h)$ is invertible; thus $h$ also is a quasi-isomorphism, and both arrows become invertible in the localization. Apply this to $\\tau_L$. Its naturality was built into step 1. No step required quasi-coherence of $R\\mathcal Hom_X(L,W)$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-duality.tex; literature/stacks-project/sites-cohomology.tex; literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0E59 proof, global derived comparison; derived category localization at quasi-isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-affine-etale-derived-module-realization",
+  "lem-sfb-space-derived-pushforward-coproducts",
+  "lem-sfb-ringed-global-hom-cup-comparison",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tags 0E58 and 0E59, global shift test, combined with the affine derived-module equivalence and sites-cohomology 0B6C/0B6D; assembly written by N9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global Hom adjunction for the right adjoint of quasi coherent derived pushforward of algebraic spaces over an affine base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The pushforward functor for sheaves of modules, induced by a continuous functor and a morphism of ring sheaves, is a right adjoint.\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"PresheafOfModules.instIsRightAdjointPushforwardCompFunctorOppositeRingCatWhiskerLeftOp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {E : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} E] {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ RingCat} {S : CategoryTheory.Functor Cᵒᵖ RingCat} (\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{E} $, a presheaf of rings $ R : \\\\mathcal{E}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and natural transformations $ \\\\phi: R \\\\to \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality sheafy trace gives derived Hom of derived global sections into the base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {A : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} A] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J A] →\\n            [inst_3 : CategoryTheory.HasGlobalSection\", \"doc\": \"For any object $X$ in category $\\\\mathcal{A}$ and sheaf $F$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this establishes a natural bijection between morphisms from the constant sheaf at $X$ to $F$ a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          (M : SheafOfModules R) → (SheafOfModules.unit\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and a sheaf of modules $ M $ over $ R $, there is a canonical equivalence between the set of natural transform\"}\n  {\"name\": \"SheafOfModules.unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on $\\\\ma\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"adjunction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafyTrace|sheafy_trace|RSheafHom|global.*[Rr]hom.*[Aa]djoint",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of derived global sections satisfies a natural isomorphism of derived Hom complexes over the base ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"{X Y : C} (f : X ⟶ Y) (I : InjectiveResolution X) (J : InjectiveResolution Y) (φ : I.cocomplex ⟶ J.cocomplex)\\n  (comm : I.ι.f 0 ≫ φ.f 0 = f ≫ J.ι.f 0) (F : C ⥤ D) [F.Additive] :\\n  F.rightDerivedToHomotopyCategory.map f ≫ (J.isoRightDerivedToHomotopyCategoryObj F).hom =\\n    (I.isoRightDerivedToHomoto\", \"doc\": \"For objects $X,Y$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I,J$, a morphism $f:X\\\\to Y$, and an additive functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, the isomorphism in the homotopy c\"}\n  {\"name\": \"CategoryTheory.instIsRightAdjointSheafΓ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : (Γ J A).IsRightAdjoint\", \"doc\": \"The global sections functor $\\\\Gamma$ is a right adjoint functor in the category of sheaves with respect to a Grothendieck topology.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓNatIsoSheafSections\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasTerminal C] {T : C} (hT : IsTerminal T) : Γ J A ≅ (sheafSections J A).obj (op T)\", \"doc\": \"Given a terminal object $ T $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, and a category $ \\\\mathcal{A} $, there exists a natural isomorphism between the global sections \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and objects $X,Y \\\\in \\\\mathcal{C}$ with injective resolutions $I$ and $J$, this theorem \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"{X Y : C} (f : X ⟶ Y) (I : InjectiveResolution X) (J : InjectiveResolution Y) (φ : I.cocomplex ⟶ J.cocomplex)\\n  (comm : I.ι.f 0 ≫ φ.f 0 = f ≫ J.ι.f 0) (F : C ⥤ D) [F.Additive] :\\n  (I.isoRightDerivedToHomotopyCategoryObj F).inv ≫ F.rightDerivedToHomotopyCategory.map f =\\n    (F.mapHomologicalComplex _\", \"doc\": \"For objects $X,Y$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I,J$, a morphism $f:X\\\\to Y$, and compatible cochain complex morphism $\\\\phi:I.\\\\text{cocomplex}\\\\to J.\\\\text{cocomplex}$ \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (I : CategoryTheory.InjectiveR\", \"doc\": \"Given objects $X,Y$ in an abelian category $\\\\mathcal{C}$ with injective resolutions $I,J$, a morphism $f:X\\\\to Y$, and a morphism $\\\\phi:I.\\\\text{cocomplex}\\\\to J.\\\\text{cocomplex}$ satisfying $I.\\\\iota_0\\\\c\"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \": IsIso F.toRightDerivedZero\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the natural transformation from $ F $ to its 0th right-derived functor $ R^0F $ is an iso\"}\n  {\"name\": \"CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"(G : D ⥤ H) (β : F ⟶ L ⋙ G) : G.IsRightDerivedFunctor β W ↔ IsIso (RF.rightDerivedDesc α W G β)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a morphism property $W$ on $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned declarations concern ordinary sheaf adjunctions, general derived categories, quasicoherent presentations, ring perfection, or topological perfect sets; none states this derived algebraic-space theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafyTrace|sheafy_trace|RSheafHom|global.*[Rr]hom.*[Aa]djoint",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint of quasi coherent derived pushforward for algebraic spaces has evaluation counit trace duality on global sections over an affine base",
+   "results": "8 hits; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; SheafOfModules.instIsRightAdjointPushforward; CategoryTheory.Adjunction.derivedε; AlgebraicGeometry.ΓSpec.adjunction_counit_app",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"adjunction\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Grothendieck duality over an affine ring gives global derived Hom into the adjoint unit as module derived Hom of global sections into the base ring",
+   "results": "8 hits; AlgebraicGeometry.instIsIsoSchemeAppUnitOppositeCommRingCatAdjunctionOfIsAffine; AlgebraicGeometry.ΓSpec.adjunction_homEquiv_apply; AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ; AlgebraicGeometry.ΓSpec_adjunction_homEquiv_eq; AlgebraicGeometry.ΓSpec.adjunction_unit_app; AlgebraicGeometry.ΓSpec.adjunction_counit_app; AlgebraicGeometry.ΓSpec.adjunction_homEquiv_symm_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary global sections, ordinary condensed internal Hom, Ext functoriality or derived-localization infrastructure; none constructs the unbounded ringed-site cup/evaluation comparison with its shifted Hom normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-adjoint-unit-properties",
+  "date": "2026-10-23",
+  "group": "Q76"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Derived global form of the sheafy trace comparison in the first and third paragraphs of Tag 0E5V; includes evaluation normalization.",
+   "via": [
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-global-trace-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the evaluation/cup/counit transpose in D(A), computed its action in each integer degree, and used the supplied adjunction and affine derived-module equivalence to prove invertibility. One general ringed-site cup/evaluation normalization lemma is statement-only; no replacement duality theorem was created. Item statement and statement dependencies unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Derived global form of the sheafy trace comparison in the first and third paragraphs of Tag 0E5V; includes evaluation normalization. The four steps realize the evaluation-normalized global trace input; latest direct-images proof paragraph (3), supporting coherent-duality prerequisite.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic canonical Leray composition for ringed topoi, specialized to global sections after f; no other lemma of this unit supplies its normalization."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic evaluation-normalized closed tensor-Hom adjunction, also on the one-object ringed site for A; used only to construct and uncurry the map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-1acfbfe3c",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-1acfbfe3c (reviewer sub-agent of L); spot-checked: Read in full: the item, its 4 steps, the new node lem-sfb-ringed-global-hom-cup-comparison, every cited statement, and Stacks spaces-duality 0E57/0E58/0GG4/0E59 (the second display of 0E59's proof has a typo that the worker found correctly), sites-cohomology 0B6C/0B6D/08JA and spaces-perfect 071Q. The item statement is unchanged and not weakened; the live item is still unsplit; there is no re-split note. The delivered route tests the global map on Hom(L,W[n]) in every degree instead of using the coherator. It is valid and is how 0E59's own proof works. Steps: (1) tau = RHom_A(G L,t)∘chi has adjunct t∘G(ev)∘c, using kappa and the transpose formula of the closed monoidal structure; (2) the degree-n map is G_Y(eps[n]∘Rf_*u), by naturality of kappa; (3) the adjoint shift comparison plus full faithfulness of the affine equivalence give a bijection; (4) the roof argument is elementary. New node: a true statement (one-object site gives the identity; degree-n check through the unit law of the lax monoidal G), general, with no invertibility claim, strictly smaller than the item and not a duplicate. The Zariski mate nodes lem-pc-sheaf-rhom-projection-formula and lem-sfb-direct-image-hom-open-ext and the H^n identification nodes do not give chi for general ringed sites. Two citation faults fixed. B3 (new node): Lp^*, its tensor comparison, the counit of Lp^*⊣Rp_* and the ringed-topos morphism p had no citations; added def-weil-pbc-ringed-topos-morphism, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-topoi-module-adjunction and lem-pc-pre-derived-adjoint-functors-general. C1 (step 3): the step needs Rf_*L in D_QCoh(Y) and cited nothing for it; it now cites lem-sfb-space-derived-pushforward-coproducts (with S=Y), also added to proof_deps. A DFS shows none of the added nodes reaches the item, so no cycle. Tool uses kappa and the closed-monoidal structure are generic and accepted. Batch 5: lem-sfb-affine-etale-derived-module-realization reaches only def-trf-algebraic-space, the general definition of algebraic spaces, already in the item's stmt_deps and not part of the trace-formula or Poincaré-duality proofs, so accepted. No SGA citation.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineGlobalTraceAdjunction",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affineGlobalTraceAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalTrace",
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalTraceSource",
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalTraceTarget",
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalTracePairing",
+   "AlgebraicGeometry.AlgebraicSpace.affineGlobalTraceAdjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineGlobalTraceAdjunction.lean",
+  "statement": "theorem affineGlobalTraceAdjunction (hqc : MapIsQuasiCompact f.hom.hom) (hqs : MapIsQuasiCompact (pullback.diagonal f.hom.hom)) : ∃ τ : affineGlobalTraceSource A Y e X f a ≅ affineGlobalTraceTarget A Y e X f, (∀ L : X.DerivedQCoh, MonoidalCategory.tensorHom (τ.hom.app (op L)) (𝟙 _) ≫ ((DerivedMonoidal.braidedCategory' DerivedCategory.Qh (HomotopyCategory.quasiIso (ModuleCat.{u} A) (.up ℤ))).braiding _ _).hom ≫ (ihom.ev ((affineDerivedSections A Y e X f).obj L.obj)).app _ = affineGlobalTracePairing A Y e X f F a adj L) ∧ (∀ (L : X.DerivedQCoh) (n : ℤ) (x : _), moduleDerivedHomClass A ((affineDerivedSections A Y e X f).obj L.obj) _ n ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) n).map (τ.hom.app (op L)) x) = (affineDerivedSectionsComposition A Y e X f).hom.app L.obj ≫ (affineDerivedSections A Y e (schemeSpace Y) (𝟙 _)).map ((derivedDirectImage f).map (affineGlobalHomCohomology A Y e X f L.obj (a.obj (schemeSpace Y).derivedQCohStructure).obj n x) ≫ ((smallModuleDirectImage f).rightDerivedFunctor.commShiftIso n).hom.app _ ≫ ((F.comparison.inv.app (a.obj (schemeSpace Y).derivedQCohStructure)) ≫ (adj.counit.app (schemeSpace Y).derivedQCohStructure).hom)⟦n⟧') ≫ ((affineDerivedSections A Y e (schemeSpace Y) (𝟙 _)).commShiftIso n).hom.app _ ≫ (affineStructureDerivedIso A Y e).hom⟦n⟧')",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-124c4b2ff",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Clause-by-clause check of affineGlobalTraceAdjunction against the node and Stacks 0E58/0GG4/0E59/071Q: A is any commutative ring, Y presented by e : Y.left ≅ Spec A, f qcqs via MapIsQuasiCompact on f and its diagonal, supplied a ⊣ F.functor through QCohDirectImagePresentation, unrestricted H_X, target ordinaryModuleDerivedInternalHom. The natural iso's pairing conjunct (cup ≫ G(ev) ≫ t through braiding and ihom.ev) determines τ uniquely; the degree-n conjunct for all n is u ↦ G_Y(ε[n]∘Rf_*u) followed by the affine iso. The three new def nodes (affine global sections, sections compositors, global Hom cohomology) are real or ∃!-normalized constructions with sorry-only theorems and source/blueprint docstrings. lean.statement fields verbatim, declarations present, added stmt_deps are definitions, no name clashes in side-live, live item unchanged. Edge cases A=0, X empty, n in ℤ, L or W zero, f=id: fine. Advisory only: keep the HomComplex/ev sign conventions in stage 3; overlap with Q103 def-sfb-affine-scalar-projection-data (different, non-reusable interface over Spec A); generic infrastructure owners (def-trf-space-etale-module-functors, def-pur-sheaf-hom, etc.) not in the new nodes' stmt_deps; two proof-only plain imports. No compile rerun: no files changed."
+ }
+}

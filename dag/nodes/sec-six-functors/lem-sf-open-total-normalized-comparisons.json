@@ -1,0 +1,143 @@
+{
+ "id": "lem-sf-open-total-normalized-comparisons",
+ "kind": "statement",
+ "title": "Normalized ordinary open total tensor and coefficient comparisons",
+ "statement": "Let $\\mathcal C$ be a site, $R$ a commutative ring sheaf, and $V\\in\\mathcal C$, with module sheafification and its locally-bijective compatibility on the site and slice in a universe containing the object and Hom universes. Use the genuine complexes, scalar extension, slice restriction, extension by zero and three comparison shapes of [def-sf-open-total-tensor-coefficient-data]. There exist comparisons $e=(\\gamma,r,\\rho)$ for all coefficient algebras and all possibly unbounded cochain complexes, satisfying the three normalizations of [def-sf-open-total-tensor-coefficient-normalization]: $\\gamma([x]_f\\otimes y)=[x\\otimes y|_V]_f$, $r(a\\otimes[x]_f)=[a|_V\\otimes x]_f$, their reverse inverse formulas, and $\\rho(a\\otimes y|_V)=(a\\otimes y)|_V$. These are isomorphisms in the actual coefficient-linear complex categories, with signed direct-sum total tensor. No interchange or coefficient-transition assertion is included.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+ },
+ "stmt_deps": [
+  "def-sf-open-total-tensor-coefficient-data",
+  "def-sf-open-total-tensor-coefficient-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Totalize the normalized module projection isomorphism $\\psi$ over every commutative coefficient ring $B$. Extension is a left adjoint, so it preserves the coproduct over all pairs $p+q=n$. Naturality of $\\psi$ in each differential gives the chain equation; additivity preserves the sign $(-1)^p$, also for negative $p$. The inverse is totalized in the reverse direction. Apply the module generator formulas before each coproduct insertion to get the two gamma formulas.",
+   "uses": [
+    "lem-sf-ringed-slice-tensor-generators",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+   }
+  },
+  {
+   "text": "Apply its coefficient-linear natural isomorphism $r$ to every degree of a complex. Naturality in the differential makes this a chain isomorphism, with the module forward and reverse formulas unchanged.",
+   "uses": [
+    "lem-sf-cbc-slice-tensor-generator-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+   }
+  },
+  {
+   "text": "Restriction along the slice forgetful functor evaluates each section and coefficient at the same object. Thus scalar extension and slice restriction have identical sectionwise balanced tensors. Their sheafification universal properties give the comparison $\\rho$. Its forward formula is identity on these tensor generators. Collect the three comparisons and the normalizations; no equation between their composites is used.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-cbc-slice-tensor-generator-coherence",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0E8I (lemma-j-shriek-and-tensor), 03CY, 03EK and 03EL; agent cochain and coefficient refinement of the indicated steps of lem-sf-open-total-tensor-coefficient-interchange."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized projection formula for extension by zero on unbounded cochain complexes of module sheaves",
+   "results": "8 hits including ProjectiveResolution.π' and CochainComplex.toTruncate; no open module projection formula.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing module tensor and functor APIs are used in the proof plan."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Generator normalized projection formula for extension by zero of sheaves of modules on cochain complexes",
+   "results": "8 hits concerning projective resolutions, group cohomology and extending zero morphisms; no matching statement.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing module tensor and functor APIs are used in the proof plan."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|ExtensionByZero|jShriek|lowerShriek",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact match. Existing module tensor and functor APIs are used in the proof plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.OpenTotalTensorCoefficientInterchange",
+  "date": "2026-10-26",
+  "group": "A6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor coefficient compatibility in the projection-formula coherence proof; interchange proof construction, generator calculation and strict coefficient assembly.",
+   "via": [
+    "lem-sf-open-total-tensor-coefficient-interchange",
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.OpenTotalTensorNormalizedComparisons",
+  "file": "lean/Sheaf/Algebra/Homology/OpenTotalTensorNormalizedComparisons.lean",
+  "declaration": "SheafOfModules.OpenTotalTensorCoefficient.normalizedComparisons_exists",
+  "statement": "theorem normalizedComparisons_exists :\n    ∃ e : Comparisons.{c, v, r} R V,\n      GammaNormalization.{c, v, r} R V e ∧ LinearNormalization.{c, v, r} R V e ∧\n      RestrictionNormalization.{c, v, r} R V e",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091052-L-3303553",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091052-L-3303553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

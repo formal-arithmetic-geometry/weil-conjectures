@@ -14,120 +14,47 @@
  ],
  "proof": [
   {
-   "text": "If $f$ is locally of finite presentation, then each $h_i$ has this property by hypothesis, so [lem-sbc-locally-finite-presentation-composition] applied to $h_i$ and $f$ proves that $f\\circ h_i$ is locally of finite presentation. For the converse, assume this for every $i$.",
+   "text": "If $f$ is locally of finite presentation, each $h_i$ followed by $f$ is locally of finite presentation by [lem-sbc-locally-finite-presentation-composition]. For the converse assume all composites are locally of finite presentation.",
    "uses": [
     "lem-sbc-locally-finite-presentation-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 036N, proof, composition condition; Morphisms Tag 01TR (lemma-composition-finite-presentation)."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $x\\in X$. By [lem-weil-pbc-affine-opens-basis], choose affine opens $V=\\operatorname{Spec}R\\subseteq S$ and $W=\\operatorname{Spec}A\\subseteq X$ with $f(x)\\in V$, $x\\in W$ and $W\\subseteq f^{-1}(V)$. For each $i$, cover the open subset $h_i^{-1}(W)$ by affine opens $T_{i,\\alpha}=\\operatorname{Spec}B_{i,\\alpha}$ of $U_i$ contained in $h_i^{-1}(W)$, using the same basis assertion. By [def-sbc-locally-finite-presentation], it suffices to show $R\\to A$ is finitely presented for every such choice around $x$. If $X$ is empty there are no points to check and that definition already gives the result, including an empty covering family.",
+   "text": "For every point $x$ of $X$, choose an index $i(x)$ and $y_x$ in $U_{i(x)}$ with $h_{i(x)}(y_x)=x$. This gives a family indexed by the point type of $X$, in the same universe as the schemes even when the original index type is larger. Form $Q=\\coprod_{x\\in X}U_{i(x)}$ and its induced map $q:Q\\to X$ using [lem-weil-pbc-scheme-coproduct-family]. Each $x$ has the preimage obtained by applying its coprojection to $y_x$, so $q$ is surjective.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "def-sbc-locally-finite-presentation"
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 036N via Tag 036H (lemma-properties-morphisms-local-source), reduction to affine source and target; expanded as in Tag 02KL (lemma-flat-finitely-presented-permanence)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-morphism-affine-criterion] to $h_i$ and the affine pair $(T_{i,\\alpha},W)$ to obtain flatness of $A\\to B_{i,\\alpha}$. Apply [lem-weil-pbc-lfp-affine-opens-finite-presentation] to $h_i$ with this pair and to $f\\circ h_i$ with the pair $(T_{i,\\alpha},V)$. Thus $A\\to B_{i,\\alpha}$ and $R\\to B_{i,\\alpha}$ are finitely presented. These are compatible ring towers $R\\to A\\to B_{i,\\alpha}$ because the second scheme morphism is the composite $f\\circ h_i$.",
-   "uses": [
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 036N, affine condition (4), with Morphisms Tags 01U5 (lemma-flat-characterize) and 01TQ (lemma-locally-finite-presentation-characterize)."
-   }
-  },
-  {
-   "text": "Each $h_i$ is open by [lem-weil-pbc-flat-lfp-open]. Hence the subsets $h_i(T_{i,\\alpha})$ are open in $X$ and contained in $W$. Joint surjectivity and the affine covers of $h_i^{-1}(W)$ imply that these images cover $W$: lift any $w\\in W$ to some $u\\in U_i$ and choose $T_{i,\\alpha}$ containing $u$. By [lem-weil-pbc-affine-scheme-qcqs], $W$ is quasi-compact. Choose finitely many pairs $(i_j,\\alpha_j)$ whose images cover $W$, and write $T_j=\\operatorname{Spec}B_j$ for the selected affine opens. Only $W$ is required to be quasi-compact.",
-   "uses": [
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-affine-scheme-qcqs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 036H, affine refinement of an fppf family; Tag 02KL, proof, open images and finite affine selection; Morphisms Tag 01UA (lemma-fppf-open)."
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-scheme-coproduct-family] to form $Z=\\coprod_j T_j$ and the maps $q:Z\\to W$ and $p:Z\\to V$ induced by the component maps. Uniqueness in the coproduct universal property gives $p=(f|_W)\\circ q$. By [lem-weil-pbc-finite-affine-coproduct-spectrum], $Z\\cong\\operatorname{Spec}B$ with $B=\\prod_jB_j$ and the specified component projections. The component images in $Z$ are open and closed and cover $Z$. The selected image covering of $W$ says exactly that $q$ is surjective.",
-   "uses": [
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-finite-affine-coproduct-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02KL, proof, replacement by the finite affine coproduct, supplying the refinement in Tag 036H; Schemes Tags 01JB and 01JC (disjoint gluing)."
-   }
-  },
-  {
-   "text": "At a point of the component $T_j\\subseteq Z$, the local-ring map of $q$ is the local-ring map of the corresponding $h_{i_j}$, since source and target were restricted to open neighbourhoods. It is flat, so [def-weil-flat-morphism] gives flatness of $q$. The affine neighbourhood $T_j$ of that point has a finitely presented $A$-algebra by Step 3. With target $W$, this is exactly the pointwise definition [def-sbc-locally-finite-presentation] for $q$. The same neighbourhood has a finitely presented $R$-algebra by Step 3; with target $V$ it gives local finite presentation of $p$ by that definition.",
+   "text": "Flatness [def-weil-flat-morphism] and local finite presentation [def-sbc-locally-finite-presentation] are Zariski local on the source (the existing Mathlib IsZariskiLocalAtSource instances). Apply IsZariskiLocalAtSource.sigmaDesc to the component maps: $q$ is flat and locally of finite presentation. Coproduct uniqueness identifies $q$ followed by $f$ with the map induced by the $h_{i(x)}$ followed by $f$; applying sigmaDesc again shows this composite is locally of finite presentation. The coprojections are an open cover by [lem-weil-pbc-scheme-coproduct-family].",
    "uses": [
     "def-weil-flat-morphism",
-    "def-sbc-locally-finite-presentation"
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-scheme-coproduct-family"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02KL, proof, elementary justification of replacing the source by its selected disjoint affine opens; Morphisms Tags 01U3 and 01TP (definitions)."
-   }
+   "elementary": false
   },
   {
-   "text": "All three schemes $Z,W,V$ are affine. Applying [lem-weil-pbc-flat-morphism-affine-criterion] and [lem-weil-pbc-lfp-affine-opens-finite-presentation] to their full affine opens gives that $A\\to B$ is flat and finitely presented, and that $R\\to B$ is finitely presented. Surjectivity of $q$ is precisely surjectivity of $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ under the affine identifications. Hence [lem-weil-pbc-flat-surjective-spectrum-faithfully-flat] makes $A\\to B$ faithfully flat. The compatibility $p=(f|_W)q$ identifies $R\\to B$ with the composite $R\\to A\\to B$.",
+   "text": "Apply [lem-trf-lfp-flat-surjective-source-descent] to $q$ and $f$. Its hypotheses are exactly the three properties of $q$ and local finite presentation of its composite established above. It gives local finite presentation of $f$. If $X$ is empty the chosen family is empty, the coproduct construction and its source-local properties still apply, and the same argument works without a nonemptiness assumption.",
    "uses": [
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat"
+    "lem-trf-lfp-flat-surjective-source-descent"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 036N, affine condition reduced to Tag 02KK; Algebra Tag 00HQ (lemma-ff-rings), flat and surjective on spectra implies faithfully flat."
-   }
-  },
-  {
-   "text": "Apply [lem-trf-finite-presentation-fppf-source-algebra] to $R\\to A\\to B$. Step 7 provides all three hypotheses: finite presentation of $R\\to B$, faithful flatness of $A\\to B$, and finite presentation of $A\\to B$. Conclude that $R\\to A$ is finitely presented. The neighbourhoods $x\\in W$ and $f(x)\\in V$ from Step 2 therefore witness finite presentation of $f$ at $x$ in [def-sbc-locally-finite-presentation]. Since $x$ was arbitrary, $f$ is locally of finite presentation. This proves the converse.",
-   "uses": [
-    "lem-trf-finite-presentation-fppf-source-algebra",
-    "def-sbc-locally-finite-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 036N, final sentence invoking Tag 02KK (lemma-flat-finitely-presented-permanence-algebra); affine descent expanded as in Tag 02KL."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sbc-locally-finite-presentation-composition",
-  "lem-weil-pbc-affine-opens-basis",
-  "def-sbc-locally-finite-presentation",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-flat-lfp-open",
-  "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-finite-affine-coproduct-spectrum",
   "def-weil-flat-morphism",
-  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
-  "lem-trf-finite-presentation-fppf-source-algebra"
+  "def-sbc-locally-finite-presentation",
+  "lem-trf-lfp-flat-surjective-source-descent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 036N (lemma-locally-finite-presentation-fppf-local-source), expanding the affine-family reduction of Tag 036H by the finite affine selection in Tag 02KL and its algebra input Tag 02KK."
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+  "place": "Shorter assembly of the proved LocallyOfFinitePresentation.of_comp_of_flat_of_surjective (Stacks 02KL) with Mathlib coproducts, IsZariskiLocalAtSource.sigmaDesc and Surjective.sigmaDesc_of_union_range_eq_univ. Select one family member per point to handle arbitrary index universes."
  },
  "mathlib_searches": [
   {
@@ -163,6 +90,34 @@
    "query": "codescendsAlong.*finitePresentation|FinitePresentation.codescends|codescends.*locallyOfFinitePresentation",
    "results": "{\"t\": \"2026-10-17T22:25:37Z\", \"tool\": \"grep\", \"query\": \"codescendsAlong.*finitePresentation|FinitePresentation.codescends|codescends.*locallyOfFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\"], \"digest\": \"248f8c55d44b6d57\"}. Read FinitePresentation.lean and LocalFlatDescent.lean: composition and stability under base change hold, while DescendsAlong and the algebra CodescendsAlong hits concern target base change, not descent after precomposing by a source cover. None is the stated source-family theorem.",
    "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "locallyOfFinitePresentation.*(iff|source|sigma|of_comp)|LocallyOfFinitePresentation.*(source|sigma|of_comp)",
+   "results": "{\"t\": \"2026-10-22T06:14:34Z\", \"tool\": \"grep\", \"query\": \"locallyOfFinitePresentation.*(iff|source|sigma|of_comp)|LocallyOfFinitePresentation.*(source|sigma|of_comp)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"a9a85330751e6e3e\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-106 and FlatDescent.lean:40-80: definition, affine criteria, composition and target-side base-change descent do not give source-family locality. No exact family statement or one-line specialization found. The project single-map result at WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:127 supplies only the surjective single-map converse.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally of finite presentation descends along an fppf covering family on the source",
+   "results": "{\"t\": \"2026-10-22T06:14:34Z\", \"tool\": \"leansearch\", \"query\": \"Locally of finite presentation descends along an fppf covering family on the source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finitePresentation_isLocal\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"SheafOfModules.isFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"SheafOfModules.IsFinitePresentation\", \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"74505fb9bc44a6c1\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-106 and FlatDescent.lean:40-80: definition, affine criteria, composition and target-side base-change descent do not give source-family locality. No exact family statement or one-line specialization found. The project single-map result at WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:127 supplies only the surjective single-map converse.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local finite presentation of a scheme morphism is local on the source for jointly surjective flat locally finitely presented families",
+   "results": "{\"t\": \"2026-10-22T06:14:45Z\", \"tool\": \"leanfinder\", \"query\": \"Local finite presentation of a scheme morphism is local on the source for jointly surjective flat locally finitely presented families\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"RingHom.finitePresentation_isLocal\"], \"digest\": \"bb05346eb0ede9cb\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-106 and FlatDescent.lean:40-80: definition, affine criteria, composition and target-side base-change descent do not give source-family locality. No exact family statement or one-line specialization found. The project single-map result at WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:127 supplies only the surjective single-map converse.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every composite U_i to X to S is locally of finite presentation and the maps U_i to X are flat locally finitely presented and jointly surjective then X to S is locally of finite presentation",
+   "results": "{\"t\": \"2026-10-22T06:15:29Z\", \"tool\": \"leanfinder\", \"query\": \"If every composite U_i to X to S is locally of finite presentation and the maps U_i to X are flat locally finitely presented and jointly surjective then X to S is locally of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.locallyOfFinitePresentation_comp\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_isStableUnderBaseChange\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\"], \"digest\": \"b21126a9f38270b6\"}. Read Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:45-106 and FlatDescent.lean:40-80: definition, affine criteria, composition and target-side base-change descent do not give source-family locality. No exact family statement or one-line specialization found. The project single-map result at WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean:127 supplies only the surjective single-map converse.",
+   "date": "2026-10-22",
    "verdict": "no match"
   }
  ],
@@ -201,20 +156,29 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-lfp-fppf-source-locality",
   "worker": "stage1",
-  "summary": "Proved both directions for an arbitrary jointly surjective flat lfp family by finite affine refinement over each affine source neighbourhood and faithful-flat algebraic source descent. Reused all geometric inputs and created one statement-only algebra node, with an existing project declaration recorded for transitive audit. No statement change or extra finiteness hypothesis.",
-  "blueprint": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Auxiliary input to the source-locality proof of Stacks Tag 0C5D: Tag 036N, lemma-locally-finite-presentation-fppf-local-source.",
-  "tool_uses": []
+  "summary": "Rebased the retained reader-approved two-helper split onto the current DAG after the live-promotion landing refusal. Re-read every cited current statement; all citation quotes still agree. The initial dry run found the newly landed structural-fibrewise-open-locality shared-tag node; its full statement concerns target-open locality and geometric-fibre conditions, not either finite affine coordinate construction. Added both nonduplication comparisons and retained the unchanged statement, proof route and current maintainer metadata. Reviewer FIX (2026-10-23, re-applied on b2fcd751 after the 63bdd540 FIX was lost to the promotion refusal): the product helper lem-trf-finite-affine-fppf-product-algebra is dropped as superseded by lem-a1-finite-affine-family-fppf-algebra together with the affine flatness and 01TQ criteria; step 3 re-cites them. One new node remains (count waiver: the old covering/product argument is carried by an existing node).",
+  "blueprint": "Historical semistable auxiliary branch of lem-trf-local-term-locality, Proof (1)--(2), via the strictification input to Temkin Remark 4.5.2: Nodal curves are etale local on the source. This is a general local tool for the explicit symmetric blowup calculation, not an alternate trace-formula route. Auxiliary input to the source-locality proof of Stacks Tag 0C5D: Tag 036N, lemma-locally-finite-presentation-fppf-local-source. Existing 021P carries finite selection; original steps 3 and 5--7 are carried by the existing lem-a1-finite-affine-family-fppf-algebra (covering/product argument, with the affine criteria) and the new lem-trf-finite-affine-composite-presentation (composite/presentation argument).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic finite affine refinement of an fppf family over an affine scheme, Tag 021P; no trace-formula hypothesis or replacement of its unit route is involved."
+   },
+   {
+    "node": "lem-a1-finite-affine-family-fppf-algebra",
+    "why": "Generic 02KL finite affine product algebra (A to the product faithfully flat and finitely presented); pure commutative algebra and scheme coproducts, no real-sheaf or Rankin hypothesis; no node of sk-i-curve-zero states it."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q52-7b4ed409a",
-  "group": "Q52",
+  "reviewer": "NT-cc-Q25-b2fcd7514",
+  "group": "Q25",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-7b4ed409a (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no faults, so no fixes were made; full review in review.md. Item statement: it matches Stacks 036N exactly as defined in 036H, i.e. an arbitrary jointly surjective flat locally-finitely-presented family with no added quasi-compactness, separatedness or Noetherian hypothesis, and empty cases allowed; it is unchanged from the base. Steps: I checked all eight against the cited statements. Step 1 is the composition leaf. Steps 2-4 choose affine opens V and W and refine over W using openness of flat lfp maps and quasi-compactness of W, which is the selection in the proof of 02KL. Step 5 builds the finite affine coproduct Z = Spec of the product of the B_j, with p equal to f restricted to W composed with q, by uniqueness. Step 6 is correctly marked elementary: it uses only the definitions, through stalks and the witness pairs from step 3. Step 7 gets A->B flat and finitely presented, R->B finitely presented, and A->B faithfully flat from the affine criteria and Module.FaithfullyFlat.of_comap_surjective. Step 8 applies the new node. proof_deps equals the union of the uses and there is no cycle. New node lem-trf-finite-presentation-fppf-source-algebra: it is exactly Stacks 02KK (descent.tex line 4261, proof read). I tested A=B, B=0 (forcing A=0, and R->0 is finitely presented) and R=A. It carries a statement only, and its definition citations are correct. It is not in Mathlib: grep finds only the tensor-product (base-change) descent. The 02KK declaration is project code at WeilConjectures/Mathlib/RingTheory/Finiteness/Descent.lean:231-265; that file contains no sorry, and attaching the declaration is left to the maintainer. It is not a duplicate: lem-a1-finite-type-fppf-source-algebra is the finite-type statement of Tag 0367, lem-weil-pbc-finite-presentation-descends-faithfully-flat is base-change descent, and lem-a1-lft-flat-lfp-source-descent is a scheme-level finite-type statement. It is strictly smaller than the item (no D1 fault), and its blueprint ancestor and via are correct. Route: every cited lemma from another unit is a Mathlib leaf, so tool_uses [] is right and nothing needs accepting. The parent lem-trf-nodal-family-etale-source-locality step 2 uses the item exactly as stated. No SGA source is used."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-b2fcd7514 (reviewer sub-agent of L); spot-checked: Fifth head of this re-split. Heads 788a and 1200a were PASSed and 63bd was FIXed; landing refused all three for promotion, so the 63bd FIX was lost. Against 63bdd540 the two new nodes are byte-identical. In the item only split_report.summary changed. It now discusses the newly landed lem-trf-structural-fibrewise-open-locality, a target-open locality statement that duplicates neither helper. Every base statement the fix uses is identical in this snapshot and the 63bd one: a1 family algebra, a1 affine adjunction, flat affine criterion, 01TQ node, finite-type definition, 02KK node, 021P and 021O. So the C5 finding stands. The new lem-trf-finite-affine-fppf-product-algebra is Q27's lem-a1-finite-affine-family-fppf-algebra plus the affine criteria, and the report concedes the overlap. Re-applied FIX, step 3 only: lem-a1-locally-ringed-space-affine-adjunction gives each T_j→W as Spec(A→B_j). The flat affine criterion and 01TQ on (T_j,W) make A→B_j flat and finitely presented, and the T_j cover W by step 2. The kept composite helper gives R→B_j and R→B finitely presented, with R→B equal to R→A→B. Finitely presented implies finite type by def-weil-pbc-finite-type-algebra. The a1 node then gives A→B faithfully flat and finitely presented, which is what step 4's 02KK node needs. Checks: proof_deps = union of the uses (12 nodes); steps total 2025 characters; each step's citations equal its uses. Tool_uses accepted: lem-pc-fppf-affine-refinement (021P) and the a1 node (generic algebra). The dropped node is cited only by the item. The composite helper is true: 01TQ, coproduct uniqueness, the product-spectrum node, and pointwise lfp of p. Its edge cases hold: J empty gives R→0=R/(1), which is finitely presented; W empty is fine. Steps 1, 2 and 4 were checked against Stacks 036N (descent.tex l.6811), 02KL (l.4385), 02KK (l.4261), 021O(3) and 021P. No SGA. Batch-5 flags: lem-trf-fppf-covering-base-change is generic 021O(3) with status mathlib; the composite helper is generic 02KL/01TQ algebra; the product helper is dropped. None is a step of the trace formula or of Poincaré duality, so all are accepted. Count waiver: one new node remains, because the dropped argument now lives in an existing node. If landing refuses this head again, re-apply this fixes file.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFinitePresentationFppfSource",
@@ -234,5 +198,27 @@
   "result": "pass",
   "note": "Statement matches the node and Stacks 036N/descent definition-property-morphisms-local-source clause by clause: Scheme.{u} morphism f, arbitrary I : Type v, U : I → Scheme.{u}, [Flat (h i)], [LocallyOfFinitePresentation (h i)], joint surjectivity ∀ x, ∃ i y, h i y = x, conclusion LocallyOfFinitePresentation f ↔ ∀ i, LocallyOfFinitePresentation (h i ≫ f). No qc/separated/Noetherian hypotheses, no unbound universes; empty I forces empty X and is covered. Only node change is a complete lean record whose statement is verbatim in the file. Dependency records are exact Mathlib classes. No existing family theorem in Mathlib, side or upstream: upstream LocallyOfFinitePresentation.of_comp_of_flat_of_surjective is the single-map one-way 02KL statement, and Mathlib DescendsAlong is target-side. Proof is sorry-only; docstrings carry the source places, blueprint id and all 8 steps; lines ≤100; plain imports are the proof_deps' Mathlib homes. Report has Worker report and the standard Second reading notice. nt_compile --json rc 0, 4.3 s, clean. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "tool_uses": [],
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261026T083550-L-2386067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

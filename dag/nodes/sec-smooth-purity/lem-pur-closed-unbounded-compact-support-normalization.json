@@ -1,0 +1,221 @@
+{
+ "id": "lem-pur-closed-unbounded-compact-support-normalization",
+ "kind": "statement",
+ "title": "Unbounded identity-open compact support for a closed immersion",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $A=A_{E,n}$. Let $i:Z\\hookrightarrow X$ be a closed immersion of separated finite-type $k$-schemes [def-weil-closed-immersion, def-weil-finite-type-morphism, def-weil-proper-morphism]. Work in the ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of constant-$A$ module sheaves [def-weil-pbc-derived-categories]. Write $F_0=i_{\\mathrm{et},*}$ for direct image on module sheaves [def-weil-pbc-direct-image], and $Q_T$ for localization of complexes at quasi-isomorphisms. The functor $F_0$ is exact. Its termwise application descends to a functor $F:D(Z_{\\mathrm{et}},A)\\to D(X_{\\mathrm{et}},A)$ normalized by $FQ_Z\\cong Q_XF_0$. For $c=(\\operatorname{id}_Z,i)$ and ordinary etale compact support [def-amb-etale-compact-support], there are canonical natural isomorphisms\n$$Ri_!^c\\xrightarrow{\\sim}Ri_{\\mathrm{et},*}\\xrightarrow{\\sim}F$$\non the whole unbounded category. The first removes identity extension by zero [def-weil-pbc-extension-by-zero]; the second is the inverse of the total right-derived comparison, which is invertible on every representing complex. Under these identifications, for every $V\\in D(Z_{\\mathrm{et}},A)$ and every integer $m$,\n$$H^m(FV)\\cong F_0(H^m(V)),$$\nnaturally in $V$. Thus $F$ preserves both cohomological lower and upper bounds. No constructibility or boundedness hypothesis is imposed on $V$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "First localization triangle; unbounded closed compact-support normalization, returned proof Step 1. Module exactness is Stacks Tag 08M3 (sites-modules.tex, lemma-i-star-equivalence); derived and identity identifications are specified in the report."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "A closed immersion is finite by the Mathlib IsFinite instance for IsClosedImmersion (Morphisms/Finite.lean). Apply the already proved constant-module finite-direct-image exactness instance preservesFiniteColimits_lowerStar_of_isFinite of [lemma-weil-pbc-finite-direct-image-exact]; lowerStar preserves finite limits as a right adjoint. Set F = lowerStar (ModuleCat P.Coefficient) i.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose phi = F.mapDerivedCategoryFactors from [lem-weil-pbc-exact-functor-derived-factorization]. Use the proved source right-derived comparison F.rightDerivedFunctorIsoMapDerivedCategory (WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/MapDerivedCategory.lean), the construction underlying the finite specialization in [lemma-weil-pbc-finite-direct-image-exact]. Its hom_fac theorem is exactly the required unit normalization equation, and its isIso_rightDerivedFunctorUnit instance proves invertibility on every representing complex. This reuses the existing homotopy-category right-derived uniqueness proof rather than constructing another Kan-extension comparison.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At the proper compactification ofIsProper i, [def-amb-etale-compact-support] is definitionally identity-open derived extension by zero followed by the total right derived F. Choose e to be precisely isoWhiskerRight (mapDerivedCategoryOpenImmersionLowerShriekId _ Z) F.rightDerivedFunctor followed by the left unitor. The source identity-open isomorphism is built by uniqueness of left adjoints, then exact termwise derivation. Its required normalization is reflexivity. Properness follows by instances from the finiteness of i; no Noetherian argument is needed by the existing definition.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse of F.mapDerivedCategoryHomologyFunctorIso in every integer degree. This is the natural functor isomorphism of [lem-weil-pbc-exact-functor-bounded-below], already descended through localization in the source library. For each lower or upper bound install the corresponding hypothesis and apply F.isGE_mapDerivedCategory_obj or F.isLE_mapDerivedCategory_obj. Both lemmas work for arbitrary unbounded objects and use no constructibility.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "E1 stage-3 proof: same unbounded identity-open normalization for the first localization triangle, reusing proved source finite pushforward exactness, normalized right-derived uniqueness, identity-open comparison and exact-functor cohomology/bounds. The unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact closed immersion direct image on ordinary etale module sheaves identifies the unbounded derived pushforward and compact support at the identity compactification with termwise direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; SheafOfModules.pushforwardNatIso; AlgebraicGeometry.Scheme.Modules.instFullPushforward; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.unitToPushforwardObjUnit_val_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(exact|Exact)|identity.*compactification|rightDerivedFunctorIsoMapDerivedCategory",
+   "results": "4 hits: Mathlib/CategoryTheory/ObjectProperty/Extensions.lean; Mathlib/CategoryTheory/Monoidal/Closed/Zero.lean; Mathlib/CategoryTheory/Sites/Closed.lean; Mathlib/CategoryTheory/Sites/Sieves.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion exact etale pushforward the unbounded derived pushforward is termwise and compact supports at the identity compactification equal pushforward",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.IsClosedImmersion.mk; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; AlgebraicGeometry.isClosedImmersion_iff_isAffineHom; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.IsClosedImmersion.base_closed; AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorIsoMapDerivedCategory\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed embedding of etale topoi exact direct image commutes with cohomology on unbounded complexes and equals proper shriek with identity open factor",
+   "results": "8 hits: CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso; TopCat.Presheaf.isSheaf_of_isOpenEmbedding; Topology.IsOpenEmbedding.compatiblePreserving; CategoryTheory.Functor.sheafPushforwardCocontinuous; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_inv; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not assert the ordinary constant-module etale/pro-etale closed compact-support normalization or its specified derived counit"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorIsoMapDerivedCategory|mapDerivedCategoryFactors",
+   "results": "10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean. Subdirectory: Algebra/Homology",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the unbounded ordinary etale closed compact-support normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes the unbounded etale compact support functor at the identity open factor equals termwise exact direct image",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the unbounded ordinary etale closed compact-support normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorIsoMapDerivedCategory\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the unbounded ordinary etale closed compact-support normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion etale module sheaf exact pushforward unbounded derived compact support identity compactification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instFullPushforward, SheafOfModules.pushforward_comp_id, SheafOfModules.pushforward_id_comp, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the unbounded ordinary etale closed compact-support normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functor on abelian categories canonical unbounded right derived comparison invertible on every complex and commutes with cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the geometric item; generic termwise descent is already lem-weil-pbc-exact-functor-derived-factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|FunctorToRightDerivedZero",
+   "results": "0 hits: . Subdirectory: CategoryTheory/Abelian",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state the unbounded ordinary etale closed compact-support normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-closed-finite-adjoint-counit-transport",
+  "date": "2026-10-22",
+  "group": "Q130"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3, realizing sk-prop-a1 first localization triangle: normalization of the closed direct-image functor before comparing its adjoints (returned item Step 1).",
+   "via": [
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-closed-unbounded-compact-support-normalization",
+  "worker": "stage1",
+  "summary": "Six-step proof with no new nodes: exact constant-module closed direct image; normalized termwise descent; inverse of the actual total right-derived comparison on every complex; identity extension by zero from its defining presheaf; identity-open compactification; natural cohomology and both bounds. Statement unchanged. All cited node statements checked.",
+  "blueprint": "Realizes the closed-functor normalization needed in prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3, and sk-prop-a1 first localization triangle, through the existing ancestry via lem-pur-closed-finite-adjoint-counit-transport and lem-pur-retracted-support-localization-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic closed-subtopos module exactness and its etale scheme instance; the local unit does not separately supply ordinary module exactness."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic unbounded exact-functor derived comparison, invertible on every complex; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-328d13d32",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-328d13d32 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from the live unsplit record, no new nodes, 6 steps), every cited statement, and the sources. Sources: Stacks 08M3, 04CA, 015F(3)(4), 03S3, 01W5, 01T6 and 010N, all tags verified, plus the blueprint sk-prop-a1 first localization triangle. No SGA source is used. Coefficient category: ordinary unbounded D(T_et,A_{E,n}), the same as in def-amb-etale-compact-support, with c=(id_Z,i) a valid compactification. No cycle. Steps 1, 2, 4, 5 and 6 are correct. Step 4 is properly elementary: j_{p!}M=M for j=id, and the sheafification unit is invertible by vu=1 and then uv=1 from uniqueness. Step 5 gets i proper from closed-immersion-proper(a) and X, Z Noetherian over Spec k. Step 6 gets naturality from localization (2),(3), not from objectwise equality. FIX (one repair, Step 3): exact-functor-derived-functor gives (F,φ^{-1}) as a Kan extension along CoCh→D, but def-amb defines Ri_* through lem-weil-pbc-kinjective-total-derived along K→D, and the step identified the two without justification. I added the bridge (CoCh→K is identity on objects and full, so the universal properties agree; uniqueness of Kan extensions makes η_K invertible on every complex) and cited lem-weil-pbc-kinjective-total-derived and def-weil-abstract-derived-category in uses and proof_deps. Overlap, not a duplicate: lem-sf-etale-immersion-shriek-normalization has n_c on bounded-below inputs only; maintainer note that the two should agree on D^+. Batch-5 flag lem-trf-oriented-closed-base-localization: its 236-node closure contains only generic trf topos/site constructions (geometric morphism, closed-complement site, complement factorization) and no trace-formula or PD statement. It is closed-subtopos module exactness (08LY/08M3/04CA), so I accept it, as Q52, NI and NJ did. I accept both declared tool_uses as generic.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedUnboundedCompactSupportNormalization",
+  "declaration": "AlgebraicGeometry.Etale.closed_unbounded_compactSupport_normalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedUnboundedCompactSupportNormalization.lean",
+  "statement": "theorem closed_unbounded_compactSupport_normalization (P : PurityFiniteSetting.{u}) {Z X : Scheme.{u}} [Z.Over (Spec (CommRingCat.of P.field.k))] [X.Over (Spec (CommRingCat.of P.field.k))] [IsSeparated (Z ↘ Spec (CommRingCat.of P.field.k))] [IsSeparated (X ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (Z ↘ Spec (CommRingCat.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of P.field.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of P.field.k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (CommRingCat.of P.field.k))] : (PreservesFiniteLimits (lowerStar (ModuleCat.{u + 1} P.Coefficient) i) ∧ PreservesFiniteColimits (lowerStar (ModuleCat.{u + 1} P.Coefficient) i)) ∧ ∃ (phi : _root_.DerivedCategory.Q ⋙ (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategory ≅ (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ _root_.DerivedCategory.Q) (e : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) (Compactification.ofIsProper i) ≅ (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctor) (delta : (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctor ≅ (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategory), phi = (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategoryFactors ∧ e = Functor.isoWhiskerRight (mapDerivedCategoryOpenImmersionLowerShriekId (ModuleCat.{u + 1} P.Coefficient) Z) (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctor ≪≫ Functor.leftUnitor (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctor ∧ (∀ K : CochainComplex (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) ℤ, IsIso ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj K))) ∧ (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).rightDerivedFunctorUnit ≫ Functor.whiskerLeft _root_.DerivedCategory.Qh delta.hom = (lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategoryFactorsh.inv ∧ (∀ m : ℤ, Nonempty ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategory ⋙ _root_.DerivedCategory.homologyFunctor _ m ≅ _root_.DerivedCategory.homologyFunctor _ m ⋙ lowerStar (ModuleCat.{u + 1} P.Coefficient) i)) ∧ (∀ (V : DerivedCategoryModule P.Coefficient Z) (a b : ℤ), (V.IsGE a → ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategory.obj V).IsGE a) ∧ (V.IsLE b → ((lowerStar (ModuleCat.{u + 1} P.Coefficient) i).mapDerivedCategory.obj V).IsLE b))",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-095621f66",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Read the item, all 8 stmt_dep records, the module and the exact side-live declarations (Compactification.ofIsProper; mapDerivedCategoryOpenImmersionLowerShriekId via leftAdjointUniq; rightDerivedLowerShriekOfCompactification = D(c.i_!) ⋙ R(c.g_*); rightDerivedFunctor/Unit along Qh; rightDerivedFunctorIsoMapDerivedCategory_hom_fac; Finite/Exact exactness instances; DerivedCategoryModule; PurityFiniteSetting.Coefficient). Every clause is rendered and pinned: phi = mapDerivedCategoryFactors; e = whiskered identity extension-by-zero iso plus left unitor at c = ofIsProper i = (id_Z, i); delta uniquely fixed by the unit equation (Kan extension along Qh); IsIso of the unit on every complex; natural H^m isomorphism as a functor iso for all m; both bounds with no hypothesis on V. No extra hypotheses; exactness is a conclusion. Universes are Scheme.{u}/ModuleCat.{u+1} as published. Edge cases: empty Z, i = id, zero object, a > b, negative degrees, n = 1. lean.statement is verbatim; node delta is lean-only versus live/side-live; no other delivery; the live node is still split. Docstrings carry the source tags and the blueprint id, with 6 proof steps; proof is sorry. Not compiled (2026-10-21 rule; no file changed). Advisories: the theorem is provable in stage 3 from existing decls (rightDerivedFunctorIsoMapDerivedCategory, rightDerivedFunctorHomologyFunctorIso); some plain imports are used only by the proof plan."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261023T102543-L-2923364",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

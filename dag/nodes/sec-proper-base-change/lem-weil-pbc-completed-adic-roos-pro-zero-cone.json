@@ -1,0 +1,141 @@
+{
+ "id": "lem-weil-pbc-completed-adic-roos-pro-zero-cone",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-pbc-koszul-reconstruction",
+   "place": "Strict augmentation argument, order 1248; derived-limit vanishing for pro-zero cones",
+   "via": [
+    "lem-weil-pbc-completed-koszul-quotient-roos-augmentation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The completed adic Roos fibre kills strict pro-zero cones",
+ "statement": "For a scheme T and completed adic coefficient datum d, take the actual completed module sheaves and strict towers of [def-weil-pbc-intrinsic-completion]. If a map v of complexes of strict towers has a cone whose levelwise transition maps eventually become zero in the derived category of completed module sheaves, then the concrete Roos fibre map of [lem-weil-pbc-exact-products-roos-comparison] induced by v is a quasi-isomorphism. No Koszul, finite quotient, or K-flat hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0940 and 0941, exact products and countable derived inverse limit; pro-zero tower vanishing"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-exact-products-roos-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The pro-etale countable-products theorem says the product of epimorphisms of completed module sheaves is epi. Express a limit map for a discrete countable diagram through Pi.isoLimit and Pi.map, obtaining preservation of epimorphisms by the limit functor and hence exact countable products.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the derived evaluation isomorphism of the ringed strict derived-limit theorem. Its naturality and cancellation along its component isomorphisms transfer the given eventually zero transition maps to eventually zero maps of the derived cone tower. The pro-zero clause gives invertibility of the derived-limit map.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact-products comparison identifies the concrete Roos model with that derived-limit functor. Naturality transports invertibility of the induced map, and the derived-category criterion identifies it with quasi-isomorphy of the original concrete Roos map.",
+   "uses": [
+    "lem-weil-pbc-exact-products-roos-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 0940 and 0941, exact products and countable derived inverse limit; pro-zero tower vanishing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural chain map from Koszul tower Roos fibre to quotient tower Roos fibre with quasi-isomorphism and augmentation unit",
+   "results": "8 hits about normalized Moore complexes and general chain factorizations; no completed Koszul tower augmentation.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCocone\"",
+   "results": "12 hits giving mapping-cocone definitions and cochain constructors, not the finite completed augmentation or its cone vanishing.",
+   "date": "2026-10-27",
+   "verdict": "generic APIs only"
+  },
+  {
+   "tool": "grep",
+   "query": "proZero.*[Rr]oos|[Rr]oos.*proZero",
+   "results": "Search service returned 0 hits. Local search found the AdicResidue coefficient augmentation and tensor cone comparison, whose coefficient-slice and dual Koszul models differ from the assigned exterior completed models.",
+   "date": "2026-10-27",
+   "verdict": "no exact model match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completed Koszul tensor quotient augmentation with strict transitions and pro zero mapping cones",
+   "results": "8 hits, including ChainComplex.augment and mappingCone.map, with no completed coefficient or strict tower theorem.",
+   "date": "2026-10-27",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedKoszulQuotientRoosAugmentation",
+  "date": "2026-10-27",
+  "group": "K1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedAdicRoosProZeroCone",
+  "file": "lean/Sheaf/Paper/CompletedAdicRoosProZeroCone.lean",
+  "declaration": "AlgebraicGeometry.Scheme.completedAdicRoosMapQuasiIsoOfProZero",
+  "statement": "theorem completedAdicRoosMapQuasiIsoOfProZero\n    (T : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)\n    {X Y : CochainComplex (CompletedAdicTowers T d) ℤ} (v : X ⟶ Y)\n    (hv : ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m), DerivedCategory.Q.map\n      ((CochainComplex.mappingCone v).asFunctor.map (homOfLE h).op) = 0) :\n    QuasiIso (ExactProductsRoos.fibre.map v)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-27"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222724-L-686395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261026T222724-L-686395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

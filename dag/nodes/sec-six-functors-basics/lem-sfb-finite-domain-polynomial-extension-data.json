@@ -1,0 +1,246 @@
+{
+ "id": "lem-sfb-finite-domain-polynomial-extension-data",
+ "kind": "statement",
+ "title": "Polynomial extension data for a finite inclusion over a normal Noetherian domain",
+ "statement": "Let $\\varphi:A\\to C$ be an injective homomorphism of commutative domains. Assume $A$ is a Noetherian normal domain [def-weil-pbc-noetherian-ring, def-weil-pbc-normal-ring] and $c_1,\\ldots,c_r\\in C$ generate $C$ as an $A$-module via $\\varphi$, meaning every $c\\in C$ equals $\\sum_{j=1}^r\\varphi(a_j)c_j$ for some $a_j\\in A$. For every integer $n\\ge0$ put $A_n=A[t_1,\\ldots,t_n]$, $C_n=C[t_1,\\ldots,t_n]$ [def-weil-pbc-mv-polynomial-ring], and let $\\varphi_n:A_n\\to C_n$ apply $\\varphi$ to coefficients and fix the variables. Then $\\varphi_n$ is injective, $A_n$ is a Noetherian normal domain, and $C_n$ is a domain. The constant polynomials $c_1,\\ldots,c_r$ generate $C_n$ as an $A_n$-module via $\\varphi_n$, and also as an $A_n$-algebra. Moreover $\\varphi_n$ is of finite presentation [def-weil-pbc-finitely-presented-algebra] and integral: every element of $C_n$ satisfies a monic polynomial with coefficients in $\\varphi_n(A_n)$. The case $n=0$ is included.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 030A, lemma-polynomial-domain-normal; Tag 00FN, lemma-Noetherian-permanence; Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation (3); Tag 00GK, lemma-finite-is-integral. The coefficientwise map and unchanged module generators are the elementary polynomial calculation in the finite affine specialization of more-morphisms.tex Tag 0F32, lemma-quasi-finite-Noetherian-universally-open."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-finitely-presented-algebra"
+ ],
+ "proof": [
+  {
+   "text": "By the finite monomial description in [def-weil-pbc-mv-polynomial-ring], the coefficient of $t^\\alpha$ in $\\varphi_n(f)$ is $\\varphi(f_\\alpha)$. Thus $\\varphi_n(f)=\\varphi_n(g)$ implies $\\varphi(f_\\alpha)=\\varphi(g_\\alpha)$ for each $\\alpha$, hence $f_\\alpha=g_\\alpha$ by injectivity of $\\varphi$, and $f=g$. Coefficientwise addition and the finite convolution formula for multiplication also show that this is the stated ring homomorphism.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Finite monomial calculation; coefficient map used in more-morphisms.tex Tag 0F32 (lemma-quasi-finite-Noetherian-universally-open)."
+   }
+  },
+  {
+   "text": "Regrouping $t^{(\\alpha,k)}$ as $t^\\alpha t_{m+1}^k$ identifies $R[t_1,\\ldots,t_{m+1}]$ with $R[t_1,\\ldots,t_m][t_{m+1}]$: the inverse expands each coefficient, and addition and multiplication agree by finite sums. For a domain $D$, nonzero polynomials of degrees $a,b$ have product coefficient at degree $a+b$ equal to the product of their nonzero leading coefficients; thus $D[T]$ is a domain. Induction starting at $C_0=C$ gives that $C_n$ is a domain. Starting at the normal domain $A_0=A$, apply [lem-weil-pbc-polynomial-ring-normal-domain] at each induction step under this same identification to conclude that every $A_n$ is a normal domain.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-normal-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A, lemma-polynomial-domain-normal; induction by regrouping monomials."
+   }
+  },
+  {
+   "text": "The $n$ variables generate $A_n$ as an $A$-algebra: each polynomial is a finite sum of coefficient multiples of products of the variables. Equivalently it is the polynomial algebra in these variables modulo the zero ideal. Since $A$ is Noetherian, [lem-weil-pbc-finite-type-algebra-noetherian] applied to $A\\to A_n$ proves that $A_n$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, first assertion."
+   }
+  },
+  {
+   "text": "For $f=\\sum_{\\alpha\\in S}b_\\alpha t^\\alpha\\in C_n$, choose $a_{\\alpha j}\\in A$ with $b_\\alpha=\\sum_{j=1}^r\\varphi(a_{\\alpha j})c_j$, for each member of the finite support $S$. Put $p_j=\\sum_{\\alpha\\in S}a_{\\alpha j}t^\\alpha\\in A_n$. Distributing finite sums gives $f=\\sum_{j=1}^r\\varphi_n(p_j)c_j$. These are exactly the original constant generators, so they span $C_n$ as an $A_n$-module. Every $A_n$-subalgebra containing them contains these sums; hence they also generate $C_n$ as an $A_n$-algebra. Evaluation $A_n[u_1,\\ldots,u_r]\\to C_n$, $u_j\\mapsto c_j$, is therefore surjective, exhibiting finite type. For $n=0$ the only monomial is $1$ and the formula is precisely the given spanning hypothesis.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary coefficient expansion in the finite affine case of more-morphisms.tex Tag 0F32, lemma-quasi-finite-Noetherian-universally-open."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-noetherian-finite-presentation] to the finite-type $A_n$-algebra $C_n$ from step 4, using Noetherianity of $A_n$ from step 3. This gives finite presentation of the given coefficient map $\\varphi_n$. Apply [lem-weil-pbc-finite-algebra-is-integral] to the finite $A_n$-module $C_n$ from step 4: each element is a root of a monic polynomial over the image of $A_n$. Both applications include $n=0$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FP, lemma-Noetherian-finite-type-is-finite-presentation (3); Tag 00GK, lemma-finite-is-integral."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-algebra-is-integral"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Assembly of Tags 030A, 00FN, 00FP(3), 00GK, with explicit elementary coefficient calculations; sources read in full at each cited lemma."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIntegrallyClosed|[Ff]initePresentation|[Ff]inite.*[Mm]ap|map.*[Ff]inite|[Ff]inite.*[Mm]vPolynomial",
+   "results": "Actual search returned 25 hits: Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/GaussLemma.lean, Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean, Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean, Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean.  Searched Mathlib/RingTheory/Polynomial.",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Algebra.FinitePresentation",
+   "results": "Actual search returned 9 hits: Algebra.FinitePresentation.mvPolynomial, Algebra.FinitePresentation.mvPolynomial_of_finitePresentation, Algebra.FinitePresentation.iff, Algebra.FinitePresentation.mk, Algebra.FinitePresentation.out, Algebra.FinitePresentation.ker_fg_of_mvPolynomial, Algebra.FinitePresentation.iff_quotient_mvPolynomial', Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite. ",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A is a normal noetherian domain and C is a domain finite over A with injective structure map, then in finitely many variables A polynomial ring is normal noetherian and the coefficient map to C polynomial ring is injective finite integral and finitely presented",
+   "results": "Actual search returned 8 hits: exists_integral_inj_algHom_of_fg, fg_of_fg_of_fg, exists_finite_inj_algHom_of_fg, exists_integral_inj_algHom_of_quotient, Polynomial.isNoetherianRing, RingHom.finite_of_algHom_finiteType_of_isJacobsonRing, Algebra.FiniteType.isNoetherianRing, AlgHom.FinitePresentation.of_finiteType. ",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPolynomial.*(IsIntegrallyClosed|Module.Finite)|instIsIntegrallyClosed|moduleFinite|module_finite|[Ff]inite.*MvPolynomial|MvPolynomial.*[Ff]inite",
+   "results": "Actual search returned 25 hits: Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/PolynomialLaw/Basic.lean, Mathlib/RingTheory/Finiteness/Finsupp.lean, Mathlib/RingTheory/Finiteness/Finsupp.lean.  Searched Mathlib/RingTheory.",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Polynomial extension of an injective finite algebra of domains over an integrally closed noetherian domain preserves injectivity and finite module generators, normality of the base, and finite presentation of the extension",
+   "results": "Actual search returned 8 hits: exists_integral_inj_algHom_of_fg, IsIntegralClosure.finite, Ring.instFiniteNormalClosure, Ring.instFiniteNormalClosure_1, fg_of_fg_of_fg, Ring.instIsIntegrallyClosedNormalClosure, exists_finite_inj_algHom_of_fg, IsIntegralClosure.isNoetherian. ",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "grep",
+   "query": "MvPolynomial|moduleFinite|isIntegrallyClosed",
+   "results": "Actual search returned 5 hits: 22, 23, 24, 180, 181.  Searched Mathlib/RingTheory/Polynomial/IsIntegral.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|isNoetherianRing|map_injective|Module.Finite|span.*map|map.*span",
+   "results": "Actual search returned 5 hits: Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean.  Searched Mathlib/Algebra/MvPolynomial.",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a finite injective extension of domains over a normal noetherian ring, adjoining finitely many indeterminates preserves the same finite module generators and gives an integral finitely presented extension with normal noetherian base",
+   "results": "Actual search returned 8 hits: exists_integral_inj_algHom_of_fg, exists_finite_inj_algHom_of_fg, isNoetherian_adjoin_finset, Algebra.finite_adjoin_simple_of_isIntegral, Algebra.finite_adjoin_of_finite_of_isIntegral, Module.Finite.of_injective, Module.finitePresentation_of_finite, Algebra.FinitePresentation.polynomial. ",
+   "date": "2026-10-22",
+   "verdict": "no match: polynomial finite-presentation and injective-map declarations cover individual clauses only. Noether normalization chooses a new map over a field, rather than the given coefficient map. None states preservation of the specified module generators together with the normal-domain, Noetherian, integral and finite-presentation conclusions; these require the coefficient regrouping and normality induction."
+  },
+  {
+   "tool": "grep",
+   "query": "map_injective|IsIntegrallyClosed|Module.Finite|span.*map",
+   "results": "Actual logged search: Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean, Mathlib/Algebra/MvPolynomial/Eval.lean; 5 hits; subdirectory Algebra/MvPolynomial. Read the returned hits: finite presentation over the coefficient base and Noether normalization do not assert preservation of the prescribed spanning family over the polynomial base. MvPolynomial.map_injective covers only injection.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; individual general results reused through existing DAG leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polynomial extension preserves specified finite module generators of an injective algebra extension and is integral finitely presented over a normal Noetherian base",
+   "results": "Actual logged search: exists_integral_inj_algHom_of_fg, instFinitePresentationTensorProduct, Algebra.IsIntegral.of_injective, Algebra.FinitePresentation.polynomial, Algebra.IsAlgebraic.extendScalars, instIsIntegralPolynomial, Algebra.Generators.extend, IsIntegral.of_finite; 8 hits; subdirectory (all). Read the returned hits: finite presentation over the coefficient base and Noether normalization do not assert preservation of the prescribed spanning family over the polynomial base. MvPolynomial.map_injective covers only injection.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; individual general results reused through existing DAG leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "MvPolynomial, Algebra.FinitePresentation",
+   "results": "Actual logged search: Algebra.FinitePresentation.mvPolynomial, Algebra.FinitePresentation.mvPolynomial_of_finitePresentation, Algebra.FinitePresentation.iff, Algebra.FinitePresentation.mk, Algebra.FinitePresentation.out, Algebra.FinitePresentation.ker_fg_of_mvPolynomial, Algebra.FinitePresentation.iff_quotient_mvPolynomial', Algebra.Presentation.instFinitePresentationModelOfHasCoeffsOfFinite; 9 hits; subdirectory (all). Read the returned hits: finite presentation over the coefficient base and Noether normalization do not assert preservation of the prescribed spanning family over the polynomial base. MvPolynomial.map_injective covers only injection.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; individual general results reused through existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective finite extension of domains over a normal Noetherian ring remains injective after adjoining finitely many variables, with the same module generators, normal Noetherian base, integral and finitely presented coefficient map",
+   "results": "Actual logged search: fg_of_fg_of_fg, Algebra.SubmersivePresentation.cotangentComplexAux_injective, exists_integral_inj_algHom_of_fg, exists_finite_inj_algHom_of_fg, Algebra.SubmersivePresentation.cotangentComplex_injective, exists_integral_inj_algHom_of_quotient, Algebra.Generators.CotangentSpace.map_toComp_injective, Algebra.PreSubmersivePresentation.map_inj; 8 hits; subdirectory (all). Read the returned hits: finite presentation over the coefficient base and Noether normalization do not assert preservation of the prescribed spanning family over the polynomial base. MvPolynomial.map_injective covers only injection.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; individual general results reused through existing DAG leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant images of any prescribed finite spanning family of an algebra span its multivariable polynomial ring over the polynomial ring of the base",
+   "results": "Actual logged search: PolynomialLaw.exists_range_φ_eq_of_fg, MvPolynomial.adjoin_range_X, Algebra.Generators.finiteType, Algebra.FiniteType.iff_exists_generators, PolynomialLaw.range_φ, Algebra.FiniteType.instMvPolynomialOfFinite, Algebra.FinitePresentation.mvPolynomial_of_finitePresentation, Algebra.FinitePresentation.mvPolynomial; 8 hits; subdirectory (all). Read the returned hits: finite presentation over the coefficient base and Noether normalization do not assert preservation of the prescribed spanning family over the polynomial base. MvPolynomial.map_injective covers only injection.",
+   "date": "2026-10-23",
+   "verdict": "no match for the full item; individual general results reused through existing DAG leaves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-finite-dominant-normal-base-universally-open",
+  "date": "2026-10-22",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.2--3.6, printed pp.605--608: finite separable constant extension, invariant Kummer cover and normalization, then rationalization of the generic marking. For a zero-dimensional base use §3.3 and a smooth covering of genus at least two. The kernel fixed-field statements are the fibre-product group construction in §3.5, rather than just the full-group invariant statement.; auxiliary de Jong §§3.2 and 3.5, pp.605,607--608, finite normalization and constant-field models. The relative purity and the full fibre-product surjectivity are the finite normal-model assertions used there; no flatness is claimed. Finiteness itself is already lem-fin-normalization-extension-finite. Local PDF WANTED; publisher PDF read.; justification that the full fibre product has a dense generic point after a finite extension of constants; re-split of finite dominant universal openness: old steps 2 and 3: coefficientwise injection, unchanged finite generators, polynomial normality and Noetherianity, finite presentation and integrality",
+   "via": [
+    "lem-sfb-finite-dominant-normal-base-universally-open",
+    "lem-sfb-finite-normal-relative-curve-model",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-domain-polynomial-extension-data",
+  "worker": "stage1",
+  "summary": "Q34 checked all clauses without changing the statement, reused four existing Mathlib leaves, and wrote the coefficient injection, polynomial regrouping and unchanged-generator calculation explicitly. No new nodes.",
+  "blueprint": "Realizes the inherited det-thm-sf-ctf-stability-direct-images (3) alteration prerequisite, specifically old finite-dominant universal-openness steps 2 and 3 recorded in blueprint.from.place. The current latest direct-images proof is read; this auxiliary algebra does not replace its unit route. The ancestor tool returns None, retained as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-714ac8f32",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-714ac8f32 (reviewer sub-agent of L); spot-checked: Read the item and all five cited nodes in full. All cited nodes are Mathlib leaves: mv-polynomial-ring, polynomial-ring-normal-domain (030A, one variable), finite-type-algebra-noetherian (00FN), finite-type-noetherian-finite-presentation (00FP(3)) and finite-algebra-is-integral (00GK). Checked each against algebra.tex (l.8130, 5991, 6088-6093, 7470) and the tags file. The statement and stmt_deps are unchanged from the base. The item is a statement-only node created by the Q37 re-split for parent step 2, and has no repair note of its own, so the re-split rule does not apply to it; live and side-live still have it unsplit. Step 1: coefficientwise injectivity, elementary. Step 2: the regrouping R[t1..t(m+1)] ≅ R[t1..tm][t(m+1)] is written out, the leading-coefficient argument shows C_n is a domain, and 030A is applied by induction from A to show A_n is normal. C_n is never claimed normal. Step 3: 00FN with A_n of finite type over A. Step 4: checked the computation f = Σ_j φ_n(p_j)c_j, so the constants span C_n as a module and generate it as an algebra, giving finite type. Step 5: 00FP(3) gives algebra-level finite presentation and 00GK gives integrality over φ_n(A_n), matching the statement. Edge cases: n=0; r=0 excluded because C is a domain; Z⊂Z[i]; non-normal Z[√−3] allowed. The parent's step-2 use matches the clauses. rg -L duplicate search found only the one-variable coefficientwise-extension node, not a duplicate. No new nodes, no SGA, no route issue (all dependencies are leaves), no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteDomainPolynomialExtensionData",
+  "declaration": "MvPolynomial.finite_domain_polynomial_extension_data",
+  "file": "lean/Sheaf/RingTheory/FiniteDomainPolynomialExtensionData.lean",
+  "statement": "theorem finite_domain_polynomial_extension_data {A : Type u} {C : Type v} [CommRing A] [CommRing C] [IsDomain A] [IsDomain C] [IsNoetherianRing A] [IsIntegrallyClosed A] (φ : A →+* C) (hφ : Function.Injective φ) (r : ℕ) (c : Fin r → C) (hc : ∀ x : C, ∃ a : Fin r → A, x = ∑ j, φ (a j) * c j) (n : ℕ) : Function.Injective (map (σ := Fin n) φ) ∧ IsNoetherianRing (MvPolynomial (Fin n) A) ∧ IsDomain (MvPolynomial (Fin n) A) ∧ IsIntegrallyClosed (MvPolynomial (Fin n) A) ∧ IsDomain (MvPolynomial (Fin n) C) ∧ (∀ f : MvPolynomial (Fin n) C, ∃ a : Fin r → MvPolynomial (Fin n) A, f = ∑ j, map φ (a j) * MvPolynomial.C (c j)) ∧ Function.Surjective (eval₂Hom (map (σ := Fin n) φ) (fun j : Fin r ↦ MvPolynomial.C (c j))) ∧ (map (σ := Fin n) φ).FinitePresentation ∧ (map (σ := Fin n) φ).IsIntegral",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-502b10ed5",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Clause-by-clause match: domains A (u) and C (v) with independent universes; IsNoetherianRing + IsIntegrallyClosed only on A; spanning hc verbatim; map φ is the coefficientwise φ_n. Conclusions: injective, A_n Noetherian/domain/integrally closed, C_n domain, the same constants C(c j) span as a module and generate as an algebra (surjective eval₂Hom over map φ), RingHom.FinitePresentation (= Algebra.FinitePresentation via toAlgebra) and RingHom.IsIntegral (monic over φ_n). n=0 included; r=0 vacuous; C not assumed normal. lean.statement verbatim; only the lean field changed versus live; 4 Mathlib-leaf stmt_deps all used; no definitions; single sorry; docstring has source tags, blueprint tag and 5 proof steps; no duplicate in the live tree; Stacks 030A/00FP(3)/00GK read, 00FN from its citation only. No findings; no compile needed."
+ }
+}

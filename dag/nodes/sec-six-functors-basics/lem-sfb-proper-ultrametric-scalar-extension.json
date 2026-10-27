@@ -23,57 +23,19 @@
    }
   },
   {
-   "text": "Consider any subspace $U$ containing $W$ and linear extension $g:U\\to K$ with $|g(u)|\\leq C\\|u\\|$, and fix $x\\in V\\setminus U$. For each $u\\in U$ put $R_u=C\\|x-u\\|$ and $B_u=\\{b\\in K:|b-g(u)|\\leq R_u\\}$. For $u,v\\in U$,\n$$|g(u)-g(v)|\\leq C\\|u-v\\|\\leq\\max(R_u,R_v).$$\nConsequently if $R_u\\leq R_v$ and $b\\in B_u$, the scalar ultrametric inequality gives $|b-g(v)|\\leq\\max(R_u,|g(u)-g(v)|)\\leq R_v$. Hence $B_u\\subseteq B_v$. In particular the balls are totally ordered by inclusion and each contains its center. Each ball is closed: for $y\\notin B_u$ set $\\epsilon=(|y-g(u)|-R_u)/2>0$. If $|z-y|<\\epsilon$ and $z\\in B_u$, the ordinary triangle inequality gives $|y-g(u)|\\leq |y-z|+R_u<\\epsilon+R_u<|y-g(u)|$, a contradiction.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent scalar-extension expansion: explicit center-distance, containment and closedness calculations for the admissible balls"
-   }
-  },
-  {
-   "text": "Use $B_0=\\{b:|b|\\leq C\\|x\\|\\}$ as a topological space with its subspace topology. It is nonempty and compact by the hypothesis on $K$. The subsets $B_0\\cap B_u$ are closed in $B_0$ by the preceding calculation. For a finite set $F\\subseteq U$, select an index $u_*$ of least radius among $F\\cup\\{0\\}$; a least member exists in this nonempty finite set of real radii. Then $B_{u_*}\\subseteq B_0\\cap\\bigcap_{u\\in F}B_u$, and its center belongs to that intersection. This also deals with $F=\\varnothing$. Apply [lem-sfb-compact-closed-finite-intersection] to the compact space $B_0$ and the set-indexed closed family $(B_0\\cap B_u)_{u\\in U}$. Obtain $b\\in\\bigcap_{u\\in U}B_u$. This is the compactness step (Stacks Tag 005D, lemma-intersection-closed-in-quasi-compact); no lower bound for the radii or completeness of $U$ is needed.",
+   "text": "For this fixed $C$, take any bounded linear extension $g:U\\to K$ of $f$ with $W\\subseteq U\\subseteq V$ and any $x\\notin U$. Apply [lem-sfb-ultrametric-one-vector-extension] to $K,V,U,C,g,x$. Its compact-ball hypotheses are exactly those of the item, and its conclusion gives a linear extension $G:U+Kx\\to K$ with the same bound $C$. This verifies the local extension condition of [lem-sfb-bounded-extension-zorn] for every such $U,g,x$. The norm and absolute value satisfy that node's ordinary triangle inequalities by $\\max(r,s)\\leq r+s$. Applying it to $W,f,C$ yields a $K$-linear map $h:V\\to K$ restricting to $f$ with $|h(v)|\\leq C\\|v\\|$ for every $v\\in V$.",
    "uses": [
-    "lem-sfb-compact-closed-finite-intersection"
+    "lem-sfb-ultrametric-one-vector-extension",
+    "lem-sfb-bounded-extension-zorn"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent scalar-extension expansion: finite intersections inside the single compact ball B_0; Stacks Tag 005D"
+    "place": "Paragraph (3), agent scalar-extension expansion: assembly of extracted old steps 2–4 and 5–6"
    }
   },
   {
-   "text": "Every element of $U+Kx$ has a unique expression $u+ax$ with $u\\in U$ and $a\\in K$: two expressions with different coefficients would imply $x\\in U$ by dividing their difference by the nonzero coefficient. Define $G(u+ax)=g(u)+ab$. This formula is additive and scalar-preserving by adding and scaling the unique expressions, and for $a=0$ it equals $g(u)$ and has the required bound. If $a\\ne0$, put $v=-a^{-1}u\\in U$. Since $b\\in B_v$, linearity and norm homogeneity give\n$$|G(u+ax)|=|a|\\,|b-g(v)|\\leq |a|C\\|x-v\\|=C\\|u+ax\\|.$$\nThus the explicitly constructed proper extension on $U+Kx$ preserves the same constant $C$. The uses of minus signs here follow from $|-1|=1$, which follows from multiplicativity and $(-1)^2=1$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent scalar-extension expansion: the linear formula and its bound on a one-vector enlargement"
-   }
-  },
-  {
-   "text": "Let $\\mathcal S$ be the set of subsets of $V\\times K$ that are graphs of linear maps $g:U\\to K$, for subspaces $W\\subseteq U\\subseteq V$, restricting to $f$ on $W$ and satisfying $|g(u)|\\leq C\\|u\\|$. This is a set, being a subfamily of the power set of $V\\times K$, and it contains the graph of $f$. For a nonempty chain of such graphs, take their union. Comparability ensures a unique value at each vector in the union of the domains. Two vectors in that domain lie together in one chain member, so their sum and scalar multiples satisfy the same linear identities there. Thus the union is again the graph of a linear map on a subspace containing $W$; it agrees with $f$, and every value satisfies the same bound because it comes from one member. This union is an upper bound in $\\mathcal S$. For the empty chain the graph of $f$ is an upper bound.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent scalar-extension expansion: check all chain-upper-bound hypotheses for the set of bounded partial-extension graphs"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-zorn-lemma] with underlying set $V\\times K$ and family $\\mathcal S$, using the upper bounds just constructed, including the empty-chain case. Let the maximal graph be that of $g:U\\to K$. If $U\\ne V$, choose $x\\in V\\setminus U$ and repeat the ball construction and the explicit formula of steps 2–4 for this $U,g,x$. Step 3 uses [lem-sfb-compact-closed-finite-intersection] and supplies $b$; step 4 supplies a bounded extension to $U+Kx$. Its graph strictly contains the maximal graph, since its domain additionally contains $x$, a contradiction. Therefore $U=V$. Put $\\widetilde f=g$.",
-   "uses": [
-    "lem-weil-pbc-zorn-lemma",
-    "lem-sfb-compact-closed-finite-intersection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
-    "place": "Paragraph (3), agent scalar-extension expansion: Zorn maximality and contradiction by the one-vector construction"
-   }
-  },
-  {
-   "text": "The maximal graph already ensures $K$-linearity and $\\widetilde f|_W=f$. For every $v,w\\in V$, linearity and its bound give\n$$|\\widetilde f(v)-\\widetilde f(w)|\\leq C\\|v-w\\|.$$\nFor any $\\epsilon>0$, take $\\delta=\\epsilon/C>0$; then $\\|v-w\\|<\\delta$ implies $|\\widetilde f(v)-\\widetilde f(w)|<\\epsilon$. Hence $\\widetilde f$ is continuous for exactly the prescribed metrics, proving every clause.",
+   "text": "Put $\\widetilde f=h$. Its construction ensures $K$-linearity and $\\widetilde f|_W=f$. For every $v,w\\in V$, linearity and its bound give\n$$|\\widetilde f(v)-\\widetilde f(w)|\\leq C\\|v-w\\|.$$\nFor any $\\epsilon>0$, take $\\delta=\\epsilon/C>0$; then $\\|v-w\\|<\\delta$ implies $|\\widetilde f(v)-\\widetilde f(w)|<\\epsilon$. Hence $\\widetilde f$ is continuous for exactly the prescribed metrics, proving every clause.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -84,8 +46,8 @@
  ],
  "proof_deps": [
   "lem-trf-continuous-linear-map-norm-bound",
-  "lem-sfb-compact-closed-finite-intersection",
-  "lem-weil-pbc-zorn-lemma"
+  "lem-sfb-ultrametric-one-vector-extension",
+  "lem-sfb-bounded-extension-zorn"
  ],
  "proof_origin": {
   "by": "agent",
@@ -403,16 +365,16 @@
   "date": "2026-10-22",
   "item": "lem-sfb-proper-ultrametric-scalar-extension",
   "worker": "stage1",
-  "summary": "Preserved the statement and its sole statement dependency. Proved bounded extension by a totally ordered family of admissible compact scalar balls, explicit one-vector extension, unions of bounded graphs, and Zorn maximality. Reused three existing Mathlib leaves, creating no nodes. Checked arbitrary nonclosed W, zero functional, empty chains and finite intersections. Searched Lean and Mathlib; no attachment or applicable Hahn–Banach theorem found. Repaired the inherited null blueprint anchor using the documented Paragraph (3) provenance; no target/unit statement changes.",
-  "blueprint": "det-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), arithmetic coefficient-topology expansion supporting the continuous retraction for finite-field boundary detection. The scalar-extension argument is absent from the blueprint and is explicitly agent-written. The inherited created.item chain ends at the non-node module Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs ancestor returned None; the actual blueprint anchor is recorded from the ancestor lem-sfb-admissible-direct-image blueprint.from.node and source path."
+  "summary": "Repair of batch5 re-split request. Statement and all other inherited records preserved. Extracted the entire old admissible-ball/one-vector construction (steps 2–4) and the bounded-chain/Zorn argument (steps 5–6) into two self-contained, statement-only unsplit nodes of comparable proof workload. The parent now assembles those two nodes between the unchanged norm-bound and elementary continuity arguments. All three kinds of Mathlib searches, second phrasings, DAG/blueprint/project searches, citation quotations, source and edge-case reviews are recorded in the report. Landing-return repair: rebuilt this record from the current shared DAG, retaining all current non-proof fields; re-read the norm-bound and field statements and verified every citation against the current dependency statements. The two extracted children remain absent from the shared DAG. Revalidated for a fresh delivery on the current server base; promotion of the side completion to the live queue remains the maintainer landing operation.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), arithmetic coefficient-topology expansion supporting the continuous retraction for finite-field boundary detection. The scalar-extension argument is absent from the blueprint and is explicitly agent-written. The inherited created.item chain ends at the non-node module Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs ancestor returned None; the actual blueprint anchor is recorded from the ancestor lem-sfb-admissible-direct-image blueprint.from.node and source path. The two extracted nodes realize the same agent expansion, with no chapter/unit route change."
  },
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NR-c0b082da1",
-  "group": "NR",
+  "reviewer": "NT-cc-Q139-176d00e1a",
+  "group": "Q139",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-c0b082da1 (reviewer sub-agent of L); spot-checked: I read the item, all 7 proof steps and the full statements of the 3 cited nodes. Nothing is wrong. The delivery keeps the imported statement word for word (stmt_deps def-weil-field) and creates no new nodes. The statement is Ingleton's scalar nonarchimedean Hahn-Banach theorem. It is true because a field with compact closed balls is spherically complete; small cases W=0, W=V, dense W and Q_p^2 checked. Step 1: lem-trf-continuous-linear-map-norm-bound gives C>0; nontriviality comes from t, the triangle inequality from max<=sum. Step 2: |g(u)-g(v)|<=max(R_u,R_v) makes the balls totally ordered and closed; the inclusion direction checks. Step 3: inside the compact ball B_0, the finite intersections contain the least-radius centre (F empty included); lem-sfb-compact-closed-finite-intersection (Stacks 005D / CompactSpace.iInter_nonempty) gives b. Step 4: with v=-a^{-1}u, g(u)+ab=a(b-g(v)), so the bound C||u+ax|| holds; signs and the a=0 case checked. Steps 5-6: chains of graphs have upper bounds (graph of f for the empty chain), and lem-weil-pbc-zorn-lemma (zorn_subset) plus steps 2-4 force U=V. Step 7: delta=eps/C gives continuity. The steps marked elementary are short calculations; no cycle. Duplicate search over the snapshot DAG (Hahn, Ingleton, spherically, ultrametric, functional extension) finds nothing that states this theorem; Mathlib's StrongDual.exists_extension needs IsRCLikeNormedField. Batch 5: the newly cited lem-trf-continuous-linear-map-norm-bound is a Mathlib leaf (ContinuousLinearMap.bound), general functional analysis whose only stmt_dep is a definition. It is not part of the statements or proofs of the trace formula or Poincare duality, so the citation is accepted and no tool_uses entry is needed. No SGA cited. Advisory: blueprint.from.node was changed from null to det-thm-sf-ctf-stability-direct-images, which is consistent with the via chain; the Ingleton reference is WANTED. No fixes written."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-176d00e1a (reviewer sub-agent of L); spot-checked: This is a landing-return rebase of the Q139 head fccf3e4a, which got a PASS earlier today. Both new nodes (lem-sfb-ultrametric-one-vector-extension, lem-sfb-bounded-extension-zorn) are byte-identical to that head. The item differs from it only in the split_report summary. Against clones/live, the item differs only in proof, proof_deps and split_report, its statement is unchanged, and live still has the 7-step proof with neither child present, so no parallel re-split exists. I re-read the current statements of def-weil-field, lem-trf-continuous-linear-map-norm-bound (needs a nontrivial |.|, given by t; no completeness required), lem-sfb-compact-closed-finite-intersection and lem-weil-pbc-zorn-lemma (all chains, including the empty one). Step 1 gets C>0. Step 2: node A takes any bounded g on any U and any x outside U, so it supplies exactly node B's local extension condition; node B then gives h on V with the bound. Step 3 is the elementary epsilon/C continuity argument. Node A checks: nesting from |g(u)-g(v)|<=max(R_u,R_v); the least-radius ball among F with 0 gives every finite intersection, including F empty; compactness of B_0 gives a nonempty total intersection; with v=-a^{-1}u, |G(u+ax)|=|a||b-g(v)|<=C||u+ax||. Node B checks: a chain union is a single-valued linear graph; graph(f) bounds the empty chain; a maximal member has domain V. Small cases: Q_p^2, W=V, W=0, f=0, V=0. Re-split criteria: old steps 2-4 (about 2273 chars) and 5-6 (about 1453 chars) reappear in full as explicit statement clauses of two comparable nodes. Node B takes the local extension as a hypothesis, so there is no circularity and no restatement of the parent. The parent is a 3-step assembly of 1539 chars. Sources: blueprint main-20261015 paragraph (3), agent provenance, Ingleton marked WANTED; no SGA. Advisory: the new nodes have blueprint.from.node null because the ancestor command returns None; this was accepted earlier. No fixes. Maintainer note: pure rebase, which needs promotion of the side completion."
  },
  "lean": {
   "module": "Sheaf.Analysis.Normed.Module.ProperUltrametricScalarExtension",
@@ -431,5 +393,17 @@
   "group": "NC",
   "result": "pass",
   "note": "All node clauses match the Lean: NormedField + IsUltrametricDist K + literal 0<|t|<1 witness + ProperSpace K (balls with r<0 are empty, so no stronger); NormedAddCommGroup/NormedSpace + IsUltrametricDist V; arbitrary Submodule W with induced topology; f : W →L[K] K; ∃ g : V →L[K] K agreeing on W. W need not be closed, V need not be complete; independent universes u,v; lean.statement verbatim in the file; only the lean field changed vs live. Statement true (compact balls ⇒ spherically complete ⇒ Ingleton). No duplicate in Mathlib (Hahn-Banach needs IsRCLike or a dense range), Sheaf, WeilConjectures or the DAG. No definitions, proof sorry only, docstrings carry the source place, blueprint tag and 7 proof steps; report has both required sections. Advisory: plain proof-only imports Operator.Basic/Compactness.Compact/Order.Zorn. No compile: no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

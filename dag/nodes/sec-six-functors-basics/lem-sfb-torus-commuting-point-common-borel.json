@@ -1,0 +1,275 @@
+{
+ "id": "lem-sfb-torus-commuting-point-common-borel",
+ "kind": "statement",
+ "title": "A torus and a commuting rational point lie in a common Borel subgroup",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. All groups below are affine group schemes [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism] over $k$, and all subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness have the meanings of [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group scheme $T$ isomorphic over $k$ to $(\\mathbf G_m)^r$ for some integer $r\\geq0$ [def-sc-gm-ga]. Let $G$ be smooth and connected, let $T\\subseteq G$ be any torus, and let $c\\in G(k)$ satisfy $c_At=tc_A$ for every commutative $k$-algebra $A$ and every $t\\in T(A)$. A Borel subgroup is a maximal smooth connected solvable subgroup of $G$, with solvable meaning that successive scheme-theoretic commutator subgroups eventually become trivial. There exists a Borel subgroup $B\\subseteq G$ such that $T\\subseteq B$ as subgroup schemes and $c\\in B(k)$. No maximality of $T$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 17.37 and its proof, printed p.363: the assertion actually proved for each c is existence of a common Borel. The parenthetical finite-union assertion is not included (it fails for the trivial torus)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Borel subgroup $B_0$ by [lem-sfb-borel-conjugation-cover]. By [lem-sfb-homogeneous-orbit-quotient-geometry] form the separated finite-type quotient $q:G\\to X=G/B_0$; it is faithfully flat, and $(g,b)\\mapsto(g,gb)$ identifies $G\\times B_0$ with $G\\times_XG$. The left action is $h\\cdot q(g)=q(hg)$: multiplication preserves right cosets after every base change, so it descends through the represented fppf coset sheaf. The unit and associativity identities follow from those of $G$ on local lifts.",
+   "uses": [
+    "lem-sfb-borel-conjugation-cover",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, choice of B and the action on G/B; quotient geometry: Theorem 17.9(a), p.354."
+   }
+  },
+  {
+   "text": "The map $q$ is of finite presentation and detects cosets. It is locally of finite type by [lemma-nagata-finite-type-to-separated-target](a), and $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so $q$ is locally of finite presentation by [pqf-lem-lft-fp-locnoeth]; as $G$ is affine and $X$ separated, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $q$ quasi-compact and of finite presentation. On a test scheme $T$ the kernel-pair isomorphism says $q(a)=q(b)$ exactly when $a^{-1}b\\in B_0(T)$.",
+   "uses": [
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, the quotient G/B and completeness of G/B used there; Theorem 17.9(a), p.354, and the quotient properties of 5.20–5.28, pp.104–105."
+   }
+  },
+  {
+   "text": "Points of $X$ lift fpqc locally, and $X$ is proper. For $x\\in X(T)$ the projection $T'=G\\times_XT\\to T$ is flat, surjective and quasi-compact by [lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-surjective-base-change, lem-weil-pbc-qcqs-morphism-permanence](3); the preimage of an affine open is quasi-compact, so finitely many affine opens of $T'$ map onto it, and $\\{T'\\to T\\}$ is an fpqc covering [def-weil-pbc-fpqc-covering] on which $x$ is the image of the first projection. With the preceding step, $q$ is a quotient as required by [lem-sfb-borel-quotient-proper-geometry]; $B_0$ is smooth, connected, closed and maximal among smooth connected solvable subgroups, so that node makes $X$ proper over $k$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-pbc-fpqc-covering",
+    "lem-sfb-borel-quotient-proper-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, the quotient G/B and completeness of G/B used there; Theorem 17.9(a), p.354, and the quotient properties of 5.20–5.28, pp.104–105."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-borel-conjugation-cover] to $c$ and $B_0$: choose $g_0\\in G(k)$ and $b_0\\in B_0(k)$ with $c=g_0b_0g_0^{-1}$. Then $c\\cdot q(g_0)=q(g_0b_0)=q(g_0)$. Thus the equalizer of $c:X\\to X$ and $\\mathrm{id}_X$ has a $k$-point.",
+   "uses": [
+    "lem-sfb-borel-conjugation-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, nonemptiness from Theorem 17.33(b), p.362."
+   }
+  },
+  {
+   "text": "Define $Y=X\\times_{X\\times_kX}X$ using $(c\\cdot-,\\mathrm{id}_X):X\\to X\\times_kX$ and the diagonal. On every test scheme its points are exactly the $x$ satisfying $c\\cdot x=x$. Since $X$ is separated, its diagonal is closed [def-weil-proper-morphism]; [lem-weil-pbc-closed-immersion-base-change] makes $Y\\hookrightarrow X$ closed. By [lem-weil-pbc-closed-immersion-proper], $Y$ is proper over $k$, hence of finite type by [def-weil-proper-morphism]. It is nonempty by the preceding step; no reduction or smoothness of $Y$ is required.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, the closed c-fixed subscheme of G/B."
+   }
+  },
+  {
+   "text": "The action of $T$ restricts to $Y$. Indeed, on every commutative $k$-algebra $A$, for $t\\in T(A)$ and $y\\in Y(A)$, the given commutation identity gives $c_A\\cdot(t\\cdot y)=t\\cdot(c_A\\cdot y)=t\\cdot y$. This holds after arbitrary base change and therefore factors the morphism $T\\times Y\\to X$ through the defining equalizer $Y$. Unit and associativity restrict from the action on $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, T stabilizes the c-fixed subscheme."
+   }
+  },
+  {
+   "text": "Every torus is smooth and connected by [lem-sfb-multiplicative-type-largest-subtorus]. Since $T\\simeq\\mathbf G_m^r$, its test-algebra groups are commutative, so its commutator morphism is the unit and it is solvable. Apply [lem-sfb-solvable-proper-fixed-point] to this smooth connected solvable group acting on the nonempty proper finite-type scheme $Y$. Obtain $y\\in Y(k)$ fixed by $T$ after every algebra extension. By [lem-sfb-homogeneous-orbit-quotient-geometry], its image in $X(k)$ lifts to some $g\\in G(k)$.",
+   "uses": [
+    "lem-sfb-multiplicative-type-largest-subtorus",
+    "lem-sfb-solvable-proper-fixed-point",
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, second use of the Borel fixed point theorem 17.3; smooth connected tori: Definition 12.14 and paragraph following, p.236."
+   }
+  },
+  {
+   "text": "Put $B=gB_0g^{-1}$. Conjugation is a group-scheme automorphism, so $B$ is closed, smooth, connected, solvable and maximal with these properties: a larger such subgroup conjugates back to one larger than $B_0$. For every $k$-algebra $A$ and $t\\in T(A)$ we have $q(tg_A)=t\\cdot y_A=y_A=q(g_A)$. The kernel-pair identity of [lem-sfb-homogeneous-orbit-quotient-geometry] gives $g_A^{-1}tg_A\\in B_0(A)$; hence $T(A)\\subseteq B(A)$ naturally in $A$, which is the subgroup-scheme containment $T\\subseteq B$. Likewise $c\\cdot y=y$ gives $g^{-1}cg\\in B_0(k)$ and $c\\in B(k)$.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 17.37, p.363, displayed coset equalities and final conjugation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-conjugation-cover",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-borel-quotient-proper-geometry",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-multiplicative-type-largest-subtorus",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "def-weil-pbc-fpqc-covering"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 17.37, printed p.363, fixed-locus proof; Theorem 17.33(b), p.362, for the first fixed point."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A torus and an element centralizing it in a connected affine algebraic group lie in a common Borel subgroup",
+   "results": "8 hits; top: RootPairing.GeckConstruction.h_mem_cartanSubalgebra', Subgroup.center_eq_infi', Sylow.conj_eq_normalizer_conj_of_mem_centralizer, LieAlgebra.exists_isCartanSubalgebra_engel, LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card, ConjClasses.mk_bijOn, LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer, LieAlgebra.zeroRootSubalgebra_normalizer_eq_self. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest cc2ae301d1f4b560.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every element commuting with a torus belongs to a Borel subgroup containing that torus",
+   "results": "8 hits; top: Commute, AddSubsemigroup.centralizer_le, Subgroup.commute_subtype_of_commute, Algebra.commute_of_mem_adjoin_of_forall_mem_commute, Subgroup.Commensurable.commensurator, MulAction.IwasawaStructure.is_comm, Subgroup.commGroup_isMulCommutative, Subgroup.closureCommGroupOfComm. Read the returned signatures: smooth-locus and basic smoothness assertions, abstract group actions/centralizers, Galois categories and Lie-algebra statements do not assert this algebraic-group-scheme result. Logged digest e737e528593e52f2.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Subgroup\"",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "borelSubgroup|BorelSubgroup|torus",
+   "results": "0 hits; top: none. No matching source lines or declarations returned. Mathlib/AlgebraicGeometry/ searched. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A torus and a commuting element in a connected algebraic group lie in a common Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T21:17:09Z\", \"tool\": \"leansearch\", \"query\": \"A torus and a commuting element in a connected algebraic group lie in a common Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.is_comm\", \"Subgroup.connectedComponentOfOne\", \"Subgroup.Commensurable.commensurator\", \"UnitAddTorus.span_mFourier_closure_eq_top\", \"OpenSubgroup.mem_top\", \"AddSubgroup.connectedComponentOfZero\", \"GroupLieAlgebra\", \"commutator_def\"], \"digest\": \"281e5be2cf051cd4\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borelSubgroup|torus",
+   "results": "{\"t\": \"2026-10-23T21:18:07Z\", \"tool\": \"grep\", \"query\": \"BorelSubgroup|borelSubgroup|torus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Borel\", \"Subgroup\"",
+   "results": "{\"t\": \"2026-10-23T21:18:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Borel\\\", \\\"Subgroup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torus and an element centralizing it in a smooth connected algebraic group are contained in a common Borel subgroup",
+   "results": "{\"t\": \"2026-10-23T21:18:09Z\", \"tool\": \"leanfinder\", \"query\": \"A torus and an element centralizing it in a smooth connected algebraic group are contained in a common Borel subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.center_eq_infi'\", \"commutator_centralizer_commutator_le_center\", \"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\", \"Subgroup.center_eq_iInf\", \"Sylow.normalizer_le_centralizer_or_le_commutator\", \"LieAlgebra.exists_engelian_lieSubalgebra_of_lt_normalizer\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"mem_upperCentralSeriesStep\"], \"digest\": \"74dd7bb49284a2b0\"} Read returned signatures: abstract group conjugacy and centralizers, Galois-category actions, Lie-algebra Borel submodules and measure-theoretic Borel spaces do not assert the algebraic-group theorem. Source candidates inspected: Group.conjugatesOfSet and subset_conjugatesOfSet (Algebra/Group/Subgroup/Basic.lean:561,570) only define conjugation saturation and its inclusion; LieAlgebra.Basis.borelUpper/borelLower (Algebra/Lie/Basis/Basic.lean:147,154) are Lie submodules.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-centralizer-smooth-connected",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 17.37 and its proof, printed p.363: the assertion actually proved for each c is existence of a common Borel. The parenthetical finite-union assertion is not included (it fails for the trivial torus).",
+   "via": [
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-commuting-point-common-borel",
+  "worker": "stage1",
+  "summary": "Follow Milne 17.37 using the represented quotient G/B, its c-fixed closed subscheme, and Borel fixed point for the commuting torus. Add only the independent Borel conjugation-covering theorem; reuse quotient geometry and smooth connected torus statements. Avoid the cyclic general flag-variety/normalizer route. Statement unchanged.",
+  "blueprint": "Latest blueprint direct-images proof (3) retained through the inherited alteration/moduli prerequisites and Milne Lemma 17.37. The inherited null ancestor and via chain are retained; this split realizes the two fixed-point arguments and final coset calculation at the inherited precise from.place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-02164d91b",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-02164d91b (reviewer sub-agent of L); spot-checked: Read Milne iAG2017 Lemma 17.37 (p.363), 17.32 to 17.34 (p.362) and 17.6 to 17.9. The item follows the proof of 17.37: fixed locus (G/B)^c, restricted action of the commuting torus T, Borel fixed point theorem, then coset containment checked on every algebra. Milne's 'finite union' claim is false for non-maximal T (T=1, G=GL2), and the base statement already omits it; the statement is unchanged. Checked each step against the cited statements: homogeneous-orbit quotient (separated finite type, faithfully flat, kernel pair, rational lifting), closed-immersion base change and properness, torus smooth and connected, solvable-group fixed point (allows non-reduced X). The algebra in old steps 2, 4 and 6 is correct, and step 6 gives T contained in gB0g^-1 as subgroup schemes. One fault, fixed: old step 1 applied lem-sfb-borel-quotient-proper-geometry without checking its quotient hypotheses (finite presentation, coset criterion, fpqc-local lifts). The fix inserts new steps 2 and 3 that check them with mathlib leaves (lemma-nagata-finite-type-to-separated-target(a), lem-weil-pbc-finite-type-over-noetherian, pqf-lem-lft-fp-locnoeth, lem-weil-pbc-qcqs-morphism-permanence(1)(3), lem-weil-pbc-flat-morphism-base-change, lem-weil-pbc-surjective-base-change, def-weil-pbc-fpqc-covering); proof_deps is now the union of the step uses. New node lem-sfb-borel-conjugation-cover (Borel existence plus G(k) as the union of the k-points of the conjugates gBg^-1, Milne 17.33(b)/17.34) is true, tested on G=1, G solvable, GL2 and Ga. It is statement-only and self-contained, with no duplicate in the DAG: borel-maximal-torus-conjugacy is about tori; general-borel-flag-variety depends on the item through borel-scheme-normalizer and torus-centralizer-smooth-connected; reductive-borel-pair-structure is the reductive case only. It does not restate a clause of the item. No cycle: computed closures do not reach the item. Batch-5: the three flagged trf nodes (lem-trf-fppf-covering-base-change, lem-trf-smooth-fpqc-base-descent) are generic site and descent lemmas; neither assumption leaf and no trf or pd theorem or proposition is in the closures, so these are not steps of the trace formula or Poincare duality proofs. Accepted. No SGA citation. tool_uses is empty and every off-unit citation is a mathlib leaf. Note for the later splitter of the new node: use the nilpotent C_G(T)^0 route of 17.28/17.29, not lem-sfb-maximal-torus-centralizer-borel, which would make a cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.TorusCommutingPointCommonBorel",
+  "declaration": "AlgebraicGeometry.exists_borelGroupScheme_torus_commuting_point",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/TorusCommutingPointCommonBorel.lean",
+  "statement": "theorem exists_borelGroupScheme_torus_commuting_point {k : Type u} [Field k] [IsAlgClosed k] (G T : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (i : T ⟶ G) (hi : IsClosedSubgroupScheme i.hom.hom) (hT : ∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (c : 𝟙_ (Over (Spec (.of k))) ⟶ G.X) (hc : ∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X), Commute (toUnit (StandardGroupSchemes.affine k A) ≫ c) (t ≫ i.hom.hom)) : ∃ (B : Grp (Over (Spec (.of k)))) (j : B ⟶ G), IsBorelGroupScheme j.hom.hom ∧ (∃ f : T ⟶ B, f ≫ j = i) ∧ ∃ b : 𝟙_ (Over (Spec (.of k))) ⟶ B.X, b ≫ j.hom.hom = c",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf392ab58",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Statement matches lem-sfb-torus-commuting-point-common-borel / Milne Lemma 17.37 (p.363) clause by clause: alg. closed k; G affine (IsAffine), finite type (LocallyOfFiniteType+QuasiCompact), Smooth, ConnectedSpace; T a closed subgroup scheme (IsClosedSubgroupScheme i.hom.hom), iso over k to splitTorus k r (rank 0 = trivial group); c a k-point; hc = Commute(c_A, t) in Hom(Spec A, G) for every A : Type u with CommRing, Algebra k; conclusion ∃ B j, IsBorelGroupScheme (closed, smooth, connected, IsSolvableGroupScheme, maximal by factorisation) ∧ T factors through B as a group-scheme hom ∧ c lifts to B(k); no maximality of T, finite-union clause omitted. Records: only lean and +2 stmt_deps (def-sfb-borel-subgroup-scheme, def-sfb-tori-multiplicative-type, both on the delivery base and landed with reviewed_lean PASS, declarations used directly) differ from live; lean.statement verbatim; live has no Lean record and no duplicate. Edge cases: T trivial, G=1, G solvable, central torus in GL2, char p, non-reduced A all fine. Proof is a single sorry; source and blueprint docstrings present, theorem docstring follows the 8 proof steps; non-public imports are proof-dependency modules; report.md has both required sections. Compile not reproduced; no file changed."
+ }
+}

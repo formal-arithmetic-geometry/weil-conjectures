@@ -1,0 +1,357 @@
+{
+ "id": "lem-sfb-integral-support-lattice-reduction",
+ "kind": "statement",
+ "title": "Integral lattice reduction for a Noetherian support induction step",
+ "statement": "Fix distinct primes $p,\\ell$, a field $k$ of characteristic $p$, and a finite normed extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. All schemes are separated of finite type over $k$ [sk-def-sfb-dc-setting]. Put $A_{E,T}=p_T^*C(-,E)$ and $A_{\\mathcal O_E,T}=p_T^*C(-,\\mathcal O_E)$, with continuous-map condensed rings and their norm topologies [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use internal modules and their ordinary unbounded derived categories [sk-def-sfb-module-objects, sk-def-sfb-module-derived-pushpull]. Write $\\Dbc(T,A_E)$ for bounded complexes with finite constant local models on finite constructible stratifications [sk-def-sfb-constructible]. Lisse means pro-etale locally finite free, including rank zero [def-sfb-lisse-coefficient-module].\n\nA full thick subcategory means a full subcategory containing zero and closed under isomorphisms, shifts, finite sums, distinguished-triangle cones and retracts [def-weil-triangulated-category]; a retract is a pair of maps whose composite on the smaller object is its identity. Let $U$ be such a scheme, let $Z\\subseteq U$ be a closed subset, and let $\\mathcal H\\subseteq D(U,A_E)$ be a full thick subcategory. A complex is supported on a closed subset $F$ if its restriction to $U\\setminus F$ is zero. Assume every object of $\\Dbc(U,A_E)$ supported on any closed $F\\subsetneq Z$ belongs to $\\mathcal H$. For each nonempty integral locally closed subscheme $a:S\\hookrightarrow U$ [def-pc-integral-scheme] whose closure in $U$ is $Z$, assume\n$ a_!(M_0[1/\\ell])[0]\\in\\mathcal H$\nfor every lisse finite-rank $A_{\\mathcal O_E,S}$-module $M_0$, where $M_0[1/\\ell]=A_{E,S}\\otimes_{A_{\\mathcal O_E,S}}M_0$ and $a_!$ is exact, factorization-independent locally closed extension [lem-sfb-locally-closed-extension-coherence]. Then every $C\\in\\Dbc(U,A_E)$ supported on $Z$ belongs to $\\mathcal H$. If $Z=\\varnothing$, this conclusion holds without either additional assumption. Nonreduced and reducible $Z$ are allowed: $Z$ has only its underlying closed-set meaning, and the integral strata carry their reduced structures. The assertion concerns finite generation operations and contains no alteration or trace assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Agent support reduction from Lemma 6.8.13 and Proposition 6.8.14, pp.61-62; Stacks proetale.tex Tags 09AH (lemma-ses-associated-to-open), 09AB (lemma-thickening); original item proof steps 1-3."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-dc-setting",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-constructible",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-triangulated-category",
+  "def-pc-integral-scheme",
+  "lem-sfb-locally-closed-extension-coherence",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-locally-closed-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "First reduce to constructible sheaves $F$ on $U$ with $F|_{U\\setminus Z}=0$. Indeed exact restriction commutes with cohomology, so every $H^q(C)$ has this support; lem-sfb-bounded-cohomology-cone-witness reconstructs $C$ from finitely many shifts and triangles of these sheaves. It therefore suffices to prove $F[0]\\in\\mathcal H$ for every such $F$. If $Z=\\varnothing$, restriction is the identity and $C=0$, which belongs to $\\mathcal H$ without further assumptions. Henceforth $Z\\ne\\varnothing$.",
+   "uses": [
+    "lem-sfb-bounded-cohomology-cone-witness",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+    "place": "Complexes paragraph; exact open restriction from proetale.tex, Tags 09BN and 09AH"
+   }
+  },
+  {
+   "text": "Let $i:T=Z_{\\rm red}\\hookrightarrow U$ be the reduced induced closed subscheme and put $N=i^*F$. The standing finite-type schemes are Noetherian by lem-weil-pbc-finite-type-over-noetherian (a field is Noetherian); closed and open subschemes are Noetherian by lem-sfb-coefficient-heart-locally-closed-extension. Their underlying spaces satisfy the minimal condition by lem-weil-pbc-noetherian-scheme-closed-subsets-minimal. All open complements used below are consequently quasi-compact. The module localization sequence for $i$ has zero open term, and gives $F\\simeq i_*N$. The pullback lemma makes $N$ stratified locally finitely presented. More specifically, pull back the finite constant-model stratification of $F$ using actual fibre products. Exact coefficient pullback takes each finite scalar presentation to the same scalar matrix over the pulled coefficient ring, by sk-prop-sfb-cartesian-coefficients. Thus the models remain scalar-constant, so $N$ is constructible in the convention of the item. We work on the actual scheme $T$, rather than identifying a nonreduced closed subscheme with its reduction.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-coefficient-heart-locally-closed-extension",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-module-constructible-pullback",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), applied to the reduced induced closed subscheme; no use of a finite-coefficient-only invariance assertion"
+   }
+  },
+  {
+   "text": "There are finitely many irreducible components $Z_1,\\ldots,Z_r$ of $T$, and they cover $T$. For each $h$, set $O_h=T\\setminus\\bigcup_{g\\ne h}Z_g$. This is a nonempty open contained in $Z_h$: otherwise the irreducible $Z_h$ would be contained in one of the other components, contradicting maximality. It is irreducible, because it is a nonempty open of $Z_h$, and reduced because $T$ is reduced. Thus $O_h$ is integral. These opens are pairwise disjoint and their closures in $U$ are $Z_h$. This is just the finite-component argument of Topology Tag 0052; integrality is the reduced/irreducible criterion in def-pc-integral-scheme.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "lem-sc-irreducible-components-cover",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 004W (lemma-irreducible) and 0052 (lemma-Noetherian), finite-component argument"
+   }
+  },
+  {
+   "text": "Restrict $N$ to $O_h$, using the same scalar-presentation pullback argument as step 2, and take its finite constructible locally closed stratification. In a finite partition of an irreducible space into locally closed subsets, one member is dense: otherwise their finitely many proper closed closures could not cover the space. A dense locally closed subset is open. Here the corresponding stratum morphism really is an open immersion: after its locally closed factorization, its closed ideal on that open has vanishing radical and hence is zero, since $O_h$ is reduced. Call this nonempty integral open $T_h\\subseteq O_h$. On $T_h$ the finite constant local models are finite-dimensional $E$-vector spaces. Choosing a basis of each model identifies $A_{E,T_h}\\otimes_E P$ with $A_{E,T_h}^{\\oplus\\dim_E P}$. Thus $N|_{T_h}$ is lisse, including the possible zero model. No arbitrary image-containment factorization is used.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback",
+    "sk-def-sfb-constructible",
+    "def-pc-integral-scheme",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13 proof, reduction to local systems; finite constant scalar models are those of sk-def-sfb-constructible"
+   }
+  },
+  {
+   "text": "Apply sk-lem-stratified-lattice to the lisse module $N|_{T_h}$. It gives a finite locally closed stratification with a lisse integral lattice on each stratum. Choose a dense stratum, as in the preceding finite-partition argument. Since $T_h$ is reduced, its stratum morphism is again an open immersion. We obtain a nonempty integral open $S_h\\subseteq T_h$ and a lisse finite-rank $A_{\\mathcal O_E,S_h}$-module $M_{0,h}$ with $M_{0,h}[1/\\ell]\\simeq N|_{S_h}$. In particular $\\overline{S_h}=Z_h$. This uses only a lattice after shrinking; it asserts no global lattice on a possibly nonnormal component.",
+   "uses": [
+    "sk-lem-stratified-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph of proof, pp.61-62"
+   }
+  },
+  {
+   "text": "Put $S=\\coprod_{h=1}^r S_h$, an open subscheme of $T$, let $j:S\\hookrightarrow T$ and $a_h:S_h\\hookrightarrow U$ be the immersions, and let $e:W=(T\\setminus S)_{\\rm red}\\hookrightarrow T$ be the closed complement. The finite disjoint open-and-closed decomposition of $S$ gives $N|_S\\simeq\\bigoplus_h (S_h\\hookrightarrow S)_!(N|_{S_h})$: the natural maps restrict to the identity on each component, and sheaf gluing on this finite open cover tests that they are isomorphisms. Exact extension and its composition coherence therefore give\n$$P:=i_*j_!j^*N\\simeq\\bigoplus_{h=1}^r(a_h)_!(M_{0,h}[1/\\ell]).$$\nEach summand is constructible by lem-sfb-coefficient-heart-lisse-extension-constructible. A finite sum is constructible by the extension clause of det-lem-coefficient-heart-closure applied to split short exact sequences.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "det-lem-coefficient-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-coefficient-heart-ii/sk-cor-coefficient-heart-ii-generation.proof.md",
+    "place": "Converse paragraph, extension of lisse sheaves; finite disjoint-open decomposition and exact composition of extensions"
+   }
+  },
+  {
+   "text": "Each summand in $P[0]$ belongs to $\\mathcal H$. If $Z_h=Z$, apply the lattice hypothesis of the item to $a_h$ and $M_{0,h}$. If $Z_h\\subsetneq Z$, the summand is bounded constructible by the preceding step and supported on $Z_h$, so apply the smaller-support hypothesis. For the support assertion, factor $a_h$ through its closed reduced closure $Z_h$: coherence identifies its extension with a closed direct image after open extension, and restriction of a closed direct image to the complementary open is zero. Thus $P[0]\\in\\mathcal H$ by finite sums. In particular when $Z$ is reducible the lattice hypothesis may be vacuous: all $Z_h$ are proper and the smaller-support hypothesis handles the summands.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AG (lemma-jshriek-zero) and Tag 09AH; elementary application of the two hypotheses to the component closures"
+   }
+  },
+  {
+   "text": "Apply module localization on $T$ to $j,e$ and then exact $i_*$. Using $F\\simeq i_*N$ yields\n$$0\\longrightarrow P\\longrightarrow F\\longrightarrow Q:=i_*e_*e^*N\\longrightarrow0.$$\nAs $P,F$ are constructible, the cokernel clause of det-lem-coefficient-heart-closure makes $Q$ constructible; this avoids assuming an unstated closed-pushforward finiteness theorem. The composite $i\\circ e$ is a closed immersion, and restriction of its direct image to $U\\setminus W$ is zero. Here $W$ is closed in $U$, contained in $Z$, and proper: each nonempty $S_h$ lies outside it. Thus $Q[0]$ has proper closed support and belongs to $\\mathcal H$ by the induction hypothesis.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-locally-closed-extension-coherence",
+    "det-lem-coefficient-heart-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open), followed by exact closed direct image"
+   }
+  },
+  {
+   "text": "The short exact sequence gives the distinguished triangle $P[0]\\to F[0]\\to Q[0]\\to P[0][1]$ by lem-sf-derived-ses-triangle. Since $P[0],Q[0]\\in\\mathcal H$, closure under shifts, cones and isomorphisms puts $F[0]$ in $\\mathcal H$ (rotate the triangle if necessary). Step 1 now gives $C\\in\\mathcal H$. Every component list, stratification, sum and cohomological reconstruction used here is finite. The proof uses neither an alteration nor a trace.",
+   "uses": [
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), degree-zero complexes; finite reconstruction as in the blueprint Complexes paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-cohomology-cone-witness",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-module-constructible-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-sc-irreducible-components-cover",
+  "def-pc-integral-scheme",
+  "sk-def-sfb-constructible",
+  "sk-lem-stratified-lattice",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "det-lem-coefficient-heart-closure",
+  "lem-sf-derived-ses-triangle"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first proof paragraph and Proposition 6.8.14, pp.61-62, with explicit finite support assembly using Stacks Tags 09AH, 0052 and 0152; not a quotation of the full support-induction statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(constructible|lisse).*(lattice|strat|support)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(triangEnvelope|thick).*(support|strat)|integral.*generat",
+   "results": "21 hits: Mathlib/Probability/Kernel/Condexp.lean, Mathlib/Analysis/BoxIntegral/Basic.lean, Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/Integral.lean, Mathlib/MeasureTheory/VectorMeasure/AddContent.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible derived category devissage into rationalized lisse integral lattices on dense open integral strata",
+   "results": "8 hits: HasDerivedCategory.standard, HasDerivedCategory, DerivedCategory.instCategory, DerivedCategory.instIsTriangulated, DerivedCategory.right_fac, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, DerivedCategory.instPretriangulated, DerivedCategory",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.triangEnvelope, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible complexes supported on a closed subset of a noetherian scheme are finitely generated by integral lattice strata and complexes with smaller support",
+   "results": "8 hits: HomologicalComplex.IsStrictlySupported, HomologicalComplex.IsSupported, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, HomologicalComplex.instIsSupportedOfIsStrictlySupported, HomologicalComplex.IsStrictlySupportedOutside, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.IsSupportedOutside, HomologicalComplex.map_isStrictlySupported",
+   "date": "2026-10-22",
+   "verdict": "no match: general derived/module/triangulated or scheme facts do not supply this continuous-coefficient support/alteration/trace assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|lisse).*(lattice|support)|(thick|triangEnvelope).*support",
+   "results": "3 hits: Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/Analysis/Calculus/Rademacher.lean, Mathlib/Analysis/Calculus/Rademacher.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern support in complex degrees, real integer lattices, or general module presentations, not geometric support devissage for continuous E-coefficients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite thick generation of constructible l adic complexes by extension by zero of integral lattices on strata",
+   "results": "8 hits: ZLattice.FG, ZLattice.module_finite, Zlattice.FG, HomologicalComplex.instIsStrictlySupportedOfNat, HomologicalComplex.instHasFiniteLimits, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, HomologicalComplex.instIsStrictlySupportedExtend, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern support in complex degrees, real integer lattices, or general module presentations, not geometric support devissage for continuous E-coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian support induction and open closed localization for continuous coefficient module sheaves with integral lattices",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.IsFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, ModuleCat.Tilde.sectionsSubmodule, ModuleCat.Tilde.isLocallyFraction, ModuleCat.Tilde.isFractionPrelocal",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern support in complex degrees, real integer lattices, or general module presentations, not geometric support devissage for continuous E-coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible complex supported on a noetherian closed subset is built from rationalizations of integral lisse lattices on dense integral strata and complexes of smaller support",
+   "results": "8 hits: HomologicalComplex.IsSupported, HomologicalComplex.IsStrictlySupported, PrimeSpectrum.BasicConstructibleSetData.n, HomologicalComplex.IsSupportedOutside, HomologicalComplex.IsStrictlySupportedOutside, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, HomologicalComplex.instIsSupportedOfIsStrictlySupported, HomologicalComplex.map_isStrictlySupported",
+   "date": "2026-10-22",
+   "verdict": "no match: these results concern support in complex degrees, real integer lattices, or general module presentations, not geometric support devissage for continuous E-coefficients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-tame-pair-proper-generators",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; extracted original item steps 1-3",
+   "via": [
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-support-lattice-reduction",
+  "worker": "stage1",
+  "summary": "Proved finite support reduction using existing lattice stratification, reduced closed support, disjoint integral component opens, module localization, constructible cokernel closure and finite cohomology reconstruction. No new nodes or statement changes. Reducible and nonreduced supports and empty support treated explicitly.",
+  "blueprint": "Inherited added-input provenance: det-thm-sf-ctf-stability-direct-images proof (3), through the continuous-algebraic-closure comparison and lem-sfb-tame-pair-proper-generators original steps 1-3. No imported blueprint ancestor; no unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-bounded-cohomology-cone-witness",
+    "why": "Generic Finite cone construction from the cohomology of a bounded derived object used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Generic Open/closed recollement for condensed coefficient modules used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic Reduced induced closed subscheme structure on a closed subset: existence and uniqueness used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-locally-closed-extension",
+    "why": "Generic Exact locally closed coefficient extension through the scheme-theoretic closure used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-module-constructible-pullback",
+    "why": "Generic Pullback of constructible condensed-coefficient module objects used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic Inverse image of the coefficient sheaves used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "sk-lem-stratified-lattice",
+    "why": "Generic Lattices after a finite stratification used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic Restriction and composition for locally closed extension by zero used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "why": "Generic Constructibility of a locally closed lisse coefficient extension used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   },
+   {
+    "node": "det-lem-coefficient-heart-closure",
+    "why": "Generic Lisse sheaves on a stratum are closed under kernels, cokernels, extensions used with its stated hypotheses for finite support assembly, without replacing the assigned direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-bounded-cohomology-cone-witness",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sfb-coefficient-heart-locally-closed-extension",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-module-constructible-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-lem-stratified-lattice",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "det-lem-coefficient-heart-closure"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-0d63219df",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-0d63219df (reviewer sub-agent of L); spot-checked: Ordinary one-level S1 split with no new nodes and no repair note; item statement unchanged; the only citer (lem-sfb-tame-pair-proper-generators step 1) uses it as stated. All 18 cited statements were read and the nine steps check out. Step 1: the cone witness plus exact j^* from the condensed recollement (its Λ covers C(-,E)) reduce C to sheaves F supported on Z; Z empty gives C=0. Step 2: T=Z_red is Noetherian, and F≅i_*i^{-1}F by the localization SES of proetale-ringed-open-closed. The weaker cokernel convention of the constructible-pullback node is correctly supplemented by the cartesian-coefficient iso, so scalar-constant models survive pullback. Step 3: O_h=T minus the other components is a nonempty, disjoint, integral open with closure Z_h. Step 4: a dense stratum is open, and a surjective closed immersion into reduced O_h is an iso; Λ(*)=E makes the models free, hence lisse. Step 5: sk-lem-stratified-lattice applies (standing scheme, char p≠ℓ) and gives a lattice on a dense integral open S_h; no global lattice is claimed, consistent with the nodal example. Step 6: the clopen sum decomposition plus coherence γ and a_!≅i_*u_! give P=⊕(a_h)_!M_{0,h}[1/ℓ]; constructibility comes from the lisse-extension node and split-extension closure. Step 7: Z_h=Z uses the lattice hypothesis, Z_h⊊Z the smaller-support one. Step 8: Q is a constructible cokernel by the coefficient-heart-closure cokernel clause; W is closed in U and properly smaller than Z because the S_h are nonempty and miss W. Step 9: the SES triangle and rotation give F[0]∈H. Small cases tested: point, crossing lines, empty Z, rank 0, nonreduced Z. Not duplicates: det-lem-integral-models-generators (absolute generation, not support-relative) and the qcqs localizing-generator node. No SGA cited. The off-unit generic tool_uses are accepted; advisory: the worker wrote them themselves (C8). Advisory: the E-coefficient nodes take E inside a fixed Q̄_ℓ, which is a harmless embedding."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralSupportLatticeReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.integralSupportLatticeReduction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralSupportReduction.integralRing",
+   "AlgebraicGeometry.ProEtale.IntegralSupportReduction.integralRing_comm",
+   "AlgebraicGeometry.ProEtale.IntegralSupportReduction.inclusion",
+   "AlgebraicGeometry.ProEtale.IntegralSupportReduction.latticeExtension",
+   "AlgebraicGeometry.ProEtale.integralSupportLatticeReduction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralSupportLatticeReduction.lean",
+  "statement": "theorem integralSupportLatticeReduction (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (_hpℓ : p ≠ ℓ) (U : Over (Spec (.of k))) [IsSeparated U.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] (Z : Closeds U.left) (H : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X U.left)))) [H.IsTriangulated] [H.IsStableUnderRetracts] : (((∀ (F : Closeds U.left), F < Z → ∀ C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X U.left)), constantModelBoundedConstructible (normContinuousRing E).X U.left C → IsZero ((CondensedRing.moduleObjectDerivedPullback (normContinuousRing E).X (Scheme.Opens.ι F.compl)).obj C) → H C) ∧ (∀ (S : Scheme.{u}) (a : S ⟶ U.left) (ha : IsImmersion a), IsIntegral S → closure (Set.range a) = (Z : Set U.left) → ∀ M₀ : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (IntegralSupportReduction.integralRing ℓ E).X S), IsLisseCoefficientModule (IntegralSupportReduction.integralRing ℓ E).X M₀ → H (IntegralSupportReduction.latticeExtension ℓ E U a ha M₀))) → ∀ C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X U.left)), constantModelBoundedConstructible (normContinuousRing E).X U.left C → IsZero ((CondensedRing.moduleObjectDerivedPullback (normContinuousRing E).X (Scheme.Opens.ι Z.compl)).obj C) → H C) ∧ (Z = ⊥ → ∀ C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U.left) Ab.{u + 1}) (condensedRingObj (normContinuousRing E).X U.left)), constantModelBoundedConstructible (normContinuousRing E).X U.left C → IsZero ((CondensedRing.moduleObjectDerivedPullback (normContinuousRing E).X (Scheme.Opens.ι Z.compl)).obj C) → H C)",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2a815024",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Read node, 14 stmt_dep records (identical to side-live), module, report. Only node change: lean record + 3 used, already-landed def stmt_deps; statement matches file verbatim. Clauses: distinct primes, char-p field, normed finite E (norm = spectral, so coefficientExtensionIntegers is the unit ball), separated finite-type U, Z : Closeds, H with IsTriangulated + IsStableUnderRetracts (gives zero/shift/cone/sum/retract/iso closure), support = zero derived open restriction, F<Z smaller-support hyp, IsIntegral immersion with closure = Z and lisse M0, latticeExtension = singleFunctor 0 of coefficientHeartLocallyClosedExtension of Mod.extendScalars along coefficientMap of the O_E to E inclusion; Z=bot as separate unconditional conjunct; single universe u. Helpers carry real data; existing SupportedLatticeNormProjection (IntermediateField) and sfbCondensedIntegers (spectral topology) don't fit the abstract normed E, so not H4. Docstrings with source/blueprint, 9-step plan, sorry only, real pro-etale site. No compile (no change). Advisory: stage-3 needs a topology bridge to the spectral-norm ring of StratifiedLattice."
+ }
+}

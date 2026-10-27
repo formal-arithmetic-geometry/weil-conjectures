@@ -15,9 +15,80 @@
   "lem-trf-derived-colimit-bar",
   "lem-trf-continuous-cocontinuous-derived-shriek"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the singleton-isomorphism pretopologies every presheaf is a sheaf; kernels and cokernels are objectwise, so evaluation and precomposition are exact. Any $u$ preserves these coverings and their pullback squares and is cocontinuous (use the identity cover to refine an isomorphism cover). Apply [lem-trf-continuous-cocontinuous-derived-shriek] with constant $R$ and identity structural map to obtain $Lg_!$, $\\varepsilon$, and its normalized adjunction. All comma categories and finite-chain indices are small.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-size-convention",
+    "lem-trf-continuous-cocontinuous-derived-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PK (lemma-compute-left-derived-g-shriek), with base site the point; Tags 08PG (example-left-derived-colimits) and 08PH (example-morphism-categories)."
+   }
+  },
+  {
+   "text": "The auxiliary total derived colimits exist by [lem-trf-derived-colimit-bar]. By [lem-trf-representable-sum-shriek-acyclic], the presheaf categories have enough projectives and arbitrary coefficient-representable sums are left $g_!$-acyclic. The left adjoint $g_!$ preserves direct sums and cokernels by their universal properties and is additive, hence right exact. The functorial nonpositive resolution $\\alpha_F:B(F)\\to F[0]$ of [lem-trf-augmented-presheaf-bar-resolution] has these sums as terms. Apply [lem-trf-bounded-above-acyclic-derived-computation] to obtain the coefficient-natural isomorphism $i_F=\\varepsilon_{B(F)}(Lg_!Q\\alpha_F)^{-1}:Lg_!F\\xrightarrow\\sim Q(g_!B(F))$.",
+   "uses": [
+    "lem-trf-representable-sum-shriek-acyclic",
+    "lem-trf-augmented-presheaf-bar-resolution",
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PK (lemma-compute-left-derived-g-shriek), with base site the point; Tags 08PG (example-left-derived-colimits) and 08PH (example-morphism-categories)."
+   }
+  },
+  {
+   "text": "Evaluation is exact by step 1, so it descends through localization. Compose its image of $i_F$ with the specified derived isomorphism $Q(\\beta_{F,V})$ of [lem-trf-shriek-bar-comma-reindexing]. This identifies $(Lg_!F)(V)$ with $K_{\\mathcal I_V}(F_V)$ in $D(R)$. That node's restriction and coefficient equations, together with naturality of $i_F$, give both required naturalities. Apply the cohomology functors: $H^{-n}$ gives the claimed isomorphisms, and positive cohomology vanishes since the bar complex has zero positive terms, including the empty-comma case.",
+   "uses": [
+    "lem-trf-shriek-bar-comma-reindexing",
+    "def-weil-abstract-derived-category",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PK (lemma-compute-left-derived-g-shriek), with base site the point; Tags 08PG (example-left-derived-colimits) and 08PH (example-morphism-categories)."
+   }
+  },
+  {
+   "text": "For $F=g^{-1}K$, use [lem-trf-augmented-copower-derived-counit] with $C=B(F)$ and $\\alpha=\\alpha_F$ from step 2. Its degree-zero identity-summand maps are $f_U=1_{K(uU)}$, so the ordinary transpose has formula $c_V(t,x)=K(t)x$. The node gives $e_K=Q(c)i_F$. Under the chain map $\\beta_{F,V}$ of step 3, this is exactly the requested comma augmentation. The same node's equations $K(s)c_V=c_{V'}(g_!C)(s)$ and $q[0]c=c'g_!(v)$, with the two naturalities of $\\beta$, prove the asserted counit compatibility.",
+   "uses": [
+    "lem-trf-augmented-copower-derived-counit",
+    "lem-trf-augmented-presheaf-bar-resolution",
+    "lem-trf-shriek-bar-comma-reindexing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PK (lemma-compute-left-derived-g-shriek), with base site the point; Tags 08PG (example-left-derived-colimits) and 08PH (example-morphism-categories)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-size-convention",
+  "lem-trf-continuous-cocontinuous-derived-shriek",
+  "lem-trf-representable-sum-shriek-acyclic",
+  "lem-trf-augmented-presheaf-bar-resolution",
+  "lem-trf-bounded-above-acyclic-derived-computation",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-shriek-bar-comma-reindexing",
+  "def-weil-abstract-derived-category",
+  "lem-trf-augmented-copower-derived-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit coefficient-module presheaf bar-resolution proof expanding Tags 08PG and 08PH to the comma-category statement of Tag 08PK; acyclic computation supplied by the existing bounded-above theorem. This does not claim to reproduce the fibred-category factorization proof of 08PK."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +124,45 @@
    "results": "8 hits: Ext, CategoryTheory.Sheaf.H, PresheafOfModules.Derivation, PresheafOfModules.HasDifferentials, SheafOfModules.Presentation.map, CategoryTheory.Sheaf.cohomologyPresheafFunctor, localCohomology.diagram, CategoryTheory.Sheaf.cohomologyPresheaf. Digest f58f2af2f2196ea8. ",
    "date": "2026-10-18",
    "verdict": "no match: ordinary Kan extension, generic derived functors, presheaf colimits and algebra presentations do not state this derived module-presheaf computation."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Kk]an|[Kk]an.*leftDerived|comma.*[Hh]omology",
+   "results": "10 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. Digest 5497836eae9b14cb. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pointwise Kan formulas and abstract localization-derived functors do not compute the derived presheaf Kan extension; the bar-resolution hits are for group representations, not arbitrary small categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homology of a comma category computes evaluation of the derived left Kan extension of a presheaf of modules",
+   "results": "8 hits: CategoryTheory.Functor.leftKanExtension, CategoryTheory.lanEvaluationIsoColim, CategoryTheory.Functor.leftKanExtensionObjIsoColimit, CategoryTheory.Functor.leftKanExtensionUnit_leftKanExtensionObjIsoColimit_hom_assoc, CategoryTheory.Functor.pointwiseLeftKanExtension_obj, CategoryTheory.Functor.LeftExtension, CategoryTheory.Functor.ι_leftKanExtensionObjIsoColimit_hom_assoc, CategoryTheory.CostructuredArrow.grothendieckPrecompFunctorToComma_obj_hom. Digest 541cf86eb59194ab. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pointwise Kan formulas and abstract localization-derived functors do not compute the derived presheaf Kan extension; the bar-resolution hits are for group representations, not arbitrary small categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftKanExtension\", \"leftDerived\"",
+   "results": "0 hits: . Digest 4f53cda18c2baa0c. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pointwise Kan formulas and abstract localization-derived functors do not compute the derived presheaf Kan extension; the bar-resolution hits are for group representations, not arbitrary small categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived left Kan extension of an R module presheaf evaluated at V is represented by the bar complex of the comma category V downarrow u",
+   "results": "8 hits: Ext, PresheafOfModules.Derivation', PresheafOfModules.Derivation, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, localCohomology.diagram, PresheafOfModules.Derivation.Universal.desc, PresheafOfModules.HasDifferentials, SheafOfModules.Presentation.map. Digest 8cddeba1293fcae1. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pointwise Kan formulas and abstract localization-derived functors do not compute the derived presheaf Kan extension; the bar-resolution hits are for group representations, not arbitrary small categories."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bar resolution of a contravariant module diagram computes the left derived functor of restriction left adjoint by sums over chains in a structured arrow category",
+   "results": "8 hits: Ext, Rep.barResolution, Rep.barResolution_complex, Rep.Tor_obj, CategoryTheory.Abelian.LeftResolution.chainComplexFunctor, Rep.Tor, CategoryTheory.Tor, Rep.Tor_map. Digest 3243a8bab075c98a. ",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary pointwise Kan formulas and abstract localization-derived functors do not compute the derived presheaf Kan extension; the bar-resolution hits are for group representations, not arbitrary small categories."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cotangent-lower-shriek",
@@ -88,5 +194,60 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-derived-shriek-comma-homology",
+  "worker": "stage1",
+  "summary": "Current-DAG rebase repair of L landing refusal. Reused newly landed lem-trf-representable-sum-shriek-acyclic and lem-trf-augmented-presheaf-bar-resolution instead of two duplicate proposals; assembly explicitly applies lem-trf-bounded-above-acyclic-derived-computation for the canonical comparison. Two genuinely new statement-only nodes retain comma-chain reindexing and the general augmented-copower derived counit. The existing two nodes and the two new nodes distribute all four original subarguments; all fourteen original proof texts remain verbatim in report.md. Statement and statement dependencies unchanged; current cited statements reread and citations regenerated. Historical search logs and superseded proposal files are retained only as sandbox evidence. Renewed landing-return repair: reread the two newly live cotangent bar comparison statements, documented all four nonduplicate pairs from the initial dry-run diagnostic, and rechecked the complete current dependency statements and fourteen verbatim citation quotes; retained the released keep-plan statement and the actual short assembly replacing the live fourteen-step proof. 2026-10-23 landing-return retry: initial current-base dry run found four new duplicate-tag pairs with scalar-unit-transpose, derived-colimit-scalar-coherence and objectwise-flat-bar-kflat; their full statements were read and all four distinctions added to the report. Rechecked every current assembly dependency and all fourteen verbatim citation quotes, retained the mathematical split and all historical search evidence.",
+  "blueprint": "Supporting lower-shriek/comma computation in the inherited cotangent-complex branch of lem-trf-local-term-locality, proof (1)--(2); the supplied detailed ancestry and from.place are retained. The current main-20261015 ancestor proof was read. This is a generic homological input below the unit, not a replacement of its contracting-correspondence route. Four subarguments below this same auxiliary comma computation are now separate work items; there is no unit-route change."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-367ddae8a",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-367ddae8a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited statement in full, and checked Stacks sites-cohomology 08PK/08PG/08PH and derived 0DVC. The comma orientation in 08PK (phi2=u(a)phi1) matches I_V with u(h)t=t', and the 08PG bar faces and signs match the reindexing node. Every old argument now lives in a node. Old steps 2-5 and 6-8 are carried word for word in content by lem-trf-representable-sum-shriek-acyclic and lem-trf-augmented-presheaf-bar-resolution, which Q94 landed on 2026-10-22 after the note and which are still unsplit. Old steps 9-11 are in the new lem-trf-shriek-bar-comma-reindexing. Old steps 13-14 are in the new lem-trf-augmented-copower-derived-counit, generalized to any augmented copower resolution. Old steps 1, 8 and 12 are short applications in the assembly (2263 characters). The note asks for at least 3 new nodes and the delivery has 2. I accept the two Q94 nodes as the other carriers, because a third copy would be a C5 duplicate. Assembly checks: step 2 meets every hypothesis of the bounded-above theorem (enough projectives and acyclicity from representable-sum, derived colimits from derived-colimit-bar, Lg_! from step 1). In step 4, f_U=id gives c_V(t,x)=K(t)x, which is the item's augmentation under beta. Reindexing node: t_{j-1}=u(h_j)t_j gives the bijection, the first face becomes t->u(h_n)t, and rho_s is a functor (U,t)->(U,ts). Counit node: by normalization and the triangle identity both sides map to Q(alpha) under the injective adjunction bijection, so e_K Lg_!Q(alpha)=Q(c)eps_C. Edge cases tested: u=id, empty E or comma category, n=0 and n=1, Z/2 over Z. No duplicates among the Q70, Q94, scalar and total-site candidates, which I read. Both new nodes are statement-only with five real searches each. No SGA and no off-unit tool use."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedShriekCommaHomology",
+  "declaration": "CategoryTheory.derivedShriekCommaModel_exists",
+  "declarations": [
+   "CategoryTheory.commaShriekInverse",
+   "CategoryTheory.commaShriekCoefficients",
+   "CategoryTheory.commaShriekEvaluation",
+   "CategoryTheory.commaShriekDerivedRestriction",
+   "CategoryTheory.DerivedShriekCommaModel",
+   "CategoryTheory.DerivedShriekCommaModel.lanIso",
+   "CategoryTheory.DerivedShriekCommaModel.homologyIso",
+   "CategoryTheory.derivedShriekCommaModel_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedShriekCommaHomology.lean",
+  "statement": "theorem derivedShriekCommaModel_exists (B : CategoryColimitBarSystem.{u}) (f : E ⥤ D) (R : Type u) [CommRing R] : Nonempty (DerivedShriekCommaModel B f R)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The existence theorem retains the full derived comma model, its normalized adjunction, canonical augmented-resolution comparison, generator formulas and both naturalities. lanIso identifies the ordinary adjoint with Mathlib Lan; homologyIso applies cohomology to the main derived isomorphism. No model is chosen from the postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-863d283f2",
+  "group": "NX",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: StructuredArrow V f is (V↓u) with the 08PK arrow direction; coefficients via proj; Lan via lanIso; derived adjunction and normalization match ContinuousCocontinuousDerivedShriekData field for field; the derived isomorphism model is pinned by model_eq and chainFormula on generators (rescaling by a unit of R leaves it unchanged); homologyIso is built from model; positive vanishing; counit formula K(a)x with counit_eq; restriction and coefficient naturality via StructuredArrow.map and generator formulas. Edge cases (empty categories, f = id, n = 0, zero ring, non-projective coefficients) covered; universes as in the bar dependency. Node changes only in lean; statement verbatim; proof is sorry; 14-step docstring. Advisory: second reading is a worker self-check under the direct-delivery policy; one import is proof-only; the worker's compile report mentions no sorry warning. No recompile, no fixes."
+ }
 }

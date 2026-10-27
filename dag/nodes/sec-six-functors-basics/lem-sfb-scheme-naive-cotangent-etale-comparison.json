@@ -1,0 +1,260 @@
+{
+ "id": "lem-sfb-scheme-naive-cotangent-etale-comparison",
+ "kind": "statement",
+ "title": "Zariski-to-etale comparison for the naive cotangent complex of schemes",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f_0:X_0\\to Y_0$ be a morphism of schemes over $S$, and let $f:X\\to Y$ be the same morphism regarded as a morphism of representable algebraic spaces over $S$ [def-trf-algebraic-space]. On the Zariski site of $X_0$, put $A=f_0^{-1}\\mathcal O_{Y_0}$ and $B=\\mathcal O_{X_0}$, using inverse image of ring sheaves [def-weil-pbc-topological-inverse-image] and the structure map $A\\to B$. Let $\\mathrm{NL}^{\\mathrm{Zar}}_{X_0/Y_0}$ be the standard sheaf naive cotangent complex $\\mathrm{NL}_{B/A}=K_B$ of [lem-sfb-sheaf-polynomial-cotangent-comparison]: explicitly take the sheaf polynomial algebra $A[B]\\twoheadrightarrow B$, its kernel $J$, and $[J/J^2\\to\\Omega_{A[B]/A}\\otimes_{A[B]}B]$ in degrees $-1,0$, with $[h]\\mapsto\\mathrm dh\\otimes1$. Let $\\epsilon_X:X_{0,\\mathrm{et}}\\to X_{0,\\mathrm{Zar}}$ be the canonical ringed-site morphism and $\\epsilon_X^*M=\\mathcal O_{X,\\mathrm{et}}\\otimes_{\\epsilon_X^{-1}\\mathcal O_{X_0}}\\epsilon_X^{-1}M$ its tensor pullback [lem-trf-zariski-etale-tensor-sections]. There is a canonical isomorphism\n$$\\epsilon_X^*\\mathrm{NL}^{\\mathrm{Zar}}_{X_0/Y_0}\\simeq\\mathrm{NL}_{X/Y}\\quad\\text{in }D(\\mathcal O_{X,\\mathrm{et}})$$\n[def-sfb-space-naive-cotangent-complex, def-weil-abstract-derived-category]. Here the left side is obtained by termwise tensor pullback. No finite-type, Noetherian, flatness or separatedness assumption on $f_0$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-sfb-sheaf-polynomial-cotangent-comparison",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-sfb-space-naive-cotangent-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The canonical comparison square for $f_0$ supplies compatible ring maps $\\epsilon_X^{-1}A\\to f_{\\mathrm{small}}^{-1}\\mathcal O_Y$ and $\\epsilon_X^{-1}B\\to\\mathcal O_X$. Apply inverse-image invariance and the functorial polynomial-presentation map to obtain a chain map $c:\\epsilon_X^*\\mathrm{NL}^{\\mathrm{Zar}}_{X_0/Y_0}\\to\\mathrm{NL}_{X/Y}$. On presentations it sends $[b]$ to the variable indexed by its structural image; in degrees $-1,0$ it sends a relation to its image and $\\mathrm dh\\otimes a$ to $\\mathrm d(h')\\otimes a$. Thus the differential commutes with $c$, and every comparison is the specified canonical one. Exactness of $\\epsilon_X^*$ ensures that its termwise interpretation is compatible with quasi-isomorphisms.",
+   "uses": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-topos-naive-cotangent-pullback",
+    "def-sfb-space-naive-cotangent-complex",
+    "lem-trf-zariski-etale-functor-comparison-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes, proof."
+   }
+  },
+  {
+   "text": "Fix $\\bar x:\\operatorname{Spec}\\Omega\\to X_0$, put $\\bar y=f_0\\bar x$, and let $x,y$ be the underlying points. Set $R=\\mathcal O_{Y_0,y}$, $T=\\mathcal O_{X_0,x}$, $R'=\\mathcal O_{Y,\\bar y}$, $T'=\\mathcal O_{X,\\bar x}$. The identity scheme charts identify $R',T'$ with the strict henselizations of $R,T$ selected by the residue embeddings in $\\Omega$. The strict-local functoriality statement identifies $R'\\to T'$ with the induced map of these strict henselizations: its maps to each pointed neighbourhood and its residue embedding are the prescribed ones. Since $f_0$ is a scheme morphism, $R\\to T$ is local; there is no finite-type condition here.",
+   "uses": [
+    "lem-sfb-space-strict-local-flatness",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes, proof."
+   }
+  },
+  {
+   "text": "Apply the pullback-stalk formula to $\\epsilon_X$ at the point $p$ given by $\\bar x$. The geometric stalk at $\\bar x$ is inverse image along $\\bar x_{\\mathrm{et}}:\\operatorname{Sh}(P_{\\mathrm{et}})\\to\\operatorname{Sh}(X_{\\mathrm{et}})$, $P=\\operatorname{Spec}\\Omega$, followed by $\\Gamma(P,-)$ [lem-weil-pbc-geometric-point-pullback-stalk]; every etale $P$-scheme is a disjoint union of copies of $P$, so $\\Gamma(P,-)$ identifies $\\operatorname{Sh}(P_{\\mathrm{et}})$ with $\\mathbf{Set}$, compatibly with rings and modules. The image point $q=\\epsilon_X\\circ p$ is the Zariski point $x$: $\\epsilon_X^{-1}H$ is the sheafification of $U\\mapsto\\varinjlim_{W\\supseteq\\operatorname{im}U}H(W)$, sheafification does not change geometric stalks [lem-weil-pbc-sheafification-geometric-stalk], and in the resulting double colimit the opens $W\\ni x$, pointed by $\\bar x$, are cofinal: a lift of $\\bar x$ to $W$ exists exactly when $x\\in W$, and each $(U,\\bar u)$ maps to $(W,\\bar x)$ when $W\\supseteq\\operatorname{im}U$. So $H_q=H_x$, and $(\\epsilon_X^*\\mathrm{NL}^{\\mathrm{Zar}})_{\\bar x}$ is $(\\mathrm{NL}^{\\mathrm{Zar}})_x\\otimes_T T'$. Inverse-image invariance for the point $\\{x\\}\\hookrightarrow X_0$ and the ordinary inverse-image stalk comparison ($A_x=R$) identify $(\\mathrm{NL}^{\\mathrm{Zar}})_x=\\mathrm{NL}_{T/R}$. The same invariance for $\\bar x_{\\mathrm{et}}$ gives $(\\mathrm{NL}_{X/Y})_{\\bar x}=\\mathrm{NL}_{T'/(f_{\\mathrm{small}}^{-1}\\mathcal O_Y)_{\\bar x}}$, and the etale inverse-image stalk comparison $(f_{\\mathrm{small}}^{-1}\\mathcal O_Y)_{\\bar x}\\cong\\mathcal O_{Y,\\bar y}=R'$ is multiplicative, being given on germs [lem-weil-pbc-inverse-image-stalk-germ]. All are identifications of the standard complexes, before passing to the derived category.",
+   "uses": [
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-sfb-topos-naive-cotangent-pullback",
+    "lem-weil-pbc-topological-inverse-image-stalk",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
+    "lem-weil-pbc-sheafification-geometric-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes, proof."
+   }
+  },
+  {
+   "text": "Under step 3, $c_{\\bar x}$ is exactly $\\mathrm{NL}_{T/R}\\otimes_T T'\\to\\mathrm{NL}_{T'/R'}$. Indeed its polynomial generators are sent by $R\\to R'$ and $[t]\\mapsto[t']$; its relation and differential components are $[h]\\otimes a\\mapsto a[h']$ and $\\mathrm dh\\otimes a\\mapsto\\mathrm d(h')\\otimes a$, the same formulas used in step 1. The strict-henselization comparison therefore makes this stalk map a quasi-isomorphism, using the compatible residue choices of step 2.",
+   "uses": [
+    "lem-sfb-topos-naive-cotangent-pullback",
+    "lem-sfb-strict-henselization-naive-cotangent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes, proof."
+   }
+  },
+  {
+   "text": "Geometric stalks of abelian etale sheaves are exact and jointly detect isomorphisms. Forgetting a module structure computes kernels and cokernels on the underlying abelian sheaves, so stalks commute with the cohomology of each complex. Step 4 says that every cohomology map of $c$ is an isomorphism on every geometric stalk; joint detection makes each cohomology map an isomorphism of sheaves (the inverse is automatically linear). Thus $c$ is a quasi-isomorphism, and becomes the asserted isomorphism in $D(\\mathcal O_{X,\\mathrm{et}})$. The empty scheme has no stalks and all its module sheaves are zero, giving the same conclusion.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-etale-zariski-equivalence",
+  "lem-sfb-topos-naive-cotangent-pullback",
+  "def-sfb-space-naive-cotangent-complex",
+  "lem-sfb-space-strict-local-flatness",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-sfb-ringed-topos-pullback-stalk",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-sfb-strict-henselization-naive-cotangent",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-trf-zariski-etale-functor-comparison-square",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 0D0X, lemma-NL-compare-spaces-schemes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the naive cotangent complex on the small etale site is the exact pullback of the Zariski naive cotangent complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.exact_cotangentComplex_toKaehler\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, Function.Exact ⇑P.cotangentComplex ⇑P.toKaehler\", \"doc\": \"The image of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ coincides with the kernel of the canonical map to the module of Kähler differentials, establishing exactne\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_δ_mapBaseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.δ R S T) ⇑(KaehlerDifferential.mapBaseChange R S T\", \"doc\": \"The image of the connecting homomorphism $\\\\delta: H^1(S \\\\to T) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ in the Jacobi-Zariski exact sequence equals the kernel of the base change map $\\\\Omega_{S/R} \\\\otimes_S B \\\\to\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n  {\"name\": \"Algebra.H1Cotangent.exact_map_δ\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ (R : Type u₁) (S : Type u₂) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (T : Type u₃)\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T],\\n  Function.Exact ⇑(Algebra.H1Cotangent.map R S T T) ⇑(Algebra.H1Cotangent.δ R S T)\", \"doc\": \"The sequence involving the induced map on first cotangent cohomology and the connecting homomorphism δ in the Jacobi-Zariski exact sequence is exact, meaning the image of the map $ H^1(S \\\\to T) \\\\to T \"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.exact_δ_map\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the connecting homomorphism $\\\\delta: H^1(Q) \\\\to T \\\\otimes_S \\\\Omega_{S/R}$ and the base change map $\\\\Omega_{A/R} \\\\otimes_A B \\\\to \\\\Omega_{B/R}$ is exact, establishing a fundamenta\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of topology from Zariski to etale commutes with the naive cotangent complex of a scheme morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"41\", \"text\": \"  apply (Ideal.cotangent_subsingleton_iff _).mp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"107\", \"text\": \"  refine (Ideal.toCotangent_eq_zero _ _).mpr ?_\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski naive cotangent complex pulls back to the naive cotangent complex of the represented algebraic spaces on the etale site",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.of_isPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {UX UY : AlgebraicGeometry.Scheme} {iY : UY ⟶ Y}\\n  [AlgebraicGeometry.IsOpenImmersion iY] {iX : UX ⟶ X} {f' : UX ⟶ UY}, CategoryTheory.IsPullba\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target, then given a pullback square where the right morphism is an open immersion, if the original morphism $ f $ satisfies $ P $, then the pulled\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"(f : Hom P P') (x) : CotangentSpace.map f (P.cotangentComplex x) = P'.cotangentComplex (.map f x)\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"Algebra.Extension.cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": P.Cotangent →ₗ[S] P.CotangentSpace\", \"doc\": \"The linear map from the cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ to the cotangent space $S \\\\otimes_R \\\\Omega_{S/R}$ of an $R$-algebra extension $S$, constructed by composing the canonical isomorphism\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \":\\n  cotangentComplexBaseChange R S P.Ring A =\\n    AlgebraTensorModule.cancelBaseChange P.Ring S A A Ω[P.Ring⁄R] ∘ₗ\\n      P.cotangentComplex.baseChange A ∘ₗ\\n        ((AlgebraTensorModule.cancelBaseChange P.Ring S A A P.ker).symm ≪≫ₗ P.cotangentEquiv.baseChange (A := A))\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"For any commutative ring $ R $ and a formally étale $ R $-algebra $ A $, the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial, i.e., it is a subsingleton (a type \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.forget_reflectsPullback_of_left\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": ReflectsLimit (cospan f g) LocallyRingedSpace.forgetToSheafedSpace\", \"doc\": \"The forgetful functor from locally ringed spaces to sheafed spaces over commutative rings reflects pullbacks for diagrams involving open immersions. Specifically, if the image of a cospan diagram unde\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring cotangent modules, presheaf differentials, topology comparisons and algebra localizations do not state this derived sheaf cotangent comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the naive cotangent complex on the etale site is the pullback of the Zariski naive cotangent complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {P : Algebra.Extension R S} →\\n            {R' : Type u'} →\\n              {S' : Type v'} →\\n                [inst_3 : CommRing R'] →\\n                  [inst_4 : CommRing S\", \"doc\": \"Given an algebra extension homomorphism $ f : P \\to P' $, this constructs the induced linear map $ P.\\text{CotangentSpace} \\to P'.\\text{CotangentSpace} $ over $ S $, defined by restricting scalars and com\"}\n  {\"name\": \"Algebra.H1Cotangent\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) → (S : Type v) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u v)\", \"doc\": \"The first cohomology group of the cotangent complex for an $ R $-algebra $ S $, constructed using the algebra's own elements as generators in the extension $ R \\to S $.\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R) (X : Dᵒᵖ),\\n  (PresheafOfModules.DifferentialsConstruction.relativeDifferentials' φ').obj X =\\n    CommRingCat.KaehlerDifferential (φ'.app X)\", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{D}^{\\\\text{op}}$, the presheaf of relative Kähler differentials assigns to $X$ the module of Kähler differentials $\\\\Omega_{S'(X)/R(X)}$, where $S'(\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level cotangent maps and topology inclusion do not compare the Zariski and etale naive sheaf complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of topology commutes with the two term cotangent complex of sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For any algebra extension homomorphism $ f : P \\\\to P' $, the induced linear map on cotangent spaces satisfies $ \\\\text{CotangentSpace.map}(f) \\\\circ \\\\text{cotangentComplex}_P = \\\\text{cotangentComplex}_{\"}\n  {\"name\": \"Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  LinearMap.baseChange A P.cotangentComplex =\\n    \", \"doc\": \"The base change of the cotangent complex of an algebra extension $ P $ to a ring $ A $ is equal to the composition of three maps: the inverse of the base change cancellation isomorphism for the algebr\"}\n  {\"name\": \"Algebra.Extension.CotangentSpace.map_comp_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {P : Algebra.Extension R S}\\n  {R' : Type u'} {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S']\\n  {P' : Algebra.Extension R' S'} [inst_6 : Algebra R R'] [inst_7 : Algebra S\", \"doc\": \"For an algebra extension homomorphism $ f : P \\to P' $, the composition of the cotangent space map $ \\text{CotangentSpace.map}(f) $ with the cotangent complex $ P.\\text{cotangentComplex} $ equals the com\"}\n  {\"name\": \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"For algebra extensions $ P $ and $ Q $, the composition of the base-changed cotangent complex map with the lifted base change of the cotangent space homomorphism induced by $ Q \\\\circ P $ equals the co\"}\n  {\"name\": \"Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Algebra.Extension R S)\\n  (A : Type u_1) [inst_3 : CommRing A] [inst_4 : Algebra S A] [inst_5 : Algebra P.Ring A]\\n  [inst_6 : IsScalarTower P.Ring S A],\\n  KaehlerDifferential.cotangentComplexBaseChange R\", \"doc\": \"The base change of the cotangent complex from $ R $ to $ S $ over $ P $, when extended by $ A $, is equal to the composition of the tensor product of $ A $ with the cotangent complex of $ P $ over $ R\"}\n  {\"name\": \"Algebra.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"(R : Type u) →\\n  (S : Type v) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (S' : Type u_2) →\\n            [inst_3 : CommRing S'] →\\n              [inst_4 : Algebra R S'] →\\n                (T : Type w) →\\n                  [inst_5 : CommRing T] →\\n \", \"doc\": \"The $ S' $-linear map from the first cotangent cohomology module of $ R \\to S' $ to that of $ S \\to T $, induced by the canonical algebra homomorphism between the generator-based extensions of $ S' $ an\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {R' : Type u'} →\\n            {S' : Type v'} →\\n              [inst_3 : CommRing R'] →\\n                [inst_4 : CommRing S'] →\\n                  [inst_5 : Algebra R' S'] \", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P') $, induced by an algebra extension homomorphism $ f: P \\to P' $, which preserves the $ S $-module structure through sca\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_apply_coe\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {R' : Type u'}\\n  {S' : Type v'} [inst_3 : CommRing R'] [inst_4 : CommRing S'] [inst_5 : Algebra R' S'] {P' : Algebra.Extension R' S'}\\n  [inst_6 : Algebra R R'] [inst_7 : Algebra S S'] [inst_8 : Algebra R S']\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and an algebra extension homomorphism $ f: P \\to P' $, the first cotangent cohomology map $ H^1(P) \\to H^1(P') $ satisfies $ \\\\io\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level cotangent maps and topology inclusion do not compare the Zariski and etale naive sheaf complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangent\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level cotangent maps and topology inclusion do not compare the Zariski and etale naive sheaf complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent|Cotangent",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"line\": \"11\", \"text\": \"public import Mathlib.RingTheory.Smooth.StandardSmoothCotangent\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"41\", \"text\": \"  apply (Ideal.cotangent_subsingleton_iff _).mp\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"105\", \"text\": \"  obtain ⟨⟨x, hx⟩, rfl⟩ := Ideal.toCotangent_surjective _ x\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"line\": \"107\", \"text\": \"  refine (Ideal.toCotangent_eq_zero _ _).mpr ?_\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level cotangent maps and topology inclusion do not compare the Zariski and etale naive sheaf complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zariski to etale comparison of naive cotangent complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton Ω[A⁄R]\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., contains at most one element).\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"Algebra.FormallyEtale.mk\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Subsingleton Ω[A⁄R] → Subsingleton (Algebra.H1Cotangent R A) → Algebra.FormallyEtale R A\", \"doc\": \"If the module of Kähler differentials $\\\\Omega_{A/R}$ is trivial and the first cohomology group of the cotangent complex is trivial, then the algebra $A$ over $R$ is formally étale.\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T],\\n  KaehlerDifferential.tensorKaehlerEquivOfForma\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[Algebra.FormallyEtale S T] : IsBaseChange T (map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv.congr_simp\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: ring-level cotangent maps and topology inclusion do not compare the Zariski and etale naive sheaf complexes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-affine-etale-naive-cotangent-presentation",
+  "date": "2026-10-23",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields). Tangent-finiteness proof: Tags 0D0Z (lemma-netherlander-fp), 0D0Y (lemma-netherlander-quasi-coherent), with spaces-morphisms.tex Tag 04ZK (lemma-locally-finite-type-locally-noetherian); Noetherian consequence used in quot.tex Tag 0D1K. Assembly of coherent naive cotangent cohomology: Finite two-term etale local models of the naive cotangent complex. Supporting input: affine polynomial-presentation comparison, Tags 0D0X and 0D0I, with arbitrary presentations by Tag 00S1; no finite-model conclusion. Topology-change prerequisite: Tag 0D0X, comparison for all scheme morphisms, before the affine presentation calculation.",
+   "via": [
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-naive-cotangent-etale-comparison",
+  "worker": "stage1",
+  "summary": "Followed Tag 0D0X: constructed the canonical map, identified its geometric stalks with the standard local-ring map, applied strict-henselization invariance, and detected quasi-isomorphism. Reused the newly arrived inverse-image comparison node; two statement-only prerequisites isolate local algebra and the general ringed-topos pullback-stalk formula. No statement changes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; The five steps realize the topology-change prerequisite before the affine polynomial calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic topology or stalk comparison used as a black box in the Stacks 0D0X route; no step of the alteration unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-topological-inverse-image-stalk",
+    "why": "Generic topology or stalk comparison used as a black box in the Stacks 0D0X route; no step of the alteration unit is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic topology or stalk comparison used as a black box in the Stacks 0D0X route; no step of the alteration unit is replaced."
+   },
+   {
+    "node": "lem-trf-zariski-etale-functor-comparison-square",
+    "why": "The arbitrary-module adjoint comparison fixes the underlying topology-change square and its structural ring maps; used as a generic tool in Tag 0D0X."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-trf-zariski-etale-functor-comparison-square"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-1bdaae1ec",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-1bdaae1ec (reviewer sub-agent of L); spot-checked: I read Tag 0D0X (spaces-more-morphisms l.5324-5395) in full, including its 'details omitted' paragraph, plus 05V5 (sites-modules l.6969) and 0D08 (more-algebra l.8524). The item statement is unchanged and agrees with 0D0X. Step 1: the ring maps come from the comparison square (lem-trf-zariski-etale-functor-comparison-square) by adjunction, the inverse image is handled by the landed topos-NL-pullback node (08TZ), and the map of presentations is written out explicitly. OK. Step 2: strict-local-flatness is used through the identity chart only (no flatness), and functoriality clause (4) identifies the stalk map with h. OK. Step 3: the mathematics is right but three facts had no citation (C1/C4): the geometric stalk as inverse image along x̄; the Zariski image point, which needs geometric stalks to commute with sheafification; and the étale inverse-image ring stalk (f^{-1}O_Y)_x̄ = O_{Y,ȳ}, which the abstract composite point q of the new node does not give. FIX: step 3 is rewritten (1755 chars) with the cofinality argument written out, and it now cites lem-weil-pbc-geometric-point-pullback-stalk, lem-weil-pbc-sheafification-geometric-stalk and lem-weil-pbc-inverse-image-stalk-germ (also added to proof_deps). These are existing nodes whose closures do not reach sec-trace-formula or sec-poincare-duality. Step 4 applies 0D08 to a local map with compatible residue choices. OK. Step 5 uses exact, conservative geometric stalks on the small étale site. OK. New node ringed-topos-pullback-stalk is faithful to 05V5 (factor order, q = u∘p) and passes the identity and zero-module cases. It is not a duplicate of space-geometric-stalk-tensor-calculus or space-stalk-ideal-pullback, which cover cartesian squares and thickenings of spaces, not ε. New node strict-henselization-naive-cotangent is faithful to 0D08 (local homomorphism, compatible separable closures, no flatness). It passes the field case and the k[ε]/ε²→k case, and the 0D08 grep found no duplicate. Batch-5: lem-sfb-space-strict-local-flatness reaches only the general definition def-trf-algebraic-space; lem-trf-zariski-etale-functor-comparison-square is the generic 03FH/03LC change of topology, outside both assumptions. Both accepted. The declared tool_uses (generic stalk/topology lemmas) are accepted; the three FIX citations are of the same kind and need recording. No SGA. No drops.; 1 file(s) fixed by the reviewer"
+ }
+}

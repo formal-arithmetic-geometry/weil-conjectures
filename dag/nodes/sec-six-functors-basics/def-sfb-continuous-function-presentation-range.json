@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-continuous-function-presentation-range",
+ "kind": "definition",
+ "title": "Section range in a continuous-function presentation",
+ "statement": "Let E be a normed field, A a totally disconnected subring, Y a scheme, and N and Q internal continuous A-modules. Supply a continuous-function presentation c of Q with values E^r as in [def-sfb-continuous-function-module-presentation] and an internal morphism f:N→Q. Define its presented section range on B in Y_proet to be Set.range(x↦c_B(F_Y(f)_B(x))), where F_Y is the equivalence of [def-weil-pbc-continuous-coefficient-module-encoding]. This is the explicit range formula and its defining equality; there is no witness selected from an existence theorem.",
+ "stmt_deps": [
+  "def-sfb-continuous-function-module-presentation",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
+  "place": "Local computation, paragraphs 1--2: the actual integral sheet embeddings in a common rational continuous-function presentation"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Range of the sectionwise map of an internal module morphism in a continuous function presentation",
+   "results": "LinearMap.range; LinearMap.range_coe; LinearMap.range_toContinuousLinearMap; ContinuousLinearMap.range_coprod. These are ordinary range constructions; the implementation uses Set.range, with the existing internal encoding and actual sheet map.",
+   "verdict": "no exact named encoded sheet-range construction",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "range of a sheaf module morphism after a continuous function presentation",
+   "results": "SheafOfModules.Presentation.mapGenerators; CategoryTheory.Sheaf.imageι; CategoryTheory.Sheaf.toImage_val. No wrapper for the actual encoded finite-etale sheet range.",
+   "verdict": "no exact match",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.range",
+   "results": "Set.range is the exact underlying set construction and is used in the definition. The project-specific coefficient encoding and sheet embedding are existing declarations.",
+   "verdict": "uses existing Set.range; new name only packages its actual arguments",
+   "date": "2026-10-26"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteEtaleLatticeSheetSectionRange|continuous.*[Pp]resentation.*[Rr]ange",
+   "results": "No named wrapper in Mathlib, WeilConjectures, Sheaf or DAG nodes. FiniteEtaleLatticeSheetMaps already constructs the actual morphism; ContinuousCoefficientModuleEncoding supplies the equivalence.",
+   "verdict": "no existing named construction",
+   "date": "2026-10-26"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "import_flags": [],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ContinuousFiniteEtaleLatticeSheetCharts",
+  "date": "2026-10-26",
+  "group": "T9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-stratified-lattice",
+   "place": "Local computation, paragraphs 1--2: the actual integral sheet embeddings in a common rational continuous-function presentation",
+   "via": [
+    "lem-sfb-continuous-finite-etale-lattice-sheet-charts",
+    "lem-sfb-continuous-finite-etale-trace-image-charts",
+    "lem-sfb-continuous-finite-etale-trace-lattice"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousFunctionPresentationRange",
+  "file": "lean/Sheaf/Paper/ContinuousFunctionPresentationRange.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.continuousFunctionPresentationRange",
+  "statement": "def continuousFunctionPresentationRange\n    {E : Type} [NormedField E] [IsTopologicalRing E]\n    (A : Subring E) [TotallyDisconnectedSpace A] {Y : Scheme.{u}} {r : ℕ}\n    {N Q : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (Profinite.continuousMapRingObj A) Y)}\n    (c : ContinuousFunctionPresentation Y A (Fin r → E) Q) (f : N ⟶ Q)\n    (B : Y.ProEt) : Set C(B.left, Fin r → E)",
+  "branch": "sheaf-dag",
+  "by": "T9",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFunctionPresentationRange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.continuousFunctionPresentationRange_eq"
+  ],
+  "note": "Concrete range of the supplied actual internal map, with its defining equality proved; no mathematical hypothesis or conclusion changes."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T130714-L-3495016",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261026T130714-L-3495016",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "id": "lem-trf-smooth-connected-open-spreading",
+ "kind": "statement",
+ "title": "Smooth connected open spreading with a prescribed embedded fibre",
+ "statement": "Let $h:Y\\to S$ be a smooth morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms] of finite presentation: locally of finite presentation [def-sbc-locally-finite-presentation], quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions]. Let $s\\in S$ and let $T\\subseteq Y_s=Y\\times_S\\operatorname{Spec}\\kappa(s)$ be an open subscheme [def-pc-fibre-product, def-weil-residue-field, def-weil-open-immersion] geometrically connected over $\\kappa(s)$ [def-pc-geometrically-irreducible]; connectedness includes nonemptiness [def-weil-connected-scheme]. There exist an affine scheme $S_1$ [def-weil-affine-spectrum], an etale morphism $a:S_1\\to S$ [def-weil-etale-morphism], a point $s_1\\in S_1$ mapping to $s$ with residue-field map $\\kappa(s)\\to\\kappa(s_1)$ an isomorphism, and a quasi-compact open $V\\subseteq Y\\times_S S_1$, such that the composite $v:V\\hookrightarrow Y\\times_S S_1\\to S_1$ is smooth, every fibre of $v$ is geometrically connected, and $V_{s_1}=T\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s_1)$ as open subschemes of $(Y\\times_S S_1)_{s_1}$.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, smooth specialization; Tag 057J, lemma-normal-morphism-irreducible, first two proof sentences (connected spreading and restriction of the base-changed morphism); smooth restriction uses Morphisms Tags 01VB, 01VC and 01VA."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-residue-field",
+  "def-weil-open-immersion",
+  "def-pc-geometrically-irreducible",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "By [sbc-lem-smooth-criterion], the smooth morphism $h$ is flat. By [sbc-lem-smooth-geometrically-reduced], all fibres of $h$ are geometrically reduced. Its finite presentation is an explicit hypothesis, so these are exactly the morphism hypotheses needed for the flat, geometrically reduced spreading theorem.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "sbc-lem-smooth-geometrically-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VF, lemma-smooth-flat; geometric reducedness: varieties.tex Tag 056T, lemma-smooth-geometrically-normal, after Tag 01VB base change"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometrically-connected-fibre-open-spreading] to $h,s,T$. The given $T$ is an open in the scheme-theoretic fibre and is geometrically connected, including nonempty, as required there. Obtain its affine $S_1$, etale $a:S_1\\to S$, point $s_1$ over $s$ with unchanged residue field, and quasi-compact open $V\\subseteq Y\\times_S S_1$. Its conclusion gives geometrically connected fibres of $V\\to S_1$ and the required equality $V_{s_1}=T\\times_s s_1$ as embedded open subschemes, not merely an abstract isomorphism.",
+   "uses": [
+    "lem-trf-geometrically-connected-fibre-open-spreading"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, statement; Tag 057J, lemma-normal-morphism-irreducible, first proof sentence"
+   }
+  },
+  {
+   "text": "Let $p:Y\\times_S S_1\\to S_1$ be the second projection. Clause (2) of [lem-pc-proper-base-change] makes $p$ smooth, since it is the base change of the smooth $h$ along $a$. This clause requires no properness hypothesis.",
+   "uses": [
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VB, lemma-base-change-smooth"
+   }
+  },
+  {
+   "text": "The inclusion $j:V\\hookrightarrow Y\\times_S S_1$ is an open immersion [def-weil-open-immersion] and $p$ is smooth by Step 3, so [lem-pc-open-immersion-smooth-composition] makes the composite $v=p\\circ j:V\\to S_1$ smooth. Together with Step 2 (geometrically connected fibres of $v$, and $V_{s_1}=T\\times_{\\operatorname{Spec}\\kappa(s)}\\operatorname{Spec}\\kappa(s_1)$ as open subschemes of $(Y\\times_S S_1)_{s_1}$) this proves all the assertions.",
+   "uses": [
+    "lem-pc-open-immersion-smooth-composition",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01VC, lemma-open-immersion-smooth; Tag 01VA, lemma-composition-smooth"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-trf-geometrically-connected-fibre-open-spreading",
+  "lem-pc-proper-base-change",
+  "lem-pc-open-immersion-smooth-composition",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 055W and Tag 057J first proof sentence, with smooth restriction from Morphisms Tags 01VB and 01VC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected.*(neighbou?r|spread)|exists.*geometricallyConnected",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts and stalk-map spreading do not give an elementary etale neighbourhood with a prescribed embedded open fibre and smooth geometrically connected open family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Spread a prescribed geometrically connected smooth fibre open to a smooth family with geometrically connected fibres on an elementary etale neighbourhood",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.spread_out_of_isGermInjective\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"AlgebraicGeometry.spread_out_unique_of_isGermInjective\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\"], \"digest\": \"41cb40db5c64f1f1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts and stalk-map spreading do not give an elementary etale neighbourhood with a prescribed embedded open fibre and smooth geometrically connected open family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"GeometricallyConnected\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts and stalk-map spreading do not give an elementary etale neighbourhood with a prescribed embedded open fibre and smooth geometrically connected open family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finitely presented morphism and a geometrically connected open in one fibre admit an affine elementary etale neighbourhood and a quasi-compact open smooth family with geometrically connected fibres and that prescribed fibre",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsEtale\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"7a89dde6a58cac56\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts and stalk-map spreading do not give an elementary etale neighbourhood with a prescribed embedded open fibre and smooth geometrically connected open family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a smooth family, a geometrically connected open of its special fibre extends etale locally to a smooth open subfamily with connected geometric fibres",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSmooth_iff\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"5f10a8be7a705f6e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth charts and stalk-map spreading do not give an elementary etale neighbourhood with a prescribed embedded open fibre and smooth geometrically connected open family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth finitely presented family and a geometrically connected open in a fibre admit an elementary etale neighbourhood and a quasi-compact open family with that fibre and geometrically connected fibres",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.finitePresentation\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"a4fe796ad364b0bd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give smooth charts, etale algebra or fibre definitions, not a prescribed embedded fibre and a geometrically connected open family"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricallyConnected.*(neighbou?r|spread)|exists.*geometricallyConnected",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give smooth charts, etale algebra or fibre definitions, not a prescribed embedded fibre and a geometrically connected open family"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prescribed geometrically connected open in a smooth fibre spreads etale locally to an open smooth family with geometrically connected fibres",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"c044c131b627f84e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give smooth charts, etale algebra or fibre definitions, not a prescribed embedded fibre and a geometrically connected open family"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"GeometricallyConnected\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give smooth charts, etale algebra or fibre definitions, not a prescribed embedded fibre and a geometrically connected open family"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically connected open subset of a special fibre extends to an open subfamily with connected geometric fibres after an etale base change fixing the residue field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.fiberToSpecResidueField\"], \"digest\": \"f799fdb552122092\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give smooth charts, etale algebra or fibre definitions, not a prescribed embedded fibre and a geometrically connected open family"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-integral-fibre-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 055W, lemma-fibre-geometrically-connected-reduced, smooth specialization; Tag 057J, lemma-normal-morphism-irreducible, first two proof sentences (connected spreading and restriction of the base-changed morphism); smooth restriction uses Morphisms Tags 01VB, 01VC and 01VA. This is the smooth 057J ingredient of the 057K finite-over-smooth step in the horizontal-curve flatification route below lem-trf-local-term-locality.",
+   "via": [
+    "lem-trf-geometrically-integral-fibre-neighbourhood",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-smooth-connected-open-spreading",
+  "worker": "stage1",
+  "summary": "Q92 specializes the existing general Tag 055W node using smooth flatness and geometrically reduced fibres, then proves smoothness of the resulting family by base change and the affine-local definition. Statement unchanged; no new nodes. Project Lean searches found no exact finished declaration.",
+  "blueprint": "Realizes the connected-spreading ingredient of the Tag 057J/057K finite-over-smooth step in the inherited horizontal-curve flatification route below lem-trf-local-term-locality. The latest blueprint local-term node supplies the ancestor, not a direct statement of this generic geometric tool.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Only the general smooth-implies-flat implication; the present unit has no replacement for this generic morphism tool."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smooth-fibre reducedness needed to apply Tag 055W, not a change of the trace-formula unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only smooth base-change clause (2), a general scheme-morphism tool; no Picard argument or properness is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-pc-proper-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-2f613871c",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-2f613871c (reviewer sub-agent of L); spot-checked: Read the item in full and every node it cites. Stacks more-morphisms 055W (lemma-fibre-geometrically-connected-reduced) and 057J (first two proof sentences) match the statement hypothesis by hypothesis. The delivery creates no new nodes, which is correct: the existing same-unit lem-trf-geometrically-connected-fibre-open-spreading is the general 055W, and its proof_deps do not contain the item, so there is no cycle. Steps 1-3 are correct. Step 1 takes flatness from sbc-lem-smooth-criterion and geometrically reduced fibres from sbc-lem-smooth-geometrically-reduced; finite presentation is a hypothesis of the item. Step 2 applies the 055W node, whose conclusion is verbatim the item's. Step 3 uses clause (2) of lem-pc-proper-base-change, smooth base change with no properness. FIX (C4): step 4 was marked elementary and relied on an affine-local characterization that def-sbc-smooth-morphisms quotes only as the theorem 02H6. It now cites the existing Mathlib leaf lem-pc-open-immersion-smooth-composition with def-weil-open-immersion, marked non-elementary, source 01VC/01VA; proof_deps is recomputed. Accepted tool_uses: sbc-lem-smooth-criterion, sbc-lem-smooth-geometrically-reduced, lem-pc-proper-base-change (generic black boxes). No SGA. Edge cases checked: S a field point (S_1=S, V=T), T one component of a disconnected fibre, T empty excluded, non-noetherian base.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedOpenSpreading",
+  "declaration": "AlgebraicGeometry.exists_smooth_geometricallyConnected_fibre_neighbourhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/SmoothConnectedOpenSpreading.lean",
+  "statement": "theorem exists_smooth_geometricallyConnected_fibre_neighbourhood {Y S : Scheme.{u}} (h : Y ⟶ S) [Smooth h] [LocallyOfFinitePresentation h] [QuasiCompact h] [QuasiSeparated h] (s : S) (T : (h.fiber s).Opens) [GeometricallyConnected (T.ι ≫ h.fiberToSpecResidueField s)] : ∃ (S₁ : Scheme.{u}) (a : S₁ ⟶ S) (s₁ : S₁) (hs : a s₁ = s), IsAffine S₁ ∧ Etale a ∧ IsIso (a.residueFieldMap s₁) ∧ ∃ V : (pullback h a).Opens, IsCompact (V : Set ↥(pullback h a)) ∧ Smooth (V.ι ≫ pullback.snd h a) ∧ GeometricallyConnected (V.ι ≫ pullback.snd h a) ∧ (pullback.snd h a).fiberι s₁ ⁻¹ᵁ V = (pullback.map (pullback.snd h a) (S₁.fromSpecResidueField s₁) h (S.fromSpecResidueField (a s₁)) (pullback.fst h a) (Spec.map (a.residueFieldMap s₁)) a (pullback.condition (f := h) (g := a)).symm (a.SpecMap_residueFieldMap_fromSpecResidueField s₁).symm ≫ eqToHom (congrArg h.fiber hs)) ⁻¹ᵁ T",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b65d7b2",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Only the lean field changed vs the live node; statement, proof, proof_deps and stmt_deps unchanged, and lean.statement appears verbatim in the file. The Lean is the landed 055W general theorem (exists_geometricallyConnected_fibre_neighbourhood, Q42) with [Flat h][GeometricallyReduced h] replaced by [Smooth h] and the conjunct Smooth (V.ι ≫ pullback.snd h a) added, matching the node and Stacks 055W/057J with smoothness from 01VB/01VC/01VA. Clause by clause: finite presentation = LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated; T as an open of h.fiber s with GeometricallyConnected over κ(s) (ConnectedSpace gives nonempty); ∃ affine S₁, Etale a, s₁ with a s₁ = s, IsIso residueFieldMap in the right direction; compact open V; embedded fibre equality through the canonical pullback.map and eqToHom, identical to the landed general theorem. Edge cases: empty T excluded; all fibres of v nonempty so v is surjective, as in the landed general theorem and true; no Noetherian assumption; one universe u with test fields over all of Type u. No new definitions, proof is sorry, source and blueprint docstrings present, docstring gives the four proof steps. No duplicate in the project lean trees or Mathlib. def-weil-connected-scheme has no lean record but the landed general theorem cites it the same way. Advisory: the Second reading section is the worker's own self-check. No compile, no fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261026T100405-L-11062",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_smooth_geometricallyConnected_fibre_neighbourhood"
+  ],
+  "sorry_after": []
+ }
+}

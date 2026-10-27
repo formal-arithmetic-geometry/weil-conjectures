@@ -8,7 +8,8 @@
   "def-weil-pbc-condensed-e-module-category",
   "def-weil-compactifications-refinements",
   "def-weil-pbc-condensed-coefficient-comparisons",
-  "lem-pur-site-restriction-module-adjunction-exact"
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pur-condensed-compact-support-projection-core"
  ],
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
@@ -16,32 +17,42 @@
  },
  "proof": [
   {
-   "text": "For identityScalar_flat, identify coefficientMap of the identity with the identity ring map. Compose Mod.extendScalarsIsoOfEq with Mod.extendScalarsId and transport finite-limit preservation from the identity functor with preservesFiniteLimits_of_natIso. No coefficient-flatness hypothesis is used.",
-   "uses": [],
-   "elementary": "The existing coefficientMap_id and tensor-unit isomorphism identify this functor with the identity; finite-limit preservation is invariant under natural isomorphism."
-  },
-  {
-   "text": "For condensedProjection_commShift, use the canonical right-derived unit shift calculation from lem-sp-canonical-right-derived-adjunction-shift. The factorization equation for each right-derived comparison is a shift-compatible composite. On K-injective representatives the source derived unit is invertible, so NatTrans.CommShift.of_comp_whiskerLeft_Qh gives shift compatibility of right-derived natural isomorphisms, exact-functor identifications, and composition identifications. Apply these to derivedComapLowerStarIso. The levelwise derived pullback comparison commutes with shifts as well. Equip scalar adjunctions with the shifts already specified by condensedScalarShift; their units and counits commute with shifts by commShift_of_rightAdjoint. The exact open adjunctions commute with the levelwise shifts. Expand the proper scalar mate and the open conjugate: every unit, counit, comparison, associator and whiskering commutes with shifts. Their paste is condensedProjection, so it commutes with shifts. The seven other original coherence and refinement theorems retain their source proof plans and original holes in the Lean docstrings.",
+   "text": "Publicly import the core construction module. It retains the original concrete scalar, proper/open, and refinement maps, all named category structures, the original coefficient shift/composition/identity coherence proofs, proper/open existence and naturality, and refinement identity. The original public instance registrations remain at the end of this module. No construction or hypothesis changes.",
    "uses": [
-    "lem-sp-canonical-right-derived-adjunction-shift"
+    "def-pur-condensed-compact-support-projection-core"
    ],
    "elementary": false
   },
   {
-   "text": "For fieldRefinement_id, take the right-adjoint conjugate of the existing leftDerivedUpperStarId as the proper pushforward identity isomorphism. The proved right unit law for leftDerivedUpperStarComp identifies the identity refinement restriction with the pullback of this isomorphism. Under the open adjunction, the inverse proper identity satisfies the original normalization; fieldProperOpen_existsUnique therefore identifies it with fieldProperOpen. The proved left unit law for leftDerivedUpperStarComp, transported through conjugateEquiv, identifies fieldPushComp at the identity with the proper identity. Their two components cancel after the proper direct image, proving the identity natural transformation.",
-   "uses": [],
-   "elementary": "Uses the already proved source-library pullback unit laws in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence, Mathlib adjunction mate identities, and the original fieldProperOpen_existsUnique declaration in this node; no new assumption."
+   "text": "For fieldRefinement_comp, use the proved associativity law leftDerivedUpperStarComp_assoc_app to identify the two pullback comparisons after transport by the refinement equations. Naturality of the comparison and the conjugate counit equation show that the restriction normalization for a composite equals the two successive normalizations. Hence the composite of the two chosen proper/open arrows, followed by the proper-image compositor, satisfies the original composite open-unit normalization. Apply fieldProperOpen_existsUnique to identify it with fieldProperOpen of the composite refinement. Separately conjugate the same pullback associativity law, using conjugateEquiv_comp and conjugateEquiv_whiskerLeft/Right, to prove associativity of the proper-image compositors with the specified equality transports. Keep the proper-image compositor identity as an equality of natural transformations. The generic assembleLiftNat composition calculation applies the final proper direct image to the proper/open composition equation and uses compositor associativity and naturality to prove fieldRefinementNat composition. The original public fieldRefinement is definitionally the assembled natural transformation; a separate proved presentation identity transfers this composition law to fieldRefinement_comp. The generic unit-normalized lift composition and componentwise mate composition are fully proved in separate generic modules; their specializations and all remaining auxiliary calculations are proved private theorems; no statement or selected map changes.",
+   "uses": [
+    "lem-pur-unit-normalized-lift-composition",
+    "lem-pur-conjugate-composition-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For condensedProjection_refinement, use condensedPushScalar_refinement_factorization (lem-pur-condensed-push-scalar-composition) to identify the original left side with the explicit three-map proper/open coefficient paste followed by the transported target compositor. This part uses the proper coefficient compositor law, its transport along r.hom_g, and naturality; it does not use scalar-extended constructibility or coefficient compatibility of the normalized open lift. Then use fieldProperOpen_scalar_pasting (lem-pur-condensed-proper-open-scalar) to identify that same explicit paste with the original right side. This part uses the open-unit-normalized lift comparison at the scalar-extended bounded constructible object, its proper direct image, and the original definitions of projection and refinement. Equality transitivity combines these two strictly distinct constituents in Lean. The two pasted constituent statements remain sorry in separate new modules. No replacement comparison map or additional choice is introduced.",
+   "uses": [
+    "lem-pur-condensed-proper-open-scalar",
+    "lem-pur-condensed-push-scalar-composition"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sp-canonical-right-derived-adjunction-shift"
+  "def-pur-condensed-compact-support-projection-core",
+  "lem-pur-unit-normalized-lift-composition",
+  "lem-pur-conjugate-composition-components",
+  "lem-pur-condensed-proper-open-scalar",
+  "lem-pur-condensed-push-scalar-composition"
  ],
  "proof_origin": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Original proof Steps 15–16: identity refinement follows from the existing pullback unit laws and adjunction mates. Retains the earlier X3 scalar flatness and shift proofs; the other six original holes are retained.",
+  "place": "Original Step 15: naturality of the uniquely open-unit-normalized proper/open comparison, proved by additive uniqueness on a binary sum. Earlier scalar-flatness, shift and identity-refinement proofs are retained. Identity coefficient projection: derived identity-square normalization and adjunction mate unit equations. Coefficient composition: canonical restriction compositor, horizontal derived squares, and proper/open adjunction mate pasting. The named scalar adjunction is a definitionally identical presentation of the existing construction, shared by shifts, scalar composition and scalar identity. Named proper and open scalar mates similarly present exactly the original projection data. C7: the remaining existence/uniqueness clause is reduced to the clopen restricted-counit calculation, with inverse cancellation and the open adjunction proved in Lean. J3: refinement composition follows from the original normalized-lift uniqueness and proved derived pullback associativity; both the restriction/counit calculation and the proper-image compositor calculation are written in Lean. C1: the coefficient/refinement compatibility is reduced to the proper-image pasting factorization and the normalized proper/open pasting factorization through the same explicit original-map composite. Equality transitivity proves the upper statement from these two constituent statements; both constituents remain named holes.",
   "by": "agent",
-  "group": "T2",
-  "date": "2026-10-21"
+  "group": "C1",
+  "date": "2026-10-27"
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -93,42 +104,32 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "lean": {
   "module": "Sheaf.Paper.CondensedCompactSupportProjection",
-  "declaration": "WeilConjectures.CompactSupportCondensedRealization.condensedProjection",
+  "declaration": "WeilConjectures.CompactSupportCondensedRealization.fieldRefinement_comp",
   "declarations": [
-   "WeilConjectures.CompactSupportCondensedRealization.pasteScalar",
-   "WeilConjectures.CompactSupportCondensedRealization.FlatCoefficientMap",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedScalar",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedScalarShift",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedProjection",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedSupportShift",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedProjection_commShift",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedScalarComp",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedProjection_comp",
-   "WeilConjectures.CompactSupportCondensedRealization.identityScalar_flat",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedScalarId",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedProjection_id",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldOpenAdjunction",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldProperOpenRestriction",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldProperOpen_existsUnique",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldProperOpen",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldPushComp",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldRefinementApp",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldRefinementApp_naturality",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldRefinement",
-   "WeilConjectures.CompactSupportCondensedRealization.condensedProjection_refinement",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldRefinement_id",
-   "WeilConjectures.CompactSupportCondensedRealization.fieldRefinement_comp"
+   "WeilConjectures.CompactSupportCondensedRealization.fieldRefinement_comp",
+   "WeilConjectures.CompactSupportCondensedRealization.condensedProjection_refinement"
   ],
   "file": "lean/Sheaf/Paper/CondensedCompactSupportProjection.lean",
-  "statement": "def condensedProjection {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : CondensedRing.rightDerivedLowerShriekOfCompactification Λ c ⋙ (condensedScalar a Y) ⟶ (condensedScalar a X) ⋙ CondensedRing.rightDerivedLowerShriekOfCompactification Λ' c",
+  "statement": "theorem fieldRefinement_comp {X Y : Scheme.{u}} {f : X ⟶ Y}\n    {c d e : Compactification f} (r : c.Refinement d) (s : d.Refinement e) :\n    fieldRefinement Λ (r.comp s) = fieldRefinement Λ s ≫ fieldRefinement Λ r",
   "branch": "newtargets-dag",
-  "by": "NC",
-  "date": "2026-10-19",
+  "by": "J3",
+  "date": "2026-10-27",
   "existing": false
  },
  "reviewed": {
@@ -148,12 +149,12 @@
   "note": "Re-delivery of 695e0022 (RETURN: theorem stmt_dep lem-fix-operation-reduction used only for the plain structure OperationScalarTransport). The fix adds def node def-pur-operation-scalar-transport with existing:true on the unchanged live BasicOperationsCoefficientReduction; the recorded statement is verbatim (one occurrence) and the node statement matches the ordinary/tensor/derived/counit fields with no existence claim. The item stmt_deps replace the theorem with that node. The three Lean modules are byte-identical to the returned head; the CondensedERealization dependency replacement is dropped and the live module is used; dependency records equal live side. Independent re-read found no extra hypotheses; P_R, alpha and a are actual constructions; the finite scalar comparison is pinned by whole-system and rationalized squares; every theorem is sorry; nothing is dropped by the route pivot; no duplicate notion. nt_compile --json on all three modules is clean: 20.0/13.0/33.8 s. Advisories: integralOrdinaryTensorSection is owned by a lemma node outside the def node's deps (inherited); projection-iso and refinement clauses are separate sorry theorems; the source path uses main-20261015."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-27",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T2",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261021T130153-L-2584587",
+  "landing": "20261027T123422-L-2294802",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

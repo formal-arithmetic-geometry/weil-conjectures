@@ -12,9 +12,50 @@
   "document": "literature/stacks-project/spaces-properties.tex",
   "place": "Tag 03ED (small etale site) and Tag 03G7 (structure sheaf); descent.tex Tag 03FH (remark-change-topologies-ringed-sites), and Tag 03DX (proposition-equivalence-quasi-coherent): the inverse comparison is restriction to Zariski opens."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an open U of the etale test scheme T, its inclusion is an open immersion, hence etale. Apply the scheme-morphism clause of [lem-trf-space-representable-etale-scheme-tests] to the morphism U → T over S. Its Yoneda map is representable etale. Compose with the given representable etale map h_T → F using isEtale_comp from [def-trf-algebraic-space]. This proves schemeOpensArrow_isEtale and defines schemeOpens by the existing explicit lift.",
+   "uses": [
+    "lem-trf-space-representable-etale-scheme-tests",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove compatible-preservation directly. Given U → W and V → W and two scheme maps from a site object Q to U and V with equal composites, the scheme pullback of the open inclusions is U ∩ V (isPullback_opens_inf_le, the intersection specialization of [lem-weil-pbc-open-fibre-product]). Lift the two maps to U ∩ V. The first projection equation verifies that the lift is over S and that its Yoneda composite to F equals the map of Q, so it is a morphism in the etale site. Both projection equations hold in that site. Compatibility of the original family at U ∩ V, followed by restriction along this lift, gives the required equality on Q. This is the private proved helper schemeOpens_compatiblePreserving.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a Zariski covering sieve R on U, consider the presieve of its images under schemeOpens. Every image arrow is an open immersion, hence etale. For each point x of U, the Zariski covering condition provides V → U in R containing x. The same point in V maps to x, as verified by Scheme.homOfLE_apply. Thus this image presieve is a covering in the defining etalePrecoverage. Its generated sieve is covering in etaleTopology by Precoverage.generate_mem_toGrothendieck, and is the functor-pushforward of R by Sieve.generate_map_eq_functorPushforward and Sieve.generate_sieve. This proves cover-preservation.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the cover- and compatible-preservation continuity criterion [lem-sfb-cover-compatible-continuous] to steps 2 and 3. This proves schemeOpens_isContinuous. The existing canonical ring comparison and SheafOfModules.pushforward now define schemeRestriction on objects and arrows without changing any construction.",
+   "uses": [
+    "lem-sfb-cover-compatible-continuous"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-representable-etale-scheme-tests",
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-sfb-cover-compatible-continuous"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03ED (definition-etale-site): open subschemes, their intersections, and jointly surjective etale covers; Tag 03G7 (definition-structure-sheaf); descent.tex Tag 03FH (remark-change-topologies-ringed-sites).",
+  "note": "R9 formalization: direct compatible-family and cover-preservation proof using the existing scheme test and Mathlib continuity criterion."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -73,7 +114,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "lean": {
@@ -111,5 +163,15 @@
   "group": "Q75",
   "result": "pass",
   "note": "Independent review complete; both delivered files compile with server confirmation and no substantive findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261023T124316-L-1369374",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

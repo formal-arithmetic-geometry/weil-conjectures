@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-normalized-finite-tensor-comparison",
+ "kind": "statement",
+ "title": "Normalized finite scalar comparison of total tensors",
+ "statement": "Let C be any small site, A a commutative ring and I an ideal. Write B for the inverse limit of the constant quotient sheaves B_n=A/I^(n+1) and pi_n:B -> B_n for its projections [def-sfb-constant-completion-coefficient-data]. For every n, the direct-sum total tensor of two B-complexes followed by actual scalar extension along pi_n and restriction to B is naturally isomorphic to the total tensor over B_n of their separately extended complexes, restricted to B [def-coef-ringed-tensor-hom-model]. In every bidegree p+q=k and over every site object, this isomorphism sends (a*b) tensor (x tensor y) to (a tensor x) tensor (b tensor y), for all sections a,b of B_n and x,y of the input degree-p and degree-q modules. There are no Noetherian, flatness, boundedness, nonzero or nonempty assumptions. The Lean interface records the additive structure of the reduction functor as a proof-valued instance argument; this is supplied by the additivity of the actual scalar-extension and restriction functors, and places no further mathematical restriction on the site or coefficients.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor-product: scalar-extension identity preceding lemma-sheafification-tensor; lemma-tensor-product-pullback (Tag 03EL). Total complexes in sites-cohomology.tex, Tags 06YM and 07A4."
+ },
+ "stmt_deps": [
+  "def-sfb-constant-completion-coefficient-data",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-strict-quotient-completion-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the already proved scalarTensorTotal helper of lem-pur-integral-tensor-reduction-tower-comparison to the actual change functor for pi_n. Whisker the resulting natural isomorphism by restriction of scalars. Its normalization on the scalar extension unit gives the formula with a=b=1.",
+   "uses": [
+    "lem-pur-integral-tensor-reduction-tower-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section tensor-product: scalar-extension identity preceding lemma-sheafification-tensor; lemma-tensor-product-pullback (Tag 03EL). Total complexes in sites-cohomology.tex, Tags 06YM and 07A4."
+   }
+  },
+  {
+   "text": "A sheafified tensor generator is bilinear: the generator of a*x and b*y is (a*b) times the generator of x and y. The scalar extension section with coefficient a is a times its unit section. Apply linearity of the comparison and the unit normalization to obtain the claimed formula for arbitrary a and b.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section tensor-product: scalar-extension identity preceding lemma-sheafification-tensor; lemma-tensor-product-pullback (Tag 03EL). Total complexes in sites-cohomology.tex, Tags 06YM and 07A4."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-tensor-reduction-tower-comparison",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "G2",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section tensor-product: scalar-extension identity preceding lemma-sheafification-tensor; lemma-tensor-product-pullback (Tag 03EL). Total complexes in sites-cohomology.tex, Tags 06YM and 07A4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural scalar quotient transition between total tensor complexes of separately scalar extended module sheaves",
+   "results": "Eight hits about generic tensor-object maps, including HomologicalComplex tensor injections and monoidal maps; no normalized sheaf scalar total-tensor comparison. Project search found the proved private scalarTensorTotal helper.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved project comparison and bilinearity."
+  },
+  {
+   "tool": "loogle",
+   "query": "NatTrans.map₂HomologicalComplex",
+   "results": "No matching identifier.",
+   "date": "2026-10-27",
+   "verdict": "No exact statement; scalarTensorTotal already supplies the needed isomorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*(NatTrans|mapNatTrans)|map₂HomologicalComplex.*NatTrans",
+   "results": "Three generic total-complex bifunctor matches, none giving the normalized scalar comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AmbientCompletedTensorAdjunction",
+  "date": "2026-10-27",
+  "group": "G2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-ambient-completed-tensor-adjunction",
+   "place": "Proof step 1: finite scalar tensor comparison and the two-scalar normalization",
+   "via": [
+    "lem-sf-ambient-completed-tensor-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedFiniteTensorComparison",
+  "file": "lean/Sheaf/Paper/NormalizedFiniteTensorComparison.lean",
+  "declaration": "CategoryTheory.AmbientCompletedTensor.normalizedFiniteTensorComparison",
+  "statement": "theorem normalizedFiniteTensorComparison (n : ℕ)\n    [(reduction J A I true n).Additive] :\n    ∃ e : coefficientTotalTensor.{u, u, u} J (completed J A I) ⋙\n        (reduction J A I true n).mapHomologicalComplex (.up ℤ) ≅\n      ((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).prod\n          ((change (projection J A I n)).mapHomologicalComplex (.up ℤ)) ⋙\n        coefficientTotalTensor.{u, u, u} J (finite J A I n) ⋙\n          (res (projection J A I n)).mapHomologicalComplex (.up ℤ),\n      ∀ (P Q : Cx (completed J A I)) (p q k : ℤ) (h : p + q = k) (U : Cᵒᵖ)\n        (a b : (finite J A I n).obj.obj U)\n        (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U),\n        ((e.hom.app (P, Q)).f k).val.app U\n          (tensorSection (projection J A I n)\n            (((coefficientTotalTensor.{u, u, u} J (completed J A I)).obj (P, Q)).X k)\n            U (a * b) (coefficientTensorGenerator.{u, u, u} J (completed J A I)\n              P Q p q k h U x y)) =\n          coefficientTensorGenerator.{u, u, u} J (finite J A I n)\n            (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).obj P)\n            (((change (projection J A I n)).mapHomologicalComplex (.up ℤ)).obj Q)\n            p q k h U (tensorSection (projection J A I n) (P.X p) U a x)\n              (tensorSection (projection J A I n) (Q.X q) U b y)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1fa77",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T065850-L-2483130",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-1fa77",
+  "group": "G2",
+  "result": "fix",
+  "landing": "20261027T065850-L-2483130",
+  "kind": "interface",
+  "note": "independent cc review: 1fa77da0 vs 55f3 delivery (only Mod qualification + obtain→choose in item; other Lean/change record identical) and new node statement vs owner nodes of reduction/res"
+ }
+}

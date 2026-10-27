@@ -1,0 +1,118 @@
+{
+ "id": "lem-sp-varying-ring-ordinary-square-pasting",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Final factor-pasting step of lem-sp-varying-ring-ordinary-clopen-evaluation.",
+   "via": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pasting ordinary square-comparison equations",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "If OrdinarySquareComparison holds for β:I⋙P→A⋙B and β′:i⋙p→a⋙b, and also for θ:A⋙B→R⋙K and θ′:a⋙b→r⋙k, using the same intermediate evaluation comparisons, it holds for β≫θ and β′≫θ′.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Functoriality and associativity in Construction 4.1; the generic component-pasting calculation is agent-formulated."
+ },
+ "stmt_deps": [
+  "lem-sp-varying-ring-ordinary-evaluation-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "At each source object map the composite β≫θ with Functor.map_comp. Substitute the comparison equation for θ, then the equation for β with the remaining θ′ component on the right. Associativity gives precisely the field equation for the composite.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Functoriality and associativity in Construction 4.1; the generic component-pasting calculation is agent-formulated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Component evaluation constant tower degree zero embedding preserves normalized adjunction mates and open base change clopen projection",
+   "results": "msearch.py returned generic constantPresheafAdj, constantSheafAdj and evaluation preserves zero morphisms; none concerns the normalized varying-ring ordinary realization.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv_hcomp\"; \"mapDerivedCategorySingleFunctor\"",
+   "results": "Generic mateEquiv_hcomp and exact-single functor coherence. Inspected Mathlib CategoryTheory/Adjunction/Mates and the adopted source LeftDerivedFunctor/SingleFunctor. None states the scheme/coefficient realization normalization.",
+   "date": "2026-10-27",
+   "verdict": "generic tools, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSingle.*comp|ordinary.*[Cc]artesian|ordinary.*[Ss]ectionEvaluation|single.*mate",
+   "results": "msearch.py found no Mathlib matches. Local rg found VaryingRingOpenBaseChangeEvaluation and VaryingRingClopenSectionEvaluation, whose conclusions concern derived coefficient evaluation to a single module category. They do not state the present ordinary-system to derived-constant-tower comparisons. The former imports the original item only for its already proved ordinaryModuleEvalG_comp.",
+   "date": "2026-10-27",
+   "verdict": "no duplicate ordinary realization normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation",
+  "date": "2026-10-27",
+  "group": "E9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOrdinarySquarePasting",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOrdinarySquarePasting.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.OrdinarySquareComparison.trans",
+  "statement": "theorem OrdinarySquareComparison.trans\n    {A B C D M A' B' C' D' M' : Type*}\n    [Category A] [Category B] [Category C] [Category D]\n    [Category M] [Category M']\n    [Category A'] [Category B'] [Category C'] [Category D']\n    {EA : A ⥤ A'} {EB : B ⥤ B'} {EC : C ⥤ C'} {ED : D ⥤ D'}\n    {R₀ : C ⥤ A} {P₀ : D ⥤ B} {K : A ⥤ B} {I : C ⥤ D}\n    {r : C' ⥤ A'} {p : D' ⥤ B'} {k : A' ⥤ B'} {i : C' ⥤ D'}\n    (eR : R₀ ⋙ EA ≅ EC ⋙ r) (eP : P₀ ⋙ EB ≅ ED ⋙ p)\n    (eK : K ⋙ EB ≅ EA ⋙ k) (eI : I ⋙ ED ≅ EC ⋙ i)\n    {EM : M ⥤ M'} {A₀ : C ⥤ M} {B₀ : M ⥤ B}\n    {a₀ : C' ⥤ M'} {b₀ : M' ⥤ B'}\n    (eA : A₀ ⋙ EM ≅ EC ⋙ a₀) (eB : B₀ ⋙ EB ≅ EM ⋙ b₀)\n    (β : I ⋙ P₀ ⟶ A₀ ⋙ B₀) (β' : i ⋙ p ⟶ a₀ ⋙ b₀)\n    (θ : A₀ ⋙ B₀ ⟶ R₀ ⋙ K) (θ' : a₀ ⋙ b₀ ⟶ r ⋙ k)\n    (hb : OrdinarySquareComparison eA eP eB eI β β')\n    (hs : OrdinarySquareComparison eR eB eK eA θ θ') :\n    OrdinarySquareComparison eR eP eK eI (β ≫ θ) (β' ≫ θ')",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-27",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.OrdinarySquareComparison.trans"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-77a07",
+  "group": "E9",
+  "result": "fix",
+  "landing": "20261027T054600-L-966087",
+  "kind": "interface",
+  "note": "independent cc review: item module + 6 new modules vs clone item (verbatim extraction diff), node JSONs vs Lean, 2 direct importers compiled against delivered modules"
+ }
+}

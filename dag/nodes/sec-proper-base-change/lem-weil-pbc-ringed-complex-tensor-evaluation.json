@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-ringed-complex-tensor-evaluation",
+ "kind": "statement",
+ "title": "Canonical tensor evaluation for ordinary ringed-site Hom complexes",
+ "statement": "For a small ringed site (C,J,O), transport the total tensor/internalHom adjunction along homComplexFunctorObjIsoInternalHom, including its sign (-1)^(pn), to the ordinary product Hom of [def-pur-hom-complex]. Define E(P,N): N tensor Hom(P,O[0]) -> Hom(P,N) by braiding followed by the canonical ihomUnitTensorToIhom map. This map is natural contravariantly in every complex P and covariantly in every complex N, and is an isomorphism if P is dualizable as an ordinary complex. If u(N):N -> Hom(O[0],N) is the transpose of the tensor left unitor, then E(O[0],N) composed with tensoring u(O[0]) and the inverse right unitor is u(N). Tensor and the ring complex are exactly those of [def-weil-pbc-ringed-koszul-system].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (section-hom-complexes) and Tag 08JJ (lemma-dual-perfect-complex), finite strictly perfect evaluation argument before passage to the derived category."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Transport CochainComplex.tensorHomAdjunction along homComplexFunctorObjIsoInternalHom. The component transpose is (-1)^(pn) times the sheaf-level transpose on the (p,n) tensor summand. Compare components using this formula to identify precomposition for the transported closed structure with the actual homComplexFunctor source map.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define E as braiding followed by MonoidalClosed.ihomUnitTensorToIhom. For a dualizable P, choose a right dual, convert it to a left dual using symmetry, and apply the proved isIso_ihomUnitTensorToIhom theorem. Both naturality equations follow by transposing and applying naturality of evaluation, associators and braiding.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the tensor unit, transpose the desired equality. WhiskerLeft_unitNatIso_hom_app_ihom_ev_app cancels the unit-Hom transpose against evaluation, and monoidal coherence gives the left unitor.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (section-hom-complexes) and Tag 08JJ (lemma-dual-perfect-complex), finite strictly perfect evaluation argument before passage to the derived category.",
+  "note": "Specialization of proved project monoidal closed and bounded-complex duality APIs; signs and unit conventions are checked explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For bounded finite free cochain complexes, tensor with the dual is naturally isomorphic to the internal Hom complex",
+   "results": "Tensor-Hom equivalences for finite free modules and closedOfHasLeftDual; no signed ringed-site Hom comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing closed-category evaluation and the project bounded-complex duality theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HasLeftDual\"",
+   "results": "Duals of the tensor unit and tensor products, closedOfHasLeftDual, and the braided conversion from right to left duals.",
+   "date": "2026-10-26",
+   "verdict": "Ingredients only; no actual Koszul-stage comparison or normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of finite free modules is dualizable, and tensoring with its dual computes the internal Hom.",
+   "results": "dualTensorHomEquiv, dualTensorHomEquivOfBasis and module dual finiteness results; no theorem for actual ringed-site complexes.",
+   "date": "2026-10-26",
+   "verdict": "Module-level ingredients only."
+  },
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|isDualizable_of_isStrictlyGE_of_isStrictlyLE|homComplexFunctorObjIsoInternalHom",
+   "results": "Mathlib grep service: zero hits. Local project-source search finds proved canonical dual-pair evaluation, bounded-complex dualizability, and signed ordinary-Hom/internalHom comparison. No existing declaration supplies the specialization and coherence statements here. Blueprint searches tensor evaluation and dualizable complex found no duplicate node.",
+   "date": "2026-10-26",
+   "verdict": "Reuse all three existing proved results; add only their specialization and coherence proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulFiniteEvaluation",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Supporting finite Koszul evaluation and completion-unit identification below the inherited ancestor def-weil-pbc-completed-pullback. In the current latest blueprint, the corresponding place is lemma-weil-pbc-completed-pullback-reduction: the displayed identification of completed inverse image with R inverse limit of reductions, together with the completion map in clause (2).",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-finite-evaluation",
+    "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedComplexTensorEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/RingedComplexTensorEvaluation.lean",
+  "declaration": "CategoryTheory.ringedComplexTensorEvaluation_isIso",
+  "statement": "theorem ringedComplexTensorEvaluation_isIso (P N : ringedSiteComplex O)\n    (hP : IsDualizable P) : IsIso (ringedComplexTensorEvaluation O P N)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26",
+  "declarations": [
+   "CategoryTheory.ringedComplexHomAdjunction",
+   "CategoryTheory.ringedComplexClosed",
+   "CategoryTheory.ringedComplexCurry_component",
+   "CategoryTheory.ringedComplexTensorEvaluation",
+   "CategoryTheory.ringedComplexTensorEvaluation_naturality",
+   "CategoryTheory.ringedComplexTensorEvaluation_isIso",
+   "CategoryTheory.ringedComplexTensorEvaluation_source",
+   "CategoryTheory.ringedComplexHomUnit",
+   "CategoryTheory.ringedComplexTensorEvaluation_unit",
+   "CategoryTheory.ringedComplexHomUnit_eq_curry"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T001241-L-4178767",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T001241-L-4178767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

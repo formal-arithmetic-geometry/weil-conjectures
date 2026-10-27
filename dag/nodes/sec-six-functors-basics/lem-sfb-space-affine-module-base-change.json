@@ -1,0 +1,320 @@
+{
+ "id": "lem-sfb-space-affine-module-base-change",
+ "kind": "statement",
+ "title": "Affine direct image of quasi-coherent modules on algebraic spaces commutes with arbitrary base change",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and let $f:X\\to Y$ and $g:Y'\\to Y$ be morphisms of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Assume $f$ is affine: it is representable and, for every affine scheme $V\\to Y$, the scheme $X\\times_Y V$ is affine [pqf-def-affine-morphism]. Put $X'=X\\times_Y Y'$, with projections $h:X'\\to X$ and $f':X'\\to Y'$ [lem-trf-space-fibre-products-etale-covers]. Let $F$ be a quasi-coherent $\\mathcal O_X$-module on the small etale site [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module]. Use tensor pullback and module direct image for the canonical ringed etale topoi [def-trf-space-etale-module-functors, lem-trf-space-enlarged-etale-ringed-site-model]. Then $f_*F$ is quasi-coherent, and the canonical natural map\n$$\\beta_F:g^*f_*F\\longrightarrow f'_*h^*F$$\nis an isomorphism. Here $\\beta_F$ is adjoint under $f'^*\\dashv f'_*$ to\n$$f'^*g^*f_*F\\simeq h^*f^*f_*F\\xrightarrow{h^*\\epsilon_F}h^*F,$$\nwhere $\\epsilon_F$ is the counit and the first arrow is the canonical composition comparison for tensor pullbacks [lem-trf-space-chart-adjunction-tensor-realization]. There is no flatness, finite-type, finite-presentation or Noetherian hypothesis on $g$, and no finite-type or finite-presentation hypothesis on $F$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07U8, lemma-affine-base-change, the quasi-coherent direct image and ordinary degree-zero base-change assertion; canonical map given in the discussion and base-change morphism preceding equation-base-change-diagram."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "pqf-def-affine-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-space-module-base-change"
+ ],
+ "proof": [
+  {
+   "text": "For an affine etale chart $u:V\\to Y$, set $U=X\\times_YV$, $p:U\\to V$ and $E=F|_U$. The hypothesis on $f$ makes $U$ affine and $p$ affine: an affine scheme test over $V$ is also an affine scheme test over $Y$. Restricting a local presentation shows $E$ is quasi-coherent. Etale direct-image restriction identifies $(f_*F)|_V$ with $p_*E$. By affine-morphism permanence $p$ is quasi-compact and separated. Apply the scheme Zariski/etale equivalence to $E$, and clause (1) of scheme affine pushforward/base change to its Zariski counterpart. The direct-image comparison in that equivalence makes $p_*E$ quasi-coherent on $V_{\\mathrm{et}}$. Thus $f_*F$ has local presentations on the affine etale charts, which cover $Y$, and is quasi-coherent by the definition.",
+   "uses": [
+    "def-trf-space-quasi-coherent-module",
+    "def-trf-algebraic-space",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change, proof and equation-representable-higher-direct-image; coherent.tex Tag 02KG, lemma-affine-base-change."
+   }
+  },
+  {
+   "text": "Choose a covering of $Y$ by affine etale schemes $V_i$. Base change gives an etale covering $W_i=Y'\\times_YV_i\\to Y'$. Cover each algebraic space $W_i$ by affine etale schemes $V'_{ij}$. Composition of etale coverings shows that $u'_{ij}:V'_{ij}\\to Y'$ form a covering. There is a scheme morphism $a:V'_{ij}\\to V_i$, with no flatness requirement. Write $U_i=X\\times_YV_i$, $U'_{ij}=U_i\\times_{V_i}V'_{ij}$, $p_i:U_i\\to V_i$, $p'_{ij}:U'_{ij}\\to V'_{ij}$ and $b:U'_{ij}\\to U_i$. The fibre-product universal property identifies $U'_{ij}$ with $X'\\times_{Y'}V'_{ij}$. Both $U_i$ and $U'_{ij}$ are affine schemes, the latter by affine scheme base-change permanence. In particular every square now used for the scheme theorem is a square of schemes; we have not assumed that $Y'$ itself is a scheme.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change, proof and equation-representable-higher-direct-image; coherent.tex Tag 02KG, lemma-affine-base-change."
+   }
+  },
+  {
+   "text": "Fix one of these squares and put $E=F|_U$. The restriction comparisons for etale direct image, together with the tensor-pullback composition comparison for the equal composites $g u'=u a$, identify the restriction of the source of $\\beta_F$ with $a^*p_*E$. Applying the same direct-image restriction to $f'$ and tensor composition to $h$ identifies its target with $p'_*b^*E$. These comparisons use etale pullback as restriction; their direct-image section maps are identities. Now pass to Zariski quasi-coherent modules on the four schemes. Tensor pullback preserves quasi-coherence, and $p,p'$ are affine, hence quasi-compact and separated. Therefore all four pullback/direct-image comparisons of the scheme Zariski/etale equivalence apply. Denote the Zariski counterpart of $E$ by $H$. The two objects become $a^*p_*H$ and $p'_*b^*H$.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change, proof and equation-representable-higher-direct-image; coherent.tex Tag 02KG, lemma-affine-base-change."
+   }
+  },
+  {
+   "text": "Check the map under these identifications, not just the objects. The chart-unit formula for tensor pullback says its unit sends a section $m$ to $1\\otimes m$; the triangle identity and linearity then force the counit to send a local tensor $c\\otimes m$ to $c$ times the restricted section $m$. Direct-image restriction leaves that section unchanged. The composition comparison sends $c\\otimes(d\\otimes m)$ to $c\\,d\\otimes m$ with $d$ pulled back along the relevant ring map. For $V=\\operatorname{Spec}R$, $U=\\operatorname{Spec}B$, $V'=\\operatorname{Spec}R'$ and $M=H(U)$, the adjoint defining the restricted $\\beta_F$ consequently gives\n$$R'\\otimes_R M\\longrightarrow(R'\\otimes_R B)\\otimes_B M,\\qquad r'\\otimes m\\longmapsto(r'\\otimes1)\\otimes m.$$\nIndeed its adjoint sends $c\\otimes(r'\\otimes m)$ to $c(r'\\otimes1)\\otimes m$; precomposing with the adjunction unit sets $c=1$. The Zariski/etale pullback comparison is itself specified by the module adjunctions and units and counits, so this computation applies through that comparison as well. These are local tensor representatives, and linearity and sheafification determine the maps from them. This is exactly the canonical map, including its direction, specified in clause (1) of scheme affine pushforward/base change.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-zariski-etale-functor-comparison-square",
+    "lem-weil-pbc-affine-pushforward-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change, proof and equation-representable-higher-direct-image; coherent.tex Tag 02KG, lemma-affine-base-change."
+   }
+  },
+  {
+   "text": "Clause (1) of scheme affine pushforward/base change makes the map computed in step 4 an isomorphism for every $R\\to R'$ and every $B$-module $M$. Its inverse has the balanced formula $(r'\\otimes b)\\otimes m\\mapsto r'\\otimes bm$; the composites on pure tensors are identities. Hence $\\beta_F$ restricts to an isomorphism on every $V'_{ij}$. For any object of $Y'_{\\mathrm{et}}$, pull back this covering. Given a section of the target, apply the local inverse on the covering pieces; these sections agree on overlaps because they are inverses of the restrictions of the same map, and uniqueness follows from local injectivity. The sheaf axiom glues them to its unique inverse image. This constructs an inverse to $\\beta_F$. All comparisons and the tensor formula commute with module maps, so the result is the stated natural comparison. Neither the tensor inverse nor the chart construction used flatness, finite type, finite presentation, or Noetherian assumptions.",
+   "uses": [
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07U8, lemma-affine-base-change, proof and equation-representable-higher-direct-image; coherent.tex Tag 02KG, lemma-affine-base-change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-algebraic-space",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "lem-trf-zariski-etale-functor-comparison-square"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07U8, lemma-affine-base-change, proof and equation-representable-higher-direct-image; coherent.tex Tag 02KG, lemma-affine-base-change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism of algebraic spaces pushforward of a quasi coherent module commutes with arbitrary tensor pullback base change",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pullback",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism permanence, scheme or ringed-site functors and adjunctions, not arbitrary-base-change invertibility of affine direct image for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*baseChange|baseChange.*affine",
+   "results": "Actual search: 25 hits; Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism permanence, scheme or ringed-site functors and adjunctions, not arbitrary-base-change invertibility of affine direct image for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine direct image of quasi coherent module sheaves commutes with arbitrary base change on algebraic spaces",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.isStableUnderBaseChange, AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange, AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism permanence, scheme or ringed-site functors and adjunctions, not arbitrary-base-change invertibility of affine direct image for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "Actual search: 12 hits; SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism permanence, scheme or ringed-site functors and adjunctions, not arbitrary-base-change invertibility of affine direct image for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change",
+   "results": "Actual search: 0 hits; ; subdirectory AlgebraicGeometry/Modules",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism permanence, scheme or ringed-site functors and adjunctions, not arbitrary-base-change invertibility of affine direct image for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On algebraic spaces restriction of scalars along an affine morphism commutes with extension of scalars along any base change for quasi coherent sheaves",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.AffineSpace.comp_homOfVector_assoc, AlgebraicGeometry.AffineSpace.homOfVector_over_assoc, AlgebraicGeometry.AffineSpace.comp_homOfVector, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits give scheme morphism permanence, scheme or ringed-site functors and adjunctions, not arbitrary-base-change invertibility of affine direct image for quasi-coherent modules on algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|affine.*baseChange|baseChange.*affine",
+   "results": "Actual Q32 search: 25 hits; Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/Morphisms/Integral.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/AffineAnd.lean, Mathlib/AlgebraicGeometry/Morphisms/Constructors.lean; subdirectory AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or abstract module functors, scalar adjunctions, or affine-morphism permanence; none states arbitrary base change of quasi-coherent module direct image on algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for affine morphisms of algebraic spaces commutes with extension of scalars for quasi coherent sheaves",
+   "results": "Actual Q32 search: 8 hits; AlgHom.restrictScalars, AlgHom.coe_restrictScalars', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, RestrictScalars, AlgHom.restrictScalars_apply, AlgHom.restrictScalars.congr_simp, PresheafOfModules.restrictScalarsObj, SheafOfModules.restrictScalars",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or abstract module functors, scalar adjunctions, or affine-morphism permanence; none states arbitrary base change of quasi-coherent module direct image on algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward",
+   "results": "Actual Q32 search: 12 hits; SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback_assoc",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or abstract module functors, scalar adjunctions, or affine-morphism permanence; none states arbitrary base change of quasi-coherent module direct image on algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine direct image of a quasi coherent module on an algebraic space commutes with arbitrary tensor pullback base change",
+   "results": "Actual Q32 search: 8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or abstract module functors, scalar adjunctions, or affine-morphism permanence; none states arbitrary base change of quasi-coherent module direct image on algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange|base_change",
+   "results": "Actual Q32 search: 0 hits; ; subdirectory AlgebraicGeometry/Modules",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme or abstract module functors, scalar adjunctions, or affine-morphism permanence; none states arbitrary base change of quasi-coherent module direct image on algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-module-base-change-flat-proper-support",
+  "date": "2026-10-23",
+  "group": "NP"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tag 0D01, quot-proposition-hilb, the Hilbert-space input in the proof of Tag 0D1C. Supporting input: Tag 09TR, quot-situation-quot; proper-support convention is the equivalent carrier formulation of spaces-perfect.tex Tag 0CZI, lemma-module-support-proper-over-base. Well-defined tensor-pullback transitions: finite presentation, relative flatness and proper support persist under base change. Supporting input: the canonical affine direct-image comparison, applied to the proper carrier closed immersion; Stacks Tag 07U8.",
+   "via": [
+    "lem-sfb-space-module-base-change-flat-proper-support",
+    "def-sfb-space-proper-quot-functor",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-affine-module-base-change",
+  "worker": "stage1",
+  "summary": "Proved quasi-coherence and arbitrary base change by etale affine chart reduction to the existing scheme theorem, including a local tensor calculation identifying the prescribed counit mate. No new nodes; the existing DAG already contains every non-elementary input. Statement unchanged.",
+  "blueprint": "Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3), direct-image supporting branch inherited through proper Quot and Hilbert representability: this node supplies the affine carrier base-change input in Stacks 07U8, not a new coefficient-layer assertion. The original inherited blueprint.from.node is null, as confirmed by blueprint_refs.py ancestor; its from.place and via are retained. Searches for affine base change, 02KG and 07U8 found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "def-trf-space-quasi-coherent-module",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   },
+   {
+    "node": "lem-trf-zariski-etale-functor-comparison-square",
+    "why": "Generic scheme or algebraic-space chart/module calculus used in the Stacks 07U8 reduction; the unit has no replacement for this supporting affine computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-algebraic-space",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-zariski-etale-functor-comparison-square"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-86ad6d41d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-86ad6d41d (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes; the statement and stmt_deps are unchanged, and proof_deps is exactly the union of the step uses (11). Source check: Stacks spaces-cohomology 07U8 lemma-affine-base-change (l.1685) reduces to coherent 02KG (l.907), which is the identity (R'⊗_R A)⊗_A M = R'⊗_R M. The item is the faithful degree-zero statement and is not weakened. Step 1: U=X×_Y V is affine and p is affine (affine tests over V are tests over Y); pushforward-restriction plus the Zariski/étale equivalence, with p qc-separated by permanence (3), make f_*F locally quasi-coherent on an étale cover, as def-trf-space-quasi-coherent-module requires. Step 2: W_i is re-covered by affine V'_ij; composite coverings come from chartwise permanence; U'_ij ≅ X'×_{Y'}V'_ij is affine by permanence (1)+(2); W_i is not assumed to be a scheme. Step 3: the objects are identified through the composition comparisons and the Zariski/étale pullback (arbitrary a) and direct-image (p, p' qc-separated) comparisons; quasi-coherence of b^*E is cited. Step 4: I recomputed the counit mate from unit m↦1⊗m, the triangle identity and the composition formula; it gives r'⊗m↦(r'⊗1)⊗m, which is the 02KG map of lem-weil-pbc-affine-pushforward-base-change(1) in the same direction. Step 5: the balanced inverse plus sheaf gluing on the cover is correct. Edge cases checked: empty space or zero ring, non-flat Z→F_p, non-finite M, g=id. Duplicates: rg for 07U8 finds only the parent (flat/proper support) and lem-sfb-space-h1-vanishing-affine-base-change (a different H^1/Γ statement). Batch-5: lem-trf-space-etale-module-pushforward-restriction, lem-trf-scheme-zariski-etale-quasi-coherent-equivalence, lem-trf-space-chartwise-etale-permanence and lem-trf-zariski-etale-functor-comparison-square are generic algebraic-space module and étale-covering calculus. Neither assumption gives them, and none is a step of the trace formula or Poincaré duality proofs. lem-sfb-space-module-pullback-quasicoherent reaches only the general definition def-trf-algebraic-space. I accept the declared tool_uses for these. No SGA source is used, and the route is unchanged. Minor: the report mentions a citations.json that is not in the commit; this does not affect the DAG."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAffineModuleBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_moduleDirectImage_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAffineModuleBaseChange.lean",
+  "statement": "theorem affine_moduleDirectImage_baseChange {S : Scheme.{u}} {X Y X' Y' : AlgebraicSpace S} (f : X ⟶ Y) (g : Y' ⟶ Y) (h : X' ⟶ X) (f' : X' ⟶ Y') (hf : IsRepresentable f.hom.hom) (ha : MapIsAffine f) (sq : IsPullback h.hom f'.hom f.hom g.hom) (F : X.Modules) [F.IsQuasicoherent] : ((moduleDirectImage f).obj F).IsQuasicoherent ∧ IsIso ((moduleBaseChange f g h f' (ObjectProperty.hom_ext _ sq.w)).app F)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing MapIsAffine scheme-test predicate with explicit representability. The canonical counit-mate comparison is owned by def-sfb-space-module-base-change, which cites def-sfb-space-module-tensor-composition for its tensor-normalized composition. No flat-base-change theorem is a statement dependency or additional hypothesis. The Lean module is unchanged from returned head 884355569d7e."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41dbd9611",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Re-delivery of the H2 return of 884355569d7e. The Lean file is byte-identical (sha e62c4580). I re-read the statement against Stacks 07U8 (l.1650-1702): IsRepresentable, MapIsAffine (affine-T IsPullback test), arbitrary IsPullback square, quasi-coherent F, and both clauses (quasi-coherence of f_*F, IsIso of the moduleBaseChange component). It has no flat or finite hypotheses and one sorry. The item diff vs live touches only lean and stmt_deps: the theorem node lem-sfb-space-flat-direct-image-base-change is replaced by the new existing:true definition node def-sfb-space-module-base-change, plus the landed def-sfb-space-affine-quasifinite-properties. The new node's alpha/delta/beta match moduleTensorSquare (gamma_{f',g} then eqToIso then gamma_{h,f} inverse), moduleBaseChangeCounit (h^*epsilon) and moduleBaseChange (f'^* adjoint, direction g^*f_* -> f'_*h^*) in SpaceFlatDirectImageBaseChange l.106-138. The defs have real data, and the node takes any commuting square. lean.statement is verbatim. It cites the landed def-sfb-space-module-tensor-composition owner, which is the same accepted pattern. Sources 03D7/03D8/07U8/073K are verified. No duplicate, and the stmt_deps (definition nodes only) create no cycle. Edge cases: empty spaces, zero F, g=id, non-flat g, non-finite F. Advisory: the defs' docstrings still name the flat theorem as their blueprint node, because the module was deliberately left unchanged. No compile, since no file was changed."
+ }
+}

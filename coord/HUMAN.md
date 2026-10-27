@@ -203,3 +203,7 @@ reproducible source patch. Q12's split still requires independent review.
 
 ## Shared landing collisions
 - dag/nodes/sec-proetale-coefficients/det-pe-morphisms-etale-comparison.json (live kept)
+
+## Blueprint statement error: sk-thm-purity-transport, étale clause (2026-10-25)
+
+The last paragraph of the blueprint unit sk-thm-purity-transport (sec-smooth-purity, `_section.md` line 29, unchanged in main-20261025 = weil-conjectures-blueprint b767183f) says "For étale $f$ we have $d=0$". False for an empty source: by def-sbc-smooth-morphisms (Stacks 02G2, a condition at every point / on nonempty fibres) $\emptyset\to\operatorname{Spec}k$ is étale and smooth of pure relative dimension $d$ for every $d$, e.g. $d=1$. Found by eight stage-2 workers (NY, Q03, ND, Q44, NA, N0, NK, NB), verified in Lean in their sandboxes (`SmoothOfRelativeDimension` quantifies over the points of the source) and by L. The isomorphism $f^*K(d)[2d]\simeq f^!K$ and the uniqueness clause are unaffected (zero categories). Node corrected with a `statement_change` (L maintenance): "An étale $f$ is smooth of pure relative dimension $0$, and the theorem with $d=0$ says $f^!\simeq f^*$". Blueprint correction prepared, not pushed: branch `fix/purity-transport-etale-clause` in `~/upstream-bp/fix-purity-transport-etale` (worktree of `~/cc1/blueprint-main`), the same one-sentence change to `blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md`, for a formalisation-findings round (AUDIT-FIXES.md) at the user's decision.

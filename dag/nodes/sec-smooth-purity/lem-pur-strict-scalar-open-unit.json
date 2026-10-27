@@ -1,0 +1,144 @@
+{
+ "id": "lem-pur-strict-scalar-open-unit",
+ "kind": "statement",
+ "title": "Scalar extension preserves the normalized strict open unit",
+ "statement": "Fix a prime $\\ell$, finite extensions $E,F$ of $\\mathbf Q_\\ell$, and a $\\mathbf Q_\\ell$-algebra map $i:E\\to F$ [def-weil-l-adic-coefficient-extension]. Put $A=\\mathcal O_E$, $B=\\mathcal O_F$. For an open immersion $s:U\\to W$ of schemes, use the constant-coefficient strict tower derived categories and their adjunctions $J_H\\dashv G_H\\dashv R_H$ [def-cbc-strict-tower-proper-open-arrows]. Let $T$ be finite-free scalar extension, $h:G_A T_U\\cong T_W G_B$ the published strictScalarPull and $b:T_W J_A\\to J_B T_U$ the published openTensor [def-pur-constant-scalar-tower-mates]. For every strict derived $A$-tower $M$ on $U$, scalar extension of the open unit followed by $h$ and the pullback of $b$ is the open unit over $B$: $G_B(b_M)\\circ h_{J_A M}\\circ T_U(\\eta_{A,M})=\\eta_{B,T_U M}$. No closedness, quasi-compactness, finite-etale-origin or uniform lower-bound hypothesis is imposed. The map h is explicitly the left-adjoint uniqueness isomorphism from the composite geometric/scalar adjunction, transported by inverse properRestriction, to the scalar/geometric composite. This is the defining term of strictScalarPull; no assertion about compact support or the scalar mate theorem is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, lemma-j-shriek-and-tensor; sites-cohomology.tex Tag 07A6, lemma-adjoint. Agent auxiliary refinement Steps 3--4, unit normalization on the strict diagram site; these tags support the calculation rather than stating this exact strict-tower identity."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-pur-constant-scalar-tower-mates"
+ ],
+ "proof": [
+  {
+   "text": "Take the ordinary coefficient-restriction/pullback isomorphism from the ring-sheaf change adjunction. Whisker it through the strict diagram category. Its geometric mate is the ordinary identity-on-sections direct-image comparison. The identity-on-sections uniqueness property of properRestrictionOrdinary identifies that mate with the published comparison.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the normalized right-derived square counit equation to that ordinary mate identity. The defining whole-complex unitCompatible property of properRestriction supplies the required normalization. Adjunction injectivity then proves that properRestriction is the geometric mate of the exact localization of the ordinary pullback square.",
+   "uses": [
+    "lem-pur-derived-square-normalization-naturality",
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The ordinary openRestriction comparison is, by definition, the inverse open-adjunction mate of the inverse pullback square. The mate unit equation gives its ordinary open-unit identity at every tower index. Apply exact localization of the open adjunctions to this identity on whole strict diagrams, using the exact_mate calculation. This gives the coefficient-restriction/open-unit identity in the derived category of towers itself.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates",
+    "def-cbc-strict-tower-proper-open-arrows"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The iterated mates/conjugation identity identifies the displayed leftAdjointUniq isomorphism with the scalar-adjunction inverse mate of the localized pullback square. Transpose the desired equation by the scalar adjunction. Use its two mate unit equations and naturality to move the scalar units through the pullback and open squares. The restriction/open-unit identity from the preceding step gives the desired open unit. Injectivity of the scalar Hom equivalence finishes the proof. No tensor model, support assertion or faithfulness of derived level evaluation is used.",
+   "uses": [
+    "def-pur-constant-scalar-tower-mates"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-pur-constant-scalar-tower-mates",
+  "lem-pur-derived-square-normalization-naturality",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "U3",
+  "date": "2026-10-27",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, together with sites-modules.tex Tag 0E8I; explicit adjunction-unit and exact-localization calculation",
+  "note": "Proved by the ordinary restriction/pullback and open mates, normalized right-derived counit compatibility, and scalar adjunction injectivity. Prunes the broad open tensor normalization dependency; all public statements and definitions are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\", \"counit\"",
+   "results": "{\"t\": \"2026-10-26T15:52:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftAdjointUniq\\\", \\\"counit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit_assoc\"], \"digest\": \"e450b188831163a6\"}",
+   "date": "2026-10-26",
+   "verdict": "Generic scalar counit and adjoint-uniqueness lemmas only; none identifies the published strictScalarPull/openTensor open unit on strict towers. The repository scalar_open_normalized theorem concerns coefficient restriction in single-level categories rather than these scalar-extension maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars commutes with the clopen projection and open extension by zero counit",
+   "results": "{\"t\": \"2026-10-26T15:52:52Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars commutes with the clopen projection and open extension by zero counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"Condensed.profiniteSolidCounit\", \"ModuleCat.homEquiv_extendScalarsComp\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendScalars_comp_id\"], \"digest\": \"6961f3362a5d3eea\"}",
+   "date": "2026-10-26",
+   "verdict": "Generic scalar counit and adjoint-uniqueness lemmas only; none identifies the published strictScalarPull/openTensor open unit on strict towers. The repository scalar_open_normalized theorem concerns coefficient restriction in single-level categories rather than these scalar-extension maps."
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*counit|mateEquiv.*counit",
+   "results": "{\"t\": \"2026-10-26T15:52:53Z\", \"tool\": \"grep\", \"query\": \"leftAdjointUniq.*counit|mateEquiv.*counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"7d602ae716c4a4d4\"}",
+   "date": "2026-10-26",
+   "verdict": "Generic scalar counit and adjoint-uniqueness lemmas only; none identifies the published strictScalarPull/openTensor open unit on strict towers. The repository scalar_open_normalized theorem concerns coefficient restriction in single-level categories rather than these scalar-extension maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves the unit of extension by zero and restriction to an open immersion",
+   "results": "{\"t\": \"2026-10-26T16:10:44Z\", \"tool\": \"leansearch\", \"query\": \"Extension of scalars preserves the unit of extension by zero and restriction to an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Function.ExtendByZero.linearMap\", \"ModuleCat.extendRestrictScalarsAdj_unit_app_apply\", \"ContinuousLinearMap.restrictScalars_zero\", \"ModuleCat.ExtendRestrictScalarsAdj.unit_app\", \"AlgebraicGeometry.IsOpenImmersion.ofRestrict\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"instSeminormedCommRingRestrictScalars\"], \"digest\": \"d7c8c3d733849e45\"}",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module scalar units and function extension by zero only. No strict tower open-unit equation with the published comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarRefinement",
+  "group": "F9",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Auxiliary strict scalar refinement Steps 3--5: open-unit normalization preceding clopen projection",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-refinement",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictScalarOpenUnit",
+  "declaration": "WeilConjectures.PurStrictScalar.strictScalarOpenUnit",
+  "file": "lean/Sheaf/Paper/StrictScalarOpenUnit.lean",
+  "statement": "theorem strictScalarOpenUnit\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (i : E →ₐ[ℚ_[l]] F) {U W : Scheme.{u}} (s : U ⟶ W) [IsOpenImmersion s]\n    (M : Derived (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) U) :\n    let h := (((adj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) s).comp\n      (scalarAdj l E F i U)).ofNatIsoRight (properRestriction l E F i s).symm).leftAdjointUniq\n        ((scalarAdj l E F i W).comp\n          (adj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) s))\n    (T l E F i U).map\n        ((jAdj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) s).unit.app M) ≫\n        h.hom.app\n          ((J (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) s).obj M) ≫\n        (G (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) s).map\n          ((openTensor l E F i s).app M) =\n      (jAdj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) s).unit.app\n        ((T l E F i U).obj M)",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261026T182125-L-3528493",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T202303-L-3448716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

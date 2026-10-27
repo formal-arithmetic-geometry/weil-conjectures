@@ -1,0 +1,307 @@
+{
+ "id": "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+ "kind": "statement",
+ "title": "Linear reductivity and smoothness of the closure of a semisimple cyclic subgroup",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $H$ be an affine finite-type $k$-group scheme [def-sc-group-scheme, def-weil-finite-type-morphism]. An algebraic representation on a finite-dimensional $k$-vector space $V$ is a group-scheme homomorphism to $\\operatorname{GL}(V)$, where $\\operatorname{GL}(V)(A)$ is the group of invertible $A$-linear endomorphisms of $V\\otimes_k A$. A group is linearly reductive if every finite-dimensional algebraic representation is a direct sum of simple representations; simple means nonzero with no nonzero proper invariant $k$-subspace, and invariant means preserved after every commutative $k$-algebra extension. Let $s\\in H(k)$ be semisimple, meaning that its image in every finite-dimensional algebraic representation of $H$ is diagonalizable over $k$. Set $\\Gamma=\\{s^n:n\\in\\mathbf Z\\}\\subset H(k)$. Let $G$ be the reduced closed subscheme of $H$ supported on the Zariski closure of these rational points [def-pc-scheme, def-weil-closed-immersion]; reduced means that its local rings have no nonzero nilpotents. Then the multiplication, inverse and identity of $H$ restrict to $G$, making $G\\hookrightarrow H$ a closed subgroup scheme [def-sc-group-scheme-subgroup]; $G$ is smooth over $k$ [def-sbc-smooth-morphisms] and linearly reductive. Moreover $\\Gamma\\subset G(k)$ is Zariski dense in the underlying topological space of $G$. No connectedness assumption is imposed on $H$ or $G$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 13.8, printed p.257, first part of its proof (linear reductivity of the cyclic closure); Lemma 1.40, Theorem 1.45 and Definition 1.48, printed pp.18-20, and Proposition 1.26, printed p.13, for its reduced smooth subgroup structure. Semisimple elements and their representation criterion: 9.19, printed p.171."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-sfb-semisimple-group-scheme-point",
+  "def-sfb-linearly-reductive-group-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Construct the constant integer group scheme $C=\\coprod_{n\\in\\mathbf Z}\\operatorname{Spec}k$. The product $C\\times_k C$ is covered by the open-and-closed components indexed by $(n,m)$, each a copy of $\\operatorname{Spec}k$; define multiplication there by the component $n+m$, inverse by $n\\mapsto-n$, and identity by the component $0$. The group identities hold on each component by the integer identities. Map the $n$th component to $H$ by the point $s^n$. The identity $s^{n+m}=s^ns^m$ makes this a homomorphism $a:C\\to H$. With object scheme $U=\\operatorname{Spec}k$, these are absolute groupoid schemes and a morphism of them, by [def-a1-groupoid-scheme]. Its topological image is exactly $\\Gamma$. No finite-type assertion about $C$ is used.",
+   "uses": [
+    "def-a1-groupoid-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8, lemma-map-groupoids-on-perfect-field-image, applied to the explicitly constructed constant integer group scheme"
+   }
+  },
+  {
+   "text": "The field $k$ is perfect: in characteristic $p>0$ each $b\\in k$ has a $p$th root since $T^p-b$ has a root; characteristic zero is perfect by the stated convention. Apply [lem-sfb-perfect-field-groupoid-image-closure] to $a$. Its reduced image closure is precisely the specified $G$, and its restricted groupoid operations give multiplication, inverse and identity, hence a closed subgroup of $H$. By [def-weil-closed-immersion], writing $H=\\operatorname{Spec}B$, we have $G=\\operatorname{Spec}(B/I)$. A finite list of algebra generators of $B$ maps to generators of $B/I$, so $G$ is affine and finite type. Each point $s^n$ factors through $G$: every element of $I$ has zero value at that point by the definition of the reduced induced structure. Their set is dense in $|G|$ because $|G|$ is its closure.",
+   "uses": [
+    "lem-sfb-perfect-field-groupoid-image-closure",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 04Q8, lemma-map-groupoids-on-perfect-field-image; affine closed immersions: Tag 01QO"
+   }
+  },
+  {
+   "text": "The reduced finite-type $k$-scheme $G$ is geometrically reduced by [lem-kun-geometric-reduced-perfect], since $k$ is perfect. It is now a group scheme locally of finite type, so [lem-sfb-geometrically-reduced-group-smooth] shows that $G\\to\\operatorname{Spec}k$ is smooth. Neither assertion assumes connectedness.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-sfb-geometrically-reduced-group-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 047N and 047P, lemma-group-scheme-characteristic-zero-smooth and lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth; geometric reducedness: varieties.tex Tag 020I, lemma-perfect-reduced"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-kernel-subgroup] to $\\mathrm{id}_H$: its kernel is the identity subgroup $1\\subseteq H$, which is normal since conjugation fixes the identity on every algebra. Apply [lem-sfb-normal-subgroup-representation-kernel] with this subgroup. This gives a representation $i:H\\to\\operatorname{GL}_{m,k}$ with $m\\geq1$ and trivial kernel on every algebra, hence injective on every algebra. Its restriction $i|_G$ is faithful because the closed immersion $G\\hookrightarrow H$ is injective on algebra-valued points. By the hypothesis on $s$, the matrix $i_k(s)$ is diagonalizable. Fix any representation $r:G\\to\\operatorname{GL}(V)$. If $V=0$, it is the empty direct sum of simples. Otherwise choose a basis, put $d=\\dim_k V\\geq1$, and apply [lem-sfb-rational-representation-semisimple-point] to $J=G$, $i|_G$, $r$ and $s\\in G(k)$. Thus $r_k(s)$ is diagonalizable. This step does not assume that representations of $G$ extend to $H$.",
+   "uses": [
+    "lem-sc-kernel-subgroup",
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-rational-representation-semisimple-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 5.19, printed p.103, and Section 9.19, printed p.171; the faithful representation bridge implicit in Corollary 13.8"
+   }
+  },
+  {
+   "text": "Choose an eigenbasis $e_1,\\ldots,e_d$ of $r_k(s)$ with eigenvalues $\\lambda_j\\in k^\\times$. In this basis write the universal matrix of $r$ as $(b_{ij})$ with $b_{ij}\\in k[G]$. At $s^n$, for every integer $n$, it is $\\operatorname{diag}(\\lambda_1^n,\\ldots,\\lambda_d^n)$, including negative $n$ because all eigenvalues are nonzero. For $i\\ne j$ the zero locus of $b_{ij}$ is closed and contains the dense set $\\Gamma$, hence contains all of $|G|$. In particular $b_{ij}$ vanishes at every $k$-point. Clause (2) of [lem-wf-affine-nullstellensatz-vanishing] applies to the reduced finitely generated algebra $k[G]$ and gives $b_{ij}=0$. Evaluation at every $g\\in G(A)$, for every commutative $k$-algebra $A$, therefore makes $r_A(g)$ diagonal. Its inverse is $r_A(g^{-1})$, also diagonal, so each diagonal entry is a unit. Consequently every line $ke_j$ is preserved with equality after every algebra extension, including nonreduced algebras.",
+   "uses": [
+    "lem-wf-affine-nullstellensatz-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.8, printed p.257: a subspace is stable under the cyclic closure if and only if stable under s; matrix-coordinate verification using schematic density"
+   }
+  },
+  {
+   "text": "Each nonzero one-dimensional invariant space $ke_j$ has only the subspaces $0$ and itself, so its restricted representation is simple. The basis decomposition $V=\\bigoplus_{j=1}^d ke_j$ is equivariant over every algebra by the diagonal calculation. Since $r$ was arbitrary, every finite-dimensional representation of $G$ is a direct sum of simples. This is linear reductivity as defined in the item; together with steps 2 and 3 it proves all assertions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 13.8, printed p.257, first paragraph of proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-groupoid-scheme",
+  "lem-sfb-perfect-field-groupoid-image-closure",
+  "def-weil-closed-immersion",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sfb-geometrically-reduced-group-smooth",
+  "lem-sc-kernel-subgroup",
+  "lem-sfb-normal-subgroup-representation-kernel",
+  "lem-sfb-rational-representation-semisimple-point",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 13.8, printed p.257, with the faithful-representation criterion of 9.19; reduced closure via Stacks 04Q8 and smoothness via 020I, 047N, 047P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The reduced Zariski closure of the cyclic subgroup generated by a semisimple algebraic group element is smooth and linearly reductive",
+   "results": "8 hits: LieAlgebra.IsSemisimple.booleanGenerators, Module.End.IsSemisimple.of_mem_adjoin_pair, LieModule.instIsTriangularizableOfIsAlgClosed, Module.End.IsSemisimple.of_mem_adjoin_singleton, RootPairing.GeckConstruction.instHasTrivialRadical, Module.End.exists_isNilpotent_isSemisimple, LieAlgebra.exists_isRegular, LieAlgebra.IsSemisimple. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest cb7159379648e7e3.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Zariski closure of powers of a diagonalizable matrix is a smooth linearly reductive affine group scheme",
+   "results": "8 hits: PrimeSpectrum.closure_singleton, PrimeSpectrum.vanishingIdeal_closure, Algebra.isOpen_smoothLocus, AlgebraicGeometry.Scheme.zariskiPretopology, PrimeSpectrum.isClosed_zeroLocus, AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor, PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, ProjectiveSpectrum.isClosed_iff_zeroLocus. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest c5e48e47c9c5dd9c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A diagonalizable matrix generates a Zariski dense cyclic subgroup of a smooth diagonalizable algebraic group",
+   "results": "8 hits: Matrix.SpecialLinearGroup.center_equiv_rootsOfUnity'_apply, Subgroup.instIsArithmeticRangeSpecialLinearGroupFinOfNatNatIntGeneralLinearGroupRealMapGL, Matrix.SpecialLinearGroup.scalar_eq_coe_self_center, SpecialLinearGroup.SL2Z_generators, Subgroup.le_adjoinNegOne, RootPairing.GeckConstruction.diagonal_elim_mem_span_h_iff, Matrix.GeneralLinearGroup.mem_center_iff_val_eq_scalar, RootPairing.GeckConstruction.instIsTriangularizableSubtypeMatrixSumMemFinsetSupportLieSubalgebraLieAlgebraCartanSubalgebra'Forall. Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest c28c88296bd0a93c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"closure\"",
+   "results": "0 hits: . Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "linearly.reductive|cyclic.*closure|closure.*cyclic|diagonali[sz]able",
+   "results": "0 hits: . Read returned signatures: general smoothness, abstract fixed sets, Lie algebras, matrix groups or Zariski topology, not this affine group-scheme assertion. Digest 4f53cda18c2baa0c. Searched Mathlib/AlgebraicGeometry/.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "linearly.reductive|cyclic.*closure|closure.*cyclic|semisimple",
+   "results": "{\"t\": \"2026-10-23T22:39:08Z\", \"tool\": \"grep\", \"query\": \"linearly.reductive|cyclic.*closure|closure.*cyclic|semisimple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern abstract monoid representations, linear endomorphisms, or affine-scheme diagonals; none compares rational representations of an affine group scheme at one point. Searched Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The reduced Zariski closure of a cyclic subgroup generated by a semisimple element is a smooth linearly reductive algebraic group",
+   "results": "{\"t\": \"2026-10-23T22:39:08Z\", \"tool\": \"leansearch\", \"query\": \"The reduced Zariski closure of a cyclic subgroup generated by a semisimple element is a smooth linearly reductive algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.isCyclic_zpowers\", \"Subgroup.closure\", \"Subgroup.dense_or_cyclic\", \"Subgroup.dense_xor'_cyclic\", \"instIsMulCommutativeSubtypeMemSubgroupOfIsCyclic\", \"AddSubgroup.closure_le_centralizer_centralizer\", \"Subgroup.topologicalClosure\", \"Subgroup.zpowers_eq_closure\"], \"digest\": \"84b616889d1e2e8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"Representation\"",
+   "results": "{\"t\": \"2026-10-23T22:39:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"Representation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Representation.IsSemisimpleRepresentation\", \"Representation.isSemisimpleRepresentation_iff_isSemisimpleModule_asModule\", \"Representation.isSemisimpleModule_iff_isSemisimpleRepresentation_ofModule\", \"MonoidAlgebra.Submodule.instIsSemisimpleRepresentation\"], \"digest\": \"78740896a613262e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semisimple element detected by one faithful algebraic group representation acts diagonalizably in every rational representation",
+   "results": "{\"t\": \"2026-10-23T22:39:10Z\", \"tool\": \"leanfinder\", \"query\": \"A semisimple element detected by one faithful algebraic group representation acts diagonalizably in every rational representation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.End.IsSemisimple.of_mem_adjoin_singleton\", \"Module.End.IsSemisimple.of_mem_adjoin_pair\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\", \"Module.End.isSemisimple_sub_algebraMap_iff\", \"Module.End.IsSemisimple.isFinitelySemisimple\", \"Module.End.isFinitelySemisimple_sub_algebraMap_iff\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\", \"IsSemisimpleModule.exists_end_algEquiv\"], \"digest\": \"0cd9d3529b2e8470\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "Jordan|IsSemisimple|diagonali[sz]able",
+   "results": "{\"t\": \"2026-10-23T22:39:26Z\", \"tool\": \"grep\", \"query\": \"Jordan|IsSemisimple|diagonali[sz]able\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/FinGroupCharZero.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Semisimple.lean\", \"Mathlib/RepresentationTheory/Maschke.lean\"], \"digest\": \"31024950681cba64\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned signatures concern abstract monoid representations, linear endomorphisms, or affine-scheme diagonals; none compares rational representations of an affine group scheme at one point. Searched Mathlib/RepresentationTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic group element diagonalizable in one faithful rational representation is diagonalizable in all rational representations",
+   "results": "{\"t\": \"2026-10-23T22:39:26Z\", \"tool\": \"leansearch\", \"query\": \"An algebraic group element diagonalizable in one faithful rational representation is diagonalizable in all rational representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonal\", \"Rep.instInjective\", \"Rep.diagonal_succ_projective\", \"Rep.diagonalSuccIsoFree\", \"Representation.asGroupHom\", \"Representation.mem_invariants\", \"Representation.diagonal\", \"Rep.diagonalSuccIsoFree_inv_hom_single_single\"], \"digest\": \"a34c5838939e2f8f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSemisimple\", \"closure\"",
+   "results": "{\"t\": \"2026-10-23T22:39:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSemisimple\\\", \\\"closure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One faithful representation detects diagonalizable points in an affine group scheme over an algebraically closed field",
+   "results": "{\"t\": \"2026-10-23T22:39:27Z\", \"tool\": \"leanfinder\", \"query\": \"One faithful representation detects diagonalizable points in an affine group scheme over an algebraically closed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.Spec_faithful\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"Rep.diagonal\", \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"Rep.diagonalHomEquiv_apply\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"Rep.diagonalHomEquiv\"], \"digest\": \"1758caa13906af77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closure of the powers of a diagonalizable matrix is a linearly reductive group scheme",
+   "results": "{\"t\": \"2026-10-23T22:39:28Z\", \"tool\": \"leanfinder\", \"query\": \"The closure of the powers of a diagonalizable matrix is a linearly reductive group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.GeneralLinearGroup.IsParabolic.pow\", \"Matrix.GeneralLinearGroup.fixpointPolynomial_eq_zero_iff\", \"IsSemisimpleRing.instMatrix\", \"Module.End.IsSemisimple.pow\", \"Module.End.exists_isNilpotent_isSemisimple\", \"Matrix.SpecialLinearGroup.scalar_eq_coe_self_center\", \"Matrix.GeneralLinearGroup.mem_center_iff_val_eq_scalar\", \"IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end\"], \"digest\": \"0c27e63852808282\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: none of the returned signatures gives the group-scheme assertion; abstract group representations and linear-endomorphism assertions have different hypotheses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-fixed-subscheme-smooth",
+  "date": "2026-10-24",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Theorem 16.40, printed pp.338–339, connectedness assertion; the proof is induction using Lemma 16.39 and the quotient sequence. The extra unipotent-factor assertion of the theorem is not needed. Supporting input for Milne 16.40: Corollary 13.8, printed p.257, smoothness assertion, specialized to a smooth connected acting affine group and a smooth affine scheme. Supporting input: Corollary 13.8, printed p.257, first part of its proof (linear reductivity of the cyclic closure); Lemma 1.40, Theorem 1.45 and Definition 1.48, printed pp.18-20, and Proposition 1.26, printed p.13, for its reduced smooth subgroup structure. Semisimple elements and their representation criterion: 9.19, printed p.171.",
+   "via": [
+    "lem-sfb-semisimple-fixed-subscheme-smooth",
+    "lem-sfb-solvable-semisimple-centralizer-connected",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-cyclic-closure-linearly-reductive",
+  "worker": "stage1",
+  "group": "Q58",
+  "summary": "Preserved the statement. Constructed the constant integer group scheme and reused the general reduced groupoid-image closure theorem, perfect-field geometric reducedness and smoothness. Isolated faithful detection of semisimple points as one statement-only lemma; wrote the dense cyclic eigenline argument over every algebra explicitly. No exact project attachment or Mathlib match.",
+  "blueprint": "Latest blueprint direct-images proof (3), at the inherited supporting Milne 13.8 cyclic-closure input. Steps 1-3 supply its reduced smooth subgroup, steps 4-6 justify linear reductivity including the faithful-representation bridge. The ancestor tool returns null; retained the inherited null from.node and its full via trace. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "def-a1-groupoid-scheme",
+    "why": "Generic definition of absolute groupoid used to apply the existing general image-closure theorem; no route replacement."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic reducedness under field extension over a perfect field; no unit-specific replacement, no use of a Kunneth theorem."
+   },
+   {
+    "node": "lem-sc-kernel-subgroup",
+    "why": "Generic kernel construction applied to the identity to obtain the trivial closed normal subgroup required for faithful representations."
+   },
+   {
+    "node": "lem-wf-affine-nullstellensatz-vanishing",
+    "why": "Generic vanishing principle for a reduced finite-type algebra, used to turn dense cyclic matrix equations into equations on all algebras."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-a1-groupoid-scheme",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-sc-kernel-subgroup",
+  "lem-wf-affine-nullstellensatz-vanishing"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-b87322357",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-b87322357 (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the item and the new node in full. The item statement and stmt_deps are byte-identical to live and side-live, where the item is still unsplit and has no repair note. The six steps match Milne iAG2017 Cor 13.8 (p.257) and 9.18/9.19 (pp.170-171), which I read in the PDF. Step 1 (elementary): constant group scheme over Z and the map n->s^n, which is a groupoid morphism. Step 2: perfect-field-groupoid-image-closure needs no finite-type source; its reduced Z on closure(Gamma) is G and is a closed subgroup; B/I is finite type, each s^n factors through G, and Gamma is dense. Step 3: perfect-field geometric reducedness, then geometrically-reduced-group-smooth. Step 4: the kernel of id_H is the trivial normal subgroup, normal-subgroup-representation-kernel gives a rep of H injective on every algebra, its restriction to G is faithful, and the new node applies with J=G and g=s; V=0 is handled separately. Step 5: off-diagonal coefficients vanish on the dense Gamma, so b_ij=0 by Nullstellensatz clause (2) on the reduced finitely generated k[G]; the matrix is then diagonal for every A, with unit entries. Step 6: the eigenlines are simple. The new node lem-sfb-rational-representation-semisimple-point is Milne 9.19 over an algebraically closed field. It is true by 9.18: g_u=1 by faithfulness, so r(g)_u=1. I tested J=1, mu_p, G_a, constant Z/p in char p and tori. It is self-contained and statement-only, and it is the parallel of the existing unipotent-point sibling, provable the same way via multiplicative-jordan-linear-compatibility and Tannaka point reconstruction. It is neither a duplicate nor a restated clause of the item. The dependency closure has no cycle (198 nodes, item absent). Batch-5 flag: normal-subgroup-representation-kernel reaches lem-trf-vector-subspace-complement, a Mathlib leaf saying vector subspaces have complements; this is generic linear algebra and not part of the trace formula or Poincare duality, so I accept it. I accept the four tool_uses as generic tools: def-a1-groupoid-scheme, lem-kun-geometric-reduced-perfect, lem-sc-kernel-subgroup, lem-wf-affine-nullstellensatz-vanishing. There is no SGA, and blueprint.from.node is null as on the base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemisimpleCyclicClosureLinearlyReductive",
+  "declaration": "AlgebraicGeometry.semisimple_cyclic_closure_linearlyReductive",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemisimpleCyclicClosureLinearlyReductive.lean",
+  "statement": "theorem semisimple_cyclic_closure_linearlyReductive {k : Type u} [Field k] [IsAlgClosed k] (H : Over (Spec (.of k))) [GrpObj H] [IsAffine H.left] [LocallyOfFiniteType H.hom] [QuasiCompact H.hom] (s : StandardGroupSchemes.affine k k ⟶ H) (hs : IsSemisimpleGroupSchemePoint H s) (G : Over (Spec (.of k))) (j : G ⟶ H) [IsClosedImmersion j.left] [IsReduced G.left] (hG : Set.range j.left = closure (Set.range (fun n : ℤ ↦ (s ^ n).left (IsLocalRing.closedPoint k)))) : ∃ (_ : GrpObj G), IsClosedSubgroupScheme j ∧ Smooth G.hom ∧ IsLinearlyReductiveGroupScheme G ∧ ∃ t : StandardGroupSchemes.affine k k ⟶ G, t ≫ j = s ∧ DenseRange (fun n : ℤ ↦ (t ^ n).left (IsLocalRing.closedPoint k))",
+  "branch": "newtargets-dag",
+  "by": "Q140",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a6c9b652",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Item node diff vs side-live = lean record + 2 used def stmt_deps; other 9 dep records byte-identical; lean.statement verbatim for item and new node. Clause by clause: alg-closed k; affine finite-type H (IsAffine, LocallyOfFiniteType+QuasiCompact), no extra hyps; s : affine k k ⟶ H with recorded IsSemisimpleGroupSchemePoint; Γ = integer powers s^n; G = reduced closed immersion j with range = closure(Γ), no group structure assumed; conclusion ∃ GrpObj G, IsClosedSubgroupScheme j (IsMonHom, injective points, closed immersion) ∧ Smooth G.hom ∧ IsLinearlyReductiveGroupScheme G ∧ ∃ t, t≫j=s ∧ dense powers. New def-sfb-linearly-reductive-group-scheme: invariance over all Type-u k-algebras via A-span (=U⊗A), nonzero minimal invariant summands, iSupIndep + sup=⊤, empty family for ι=∅; matches Milne Def 12.52 / Cor 13.8 (checked in PDF); not a duplicate (RationalHom.IsSimple/IsSemisimple need CharZero and k-points). Docstrings carry source, blueprint id and the 6 steps; sorry only; proof-plan imports exist. No change, so no compile. Advisory: StandardGroupSchemes.affine (def-sc-gm-ga) comes in through the semisimple-point node."
+ }
+}

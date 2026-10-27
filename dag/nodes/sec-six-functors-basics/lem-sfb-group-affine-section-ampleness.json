@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-group-affine-section-ampleness",
+ "kind": "statement",
+ "title": "Ampleness detected by a fibrewise nonempty affine section locus on a smooth group",
+ "statement": "Let $T$ be an affine locally Noetherian scheme [def-pc-scheme, pqf-def-locnoeth] whose local rings are integrally closed domains [def-weil-pbc-normal-ring]. Let $p:G\\to T$ be a smooth separated morphism of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation], separated meaning that the diagonal is a closed immersion, and let $G$ be a group scheme over $T$: there are $T$-morphisms $m:G\\times_TG\\to G$, $i:G\\to G$ and $e:T\\to G$ satisfying the associativity, unit and inverse identities, equivalently $T'\\mapsto G(T')=\\operatorname{Hom}_T(T',G)$ takes values in groups (the relative form of [def-sc-group-scheme], whose base is a field). Assume that for every $t\\in T$ the fibre $G_t=G\\times_T\\operatorname{Spec}\\kappa(t)$ [def-pc-fibre-product, def-weil-residue-field] is connected [def-weil-connected-scheme]. Let $L$ be an invertible $\\mathcal O_G$-module [def-sc-invertible-module], let $n\\geq1$, and let $\\sigma\\in\\Gamma(G,L^{\\otimes n})$. Write $G_\\sigma$ for the open where the residue-field value of $\\sigma$ is nonzero [def-weil-pbc-ample-invertible-module]. If $G_\\sigma$ is affine and its intersection with every fibre of $p$ is nonempty, then $L$ is ample on $G$ in the absolute sense [def-weil-pbc-ample-invertible-module]. Neither commutativity nor properness of $G$, nor any symmetry or rigidification of $L$, is assumed. A single supplied section, rather than a pre-existing affine cover by section loci, is the hypothesis.",
+ "source": {
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Guo, Proposition 5.9, final assertion, printed pp.13--14, and Corollary 6.6(ii), printed p.16 (Raynaud VI, Theorem 2.1), applied to the left translation action of G on itself. Some positive tensor power satisfies the theorem of the square; the section criterion then detects ampleness. Read online in the March 31, 2026 version; local copy WANTED. This is the locally Noetherian specialization, also for a normal affine base with finitely many disjoint integral components.",
+  "url": "https://ningguomath.com/wp-content/uploads/2026/03/amplenew-1.pdf"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-weil-connected-scheme",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module",
+  "def-pc-fibre-product",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Finite presentation gives quasi-compactness and quasi-separatedness of $G\\to T$ by [def-sbc-locally-finite-presentation]. Apply [lem-sfb-normal-group-square-power] to the supplied group and line: $T$ is affine, locally Noetherian and normal by the stated local-ring hypothesis; $G\\to T$ is smooth separated of finite presentation with connected fibres. Obtain $r\\geq1$ for which $A=L^{\\otimes r}$ satisfies the square condition for left multiplication.",
+   "uses": [
+    "lem-sfb-normal-group-square-power",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Proposition 5.9, final assertion; finite-component specialization isolated in the cited node"
+   }
+  },
+  {
+   "text": "Set $v=\\sigma^{\\otimes r}\\in\\Gamma(G,A^{\\otimes n})$, using the reassociation $A^{\\otimes n}\\cong L^{\\otimes nr}$. In a local frame, if $\\sigma$ is represented by $f$, then $v$ is represented by $f^r$. At every residue field $f^r\\ne0$ if and only if $f\\ne0$, so $G_v=G_\\sigma=:V$. Thus $V$ is affine and $V\\to T$ is surjective by the hypothesis on every fibre. These are precisely the section loci of [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Corollary 6.5 application; tensor-section calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-surjective-base-change], the projection $\\pi:G\\times_TV\\to G$ is surjective, since it is the base change of $V\\to T$. The maps $F(g,u)=(gu,u)$ and $F^{-1}(x,u)=(xu^{-1},u)$ are inverse $T$-morphisms of $G\\times_TV$, by the group identities. Consequently multiplication $a:G\\times_TV\\to G$ equals $\\pi\\circ F$ and is surjective. If $U$ is the union of the affine section loci of positive powers of $A$, then $V=G_v\\subseteq U$, so $G\\times_TU\\to G$ is surjective as well.",
+   "uses": [
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Corollary 6.5 orbit-cover hypothesis, explicit left-action computation"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-square-action-affine-orbit-criterion] with $S=T$, $H=X=G$, multiplication as action, and $M=A$. The square condition is Step 1, and Step 3 verifies the orbit-cover hypothesis; the two structure morphisms are the given separated finitely presented morphism. Thus $A$ is ample. For every $x\\in G$, its ampleness supplies $k\\geq1$ and $w\\in\\Gamma(G,A^{\\otimes k})$ with $x\\in G_w$ affine. Regard $w$ as a section of $L^{\\otimes rk}$ by reassociating tensor factors. Its residue value and its locus are unchanged, and $rk\\geq1$. Together with the quasi-compactness included in the ampleness of $A$, this proves ampleness of $L$ directly by [def-weil-pbc-ample-invertible-module].",
+   "uses": [
+    "lem-sfb-square-action-affine-orbit-criterion",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+    "place": "Corollary 6.5; equivalently Corollary 6.6(ii); reflection of ampleness along a positive tensor power is the defining affine-locus criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-normal-group-square-power",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-sfb-square-action-affine-orbit-criterion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/guo-divisors-coherent-schemes-homogeneous-spaces.pdf",
+  "place": "Assembly following Guo Proposition 5.9 and Corollary 6.5, read online in the March 31, 2026 version. Local source WANTED. Explicit multiplication/projection argument replaces the maximal-fibre-point formulation of Corollary 6.6(ii)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|[Tt]heorem.*[Ss]quare|[Aa]mple.*[Gg]roup|[Gg]roup.*[Aa]mple",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf on a smooth connected group scheme is ample if some section has affine nonvanishing locus meeting every fibre over a normal affine base",
+   "results": "Hits read: AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.Scheme.affineBasicOpen, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instIsAffineFiberOfIsAffineHom, AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen, AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso, AlgebraicGeometry.Scheme.Modules.inv_app. No declaration states the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Group\"",
+   "results": "No hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a smooth separated group scheme with connected fibres over a normal Noetherian affine base, a line bundle with a section whose nonvanishing locus is affine and meets every fibre is ample",
+   "results": "Hits read: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen. No declaration states the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud ampleness criterion: on a normal base a line bundle on a smooth group with connected fibres is ample when a section has affine complement intersecting every fibre",
+   "results": "Hits read: AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine, AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan. No declaration states the geometric assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|[Tt]heorem.*[Ss]quare|[Aa]mple.*[Gg]roup|[Gg]roup.*[Aa]mple",
+   "results": "{\"t\": \"2026-10-24T02:45:22Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|[Tt]heorem.*[Ss]quare|[Aa]mple.*[Gg]roup|[Gg]roup.*[Aa]mple\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/MooreComplex.lean\", \"Mathlib/Tactic/Translate/ToAdditive.lean\", \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"Mathlib/NumberTheory/SumTwoSquares.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\"], \"digest\": \"00fbb51d46e9d411\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; none states this geometric theorem or a one-line generalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\", \"Group\"",
+   "results": "{\"t\": \"2026-10-24T02:45:22Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsAmple\\\", \\\"Group\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; none states this geometric theorem or a one-line generalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a connected smooth group over a normal affine base is ample when a power has an affine section open surjective to the base",
+   "results": "{\"t\": \"2026-10-24T02:45:22Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle on a connected smooth group over a normal affine base is ample when a power has an affine section open surjective to the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ampleSet_empty\", \"ampleSet_univ\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AmpleSet\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AmpleSet.vadd_iff\", \"AmpleSet.vadd\", \"AlgebraicGeometry.instIsAffineHomιBasicOpen\"], \"digest\": \"4fa00f6784e700e2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; none states this geometric theorem or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud ampleness criterion for a smooth group scheme using one affine section open",
+   "results": "{\"t\": \"2026-10-24T02:45:26Z\", \"tool\": \"leanfinder\", \"query\": \"Raynaud ampleness criterion for a smooth group scheme using one affine section open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"AlgebraicGeometry.reduce_to_affine_global\", \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"AlgebraicGeometry.FormallyUnramified.formallyUnramified_of_affine_subset\"], \"digest\": \"a0bdf47bddf44e7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; none states this geometric theorem or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible module on a smooth group with connected fibres is ample if a section has affine nonvanishing locus meeting every fibre over a normal affine base",
+   "results": "{\"t\": \"2026-10-24T02:45:27Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible module on a smooth group with connected fibres is ample if a section has affine nonvanishing locus meeting every fibre over a normal affine base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.Proj.isAffineOpen_basicOpen\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpen\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_basicOpen_is_basicOpen\"], \"digest\": \"b63b4b043345211e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; none states this geometric theorem or a one-line generalization."
+  },
+  {
+   "tool": "grep",
+   "query": "Picard.admiss|[Tt]heorem.of.the.[Ss]quare|IsAmple|isAmple",
+   "results": "{\"t\": \"2026-10-24T02:46:23Z\", \"tool\": \"grep\", \"query\": \"Picard.admiss|[Tt]heorem.of.the.[Ss]quare|IsAmple|isAmple\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits read; none states this geometric theorem or a one-line generalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-smooth-group-local-ample-line",
+  "date": "2026-10-24",
+  "group": "NJ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Guo, Proposition 5.9, final assertion, printed pp.13--14, and Corollary 6.6(ii), printed p.16 (Raynaud VI, Theorem 2.1), applied to the left translation action of G on itself. Some positive tensor power satisfies the theorem of the square; the section criterion then detects ampleness.; auxiliary to lem-sfb-symmetric-line-power-prolongation, proof step 3 (local ample line on H_W).",
+   "via": [
+    "lem-sfb-normal-smooth-group-local-ample-line",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-group-affine-section-ampleness",
+  "worker": "stage1",
+  "summary": "NY: statement unchanged. Separate the square-power theorem from the Picard-admissible orbit criterion, then prove orbit coverage using an explicit multiplication automorphism and surjective base change. The original section becomes a section of a power of the square line without changing its locus; reflect ampleness from that line directly using section loci. Two new statement-only nodes; no Mathlib match or project attachment. Local Guo PDF WANTED, online source read.",
+  "blueprint": "Inherited supporting input to lem-sfb-normal-smooth-group-local-ample-line, and hence to det-thm-sf-ctf-stability-direct-images (3). Latest blueprint proof (3) uses compactification and open direct image; this lower-level inherited positivity input is not explicitly printed there. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "General surjectivity under fibre product, applied to the supplied affine section open over T; no node of this unit replaces this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NY-094a3263c",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-094a3263c (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, and read Guo (fetched the author's PDF, ran pdftotext) at section 5.6, Def 4.1, Prop 5.9 (final assertion), Cor 6.5 and its section-6 setup, and Cor 6.6(ii). (1) The square condition in both new nodes is exactly Guo's Picard-admissibility: delta(g)=gL⊗L^{-1} is a homomorphism into Pic(X_B)/Pic(B) for every B, with gL=tau_g^*L. (2) lem-sfb-normal-group-square-power is Prop 5.9's final assertion with X=G: smooth implies strict (N)-type, and smooth connected group fibres are geometrically integral. The disconnected normal Noetherian base is handled with finitely many integral components, a common multiple of the exponents and the line N glued over each component of B. (3) lem-sfb-square-action-affine-orbit-criterion specializes Cor 6.5: smooth implies flat, finitely presented and universally open; affine X_s are quasi-affine, so the smaller union U still gives the cover; over an affine base, S-ample is absolute ample. (4) Steps are correct: Step 2's equality G_{sigma^r}=G_sigma is elementary; Step 3 writes multiplication a=pi∘F with F(g,u)=(gu,u) an automorphism (inverse (xu^{-1},u), no commutativity needed) and pi surjective by lem-weil-pbc-surjective-base-change, a Mathlib leaf; Step 4 applies the orbit node with H=X=G, then passes ampleness from L^r to L directly by the definition. (5) My DAG-wide search (theorem of the square, Picard-admissible, Raynaud, orbit+ample) found only commutative/semiabelian cubical nodes, so there are no duplicates. Neither new node restates a clause of the item. (6) There are no SGA citations; LeanSearch, LeanFinder, Loogle and grep searches are recorded; the item is still unsplit in the live clone. Advisory only, no changes made: in the square-power node, X and M are used before the sentence that sets X=H, M=L^r (it still reads unambiguously); from.node is null, inherited from the parent; Guo's PDF should be added to literature."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupAffineSectionAmpleness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_of_group_affine_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupAffineSectionAmpleness.lean",
+  "statement": "theorem isAmple_of_group_affine_section (T : Scheme.{u}) [IsAffine T] [IsLocallyNoetherian T] (hT : ∀ t : T, IsDomain (T.presheaf.stalk t) ∧ IsIntegrallyClosed (T.presheaf.stalk t)) (G : Over T) [GrpObj G] [Smooth G.hom] [IsSeparated G.hom] [LocallyOfFinitePresentation G.hom] [QuasiCompact G.hom] (hconnected : ∀ t : T, ConnectedSpace (G.hom.fiber t)) (L : G.left.Modules) [L.IsInvertible] (n : ℕ) (hn : 1 ≤ n) (sigma : (L.tensorPow n).val.presheaf.obj (Opposite.op ⊤)) (U : G.left.Opens) (hU : (U : Set G.left) = nonvanishingLocus (L.tensorPow n) sigma) (haffine : IsAffineOpen U) (hmeets : ∀ t : T, ∃ x : G.left, x ∈ U ∧ G.hom x = t) : IsAmple G.left L",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-830d880cf",
+  "group": "N6",
+  "result": "pass",
+  "note": "Only the item's lean field and new module Sheaf.AlgebraicGeometry.GroupAffineSectionAmpleness are added; the recorded statement equals the file verbatim. Clause match: affine locally Noetherian T; each stalk an integrally closed domain (inline normal-domain form); GrpObj G in Over T with Smooth, IsSeparated, LocallyOfFinitePresentation and QuasiCompact (separated gives quasi-separated, so exactly finite presentation); ConnectedSpace (G.hom.fiber t), nonempty as in 004S; invertible L; n with 1 ≤ n; global section sigma of tensorPow n; U equal to the recorded nonvanishingLocus; IsAffineOpen U; U meets every fibre in a point; conclusion is the absolute Scheme.Modules.IsAmple. No extra hypotheses (no commutativity, properness or rigidification). Edge cases: empty T, disconnected base, n=1, single universe u. No duplicate statement found. Source/blueprint docstrings and the 4-step proof docstring are present; proof is sorry; Worker report and Second reading by N6 sections present. Not recompiled (no change). Minor: two imports needed only by the eventual proof, harmless."
+ }
+}

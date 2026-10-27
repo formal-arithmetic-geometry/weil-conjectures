@@ -20,68 +20,48 @@
  ],
  "proof": [
   {
-   "text": "In the refinement case use [def-weil-pbc-proper-open-comparison]. Its construction identifies $V=u^{-1}(j_2(X))$ and its clopen component $s(X)$, with $bs=j_1$, $ps=\\mathrm{id}_X$. Restrict the arrow just constructed to $j_2$. Under the restriction isomorphism [lem-weil-pbc-derived-open-restriction], the extension-by-zero comparison [cor-cbc-derived-extension-zero-base-change], and the component restriction [lem-weil-pbc-clopen-section-direct-image], its source and target become $K$. The underived $\\delta$ sends a section on $X$ to itself on $s(X)$ and zero on the other component. Thus this restricted arrow is exactly $\\theta_{u,K}^{-1}$ from the comparison definition; the resolution map is the canonical derived comparison and does not change that identity on the component. The adjunction [lem-weil-pbc-extension-by-zero-adjunction], descended degreewise since extension by zero and inverse image are exact [lem-weil-pbc-extension-by-zero-exact] [prop-weil-pbc-inverse-image-modules-exact], makes the arrow $j_{2!}K\\to Ru_*j_{1!}K$ uniquely determined by this restriction. It is consequently $\\alpha_{u,K}$, the adjoint of $\\theta_{u,K}^{-1}$.",
+   "text": "Apply the derived unit equation [lem-cbc-proper-open-derived-unit-normalization] to the given δ on the refinement triangle. The proved unit characterization [lem-weil-pbc-proper-open-identification-unit] identifies its last two factors with properOpenIdentification.hom followed by η₁. The derived open unit η₁ is invertible by fully faithful open extension. Cancel η₁ and the identification to show that the open-adjoint transpose of the canonical derived δ is properOpenIdentification.inv. Injectivity of the open adjunction homEquiv identifies the original map with properOpenComparison. Finally hγ replaces γ by the canonical lift.",
    "uses": [
+    "lem-cbc-proper-open-derived-unit-normalization",
+    "lem-weil-pbc-proper-open-identification-unit",
     "def-weil-pbc-proper-open-comparison",
-    "lem-weil-pbc-derived-open-restriction",
-    "cor-cbc-derived-extension-zero-base-change",
-    "lem-weil-pbc-clopen-section-direct-image",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-extension-by-zero-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, specialization to a refinement; comparison definition and its component normalization"
-   }
+   "elementary": false
   },
   {
-   "text": "For base change first work with sheaves. The support inclusions into ordinary direct images in [lem-cbc-proper-support-sheaf-composition] identify $i_!r_*$ and $p_*k_!$ inside $(ir)_*=(pk)_*$. Its pullback-composition clause says that the two paths consisting of the ordinary comparisons and the extension-by-zero comparisons give the pullback comparison for that same composite morphism. Thus the ordinary version of the required base-change diagram commutes. These are injective inclusions; inverse image preserves them by [prop-weil-pbc-inverse-image-modules-exact]. Hence equality in the common ordinary direct image is equality in the support subsheaf. The open comparisons $\\beta_i,\\beta_k$ of [cor-cbc-derived-extension-zero-base-change] agree with the restrictions $c_k,c_i$ of the ordinary comparisons to the support subsheaves, which the support node calls canonical; we check this for $k$ (the case of $i$ is identical). By [lem-cbc-extension-zero-base-change], $\\beta_k^{-1}$ is the $k_{1!}\\dashv k_1^{-1}$ mate of $x=\\theta\\circ d^{-1}\\eta_k:d^{-1}F\\to k_1^{-1}a^{-1}k_!F$. Since $\\beta_k$ is invertible, $c_k=\\beta_k$ iff $c_k\\beta_k^{-1}=\\mathrm{id}$, iff the adjoint $k_1^{-1}(c_k)\\circ x$ is the unit $\\eta_{k_1}$ [lem-weil-pbc-extension-by-zero-adjunction]. Evaluate on an etale $W\\to A_1$: by the presheaf formula [def-weil-pbc-extension-by-zero] and the explicit adjunction, $\\eta_k,\\eta_{k_1}$ are the identity on sections over objects factoring through the open, $\\theta$ is the identity on germs, and the ordinary comparison restricts a section along $W\\to V\\times_BA$, which is $W\\to V$ for $V$ factoring through $A$. So both maps send the germ of $s\\in F(V)$ to the same germ, and $c_k=\\beta_k$. The ordinary-comparison pasting is also the unit/counit mate equation in clauses (1),(2) of [lem-weil-pbc-mate-pasting] for the module inverse-image adjunctions; all constant-ring pullbacks are the identifications of [prop-weil-pbc-inverse-image-modules-exact].",
+   "text": "For ordinary sheaves compose both paths of the cube with p₁* of the support inclusion k₁!→k₁* and the pushforward compositor. properSupportSheafComposition realizes the inclusion as injective on sections, hence monic. Use the ordinary open-base-change/inclusion equation, naturality, vertical mate pasting, and the assumed δ normalization to identify both paths with the same map in the common ordinary direct image. Cancel the monic inclusion. No Noetherian hypotheses are used.",
    "uses": [
     "lem-cbc-proper-support-sheaf-composition",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "cor-cbc-derived-extension-zero-base-change",
-    "lem-weil-pbc-mate-pasting",
     "lem-cbc-extension-zero-base-change",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "def-weil-pbc-extension-by-zero"
+    "lem-weil-pbc-mate-pasting"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7F, ordinary-complex diagram and its reduction to ordinary direct images; Tags 0F55 and 0F77"
-   }
+   "elementary": false
   },
   {
-   "text": "The assumed derived-unit normalization uniquely identifies every gamma with the rightDerivedFunctorPlusBaseChange map of its delta: use rightDerived_ext, whiskered by the exact open extension. Apply [lem-weil-pbc-right-derived-plus-cube] to the ordinary support cube from the preceding step. The canonical derived exact-comparison isomorphisms in that theorem are precisely extensionZeroBaseChangeDerivedPlusIso, and the two vertical transformations are derivedBaseChangeMapPlus. This gives the asserted derived cube without assuming that inverse image preserves injectives.",
+   "text": "Apply rightDerivedFunctorPlusBaseChange_cube to the proved ordinary cube. The exact transverse isomorphisms are the inverses of the ordinary open-base-change maps. The definition of extensionZeroBaseChangeDerivedPlusIso and compatibility of exact derived natural isomorphisms with inversion identify these transverse derived maps. The remaining two faces are definitionally derivedBaseChangeMapPlus. Replace the canonical lifted δ faces by γ using hγ and reassociate, giving the complete base-change conjunct.",
    "uses": [
     "lem-weil-pbc-right-derived-plus-cube",
-    "cor-cbc-derived-extension-zero-base-change",
-    "lem-weil-pbc-exchange-forget-coefficients"
+    "cor-cbc-derived-extension-zero-base-change"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "cor-cbc-derived-extension-zero-base-change",
-  "def-weil-pbc-extension-by-zero",
+  "lem-cbc-proper-open-derived-unit-normalization",
+  "lem-weil-pbc-proper-open-identification-unit",
   "def-weil-pbc-proper-open-comparison",
-  "lem-cbc-extension-zero-base-change",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-weil-pbc-clopen-section-direct-image",
-  "lem-weil-pbc-derived-open-restriction",
-  "lem-weil-pbc-exchange-forget-coefficients",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-cbc-extension-zero-base-change",
   "lem-weil-pbc-mate-pasting",
   "lem-weil-pbc-right-derived-plus-cube",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "cor-cbc-derived-extension-zero-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F, open-immersion bounded-below finite-ring specialization; resolution comparisons and refinement normalization expanded"
+  "place": "Tags 0F7B and 0F7F; ordinary support cube proved directly; refinement uses the proved identification-unit theorem and one strictly algebraic unit normalization step"
  },
  "mathlib_searches": [
   {
@@ -153,14 +133,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-25",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F2",
+  "group": "V9",
   "result": "pass",
-  "landing": "20261018T112414-L-631734",
+  "landing": "20261025T101711-L-3724954",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

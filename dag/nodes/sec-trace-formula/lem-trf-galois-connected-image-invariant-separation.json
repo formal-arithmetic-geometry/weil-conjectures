@@ -1,0 +1,283 @@
+{
+ "id": "lem-trf-galois-connected-image-invariant-separation",
+ "kind": "statement",
+ "title": "A connected base-changed image gives an invariant nontrivial separation",
+ "statement": "Let $k$ be a field and let $L/k$ be a finite Galois extension [def-pc-field-extension]: $L$ is finite-dimensional over $k$, separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal (the minimal polynomial over $k$ of every element of $L$ splits in $L$). Let $f:T\\to X$ be a morphism of schemes over $k$ [def-weil-scheme-over-base], write $f_L:T_L\\to X_L$ for its base change [def-pc-base-change], and assume $T_L$ is connected, including nonempty [def-weil-connected-scheme]. Put $G=\\operatorname{Aut}(L/k)$ and, for $\\sigma\\in G$, put $\\sigma_X=\\mathrm{id}_X\\times\\operatorname{Spec}(\\sigma)$ [def-weil-affine-spectrum]. Suppose $X_L=A\\amalg B$ is a partition into two nonempty open and closed subsets. After possibly interchanging $A$ and $B$, the subsets\n$$\nP=\\bigcap_{\\sigma\\in G}\\sigma_X(A),\\qquad Q=X_L\\setminus P\n$$\nare nonempty, open and closed, satisfy $X_L=P\\amalg Q$ and $f_L(T_L)\\subseteq P\\subseteq A$, and obey $\\sigma_X(P)=P$ and $\\sigma_X(Q)=Q$ for every $\\sigma\\in G$. No connectedness assumption on $X$ or geometric connectedness assumption on $T$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038C, lemma-tricky, first paragraph and the displayed intersection/union construction, specialized to finite Galois L/k; action in equation-galois-action-base-change-kbar."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Let $I=f_L(T_L)$. The inverse images $f_L^{-1}(A)$ and $f_L^{-1}(B)$ are complementary open and closed subsets of $T_L$: inverse images under the continuous underlying map of a scheme morphism preserve opens, closed sets, complements, and unions [def-pc-scheme]. By the definition of connectedness [def-weil-connected-scheme], one inverse image is empty. Interchange $A,B$ if necessary so that $f_L^{-1}(B)=\\varnothing$. Then $I\\subseteq A$, and $I\\ne\\varnothing$ since $T_L\\ne\\varnothing$.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph and finite-Galois intersection/union construction; equation-galois-action-base-change-kbar for the opposite action."
+   }
+  },
+  {
+   "text": "For $Y=T,X$, functoriality of the spectrum [def-weil-affine-spectrum] and the universal property of fibre products [def-pc-fibre-product, def-pc-base-change] give $1_Y=\\mathrm{id}_{Y_L}$ and $(\\sigma\\circ\\tau)_Y=\\tau_Y\\circ\\sigma_Y$: both sides have the same two projections. In particular $(\\sigma^{-1})_Y$ is inverse to $\\sigma_Y$, so these are homeomorphisms, their underlying maps and inverses being continuous scheme morphisms [def-pc-scheme]. The same projection check gives $f_L\\circ\\sigma_T=\\sigma_X\\circ f_L$: the projections to $X$ are both $f\\circ\\mathrm{pr}_T$, and the projections to $\\operatorname{Spec}L$ are both $\\operatorname{Spec}(\\sigma)\\circ\\mathrm{pr}_L$. Thus $\\sigma_X(I)=f_L(\\sigma_T(T_L))=I$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product",
+    "def-pc-base-change",
+    "def-pc-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph and finite-Galois intersection/union construction; equation-galois-action-base-change-kbar for the opposite action."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-galois-fixed-field] with $M=L$: the assumed finite-dimensionality, separability and normality are exactly its hypotheses, so $G$ is finite. Every $\\sigma_X(A)$ is open and closed, because it is the inverse image of $A$ under the continuous inverse homeomorphism $(\\sigma^{-1})_X$. Hence $P=\\bigcap_{\\sigma\\in G}\\sigma_X(A)$ is open and closed: a finite intersection of opens is open, and its complement is a finite union of open complements. Therefore $Q=X_L\\setminus P$ is also open and closed.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph and finite-Galois intersection/union construction; equation-galois-action-base-change-kbar for the opposite action."
+   }
+  },
+  {
+   "text": "For every $\\sigma\\in G$, step 2 and $I\\subseteq A$ give $I=\\sigma_X(I)\\subseteq\\sigma_X(A)$; thus $I\\subseteq P$, so $P$ is nonempty. The identity automorphism occurs among the indices, so $P\\subseteq1_X(A)=A$. Consequently $B\\subseteq X_L\\setminus P=Q$, so $Q$ is nonempty. The definition of $Q$ gives $X_L=P\\amalg Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph and finite-Galois intersection/union construction; equation-galois-action-base-change-kbar for the opposite action."
+   }
+  },
+  {
+   "text": "Fix $\\tau\\in G$. A bijection carries an intersection to the intersection of its images: a point belongs on either side precisely when its unique inverse image belongs to every member of the family. Using the opposite composition law from step 2, we obtain $\\tau_X(P)=\\bigcap_{\\sigma\\in G}\\tau_X(\\sigma_X(A))=\\bigcap_{\\sigma\\in G}(\\sigma\\circ\\tau)_X(A)=P$, since $\\sigma\\mapsto\\sigma\\circ\\tau$ permutes $G$, with inverse $\\rho\\mapsto\\rho\\circ\\tau^{-1}$. A bijection also preserves complements, so $\\tau_X(Q)=X_L\\setminus\\tau_X(P)=Q$. This proves every assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038C, lemma-tricky, first paragraph and finite-Galois intersection/union construction; equation-galois-action-base-change-kbar for the opposite action."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-pc-base-change",
+  "lem-weil-pbc-finite-galois-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 038C, lemma-tricky, first paragraph and finite-Galois intersection/union construction; equation-galois-action-base-change-kbar for the opposite action."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Gg]alois.*[Cc]lopen|[Cc]lopen.*[Gg]alois|[Ii]nvariant.*[Cc]lopen",
+   "results": "0 hits: No hits.  No declaration states this scheme lemma or a one-line specialization of it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Galois group action connected base change image invariant clopen partition refinement",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected; IsGaloisGroup.fixedPoints; Algebra.isInvariant_of_isGalois; IsGaloisGroup.mk; IsGaloisGroup.casesOn; CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat; FiniteGaloisIntermediateField.finGaloisGroup; IsGaloisGroup.finite.  No declaration states this scheme lemma or a one-line specialization of it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClopen, Set.iInter",
+   "results": "7 hits: isClopen_iInter_of_finite; Set.Finite.isClopen_biInter; isClopen_biInter_finset; connectedComponent_subset_iInter_isClopen; connectedComponent_eq_iInter_isClopen; isClopen_iInter; isClopen_iInter₂.  Finite intersection clopenness only; does not supply base-change equivariance, image containment or nontriviality.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyConnected",
+   "results": "12 hits: AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyConnected; AlgebraicGeometry.GeometricallyConnected; AlgebraicGeometry.instSurjectiveOfGeometricallyConnected; AlgebraicGeometry.GeometricallyConnected.eq_geometrically; AlgebraicGeometry.GeometricallyConnected.geometrically_connectedSpace; AlgebraicGeometry.GeometricallyConnected.mk; AlgebraicGeometry.geometricallyConnected_iff; AlgebraicGeometry.instGeometricallyConnectedFiberToSpecResidueField.  No declaration states this scheme lemma or a one-line specialization of it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism T to X of schemes over a field and a finite Galois extension L with T_L connected, a nontrivial clopen partition of X_L has a nontrivial Galois invariant clopen refinement containing the image of T_L",
+   "results": "8 hits: exists_clopen_partition_of_clopen_cover; instTotallySeparatedSpaceAlgEquivOfIsIntegral; ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal; TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover; krullTopology_isTotallySeparated; CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen; TopologicalSpace.IsOpenCover.exists_finite_clopen_cover; subsingleton_of_disjoint_isClopen.  No declaration states this scheme lemma or a one-line specialization of it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersect all translates of a clopen subset containing a nonempty invariant connected image under a finite group of scheme automorphisms to obtain a proper nonempty invariant clopen subset",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen; connectedComponent_eq_iInter_isClopen; compact_exists_isClopen_in_isOpen; IsClopen.biUnion_connectedComponentIn; connectedComponent_subset_iInter_isClopen; ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal; TopologicalSpace.IsOpenCover.exists_finite_nonempty_disjoint_clopen_cover; InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup.  No declaration states this scheme lemma or a one-line specialization of it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isClopen_iInter_of_finite|[Gg]alois.*[Cc]lopen|[Cc]lopen.*[Gg]alois",
+   "results": "1 hits: Mathlib/Topology/Clopen.lean.  No declaration states this scheme lemma or a one-line specialization of it.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite Galois field extension and a morphism of schemes whose base changed source is connected, the intersection of all Galois translates of a clopen subset containing its image is nonempty clopen and invariant",
+   "results": "8 hits: Algebra.isInvariant_of_isGalois, instTotallySeparatedSpaceAlgEquivOfIsIntegral, krullTopology_isTotallySeparated, galBasis, InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, mem_galBasis_iff. No exact match or one-line specialization for the scheme assertion; related algebraic invariance, topology or base-change properties do not give the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClopen, Set.iInter",
+   "results": "7 hits: isClopen_iInter_of_finite, Set.Finite.isClopen_biInter, isClopen_biInter_finset, connectedComponent_subset_iInter_isClopen, connectedComponent_eq_iInter_isClopen, isClopen_iInter, isClopen_iInter₂. Finite-intersection topology only; no base-change equivariance or connected-image assertion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois invariant nontrivial clopen separation of base changed scheme containing the image of a connected scheme",
+   "results": "8 hits: AlgebraicGeometry.UniversallyClosed.universally_isClosedMap, AlgebraicGeometry.IsSeparated.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_isStableUnderBaseChange, AlgebraicGeometry.universallyClosed_iff, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, instTotallySeparatedSpaceAlgEquivOfIsIntegral. No exact match or one-line specialization for the scheme assertion; related algebraic invariance, topology or base-change properties do not give the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]alois.*[Cc]lopen|[Cc]lopen.*[Gg]alois|[Ii]nvariant.*[Cc]lopen",
+   "results": "0 hits: . No exact match or one-line specialization for the scheme assertion; related algebraic invariance, topology or base-change properties do not give the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The automorphisms of a finite dimensional field extension over its base field form a finite set",
+   "results": "8 hits: AlgEquiv.fintype, IsGaloisGroup.finite, AlgEquiv.card_le, AlgHom.card_le, Polynomial.instFintypeGal, FiniteGaloisIntermediateField.finGaloisGroup, finrank_algHom, IsGalois.card_aut_eq_finrank. These supply only auxiliary finiteness. The existing node lem-weil-pbc-finite-galois-fixed-field already states the needed fact; none states the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgEquiv, Finite",
+   "results": "12 hits: Finite.algEquiv, FixedPoints.toAlgAutMulEquiv, FixedPoints.toAlgAut_surjective, FixedPoints.toAlgAut_bijective, MvPolynomial.IsHomogeneous.coeff_isHomogeneous_of_optionEquivLeft_symm, IsGalois.finiteDimensional_of_finite, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod. These supply only auxiliary finiteness. The existing node lem-weil-pbc-finite-galois-fixed-field already states the needed fact; none states the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Aa]lg[Ee]quiv|[Aa]lg[Ee]quiv.*finite|instance.*finite|fintype",
+   "results": "23 hits: Mathlib/FieldTheory/Finite/Valuation.lean, Mathlib/FieldTheory/Finite/Valuation.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Extension.lean. No exact match or one-line specialization for the scheme assertion; related algebraic invariance, topology or base-change properties do not give the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The set of algebra automorphisms of a finite dimensional field extension is finite",
+   "results": "8 hits: AlgEquiv.fintype, AlgEquiv.fintype.congr_simp, instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree, IsGaloisGroup.finite, AlgEquiv.card_le, AlgHom.card_le, FintypeCat.instFiniteAut, minpoly.AlgHom.fintype.congr_simp. These supply only auxiliary finiteness. The existing node lem-weil-pbc-finite-galois-fixed-field already states the needed fact; none states the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group of homeomorphisms preserves a nonempty image of a connected space; intersect the translates of a clopen neighbourhood of that image to get an invariant proper clopen neighbourhood",
+   "results": "8 hits: Finite.to_properlyDiscontinuousSMul, ProperlyDiscontinuousSMul.exists_nhds_image_smul_eq_self, ProperlyDiscontinuousVAdd.exists_nhds_image_vadd_eq_self, Finite.to_properlyDiscontinuousVAdd, IsQuotientCoveringMap.disjoint, ProperlyDiscontinuousSMul.exists_nhds_disjoint_image, ProperSMul, ProperlyDiscontinuousSMul. No exact match or one-line specialization for the scheme assertion; related algebraic invariance, topology or base-change properties do not give the item.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-geometrically-connected-image-criterion",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Connected-point geometric-connectedness criterion used below lem-trf-local-term-locality: extracted argument of lem-trf-geometrically-connected-image-criterion, former steps 3--4, realizing the finite-Galois invariant-intersection construction of Tag 038C inside the Tag 056R criterion.",
+   "via": [
+    "lem-trf-geometrically-connected-image-criterion",
+    "lem-trf-connected-point-geometrically-connected",
+    "lem-trf-smooth-component-pure-transcendental",
+    "lem-trf-etale-finite-smooth-local-structure",
+    "lem-trf-elementary-module-devissage",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-galois-connected-image-invariant-separation",
+  "worker": "stage1",
+  "summary": "Q14 checked Tag 038C and its opposite Galois action, found no exact project attachment, and wrote the connected-image, equivariance, finite-intersection and reindexing arguments. Reused the existing finite-Galois Mathlib leaf. Statement unchanged; no new nodes. All five steps were checked against their cited statements and the nonempty, trivial-extension and opposite-action edge cases.",
+  "blueprint": "Realizes the finite-Galois invariant-intersection argument in the inherited blueprint.from.place below lem-trf-local-term-locality, through lem-trf-geometrically-connected-image-criterion. The latest blueprint locality proof was read; this is a subordinate geometric tool, with no change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q14-a31b1cfc7",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-a31b1cfc7 (reviewer sub-agent of L); spot-checked: I read the statement and all five steps in full and found no faults, so I wrote no fixes. The statement is Stacks varieties Tag 038C (lemma-tricky, lines 1020-1064) specialized to a finite Galois L/k. Its opposite action matches equation-galois-action-base-change-kbar (line 870). The statement is unchanged and is exactly what the parent lem-trf-geometrically-connected-image-criterion uses in its step 3. Step 1: the preimages of A and B under the continuous map of f_L form a clopen partition of T_L (def-pc-scheme, def-weil-connected-scheme); after swapping, I ⊆ A and I is nonempty because T_L is. Step 2: Spec is contravariant and fibre-product maps are fixed by their projections, which gives (στ)_Y = τ_Y σ_Y; I checked this on the projection to Spec L. The same check gives f_L σ_T = σ_X f_L, so σ_X(I) = I. Step 3: G is finite by lem-weil-pbc-finite-galois-fixed-field with M = L, whose hypotheses are identical and which is a Mathlib leaf. Each translate σ_X(A) is clopen as a preimage under (σ⁻¹)_X, and a finite intersection of clopen sets is clopen. Step 4: I ⊆ P; P ⊆ A from the identity index; B ⊆ Q. Step 5: σ ↦ στ is a bijection of G, consistent with step 2. Edge cases: L = k gives P = A; the image in either part of a disconnected X needs the swap; empty T_L is excluded by the connectedness definition. There are no new nodes. The DAG candidates are not duplicates: lem-weil-pbc-galois-finite-invariant-clopen-partition proves existence over an intermediate field without image containment, and lem-sfb-action-clopen-orbit-refinement and lem-sfb-invariant-partition-quotient-system are partition-refinement results. No SGA source is cited, the unit and route are unchanged, there is no repair note, and there are no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisConnectedImageInvariantSeparation",
+  "declaration": "AlgebraicGeometry.galois_connected_image_invariant_separation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisConnectedImageInvariantSeparation.lean",
+  "statement": "theorem galois_connected_image_invariant_separation (k L : Type u) [Field k] [Field L] [Algebra k L] [FiniteDimensional k L] [IsGalois k L] (T X : Scheme.{u}) [T.Over (Spec (.of k))] [X.Over (Spec (.of k))] (f : T ⟶ X) [f.IsOver (Spec (.of k))] [ConnectedSpace (T.baseChangeField k L)] (A B : Set (X.baseChangeField k L)) (hA : IsClopen A) (hB : IsClopen B) (hAne : A.Nonempty) (hBne : B.Nonempty) (hdisj : Disjoint A B) (hcover : A ∪ B = Set.univ) : ∃ C P Q : Set (X.baseChangeField k L), (C = A ∨ C = B) ∧ P = ⋂ σ : L ≃ₐ[k] L, (baseChangeMap (X ↘ Spec (.of k)) (specAlgEquivOver σ)) '' C ∧ Q = Pᶜ ∧ P.Nonempty ∧ Q.Nonempty ∧ IsClopen P ∧ IsClopen Q ∧ Disjoint P Q ∧ P ∪ Q = Set.univ ∧ Set.range (((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap k L)))).map (f.asOver (Spec (.of k)))).left) ⊆ P ∧ P ⊆ C ∧ ∀ σ : L ≃ₐ[k] L, (baseChangeMap (X ↘ Spec (.of k)) (specAlgEquivOver σ)) '' P = P ∧ (baseChangeMap (X ↘ Spec (.of k)) (specAlgEquivOver σ)) '' Q = Q",
+  "branch": "sheaf-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-408b3250d",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Node unchanged except lean; stmt_deps unchanged; lean.statement verbatim with the file signature; one theorem whose only proof is sorry, no definitions. Hypotheses match exactly: FiniteDimensional+IsGalois, T/X/f over k, ConnectedSpace on T_L only, A/B nonempty clopen disjoint covering. Conclusion: C = A ∨ C = B is the swap, P pinned to the intersection of baseChangeMap(specAlgEquivOver σ) images = id_X×Spec(σ), Q = Pᶜ, every clause present (nonempty, clopen, partition, range f_L ⊆ P ⊆ C, σ-invariance of P and Q). Same action spelling and stmt_deps as the landed lem-weil-pbc-galois-finite-invariant-clopen-partition and galois-invariant-closed-subset-descends. Edge cases L=k, image in B, empty T_L/X_L, disconnected X covered; one universe u is the project convention. Checked against Stacks 038C lemma-tricky (varieties.tex 1020-1064) and eq 870. Docstrings carry the source and blueprint id; report has both sections. No changes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261026T235842-L-1460928",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.galois_connected_image_invariant_separation"
+  ],
+  "sorry_after": []
+ }
+}

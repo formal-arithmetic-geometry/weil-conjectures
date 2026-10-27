@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-cubical-boundary-coordinate-projections",
+ "kind": "statement",
+ "title": "Cubical boundary, coordinate projections and translation structure",
+ "statement": "Let $r\\geq0$ be an integer, $D=\\mathbf Z^r$, and $u_1,\\ldots,u_r$ its ordered standard basis. For $0\\leq a\\leq r$ let $C_a$ be the free abelian group [def-weil-pbc-free-module] on $[v,I]$ with $v\\in D$, $I\\subseteq\\{1,\\ldots,r\\}$ and $|I|=a$, and set $C_a=0$ in all other integer degrees. Put $q_i(I)=\\#\\{j\\in I:j<i\\}$ and define homomorphisms by\n$$\\partial_a[v,I]=\\sum_{i\\in I}(-1)^{q_i(I)}([v+u_i,I\\setminus\\{i\\}]-[v,I\\setminus\\{i\\}])\\quad(a\\geq1),\\qquad \\partial_a=0\\quad(a\\leq0).$$\nFor $1\\leq i\\leq r$ set $\\rho_i(v)=v-v_i u_i$ and define $p_{i,a}:C_a\\to C_a$ by $p_{i,a}[v,I]=0$ when $i\\in I$ and $p_{i,a}[v,I]=[\\rho_i(v),I]$ otherwise, with zero maps outside the range. Let $\\epsilon:C_0\\to\\mathbf Z$ send every vertex to $1$ and $s:\\mathbf Z\\to C_0$ send $1$ to $[0,\\varnothing]$. Then $\\partial_{a-1}\\partial_a=0$ in every integer degree and $\\epsilon\\partial_1=0$, so $C_\\bullet$ is an augmented chain complex [def-weil-pbc-module-chain-complex-homology]. For every $i,j,a$,\n$$\\partial_a p_{i,a}=p_{i,a-1}\\partial_a,\\qquad p_{i,a}p_{j,a}=p_{j,a}p_{i,a}.$$\nPut $P_{0,a}=1$ and $P_{k,a}=p_{1,a}\\cdots p_{k,a}$ for $1\\leq k\\leq r$. Then $P_{r,0}=s\\epsilon$ and $P_{r,a}=0$ for $a\\ne0$ (the empty product for $r=0$ included). For $w\\in D$ let $\\tau_{w,a}[v,I]=[v+w,I]$. Then $\\partial_a\\tau_{w,a}=\\tau_{w,a-1}\\partial_a$ and $\\epsilon\\tau_{w,0}=\\epsilon$. If $\\mathcal I_a$ is the finite set of subsets of size $a$, there is a basis-preserving isomorphism\n$$C_a\\cong\\bigoplus_{I\\in\\mathcal I_a}\\mathbf Z^{(D)},\\qquad [v,I]\\longmapsto\\text{the basis vector at }v\\text{ in summand }I,$$\nwhere $\\mathbf Z^{(D)}$ denotes the free abelian group on $D$. The isomorphism intertwines translation with the regular action $w[v]=[v+w]$ on each summand. Thus these summands are copies of the free integral $D$-module on one orbit. For $r=0$, $C_0\\cong\\mathbf Z$ by $[0,\\varnothing]\\mapsto1$, with $\\epsilon=s=1$ under this identification.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only. Agent-written coordinate lemma extracted from the returned eight-step proof of lem-sfb-integral-lattice-cubical-contraction: Paragraph (3), open direct image, integral lattice input below the tame-boundary calculation; returned cubical-contraction proof steps 1, 2, 8 and step 6 product identification."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Every element of $C_a$ has a unique finitely supported expression $\\sum_{v,I}n_{v,I}[v,I]$ by [def-weil-pbc-free-module]. Extend each prescribed basis map $f$ by $f(\\sum n_{v,I}[v,I])=\\sum n_{v,I}f[v,I]$. Each boundary image has at most $r$ signed differences, hence at most $2r$ basis terms. These formulas are well-defined homomorphisms: addition adds coefficients and multiplication by an integer multiplies every coefficient, so they are $\\mathbf Z$-linear. The same construction gives $\\epsilon$ and $s$. In degrees with zero group use the unique zero maps. Equality of these maps is checked on the basis by the finite-sum formula.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "For $2\\le a\\le r$, expand $\\partial_{a-1}\\partial_a[v,I]$ and pair the two orders of deleting distinct $i<j$ in $I$. Put $J=I\\setminus\\{i,j\\}$. Both orders have the same unsigned expression $[v+u_i+u_j,J]-[v+u_i,J]-[v+u_j,J]+[v,J]$. Deleting $i$ then $j$ has exponent $q_i(I)+q_j(I)-1$, whereas deleting $j$ then $i$ has exponent $q_j(I)+q_i(I)$. Their signs are opposite. Every term belongs to exactly one such pair, so the sum is zero. For $a=1$ or $a\\le0$ a differential is zero; for $a>r$ the domain is zero. This proves the identity in all integer degrees.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "On a degree-one generator, $\\epsilon\\partial_1[v,\\{i\\}]=\\epsilon([v+u_i,\\varnothing]-[v,\\varnothing])=1-1=0$. The preceding square-zero identity is exactly the chain-complex condition of [def-weil-pbc-module-chain-complex-homology]. The homomorphism $\\epsilon$ is its augmentation because it annihilates $\\partial_1$, and $\\epsilon s(1)=1$. No exactness assertion is needed here.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "Fix $i$ and a basis cell $[v,I]$ of positive degree. If $i\\notin I$, every $j\\in I$ satisfies $j\\ne i$, hence $\\rho_i(v+u_j)=\\rho_i(v)+u_j$; the signs and deleted subsets are unchanged, giving $\\partial_a p_{i,a}[v,I]=p_{i,a-1}\\partial_a[v,I]$ term by term. If $i\\in I$, the left side is zero. On the right all $j\\ne i$ terms are killed since their subsets still contain $i$; the remaining $j=i$ term is zero since $\\rho_i(v+u_i)=\\rho_i(v)$. In degree zero both sides vanish, and outside the range their domain is zero. Thus these families are chain maps in the sense of [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "For a fixed $I$, either $i\\in I$ or $j\\in I$, in which case both composites $p_{i,a}p_{j,a}$ and $p_{j,a}p_{i,a}$ kill $[v,I]$, or both indices are absent. In the latter case the two maps reset those coordinates, in either order; $\\rho_i\\rho_j(v)=\\rho_j\\rho_i(v)$, including $i=j$. Hence the projections commute. More explicitly $P_{k,a}[v,I]$ is zero if $I\\cap\\{1,\\ldots,k\\}\\ne\\varnothing$, and otherwise is $[v-\\sum_{j=1}^k v_j u_j,I]$, by successive application of the definitions. With $k=r$ this is $[0,\\varnothing]$ for a vertex and zero for positive-degree cells. It equals $s\\epsilon$ in degree zero; in negative degrees both the group and its endomorphism are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "Translations satisfy $\\tau_{w,a}\\tau_{z,a}[v,I]=[v+z+w,I]=\\tau_{w+z,a}[v,I]$ and $\\tau_{0,a}=1$. For each boundary summand, $(v+w)+u_i=(v+u_i)+w$ and the subset and sign are unchanged. Therefore $\\partial_a\\tau_{w,a}=\\tau_{w,a-1}\\partial_a$ on every generator, with the zero-degree cases immediate. Also $\\epsilon\\tau_{w,0}[v,\\varnothing]=1=\\epsilon[v,\\varnothing]$, giving the augmentation equivariance for the trivial action on $\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "The set $\\mathcal I_a$ is finite since it is contained in the powerset of the $r$-element coordinate set (and is empty outside $0\\le a\\le r$). Send $\\sum_{v,I}n_{v,I}[v,I]$ to the tuple whose $I$-component is $\\sum_v n_{v,I}[v]$. Each sum has finite support. Conversely send a tuple of finitely supported sums $\\bigl(\\sum_v m_{I,v}[v]\\bigr)_I$ to $\\sum_{I,v}m_{I,v}[v,I]$. These are homomorphisms by addition of coefficients, and their two composites fix all coefficients, so they give the stated basis-preserving isomorphism using [def-weil-pbc-free-module]. On the basis it sends $\\tau_w[v,I]$ to $[v+w]$ in the same summand. That summand has one free orbit of basis elements: $w[0]=[w]$ and the equation $w[0]=[0]$ forces $w=0$. Thus it is the free integral $D$-module on one orbit, with the asserted regular action.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  },
+  {
+   "text": "For $r=0$, the group $D=\\mathbf Z^0$ has just its zero element and the only subset is $\\varnothing$. Thus $C_0$ consists uniquely of the multiples $n[0,\\varnothing]$. The maps $n[0,\\varnothing]\\mapsto n$ and $n\\mapsto n[0,\\varnothing]$ are inverse; these are $\\epsilon$ and $s$. All other groups vanish. The empty product $P_{0,0}=1$ is consequently $s\\epsilon$, and $P_{0,a}=1_{0}=0$ for $a\\ne0$. The empty set of projection indices requires no further case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0623 (definition-koszul-complex), preceding alternating differential, comparison only; agent-written verification on the displayed lattice basis."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "cubical|lattice.*(boundary|chainMap)|coordinate.*(reset|projection)",
+   "results": "{\"t\": \"2026-10-22T05:58:17Z\", \"tool\": \"grep\", \"query\": \"cubical|lattice.*(boundary|chainMap)|coordinate.*(reset|projection)\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold-Kan projections act on simplicial alternating-face complexes, bar differentials use tuples of group elements, and abstract chain-map constructors assume rather than prove the requisite commuting squares; none states these cubical maps and translation decomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|[Kk]oszul.*(projection|translation)|lattice.*(contract|resolution)",
+   "results": "{\"t\": \"2026-10-22T05:58:17Z\", \"tool\": \"grep\", \"query\": \"cubical|[Kk]oszul.*(projection|translation)|lattice.*(contract|resolution)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold-Kan projections act on simplicial alternating-face complexes, bar differentials use tuples of group elements, and abstract chain-map constructors assume rather than prove the requisite commuting squares; none states these cubical maps and translation decomposition."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate projections of the cubical chain complex of the integer lattice commute with the boundary and kill cells containing that direction",
+   "results": "{\"t\": \"2026-10-22T05:58:18Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate projections of the cubical chain complex of the integer lattice commute with the boundary and kill cells containing that direction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"EuclideanSpace.projₗ\", \"HomologicalComplex.p_fromOpcycles\", \"CochainComplex.mappingCone.d_snd_v\", \"CategoryTheory.ProjectiveResolution.lift_commutes\", \"CategoryTheory.ProjectiveResolution.lift_commutes_assoc\", \"AlgebraicTopology.AlternatingFaceMapComplex.d_squared\", \"HomologicalComplex.Hom.sqTo_left\", \"HomologicalComplex.liftCycles_homologyπ_eq_zero_of_boundary\"], \"digest\": \"cde38ef48decab03\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold-Kan projections act on simplicial alternating-face complexes, bar differentials use tuples of group elements, and abstract chain-map constructors assume rather than prove the requisite commuting squares; none states these cubical maps and translation decomposition."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChainComplex\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-22T05:58:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"ChainComplex\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ChainComplex.ofHom\", \"CochainComplex.ofHom\", \"ChainComplex.mkHom\", \"CochainComplex.mkHom\", \"ChainComplex.mkHom_f_0\", \"ChainComplex.mkHom_f_1\", \"CochainComplex.mkHom_f_0\", \"CochainComplex.mkHom_f_1\"], \"digest\": \"5111bafb7a1e721b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold-Kan projections act on simplicial alternating-face complexes, bar differentials use tuples of group elements, and abstract chain-map constructors assume rather than prove the requisite commuting squares; none states these cubical maps and translation decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The cubical integer lattice boundary squares to zero and coordinate reset projections are commuting chain maps equivariant under other coordinate translations",
+   "results": "{\"t\": \"2026-10-22T05:58:28Z\", \"tool\": \"leanfinder\", \"query\": \"The cubical integer lattice boundary squares to zero and coordinate reset projections are commuting chain maps equivariant under other coordinate translations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_Hσ_eq\", \"AlgebraicTopology.DoldKan.hσ'_eq\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_P_eq_self\", \"AlgebraicTopology.DoldKan.HigherFacesVanish.comp_P_eq_self_assoc\", \"AlgebraicTopology.DoldKan.σ_comp_P_eq_zero\", \"AlgebraicTopology.DoldKan.decomposition_Q\", \"Homotopy.mkInductiveAux₃\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\"], \"digest\": \"b544b97c93af36cd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold-Kan projections act on simplicial alternating-face complexes, bar differentials use tuples of group elements, and abstract chain-map constructors assume rather than prove the requisite commuting squares; none states these cubical maps and translation decomposition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free abelian chains on integer lattice cells decompose into finitely many regular translation modules and coordinate collapse is a chain map",
+   "results": "{\"t\": \"2026-10-22T05:58:29Z\", \"tool\": \"leanfinder\", \"query\": \"Free abelian chains on integer lattice cells decompose into finitely many regular translation modules and coordinate collapse is a chain map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.Linear_CC'\", \"Profinite.NobelingProof.Nobeling_aux\", \"Profinite.NobelingProof.Linear_CC'₀\", \"Profinite.NobelingProof.Linear_CC'₁\", \"groupHomology.inhomogeneousChains.d\", \"Rep.standardComplex.d\", \"Profinite.NobelingProof.CC_comp_zero\", \"Profinite.NobelingProof.GoodProducts.finsuppSum_mem_span_eval\"], \"digest\": \"8867b9fedd1ce2de\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Dold-Kan projections act on simplicial alternating-face complexes, bar differentials use tuples of group elements, and abstract chain-map constructors assume rather than prove the requisite commuting squares; none states these cubical maps and translation decomposition."
+  },
+  {
+   "tool": "grep",
+   "query": "cubical|[Kk]oszul.*(projection|translation)|lattice.*(boundary|chainMap)",
+   "results": "{\"t\": \"2026-10-22T11:18:07Z\", \"tool\": \"grep\", \"query\": \"cubical|[Kk]oszul.*(projection|translation)|lattice.*(boundary|chainMap)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Order/CompleteLattice/Defs.lean\"], \"digest\": \"c792ec3b8d91836f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial alternating-face and bar complexes have different generators; abstract chain-map constructors assume the commuting squares. Geometric lattice and order-lattice hits do not state the cubical coordinate identities. Source and returned signatures checked."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coordinate reset projections commute with the alternating boundary on integer cubical lattice chains",
+   "results": "{\"t\": \"2026-10-22T11:18:07Z\", \"tool\": \"leansearch\", \"query\": \"Coordinate reset projections commute with the alternating boundary on integer cubical lattice chains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.alternatingFaceMapComplex\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"CategoryTheory.ProjectiveResolution.lift_commutes_assoc\", \"AlgebraicTopology.AlternatingFaceMapComplex.objD\", \"CochainComplex.ConnectData.restrictionLEIso_hom_f\", \"AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality\", \"AlgebraicTopology.AlternatingCofaceMapComplex.obj\", \"AlgebraicTopology.alternatingFaceMapComplex_obj_d\"], \"digest\": \"ead505cf75f1f4ee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial alternating-face and bar complexes have different generators; abstract chain-map constructors assume the commuting squares. Geometric lattice and order-lattice hits do not state the cubical coordinate identities. Source and returned signatures checked."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ChainComplex\", \"Hom\"",
+   "results": "{\"t\": \"2026-10-22T11:18:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"ChainComplex\\\", \\\"Hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"ChainComplex.ofHom\", \"CochainComplex.ofHom\", \"ChainComplex.mkHom\", \"CochainComplex.mkHom\", \"ChainComplex.mkHom_f_0\", \"ChainComplex.mkHom_f_1\", \"CochainComplex.mkHom_f_0\", \"CochainComplex.mkHom_f_1\"], \"digest\": \"5111bafb7a1e721b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial alternating-face and bar complexes have different generators; abstract chain-map constructors assume the commuting squares. Geometric lattice and order-lattice hits do not state the cubical coordinate identities. Source and returned signatures checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The oriented cubical chain complex on an integer lattice has square zero boundary and commuting coordinate collapse chain maps",
+   "results": "{\"t\": \"2026-10-22T11:18:11Z\", \"tool\": \"leanfinder\", \"query\": \"The oriented cubical chain complex on an integer lattice has square zero boundary and commuting coordinate collapse chain maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.d_comp_ε\", \"AlgebraicTopology.AlternatingFaceMapComplex.obj\", \"AlgebraicTopology.DoldKan.N₂_obj_X_d\", \"HomologicalComplex.alternatingConst\", \"Rep.standardComplex.d_of\", \"Rep.standardComplex.d_eq\", \"Rep.standardComplex.d\", \"AlgebraicTopology.AlternatingFaceMapComplex.d_squared\"], \"digest\": \"6e8ee88ca8c1c4c1\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial alternating-face and bar complexes have different generators; abstract chain-map constructors assume the commuting squares. Geometric lattice and order-lattice hits do not state the cubical coordinate identities. Source and returned signatures checked."
+  },
+  {
+   "tool": "grep",
+   "query": "d_squared|def ofHom|def d |d_comp_ε",
+   "results": "{\"t\": \"2026-10-22T11:19:06Z\", \"tool\": \"grep\", \"query\": \"d_squared|def ofHom|def d |d_comp_ε\", \"sub\": \"AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"74\", \"125\", \"321\", \"322\", \"326\"], \"digest\": \"5fee5bbbb70671bb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial alternating-face and bar complexes have different generators; abstract chain-map constructors assume the commuting squares. Geometric lattice and order-lattice hits do not state the cubical coordinate identities. Source and returned signatures checked."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free abelian groups on integer lattice cells split into regular translation modules indexed by coordinate subsets with commuting coordinate reset maps",
+   "results": "{\"t\": \"2026-10-22T11:19:11Z\", \"tool\": \"leanfinder\", \"query\": \"Free abelian groups on integer lattice cells split into regular translation modules indexed by coordinate subsets with commuting coordinate reset maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZLattice.module_free\", \"ZSpan.fundamentalDomain_pi_basisFun\", \"ZLattice.isAddFundamentalDomain\", \"BoxIntegral.unitPartition.tag_index_eq_self_of_mem_smul_span\", \"AffineAddMonoid.embedding\", \"Int.submodule_toAddSubgroup_index_ne_zero_iff\", \"PeriodPair.latticeEquivProd\", \"NumberField.mixedEmbedding.fundamentalDomain_integerLattice\"], \"digest\": \"a1a442b8c3140c0b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: simplicial alternating-face and bar complexes have different generators; abstract chain-map constructors assume the commuting squares. Geometric lattice and order-lattice hits do not state the cubical coordinate identities. Source and returned signatures checked."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-lattice-cubical-contraction",
+  "date": "2026-10-22",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image, integral lattice input below the tame-boundary calculation; returned cubical-contraction proof steps 1, 2, 8 and step 6 product identification.",
+   "via": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-cubical-boundary-coordinate-projections",
+  "worker": "stage1",
+  "summary": "Checked the alternating differential against Stacks Tag 0623 and supplied the explicit paired-face cancellation, coordinate-reset cases, full-product computation, translation action and inverse coefficient regrouping. No non-elementary result is hidden and no new nodes are needed. Normalized the imported double-escaped TeX without changing the statement. Repair of returned head 3c45ff44478: compared the retained split against the current live unsplit item; its statement, source, statement dependencies and blueprint metadata agree. Re-read both current cited definition statements and verified all four citation quotes. Retained the approved eight-step argument, clarified finite support and integer linearity in step 1, and rebuilt through deliver.py against the current DAG rather than relying on side-project completion.",
+  "blueprint": "Current main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3), open direct image; this item supplies coordinate-chain calculations below the integral lattice input. It realizes the parent contraction split step 1 and the P_r=e input of step 3. The ancestor tool returns None for the existing created-item chain, so its existing null from.node and via list are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N9-261a97e46",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-261a97e46 (reviewer sub-agent of L); spot-checked: PASS for lem-sfb-cubical-boundary-coordinate-projections @261a97e4, with no fixes. This re-delivery answers return L for head 3c45ff44478a, which was PASSed in runs/1/N9__…__3c45ff44478a; that return was a landing/promotion fault, not a mathematical one. I diffed the normalized JSON against that head. The statement, source, stmt_deps/proof_deps, proof_origin, created, blueprint and steps 2-8 are identical. Only the step-1 wording changed: 'at most r signed differences, hence 2r basis terms', explicit Z-linearity, and 'zero group'. The split_report summary and date also changed. There are no new nodes and no repair note for this item, so the 10-21 re-split rule does not apply. Source check: Stacks more-algebra.tex, the alternating differential before definition-koszul-complex (Tag 0623, lines ~6580-6597). Its sign (-1)^{pos+1} equals (-1)^{q_i(I)}. The tag is comparison only, proof_origin is agent, and no SGA source is used. I re-read the 8 steps by hand. Step 2: for i<j the exponents are q_i+q_j-1 and q_i+q_j with the same four vertices. Step 4: the case i in I uses rho_i(v+u_i)=rho_i(v). Step 5: P_r = s epsilon in degree 0. Step 7: explicit inverse regroupings, each summand one free orbit. Step 8: r=0 and the empty product. My script checked 1111 cells (r<=3, coordinates -2..2) for d^2=0, epsilon d_1=0, d p_i=p_i d, p_i p_j=p_j p_i, P_r=s epsilon and translation equivariance, with 0 failures. Both deps are existing Mathlib definition leaves, and their statements contain the cited facts. The only citer is the parent cubical-contraction, so there is no cycle and no duplicate. Maintainer: please land and promote this re-delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.CubicalBoundaryCoordinateProjections",
+  "declaration": "IntegralLatticeCubical.boundary_coordinate_projections",
+  "declarations": [
+   "IntegralLatticeCubical.resetCoordinate",
+   "IntegralLatticeCubical.coordinateProjection",
+   "IntegralLatticeCubical.coordinateProduct",
+   "IntegralLatticeCubical.boundary_coordinate_projections"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/CubicalBoundaryCoordinateProjections.lean",
+  "statement": "theorem boundary_coordinate_projections (r : ℕ) : (∀ a : ℤ, Module.Free ℤ (Chains r a)) ∧ (∀ a : ℤ, a < 0 ∨ (r : ℤ) < a → Subsingleton (Chains r a)) ∧ (∀ a : ℤ, a ≤ 0 → boundary r a = 0) ∧ (∀ a : ℤ, (boundary r (a - 1)).comp (boundary r a) = 0) ∧ (augmentation r).comp (boundary r 1) = 0 ∧ (∀ (i : Fin r) (a : ℤ), (boundary r a).comp (coordinateProjection r a i) = (coordinateProjection r (a - 1) i).comp (boundary r a)) ∧ (∀ (i j : Fin r) (a : ℤ), (coordinateProjection r a i).comp (coordinateProjection r a j) = (coordinateProjection r a j).comp (coordinateProjection r a i)) ∧ coordinateProduct r 0 r = (sectionMap r).comp (augmentation r) ∧ (∀ a : ℤ, a ≠ 0 → coordinateProduct r a r = 0) ∧ (∀ (w : Fin r → ℤ) (a : ℤ), (boundary r a).comp (translate r a w) = (translate r (a - 1) w).comp (boundary r a)) ∧ (∀ w : Fin r → ℤ, (augmentation r).comp (translate r 0 w) = augmentation r) ∧ (∀ a : ℤ, Finite (Directions r a)) ∧ (∀ a : ℤ, ∃ e : Chains r a ≃ₗ[ℤ] (Directions r a →₀ ((Fin r → ℤ) →₀ ℤ)), (∀ (v : Fin r → ℤ) (I : Directions r a), e (Finsupp.single (v, I) 1) = Finsupp.single I (Finsupp.single v 1)) ∧ (∀ (w : Fin r → ℤ) (x : Chains r a) (I : Directions r a), e (translate r a w x) I = Finsupp.mapDomain (fun v ↦ v + w) (e x I))) ∧ (r = 0 → ∃ e : Chains r 0 ≃ₗ[ℤ] ℤ, e.toLinearMap = augmentation r ∧ e.symm.toLinearMap = sectionMap r)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Reuses the existing IntegralLatticeCubical cell, boundary, augmentation, section and translation constructions from the parent contraction module; introduces only the coordinate resets and ordered projection products. The parent theorem is not invoked."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-552e3325d",
+  "group": "Q95",
+  "result": "pass",
+  "note": "Read node, both Mathlib stmt_deps (Module.Free, HomologicalComplex.homology), the parent module IntegralLatticeCubicalContraction (Chains/Directions/cell/boundary/augmentation/sectionMap/translate) and the delivered module. All clauses match the node: free and zero terms, d^2=0, eps d1=0, d p_i=p_i d, p_i p_j=p_j p_i, P_{r,0}=s eps, P_{r,a}=0 for a!=0 (r=0 empty product checked), translation equivariance, finite I_a, basis-preserving regrouping equivalence with the regular action, r=0 C0 iso Z. Boundary sign (-1)^#{j<i} with Fin r 0-indexing preserved; a<=0 boundary zero true. New defs have real data with source/blueprint docstrings; the eight-step proof is in the docstring; only sorry; no universe restriction; statement verbatim; only the lean field changed vs side-live; no name clash. M1 maintainer note: the item imports parent theorem-node helpers (the parent proof_deps cite the item, so no back-import); the rule-7 exclusion is listed in the report, same as Q58; move the parent helpers to a def-node module eventually. No compile needed (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261025T050743-L-3838794",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "IntegralLatticeCubical.boundary_coordinate_projections"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-space-square-zero-stalk-data",
+ "kind": "definition",
+ "title": "Normalized square-zero ideal and fibre-product stalk data",
+ "status": "split",
+ "statement": "Use the tensor product of module sheaves [def-pur-sheaf-tensor-product], and algebraic spaces [def-trf-algebraic-space], module sheaves [def-weil-sheaf-of-modules-category], normalized first-order thickening site models and chart ring maps [def-sfb-space-square-zero-extension-data], the canonical tensor pullback and local tensors [def-trf-space-etale-module-functors], and pointed stalk presentations [def-sfb-space-pointed-stalk-data]. For a thickening site model $T$ of $X\\hookrightarrow X'$, put $R_T(U)=\\Gamma(T^{-1}U,\\mathcal O)$. A square-zero ideal presentation is an $\\mathcal O_X$-module sheaf with a natural sectionwise injective additive inclusion into $R_T$, image the kernel of its quotient to $\\mathcal O_X$, with square-zero products and quotient scalar action; require the quotient to be locally surjective. For a morphism of spaces and two pointed stalk presentations, a normalized stalk ring map is a ring map agreeing on every compatible pointed chart pair with the specified chart ring map. A fibre-product ideal presentation uses the actual sheaf fibre product [def-sfb-space-sheaf-fibre-product], an algebraic space by [lem-trf-space-fibre-products-etale-covers], its canonical map from $X$, the regular-functions stalk on that fibre product, and the restriction from $B'$ prescribed on all compatible pointed charts; its ideal is the kernel of this restriction. These are normalized data, with no existence assertion.",
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-space-square-zero-extension-data",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-pointed-stalk-data",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 04K0, 04K2 and 04K5; sites-modules.tex Tags 04EQ and 05V5; spaces-morphisms.tex Tag 03MB; spaces-more-morphisms.tex Tag 05ZS. The normalized data display the constructions in these source statements."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Square zero ideal sheaf algebraic space stalk tensor pullback comparison",
+   "results": "Search succeeded; 8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.StructureSheaf.stalkIso, DividedPowers.OfSquareZero.dividedPowers, derivationToSquareZeroEquivLift, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk, retractionOfSectionOfKerSqZero, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, ModuleCat.Tilde.stalkIso.",
+   "date": "2026-10-23",
+   "verdict": "No algebraic-space pointed stalk presentation or normalized square-zero comparison data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized presentations of stalk rings and module stalks of algebraic spaces by colimit cocones over pointed etale neighborhoods",
+   "results": "Search succeeded; 8 hits: ModuleCat.Tilde.toStalk, AlgebraicGeometry.LocallyRingedSpace.toStalk_stalkMap_toΓSpec, AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.coequalizer_π_stalk_isLocalHom, ModuleCat.Tilde.stalkToFiberLinearMap, smoothSheafCommRing.forgetStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Scheme.fromSpecStalk_appTop, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk_assoc.",
+   "date": "2026-10-23",
+   "verdict": "No match: these are scheme or smooth manifold stalks, not this normalized algebraic-space presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "SquareZeroStalk|SquareZeroIdeal|AlgebraicSpace",
+   "results": "Search succeeded; 0 hits in Mathlib. Local rg of lean/WeilConjectures and lean/Sheaf for SquareZeroStalk and SquareZeroIdeal gave no hits. Existing SpaceSquareZeroExtensionData and AlgebraicSpaceModuleOperations are used. blueprint_refs search for geometric stalk square zero ideal and pointed stalk presentation each returned zero matching blueprint nodes.",
+   "date": "2026-10-23",
+   "verdict": "No existing declaration or definition node for these normalized data; reuse existing sites, modules, tensor pullback, thickenings and chart ring maps."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-stalk-ideal-pullback",
+  "date": "2026-10-23",
+  "group": "Q10"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 06BH (lemma-deform), both directions. Supporting input: the stalk and ideal comparisons underlying the etale-chart reduction in Tag 06BH.",
+   "via": [
+    "lem-sfb-space-stalk-ideal-pullback",
+    "lem-sfb-space-square-zero-flatness-criterion",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceSquareZeroStalkData",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SquareZeroIdeal",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroThickenedStructure",
+   "AlgebraicGeometry.AlgebraicSpace.SquareZeroIdeal",
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroTensor",
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroTmul",
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroTensorScale",
+   "AlgebraicGeometry.AlgebraicSpace.SquareZeroRingMap",
+   "AlgebraicGeometry.AlgebraicSpace.squareZeroPullbackMap",
+   "AlgebraicGeometry.AlgebraicSpace.SquareZeroFibreProductIdeal"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceSquareZeroStalkData.lean",
+  "statement": "structure SquareZeroIdeal {S : Scheme.{u}} {X X' : AlgebraicSpace S} {i : X ⟶ X'} (T : ThickeningSiteModel i)",
+  "branch": "sheaf-dag",
+  "by": "Q10",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Review FIX: the fibre product is the landed enlargedFibreProduct of def-sfb-space-sheaf-fibre-product (existing:true), not a second definition with the same body.",
+  "fixed_by": "NT-stage2-cc-e7cb93a71"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7cb93a71",
+  "group": "Q10",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e7cb93a71",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Read item node, source tags 04K0/04K2/04K5/04EQ/05V5/03MB/05ZS, all 4 delivered modules, the 3 new def nodes and the dependency declarations (ThickeningSiteModel, ChartRingMap.Reduces/InducedBy, moduleTensorPullback/moduleTensorSection, IsSpaceFirstOrderThickening). Every clause matches the node and is normalized on germs, charts or kernels, with colimit cocones for stalks. Clauses checked: ring square with surjections and kernels I,J; I^2=J^2=0; A'/I, B'/J identifications; (f^*I)_x = I⊗_A B with pure-tensor normalization; q(i⊗b)=f'#(i)b̃ for all lifts; ideal of Y×_{Y'}X' has stalk IB'; cartesian_iff over all geometric points; no flatness. The existential is not hollow. Edge cases OK (identity, empty X, k[ε]→k, k[t]/t²). Statements verbatim; dep records identical to live; no local proofs; docstrings present. FINDING H4: squareZeroPullbackSpace duplicated the landed enlargedFibreProduct (def-sfb-space-sheaf-fibre-product, existing:true, landed 12:14 UTC before base 16:15 UTC). FIX: fixes/SpaceSquareZeroStalkData.lean uses enlargedFibreProduct (public import EnlargedEtaleRingedSite); fixes/def-sfb-space-square-zero-stalk-data.json adds that stmt_dep, cites it and drops the declaration; report.md sentence updated. Item statement and stmt_deps unchanged. nt_compile --json of all 4 modules clean (6.6/9.7/41.5/19.6 s). Advisory: unused public CochainTensorUniverses import in item module."
+ }
+}

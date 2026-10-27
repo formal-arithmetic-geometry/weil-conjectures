@@ -23,7 +23,7 @@
  ],
  "proof": [
   {
-   "text": "Prove uniqueness of the normalized ordinary tensor structure by transposing its tensor and unit equations under the module adjunction; cancel the epimorphism from the ambient tensor to the relative tensor. The existing strong monoidal pullback satisfies these equations by the scalar-extension tensor comparison and the monoidal sheaf adjunction. Identify the chosen structure with it. Preserve flat modules using inverseImageModule_preservesFlat and extension along the invertible coefficient map. Share the existing sheaf braiding explicitly in its symmetric structure; the generic record update is reflexively equal to the original structure, so no tensor or symmetry changes.",
+   "text": "Construct the ordinary tensor core directly from the existing strong monoidal pullback. The scalar-extension tensor comparison and monoidal sheaf adjunction give its normalization equations. Keep the existing proof that these equations determine the core uniquely: transpose tensor and unit equations under the module adjunction and cancel the epimorphism from the ambient tensor. Use the existing ordinary strong monoidal instance directly; it is the same normalized structure as the former core-to-monoidal round trip by the existing equality proof. Preserve flat modules using inverseImageModule_preservesFlat and extension along the invertible coefficient map. Share the existing sheaf braiding explicitly in its symmetric structure; the generic record update is reflexively equal to the original structure, so no tensor or symmetry changes. Cache the existing abelian, monoidal and derived structures locally, and keep the transported coefficient multiplication and module closed structure folded; expose the core normalization through a proved private helper instead of expanding a unique-choice term. During the private tensor normalization proof, keep the module adjunction folded and reuse its explicit unit equation. Proved private caches of the existing module Grothendieck, flat-resolution and graded-tensor instance facts are enabled only in private proof sections, without entering public constructions.",
    "uses": [
     "new-proetale-inverse-image-module-flat"
    ],
@@ -34,7 +34,7 @@
    }
   },
   {
-   "text": "Use the existing residueDerivedMonoidal structure on each exact flat-preserving pullback. Its tensor map is the specified leftDerivedTensorComparison. Check its unit against the explicit degree-zero comparison using leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac and the quotient factorization. Descend ordinary braiding compatibility on flat resolutions; use the existing generic derived-braiding wrapper, whose braiding field is definitionally the specified Koszul construction. Prove monoidality of ordinary pullback composition by the conjugate pushforward tensor identity, checked after the balanced-tensor quotient. Derivation preserves that tensor identity by leftDerivedTensorComparison_naturality_app and map_leftDerivedTensorComparison_app_app_comp. Compose the two comparisons with transport along fp=fq to obtain tensor compatibility for the precise tracePullSquare. Name the explicit degree-zero unit composite and Koszul braiding as generic functions, then assemble the canonical derived unit, tensor and braiding comparisons with the ordinary categories still abstract before specializing them. These caches are definitionally the existing constructions. Store the three canonical derived monoidal structures, unit comparison, tensor comparisons and braidings in TraceComparisonData, constructed first over abstract abelian categories and then specialized to internal modules. TraceFirstAssertion uses the same TraceFirstFormula through traceDataFormula and the fields of traceNativeComparisonData. The bundle changes no map; it avoids proof-abstraction comparisons between independently expanded monoidal instances. Prove the bundled trace assembly over fully abstract ordinary abelian categories before any specialization to internal modules, and construct the proof-only derived braided functor instances inside that proof. The native square proof refers directly to the canonical leftDerivedTensorComparison; its unused public native alias is removed. Reassociate the square-family equation with Category.assoc explicitly; transport the canonical unit equality using the proved generic equality-transport helper. Express tensor compatibility as the private predicate traceDataSquare over the same canonical comparison-data bundle. Prove the entire composition-family square calculation over abstract ordinary abelian categories, and only then specialize this folded proposition to the native sheaf-module pullbacks.",
+   "text": "Use the existing residueDerivedMonoidal structure on each exact flat-preserving pullback. Its tensor map is the specified leftDerivedTensorComparison. Use the existing canonical leftDerivedTensorUnitIso as the named degree-zero unit comparison; the former explicit comparison was proved equal to it. The residue monoidal unit identification remains the same equation. Apply the proved source theorem Functor.leftDerivedFunctor_map_braiding_hom_δ from WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure. Its tensor map and the residue-derived tensor map are both leftDerivedTensorComparison, so simplifying leftDerivedFunctorMonoidal_δ gives the required equation. Invert the tensorator to obtain the lax braided equation. Thus no local K-flat calculation or heavy etale derived-braiding proof import is needed. Prove monoidality of ordinary pullback composition by the conjugate pushforward tensor identity, checked after the balanced-tensor quotient. Derivation preserves that tensor identity by leftDerivedTensorComparison_naturality_app and map_leftDerivedTensorComparison_app_app_comp. Compose the two comparisons with transport along fp=fq to obtain tensor compatibility for the precise tracePullSquare. Name the canonical degree-zero unit and Koszul braiding as generic functions, then assemble the canonical derived unit, tensor and braiding comparisons with the ordinary categories still abstract before specializing them. These caches are definitionally the existing constructions. Store the three canonical derived monoidal structures, unit comparison, tensor comparisons and braidings in TraceComparisonData, constructed first over abstract abelian categories and then specialized to internal modules. TraceFirstAssertion uses the same TraceFirstFormula through traceDataFormula and the fields of traceNativeComparisonData. The bundle changes no map; it avoids proof-abstraction comparisons between independently expanded monoidal instances. Prove the bundled trace assembly over fully abstract ordinary abelian categories before any specialization to internal modules, and construct the proof-only derived braided functor instances inside that proof. The native square proof refers directly to the canonical leftDerivedTensorComparison; its unused public native alias is removed. Reassociate the square-family equation with Category.assoc explicitly; transport the canonical unit equality using the proved generic equality-transport helper. Express tensor compatibility as the private predicate traceDataSquare over the same canonical comparison-data bundle. Prove the entire composition-family square calculation over abstract ordinary abelian categories, and only then specialize this folded proposition to the native sheaf-module pullbacks. Keep ordinary pullback and composition constructions folded during the composition calculation, and fold the right-adjoint lax structure after proving its tensor equation; use the existing API equations without the former local transparency override. Keep Qh folded, and keep residueDerivedMonoidal folded after proving its unit and tensor equations. The assembly uses residue_derived_tensor for its three tensorator identifications rather than unfolding the monoidal construction. Disable backward definition rules outside the ordinary-braiding section that explicitly uses them. Reuse the proved DerivedCategory.symmetricCategory for the three derived symmetric structures, keeping its underlying canonical braiding folded after naming the public alias.",
    "uses": [
     "new-integral-residue-derived-monoidal",
     "new-proetale-derived-module-pullback-monoidal"
@@ -74,8 +74,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
-  "place": "(1), first triangle: reassociate q p_2 = q p_1 and move M outside Rp_1*; the existing projection/mate argument carried out directly in the stated internal-module categories"
+  "group": "N4",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03EL, 0G7E, 07A4 and 0B56; canonical normalized tensor core and unit, with the existing derived comparisons and trace argument preserved; generic derived braiding reused from the proved source theorem Functor.leftDerivedFunctor_map_braiding_hom_δ; composition rewrites focused on their intended side, tensor cancellation proved generically, and module tensor data kept folded through assembly; natural-transformation composition and trace propositions kept folded, with explicit composition equations in the derived assembly; derived symmetric structures reused from the proved source construction rather than reconstructed locally; existing module instance proofs cached only in private proof sections"
  },
  "mathlib_searches": [
   {
@@ -255,15 +256,26 @@
   "result": "pass",
   "note": "Re-delivery of returned 21f8aa1d2971; both earlier findings repaired. (1) H13: the dep record lem-weil-pbc-ringed-topoi-derived-tensor-pullback is identical to live; the only DAG difference is the item's lean field. CondensedModuleTensorPullback.lean is deleted; its nine helpers moved verbatim (only the blueprint tag changed) into Sheaf/Paper/TraceBaseChangeFirst.lean and are listed in lean.declarations. (2) H9: the three unused imports and the traceAbstractSquare/traceBaseChange/tracePushSquare wrappers are removed. Statement unchanged; I re-checked trace1/trace2 (t_i b_i = f*t, with the square comparison and the unit iso), the B_N order (symmetry, pi^-1_{p2,T_X,p1*N}, symmetry, b2^-1 tensor 1), e_K, the conjugateIsoEquiv common-source identification and both targets Rf*N. Hypotheses only on Loc(Dbc); no extra universe constraints; statement field verbatim; 26 declarations present; no name collisions or competing upperStar Monoidal instance. Sorries: two postponed helper theorems with proof docstrings plus the item theorem. nt_compile --json: first try a side dep (DerivedPullbackTensorHom) timed out at load ~118; retry exit 0, item 42.9 s/60 s, no errors or warnings. Notes: condensedDerivedTensorIso unused (moved at the earlier reviewer's request); stage 3 must prove the two helper theorems; the second reading is a worker self-check."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "reviewed_proof": {
-  "date": "2026-10-22",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-f9e70",
-  "group": "V9",
+  "reviewer": "COMPILER",
+  "group": "N4",
   "result": "pass",
-  "landing": "20261022T013535-L-3614540",
+  "landing": "20261026T023624-L-587203",
   "kind": "interface",
-  "note": "independent cc review: delivered TraceBaseChangeFirst (bundle TraceComparisonData/traceDataFormula) against the clone's old TraceFirstAssertion/condensedDerivedUnitIso via sandbox defeq/HEq checks; node proof_deps against imports; removed aliases against clone lean/quarantine/dag"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

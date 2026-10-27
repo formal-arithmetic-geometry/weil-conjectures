@@ -30,63 +30,56 @@
  ],
  "proof": [
   {
-   "text": "Because $f$ is locally of finite presentation, the composition $Z'\\to S$ is locally of finite presentation: $i$ is of finite presentation and $X'\\to S$ is locally of finite presentation by composition. Likewise $Y'\\to S$ is locally of finite presentation because $h$ is smooth and $S'\\to S$ is etale. The finite morphism $\\pi$ is therefore locally of finite presentation by the finite-presentation permanence lemma, and the new node lem-trf-finite-morphism-finite-presentation makes $\\pi$ a morphism of finite presentation.",
+   "text": "Use g ≫ f = f' ≫ e and composition of local finite presentation to see that f' ≫ e is locally of finite presentation. Apply locallyOfFinitePresentation_of_comp to f' and e. Then use i ≫ f' = π ≫ h and composition to see π ≫ h is locally of finite presentation. SmoothOfRelativeDimension.smooth makes h smooth, hence locally of finite type, so the same cancellation theorem gives local finite presentation of π. Finiteness supplies quasi-compactness and quasi-separatedness by Mathlib instances.",
    "uses": [
-    "lem-trf-finite-morphism-finite-presentation"
+    "lem-a1-map-over-base-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, first proof paragraph."
-   }
+   "elementary": true
   },
   {
-   "text": "For the neighbourhood assertions, introduce (4): $g^*\\mathcal F$ is of finite presentation near $x'$. Pullback preserves finite presentation, so (1) implies (4). Conversely, $g$ is etale and hence open; for any neighbourhood $U'\\ni x'$ its image is an open neighbourhood of $x$, and $U'\\to g(U')$ is an etale covering. Faithfully flat descent of finite presentation then gives (4) implies (1).",
-   "uses": [
-    "lem-trf-etale-module-finite-presentation-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, neighbourhood proof, paragraph beginning “The etale morphism $g$ is open”."
-   }
-  },
-  {
-   "text": "The identity $i_*\\mathcal G\\cong g^*\\mathcal F$ identifies (4) with finite presentation of $i_*\\mathcal G$ near $x'$. Apply the finite-pushforward equivalence to the finite finitely presented closed immersion $i$ and its marked point to obtain (4) $\\Leftrightarrow$ (2). Apply the same equivalence to $\\pi$ (whose finite presentation was established in Step 1) and the singleton fibre $\\pi^{-1}(\\{y'\\})=\\{z'\\}$ to obtain (2) $\\Leftrightarrow$ (3).",
+   "text": "The closed immersion i is injective on points, so its fibre over i(z') is {z'}. Apply finitePresentation_near_and_stalk_iff_pushforward_of_singleton_fibre to i and G, and also to π and G using the given singleton-fibre equality. Quasi-coherence of G is the first conjunct of its quasi-coherent finite-type hypothesis.",
    "uses": [
     "lem-trf-finite-pushforward-module-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, paragraph beginning “Using Descent, Lemma 03C4”."
-   }
+   "elementary": true
   },
   {
-   "text": "For stalks, the local ring map $\\mathcal O_{X,x}\\to\\mathcal O_{X',x'}$ is faithfully flat because $g$ is etale and the map is local. Faithfully flat module finite-presentation descent identifies finite presentation of $\\mathcal F_x$ with that of $(g^*\\mathcal F)_{x'}$. The closed immersion $i$ induces a surjective finite-presentation local ring map, and $\\pi$ induces a finite-presentation local ring map because it is finite, finitely presented, and has singleton fibre at $y'$. Applying the finite-extension module equivalence to these two local ring maps, and using $i_*\\mathcal G\\cong g^*\\mathcal F$, gives the equivalence of (a), (b), and (c).",
+   "text": "Apply etale_module_finite_presentation_local to g and F. On each open U of X', restrict the supplied isomorphism i_*G ≅ g^*F with SheafOfModules.overFunctor. Finite presentation is invariant under isomorphism, so finite presentation near x' of these two sheaves is equivalent. Compose this equivalence, the etale-local equivalence and the i-neighbourhood equivalence from the previous step, using i(z')=x'. The π-neighbourhood equivalence is already the third conclusion.",
    "uses": [
-    "lem-trf-finite-presentation-module-descent-flat-local",
-    "lem-trf-finite-extension-module-finite-presentation",
+    "lem-trf-etale-module-finite-presentation-local",
     "lem-trf-finite-pushforward-module-finite-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 057T, stalkwise proof, paragraph beginning “To prove the equivalence of (a), (b), (c)”."
-   }
+   "elementary": false
+  },
+  {
+   "text": "For a flat scheme morphism p and a point t, algebraize its local ring map. Flat.stalkMap and locality make that algebra faithfully flat. The natural pullback-stalk isomorphism identifies (p^*M)_t with O_{T,t} tensor M_{p(t)}. The Mathlib tensor-base-change instance gives ascent of finite presentation, and faithfully flat descent gives the converse. Transport both directions through the linear equivalence of the stalk isomorphism. This is the fully proved private helper finitePresentation_stalk_iff_flat_pullback.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-trf-finite-presentation-module-descent-flat-local"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the preceding helper to the etale, hence flat, map g and rewrite g(x')=x. Apply moduleStalkFunctor at x' to i_*G ≅ g^*F and transport finite presentation using LinearEquiv.finitePresentation_iff. Compose this with the i-stalk equivalence from step 2 (rewritten by i(z')=x'). The π-stalk equivalence from step 2 supplies the last conclusion. Assemble all five conjuncts.",
+   "uses": [
+    "lem-trf-finite-pushforward-module-finite-presentation",
+    "lem-weil-pbc-module-stalk-pullback",
+    "lem-trf-finite-presentation-module-descent-flat-local"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-a1-map-over-base-finite-presentation",
   "lem-trf-etale-module-finite-presentation-local",
-  "lem-trf-finite-extension-module-finite-presentation",
-  "lem-trf-finite-morphism-finite-presentation",
+  "lem-trf-finite-presentation-module-descent-flat-local",
   "lem-trf-finite-pushforward-module-finite-presentation",
-  "lem-trf-finite-presentation-module-descent-flat-local"
+  "lem-weil-pbc-module-stalk-pullback"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 057T, complete proof of lemma-devissage-finite-presentation."
+  "place": "Tag 057T, complete proof; D4 Lean assembly using the existing singleton-fibre comparison for both the closed immersion and the finite map, and the proved tensor-pullback stalk comparison."
  },
  "mathlib_searches": [
   {
@@ -173,5 +166,26 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261023T104752-L-3426115",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

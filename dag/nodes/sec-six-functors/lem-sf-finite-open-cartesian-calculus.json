@@ -1,0 +1,145 @@
+{
+ "id": "lem-sf-finite-open-cartesian-calculus",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Open-factor base-change calculation, steps 5--6 of lem-sf-pf-open-base-change-square.",
+   "via": [
+    "lem-sf-pf-open-base-change-square"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ambient finite open Cartesian tensor calculus",
+ "statement": "For a coefficient datum c and finite extension E, positive level n+1 and compactified square Q, there exist precisely unit-normalized intrinsic finite maps d : FiniteMaps, and for arbitrary ambient derived K on X and P on Z their open projection/base-change square commutes. There is no constructibility or Tor hypothesis on K or P. The displayed identity is OpenIdentityAt with the actual finite tensor, canonical pullback comparisons, and canonical geometric square comparison [lem-pur-derived-pullback-tensor-iso].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+ },
+ "stmt_deps": [
+  "def-sf-open-base-change-square-data",
+  "def-sf-operation-stages",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sp-finite-intrinsic-open-square"
+ ],
+ "proof": [
+  {
+   "text": "Localize the exact open adjunction and use the canonical K-flat tensor model. The open projection inverse is the open-unit transpose followed by inverse tensor pullback. Open localization gives its invertibility, and Cartesian open base change gives invertibility of the canonical reverse exchange mate. Naturality assembles these into FiniteMaps with both specified transpose equations and beta inverse equal to the specified mate.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "prop-exc-open-adjoint",
+    "lem-trf-open-square-exchange",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+   }
+  },
+  {
+   "text": "Transpose the inverse tensor square under the base-changed open adjunction. Substitute the normalized inverse projection and exchange transposes. Naturality moves the geometric square comparison and tensor comparison past each other. Monoidality of the canonical composition comparison identifies the middle factors. The open-unit naturality and the base-changed projection transpose identify the remaining factors. Adjunction injectivity and cancellation give the stated forward equality on arbitrary unbounded inputs.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-sf-open-tensor-normalization",
+    "prop-exc-open-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+    "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-open-tensor-normalization",
+  "lem-trf-open-square-exchange",
+  "prop-exc-open-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "Base-change paragraph, open-factor restriction calculation, steps 5--6 of lem-sf-pf-open-base-change-square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero projection formula compatibility with base change for derived sheaves",
+   "results": "Function.ExtendByZero.linearMap and general derived functor lemmas; none states the sheaf open Cartesian tensor identity.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "base change compatibility of the projection formula of extension by zero along an open immersion in derived categories",
+   "results": "Scheme.Modules.restrictFunctorComp and open immersion section identities; no derived open tensor/base-change square.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "projectionMap_mate",
+   "results": "No Mathlib identifier. The adopted source library has CategoryTheory.Adjunction.projectionMap_mate, a generic adjunct calculation requiring the normalized comparison hypotheses.",
+   "date": "2026-10-25",
+   "verdict": "no one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionMap_mate|open.*baseChange|projection.*baseChange in Mathlib/CategoryTheory; matching DAG and current blueprint searches",
+   "results": "No Mathlib open derived identity. The project ClopenCartesianTensorSquare.cartesian_tensor proves the analogous identity on supplied site models; conversion to the canonical finite and completed models remains necessary.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenBaseChangeSquare",
+  "date": "2026-10-25",
+  "group": "P2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteOpenCartesianCalculus",
+  "file": "lean/Sheaf/SixFunctors/FiniteOpenCartesianCalculus.lean",
+  "declaration": "WeilConjectures.OpenProjectionBaseChange.finite_open_cartesian_calculus",
+  "statement": "theorem finite_open_cartesian_calculus (n : ℕ) (Q : SixFunctorCompactifiedSquare D) :\n    ∃ d : FiniteMaps D c E n Q,\n      ∀ (K : proEtaleDerivedCategory Q.X.obj.left (finiteCoefficientRing c.l E (n + 1)))\n        (P : proEtaleDerivedCategory Q.Z.obj.left (finiteCoefficientRing c.l E (n + 1))),\n  OpenIdentityAt\n    (finiteIntrinsicDerivedTensor c.l E Q.X.obj.left n)\n    (finiteIntrinsicDerivedTensor c.l E Q.Z.obj.left n)\n    (finiteIntrinsicDerivedTensor c.l E Q.X'.obj.left n)\n    (finiteIntrinsicDerivedTensor c.l E Q.Z'.obj.left n)\n    (finiteDerivedPullback c.l E n Q.h.hom.left)\n    (finiteDerivedPullback c.l E n Q.g'.hom.left)\n    (finiteDerivedPullback c.l E n Q.i.hom.left)\n    (finiteDerivedPullback c.l E n Q.i'.hom.left)\n    (finiteOpen D c E n Q) (finiteOpen' D c E n Q)\n    (fun N T ↦ d.gamma.hom.app (N, T)) (fun N T ↦ d.gamma'.hom.app (N, T))\n    d.beta.hom.app K P\n    ((finiteMu D c E Q.g' n K\n      ((finiteDerivedPullback c.l E n Q.i.hom.left).obj\n        P)).hom)\n    ((finiteMu D c E Q.h n ((finiteOpen D c E n Q).obj K)\n      P).hom)\n    ((sfIntrinsicDerivedSquarePullback (finiteCoefficientRing c.l E (n + 1))\n      Q.g'.hom.left Q.i'.hom.left Q.i.hom.left Q.h.hom.left Q.openSquare.w).hom.app\n        P)\n",
+  "branch": "sheaf-dag",
+  "by": "P2",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3efa",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261025T163954-L-924423",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-e3efa",
+  "group": "P2",
+  "result": "fix",
+  "landing": "20261025T163954-L-924423",
+  "kind": "interface",
+  "note": "independent cc review: openBaseChangeSquare stmt byte-identical to clone; 37 decls diffed verbatim vs clone lines 1-588 into OpenBaseChangeSquareData (public re-export); sorry lemmas read against FiniteMaps/IntegralMaps pinning fields in OpenFactorCoherence(Data)/OpenFactorTensorModel; importer ProjectionFormulaCoherence compiled rc 0 in sandbox; #print axioms = propext/sorryAx/choice/Quot.sound"
+ }
+}

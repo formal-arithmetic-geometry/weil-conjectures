@@ -1,0 +1,130 @@
+{
+ "id": "lem-sf-projection-field-stage-laws",
+ "kind": "statement",
+ "title": "Field coefficient-stage compact-support projection laws",
+ "statement": "Let S be the specified six-functor operation datum [def-fix-six-functor-datum] for finite-field datum D, coefficient datum C, finite extension E of Q_l and positive finite level n. The canonical compact-support projection of [def-sf-constructible-projection-mates] satisfies CompactSupportProjectionLaws at S.higher.rational, S.closure.commonStage and every (S.closure.coefficientStages E0).rational. Each uses exactly the tensor and exchange data recorded at that stage and the entire second-input domain (the predicate True). Thus invertibility, naturality, compactification independence, composition, the associativity pentagon and proper-counit identification all hold at these field stages; the common-stage statement uses the specified common finite-field construction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Finite formula, adic reconstruction, field transport and coherence paragraphs; coefficient-stage decomposition"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Uncurry the supplied mate into a natural transformation between the projection source and target bifunctors; its naturality is the required two-input equation. From SixFunctorExchangeComparison.projection, functorial preservation of isomorphisms and cancellation of the tensor/support/pullback comparison isomorphisms prove coefficient transport of invertibility.",
+   "uses": [
+    "def-sf-operation-stages",
+    "def-sf-constructible-projection-mates"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Every integral model of a raw rational object is finite Tor by the residue criterion. Apply compactSupportProjectionFormula_integralStages and the coefficient transport calculation to prove rational invertibility at H = S.higher and every closure coefficient stage. Transport the four remaining equations by compactSupportProjectionCoherence_rational, and assemble their six law fields with the proved naturality.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "lem-sf-projection-integral-stage-laws",
+    "lem-sf-rational-projection-comparison-equations",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two common-stage pairs form the finite coefficient compositum. isoToStage represents both there. Their projection component is invertible by the rational-stage laws and SixFunctorExchangeComparison.projection; naturality along the two isoToStage isomorphisms then gives invertibility at the original pairs. compactSupportProjectionCoherence_common transports the four comparison equations from the finite fields. Combine these with the proved naturality and return the original three-clause conjunction.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-sf-operation-stages",
+    "lem-sf-common-projection-comparison-equations"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-operation-stages",
+  "def-sf-constructible-projection-mates",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-projection-integral-stage-laws",
+  "lem-sf-rational-projection-comparison-equations",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-sf-common-projection-comparison-equations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "S3: explicit mate naturality, inverse transport, raw rational object models, and finite compositum presentations. Only comparison-equation transport remains split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for compactly supported direct image at finite, integral and rational coefficient stages",
+   "results": "Profinite.NobelingProof.πs', Profinite.NobelingProof.πs, Profinite.NobelingProof.πJ, Profinite.NobelingProof.πs'_apply_apply, Profinite.NobelingProof.coe_πs', Profinite.NobelingProof.coe_πs, Profinite.NobelingProof.πs_apply_apply, Profinite.NobelingProof.CC_comp_zero",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient-stage projection laws found. "
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSupportProjectionLaws",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient-stage projection laws found. loogle: unknown identifier 'CompactSupportProjectionLaws'"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionFormula|CompactSupportFiniteProjection.Laws",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient-stage projection laws found. "
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFormula",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Field coefficient-stage compact-support projection laws; coefficient-stage part of the original conjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionFieldStages",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionFieldStages.lean",
+  "declaration": "WeilConjectures.compactSupportProjectionFormula_fieldStages",
+  "statement": "theorem compactSupportProjectionFormula_fieldStages\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorOperationDatum D C E n hn) :\n    CompactSupportProjectionLaws S.higher.rational S.higher.rationalTensor\n      S.higher.rationalExchange (fun _ _ ↦ True) ∧\n    CompactSupportProjectionLaws S.closure.commonStage S.closure.commonStageTensor\n      S.closure.commonStageExchange (fun _ _ ↦ True) ∧\n    ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,\n      CompactSupportProjectionLaws (S.closure.coefficientStages E₀).rational\n        (S.closure.coefficientStages E₀).rationalTensor\n        (S.closure.coefficientStages E₀).rationalExchange (fun _ _ ↦ True)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T201914-L-2644369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T002539-L-97221",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

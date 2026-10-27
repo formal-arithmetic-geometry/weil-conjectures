@@ -1,0 +1,165 @@
+{
+ "id": "lem-trf-intrinsic-ordinary-local-rule",
+ "kind": "statement",
+ "title": "Finite ordinary realization of an intrinsic labeled local rule",
+ "statement": "Fix a totally ordered set $L$, a synchronized embedded resolution assignment $E$ [def-trf-labeled-embedded-resolution], and an intrinsic assignment $I$ associated to $E$ [def-trf-intrinsic-labeled-resolution]. There exists a local ordinary rule $B$ in the sense of [def-trf-labeled-ordinary-resolution-descent-data]. For every rational input $S$ [def-trf-ordinary-resolution-rule], proof that $S$ is embeddable, and permitted embedding $p$ of $S$, the ordinary tower of $B(S)$ and its increasing label embedding are exactly the ordinary tower and label embedding of $I(S)$ (using $p$ only to witness membership in the intrinsic domain). Equality here is equality of the `LabeledOrdinaryTower` data of [def-trf-labeled-ordinary-zariski-resolution-data], not just terminal-scheme isomorphism. Thus $B$ has the supplied regular centers and final scheme, coherent center ideals [pqf-def-coherent], and labeled finite-index cartesian comparisons for all smooth rational morphisms between embeddable inputs. No global descent or global smooth coherence is asserted.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+ },
+ "stmt_deps": [
+  "def-trf-intrinsic-labeled-resolution",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "pqf-def-coherent",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "The embedding predicates are equivalent: compose a permitted source isomorphism with its closed immersion, or use the identity source isomorphism for a literal embedding. Set the finite tower and labels to the corresponding projections of I.tower. Membership witnesses are proofs, so proof irrelevance identifies all such choices. Transport the cut-center coherence condition along its stage isomorphism and center_ordinary; identify scheme restriction with the equivalent ringed-space slice to obtain the coherent-center predicate. Regularity is I.tower.resolves. Empty and regular inputs have length zero by its supplied fields.",
+   "uses": [
+    "def-trf-intrinsic-labeled-resolution",
+    "def-trf-labeled-embedded-resolution",
+    "def-trf-labeled-ordinary-resolution-descent-data",
+    "def-trf-labeled-ordinary-zariski-resolution-data",
+    "pqf-def-coherent",
+    "def-trf-ordinary-resolution-rule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+   }
+  },
+  {
+   "text": "For a smooth map take I.comparison. Its retained-label clause embeds the finite source label list into the target list in order. At target level i choose the cut before target label i, and use the full cut at the final level. Count the source labels in this cut. The index-label equivalence gives both endpoint equations, the count equations before/after retained stages and constancy at a deleted stage. This includes length zero, where the level index set is a singleton.",
+   "uses": [
+    "def-trf-intrinsic-labeled-resolution",
+    "def-trf-ordinary-resolution-rule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+   }
+  },
+  {
+   "text": "Conjugate the cut natural transformation by its stage isomorphisms to obtain the finite level maps. Cartesian squares transport along these isomorphisms. The stage naturality and transformation naturality give transition naturality. Transport the equality of cut centers through center_ordinary and functorial ideal comap to obtain the retained-center equation. The retained-label predicate says exactly that the extended ideal is nonunit, giving deleted_iff_unit. Label equality follows from the survivor embedding. These fields form B, with the stated literal labeled-tower equality.",
+   "uses": [
+    "def-trf-intrinsic-labeled-resolution",
+    "def-trf-labeled-ordinary-resolution-descent-data",
+    "def-trf-labeled-ordinary-zariski-resolution-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-intrinsic-labeled-resolution",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "pqf-def-coherent",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Convert finite labeled blowup tower lower cut cartesian comparisons into ordered contraction counts and retained stages",
+   "results": "8 results, including Relation.cutExpand_le_invImage_lex, OrderedFinpartition, Matroid.contract_rankFinite, and finite order interval facts; none describes ordinary resolution comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: these results do not convert the project's fixed labeled ordinary resolution interfaces. Existing scheme, order and gluing APIs are components, not this conditional comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite labeled ordinary blowup towers indexed by lower sets admit finite retained stage and contraction count comparisons for a cartesian natural transformation preserving center ideals",
+   "results": "8 results, including ExistsHomHomCompEqCompAux.exists_index, hii′, i′, exists_eq, PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last and Ideal.exists_ltSeries_of_hasGoingDown. These concern limit diagrams and prime chains, not finite ordinary resolution comparisons.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: these results do not convert the project's fixed labeled ordinary resolution interfaces. Existing scheme, order and gluing APIs are components, not this conditional comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "IntrinsicLabeledResolutionPullback|OrdinaryZariskiResolutionRule; lower.*cut|contraction.*count in Mathlib/AlgebraicGeometry and Mathlib/Order",
+   "results": "Project search finds only the three input/output definition modules and their existing conditional existence theorems. Mathlib grep returns no relevant conversion. Blueprint search lower cut ordinary: 0 matches.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: these results do not convert the project's fixed labeled ordinary resolution interfaces. Existing scheme, order and gluing APIs are components, not this conditional comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothFunctorialOrdinaryResolution",
+  "date": "2026-10-26",
+  "group": "H9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Finite-interface assembly: Finite ordinary realization of an intrinsic labeled local rule.",
+   "via": [
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntrinsicResolutionOrdinaryLocalRule",
+  "declaration": "AlgebraicGeometry.intrinsicResolution_ordinary_localRule",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntrinsicResolutionOrdinaryLocalRule.lean",
+  "statement": "theorem intrinsicResolution_ordinary_localRule (L : Type w) [LinearOrder L] (E : SynchronizedEmbeddedResolution.{u, w} L) (I : IntrinsicResolutionOfEmbedded L E) : ∃ B : OrdinaryResolutionDescent.LocalRule.{u, w} L, (∀ (S : RationalResolutionInput.{u}) (eS : OrdinaryResolutionDescent.Embeddable S) (p : RationalResolutionEmbedding S), (⟨(B.tower S eS).tower, (B.tower S eS).labels⟩ : LabeledOrdinaryTower L S.scheme) = ⟨(I.tower ⟨S, ⟨p⟩⟩).ordinary, (I.tower ⟨S, ⟨p⟩⟩).label⟩)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T082220-L-2150309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T082220-L-2150309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

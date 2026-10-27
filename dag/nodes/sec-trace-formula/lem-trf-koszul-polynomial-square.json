@@ -1,0 +1,147 @@
+{
+ "id": "lem-trf-koszul-polynomial-square",
+ "kind": "statement",
+ "title": "Canonical derived multiplication for the polynomial Koszul square",
+ "statement": "Let R be a commutative ring and f:Fin r\\to R a Koszul-regular sequence [def-weil-pbc-koszul-regular-sequence]. Let P=ℤ[x_i] (with the universe lift), Z=P/(x_i), I=(f_i), and B=R/I. Form the square (P\\to Z)\\to (R\\to B), sending x_i to f_i and integers to their quotient classes. Its canonical derived multiplication Z\\otimes ᴸ_P R\\to B[0], defined as the adjunct of the actual square module map under [lem-trf-cotangent-flat-base-change], is invertible.",
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-koszul-derived-quotient",
+  "lem-trf-cotangent-polynomial-special-case"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08SJ (lemma-mod-regular-sequence), first paragraph: the polynomial Koszul square and derived tensor identification."
+ },
+ "proof": [
+  {
+   "text": "Construct the commutative polynomial square by evaluation and identify the zero-section quotient P/(x_i) with ℤ via evaluation at zero. Identify the mixed tensor with second argument R[0] with ordinary scalar extension by the tensor-unit isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the pointwise mixed-tensor derived functor. Transport universality of the scalar-extension counit from homotopy localization to cochains. Uniqueness of right Kan extensions identifies these two derived functors; the Koszul derived-quotient comparison then gives an isomorphism e from the derived extension of Z[0] to B[0]. This step requires no normalization of e.",
+   "uses": [
+    "lem-pc-mixed-tensor-pointwise-left-derived",
+    "lem-weil-pbc-cochain-universal-counit-transport",
+    "lem-trf-koszul-derived-quotient"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let μ be the canonical derived multiplication. Full faithfulness of the derived single functor writes e⁻¹μ as the single of an R-linear endomorphism k of B. The adjunct of e similarly comes from a P-linear map a:Z→Res(B). Naturality of the adjunction and of the restriction/single comparison gives a followed by k equal to the square module map. Evaluating at 1 yields k(a(1))=1.",
+   "uses": [
+    "lem-trf-cotangent-flat-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An R-linear endomorphism k of R/I is multiplication by k(1), since R→R/I is surjective. If k(x)=1, then x·k(1)=1; multiplication by x is its inverse. Thus k and hence μ=e∘single(k) are isomorphisms. This covers r=0, the unit ideal, and the zero ring.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-mixed-tensor-pointwise-left-derived",
+  "lem-trf-cotangent-flat-base-change",
+  "lem-trf-koszul-derived-quotient",
+  "lem-weil-pbc-cochain-universal-counit-transport"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "group": "J5",
+  "date": "2026-10-24",
+  "description": "Lean proof of the cited source argument, using the existing derived-functor interfaces and proved categorical glue.",
+  "place": "Tag 08SJ (lemma-mod-regular-sequence), first paragraph: the polynomial Koszul square and derived tensor identification."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived tensor polynomial augmentation quotient Koszul regular sequence Tor independent",
+   "results": "8 hits; top: RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_rTensor, RingTheory.Sequence.IsWeaklyRegular.isWeaklyRegular_lTensor, Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Extension.tensorCotangent. Search digest 6f90a217a6a1af2e. These results do not state the full derived-complex assertion; the relevant existing project interfaces are used instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul regular sequence quotient derived cotangent complex concentrated degree minus one",
+   "results": "8 hits; top: Algebra.Extension.H1Cotangent, Ideal.instModuleQuotientCotangent, Ideal.Cotangent, Ideal.instInhabitedCotangent, RingTheory.Sequence.isWeaklyRegular_cons_iff', RingTheory.Sequence.isRegular_cons_iff, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Algebra.Extension.Cotangent.ker_mk. Search digest 7a1b8b3afde300cc. These results do not state the full derived-complex assertion; the relevant existing project interfaces are used instead.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n Koszul|IsKoszulRegular lean/.lake/packages/mathlib/Mathlib/RingTheory",
+   "results": "Only Mathlib/RingTheory/Regular/RegularSequence.lean:21: TODO for Koszul regular sequences, H_1-regular sequences, quasi-regular sequences, depth. No derived Koszul quotient or Tor-independent square theorem.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.KoszulQuotientCotangentVanishing",
+  "date": "2026-10-24",
+  "group": "J5"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Subargument: Tag 08SJ (lemma-mod-regular-sequence), first paragraph: the polynomial Koszul square and derived tensor identification.",
+   "via": [
+    "lem-trf-koszul-quotient-cotangent-vanishing",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulPolynomialSquare",
+  "file": "lean/Sheaf/RingTheory/KoszulPolynomialSquare.lean",
+  "declaration": "Algebra.CotangentResolution.isIso_koszulPolynomialSquare",
+  "declarations": [
+   "Algebra.CotangentResolution.koszulPolynomialSquare",
+   "Algebra.CotangentResolution.isIso_koszulPolynomialSquare"
+  ],
+  "statement": "theorem isIso_koszulPolynomialSquare\n    [∀ B : CommRingCat.{u}, HasDerivedCategory.{u + 1} (ModuleCat.{u} B)]\n    (R : Type u) [CommRing R] {r : ℕ} (f : Fin r → R)\n    (hreg : RingTheory.Sequence.IsKoszulRegular f) :\n    IsIso (derivedSquareMultiplication (koszulPolynomialSquare R f))",
+  "branch": "sheaf-dag",
+  "by": "J5",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261023T231636-L-3628872",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261023T231636-L-3628872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

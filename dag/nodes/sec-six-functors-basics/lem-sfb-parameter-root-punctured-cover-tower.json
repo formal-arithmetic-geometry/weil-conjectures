@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-parameter-root-punctured-cover-tower",
+ "kind": "statement",
+ "title": "Finite etale punctured root transitions and their pro-etale limit",
+ "statement": "Let $p$ be a positive prime, $H$ a commutative ring of characteristic $p$, $t_1,\\ldots,t_r\\in H$, $r\\geq0$, and $f=\\prod_i t_i$. For $N_p=\\{n>0:(n,p)=1\\}$ put $H_n=H[x_i]/(x_i^n-t_i)$ [def-weil-pbc-mv-polynomial-ring]. For $n\\mid m$ the map $x_{i,n}\\mapsto x_{i,m}^{m/n}$ gives $H_m\\cong H_n[y_i]/(y_i^{m/n}-x_{i,n})$. These maps fix coefficients and satisfy the identity and composition laws. The algebras $H_n$ over $H$ and $H_m$ over $H_n$ are finite free of ranks $n^r$ and $(m/n)^r$ respectively, with the corresponding bounded-exponent monomial bases. After localizing at $f$ [def-weil-ring-localization-away], every level and transition map is finite etale and faithfully flat, hence surjective on spectra [def-weil-etale-morphism]. Set $H_\\infty=\\varinjlim_{n\\in N_p}H_n$. Then $H_\\infty[1/f]=\\varinjlim_n H_n[1/f]$ and $\\operatorname{Spec}H_\\infty[1/f]\\to\\operatorname{Spec}H[1/f]$ is the affine inverse limit of these finite levels and a pro-etale covering [def-weil-pbc-proetale-site]. No Noetherian hypothesis is imposed on $H$; for $r=0$ or $n=1$ the appropriate level or transition is the identity. Zero localizations are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "00UB, 00UC (monic standard-etale presentations); 090N (lemma-colimit-faithfully-flat); ILO IX Proposition 2.1, p.133, power refinements; agent computation of transition presentations and affine covering condition."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-free-module",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-sfb-strict-local-kummer-tame-module"
+ ],
+ "proof": [
+  {
+   "text": "Use the explicit finite root algebra API: transition maps are the power substitutions, they satisfy identity and composition, the monomial bases have the required product formulas, and refinement is the explicitly constructed iterated quotient equivalence with its transported basis.",
+   "uses": [
+    "lem-sfb-simultaneous-root-algebra-api"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the actual compatible-root quotient inclusions and its ring colimit universal property. Localize the inclusions and transitions using their constructed lifts; compatibility and structural-map identities follow from the localized-map API. The localized ring colimit property follows by inverting the common coefficient in the original universal property.",
+   "uses": [
+    "lem-sfb-compatible-root-quotient-colimit",
+    "lem-sfb-localization-presented-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each prime-to-p order is invertible in a characteristic-p ring by invertibleOfCoprime. Apply the localized root API to each level and refinement. Convert the resulting ring-map finiteness and etaleness to the affine scheme properties. Faithful flatness implies spectrum surjectivity.",
+   "uses": [
+    "lem-sfb-simultaneous-root-localization-api",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the divisibility wrapper and its universe lift to get a small nonempty directed diagram. Apply the presented-colimit geometry API to the localized universal property and faithfully flat etale level maps. This gives faithful flatness and ind-etaleness of the full structural map and the unique factorization for every test scheme. Surjectivity follows from faithful flatness.",
+   "uses": [
+    "lem-sfb-compatible-root-quotient-colimit",
+    "lem-sfb-presented-ring-colimit-geometry",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert ind-etaleness of the full algebra to weak etaleness of its spectrum map by the etale comparison. The affine spectrum morphism is quasi-compact; together with surjectivity and weak etaleness Scheme.Hom.singleton_mem_propQCPrecoverage gives exactly the singleton pro-etale covering. The one-level evaluation equivalence and empty-variable equivalences give the two final boundary clauses. Every construction allows zero rings and nilpotent denominators.",
+   "uses": [
+    "det-pe-morphisms-etale-comparison",
+    "def-weil-pbc-proetale-covering",
+    "lem-sfb-simultaneous-root-algebra-api",
+    "lem-sfb-compatible-root-quotient-colimit"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-simultaneous-root-algebra-api",
+  "lem-sfb-compatible-root-quotient-colimit",
+  "lem-sfb-localization-presented-colimit",
+  "lem-sfb-simultaneous-root-localization-api",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-sfb-presented-ring-colimit-geometry",
+  "det-pe-morphisms-etale-comparison",
+  "def-weil-pbc-proetale-covering"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit finite monic-division and localization constructions, followed by the adopted source filtered-colimit API (090N), spectrum preservation of limits (01YW), and Bhatt--Scholze 4.1.1/4.2.1. The original eleven-step route is retained, with transition etaleness obtained by restriction of scalars between etale levels."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous parameter root algebras have finite etale surjective power transitions after inverting the parameters and pro etale inverse limit cover",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardEtale.of_surjective\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ (R : Type u_4) (S : Type u_5) (T : Type u_6) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [Algebra.IsStandardEtale R S] [Algebra.Etale R T] (f : S →ₐ[R] T),\\n  Function.Surjective ⇑f → Algebra.IsStandardEtale R T\", \"doc\": \"If $ S $ is a standard étale $ R $-algebra, $ T $ is an étale $ R $-algebra, and there exists a surjective $ R $-algebra homomorphism $ f : S \\to T $, then $ T $ is also a standard étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and composition do not state the simultaneous power-transition tower and its faithfully-flat pro-etale limit cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime to characteristic Kummer root tower of units is faithfully flat ind etale with finite free transition presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.Etale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.Etale R A]\\n  [Algebra.Etale A B], Algebra.Etale R B\", \"doc\": \"Let $ R $, $ A $, and $ B $ be commutative rings. If $ R \\to A $ and $ A \\to B $ are étale algebras and the scalar actions satisfy the tower condition $ R \\to A \\to B $, then the composite algebra $ R \\to \"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [IsScalarTower R A B] (p : Ideal A) (P : Ideal B)\\n  [P.LiesOver p] [inst_8 : p.IsPrime] [inst_9 : P.IsPrime] [Algebra.\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S}, f.Etale → Algebra.Etale R S\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"Algebra.FormallyEtale.comp\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [inst_5 : Algebra A B] [IsScalarTower R A B] [Algebra.FormallyEtale R A]\\n  [Algebra.FormallyEtale A B], Algebra.FormallyEtale R B\", \"doc\": \"If $ A $ is a formally étale algebra over a commutative ring $ R $, and $ B $ is a formally étale algebra over $ A $, then $ B $ is a formally étale algebra over $ R $.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and composition do not state the simultaneous power-transition tower and its faithfully-flat pro-etale limit cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Simultaneous parameter root algebras have finite etale surjective power transitions after inverting the parameters and pro etale inverse limit cover",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Function.Surjective ⇑(algebraMap R S) → (Algebra.FormallyEtale R S ↔ IsIdempotentElem (RingHom.ker (algebraMap R S)))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a surjective algebra homomorphism $ R \\\\to S $. Then $ S $ is formally étale over $ R $ if and only if the kernel of this homomorphism is an idempotent ide\"}\n  {\"name\": \"Algebra.Etale.recOn\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.Etale R A → Sort u_1} →\\n            (t : Algebra.Etale R A) →\\n              ((formallyEtale : Algebra.FormallyEtale R A) →\\n                  (finitePre\", \"doc\": \"Given commutative rings $ R $ and $ A $ with an $ R $-algebra structure on $ A $, this recursor allows defining functions on the property that $ A $ is étale over $ R $ by specifying their behavior on\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyEtale R A ↔ FormallyEtale R B\", \"doc\": \"Given an algebra isomorphism $ e : A \\\\simeq_R B $, the algebra $ A $ is formally étale over $ R $ if and only if $ B $ is formally étale over $ R $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and composition do not state the simultaneous power-transition tower and its faithfully-flat pro-etale limit cover"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and composition do not state the simultaneous power-transition tower and its faithfully-flat pro-etale limit cover"
+  },
+  {
+   "tool": "grep",
+   "query": "(root|[Rr]oot).*(pro[Ee]tale|[Ff]aithfully[Ff]lat)|(pro[Ee]tale|[Ff]aithfully[Ff]lat).*(root|[Rr]oot)",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"line\": \"573\", \"text\": \"theorem _root_.IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat (hf : IsBaseChange S f)\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: standard-etale presentations and composition do not state the simultaneous power-transition tower and its faithfully-flat pro-etale limit cover"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prime to characteristic simultaneous root tower after inverting the parameters has finite free etale faithfully flat transitions and pro etale covering inverse limit",
+   "results": "Logged OK; 8 hits: Algebra.IsEtaleAt.comp, PreTilt.instPerfectRing, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Perfection.perfectRing, Algebra.FormallyEtale.instForallOfFinite, BDeRhamPlus, perfectClosure",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits supply standard-etale, composition or localization ingredients, not simultaneous divisibility transition presentations, monomial bases and the faithfully flat covering limit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdjoinRoot\", \"Etale\"",
+   "results": "Logged OK; 1 hits: StandardEtalePair.equivAwayAdjoinRoot",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits supply standard-etale, composition or localization ingredients, not simultaneous divisibility transition presentations, monomial bases and the faithfully flat covering limit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous parameter root algebras with prime to characteristic exponents form finite free etale surjective transition towers after localization and a pro etale inverse limit cover",
+   "results": "Logged OK; 8 hits: StandardEtalePresentation, RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_of_isEtaleAt, Algebra.IsStandardEtale.of_surjective, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, StandardEtalePair.instEtaleRing",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits supply standard-etale, composition or localization ingredients, not simultaneous divisibility transition presentations, monomial bases and the faithfully flat covering limit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer tower of roots of several units indexed by divisibility finite free transition maps faithfully flat ind etale limit",
+   "results": "Logged OK; 8 hits: StandardEtalePair, StandardEtalePresentation, Algebra.IsStandardEtale, Algebra.Etale, Algebra.Etale.exists_subalgebra_fg, StandardEtalePair.instEtaleRing, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: the hits supply standard-etale, composition or localization ingredients, not simultaneous divisibility transition presentations, monomial bases and the faithfully flat covering limit"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-universal-residual-charts",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image in det-thm-sf-ctf-stability-direct-images.proof.md; extracted SNC tame-boundary subargument, specifically the finite punctured parameter-root levels, divisibility transitions, and covering inverse limit (parent extraction steps 14--16).",
+   "via": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-parameter-root-punctured-cover-tower",
+  "worker": "stage1",
+  "summary": "Split into explicit transition maps and inverse presentations, iterated monic-division bases, localized fraction presentations, coordinatewise faithful flatness, successive unit-binomial etale covers, localization-colimit inverse maps, and the affine ind-etale faithfully flat covering limit. Reused existing nodes throughout; no new nodes. Retained the statement and its sources, clarified all identity boundary cases in the proof, and added missing notion dependencies. Read every cited statement and provided verbatim citations.",
+  "blueprint": "Realizes Paragraph (3) of det-thm-sf-ctf-stability-direct-images.proof.md through the extracted open-image SNC tame-boundary root tower; parent lem-sfb-snc-universal-residual-charts, extraction steps 14--16. Blueprint ancestor tool returns None for the inherited created.item chain, so preserved the existing null ancestor and via chain and filled its exact source place. Whole-blueprint searches found no equivalent imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "General monic-division power basis used over arbitrary rings; the unit has no replacement for this elementary algebra tool."
+   },
+   {
+    "node": "lem-sfb-unit-binomial-finite-etale",
+    "why": "General unit-binomial etale covering theorem used one variable at a time; no change to the SNC tame-root route."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-composition",
+    "why": "Generic composition of singleton surjective etale coverings to assemble the independent root adjunctions."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic algebraic faithful-flatness criterion gives the precise surjectivity implication at finite levels and at the colimit."
+   },
+   {
+    "node": "lem-weil-pbc-directed-colimit-faithfully-flat-algebras",
+    "why": "General fixed-base directed-colimit theorem supplies faithful flatness of the infinite affine cover without a Noetherian hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-spec-small-colimit-limit",
+    "why": "Generic affine spectrum/colimit theorem identifies the actual inverse-limit cone in schemes."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Clause 2 supplies weak etaleness of an ind-etale affine map, needed for the pro-etale covering definition."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affine-morphism lemma provides an affine preimage of every affine open for the fpqc covering condition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "det-pe-morphisms-etale-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-553f47b24",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-553f47b24 (reviewer sub-agent of L); spot-checked: First split of a node created by the parent's 2026-10-22 re-split (live unsplit, no repair note of its own, not on the side-live drop list; the citer snc-universal-residual-charts is live). The statement is byte-identical to live; the added stmt_deps are only definition nodes. I read all 11 steps against every cited statement. Steps 1-2 (Bezout units, transition presentations) hold. Step 3 builds the multivariable basis from monic-quotient-free (AdjoinRoot.powerBasis') by a written-out induction. Step 4 identifies localized quotients and shows the adjoined elements are units (t_i^{-1}=prod_{j!=i}t_j/f). Step 5 gets faithful flatness from B⊗M≅M^E with E finite and nonempty. Step 6 gets finite étale surjective maps from unit-binomial-finite-etale (hypotheses n≥1 a unit and u a unit, both checked), etale-covering-composition and the finite criterion of def-weil-finite-integral-morphism. Step 8 writes inverse maps C[1/f]≅colim H_n[1/f]. Step 9 uses Stacks 090N (algebra.tex l.9286; hypotheses of a fixed base and nonempty directed index checked) and spec-small-colimit-limit. Step 10 proves the covering: ind-étale ⇒ weakly étale (pe-morphisms clause 2), then affine preimage plus surjectivity gives the fpqc condition. Tested r=0, n=1, m=n, f nilpotent, H=0, H=F_p with t=1, and nonreduced H; all hold. The duplicate search with rg -L found only more special nodes (labelled-root-algebra-geometry over regular B, root-tower-profinite-base-change, compatible-kummer-tower-cech) and none states the covering clause. Stacks tags 00UB/00UC/090N/00HQ/03PL/01YW/022B/01SH match their labels; no SGA. I accept the tool_uses: directed-colimit-ff and det-pe-morphisms-etale-comparison are generic; the others are Mathlib leaves or in the same unit. Maintainer note: the proof is 7.9k characters with no new nodes; no rule caps a first split, but a later re-split order may target it. citations.json is named in the report but is not in the commit; this is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ParameterRootPuncturedCoverTower",
+  "declaration": "AlgebraicGeometry.parameterRoot_punctured_cover_tower",
+  "declarations": [
+   "AlgebraicGeometry.ParameterRootTower.puncturedLevel",
+   "AlgebraicGeometry.ParameterRootTower.puncturedFull",
+   "AlgebraicGeometry.ParameterRootTower.levelMap",
+   "AlgebraicGeometry.ParameterRootTower.fullMap",
+   "AlgebraicGeometry.parameterRoot_punctured_cover_tower"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ParameterRootPuncturedCoverTower.lean",
+  "statement": "theorem parameterRoot_punctured_cover_tower (p : ℕ) (hp : p.Prime) (H : Type u) [CommRing H] [CharP H p] (r : ℕ) (t : Fin r → H) : ∃ (transition : ∀ (n m : TameRootOrder p), n.val ∣ m.val → (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i)))) →ₐ[H] (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ m.val - MvPolynomial.C (t i))))) (inclusion : ∀ n : TameRootOrder p, (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i)))) →ₐ[H] tameRootAlgebra p t) (localizedTransition : ∀ (n m : TameRootOrder p), n.val ∣ m.val → puncturedLevel t n.val →+* puncturedLevel t m.val) (localizedInclusion : ∀ n : TameRootOrder p, puncturedLevel t n.val →+* puncturedFull p t), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val) (i : Fin r), transition n m h (Ideal.Quotient.mk _ (MvPolynomial.X i)) = Ideal.Quotient.mk _ (MvPolynomial.X i) ^ (m.val / n.val)) ∧ (∀ n, transition n n (dvd_refl n.val) = AlgHom.id H _) ∧ (∀ (n m l : TameRootOrder p) (h : n.val ∣ m.val) (h' : m.val ∣ l.val), (transition m l h').comp (transition n m h) = transition n l (h.trans h')) ∧ (∀ n : TameRootOrder p, ∃ b : Module.Basis (Fin r → Fin n.val) H ((MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i))))), ∀ e, b e = ∏ i, Ideal.Quotient.mk _ (MvPolynomial.X i) ^ (e i).val) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (∃ e : (MvPolynomial (Fin r) ((MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i))))) ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ (m.val / n.val) - MvPolynomial.C (Ideal.Quotient.mk _ (MvPolynomial.X i))))) ≃+* (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ m.val - MvPolynomial.C (t i)))), (∀ a : (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i)))), e (algebraMap _ _ a) = transition n m h a) ∧ ∀ i : Fin r, e (Ideal.Quotient.mk _ (MvPolynomial.X i)) = Ideal.Quotient.mk _ (MvPolynomial.X i)) ∧ (∃ b : @Module.Basis (Fin r → Fin (m.val / n.val)) ((MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i))))) ((MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ m.val - MvPolynomial.C (t i))))) _ _ (@Algebra.toModule _ _ _ _ (transition n m h).toRingHom.toAlgebra), ∀ e, b e = ∏ i, Ideal.Quotient.mk _ (MvPolynomial.X i) ^ (e i).val)) ∧ (∀ (n : TameRootOrder p) (i : Fin r), inclusion n (Ideal.Quotient.mk _ (MvPolynomial.X i)) = Ideal.Quotient.mk _ (MvPolynomial.X (i, n))) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (inclusion m).comp (transition n m h) = inclusion n) ∧ (∀ (Q : Type u) [CommRing Q] (a : ∀ n : TameRootOrder p, (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i)))) →+* Q), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (a m).comp (transition n m h).toRingHom = a n) → ∃! g : tameRootAlgebra p t →+* Q, ∀ n, g.comp (inclusion n).toRingHom = a n) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val) (a : (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i))))), localizedTransition n m h (algebraMap _ _ a) = algebraMap _ _ (transition n m h a)) ∧ (∀ n : TameRootOrder p, RingHom.FaithfullyFlat (levelMap t n.val) ∧ IsFinite (Spec.map (CommRingCat.ofHom (levelMap t n.val))) ∧ Etale (Spec.map (CommRingCat.ofHom (levelMap t n.val))) ∧ Surjective (Spec.map (CommRingCat.ofHom (levelMap t n.val)))) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), RingHom.FaithfullyFlat (localizedTransition n m h) ∧ IsFinite (Spec.map (CommRingCat.ofHom (localizedTransition n m h))) ∧ Etale (Spec.map (CommRingCat.ofHom (localizedTransition n m h))) ∧ Surjective (Spec.map (CommRingCat.ofHom (localizedTransition n m h)))) ∧ (∀ (n : TameRootOrder p) (a : (MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i))))), localizedInclusion n (algebraMap _ _ a) = algebraMap _ _ (inclusion n a)) ∧ (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (localizedInclusion m).comp (localizedTransition n m h) = localizedInclusion n) ∧ (∀ n, (localizedInclusion n).comp (levelMap t n.val) = fullMap p t) ∧ (∀ (Q : Type u) [CommRing Q] (a : ∀ n : TameRootOrder p, puncturedLevel t n.val →+* Q), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), (a m).comp (localizedTransition n m h) = a n) → ∃! g : puncturedFull p t →+* Q, ∀ n, g.comp (localizedInclusion n) = a n) ∧ (∀ (Z : Scheme.{u}) (a : ∀ n : TameRootOrder p, Z ⟶ Spec (.of (puncturedLevel t n.val))), (∀ (n m : TameRootOrder p) (h : n.val ∣ m.val), a m ≫ Spec.map (CommRingCat.ofHom (localizedTransition n m h)) = a n) → ∃! g : Z ⟶ Spec (.of (puncturedFull p t)), ∀ n, g ≫ Spec.map (CommRingCat.ofHom (localizedInclusion n)) = a n) ∧ RingHom.FaithfullyFlat (fullMap p t) ∧ Surjective (Spec.map (CommRingCat.ofHom (fullMap p t))) ∧ Presieve.singleton (Spec.map (CommRingCat.ofHom (fullMap p t))) ∈ Scheme.proetalePrecoverage (Spec (.of (Localization.Away (∏ i, t i)))) ∧ Function.Bijective (algebraMap H ((MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ 1 - MvPolynomial.C (t i)))))) ∧ (r = 0 → (∀ n : TameRootOrder p, Function.Bijective (algebraMap H ((MvPolynomial (Fin r) H ⧸ Ideal.span (Set.range (fun i : Fin r ↦ MvPolynomial.X i ^ n.val - MvPolynomial.C (t i))))))) ∧ Function.Bijective (algebraMap H (tameRootAlgebra p t)))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Finite root quotients are inlined using the recorded MvPolynomial and Ideal.Quotient APIs, without a theorem statement dependency. The full compatible-root quotient is reused. All transition, colimit and spectrum-limit maps retain their generator equations and universal properties; no data is chosen from the postponed proof."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-18f56f237",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 2edac24b27b0. The repair is the inlining route the return allowed: strictLocalParameterRootRing is replaced everywhere by its literal body (identical to StrictLocalPrimeToPKummerSplitting.lean:57), and the theorem stmt_dep lem-sfb-strict-local-prime-to-p-kummer-splitting and its import are dropped. Snapshot diff shows no other change to module or node besides the regenerated lean record. Independent clause check: H-algebra transitions X_i to X_i^(m/n) with identity/composition laws; H_m ≅ H_n[y]/(y^(m/n)−x_n) RingEquiv; monomial bases of ranks n^r and (m/n)^r (second basis via the transition algebra); localized levels and transitions FaithfullyFlat/IsFinite/Etale/Surjective; tameRootAlgebra colimit ∃! over Q : Type u; localization commutes with the colimit; Spec limit ∃! for every Scheme.{u}; singleton in Scheme.proetalePrecoverage (WeaklyEtale plus qc condition). Edge cases n=1, m=n, r=0, nilpotent f and H=0 (excluded by CharP) covered. Helpers are real definitions with docstrings; one sorry; lean.statement verbatim (script check); all stmt_deps are definition nodes; plain proof imports exist in side-live; live node has no lean record, so not superseded. No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261023T134724-L-2738742",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

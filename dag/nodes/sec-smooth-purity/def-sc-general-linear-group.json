@@ -219,7 +219,18 @@
  "uses_not_cited": [
   "def-sc-group-scheme-subgroup"
  ],
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-an",
  "blueprint_update": {
@@ -251,5 +262,49 @@
   "group": "Q160",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-880ac2c1e (reviewer sub-agent of L); spot-checked: I read the item in full: statement and all 8 steps. I also read the current main-20261015 blueprint statement and proof, the old master import, Stacks 022W (groupoids.tex l.485) and 01QO (morphisms.tex l.58-81), and the full statement of every cited node. The delivery has no new nodes and the statement keeps every clause and hypothesis of the current blueprint (field k, c>=1, all commutative k-algebras R). The antipode (-1)^{i+j}M_ji/D is correct. The old master adjugate (M_kl) is false: for [[1,2],[3,4]] the product is [[8,5],[20,13]], not -2I, and the delivery follows the corrected current blueprint. Steps 1-4, 6 and 8 are correct: Cauchy-Binet in the square case with the row/column Leibniz reindexing, both adjugate identities, the polynomial and localization (00CP) universal properties for points over all R, m*/eps/i* built in A⊗A, det to G_m checked on t, and the det-1 subgroup condition. Edge cases checked: c=1, c=2, characteristic 2, dual numbers, the zero ring. Duplicate search: sk-d-geometry only mentions GL in a survey with no coordinate maps, SL or det, so it is not a duplicate. Off-unit dependencies are Mathlib leaves or the Lean-closed Cauchy-Binet; no tool_uses are needed. FIX (two missing citations): Step 7 derived 'Spec q is a closed immersion' from def-weil-closed-immersion, but that node's affine form 01QO(2) needs every affine open. I now cite the existing Mathlib leaf lem-weil-pbc-closed-immersion-affine-cover-criterion(2) with the single-open cover. Step 5 also needed lem-weil-pbc-fibre-product-affine-spectra to turn the coordinate identities into scheme diagrams on G×G and G×G×G. proof_deps is recomputed. The statement is unchanged and no nodes are dropped. Corrected file: fixes/dag/nodes/sec-smooth-purity/def-sc-general-linear-group.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LinearGroupSchemes",
+  "declaration": "AlgebraicGeometry.LinearGroupSchemes.specialLinear",
+  "declarations": [
+   "AlgebraicGeometry.LinearGroupSchemes.Index",
+   "AlgebraicGeometry.LinearGroupSchemes.specialIdeal",
+   "AlgebraicGeometry.LinearGroupSchemes.SpecialAlgebra",
+   "AlgebraicGeometry.LinearGroupSchemes.specialMatrix",
+   "AlgebraicGeometry.LinearGroupSchemes.specialLinear",
+   "AlgebraicGeometry.LinearGroupSchemes.specialRelations",
+   "AlgebraicGeometry.LinearGroupSchemes.specialComul",
+   "AlgebraicGeometry.LinearGroupSchemes.specialCounit",
+   "AlgebraicGeometry.LinearGroupSchemes.specialAntipode",
+   "AlgebraicGeometry.LinearGroupSchemes.specialGroup_existsUnique",
+   "AlgebraicGeometry.LinearGroupSchemes.specialGroup",
+   "AlgebraicGeometry.LinearGroupSchemes.specialDet_isUnit",
+   "AlgebraicGeometry.LinearGroupSchemes.specialQuotient",
+   "AlgebraicGeometry.LinearGroupSchemes.inclusion",
+   "AlgebraicGeometry.LinearGroupSchemes.inclusion_specification",
+   "AlgebraicGeometry.LinearGroupSchemes.determinant_commutes",
+   "AlgebraicGeometry.LinearGroupSchemes.determinantCoordinates",
+   "AlgebraicGeometry.LinearGroupSchemes.determinant",
+   "AlgebraicGeometry.LinearGroupSchemes.determinant_specification",
+   "AlgebraicGeometry.LinearGroupSchemes.generalAntipode_minor",
+   "AlgebraicGeometry.LinearGroupSchemes.specialPoints_existsUnique",
+   "AlgebraicGeometry.LinearGroupSchemes.specialPoints",
+   "AlgebraicGeometry.LinearGroupSchemes.specialPoints_natural"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LinearGroupSchemes.lean",
+  "statement": "def specialLinear : Over (Spec (.of k))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing upstream GeneralLinearGroup and its coordinate Hopf algebra, coordinate maps and natural homMulEquiv without duplicating GL. The new declarations construct the special-linear polynomial quotient, its actual coordinate maps, quotient inclusion and Laurent determinant morphism, and state their group, minor and natural-point properties. Index c is ULift (Fin c) for the upstream common universe. Definitions also extend canonically to c=0; the node concerns c>=1. Chosen group and point data are fixed by unique-existence statements, not arbitrary existence."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1afc7fdd8",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Read item, all 12 stmt_dep records, the delivered LinearGroupSchemes.lean, and upstream GeneralLinear/HopfAlgebra GL, GroupScheme.Defs and StandardGroupSchemes sources. GL reuses upstream (CoordinateRing = Away det, Hopf comul/counit/antipode, homMulEquiv + naturality); generalAntipode_minor matches Mathlib adjugate_fin_succ_eq_det_submatrix (row j.succAbove, col i.succAbove, sign invariant under 0-based shift, d=0 empty minor). SL = Spec MvPolynomial/(det-1) with real liftₐ comul/counit/antipode (relations true: det(X_L X_R)=1, det 1=1, det adj = det^(c-1)=1), group pinned by ∃! as in landed roots/alpha; inclusion = Spec of localization lift, IsClosedSubgroupScheme + surjective + invSelf↦1 + coord↦residue; SL points ≃* SpecialLinearGroup pinned via toGL (unique) and natural; det = Laurent eval at det genericUnit into recorded multiplicative k, IsMonHom and T↦D. Edge cases c=0,1,2, char 2, zero/nonreduced R; R : Type u forced by Over(Spec k); ULift index canonical. No SL/det-scheme duplicate in Sheaf/WeilConjectures; docstrings with source+blueprint; all 9 theorems sorry; lean.statement verbatim; no dep or statement changes. No fixes, no compile needed."
  }
 }

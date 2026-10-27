@@ -1,0 +1,210 @@
+{
+ "id": "lem-sfb-semisimple-lie-surjective-image",
+ "kind": "statement",
+ "title": "Surjective images of semisimple Lie algebras in characteristic zero",
+ "statement": "Let $F$ be a field of characteristic zero [def-weil-field], let $L,H$ be finite-dimensional $F$-Lie algebras [def-wf-lie-algebra], and let $q:L\\to H$ be a surjective linear map satisfying $q([x,y])=[q(x),q(y)]$. If $L$ has no nonzero solvable Lie ideal, then $H$ has no nonzero solvable Lie ideal; thus semisimplicity in the sense of [def-wf-semisimple-lie-algebra] descends under surjective Lie homomorphisms.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.475, final paragraph: for a representation with kernel ideal a, the Killing-form decomposition g=a⊕b has both summands semisimple. Apply the same ideal decomposition to ker(q)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-wf-lie-algebra",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Put $I=\\ker q$. It is an ideal: if $i\\in I$ and $x\\in L$, then $q([x,i])=[q(x),0]=0$. Apply [lem-sfb-semisimple-lie-ideal-complement] to $L$ and $I$, obtaining an ideal $J$ with $I\\cap J=0$ and $I+J=L$. The field has characteristic zero, $L$ is finite-dimensional, and the hypothesis on its solvable ideals is exactly the semisimplicity required there.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "lem-sfb-semisimple-lie-ideal-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475 (PDF p.487), final paragraph under The Casimir operator: the kernel ideal has a complementary ideal, obtained using the Killing form; characteristic-zero and finite-dimensional hypotheses at the start of §22c."
+   }
+  },
+  {
+   "text": "The restriction $q_J:J\\to H$ is injective since its kernel is $I\\cap J=0$. It is surjective: for $h=q(x)$, write $x=i+j$ with $i\\in I,j\\in J$; then $h=q(j)$. Also $[I,J]=0$: a bracket $[i,j]$ lies in $J$ because $J$ is an ideal and in $I$ because $I$ is an ideal and the bracket is skew-symmetric, hence lies in $I\\cap J$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475 (PDF p.487), final paragraph under The Casimir operator: the kernel ideal has a complementary ideal, obtained using the Killing form; characteristic-zero and finite-dimensional hypotheses at the start of §22c."
+   }
+  },
+  {
+   "text": "Let $A\\subseteq H$ be a solvable ideal and put $B=\\{j\\in J:q(j)\\in A\\}$. This is a subspace and is an ideal of $L$: for $x=i+j\\in I+J$ and $b\\in B$, one has $[x,b]=[j,b]\\in J$ and $q([j,b])=[q(j),q(b)]\\in A$. Thus $[x,b]\\in B$.",
+   "uses": [
+    "def-wf-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475 (PDF p.487), final paragraph under The Casimir operator: the kernel ideal has a complementary ideal, obtained using the Killing form; characteristic-zero and finite-dimensional hypotheses at the start of §22c."
+   }
+  },
+  {
+   "text": "Choose $n$ with $D^nA=0$. Inductively $q(D^rB)\\subseteq D^rA$: at $r=0$ this is the definition of $B$; the successor follows by mapping each bracket generator, using $q([u,v])=[q(u),q(v)]$ and linearity on their span. Hence $q(D^nB)=0$. Since $D^nB\\subseteq B\\subseteq J$ and $q_J$ is injective, $D^nB=0$. Thus $B$ is a solvable ideal of $L$, so $B=0$ by hypothesis. For $a\\in A$, surjectivity of $q_J$ gives $j\\in J$ with $q(j)=a$; this $j$ belongs to $B=0$, giving $a=0$. Every solvable ideal of $H$ is zero, which is its semisimplicity.",
+   "uses": [
+    "def-wf-lie-algebra",
+    "def-wf-semisimple-lie-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "§22c, printed p.475 (PDF p.487), final paragraph under The Casimir operator: the kernel ideal has a complementary ideal, obtained using the Killing form; characteristic-zero and finite-dimensional hypotheses at the start of §22c."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-wf-lie-algebra",
+  "lem-sfb-semisimple-lie-ideal-complement",
+  "def-wf-semisimple-lie-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "§22c, printed p.475 (PDF p.487), final paragraph under The Casimir operator: the kernel ideal has a complementary ideal, obtained using the Killing form; characteristic-zero and finite-dimensional hypotheses at the start of §22c."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of finite dimensional Lie algebras sends a semisimple Lie algebra to a semisimple Lie algebra in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Function.Surjective.isEngelian\", \"module\": \"Mathlib/Algebra/Lie/Engel\", \"type\": \"∀ {R : Type u₁} {L : Type u₂} {L₂ : Type u₃} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L₂] [inst_4 : LieAlgebra R L₂] {f : L →ₗ⁅R⁆ L₂},\\n  Function.Surjective ⇑f → LieAlgebra.IsEngelian R L → LieAlgebra.IsEngelian R L₂\", \"doc\": \"If $ f: L \\\\to L_2 $ is a surjective Lie algebra homomorphism over a commutative ring $ R $, and $ L $ is an Engelian Lie algebra, then $ L_2 $ is also an Engelian Lie algebra.\"}\n  {\"name\": \"IsSemisimpleModule.of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} [inst : Ring R] {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {N : Type u_5}\\n  [inst_3 : AddCommGroup N] [inst_4 : Module R N] [IsSemisimpleModule R M] (f : M →ₗ[R] N),\\n  Function.Surjective ⇑f → IsSemisimpleModule R N\", \"doc\": \"If $ M $ is a semisimple module over a ring $ R $ and there exists a surjective linear map $ f : M \\\\to N $, then $ N $ is also a semisimple module over $ R $.\"}\n  {\"name\": \"Function.Surjective.lieAlgebra_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w₁} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] {f : L' →ₗ⁅R⁆ L} [hL' : LieAlgebra.IsSolvable L'],\\n  Function.Surjective ⇑f → LieAlgebra.IsSolvable L\", \"doc\": \"Let $ L $ and $ L' $ be Lie algebras over a commutative ring $ R $. If there exists a surjective Lie algebra homomorphism $ f : L \\to L' $ and $ L' $ is solvable, then $ L $ is solvable.\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"Function.Surjective.lieAlgebra_isNilpotent\", \"module\": \"Mathlib/Algebra/Lie/Nilpotent\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] [h₁ : LieRing.IsNilpotent L] {f : L →ₗ⁅R⁆ L'},\\n  Function.Surjective ⇑f → LieRing.IsNilpotent L'\", \"doc\": \"If $ L $ is a nilpotent Lie algebra over a commutative ring $ R $ and there exists a surjective Lie algebra homomorphism $ f : L \\\\to L' $, then $ L' $ is also nilpotent.\"}\n  {\"name\": \"Function.Surjective.isLieAbelian\", \"module\": \"Mathlib/Algebra/Lie/Abelian\", \"type\": \"∀ {R : Type u} {L₁ : Type v} {L₂ : Type w} [inst : CommRing R] [inst_1 : LieRing L₁] [inst_2 : LieRing L₂]\\n  [inst_3 : LieAlgebra R L₁] [inst_4 : LieAlgebra R L₂] {f : L₁ →ₗ⁅R⁆ L₂},\\n  Function.Surjective ⇑f → IsLieAbelian L₁ → IsLieAbelian L₂\", \"doc\": \"Let $ R $ be a commutative ring, and let $ L_1 $ and $ L_2 $ be Lie algebras over $ R $. If $ f : L_1 \\\\to L_2 $ is a surjective Lie algebra homomorphism and $ L_1 $ is abelian (i.e., $[x, y] = 0$ for \"}\n  {\"name\": \"RingHom.isSemisimpleRing_of_surjective\", \"module\": \"Mathlib/RingTheory/SimpleModule/Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S),\\n  Function.Surjective ⇑f → ∀ [IsSemisimpleRing R], IsSemisimpleRing S\", \"doc\": \"If $ R $ is a semisimple ring and $ f : R \\\\to S $ is a surjective ring homomorphism, then $ S $ is also a semisimple ring.\"}\n  {\"name\": \"LieAlgebra.IsKilling.isSemisimple_ad_of_mem_isCartanSubalgebra\", \"module\": \"Mathlib/Algebra/Lie/Weights/Killing\", \"type\": \"∀ {K : Type u_2} {L : Type u_3} [inst : LieRing L] [inst_1 : Field K] [inst_2 : LieAlgebra K L] [FiniteDimensional K L]\\n  {H : LieSubalgebra K L} [H.IsCartanSubalgebra] [LieAlgebra.IsKilling K L] [LieModule.IsTriangularizable K (↥H) L]\\n  [PerfectField K] {x : L}, x ∈ H → ((LieAlgebra.ad K L) x).IsSe\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ with non-degenerate Killing form, if $\\\\mathfrak{h}$ is a Cartan subalgebra of $\\\\mathfrak{g}$ and $x \\\\in \\\\mathfrak{h}$, then the adjoint end\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: solvability descends under Lie surjections and semisimple associative modules descend under surjections, but neither states preservation of zero Lie radical"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LieAlgebra\", \"quotient\", \"Semisimple\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: solvability descends under Lie surjections and semisimple associative modules descend under surjections, but neither states preservation of zero Lie radical"
+  },
+  {
+   "tool": "grep",
+   "query": "semisimple|trivialRadical|trivial_radical",
+   "results": "[grep] OK 0 hit(s); read Mathlib/Algebra/Lie/Quotient.lean (correct file path; quotient Lie structures, no semisimplicity theorem).",
+   "date": "2026-10-23",
+   "verdict": "no match: solvability descends under Lie surjections and semisimple associative modules descend under surjections, but neither states preservation of zero Lie radical"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quotient of a finite dimensional semisimple Lie algebra by any ideal is semisimple over a field of characteristic zero",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSemisimpleModule.quotient\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \": IsSemisimpleModule R (M ⧸ m)\", \"doc\": \"For any ring $ R $, module $ M $ over $ R $, and submodule $ m $ of $ M $, if $ M $ is a semisimple module (i.e., a direct sum of simple submodules), then the quotient module $ M/m $ is also semisimpl\"}\n  {\"name\": \"LieSubmodule.Quotient.lieQuotientLieRing\", \"module\": \"Mathlib.Algebra.Lie.Quotient\", \"type\": \": LieRing (L ⧸ I)\", \"doc\": \"For any Lie algebra $ L $ over a commutative ring $ R $ and any Lie ideal $ I $ of $ L $, the quotient $ L/I $ inherits a canonical Lie algebra structure over $ R $. The Lie bracket on the quotient is\"}\n  {\"name\": \"LieSubmodule.Quotient.lieQuotientLieAlgebra\", \"module\": \"Mathlib.Algebra.Lie.Quotient\", \"type\": \": LieAlgebra R (L ⧸ I)\", \"doc\": \"For any Lie algebra $ L $ over a commutative ring $ R $ and any Lie ideal $ I $ of $ L $, the quotient $ L/I $ inherits a canonical Lie algebra structure over $ R $. The Lie bracket on the quotient is\"}\n  {\"name\": \"LieSubmodule.Quotient.lieQuotientHasBracket\", \"module\": \"Mathlib.Algebra.Lie.Quotient\", \"type\": \": Bracket (L ⧸ I) (L ⧸ I)\", \"doc\": \"For any Lie algebra $ L $ over a commutative ring $ R $ and a Lie ideal $ I $ of $ L $, the quotient $ L/I $ inherits a well-defined Lie bracket operation from $ L $. This bracket is defined by taking\"}\n  {\"name\": \"algebra_finiteType_of_liesOver\", \"module\": \"Mathlib.RingTheory.Finiteness.Quotient\", \"type\": \"[Algebra.FiniteType A B] : Algebra.FiniteType (A ⧸ p) (B ⧸ P)\", \"doc\": \"If $ B $ is a finitely generated $ A $-algebra and $ P $ is an ideal in $ B $ lying over an ideal $ p $ in $ A $, then the quotient ring $ B/P $ is a finitely generated algebra over the quotient ring \"}\n  {\"name\": \"LieAlgebra.IsSimple.instIsSemisimple\", \"module\": \"Mathlib.Algebra.Lie.Semisimple.Basic\", \"type\": \"[IsSimple R L] : IsSemisimple R L\", \"doc\": \"Every simple Lie algebra over a commutative ring $ R $ is semisimple. Specifically, if $ L $ is a non-abelian Lie algebra over $ R $ with no nontrivial proper ideals, then $ L $ satisfies the definiti\"}\n  {\"name\": \"IsSemisimpleModule.exists_quotient_linearEquiv_submodule\", \"module\": \"Mathlib.RingTheory.SimpleModule.Basic\", \"type\": \"(N : Submodule R M) : ∃ (P : Submodule R M), Nonempty (N ≃ₗ[R] M ⧸ P)\", \"doc\": \"For any semisimple module $ M $ over a ring $ R $ and any submodule $ N $ of $ M $, there exists a submodule $ P $ of $ M $ such that $ N $ is isomorphic to the quotient module $ M/P $.\"}\n  {\"name\": \"Algebra.QuasiFinite.instQuotientIdeal\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(I : Ideal S) [QuasiFinite R S] : QuasiFinite R (S ⧸ I)\", \"doc\": \"Given a commutative ring $ S $ with a quasi-finite $ R $-algebra structure (i.e., $ S $ is finitely generated as an $ R $-module) and an ideal $ I $ of $ S $, the quotient ring $ S/I $ inherits a cano\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: solvability descends under Lie surjections and semisimple associative modules descend under surjections, but neither states preservation of zero Lie radical"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphic image of a Lie algebra with zero solvable radical has zero radical in characteristic zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieHom.isSolvable_range\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w₁} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] (f : L' →ₗ⁅R⁆ L) [LieAlgebra.IsSolvable L'],\\n  LieAlgebra.IsSolvable ↥f.range\", \"doc\": \"If $ L' $ is a solvable Lie algebra over a commutative ring $ R $ and $ f : L' \\to L $ is a Lie algebra homomorphism, then the image of $ f $ forms a solvable Lie subalgebra of $ L $. This follows beca\"}\n  {\"name\": \"Function.Surjective.lieAlgebra_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ {R : Type u} {L : Type v} {L' : Type w₁} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : LieRing L'] [inst_4 : LieAlgebra R L'] {f : L' →ₗ⁅R⁆ L} [hL' : LieAlgebra.IsSolvable L'],\\n  Function.Surjective ⇑f → LieAlgebra.IsSolvable L\", \"doc\": \"Let $ L $ and $ L' $ be Lie algebras over a commutative ring $ R $. If there exists a surjective Lie algebra homomorphism $ f : L \\to L' $ and $ L' $ is solvable, then $ L $ is solvable.\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_no_solvable_ideals\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Basic\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L],\\n  (∀ (I : LieIdeal R L), LieAlgebra.IsSolvable ↥I → I = ⊥) → LieAlgebra.HasTrivialRadical R L\", \"doc\": \"If every solvable Lie ideal $ I $ of a Lie algebra $ L $ over a commutative ring $ R $ satisfies $ I = \\\\{0\\\\} $, then $ L $ has a trivial radical (i.e., its radical—the largest solvable ideal—is the ze\"}\n  {\"name\": \"LieAlgebra.IsKilling.instHasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_3) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsKilling R L] [Module.Free R L] [Module.Finite R L] [IsDomain R] [IsPrincipalIdealRing R],\\n  LieAlgebra.HasTrivialRadical R L\", \"doc\": \"For a Lie algebra $ L $ over a commutative ring $ R $ that is a domain and a principal ideal ring, if $ L $ is finitely generated and free as an $ R $-module and its Killing form is non-degenerate, th\"}\n  {\"name\": \"LieAlgebra.hasTrivialRadical_of_isIrreducible_of_isFaithful\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Lemmas\", \"type\": \"∀ (k : Type u_1) (L : Type u_2) (M : Type u_3) [inst : Field k] [CharZero k] [inst_2 : LieRing L]\\n  [inst_3 : LieAlgebra k L] [Module.Finite k L] [inst_5 : AddCommGroup M] [inst_6 : Module k M]\\n  [inst_7 : LieRingModule L M] [inst_8 : LieModule k L M] [Module.Finite k M] [LieModule.IsIrreducible k L\", \"doc\": \"If a Lie algebra $\\\\mathfrak{g}$ over a field $k$ admits an irreducible and faithful module $M$ such that the trace of the endomorphism $\\\\mathrm{ad}_x \\\\in \\\\mathrm{End}_k(M)$ corresponding to each $x \\\\i\"}\n  {\"name\": \"LieAlgebra.HasTrivialRadical\", \"module\": \"Mathlib/Algebra/Lie/Semisimple/Defs\", \"type\": \"(R : Type u_1) → (L : Type u_2) → [inst : CommRing R] → [inst_1 : LieRing L] → [LieAlgebra R L] → Prop\", \"doc\": \"The Lie algebra $ L $ over the commutative ring $ R $ has a trivial radical, meaning its radical (the largest solvable ideal) is the zero ideal.\"}\n  {\"name\": \"LieAlgebra.radical_eq_top_of_isSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [LieAlgebra.IsSolvable L], LieAlgebra.radical R L = ⊤\", \"doc\": \"If $ \\\\mathfrak{g} $ is a solvable Lie algebra over a commutative ring $ R $, then its radical (the sum of all solvable ideals) is equal to the entire Lie algebra $ \\\\mathfrak{g} $, i.e., $ \\\\mathrm{radi\"}\n  {\"name\": \"LieAlgebra.radicalIsSolvable\", \"module\": \"Mathlib/Algebra/Lie/Solvable\", \"type\": \"∀ (R : Type u) (L : Type v) [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [IsNoetherian R L],\\n  LieAlgebra.IsSolvable ↥(LieAlgebra.radical R L)\", \"doc\": \"If a Lie algebra $ L $ over a commutative ring $ R $ is Noetherian (i.e., every submodule is finitely generated), then its radical—the sum of all solvable ideals in $ L $—is itself a solvable ideal.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: solvability descends under Lie surjections and semisimple associative modules descend under surjections, but neither states preservation of zero Lie radical"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of finite dimensional semisimple Lie algebras has semisimple image in characteristic zero",
+   "results": "Executed search: 8 hits; Eight hits: surjective Engelian/solvable/abelian descent, associative semisimple modules and rings, IsKilling.instSemisimple; none is zero-radical descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieAlgebra.HasTrivialRadical",
+   "results": "Executed search: 12 hits; Twelve hits: HasTrivialRadical and its constructors, zero-solvable-ideals criteria, simple/semisimple implications; none concerns a general surjective image.",
+   "date": "2026-10-23",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a semisimple Lie algebra under a surjective Lie algebra homomorphism is semisimple",
+   "results": "Executed search: 8 hits; Eight hits: associative semisimple module/ring images, solvable and nilpotent Lie images, LieHom.range; none states semisimple Lie image descent.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|quotient|isCompl",
+   "results": "Executed search: 0 hits; Zero hits in Algebra/Lie/Semisimple; read the Mathlib Killing and CartanCriterion sources for the smaller complement input.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semisimple-group-casimir-trace",
+  "date": "2026-10-23",
+  "group": "Q17"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Characteristic-zero simplicity step: finite-dimensional rational modules are direct sums of simple submodules. Supporting Casimir endomorphism and trace for a semisimple algebraic group. Prerequisite: Surjective images of semisimple Lie algebras in characteristic zero.",
+   "via": [
+    "lem-sfb-semisimple-group-casimir-trace",
+    "lem-sfb-characteristic-zero-complete-reducibility",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semisimple-lie-surjective-image",
+  "worker": "stage1",
+  "summary": "Followed Milne §22c p.475 kernel-ideal decomposition. Added one Mathlib leaf for complementary ideals, then wrote the kernel restriction, commuting-ideals calculation, inverse-image ideal and derived-series induction explicitly. Kept the statement and statement dependencies unchanged; searched project Lean and all DAG/blueprint statements, checked arbitrary characteristic-zero fields and zero cases.",
+  "blueprint": "The inherited from.place locates this supporting Lie-algebra input below det-thm-sf-ctf-stability-direct-images, proof (3), through the existing alteration/reductivity/Casimir chain. Checked the current latest blueprint direct-images proof and unit. The ancestor command returns null (as already stored); its via chain is preserved. Step 1 realizes the Milne ideal decomposition; steps 2-4 give the supporting surjective-image argument. No unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-33def7284",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-33def7284 (reviewer sub-agent of L); spot-checked: Read Milne §22c (PDF p.487, printed p.475), last paragraph of 'The Casimir operator': the kernel ideal a gives g = a ⊕ b via the Killing form; the item and the new leaf follow this route. The item statement and stmt_deps are unchanged, and the zero-radical semisimplicity agrees with def-wf-semisimple-lie-algebra. New leaf lem-sfb-semisimple-lie-ideal-complement: checked LieIdeal.isCompl_killingCompl at Killing.lean:142. IsKilling comes from HasTrivialRadical.instIsKilling at CartanCriterion.lean:258; its hypotheses (CharZero, IsDomain at line 49; IsNoetherian, Module.Free at line 198) are instances Lean infers over a field with Module.Finite. IsCompl means exactly I∩J=0 and I+J=L. The node is statement-only and self-contained, and its search records match the real Mathlib hits. Scanned all DAG statements for semisimple/Lie/ideal/Killing (lem-ag-killing-nondegenerate, sk-lem-walg-killing, lem-ag-central-radical-quotient, det-d-lie): no duplicate. Step 1: ker q is an ideal, and the leaf applies with every hypothesis present. Step 2: q|_J is bijective (kernel I∩J=0; lift then decompose), and [I,J] ⊆ I∩J = 0. Step 3: B = q|_J^{-1}(A) is an ideal of L because [i,b]=0 and q[j,b] ∈ A. Step 4: the induction q(D^r B) ⊆ D^r A is set up correctly; injectivity gives D^n B = 0, so B = 0 by hypothesis, and surjectivity of q|_J then gives A = 0. Tested L=0, I=0, I=L and sl2⊕sl2 → sl2. Mathlib has no surjective-image lemma for HasTrivialRadical, so split status is right. No cycle, no tool from another unit, no SGA; blueprint from.node null inherited, via chain preserved. Not a re-split (the item had no proof on the base)."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Lie.SemisimpleSurjectiveImage",
+  "declaration": "LieAlgebra.hasTrivialRadical_of_surjective",
+  "file": "lean/Sheaf/Algebra/Lie/SemisimpleSurjectiveImage.lean",
+  "statement": "theorem hasTrivialRadical_of_surjective (F : Type u) [Field F] [CharZero F] (L : Type v) [LieRing L] [LieAlgebra F L] [Module.Finite F L] (H : Type w) [LieRing H] [LieAlgebra F H] [Module.Finite F H] (q : L →ₗ⁅F⁆ H) (hq : Function.Surjective q) [HasTrivialRadical F L] : HasTrivialRadical F H",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-beea77165",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Every hypothesis and the conclusion match the node: F a Field with CharZero; L and H finite-dimensional over F (Module.Finite) via LieRing/LieAlgebra; q a bundled LieHom with hq for surjectivity; HasTrivialRadical for L (hypothesis) and H (conclusion), the def-wf-semisimple-lie-algebra predicate (equivalent to no nonzero solvable ideal). No extra assumptions; universes u v w independent; autoImplicit false. Edge cases H=0 and L=0 covered; field not assumed algebraically closed. No Mathlib or project duplicate or name clash for hasTrivialRadical_of_surjective. lean.statement verbatim in the file; stmt_deps unchanged; no new nodes or dep edits. Proof is only sorry, no hollow defs. Docstrings carry Milne §22c p.475, the blueprint id and the 4-step proof. Report has Worker report and Second reading by Q14. Public import WeilConjectures.Mathlib.Algebra.Lie.Radical exists. Not recompiled (no FIX)."
+ }
+}

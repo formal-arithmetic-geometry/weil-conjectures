@@ -260,7 +260,18 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-f25081881 (reviewer sub-agent of L); spot-checked: I read all 13 steps against the cited statements and the main-20261015 blueprint statement and proof (open/closed sheaf formulas, derived version, locally closed composition). The statement agrees with the blueprint; 'commutative' only makes explicit what the relative tensor and sk-def-sfb-dc-setting already require. The delivery adds no new nodes and no Mathlib leaves, and cites no SGA source. The repair splits former step 10 into three steps. Step 10 computes on representatives: lem-pc-kflat-resolution, the 'no resolution needed' clause of lem-weil-pbc-exact-functor-derived-factorization, and the representative clause of lem-weil-pbc-site-derived-tensor-descent applied separately to each ring, then identified with def-sfb-derived-tensor-modules through lem-sfb-derived-tensor-modules-derived. Step 11 is the elementary signed-homotopy check; the cross terms cancel. Step 12: each q_R is a localization by the descent node's equivalence clause, and lem-sfb-multivariable-derived-calculus with n=2 and identity subcategories (explicitly permitted there) makes q_A x q_B a localization at W_A x W_B. Clause (2) of the Mathlib leaf lem-weil-pbc-localization-universal-property then extends the representative isomorphism uniquely to a natural isomorphism. The phi_i isomorphisms show that both bifunctors invert W; I also checked this directly through K-flat cones and the exactness of e. The same-ring clause is not misused on mixed coefficients. Steps 1-9 and 13 still check: the qcqs and quasi-compact-complement hypotheses for lem-weil-pbc-proetale-ringed-open-closed, coproduct preservation for i_*, the totalization signs, preservation of K-flatness and flat terms in both directions, and u^*i^* = a^* through def-sfb-module-upper-star-comp. The route is fine: unit sk-lem-int-tensor uses sk-def-sfb-derived-tensor-hom. I accept the generic tool uses in split_report. The duplicate search found only simplicial/Brown-specific localization nodes. Edge cases checked: empty S, identity immersions, the zero ring, unbounded complexes. No fixes."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.SixFunctors.IntTensorProjection",
   "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.locallyClosedImmersionTensorProjection",
@@ -289,5 +300,45 @@
   "landing": "20261019T002609-L-2157997",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $\\Lambda$ be a condensed ring, $X$ a standing scheme, and\n$a=i\\circ u\\colon S\\hookrightarrow X$ a locally closed immersion, with\n$u\\colon S\\hookrightarrow\\overline S$ open and $i\\colon\\overline S\\hookrightarrow X$ closed, and\n$a_!=i_*u_!$. For $M\\in\\D(S_{\\mathrm{proét}},\\Lambda)$ and $L\\in\\D(X_{\\mathrm{proét}},\\Lambda)$\nthere is a natural isomorphism\n$$\n(a_!M)\\otimes^{\\mathbf L}_{\\Lambda_X}L\\simeq a_!\\bigl(M\\otimes^{\\mathbf L}_{\\Lambda_S}a^*L\\bigr)\n\\quad\\text{in }\\D(X_{\\mathrm{proét}},\\Lambda).\n$$",
+  "proof": [
+   {
+    "text": "Throughout we use [sk-prop-sf-open-closed-triangle]: for an open immersion $j$\nwith closed complement $i$, the functors $j^*$, $j_!$, $i^*$, $i_*$ are exact,\n$j^*j_!=\\mathrm{id}$, $i^*i_*=\\mathrm{id}$, $i^*j_!=0$, $j^*i_*=0$, and a morphism of\nmodule sheaves on $X$ that becomes an isomorphism after $j^*$ and after $i^*$\nis an isomorphism (apply the localization sequence to its kernel and\ncokernel). Inverse images $j^*$, $i^*$ are compatible with tensor products,\nsince the coefficient sheaves are pulled back\n([sk-prop-sfb-cartesian-coefficients]).",
+    "uses": [
+     "sk-prop-sfb-cartesian-coefficients"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Open immersions, sheaves.* Let $j\\colon V\\hookrightarrow Y$ be open, $M$ a\n$\\Lambda_V$-module and $N$ a $\\Lambda_Y$-module. The identity of $M\\otimes j^*N$,\nviewed as a map $M\\otimes j^*N\\to j^*j_!M\\otimes j^*N=j^*(j_!M\\otimes N)$, is\nadjoint under $j_!\\dashv j^*$ to a natural map\n$\\theta\\colon j_!(M\\otimes j^*N)\\to j_!M\\otimes N$. After $j^*$ it is the identity;\nafter $i^*$ both sides vanish ($i^*(j_!M\\otimes N)=i^*j_!M\\otimes i^*N=0$). So $\\theta$\nis an isomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Closed immersions, sheaves.* Let $i\\colon T\\hookrightarrow Y$ be closed, $M$ a\n$\\Lambda_T$-module and $N$ a $\\Lambda_Y$-module. The unit of $i^*\\dashv i_*$ gives\n$i_*M\\otimes N\\to i_*i^*(i_*M\\otimes N)=i_*(M\\otimes i^*N)$. After $i^*$ it is the\nidentity of $M\\otimes i^*N$, and after $j^*$ both sides vanish. So it is an\nisomorphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Derived version.* Represent $L$ by a K-flat complex $Q$ of $\\Lambda_X$-modules\n([det-def-sfb-derived-tensor-hom]). Inverse image along an open or closed\nimmersion preserves K-flatness: if $C$ is acyclic on the subscheme, then\n$C\\otimes j^*Q=j^*(j_!C\\otimes Q)$, respectively $C\\otimes i^*Q=i^*(i_*C\\otimes Q)$ by the\nsheaf formulas, and $j_!C$, $i_*C$ are acyclic. Applying the sheaf formulas\ntermwise to the double complexes gives\n$j_!M\\otimes Q\\simeq j_!(M\\otimes j^*Q)$ and $i_*M\\otimes Q\\simeq i_*(M\\otimes i^*Q)$ for any\ncomplex $M$; since $Q$, $j^*Q$, $i^*Q$ are K-flat and $j_!$, $i_*$ are exact, these\nare the derived isomorphisms $j_!M\\otimes^{\\mathbf L}L\\simeq j_!(M\\otimes^{\\mathbf L}j^*L)$ and\n$i_*M\\otimes^{\\mathbf L}L\\simeq i_*(M\\otimes^{\\mathbf L}i^*L)$.",
+    "uses": [
+     "det-def-sfb-derived-tensor-hom"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Locally closed immersions.* Combining,\n$$\na_!M\\otimes^{\\mathbf L}L=i_*(u_!M)\\otimes^{\\mathbf L}L\\simeq i_*\\bigl(u_!M\\otimes^{\\mathbf L}i^*L\\bigr)\n\\simeq i_*u_!\\bigl(M\\otimes^{\\mathbf L}u^*i^*L\\bigr)=a_!(M\\otimes^{\\mathbf L}a^*L).\n$$\nAll maps are natural in $M$ and $L$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

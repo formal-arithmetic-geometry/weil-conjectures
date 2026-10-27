@@ -1,0 +1,133 @@
+{
+ "id": "lem-fix-ordinary-completed-open-closed-detection",
+ "kind": "statement",
+ "title": "Open and closed restrictions detect ordinary module isomorphisms",
+ "statement": "Fix ell,E [def-weil-l-adic-coefficient-extension]. Let S,U,Z be qcqs schemes [def-pc-scheme, def-weil-quasi-separated-morphism], j:U→S a quasi-compact open immersion [def-weil-open-immersion], and i:Z→S a closed immersion [def-weil-closed-immersion], with disjoint images whose union is S. For every morphism f:M→N of modules over the completed integral coefficient sheaf on S [def-weil-completed-integral-coefficients], if both ordinaryPull(j).map(f) and ordinaryPull(i).map(f) are isomorphisms then f is an isomorphism. The functors are exactly those of [def-fix-qcqs-completion-ordinary-models]. Coefficient and site universes are independent; this statement involves only module sheaves, no derived category or ambient immersion.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AH, lemma-ses-associated-to-open; 09AG, lemma-jshriek-zero; 09BM, lemma-closed-immersion-complement-retrocompact-exact. Apply the natural module localization sequence and the short five lemma."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-completed-integral-coefficients",
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Use the invertibility of the actual ordinary coefficient map for the open immersion. Compare ring left adjoints with localized restriction using their unit equation. The continuous map-pullback site adjunction gives an adjunction on modules. Construct the slice module equivalence by Mathlib pushforwardPushforwardEquivalence, retaining the equality of its functor with actual module pushforward; pushforwardComp compares its composition with slice restriction without unfolding a full functor equality. Uniqueness of module left adjoints yields ordinaryOpenSliceComparison, with independent site and coefficient universes.",
+   "uses": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "def-fix-qcqs-completion-ordinary-models",
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-weakly-etale-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the independent-universe completed localization sequence to M and N. Naturality of the extension counit and the closed unit supplies a morphism of short exact sequences with middle component f. The open comparison makes the first vertical map invertible; the hypothesis on closed pullback makes the last vertical map invertible. Mathlib ShortComplex.isIso₂_of_shortExact_of_isIso₁₃ gives IsIso f. Empty pieces are included.",
+   "uses": [
+    "lem-fix-ordinary-completed-localization-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "def-pur-integral-derived-operations",
+  "lem-fix-ordinary-completed-localization-sequence",
+  "lem-fix-qcqs-ordinary-restriction-exact",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AH and 09AG: actual independent-universe localized module sequence, adjunction-compatible open comparison, and Mathlib short five lemma. R8 writes both combination steps and the local covering/exactness arguments; only the closed specialization-unit step is split off."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sheaves of modules to an open closed decomposition or a covering family jointly reflects isomorphisms, and inverse images compose",
+   "results": "Scheme.Modules.restrictFunctorIsoPullback and restrictFunctorComp concern Zariski structure-sheaf modules. SheafOfModules.pullbackIso and instReflectsIsomorphismsSheafSheafCompose give generic ingredients, not completed pro-etale coefficients.",
+   "date": "2026-10-27",
+   "verdict": "No direct match for the specified ordinaryPull. Use the existing coefficient models and generic site/module constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsLeftDerivedFunctor",
+   "results": "leftDerivedUnique and the left-derived natural-isomorphism API.",
+   "date": "2026-10-27",
+   "verdict": "Useful for transporting exact ordinary restrictions to mapDerivedCategory; no geometry-specific module detection statement."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|mapDerivedCategoryCompIso|JointlyReflectIsomorphisms",
+   "results": "Mathlib SheafOfModules.pushforwardComp and source ExactFunctor.lean mapDerivedCategoryCompIso and jointlyReflectIsomorphisms_mapDerivedCategory.",
+   "date": "2026-10-27",
+   "verdict": "Reuse these proved generic composition and derived-detection lemmas. The lower completed-coefficient geometry still requires its own interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact functors which jointly reflect isomorphisms also jointly reflect isomorphisms on unbounded derived categories",
+   "results": "Eight general derived-functor results including mapDerivedCategory and its factorizations. Local rg found the exact jointly-reflecting-family theorem in WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor.",
+   "date": "2026-10-27",
+   "verdict": "Reuse that existing proved source theorem rather than introduce another cohomology descent obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryLocalDetection",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.",
+   "via": [
+    "lem-fix-qcqs-ordinary-local-detection",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCompletedOpenClosedDetection",
+  "file": "lean/Sheaf/Paper/OrdinaryCompletedOpenClosedDetection.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.ordinaryCompletedOpenClosedDetection",
+  "statement": "theorem ordinaryCompletedOpenClosedDetection\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (S U Z : Scheme.{t})\n    [CompactSpace S] [QuasiSeparatedSpace S]\n    [CompactSpace U] [QuasiSeparatedSpace U]\n    [CompactSpace Z] [QuasiSeparatedSpace Z]\n    (j : U ⟶ S) (i : Z ⟶ S)\n    [IsOpenImmersion j] [QuasiCompact j] [IsClosedImmersion i]\n    (hcover : Set.range j.base ∪ Set.range i.base = Set.univ)\n    (hdisj : Disjoint (Set.range j.base) (Set.range i.base)) :\n    ∀ {M N : Mod l E S none} (f : M ⟶ N),\n      IsIso ((ordinaryPull l E j).map f) →\n      IsIso ((ordinaryPull l E i).map f) → IsIso f",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T222617-L-674083",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R8",
+  "result": "pass",
+  "landing": "20261027T012930-L-2349270",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

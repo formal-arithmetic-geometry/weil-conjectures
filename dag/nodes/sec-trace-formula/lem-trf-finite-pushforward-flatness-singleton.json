@@ -1,0 +1,352 @@
+{
+ "id": "lem-trf-finite-pushforward-flatness-singleton",
+ "kind": "statement",
+ "title": "Relative flatness of finite pushforward near a singleton fibre",
+ "statement": "Let $S=\\operatorname{Spec}A$ for a commutative ring $A$ [def-weil-affine-spectrum], let $Y,Z$ be schemes [def-pc-scheme], let $h:Y\\to S$ be a morphism, and let $\\pi:Z\\to Y$ be finite [def-weil-finite-integral-morphism]. Let $\\mathcal G$ be a quasi-coherent $\\mathcal O_Z$-module [pqf-def-coherent], and put $P=\\pi_*\\mathcal G$, where $P(V)=\\mathcal G(\\pi^{-1}V)$ with scalars restricted through $\\pi^\\sharp$ [def-pc-module-pullback]. Then $P$ is quasi-coherent. For every affine open $V\\subseteq Y$, $\\pi^{-1}V$ is affine and the following conditions are equivalent: $\\mathcal G|_{\\pi^{-1}V}$ is flat over $S$ through $h\\pi$; the $A$-module $\\Gamma(\\pi^{-1}V,\\mathcal G)=\\Gamma(V,P)$ is flat; $P|_V$ is flat over $S$ through $h$. Here relative flatness uses [def-pc-scheme-module-flat-over], and ordinary module flatness uses [def-weil-pbc-flat-ring-map]. Suppose now $z\\in Z$, $y=\\pi(z)$, and $\\pi^{-1}(\\{y\\})=\\{z\\}$. Then $\\mathcal G$ is flat over $S$ on some open neighbourhood of $z$ if and only if $P$ is flat over $S$ on some open neighbourhood of $y$. Also the canonical germ map $P_y\\to\\mathcal G_z$ is an $\\mathcal O_{S,h(y)}$-linear isomorphism; in particular $P_y$ is flat over this base local ring if and only if $\\mathcal G_z$ is. Stalks and their structure-map actions are as in [def-pc-module-stalk-functor]. No finite generation of $\\mathcal G$, finite presentation of $\\pi$, affineness of $Y$ or $Z$, or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057U, lemma-devissage-flat; Supporting elementary-devissage flatness branch: affine section comparison, shrinking through the singleton finite fibre for (2) with (3), and the canonical base-linear stalk comparison (b) with (c)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-coherent",
+  "def-pc-module-pullback",
+  "def-pc-scheme-module-flat-over",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-module-stalk-functor"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-finite-integral-morphism], $\\pi$ is affine and $\\pi^{-1}V$ is affine for every affine open $V$ of $Y$. Apply clause (1) of [lem-weil-pbc-affine-pushforward-base-change] to $\\pi$, $\\mathcal G$ and the identity base change of $Y$: $P$ is quasi-coherent. By the definition of direct image, $\\Gamma(V,P)=\\Gamma(\\pi^{-1}V,\\mathcal G)$; its $A$-action sends $a$ to multiplication by $\\pi^\\sharp(h^\\sharp(a))=(h\\pi)^\\sharp(a)$. Thus this equality identifies the two specified $A$-modules, not only their underlying groups.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-pushforward-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, proof of (2) iff (3) and (b) iff (c), with the omitted shrinking argument supplied by Tag 05B8."
+   }
+  },
+  {
+   "text": "For any quasi-coherent module $F$ on a scheme $T$ over $S=\\operatorname{Spec}A$ and any affine open $W$ of $T$, [lem-pc-affine-chart-relative-flat-criterion] identifies $A$-flatness of $F(W)$ with relative flatness of all stalks at points of $W$. Here $\\Gamma(S,\\mathcal O_S)=A$ by [def-weil-affine-spectrum]. The restriction stalk isomorphism [lem-weil-pbc-module-restriction-stalk-iso] identifies those stalks with the stalks of $F|_W$, preserving the base action. By clause (2) of [lem-weil-pbc-module-restriction-open-immersion-colimits], $F|_W$ is again quasi-coherent, so the implications [lem-pc-relative-flat-module-stalk] and [lem-pc-relative-flat-of-stalks] apply to it and identify this stalk condition with relative flatness of $F|_W$. Apply this first to $(T,F,W)=(Z,\\mathcal G,\\pi^{-1}V)$ and then to $(Y,P,V)$. Step 1 gives the same $A$-module in both cases, proving all three affine conditions equivalent.",
+   "uses": [
+    "lem-pc-affine-chart-relative-flat-criterion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-module-restriction-stalk-iso",
+    "lem-pc-relative-flat-module-stalk",
+    "lem-pc-relative-flat-of-stalks",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, proof of (2) iff (3) and (b) iff (c), with the omitted shrinking argument supplied by Tag 05B8."
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal G|_U$ is flat over $S$ for an open neighbourhood $U$ of $z$. By [lem-trf-finite-singleton-fibre-localization], choose an open neighbourhood $V_0$ of $y$ with $\\pi^{-1}V_0\\subseteq U$. By [lem-weil-pbc-affine-opens-basis], choose $y\\in V\\subseteq V_0$ with $V$ affine. Every stalk on $\\pi^{-1}V$ is relatively flat: use [lem-pc-relative-flat-module-stalk] on $U$ and [lem-weil-pbc-module-restriction-stalk-iso] for the inclusions of these opens. As $\\mathcal G|_{\\pi^{-1}V}$ is quasi-coherent by clause (2) of [lem-weil-pbc-module-restriction-open-immersion-colimits], [lem-pc-relative-flat-of-stalks] makes it flat over $S$. Step 2 makes $P|_V$ flat over $S$.",
+   "uses": [
+    "lem-trf-finite-singleton-fibre-localization",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pc-relative-flat-module-stalk",
+    "lem-weil-pbc-module-restriction-stalk-iso",
+    "lem-pc-relative-flat-of-stalks",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, proof of (2) iff (3) and (b) iff (c), with the omitted shrinking argument supplied by Tag 05B8."
+   }
+  },
+  {
+   "text": "Conversely suppose $P|_W$ is flat over $S$ on an open neighbourhood $W$ of $y$. Choose an affine $y\\in V\\subseteq W$ by [lem-weil-pbc-affine-opens-basis]. Its stalks are relatively flat by [lem-pc-relative-flat-module-stalk], and the restriction stalk isomorphisms of [lem-weil-pbc-module-restriction-stalk-iso] identify them with those of $P|_V$. Apply [lem-pc-relative-flat-of-stalks] to $P|_V$, which is quasi-coherent by Step 1 and clause (2) of [lem-weil-pbc-module-restriction-open-immersion-colimits], and then Step 2: $\\mathcal G|_{\\pi^{-1}V}$ is flat over $S$. The open $\\pi^{-1}V$ contains $z$, proving the reverse neighbourhood implication.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pc-relative-flat-module-stalk",
+    "lem-weil-pbc-module-restriction-stalk-iso",
+    "lem-pc-relative-flat-of-stalks",
+    "lem-weil-pbc-module-restriction-open-immersion-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 057U, lemma-devissage-flat, proof of (2) iff (3) and (b) iff (c), with the omitted shrinking argument supplied by Tag 05B8."
+   }
+  },
+  {
+   "text": "By [lem-trf-finite-singleton-fibre-localization], the canonical germ map $P_y\\to\\mathcal G_z$ is an $\\mathcal O_{Y,y}$-linear isomorphism with the source stalk action through $\\pi_z^\\sharp$. Restrict its scalars along $h_y^\\sharp:\\mathcal O_{S,h(y)}\\to\\mathcal O_{Y,y}$. The composite scalar map is $(h\\pi)_z^\\sharp$, so this is exactly the requested base-linear canonical isomorphism. Flatness is invariant under this linear isomorphism: for each injective base-linear map, its two tensor maps are conjugate by tensoring with the isomorphism and its inverse; injectivity is therefore equivalent, as in [def-weil-pbc-flat-ring-map].",
+   "uses": [
+    "lem-trf-finite-singleton-fibre-localization",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05B8, lemma-finite-morphism-single-point-in-fibre (4); restriction of its scalar action through the base stalk map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-pc-relative-flat-module-stalk",
+  "lem-pc-relative-flat-of-stalks",
+  "lem-trf-finite-singleton-fibre-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-weil-pbc-module-restriction-open-immersion-colimits",
+  "lem-weil-pbc-module-restriction-stalk-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 057U, lemma-devissage-flat, proof of (2) iff (3) and (b) iff (c), with the omitted shrinking argument supplied by Tag 05B8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism with a singleton fibre relative flatness of a quasi coherent module near the point and of its stalk is equivalent to flatness of its direct image",
+   "results": "8 hits. AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat.stalkMap; Module.flat_of_localized_maximal; RingHom.Flat.propertyIsLocal; AlgebraicGeometry.flat_iff; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Scheme.Hom.flat_appLE The scheme flatness hits concern structure sheaves or covers. Module localization and restrictStalkNatIso do not supply finite direct-image relative flatness or the singleton-fibre neighbourhood and stalk comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, AlgebraicGeometry.IsFinite",
+   "results": "0 hits. No declarations returned. The scheme flatness hits concern structure sheaves or covers. Module localization and restrictStalkNatIso do not supply finite direct-image relative flatness or the singleton-fibre neighbourhood and stalk comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(pushforward|singleton)|((pushforward|singleton).*flat)",
+   "results": "3 hits. Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Morphisms/Flat.lean Searched Mathlib/AlgebraicGeometry. The scheme flatness hits concern structure sheaves or covers. Module localization and restrictStalkNatIso do not supply finite direct-image relative flatness or the singleton-fibre neighbourhood and stalk comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flatness over an affine base of finite direct image of a quasi coherent module at a singleton fibre stalk and on an open neighborhood",
+   "results": "8 hits. AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.Flat.casesOn; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.Flat.flat_of_affine_subset; Module.Flat.of_isLocalizedModule The scheme flatness hits concern structure sheaves or covers. Module localization and restrictStalkNatIso do not supply finite direct-image relative flatness or the singleton-fibre neighbourhood and stalk comparison.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "flat.*(pushforward|singleton)|((pushforward|singleton).*flat)",
+   "results": {
+    "t": "2026-10-23T14:40:40Z",
+    "tool": "grep",
+    "query": "flat.*(pushforward|singleton)|((pushforward|singleton).*flat)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/Flat.lean"
+    ],
+    "digest": "97e374aa487fa903"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: morphism flatness concerns structure sheaves; localization and restriction stalk results are ingredients, not the finite-direct-image comparison with all clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image of a quasi coherent sheaf preserves relative flatness over an affine base and identifies stalks at singleton fibres",
+   "results": {
+    "t": "2026-10-23T14:40:40Z",
+    "tool": "leansearch",
+    "query": "Finite direct image of a quasi coherent sheaf preserves relative flatness over an affine base and identifies stalks at singleton fibres",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat.instMorphismRestrict",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "Module.Flat.localizedModule",
+     "AlgebraicGeometry.Flat.of_stalkMap",
+     "AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
+     "AlgebraicGeometry.Flat.iff_flat_stalkMap",
+     "AlgebraicGeometry.Flat.stalkMap"
+    ],
+    "digest": "1cf4a45e2f69b070"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: morphism flatness concerns structure sheaves; localization and restriction stalk results are ingredients, not the finite-direct-image comparison with all clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, AlgebraicGeometry.IsFinite",
+   "results": {
+    "t": "2026-10-23T14:40:40Z",
+    "tool": "loogle",
+    "query": "Module.Flat, AlgebraicGeometry.IsFinite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: morphism flatness concerns structure sheaves; localization and restriction stalk results are ingredients, not the finite-direct-image comparison with all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative flatness of a quasi coherent module and its finite pushforward over an affine base agree on affine opens and near a singleton fibre",
+   "results": {
+    "t": "2026-10-23T14:40:42Z",
+    "tool": "leanfinder",
+    "query": "Relative flatness of a quasi coherent module and its finite pushforward over an affine base agree on affine opens and near a singleton fibre",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat",
+     "AlgebraicGeometry.Flat.of_stalkMap",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat",
+     "AlgebraicGeometry.Flat.stalkMap"
+    ],
+    "digest": "eb5c0be17030e729"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: morphism flatness concerns structure sheaves; localization and restriction stalk results are ingredients, not the finite-direct-image comparison with all clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkPushforward|restrictStalkNatIso|IsQuasicoherent.*pushforward",
+   "results": {
+    "t": "2026-10-23T14:43:22Z",
+    "tool": "grep",
+    "query": "stalkPushforward|restrictStalkNatIso|IsQuasicoherent.*pushforward",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+     "Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+     "Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean",
+     "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean"
+    ],
+    "digest": "fcdcf59415799d34"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: morphism flatness concerns structure sheaves; localization and restriction stalk results are ingredients, not the finite-direct-image comparison with all clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism the quasi coherent direct image and source module have the same module of sections and equivalent flatness over Spec A",
+   "results": {
+    "t": "2026-10-23T14:43:24Z",
+    "tool": "leanfinder",
+    "query": "For an affine morphism the quasi coherent direct image and source module have the same module of sections and equivalent flatness over Spec A",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.flat_appLE",
+     "AlgebraicGeometry.Flat.flat_of_affine_subset",
+     "AlgebraicGeometry.Flat.flat_appLE",
+     "AlgebraicGeometry.flat_iff",
+     "AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine",
+     "AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom",
+     "AlgebraicGeometry.Scheme.Modules.pushforward",
+     "AlgebraicGeometry.Flat.instHasRingHomPropertyFlat"
+    ],
+    "digest": "56105c94bce9872d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: morphism flatness concerns structure sheaves; localization and restriction stalk results are ingredients, not the finite-direct-image comparison with all clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-elementary-devissage-flatness",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting elementary-devissage flatness branch: affine section comparison, shrinking through the singleton finite fibre for (2) with (3), and the canonical base-linear stalk comparison (b) with (c).",
+   "via": [
+    "lem-trf-elementary-devissage-flatness",
+    "lem-trf-finite-type-flat-etale-neighborhood",
+    "lem-trf-flat-finite-type-flat-point-local"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-finite-pushforward-flatness-singleton",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Five assembly steps use existing affine relative-flatness, quasi-coherent pushforward and singleton-fibre nodes. The omitted neighbourhood shrinking in Tag 057U is made explicit. No new nodes or Mathlib leaves. The canonical stalk map is restricted along the base local-ring map, with tensor injectivity proving flatness invariance.",
+  "blueprint": "Supporting elementary-devissage flatness branch of lem-trf-local-term-locality, through lem-trf-elementary-devissage-flatness: Tag 057U (2) with (3), affine section comparison and omitted shrinking; (b) with (c), base-linear canonical stalk comparison. The latest blueprint locality proof itself invokes the contracting-correspondence theorem; this item supplies its already seeded local-algebra supporting branch.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-pushforward-base-change",
+    "why": "Only clause (1), quasi-coherence of affine direct image, used as a generic tool; no trace-unit step is replaced."
+   },
+   {
+    "node": "lem-pc-affine-chart-relative-flat-criterion",
+    "why": "The generic one-affine-chart flatness criterion over an affine base supplies the section/stalk bridge needed by Tag 057U."
+   },
+   {
+    "node": "lem-weil-pbc-module-restriction-stalk-iso",
+    "why": "Generic scalar-compatible module stalk restriction to an open, used to interpret relative flatness on neighbourhoods."
+   },
+   {
+    "node": "lem-pc-relative-flat-module-stalk",
+    "why": "Generic implication from relative flatness to relative stalk flatness for open restrictions."
+   },
+   {
+    "node": "lem-pc-relative-flat-of-stalks",
+    "why": "Generic converse from flat stalks to relative flatness of a quasi-coherent module."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-pushforward-base-change",
+  "lem-pc-affine-chart-relative-flat-criterion",
+  "lem-weil-pbc-module-restriction-stalk-iso",
+  "lem-pc-relative-flat-module-stalk",
+  "lem-pc-relative-flat-of-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-0adbc1953",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-0adbc1953 (reviewer sub-agent of L); spot-checked: FIX for one missing citation (C1). The delivery is one commit with the item and the report and no new nodes. The statement and stmt_deps are identical to live, and live still has the item unsplit. I read Stacks 057U (flat.tex lemma-devissage-flat): (2)<=>(3) is the equal-sections argument plus the 'omitted topological arguments' via 05B8, and (b)<=>(c) is 05B8(4). I read 05B8 (more-morphisms lemma-finite-morphism-single-point-in-fibre) clauses (1) and (4), which the same-unit node lem-trf-finite-singleton-fibre-localization states. Step 1: finite implies affine; lem-weil-pbc-affine-pushforward-base-change (1) with g=id gives P quasi-coherent; the A-action through (h pi)^sharp is correct. Step 2: the affine-chart criterion over Spec A, the restriction-stalk iso and the two relative-flatness directions are correct. Fault: lem-pc-relative-flat-of-stalks (and def-pc-scheme-module-flat-over) need F|_W quasi-coherent, and no step cited it. Fixed by citing the Mathlib leaf lem-weil-pbc-module-restriction-open-immersion-colimits (2) (isQuasicoherent_restrictFunctor) in steps 2, 3 and 4, with proof_deps updated. Step 3 uses the singleton hypothesis exactly where needed (05B8 shrinking, then an affine V by the basis leaf). Step 4 correctly does not need it. Step 5 (germ iso, restricting scalars along h_y, composite of stalk maps, flatness invariant under a linear iso) is genuinely elementary. Small cases checked: Spec(Z/p)->Spec Z (non-flat on both sides), the empty Z, and a two-point fibre (shrinking fails). There is no cycle, no SGA, and no duplicate in the DAG or the blueprint (same_as []). I accept the 5 declared generic tool_uses (affine pushforward qcoh, affine-chart flatness criterion, restriction-stalk iso, both relative-flat stalk directions).; 1 file(s) fixed by the reviewer"
+ }
+}

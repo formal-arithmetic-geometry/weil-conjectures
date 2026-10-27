@@ -1,0 +1,13 @@
+# N6 maintenance: derived-Weil tensor closure dispatch loop
+
+Item: `lem-sf-derived-weil-tensor-hom-adjunction`. Maintenance run: `1792651688`, 2026-10-22.
+
+Q32's split was accepted at 05:21:11 UTC (`coord/deliveries.log`, reviewer `NT-cc-Q32-7383b776d`; ledger entry for `deliver/Q32/lem-sf-derived-weil-tensor-hom-adjunction`). N6's retained stage-1 packet was an unchanged copy, accompanied by a report repeatedly treating that review as superseding its assignment. Its last worker repaired a stale step-8 citation, but preflight still correctly rejected the unchanged item and its 7297-character proof.
+
+The current repair record, issued by `b15ca6d7b0d` at 05:47:59 UTC, explicitly has `state: released`, `stage: 1`, `keep_plan: true`. It orders a finer split into at least two comparable, self-contained, statement-only nodes and an assembly proof at most 3000 characters, preserving every argument. `tools/dag_queue.py:stage1_repair_owed` and `stage1_completed` already implement that reopening. The standing stage-1 brief, however, still unconditionally said "Live finished/mathlib/merged/split-and-reviewed nodes win; never split one." Repeated workers obeyed that obsolete prohibition instead of the repair order. This is a brief/handoff conflict; changing the mathematics or weakening preflight is not the maintenance fix.
+
+This commit corrects `coord/brief-stage1.md`: read the repair record before deciding completion; a released stage-1 repair overrides the old review; `keep_plan` preserves the route rather than completion; preserve all work in the new nodes rather than summarizing it. The live-wins sentence now states the exception. The old brief is preserved as `coord/brief-stage1.md.maint-N6-tensor-hom-1792651688.bak`. This new report has an empty pre-creation backup with the same suffix.
+
+The launcher has a retained stage-1 sandbox at `/home/ubuntu/weil-newtargets-sandbox/N6/lem-sf-derived-weil-tensor-hom-adjunction`; no stage-2 packet existed when maintenance began. The queue intentionally contains both stages under `keep_plan`; the dispatcher's maintenance label later became stage 2. A stage-1 worker must perform the released re-split using `deliver.py`, retaining the old proof/citations/searches. A stage-2 worker must formalize the current statement using `deliver2.py`, independently of the proof-only re-split; Q32's stage-1 review is not a stage-2 completion.
+
+No node, proof, Lean module, repair-note state, claim, dispatcher state, gate, landing tool or concurrency setting is changed by this maintenance. The repair remains open for the ordinary worker and independent review. Local item route and retained-report handoffs are described in the launcher's maintenance `REPORT.md`.

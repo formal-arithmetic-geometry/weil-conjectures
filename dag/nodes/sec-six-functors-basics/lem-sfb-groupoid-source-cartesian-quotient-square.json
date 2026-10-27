@@ -1,0 +1,274 @@
+{
+ "id": "lem-sfb-groupoid-source-cartesian-quotient-square",
+ "kind": "statement",
+ "title": "A cartesian source square gives a 2-cartesian square of quotient stacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], in the universes of [def-weil-size-convention]. Let $(U,R,s,t,e,j,c)$ and $(V,Q,s',t',e',j',c')$ be groupoids in algebraic spaces over $S$ [def-trf-algebraic-space]: on every test scheme their points form groupoids, with the displayed source, target, identity, inverse and composition maps, naturally under pullback. Let $f_0:U\\to V$ and $f_1:R\\to Q$ commute with all these maps. Write $[U/R]$ and $[V/Q]$ for the fppf stackifications [lem-sfb-groupoid-stackification-local-description] of these presheaves of groupoids on the big fppf site [def-pc-fppf-site], and $[f]:[U/R]\\to[V/Q]$ for the morphism induced by $f_0,f_1$. If $(s,f_1):R\\to U\\times_{f_0,V,s'}Q$ is an isomorphism of algebraic spaces, then the canonical square with horizontal object maps $U\\to[U/R]$, $V\\to[V/Q]$ and vertical maps $f_0,[f]$ is a 2-fibre-product square. Equivalently, the canonical functor $U\\to V\\times_{[V/Q]}[U/R]$ is an equivalence over $V$. Here spaces are regarded as discrete fibred groupoids, and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids].",
+ "source": {
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Tag 04ZN (lemma-criterion-fibre-product), with the induced morphism in lemma-quotient-stack-functorial."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-trf-algebraic-space",
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-pc-fppf-site",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sfb-space-groupoid-quotient-presentation",
+  "def-sfb-moduli-chart-normalization"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=[U/R]$, $D=[V/Q]$, and write $a:U\\to A$, $b:V\\to D$, $F=[f]$. The stackification extension property of [lem-sfb-groupoid-stackification-local-description] supplies $F$ with the comparison $Fa\\cong bf_0$, compatible with $f_1$ on arrows. In the formulas below this comparison is inserted whenever an image of a chart object or arrow is identified. By the fibrewise definition in [def-sfb-stable-pointed-moduli-groupoids], $B=V\\times_D A$ has objects $(v,x,\\alpha:b(v)\\xrightarrow{\\sim}F(x))$. Its arrows to $(w,y,\\beta)$ are an equality $v=w$ and $h:x\\to y$ with $F(h)\\alpha=\\beta$. It is an fppf stack: glue local $v$ in the sheaf $V$ [def-trf-algebraic-space], glue local $x$ and its descent arrows in $A$, and glue the local $\\alpha$ in the isomorphism sheaf of $D$. Their overlap equation is exactly the displayed arrow equation; arrows glue uniquely by the sheaf axiom in $A$. This also treats empty covers. The canonical comparison $G:U\\to B$ sends $u$ to $(f_0(u),a(u),1)$; all constructions commute with pullback.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04ZN (lemma-criterion-fibre-product), direct local-object/arrow-lifting proof; stackification input: stacks.tex Tags 02ZP and 0436; local equivalence: Tag 046N."
+   }
+  },
+  {
+   "text": "For $u,w\\in U(T)$ the presheaf of arrows from $u$ to $w$ is $I_{u,w}(T')=\\{r\\in R(T'):s(r)=u|_{T'},\\ t(r)=w|_{T'}\\}$ on $T$-schemes. It is an fppf sheaf: glue the local $r$ uniquely in $R$, and check the endpoint equations locally in the sheaf $U$ [def-trf-algebraic-space]. The identical argument for $Q,V$ gives its arrow sheaves. Sheafification fixes these sheaves: the universal factorization in [def-weil-pbc-sheafification] of their identity gives an inverse to the unit, and uniqueness gives the other inverse identity. Consequently [lem-sfb-groupoid-stackification-local-description] identifies arrows between $a(u),a(w)$ with actual sections $r$ of $R$ with those endpoints, and similarly arrows between $b(v),b(z)$ with sections of $Q$. These identifications respect composition and pullback and make $F$ act by $f_1$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-weil-pbc-sheafification",
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04ZN (lemma-criterion-fibre-product), direct local-object/arrow-lifting proof; stackification input: stacks.tex Tags 02ZP and 0436; local equivalence: Tag 046N."
+   }
+  },
+  {
+   "text": "The assumed isomorphism $(s,f_1)$ gives, on every test scheme $T$, a unique arrow $r\\in R(T)$ with any prescribed $s(r)=u$ and $f_1(r)=q$ satisfying $s'(q)=f_0(u)$. In particular an arrow $G(u)\\to G(w)$ in $B(T)$ requires $f_0(u)=f_0(w)$ and, by step 2, an $r:u\\to w$ with $f_1(r)=e'(f_0(u))$. The identity $e(u)$ has exactly this source and image. Uniqueness forces $r=e(u)$ and hence $w=u$. Conversely when $w=u$ this identity supplies the unique arrow. Thus the map from the discrete groupoid $U(T)$ induces a bijection on every arrow set, including the empty sets: $G$ is fibrewise fully faithful.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04ZN (lemma-criterion-fibre-product), direct local-object/arrow-lifting proof; stackification input: stacks.tex Tags 02ZP and 0436; local equivalence: Tag 046N."
+   }
+  },
+  {
+   "text": "For $(v,x,\\alpha)\\in B(T)$, [lem-sfb-groupoid-stackification-local-description] gives an fppf cover and, on each member, $u\\in U$ with $\\theta:a(u)\\xrightarrow{\\sim}x$. Work on one member. The composite $q=F(\\theta)^{-1}\\alpha:b(v)\\to b(f_0(u))$ is an actual $Q$-arrow by step 2, with source $v$ and target $f_0(u)$. Apply the unique lifting of step 3 to $q^{-1}$ with source $u$. This gives $r:u\\to w$ in $R$, where $w=t(r)$ and $f_0(w)=t'(q^{-1})=v$. Set $h=\\theta\\,a(r)^{-1}:a(w)\\to x$. Since $f_1(r)=q^{-1}$, one has $F(h)=F(\\theta)q=\\alpha$. Therefore $(1_v,h)$ is an isomorphism $G(w)\\xrightarrow{\\sim}(v,x,\\alpha)$ in $B$. Every object of $B$ is locally in the essential image of $G$.",
+   "uses": [
+    "lem-sfb-groupoid-stackification-local-description"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04ZN (lemma-criterion-fibre-product), direct local-object/arrow-lifting proof; stackification input: stacks.tex Tags 02ZP and 0436; local equivalence: Tag 046N."
+   }
+  },
+  {
+   "text": "The sheaf $U$, viewed as a discrete fibred groupoid, is an fppf stack: sections glue uniquely by its sheaf axiom, and any descent arrow is an equality. The same site and larger universe work for $U$ and $B$, by [def-pc-fppf-site] and [def-weil-size-convention]. Step 1 makes $B$ a stack, step 3 proves fibrewise full faithfulness, and step 4 proves covering-local essential surjectivity. Thus [lem-sfb-stack-fully-faithful-local-equivalence] applies to the pullback-compatible functor $G$ and gives an equivalence over the site. Since $G$ projects to $f_0$ on $V$ and to $a$ on $A$, it is an equivalence over $V$ and is precisely the canonical comparison to the 2-fibre product. The definition in [def-sfb-stable-pointed-moduli-groupoids] now identifies the asserted square as 2-cartesian.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "def-weil-size-convention",
+    "lem-sfb-stack-fully-faithful-local-equivalence",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 04ZN (lemma-criterion-fibre-product), direct local-object/arrow-lifting proof; stackification input: stacks.tex Tags 02ZP and 0436; local equivalence: Tag 046N."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-groupoid-stackification-local-description",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-weil-pbc-sheafification",
+  "def-pc-fppf-site",
+  "def-weil-size-convention",
+  "lem-sfb-stack-fully-faithful-local-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-groupoids.tex",
+  "place": "Direct local proof of Tag 04ZN from stacks.tex Tags 02ZP, 0436 and 046N; the source proof instead factors through its explicit action groupoid."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "quotient.*stack|stack.*quotient|Groupoid.*pullback|pullback.*Groupoid",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of groupoids with cartesian source square induces a pullback square of quotient stacks",
+   "results": "Read returned hits: CategoryTheory.BicartesianSq.toIsPullback, CategoryTheory.Square.IsPullback.map_iff, CategoryTheory.Square.IsPullback.iff_of_equiv, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.Hom.ext, CategoryTheory.GrpObj.isPullback, CategoryTheory.Square.IsPullback.of_equiv, CategoryTheory.Sheaf.isPullback_square_op_map_yoneda_presheafToSheaf_yoneda_iff; 8 hits; digest e61fffcf1d967cac",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cartesian source square of a functor between smooth algebraic space groupoids induces a 2 fibre product square on their quotient stacks",
+   "results": "Read returned hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_right', AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_left', CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.instIsFiberedForget, CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_right, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.hasLimit_cospan_forget_of_left; 8 hits; digest dad37c7a9a2920f5",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient stack functor of algebraic groupoids is cartesian over the object spaces when its arrow source square is cartesian",
+   "results": "Read returned hits: CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift, CategoryTheory.instIsCartesianCompOfIsFibered, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_exists_isCartesian, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.isStackFor'; 8 hits; digest 583d67b22e883d3f",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cartesian square of groupoids induces a 2 pullback square of quotient stacks",
+   "results": "Read returned hits: CategoryTheory.BicartesianSq.toIsPullback, CategoryTheory.BicartesianSq.isColimit', CategoryTheory.Square.IsPullback.map_iff, CategoryTheory.Square.IsPullback.iff_of_equiv, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare, CategoryTheory.BicartesianSq, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.asSquare_iso, CategoryTheory.BicartesianSq.of_isPullback_isPushout; 8 hits; digest 435b004b76de862d",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits\", \"Pullback\", \"Groupoid\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor between algebraic space groupoids a cartesian source square gives a cartesian square of object spaces and quotient stacks",
+   "results": "Read returned hits: CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift, CategoryTheory.Functor.IsFibered.isStronglyCartesian_of_isCartesian, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift, CategoryTheory.Functor.IsPreFibered.pullbackMap.IsCartesian, CategoryTheory.instIsCartesianCompOfIsFibered, HasFibers.pullbackMap.isCartesian; 8 hits; digest 956791bf66c703c2",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of groupoid objects with cartesian source square gives a pullback after stackification",
+   "results": "Read returned hits: CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.IsStack.toIsPrestack, CategoryTheory.Pseudofunctor.IsStack.of_isStackFor, CategoryTheory.Pseudofunctor.isPrestackFor', CategoryTheory.Pseudofunctor.IsStackFor.isPrestackFor, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift, CategoryTheory.Pseudofunctor.isStackFor; 8 hits; digest 859b32f56e0cdb0e",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: the returned categorical pullback and fibred-category declarations do not identify object spaces with base changes of fppf quotient stacks."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.?stack|stackification|stackify",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary category pullbacks, cartesian lifts, and the stack-condition predicate do not state the quotient-stack base-change assertion for the specified sheaves of groupoids."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor of groupoid objects with unique lifts of arrows from every source makes the square of objects and quotient stacks a pullback",
+   "results": "Read returned hits: CategoryTheory.Quotient.lift_unique, CategoryTheory.FreeGroupoid.lift_unique, Quiver.FreeGroupoid.lift_unique, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.toFunctorToCategoricalPullback, CategoryTheory.Quotient.lift, CategoryTheory.Quotient.lift.isLift, SSet.Truncated.HomotopyCategory.lift_unique', CategoryTheory.Over.pullback; 8 hits; digest fbc81bcd8e5ecad4",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary category pullbacks, cartesian lifts, and the stack-condition predicate do not state the quotient-stack base-change assertion for the specified sheaves of groupoids."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "Read returned hits: none; 0 hits; digest 4f53cda18c2baa0c",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary category pullbacks, cartesian lifts, and the stack-condition predicate do not state the quotient-stack base-change assertion for the specified sheaves of groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of algebraic space groupoids with cartesian source square gives a 2 cartesian square of object spaces and fppf quotient stacks",
+   "results": "Read returned hits: CategoryTheory.Pseudofunctor.CoGrothendieck.homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_homCartesianLift, CategoryTheory.Pseudofunctor.CoGrothendieck.isStronglyCartesian_homCartesianLift, CategoryTheory.Pseudofunctor.isStackFor', CategoryTheory.Pseudofunctor.CoGrothendieck.isHomLift_cartesianLift, CategoryTheory.Pseudofunctor.IsStack, CategoryTheory.instIsCartesianCompOfIsFibered, CategoryTheory.Pseudofunctor.CoGrothendieck.domainCartesianLift; 8 hits; digest ea299aaf00953396",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary category pullbacks, cartesian lifts, and the stack-condition predicate do not state the quotient-stack base-change assertion for the specified sheaves of groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a functor between groupoid sheaves with unique arrow lifting the discrete source sheaf is the base change of the associated quotient stack",
+   "results": "Read returned hits: LightCondensed.discrete_map, Condensed.discrete_map, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor_obj_val_obj, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_obj_α, CompHausLike.LocallyConstant.functorIso, CategoryTheory.GrothendieckTopology.pseudofunctorOver_toPrelaxFunctor_toPrelaxFunctorStruct_toPrefunctor_map_toFunctor_map_val_app, CategoryTheory.Pseudofunctor.sheafHom, CategoryTheory.Pseudofunctor.IsStack; 8 hits; digest 81cda5310526687b",
+   "date": "2026-10-23",
+   "verdict": "No match: ordinary category pullbacks, cartesian lifts, and the stack-condition predicate do not state the quotient-stack base-change assertion for the specified sheaves of groupoids."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-invariant-closed-substack-descent",
+  "date": "2026-10-23",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Gieseker stability and closedness of the ten-canonical locus. This input serves Section 2.1, printed pp.4--5, Hilbert embedding and determinant line; agent expansion of descent through the central group scheme mu_r, including nonreduced mu_r. Local PDF WANTED; read online at https://arxiv.org/pdf/0810.2340. Supporting general input: The geometric stability convention for the Hilbert linearization: affine invariant-quotient fibres and invariant closed images used to construct the stable open, without presupposing a projective stable-locus theorem. Supporting input: Smooth atlas topology, invariant closed subsets, and their reduced closed substacks used for the affine invariant quotient. Supporting input: scheme-theoretic descent after the reduced inverse images along s and t have been identified, in the proof of Stacks 0509. Supporting input: Stacks 04YN proof, application of spaces-groupoids Tag 04ZN to the inclusion of the restricted groupoid.",
+   "via": [
+    "lem-sfb-invariant-closed-substack-descent",
+    "lem-sfb-smooth-presentation-closed-subsets",
+    "lem-sfb-affine-pgl-quotient-orbit-topology",
+    "lem-sfb-hilbert-plucker-pgl-linearization",
+    "lem-sfb-gieseker-ten-canonical-hilbert-stability",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-groupoid-source-cartesian-quotient-square",
+  "worker": "stage1",
+  "summary": "Q91 gives a direct local proof using existing stackification and fully faithful local-equivalence nodes. Arrow sheaves are already sheaves; the cartesian source hypothesis uniquely lifts arrows and kills the comparison isotropy, then supplies local lifts of arbitrary fibre-product objects. No new nodes, no statement changes, no Lean attachment.",
+  "blueprint": "The inherited provenance serves det-thm-sf-ctf-stability-direct-images proof (3), via invariant closed-substack descent and Stacks 04YN/04ZN. Read current latest sk-thm-sf-ctf-stability-direct-images.proof.md (3). This generic tool remains below the unit route; no new blueprint duplicate was found. blueprint_refs ancestor returns None, retained as inherited."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-d23b99f8b",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-d23b99f8b (reviewer sub-agent of L); spot-checked: Read the item, the report, the 7 cited statements and Stacks spaces-groupoids.tex Tag 04ZN (l.3095) and lemma-quotient-stack-functorial (l.2431). The statement is unchanged against live and side-live (both unsplit), and its hypothesis (s,f_1): R≅U×_{f_0,V,s'}Q is exactly the cartesian source square of 04ZN. No new nodes, no SGA. proof_deps equal the union of the step uses. The direct proof replaces the 04Y4 auxiliary-groupoid route (proof_origin agent) and is correct. Step 1: B=V×_D A follows the def-sfb 2-fibre-product convention; its stackness is re-checked from the stack axioms (glue v in V, x in A, α in Isom_D). Step 2: the arrow presheaves are equalizers of sheaves; clause (b) of the stackification node identifies Hom(a u,a w) with I_{u,w}; only the universal property of def-weil-pbc-sheafification is used. Step 3: unique lift through the source square forces r=e(u), so G is fibrewise fully faithful. Step 4: arrow directions checked; F(h)=F(θ)q=α. Step 5: the fully-faithful local-equivalence node applies; the inverse lies over V because V is discrete. Edge cases: identity morphism, discrete groupoids, pt→BG, G acting on itself over (pt,G), empty covers. Duplicate search over 04ZN, criterion-fibre-product, 2-cartesian and [U/R] found only the citers and different neighbours (04Y4, 0DTG, 04WY). The working tools are in the item's own unit; the other-unit nodes are definitions only. No tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidSourceCartesianQuotientSquare",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.groupoid_source_cartesian_quotient_square",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidSourceCartesianQuotientSquare.lean",
+  "statement": "theorem groupoid_source_cartesian_quotient_square {S : Scheme.{u}} {U R V Q : AlgebraicSpace S} (s t : R.obj.obj ⟶ U.obj.obj) (e : U.obj.obj ⟶ R.obj.obj) (j : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s t ⟶ R.obj.obj) (s' t' : Q.obj.obj ⟶ V.obj.obj) (e' : V.obj.obj ⟶ Q.obj.obj) (j' : Q.obj.obj ⟶ Q.obj.obj) (c' : Limits.pullback s' t' ⟶ Q.obj.obj) (A : BasedCategory.{v₁, w₁} (Over S)) (D : BasedCategory.{v₂, w₂} (Over S)) (a : BasedFunctor (discreteModuli U.obj.obj) A) (b : BasedFunctor (discreteModuli V.obj.obj) D) (pU : SpaceGroupoidQuotientPresentation s t e j c A a) (pV : SpaceGroupoidQuotientPresentation s' t' e' j' c' D b) (f₀ : U ⟶ V) (f₁ : R ⟶ Q) (hs : s ≫ f₀.hom.hom = f₁.hom.hom ≫ s') (ht : t ≫ f₀.hom.hom = f₁.hom.hom ≫ t') (he : e ≫ f₁.hom.hom = f₀.hom.hom ≫ e') (hj : j ≫ f₁.hom.hom = f₁.hom.hom ≫ j') (hc : ∀ (T : Over S) (p : yoneda.obj T ⟶ Limits.pullback s t) (q : yoneda.obj T ⟶ Limits.pullback s' t'), q ≫ pullback.fst s' t' = p ≫ pullback.fst s t ≫ f₁.hom.hom → q ≫ pullback.snd s' t' = p ≫ pullback.snd s t ≫ f₁.hom.hom → p ≫ c ≫ f₁.hom.hom = q ≫ c') (F : BasedFunctor A D) (θ : ((discreteModuliMap f₀.hom.hom).comp b) ≅ a.comp F) (hθ : ∀ (T : Over S) (x y : yoneda.obj T ⟶ U.obj.obj) (r : {r : yoneda.obj T ⟶ R.obj.obj // r ≫ s = x ∧ r ≫ t = y}) (q : {q : yoneda.obj T ⟶ Q.obj.obj // q ≫ s' = x ≫ f₀.hom.hom ∧ q ≫ t' = y ≫ f₀.hom.hom}), q.val = r.val ≫ f₁.hom.hom → θ.hom.toNatTrans.app (CostructuredArrow.mk x) ≫ F.map (spaceGroupoidPresentationArrow s t a pU.arrows x y r) = spaceGroupoidPresentationArrow s' t' b pV.arrows (x ≫ f₀.hom.hom) (y ≫ f₀.hom.hom) q ≫ θ.hom.toNatTrans.app (CostructuredArrow.mk y)) (hcart : IsPullback s f₁.hom.hom f₀.hom.hom s') : (moduliTwoFiberLift (discreteModuliMap f₀.hom.hom) a θ).toFunctor.IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-102be41cc",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read the item, the 8 stmt_deps owners (SpaceGroupoidQuotientPresentation/spaceGroupoidPresentationArrow, moduliTwoFiberLift/moduliTwoFiberProduct, discreteModuli(Map), ModuliTwoIso, IsFppfModuliStack incl. IsFibredInGroupoids, IsPresheafGroupoid) and Stacks spaces-groupoids l.3094 04ZN. The item record differs from live only in lean plus 2 added stmt_deps; both are landed definition owners actually used; no dependency record changes; lean.statement is verbatim. hs/ht/he/hj/hc give the groupoid morphism, with the c fst/snd convention consistent with the presentation. A,D come from the presentations (02ZP local description); F+θ+hθ pin [f] as the stackification extension, so it is not arbitrary. hcart = IsPullback s f₁ f₀ s' is the 04ZN source square. The conclusion is IsEquivalence of the canonical lift into V×_D A, with factor order as in Stacks. Independent quotient universes; no extra assumptions. Edge cases: empty covers, identity, pt→BG. No duplicate found in Sheaf or Mathlib. Docstrings, sorry-only proof and both report sections present. No compile (no file changed)."
+ }
+}

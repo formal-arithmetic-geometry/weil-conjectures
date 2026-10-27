@@ -1,0 +1,149 @@
+{
+ "id": "lem-weil-pbc-ringed-projection-local-pullback-normalization",
+ "kind": "statement",
+ "title": "Normalization of the localized pullback on arbitrary complexes",
+ "statement": "Fix schemes X,Y, f:X→Y, ring sheaves RY,RX, coefficient identification c, Global datum g, V in Y.ProEt and Local datum l as in [def-weil-pbc-ringed-projection-restriction-data]. Let G,H be the ordinary restrictions on Y and X, F the global ordinary module pullback and K the local one. Define gamma:G K→F H to be the inverse adjunction mate of l.ordinaryDirectImage.hom using the actual module adjunctions. Write theta=l.pullback.inv, and for a complex P let bFH(P):H_D(F_D(QP))≅Q(H(FP)) and bGK(P):K_D(G_D(QP))≅Q(K(GP)) be the composites of the supplied exact-functor localization factors. For every cochain complex P of Mod(RY), theta(QP) followed by bFH(P).hom equals bGK(P).hom followed by Q(gamma applied termwise to P). This assertion involves no tensor products or K-flatness.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04J0, 07A6 and 08FI; the first (normalized mate) step of the parent tensor-square proof."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-projection-restriction-data"
+ ],
+ "proof": [
+  {
+   "text": "Identify Operation.rightComparison with the canonical cochain unit rightDerivedFunctorUnitQ; the mapHomotopyCategoryFactors component is identity. Its naturality gives a natural transformation on all complexes. Apply derived_unit_cochain to the actual module adjunction and use naturality to obtain the normalized Hom equation for any chain map out of the termwise pullback.",
+   "uses": [
+    "lem-sfb-derived-adjunction-cochain-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC and 09T5; cochain normalization of the canonical derived adjunction unit."
+   }
+  },
+  {
+   "text": "Regard the two right-square normalization composites as natural transformations on complexes. For arbitrary I choose a K-injective resolution j:I→J. Restriction is exact, so the target functor maps j to an isomorphism. At J the supplied directImage_representative, postcomposed with the right-derived image of the restriction factor, gives equality by cancellation. Naturality and cancellation of the invertible target map j prove equality at I.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 08FI; normalization on K-injective resolutions and naturality."
+   }
+  },
+  {
+   "text": "The supplied mate_counit identifies the mate of pullback.inv with directImage.hom by the local Hom bijection. The inverse mate unit identity identifies the ordinary transpose of gamma in each degree. Apply the local derived Hom bijection to both proposed maps, use the normalized unit and Hom equations and the right-square normalization just established, and move the restriction factor through the ordinary unit by naturality. The transposes coincide, hence so do the maps.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0; the inverse mate of the localized direct-image comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-adjunction-cochain-unit",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 04J0, 07A6 and 08FI; the first (normalized mate) step of the parent tensor-square proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived adjunction mate normalized on K injective complexes is the localization of the ordinary pullback mate on every complex",
+   "results": "Eight hits, including Adjunction.derivedη_fac_app and derivedε_fac_app. These supply the abstract homotopy normalization; the existing project derived_unit_cochain gives its cochain version. No specialized localized mate theorem at the actual independent site sizes.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing cochain unit theorem, then prove the specialization by naturality and mates."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derivedη_fac_app",
+   "results": "One hit in Mathlib.CategoryTheory.Functor.Derived.Adjunction.",
+   "date": "2026-10-27",
+   "verdict": "The abstract factorization is used through the already proved project cochain theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "pure_hom_ext|unit_mateEquiv_symm|mapDerivedCategoryRightDerivedAdjunction",
+   "results": "Mathlib.CategoryTheory.Adjunction.Mates.unit_mateEquiv_symm. Project rg finds DerivedAdjunctionCochainUnit, RingedSlicePullbackMateNormalization, RingedProjectionGlobalModel and GeometricTensorEvaluation. The generic slice theorem uses a shared small-site universe.",
+   "date": "2026-10-27",
+   "verdict": "Use the mates law and the existing canonical unit normalization directly in the supplied Local presentation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionLocalTensorSquare",
+  "date": "2026-10-27",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Tags 04J0, 07A6 and 08FI; the first (normalized mate) step of the parent tensor-square proof.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-local-tensor-square",
+    "lem-weil-pbc-ringed-projection-local-model",
+    "lem-weil-pbc-ringed-projection-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionLocalPullbackNormalization",
+  "file": "lean/Sheaf/Paper/RingedProjectionLocalPullbackNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.localPullbackNormalization",
+  "statement": "theorem localPullbackNormalization\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})\n    (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1})\n    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ≅ R_X)\n    (g : Global f R_Y R_X c) (V : Y.ProEt)\n    (l : Local f R_Y R_X c g V) :\n    letI := l.restrictionYAdditive\n    letI := l.restrictionXAdditive\n    ∀ P : CochainComplex (Mod R_Y) ℤ,\n      l.pullback.inv.app (DerivedCategory.Q.obj P) ≫\n        l.restrictionX.model.functor.map (g.operation.leftModel.factors.hom.app P) ≫\n        l.restrictionX.model.factors.hom.app\n          ((g.operation.pullback.mapHomologicalComplex (.up ℤ)).obj P) =\n      l.operation.left.map (l.restrictionY.model.factors.hom.app P) ≫\n        l.operation.leftModel.factors.hom.app\n          ((SheafOfModules.overFunctor.{u + 1}\n            ((sheafCompose (ProEt.topology Y)\n              (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Y) V).mapHomologicalComplex\n              (.up ℤ) |>.obj P) ≫\n        DerivedCategory.Q.map\n          ((NatTrans.mapHomologicalComplex (localOrdinaryPullbackSquare l) (.up ℤ)).app P)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-27",
+  "sorry_free": true,
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.localOrdinaryPullbackSquare",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.localPullbackNormalization"
+  ]
+ },
+ "split_report": {
+  "date": "2026-10-27",
+  "item": "Sheaf.Paper.RingedProjectionLocalTensorSquare",
+  "worker": "stage3",
+  "summary": "A proved normalization on all complexes using the canonical cochain unit and K-injective naturality. No new proof hole.",
+  "blueprint": "The normalized localization subargument below the perfect projection formula, first proof step of the parent tensor-square node.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-adjunction-cochain-unit",
+    "why": "Uses only the generic canonical derived adjunction unit normalization for abelian categories; the same-unit small-site normalization has a different universe presentation."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T050630-L-247356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261027T050630-L-247356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

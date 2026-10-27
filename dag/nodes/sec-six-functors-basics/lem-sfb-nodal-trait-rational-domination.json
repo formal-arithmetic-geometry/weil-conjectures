@@ -1,0 +1,293 @@
+{
+ "id": "lem-sfb-nodal-trait-rational-domination",
+ "kind": "statement",
+ "title": "Rational geometric fibres dominate modifications of a nodal trait curve",
+ "statement": "Let $A$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $F$, and put $T=\\operatorname{Spec}A$ [def-weil-affine-spectrum]. Let $C\\to T$ be H-projective [def-kun-projective], flat [def-weil-flat-morphism] and finitely presented [def-sbc-locally-finite-presentation], with smooth geometrically integral generic fibre [def-sbc-smooth-morphisms, def-pc-geometrically-irreducible] and nonempty connected reduced geometric fibres of pure dimension one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Suppose every singularity of a geometric fibre has completed local ring $\\Omega[[u,v]]/(uv)$ [def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Then $C$ is integral [def-pc-integral-scheme] and normal, meaning that all its local rings are integrally closed domains. For every integral $\\Gamma$ with an H-projective morphism $p:\\Gamma\\to C$ whose restriction over $\\operatorname{Spec}F$ is an isomorphism, there are an integral scheme $Y$, an H-projective morphism $h:Y\\to C$ also an isomorphism over $\\operatorname{Spec}F$, and a proper surjective $C$-morphism $a:Y\\to\\Gamma$ [def-weil-proper-morphism, def-weil-surjective-morphism], with $pa=h$, having the following property: for every algebraically closed field $\\Omega$ and $\\operatorname{Spec}\\Omega\\to C$, the reduction [def-weil-pbc-scheme-reduction] of the geometric fibre $Y\\times_C\\operatorname{Spec}\\Omega$ is either a point or a nonempty connected union of finitely many irreducible components, each isomorphic to $\\mathbf P^1_\\Omega$ [def-sc-p1-standard].",
+ "source": {
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 3.13 proof, printed p.609: normal nodal surface, local singularities xy=pi^n, and resolution of indeterminacy by rational exceptional curves. This statement isolates the geometric domination assertion, without any target or extension conclusion. Supporting point-blowup domination: Stacks resolve.tex, lemma-dominate-by-blowing-up-in-points (Tag 0AHI). Local de Jong PDF WANTED; primary PDF read online.",
+  "url": "https://aif.centre-mersenne.org/item/10.5802/aif.1575.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-kun-projective",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-scheme-reduction",
+  "def-sc-p1-standard",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-smooth-generic-nodal-trait-normality] to $C$: every local ring is an integrally closed domain, and $C$ is integral as $C_F$ is. By [lem-sfb-nodal-trait-finite-singular-charts] $C$ is Noetherian. Apply [lem-sfb-nodal-trait-regularization] to obtain a finite tower $r:Z\\to C$ of blowups of reduced nonregular closed special-fibre points, with $Z$ regular, all stages flat finitely presented nodal families, and $r$ an isomorphism over $\\operatorname{Spec}F$. On each stage (generic fibre $C_F$) the normality lemma gives integrality and [lem-sfb-nodal-trait-finite-singular-charts] Noetherianity, local dimensions at most two, and dimension two at closed special-fibre points. Each arrow is H-projective by [lem-sfb-projective-affine-base-blowup] ($A$ and the stages are Noetherian); [lem-trf-h-projective-composition] makes $r$ H-projective.",
+   "uses": [
+    "lem-sfb-smooth-generic-nodal-trait-normality",
+    "lem-sfb-nodal-trait-finite-singular-charts",
+    "lem-sfb-nodal-trait-regularization",
+    "lem-sfb-projective-affine-base-blowup",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/models.tex",
+    "place": "Tag 0CDE (lemma-blowup-at-worst-nodal); returned Steps 1--2"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-regular-trait-modification-graph-tower] to $r$ and the given $p$: $C$ is integral H-projective over $T$ with nonempty integral generic fibre, and $Z$ satisfies its hypotheses by Step 1. Obtain a tower $Y\\to Z$ of blowups of reduced closed special-fibre points with regular two-dimensional local rings, and $a:Y\\to\\Gamma$ with $pa=h=rb_1\\cdots b_m$. Here $Y$ is integral, and $h$ is H-projective and an isomorphism over $\\operatorname{Spec}F$.",
+   "uses": [
+    "lem-sfb-regular-trait-modification-graph-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0C5H (lemma-extend-rational-map-blowing-up), whose proof is the reduced graph plus Tag 0AHI (lemma-dominate-by-blowing-up-in-points); returned Steps 4--6"
+   }
+  },
+  {
+   "text": "Concatenate the two towers over $X_0=C$; all stages are integral Noetherian by Steps 1--2. The nodal centres satisfy (a) of [lem-sfb-trait-point-tower-rational-components] by Step 1 (whole stage nodal, nonregular at the centre), the later ones (b) by Step 2. Thus every reduced geometric fibre of $h$ has dimension at most one and finitely many components, and each positive-dimensional component is $\\mathbf P^1$ over its specified geometric field.",
+   "uses": [
+    "lem-sfb-trait-point-tower-rational-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E (lemma-strict-transform); returned Steps 3 and 8"
+   }
+  },
+  {
+   "text": "Since $pa=h$, $a$ is a $C$-morphism. The source $Y$ is proper over $C$ by [lem-pc-projective-proper], and $\\Gamma$ is separated over $C$ because $p$ is projective. Thus [lem-weil-pbc-proper-to-separated] makes $a$ proper. Over $\\operatorname{Spec}F$, $a$ is the isomorphism $p_F^{-1}h_F$, so its closed image contains the nonempty, hence dense, generic fibre of the integral $\\Gamma$; hence $a$ is surjective.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-proper-to-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W6, proper source to separated target; closed image containing a dense open"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-proper-normal-geometric-connectedness] to $h$, proper by Step 4. Its source is integral, hence reduced, with generic point in $Y_F\\cong C_F$, mapping to the generic point $\\xi$ of $C$; its target is integral normal (Step 1); its fibre over $\\xi$ is $\\operatorname{Spec}\\kappa(\\xi)$, with global functions $\\kappa(\\xi)$. Hence every geometric fibre is nonempty connected, and so is its reduction. If it has dimension zero, it is one point (finitely many components, Step 3) whose reduced local ring is a field; [lem-weil-pbc-zariski-lemma] makes it $\\Omega$. Otherwise a zero-dimensional component would be a closed point in no other component, hence open and closed in the finite union, contradicting connectedness. So all components are one-dimensional and Step 3 identifies them with $\\mathbf P^1_\\Omega$.",
+   "uses": [
+    "lem-trf-proper-normal-geometric-connectedness",
+    "lem-weil-pbc-zariski-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0AY8 (lemma-geometrically-connected-fibres-towards-normal); returned Step 9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-smooth-generic-nodal-trait-normality",
+  "lem-sfb-nodal-trait-finite-singular-charts",
+  "lem-sfb-nodal-trait-regularization",
+  "lem-sfb-projective-affine-base-blowup",
+  "lem-trf-h-projective-composition",
+  "lem-sfb-regular-trait-modification-graph-tower",
+  "lem-sfb-trait-point-tower-rational-components",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-trf-proper-normal-geometric-connectedness",
+  "lem-weil-pbc-zariski-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/de-jong-families-curves-alterations-1997.pdf",
+  "place": "Lemma 3.13 proof, printed p.609; explicit singular-point resolution followed by Stacks 0AHI, with geometric connectedness from 0AY8. Archival PDF WANTED; primary PDF read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A semistable surface over a trait has a resolution whose geometric exceptional components are projective lines",
+   "results": "{\"t\": \"2026-10-22T03:44:18Z\", \"tool\": \"leansearch\", \"query\": \"A semistable surface over a trait has a resolution whose geometric exceptional components are projective lines\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"LibraryNote.Design_choices_about_smooth_algebraic_structures\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"ea4687df41dd3765\"}; no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|rationalSingular|RationalSingular|exceptional.*[Cc]urve",
+   "results": "{\"t\": \"2026-10-22T03:44:18Z\", \"tool\": \"grep\", \"query\": \"nodal|semistable|rationalSingular|RationalSingular|exceptional.*[Cc]urve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T03:44:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective modification of a nodal curve over a discrete valuation ring with smooth generic fibre is dominated by a resolution with rational connected exceptional fibres",
+   "results": "{\"t\": \"2026-10-22T03:44:21Z\", \"tool\": \"leanfinder\", \"query\": \"A projective modification of a nodal curve over a discrete valuation ring with smooth generic fibre is dominated by a resolution with rational connected exceptional fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.isMinimal_iff\", \"WeierstrassCurve.Projective.NonsingularLift\"], \"digest\": \"d94783a9f63a32df\"}; no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres.",
+   "date": "2026-10-22",
+   "verdict": "no match: minimal Weierstrass models and base-change stability of smoothness do not resolve nodal surfaces or dominate their modifications by rational exceptional fibres."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective modification of a nodal curve over a discrete valuation ring is dominated by a regular surface with connected rational geometric exceptional fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.IsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} → [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → Prop\", \"doc\": \"A property of a Weierstrass curve over the fraction field $ K $ of a discrete valuation ring $ R $, indicating that the curve satisfies minimality conditions with respect to the valuation induced by $\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K},\\n  WeierstrassCurve.IsMinimal R (WeierstrassCurve.minimal R W)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.minimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → WeierstrassCurve K\", \"doc\": \"Given a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, this function returns the minimal Weierstrass curve equivalent to $ W $ under a variable change. The r\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [WeierstrassCurve.IsMinimal R W], WeierstrassCurve.IsIntegral R W\", \"doc\": \"Every minimal Weierstrass curve over the fraction field of a discrete valuation ring is integral, meaning its coordinate ring forms an integral domain.\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] {K : Type u_2} [inst_1 : Field K] [inst_2 : Algebra R K] [inst_3 : IsDomain R]\\n  [ValuationRing R] [IsFractionRing R K] (W : WeierstrassCurve K), ∃ C, WeierstrassCurve.IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned Weierstrass minimal-model and nonsingularity declarations do not state domination of arbitrary nodal-trait modifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned Weierstrass minimal-model and nonsingularity declarations do not state domination of arbitrary nodal-trait modifications."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|semistable|exceptional.*[Cc]urve",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned Weierstrass minimal-model and nonsingularity declarations do not state domination of arbitrary nodal-trait modifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A modification of a semistable curve over a discrete valuation ring admits rational exceptional fibre domination",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) : ∃ C : VariableChange K, IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W W_1 : WeierstrassCurve K) (e_W : W = W_1)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGood\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, if two Weierstrass curves $ W $ and $ W_1 $ over $ K $ are equal, then $ W $ has good reduction if and only if $ W_1 $ has good reduction\"}\n  {\"name\": \"WeierstrassCurve.isGoodReduction_iff\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  WeierstrassCurve.IsGoodReduction R W ↔\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and a minimal Weierstrass curve $ W $ over $ K $, the curve $ W $ has good reduction if and only if the valuation of its discriminant $ \\\\\"}\n  {\"name\": \"WeierstrassCurve.instIsMinimalMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"{W : WeierstrassCurve K} : IsMinimal R (W.minimal R)\", \"doc\": \"For any Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, the minimal Weierstrass curve obtained by applying the minimal transformation to $ W $ satisfies the m\"}\n  {\"name\": \"WeierstrassCurve.exists_isIntegral\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) : ∃ C : VariableChange K, IsIntegral R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ over a field $ K $ equipped with an $ R $-algebra structure, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ has an integral coordina\"}\n  {\"name\": \"WeierstrassCurve.reduction\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"(W : WeierstrassCurve K) [IsMinimal R W] : WeierstrassCurve (ResidueField R)\", \"doc\": \"Given a minimal Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, its reduction is the Weierstrass curve obtained by first constructing the integral model of $ \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction.mk\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] {W : WeierstrassCurve K}\\n  [inst_6 : WeierstrassCurve.IsMinimal R W],\\n  (IsDedekindDomain.HeightOneSpectrum.valuati\", \"doc\": \"If the valuation of the discriminant $\\\\Delta$ of a minimal Weierstrass curve $W$ over the fraction field $K$ of a discrete valuation ring $R$ equals 1, then $W$ has good reduction, meaning its coeffic\"}\n  {\"name\": \"WeierstrassCurve.instIsIntegralOfIsMinimal\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Reduction\", \"type\": \"{W : WeierstrassCurve K} [IsMinimal R W] : IsIntegral R W\", \"doc\": \"Every minimal Weierstrass curve over the fraction field of a discrete valuation ring is integral, meaning its coordinate ring forms an integral domain.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned Weierstrass minimal-model and nonsingularity declarations do not state domination of arbitrary nodal-trait modifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Resolution of indeterminacy on an arithmetic nodal surface by point blowups with projective line exceptional components",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"Every point on a projective Weierstrass curve over a commutative ring $ R $ is nonsingular, meaning it satisfies the curve's homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ and at least one p\"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [Nontrivial R], W'.NonsingularLift ⟦![0, 1, 0]⟧\", \"doc\": \"For any non-trivial commutative ring $ R $, the projective point $[0:1:0]$ on the Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ satisfies the nonsingularity condition. This means the poin\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Jacobian R → WeierstrassCurve.Jacobian.PointClass R → Prop\", \"doc\": \"The property that a point class $ [P] $ in the Jacobian of a Weierstrass curve is nonsingular if any representative $ P $ of the class satisfies the nonsingularity condition. This is well-defined beca\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.nonsingularLift_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} [Nontrivial R], W'.NonsingularLift ⟦![1, 1, 0]⟧\", \"doc\": \"For any nontrivial commutative ring $ R $, the zero element of the Jacobian of a Weierstrass curve, represented by the point class $ [1, 1, 0] $, is nonsingular.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → (Fin 3 → R) → Prop\", \"doc\": \"A point $ P = [X:Y:Z] $ in projective space over a ring $ R $ is nonsingular if it satisfies the homogeneous cubic equation defining the projective Weierstrass curve $ Y^2Z + a_1XYZ + a_3YZ^2 - X^3 - \"}\n  {\"name\": \"WeierstrassCurve.Projective.nonsingular_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Projective R} [Nontrivial R], W'.Nonsingular ![0, 1, 0]\", \"doc\": \"For a projective Weierstrass curve over a nontrivial ring $ R $, the point $[0:1:0]$ is nonsingular. This means that at least one of the partial derivatives of the curve's defining polynomial $ W(X,Y,\"}\n  {\"name\": \"WeierstrassCurve.Jacobian.Point.nonsingular\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Jacobian R} (self : W'.Point), W'.NonsingularLift self.point\", \"doc\": \"For any commutative ring $ R $ and any Weierstrass curve over $ R $, a point on the Jacobian (which is the curve itself) is nonsingular if and only if every representative of its equivalence class und\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: The returned Weierstrass minimal-model and nonsingularity declarations do not state domination of arbitrary nodal-trait modifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-high-genus-hom-closure",
+  "date": "2026-10-22",
+  "group": "NK"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction",
+   "via": [
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-trait-rational-domination",
+  "worker": "stage1",
+  "summary": "Repair of L's side-completion promotion refusal on the current fetched DAG. Re-read all ten assembly dependency statements: the retained full-statement quotations still match, and the current parent agrees outside proof/proof_deps/split_report. The released keep_plan order still requires three new statement-only nodes; they remain absent live. Preserve the statement, inherited metadata, nine source arguments and logged searches. Clarify assembly Step 1 by applying normality and dimension bounds at every regularization stage, and Step 4 by deriving both proper morphisms and the separated target from the cited projective-proper statement. Three independent unsplit inputs and a short five-step assembly are retained. The signed report records the new current-base comparison, source and hypothesis audit; delivery.py rebases and verifies server-side. No Lean edit or compilation. Maintainer reader FIX (Q48 2626, re-applying the lost c1db8f48 FIX): the graph-tower node is narrowed to the trait application of the existing lem-sfb-surface-rational-map-point-resolution (Stacks 0C5H); the normality node drops the Noetherian and local-dimension clauses already stated by lem-sfb-nodal-trait-finite-singular-charts, which Step 1 now cites; the components node replaces 'near z_i' by 'over some open neighbourhood of z_i in X_i'; Steps 1-5 are rewritten accordingly and Step 5 checks every hypothesis of the 0AY8 node.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong Lemma 3.13, rational exceptional-curve geometry before contraction; returned Steps 1--9 are mapped in report.md; no chapter or unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic algebraic-geometric input for the nodal-trait surface argument: Composition of H-projective morphisms. This supplies no trace-formula, duality or coefficient theorem; the present unit has no node stating this generic fact."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic algebraic-geometric input for the nodal-trait surface argument: Projective morphisms are proper. This supplies no trace-formula, duality or coefficient theorem; the present unit has no node stating this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-to-separated",
+    "why": "Generic algebraic-geometric input for the nodal-trait surface argument: Proper to a separated target. This supplies no trace-formula, duality or coefficient theorem; the present unit has no node stating this generic fact."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic algebraic-geometric input for the nodal-trait surface argument: Zariski's lemma: a field of finite type over a field is a finite extension. This supplies no trace-formula, duality or coefficient theorem; the present unit has no node stating this generic fact."
+   },
+   {
+    "node": "lem-trf-proper-normal-geometric-connectedness",
+    "why": "Generic algebraic-geometric input for the nodal-trait surface argument: Geometrically connected fibres of proper maps to normal schemes. This supplies no trace-formula, duality or coefficient theorem; the present unit has no node stating this generic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-nodal-family-etale-local-model",
+  "lem-sbc-etale-trait-stalk",
+  "lem-trf-projective-nodal-family-geometry",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-trf-h-projective-composition",
+  "thm-nagata-strict-transform-is-blowup",
+  "cor-nagata-blowup-cartier-iso",
+  "def-nagata-strict-transform",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-sc-normal-dim1-dvr",
+  "lem-weil-pbc-proper-to-separated",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-trf-proper-normal-geometric-connectedness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-262757235",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-262757235 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. This is the fourth delivery of the batch-5 re-split. The live repair note (released, stage 1, keep_plan, at least 3 nodes, assembly at most 3000 characters) still applies. Live still has the old 9-step proof and none of the three new ids, so the delivery is not superseded. A parsed diff against the c1db8f48 snapshot shows the three new nodes are byte-identical. In the item only the wording of Steps 1 and 4 and the split_report changed. So the c1db8f48 FIX, which re-applied the 456ce6f9 and 773d48f3 FIXes, was lost a third time after the 'not in live DAG' landing refusals, and I re-apply it here. Mapping of old steps: 1 goes to the normality node; 2 to the existing reviewed regularization node, plus the projective-affine-base-blowup and H-projective-composition nodes; 3 and 8 to the components node; 4-6 to the graph-tower node (old Steps 4-6 restate the reviewed 0C5H node); 7 and 9 to assembly Steps 4 and 5. Sources read: resolve.tex 0C5H at l.965-990 (its proof is the codimension-1 extension, the finite set of regular 2-dimensional bad points, the graph and 0AHI), divisors.tex 080E at l.8802, and the 0AY8 hypotheses. Tags 0CBY, 0CDE, 0AGQ, 0AGR and 0AHI are confirmed in tags/tags. No SGA is cited. De Jong 3.13 stays WANTED and proof_origin stays agent. FIX 1 (C5): the graph-tower node restated 0C5H, i.e. lem-sfb-surface-rational-map-point-resolution together with its proof internals G, E and v. I narrowed it to the trait application: blowups of closed special-fibre points, centres regular of dimension 2 (by the dimension formula, 1+1-0), every Z_i H-projective, and a with pa=h automatic from S=C. Tested on Gamma=C, a regular-point blowup and Z_k empty. FIX 2 (C5): the normality node restated the Noetherian and local-dimension clauses of lem-sfb-nodal-trait-finite-singular-charts (same unit, same hypotheses). I removed them, and Step 1 now cites finite-singular-charts. The trimmed node is true: ab=pi^n with n>=1 is S2 and R1 so Serre's criterion applies, flatness gives density, and integrality follows. Tested on xy=pi, pi^2, pi^3, smooth, disjoint and empty families. FIX 3 (B2): 'nodal near z_i' in the components node now reads 'over some open neighbourhood of z_i in X_i'. That node is true: the exceptional fibre is a conic or two lines in case (a) and P1 over kappa(z) in case (b); Zariski's lemma handles inseparable residue fields; an old line meets the centre in a finite set, so its pulled-back ideal is invertible and 080E gives the line back. The assembly is the c1db8f48 text: 2992 characters, uses equal proof_deps, no cycle, and Step 5 checks every 0AY8 hypothesis. A FIX sentence is appended to this head's split_report. The tool_uses (H-projective composition, projective implies proper, proper to separated, Zariski's lemma, 0AY8) are generic and accepted. Maintainer note: these fixes have now been lost three times; L must promote this item with the fixes.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalTraitRationalDomination",
+  "declaration": "AlgebraicGeometry.exists_nodal_trait_rational_domination",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalTraitRationalDomination.lean",
+  "statement": "theorem exists_nodal_trait_rational_domination (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (F : Type u) [Field F] [Algebra A F] [IsFractionRing A F] (C : Scheme.{u}) (f : C ⟶ Spec (.of A)) [IsHProjective f] [Flat f] [LocallyOfFinitePresentation f] [Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap A F))))] [GeometricallyIntegral (pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap A F))))] (hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of A)), ConnectedSpace ↥(pullback f g) ∧ IsReduced (pullback f g) ∧ (pullback f g).IsPureDimension 1) (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of A)) (x : ↥(pullback f g)), x ∉ (pullback.snd f g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback f g).presheaf.stalk x)) ((pullback f g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) : IsIntegral C ∧ (∀ x : C, IsDomain (C.presheaf.stalk x) ∧ IsIntegrallyClosed (C.presheaf.stalk x)) ∧ ∀ (Γ : Scheme.{u}) [IsIntegral Γ] (p : Γ ⟶ C) [IsHProjective p], IsIso (pullback.snd p (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A F))))) → ∃ (Y : Scheme.{u}) (h : Y ⟶ C) (a : Y ⟶ Γ), IsIntegral Y ∧ IsHProjective h ∧ IsIso (pullback.snd h (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap A F))))) ∧ IsProper a ∧ Surjective a ∧ a ≫ p = h ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ C), (IsIso ((pullback h g).nilradical.subschemeι ≫ pullback.snd h g)) ∨ (ConnectedSpace ↥(pullback h g).nilradical.subscheme ∧ (irreducibleComponents ↥((pullback h g).nilradical.subscheme)).Finite ∧ ∀ Z : Set ↥((pullback h g).nilradical.subscheme), Z ∈ irreducibleComponents ↥((pullback h g).nilradical.subscheme) → ∃ i : ProjectiveLine (Spec (.of Ω)) ⟶ (pullback h g).nilradical.subscheme, IsClosedImmersion i ∧ Set.range i = Z ∧ i ≫ (pullback h g).nilradical.subschemeι ≫ pullback.snd h g = ProjectiveLine (Spec (.of Ω)) ↘ Spec (.of Ω))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9069c7562",
+  "group": "NR",
+  "result": "pass",
+  "note": "Every clause of lem-sfb-nodal-trait-rational-domination checked against the Lean: DVR A, fraction field F, f : C → Spec A that is H-projective, flat and of finite presentation; smooth, geometrically integral generic fibre; hfib (connected, reduced, IsPureDimension 1 over every algebraically closed Ω in universe u); hnodal (ring iso of the maximal-adic completion of the stalk with MvPowerSeries (Fin 2) Ω/(X0X1) at non-smooth points, equivalent to an Ω-algebra iso by Cohen); C integral with integrally closed domain stalks; ∀ integral Γ with H-projective p that is iso over F, ∃ integral Y, H-projective h iso over F, a proper and surjective with a≫p=h; reduced geometric fibres are Spec Ω (iso, equivalent to a point by Zariski) or connected with finitely many components, each the image of a closed immersion from ProjectiveLine over Ω. No extra hypotheses; quantifier order matches. The only node changes are the lean record and the added stmt_dep def-weil-pure-dimension (landed by ND with a lean record, allowed by brief-stage2 l.167). Statement unchanged; lean.statement verbatim. No dropped nodes. Docstrings carry the source, the blueprint tag and all 9 steps. Proof is sorry only. All imports exist live. Not recompiled per 2026-10-21; worker reports a clean compile. Advisory: hyphen-wrapped dependency ids in the docstring."
+ }
+}

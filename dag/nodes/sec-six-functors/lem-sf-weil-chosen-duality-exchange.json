@@ -1,0 +1,268 @@
+{
+ "id": "lem-sf-weil-chosen-duality-exchange",
+ "kind": "statement",
+ "title": "Specified Weil exchange data for chosen dualizing objects",
+ "statement": "Fix a finite field $k_0$, an algebraic closure $k$, a prime $\\ell\\ne\\operatorname{char}k_0$ and $\\Omega=\\overline{\\mathbf Q}_\\ell$. Let $f_0:X_0\\to Y_0$ be separated and of finite type, with $X_0,Y_0$ separated finite-type $k_0$-schemes, and let $f:X\\to Y$ be its geometric base change. For $T=X,Y,s=\\operatorname{Spec}k$, use the common-stage category $\\mathcal C_T=D^b_c(T,\\Omega)$ [def-weil-algebraically-closed-coefficients] and its geometric-Frobenius fixed-pair category $\\mathrm W(T_0)$ [def-weil-weil-sheaf-complex]. Operations mean the common-stage pullback, direct image, compact support, tensor and internal Hom [def-weil-derived-pullback-tensor-hom], [def-weil-integral-rational-qbar-compact-support], [def-weil-derived-direct-image], with their standard Weil lifts. Use their canonical lifted constructible exceptional adjoints [cor-coef-verdier-weil-equivariance]. Choose arbitrary structure adjunctions $Ra_{T,0!}\\dashv J_T$ on the pair categories and put $\\omega_T=J_T\\Omega_{s_0}$, $D_T=R\\mathcal Hom_T(-,\\omega_T)$. Write $J_T^{\\rm can}$ for the canonical structure right adjoint and $n_T:\\omega_T\\xrightarrow{\\sim}J_T^{\\rm can}\\Omega_{s_0}$ for the counit-compatible comparison. Let $G_f$ be the canonical geometric constructible right adjoint of $Rf_!$ [def-weil-exceptional-inverse-image], with its standard Weil lift.\n\nThe ordinary adjunction $f^*\\dashv Rf_*$ restricts to the pair categories with its ordinary unit, counit and Hom bijections. Let $c_f^{\\rm can}:G_fJ_Y^{\\rm can}\\xrightarrow{\\sim}J_X^{\\rm can}$ be the right-adjoint mate of the compact-support composition isomorphism $Ra_{X!}\\xrightarrow{\\sim}Ra_{Y!}Rf_!$ [def-fix-six-functor-datum]. Then\n$$c_f=n_X^{-1}\\circ(c_f^{\\rm can})_{\\Omega_{s_0}}\\circ G_f(n_Y):G_f\\omega_Y\\xrightarrow{\\sim}\\omega_X$$\nis an isomorphism of Weil pairs. For $M\\in\\mathrm W(X_0)$ put $A=R\\mathcal Hom_Y(Rf_!M,\\omega_Y)$. The successive exceptional, tensor--Hom and ordinary adjunction transposes of\n$$Rf_!(M\\otimes^Lf^*A)\\xrightarrow{\\operatorname{PF}_{f,M,A}^{-1}}Rf_!M\\otimes^LA\\xrightarrow{\\operatorname{ev}}\\omega_Y$$\ndefine a Weil morphism $\\tau_M:A\\to Rf_*R\\mathcal Hom_X(M,G_f\\omega_Y)$, natural contravariantly in $M$. Here $\\operatorname{PF}$ is the specified projection isomorphism [fix-prop-projection-formula]. Every object and transpose displayed lies in the bounded constructible categories. In particular\n$$e_M=Rf_*R\\mathcal Hom_X(M,c_f)\\circ\\tau_M:D_YRf_!M\\longrightarrow Rf_*D_XM$$\nis a natural Weil morphism. These assertions concern the specified maps and use only constructible exceptional adjoints; no ambient exceptional-adjoint admissibility is imposed. No invertibility of $\\tau_M$ or $e_M$ is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md",
+  "place": "Equivariant adjunction maps and evaluation; thm-sf-verdier-exchange.proof.md Step 1 composition mate; returned proof Step 2, Step 3 and the c-isomorphism portion of Step 4"
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image",
+  "cor-coef-verdier-weil-equivariance",
+  "fix-prop-projection-formula",
+  "def-weil-exceptional-inverse-image",
+  "def-fix-six-functor-datum",
+  "def-pod-constructible-weil-model-squares",
+  "def-sf-constructible-common-stage-data",
+  "def-sf-derived-argument-first-evaluation",
+  "def-pod-weil-lift-interfaces",
+  "def-pod-partial-closed-interfaces",
+  "def-sf-adic-closed-reindexing-maps",
+  "def-sf-constructible-projection-mates",
+  "def-sf-rational-common-tensor-symmetries",
+  "def-a1-common-stage-coefficient-unit",
+  "def-weil-frobenius-square-exchange",
+  "def-sf-operation-stages"
+ ],
+ "proof": [
+  {
+   "text": "Obtain Data from lem-sf-weil-chosen-exchange-construction. This supplies the normalized Hom lifts, constant pair, specified projection and compositor, with no exchange law.",
+   "uses": [
+    "lem-sf-weil-chosen-exchange-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Unfold the explicitly constructed ordinaryAdjunction and IsoAlgebra.mapOfNatIsoAdjunction. Units and counits have the original carrier maps by reflexivity. Expand homEquiv_unit and homEquiv_counit, eliminate each given carrier HEq, and conclude both Hom-bijection carrier formulas by reflexivity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary chosen structure right adjunctions use the existing chosenComparison: rightAdjointUniq, conjugateIsoEquiv and composition of isomorphisms construct exactly the specified Weil comparison. The three-transpose components form tau by lem-sf-weil-chosen-transpose-naturality.",
+   "uses": [
+    "lem-sf-weil-chosen-transpose-naturality",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Map chosenComparison.hom under the flipped curried Hom bifunctor to obtain a natural transformation, then whisker it by Q. Compose this with tau. The tau_app and exchange_app formulas are definitional. Package this Exchange for all chosen adjunctions together with the proved OrdinaryMaps. No inverse of tau or exchange is used.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "det-sp-unique-right-adjoint",
+  "lem-sf-weil-chosen-exchange-construction",
+  "lem-sf-weil-chosen-transpose-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/thm-sf-verdier-exchange.proof.md",
+  "place": "D2 reduction: normalized data construction and three-transpose naturality split off; ordinary carrier laws and final Hom substitution proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The projection evaluation transpose Verdier exchange map for constructible Weil pairs and arbitrary structure right adjoints is a natural isomorphism without ambient exceptional adjoint admissibility",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.bijection_natural\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Category.{v₁, u₂} D]\\n  (i : CategoryTheory.Functor D C) [inst_2 : CategoryTheory.CartesianMonoidalCategory C]\\n  [inst_3 : CategoryTheory.Reflective i] [inst_4 : CategoryTheory.MonoidalClosed C]\\n  [inst\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with a reflective functor $i: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ whose essential image forms an exponential ideal, the natural bijection between $\\\\text{Hom}_\"}\n  {\"name\": \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso LightCondSet.sequentialAdjunction.counit\", \"doc\": \"The counit of the adjunction between the category of sequential topological spaces and the category of light condensed sets is an isomorphism.\"}\n  {\"name\": \"AlgebraicTopology.DoldKan.Compatibility.τ₁\", \"module\": \"Mathlib/AlgebraicTopology/DoldKan/Compatibility\", \"type\": \"{A : Type u_1} →\\n  {A' : Type u_2} →\\n    {B : Type u_3} →\\n      {B' : Type u_4} →\\n        [inst : CategoryTheory.Category.{v_1, u_1} A] →\\n          [inst_1 : CategoryTheory.Category.{v_2, u_2} A'] →\\n            [inst_2 : CategoryTheory.Category.{v_3, u_3} B] →\\n              [inst_3 : CategoryTheory.\", \"doc\": \"An isomorphism between the composition $ e_B \\\\circ e'^{-1} \\\\circ e' $ and $ e_B $, constructed via a chain of natural isomorphisms: first using the associator to reassociate functors, then applying ri\"}\n  {\"name\": \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"module\": \"Mathlib/Condensed/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso CondensedSet.compactlyGeneratedAdjunction.counit\", \"doc\": \"The counit of the adjunction between compactly generated spaces and condensed sets is an isomorphism. This means that for every compactly generated space $X$, the canonical morphism from the condensed\"}\n  {\"name\": \"CategoryTheory.exponentialIdealReflective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Closed/Ideal\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n      [inst_1 : CategoryTheory.Category.{v₁, u₂} D] →\\n        (i : CategoryTheory.Functor D C) →\\n          [inst_2 : CategoryTheory.CartesianMonoidalCategory C] →\\n            [inst_3 : CategoryTheory.MonoidalClosed C\", \"doc\": \"For a reflective exponential ideal inclusion functor $i : D \\to C$ in a Cartesian monoidal closed category $\\\\mathcal{C}$, there is a natural isomorphism between the composition $i \\\\circ [A, -] \\\\circ \\\\t\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a predicate $ P $ on compact Hausdorff-like spaces that has explicit finite coproducts, the unit of the adjunction between the functor constructing sheaves of locally constant functions and the se\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariance and invertibility of the canonical map dual compact support to direct image dual in constructible sheaf categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((LightCondensed.forget R).map\\n      ((LightCondensed.discreteUnderlyingAdj (ModuleCat R)).counit.app\\n        ((LightCondMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the morphism obtained by applying the forgetful functor from light condensed $ R $-modules to light condensed sets to the counit of the discrete-underlying adjunction \"}\n  {\"name\": \"CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a predicate $ P $ on compact Hausdorff-like spaces that has explicit finite coproducts, the unit of the adjunction between the functor constructing sheaves of locally constant functions and the se\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n    \", \"doc\": \"A natural transformation from the composition of the sheaf sections functor (evaluated at the terminal object PUnit) with a finite-product-preserving functor to the identity functor on sheaves over co\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)] →\\n    [inst : CompHausLike.HasProp P PUnit.{u + 1}] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n    \", \"doc\": \"There is an adjunction between the functor that constructs sheaves of locally constant functions on compact Hausdorff-like spaces and the sections functor evaluated at the terminal object (the unit ty\"}\n  {\"name\": \"CompHausLike.LocallyConstant.counit_app_val\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"For a sheaf $X$ over compact Hausdorff-like spaces with a coherent Grothendieck topology, the counit of the adjunction between the sheaf of locally constant functions and the presheaf construction eva\"}\n  {\"name\": \"CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R] (M : ModuleCat R),\\n  CategoryTheory.IsIso\\n    ((Condensed.forget R).map\\n      ((Condensed.discreteUnderlyingAdj (ModuleCat R)).counit.app ((CondensedMod.LocallyConstant.functor R).obj M)))\", \"doc\": \"For any left $ R $-module $ M $, the counit of the adjunction between discrete condensed modules and the underlying category, evaluated at the locally constant condensed module associated to $ M $, be\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil Frobenius equivariant Verdier exchange dual compact support direct image canonical mate",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.frobeniusMorphism_mate\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Closed.Functor\", \"type\": \"(h : L ⊣ F) (A : C) :\\n  conjugateEquiv (h.comp (ihom.adjunction A)) ((ihom.adjunction (F.obj A)).comp h) (frobeniusMorphism F h A).natTrans =\\n    (expComparison F A).natTrans\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be monoidal closed categories, and let $L: \\\\mathcal{D} \\\\to \\\\mathcal{C}$ and $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ be a pair of adjoint functors, with $L$ being the left \"}\n  {\"name\": \"WittVector.IsocrystalEquiv.frob_equivariant\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂]\\n  (self : \", \"doc\": \"Let $p$ be a prime number and $k$ be a perfect commutative ring of characteristic $p$. Let $V$ and $V_2$ be two isocrystals over $k$, with corresponding Frobenius isomorphisms $\\\\Phi_V$ and $\\\\Phi_{V_2}\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"∀ {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [inst : CategoryTheory.Category.{v₁, u₁} C]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] [inst_2 : CategoryTheory.Category.{v₃, u₃} E]\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Fun\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"WittVector.IsocrystalHom.mk.sizeOf_spec\", \"module\": \"Mathlib.RingTheory.WittVector.Isocrystal\", \"type\": \"∀ {p : ℕ} [inst : Fact (Nat.Prime p)] {k : Type u_1} [inst_1 : CommRing k] [inst_2 : CharP k p]\\n  [inst_3 : PerfectRing k p] {V : Type u_2} [inst_4 : AddCommGroup V] [inst_5 : WittVector.Isocrystal p k V]\\n  {V₂ : Type u_3} [inst_6 : AddCommGroup V₂] [inst_7 : WittVector.Isocrystal p k V₂] [inst_8 : \", \"doc\": \"The Frobenius endomorphism on the fraction ring $ K(p, k) $ of Witt vectors over a perfect commutative ring $ k $ of characteristic $ p $, which raises each coefficient to its $ p $-th power, has an i\"}\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \": TwoSquare G L₁ L₂ H ≃ TwoSquare R₁ H G R₂\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and a two-square diagram between functors involving these adjoints, there is a natural equivalence between two constructions of mates: one derived from w\"}\n  {\"name\": \"WittVector.frobeniusEquiv_symm_apply\", \"module\": \"Mathlib.RingTheory.WittVector.Frobenius\", \"type\": \"∀ (p : ℕ) (R : Type u_1) [hp : Fact (Nat.Prime p)] [inst : CommRing R] [inst_1 : CharP R p] [inst_2 : PerfectRing R p],\\n  ⇑(WittVector.frobeniusEquiv p R).symm = ⇑(WittVector.map ↑(frobeniusEquiv R p).symm)\", \"doc\": \"For a prime $ p $ and a perfect commutative ring $ R $ of characteristic $ p $, the inverse of the Frobenius ring equivalence on Witt vectors $ W(R) $ is equal to the Witt vector map induced by the in\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"{L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C} {L₃ : C ⥤ D} {R₃ : D ⥤ C} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)\\n  (adj₃ : L₃ ⊣ R₃) (α : TwoSquare G L₁ L₂ H) (β : L₃ ⟶ L₂) :\\n  (mateEquiv adj₁ adj₃) (α.whiskerRight β) = (mateEquiv adj₁ adj₂ α).whiskerBottom (conjugateEquiv adj₂ adj₃ β)\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $, $ L₂ ⊣ R₂ $, and $ L₃ ⊣ R₃ $, and a two-square diagram $ α $ between functors involving $ L₁, L₂ $, along with a natural transformation $ β: L₃ → L₂ $, the composition o\"}\n  {\"name\": \"CategoryTheory.mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \"(α : TwoSquare G₁ L₁ L₂ H₁) (β : TwoSquare G₂ L₂ L₃ H₂) :\\n  (mateEquiv adj₁ adj₃) (α ≫ₕ β) = (mateEquiv adj₁ adj₂ α) ≫ᵥ (mateEquiv adj₂ adj₃ β)\", \"doc\": \"Given adjunctions $ L₁ ⊣ R₁ $ and $ L₂ ⊣ R₂ $, and two two-square diagrams $ α $ and $ β $ between functors involving these adjoints, the mate equivalence commutes with vertical composition. Specifica\"}",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier.*exchange|verdier.*exchange|exceptional.*adjoint|lowerShriek",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil fixed pairs for constructible sheaves: ordinary adjunction, composition mate for chosen dualizing objects, and natural projection evaluation transpose",
+   "results": "8 hits; CompHausLike.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondSet.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, CompHausLike.LocallyConstant.adjunction_left_triangle, CompHausLike.LocallyConstant.adjunction_unit, CompHausLike.LocallyConstant.adjunction_counit",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits; none; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-23",
+   "verdict": "invalid query; corrected by the subsequent CategoryTheory.Adjunction search; no absence conclusion from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|dualizing|Verdier",
+   "results": "24 hits; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/ComposableArrows/Basic.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Presentable/Directed.lean, Mathlib/CategoryTheory/Localization/Triangulated.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural equivariant duality exchange map obtained by transposing projection formula and evaluation in categories of Frobenius fixed pairs",
+   "results": "8 hits; LinearEquiv.trans_dualMap_symm_flip, Module.Dual.transpose, LinearMap.dualMap, Module.Dual.eval_naturality, LinearMap.dualMap_def, Module.Dual.congr_apply_apply, Module.dualProdDualEquivDual, LinearEquiv.symm_flip",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjoint functors lift to categories of objects with automorphism and tensor Hom evaluation transposes are equivariant",
+   "results": "8 hits; CategoryTheory.FunctorToTypes.adj, CategoryTheory.MonoidalClosed.FunctorCategory.adj, Rep.homEquiv, CategoryTheory.Functor.monoidalClosed_closed_adj, Rep.homEquiv_def, CategoryTheory.Types.tensorProductAdjunction, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv, Rep.MonoidalClosed.linearHomEquivComm; functor-category and representation-category tensor-Hom results do not include sheaf Frobenius transport or these specified adjunction maps",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction",
+   "results": "12 hits; CategoryTheory.Adjunction.id, CategoryTheory.Adjunction.instInhabitedId, CategoryTheory.Adjunction, CategoryTheory.Equivalence.toAdjunction, CategoryTheory.Equivalence.toAdjunction', CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk'; generic adjunction declarations do not state the common-stage Weil construction, chosen dualizing comparison, or the specified projection-evaluation map",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|dualizingComplex|verdierDual|IsoAlgebra.*Adjunction",
+   "results": "0 hits; none",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-weil-upper-shriek-verdier-conjugate",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Exceptional conjugacy clause Rf^!=D_X f^* D_Y of thm-coef-qbar-verdier, used in lem-a1-local-boundary-duality; subdivision of the returned proof of lem-sf-weil-upper-shriek-verdier-conjugate",
+   "via": [
+    "lem-sf-weil-upper-shriek-verdier-conjugate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sf-weil-chosen-duality-exchange",
+  "worker": "stage1",
+  "summary": "Q07 checked the current blueprint, the exact existing statements, upstream VerdierDual.lean and Mathlib searches. The unchanged statement is proved using existing closure, ordinary Frobenius adjunction, composition-mate and evaluation/transpose tools. The proof treats arbitrary chosen structure adjunctions via counit-compatible uniqueness, writes all three transposes, checks every bounded constructible domain and the projection-formula finite-Tor condition at field coefficients, and writes the full contravariant naturality equations. No new nodes, no attachments and no invertibility assertion for the exchange arrows.",
+  "blueprint": "Realizes the exceptional conjugacy input named in the inherited from.place through the current blueprint cor-coef-verdier-weil-equivariance evaluation/adjunction paragraphs, thm-sf-verdier-exchange Step 1 composition mate, and lem-sf-tensor-hom Step 1 Hom-bijection chain. The ancestor helper currently prints None for this existing created node; inherited from.node and via are preserved, and no new node needs an ancestor. Whole-blueprint searches for chosen duality and Verdier exchange found no exact restatement of this chosen-adjoint, non-invertibility package.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Underlying pullback/tensor closure for the coefficient operations explicitly named in the statement; the item unit has no replacement construction for these operations."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Underlying compact-support closure at integral coefficients, passed by the specified field object formulas; a preservation tool, not a change to the duality route."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Only unconditional clause (1), the underlying ordinary adjunction on bounded constructible categories, is used; exceptional conditional clauses are not invoked."
+   },
+   {
+    "node": "cor-coef-verdier-weil-equivariance",
+    "why": "Supplies exactly the standard lifted constructible exceptional adjunctions already fixed by the item statement, including structures, units and counits."
+   },
+   {
+    "node": "lem-pod-frobenius-pullback-monoidal-adjunction-coherence",
+    "why": "Supplies the ordinary Frobenius mate normalization and original unit/counit on pairs, rather than changing the geometric proof route."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic categorical uniqueness identifies arbitrary chosen structure adjoints with the canonical ones, in the pair categories."
+   },
+   {
+    "node": "lem-pod-verdier-composition-mate-normalization",
+    "why": "Only its unconditional canonical composition-mate clause is used to fix the specified map; no internal-adjunction invertibility or ambient admissibility clause is used."
+   },
+   {
+    "node": "lem-pod-derived-automorphism-hom-evaluation",
+    "why": "Generic evaluation-defined Frobenius Hom comparison and its transpose identity on the coefficient-stage categories; this justifies the pair restriction without a site-perfectness assumption."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The specified natural Weil projection isomorphism is a hypothesis of the construction in the statement and supplies the inverse in its displayed pairing."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Only the ordinary operations, tensor evaluation and their functorial Weil lifts are used; its conditional exceptional-adjoint clause is replaced by the constructible lift already stipulated in the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-unique-right-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-490cafabb",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-490cafabb (reviewer sub-agent of L); spot-checked: Read the item and all 15 cited statements, plus the blueprint proofs (cor-coef-verdier-weil-equivariance, lem-fix-weil-operations, thm-sf-verdier-exchange Step 1, lem-sf-tensor-hom Step 1). The statement and stmt_deps are unchanged from live, which still has the item unsplit, and there is no repair note for this item. There are no new nodes, and proof_deps equals the union of the step uses, with no cycle. Steps checked: Step 1, every object and transpose is constructible (integral internal Hom, pullback and tensor closure, compact-support closure, fix-prop-adjunctions(1) only). Step 2, the ordinary unit and counit equations on pairs. Step 3, n_T comes from det-sp-unique-right-adjoint in the pair categories; the composition-mate clause c_Z is used with alpha taken as the inverse of the item's compositor, and its direction and types check. Step 4, I redid the transpose of b(theta_K⊗theta_L)mu = theta_N P(b), which gives b#theta_L = RHom(theta_K^-1,theta_N)cP(b#), the standard internal-Hom lift. Step 5, ctf=c at field coefficients so the projection formula applies; t, r and tau have the right types. Steps 6 and 7, the naturality equations are verified. No invertibility, ambient exceptional adjoint or site-perfectness is used. Edge cases checked: M=0, empty X, f=id, a point with Frobenius, rescaled chosen adjunctions. Batch-5: none of lem-fix-weil-operations and the three lem-pod-* nodes reaches nt-assume-trace-formula, nt-assume-poincare-duality, sk-thm-poincare-duality or any trace or Poincare theorem. lem-fix-weil-operations and lem-pod-derived-automorphism-hom-evaluation were already in the item's statement closure. All four are generic six-functor and Frobenius coherence results, not parts of the smooth Poincare isomorphism or of the trace formula, so they are accepted. The declared tool_uses are accepted as black-box generic tools. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilChosenDualityExchange",
+  "declaration": "WeilConjectures.WeilChosenDualityExchange.weil_chosen_duality_exchange",
+  "declarations": [
+   "WeilConjectures.WeilChosenDualityExchange.weil_chosen_duality_exchange"
+  ],
+  "file": "lean/Sheaf/Paper/WeilChosenDualityExchange.lean",
+  "statement": "theorem weil_chosen_duality_exchange (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] (S : SixFunctorOperationDatum D C E 1 (Nat.le_refl 1)) (W : CommonLifts D C S.closure.commonStage) (X Y : Models D) [IsSeparated X.obj.hom] [IsSeparated Y.obj.hom] (f : X ⟶ Y) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (cf : Compactification f.hom.left) (cy : Compactification (structureMap D Y).hom.left) (cx : Compactification (f ≫ structureMap D Y).hom.left) : ∃ d : Data D C S.closure W X Y f cf cy cx, d.Laws",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "D2: existing interfaces relocated verbatim to WeilChosenDualityExchangeData and publicly re-exported. The theorem statement is unchanged. The ordinary carrier laws and final comparison substitution are proved; construction and transpose naturality are split into strict subclaims."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4851a5d6e",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at aaa17dc6. Lean module byte-identical to aaa17dc6, whose maths was already found correct. Item node changes only stmt_deps and lean.note: lem-pur-derived-pullback-tensor-iso replaced by def-sf-rational-common-tensor-symmetries (owns pullbackTensorCommonBraiding and its _existsUnique lemma, used at line 196); added def-weil-frobenius-square-exchange (geometricCompactification, lines 246-248) and def-sf-operation-stages (SixFunctorCommonStages, line 237). All three are split definition nodes present in the snapshot, so on the base. Statement, proof, source and lean.statement verbatim and unchanged. Report has Worker report, Second reading by NX and an accurate repair section. No file changed, no compile run. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d87eb",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261025T122702-L-1796890",
+  "kind": "interface",
+  "note": "independent cc review: relocated interface block vs clone d6dfe898 (verbatim substring); item signature vs clone; two new sorry statements vs item node Steps 1,4,5,6 and the carrier normalizations of Data/HomLift; node proof_deps vs step uses; #print axioms in /tmp sandbox vs published"
+ }
+}

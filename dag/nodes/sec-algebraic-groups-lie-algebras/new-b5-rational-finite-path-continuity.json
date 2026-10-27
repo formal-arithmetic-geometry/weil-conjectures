@@ -1,0 +1,132 @@
+{
+ "id": "new-b5-rational-finite-path-continuity",
+ "kind": "statement",
+ "title": "Continuity of a rationalized finite-cover evaluation action",
+ "statement": "Let Y be a Noetherian separated scheme, l an invertible prime, E a finite extension of Q_l, t a geometric point, and F a rational lisse sheaf in the sense of [def-pod-lisse-l-adic-sheaves]. Suppose A(g) is a linear automorphism of its integral inverse-limit fibre for every automorphism g of the finite-etale fibre functor [def-galois-fibre-functor]. Suppose B_n(g) is a linear automorphism of the n-th finite stalk, acts on every finite-cover germ by applying g to the point of that cover, and the inverse-limit projections intertwine A(g) with B_n(g). Let rho be an E-linear group action on the rational fibre whose value on a tensor a tensor x is a tensor A(g)x. Then the rational fibre is finite-dimensional and rho is jointly continuous for the spectral-norm module topology, namely IsContinuousCoefficient of [def-pod-l-adic-representations]. No group laws for the supplied maps A or B beyond those forced by the displayed normalization are assumed; the group laws are required of rho.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.1) b)-c), (1.1.6), pp.146-150; Stanford Weil II seminar L19, Proposition 1.1.9, integral-lattice and positive-adic-reduction bullets, p.3"
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-l-adic-representations",
+  "def-galois-fibre-functor"
+ ],
+ "proof": [
+  {
+   "text": "Finite level stalks are finite: they are finite modules annihilated by a positive power of the coefficient uniformizer. Represent each stalk element by a finite-cover germ. Its orbit map under B_n is the orbit of its representing point in a finite-etale cover followed by that cover section germ map. Evaluation of automorphisms on a finite fibre is continuous for its discrete topology, hence every such orbit map is continuous. The germ formula is independent of representatives since B_n is an actual linear equivalence on the stalk.",
+   "uses": [
+    "new-e5-linear-fibre-path-transport",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the finite-module adic-limit theorem to the stalk diagram. Its transitions are surjective and have the recorded uniformizer-power kernels by the definition of an integral lisse sheaf. It follows that the inverse limit is finite over the coefficient integers and that its adic topology is the subspace topology in the product of the discrete stalks. The projection equation identifies the projected action with B_n on every stalk. For a fixed target level, the open stabilizer of the projected vector and the kernel of that projection form product neighbourhoods on which the projected action is constant. Thus the integral action is jointly continuous.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rationalizing a finite integral module yields a finite-dimensional E-vector space. The image of the integral module is a lattice after killing its torsion; its uniformizer dilates give the usual lattice neighbourhood basis in the spectral-norm module topology. The tensor formula identifies rho on these lattices with the integral action and its scalar dilates. For each point in the rational fibre choose a bounded denominator lattice containing it; continuity there follows from the integral action and scalar multiplication. These lattices are open and cover the rational fibre, so the action is jointly continuous. The argument also applies when the rational fibre is zero.",
+   "uses": [
+    "def-pod-l-adic-representations",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-e5-linear-fibre-path-transport",
+  "def-galois-fibre-functor",
+  "lem-pod-adic-limit-finite-modules",
+  "def-pod-l-adic-representations",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "B5",
+  "date": "2026-10-25",
+  "note": "Detailed continuity step of the cited integral/rational lisse correspondence, following Weil II and L19; specialization to a pointed component needs no connectedness assumption on Y."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Representation.IsLAdic",
+   "results": "0 hits: ",
+   "date": "2026-10-25",
+   "verdict": "No theorem for rationalized finite-path continuity; generic action and limit APIs only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric monodromy action on the stalk of a lisse l-adic sheaf is continuous and descends to a finite coefficient field",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instContinuousSMulAutFintypeCatObjCarrier, CategoryTheory.PreGaloisCategory.continuousSMul_aut_fiber, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul, cyclotomicCharacter.continuous, CategoryTheory.PreGaloisCategory.functorToContAction, CategoryTheory.PreGaloisCategory.toAut_continuous, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous",
+   "date": "2026-10-25",
+   "verdict": "No theorem for rationalized finite-path continuity; generic action and limit APIs only."
+  },
+  {
+   "tool": "grep",
+   "query": "IsLAdic|etaleGeometricRep|coefficient.*ontinuous",
+   "results": "12 hits: Mathlib/RingTheory/MvPowerSeries/PiTopology.lean, Mathlib/RingTheory/MvPowerSeries/PiTopology.lean, Mathlib/Analysis/Analytic/Composition.lean, Mathlib/NumberTheory/Padics/MahlerBasis.lean, Mathlib/Topology/ContinuousMap/Polynomial.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean",
+   "date": "2026-10-25",
+   "verdict": "No theorem for rationalized finite-path continuity; generic action and limit APIs only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous linear action on the finite quotients of an adic inverse system induces a continuous action on its rationalization",
+   "results": "8 hits: QuotientAddGroup.instContinuousVAdd, SeparationQuotient.liftCLM, SeparationQuotient.instMulAction, SeparationQuotient.instAddAction, QuotientGroup.instContinuousSMul, SeparationQuotient.instVAdd, QuotientGroup.instContinuousConstSMul, ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+   "date": "2026-10-25",
+   "verdict": "No theorem for rationalized finite-path continuity; generic action and limit APIs only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilFundamentalRepresentation",
+  "date": "2026-10-25",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Geometric fundamental representation paragraph and final continuity sentence: finite coefficient-field continuity before extension to Qlbar.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RationalFinitePathContinuity",
+  "file": "lean/Sheaf/Paper/RationalFinitePathContinuity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.rationalFinitePathAction_continuous",
+  "statement": "theorem rationalFinitePathAction_continuous\n    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)]\n    (t : Spec (.of Ω) ⟶ Y) (F : LisseRationalSheaf l E Y)\n    (A : Aut (fiber t) →\n      (lisseIntegralFiber l E Y t F.integral ≃ₗ[Padic.coefficientExtensionIntegers l E]\n        lisseIntegralFiber l E Y t F.integral))\n    (B : ∀ n : ℕ, Aut (fiber t) →\n      (((pointSmallEtale t).ulift.{u + 1}.sheafFiber\n        (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))).obj\n          (F.integral.obj.obj (op n)) ≃ₗ[Padic.coefficientExtensionIntegers l E]\n       ((pointSmallEtale t).ulift.{u + 1}.sheafFiber\n        (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))).obj\n          (F.integral.obj.obj (op n))))\n    (hB : ∀ (n : ℕ) (g : Aut (fiber t)) (P : Y.FiniteEtale)\n      (a : (fiber t).obj P) (s : (F.integral.obj.obj (op n)).obj.obj (op P.obj)),\n      B n g ((pointSmallEtale t).ulift.{u + 1}.toPresheafFiber P.obj ⟨a⟩\n        (F.integral.obj.obj (op n)).obj s) =\n      (pointSmallEtale t).ulift.{u + 1}.toPresheafFiber P.obj ⟨g.hom.app P a⟩\n        (F.integral.obj.obj (op n)).obj s)\n    (hA : ∀ (g : Aut (fiber t)) (n : ℕ)\n      (x : lisseIntegralFiber l E Y t F.integral),\n      limit.π (F.integral.obj ⋙ (pointSmallEtale t).ulift.{u + 1}.sheafFiber) (op n)\n          (A g x) =\n        B n g (limit.π\n          (F.integral.obj ⋙ (pointSmallEtale t).ulift.{u + 1}.sheafFiber) (op n) x))\n    (ρ : Aut (fiber t) →*\n      (lisseRationalFiber l E Y t F ≃ₗ[E] lisseRationalFiber l E Y t F))\n    (hρ : ∀ (g : Aut (fiber t)) (a : E)\n      (x : lisseIntegralFiber l E Y t F.integral),\n      ρ g (a ⊗ₜ[Padic.coefficientExtensionIntegers l E] x) =\n        a ⊗ₜ[Padic.coefficientExtensionIntegers l E] (A g x)) :\n    Representation.IsContinuousCoefficient l E (ProfiniteGrp.of (Aut (fiber t)))\n      (lisseRationalFiber l E Y t F) ρ",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T163544-L-693223",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261025T163544-L-693223",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

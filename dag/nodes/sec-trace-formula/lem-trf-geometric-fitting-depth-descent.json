@@ -1,0 +1,318 @@
+{
+ "id": "lem-trf-geometric-fitting-depth-descent",
+ "kind": "statement",
+ "title": "Descent of the geometric Fitting and depth conditions",
+ "statement": "Let $k$ be a field, $\\Omega/k$ an algebraic closure [def-weil-algebraic-closure], $S$ a finitely generated $k$-algebra [def-weil-pbc-finite-type-algebra], and $\\mathfrak p\\subset S$ a maximal ideal. Let $\\mathfrak q\\subset S\\otimes_k\\Omega$ be a prime whose inverse image in $S$ is $\\mathfrak p$. Set $A=S_{\\mathfrak p}$, $\\mathfrak m=\\mathfrak pA$, $F=S/\\mathfrak p$, $B=(S\\otimes_k\\Omega)_{\\mathfrak q}$, and $\\mathfrak n=\\mathfrak qB$ [def-weil-pbc-localization-at-prime, def-weil-pbc-module-tensor-product]. Put $J=\\operatorname{Fit}_1(\\Omega_{S/k})$, $J_A=JA$, and $J_B=\\operatorname{Fit}_1(\\Omega_{(S\\otimes_k\\Omega)/\\Omega})B$, with Kähler differentials [def-weil-pbc-kahler-differentials] and the index-$1$ presentation-minor ideal [lem-trf-fitting-ideal-independence-base-change]. If $J_B=\\mathfrak n$ and $\\operatorname{depth}B=1$ [def-weil-pbc-depth], then $F/k$ is finite separable [def-weil-pbc-separable-algebraic-extension], $J_A=\\mathfrak m$, and $\\operatorname{depth}A=\\operatorname{depth}\\widehat A=1$, where $\\widehat A$ is the $\\mathfrak m$-adic completion [def-weil-pbc-adic-completion]. In particular the residue map induces $A/J_A\\cong F$.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), arbitrary-field paragraphs descending the geometric first-Fitting field stalk and depth one; differential base change as in Algebra Tags 00RV and 00RT."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-kahler-differentials",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [
+  {
+   "text": "Choose algebra generators $s_1,\\ldots,s_d$ of $S/k$. By the additive and Leibniz relations of [def-weil-pbc-kahler-differentials], the differential of a polynomial in these generators is an $S$-linear combination of $\\mathrm ds_i$ (induct on sums and products, with constants having differential zero). The symbol construction in that node says all differentials generate the module. Thus $\\Omega_{S/k}$ is a finite $S$-module, including when $d=0$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RZ (lemma-differentials-finitely-generated), explicit generator argument; Tag 07BK (definition-differentials)."
+   }
+  },
+  {
+   "text": "Put $C=S\\otimes_k\\Omega$. By [lem-weil-pbc-kahler-differentials-base-change], $\\Omega_{C/\\Omega}\\cong C\\otimes_S\\Omega_{S/k}$. Apply clause (2) of [lem-trf-fitting-ideal-independence-base-change] first to $S\\to C$ and then to $C\\to B$: the index-$1$ ideals satisfy $\\operatorname{Fit}_1(\\Omega_{C/\\Omega})=JC$ and $(JC)B=J_B=\\mathfrak n$. For $j\\in J$, its image in $B$ lies in $\\mathfrak qB$, so its image in $C$ lies in $\\mathfrak q$; contraction under localization at a prime gives this directly from the fraction criterion. Since $\\mathfrak q\\cap S=\\mathfrak p$, we have $J\\subseteq\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-trf-fitting-ideal-independence-base-change",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), arbitrary-field paragraph defining Z; Algebra Tag 00RV and More on Algebra Tag 07ZA (lemma-fitting-ideal-basics), part (3)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometric-field-stalk-descent] to $S$, $\\mathfrak p$ and the given prime $\\mathfrak q$. Its unconditional clauses give finiteness of $F/k$, maximality of $\\mathfrak q$, and the structural $\\Omega$-algebra identification $C/\\mathfrak q=\\kappa(\\mathfrak q)\\cong\\Omega$. Since $J_B=\\mathfrak n$, the same residue map identifies $B/J_B$ with $\\Omega$ as an $\\Omega$-algebra.",
+   "uses": [
+    "lem-trf-geometric-field-stalk-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), the geometric first-Fitting field stalk; Algebra Tag 00FV (theorem-nullstellensatz)."
+   }
+  },
+  {
+   "text": "Set $T=S/J$ and $\\mathfrak p_T=\\mathfrak p/J$; these are a finite type $k$-algebra and a maximal ideal, with $T/\\mathfrak p_T=F$. Tensor $J\\to S\\to T\\to0$ over $k$ with $\\Omega$. By [lem-weil-pbc-tensor-right-exact], the map $C\\to T\\otimes_k\\Omega$, $s\\otimes a\\mapsto\\bar s\\otimes a$, is surjective with kernel the image of $J\\otimes_k\\Omega$. That image is exactly $JC$: its pure tensors are $(j\\otimes1)(1\\otimes a)$, and multiplication of such a tensor by $s\\otimes b$ gives $sj\\otimes ab$ with $sj\\in J$. Hence $T\\otimes_k\\Omega\\cong C/JC$ as $\\Omega$-algebras. The prime $\\mathfrak r=\\mathfrak q/JC$ of this quotient contracts to $\\mathfrak p_T$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), pass to the closed subscheme Z defined by J; Algebra Tag 00DF (lemma-tensor-product-exact)."
+   }
+  },
+  {
+   "text": "The fraction maps $(c+JC)/(v+JC)\\mapsto(c/v)+J_B$, with $v\\notin\\mathfrak q$, identify $(C/JC)_{\\mathfrak q/JC}$ with $B/J_B$. The inverse sends the class of $c/v$ to the displayed quotient fraction. They are well defined: the fraction equality relation in either quotient says that some element outside $\\mathfrak q$ annihilates the difference modulo $JC$, and clearing denominators gives precisely membership in $(JC)B=J_B$. The maps preserve multiplication and are inverse on every fraction. Thus $(T\\otimes_k\\Omega)_{\\mathfrak r}\\cong\\Omega$ as $\\Omega$-algebras by step 3. Apply the conditional clause of [lem-trf-geometric-field-stalk-descent], now to $T$ and $\\mathfrak p_T$. It gives $T_{\\mathfrak p_T}\\cong F$ via the residue map and $F/k$ finite separable.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-trf-geometric-field-stalk-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), arbitrary-field paragraph: the geometric field stalk of Z descends to a separable field stalk."
+   }
+  },
+  {
+   "text": "The same quotient-fraction formulas, with $S,J,\\mathfrak p$ in place of $C,JC,\\mathfrak q$, give $A/J_A\\cong T_{\\mathfrak p_T}$. The resulting map $A/J_A\\to F$ sends the class of $s/u$ to $\\bar s/\\bar u$, so it is the residue map and is an isomorphism by step 5. Its kernel before quotienting is both $J_A$ and $\\mathfrak m$, giving $J_A=\\mathfrak m$ and the required residue isomorphism.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0C4D (lemma-nodal), descent of the first Fitting ideal to the maximal ideal."
+   }
+  },
+  {
+   "text": "The quotient $C\\to C/\\mathfrak q\\cong\\Omega$ of step 3 restricts to a $k$-embedding $\\iota:F\\hookrightarrow\\Omega$, because its restriction to $S$ has kernel $\\mathfrak p$. On pure tensors it is $s\\otimes a\\mapsto\\iota(\\bar s)a$, so $\\mathfrak q$ is exactly the kernel of this evaluation map. Apply [lem-trf-separable-evaluation-local-base-change] with $K=\\Omega$ and the finite separable extension from step 5. It states that $A,B$ are Noetherian local rings, $A\\to B$ is a faithfully flat local homomorphism, and $B/\\mathfrak mB\\cong\\Omega$ (also $\\mathfrak mB=\\mathfrak n$). All these assertions concern the original given prime $\\mathfrak q$.",
+   "uses": [
+    "lem-trf-separable-evaluation-local-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0C4Y (lemma-change-fields-flat) and 0C50 (lemma-change-fields-algebraic-unramified), finite separable closed-fibre case."
+   }
+  },
+  {
+   "text": "A nonzero field has depth zero by [def-weil-pbc-depth, def-weil-pbc-regular-sequence]: its maximal ideal is zero, the empty regular sequence exists, and any positive-length sequence in that ideal starts with zero, whose multiplication on the nonzero field is not injective. Thus the closed fibre $B/\\mathfrak mB\\cong\\Omega$ of step 7 has depth zero. Apply [lem-weil-pbc-flat-local-depth-formula] to its flat local map $A\\to B$ between Noetherian local rings. It gives $1=\\operatorname{depth}B=\\operatorname{depth}A+0$, hence $\\operatorname{depth}A=1$.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0337 (lemma-apply-grothendieck), with Tags 00LI (definition-depth) and 00LF (definition-regular-sequence)."
+   }
+  },
+  {
+   "text": "For the Noetherian local ring $A$ of step 7, [lem-weil-pbc-local-completion-local-ring] gives that $\\widehat A$ is local, with maximal ideal $\\mathfrak m\\widehat A$ and residue field $\\widehat A/\\mathfrak m\\widehat A\\cong A/\\mathfrak m=F$. In particular the canonical map $A\\to\\widehat A$ is local. By [lem-weil-pbc-adic-completion-noetherian], $\\widehat A$ is Noetherian, and [lem-weil-pbc-noetherian-completion-flat] says this canonical map is flat. Its closed fibre is the nonzero field $F$, of depth zero by the regular-sequence argument of step 8. Applying [lem-weil-pbc-flat-local-depth-formula] gives $\\operatorname{depth}\\widehat A=\\operatorname{depth}A+0=1$, completing every clause.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-noetherian-completion-flat",
+    "lem-weil-pbc-flat-local-depth-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion), 0316 (lemma-completion-Noetherian-Noetherian), 00MB (lemma-completion-flat), and 0337 (lemma-apply-grothendieck)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-trf-fitting-ideal-independence-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-geometric-field-stalk-descent",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-trf-separable-evaluation-local-base-change",
+  "def-weil-pbc-depth",
+  "def-weil-pbc-regular-sequence",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0C4D (lemma-nodal), arbitrary-field first-Fitting descent paragraphs; depth via Algebra Tag 0337 and completion via Tags 00MB, 0316, 05GG, 05GI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Descent from a geometric local ring with maximal first Fitting ideal and depth one gives separable residue field and the same depth and Fitting equality",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"leanfinder\", \"query\": \"Descent from a geometric local ring with maximal first Fitting ideal and depth one gives separable residue field and the same depth and Fitting equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.isSeparable_residueField_iff\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"instIsSeparableQuotientIdealOfResidueField\", \"instIsSeparableResidueFieldOfQuotientIdeal\"], \"digest\": \"b648a45a9ba61221\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-22T06:10:30Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|fitting_ideal",
+   "results": "{\"t\": \"2026-10-22T06:10:30Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|fitting_ideal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type algebra over a field a reduced geometric singular field stalk descends to a separable residue field and depth one local ring",
+   "results": "{\"t\": \"2026-10-22T06:10:31Z\", \"tool\": \"leansearch\", \"query\": \"For a finite type algebra over a field a reduced geometric singular field stalk descends to a separable residue field and depth one local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"AlgebraicGeometry.LocallyRingedSpace.residueField\", \"AlgebraicGeometry.Scheme.residueField\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation\", \"Algebra.IsGeometricallyReduced.casesOn\", \"Algebra.isReduced_of_isGeometricallyReduced\"], \"digest\": \"817dd910f7bb4fea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Faithfully flat local descent of the first Fitting ideal of differentials and depth from an algebraic closure",
+   "results": "{\"t\": \"2026-10-22T06:10:44Z\", \"tool\": \"leanfinder\", \"query\": \"Faithfully flat local descent of the first Fitting ideal of differentials and depth from an algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.Smooth.flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.exists_finiteType\"], \"digest\": \"42c6b8f2f872480f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected the returned statements; they do not give this local singularity assertion or a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "Fitting|fittingIdeal|fitting_ideal",
+   "results": "{\"t\": \"2026-10-23T04:09:17Z\", \"tool\": \"grep\", \"query\": \"Fitting|fittingIdeal|fitting_ideal\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"39ce9b936c9e89e8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flatness, smoothness or unramified statements do not state the Fitting-ideal and depth conclusion; grep hits are Fitting decomposition of endomorphisms, not Fitting ideals."
+  },
+  {
+   "tool": "loogle",
+   "query": "KaehlerDifferential, Algebra.IsSeparable",
+   "results": "{\"t\": \"2026-10-23T04:09:18Z\", \"tool\": \"loogle\", \"query\": \"KaehlerDifferential, Algebra.IsSeparable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flatness, smoothness or unramified statements do not state the Fitting-ideal and depth conclusion; grep hits are Fitting decomposition of endomorphisms, not Fitting ideals."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Faithfully flat local descent of maximal Fitting ideal of differentials and depth one",
+   "results": "{\"t\": \"2026-10-23T04:09:18Z\", \"tool\": \"leansearch\", \"query\": \"Faithfully flat local descent of maximal Fitting ideal of differentials and depth one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_isLocalizedModule\", \"Module.Flat.of_flat_tensorProduct\", \"Module.flat_of_isLocalized_maximal\", \"Module.Flat.localizedModule\", \"Module.free_of_flat_of_isLocalRing\", \"RingHom.FaithfullyFlat\", \"Module.FaithfullyFlat.mk\", \"Module.FaithfullyFlat.toFlat\"], \"digest\": \"1a457ac0eac0bf58\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flatness, smoothness or unramified statements do not state the Fitting-ideal and depth conclusion; grep hits are Fitting decomposition of endomorphisms, not Fitting ideals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of first Fitting ideal of Kahler differentials and depth one from algebraic closure to local ring",
+   "results": "{\"t\": \"2026-10-23T04:09:25Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of first Fitting ideal of Kahler differentials and depth one from algebraic closure to local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.IsUnramifiedAt\", \"Algebra.IsSmoothAt\", \"Algebra.Unramified\", \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential\", \"Algebra.unramifiedLocus\"], \"digest\": \"8775a90948da9139\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flatness, smoothness or unramified statements do not state the Fitting-ideal and depth conclusion; grep hits are Fitting decomposition of endomorphisms, not Fitting ideals."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If geometric singular subscheme has a field stalk then residue extension is separable and local depth is unchanged under completion",
+   "results": "{\"t\": \"2026-10-23T04:10:27Z\", \"tool\": \"leanfinder\", \"query\": \"If geometric singular subscheme has a field stalk then residue extension is separable and local depth is unchanged under completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.isSeparable_residueField_iff\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\"], \"digest\": \"cf98434acc87970e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned flatness, smoothness or unramified statements do not state the Fitting-ideal and depth conclusion; grep hits are Fitting decomposition of endomorphisms, not Fitting ideals."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-point-local-criterion",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Pointwise nodal characterization used in the proof of the nodal lci criterion (Stacks Tags 0C4D and 0C4E). Re-split of the pointwise proof: old steps (3, 4, 5); Descent of the geometric Fitting and depth conditions.",
+   "via": [
+    "lem-trf-nodal-point-local-criterion",
+    "lem-trf-nodal-curve-lci-criterion",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-geometric-fitting-depth-descent",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Descended the geometric field stalk of S/J using the existing field-stalk lemma; wrote the quotient tensor and localization identifications explicitly; used the existing separable evaluation lemma to verify flatness and both Noetherian hypotheses before applying the depth formula, and applied it again to completion. No new nodes.",
+  "blueprint": "The nearest ancestor lem-trf-local-term-locality, through its recorded nodal-geometry descendants, uses the pointwise nodal criterion. These steps realize precisely the arbitrary-field first-Fitting and depth descent paragraphs of Stacks 0C4D used in the forward implication of lem-trf-nodal-point-local-criterion; completion depth is the standard flat local depth extension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kahler-differentials-base-change",
+    "why": "Scalar extension of differentials identifies the geometric Fitting ideal; the unit has no competing general differential base-change theorem."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Tensor right exactness identifies the affine singular quotient after field extension; this is a generic algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "The exact flat local depth formula is the tool explicitly cited by Curves 0C4D, applied also to completion."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Supplies the local structure, maximal ideal and residue field of completion needed for the depth formula."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Supplies the Noetherian target hypothesis of the depth formula for completion."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-completion-flat",
+    "why": "Supplies flatness of the canonical completion map for the depth formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-noetherian-completion-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-96de560f8",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-96de560f8 (reviewer sub-agent of L); spot-checked: I read the full item, all 13 cited statements and Stacks curves.tex Tag 0C4D, arbitrary-field paragraph (Fit_1 base change, geometric reduction to separable κ(x), flat depth descent). The delivery has no new nodes and nine steps, each under 800 characters, and no cycle. Step-by-step: 1 Ω_{S/k} finite from the symbol presentation (elementary). 2 Kähler base change plus Fitting clauses (1)/(2) give I_1 = JC; J ⊆ p is checked from the fraction relation; the second clause-(2) use for C→B is redundant (J_B is defined as (JC)B) but harmless. 3 Uses only the unconditional clauses of geometric-field-stalk-descent: B/J_B = κ(q) ≅ Ω. 4 Right exactness gives T⊗Ω ≅ C/JC, with the image of J⊗Ω equal to JC both ways. 5 Localization commutes with the quotient, written out; the conditional descent clause applied to T and p/J gives T_p = F and F/k separable. 6 A/JA ≅ T_p → F is the residue map, so JA = m. 7 q = ker ε for the embedding ι from C/q ≅ Ω; separable-evaluation-local-base-change gives Noetherian local A, B, a faithfully flat local map and B/mB ≅ Ω, with separability proved first. 8 Depth of a field is 0, so the flat local depth formula gives depth A = 1 (∞ excluded). 9 Completion is local with residue field F, Noetherian and flat, so depth Â = 1. Tested on k[x,y]/(xy) (also char 2), a smooth point (hypothesis fails) and purely inseparable F (depth-1 hypothesis excludes it). No duplicate among the 0C4D/Fitting nodes. No SGA. The sk-thm-p1 tool_uses (all in split_report) are generic algebra; I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.GeometricFittingDepthDescent",
+  "declaration": "Algebra.geometric_fitting_depth_descent",
+  "file": "lean/Sheaf/RingTheory/GeometricFittingDepthDescent.lean",
+  "statement": "theorem geometric_fitting_depth_descent (k : Type u) (Ω : Type v) (S : Type w) [Field k] [Field Ω] [CommRing S] [Algebra k Ω] [IsAlgClosure k Ω] [Algebra k S] [Algebra.FiniteType k S] (p : Ideal S) [p.IsMaximal] (q : PrimeSpectrum (S ⊗[k] Ω)) (hq : q.asIdeal.comap (algebraMap S (S ⊗[k] Ω)) = p) (d e : ℕ) (π : (Fin d → S) →ₗ[S] KaehlerDifferential k S) (hπ : Function.Surjective π) (ρ : (Fin e → S ⊗[k] Ω) →ₗ[S ⊗[k] Ω] @KaehlerDifferential Ω (S ⊗[k] Ω) _ _ Algebra.TensorProduct.rightAlgebra) (hρ : Function.Surjective ρ) (hfit : Ideal.map (algebraMap (S ⊗[k] Ω) (Localization.AtPrime q.asIdeal)) (ρ.presentationFittingIdeal 1) = IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal)) (hdepth : IsLocalRing.depth (R := Localization.AtPrime q.asIdeal) (Localization.AtPrime q.asIdeal) = 1) : Module.Finite k (S ⧸ p) ∧ Algebra.IsSeparable k (S ⧸ p) ∧ Ideal.map (algebraMap S (Localization.AtPrime p)) (π.presentationFittingIdeal 1) = IsLocalRing.maximalIdeal (Localization.AtPrime p) ∧ IsLocalRing.depth (R := Localization.AtPrime p) (Localization.AtPrime p) = 1 ∧ (Ideal.map (algebraMap (Localization.AtPrime p) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p))) (IsLocalRing.maximalIdeal (Localization.AtPrime p))).depth (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) = 1 ∧ ∃ E : (Localization.AtPrime p ⧸ Ideal.map (algebraMap S (Localization.AtPrime p)) (π.presentationFittingIdeal 1)) ≃+* (S ⧸ p), E.toRingHom.comp (Ideal.Quotient.mk (Ideal.map (algebraMap S (Localization.AtPrime p)) (π.presentationFittingIdeal 1))) = (IsLocalization.AtPrime.equivQuotMaximalIdeal p (Localization.AtPrime p)).symm.toRingHom.comp (IsLocalRing.residue (Localization.AtPrime p))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses arbitrary finite generating surjections to compute the index-1 presentation-minor ideals supplied by the recorded Fitting dependency. The right-factor Ω-algebra structure on S ⊗[k] Ω is explicit. Completion depth is ideal depth for the extended maximal ideal, which AdicCompletion.maximalIdeal_eq_map identifies with the completion maximal ideal. The residue isomorphism is characterized by equality of its composite with the quotient map and the canonical residue map to S/p."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c0610509",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion is rendered exactly: IsAlgClosure; Algebra.FiniteType as the instance form of RingHom.FiniteType; maximal p; prime q with comap equal to p; Fit_1 through presentationFittingIdeal of arbitrary surjections π and ρ (owned by the cited lem-trf-fitting-ideal-independence-base-change, with the right-factor Ω-structure explicit); hfit J_B = n; hdepth B = 1. Conclusions: finite + IsSeparable, J_A = m, depth A = 1, completion depth as Ideal.depth of mÂ (equal to the local depth by maximalIdeal_eq_map_of_fg, A Noetherian), and E : A/J_A ≃ S/p characterized by the residue map. lean.statement matches the file verbatim; no statement_change; no added assumptions; universes independent; no new definitions; proof is sorry; docstrings give source place, blueprint tag and the 9-step plan; consistent with Stacks 0C4D and the geometric_field_stalk_descent conventions. No compile run (no file changed)."
+ }
+}

@@ -1,0 +1,190 @@
+{
+ "id": "lem-sp-ell-quotient-finite-discrete",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "via": [],
+   "place": "sk-def-sp-tate-twist (Lean Sheaf.Paper.ProEtaleTateTwistsOfUniverses, which imports Sheaf.Paper.ProEtaleTateTwists): the finite coefficients B_{E,n+1}=O_E/ℓ^{n+1} of the integral twist and the continuity making spEllPointReduction a condensed map"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "O_E/ℓ^{n+1} is finite and the reduction is continuous to the discrete quotient",
+ "statement": "Let $\\ell$ be a prime, $E\\subseteq\\overline{\\mathbf Q}_\\ell$ a finite extension of $\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], topologized by the absolute value extending that of $\\mathbf Q_\\ell$ [def-sfb-coefficient-extension-integers-topology], and $n\\ge0$. Then the ring $\\mathcal O_E/\\ell^{n+1}\\mathcal O_E$ is finite, and the quotient map $\\mathcal O_E\\to\\mathcal O_E/\\ell^{n+1}\\mathcal O_E$ is continuous when the quotient carries the discrete topology.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "sk-def-sp-tate-twist: sk-def-sp-tate-twist (Lean Sheaf.Paper.ProEtaleTateTwistsOfUniverses, which imports Sheaf.Paper.ProEtaleTateTwists): the finite coefficients B_{E,n+1}=O_E/ℓ^{n+1} of the integral twist and the continuity making spEllPointReduction a condensed map; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spEllQuotient_finite_continuous (module Sheaf.Paper.ProEtaleTateTwists, lines 112-125, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-coefficient-extension-integers-topology"
+ ],
+ "proof": [
+  {
+   "text": "Let $q:O\\to O/\\ell^kO$ be reduction. Work in the metric topology specified by the cited topology definition. Set $r=|\\ell|_E^k>0$. For any $x,y\\in O$ with $|y-x|_E<r$, division in $E$ gives $|(y-x)/\\ell^k|_E=|y-x|_E/r<1$. Thus $a=(y-x)/\\ell^k$ lies in $O=\\{z:|z|_E\\le1\\}$ and $y-x=\\ell^ka$, so $q(y)=q(x)$. Consequently every $x$ in a fibre has its relative open ball $B_O(x,r)$ contained in that fibre; every fibre is open. The inverse image of any subset of the discrete target is the union of its fibres, hence open. This proves continuity. This is a direct computation from the definitions, independent of any identification of the valuation topology with an adic topology. This calculation is already formalized by PadicAlgCl.continuous_integersModPowMk, applied at exponent n+1; its quotient and topology are definitionally the ones here.",
+   "uses": [
+    "def-sfb-coefficient-extension-integers-topology",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral twist formula and the use of the discrete finite coefficient (O_E/ell^n); explicit open-fibre argument supplied here, as the blueprint does not prove continuity."
+   }
+  },
+  {
+   "text": "Equip E with the norm restricted from the specified algebraic closure. It extends the norm on Q_l, so E is a finite-dimensional normed Q_l-space. By [lem-weil-l-adic-extension-proper], E is proper. Its ring of integers is exactly the closed unit ball, hence compact. Reduction to O_E/(ell^(n+1)) is continuous by step 1 and surjective by the ideal quotient construction. Its image, the whole quotient, is compact. A compact discrete space is finite. This proves finiteness for n=0 as well as all larger indices, without choosing a uniformizer.",
+   "uses": [
+    "lem-weil-l-adic-extension-proper",
+    "def-sfb-coefficient-extension-integers-topology",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral twist formula with positive ell-power quotients; compact-discrete proof using the existing PadicAlgCl.continuous_integersModPowMk theorem in WeilConjectures.NumberTheory.Padics.IntegersModPow."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-coefficient-extension-integers-topology",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral twist formula with positive ell-power quotients; compact-discrete proof using the existing PadicAlgCl.continuous_integersModPowMk theorem in WeilConjectures.NumberTheory.Padics.IntegersModPow. S6: continuity followed by compactness of the integer ring and finiteness of compact discrete images."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of ring of integers of a p-adic field by a power of p is finite",
+   "results": "Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField (Mathlib.Topology.Algebra.Valued.LocallyCompact), IsLocalRing.finite_quotient_iff, Ideal.finite_quotient_pow",
+   "date": "2026-10-23",
+   "verdict": "partial: finiteness of O/m^n for a DVR valued field with finite residue field; the stage-1 worker checks it applies to O_E with (ℓ^{n+1}) = m^{e(n+1)}"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "quotient map to a finite discrete quotient ring is continuous for the adic topology on integers of a local field",
+   "results": "IsDedekindDomain.instTopologicalSpaceFiniteAdeleRing, FiniteAdeleRing.instIsTopologicalRing, HeightOneSpectrum.coe_mem_adicCompletionIntegers: adeles, no match",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rlE 'finite_quotient_maximalIdeal_pow|Ideal.Quotient.mk.*[Cc]ontinuous' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "Topology/Algebra/Valued/LocallyCompact.lean (finiteness above); Topology/Category/Profinite/Basic.lean and others: unrelated quotients",
+   "date": "2026-10-23",
+   "verdict": "partial"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_quotient_maximalIdeal_pow|finite_quotient_pow|continuous.*Quotient|continuous_discrete_rng",
+   "results": "{\"t\": \"2026-10-23T15:29:31Z\", \"tool\": \"grep\", \"query\": \"finite_quotient_maximalIdeal_pow|finite_quotient_pow|continuous.*Quotient|continuous_discrete_rng\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/ModularForms/Bounds.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Basic.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Section.lean\", \"Mathlib/Topology/Algebra/SeparationQuotient/Section.lean\"], \"digest\": \"fa7619328d98c60a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole conjunction: hits give generic valued-field structure or quotient finiteness, special cases for Z_p, or already constructed discrete quotients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite discrete quotients of the ring of integers of a finite extension of the p-adic numbers with continuous quotient map",
+   "results": "{\"t\": \"2026-10-23T15:29:31Z\", \"tool\": \"leansearch\", \"query\": \"finite discrete quotients of the ring of integers of a finite extension of the p-adic numbers with continuous quotient map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt\", \"DiscreteQuotient.ofLE_continuous\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"DiscreteQuotient.proj\", \"instFiniteQuotientRingOfIntegersIdealOfNumberFieldOfIsMaximal\", \"PadicInt.instIsDiscreteValuationRing\", \"Padic\", \"DiscreteQuotient.comap\"], \"digest\": \"e85f3b8ac9056c39\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole conjunction: hits give generic valued-field structure or quotient finiteness, special cases for Z_p, or already constructed discrete quotients"
+  },
+  {
+   "tool": "loogle",
+   "query": "Valued.integer, Finite",
+   "results": "{\"t\": \"2026-10-23T15:29:32Z\", \"tool\": \"loogle\", \"query\": \"Valued.integer, Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\"], \"digest\": \"97a9329f5652afa4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole conjunction: hits give generic valued-field structure or quotient finiteness, special cases for Z_p, or already constructed discrete quotients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quotient of the ring of integers of a finite extension of the p-adic numbers by a positive power of p is finite and reduction to the discrete quotient is continuous",
+   "results": "{\"t\": \"2026-10-23T15:29:32Z\", \"tool\": \"leanfinder\", \"query\": \"The quotient of the ring of integers of a finite extension of the p-adic numbers by a positive power of p is finite and reduction to the discrete quotient is continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"PadicInt.toZModPow\", \"ModP\", \"PadicInt.toZModHom\", \"PadicInt.instIsAdicCompleteMaximalIdeal\", \"PadicInt.toZMod\", \"PadicInt.toZMod_spec\", \"ModP.commRing\"], \"digest\": \"08b544137fc2f9b7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole conjunction: hits give generic valued-field structure or quotient finiteness, special cases for Z_p, or already constructed discrete quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_quotient_maximalIdeal_pow_of_finite_residueField",
+   "results": "{\"t\": \"2026-10-23T15:30:04Z\", \"tool\": \"grep\", \"query\": \"finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"sub\": \"Topology/Algebra/Valued\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\", \"Mathlib/Topology/Algebra/Valued/LocallyCompact.lean\"], \"digest\": \"66e4f273f6c5cea1\"}",
+   "date": "2026-10-23",
+   "verdict": "partial: exact finiteness input after the DVR and ramification-exponent steps; already represented by lem-weil-valued-dvr-finite-quotients"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_quotient_pow|span_singleton_pow",
+   "results": "{\"t\": \"2026-10-23T15:30:04Z\", \"tool\": \"grep\", \"query\": \"finite_quotient_pow|span_singleton_pow\", \"sub\": \"RingTheory/Ideal\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/IsPrincipalPowQuotient.lean\", \"Mathlib/RingTheory/Ideal/Operations.lean\", \"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Index.lean\", \"Mathlib/RingTheory/Ideal/Quotient/Index.lean\"], \"digest\": \"6b05600c0d5d53c6\"}",
+   "date": "2026-10-23",
+   "verdict": "partial: finite ideal powers and equality of powers of principal ideals; does not establish the finite-extension DVR hypotheses or the continuity clause"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonarchimedean local field the ring of integers modulo the principal ideal generated by a nonzero nonunit is a finite discrete continuous quotient",
+   "results": "{\"t\": \"2026-10-23T15:30:05Z\", \"tool\": \"leanfinder\", \"query\": \"For a nonarchimedean local field the ring of integers modulo the principal ideal generated by a nonzero nonunit is a finite discrete continuous quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"instFiniteQuotientRingOfIntegersIdealOfNumberFieldOfIsMaximal\", \"IsNonarchimedeanLocalField.instIsDiscreteValuationRingSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"instFiniteQuotientIdealOfIsMaximal\", \"Valued.integer.totallyBounded_iff_finite_residueField\", \"ArchimedeanClass.FiniteResidueField\", \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\"], \"digest\": \"f2f223a61f0fa503\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the whole conjunction: hits give generic valued-field structure or quotient finiteness, special cases for Z_p, or already constructed discrete quotients"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "sk-def-sp-tate-twist",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistLevels",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistLevels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spEllQuotient_finite_continuous",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spEllQuotient_finite_continuous"
+  ],
+  "statement": "theorem spEllQuotient_finite_continuous (E : PadicAlgCl.FiniteIntermediateField ℓ)\n    (n : ℕ) :\n    Finite (spEllQuotient ℓ E n) ∧\n    @Continuous _ _ (spIntegersTopology ℓ E) ⊥\n      (Ideal.Quotient.mk (spTateEllIdeal ℓ E n)) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sp-ell-quotient-finite-discrete",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient models unchanged. Split finiteness through the existing finite-extension DVR theorem, the positive ramification exponent of ell, and the existing finite uniformizer-quotient Mathlib leaf. Proved continuity directly by open balls in the given valuation topology, without assuming an adic-topology comparison. No new nodes. Inspected the separate upstream finite-quotient and continuous-reduction declarations; neither alone states the whole conjunction. Ran and read LeanSearch, two LeanFinder phrasings, Loogle and three source greps.",
+  "blueprint": "Realizes the finite positive-level coefficient rings in the integral-twist formula of sk-def-sp-tate-twist and the continuity needed to regard reduction as a map of condensed coefficients; latest blueprint has no proof steps for this definition.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic local-field structure theorem: gives the DVR, finite residue field, uniformizer and factorization of ell. The Tate-twist unit assumes these coefficient-ring facts and contains no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-6a9b3bf73",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-6a9b3bf73 (reviewer sub-agent of L); spot-checked: The item statement is unchanged and matches the Lean `spEllQuotient_finite_continuous` (span{ℓ^(n+1)}, the topology restricted from Q̄_ℓ, discrete target) and the integral-twist formula O_E/ℓ^n in blueprint sk-def-sp-tate-twist. No new nodes. Step 1: lem-weil-l-adic-extension-integers-dvr clauses 1-5 give ℓ=uπ^e, and |ℓ|=ℓ^{-1} (def-weil-l-adic-numbers) gives e>0. The tool_use of this other-unit node is accepted as the generic local-field structure theorem. Stacks 00PD (algebra.tex:29104) is checked. Step 2: ℓ^kO=π^{ek}O is checked in both directions, and finiteness follows from clause 2 of lem-weil-valued-dvr-finite-quotients. FIX: that lemma also assumes a nonarchimedean absolute value, which the step neither checked nor cited. I added def-weil-l-adic-coefficient-extension (clause 1, nonarchimedean; already in proof_deps) to step 2's uses and wrote out every hypothesis check. Step 3: the elementary open-ball argument (r=|ℓ|^k, (y−x)/ℓ^k ∈ O) is correct. Small cases checked: E=Q_ℓ, n=0, ramified e=2, ℓ=2. Not duplicates: lem-sp-ell-power-ideals-nested (only the inclusion ℓ^{n+2}O ⊆ ℓ^{n+1}O) and the π-power nodes lem-sfb-integers-profinite-tower and coset-basis. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

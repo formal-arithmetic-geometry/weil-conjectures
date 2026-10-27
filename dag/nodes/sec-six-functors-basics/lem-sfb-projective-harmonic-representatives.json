@@ -1,0 +1,219 @@
+{
+ "id": "lem-sfb-projective-harmonic-representatives",
+ "kind": "statement",
+ "title": "Harmonic representatives on complex projective manifolds",
+ "statement": "Let $X$ be any smooth projective $\\mathbf C$-scheme [def-pc-scheme], [def-sbc-smooth-morphisms], [def-pc-projective-morphism] and let $M=X^{\\mathrm{an}}$ be its complex manifold of complex points. Equip each of its finitely many connected components with the Kähler metric induced from a projective embedding (a Hermitian metric with closed associated real $(1,1)$-form); component dimensions need not agree. For nonnegative integers $p,q$, let $A^{p,q}(M)$ be smooth complex differential forms of type $(p,q)$ and $H^{p,q}_{\\bar\\partial}(M)=\\ker\\bar\\partial/\\operatorname{im}\\bar\\partial$ their Dolbeault cohomology, with negative-degree spaces zero. Write $d_{\\mathrm{an}}=\\partial+\\bar\\partial$ and $\\Delta_{\\bar\\partial}=\\bar\\partial\\bar\\partial^*+\\bar\\partial^*\\bar\\partial$, where the adjoint uses the metric and integration. Every class $b\\in H^{p,q}_{\\bar\\partial}(M)$ has a smooth representative $\\alpha\\in A^{p,q}(M)$ with $\\Delta_{\\bar\\partial}\\alpha=0$; every such harmonic form satisfies $d_{\\mathrm{an}}\\alpha=0$. The assertion includes disconnected $X$ and the empty scheme.",
+ "source": {
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "WANTED locally: Popa, proof of Theorem 1.6.6, printed pp.26--27, harmonic representatives and d-closedness. Read online https://people.math.harvard.edu/~mpopa/271/Kodaira-posted.pdf; full bidegree formulation of the stated Hodge input."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-pc-projective-morphism",
+  "def-sfb-projective-dolbeault-data"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-sfb-algebraic-dolbeault-derivative-comparison], write $M=\\coprod_{i=1}^r M_i$ with compact open and closed connected components. Each $M_i$ has constant complex dimension and the Kähler metric specified in the statement. Complex manifolds have no boundary. Forms, $\\bar\\partial$ and its adjoint act componentwise: the global integral is the sum of the component integrals, so the adjoint identity is the sum of the component adjoint identities. Consequently the Laplacian acts componentwise as well. It suffices to construct a representative and prove closedness separately on each $M_i$.",
+   "uses": [
+    "lem-sfb-algebraic-dolbeault-derivative-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Theorem 1.6.6, pp.26--27; compactness input and componentwise extension by Q81"
+   }
+  },
+  {
+   "text": "Fix $M_i$ and a smooth $\\bar\\partial$-closed representative $\\beta$ of the restricted class. Apply [lem-sfb-hermitian-dolbeault-orthogonal-decomposition] to obtain $\\beta=h+\\bar\\partial u+\\bar\\partial^*v$ with $\\Delta_{\\bar\\partial}h=0$. By the defining adjoint relation, $0=\\langle\\Delta_{\\bar\\partial}h,h\\rangle=\\|\\bar\\partial^*h\\|^2+\\|\\bar\\partial h\\|^2$, so $\\bar\\partial h=0$. Set $\\gamma=\\bar\\partial^*v$. Since $\\bar\\partial\\beta=\\bar\\partial h=0$ and $\\bar\\partial^2=0$, we have $\\bar\\partial\\gamma=0$. Thus $\\|\\gamma\\|^2=\\langle\\bar\\partial^*v,\\gamma\\rangle=\\langle v,\\bar\\partial\\gamma\\rangle=0$, hence $\\gamma=0$. Here zero $L^2$ norm forces a smooth form to vanish: a nonzero value gives a positive norm on a coordinate neighbourhood of positive volume. It follows that $\\beta-h=\\bar\\partial u$, so $h$ represents the required class.",
+   "uses": [
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Theorem 6.7, pp.23--24; adjoint calculation for the cohomology consequence"
+   }
+  },
+  {
+   "text": "For any harmonic $(p,q)$-form $\\alpha$ on $M_i$, [lem-sfb-kahler-laplacian-identity] gives $\\Delta_d\\alpha=2\\Delta_{\\bar\\partial}\\alpha=0$. Apply the defining adjoint identity on this compact manifold: $0=\\langle\\Delta_d\\alpha,\\alpha\\rangle=\\|d^*\\alpha\\|^2+\\|d\\alpha\\|^2$. Both terms are nonnegative, so $d\\alpha=0$ by the same smooth-form norm argument as in step 2. This applies to every harmonic form, including the representative just constructed.",
+   "uses": [
+    "lem-sfb-kahler-laplacian-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/kong-complex-geometry-notes.pdf",
+    "place": "Proposition 6.12, p.26; adjoint calculation giving closedness"
+   }
+  },
+  {
+   "text": "The finitely many representatives $h_i$ glue on the disjoint open components to a smooth form $h$; the primitives $u_i$ glue as well, so $\\beta-h=\\bar\\partial u$ globally. All operator equations hold on each component and hence on $M$. If $p$ or $q$ exceeds a component dimension, its $(p,q)$-space is zero and the construction there uses zero forms. In dimension zero only bidegree $(0,0)$ can be nonzero and all derivatives vanish. If $r=0$, all form and cohomology spaces are zero and the zero form suffices. Thus unequal component dimensions, disconnectedness, and the empty scheme cause no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/popa-kodaira-dimension.pdf",
+    "place": "Theorem 1.6.6 input, extended componentwise by Q81"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-algebraic-dolbeault-derivative-comparison",
+  "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+  "lem-sfb-kahler-laplacian-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/popa-kodaira-dimension.pdf",
+  "place": "Popa Theorem 1.6.6, pp.26--27, harmonic-form input, expanded using Kong Theorem 6.7 and Proposition 6.12 (both read online; local copies WANTED). Componentwise assembly and adjoint calculations supplied by Q81."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Kahler|Kähler|Dolbeault|harmonic.*form|form.*harmonic",
+   "results": "OK 25 hits: Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Basic.lean, Mathlib/NumberTheory/Harmonic/Int.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean, Mathlib/Geometry/Euclidean/Angle/Oriented/Rotation.lean. ",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonic functions, compact holomorphic functions and d squared zero do not give harmonic representatives of Dolbeault classes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hodge theorem compact Kahler manifold harmonic representatives are d closed",
+   "results": "OK 8 hits: KaehlerDifferential.D_apply, InnerProductSpace.HarmonicOnNhd, InnerProductSpace.HarmonicAt.eventually, InnerProductSpace.harmonicOnNhd_comp_CLE_iff, Algebra.Generators.toKaehler_tmul_D, AnalyticAt.harmonicAt, harmonic_is_realOfHolomorphic, KaehlerDifferential.mvPolynomialBasis_repr_apply. ",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonic functions, compact holomorphic functions and d squared zero do not give harmonic representatives of Dolbeault classes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"harmonic\", \"form\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonic functions, compact holomorphic functions and d squared zero do not give harmonic representatives of Dolbeault classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dolbeault cohomology classes on a compact Kahler manifold have harmonic representatives and all harmonic forms are closed for the exterior derivative",
+   "results": "OK 8 hits: extDeriv_extDeriv, extDeriv_extDeriv_apply, extDerivWithin_extDerivWithin_eqOn, ContDiffAt.harmonicAt, extDerivWithin_extDerivWithin_apply, MDifferentiable.exists_eq_const_of_compactSpace, MDifferentiable.apply_eq_of_compactSpace, groupCohomology.H2π_eq_zero_iff. ",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonic functions, compact holomorphic functions and d squared zero do not give harmonic representatives of Dolbeault classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every Dolbeault cohomology class of bidegree p q on a compact Kahler manifold has a d closed smooth representative",
+   "results": "OK 8 hits: MDifferentiable.exists_eq_const_of_compactSpace, MDifferentiable.apply_eq_of_compactSpace, CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff, CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff, CochainComplex.HomComplex.CohomologyClass.toHom_mk_eq_zero_iff, groupCohomology.H2π_eq_zero_iff, groupCohomology.H2π_eq_iff, CochainComplex.HomComplex.CohomologyClass. ",
+   "date": "2026-10-24",
+   "verdict": "no match: harmonic functions, compact holomorphic functions and d squared zero do not give harmonic representatives of Dolbeault classes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dolbeault cohomology of a smooth complex projective variety has harmonic representatives which are closed differential forms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Preadditive C] → CochainComplex C ℤ → CochainComplex C ℤ → ℤ → Type v\", \"doc\": \"The cohomology class in degree $ n $ of the homomorphism complex $ \\\\text{Hom}(K, L) $ is defined as the quotient of the cocycle subgroup $ \\\\text{Cocycle}(K, L, n) $ by the coboundary subgroup $ \\\\text{\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.mk_eq_zero_iff\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {K L : CochainComplex C ℤ} {n : ℤ} (x : CochainComplex.HomComplex.Cocycle K L n),\\n  CochainComplex.HomComplex.CohomologyClass.mk x = 0 ↔ x ∈ CochainComplex.HomComplex.coboundaries K L n\", \"doc\": \"For any cocycle $x$ in degree $n$ of the homomorphism complex $\\\\text{Hom}(K, L)$, the cohomology class $[x]$ is zero in the $n$-th cohomology group if and only if $x$ is a coboundary, i.e., $x$ lies i\"}\n  {\"name\": \"CochainComplex.HomComplex.CohomologyClass.toHom_mk_eq_zero_iff\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  {K L : CochainComplex C ℤ} {n : ℤ} (x : CochainComplex.HomComplex.Cocycle K L n),\\n  CochainComplex.HomComplex.CohomologyClass.toHom (CochainComplex.HomComplex.CohomologyClass.mk x) = 0 ↔\\n    x ∈ Cochai\", \"doc\": \"The induced homomorphism from the $n$-th cohomology class of the homomorphism complex $\\\\text{Hom}(K, L)$ to the homotopy class of chain maps sends a cohomology class $[x]$ to zero if and only if the c\"}\n  {\"name\": \"CochainComplex.HomComplex.leftHomologyData_π_hom_apply\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Preadditive C]\\n  (K L : CochainComplex C ℤ) (n : ℤ) (x : CochainComplex.HomComplex.Cocycle K L n),\\n  (AddCommGrpCat.Hom.hom (CochainComplex.HomComplex.leftHomologyData K L n).π) x =\\n    CochainComplex.HomComplex.Cohomo\", \"doc\": \"For any cochain complexes $ K $ and $ L $ in a preadditive category $ \\\\mathcal{C} $, and for any integer $ n $, the projection morphism $ \\\\pi $ in the left homology data of the homomorphism complex $ \"}\n  {\"name\": \"groupCohomologyIso\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic\", \"type\": \"{k G : Type u} →\\n  [inst : CommRing k] →\\n    [inst_1 : Group G] →\\n      (A : Rep k G) →\\n        (n : ℕ) →\\n          (P : CategoryTheory.ProjectiveResolution (Rep.trivial k G k)) →\\n            groupCohomology A n ≅ HomologicalComplex.homology (P.complex.linearYonedaObj k A) n\", \"doc\": \"For a group $ G $, commutative ring $ k $, $ k $-representation $ A $ of $ G $, and projective resolution $ P $ of the trivial representation, the $ n $-th group cohomology module $ H^n(G, A) $ is iso\"}\n  {\"name\": \"groupCohomology.H2π_eq_zero_iff\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (x : ↥(groupCohomology.cocycles₂ A)),\\n  (CategoryTheory.ConcreteCategory.hom (groupCohomology.H2π A)) x = 0 ↔ ⇑x ∈ groupCohomology.coboundaries₂ A\", \"doc\": \"For a commutative ring $ k $, group $ G $, and $ k $-representation $ A $, the projection of a 2-cocycle $ x $ into the second group cohomology module $ H^2(G, A) $ is zero if and only if $ x $ is a 2\"}\n  {\"name\": \"groupCohomology.H1π_eq_zero_iff\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (x : ↥(groupCohomology.cocycles₁ A)),\\n  (CategoryTheory.ConcreteCategory.hom (groupCohomology.H1π A)) x = 0 ↔ ⇑x ∈ groupCohomology.coboundaries₁ A\", \"doc\": \"For a group $ G $, a representation $ A $ of $ G $ over a commutative ring $ k $, and a 1-cocycle $ x : G \\to A $, the projection of $ x $ into the first group cohomology module $ H^1(G, A) $ is zero i\"}\n  {\"name\": \"groupCohomology.H2π_eq_iff\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/LowDegree\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] {A : Rep k G} (x y : ↥(groupCohomology.cocycles₂ A)),\\n  (CategoryTheory.ConcreteCategory.hom (groupCohomology.H2π A)) x =\\n      (CategoryTheory.ConcreteCategory.hom (groupCohomology.H2π A)) y ↔\\n    ⇑x - ⇑y ∈ groupCohomology.coboundaries₂ A\", \"doc\": \"For any two 2-cocycles $x$ and $y$ in the group cohomology of $G$ with coefficients in a $k$-representation $A$, their images under the projection to the second cohomology module $H^2(G, A)$ are equal\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract cohomology quotients, Euclidean harmonic functions and exterior derivative squared zero do not give harmonic representatives."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"harmonic\", \"form\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract cohomology quotients, Euclidean harmonic functions and exterior derivative squared zero do not give harmonic representatives."
+  },
+  {
+   "tool": "grep",
+   "query": "Dolbeault|HodgeDecomposition|harmonic.*form|form.*harmonic|KahlerManifold",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/Int.lean\", \"line\": \"14\", \"text\": \"The nth Harmonic number is not an integer. We formalize the proof using\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Harmonic/Poisson.lean\", \"line\": \"14\", \"text\": \"This file establishes several versions of the **Poisson Integral Formula** for harmonic functions on\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Harmonic/Poisson.lean\", \"line\": \"18\", \"text\": \"TODO: Extend this formula to vector-valued harmonic functions\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Harmonic/Poisson.lean\", \"line\": \"38\", \"text\": \"**Poisson integral formula** for harmonic functions on arbitrary disks in the complex plane,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Harmonic/Poisson.lean\", \"line\": \"70\", \"text\": \"**Poisson integral formula** for harmonic functions on arbitrary disks in the complex plane,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/Harmonic/Poisson.lean\", \"line\": \"88\", \"text\": \"**Poisson integral formula** for harmonic functions on arbitrary disks in the complex plane,\"}\n  {\"file\": \"Mathlib/Analysis/Complex/JensenFormula.lean\", \"line\": \"202\", \"text\": \"  `Mathlib/Analysis/Complex/Harmonic/Poisson` for the classic Poisson Integral Formula, for harmonic\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract cohomology quotients, Euclidean harmonic functions and exterior derivative squared zero do not give harmonic representatives."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hodge theorem compact Kahler manifold Dolbeault harmonic representative",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Orientation.kahler_apply_apply\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x y : E) : o.kahler x y = ⟪x, y⟫ + ω x y • Complex.I\", \"doc\": \"For any vectors $x, y$ in a two-dimensional real inner product space $E$, the Kähler structure $o.\\text{kahler}$ evaluated at $x$ and $y$ equals the real inner product $\\\\langle x, y\\\\rangle$ plus the sy\"}\n  {\"name\": \"Orientation.kahler_mul\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(a x y : E) : o.kahler x a * o.kahler a y = ‖a‖ ^ 2 * o.kahler x y\", \"doc\": \"For vectors $x, a, y$ in the space $E$, the product of the Kähler maps $o.\\\\text{kähler}(x, a)$ and $o.\\\\text{kähler}(a, y)$ equals the square of the norm of $a$ multiplied by the Kähler map $o.\\\\text{kä\"}\n  {\"name\": \"Orientation.kahler_eq_zero_iff\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x y : E) : o.kahler x y = 0 ↔ x = 0 ∨ y = 0\", \"doc\": \"For any vectors $x$ and $y$ in a two-dimensional real inner product space, the Kähler form $\\\\langle x, y\\\\rangle + i\\\\omega(x, y)$ equals zero if and only if either $x = 0$ or $y = 0$, where $\\\\langle \\\\c\"}\n  {\"name\": \"Complex.kahler\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(w z : ℂ) : Complex.orientation.kahler w z = z * conj w\", \"doc\": \"The Kähler structure on the complex numbers $\\\\mathbb{C}$, viewed as a 2-dimensional real inner product space, is defined by the complex-bilinear map $(w, z) \\\\mapsto z \\\\cdot \\\\overline{w}$, where $\\\\over\"}\n  {\"name\": \"KaehlerDifferential.D_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(s : S) :\\n  KaehlerDifferential.D R S s =\\n    (KaehlerDifferential.ideal R S).toCotangent\\n      ⟨1 ⊗ₜ s - s ⊗ₜ 1, KaehlerDifferential.one_smul_sub_smul_one_mem_ideal R s⟩\", \"doc\": \"For any element $ s $ in an $ R $-algebra $ S $, the Kähler differential $ d(s) $ is equal to the equivalence class of $ 1 \\\\otimes s - s \\\\otimes 1 $ in the cotangent module $ \\\\Omega_{S/R} $.\"}\n  {\"name\": \"Orientation.kahler\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \": E →ₗ[ℝ] E →ₗ[ℝ] ℂ\", \"doc\": \"The Kähler structure is defined as a complex-linear map constructed by combining the real inner product $\\\\langle \\\\cdot, \\\\cdot \\\\rangle$ with the complex structure $i$ and symplectic form $\\\\omega$. Spec\"}\n  {\"name\": \"Orientation.kahler_apply_self\", \"module\": \"Mathlib.Analysis.InnerProductSpace.TwoDim\", \"type\": \"(x : E) : o.kahler x x = ‖x‖ ^ 2\", \"doc\": \"For any vector $x$ in a two-dimensional real inner product space $E$ equipped with a complex structure and symplectic form $\\\\omega$, the Kähler structure $o.\\\\text{kahler}$ satisfies $o.\\\\text{kahler}(x\"}\n  {\"name\": \"KaehlerDifferential.mvPolynomialBasis_repr_apply\", \"module\": \"Mathlib.RingTheory.Kaehler.Polynomial\", \"type\": \"(σ) (x) (i) : (mvPolynomialBasis R σ).repr (D _ _ x) i = MvPolynomial.pderiv i x\", \"doc\": \"For a commutative ring $ R $ and a type $ \\\\sigma $, the representation of the Kähler differential $ D(x) $ of a polynomial $ x \\\\in R[\\\\sigma] $ in the standard basis $ \\\\{dX_s\\\\}_{s \\\\in \\\\sigma} $ is give\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract cohomology quotients, Euclidean harmonic functions and exterior derivative squared zero do not give harmonic representatives."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On compact Kahler manifolds the Dolbeault Laplacian harmonic forms represent all Dolbeault classes and are de Rham closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"extDerivWithin_extDerivWithin_eqOn\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {s : Set E},\\n  ContDiffOn 𝕜 r ω s →\\n    mi\", \"doc\": \"If a differential form $\\\\omega$ is continuously differentiable of class $C^r$ on a set $s$ with $r \\\\geq \\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2)$, and $s$ satisfies unique differentiability, then the seco\"}\n  {\"name\": \"extDerivWithin_extDerivWithin_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {s : Set E} {x : E},\\n  ContDiffWithinAt 𝕜 \", \"doc\": \"For a differential form $\\\\omega$ over a nontrivially normed field $\\\\mathbb{K}$, if $\\\\omega$ is $C^r$-smooth within a set $s$ at a point $x \\\\in s$ with $r \\\\geq \\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2)$, an\"}\n  {\"name\": \"extDeriv_extDeriv\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F}, ContDiff 𝕜 r ω → minSmoothness 𝕜 2 ≤ r → \", \"doc\": \"For a continuously differentiable differential form $\\\\omega$ of degree $n$ over a nontrivially normed field $\\\\mathbb{K}$, if the smoothness order $r$ satisfies $\\\\min\\\\text{Smoothness}(\\\\mathbb{K}, 2) \\\\l\"}\n  {\"name\": \"extDeriv_extDeriv_apply\", \"module\": \"Mathlib/Analysis/Calculus/DifferentialForm/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace 𝕜 F] {n : ℕ} {r : WithTop ℕ∞}\\n  {ω : E → E [⋀^Fin n]→L[𝕜] F} {x : E}, ContDiffAt 𝕜 r ω x → minSmoothnes\", \"doc\": \"If $\\\\omega$ is a differential form of degree $n$ that is continuously differentiable of order $r$ at a point $x$, where $r$ is at least the minimal smoothness required for the field $\\\\mathbb{K}$, then\"}\n  {\"name\": \"ContDiffAt.harmonicAt\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Harmonic/Constructions\", \"type\": \"∀ {F : Type u_1} [inst : NormedAddCommGroup F] [inst_1 : NormedSpace ℂ F] {f : ℂ → F} {x : ℂ},\\n  ContDiffAt ℂ 2 f x → InnerProductSpace.HarmonicAt f x\", \"doc\": \"If a function $f$ is twice continuously differentiable at a point $x$ in the complex numbers, then $f$ is harmonic at $x$.\"}\n  {\"name\": \"MDifferentiable.apply_eq_of_compactSpace\", \"module\": \"Mathlib/Geometry/Manifold/Complex\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] {F : Type u_2} [inst_2 : NormedAddCommGroup F]\\n  [inst_3 : NormedSpace ℂ F] {H : Type u_3} [inst_4 : TopologicalSpace H] {I : ModelWithCorners ℂ E H} [I.Boundaryless]\\n  {M : Type u_4} [inst_6 : TopologicalSpace M] [inst_7 : Ch\", \"doc\": \"If $ M $ is a compact preconnected manifold with corners and $ f : M \\\\to F $ is a differentiable function, then $ f $ is constant, i.e., $ f(a) = f(b) $ for all $ a, b \\\\in M $.\"}\n  {\"name\": \"InnerProductSpace.HarmonicAt.comp_CLM\", \"module\": \"Mathlib/Analysis/InnerProductSpace/Harmonic/Basic\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : InnerProductSpace ℝ E] [inst_2 : FiniteDimensional ℝ E]\\n  {F : Type u_2} [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] {G : Type u_3}\\n  [inst_5 : NormedAddCommGroup G] [inst_6 : NormedSpace ℝ G] {f : E → F} {x : E},\\n  InnerProduct\", \"doc\": \"If a function $ f $ is harmonic at a point $ x $ in a real inner product space, then the composition of $ f $ with any continuous linear map $ l : F \\\\to G $ is also harmonic at $ x $.\"}\n  {\"name\": \"MDifferentiable.exists_eq_const_of_compactSpace\", \"module\": \"Mathlib/Geometry/Manifold/Complex\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] {F : Type u_2} [inst_2 : NormedAddCommGroup F]\\n  [inst_3 : NormedSpace ℂ F] {H : Type u_3} [inst_4 : TopologicalSpace H] {I : ModelWithCorners ℂ E H} [I.Boundaryless]\\n  {M : Type u_4} [inst_6 : TopologicalSpace M] [inst_7 : Ch\", \"doc\": \"If $ M $ is a compact preconnected complex manifold and $ f : M \\\\to F $ is a differentiable function to a complex topological vector space $ F $, then there exists a constant $ v \\\\in F $ such that $ f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract cohomology quotients, Euclidean harmonic functions and exterior derivative squared zero do not give harmonic representatives."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hodge-first-differential-zero",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds.",
+   "via": [
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-projective-harmonic-representatives",
+  "worker": "stage1",
+  "summary": "Preserved the statement and statement dependencies. Reused the existing algebraic/Dolbeault comparison statement for the compact finite component decomposition. Two statement-only inputs isolate the smooth orthogonal Dolbeault decomposition and the Kähler Laplacian identity. The item kills the coexact term by adjointness, proves closedness of every harmonic form by the de Rham energy identity, and glues over components including dimension zero and the empty scheme. No project declaration or Mathlib match was found.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Expands the harmonic-form input used in Popa Theorem 1.6.6 along the existing alteration/Kodaira branch."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q81-4aada1f1c",
+  "group": "Q81",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-4aada1f1c (reviewer sub-agent of L); spot-checked: I read the whole split of lem-sfb-projective-harmonic-representatives and the sources at the cited places, which I downloaded read-only because neither PDF is in literature/. Popa, Thm 1.6.6 proof, pp.26-27: harmonic representatives exist and are d-closed. Kong, Thm 6.7, pp.23-24: orthogonal Dolbeault decomposition on a compact Hermitian manifold. Kong, Prop 6.12, p.26: Δ_d = 2Δ_∂̄ on any Kähler manifold, no compactness. The item's statement and stmt_deps are unchanged. Step 1 uses only what lem-sfb-algebraic-dolbeault-derivative-comparison states: a finite disjoint union of compact Kähler manifolds, dimensions allowed to differ. That node is unsplit, so there is no cycle. Step 2: the adjoint argument gives ∂̄h = 0 and ∂̄γ = 0, then ‖γ‖² = ⟨v,∂̄γ⟩ = 0; I checked the degrees and the conjugate-symmetry order. Step 3: the energy identity on a compact component gives dα = 0. Step 4 glues over the components. I checked the empty scheme, a point, degrees above a component's dimension, and components of unequal dimension. Both new nodes match their source statements exactly with the right hypotheses (Hermitian without Kähler for the decomposition, Kähler without compactness for the identity). Both are statement-only and self-contained, have searches of all three kinds, and neither restates a clause of the item. rg -L over dag/nodes finds no duplicate. All cited nodes are in unit sk-thm-sf-ctf-stability, so no tool_uses are needed. No SGA is cited. The blueprint ancestor is null, inherited from the item. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.Geometry.Complex.ProjectiveHarmonicRepresentatives",
+  "declaration": "ComplexManifold.projective_harmonic_representatives",
+  "file": "lean/Sheaf/Geometry/Complex/ProjectiveHarmonicRepresentatives.lean",
+  "statement": "theorem projective_harmonic_representatives {X : Scheme.{u}} (f : X ⟶ Spec (.of (ULift.{u} ℂ))) [Smooth f] [IsProjective f] (A : SmoothAnalytic.Data f) (P : ProjectiveDolbeaultData A) (p q : ℕ) : (∀ b : P.Cohomology p q, ∃ α : P.cycles p q, P.classOf p q α = b ∧ ∀ i, (P.operators i).laplacian (α.val i) = 0) ∧ (∀ α : P.Forms, (∀ i, α i ∈ (P.operators i).harmonic p q) → ∀ i, (P.operators i).dbar (α i) + (P.operators i).del (α i) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f66be29f",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read item node (only lean + stmt_deps changed; stmt_deps adds the delivery's new def node), new node def-sfb-projective-dolbeault-data and both modules, and the used declarations (SmoothAnalytic.Data, HermitianDolbeaultData operators/typeForms/laplacian/harmonic/exact, IsKahlerMetric, IsHProjective, homOfSections). Hypotheses Smooth/IsProjective over Spec ULift ℂ, no extra assumptions; both conclusion clauses present (harmonic representative with classOf = b; every harmonic form has dbar+del = 0 = d_an). The structure is real data with Fubini-Study pullback pinned via local lifts (1/π normalization consistent with ω=(i/2π)∂∂̄log|z|²) and a concrete ker/im quotient (integer q-1). Checked that actual X satisfies the hypotheses (compatible, induced, embedding incl. empty X into ℙ⁰). Edge cases (empty, disconnected, unequal dims, out-of-range degrees, q=0, dim 0) covered. No duplicate in DAG/lean/Mathlib; new node fields conform; docstrings/blueprint tags/4 proof steps present; lines ≤100; proof only sorry; report sections present. No fixes."
+ }
+}

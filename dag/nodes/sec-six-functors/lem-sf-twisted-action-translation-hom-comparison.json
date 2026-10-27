@@ -1,0 +1,127 @@
+{
+ "id": "lem-sf-twisted-action-translation-hom-comparison",
+ "kind": "statement",
+ "title": "Invertibility of the canonical internal Hom comparison for translation",
+ "statement": "Let $(C,J)$ be a small site, $s:C\\simeq C$ have continuous inverse, $R$ a sheaf of commutative rings, $a:(s^{-1})^*R\\simeq R$, $P$ a RestrictionPresentation [def-sf-twisted-action-presentation-data] and $T$ TensorComparisons [lem-sf-twisted-action-tensor-comparisons]. Let $F=\\sigma$ and $b_{M,Q}:F(M\\otimes Q)\\simeq FM\\otimes FQ$ be T.sigmaTensor. For any base-site module sheaves $M,N$, put $H=\\mathcal Hom_R(M,N)$ [def-pur-sheaf-hom]. Then the explicit map $\\gamma_{M,N}=\\operatorname{curry}(b_{M,H}^{-1}F(\\mathrm{ev}_{M,N})):FH\\to\\mathcal Hom_R(FM,FN)$ is invertible, where evaluation and currying are those of the ordinary sheaf tensor-Hom adjunction [def-pur-sheaf-tensor-product].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor; formal internal-Hom preservation for the tensor autoequivalence sigma, written by D4."
+ },
+ "stmt_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Transpose the inverse translation tensor comparison followed by translated evaluation. For test objects FQ, postcomposition with the transpose equals the composite of full faithfulness of F, the tensor-Hom adjunction, the tensor isomorphism, and the adjunction in the target; tensor naturality proves the equality. These maps are bijective. Essential surjectivity of the translation equivalence and the Yoneda criterion prove that the transpose is invertible.",
+   "uses": [
+    "def-sf-twisted-action-presentation-data",
+    "lem-sf-twisted-action-tensor-comparisons",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sf-twisted-action-presentation-data",
+  "lem-sf-twisted-action-tensor-comparisons",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-internal-hom-adjoint-tensor; formal internal-Hom preservation for the tensor autoequivalence sigma, written by D4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Currying in a monoidal closed category commutes with an invertible action of a tensor autoequivalence, with conjugate action on internal Hom",
+   "results": "MonoidalClosed.curry, curryHomEquiv, ofEquiv_curry_def and functor-category Hom equivalences. These provide ordinary adjunction operations but not the displayed fixed-pair equation for the normalized tensor data.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetful functor from equivariant objects of monoidal autoequivalence preserves internal Hom",
+   "results": "Action forgetful monoidal comparisons, Rep.ihom and functor-category closed structures. None has the twisted sigma action and the TensorComparisons interface.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*curr|curr.*equivariant|Hom fixed pair|Hom.*conjugate action",
+   "results": "No existing node states this fixed-pair currying criterion. The parent TwistedActionHomEvaluationComparisons has a private translation-isomorphism proof, and TwistedActionClosedComparisons has private evaluation identities. Their proof methods are reused without importing these consumers. Mathlib Groupoid closed functor categories require a different untwisted functor-category presentation.",
+   "date": "2026-10-27",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.TwistedActionRestrictionHomComparison",
+  "date": "2026-10-27",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The parent obligation has no created.item blueprint ancestor. Its recorded provenance is lem-a1-local-boundary-duality and the evaluation/biduality sentence of thm-coef-qbar-verdier. This site realization supplies the abelian-category foundation for the internal-Hom and evaluation argument of cor-coef-verdier-weil-equivariance, without replacing the native derived category by fixed pairs in a derived category. Original twisted-site proof steps 9--13; sheafification and localized-site Hom calculation. Substep: Original closed-comparisons proof steps 3--4 and evaluation portion of step 5 (original action-site steps 11--13); sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor. Restriction-only substep: invertibility of the transpose of restricted evaluation; translation preservation and both evaluation equations are proved in the parent.",
+   "via": [
+    "lem-sf-twisted-action-hom-pair-currying",
+    "lem-sf-twisted-action-restriction-hom-comparison-iso",
+    "lem-sf-twisted-action-hom-evaluation-comparisons",
+    "lem-sf-twisted-action-closed-comparisons",
+    "lem-sf-twisted-action-ringed-site",
+    "lem-sf-weil-native-closed-forgetful",
+    "lem-sf-weil-verdier-biduality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TwistedActionTranslationHomComparison",
+  "file": "lean/Sheaf/CategoryTheory/TwistedActionTranslationHomComparison.lean",
+  "declaration": "CategoryTheory.TwistedActionRingedSite.isIso_translationHomComparison",
+  "statement": "theorem isIso_translationHomComparison (P : RestrictionPresentation J s R a)\n    (T : TensorComparisons J s R a P) (M N : Modules R) :\n    IsIso (SheafOfModules.tensorHomEquiv (R := R) _ _ _\n      ((T.sigmaTensor M (SheafOfModules.homObj (R := R) M N)).inv ≫\n        (sigma J s R a).map (evaluationMap M N)))",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261027T094343-L-217340",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

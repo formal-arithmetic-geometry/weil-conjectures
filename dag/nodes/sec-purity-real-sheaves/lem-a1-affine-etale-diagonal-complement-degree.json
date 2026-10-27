@@ -1,0 +1,289 @@
+{
+ "id": "lem-a1-affine-etale-diagonal-complement-degree",
+ "kind": "statement",
+ "title": "Affine etale diagonal complement lowers fibre degree",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $T,T'$ be affine $S$-schemes, and let $a:T'\\to T$ be etale [def-weil-etale-morphism]. Let $n\\geq1$ bound the degrees of the fibres of $a$ [def-weil-pbc-fibre-degree-bound], meaning that every residue-field fibre is finite of coordinate-algebra dimension at most $n$. Write $T''=T'\\times_TT'$ [def-pc-fibre-product], with projections $\\pi_0,\\pi_1$, and let $\\delta:T'\\to T''$ be the diagonal. Then $\\delta$ identifies $T'$ with an open and closed subscheme [def-weil-open-immersion, def-weil-closed-immersion], and its complementary open and closed subscheme $T^*$ is affine. The restriction $b=\\pi_1|_{T^*}:T^*\\to T'$ is etale and its fibre degrees are bounded by $n-1$. For every field $K$ and map $\\operatorname{Spec}K\\to T'$, the fibre of $\\pi_1$ is the disjoint union of $\\operatorname{Spec}K$ and the fibre of $b$; its coordinate $K$-algebra is $K\\times C$, with $C$ the coordinate algebra of that complementary fibre and $\\dim_K C\\leq n-1$. If $n=1$, then $T^*$ is empty and $a$ is an open immersion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XW (lemma-neighbourhood-scheme), proof, third paragraph (diagonal decomposition and degree subtraction), with the bound-one case of the second paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-fibre-degree-bound",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Write $T=\\operatorname{Spec}A$ and $T'=\\operatorname{Spec}B$. By [lem-weil-pbc-fibre-product-affine-spectra], $T''=\\operatorname{Spec}R$ with $R=B\\otimes_A B$, and the projections are induced by the two factor maps. The morphism $a$ is separated by [lem-weil-pbc-affine-source-morphism-separated], so its diagonal is a closed immersion by [def-weil-proper-morphism]. It is also an open immersion: [def-weil-etale-morphism] makes $a$ unramified, and [def-weil-unramified-morphism] defines this using its open diagonal. Thus $\\delta$ identifies $T'$ with an open subscheme $D\\subseteq T''$ whose underlying subset is also closed. The defining identities of the diagonal give $\\pi_1\\delta=\\mathrm{id}_{T'}$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "def-weil-proper-morphism",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, third paragraph; Schemes Tags 01JQ, 01KN; Morphisms Tag 02GE"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-clopen-idempotent], choose the idempotent $e\\in R$ with $D=D(e)$ and complement $D(1-e)$. By [lem-weil-pbc-principal-localization-open-immersion], this complement, with its open subscheme structure, is $T^*=\\operatorname{Spec}R_{1-e}$, hence affine. It is a closed subscheme as well: the localization $R_{1-e}$ is $R/(e)$, since inverting $1-e$ forces $e=0$ by $e(1-e)=0$, and conversely $e=0$ makes $1-e=1$ invertible. Thus its inclusion is induced by the quotient $R\\twoheadrightarrow R/(e)$ and is a closed immersion by the affine description in [def-weil-closed-immersion]. This proves the asserted open and closed decomposition with the specified complementary open structure.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, third paragraph; Algebra Tag 00EE, lemma-disjoint-decomposition; Schemes Tag 01I3, lemma-standard-open-affine"
+   }
+  },
+  {
+   "text": "The projection $\\pi_1:T''\\to T'$ is the base change of $a$ along $a$, hence etale by clause 1 of [lem-weil-pbc-etale-base-change-finite-limits]. Applying [lem-a1-etale-open-restriction] with source open $T^*$ and target open all of $T'$ proves that $b$ is etale. By [lem-weil-pbc-fibre-degree-base-change] the degrees of the fibres of $\\pi_1$ are bounded by the same integer $n$.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-a1-etale-open-restriction",
+    "lem-weil-pbc-fibre-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, third paragraph; Morphisms Tags 02GO, 02GJ, 03J7"
+   }
+  },
+  {
+   "text": "Put $C_0=\\Gamma(T^*,\\mathcal O_{T^*})$. Restriction to the disjoint open cover $T''=D\\amalg T^*$ gives a ring isomorphism $R\\cong B\\times C_0$: its inverse glues the two sections, with no compatibility condition because the overlap is empty. Here $\\Gamma(D,\\mathcal O_D)=B$ through $\\delta$. The structure map of $\\pi_1$ is $b_0\\mapsto(b_0,b^\\sharp(b_0))$, because $\\pi_1\\delta=\\mathrm{id}$, so this is an isomorphism of $B$-algebras. Fix a field-valued point $u:\\operatorname{Spec}K\\to T'$. By [lem-weil-pbc-fibre-product-affine-spectra], the coordinate algebras of the fibres of $\\pi_1$ and $b$ are respectively $R\\otimes_B K$ and $C=C_0\\otimes_B K$. The explicit $K$-algebra isomorphism $R\\otimes_B K\\cong K\\times C$ sends $(b_0,c)\\otimes k$ to $(u^\\sharp(b_0)k,c\\otimes k)$. Its inverse sends $(k,0)$ to $(1,0)\\otimes k$ and $(0,c\\otimes k)$ to $(0,c)\\otimes k$; these balanced maps are inverse on pure tensors. The corresponding scheme decomposition is precisely the pullback of $D\\amalg T^*$: a morphism into a disjoint open cover is uniquely its restrictions to the inverse images of the two opens. The first piece is $\\operatorname{Spec}K$, since $\\pi_1|_D$ is the inverse of $\\delta$; the second is the fibre of $b$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, third paragraph, diagonal fibre is one point; elementary sheaf gluing and explicit tensor-product calculation, with Schemes Tag 01JQ"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-fibre-degree-bound-field-points] to $\\pi_1$ with its bound from step 3. Its fibre over every $u:\\operatorname{Spec}K\\to T'$ is finite over $K$, of coordinate dimension at most $n$. Step 4 identifies this coordinate algebra with $K\\times C$. Projection onto $C$ shows that $C$ is finite-dimensional: the projections of any finite spanning set span it. If $c_1,\\ldots,c_d$ is a basis of $C$, then $(1,0),(0,c_1),\\ldots,(0,c_d)$ is a basis of $K\\times C$, so $1+d\\leq n$ and $d\\leq n-1$. Consequently $\\operatorname{Spec}C$ is finite over $K$ by [def-weil-finite-integral-morphism]. Taking $K=\\kappa(t')$ for each $t'\\in T'$ proves that $n-1$ bounds the fibre degrees of $b$ by [def-weil-pbc-fibre-degree-bound]. This also gives every asserted clause for arbitrary field-valued points, without assuming that $a$ itself is finite.",
+   "uses": [
+    "lem-weil-pbc-fibre-degree-bound-field-points",
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-fibre-degree-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, third paragraph, degree subtraction; Morphisms Tag 03J5, lemma-characterize-universally-bounded"
+   }
+  },
+  {
+   "text": "If $n=1$, every residue-field fibre of $b$ has zero-dimensional coordinate algebra, hence is the empty affine scheme. If a point $x\\in T^*$ existed, with $t'=b(x)$, the maps $\\operatorname{Spec}\\kappa(x)\\to T^*$ and $\\operatorname{Spec}\\kappa(x)\\to\\operatorname{Spec}\\kappa(t')$ would give a point of the fibre at $t'$ by the universal property [def-pc-fibre-product], a contradiction. Thus $T^*$ is empty. The diagonal is therefore surjective. Equivalence (4) with (3) in [def-weil-radicial-morphism] says that $a$ is radicial, and [lem-weil-pbc-radicial-etale-open] now makes $a$ an open immersion, using its original etale hypothesis. This includes the case $T'$ is empty.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-weil-radicial-morphism",
+    "lem-weil-pbc-radicial-etale-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, second paragraph, bound-one case; Morphisms Tag 01S4 and Etale Morphisms Tag 025G, theorem-etale-radicial-open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-fibre-degree-bound",
+  "def-weil-proper-morphism",
+  "def-weil-radicial-morphism",
+  "def-weil-unramified-morphism",
+  "lem-a1-etale-open-restriction",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-fibre-degree-bound-field-points",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-radicial-etale-open",
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03XW, lemma-neighbourhood-scheme, proof, second and third paragraphs; explicit elementary affine and linear-algebra details supplied in steps 2, 4, 5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "diagonal.*[Cc]ompl|[Cc]ompl.*diagonal|[Bb]ound.*[Ff]ib|[Ff]ib.*[Dd]egree",
+   "results": "{\"t\": \"2026-10-22T07:55:50Z\", \"tool\": \"grep\", \"query\": \"diagonal.*[Cc]ompl|[Cc]ompl.*diagonal|[Bb]ound.*[Ff]ib|[Ff]ib.*[Dd]egree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of the diagonal of an affine etale morphism has degree one less in every fibre",
+   "results": "{\"t\": \"2026-10-22T07:55:50Z\", \"tool\": \"leansearch\", \"query\": \"The complement of the diagonal of an affine etale morphism has degree one less in every fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"Set.offDiag_univ\", \"AlgebraicGeometry.HasAffineProperty.diagonal_iff\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\"], \"digest\": \"7ebb65d652b0f75f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"diagonal\"",
+   "results": "{\"t\": \"2026-10-22T07:55:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"diagonal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.WeaklyEtale.flat_diagonal\", \"AlgebraicGeometry.WeaklyEtale.instDiagonalScheme\", \"AlgebraicGeometry.WeaklyEtale.weaklyEtale_eq_flat_inf_diagonal_flat\"], \"digest\": \"64e39918aff7ea3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated etale morphism with at most one geometric point in each fibre is an open immersion",
+   "results": "{\"t\": \"2026-10-22T07:55:56Z\", \"tool\": \"leanfinder\", \"query\": \"A separated etale morphism with at most one geometric point in each fibre is an open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsOpenImmersion\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.IsPreimmersion\", \"AlgebraicGeometry.IsImmersion\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"AlgebraicGeometry.isOpenImmersion_iff_stalk\"], \"digest\": \"a18bae58605e82c5\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale map of affine schemes with fibre degree bounded by n the complement of its diagonal is affine etale with fibre degree bounded by n minus one",
+   "results": "{\"t\": \"2026-10-22T07:55:57Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale map of affine schemes with fibre degree bounded by n the complement of its diagonal is affine etale with fibre degree bounded by n minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"e3a8de3c9e26c9b9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an affine etale base change of a separated locally quasi finite algebraic space the saturated pullback of an open scheme is the union of the original open and the off diagonal image and is quasi affine when the latter is a quasi compact scheme",
+   "results": "{\"t\": \"2026-10-22T07:56:24Z\", \"tool\": \"leanfinder\", \"query\": \"In an affine etale base change of a separated locally quasi finite algebraic space the saturated pullback of an open scheme is the union of the original open and the off diagonal image and is quasi affine when the latter is a quasi compact scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.IsAffineOpen.isCompact_pullback_inf\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_diagonal_of_isPullback\", \"AlgebraicGeometry.QuasiSeparated.quasiCompact_diagonal\", \"AlgebraicGeometry.QuasiSeparated.diagonalQuasiCompact\"], \"digest\": \"fd48052f5d75f1fc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gluing the diagonal and complementary images in an etale equivalence relation gives the scheme representing the saturated open pullback",
+   "results": "{\"t\": \"2026-10-22T07:56:24Z\", \"tool\": \"leanfinder\", \"query\": \"Gluing the diagonal and complementary images in an etale equivalence relation gives the scheme representing the saturated open pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.GlueData.Rel\", \"AlgebraicGeometry.Scheme.Pullback.gluing_V\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\"], \"digest\": \"1ed61013ac173acb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give only scheme permanence/gluing or general morphism descent, not the complete stated argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"diagonal\"",
+   "results": "{\"t\": \"2026-10-23T04:09:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"diagonal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.WeaklyEtale.flat_diagonal\", \"AlgebraicGeometry.WeaklyEtale.instDiagonalScheme\", \"AlgebraicGeometry.WeaklyEtale.weaklyEtale_eq_flat_inf_diagonal_flat\"], \"digest\": \"64e39918aff7ea3a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; these give separate diagonal, permanence or field-etale facts, not the complete affine-complement degree-subtraction statement"
+  },
+  {
+   "tool": "grep",
+   "query": "diagonal.*compl|compl.*diagonal|fiberDegree|BoundsFiberDegrees",
+   "results": "{\"t\": \"2026-10-23T04:09:21Z\", \"tool\": \"grep\", \"query\": \"diagonal.*compl|compl.*diagonal|fiberDegree|BoundsFiberDegrees\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; these give separate diagonal, permanence or field-etale facts, not the complete affine-complement degree-subtraction statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The complement of the diagonal of an affine etale scheme morphism lowers fibre degree by one",
+   "results": "{\"t\": \"2026-10-23T04:09:23Z\", \"tool\": \"leansearch\", \"query\": \"The complement of the diagonal of an affine etale scheme morphism lowers fibre degree by one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instLiftSchemeId\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover_diagonal\", \"AlgebraicGeometry.FormallyUnramified.recOn\"], \"digest\": \"e4014f5ee20b2023\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; these give separate diagonal, permanence or field-etale facts, not the complete affine-complement degree-subtraction statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine etale morphism the complement of the diagonal is affine etale and its fibre degree is one less",
+   "results": "{\"t\": \"2026-10-23T04:09:27Z\", \"tool\": \"leanfinder\", \"query\": \"For an affine etale morphism the complement of the diagonal is affine etale and its fibre degree is one less\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\"], \"digest\": \"67633397dbb971fd\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; these give separate diagonal, permanence or field-etale facts, not the complete affine-complement degree-subtraction statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isAffine.*[Cc]losed|[Cc]losed.*isAffine|[Cc]lopen|finrank_prod|isAffine_pullback",
+   "results": "{\"t\": \"2026-10-23T04:09:49Z\", \"tool\": \"grep\", \"query\": \"isAffine.*[Cc]losed|[Cc]losed.*isAffine|[Cc]lopen|finrank_prod|isAffine_pullback\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/Stalk.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean\"], \"digest\": \"747d558b0d06fdf0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; these give separate diagonal, permanence or field-etale facts, not the complete affine-complement degree-subtraction statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Removing the section from an etale algebra splits off one factor and subtracts one from its finite vector space dimension",
+   "results": "{\"t\": \"2026-10-23T04:10:00Z\", \"tool\": \"leanfinder\", \"query\": \"Removing the section from an etale algebra splits off one factor and subtracts one from its finite vector space dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation.P\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"StandardEtalePresentation.toSubmersivePresentation\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.IsStandardEtale.nonempty_standardEtalePresentation\"], \"digest\": \"ab7ddb003a9372c7\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; these give separate diagonal, permanence or field-etale facts, not the complete affine-complement degree-subtraction statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-etale-quasi-affine-image-scheme",
+  "date": "2026-10-22",
+  "group": "Q126"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Historical 03XX representability ingredient beneath lem-a1-affine-hc0; 03XW proof, third paragraph (diagonal decomposition and degree subtraction), with the bound-one case of the second paragraph",
+   "via": [
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-a1-affine-etale-diagonal-complement-degree",
+  "worker": "stage1",
+  "summary": "Proved the affine diagonal decomposition, complementary affineness and etaleness, arbitrary-field fibre product formula and degree subtraction, and bound-one open-immersion conclusion. Reused existing nodes throughout; no new nodes, no change to the statement. Expanded the disjoint-cover section gluing and tensor-product maps explicitly, and checked every citation against its statement.",
+  "blueprint": "Historical representability branch beneath lem-a1-affine-hc0 through lem-a1-separated-etale-space-scheme, lem-a1-separated-locally-qf-space-representable and lem-a1-etale-quasi-affine-image-scheme: realizes exactly the diagonal/complement degree-decreasing induction input of Stacks 03XW, proof, third paragraph, together with its second-paragraph bound-one case. The current main-20261015 affine-hc0 proof no longer spells out this historical auxiliary route; this item and its existing ancestry are retained unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-degree-base-change",
+    "why": "Generic base-change invariance of fibre degree, applied to the self-base-change of a; the local unit has no replacement for the Stacks 03J7 input used in 03XW."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-degree-bound-field-points",
+    "why": "Generic arbitrary-field-point form of a fibre-degree bound, Stacks 03J5; needed to retain the item's clause for all fields, beyond residue-field fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-weil-pbc-fibre-degree-bound-field-points"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NU-41af3aceb",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-41af3aceb (reviewer sub-agent of L); spot-checked: I read the delivery in full: 0 new nodes, the statement is unchanged, and all six steps check out against the cited statements and Stacks 03XW (spaces-morphisms.tex, proof of lemma-neighbourhood-scheme, the n=1 case and the T''=Δ(T')⨿T* paragraph, about lines 10512-10545). Step 1: δ is open by the definition in def-weil-unramified-morphism (a is étale, hence unramified) and closed because a is separated (affine-source node plus the separated definition in def-weil-proper-morphism). Step 2: clopen idempotent e; T*=Spec R_{1-e} by the principal-localization node; checked R_{1-e}≅R/(e), so T* is also closed. Step 3: clause 1 of the étale base-change node with u=a and W=T' (π1 by symmetry of the fibre product); open restriction gives b étale; the final sentence of the fibre-degree base-change node (03J7) gives π1 bounded by n. Step 4: R≅B×C0 with structure map (id,b♯); checked that the tensor map to K×C is balanced and that its inverse works on generators. Step 5: the field-points node (03J5) gives the bound n; C is finite-dimensional and 1+d≤n. Step 6: n=1 makes every residue fibre Spec 0, so T* is empty, the diagonal is surjective, (4)⇒(3) in def-weil-radicial-morphism makes a radicial, and 025G (Lean-closed in slopmaster2) gives an open immersion. Edge cases tested: T' empty; Spec(k×k) over k with n=2; D(f)⊂Spec A, which is not finite. The citer lem-a1-etale-quasi-affine-image-scheme (step 3) uses exactly the delivered clauses. rg -L searches for 03XW and diagonal complement find no duplicate. I accept the declared tool_uses for the two sk-thm-p1 nodes (03J5 and 03J7) as generic black-box tools that the Rankin unit's route does not provide. No SGA is cited. Minor: the report mentions citations.json, which is not in the commit; this is immaterial."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineEtaleDiagonalComplementDegree",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.affine_etale_diagonal_complement_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineEtaleDiagonalComplementDegree.lean",
+  "statement": "theorem affine_etale_diagonal_complement_degree {S T T' : Scheme.{u}} [IsAffine T] [IsAffine T'] (t : T ⟶ S) (t' : T' ⟶ S) (a : Over.mk t' ⟶ Over.mk t) [Etale a.left] (n : ℕ) (hn : 1 ≤ n) (ha : BoundsFiberDegrees a.left n) : IsOpenImmersion (pullback.diagonal a.left) ∧ IsClosedImmersion (pullback.diagonal a.left) ∧ ∃ U : (pullback a.left a.left).Opens, (U : Set (pullback a.left a.left : Scheme.{u})) = (Set.range (pullback.diagonal a.left))ᶜ ∧ IsClosedImmersion U.ι ∧ IsAffine U.toScheme ∧ Etale (U.ι ≫ pullback.snd a.left a.left) ∧ BoundsFiberDegrees (U.ι ≫ pullback.snd a.left a.left) (n - 1) ∧ (∀ (K : Type u) [Field K] (g : Spec (CommRingCat.of K) ⟶ T'), IsFinite (pullback.snd (U.ι ≫ pullback.snd a.left a.left) g) ∧ (pullback.snd (U.ι ≫ pullback.snd a.left a.left) g).finrankΓ ≤ n - 1 ∧ ∃ (s : Spec (CommRingCat.of K) ⟶ pullback (pullback.snd a.left a.left) g) (j : pullback (U.ι ≫ pullback.snd a.left a.left) g ⟶ pullback (pullback.snd a.left a.left) g), s ≫ pullback.fst (pullback.snd a.left a.left) g = g ≫ pullback.diagonal a.left ∧ s ≫ pullback.snd (pullback.snd a.left a.left) g = 𝟙 _ ∧ j ≫ pullback.fst (pullback.snd a.left a.left) g = pullback.fst (U.ι ≫ pullback.snd a.left a.left) g ≫ U.ι ∧ j ≫ pullback.snd (pullback.snd a.left a.left) g = pullback.snd (U.ι ≫ pullback.snd a.left a.left) g ∧ IsIso (coprod.desc s j) ∧ ∃ e : Γ(pullback (pullback.snd a.left a.left) g, ⊤) ≃+* K × Γ(pullback (U.ι ≫ pullback.snd a.left a.left) g, ⊤), ∀ r, e r = ((s.appTop ≫ (Scheme.ΓSpecIso (CommRingCat.of K)).hom).hom r, j.appTop.hom r)) ∧ (n = 1 → IsEmpty U.toScheme ∧ IsOpenImmersion a.left)",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d34882918",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: diagonal open and closed immersion; complement U open, closed and affine; b = U.ι ≫ pullback.snd étale with fibre degree ≤ n−1; for every field K in universe u and point Spec K → T', the fibre splits as Spec K plus the fibre of b via canonical maps (IsIso (coprod.desc s j)), with a ring isomorphism to K × C given by the restriction maps, IsFinite and finrankΓ ≤ n−1; n=1 gives U empty and a an open immersion. No extra hypotheses; the dependency declarations BoundsFiberDegrees, finrankΓ and ΓAlgebra were read in side-live; Stacks pr_1 is pullback.snd. Edge cases checked: T' empty, non-finite open immersion, k×k over k, n=1. The statement field matches the file verbatim; the node is unchanged against side-live apart from lean; no name collision; no definitions; proof is sorry; docstrings give the source place and blueprint id; proof-only imports exist; no SGA citation. Not recompiled because no file was changed."
+ }
+}

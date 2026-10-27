@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-space-proper-support-module-ext-finite",
+ "kind": "statement",
+ "title": "Ext finiteness for finitely presented modules with proper support",
+ "statement": "Let $k$ be a field [def-weil-field], and let $X$ be an algebraic space over $\\operatorname{Spec}k$ [def-trf-algebraic-space, def-weil-affine-spectrum], in the universes of [def-weil-size-convention]. Suppose $X\\to\\operatorname{Spec}k$ is locally of finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. Let $M,N$ be quasi-coherent $\\mathcal O_X$-modules on the small etale ringed site [def-trf-space-quasi-coherent-module], both of finite presentation, meaning etale locally cokernels of maps $\\mathcal O^m\\to\\mathcal O^n$ with $m,n$ finite. Assume that $N\\cong j_*Q$ for a closed immersion $j:Z\\hookrightarrow X$ and a finite type quasi-coherent $\\mathcal O_Z$-module $Q$, where $Z\\to\\operatorname{Spec}k$ is proper. Here closed immersion is representable and a closed immersion on scheme tests [def-weil-closed-immersion]; finite type for a module means etale locally finitely generated, and proper means separated, of finite type and universally closed on all algebraic-space base changes [def-sfb-space-morphism-properties]. Use the canonical module direct image [def-trf-space-etale-module-functors]. Then, for every integer $n\\geq0$, the $k$-vector space\n$$\\operatorname{Ext}^n_{\\mathcal O_X}(M,N)\n=\\operatorname{Hom}_{D(\\mathcal O_X)}(M[0],N[0][n])$$\nis finite dimensional, meaning spanned by finitely many vectors [def-weil-abstract-derived-category]. The scalar action comes from $X\\to\\operatorname{Spec}k$. No properness, separatedness or quasi-compactness of $X$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Tags 0D0S (lemma-coherent-internal-hom) and 0D0R (lemma-direct-image-coherent-bdd-below), with S=Y=Spec k and proper supports of the cohomology of RHom; proper-support version of the argument of Tag 0D0T (lemma-ext-finite). Finitely presented modules are coherent by spaces-cohomology.tex Tag 07UB (lemma-coherent-Noetherian)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-trf-algebraic-space",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-closed-immersion",
+  "def-sfb-space-morphism-properties",
+  "def-trf-space-etale-module-functors",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $Y=\\operatorname{Spec}k$ and $f:X\\to Y$. Every ideal of the field is zero or the whole field, so $k$ is Noetherian. By the definition of local finite presentation, every point of every etale scheme chart $U\\to X$ has an affine open neighbourhood $\\operatorname{Spec}A$ with $A$ a finitely presented, hence finite type, $k$-algebra. These $A$ are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]; thus each chart is locally Noetherian and $X$ is locally Noetherian. By [lem-sfb-space-qcoh-affine-chart-calculus], the restrictions of $M,N$ to each affine etale chart are associated to finitely presented, in particular finitely generated, modules. This is exactly the coherent-module convention in [lem-sfb-space-coherent-derived-internal-hom]. Thus $M[0],N[0]$ have coherent cohomology, both bounded above and below.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-coherent-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07UB (lemma-coherent-Noetherian); spaces-morphisms Tag 04ZK, local Noetherianity checked on charts."
+   }
+  },
+  {
+   "text": "Let $G=R\\mathcal Hom_{\\mathcal O_X}(M[0],N[0])$. Apply [lem-sfb-space-coherent-derived-internal-hom] with $K=M[0]$, $L=N[0]$. Its upper bound on $K$, lower bound on $L$, and local Noetherianity are all supplied by step 1. Consequently $G$ has coherent cohomology and is bounded below. No perfectness or finite projective dimension of $M$ is needed.",
+   "uses": [
+    "lem-sfb-space-coherent-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0S (lemma-coherent-internal-hom)."
+   }
+  },
+  {
+   "text": "Set $T=|j|(|Z|)$. For every etale chart $V\\to X$ disjoint from $T$, every chart $W\\to Z$ mapping to $V$ is empty. The limit defining $(j_*Q)(V)$ in [def-trf-space-etale-module-functors] is therefore the zero module. Hence $N|_V=0$ on every such scheme chart $V$. By the slice restriction isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction], $G|_V=R\\mathcal Hom(M|_V,0)=0$. These charts cover the complement of $T$, so every $\\mathcal H^q(G)$ vanishes off $T$. To see that its support $T_q$ is closed, restrict this coherent module to affine etale charts. The comparison of supports in [lem-sfb-space-etale-chart-support] and [lem-weil-pbc-finite-type-module-support-closed] identify the preimage of $T_q$ with $V(\\operatorname{Ann}H_q)$ for the finite chart module $H_q$. The atlas topology [def-a1-space-point-topology] now makes $T_q$ closed. Since $T$ is the point set of the proper closed subspace $Z$, [lem-sfb-space-proper-support-closed-operations] makes $T$ proper over $Y$, and then makes its closed subset $T_q$ proper over $Y$.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-space-etale-chart-support",
+    "lem-weil-pbc-finite-type-module-support-closed",
+    "def-a1-space-point-topology",
+    "lem-sfb-space-proper-support-closed-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0CZE (lemma-closed-closed-proper-over-base); sites-cohomology Tag 08JB (lemma-restriction-RHom-to-U); scheme support Tag 056J (lemma-support-finite-type)."
+   }
+  },
+  {
+   "text": "The affine scheme $Y$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], and locally Noetherian by its single chart $\\operatorname{Spec}k$, hence Noetherian. The map $f$ is locally of finite type, since a finitely presented algebra is finitely generated and the same affine chart neighbourhoods serve; $G$ is bounded below coherent by step 2, and its cohomology supports are proper over $Y$ by step 3. Apply [lem-sfb-space-proper-support-below-coherent-image] to obtain $P=Rf_*G$ with bounded-below coherent cohomology on $Y$. This application uses proper supports, without asserting that $X$ is proper or quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-proper-support-below-coherent-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0R (lemma-direct-image-coherent-bdd-below), auxiliary S=Y=Spec(k)."
+   }
+  },
+  {
+   "text": "The closed tensor--Hom adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal], with symmetry, makes $R\\mathcal Hom(M[0],-)$ a right adjoint of $M[0]\\otimes^{\\mathbf L}-$ as required in [lem-sfb-derived-internal-hom-sections-model]. The latter gives $\\operatorname{Ext}^n(M,N)\\cong H^nR\\Gamma(X,G)$. Let $h:(Y_{\\mathrm{et}},\\mathcal O_Y)\\to(*,k)$ be the global-sections ringed-topos morphism. The canonical direct image $f_*$ of [def-trf-space-etale-module-functors], with $f^{-1}$ and the structure map $f^{-1}\\mathcal O_Y\\to\\mathcal O_X$ used there to define $f^*$, is the module direct image of a ringed-topos morphism, so the $Rf_*$ of step 4 is the one of the next node. By [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] for $f,h$, one has $R\\Gamma(X,G)\\cong R\\Gamma(Y,P)$ in $D(k)$: its representative comparison is $h_*j$ for a K-injective representative $I$ of $G$ and a resolution $j:f_*I\\to J$, and is $k$-linear via the structure morphism. All sites are small in one containing universe.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08JA (lemma-section-RHom-over-U) and 0D6E (lemma-derived-pushforward-composition); displayed identities in spaces-perfect Tag 0D0T."
+   }
+  },
+  {
+   "text": "Since $P$ has coherent and therefore quasi-coherent cohomology, apply [lem-sfb-affine-etale-derived-module-realization] with $A=k$. Put $E=R\\Gamma(Y,P)$. Its equivalence and cohomology compatibility give $a_k(H^n(E))\\cong\\mathcal H^n(P)$. Coherence on the affine chart $Y$ says that the latter is $a_k(V_n)$ for a finitely generated $k$-module $V_n$. Apply sections and the same node's identity $\\Gamma(Y,a_k(V))\\cong V$ to obtain $H^n(E)\\cong V_n$. The Ext comparison of step 5 respects scalars: on a K-injective target $J$ the multiplication chain map $c\\,1_J$, for $c\\in k$, acts by postcomposition on the global Hom complex; naturality in the target in [lem-sfb-derived-internal-hom-sections-model] identifies it with multiplication by $c$ on derived global sections. The remaining identifications are in $D(k)$ or are the $k$-linear associated-sheaf and sections comparisons. Thus $\\operatorname{Ext}^n(M,N)$ is $k$-linearly isomorphic to $V_n$. The images of a finite generating set of $V_n$ span Ext, as required for every $n\\geq0$.",
+   "uses": [
+    "lem-sfb-affine-etale-derived-module-realization",
+    "lem-sfb-derived-internal-hom-sections-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 0D0T (lemma-ext-finite), affine conclusion; affine derived equivalence in spaces-perfect Tag 071Q (lemma-derived-quasi-coherent-small-etale-site) and sites-cohomology Tag 08JA."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-coherent-derived-internal-hom",
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-space-etale-chart-support",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-a1-space-point-topology",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-proper-support-below-coherent-image",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-affine-etale-derived-module-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-perfect.tex",
+  "place": "Proper-support adaptation of Tag 0D0T using Tags 0D0S and 0D0R; restriction proves support containment."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ext groups of coherent modules with proper support on a finite type algebraic space over a field are finite dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"instHasExtModuleCatOfSmall\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Ext/HasExt\", \"type\": \"∀ (R : Type u) [inst : Ring R] [Small.{v, u} R], CategoryTheory.HasExt (ModuleCat R)\", \"doc\": \"For any small ring $ R $, the category of left $ R $-modules satisfies the property that localized hom-sets between single-term cochain complexes concentrated at degree 0 (with respect to quasi-isomor\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.subsingleton'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C} {X : C} {n : ℕ}\\n  [self : CategoryTheory.HasInjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext Y X i)\", \"doc\": \"If an object $X$ in an abelian category has injective dimension less than $n$, then for all integers $i \\\\geq n$ and for any object $Y$ in the category, the Ext group $\\\\operatorname{Ext}^i(Y, X)$ is tr\"}\n  {\"name\": \"isZero_Ext_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"∀ {R : Type u_1} [inst : Ring R] {C : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_2} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.EnoughProjectives C]\\n  (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (\", \"doc\": \"For any projective object $ X $ in an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, and for any object $ Y $ in $ \\\\mathcal{C} $, the $(n + 1)$-th extension group $\\\\text{Ext}^{\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.subsingleton'\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} {inst : CategoryTheory.Category.{v, u} C} {inst_1 : CategoryTheory.Abelian C} {X : C} {n : ℕ}\\n  [self : CategoryTheory.HasProjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ ⦃Y : C⦄, Subsingleton (CategoryTheory.Abelian.Ext X Y i)\", \"doc\": \"If an object $X$ in an abelian category has projective dimension strictly less than $n$, then for all $i \\\\geq n$ and any object $Y$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is trivial (a subsinglet\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.hasExt\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/HasExt\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C], CategoryTheory.HasExt C\", \"doc\": \"Every Grothendieck abelian category has the property that the localized hom-sets between single-term cochain complexes in its derived category form small sets, ensuring the derived category has well-d\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.subsingleton\", \"module\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) (n : ℕ) [hX : CategoryTheory.HasProjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ (Y : C), Subsingleton (CategoryTheory.Abelian.Ext X Y i)\", \"doc\": \"If an object $X$ in an abelian category has projective dimension less than $n$, then for all $i \\\\geq n$ and any object $Y$, the Ext group $\\\\mathrm{Ext}^i(X, Y)$ is trivial (i.e., contains at most one \"}\n  {\"name\": \"CategoryTheory.hasInjectiveDimensionLT_iff\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (X : C) (n : ℕ)\\n  [inst_2 : CategoryTheory.HasExt C],\\n  CategoryTheory.HasInjectiveDimensionLT X n ↔\\n    ∀ (i : ℕ), n ≤ i → ∀ ⦃Y : C⦄ (e : CategoryTheory.Abelian.Ext Y X i), e = 0\", \"doc\": \"For an object $X$ in an abelian category $\\\\mathcal{C}$, $X$ has injective dimension less than $n$ if and only if for all integers $i \\\\geq n$ and for all objects $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\o\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.subsingleton\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Dimension\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) (n : ℕ) [hX : CategoryTheory.HasInjectiveDimensionLT X n] (i : ℕ),\\n  n ≤ i → ∀ (Y : C), Subsingleton (CategoryTheory.Abelian.Ext Y X i)\", \"doc\": \"If an object $ X $ in an abelian category $ \\\\mathcal{C} $ has injective dimension less than $ n $, then for every natural number $ i \\\\geq n $ and every object $ Y $ in $ \\\\mathcal{C} $, the Ext group $\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module Ext and abstract sheaf cohomology do not assert proper-support Ext finiteness for algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaf proper support finite dimensional Ext group",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(X Y : C) (n : ℕ) : Type w\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(f : X ⟶ Y) : Ext X Y 0\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  (f f_1 : R.complex.X n ⟶ Y) (e_f : f = f_1) (m m_1 : ℕ) (e_m : m = m_1) (hm : n + 1 = m)\\n  (hf : CategoryT\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group $ \\\\operatorname{Ext}^n(X, Y) $ is defined as the hom-set in the derived category between the $ n $-shifted single-term\"}\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \"(n : ℕ) : Type w'\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.subsingleton\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Dimension\", \"type\": \"[hX : HasProjectiveDimensionLT X n] (i : ℕ) (hi : n ≤ i) (Y : C) : Subsingleton (Ext.{w} X Y i)\", \"doc\": \"If an object $X$ in an abelian category has projective dimension less than $n$, then for all $i \\\\geq n$ and any object $Y$, the Ext group $\\\\mathrm{Ext}^i(X, Y)$ is trivial (i.e., contains at most one \"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.subsingleton\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Dimension\", \"type\": \"[hX : HasInjectiveDimensionLT X n] (i : ℕ) (hi : n ≤ i) (Y : C) : Subsingleton (Ext.{w} Y X i)\", \"doc\": \"If an object $ X $ in an abelian category $ \\\\mathcal{C} $ has injective dimension less than $ n $, then for every natural number $ i \\\\geq n $ and every object $ Y $ in $ \\\\mathcal{C} $, the Ext group $\"}\n  {\"name\": \"CategoryTheory.HasInjectiveDimensionLT.mk\", \"module\": \"Mathlib.CategoryTheory.Abelian.Injective.Dimension\", \"type\": \"(hX : ∀ (i : ℕ) (_ : n ≤ i) ⦃Y : C⦄, ∀ (e : Ext Y X i), e = 0) : HasInjectiveDimensionLT X n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$, an object $X$ has injective dimension less than $n$ if and only if for every object $Y$ in $\\\\mathcal{C}$ and every integer $i \\\\geq n$, the Ext group $\\\\operatornam\"}\n  {\"name\": \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Dimension\", \"type\": \"(hX : ∀ (i : ℕ) (_ : n ≤ i) ⦃Y : C⦄, ∀ (e : Ext X Y i), e = 0) : HasProjectiveDimensionLT X n\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category and $X$ an object in $\\\\mathcal{C}$. If for every integer $i \\\\geq n$ and for every object $Y$ in $\\\\mathcal{C}$, the Ext group $\\\\operatorname{Ext}^i(X, Y)$ is tr\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module Ext and abstract sheaf cohomology do not assert proper-support Ext finiteness for algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"Finite\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Cardinal.extend_function_finite\", \"module\": \"Mathlib.SetTheory.Cardinal.Arithmetic\", \"type\": \" {α : Type u} {β : Type v} [Finite α] {s : Set α} (f : ↑s ↪ β) (h : Nonempty (α ≃ β)) : ∃ g, ∀ (x : ↑s), g ↑x = f x\", \"doc\": \"\"}\n  {\"name\": \"Module.instFintypeElemExtendOfFiniteSubtypeMemSubmoduleSpan\", \"module\": \"Mathlib.LinearAlgebra.Dimension.StrongRankCondition\", \"type\": \" {R : Type u_2} {M : Type u_3} [DivisionRing R] [AddCommGroup M] [Module R M] {s t : Set M} [Module.Finite R ↥(Submodule.span R t)] (hs : LinearIndepOn R id s) (hst : s ⊆ t) : Fintype ↑(hs.extend hst)\", \"doc\": \"\"}\n  {\"name\": \"Algebra.instFiniteOfIsQuadraticExtension\", \"module\": \"Mathlib.LinearAlgebra.Dimension.Free\", \"type\": \" (R : Type u_2) (S : Type u_3) [CommSemiring R] [StrongRankCondition R] [Semiring S] [Algebra R S] [Algebra.IsQuadraticExtension R S] : Module.Finite R S\", \"doc\": \"\"}\n  {\"name\": \"AddSubgroup.instFiniteIndexTop\", \"module\": \"Mathlib.GroupTheory.Index\", \"type\": \" {G : Type u_1} [AddGroup G] : ⊤.FiniteIndex\", \"doc\": \"\"}\n  {\"name\": \"Subgroup.instFiniteIndexTop\", \"module\": \"Mathlib.GroupTheory.Index\", \"type\": \" {G : Type u_1} [Group G] : ⊤.FiniteIndex\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.instIsClosedUnderExtensionsInverseImageOfPreservesZeroMorphismsOfPreservesFiniteLimitsOfPreservesFiniteColimits\", \"module\": \"Mathlib.CategoryTheory.ObjectProperty.Extensions\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u'} [CategoryTheory.Category.{v', u'} D] (P : CategoryTheory.ObjectProperty C) [CategoryTheory.Limits.HasZeroMorphisms C] [P.IsClosedUnderExtensions] (F : CategoryTheory.Functor D C) [CategoryTheory.Limits.HasZeroMorphisms D] [F.PreservesZer\", \"doc\": \"\"}\n  {\"name\": \"IsIntegralClosure.isFractionRing_of_finite_extension\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \" (A : Type u_3) (K : Type u_4) [CommRing A] (L : Type u_5) [Field K] [Field L] [Algebra A K] [Algebra A L] [IsFractionRing A K] (C : Type u_6) [CommRing C] [IsDomain C] [Algebra C L] [IsIntegralClosure C A L] [Algebra A C] [IsScalarTower A C L] [IsDomain A] [Algebra K L] [IsScalarTower A K L] [Finit\", \"doc\": \"If the field `L` is a finite extension of the fraction field of the integral domain `A`,\\nthe integral closure `C` of `A` in `L` has fraction field `L`.\"}\n  {\"name\": \"integralClosure.isFractionRing_of_finite_extension\", \"module\": \"Mathlib.RingTheory.Localization.Integral\", \"type\": \" {A : Type u_3} (K : Type u_4) [CommRing A] (L : Type u_5) [Field K] [Field L] [Algebra A K] [IsFractionRing A K] [IsDomain A] [Algebra A L] [Algebra K L] [IsScalarTower A K L] [FiniteDimensional K L] : IsFractionRing (↥(integralClosure A L)) L\", \"doc\": \"If the field `L` is a finite extension of the fraction field of the integral domain `A`,\\nthe integral closure of `A` in `L` has fraction field `L`.\"}\n  {\"name\": \"Algebra.EssFiniteType.algHom_ext\", \"module\": \"Mathlib.RingTheory.EssentialFiniteness\", \"type\": \" {R : Type u_1} {S : Type u_2} (T : Type u_3) [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra.EssFiniteType R S] (f g : S →ₐ[R] T) (H : ∀ s ∈ Algebra.EssFiniteType.finset R S, f s = g s) : f = g\", \"doc\": \"\"}\n  {\"name\": \"RingHom.EssFiniteType.ext\", \"module\": \"Mathlib.RingTheory.EssentialFiniteness\", \"type\": \" {R : Type u_1} {S : Type u_2} {T : Type u_3} [CommRing R] [CommRing S] [CommRing T] {f : R →+* S} (hf : f.EssFiniteType) {g₁ g₂ : S →+* T} (h₁ : g₁.comp f = g₂.comp f) (h₂ : ∀ x ∈ hf.finset, g₁ x = g₂ x) : g₁ = g₂\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Descent\", \"type\": \" {A B : Type u} [CommRing A] [CommRing B] {f : A →+* B} (hf : f.Flat) : CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"\"}\n  {\"name\": \"ModuleCat.finite_ext\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Ext.Finite\", \"type\": \" (R : Type u) [CommRing R] [Small.{v, u} R] [IsNoetherianRing R] (N M : ModuleCat R) [Module.Finite R ↑N] [Module.Finite R ↑M] (i : ℕ) : Module.Finite R (CategoryTheory.Abelian.Ext N M i)\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module Ext and abstract sheaf cohomology do not assert proper-support Ext finiteness for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "proper.*support|support.*proper|coherent.*[Ee]xt|[Ee]xt.*coherent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Notation/Support.lean\", \"line\": \"15\", \"text\": \"In this file we define `Function.support f = {x | f x ≠ 0}` and prove its basic properties.\"}\n  {\"file\": \"Mathlib/Algebra/Group/Support.lean\", \"line\": \"14\", \"text\": \"In this file we prove basic properties of `Function.support f = {x | f x ≠ 0}`, and similarly for\"}\n  {\"file\": \"Mathlib/Algebra/Order/Ring/Ordering/Basic.lean\", \"line\": \"18\", \"text\": \"We prove basic properties of (pre)orderings on rings and their supports.\"}\n  {\"file\": \"Mathlib/Condensed/AB.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveColimits\"}\n  {\"file\": \"Mathlib/Condensed/AB.lean\", \"line\": \"40\", \"text\": \"    (StoneanCompHaus.equivalence A).symm.trans Presheaf.coherentExtensiveEquivalence\"}\n  {\"file\": \"Mathlib/Condensed/AB.lean\", \"line\": \"47\", \"text\": \"    (StoneanCompHaus.equivalence A).symm.trans Presheaf.coherentExtensiveEquivalence\"}\n  {\"file\": \"Mathlib/Condensed/Epi.lean\", \"line\": \"62\", \"text\": \"    ← Presheaf.coherentExtensiveEquivalence.functor.epi_map_iff_epi,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic.lean\", \"line\": \"20\", \"text\": \"local at the target, and special support for those properties whose `AffineTargetMorphismProperty`\"}\n  {\"file\": \"Mathlib/Topology/ContinuousMap/CompactlySupported.lean\", \"line\": \"16\", \"text\": \"class `CompactlySupportedContinuousMapClass`, and prove basic properties.\"}\n  {\"file\": \"Mathlib/Topology/LocallyFinsupp.lean\", \"line\": \"189\", \"text\": \"## Elementary properties of the support\"}\n  {\"file\": \"Mathlib/Analysis/Meromorphic/Divisor.lean\", \"line\": \"82\", \"text\": \"## Support Properties\"}\n  {\"file\": \"Mathlib/Analysis/Meromorphic/Divisor.lean\", \"line\": \"89\", \"text\": \"lemma _root_.divisor_sphere_support_finite [ProperSpace 𝕜] {f : 𝕜 → E} {R : ℝ} {c : 𝕜} :\"}\n  {\"file\": \"Mathlib/Analysis/Meromorphic/Divisor.lean\", \"line\": \"110\", \"text\": \"lemma divisor_ball_support_finite [ProperSpace 𝕜] {f : 𝕜 → E} {R : ℝ} {c : 𝕜}\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Lp/lpSpace.lean\", \"line\": \"31\", \"text\": \"* `Memℓp f p` : property that the function `f` satisfies, as appropriate, `f` finitely supported\"}\n  {\"file\": \"Mathlib/Analysis/Convolution.lean\", \"line\": \"200\", \"text\": \"on `x₀ - s` (note that both properties hold if `g` is continuous with compact support). -/\"}\n  {\"file\": \"Mathlib/Analysis/Convolution.lean\", \"line\": \"348\", \"text\": \"both properties hold if `g` is continuous with compact support). We also require that `f` is\"}\n  {\"file\": \"Mathlib/Analysis/Calculus/FDeriv/Defs.lean\", \"line\": \"34\", \"text\": \"supporting lemmas; a much wider range of elementary properties are proved in the file  `Basic.lean`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Limits.lean\", \"line\": \"237\", \"text\": \"topology (see `Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean`).\"}\n  {\"file\": \"Mathlib/Analysis/Distribution/Support.lean\", \"line\": \"19\", \"text\": \"compactly supported) and all basic properties are proved in an abstract setting using `FunLike`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean\", \"line\": \"17\", \"text\": \"for the coherent topology on a preregular finitary extensive category where sequential limits of\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveSheaves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.CategoryTheory.Sites.Coherent.ExtensiveSheaves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"230\", \"text\": \"theorem isSheaf_coherent_iff_regular_and_extensive [Preregular C] [FinitaryPreExtensive C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"233\", \"text\": \"  rw [← extensive_regular_generate_coherent]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Coherent/SheafComparison.lean\", \"line\": \"241\", \"text\": \"  rw [isSheaf_coherent_iff_regular_and_extensive]\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module Ext and abstract sheaf cohomology do not assert proper-support Ext finiteness for algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom of coherent sheaves with proper support has finite dimensional cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          CategoryTheory.Sheaf J AddCommGrpCat → ℕ → C\", \"doc\": \"For a fixed natural number $n$ and a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups, the cohomology presheaf is a contravariant functor $\\\\mathcal{C}^\\\\text{op} \\\\to \\\\text{AddCommGrp\"}\n  {\"name\": \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n        [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] →\\n          ℕ → CategoryTheory.Functor (CategoryTheory.S\", \"doc\": \"For a fixed natural number $n$, this defines a functor that maps a sheaf $F$ on a category $\\\\mathcal{C}$ with values in abelian groups to a presheaf of Ext groups. Specifically, it constructs a functo\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughInjectives\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {I : C} [CategoryTheory.Injective I] {K : CochainComplex C ℤ} {i : ℤ}\\n  (φ : DerivedCategory.Q.obj K ⟶ DerivedCategory.Q.obj ((CochainComplex.singleFunctor C i).obj I)) (n :\", \"doc\": \"Let $\\\\mathcal{C}$ be an abelian category with injective object $I$, and let $K$ be a cochain complex in $\\\\mathcal{C}$ strictly supported in degrees $\\\\geq n$. For any integer $i < n$, every morphism $\\\\\"}\n  {\"name\": \"CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Sheaf\", \"type\": \"∀ {C : Type u₂} [inst : CategoryTheory.Category.{v, u₂} C] [inst_1 : CategoryTheory.EssentiallySmall.{v, v, u₂} C]\\n  (J : CategoryTheory.GrothendieckTopology C) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v, u₁} A]\\n  [inst_3 : CategoryTheory.Abelian A] [CategoryTheory.IsGrothendieckAbelian.{v, \", \"doc\": \"Let $\\\\mathcal{C}$ be an essentially small category equipped with a Grothendieck topology $J$, and let $\\\\mathcal{A}$ be a Grothendieck abelian category. If there exists a sheafification functor for pre\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary module Ext and abstract sheaf cohomology do not assert proper-support Ext finiteness for algebraic spaces"
+  },
+  {
+   "tool": "grep",
+   "query": "finite_ext|proper.*support|support.*proper|coherent.*Ext",
+   "results": "[grep] OK 1 hit(s): Mathlib/AlgebraicGeometry/Morphisms/Basic.lean:20 is a comment about support for morphism properties.",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext is for ordinary finite modules over a Noetherian ring, not module sheaves with proper support on an algebraic space; source lines 27-34 read."
+  },
+  {
+   "tool": "grep",
+   "query": "theorem finite_ext|lemma finite_ext",
+   "results": "[grep] OK 0 hit(s). The declaration is an instance, not a theorem/lemma keyword.",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext is for ordinary finite modules over a Noetherian ring, not module sheaves with proper support on an algebraic space; source lines 27-34 read."
+  },
+  {
+   "tool": "grep",
+   "query": "ModuleCat.finite_ext",
+   "results": "[grep] OK 1 hit(s): Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27, instance ModuleCat.finite_ext [Small.{v} R] [IsNoetherianRing R] (N M : ModuleCat.{v} R).",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext is for ordinary finite modules over a Noetherian ring, not module sheaves with proper support on an algebraic space; source lines 27-34 read."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_ext|coherent.*Ext|proper.*support",
+   "results": "OK 3 hits: Mathlib/Algebra/Group/Support.lean, Mathlib/Algebra/Order/Ring/Ordering/Basic.lean, Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean; Mathlib/Algebra",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext (Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-34, read) concerns ordinary finite modules over a Noetherian ring, not module sheaves on a possibly nonproper algebraic space. Abstract Ext existence and sheaf presentation notions do not give the asserted finiteness."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent sheaves proper support finite dimensional Ext",
+   "results": "OK 8 hits: CategoryTheory.Abelian.Ext, CategoryTheory.ProjectiveResolution.extMk.congr_simp, CategoryTheory.Abelian.Ext.mk₀, CategoryTheory.Sheaf.H, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.HasProjectiveDimensionLT.mk, SheafOfModules.IsQuasicoherent.casesOn, CategoryTheory.hasExt_of_enoughProjectives",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext (Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-34, read) concerns ordinary finite modules over a Noetherian ring, not module sheaves on a possibly nonproper algebraic space. Abstract Ext existence and sheaf presentation notions do not give the asserted finiteness."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finite_ext\"",
+   "results": "OK 3 hits: IsIntegralClosure.isFractionRing_of_finite_extension, integralClosure.isFractionRing_of_finite_extension, ModuleCat.finite_ext",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext (Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-34, read) concerns ordinary finite modules over a Noetherian ring, not module sheaves on a possibly nonproper algebraic space. Abstract Ext existence and sheaf presentation notions do not give the asserted finiteness."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ext groups of finitely presented quasi coherent modules with proper support on an algebraic space over a field are finite dimensional",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.Scheme.Modules.instAbelian, instHasExtModuleCatOfSmall, SheafOfModules.IsFiniteType, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.HasProjectiveDimensionLT.subsingleton', CategoryTheory.HasProjectiveDimensionLT.subsingleton, isZero_Ext_succ_of_projective",
+   "date": "2026-10-24",
+   "verdict": "no match: ModuleCat.finite_ext (Mathlib/Algebra/Category/ModuleCat/Ext/Finite.lean:27-34, read) concerns ordinary finite modules over a Noetherian ring, not module sheaves on a possibly nonproper algebraic space. Abstract Ext existence and sheaf presentation notions do not give the asserted finiteness."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-tangent-finite",
+  "date": "2026-10-24",
+  "group": "Q66"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Proof (3), compactification/direct-image preservation, inherited alteration and stable-moduli prerequisite chain; algebraicity of the coherent-family stack used by the proper-support Quot representability input. Supporting input: Tag 08W8 (lemma-coherent-tangent-space), Situation 08KB (situation-coherent). More precisely, the final Ext finiteness argument with proper support, without assuming the whole fibre proper.",
+   "via": [
+    "lem-sfb-space-coherent-tangent-finite",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-proper-support-module-ext-finite",
+  "worker": "stage1",
+  "summary": "Q48: kept the statement unchanged. Proved the proper-support version using existing coherent RHom and slice/affine comparisons, with one new statement-only proper-support bounded-below direct-image input. Checked nonproper/non-quasicompact ambient spaces, unbounded positive Ext, chartwise hypotheses and scalar compatibility.",
+  "blueprint": "Latest det-thm-sf-ctf-stability-direct-images proof (3): inherited alteration/stable-moduli prerequisites, coherent-family tangent finiteness. This split realizes the proper-support Ext input used at the end of Tag 08W8. Ancestor command reports None in the imported created.item chain; preserved the existing null ancestor and precise place/via chain.",
+  "tool_uses": [
+   {
+    "node": "def-trf-space-etale-module-functors",
+    "why": "Generic Canonical etale module functors of algebraic spaces used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-support-closed",
+    "why": "Generic The support of a finite type quasi-coherent module is closed, locally the zero locus of the annihilator used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   },
+   {
+    "node": "def-a1-space-point-topology",
+    "why": "Generic Point images and topology of algebraic spaces used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic The derived category of a ringed site is closed symmetric monoidal used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic Derived internal Hom into a K-injective and its derived global sections used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images used only for the module-sheaf/derived or affine-chart comparison in the proper-support Ext argument; this unit has no replacement for that general interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-space-etale-module-functors",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-finite-type-module-support-closed",
+  "def-a1-space-point-topology",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-ffe46e140",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-ffe46e140 (reviewer sub-agent of L); spot-checked: Read the item and the new node lem-sfb-space-proper-support-below-coherent-image in full, every cited statement, and Stacks spaces-perfect 0CZE, 08GK, 0D0R, 0D0S and 0D0T (statement and proof). The item statement is unchanged and true: 0D0S + 0D0R + the Leray identification of 0D0T, with S=Y=Spec k and proper supports. The new node is 0D0R taken literally with S=Y (f locally of finite type, Y Noetherian, G in D^+_Coh, every H^q support proper over Y); I checked it via truncations reducing to 08GK. It is statement-only and self-contained, with searches of all three kinds. It is not a duplicate: the existing nodes either need f proper (lem-sfb-proper-space-coherent-derived-image) or a bounded interval (08GK, lem-sfb-space-proper-support-bounded-coherent-image), and RHom(M,N) need not be bounded. It does not restate the item. Steps 2, 3 and 6 check against their cited statements (slice RHom gives G|_V=0 off T; chart support V(Ann) plus atlas topology gives closed T_q; closed-operations makes T_q proper; k-linearity follows from sections-model naturality). FIX, three edits to item proof text, statements and new node untouched: (1) step 1 claimed every affine etale chart is a finitely presented k-algebra, which is Stacks 01TQ hidden in an elementary step; it now uses the pointwise affine neighbourhoods that the definition of local finite presentation gives. (2) Step 4 now says why f is locally of finite type. (3) Step 5 now identifies the canonical chart-limit direct image (def-trf-space-etale-module-functors, used for P in step 4) with the ringed-topos direct image that the pushforward-composition lemma needs; that node is added to step 5's uses (proof_deps unchanged). Batch 5: every listed citation is a general definition or general coherent-module lemma about algebraic spaces, outside the trace-formula and Poincare-duality statements and proofs; accepted. Declared tool_uses accepted as generic. No SGA cited. Notes: coord/dag-sync.md is absent from the snapshot; the citations.json the report mentions is not in the commit; from.node is null, inherited from the base chain.; 1 file(s) fixed by the reviewer"
+ }
+}

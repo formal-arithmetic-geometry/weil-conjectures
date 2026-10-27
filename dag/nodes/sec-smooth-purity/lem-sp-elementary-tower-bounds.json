@@ -1,0 +1,192 @@
+{
+ "id": "lem-sp-elementary-tower-bounds",
+ "kind": "statement",
+ "title": "Separate intervals under inverse image, Tate tensor and shift",
+ "statement": "Fix a characteristic-p field k, primes ell!=p, a finite extension E/Q_ell and the specified geometric operations on ordinary strict varying-coefficient towers [det-sp-tower-shriek-levels]. Use the bounds, twist and normalized Tate data of [def-sp-chart-tate-tower-data]. (i) For any k-morphism X->Y of Noetherian k-schemes, the specified ordinary derived inverse image preserves intrinsic finite-Tor constructibility at every level and any two prescribed cohomological and Tor intervals [a,b], [s,t]. (ii) On any Noetherian k-scheme T, tensor with the degree-zero strict Tate tower of any nonnegative exponent r, with the specified finite lines and quotient transitions, preserves those same bounds. (iii) For any scheme T and any integer j, shifting an actual tower by j changes these four endpoints to a-j,b-j,s-j,t-j. No normalization of the input tower is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals"
+ },
+ "stmt_deps": [
+  "def-sp-chart-tate-tower-data",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "At a fixed level put $R=A_n$. The finite twist of [def-coefficient-twists-detailed] is $\\mathbf Z_\\ell(1)\\otimes_{\\mathbf Z_\\ell}R$, by ordinary tensor associativity. With $B=R$ and $r=n$, [lem-amb-root-tower-finite-tensor] identifies it with $\\mu_{\\ell^n}\\otimes_{\\mathbf Z/\\ell^n}R$ on the pro-etale site. This is the comparison pullback of the small-etale twist: indeed, on an etale cover trivializing $\\mu_{\\ell^n}$, choose its generator $\\zeta$; on both sites $a\\mapsto\\zeta^a$ identifies the root sheaf with the constant $\\mathbf Z/\\ell^n$ sheaf. The comparison is therefore an isomorphism locally and hence globally. Such etale covers exist by [lem-asd-finite-etale-twist-line] with $A=\\mathbf Z/\\ell^n$, and tensor commutes with pullback by [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. By [lem-asd-finite-etale-twist-line], its $c$th tensor power is etale locally $R$ for every $c\\ge0$, including $c=0$. Tensor by this line is exact, and thus its ordinary and derived tensors agree. The prime $\\ell$ is invertible on all schemes in question because $\\ell\\ne p$.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-amb-root-tower-finite-tensor",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs and Uniformity: finite Tate-line identification"
+   }
+  },
+  {
+   "text": "Choose the witness $L_n$ for $K_n$ from Step 2 with cohomological interval $[a,b]$ and Tor interval $[u,v]$. Apply [lem-sp-etale-scalar-flat-model] with the identity map $R\\to R$ to obtain a flat constructible representative $P_n$ supported in $[u,v]$. For $g=p_de:U\\to Y$, [lem-sp-etale-pullback-line-flat-model] applied to $P_n$, the finite twist line $R_U(d)$ of Step 4 and shift $2d$ proves that $(g^*L_n)(d)[2d]$ is constructible and has Tor interval $[u-2d,v-2d]$. Its cohomological interval is the sharper $[a-2d,b-2d]$: inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact], exact functors commute with cohomology by [lem-weil-pbc-exact-functor-complex-cohomology], and tensor by the flat constructible line preserves $[a,b]$ by [lem-fd-flat-constructible-tensor]. Finally $H^i(C[2d])=H^{i+2d}(C)$. The pullback comparison [lem-weil-pbc-comparison-pullback] identifies the pro-etale image of this witness with $e^*p_d^*K_n(d)[2d]$. Its Tor interval passes to the pro-etale site by [det-pe-finite-tor-comparison-noetherian]; its cohomological interval and intrinsic constructibility pass by [lem-weil-pbc-finite-ring-constructible-derived-origin]. Tensor comparison can be computed on $P_n$: comparison pullback preserves its flat terms by [lem-pe-constructible-comparison-flat-pullback], so the ordinary monoidal comparison of Step 4 computes the derived comparison as well.",
+   "uses": [
+    "lem-sp-etale-scalar-flat-model",
+    "lem-sp-etale-pullback-line-flat-model",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-fd-flat-constructible-tensor",
+    "lem-weil-pbc-comparison-pullback",
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-pe-constructible-comparison-flat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Uniformity: chart bounds, retaining separate cohomological and Tor intervals"
+   }
+  },
+  {
+   "text": "Termwise inverse image gives an actual strict tower functor: the quotient-linear transition maps are pulled back with their scalar actions. It is exact, since its components are exact by [prop-weil-pbc-proetale-constant-exact] and tower kernels and cokernels are componentwise by [det-sp-coefficient-towers-abelian]. Likewise termwise tensor by the specified Tate-line tower is exact, since each component line of Step 4 is locally free of rank one; its transitions are the prescribed quotient transitions. Thus these operations descend to the ordinary derived tower category and evaluate to the finite operations, as also specified in [det-sp-tower-shriek-levels]. Apply Step 5 at each stage. After $r$ of the $d$ ordered affine-line pullback/twist/shift operations, the common intervals are $[a-2r,b-2r]$ and $[u-2r,v-2r]$: the base $r=0$ is $K$, and one further operation preserves the endpoints under pullback and twist and subtracts $2$ under $[2]$. The final etale pullback preserves both intervals. Partial stages before a twist or shift follow by the same formulas. Hence $H_UK$ and every intermediate object belong to the indicated uniform subcategory, with bounded-below actual towers by Step 3 and separate etale-origin-level witnesses by Step 2.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "det-sp-coefficient-towers-abelian",
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Local pairs: actual strict-tower operations and ordered affine projections"
+   }
+  },
+  {
+   "text": "Apply the finite-ring constructible derived origin theorem and specified Tor-interval comparison separately to every level. Transport the finite inverse image and flat-line tensor through the normalized evaluation comparisons; shift homology reindexes all endpoints.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-exc-comparison-tor-interval"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "lem-amb-root-tower-finite-tensor",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sp-etale-scalar-flat-model",
+  "lem-sp-etale-pullback-line-flat-model",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-fd-flat-constructible-tensor",
+  "lem-weil-pbc-comparison-pullback",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-pe-constructible-comparison-flat-pullback",
+  "prop-weil-pbc-proetale-constant-exact",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-tower-shriek-levels",
+  "lem-exc-comparison-tor-interval"
+ ],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals",
+  "by": "agent"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform cohomological and Tor bounds for pullback and Tate twist in ordinary derived coefficient towers",
+   "results": "Rep.isZero_Tor_succ_of_projective, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.cm5b and homology exact-sequence lemmas; no specialized tower interval transport.",
+   "date": "2026-10-25",
+   "verdict": "Use existing geometric and finite-level declarations; a tower-presentation bridge is still needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "results": "smoothOfRelativeDimension_comp, smoothOfRelativeDimension_isStableUnderBaseChange, pullback fst/snd instances.",
+   "date": "2026-10-25",
+   "verdict": "Geometry is already available; no ordinary tower-domain or interval API."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact evaluation of strict sheaf coefficient towers jointly detects zero homology and bounded below complexes",
+   "results": "ShortComplex.exact_iff_isZero_homology, CochainComplex.isZero_of_isGE, HomologicalComplex.exactAt_iff_isZero_homology; no strict coefficient tower bridge.",
+   "date": "2026-10-25",
+   "verdict": "General exact homology tools available, but no specialized result."
+  },
+  {
+   "tool": "grep",
+   "query": "tower.*bound|bound.*tower; origins|domain_of_bounds|bounds_operations|bounds_pull|bounds_twist",
+   "results": "Mathlib has no coefficient-tower bounds. Project: SmoothPurityTowerBound, CompactSupportUniformTorBound, TwistedPullbackTowerDomain and ProEtaleCtfPullbackDomains. The latter two require finite-field/gamma data and import this module, so cannot supply the bridge without a cycle. blueprint_refs.py search tower bounds returned 0 blueprint nodes.",
+   "date": "2026-10-25",
+   "verdict": "New nodes record only the missing interfaces used by this argument, not copies of the chart theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityTowerChartAdmissibility",
+  "date": "2026-10-25",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs and Uniformity: actual tower domains and separate uniform intervals",
+   "via": [
+    "lem-sp-tower-chart-admissibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityTowerBoundsOperations",
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerBoundsOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpChartAdmissibility.elementary_tower_bounds",
+  "statement": "theorem elementary_tower_bounds\n    (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (hlp : l ≠ p)\n    (base : SpTowerShriek.Base l E) (ops : SpTowerShriek.Operations l E base) :\n    (∀ (X Y : Over (Spec (.of k))) [IsNoetherian X.left] [IsNoetherian Y.left]\n      (f : X ⟶ Y) (C : SpTowerShriek.D l E Y.left) (a b s t : ℤ),\n      bounds l E Y.left C a b s t →\n      bounds l E X.left ((SpTowerShriek.pull l E base (ops.geometry f.left)).obj C)\n        a b s t) ∧\n    (∀ (T : Over (Spec (.of k))) [IsNoetherian T.left] (w : Twists l E T.left)\n      (C : SpTowerShriek.D l E T.left) (r : ℕ) (a b s t : ℤ),\n      bounds l E T.left C a b s t →\n      bounds l E T.left (twist l E base w C r) a b s t) ∧\n    (∀ (T : Scheme.{u}) (C : SpTowerShriek.D l E T) (j a b s t : ℤ),\n      bounds l E T C a b s t →\n      bounds l E T (C⟦j⟧) (a - j) (b - j) (s - j) (t - j))",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-sp-elementary-tower-bounds",
+  "worker": "stage3 B7",
+  "summary": "Read the current blueprint Local pairs/Uniformity source, all cited declarations, and the original chart-admissibility proof steps. Searched Mathlib through LeanSearch, Loogle, LeanFinder and source grep, and searched project/blueprint duplicates. This interface isolates only the finite-to-tower domain or operation bridge used by the real chart assembly.",
+  "blueprint": "Local pairs and Uniformity of det-sp-tower-gluing; details are the cited chart-admissibility proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-37575",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261025T162009-L-190660",
+  "kind": "interface",
+  "note": "independent cc review: 13 relocated chart data decls byte-identical to live (SmoothPurityTowerChartData, public re-export from item); tower_chart_admissibility signature unchanged; domain_of_level_bounds/elementary_tower_bounds checked true against SpTowerShriek.Base/Geometry/Data pinning; 5 delivered modules + 7 direct importers compile in sandbox; node proof fields match the Lean"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-signed-twist-evaluation-extension",
+ "kind": "statement",
+ "title": "Unique evaluation-normalized extension of positive finite Tate comparisons",
+ "statement": "Fix a finite purity setting P of [def-pur-conventions], a natural number n with P.level=n+1, the finite coefficient ring A=O_E/(varpi_E^(n+1)), and a proof that ell^(n+1) annihilates A. For every k-scheme X with structure morphism a, write L_X(r) and M_X(r) for the signed etale and pro-etale A-module sheaves, and nu_X for site comparison, as defined in [def-pur-signed-twist-site-transport-data]. Let b_X(j):nu_X^*L_X(j) ≅ M_X(j), j≥0, satisfy the specified root-tensor normalization [lem-amb-finite-tate-site-descent]. There is a unique family q_X(r):nu_X^*L_X(r) ≅ M_X(r), for all integers r and all X,a, agreeing with b_X(j) at every nonnegative j, such that for every d≥1, etale object U, pro-etale object W over U, local functional phi in L_X(-d)(U) and x in L_X(d)(U), evaluation of q_X(-d)(nu^*phi) on q_X(d)(nu^*x) equals q_X(0)(nu^*(phi(x))). Here pulled sections use the actual adjunction unit followed by restriction, and the evaluations are precisely the fixed pairings in the cited definition. Only this dual-extension result is asserted.",
+ "stmt_deps": [
+  "def-pur-signed-twist-site-transport-data",
+  "lem-amb-finite-tate-site-descent"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX, remark-pullback-internal-hom; Tag 0FNY, example-dual: transpose of evaluation for a finite locally free line."
+ },
+ "proof": [
+  {
+   "text": "For $d>0$ set $P=L_X(d)$ and $Q=A_X(d)$, and $t=q^+_{X,d}$. The comparison site inclusion preserves finite limits and coverings [def-weil-pbc-site-comparison-morphism], and $\\nu_X^{-1}A_{X_{\\mathrm{et}}}\\cong A_{X_{\\mathrm{proet}}}$ as ring sheaves, so that $\\nu_X^*$ on $A$-modules is $\\nu_X^{-1}$ [lem-sf-comparison-pullback-exact](1). Apply [lem-pur-signed-line-derived-base-change] to this line and $t$ (only its degree $-1$ clause is needed). Equivalently, use the evaluation-defined isomorphism $\\delta_{\\nu_X,P}$ of [lem-pur-ringed-site-finite-free-dual-pullback] and put\n$$q_{X,-d}=(t^{-1})^\\vee\\delta_{\\nu_X,P}.$$\nThus a pulled functional $\\phi$ is sent to the functional whose value on $t(w)$ is the pulled value $\\phi(w)$. This proves precisely the displayed evaluation equation, invertibility and uniqueness. Locally, if $e_d$ is a basis of $P$ and $f_d=t(e_d)$, the map sends $e_d^\\vee$ to $f_d^\\vee$. These formulas refer to the actual sheaf duals, not to a chosen abstract inverse line.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pur-signed-line-derived-base-change",
+    "lem-pur-ringed-site-finite-free-dual-pullback",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX, remark-pullback-internal-hom; Tag 0FNY, example-dual: transpose of evaluation for a finite locally free line."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-signed-line-derived-base-change",
+  "lem-pur-ringed-site-finite-free-dual-pullback",
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Separate result in Step 2 of lem-pur-signed-twist-site-transport; its full local proof is in the declaration docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor for sheaves of modules preserves the dual of a finite locally free line and its evaluation pairing",
+   "results": "8 hits: Scheme.Modules.pullback; SheafOfModules.pullback; pullbackObjFreeIso.congr_simp; pullbackPushforwardAdjunction; Equivalence.sheafCongrPrecoherent_inverse_map_val_app; instIsLeftAdjointPullback; pullbackObjFreeIso_hom_naturality; pullbackObjFreeIso_hom_naturality_assoc.",
+   "date": "2026-10-25",
+   "verdict": "Generic pullback and free-module API, no normalization of the actual signed Tate comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse image of module sheaves sends a finite locally free line dual to its dual preserving evaluation and uniquely extends a positive Tate comparison to signed powers",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv; ModuleCat.tilde; LightCondensed.free; ModuleCat.Tilde.toOpen; ModuleCat.tildeInModuleCat; SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply; SheafOfModules.freeHomEquiv_symm_comp; ModuleCat.Tilde.const.",
+   "date": "2026-10-25",
+   "verdict": "no exact result for the specified root-normalized signed Tate maps; generic free-sheaf and tilde results do not assert the evaluation, product or geometric equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.HasRightDual, CategoryTheory.Functor.Monoidal",
+   "results": "1 hit: CategoryTheory.hasRightDualOfEquivalence, Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence.",
+   "date": "2026-10-25",
+   "verdict": "dual transport along an equivalence, not the specified Tate comparison and its local normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|signed.*[Pp]ower",
+   "results": "1 hit: Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean:53, each n is assigned a value, which we use as the coefficients of the power series.",
+   "date": "2026-10-25",
+   "verdict": "unrelated power-series use; no Tate sheaf comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SignedTwistSiteTransport",
+  "date": "2026-10-25",
+  "group": "A6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Proof 'Unit multiples': identify the finite Kummer coefficient twist under site comparison; dual evaluation fixes the negative powers. This is source Step 2 of lem-pur-signed-twist-site-transport.",
+   "via": [
+    "lem-pur-signed-twist-site-transport",
+    "lem-pur-supported-cup-functoriality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SignedTwistEvaluationExtension",
+  "file": "lean/Sheaf/Paper/SignedTwistEvaluationExtension.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.signedTwistEvaluationExtension",
+  "statement": "theorem signedTwistEvaluationExtension (P : PurityFiniteSetting.{u}) (n : ℕ)\n    (hlevel : P.level = n + 1)\n    (hA : ((P.coefficients.l ^ (n + 1) : ℕ) : P.signedSiteCoefficient n) = 0)\n    (b : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj\n        (P.signedSiteEtale n hA X (k : ℤ)) ≅ P.signedSitePro n X (k : ℤ))\n    (hb : ∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n      IsFiniteTateSiteComparison P.coefficients.l P.extension n X n hA k (b X a k)) :\n    ∃! q : ∀ (X : Scheme.{u}) (_a : X ⟶ Spec (.of P.field.k)) (r : ℤ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (P.signedSiteCoefficient n)) X).obj\n        (P.signedSiteEtale n hA X r) ≅ P.signedSitePro n X r,\n      (∀ (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (k : ℕ),\n        q X a k = b X a k) ∧ P.SignedSiteEvaluation n hA q",
+  "branch": "sheaf-dag",
+  "by": "A6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-7cb3f",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261025T161806-L-112271",
+  "kind": "interface",
+  "note": "independent cc review: delivered SignedTwistSiteTransportData defs vs clone a25e16ef939 SignedTwistSiteTransport lines 44-284 (byte-identical); theorem signature byte-identical; 3 new sorry statements = item conjuncts (node lean.statement = signature ×3); root_normalized compiled in scratch against live defs, axioms propext/Classical.choice/Quot.sound; 0 importers"
+ }
+}

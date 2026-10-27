@@ -1,0 +1,415 @@
+# IntegralCompactificationBridge supporting data and ordinary composition
+
+## Reason
+
+The two remaining normalization comparisons must refer to the same existing data
+without importing the theorem that uses them. Move that data, unchanged, into an
+acyclic supporting module and re-export it publicly from the original module.
+This is an interface relocation, not a change of any mathematical definition.
+The new ordinaryComparison transports the existing completedShriekIntegralA into
+the published integral constructible coordinates; it does not redefine the mate.
+
+## Old
+
+The following block was in IntegralCompactificationComparisonBridge. All public
+names, types, bodies and the existing private auxiliary proofs are retained.
+
+```lean
+section Integral
+variable (k : Type u) [Field k] (hl : IsUnit (l : k))
+  {X Y : Scheme.{u}}
+  [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+  {f : X ⟶ Y} [f.IsOver (Spec (.of k))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+
+/-- Direct identification for one compactification, from the universal proper/limit
+comparison, the actual open reduction mate and inverse reconstruction unit, then the
+published strict-quotient realization. No expression-realization family is selected.
+Source: blueprint fix-lem-exchanges Step 5; Bhatt--Scholze Definition 6.7.6
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def directIdentification {D : FiniteFieldDatum.{u}}
+    (o : IntegralSystemRealization.Operations l E) (r : Realizations l E D o)
+    (c : Compactification f) (K : sfIntegralConstructibleCategory l E X) :
+    (coefficientSequenceLimit l E Y).obj ((systemWord l E o c).obj
+      ((calculus l E X).reduction.obj K.obj)) ⟶
+        ((sfCompactSupportFiniteIntegralFunctor l k hl c E).obj K).obj :=
+  (r.realizationModel.push l E c.g).hom.app
+    ((IntegralSystemRealization.Operations.shriek l E o c.i).obj
+      ((calculus l E X).reduction.obj K.obj)) ≫
+  (ringedPush l E c.g).map
+    ((coefficientSequenceLimit l E c.Z).map
+      ((r.realizationModel.openReduction l E c.i).app K.obj) ≫
+      inverseOrZero ((calculus l E c.Z).adjunction.unit.app
+        ((ringedOpen l E c.i).obj K.obj))) ≫
+  (sfQcqsCompactSupportRealization l E k hl c).hom.app K
+
+/-- The canonical passage from the actual compact-support output to its completed word.
+The proper comparison is normalized by the universal derived unit; the open factor
+uses the actual completion unit. The adjunction is a presentation of those fixed functors.
+Source: blueprint fix-lem-exchanges Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def wordCoordinates (c : Compactification f)
+    (a : sfCbcModelExtension c.i (constantRing l E) ⊣
+      (sfCbcMorphism c.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) :
+    (H l E Y).obj (((sfCompactSupportFiniteIntegralFunctor l k hl c E).obj K).obj) ⟶
+      ((word c).complete (constantDatum l E)).obj ((H l E X).obj K.obj) :=
+  (H l E Y).map ((sfQcqsCompactSupportRealization l E k hl c).inv.app K) ≫
+  (integralDirectScalarIso l E c.g).hom.app ((ringedOpen l E c.i).obj K.obj) ≫
+  ((sfCbcMorphism c.g).push (ULift.{u + 1} (constantRing l E))).map
+    (openSigmaHom l E c.i a K.obj)
+
+/-- Exactly L(q_W) eta following the fixed single-compactification coordinates.
+Source: blueprint fix-lem-exchanges Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def wordComparison (c : Compactification f)
+    (a : sfCbcModelExtension c.i (constantRing l E) ⊣
+      (sfCbcMorphism c.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) :=
+  wordCoordinates l E k hl c a K ≫
+    ((word c).a (constantDatum l E) (constantReducedUnits l E)).app ((H l E X).obj K.obj)
+
+/-- The common-window condition for the actual intermediate strict systems of one word.
+The origin witnesses and normalization are those of the published generator domain.
+Source: Stacks 0941; the domain paragraph of this node
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def systemWordDomain (o : IntegralSystemRealization.Operations l E)
+    (c : Compactification f) (M : System l E X) (lo hi torLo torHi : ℤ) : Prop :=
+  SystemAdmissible l E X M lo hi torLo torHi ∧
+    SystemAdmissible l E c.Z
+      ((IntegralSystemRealization.Operations.shriek l E o c.i).obj M)
+        lo hi torLo torHi ∧
+    SystemAdmissible l E Y ((systemWord l E o c).obj M) lo hi torLo torHi
+
+/-- The integral input, its open output, and its actual strict quotient word have
+compatible origins, normalized reductions and one fixed cohomological and Tor window.
+Source: Stacks 0941; the domain paragraph of this node
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def singleDomain (o : IntegralSystemRealization.Operations l E)
+    (c : Compactification f) (K : sfIntegralConstructibleCategory l E X)
+    (lo hi torLo torHi : ℤ) : Prop :=
+  Admissible l E (calculus l E X) K.obj lo hi torLo torHi ∧
+    Admissible l E (calculus l E c.Z) ((ringedOpen l E c.i).obj K.obj)
+      lo hi torLo torHi ∧
+    systemWordDomain l E o c ((calculus l E X).reduction.obj K.obj) lo hi torLo torHi
+
+private theorem inverseOrZero_eq_inv {C : Type*} [Category C] [HasZeroMorphisms C]
+    {A B : C} (f : A ⟶ B) [IsIso f] : inverseOrZero f = inv f := by
+  simp only [inverseOrZero, dif_pos (inferInstance : IsIso f)]
+
+private theorem directIdentification_isIso {D : FiniteFieldDatum.{u}}
+    (o : IntegralSystemRealization.Operations l E) (r : Realizations l E D o)
+    (c : Compactification f) (K : sfIntegralConstructibleCategory l E X)
+    (hK : finiteTorConstructibleIntegral l E X K.obj) :
+    IsIso (directIdentification l E k hl o r c K) := by
+  let : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+  obtain ⟨hred, hunit⟩ := openReconstructionEffectivity l E o r.realizationModel c.i
+    K.obj (Or.inl hK)
+  let := hred
+  let := hunit
+  dsimp only [directIdentification]
+  rw [inverseOrZero_eq_inv]
+  infer_instance
+
+private theorem wordCoordinates_isIso (c : Compactification f)
+    (a : sfCbcModelExtension c.i (constantRing l E) ⊣
+      (sfCbcMorphism c.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X)
+    (hopen : sfIntegralConstructible l E c.Z ((ringedOpen l E c.i).obj K.obj)) :
+    IsIso (wordCoordinates l E k hl c a K) := by
+  let : IsNoetherianRing (constantRing l E) := (constantCoefficientProperties l E).1
+  let : IsNoetherianRing (ULift.{u + 1} (constantRing l E)) :=
+    isNoetherianRing_of_ringEquiv (constantRing l E) ULift.ringEquiv.symm
+  have hc := (integralConstantCompleteTransport l E c.Z).1
+    ⟨(ringedOpen l E c.i).obj K.obj, hopen⟩
+  have hu := ((sfCbcSite c.Z).completion_properties _ _).2.2 _ |>.mpr hc
+  let e := (integralOpenScalarIso l E c.i a).app K.obj
+  have hv := (NatTrans.isIso_app_iff_of_iso
+    ((sfCbcSite c.Z).unit _ (sfCbcModelIdeal (constantDatum l E))) e).mp hu
+  have hs : IsIso (openSigmaHom l E c.i a K.obj) := by
+    dsimp only [openSigmaHom]
+    exact IsIso.comp_isIso' (Iso.isIso_hom ((integralOpenScalarIso l E c.i a).app K.obj)) hv
+  let := hs
+  dsimp only [wordCoordinates]
+  exact inferInstance
+
+private theorem wordComparison_isIso (c : Compactification f)
+    (a : sfCbcModelExtension c.i (constantRing l E) ⊣
+      (sfCbcMorphism c.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X)
+    (hopen : sfIntegralConstructible l E c.Z ((ringedOpen l E c.i).obj K.obj)) :
+    IsIso (wordComparison l E k hl c a K) := by
+  let := wordCoordinates_isIso l E k hl c a K hopen
+  let : ∀ n : ℕ, Finite (constantRing l E ⧸
+      (constantDatum l E).ideal ^ (n + 1)) :=
+    (constantCoefficientProperties l E).the project server
+  obtain ⟨hu, hn⟩ := sfCbcCompactSupportCompositionLimit (constantDatum l E)
+  have ha := hn.a_isIso (word c) ((H l E X).obj K.obj)
+    ((integralConstantCompleteTransport l E X).1 K)
+  have he : hu = constantReducedUnits l E := Subsingleton.elim _ _
+  subst hu
+  let := ha
+  dsimp only [wordComparison]
+  infer_instance
+
+end Integral
+section Integral
+variable (k : Type u) [Field k] (hl : IsUnit (l : k))
+  {X Y Z : Scheme.{u}}
+  [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Z.Over (Spec (.of k))]
+  [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+  [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
+  {f : X ⟶ Y} {g : Y ⟶ Z}
+  [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [g.IsOver (Spec (.of k))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+
+/-- The concatenated comparison uses exactly the recursive q of the concatenated word.
+Source: blueprint fix-lem-exchanges Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def compositeWordComparison (cf : Compactification f) (cg : Compactification g)
+    (af : sfCbcModelExtension cf.i (constantRing l E) ⊣
+      (sfCbcMorphism cf.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ag : sfCbcModelExtension cg.i (constantRing l E) ⊣
+      (sfCbcMorphism cg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) :=
+  wordCoordinates l E k hl cg ag ((sfCompactSupportFiniteIntegralFunctor l k hl cf E).obj K) ≫
+  ((word cg).complete (constantDatum l E)).map (wordCoordinates l E k hl cf af K) ≫
+  ((word cf).appendCompleteIso (constantDatum l E) (word cg)).inv.app ((H l E X).obj K.obj) ≫
+  (((word cf).append (word cg)).a (constantDatum l E) (constantReducedUnits l E)).app
+    ((H l E X).obj K.obj) ≫
+  (constantLimit l E Z).map
+    (((word cf).appendStrictIso (word cg)).hom.app
+      ((constantReduction l E X).obj ((H l E X).obj K.obj)))
+
+/-- The specified constant-tower composition formula, prior to finite evaluation.
+Source: blueprint fix-lem-exchanges (2),(4), proof Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def constantComparison (t : Compactification.Triangle f g)
+    [QuasiCompact t.q] [QuasiCompact t.cg.i]
+    (af : sfCbcModelExtension t.cf.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cf.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ag : sfCbcModelExtension t.cg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ah : sfCbcModelExtension t.cfg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cfg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) :=
+  compositeWordComparison l E k hl t.cf t.cg af ag K ≫
+    (constantLimit l E Z).map (constantBeta l E t af ag ah
+      ((constantReduction l E X).obj ((H l E X).obj K.obj))) ≫
+    inverseOrZero (wordComparison l E k hl t.cfg ah K)
+
+/-- Full faithfulness on complete coefficient objects uniquely lifts the specified
+constant-word coordinate formula to an actual integral morphism.
+Source: Stacks 099M; blueprint fix-lem-exchanges (2),(4), proof Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge).
+Proof: the source and target are outputs of the published integral compact-support
+functors, hence complete. The constant-completion equivalence is fully faithful on
+these objects. Its Hom bijection gives existence and uniqueness for the prescribed
+coordinate morphism; it selects no arbitrary expression-realization isomorphism. -/
+theorem completedComparison_existsUnique (t : Compactification.Triangle f g)
+    [QuasiCompact t.q] [QuasiCompact t.cg.i]
+    (af : sfCbcModelExtension t.cf.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cf.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ag : sfCbcModelExtension t.cg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ah : sfCbcModelExtension t.cfg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cfg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) :
+    ∃! a : ((sfCompactSupportFiniteIntegralFunctor l k hl t.cg E).obj
+          ((sfCompactSupportFiniteIntegralFunctor l k hl t.cf E).obj K)).obj ⟶
+        ((sfCompactSupportFiniteIntegralFunctor l k hl t.cfg E).obj K).obj,
+      (H l E Z).map a = constantComparison l E k hl t af ag ah K := by
+  let A := (sfCompactSupportFiniteIntegralFunctor l k hl t.cg E).obj
+    ((sfCompactSupportFiniteIntegralFunctor l k hl t.cf E).obj K)
+  let B := (sfCompactSupportFiniteIntegralFunctor l k hl t.cfg E).obj K
+  have h := (integralConstantCompleteTransport l E Z).2 A B
+  obtain ⟨a, ha⟩ := h.2 (constantComparison l E k hl t af ag ah K)
+  exact ⟨a, ha, fun b hb ↦ h.1 (hb.trans ha.symm)⟩
+
+/-- The specified completed composition, determined uniquely by its constant-word image.
+Source: blueprint fix-lem-exchanges (2),(4), proof Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def completedComparison (t : Compactification.Triangle f g)
+    [QuasiCompact t.q] [QuasiCompact t.cg.i]
+    (af : sfCbcModelExtension t.cf.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cf.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ag : sfCbcModelExtension t.cg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ah : sfCbcModelExtension t.cfg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cfg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) :=
+  (completedComparison_existsUnique l E k hl t af ag ah K).exists.choose
+
+/-- The exact integral counit composite in the node's displayed conclusion.
+The inverseOrZero convention is used only to type this ambient expression; the
+bridge theorem asserts invertibility on the stated domain, so these are the unique inverses.
+Source: blueprint fix-lem-exchanges Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def semilinearComparison {D : FiniteFieldDatum.{u}}
+    (o : IntegralSystemRealization.Operations l E) (r : Realizations l E D o)
+    (t : Compactification.Triangle f g) [QuasiCompact t.q] [QuasiCompact t.cg.i]
+    (K : sfIntegralConstructibleCategory l E X) :=
+  inverseOrZero (directIdentification l E k hl o r t.cg
+    ((sfCompactSupportFiniteIntegralFunctor l k hl t.cf E).obj K)) ≫
+  (coefficientSequenceLimit l E Z).map ((systemWord l E o t.cg).map
+    ((calculus l E Y).reduction.map
+      (inverseOrZero (directIdentification l E k hl o r t.cf K)))) ≫
+  (coefficientSequenceLimit l E Z).map ((systemWord l E o t.cg).map
+    ((calculus l E Y).adjunction.counit.app
+      ((systemWord l E o t.cf).obj ((calculus l E X).reduction.obj K.obj)))) ≫
+  (coefficientSequenceLimit l E Z).map
+    (systemBeta l E o r t ((calculus l E X).reduction.obj K.obj)) ≫
+  directIdentification l E k hl o r t.cfg K
+
+/-- All words and the additional proper/open and counit intermediate systems share
+these finite windows and retain the published compatible etale-origin witnesses.
+Source: the explicit domain paragraph of this node
+(blueprint: lem-sf-integral-compactification-comparison-bridge). -/
+def bridgeDomain (o : IntegralSystemRealization.Operations l E)
+    (t : Compactification.Triangle f g) (K : sfIntegralConstructibleCategory l E X)
+    (lo hi torLo torHi : ℤ) : Prop :=
+  singleDomain l E o t.cf K lo hi torLo torHi ∧
+  singleDomain l E o t.cg ((sfCompactSupportFiniteIntegralFunctor l k hl t.cf E).obj K)
+    lo hi torLo torHi ∧
+  singleDomain l E o t.cfg K lo hi torLo torHi ∧
+  systemWordDomain l E o t.cg
+    ((systemWord l E o t.cf).obj ((calculus l E X).reduction.obj K.obj))
+      lo hi torLo torHi ∧
+  systemWordDomain l E o t.cg
+    ((calculus l E Y).reduction.obj ((coefficientSequenceLimit l E Y).obj
+      ((systemWord l E o t.cf).obj ((calculus l E X).reduction.obj K.obj))))
+      lo hi torLo torHi ∧
+  SystemAdmissible l E t.cfg.Z
+    ((IntegralSystemRealization.Operations.shriek l E o t.q).obj
+      ((IntegralSystemRealization.Operations.shriek l E o t.cf.i).obj
+        ((calculus l E X).reduction.obj K.obj))) lo hi torLo torHi ∧
+  SystemAdmissible l E t.cg.Z
+    ((IntegralSystemRealization.Operations.push l E o t.p).obj
+      ((IntegralSystemRealization.Operations.shriek l E o t.cfg.i).obj
+        ((calculus l E X).reduction.obj K.obj))) lo hi torLo torHi
+
+/-- The canonical d and normalized word comparisons are invertible on the supplied domain.
+Source: Stacks 0941; blueprint fix-lem-exchanges Step 5
+(blueprint: lem-sf-integral-compactification-comparison-bridge).
+Proof: the normalized quotient systems reconstruct their total limits, including the
+open output. The universal proper/limit comparison is invertible. The projection-normalized
+realization identifies this composite with the actual compact-support model. The word
+reconstruction theorem applies to the same common windows and compatible etale origins,
+so its comparisons, after the canonical coefficient identifications, are invertible. -/
+theorem comparisons_isIso {D : FiniteFieldDatum.{u}}
+    (o : IntegralSystemRealization.Operations l E) (r : Realizations l E D o)
+    (t : Compactification.Triangle f g) [QuasiCompact t.q] [QuasiCompact t.cg.i]
+    (af : sfCbcModelExtension t.cf.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cf.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ag : sfCbcModelExtension t.cg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (ah : sfCbcModelExtension t.cfg.i (constantRing l E) ⊣
+      (sfCbcMorphism t.cfg.i).modulePull (ULift.{u + 1} (constantRing l E)))
+    (K : sfIntegralConstructibleCategory l E X) (lo hi torLo torHi : ℤ)
+    (_hK : bridgeDomain l E k hl o t K lo hi torLo torHi) :
+    IsIso (directIdentification l E k hl o r t.cf K) ∧
+    IsIso (directIdentification l E k hl o r t.cg
+      ((sfCompactSupportFiniteIntegralFunctor l k hl t.cf E).obj K)) ∧
+    IsIso (directIdentification l E k hl o r t.cfg K) ∧
+    IsIso (wordComparison l E k hl t.cfg ah K) ∧
+    IsIso (compositeWordComparison l E k hl t.cf t.cg af ag K) := by
+  have hf := _hK.1
+  have hg := _hK.2.1
+  have hh := _hK.2.2.1
+  refine ⟨directIdentification_isIso l E k hl o r t.cf K hf.1.1,
+    directIdentification_isIso l E k hl o r t.cg _ hg.1.1,
+    directIdentification_isIso l E k hl o r t.cfg K hh.1.1,
+    wordComparison_isIso l E k hl t.cfg ah K hh.the project server, ?_⟩
+  let := wordCoordinates_isIso l E k hl t.cf af K hf.the project server
+  let := wordCoordinates_isIso l E k hl t.cg ag
+    ((sfCompactSupportFiniteIntegralFunctor l k hl t.cf E).obj K) hg.the project server
+  let : ∀ n : ℕ, Finite (constantRing l E ⧸
+      (constantDatum l E).ideal ^ (n + 1)) :=
+    (constantCoefficientProperties l E).the project server
+  obtain ⟨hu, hn⟩ := sfCbcCompactSupportCompositionLimit (constantDatum l E)
+  have ha := hn.a_isIso ((word t.cf).append (word t.cg)) ((H l E X).obj K.obj)
+    ((integralConstantCompleteTransport l E X).1 K)
+  have he : hu = constantReducedUnits l E := Subsingleton.elim _ _
+  subst hu
+  let := ha
+  dsimp only [compositeWordComparison]
+  infer_instance
+
+end Integral
+
+/-- The coefficient prime is a unit in the fixed algebraic closure of the finite field.
+Source: the coefficient paragraph of this node; blueprint fix-lem-exchanges
+(blueprint: lem-sf-integral-compactification-comparison-bridge).
+Proof: the specified cardinality of the finite base field gives characteristic D.p.
+The algebraic closure has the same characteristic. A distinct prime has nonzero cast
+and hence is a unit in this field. -/
+theorem coefficientPrimeUnit (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) :
+    IsUnit (l : D.k) := by
+  exact PurCompactSupport.coefficientPrimeUnit l D _hl
+```
+
+## New
+
+The exact preceding block is in IntegralCompactificationComparisonData, with the
+same namespace and preceding variables. The copied transparency-disabling
+options are removed; declaration text is identical. The original module adds:
+
+```lean
+public import Sheaf.SixFunctors.IntegralCompactificationComparisonData
+```
+
+The original final theorem has exactly its old signature and now has a complete
+proof from the two new comparison statements. The only new data construction is:
+
+```lean
+def ordinaryComparison {D : FiniteFieldDatum.{u}} {o : Operations l E}
+    (r : Realizations l E D o) (t : Compactification.Triangle f g)
+    [QuasiCompact t.cf.i] [QuasiCompact t.cg.i] [QuasiCompact t.q] :
+    (sfCompactSupportFiniteIntegralFunctor l k hl t.cf E ⋙
+      sfCompactSupportFiniteIntegralFunctor l k hl t.cg E) ⋙
+        (sfIntegralConstructible l E Z).ι ⟶
+    sfCompactSupportFiniteIntegralFunctor l k hl t.cfg E ⋙
+        (sfIntegralConstructible l E Z).ι :=
+  whiskerLeft (sfCompactSupportFiniteIntegralFunctor l k hl t.cf E)
+    (sfQcqsCompactSupportRealization l E k hl t.cg).inv ≫
+  whiskerRight (sfQcqsCompactSupportRealization l E k hl t.cf).inv
+    (ringedOpen l E t.cg.i ⋙ ringedPush l E t.cg.g) ≫
+  whiskerLeft (sfIntegralConstructible l E X).ι (completedShriekIntegralA l E r t) ≫
+  (sfQcqsCompactSupportRealization l E k hl t.cfg).hom
+```
+
+The old directIdentification node now points to the data module. The new data
+node records the other moved definitions. No target definition changes its body,
+so this relocation does not change a target's meaning. No source-library file is
+modified and no declaration or module is withdrawn.
+
+## Users
+
+The table records all nine downstream modules returned by tools/downstream.py.
+None is edited. No current claim for these names appears in the shared claim
+snapshot inspected by this worker.
+
+| module | group holding it | effect |
+| --- | --- | --- |
+| Sheaf.Paper.CompactSupportRealizationFactorNormalization | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CompactSupportRealizationFactorization | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CondensedOpenCoefficientModels | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CondensedOpenCounitComparisons | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CondensedOpenCounitRealization | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CondensedOpenCounitRealizationSupport | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CondensedOpenCounitUnits | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.CondensedOpenUnitComparison | no claim in shared snapshot | unchanged, re-exported |
+| Sheaf.Paper.NativeWeilScalarFrobeniusCounit | no claim in shared snapshot | unchanged, re-exported |
+
+All public imports originally present in the item remain. The private
+OpenReconstructionEffectivity import follows its existing proof into the data
+module. The direct consumer CompactSupportRealizationFactorNormalization is
+compiled against the extracted module with temporary profiler instrumentation
+(54 seconds, accepted); no consumer source change is included.
+
+## Status
+
+landed 20261026T002638-L-104791 2026-10-26 (merge of deliver/S4/Sheaf.SixFunctors.IntegralCompactificationComparisonBridge)

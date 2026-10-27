@@ -12,9 +12,71 @@
   "def-pd-separable-closure",
   "def-weil-pbc-relative-separable-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C=K_{\\mathrm{perf}}$ and $D=\\bigcap_{n\\geq0}(K^{\\mathrm{sep}})^{p^n}$. Frobenius is an injective field homomorphism, so every power image is a subfield and so are $C,D$. The field $C$ is perfect: given $c\\in C$, choose $b\\in K$ with $b^p=c$. For every $n$, choose $u\\in K$ with $u^{p^{n+1}}=c$. Then $(u^{p^n})^p=b^p$, and injectivity gives $b=u^{p^n}$. Thus $b\\in C$ and Frobenius on $C$ is surjective.",
+   "uses": [
+    "def-weil-ring-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV, Lemma 3.2.2, proof, printed p. 56 (PDF p. 62): coefficientwise Frobenius of the minimal polynomial."
+   }
+  },
+  {
+   "text": "By the relative-separable-closure definition, $S/C$ is algebraic. Since $C$ is perfect by Step 1, the algebraic-extension perfectness theorem makes $S$ perfect. For $s\\in S$, recursively take $p$th roots in $S$, obtaining for every $n$ an element $s_n\\in S$ with $s_n^{p^n}=s$. As $S\\subseteq K^{\\mathrm{sep}}$, this gives $s\\in D$ and hence $S\\subseteq D$.",
+   "uses": [
+    "def-weil-pbc-relative-separable-closure",
+    "lem-per-algebraic-extension-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV, Lemma 3.2.2, proof, printed p. 56 (PDF p. 62): coefficientwise Frobenius of the minimal polynomial."
+   }
+  },
+  {
+   "text": "Conversely, let $x\\in D$, and for each $n\\geq0$ choose $x_n\\in K^{\\mathrm{sep}}$ with $x_n^{p^n}=x$. Every $x_n$ is separable algebraic over $K$, since $K^{\\mathrm{sep}}/K$ is separable algebraic. Let $f$ be the monic minimal polynomial of $x$ over $K$, and $f_n$ that of $x_n$. Apply the iterated-Frobenius minimal-polynomial identity with $F=K$, $E=K^{\\mathrm{sep}}$, $a=x_n$. It gives $f(T)=\\sum_i b_{n,i}^{p^n}T^i$ when $f_n(T)=\\sum_i b_{n,i}T^i$. Thus for each coefficient $c_i$ of $f$ and every $n$, $c_i=b_{n,i}^{p^n}\\in K^{p^n}$; hence every $c_i$ lies in $C$. In particular $f\\in C[T]$, it is monic of positive degree, and $f(x)=0$.",
+   "uses": [
+    "def-pd-separable-closure",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-per-minpoly-iterated-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV, Lemma 3.2.2, proof, printed p. 56 (PDF p. 62): coefficientwise Frobenius of the minimal polynomial."
+   }
+  },
+  {
+   "text": "The polynomial $f\\in C[T]$ is irreducible: a factorization into two positive-degree polynomials over $C$ would give the same factorization over $K$, contradicting its minimal-polynomial irreducibility. It is therefore the minimal polynomial of $x$ over $C$. Moreover $f$ is separable over $K$, so its derivative is nonzero; the same derivative computed over $C$ is nonzero since $C\\hookrightarrow K$ is injective. Any nonconstant common divisor of $f,f'$ in $C[T]$ would, by irreducibility of $f$, be associated to $f$, impossible since $\\deg(f')<\\deg f$. The Euclidean algorithm thus gives $Uf+Vf'=1$ in $C[T]$. This is separability over $C$. Consequently $x$ is separable algebraic over $C$, so $x\\in S$ by its defining membership condition. This proves $D\\subseteq S$ and the equality.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial",
+    "def-weil-pbc-relative-separable-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé IV, Lemma 3.2.2, proof, printed p. 56 (PDF p. 62): coefficientwise Frobenius of the minimal polynomial."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separable-polynomial",
+  "def-pd-separable-closure",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-ring-frobenius",
+  "lem-per-algebraic-extension-perfect",
+  "lem-per-minpoly-iterated-frobenius"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV, Lemma 3.2.2, proof, printed p. 56 (PDF p. 62): coefficientwise Frobenius of the minimal polynomial."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +112,66 @@
    "results": "8 hits: IsSepClosure.isAlgClosure_of_perfectField, IsSepClosure.isAlgClosure_of_perfectField_top, IsSepClosure.of_isAlgClosure_of_perfectField, IsSepClosed.isAlgClosed_of_perfectField, perfectClosure.isAlgebraic, separableClosure_inf_perfectClosure, perfectField_iff_isSeparable_algebraicClosure, perfectField_of_isSeparable_of_perfectField_top. Search log digest 77e43415f8756ba0.",
    "date": "2026-10-19",
    "verdict": "no match: perfect-field and relative perfect-closure results do not identify the intersection of all Frobenius images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "separable closure of the perfect core equals the intersection of all iterated Frobenius images in the separable closure",
+   "results": "separableClosure_inf_perfectClosure; perfectClosure; perfectField_of_isSeparable_of_perfectField_top; perfectClosure.perfectRing; PerfectClosure.iterate_frobenius_mk; perfectClosure.perfectField; separableClosure_le; le_perfectClosure. 8 hits; search digest e6c5d20c5eecd323.",
+   "date": "2026-10-24",
+   "verdict": "no match for the perfect-core equality: relative perfectClosure denotes the purely inseparable extension, not the intersection of iterated Frobenius images"
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.*(frobenius|expand)|map.*minpoly|perfectField|perfectRing",
+   "results": "Mathlib/FieldTheory/SplittingField/IsSplittingField.lean; Mathlib/FieldTheory/SplittingField/IsSplittingField.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/IsAlgClosed/Basic.lean. 25 hits; search digest d2a94456c2e8f624.",
+   "date": "2026-10-24",
+   "verdict": "no match for the perfect-core equality: relative perfectClosure denotes the purely inseparable extension, not the intersection of iterated Frobenius images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "in a separable closure the intersection of all iterated Frobenius images is the separable closure of the largest perfect subfield",
+   "results": "SeparableClosure; separableClosure.isSeparable; separableClosure; separableClosure.isSepClosure; SeparableClosure.isSepClosed; IsPurelyInseparable.iterateFrobenius; IsSepClosure.isAlgClosure_of_perfectField; IsSepClosure. 8 hits; search digest d98f8d7e3eb0a88c.",
+   "date": "2026-10-24",
+   "verdict": "no match for the perfect-core equality: relative perfectClosure denotes the purely inseparable extension, not the intersection of iterated Frobenius images"
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly, frobenius",
+   "results": "minpoly.frobenius_of_isSeparable. 1 hits; search digest 2e764b453f6d24c8.",
+   "date": "2026-10-24",
+   "verdict": "partial match only: the minimal-polynomial Frobenius identity is the Mathlib leaf lem-per-minpoly-iterated-frobenius; it does not state the perfect-core equality"
+  },
+  {
+   "tool": "grep",
+   "query": "minpoly.iterateFrobenius_of_isSeparable|theorem minpoly.frobenius_of_isSeparable",
+   "results": "Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean; Mathlib/FieldTheory/PurelyInseparable/PerfectClosure.lean. 3 hits; search digest 4638e549731e38b4.",
+   "date": "2026-10-24",
+   "verdict": "partial match only: the minimal-polynomial Frobenius identity is the Mathlib leaf lem-per-minpoly-iterated-frobenius; it does not state the perfect-core equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "minimal polynomial of a separable element under iterated Frobenius equals coefficientwise Frobenius of its minimal polynomial",
+   "results": "minpoly.frobenius_of_isSeparable; minpoly.iterateFrobenius_of_isSeparable; minpoly.map_eq_of_isSeparable_of_isPurelyInseparable; IsSeparable; Polynomial.map_iterateFrobenius_expand; Polynomial.IsSeparableContraction; IsPurelyInseparable.minpoly_eq_X_sub_C_pow; FiniteField.minpoly_frobeniusAlgHom. 8 hits; search digest 7f3dabdf35c6570f.",
+   "date": "2026-10-24",
+   "verdict": "partial match only: the minimal-polynomial Frobenius identity is the Mathlib leaf lem-per-minpoly-iterated-frobenius; it does not state the perfect-core equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "minpoly.iterateFrobenius_of_isSeparable",
+   "results": "minpoly.iterateFrobenius_of_isSeparable. 1 hits; search digest db8ffde1c879706a.",
+   "date": "2026-10-24",
+   "verdict": "partial match only: the minimal-polynomial Frobenius identity is the Mathlib leaf lem-per-minpoly-iterated-frobenius; it does not state the perfect-core equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "minimal polynomial of a separable element raised to p to the n is the minimal polynomial with coefficients raised to p to the n",
+   "results": "minpoly.iterateFrobenius_of_isSeparable; minpoly.frobenius_of_isSeparable; minpoly.map_eq_of_isSeparable_of_isPurelyInseparable; minpoly.natSepDegree_eq_one_iff_eq_expand_X_sub_C; IsPurelyInseparable.minpoly_eq'; minpoly.natSepDegree_eq_one_iff_eq_X_sub_C_pow; IsPurelyInseparable.minpoly_eq_X_sub_C_pow; minpoly.natSepDegree_eq_one_iff_pow_mem. 8 hits; search digest ef8e62e20d4a6d61.",
+   "date": "2026-10-24",
+   "verdict": "partial match only: the minimal-polynomial Frobenius identity is the Mathlib leaf lem-per-minpoly-iterated-frobenius; it does not state the perfect-core equality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-extension-perfect-core",
@@ -81,5 +199,49 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-separable-closure-perfect-core",
+  "worker": "stage1",
+  "summary": "Read ILO IV Lemma 3.2.2 and wrote both inclusions: elementary perfectness of the Frobenius-image intersection, existing algebraic-extension perfectness for the forward inclusion, exact Mathlib minimal-polynomial Frobenius identity for the reverse inclusion, then explicit irreducibility and derivative descent. One new Mathlib leaf; statement unchanged; no Lean or compiler use.",
+  "blueprint": "Supports the inherited ILO IV §3.2.2 finite-extension perfect-core input below lem-per-artin-gabber-affine-curve, through the recorded local-duality/Cohen–Gabber/Epp chain. No change to the chapter or unit route. The current latest blueprint ancestor was read; its Step 1 requires the local-duality input exposed by that chain."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O1-d781e1d1d",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-d781e1d1d (reviewer sub-agent of L); spot-checked: PASS. The mathematics is correct; I read all of it, and review.md has the step-by-step checks. Source checked: ILO Exposé IV, Lemme 3.2.2 (PDF pp. 61-62). The 4 steps follow its two inclusions. Step 1 shows the perfect core C is perfect, using injectivity of Frobenius. Step 2: S/C is algebraic and C is perfect, so S is perfect (lem-per-algebraic-extension-perfect = Mathlib Algebra.IsAlgebraic.perfectField, Perfect.lean:343-347); taking iterated p-th roots in S gives S ⊆ D. Step 3: the new leaf gives f = coefficientwise p^n-th power of f_n, so every coefficient of f lies in C. Step 4: irreducibility over C descends from K, f' is nonzero, and Bezout in C[T] gives separability over C, so x is in S. New leaf lem-per-minpoly-iterated-frobenius: exact specialisation of minpoly.iterateFrobenius_of_isSeparable (PerfectClosure.lean:383-400; ExpChar comes from characteristic p). I tested it on a in F, n=0, and the case a^2=t in characteristic p≠2; the separability hypothesis is necessary (counterexample t^{1/p}) and is kept. It is not a duplicate and does not restate the item. Mechanical finding (cites dropped lem-per-algebraic-extension-perfect): accepted. That node (drop list line 1408) is already reached from nt-target-weil-conjectures through the live lem-sfb-raynaud-faltings-normalized-reduction → lem-per-epp-common-finite-trait-extension chain, so the citation adds no dropped node to the reached closure. No lem-sfb copy of it exists. The route lock is respected: no SGA, Qbar_l, t-structure, Gabber finiteness or alteration machinery is used. Maintainer note: the item (line 1888) and its parent lem-per-finite-extension-perfect-core (line 1554) are on the 2026-10-19 drop list, yet the BFS reaches them via lem-sfb-epp-essentially-finite-type-traits → epp-weak-perfect-residue → lem-sfb-finitely-generated-residue-perfect-core; the drop list and that chain should be reconciled. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableClosurePerfectCore",
+  "declaration": "Field.separableClosure_perfect_core",
+  "file": "lean/Sheaf/FieldTheory/SeparableClosurePerfectCore.lean",
+  "statement": "theorem separableClosure_perfect_core (K : Type u) (Ks : Type v) [Field K] [Field Ks] [Algebra K Ks] [IsSepClosure K Ks] (p : ℕ) [Fact p.Prime] [CharP K p] : ((@separableClosure (↥(⨅ n : ℕ, (iterateFrobenius K p n).fieldRange)) Ks inferInstance inferInstance ((algebraMap K Ks).comp (⨅ n : ℕ, (iterateFrobenius K p n).fieldRange).subtype).toAlgebra) : Set Ks) = {x : Ks | ∀ n : ℕ, ∃ a : Ks, a ^ (p ^ n) = x}",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b46ad6cd",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Field.separableClosure_perfect_core matches ILO IV Lemme 3.2.2 and the node clause by clause: Field K, CharP K p with Fact p.Prime (= char p>0, not stronger), IsSepClosure K Ks, core = ⨅ n (iterateFrobenius K p n).fieldRange including n=0, S = separableClosure of the core in Ks with the canonical composite algebra map, conclusion = Set equality with {x | ∀ n, ∃ a, a^(p^n)=x}; independent universes u,v. Edge cases checked: n=0, perfect K, separably closed K, p=2, imperfect K. Only the lean field differs from side-live; lean.statement is verbatim the file signature; imports exist; no definitions, proof only sorry; source and blueprint docstrings present; report has Worker report and Second reading sections. Not recompiled (no file changed). A parallel Q35 delivery of the same item exists. No findings."
+ }
 }

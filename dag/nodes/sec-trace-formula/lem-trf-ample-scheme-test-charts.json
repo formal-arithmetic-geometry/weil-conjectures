@@ -1,0 +1,151 @@
+{
+ "id": "lem-trf-ample-scheme-test-charts",
+ "kind": "statement",
+ "title": "Geometric scheme-test charts with explicit scheme pullbacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $f:F\\to Y$ a morphism of algebraic spaces [def-trf-algebraic-space], and $(Y_i\\to Y)_{i\\in I}$ a jointly surjective family of etale scheme charts [def-trf-algebraic-space-jointly-surjective-family]. Suppose the given scheme charts $F_i\\to F$ fit into cartesian squares $F_i=F\\times_Y Y_i$, with projections $p_i:F_i\\to Y_i$. For any scheme test $h:T\\to Y$, there exist an algebraic space $X=F\\times_Y T$, its projections and cartesian square, schemes $T_i=Y_i\\times_Y T$ with both projections, their cartesian squares, and an etale jointly surjective family $T_i\\to T$. Put $X_i=F_i\\times_{Y_i}T_i$, taking the actual categorical scheme pullbacks with structure map through $F_i\\to S$ and the two standard projections. There are etale jointly surjective maps $X_i\\to X$ with cartesian squares $X_i=X\\times_T T_i$, and their composites to $F$ equal $X_i\\to F_i\\to F$. If $h$ is etale then $X\\to F$ is etale. The index universe is arbitrary.",
+ "source": {
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 02X2 and 025Y; spaces-topologies.tex Tag 041F (3); original preparation Step 1 and etale-projection part of Step 8."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Form the algebraic-space fibre product and represent each base chart after the scheme test. Base change of the given cover gives the jointly surjective etale family of T_i.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the explicit scheme pullbacks F_i times_{Y_i} T_i. The universal property and pasting of the specified squares give their maps to X, the cartesian source squares, and the equation of maps to F.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply stability of the cover under base change to obtain etaleness and joint surjectivity of the source charts. When h is etale, its base change X to F is etale as well.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces.tex",
+  "place": "Tags 02X2 and 025Y; spaces-topologies.tex Tag 041F (3); original preparation Step 1 and etale-projection part of Step 8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The base change of an algebraic space along an arbitrary scheme test has an etale scheme cover given by fibre products of a scheme cover of the target",
+   "results": "Results include IsEtale.instIsStableUnderBaseChangeScheme, Scheme.Cover.pullbackCoverOver and its variants, and Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage.",
+   "date": "2026-10-26",
+   "verdict": "Scheme cover base change is available; no theorem supplies these algebraic-space charts with all specified cartesian squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible module descent on an algebraic space along etale charts with normalized tensor pullback transitions and arbitrary base change",
+   "results": "Eight results: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, IsEtale.instFormallyUnramified, Algebra.Etale.exists_subalgebra_fg, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, its symm_D_algebraMap, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, and an IsEtale cancellation instance.",
+   "date": "2026-10-26",
+   "verdict": "No matching algebraic-space theorem. Existing project comparison/descent declarations provide components but not their normalized assembly."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeRestriction|OrdinaryEtaleIdentification|IsQuasiCompactPresheafMap",
+   "results": "msearch grep returned zero Mathlib hits. Repository rg locates OrdinaryEtaleIdentification, AlgebraicSpaceInvertibleDescent and the item. blueprint_refs search scheme test returned zero imported blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "The concrete predicates and their assembly are project-specific. Reuse their existing definition owners; extract the six remaining existing equations without changing data."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.AmpleSchemeTestLinePreparation",
+  "date": "2026-10-26",
+  "group": "S4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the polarized-scheme descent sentence of lem-trf-local-term-locality, via the arbitrary-scheme-test reduction of lem-trf-algebraic-space-ample-local: old proof Steps 1 and 2 (base-changed covers, invertible cocycle descent, etale-test comparison, and quasi-compact separated preparation).; Geometric scheme-test charts with explicit scheme pullbacks",
+   "via": [
+    "lem-trf-ample-scheme-test-line-preparation",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.TraceFormula.AmpleSchemeTestCharts",
+  "file": "lean/Sheaf/TraceFormula/AmpleSchemeTestCharts.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_ampleSchemeTestCharts",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.ampleTestChartOver",
+   "AlgebraicGeometry.AlgebraicSpace.ampleTestChartFst",
+   "AlgebraicGeometry.AlgebraicSpace.ampleTestChartSnd",
+   "AlgebraicGeometry.AlgebraicSpace.AmpleSchemeTestCharts",
+   "AlgebraicGeometry.AlgebraicSpace.exists_ampleSchemeTestCharts"
+  ],
+  "statement": "theorem exists_ampleSchemeTestCharts {S : Scheme.{u}} {F Y : AlgebraicSpace S} (f : F ⟶ Y) (I : Type v) (Yᵢ : I → Y.EtaleSite) (Fᵢ : I → F.EtaleSite) (pᵢ : ∀ i : I, (Fᵢ i).obj.left ⟶ (Yᵢ i).obj.left) (hcover : IsJointlySurjective (fun i : I ↦ (Yᵢ i).obj.hom)) (hpb : ∀ i : I, IsPullback (Fᵢ i).obj.hom (yoneda.map (pᵢ i)) f.hom.hom (Yᵢ i).obj.hom) (T : Over S) (h : yoneda.obj T ⟶ Y.obj.obj) : Nonempty (AmpleSchemeTestCharts f Yᵢ Fᵢ pᵢ T h)",
+  "branch": "sheaf-dag",
+  "by": "S4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7e2e3",
+  "group": "S4",
+  "result": "fix",
+  "landing": "20261026T082945-L-2243945",
+  "kind": "interface",
+  "note": "independent cc review: 6 defs moved byte-identical to clone; item signature/structure vs node lean.statement; 3 new sorry statements vs their nodes and the definitions of the qc/separated presheaf properties; no importers of item in clone"
+ }
+}

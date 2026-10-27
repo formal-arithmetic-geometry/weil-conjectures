@@ -1,0 +1,249 @@
+{
+ "id": "lem-sf-cartesian-stratum-module-restriction",
+ "kind": "statement",
+ "title": "Cartesian stratum restriction with canonical finite constant coefficients",
+ "statement": "Let $A$ be a finite commutative ring, $g:Y\\to X$ a scheme morphism and $s:S\\hookrightarrow X$ an immersion [def-pc-scheme, def-weil-closed-immersion]. Put $S'=S\\times_XY$, with projections $s':S'\\to Y$ and $g':S'\\to S$ [def-pc-fibre-product]. Use the small pro-etale sites [def-weil-pbc-proetale-site], the constant coefficient rings $A_T$ [def-weil-pbc-constant-sheaf], and the actual module inverse image $f_A^*M=f^{-1}M\\otimes_{f^{-1}A_T}A_{T'}$ with its canonical constant-section coefficient map [def-weil-proetale-inverse-image]. There is a natural isomorphism of $A_{S'}$-module sheaves\n$$\\theta_M:(s')_A^*g_A^*M\\xrightarrow{\\sim}(g')_A^*s_A^*M$$\nfor every $A_X$-module sheaf $M$. On underlying sheaves this is the inverse-image composition comparison associated to $g\\circ s'=s\\circ g'$. Its coefficient identification agrees along both composition paths with the canonical map for this common composite, sending every constant section $a\\in A$ to the same section. It intertwines the $A$-module action maps.\n\nIf $s_A^*M$ is locally constant with finite stalks at every geometric point [def-weil-proetale-locally-constant-sheaf, def-weil-proetale-geometric-stalk], then $(s')_A^*g_A^*M$ has these same two properties. This holds for the actual fibre product schemes, with no reduction, Noetherianity or invertibility hypothesis, and includes empty $S'$ and the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant, with inverse-image composition and canonical constant-section coefficient transport; cartesian-stratum specialization of old item step 3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-pbc-proetale-operations",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "proof": [
+  {
+   "text": "The underlying tensor-unit comparison is invertible by ringUnitComparison in ProEtaleRingSheafChangeAdjunction. Apply it twice to get invertibility of each iterated comparison. These use the specified constant-ring comparison and the normalized module adjunction.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the canonical direct-image compositor directComp from ProEtaleModulePullbackComposition and take its adjoint mate moduleComp. Transposing the underlying comparison, naturality of homEquiv, the unit formula for conjugation, and the direct-image section formula prove compComparison_normalization. Cancellation gives its inverse version. The argument is the retained common-universe specialization of the declared module-composition result.",
+   "uses": [
+    "lem-pur-proetale-module-pullback-composition",
+    "def-per-site-comparison-pullback-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along equality of the two scheme composites. Equality transport is packaged using its proved unique eqToIso value and constant-section compatibility. Compose inverse compositor, equality transport, and compositor. The elementary square_arrows calculation proves the normalization; naturality is naturality of the resulting module natural isomorphism. The packaged sheaf square equals the original explicit composite by proEtaleCartesianStratumSheafComparison_eq.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the coefficient composition equation on snd,g and fst,s. Cancel the first sheaf compositor against its inverse in the square, use the uniquely specified equality transport on constant-section coefficient maps, and obtain the second coefficient equation.",
+   "uses": [
+    "lem-pur-proetale-constant-ring-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply proEtale_finiteLocalConstancy_pullback along fst to the restriction along s. Insert or remove the True predicate to identify the two local-constancy presentations. Compose local trivializations with overFunctor.mapIso theta. Apply each geometric module stalk functor to theta and transfer finiteness through the resulting bijection. The construction is categorical, hence also covers empty schemes and the zero ring.",
+   "uses": [
+    "lem-pur-proetale-finite-local-constancy-pullback",
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-proetale-module-pullback-composition",
+  "def-per-site-comparison-pullback-data",
+  "def-pc-fibre-product",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-pur-proetale-finite-local-constancy-pullback",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2, 03D3, 03D8 and 093R; normalized adjunction mates, canonical compositor and transport, followed by finite local constancy pullback"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(proetale|pro.etale).*(stratum|locally.constant)|(stratum|locally.constant).*(proetale|pro.etale)",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of strata and constant coefficient proetale module sheaf restriction preserve finite locally constant modules",
+   "results": "OK 8 hits; IsBaseChange.finitePow, ModuleCat.Tilde.res_const, SheafOfModules.restrictScalars_map_val, SheafOfModules.restrictScalars_obj_val, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme, CompHausLike.LocallyConstantModule.functor_obj_val, CompHausLike.LocallyConstantModule.functor_map_val",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"comp\"",
+   "results": "OK 12 hits; CategoryTheory.Limits.WidePullback.eq_lift_of_comp_eq, CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd, CategoryTheory.Limits.pullbackComparison, CategoryTheory.Limits.pullbackSymmetry_inv_comp_fst, CategoryTheory.Limits.pullbackSymmetry_inv_comp_snd, CategoryTheory.Limits.pullbackSymmetry_hom_comp_fst_assoc, CategoryTheory.Limits.pullbackSymmetry_hom_comp_snd_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes, restriction of a constant finite ring module proetale inverse image to the fibre product stratum is canonically the inverse image of the original restriction, preserving locally constant finite stalks",
+   "results": "OK 8 hits; AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst, AlgebraicGeometry.Scheme.Pullback.diagonalRestrictIsoDiagonal, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_ι_assoc, AlgebraicGeometry.pullbackRestrictIsoRestrict_hom_morphismRestrict, AlgebraicGeometry.isPullback_morphismRestrict",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compose constant coefficient module inverse images on small proetale sites and preserve finite locally constant local models on arbitrary subschemes",
+   "results": "OK 8 hits; Profinite.exists_locallyConstant_finite_aux, ModuleCat.Tilde.res_const, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq, Profinite.exists_locallyConstant_fin_two, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Profinite.exists_locallyConstant_finite_nonempty",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme pullbacks, immersion classes, locally constant functions, or underlying module-sheaf infrastructure; none states this constant-coefficient pro-etale stratum comparison and test"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes, canonical constant coefficient module inverse images compose compatibly with their underlying sheaf comparison and preserve locally constant finite geometric stalks",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.inv_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf-module pullback composition infrastructure or Zariski scheme modules or condensed constant modules; none states the actual pro-etale constant-ring square with the coefficient normalization and finite geometric-stalk clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"pullback\"",
+   "results": "OK 12 hits; PresheafOfModules.pullbackId, PresheafOfModules.pullbackObjIsDefined, PresheafOfModules.pullback, PresheafOfModules.pullbackObjIsDefined_eq_top, PresheafOfModules.pullbackObjIsDefined_free_yoneda, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pullbackComp, PresheafOfModules.pullback_comp_id",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf-module pullback composition infrastructure or Zariski scheme modules or condensed constant modules; none states the actual pro-etale constant-ring square with the coefficient normalization and finite geometric-stalk clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback.*[Ll]ocally[Cc]onstant|[Ll]ocally[Cc]onstant.*pullback",
+   "results": "OK 25 hits; Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/Basic.lean, Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf-module pullback composition infrastructure or Zariski scheme modules or condensed constant modules; none states the actual pro-etale constant-ring square with the coefficient normalization and finite geometric-stalk clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant ring module sheaf inverse images on the small proetale site commute in a cartesian square and preserve finite locally constant sheaves",
+   "results": "OK 8 hits; CategoryTheory.constantCommuteCompose, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf-module pullback composition infrastructure or Zariski scheme modules or condensed constant modules; none states the actual pro-etale constant-ring square with the coefficient normalization and finite geometric-stalk clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of geometric inverse images lifts to modules over a constant ring and carries finite locally constant sheaves to finite locally constant sheaves",
+   "results": "OK 8 hits; CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_map, CompHausLike.LocallyConstantModule.functorToPresheaves, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor_map_val, LightCondMod.LocallyConstant.functorToPresheaves, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-22",
+   "verdict": "no match: general sheaf-module pullback composition infrastructure or Zariski scheme modules or condensed constant modules; none states the actual pro-etale constant-ring square with the coefficient normalization and finite geometric-stalk clauses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-finite-immersion-constructibility-interval",
+  "date": "2026-10-22",
+  "group": "Q08"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Finite-stage paragraph: comparison of restriction vertices on constructible strata; retained detailed proof of lem-sf-finite-immersion-constructibility-interval, old step 3 (coefficient-linear fibre-product restriction and finite local constancy)",
+   "via": [
+    "lem-sf-finite-immersion-constructibility-interval"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-cartesian-stratum-module-restriction",
+  "worker": "Q116",
+  "summary": "Five-step split, with unchanged statement and no new nodes: cancel the specified scalar isomorphisms in the actual tensor pullbacks, compare both coefficient paths through the common composite, explicitly lift its underlying inverse-image comparison by naturality of operations, and apply the existing finite-local-constancy pullback lemma. Empty fibre products and the zero ring are included.",
+  "blueprint": "Finite-stage restriction comparisons of prop-sf-open-closed-triangle-all-stages, via lem-sf-finite-immersion-constructibility-interval old step 3; follows the recorded actual fibre-product restriction route.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical coefficient isomorphism for arbitrary scheme arrows, needed to compare the actual tensor pullback with underlying inverse image; no node of this localization unit states it."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "The normalized coefficient-composition equation for both paths; no node of this localization unit supplies this general coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Finite-product preservation of the actual geometric inverse images, needed for the explicit action comparison; a generic site tool not supplied by this localization unit."
+   },
+   {
+    "node": "lem-pur-proetale-finite-local-constancy-pullback",
+    "why": "Preservation of intrinsic local constancy and all finite geometric module stalks under arbitrary scheme pullback; generic finite-coefficient tool needed for restriction to the actual stratum."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-pur-proetale-finite-local-constancy-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q116-78aefefa3",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-78aefefa3 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes and no fixes. The delivery adds a five-step proof and leaves the statement, stmt_deps and blueprint unchanged; it is one commit with the report. The statement is true for any morphism s; the immersion hypothesis is unused. I tested it on empty S', s=id, A=0 and A=F_4. Source: Stacks 093R (sites-modules.tex l.8435) states the pullback of a locally constant module sheaf over a fixed ring is locally constant, with the proof omitted, so proof_origin agent is correct. Step 1: prop-weil-pbc-proetale-constant-ring-map says c_u is invertible; contracting the tensor pullback m⊗a↦c^{-1}(a)m with inverse m↦m⊗1 is elementary. Step 2: lem-pur-proetale-constant-ring-composition, applied to (s',g) and (g',s) with t=gs'=sg', gives c_t=c_{s'}(s')^{-1}(c_g)α_1=c_{g'}(g')^{-1}(c_s)α_2; this uses only its statement. Step 3: θ=α_2α_1^{-1} is A_{S'}-linear by naturality of α_i on the action map, with finite products preserved by lem-weil-pbc-left-exact-site-inverse-image-tensor and the step-2 equation; this is elementary. Step 4: lem-pur-proetale-finite-local-constancy-pullback with b=g', F=s_A^*M has exactly the item's hypotheses. Composing trivializations with θ restricted to U_j, and taking stalks of θ, carries both properties over. Step 5: the degenerate cases follow from the empty-source clause. This matches what step 2 of the parent lem-sf-finite-immersion-constructibility-interval needs on each stratum S_ν×_X Y. Duplicate search over all nodes for locally constant together with fibre products: lem-exc-proetale-pullback-locally-constant, lem-fd-constructible-tensor-refinement-witness and lem-sfb-adic-finite-stratification-pullback are related but none states the item. There is no cycle. Tool uses: I accept the three off-unit generic tools (constant-ring-map, constant-ring-composition, left-exact inverse image). lem-pur-proetale-finite-local-constancy-pullback is in sk-def-sf-operations, which the unit cites, so its tool_uses entry is unnecessary but harmless. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartesianStratumModuleRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_cartesianStratum_moduleRestriction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleToAbelianSheaf",
+   "AlgebraicGeometry.Scheme.proEtaleConstantModuleUnderlyingComparison",
+   "AlgebraicGeometry.Scheme.proEtaleIteratedConstantModuleUnderlyingComparison",
+   "AlgebraicGeometry.Scheme.proEtaleCartesianStratumSheafComparison",
+   "AlgebraicGeometry.Scheme.proEtale_cartesianStratum_moduleRestriction",
+   "AlgebraicGeometry.Scheme.proEtaleSheafTransport_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleSheafTransport",
+   "AlgebraicGeometry.Scheme.stratumSheafComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.proEtaleCartesianStratumSheafComparison_eq"
+  ],
+  "file": "lean/Sheaf/Paper/CartesianStratumModuleRestriction.lean",
+  "statement": "theorem proEtale_cartesianStratum_moduleRestriction {S Y X : Scheme.{u}} (s : S ⟶ X) [IsImmersion s] (g : Y ⟶ X) (A : Type u) [CommRing A] [Finite A] : ∃ theta : ∀ M : proEtaleRingModules X (proEtaleConstantRing X A), proEtaleConstantModulePullback (pullback.snd s g) A (proEtaleConstantModulePullback g A M) ≅ proEtaleConstantModulePullback (pullback.fst s g) A (proEtaleConstantModulePullback s A M), (∀ (M N : proEtaleRingModules X (proEtaleConstantRing X A)) (a : M ⟶ N), proEtaleConstantModulePullbackMap (pullback.snd s g) A (proEtaleConstantModulePullbackMap g A a) ≫ (theta N).hom = (theta M).hom ≫ proEtaleConstantModulePullbackMap (pullback.fst s g) A (proEtaleConstantModulePullbackMap s A a)) ∧ (∀ M : proEtaleRingModules X (proEtaleConstantRing X A), IsIso (proEtaleIteratedConstantModuleUnderlyingComparison (pullback.snd s g) g A M) ∧ IsIso (proEtaleIteratedConstantModuleUnderlyingComparison (pullback.fst s g) s A M) ∧ proEtaleIteratedConstantModuleUnderlyingComparison (pullback.snd s g) g A M ≫ (proEtaleConstantModuleToAbelianSheaf (pullback s g) A).map (theta M).hom = (proEtaleCartesianStratumSheafComparison AddCommGrpCat.{u + 1} s g).hom.app ((proEtaleConstantModuleToAbelianSheaf X A).obj M) ≫ proEtaleIteratedConstantModuleUnderlyingComparison (pullback.fst s g) s A M) ∧ ((ProEtale.supportSiteProEtaleComparisonComp CommRingCat.{u + 1} (pullback.snd s g) g).hom.app (proEtaleConstantRing X A) ≫ (proEtaleSheafInverseImage (pullback.snd s g) CommRingCat.{u + 1}).map (proEtaleCoefficientInverseImageMap g A) ≫ proEtaleCoefficientInverseImageMap (pullback.snd s g) A = proEtaleCoefficientInverseImageMap (pullback.snd s g ≫ g) A) ∧ ((ProEtale.supportSiteProEtaleComparisonComp CommRingCat.{u + 1} (pullback.snd s g) g).hom.app (proEtaleConstantRing X A) ≫ (proEtaleCartesianStratumSheafComparison CommRingCat.{u + 1} s g).hom.app (proEtaleConstantRing X A) ≫ (proEtaleSheafInverseImage (pullback.fst s g) CommRingCat.{u + 1}).map (proEtaleCoefficientInverseImageMap s A) ≫ proEtaleCoefficientInverseImageMap (pullback.fst s g) A = proEtaleCoefficientInverseImageMap (pullback.snd s g ≫ g) A) ∧ (∀ M : proEtaleRingModules X (proEtaleConstantRing X A), (IsLocallyConstantProEtaleModuleSheafOfUniverses S A (proEtaleConstantModulePullback s A M) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ S), Finite ((geometricRingModuleStalkFunctor y (proEtaleConstantRing S A)).obj (proEtaleConstantModulePullback s A M))) → IsLocallyConstantProEtaleModuleSheafOfUniverses (pullback s g) A (proEtaleConstantModulePullback (pullback.snd s g) A (proEtaleConstantModulePullback g A M)) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ pullback s g), Finite ((geometricRingModuleStalkFunctor y (proEtaleConstantRing (pullback s g) A)).obj (proEtaleConstantModulePullback (pullback.snd s g) A (proEtaleConstantModulePullback g A M))))",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The module-isomorphism family has its explicit naturality equation. Its underlying map is normalized through the actual tensor-unit module adjunction and the published inverse-image composition mates, including transport along the chosen fibre-product equality. Both coefficient paths equal the canonical coefficient map for the common composite. Local constancy uses the recorded independent-universe definition, and stalk finiteness uses the recorded module-stalk functor. Four real-data helpers package only these constructions; no arbitrary module isomorphism is selected."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-06504fb06",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Redelivery of RETURN 0e4ac3a170dc (H2). Lean file byte-identical; item node changes only stmt_deps: theorem lem-weil-pbc-comparison-pullback replaced by landed definition node def-per-site-comparison-pullback-data (existing:true on SupportComparisonPullbackCoherence, declarations include supportSiteProEtaleComparisonComp, a plain conjugate-mate def). def-weil-pbc-proetale-operations retained. All 10 dep records byte-identical to side-live; live item has no lean (no supersession); statement verbatim, 1 sorry, max line 93; report has Worker report and Second reading by Q73. Mathematics re-confirmed: immersion, finite comm A, snd=s', fst=g', θ iso of A_{S'}-modules natural in M, underlying map pinned by IsIso tensor-unit comparisons and the Comp⁻¹≫eqToIso≫Comp square, both coefficient paths = c_{snd≫g}, local constancy and finite geometric stalks transfer; edge cases ok. lem-pur-proetale-module-pullback-composition is related, not a duplicate. Advisories: helper square duplicates supportSiteProEtaleComparisonSquare; 5 unused private imports. No compile (Lean unchanged)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-5f609",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261024T191141-L-260151",
+  "kind": "interface",
+  "note": "independent cc review: delivered CartesianStratumModuleRestriction.lean vs clones/live (theorem statement identical, only sorry replaced), node JSON vs live (proof fields + 4 new lean.declarations), change record vs actual def changes; #print axioms clean"
+ }
+}

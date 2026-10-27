@@ -1,0 +1,154 @@
+{
+ "id": "lem-sfb-condensed-sections-ind-vanishing",
+ "kind": "statement",
+ "title": "Fixed-degree ordinary module-section vanishing passes to filtered-colimit hulls",
+ "statement": "Let X be a quasi-compact quasi-separated scheme [def-pc-scheme, def-weil-pbc-quasi-compact-scheme] and let Λ be any commutative condensed ring. Use internal Λ_X-modules on the small pro-étale site [def-weil-pbc-proetale-site] and their ordinary uncompleted derived sections to abelian groups [sk-def-sfb-module-derived-pushpull, def-sfb-condensed-module-sections]. Let P be any property of these modules, and q any integer. Suppose H^q(RΓ(X,N[0]))=0 for every N satisfying P. Then the same vanishing holds for any M which admits a small filtered ambient colimit presentation by modules satisfying P [def-weil-pbc-category-colimit], equivalently ObjectProperty.ind.{u+1} P M. Index categories are small in universe u+1, where X is a Scheme.{u}. No degree bound on q, coefficient restrictions, Noetherianity, or lift of the module diagram to presentations is assumed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-sfb-condensed-module-sections",
+  "def-weil-pbc-category-colimit"
+ ],
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), global sections clause, applied to degree-zero module complexes."
+ },
+ "proof": [
+  {
+   "text": "Choose the given filtered module presentation, and apply the single-complex functor in degree zero. Each complex is strictly supported in degrees at least zero, so good truncation at zero is isomorphic to the original complex. The single-complex functor preserves colimits. Thus the vertex of the continuity cocone is isomorphic to the single complex on M.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply bounded-below filtered continuity of ordinary module-derived global sections with common lower bound zero. It identifies the target cohomology with the colimit of the degree-q cohomology groups of the given modules.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each group in this last diagram is zero by hypothesis. A colimit of a zero diagram is zero. Transport zero-ness through the continuity isomorphism and the single-complex colimit identification.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(1), global sections clause, applied to degree-zero module complexes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of filtered colimits of sheaves vanishes with a common cohomological dimension bound",
+   "results": "8 hits: CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Sheaf.ab5ofSize, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, Condensed.hasExactColimitsOfShape, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian",
+   "date": "2026-10-23",
+   "verdict": "No exact transfer or module-derived filtered-vanishing theorem. The generic zero-colimit facts are reused in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsZero, CategoryTheory.Limits.colimit",
+   "results": "0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No exact transfer or module-derived filtered-vanishing theorem. The generic zero-colimit facts are reused in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "weakSerre|cohomologicalDimension|IsZero.*colimit",
+   "results": "9 hits: Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact transfer or module-derived filtered-vanishing theorem. The generic zero-colimit facts are reused in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "IsZero.*colimit|weakSerre|condensedModuleSections",
+   "results": "9 hits: Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/ZeroMorphisms.lean, Mathlib/CategoryTheory/Limits/Shapes/Kernels.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean, Mathlib/CategoryTheory/Preadditive/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "No exact transfer or module-derived filtered-vanishing theorem. The generic zero-colimit facts are reused in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary derived global sections of module sheaves on a quasi compact quasi separated pro etale site preserve vanishing in a fixed degree under filtered colimits of modules",
+   "results": "8 hits: SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.preservesColimit_Γ, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero, SheafOfModules.sections, PresheafOfModules.isSheaf_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "No exact transfer or module-derived filtered-vanishing theorem. The generic zero-colimit facts are reused in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For affine Noetherian schemes a torsion etale cohomological dimension bound gives ordinary pro etale cohomology vanishing on the weak Serre coproduct closure of finite constant constructible continuous coefficient modules",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, Rep.isZero_Tor_succ_of_projective, CategoryTheory.hasInjectiveDimensionLT_iff, CategoryTheory.hasProjectiveDimensionLT_iff, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CategoryTheory.HasInjectiveDimensionLT.mk, CategoryTheory.HasProjectiveDimensionLT.mk, DerivedCategory.isGE_iff",
+   "date": "2026-10-23",
+   "verdict": "No exact transfer or module-derived filtered-vanishing theorem. The generic zero-colimit facts are reused in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TorsionCdTopologicalSerreTransfer",
+  "group": "W4",
+  "date": "2026-10-24"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement proof (2), first paragraph: the final filtered heart-cohomology colimit argument of the torsion dimension transfer, independently of the disputed approximation.",
+   "via": [
+    "lem-sfb-torsion-cd-topological-serre-transfer",
+    "lem-sfb-affine-profinite-family-serre-cd",
+    "lem-sfb-profinite-geometric-family-heart-cd",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedSectionsIndVanishing",
+  "file": "lean/Sheaf/Paper/CondensedSectionsIndVanishing.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedModuleSections_ind_isZero",
+  "statement": "theorem condensedModuleSections_ind_isZero\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]\n    (P : ObjectProperty\n      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))\n    (q : ℤ)\n    (hP : ∀ M, P M → IsZero ((DerivedCategory.homologyFunctor _ q).obj\n      ((condensedModuleSections Λ X).rightDerivedFunctor.obj\n        ((DerivedCategory.singleFunctor _ 0).obj M))))\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))\n    (hM : P.ind.{u + 1} M) :\n    IsZero ((DerivedCategory.homologyFunctor _ q).obj\n      ((condensedModuleSections Λ X).rightDerivedFunctor.obj\n        ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261024T191608-L-439299",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261024T191608-L-439299",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

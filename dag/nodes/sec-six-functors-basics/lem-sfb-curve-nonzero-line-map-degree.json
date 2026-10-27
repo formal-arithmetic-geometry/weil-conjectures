@@ -1,0 +1,239 @@
+{
+ "id": "lem-sfb-curve-nonzero-line-map-degree",
+ "kind": "statement",
+ "title": "Nonzero maps of line bundles give a nonnegative tensor-dual degree difference",
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension]. Let $A,B$ be invertible $\\mathcal O_C$-modules and put $A^\\vee=\\mathcal H om_{\\mathcal O_C}(A,\\mathcal O_C)$ [def-sc-invertible-module] and $L=B\\otimes_{\\mathcal O_C}A^\\vee$ [def-pur-sheaf-tensor-product]. Both $A^\\vee$ and $L$ are invertible. There is a canonical $\\Gamma(C,\\mathcal O_C)$-linear isomorphism\n$$\\operatorname{Hom}_{\\mathcal O_C}(A,B)\\simeq\\Gamma(C,L)$$\nwhich sends a morphism $\\varphi$ locally given by $\\varphi(e_A)=h e_B$, for local bases $e_A,e_B$, to the section locally given by $h e_B\\otimes e_A^\\vee$. For $\\varphi\\ne0$ its corresponding global section $s_\\varphi$ is nonzero. Evaluation is an isomorphism $A\\otimes_{\\mathcal O_C}A^\\vee\\simeq\\mathcal O_C$. With $\\deg_k N=\\chi(C,N)-\\chi(C,\\mathcal O_C)\\in\\mathbf Z$ [def-pc-degree-line-bundle], [def-pc-euler-characteristic], one has\n$$\\deg_k A^\\vee=-\\deg_k A,\\qquad \\deg_k L=\\deg_k B-\\deg_k A.$$\nIf $\\varphi\\ne0$, then $\\deg_k L\\ge0$.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B40 (varieties-lemma-check-invertible-sheaf-trivial), proof of (5) via (1), including the displayed sheaf Hom identity; Tag 0AYX (varieties-lemma-degree-tensor-product), rank-one case."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-pc-tensor-dual-invertible] to $A$ and $B$: $A^\\vee$ is invertible, $L=B\\otimes A^\\vee$ is invertible, and the canonical evaluation $A\\otimes A^\\vee\\to\\mathcal O_C$ is an isomorphism.",
+   "uses": [
+    "lem-pc-tensor-dual-invertible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 01CT, modules-lemma-constructions-invertible, (1)--(2)."
+   }
+  },
+  {
+   "text": "Choose a common Zariski trivializing cover for $A,B$ using [def-sc-invertible-module]. On a member with bases $e_A,e_B$, send $\\varphi(e_A)=h e_B$ to $h e_B\\otimes e_A^\\vee$. If $e_A'=u e_A$ and $e_B'=v e_B$ on an overlap, with $u,v$ units, then $h'=uv^{-1}h$ and $(e_A')^\\vee=u^{-1}e_A^\\vee$, so $h'e_B'\\otimes(e_A')^\\vee=h e_B\\otimes e_A^\\vee$. Thus these local sections glue. Conversely a section locally written $h e_B\\otimes e_A^\\vee$ gives the maps $e_A\\mapsto h e_B$; the same formula makes them agree on overlaps. These constructions commute with restrictions, addition and multiplication by functions, and are inverse on each trivializing open. Hence they give the asserted canonical $\\Gamma(C,\\mathcal O_C)$-linear isomorphism. Zero corresponds locally to $h=0$, so $s_\\varphi=0$ if and only if $\\varphi=0$.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B40, varieties-lemma-check-invertible-sheaf-trivial, proof of (5): the sheaf Hom identity and application of (1)."
+   }
+  },
+  {
+   "text": "By [def-pc-degree-line-bundle], $\\deg_k\\mathcal O_C=\\chi(C,\\mathcal O_C)-\\chi(C,\\mathcal O_C)=0$. Apply [lem-trf-curve-degree-tensor-additive] to $A,A^\\vee$; evaluation from Step 1 identifies their tensor product with $\\mathcal O_C$. The evaluation isomorphism and its inverse induce inverse $k$-linear maps on every $H^i(C,-)$; hence the dimensions in [def-pc-euler-characteristic] agree term by term, giving equal Euler characteristics and degrees. Thus $0=\\deg_k A+\\deg_k A^\\vee$. Thus $\\deg_k A^\\vee=-\\deg_k A$. Apply the same tensor formula to $B,A^\\vee$ to obtain $\\deg_k L=\\deg_k B-\\deg_k A$. The dimension-one hypothesis implies dimension at most one, as required by that formula.",
+   "uses": [
+    "def-pc-degree-line-bundle",
+    "def-pc-euler-characteristic",
+    "lem-trf-curve-degree-tensor-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYX, varieties-lemma-degree-tensor-product, rank-one case; Tag 0B40, proof of (5), degree of the tensor-dual bundle."
+   }
+  },
+  {
+   "text": "If $\\varphi\\ne0$, Step 2 supplies the nonzero section $s_\\varphi$ of the invertible bundle $L$. Apply [lem-trf-curve-section-degree-positivity] to $(C,L,s_\\varphi)$. Its hypotheses are exactly that $C$ is integral, proper over the field $k$, and of dimension one; it yields $\\deg_k L\\ge0$.",
+   "uses": [
+    "lem-trf-curve-section-degree-positivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B40, varieties-lemma-check-invertible-sheaf-trivial, proof of (5): the sheaf Hom identity and application of (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "lem-pc-tensor-dual-invertible",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-curve-section-degree-positivity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0B40, varieties-lemma-check-invertible-sheaf-trivial, proof of (5) via (1); Tag 0AYX, varieties-lemma-degree-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a proper integral curve a nonzero homomorphism A to B of invertible sheaves is a nonzero global section of B tensor dual A and this line bundle has degree deg B minus deg A nonnegative",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens} (x : ↥X) (hx : x ∈ U) (f : ↑(X.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom (X.evaluation U x hx)) f ≠ 0 ↔ x ∈ X.basicOpen f\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, a point $x \\\\in U$, and a section $f$ of the structure sheaf over $U$, the evaluation of $f$ at $x$ is non-zero in the residue field $\\\\kappa(x)$ if and\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [Nontrivial R] (y : Polynomial R),\\n  WeierstrassCurve.Affine.CoordinateRing.YClass W' y ≠ 0\", \"doc\": \"For a non-trivial base ring $ R $, the element $ Y - y $ in the coordinate ring of an affine Weierstrass curve (defined as the quotient ring $ R[X,Y] $ modulo the Weierstrass polynomial ideal) is not \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none states the scheme line-bundle degree/section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Invertible\", \"degree\"",
+   "results": "[loogle] OK 6 hit(s)\n  {\"name\": \"Polynomial.splits_of_natDegree_le_one_of_invertible\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \" {R : Type u_1} [Semiring R] {f : Polynomial R} (hf : f.natDegree ≤ 1) (h : Invertible f.leadingCoeff) : f.Splits\", \"doc\": \"**Alias** of `Polynomial.Splits.of_natDegree_le_one_of_invertible`.\"}\n  {\"name\": \"Polynomial.Splits.of_natDegree_le_one_of_invertible\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \" {R : Type u_1} [Semiring R] {f : Polynomial R} (hf : f.natDegree ≤ 1) (h : Invertible f.leadingCoeff) : f.Splits\", \"doc\": \"\"}\n  {\"name\": \"Polynomial.splits_of_degree_le_one_of_invertible\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \" {R : Type u_1} [Semiring R] {f : Polynomial R} (hf : f.degree ≤ 1) (h : Invertible f.leadingCoeff) : f.Splits\", \"doc\": \"**Alias** of `Polynomial.Splits.of_degree_le_one_of_invertible`.\"}\n  {\"name\": \"Polynomial.Splits.of_degree_le_one_of_invertible\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \" {R : Type u_1} [Semiring R] {f : Polynomial R} (hf : f.degree ≤ 1) (h : Invertible f.leadingCoeff) : f.Splits\", \"doc\": \"\"}\n  {\"name\": \"Polynomial.Splits.comp_of_natDegree_le_one_of_invertible\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \" {R : Type u_1} [CommSemiring R] {f g : Polynomial R} (hf : f.Splits) (hg : g.natDegree ≤ 1) (h : Invertible g.leadingCoeff) : (f.comp g).Splits\", \"doc\": \"\"}\n  {\"name\": \"Polynomial.Splits.comp_of_degree_le_one_of_invertible\", \"module\": \"Mathlib.Algebra.Polynomial.Splits\", \"type\": \" {R : Type u_1} [CommSemiring R] {f g : Polynomial R} (hf : f.Splits) (hg : g.degree ≤ 1) (h : Invertible g.leadingCoeff) : (f.comp g).Splits\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none states the scheme line-bundle degree/section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(nonzero|nontrivial).*degree|degree.*(nonzero|nontrivial)|degree.*dual|dual.*degree",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"line\": \"435\", \"text\": \"lemma natDegree_Φ [Nontrivial R] (n : ℤ) : (W.Φ n).natDegree = n.natAbs ^ 2 :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Degree.lean\", \"line\": \"438\", \"text\": \"lemma natDegree_Φ_pos [Nontrivial R] {n : ℤ} (hn : n ≠ 0) : 0 < (W.Φ n).natDegree := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"111\", \"text\": \"lemma degree_polynomial [Nontrivial R] : W.polynomial.degree = 2 := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Basic.lean\", \"line\": \"116\", \"text\": \"lemma natDegree_polynomial [Nontrivial R] : W.polynomial.natDegree = 2 := by\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none states the scheme line-bundle degree/section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero map of line bundles on a proper integral algebraic curve implies that the degree of the target is at least the degree of the source",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf Hom between two line bundles is the tensor of the second with the dual of the first; global nonzero sections on proper curves give a nonnegative degree difference",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.sub_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {U : X.Opens} (φ ψ : M ⟶ N),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app (φ - ψ) U =\\n    AlgebraicGeometry.Scheme.Modules.Hom.app φ U - AlgebraicGeometry.Scheme.Modules.Hom.app ψ U\", \"doc\": \"For any two sheaf homomorphisms $\\\\phi, \\\\psi : M \\\\to N$ between sheaves of modules over a scheme $X$, and for any open subset $U \\\\subseteq X$, the component of the difference $\\\\phi - \\\\psi$ at $U$ satis\"}\n  {\"name\": \"AlgebraicGeometry.Proj.sub_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"For sections $ s $ and $ t $ of the structure sheaf on the projective spectrum, the value of $ s - t $ at any point $ x $ is equal to the difference of the values of $ s $ and $ t $ at $ x $, i.e., $ \"}\n  {\"name\": \"ModuleCat.instAddCommGroupObjOppositeOpensCarrierTopValTildeInType\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) →\\n      (U : (TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))ᵒᵖ) → AddCommGroup (M.tildeInType.val.obj U)\", \"doc\": \"For any commutative ring $ R $, module $ M $, and open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the sections of the sheaf associated to $ M $ over $ U $ form an additive commutative\"}\n  {\"name\": \"AlgebraicGeometry.Proj.mul_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"The structure sheaf on the projective spectrum of a graded ring assigns to each open set $ U $ the ring of sections locally represented by homogeneous fractions $ r/s $, where $ s $ is a homogeneous e\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_comp_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  {M N : SheafOfModules R} (f : SheafOfModules.unit R ⟶ M) (p : M ⟶ N),\\n  N.unitH\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $, and sheaves of modules $ M $ and $ N $ over $ R $, the equivalence between natural transformations $ \\\\eta: \\\\t\"}\n  {\"name\": \"AlgebraicGeometry.Proj.add_apply\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf\", \"type\": \"∀ {A : Type u_1} {σ : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {V : (TopologicalSpace.Opens ↑(ProjectiveSpectrum.top 𝒜))ᵒᵖ}\\n  (s t : ↑((AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf 𝒜).val.obj V)) (x : ↥(Opp\", \"doc\": \"For any sections $s$ and $t$ of the structure sheaf on the projective spectrum of a graded ring, and for any point $x$ in their domain, the evaluation of the sum $s + t$ at $x$ equals the sum of the e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.add_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {U : X.Opens} (φ ψ : M ⟶ N),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app (φ + ψ) U =\\n    AlgebraicGeometry.Scheme.Modules.Hom.app φ U + AlgebraicGeometry.Scheme.Modules.Hom.app ψ U\", \"doc\": \"For any scheme $X$ and sheaves of modules $M,N$ over its structure sheaf, given homomorphisms $\\\\phi,\\\\psi:M\\\\to N$ and an open subset $U\\\\subseteq X$, the component of $\\\\phi+\\\\psi$ at $U$ satisfies $(\\\\phi\"}\n  {\"name\": \"SheafOfModules.unitHomEquiv_symm_comp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {R : CategoryTheory.Sheaf J RingCat} [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)]\\n  {M N : SheafOfModules R} (s : M.sections) (p : M ⟶ N),\\n  CategoryTheory.Categor\", \"doc\": \"For any sheaf of modules $M$ and $N$ over a sheaf of rings $R$, any global section $s$ of $M$, and any morphism $p: M \\to N$, the composition of the inverse unit hom equivalence applied to $s$ followed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: all returned hits were read; none states the scheme line-bundle degree/section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "degree.*(dual|nonneg)|Hom.*(tensor|dual)",
+   "results": "{\"t\": \"2026-10-23T04:08:27Z\", \"tool\": \"grep\", \"query\": \"degree.*(dual|nonneg)|Hom.*(tensor|dual)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/GammaSpecAdjunction.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\", \"Mathlib/AlgebraicGeometry/Group/Affine.lean\"], \"digest\": \"10f97195862ed56c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; ring-level Picard-group identities and polynomial degrees do not state the proper-curve sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The degree of an invertible sheaf with a nonzero global section on a proper integral curve is nonnegative",
+   "results": "{\"t\": \"2026-10-23T04:08:28Z\", \"tool\": \"leansearch\", \"query\": \"The degree of an invertible sheaf with a nonzero global section on a proper integral curve is nonnegative\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.zero_le_degree_iff\", \"AlgebraicGeometry.Scheme.component_nontrivial\", \"MeromorphicOn.AnalyticOnNhd.divisor_nonneg\", \"LaurentPolynomial.degree\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.IsFraction\", \"Polynomial.natDegree_pos_of_nextCoeff_ne_zero\", \"WeierstrassCurve.natDegree_Ψ₃_pos\", \"FractionalIdeal.count_coe_nonneg\"], \"digest\": \"6939e8474ed3eec4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; ring-level Picard-group identities and polynomial degrees do not state the proper-curve sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"degree\"",
+   "results": "{\"t\": \"2026-10-23T04:08:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInvertible\\\", \\\"degree\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; ring-level Picard-group identities and polynomial degrees do not state the proper-curve sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero homomorphism of line bundles on a proper integral curve corresponds to a nonzero section of target tensor source dual and its degree is the nonnegative difference of degrees",
+   "results": "{\"t\": \"2026-10-23T04:08:30Z\", \"tool\": \"leanfinder\", \"query\": \"A nonzero homomorphism of line bundles on a proper integral curve corresponds to a nonzero section of target tensor source dual and its degree is the nonnegative difference of degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.natDegree_Φ_pos\", \"WeierstrassCurve.natDegree_preΨ_pos\", \"WeierstrassCurve.natDegree_preΨ'_pos\", \"WeierstrassCurve.natDegree_ΨSq_pos\", \"WeierstrassCurve.Affine.CoordinateRing.YClass_ne_zero\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\"], \"digest\": \"7e55c77c53e1291f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; ring-level Picard-group identities and polynomial degrees do not state the proper-curve sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible sheaves have duals, Hom of two line bundles is global sections of their tensor quotient, and degree is additive under tensor product",
+   "results": "{\"t\": \"2026-10-23T04:08:32Z\", \"tool\": \"leanfinder\", \"query\": \"Invertible sheaves have duals, Hom of two line bundles is global sections of their tensor quotient, and degree is additive under tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.inv_eq_dual\", \"instCommGroupPic\", \"CommRing.Pic.functor\", \"CommRing.Pic.mk_dual\", \"CommRing.Pic.mk_tensor\", \"CommRing.Pic.AsModule\", \"CommRing.Pic.instAddCommGroupAsModule\", \"CommRing.Pic.mk\"], \"digest\": \"bfd13bf0f8d8e70b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the returned signatures; ring-level Picard-group identities and polynomial degrees do not state the proper-curve sheaf assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-riemann-hurwitz-numerical",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), auxiliary high-genus-cover argument in the alteration reduction: the finite-curve genus comparison used to exclude rational curves. Riemann--Hurwitz for the separable factor, retaining the full effective different in wild characteristic (Stacks 0C1B). Original item Steps 3 and 5: the nonzero differential gives a global section of the tensor-dual line bundle, and evaluation plus tensor additivity identifies its nonnegative degree with the difference of the two line-bundle degrees.",
+   "via": [
+    "lem-sfb-curve-riemann-hurwitz-numerical",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-nonzero-line-map-degree",
+  "worker": "stage1",
+  "summary": "Repair of side-completion promotion return: rebased retained four-step split against the current live unsplit item and re-read every cited statement. Statement, statement dependencies, source, created fields and blueprint unchanged. Reuse invertible-dual/evaluation, tensor-degree-additivity and section-degree-positivity; retain the explicit Hom-to-sections construction. Step 3 now states the inverse induced cohomology maps establishing degree invariance and cites the Euler-characteristic definition explicitly. No new nodes; all citation quotes rechecked.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images proof (3), auxiliary high-genus-cover branch through lem-sfb-curve-riemann-hurwitz-numerical Steps 3 and 5: the differential gives a nonzero section of the tensor-dual bundle and its degree is the nonnegative degree difference. The existing from.node is null because the imported ancestry chain is broken; its recorded place and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-tensor-dual-invertible",
+    "why": "General invertible-sheaf dual, tensor and evaluation identities needed for the tensor-dual bundle; no corresponding node of this unit states them."
+   },
+   {
+    "node": "lem-trf-curve-degree-tensor-additive",
+    "why": "General proper dimension-at-most-one tensor-degree formula used twice; the current unit has no degree-additivity node."
+   },
+   {
+    "node": "lem-trf-curve-section-degree-positivity",
+    "why": "General proper integral curve nonzero-section degree inequality applied to the constructed section; the current unit has no such theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-tensor-dual-invertible",
+  "lem-trf-curve-degree-tensor-additive",
+  "lem-trf-curve-section-degree-positivity"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-O1-c28d22010",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-c28d22010 (reviewer sub-agent of L); spot-checked: This is a re-push of the side completion b5f14d5f, which I passed earlier; L returned it as not promoted. The item is still unsplit with no proof in both the live and side-live DAG, and no repair note exists for it. I diffed this head against the earlier head. The only changes are one sentence added to Step 3 and the summary text. The new sentence says that the evaluation isomorphism and its inverse induce inverse maps on every H^i, so the Euler characteristics are equal. It also adds def-pc-euler-characteristic to Step 3 and to proof_deps. The sentence is correct. I re-read all 4 steps in full. Step 1: lem-pc-tensor-dual-invertible holds on any scheme. Step 2: I checked the frame change by hand (h'=uv^{-1}h, (e_A')^vee=u^{-1}e_A^vee). The local sections glue, the inverse exists, the map is linear, and s=0 exactly when phi=0. Step 3: deg O=0, lem-trf-curve-degree-tensor-additive applies with dimension <=1, and both degree identities follow. Step 4: clause 1 of lem-trf-curve-section-degree-positivity, with all its hypotheses met. Sources match: Stacks 0B40(1) and (5), 0AYX in rank one, and Modules 01CT(1)-(2). Small cases hold: P^1, A=B, the zero map, singular curves and non-closed k. No duplicate node exists. No SGA is cited. Batch-5 check: both flagged trf citations (curve-degree-tensor-additive and curve-section-degree-positivity) are generic Stacks degree facts on proper curves. Their DAG closures contain only coherent cohomology, spectral-sequence, Chow and proper-quasi-finite nodes, and no trace, local-term, Poincare-duality, assumption-leaf or batch-4 target node. They are not part of the trace formula or Poincare duality, so I accept them, together with the 3 tool_uses, as generic black-box tools. Maintainer notes: blueprint.from.node is null, inherited from the ancestry record. The worker reported one read-only git command, which wrote nothing. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveNonzeroLineMapDegree",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_nonzero_line_map_degree",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveNonzeroLineMapDegree.lean",
+  "statement": "theorem curve_nonzero_line_map_degree (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hC : topologicalKrullDim C = 1) (A B : C.Modules) [A.IsInvertible] [B.IsInvertible] : (dual A).IsInvertible ∧ (B ⊗ dual A).IsInvertible ∧ IsIso (dualEvaluation A) ∧ (dual A).degree k = -A.degree k ∧ (B ⊗ dual A).degree k = B.degree k - A.degree k ∧ ∃ E : (A ⟶ B) ≃+ Γ(B ⊗ dual A, ⊤), (∀ (r : Γ(C, ⊤)) (φ : A ⟶ B), E (φ ≫ B.smulHom r) = r • E φ) ∧ (∀ φ : A ⟶ B, homOfGlobalSection (B ⊗ dual A) (E φ) = Hom.adjointSection φ) ∧ (∀ φ : A ⟶ B, φ ≠ 0 → E φ ≠ 0 ∧ 0 ≤ (B ⊗ dual A).degree k)",
+  "branch": "sheaf-dag",
+  "by": "Q109",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-15b719cc5",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Only the item lean record and one module CurveNonzeroLineMapDegree.lean (one sorry theorem, no defs); statement verbatim. Hypotheses match the recorded deps (Field, IsIntegral, IsProper over Spec k, topologicalKrullDim C = 1, Scheme.Modules.IsInvertible) with nothing stronger. ⊗ on C.Modules is SheafOfModules.monoidalCategory, the same construction as the recorded cochainModulesMonoidal (only the Prop argument differs). dualEvaluation is the true evaluation. E : (A ⟶ B) ≃+ Γ(B ⊗ Aᵛ, ⊤) is Γ(C,O)-linear via smulHom and uniquely pinned by homOfGlobalSection (E φ) = Hom.adjointSection φ (inv ev ≫ φ ▷ Aᵛ = the node's h e_B ⊗ e_A^∨ formula); homOfGlobalSection is injective. Degree identities and the nonzero ⇒ (E φ ≠ 0 ∧ deg ≥ 0) clause present. Edge cases (φ=0, A=B, P¹ O(a)→O(b), singular curves, non-closed k, frame change) OK. Upstream helpers have no owning node. Docstrings/source/blueprint OK; second reading is a self-check (no sub-agent allowed). No compile needed (no changes)."
+ }
+}

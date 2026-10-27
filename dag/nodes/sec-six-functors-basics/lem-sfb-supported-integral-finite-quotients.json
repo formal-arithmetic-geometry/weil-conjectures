@@ -1,0 +1,141 @@
+{
+ "id": "lem-sfb-supported-integral-finite-quotients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Integral closed-fibre comparison: Supported finite quotients and scalar-coordinate pullback",
+   "via": [
+    "lem-sfb-supported-integral-model-restriction-tower",
+    "lem-sfb-supported-three-term-scalar-rigidity",
+    "lem-sfb-closed-torsion-rigidity-serre-transfer",
+    "lem-sfb-proper-wcontractible-closed-fibre-rigidity",
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sfb-qcqs-proper-hull-tail-bound",
+    "lem-sfb-qcqs-proper-localizing-coproducts",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Supported finite quotients and scalar-coordinate pullback",
+ "statement": "For an integral coefficient ring R topologically isomorphic to Z_ell, with pi corresponding to ell, or to the integers of a finite extension of Q_ell, with pi generating the maximal ideal, let t:T0→T be a closed immersion of qcqs schemes and p:S→T a path in the qcqs open/closed support tree. For any scalar coordinates c0 and c as in def-sfb-supported-integral-model-tower-data, normalized pullback coordinates exist. Every supported ordinary quotient of a finite scalar local model is classical in the fixed R-module coordinates, is annihilated by pi^(n+1), and is annihilated by a uniform power of ell on all sections.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(2), integral closed-fibre comparison; Supported finite quotients and scalar-coordinate pullback"
+ },
+ "stmt_deps": [
+  "def-sfb-supported-integral-model-tower-data",
+  "def-sfb-qcqs-open-closed-tree",
+  "sk-thm-pe-classical-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "1. Transport the continuous coefficient ring along the given topological ring isomorphism.\nFor the valuation-ring case, two generators of the maximal ideal differ by a unit;\ntransport multiplication and each quotient projection along these units. The integral\nquotient normalization identifies each positive quotient with a finite discrete ring.\nThe prime ell lies in the uniformizer ideal, so its (n+1)-st power kills that quotient.\n2. On each finite scalar-model chart, exact scalar extension takes a finite presentation\nto the presentation of the ordinary quotient. Its finite quotient model is locally\nconstant. Extend the finite constructible strata through each support edge, adjoining\nthe complementary stratum with zero module. Exactness and scalar linearity preserve\nthe quotient relation and ell-power annihilation on these extensions.\n3. Constructible pro-etale sheaves with finite discrete coefficients are classical.\nForgetting to sets preserves this assertion; the specified scalar coordinates identify\nthe underlying sheaf and the action, giving all three displayed properties.\n4. Restrict continuous coefficients to constant scalars. The cartesian coefficient square\nidentifies this restriction before and after geometric inverse image. In section-action\ncoordinates its underlying direct-image map is identity. Conjugate by the prescribed\nunderlying coordinate isomorphisms to get lower_normalization. The adjunction mate is\ninvertible by the cartesian square; it gives upper and exactly the required mate equation.\nThe zero quotient, empty schemes and identity support path obey the same formulas.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-integral-quotient-resolution-normalization",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-finite-model-sheaf-quotient-constructible",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "lem-pe-finite-discrete-scalar-constant-models",
+    "det-pe-constructible-comparison-classical",
+    "sk-thm-pe-classical-sheaves",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "Supported finite quotients and scalar-coordinate pullback; original supported restriction-tower plan"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-integral-quotient-resolution-normalization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-finite-model-sheaf-quotient-constructible",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "lem-pe-finite-discrete-scalar-constant-models",
+  "det-pe-constructible-comparison-classical",
+  "sk-thm-pe-classical-sheaves",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Supported integral restriction-tower plan, specialized into the displayed Lean interface"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally constant integral module on the pro etale site has classical finite quotients compatible with restriction and extension by zero",
+   "results": "CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.isDiscrete_tfae, locally constant module constructions; no scheme support or strict derived tower statement.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of an integral locally constant module are reconstructed from the strict ordinary uniformizer quotient tower, compatibly with pullback",
+   "results": "BDeRhamPlus, BDeRham, AdicCompletion.eval_comp_of, and IsAdicComplete.StrictMono scalar limit lemmas; no module-sheaf endpoint or restriction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerivedPullback",
+   "results": "No hits, identifier is outside Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restriction.*[Ll]imit|[Ll]imit.*restriction|quotient.*[Cc]lassical in Mathlib/CategoryTheory and Mathlib/Algebra/Homology",
+   "results": "Only SmallObject iteration restrictionLT limit lemmas. No pro-etale or normalized strict derived tower reconstruction.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SupportedIntegralModelRestrictionTower",
+  "date": "2026-10-24",
+  "group": "C4"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportedIntegralFiniteQuotients",
+  "file": "lean/Sheaf/Paper/SupportedIntegralFiniteQuotients.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedIntegral.supported_integral_finite_quotients",
+  "statement": "theorem supported_integral_finite_quotients\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]\n    [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (π : R)\n    (hR :\n      (∃ e : R ≃+* ℤ_[ℓ], Continuous e ∧ Continuous e.symm ∧ e π = (ℓ : ℤ_[ℓ])) ∨\n      (letI := spectralNorm.nontriviallyNormedField (Padic ℓ) E\n       ∃ e : R ≃+* Padic.coefficientExtensionIntegers ℓ E,\n         Continuous e ∧ Continuous e.symm ∧\n         Ideal.span ({e π} : Set (Padic.coefficientExtensionIntegers ℓ E)) =\n           Padic.coefficientExtensionMaximalIdeal ℓ E))\n    {T₀ T S : Scheme.{u}} [CompactSpace T] [QuasiSeparatedSpace T]\n    [CompactSpace T₀] [QuasiSeparatedSpace T₀]\n    (t : T₀ ⟶ T) [IsClosedImmersion t]\n    (tree : QcqsOpenClosedTree T) (p : tree.Path S)\n    (c₀ : Coordinates R T₀) (c : Coordinates R T) :\n    Nonempty (PullbackCoordinates R t c₀ c) ∧\n    (∀ (M : Models R S) (n : ℕᵒᵖ),\n      IsClassical ((sheafCompose (Scheme.ProEt.topology T)\n        (forget (ModuleCat.{u + 1} (ULift.{u + 1} R)))).obj\n          ((((supportedQuotients R p π) ⋙ towerMap c.functor).obj M).obj n))) ∧\n    (∀ (M : Models R S) (n : ℕ) (V : T.ProEtᵒᵖ),\n      (((((supportedQuotients R p π) ⋙ towerMap c.functor).obj M).obj (op n)).obj.obj V).smul\n        (ULift.up (π ^ (n + 1))) = 0) ∧\n    (∀ (M : Models R S) (n : ℕ), ∃ k : ℕ, ∀ (V : T.ProEtᵒᵖ)\n      (x : ((((supportedQuotients R p π) ⋙ towerMap c.functor).obj M).obj (op n)).obj.obj V),\n      (ℓ ^ k) • x = 0)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-d99ce",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261024T184736-L-3158392",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-d99ce",
+  "group": "C4",
+  "result": "fix",
+  "landing": "20261024T184736-L-3158392",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (byte-identical after letI restore) and node lean.statement; three new sorried statements vs their nodes and the definitions in SupportedIntegralModelTowerData / RestrictionComparison; item proof vs node proof steps; compiled 4 modules + #print axioms"
+ }
+}

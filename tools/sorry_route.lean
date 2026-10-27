@@ -57,11 +57,20 @@ def run (targetMods : Array Name) (stops : Array Name := #[]) (stopMods : Array 
   let mut decls : Std.HashMap Name (Array Name) := {}
   let mut owners : Std.HashMap Name (Array (Name × ConstantInfo)) := {}
   let mut todo := targetMods
+  let mut missing : Array Name := #[]
   while h : todo.size > 0 do
     let m := todo.back
     todo := todo.pop
     if imports.contains m then continue
-    let md ← readFull m
+    -- 2026-10-23: a module without a compiled file (quarantined, or restored but not built yet) must not abort the
+    -- walk (batches 3/4 failed on Sheaf.Paper.FiniteCoefficientReductionFlatModel): print `MISSING m` and do not
+    -- enter it; the walk prints `UNOWNED n` for the names it meets that no loaded module declares, and
+    -- tools/sorry_route.py counts as open the missing module's (DAG-recorded) declarations among them
+    let md? ← try pure (some (← readFull m)) catch e => do IO.println s!"MISSING {m} {e}"; pure none
+    if md?.isNone then
+      imports := imports.insert m #[]
+      missing := missing.push m
+    let some md := md? | continue
     let imps := (md.imports.map (·.module)).filter isProject
     imports := imports.insert m imps
     decls := decls.insert m md.constNames
@@ -85,6 +94,7 @@ def run (targetMods : Array Name) (stops : Array Name := #[]) (stopMods : Array 
   let mut cache : Std.HashMap Name NameSet := {}
   let mut stack := targets
   let mut out : Array (Name × Name) := #[]
+  let mut unowned : NameSet := {}
   while h : stack.size > 0 do
     let (ctx, n) := stack.back
     stack := stack.pop
@@ -105,7 +115,10 @@ def run (targetMods : Array Name) (stops : Array Name := #[]) (stopMods : Array 
     if vc.contains ``sorryAx || tc.contains ``sorryAx then out := out.push (n, m)
     for c in tc ++ vc do
       if owners.contains c then stack := stack.push (m, c)
+      else if !missing.isEmpty then unowned := unowned.insert c
   for (d, m) in out do
     IO.println s!"ROUTE {m} {d}"
+  for n in unowned do
+    IO.println s!"UNOWNED {n}"
 
 end SorryRoute

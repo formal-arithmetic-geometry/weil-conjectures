@@ -1,0 +1,433 @@
+{
+ "id": "lem-sfb-symbol-cutoff-scaled-derivatives",
+ "kind": "statement",
+ "title": "Derivative bounds for a dilated smooth cutoff",
+ "statement": "Use the real field [def-weil-field] and smooth functions in Euclidean coordinates [def-sfb-smooth-real-manifold]. Let $m\\geq1$ and let $\\theta:\\mathbf R^m\\to\\mathbf R$ be smooth, equal to $0$ on $\\{|\\xi|\\leq1\\}$ and equal to $1$ on $\\{|\\xi|\\geq2\\}$. For $R\\geq1$ put $\\theta_R(\\xi)=\\theta(\\xi/R)$. The function $\\theta_R$ is smooth. For every $n\\in\\mathbf N$ there is a constant $A_n\\geq1$, depending only on $n,m$ and $\\theta$, such that for every multi-index $\\gamma$ with $|\\gamma|\\leq n$ and every $\\xi\\in\\mathbf R^m$, $|\\partial^\\gamma\\theta_R(\\xi)|\\leq A_n(1+R)^{-|\\gamma|}$. For $\\gamma=0$, $\\theta_R(\\xi)=0$ when $|\\xi|\\leq R$; for $|\\gamma|>0$, $\\partial^\\gamma\\theta_R(\\xi)=0$ unless $R\\leq|\\xi|\\leq2R$.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Demailly, Differential and pseudodifferential operators on manifolds, §3.7, printed p.7 (PDF pp.7–8), equations in the cutoff proof immediately after the choice of θ; the scaled derivative estimate and annular support."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-smooth-real-manifold"
+ ],
+ "proof": [
+  {
+   "text": "Put $L_R(x)=R^{-1}x$, a continuous real-linear map since $R\\geq1$. By [lem-sfb-real-smooth-differentiation], $\\theta_R=\\theta\\circ L_R$ is smooth. The same node shows that each coordinate partial of a smooth function is smooth: compose its smooth differential with the continuous linear evaluation $T\\mapsto T(e_j)$. For any ordered list $I$ of $k$ coordinate directions, prove $\\partial_I(\\theta\\circ L_R)=R^{-k}(\\partial_I\\theta)\\circ L_R$ by induction on $k$. The empty list is the identity. Given the formula for $I$, differentiate in direction $e_j$; the chain rule gives $D(\\partial_I\\theta)(L_Rx)[R^{-1}e_j]=R^{-1}\\partial_j\\partial_I\\theta(L_Rx)$, and the constant factor $R^{-k}$ remains. This proves the formula for every list, hence for the fixed coordinate ordering defining every multi-index $\\gamma$, with $k=|\\gamma|$.",
+   "uses": [
+    "lem-sfb-real-smooth-differentiation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Calculus/ContDiff/Basic.lean",
+    "place": "ContinuousLinearMap.contDiff and ContinuousLinearMap.iteratedFDeriv_comp_right, lines 161 and 461–467; agent coordinate induction from the real chain rule."
+   }
+  },
+  {
+   "text": "If $|x|\\leq R$, then $|x/R|\\leq1$, so $\\theta_R(x)=0$. On the open sets $|x|<R$ and $|x|>2R$, respectively, $\\theta_R$ is identically $0$ and $1$. Every positive coordinate derivative vanishes there: the first derivative is zero by the difference quotient of a locally constant function, and induction applies because that derivative is identically zero on the same open set. Thus positive derivatives vanish outside $R\\leq|x|\\leq2R$. The same argument at $R=1$ gives vanishing of positive derivatives of $\\theta$ outside the closed annulus $1\\leq|x|\\leq2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: §3.7 cutoff argument; agent proof directly from local difference quotients and the stated cutoff values."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-dimensional-normed-proper] to $\\mathbf R^m$ over the usual locally compact nontrivially normed field $\\mathbf R$: the coordinate basis is finite, so $K=\\{y:|y|\\leq2\\}$ is compact. By step 1 each $\\partial^\\gamma\\theta$ is smooth, hence continuous. Apply [lem-sfb-compact-continuous-norm-bound] to each scalar-valued function $\\partial^\\gamma\\theta$ on $K$ (target $\\mathbf R^1$). There are finitely many $\\gamma\\in\\mathbf N^m$ with $|\\gamma|\\leq n$, since each entry is at most $n$. Take $C_n$ to be the maximum of $1$ and their finitely many bounds. Off $K$, the order-zero function equals $1$, and every positive derivative is zero by step 2. Consequently $|\\partial^\\gamma\\theta(y)|\\leq C_n$ for all $y$ and $|\\gamma|\\leq n$, with $C_n$ depending only on $n,m,\\theta$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-normed-proper",
+    "lem-sfb-compact-continuous-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Module/FiniteDimension.lean",
+    "place": "FiniteDimensional.proper, lines 553–556, and proper_real, lines 562–564; Mathlib/Analysis/Normed/Group/Bounded.lean, IsCompact.exists_bound_of_continuousOn generated at lines 96–100."
+   }
+  },
+  {
+   "text": "Set $A_n=2^n C_n\\geq1$. For $k=|\\gamma|\\leq n$, steps 1 and 3 give $|\\partial^\\gamma\\theta_R(x)|\\leq C_nR^{-k}$. Since $R\\geq1$, $(1+R)/R\\leq2$, so $R^{-k}\\leq2^k(1+R)^{-k}\\leq2^n(1+R)^{-k}$. This is the required estimate, uniformly for all $R\\geq1$. For $k=0$ this is simply the global bound for $\\theta$, including when $n=0$. Together with smoothness and the support assertions in steps 1–2, it proves every clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-hodge-ams.pdf",
+    "place": "WANTED locally: §3.7 scaled-cutoff estimate; agent elementary comparison of R and 1+R."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-real-smooth-differentiation",
+  "lem-sfb-finite-dimensional-normed-proper",
+  "lem-sfb-compact-continuous-norm-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "The cited Demailly §3.7 is unavailable locally; complete agent proof from the three cited existing Mathlib leaf nodes, following the inherited cutoff route."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derivative bounds for a smooth cutoff scaled by R, supported in an annulus of radii R and 2R",
+   "results": "ContDiffBumpBase.ofInnerProductSpace; ContDiffBump.toFun; ContDiffBump.rIn_lt_rOut; ExistsContDiffBumpBase.instHasContDiffBumpOfFiniteDimensionalReal; no declaration states the requested scaled derivative estimate for an arbitrary fixed θ.",
+   "date": "2026-10-24",
+   "verdict": "no match: Mathlib supplies bump existence and support, but not this explicit multi-index scaling estimate for a given cutoff."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounds on derivatives of a dilated smooth bump function and its support",
+   "results": "ContDiffBumpBase.ofInnerProductSpace; ExistsContDiffBumpBase.y_support; ContDiffBump.toFun; HasCompactSupport.deriv; no exact scaled estimate.",
+   "date": "2026-10-24",
+   "verdict": "no match: bump-function support results do not state the uniform R-scaled derivative estimate."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContDiffBumpBase, iteratedFDeriv",
+   "results": "0 hits.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "BumpFunction|smoothTransition|iteratedFDeriv.*scale|deriv.*scale",
+   "results": "Mathlib/Analysis/Calculus/BumpFunction/{FiniteDimension,SmoothApprox,Normed,InnerProduct,Convolution}.lean; no scaled derivative estimate declaration.",
+   "date": "2026-10-24",
+   "verdict": "no match: only bump constructors and support infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "iteratedFDeriv.*(comp|smul)|IsCompact.*bddAbove|iteratedFDeriv.*const",
+   "results": {
+    "t": "2026-10-24T07:45:01Z",
+    "tool": "grep",
+    "query": "iteratedFDeriv.*(comp|smul)|IsCompact.*bddAbove|iteratedFDeriv.*const",
+    "sub": "Analysis",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/SpecialFunctions/Bernstein.lean",
+     "Mathlib/Analysis/SpecialFunctions/Log/RpowTendsto.lean",
+     "Mathlib/Analysis/SpecialFunctions/Log/RpowTendsto.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean",
+     "Mathlib/Analysis/Fourier/FourierTransformDeriv.lean"
+    ],
+    "digest": "872baf2e941bfc45"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the full cutoff estimate, uniform in R, for arbitrary smooth theta constant on the prescribed regions."
+  },
+  {
+   "tool": "loogle",
+   "query": "iteratedFDeriv, ContinuousLinearMap",
+   "results": {
+    "t": "2026-10-24T07:45:01Z",
+    "tool": "loogle",
+    "query": "iteratedFDeriv, ContinuousLinearMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "norm_iteratedFDeriv_one",
+     "iteratedFDeriv_one_apply",
+     "DifferentiableAt.iteratedFDeriv_succ_apply_left'",
+     "norm_fderiv_iteratedFDeriv",
+     "norm_iteratedFDeriv_fderiv",
+     "iteratedFDeriv_succ_apply_left",
+     "iteratedFDeriv_two_apply",
+     "iteratedFDeriv_succ_apply_right"
+    ],
+    "digest": "16c13e1f7765f28e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the full cutoff estimate, uniform in R, for arbitrary smooth theta constant on the prescribed regions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterated Frechet derivative of a smooth function composed with scalar multiplication and boundedness of its derivatives on a compact set",
+   "results": {
+    "t": "2026-10-24T07:45:05Z",
+    "tool": "leanfinder",
+    "query": "Iterated Frechet derivative of a smooth function composed with scalar multiplication and boundedness of its derivatives on a compact set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "norm_iteratedFDerivWithin_clm_apply_const",
+     "norm_iteratedFDeriv_smul_le",
+     "norm_iteratedFDerivWithin_smul_le",
+     "ContDiffMapSupportedIn.bounded_iteratedFDeriv",
+     "norm_iteratedFDeriv_clm_apply_const",
+     "ContDiffMapSupportedIn.norm_iteratedFDeriv_apply_le_seminorm",
+     "norm_iteratedFDeriv_comp_le'",
+     "norm_iteratedFDeriv_comp_le"
+    ],
+    "digest": "7b813b14cd24fab3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the full cutoff estimate, uniform in R, for arbitrary smooth theta constant on the prescribed regions."
+  },
+  {
+   "tool": "grep",
+   "query": "iteratedFDeriv_comp_right|iteratedFDeriv_const|continuous_iteratedFDeriv",
+   "results": {
+    "t": "2026-10-24T07:45:27Z",
+    "tool": "grep",
+    "query": "iteratedFDeriv_comp_right|iteratedFDeriv_const|continuous_iteratedFDeriv",
+    "sub": "Analysis/Calculus",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Operations.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Basic.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Basic.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Basic.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Basic.lean",
+     "Mathlib/Analysis/Calculus/SmoothSeries.lean"
+    ],
+    "digest": "05fd6a18ee4451f5"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the full cutoff estimate, uniform in R, for arbitrary smooth theta constant on the prescribed regions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform derivative estimates for a smooth cutoff after dilation by a positive scale",
+   "results": {
+    "t": "2026-10-24T07:45:28Z",
+    "tool": "leansearch",
+    "query": "Uniform derivative estimates for a smooth cutoff after dilation by a positive scale",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "hasDerivWithinAt_comp_mul_left_smul_iff",
+     "hasFDerivWithinAt_comp_smul_smul_iff",
+     "HasCompactSupport.deriv",
+     "SchwartzMap.decay_smul_aux",
+     "mdifferentiableWithinAt_smul_const_section",
+     "Dilation.isUniformInducing",
+     "SchwartzMap.derivCLM",
+     "Dilation.lipschitz"
+    ],
+    "digest": "b91c27393aa1bade"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the full cutoff estimate, uniform in R, for arbitrary smooth theta constant on the prescribed regions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth function theta constant outside an annulus, all coordinate derivatives of theta(x/R) are bounded by a constant times R to the negative derivative order",
+   "results": {
+    "t": "2026-10-24T07:45:36Z",
+    "tool": "leanfinder",
+    "query": "For a smooth function theta constant outside an annulus, all coordinate derivatives of theta(x/R) are bounded by a constant times R to the negative derivative order",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SchwartzMap.decay",
+     "Function.HasTemperateGrowth",
+     "SchwartzMap.decay'",
+     "SchwartzMap.seminormAux_le_bound",
+     "Function.HasTemperateGrowth.norm_iteratedFDeriv_le_uniform_aux",
+     "Function.HasTemperateGrowth.isBigO_uniform",
+     "SchwartzMap.le_seminormAux",
+     "norm_jacobiTheta₂_term_fderiv_le"
+    ],
+    "digest": "e7f70c4ecbf9de38"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: these hits do not state the full cutoff estimate, uniform in R, for arbitrary smooth theta constant on the prescribed regions."
+  },
+  {
+   "tool": "grep",
+   "query": "isCompact_closedBall|proper_rclike",
+   "results": {
+    "t": "2026-10-24T07:50:17Z",
+    "tool": "grep",
+    "query": "isCompact_closedBall|proper_rclike",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/NumberTheory/LocalField/Basic.lean",
+     "Mathlib/Topology/Bornology/BoundedOperation.lean",
+     "Mathlib/Topology/MetricSpace/Lipschitz.lean",
+     "Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean",
+     "Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean",
+     "Mathlib/Topology/MetricSpace/Pseudo/Lemmas.lean",
+     "Mathlib/Topology/MetricSpace/ProperSpace/Lemmas.lean"
+    ],
+    "digest": "a3640d3fd41055c1"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting search: compact-ball fact already supplied by existing node lem-sfb-finite-dimensional-normed-proper; no new node created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed Euclidean balls are compact in every finite dimension including dimension zero",
+   "results": {
+    "t": "2026-10-24T07:50:18Z",
+    "tool": "leansearch",
+    "query": "Closed Euclidean balls are compact in every finite dimension including dimension zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Euclidean.isCompact_closedBall",
+     "ProperSpace.isCompact_closedBall",
+     "FiniteDimensional.proper_real",
+     "instCompactSpaceElemClosedBallOfProperSpace",
+     "Euclidean.closedBall",
+     "Metric.sphere.compactSpace",
+     "FiniteDimensional.proper",
+     "TopCat.instCompactSpaceCarrierDisk"
+    ],
+    "digest": "dcb096a064421741"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting search: compact-ball fact already supplied by existing node lem-sfb-finite-dimensional-normed-proper; no new node created."
+  },
+  {
+   "tool": "loogle",
+   "query": "Metric.isCompact_closedBall",
+   "results": {
+    "t": "2026-10-24T07:50:18Z",
+    "tool": "loogle",
+    "query": "Metric.isCompact_closedBall",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'Metric.isCompact_closedBall'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting search: compact-ball fact already supplied by existing node lem-sfb-finite-dimensional-normed-proper; no new node created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed ball in a finite dimensional real normed vector space is compact",
+   "results": {
+    "t": "2026-10-24T07:50:18Z",
+    "tool": "leanfinder",
+    "query": "A closed ball in a finite dimensional real normed vector space is compact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Euclidean.isCompact_closedBall",
+     "FiniteDimensional.of_isCompact_closedBall",
+     "FiniteDimensional.of_isCompact_closedBall₀",
+     "FiniteDimensional.proper_real",
+     "FiniteDimensional.proper_rclike",
+     "TopCat.instCompactSpaceCarrierDisk",
+     "FiniteDimensional.proper",
+     "LocallyCompactSpace.of_finiteDimensional_of_complete"
+    ],
+    "digest": "a01bd4c45317c8f8"
+   },
+   "date": "2026-10-24",
+   "verdict": "supporting search: compact-ball fact already supplied by existing node lem-sfb-finite-dimensional-normed-proper; no new node created."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-symbol-dilated-cutoff-estimates",
+  "date": "2026-10-24",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting cutoff argument in the proof of det-thm-sf-ctf-stability-direct-images (3), Demailly §3.7 p.7: scaled cutoff derivative estimates used in the Leibniz bound.",
+   "via": [
+    "lem-sfb-symbol-dilated-cutoff-estimates",
+    "lem-sfb-symbol-borel-cutoff",
+    "lem-sfb-pseudodifferential-asymptotic-sum",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-symbol-cutoff-scaled-derivatives",
+  "worker": "stage1",
+  "summary": "Q44 checked the complete cutoff statement, found no project attachment, and gave a four-step coordinate induction, local-constancy support argument, compact-ball derivative bound, and explicit A_n=2^n C_n comparison. All three analytic inputs reuse existing Mathlib leaves; zero new nodes. No statement changed. Demailly is WANTED locally; proof is agent-written.",
+  "blueprint": "Supporting analytic cutoff argument inherited below det-thm-sf-ctf-stability-direct-images (3), through lem-sfb-symbol-dilated-cutoff-estimates. The latest blueprint direct-image paragraph itself contains no cutoff calculation; this is an existing agent expansion, not a change to the unit route. Existing null nearest-blueprint ancestor retained as returned by blueprint_refs.py ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-90518d144",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-90518d144 (reviewer sub-agent of L); spot-checked: Read the item, its parent and all cited nodes in full; the four-step proof is correct and complete. Only the split fields differ from NQ's created version; statement, stmt_deps, source and blueprint are unchanged; no new nodes. Step 1 uses lem-sfb-real-smooth-differentiation for linear smooth maps, composition, smooth Df and the chain rule, which give smooth partials as ev_{e_j}∘Df and the induction over ordered lists ∂_I(θ∘L_R)=R^{-k}(∂_Iθ)∘L_R; no Schwarz symmetry is needed. Step 2 is elementary: derivatives vanish on the open regions |x|<R and |x|>2R, and order-0 vanishing on the closed ball comes from the hypothesis. Step 3 uses lem-sfb-finite-dimensional-normed-proper (ℝ locally compact, so the closed 2-ball is compact) and lem-sfb-compact-continuous-norm-bound (target ℝ^1), plus finitely many γ; the bound is global because θ=1 and positive derivatives are 0 off the ball. Step 4: R≥1 gives R^{-k}≤2^k(1+R)^{-k}, so A_n=2^nC_n. Tested n=0, m=1, R=1, large R, the endpoints |ξ|=R and |ξ|=2R, and θ not confined to [0,1]. Mathlib source lines checked: ContDiff/Basic 161 and 461-467, FiniteDimension 553-564, Normed/Group/Bounded 96-100. All three cited nodes are Mathlib leaves of the same unit sk-thm-sf-ctf-stability, so no tool_uses are needed. rg over the DAG for cutoff, dilat and θ(ξ/R) finds no duplicate. Demailly is absent from literature and LIST.md, so the WANTED line and the agent proof_origin are correct. The null blueprint.from.node is inherited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.SymbolCutoffScaledDerivatives",
+  "declaration": "EuclideanSpace.exists_dilatedCutoff_derivative_bounds",
+  "file": "lean/Sheaf/Analysis/SymbolCutoffScaledDerivatives.lean",
+  "statement": "theorem exists_dilatedCutoff_derivative_bounds (m : ℕ) (hm : 1 ≤ m) (θ : EuclideanSpace ℝ (Fin m) → ℝ) (hθ : ContDiff ℝ ∞ θ) (hzero : ∀ ξ : EuclideanSpace ℝ (Fin m), ‖ξ‖ ≤ 1 → θ ξ = 0) (hone : ∀ ξ : EuclideanSpace ℝ (Fin m), 2 ≤ ‖ξ‖ → θ ξ = 1) : (∀ R : ℝ, 1 ≤ R → ContDiff ℝ ∞ (fun ξ ↦ θ (R⁻¹ • ξ))) ∧ (∀ n : ℕ, ∃ A : ℝ, 1 ≤ A ∧ ∀ R : ℝ, 1 ≤ R → ∀ γ : Fin m → ℕ, (∑ j, γ j) ≤ n → ∀ ξ : EuclideanSpace ℝ (Fin m), ‖iteratedFDeriv ℝ (List.ofFn (fun j : Fin m ↦ List.replicate (γ j) j)).flatten.length (fun x ↦ θ (R⁻¹ • x)) ξ (fun i ↦ EuclideanSpace.single ((List.ofFn (fun j : Fin m ↦ List.replicate (γ j) j)).flatten.get i) 1)‖ ≤ A * (1 + R) ^ (-((∑ j, γ j) : ℤ))) ∧ (∀ R : ℝ, 1 ≤ R → ∀ ξ : EuclideanSpace ℝ (Fin m), ‖ξ‖ ≤ R → θ (R⁻¹ • ξ) = 0) ∧ (∀ R : ℝ, 1 ≤ R → ∀ γ : Fin m → ℕ, 0 < (∑ j, γ j) → ∀ ξ : EuclideanSpace ℝ (Fin m), ¬ (R ≤ ‖ξ‖ ∧ ‖ξ‖ ≤ 2 * R) → iteratedFDeriv ℝ (List.ofFn (fun j : Fin m ↦ List.replicate (γ j) j)).flatten.length (fun x ↦ θ (R⁻¹ • x)) ξ (fun i ↦ EuclideanSpace.single ((List.ofFn (fun j : Fin m ↦ List.replicate (γ j) j)).flatten.get i) 1) = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1377ab9b7",
+  "group": "Q131",
+  "result": "fix",
+  "note": "Lean statement EuclideanSpace.exists_dilatedCutoff_derivative_bounds matches every clause of the node: m≥1; θ smooth ℝ^m→ℝ, 0 on ‖ξ‖≤1, 1 on ‖ξ‖≥2; θ_R=θ(R⁻¹•ξ) smooth for R≥1; ∀n ∃A≥1 chosen before R,γ,ξ; ∂^γ as iteratedFDeriv on replicated unit vectors (γ=0 gives θ_R itself); bound A(1+R)^(-|γ|); order-0 vanishing on ‖ξ‖≤R; positive-order vanishing off the closed annulus for all orders. Edge cases n=0, R=1, endpoints and θ outside [0,1] checked; no universes; no defs or duplicate notion (complex multiIndexPartialDeriv not copied); proof sorry only; docstrings carry source, blueprint id and proof steps; lean.statement verbatim; item changed only in lean. Only fault H11: the second reading is a same-worker rereading. Fixed by fixes/lem-sfb-symbol-cutoff-scaled-derivatives.report.md (worker report verbatim plus independent clause-by-clause second reading). No Lean change, no compile."
+ }
+}

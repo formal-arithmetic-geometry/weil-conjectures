@@ -1,0 +1,126 @@
+{
+ "id": "lem-pur-finite-proper-compositor-mate",
+ "kind": "statement",
+ "title": "Intrinsic finite direct-image compositor conjugacy",
+ "statement": "Fix the finite coefficient datum P of [def-pur-conventions]. For any schemes X,Y,Z and composable maps f:X→Y, g:Y→Z use the ordinary intrinsic unbounded operations, normalized adjunction adj, pullback compositor comp, realization equivalences and transported K-injective compositor kappa constructed in [def-pur-finite-proper-product-maps]. Then kappa(f,g) inverse is exactly the adjunction conjugate of comp(f,g).hom from the composite adjunction adj(g).comp(adj(f)) to adj(f≫g). This is an equality of natural transformations, with no properness or boundedness assumption.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+ },
+ "stmt_deps": [
+  "def-pur-finite-proper-product-maps",
+  "def-pur-conventions",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof": [
+  {
+   "text": "The fixed-scalar direct-image compositor is conjugate to the fixed-scalar pullback compositor by the normalization calculation of [lem-pur-ordinary-derived-composite-transpose].",
+   "uses": [
+    "lem-pur-ordinary-derived-composite-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+   }
+  },
+  {
+   "text": "Use the section-normalized intrinsic realization/direct-image comparisons of [def-weil-proetale-inverse-image]. Both intrinsic adjunctions are transported from the same ordinary fixed-scalar adjunctions. Their derived unit/counit equations give the same conjugate after deriving the exact realization equivalences. Expand pushModel and iteratedPushModel; cancel the middle realization units/counits by the triangle identities. What remains is precisely kappa.inv = conjugate(comp.hom), for the specified intrinsic comp.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4, 07A6, 0D6D, 0D6E and 0E48 (remark-compatible-with-diagram and equation-projection-formula-map); agent-formulated normalization and symmetry consequences used in the proper-product paragraph of literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-ordinary-derived-composite-transpose"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit realization/mate or signed symmetry calculation in the cited proper-product argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The transpose of the ordinary external product defined by exchange and projection is the tensor of pullback counits and is invariant under swapping the factors",
+   "results": "8 hits including CategoryTheory.MonoidalCategory.externalProductSwap, externalProductFlip and frobeniusMorphism_mate. They concern abstract external products or cartesian closed functors, not the specified intrinsic derived comparisons and transported direct-image compositor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse direct image compositor is the adjunction mate of pullback composition for intrinsic constant coefficient derived sheaves",
+   "results": "8 hits including SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, and Functor.sheafPullbackConstruction.sheafAdjunctionContinuous. These are underived module-sheaf comparisons or abstract adjunctions; the intrinsic derived realization transport is not supplied.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sfIntrinsicDerivedPullbackComp|canonicalFinitePullbackTensor_composition_condition|conjugateEquiv_counit",
+   "results": "Mathlib CategoryTheory/Adjunction/Mates.lean:285 and 291 give conjugateEquiv_counit and its converse. These prove formal transpose consequences after the intrinsic compositor conjugacy is supplied, not that conjugacy itself. Local rg also inspected the actual intrinsic composition and realization constructions.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteProperProductTranspose",
+  "date": "2026-10-26",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-affine-space-composition-law",
+   "place": "Steps 3--4, proper-product interchange: the specified K-injective compositor must preserve the actual ordinary derived adjunction after intrinsic realization transport.",
+   "via": [
+    "lem-pur-finite-proper-product-transpose",
+    "lem-pur-finite-forward-product-symmetry",
+    "lem-pur-affine-space-trace-factorization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteProperCompositorMate",
+  "file": "lean/Sheaf/Paper/FiniteProperCompositorMate.lean",
+  "declaration": "WeilConjectures.FiniteProperProduct.finiteProperCompositorMate",
+  "statement": "theorem finiteProperCompositorMate (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) : (kappa P f g).inv = conjugateEquiv ((adj P g).comp (adj P f)) (adj P (f ≫ g)) (comp P f g).hom",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5f2f8",
+  "group": "S9",
+  "result": "fix",
+  "landing": "20261026T002706-L-108957",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery 5f2f vs 1cd1 (Lean+nodes byte-identical); item/leg vs clone; 5 downstream modules compiled against delivered set; change-record Users vs computed users"
+ }
+}

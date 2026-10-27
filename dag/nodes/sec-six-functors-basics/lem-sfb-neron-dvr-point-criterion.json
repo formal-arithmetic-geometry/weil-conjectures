@@ -1,0 +1,389 @@
+{
+ "id": "lem-sfb-neron-dvr-point-criterion",
+ "kind": "statement",
+ "title": "Essentially smooth DVR point criterion for Néron lft-models",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $K=\\operatorname{Frac}(R)$ and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. A commutative group scheme over a base has multiplication, inverse and identity morphisms over that base satisfying the commutative group identities. Separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. Let $N$ be a smooth separated $S$-group scheme, locally of finite type, with finite-type generic fibre $G$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]. Then the following are equivalent: (i) for every smooth $S$-scheme $X$, restriction is a bijection $\\operatorname{Hom}_S(X,N)\\simeq\\operatorname{Hom}_K(X_K,G)$ [def-pc-base-change]; (ii) for every local injective extension of discrete valuation rings $R\\to A$ for which $A$ is a local ring at a point of a smooth $R$-scheme, restriction $N(A)\\to G(\\operatorname{Frac}A)$ is surjective. Thus (i) says that $N$ is a Néron lft-model of $G$. Neither quasi-compactness of $N$ nor excellence, completeness or perfection of residue fields is required.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension. Local PDF WANTED; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change"
+ ],
+ "proof": [
+  {
+   "text": "Fix a uniformizer $\\pi$ of $R$. The DVR definition makes $R$ Noetherian; [lem-sc-dvr-dimension-one] gives dimension one. The only primes are $(0)$ and the maximal ideal: an intermediate nonzero prime would give a chain of length two. Thus its prime localizations are the field $K$ and $R$ itself, both regular local by the generator definition [def-weil-regular-scheme]. Hence $R$ is regular and normal by [lem-weil-pbc-regular-ring-normal]. For any smooth $S$-scheme $Y$, its affine smooth charts are regular by [def-sbc-smooth-morphisms] and [lem-weil-pbc-regular-ring-smooth-ascent], and normal by [lem-weil-pbc-regular-ring-normal]. Thus every stalk of $Y$ is a Noetherian normal domain. Moreover $Y$ is reduced, locally Noetherian and $Y_K$ is dense by [lem-trf-smooth-reduced-dense-pullback], applied to the reduced locally Noetherian $S$ and its dense generic open.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-sc-dvr-dimension-one",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-ring-normal",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-trf-smooth-reduced-dense-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr), 07NF (lemma-regular-goes-up), 0567 (lemma-regular-normal); descent.tex Tag 034E and morphisms.tex Tag 01UA for the cited smooth-density node."
+   }
+  },
+  {
+   "text": "Every point of such a $Y$ has an integral affine open neighbourhood. Indeed take a regular affine smooth chart. It is a Noetherian scheme; [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] gives the descending-chain condition on closed subsets. Its normality from step 1 allows [lem-trf-normal-topologically-noetherian-components]: its components are disjoint open-and-closed normal integral schemes. The component containing the chosen point is affine (the complementary open-and-closed decomposition of an affine scheme corresponds to an idempotent). This last assertion can also be avoided by taking any affine open inside that open component. In particular, on this neighbourhood the fraction field of its coordinate ring equals the fraction field of the stalk at any point, by the localization description [lem-weil-pbc-affine-open-stalk-localization].",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-normal-topologically-noetherian-components",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357 (lemma-normal-locally-finite-nr-irreducibles); schemes.tex Tag 01HV (lemma-spec-sheaves) for affine stalks."
+   }
+  },
+  {
+   "text": "Assume (i), and let $A=\\mathcal O_{Y,y}$ be a DVR as in (ii), with fraction field $F$. The structural image of $\\pi$ is nonzero and is in the maximal ideal of $A$, since $R\\to A$ is injective and local. By [lem-weil-pbc-dvr-unit-times-uniformizer-power], writing it as a unit times a positive power of a uniformizer of $A$ shows $A[1/\\pi]=F$. The same node gives $R[1/\\pi]=K$. Given $a\\in G(F)$, view it as a map to $N$ and choose an affine smooth chart $V=\\operatorname{Spec}C$ of $N$ containing its image. By [def-sbc-locally-finite-presentation] its coordinate algebra has a finite presentation over either $R$ or the generic affine open $K$ of $S$.",
+   "uses": [
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-sbc-smooth-morphisms",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  },
+  {
+   "text": "Choose the integral affine neighbourhood $W=\\operatorname{Spec}B$ of $y$ from step 2 and its prime $\\mathfrak q$. Then $A=B_{\\mathfrak q}$ by [lem-weil-pbc-affine-open-stalk-localization]. For each of the finitely many generators of $C$, its image in $F=B_{\\mathfrak q}[1/\\pi]$ is $b/(s\\pi^n)$ with $s\\notin\\mathfrak q$. Invert the product of these finitely many $s$ in $B$. Each of the finitely many defining relations vanishes after further localization at $B\\setminus\\mathfrak q$, so another finite product outside $\\mathfrak q$ kills all their numerators. We obtain an algebra map $C\\to B_t[1/\\pi]$, $t\\notin\\mathfrak q$, and thus a morphism $(W_t)_K\\to G$ inducing $a$. Apply (i) to the smooth open $W_t$, and restrict its extension $W_t\\to N$ along $\\operatorname{Spec}A\\to W_t$. Its restriction to $\\operatorname{Spec}F$ is $a$. This proves (ii).",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  },
+  {
+   "text": "Assume (ii) and fix a smooth $S$-scheme $X$ and $f_K:X_K\\to G$. For every point $x$ of the special fibre whose ambient local ring has dimension one, step 1 and [lem-sc-normal-dim1-dvr] make $A=\\mathcal O_{X,x}$ a DVR. The map $R\\to A$ is local and injective. For injectivity, [lem-pc-smooth-flat] makes it flat; for $0\\ne r\\in R$, tensoring the injection $R\\xrightarrow{r}R$ with $A$ makes multiplication by $r$ on $A$ injective. Since the local ring $A$ is nonzero, the image of $r$ cannot be zero. Thus (ii) applies to the point of $G(\\operatorname{Frac}A)$ obtained from $f_K$, and provides $h_x:\\operatorname{Spec}A\\to N$ extending that point.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  },
+  {
+   "text": "Spread $h_x$ to an open neighbourhood of $x$ explicitly. A morphism from the spectrum of a local ring factors through every open neighbourhood of the image of its closed point: the inverse image is open containing that closed point and therefore all of the local spectrum. Choose an affine smooth chart $\\operatorname{Spec}C\\subseteq N$ at that image, with $C$ finitely presented over $R$ [def-sbc-locally-finite-presentation]. Inside an integral affine neighbourhood $W=\\operatorname{Spec}B$ of $x$ from step 2, use $A=B_{\\mathfrak q}$ [lem-weil-pbc-affine-open-stalk-localization]. Represent the images of the finitely many generators of $C$ by fractions with denominators outside $\\mathfrak q$, then invert their product; invert another product outside $\\mathfrak q$ annihilating the finitely many relation numerators. This gives $h:W_t\\to N$ inducing $h_x$ and with $x\\in W_t$. On the generic fibre of this integral neighbourhood, $h$ and $f_K$ agree at its generic point, because its function field is $\\operatorname{Frac}A$. By [lem-sfb-relative-separated-dominant-ext] they agree on all of $(W_t)_K$: this source is reduced, the generic point has dense image, and $G=N_K$ is separated. The last separatedness follows by base-changing the closed diagonal of $N$; on affine charts a closed immersion is a quotient, and tensoring a quotient is a quotient.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  },
+  {
+   "text": "Glue $f_K$ and all the maps $h$ of step 6 on the union $U$ of their domains and $X_K$. On every overlap their restrictions agree on its generic fibre, which is dense and reduced by step 1 applied to that smooth open. Hence [lem-sfb-relative-separated-dominant-ext] gives equality on the entire overlap, and [lem-weil-pbc-scheme-morphism-gluing] produces $u:U\\to N$ over $S$. It contains $X_K$ and every point of the special fibre with ambient local-ring dimension one. There are no dimension-zero ambient points over the closed point: their stalks are domains by step 1, and the injective local map from $R$ sends $\\pi$ to a nonzero nonunit, whereas a zero-dimensional local domain is a field. Thus $U$ contains every point of $X$ of ambient codimension at most one.",
+   "uses": [
+    "lem-sfb-relative-separated-dominant-ext",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  },
+  {
+   "text": "The open $U$ is dense in every fibre. Its generic fibre is all of $X_K$. If $x$ is a generic point of a component of $X_k$, its fibre local ring has dimension zero: in an affine fibre chart its prime is minimal, so localizing has only one prime. The flat local dimension formula [lem-weil-pbc-flat-height-formula], applicable to the Noetherian stalks by step 1 and [lem-pc-smooth-flat], and the fibre-stalk identification [lem-sbc-scheme-fibre-stalk-quotient] give $\\dim\\mathcal O_{X,x}=\\dim R+0=1$. Hence all these generic points lie in $U$ by step 7. They are dense in $X_k$, since every point of an affine fibre chart specializes from a minimal prime. This proves the fibrewise density, including the case of empty fibres.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "lem-pc-smooth-flat",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-relative-group-weil-extension] to $S=\\operatorname{Spec}R$, the smooth $X$, the smooth separated group $N$, and $u:U\\to N$. The base is normal Noetherian by step 1, fibrewise density is step 8, and the dimension-at-most-one condition is step 7. Obtain $f:X\\to N$ extending $f_K$. For any two such extensions, $X$ is reduced and $X_K\\subseteq X$ is dense by step 1, so [lem-sfb-relative-separated-dominant-ext] proves their equality. This proves the bijection (i). All constructions were on individual affine neighbourhoods followed by gluing; there was no finiteness assumption on the number of neighbourhoods or on $N$. If $X$ is empty both Hom sets have one element.",
+   "uses": [
+    "lem-sfb-relative-group-weil-extension",
+    "lem-sfb-relative-separated-dominant-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR §10.1 Proposition 2, printed p.290 (PDF p.296), with its local arguments expanded."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-dimension-one",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-regular-ring-normal",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-sbc-locally-finite-presentation",
+  "lem-sc-normal-dim1-dvr",
+  "lem-pc-smooth-flat",
+  "lem-sfb-relative-separated-dominant-ext",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-sfb-relative-group-weil-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR §10.1 Proposition 2 and §4.4 Theorem 1, primary scan consulted; the finite-presentation localization calculations and dimension verification are agent-written expansions. Project PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group scheme over a discrete valuation ring has the Neron mapping property if points extend over all essentially smooth discrete valuation rings",
+   "results": "{\"t\": \"2026-10-24T05:02:38Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated group scheme over a discrete valuation ring has the Neron mapping property if points extend over all essentially smooth discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.iff\", \"AlgebraicGeometry.ValuativeCriterion.uniqueness\", \"AlgebraicGeometry.ValuativeCriterion.Existence.of_specializingMap\"], \"digest\": \"8eba005edbc3f23b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron lft model criterion using surjectivity on discrete valuation rings essentially smooth over the base",
+   "results": "{\"t\": \"2026-10-24T05:02:30Z\", \"tool\": \"leansearch\", \"query\": \"Neron lft model criterion using surjectivity on discrete valuation rings essentially smooth over the base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.of_comp_surjective\", \"AlgebraicGeometry.ValuativeCriterion\", \"AlgebraicGeometry.ValuativeCriterion.Existence\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"of_isDiscreteValuationRing\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmooth.recOn\", \"Algebra.smoothLocus\"], \"digest\": \"ea349ada78b6be0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T05:02:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|essentiallySmooth.*[Pp]oint",
+   "results": "{\"t\": \"2026-10-24T05:02:31Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|essentiallySmooth.*[Pp]oint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil extension theorem converts extension of generic points at smooth valuation rings into the universal property of a Neron model",
+   "results": "{\"t\": \"2026-10-24T05:02:40Z\", \"tool\": \"leanfinder\", \"query\": \"Weil extension theorem converts extension of generic points at smooth valuation rings into the universal property of a Neron model\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.Existence.eq\", \"AlgebraicGeometry.ValuativeCriterion.existence\", \"AlgebraicGeometry.ValuativeCriterion.eq\", \"AlgebraicGeometry.ValuativeCommSq.algebra\", \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"AlgebraicGeometry.ValuativeCommSq.i₁\", \"AlgebraicGeometry.ValuativeCommSq.field\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\"], \"digest\": \"3573de69718c07a7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern general scheme gluing, ordinary valuative criteria, ring localizations, topological groups, manifolds, or unrelated scalar operations; none states extension of coherent algebraic line data or the stated Néron-model assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil extension theorem: a rational map from a smooth scheme over a normal noetherian base to a smooth separated group scheme defined in codimension one extends everywhere",
+   "results": "{\"t\": \"2026-10-24T07:02:25Z\", \"tool\": \"leanfinder\", \"query\": \"Weil extension theorem: a rational map from a smooth scheme over a normal noetherian base to a smooth separated group scheme defined in codimension one extends everywhere\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\", \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.toPartialMap\", \"AlgebraicGeometry.Scheme.RationalMap\"], \"digest\": \"284a3710005e1cf7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A rational map from a smooth scheme over a normal Noetherian base to a smooth separated group scheme extends if defined at all codimension one points",
+   "results": "{\"t\": \"2026-10-24T07:02:42Z\", \"tool\": \"leansearch\", \"query\": \"A rational map from a smooth scheme over a normal Noetherian base to a smooth separated group scheme extends if defined at all codimension one points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap.IsOver.mk\", \"AlgebraicGeometry.Scheme.RationalMap.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver.exists_partialMap_over\", \"AlgebraicGeometry.Scheme.instIsOverCompHomOfIsOver\", \"AlgebraicGeometry.Scheme.RationalMap.IsOver\", \"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.Scheme.RationalMap.exists_rep\"], \"digest\": \"9d50d039e02c9692\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"RationalMap\"",
+   "results": "{\"t\": \"2026-10-24T07:02:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"RationalMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.RationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.id\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.Scheme.Hom.toRationalMap\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap\", \"AlgebraicGeometry.Scheme.RationalMap.representative\", \"AlgebraicGeometry.Scheme.PartialMap.toRationalMap_surjective\", \"AlgebraicGeometry.Scheme.RationalMap.openCoverDomain\"], \"digest\": \"17fc852bc34c880c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*[Ee]xtension|[Ee]xtension.*[Gg]roup|Neron|Néron",
+   "results": "{\"t\": \"2026-10-24T07:02:43Z\", \"tool\": \"grep\", \"query\": \"Weil.*[Ee]xtension|[Ee]xtension.*[Gg]roup|Neron|Néron\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hartogs extension for maps into relative algebraic groups: morphisms from a fibrewise dense open of a smooth scheme extend across codimension two over a DVR",
+   "results": "{\"t\": \"2026-10-24T07:03:03Z\", \"tool\": \"leanfinder\", \"query\": \"Hartogs extension for maps into relative algebraic groups: morphisms from a fibrewise dense open of a smooth scheme extend across codimension two over a DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.exists_restrict_isOver\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"AlgebraicGeometry.ext_of_isDominant\", \"AlgebraicGeometry.ext_of_isDominant_of_isSeparated'\"], \"digest\": \"f221c5111a3cad98\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated group scheme over a DVR satisfies the Neron mapping property exactly when points over essentially smooth DVR extensions extend",
+   "results": "{\"t\": \"2026-10-24T07:08:05Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth separated group scheme over a DVR satisfies the Neron mapping property exactly when points over essentially smooth DVR extensions extend\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSeparated.valuativeCriterion\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"4bcc08ad213ace1f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: rational-map representatives, local spreading, smooth charts and equality of existing morphisms do not give the relative group extension theorem or the Néron criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-torus-extension-neron-lft",
+  "date": "2026-10-24",
+  "group": "Q122"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), recorded trait-extension prerequisite below the alteration route; BLR 10.1 Proposition 2 and its proof, printed p.290 (PDF p.296): essentially smooth DVR criterion, via Weil extension.",
+   "via": [
+    "lem-sfb-split-torus-extension-neron-lft",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-neron-dvr-point-criterion",
+  "worker": "stage1",
+  "summary": "Checked BLR 10.1 Proposition 2 against all hypotheses. Expanded both local spreading arguments, verified the actual local injective DVR tests, assembled a fibrewise dense domain, and isolated the relative Weil extension theorem as one statement-only prerequisite. No statement correction and no Lean attachment.",
+  "blueprint": "No imported ancestor is found by blueprint_refs.py ancestor (None). The inherited provenance serves det-thm-sf-ctf-stability-direct-images (3), trait extension beneath the recorded alteration route. Latest sk-thm-sf-ctf-stability-direct-images.proof.md (3) is the direct-image assembly; the item supplies the already recorded Néron-model prerequisite, without changing the unit route. BLR 10.1 Proposition 2 forward direction is steps 3–4; its rational-extension converse is steps 5–8 and its Weil-extension invocation is step 9.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "DVR dimension used to check the normal Noetherian base; a commutative-algebra tool. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Normality of regular affine smooth charts; a commutative-algebra tool. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Regularity ascends from the DVR to a smooth chart; a commutative-algebra tool. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-trf-smooth-reduced-dense-pullback",
+    "why": "Reducedness and density of the generic fibre of an arbitrary smooth test scheme; a smooth-geometry tool. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Topological Noetherianity of each Noetherian affine chart. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Integral open neighbourhoods in a normal Noetherian affine chart. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Actual fraction descriptions and zero detection in affine stalks. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Inverting the nonzero nonunit image of the base uniformizer gives the entire fraction field. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "The actual dimension-one normal stalk is a DVR. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Flatness and local finite presentation of the smooth test scheme. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Assemble all compatible local morphisms along an arbitrary open cover. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Dimension one at a special-fibre component generic point. No node of the item’s unit supplies this generic tool statement."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Identify the fibre term in the flat local dimension formula. No node of the item’s unit supplies this generic tool statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-trf-smooth-reduced-dense-pullback",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-normal-dim1-dvr",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-sbc-scheme-fibre-stalk-quotient"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q124-c7a73b1c0",
+  "group": "Q124",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q124-c7a73b1c0 (reviewer sub-agent of L); spot-checked: First split, not a re-split: the item's statement and stmt_deps are byte-identical to the prior unsplit node. Nothing was changed, no fixes, nothing dropped. BLR (§10.1 Prop. 2, §4.4 Thm. 1) is not in literature/ (WANTED, proof_origin agent). I checked it from my knowledge of the book, not from a local copy. Stacks tags 00PD, 07NF, 0567, 0357, 034E, 01UA, 01HV, 00ON and 0HA1 exist with the labels quoted. Steps 1–9 hold against every cited statement. Step 1: R is regular and normal; smooth charts are regular and normal (07NF, 0567); smooth-reduced-dense-pullback applies with Spec K dense. Step 2: integral affine neighbourhoods via 0357. Steps 3–4: π maps to a nonzero nonunit, so A[1/π]=Frac A; the spreading to W_t is correct, with relations automatic since B is a domain, and (i) then restricts to the lift. Step 5: a dimension-1 stalk is a DVR, and R→A is injective by flatness. Step 6: spreading h_x and the comparison with f_K via relative-separated-dominant-ext; G is separated by base change. Step 7: gluing; there are no dimension-0 special points. Step 8: flat height formula plus the fibre-stalk quotient give fibre density. Step 9: the new node's hypotheses are all met; uniqueness comes from the ext lemma. New node lem-sfb-relative-group-weil-extension is BLR 4.4/1 with S-rational and codim ≤1 made explicit; uniqueness is true. Tested on G_m on A²∖0 (extends) and P¹ with x/y (fails without a group). It is self-contained and statement-only, all three search kinds are recorded, it is not a duplicate of the field-level Weil extension, divisorial indeterminacy, abelian Néron property or valuation-point nodes, and it does not restate a clause of the item. No cycle. Batch-5 flags: lem-trf-smooth-reduced-dense-pullback (034E/01UA) and lem-trf-normal-topologically-noetherian-components (0357) are generic scheme-theory tools; their closures (132 and 60 nodes) contain no other trace-formula or Poincaré node, and neither assumption gives them, so both are accepted. All 13 declared tool_uses are accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NeronDvrPointCriterion",
+  "declaration": "AlgebraicGeometry.neron_mappingProperty_iff_dvr_points",
+  "file": "lean/Sheaf/AlgebraicGeometry/NeronDvrPointCriterion.lean",
+  "statement": "theorem neron_mappingProperty_iff_dvr_points (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (N : Over (Spec (CommRingCat.of R))) [CommGrpObj N] [Smooth N.hom] [IsSeparated N.hom] [LocallyOfFiniteType N.hom] [QuasiCompact ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj N).hom] : (∀ (X : Over (Spec (CommRingCat.of R))) (_ : Smooth X.hom), Function.Bijective (fun f : X ⟶ N ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R K)))).map f)) ↔ (∀ (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] (φ : R →+* A) (_ : IsLocalHom φ) (_ : Function.Injective φ), (∃ (Y : Over (Spec (CommRingCat.of R))) (_ : Smooth Y.hom) (y : Y.left) (e : Y.left.presheaf.stalk y ≃+* A), Spec.map (CommRingCat.ofHom e.toRingHom) ≫ Y.left.fromSpecStalk y ≫ Y.hom = Spec.map (CommRingCat.ofHom φ)) → Function.Surjective (fun f : Over.mk (Spec.map (CommRingCat.ofHom φ)) ⟶ N ↦ (Over.homMk (Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A)))) (rfl) : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap A (FractionRing A))) ≫ Spec.map (CommRingCat.ofHom φ)) ⟶ Over.mk (Spec.map (CommRingCat.ofHom φ))) ≫ f))",
+  "branch": "newtargets-dag",
+  "by": "Q122",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85b717f2e",
+  "group": "Q122",
+  "result": "pass",
+  "note": "Read node, BLR 10.1/2 hypotheses, module, report and all 7 stmt_dep records. The only change to the node is the lean record, and its statement equals the file signature verbatim. R is a DVR, K any IsFractionRing. N : Over (Spec R) with CommGrpObj via Mathlib's fibre-product Over cartesian structure (Pullbacks.lean:712); Smooth/IsSeparated/LocallyOfFiniteType on N.hom. G = Over.pullback along Spec K→Spec R with QuasiCompact (finite type = lft ∧ qc; lft is inherited); no qc on N. (i) is bijectivity of the actual Over.pullback map. (ii) quantifies over DVRs A with local injective φ, isomorphic to a stalk of a smooth Y compatibly with φ (map directions checked), with surjectivity of precomposition with Spec Frac A→Spec A, canonically N(A)→G(Frac A). Edge cases fine: empty X, A=R, single universe, autoImplicit false. No definitions, no duplicates found, docstrings with source/blueprint/9 steps, sorry only, private imports exist in side-live. No change, so no compile; the worker reports a clean scompile."
+ }
+}

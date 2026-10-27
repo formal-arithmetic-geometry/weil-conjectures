@@ -1,0 +1,109 @@
+{
+ "id": "lem-asd-kernel-counit-trace-change",
+ "kind": "statement",
+ "title": "Coefficient automorphisms and change of the kernel trace",
+ "statement": "Given finite coefficients A, a proper q:X → Y, a complex B on X, and a trace-diagonal datum D on B [lem-sf-diagonal-kernel-integral-triangles], let a be an automorphism of B and let τ:Rq_! B → the derived tensor unit satisfy Rq_!(a) followed by D.trace = τ. The explicitly constructed datum kernelDatumWithTrace D τ retains the diagonal class and has trace τ. For every K on Y, applying Rq_! to the tensor action of a and then the kernel counit of D is equal to the kernel counit of the new datum. This is an equality of counit composites and does not assert either triangle identity.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The coefficient normalization and transport of the kernel counit in the diagonal argument."
+ },
+ "stmt_deps": [
+  "lem-sf-diagonal-kernel-integral-triangles"
+ ],
+ "proof": [
+  {
+   "text": "Construct the new datum with trace τ and with the diagonal class of D. Its trace projection is τ by the record constructor. Naturality of the projection map in B gives the square for the coefficient automorphism. Cancel the projection isomorphism to obtain the square for its inverse, then use tensor functoriality and the hypothesis Rq_!(a) D.trace=τ. Both counit composites have the same final left-unitor factor.",
+   "uses": [
+    "lem-sf-diagonal-kernel-integral-triangles"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-diagonal-kernel-integral-triangles"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "The coefficient normalization and transport of the kernel counit in the diagonal argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparing projection formula counits using symmetry and proper pushforward",
+   "results": "Eight unrelated results on Noebeling, projection of measures and condensed comparisons; no specialized derived proper counit comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the project proper projection coherence and generic category theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "Five generic constructor and counit/unit formulas for transport through a natural isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "Transport API is useful in the parent adjunction; it does not establish the required equality of actual trace maps."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_inv_naturality_left|projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar",
+   "results": "Mathlib provides generic braiding naturality. The local source library provides projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar.",
+   "date": "2026-10-26",
+   "verdict": "Use these existing generic coherence identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coefficient automorphism changes a diagonal kernel counit by its action on the trace",
+   "results": "CoalgHomClass.counit_comp; Coalgebra.counitCoalgHom_toLinearMap; CoalgebraStruct.counit; MonoidAlgebra.counit_single; Coalgebra.counitCoalgHom_apply; Coalgebra.counitCoalgHom; Coalgebra.lTensor_counit_comp_comul; CoalgHomClass.counit_comp_apply",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Both diagonal triangle calculations and the actual inverse-projection counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.KernelCounitTraceChange",
+  "file": "lean/Sheaf/SixFunctors/KernelCounitTraceChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.kernelCounit_traceChange",
+  "statement": "theorem kernelCounit_traceChange\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    (B : DerivedCategoryModule A X) (D : TraceDiagonalDatum A q B) (a : B ≅ B)\n    (τ : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q).obj B ⟶\n      derivedTensorUnit (ModuleCat.{u + 1} A) Y)\n    (hτ : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q).map a.hom ≫ D.trace = τ) :\n    let D' := kernelDatumWithTrace A q B D τ\n    D'.trace = τ ∧ ∀ K : DerivedCategoryModule A Y,\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q).map\n          (((derivedTensor (ModuleCat.{u + 1} A) X).map a.hom).app\n            ((CoordinateTrace.pull A q).obj K)) ≫ (SfDiagonalKernel.counit A D).app K =\n        (SfDiagonalKernel.counit A D').app K",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

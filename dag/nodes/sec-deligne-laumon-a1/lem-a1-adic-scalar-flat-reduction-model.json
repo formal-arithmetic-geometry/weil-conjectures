@@ -1,0 +1,330 @@
+{
+ "id": "lem-a1-adic-scalar-flat-reduction-model",
+ "kind": "statement",
+ "title": "Adic scalar data and normalized flat reduction complexes",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\pi$, and put $A_n=R/\\pi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $T$ be any scheme [def-pc-scheme]. On its small pro-etale site [def-weil-pbc-proetale-site] write $\\underline M_T$ for the constant sheaf of an $R$-module $M$ [def-weil-pbc-constant-sheaf], and put $B_T=\\varprojlim_n(A_n)_T$, with projections $\\operatorname{pr}_{T,n}$ [def-weil-completed-integral-coefficients]. Let $P^\\bullet$ be a specified bounded complex of finite projective $R$-modules [def-pc-perfect-ring-complex], and put $M_T^\\bullet=B_T\\otimes_{\\underline R_T}\\underline{P^\\bullet}_T$ and $D_{T,n}^\\bullet=(A_n)_T\\otimes_{\\underline R_T}\\underline{P^\\bullet}_T$, with the given scalar differentials [def-pur-sheaf-tensor-product]. Use sheaves of modules and their ambient unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category].\n\nThe ring $R$ is Noetherian, and $(R,(\\pi))$ satisfies the adic coefficient datum [def-weil-pbc-adic-coefficient-datum]: every $A_n$ is finite, is killed by a power of $\\ell$, and has the finite free resolution $[R\\xrightarrow{\\pi^n}R]$ in degrees $-1,0$. The coefficient sheaves of this datum are the displayed constant finite sheaves, and their completed limit and all quotient projections agree with $B_T$ and $\\operatorname{pr}_{T,n}$.\n\nFor every $r$, $\\underline{P^r}_T$ is flat over $\\underline R_T$, and $M_T^\\bullet$ is a bounded K-flat complex with flat terms over $B_T$ [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. There are finite-free splitting maps $i_r:P^r\\to R^{m_r}$, $s_r:R^{m_r}\\to P^r$ with $s_ri_r=1$; their constant realizations and scalar extensions to $B_T$ and every $(A_n)_T$ retain this identity and commute with quotient transitions. Splittings are only asserted degreewise, not as splittings of complexes.\n\nThe K-flat computation counit for derived reduction [lem-pur-derived-change-of-rings] followed by balanced tensor cancellation gives a natural isomorphism in $D((A_n)_T)$\n$$M_T^\\bullet\\otimes^L_{B_T}(A_n)_T\\xrightarrow{\\sim}D_{T,n}^\\bullet.$$\nIts ordinary chain representative sends $(b\\otimes p)\\otimes a$ to $a\\operatorname{pr}_{T,n}(b)\\otimes p$, with inverse $a\\otimes p\\mapsto(1\\otimes p)\\otimes a$. It intertwines every original differential, every consecutive quotient transition, and the canonical reduction unit $b\\otimes p\\mapsto(b\\otimes p)\\otimes1$ with the quotient augmentation $b\\otimes p\\mapsto\\operatorname{pr}_{T,n}(b)\\otimes p$. These comparisons are natural in chain maps of bounded finite-projective scalar complexes and do not depend on the chosen splittings. Site object, morphism and coefficient universes can be independently enlarged under the smallness convention [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Stacks Tags 093M (sites-modules.tex, lemma-completion-flat), 06YQ (sites-cohomology.tex, lemma-bounded-flat-K-flat), 0G7E (sites-cohomology.tex, lemma-pullback-K-flat); returned parent Steps 1-2, coefficient datum verification and normalized K-flat quotient computation."
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "def-pc-perfect-ring-complex",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-size-convention",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved adic-ring domain theorem to obtain the datum with ideal (pi), finiteness and l-power annihilation of every quotient. The nonzero uniformizer gives injectivity of multiplication by its powers. Quotient equality to zero and singleton-ideal membership identify the kernel with that image; the quotient map is surjective.",
+   "uses": [
+    "lem-sf-bc-adic-ring-domain",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "DVR quotient arithmetic; elementary singleton-ideal kernel calculation."
+   }
+  },
+  {
+   "text": "Construct the sheaf of continuous functions with values in the discrete coefficient ring, allowing independent site and coefficient universes. Mathlib proves its sheaf condition by restriction of the fpqc continuous-map sheaf. The map from constant functions is locally injective (use the empty cover on an empty scheme) and locally surjective on the open fibres of a locally constant function. The locally bijective sheafification criterion gives its isomorphism with the constant ring sheaf. Factor continuous functions uniquely through connected components; evaluate sheafification naturality to prove constants, restrictions and quotient postcomposition. Evaluation preserves the inverse limit, so its universal property gives the unique compatible completed section.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12; continuous maps into a discrete space; sectionwise inverse-limit universal property."
+   }
+  },
+  {
+   "text": "Apply Mathlib Module.Finite.exists_comp_eq_id_of_projective to each scalar term. Map the resulting retract equation through the constant and scalar-extension functors. Naturality of the module sheafification unit and the normalized change-of-rings tensor maps give the three section formulas for each splitting map.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00NX and 05CF; Mathlib finite projective retract and functoriality."
+   }
+  },
+  {
+   "text": "Reuse the fully proved constant_flat and model_good helpers of the existing scalar-model interface, without using its unfinished pullback theorem. Their proof uses the site equational criterion for flatness of constant projective terms, bounded-above flat K-flatness, and preservation of K-flatness and flat terms by change of rings. The additive realization functor maps all zero terms outside the original finite interval to zero.",
+   "uses": [
+    "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-kflat-change-of-rings-independent",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ and 0G7E; constant_flat and model_good proofs in the existing scalar-model interface."
+   }
+  },
+  {
+   "text": "For ring-sheaf maps R to B to A, the normalized ordinary scalar-extension adjunctions compose, while restriction of scalars composes canonically. Uniqueness of left adjoints therefore gives a natural isomorphism between the iterated and direct extension functors. Its Hom normalization determines the image of 1 tensor (1 tensor x). Linearity in both scalar actions gives the full formula a tensor (b tensor x) maps to (a pr(b)) tensor x. The coefficient composite equality is the limit projection equation. Whisker with constant realization and map to cochain complexes; functoriality retains the original differentials and gives chain-map naturality.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA; composition and uniqueness of normalized scalar-extension left adjoints."
+   }
+  },
+  {
+   "text": "Specialize the forward formula at b=1 and apply the inverse isomorphism to obtain the inverse formula. Apply the normalized tower unit formula to obtain the quotient augmentation. Expand each successor arrow of quotientTower; the inverse formula, normalized unrestricted transition formula and forward formula give the stipulated quotient transition on every pure tensor.",
+   "uses": [
+    "lem-weil-integral-reduction-tower-well-defined",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA and 05V4; normalized tensor units and quotient transitions."
+   }
+  },
+  {
+   "text": "The two normalized adjunction Hom equivalences are injective, so any two reduction maps agreeing on the nested pure tensors are equal. This proves independence of the reductions, without choosing splittings in their construction. For derived naturality, the identity-resolution comparison is the universal derived counit followed by localization of the ordinary reduction isomorphism. Naturality of that counit and chainBalance, and functoriality of localization, prove the specified derived square.",
+   "uses": [
+    "lem-weil-integral-reduction-tower-well-defined",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY and 06YQ; uniqueness of the normalized adjunction maps and naturality of the universal derived counit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-bc-adic-ring-domain",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-size-convention",
+  "def-weil-pbc-projective-module",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-site-flat-equational-criterion-universes",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-kflat-change-of-rings-independent",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-perfect-ring-complex",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "D9 Lean proof, 2026-10-25: existing arithmetic datum; independent-universe constant-section sheafification; Mathlib finite projective retractions; proved scalar-model flatness helpers; normalized ordinary adjunction composition and universal derived counit naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective modules over the integers of a finite extension of the l-adic numbers gives a K-flat completed constant sheaf complex with canonical reduction maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"Condensed.profiniteSolid\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the right Kan extension of the embedding functor from finite types to profinite spaces along th\"}\n  {\"name\": \"Condensed.profiniteFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor Profinite (CondensedMod R)\", \"doc\": \"The functor from the category of profinite spaces to the category of condensed $ R $-modules, defined as the composition of the canonical inclusion functor from profinite spaces to condensed sets and \"}\n  {\"name\": \"AdicCompletion.flat_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) [IsNoetherianRing R], Module.Flat R (AdicCompletion I R)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the $ I $-adic completion of $ R $, defined as the inverse limit $ \\\\varprojlim R/I^n $, is a flat $ R $-module.\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"CondensedMod.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor (ModuleCat R) (CondensedMod R)\", \"doc\": \"A functor from the category of $ R $-modules to the category of condensed modules over $ R $, which assigns to each $ R $-module $ X $ the sheaf that maps a compact Hausdorff-like space $ S $ to the $\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic AdicCompletion flatness and Valued.integer finite quotients are components, not this constant module-sheaf K-flat reduction and unit normalization theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"flat\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic AdicCompletion flatness and Valued.integer finite quotients are components, not this constant module-sheaf K-flat reduction and unit normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|isKFlat|bounded.*flat",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic AdicCompletion flatness and Valued.integer finite quotients are components, not this constant module-sheaf K-flat reduction and unit normalization theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a discrete valuation ring with finite residue field, its power quotients form an adic coefficient datum and completed scalar extension of a bounded projective complex computes derived reduction",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[IsDiscreteValuationRing 𝒪[K]] (h : Finite 𝓀[K]) (n : ℕ) : Finite (𝒪[K] ⧸ 𝓂[K] ^ n)\", \"doc\": \"Let $\\\\mathcal{O}_K$ be the ring of integers of a discrete valuation field $K$ with maximal ideal $\\\\mathfrak{m}_K$ and residue field $k_K = \\\\mathcal{O}_K/\\\\mathfrak{m}_K$. If the residue field $k_K$ is \"}\n  {\"name\": \"Valued.integer.properSpace_iff_completeSpace_and_isDiscreteValuationRing_integer_and_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] : ProperSpace K ↔ CompleteSpace K ∧ IsDiscreteValuationRing 𝒪[K] ∧ Finite 𝓀[K]\", \"doc\": \"For a field $ K $ equipped with a rank one valuation, the topology induced by the valuation makes $ K $ a proper space (every closed ball is compact) if and only if $ K $ is complete, its ring of inte\"}\n  {\"name\": \"AdicCompletion.module\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      {M : Type u_3} →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Module (AdicCompletion I R) (AdicCompletion I M)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and an $ R $-module $ M $, the $ I $-adic completion of $ M $ admits a scalar multiplication by the $ I $-adic completion of $ R $, making it a module ove\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": ValuationSubring (v.adicCompletion K)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of all elements in the completion whose valuation is less than o\"}\n  {\"name\": \"AdicCompletion.val_smul_eq_evalₐ_smul\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"(n : ℕ) (r : AdicCompletion I R) (x : M ⧸ (I ^ n • ⊤ : Submodule R M)) : r.val n • x = evalₐ I n r • x\", \"doc\": \"For any natural number $n$, any element $r$ in the $I$-adic completion of $R$, and any element $x$ in the quotient module $M / I^nM$, the scalar multiplication of $r$'s valuation at $n$ with $x$ is eq\"}\n  {\"name\": \"PowerSeries.instIsDiscreteValuationRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsDiscreteValuationRing k⟦X⟧\", \"doc\": \"For any field $ k $, the ring of formal power series $ k⟦X⟧ $ is a discrete valuation ring. This means $ k⟦X⟧ $ is a principal ideal domain with a unique non-zero prime ideal (generated by $ X $), and\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic AdicCompletion flatness and Valued.integer finite quotients are components, not this constant module-sheaf K-flat reduction and unit normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*flat|flat.*constant|completed.*reduction",
+   "results": "[grep] OK 9 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"31\", \"text\": \"- `AlgebraicGeometry.Scheme.Hom.isLocallyConstant_finrank`: The rank function of a finite flat\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"86\", \"text\": \"flat and locally of finite presentation, this is a locally constant function (see\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"line\": \"231\", \"text\": \"/-- The rank of a finite flat locally finitely presented morphism is locally constant. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"34\", \"text\": \"  If `M` is flat over `R`, then `rankAtStalk` is locally constant.\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"line\": \"224\", \"text\": \"lemma isLocallyConstant_rankAtStalk [Module.FinitePresentation R M] [Module.Flat R M] :\"}\n  {\"file\": \"Mathlib/RingTheory/TotallySplit.lean\", \"line\": \"25\", \"text\": \"  some constant rank, there exists a faithfully flat, finite étale `R`-algebra `T` such that\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"11\", \"text\": \"# A finite flat module `M` is locally free if `rankAtStalk M` is constant\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/LocallyFree.lean\", \"line\": \"36\", \"text\": \"theorem Free.away_of_finite_of_flat_of_rankAtStalk_constant (p : Ideal R) [p.IsPrime]\"}\n  {\"file\": \"Mathlib/RingTheory/Flat/Rank.lean\", \"line\": \"118\", \"text\": \"/-- If `S` is a finite, flat `R`-algebra, `S` is of constant rank `1` if and only if\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: algebraic AdicCompletion flatness and Valued.integer finite quotients are components, not this constant module-sheaf K-flat reduction and unit normalization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|isKFlat|bounded.*flat",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern algebraic modules, condensed modules or generic derived categories, not this completed constant ring-sheaf quotient comparison with all normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of a bounded finite projective complex of sheaves after completed scalar extension along a quotient ring",
+   "results": "OK 8 hits: DerivedCategory.right_fac_of_isStrictlyLE, Algebra.FormallyUnramified.projective_of_restrictScalars, HasDerivedCategory.standard, ModuleCat.smulShortComplex_g, CategoryTheory.ProjectiveResolution.extMk_hom, AdicCompletion.kerProj, AdicCompletion.kerProj.congr_simp, CategoryTheory.hasExt_of_enoughProjectives",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern algebraic modules, condensed modules or generic derived categories, not this completed constant ring-sheaf quotient comparison with all normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"flat\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern algebraic modules, condensed modules or generic derived categories, not this completed constant ring-sheaf quotient comparison with all normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective modules over a p-adic valuation ring gives a K-flat constant sheaf scalar extension with natural normalized derived quotient reductions",
+   "results": "OK 8 hits: Condensed.profiniteSolid, localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CondensedMod.IsSolid, CondensedMod.ofSheafProfinite, Module.Flat.of_projective, LightCondMod.ofSheafLightProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern algebraic modules, condensed modules or generic derived categories, not this completed constant ring-sheaf quotient comparison with all normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(quotient|reduction)|KFlat|isKFlat",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern algebraic modules, condensed modules or generic derived categories, not this completed constant ring-sheaf quotient comparison with all normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ring sheaf map R to B to S, a bounded complex of projective constant R modules satisfies (B tensor P) derived tensor over B with S is naturally S tensor P with explicit quotient unit",
+   "results": "OK 8 hits: LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, Module.Projective.tensorProduct, PresheafOfModules.Monoidal.tensorObj",
+   "date": "2026-10-22",
+   "verdict": "no match: returned declarations concern algebraic modules, condensed modules or generic derived categories, not this completed constant ring-sheaf quotient comparison with all normalizations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-completed-perfect-scalar-pullback",
+  "date": "2026-10-22",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-map-purity",
+   "place": "Proof, first paragraph: 'By [lemma-weil-pbc-finite-stalk-formula], the geometric stalk of the direct image is the direct sum over all geometric points above $\\bar y$' -- the restriction of $\\mathcal F$ to the geometric fibre is again a constructible sheaf whose stalks are those of $\\mathcal F$. Subargument: Lemma 6.5.9(4)-(5) and Proposition 6.6.11, finite perfect scalar models; Stacks Tag 093M (sites-modules.tex, lemma-completion-flat); agent calculation in returned proof Steps 3 and 5, including the projective-summand inverse limit and balanced-tensor identification. Re-split task: Adic scalar data and normalized flat reduction complexes (returned parent Steps 1,2).",
+   "via": [
+    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-a1-finite-etale-weil-fibre-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-adic-scalar-flat-reduction-model",
+  "worker": "stage1",
+  "summary": "Q53: kept the statement and all imported provenance; proved the adic datum and coefficient identifications, constructed degreewise finite-free retractions and proved their sheaf flatness, then computed the normalized derived quotient maps with explicit differential, transition, unit and chain-map checks. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "Realizes the inherited ancestor lem-a1-finite-map-purity proof first-paragraph finite-fibre coefficient subargument, through lem-a1-completed-perfect-scalar-pullback Steps 1-2: coefficient datum verification and normalized K-flat finite reductions. Does not replace the unit's finite-fibre/purity route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic arithmetic input for the finite coefficient rings: principality, domain property and uniformizer factorization. The affine-line unit does not reprove local-field structure."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Generic finite constant sheaf section description, needed to match the adic datum coefficient presheaf with the displayed constant sheaves; no affine-line-specific alternative."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Generic constant module functor fact: preserves finite direct sums so finite-free scalar splittings realize as sheaf splittings."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "Generic bounded-above flat K-flatness theorem with independent universes; used only after explicitly proving flatness."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic unbounded derived scalar-extension computation on the identity K-flat representative, preserving the target quotient-ring module category."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic extension of section-bilinear maps of presheaves to the sheafifications (Stacks 0GMW); needed to define the balanced cancellation maps on the nested sheaf tensor; no affine-line node gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-6e8d31792",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-6e8d31792 (reviewer sub-agent of L); spot-checked: Read the item in full. There are no new nodes. I checked the statement (unchanged, not weakened; it adds stmt_deps for projective and Noetherian, both used), every cited statement and the sources: Stacks 05CF, 093J, 06YQ, 05V4 and 0GMW (tags file checked), and Bhatt–Scholze 4.2.12 (PDF p.30). The live item is still unsplit, so this delivery is not superseded. The parent lem-a1-completed-perfect-scalar-pullback Step 1 uses exactly the item's conclusion. Steps 1-5 and 7-9 are correct. Step 1: ℓ is in (π) because |ℓ|_E=ℓ^{-1}; [R→R] by π^n resolves A_n; every hypothesis of the adic datum holds. Step 2: a continuous map to a finite discrete set factors uniquely through π_0, so the datum's presheaf already is the sheaf (A_n)_T; the limit and its projections agree. Steps 3-4: the finite-free retract gives flatness. Step 5: bounded-above flat implies K-flat. Step 7: derived change of rings, clause 2, on the identity resolution. Steps 8-9: transitions, unit and naturality checked on generators; the maps do not depend on the splittings. Edge cases tested: n=1, E=Q_ℓ, ramified E, P=0 and m_r=0, P=[R→R] by ℓ, empty T, ℓ not invertible on T. Duplicate search found related nodes but none stating the item: lem-sfb-adic-perfect-model-complete-reduction (residue field only), lem-sfb-constant-realization-derived-scalar-extension (constant coefficients), lem-sfb-flat-scalar-realization-flat. FIX, error C1/C4 in Step 6: the maps μ_n and ν_n were defined only on sectionwise presheaf tensors. The source sheaf (B_T⊗P)⊗_{B_T}S has an already-sheafified first factor, so defining the maps on it and checking that they are inverse needs Stacks 0GMW, which is the DAG node lem-pc-sites-module-sheafification-bilinear-extension. I added it to the Step 6 uses (elementary set to false, text expanded, source Tag 0GMW), to proof_deps and to split_report.tool_uses. The five declared tool uses are accepted. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicScalarFlatReductionModel",
+  "declaration": "WeilConjectures.AdicScalarFlatReduction.adicScalarFlatReductionModel",
+  "declarations": [
+   "WeilConjectures.AdicScalarFlatReduction.ScalarResolution",
+   "WeilConjectures.AdicScalarFlatReduction.FiniteCoefficients",
+   "WeilConjectures.AdicScalarFlatReduction.MapFormula",
+   "WeilConjectures.AdicScalarFlatReduction.Splittings",
+   "WeilConjectures.AdicScalarFlatReduction.InverseFormula",
+   "WeilConjectures.AdicScalarFlatReduction.UnitFormula",
+   "WeilConjectures.AdicScalarFlatReduction.Data",
+   "WeilConjectures.AdicScalarFlatReduction.derivedComparison",
+   "WeilConjectures.AdicScalarFlatReduction.adicScalarFlatReductionModel"
+  ],
+  "file": "lean/Sheaf/Paper/AdicScalarFlatReductionModel.lean",
+  "statement": "theorem adicScalarFlatReductionModel : Nonempty (Data l E T)",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The helper predicates and Data package every clause; derivedComparison is the existing identity K-flat counit followed by the specified chain balancing isomorphism. Reuses the published CompletedPerfectScalar definitions and no pullback theorem. Positive n is indexed by n+1; site and coefficient universes remain independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91c6259ad",
+  "group": "NC",
+  "result": "fix",
+  "note": "Read the node, all 16 stmt_dep records, the report and the module; read the parent CompletedPerfectScalarPullback helpers, CompletedIntegralCoefficients, Complete/AdicCoefficientDatum, unrestrictedTowerResolutionIso and scalarReductionDerivedExtension. All clauses match: datum with ideal span{π}; ScalarResolution; FiniteCoefficients with a unique, pinned iso to LocallyConstant(π0 U, A_{n+1}) plus the limit/pr property (universe transport of the datum's sheaves); constant/term flatness, boundedness, IsKFlatIndependentCoefficients; degreewise splittings; ModelReductions with formula/transition/naturality; inverse and unit formulas; uniqueness; canonical derivedComparison. FIX H3: the node's 'natural isomorphism in D((A_n)_T)' (Step 9) was missing, since only chain naturality was stated. Added Data.derivedNatural (naturality square of derivedReductionIso under scalarReductionDerivedExtension and finiteModel), true by naturality of ε, quotientCompQhIso, mapHomotopyCategoryFactors and ModelReductions.naturality. Complete module in fixes/AdicScalarFlatReductionModel.lean; statement and records unchanged; nt_compile --json 13.0 s clean. Advisory: the item imports the parent theorem module whose proof_deps cite it (stage-3 import cycle, stages/2 §3(7)), so the maintainer should split the parent helpers into an interface module. Non-stmt_dep owners scalarReductionDerivedExtension/unrestrictedTowerUnit come through the parent helpers (advisory). Edge cases n=0→π^1, empty T, P=0, non-chain splittings, ℓ non-invertible, independent t/u are all fine."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261025T095043-L-3286905",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

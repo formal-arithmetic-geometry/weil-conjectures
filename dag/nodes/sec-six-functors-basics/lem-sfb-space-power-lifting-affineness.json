@@ -1,0 +1,326 @@
+{
+ "id": "lem-sfb-space-power-lifting-affineness",
+ "kind": "statement",
+ "title": "Global power lifting detects affine algebraic spaces over arbitrary rings",
+ "statement": "Let $R$ be a commutative ring and let $Z$ be an algebraic space over $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum, def-trf-algebraic-space]. Assume $Z$ is quasi-compact and quasi-separated: it admits a surjective etale atlas from a quasi-compact scheme and its absolute diagonal is quasi-compact on affine scheme tests [def-sfb-stack-qcqs-morphism]. A quasi-coherent commutative $\\mathcal O_Z$-algebra means a sheaf of commutative unital $\\mathcal O_Z$-algebras on the small etale site whose underlying module is quasi-coherent [def-trf-space-quasi-coherent-module]; surjective means surjective as a sheaf, and $\\Gamma(Z,-)$ denotes global sections. Suppose that for every surjection $\\mathcal B\\twoheadrightarrow\\mathcal C$ of such algebras and every $c\\in\\Gamma(Z,\\mathcal C)$, there are an integer $N>0$ and $b\\in\\Gamma(Z,\\mathcal B)$ whose image is $c^N$. Then $Z$ is represented by an affine scheme. Neither $R$ nor $Z$ is assumed Noetherian or of finite type.",
+ "source": {
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Alper, Adequate moduli spaces and geometrically reductive group schemes, Lemma 4.1.8 (3) implies (2), printed pp.502-504, and Theorem 4.3.1, printed pp.505-506. Global power-lifting formulation, with no field hypothesis. Local PDF WANTED; journal version read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-sfb-stack-qcqs-morphism",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-quasi-coherent-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite surjective finitely presented scheme cover $p:Y\\to Z$. Its source is qcqs by the cited finite-presentation source lemma. Given a surjection $\\mathcal B\\twoheadrightarrow\\mathcal C$ of quasi-coherent algebras on $Y$, both $p_*\\mathcal B$ and $p_*\\mathcal C$ are quasi-coherent, by the degree-zero case of the higher-direct-image lemma. This pushforward is still surjective: on every affine etale chart $V\\to Z$, the scheme $W=Y\\times_ZV$ is affine by finiteness, and affine-chart sections compute cokernels, so $\\mathcal B(W)\\to\\mathcal C(W)$ is surjective. The direct-image chart-limit definition identifies its value on $V$ with sections over $W$: a compatible family on all etale charts of $W$ is exactly a section by the sheaf gluing axiom. The same definition identifies global sections of $p_*\\mathcal B$ and $p_*\\mathcal C$ with those of $\\mathcal B$ and $\\mathcal C$. Apply the assumed property on $Z$ to these pushed-forward algebras. Thus $Y$ has the same global positive-power-lifting property.",
+   "uses": [
+    "lem-sfb-qcqs-space-finite-scheme-cover",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-space-higher-direct-image-quasi-coherent",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 4.3.1, printed p.506, final paragraph; Tag 09YC, and the affine-chart justification of the sentence that the covering scheme is adequately affine. Local PDF WANTED; journal PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+   }
+  },
+  {
+   "text": "Use the Zariski-etale quasi-coherent equivalence to work on the scheme $Y$ with Zariski quasi-coherent algebras; restriction preserves global sections and the tensor-pullback description identifies algebra structures. Surjectivity is detected on affine charts, so the lifting property just obtained applies to these algebras. Put $A=\\Gamma(Y,\\mathcal O_Y)$. For a closed point $q\\in Y$, choose an affine open $U$ containing $q$. Choose quasi-coherent ideals $\\mathcal I,\\mathcal J\\subseteq\\mathcal O_Y$ cutting out $Y\\setminus U$ and $\\{q\\}$, respectively. Their vanishing sets are disjoint, so $\\mathcal I+\\mathcal J=\\mathcal O_Y$: at every stalk one ideal is the unit ideal. Consequently the composite $\\mathcal I\\hookrightarrow\\mathcal O_Y\\twoheadrightarrow\\mathcal O_Y/\\mathcal J$ is surjective. Its target is quasi-coherent by affine-chart cokernel calculus. The induced map $\\operatorname{Sym}(\\mathcal I)\\twoheadrightarrow\\operatorname{Sym}(\\mathcal O_Y/\\mathcal J)$ is a surjection of quasi-coherent algebras. Let $t$ be the global degree-one section given by $1$ modulo $\\mathcal J$. Power lifting supplies $N>0$ and $s\\in\\Gamma(Y,\\operatorname{Sym}(\\mathcal I))$ mapping to $t^N$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sc-closed-subset-qc-ideal",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-trf-symmetric-sheaf-map-degreewise-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 4.3.1, printed pp.505-506, scheme argument, first displayed symmetric-algebra surjection. We use any ideal of the closed singleton instead of its residue-field skyscraper. Local PDF WANTED; journal PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+   }
+  },
+  {
+   "text": "Take the degree-$N$ component $s_N$ of $s$. This is a global section: on every affine open the symmetric algebra has its cited direct-sum grading, and the degree projections commute with restrictions, since restrictions send degree-one generators to degree-one generators. The same generator calculation shows that the symmetric-algebra map preserves degrees, hence $s_N$ maps to $t^N$. Evaluate $\\operatorname{Sym}(\\mathcal I)\\to\\mathcal O_Y$ via the inclusion of $\\mathcal I$, and let $f$ be the image of $s_N$. Locally it is a sum of products of $N$ elements of $\\mathcal I$, so $f\\in\\mathcal I^N\\subseteq\\mathcal I$ since $N>0$. Modulo $\\mathcal J$, evaluation agrees with the map $\\operatorname{Sym}(\\mathcal O_Y/\\mathcal J)\\to\\mathcal O_Y/\\mathcal J$ sending its degree-one section $t$ to $1$, by the symmetric-algebra universal property. Thus $f\\equiv1\\pmod{\\mathcal J}$. Therefore $q\\in Y_f\\subseteq U$, and $Y_f=D_U(f|_U)$ is affine by the affine principal-open lemma.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "lem-weil-pbc-affine-open-section-vanishing-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 4.3.1, printed p.506, construction of f and the equality X_f=U_f. Taking the positive homogeneous component makes the vanishing on the complement explicit. Local PDF WANTED; journal PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+   }
+  },
+  {
+   "text": "The opens $Y_f$ so obtained cover all closed points, hence all of $Y$. Indeed, the complement of their union is a closed subset of the quasi-compact space $Y$; if nonempty it has a point closed in $Y$ by the cited Kolmogorov-space lemma, contradicting the construction. The underlying space of a scheme is Kolmogorov directly from its affine charts: two distinct points either have an open containing only one, or both lie in one affine open and distinct prime ideals are distinguished by a principal open. Quasi-compactness now gives finitely many such sections $f_1,\\ldots,f_m\\in A$ with affine $Y_{f_i}$ covering $Y$. If $Y$ is empty it is $\\operatorname{Spec}(0)$ and the conclusion follows immediately, so in the remaining argument choose $m>0$.",
+   "uses": [
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 4.3.1, printed p.506, passage from closed-point neighbourhoods to a finite affine principal-open covering; Topology Tag 005E (lemma-quasi-compact-closed-point). Local PDF WANTED; journal PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+   }
+  },
+  {
+   "text": "Consider the map of quasi-coherent polynomial algebra sheaves $\\alpha:\\mathcal O_Y[T_1,\\ldots,T_m]\\to\\mathcal O_Y[x]$ defined by $T_i\\mapsto f_i x$. These algebras are the symmetric algebras of the corresponding finite free modules. On $Y_{f_i}$ the image contains $x$ because $f_i$ is a unit, so $\\alpha$ is surjective as a sheaf. Global sections of these polynomial sheaves are $A[T_1,\\ldots,T_m]$ and $A[x]$: their underlying modules are direct sums of copies of $\\mathcal O_Y$ indexed by monomials, and the degree-zero case of the cited coproduct-cohomology lemma commutes these sums with $\\Gamma$. The free-module symmetric-algebra identification makes these identifications multiplicative and sends each variable to the same variable. Apply positive-power lifting to $x$. There are $L>0$ and $g\\in A[T_1,\\ldots,T_m]$ with $g(f_1x,\\ldots,f_mx)=x^L$. Writing $g=\\sum_\\nu a_\\nu T^\\nu$, comparison of the coefficient of $x^L$ gives $1=\\sum_{|\\nu|=L}a_\\nu\\prod_i f_i^{\\nu_i}$. Each term belongs to $(f_1,\\ldots,f_m)$ because $L>0$. Thus this ideal is the unit ideal.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-weil-pbc-basic-open-function",
+    "lem-weil-pbc-qcqs-cohomology-direct-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 4.3.1, printed p.506, polynomial-algebra surjection and comparison of degree-N coefficients. Local PDF WANTED; journal PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+   }
+  },
+  {
+   "text": "The finite family $f_i$ generates the unit ideal in $A$ and all $Y_{f_i}$ are affine, so the cited unit-ideal principal-open criterion makes $Y$ affine. Apply Chevalley affineness descent for algebraic spaces to the finite surjective morphism $p:Y\\to Z$. It gives that $Z$ is represented by an affine scheme. Every preceding step allowed arbitrary commutative rings and used neither Noetherianity nor finite type of $Z$ over $R$.",
+   "uses": [
+    "lem-weil-pbc-affine-unit-ideal-basic-opens",
+    "lem-sfb-finite-surjective-affine-space-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/alper-adequate-moduli-spaces.pdf",
+    "place": "Theorem 4.3.1, printed p.506, last sentence of the scheme argument and final paragraph; Stacks Tags 01QF and 07VS. Local PDF WANTED; journal PDF read online at https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qcqs-space-finite-scheme-cover",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-space-higher-direct-image-quasi-coherent",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "def-trf-space-etale-module-functors",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-closed-subset-qc-ideal",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-trf-symmetric-sheaf-map-degreewise-surjective",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-affine-unit-ideal-basic-opens",
+  "lem-sfb-finite-surjective-affine-space-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/alper-adequate-moduli-spaces.pdf",
+  "place": "Theorem 4.3.1, printed pp.505-506, explicit global-lifting version of the proof, with the homogeneous-component and closed-point-cover details supplied. Local PDF WANTED; journal PDF read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space is affine if every section of every quotient of quasi coherent algebras has a positive power lifting globally",
+   "results": "{\"t\": \"2026-10-24T07:04:11Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact quasi separated algebraic space is affine if every section of every quotient of quasi coherent algebras has a positive power lifting globally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"AlgebraicGeometry.quasiSeparatedSpace_iff_affine\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.quasiCompact_over_affine_iff\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\"], \"digest\": \"4f524f4ab4314583\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adequately|adequateModuli|geometricallyReductive|powerReductive",
+   "results": "{\"t\": \"2026-10-24T07:07:44Z\", \"tool\": \"grep\", \"query\": \"adequately|adequateModuli|geometricallyReductive|powerReductive\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated algebraic space satisfying global power lifting for all surjections of quasi coherent algebras is affine",
+   "results": "{\"t\": \"2026-10-24T07:07:45Z\", \"tool\": \"leansearch\", \"query\": \"A quasi compact quasi separated algebraic space satisfying global power lifting for all surjections of quasi coherent algebras is affine\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\", \"AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace\", \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\"], \"digest\": \"68e22ec123a8c7b4\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T07:07:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.IsAffineOpen.Spec_basicOpen\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.IsAffine.of_isIso\"], \"digest\": \"1865330eb73e2686\"}; Hits read: scheme affine instances, abstract module descent, or affine space facts do not state the algebraic-space assertion or the torsor coaction comparison.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A qcqs algebraic space with positive power lifts for sections of all quotient quasi coherent algebras is an affine scheme",
+   "results": "{\"t\": \"2026-10-24T07:39:07Z\", \"tool\": \"leanfinder\", \"query\": \"A qcqs algebraic space with positive power lifts for sections of all quotient quasi coherent algebras is an affine scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"3b854dff94cfbfec\"}; Read hits: affine scheme predicates, scheme-localization lemmas and the existing unit-ideal affineness criterion cover smaller ingredients, not the positive-power criterion for algebraic spaces. No match to the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsAffine\"",
+   "results": "{\"t\": \"2026-10-24T07:41:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsAffine\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffine\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.instIsAffineObjOppositeCommRingCatSchemeSpec\", \"AlgebraicGeometry.isAffine_affineScheme\", \"AlgebraicGeometry.IsAffineOpen.Spec_basicOpen\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.IsAffine.of_isIso\"], \"digest\": \"1865330eb73e2686\"}; Read hits: affine scheme predicates, scheme-localization lemmas and the existing unit-ideal affineness criterion cover smaller ingredients, not the positive-power criterion for algebraic spaces. No match to the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adequat|power.?surject|power.?lift",
+   "results": "{\"t\": \"2026-10-24T07:44:26Z\", \"tool\": \"grep\", \"query\": \"adequat|power.?surject|power.?lift\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read hits: affine scheme predicates, scheme-localization lemmas and the existing unit-ideal affineness criterion cover smaller ingredients, not the positive-power criterion for algebraic spaces. No match to the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Algebraic spaces Serre affineness criterion by lifting powers of sections of quasi coherent algebras",
+   "results": "{\"t\": \"2026-10-24T07:44:26Z\", \"tool\": \"leansearch\", \"query\": \"Algebraic spaces Serre affineness criterion by lifting powers of sections of quasi coherent algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_eq_of_qcqs\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsAffine.casesOn\", \"AlgebraicGeometry.isAffine_of_isAffineOpen_basicOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.HasAffineProperty.iff\", \"AlgebraicGeometry.HasAffineProperty.iff_of_iSup_eq_top\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\"], \"digest\": \"8f2d454baf7f6063\"}; Read hits: affine scheme predicates, scheme-localization lemmas and the existing unit-ideal affineness criterion cover smaller ingredients, not the positive-power criterion for algebraic spaces. No match to the item.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-power-reductive-free-affine-quotient",
+  "date": "2026-10-24",
+  "group": "Q132"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Proposition 9.7.8, printed p.528, with Lemma 9.2.5(3) and Theorem 4.3.1 (power-lifting formulation of geometric reductivity and the adequate Serre criterion). The assertion that q is affine finitely presented is fppf descent from the trivial torsor projection. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: adequate Serre criterion, global algebra-surjection formulation over an arbitrary affine base.",
+   "via": [
+    "lem-sfb-power-reductive-free-affine-quotient",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-power-lifting-affineness",
+  "worker": "stage1",
+  "summary": "Followed Alper Theorem 4.3.1 with its scheme proof written out, and replaced the implicit adequate-affineness ascent by affine-chart pushforward exactness. Only the missing arbitrary-base finite scheme cover is new; the existing arbitrary-base Chevalley node is reused. No statement change and no field, Noetherian or finite-type hypothesis added.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Proposition 9.7.8, printed p.528, with Lemma 9.2.5(3) and Theorem 4.3.1 (power-lifting formulation of geometric reductivity and the adequate Serre criterion). The assertion that q is affine finitely presented is fppf descent from the trivial torsor projection. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: adequate Serre criterion, global algebra-surjection formulation over an arbitrary affine base. Steps 1 and 6 realize the finite scheme cover and Chevalley passage; steps 2-5 realize the adequate Serre criterion used there. The ancestor utility returns None (inherited null); no blueprint node states this result or Tag 09YC. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-sc-closed-subset-qc-ideal",
+    "why": "Generic Closed subsets are cut out by quasi-coherent ideals used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Generic The symmetric algebra of a quasi-coherent module: universal property and sections over affine opens used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-trf-symmetric-sheaf-map-degreewise-surjective",
+    "why": "Generic Surjective module-sheaf maps induce degreewise surjective symmetric-algebra maps used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-graded",
+    "why": "Generic The symmetric algebra is graded by the images of the tensor powers used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic Sections over an affine open: vanishing at a point iff membership in its prime; basic opens are affine with ring the localization used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-sc-quasi-compact-kolmogorov-closed-point",
+    "why": "Generic Closed points in closed subsets of quasi-compact Kolmogorov spaces used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "why": "Generic The symmetric algebra of a finite free module is a polynomial ring used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-basic-open-function",
+    "why": "Generic The non-vanishing locus of a function on a scheme is open used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-cohomology-direct-sum",
+    "why": "Generic Cohomology commutes with direct sums of modules on a qcqs scheme used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-unit-ideal-basic-opens",
+    "why": "Generic A scheme covered by affine basic opens of sections generating the unit ideal is affine used in the explicit adequate Serre argument; no statement of this unit supplies this general scheme/topological algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-closed-subset-qc-ideal",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-trf-symmetric-sheaf-map-degreewise-surjective",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-basic-open-function",
+  "lem-weil-pbc-qcqs-cohomology-direct-sum",
+  "lem-weil-pbc-affine-unit-ideal-basic-opens"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-101849b49",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-101849b49 (reviewer sub-agent of L); spot-checked: Verdict PASS, first split of the item; review in review.md, no fixes. Delivery: one commit with the item (statement unchanged, 6 steps) and one statement-only new node, lem-sfb-qcqs-space-finite-scheme-cover. The new node matches Stacks 09YC(1) (spaces-limits.tex 3569, proposition-there-is-a-scheme-finite-over) exactly: any base scheme S, any qcqs space, a finite surjective finitely presented scheme cover. It is not a duplicate: the existing 09YC-related nodes are the Noetherian separated cover over a field and the 09YB integral cover. The arbitrary-ring item duplicates none of the adequacy criteria, which all need a base field. Step checks: (1) the cover plus 06G5 makes Y qcqs; 0720 at i=0 gives quasi-coherence; W=Y×_Z V is affine and terminal in the chart category, so p_* gives sections over W, is surjective, and leaves global sections unchanged. (2)-(3) Transfer to Zariski algebras by 03DX; take I, J by 01J3 with I+J=O; Sym(I)->Sym(O/J) is degreewise surjective by 01CJ; the degree-N component (N>0) gives f in I with f≡1 mod J, so q∈Y_f⊆U and Y_f is affine by 01I3(b). (4) Closed points via 005E plus a finite subcover. (5) α: T_i↦f_i x; global sections are polynomial rings by 01FF at p=0; comparing x^L coefficients with L>0 shows the f_i generate the unit ideal. (6) 01QF makes Y affine and 07VS (Stacks spaces-limits lemma-affine, read) makes Z affine. Edge cases checked: Y empty, N>0 and L>0 needed, arbitrary I, no Jacobson or Noetherian assumption, P^1 sanity check. The Alper local PDF is absent (WANTED), so I could not read it and verified the mathematics independently against the standard route. Batch-5: every flagged citation is a definition or a general foundation (03DX descent, 01CJ, algebraic-space fibre products and descent). The closures contain no sk-thm-trace-transport and no nt- node, and the base item stmt_deps already cite def-trf-algebraic-space, so all flags are accepted. The generic cross-unit tools listed in split_report.tool_uses are accepted for the maintainer to record."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePowerLiftingAffineness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_scheme_of_global_power_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePowerLiftingAffineness.lean",
+  "statement": "theorem exists_affine_scheme_of_global_power_lifting (R : Type u) [CommRing R] (Z : AlgebraicSpace (Spec (CommRingCat.of R))) (_hqc : IsQuasiCompact Z.obj) (_hqs : MapIsQuasiCompact (prod.lift (𝟙 Z.obj.obj) (𝟙 Z.obj.obj))) (_hlift : ∀ (B C : Z.QCAlg) (q : B ⟶ C), Presheaf.IsLocallySurjective Z.etaleTopology q.hom.right.hom → ∀ c : (C.obj.right.obj ⋙ forget CommRingCat).sections, ∃ N : ℕ, 0 < N ∧ ∃ b : (B.obj.right.obj ⋙ forget CommRingCat).sections, ∀ U : Z.EtaleSiteᵒᵖ, (q.hom.right.hom.app U) (b.val U) = (c.val U) ^ N) : ∃ U : Over (Spec (CommRingCat.of R)), IsAffine U.left ∧ Nonempty (yoneda.obj U ≅ Z.obj.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c43a0978",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Fresh S2 delivery; only the item node differs from side-live (lean record + landed stmt_dep def-sfb-space-quasi-coherent-algebra, used via QCAlg). lean.statement verbatim; all imports exist. Clauses match Alper Lemma 4.1.8(3)=>(2) and Thm 4.3.1: arbitrary CommRing R, Z an algebraic space over Spec R, IsQuasiCompact Z.obj (qc etale atlas), diagonal qc on affine tests, all QCAlg B C with IsLocallySurjective algebra map q, every global section c (compatible families), one global N>0 and b with q(b)=c^N, conclusion an affine U with yoneda U ≅ Z. No Noetherian/finite-type/separatedness assumption and no weakening universe restriction (all algebras the proof uses live in u). Edge cases empty Z, R=0, zero sections, N=0 excluded, disconnected Z, P^1 non-vacuity OK. No defs, sorry only, source/blueprint docstrings and all 6 proof steps (H8); report has Worker report and Second reading by Q81. No compile (no file changed); worker reports a clean compile. Advisory: hqs is MapIsQuasiCompact(prod.lift 𝟙 𝟙), the diagonal relative to affine Spec R, instead of the landed IsAbsolutelyQuasiSeparated/MapIsQuasiSeparated; equivalent to 0AHR(3) because S is affine, so a note only."
+ }
+}

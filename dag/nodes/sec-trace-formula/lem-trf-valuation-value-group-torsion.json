@@ -13,68 +13,41 @@
  ],
  "proof": [
   {
-   "text": "Put $U=\\{v\\in V:v\\ne0,\\ v^{-1}\\in V\\}$ and $M=V\\setminus U$. Thus $U$ is precisely the set of units of $V$: an inverse in the subring is the field inverse. If $r\\in M$ and $b\\in V$, then $br\\in M$, since an inverse $c\\in V$ of $br$ would make $bc$ an inverse of $r$. In particular $0\\in M$, $1\\notin M$, and $-r\\in M$ whenever $r\\in M$.",
+   "text": "View V as the valuation subring W using the inverse alternative, supplying the zero case by zero membership. Use its canonical multiplicative valuation v. Mathlib ValuationSubring.valuation_eq_iff identifies equality of valuations of two elements with multiplication by a unit of W.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph; Tag 0ASH, lemma-inequality-general, proof, normalization at a term of minimal additive valuation (maximal multiplicative valuation)."
    }
   },
   {
-   "text": "For nonzero $r,s\\in E$, the hypothesis applied to $r/s$ says $r/s\\in V$ or $s/r\\in V$. Consequently, if $r,s\\in M$ are nonzero and $r/s\\in V$, then $r+s=s(1+r/s)\\in M$ by Step 1; if $s/r\\in V$, use $r+s=r(1+s/r)$. The zero cases are immediate. Thus $M$ is closed under addition, and every finite sum of elements of $M$ belongs to $M$. This is a direct calculation, without invoking a local-ring or maximal-ideal theorem.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
-   }
-  },
-  {
-   "text": "Fix $x\\in E^\\times$. By [def-weil-algebraic-element] there is a nonzero polynomial $P(T)=\\sum_{i\\in I}c_iT^i\\in K[T]$ with $P(x)=0$, where $I$ is its finite nonempty set of exponents with nonzero coefficients. Put $d_i=c_ix^i\\in E^\\times$. Then $\\sum_{i\\in I}d_i=0$. There are at least two indices: a single term is nonzero because both its coefficient and $x$ are nonzero in a field.",
+   "text": "For nonzero x, choose a nonzero polynomial p with p(x)=0 by [def-weil-algebraic-element]. Its support s is nonempty. For i in s put d(i)=algebraMap(coeff(p,i))*x^i. Each term is nonzero, since the field algebra map is injective and x is nonzero, and the sum of these terms is zero by polynomial evaluation.",
    "uses": [
     "def-weil-algebraic-element"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph; Tag 0ASH, lemma-inequality-general, proof, normalization at a term of minimal additive valuation (maximal multiplicative valuation)."
    }
   },
   {
-   "text": "Choose $j\\in I$ such that $d_i/d_j\\in V$ for all $i\\in I$. Here is the finite selection argument: start with any term, and process the remaining terms one at a time. If the new term divided by the current chosen term is in $V$, keep the choice. Otherwise their inverse ratio is in $V$, so replace the chosen term by the new one; every earlier term divided by the new choice is the product of its old ratio and the old choice divided by the new one, hence is in $V$. This induction ends because $I$ is finite.",
+   "text": "Choose j in s maximizing v(d(j)) using Finset.exists_max_image. If no other i in s has the same valuation, every other term has strictly smaller valuation. Valuation.map_sum_eq_of_lt would then make the valuation of the zero sum equal to the nonzero valuation v(d(j)), a contradiction. Thus two distinct indices have equal valuations. Reorder them as i<j. This is the proved private helper equal_value_terms.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph; Tag 0ASH, lemma-inequality-general, proof, normalization at a term of minimal additive valuation (maximal multiplicative valuation)."
    }
   },
   {
-   "text": "Write $t_i=d_i/d_j\\in V$. Dividing the relation in Step 3 by $d_j\\ne0$ gives $\\sum_i t_i=0$, and $t_j=1$. If every $t_i$ with $i\\ne j$ belonged to $M$, Step 2 would give $-1=\\sum_{i\\ne j}t_i\\in M$, contradicting Step 1 since $-1$ is a unit. Hence there is $i\\ne j$ with $t_i\\in U$; in particular $t_i,t_i^{-1}\\in V$.",
+   "text": "ValuationSubring.valuation_eq_iff gives a unit u of W with u*d(i)=d(j). Set n=j-i>0 and a=coeff(p,i)/coeff(p,j), a nonzero element of K. Cancel the nonzero factor algebraMap(coeff(p,j))*x^i in this equality, using x^i*x^(j-i)=x^j, to obtain x^n=algebraMap(a)*u. Both u and its inverse lie in V by their unit membership, and u is nonzero. This is exactly the required elementwise torsion assertion.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
-   }
-  },
-  {
-   "text": "If $i>j$, the equation $t_i=(c_i/c_j)x^{i-j}$ gives $x^{i-j}=(c_j/c_i)t_i$; take $n=i-j$, $a=c_j/c_i\\in K^\\times$, and $u=t_i$. If $i<j$, invert the same equation to obtain $t_i^{-1}=(c_j/c_i)x^{j-i}$, hence $x^{j-i}=(c_i/c_j)t_i^{-1}$; take $n=j-i$, $a=c_i/c_j\\in K^\\times$, and $u=t_i^{-1}$. In both cases $n\\ge1$ and $u,u^{-1}\\in V$, as required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
-   }
-  },
-  {
-   "text": "The set $U=V^\\times$ is a subgroup of $E^\\times$: products and inverses remain in $V$ together with their inverses. In the quotient group $E^\\times/U$, the equality $x^n=au$ gives $[x]^n=[a]$ because $[u]=1$. Thus the positive multiple $n[x]$ lies in the image of $K^\\times$, exactly the final clause.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+    "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph; Tag 0ASH, lemma-inequality-general, proof, normalization at a term of minimal additive valuation (maximal multiplicative valuation)."
    }
   }
  ],
@@ -84,7 +57,8 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph, and Tag 0ASH, lemma-inequality-general, proof: normalization of a nonzero relation at a term of minimal value. Agent-written direct polynomial version, with the elementary divisibility and nonunit arguments written below; no finite-index theorem is invoked."
+  "place": "Tag 0ASJ, lemma-etale-extension-valuation-ring, first proof paragraph; Tag 0ASH, lemma-inequality-general, proof, normalization at a term of minimal additive valuation (maximal multiplicative valuation).",
+  "note": "V4: formalized the direct polynomial proof using Mathlib canonical valuation and the unequal-valuations sum lemma in place of the explicit nonunit-ideal calculations."
  },
  "mathlib_searches": [
   {
@@ -243,5 +217,26 @@
   "result": "pass",
   "note": "Statement and dependencies match; source and edge cases checked; scompile.py passed with local overlay and server confirmation; no findings."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261026T083336-L-2327763",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

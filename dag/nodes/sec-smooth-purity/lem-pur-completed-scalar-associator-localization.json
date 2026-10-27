@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-completed-scalar-associator-localization",
+ "kind": "statement",
+ "title": "Completed scalar associator agrees with exact localization",
+ "statement": "For finite l-adic coefficient extensions E to F to L, every scheme W and every unbounded derived completed integral E-module K, the completed derived tensorComposition followed by completedTensorModel for the composite equals the successive exact-model comparisons followed by the localized ordinary scalar associator. This compares associators only, without any constant-restriction balancing square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint), Tag 06YY (lemma-derived-base-change); ordinary tensor associativity: sites-modules.tex, Tag 03EK."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-completed-scalar-exact-model",
+  "lem-pur-completed-scalar-model-counit",
+  "def-pur-ordinary-scalar-associator"
+ ],
+ "proof": [
+  {
+   "text": "Localize each ordinary scalar adjunction and transport its left functor by completedTensorModel. On every K-flat complex the resulting unit satisfies the defining pbcDerivedScalarAdjunction_exists equation, by completedTensorModel_counit and the ordinary unit formula. Uniqueness identifies this adjunction with the specified derived adjunction. The identity-on-sections restriction compositor localizes to pbcDerivedRestrictComp by definition. Localization preserves composite adjunction units and their transport by that compositor. Finally leftAdjointUniq preserves the unit and is determined by that condition, so the completed derived associator is the localized ordinary associator conjugated by the three exact models. This gives the displayed equation. Exactness makes all computation comparisons invertible and removes boundedness assumptions.",
+   "uses": [
+    "def-pur-completed-scalar-exact-model",
+    "lem-pur-completed-scalar-model-counit",
+    "def-pur-ordinary-scalar-associator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), Tag 06YY (lemma-derived-base-change); ordinary tensor associativity: sites-modules.tex, Tag 03EK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-scalar-exact-model",
+  "lem-pur-completed-scalar-model-counit",
+  "def-pur-ordinary-scalar-associator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 06YY; auxiliary exact-localization argument for constant/completed scalar associativity."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of mates for composite adjunctions and scalar restriction extension natural transformations",
+   "results": "msearch leanfinder found mateEquiv and mateEquiv_hcomp; no prescribed scalarCompletion normalization or associativity square.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "Mathlib leftAdjointUniq and homEquiv_leftAdjointUniq_hom_app supply uniqueness and unit characterization.",
+   "date": "2026-10-26",
+   "verdict": "usable ingredients"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*comp|mate.*comp",
+   "results": "Existing exact-derived square pasting, universal left-derived uniqueness, and normalized ordinary/derived scalar adjunctions. No specialized model comparison.",
+   "date": "2026-10-26",
+   "verdict": "usable ingredients"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For exact functors, localization preserves the unit-normalized associator of composite adjunctions and the universal left derived counit comparison.",
+   "results": "Adjunction.localization, localization_unit_app, localization_counit_app, derived_unit and derived_counit. These supply generic adjunction localization, not the specialized pbc normalization and associator comparison.",
+   "date": "2026-10-26",
+   "verdict": "ingredients, no exact specialized match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantCompletedScalarAssociativity",
+  "date": "2026-10-26",
+  "group": "P7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Auxiliary Step 9 of strict scalar composition, serving coefficient compatibility: Completed scalar associator agrees with exact localization.",
+   "via": [
+    "lem-pur-constant-completed-scalar-associativity",
+    "lem-pur-compact-support-strict-scalar-composition",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedScalarAssociatorLocalization",
+  "file": "lean/Sheaf/Paper/CompletedScalarAssociatorLocalization.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.completedTensorModel_composition",
+  "statement": "theorem completedTensorModel_composition\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (i : E →ₐ[ℚ_[l]] F)\n    (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]\n    (j : F →ₐ[ℚ_[l]] L) (W : Scheme.{u})\n    (K : DerivedCategory (scalarReductionSource l E W)) :\n    (haveI := (completedTensor_exact l E F i W).1\n     haveI := (completedTensor_exact l E F i W).2\n     haveI := (completedTensor_exact l F L j W).1\n     haveI := (completedTensor_exact l F L j W).2\n     haveI := (completedTensor_exact l E L (j.comp i) W).1\n     haveI := (completedTensor_exact l E L (j.comp i) W).2\n     haveI := pbcExtend_additive (completedCoefficientMap l E F i W)\n     haveI := pbcExtend_additive (completedCoefficientMap l F L j W)\n     haveI := pbcExtend_additive (completedCoefficientMap l E L (j.comp i) W)\n     (PurCompactSupport.tensorComposition _ _ _\n       (PurCompactSupport.completedMap_composition l E F i L j W)).hom.app K ≫\n       (completedTensorModel l E L (j.comp i) W).hom.app K =\n     (pbcDerivedExtend (completedCoefficientMap l F L j W)).map\n       ((completedTensorModel l E F i W).hom.app K) ≫\n       (completedTensorModel l F L j W).hom.app\n         ((pbcExtend (completedCoefficientMap l E F i W)).mapDerivedCategory.obj K) ≫\n       ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫\n         Functor.mapDerivedCategoryNatIso\n           (ordinaryScalarAssociator _ _ _\n             (PurCompactSupport.completedMap_composition l E F i L j W))).hom.app K)",
+  "branch": "sheaf-dag",
+  "by": "P7",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T204812-L-3012368",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261025T204812-L-3012368",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

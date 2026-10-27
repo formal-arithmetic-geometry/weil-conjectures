@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-etale-brown-open-singleton-evaluation",
+ "kind": "statement",
+ "title": "Evaluation of the canonical open singleton insertion is the open scalar projection",
+ "statement": "Let O be a commutative ring, t an element, f:X→Y a scheme morphism, c a compactification and S:StrictEtaleCompactSupport O t c [def-per-strict-etale-system-interfaces]. Fix m≤n and a natural isomorphism q from scalar extension on X followed by level-m open extension to level-n open extension followed by scalar extension on c.Z. Suppose its mate for the two level open extension/inverse-image adjunctions equals the inverse of S.openDerived.derivedTensor. Form insertion by conjugating S.openDerived.inverseEvaluation at level n under the composite singleton/open adjunctions. For every derived level-n object P on X, evaluation at m of insertion(P) followed by derivedBelow on c.Z at the level-n open extension of P equals openDerivedEvaluation at the singleton extension of P, then level-m open extension of derivedBelow on X at P, then q at P. No finiteness, Brown adjoint, or proper singleton mate is assumed.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng, Construction 5.14, Construction 5.15 and Lemma 5.16 (printed p. 35), pasting the open singleton comparison (4.22.2), with singleton Hom transposes from Construction 4.1."
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-per-strict-etale-system-interfaces",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-pur-etale-brown-projection-realization"
+ ],
+ "proof": [
+  {
+   "text": "Prove the singleton below-level Hom-transpose formula from derivedBelow_rep, hom_formula, the normalized derived adjunctions and transition_rep on flat-term K-flat representatives, and descend to the arbitrary fixed derived packages.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-pur-system-single-derived-evaluation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose through the level open adjunction and scalar adjunction. The prescribed mate equation for q and inverseTransition identify the coefficient factors. The defining conjugate equation of insertion and the evaluated open adjunction identify the remaining factors. Injectivity of both transposes gives the displayed equality.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-system-single-derived-evaluation",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Zheng Construction 4.1; Lemma 5.13; Constructions 5.14–5.15 and Lemma 5.16. Explicit normalized Hom-transpose steps of lem-pur-etale-brown-geometric-comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The evaluation of the singleton left adjoint to derived evaluation commutes with proper direct image and open extension by zero through scalar extension mates",
+   "results": [
+    "CategoryTheory.evaluationLeftAdjoint",
+    "CategoryTheory.lanEvaluationIsoColim",
+    "SheafOfModules.PullbackConstruction.adjunction",
+    "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt",
+    "CategoryTheory.evaluationAdjunctionRight",
+    "CategoryTheory.evaluationAdjunctionLeft",
+    "ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
+    "stalkSkyscraperSheafAdjunction"
+   ],
+   "date": "2026-10-25",
+   "verdict": "Generic evaluation and adjunction constructions; no normalized strict coefficient singleton or fixed-presentation projection comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coefficient projection and evaluation of singleton extension, computed by normalized adjunction mates for sheaves of modules over constant rings",
+   "results": [
+    "SheafOfModules.unitHomEquiv_apply_coe",
+    "SheafOfModules.Presentation.map_π_eq",
+    "SheafOfModules.Presentation.mapGenerators",
+    "SheafOfModules.unitHomEquiv",
+    "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+    "SheafOfModules.unitHomEquiv_comp_apply",
+    "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+    "SheafOfModules.unitToPushforwardObjUnit"
+   ],
+   "date": "2026-10-25",
+   "verdict": "Generic module-sheaf tools; no exact match for the specified derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "singleton.*[Mm]ate|[Mm]ate.*singleton|constantRingModuleRestriction|derivedBelow",
+   "results": [
+    {
+     "file": "Mathlib/Analysis/Calculus/InverseFunctionTheorem/ApproximatesLinearOn.lean",
+     "line": "361",
+     "text": "theorem to_inv (hf : ApproximatesLinearOn f (f' : E →L[𝕜] F) s c) (hc : Subsingleton E ∨ c < N⁻¹) :"
+    }
+   ],
+   "date": "2026-10-25",
+   "verdict": "The single textual hit is unrelated; local rg also found only the parent and generic systemSingleDerivedTranspose, whose fixed model must be compared with the given package."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleBrownGeometricComparisons",
+  "date": "2026-10-25",
+  "group": "H6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Steps 4–5 (the open singleton Hom-transpose square) of lem-pur-etale-brown-geometric-comparisons, serving Zheng Lemmas 5.13 and 5.16 in the six-operations construction. The existing created.item chain ends in a module name and has no imported blueprint ancestor.",
+   "via": [
+    "lem-pur-etale-brown-geometric-comparisons",
+    "lem-pur-etale-system-brown-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleBrownOpenSingletonEvaluation",
+  "file": "lean/Sheaf/Paper/EtaleBrownOpenSingletonEvaluation.lean",
+  "declaration": "AlgebraicGeometry.etaleBrownOpenSingletonEvaluation",
+  "statement": "theorem etaleBrownOpenSingletonEvaluation\n    (S : StrictEtaleCompactSupport O t c) {m n : ℕ} (h : m ≤ n)\n    (q : (S.PX.scalar h).derived ⋙ S.levelDerivedOpen m ≅\n      S.levelDerivedOpen n ⋙ (S.PZ.scalar h).derived)\n    (hq : (mateEquiv (S.levelDerivedOpenAdjunction n) (S.levelDerivedOpenAdjunction m)\n      (.mk _ _ _ _ q.hom)).natTrans = (S.openDerived.derivedTensor h).inv)\n    (P : DerivedCategory (strictEtaleLevel X O t n)) :\n    let insertion := ((conjugateIsoEquiv\n      ((S.PX.derivedAdj n).comp S.derivedOpenAdjunction)\n      ((S.levelDerivedOpenAdjunction n).comp (S.PZ.derivedAdj n))).symm\n        (S.openDerived.inverseEvaluation n)).symm\n    (S.PZ.evaluation m).map (insertion.hom.app P) ≫\n      (S.PZ.derivedBelow h).hom.app ((S.levelDerivedOpen n).obj P) =\n    (S.openDerivedEvaluation m).hom.app ((S.PX.derivedExtension n).obj P) ≫\n      (S.levelDerivedOpen m).map ((S.PX.derivedBelow h).hom.app P) ≫ q.hom.app P",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T180724-L-4024248",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T180724-L-4024248",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

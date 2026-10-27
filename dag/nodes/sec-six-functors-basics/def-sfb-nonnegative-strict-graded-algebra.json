@@ -1,0 +1,392 @@
+{
+ "id": "def-sfb-nonnegative-strict-graded-algebra",
+ "kind": "definition",
+ "title": "Nonnegative strictly graded commutative algebras",
+ "statement": "Let $R$ be a commutative ring. A nonnegatively graded unital $R$-algebra [def-sfb-nonnegative-graded-algebra] consists of an associative unital $R$-algebra $A$ and $R$-submodules $A_i$ for $i\\geq0$, such that the additive sum map $\\bigoplus_{i\\geq0}A_i\\to A$ is an isomorphism, $1\\in A_0$, the image of $R$ lies in $A_0$, and $A_i A_j\\subseteq A_{i+j}$. Put $A_i=0$ for $i<0$. An element of $A_i$ is homogeneous of degree $i$. The algebra is strictly graded commutative if $xy=(-1)^{ij}yx$ for every homogeneous $x\\in A_i,y\\in A_j$ and $x^2=0$ for every homogeneous element of odd degree. Write $A_{\\mathrm{even}}=\\bigoplus_{i\\geq0}A_{2i}$, $A_{\\mathrm{odd}}=\\bigoplus_{i\\geq0}A_{2i+1}$ and $A_{\\mathrm{even},+}=\\bigoplus_{i>0}A_{2i}$. The even part is a commutative subalgebra and its positive-degree part is an ideal in it.",
+ "source": {
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tag 09PF (section-tate), paragraphs immediately preceding Tag 09PG (definition-divided-powers-graded): graded algebras, parity parts and strict graded commutativity."
+ },
+ "stmt_deps": [
+  "def-sfb-nonnegative-graded-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Use the internal direct-sum grading of [def-sfb-nonnegative-graded-algebra]. The displayed parity sums mean their images inside $A$: an element is a finite sum of homogeneous components with respectively even, odd, or strictly positive even indices. These images are $R$-submodules, since addition, negation, and scalar multiplication preserve the indicated indices. The restricted sum maps are injective because the full sum map is injective. Thus these are genuine submodules of the given algebra, without any choice of new data.",
+   "uses": [
+    "def-sfb-nonnegative-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PF, section-tate, introductory grading and parity conventions, lines 951–962; Tag 09PG, definition-divided-powers-graded, following observation at lines 985–990."
+   }
+  },
+  {
+   "text": "For the final structural assertions, $1$ and the scalar image lie in $A_0\\subseteq A_{\\mathrm{even}}$ by [def-sfb-nonnegative-graded-algebra]. Multiplication sends $A_{2i}A_{2j}$ into $A_{2(i+j)}$, so finite distributivity proves closure of the even submodule under multiplication. The defining sign rule gives $xy=yx$ on these homogeneous components because $(-1)^{(2i)(2j)}=1$; expanding two finite sums proves commutativity on the whole even part. Hence the inherited operations make it a commutative $R$-subalgebra. If $j>0$, then $i+j>0$ for every $i\\geq0$, so the same expansion shows that multiplication by any even element preserves the positive even submodule. This proves it is an ideal of the even subalgebra. Associativity, distributivity, and the unit equations are inherited from $A$.",
+   "uses": [
+    "def-sfb-nonnegative-graded-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dpa.tex",
+    "place": "Tag 09PF, section-tate, introductory grading and parity conventions, lines 951–962; Tag 09PG, definition-divided-powers-graded, following observation at lines 985–990."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-nonnegative-graded-algebra"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dpa.tex",
+  "place": "Tags 09PF/09PG: definition as written in section-tate; explicit elementary verification of parity submodules, commutativity, and ideal closure supplied here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A nonnegative graded unital algebra over a commutative ring that is graded commutative and every homogeneous odd degree element has square zero",
+   "results": {
+    "t": "2026-10-23T23:18:17Z",
+    "tool": "leanfinder",
+    "query": "A nonnegative graded unital algebra over a commutative ring that is graded commutative and every homogeneous odd degree element has square zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.gradedAlgebra",
+     "CliffordAlgebra.gradedAlgebra",
+     "CliffordAlgebra.evenOdd.gradedMonoid",
+     "ExteriorAlgebra.GradedAlgebra.ι_sq_zero",
+     "ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower",
+     "ExteriorAlgebra.GradedAlgebra.liftι",
+     "CliffordAlgebra.GradedAlgebra.ι",
+     "CliffordAlgebra.GradedAlgebra.ι_apply"
+    ],
+    "digest": "29f05a36df93e72d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, GradedRing at line 67) defines the underlying grading but has neither signed commutativity nor the independent odd-square-zero axiom. ExteriorAlgebra.gradedAlgebra and its generator-square lemma describe a particular algebra. GradedTensorProduct.comm (Internal.lean:363) is a braiding between tensor products, not this structure on an arbitrary algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedAlgebra\"",
+   "results": {
+    "t": "2026-10-23T23:18:16Z",
+    "tool": "loogle",
+    "query": "\"GradedAlgebra\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "GradedAlgebra",
+     "GradedAlgebra.proj",
+     "instGradedAlgebraRestrictScalars",
+     "DirectSum.IsInternal.gradedAlgebra",
+     "GradedAlgebra.proj_apply",
+     "GradedAlgebra.mem_support_iff",
+     "GradedAlgebra.ofAlgHom",
+     "GradedAlgebra.proj_recompose"
+    ],
+    "digest": "e008dd087660a853"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, GradedRing at line 67) defines the underlying grading but has neither signed commutativity nor the independent odd-square-zero axiom. ExteriorAlgebra.gradedAlgebra and its generator-square lemma describe a particular algebra. GradedTensorProduct.comm (Internal.lean:363) is a braiding between tensor products, not this structure on an arbitrary algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "strictly graded|strict.*graded.*comm|GradedComm",
+   "results": {
+    "t": "2026-10-23T23:18:16Z",
+    "tool": "grep",
+    "query": "strictly graded|strict.*graded.*comm|GradedComm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean"
+    ],
+    "digest": "6a3d3f5ecf31237f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, GradedRing at line 67) defines the underlying grading but has neither signed commutativity nor the independent odd-square-zero axiom. ExteriorAlgebra.gradedAlgebra and its generator-square lemma describe a particular algebra. GradedTensorProduct.comm (Internal.lean:363) is a braiding between tensor products, not this structure on an arbitrary algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict graded commutativity with odd homogeneous squares zero for a graded algebra",
+   "results": {
+    "t": "2026-10-23T23:18:16Z",
+    "tool": "leansearch",
+    "query": "Strict graded commutativity with odd homogeneous squares zero for a graded algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TensorProduct.gradedComm_algebraMap_tmul",
+     "GradedTensorProduct.comm_coe_tmul_coe",
+     "GradedTensorProduct.comm",
+     "DirectSum.GAlgebra.commutes",
+     "TensorProduct.gradedComm_of_zero_tmul",
+     "ExteriorAlgebra.GradedAlgebra.ι_sq_zero",
+     "CliffordAlgebra.gradedAlgebra",
+     "GradedAlgebra"
+    ],
+    "digest": "999533c36b718a67"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, GradedRing at line 67) defines the underlying grading but has neither signed commutativity nor the independent odd-square-zero axiom. ExteriorAlgebra.gradedAlgebra and its generator-square lemma describe a particular algebra. GradedTensorProduct.comm (Internal.lean:363) is a braiding between tensor products, not this structure on an arbitrary algebra."
+  },
+  {
+   "tool": "grep",
+   "query": "class GradedAlgebra|class GradedRing|abbrev GradedAlgebra",
+   "results": {
+    "t": "2026-10-23T23:19:22Z",
+    "tool": "grep",
+    "query": "class GradedAlgebra|class GradedRing|abbrev GradedAlgebra",
+    "sub": "RingTheory/GradedAlgebra",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/GradedAlgebra/Basic.lean",
+     "Mathlib/RingTheory/GradedAlgebra/Basic.lean",
+     "Mathlib/RingTheory/GradedAlgebra/Basic.lean"
+    ],
+    "digest": "f05a4ad25e35b431"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, GradedRing at line 67) defines the underlying grading but has neither signed commutativity nor the independent odd-square-zero axiom. ExteriorAlgebra.gradedAlgebra and its generator-square lemma describe a particular algebra. GradedTensorProduct.comm (Internal.lean:363) is a braiding between tensor products, not this structure on an arbitrary algebra."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GradedAlgebra\"",
+   "results": {
+    "t": "2026-10-23T23:49:43Z",
+    "tool": "loogle",
+    "query": "\"GradedAlgebra\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "GradedAlgebra",
+     "GradedAlgebra.proj",
+     "instGradedAlgebraRestrictScalars",
+     "DirectSum.IsInternal.gradedAlgebra",
+     "GradedAlgebra.proj_apply",
+     "GradedAlgebra.mem_support_iff",
+     "GradedAlgebra.ofAlgHom",
+     "GradedAlgebra.proj_recompose"
+    ],
+    "digest": "e008dd087660a853"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, inherited GradedRing at line 67) provides only the underlying grading; ExteriorAlgebra.gradedAlgebra (LinearAlgebra/ExteriorAlgebra/Grading.lean:72) and ExteriorAlgebra.GradedAlgebra.ι_sq_zero (line 48) concern a specific exterior algebra and its generators; GradedTensorProduct.comm (LinearAlgebra/TensorProduct/Graded/Internal.lean:363) swaps tensor factors rather than imposing signed commutativity and odd-square-zero on an arbitrary algebra. Candidate source lines read."
+  },
+  {
+   "tool": "grep",
+   "query": "strictly graded|strict.*graded.*comm|GradedComm",
+   "results": {
+    "t": "2026-10-23T23:49:43Z",
+    "tool": "grep",
+    "query": "strictly graded|strict.*graded.*comm|GradedComm",
+    "sub": "",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/External.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Graded/Internal.lean"
+    ],
+    "digest": "6a3d3f5ecf31237f"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, inherited GradedRing at line 67) provides only the underlying grading; ExteriorAlgebra.gradedAlgebra (LinearAlgebra/ExteriorAlgebra/Grading.lean:72) and ExteriorAlgebra.GradedAlgebra.ι_sq_zero (line 48) concern a specific exterior algebra and its generators; GradedTensorProduct.comm (LinearAlgebra/TensorProduct/Graded/Internal.lean:363) swaps tensor factors rather than imposing signed commutativity and odd-square-zero on an arbitrary algebra. Candidate source lines read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict graded commutativity for a nonnegative graded algebra with vanishing squares in odd degree",
+   "results": {
+    "t": "2026-10-23T23:49:44Z",
+    "tool": "leansearch",
+    "query": "Strict graded commutativity for a nonnegative graded algebra with vanishing squares in odd degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "GradedTensorProduct.comm",
+     "TensorProduct.gradedComm_tmul_algebraMap",
+     "GradedTensorProduct.comm_coe_tmul_coe",
+     "TensorProduct.gradedComm_algebraMap_tmul",
+     "TensorProduct.gradedComm_of_zero_tmul",
+     "DirectSum.GAlgebra.commutes",
+     "TensorProduct.gradedComm_one",
+     "TensorProduct.tmul_of_gradedMul_of_tmul"
+    ],
+    "digest": "a7b08f8c50c843c3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, inherited GradedRing at line 67) provides only the underlying grading; ExteriorAlgebra.gradedAlgebra (LinearAlgebra/ExteriorAlgebra/Grading.lean:72) and ExteriorAlgebra.GradedAlgebra.ι_sq_zero (line 48) concern a specific exterior algebra and its generators; GradedTensorProduct.comm (LinearAlgebra/TensorProduct/Graded/Internal.lean:363) swaps tensor factors rather than imposing signed commutativity and odd-square-zero on an arbitrary algebra. Candidate source lines read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonnegatively graded algebra is strictly graded commutative if homogeneous elements commute with the Koszul sign and all odd degree homogeneous elements square to zero",
+   "results": {
+    "t": "2026-10-23T23:49:44Z",
+    "tool": "leanfinder",
+    "query": "A nonnegatively graded algebra is strictly graded commutative if homogeneous elements commute with the Koszul sign and all odd degree homogeneous elements square to zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.gradedAlgebra",
+     "CliffordAlgebra.gradedAlgebra",
+     "ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower",
+     "CliffordAlgebra.evenOdd.gradedMonoid",
+     "SetLike.gcommRing",
+     "TensorProduct.gradedComm_gradedMul",
+     "TensorProduct.gradedCommAux",
+     "TensorAlgebra.gradedAlgebra"
+    ],
+    "digest": "7038b7b03e9f50fd"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, inherited GradedRing at line 67) provides only the underlying grading; ExteriorAlgebra.gradedAlgebra (LinearAlgebra/ExteriorAlgebra/Grading.lean:72) and ExteriorAlgebra.GradedAlgebra.ι_sq_zero (line 48) concern a specific exterior algebra and its generators; GradedTensorProduct.comm (LinearAlgebra/TensorProduct/Graded/Internal.lean:363) swaps tensor factors rather than imposing signed commutativity and odd-square-zero on an arbitrary algebra. Candidate source lines read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supercommutative graded algebras with odd squares zero over arbitrary commutative rings",
+   "results": {
+    "t": "2026-10-23T23:49:45Z",
+    "tool": "leanfinder",
+    "query": "Supercommutative graded algebras with odd squares zero over arbitrary commutative rings",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ExteriorAlgebra.gradedAlgebra",
+     "CliffordAlgebra.gradedAlgebra",
+     "ExteriorAlgebra.GradedAlgebra.ι_sq_zero",
+     "ExteriorAlgebra",
+     "CliffordAlgebra.evenOdd.gradedMonoid",
+     "ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower",
+     "CliffordAlgebra",
+     "CliffordAlgebraRing.instCommRingCliffordAlgebraUnitOfNatQuadraticForm"
+    ],
+    "digest": "cfeed06e43028a9a"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: GradedAlgebra (Mathlib/RingTheory/GradedAlgebra/Basic.lean:170, inherited GradedRing at line 67) provides only the underlying grading; ExteriorAlgebra.gradedAlgebra (LinearAlgebra/ExteriorAlgebra/Grading.lean:72) and ExteriorAlgebra.GradedAlgebra.ι_sq_zero (line 48) concern a specific exterior algebra and its generators; GradedTensorProduct.comm (LinearAlgebra/TensorProduct/Graded/Internal.lean:363) swaps tensor factors rather than imposing signed commutativity and odd-square-zero on an arbitrary algebra. Candidate source lines read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-divided-power-dga",
+  "date": "2026-10-24",
+  "group": "NR"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting the etale chart comparison in the fibrewise complete-intersection locus on the direct-image branch (3) of det-thm-sf-ctf-stability-direct-images; the local-ring comparison used below lem-sfb-lci-etale-pointwise-invariance. Flat-local complete-intersection comparison on the ordinary fibres, as in descent.tex Tag 05B7 proof, last paragraph. Supporting input: Regular generation of nested ideals with a flat quotient. The single-ring nested-ideal step in Stacks 09PX, implication (2) to (3), applying dpa.tex lemma-regular-sequence (09PW) to IS contained in J. Immediate supporting input: Stacks 09PW proof, first sentence, applying 09PV to the map of minimal-generator spaces. Supporting input for Tag 09PV: dpa.tex lemma-not-finite-pd (09PU), applied to the cyclic square-zero quotient constructed from a nonzero kernel vector. Auxiliary input for Tag 09PU: Tags 09PG (definition-divided-powers-graded), 09PJ (definition-divided-powers-dga), and 09PH/09PI (example-adjoining-odd/even); homological conventions in section-tate Immediate notion: Underlying graded algebra in Stacks 09PG, used by 09PJ; the notions supporting the 09PU Tate-resolution argument below the direct-image branch (3).",
+   "via": [
+    "def-sfb-divided-power-dga",
+    "lem-sfb-square-zero-relation-tor-obstruction",
+    "lem-sfb-finite-tor-ideal-generators-injective",
+    "lem-sfb-nested-regular-ideals-finite-tor",
+    "lem-sfb-flat-quotient-nested-regular-ideals",
+    "lem-sfb-flat-local-ci-source-fibre",
+    "lem-sfb-syntomic-etale-source-locality",
+    "lem-sfb-lci-etale-pointwise-invariance",
+    "lem-sfb-space-fibrewise-lci-source-locus",
+    "lem-sfb-space-lci-base-open",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "def-sfb-nonnegative-strict-graded-algebra",
+  "worker": "stage1",
+  "summary": "Retained the source-correct definition and its existing Mathlib-leaf grading dependency. Verified Stacks 09PF and 09PG, searched the current project, whole DAG, blueprint, and Mathlib (including a second semantic phrasing); no exact attachment or strict-commutativity Mathlib match. Added two elementary steps constructing the parity submodules as finite sums inside A and verifying the final even-subalgebra and positive-even-ideal assertions. No new nodes; no hypotheses added; characteristic-two, degree-zero, and zero-ring cases checked.",
+  "blueprint": "The inherited supporting-input chain serves direct-image branch (3) of det-thm-sf-ctf-stability-direct-images through the local complete-intersection and 09PU Tate-resolution argument. This definition provides exactly the strict graded-commutativity and parity notions required by 09PG/09PJ. Latest direct-image proof and unit read; inherited null ancestor and via chain retained, as confirmed by blueprint_refs.py ancestor. Whole-blueprint searches found no equivalent strict graded definition.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-f3387b2a2",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-f3387b2a2 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found nothing to repair; no fixes were written and review.md has the full checks. Delivery shape: one commit with only the item and its report; no new nodes; no repair note for this item; live and side-live still have the item unsplit, so it is not superseded. Against live, the statement, stmt_deps [def-sfb-nonnegative-graded-algebra], source and blueprint fields are unchanged; the 5 old Mathlib searches are kept and 5 are added. Source: Stacks dpa.tex 09PF (section-tate, label at line 934; lines 951-962) and 09PG (line 966; the observation at lines 986-990). The item matches the source hypothesis by hypothesis: arbitrary commutative R, an associative unital algebra not assumed commutative, A_i=0 for i<0, both the signed rule and odd x^2=0, and A_{even,+}=sum over i>0 of A_{2i}. Step 1 is elementary and correct: the parity submodules are images of finite sums, and the restricted sum maps are injective because the full sum map is. Step 2 is elementary and correct: 1 and the image of R lie in A_0, A_{2i}A_{2j} lies in A_{2(i+j)}, the sign (-1)^{4ij}=1 gives commutativity of the even part without cancelling 2, and i+j>0 makes A_{even,+} an ideal. Both steps use only the stated clauses of the Mathlib-leaf dependency; proof_deps equals the union of uses; there is no cycle and no off-unit citation (tool_uses empty). Edge cases checked: degree 0 only, the zero algebra, F_2[t] with t in degree 1 (signed rule holds but t^2 is nonzero, so the odd-square axiom must stay, and it does), and the exterior algebra. The duplicate search (rg -L over dag/nodes for strictly graded commutative) finds only nodes that cite this item and two unrelated Tor nodes. Mathlib searches cover leanfinder, loogle, leansearch and grep; GradedAlgebra, ExteriorAlgebra and GradedTensorProduct.comm were rightly rejected as matches."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NonnegativeStrictGradedAlgebra",
+  "declaration": "GradedAlgebra.IsStrictlyGradedCommutative",
+  "declarations": [
+   "GradedAlgebra.IsStrictlyGradedCommutative",
+   "GradedAlgebra.integerComponent",
+   "GradedAlgebra.evenPart",
+   "GradedAlgebra.oddPart",
+   "GradedAlgebra.positiveEvenPart",
+   "GradedAlgebra.parity_properties",
+   "GradedAlgebra.evenSubalgebra",
+   "GradedAlgebra.evenSubalgebraCommRing",
+   "GradedAlgebra.positiveEvenIdeal"
+  ],
+  "file": "lean/Sheaf/RingTheory/NonnegativeStrictGradedAlgebra.lean",
+  "statement": "class IsStrictlyGradedCommutative (𝒜 : ℕ → Submodule R A) [GradedAlgebra 𝒜] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "R : Type u and A : Type v are explicitly bound with CommRing R, Ring A and Algebra R A. The underlying nonnegative grading is the dependency Mathlib GradedAlgebra. The class adds precisely signed commutativity and the independent odd-square-zero condition. Parity parts are submodule sums inside A; the structural assertions are parity_properties. The even subalgebra, its inherited commutative ring structure and the positive even ideal have real carriers and inherited operations; their proof fields refer to that named theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb9f9b238",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Item def-sfb-nonnegative-strict-graded-algebra matches the node and Stacks dpa.tex 951-990 (09PF/09PG) clause by clause: CommRing R; noncommutative Ring A with Algebra R A, independent universes; [GradedAlgebra 𝒜] is the recorded Mathlib dep; integerComponent sends negSucc to ⊥; signed_comm (-1)^(ij) for all degrees; independent odd_sq_zero (needed in char 2, e.g. F_2[t]); even/odd/positive-even parts are ⨆ of the right components; evenSubalgebra (Submodule.toSubalgebra), CommRing instance with inherited operations and positiveEvenIdeal have real data; the only sorry is parity_properties, the node's own final assertion, with a step-by-step proof docstring. lean.statement is verbatim; all 9 declarations listed; source and blueprint docstrings present. No name clashes in Mathlib or the side-live Sheaf/WeilConjectures trees; only the lean field differs from side-live; not superseded. No fixes, no compile."
+ }
+}

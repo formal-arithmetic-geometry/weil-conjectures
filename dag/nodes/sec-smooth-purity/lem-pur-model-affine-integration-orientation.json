@@ -1,0 +1,162 @@
+{
+ "id": "lem-pur-model-affine-integration-orientation",
+ "kind": "statement",
+ "title": "Ordered affine integration orientations and zero-section identities",
+ "statement": "Fix a finite purity datum P [def-pur-conventions] and d,e in N. For an affine finite-type k-scheme B let A^r_B be the fixed finite-coordinate affine model, with projection P_r and zero section z_r [def-sbc-affine-space, def-asd-vector-bundle-zero-section]. Use the canonical coordinate, unit, site and Tate comparisons of [def-pur-composition-model-orientation-coordinates]. There exists a family G_r:T_r -> omega_(P_r) of isomorphisms satisfying the prescribed ordered-Gamma normalization and its rank-zero identity. For every B, sigma_(q,P_e) followed by the inverse total G equals the tensor of the base-changed inverse rank-d G and the pulled-back inverse rank-e G, followed by mu. Its zero-section pullback b_r satisfies nu_(d,e) followed by b_(d+e) = (b_d tensor b_e) followed by ordered Tate concatenation. For every composable pair f:U->V, g:V->T of separated finite-type smooth morphisms of pure ranks d,e between affine finite-type k-schemes, the three normal orientations beta_f, f*beta_g and beta_(gf) agree with b_d,b_e,b_(d+e) under every prescribed compatible conormal frame, including its fixed standard-section base-change comparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "stmt_deps": [
+  "def-pur-composition-model-orientation-coordinates"
+ ],
+ "proof": [
+  {
+   "text": "For a trivial bundle $u$ of rank $r$ over a separated finite-type base write $P_{u,H}$ for the integration-transposed map, and $G_u=P_{u,\\Lambda}$. The ordered-integration theorem gives $P_{u,H}=\\Gamma_{u,H}$ at every $n\\geq1$; the coefficient-counit normalization gives\n$$\\Gamma_{u,H}=\\theta_{u,H}(1\\otimes G_u).$$\nBoth statements use the same inverse projection, restricted projective-line trace and actual exceptional adjunction as in the question. Thus this equality identifies actual maps, not just objects. Its inputs include the pulled-back Tate lines, $\\omega_{P_e}$ and the coefficient-unit object: the coefficient normalization supplies the finite-Tor etale witnesses and invertible projection maps, and the tensor-mate statement supplies $\\omega_{P_e}\\in D^b_{ctf}$. The model agreement theorem identifies the inverse of $G_u$ with the specified diagonal orientation. In particular all $G_u$ used below are isomorphisms, and this argument does not impose $e(E/\\mathbf Q_\\ell)\\mid n$.",
+   "uses": [
+    "lem-pur-affine-ordered-integration-transposes",
+    "lem-pur-affine-coefficient-counit-normalization",
+    "lem-pur-composition-tensor-mate",
+    "lem-pur-projection-purity-agreement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  },
+  {
+   "text": "Apply integration-normalized direct-sum compatibility to the two trivial bundles of ranks $d,e$ over the affine finite-type scheme $B$, with $f=q$, $g=P_e$, $h=P_{d+e}$ and $K=\\Lambda_B$. Its source identification is $\\mu^{-1}$ from Step 1. Its $q$-orientation is the base change along $P_e$ of the rank-$d$ unit orientation, as required in the statement; by the base-change clause of the same theorem (exchange $e$ and associator $a$, at $K=\\Lambda_B$) this base change is the integration-normalized map of the trivial rank-$d$ bundle $q$ itself, i.e. $G_q$ of Step 2, so the factor $\\gamma_q$ at $\\omega_g$ is $\\theta_{q,\\omega_g}(1\\otimes G_q)$. This compatibility is initially ordinary-etale. The vector-integration comparison identifies its traces, projection maps and exceptional transposes with the specified pro-etale ones. The compact-support site-coherence equation identifies its compositor with the actual pro-etale compositor; conjugating this equation by the composite Hom bijections identifies the right mates by mate pasting. Thus on this site the direct-sum formula is\n$$G_h=c^{-1}\\Gamma_{q,\\omega_g}(Lq^*G_g\\otimes1)\\mu^{-1}.$$\nThe bases here are affine finite type (and therefore in the separated finite-type domain of Step 2), all coefficient inputs have its finite-Tor witnesses, and every comparison in the formula is the prescribed one.",
+   "uses": [
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-vector-integration-site-comparison",
+    "lem-pur-compact-support-site-coherence",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  },
+  {
+   "text": "Substitute Step 2 into the formula of Step 3 and use naturality of $\\theta_{q,-}$ in $G_g:T_e\\to\\omega_g$. With the tensor symmetry displayed in the definition of $\\sigma$ this gives\n$$G_h\\mu=c^{-1}\\theta_{q,\\omega_g}\\mathrm{sym}(G_q\\otimes Lq^*G_g)=\\sigma_{q,P_e}(G_q\\otimes Lq^*G_g).$$\nCompose on the left by $G_h^{-1}$ and on the right by $G_q^{-1}\\otimes Lq^*G_g^{-1}$. The result is exactly\n$$\\Gamma_{P_{d+e},\\Lambda}^{-1}\\sigma_{q,P_e}=\\mu(\\Gamma_{q,\\Lambda}^{-1}\\otimes Lq^*\\Gamma_{P_e,\\Lambda}^{-1}).$$\nThis is an equality of the integration-normalized maps. No choice of a trivialization of the target line enters the cancellation. For $d=0$ or $e=0$, ordered comparisons are identities at rank zero, the composite-adjunction mate is the identity comparison, and the same calculation reduces to a tensor-unit law.",
+   "uses": [
+    "lem-pur-composition-tensor-mate",
+    "def-pur-affine-space-comparison",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  },
+  {
+   "text": "Pull Step 4 back along the total zero section $z_{d+e}:B\\to\\mathbf A^{d+e}_B$. The specified base-change identifications identify its source with $D_d\\otimes^LD_e$, its pulled-back $\\sigma$ with $\\nu_{d,e}$, and $Lz_{d+e}^*Lq^*G_g^{-1}$ with $b_e$. The rank-$d$ bundle is the base change of $P_d$, so its pulled-back inverse orientation is $b_d$. Monoidality and Tate pullback identify the pulled-back $\\mu$ with the same concatenation on $B$. Consequently\n$$b_{d+e}\\nu_{d,e}=\\mu(b_d\\otimes b_e).$$\nThe vector-integration comparison identifies the inverse integration-transposed map with the bundle orientation used in the chart lemma. Therefore, in each actual normal-bundle frame, $\\beta_f=b_d$, $Lf^*\\beta_g=b_e$ and $\\beta_{gf}=b_{d+e}$. The rank-zero formula follows from the unit calculation in Step 4.",
+   "uses": [
+    "lem-pur-composition-compatible-dnc-charts",
+    "lem-pur-vector-integration-site-comparison",
+    "cor-pur-vector-bundle-purity",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+    "place": "Step 1: affine model and compatibility of the diagonal orientations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-affine-ordered-integration-transposes",
+  "lem-pur-affine-coefficient-counit-normalization",
+  "lem-pur-composition-tensor-mate",
+  "lem-pur-projection-purity-agreement",
+  "cor-pur-vector-bundle-purity",
+  "lem-pur-vector-integration-site-comparison",
+  "lem-pur-compact-support-site-coherence",
+  "lem-weil-pbc-mate-pasting",
+  "def-pur-affine-space-comparison",
+  "lem-pur-composition-compatible-dnc-charts",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Steps 1–2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing affine orientations zero section multiplicativity and detection of automorphisms of shifted Tate lines",
+   "results": "Orientation.map; CharacterModule.dual_zero; FractionalIdeal.dual_zero; Module.Basis.orientation; DomAddAct.mk_zero; instMulZeroClassOrderDual; OrderDual.instMulActionWithZero; AffineMap.zero_linear. None concerns the specified sheaf orientations.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical smooth dualizing orientations respect composition and descend from affine charts",
+   "results": "inTangentCoordinates_eq; inTangentCoordinates; SmoothBumpCovering.comp_embeddingPiTangent_mfderiv; SingularManifold.comap_f; tangentCoordChange_comp; ModelWithCorners.coe_extChartAt_transContinuousLinearEquiv; ContinuousLinearEquiv.toTransContinuousLinearEquiv; mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm'. These are manifold coordinate results, not etale sheaf comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*orientation|orientation.*descent|compositionSourceFixed",
+   "results": "0 hits in the Mathlib search service.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompositionModelOrientationDescent",
+  "date": "2026-10-25",
+  "group": "V3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Steps 1–2; Ordered affine integration orientations and zero-section identities",
+   "via": [
+    "lem-pur-composition-model-orientation-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ModelAffineIntegrationOrientation",
+  "file": "lean/Sheaf/Paper/ModelAffineIntegrationOrientation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.model_affine_integration_orientation",
+  "statement": "theorem model_affine_integration_orientation (P : PurityFiniteSetting.{u}) (d e : ℕ) : ∃ G : P.ModelAffineGamma, P.ModelGammaNormalization G ∧ P.ModelGammaZeroNormalization ∧ (∀ (B : Scheme.{u}) [IsAffine B] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB], ModelAffineOrientationEquation P G B d e aB ∧ ModelZeroOrientationEquation P G B d e aB) ∧ ∀ (U V T : Scheme.{u}) [IsAffine U] [IsAffine V] [IsAffine T] (f : U ⟶ V) (g : V ⟶ T) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] (aT : T ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aT] [QuasiCompact aT], ModelChartBetaIdentification P G d e f g aT",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b7396",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261025T124108-L-1933073",
+  "kind": "interface",
+  "note": "independent cc review: delivered CompositionModelOrientationDefinitions.lean vs clone item module (definitions verbatim, only blueprint tags), item theorem statement vs clone (byte-identical), five split statements vs original conclusion conjuncts and PurityCompositionCoherence source normalization, item node fields vs clone (only proof/proof_deps/proof_origin/lean/tool_uses)"
+ }
+}

@@ -21,114 +21,42 @@
  ],
  "proof": [
   {
-   "text": "Work in the ringed sequence site of [def-coef-ringed-sequence-site], not in the category of towers in a derived category. Its module sheaves are the strict quotient-semilinear systems in the statement. The geometric maps leave the positive index fixed; scalar change is change of its ring sheaf along the compatible maps $A_{E,n}\\to A_{L,n}$. By [def-trf-integral-comparison-sequence-systems], the ordinary comparison maps are the indicated adjunction mates and balanced tensor maps. The adjunct of the geometric compositor on a local section $x$ is the successive unit $\\gamma_h\\gamma_k(x)$: applying the two adjunction bijections to the mate of fibre-product pasting gives exactly the composite unit. The identity mate gives $\\gamma_{\\mathrm{id}}(x)=x$ after the unit identification. In the computations below, equality on these unit sections determines a map out of an inverse image by the adjunction bijection; equality on $1\\otimes x$ determines a scalar-linear map out of scalar extension by its tensor adjunction. Thus these tests determine the whole sheaf maps, without assuming that arbitrary sections are globally pure tensors.",
+   "text": "Use the shared canonical scalar comparisons and original path interpretation without altering their meanings. Prove ordinary geometric associativity by the sectionwise direct-image pasting maps and adjunction mates, and prove both ordinary and derived geometric units by their explicit mate equations. Apply the ordinary scalar-generator interchange theorem to the three ordinary scalar clauses.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "def-trf-integral-comparison-sequence-systems"
+    "def-trf-quotient-system-coherence-data",
+    "lem-trf-sequence-scalar-generator-interchange",
+    "lem-trf-adjoint-composition-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition: ordinary composition map; agent expansion using the prescribed sequence-site adjunctions"
-   }
+   "elementary": false
   },
   {
-   "text": "First check geometric coherence on module systems. For three composable scheme maps, either composite of compositors takes the unit section of the composite inverse image to $\\gamma_{f_1}\\gamma_{f_2}\\gamma_{f_3}(x)$. The two underlying fibre-product pastings both send a nested tuple to the same tuple with its three entries, so these are the same section under the canonical base-change identifications. The determining adjunction test of Step 1 proves associativity. Inserting an identity inserts $\\gamma_{\\mathrm{id}}$, hence leaves this expression unchanged and proves the two unit equations. For an arbitrary finite string, define its comparison by the successively composed units. Induction on the length of a parenthesized string, using the three-map equality at the last junction, identifies every parenthesization with that comparison; the length-zero and length-one cases are the identity units. Equal scheme morphisms induce the same base-change functor and coefficient map; the same adjunction mate therefore gives equal comparisons after these canonical identifications.",
+   "text": "Apply the finite-bracketing coherence theorem to the ordinary and derived geometric comparison systems. The previous associativity and unit equations supply its hypotheses, with equality transports oriented by cancellation. The four remaining derived component equations are supplied independently, then assemble the twelve unchanged fields.",
    "uses": [
-    "def-trf-integral-comparison-sequence-systems"
+    "lem-trf-sequence-derived-associativity",
+    "lem-trf-sequence-finite-bracketing-coherence",
+    "lem-trf-sequence-derived-mixed-square",
+    "lem-trf-sequence-derived-scalar-unit",
+    "lem-trf-sequence-derived-scalar-tower"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent verification of composition, identity and finite-string coherence"
-   }
-  },
-  {
-   "text": "For the mixed square use the source generator $1\\otimes\\gamma_{kh}(x)$ of $S_{L/E,Z}U_{kh,E}C$. The left side first gives $1\\otimes\\gamma_h\\gamma_k(x)$, then $\\gamma_h(1\\otimes\\gamma_k(x))$, then $\\gamma_h\\gamma_k(1\\otimes x)$. The right side gives $\\gamma_{kh}(1\\otimes x)$ and then $\\gamma_h\\gamma_k(1\\otimes x)$. Here all units carry their prescribed coefficient field, and the constant coefficient sections are identified by the canonical coefficient inverse-image map. The formulas are those of [def-trf-integral-comparison-sequence-systems]. The adjunction and scalar-linearity test of Step 1 therefore proves the displayed mixed geometric equation as an equality of ordinary system maps.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent calculation of the mixed geometric/scalar square"
-   }
-  },
-  {
-   "text": "For identity scalar change, start with $1\\otimes\\gamma_f(x)$. The composite $U_{f,E}(e_Y)\\kappa_f^{E/E}$ sends it to $\\gamma_f(1x)=\\gamma_f(x)$, and $e_XU_{f,E}$ sends it to the same section. For a general coefficient $s$, linearity gives $\\gamma_f(sx)=s\\gamma_f(x)$ under the constant coefficient identification. The determining test of Step 1 proves the scalar unit equation, including equality fields and the identity scheme map.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent scalar-unit calculation from the tensor formulas prescribed in def-trf-integral-comparison-sequence-systems"
-   }
-  },
-  {
-   "text": "For the scalar tower equation start with $c\\otimes(b\\otimes\\gamma_f(x))$ in $S_{M/L,X}S_{L/E,X}U_{f,E}C$. On the left the inner $\\kappa$ and then the outer $\\kappa$ give $\\gamma_f(c\\otimes(b\\otimes x))$; applying $U_{f,M}(\\alpha_Y)$ gives $\\gamma_f(cb\\otimes x)$. On the right $\\alpha_XU_{f,E}$ gives $cb\\otimes\\gamma_f(x)$ and $\\kappa_f^{M/E}$ gives $\\gamma_f(cb\\otimes x)$. Products here use the given inclusion $L\\subset M$, exactly as in the associator formula of [def-trf-integral-comparison-sequence-systems]. Balance over $A_{L,n}$ identifies the coefficients $cb$, so this calculation is valid without flatness of any quotient-ring map. Applying the determining test proves the tower equation. It also covers $E=L$, $L=M$, and $E=L=M$.",
-   "uses": [
-    "def-trf-integral-comparison-sequence-systems"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent scalar-tower calculation from the balanced tensor formulas prescribed in def-trf-integral-comparison-sequence-systems"
-   }
-  },
-  {
-   "text": "The calculations above are on whole strict systems. To spell out restriction compatibility, let $r$ be a vertical restriction and $q$ a horizontal transition from level $m$ to $n\\le m$. Each inverse-image unit is natural, so $r\\gamma_f(x)=\\gamma_f(rx)$ and $q\\gamma_f(x)=\\gamma_f(qx)$ under the coefficient restrictions. A scalar tensor restricts as $r(b\\otimes x)=r(b)\\otimes r(x)$ and transitions as $q(b\\otimes x)=q(b)\\otimes q(x)$. The quotient coefficient maps are ring homomorphisms, hence $q(cb)=q(c)q(b)$; also $r(cb)=r(c)r(b)$. Consequently restriction of the common answers in Steps 3--5 is respectively $\\gamma_h\\gamma_k(1\\otimes qx)$, $\\gamma_f(qs\\,qx)$, and $\\gamma_f(qc\\,qb\\otimes qx)$, and applying the comparison after transition gives exactly these answers. Replace $q$ by $r$ for the vertical equations. The geometric formulas in Step 2 commute with $r$ and $q$ by the same unit naturality. Every sequence-site arrow is a composite of vertical and horizontal arrows, so these checks cover every arrow. Termwise application to a complex also commutes with its differential by naturality in the input module; the maps have degree zero and introduce no Koszul sign.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "def-trf-integral-comparison-sequence-systems"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent restriction and quotient-transition verification on the ringed sequence site; Tag 0D6D model comparison"
-   }
-  },
-  {
-   "text": "For an arbitrary unbounded input choose one flat-term K-flat resolution on its entire ringed sequence site by [lem-pc-kflat-resolution]. This resolves the strict system as a single ringed-site module complex, rather than choosing unrelated resolutions at each level. By [lem-weil-pbc-ringed-topos-kflat-pullback], every ordinary geometric pullback and every scalar extension of this complex is again K-flat with flat terms: scalar extension is the special case with identity underlying topos and the actual quotient ring-sheaf map. Repeated application proves the assertion for every intermediate expression in the finite diagrams of Steps 2--5. The sites are the small sequence sites of [def-coef-ringed-sequence-site], and the geometric and coefficient ringed maps are those of [def-trf-integral-comparison-sequence-systems]; thus the cited preservation theorem applies with its actual hypotheses. By [lem-pur-derived-change-of-rings], the scalar functors and their resolution comparisons are computed on these models and are independent of the chosen K-flat resolution. The geometric functor is exact as specified in [def-trf-integral-comparison-sequence-systems], so its termwise action computes its derived functor. Accordingly the stipulated derived comparison components are precisely the localizations of the cochain maps checked above. The derived scalar associator is constructed as the universal left-derived lift of the ordinary tensor associator. On a flat-term K-flat resolution its component is invertible: the first scalar extension remains K-flat by lem-pur-kflat-change-of-rings-independent, so all three model counits are invertible. Naturality across resolution quasi-isomorphisms gives invertibility everywhere. The derived scalar unit is the uniqueness isomorphism between the given derived scalar model and the identity, using the localized ordinary multiplication unitor as counit. For uniqueness of both comparisons, equality on K-flat inputs extends to all inputs by naturality and cancellation of the resolution isomorphisms. These two existence-and-uniqueness assertions are proved in Lean; the combined mixed-coherence theorem retains its original proof obligation.",
-   "uses": [
-    "def-coef-ringed-sequence-site",
-    "def-trf-integral-comparison-sequence-systems",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings-independent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), and 0D6D"
-   }
-  },
-  {
-   "text": "Apply the localization of [def-weil-abstract-derived-category] to the equal cochain maps of Steps 2--6 on the simultaneous model of Step 7. A functor takes equal arrows to equal arrows, so all desired equations hold at that model. If $a,b:F\\Rightarrow G$ denote the two derived composites of any equation and $p:P\\to C$ is the chosen resolution, naturality gives $a_C F(Qp)=G(Qp)a_P$ and $b_C F(Qp)=G(Qp)b_P$. Since $Qp$ is invertible and $a_P=b_P$, cancellation gives $a_C=b_C$. This proves equality for every input and, since the comparisons are natural, equality of natural transformations. Step 6 shows these are equalities localized from the full quotient diagrams before any realization. The resolution and preservation theorems apply to unbounded complexes and arbitrary ring maps. No step used normalization, a bound on cohomology or Tor-amplitude, or flatness of $A_{E,n}\\to A_{L,n}$; hence all the stated unrestricted assertions follow.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D localization of the termwise comparison; agent cancellation argument for all derived inputs"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
-  "def-trf-integral-comparison-sequence-systems",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-abstract-derived-category",
-  "lem-pur-kflat-change-of-rings-independent"
+  "def-trf-quotient-system-coherence-data",
+  "lem-trf-sequence-scalar-generator-interchange",
+  "lem-trf-adjoint-composition-coherence",
+  "lem-trf-sequence-derived-associativity",
+  "lem-trf-sequence-finite-bracketing-coherence",
+  "lem-trf-sequence-derived-mixed-square",
+  "lem-trf-sequence-derived-scalar-unit",
+  "lem-trf-sequence-derived-scalar-tower"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "U4",
+  "date": "2026-10-25",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6D, 06YS, 0G7E, 06YT, 06YY for simultaneous models; mixed identities expanded from the prescribed sequence-system tensor formulas, not claimed as a verbatim Stacks theorem. C2: the derived scalar associator and unitor are proved by the universal left-derived lift and uniqueness APIs; flat-term preservation uses the existing independent-universe change-of-rings theorem. The remaining main theorem is unchanged."
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; extracted finite-word and scalar-generator coherence argument, not a verbatim statement of the tag."
  },
  "mathlib_searches": [
   {
@@ -200,6 +128,118 @@
    "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso",
    "date": "2026-10-21",
    "verdict": "no match: the ordinary sheaf pullback compositor and associativity laws cover geometric clauses; the full unbounded strict quotient-system mixed tensor-normalized equations require the explicit cochain calculations and derived-model argument. Read PullbackContinuous.lean:165-210."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical adjunction mates of inverse image composition on ringed sequence sites give associative and unital comparisons for all finite strings, determined on adjunction unit sections",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackComp, CategoryTheory.sheafComposeNatTrans_fac, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.sheafComposeNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: ordinary geometric compositor laws cover only its geometric part; read Sheaf/PullbackContinuous.lean:165-210."
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pullback_comp_id|pullback_id_comp",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. Subdirectory: Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: ordinary geometric compositor laws cover only its geometric part; read Sheaf/PullbackContinuous.lean:165-210."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedLift|leftDerived_fac_app|IsKFlat",
+   "results": "7 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. Subdirectory: CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*pullback|pullback.*scalar|extendScalars.*(comp|assoc)",
+   "results": "9 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean. Subdirectory: Algebra/Category",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar pseudofunctor laws and single sheaf pullback comparisons do not include the three prescribed whole-sequence interchange equations and quotient-transition compatibility; read PullbackContinuous.lean:165-210 and ModuleCat/ChangeOfRings.lean:984-1015."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback_assoc, SheafOfModules.pullback_comp_id",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: ordinary geometric compositor laws cover only its geometric part; read Sheaf/PullbackContinuous.lean:165-210."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "6 hits: CategoryTheory.Functor.leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.leftDerived_fac, CategoryTheory.Functor.leftDerived_fac_app, CategoryTheory.Functor.leftDerived_fac_assoc, CategoryTheory.Functor.leftDerived_fac_app_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar pseudofunctor laws and single sheaf pullback comparisons do not include the three prescribed whole-sequence interchange equations and quotient-transition compatibility; read PullbackContinuous.lean:165-210 and ModuleCat/ChangeOfRings.lean:984-1015."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One flat term K-flat resolution on a ringed sequence site simultaneously computes finite composites of geometric pullback and scalar extension, with the canonical derived comparison counits",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.lan_flat_of_flat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, comonadicExtendScalars, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, AlgebraicGeometry.Scheme.Hom.flat_appLE",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary extension of scalars and inverse image of module sheaves commute coherently with geometric composition, coefficient multiplication units and successive scalar extensions on strict quotient diagrams",
+   "results": "8 hits: CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, ModuleCat.Tilde.toOpen_res, ModuleCat.extendScalarsComp, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc_assoc, SheafOfModules.freeHomEquiv_symm_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar pseudofunctor laws and single sheaf pullback comparisons do not include the three prescribed whole-sequence interchange equations and quotient-transition compatibility; read PullbackContinuous.lean:165-210 and ModuleCat/ChangeOfRings.lean:984-1015."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse image and extension of scalar sheaves of modules satisfy mixed geometric composition coefficient unit and coefficient tower identities on generators",
+   "results": "8 hits: PresheafOfModules.pullback, SheafOfModules.unit, PresheafOfModules.unit, ModuleCat.RestrictionCoextensionAdj.unit', SheafOfModules.pushforwardNatIso_inv, PresheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.inv_app, ModuleCat.extendScalarsId_inv_app_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar pseudofunctor laws and single sheaf pullback comparisons do not include the three prescribed whole-sequence interchange equations and quotient-transition compatibility; read PullbackContinuous.lean:165-210 and ModuleCat/ChangeOfRings.lean:984-1015."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical geometric inverse image compositors on strict quotient module systems satisfy finite string associativity and units and commute with index transitions",
+   "results": "8 hits: CategoryTheory.PreservesImage.inv_comp_image_ι_map_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, lTensor.inverse_comp_lTensor, SheafOfModules.ιFree_mapFree_inv_assoc, CategoryTheory.MorphismProperty.IsStableUnderComposition.inverseImage, ModuleCat.imageIsoRange_inv_image_ι_assoc, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map_assoc, Magma.AssocQuotient.lift_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: ordinary geometric compositor laws cover only its geometric part; read Sheaf/PullbackContinuous.lean:165-210."
+  },
+  {
+   "tool": "leansearch",
+   "query": "One K-flat resolution of strict quotient systems computes all intermediate scalar pullback composites and the universal cochain normalized associator unitor and comparison maps",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.Hom.hom'_f_assoc, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precompose_map_rightUnitor, HomotopicalAlgebra.CofibrantObject.HoCat.ιCompResolutionNatTrans, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap_fac_assoc, HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget, ComplexShape.strictUniversalPropertyFixedTargetQuotient, HomotopicalAlgebra.CofibrantObject.HoCat.resolutionMap",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed Beck Chevalley square for pullback and tensor change of rings, including scalar associator and unitor compatibility as maps of sheaves of strict inverse systems",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module scalar pseudofunctor laws and single sheaf pullback comparisons do not include the three prescribed whole-sequence interchange equations and quotient-transition compatibility; read PullbackContinuous.lean:165-210 and ModuleCat/ChangeOfRings.lean:984-1015."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of module sheaves on a ringed diagram site has canonical composition mates characterized by successive unit sections; arbitrary parenthesizations and identity insertions agree with all diagram restrictions",
+   "results": "8 hits: SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.Presentation.map_π_eq, SheafOfModules.unitHomEquiv_comp_apply, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.ιFree_mapFree_inv_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match for the full item: ordinary geometric compositor laws cover only its geometric part; read Sheaf/PullbackContinuous.lean:165-210."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal derived counits for finite words in exact inverse image and nonflat scalar extension are simultaneously invertible on whole diagram K-flat models and identify canonical composition and scalar unit maps",
+   "results": "8 hits: Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_lTensor_exact, CategoryTheory.lan_flat_of_flat, Module.Flat.iff_lTensor_exact'",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite diagram of ringed topoi, flat term K-flat models compute every finite word in derived pullbacks; natural transformations of ordinary words descend uniquely and preserve whiskering and pasting",
+   "results": "8 hits: CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.PreservesFiniteLimitsOfFlat.lift, CategoryTheory.lan_flat_of_flat, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.PreservesFiniteLimitsOfFlat.fac, CategoryTheory.lan_preservesFiniteLimits_of_flat, CategoryTheory.RepresentablyFlat, CategoryTheory.RepresentablyFlat.comp",
+   "date": "2026-10-22",
+   "verdict": "no match: universal left-derived lifts alone do not supply simultaneous K-flat preservation for finite words on arbitrary ringed sites and their normalized comparison descent; read Functor/Derived/LeftDerived.lean:74-110."
   }
  ],
  "mathlib_match": null,
@@ -223,53 +263,50 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-trf-quotient-system-mixed-coherence",
   "worker": "stage1",
-  "summary": "Checked the ringed sequence-site constructions and the actual Stacks flat-term K-flat hypotheses. Gave explicit generator and adjunction calculations for geometric, mixed, scalar-unit and scalar-tower equations, with both site restrictions and quotient transitions, then localized one simultaneous unbounded model. Reused existing general resolution/pullback nodes; no new node and no statement correction. No exact project attachment or Mathlib match.",
+  "summary": "Re-split the 8409-character proof under the explicit released repair note. Two comparable independent tasks carry ordinary tensor-generator interchange and general ringed K-flat finite-word comparison descent. Reused adjoint-composition-coherence for geometric associativity; retained explicit finite-string induction and final cancellation. Statement unchanged; all old arguments preserved in the report distribution and new statements.",
   "blueprint": "prop-trf-karoubi-independence.proof.md, last sentence: transport of Frobenius at a common coefficient stage; supplies the strict geometric/scalar coherence used by lem-trf-integral-pullback-comparison-realization, originating in lem-trf-local-frobenius-transport-normalization.",
   "tool_uses": [
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "General unbounded flat-term K-flat resolution on the whole ringed sequence site; the trace-transport unit does not state resolution existence."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "General ringed-topos pullback preserves flat-term K-flat models for all intermediate scalar and geometric operations; no trace-transport node states this general resolving-class fact."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "General derived change-of-rings computation and resolution independence, with no flatness of coefficient maps; used as a tool for the prescribed scalar functors."
+    "node": "lem-trf-adjoint-composition-coherence",
+    "why": "General unit-compatible adjunction-mate associativity for nonidentical right composites; applied to sequence direct-image fibre-product pasting, without replacing the trace transport route."
    }
   ]
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-pur-derived-change-of-rings"
+  "lem-pur-derived-change-of-rings",
+  "lem-trf-adjoint-composition-coherence"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q113-c804dac5f",
-  "group": "Q113",
+  "reviewer": "NT-cc-Q70-9bc5c74c5",
+  "group": "Q70",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-c804dac5f (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and Stacks 0D6D in full, and recomputed every generator calculation; the split is correct. Shape: one commit; the statement is unchanged from live, where the item is still unsplit. There is no repair note, so this is not a re-split. Neither the item nor any node it cites, nor its parent, is on the drop list. No SGA is cited. The Stacks tags 0D6D, 06YS, 0G7E, 06YT and 06YY match their labels in tags/tags. review_split's 'no such node' messages are only because it does not follow the chapter symlinks; find -L finds every cited node. Steps 1-6 are generator calculations from def-trf-integral-comparison-sequence-systems, which fixes the compositor mate, kappa, the associator and the unitor. A map is determined by its values on 1⊗gamma_f(x), through the inverse-image and scalar adjunctions. I recomputed the mixed square: both sides give gamma_h gamma_k(1⊗x). The scalar unit and tower equations also agree: both sides of the tower give gamma_f(cb⊗x). A_{E,n}->A_{L,n} is a ring map because n*e >= n. Compatibility with quotient transitions and site restrictions follows from naturality of the units and multiplicativity of the quotient maps. Step 7 checks the hypotheses of the cited tools correctly: one flat-term K-flat resolution on the whole sequence site (06YS node); the ringed-topos K-flat preservation lemma (0G7E node) with an arbitrary ring map, for both geometric U_f and scalar change on the identity topos; and lem-pur-derived-change-of-rings, which needs no flatness of the coefficient maps. Step 8's cancellation along the iso Qp is correct. Unbounded and non-normalized inputs, ramified non-flat coefficient changes, n=1, and strings of length 0 and 1 are all covered. Zero new nodes is legitimate here: every non-elementary input is an existing general node, and nothing is relabelled as a node (D1 does not apply). The parent integral-pullback-comparison-realization uses exactly these clauses in its Step 3. I accept the three generic tool_uses in split_report (kflat-resolution, ringed-topos-kflat-pullback, derived-change-of-rings) for the maintainer to record. Advisory only: lem-pur-coefficient-pullback-coherence is related but in an abstract-presentation setting, so it is not a duplicate. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-9bc5c74c5 (reviewer sub-agent of L); spot-checked: I read the full re-split of lem-trf-quotient-system-mixed-coherence (head 9bc5c74c) and it passes; no fixes. The statement is byte-identical to live, and the item is neither dropped nor already split by another group. The released human repair note (in clones/live and side-live, not in the snapshot) asks for at least 2 new nodes of comparable size and an assembly of at most 3000 characters. Old steps 1-8 (8409 characters) appear verbatim in the report and are all reallocated. Old 1 and 3-6 (determining adjunction/tensor test; mixed, scalar-unit and tower generator equations; restriction/transition and cochain compatibility) go to the new unsplit node lem-trf-sequence-scalar-generator-interchange. Old 7-8 (one flat-term K-flat model for the whole system, preservation through every word, invertible composite counits, unique t^L with the counit equation, preservation of whiskering and pasting, determination on Q P) go to the new unsplit node lem-trf-ringed-kflat-word-comparison-descent. Old step 2's three-map associativity reuses lem-trf-adjoint-composition-coherence; item Step 1 checks its hypothesis, associativity of the fibre-product pasting d, and the old a_{012} is the inverse of c_{h,k}. The finite-string induction and units stay in item Step 2 (elementary, explicit bases). The new proof is 5 steps and 2312 characters. The two nodes are of comparable size (about 4.2k vs 3.1k characters of old argument) and neither restates the item: one is the underived identity, the other is generic. I recomputed all three generator calculations and the determining test via the tensor and inverse-image adjunctions; no flatness is needed. Edge cases checked: E=L=M, ramified A_{E,n} to A_{L,n}, n=1. I checked the descent node against Stacks sites-cohomology 06YS (l.3207), 0G7E (l.3508), 06YY (l.3585) and 0D6D (l.3658), and checked existence and uniqueness of t^L via roofs with K-flat apex. Both new statements are true and self-contained, satisfy B1-B7, and record grep, loogle, leanfinder and leansearch searches. Nearest existing nodes (lem-pod-finite-system-pullback-coherence, lem-pur-coefficient-pullback-coherence, lem-sfb-multivariable-derived-calculus, lem-sp-exact-derived-transformation-pasting) overlap only partially; advisory. Batch 5: the item's closure, new vs base, adds exactly the 3 flagged nodes, and all are generic and outside the assumed statements. adjoint-composition-coherence: mathlib leaf, unit sk-d-weil, closure of 3 nodes, pure adjunction-mate associativity. scalar-generator-interchange: ordinary sheaf algebra, whose only trf deps are def-trf-integral-comparison-sequence-systems (already a stmt_dep) and lem-trf-localization-essentially-surjective (generic, already in the base closure). kflat-word-descent: generic homological algebra. Two harmless slips: Step 4 says coefficient maps 'of Step 1' where Step 3 is meant, and the item's tool_uses field still lists the old K-flat tools."
  },
  "lean": {
   "module": "Sheaf.Paper.QuotientSystemMixedCoherence",
   "declaration": "WeilConjectures.integralQuotientMixedCoherence",
   "declarations": [
-   "WeilConjectures.integralComparisonSystemScalarComposition_existsUnique",
-   "WeilConjectures.integralComparisonSystemScalarComposition",
-   "WeilConjectures.integralComparisonSystemScalarUnit_existsUnique",
-   "WeilConjectures.integralComparisonSystemScalarUnit",
-   "WeilConjectures.IntegralQuotientPathInvertible",
-   "WeilConjectures.IntegralQuotientBracketing",
-   "WeilConjectures.integralQuotientBracketFunctor",
-   "WeilConjectures.integralQuotientBracketComparison",
+   "WeilConjectures.integralQuotientMixedCoherence",
    "WeilConjectures.IntegralQuotientMixedCoherence",
-   "WeilConjectures.integralQuotientMixedCoherence"
+   "WeilConjectures.integralQuotientClauseOrdinaryMixed",
+   "WeilConjectures.integralQuotientClauseOrdinaryScalarUnit",
+   "WeilConjectures.integralQuotientClauseOrdinaryScalarTower",
+   "WeilConjectures.integralQuotientClauseOrdinaryAssociative",
+   "WeilConjectures.integralQuotientClauseOrdinaryUnital",
+   "WeilConjectures.integralQuotientClauseOrdinaryFinite",
+   "WeilConjectures.integralQuotientClauseDerivedMixed",
+   "WeilConjectures.integralQuotientClauseDerivedScalarUnit",
+   "WeilConjectures.integralQuotientClauseDerivedScalarTower",
+   "WeilConjectures.integralQuotientClauseDerivedAssociative",
+   "WeilConjectures.integralQuotientClauseDerivedUnital",
+   "WeilConjectures.integralQuotientClauseDerivedFinite"
   ],
   "file": "lean/Sheaf/Paper/QuotientSystemMixedCoherence.lean",
   "statement": "theorem integralQuotientMixedCoherence (l : ℕ) [Fact l.Prime] : IntegralQuotientMixedCoherence.{t, u} l",
@@ -287,13 +324,25 @@
   "note": "Re-delivery after the H13 RETURN of 33e3f1b6: def-trf-integral-comparison-sequence-systems record is now byte-identical (cmp) to live and side-live (N2, IntegralComparisonSequenceSystems, 36 decls); the separate IntegralComparisonSequenceScalarDerived module is dropped; the derived alpha/e helpers (integralComparisonSystemScalarComposition/_existsUnique, integralComparisonSystemScalarUnit/_existsUnique) are moved verbatim into the item module in a closed section, retagged to the item and listed in lean.declarations. They are .choose of ∃! pinned via the universal cochain counits on K-flat representatives, the same pattern as live derived kappa, so not hollow. The rest of the item Lean is unchanged from the previously reviewed head. Re-read every clause (mixed square, scalar unit, scalar tower, associativity, both unit laws, finite bracketings; ordinary and derived): matches the node, with no added assumptions and independent universes t/u. lean.statement is verbatim; no name clashes in live or side-live; docstrings carry all 8 proof steps; report sections present. No compile run (2026-10-21 rule), no fixes. Advisory: proof-plan-only imports; Nonempty Invertible in the path predicate."
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-25",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C2",
-  "result": "pass",
-  "landing": "20261021T170717-L-2752086",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-2a332",
+  "group": "U4",
+  "result": "fix",
+  "landing": "20261025T164455-L-1022707",
+  "kind": "interface",
+  "note": "independent cc review: 2a3329 Lean+node files byte-identical to previously reviewed 1e2d2af4 (FIX); base drift checked (no changed deps/importers); reader gate re-run: 7 delivered modules + 5 live direct importers compile; axioms as expected; item node differs from live only in lean/proof/proof_deps/proof_origin"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

@@ -1,0 +1,264 @@
+{
+ "id": "lem-sfb-keel-mori-uniform-topological-moduli",
+ "kind": "statement",
+ "title": "Uniform topological moduli space for a finite-diagonal Deligne--Mumford stack",
+ "statement": "Let $k$ be a field [def-weil-field], and let $\\mathcal X$ be a Deligne--Mumford stack over $k$ as in [def-sfb-stable-pointed-moduli-groupoids]. Suppose its relative diagonal $\\Delta_{\\mathcal X/k}:\\mathcal X\\to\\mathcal X\\times_k\\mathcal X$ is finite: every scheme base change is a scheme finite over the base [def-weil-finite-integral-morphism]. There exist an algebraic space $M/k$ [def-trf-algebraic-space] and a morphism $c:\\mathcal X\\to M$ with the following two properties. First, $c$ is uniform categorical: for every flat morphism $M'\\to M$ of algebraic spaces over $k$, every morphism $\\mathcal X\\times_M M'\\to Z$ to an algebraic space $Z/k$ factors uniquely through the projection $\\mathcal X\\times_M M'\\to M'$. This includes the identity base change, so $c$ is initial among morphisms to algebraic spaces over $k$. Flatness of algebraic-space morphisms is tested on etale scheme charts using [def-weil-flat-morphism]. Second, $c$ is a universal homeomorphism: for every Deligne--Mumford stack $\\mathcal Z/k$ and morphism $\\mathcal Z\\to M$, the map $|\\mathcal X\\times_M\\mathcal Z|\\to|\\mathcal Z|$ is a homeomorphism. Here points and topology are those of [lem-sfb-stack-topology-open-substacks], also applied to algebraic spaces as stacks with trivial automorphisms. In particular $|c|:|\\mathcal X|\\to|M|$ is a homeomorphism. Schemes are [def-pc-scheme].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT (theorem-keel-mori), specialized to Deligne--Mumford stacks with finite diagonal; Tag 0DUG (definition-categorical-quotient). The finite-inertia hypothesis follows because the inertia projection is the base change of the relative diagonal along itself. Universal homeomorphism means stacks-morphisms.tex Tag 0CI7 (definition-universal-homeomorphism)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "def-trf-algebraic-space",
+  "def-weil-flat-morphism",
+  "lem-sfb-stack-topology-open-substacks",
+  "def-pc-scheme",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-stack-point-topological-space"
+ ],
+ "proof": [
+  {
+   "text": "The inertia $I_{\\mathcal X}$ is the 2-fibre product $\\mathcal X\\times_{\\mathcal X\\times_k\\mathcal X}\\mathcal X$, both maps being the relative diagonal. Indeed an object consists of two objects and two isomorphisms between them; identifying the two objects by the first isomorphism leaves an object and an automorphism. Its projection to the second factor is therefore the base change of $\\Delta_{\\mathcal X/k}$. For every scheme $T\\to\\mathcal X$, its further pullback is exactly the scheme base change of that diagonal along $T\\to\\mathcal X\\to\\mathcal X\\times_k\\mathcal X$. Thus the hypothesis of finite diagonal gives finite inertia, in precisely the scheme-test convention required below.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), finite-inertia hypothesis; the fibre-product computation is elementary."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-keel-mori-finite-inertia-quotient] over $S=\\operatorname{Spec}k$. It gives an algebraic space $M/k$ and a categorical map $c:\\mathcal X\\to M$ which is a universal homeomorphism. In particular the second property in the item already holds, since every Deligne--Mumford test stack is an algebraic-stack test allowed by that node. Taking the identity test $M\\to M$ gives $|\\mathcal X|\\cong|M|$. It remains to prove that this same $c$ has the asserted factorization property after flat base change. Categorical choices cause no ambiguity: if $d:\\mathcal X\\to P$ is another one, their two factorization properties give maps $u:P\\to M$ and $v:M\\to P$ with $ud=c$ and $vc=d$. Then $(uv)c=c$ and $(vu)d=d$, so categorical uniqueness gives $uv=1_M$ and $vu=1_P$. The equalities $ud=c$ and $vc=d$ identify the quotient maps. On a 2-fibre-product test object, apply $u$ or $v$ to its algebraic-space component and to its structural identification; the identities $uv=1_M$ and $vu=1_P$ make these operations inverse. This gives the corresponding cartesian diagrams for the chosen categorical map.",
+   "uses": [
+    "lem-sfb-keel-mori-finite-inertia-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), existence and topological assertions; reuse the existing finite-inertia categorical-quotient node."
+   }
+  },
+  {
+   "text": "Choose the jointly surjective separated representable etale maps $g_i:\\mathcal X_i\\to\\mathcal X$ and the affine finite locally free groupoid presentations $\\mathcal X_i\\simeq[U_i/R_i]$ from [lem-sfb-finite-inertia-etale-affine-charts]. Each $\\mathcal X_i$ is Deligne--Mumford: pull back an etale scheme atlas of $\\mathcal X$ to $\\mathcal X_i$, refine the resulting etale algebraic spaces by their etale scheme charts [def-trf-algebraic-space], and compose. These charts cover $\\mathcal X_i$ and are etale by base-change and composition stability in [lem-sfb-stack-chartwise-smooth-etale-calculus]; representability of its diagonal is part of being an algebraic stack. Each chart has finite inertia, since its inertia projection is the pullback of that of $\\mathcal X$ by the asserted inertia isomorphism. Apply [lem-sfb-finite-flat-affine-groupoid-moduli] to the specified presentation: $c_i:\\mathcal X_i\\to M_i=\\operatorname{Spec}C_i$ is uniform categorical, hence categorical at the identity base change. The $g_i$ preserve inertia, so [lem-sfb-keel-mori-stabilizer-preserving-etale] gives separated etale maps $r_i:M_i\\to M$ and equivalences $\\mathcal X_i\\simeq\\mathcal X\\times_M M_i$. The $r_i$ cover $M$: for $m\\in|M|$, choose $x$ above it using $|c|$ surjective and then $x_i$ above $x$ using joint surjectivity; $c_i(x_i)$ maps to $m$.",
+   "uses": [
+    "lem-sfb-finite-inertia-etale-affine-charts",
+    "lem-sfb-finite-flat-affine-groupoid-moduli",
+    "lem-sfb-keel-mori-stabilizer-preserving-etale",
+    "def-trf-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tags 0DUE, 0DUP, 0DUR, 0DUV; cartesian local models and their joint surjectivity."
+   }
+  },
+  {
+   "text": "Let $b:N\\to M$ be any flat algebraic-space morphism over $k$ and put $\\mathcal Y=\\mathcal X\\times_M N$. Set $N_i=N\\times_M M_i$. By [lem-trf-space-fibre-products-etale-covers], the $N_i$ are algebraic spaces and $N_i\\to N$ form an etale covering. All maps here are maps of algebraic spaces, hence representable by algebraic spaces. Over $S=\\operatorname{Spec}k$, the flat map $N_i\\to M_i$ is the base change of $b$; apply the arbitrary-base-change clause of [lem-sfb-stack-chartwise-smooth-etale-calculus]. Associating the 2-fibre products identifies $\\mathcal Y\\times_N N_i$ with $\\mathcal X_i\\times_{M_i}N_i$. On a scheme test $T$, both sides consist of triples $(x,n,m_i)$ with $c(x)=b(n)=r_i(m_i)$; arrows are isomorphisms of $x$ fixing $n,m_i$. Keeping this triple and its arrows gives inverse functors, compatible with pullback in $T$ and with projection to $\\mathcal Y$. For an algebraic space $Z/k$ and a map $\\theta:\\mathcal Y\\to Z$, restrict $\\theta$ to these identified stacks. The uniform property of $c_i$ gives unique maps $\\psi_i:N_i\\to Z$ whose composites with these projections equal the restrictions of $\\theta$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-finite-flat-affine-groupoid-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), last paragraph, local factorizations after arbitrary flat base change; Tag 0DUR supplies their universal property."
+   }
+  },
+  {
+   "text": "On $N_{ij}=N_i\\times_N N_j$, compare the two restrictions of $\\psi_i,\\psi_j$. The projection $N_{ij}\\to N_i$ is etale by [lem-trf-space-fibre-products-etale-covers]; it is flat, and $N_{ij}\\to M_i$ is flat, by [lem-sfb-stack-chartwise-smooth-etale-calculus] applied over $S=\\operatorname{Spec}k$ to these representable maps of algebraic spaces: etale implies smooth implies flat, and $N_{ij}\\to M_i$ is the composite of the flat maps $N_{ij}\\to N_i$ and $N_i\\to M_i$. Write $p_i:N_{ij}\\to N_i$, $p_j:N_{ij}\\to N_j$ and $e:\\mathcal Y\\times_N N_{ij}\\to N_{ij}$. Pulling back the two equalities constructed in step 4 gives $(\\psi_i p_i)e=\\theta\\operatorname{pr}_{\\mathcal Y}=(\\psi_j p_j)e$: both maps to $\\mathcal Y$ forget exactly the two chart coordinates. Thus the two candidate maps have identical composites with $e$. This stack is $\\mathcal X_i\\times_{M_i}N_{ij}$ by the cartesian identification already obtained. The injective part of the uniform bijection in [lem-sfb-finite-flat-affine-groupoid-moduli], for the flat map $N_{ij}\\to M_i$, forces $\\psi_i|_{N_{ij}}=\\psi_j|_{N_{ij}}$. This writes out the agreement on overlaps without assuming a separate quotient theorem for the overlap stack.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-sfb-finite-flat-affine-groupoid-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), last paragraph: the omitted agreement-on-overlaps argument."
+   }
+  },
+  {
+   "text": "Glue the compatible $\\psi_i$ to $\\psi:N\\to Z$ using that algebraic spaces are sheaves [def-trf-algebraic-space]. Explicitly, for a scheme $T\\to N$, refine the etale cover $T\\times_N N_i$ by etale scheme charts. The maps from these charts to $Z$ agree on overlaps by the previous step, so the sheaf axiom gives a unique element of $Z(T)$. For $T^\\prime\\to T$, the pulled-back section and the section constructed on $T^\\prime$ have the same restrictions on the pulled-back cover, hence are equal by sheaf uniqueness. Thus these sections define a natural transformation $N\\to Z$. For any scheme object $T\\to\\mathcal Y$, the maps $T\\to N\\xrightarrow{\\psi}Z$ and $T\\to\\mathcal Y\\xrightarrow{\\theta}Z$ agree on the induced etale cover, so they agree by the same sheaf axiom. Thus $\\psi$ factors $\\theta$. If $\\phi$ is another factorization, its restriction to each $N_i$ equals $\\psi_i$ by the categorical uniqueness established in step 4. Testing on scheme charts and using sheaf uniqueness gives $\\phi=\\psi$. Since $b, Z,\\theta$ were arbitrary, this proves uniformity, including the identity base change.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori), last paragraph: sheaf gluing, factorization, and uniqueness, written on scheme tests."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "lem-sfb-keel-mori-finite-inertia-quotient",
+  "lem-sfb-finite-inertia-etale-affine-charts",
+  "lem-sfb-finite-flat-affine-groupoid-moduli",
+  "lem-sfb-keel-mori-stabilizer-preserving-etale",
+  "def-trf-algebraic-space",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tags 0DUE, 0DUP, 0DUR, 0DUT and 0DUV; the last paragraph of the Keel--Mori proof gives the descent argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack with finite diagonal admits a uniform categorical moduli algebraic space which is a universal homeomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.universallyInjective_eq_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"@AlgebraicGeometry.UniversallyInjective = CategoryTheory.MorphismProperty.diagonal @AlgebraicGeometry.Surjective\", \"doc\": \"A morphism of schemes is universally injective if and only if its diagonal morphism (obtained from the pullback of the morphism with itself) is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"AlgebraicGeometry.AffineTargetMorphismProperty → AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"For any scheme $X$ and affine scheme $x$, given a morphism $f: X \\\\to x$, and for any affine schemes $U_1, U_2$ with open immersions $f_1: U_1 \\\\to X$ and $f_2: U_2 \\\\to X$, the property $P$ holds for th\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_affineProperty_isLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ {Q : AlgebraicGeometry.AffineTargetMorphismProperty} [Q.IsLocal], Q.diagonal.IsLocal\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then the diagonal property $ Q $ (preserved under pullbacks along open immersions from affine schemes) is also local\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyDiagonalSchemeDiagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q], AlgebraicGeometry.HasAffineProperty P.diagonal Q.diagonal\", \"doc\": \"If a morphism property $P$ has the affine property with respect to another property $Q$ in the category of schemes, then the diagonal morphism property of $P$ also has the affine property with respect\"}\n  {\"name\": \"AlgebraicGeometry.instIsZariskiLocalAtTargetDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  AlgebraicGeometry.IsZariskiLocalAtTarget P.diagonal\", \"doc\": \"If a morphism property $P$ on schemes is Zariski local at the target, then the diagonal morphism property $P.diagonal$ (defined via pullbacks) is also Zariski local at the target. This asserts that th\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.diagonal_of_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Constructors\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {Q : AlgebraicGeometry.AffineTargetMorphismProperty}\\n  [AlgebraicGeometry.HasAffineProperty P Q] {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (𝒰 : Y.OpenCover)\\n  [inst : ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsAffine (𝒰.X i)]\\n  (𝒰' : (i : 𝒰.\", \"doc\": \"Let $ f: X \\to Y $ be a morphism of schemes where $ Y $ is affine. Suppose $ \\\\mathcal{U} $ is an open cover of $ Y $ such that each $ \\\\mathcal{U}.X_i $ is affine, and for each $ i $, the pullback of $ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Keel Mori existence of a categorical moduli space for an algebraic stack with finite inertia",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsOverSchemeTopMorphismProperty\", \"module\": \"Mathlib.AlgebraicGeometry.LimitsOver\", \"type\": \": HasFiniteCoproducts (P.Over ⊤ S)\", \"doc\": \"The category of morphisms over schemes with the top morphism property (which is always true for any morphism) has finite coproducts.\"}\n  {\"name\": \"SheafOfModules.hasLimit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasLimit F\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all limits. This means that for any diagram (\"}\n  {\"name\": \"SheafOfModules.Finite.hasFiniteLimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits\", \"type\": \": HasFiniteLimits (SheafOfModules.{v} R)\", \"doc\": \"For any category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the category of sheaves of modules over $R$ has all finite limits. This includes the existenc\"}\n  {\"name\": \"Module.injective_object_of_injective_module\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Injective\", \"type\": \"[inj : Injective R M] : CategoryTheory.Injective (ModuleCat.of R M)\", \"doc\": \"If $ M $ is an injective module over a ring $ R $, then the corresponding object in the category of left $ R $-modules is an injective object in that category.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasLimits X.Modules\", \"doc\": \"For any scheme $X$, the category of sheaves of modules over the structure sheaf of $X$ has all limits. This means that for every diagram in this category indexed by a category of the same size, the li\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": HasColimits X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ has all colimits. This means that given any diagram in this category, there exists a colimit object satisfyin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"(M : SheafOfModules.{u} R) [M.IsFinitePresentation] : M.IsQuasicoherent\", \"doc\": \"Every sheaf of modules with finite presentation over a ring sheaf is quasicoherent.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Moduli\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "Keel.?Mori|categoricalModuli|moduliSpace|finiteInertia",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of algebraic space quotient of a stack with finite automorphism groups compatible with flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"AlgebraicGeometry.IsOpenImmersion.DescendsAlong\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"In the category of schemes, the property of being an open immersion descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes an open \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Deligne Mumford stack with finite diagonal has a uniform categorical moduli algebraic space after every flat base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Keel Mori quotient of a stack with finite inertia is a universal homeomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x : ↥(AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).glued),\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰) x)\", \"doc\": \"For any point $x$ in the glued scheme constructed from an open cover $\\\\mathcal{U}$ of a scheme $X$, the stalk map induced by the canonical morphism from the glued scheme to $X$ is an isomorphism in th\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_stalk_iso\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is an isomorphism if and only if the underlying continuous map on topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced map on stalks $f_\"}\n  {\"name\": \"AlgebraicGeometry.isIso_iff_isIso_stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  CategoryTheory.IsIso f ↔\\n    CategoryTheory.IsIso f.base ∧ ∀ (x : ↥X), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.stalkMap f x)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is an isomorphism if and only if its underlying continuous map of topological spaces is a homeomorphism, and for every point $x \\\\in X$, the induced \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Cover.fromGlued 𝒰)\", \"doc\": \"Given an open cover $\\\\mathcal{U}$ of a scheme $X$, the canonical morphism from the glued scheme constructed via colimit from the gluing data of $\\\\mathcal{U}$ to $X$ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Moduli\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "Keel.?Mori|categoricalModuli|moduliSpace|finiteInertia",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform categorical coarse moduli spaces for finite diagonal Deligne Mumford stacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"UniformSpaceCat\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \"Type (u + 1)\", \"doc\": \"The category of uniform spaces, where objects are uniform spaces and morphisms are uniformly continuous maps.\"}\n  {\"name\": \"UniformSpaceCat.instInhabited\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \": Inhabited UniformSpaceCat\", \"doc\": \"The category of uniform spaces is inhabited, as demonstrated by the empty type equipped with its canonical uniform space structure.\"}\n  {\"name\": \"UniformSpaceCat.instLargeCategory\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \": LargeCategory.{u} UniformSpaceCat.{u}\", \"doc\": \"The category of uniform spaces, where objects are uniform spaces and morphisms are uniformly continuous maps, forms a large category. This instance verifies the category axioms: identity morphisms are\"}\n  {\"name\": \"nhdsSet_diagonal_eq_uniformity\", \"module\": \"Mathlib.Topology.UniformSpace.Compact\", \"type\": \"[CompactSpace α] : 𝓝ˢ (diagonal α) = 𝓤 α\", \"doc\": \"In a compact space $\\\\alpha$, the neighborhood filter of the diagonal set $\\\\{(x, x) \\\\mid x \\\\in \\\\alpha\\\\} \\\\subseteq \\\\alpha \\\\times \\\\alpha$ coincides with the uniformity $\\\\mathcal{U}(\\\\alpha)$ of the space.\"}\n  {\"name\": \"UniformSpaceCat.recOn\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \"{motive : UniformSpaceCat → Sort u_1} →\\n  (t : UniformSpaceCat) →\\n    ((carrier : Type u) → [str : UniformSpace carrier] → motive { carrier := carrier, str := str }) → motive t\", \"doc\": \"Given a type family over the category of uniform spaces and a rule assigning to each uniform space (defined on a type $X$ with structure) an element of the corresponding type family, this recursor con\"}\n  {\"name\": \"UniformSpaceCat.of.injEq\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \"∀ (carrier : Type u) [str : UniformSpace carrier] (carrier_1 : Type u) (str_1 : UniformSpace carrier_1),\\n  ({ carrier := carrier, str := str } = { carrier := carrier_1, str := str_1 }) = (carrier = carrier_1 ∧ str ≍ str_1)\", \"doc\": \"Two objects in the category of uniform spaces constructed from types $X$ and $Y$ with uniform space structures are equal if and only if $X = Y$ as types and their uniform space structures are uniforml\"}\n  {\"name\": \"UniformSpaceCat.instCoeSortType\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \": CoeSort UniformSpaceCat Type*\", \"doc\": \"There is a canonical coercion from the category of uniform spaces to the type of uniform spaces, given by the carrier function that maps the category to its objects.\"}\n  {\"name\": \"UniformSpaceCat.rec\", \"module\": \"Mathlib.Topology.Category.UniformSpace\", \"type\": \"{motive : UniformSpaceCat → Sort u_1} →\\n  ((carrier : Type u) → [str : UniformSpace carrier] → motive { carrier := carrier, str := str }) →\\n    (t : UniformSpaceCat) → motive t\", \"doc\": \"Given a type family over the category of uniform spaces and a rule assigning to each uniform space (defined on a type $X$ with structure) an element of the corresponding type family, this recursor con\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern scheme morphisms, affine schemes, ordinary groupoids or manifold groupoids, not the stated moduli assertion for stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coarse-moduli-open-restriction",
+  "date": "2026-10-22",
+  "group": "Q63"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input. Supporting input: Keel--Mori uniform categorical space and universal homeomorphism, before identifying it with the given coarse scheme.",
+   "via": [
+    "lem-sfb-coarse-moduli-open-restriction",
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-keel-mori-uniform-topological-moduli",
+  "worker": "stage1",
+  "summary": "Reused the existing finite-inertia categorical quotient and its universal homeomorphism; proved the remaining uniformity by finite-flat affine local models, cartesian stabilizer-preserving etale moduli squares and explicit sheaf gluing on overlaps. Three genuine local geometric inputs are stated without proofs. No finite-type or tame-stabilizer hypothesis is added; the statement is unchanged. All new nodes have fresh logged Mathlib searches in two semantic phrasings. Repair after the side-completion promotion refusal: rebased through the delivery tool on the current server DAG, reread all cited statements, revalidated the thirteen verbatim citations, and made the uniqueness transport between categorical choices explicit in step 2. Rechecked against the live unsplit item after the promotion return at ff8bec68c63; reread all cited live statements and expanded the inverse maps of base-change diagrams in step 2 and the scheme-pullback compatibility in step 6. All thirteen citation quotes remain valid; the statement, local inputs and Mathlib search questions are unchanged. Latest return 475147e6c3a: compared the retained delivery with the current unsplit DAG, reread all six existing cited statements and all three local inputs, and expanded step 4 into the test-object-and-arrow identification needed to restrict theta compatibly. Rebased through the required delivery tool; the statement and all logged search questions remain unchanged. Promotion return 75e5f940dc6: rebased the retained split with the delivery tool, compared the live unsplit baseline, reread all six existing cited statements and three local inputs, and wrote the two overlap factorization equalities explicitly in step 5. The thirteen verbatim citations remain valid. Return at 1f5060dfc36: reread the current chart-calculus statement and applied its representability and scheme-base hypotheses explicitly in steps 4 and 5. Rebased the local inputs by replacing two newly duplicated nodes with the existing finite-inertia affine-chart and finite-flat affine-groupoid nodes, using their full statements and specified quotient presentations. One child remains; statement unchanged.",
+  "blueprint": "Realizes main-20261015 det-thm-sf-ctf-stability-direct-images proof (3), through the existing alteration/level-moduli creation chain: the Keel--Mori input below coarse-moduli restriction to opens. The inherited creation chain has no blueprint id (ancestor tool returns None), so its null anchor and via chain are retained, with the explicit paragraph (3) place.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Algebraic-space fibre products and preservation of etale covering families under base change are a generic descent tool; this unit has no such general algebraic-space cover node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-8a6025c56",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-8a6025c56 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read Stacks 0DUG, 0DUE, 0DUS, 0DUT (full proof, including the fundamental-diagram claim and the final uniformity paragraph) and 0DUV. Since the previous head 1f50, the item statement and the new 0DUV node are unchanged. Steps 3–5 now cite the existing NL nodes lem-sfb-finite-inertia-etale-affine-charts and lem-sfb-finite-flat-affine-groupoid-moduli instead of two sandbox duplicates, so this is a real rebase, not a re-push. Step 1: I_X ×_X T = X ×_{X×X} T, so finite diagonal gives finite inertia. Step 2: the existing quotient node gives the categorical M and the universal homeomorphism, and asserts no uniformity; a DM test stack is an algebraic stack because étale implies smooth. Step 3: the X_i are DM (pulled-back atlas refined by scheme charts) and have finite inertia (inertia isomorphism); c_i is uniform hence categorical; the 0DUV node gives r_i and X_i ≃ X ×_M M_i; the r_i cover M pointwise. Step 4: N_i → M_i is flat by base change, Y ×_N N_i ≅ X_i ×_{M_i} N_i, and uniformity gives ψ_i. Step 5: N_ij → M_i is flat (étale then flat), and injectivity of the uniform bijection gives ψ_i = ψ_j on N_ij; this writes out 0DUT's 'details omitted'. Step 6: the sheaf gluing, factorization and uniqueness are elementary and correct. New node lem-sfb-keel-mori-stabilizer-preserving-etale: true (0DUV for DM stacks, transported to arbitrary categorical choices by uniqueness); statement-only and self-contained; its source proof uses no uniformity, and a dependency DFS finds no cycle. It is not a duplicate of 0DUS affine-moduli (that node needs a well-nigh affine target), etale-local-moduli-gluing, open-restriction, or finite-inertia-adequate-coarse-space (finite type, no uniformity stated). Edge cases checked: empty stack, identity, open immersion, and an atlas of BG (correctly excluded because it does not preserve inertia). Batch-5: def-sfb-stable-pointed-moduli-groupoids, def-trf-algebraic-space, the chart calculus and lem-trf-space-fibre-products-etale-covers (Stacks 02X2/041F) are general foundations, not parts of the trace-formula or Poincaré-duality proofs, so accepted. Accepted tool_use: lem-trf-space-fibre-products-etale-covers as a generic off-unit algebraic-space cover lemma. No SGA citation. Cosmetic: the split_report summary still says 'three local inputs'; there is now one."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.KeelMoriUniformTopologicalModuli",
+  "declaration": "CategoryTheory.keelMori_uniform_topological_moduli",
+  "file": "lean/Sheaf/AlgebraicGeometry/KeelMoriUniformTopologicalModuli.lean",
+  "statement": "theorem keelMori_uniform_topological_moduli (k : Type u) [Field k] (X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (hX : IsDeligneMumfordModuliStack X) (hdiag : HasFiniteModuliDiagonal X) : ∃ (M : AlgebraicSpace (Spec (.of k))) (c : BasedFunctor X (discreteModuli M.obj.obj)), (∀ (B : AlgebraicSpace (Spec (.of k))) (b : B ⟶ M), AlgebraicSpace.MapIsFlat b → ∀ Y : AlgebraicSpace (Spec (.of k)), Function.Bijective (fun h : B.obj.obj ⟶ Y.obj.obj ↦ (moduliTwoFiberFst (discreteModuliMap b.hom.hom) c).comp (discreteModuliMap h))) ∧ (∀ (Z : BasedCategory.{max u v₁ v₂, max (u + 1) w₁ w₂} (Over (Spec (.of k)))) (g : BasedFunctor Z (discreteModuli M.obj.obj)), IsDeligneMumfordModuliStack Z → IsHomeomorph (moduliPointMap (moduliTwoFiberFst g c))) ∧ IsHomeomorph (moduliPointMap c)",
+  "branch": "sheaf-dag",
+  "by": "Q32",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c0404757",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Fresh stage-2 delivery: one module, sorry-only theorem keelMori_uniform_topological_moduli; lean record verbatim; 4 added stmt_deps (finite-stack-scheme-tests, space-morphism-properties, dm-stack-morphism-properties, stack-point-topological-space) are the landed owners and on base. Clause check: Field k; IsDeligneMumfordModuliStack; HasFiniteModuliDiagonal = finite relative diagonal on scheme pair tests; ∃ AlgebraicSpace M, c; uniform categoricity = Bijective precomposition with moduliTwoFiberFst over all MapIsFlat b (chartwise Mathlib Flat), all Y; equality of strict based functors into discreteModuli is the right notion (same as IsCoarseModuliScheme/finiteFlatAffineGroupoid_moduli); DM-test universal homeomorphism via moduliPointMap/moduliPointTopologicalSpace; |c| homeomorphism. No extra hypotheses; docstrings carry source tags, blueprint id and 6 proof steps; worker report and second-reading sections present. Note: test-stack universes max u v₁ v₂/max (u+1) w₁ w₂ follow the landed finite-flat-affine-groupoid sibling (not strictly needed, acceptable). No Keel–Mori duplicate in the Lean trees. No compile run (no changes)."
+ }
+}

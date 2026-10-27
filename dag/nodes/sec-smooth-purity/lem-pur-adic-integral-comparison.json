@@ -24,10 +24,10 @@
    }
   },
   {
-   "text": "Use the single covering on which all module levels have compatible bases. On each slice, these bases identify the whole module tower, its limit and every projection with their ring counterparts. The inverse image carries this local description to the target cover. More explicitly, let $E$ be the coproduct of the sheafified representables of the covering objects, so $E\\to1$ is epi. Finite-product preservation gives $L(X\\times E)\\cong LX\\times LE$, and colimit preservation carries this cover to a cover. In the slice over $E$, the compatible bases identify the module comparison with the coefficient comparison. The latter is invertible by the preceding step, so the module comparison is invertible over $LE$ and hence globally. Slice restriction is sectionwise, so its limit identifications preserve the projections. This uses a single cover for all levels, not a separate cover for each level.",
+   "text": "Fix a covering object V. Form the sheafification of the dependent-sum presheaf X ↦ Σ(f:X→V), H(X,f) for H on C/V. On restricted sheaves this is naturally h_V × (-), with h_V the sheafified representable. Compatible local bases give an isomorphism of the ring and module towers after product with h_V. Products with a fixed object preserve tower limits (the first coordinate is fixed by projection to level zero, and the second by the original limit), and L preserves products, so preservation of the ring tower limit implies preservation of the module tower limit after product with L(h_V). The covering makes the h_V jointly locally surjective over the terminal sheaf. The adjunction preserves this property, by map_jointly_locally_surjective. Thus the L(h_V) are jointly locally inhabited. If their products with the canonical module-limit comparison are isomorphisms, that comparison is locally injective and locally surjective, hence an isomorphism. This gives the normalized underlying module-sheaf comparison without a slice inverse-image construction.",
    "uses": [
     "def-pur-localized-ringed-site",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-inverse-image-local-families",
     "lem-galois-set-sheaf-local-bijection-isomorphism",
     "def-pur-sheaf-inverse-limit"
    ],
@@ -57,14 +57,14 @@
   "def-pur-sheaf-inverse-limit",
   "def-weil-sheaf-of-modules-category",
   "lem-galois-set-sheaf-local-bijection-isomorphism",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-weil-pbc-inverse-image-local-families"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-  "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion.",
-  "group": "V6",
-  "date": "2026-10-21"
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph; local-basis limit argument implemented via products with sheafified representables, connected limits, and local surjectivity.",
+  "group": "A7",
+  "date": "2026-10-23"
  },
  "mathlib_searches": [
   {
@@ -131,13 +131,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "C-2df79",
-  "group": "V6",
+  "reviewer": "COMPILER",
+  "group": "A7",
   "result": "pass",
-  "landing": "20261021T134603-L-1380680",
+  "landing": "20261023T230349-L-3418401",
   "kind": "interface",
-  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

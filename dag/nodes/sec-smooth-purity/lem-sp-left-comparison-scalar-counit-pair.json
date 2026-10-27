@@ -1,0 +1,258 @@
+{
+ "id": "lem-sp-left-comparison-scalar-counit-pair",
+ "kind": "statement",
+ "title": "Both scalar-counit maps under compatible left comparisons and refinement chains",
+ "statement": "Let $\\mathcal X_A,\\mathcal X_B,\\mathcal Y_A,\\mathcal Y_B$ be categories [def-nagata-category]. All functors preserve identities and composition, all transformations below are natural, and compositions are read right to left. For $R=A,B$, give functors $F_R,F'_R:\\mathcal X_R\\to\\mathcal Y_R$ and $H_R:\\mathcal Y_R\\to\\mathcal X_R$, natural maps $\\epsilon_R:F_RH_R\\to1$, and natural isomorphisms $\\lambda_R:F_R\\xrightarrow{\\sim}F'_R$. Define natural maps\n$$\\epsilon'_{R,K}=\\epsilon_{R,K}\\circ\\lambda_R(H_RK)^{-1}.$$\nGive functors $T_X:\\mathcal X_A\\to\\mathcal X_B$, $T_Y:\\mathcal Y_A\\to\\mathcal Y_B$, natural maps $q:T_YF_A\\to F_BT_X$, $q':T_YF'_A\\to F'_BT_X$ and $a:T_XH_A\\to H_BT_Y$. Assume for every $M\\in\\mathcal X_A$ the coefficient square\n$$q'_M\\circ T_Y(\\lambda_A(M))=\\lambda_B(T_XM)\\circ q_M.$$\nFor $K\\in\\mathcal Y_A$ define parallel maps\n$$D_K=\\epsilon_{B,T_YK}\\circ F_B(a_K)\\circ q_{H_AK},\\qquad E_K=T_Y(\\epsilon_{A,K}),$$\n$$D'_K=\\epsilon'_{B,T_YK}\\circ F'_B(a_K)\\circ q'_{H_AK},\\qquad E'_K=T_Y(\\epsilon'_{A,K}).$$\nThen the two individual conjugacy identities are\n$$D'_K\\circ T_Y(\\lambda_A(H_AK))=D_K,\\qquad E'_K\\circ T_Y(\\lambda_A(H_AK))=E_K.$$\nIn particular $D_K=E_K$ if and only if $D'_K=E'_K$. The same formulas hold for an inverse comparison and for a finite composite of compatible comparisons: if $\\mu_R:F'_R\\xrightarrow{\\sim}F''_R$ satisfies the analogous coefficient square for $q',q''$, and $\\epsilon''_R=\\epsilon'_R\\circ\\mu_R(H_R)^{-1}$, then the comparison is $\\mu_R\\lambda_R$ and the formula uses $T_Y((\\mu_A\\lambda_A)(H_AK))$. Thus it applies to any two refinement chains whose composite comparisons agree. No adjunction axioms or invertibility of $q,q',a$ are required. When $\\epsilon_R$ is an actual counit, $\\epsilon'_R$ is the counit of its specified left-isomorphism transport; no replacement by an unspecified isomorphic map is implicit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $K$, and write $L=T_Y(\\lambda_A(H_AK))$, $u=\\lambda_B(T_XH_AK)$, and $v=\\lambda_B(H_BT_YK)$. The assumed square gives $q\\prime_{H_AK}L=u q_{H_AK}$. Naturality of $\\lambda_B$ at $a_K$ gives $F\\prime_B(a_K)u=vF_B(a_K)$. Substituting these two equalities and the definition of $\\epsilon\\prime_B$, and associating compositions using [def-nagata-category], gives $$D\\prime_K L=\\epsilon_{B,T_YK}v^{-1}F\\prime_B(a_K)u q_{H_AK}=\\epsilon_{B,T_YK}v^{-1}vF_B(a_K)q_{H_AK}=D_K.$$ Only $v$ is cancelled; neither $a_K$ nor $q_{H_AK}$ is inverted.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+   }
+  },
+  {
+   "text": "By functoriality and the defining formula for $\\epsilon\\prime_A$, $$E\\prime_K L=T_Y(\\epsilon_{A,K}\\lambda_A(H_AK)^{-1})T_Y(\\lambda_A(H_AK))=T_Y(\\epsilon_{A,K})=E_K.$$ The inverse of $L$ is $T_Y(\\lambda_A(H_AK)^{-1})$, since a functor preserves composition and identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+   }
+  },
+  {
+   "text": "The preceding identities imply that $D\\prime_K=E\\prime_K$ gives $D_K=E_K$ by precomposition with $L$. Conversely, if $D_K=E_K$, then $D\\prime_KL=E\\prime_KL$; compose on the right with the displayed inverse of $L$ to obtain $D\\prime_K=E\\prime_K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+   }
+  },
+  {
+   "text": "For the inverse comparison, the original coefficient square, multiplied by the two inverse components, reads $$q_M T_Y(\\lambda_A(M)^{-1})=\\lambda_B(T_XM)^{-1}q\\prime_M.$$ Also $\\epsilon\\prime_{R,K}\\lambda_R(H_RK)=\\epsilon_{R,K}$. Thus the reversed data satisfy precisely the same hypotheses. The preceding calculations with primed and unprimed data exchanged prove both inverse identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+   }
+  },
+  {
+   "text": "For a second compatible comparison $\\mu$, functoriality and the two coefficient squares give $$q\\prime\\prime_M T_Y((\\mu_A\\lambda_A)(M))=\\mu_B(T_XM)q\\prime_M T_Y(\\lambda_A(M))=(\\mu_B\\lambda_B)(T_XM)q_M.$$ Moreover $$\\epsilon\\prime\\prime_{R,K}=\\epsilon_{R,K}\\lambda_R(H_RK)^{-1}\\mu_R(H_RK)^{-1}=\\epsilon_{R,K}((\\mu_R\\lambda_R)(H_RK))^{-1}.$$ Consequently the first two calculations apply to the composite. For any finite chain, induct on its length: length zero has identity comparison and the original counit, and appending one comparison is the calculation just given. The resulting two maps therefore depend only on the composite comparison. In particular two refinement chains with equal composites have identical transported counits and identical conjugacy formulas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+   }
+  },
+  {
+   "text": "If $\\epsilon_R$ is the counit of a specified adjunction $F_R\\dashv H_R$, use [lem-sfb-adjunction-transport-left-iso] with $L=F_R$, $L\\prime=F\\prime_R$, $R=H_R$ and $e=\\lambda_R$. Its Hom bijection is $f\\mapsto a(f\\lambda_R(M))$. At $M=H_RK$, the original inverse image of $1_{H_RK}$ is $\\epsilon_{R,K}$, so the transported inverse image is exactly $\\epsilon_{R,K}\\lambda_R(H_RK)^{-1}=\\epsilon\\prime_{R,K}$. This proves the final counit assertion for the specified transport. Steps 1–5 used no adjunction axiom and no invertibility of $q,q\\prime,a$.",
+   "uses": [
+    "lem-sfb-adjunction-transport-left-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-sfb-adjunction-transport-left-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7; agent-written categorical expansion of the Charts paragraph",
+  "note": "Explicit categorical calculation of the comparison cancellation implicit in the Charts paragraph; the adjunction transport is the existing Mathlib leaf."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|counit.*(iso|conjuga)|iso.*counit",
+   "results": "{\"t\": \"2026-10-22T05:55:49Z\", \"tool\": \"grep\", \"query\": \"ofNatIsoLeft|counit.*(iso|conjuga)|iso.*counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/FullyFaithfulLimits.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\"], \"digest\": \"45891910f3c275d8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoLeft_counit and leftAdjointUniq give the transported counit of one adjunction, not the simultaneous two-coefficient pair formula with its specified coefficient square and composite comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar counit morphisms conjugate under natural isomorphisms of left adjoints compatible with change of coefficients",
+   "results": "{\"t\": \"2026-10-22T05:55:50Z\", \"tool\": \"leansearch\", \"query\": \"Scalar counit morphisms conjugate under natural isomorphisms of left adjoints compatible with change of coefficients\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "{\"t\": \"2026-10-22T05:55:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.ofNatIsoLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.ofNatIsoLeft\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_symm_apply\"], \"digest\": \"f6cdf75f254109e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoLeft_counit and leftAdjointUniq give the transported counit of one adjunction, not the simultaneous two-coefficient pair formula with its specified coefficient square and composite comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar counit equation is invariant under counit preserving replacement of left adjoints, with an explicit formula for each side and coherent refinement comparisons",
+   "results": "{\"t\": \"2026-10-22T05:56:03Z\", \"tool\": \"leanfinder\", \"query\": \"The scalar counit equation is invariant under counit preserving replacement of left adjoints, with an explicit formula for each side and coherent refinement comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.mk'_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_counit_assoc\", \"CategoryTheory.Adjunction.rightAdjointUniq_hom_counit\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc\", \"CategoryTheory.Adjunction.mkOfUnitCounit_counit\"], \"digest\": \"2ff7947a62c6d29c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoLeft_counit and leftAdjointUniq give the transported counit of one adjunction, not the simultaneous two-coefficient pair formula with its specified coefficient square and composite comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given adjunctions at two coefficients and isomorphisms of left functors compatible with coefficient maps, both scalar counit composites transform by the same invertible precomposition",
+   "results": "{\"t\": \"2026-10-22T05:56:03Z\", \"tool\": \"leanfinder\", \"query\": \"Given adjunctions at two coefficients and isomorphisms of left functors compatible with coefficient maps, both scalar counit composites transform by the same invertible precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit\", \"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.Triple.adj₁_counit_app_rightToLeft_app\", \"CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom_app\", \"CategoryTheory.Adjunction.leftAdjointCompIso_hom\"], \"digest\": \"b53aef8b22720670\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ofNatIsoLeft_counit and leftAdjointUniq give the transported counit of one adjunction, not the simultaneous two-coefficient pair formula with its specified coefficient square and composite comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "lemma comp_counit_app|def ofNatIsoLeft|counit := Functor.whiskerLeft _ iso.inv|lemma conjugateEquiv_counit|lemma leftAdjointUniq_hom_app_counit",
+   "results": "{\"t\": \"2026-10-22T05:57:10Z\", \"tool\": \"grep\", \"query\": \"lemma comp_counit_app|def ofNatIsoLeft|counit := Functor.whiskerLeft _ iso.inv|lemma conjugateEquiv_counit|lemma leftAdjointUniq_hom_app_counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"046690a34c4596db\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Read the exact expansion/transport declarations: these give only one counit formula, not the full scalar comparison assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar counit morphisms conjugate under natural isomorphisms of left adjoints compatible with change of coefficients",
+   "results": "{\"t\": \"2026-10-22T06:54:29Z\", \"tool\": \"leansearch\", \"query\": \"Scalar counit morphisms conjugate under natural isomorphisms of left adjoints compatible with change of coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.conjugateEquiv_counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\"], \"digest\": \"5547e6a4633699b2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ModuleCat change-of-rings counits concern extension/restriction of module scalars. conjugateEquiv_counit and counitAsIsoOfIso require adjunctions and do not state the separate D/E formulas under a coefficient-compatible left comparison and its inverse/composites."
+  },
+  {
+   "tool": "grep",
+   "query": "ofNatIsoLeft|counit.*conjuga|conjuga.*counit",
+   "results": "{\"t\": \"2026-10-22T11:51:14Z\", \"tool\": \"grep\", \"query\": \"ofNatIsoLeft|counit.*conjuga|conjuga.*counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"72c59745fefe5049\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give adjunction transport, mates or naturality, not the full two-coefficient pair of identities for arbitrary natural maps and inverse/finite comparison chains."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoLeft",
+   "results": "{\"t\": \"2026-10-22T11:51:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.ofNatIsoLeft\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.ofNatIsoLeft\", \"CategoryTheory.Adjunction.ofNatIsoLeft_counit\", \"CategoryTheory.Adjunction.ofNatIsoLeft_unit\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_apply\", \"CategoryTheory.Adjunction.homEquiv_ofNatIsoLeft_symm_apply\"], \"digest\": \"f6cdf75f254109e9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give adjunction transport, mates or naturality, not the full two-coefficient pair of identities for arbitrary natural maps and inverse/finite comparison chains."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit compatibility is preserved by a natural isomorphism of left functors compatible with the coefficient square",
+   "results": "{\"t\": \"2026-10-22T11:51:15Z\", \"tool\": \"leansearch\", \"query\": \"Counit compatibility is preserved by a natural isomorphism of left functors compatible with the coefficient square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counitAsIsoOfIso\", \"CategoryTheory.Comma.mapLeftIso\", \"CategoryTheory.Functor.leftExtensionEquivalenceOfIso₁_counitIso_hom_app_right_app\", \"CategoryTheory.ComonadIso.mk\", \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"CategoryTheory.Comonad.transport\", \"CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso\", \"CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso\"], \"digest\": \"e9a55fb12aa29a93\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give adjunction transport, mates or naturality, not the full two-coefficient pair of identities for arbitrary natural maps and inverse/finite comparison chains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Both sides of a counit compatibility square conjugate under compatible natural isomorphisms of the left functors, without assuming adjunctions",
+   "results": "{\"t\": \"2026-10-22T11:51:22Z\", \"tool\": \"leanfinder\", \"query\": \"Both sides of a counit compatibility square conjugate under compatible natural isomorphisms of the left functors, without assuming adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv_counit\", \"CategoryTheory.conjugateEquiv_counit_symm\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm\", \"CategoryTheory.unit_conjugateEquiv\", \"CategoryTheory.conjugateEquiv_comm\", \"CategoryTheory.conjugateEquiv_apply_app\", \"CategoryTheory.mateEquiv_counit\"], \"digest\": \"b1ab334c0d19369c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give adjunction transport, mates or naturality, not the full two-coefficient pair of identities for arbitrary natural maps and inverse/finite comparison chains."
+  },
+  {
+   "tool": "grep",
+   "query": "def ofNatIsoLeft|counit := Functor.whiskerLeft|lemma homEquiv_ofNatIsoLeft",
+   "results": "{\"t\": \"2026-10-22T11:51:44Z\", \"tool\": \"grep\", \"query\": \"def ofNatIsoLeft|counit := Functor.whiskerLeft|lemma homEquiv_ofNatIsoLeft\", \"sub\": \"CategoryTheory/Adjunction/Basic.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"497\", \"499\", \"509\", \"515\"], \"digest\": \"18974027a1f08c3a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give adjunction transport, mates or naturality, not the full two-coefficient pair of identities for arbitrary natural maps and inverse/finite comparison chains."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of a natural isomorphism implies invariance of a commutative square under invertible precomposition and composition of compatible comparisons",
+   "results": "{\"t\": \"2026-10-22T11:51:50Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of a natural isomorphism implies invariance of a commutative square under invertible precomposition and composition of compatible comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CatCommSq.iso_hom_naturality\", \"CategoryTheory.CatCommSq.iso_inv_naturality\", \"CategoryTheory.CatCommSq.iso_hom_naturality_assoc\", \"CategoryTheory.CatCommSq.iso_inv_naturality_assoc\", \"CategoryTheory.CatCommSq.hInv\", \"CategoryTheory.CatCommSq.vInv\", \"CategoryTheory.CatCommSq.iso\", \"CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_naturality₂\"], \"digest\": \"4f572bec950d466c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give adjunction transport, mates or naturality, not the full two-coefficient pair of identities for arbitrary natural maps and inverse/finite comparison chains."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-chart-counit-scalar-transport",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: cancel the graph-normalized left comparison and the canonical compactification refinement comparisons; returned Step 4 and refinement argument of Step 7",
+   "via": [
+    "lem-sp-chart-counit-scalar-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sp-left-comparison-scalar-counit-pair",
+  "worker": "stage1",
+  "summary": "Expanded both individual conjugacy identities by the coefficient square and naturality, proved cancellation, inverse and finite-chain coherence directly, and used the existing left-adjunction-transport Mathlib leaf only for the final counit interpretation. No new nodes and no change to the statement.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: cancel the graph-normalized left comparison and compactification refinement comparisons, as made precise by the parent lem-sp-chart-counit-scalar-transport.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-49550b4e1",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-49550b4e1 (reviewer sub-agent of L); spot-checked: I read the item, the report, the parent lem-sp-chart-counit-scalar-transport (Q01 re-split, Steps 2 and 4 cite this item), lem-sp-chart-left-scalar-normalization, the cited def-nagata-category and lem-sfb-adjunction-transport-left-iso, the main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph (lines 20-36), and Mathlib Adjunction/Basic.lean lines 495-512 (ofNatIsoLeft counit = iso.inv ≫ counit; homEquiv_ofNatIsoLeft_apply). The delivery is one commit with the item and the report only and no new nodes. Statement, stmt_deps and blueprint are identical to the live node, which is unsplit, so no other group has split it. There is no repair note, so no re-split order applies. proof_deps equals the union of the uses, and nothing cites SGA. I type-checked every map. Step 1: the coefficient square at H_AK gives q'L=uq, and naturality of λ_B at a_K gives F'_B(a_K)u=vF_B(a_K), so D'L=D; only λ is cancelled. Step 2: functoriality gives E'L=E. Step 3: the iff follows by composing with L and L^{-1}. Step 4: the inverse square q T(λ^{-1})=λ_B^{-1}q' is derived correctly. Step 5: q''T(μλ)=(μλ)_B q and ε''=ε(μλ)^{-1}, and the induction on chain length has an identity base. Step 6: the counit of the transport is the preimage of the identity, which gives ε λ(HK)^{-1}; this matches Mathlib ofNatIsoLeft. Edge cases: identity comparison, inverse pair, empty chain, zero or non-invertible a and q, and T equal to the identity. Both cited nodes are Mathlib leaves, so no tool_uses are needed. Zero new nodes is appropriate because every step is an explicit short categorical calculation. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LeftComparisonScalarCounitPair",
+  "declaration": "CategoryTheory.leftComparison_scalarCounitPair",
+  "declarations": [
+   "CategoryTheory.leftComparisonCounit",
+   "CategoryTheory.scalarCounitPairLeft",
+   "CategoryTheory.ScalarCounitPairConjugacy",
+   "CategoryTheory.leftComparison_scalarCounitPair",
+   "CategoryTheory.scalarCounitComparisonChain",
+   "CategoryTheory.scalarCounitTransportChain",
+   "CategoryTheory.leftComparison_scalarCounitPair_chain",
+   "CategoryTheory.leftComparison_scalarCounitPair_refinement"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LeftComparisonScalarCounitPair.lean",
+  "statement": "theorem leftComparison_scalarCounitPair {F_A F'_A : X_A ⥤ Y_A} {F_B F'_B : X_B ⥤ Y_B} {H_A : Y_A ⥤ X_A} {H_B : Y_B ⥤ X_B} {T_X : X_A ⥤ X_B} {T_Y : Y_A ⥤ Y_B} (ε_A : H_A ⋙ F_A ⟶ 𝟭 Y_A) (ε_B : H_B ⋙ F_B ⟶ 𝟭 Y_B) (e_A : F_A ≅ F'_A) (e_B : F_B ≅ F'_B) (q : F_A ⋙ T_Y ⟶ T_X ⋙ F_B) (q' : F'_A ⋙ T_Y ⟶ T_X ⋙ F'_B) (a : H_A ⋙ T_X ⟶ T_Y ⋙ H_B) (h : ∀ M : X_A, T_Y.map (e_A.hom.app M) ≫ q'.app M = q.app M ≫ e_B.hom.app (T_X.obj M)) : ScalarCounitPairConjugacy ε_A ε_B e_A e_B q q' a ∧ (∀ K : Y_A, (T_Y.map (e_A.inv.app (H_A.obj K)) ≫ scalarCounitPairLeft q a ε_B K = scalarCounitPairLeft q' a (leftComparisonCounit ε_B e_B) K) ∧ (T_Y.map (e_A.inv.app (H_A.obj K)) ≫ T_Y.map (ε_A.app K) = T_Y.map ((leftComparisonCounit ε_A e_A).app K)))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The main theorem records both conjugacy identities, their equivalence, and the inverse identities. Companion chain and refinement theorems record the finite-composite and equal-composite clauses. The final actual-counit clause uses Mathlib CategoryTheory.Adjunction.ofNatIsoLeft_counit directly; leftComparisonCounit is its explicit whiskerLeft formula."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10dfc43da",
+  "group": "N7",
+  "result": "pass",
+  "note": "Item theorem matches the node clause by clause: coefficient square, left member, transported counit (whiskerLeft H e.inv ≫ ε), both conjugacy identities, the iff and the inverse identities; no adjunction, IsIso or universe restriction. Recursive chain composite/transport defs are real data, with n=0 identity; the chain theorem gives the composite square, transport normalization and conjugacy; the refinement theorem uses eqToIso endpoints only. Statements verified true by hand. The actual-counit clause reuses Mathlib ofNatIsoLeft_counit. lean.statement is verbatim and the declarations are complete; stmt_deps [def-nagata-category] is exact; docstrings carry source and blueprint; no duplicate notion; node equals live except lean; both report sections present (the second reading is the same worker, advisory only). No fixes, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261023T123542-L-1208776",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.leftComparison_scalarCounitPair",
+   "CategoryTheory.leftComparison_scalarCounitPair_chain",
+   "CategoryTheory.leftComparison_scalarCounitPair_refinement"
+  ],
+  "sorry_after": []
+ }
+}

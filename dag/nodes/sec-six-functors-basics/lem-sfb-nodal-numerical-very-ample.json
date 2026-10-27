@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-nodal-numerical-very-ample",
+ "kind": "statement",
+ "title": "Numerical very ampleness on a nodal curve",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-algebraic-closure], and let $X$ be a nonempty connected projective reduced $k$-scheme of pure dimension one [def-kun-projective, def-pc-reduced-scheme, def-weil-connected-scheme, def-kun-topological-krull-dimension, def-weil-pure-dimension]. Assume $X$ is smooth except at ordinary nodes with completed local $k$-algebras $k[[u,v]]/(uv)$ [def-sbc-smooth-morphisms, def-weil-pbc-adic-completion, def-weil-pbc-multivariate-power-series]. Cohomology means Zariski module-sheaf cohomology [def-sc-ringed-space-module-cohomology], and $h^i(X,F)=\\dim_k H^i(X,F)$. Let $A$ be an invertible module [def-sc-invertible-module]. For every nonempty reduced union $B$ of irreducible components, suppose\n$$\\deg_k(A|_B)\\geq 2p_a(B)+1,\\qquad p_a(B)=1-\\chi(B,\\mathcal O_B),$$\nwhere degree, Euler characteristic and restriction are [def-pc-degree-line-bundle, def-pc-euler-characteristic, def-pc-module-pullback]. Then $A$ is very ample in the complete-linear-system sense [def-sc-ample]: the evaluation map generates $A$ and defines a closed immersion $X\\hookrightarrow\\mathbf P(H^0(X,A)^\\vee)$ pulling back the hyperplane line to $A$. Irreducible components have the meaning of [def-weil-irreducible-components].",
+ "source": {
+  "document": "literature/franciosi-tenni-canonical-ring-3-connected-2014.pdf",
+  "place": "Section 2, Proposition 2.5(iii), printed p.40; nodal specialization. Local PDF WANTED; author-hosted primary text read online.",
+  "url": "https://pagine.dm.unipi.it/franciosi/lavori/franciosi-tenni2.pdf"
+ },
+ "stmt_deps": [
+  "def-kun-projective",
+  "def-kun-topological-krull-dimension",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-module-pullback",
+  "def-pc-reduced-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-sc-ringed-space-module-cohomology",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-multivariate-power-series",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-morphism-to-projective-space-by-sections"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-kun-projective-implies-proper], applied to the structure morphism $X\\to\\operatorname{Spec}k$, which is projective in the sense of [def-kun-projective], $X$ is proper over $k$, hence of finite type. By [lem-trf-proper-field-invertible-coherent], $X$ is Noetherian. Fix any nonempty zero-dimensional closed subscheme $j:Z\\hookrightarrow X$ with $n=\\dim_k\\Gamma(Z,\\mathcal O_Z)\\leq2$. It is finite and affine by [lem-pc-zero-dimensional-closed-subscheme-finite]. Write $R=\\Gamma(Z,\\mathcal O_Z)$ and $I_Z$ for its defining ideal.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-trf-proper-field-invertible-coherent",
+    "lem-pc-zero-dimensional-closed-subscheme-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E, lemma-vanishing-on-gorenstein; Tag 0E8X, lemma-tricanonical, length-two-subscheme method"
+   }
+  },
+  {
+   "text": "Suppose $H^1(X,I_Z\\otimes A)\\ne0$. Apply [lem-sfb-curve-ideal-h1-subcurve-obstruction]: its properness, reducedness, connectedness, dimension-one and invertibility hypotheses hold. It gives a nonempty reduced connected closed subcurve $B$ with $\\deg_k(A|_B)\\leq-2\\chi(B,\\mathcal O_B)+\\dim_k\\Gamma(Z\\times_X B,\\mathcal O)$. This $B$ is a reduced union of components of $X$: each dimension-one component is already an ambient component, and an additional zero-dimensional component would be an isolated point, contradicting connectedness and $\\dim B=1$. For $T=Z\\times_X B$, [def-weil-closed-immersion] identifies $T$ with $\\operatorname{Spec}(R/J)$ for an ideal $J$ of $R$: the defining ideals of $Z$ and $B$ are added on affine charts. Thus $\\dim_k\\Gamma(T,\\mathcal O_T)\\leq n\\leq2$, including $T=\\varnothing$. The asserted upper bound is at most $-2\\chi(B,\\mathcal O_B)+2=2p_a(B)$, contradicting the assumed lower bound $2p_a(B)+1$. Therefore $H^1(X,I_Z\\otimes A)=0$ for every such $Z$.",
+   "uses": [
+    "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E3E, lemma-vanishing-on-gorenstein; compare Tag 0E8X, lemma-tricanonical, final subcurve inequality"
+   }
+  },
+  {
+   "text": "The ideal sequence tensored with $A$ is $0\\to I_Z\\otimes A\\to A\\to j_*(A|_Z)\\to0$: locally trivialize $A$ and it is just $0\\to I_Z\\to\\mathcal O_X\\to j_*\\mathcal O_Z\\to0$ [def-sc-invertible-module, def-sbc-closed-immersion-ideal-sheaf, def-pc-module-pullback]. By [lem-sc-module-section-boundary-exact], every section of the quotient lifts, since its boundary belongs to the zero group of step 2. By the definition of direct image, $\\Gamma(X,j_*(A|_Z))=\\Gamma(Z,A|_Z)$. Thus the restriction $H^0(X,A)\\to H^0(Z,A|_Z)$ is surjective for every nonempty $Z$ of degree at most two.",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-pc-module-pullback",
+    "lem-sc-module-section-boundary-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0E8X, lemma-tricanonical, passage from H^1 of the ideal twist to restriction surjectivity; cohomology.tex Tag 01DZ"
+   }
+  },
+  {
+   "text": "All closed points of $X$ have residue field $k$ by [lem-weil-pbc-closed-point-residue-field-base]. For $Z=\\{x\\}$, lift a nonzero fibre vector using step 3; this gives a section nonvanishing at every prescribed closed point. For distinct closed $x,y$, take the reduced disjoint union $Z=\\{x,y\\}$, of degree two, and lift the pair $(0,e_y)$, where $e_y\\ne0$ in the fibre of $A$. This separates $x$ and $y$. Finally let $\\theta$ be a nonzero tangent vector at $x$ [def-sc-scheme-tangent-space]. On an affine neighbourhood of $x$ it gives a $k$-algebra map $a\\mapsto a(x)+d(a)\\epsilon$ to $k[\\epsilon]/(\\epsilon^2)$. Nonzero means $d(a)\\ne0$ for some $a$; the image then contains $\\epsilon$ as well as $k$, so the map is surjective. Its kernel defines a closed subscheme supported at $x$, glued with the unit ideal outside $x$, hence a closed immersion into $X$ [def-weil-closed-immersion]. This is a degree-two $Z$. Trivialize $A$ near $x$ [def-sc-invertible-module] and use step 3 to lift $\\epsilon$ times its frame on $Z$. The resulting section vanishes at $x$ and has nonzero derivative along $\\theta$.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "def-sc-scheme-tangent-space",
+    "def-weil-closed-immersion",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8T, lemma-variant-separate-points-tangent-vectors, proof; Tag 0B2C, definition-tangent-space"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-point-tangent-separation-closed-immersion] with $V=H^0(X,A)$. Properness was established in step 1; algebraic closedness and invertibility are assumed; step 4 proves all three section hypotheses, including generation at closed points. It follows that $V$ is finite-dimensional, evaluation generates $A$, and the complete linear system is a closed immersion $X\\hookrightarrow\\mathbf P(V^\\vee)$ pulling back $\\mathcal O(1)$ to $A$. This is exactly the required complete-linear-system very ampleness. No smoothness assumption on $X$ or Cartier assumption on the test subschemes was used.",
+   "uses": [
+    "lem-sc-point-tangent-separation-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0E8S, lemma-separate-points-tangent-vectors, with the explicit generation hypothesis of the cited DAG node"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-invertible-module",
+  "def-sc-scheme-tangent-space",
+  "def-weil-closed-immersion",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-module-section-boundary-exact",
+  "lem-sc-point-tangent-separation-closed-immersion",
+  "lem-sfb-curve-ideal-h1-subcurve-obstruction",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0E3E (lemma-vanishing-on-gorenstein) and the length-two-subscheme argument of Tag 0E8X (lemma-tricanonical); varieties.tex Tags 0E8T and 0E8S. The same numerical conclusion is Franciosi–Tenni Proposition 2.5(iii)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "subcurve|numerically.*very.*ample|very.*ample.*degree",
+   "results": "{\"t\": \"2026-10-23T11:23:33Z\", \"tool\": \"grep\", \"query\": \"subcurve|numerically.*very.*ample|very.*ample.*degree\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: numerical very ampleness on a reducible nodal curve is not stated by the returned elliptic-curve and projective-spectrum results"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Numerical criterion for very ample invertible sheaves on reducible nodal projective curves",
+   "results": "{\"t\": \"2026-10-23T11:23:34Z\", \"tool\": \"leansearch\", \"query\": \"Numerical criterion for very ample invertible sheaves on reducible nodal projective curves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ValuativeCriterion.eq\", \"WeierstrassCurve.Projective.nonsingular_of_Z_eq_zero\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\", \"WeierstrassCurve.Affine.nonsingular_iff'\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"WeierstrassCurve.natDegree_preΨ₄_pos\", \"WeierstrassCurve.IsGoodReduction.congr_simp\"], \"digest\": \"d42cd85bd4fd7b6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: numerical very ampleness on a reducible nodal curve is not stated by the returned elliptic-curve and projective-spectrum results"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"VeryAmple\"",
+   "results": "{\"t\": \"2026-10-23T11:23:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"VeryAmple\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: numerical very ampleness on a reducible nodal curve is not stated by the returned elliptic-curve and projective-spectrum results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a projective reduced nodal curve a line bundle with degree at least twice the arithmetic genus plus one on every subcurve is very ample",
+   "results": "{\"t\": \"2026-10-23T11:23:35Z\", \"tool\": \"leanfinder\", \"query\": \"On a projective reduced nodal curve a line bundle with degree at least twice the arithmetic genus plus one on every subcurve is very ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.toProjective\", \"WeierstrassCurve.Projective.nonsingularLift_iff\", \"WeierstrassCurve.Projective.nonsingularLift_addMap\", \"WeierstrassCurve.Affine\"], \"digest\": \"5f999bc40d54e233\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: numerical very ampleness on a reducible nodal curve is not stated by the returned elliptic-curve and projective-spectrum results"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle of large multidegree on a reducible projective curve separates points and tangent directions",
+   "results": "{\"t\": \"2026-10-23T11:23:39Z\", \"tool\": \"leanfinder\", \"query\": \"A line bundle of large multidegree on a reducible projective curve separates points and tangent directions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.NonsingularLift\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"Configuration.ofField.instNondegenerateProjectivizationForallFinOfNatNat\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Jacobian.NonsingularLift\", \"WeierstrassCurve.Projective.Point.mk_ne_zero\"], \"digest\": \"7d609e1da853e3fe\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: numerical very ampleness on a reducible nodal curve is not stated by the returned elliptic-curve and projective-spectrum results"
+  },
+  {
+   "tool": "grep",
+   "query": "very.?ample|VeryAmple|subcurve",
+   "results": "{\"t\": \"2026-10-23T12:57:51Z\", \"tool\": \"grep\", \"query\": \"very.?ample|VeryAmple|subcurve\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj, affine-space and Weierstrass-curve declarations do not state a numerical embedding criterion for arbitrary reduced curves",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A line bundle on a reduced projective curve is very ample if its degree on every subcurve B is at least 2 times the arithmetic genus of B plus 1",
+   "results": "{\"t\": \"2026-10-23T12:57:51Z\", \"tool\": \"leansearch\", \"query\": \"A line bundle on a reduced projective curve is very ample if its degree on every subcurve B is at least 2 times the arithmetic genus of B plus 1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"WeierstrassCurve.Projective\", \"WeierstrassCurve.Projective.polynomial\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.openCoverOfISupEqTop\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"WeierstrassCurve.instIsIntegralOfIsMinimal\"], \"digest\": \"577cb7445e017245\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj, affine-space and Weierstrass-curve declarations do not state a numerical embedding criterion for arbitrary reduced curves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsVeryAmple\", \"AlgebraicGeometry\"",
+   "results": "{\"t\": \"2026-10-23T12:57:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsVeryAmple\\\", \\\"AlgebraicGeometry\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj, affine-space and Weierstrass-curve declarations do not state a numerical embedding criterion for arbitrary reduced curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a proper reduced connected curve a line bundle of degree at least twice arithmetic genus plus one on every subcurve is very ample",
+   "results": "{\"t\": \"2026-10-23T12:57:52Z\", \"tool\": \"leanfinder\", \"query\": \"On a proper reduced connected curve a line bundle of degree at least twice arithmetic genus plus one on every subcurve is very ample\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop\", \"AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\"], \"digest\": \"d2dbb9af5625cff4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj, affine-space and Weierstrass-curve declarations do not state a numerical embedding criterion for arbitrary reduced curves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible sheaf of large multidegree on a projective reducible curve separates points and tangent vectors",
+   "results": "{\"t\": \"2026-10-23T13:01:42Z\", \"tool\": \"leanfinder\", \"query\": \"An invertible sheaf of large multidegree on a projective reducible curve separates points and tangent vectors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.isSeparated\", \"WeierstrassCurve.Projective.NonsingularLift\", \"WeierstrassCurve.Projective.Point.nonsingular\", \"WeierstrassCurve.Projective.Nonsingular\", \"WeierstrassCurve.Projective.nonsingularLift_zero\", \"WeierstrassCurve.Projective.PointClass\", \"WeierstrassCurve.Jacobian.NonsingularLift\"], \"digest\": \"67d081a355ae126c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned Proj, affine-space and Weierstrass-curve declarations do not state a numerical embedding criterion for arbitrary reduced curves"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-general-section-cluster-strict-bound",
+  "date": "2026-10-23",
+  "group": "Q37"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Proposition 2.5(iii), printed p.40; nodal specialization.",
+   "via": [
+    "lem-sfb-general-section-cluster-strict-bound",
+    "lem-sfb-nodal-numerical-section-multiplication",
+    "lem-sfb-stable-pointed-field-linear-series",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-nodal-numerical-very-ample",
+  "worker": "stage1",
+  "summary": "Split with no new nodes: reuse the existing 0E3E subcurve obstruction, contradict it for all test subschemes of degree one or two, lift sections by module boundary exactness, explicitly separate points and tangent vectors, and apply the existing general proper-scheme embedding criterion. Statement unchanged; no smooth-curve-only criterion is used.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Log-canonical linear series on stable pointed curves over a field. Supporting input: normal generation: a numerical multiplication theorem for an arbitrary line bundle, independent of logarithmic canonical powers or stability; Theorem 4.2 proof: Proposition 4.1 strict inequality on nonempty subclusters of a general hyperplane section; Section 2, Proposition 2.5(iii), printed p.40; nodal specialization. This split supplies the numerical embedding prerequisite by the Stacks subcurve-obstruction and separation argument. The current latest blueprint direct-image proof is read as route context, not evidence for this numerical lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Projective (closed immersion into P^N, def-kun-projective) implies proper; the exact convention of the item, a generic scheme-geometric prerequisite, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-trf-proper-field-invertible-coherent",
+    "why": "Noetherianity of a proper scheme over a field, used to identify one-dimensional subcurves with unions of components."
+   },
+   {
+    "node": "lem-pc-zero-dimensional-closed-subscheme-finite",
+    "why": "Zero-dimensional finite-type subschemes over a field are affine finite schemes, needed for the elementary intersection-length bound."
+   },
+   {
+    "node": "lem-sc-module-section-boundary-exact",
+    "why": "The ordinary module-cohomology section-lifting criterion applies to the ideal sequence; no étale or trace assertion is used."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Closed points over an algebraically closed field are rational, to form degree-one and degree-two test subschemes."
+   },
+   {
+    "node": "lem-sc-point-tangent-separation-closed-immersion",
+    "why": "Generic proper-scheme embedding criterion after proving generation and separation. The unit has no replacement for this geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-projective-implies-proper",
+  "lem-trf-proper-field-invertible-coherent",
+  "lem-pc-zero-dimensional-closed-subscheme-finite",
+  "lem-sc-module-section-boundary-exact",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-sc-point-tangent-separation-closed-immersion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NB-39c70502a",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-39c70502a (reviewer sub-agent of L); spot-checked: Read in full: the item (no new nodes, statement unchanged), every cited statement, Stacks curves 0E3E and 0E8X, and varieties 0E8T and 0E8S. The proof is sound. Step 2 matches the statement of the 0E3E obstruction node. Its B is a union of components: a 1-dimensional irreducible closed set is a component, and an isolated point is excluded by connectedness. Z×B is Spec(R/J), so it has length at most 2, and -2χ+2=2p_a gives the contradiction. Step 3 lifts sections by the iff-form boundary lemma. Step 4 is the 0E8T construction: points via reduced Z, tangents via Im θ ≅ Spec k[ε]; no Cartier or smoothness assumption is made at nodes. Step 5 is the generic embedding criterion with V=H^0. Small cases check out: P^1 with O(3), the nodal cubic with degree 3, and a line pair with bidegree (1,1). Searches found no duplicate (smooth 2g+1 nodes, tricanonical, Sym-multiplication). Acyclic. Batch-5: lem-trf-proper-field-invertible-coherent (01XZ/01T6, Noetherian and coherent) and lem-trf-proper-finite-fibre-finite-near (02UP, reached via the tangent-separation node) are generic scheme facts, not steps of the trace formula or Poincaré duality, so they are accepted; the 0E3E obstruction reaches only these. FIX: step 1 cited lem-pc-projective-proper, whose 'projective' (def-pc-projective-morphism) also requires quasi-compactness and differs from the item's def-kun-projective. It is replaced by the reviewed, definition-exact lem-kun-projective-implies-proper in the text, uses, proof_deps and tool_uses. Remaining declared tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalNumericalVeryAmple",
+  "declaration": "AlgebraicGeometry.nodal_numerical_very_ample",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNumericalVeryAmple.lean",
+  "statement": "theorem nodal_numerical_very_ample (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u}) (f : X ⟶ Spec (.of k)) [IsHProjective f] [ConnectedSpace X] [IsReduced X] (hpure : X.IsPureDimension 1) (hnodal : ∀ x : X, x ∉ f.smoothLocus → ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) k)}), ∀ a : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) (X.presheaf.germ ⊤ x trivial (f.appTop ((Scheme.ΓSpecIso (.of k)).inv a)))) = Ideal.Quotient.mk _ (MvPowerSeries.C a)) (A : X.Modules) [A.IsInvertible] (hdegree : ∀ (B : Scheme.{u}) (i : B ⟶ X), IsClosedImmersion i → IsReduced B → Nonempty B → (∃ S : Set (Set X), S ⊆ irreducibleComponents X ∧ Set.range i = ⋃₀ S) → 2 * (1 - @Scheme.Modules.eulerChar k _ B ⟨i ≫ f⟩ (SheafOfModules.unit B.ringCatSheaf)) + 1 ≤ @Scheme.Modules.degree k _ B ⟨i ≫ f⟩ ((Scheme.Modules.tensorPullback i).obj A)) : ∃ (I : Type u) (_ : Finite I) (b : Module.Basis I k ((ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop).hom).obj (A.val.obj (Opposite.op ⊤)))) (s : I → A.sections), (∀ i : I, (s i).val (Opposite.op ⊤) = b i) ∧ ∃ hs : Epi (A.freeHomEquiv.symm s), IsClosedImmersion (ProjectiveSpace.homOfGeneratingSections I f A s hs) ∧ Nonempty ((Scheme.Modules.tensorPullback (ProjectiveSpace.homOfGeneratingSections I f A s hs)).obj (ProjectiveSpace.twist I (Spec (.of k)) 1) ≅ A)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a22d5b166",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery after the 549b RETURN (H4/§1(B) rebinding of def-pc-euler-characteristic/def-pc-degree-line-bundle). Module diff vs 549b: only the import swap to WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar (+ the RingedSpaceModuleCohomology stmt_dep module) and moduleEulerChar/moduleDegree -> recorded Scheme.Modules.eulerChar/degree with the same binder shape (k _ B ⟨i≫f⟩). Both dep modules dropped. The euler-char, degree and morphism-to-projective-space node files are byte-identical to side-live. The item node differs from live only in lean and in one added stmt_dep (def-weil-pbc-morphism-to-projective-space-by-sections, landed 2026-10-11, used in the conclusion). Clause check: IsHProjective, ConnectedSpace/IsReduced/IsPureDimension 1, hnodal as a k-algebra iso of the adic completion, invertible A, component-union tests incl. disconnected B and B=X over ℤ, complete-linear-system conclusion via a basis of Γ(X,A), Epi generation, canonical homOfGeneratingSections closed immersion, tensorPullback twist 1 ≅ A. Edge cases and universes fine. lean.statement verbatim; single sorry; docstrings carry source place and blueprint id. No file changed, so nothing compiled."
+ }
+}

@@ -14,20 +14,18 @@ public import Sheaf.Paper.CartesianCoefficients
 public import Sheaf.Paper.ProEtaleTateTwistsOfUniverses
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import Sheaf.Paper.IntegralResidueDerivedMonoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCoherence
 import Sheaf.Paper.InverseImageModuleFlat
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMonoidal
 import Sheaf.CategoryTheory.Adjunction.LeftCoefficientProjectionAction
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
-import Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Counit
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 
 
@@ -48,13 +46,26 @@ tensor-pullback interface remains publicly imported with its recorded declaratio
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option Elab.async false
+set_option backward.defeqAttrib.useBackward false
 attribute [local instance 20000]
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
-attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
+attribute [local irreducible] DerivedCategory.Qh
+  CategoryTheory.Functor.leftDerivedFunctor
   CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.leftDerivedTensorComparison CategoryTheory.Functor.leftDerivedFunctorCounit
 
 set_option synthInstance.maxSize 2048
+
+-- Reuse the existing compact structures instead of rebuilding the internal-module tensors.
+attribute [local instance 20000]
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleMonoidal
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleAbelian
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionModuleHasDerived
+  AlgebraicGeometry.ProEtale.CondensedRing.projectionDerivedMonoidal
+attribute [local irreducible] CategoryTheory.Mod.monoidalClosed
+  CategoryTheory.Sheaf.monObj_sheafCompose_obj
+  AlgebraicGeometry.ProEtale.upperStarFromPoint
 
 universe u u₁ u₂ u₃ v₁ v₂ v₃
 
@@ -98,7 +109,82 @@ def traceCanonicalDerivedBraiding
   (DerivedCategory.braidedCategory' A).braiding K L
 end CategoryTheory
 
+attribute [local irreducible] DerivedCategory.braidedCategory'
 
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+section ModuleProofCaches
+-- These are proofs of existing instance facts. Activate them only in private proof sections.
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+
+omit [IsCommMonObj Λ] in
+private theorem traceModuleGrothendieck :
+    IsGrothendieckAbelian.{u + 1}
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+  inferInstance
+private theorem traceModuleFlat :
+    Abelian.HasFunctorialFlatResolution
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+  inferInstance
+private theorem traceTensorLeft
+    (A : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    PreservesColimitsOfSize.{0, 0} (tensorLeft A) := inferInstance
+private theorem traceTensorRight
+    (A : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    PreservesColimitsOfSize.{0, 0} (tensorRight A) := inferInstance
+attribute [local instance 20000] traceModuleGrothendieck traceModuleFlat
+  traceTensorLeft traceTensorRight
+private theorem traceGradedTensor
+    (A B : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    A.HasTensor B := inferInstance
+private theorem traceGradedTensorLeft
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    A.HasGoodTensor₁₂Tensor B C := inferInstance
+private theorem traceGradedTensorRight
+    (A B C : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    A.HasGoodTensorTensor₂₃ B C := inferInstance
+private theorem traceGradedTensorFour
+    (A B C D : GradedObject ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    A.HasTensor₄ObjExt B C D := inferInstance
+end ModuleProofCaches
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+section OrdinaryPullbackStructures
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+
+/-- Canonical strong monoidal module inverse image.
+Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first). -/
+instance condensedUpperStarMonoidal : (upperStar Λ f).Monoidal :=
+  monoidal_upperStar Λ f
+
+/-- Module inverse image preserves flat modules.
+Source: Stacks 0G7E (blueprint: lem-sfb-trace-base-change-first).
+Proof: pass through the exact internal-to-sectionwise module equivalence. The
+normalized tensor comparison is the usual scalar-extension comparison there by its
+unit-generator equations. Pullback of a flat sheaf is flat by the local tensor
+criterion, so tensoring with the pulled-back module is exact. Transport back through
+the exact equivalence. This is flatness in the existing monoidal module category. -/
+@[instance] theorem condensedUpperStarPreservesFlat : (upperStar Λ f).PreservesFlat := by
+  have hf := inverseImageModule_preservesFlat f (condensedRingObj Λ Y)
+    (condensedRingObj Λ X) (asIso (condensedPullbackHom Λ f)).inv
+  refine ⟨fun {M} hM ↦ ?_⟩
+  exact ObjectProperty.flat.prop_of_iso
+    ((Functor.isoWhiskerLeft
+      ((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y))
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).app M).symm
+    (hf.flat_obj hM)
+
+
+end OrdinaryPullbackStructures
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+attribute [local irreducible] NatTrans.vcomp
 
 section MapTensorHelper
 
@@ -263,56 +349,8 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
     δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
 private local instance : BraidedCategory (DerivedCategory C) := DerivedCategory.braidedCategory' C
 private local instance : BraidedCategory (DerivedCategory D) := DerivedCategory.braidedCategory' D
-private theorem generic_derived_delta (K M : DerivedCategory C) :
-    letI := F.residueDerivedMonoidal
-    δ F.leftDerivedFunctor K M = ((F.leftDerivedTensorComparison).app K).app M := rfl
 include hG
-private theorem generic_derived_braid_Qh
-    (P Q : HomotopyCategory C (.up ℤ))
-    (hP : F.kFlatMap P) :
-    letI := F.residueDerivedMonoidal
-    F.leftDerivedFunctor.map (β_ (Qh.obj P) (Qh.obj Q)).hom ≫
-        δ F.leftDerivedFunctor (Qh.obj Q) (Qh.obj P) =
-      δ F.leftDerivedFunctor (Qh.obj P) (Qh.obj Q) ≫
-        (β_ (F.leftDerivedFunctor.obj (Qh.obj P)) (F.leftDerivedFunctor.obj (Qh.obj Q))).hom := by
-  let := F.residueDerivedMonoidal
-  have : IsIso (μ Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
-      ((F.mapHomotopyCategory (.up ℤ)).obj P)) :=
-    isIso_μNatTrans_Qh_app_app_of_kFlat _ _ hP
-  rw [← cancel_mono ((F.leftDerivedFunctorCounit.app Q ⊗ₘ
-    F.leftDerivedFunctorCounit.app P) ≫
-    μ Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
-      ((F.mapHomotopyCategory (.up ℤ)).obj P))]
-  simp only [generic_derived_delta, Category.assoc]
-  rw [F.leftDerivedTensorComparison_app_app_comp_tensorHom,
-    ← BraidedCategory.braiding_naturality_assoc]
-  have hβ : (β_ ((F.mapHomotopyCategory (.up ℤ) ⋙ Qh).obj P)
-      ((F.mapHomotopyCategory (.up ℤ) ⋙ Qh).obj Q)).hom ≫
-        μ Qh ((F.mapHomotopyCategory (.up ℤ)).obj Q)
-          ((F.mapHomotopyCategory (.up ℤ)).obj P) =
-      μ Qh ((F.mapHomotopyCategory (.up ℤ)).obj P)
-          ((F.mapHomotopyCategory (.up ℤ)).obj Q) ≫
-        Qh.map (β_ ((F.mapHomotopyCategory (.up ℤ)).obj P)
-          ((F.mapHomotopyCategory (.up ℤ)).obj Q)).hom :=
-    DerivedCategory.braidedCategory_braiding_hom_μ_Qh D _ _
-  rw [hβ]
-  rw [reassoc_of% (F.leftDerivedTensorComparison_app_app_comp_tensorHom P Q)]
-  rw [← Functor.map_comp_assoc]
-  rw [DerivedCategory.braidedCategory_braiding_hom_μ_Qh C P Q]
-  rw [Functor.map_comp_assoc]
-  have hn : F.leftDerivedFunctor.map (Qh.map (β_ P Q).hom) ≫
-      F.leftDerivedFunctorCounit.app (Q ⊗ P) =
-      F.leftDerivedFunctorCounit.app (P ⊗ Q) ≫
-        Qh.map ((F.mapHomotopyCategory (.up ℤ)).map (β_ P Q).hom) :=
-    F.leftDerivedFunctorCounit.naturality _
-  erw [reassoc_of% hn]
-  rw [← Qh.map_comp, ← Qh.map_comp]
-  erw [Functor.mapHomotopyCategory_map_braiding_hom_δ _ hG P Q]
-  rfl
-
-
-/-- The comonoidal structure of `Lg^*` is compatible with the derived braidings:
-`Lg^* β_{K, M} ≫ δ_{M, K} = δ_{K, M} ≫ β_{Lg^* K, Lg^* M}`. -/
+/-- The generic derived braiding theorem applies to the same tensor comparison. -/
 private theorem generic_derived_braid
     (K M : DerivedCategory C) :
     letI := F.residueDerivedMonoidal
@@ -320,10 +358,8 @@ private theorem generic_derived_braid
       δ F.leftDerivedFunctor K M ≫
         (β_ (F.leftDerivedFunctor.obj K) (F.leftDerivedFunctor.obj M)).hom := by
   let := F.residueDerivedMonoidal
-  obtain ⟨P, hP, ⟨eP⟩⟩ := F.residue_exists_kFlatMap_iso K
-  obtain ⟨Q, -, ⟨eQ⟩⟩ := F.residue_exists_kFlatMap_iso M
-  exact Functor.OplaxMonoidal.map_braiding_hom_δ_of_iso _ eP eQ
-    (generic_derived_braid_Qh F hG P Q hP)
+  simpa only [Functor.leftDerivedFunctorMonoidal_δ] using
+    F.leftDerivedFunctor_map_braiding_hom_δ hG K M
 
 /-- The canonical monoidal structure on the derived functor preserves the
 Koszul braiding, by its comparison square on K-flat resolutions. -/
@@ -334,7 +370,7 @@ private theorem generic_derived_braid_lax
       (β_ (F.leftDerivedFunctor.obj K) (F.leftDerivedFunctor.obj M)).hom ≫
         μ F.leftDerivedFunctor M K := by
   let := F.residueDerivedMonoidal
-  exact Functor.Monoidal.μ_map_braiding_hom_of_δ _ K M
+  exact Functor.Monoidal.μ_comp_map_braiding_hom_of_δ _ K M
     (generic_derived_braid F hG K M)
 
 
@@ -358,32 +394,12 @@ factorization and the ordinary unit isomorphism; no data is chosen.
 Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
 @[irreducible]
 def traceDegreeZeroUnitIso : F.leftDerivedFunctor.obj (𝟙_ _) ≅ 𝟙_ _ :=
-  F.leftDerivedFunctorIsoMapDerivedCategory.app (𝟙_ _) ≪≫
-    F.mapDerivedCategoryFactors.app (𝟙_ _) ≪≫
-    DerivedCategory.Q.mapIso
-      (((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app (𝟙_ _)) ≪≫
-        (HomologicalComplex.single _ (.up ℤ) 0).mapIso
-          (Functor.Monoidal.εIso F).symm)
+  F.leftDerivedTensorUnitIso
 
 omit [F.PreservesFlat] in
 private theorem derived_unit_explicit :
     F.traceDegreeZeroUnitIso = F.leftDerivedTensorUnitIso := by
   unfold traceDegreeZeroUnitIso
-  apply Iso.ext
-  unfold Functor.leftDerivedTensorUnitIso
-  simp only [Iso.trans_hom, Functor.mapIso_hom, asIso_hom]
-  rw [← Functor.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac]
-  erw [Functor.mapDerivedCategoryFactorsh_hom_app F (𝟙_ _)]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [← DerivedCategory.Qh.map_comp_assoc]
-  have hi := Iso.inv_hom_id_app (F.mapHomotopyCategoryFactors (.up ℤ))
-    (𝟙_ _)
-  erw [hi]
-  erw [DerivedCategory.Qh.map_id, Category.id_comp]
-  simp only [DerivedCategory.quotientCompQhIso,
-    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-    CategoryTheory.Quotient.lift.isLift_hom, Category.id_comp]
-  erw [Functor.map_id, Category.id_comp]
   rfl
 /-- The explicit unit composite is the inverse unitator of the derived monoidal functor. -/
 private theorem derived_unit_monoidal_explicit :
@@ -395,6 +411,12 @@ private theorem derived_unit_monoidal_explicit :
   change _ = Functor.OplaxMonoidal.η F.leftDerivedFunctor
   rw [residueDerivedOplax_η_eq_tensorUnitIso]
   exact congrArg Iso.hom (derived_unit_explicit F)
+
+/-- The residue-derived tensorator is the recorded tensor comparison. -/
+private theorem residue_derived_tensor :
+    letI := F.residueDerivedMonoidal
+    Functor.OplaxMonoidal.δ F.leftDerivedFunctor =
+      fun K M ↦ (F.leftDerivedTensorComparison.app K).app M := rfl
 
 variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian.{u + 1} E]
   [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
@@ -419,6 +441,8 @@ private theorem derived_comp_explicit (τ : H ≅ F ⋙ G) [NatTrans.IsMonoidal 
   simp only [tensorHom_comp_tensorHom]
 
 end CategoryTheory.Functor
+
+attribute [local irreducible] CategoryTheory.Functor.residueDerivedMonoidal
 
 private theorem tensor_square_family
     {C V : Type*} [Category C] [Category V] [MonoidalCategory C] [MonoidalCategory V]
@@ -486,32 +510,21 @@ private theorem conjugate_tensor_only
     unit_conjugateEquiv_symm a₁ a₂ e Y, ← tensorHom_comp_tensorHom_assoc,
     Functor.LaxMonoidal.μ_natural, Adjunction.unit_app_tensor_comp_map_δ_assoc]
 
-private theorem monoidal_core_roundtrip
-    {C D : Type*} [Category C] [Category D]
-    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [m : F.Monoidal] :
-    (Functor.CoreMonoidal.ofOplaxMonoidal F).toMonoidal = m := by
-  apply Functor.Monoidal.ext
-  · exact Functor.Monoidal.inv_η _
-  · funext M N
-    exact Functor.Monoidal.inv_δ _ M N
-  · rfl
-  · rfl
+private theorem tensorEndomorphisms_identity
+    {C : Type*} [Category C] [MonoidalCategory C] {X Y Z : C}
+    (a : X ⟶ X) (b : Y ⟶ Y) (k : X ⊗ Y ⟶ Z)
+    (ha : a = 𝟙 X) (hb : b = 𝟙 Y) : (a ⊗ₘ b) ≫ k = k := by
+  rw [ha, hb, tensorHom_id, id_whiskerRight, Category.id_comp]
 
 private theorem proof_transport_one {A : Sort*} (P : A → Prop) {a b : A}
     (h : a = b) (hb : P b) : P a := by
   cases h
   exact hb
-private theorem proof_transport_three {A B C : Sort*} (P : A → B → C → Prop)
-    {a a' : A} {b b' : B} {c c' : C}
-    (ha : a = a') (hb : b = b') (hc : c = c') (h : P a' b' c') : P a b c := by
-  cases ha
-  cases hb
-  cases hc
-  exact h
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+
 section TensorPullbackHelpers
+attribute [local irreducible] upperStarLowerStarAdjunction
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -534,6 +547,11 @@ def CondensedTensorNormalization (m : (upperStar Λ f).CoreMonoidal) : Prop :=
   ((upperStarLowerStarAdjunction Λ f).unit.app (𝟙_ _)).hom ≫
       (ProEtale.lowerStar Ab.{u + 1} f).map m.εIso.inv.hom =
     condensedPushforwardHom Λ f
+
+section TensorNormalizationProofs
+attribute [local instance 20000] traceModuleGrothendieck traceModuleFlat
+  traceTensorLeft traceTensorRight traceGradedTensor traceGradedTensorLeft
+  traceGradedTensorRight traceGradedTensorFour
 
 private theorem module_unit_hom
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) :
@@ -600,6 +618,8 @@ private theorem canonical_tensor_normalization :
       Functor.comp_map, Mod.comap_map_hom, Functor.mapMod, Mod.homMk] using
       homEquiv_εIso_inv_hom Λ f
 
+end TensorNormalizationProofs
+
 /-- The ordinary tensor pullback has one uniquely normalized strong monoidal structure.
 Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first).
 Proof: present relative tensor by its two balancing arrows. Inverse image preserves
@@ -640,26 +660,14 @@ theorem condensedTensorCore_existsUnique :
 /-- The specified ordinary strong monoidal structure, selected by its unique equations.
 Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first). -/
 def condensedTensorCore : (upperStar Λ f).CoreMonoidal :=
-  (condensedTensorCore_existsUnique Λ f).exists.choose
+  Functor.CoreMonoidal.ofOplaxMonoidal (upperStar Λ f)
 
-private theorem condensedTensorCore_eq :
-    condensedTensorCore Λ f =
-      Functor.CoreMonoidal.ofOplaxMonoidal (upperStar Λ f) :=
-  (condensedTensorCore_existsUnique Λ f).unique
-    (condensedTensorCore_existsUnique Λ f).exists.choose_spec
-    (canonical_tensor_normalization Λ f)
-
-/-- Canonical strong monoidal module inverse image.
-Source: Stacks 03EL (blueprint: lem-sfb-trace-base-change-first). -/
-instance condensedUpperStarMonoidal : (upperStar Λ f).Monoidal :=
-  (condensedTensorCore Λ f).toMonoidal
+private theorem condensedTensorCore_normalization :
+    CondensedTensorNormalization Λ f (condensedTensorCore Λ f) :=
+  canonical_tensor_normalization Λ f
 
 private theorem condensedUpperStarMonoidal_eq :
-    condensedUpperStarMonoidal Λ f = monoidal_upperStar Λ f := by
-  let := monoidal_upperStar Λ f
-  unfold condensedUpperStarMonoidal
-  rw [condensedTensorCore_eq]
-  exact monoidal_core_roundtrip (upperStar Λ f)
+    condensedUpperStarMonoidal Λ f = monoidal_upperStar Λ f := rfl
 
 attribute [local irreducible] condensedTensorCore condensedUpperStarMonoidal
 private theorem ordinary_upperStar_braiding
@@ -668,14 +676,7 @@ private theorem ordinary_upperStar_braiding
     Functor.LaxMonoidal.μ (upperStar Λ f) M N ≫ (upperStar Λ f).map (β_ M N).hom =
       (β_ ((upperStar Λ f).obj M) ((upperStar Λ f).obj N)).hom ≫
         Functor.LaxMonoidal.μ (upperStar Λ f) N M := by
-  apply proof_transport_one
-    (fun m : (upperStar Λ f).Monoidal ↦
-      letI := m
-      Functor.LaxMonoidal.μ (upperStar Λ f) M N ≫
-          (upperStar Λ f).map (β_ M N).hom =
-        (β_ ((upperStar Λ f).obj M) ((upperStar Λ f).obj N)).hom ≫
-          Functor.LaxMonoidal.μ (upperStar Λ f) N M)
-    (condensedUpperStarMonoidal_eq Λ f)
+  unfold condensedUpperStarMonoidal
   let := monoidal_upperStar Λ f
   let G := ProEtale.upperStar Ab.{u + 1} f
   let : (G.mapMod (condensedRingObj Λ Y)).LaxBraided :=
@@ -683,24 +684,6 @@ private theorem ordinary_upperStar_braiding
   let := extend_braided (condensedPullbackHom Λ f)
   exact Functor.LaxBraided.braided (F := G.mapMod (condensedRingObj Λ Y) ⋙
     Mod.extendScalars (condensedPullbackHom Λ f)) M N
-
-/-- Module inverse image preserves flat modules.
-Source: Stacks 0G7E (blueprint: lem-sfb-trace-base-change-first).
-Proof: pass through the exact internal-to-sectionwise module equivalence. The
-normalized tensor comparison is the usual scalar-extension comparison there by its
-unit-generator equations. Pullback of a flat sheaf is flat by the local tensor
-criterion, so tensoring with the pulled-back module is exact. Transport back through
-the exact equivalence. This is flatness in the existing monoidal module category. -/
-@[instance] theorem condensedUpperStarPreservesFlat : (upperStar Λ f).PreservesFlat := by
-  have hf := inverseImageModule_preservesFlat f (condensedRingObj Λ Y)
-    (condensedRingObj Λ X) (asIso (condensedPullbackHom Λ f)).inv
-  refine ⟨fun {M} hM ↦ ?_⟩
-  exact ObjectProperty.flat.prop_of_iso
-    ((Functor.isoWhiskerLeft
-      ((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y))
-      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))).app M).symm
-    (hf.flat_obj hM)
-
 
 /-- The canonical derived unit comparison, computed on the regular module in degree zero.
 Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
@@ -711,9 +694,14 @@ def condensedDerivedUnitIso :
 
 end TensorPullbackHelpers
 
-section CompositionCoherence
 attribute [local irreducible] Mod.monoidalCategoryStruct
-set_option backward.isDefEq.respectTransparency false
+
+section CompositionCoherence
+attribute [local instance 20000] traceModuleGrothendieck traceModuleFlat
+  traceTensorLeft traceTensorRight traceGradedTensor traceGradedTensorLeft
+  traceGradedTensorRight traceGradedTensorFour
+attribute [local irreducible] upperStar
+  upperStarComp lowerStarComp
 private theorem lower_mu_pi
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -732,7 +720,7 @@ private theorem lower_mu_pi
       (a.counit.app M ⊗ₘ a.counit.app N))).hom = _
   rw [Adjunction.homEquiv_unit]
   simp only [Mod.comp_hom', Functor.map_comp, lowerStar_map_hom]
-  erw [reassoc_of% ((condensedTensorCore_existsUnique Λ f).exists.choose_spec.1
+  erw [reassoc_of% ((condensedTensorCore_normalization Λ f).1
     ((lowerStar Λ f).obj M) ((lowerStar Λ f).obj N))]
   erw [← Functor.map_comp]
   rw [MonoidalCategory.tensorHom_def (a.counit.app M) (a.counit.app N)]
@@ -745,8 +733,10 @@ private theorem lower_mu_pi
   have hM := congrArg Mod.Hom.hom (a.right_triangle_components M)
   have hN := congrArg Mod.Hom.hom (a.right_triangle_components N)
   simp only [Mod.comp_hom', lowerStar_map_hom, Mod.id_hom'] at hM hN
-  erw [hM, hN, tensorHom_id, id_whiskerRight, Category.id_comp]
+  exact tensorEndomorphisms_identity _ _ _ hM hN
 
+
+attribute [local irreducible] Adjunction.rightAdjointLaxMonoidal
 
 private theorem lower_comp_tensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -771,17 +761,18 @@ private theorem lower_comp_tensor
   erw [reassoc_of% (lower_mu_pi Λ g ((lowerStar Λ f).obj M)
     ((lowerStar Λ f).obj N))]
   erw [← Functor.map_comp_assoc, lower_mu_pi Λ f M N]
-  erw [reassoc_of% (tensorπ_tensorHom ((lowerStarComp Λ f g).hom.app M)
-    ((lowerStarComp Λ f g).hom.app N))]
+  conv_rhs =>
+    erw [reassoc_of% (tensorπ_tensorHom ((lowerStarComp Λ f g).hom.app M)
+      ((lowerStarComp Λ f g).hom.app N))]
   erw [lower_mu_pi Λ (f ≫ g) M N]
   simp only [lowerStarComp_hom_app_hom, Functor.map_comp, Category.assoc]
   erw [(ProEtale.lowerStarComp Ab.{u + 1} f g).hom.naturality
     (Mod.tensorObjπ M N)]
-  rw [← Category.assoc, ← Category.assoc]
-  exact congrArg (fun z ↦ z ≫ (ProEtale.lowerStar Ab.{u + 1} (f ≫ g)).map
-    (Mod.tensorObjπ M N))
-    (NatTrans.IsMonoidal.tensor (τ := (ProEtale.lowerStarComp Ab.{u + 1} f g).hom)
-      M.X N.X)
+  have ht := NatTrans.IsMonoidal.tensor_assoc
+    (τ := (ProEtale.lowerStarComp Ab.{u + 1} f g).hom) M.X N.X
+    ((ProEtale.lowerStar Ab.{u + 1} (f ≫ g)).map (Mod.tensorObjπ M N))
+  simp only [Functor.LaxMonoidal.comp_μ, Functor.comp_obj, Category.assoc] at ht
+  exact ht
 
 private theorem upper_comp_tensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -815,17 +806,7 @@ private theorem upper_comp_monoidal
     [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     NatTrans.IsMonoidal (upperStarComp Λ f g).hom := by
   constructor
-  · apply proof_transport_three
-      (fun (mf : (upperStar Λ f).Monoidal) (mg : (upperStar Λ g).Monoidal)
-          (mfg : (upperStar Λ (f ≫ g)).Monoidal) ↦
-        letI := mf
-        letI := mg
-        letI := mfg
-        Functor.LaxMonoidal.ε (upperStar Λ (f ≫ g)) ≫
-            (upperStarComp Λ f g).hom.app (𝟙_ _) =
-          Functor.LaxMonoidal.ε (upperStar Λ g ⋙ upperStar Λ f))
-      (condensedUpperStarMonoidal_eq Λ f) (condensedUpperStarMonoidal_eq Λ g)
-      (condensedUpperStarMonoidal_eq Λ (f ≫ g))
+  · unfold condensedUpperStarMonoidal
     let := monoidal_upperStar Λ f
     let := monoidal_upperStar Λ g
     let := monoidal_upperStar Λ (f ≫ g)
@@ -1319,6 +1300,8 @@ def traceDataFormula
   TraceFirstFormula LC LD LV F P U₁ U₂ Q₁ Q₂ a a₁ a₂ s
     T.unitIso T.tensorF T.tensorOne T.tensorTwo T.symmetryD T.symmetryV TY
 
+attribute [local irreducible] traceDataFormula
+
 section AbstractTrace
 variable {C D V : Type*} [Category C] [Category D] [Category V]
   [MonoidalCategory C] [SymmetricCategory C]
@@ -1454,16 +1437,7 @@ private theorem abstract_trace_formula :
       (scalar_evaluation a N K H.t).symm
 end AbstractTrace
 
-/-- The canonical derived braiding satisfies the existing derived symmetry law. -/
-private theorem canonical_derived_symmetry
-    {A : Type u₁} [Category.{u + 1} A] [Abelian A]
-    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [SymmetricCategory A]
-    [MonoidalPreadditive A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
-    (K M : DerivedCategory A) :
-    (CategoryTheory.traceCanonicalDerivedBraiding K M).hom ≫
-        (CategoryTheory.traceCanonicalDerivedBraiding M K).hom = 𝟙 (K ⊗ M) := by
-  exact @SymmetricCategory.symmetry (DerivedCategory A) _ _
-    (DerivedCategory.symmetricCategory A) K M
+attribute [local irreducible] TraceFirstFormula
 
 section DerivedTraceAssembly
 variable {C : Type u₁} [Category.{u + 1} C] [Abelian C]
@@ -1562,6 +1536,7 @@ private theorem derived_trace_assembly
     (hs : traceDataSquare (derivedTraceComparisonData F U₁ U₂) s) :
     traceDataFormula (derivedTraceComparisonData F U₁ U₂)
       LC LD LV P Q₁ Q₂ a a₁ a₂ s TY := by
+  unfold traceDataFormula
   change TraceFirstFormula LC LD LV F.leftDerivedFunctor P
       U₁.leftDerivedFunctor U₂.leftDerivedFunctor Q₁ Q₂ a a₁ a₂ s
       F.traceDegreeZeroUnitIso
@@ -1579,17 +1554,11 @@ private theorem derived_trace_assembly
           (U₂.leftDerivedTensorComparison.app (F.leftDerivedFunctor.obj K)).app
             (F.leftDerivedFunctor.obj M) ≫ (s.hom.app K ⊗ₘ s.hom.app M) at hs
   let : BraidedCategory (DerivedCategory C) := DerivedCategory.braidedCategory' C
-  let : SymmetricCategory (DerivedCategory C) := {
-    toBraidedCategory := DerivedCategory.braidedCategory' C
-    symmetry := canonical_derived_symmetry }
+  let : SymmetricCategory (DerivedCategory C) := DerivedCategory.symmetricCategory C
   let : BraidedCategory (DerivedCategory D) := DerivedCategory.braidedCategory' D
-  let : SymmetricCategory (DerivedCategory D) := {
-    toBraidedCategory := DerivedCategory.braidedCategory' D
-    symmetry := canonical_derived_symmetry }
+  let : SymmetricCategory (DerivedCategory D) := DerivedCategory.symmetricCategory D
   let : BraidedCategory (DerivedCategory V) := DerivedCategory.braidedCategory' V
-  let : SymmetricCategory (DerivedCategory V) := {
-    toBraidedCategory := DerivedCategory.braidedCategory' V
-    symmetry := canonical_derived_symmetry }
+  let : SymmetricCategory (DerivedCategory V) := DerivedCategory.symmetricCategory V
   let : F.LaxBraided := { braided := hF }
   let : F.Braided := {}
   let : F.leftDerivedFunctor.Braided := by
@@ -1621,11 +1590,14 @@ private theorem derived_trace_assembly
     simp only [Functor.map_braiding, Category.assoc, Functor.Monoidal.μ_δ,
       Category.comp_id]
   have hdF : Functor.OplaxMonoidal.δ F.leftDerivedFunctor =
-      fun K M ↦ (F.leftDerivedTensorComparison.app K).app M := rfl
+      fun K M ↦ (F.leftDerivedTensorComparison.app K).app M :=
+    CategoryTheory.Functor.residue_derived_tensor F
   have hd₁ : Functor.OplaxMonoidal.δ U₁.leftDerivedFunctor =
-      fun K M ↦ (U₁.leftDerivedTensorComparison.app K).app M := rfl
+      fun K M ↦ (U₁.leftDerivedTensorComparison.app K).app M :=
+    CategoryTheory.Functor.residue_derived_tensor U₁
   have hd₂ : Functor.OplaxMonoidal.δ U₂.leftDerivedFunctor =
-      fun K M ↦ (U₂.leftDerivedTensorComparison.app K).app M := rfl
+      fun K M ↦ (U₂.leftDerivedTensorComparison.app K).app M :=
+    CategoryTheory.Functor.residue_derived_tensor U₂
   have hcD (K M : DerivedCategory D) :
       CategoryTheory.traceCanonicalDerivedBraiding K M = β_ K M := rfl
   have hcV (K M : DerivedCategory V) :
@@ -1655,8 +1627,6 @@ private theorem derived_trace_assembly
       F.leftDerivedFunctor P U₁.leftDerivedFunctor U₂.leftDerivedFunctor Q₁ Q₂
       a a₁ a₂ s TY hs')
 end DerivedTraceAssembly
-
-attribute [local irreducible] TraceFirstFormula
 
 section ModuleTraceAssembly
 variable {C : Type u₁} [Category.{u + 1} C] [Abelian C]
@@ -1712,7 +1682,6 @@ private theorem module_trace_assembly
   exact derived_trace_assembly LC LD LV F U₁ U₂ P Q₁ Q₂ a a₁ a₂ s TY hF h₁ h₂ hs
 end ModuleTraceAssembly
 
-attribute [local irreducible] traceDataFormula
 
 
 
@@ -1778,9 +1747,11 @@ def traceNativeComparisonData :
     (upperStar Λ f) (upperStar Λ p) (upperStar Λ q)
 
 section SquareCoherence
+attribute [local instance 20000] traceModuleGrothendieck traceModuleFlat
+  traceTensorLeft traceTensorRight traceGradedTensor traceGradedTensorLeft
+  traceGradedTensorRight traceGradedTensorFour
 attribute [local irreducible] upperStar lowerStar
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctor
-attribute [local irreducible] Mod.monoidalCategoryStruct
 private theorem trace_square_tensor (w : p ≫ f = q ≫ f) :
     traceDataSquare (traceNativeComparisonData Λ f p q) (tracePullSquare Λ f p q w) := by
   let := upper_comp_monoidal Λ p f
@@ -1813,9 +1784,11 @@ def TraceFirstAssertion {X Y W : Scheme.{u}} (f : X ⟶ Y) (p q : W ⟶ X)
     (tracePullSquare Λ f p q sq.w) TY
 
 section ConcreteTrace
+attribute [local instance 20000] traceModuleGrothendieck traceModuleFlat
+  traceTensorLeft traceTensorRight traceGradedTensor traceGradedTensorLeft
+  traceGradedTensorRight traceGradedTensorFour
 attribute [local irreducible] upperStar lowerStar
 attribute [local irreducible] CategoryTheory.Functor.rightDerivedFunctor
-attribute [local irreducible] Mod.monoidalCategoryStruct
 private theorem concrete_trace_formula (sq : ChosenCartesianSquare p q f f)
     (TY : TraceD Λ Y) : TraceFirstAssertion Λ f p q sq TY := by
   unfold TraceFirstAssertion traceNativeComparisonData

@@ -1,0 +1,168 @@
+{
+ "id": "lem-per-flat-ideal-strict-transform-comparison",
+ "kind": "statement",
+ "title": "comparison of the ideal strict transform with its extended ideal under a flat morphism",
+ "statement": "Let f:X→S be a flat morphism of schemes [def-weil-flat-morphism]. Let I be a quasi-coherent ideal on S whose associated ideal module is of finite type, and let K be a quasi-coherent ideal on X [pqf-def-coherent]. Write p:X×_S Bl_I(S)→X for the first projection [def-pc-fibre-product, def-nagata-global-blowup]. The module strict transform of K along the retained centre I [def-trf-module-strict-transform] is isomorphic to the module associated to the extended ideal K.comap p [def-nagata-extended-ideal]. This asserts no arbitrary choice of a new ideal and needs neither a preserved open nor finite presentation of K.",
+ "stmt_deps": [
+  "def-weil-flat-morphism",
+  "pqf-def-coherent",
+  "def-pc-fibre-product",
+  "def-nagata-global-blowup",
+  "def-trf-module-strict-transform",
+  "def-nagata-extended-ideal"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080D (1), definition-strict-transform; Tag 080F, lemma-strict-transform-flat, exceptional-power-torsion argument; Modules Tag 01AJ for the ideal image"
+ },
+ "proof": [
+  {
+   "text": "Put Y=X×_S Bl_I(S), with projections p and g. The exceptional ideal E=I O_{Bl_I(S)} is Cartier by principalization. Since g is flat by base change, the structure module of Y is flat over Bl_I(S). Apply the Cartier-support injectivity lemma to it: restriction to the complement W of g^{-1}|E| is injective on sections of every open.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "lem-trf-relative-flat-cartier-support",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let alpha:p* K→O_Y be the pullback inclusion composed with the structure-module comparison. The ideal-tensor comparison identifies its image with (K.comap p).toModules. Off the exceptional divisor p is an isomorphism, so alpha restricts to an injection there. Hence ker alpha is contained in the subsheaf of p*K supported on Y minus W.",
+   "uses": [
+    "lem-pur-ideal-tensor-pullback-comparison",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conversely a section of p*K vanishing on W has alpha-image vanishing on W; sectionwise injectivity for O_Y makes the image zero. Thus ker alpha is exactly the kernel of the restriction unit. Quotienting by this kernel and applying the first isomorphism theorem identifies the strict transform with image alpha and therefore the extended ideal.",
+   "uses": [
+    "lem-trf-relative-flat-cartier-support",
+    "def-trf-module-strict-transform"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "thm-nagata-blowup-principalizes-center",
+  "lem-trf-relative-flat-cartier-support",
+  "def-weil-flat-morphism",
+  "lem-pur-ideal-tensor-pullback-comparison",
+  "thm-nagata-global-blowup-complement",
+  "def-trf-module-strict-transform"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080D (1), definition-strict-transform; Tag 080F, lemma-strict-transform-flat, exceptional-power-torsion argument; Modules Tag 01AJ for the ideal image"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The strict transform of an ideal under a base blowup of a flat scheme is the extended ideal",
+   "results": "8 hits, including FractionalIdeal.extended, Ideal.comap_map_eq_self_of_faithfullyFlat, AlgebraicGeometry.Flat.stalkMap and Scheme.IdealSheafData.comap; none identifies this module strict transform.",
+   "date": "2026-10-26",
+   "verdict": "No match for this ideal-sheaf comparison or criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictTransform\", \"Ideal\"",
+   "results": "OK, 0 hits",
+   "date": "2026-10-26",
+   "verdict": "No match for this ideal-sheaf comparison or criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "strictTransform|moduleStrictTransform",
+   "results": "OK, 0 hits in Mathlib",
+   "date": "2026-10-26",
+   "verdict": "No match for this ideal-sheaf comparison or criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSupportedIdealPrincipalization",
+  "date": "2026-10-26",
+  "group": "V1"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3 ('By the duality symmetry of the middle perverse t-structure'): auxiliary purity/completion-rigidity input through descendant lem-per-henselian-completion-open-rigidity; the completion comparison used in the Artin–Gabber reduction; local-ring/stalk analysis in ILO XX 4.4, printed p.373, paragraph beginning Using the study in Fujiwara. Finite-stage principalization on an étale neighbourhood, needed for the I-valuative assertion. This lemma isolates comparison of the ideal strict transform with its extended ideal under a flat morphism.",
+   "via": [
+    "lem-per-etale-supported-ideal-principalization",
+    "lem-per-admissible-modification-fujiwara-valuative-local",
+    "lem-per-admissible-modification-valuative-stalks",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FlatIdealStrictTransformComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatIdealStrictTransformComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.nonempty_moduleStrictTransform_ideal_iso_comap",
+  "statement": "theorem nonempty_moduleStrictTransform_ideal_iso_comap\n    {X S : Scheme.{u}} (f : X ⟶ S) [Flat f]\n    (I : S.IdealSheafData) [I.toModules.IsFiniteType]\n    (K : X.IdealSheafData) [K.toModules.IsQuasicoherent] :\n    Nonempty (moduleStrictTransform f I K.toModules ≅\n      (K.comap (pullback.fst f I.blowupMap)).toModules)",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-26"
+ },
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "lem-per-flat-ideal-strict-transform-comparison",
+  "worker": "stage3 V1",
+  "summary": "A strictly smaller comparison/criterion isolated from the assigned parent proof; statements checked on empty schemes, zero and unit ideals and nonreduced bases.",
+  "blueprint": "Proof Step 3 ('By the duality symmetry of the middle perverse t-structure'): auxiliary purity/completion-rigidity input through descendant lem-per-henselian-completion-open-rigidity; the completion comparison used in the Artin–Gabber reduction; local-ring/stalk analysis in ILO XX 4.4, printed p.373, paragraph beginning Using the study in Fujiwara. Finite-stage principalization on an étale neighbourhood, needed for the I-valuative assertion. This lemma isolates comparison of the ideal strict transform with its extended ideal under a flat morphism.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "General blowup, ideal-image, Cartier-support or local-freeness tool used in this geometric subargument, rather than a perverse-sheaf assertion."
+   },
+   {
+    "node": "lem-trf-relative-flat-cartier-support",
+    "why": "General blowup, ideal-image, Cartier-support or local-freeness tool used in this geometric subargument, rather than a perverse-sheaf assertion."
+   },
+   {
+    "node": "lem-pur-ideal-tensor-pullback-comparison",
+    "why": "General blowup, ideal-image, Cartier-support or local-freeness tool used in this geometric subargument, rather than a perverse-sheaf assertion."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "General blowup, ideal-image, Cartier-support or local-freeness tool used in this geometric subargument, rather than a perverse-sheaf assertion."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083235-L-2303871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261026T083235-L-2303871",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

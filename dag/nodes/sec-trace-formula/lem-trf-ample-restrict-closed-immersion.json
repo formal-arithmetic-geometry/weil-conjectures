@@ -16,56 +16,28 @@
  ],
  "proof": [
   {
-   "text": "Put $L=i^*M$. By [lem-weil-pbc-invertible-pullback-invertible], $L$ is invertible. Ampleness of $M$ implies that $Y$ is quasi-compact by [def-weil-pbc-ample-invertible-module]. The definition of a closed immersion [def-weil-closed-immersion] identifies $X$ homeomorphically with the closed subset $i(X)$ of $Y$. Apply [lem-weil-pbc-closed-in-quasi-compact] to that closed subset. Thus $X$ is quasi-compact.",
+   "text": "A closed immersion i is affine by [def-weil-closed-immersion], in its equivalent affine characterization; Lean infers IsAffineHom i using IsClosedImmersion.instIsAffineHom (Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:151). Apply [lem-weil-pbc-pullback-ample-invertible] to i, M, and hM. Its conclusion is exactly the required tensor-pullback ampleness with the same explicit invertibility instance. This specializes the existing absolute ampleness theorem and preserves Step 3 of the graded-immersion unit.",
    "uses": [
-    "lem-weil-pbc-invertible-pullback-invertible",
-    "def-weil-pbc-ample-invertible-module",
     "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-in-quasi-compact"
+    "lem-weil-pbc-pullback-ample-invertible"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
-   }
-  },
-  {
-   "text": "Fix $x\\in X$. By ampleness [def-weil-pbc-ample-invertible-module], choose $n\\geq1$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ such that $i(x)\\in Y_s$ and $Y_s$ is affine. Apply [lem-weil-pbc-tensor-power-section-nonvanishing-pullback] to the morphism $i$, the invertible module $M$, this positive integer $n$ and the section $s$. It gives a global section $t\\in\\Gamma(X,L^{\\otimes n})$ whose nonvanishing open is $X_t=i^{-1}(Y_s)$. In particular $x\\in X_t$.",
-   "uses": [
-    "def-weil-pbc-ample-invertible-module",
-    "lem-weil-pbc-tensor-power-section-nonvanishing-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
-   }
-  },
-  {
-   "text": "Since $i$ is a closed immersion and $Y_s$ is an affine open, clause (1) of [lem-weil-pbc-closed-immersion-affine-cover-criterion] says that $i^{-1}(Y_s)$ is affine. Hence the section $t$ of Step 2 has affine nonvanishing open $X_t$ containing $x$. For every $x$ we have now produced the positive tensor-power section required by [def-weil-pbc-ample-invertible-module]. Together with invertibility and quasi-compactness from Step 1, this is ampleness of $L=i^*M$.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "def-weil-pbc-ample-invertible-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
+    "place": "Tag 01PU (lemma-ample-on-closed); affine-pullback generalization: Morphisms Tag 0892, part (2)"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-invertible-pullback-invertible",
-  "def-weil-pbc-ample-invertible-module",
   "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-in-quasi-compact",
-  "lem-weil-pbc-tensor-power-section-nonvanishing-pullback",
-  "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+  "lem-weil-pbc-pullback-ample-invertible"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "T7",
+  "date": "2026-10-23",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Tag 01PU (lemma-ample-on-closed), proof; Definition 01PS (definition-ample)"
+  "place": "Tag 01PU (lemma-ample-on-closed), specialized from the proved affine-pullback theorem (Morphisms Tag 0892, part (2))"
  },
  "mathlib_searches": [
   {
@@ -210,5 +182,26 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 01PU clause by clause: Y : Scheme.{u}, M : Y.Modules [IsInvertible] with IsAmple Y M (absolute 01PS notion), any i : X ⟶ Y [IsClosedImmersion]; conclusion @IsAmple X ((tensorPullback i).obj M) via invertible_pullback_tensor, same form as the recorded isAmple_tensorPullback_of_isAffineHom. No extra hypotheses; shared universe forced by the morphism; lean.statement verbatim; only node change vs live is the lean record. Edge cases (empty X, identity, nilpotent ideals) covered. nt_compile --json clean (2.0 s); control with an unknown identifier fails; scratch probe proves the item by exact isAmple_tensorPullback_of_isAffineHom i M hM (2.3 s). No existing closed-immersion theorem, so existing:false is right. Docstrings carry source, blueprint id and all 3 proof steps; only sorry. Second-reading section is the standard dispatcher placeholder. Advisory: stage-3 proof is one line from the affine-hom theorem."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261023T103319-L-3097002",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

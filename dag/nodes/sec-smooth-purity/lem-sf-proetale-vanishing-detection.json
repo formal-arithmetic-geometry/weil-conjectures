@@ -196,7 +196,18 @@
   "def-weil-pbc-proetale-site"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-fullcd-etale-origin",
  "split_report": {
@@ -256,5 +267,23 @@
   "group": "NG",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, all statement dependencies, source passages, exact declarations, universes, edge cases, docstrings and pilot gates. Primary signature matches verbatim; local side-overlay per-file compilation passed. No findings or fixes; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $\\Lambda$ be a commutative ring, let $T$ be a scheme and let\n$F$ be a sheaf of $\\Lambda$-modules on the\nsmall pro-étale site\n$T_{\\Proet}$.\n\n1. **(i)** $F=0$ if and only if $F(W)=0$ for every affine weakly\ncontractible object $W\\to T$ of $T_{\\Proet}$.\n1. **(ii)** More generally, a complex of $\\Lambda$-module sheaves on\n$T_{\\Proet}$ is acyclic if and only if its evaluation at every affine\nweakly contractible object of $T_{\\Proet}$ is an acyclic complex.\n\nConsequently the family of evaluation functors $F\\mapsto F(W)$, indexed\nby the affine weakly contractible objects, is a detection device on the\nwhole pro-étale topos, although the geometric-point stalks are not\nconservative there by clause (4) of\n[lem-cbc-proetale-stalk-conservative].",
+  "proof": [
+   {
+    "text": "*(i).* The implication from left to right is trivial. For the\nconverse let $V$ be an object of $T_{\\Proet}$. The pro-étale site has\nenough affine quasi-compact weakly contractible objects: this is Stacks\nProject, Pro-étale Cohomology, Lemma 61.13.4,\n[Tag 0990](https://stacks.math.columbia.edu/tag/0990), which states\nthat $T_{\\mathrm{proet}}$ has enough (affine) quasi-compact\nweakly contractible objects in the sense of the definition of weakly\ncontractible objects of a site, so that every object of $T_{\\Proet}$\nadmits a covering $\\lbrace W_i\\to V\\rbrace$ by affine weakly contractible\nobjects; the cited lemma is the pro-étale instance of that general\nnotion. The sheaf axiom embeds $F(V)$ into $\\prod_iF(W_i)=0$, so\n$F(V)=0$, and $V$ was arbitrary.\n*(ii).* A complex of sheaves is acyclic if and only if each of its\nthree-term segments $K^n\\to K^{n+1}\\to K^{n+2}$ is exact in the middle.\nExactness of such a segment is detected by evaluation at the objects of\nany class $\\mathcal B$ of weakly contractible objects that covers every\nobject of the site: this is Stacks Project, Cohomology on Sites,\nProposition 21.51.2,\n[Tag 0947](https://stacks.math.columbia.edu/tag/0947), part (1),\nquoted here and applied with $\\mathcal B$ the affine weakly contractible\nobjects, whose covering property is the input of (i); the remaining parts\nof that proposition are not used. Combining the two equivalences gives\n(ii). The final sentence restates that (i) and (ii) are proved by\nevaluation at weakly contractible objects and never by geometric-point\nstalks, in contrast with clause (4) of\n[lem-cbc-proetale-stalk-conservative].",
+    "uses": [
+     "lem-cbc-proetale-stalk-conservative"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; a worker who touches the node follows it"
  }
 }

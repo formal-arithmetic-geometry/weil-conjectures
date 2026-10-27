@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-global-leray-unit-square",
+ "kind": "statement",
+ "title": "The global cocycle square for an ordinary coefficient map",
+ "statement": "Let f:X→S, q:Y→T, g:T→S and p:Y→X commute, and let φ:F→p_*M be an ordinary coefficient h-map. For n≥0 let e:Hⁿ(Rg_*Rq_*(M[0]))→g_*Hⁿ(Rq_*(M[0])) satisfy the canonical local class equation [def-weil-pbc-truncated-counit-edge]. Write α=derivedSquareUnitMap(f,q,g,p,φ) [lem-weil-pbc-derived-square-unit-map]. The total-derived Leray edge of φ* x equals the whole-open restriction from g⁻¹S to T of (Hⁿ(α);e) applied to the total-derived Leray edge of x. Here φ* is moduleCohomologyFMap and both total-derived Leray edges are the chosen classical edges transported by schemeSingleCohomologyComparison. No derived pullback or cohomological upper bound is assumed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 (lemma-describe-higher-direct-images), 01F4(2) (lemma-apply-Leray), and 01FB (remark-explain-arrow)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-pc-leray-degenerate-sections",
+  "lem-weil-pbc-derived-square-unit-map",
+  "def-weil-pbc-derived-square-local-models",
+  "def-weil-pbc-truncated-counit-edge"
+ ],
+ "proof": [
+  {
+   "text": "Identify the canonical restrictedDirectImageMap with the restricted h-map supplied by moduleCohomologyFMap_restriction, using injectivity of the restriction adjunction hom equivalence and cancellation of the pushforward composition isomorphism. This gives the restriction square on cohomology.",
+   "uses": [
+    "lem-weil-pbc-module-cohomology-fmap-functorial"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose injective resolutions and their restricted-resolution section comparisons at f inverse top and p inverse f inverse top, and apply derivedSquareUnit_localClasses.",
+   "uses": [
+    "lem-pc-restricted-resolution-sections-exist",
+    "lem-weil-pbc-derived-square-local-classes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose by the source cohomology restriction. The two applications of lerayEdge_restrictedResolution and the cohomology restriction square identify the local equation with the classical global Leray equation. Postcompose with the inverse total/classical comparison and restrict g inverse top to top. Cancel the comparison and its inverse, using naturality.",
+   "uses": [
+    "lem-weil-pbc-leray-edge-restricted-resolution"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-restricted-resolution-sections-exist",
+  "lem-weil-pbc-derived-square-local-classes",
+  "lem-weil-pbc-leray-edge-restricted-resolution",
+  "lem-weil-pbc-module-cohomology-fmap-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01E4 (lemma-describe-higher-direct-images), 01F4(2) (lemma-apply-Leray), and 01FB (remark-explain-arrow)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The cocycle Leray edge equals the canonical cohomology sheaf class map computed from a restricted injective resolution",
+   "results": "Eight hits about Ext and Hom-complex cocycles; none identifies the chosen Leray edge and resolutionSectionClass.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyπ\", \"mapHomologyIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leray.*resolutionSection|resolutionSection.*leray",
+   "results": "0 Mathlib hits; local rg in WeilConjectures and Sheaf found no existing bridge. Related proved restriction calculations occur in RestrictedResolutionCohomology and private helpers of TargetSectionClassRestriction.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TopDegreeLeraySquare",
+  "date": "2026-10-26",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-top-degree-leray-square",
+   "place": "Proof steps 3 and 4: local cocycle square specialized to global Leray classes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GlobalLerayUnitSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/GlobalLerayUnitSquare.lean",
+  "declaration": "AlgebraicGeometry.globalLeray_unitSquare",
+  "statement": "theorem globalLeray_unitSquare\n    {X S Y T : Scheme.{u}} (f : X ⟶ S) (q : Y ⟶ T) (g : T ⟶ S) (p : Y ⟶ X)\n    (hs : p ≫ f = q ≫ g) (F : X.Modules) (M : Y.Modules)\n    (φ : F ⟶ (Scheme.Modules.pushforward p).obj M) (n : ℕ)\n    (e : (DerivedCategory.homologyFunctor.{w, u, u + 1}\n      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (n : ℤ)).obj\n        ((schemeDerivedDirectImage g).obj (globalLerayImage.{u, w} q M)) ⟶\n      (Scheme.Modules.pushforward g).obj ((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (n : ℤ)).obj\n          (globalLerayImage.{u, w} q M)))\n    (he : ∀ V : S.Opensᵒᵖ,\n      (RingedSpace.topEdgeLocalClass S.toRingedSpace (n : ℤ)\n        ((schemeDerivedDirectImage g).obj (globalLerayImage.{u, w} q M))).app V ≫\n        ((SheafOfModules.toSheaf (moduleRings S.toRingedSpace)).map e).hom.app V =\n      (RingedSpace.topEdgeLocalLeray g.toLRSHom.toShHom (n : ℤ)\n        (globalLerayImage.{u, w} q M)).hom.app V ≫\n      (RingedSpace.topEdgeInverseLocalClass g.toLRSHom.toShHom (n : ℤ)\n        (globalLerayImage.{u, w} q M)).app V)\n    (x : (RingedSpace.moduleCohomology X.toRingedSpace n).obj F) :\n    (RingedSpace.globalSectionsFunctor T.toRingedSpace).map\n        (globalLerayComparison.{u, w} q M n).inv\n          (((Classical.choose (exists_lerayEdge_isIso_of_vanishing q)) n).app M\n            (Scheme.Modules.moduleCohomologyFMap p φ n x)) =\n      (((DerivedCategory.homologyFunctor\n        (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (n : ℤ)).obj\n          (globalLerayImage.{u, w} q M)).val.presheaf.map\n        (eqToHom (congrArg op (Opens.map_top g.base).symm) :\n        op (g ⁻¹ᵁ (⊤ : S.Opens)) ⟶ op (⊤ : T.Opens)))\n          (Hom.app ((DerivedCategory.homologyFunctor\n            (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (n : ℤ)).map\n              (globalLerayUnitMap f q g p hs F M φ) ≫ e) ⊤\n            ((RingedSpace.globalSectionsFunctor S.toRingedSpace).map\n              (globalLerayComparison.{u, w} f F n).inv\n                (((Classical.choose (exists_lerayEdge_isIso_of_vanishing f)) n).app F x)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-26",
+  "declarations": [
+   "AlgebraicGeometry.globalLerayModuleAbelian",
+   "AlgebraicGeometry.globalLerayImage",
+   "AlgebraicGeometry.globalLerayImage_isGE",
+   "AlgebraicGeometry.globalLerayUnitMap",
+   "AlgebraicGeometry.globalLerayComparison",
+   "AlgebraicGeometry.globalLeray_unitSquare"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f989a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T065756-L-3232285",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-f989a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261026T065756-L-3232285",
+  "kind": "interface",
+  "note": "independent cc review: Delivered TopDegreeLeraySquare/GlobalLerayUnitSquare/LerayEdgeRestrictedResolution + 3 consumer adaptations vs clone ad190c25771: theorem statement unchanged, delegated def bodies identical terms (schemeSingleCohomologyComparison = same Mathlib iso); original CoherentAffineBaseChangeEdge fails at 727 against delivered deps (forced); sandbox axioms = propext/Classical.choice/Quot.sound (+sorryAx from the new statement and sorried dependencies); lerayEdge_restrictedResolution checked true against the cocycle-pinned edge"
+ }
+}

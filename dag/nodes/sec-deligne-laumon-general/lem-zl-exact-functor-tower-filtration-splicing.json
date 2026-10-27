@@ -1,0 +1,278 @@
+{
+ "id": "lem-zl-exact-functor-tower-filtration-splicing",
+ "kind": "statement",
+ "title": "Prescribed quotient filtrations in a finite tower of exact functors",
+ "statement": "Let $t\\in\\mathbf N$, let $\\mathcal A_a$ for $0\\leq a\\leq t$ be abelian categories [def-sp-abelian], and for $a<t$ let $T_a:\\mathcal A_{a+1}\\to\\mathcal A_a$ be additive exact functors [def-weil-pbc-additive-functor; def-galois-exact-functor]. Let $H_a\\in\\mathcal A_a$ with $H_t$ a zero object. For every $a<t$ let $K_a\\in\\mathcal A_a$ and let\n$$0\\longrightarrow K_a\\xrightarrow{u_a}H_a\\xrightarrow{\\pi_a}T_aH_{a+1}\\longrightarrow0$$\nbe short exact, meaning that $u_a$ is a kernel of $\\pi_a$ and $\\pi_a$ is a cokernel of $u_a$. Fix for each $a<t$ a finite increasing filtration by subobjects $0=K_{a,0}\\subseteq\\cdots\\subseteq K_{a,n_a}=K_a$; a subobject is a monomorphism modulo isomorphism, and the quotient $Q_{a,s}=K_{a,s}/K_{a,s-1}$ is the cokernel of its inclusion. Inclusions need not be strict. For $a\\leq c$ write $T_{a,c}=T_a\\circ\\cdots\\circ T_{c-1}:\\mathcal A_c\\to\\mathcal A_a$, with $T_{a,a}$ the identity.\n\nFor every $a\\leq t$, $H_a$ admits a finite filtration of length $\\sum_{c=a}^{t-1}n_c$ whose successive quotients are isomorphic to $T_{a,c}Q_{c,s}$, ordered first by $c\\geq a$ and then by $1\\leq s\\leq n_c$. At stage $a$ the filtration may be chosen as the images $u_a(K_{a,r})$ followed by the inverse images $\\pi_a^{-1}(T_aL_s)$, where $L_\\bullet$ is the chosen filtration of $H_{a+1}$; $\\pi_a^{-1}(0)=u_a(K_a)$ and\n$$\\pi_a^{-1}(T_aL_s)/\\pi_a^{-1}(T_aL_{s-1})\\simeq T_a(L_s/L_{s-1}).$$\nInverse image means the pullback of a subobject along $\\pi_a$. No splitting of any displayed short exact sequence is assumed. The assertion includes $t=0$ and all $n_a=0$, with the empty filtration of a zero object. If isomorphism-invariant classes $P_{a,v}\\subseteq\\operatorname{Ob}(\\mathcal A_a)$ indexed by $v\\in\\mathbf R$ satisfy $T_a(P_{a+1,v})\\subseteq P_{a,v}$, and $Q_{a,s}\\in P_{a,v_{a,s}}$, then the resulting quotient indexed by $(c,s)$ belongs to $P_{a,v_{c,s}}$. Thus the assigned labels and every common real upper bound of them are retained.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Final paragraph, “Splice the resulting finite filtrations using inverse images under the quotient map” and “starting at the last nonempty member of the chain”; old gluing proof steps 4 and 6, in their purely abelian-category form."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-galois-exact-functor",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [
+  {
+   "text": "Put $N_a=\\sum_{c=a}^{t-1}n_c$. We construct the asserted filtration for every $a$ by descending induction, retaining its ordered quotient isomorphisms. At $a=t$, $N_t=0$ and the zero object $H_t$ has the empty filtration. For the induction step fix a filtration $0=L_0\\subseteq\\cdots\\subseteq L_m=H_{a+1}$ supplied at $a+1$, where $m=N_{a+1}$. Write $H=H_a$, $K=K_a$, $u=u_a$, $\\pi=\\pi_a$, $B=T_aH_{a+1}$ and $S_s=T_aL_s\\subseteq B$. By [lem-sp-exact-functor-preserves-homology](a), the $S_s$ are nested subobjects and $S_s/S_{s-1}\\simeq T_a(L_s/L_{s-1})$, compatibly with the quotient maps. Also $S_0=0$: additivity gives $\\mathrm{id}_{T_a0}=T_a(\\mathrm{id}_0)=T_a(0)=0$, which makes $T_a0$ a zero object. The top subobject is $S_m=B$.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. Exact transport uses Stacks Tag 010N, homology.tex, label lemma-exact-functor."
+   }
+  },
+  {
+   "text": "For $0\\le s\\le m$ form $R_s=H\\times_B S_s$, with maps $h_s:R_s\\to H$, $p_s:R_s\\to S_s$ and $j_s:S_s\\hookrightarrow B$ satisfying $\\pi h_s=j_sp_s$. These pullbacks exist directly from [def-sp-abelian]: take the kernel of $(\\pi,-j_s):H\\oplus S_s\\to B$, whose maps from any object are exactly the compatible pairs. The map $h_s$ is monic: if $h_sx=h_sy$, then $j_sp_sx=\\pi h_sx=\\pi h_sy=j_sp_sy$; cancel $j_s$, then use uniqueness of the compatible pair. Each inclusion $S_{s-1}\\hookrightarrow S_s$ gives an inclusion $i_s:R_{s-1}\\hookrightarrow R_s$ by the same universal property. The pullback for $S_0=0$ is $\\ker\\pi$, so $R_0=u(K)$ as subobjects by the given kernel property of $u$. For $S_m=B$ the compatible pair $(\\mathrm{id}_H,\\pi)$ gives an inverse to $h_m$, hence $R_m=H$ as subobjects.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. The kernel formula is Stacks homology.tex, Example label example-fibre-product-pushouts following Tag 010D; its universal property is checked here."
+   }
+  },
+  {
+   "text": "Each $p_s:R_s\\to S_s$ is epic. Indeed, for any $y:V\\to S_s$, apply [lem-sp-abelian-refinements](a) to the epimorphism $\\pi$ and $j_sy:V\\to B$. It supplies an epimorphism $\\rho:V\\prime\\to V$ and $x:V\\prime\\to H$ with $\\pi x=j_sy\\rho$. The compatible pair $(x,y\\rho)$ defines $z:V\\prime\\to R_s$ with $p_sz=y\\rho$. The converse direction of (a) now says that $p_s$ is epic. Here $\\pi$ is epic because it is a cokernel: maps agreeing after $\\pi$ are equal by uniqueness in its universal property. This argument also applies when $S_s=0$.",
+   "uses": [
+    "lem-sp-abelian-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. The refinement characterization proves the pullback-epimorphism assertion of Stacks Tag 05PK without assuming a splitting."
+   }
+  },
+  {
+   "text": "Fix $1\\le s\\le m$ and let $f_s:S_{s-1}\\hookrightarrow S_s$, $q_s:S_s\\to D_s=S_s/S_{s-1}$ be its cokernel. The composite $e_s=q_sp_s:R_s\\to D_s$ is epic, since $p_s$ is epic and every cokernel is epic. It kills $i_s$. To prove exactness, let $y:V\\to R_s$ satisfy $e_sy=0$. By [lem-sp-abelian-refinements](c), there are an epimorphism $\\rho:V\\prime\\to V$ and $x:V\\prime\\to S_{s-1}$ with $p_sy\\rho=f_sx$. Thus $\\pi h_sy\\rho=j_sf_sx=j_{s-1}x$. The pair $(h_sy\\rho,x)$ defines $z:V\\prime\\to R_{s-1}$. Its image $i_sz$ equals $y\\rho$: their composites with the monomorphism $h_s$ are both $h_sy\\rho$. Part (b) of the same node proves that $R_{s-1}\\xrightarrow{i_s}R_s\\xrightarrow{e_s}D_s$ is exact. By [lem-weil-pbc-abelian-exact-epi-cokernel](a), $e_s$ is a cokernel of $i_s$. Therefore $R_s/R_{s-1}\\simeq D_s\\simeq T_a(L_s/L_{s-1})$. The first isomorphism is the unique map intertwining the quotient projections; the reverse map is provided by the other cokernel universal property, and their composites are identities by uniqueness.",
+   "uses": [
+    "lem-sp-abelian-refinements",
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. Quotient identification by exactness and epimorphic cokernels; compare Stacks Tags 08N3 and 08N4, homology.tex, labels lemma-cartesian-kernel and lemma-cartesian-cocartesian."
+   }
+  },
+  {
+   "text": "For $0\\le r\\le n_a$ let $A_r\\subseteq H$ be represented by $K_{a,r}\\hookrightarrow K\\xrightarrow{u}H$. Then $A_0=0$ and $A_{n_a}=u(K)=R_0$. For $1\\le r\\le n_a$, [lem-sfb-subobject-inclusion-cokernel], with $f$ and $g$ the two composite inclusions into $H$, $\\alpha=\\mathrm{id}$ and $\\phi:K_{a,r-1}\\hookrightarrow K_{a,r}$, identifies $A_r/A_{r-1}$ with $Q_{a,r}$. All its hypotheses hold because the composites are monic and $f=g\\phi$. Concatenate $A_0,\\ldots,A_{n_a}$ and $R_1,\\ldots,R_m$, omitting the repeated junction $R_0=A_{n_a}$. This has length $n_a+m=N_a$. Its first quotients are $Q_{a,r}=T_{a,a}Q_{a,r}$. By step 4 and the induction isomorphisms its remaining quotients are $T_aT_{a+1,c}Q_{c,s}\\simeq T_{a,c}Q_{c,s}$, in precisely the original order. A functor sends an isomorphism to an isomorphism by applying it to the two inverse maps. This completes the descending induction and gives the prescribed images and inverse images.",
+   "uses": [
+    "lem-sfb-subobject-inclusion-cokernel"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. Assemble the two lists after identifying their junction; the categorical representative comparison is the cited closed node."
+   }
+  },
+  {
+   "text": "For the label assertion, iterating the assumed inclusions $T_b(P_{b+1,v})\\subseteq P_{b,v}$ shows that $T_{a,c}Q_{c,s}\\in P_{a,v_{c,s}}$: at $a=c$ this is the hypothesis on $Q_{c,s}$, and decreasing $a$ once applies exactly one assumed inclusion. Isomorphism invariance then applies to each quotient isomorphism constructed above. Its label is unchanged, so any real number bounding all input labels also bounds all output labels. The construction allows repeated subobjects throughout. If $t=0$ it is its base case. If all $n_a=0$, descending induction gives a chain of length zero from zero to $H_a$, so $H_a$ is zero and its filtration is empty. More generally either list at a junction may have length zero; the endpoint identifications used in step 5 still hold. No argument selected a section of $\\pi_a$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. Label transport and degenerate lengths in the same finite induction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-exact-functor-preserves-homology",
+  "def-sp-abelian",
+  "lem-sp-abelian-refinements",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "lem-sfb-subobject-inclusion-cokernel"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Final paragraph: splice finite filtrations by inverse images, starting at the last nonempty member of the closed chain. Expanded purely categorical argument using the cited Mathlib leaves and represented-subobject comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite tower of short exact sequences in abelian categories connected by exact functors gives a filtration with transported prescribed quotient factors",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ShortComplex.SnakeInput.snake_lemma\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/SnakeLemma\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  (S : CategoryTheory.ShortComplex.SnakeInput C), S.composableArrows.Exact\", \"doc\": \"Given input data for the Snake Lemma in an abelian category, the composable sequence of five morphisms (formed by differentials $f, g$ from the leftmost and third short complexes and the connecting mo\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.covariantSequence\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.HasExt C] →\\n        C →\\n          {S : CategoryTheory.ShortComplex C} →\\n            S.ShortExact → (n₀ n₁ : ℕ) → n₀ + 1 = n₁ → CategoryTheory.ComposableArrows AddCommGrpCat 5\", \"doc\": \"A sequence of five composable group homomorphisms between additive commutative groups, constructed from postcompositions with extension classes and zero morphisms, forming a long exact sequence in the\"}\n  {\"name\": \"CategoryTheory.Functor.exact_tfae\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  [∀ (S : CategoryTheory.ShortComplex C), \", \"doc\": \"For a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, the following are equivalent: (1) $F$ preserves short exact sequences, (2) $F$ preserves exact complexes, (3) $F$ preserves \"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.ab_finite\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.Exact → ∀ [Finite ↑S.X₁] [Finite ↑S.X₃], Finite ↑S.X₂\", \"doc\": \"In an exact short complex of abelian groups, if the first and third objects are finite, then the middle object is also finite.\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.generatingMonomorphisms.functor\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/EnoughInjectives\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {G : C} →\\n      [inst_1 : CategoryTheory.Abelian C] →\\n        CategoryTheory.IsSeparator G →\\n          {X : C} →\\n            [CategoryTheory.IsGrothendieckAbelian.{w, v, u} C] →\\n              CategoryTheory.Subobject X →\\n              \", \"doc\": \"This functor maps the well-ordered index category $ J $ to the category $ \\\\mathcal{C} $ by first associating each object $ j \\\\in J $ with a subobject of $ X $ constructed through transfinite iteration\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.ab_finite_iff\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/Ab\", \"type\": \"∀ {S : CategoryTheory.ShortComplex Ab}, S.ShortExact → (Finite ↑S.X₂ ↔ Finite ↑S.X₁ ∧ Finite ↑S.X₃)\", \"doc\": \"In a short exact sequence $0 \\\\to A_1 \\\\to A_2 \\\\to A_3 \\\\to 0$ of abelian groups, the middle group $A_2$ is finite if and only if both $A_1$ and $A_3$ are finite.\"}\n  {\"name\": \"CategoryTheory.ComposableArrows.Exact.sc'\", \"module\": \"Mathlib/Algebra/Homology/ExactSequence\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {n : ℕ} →\\n        {S : CategoryTheory.ComposableArrows C n} →\\n          S.Exact →\\n            (i j k : ℕ) →\\n              autoParam (i + 1 = j) CategoryTheory.Composable\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, an exact sequence $S$ of $n$ composable arrows $A_0 \\\\to A_1 \\\\to \\\\cdots \\\\to A_n$, and indices $i,j,k$ satisfying $i+1 = j$, $j+1 = k$, and $k \\\\leq n$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the full finite exact-functor tower with prescribed graded factors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Splice given filtrations by inverse images along successive epimorphisms in a finite exact functor tower ending at zero",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.ComposableArrows.Exact.sc'\", \"module\": \"Mathlib/Algebra/Homology/ExactSequence\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      {n : ℕ} →\\n        {S : CategoryTheory.ComposableArrows C n} →\\n          S.Exact →\\n            (i j k : ℕ) →\\n              autoParam (i + 1 = j) CategoryTheory.Composable\", \"doc\": \"Given a category $\\\\mathcal{C}$ with zero morphisms, an exact sequence $S$ of $n$ composable arrows $A_0 \\\\to A_1 \\\\to \\\\cdots \\\\to A_n$, and indices $i,j,k$ satisfying $i+1 = j$, $j+1 = k$, and $k \\\\leq n$\"}\n  {\"name\": \"Profinite.NobelingProof.succ_exact\", \"module\": \"Mathlib/Topology/Category/Profinite/Nobeling/Successor\", \"type\": \"∀ {I : Type u} (C : Set (I → Bool)) [inst : LinearOrder I] [inst_1 : WellFoundedLT I] {o : Ordinal.{u}},\\n  IsClosed C →\\n    ∀ (hsC : Profinite.NobelingProof.contained C (Order.succ o)) (ho : o < Ordinal.type fun x1 x2 => x1 < x2),\\n      {\\n          X₁ :=\\n            ModuleCat.of ℤ\\n              (Loc\", \"doc\": \"For a well-ordered set $ I $, a set $ C $ of Boolean-valued functions on $ I $, and an ordinal $ o $ less than the order type of $ I $, if $ C $ satisfies the containment condition with respect to $ \\\\\"}\n  {\"name\": \"CategoryTheory.exact_f_d\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {X Y : C} (f : X ⟶ Y),\\n  { X₁ := X, X₂ := Y, X₃ := CategoryTheory.Injective.syzygies f, f := f, g := CategoryTheory.Injective.d f,\\n      zero := ⋯ }.Exact\", \"doc\": \"In an abelian category with enough injectives, for any morphism $ f : X \\to Y $, the short complex formed by $ f $ and its injective differential $ d_f : Y \\to I $ (where $ I $ is an injective object) i\"}\n  {\"name\": \"CategoryTheory.ComposableArrows.Exact.exact'\", \"module\": \"Mathlib/Algebra/Homology/ExactSequence\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  {n : ℕ} {S : CategoryTheory.ComposableArrows C n} (hS : S.Exact) (i j k : ℕ)\\n  (hij : autoParam (i + 1 = j) CategoryTheory.ComposableArrows.Exact.exact'._auto_1)\\n  (hjk : autoParam (j\", \"doc\": \"In a category equipped with zero morphisms, if a sequence of $n$ composable morphisms $A_0 \\\\to A_1 \\\\to \\\\cdots \\\\to A_n$ is exact (i.e., the image of each morphism equals the kernel of the next), then a\"}\n  {\"name\": \"CategoryTheory.Abelian.epi_of_epi_of_epi_of_epi\", \"module\": \"Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {R₁ R₂ : CategoryTheory.ComposableArrows C 2} (φ : R₁ ⟶ R₂),\\n  R₂.Exact →\\n    CategoryTheory.Epi\\n        (R₁.map' 1 2 CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono'._proof_6\\n          CategoryTh\", \"doc\": \"In an abelian category, given an exact sequence of composable arrows $ R_2 $, if the morphism from position 1 to 2 is an epimorphism, and the natural transformation components at positions 0 and 2 are\"}\n  {\"name\": \"CategoryTheory.Abelian.mono_of_epi_of_epi_of_mono\", \"module\": \"Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {R₁ R₂ : CategoryTheory.ComposableArrows C 2} (φ : R₁ ⟶ R₂),\\n  R₁.Exact →\\n    R₂.Exact →\\n      CategoryTheory.Epi\\n          (R₁.map' 1 2 CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono'._proof_6\\n \", \"doc\": \"In an abelian category, given two exact sequences $R_1$ and $R_2$ connected by a natural transformation $\\\\phi$, if the morphism $R_1(1\\\\to 2)$ is an epimorphism, the component $\\\\phi_0$ is an epimorphis\"}\n  {\"name\": \"CategoryTheory.ShortComplex.Exact.exact_up_to_refinements\", \"module\": \"Mathlib/CategoryTheory/Abelian/Refinements\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {S : CategoryTheory.ShortComplex C},\\n  S.Exact →\\n    ∀ {A : C} (x₂ : A ⟶ S.X₂),\\n      CategoryTheory.CategoryStruct.comp x₂ S.g = 0 →\\n        ∃ A' π,\\n          ∃ (_ : CategoryTheory.Epi π),\\n         \", \"doc\": \"In an abelian category $\\\\mathcal{C}$, given an exact short complex $S: X_1 \\\\xrightarrow{f} X_2 \\\\xrightarrow{g} X_3$ and a morphism $x_2: A \\\\to X_2$ satisfying $x_2 \\\\circ g = 0$, there exists an object\"}\n  {\"name\": \"CategoryTheory.Abelian.epi_of_mono_of_epi_of_mono'\", \"module\": \"Mathlib/CategoryTheory/Abelian/DiagramLemmas/Four\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  {R₁ R₂ : CategoryTheory.ComposableArrows C 2} (φ : R₁ ⟶ R₂),\\n  R₁.Exact →\\n    R₂.map' 0 2 CategoryTheory.Abelian.mono_of_epi_of_mono_of_mono'._proof_2\\n          CategoryTheory.Abelian.mono_of_epi_of_\", \"doc\": \"In an abelian category, given exact sequences and morphisms satisfying $R_2(0 \\to 2) = 0$, with $R_2(0 \\to 1)$ a monomorphism, $\\\\phi_1$ an epimorphism, and $\\\\phi_2$ a monomorphism, it follows that $\\\\phi\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the full finite exact-functor tower with prescribed graded factors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Filtration, CategoryTheory.ShortComplex.ShortExact",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the full finite exact-functor tower with prescribed graded factors"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]iltration.*([Ee]xtension|[Ss]hortExact|[Ee]xact)|[Ss]hortExact.*[Ff]iltration",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the full finite exact-functor tower with prescribed graded factors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given filtrations of subobjects and quotients in a finite tower of short exact sequences construct a finite filtration with the exact prescribed graded objects",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsModuleFiltration.toIsFiltration\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"∀ {ι : Type u_1} {ιM : Type u_2} (R : Type u_3) {M : Type u_4} {σ : Type u_5} {σM : Type u_6} {inst : AddMonoid ι}\\n  {inst_1 : PartialOrder ι} {inst_2 : PartialOrder ιM} {inst_3 : VAdd ι ιM} {inst_4 : Semiring R} {inst_5 : SetLike σ R}\\n  {inst_6 : AddCommMonoid M} {inst_7 : Module R M} {inst_8 : Set\", \"doc\": \"If a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration (i.e., each $F_i$ is a submodule, the filtration is increasing, and compatible with additio\"}\n  {\"name\": \"IsModuleFiltration\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [PartialOrder ιM] →\\n                  [VAdd ι ιM] →\\n                    [\", \"doc\": \"A predicate asserting that a family of subsets $\\\\{F_i\\\\}_{i \\\\in \\\\iota}$ of a module $M$ over a semiring $R$ forms a module filtration, where $\\\\iota$ is an ordered additive monoid. This requires that ea\"}\n  {\"name\": \"MeasureTheory.Filtration.mk.congr_simp\", \"module\": \"Mathlib.Probability.Process.Filtration\", \"type\": \"∀ {Ω : Type u_1} {ι : Type u_2} [inst : Preorder ι] {m : MeasurableSpace Ω} (seq seq_1 : ι → MeasurableSpace Ω)\\n  (e_seq : seq = seq_1) (mono' : Monotone seq) (le' : ∀ (i : ι), seq i ≤ m),\\n  { seq := seq, mono' := mono', le' := le' } = { seq := seq_1, mono' := ⋯, le' := ⋯ }\", \"doc\": \"If two sequences of σ-algebras are equal, each σ-algebra in the sequence is coarser than a given σ-algebra $ m $, and the sequence is monotonic with respect to a preorder, then the filtrations constru\"}\n  {\"name\": \"IsModuleFiltration.mk_int\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"(F : ℤ → σ) (mono : Monotone F) [SetLike.GradedMonoid F] (F' : ℤ → σM) (mono' : Monotone F')\\n  [SetLike.GradedSMul F F'] :\\n  letI := IsRingFiltration.mk_int F mono\\n  IsModuleFiltration F (fun n ↦ F (n - 1)) F' (fun n ↦ F' (n - 1))\", \"doc\": \"Given a monotone family $ F : \\\\mathbb{Z} \\\\to \\\\sigma $ of subsets of a semiring $ R $ forming a graded monoid, and a monotone family $ F' : \\\\mathbb{Z} \\\\to \\\\sigma_M $ of subsets of an $ R $-module $ M $\"}\n  {\"name\": \"MeasureTheory.Filtration.mk.inj\", \"module\": \"Mathlib.Probability.Process.Filtration\", \"type\": \"∀ {Ω : Type u_1} {ι : Type u_2} {inst : Preorder ι} {m : MeasurableSpace Ω} {seq : ι → MeasurableSpace Ω}\\n  {mono' : Monotone seq} {le' : ∀ (i : ι), seq i ≤ m} {seq_1 : ι → MeasurableSpace Ω} {mono'_1 : Monotone seq_1}\\n  {le'_1 : ∀ (i : ι), seq_1 i ≤ m},\\n  { seq := seq, mono' := mono', le' := le' } \", \"doc\": \"If two filtrations constructed from monotonic families of σ-algebras $(\\\\mathcal{F}_i)_{i \\\\in \\\\iota}$ and $(\\\\mathcal{G}_i)_{i \\\\in \\\\iota}$ (each coarser than a fixed σ-algebra $m$) are equal, then the d\"}\n  {\"name\": \"Ideal.Filtration.mk.inj\", \"module\": \"Mathlib.RingTheory.Filtration\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} {I : Ideal R} {M : Type u_3} {inst_1 : AddCommGroup M} {inst_2 : Module R M}\\n  {N : ℕ → Submodule R M} {mono : ∀ (i : ℕ), N (i + 1) ≤ N i} {smul_le : ∀ (i : ℕ), I • N i ≤ N (i + 1)}\\n  {N_1 : ℕ → Submodule R M} {mono_1 : ∀ (i : ℕ), N_1 (i + 1) ≤ N_1 i} {smul_le_1 \", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, if two decreasing sequences of submodules $ (N_i) $ and $ (N'_i) $ satisfy $ N_{i+1} \\\\subseteq N_i $, $ N'_{i+1} \\\\subs\"}\n  {\"name\": \"IsFiltration.casesOn\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {A : Type u_2} →\\n    {σ : Type u_3} →\\n      [inst : Preorder ι] →\\n        [inst_1 : SetLike σ A] →\\n          {F F_lt : ι → σ} →\\n            {motive : IsFiltration F F_lt → Sort u} →\\n              (t : IsFiltration F F_lt) →\\n                ((mono : Monotone F) →\\n                  \", \"doc\": \"Given a filtration $(F, F_<)$ indexed by a preorder $\\\\iota$ over set-like structures $\\\\sigma$ on $A$, this recursor allows defining properties or constructions depending on the filtration by specifyin\"}\n  {\"name\": \"IsModuleFiltration.recOn\", \"module\": \"Mathlib.RingTheory.FilteredAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {ιM : Type u_2} →\\n    {R : Type u_3} →\\n      {M : Type u_4} →\\n        {σ : Type u_5} →\\n          {σM : Type u_6} →\\n            [inst : AddMonoid ι] →\\n              [inst_1 : PartialOrder ι] →\\n                [inst_2 : PartialOrder ιM] →\\n                  [inst_3 : VAdd ι ιM] →\\n   \", \"doc\": \"A recursor for the module filtration predicate, allowing definition by recursion on the structure of an IsModuleFiltration by providing a constructor that uses the underlying IsFiltration and GradedSM\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no returned declaration states the full finite exact-functor tower with prescribed graded factors"
+  },
+  {
+   "tool": "grep",
+   "query": "cokernel.*(pullback|map.*[Ii]so)|pullback.*cokernel|isIso.*cokernel",
+   "results": {
+    "t": "2026-10-23T15:11:55Z",
+    "tool": "grep",
+    "query": "cokernel.*(pullback|map.*[Ii]so)|pullback.*cokernel|isIso.*cokernel",
+    "sub": "CategoryTheory/Abelian",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/FunctorCategory.lean",
+     "Mathlib/CategoryTheory/Abelian/Transfer.lean",
+     "Mathlib/CategoryTheory/Abelian/Pseudoelements.lean",
+     "Mathlib/CategoryTheory/Abelian/Pseudoelements.lean",
+     "Mathlib/CategoryTheory/Abelian/Pseudoelements.lean",
+     "Mathlib/CategoryTheory/Abelian/Pseudoelements.lean",
+     "Mathlib/CategoryTheory/Abelian/Pseudoelements.lean",
+     "Mathlib/CategoryTheory/Abelian/Basic.lean"
+    ],
+    "digest": "08b9ffc854592f84"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete prescribed-factor tower statement; hits concern exact functors or local cokernel calculus only"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_cokernel_map_of_isPushout|isPushout_of_isPullback|isPushout.*[Ee]pi|epi.*isPushout",
+   "results": {
+    "t": "2026-10-23T15:18:53Z",
+    "tool": "grep",
+    "query": "isIso_cokernel_map_of_isPushout|isPushout_of_isPullback|isPushout.*[Ee]pi|epi.*isPushout",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 22,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/MorphismProperty/Limits.lean",
+     "Mathlib/CategoryTheory/Abelian/CommSq.lean",
+     "Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean",
+     "Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean",
+     "Mathlib/CategoryTheory/Limits/EpiMono.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Square.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/NormalMono/Basic.lean",
+     "Mathlib/CategoryTheory/Limits/Shapes/Pullback/Mono.lean"
+    ],
+    "digest": "81c91b29f79f0a6e"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete prescribed-factor tower statement; hits concern exact functors or local cokernel calculus only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite increasing filtrations in an abelian category can be spliced by inverse images through a tower of exact functors with prescribed successive quotients",
+   "results": {
+    "t": "2026-10-23T15:20:26Z",
+    "tool": "leansearch",
+    "query": "Finite increasing filtrations in an abelian category can be spliced by inverse images through a tower of exact functors with prescribed successive quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "IsModuleFiltration",
+     "CategoryTheory.instIsFilteredOrEmptyGrothendieckOfαCategoryObjCat",
+     "CategoryTheory.Functor.exact_tfae",
+     "IsFiltration.casesOn",
+     "IsFiltration.recOn",
+     "IsFiltration.rec",
+     "IsFiltration.mk",
+     "IsModuleFiltration.mk"
+    ],
+    "digest": "12bdef9510df21a8"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the complete prescribed-factor tower statement; hits concern exact functors or local cokernel calculus only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-reduced-frontier-mixed-gluing",
+  "date": "2026-10-22",
+  "group": "Q58"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Final paragraph, “Splice the resulting finite filtrations using inverse images under the quotient map” and “starting at the last nonempty member of the chain”; old gluing proof steps 4 and 6, in their purely abelian-category form.",
+   "via": [
+    "lem-zl-reduced-frontier-mixed-gluing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-zl-exact-functor-tower-filtration-splicing",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all existing search records. Expanded the inverse-image construction into a descending induction, with explicit pullback representatives, refinement-based epimorphicity and quotient exactness, representative comparisons, lengths and labels. Every non-elementary ingredient already has a DAG node; no new nodes.",
+  "blueprint": "thm-zl-real-mixed-by-curves final paragraph: exact pushforward transports the finite filtrations (step 1); inverse images under the quotient map (steps 2-4); start at the last nonempty member and splice (step 5); finite global filtration and retained weights (step 6).",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NN-3efc19786",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-3efc19786 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes and no repair note, so the re-split rule does not apply. The statement is unchanged and fits its only citer, lem-zl-reduced-frontier-mixed-gluing (T_a=i_{a*}). Source checked: the final paragraph of thm-zl-real-mixed-by-curves.proof.md, which is identical in main-20261015 and latest. Step 1: lem-sp-exact-functor-preserves-homology(a) states nested-subobject preservation and Φ(T/S)≅ΦT/ΦS, and its hypotheses are met by additive + exact T_a; S_0=0 follows from additivity. Step 2: the pullback R_s is the kernel of (π,−j_s); h_s is monic by cancelling the mono j_s; i_s is monic since h_s i_s=h_{s-1}; R_0=u(K) and R_m=H. Step 3: refinements(a) applied both ways shows p_s is epi (pullback of an epi, Stacks 05PK(1), homology.tex:919). Step 4: refinements(c) on q_s=coker f_s gives the lift z with i_s z=yρ, (b) gives exactness (im=ker in both nodes), and exact-epi-cokernel(a) gives R_s/R_{s-1}≅T_a(L_s/L_{s-1}). Step 5: lem-sfb-subobject-inclusion-cokernel is Lean-closed (cokernelOfLEMkIso, Devissage:56), so no tool_use is needed; f=gφ, α=id; junction A_{n_a}=R_0; length n_a+N_{a+1}=N_a; order preserved. Step 6: labels follow by induction on c−a plus isomorphism invariance. proof_deps equals the union of the uses. Edge cases checked: t=0, n_a=0, all n_a=0, S_s=0, repeated subobjects, and the nonsplit Z/2→Z/4→Z/2 example. A DAG grep found no duplicate (lem-a1-extension-bounds and lem-a1-mixed-direct-summand are weaker). No SGA. The only cosmetic issue is V\\prime for V'; nothing to fix."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactFunctorTowerFiltrationSplicing",
+  "declaration": "CategoryTheory.exactFunctorTowerFiltrationSplicing",
+  "file": "lean/Sheaf/CategoryTheory/ExactFunctorTowerFiltrationSplicing.lean",
+  "statement": "theorem exactFunctorTowerFiltrationSplicing (t : ℕ) (A : Fin (t + 1) → Type u) [hcat : ∀ a, Category.{v} (A a)] [hab : ∀ a, Abelian (A a)] (T : ∀ a : Fin t, A a.succ ⥤ A a.castSucc) (hadd : ∀ a, (T a).Additive) (hlim : ∀ a, PreservesFiniteLimits (T a)) (hcol : ∀ a, PreservesFiniteColimits (T a)) (H : ∀ a : Fin (t + 1), A a) (hHt : IsZero (H ⟨t, by omega⟩)) (K : ∀ a : Fin t, A a.castSucc) (u : ∀ a : Fin t, K a ⟶ H a.castSucc) (π : ∀ a : Fin t, H a.castSucc ⟶ (T a).obj (H a.succ)) (huπ : ∀ a, u a ≫ π a = 0) (hu : ∀ a, IsLimit (KernelFork.ofι (u a) (huπ a))) (hπ : ∀ a, IsColimit (CokernelCofork.ofπ (π a) (huπ a))) (n : ∀ a : Fin t, ℕ) (Ks : ∀ a : Fin t, Fin (n a + 1) → Subobject (K a)) (hKzero : ∀ a, Ks a 0 = ⊥) (hKtop : ∀ a, Ks a (Fin.last (n a)) = ⊤) (hKmono : ∀ (a : Fin t) (s : Fin (n a)), Ks a s.castSucc ≤ Ks a s.succ) (P : ∀ a : Fin (t + 1), ℝ → Set (A a)) (hPinv : ∀ a v X Y, X ∈ P a v → Nonempty (X ≅ Y) → Y ∈ P a v) (hPT : ∀ (a : Fin t) v X, X ∈ P a.succ v → (T a).obj X ∈ P a.castSucc v) (v : ∀ a : Fin t, Fin (n a) → ℝ) (hQ : ∀ (a : Fin t) (s : Fin (n a)), cokernel (Subobject.ofLE (Ks a s.castSucc) (Ks a s.succ) (hKmono a s)) ∈ P a.castSucc (v a s)) : ∃ (N : Fin (t + 1) → ℕ) (F : ∀ a : Fin (t + 1), ℕ → Subobject (H a)) (V : ∀ (a c : Fin (t + 1)), a ≤ c → A c ⥤ A a) (hVid : ∀ a, V a a le_rfl = 𝟭 (A a)) (hVstep : ∀ (a : Fin t) (c : Fin (t + 1)) (hac : a.succ ≤ c), V a.castSucc c ((Fin.castSucc_le_succ a).trans hac) = V a.succ c hac ⋙ T a) (hN : ∀ a, N a = ∑ b : Fin t, if a.val ≤ b.val then n b else 0) (hFzero : ∀ a, F a 0 = ⊥) (hFtop : ∀ a, F a (N a) = ⊤) (hFmono : ∀ a r, F a r ≤ F a (r + 1)) (hFkernel : ∀ (a : Fin t) (r : Fin (n a + 1)), F a.castSucc r = imageSubobject ((Ks a r).arrow ≫ u a)) (hFpullback : ∀ (a : Fin t) (r : ℕ), r ≤ N a.succ → F a.castSucc (n a + r) = (Subobject.pullback (π a)).obj (imageSubobject ((T a).map (F a.succ r).arrow))) (hQFkernel : ∀ (a : Fin t) (r : Fin (n a)), Nonempty (cokernel (Subobject.ofLE (F a.castSucc r) (F a.castSucc (r + 1)) (hFmono a.castSucc r)) ≅ cokernel (Subobject.ofLE (Ks a r.castSucc) (Ks a r.succ) (hKmono a r)))) (hQFtail : ∀ (a : Fin t) (r : ℕ), r < N a.succ → Nonempty (cokernel (Subobject.ofLE (F a.castSucc (n a + r)) (F a.castSucc (n a + r + 1)) (hFmono a.castSucc (n a + r))) ≅ (T a).obj (cokernel (Subobject.ofLE (F a.succ r) (F a.succ (r + 1)) (hFmono a.succ r))))), ∀ (a : Fin (t + 1)) (c : Fin t) (hac : a ≤ c.castSucc) (s : Fin (n c)) (r : ℕ), r = (∑ b : Fin t, if a.val ≤ b.val ∧ b.val < c.val then n b else 0) + s.val → Nonempty (cokernel (Subobject.ofLE (F a r) (F a (r + 1)) (hFmono a r)) ≅ (V a c.castSucc hac).obj (cokernel (Subobject.ofLE (Ks c s.castSucc) (Ks c s.succ) (hKmono c s)))) ∧ cokernel (Subobject.ofLE (F a r) (F a (r + 1)) (hFmono a r)) ∈ P a (v c s)",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f29c0bb7",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Statement verbatim in file, single sorry, docstrings carry source+blueprint+6 proof steps; no new nodes/statement_change. Clause check: abelian family, additive+PreservesFinite{Limits,Colimits} T_a, kernel/cokernel universal properties (no splitting), Subobject filtrations with ≤, Q as cokernel(ofLE); composite V pinned by hVid/hVstep (unique, T_{a,c}=T_a∘T_{a+1,c}); N sum correct (N(castSucc a)=n a+N(succ a)); F images of u (hFkernel) then Subobject.pullback π of imageSubobject(T.map L.arrow) (hFpullback), junction derived; hQFkernel/hQFtail and final ordered clause r=Σ_{a≤b<c}n_b+s give T_{a,c}Q_{c,s} and labels P a (v c s). Edge cases t=0, all n=0, empty blocks, last stage, nonsplit all covered. Single u/v universe for the Fin-indexed family is disclosed and fits the only citer. Source thm-zl-real-mixed-by-curves.proof.md l.89-105 matches. No H4 duplicate; Mathlib subobject API only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261024T233321-L-2450578",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.exactFunctorTowerFiltrationSplicing"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "id": "lem-sf-rational-dualizing-identification",
+ "kind": "statement",
+ "title": "Structure exceptional value of the rational coefficient unit",
+ "statement": "Fix the finite-field datum D, l different from its characteristic, a separated finite-type D.k-scheme X, an algebraic closure Ω of Q_l, and any normalized exceptional system S at the structure morphism [def-weil-exceptional-inverse-image]. For any finite coefficient field F and coherent integral dualizing datum w [def-sf-coherent-integral-dualizing-datum], the rationalization of w.omega is isomorphic to the value of S at its recorded structure compactification and rational F on coefficientUnit, the localized completed regular module. This is DualizingIdentification [def-sf-rational-verdier-identifications].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
+  "place": "lem-coef-rational-operations, original DAG steps 11"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-sf-rational-verdier-identifications",
+  "def-sf-rational-verdier-data",
+  "def-weil-exceptional-inverse-image",
+  "def-sf-coherent-integral-dualizing-datum"
+ ],
+ "proof": [
+  {
+   "text": "The left adjoint $A_E$ of Step 10 is the rational compact-support functor: its integral representative and strict finite-reduction tower are exactly the ones in the definition of rational compact support. Likewise $G_E$ is the rationalized finite-stage exceptional inverse image specified in the exceptional-inverse-image definition. Localizing the integral formula, using the already identified pullback and duality functors, gives $Rf_E^!M\\cong D_{X,E}f^*D_{Y,E}M$. If either operation is instead characterized by the adjunction, its comparison is forced by the counit: the unique map between right adjoints whose transpose is the other counit is inverse to the reverse comparison, since both composites transpose to the original counit. This proves preservation of the units and counits too. For $f=a_X$, the integral theorem identifies $G_R(R)$ with $\\omega_{X,R}$, so rationalizing gives $Ra_{X,E}^!E=\\omega_{X,E}$.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-coef-integral-exceptional-adjoint",
+    "thm-coef-rational-verdier"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
+    "place": "Proof, paragraph 7: identify the prescribed operations, formula and structure-morphism value"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-coef-integral-exceptional-adjoint",
+  "thm-coef-rational-verdier"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-coef-rational-operations.md",
+  "place": "Formal interface for the cited steps; complete representative and comparison argument retained in the theorem docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A tensor Hom adjunction descends to scalar localization",
+   "results": "ModuleCat.monoidalClosedHomEquiv; IsLocalizedModule.mapExtendScalars; scalar module facts only, no normalized pro-etale constructible adjunction.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rationalization of a tensor internal Hom adjunction and compatibility of exceptional inverse image with finite scalar extension",
+   "results": "LightCondensed.ihomPoints_symm_comp; Grothendieck tensorObjPreadditiveCoyonedaObjAdjunction. Different categories and no coefficient normalizations.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "ofNatIsoRight and component laws; used with ofNatIsoLeft to construct exceptionalIdentificationOfIso. Does not give the geometric isomorphism or scalar square.",
+   "date": "2026-10-25",
+   "verdict": "tool for the proved adjunction-transport construction only"
+  },
+  {
+   "tool": "grep",
+   "query": "HomIdentification|DualizingIdentification|rational.*[Aa]djunction",
+   "results": "msearch Mathlib: zero hits. rg of source RationalOperations: etale-domain rational adjunction requires ambient adjoints and omits scalar compatibility, hence does not specialize. Project exact interfaces occur only in assigned module and its consumers; no theorem supplying these separate assertions.",
+   "date": "2026-10-25",
+   "verdict": "no duplicate statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalOperations",
+  "date": "2026-10-25",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Proof steps 11",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalDualizingIdentification",
+  "file": "lean/Sheaf/SixFunctors/RationalDualizingIdentification.lean",
+  "declaration": "WeilConjectures.RationalOperations.rationalDualizing_identification",
+  "statement": "theorem rationalDualizing_identification\n    (S : structureSystem l X D hl Ω) (F : FieldStage.{u} l)\n    (w : IntegralFiniteExtension.DualizingDatum l X D hl F.carrier) :\n    DualizingIdentification l X D hl Ω S F w",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-849a5",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261025T100911-L-3636679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-849a5",
+  "group": "D2",
+  "result": "fix",
+  "landing": "20261025T100911-L-3636679",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalOperationsData vs published RationalOperations prefix (verbatim, imports only differ); item proof vs exists_system/coef_rational_verdier/dualizingDatum_nonempty + 3 new sorry statements read against RationalVerdier.Datum/TensorPresentation/DualizingDatum pinning; nodes vs Lean; 11 direct importers compiled against sandbox build"
+ }
+}

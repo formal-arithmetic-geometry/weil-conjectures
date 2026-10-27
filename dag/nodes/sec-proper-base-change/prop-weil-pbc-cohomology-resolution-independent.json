@@ -55,7 +55,32 @@
   "latex:proposition"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CochainComplex.IsKInjective.nonempty_homology_iso"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CochainComplex.IsKInjective.nonempty_homology_iso",
+     "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective",
+     "lines": [
+      53,
+      70
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective",
   "declaration": "CochainComplex.IsKInjective.nonempty_homology_iso",
@@ -87,19 +112,24 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed by the lead of H1; spot-checked by L: L: K-injective resolutions homotopy equivalent; Lean IsKInjective.nonempty_homology_iso noted"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\mathcal C$ and $\\mathcal D$ be abelian categories, $G:\\mathcal C\\to\\mathcal D$\nan additive functor, and $K$ a complex in $\\mathcal C$. If $K\\to I^\\bullet$ and\n$K\\to J^\\bullet$ are two K-injective resolutions\n[def-weil-pbc-kinjective-resolutions] of $K$, then for every $q$ the objects\n$\\mathcal H^q(G(I^\\bullet))$ and $\\mathcal H^q(G(J^\\bullet))$ are isomorphic.\n\nIn particular, let $T$ be a scheme and $F$ an etale abelian sheaf on the small\netale site [def-weil-pbc-etale-site] of $T$. For $G=\\Gamma(T,-)$ and $K=F$\nplaced in degree $0$, the groups $\\mathcal H^q(\\Gamma(T,I^\\bullet))$ and\n$\\mathcal H^q(\\Gamma(T,J^\\bullet))$ are isomorphic, so the groups\n$H^q(T_{\\Et},F)$ of [def-weil-pbc-etale-cohomology] are independent of the\nchosen resolution.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ and $\\mathcal D$ be abelian categories, $G:\\mathcal C\\to\\mathcal D$\nan additive functor, and $K$ a complex in $\\mathcal C$. If $K\\to I^\\bullet$ and\n$K\\to J^\\bullet$ are two K-injective resolutions\n[def-sp-kinjective-bridge] of $K$, then for every $q$ the objects\n$\\mathcal H^q(G(I^\\bullet))$ and $\\mathcal H^q(G(J^\\bullet))$ are isomorphic.\n\nIn particular, let $T$ be a scheme and $F$ an etale abelian sheaf on the small\netale site [def-weil-pbc-etale-site] of $T$. For $G=\\Gamma(T,-)$ and $K=F$\nplaced in degree $0$, the groups $\\mathcal H^q(\\Gamma(T,I^\\bullet))$ and\n$\\mathcal H^q(\\Gamma(T,J^\\bullet))$ are isomorphic, so the groups\n$H^q(T_{\\Et},F)$ of [def-weil-pbc-etale-cohomology] are independent of the\nchosen resolution.",
   "proof": [
    {
-    "text": "The two K-injective resolutions of $K$ are chain-homotopy equivalent (a\nquasi-isomorphism between K-injective complexes is a homotopy equivalence;\ncompare [prop-weil-pbc-kinjective-resolutions-exist]), so there are chain maps\n$I^\\bullet\\to J^\\bullet$ and $J^\\bullet\\to I^\\bullet$ over $K$ whose\ncomposites are homotopic to the identities. The additive functor\n$G$ (for instance $\\Gamma(T,-)$ of [def-weil-pbc-etale-cohomology]) carries chain maps\nto chain maps and preserves homotopies and composites, so\n$G(I^\\bullet)$ and $G(J^\\bullet)$ are chain-homotopy equivalent complexes. Chain-homotopy equivalent complexes\nhave isomorphic cohomology in every degree, so $\\mathcal\nH^q(G(I^\\bullet))\\cong\\mathcal H^q(G(J^\\bullet))$ for all $q$.\nFor $G=\\Gamma(T,-)$ and $K=F$ these cohomology groups are the groups $H^q(T_{\\Et},F)$ of\n[def-weil-pbc-etale-cohomology], which is therefore independent of the\nresolution, the resolutions being those of\n[def-weil-pbc-kinjective-resolutions].",
+    "text": "The two K-injective resolutions of $K$ are chain-homotopy equivalent (a\nquasi-isomorphism between K-injective complexes is a homotopy equivalence;\ncompare [prop-weil-pbc-kinjective-resolutions-exist]), so there are chain maps\n$I^\\bullet\\to J^\\bullet$ and $J^\\bullet\\to I^\\bullet$ over $K$ whose\ncomposites are homotopic to the identities. The additive functor\n$G$ (for instance $\\Gamma(T,-)$ of [def-weil-pbc-etale-cohomology]) carries chain maps\nto chain maps and preserves homotopies and composites, so\n$G(I^\\bullet)$ and $G(J^\\bullet)$ are chain-homotopy equivalent complexes. Chain-homotopy equivalent complexes\nhave isomorphic cohomology in every degree, so $\\mathcal\nH^q(G(I^\\bullet))\\cong\\mathcal H^q(G(J^\\bullet))$ for all $q$.\nFor $G=\\Gamma(T,-)$ and $K=F$ these cohomology groups are the groups $H^q(T_{\\Et},F)$ of\n[def-weil-pbc-etale-cohomology], which is therefore independent of the\nresolution, the resolutions being those of\n[def-sp-kinjective-bridge].",
     "uses": [
      "prop-weil-pbc-kinjective-resolutions-exist",
      "def-weil-pbc-etale-cohomology",
-     "def-weil-pbc-kinjective-resolutions"
+     "def-sp-kinjective-bridge"
     ],
     "elementary": false
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,286 @@
+{
+ "id": "lem-sfb-local-generic-unit-factorization",
+ "kind": "statement",
+ "title": "Local factorization of units on an integral generic fibre",
+ "statement": "Let $A\\to B$ be a flat local homomorphism [def-weil-pbc-flat-ring-map] of commutative Noetherian integral domains [def-weil-pbc-noetherian-ring], with $A$ normal [def-weil-pbc-normal-ring]. Here local means that $A,B$ each have a unique maximal ideal and the inverse image of the maximal ideal of $B$ is the maximal ideal of $A$. Write $K=\\operatorname{Frac}(A)$, and identify $A,B,K$ with their images in $\\operatorname{Frac}(B)$ under this injective map. Assume that for every prime ideal $\\mathfrak p\\subset A$, the ring obtained from $B/\\mathfrak pB$ by inverting all images of $A\\setminus\\mathfrak p$ is a nonzero integral domain; these are the integral nonempty fibres. Put $B_K=(A\\setminus\\{0\\})^{-1}B$, the ring of fractions $b/a$ with $b\\in B$ and $0\\ne a\\in A$. Then every $f\\in B_K^\\times$ can be written $f=h u$ with $h\\in K^\\times$ and $u\\in B^\\times$. The factor $h$ is unique modulo $A^\\times$: if $f=h u=h'u'$ with $u,u'\\in B^\\times$, then $h/h'\\in A^\\times$. In particular, for $h\\in K^\\times$, its image is a unit of $B$ if and only if $h\\in A^\\times$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD7, lemma-in-image-pullback, proof, affine/local ring factorization paragraph: from s=a/r=r_prime/a_prime through the symbolic-power ideals I,I_prime and s=u g/r. The unit-reflection uniqueness is the same proof's uniqueness for a faithfully flat local map. This statement is the local commutative-algebra input, not the conclusion about an invertible sheaf or a Cartier divisor."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\mathfrak m_A,\\mathfrak m_B$ be the maximal ideals. Locality gives $\\mathfrak m_AB\\subseteq\\mathfrak m_B$, so $B/\\mathfrak m_AB\\ne0$. The local case of the faithful-flatness criterion makes $A\\to B$ faithfully flat. Ideal contraction gives $JB\\cap A=J$ for every ideal $J\\subseteq A$, in particular injectivity. These facts justify all the inclusions into $\\operatorname{Frac}(B)$ used below.",
+   "uses": [
+    "lem-weil-pbc-flat-module-faithfully-flat-maximal-ideals",
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, affine paragraph, faithful-flat descent; algebra.tex Tags 00HP (lemma-ff), 05CK (lemma-faithfully-flat-universally-injective)"
+   }
+  },
+  {
+   "text": "For any prime $\\mathfrak p\\subset A$ and any $s\\in A\\setminus\\mathfrak p$, multiplication by $s$ on $A/\\mathfrak p$ is injective. Flat tensor exactness, identifying $(A/\\mathfrak p)\\otimes_A B$ with $B/\\mathfrak pB$ via $\\bar a\\otimes b\\mapsto\\overline{ab}$, makes multiplication by $s$ injective on $B/\\mathfrak pB$. Thus $B/\\mathfrak pB$ injects into its localization at $A\\setminus\\mathfrak p$: a class killed by localization is killed by one such $s$ and hence is zero. By the integral nonempty fibre hypothesis this localization is a nonzero domain. Therefore $B/\\mathfrak pB$ is a nonzero domain and $\\mathfrak q=\\mathfrak pB$ is prime. Its contraction is $\\mathfrak p$ by step 1. This supplies the justification for the source\\'s assertion that $\\mathfrak pB$ is prime.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, affine paragraph: q_i=p_iA is prime; algebra.tex Tag 00HD (lemma-flat)"
+   }
+  },
+  {
+   "text": "Choose presentations $f=a/r$ and $f^{-1}=a\\prime/r\\prime$ with $a,a\\prime\\in B$ and $r,r\\prime\\in A\\setminus\\{0\\}$. Equality in the fraction field gives $aa\\prime=rr\\prime=t\\ne0$. In particular $a,a\\prime\\ne0$. Let $\\mathfrak p_1,\\ldots,\\mathfrak p_n$ be all primes minimal over $(t)$; the set is finite. The principal ideal height bound and $t\\ne0$ show that each has height one. Their localizations $A_i=A_{\\mathfrak p_i}$ are discrete valuation rings by the cited normal-domain valuation statement. Write $m_i=v_{\\mathfrak p_i}(t)\\geq1$. If $t$ is a unit the list is empty; every ideal intersection below then means the whole ring.",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-sfb-krull-principal-ideal-height-bound",
+    "lem-trf-normal-domain-principal-divisor-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, affine paragraph s=a/r and s=r_prime/a_prime; algebra.tex Tags 00FR, 00KV, 031S, 00PD"
+   }
+  },
+  {
+   "text": "For each $i$ choose a uniformizer $\\pi_i\\in A_i$. Set $\\mathfrak q_i=\\mathfrak p_iB$. Since $\\mathfrak q_i\\cap A=\\mathfrak p_i$, the fraction rule defines $A_i\\to B_i=B_{\\mathfrak q_i}$. The maximal ideal of $B_i$ is $\\mathfrak q_iB_i=\\mathfrak p_iB_i=\\pi_iB_i$. The ring $B_i$ is a Noetherian local domain: use localization permanence for Noetherianity, and the fraction construction for the domain assertion. The image of $\\pi_i$ is nonzero and is a nonunit. The unit-times-power lemma therefore gives $a=u_i\\pi_i^{e_i}$ and $a\\prime=u_i\\prime\\pi_i^{e_i\\prime}$ in $B_i$ with units $u_i,u_i\\prime$ and nonnegative integers $e_i,e_i\\prime$. In $A_i$ the same lemma writes $t=w_i\\pi_i^{m_i}$ with a unit $w_i$ (the exponent equals the normalized valuation from step 3). Its image is still a unit in $B_i$. Cancelling powers in $aa\\prime=t$ proves $e_i+e_i\\prime=m_i$: unequal exponents would make a positive power of the nonunit $\\pi_i$ a unit.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, affine paragraph: the two local DVRs, ramification index 1, and e_i+e_i_prime; algebra.tex Tags 00FN, 00PD"
+   }
+  },
+  {
+   "text": "For a prime $P$ of a ring $T$ write $P^{(j)}=\\{x\\in T:x/1\\in P^jT_P\\}$ for $j\\geq0$. We claim $\\bigcap_i\\mathfrak p_i^{(m_i)}=(t)$. One inclusion follows from $tA_i=\\mathfrak p_i^{m_i}A_i$. Conversely take $x$ in the intersection and consider its class in $A/tA$. Every associated prime of $A/tA$ has height one by the cited normal-domain quotient theorem. It contains $t$ (it is the annihilator of a class modulo $t$), and hence is minimal over $(t)$: a smaller prime containing $t\\ne0$ would give a chain of length two starting at $(0)$. It is therefore one of the $\\mathfrak p_i$. The class of $x$ vanishes in all these localizations, because $x\\in tA_i$. The cited injectivity into the product of associated-prime localizations gives $x\\in(t)$. This also proves the claim for the empty list, when $A/tA=0$.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, displayed intersection for (rr_prime); algebra.tex Tags 031T (lemma-normal-domain-intersection-localizations-height-1), 0311 (lemma-zero-at-ass-zero)"
+   }
+  },
+  {
+   "text": "Set $I=\\bigcap_i\\mathfrak p_i^{(e_i)}$ and $I\\prime=\\bigcap_i\\mathfrak p_i^{(e_i\\prime)}$. For $x\\in I$ and $y\\in I\\prime$, localization at $\\mathfrak p_i$ puts $xy$ in $\\mathfrak p_i^{e_i+e_i\\prime}A_i=\\mathfrak p_i^{m_i}A_i$. Step 5 gives $xy\\in(t)$. Finite sums of such products give $II\\prime\\subseteq(t)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, affine paragraph defining I,I_prime and observing II_prime contained in (rr_prime)"
+   }
+  },
+  {
+   "text": "Extension to $B$ preserves these finite intersections. Indeed for any finite family of ideals $J_i\\subseteq A$, the sequence $0\\to\\bigcap_iJ_i\\to A\\to\\bigoplus_i A/J_i$, with the quotient maps as components, is exact. Flat tensor exactness identifies its tensor with $0\\to(\\bigcap_iJ_i)\\otimes_A B\\to B\\to\\bigoplus_iB/J_iB$. The image of the left map is $(\\bigcap_iJ_i)B$, whereas the kernel of the right map is $\\bigcap_iJ_iB$; the quotient identification sends $\\bar x\\otimes b$ to $\\overline{xb}$. For an empty family both sides are $B$. Now apply symbolic-power flat extension to each prime pair $(\\mathfrak p_i,\\mathfrak q_i)$ from step 2. This yields $IB=\\bigcap_i\\mathfrak q_i^{(e_i)}$ and $I\\prime B=\\bigcap_i\\mathfrak q_i^{(e_i\\prime)}$. The local factorizations of step 4 place $a$ in $IB$ and $a\\prime$ in $I\\prime B$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-sfb-symbolic-powers-flat-prime-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, equalities for IA and I_prime A; algebra.tex Tags 0BBY (lemma-flat-intersect-ideals), 0BC0 (lemma-symbolic-power-flat-extension)"
+   }
+  },
+  {
+   "text": "Step 6 gives $(II\\prime)B\\subseteq tB$, while $t=aa\\prime\\in(IB)(I\\prime B)=(II\\prime)B$ gives the reverse inclusion. Here extension commutes with ideal multiplication directly by expanding finite sums of generators. Contracting both ideals by faithful flatness gives $II\\prime=(t)$ in $A$. We now use locality to write out the principal-product argument. Express $t=\\sum_{j=1}^N x_jy_j$ with $x_j\\in I$, $y_j\\in I\\prime$. Since every $x_jy_j\\in(t)$, write $x_jy_j=c_jt$; cancellation of $t\\ne0$ gives $\\sum c_j=1$. Some $c_j$ is a unit, as otherwise the sum belongs to the maximal ideal. Set $g=x_j$, $g\\prime=c_j^{-1}y_j$, so $gg\\prime=t$. For any $x\\in I$, write $xg\\prime=dt=dgg\\prime$ with $d\\in A$ and cancel $g\\prime\\ne0$ to obtain $x=dg$. Thus $I=(g)$. Interchanging the factors gives $I\\prime=(g\\prime)$. This is the elementary local proof of the special case of Tag 09ME used here; no invertible-module theorem is assumed.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, descent of the product ideal; algebra.tex Tag 09ME (lemma-product-ideals-principal), local proof with one unit coefficient"
+   }
+  },
+  {
+   "text": "Since $a\\in IB=gB$ and $a\\prime\\in I\\prime B=g\\prime B$, choose $u,u\\prime\\in B$ with $a=gu$ and $a\\prime=g\\prime u\\prime$. Then $t=aa\\prime=gg\\prime uu\\prime=tuu\\prime$ and cancellation in $B$ gives $uu\\prime=1$. Thus $u\\in B^\\times$. With $h=g/r\\in K^\\times$ we obtain $f=hu$, as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, end of affine paragraph: a=ug, a_prime=u_prime g_prime, s=ug/r"
+   }
+  },
+  {
+   "text": "For unit reflection on fractions let $h=c/d\\in K^\\times$ with $c,d\\in A\\setminus\\{0\\}$ and assume $h\\in B^\\times$. Then $c=dh$ implies $c\\in dB\\cap A=dA$, hence $h\\in A$. Likewise $d=ch^{-1}$ implies $d\\in cB\\cap A=cA$, hence $h^{-1}\\in A$. Thus $h\\in A^\\times$; the converse follows by mapping an inverse. Finally if $f=hu=h\\prime u\\prime$ then $h/h\\prime=u\\prime/u\\in B^\\times$ and the reflection just proved gives $h/h\\prime\\in A^\\times$. This proves both remaining clauses without any normality hypothesis beyond the one already used for existence.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-ideal-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD7, uniqueness for the faithfully flat local map in the paragraph following affine factorization; algebra.tex Tag 05CK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-faithfully-flat-maximal-ideals",
+  "lem-weil-pbc-faithfully-flat-ideal-contraction",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sfb-krull-principal-ideal-height-bound",
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "lem-sfb-symbolic-powers-flat-prime-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD7, lemma-in-image-pullback, affine/local factorization paragraph; expanded with the cited algebra.tex statements. The local proof of Tag 09ME and faithful-flat fraction reflection are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat local map of Noetherian domains with integral fibres over a normal domain, every unit on the generic fibre is a base fraction times a unit of the local target ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.intNorm_eq_of_isLocalization\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} {B : Type u_6} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] {Aₘ : Type u_9}\\n  {Bₘ : Type u_10} [inst_3 : CommRing Aₘ] [inst_4 : CommRing Bₘ] [inst_5 : Algebra Aₘ Bₘ] [inst_6 : Algebra A Aₘ]\\n  [inst_7 : Algebra B Bₘ] [inst_8 : Algebra A Bₘ] [IsScalarTower A Aₘ Bₘ]\", \"doc\": \"For elements $ x $ in the integral closure $ B $ of a commutative ring $ A $, the integral norm $ \\\\mathrm{N}_{L/K}(x) $ in $ A $ maps to the same value in the fraction ring $ A_\\\\mathfrak{m} $ as the i\"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (x : p.Fiber S), ∃ r ∉ p, ∃ s, r • x = 1 ⊗ₜ[R] s\", \"doc\": \"For any element $ x $ in the tensor product $ k(p) \\\\otimes_R S $, where $ k(p) $ is the residue field of the prime ideal $ p $ in the commutative ring $ R $, there exist an element $ r \\\\in R \\\\setminus\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isUnit_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (f : ↥x.asIdeal.primeCompl),\\n  IsUnit ((CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.toStalk R x)) ↑f)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, any element $ f \\\\in R $ not contained in the prime ideal $ \\\\mathfrak{p} $ corresponding to $ x $ become\"}\n  {\"name\": \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"RingHom.HoldsForLocalizationAway fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension 0\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ makes $ S $ a standard smooth algebra over $ R $ of relative dimension 0, then this property is preserved under localization at any element of $ R $. Specificall\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {s : Set S},\\n  Ideal.span s = ⊤ →\\n    ∀ (Sᵣ : ↑s → Type u_4) [inst_5 : (r : ↑s) → CommRing (Sᵣ r)] [inst_6 : (r : ↑s) → Algebra S (Sᵣ r)]\\n   \", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"isIntegrallyClosed_ofLocalizationMaximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/IntegrallyClosed\", \"type\": \"OfLocalizationMaximal fun R x => ∀ [IsDomain R], IsIntegrallyClosed R\", \"doc\": \"Let $ R $ be a commutative ring. If the localization of $ R $ at every maximal ideal is integrally closed in its fraction field whenever it is a domain, then $ R $ itself is integrally closed in its f\"}\n  {\"name\": \"ModuleCat.Tilde.isUnit_toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (r : ↥x.asIdeal.primeCompl), IsUnit ((algebraMap R (Module.End R ↑(M.tildeInModuleCat.stalk x))) ↑r)\", \"doc\": \"For any prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$ and any element $r$ in the complement of $\\\\mathfrak{p}$, the image of $r$ under the canonical algebra map from $R\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results cover unit reflection for an existing ring element, fraction/localization manipulations, and integral-closure base change, not the asserted factorization with integral fibres. Both semantic phrasings and the RingTheory searches were read."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A is a normal Noetherian local domain and B is a faithfully flat local algebra with all fibres integral, the units of B tensor Frac A are generated by B units and Frac A units",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {s : Set S},\\n  Ideal.span s = ⊤ →\\n    ∀ (Sᵣ : ↑s → Type u_4) [inst_5 : (r : ↑s) → CommRing (Sᵣ r)] [inst_6 : (r : ↑s) → Algebra S (Sᵣ r)]\\n   \", \"doc\": \"Let $R$ and $S$ be commutative rings, with $S$ being an $R$-algebra, and let $B$ be another $R$-algebra. For a ring $A$ and an $A$-algebra $C$, let $\\\\overline{C}^A$ denote the integral closure of $A$ \"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] (M : Submonoid R) [IsLocalization M S],\\n  Function.Bijective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at a submonoid $ M $, then the canonical map from the tensor product of the integral closure of $ R $ in $ B $ with $ S $ over $ R $ to the\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_injective_of_flat\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Module.Flat R S],\\n  Function.Injective ⇑(TensorProduct.toIntegralClosure R S B)\", \"doc\": \"If $ S $ is a flat $ R $-module, then the canonical map from the integral closure of $ R $ in $ B $ to the integral closure of $ S $ in $ B \\\\otimes_R S $ is injective.\"}\n  {\"name\": \"Ideal.Fiber.exists_smul_eq_one_tmul\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Fiber\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (x : p.Fiber S), ∃ r ∉ p, ∃ s, r • x = 1 ⊗ₜ[R] s\", \"doc\": \"For any element $ x $ in the tensor product $ k(p) \\\\otimes_R S $, where $ k(p) $ is the residue field of the prime ideal $ p $ in the commutative ring $ R $, there exist an element $ r \\\\in R \\\\setminus\"}\n  {\"name\": \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] {T : Type u_4} [inst_5 : CommRing T] [inst_6 : Algebra R T]\\n  [inst_7 : Algebra S T] [IsScalarTower R S T],\\n  Function.Bijective ⇑(TensorProd\", \"doc\": \"Given a scalar tower $ R \\to S \\to T $ of commutative rings with compatible algebra structures, if the integral closure maps $ \\\\text{IntegralClosure}(R,S,B) $ and $ \\\\text{IntegralClosure}(S,T,S \\\\otimes_\"}\n  {\"name\": \"RingHom.SurjectiveOnStalks.exists_mul_eq_tmul\", \"module\": \"Mathlib/RingTheory/SurjectiveOnStalks\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {S : Type u_2} [inst_1 : CommRing S] {T : Type u_3} [inst_2 : CommRing T]\\n  [inst_3 : Algebra R T] [inst_4 : Algebra R S],\\n  (algebraMap R T).SurjectiveOnStalks →\\n    ∀ (x : TensorProduct R S T) (J : Ideal T), J.IsPrime → ∃ t r a, r • t ∉ J ∧ 1 ⊗ₜ[R] (r • t) * x \", \"doc\": \"Let $R, S, T$ be commutative rings, and let $S$ and $T$ be $R$-algebras. Let $\\\\phi: R \\\\to T$ be the structure map. Suppose that $\\\\phi$ is surjective on stalks. Then for any element $x \\\\in S \\\\otimes_R \"}\n  {\"name\": \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/IntegralClosure\", \"type\": \"∀ {R : Type u_1} {B : Type u_3} [inst : CommRing R] [inst_1 : CommRing B] [inst_2 : Algebra R B] {σ : Type u_4},\\n  Function.Bijective ⇑(TensorProduct.toIntegralClosure R (MvPolynomial σ R) B)\", \"doc\": \"The natural map from the multivariate polynomial ring $ R[\\\\sigma] $ to the integral closure of $ R $ in $ B $ is bijective, i.e., it is both injective and surjective.\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] (n : ℕ) [Algebra.IsStandardSmoothOfRelativeDimension n A B],\\n  ∃ A₀ B₀ x x_1,\\n    A₀.FG ∧ Algebra.IsStandardSmoothOfRelativeDimension n (↥A₀) B\", \"doc\": \"For any commutative ring $ A $ and an $ A $-algebra $ B $ that is standard smooth of relative dimension $ n $, there exist a finitely generated subalgebra $ A_0 $ of $ A $ over $ R $, a commutative ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results cover unit reflection for an existing ring element, fraction/localization manipulations, and integral-closure base change, not the asserted factorization with integral fibres. Both semantic phrasings and the RingTheory searches were read."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit in the generic fibre of a flat local algebra over a normal Noetherian domain with integral fibres is a fraction from the base times a unit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"isUnit_of_map_unit\", \"module\": \"Mathlib.Algebra.Group.Units.Hom\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} {F : Type u_5} [inst : Monoid R] [inst_1 : Monoid S] [inst_2 : FunLike F R S] (f : F)\\n  [IsLocalHom f] (a : R), IsUnit (f a) → IsUnit a\", \"doc\": \"Let $ R $ and $ S $ be monoids, and let $ f : R \\\\to S $ be a local homomorphism. If $ a \\\\in R $ satisfies that $ f(a) $ is a unit in $ S $, then $ a $ is a unit in $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.isUnit_res_of_isUnit_germ\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"(U : Opens X) (f : X.presheaf.obj (op U)) (x : X) (hx : x ∈ U) (h : IsUnit (X.presheaf.germ U x hx f)) :\\n  ∃ (V : Opens X) (i : V ⟶ U) (_ : x ∈ V), IsUnit (X.presheaf.map i.op f)\", \"doc\": \"In a ringed space $X$ with sheaf of commutative rings, if the germ of a section $f$ at a point $x$ (viewed in the stalk at $x$) is a unit, then there exists an open neighborhood $V$ of $x$ contained i\"}\n  {\"name\": \"AlgebraicGeometry.RingedSpace.isUnit_of_isUnit_germ\", \"module\": \"Mathlib.Geometry.RingedSpace.Basic\", \"type\": \"(U : Opens X) (f : X.presheaf.obj (op U)) (h : ∀ (x) (hx : x ∈ U), IsUnit (X.presheaf.germ U x hx f)) : IsUnit f\", \"doc\": \"In a ringed space $X$, if a section $f$ over an open set $U$ has the property that for every point $x \\\\in U$, the germ of $f$ at $x$ is a unit in the stalk $\\\\mathcal{O}_{X,x}$, then $f$ itself is a un\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.GammaSpecAdjunction\", \"type\": \": IsUnit (X.toToΓSpecMapBasicOpen r r)\", \"doc\": \"For a locally ringed space $X$ and an element $r$ in its ring of global sections $\\\\Gamma(X)$, the restriction of $r$ to the basic open set $X_{D(r)}$ (the preimage of $D(r)$ under the $\\\\Gamma$-Spec ma\"}\n  {\"name\": \"IsFractionRing.nonZeroDivisors_eq_isUnit\", \"module\": \"Mathlib.RingTheory.Localization.FractionRing\", \"type\": \": K⁰ = IsUnit.submonoid K\", \"doc\": \"In the fraction ring $ K $ of a commutative semiring $ R $, the submonoid of non-zero divisors of $ R $ localized in $ K $ coincides with the submonoid of invertible elements in $ K $.\"}\n  {\"name\": \"FractionalIdeal.extended_one\", \"module\": \"Mathlib.RingTheory.FractionalIdeal.Extended\", \"type\": \": extended L hf (1 : FractionalIdeal M K) = 1\", \"doc\": \"The extension of the unit fractional ideal $1$ (corresponding to the entire ring $R$) from the localization $K = R_M$ to the localization $L = B_N$ (where $N$ contains the image of $M$) is equal to th\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.isUnit_toStalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) (f : x.asIdeal.primeCompl) : IsUnit (toStalk R x (f : R))\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, any element $ f \\\\in R $ not contained in the prime ideal $ \\\\mathfrak{p} $ corresponding to $ x $ become\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.valuation_of_unit_eq\", \"module\": \"Mathlib.RingTheory.DedekindDomain.SelmerGroup\", \"type\": \"(x : Rˣ) : v.valuationOfNeZero (Units.map (algebraMap R K : R →* K) x) = 1\", \"doc\": \"For a Dedekind domain $ A $ with fraction field $ K $, and a height one prime ideal $ \\\\mathfrak{p} $, the $ \\\\mathfrak{p} $-adic valuation of the image of a unit $ x \\\\in R^\\\\times $ under the canonical \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results cover unit reflection for an existing ring element, fraction/localization manipulations, and integral-closure base change, not the asserted factorization with integral fibres. Both semantic phrasings and the RingTheory searches were read."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"IsUnit\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"minpoly.IsIntegrallyClosed.isIntegral_iff_isUnit_leadingCoeff\", \"module\": \"Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed\", \"type\": \" {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [IsDomain R] [Algebra R S] [IsIntegrallyClosed R] [IsDomain S] [Module.IsTorsionFree R S] {x : S} {p : Polynomial R} (hirr : Irreducible p) (hp : (Polynomial.aeval x) p = 0) : IsIntegral R x ↔ IsUnit p.leadingCoeff\", \"doc\": \"If `x` is a root of an irreducible polynomial `p`, then `x` is integral\\niff the leading coefficient of `p` is a unit.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results cover unit reflection for an existing ring element, fraction/localization manipulations, and integral-closure base change, not the asserted factorization with integral fibres. Both semantic phrasings and the RingTheory searches were read."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*unit|unit.*generic|fraction.*unit|unit.*fraction",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"line\": \"182\", \"text\": \"lemma _root_.Units.submodule_isFractional [IsLocalization S P] (I : (Submodule R P)ˣ) :\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"line\": \"184\", \"text\": \"  FractionalIdeal.isFractional_of_fg (fg_unit _)\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"line\": \"203\", \"text\": \"theorem fg_unit (I : (FractionalIdeal S P)ˣ) : FG (I : Submodule R P) :=\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"line\": \"206\", \"text\": \"theorem fg_of_isUnit (I : FractionalIdeal S P) (h : IsUnit I) : FG (I : Submodule R P) :=\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Operations.lean\", \"line\": \"210\", \"text\": \"    (h : IsUnit (I : FractionalIdeal S P)) : I.FG := by\"}\n  {\"file\": \"Mathlib/RingTheory/FractionalIdeal/Inverse.lean\", \"line\": \"86\", \"text\": \"theorem mul_inv_cancel_iff_isUnit {I : FractionalIdeal R₁⁰ K} : I * I⁻¹ = 1 ↔ IsUnit I :=\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"line\": \"155\", \"text\": \"theorem idem : IsFractionRing K K := IsLocalization.self (nonZeroDivisors_eq_isUnit R K).le\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"line\": \"168\", \"text\": \"theorem self_iff_nonZeroDivisors_eq_isUnit : IsFractionRing R R ↔ R⁰ = IsUnit.submonoid R where\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"line\": \"172\", \"text\": \"theorem self_iff_nonZeroDivisors_le_isUnit : IsFractionRing R R ↔ R⁰ ≤ IsUnit.submonoid R := by\"}\n  {\"file\": \"Mathlib/RingTheory/Ideal/AssociatedPrime/Finiteness.lean\", \"line\": \"176\", \"text\": \"      (IsFractionRing.self_iff_nonZeroDivisors_le_isUnit.mp ‹_› h)\"}\n  {\"file\": \"Mathlib/RingTheory/Localization/AsSubring.lean\", \"line\": \"47\", \"text\": \"    mapToFractionRing K S B hS b = IsLocalization.lift (map_isUnit_of_le K S hS) b :=\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"904\", \"text\": \"  have ⟨I, eq⟩ := Submodule.range_unitsToPic R (FractionRing R) ▸ this\"}\n  {\"file\": \"Mathlib/RingTheory/PicardGroup.lean\", \"line\": \"927\", \"text\": \"  have : IsUnit (e 1 : R) := IsFractionRing.self_iff_nonZeroDivisors_le_isUnit.mp ‹_› <|\"}\n  {\"file\": \"Mathlib/RingTheory/UniqueFactorizationDomain/ClassGroup.lean\", \"line\": \"84\", \"text\": \"private theorem isPrincipal_of_isUnit_fractionalIdeal (I : Ideal R)\"}\n  {\"file\": \"Mathlib/RingTheory/UniqueFactorizationDomain/ClassGroup.lean\", \"line\": \"85\", \"text\": \"    (hI : IsUnit (I : FractionalIdeal R⁰ (FractionRing R))) :\"}\n  {\"file\": \"Mathlib/RingTheory/UniqueFactorizationDomain/ClassGroup.lean\", \"line\": \"109\", \"text\": \"private theorem isPrincipal_fractionalIdeal_of_isUnit\"}\n  {\"file\": \"Mathlib/RingTheory/UniqueFactorizationDomain/ClassGroup.lean\", \"line\": \"113\", \"text\": \"  have hJunit : IsUnit (J : FractionalIdeal R⁰ (FractionRing R)) :=\"}\n  {\"file\": \"Mathlib/RingTheory/UniqueFactorizationDomain/ClassGroup.lean\", \"line\": \"114\", \"text\": \"    FractionalIdeal.isUnit_num.mpr ⟨I, rfl⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"line\": \"141\", \"text\": \"  hp.isUnit_iff_isUnit_map_of_injective (IsFractionRing.injective _ _)\"}\n  {\"file\": \"Mathlib/RingTheory/Polynomial/Eisenstein/IsIntegral.lean\", \"line\": \"355\", \"text\": \"    rwa [← IsFractionRing.injective R K hQ, mul_comm, ← Units.coe_neg_one, mul_pow, ←\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"49\", \"text\": \"    (Units.map (FractionalIdeal.extendedHom (FractionRing B) B).toMonoidHom)\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"52\", \"text\": \"      refine ⟨Units.mk0 (IsFractionRing.map (j := algebraMap A B)\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"61\", \"text\": \"      (Units.map (FractionalIdeal.extendedHom (FractionRing B) B).toMonoidHom α) := by\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"67\", \"text\": \"        (Units.map (FractionalIdeal.extendedHom (FractionRing B) B).toMonoidHom I) := by\"}\n  {\"file\": \"Mathlib/RingTheory/ClassGroup/ExtendedHom.lean\", \"line\": \"94\", \"text\": \"      ClassGroup.mk _ (Units.map (FractionalIdeal.extendedHom (FractionRing B) B).toMonoidHom\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results cover unit reflection for an existing ring element, fraction/localization manipulations, and integral-closure base change, not the asserted factorization with integral fibres. Both semantic phrasings and the RingTheory searches were read."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*unit|unit.*generic|integral.*fib[er]+|fib[er]+.*integral",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected results cover unit reflection for an existing ring element, fraction/localization manipulations, and integral-closure base change, not the asserted factorization with integral fibres. Both semantic phrasings and the RingTheory searches were read."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-group-vertical-cartier-descent",
+  "date": "2026-10-24",
+  "group": "Q14"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Vertical Cartier divisors of a smooth connected group over a normal base; local commutative-algebra input: the affine factorization paragraph of Stacks 0BD7, used on stalks before the fibre-overlap gluing argument.",
+   "via": [
+    "lem-sfb-normal-group-vertical-cartier-descent",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-local-generic-unit-factorization",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BD7 into numerator/inverse-numerator factorization, height-one symbolic cutoff ideals, faithful-flat product descent and explicit local generators. Added only the general symbolic-power flat-extension input (0BC0); reused existing exact tensor, associated-prime detection and valuation statements. Proved reflection of fractional units separately by ideal contraction. No statement change.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Vertical Cartier divisors of a smooth connected group over a normal base; local commutative-algebra input: the affine factorization paragraph of Stacks 0BD7, used on stalks before the fibre-overlap gluing argument. Realizes the local algebra prerequisite in the recorded alteration/Picard chain; the current latest direct-image proof does not spell out this lower-level algebra. The ancestor command returns None because the created.item chain ends at the Lean module Sheaf.SixFunctors.CtfStabilityDirectImages; the inherited null ancestor and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-normal-domain-principal-divisor-kernel",
+    "why": "Only its stated height-one DVR and normalized valuation clauses are used, as generic commutative algebra in Stacks 0BD7; this unit contains no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "Its 031T height-one associated-prime statement detects the principal ideal cutoff; it is generic commutative algebra, not a substitute for a unit-route step."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Its 0311 injectivity detects zero in A/tA; no statement in this unit supplies this general module tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-normal-domain-principal-divisor-kernel",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-01e60ebf2",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-01e60ebf2 (reviewer sub-agent of L); spot-checked: PASS: read the item, all 10 steps, the new node and every cited statement against Stacks 0BD7 and 0BC0; no fixes. Item statement unchanged from the base (identical to the Q14 snapshot copy). Every step checks. Step 2 proves pB is prime: flatness makes B/pB inject into its localization, and the fibre hypothesis makes that a nonzero domain. Step 3 gets height one from Krull and t != 0. Step 4 applies the unit-times-power lemma directly to B_q and gives e_i+e_i'=m_i, i.e. ramification index 1. Step 5 proves the intersection is (t) from the 031T associated-prime height and 0311 injectivity, with the empty case covered. Step 7 handles flat intersections plus 0BC0. Step 8 gets II'=(t) by contraction and writes out the local 09ME argument. Step 10 proves unit reflection by contraction. proof_deps equals the union of the uses. The new node is 0BC0 verbatim, with the symbolic power defined inline and Noetherian added only as a restriction. Small cases pass: k[t]->k[t,x], n=0 and n=1, the identity map; k[t]->k[s] with t->s^2 shows the primality hypothesis is needed. It is not a duplicate: lem-per-vertical-symbolic-powers-completion is only the completion special case, and Mathlib has no symbolicPower. It is not a restatement of the item. Batch-5 finding: lem-trf-normal-domain-principal-divisor-kernel is generic algebra (00PD/031T, unit sk-i-curve-zero). Its 83-node closure is pure commutative algebra with no trace-formula or Poincare-duality node, so it is outside both assumptions and accepted. The three declared tool_uses are generic black boxes and accepted. No SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LocalGenericUnitFactorization",
+  "declaration": "Algebra.local_generic_unit_factorization",
+  "file": "lean/Sheaf/RingTheory/LocalGenericUnitFactorization.lean",
+  "statement": "theorem local_generic_unit_factorization (A : Type u) (B : Type v) [CommRing A] [CommRing B] [IsDomain A] [IsDomain B] [IsNoetherianRing A] [IsNoetherianRing B] [IsIntegrallyClosed A] [IsLocalRing A] [IsLocalRing B] [Algebra A B] [IsLocalHom (algebraMap A B)] (hflat : RingHom.Flat (algebraMap A B)) (hfibres : ∀ (p : Ideal A) [p.IsPrime], IsDomain (p.Fiber B)) : (∀ f : (FractionRing A ⊗[A] B)ˣ, ∃ (h : (FractionRing A)ˣ) (w : Bˣ), (f : FractionRing A ⊗[A] B) = algebraMap (FractionRing A) (FractionRing A ⊗[A] B) h * Algebra.TensorProduct.includeRight (R := A) (A := FractionRing A) (w : B)) ∧ (∀ (h h' : (FractionRing A)ˣ) (w w' : Bˣ), algebraMap (FractionRing A) (FractionRing A ⊗[A] B) h * Algebra.TensorProduct.includeRight (R := A) (A := FractionRing A) (w : B) = algebraMap (FractionRing A) (FractionRing A ⊗[A] B) h' * Algebra.TensorProduct.includeRight (R := A) (A := FractionRing A) (w' : B) → ∃ a : Aˣ, algebraMap A (FractionRing A) a = (h : FractionRing A) / h') ∧ (∀ h : (FractionRing A)ˣ, (∃ w : Bˣ, algebraMap (FractionRing A) (FractionRing A ⊗[A] B) h = Algebra.TensorProduct.includeRight (R := A) (A := FractionRing A) (w : B)) ↔ ∃ a : Aˣ, algebraMap A (FractionRing A) a = h)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e3df294d",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Lean statement matches the node and Stacks 0BD7 clause by clause: IsLocalHom ⇔ comap m_B = m_A (local_hom_TFAE); Ideal.Fiber = κ(p)⊗B = (A∖p)⁻¹(B/pB), IsDomain includes nonzero; normal = IsIntegrallyClosed on a domain (dep record); B_K = FractionRing A ⊗[A] B, matching the source's A⊗_R K. Factorization, uniqueness mod A^× and two-sided unit reflection all present; no stronger hypotheses; universes u,v independent. Only the lean record was added (node otherwise identical to the side-live Q57 split); statement verbatim in file; proof is sorry only; source/blueprint docstrings with all 10 steps; private imports are the recorded proof_dep modules. Not superseded live; no repair note. Edge cases: field base, identity map, ramified counterexample fails hfibres. Not recompiled per instruction; no files changed."
+ }
+}

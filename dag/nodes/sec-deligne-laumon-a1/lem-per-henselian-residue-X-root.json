@@ -1,0 +1,170 @@
+{
+ "id": "lem-per-henselian-residue-X-root",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Dense-field comparison: Stability of a simple root under coefficient perturbation over a henselian valued field. This node isolates A simple maximal-ideal root of a polynomial reducing to X.",
+   "via": [
+    "lem-per-henselian-simple-root-stability",
+    "lem-per-dense-henselian-field-etale-comparison",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A simple maximal-ideal root of a polynomial reducing to X",
+ "statement": "Let $R$ be a commutative henselian local ring with maximal ideal $\\mathfrak m$ and residue field $\\kappa$ [def-weil-pbc-henselian-terminology, def-weil-residue-field]. Let $H\\in R[X]$ [def-weil-polynomial-ring] have reduction $\\overline H=X$. Then there exists $z\\in\\mathfrak m$ with $H(z)=0$ and $H^{\\prime}(z)\\in R^\\times$. No monicity, valuation, topology or domain assumption is imposed on $R$ or $H$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GG, simple-root characterization; explicit reciprocal-polynomial reduction to the monic interface (agent reconstruction of the original stability proof steps 4--5)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-residue-field",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put p=H(1-X), N=natDegree(H)+1. Evaluation of the reduction at 1 gives residue(H(1))=1, so H(1) is a unit u. The polynomial Q=C(u inverse)*reflect(N,p) has degree at most N; its coefficient at N is u inverse*p.coeff(0)=1. Thus Q is monic. This is coefficient reflection, with N fixed before reducing coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG, simple-root characterization; explicit reciprocal-polynomial reduction to the monic interface (agent reconstruction of the original stability proof steps 4--5)"
+   }
+  },
+  {
+   "text": "Mapping reflection and composition to the residue field gives Qbar=X^N-X^(N-1). Its value at 1 is zero and its derivative there is N-(N-1)=1 in every characteristic. Apply Mathlib HenselianLocalRing.TFAE, implication 0 to 1, to the monic Q and the residue root 1. Obtain Q(y)=0 and residue(y)=1. This is precisely the monic simple-root interface of the henselian notion [def-weil-pbc-henselian-terminology].",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG, simple-root characterization; explicit reciprocal-polynomial reduction to the monic interface (agent reconstruction of the original stability proof steps 4--5)"
+   }
+  },
+  {
+   "text": "The element y is a unit. Set z=1-y inverse; its residue is zero, so it is in the maximal ideal. Since Q(y)=0, multiplying by u gives reflect(N,p)(y)=0. The reflection evaluation identity at the inverse unit gives p(y inverse)=0, equivalently H(z)=0.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG, simple-root characterization; explicit reciprocal-polynomial reduction to the monic interface (agent reconstruction of the original stability proof steps 4--5)"
+   }
+  },
+  {
+   "text": "The derivative commutes with coefficient reduction, so H prime reduces to 1. Consequently residue(H prime(z))=1, and H prime(z) is a unit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG, simple-root characterization; explicit reciprocal-polynomial reduction to the monic interface (agent reconstruction of the original stability proof steps 4--5)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GG, monic simple-root lifting; explicit reciprocal reduction and valuation estimates reconstructed for the ILO XX 4.4 input"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, Polynomial.eval",
+   "results": "{\"t\": \"2026-10-26T08:18:54Z\", \"tool\": \"loogle\", \"query\": \"HenselianLocalRing, Polynomial.eval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.mk\"], \"digest\": \"d713896019a4a6db\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The monic Hensel interfaces, reflection identities and root-scaling identities were read; none states this conclusion. The monic Hensel interface is used in the proved algebraic helper."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a henselian local ring any polynomial whose residue is X has a simple root in the maximal ideal",
+   "results": "{\"t\": \"2026-10-26T08:22:37Z\", \"tool\": \"leansearch\", \"query\": \"Over a henselian local ring any polynomial whose residue is X has a simple root in the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.mk\", \"hensels_lemma\", \"HenselianRing.rec\", \"instHenselianRingMaximalIdeal\", \"HenselianRing.is_henselian\", \"HenselianRing.recOn\"], \"digest\": \"24c69ca1c1f4a4e2\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The monic Hensel interfaces, reflection identities and root-scaling identities were read; none states this conclusion. The monic Hensel interface is used in the proved algebraic helper."
+  },
+  {
+   "tool": "grep",
+   "query": "reflect|residue.*root|root.*residue (subdirectory Algebra/Polynomial/Reverse.lean)",
+   "results": "{\"t\": \"2026-10-26T08:26:37Z\", \"tool\": \"grep\", \"query\": \"reflect|residue.*root|root.*residue\", \"sub\": \"Algebra/Polynomial/Reverse.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"82\", \"85\", \"88\", \"92\", \"93\"], \"digest\": \"1bfdaf39cd9a7939\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The monic Hensel interfaces, reflection identities and root-scaling identities were read; none states this conclusion. The monic Hensel interface is used in the proved algebraic helper."
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.map, IsLocalRing.residue, Polynomial.IsRoot",
+   "results": "{\"t\": \"2026-10-26T08:26:37Z\", \"tool\": \"loogle\", \"query\": \"Polynomial.map, IsLocalRing.residue, Polynomial.IsRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The monic Hensel interfaces, reflection identities and root-scaling identities were read; none states this conclusion. The monic Hensel interface is used in the proved algebraic helper."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a henselian local ring a polynomial whose reduction is X has a simple root in the maximal ideal",
+   "results": "{\"t\": \"2026-10-26T08:28:20Z\", \"tool\": \"leanfinder\", \"query\": \"Over a henselian local ring a polynomial whose reduction is X has a simple root in the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"HenselianRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing\", \"HenselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"PowerSeries.weierstrassDistinguished\"], \"digest\": \"2df3d69c5f6e795e\"}",
+   "date": "2026-10-26",
+   "verdict": "No exact match. The monic Hensel interfaces, reflection identities and root-scaling identities were read; none states this conclusion. The monic Hensel interface is used in the proved algebraic helper."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.FieldTheory.HenselianSimpleRootStability",
+  "date": "2026-10-26",
+  "group": "S3"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.HenselianResidueXRoot",
+  "file": "lean/Sheaf/RingTheory/HenselianResidueXRoot.lean",
+  "declaration": "HenselianLocalRing.exists_simple_root_of_map_eq_X",
+  "statement": "theorem exists_simple_root_of_map_eq_X\n    (R : Type u) [CommRing R] [HenselianLocalRing R]\n    (H : R[X]) (hH : H.map (residue R) = X) :\n    ∃ z : R, z ∈ maximalIdeal R ∧ H.IsRoot z ∧ IsUnit (H.derivative.eval z)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T092553-L-3443616",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261026T092553-L-3443616",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

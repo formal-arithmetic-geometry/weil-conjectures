@@ -134,7 +134,54 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q68-caa3be44b (reviewer sub-agent of L); spot-checked: Reviewed the item, both cited node statements, blueprint proof/source, chapter and unit route, edge cases, coefficient category, target source bindings, Mathlib searches, duplicates, and acyclicity. The single proof step is complete and correctly sourced; no repairs or new nodes are needed. Wrote review.md."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.ProEtale.padicIntegersRingObjToContinuousMapRingObj",
+    "Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing",
+    "CategoryTheory.Sheaf.isMonHom_sheafCompose_map"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.padicIntegersRingObjToContinuousMapRingObj",
+     "module": "WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization",
+     "lines": [
+      93,
+      99
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic",
+     "lines": [
+      126,
+      130
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Sheaf.isMonHom_sheafCompose_map",
+     "module": "WeilConjectures.CategoryTheory.RingObjects.RingPresheaf",
+     "lines": [
+      198,
+      202
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "lean": {
   "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic",
   "declaration": "Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing",
@@ -156,5 +203,25 @@
   "group": "Q83",
   "result": "pass",
   "note": "existing:true record only; no Lean module, and only the lean field changes. The primary declaration Profinite.padicIntegersCondensedRingToPadicSubfieldCondensedRing (EllAdic.lean:127-130) is the canonical postcomposition continuousMapRingSheafMap of 𝒪_E.subtype, with 𝒪_E and the topology restricted from PadicAlgCl. It holds for every embedded E, and the node's finite E is the E.1 specialization. Sheaf.isMonHom_sheafCompose_map gives the ring-object-morphism clause. Statement verbatim; universes match the dep binding. The existing padicIntegersRingObjToContinuousMapRingObj and padicIntegersToPadicSubfield (the citer's binding) are built from this map, so nothing is duplicated. Probe compile via nt_compile --json: both #checks pass and IsMonHom inferInstance for a FiniteIntermediateField; clean in 9.1 s. Edge cases E=Q_ℓ, ℓ=2 and empty S are fine. Only a stale line number in report.md (cosmetic)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\ell$ be a prime and $E\\subseteq\\Qlb$ a finite extension of $\\mathbf Q_\\ell$. The\ninclusion $\\cO_E\\hookrightarrow E$ is a continuous ring map, so it induces a morphism of\ncondensed rings $\\underline{\\cO}_E\\to\\underline E$, $f\\mapsto f$ on\n$C(S,\\cO_E)\\to C(S,E)$ [det-def-sfb-condensed-ring]. Its underlying morphism of condensed\nabelian groups is a morphism of ring objects of $\\Sh(*_{\\mathrm{proét}},\\Ab)$\n[det-def-sfb-ring-object].",
+  "proof": [
+   {
+    "text": "The condensed ring construction is functorial in continuous ring maps\n[det-def-sfb-condensed-ring]. Forgetting from sheaves of rings to sheaves of abelian groups\nsends morphisms of sheaves of rings to morphisms of ring objects, because the\nmultiplication of the ring object is induced by the sectionwise multiplication\n[det-def-sfb-ring-object].",
+    "uses": [
+     "det-def-sfb-condensed-ring",
+     "det-def-sfb-ring-object"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

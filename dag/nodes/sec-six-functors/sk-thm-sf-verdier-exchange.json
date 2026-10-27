@@ -20,34 +20,20 @@
  ],
  "proof": [
   {
-   "text": "The coefficient unit $\\Lambda_s$ is in $\\Dctf(s,\\Lambda)$: at a finite stage it is a constant free rank-one module in degree zero, and tensoring with it is the identity, hence its Tor interval is $[0,0]$. At the integral stage use its compatible rank-one reductions, and at the field stages its scalar images, with the conventions of [sk-def-sf-setting]. Since $a_X$ and $a_Y$ are separated and finite type, the functor type in [sk-def-sf-operations](vi) gives $\\omega_X\\in\\Dctf(X,\\Lambda)$ and $\\omega_Y\\in\\Dctf(Y,\\Lambda)$. This is an application of the specified constructible functors, not of the optional ambient functor in (v). In particular $N=\\omega_Y$ is an allowed input to the tensor–Hom exchange.",
+   "text": "The unit $\\Lambda_s$ is constructible with Tor interval $[0,0]$: tensoring with the rank-one constant complex is the identity; integral reductions and scalar images give the higher-stage unit [sk-def-sf-setting]. The constructible functor types in [sk-def-sf-operations](vi) therefore put $\\omega_X,\\omega_Y$ in $\\Dctf$. Apply [lem-sf-constructible-exceptional-compositor] to $g=a_Y$, $x=a_X$ and evaluate its conjugate at $\\Lambda_s$. This gives the specified isomorphism $c_\\Lambda:Rf^!\\omega_Y\\xrightarrow{\\sim}\\omega_X$.",
    "uses": [
     "sk-def-sf-setting",
-    "sk-def-sf-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Step 1 and the typing needed for Step 2"
-   }
-  },
-  {
-   "text": "Write $F_h=Rh_!$ and $G_h=Rh^!$ for $h=f,a_Y,a_X$. Their exact constructible adjunctions, with finite-Tor preservation at every coefficient stage, are [lem-sf-constructible-exceptional-adjunction-coefficients]. The canonical composition isomorphism $\\alpha:F_{a_Y}F_f\\xrightarrow{\\sim}F_{a_X}$ is [thm-sf-comp-composition] at finite coefficients. At the other stages use its completed and transported forms explicitly included in [fix-lem-exchanges](2),(4), not the finite theorem applied to a different coefficient category. The mate calculus [lem-weil-pbc-mate-pasting](2) supplies the composite adjunction $F_{a_Y}F_f\\dashv G_fG_{a_Y}$ with pasted unit and counit. For $K\\in\\Dctf(X,\\Lambda)$ and $L\\in\\Dctf(s,\\Lambda)$ its Hom bijection is\n$$\\operatorname{Hom}_X(K,G_fG_{a_Y}L)\\cong\\operatorname{Hom}_s(F_{a_Y}F_fK,L)\\xrightarrow{h\\mapsto h\\circ\\alpha_K^{-1}}\\operatorname{Hom}_s(F_{a_X}K,L)\\cong\\operatorname{Hom}_X(K,G_{a_X}L).$$\nEquivalently, conjugate $\\alpha^{-1}$ between these two adjunctions using [def-weil-pbc-adjunction-conjugate]. That node asserts that this conjugation preserves isomorphisms and sends inverse transformations to inverse transformations. It therefore gives a canonical natural isomorphism $c:G_fG_{a_Y}\\xrightarrow{\\sim}G_{a_X}$. Evaluating at $L=\\Lambda_s$ gives $c_\\Lambda:Rf^!\\omega_Y\\xrightarrow{\\sim}\\omega_X$. All adjunctions here are on constructible categories; no full ambient pro-étale exceptional adjoint is used.",
-   "uses": [
-    "lem-sf-constructible-exceptional-adjunction-coefficients",
-    "thm-sf-comp-composition",
-    "fix-lem-exchanges",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-conjugate"
+    "sk-def-sf-operations",
+    "lem-sf-constructible-exceptional-compositor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Step 1: structure-morphism composition and its adjunction mate"
+    "place": "Step 1: typing and exceptional-composition specialization"
    }
   },
   {
-   "text": "Apply [sk-thm-sf-tensor-hom] with the given $M$ and with $N=\\omega_Y$, whose finite-Tor constructible membership was checked in step 1. Take the inverse of its displayed isomorphism, since the required direction is from internal Hom on $Y$ to direct image on $X$, and then apply the functor $Rf_*\\RHom_X(M,-)$ to $c_\\Lambda$ from step 2. With the internal Hom operation of [sk-def-sf-operations](i), this is\n$$\\mathbb D_Y(Rf_!M)=\\RHom_Y(Rf_!M,\\omega_Y)\\xrightarrow{\\sim}Rf_*\\RHom_X(M,Rf^!\\omega_Y)\\xrightarrow{Rf_*\\RHom_X(M,c_\\Lambda)}Rf_*\\RHom_X(M,\\omega_X)=Rf_*\\mathbb D_XM.$$\nDefine $\\varepsilon_{f,M}$ to be this composite. The first arrow is an isomorphism in the ambient $D^+(Y,\\Lambda)$ by the cited exchange theorem; the second is the image of an isomorphism under a functor, hence an isomorphism in the same category.",
+   "text": "Apply [sk-thm-sf-tensor-hom] to $M$ and $N=\\omega_Y$, with the membership checked in step 1. Invert that exchange and postcompose by $c_\\Lambda$ through the internal-Hom bifunctor [sk-def-sf-operations](i):\n$$\\mathbb D_Y(Rf_!M)\\xrightarrow{\\sim}Rf_*\\RHom_X(M,Rf^!\\omega_Y)\\xrightarrow{Rf_*\\RHom_X(M,c_\\Lambda)}Rf_*\\mathbb D_XM.$$\nDefine $\\varepsilon_{f,M}$ by this composite. Both arrows are isomorphisms in the stated $D^+(Y,\\Lambda)$; the second is a functor applied to an isomorphism.",
    "uses": [
     "sk-thm-sf-tensor-hom",
     "sk-def-sf-operations"
@@ -55,11 +41,11 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Step 2: specialize tensor–Hom exchange and substitute Step 1"
+    "place": "Step 2: tensor-Hom specialization and substitution"
    }
   },
   {
-   "text": "For $u:M\\to M'$, the naturality in [sk-thm-sf-tensor-hom] gives the contravariant naturality square for the first arrow of step 3. For the second arrow, precomposition by $u$ and postcomposition by $c_\\Lambda$ commute by the bifunctoriality of the internal Hom of [sk-def-sf-operations](i). Applying $Rf_*$ and pasting the two squares gives\n$$Rf_*\\mathbb D_X(u)\\circ\\varepsilon_{f,M'}=\\varepsilon_{f,M}\\circ\\mathbb D_Y(Rf_!u).$$\nFor a shift $M[r]$, the derived Hom shift identification is $\\RHom_X(M[r],N)=\\RHom_X(M,N)[-r]$; applying postcomposition by the fixed degree-zero map $c_\\Lambda$ gives the shifted postcomposition map. The shift compatibility of the first arrow is the one asserted by [sk-thm-sf-tensor-hom]. Thus under the canonical identifications both sides and the entire exchange for $M[r]$ are the shifts by $[-r]$ of their values at $M$.",
+   "text": "For $u:M\\to M'$, naturality of [sk-thm-sf-tensor-hom] gives the first arrow's square. For the second, internal-Hom bifunctoriality [sk-def-sf-operations](i) makes precomposition by $u$ commute with postcomposition by $c_\\Lambda$. Pasting gives\n$$Rf_*\\mathbb D_X(u)\\circ\\varepsilon_{f,M'}=\\varepsilon_{f,M}\\circ\\mathbb D_Y(Rf_!u).$$\nUnder $\\RHom(M[r],N)\\cong\\RHom(M,N)[-r]$, postcomposition by the fixed degree-zero $c_\\Lambda$ is the shifted postcomposition. The first arrow respects shifts by the cited exchange theorem, so their composite has the required $[-r]$ shift law.",
    "uses": [
     "sk-thm-sf-tensor-hom",
     "sk-def-sf-operations"
@@ -71,76 +57,31 @@
    }
   },
   {
-   "text": "For a finite quotient or finite-free coefficient extension $A\\to B$, write $C_T=-\\otimes_A^LB_T$, $F_h=Rh_!$ and $G_h=Rh^!$. The counit-normalized comparisons $q_h:C F_{h,A}\\xrightarrow{\\sim}F_{h,B}C$ and $b_h:C G_{h,A}\\xrightarrow{\\sim}G_{h,B}C$ are [lem-sf-constructible-exceptional-adjunction-coefficients]. Its counit equation reads\n$$\\epsilon_{h,B,CL}\\circ F_{h,B}(b_{h,L})=C(\\epsilon_{h,A,L})\\circ q_{h,G_{h,A}L}^{-1}.$$\nFor $a=a_Y$, $x=a_X$ put $q_{a,f}=(F_{a,B}q_f)\\circ(q_aF_{f,A})$. The geometric composition square\n$$q_x\\circ C_s(\\alpha_A)=\\alpha_B\\circ q_{a,f}$$\nis exactly the composition clause of [lem-sp-et-proet-coefficient-compatibility], used with $g=a$. That statement permits every homomorphism of finite rings annihilated by powers of $\\ell$, hence both quotients and $A_{E,n}\\to\\mathcal O_{E'}/\\varpi_E^n\\mathcal O_{E'}$, including ramified extensions. All inputs are finite-Tor constructible by the adjunction theorem; $X,Y,s$ are separated finite type, as required by the geometric comparison. Thus the square concerns the specified compactification composition maps, not chosen objectwise isomorphisms.",
+   "text": "Use [lem-sf-finite-exceptional-compositor-coefficients] for finite quotients and ramified finite-free changes, and [lem-sf-adic-exceptional-compositor-coefficients] for integral reduction, scalar extension, rationalization and common stages. With $g=a_Y$, set $\\kappa_T=b_{a_T,\\Lambda_s}$ followed by $G_{a_T,\\Lambda'}(C_s\\Lambda_s\\cong\\Lambda'_s)$. Their equations and naturality in the coefficient unit give\n$$\\kappa_X C_X(c_\\Lambda)=c_{\\Lambda'}G_{f,\\Lambda'}(\\kappa_Y)b_{f,\\omega_{Y,\\Lambda}}.$$\nNaturality of the internal-Hom/direct-image comparison maps makes this the coefficient square for the second arrow in step 2. Paste it with the coefficient square for the inverse tensor–Hom exchange [sk-thm-sf-tensor-hom]. This proves the claimed compatibility on precisely the comparison domains stated there; field reduction uses integral representatives as in the adic lemma.",
    "uses": [
-    "lem-sf-constructible-exceptional-adjunction-coefficients",
-    "lem-sp-et-proet-coefficient-compatibility"
+    "lem-sf-finite-exceptional-compositor-coefficients",
+    "lem-sf-adic-exceptional-compositor-coefficients",
+    "sk-thm-sf-tensor-hom"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Final compatibility sentence: geometric composition/coefficient square"
-   }
-  },
-  {
-   "text": "Set $Z_L=G_{f,A}G_{a,A}L$ and $\\beta_{A,L}=\\epsilon_{a,A,L}\\circ F_{a,A}(\\epsilon_{f,A,G_{a,A}L})$. This is the pasted counit of [lem-weil-pbc-mate-pasting](2). The defining transpose identity for the conjugate $c_A$ of step 2 is\n$$\\epsilon_{x,A,L}\\circ F_{x,A}(c_{A,L})\\circ\\alpha_{A,Z_L}=\\beta_{A,L}.$$\nWe compare the two maps\n$$b_{x,L}\\circ C_X(c_{A,L}),\\qquad c_{B,C_sL}\\circ G_{f,B}(b_{a,L})\\circ b_{f,G_{a,A}L}$$\nfrom $C_XZ_L$ to $G_{x,B}C_sL$. Transposing the first, the counit equation of step 5 and naturality of $q_x$ give\n$$C_s(\\beta_{A,L})\\circ C_s(\\alpha_{A,Z_L}^{-1})\\circ q_{x,Z_L}^{-1}\n=C_s(\\beta_{A,L})\\circ q_{a,f,Z_L}^{-1}\\circ\\alpha_{B,C_XZ_L}^{-1}.$$\nHere the equality is precisely step 5's composition square. Transposing the second gives\n$$\\beta_{B,C_sL}\\circ F_{a,B}F_{f,B}(G_{f,B}(b_{a,L})\\circ b_{f,G_{a,A}L})\\circ\\alpha_{B,C_XZ_L}^{-1}.$$\nExpand $\\beta_B$. Naturality moves $b_a$ past $\\epsilon_{f,B}$; replace $\\epsilon_{f,B}F_{f,B}(b_f)$ by $C_Y(\\epsilon_{f,A})q_f^{-1}$. Then replace $\\epsilon_{a,B}F_{a,B}(b_a)$ by $C_s(\\epsilon_{a,A})q_a^{-1}$. Naturality of $q_a$ makes the result the first transpose displayed above. The adjunction bijection makes the original maps equal. This is the explicit instance of mate pasting and changing adjunctions in [lem-weil-pbc-mate-pasting](2),(3).",
-   "uses": [
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Final compatibility sentence: compute both counit transposes"
-   }
-  },
-  {
-   "text": "For integral coefficients the same calculation takes place on coherent cartesian sections before total inverse limit. Apply [lem-coef-cartesian-section-adjoint-mates] to the enhanced finite $F_h$, coherent invertible $q_h,b_h$ and adjunctions supplied by [lem-pur-finite-coefficient-adjoint-comparisons]. The former statement supplies actual section units, counits, and naturality for composition comparisons. The geometric comparisons and their composites have simultaneous enhanced models by [lem-coef-semilinear-derived-sections]. Consequently the transposition and equality in step 6 are identities of section maps, rather than an inference that evaluated derived morphisms determine a system morphism.\nThe integral compactification realization [lem-sf-integral-compactification-system-realization] intertwines nested compact supports and their composition maps, including the proper/open interchange, with total-limit realizations. Its hypotheses hold: all inputs here are normalized constructible systems with common Tor and cohomological bounds by [lem-sf-constructible-exceptional-adjunction-coefficients] and the coefficient conventions. That same adjunction theorem identifies the integral $b_h$ as the counit-normalized comparisons and includes their integral-reduction and integral-scalar-extension equations. Thus applying the section construction and its integral realization to step 6 gives exactly the integral equation for $c$, by uniqueness of conjugation [def-weil-pbc-adjunction-conjugate]. Finite extension uses the compatible finite-free systems at levels $en$, where $(\\varpi_E^n)=(\\varpi_{E'}^{en})$, and their common-stage identifications in the adjunction theorem. Rationalization and passage to common finite stages carry the same equation to field coefficients. No arbitrary family of finite derived maps is lifted in this argument.",
-   "uses": [
-    "lem-coef-cartesian-section-adjoint-mates",
-    "lem-pur-finite-coefficient-adjoint-comparisons",
-    "lem-coef-semilinear-derived-sections",
-    "lem-sf-integral-compactification-system-realization",
-    "lem-sf-constructible-exceptional-adjunction-coefficients",
-    "def-weil-pbc-adjunction-conjugate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Final compatibility sentence: coherent integral and field passage"
-   }
-  },
-  {
-   "text": "Put $L=A_s$ in the coefficient equation of step 6, or its integral/field realization of step 7, and set $\\kappa_T=b_{a_T,A_s}$ followed by $G_{a_T,B}(C_sA_s\\cong B_s)$. Naturality in $L$ gives\n$$\\kappa_X\\circ C_X(c_A)=c_B\\circ G_{f,B}(\\kappa_Y)\\circ b_{f,\\omega_{Y,A}}.$$\nThe operation comparisons are natural in their inputs. Apply this equation to postcomposition in $Rf_*\\RHom_X(M,-)$: it gives the coefficient square for the second arrow in step 3, under the internal-Hom and direct-image comparison maps of [sk-thm-sf-tensor-hom]. The coefficient square for the first arrow is explicitly part of that theorem. Pasting the squares proves compatibility of $\\varepsilon_{f,M}$. At field coefficients finite reduction means reducing chosen integral representatives before rationalization, as in [lem-sf-constructible-exceptional-adjunction-coefficients]; it is not an additional functor from fields to torsion coefficients. Every comparison is used only on its stated domain, without asserting any arbitrary-input internal-Hom coefficient isomorphism.",
-   "uses": [
-    "sk-thm-sf-tensor-hom",
-    "lem-sf-constructible-exceptional-adjunction-coefficients"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-    "place": "Final compatibility sentence: evaluate at the coefficient unit and paste"
+    "place": "Final sentence: specialize the compositor coefficient equations and paste"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sf-setting",
   "sk-def-sf-operations",
-  "lem-sf-constructible-exceptional-adjunction-coefficients",
-  "thm-sf-comp-composition",
-  "fix-lem-exchanges",
-  "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-adjunction-conjugate",
+  "lem-sf-constructible-exceptional-compositor",
   "sk-thm-sf-tensor-hom",
-  "lem-sp-et-proet-coefficient-compatibility",
-  "lem-coef-cartesian-section-adjoint-mates",
-  "lem-pur-finite-coefficient-adjoint-comparisons",
-  "lem-coef-semilinear-derived-sections",
-  "lem-sf-integral-compactification-system-realization"
+  "lem-sf-finite-exceptional-compositor-coefficients",
+  "lem-sf-adic-exceptional-compositor-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-verdier-exchange/sk-thm-sf-verdier-exchange.proof.md",
-  "place": "Steps 1–2 and final compatibility sentence; expanded Hom and mate calculations"
+  "place": "Steps 1-2 and final compatibility sentence; short assembly of three independently queued compositor lemmas"
  },
  "mathlib_searches": [
   {
@@ -244,43 +185,31 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-verdier-exchange",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek",
+    "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex"
+   ]
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Etale.nonempty_iso_verdierDual_rightDerivedLowerShriek",
+    "AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex"
+   ]
+  }
+ },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "item": "sk-thm-sf-verdier-exchange",
   "worker": "stage1",
-  "summary": "Made the separated-scheme domain and coefficient conventions explicit after detecting that the original statement permits structure maps outside the definition of a_!. Split the imported paragraph into a typing check, the structure-morphism mate construction, the tensor–Hom specialization with its correct inverse direction, and explicit naturality/shift/coefficient calculations. Reused existing generic mate and coefficient-system nodes, with no new nodes. The finite-coefficient Lean declarations do not cover all coefficient stages or compatibility clauses; the audit affine open already belongs to thm-sc-affine-torsion-cd. Second reading replaces downstream duality-based coefficient tools by existing geometric adjoint comparisons and section adjunction/effectivity; writes the common counit transpose explicitly. Q84 retained the prior proof and statement correction, replaced definition-only adjunction citation by the exact existing theorem, reused the existing all-finite-coefficient composition square and integral system realization, and separated the long compatibility calculation into explicit geometric, transpose, coefficient-passage and final-pasting steps. No new nodes.",
-  "blueprint": "Steps 1–2 realize source Step 1, step 3 source Step 2, and steps 4–8 expand its final naturality, shift, finite-reduction and scalar-extension sentence, retaining the non-duality route.",
-  "tool_uses": [
-   {
-    "node": "fix-lem-exchanges",
-    "why": "Uses the stated completed/transported compact-support composition forms and their coefficient comparisons, which the finite-only thm-sf-comp-composition does not assert."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Uses its simultaneous models for open/proper exchange mates and direct-image composites, and their evaluation/composition coherence, for the coefficient-composition square before transposing; no new lift of an arbitrary derived diagram is assumed."
-   },
-   {
-    "node": "lem-pur-finite-coefficient-adjoint-comparisons",
-    "why": "Geometric, counit-normalized finite quotient and finite-free comparisons; avoids the downstream Verdier/biduality description of exceptional inverse image."
-   },
-   {
-    "node": "lem-coef-cartesian-section-adjoint-mates",
-    "why": "Coherent section adjunctions and their naturality for composition comparisons, before integral derived limit."
-   },
-   {
-    "node": "lem-sf-constructible-exceptional-adjunction-coefficients",
-    "why": "Exact constructible adjunctions and counit-normalized coefficient comparisons at all stages; replaces an appeal to a definition for a theorem. No Verdier-duality formula is used."
-   },
-   {
-    "node": "lem-sp-et-proet-coefficient-compatibility",
-    "why": "Canonical geometric composition/coefficient square for arbitrary finite coefficient maps, including ramified finite-free extension; the unit names composition but does not state this square."
-   },
-   {
-    "node": "lem-sf-integral-compactification-system-realization",
-    "why": "Realization of nested compact-support functors and their specified composition transformations before and after total limit; avoids assuming faithfulness of evaluated derived arrows."
-   }
-  ],
+  "summary": "Q65 re-split repair: preserve the statement and original calculations; extract three statement-only unsplit lemmas for constructible exceptional composition, finite coefficient/counit-transpose compatibility and coherent integral/field realization. The parent is a four-step assembly under 3000 characters. Retained original proof and earlier report in the delivery report, with each argument mapped to its new obligation.",
+  "blueprint": "Assembly step 1 and the constructible compositor realize blueprint Step 1; assembly step 2 realizes Step 2; assembly step 3 and the finite/adic compositor lemmas plus step 4 realize the final naturality/shift/coefficient sentence.",
+  "tool_uses": [],
   "statement_disputed": "The original statement allows X=Y to be the affine line with doubled origin and f=id. Then f is separated finite type but a_Y is not separated, so Ra_Y^! is outside the domain of sk-def-sf-operations(vi). Corrected by stating X,Y separated, making explicit the structure-map domain intended by the dualizing-complex construction."
  },
  "tool_uses": [
@@ -298,12 +227,12 @@
   "lem-sf-integral-compactification-system-realization"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q84-193b9ba41",
-  "group": "Q84",
+  "reviewer": "NT-cc-Q65-60580726d",
+  "group": "Q65",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-193b9ba41 (reviewer sub-agent of L); spot-checked: I read all of it in full: the item, the main-20261015 _section and proof, the unit, the sibling thm-sf-verdier-exchange, all 13 cited statements, the citers, Stacks more-etale 0F7J (lemma-shriek-composition, l.3159) and 0GL6 (remark-Rf-lower-shriek-change-of-rings, l.3739), and the slopmaster2 TensorHom.lean l.380-425. There are no new nodes. (1) Statement: requiring X,Y separated is a forced typing correction. sk-def-sf-operations(vi) defines Rf^! only for separated morphisms, and the doubled-origin line with f=id would put a_Y outside it. Every citer (package, global-duality, identification, poincare nodes) works over separated schemes, and all clauses are kept. Nothing is weakened. (2) Step 2: conjugating alpha^{-1}:F_x->F_aF_f gives c:G_fG_a->G_x; the direction and the Hom chain are correct. The adjunction node covers a_Y. The unit's sk-lem-sf-mate has no realizing node, and lem-sf-mate needs the admissibility datum, so doing the mate inline with the mate-pasting and conjugate leaves faithfully carries the unit's Step 1. (3) Steps 3-4: the tensor-Hom map is inverted correctly; naturality and the [-r] shift check out. (4) Step 5: the counit equation and the composition square are exactly what lem-sf-constructible-exceptional-adjunction-coefficients and lem-sp-et-proet-coefficient-compatibility state, with g=a. The square holds for any map of finite l-torsion rings, which covers the ramified B_n=A_{E',en}. (5) Step 6: I recomputed both counit transposes myself and they agree. (6) Step 7: the hypotheses of section-adjoint-mates are supplied by lem-pur-finite-coefficient-adjoint-comparisons (X,Y separated, field of positive characteristic). The realization lemma intertwines the compositors, and no faithfulness of evaluation is assumed. (7) Step 8: evaluating at L=A_s and using naturality of c_B checks out. No cycle (transitive check over the snapshot), no SGA, three-kind searches recorded, and the Lean declarations are Nonempty-iso torsion only, so nothing is attached. Accepted tool_uses (all seven in split_report): fix-lem-exchanges, lem-sf-constructible-exceptional-adjunction-coefficients, lem-sp-et-proet-coefficient-compatibility, lem-pur-finite-coefficient-adjoint-comparisons, lem-coef-cartesian-section-adjoint-mates, lem-coef-semilinear-derived-sections, lem-sf-integral-compactification-system-realization. Maintainer note: the item's maintainer-owned tool_uses and reviewed fields are left over from the Q34 split and name nodes this proof no longer cites; replace them at merge. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-60580726d (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes, every cited statement, the blueprint main-20261015 proof and unit, and the released 2026-10-22 batch-5 re-split note. Statement, stmt_deps and blueprint are byte-identical to live. The report reproduces all 8 old steps verbatim. Mapping: old 2 → constructible-compositor node; old 5+6 → finite node; old 7 → adic node; old 1, 3, 4, 8 → 4 assembly steps, 2464 chars total, none over 2000, nothing dropped. The new nodes are of comparable size and none restates the item. Mathematics checked: conjugate direction (α⁻¹: F_x→F_gF_f gives G_fG_g→G_x); counit characterization; Hom chain; typing of q_{g,f} and of the common transpose; both transposes recomputed; κ equation at L=Λ_s; ramification (ϖ^n)=(ϖ'^{en}); small cases (identities, zero, point, nonflat quotient). Three repairs, written to fixes/dag/nodes/sec-six-functors/*.json. (1) B2/B3: all three new statements used objects constructed elsewhere without stmt_deps. These are the all-stage constructible adjunctions and counits and q_h/b_h (lem-sf-constructible-exceptional-adjunction-coefficients) and α (thm-sf-comp-composition). In the adic node the system functors 𝔊_f, 𝔊_g, 𝔊_x were never introduced; they now come from lem-coef-cartesian-section-adjoint-mates, with the realization from lem-sf-integral-compactification-system-realization. Fixed by citing these nodes inline, adding the stmt_deps and the E' convention; a BFS shows no cycle. (2) C5: the finite node's first equation q_x∘C(α_A)=α_B∘q_{g,f} duplicated the composition clause of the existing lem-sp-et-proet-coefficient-compatibility; removed. (3) B9: same_as now lists det-sfb-coefficient-comparisons-exceptional and det-prop-scalar-six-exceptional for the finite and adic nodes, and pur9-def-upper-shriek-composition for the constructible node. Item, unit and proofs unchanged; no tool_uses; no SGA.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.VerdierExchange",
@@ -362,5 +291,21 @@
   "group": "NX",
   "result": "fix",
   "note": "Substance correct. Every node clause matches the Lean: the datum, all four stages with n≥1, separated finite-type X, Y and f, a_X=a_Y∘f, and the dualizing objects from the published constructible System with no ambient adjoint. Rf^!ω_Y≅ω_X is the integral conjugate of the inverse completed compositor (direction checked) and is fixed by the coefficient squares at the other stages. ε has real canonical components and an ambient D+ realization at ring stages; naturality, the [-r] shift law and every Allowed, rationalization, rational-scalar and common-stage compatibility are on their stated domains only. The exchangeNaturality clause over all StageScalar was checked to follow formally from the counit, dualizing and projection squares. The constructible-category packaging is true by thm-sf-ctf-stability. The .choose witnesses are unique. Universes are not restricted; there are no hollow defs and only the theorem is sorry; docstrings are present; only the lean field changed and its statement is verbatim. nt_compile is clean: 53.4 s delivered, 54.6 s fixed. FIX (H9): removed four unused imports (DerivedPullbackTensorHom, SfDerivedDirectImage, FiniteCoefficientAdjointComparisons, CanonicalOriginCompactSupportComposition); fixes/VerdierExchange.lean is the complete replacement module and the statement is unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-9981b",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261025T013859-L-4029736",
+  "kind": "interface",
+  "note": "independent cc review: VerdierExchangeData vs Q38 landed version 90fbac22ea6 (only explicit .{u}, gen* options, let-abstracted signedShift, cases ringInclusionShift); item vs quarantine/Sheaf/Paper/VerdierExchange.lean (Package/Assertion/verdier_exchange verbatim, 34 dup defs replaced by public import); node vs HEAD",
+  "sorry_before": [
+   "WeilConjectures.VerdierExchange.verdier_exchange"
+  ],
+  "sorry_after": [
+   "WeilConjectures.VerdierExchange.verdier_exchange"
+  ]
  }
 }

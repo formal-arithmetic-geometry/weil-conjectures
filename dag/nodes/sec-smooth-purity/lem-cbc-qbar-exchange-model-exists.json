@@ -1,0 +1,113 @@
+{
+ "id": "lem-cbc-qbar-exchange-model-exists",
+ "kind": "statement",
+ "title": "Existence of the normalized compact-support exchange model",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a compact-support square with chosen compactifications $c,c'$ and their proper Cartesian and open-immersion squares [def-cbc-compact-support-square]. Assume all four schemes are noetherian of finite dimension with $\\ell$ invertible, and $f$ is separated, locally of finite type and quasi-compact. Then the normalized exchange model of [def-cbc-qbar-normalized-exchange-model] is nonempty. This conclusion constructs the coherent composite families and their unit, localization, inverse-beta and exchange normalizations only; it asserts no exchange invertibility, descended isomorphism or representative formula.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/_section.md",
+  "place": "Adic/rational/algebraically closed coefficient clause; normalized finite-stage realization expanded in thm-cbc-qbar proof steps 2--3."
+ },
+ "stmt_deps": [
+  "def-cbc-qbar-normalized-exchange-model",
+  "def-cbc-compact-support-square",
+  "def-weil-pbc-qbar-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply coefficient coherence to obtain the normalized compact-support families H,H′, completed-pullback families P,P′, and their compatible exchange. Use their preservation and completionUnit fields. Compose H with P and P′ with H′; additivity, commutation with shifts and preservation of triangles compose. The composite beta is the prescribed whiskered product, whose commutation with shifts follows from those of its factors and the associators.",
+   "uses": [
+    "lem-cbc-rational-compact-support-coefficient-coherence",
+    "prop-weil-pbc-descent-functors"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker and compose the constituent localization equalities. Both composite integral restrictions keep exactly the ambient object and morphism maps. Expand each composite beta inverse and substitute the constituent normalized beta equations. Naturality moves the intermediate scalar-integral comparison, and adjacent inverse comparisons cancel. For H followed by P this yields cbcScalarSourceInverse; for P′ followed by H′ it yields cbcScalarTargetInverse. Membership follows from operation and scalar preservation. Equal fields are included in the constituent laws. The supplied localized exchange normalization finishes the model, with witness proofs identified by proof irrelevance.",
+   "uses": [
+    "lem-cbc-rational-compact-support-coefficient-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "prop-weil-pbc-descent-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/_section.md",
+  "place": "Coefficient-stage realization of the adic compact-support clause, expanded using the existing normalized families; thm-cbc-qbar steps 2--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Coherent compact support and completed pullback coefficient families form a normalized composite exchange model",
+   "results": "8 hits, including CategoryTheory.Precoherent.pullback and compactly supported continuous-map facts; none gives normalized completed coefficient families.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent compact support and completed pullback coefficient families form a normalized composite exchange model",
+   "results": "8 hits, including CompHausLike.pullback.condition, TopCat.GlueData.MkCore.t' and FormalMultilinearSeries.applyComposition; none concerns coefficient descent.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CbcQbarExchangeModel|CbcCompactSupportCoefficientFamily|CbcCompletedPullCoefficientFamily",
+   "results": "0 Mathlib hits. Local rg found the existing model in the item and normalized constituent families in NormalizedCoefficientFamilies.",
+   "date": "2026-10-25",
+   "verdict": "no Mathlib match; reuse constituent families and extract the existing model unchanged"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QbarCompactSupportBaseChange",
+  "date": "2026-10-25",
+  "group": "N4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-qbar",
+   "place": "Proof steps 2--3: normalized coefficient comparisons and construction of the composite descent model.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.QbarCompactSupportExchangeModelExists",
+  "file": "lean/Sheaf/Paper/QbarCompactSupportExchangeModelExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcQbarExchangeModel_exists",
+  "statement": "theorem cbcQbarExchangeModel_exists\n    [IsSeparated f] [LocallyOfFiniteType f]\n    [IsNoetherian Y] [IsNoetherian X']\n    (dimY : ∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))\n    (dimX' : ∃ n : ℕ, topologicalKrullDim X' ≤ (n : WithBot ℕ∞))\n    (invY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y))\n    (invX' : ∀ x : X', IsUnit (l : X'.presheaf.stalk x)) :\n    Nonempty (CbcQbarExchangeModel l Ω c c' gbar properSquare openSquare)",
+  "branch": "sheaf-dag",
+  "by": "N4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66069",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T163938-L-913472",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-66069",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261025T163938-L-913472",
+  "kind": "interface",
+  "note": "independent cc review: qbarCompactSupportBaseChange statement (byte-identical to clone) and moved model/scalar defs (bodies identical, re-exported) against thm-cbc-qbar + new nodes def-cbc-qbar-normalized-exchange-model / lem-cbc-qbar-exchange-model-exists; 6 of 7 direct importers compiled with the delivery"
+ }
+}

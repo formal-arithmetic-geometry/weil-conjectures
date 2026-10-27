@@ -1,0 +1,203 @@
+{
+ "id": "lem-trf-essential-pro-initial-evaluation",
+ "kind": "statement",
+ "title": "Evaluate an essentially constant pro-cone at an initial stage",
+ "statement": "Let $J$ be a cofiltered category, $\\mathcal C$ a category, $G:J\\to\\mathcal C$ a functor, and $i\\in J$ an initial object, meaning there is a unique morphism $\\iota_j:i\\to j$ for every $j\\in J$. Suppose $G$ is essentially constant as a pro-object with value $X$ [def-pc-essentially-constant-pro-diagram] for a specified cone $u_j:X\\to G(j)$: these maps are natural in $j$, and there are $j_0\\in J$ and $r:G(j_0)\\to X$ with $ru_{j_0}=1_X$ such that, for every $j$, some $k\\in J$ and arrows $a:k\\to j_0$, $b:k\\to j$ satisfy $G(b)=u_jrG(a)$. Then $u_i:X\\to G(i)$ is an isomorphism whose inverse is\n$$w=rG(\\iota_{j_0}):G(i)\\to X.$$\nMore precisely, $wu_i=1_X$, $u_iw=1_{G(i)}$, and $u_j=G(\\iota_j)u_i$ for every $j$. This assertion holds for the specified cone and every witness $(j_0,r)$ satisfying these conditions.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 05PU (definition-essentially-constant-diagram), clause (2)(a)-(b); explicit inverse calculation extracted from returned item step 3. This is an agent-formulated consequence for a specified cone, not a verbatim Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof": [
+  {
+   "text": "By naturality of the specified cone in [def-pc-essentially-constant-pro-diagram], $G(\\iota_j)u_i=u_j$ for every $j$. Set $w=rG(\\iota_{j_0}):G(i)\\to X$. At $j=j_0$, naturality and the given retraction identity yield $wu_i=rG(\\iota_{j_0})u_i=ru_{j_0}=1_X$.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PU (categories-definition-essentially-constant-diagram), part (2)(a)-(b); elementary consequence for the specified cone at an initial object, calculated by Q25."
+   }
+  },
+  {
+   "text": "Apply the common-stage clause of [def-pc-essentially-constant-pro-diagram] at $j=i$, obtaining $a:k\\to j_0$, $b:k\\to i$ with $G(b)=u_i rG(a)$. Put $c=\\iota_k:i\\to k$. Initiality gives $bc=1_i$ and $ac=\\iota_{j_0}$, because each is a pair of morphisms from $i$ to the same object. Precompose the factorization with $G(c)$ and use functoriality: $1_{G(i)}=G(bc)=G(b)G(c)=u_i rG(a)G(c)=u_i rG(ac)=u_i rG(\\iota_{j_0})=u_iw$.",
+   "uses": [
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PU (categories-definition-essentially-constant-diagram), part (2)(a)-(b); elementary consequence for the specified cone at an initial object, calculated by Q25."
+   }
+  },
+  {
+   "text": "The two identities $wu_i=1_X$ and $u_iw=1_{G(i)}$ say exactly that $u_i$ is an isomorphism with inverse $w$. The formula $u_j=G(\\iota_j)u_i$ was proved in Step 1. The calculation began with an arbitrary specified cone and an arbitrary witness $(j_0,r)$ satisfying the stated conditions, so it proves every asserted quantifier.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 05PU (categories-definition-essentially-constant-diagram), part (2)(a)-(b); elementary consequence for the specified cone at an initial object, calculated by Q25."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-essentially-constant-pro-diagram"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 05PU (categories-definition-essentially-constant-diagram), part (2)(a)-(b); elementary consequence for the specified cone at an initial object, calculated by Q25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ee]ssentially[Cc]onstant|[Ee]ssentially.constant|[Ii]sInitial.*[Ii]sIso|[Ii]sIso.*[Ii]sInitial",
+   "results": "{\"t\": \"2026-10-22T06:47:08Z\", \"tool\": \"grep\", \"query\": \"[Ee]ssentially[Cc]onstant|[Ee]ssentially.constant|[Ii]sInitial.*[Ii]sIso|[Ii]sIso.*[Ii]sInitial\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Sites/Plus.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Limits/VanKampen.lean\", \"Mathlib/CategoryTheory/Limits/VanKampen.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean\"], \"digest\": \"9e4c6547e92bc088\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Limits.IsLimit.isIso_π_app_of_isInitial (CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes an already limit cone, whereas this statement starts with the specified Stacks 05PU retraction/factorization witness and identifies an explicit inverse. IsEventuallyConstantTo results concern eventual transition isomorphisms, not this pro-object condition. The cone inverse calculation preserved in the report is needed."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInitial\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-22T06:47:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInitial\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.isIso_π_app_of_isInitial\", \"CategoryTheory.Limits.IsInitial.ofBinaryCoproductDisjointOfIsLimit\", \"CategoryTheory.Limits.IsInitial.ofCoproductDisjointOfIsLimit\", \"CategoryTheory.Limits.IsInitial.ofBinaryCoproductDisjointOfIsColimitOfIsLimit\", \"CategoryTheory.Limits.IsInitial.ofCoproductDisjointOfIsColimitOfIsLimit\"], \"digest\": \"c653f8236796c0d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Limits.IsLimit.isIso_π_app_of_isInitial (CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes an already limit cone, whereas this statement starts with the specified Stacks 05PU retraction/factorization witness and identifies an explicit inverse. IsEventuallyConstantTo results concern eventual transition isomorphisms, not this pro-object condition. The cone inverse calculation preserved in the report is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An essentially constant pro diagram over a category with an initial object has value canonically isomorphic to its initial stage",
+   "results": "{\"t\": \"2026-10-22T06:47:09Z\", \"tool\": \"leansearch\", \"query\": \"An essentially constant pro diagram over a category with an initial object has value canonically isomorphic to its initial stage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.limitOfInitial\", \"CategoryTheory.Limits.colimitConstInitial\", \"CategoryTheory.Functor.initial_const_initial\", \"CategoryTheory.Limits.isIso_π_initial\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isoMap\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.coconeιApp_eq_id\", \"CategoryTheory.Limits.ι_colimitConstInitial_hom\", \"CategoryTheory.Limits.colimitConstInitial_inv\"], \"digest\": \"2c7b166cae52778a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Limits.IsLimit.isIso_π_app_of_isInitial (CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes an already limit cone, whereas this statement starts with the specified Stacks 05PU retraction/factorization witness and identifies an explicit inverse. IsEventuallyConstantTo results concern eventual transition isomorphisms, not this pro-object condition. The cone inverse calculation preserved in the report is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a cone with a stage retraction and common-stage factorization on a cofiltered diagram, its leg at an initial object is an isomorphism",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"leanfinder\", \"query\": \"Given a cone with a stage retraction and common-stage factorization on a cofiltered diagram, its leg at an initial object is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.isIso_π_app_of_isInitial\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'\", \"CategoryTheory.Limits.isIso_π_initial\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit\", \"CategoryTheory.Limits.isIso_π_of_isInitial\", \"CategoryTheory.Limits.coconeOfDiagramInitial_ι_app\", \"CategoryTheory.Limits.coconeOfDiagramInitial\", \"CategoryTheory.Limits.coconeOfDiagramInitial_pt\"], \"digest\": \"ac8c43ba5274bf02\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Limits.IsLimit.isIso_π_app_of_isInitial (CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes an already limit cone, whereas this statement starts with the specified Stacks 05PU retraction/factorization witness and identifies an explicit inverse. IsEventuallyConstantTo results concern eventual transition isomorphisms, not this pro-object condition. The cone inverse calculation preserved in the report is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially constant cofiltered pro-object with specified value cone evaluated at an initial index has an invertible cone leg",
+   "results": "{\"t\": \"2026-10-22T06:47:20Z\", \"tool\": \"leanfinder\", \"query\": \"An essentially constant cofiltered pro-object with specified value cone evaluated at an initial index has an invertible cone leg\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit\", \"CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq\", \"CategoryTheory.Functor.initial_of_isCofiltered_pUnit\", \"CategoryTheory.Functor.initial_iff_of_isCofiltered\", \"CategoryTheory.Functor.IsEventuallyConstantTo.cone_pt\", \"CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq_id\"], \"digest\": \"51d3f6c4dece904a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Limits.IsLimit.isIso_π_app_of_isInitial (CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes an already limit cone, whereas this statement starts with the specified Stacks 05PU retraction/factorization witness and identifies an explicit inverse. IsEventuallyConstantTo results concern eventual transition isomorphisms, not this pro-object condition. The cone inverse calculation preserved in the report is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]ssentially[Cc]onstant|[Ee]ssentially.constant|[Ii]sInitial.*[Ii]sIso|[Ii]sIso.*[Ii]sInitial",
+   "results": "{\"t\": \"2026-10-23T14:38:19Z\", \"tool\": \"grep\", \"query\": \"[Ee]ssentially[Cc]onstant|[Ee]ssentially.constant|[Ii]sInitial.*[Ii]sIso|[Ii]sIso.*[Ii]sInitial\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 24, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Endofunctor/Algebra.lean\", \"Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Galois/Basic.lean\", \"Mathlib/CategoryTheory/Extensive.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Cartesian.lean\"], \"digest\": \"eaeaf79e9eebe988\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the closest result Limits.IsLimit.isIso_π_app_of_isInitial (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes a limit cone, not the specified retraction/factorization witnesses or explicit inverse. Eventual-constancy results require transition isomorphisms and/or a limit cone. The short inverse calculation is supplied in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An essentially constant pro-object with a specified cone is isomorphic to the value of the diagram at an initial index, with inverse induced by the retraction witness",
+   "results": "{\"t\": \"2026-10-23T14:38:19Z\", \"tool\": \"leansearch\", \"query\": \"An essentially constant pro-object with a specified cone is isomorphic to the value of the diagram at an initial index, with inverse induced by the retraction witness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantTo.cone_pt\", \"CategoryTheory.Limits.colimitConstInitial_inv\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isoMap\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'\", \"CategoryTheory.Limits.isIso_π_initial\", \"CategoryTheory.Functor.IsEventuallyConstantFrom.isIso_ι_of_isColimit\", \"CategoryTheory.Limits.colimitOfDiagramInitial\"], \"digest\": \"c30a6003b901ae8d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the closest result Limits.IsLimit.isIso_π_app_of_isInitial (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes a limit cone, not the specified retraction/factorization witnesses or explicit inverse. Eventual-constancy results require transition isomorphisms and/or a limit cone. The short inverse calculation is supplied in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInitial\", \"IsLimit\"",
+   "results": "{\"t\": \"2026-10-23T14:38:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInitial\\\", \\\"IsLimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.isIso_π_app_of_isInitial\", \"CategoryTheory.Limits.IsInitial.ofBinaryCoproductDisjointOfIsLimit\", \"CategoryTheory.Limits.IsInitial.ofCoproductDisjointOfIsLimit\", \"CategoryTheory.Limits.IsInitial.ofBinaryCoproductDisjointOfIsColimitOfIsLimit\", \"CategoryTheory.Limits.IsInitial.ofCoproductDisjointOfIsColimitOfIsLimit\"], \"digest\": \"c653f8236796c0d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the closest result Limits.IsLimit.isIso_π_app_of_isInitial (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes a limit cone, not the specified retraction/factorization witnesses or explicit inverse. Eventual-constancy results require transition isomorphisms and/or a limit cone. The short inverse calculation is supplied in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a natural cone X to a cofiltered diagram G with a stage retraction and common-stage factorization through X, its leg at an initial object is an isomorphism",
+   "results": "{\"t\": \"2026-10-23T14:38:20Z\", \"tool\": \"leanfinder\", \"query\": \"Given a natural cone X to a cofiltered diagram G with a stage retraction and common-stage factorization through X, its leg at an initial object is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit\", \"CategoryTheory.Limits.IsLimit.isIso_π_app_of_isInitial\", \"CategoryTheory.Functor.IsEventuallyConstantTo.isIso_π_of_isLimit'\", \"CategoryTheory.Limits.isIso_π_of_isInitial\", \"CategoryTheory.Limits.isIso_π_initial\", \"CategoryTheory.Functor.IsEventuallyConstantTo.coneπApp_eq\", \"CategoryTheory.Limits.coconeOfDiagramInitial_ι_app\", \"CategoryTheory.Limits.isIso_ι_initial\"], \"digest\": \"1ede477587c02e5f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the closest result Limits.IsLimit.isIso_π_app_of_isInitial (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes a limit cone, not the specified retraction/factorization witnesses or explicit inverse. Eventual-constancy results require transition isomorphisms and/or a limit cone. The short inverse calculation is supplied in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split cone over a diagram indexed by a category with an initial object has an invertible component if every transition eventually factors through its vertex",
+   "results": "{\"t\": \"2026-10-23T14:38:48Z\", \"tool\": \"leanfinder\", \"query\": \"A split cone over a diagram indexed by a category with an initial object has an invertible component if every transition eventually factors through its vertex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.IsLimit.isIso_π_app_of_isInitial\", \"CategoryTheory.Limits.IsInitial.isSplitEpi_to\", \"CategoryTheory.Limits.initial.isSplitEpi_to\", \"CategoryTheory.Limits.coconeOfDiagramInitial_ι_app\", \"CategoryTheory.Limits.isIso_π_of_isInitial\", \"CategoryTheory.Limits.isIso_π_initial\", \"CategoryTheory.Limits.coneOfDiagramInitial\", \"CategoryTheory.Limits.coconeOfDiagramInitial\"], \"digest\": \"b776736acba2184f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the closest result Limits.IsLimit.isIso_π_app_of_isInitial (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes a limit cone, not the specified retraction/factorization witnesses or explicit inverse. Eventual-constancy results require transition isomorphisms and/or a limit cone. The short inverse calculation is supplied in the proof."
+  },
+  {
+   "tool": "grep",
+   "query": "def IsEventuallyConstantTo|isIso_π_of_isLimit|IsLimit.isIso_π_app_of_isInitial",
+   "results": "{\"t\": \"2026-10-23T14:42:32Z\", \"tool\": \"grep\", \"query\": \"def IsEventuallyConstantTo|isIso_π_of_isLimit|IsLimit.isIso_π_app_of_isInitial\", \"sub\": \"CategoryTheory/Limits\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean\", \"Mathlib/CategoryTheory/Limits/Constructions/EventuallyConstant.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean\"], \"digest\": \"75652a2e7ff43bf6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the closest result Limits.IsLimit.isIso_π_app_of_isInitial (Mathlib/CategoryTheory/Limits/Shapes/IsTerminal.lean:427-432) assumes a limit cone, not the specified retraction/factorization witnesses or explicit inverse. Eventual-constancy results require transition isomorphisms and/or a limit cone. The short inverse calculation is supplied in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-left-derived-object-cohomology",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor. Supporting object-level input: closure of left-acyclic objects under extensions and kernels of epimorphisms, dual of Stacks 015D. Supporting single-object cohomology input: the degree-zero counit and positive-degree vanishing used before the long exact sequence. Extracted argument: invert the canonical essential-value cone leg at the initial identity denominator using its retraction and common-stage factorization (returned step 3).",
+   "via": [
+    "lem-trf-left-derived-object-cohomology",
+    "lem-trf-left-acyclic-short-exact",
+    "lem-trf-bounded-above-acyclic-derived-computation",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-essential-pro-initial-evaluation",
+  "worker": "stage1",
+  "summary": "Q25 checked Stacks 05PU(2), the specified-cone quantifiers and the current project source; proved both inverse identities and the component formula by elementary naturality, initiality and functoriality calculations. No new nodes or statement changes were needed. Preserved inherited search records and appended the actual Q25 searches.",
+  "blueprint": "Supporting categorical calculation in the inherited chain from lem-trf-local-term-locality, proof (1)--(2), to lem-trf-left-derived-object-cohomology, returned step 3: inversion of the canonical essential-value cone leg at the initial identity denominator. The latest blueprint ancestor was read; this auxiliary calculation is not a separately stated blueprint lemma.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-e3ef3fff7",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-e3ef3fff7 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit (the item plus its report, which has a Review by Q25 section) with no new nodes. The item statement is byte-identical to the live and side-live copies, which are both still unsplit, so no other group has done this item. There is no re-split repair note for it. Source checked: Stacks categories.tex lines 2928-2958, Definition 05PU, part (2); the cited def-pc-essentially-constant-pro-diagram matches it clause for clause and arrow for arrow. Step 1: naturality gives G(iota_j)u_i = u_j, and r u_{j0} = 1 then gives w u_i = 1. Step 2: the common-stage clause at j = i, with c = iota_k; initiality gives bc = 1_i and ac = iota_{j0}, and covariant functoriality gives 1 = u_i w. Step 3: the two inverse identities, holding for every witness. All three steps are elementary and complete; proof_deps equals the union of the step uses, and no tool_uses are needed. Small cases I tested: a one-object J; J = {i -> t}, where the conclusion correctly holds only at the initial stage; j_0 different from i; and a split inclusion that has a retraction but fails the common-stage clause, so Step 2 really needs that hypothesis. Duplicate search over the snapshot (rg -L for 05PU and essentially constant, crossed with initial): lem-pur-essential-constant-cofinal-0a1s, lem-trf-kprojective-denominator-initial, lem-pc-essentially-constant-pro-hom-colimit, lem-pur-essential-constant-pro-criterion-05py and lem-pur-resolving-class-essential-constancy. None states this explicit inverse for every witness. The blueprint chain is kept, no SGA is cited, and I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantProInitialEvaluation",
+  "declaration": "CategoryTheory.essentiallyConstantPro_initial_evaluation",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/EssentiallyConstantProInitialEvaluation.lean",
+  "statement": "theorem essentiallyConstantPro_initial_evaluation {J : Type uJ} {C : Type uC} [Category.{vJ} J] [Category.{vC} C] (G : J ⥤ C) (X : C) (i : J) (hi : IsInitial i) (h : IsEssentiallyConstantProDiagram G X) : ∀ (u : (Functor.const J).obj X ⟶ G) (j₀ : J) (r : G.obj j₀ ⟶ X), u.app j₀ ≫ r = 𝟙 X → (∀ j : J, ∃ k : J, ∃ a : k ⟶ j₀, ∃ b : k ⟶ j, G.map b = G.map a ≫ r ≫ u.app j) → IsIso (u.app i) ∧ u.app i ≫ (G.map (hi.to j₀) ≫ r) = 𝟙 X ∧ (G.map (hi.to j₀) ≫ r) ≫ u.app i = 𝟙 (G.obj i) ∧ ∀ j : J, u.app j = u.app i ≫ G.map (hi.to j)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e8ef6285",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05PU(2) clause by clause: arbitrary cone u and witness (j0,r), retraction u.app j0 ≫ r = 𝟙, factorization G.map b = G.map a ≫ r ≫ u.app j (same as dependency IsEssentiallyConstantProDiagram), conclusions IsIso, both inverse identities with w = G.map (hi.to j0) ≫ r, and u_j = u_i ≫ G.map ι_j, all in correct order; h only adds cofilteredness, which the node assumes; universes independent, no extra instances. Proof steps re-checked and true. Records: only lean field changed vs side-live; statement identical; lean.statement verbatim; not landed by another group. No defs, sorry only, docstrings carry source, blueprint tag and proof steps. No Mathlib/project duplicate (isIso_π_app_of_isInitial needs IsLimit). Advisory H11: Second reading section says none was done (dispatcher policy); worker clause mapping verified. No files changed, so no compile."
+ }
+}

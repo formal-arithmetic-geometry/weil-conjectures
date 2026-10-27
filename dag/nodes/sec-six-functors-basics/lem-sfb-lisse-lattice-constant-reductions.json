@@ -1,0 +1,263 @@
+{
+ "id": "lem-sfb-lisse-lattice-constant-reductions",
+ "kind": "statement",
+ "title": "Global compatible bases for individually constant lisse reductions",
+ "statement": "Let $\\ell$ be a prime, $E/\\mathbf Q_\\ell$ a finite extension with its norm topology, $A=\\mathcal O_E$ its valuation ring, $\\varpi$ a uniformizer, and $A_n=A/\\varpi^nA$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be any scheme, with no connectedness or Noetherian hypothesis [def-pc-scheme]. On its small pro-etale site [def-weil-pbc-proetale-site], let $A_X$ and $E_X$ be the pullbacks of the condensed continuous-map rings of $A$ and $E$, and let $(A_n)_X$ be that of the finite discrete ring $A_n$ [def-sfb-continuous-map-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use internal modules [sk-def-sfb-module-objects], equivalently sheaf modules with their unchanged underlying abelian sheaves [def-weil-sheaf-of-modules-category]. Let $N$ be a lisse $A_X$-module, meaning pro-etale locally finite free, with rank zero allowed [def-sfb-lisse-coefficient-module]. Set $F_n=N/\\varpi^nN$ with the actual scalar quotient transitions $F_{n+1}/\\varpi^nF_{n+1}\\cong F_n$.\n\nFix $d\\geq0$. Assume that for each $n\\geq1$ there exists an $A_n$-linear isomorphism $F_n\\cong(A_n)_X^d$, where $(A_n)_X$ is the constant sheaf of the finite ring $A_n$ [def-weil-pbc-constant-sheaf]. No compatibility between these initially supplied isomorphisms is assumed. Given any isomorphism $b_1:F_1\\xrightarrow{\\sim}(A_1)_X^d$, there are isomorphisms $b_n:F_n\\xrightarrow{\\sim}(A_n)_X^d$ extending $b_1$ and commuting with all quotient transitions. There is an $A_X$-linear isomorphism $b:N\\xrightarrow{\\sim}A_X^d$ whose reduction is $b_n$ for every $n$. Along the inclusion $A_X\\to E_X$ induced by $A\\subset E$ [def-sfb-continuous-map-condensed-ring-map], it gives an isomorphism of the ordinary scalar extension $E_X\\otimes_{A_X}N$ with $E_X^d$, the constant continuous-coefficient module with fibre $E^d$. These are assertions on $X$ itself, not just after a cover. They include the empty scheme and $d=0$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Original item steps 7 and 8: agent compatible-basis argument supplementing Lemma 4.2.12 and Proposition 6.8.4(1), p.59. Apply the reduction equivalence on X itself after constructing globally compatible bases; the scalar extension is ordinary rationalization. Not the weaker assertion that compatible bases exist after a pro-etale covering."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-lisse-coefficient-module",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-per-integral-lisse-reduction-data",
+  "def-weil-pbc-lisse-lattice-coefficients",
+  "def-sfb-integral-lisse-cokernel-tower",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient reduction has a proved sectionwise-surjective cokernel description. Transfer this surjectivity to the canonical scalar cokernel using its unique comparison isomorphism. The finite free summand maps and projections then show that the canonical quotient of the standard finite free integral sheaf is surjective on sections over every object. In particular it is surjective over the terminal pro-etale object X. Lift the images of the free generators there and restrict them along each object’s structure map to X. The free sheaf universal property assembles them into a global integral-linear lift of any map from the integral free sheaf to its quotient. This uses global coefficient sections, not local lifting of arbitrary sheaf epimorphisms.",
+   "uses": [
+    "lem-sfb-integral-lisse-coefficient-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), Proposition 6.8.4(1); global finite-basis lifting using continuous coefficient reductions"
+   }
+  },
+  {
+   "text": "Lift a quotient automorphism and its inverse to endomorphisms of the integral free sheaf using Step 1, then reduce both lifts to level n+1. Naturality and epimorphy of the canonical projections show that their reductions at level n are the prescribed inverse maps. The inverse errors dP=bg-1 and dQ=gb-1 vanish under the transition. That transition is the cokernel of the smaller uniformizer power. Exactness, naturality of scalar multiplication and the vanishing of the larger power imply dP squared and dQ squared vanish: each error factors through the smaller scalar and commutes with it, and that scalar squares to zero. Correct the inverse by 1-dP, equivalently by 1-dQ. Thus every global quotient automorphism lifts globally to the next level. The calculation uses the existing proved private lift_iso_square_zero, scalarCokernel_zero and scalar_square_zero lemmas from IntegralLisseTowerLocalBases, made available by a proof-only import all. No copies or new square-zero statements are introduced; its local-bases theorem is not applied.",
+   "uses": [
+    "lem-sfb-integral-lisse-cokernel-transition-quotient",
+    "lem-sfb-integral-lisse-tower-local-bases"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1); square-zero inverse correction in the sheaf module category"
+   }
+  },
+  {
+   "text": "Given a current basis and an arbitrary next-level basis, descend the latter through the actual scalar cokernels. Their universal properties give the descended isomorphism and its transition equation. Compare it to the current basis, lift the resulting automorphism by Step 2, and postcompose the next-level basis with that lift. This gives a next basis satisfying the adjacent compatibility equation. Recursion starting at the prescribed residue basis gives all levels. NatTrans.ofOpSequence assembles the adjacent equations into a natural isomorphism of the actual towers.",
+   "uses": [
+    "lem-sfb-integral-lisse-cokernel-transition-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1); recursion on positive reduction levels and scalar-cokernel universality"
+   }
+  },
+  {
+   "text": "The existing proved private free_isFiniteLocallyFree lemma from IntegralLisseTowerEffective supplies finite local freeness of the standard free sheaf, including the empty index type. A proof-only import all makes that lemma available; the effectiveness theorem is not applied. Apply the integral-lisse module completeness theorem both to N and to this standard free sheaf. Postcompose the first limit cone by the tower isomorphism from Step 3, and use uniqueness of limits to obtain an integral basis. Its projection equation, naturality of the canonical cokernel projection and epimorphy of that projection identify every actual reduction with the chosen tower basis. A separate coefficient-limit application and a separate finite-product/limit comparison are unnecessary.",
+   "uses": [
+    "lem-sfb-integral-lisse-module-complete",
+    "lem-sfb-integral-lisse-tower-effective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), Definition 6.8.3, Proposition 6.8.4(1); uniqueness of limits"
+   }
+  },
+  {
+   "text": "For the ordinary rationalization, evaluate the integral basis on each object. Compose its linear equivalence with finite-free coordinates. The scalar-extension tensor congruence, TensorProduct.piRight and the tensor right-unit equivalence identify S(U) tensor_R(U) N(U) with the finite free S(U)-module. The resulting map sends s tensor x to coordinates s times the scalar image of the integral coordinates of x. The tensor universal property reduces naturality to pure tensors; naturality of the integral basis, free projections and the ring map proves it. Sheafify the resulting presheaf isomorphism and compose with the sheafification counit of the free target. Unit naturality and the adjunction triangle prove exactly the stated formula after the actual sheafification unit. Rank zero uses empty finite sums throughout; every construction is valid over the empty scheme without an extra hypothesis.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.1 and Proposition 6.8.4(1); ordinary scalar extension and tensor sheafification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-coefficient-quotients",
+  "lem-sfb-integral-lisse-cokernel-transition-quotient",
+  "lem-sfb-integral-lisse-tower-local-bases",
+  "lem-sfb-integral-lisse-module-complete",
+  "lem-sfb-integral-lisse-tower-effective",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Global compatible-basis supplement to Proposition 6.8.4(1), realized by global free-generator lifts, the existing private square-zero lemmas of IntegralLisseTowerLocalBases, module completeness twice using the existing private free_isFiniteLocallyFree lemma of IntegralLisseTowerEffective, and sectionwise tensor sheafification. Both helper modules are imported proof-only with import all; none of their private lemmas is redeclared."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A lisse integral local system whose reductions modulo every uniformizer power are globally constant free of fixed rank is globally free with compatible reduction bases",
+   "results": "{\"t\": \"2026-10-22T06:06:17Z\", \"tool\": \"leanfinder\", \"query\": \"A lisse integral local system whose reductions modulo every uniformizer power are globally constant free of fixed rank is globally free with compatible reduction bases\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LocallyConstant.freeOfProfinite\", \"Profinite.NobelingProof.Nobeling_aux\", \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"Module.isLocallyConstant_rankAtStalk\", \"Module.exists_basis_of_basis_baseChange\", \"Module.mem_freeLocus\", \"Module.free_of_flat_of_isLocalRing\", \"Module.free_of_flat_of_finrank_eq\"], \"digest\": \"7148663f8123ae58\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completeness, free sheaf constructors and manifold frames do not assert global compatible trivializations of these sheaf reductions on an arbitrary scheme"
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*(basis|bases|trivialization)|constant.*reductions|reductions.*constant",
+   "results": "{\"t\": \"2026-10-22T06:06:26Z\", \"tool\": \"grep\", \"query\": \"compatible.*(basis|bases|trivialization)|constant.*reductions|reductions.*constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean\", \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"Mathlib/Topology/Category/TopCat/Limits/Cofiltered.lean\", \"Mathlib/Topology/Category/TopCat/Limits/Cofiltered.lean\"], \"digest\": \"6ffdfb0dafa121c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completeness, free sheaf constructors and manifold frames do not assert global compatible trivializations of these sheaf reductions on an arbitrary scheme"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global compatible bases of constant finite reductions reconstruct a free integral lisse sheaf on any scheme",
+   "results": "{\"t\": \"2026-10-22T06:06:26Z\", \"tool\": \"leansearch\", \"query\": \"Global compatible bases of constant finite reductions reconstruct a free integral lisse sheaf on any scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"Profinite.NobelingProof.Nobeling_aux\", \"LocallyConstant.freeOfProfinite\", \"CategoryTheory.constantSheafΓAdj\", \"LightCondensed.IsDiscrete\", \"SheafOfModules.freeCofan\", \"SheafOfModules.pullbackObjFreeIso\"], \"digest\": \"226b57b862c244f8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completeness, free sheaf constructors and manifold frames do not assert global compatible trivializations of these sheaf reductions on an arbitrary scheme"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T06:06:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyConstant\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completeness, free sheaf constructors and manifold frames do not assert global compatible trivializations of these sheaf reductions on an arbitrary scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Individually trivial finite free reductions of an adic module sheaf admit globally compatible trivializations and reconstruct the constant complete module",
+   "results": "{\"t\": \"2026-10-22T06:06:54Z\", \"tool\": \"leanfinder\", \"query\": \"Individually trivial finite free reductions of an adic module sheaf admit globally compatible trivializations and reconstruct the constant complete module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top\", \"AdicCompletion.of_apply\", \"AdicCompletion\", \"AdicCompletion.exists_smodEq_pow_add_one_smul\", \"Hausdorffification\", \"AdicCompletion.eval_of\"], \"digest\": \"09d79ab860517fbc\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary module completeness, free sheaf constructors and manifold frames do not assert global compatible trivializations of these sheaf reductions on an arbitrary scheme"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Individually constant finite reductions of a lisse integral sheaf admit compatible global bases extending a given residue basis",
+   "results": "{\"t\": \"2026-10-22T07:09:04Z\", \"tool\": \"leanfinder\", \"query\": \"Individually constant finite reductions of a lisse integral sheaf admit compatible global bases extending a given residue basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.exists_basis_of_basis_baseChange\", \"Profinite.NobelingProof.GoodProducts.Basis\", \"FiniteDimensional.exists_is_basis_integral\", \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"IsLocalRing.basisQuotient_apply\", \"Module.Basis.ofIsCoprimeDifferentIdeal\"], \"digest\": \"4e2beeec1be7c8ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic module bases/completions, free sheaf constructors and bundle trivializations do not give the global compatible trivializations of finite reduction sheaves on arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "compatible.*(basis|bases|trivialization)|constant.*reductions|reductions.*constant",
+   "results": "{\"t\": \"2026-10-22T07:12:26Z\", \"tool\": \"grep\", \"query\": \"compatible.*(basis|bases|trivialization)|constant.*reductions|reductions.*constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Geometry/Manifold/VectorBundle/LocalFrame.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean\", \"Mathlib/Topology/Algebra/Nonarchimedean/Bases.lean\", \"Mathlib/Topology/Algebra/FilterBasis.lean\", \"Mathlib/Topology/Category/TopCat/Limits/Cofiltered.lean\", \"Mathlib/Topology/Category/TopCat/Limits/Cofiltered.lean\"], \"digest\": \"6ffdfb0dafa121c9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic module bases/completions, free sheaf constructors and bundle trivializations do not give the global compatible trivializations of finite reduction sheaves on arbitrary schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible trivializations of all finite quotient sheaves reconstruct a globally free complete local system",
+   "results": "{\"t\": \"2026-10-22T07:12:27Z\", \"tool\": \"leansearch\", \"query\": \"Compatible trivializations of all finite quotient sheaves reconstruct a globally free complete local system\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Trivialization.toPretrivialization\", \"VectorBundleCore.localTriv\", \"LocallyConstant.freeOfProfinite\", \"Trivialization.IsLinear\", \"SheafOfModules.free\", \"TopCat.Sheaf.forget\", \"SheafOfModules.ιFree\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\"], \"digest\": \"6f794a1ccca4fbdb\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic module bases/completions, free sheaf constructors and bundle trivializations do not give the global compatible trivializations of finite reduction sheaves on arbitrary schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"AdicCompletion\"",
+   "results": "{\"t\": \"2026-10-22T07:12:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyConstant\\\", \\\"AdicCompletion\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic module bases/completions, free sheaf constructors and bundle trivializations do not give the global compatible trivializations of finite reduction sheaves on arbitrary schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adically complete module sheaf with constant free finite quotients is free by successively lifting change of basis matrices",
+   "results": "{\"t\": \"2026-10-22T07:12:38Z\", \"tool\": \"leanfinder\", \"query\": \"An adically complete module sheaf with constant free finite quotients is free by successively lifting change of basis matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete\", \"Module.FinitePresentation.exists_free_localizedModule_powers\", \"IsPrecomplete\", \"AdicCompletion\", \"AdicCompletion.module\", \"IsAdicComplete.toIsPrecomplete\", \"Hausdorffification\", \"isPrecomplete_iff\"], \"digest\": \"7519c8081a72f050\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic module bases/completions, free sheaf constructors and bundle trivializations do not give the global compatible trivializations of finite reduction sheaves on arbitrary schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_basis_of_basis_baseChange|def free |class IsAdicComplete|def AdicCompletion|def toPretrivialization",
+   "results": "{\"t\": \"2026-10-22T07:13:45Z\", \"tool\": \"grep\", \"query\": \"exists_basis_of_basis_baseChange|def free |class IsAdicComplete|def AdicCompletion|def toPretrivialization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"Mathlib/NumberTheory/Padics/HeightOneSpectrum.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/Free.lean\"], \"digest\": \"571a623876ca88fa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary algebraic module bases/completions, free sheaf constructors and bundle trivializations do not give the global compatible trivializations of finite reduction sheaves on arbitrary schemes"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lisse-lattice-potential-kummer-tameness",
+  "date": "2026-10-22",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3): coefficient-specific alteration/tame-boundary reduction below lem-sfb-continuous-algcl-open-scalar-comparison; this added input has no imported blueprint ancestor; extracted Original item steps 7 and 8: agent compatible-basis argument supplementing Lemma 4.2.12 and Proposition 6.8.4(1), p.59. Apply the reduction equivalence on X itself after constructing globally compatible bases; the scalar extension is ordinary rationalization. Not the weaker assertion that compatible bases exist after a pro-etale covering.",
+   "via": [
+    "lem-sfb-lisse-lattice-potential-kummer-tameness",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lisse-lattice-constant-reductions",
+  "worker": "stage1",
+  "summary": "Preserved the complete global statement, arbitrary schemes, prescribed residue basis and zero rank. Wrote the finite-basis matrix description, global square-zero lift, basis-correction recursion, limit assembly and ordinary scalar-extension formulas. Reused five existing nodes; created none. No exact project attachment or Mathlib leaf was found.",
+  "blueprint": "Realizes the original steps 7 and 8 of lem-sfb-lisse-lattice-potential-kummer-tameness: global compatible bases and rationalization, supporting det-thm-sf-ctf-stability-direct-images proof (3). The recorded ancestor command returns None for this added-input chain; preserved the inherited blueprint.from record.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integral-square-zero-matrix-lift",
+    "why": "Generic square-zero matrix inversion, used over A_(n+1); no unit-specific result is replaced."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-module-complete",
+    "why": "Finite locally free integral module completeness on an arbitrary scheme, used only to identify N with its actual scalar-quotient limit."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-coefficient-limit",
+    "why": "Continuous integral coefficient limit with canonical reduction projections on arbitrary schemes, used to identify the constant free tower limit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-integral-lisse-module-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-fbafcf788",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-fbafcf788 (reviewer sub-agent of L); spot-checked: There are no new nodes and the statement is unchanged; the item is the Q93 extraction of steps 7–8 of lem-sfb-lisse-lattice-potential-kummer-tameness, and its only citer uses it verbatim. No re-split note applies, there is no cycle (closure of 314 nodes) and no SGA source. I checked the source in Bhatt–Scholze: Lemma 4.2.12 holds on any scheme (qcqs only for the π0 formula), Lemma 6.8.2(1) and Definition 6.8.3 match, and Prop. 6.8.4(1) leaves its proof to the reader, so writing it out is the split. Step 1 uses totally-disconnected-coefficient-realization (naturality and finite products give the C(|U|,A_n) model; automorphisms are global locally constant GL_d matrices). Step 2 applies the square-zero matrix lift with I=ϖ^n/ϖ^{n+1}, valid since n≥1, plus a set section, giving a global lift without covers. Step 3's recursion b_{n+1}=ũ_n c_{n+1} reduces to b_n; I checked it. Step 4 uses integral-lisse-module-complete and integral-lisse-coefficient-limit, both for arbitrary X with rank 0 allowed, identified with the item's coefficients via Step 1. Step 5 builds the limit map and its inverse, with linearity by the jointly monic projections. Step 6 is the sectionwise tensor E(U)⊗A(U)^d≅E(U)^d, which is already a sheaf. I tested d=0, X=∅, disconnected or non-quasi-compact X, and Z_2 levels 2→4. No duplicate in the DAG: the pbc lattice nodes and normalized-tower local models are local or Noetherian. I accept the three generic tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseLatticeConstantReductions",
+  "declaration": "AlgebraicGeometry.ProEtale.lisseLattice_constant_reductions",
+  "file": "lean/Sheaf/Paper/LisseLatticeConstantReductions.lean",
+  "statement": "theorem lisseLattice_constant_reductions (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (N : IntegralLisseModule l E X) (d : ℕ) (hconstant : ∀ n : ℕ, Nonempty (integralLisseCokernel l E X N.obj n ≅ integralLisseCokernel l E X (SheafOfModules.free (R := integralLisseRing l E X) (ULift.{u + 1} (Fin d))) n)) (b1 : integralLisseCokernel l E X N.obj 0 ≅ integralLisseCokernel l E X (SheafOfModules.free (R := integralLisseRing l E X) (ULift.{u + 1} (Fin d))) 0) : ∃ (B : integralLisseCokernelTower l E X N.obj ≅ integralLisseCokernelTower l E X (SheafOfModules.free (R := integralLisseRing l E X) (ULift.{u + 1} (Fin d)))) (b : N.obj ≅ SheafOfModules.free (R := integralLisseRing l E X) (ULift.{u + 1} (Fin d))) (bE : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} (lisseIntegerToFieldSized l E X) N.obj ≅ SheafOfModules.free (R := (sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheafSized l E X)) (ULift.{u + 1} (Fin d))), B.app (op 0) = b1 ∧ (∀ n : ℕ, ((integralLisseCokernelFunctor l E X).mapIso b).app (op n) = B.app (op n)) ∧ ∀ (U : X.ProEtᵒᵖ) (s : (lisseFieldSheafSized l E X).obj.obj U) (x : N.obj.val.obj U) (i : ULift.{u + 1} (Fin d)), (SheafOfModules.freeπ (R := (sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheafSized l E X)) i).val.app U (bE.hom.val.app U (((PresheafOfModules.sheafificationAdjunction (R := (sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (lisseFieldSheafSized l E X)) (𝟙 _)).unit.app (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} (lisseIntegerToFieldSized l E X) N.obj)).app U (s ⊗ₜ[(lisseIntegerSheafSized l E X).obj.obj U, ((lisseIntegerToFieldSized l E X).hom.app U).hom] x))) = s * (lisseIntegerToFieldSized l E X).hom.app U ((SheafOfModules.freeπ i).val.app U (b.hom.val.app U x))",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The equivalent continuous sheaf-module model, as explicitly allowed in the statement. Finite free quotient coefficients are represented by the actual scalar cokernels of the standard integral free sheaf, with their canonical transitions; restriction of scalars is fully faithful on quotient modules. B is an isomorphism of the actual towers, and every component is the reduction of b. The ordinary rationalization bE is normalized on every local pure tensor after the actual sheafification unit. Rank zero, the empty scheme and arbitrary disconnected/non-Noetherian schemes are retained. Additional already-landed statement dependencies record the reused coefficient and actual-cokernel interfaces; no definitions or statements are copied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-725e06760",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-push of 4a561903 (reviewer PASS; landing refused 'reach: def-sfb-integral-lisse-cokernel-tower is not reached from a target'). Item .lean byte-identical (sha256 189bb228…), item and def node JSON identical; only report/blueprint-index differ. Recomputed reach with dag_queue.Dag.distances_from on side-live (2026-10-23 12:33) + delivered records: def node reached at depth 14 via the item and the split route kummer-tameness → tame-pair-lattice-realization → … → det-thm-sf-ctf-stability-direct-images; all route nodes split, so the refusal was transient (an unsplit route node cuts reach), not a delivery fault. Statement re-read: arbitrary X incl. ∅, lisse = isFiniteLocallyFree (rank 0/varying), actual ϖ^(n+1) cokernel tower, (A_n)_X^d as cokernel of free (sound), independent Nonempty hypotheses, arbitrary b1 = B.app 0, B tower iso, mapIso b = B levelwise, bE ordinary changeOfRings pinned on pure tensors; d=0 ok. Def node: existing:true over 5 unchanged plain live defs (no .choose), statement verbatim, no other owner, item live lean null, no repair note. Single sorry, docstrings with source/blueprint + 6 steps. Advisory: lean.note 'already-landed' wording. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261023T152146-L-456502",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

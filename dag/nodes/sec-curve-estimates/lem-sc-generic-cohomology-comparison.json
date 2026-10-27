@@ -127,7 +127,32 @@
   "def-weil-pbc-etale-sheaves"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.IsCurve.isIso_functorH_map_unit_fromSpecFunctionField",
+     "module": "WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension",
+     "lines": [
+      311,
+      325
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-cd",
  "split_report": {
@@ -179,5 +204,24 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $C/k$ be a smooth integral separated\ncurve over algebraically closed $k$,\nand let $\\eta:\\operatorname{Spec}k(C)\\to C$ be its generic point,\nwith function field $k(C)$.\nFor every torsion etale sheaf\n$F$, the adjunction map induces\n\n$$\nH^q(C,F)\\ \\xrightarrow{\\ \\sim\\ }\\ H^q(C,\\eta_*\\eta^*F)\n\\qquad(q\\geq2)\n$$\n\non cohomology.",
+  "proof": [
+   {
+    "text": "The generic restriction of $\\eta_*M$ is $M$: after a geometric\ngeneric base change the source is the same separably closed\npoint, as is also seen in\n[prop-weil-pbc-strict-henselization-stalk-formula] in degree zero.\nHence the kernel and cokernel of $F\\to\\eta_*\\eta^*F$ both\nhave zero generic restriction; its sections then vanish generically in the sense of [lem-sc-zero-generic-acyclic], because a section over a quasi-compact etale $V\\to C$ restricts to zero on $V\\times_C\\operatorname{Spec}k(C)=\\varprojlim_UV\\times_CU$, the limit over the nonempty affine opens $U$, hence already on some $V\\times_CU$. They are acyclic by\n[lem-sc-zero-generic-acyclic]. Write the map as a\nsurjection onto its image followed by an injection. The two\nlong exact sequences give the displayed isomorphism for $q\\geq2$.",
+    "uses": [
+     "prop-weil-pbc-strict-henselization-stalk-formula",
+     "lem-sc-zero-generic-acyclic"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -168,7 +168,7 @@ private theorem koszulStep_formula (k m : ℕ) (hkm : k ≤ m) :
   induction m, hkm using Nat.le_induction with
   | base =>
     simp [koszulStep, principalKoszulTower, endoPow,
-      CochainComplex.mappingCone.map_id, principalKoszul]
+      CochainComplex.mappingCone.map_id, principalKoszul, principalKoszulScalarComplex]
   | succ m hkm ih =>
     have hcomp : koszulStep R s (Nat.le_trans hkm (Nat.le_succ m)) =
         principalKoszulTransition R (unitSection R s) m ≫ koszulStep R s hkm := by
@@ -179,7 +179,7 @@ private theorem koszulStep_formula (k m : ℕ) (hkm : k ≤ m) :
       congr 1
       exact Functor.ofOpSequence_map_homOfLE_succ _ m
     rw [hcomp, ih]
-    dsimp only [principalKoszulTransition]
+    dsimp only [principalKoszulTransition, principalKoszulScalarComplex]
     rw [← CochainComplex.mappingCone.map_comp]
     congr 1
     · rw [← F.map_comp]

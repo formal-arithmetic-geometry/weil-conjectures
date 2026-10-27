@@ -1,0 +1,33 @@
+# Q113 stage-1 report
+
+1. Files written: dag/nodes/sec-six-functors-basics/lem-sfb-space-fixed-base-atlas-relation-tower.json (statement, split; not in Mathlib). No new nodes or Mathlib leaves. citations.json records every step citation, using the full verbatim statement so no used hypothesis is elided. searches.jsonl retains the actual search log.
+2. Attachments: none. Searched lean/WeilConjectures by the item id, atlas/relation and mixed-product concepts; no declaration states this item.
+3. WANTED: none.
+4. No statement error found and no statement or statement dependency changed. The inherited blueprint ancestor is null: blueprint_refs.py ancestor returns None because the historical creation chain has no imported ancestor; its precise existing place and via chain are retained. The latest blueprint direct-images proof (3) and its recorded approximation prerequisites were read. No unit or chapter edited.
+5. Nothing unfinished in the split.
+
+## Review by Q113
+
+I read spaces-limits.tex Tag 084T (lemma-descend-separated), including its mixed square, Tag 086X (lemma-eventually-separated), and Tag 07SF (lemma-directed-inverse-system-has-limit). I also read spaces-morphisms.tex Tag 03KN (lemma-fibre-product-after-map) and Tag 073B (lemma-quasi-compact-quasi-separated-permanence), and spaces-properties.tex Tag 0AHR (lemma-characterize-quasi-separated). There are no new nodes needing a separate source review. The proof is marked agent because its detailed relative mixed-product and section-coordinate arguments elaborate the source rather than copy a single document proof.
+
+Step 1 uses the existing affine-limit statement for affine projections and its arbitrary-base-change limit clause, and affine-locality for base change and affine sources over affine targets. I checked these full statements and their hypotheses. Cofinality of an upper tail is written by the explicit common-upper-bound cone extension. All indexing categories are small, nonempty and directed. Limits of spaces over Y give the same underlying limit over Spec Z: a cone determines its map to Y by any component, and compatibility makes that independent of the component. No finite presentation is used.
+
+Step 2 uses the existing fibre-products/etale-covering statement exactly for representability and pullback of the singleton atlas cover. It provides both etale projections of each relation scheme. I do not use its proof or assume an arbitrary map of algebraic spaces is representable.
+
+Step 3 reads the definition of an algebraic space for representable diagonal. The affine spectra product leaf supplies the affine absolute product. The comparison lemma explicitly supplies a separated representable map even without a separated base. The separated-over-affine lemma then supplies absolute separatedness, and the absolute-quasi-separated definition explicitly gives quasi-compactness for two affine tests. Thus Y need only be quasi-separated, not quasi-compact; it need not be separated. Step 4 applies precisely those same statements to Z_a for relation finiteness, and applies the comparison lemma with the different final base Y for the locally finite type assertion about j_a. I checked that neither application assumes Z_a -> Y separated or of finite presentation.
+
+Steps 5 and 6 write inverse natural formulas on every scheme test. A point x of U_a remembers its Z_a coordinate; equality with the image of v in R_a forces that coordinate to be the image of z_b, so (x_o,z_b) exists in U_b. This verifies the essential pullback square along the second projection, not an unjustified assertion that every relation tower has that square. Step 6 checks both target components, so h_{a,b} is exactly the base change of j_a along 1 times u_{ba}. The same formulas work with the limit Z, without separatedness.
+
+Step 7 gets quasi-compactness of R by its affine morphism to the already quasi-compact R_a, using affine-locality and the explicit arbitrary quasi-compact scheme test in quasi-compact-affine-tests. Separatedness instead uses the comparison lemma for U,U over Z and the separated-over-affine lemma. I corrected an initial draft that invoked separated composition without a cited node; the final proof applies the existing comparison statement directly. No unstated quasi-separatedness of Z is needed.
+
+Step 8 applies the exact qc-source/qs-target clause of space-qcqs-permanence to each relation projection. Affine targets are quasi-separated by the absolute-quasi-separated affine-test definition, since products of affine schemes over an affine scheme are affine. Etaleness implies local finite presentation by the cited etale definition, and the displayed finite algebra presentation in the local-finite-presentation definition immediately gives finite generation. Together with quasi-compactness this is exactly the cited definition of finite type. It does not infer quasi-compactness solely from etaleness.
+
+Step 9 uses affine-locality only for the affine transition pullbacks, then proves the limit assertion by its universal property: the common W component and compatible U_b components give exactly one map to W times_Y U. Step 3 ensures this sheaf product is a scheme. No non-small diagram or nonexistent scheme fibre product over a space is assumed.
+
+I checked delivery-errors B through E: every citation was opened; citations.json quotes only actual statements; no lemma is sourced from a definition that lacks it; no new node duplicates an item clause, another DAG node or a Mathlib fact. Blueprint searches for atlas, 084T, 07SF and fibre-product concepts found no imported counterpart. The item retains earlier Mathlib searches and adds the searches actually run in this sandbox; the inspected hits are scheme-only affine pullbacks, etaleness, quasi-separatedness and abstract kernel pairs. None proves the algebraic-space tower. I read the relevant Mathlib Affine.lean, QuasiSeparated.lean and EffectiveEpi.lean source hypotheses.
+
+Edge cases checked: an empty affine atlas (zero ring) forces all later spaces empty and all squares hold; the one-element directed system makes the relation isomorphisms identities; arbitrary W may be empty or map into a disjoint part of Y; a nonseparated Y still gives separated mixed schemes by the comparison lemma; affine transition maps need not be finite type. No step exceeds 2000 characters. Existing dependency closures were checked for return paths to the item; none was found. Off-unit scheme separatedness and space fibre-product tools are declared in split_report.tool_uses.
+
+## Not duplicates
+
+No new nodes were created. Reused lem-sfb-space-fibre-product-comparison rather than creating another 03KN lemma, and reused the existing affine limits and quasi-separatedness nodes.

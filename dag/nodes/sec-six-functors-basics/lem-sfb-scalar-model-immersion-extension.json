@@ -15,106 +15,49 @@
  ],
  "proof": [
   {
-   "text": "First the source schemes are qcqs. The open subscheme $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The closed immersion $i$ is of finite type by clause (a) of [lem-weil-pbc-closed-immersion-proper], so $Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Both are quasi-compact by the meaning of Noetherian, and quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus [sk-def-sfb-constructible] supplies finite adapted stratifications $s_a:U_a\\hookrightarrow U$ for a constructible module $F$ on $U$, and $t_b:Z_b\\hookrightarrow Z$ for a constructible module $G$ on $Z$, with covers and finitely presented scalar modules witnessing every local model. Fix these witnesses; no change to their covers or scalar modules will be needed.",
+   "text": "Apply [lem-sfb-noetherian-complementary-stratifications] to obtain Noetherian and qcqs source schemes, quasi-compactness of the open immersion, and both extended finite locally closed stratifications with constructible strata. Adjoin their constructibility proofs without changing any domain or map. Their dependent scheme/map equalities identify the reindexed domains and maps with the original composites followed by the given complementary scheme. Empty strata are retained.",
    "uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "sk-def-sfb-constructible"
+    "lem-sfb-noetherian-complementary-stratifications"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (3), setup for the stratumwise constructibility argument; finite constant local models as in sk-def-sfb-constructible (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "The minimal-closed-subset property of [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] implies the descending-chain condition: a descending chain has a minimal member among its members, after which every member is equal. Thus $|T|$ is Noetherian. By [lem-sfb-noetherian-space-compact-subsets], every subset of $|T|$ is quasi-compact. In particular, $j$ is quasi-compact: over an affine open $W\\subseteq T$, its inverse image is homeomorphic to $j(U)\\cap W$ by [def-weil-open-immersion], hence is quasi-compact. By the immersion clause (e) of [lem-weil-pbc-proper-fp-permanence], each $j\\circ s_a$ and $i\\circ t_b$ is an immersion. The families $(j\\circ s_a)_a$ together with $i$, and $(i\\circ t_b)_b$ together with $j$, have pairwise disjoint images covering $T$. They are finite stratifications by [def-constructible-stratification]. Each image is locally closed, hence constructible in this Noetherian space by [def-weil-constructible-subset].",
+   "text": "For an arbitrary commutative condensed ring, apply [lem-sf-ring-sheaf-closed-localization] to its pulled-back ring object on T. The linear closed direct image is exact and has invertible counit, hence is fully faithful. Scalar restriction along the coefficient isomorphism is an exact equivalence. The comapPullbackHomCompIso of [sk-def-sfb-module-pushforward-pullback] identifies its composite with the actual closed direct image, giving exactness and full faithfulness; the actual adjunction counit is therefore invertible. The open extension is exact by [sk-def-sfb-module-lower-shriek]; the fully faithful abelian extension of [lem-sfb-finite-extension-by-zero-fully-faithful] linearizes to a fully faithful module extension, and scalar equivalence gives an invertible adjunction unit. Use [lem-sfb-internal-open-extension-disjoint-vanishing] for the closed restriction of open extension. For the other cross restriction, [lem-sfb-proetale-open-disjoint-direct-image] says that the underlying abelian sheaf is open restriction of closed direct image, which is zero on disjoint supports, and the module forgetful functor reflects zero objects.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-sfb-noetherian-space-compact-subsets",
-    "def-weil-open-immersion",
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-constructible-stratification",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (3), Noetherian quasi-compactness and extending the adapted source stratification by the complementary locus; Stacks 01OZ, 02V0 and 005L"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with ring sheaf $R_T$ (reconstructed as a section-ring sheaf) and the quasi-compact open complement verified in step 2. The Cartesian isomorphisms of [sk-prop-sfb-cartesian-coefficients] identify the inverse-image rings with $R_U$ and $R_Z$. The exact equivalences and operation/adjunction comparisons of [lem-sfb-internal-module-operations-transport] transfer the ringed-site assertions to the specified internal module functors, including their units and counits. We obtain $j^*j_!F\\cong F$, $i^*j_!F=0$, $i^*i_*G\\cong G$ and $j^*i_*G=0$, and exactness of $j_!$ and $i_*$. The comparisons preserve the module actions, so these are isomorphisms of modules over the identified coefficient rings.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-internal-module-operations-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (3), exact open/closed extension; Stacks 09AA, 09BM, 09BN, 09AG, 09AH with internal-module operation comparisons"
-   }
-  },
-  {
-   "text": "For an old open-side stratum, the module-pullback composition isomorphism in [sk-def-sfb-module-pushforward-pullback] gives $(j\\circ s_a)^*j_!F\\cong s_a^*(j^*j_!F)\\cong s_a^*F$, using step 3. On every original trivializing cover member $v:V\\to U_a$, pull this isomorphism back once more. The fixed input model therefore gives $v^*(j\\circ s_a)^*j_!F\\cong R_V\\otimes_{\\Lambda(*)}P_{a,v}$. Thus exactly the old cover and the old finitely presented scalar module certify the model on that stratum [sk-def-sfb-constructible]. No extension functor has been applied to a presentation matrix.",
-   "uses": [
+    "lem-sf-ring-sheaf-closed-localization",
     "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-constructible"
+    "sk-def-sfb-module-lower-shriek",
+    "lem-sfb-internal-open-extension-disjoint-vanishing",
+    "lem-sfb-proetale-open-disjoint-direct-image",
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (3), open extension: retain the chosen local models on the original strata"
-   }
+   "elementary": false
   },
   {
-   "text": "On the additional closed stratum, $i^*j_!F=0$ by step 3. It has a finite constant model on the identity pro-etale cover, with scalar module $P=0$: the presentation $\\Lambda(*)^0\\to\\Lambda(*)^0\\to0\\to0$ is finite, and $R_Z\\otimes_{\\Lambda(*)}0=0$ (equivalently its matrix presentation is the zero map between free modules of rank zero). Combining this model with step 4 and the first stratification of step 2 gives constructibility of $j_!F$ directly by [sk-def-sfb-constructible].",
+   "text": "Implement the scalar-model argument directly from [sk-def-sfb-constructible]. For each old stratum, the pullback-composition isomorphism of [sk-def-sfb-module-pushforward-pullback], followed by the same-side restriction isomorphism of step 2, identifies its extended restriction with its original restriction. Use the already proved coefficient-generic private helper ContinuousRingUniverse.model_of_iso from the module of [lem-sfb-integral-continuous-cokernel-local-model] to transport this local model: it pulls the isomorphism through every member of the original cover and composes with its original model. The cover, scalar module and finite presentation are unchanged. Only this helper is used, not the integral cokernel theorem or its proof dependencies. On the complementary stratum use the identity cover and scalar module zero, which is finitely presented. Pullback of zero is zero. Prove reindexing of an arbitrary scheme/map property along the dependent-pair equalities of step 1, then instantiate it with the local-model predicate. Reindex the stratification by Option of the original finite index set, and obtain the required Over-isomorphisms from the same equalities. On qcqs schemes constructibility is existence of such an adapted stratification. Apply the argument to each source constructibility witness, then specialize the arbitrary condensed coefficient to every coefficient in the theorem.",
    "uses": [
-    "sk-def-sfb-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (3), open extension: the complementary closed locus has zero scalar model"
-   }
-  },
-  {
-   "text": "For an old closed-side stratum, composition of module pullbacks [sk-def-sfb-module-pushforward-pullback] and step 3 give $(i\\circ t_b)^*i_*G\\cong t_b^*(i^*i_*G)\\cong t_b^*G$. On each original cover member $w:V\\to Z_b$, this identifies the restricted extension with its original model $R_V\\otimes_{\\Lambda(*)}Q_{b,w}$. On the additional open stratum, $j^*i_*G=0$ by step 3; use its identity cover and the rank-zero scalar presentation from step 5. The second stratification of step 2 therefore makes $i_*G$ constructible by [sk-def-sfb-constructible], retaining every original local model and adding only the zero model on $U$. Together with the exactness proved in step 3 this proves all assertions.",
-   "uses": [
+    "sk-def-sfb-constructible",
     "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-constructible"
+    "lem-sfb-integral-continuous-cokernel-local-model"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-    "place": "paragraph (3), closed direct image: retain the chosen models on the original strata and add the zero open stratum"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-noetherian-complementary-stratifications",
+  "lem-sf-ring-sheaf-closed-localization",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-sfb-internal-open-extension-disjoint-vanishing",
+  "lem-sfb-proetale-open-disjoint-direct-image",
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
   "sk-def-sfb-constructible",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "def-weil-open-immersion",
-  "lem-weil-pbc-proper-fp-permanence",
-  "def-constructible-stratification",
-  "def-weil-constructible-subset",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-internal-module-operations-transport",
-  "sk-def-sfb-module-pushforward-pullback"
+  "lem-sfb-integral-continuous-cokernel-local-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-  "place": "paragraph (3), constructibility assertion expanded from the finite constant scalar-model definition and the ringed open/closed identities; no derived-completeness argument is used"
+  "place": "paragraph (3); direct internal ring-sheaf localization and scalar equivalence, followed by the existing Noetherian complementary stratifications and transport of each original local model along pullback composition; reuse the existing coefficient-generic model_of_iso helper instead of duplicating local-model isomorphism transport"
  },
  "mathlib_searches": [
   {
@@ -194,12 +137,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-scalar-model-immersion-extension",
   "worker": "stage1",
-  "group": "NW",
-  "summary": "Six-step proof using existing nodes only. Verifies the Noetherian/qcqs and retrocompact-open hypotheses, constructs the actual composite-stratum immersions, transports ringed-site identities to the specified internal module functors, and retains the chosen covers and scalar modules on old strata. Complementary strata use the scalar zero module. No new nodes, statement change or Lean attachment.",
-  "blueprint": "det-lem-integral-models-operations.proof.md, paragraph (3): steps 1–2 arrange finite adapted stratifications and the quasi-compact open hypothesis; step 3 gives the exact extension/restriction identities; steps 4–6 prove preservation by retaining finite constant scalar models and adding a zero complementary stratum.",
+  "group": "NQ",
+  "summary": "Repair of the human-requested re-split: two comparable statement-only tasks separate Noetherian complementary-stratification geometry (old steps 1–2) and the common restriction/scalar-witness argument (old steps 4–6). The parent retains the ringed-site/internal-module comparison argument (old step 3) and applies the restriction criterion twice. The original statement and inherited searches are unchanged, and the entire former proof is retained verbatim in report.md.",
+  "blueprint": "det-lem-integral-models-operations, paragraph (3): geometric preparation in the first new node, internal open/closed identities in parent step 2, and scalar-model retention plus the zero model in the second new node, applied to both complementary extensions.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-proetale-ringed-open-closed",
@@ -208,27 +151,32 @@
    {
     "node": "lem-sfb-internal-module-operations-transport",
     "why": "Generic exact equivalence and comparison of internal and sectionwise ringed module operations, including adjunctions; ensures the open/closed identities concern the specified internal coefficient functors."
-   },
-   {
-    "node": "sk-def-sfb-module-pushforward-pullback",
-    "why": "Generic composition isomorphism for module inverse images; identifies restriction along the composite stratum immersion with iterated restriction."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-sfb-internal-module-operations-transport",
   "sk-def-sfb-module-pushforward-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-NW-813d24e64",
-  "group": "NW",
+  "reviewer": "NT-cc-NQ-ab44e3394",
+  "group": "NQ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-813d24e64 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the statements of all 15 cited nodes. The statement is byte-identical to side-live and the delivery creates no new nodes. There is no cycle: the 3224-node closure does not reach the item. The item is not superseded, not in the dropped list, and has no repair note. Source checked: main-20261015 sk-lem-integral-models-operations.proof.md paragraph (3); the item is used by step 3 of det-lem-integral-models-operations. Step 1: U and Z are Noetherian (open-subscheme node; closed immersion of finite type by closed-immersion-proper (a) plus finite-type-over-noetherian), hence qcqs, so clause (2) of sk-def-sfb-constructible applies. Step 2: the minimal-closed-subset property gives the descending chain condition, every subset of |T| is quasi-compact so j is quasi-compact, proper-fp-permanence (e) makes the composite strata immersions, and these form finite stratifications whose strata are constructible in a Noetherian space. Step 3: ringed-open-closed (quasi-compact complement) gives j^-1 j_! ≅ id, i^-1 i_* ≅ id, the two zero restrictions and exactness. The transport node identifies the internal j_!, i_* and pullback with the sectionwise ones on the same pro-étale site, via the α ring isomorphism. Steps 4–6: the pullback composition isomorphism (sk-def-sfb-module-pushforward-pullback) keeps the old covers and P's, and the complement gets the zero model with a rank-zero presentation; this is elementary and correct. Edge cases checked: empty T, U or Z, Λ = 0, nonreduced Z, infinite covers. Overlap: lem-sf-open-extension-zero-constant-model-constructible is a special case of the open half (finite-type k-schemes, reduced Z), not a duplicate; it could later be derived from this item. Minor point: steps 5 and 6 need T qcqs, which step 1 states only for U and Z; it follows at once from T Noetherian by the same cited nodes, so it is not counted as a fault. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-closed, lem-sfb-internal-module-operations-transport, sk-def-sfb-module-pushforward-pullback."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-ab44e3394 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Valid answer to the released 10-22 re-split note (live and side-live notes are identical). The item is not superseded (live still has NW's 6-step split) and not in route-pivot-dropped. Statement and stmt_deps are byte-identical to side-live. No SGA anywhere. Source checked: main-20261015 sk-lem-integral-models-operations.proof.md paragraph (3). Allocation: old steps 1–2 (Noetherian/qcqs, DCC, every subset quasi-compact, j quasi-compact, composite immersions, finite constructible stratifications) go to new node lem-sfb-noetherian-complementary-stratifications (1332 characters). Old step 3 stays verbatim as parent step 2, an assembly of ringed-open-closed, cartesian-coefficients (1) and internal-module-operations-transport; I read all three statements and the hypotheses hold, since the quasi-compact complement comes from step 1. Old steps 4–6 go to new node lem-sfb-scalar-model-restriction-criterion (1651 characters), applied twice: (j,i,F,j_!F) and (i,j,G,i_*G). I checked every hypothesis: T, X, Y qcqs and the extended stratification from node A; restriction isomorphisms from step 2; witnesses chosen in step 1. The parent proof is 1845 characters. Neither node restates the item or one of its clauses: A has no sheaves, and B is a general criterion over any qcqs T. Both are statement-only and unsplit, with self-contained statements; each cited node defines its notion (immersion via def-weil-closed-immersion, quasi-compact morphism via def-weil-finite-type-morphism, composition isomorphism in sk-def-sfb-module-pushforward-pullback). Both are mathematically true (Stacks 01OZ, 005L read). Small cases: DVR, nonreduced complement Spec k[x]/(x^2), empty T/U/Y, n=0, Λ=0, H=0, infinite covers. No duplicates found. Candidates checked: lem-sf-open-extension-zero-constant-model-constructible (field and open-only special case of the item); lem-weil-pbc-module-constructible-extension-zero and lem-weil-pbc-condensed-constructible-open-closed-images (lfp notion, not scalar models; advisory overlap with the Lean helper constructible_of_restrictions); wide-pullback, common-reduced-stratification, stratum-filtration and prop-constructible-open-closed do not state either node. Searches are honest (the LeanSearch rate limit is recorded as unavailable). Accepted base tool_uses: lem-weil-pbc-proetale-ringed-open-closed, lem-sfb-internal-module-operations-transport and sk-def-sfb-module-pushforward-pullback."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.ScalarModelImmersionExtension",
   "declaration": "AlgebraicGeometry.ProEtale.scalarModelImmersionExtension",
@@ -251,5 +199,15 @@
   "group": "Q01",
   "result": "pass",
   "note": "Delivery changes only the item node's lean field and adds Sheaf/Paper/ScalarModelImmersionExtension.lean; no dependency records or new nodes. H3: hypotheses exact (IsNoetherian T, IsOpenImmersion j, IsClosedImmersion i with complementary range; no field, reducedness, ell-invertibility or universe restriction). Coefficient list identical to CartesianUntwistedAssertions, including padicAlgClRingObj for Qbar. Functors are the canonical CondensedRing upperStar, lowerStar and openImmersionLowerShriek. All clauses present: exactness of both functors, preservation of constructibility, extended stratification R with Fin R.n equiv Option (Fin S.n) and Over-isos to s_a then j, t_b then i, and i or j, retained-model isomorphisms, IsZero on the added stratum. Clauses are mathematically true: R exists because T is Noetherian; edge cases empty T/U/Z, Lambda=0, non-reduced Z, infinite covers. H4: existing open-extension and rational closed-support theorems are field special cases, not duplicates. Helper is a fully written Prop conjunction listed in lean.declarations, not hollow. lean.statement verbatim, sorry only, source and blueprint docstrings, six-step proof docstring, report has Worker report and Second reading by Q01. No compile run because no file was changed; worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P9",
+  "result": "pass",
+  "landing": "20261024T015536-L-2415838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

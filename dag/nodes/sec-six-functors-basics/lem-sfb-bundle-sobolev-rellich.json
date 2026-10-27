@@ -1,0 +1,311 @@
+{
+ "id": "lem-sfb-bundle-sobolev-rellich",
+ "kind": "statement",
+ "title": "Sobolev realization and Rellich compactness for metric bundles",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $N$ be a compact oriented smooth manifold without boundary, of dimension $m\\geq1$, with a smooth Riemannian metric and its positive volume form $dV$, and let $B\\to N$ be a smooth finite-rank real vector bundle with a smooth positive definite fibre metric. Define $L^2(B)$ as the completion of $\\Gamma^\\infty(B)$ for $\\|u\\|_0^2=\\int_N|u|^2\\,dV$. For an integer $s\\geq1$, fix finitely many coordinate charts trivializing $B$ and a subordinate smooth partition of unity $(\\chi_i)$ with compact support inside the charts. Define $H^s(B)$ as the completion for the norm whose square is the sum, over $i$ and multi-indices $\\alpha$ with $|\\alpha|\\leq s$, of $\\|\\partial^\\alpha(\\chi_i u)\\|_{L^2(\\mathbf R^m)}^2$, using the frame components and extending each localized section by zero. Different finite atlas, frame and partition choices give equivalent Sobolev norms and the same subspace of distributional sections. These are real Hilbert spaces; smooth sections are dense in each by the completion maps. The space $L^2(B)$ canonically identifies, with its integrated inner product, with measurable sections modulo almost-everywhere equality having finite $\\int_N|u|^2\\,dV$. The identity on smooth sections extends to a bounded injective linear map $j_s:H^s(B)\\to L^2(B)$. Its image consists exactly of those $L^2$ sections whose localized distributional derivatives through order $s$ are in $L^2$. Here distributional sections mean local distributions in smooth frames with the usual change-of-frame rule. The induced map $L^2(B)\\to\\mathcal D'(B)$ is injective. The map $j_s$ is compact: every sequence bounded in $H^s(B)$ has a subsequence whose images converge in $L^2(B)$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-metric-bundle-sobolev-data",
+  "def-sfb-bundle-sobolev-space"
+ ],
+ "proof": [
+  {
+   "text": "For smooth sections use the integrated fibre pairing for order zero and the sum of the localized derivative pairings for order $s$. Both are positive definite: a nonzero smooth section is nonzero on a coordinate open set of positive volume, and some $\\chi_i$ is nonzero at each point. The displayed norms are exactly their inner product norms. Extend each pairing to Cauchy sequences by $\\langle[u_n],[v_n]\\rangle=\\lim_n\\langle u_n,v_n\\rangle$; Cauchy–Schwarz proves existence and independence of representatives, and the extended norm is the completion norm. Thus the two completions are real Hilbert spaces, with dense images of smooth sections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+   }
+  },
+  {
+   "text": "Put $K_i=\\operatorname{supp}\\chi_i$ and $f_i(u)=(\\chi_i u)_i$, extended by zero. On each $K_i$, the smooth positive volume density and positive fibre-metric matrix have positive lower bounds and finite upper bounds. Consequently $c\\|u\\|_0\\leq(\\sum_i\\|f_i(u)\\|_2^2)^{1/2}\\leq C\\|u\\|_0$; the first inequality follows by $u=\\sum_i\\chi_i u$ and the triangle inequality. These estimates also hold for measurable sections. Their square-integrable a.e. classes form a complete space: for a Cauchy sequence $u_n$, each $f_i(u_n)$ converges in Euclidean $L^2$ by the cited lemma, and the finite sum of these limits, put back into their frames, is the integrated-$L^2$ limit of $u_n$. For a measurable section $u$, apply that lemma with $s=0$ to each $f_i(u)$, choosing approximants supported in a fixed compact subset of its chart. Their finite sum is a smooth global section converging to $u$ in the integrated norm. The map sending a smooth Cauchy sequence to this measurable limit therefore identifies the order-zero completion isometrically with all such classes, including its integrated inner product.",
+   "uses": [
+    "lem-sfb-euclidean-sobolev-graph-mollification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+   }
+  },
+  {
+   "text": "The order-zero estimate of step 2 gives $\\|u\\|_0\\leq C\\|u\\|_s$ on smooth sections. Sending a Sobolev Cauchy sequence to its $L^2$ limit defines a bounded linear map $j_s$. Each $f_i(u_n)$ is Cauchy in the Euclidean $W^{s,2}$ graph norm and has limit $f_i(u)$ in $L^2$, where $u=j_s([u_n])$. The closed-graph assertion of the cited lemma says that its derivative limits are precisely the weak derivatives of $f_i(u)$. If $u=0$, that assertion makes every derivative limit zero, so $\\|u_n\\|_s\\to0$. Thus $j_s$ is injective and its image has all the asserted localized weak derivatives.",
+   "uses": [
+    "lem-sfb-euclidean-sobolev-graph-mollification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+   }
+  },
+  {
+   "text": "Conversely let a measurable $L^2$ section $u$ have every $f_i(u)$ in $W^{s,2}$. The Euclidean smoothing lemma gives $a_{i,n}\\to f_i(u)$ in $W^{s,2}$, with all $a_{i,n}$ supported in one compact $K'_i$ inside the $i$-th coordinate image. Reconstruct $u_n=\\sum_i(a_{i,n})^{\\mathrm{frame}}$, extending each summand by zero outside its chart. These are smooth sections. For each target chart $j$, apply the overlap bound with source support $\\kappa_i^{-1}(K'_i)$ and target cutoff $\\chi_j$ to each error $a_{i,n}-f_i(u)$. It gives $\\|f_j(u_n-u)\\|_{W^{s,2}}\\leq\\sum_i C_{ji}\\|a_{i,n}-f_i(u)\\|_{W^{s,2}}\\to0$. There are finitely many charts, so $u_n$ is Sobolev Cauchy and its image is $u$. This proves the reverse image inclusion.",
+   "uses": [
+    "lem-sfb-euclidean-sobolev-graph-mollification",
+    "lem-sfb-sobolev-chart-overlap-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+   }
+  },
+  {
+   "text": "For a second atlas, frames and partition $(\\psi_j)$ write $g_j(u)=(\\psi_j u)_j=\\sum_i(\\psi_j(\\chi_i u))_j$. The overlap bound with source support $K_i$ and target cutoff $\\psi_j$ gives $\\|g_j(u)\\|_{W^{s,2}}\\leq\\sum_i C_{ji}\\|f_i(u)\\|_{W^{s,2}}$. Summing finitely many squares yields $\\|u\\|_{s,\\psi}\\leq C\\|u\\|_{s,\\chi}$; swapping the choices gives the reverse inequality. The same bounds for weak sections and steps 3–4 identify both completions with the same measurable subspace. The overlap lemma also supplies the distributional coordinate and frame compatibility. A measurable $L^2$ section gives a distributional section by its locally integrable coefficients; local integrability and convergence against tests follow from Cauchy–Schwarz on compact supports and the Euclidean lemma. If this distribution is zero, every localized $f_i(u)$ is zero by that lemma's injectivity into distributions. Since $u=\\sum_i\\chi_i u$, the original a.e. class is zero. Thus the subspaces just identified agree inside $\\mathcal D'(B)$ as claimed.",
+   "uses": [
+    "lem-sfb-euclidean-sobolev-graph-mollification",
+    "lem-sfb-sobolev-chart-overlap-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+   }
+  },
+  {
+   "text": "For a sequence $u_n$ bounded in $H^s(B)$ use step 3 to regard it as weak sections. Each $f_i(u_n)$ has support in the same compact $\\kappa_i(K_i)$ and is bounded in $W^{1,2}$, since $s\\geq1$. Apply the fixed-support Euclidean Rellich lemma successively to the finitely many indices $i$, retaining a subsequence at each index. The final subsequence has every $f_i(u_n)$ convergent in $L^2$. The order-zero estimate of step 2 applied to differences shows that $j_s(u_n)$ is Cauchy in $L^2(B)$ along it, hence converges there by completeness. This is exactly the stated compactness of $j_s$.",
+   "uses": [
+    "lem-sfb-euclidean-fixed-support-rellich"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-euclidean-sobolev-graph-mollification",
+  "lem-sfb-sobolev-chart-overlap-bound",
+  "lem-sfb-euclidean-fixed-support-rellich"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), nested analytic prerequisite in the existing blueprint.from.place; agent-written completion/weak-derivative details for Demailly VI §2 Sobolev setup and Rellich (2.2)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sobolev spaces of smooth vector bundle sections on compact manifolds have compact embedding H1 into L2 and inject into distributions",
+   "results": "{\"t\": \"2026-10-24T02:27:46Z\", \"tool\": \"leanfinder\", \"query\": \"Sobolev spaces of smooth vector bundle sections on compact manifolds have compact embedding H1 into L2 and inject into distributions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_embedding_euclidean_of_compact\", \"ContDiffMapSupportedIn.structureMapLM_zero_injective\", \"ContDiffMapSupportedIn.structureMapCLM_zero_injective\", \"ContDiffMapSupportedIn.structureMapCLM\", \"ContDiffMapSupportedIn.coeHom_injective\", \"TestFunction.injective_toBoundedContinuousFunctionCLM\", \"ContDiffMapSupportedIn.toBoundedContinuousFunctionLM\", \"ContDiffMapSupportedIn.toBoundedContinuousFunctionCLM\"], \"digest\": \"c7a901399aa36b75\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential Sobolev operations, test-function embeddings and smooth bundle sections do not give the completion realization and Rellich compact inclusion for manifold bundle sections."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": "{\"t\": \"2026-10-24T02:27:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sobolev\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TemperedDistribution.MemSobolev\", \"TemperedDistribution.MemSobolev.mono\", \"TemperedDistribution.memSobolev_fun_zero\", \"TemperedDistribution.MemSobolev.lineDerivOp\", \"TemperedDistribution.MemSobolev.laplacian\", \"TemperedDistribution.MemSobolev.neg\", \"TemperedDistribution.MemSobolev.sub\", \"TemperedDistribution.MemSobolev.add\"], \"digest\": \"9f33c41d8fc07c0a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential Sobolev operations, test-function embeddings and smooth bundle sections do not give the completion realization and Rellich compact inclusion for manifold bundle sections."
+  },
+  {
+   "tool": "grep",
+   "query": "Sobolev|Rellich|Garding|Gårding",
+   "results": "{\"t\": \"2026-10-24T02:27:55Z\", \"tool\": \"grep\", \"query\": \"Sobolev|Rellich|Garding|Gårding\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean\", \"Mathlib/Analysis/Complex/AbelLimit.lean\", \"Mathlib/Analysis/Distribution/DerivNotation.lean\", \"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"bbf7cbfdd8bc85f3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential Sobolev operations, test-function embeddings and smooth bundle sections do not give the completion realization and Rellich compact inclusion for manifold bundle sections."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sobolev Rellich compact embedding for sections of a vector bundle on a compact manifold",
+   "results": "{\"t\": \"2026-10-24T02:28:00Z\", \"tool\": \"leansearch\", \"query\": \"Sobolev Rellich compact embedding for sections of a vector bundle on a compact manifold\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffSection\", \"ContMDiffSection.ctorIdx\", \"ContinuousOn.inner_bundle\", \"ContMDiff.inner_bundle\", \"ContMDiffSection.coe_injective\", \"MDifferentiableOn.inner_bundle\", \"ContMDiffSection.toFun\", \"ContMDiffSection.mdifferentiable\"], \"digest\": \"d0f8077ff487fc37\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Euclidean Bessel-potential Sobolev operations, test-function embeddings and smooth bundle sections do not give the completion realization and Rellich compact inclusion for manifold bundle sections."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sobolev norm completion smooth sections compact manifold Rellich compact embedding into L2",
+   "results": {
+    "t": "2026-10-24T03:00:52Z",
+    "tool": "leanfinder",
+    "query": "Sobolev norm completion smooth sections compact manifold Rellich compact embedding into L2",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContDiffMapSupportedIn.seminorm",
+     "ContDiffMapSupportedIn.supSeminorm",
+     "ContDiffMapSupportedIn.seminorm_apply",
+     "ContDiffMapSupportedIn.withSeminorms",
+     "ContDiffMapSupportedIn.withSeminorms'",
+     "Bundle.ContMDiffRiemannianMetric.isVonNBounded",
+     "ContDiffMapSupportedIn.seminorm_le_iff",
+     "ContDiffMapSupportedIn.norm_toBoundedContinuousFunction"
+    ],
+    "digest": "f2cbcf681a721788"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no completion/weak-derivative realization and compact inclusion for manifold bundle sections among these hits."
+  },
+  {
+   "tool": "grep",
+   "query": "Sobolev|Rellich|weakDeriv|weak_deriv",
+   "results": {
+    "t": "2026-10-24T03:02:01Z",
+    "tool": "grep",
+    "query": "Sobolev|Rellich|weakDeriv|weak_deriv",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 11,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/Distribution/DerivNotation.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean",
+     "Mathlib/Analysis/Distribution/Sobolev.lean"
+    ],
+    "digest": "10724567e4bf3a48"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no completion/weak-derivative realization and compact inclusion for manifold bundle sections among these hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact inclusion of Sobolev H1 sections into square integrable sections on a compact smooth manifold",
+   "results": {
+    "t": "2026-10-24T03:02:02Z",
+    "tool": "leansearch",
+    "query": "Compact inclusion of Sobolev H1 sections into square integrable sections on a compact smooth manifold",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TestFunction.continuous_ofSupportedIn",
+     "ContinuousMap.toLp",
+     "ContinuousMap.inclusion.congr_simp",
+     "contMDiff_subtype_val",
+     "contMDiff_inclusion",
+     "ContinuousMap.inclusion",
+     "Manifold.IsSmoothEmbedding.of_opens",
+     "TopologicalSpace.Compacts.isUniformEmbedding_toCloseds"
+    ],
+    "digest": "b1b1909ec758e907"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no completion/weak-derivative realization and compact inclusion for manifold bundle sections among these hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sobolev\"",
+   "results": {
+    "t": "2026-10-24T03:02:02Z",
+    "tool": "loogle",
+    "query": "\"Sobolev\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "TemperedDistribution.MemSobolev",
+     "TemperedDistribution.MemSobolev.mono",
+     "TemperedDistribution.memSobolev_fun_zero",
+     "TemperedDistribution.MemSobolev.lineDerivOp",
+     "TemperedDistribution.MemSobolev.laplacian",
+     "TemperedDistribution.MemSobolev.neg",
+     "TemperedDistribution.MemSobolev.sub",
+     "TemperedDistribution.MemSobolev.add"
+    ],
+    "digest": "9f33c41d8fc07c0a"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no completion/weak-derivative realization and compact inclusion for manifold bundle sections among these hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-elliptic-sobolev-closed-range",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §1 (1.4), VI §2 Sobolev spaces and the closed-Sobolev-range part of Corollary (2.4)(ii), equations (2.5)--(2.6), printed pp.288--290; the local-system argument applies between two metric bundles; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Supporting input for Sobolev closed range: VI §1 (1.4), VI §2 Sobolev-space setup and Rellich lemma (2.2), printed pp.288–289; completion/weak-derivative realization made explicit; WANTED locally, read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf",
+   "via": [
+    "lem-sfb-elliptic-sobolev-closed-range",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bundle-sobolev-rellich",
+  "worker": "stage1",
+  "summary": "Q57: verified no project attachment; retained the statement, split the analytic inputs into three genuinely local lemmas, and supplied the finite-chart proof of realization, injectivity, norm independence and compactness. All new lemmas searched with logged commands; source missing locally reported WANTED.",
+  "blueprint": "Latest direct-images proof paragraph (3), through the existing admissible direct-image/alteration/Kodaira/Hodge analytic prerequisite chain recorded in blueprint.from: steps 1–5 supply the Sobolev setup and completion/weak-derivative realization; step 6 supplies Rellich (Demailly VI §2 (2.2))."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-ac66255b7",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-ac66255b7 (reviewer sub-agent of L); spot-checked: I read the item's six steps and the three new unsplit statement-only nodes in full. The item statement is unchanged; its only citer is elliptic-sobolev-closed-range. Source: the Demailly book is not in the local literature and the report lists it as WANTED. I checked the supplementary pseudodiff.pdf, pp. 2-6, and it matches the cited places: (1.5), (2.1) with its integer-order equivalence, (2.2) and (2.2'), Lemma 2.3, and the fixed-support W^t_K reduction in the proof of Rellich Lemma 2.7. The graph-mollification node (L^2 into D' injective, W^{s,2} Hilbert, closed derivative graph, smoothing with compact support K' containing K inside the open set) is true, including when K is empty or s=0. The overlap bound is true: with Hausdorff, supp eta meets K in a compact subset of the chart overlap U∩V, so the chain and Leibniz rules apply. Fixed-support Rellich is the t=1, s=0 case of Demailly 2.7, and both of its hypotheses are needed. Step checks: 1 is elementary and correctly marked. 2 gives the two-sided order-zero bound on each K_i and identifies the completion with measurable sections. 3 uses the closed-graph clause, which gives injectivity of j_s and the weak derivatives of the image. 4 applies the overlap bound with K equal to the preimage of K'_i and eta=chi_j; the hypotheses hold because K' contains K. 5 gives norm equivalence in both directions and injectivity into D'. 6 uses s>=1, fixed supports and finitely many extractions. A grep of the DAG and the blueprint finds no duplicate, and same_as=[] is correct. No new node restates a clause of the item. There is no SGA, no tool_uses and no fix."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.BundleSobolevRellich",
+  "declaration": "BundleSobolev.bundle_sobolev_rellich",
+  "declarations": [
+   "BundleSobolev.bundle_sobolev_rellich"
+  ],
+  "file": "lean/Sheaf/Analysis/BundleSobolevRellich.lean",
+  "statement": "theorem bundle_sobolev_rellich (m r : ℕ) (hm : 1 ≤ m) (N : Type u) [TopologicalSpace N] [T2Space N] [SecondCountableTopology N] [CompactSpace N] [ChartedSpace (EuclideanSpace ℝ (Fin m)) N] [IsManifold 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) ∞ N] (h_oriented : ∃ A : Set (OpenPartialHomeomorph N (EuclideanSpace ℝ (Fin m))), (∀ c ∈ A, c ∈ IsManifold.maximalAtlas 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) ∞ N) ∧ (∀ x : N, ∃ c ∈ A, x ∈ c.source) ∧ ∀ c ∈ A, ∀ d ∈ A, ∀ x ∈ c.source ∩ d.source, 0 < (fderiv ℝ (d ∘ c.symm) (c x)).toLinearMap.det) (B : N → Type v) [∀ x, NormedAddCommGroup (B x)] [∀ x, InnerProductSpace ℝ (B x)] [TopologicalSpace (TotalSpace (EuclideanSpace ℝ (Fin r)) B)] [FiberBundle (EuclideanSpace ℝ (Fin r)) B] [VectorBundle ℝ (EuclideanSpace ℝ (Fin r)) B] [ContMDiffVectorBundle ∞ (EuclideanSpace ℝ (Fin r)) B 𝓘(ℝ, EuclideanSpace ℝ (Fin m))] [IsContMDiffRiemannianBundle 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) ∞ (EuclideanSpace ℝ (Fin r)) B] (g : ContMDiffRiemannianMetric 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) ∞ (EuclideanSpace ℝ (Fin m)) (fun x : N ↦ TangentSpace 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) x)) [MeasurableSpace N] [BorelSpace N] (V : MetricVolume g) (s : ℕ) (hs : 1 ≤ s) : ∃ L : HilbertCompletion (ContMDiffSection 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) (EuclideanSpace ℝ (Fin r)) ∞ B) (fun u v ↦ l2Pairing V.measure u v), Function.Injective L.smooth ∧ ∃ e : L.Space ≃ L2 (q := r) B V.measure, (∀ u, (e (L.smooth u)).val = ((u : ∀ x, B x) : Filter.Product (ae V.measure) B)) ∧ (∀ u v : L.Space, inner ℝ u v = classPairing V.measure (e u) (e v)) ∧ (∀ u : L.Space, ‖u‖ = l2Norm (q := r) B V.measure (e u)) ∧ (∀ u : L2 (q := r) B V.measure, IsDistribution g (testPairing (m := m) V.measure u)) ∧ Function.Injective (fun u : L2 (q := r) B V.measure ↦ testPairing (m := m) V.measure u) ∧ ∀ P : Localization (m := m) (q := r) B, ∃ H : HilbertCompletion (ContMDiffSection 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) (EuclideanSpace ℝ (Fin r)) ∞ B) (fun u v ↦ sobolevPairing P s u v), Function.Injective H.smooth ∧ ∃ j : H.Space →L[ℝ] L.Space, (∀ u, j (H.smooth u) = L.smooth u) ∧ Function.Injective j ∧ (∀ u : L.Space, (∃ v : H.Space, j v = u) ↔ MemSobolev (m := m) (q := r) B V.measure s (e u)) ∧ (∀ Q : Localization (m := m) (q := r) B, (∃ c C : ℝ, 0 < c ∧ 0 < C ∧ ∀ u : ContMDiffSection 𝓘(ℝ, EuclideanSpace ℝ (Fin m)) (EuclideanSpace ℝ (Fin r)) ∞ B, c * Real.sqrt (sobolevPairing P s u u) ≤ Real.sqrt (sobolevPairing Q s u u) ∧ Real.sqrt (sobolevPairing Q s u u) ≤ C * Real.sqrt (sobolevPairing P s u u)) ∧ (∀ u : L2 (q := r) B V.measure, MemSobolev (m := m) (q := r) B V.measure s u ↔ ∀ (i : Fin Q.size) (k : Fin r), HasWeakDerivatives s ⊤ (localizedCoefficient (q := r) B Q V.measure u i k))) ∧ IsCompactOperator j ∧ (∀ u : ℕ → H.Space, (∃ C : ℝ, ∀ n, ‖u n‖ ≤ C) → ∃ (a : ℕ → ℕ) (v : L.Space), StrictMono a ∧ Tendsto (fun n ↦ j (u (a n))) atTop (𝓝 v))",
+  "branch": "sheaf-dag",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of e8af0cd471ab H4/H9: the completions realize the single shared BundleSobolev.L2/l2Norm and MemSobolev from def-sfb-bundle-sobolev-space. Uses its MetricVolume, Localization, scalar multiPartial and localizedCoefficient; the forall-Q clause identifies the shared weak predicate with localized weak derivatives. The helper retains only pairings, compatible local distribution tests and HilbertCompletion with its scalar structure inherited solely from InnerProductSpace."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e3c19af7",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery of e8af (RETURN H4+H9). H4 fixed: helper def-sfb-metric-bundle-sobolev-data now imports and cites NO's landed def-sfb-bundle-sobolev-space and keeps only l2Pairing/sobolevPairing/classPairing/Tests/testPairing/testDensity/IsDistribution/HilbertCompletion, with no name clash in side-live lean/Sheaf; the dependency landed 13:18 CST, before base 47f81f2. H9 fixed: HilbertCompletion.scalar removed, so the Module instance comes only from InnerProductSpace. Clause check: L as completion of q0 with an injective dense map; e : L.Space ≃ shared L2, fixed on smooth sections, preserving inner product and norm (hence canonical); IsDistribution with testDensity ⟨e v, φ(c x)⟩/√det G is the correct Jacobian/frame rule, and L2 → families is injective; ∀P Localization: H completion of sobolevPairing (α=0 included); j bounded, injective, extends the identity; image ↔ shared MemSobolev s; ∀Q: two-sided norm bounds and MemSobolev ↔ localized HasWeakDerivatives on ⊤ (compact support makes local L² global L²); IsCompactOperator and the sequence form; s≥1, m≥1. Edge cases: empty N, r=0, α=0, independent universes u,v. lean.statement verbatim for item and helper; the 4 Mathlib binding records (IsManifold/ContMDiffVectorBundle/ContMDiffSection/TestFunction) match Mathlib and do not conflict with live; item statement, proof and proof_deps unchanged; only sorry; docstrings carry source, blueprint tag and the 6 steps; proof-only import exists on live. Advisory: ∀P ranges over the shared oriented Localization with atlas trivializations; it is nonempty via h_oriented. No compile (no FIX)."
+ }
+}

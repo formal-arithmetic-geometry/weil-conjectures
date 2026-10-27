@@ -1,0 +1,135 @@
+{
+ "id": "lem-fix-proetale-ringed-pullback-underlying-universes",
+ "kind": "statement",
+ "title": "ProEtaleRingedPullbackUnderlyingOfUniverses",
+ "statement": "Let f:X to Y be any morphism of schemes in universe t [def-pc-scheme], with their actual small pro-etale sites [def-weil-pbc-proetale-site]. Fix an independent universe u and put r=max(u,t+1). Let L and B be left adjoints to actual sectionwise ring and abelian direct image at coefficient size r [def-weil-proetale-inverse-image]. Let R,S be ring sheaves of size r on Y and X, and c:R to f_*S a ring-sheaf map. Suppose its ring adjunct L(R) to S is invertible. Let P be any left adjoint to module direct image through c on the categories of module sheaves of size r [def-weil-sheaf-of-modules-category]. Then P followed by forgetting to abelian sheaves is naturally isomorphic to forgetting R-modules to abelian sheaves followed by B. This is valid for noncommutative ring sheaves as well, including the zero ring and empty schemes.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module; Tag 03D3, lemma-adjoint-push-pull-modules."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Transport the ring and abelian adjunctions to the coefficient-sized AsSmall models using fully faithful restriction. The ring adjunct of the transported direct map is the inverse-equivalence image of the original adjunct and is invertible. Compare that adjunct with the canonical ring pullback by uniqueness of left adjoints. The unit equation and the generic forgetful-pullback comparison make this into a set inverse-image presentation of the target ring. This proves the presentation directly, without the fixed-universe pro-etale ring-presentation lemma.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module; Tag 03D3, lemma-adjoint-push-pull-modules."
+   }
+  },
+  {
+   "text": "Apply the generic inverse-image action/adjunction theorem to this ring presentation. Uniqueness of the small-site ring, module and abelian left adjoints gives the small-site underlying-sheaf comparison. Transport the canonical small module adjunction back along the module equivalences: the composite direct image is identified with actual pushforward through c by the sectionwise identity isomorphism. Compare its left adjoint with P. Finally whisker the small underlying comparison with the two equivalences and cancel their counits. This gives the displayed actual-site comparison, for arbitrary independent universes, including zero rings and empty schemes.",
+   "uses": [
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D2, lemma-pullback-module; Tag 03D3, lemma-adjoint-push-pull-modules."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-inverse-image-action-adjunction",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D2, lemma-pullback-module; Tag 03D3, lemma-adjoint-push-pull-modules."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The underlying abelian sheaf of pullback of sheaves of modules along an invertible inverse image ring map",
+   "results": "Eight hits: sheaf pullback finite-limit and module pullback adjunction results; no independent-universe pro-etale algebraic comparison.",
+   "date": "2026-10-27",
+   "verdict": "No direct match; the returned generic pullback constructions require algebraic lift and site transport."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The underlying abelian sheaf of a module pullback along an invertible inverse image coefficient map is naturally isomorphic to the inverse image of the underlying abelian sheaf",
+   "results": "Eight hits: open immersion preservation and module pullback/free-module comparisons; no exact result.",
+   "date": "2026-10-27",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "module.*[Pp]ullback.*[Uu]nderlying|immersion.*[Ll]imits",
+   "results": "Eight Mathlib hits, concerning scheme immersions and pullbacks, not algebraic sheaf inverse-image comparisons. Local project signatures have only the fixed same-universe versions.",
+   "date": "2026-10-27",
+   "verdict": "No duplicate with independent t and u."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QcqsOrdinaryRestrictionExact",
+  "date": "2026-10-27",
+  "group": "S5"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning “For an admissible exceptional adjoint”, especially “Evaluation is natural in the two Weil maps and their inverses, so its square commutes”: the canonical-unit restriction and finite open–closed locality used in the ordinary-to-completed evaluation comparison.; Step 1: geometric inverse image, completed coefficient identification and module limits; underlying module scalar-action comparison",
+   "via": [
+    "lem-fix-qcqs-ordinary-restriction-exact",
+    "lem-fix-qcqs-ordinary-restriction-models",
+    "lem-fix-qcqs-completion-unit-locality",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleRingedPullbackUnderlyingOfUniverses",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleRingedPullbackUnderlyingOfUniverses.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_ringedPullback_underlying_of_isIso",
+  "statement": "theorem proEtale_ringedPullback_underlying_of_isIso\n    {X Y : Scheme.{t}} (f : X ⟶ Y)\n    (L : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)} ⥤\n      Sheaf (ProEt.topology X) RingCat.{max u (t + 1)})\n    (aL : L ⊣ (proEtaleBaseChange f).sheafPushforwardContinuous\n      RingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X))\n    (B : Sheaf (ProEt.topology Y) AddCommGrpCat.{max u (t + 1)} ⥤\n      Sheaf (ProEt.topology X) AddCommGrpCat.{max u (t + 1)})\n    (aB : B ⊣ (proEtaleBaseChange f).sheafPushforwardContinuous\n      AddCommGrpCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X))\n    (R : Sheaf (ProEt.topology Y) RingCat.{max u (t + 1)})\n    (S : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)})\n    (c : R ⟶ ((proEtaleBaseChange f).sheafPushforwardContinuous\n      RingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X)).obj S)\n    [IsIso ((aL.homEquiv R S).symm c)]\n    (P : SheafOfModules.{max u (t + 1)} R ⥤ SheafOfModules.{max u (t + 1)} S)\n    (aP : P ⊣ SheafOfModules.pushforward.{max u (t + 1)} c) :\n    Nonempty (P ⋙ SheafOfModules.toSheaf S ≅ SheafOfModules.toSheaf R ⋙ B)",
+  "branch": "sheaf-dag",
+  "by": "S5",
+  "date": "2026-10-27"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T012936-L-2350264",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S5",
+  "result": "pass",
+  "landing": "20261027T012936-L-2350264",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

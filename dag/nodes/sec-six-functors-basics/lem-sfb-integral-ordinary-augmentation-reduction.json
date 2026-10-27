@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-integral-ordinary-augmentation-reduction",
+ "kind": "statement",
+ "title": "Ordinary quotient augmentation on a regular integral complex is invertible modulo the prime",
+ "statement": "Let ell be prime, W a scheme, O an ordinary simultaneous cokernel presentation of the ell^(n+1) quotients of integral abelian sheaves on W_proet, RZ any total right-derived inverse limit with its comparison etaZ, and e any additive equivalence with sheaves of modules over the lifted integers. For every complex P whose positive prime-power multiplications are monic in every degree, the explicit ordinary augmentation [lem-sfb-integral-strict-augmentation], after applying e and derived reduction modulo ell, is an isomorphism. No simultaneous left-derived reduction I, arbitrary derived input, cone choice, or natural-transformation existence is part of this statement.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; algebraization.tex principal Koszul argument; proof of the regular-complex computation of the canonical strict augmentation"
+ },
+ "stmt_deps": [
+  "def-sfb-diagonal-system-interface",
+  "lem-sfb-integral-strict-augmentation"
+ ],
+ "proof": [
+  {
+   "text": "Apply the unreduced normalized Milnor presentation to the specified ordinary augmentation. It supplies limiting product fans for the constant tower K and the principal derived quotient tower, distinguished Milnor triangles with vertices K and the actual image of RZ, and both squares for the actual augmentation, including the shifted boundary square.",
+   "uses": [
+    "lem-sfb-integral-ordinary-augmentation-milnor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The lifted prime is a nonzerodivisor, by its nonzero image in the integers. Apply the proved general isIso_reductionModIdeal_of_principalMilnorMorphism to these two Milnor triangles and the specified ordinary augmentation. Its tensor-product, successor-lift, boundary-square and coefficient-comparison argument gives precisely the requested isomorphism.",
+   "uses": [
+    "lem-sfb-principal-milnor-augmentation-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-ordinary-augmentation-milnor",
+  "lem-sfb-principal-milnor-augmentation-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 099M, lemma-naive-completion; sites-cohomology.tex, Tags 0940 and 0941; normalized strict augmentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse limit of ordinary prime power quotients of a complex with torsion free terms has its canonical augmentation invertible modulo the prime",
+   "results": "Eight hits for ordinary profinite inverse limits and module direct limits; none for the derived sheaf augmentation.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib theorem; use the universal derived construction and principal Koszul calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation from a regular complex of abelian sheaves to the right derived inverse limit of its ordinary prime power quotients is an isomorphism after derived reduction modulo the prime",
+   "results": "Eight hits for local cohomology, ordinary zeroth derived functors, solidification and representation resolutions; none for this augmentation calculation.",
+   "date": "2026-10-27",
+   "verdict": "No direct Mathlib match. Use the principal Koszul and Roos argument of Stacks 099M."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedLift",
+   "results": "Six hits in Mathlib.CategoryTheory.Functor.Derived.LeftDerived, including leftDerivedLift, leftDerived_fac and leftDerived_fac_app.",
+   "date": "2026-10-27",
+   "verdict": "Use the universal lift and its factorization equation to construct and normalize the natural augmentation."
+  },
+  {
+   "tool": "grep",
+   "query": "reductionModIdeal|integralStrictAugmentation",
+   "results": "No search-service hits. Local rg finds the source reductionModIdeal and isIso_smul_id_of_isZero_reductionModIdeal; there is no existing integralStrictAugmentation.",
+   "date": "2026-10-27",
+   "verdict": "Use the proved source cone criterion; explicitly construct the augmentation and isolate only its ordinary regular-complex computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStrictLimitAugmentationTriangle",
+  "date": "2026-10-27",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-system",
+   "place": "Proof step 4: strict integral prime-power completion; Ordinary quotient augmentation on a regular integral complex is invertible modulo the prime",
+   "via": [
+    "lem-sfb-integral-strict-limit-augmentation-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralOrdinaryAugmentationReduction",
+  "file": "lean/Sheaf/Paper/IntegralOrdinaryAugmentationReduction.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_ordinary_augmentation_reduction",
+  "statement": "theorem integral_ordinary_augmentation_reduction (ℓ : ℕ) [Fact ℓ.Prime] (W : Scheme.{u})\n    [HasDerivedCategory.{u + 1} (DiagonalAb W)]\n    [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb W)]\n    (O : DiagonalReductionPresentation ℓ (𝟭 (DiagonalAb W)))\n    (RZ : DerivedCategory (ℕᵒᵖ ⥤ DiagonalAb W) ⥤ DerivedCategory (DiagonalAb W))\n    (ηZ : (lim : (ℕᵒᵖ ⥤ DiagonalAb W) ⥤ DiagonalAb W).mapHomologicalComplex (.up ℤ) ⋙\n      DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RZ)\n    (hRZ : RZ.IsRightDerivedFunctor ηZ\n      (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ DiagonalAb W) (.up ℤ)))\n    (e : DiagonalAb W ≌\n      Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))\n    [e.functor.Additive] [e.inverse.Additive]\n    (P : CochainComplex (DiagonalAb W) ℤ)\n    (hP : ∀ (n : ℕ) (i : ℤ), Mono (ℓ ^ (n + 1) • 𝟙 (P.X i))) :\n    IsIso ((DerivedCategory.reductionModIdeal (Scheme.ProEt.topology W)\n      (Ideal.span {(ℓ : ULift.{u + 1} ℤ)})).map\n        (e.mapDerivedCategory.functor.map\n          (integralStrictOrdinaryAugmentation ℓ RZ ηZ O P)))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261026T222628-L-675480",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T235945-L-1473581",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

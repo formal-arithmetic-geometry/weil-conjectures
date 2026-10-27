@@ -1,0 +1,274 @@
+{
+ "id": "lem-trf-normalization-pair-ring-invariance",
+ "kind": "statement",
+ "title": "Ring invariance of normalized local pairs, branch count and defect length",
+ "statement": "Let $k$ be a field [def-weil-field], and let $H,H'$ be nonzero reduced commutative Noetherian local $k$-algebras, with residue fields identified with $k$ by their structural maps [def-weil-pbc-noetherian-ring]; reduced means having no nonzero nilpotent. For a reduced ring $R$ write $Q(R)$ for its localization at the non-zero-divisors (those $s$ for which $sr=0$ forces $r=0$), and $\\overline R$ for the integral closure of $R$ in $Q(R)$ [def-weil-pbc-integral-closure]. Assume $\\overline H$ and $\\overline {H'}$ are finite over their respective rings [def-weil-finitely-generated-module], that $\\overline H/H$ and $\\overline {H'}/H'$ are finite-dimensional over $k$, and that\n$$\\overline H\\cong\\prod_{i=1}^b S_i,\\qquad \\overline {H'}\\cong\\prod_{j=1}^{b'} S'_j$$\nfor finite nonempty families of nonzero local integral domains. Every ring isomorphism $\\varphi:H\\cong H'$ extends uniquely to a ring isomorphism $Q(H)\\cong Q(H')$, carries $\\overline H$ onto $\\overline {H'}$, and induces an additive isomorphism of quotients satisfying $\\overline\\varphi(hm)=\\varphi(h)\\overline\\varphi(m)$. It identifies their lattices of submodules, their finite composition lengths [def-weil-pbc-module-length], and their sets of primitive nonzero idempotents (idempotents not expressible as the sum of two nonzero orthogonal idempotents) in the integral closures. Consequently $b=b'$ and\n$$\\dim_k(\\overline H/H)=\\operatorname{length}_H(\\overline H/H)=\\operatorname{length}_{H'}(\\overline {H'}/H')=\\dim_k(\\overline {H'}/H').$$\nIf $\\varphi$ is a $k$-algebra isomorphism, its extensions and quotient isomorphism are also $k$-linear. No scalar compatibility of $\\varphi$ is required for the equality of lengths, dimensions, or branch counts.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent-written ring-invariance comparison needed to use the normalization and delta computation in Tag 0C1U (equation-multicross) with the ring-isomorphism definition of a node; integral closure means algebra.tex Tag 00GP (definition-integral-closure). Expands returned proof steps 9 and 11, without assuming a ring isomorphism is k-linear."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-module-length"
+ ],
+ "proof": [
+  {
+   "text": "The non-zero-divisors form a multiplicative set: $1x=0$ implies $x=0$, and $stx=0$ implies $tx=0$ and then $x=0$. If $s$ is a non-zero-divisor of $H$ and $\\varphi(s)y=0$, write $y=\\varphi(x)$; injectivity gives $sx=0$, hence $y=0$. Apply this also to $\\varphi^{-1}$, so $\\varphi$ bijects the denominator sets. The localization universal property applied to $H\\xrightarrow{\\varphi}H'\\to Q(H')$ gives $F:Q(H)\\to Q(H')$, with $F(a/s)=\\varphi(a)/\\varphi(s)$. Applying it to the inverse gives $G$; $GF$ and $FG$ agree with the identities on the base rings, so uniqueness makes them identities. The same uniqueness proves uniqueness of $F$. We regard $H$ as a subring of $Q(H)$: $a/1=0$ means $sa=0$ for a denominator $s$, hence $a=0$; similarly for $H'$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP (proposition-universal-property-localization), and the injectivity observation immediately preceding it; explicit denominator check for the present isomorphism."
+   }
+  },
+  {
+   "text": "For $z\\in\\overline H$, choose a monic equation $z^n+\\sum_{i<n}a_i z^i=0$ with $a_i\\in H$. Applying $F$ gives $F(z)^n+\\sum_{i<n}\\varphi(a_i)F(z)^i=0$, so $F(z)\\in\\overline {H'}$. The identical calculation for $G$ proves the reverse inclusion. Thus $E=F|_{\\overline H}:\\overline H\\to\\overline {H'}$ is a ring isomorphism with inverse $G|_{\\overline {H'}}$, and $E(h)=\\varphi(h)$ on $H$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GP (definition-integral-closure), using the monic-equation definition of integrality (Tag 00GI)."
+   }
+  },
+  {
+   "text": "Put $M=\\overline H/H$ and $M'=\\overline {H'}/H'$, as additive module quotients. Define $T:M\\to M'$ by $T([z])=[E(z)]$. Replacing $z$ by $z+h$ changes $E(z)$ by $\\varphi(h)\\in H'$, so this is well-defined. It is additive, and $[w]\\mapsto[E^{-1}(w)]$ is its inverse by the same check. For $h\\in H$, $T(h[z])=[E(hz)]=[\\varphi(h)E(z)]=\\varphi(h)T([z])$. The inverse satisfies the corresponding identity with $\\varphi^{-1}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent calculation with the integral-closure pair of Tag 00GP; application to the normalization defect in curves.tex Tag 0C1U (equation-multicross)."
+   }
+  },
+  {
+   "text": "For an $H$-submodule $N\\subseteq M$, the additive subgroup $T(N)$ is an $H'$-submodule: given $h'\\in H'$ and $T(x)\\in T(N)$, set $h=\\varphi^{-1}(h')$ and use $h'T(x)=T(hx)$. Applying $T^{-1}$ gives the inverse correspondence. Both maps preserve inclusion, so this is an order isomorphism of submodule lattices; consequently it also preserves their meets and joins, characterized as greatest lower and least upper bounds. It bijects strict chains and their lengths, including their zero and whole-module endpoints, so the definition of length gives $\\operatorname{length}_H M=\\operatorname{length}_{H'}M'$. The same image/preimage argument using $E(hz)=\\varphi(h)E(z)$ identifies the submodule lattices of the two integral closures as well.",
+   "uses": [
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02LY (definition-length); direct submodule-chain argument, analogous to Tag 00IX (lemma-length-independent) but allowing a semilinear bijection."
+   }
+  },
+  {
+   "text": "Every $H$-submodule of $M$ is a $k$-linear subspace because the $k$-action factors through $H$. Along a strict submodule chain its $k$-dimension strictly increases, so all chain lengths are at most $\\dim_k M<\\infty$. Thus $M$ has finite $H$-length. The cited simple-filtration theorem gives $0=M_0\\subsetneq\\cdots\\subsetneq M_r=M$ with nonzero simple factors $V_i=M_i/M_{i-1}$. These subquotients retain their compatible $k$-vector-space structures and are finite-dimensional. Apply the same argument separately to $H'$ and $M'$, using its own structural $k$-action. When a defect is zero its filtration has $r=0$.",
+   "uses": [
+    "def-weil-pbc-module-length",
+    "lem-weil-pbc-finite-length-module-simple-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 02LY (definition-length), 00J3 (lemma-simple-pieces), part (2)."
+   }
+  },
+  {
+   "text": "Fix a factor $V_i$ from Step 5 and $0\\ne v\\in V_i$. Simplicity says $Hv=V_i$. The surjection $H\\to V_i$, $a\\mapsto av$, has proper kernel $I$. If $I\\subsetneq J\\subsetneq H$ were an ideal, its image $Jv$ would be a nonzero proper submodule: it is nonzero since some $a\\in J\\setminus I$ has $av\\ne0$, and $Jv=V_i$ would give $1-j\\in I\\subset J$ for some $j\\in J$, contradicting $J\\ne H$. Thus $I$ is maximal, and locality gives $I=\\mathfrak m_H$. The map $H/I\\to V_i$, $a+I\\mapsto av$, is bijective and $k$-linear. The structural residue-field identification $k\\to H/\\mathfrak m_H$ is a $k$-linear bijection; hence $\\dim_k V_i=1$. Its only submodules are $0,V_i$, so its length is $1$ by the chain definition. This calculation applies to every factor for $H'$ as well, with its own maximal ideal and structural residue map.",
+   "uses": [
+    "def-weil-pbc-simple-module",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J2 (lemma-characterize-length-1), cyclic-generator argument written out; locality and the structural residue-field hypothesis identify the quotient with k."
+   }
+  },
+  {
+   "text": "The inclusion and quotient maps give short exact sequences $0\\to M_{i-1}\\to M_i\\to V_i\\to0$. Additivity of module length yields inductively $\\operatorname{length}_H M_i=i$, starting with the zero module of length $0$ and using Step 6. The same sequences of finite-dimensional $k$-spaces give $\\dim_k M_i=i$: extend a basis of $M_{i-1}$ by a lift of a basis of the one-dimensional quotient $V_i$. Therefore $\\dim_k M=r=\\operatorname{length}_H M$. Repeating for $M'$ gives $\\dim_k M'=\\operatorname{length}_{H'}M'$. Combine these equalities with Step 4 to obtain all four equal quantities in the statement. No equality of the two structural maps from $k$ has entered this argument.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IV (lemma-length-additive); finite iteration on the filtration of Tag 00J3, with elementary basis extension for vector-space dimensions."
+   }
+  },
+  {
+   "text": "A ring isomorphism preserves and reflects the equations $e^2=e$, $ef=0$, $e=f+g$, and nonzeroness. Thus $E$ and $E^{-1}$ biject primitive nonzero idempotents: any forbidden orthogonal decomposition on either side pulls back or pushes forward to one on the other. In $\\prod_{i=1}^b S_i$, every idempotent coordinate satisfies $e_i(e_i-1)=0$, hence is $0$ or $1$ because $S_i$ is a domain. Its support is therefore a subset of $\\{1,\\ldots,b\\}$. A nonempty support of size at least two splits into two nonempty disjoint supports, giving a decomposition into nonzero orthogonal idempotents. A singleton support cannot so split, since orthogonality makes the two supports disjoint and their union the singleton. Consequently the primitive nonzero idempotents are exactly the $b$ coordinate idempotents. The same calculation gives $b'$ on the other side, whence $b=b'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent coordinate calculation for the product-normalization setting of curves.tex Tag 0C1U (equation-multicross)."
+   }
+  },
+  {
+   "text": "Finally suppose $\\varphi$ is a $k$-algebra isomorphism. For $c\\in k$, $F(c)=\\varphi(c)=c$, so $F(cx)=cF(x)$ in the total fraction rings. Its restriction $E$ and the induced map $T$ have the same scalar identity, as do their inverses. Thus they are $k$-linear. Without this extra assumption Step 3 supplies precisely the $\\varphi$-semilinear identity, and Steps 4, 7, and 8 already give the length, dimension, and branch-count equalities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent scalar check for the extension constructed using Tag 00CP and its restriction using Tag 00GP."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-length",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "def-weil-pbc-simple-module",
+  "lem-weil-pbc-length-additive-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Explicit isomorphism comparison using Tags 00CP, 00GP, 02LY, 00J3, 00J2 and 00IV; normalization-defect application is curves.tex Tag 0C1U (equation-multicross)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integralClosure.*[Ee]quiv|[Ee]quiv.*integralClosure|length.*ringEquiv|ringEquiv.*length",
+   "results": "{\"t\": \"2026-10-22T06:07:27Z\", \"tool\": \"grep\", \"query\": \"integralClosure.*[Ee]quiv|[Ee]quiv.*integralClosure|length.*ringEquiv|ringEquiv.*length\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Polynomial/GaussLemma.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\"], \"digest\": \"38bc606e4bec0f79\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AlgEquiv.mapIntegralClosure (Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean:182) transports integral closures with fixed coefficient ring and an existing ambient algebra equivalence; it does not supply the total-fraction extension for varying bases, branch-count comparison, or scalar-independent quotient length and dimension comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism invariance of normalization quotient colength and number of local domain factors of a finite normalization",
+   "results": "{\"t\": \"2026-10-22T06:07:28Z\", \"tool\": \"leansearch\", \"query\": \"Isomorphism invariance of normalization quotient colength and number of local domain factors of a finite normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"normalizedFactorsEquivOfQuotEquiv_emultiplicity_eq_emultiplicity\", \"Ideal.relNorm_comap_algEquiv\", \"normalizedFactorsEquivOfQuotEquiv\", \"Algebra.intNorm_map_algEquiv\", \"Ideal.relNorm_map_algEquiv\", \"mem_normalizedFactors_factor_orderIso_of_mem_normalizedFactors\", \"RingHom.QuasiFinite.respectsIso\"], \"digest\": \"80853efe0a91f8c2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AlgEquiv.mapIntegralClosure (Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean:182) transports integral closures with fixed coefficient ring and an existing ambient algebra equivalence; it does not supply the total-fraction extension for varying bases, branch-count comparison, or scalar-independent quotient length and dimension comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"equiv\"",
+   "results": "{\"t\": \"2026-10-22T06:07:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"equiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure_map_algEquiv\", \"IsIntegralClosure.equiv\", \"AlgEquiv.mapIntegralClosure\", \"IsIntegralClosure.of_algEquiv\", \"IsIntegralClosure.algebraMap_equiv\", \"AlgEquiv.coe_mapIntegralClosure\", \"Rat.IsIntegralClosure.intEquiv\", \"Rat.IsIntegralClosure.intEquiv_apply_eq_ringOfIntegersEquiv\"], \"digest\": \"6abea8273945500a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AlgEquiv.mapIntegralClosure (Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean:182) transports integral closures with fixed coefficient ring and an existing ambient algebra equivalence; it does not supply the total-fraction extension for varying bases, branch-count comparison, or scalar-independent quotient length and dimension comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring isomorphism of reduced local rings extends to their total rings of fractions and integral closures and preserves normalization branch number and quotient module length",
+   "results": "{\"t\": \"2026-10-22T06:07:38Z\", \"tool\": \"leanfinder\", \"query\": \"A ring isomorphism of reduced local rings extends to their total rings of fractions and integral closures and preserves normalization branch number and quotient module length\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intNorm_map_algEquiv\", \"Algebra.intNorm_eq_of_isLocalization\", \"Ideal.relNorm_map_algEquiv\", \"Ideal.relNorm_comap_algEquiv\", \"IsLocalization.AtPrime.ramificationIdx_map_eq_ramificationIdx\", \"IsDedekindDomain.primesOverEquivPrimesOver\", \"IsDedekindDomain.primesOverEquivPrimesOver_ramificationIdx_eq\", \"IsDedekindDomain.primesOverEquivPrimesOver_inertiagDeg_eq\"], \"digest\": \"e2cec6db1cd8fe1c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: AlgEquiv.mapIntegralClosure (Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean:182) transports integral closures with fixed coefficient ring and an existing ambient algebra equivalence; it does not supply the total-fraction extension for varying bases, branch-count comparison, or scalar-independent quotient length and dimension comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring isomorphism preserves total fraction rings, normalization, primitive idempotents and the module length of the normalization quotient",
+   "results": "{\"t\": \"2026-10-23T09:45:49Z\", \"tool\": \"leanfinder\", \"query\": \"A ring isomorphism preserves total fraction rings, normalization, primitive idempotents and the module length of the normalization quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.isFractionRing_iff_of_base_ringEquiv\", \"IsFractionRing.ringEquivOfRingEquiv\", \"RingHom.EssFiniteType.respectsIso\", \"IsFractionRing.ringEquivOfRingEquiv_algebraMap\", \"Ideal.relNorm_map_algEquiv\", \"RingEquiv.ringKrullDim\", \"Algebra.intNorm_map_algEquiv\", \"ringKrullDim_eq_of_ringEquiv\"], \"digest\": \"a8c185dc382b7e6f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "grep",
+   "query": "length.*(finrank|equiv)|integralClosure.*[Ee]quiv|[Ee]quiv.*integralClosure",
+   "results": "{\"t\": \"2026-10-23T09:46:20Z\", \"tool\": \"grep\", \"query\": \"length.*(finrank|equiv)|integralClosure.*[Ee]quiv|[Ee]quiv.*integralClosure\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\", \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean\"], \"digest\": \"627c1f5e397d921e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ring isomorphism invariance of total fraction ring integral closure normalization quotient length and number of primitive idempotents",
+   "results": "{\"t\": \"2026-10-23T09:46:21Z\", \"tool\": \"leansearch\", \"query\": \"Ring isomorphism invariance of total fraction ring integral closure normalization quotient length and number of primitive idempotents\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegrallyClosed.of_equiv\", \"Ideal.quotientEquiv\", \"RingHom.isIntegral_respectsIso\", \"IsFractionRing.isFractionRing_iff_of_base_ringEquiv\", \"isIntegrallyClosed_iff_isIntegrallyClosedIn\", \"isIntegrallyClosed_iff_isIntegralClosure\", \"Ideal.map_isPrime_of_equiv\", \"isIntegrallyClosed_iff\"], \"digest\": \"ccea7cbbb677093f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"ringEquiv\"",
+   "results": "{\"t\": \"2026-10-23T09:46:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsLocalization\\\", \\\"ringEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"IsLocalization.ringEquivOfRingEquiv\", \"IsLocalization.ringEquivOfRingEquiv_apply\", \"IsLocalization.ringEquivOfRingEquiv_eq\", \"IsLocalization.isLocalization_of_base_ringEquiv\", \"IsLocalization.isLocalization_iff_of_base_ringEquiv\", \"IsLocalization.of_ringEquiv_left\", \"IsLocalization.ringEquivOfRingEquiv_symm\", \"IsLocalization.ringEquivOfRingEquiv_eq_map\"], \"digest\": \"c0554428aa7912eb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "grep",
+   "query": "length.*finrank|finrank.*length|length_eq|isSimpleModule.*quotient",
+   "results": "{\"t\": \"2026-10-23T09:49:11Z\", \"tool\": \"grep\", \"query\": \"length.*finrank|finrank.*length|length_eq|isSimpleModule.*quotient\", \"sub\": \"RingTheory/Length.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"22\", \"39\", \"43\", \"49\", \"54\"], \"digest\": \"05212af9190a904c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The length of a finite dimensional module over a local algebra with residue field equal to the coefficient field equals its vector space dimension",
+   "results": "{\"t\": \"2026-10-23T09:49:15Z\", \"tool\": \"leanfinder\", \"query\": \"The length of a finite dimensional module over a local algebra with residue field equal to the coefficient field equals its vector space dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.length_eq_finrank\", \"IsLocalRing.finrank_quotient_map\", \"Module.length_eq_rank\", \"Module.length_of_free_of_finite\", \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"IsLocalRing.finrank_CotangentSpace_eq_one\", \"IsLocalRing.finrank_cotangentSpace_eq_zero_iff\", \"Module.length_of_free\"], \"digest\": \"d2300b1e96407bb3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "grep",
+   "query": "ringEquivOfRingEquiv|mapIntegralClosure",
+   "results": "{\"t\": \"2026-10-23T09:51:08Z\", \"tool\": \"grep\", \"query\": \"ringEquivOfRingEquiv|mapIntegralClosure\", \"sub\": \"RingTheory/IntegralClosure\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\", \"Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean\"], \"digest\": \"41f6c165e952b1a8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.length\", \"restrictScalars\"",
+   "results": "{\"t\": \"2026-10-23T09:51:09Z\", \"tool\": \"loogle\", \"query\": \"\\\"Module.length\\\", \\\"restrictScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Submodule.length_le_length_restrictScalars\"], \"digest\": \"a99c0a8f31cd09aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the complete item: hits concern fraction-ring extension, fixed-base integral closure, or length of vector spaces/restriction of scalars separately; none supplies the normalization pair, quotient lattice, scalar-independent defect dimension, and branch count together. Relevant declarations were read in Localization/FractionRing.lean:423-438, IntegralClosure/IsIntegralClosure/Basic.lean:159-188, Length.lean:290-299, and LocalRing/Length.lean:49-70."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ordinary-point-delta-branches",
+  "date": "2026-10-22",
+  "group": "Q97"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical semistable-alteration exceptional-fibre input below lem-trf-local-term-locality, via lem-trf-valuation-exceptional-local-criterion, proof step 5: Appendix B genus/tree calculation. Appendix B, ordinary n-fold points and the inequality/equality characterization preceding Lemma B.1, printed pp. 56--57. Argument extracted from returned proof steps 9 and 11 of lem-trf-ordinary-point-delta-branches.",
+   "via": [
+    "lem-trf-ordinary-point-delta-branches",
+    "lem-trf-curve-p1-tree-local-criterion",
+    "lem-trf-valuation-exceptional-local-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-normalization-pair-ring-invariance",
+  "worker": "stage1",
+  "summary": "Q123 wrote the explicit fraction extension, integral-closure restriction, semilinear quotient and submodule correspondence, and primitive-idempotent count. Finite-dimensional defects have finite length, so the existing simple-filtration node and existing length-additivity leaf reduce dimension equality to the elementary cyclic-generator classification of a simple factor over the given local ring with structural residue field k. No new nodes: all remaining calculations take a few lines from cited definitions or existing statements. Statement unchanged except a missing module-length definition citation. No project attachment or Mathlib match covers the complete item.",
+  "blueprint": "Retains the historical Appendix B ordinary-point comparison recorded in blueprint.from.place, through lem-trf-ordinary-point-delta-branches Steps 3 and 5. The latest blueprint lem-trf-local-term-locality proof follows the contracting-correspondence route and no longer contains the historical semistable exceptional-fibre calculation; this worker only splits its assigned surviving algebraic dependency and changes no unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-99b02c502",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-99b02c502 (reviewer sub-agent of L); spot-checked: I read the whole split (9 steps, 0 new nodes) against live, where the item is unsplit and has no repair note. The only statement change adds the missing [def-weil-pbc-module-length] citation and its stmt_dep. Read the six cited node statements: localization UP and length-additive (Mathlib leaves), simple-filtration (Lean-closed in slopmaster2, so a tool, not route), and three definitions. proof_deps equal the union of uses, no SGA appears, and the three kinds of search are recorded. Steps checked: (1) NZD denominators correspond and the UP uniqueness makes F and G mutually inverse; (2) the monic-equation definition maps the closures onto each other; (3) the quotient map is well defined and φ-semilinear; (4) the submodule order isomorphism uses only surjectivity of φ and gives equal lengths; (5) length ≤ dim_k < ∞, then the filtration node applies; (6) the Tag 00J2 cyclic-generator argument is written out in full (maximal kernel = 𝔪, structural residue field k, so dim 1); (7) additivity plus basis extension give length = dim on each side; (8) 0/1 coordinate idempotents, singleton supports are primitive, so b=b′; (9) the k-linear case. Sources checked: curves.tex 0C1U equation-multicross; algebra.tex 00IX, 00IY, 00J2 and the tag table. No existing 00J2/00IY node, and lem-exc-semilocal-restriction-length is not a duplicate. Edge cases: H=k, the two-branch pair, and a conjugation-twisted φ. The citer lem-trf-ordinary-point-delta-branches Steps 3 and 5 are unaffected."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NormalizationPairRingInvariance",
+  "declaration": "RingEquiv.normalization_pair_ring_invariance",
+  "declarations": [
+   "RingEquiv.normalizationPairDefect",
+   "RingEquiv.normalization_pair_ring_invariance"
+  ],
+  "file": "lean/Sheaf/RingTheory/NormalizationPairRingInvariance.lean",
+  "statement": "theorem normalization_pair_ring_invariance (k : Type u) [Field k] (H : Type v) [CommRing H] [IsLocalRing H] [IsNoetherianRing H] [IsReduced H] [Algebra k H] (H' : Type v') [CommRing H'] [IsLocalRing H'] [IsNoetherianRing H'] [IsReduced H'] [Algebra k H'] (hres : Function.Bijective ((IsLocalRing.residue H).comp (algebraMap k H))) (hres' : Function.Bijective ((IsLocalRing.residue H').comp (algebraMap k H'))) [Module.Finite H (integralClosure H (FractionRing H))] [Module.Finite H' (integralClosure H' (FractionRing H'))] [FiniteDimensional k (normalizationPairDefect H)] [FiniteDimensional k (normalizationPairDefect H')] (I : Type w) [Finite I] [Nonempty I] (S : I → Type t) [∀ i : I, CommRing (S i)] [∀ i : I, IsLocalRing (S i)] [∀ i : I, IsDomain (S i)] (decomp : integralClosure H (FractionRing H) ≃+* ∀ i : I, S i) (I' : Type w') [Finite I'] [Nonempty I'] (S' : I' → Type t') [∀ i : I', CommRing (S' i)] [∀ i : I', IsLocalRing (S' i)] [∀ i : I', IsDomain (S' i)] (decomp' : integralClosure H' (FractionRing H') ≃+* ∀ i : I', S' i) (phi : H ≃+* H') : ∃ (F : FractionRing H ≃+* FractionRing H') (E : integralClosure H (FractionRing H) ≃+* integralClosure H' (FractionRing H')) (T : normalizationPairDefect H ≃+ normalizationPairDefect H') (L : Submodule H (normalizationPairDefect H) ≃o Submodule H' (normalizationPairDefect H')) (LC : Submodule H (integralClosure H (FractionRing H)) ≃o Submodule H' (integralClosure H' (FractionRing H'))), (∀ h : H, F (algebraMap H (FractionRing H) h) = algebraMap H' (FractionRing H') (phi h)) ∧ (∀ F' : FractionRing H ≃+* FractionRing H', (∀ h : H, F' (algebraMap H (FractionRing H) h) = algebraMap H' (FractionRing H') (phi h)) → F' = F) ∧ (∀ z : integralClosure H (FractionRing H), (E z : FractionRing H') = F (z : FractionRing H)) ∧ (∀ z : integralClosure H (FractionRing H), T (Submodule.Quotient.mk z) = Submodule.Quotient.mk (E z)) ∧ (∀ (h : H) (m : normalizationPairDefect H), T (h • m) = phi h • T m) ∧ (∀ (N : Submodule H (normalizationPairDefect H)) (m : normalizationPairDefect H), T m ∈ L N ↔ m ∈ N) ∧ (∀ (N : Submodule H (integralClosure H (FractionRing H))) (z : integralClosure H (FractionRing H)), E z ∈ LC N ↔ z ∈ N) ∧ Module.length H (normalizationPairDefect H) < ⊤ ∧ Module.length H' (normalizationPairDefect H') < ⊤ ∧ (∀ e : integralClosure H (FractionRing H), (IsIdempotentElem e ∧ e ≠ 0 ∧ ∀ f g : integralClosure H (FractionRing H), IsIdempotentElem f → IsIdempotentElem g → f * g = 0 → e = f + g → f = 0 ∨ g = 0) ↔ (IsIdempotentElem (E e) ∧ E e ≠ 0 ∧ ∀ f g : integralClosure H' (FractionRing H'), IsIdempotentElem f → IsIdempotentElem g → f * g = 0 → E e = f + g → f = 0 ∨ g = 0)) ∧ Nat.card I = Nat.card I' ∧ (Module.finrank k (normalizationPairDefect H) : ℕ∞) = Module.length H (normalizationPairDefect H) ∧ Module.length H (normalizationPairDefect H) = Module.length H' (normalizationPairDefect H') ∧ Module.length H' (normalizationPairDefect H') = (Module.finrank k (normalizationPairDefect H') : ℕ∞) ∧ ((∀ a : k, phi (algebraMap k H a) = algebraMap k H' a) → (∀ (a : k) (x : FractionRing H), F (a • x) = a • F x) ∧ (∀ (a : k) (z : integralClosure H (FractionRing H)), E (a • z) = a • E z) ∧ (∀ (a : k) (m : normalizationPairDefect H), T (a • m) = a • T m))",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3488540a6",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Node minus lean is identical to side-live, and lean.statement matches the file signature exactly. Hypotheses match the node with no stronger assumptions: hres/hres' use the structural residue map; FractionRing is the localization at non-zero-divisors; the closure is integralClosure; finiteness via Module.Finite and FiniteDimensional on the real quotient; I, I' finite and nonempty with local-domain factors. Conclusions: F is unique among all ring isomorphisms extending phi; E is tied to F; T is pinned on representatives and is phi-semilinear; the lattice maps L and LC are pinned to images under T and E; both lengths finite; primitive idempotents correspond along E; Nat.card I = Nat.card I'; dim = length = length' = dim'; k-linearity only under the scalar-compatibility hypothesis. normalizationPairDefect is the real quotient, not hollow, and has no existing equivalent. Proof is sorry only; docstrings carry source, blueprint and nine proof steps. Edge cases H=k, two-branch node, twisted phi, char 2 and universes are fine. No compile (no file changed)."
+ }
+}

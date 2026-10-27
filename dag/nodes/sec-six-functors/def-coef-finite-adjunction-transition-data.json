@@ -1,0 +1,126 @@
+{
+ "id": "def-coef-finite-adjunction-transition-data",
+ "kind": "definition",
+ "title": "Finite adjunction transition constructions",
+ "statement": "Fix the finite-field, coefficient and geometric data of [def-weil-finite-field-fiber], [def-weil-l-adic-coefficient-extension], [def-weil-scheme-morphism-properties], [def-weil-completed-integral-coefficients], [def-weil-integral-rational-qbar-compact-support], [def-weil-exceptional-inverse-image], [def-weil-derived-complete-integral-detailed], [def-weil-integral-derived-reduction], [def-weil-finite-tor-amplitude], [def-weil-finite-coefficient-point], [lem-coef-finite-dualizing], [lem-coef-integral-compact-support], [lem-pod-point-sections-derived-reduction], [def-pur-derived-internal-hom], [lem-coef-finite-mapping-adjunction], [lem-fix-compact-support-coefficient-change], [def-coef-tower-coaugmentation-constructions], [def-coef-tower-evaluation-pairing-constructions], [def-coef-tower-trace-constructions], [def-coef-derived-system-calculus-data], [def-coef-tower-currying-models], [def-coef-tower-normalized-tensor-evaluation]. Define H_r as integral global Hom into the restricted finite dualizing object, HTransition by postcomposition with the restricted exceptional transition, C as integral compact-support sections, J_r as RHom_R(C,A_r), and JTransition by the coefficient quotient. Define alpha by the specified point reduction and scalarHom by the evaluation-normalized scalar adjunction. Define finiteHorizontal as scalarHom followed by the finiteArrow of CoefCurryingModels. The Lean constructions are relocated verbatim, with their signatures and bodies unchanged.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "lem-coef-finite-dualizing",
+  "lem-coef-integral-compact-support",
+  "lem-pod-point-sections-derived-reduction",
+  "def-pur-derived-internal-hom",
+  "lem-coef-finite-mapping-adjunction",
+  "lem-fix-compact-support-coefficient-change",
+  "def-coef-tower-coaugmentation-constructions",
+  "def-coef-tower-evaluation-pairing-constructions",
+  "def-coef-tower-trace-constructions",
+  "def-coef-derived-system-calculus-data",
+  "def-coef-tower-currying-models",
+  "def-coef-tower-normalized-tensor-evaluation"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2, finite mapping adjunctions and compatibility with reduction; original steps 1,2,6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Same finite mapping adjunction argument, with transition and input naturality separated."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact evaluation functor commutes with derived tensor products and tower transitions",
+   "results": "Ordinary evaluation and exact functor tools only; no finite mapping-adjunction compatibility theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "Generic curry naturality provides transposition only, not the normalized finite pairing calculation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "curry_natural|uncurry_natural|pairingDinaturality",
+   "results": "Generic Mathlib currying and the specified project pairingDinaturality clause; no existing horizontal square or horizontal naturality lemma.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.FiniteAdjunctionTransition",
+  "date": "2026-10-25",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Paragraph 2, finite mapping adjunction compatibility; original steps 1,2,6",
+   "via": [
+    "lem-coef-finite-adjunction-transition"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteAdjunctionTransitionData",
+  "file": "lean/Sheaf/SixFunctors/FiniteAdjunctionTransitionData.lean",
+  "declaration": "WeilConjectures.FiniteAdjunctionTransition.finiteHorizontal",
+  "branch": "sheaf-dag",
+  "by": "N3",
+  "date": "2026-10-25",
+  "declarations": [
+   "WeilConjectures.FiniteAdjunctionTransition.H",
+   "WeilConjectures.FiniteAdjunctionTransition.restrictedTau",
+   "WeilConjectures.FiniteAdjunctionTransition.HTransition",
+   "WeilConjectures.FiniteAdjunctionTransition.C",
+   "WeilConjectures.FiniteAdjunctionTransition.J",
+   "WeilConjectures.FiniteAdjunctionTransition.JTransition",
+   "WeilConjectures.FiniteAdjunctionTransition.alpha",
+   "WeilConjectures.FiniteAdjunctionTransition.scalarHom",
+   "WeilConjectures.FiniteAdjunctionTransition.finiteHorizontal"
+  ],
+  "statement": "def finiteHorizontal (r : ℕ)\n    (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) :\n    (H D l E X r).obj (op K.obj) ⟶ (J D l E X T r).obj (op K.obj)"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-52d21",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T123429-L-1870654",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-52d21",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261025T123429-L-1870654",
+  "kind": "interface",
+  "note": "independent cc review: relocated construction block vs clone item module (verbatim diff); new statement signatures vs node lean.statement; finiteAdjunctionSquare/Naturality vs the item's first two conjuncts and the IsSpecified clauses of CoefCurryingModels; trace conjunct vs finiteDualizingCoefficientComparisons"
+ }
+}

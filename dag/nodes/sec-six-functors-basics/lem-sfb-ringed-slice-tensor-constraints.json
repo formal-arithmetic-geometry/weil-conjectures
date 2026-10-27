@@ -1,0 +1,138 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DJ, 07A4 and 0FPT; lemma-pullback-tensor-product, lines 3684–3725, and lemma-symmetric-monoidal-cat-complexes, lines 12936–12958."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03DJ, 07A4 and 0FPT; lemma-pullback-tensor-product, lines 3684–3725, and lemma-symmetric-monoidal-cat-complexes, lines 12936–12958."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "date": "2026-10-21",
+  "group": "U7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-site-duality-maps",
+   "place": "Restriction compatibility of the associator and scalar-unit equations in the evaluation transpose."
+  }
+ },
+ "id": "lem-sfb-ringed-slice-tensor-constraints",
+ "title": "Normalized slice tensor comparison preserves associators",
+ "statement": "For a small ringed site and its slice [def-weil-size-convention, def-pur-localized-ringed-site], fix the derived closed structures, K-flat tensor comparisons and full tensor coherences [lem-sf-ringed-derived-closed-symmetric-monoidal, def-coef-ringed-tensor-hom-model]. A slice tensor comparison normalized on flat-term K-flat representatives [lem-weil-pbc-ringed-slice-evaluation-transpose] preserves the derived associator: restriction of reassociation followed by the two right-nested comparisons equals the two left-nested comparisons followed by reassociation on the slice.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat representatives for three arguments. Their two total products are flat-term and K-flat. The tensor normalization supplies four comparison squares; the full coherences supply the source and slice reassociation maps.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction of reassociation followed by the right nested tensor comparison equals the left nested comparison followed by slice reassociation. Detect equality on triple local pure tensors using tensor-Hom currying, sheafification and coproduct universal properties. Each side sends the three generators to the same nested generator without a sign.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sfb-ringed-tensor-constraint-completion",
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize the chain equation and use naturality of the localization isomorphism and of tensor-model comparisons to combine the four squares. Cancel the model isomorphisms to obtain the associator equation on representatives. Transport it along resolving quasi-isomorphisms to arbitrary derived objects by tensor-comparison and associator naturality. The site tensor-right comparison transports flatness between the abstract tensor-right functor and IsFlatOnSite.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-pur-kflat-total-tensor-model",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sfb-ringed-tensor-constraint-completion",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ringedSlice.*(associator|scalar_unit)",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized slice constraint theorem. Use pure-tensor models and categorical naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associator_naturality\"",
+   "results": "12 hits: CategoryTheory.Bicategory.associator_naturality_left; CategoryTheory.Bicategory.associator_naturality_right; CategoryTheory.Bicategory.associator_naturality_middle; CategoryTheory.Bicategory.associator_naturality_left_assoc; CategoryTheory.Bicategory.associator_naturality_right_assoc; CategoryTheory.Bicategory.associator_naturality_middle_assoc; CategoryTheory.Limits.coprod.associator_naturality; CategoryTheory.Limits.prod.associator_naturality",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized slice constraint theorem. Use pure-tensor models and categorical naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized restriction of sheaves tensor product preserves associativity and scalar multiplication on the derived category by comparison on K-flat complexes",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Sheaf.monoidalCategory; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instMonoidalLightCondSetLightCondModFree; instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite; CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized slice constraint theorem. Use pure-tensor models and categorical naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor comparison for restriction of sheaves to a slice site commutes with the associator.",
+   "results": "8 hits: Bimod.AssociatorBimod.homAux; CategoryTheory.Localization.Monoidal.associator; CategoryTheory.Dial.associatorImpl; TensorProduct.tensorTensorTensorAssoc; SheafOfModules.pullback_assoc; SheafOfModules.pushforward_assoc; CategoryTheory.Sheaf.ΓRes_map_assoc; CategoryTheory.Over.associator_hom_left_snd_snd",
+   "date": "2026-10-22",
+   "verdict": "No exact match. General localization associators and pullback associativity do not prove the prescribed slice tensor comparison square."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceTensorConstraints",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceTensorConstraints.lean",
+  "declaration": "CategoryTheory.ringedSlice_tensor_associator",
+  "statement": "theorem ringedSlice_tensor_associator :\n    let r := ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U\n    ∀ X Y Z,\n      r.map (S.monoidal.associator X Y Z).hom ≫\n        (d.rho X (S.tensor.obj (Y, Z))).hom ≫\n        SU.tensor.map\n          (X := (r.obj X, r.obj (S.tensor.obj (Y, Z))))\n          (Y := (r.obj X, SU.tensor.obj (r.obj Y, r.obj Z)))\n          (𝟙 (r.obj X), (d.rho Y Z).hom) =\n      (d.rho (S.tensor.obj (X, Y)) Z).hom ≫\n        SU.tensor.map\n          (X := (r.obj (S.tensor.obj (X, Y)), r.obj Z))\n          (Y := (SU.tensor.obj (r.obj X, r.obj Y), r.obj Z))\n          ((d.rho X Y).hom, 𝟙 (r.obj Z)) ≫\n        (SU.monoidal.associator (r.obj X) (r.obj Y) (r.obj Z)).hom",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, 5 adapted modules, 5 new modules, 7 node files and 2 change records matched against the base in clones/live (verbatim move, identical #check signatures, import-only adaptations of unclaimed modules, unchanged statements), #print axioms in a sandbox, and the reader gate: 57 of 63 direct importers compiled against the sandbox, 3 after recompiling a stale importer, 3 not compilable against the lagging published build either"
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "id": "def-sf-common-projection-tensor-comparison",
+ "kind": "definition",
+ "title": "Natural canonical tensorator for finite-stage inclusion",
+ "statement": "For a prime l, an algebraic closure Ω of Q_l, and a scheme W with l invertible, let i_E be finite-stage inclusion [def-weil-algebraically-closed-coefficients] and let R and T be the rational and common-stage tensor functors [def-weil-derived-pullback-tensor-hom]. On two inputs included from E, extend the literal common-stage tensor object back to E using isoToStage and commonStageTensorComparison. This is a natural isomorphism to the inclusion of the tensor of the reflexively extended inputs: the representative formula for T proves naturality. Compose with the tensor of the canonical repeated-stage scalar unit and invert. The proved naturality and construction are [lem-sf-common-stage-inclusion-tensor-model-naturality]. This defines a natural isomorphism R;i_E ≅ (i_E × i_E);T, independently of any morphism or compactification. For a SixFunctorCommonStages datum [def-sf-operation-stages], the coefficient prime is invertible on each space because it is invertible on the base field. Transport this natural isomorphism by the prescribed rational and common tensor normalizations to define commonProjectionTensorComparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-sf-pf-field.proof.md",
+  "place": "Compatibility and the common finite coefficient-field paragraph: flat extension of scalars respects the units, counits, associativity and specified projection mate."
+ },
+ "stmt_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-operation-stages",
+  "lem-sf-common-stage-inclusion-tensor-model-naturality"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor preserves a proper adjunction projection mate when it preserves the tensor pullback comparison and the adjunction counit",
+   "results": "Eight hits on categorical pullbacks, functorialityCounit, Frobenius mates and adjunctions. None gives this coefficient-stage comparison.",
+   "date": "2026-10-27",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "NatIso.ofComponents and its component formulas construct the natural tensorator; no common-stage projection-factor theorem.",
+   "date": "2026-10-27",
+   "verdict": "Generic construction used; no matching factor compatibility."
+  },
+  {
+   "tool": "grep",
+   "query": "stageTensor.*natur|commonProjectionTensorCompatibility; local Mathlib CategoryTheory/Adjunction and Functor/Currying; Sheaf/Paper/ExchangeProjectionSuppliedDomains",
+   "results": "Existing stageTensor specifies object components only. The supplied projection is literally a composite of the proper counit mate and proper image of open projection, with support identifications. No canonical common-stage factor square found.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing formula and isolate its two actual factors."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonProjectionTensorCompatibility",
+  "date": "2026-10-27",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Compatibility paragraph of thm-sf-pf-field: the canonical tensor comparison and the proper/open factors of its projection mate. The created.item chain ends at a module name; no blueprint ancestor is returned by blueprint_refs.py.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CommonProjectionTensorComparison",
+  "file": "lean/Sheaf/Paper/CommonProjectionTensorComparison.lean",
+  "declaration": "WeilConjectures.commonProjectionTensorComparison",
+  "declarations": [
+   "WeilConjectures.sixFunctorSpace_coefficient_invertible",
+   "WeilConjectures.commonProjectionTensorComparison"
+  ],
+  "statement": "def commonProjectionTensorComparison\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)\n    (X : SixFunctorSpace D) :\n    Functor.uncurry.obj ((H.coefficientStages E).rationalTensor X) ⋙\n        inclusion (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E ≅\n      (inclusion (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E).prod\n          (inclusion (l := C.l) (Ω := C.Qbar) (Y := X.obj.left) E) ⋙\n        Functor.uncurry.obj (H.commonStageTensor X)",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T222546-L-668253",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261026T222546-L-668253",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

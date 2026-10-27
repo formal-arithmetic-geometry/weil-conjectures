@@ -1,0 +1,105 @@
+{
+ "id": "def-sfb-scalar-inverse-image-normalization",
+ "kind": "definition",
+ "title": "Elementary scalar tensors and normalized inverse-image comparison",
+ "status": "split",
+ "statement": "Let $(C,J)$ and $(D,K)$ be sites small in the coefficient and module universe [def-weil-size-convention], $A,B$ sheaves of commutative rings on $C$, $A',B'$ sheaves of commutative rings on $D$, and $a:A\\to B$, $a':A'\\to B'$ ring maps. For an $A$-module sheaf $M$ [def-weil-sheaf-of-modules-category], define $\\operatorname{scalarPure}_{a,M,U}(b,m)$ to be the image of the balanced tensor $b\\otimes m$ under the unit [def-weil-pbc-ringed-tensor-section-calculus] from the sectionwise change-of-rings presheaf to its module sheafification $B\\otimes_A M$ [def-pur-sheaf-tensor-product]. Let $F:\\operatorname{Sh}(C)\\to\\operatorname{Sh}(D)$ be a functor and let $I_A,I_B$ be algebraic inverse-image presentations [def-weil-pbc-algebraic-inverse-image] for $(A,A')$ and $(B,B')$, with ring identifications $e_A,e_B$ and underlying-module identifications $e_M:|I_A M|\\cong F|M|$ and $e_N:|I_B N|\\cong F|N|$. For a natural isomorphism $\\chi:(B\\otimes_A-)I_B\\cong I_A(B'\\otimes_{A'}-)$, define $\\operatorname{IsScalarInverseImageComparison}(F,I_A,I_B,a,a',\\chi)$ as the following normalization predicate: for every module $M$, test sheaf $T$, and arrows $s:T\\to|B|$, $m:T\\to|M|$, $z:T\\to|B\\otimes_A M|$ satisfying $z_U(t)=\\operatorname{scalarPure}_{a,M,U}(s_U(t),m_U(t))$ on every section, one has on every section of $FT$ the equation $\\chi_M(e_{B\\otimes M}^{-1}Fz)=\\operatorname{scalarPure}_{a',I_A M}(e_BFs,e_M^{-1}Fm)$. This defines a predicate, without asserting existence of a normalized isomorphism or requiring the ring square to commute.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-ringed-tensor-section-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL (lemma-tensor-product-pullback); blueprint main-20261015 det-prop-scalar-six-pullback.proof.md (1), (3), the canonical elementary-tensor normalization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheafified pure scalar tensor and normalized inverse image comparison for sheaves of modules",
+   "results": "[leansearch] OK 8 hit(s): PresheafOfModules.sheafifyMap; PresheafOfModules.sheafification; PresheafOfModules.toSheafify; PresheafOfModules.sheafifyMap.congr_simp; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.Sheafify.SMulCandidate.mk.congr_simp; PresheafOfModules.Sheafify.map_smul_eq; ModuleCat.tildeInModuleCat.",
+   "date": "2026-10-22",
+   "verdict": "Sheafification construction is reused; no normalized inverse-image predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheafified pure scalar tensor normalized inverse image comparison on generalized elements",
+   "results": "[leanfinder] OK 8 hit(s): PresheafOfModules.Sheafify.SMulCandidate.h; PresheafOfModules.Sheafify.one_smul; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv_symm_hom.",
+   "date": "2026-10-22",
+   "verdict": "None defines this normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep \"scalarPure|IsScalarInverseImageComparison\"; rg same names in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json; rg primary declaration records in dag/nodes; blueprint_refs.py search \"scalar inverse-image normalization\"",
+   "results": "[grep] OK 0 hit(s). Upstream and upstream-name index have no matching declaration. Project: the two exact definitions are currently helpers in ScalarInverseImageTowerDiagram; unrelated scalarPure names in LocalizedStrictTensorData and RingIsomorphismTensorTransport are differently scoped. No definition node owns these exact definitions. The helpers are moved verbatim, not duplicated.",
+   "date": "2026-10-22",
+   "verdict": "Extract the existing helpers into their own owning module as explicitly required by return H2/H12."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-finite-free-scalar-coordinates",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Canonical balancing and pure-tensor formulas used to transport the finite-basis coordinate isomorphism.",
+   "via": [
+    "lem-sfb-derived-finite-free-scalar-coordinates",
+    "lem-sfb-qcqs-proper-integral-rational-scalar-comparison",
+    "lem-sfb-qcqs-proper-constructible-closed-base-change",
+    "lem-sfb-qcqs-proper-open-boundary-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarInverseImageTowerDiagram",
+  "declaration": "SheafOfModules.RingedTensor.IsScalarInverseImageComparison",
+  "declarations": [
+   "SheafOfModules.RingedTensor.scalarPure",
+   "SheafOfModules.RingedTensor.IsScalarInverseImageComparison"
+  ],
+  "statement": "def IsScalarInverseImageComparison\n    {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]\n    {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX}\n    {AY BY : Sheaf JY CommRingCat.{u}} {AX BX : Sheaf JX CommRingCat.{u}}\n    (F : Sheaf JY (Type u) ⥤ Sheaf JX (Type u))\n    (IA : AlgebraicInverseImage F AY AX) (IB : AlgebraicInverseImage F BY BX)\n    (aY : AY ⟶ BY) (aX : AX ⟶ BX)\n    (e : tensorFunctor aY ⋙ IB.modules ≅ IA.modules ⋙ tensorFunctor aX) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Ownership record for the existing scalarPure and IsScalarInverseImageComparison definitions in the landed tower module, as required by return f61320890a14 H13. The module, its stage-3 proof, and the tower node record are untouched; no extraction or duplicate definition is delivered."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd4bc8bc",
+  "group": "Q16",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd4bc8bc",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery after RETURN f61320890a14 (H13). diff -r against the f6132 snapshot: the item module's only change is the import requested (public import Sheaf.CategoryTheory.ScalarInverseImageTowerDiagram). ScalarInverseImageNormalization.lean and the tower module are no longer delivered, so the landed stage-3 tower proof is untouched (live module has 0 sorry). def-sfb-scalar-inverse-image-normalization is now existing:true on the tower module; its lean.statement is verbatim in the live module, and scalarPure exists there. Item statement, helpers and stmt_deps are unchanged from the version accepted on substance; I re-checked them independently: Φ pinned through ε, φ and the projections; φ pinned on scalarPure (forward q_i(s)•m, inverse Σ b_i⊗m_i); χ/ρ/κ/κS/τ/σ/σD/β all pinned; θ' = g⁻¹θ; final square uses the actual Φ and a Φ' normalized the same way. No extra hypotheses; universes u and w; edge cases d=0, d=1 with scaled basis, no terminal object, identity g, unbounded complexes. lean.statement verbatim, 6 declarations present, one sorry, docstrings carry source and blueprint, report has Worker report and Second reading sections. No compile (no file changed); worker reports a clean scompile and a deliver2 dry-run OK at 5f900d98835. Advisory: double listing of the two definitions (tower node plus existing:true node, accepted by the dry run); possible duplicate LocalizedStrictTensor.scalarPure in another node; def-weil-pbc-ringed-topos-morphism contributes no Lean declaration."
+ }
+}

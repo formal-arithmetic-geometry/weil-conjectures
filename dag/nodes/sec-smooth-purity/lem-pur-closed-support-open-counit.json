@@ -1,0 +1,421 @@
+{
+ "id": "lem-pur-closed-support-open-counit",
+ "kind": "statement",
+ "title": "Actual derived open counit on a closed pushforward supported in the open",
+ "statement": "Let $A$ be a commutative ring, let $Y,U,Z$ be schemes [def-pc-scheme], let $j:U\\hookrightarrow Y$ be an open immersion [def-weil-open-immersion], and let $i:Z\\hookrightarrow U$ be a closed immersion such that $k=ji:Z\\hookrightarrow Y$ is also closed [def-weil-closed-immersion]. Let $B$ be a sheaf of modules over the constant ring sheaf $A_Z$ on the small etale site [def-weil-pbc-etale-sheaves]. Put $F=k_*B$ and $G=i_*B$, using [def-weil-pbc-direct-image]. Let $j^{-1}$ be ordinary inverse image [def-weil-pbc-inverse-image] and $j_!$ extension by zero [def-weil-pbc-extension-by-zero]. There is a canonical restriction isomorphism $\\rho:j^{-1}F\\xrightarrow{\\sim}G$ whose component at every etale $V\\to U$ is the identity on $B(V\\times_U Z)$, after the canonical fibre-product identification. The sheaf $F$ restricts to zero on $Y\\setminus k(Z)$.\n\nOn the ordinary unbounded derived categories [def-weil-pbc-derived-categories], use the adjunction $Dj_!\\dashv D(j^{-1})$ obtained by localizing the sheaf adjunction $j_!\\dashv j^{-1}$ of [lem-weil-pbc-extension-by-zero-adjunction] (both functors are exact on module sheaves over the constant ring sheaves [lem-weil-pbc-extension-by-zero-exact], [prop-weil-pbc-inverse-image-modules-exact]) as in [def-weil-exact-derived-adjunction]. Denote its counit by $\\epsilon_M:Dj_!D(j^{-1})M\\to M$. On sheaves this is the localized original sheaf counit. With sheaves placed in degree zero, the actual morphism\n$$e=\\epsilon_F\\circ Dj_!(\\rho^{-1}):Dj_!G\\longrightarrow F$$\nis an isomorphism. For every $M\\in D(Y_{\\mathrm{et}},A)$ and every morphism $c:F\\to M$, set $c_U=D(j^{-1})(c)\\circ\\rho^{-1}:G\\to D(j^{-1})M$. Then the actual derived morphisms satisfy\n$$\\epsilon_M\\circ Dj_!(c_U)=c\\circ e.$$\nThis applies in particular to shifted sheaves $M=L[r]$ for every integer $r$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero) and 095L (lemma-ses-associated-to-open), applied to a closed support contained in the open; exact derived localization uses derived.tex Tag 015F (lemma-right-derived-exact-functor).",
+  "external": [
+   {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 2: actual compact image of the supported origin; expanded returned proof steps 2--4, restriction, support counit, exact derived normalization and naturality."
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-derived-categories",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical isomorphism between the pullbacks of V.hom and i over U and of V.hom ≫ j and i ≫ j over Y using pullback.lift in both directions, cancellation of the monomorphism j, and pullback.hom_ext. Its two projection equations imply naturality in V. Apply the presheaf B contravariantly, lift the resulting natural isomorphism to sheaves, and compose it with upperStarIsoOpenImmersionRestriction. Cancellation of that restriction comparison proves exactly the required section formula.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-direct-image",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 (definition-extension-zero), restriction paragraph and equation-j-p-shriek; Tag 03S5 (proposition-describe-jshriek); Tag 095L (lemma-ses-associated-to-open), proof."
+   }
+  },
+  {
+   "text": "Put $W=Y\\setminus k(Z)$, which is open because $k$ is closed. For every etale $T\\to W$, the fibre product $T\\times_Y Z$ is empty: a point of it would map both into $W$ and into $k(Z)$. Hence $F(T)=B(\\varnothing)=0$, the last equality being the sheaf axiom for the empty covering of the empty object. Restriction to $W$ is the inverse image along its open inclusion, by the restriction description of the cited adjunction. It follows that $F|_W=0$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 (definition-extension-zero), restriction paragraph and equation-j-p-shriek; Tag 03S5 (proposition-describe-jshriek); Tag 095L (lemma-ses-associated-to-open), proof."
+   }
+  },
+  {
+   "text": "Check the original sheaf counit on all geometric stalks using Scheme.isIso_of_isIso_sheafFiber_map. For a point inside j(U), lift it through j; the upperStar image of the counit is already invertible by the triangle identity and the invertible open-adjunction unit. Transfer this invertibility to the stalk using upperStarCompUliftSheafFiberIso. Outside j(U), the extension-by-zero source stalk vanishes. The point also lies in the open complement W of the closed image of i ≫ j. The existing disjoint-range vanishing lemma gives W^*(i ≫ j)_* B = 0; lifting the point through W and the same fibre comparison show the target stalk is zero. The stalk map is therefore invertible in ModuleCat, so conservativity applies directly to module sheaves.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-vanishing-lowerstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 (definition-extension-zero), restriction paragraph and equation-j-p-shriek; Tag 03S5 (proposition-describe-jshriek); Tag 095L (lemma-ses-associated-to-open), proof."
+   }
+  },
+  {
+   "text": "Apply the sheaf adjunction termwise to the degree-zero single complex F. Its counit components are invertible: in degree zero transport the preceding sheaf result by singleObjXSelf, and in every other degree both objects are zero. HomologicalComplex.Hom.isIso_of_components makes the complex counit invertible. Expand exactDerivedAdjunction using Adjunction.localization_counit_app: the derived counit is a composite of the standard exact-functor comparison isomorphisms and the localization of this invertible complex counit. Finally the inverse restriction isomorphism and its standard degree-zero comparison remain invertible under the derived extension-by-zero functor. Their composite is precisely closedSupportOpenCounitArrow.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), exact-functor localization; specified counit convention in def-weil-exact-derived-adjunction."
+   }
+  },
+  {
+   "text": "Write $J=Dj_!$ and $P=D(j^{-1})$. The counit of the specified derived adjunction is a natural transformation $JP\\to\\mathrm{id}$; its defining naturality equation at the arbitrary derived morphism $c:F\\to M$ is $\\epsilon_M\\circ JP(c)=c\\circ\\epsilon_F$. Functoriality and the definition of $c_U$ give $\\epsilon_M\\circ J(c_U)=\\epsilon_M\\circ JP(c)\\circ J(\\rho^{-1})=c\\circ\\epsilon_F\\circ J(\\rho^{-1})=c\\circ e$. Naturality here is in the derived category itself, so $c$ need not be represented by a sheaf map or an unlocalized chain map. Taking $M=L[r]$ gives the asserted shifted-sheaf case for every integer $r$.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 (definition-extension-zero), restriction paragraph and equation-j-p-shriek; Tag 03S5 (proposition-describe-jshriek); Tag 095L (lemma-ses-associated-to-open), proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-direct-image",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-exact-derived-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3, 03S5 and 095L; derived.tex Tag 015F. Lean proof by G3: canonical pullback restriction, existing open triangle and disjoint-range vanishing, module-stalk conservativity, and localization of the original termwise counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(counit.*(closed|support)|((closed|support).*counit)|extensionByZero)",
+   "results": {
+    "n_hits": 5,
+    "top": [
+     "Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean",
+     "Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean",
+     "Mathlib/CategoryTheory/Pi/Monoidal.lean",
+     "Mathlib/CategoryTheory/Pi/Monoidal.lean"
+    ],
+    "note": "",
+    "digest": "cb6a5d866284c5cf",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements give general counit naturality, Zariski structure-sheaf restriction, topological skyscrapers or structure-sheaf evaluation; none supplies this ordinary etale module statement with its specified derived and section normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, \"naturality\"",
+   "results": {
+    "n_hits": 2,
+    "top": [
+     "CategoryTheory.Adjunction.counit_naturality",
+     "CategoryTheory.Adjunction.counit_naturality_assoc"
+    ],
+    "note": "",
+    "digest": "707a616fb3bc376d",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements give general counit naturality, Zariski structure-sheaf restriction, topological skyscrapers or structure-sheaf evaluation; none supplies this ordinary etale module statement with its specified derived and section normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed immersion factoring through an open immersion gives an isomorphism from extension by zero of its direct image to the ambient direct image, compatible with the actual derived adjunction counit.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+     "AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_assoc",
+     "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict",
+     "AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc",
+     "AlgebraicGeometry.Scheme.Hom.appIso",
+     "AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc"
+    ],
+    "note": "",
+    "digest": "87e49d17856bcc63",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements give general counit naturality, Zariski structure-sheaf restriction, topological skyscrapers or structure-sheaf evaluation; none supplies this ordinary etale module statement with its specified derived and section normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes and a closed immersion supported inside that open, extension by zero of the restricted closed pushforward is canonically the closed pushforward; its derived counit is natural on morphisms to shifted complexes.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+     "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+     "AlgebraicGeometry.liftCoborder_app",
+     "AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom"
+    ],
+    "note": "",
+    "digest": "d1445e33c1d7c293",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements give general counit naturality, Zariski structure-sheaf restriction, topological skyscrapers or structure-sheaf evaluation; none supplies this ordinary etale module statement with its specified derived and section normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jshriek|closed.*support.*counit",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements give general counit naturality, Zariski structure-sheaf restriction, topological skyscrapers or structure-sheaf evaluation; none supplies this ordinary etale module statement with its specified derived and section normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "counit_naturality|restrictAdjunction|stalkSkyscraperSheafAdjunction",
+   "results": {
+    "n_hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/Adjunction/Unique.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean",
+     "Mathlib/CategoryTheory/Adjunction/Triple.lean"
+    ],
+    "note": "",
+    "digest": "5170e89fd9849563",
+    "subdirectory": "CategoryTheory"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned statements give general counit naturality, Zariski structure-sheaf restriction, topological skyscrapers or structure-sheaf evaluation; none supplies this ordinary etale module statement with its specified derived and section normalizations"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|closed.*support.*counit",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski structure-sheaf restriction, abstract derived functor comparisons, and general counit naturality do not state the etale closed-support reconstruction with its specified component and counit normalizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.counit, \"naturality\"",
+   "results": {
+    "n_hits": 2,
+    "top": [
+     "CategoryTheory.Adjunction.counit_naturality",
+     "CategoryTheory.Adjunction.counit_naturality_assoc"
+    ],
+    "note": "",
+    "digest": "707a616fb3bc376d",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski structure-sheaf restriction, abstract derived functor comparisons, and general counit naturality do not state the etale closed-support reconstruction with its specified component and counit normalizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion of schemes extension by zero of the restriction of a closed pushforward supported in the open is isomorphic to that pushforward, with natural derived counit.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+     "AlgebraicGeometry.Scheme.Hom.appIso",
+     "AlgebraicGeometry.IsOpenImmersion.ΓIsoTop",
+     "AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom_assoc"
+    ],
+    "note": "",
+    "digest": "a9c1528d56bc7dc0",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski structure-sheaf restriction, abstract derived functor comparisons, and general counit naturality do not state the etale closed-support reconstruction with its specified component and counit normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of schemes a sheaf of modules supported on a closed subscheme contained in the open is recovered by extension by zero, using the actual derived counit and its naturality.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+     "AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+     "AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+     "AlgebraicGeometry.Scheme.ofRestrict_app",
+     "AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+     "AlgebraicGeometry.liftCoborder_app"
+    ],
+    "note": "",
+    "digest": "cbcd4bcb35cbd647",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski structure-sheaf restriction, abstract derived functor comparisons, and general counit naturality do not state the etale closed-support reconstruction with its specified component and counit normalizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf vanishing on the complement of an open subscheme the adjunction counit from extension by zero of its inverse image is an isomorphism, and after exact localization its naturality holds for every morphism of unbounded derived objects.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app",
+     "CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+     "CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh"
+    ],
+    "note": "",
+    "digest": "91becb2a10c7e492",
+    "subdirectory": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Zariski structure-sheaf restriction, abstract derived functor comparisons, and general counit naturality do not state the etale closed-support reconstruction with its specified component and counit normalizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-origin-class-projective-comparison",
+  "date": "2026-10-22",
+  "group": "Q125"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rank-one-thom",
+   "place": "Step 2, geometric-fibre origin class: closed support inside the affine chart; expanded comparison proof steps 2--3 and counit naturality in step 4",
+   "via": [
+    "lem-pur-origin-class-projective-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-closed-support-open-counit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps prove the restriction formula, vanishing off the closed support, invertibility of the specified sheaf counit on geometric stalks, its exact derived localization, and naturality for every derived morphism. Existing DAG facts suffice; no new nodes. Checked Stacks 03S3, 03S5, 095L and 015F, source Lean and logged Mathlib searches.",
+  "blueprint": "thm-pur-rank-one-thom, proof Step 2: the actual compact image of the origin class in the affine chart, expanded through the parent lem-pur-origin-class-projective-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic ordinary etale sheaf tool used for restriction, geometric-stalk detection or exact-functor localization in the affine-chart origin-class comparison; no replacement of the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic ordinary etale sheaf tool used for restriction, geometric-stalk detection or exact-functor localization in the affine-chart origin-class comparison; no replacement of the unit purity route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic ordinary etale sheaf tool used for restriction, geometric-stalk detection or exact-functor localization in the affine-chart origin-class comparison; no replacement of the unit purity route."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic ordinary etale sheaf tool used for restriction, geometric-stalk detection or exact-functor localization in the affine-chart origin-class comparison; no replacement of the unit purity route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary etale sheaf tool used for restriction, geometric-stalk detection or exact-functor localization in the affine-chart origin-class comparison; no replacement of the unit purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-extension-by-zero-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NE-593347f38",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-593347f38 (reviewer sub-agent of L); spot-checked: Read the full delivery and its sources: Stacks etale-cohomology.tex 03S3 (definition-extension-zero, l.11361, with the restriction paragraph and equation-j-p-shriek), 03S5 (proposition-describe-jshriek, l.11425), 095L (lemma-ses-associated-to-open, l.11588, with its stalkwise proof) and derived.tex 015F (lemma-right-derived-exact-functor, l.5884). I also read the statement of every cited node. Shape: no new nodes; the statement and stmt_deps are identical to live, where the item is still unsplit (not superseded, no re-split note); proof_deps equals the union of the step uses; no SGA citation; the Mathlib searches include grep, loogle, leansearch and leanfinder. Steps: 1 (V x_Y Z = V x_U Z because j is a monomorphism, and the adjunction node identifies j^{-1} on sections), 2 (F(T)=B(empty)=0 over W=Y\\\\k(Z)), 4 (localized counits from def-weil-exact-derived-adjunction, with both functors exact) and 5 (counit naturality, computation checked: c o e) are correct. Edge cases checked: Z empty, U=Y, A=0, M=L[r]. Without closedness of k the result fails (Z=U=G_m in A^1: j_*A has a nonzero stalk at 0, j_!A has stalk 0), and the hypothesis is stated. FIX, one E5 gap in step 3: the step called the stalk map the identity under the extension-by-zero stalk isomorphism but never compared (j^{-1}F)_u with F_y. I added the cofinality argument: V x_Y U is a neighbourhood of the lifted point that factors through U, so the colimits agree. The step is now 1545 characters; nothing else changed. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-pur-closed-support-open-counit.json. Duplicate search: lem-weil-pbc-extension-by-zero-open-characterization (abelian sheaves, unsplit) overlaps step 3's sheaf iso, but it does not duplicate the item, and the delivered module-sheaf argument is kept. The others are not duplicates: open-closed-short-exact and cbc-open-closed-recollement (complementary open), exc-open-closed-detection and sfb-locally-closed (pro-etale). Accepted tool_uses: the five generic etale sheaf tools (extension-by-zero adjunction, stalks, exact; inverse-image-modules-exact; geometric-stalk-conservative).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportOpenCounit",
+  "declaration": "AlgebraicGeometry.Etale.closedSupport_openCounit",
+  "declarations": [
+   "AlgebraicGeometry.Etale.exactRestrictionLift",
+   "AlgebraicGeometry.Etale.exactCounitComposite",
+   "AlgebraicGeometry.Etale.openCounitRestrictionLift",
+   "AlgebraicGeometry.Etale.closedSupportOpenCounitArrow",
+   "AlgebraicGeometry.Etale.closedSupport_openCounit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSupportOpenCounit.lean",
+  "statement": "theorem closedSupport_openCounit (A : Type (u + 1)) [CommRing A] {Y U Z : Scheme.{u}} (j : U ⟶ Y) (i : Z ⟶ U) [IsOpenImmersion j] [IsClosedImmersion i] [IsClosedImmersion (i ≫ j)] (B : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)) : ∃ ρ : (upperStar (ModuleCat.{u + 1} A) j).obj ((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B) ≅ (lowerStar (ModuleCat.{u + 1} A) i).obj B, (∀ V : U.Etale, ∃ τ : (MorphismProperty.Over.pullback @Etale ⊤ i).obj V ≅ (MorphismProperty.Over.pullback @Etale ⊤ (i ≫ j)).obj ((MorphismProperty.Over.map ⊤ (inferInstance : Etale j)).obj V), τ.hom.left ≫ pullback.fst (V.hom ≫ j) (i ≫ j) = pullback.fst V.hom i ∧ (((upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j).inv.app ((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B)) ≫ ρ.hom).hom.app (op V) = B.obj.map τ.hom.op) ∧ (∀ T : Y.Etale, Disjoint (Set.range T.hom) (Set.range (i ≫ j)) → IsZero (((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B).obj.obj (op T))) ∧ IsIso (closedSupportOpenCounitArrow A j ((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B) ((lowerStar (ModuleCat.{u + 1} A) i).obj B) ρ) ∧ (∀ (M : DerivedCategoryModule A Y) (c : (_root_.DerivedCategory.singleFunctor _ 0).obj ((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B) ⟶ M), (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map (openCounitRestrictionLift A j ((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B) ((lowerStar (ModuleCat.{u + 1} A) i).obj B) ρ ≫ (upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory.map c) ≫ (SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).counit.app M = closedSupportOpenCounitArrow A j ((lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).obj B) ((lowerStar (ModuleCat.{u + 1} A) i).obj B) ρ ≫ c)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c0f98879",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Only the lean field of the item node changed and every dep node file is identical to side-live; lean.statement matches the file verbatim, with a single sorry. Hypotheses match the node exactly (IsOpenImmersion j, IsClosedImmersion i and i≫j); A : Type (u+1) is the recorded DerivedCategoryModule encoding. ρ is existential but pinned: through upperStarIsoOpenImmersionRestriction its component must be B.map τ.hom.op, and τ (over Z, with the fst condition; Mathlib Over.pullback uses pullback.snd) is the unique fibre-product identification. The vanishing clause is equivalent to F|_{Y∖k(Z)}=0. e = J.map(single ρ.inv ≫ mapDerivedCategorySingleFunctor.inv) ≫ counit of the recorded exactDerivedAdjunction (read: localizes a.mapHomologicalComplex) on the recorded openImmersionLowerShriekUpperStarAdjunction; exactness instances come from the recorded nodes. The IsIso and ∀M ∀c naturality clauses match the node, and ∀ M covers L[r]. Edge cases checked (Z empty, j=𝟙, A=0, unbounded M). Helpers are real compositions with no name clash; docstrings carry the source and blueprint tag and the 5-step proof; no pro-etale substitute. No changes, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261024T185755-L-3669292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

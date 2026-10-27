@@ -1,0 +1,160 @@
+{
+ "id": "lem-pur-scalar-tensor-representative-pullback",
+ "kind": "statement",
+ "title": "Pullback square for scalar tensor representatives",
+ "statement": "Let phi:A -> B be a homomorphism of commutative rings in Type(u+1), f:Z -> W a morphism of schemes in universe u, and P a cochain complex of A-module sheaves on W. Let q_phi(P) be the explicit scalar tensor representative [lem-pur-scalar-tensor-representative-calculus], g(P) the geometric representative and k the specified coefficient pullback iso [def-pur-scalar-pullback-representative-data]. Let t:f^{-1}(P tensor B_W) ~= f^{-1}P tensor B_Z be the ordinary monoidal tensor comparison followed by the coefficient iso from [lem-pur-scalar-sheaf-tensor-pullback]. Then the derived inverse-image tensor comparison at QP and B_W[0], followed by id tensor k, by g(P) tensor id, and by q_phi(f^{-1}P), equals derived inverse image of q_phi(P), followed by g(P tensor B_W) and Q(t). This is a counit compatibility, with no flatness or boundedness hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0FPH (lemma-tensor-pull-compatibility); scalar-coefficient specialization"
+ },
+ "stmt_deps": [
+  "lem-pur-scalar-tensor-representative-calculus",
+  "def-pur-scalar-pullback-representative-data",
+  "lem-pur-scalar-sheaf-tensor-pullback",
+  "lem-pur-upper-star-single-tensor-representative"
+ ],
+ "proof": [
+  {
+   "text": "Specialize upperStar_single_tensor_representative to the ordinary scalar coefficient iso. The exact single-coefficient comparison equals the specified scalarCoefficientPullbackIso by its concrete definition. The endpoint equality isos in scalarTensorRepresentative become identity after unfolding the equal tensor functors. Cancel these identities and reassociate. The resulting equality is precisely the asserted scalar-endpoint square.",
+   "uses": [
+    "lem-pur-scalar-tensor-representative-calculus",
+    "lem-pur-upper-star-single-tensor-representative",
+    "lem-pur-scalar-sheaf-tensor-pullback"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-scalar-tensor-representative-calculus",
+  "lem-pur-upper-star-single-tensor-representative",
+  "lem-pur-scalar-sheaf-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0FPH (lemma-tensor-pull-compatibility); scalar-coefficient specialization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of extension of scalars commutes with inverse image and tensor comparison on K-flat complexes",
+   "results": "8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, Module.Flat.isBaseChange",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.LaxMonoidal.μ_natural_left",
+   "results": "1 hits: CategoryTheory.Functor.LaxMonoidal.μ_natural_left",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarSheafTensorMap|scalarTensorPullback|scalarTensorModelNormalization",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived inverse image tensor comparison with a complex concentrated in degree zero agrees with the ordinary monoidal pullback tensor comparison",
+   "results": "8 hits: HomologicalComplex.leftUnitor'_inv, HomologicalComplex.leftUnitor', HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Functor.Monoidal.tensorObjComp_inv_app, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pullback tensor product comparison commutes with localization on a complex and a sheaf concentrated in degree zero",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.rTensor, IsLocalization.tensorProduct_isLocalizedModule, DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.Q, IsLocalization.tensor, CategoryTheory.Functor.mapDerivedCategoryFactors, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "the unit projection map of extension and restriction of scalars commutes with monoidal inverse image of sheaves",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, PresheafOfModules.restrictScalarsObj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  },
+  {
+   "tool": "grep",
+   "query": "map.*unitProjection|tensor.*single.*pullback|pullback.*single.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "No exact Mathlib match for the specified sheaf/derived comparison square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ScalarTensorPullbackNormalization",
+  "date": "2026-10-27",
+  "group": "Q5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-finite-compact-support-constructibility",
+   "place": "Step 5, finite coefficient reduction; scalar endpoint transport in the tensor counit square, Tags 07A4 and 0FPH",
+   "via": [
+    "lem-pur-scalar-tensor-pullback-normalization",
+    "lem-pur-etale-scalar-mate-projection"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ScalarTensorRepresentativePullback",
+  "file": "lean/Sheaf/Paper/ScalarTensorRepresentativePullback.lean",
+  "declaration": "AlgebraicGeometry.Etale.scalarTensorRepresentative_pullback",
+  "statement": "theorem scalarTensorRepresentative_pullback\n    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)\n    {Z W : Scheme.{u}} (f : Z ⟶ W)\n    (P : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) :\n    ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) f).app\n          (DerivedCategory.Q.obj P)).app (scalarCoefficient φ W) ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) Z).obj\n          (L(upperStar (ModuleCat.{u + 1} A) f).obj (DerivedCategory.Q.obj P))).map\n          (scalarCoefficientPullbackIso φ f).hom ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) Z).flip.obj (scalarCoefficient φ Z)).map\n          (scalarGeometricRepresentative A f P) ≫\n        scalarTensorRepresentative φ Z\n          (((upperStar (ModuleCat.{u + 1} A) f).mapHomologicalComplex (.up ℤ)).obj P) =\n      L(upperStar (ModuleCat.{u + 1} A) f).map (scalarTensorRepresentative φ W P) ≫\n        scalarGeometricRepresentative A f\n          (((tensorRight (scalarCoefficientSheaf φ W)).mapHomologicalComplex (.up ℤ)).obj P) ≫\n        DerivedCategory.Q.map\n          ((Functor.mapHomologicalComplexCompIso\n              (upperStarTensorSingleIso A f (scalarCoefficientSheafPullbackIso φ f)) (.up ℤ) ≪≫\n            (Functor.mapHomologicalComplexCompIso (Iso.refl\n              (upperStar (ModuleCat.{u + 1} A) f ⋙\n                tensorRight (scalarCoefficientSheaf φ Z))) (.up ℤ)).symm).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T021351-L-2762338",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261027T021351-L-2762338",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

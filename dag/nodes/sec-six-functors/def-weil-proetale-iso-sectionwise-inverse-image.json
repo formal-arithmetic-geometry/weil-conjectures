@@ -1,0 +1,124 @@
+{
+ "id": "def-weil-proetale-iso-sectionwise-inverse-image",
+ "kind": "definition",
+ "title": "Sectionwise inverse image and module transport along a pro-etale scheme isomorphism",
+ "status": "split",
+ "statement": "Let $g:X\\to Y$ be an isomorphism of schemes [def-weil-scheme-morphism-properties]. Use the small pro-etale sites [def-weil-pbc-proetale-site] with independent universes as in [def-weil-size-convention]. Define $\\Phi_g:X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$ by $(U\\xrightarrow{u}X)\\mapsto(U\\xrightarrow{g\\circ u}Y)$, leaving the underlying schemes and arrows unchanged. For a category $D$ with arbitrary object and morphism universes, define the sectionwise model $F_g$ of inverse image [def-weil-proetale-inverse-image] on $D$-valued sheaves by precomposition with $\\Phi_g^{\\mathrm{op}}$: $(F_g\\mathcal F)(U)=\\mathcal F(\\Phi_g U)$, with the same rule on restriction maps and on morphisms of sheaves. The existing continuity instance of $\\Phi_g$ supplies the sheaf condition; no choice of an inverse-image comparison is part of this definition.\n\nFor $X,Y$ of universe $t$, an independent coefficient universe $r$, sheaves of rings $R_Y$ on $Y_{\\mathrm{proet}}$ and $R_X$ on $X_{\\mathrm{proet}}$ valued in $\\operatorname{RingCat}_{\\max(r,t+1)}$, and a specified isomorphism $c:F_gR_Y\\to R_X$, define the module inverse-image functor $G_c:\\operatorname{Mod}(R_Y)\\to\\operatorname{Mod}(R_X)$ on sheaves of modules [def-weil-sheaf-of-modules-category] of universe $\\max(r,t+1)$ by $(G_cM)(U)=M(\\Phi_g U)$. Its $R_X(U)$-action is $a\\cdot x=c_U^{-1}(a)x$; restrictions and module morphisms are evaluated at the same corresponding objects. Equivalently this is the existing sheaf-of-modules pushforward for the continuous functor $\\Phi_g$ and the ring map $c^{-1}$.",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites.tex; literature/stacks-project/sites-modules.tex",
+  "place": "Tag 09A5, section-morphism; Tag 00WX, lemma-adjoint-sheaves; Tag 03D2, lemma-pullback-module. The sectionwise model specializes site inverse image to an isomorphism, with module action transported through the specified inverse ring map."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sheafPushforwardContinuous|def pushforward [Algebra/Category/ModuleCat/Sheaf]",
+   "results": "17 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
+   "date": "2026-10-23",
+   "verdict": "The generic Mathlib constructions are reused through the exact existing project sectionwise functors; no definition is copied."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf inverse image along scheme isomorphism by precomposition and module scalar transport",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackCongr, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.Hom.appIso_inv_app, AlgebraicGeometry.Scheme.Hom.inv_image",
+   "date": "2026-10-23",
+   "verdict": "The generic Mathlib constructions are reused through the exact existing project sectionwise functors; no definition is copied."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf inverse image along scheme isomorphism by precomposition and module scalar transport",
+   "results": "8 hits: AlgebraicGeometry.Scheme.inv_app, AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Hom.inv_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app, AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp, AlgebraicGeometry.Scheme.inv_appTop, AlgebraicGeometry.Scheme.Modules.pushforwardCongr",
+   "date": "2026-10-23",
+   "verdict": "The generic Mathlib constructions are reused through the exact existing project sectionwise functors; no definition is copied."
+  },
+  {
+   "tool": "rg",
+   "query": "isoSectionwiseInverseImage|isoSectionwiseModuleInverseImage|proEtaleIsoPostcompose in lean/WeilConjectures and lean/Sheaf/AlgebraicGeometry",
+   "results": "No match in WeilConjectures. Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage has isoSectionwiseInverseImage and isoSectionwiseModuleInverseImage, reexporting proEtaleIsoPostcompose from ProEtaleIsomorphismInverseImage. These are the exact definitions reused.",
+   "date": "2026-10-23",
+   "verdict": "existing:true on the existing Sheaf definitions; no new Lean module"
+  },
+  {
+   "tool": "rg / tools/blueprint_refs.py search",
+   "query": "isoSectionwiseInverseImage|isoSectionwiseModuleInverseImage|proEtaleIsoPostcompose in dag/nodes; blueprint search \"sectionwise inverse image\"",
+   "results": "The theorem lem-weil-proetale-isomorphism-inverse-image lists the declarations but no definition node owns them. Three definition-node textual matches concern point restriction coordinates, adic section models, and constant Weil structure, not these generic isomorphism functors. Blueprint search: 0 nodes.",
+   "date": "2026-10-23",
+   "verdict": "Add definition ownership as required by the independent H2 return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-isomorphism-scalar-quotient-chain-squares",
+  "date": "2026-10-23",
+  "group": "Q15"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Corresponding-object inverse-image and module-action coordinates used in scalar quotient/transition chain squares, proof Step 1; definition ownership separated from the site-equivalence theorem after independent stage-2 return H2.",
+   "via": [
+    "lem-weil-isomorphism-scalar-quotient-chain-squares",
+    "lem-weil-isomorphism-scalar-tensor-kflat-model",
+    "lem-weil-isomorphism-comparison-scalar-extension",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage",
+  "declaration": "AlgebraicGeometry.Scheme.isoSectionwiseInverseImage",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleIsoPostcompose",
+   "AlgebraicGeometry.Scheme.proEtaleIsoPostcompose_isContinuous",
+   "AlgebraicGeometry.Scheme.isoSectionwiseInverseImage",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage",
+   "AlgebraicGeometry.Scheme.isoSectionwiseModuleInverseImage_additive"
+  ],
+  "statement": "abbrev isoSectionwiseInverseImage {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]\n    (D : Type d) [Category.{v} D] :\n    Sheaf (ProEt.topology Y) D ⥤ Sheaf (ProEt.topology X) D",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "H2 repair requested by the independent review of immutable head ea3f49d03a43: this definition node owns the existing sectionwise precomposition and module scalar-transport constructions, including the reexported site functor, its continuity instance, and module additivity used for termwise cochain transport. No Lean declaration is added or changed. The separate isomorphism inverse-image theorem remains a proof dependency of the consumer."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1386c065f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1386c065f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of ea3f49d03a43. The item .lean is byte-identical (sha256 416fd16f). Compared with side-live and live, the item node changes only stmt_deps and lean. The theorem stmt_dep lem-weil-proetale-isomorphism-inverse-image is replaced by the new definition node def-weil-proetale-iso-sectionwise-inverse-image, and the theorem stays in proof_deps. The new node is existing:true on Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage; its primary statement is verbatim the isoSectionwiseInverseImage abbrev. It also owns isoSectionwiseModuleInverseImage (pushforward along inv c, so the action is c^-1, as the node states), proEtaleIsoPostcompose (re-exported) and two landed typing instances. Its 5 stmt_deps are landed definition nodes, and no duplicate definition node exists in live or side-live. Independent clause-by-clause re-read of the item Lean: Tower/Transport hypotheses, UpperFormula normalization, both finite rules (cB.inv forward, cB.hom inverse), the v/w formulas, both transition formulas and both square orientations all match the node; witnesses are pinned by sheafification and bilinear-extension uniqueness. Edge cases m=1, zero rings and complexes, unbounded P, independent universes. Only sorry; docstrings complete; report sections present. No compile run (no change made)."
+ }
+}

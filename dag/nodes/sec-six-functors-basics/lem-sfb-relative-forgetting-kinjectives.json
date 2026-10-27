@@ -1,0 +1,148 @@
+{
+ "id": "lem-sfb-relative-forgetting-kinjectives",
+ "kind": "statement",
+ "title": "Forgetting a commuting profinite action preserves K-injective complexes",
+ "statement": "Let R be a commutative condensed ring and let G be a profinite group. Let J be any topological group. Use the internal action categories and the functor U_J=forgetResidual R G J, restriction along j to (1,j), of [def-sfb-relative-derived-invariants]. For every unbounded integer-indexed K-injective complex I in the category of G times J actions, the termwise image U_J(I) is K-injective in the category of J actions. Here K-injective means that every map from an acyclic complex is null homotopic, as in [def-pur-kinjective-complex].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03EV and 0GMW; the agent-formulated commuting-action induction of paragraph (3), step 6 in def-sfb-relative-invariant-forgetting."
+ },
+ "stmt_deps": [
+  "def-sfb-relative-derived-invariants",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use the product-forgetting datum with trivial retained group to obtain the flat free internal module R[G], together with its represented extension-by-zero presentation. Only G is required to be profinite.",
+   "uses": [
+    "lem-sfb-product-action-exact-forgetting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a J-action M, sheafify the presheaf direct sum of M(S) over continuous maps g:S to G. Its tensor comparison identifies it with R[G] tensor M. Define (a,j)([g] tensor m)=[ag] tensor jm. The formulas respect balancing and restrictions. To act on a sheafified section, lift it on a cover, apply the restricted parameter, and glue; local equality gives independence. The two factors commute and the group laws hold on generators. Maps apply the original J-equivariant map to m.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "def-sfb-condensed-equivariant-bar-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transpose sends a product-equivariant map h to m maps to h([1] tensor m). Its inverse sends f to [g] tensor m maps to g f(m). The commuting actions prove equivariance; evaluating on generators proves the inverse identities and naturality. Thus induction is left adjoint to forgetting the first factor. Flatness makes this induction exact, since kernels and cokernels of these action categories are computed on underlying modules. This construction and adjunction impose no compactness or cyclicity on J.",
+   "uses": [
+    "def-sfb-relative-derived-invariants",
+    "lem-sfb-product-action-exact-forgetting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For acyclic C and K-injective I transpose a map C to U(I) through the termwise adjunction. Its source Ind(C) is acyclic by exactness, so the transpose is null homotopic. Transport the null homotopy back. The definition of K-injectivity gives that U(I) is K-injective. This proves the stated preservation class on all unbounded complexes.",
+   "uses": [
+    "def-pur-kinjective-complex"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-product-action-exact-forgetting",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-relative-derived-invariants",
+  "def-pur-kinjective-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03EV and 0GMW; the agent-formulated commuting-action induction of paragraph (3), step 6 in def-sfb-relative-invariant-forgetting."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact left adjoint restriction action of product group preserves K injective complexes",
+   "results": [
+    "Rep.indResAdjunction",
+    "Rep.instIsRightAdjointActionModuleCatRes",
+    "Rep.instIsLeftAdjointIndFunctor",
+    "Profinite.NobelingProof.succ_exact"
+   ],
+   "date": "2026-10-26",
+   "verdict": "No internal condensed-action comparison. The representation-theoretic induction uses ordinary ring modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.preservesKInjectiveComplexes",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No Mathlib declaration by this name; Loogle reports unknown identifier. The corresponding criterion exists in the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKInjectiveComplexes|preservesKInjectiveComplexes",
+   "results": [],
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match. The source criterion in RightDerivedFunctor/Comp.lean requires an exact left adjoint; ProductActionExactForgetting.exists_datum restricts J and does not directly supply the arbitrary-J instance."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RelativeInvariantForgetting",
+  "date": "2026-10-26",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), step 6: exact induction for residual forgetting, the unbounded-resolution input to the normalized derived comparison.",
+   "via": [
+    "def-sfb-relative-invariant-forgetting",
+    "lem-sfb-relative-cyclic-restriction-model",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RelativeForgettingKInjectives",
+  "file": "lean/Sheaf/CategoryTheory/RelativeForgettingKInjectives.lean",
+  "declaration": "CategoryTheory.RelativeCyclic.forgetResidual_preservesKInjectiveComplexes",
+  "statement": "theorem forgetResidual_preservesKInjectiveComplexes\n    (A : CondensedBar.Ring.{u}) (G J : Type u)\n    [Group G] [TopologicalSpace G] [IsTopologicalGroup G]\n    [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]\n    [Group J] [TopologicalSpace J] [IsTopologicalGroup J] :\n    (forgetResidual A G J).PreservesKInjectiveComplexes",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T082056-L-2129344",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261026T082056-L-2129344",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

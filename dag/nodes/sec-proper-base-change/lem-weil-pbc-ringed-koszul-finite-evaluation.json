@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-finite-evaluation",
+ "kind": "statement",
+ "title": "Finite Koszul evaluation identifies the Hom tower and the strict dual tensor tower",
+ "statement": "Let C be a small category with topology J, O a commutative ring sheaf, r a natural number, and b a Fin r family of global sections. With P the actual positive Koszul diagram and T the strict dual tensor tower of [def-weil-pbc-ringed-koszul-system], there is for every coefficient complex N an isomorphism of inverse diagrams Hom(P_m,N) ≅ T(N)_m. The isomorphisms commute with coefficient chain maps. After precomposition by P_m -> O[0], inverse evaluation at one followed by the comparison is exactly the specified tensor unit N -> T(N)_m. There is no colimit, ordinary inverse limit, derived category, or injectivity hypothesis in this statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A0A, lemma-colim-and-lim-of-duals; Section 0A8X, section-hom-complexes; for finite evaluation also lemma-dual-perfect-complex and more-algebra.tex Tag 0913. Finite evaluation: sites-cohomology.tex Tag 08JJ, lemma-dual-perfect-complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pur-hom-complex"
+ ],
+ "proof": [
+  {
+   "text": "Each actual positive Koszul stage P_m is dualizable by the bounded two-term factor argument and tensor induction. The canonical tensor evaluation E(P_m,N) is therefore an isomorphism. Source naturality makes these maps a natural isomorphism from the strict dual tensor tower to the Hom tower. Take its inverse to obtain the isomorphism requested in the statement.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-dualizable",
+    "lem-weil-pbc-ringed-complex-tensor-evaluation",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Coefficient naturality of E proves the first equation after postcomposing with E(P_m,M) and cancelling the inverse evaluation. For the unit equation, similarly postcompose by E(P_m,N); substitute the actual dual projection and use source naturality for P_m -> O[0]. The tensor-Hom unit identity reduces the composite to u(N) followed by precomposition with that projection. The normalization u(N)=ringedHomUnitEvaluationIso.inv gives the desired equality.",
+   "uses": [
+    "lem-weil-pbc-ringed-complex-tensor-evaluation",
+    "lem-weil-pbc-ringed-hom-tensor-unit-normalization",
+    "def-weil-pbc-ringed-koszul-system"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-koszul-dualizable",
+  "lem-weil-pbc-ringed-complex-tensor-evaluation",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-weil-pbc-ringed-hom-tensor-unit-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0A8X (section-hom-complexes) and Tag 08JJ (lemma-dual-perfect-complex), finite strictly perfect evaluation argument before passage to the derived category.",
+  "note": "Use proved bounded-complex dualizability and closed-category tensor evaluation rather than redoing finite degreewise sums. The signed ordinary Hom source maps and evaluation-at-one unit are identified explicitly. No new unproved dependency is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal Hom sends colimits in its first variable to limits, and tensor by a finite free complex agrees with Hom from its dual",
+   "results": "Eight results include dualTensorHomEquiv, ihom.adjunction, tensorLeft preservation of colimits, and HomologicalComplex evaluation preserving colimits. No full sheaf-complex comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use generic closed-category and degreewise limit API; no exact finite Koszul comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed monoidal category internal Hom from a colimit is the limit of internal Homs, and internal Hom from a dualizable object is tensor with its dual",
+   "results": "Eight results include closedOfHasLeftDual and the evaluation/coevaluation identities. None gives finite Koszul complexes or the strict tower.",
+   "date": "2026-10-26",
+   "verdict": "No exact strict finite Koszul evaluation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesLimitsOfShape\", \"internalHom\"",
+   "results": "ihom.instPreservesLimitsOfShapeOppositeObjFunctorFlipInternalHom in Mathlib.CategoryTheory.Monoidal.Closed.Braided.",
+   "date": "2026-10-26",
+   "verdict": "Used for sheaf Hom from a colimit; not a full complex or Koszul comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "dual.*[Ee]val|[Ee]val.*dual|homComplex.*[Cc]olimit; homComplexFunctorObjIsoInternalHom; Koszul evaluation",
+   "results": "Module dual evaluation and HomComplexInternalHomComparison are available; no Hom-complex colimit cone theorem or strict finite Koszul evaluation theorem. Blueprint searches for colim-and-lim-of-duals and Koszul evaluation return no imported blueprint nodes.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate of either intermediate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedKoszulColimitHomOrdinaryLimit",
+  "date": "2026-10-26",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Current main-20261015 def-weil-pbc-completed-pullback, displayed equality with R\\varprojlim_n(Lg^*K\\otimes^L_\\Lambda\\Lambda/I^n), and final sentence: \"The comparison from ordinary pullback is the completion map of Lg^*K.\" This is a supporting finite Koszul/Cech unit comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-koszul-colimit-hom-ordinary-limit",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulFiniteEvaluation",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulFiniteEvaluation.lean",
+  "declaration": "CategoryTheory.exists_ringedKoszul_finiteEvaluation",
+  "statement": "theorem exists_ringedKoszul_finiteEvaluation :\n    ∃ e : ∀ N : ringedSiteComplex O,\n      (ringedKoszulDiagram O r b).op ⋙ (homComplexFunctor (R := O)).flip.obj N ≅\n        (ringedKoszulTensorTower O r b).obj N,\n      (∀ (N M : ringedSiteComplex O) (f : N ⟶ M) (m : ℕᵒᵖ),\n        ((homComplexFunctor (R := O)).obj\n          (op ((ringedKoszulDiagram O r b).obj m.unop))).map f ≫ (e M).hom.app m =\n        (e N).hom.app m ≫ ((ringedKoszulTensorTower O r b).map f).app m) ∧\n      (∀ (N : ringedSiteComplex O) (m : ℕᵒᵖ),\n        (ringedHomUnitEvaluationIso O N).inv ≫\n          ((homComplexFunctor (R := O)).map\n            (ringedKoszulProjection O r b m.unop).op).app N ≫ (e N).hom.app m =\n        ringedKoszulTensorUnitComponent O r b N m)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T212006-L-4187679",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T001241-L-4178767",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

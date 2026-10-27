@@ -1,0 +1,125 @@
+{
+ "id": "lem-sf-roos-comparison-resolution-uniqueness",
+ "kind": "statement",
+ "title": "K-injective resolutions determine a natural Roos comparison",
+ "statement": "Let A be an abelian category with countable products and inverse limits, with a derived category for A and its natural-number inverse towers. Suppose the tower category is Grothendieck abelian and inverse limit is additive. Two families of isomorphisms from the localization of the strict positive-difference Roos complex [def-weil-strict-roos-model] to derived inverse limit [lem-sf-strict-roos-derived-limit-comparison] are equal if both are natural in the tower complex and they agree on every K-injective tower complex. The module also transports the existing exact-products comparison to the strict positive-difference convention and proves its normalized uniqueness as private helpers.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Localization returned Step 6: strict Roos comparison, uniqueness by K-injective resolutions."
+ },
+ "stmt_deps": [
+  "def-weil-strict-roos-model",
+  "lem-sf-strict-roos-derived-limit-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Given a tower complex M, take the functorial K-injective resolution q : M → I. The localized q and hence its image under derived inverse limit are isomorphisms. Naturality identifies each comparison postcomposed with this image with the Roos image of q followed by its comparison on I. Equality on I and cancellation prove equality on M. No boundedness or nonzero hypothesis is used.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-sf-strict-roos-derived-limit-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The retained proved private normalization first applies ExactProductsRoos.comparisonIso to rightDerivedFunctorUnitQ. Transport along the existing signIso and ordinaryIso identifies the normalized positive-difference inclusion. On K-injectives this inclusion is invertible by its unit equation; cancel it to identify any other normalized comparison. Apply the proved public resolution uniqueness lemma to extend to all complexes.",
+   "uses": [
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "lem-weil-pbc-exact-adjoint-tower-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For checking time, retain the already-proved coordinate product comparison and its uniqueness, uniqueness of the universal exact left-derived comparison, and its exact counit normalization as private helpers. These are the parent's original categorical calculations, with unchanged statements and complete proofs.",
+   "uses": [
+    "lem-pur-roos-comparison-horizontal-coherence",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "lem-weil-pbc-exact-adjoint-tower-models",
+  "def-weil-strict-roos-model",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-pur-roos-comparison-horizontal-coherence",
+  "lem-cbc-completed-extension-zero-comparison"
+ ],
+ "proof_origin": {
+  "by": "C4",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Strict Roos normalization and uniqueness; extraction of the already-proved generic argument to keep the parent below its compile-time limit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural comparison of functors on cochain complexes is determined by its values on K-injective complexes via functorial K-injective resolutions",
+   "results": "CategoryTheory.Functor.rightDerived_map_eq; CochainComplex.IsKInjective.Qh_map_bijective; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq; CategoryTheory.injectiveResolutions; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+   "date": "2026-10-27",
+   "verdict": "No exact abstract comparison extensionality theorem; use the existing functorial K-injective resolution and naturality, preserving the established Roos comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.toKInjectiveResolution",
+   "results": "loogle: unknown identifier 'CochainComplex.toKInjectiveResolution'",
+   "date": "2026-10-27",
+   "verdict": "No exact abstract comparison extensionality theorem; use the existing functorial K-injective resolution and naturality, preserving the established Roos comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "kInjectiveResolutionFunctor|rightDerivedFunctorUnitQ_naturality",
+   "results": "none",
+   "date": "2026-10-27",
+   "verdict": "No exact abstract comparison extensionality theorem; use the existing functorial K-injective resolution and naturality, preserving the established Roos comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfImmersionCompletedPullbackComparison",
+  "date": "2026-10-27",
+  "group": "C4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-immersion-completed-pullback-comparison",
+   "place": "Strict Roos normalization and K-injective uniqueness in proof Step 3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfImmersionRoosNormalization",
+  "file": "lean/Sheaf/Paper/SfImmersionRoosNormalization.lean",
+  "declaration": "sfRoosComparison_ext",
+  "statement": "theorem sfRoosComparison_ext\n    {A : Type uA} [Category.{vA} A] [Abelian A] [HasCountableProducts A]\n    [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory.{w} A]\n    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]\n    [IsGrothendieckAbelian.{u} (ℕᵒᵖ ⥤ A)]\n    [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive]\n    (e e' : ∀ M : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,\n      DerivedCategory.Q.{w}.obj (strictRoosComplex M) ≅\n        (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor.obj (DerivedCategory.Q.{w}.obj M))\n    (he : ∀ (M N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (a : M ⟶ N),\n      DerivedCategory.Q.{w}.map (roosF.map a) ≫ (e N).hom =\n        (e M).hom ≫ (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor.map\n          (DerivedCategory.Q.{w}.map a))\n    (he' : ∀ (M N : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (a : M ⟶ N),\n      DerivedCategory.Q.{w}.map (roosF.map a) ≫ (e' N).hom =\n        (e' M).hom ≫ (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor.map\n          (DerivedCategory.Q.{w}.map a))\n    (hI : ∀ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) [I.IsKInjective], e I = e' I) :\n    e = e'",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T112325-L-1570997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261027T112325-L-1570997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

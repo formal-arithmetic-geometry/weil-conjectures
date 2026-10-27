@@ -1,0 +1,191 @@
+{
+ "id": "lem-trf-etale-shifted-line-comparison-existence",
+ "kind": "statement",
+ "title": "Gluing normalized affine-line comparisons of sheaves placed in a common degree",
+ "statement": "Let $S$ be any scheme, $A$ a commutative ring, $a:X=\\mathbf A^1_S\\to S$, and $i:S\\to X$ the unit section. Work with ordinary constant-$A$ module inverse image on small etale sites and its total left derived functor. Let $m\\in\\mathbf Z$, $C\\in D(S_{et},A)$, and $F\\in D(X_{et},A)$, with $C[-m]$ and $F[-m]$ isomorphic to arbitrary sheaves of $A$-modules. Fix $\\theta:Li^*F\\simeq C$. Given an arbitrary etale covering family $b_j:S_j\\to S$ and comparisons $\\lambda_j:Lq_j^*F\\simeq La_j^*Lb_j^*C$ on $X_j=\\mathbf A^1_{S_j}$, assume that reading each comparison at the unit section, through the canonical inverse-image compositors and theta, is the identity of $Lb_j^*C$. Then there exists $\\kappa:F\\simeq La^*C$ with $Li^*\\kappa=\\theta$ and whose restriction to each $X_j$, through the canonical base-change compositor, is $\\lambda_j$. This assertion includes the empty scheme and zero coefficient ring. The scheme, affine space, coefficient categories, exact inverse images and etale maps are those of [def-pc-scheme], [def-sbc-affine-space], [def-weil-pbc-derived-categories], [prop-weil-pbc-inverse-image-modules-exact], and [def-weil-etale-morphism].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Opening paragraph and Gluing: descent of normalized local maps and their inverses; existence part."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First prove the sheaf assertion, in fact for any sheaf $L$ of $A$-modules. By [new-lem-pur-etale-a1-pullback-full], the ordinary functor $a^*$ is full for this arbitrary scheme $S$ and commutative ring $A$. Hence there is a sheaf endomorphism $b:L\\to L$ with $u=a^*b$. Applying $i_1^*$ and using the natural identification $i_1^*a^*\\cong\\mathrm{id}$ specified in the statement gives $b=i_1^*u=1_L$. Functoriality then gives $u=a^*(1_L)=1_{a^*L}$. Only fullness was used; no claim that $i_1^*$ is faithful on all sheaves on $X$ is needed.",
+   "uses": [
+    "new-lem-pur-etale-a1-pullback-full"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3H, lemma-sections-upstairs, connected-fibre argument, in the existing affine-line fullness node; blueprint sk-thm-dnc.proof.md, Gluing, rigidity of the ratio"
+   }
+  },
+  {
+   "text": "Choose sheaves $P$ on $X$ and $Q$ on $S$ and isomorphisms $F[-m]\\cong P[0]$, $C[-m]\\cong Q[0]$, as the hypotheses allow. Fixed-coefficient inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]. Its termwise derived functor commutes with shifts and takes $Q[0]$ to $(a^*Q)[0]$ by [lem-sf-exact-functor-derived-triangulated]. Shift every given map by $[-m]$ and conjugate with these fixed isomorphisms. Full faithfulness of the single-complex functor [lem-weil-pbc-derived-single-fully-faithful] identifies the resulting maps, their compositions and their inverses with unique ordinary sheaf maps. Thus $\\theta$ becomes an isomorphism $\\vartheta:i_1^*P\\to Q$ and $\\lambda_i$ becomes an isomorphism $l_i:P|_{X_i}\\to a_i^*(Q|_{S_i})$ normalized by $i_1^*l_i=\\vartheta|_{S_i}$. These identifications commute with restriction: termwise inverse image of a single complex is the single complex of the inverse image, also on morphisms. The supplied inverse-image compositors are used throughout. Undoing the shift is an inverse equivalence, so all sheaf equalities proved below give precisely the required derived equalities.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts, part (2); Tag 015F, lemma-right-derived-exact-functor; blueprint sk-thm-dnc.proof.md, opening paragraph: morphisms between these complexes are sheaf morphisms"
+   }
+  },
+  {
+   "text": "Put $S_{ij}=S_i\\times_SS_j$ and $X_{ij}=X\\times_SS_{ij}$. From the fibre-product definition of affine space [def-sbc-affine-space], $X\\times_SS_i\\cong\\mathbf A^1_{S_i}$ and $X_{ij}\\cong\\mathbf A^1_{S_{ij}}$: an arrow into either side is exactly an arrow into the new base together with an arrow into $\\operatorname{Spec}\\mathbf Z[t]$ over $\\operatorname{Spec}\\mathbf Z$. The two descriptions therefore have the same projections and the same section $t=1$. By [lem-weil-pbc-etale-covering-base-change], the $X_i\\to X$ form an etale covering family, and pulling the $S_i\\to S$ back to any $S_j$ again gives an etale cover. Consequently all the restrictions and overlaps used below are small-etale restrictions and the argument of Step 1 applies with base $S_{ij}$.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-etale-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing, base change to S_i times_S S_j"
+   }
+  },
+  {
+   "text": "On $X_{ij}$ write $l_i,l_j$ for the two restrictions, using the prescribed compositors, and form $r_{ij}=l_j\\circ l_i^{-1}$, an automorphism of $a_{ij}^*(Q|_{S_{ij}})$. Normalization gives $i_1^*r_{ij}=\\vartheta|_{S_{ij}}\\circ(\\vartheta|_{S_{ij}})^{-1}=1$. Step 1 over $S_{ij}$ gives $r_{ij}=1$, whence $l_j=r_{ij}l_i=l_i$. Their inverses agree too: multiply $l_j=l_i$ on the left by $l_j^{-1}$ and on the right by $l_i^{-1}$. These are equalities of sheaf maps, hence also of the original derived maps by Step 2.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing, the two normalized local isomorphisms differ by an automorphism, which is the identity"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-etale-sheaf-hom-family-gluing] to the sheaves $P,a^*Q$, the covering family $X_i\\to X$ of Step 3, and the maps $l_i$ of Step 4. Its compatibility condition on every etale object $W$ mapping to two cover members holds: the two arrows give an arrow $W\\to X_{ij}$ by the fibre-product universal property, and restricting $l_i=l_j$ along it gives exactly the required equality with the canonical localization identifications. This yields a unique sheaf map $k:P\\to a^*Q$ restricting to every $l_i$. Apply the same node to the inverse maps to obtain $h:a^*Q\\to P$. Both $hk$ and $1_P$ restrict to $1_{P|_{X_i}}$, and both $kh$ and $1_{a^*Q}$ restrict to $1_{(a^*Q)|_{X_i}}$; the uniqueness clause of the gluing node gives $hk=1_P$ and $kh=1_{a^*Q}$. Thus $k$ is an isomorphism. Step 2 returns an isomorphism $\\kappa:F\\to a^*C$ with all the required restrictions.",
+   "uses": [
+    "lem-amb-etale-sheaf-hom-family-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM, lemma-internal-hom, via Sites Tag 04TQ, lemma-glue-maps; blueprint sk-thm-dnc.proof.md, Gluing, glue maps and inverses"
+   }
+  },
+  {
+   "text": "The section restriction of the glued comparison and the prescribed theta agree after every member of the base cover, because each local comparison is normalized. Uniqueness of sheaf morphism gluing on the base cover identifies them. Undoing the common shift yields the normalized derived comparison with the prescribed restrictions. No assertion of global uniqueness or independence is included in this existence result.",
+   "uses": [
+    "lem-amb-etale-sheaf-hom-family-gluing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "lem-amb-etale-sheaf-hom-family-gluing",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-etale-covering-base-change",
+  "new-lem-pur-etale-a1-pullback-full",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Gluing, existence and normalization; separated from rigidity of arbitrary comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale local isomorphisms of sheaves shifted in the same degree glue to a normalized isomorphism on an affine line",
+   "results": "8 hits: topological sheaf gluing, gluing schemes, locally surjective sheaves; none is the shifted ordinary-etale comparison statement.",
+   "date": "2026-10-23",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale locally normalized comparison from a shifted rank one sheaf on the affine line to a pullback descends to a global normalized isomorphism",
+   "results": "8 unrelated scheme normalization hits.",
+   "date": "2026-10-23",
+   "verdict": "No matching result."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.sectionRestrictionIso",
+   "results": "No hits; identifier not present in Mathlib.",
+   "date": "2026-10-23",
+   "verdict": "The compositor API is in the adopted source library."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionRestrictionIso.*(comp|trans)|normalized.*(descent|glue)",
+   "results": "msearch grep: 0 hits. Local rg finds the assigned item, derived gluing along a single surjective etale morphism, and specialized normalized AffineLine comparisons with a field base. None states arbitrary-family comparison existence.",
+   "date": "2026-10-23",
+   "verdict": "No existing arbitrary-family comparison-existence theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleShiftedLineNormalizedDescent",
+  "group": "M4",
+  "date": "2026-10-23"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (2), normal-cone specialization in the contracting-correspondence argument: normalized deformation of a smooth section, used in the ambient diagonal purity input. Extracted argument: Gluing, comparison of ratios on geometric affine-line fibres and gluing maps and inverses; old item Steps 10–11.",
+   "via": [
+    "lem-trf-etale-shifted-line-normalized-descent",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleShiftedLineComparisonExistence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleShiftedLineComparisonExistence.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_normalized_shifted_line_comparison",
+  "statement": "theorem exists_normalized_shifted_line_comparison (A : Type (u + 1)) [CommRing A]\n    (S : Scheme.{u})\n    (m : ℤ) (C : DerivedCategoryModule A S)\n    (F : DerivedCategoryModule A (AffineSpace (ULift.{u} (Fin 1)) S))\n    (hC : ∃ Q : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A),\n      Nonempty (C⟦-m⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj Q))\n    (hF : ∃ P : Sheaf (AffineSpace (ULift.{u} (Fin 1)) S).smallEtaleTopology\n        (ModuleCat.{u + 1} A),\n      Nonempty (F⟦-m⟧ ≅ (_root_.DerivedCategory.singleFunctor _ 0).obj P))\n    (θ : (upperStar (ModuleCat.{u + 1} A)\n      (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.obj F ≅ C)\n    (cover : Scheme.Cover.{u} Scheme.etalePrecoverage S)\n    (localIso : ∀ i : cover.I₀,\n      (upperStar (ModuleCat.{u + 1} A)\n        (AffineSpace.map (ULift.{u} (Fin 1)) (cover.f i))).leftDerivedFunctor.obj F ≅\n      (upperStar (ModuleCat.{u + 1} A)\n        (AffineSpace (ULift.{u} (Fin 1)) (cover.X i) ↘ cover.X i)).leftDerivedFunctor.obj\n          ((upperStar (ModuleCat.{u + 1} A) (cover.f i)).leftDerivedFunctor.obj C))\n    (hlocal : ∀ i : cover.I₀, sectionRestrictionIso (ModuleCat.{u + 1} A) (cover.f i)\n      (AffineSpace.map (ULift.{u} (Fin 1)) (cover.f i))\n      (AffineSpace.oneSection_comp_map (cover.f i))\n      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) (cover.X i))\n      θ (localIso i) = Iso.refl _) :\n    ∃ κ : F ≅ (L((AffineSpace (ULift.{u} (Fin 1)) S ↘ S)^*[ModuleCat.{u + 1} A])).obj C,\n      (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) S)^*[ModuleCat.{u + 1} A])).map κ.hom ≫\n        (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)\n          (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)\n          (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)\n          (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) S)).hom.app C = θ.hom ∧\n      ∀ i : cover.I₀,\n        (L((AffineSpace.map (ULift.{u} (Fin 1)) (cover.f i))^*[ModuleCat.{u + 1} A])).mapIso κ ≪≫\n          ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n            (AffineSpace.map (ULift.{u} (Fin 1)) (cover.f i))\n            (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).app C).symm ≪≫\n          (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)\n            (AffineSpace (ULift.{u} (Fin 1)) (cover.X i) ↘ cover.X i) (cover.f i)\n            (AffineSpace.map (ULift.{u} (Fin 1)) (cover.f i) ≫\n              AffineSpace (ULift.{u} (Fin 1)) S ↘ S)\n            (AffineSpace.map_over (cover.f i))).app C = localIso i",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-23"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261023T231835-L-3650574",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261023T231835-L-3650574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

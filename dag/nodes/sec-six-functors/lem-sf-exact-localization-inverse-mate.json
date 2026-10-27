@@ -1,0 +1,307 @@
+{
+ "id": "lem-sf-exact-localization-inverse-mate",
+ "kind": "statement",
+ "title": "Exact localization preserves the specified inverse mate",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal D,\\mathcal F$ be abelian categories with chosen ordinary unbounded derived categories [def-weil-abstract-derived-category]. Let $L_1:\\mathcal A\\to\\mathcal B$, $R_1:\\mathcal B\\to\\mathcal A$, $L_2:\\mathcal D\\to\\mathcal F$, $R_2:\\mathcal F\\to\\mathcal D$, $G:\\mathcal A\\to\\mathcal D$ and $H:\\mathcal B\\to\\mathcal F$ be additive exact functors. Fix adjunctions $a_1:L_1\\dashv R_1$, $a_2:L_2\\dashv R_2$, and an isomorphism $d:GR_1\\xrightarrow{\\sim}R_2H$. Let $\\beta:L_2G\\to HL_1$ be its inverse mate [def-weil-pbc-adjunction-mate], and assume $\\beta$ invertible. Give $D(L_i)\\dashv D(R_i)$ the exact localized adjunctions of [def-weil-exact-derived-adjunction]. Use the standard exact-composition isomorphisms to form $D(d):D(G)D(R_1)\\cong D(R_2)D(H)$. Its inverse mate $\\beta^D$ is precisely $D(\\beta)$ under those isomorphisms, and is therefore invertible. This assertion concerns these specified localized adjunctions, including their Hom bijections: for complexes $K,L$, the exact-functor factorization isomorphisms carry the localized adjunct of a cochain map $L_1K\\to L$ to the localization of its ordinary cochain adjunct. Writing $\\varphi_{F,K}:D(F)Q(K)\\cong Q(F^\\#K)$ for the exact-functor factorization and $a_i^\\#$ for the degreewise cochain adjunction, the Hom normalization is $\\operatorname{adj}_{D(a_i)}(Q(f)\\circ\\varphi_{L_i,K})=\\varphi_{R_i,L}^{-1}\\circ Q(\\operatorname{adj}_{a_i^\\#}(f))$. The mate equality holds on all derived objects; no faithfulness of localization is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7 (remark-base-change), unit-square-counit convention; agent-formulated compatibility of exact localization with inverse mates, matching exact_hom_fac and exact_inverse_mate_isIso in Sheaf.SixFunctors.SemilinearProperOpenMatePasting, lines 2004-2106."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [
+  {
+   "text": "For every exact functor T, use [lem-weil-pbc-exact-functor-derived-factorization] to obtain the standard factorization φ_T of D(T)Q through the termwise cochain functor. The composition and natural-isomorphism lifting formulas from [lem-weil-pbc-localization-universal-property] show that the standard derived square associated to e, conjugated by the two successive factorization isomorphisms on each side, equals Q applied to its cochain square. In Lean, square_fac proves this using mapDerivedCategoryCompIso_fac, mapDerivedCategoryNatIso_fac, naturality, and cancellation of inverse isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation."
+   }
+  },
+  {
+   "text": "The cochain adjunction $a^\\#:L^\\#\\dashv R^\\#$ is degreewise the given adjunction $a:L\\dashv R$ of [def-weil-exact-derived-adjunction]. Explicitly, the adjunct of $f:L^\\#K\\to N$ is $g=R^\\#(f)\\circ\\eta^\\#_K$ and its inverse sends $g$ to $\\varepsilon^\\#_N\\circ L^\\#(g)$. Naturality of $\\eta$ and $\\varepsilon$ makes these families commute with the differentials; the two composites are identities by the triangle identities in each degree. Thus these are actual cochain maps and the stated cochain Hom bijection.",
+   "uses": [
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation."
+   }
+  },
+  {
+   "text": "For either specified localized adjunction of [def-weil-exact-derived-adjunction], its localized unit and counit give\n$\\eta^D_{QK}=\\chi_{R,L,K}^{-1}Q(\\eta^\\#_K)$ and\n$\\varepsilon^D_{QN}=Q(\\varepsilon^\\#_N)\\chi_{L,R,N}$.\nThese follow by applying the transformation-lifting formula of step 1 to the original unit and counit; their source or target identity functor has identity factorization. For $f:L^\\#K\\to N$, expand the adjunct as $D(R)(Q(f)\\varphi_{L,K})\\eta^D_{QK}$. Substituting the unit formula cancels $D(R)(\\varphi_{L,K})$ against its inverse and leaves\n$D(R)(Qf)\\varphi_{R,L^\\#K}^{-1}Q(\\eta^\\#_K)\n=\\varphi_{R,N}^{-1}Q(R^\\#f)Q(\\eta^\\#_K)\n=\\varphi_{R,N}^{-1}Q(\\operatorname{adj}_{a^\\#}(f))$.\nThe first equality is precisely naturality of $\\varphi_R$ at $f$; the last is step 2. This proves the requested Hom normalization for the specified adjunctions.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation."
+   }
+  },
+  {
+   "text": "For a pair of adjunctions and the square d of [def-weil-pbc-adjunction-mate], characterize its inverse mate β by the unit equation η₂ at GK followed by R₂(β_K) = G(η₁ at K) followed by d at L₁K. This is unit_mateEquiv_symm. The equation determines β: the second adjunction Hom bijection sends β_K to its left side and is injective. Applying the original unit equation degreewise gives an equality of actual cochain maps by extensionality in each degree.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation."
+   }
+  },
+  {
+   "text": "Localize the unit equation from step 4 using the specified adjunctions [def-weil-exact-derived-adjunction]. On QK, precompose by φ_G inverse and postcompose by the successive H,L₁,R₂ factorization maps; all these maps are isomorphisms. For its left side, naturality of the second localized unit, the localized unit formula of step 3, and square_fac of step 1 for β reduce the composite to Q of η₂# followed by R₂# of the cochain β square. For its right side, the first localized unit formula, naturality of φ_G inverse and of D(d), and square_fac for d reduce it to Q of G#η₁# followed by the cochain d square. Their equality is the degreewise unit equation of step 4. Thus D(β), with the standard composition identifications, satisfies the localized unit equation at every QK. This is the direct cochain calculation mate_unit_Q; it uses only exactness and no tensor or resolution hypotheses.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-exact-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation."
+   }
+  },
+  {
+   "text": "At QK, unit_mateEquiv_symm says that the inverse mate of D(d) satisfies the same localized unit equation. Apply injectivity of the second localized adjunction Hom bijection and step 5 to identify the two components. By [lem-weil-pbc-localization-universal-property](3), Localization.natTrans_ext extends their equality to all derived objects, without assuming Q faithful. The derived square of the ordinary isomorphism β is an isomorphism, so the equality gives IsIso of the localized inverse mate. Combine this with both Hom normalizations from step 3.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Sentence beginning \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; agent-supplied exact-localization calculation. Lean proof by M8 uses the equivalent unit characterization of inverse mates, rather than expanding the three-arrow counit formula; standard derived composition and natural-isomorphism factorization APIs are reused."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functors between abelian categories localize adjunctions and preserve invertibility of an inverse adjunction mate square in unbounded derived categories",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedη_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Abelian.Ext.mapExactFunctor_hom; CategoryTheory.Adjunction.derived; CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Inverse mate of an exact functor square commutes with localization to derived categories",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.mapDerivedCategory",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|mapDerivedCategorySquareIso|derivedMate|exactDerivedAdjunction",
+   "results": "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localizing exact adjunctions preserves Beck Chevalley isomorphisms with normalized units and counits",
+   "results": "CategoryTheory.Adjunction.localization; CategoryTheory.Adjunction.Localization.ε_app; CategoryTheory.Adjunction.localization_unit_app; CategoryTheory.Adjunction.Localization.ε; CategoryTheory.Adjunction.localization_counit_app; CategoryTheory.Adjunction.Localization.η; CategoryTheory.Adjunction.Localization.η_app; CategoryTheory.Adjunction.isLocalization_leftAdjoint",
+   "date": "2026-10-22",
+   "verdict": "no match: retrieved declarations do not state this specified ringed-sequence/derived-adjunction normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact localization preserves inverse mates of adjunction squares and the Hom adjunction bijection",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.Localization.ε_app",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.mateEquiv_apply",
+     "CategoryTheory.mateEquiv_symm_apply",
+     "CategoryTheory.mateEquiv",
+     "CategoryTheory.mateEquiv_counit_symm",
+     "CategoryTheory.mateEquiv_square",
+     "CategoryTheory.mateEquiv_counit"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: localization and derived unit/counit APIs supply ingredients; no single declaration states both specified inverse-mate equality and the Hom normalization for these exact localized adjunctions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.localization",
+   "results": {
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.localization_counit_app",
+     "CategoryTheory.Adjunction.localization_unit_app"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: localization and derived unit/counit APIs supply ingredients; no single declaration states both specified inverse-mate equality and the Hom normalization for these exact localized adjunctions."
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|localization_counit_app|liftNatTrans|natTrans_ext",
+   "results": {
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Localization/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/Preadditive.lean",
+     "Mathlib/CategoryTheory/Localization/FiniteProducts.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: localization and derived unit/counit APIs supply ingredients; no single declaration states both specified inverse-mate equality and the Hom normalization for these exact localized adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse mate square of exact functors on derived categories equals the localization of the underived mate",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.LocalizerMorphism.IsLeftDerivabilityStructure.guitartExact'",
+     "CategoryTheory.Adjunction.derivedε_fac_app",
+     "CategoryTheory.Adjunction.derivedε_fac_app_assoc",
+     "CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'",
+     "CategoryTheory.Adjunction.derivedη_fac_app",
+     "CategoryTheory.Adjunction.derivedη_fac_app_assoc",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: localization and derived unit/counit APIs supply ingredients; no single declaration states both specified inverse-mate equality and the Hom normalization for these exact localized adjunctions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction localized at quasi isomorphisms carries the cochain adjunct to the derived adjunct",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.derived_unit",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.derivedε",
+     "CategoryTheory.Adjunction.derived_counit"
+    ]
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: localization and derived unit/counit APIs supply ingredients; no single declaration states both specified inverse-mate equality and the Hom normalization for these exact localized adjunctions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-semilinear-proper-open-mate-pasting",
+  "date": "2026-10-22",
+  "group": "NW"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Proof sentence: \"The maps used here are tensor reassociation, evaluation, and adjunction units and counits\"; intrinsic semilinear proper/open realization, returned proof step 5: Exact localization preserves the specified inverse mate",
+   "via": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-exact-localization-inverse-mate",
+  "worker": "stage1",
+  "summary": "Proved the normalized Hom bijection by the localized unit formula and naturality, computed all three arrows of the inverse mate on complexes, and used the existing localization uniqueness leaf to extend equality to all derived objects. Reused existing factorization and localization leaves; no new nodes and no change to the statement.",
+  "blueprint": "Realizes the units/counits and preservation-of-mates sentences of fix-prop-coherence, through the exact-localization subclaim in the semilinear proper/open realization.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-6ed4397fa",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-6ed4397fa (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement is byte-identical to the base (all 294 earlier snapshots hold it unsplit), and live and side-live still show it unsplit. There is no repair note, no SGA citation and no supersession. Statement check: β is the inverse mate of d with the correct direction (def-weil-pbc-adjunction-mate). The Hom normalization type-checks, and β being invertible is a separate hypothesis. Tested on zero categories, the identity square, a scalar automorphism (stays u, not u⁻¹) and a non-invertible unit. Step 1 uses the exact-functor factorization leaf (mapDerivedCategoryFactors) and clause (2) of the localization leaf (liftNatTrans); χ is the composite of the φ maps. Step 2 checks the cochain adjunction degreewise. In step 3 I recomputed η^D = χ⁻¹Q(η#) and ε^D = Q(ε#)χ from def-weil-exact-derived-adjunction, and the Hom clause follows by naturality of φ_R at f. Step 4 applies the inverse-mate formula degreewise, using d and not d⁻¹. In step 5 I checked the three arrows under the χ/φ identifications, which give β^D_QK = χ_{H,L1}⁻¹Q(β#)χ_{L2,G}. Step 6 uses clause (3) of the localization leaf (natTrans_ext) for equality on all objects, not faithfulness of Q, and clause (2) for the inverse. Sources: Stacks 07A7 remark-base-change (sites-cohomology.tex l.4033) and the units/counits sentence of blueprint main-20261015 fix-prop-coherence.proof.md, both read. All cited nodes are definitions or Mathlib leaves, so they are off the route and tool_uses is empty. Duplicate candidates checked and found to differ: lem-pc-exact-left-adjoint-derived-mate-compatibility (K-injective, right-derived), lem-sc-localization-nested-adjunction-mate, lem-sf-semilinear-evaluation-derived-adjunction, lem-weil-pbc-adjunction-square-shift-mate. The parent's step-6 use matches the statement. Notation nit only: the complex is called L and the categories D, F clash with D(-). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ExactLocalizationInverseMate",
+  "declaration": "CategoryTheory.exact_localization_inverse_mate",
+  "file": "lean/Sheaf/SixFunctors/ExactLocalizationInverseMate.lean",
+  "statement": "theorem exact_localization_inverse_mate {A : Type u₁} {B : Type u₂} {D : Type u₃} {F : Type u₄} [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} D] [Category.{v₄} F] [Abelian A] [Abelian B] [Abelian D] [Abelian F] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B] [HasDerivedCategory.{w₃} D] [HasDerivedCategory.{w₄} F] {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : D ⥤ F} {R₂ : F ⥤ D} {G : A ⥤ D} {H : B ⥤ F} [L₁.Additive] [R₁.Additive] [L₂.Additive] [R₂.Additive] [G.Additive] [H.Additive] [PreservesFiniteLimits L₁] [PreservesFiniteColimits L₁] [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁] [PreservesFiniteLimits L₂] [PreservesFiniteColimits L₂] [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂] [PreservesFiniteLimits G] [PreservesFiniteColimits G] [PreservesFiniteLimits H] [PreservesFiniteColimits H] (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (d : R₁ ⋙ G ≅ H ⋙ R₂) [IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans] : IsIso ((mateEquiv (exactLocalizationDerivedAdjunction a₁) (exactLocalizationDerivedAdjunction a₂)).symm (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans ∧ ((mateEquiv (exactLocalizationDerivedAdjunction a₁) (exactLocalizationDerivedAdjunction a₂)).symm (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans = (Functor.mapDerivedCategorySquareIso (asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans)).hom ∧ (∀ (K : CochainComplex A ℤ) (L : CochainComplex B ℤ) (f : (L₁.mapHomologicalComplex (.up ℤ)).obj K ⟶ L), (exactLocalizationDerivedAdjunction a₁).homEquiv (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) (L₁.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((a₁.mapHomologicalComplex (.up ℤ)).homEquiv _ _ f) ≫ R₁.mapDerivedCategoryFactors.inv.app L) ∧ (∀ (K : CochainComplex D ℤ) (L : CochainComplex F ℤ) (f : (L₂.mapHomologicalComplex (.up ℤ)).obj K ⟶ L), (exactLocalizationDerivedAdjunction a₂).homEquiv (DerivedCategory.Q.obj K) (DerivedCategory.Q.obj L) (L₂.mapDerivedCategoryFactors.hom.app K ≫ DerivedCategory.Q.map f) = DerivedCategory.Q.map ((a₂.mapHomologicalComplex (.up ℤ)).homEquiv _ _ f) ≫ R₂.mapDerivedCategoryFactors.inv.app L)",
+  "branch": "newtargets-dag",
+  "by": "Q143",
+  "date": "2026-10-22",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.exactLocalizationDerivedAdjunction",
+   "CategoryTheory.exact_localization_inverse_mate"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dad1dd8f1",
+  "group": "Q143",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of f7d9d1fe3de2. Dep record def-weil-exact-derived-adjunction now byte-identical to live (Q22 existing:true exactDerivedAdjunction); ExactDerivedAdjunctionGeneral.lean removed. Universe-general item helper exactLocalizationDerivedAdjunction has the same body as live exactDerivedAdjunction (CatCommSq via mapDerivedCategoryFactors.symm, then Adjunction.localization of the degreewise a.mapHomologicalComplex), with source/blueprint docstring, listed in lean.declarations (the option the prior review allowed). Theorem changed only the helper name; re-verified: beta = mateEquiv.symm of d.hom (G⋙L₂ ⟶ L₁⋙H), IsIso beta a separate hypothesis, D(d) = mapDerivedCategorySquareIso (compIso⁻¹ ≫ natIso ≫ compIso), IsIso of beta^D plus whole-natTrans equality with squareIso(asIso beta), Hom normalization homEquiv(φ_L.hom ≫ Q f) = Q(adj f) ≫ φ_R.inv for a₁ and a₂. Statement verbatim in file; item non-lean fields equal live; no live lean record for the item. Edge cases (zero categories, identity square, scalar automorphism, 12 independent universes) OK. Not compiled (no file changed); worker reports a clean compile and an rfl probe against the live def."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261022T144019-L-1481591",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

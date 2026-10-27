@@ -47,7 +47,43 @@
   "lem-sc-ext-torsor"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "CategoryTheory.Sheaf.nonempty_equiv_H_one_torsor",
+    "CategoryTheory.Sheaf.subsingleton_H_one_of_surjective"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "CategoryTheory.Sheaf.nonempty_equiv_H_one_torsor",
+     "module": "WeilConjectures.CategoryTheory.Sites.Torsor",
+     "lines": [
+      1073,
+      1082
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "CategoryTheory.Sheaf.subsingleton_H_one_of_surjective",
+     "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+     "lines": [
+      154,
+      179
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-curve-estimates",
  "unit": "sk-prop-hilbert90",
  "lead_note": "16:25 UTC: the bijection named in the statement by L (reviewers R-th2, R-tbr: citers lem-sc-torsor-h1-boundary-representative and lem-sc-torsor-h1-zariski-boundary-class need which bijection, and could not borrow it from the proof, C3); Stacks 03AJ construction.",
@@ -62,5 +98,37 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal C$ be a site with a terminal object (for instance the\nsmall etale site $X_{\\Et}$ or the Zariski site $X_{\\mathrm{Zar}}$ of a\nscheme $X$, e.g. of a curve $C$ as in [def-sc-curves]) and let $G$ be a\nsheaf of abelian groups on $\\mathcal C$, with $G$-torsors defined as in\n[def-sc-gm-torsor]. Write $\\mathbf Z$ for the constant sheaf. There is\na canonical bijection\n\n$$\nH^1(\\mathcal C,G)=\\operatorname{Ext}^1_{\\mathrm{Ab}(\\mathcal C)}(\\mathbf Z,G)\n\\cong\\{\\text{isomorphism classes of }G\\text{-torsors}\\},\n\\qquad T\\longmapsto[T],\n$$\n\nwith the following properties.\n\n- **(a)** A torsor $T$ has class $[T]=0$ if and only if it has a\n  global section, i.e. if and only if it is isomorphic to the trivial\n  torsor $G$.\n- **(b)** The group law of $H^1$ is the contracted product: if\n  $T,T',T''$ are $G$-torsors and $\\mu:T\\times T'\\to T''$ is a morphism\n  of sheaves of sets with\n  $\\mu(g\\cdot t,t')=g\\cdot\\mu(t,t')=\\mu(t,g\\cdot t')$, then\n  $[T'']=[T]+[T']$. (For example $T''=T\\wedge T':=(T\\times T')/G$, the\n  quotient by the antidiagonal action.)",
+  "proof": [
+   {
+    "text": "*Step 1: $H^1=\\operatorname{Ext}^1$.* The functor\n$\\operatorname{Hom}_{\\mathrm{Ab}(\\mathcal C)}(\\mathbf Z,-)$ is\ncanonically isomorphic to the global sections functor (a homomorphism\n$\\mathbf Z\\to F$ is determined by the image of $1$, a section over the\nterminal object), so its first right derived functor is\n$H^1(\\mathcal C,-)$ on the one hand and\n$\\operatorname{Ext}^1(\\mathbf Z,-)$ on the other.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: extensions and torsors.* Given an extension\n$0\\to G\\xrightarrow{\\iota}E\\xrightarrow{\\pi}\\mathbf Z\\to0$, the\npreimage $T:=\\pi^{-1}(1)\\subseteq E$ of the section $1$ is a\n$G$-torsor: the $G$-action $g\\cdot t=\\iota(g)+t$ is free and\ntransitive on sections, $T$ has sections locally because $\\pi$ is an\nepimorphism of sheaves, and a section $t\\in T(U)$ trivializes\n$T|_U\\xrightarrow{\\sim}G|_U$ via $g\\mapsto\\iota(g)+t$.\n\nConversely, given a $G$-torsor $T$, define an abelian sheaf\n$E:=\\coprod_{n\\in\\mathbf Z}T^{\\otimes n}$, where for $n\\geq1$,\n$T^{\\otimes n}$ is the $n$-fold contracted product\n$(T\\times\\cdots\\times T)/G$ (quotient by the antidiagonal actions of\n$G$ on pairs of factors), $T^{\\otimes0}:=G$, and $T^{\\otimes(-n)}$ is\nthe $n$-fold contracted product of the inverse torsor $T^{-1}$ (the\nsheaf $T$ with $G$ acting through negation). The group law is the\nconcatenation $T^{\\otimes m}\\times T^{\\otimes n}\\to T^{\\otimes(m+n)}$;\nassociativity is that of contracted products, and the inverse is given\ncomponentwise by $T^{\\otimes n}\\cong(T^{-1})^{\\otimes n}$. The map\n$\\pi:E\\to\\mathbf Z$ sending $T^{\\otimes n}$ to $n$ is a homomorphism,\nan epimorphism because each $T^{\\otimes n}$ is a torsor and so has\nsections locally, and its kernel is $T^{\\otimes0}=G$; thus\n$0\\to G\\to E\\xrightarrow{\\pi}\\mathbf Z\\to0$ is exact. The two\nconstructions are mutually inverse: for the extension built from $T$,\nthe preimage of $1$ is $T^{\\otimes1}=T$; and for the torsor\n$T:=\\pi^{-1}(1)$ of an extension $E$, the addition of $E$ induces\nisomorphisms $\\pi^{-1}(n)\\xrightarrow{\\sim}T^{\\otimes n}$, which\nidentify $E$ with $\\coprod_nT^{\\otimes n}$. With Step 1 this gives the\nbijection $T\\mapsto[T]$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 3: (a).* The trivial torsor $G$ corresponds to the split\nextension $G\\oplus\\mathbf Z$, i.e. to the class $0$. Conversely, if the\nextension $E$ of $T$ splits, a splitting $s:\\mathbf Z\\to E$ gives a\nglobal section $s(1)$ of $\\pi^{-1}(1)=T$. A torsor with a global\nsection $t$ is isomorphic to $G$ via $g\\mapsto g\\cdot t$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4: (b).* The Baer sum of two extensions $E,E'$ is the\nsubquotient $\\{(e,e'):\\pi(e)=\\pi'(e')\\}/\\{(g,-g)\\}$ of $E\\times E'$,\nand its preimage of $1$ is $(\\pi^{-1}(1)\\times\\pi'^{-1}(1))/G$, the\ncontracted product $T\\wedge T'$ of the two torsors; so\n$[T\\wedge T']=[T]+[T']$. A morphism $\\mu:T\\times T'\\to T''$ which is\nequivariant in each argument is invariant under the antidiagonal\naction, hence factors through a $G$-equivariant morphism\n$T\\wedge T'\\to T''$ of $G$-torsors. An equivariant morphism of torsors\nis an isomorphism (check locally, where it is a translation of $G$),\nso $[T'']=[T\\wedge T']=[T]+[T']$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

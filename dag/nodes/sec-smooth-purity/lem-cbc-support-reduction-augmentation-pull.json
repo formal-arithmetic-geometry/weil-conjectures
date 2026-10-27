@@ -1,0 +1,121 @@
+{
+ "id": "lem-cbc-support-reduction-augmentation-pull",
+ "kind": "statement",
+ "title": "Strict quotient augmentation and prescribed pro-etale reduction pullback",
+ "statement": "Fix the adic coefficient datum $A,I$ of [def-weil-pbc-adic-coefficient-datum]. On each scheme's small pro-etale site use the unbounded derived category of modules over the constant coefficient ring sheaf $\\underline A$, the strict constant tower functor $\\Delta$, quotient reduction tower $\\mathcal R$, and its quotient augmentation $i:\\Delta\\to\\mathcal R$ as in [lem-sp-completion-mate-comparison]. For any morphism $p:U\\to Y$, let $G_p$ be exact pullback of strict constant-coefficient towers, $p^*$ the ambient derived pullback, $s_p:G_p\\Delta_Y\\xrightarrow{\\sim}\\Delta_Up^*$ the prescribed diagonal comparison, and $t_p:G_p\\mathcal R_Y\\xrightarrow{\\sim}\\mathcal R_Up^*$ the prescribed normalized reduction/pullback comparison. Then\n$$t_p\\circ G_p(i_Y)=(i_U p^*)\\circ s_p.$$\nThe equality is of natural transformations into the derived category of whole strict towers and includes every quotient transition. No completeness, properness, or perfectness of an input is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; together with proetale.tex Tag 099M lemma-naive-completion. Strict augmentation subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower, serving the final compatibility paragraph of thm-cbc-complete-proetale."
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-sp-completion-mate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "On ordinary modules the quotient augmentation sends x to 1 tensor x. The normalized ordinary reduction/pullback comparison sends the pullback of 1 tensor x to 1 tensor the pullback of x, while the diagonal comparison is the termwise identity. Thus the ordinary strict tower square commutes. Quotient transition ring maps preserve 1, so these component equations are an equality of ordinary tower maps.",
+   "uses": [
+    "lem-sp-completion-mate-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; together with proetale.tex Tag 099M lemma-naive-completion. Strict augmentation subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower, serving the final compatibility paragraph of thm-cbc-complete-proetale."
+   }
+  },
+  {
+   "text": "Apply the cochain and homotopy functors to the ordinary tower square. Compute reduction on flat-term K-flat representatives with K-flat pullback. The universal reduction counits and the representative normalization of reductionPullIso identify the localized comparison edges with the specified reduction/pullback comparison; augmentation_normalized identifies the augmentation edges. The resolving-class localization property extends equality to the whole unbounded derived category.",
+   "uses": [
+    "lem-sp-completion-mate-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; together with proetale.tex Tag 099M lemma-naive-completion. Strict augmentation subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower, serving the final compatibility paragraph of thm-cbc-complete-proetale."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completion-mate-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product; together with proetale.tex Tag 099M lemma-naive-completion. Strict augmentation subcalculation of step 4 of lem-cbc-completed-support-intermediate-tower, serving the final compatibility paragraph of thm-cbc-complete-proetale. This is the strict quotient insertion square; subsequent mate and completion calculations are proved separately, not part of this obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived reduction pullback isomorphism preserves the strict quotient augmentation for pro etale constant module sheaves",
+   "results": "Eight hits: four KaehlerDifferential results, two sheaf-module pullback/free results, Algebra.FormallyEtale.comp_bijective and StandardEtalePair.instFormallyEtaleRing.",
+   "date": "2026-10-26",
+   "verdict": "No strict quotient derived augmentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "Nine hits including CategoryTheory.NatTrans.naturality and unrelated pullback/pushout cone, Grothendieck map and resolution formulas.",
+   "date": "2026-10-26",
+   "verdict": "General naturality only; does not identify the two prescribed reduction maps."
+  },
+  {
+   "tool": "grep",
+   "query": "augmentation.*pull|pull.*augmentation",
+   "results": "Zero hits in msearch. Repository searches find the corresponding square in the generic small-site completion model, not the prescribed OrderedExchange model.",
+   "date": "2026-10-26",
+   "verdict": "No directly usable matching declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedSupportIntermediateTower",
+  "date": "2026-10-26",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Final compatibility paragraph, via step 4 of lem-cbc-completed-support-intermediate-tower"
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SupportReductionAugmentationPull",
+  "file": "lean/Sheaf/Paper/SupportReductionAugmentationPull.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.supportReductionAugmentationPull",
+  "statement": "theorem supportReductionAugmentationPull {A : Type (t + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) {U Y : Scheme.{t}} (p : U ⟶ Y) :\n    whiskerRight (augmentation d Y) (exchangeConstantPull (A := A) p) ≫\n        (reductionPullIso d p).hom =\n      (diagonalPullIso (A := A) p).hom ≫\n        whiskerLeft (pull (A := A) p) (augmentation d U)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T210224-L-3496541",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261025T210224-L-3496541",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

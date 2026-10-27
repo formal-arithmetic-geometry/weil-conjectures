@@ -20,97 +20,49 @@
  ],
  "proof": [
   {
-   "text": "A finite morphism is affine by [def-weil-finite-integral-morphism]. Hence if $\\mathcal L$ is ample, [lem-weil-pbc-pullback-ample-invertible] applied to $f$ proves that $f^*\\mathcal L$ is ample. Pullback preserves the rank-one local trivializations: on $f^{-1}U$ a trivialization $\\mathcal L|_U\\cong\\mathcal O_U$ pulls back to $\\mathcal O_{f^{-1}U}$ by the tensor-pullback definition [def-pc-module-pullback]. Thus $f^*\\mathcal L$ is invertible [def-sc-invertible-module]. For the remaining steps assume it is ample.",
+   "text": "A finite morphism is affine [def-weil-finite-integral-morphism], so [lem-weil-pbc-pullback-ample-invertible] proves ascent. Pullback is invertible by [lem-weil-pbc-invertible-pullback-tensor](1). For descent assume $f^*\\mathcal L$ ample. The affine base $\\operatorname{Spec}R$ is locally Noetherian by its chart [pqf-def-locnoeth] and quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Proper morphisms are finite type [def-weil-proper-morphism], so [lem-weil-pbc-finite-type-over-noetherian] makes $X,Y$ Noetherian.",
    "uses": [
     "def-weil-finite-integral-morphism",
     "lem-weil-pbc-pullback-ample-invertible",
-    "def-pc-module-pullback",
-    "def-sc-invertible-module"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, first paragraph"
-   }
-  },
-  {
-   "text": "Both $X$ and $Y$ are Noetherian. Indeed $\\operatorname{Spec}R$ is locally Noetherian by its single affine chart with ring $R$ [pqf-def-locnoeth], and is quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Properness includes finite type [def-weil-proper-morphism], so [lem-weil-pbc-finite-type-over-noetherian] applies to each structure morphism. In particular both schemes are locally Noetherian, as required by the coherence and devissage statements below.",
-   "uses": [
+    "lem-weil-pbc-invertible-pullback-tensor",
     "pqf-def-locnoeth",
     "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
     "def-weil-proper-morphism",
     "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V, Noetherian hypotheses for the application of Tag 01YM; Tag 01T6, lemma-finite-type-noetherian"
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, ascent and Noetherian setup"
    }
   },
   {
-   "text": "For a coherent module $\\mathcal E$ on $X$, define $\\mathcal P(\\mathcal E)$ by eventual vanishing of $H^p(X,\\mathcal E\\otimes\\mathcal L^{\\otimes n})$ for every $p>0$, with one bound $n_0\\ge0$ for all $p$. Cohomology is derived global sections [pqf-def-cohomology]; the module category has enough injectives [lem-sc-ringed-space-module-sheaves-enough-injectives] and global sections is additive and left exact [lem-sc-global-sections-left-exact]. Thus [lem-weil-pbc-right-derived-universal-delta-functor] gives additive cohomology functors and long exact sequences. The zero module has $\\mathcal P$. Tensoring a short exact sequence by $\\mathcal L^{\\otimes n}$ is exact: on a rank-one trivializing cover [def-sc-invertible-module] the tensor functor [def-pur-sheaf-tensor-product] is the identity, so its stalk sequences are exact and [lem-weil-pbc-module-stalk-exact](5) gives sheaf exactness. If the end terms have $\\mathcal P$, the segment $H^p(\\mathcal E_1\\otimes\\mathcal L^{\\otimes n})\\to H^p(\\mathcal E\\otimes\\mathcal L^{\\otimes n})\\to H^p(\\mathcal E_2\\otimes\\mathcal L^{\\otimes n})$ gives vanishing after the maximum of their two bounds. Finite sums are coherent [lem-weil-pbc-coherent-modules-kernel-cokernel-sum](3). For $r\\ge1$, $\\mathcal E$ is a retract of $\\mathcal E^{\\oplus r}$ using the first inclusion and projection; tensor and additive cohomology preserve that retraction, so $\\mathcal P(\\mathcal E^{\\oplus r})$ implies $\\mathcal P(\\mathcal E)$. These are clauses (0), (1), (2) of devissage.",
+   "text": "For coherent $\\mathcal E$ put $\\mathcal P(\\mathcal E)\\iff\\exists n_0\\ge0\\;\\forall n\\ge n_0\\;\\forall p>0,\\ H^p(X,\\mathcal E\\otimes\\mathcal L^{\\otimes n})=0$. This is $\\mathcal P_{\\mathcal L}$ of [lem-trf-twisted-cohomology-devissage-closure], which supplies its zero case, extension closure and descent from a nonempty finite sum, conditions (0)-(2) of devissage.",
    "uses": [
-    "pqf-def-cohomology",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-sc-global-sections-left-exact",
-    "lem-weil-pbc-right-derived-universal-delta-functor",
-    "def-sc-invertible-module",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-module-stalk-exact",
-    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V, verification of Tag 01YM conditions (1) and (2), with the zero case explicit"
-   }
-  },
-  {
-   "text": "For an integral closed subscheme $i:Z\\hookrightarrow X$ with generic point $\\xi$, [lem-weil-pbc-finite-surjective-coherent-generic-support] gives a coherent $\\mathcal F$ on $Y$ such that $\\mathcal G=f_*\\mathcal F$ has support $i(Z)$ and $\\mathfrak m_\\xi\\mathcal G_\\xi=0$. The finite-pushforward theorem [lem-weil-pbc-finite-pushforward-coherent] makes $\\mathcal G$ coherent on the locally Noetherian $X$. Let $\\mathcal J\\subseteq\\mathcal O_X$ be quasi-coherent with $\\mathcal J_\\xi=\\mathcal O_{X,\\xi}$. Coherent modules on locally Noetherian schemes are quasi-coherent [pqf-lem-coherent-ft-locnoeth]. Apply [lem-weil-pbc-affine-pushforward-ideal-product] to the affine $f$, $\\mathcal F$, and $\\mathcal J$. Its clause (1) says that $\\mathcal H:=f^{-1}\\mathcal J\\cdot\\mathcal F$ is a quasi-coherent submodule of $\\mathcal F$, and its clause (2) gives the equality $\\mathcal J\\mathcal G=f_*\\mathcal H$ as submodules of $\\mathcal G$. Since $Y$ is locally Noetherian, [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2) gives coherence of $\\mathcal H$; finite coherent pushforward then gives coherence of $\\mathcal J\\mathcal G=f_*\\mathcal H$. Thus both the identity and coherence on $Y$ used below are supplied by cited statements.",
-   "uses": [
-    "lem-weil-pbc-finite-surjective-coherent-generic-support",
-    "lem-weil-pbc-finite-pushforward-coherent",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-weil-pbc-affine-pushforward-ideal-product",
-    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth"
+    "lem-trf-twisted-cohomology-devissage-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V, condition (3)(a)-(c); Tag 01YO, lemma-finite-morphism-Noetherian; Tag 01YP, lemma-affine-morphism-projection-ideal; Tags 01Y1 and 01Y6"
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, verification of conditions (1),(2)"
    }
   },
   {
-   "text": "For $n\\ge0$ put $\\mathcal N=\\mathcal L^{\\otimes n}$ (with $\\mathcal N=\\mathcal O_X$ for $n=0$). It is invertible by its rank-one trivializations [def-sc-invertible-module]. The affine morphism $f$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence](3), so the invertible-module clause of [lem-pc-projection-formula] applies to $E=\\mathcal H[0]$ and $\\mathcal N$. Tensoring by $\\mathcal N$ and by $f^*\\mathcal N$ is exact by the same local identity argument as Step 3, so the derived tensors here are ordinary tensors. The quasi-coherent tensor-product theorem [lem-weil-pbc-quasi-coherent-tensor-product-affine-sections] applies to $\\mathcal H$ and $f^*\\mathcal N$. Affine higher-direct-image vanishing [lem-weil-pbc-affine-morphism-cohomology-edge] for $\\mathcal H$ and $\\mathcal H\\otimes f^*\\mathcal N$ therefore turns the derived projection isomorphism, in degree zero, into $f_*\\mathcal H\\otimes\\mathcal N\\cong f_*(\\mathcal H\\otimes f^*\\mathcal N)$. Concretely this is the ordinary projection map: on any open $U$ trivializing $\\mathcal N$, both sides are $(f_*\\mathcal H)|_U$ and the map is the identity. This also proves compatibility on overlaps, since the projection map is defined by multiplication by the pulled-back local section. By the tensor-pullback definition [def-pc-module-pullback], $f^*(\\mathcal L^{\\otimes n})\\cong(f^*\\mathcal L)^{\\otimes n}$: both are trivial on $f^{-1}U$ and have the same pulled-back $n$-th-power transition functions.",
+   "text": "For each integral closed $Z\\subseteq X$ with generic point $\\xi$, [lem-weil-pbc-finite-surjective-coherent-generic-support] gives coherent $\\mathcal F$ on $Y$ with $\\mathcal G=f_*\\mathcal F$ supported exactly on $Z$ and $\\mathfrak m_\\xi\\mathcal G_\\xi=0$. By [lem-trf-finite-ideal-twist-cohomology-comparison](1) with $\\mathcal J=\\mathcal O_X$, $\\mathcal G$ is coherent. Fix any quasi-coherent ideal $\\mathcal J$ with $\\mathcal J_\\xi=\\mathcal O_{X,\\xi}$. The same comparison gives coherent $\\mathcal H=f^{-1}\\mathcal J\\cdot\\mathcal F$ and $\\mathcal J\\mathcal G=f_*\\mathcal H$; its cohomology isomorphisms identify the twists of $\\mathcal J\\mathcal G$ on $X$ with those of $\\mathcal H$ by $(f^*\\mathcal L)^{\\otimes n}$ on $Y$. Since $Y$ is proper over $R$ and $f^*\\mathcal L$ invertible and ample, [lem-weil-pbc-coherent-serre-vanishing] gives, for this fixed ideal, $n_0(\\mathcal J)\\ge0$ such that the groups vanish for every $n\\ge n_0(\\mathcal J)$ and every $p>0$, hence $\\mathcal P_{\\mathcal L}(\\mathcal J\\mathcal G)$. By [lem-weil-pbc-ideal-module-product-stalk](2), $(\\mathcal J\\mathcal G)_\\xi=\\mathcal J_\\xi\\mathcal G_\\xi=\\mathcal G_\\xi$ through the inclusion. Take the coherent $\\mathcal G'=\\mathcal J\\mathcal G$, with its identity inclusion into $\\mathcal J\\mathcal G$; the comparison supplies its coherence, and the stalk equality verifies (3)(c). Conditions (3)(a),(b) hold for $\\mathcal G$.",
    "uses": [
-    "def-sc-invertible-module",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-pc-projection-formula",
-    "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "def-pc-module-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V, second equality in the displayed calculation; ordinary projection formula Tag 01E8, lemma-projection-formula, degree zero and its local finite-free argument"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-affine-morphism-cohomology-edge] to the quasi-coherent $\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}$ (quasi-coherence was checked in Step 5). Steps 4-5 give for every $p,n\\ge0$ the isomorphisms $H^p(X,\\mathcal J\\mathcal G\\otimes\\mathcal L^{\\otimes n})\\cong H^p(X,f_*(\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n}))\\cong H^p(Y,\\mathcal H\\otimes(f^*\\mathcal L)^{\\otimes n})$. The sheaf $\\mathcal H$ is coherent by Step 4, $Y$ is proper over the Noetherian ring $R$, and $f^*\\mathcal L$ is invertible and ample. Consequently [lem-weil-pbc-coherent-serre-vanishing] gives one $n_0$ for which the right side vanishes for all $p>0$ and $n\\ge n_0$. Hence $\\mathcal P(\\mathcal J\\mathcal G)$ holds. By [lem-weil-pbc-ideal-module-product-stalk](2), $(\\mathcal J\\mathcal G)_\\xi=\\mathcal J_\\xi\\mathcal G_\\xi=\\mathcal G_\\xi$, with the equality through its inclusion into $\\mathcal G_\\xi$. The coherent submodule $\\mathcal G'=\\mathcal J\\mathcal G$ thus verifies devissage clause (3)(c), while Step 4 verified (3)(a) and (3)(b).",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-weil-pbc-finite-surjective-coherent-generic-support",
+    "lem-trf-finite-ideal-twist-cohomology-comparison",
     "lem-weil-pbc-coherent-serre-vanishing",
     "lem-weil-pbc-ideal-module-product-stalk"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V, displayed cohomology calculation and condition (3)(c); Tag 089W, lemma-relative-affine-cohomology; Tag 02O1, lemma-kill-by-twisting"
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, condition (3) and displayed vanishing comparison"
    }
   },
   {
-   "text": "The property $\\mathcal P$ satisfies every hypothesis of [lem-weil-pbc-coherent-property-devissage-integral-subschemes]: $X$ is Noetherian by Step 2, clauses (0)-(2) hold by Step 3, and the coherent $\\mathcal G$ and $\\mathcal G'$ required by (3) were verified in Steps 4-6. Hence $\\mathcal P$ holds for every coherent module on $X$. In particular it holds for every quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_X$: $\\mathcal O_X$ is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth], and [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2) makes $\\mathcal I$ coherent. Choose $n\\ge\\max(1,n_0)$ for its bound; then $H^1(X,\\mathcal I\\otimes\\mathcal L^{\\otimes n})=0$. The exact ideal-twist vanishing hypothesis of [lem-trf-ideal-twist-vanishing-implies-ample] is now satisfied, so $\\mathcal L$ is ample. Together with Step 1 this proves the stated equivalence.",
+   "text": "All hypotheses of [lem-weil-pbc-coherent-property-devissage-integral-subschemes] now hold; therefore every coherent module has $\\mathcal P_{\\mathcal L}$. The structure sheaf is quasi-coherent of finite type, hence coherent by [pqf-lem-coherent-ft-locnoeth]; every quasi-coherent ideal $\\mathcal I$ is coherent by [lem-weil-pbc-coherent-kernel-cokernel-locnoeth](2). Its vanishing bound gives $H^1(X,\\mathcal I\\otimes\\mathcal L^{\\otimes n})=0$ for $n\\ge\\max(1,n_0)$. Apply [lem-trf-ideal-twist-vanishing-implies-ample] to conclude $\\mathcal L$ ample.",
    "uses": [
     "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
     "pqf-lem-coherent-ft-locnoeth",
@@ -120,37 +72,25 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 0B5V conclusion; Tag 0B5U, lemma-vanshing-gives-ample, (2) implies (3) implies (1)"
+    "place": "Tag 0B5V, lemma-surjective-finite-morphism-ample, conclusion via Tag 01YM and Tag 0B5U, lemma-vanshing-gives-ample"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-module-pullback",
-  "def-pur-sheaf-tensor-product",
-  "def-sc-invertible-module",
   "def-weil-finite-integral-morphism",
   "def-weil-proper-morphism",
-  "lem-pc-projection-formula",
-  "lem-sc-global-sections-left-exact",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-trf-finite-ideal-twist-cohomology-comparison",
   "lem-trf-ideal-twist-vanishing-implies-ample",
-  "lem-weil-pbc-affine-morphism-cohomology-edge",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-affine-pushforward-ideal-product",
+  "lem-trf-twisted-cohomology-devissage-closure",
   "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
-  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
   "lem-weil-pbc-coherent-property-devissage-integral-subschemes",
   "lem-weil-pbc-coherent-serre-vanishing",
-  "lem-weil-pbc-finite-pushforward-coherent",
   "lem-weil-pbc-finite-surjective-coherent-generic-support",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-ideal-module-product-stalk",
-  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-invertible-pullback-tensor",
   "lem-weil-pbc-pullback-ample-invertible",
-  "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-  "lem-weil-pbc-right-derived-universal-delta-functor",
   "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "pqf-def-cohomology",
   "pqf-def-locnoeth",
   "pqf-lem-coherent-ft-locnoeth"
  ],
@@ -248,11 +188,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-finite-surjective-ample-reflection",
   "worker": "stage1",
-  "summary": "Repair of returned head b6379fc8f9. Statement unchanged. Replaced both proposed children with existing DAG statements and their explicit specializations. Seven proof steps now separately justify the ideal-product identity, coherence on Y and X, projection/cohomology comparison, and the exact ideal-twist criterion. No new nodes, Lean edits, or compilation.",
-  "blueprint": "Preserves the current main ancestry through lem-trf-fibre-degree-ample-criterion to lem-trf-local-term-locality. This supporting Stacks 0B5V theorem realizes the finite-surjective ampleness reflection used in the normalized-fibre degree-to-ampleness argument; the chapter/unit route and inherited ancestry remain unchanged. The two proposed descendants with incorrectly empty via arrays are removed as redundant.",
+  "summary": "Repair of batch5 re-split return. Statement unchanged. Extracted exact twists and eventual-vanishing closure, and finite ideal-product coherence/projection/cohomology comparison, into two independent statement-only unsplit nodes. Retained generic-support choice, Serre vanishing, generic stalk equality, devissage and ideal-twist ampleness in the short assembly. Original seven-step argument preserved verbatim in the report with an allocation to the children and assembly. Rechecked after the 2026-10-22 landing refusal against the current shared DAG and retained returned argument; assembly Step 2 now explicitly introduces the uniform vanishing property. All cited current statements still supply the required clauses; no statement, child workload, or proof route changed. In this continuation, established coherence of the generic witness G first by the comparison with J=O_X, before quantifying over arbitrary generic-unit ideals J, so the witness is fixed independently of the ideal. Revalidated all 16 assembly citations against the current DAG. Current-head repair: the Serre bound in Step 3 is explicitly allowed to depend on the chosen ideal J, while uniform in n beyond that bound and in every positive cohomological degree. All 14 existing assembly dependency statements are unchanged against the retained rebase audit. Rebased again after the live-queue promotion refusal: current existing dependency files and statements are unchanged, all 16 quotes remain valid, and Step 3 explicitly supplies the coherent submodule and its identity inclusion required in devissage (3)(c).",
+  "blueprint": "Same finite-surjective ampleness input to normalized-fibre degree-to-ampleness argument, with unchanged ancestry to lem-trf-local-term-locality. The two new nodes serve the 0B5V subarguments of old Steps 3 and 4-6; the parent retains ascent, Noetherianity, generic witnesses, devissage and ampleness.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-pullback-ample-invertible",
@@ -267,60 +207,16 @@
     "why": "Noetherianity of X and Y from their proper structure morphisms. This is a generic tool in the Stacks proof, not a replacement of the unit route."
    },
    {
-    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "why": "Checks the enough-injectives hypothesis for derived cohomology. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-sc-global-sections-left-exact",
-    "why": "Checks additivity and left exactness for derived cohomology. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
-    "why": "Additivity and long exactness needed by the devissage closure conditions. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-module-stalk-exact",
-    "why": "Local rank-one tensor exactness implies sheaf exactness. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
-    "why": "Coherence of the finite sum used in the retract condition. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
     "node": "lem-weil-pbc-finite-surjective-coherent-generic-support",
     "why": "The source generic-support and generic-annihilator input. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-finite-pushforward-coherent",
-    "why": "Coherence of G and JG under finite pushforward. This is a generic tool in the Stacks proof, not a replacement of the unit route."
    },
    {
     "node": "pqf-lem-coherent-ft-locnoeth",
     "why": "Coherent/quasi-coherent finite-type criterion on locally Noetherian schemes. This is a generic tool in the Stacks proof, not a replacement of the unit route."
    },
    {
-    "node": "lem-weil-pbc-affine-pushforward-ideal-product",
-    "why": "Both the ideal-product identity and quasi-coherence on Y used by the source. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
     "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
     "why": "Coherence of H and of quasi-coherent ideals on X. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-affine-morphism-permanence",
-    "why": "Quasi-compact and quasi-separated hypotheses for the projection formula. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-pc-projection-formula",
-    "why": "Its invertible-module clause supplies the source degree-zero projection formula. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-quasi-coherent-tensor-product-affine-sections",
-    "why": "Quasi-coherence required in affine vanishing/cohomology. This is a generic tool in the Stacks proof, not a replacement of the unit route."
-   },
-   {
-    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
-    "why": "Affine higher-direct-image vanishing and cohomology comparison. This is a generic tool in the Stacks proof, not a replacement of the unit route."
    },
    {
     "node": "lem-weil-pbc-coherent-serre-vanishing",
@@ -359,12 +255,12 @@
   "lem-weil-pbc-coherent-property-devissage-integral-subschemes"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-Codex-Q11-b0b5bb168",
-  "group": "Q11",
+  "reviewer": "NT-cc-Q146-ba184ca8a",
+  "group": "Q146",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-b0b5bb168 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, Stacks Tags 0B5V/0B5U/01YP/01E8/089W and related coherence/devissage sources. The seven steps correctly establish finite-surjective ampleness reflection, all hypotheses and edge cases check, no new nodes remain, no route-pivot or SGA violation occurs, and no step exceeds 2000 characters. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-ba184ca8a (reviewer sub-agent of L); spot-checked: I read Stacks 0B5V (coherent.tex) in full, the human's re-split note (batch5, 2026-10-21, keep_plan), the item, both new nodes in full and the statement of every cited node. Delta from the previous head 3a9f: both new nodes are byte-identical to all four earlier heads. In the item only one sentence of Step 3 changed: G'=JG is now taken with its inclusion into JG. That is correct, since devissage (3)(c) asks for G' contained in JG with G'_xi=G_xi. Re-split: old steps 1-2 became Step 1. Old step 3 became the whole of lem-trf-twisted-cohomology-devissage-closure. The coherence and JG=f_*H part of old step 4, all of old step 5 and the H^p chain of old step 6 became lem-trf-finite-ideal-twist-cohomology-comparison. The witness choice, Serre vanishing with one n_0(J) for all p>0 and the generic stalk equality stay in Step 3, and old step 7 became Step 4. Nothing was dropped, the two nodes have 1643 and 2303 characters, neither restates the item, and the assembly has 2855 characters. All hypotheses check: finite implies affine, which gives ascent; f^*L is invertible by invertible-pullback-tensor(1); X and Y are Noetherian by finite-type-over-noetherian; generic support needs only X locally Noetherian; G is coherent (comparison with J=O_X) before J is quantified; Y is proper over Noetherian R with f^*L ample, so Serre vanishing applies; n>=max(1,n_0) gives the hypothesis of lem-trf-ideal-twist-vanishing-implies-ample. Both new statements are true. I checked them on E=0, the empty sum, r=1 (r=0 is rightly excluded), J=0, J=O_X, n=0, p=0 and empty Y. An rg -L search (0B5V, 01YP, 089W, 01YM, 01YO, f^{-1}J, the twist-vanishing pattern) and a scan of nodes created since 10-21 found no duplicate. FIX (B3, two points, the same fix as e233/e2a6/45ea/3a9f, now lost a 4th time): (f^*L)^{⊗0}=O_Y was undefined, because def-pur-sheaf-tensor-product defines powers only for m>=1; and 'the affine cohomology edge map' had no node. Clause (3) now names e_{f,M}:H^p(X,f_*M)->H^p(Y,M) of def-weil-pbc-module-cohomology-fmap(c), which is added to stmt_deps without creating a cycle. Only statement and stmt_deps change. Batch-5 flag: both flagged citations are generic coherent-cohomology facts from 0B5V and sit in sec-trace-formula only because they were created for this item. They are neither statements nor proof steps of the trace formula or of Poincare duality, so they are accepted. The inherited 0B5V tool uses and invertible-pullback-tensor(1) are accepted. No SGA is cited. Maintainer: this fix has been lost four times; please resolve the promotion of this item or apply fixes/ directly.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.FiniteSurjectiveAmpleReflection",
@@ -384,5 +280,16 @@
   "result": "pass",
   "note": "Reviewed source, node, dependencies, declarations, docstrings, edge cases, route-pivot compliance, and report sections; independent scompile.py verification passed with exit code 0. review.md written; no fixes needed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,162 @@
+{
+ "id": "lem-trf-synchronized-resolution-descent-datum",
+ "kind": "statement",
+ "title": "Affine descent datum of fixed synchronized ordinary resolution towers",
+ "statement": "Fix a totally ordered set $L$. Let $A$ be an ordinary Zariski resolution rule [def-trf-labeled-ordinary-zariski-resolution-data], and let $B$ be a local smooth ordinary rule [def-trf-labeled-ordinary-resolution-descent-data]. Suppose the underlying labeled tower of $A(S)$ equals that of $B(S)$ for every input $S$ and every pair of embeddability witnesses. Let $R(S)$ be fixed global labeled ordinary towers [def-trf-ordinary-resolution-rule], each satisfying IsResolution, and suppose each $R(S)$ satisfies $A$.IsSynchronizedDescent: for every finite affine-cover total there is a unique full label-preserving cartesian comparison whose centers descend. Then there exists an affine descent datum $D$ [def-trf-labeled-ordinary-resolution-descent-data] whose local rule is exactly $B$ and whose underlying labeled global tower is exactly $R(S)$ for every $S$. In particular its specified full cover identifications [def-per-ordinary-tower-cartesian-map] satisfy the count and level-map cocycles for smooth maps between covers over the same input. This conclusion supplies no global smooth comparison or identity/composition/nondeletion theorem.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+ },
+ "stmt_deps": [
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-per-ordinary-tower-cartesian-map",
+  "def-trf-ordinary-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "For each S put D.tower S equal to the given R(S), with regularity and coherent-center proofs from IsResolution. Enumerate the finite index type of an AffineCover by Fin n. Identify its spectrum charts with their affine open ranges. Transport the component arrows and coproduct universal property along these isomorphisms; the total scheme and covering map stay unchanged. The covering and rational equations now form ResolutionAffineCover. Apply the supplied synchronized descent and change the output labeled tower by the assumed equality A=B. This gives the full CoverIdentification with all its center and label equalities.",
+   "uses": [
+    "def-trf-labeled-ordinary-zariski-resolution-data",
+    "def-trf-labeled-ordinary-resolution-descent-data",
+    "def-per-ordinary-tower-cartesian-map",
+    "def-trf-ordinary-resolution-rule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+   }
+  },
+  {
+   "text": "For a smooth v between two such cover totals over S, both total label lists equal the global list via the full cover identifications. Label preservation of B.comparison therefore makes its survivor embedding a bijection of equal finite ordered lists. Its count is the length-transport cast; this follows successively from count_zero and count_after, and handles singleton level sets too. This is precisely cocycle_count.",
+   "uses": [
+    "def-trf-labeled-ordinary-zariski-resolution-data",
+    "def-trf-labeled-ordinary-resolution-descent-data",
+    "def-trf-ordinary-resolution-rule"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+   }
+  },
+  {
+   "text": "After the count identification the composite through B.comparison and either full cover identification have the same initial map and extended ideals. Induct on stages to identify their level maps. At each blowup the center is invertible on the source by principalization, so uniqueness in the ordinary blowup universal property gives the same lift. An inserted unit stage is an identity and satisfies the same assertion. This proves cocycle_map with its specified transports. Enumerations have no effect by this uniqueness. Together with the fixed local rule and literal global-tower equations the constructions form the desired Datum.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property",
+    "def-trf-labeled-ordinary-resolution-descent-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-labeled-ordinary-zariski-resolution-data",
+  "def-trf-labeled-ordinary-resolution-descent-data",
+  "def-per-ordinary-tower-cartesian-map",
+  "def-trf-ordinary-resolution-rule",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.1.4--2.1.9, 2.3.4 and Remark 2.3.5(ii), printed pp.87--88,91--92. Agent expansion of the finite-index realization and affine-cover interface changes in the accepted assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unique uncontracted affine cover identifications of finite labeled blowup towers satisfy the cocycle for smooth maps between the covers",
+   "results": "8 results: Scheme.Pullback.cocycle, Scheme.Cover.glued_cover_cocycle, AffineCover constructors and maps. None states the ordered blowup tower count/map cocycle.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: these results do not convert the project's fixed labeled ordinary resolution interfaces. Existing scheme, order and gluing APIs are components, not this conditional comparison statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A synchronized affine cover descent of fixed labeled ordinary blowup towers gives cover comparison cocycles for a local smooth resolution rule",
+   "results": "8 results, including Scheme.Cover.glued_cover_cocycle and affine transition-limit cover data. None packages fixed ordinary resolution towers into Datum.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: these results do not convert the project's fixed labeled ordinary resolution interfaces. Existing scheme, order and gluing APIs are components, not this conditional comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "blowup.*cocycle|cocycle.*blowup; synchronizedResolution_descentDatum in Mathlib/AlgebraicGeometry, WeilConjectures and Sheaf",
+   "results": "No matching conversion. The project has Datum and the conditional descendedResolution_smoothComparisons theorem, but no constructor from IsSynchronizedDescent. Blueprint search synchronized descent: 0 matches.",
+   "date": "2026-10-26",
+   "verdict": "No matching theorem: these results do not convert the project's fixed labeled ordinary resolution interfaces. Existing scheme, order and gluing APIs are components, not this conditional comparison statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothFunctorialOrdinaryResolution",
+  "date": "2026-10-26",
+  "group": "H9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Finite-interface assembly: Affine descent datum of fixed synchronized ordinary resolution towers.",
+   "via": [
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SynchronizedResolutionDescentDatum",
+  "declaration": "AlgebraicGeometry.synchronizedResolution_descentDatum",
+  "file": "lean/Sheaf/AlgebraicGeometry/SynchronizedResolutionDescentDatum.lean",
+  "statement": "theorem synchronizedResolution_descentDatum (L : Type w) [LinearOrder L] (A : OrdinaryZariskiResolutionRule.{u, w} L) (B : OrdinaryResolutionDescent.LocalRule.{u, w} L) (hAB : ∀ (S : RationalResolutionInput.{u}) (eA : S.IsEmbeddable) (eB : OrdinaryResolutionDescent.Embeddable S), A.tower S eA = ⟨(B.tower S eB).tower, (B.tower S eB).labels⟩) (R : ∀ S : RationalResolutionInput.{u}, LabeledOrdinaryTower L S.scheme) (hR : ∀ S, (R S).IsResolution) (hdescent : ∀ S, A.IsSynchronizedDescent S (R S)) : ∃ D : OrdinaryResolutionDescent.Datum.{u, w} L, D.localRule = B ∧ ∀ S, (⟨(D.tower S).tower, (D.tower S).labels⟩ : LabeledOrdinaryTower L S.scheme) = R S",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-26",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T082220-L-2150309",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261026T082220-L-2150309",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

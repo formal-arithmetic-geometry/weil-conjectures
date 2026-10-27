@@ -1,0 +1,239 @@
+{
+ "id": "lem-trf-terminal-bar-evaluation-compatibility",
+ "kind": "statement",
+ "title": "Terminal-object bar evaluation and compatibility of bar conventions",
+ "statement": "Fix the universes of [def-weil-size-convention]. For a small ordinary category $\\mathcal J$, a commutative ring $R$, and a covariant functor $H:\\mathcal J\\to\\operatorname{Mod}_R$, let $K_{\\mathcal J}(H)$ be the bar complex of [lem-trf-derived-colimit-bar] for the site $\\mathcal J^{op}$ with singleton identity coverings. Let $B_{\\mathcal J}(H)$ be the first-vertex bar model of [lem-trf-simplicial-derived-colimit-computation]: its degree $-n$ summands are $H(j_0)$ on chains $j_0\\to\\cdots\\to j_n$, with faces numbered from $j_0$. The identically indexed summands of $K_{\\mathcal J}(H)$ have faces numbered from $j_n$. Multiplication in degree $-n$ by $\\lambda_n=(-1)^{n(n+1)/2}$ defines a chain isomorphism $\\sigma_{\\mathcal J,H}:K_{\\mathcal J}(H)\\xrightarrow{\\sim}B_{\\mathcal J}(H)$, natural in $H$ and in functors of indexing categories; it is the identity in degree zero and commutes with the degree-zero cocone augmentations.\nLet $t$ be a terminal object of $\\mathcal J$, meaning that each object $j$ has exactly one morphism $!_j:j\\to t$. There is a unique chain map $\\epsilon_{\\mathcal J,t,H}:K_{\\mathcal J}(H)\\to H(t)[0]$ whose component on a degree-zero generator $(j,x)$ is $H(!_j)(x)$ and whose components in other degrees are zero. This map is a quasi-isomorphism, hence an isomorphism in $D(R)$ [def-weil-abstract-derived-category]. For the functor $i:*\\to\\mathcal J$ selecting $t$ and the constant coefficient $H(t)$ on the one-object identity category, the bar reindexing map satisfies $\\epsilon_{\\mathcal J,t,H}K(i,1)=\\epsilon_{*,*,H(t)}$. Here $\\epsilon_{*,*,H(t)}$ is the canonical constant-alternating-complex augmentation to $H(t)[0]$. For every small category $\\mathcal I$ and functor $u:\\mathcal I\\to\\mathcal J$, the composite $\\epsilon_{\\mathcal J,t,H}K(u,1)$ is precisely the chain map $K_{\\mathcal I}(H\\circ u)\\to H(t)[0]$ with degree-zero formula $(a,x)\\mapsto H(!_{u(a)})(x)$ and zero components in all other degrees. These identities hold as chain maps, and remain the same under $\\sigma$ after the corresponding bar-convention identifications.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08PG (example-left-derived-colimits), Tag 08PH (example-morphism-categories), Tag 08Q9 (lemma-compute-by-cosimplicial-resolution); terminal polynomial target application in cotangent.tex Tag 08QV (lemma-polynomial-on-top). Explicit bar-sign identification and terminal augmentation argument extracted from the returned proof."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-simplicial-derived-colimit-computation",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Write $C_n=\\bigoplus_{j_0\\to\\cdots\\to j_n}H(j_0)$ and let $b_r$ delete $j_r$, applying $H(j_0\\to j_1)$ when $r=0$. The two cited bar formulas give $\\partial^B_n=\\sum_{r=0}^n(-1)^rb_r$ and $\\partial^K_n=\\sum_{r=0}^n(-1)^{n-r}b_r=(-1)^n\\partial^B_n$ for $n\\geq1$. Since $\\lambda_n=(-1)^n\\lambda_{n-1}$, we have $\\partial^B_n\\lambda_n=\\lambda_{n-1}\\partial^K_n$. Also $\\lambda_n^2=1$, so the degreewise scalar map is a chain isomorphism with the same inverse. Reindexing a chain, or applying a natural coefficient map to its element, is $R$-linear and preserves $n$, hence commutes with this scalar. Finally $\\lambda_0=1$, so every degree-zero cocone augmentation is preserved.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); explicit reversal-of-faces sign calculation."
+   }
+  },
+  {
+   "text": "Define $\\epsilon_0:C_0\\to H(t)$ by the specified $R$-linear map on each summand, and put all other components equal to zero. For $f:j_0\\to j_1$, the $K$ boundary is $(j_0,x)-(j_1,H(f)x)$. Its image is $H(!_{j_0})x-H(!_{j_1})H(f)x=0$, because terminality gives $!_{j_1}f=!_{j_0}$. This is the only nonzero chain-map condition into $H(t)[0]$. The direct-sum universal property fixes $\\epsilon_0$ uniquely; the other components are forced by their zero targets. The inclusion $e:H(t)[0]\\to K$ at the degree-zero summand $t$ is a chain map and $\\epsilon e=1$, since $!_t=1_t$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG/08PH (example-left-derived-colimits, example-morphism-categories); degree-zero boundary and terminal cocone."
+   }
+  },
+  {
+   "text": "Define $s_n:C_n\\to C_{n+1}$ for $n\\geq0$ by $(j_0\\to\\cdots\\to j_n,x)\\mapsto(j_0\\to\\cdots\\to j_n\\xrightarrow{!_{j_n}}t,x)$, extending $R$-linearly from the direct sum. Let $k_r$ denote a $K$ face. For $n\\geq1$, $k_0s_n=1$ and $k_rs_n=s_{n-1}k_{r-1}$ for $1\\leq r\\leq n+1$. At $r=1$ the latter equality uses $!_{j_n}f=!_{j_{n-1}}$; at $r=n+1$ both sides apply $H(j_0\\to j_1)$; all other cases delete the same internal vertex. Therefore $\\partial^K_{n+1}s_n=1+\\sum_{r=1}^{n+1}(-1)^rs_{n-1}k_{r-1}=1-s_{n-1}\\partial^K_n$. In degree zero the two faces instead give $\\partial^K_1s_0(j,x)=(j,x)-(t,H(!_j)x)$, so $\\partial^K_1s_0=1-e\\epsilon$. Thus these maps exhibit the homotopy $1\\simeq e\\epsilon$, including the degree-zero endpoint.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PG (example-left-derived-colimits); agent terminal-object version of the explicit bar contraction."
+   }
+  },
+  {
+   "text": "Here is the cohomology calculation directly. If $n\\geq1$ and $z\\in C_n$ is a cycle, step 3 gives $z=\\partial^K_{n+1}s_nz$, so every negative-degree cohomology group of $K$ vanishes. In degree zero every element $z$ satisfies $z-e\\epsilon z=\\partial^K_1s_0z$, and $\\epsilon$ kills boundaries by step 2. Consequently the induced maps $H^0(K)\\to H(t)$ and $y\\mapsto[e(y)]$ are inverse. All positive-degree terms vanish. Thus $\\epsilon$ is a quasi-isomorphism by the cited definition, and its image in the localization $D(R)$ is an isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PG (example-left-derived-colimits); elementary cycle/boundary calculation from the displayed contraction."
+   }
+  },
+  {
+   "text": "For $u:\\mathcal I\\to\\mathcal J$, the cited reindexing formula sends $(a_0\\to\\cdots\\to a_n,x)$ to $(u(a_0)\\to\\cdots\\to u(a_n),x)$. Composing with $\\epsilon$ therefore gives $(a,x)\\mapsto H(!_{u(a)})x$ in degree zero, and zero in other degrees, exactly as asserted. Taking $u=i:*\\to\\mathcal J$ gives $H(!_t)=1_{H(t)}$ in degree zero. On $*$ every face is the identity, so its degree $-n$ differential is $\\sum_{r=0}^n(-1)^r$, namely zero for odd $n$ and the identity for even $n>0$; the augmentation has degree-zero component the identity and other components zero. Hence $\\epsilon K(i,1)=\\epsilon_{*,*,H(t)}$ strictly. Finally, in either of these equations the only component seen by an augmentation is degree zero. Step 1 gives $\\sigma_0=1$ and strict commutation with reindexing, so the same equations hold after applying the bar-convention identifications.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories); strict terminal and arbitrary-reindexing augmentation formulas, as used in cotangent.tex Tag 08QV (lemma-polynomial-on-top)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-simplicial-derived-colimit-computation",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories); explicit terminal contraction and bar-sign calculation, motivated by cotangent.tex Tag 08QV (lemma-polynomial-on-top)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation of a module valued category bar complex at a terminal object is a quasi-isomorphism compatible with reindexing and reversal of the bar face convention",
+   "results": "{\"t\": \"2026-10-22T06:44:00Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical augmentation of a module valued category bar complex at a terminal object is a quasi-isomorphism compatible with reindexing and reversal of the bar face convention\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.barComplex.isoStandardComplex\", \"AlgebraicTopology.DoldKan.Γ₀NondegComplexIso\", \"SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁\", \"ChainComplex.augmentTruncate\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\"], \"digest\": \"d35a0540ade08b40\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimitOfTerminal (Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean:293) concerns ordinary colimits; alternating-complex augmentation components and monoid bar resolutions do not give the category-bar terminal augmentation together with its sign-convention and reindexing compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"IsTerminal\"",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"bar\\\", \\\"IsTerminal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimitOfTerminal (Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean:293) concerns ordinary colimits; alternating-complex augmentation components and monoid bar resolutions do not give the category-bar terminal augmentation together with its sign-convention and reindexing compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ar.*[Tt]erminal|[Tt]erminal.*[Bb]ar|[Bb]ar.*[Aa]ugmentation",
+   "results": "{\"t\": \"2026-10-22T06:43:49Z\", \"tool\": \"grep\", \"query\": \"[Bb]ar.*[Tt]erminal|[Tt]erminal.*[Bb]ar|[Bb]ar.*[Aa]ugmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimitOfTerminal (Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean:293) concerns ordinary colimits; alternating-complex augmentation components and monoid bar resolutions do not give the category-bar terminal augmentation together with its sign-convention and reindexing compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a terminal object computes derived colimits of module functors with canonical bar augmentation and natural reindexing",
+   "results": "{\"t\": \"2026-10-22T06:43:50Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at a terminal object computes derived colimits of module functors with canonical bar augmentation and natural reindexing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.colimitOfTerminal\", \"CategoryTheory.lanEvaluationIsoColim\", \"CategoryTheory.Limits.colimitObjIsoColimitCompEvaluation\", \"CategoryTheory.Limits.colimitIsoFlipCompColim\", \"PresheafOfModules.evaluation\", \"CategoryTheory.Limits.evaluation_preservesColimitsOfShape\", \"CategoryTheory.Limits.preservesColimit_of_evaluation\", \"CategoryTheory.Limits.sigmaObjIso\"], \"digest\": \"7bd0c1806e7e3776\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimitOfTerminal (Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean:293) concerns ordinary colimits; alternating-complex augmentation components and monoid bar resolutions do not give the category-bar terminal augmentation together with its sign-convention and reindexing compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category homology bar complex augmentation at a final object agrees with the simplicial comparison and canonical reindexing maps including reversed differential signs",
+   "results": "{\"t\": \"2026-10-22T06:44:12Z\", \"tool\": \"leanfinder\", \"query\": \"Category homology bar complex augmentation at a final object agrees with the simplicial comparison and canonical reindexing maps including reversed differential signs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicTopology.AlternatingFaceMapComplex.ε\", \"Rep.standardComplex.compForgetAugmentedIso\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"SimplicialObject.Splitting.toKaroubiNondegComplexIsoN₁_hom_f_f\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ\", \"AlgebraicTopology.DoldKan.N₁Γ₀_hom_app\"], \"digest\": \"a017fc259f892e2c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimitOfTerminal (Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean:293) concerns ordinary colimits; alternating-complex augmentation components and monoid bar resolutions do not give the category-bar terminal augmentation together with its sign-convention and reindexing compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "colimitOfTerminal|ε_app_f_zero|ε_app_f_succ",
+   "results": "{\"t\": \"2026-10-22T06:45:07Z\", \"tool\": \"grep\", \"query\": \"colimitOfTerminal|ε_app_f_zero|ε_app_f_succ\", \"sub\": \"CategoryTheory/Limits/Shapes\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean\"], \"digest\": \"03aa4a5f5a46c57a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: colimitOfTerminal (Mathlib/CategoryTheory/Limits/Shapes/Terminal.lean:293) concerns ordinary colimits; alternating-complex augmentation components and monoid bar resolutions do not give the category-bar terminal augmentation together with its sign-convention and reindexing compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bar\", \"IsTerminal\"",
+   "results": "{\"t\": \"2026-10-23T14:53:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"bar\\\", \\\"IsTerminal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: monoid standard/bar resolutions and generic extra-degeneracy homotopy equivalences do not state the arbitrary-category coefficient bar assertion with the two face conventions and strict reindexing formulas. ExtraDegeneracy.homotopyEquiv requires constructing its extra-degeneracy data; that construction is written explicitly in proof step 3."
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]ar.*[Tt]erminal|[Tt]erminal.*[Bb]ar|[Bb]ar.*[Aa]ugmentation",
+   "results": "{\"t\": \"2026-10-23T14:53:58Z\", \"tool\": \"grep\", \"query\": \"[Bb]ar.*[Tt]erminal|[Tt]erminal.*[Bb]ar|[Bb]ar.*[Aa]ugmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: monoid standard/bar resolutions and generic extra-degeneracy homotopy equivalences do not state the arbitrary-category coefficient bar assertion with the two face conventions and strict reindexing formulas. ExtraDegeneracy.homotopyEquiv requires constructing its extra-degeneracy data; that construction is written explicitly in proof step 3."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at a terminal object computes category homology by the augmented category bar complex",
+   "results": "{\"t\": \"2026-10-23T14:53:58Z\", \"tool\": \"leansearch\", \"query\": \"Evaluation at a terminal object computes category homology by the augmented category bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.eval\", \"CategoryTheory.CategoryWithHomology.hasHomology\", \"SSet.hoFunctor.terminalIso\", \"SSet.hoFunctor.unitHomEquiv\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply\", \"HomologicalComplex.asFunctor\", \"CategoryTheory.ShortComplex.homologyFunctor_obj\", \"HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_symm_apply\"], \"digest\": \"694a96c75e0caf50\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: monoid standard/bar resolutions and generic extra-degeneracy homotopy equivalences do not state the arbitrary-category coefficient bar assertion with the two face conventions and strict reindexing formulas. ExtraDegeneracy.homotopyEquiv requires constructing its extra-degeneracy data; that construction is written explicitly in proof step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical augmentation of a category bar complex with covariant module coefficients to evaluation at a terminal object is a quasi-isomorphism natural in reindexing",
+   "results": "{\"t\": \"2026-10-23T14:53:59Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical augmentation of a category bar complex with covariant module coefficients to evaluation at a terminal object is a quasi-isomorphism natural in reindexing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.barResolution.extIso\", \"Rep.standardComplex.compForgetAugmentedIso\", \"CategoryTheory.ProjectiveResolution.quasiIso\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"Rep.barComplex.isoStandardComplex\", \"Rep.standardComplex.εToSingle₀_comp_eq\"], \"digest\": \"ecf7f6ffb68b8013\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: monoid standard/bar resolutions and generic extra-degeneracy homotopy equivalences do not state the arbitrary-category coefficient bar assertion with the two face conventions and strict reindexing formulas. ExtraDegeneracy.homotopyEquiv requires constructing its extra-degeneracy data; that construction is written explicitly in proof step 3."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Contracting homotopy of a category bar construction by appending the unique arrow to a final object with arbitrary module coefficients",
+   "results": "{\"t\": \"2026-10-23T14:57:02Z\", \"tool\": \"leanfinder\", \"query\": \"Contracting homotopy of a category bar construction by appending the unique arrow to a final object with arbitrary module coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\", \"AlgebraicTopology.DoldKan.homotopyPToId\", \"AlgebraicTopology.DoldKan.Hσ\", \"AlgebraicTopology.AlternatingFaceMapComplex.ε\"], \"digest\": \"3dc2ad9c0ad4c4e4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: monoid standard/bar resolutions and generic extra-degeneracy homotopy equivalences do not state the arbitrary-category coefficient bar assertion with the two face conventions and strict reindexing formulas. ExtraDegeneracy.homotopyEquiv requires constructing its extra-degeneracy data; that construction is written explicitly in proof step 3."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-cotangent-lower-shriek-polynomial-top",
+  "date": "2026-10-22",
+  "group": "Q01"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. Polynomial-top auxiliary computation in the supporting cotangent lower-shriek counits: Stacks 08QV, evaluation at the identity-augmented polynomial target, with 08PG/08PH/08Q9; returned polynomial-top proof Step 1 (bar signs), Step 6 and Step 7 (canonical augmentation formulas).",
+   "via": [
+    "lem-trf-cotangent-lower-shriek-polynomial-top",
+    "lem-trf-cotangent-lower-shriek",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-terminal-bar-evaluation-compatibility",
+  "worker": "stage1",
+  "summary": "All clauses retained. The face-reversal sign, augmentation chain condition, explicit append-terminal contraction, cycle/boundary proof of quasi-isomorphism, and strict reindexing identities are proved directly from existing bar statements. No new nodes: these are elementary generator calculations, each written out. No project attachment found; all actual Mathlib searches read and recorded.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Auxiliary computation of the polynomial-presentation lower-shriek counits (Stacks 08QW), used for the three homology comparisons in the transitivity triangle. Polynomial-top auxiliary computation in the supporting cotangent lower-shriek counits: Stacks 08QV, evaluation at the identity-augmented polynomial target, with 08PG/08PH/08Q9; returned polynomial-top proof Step 1 (bar signs), Step 6 and Step 7 (canonical augmentation formulas). Steps 1--5 supply precisely the extracted bar signs and canonical terminal evaluation needed by the polynomial-top computation."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-b78394a1b",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-b78394a1b (reviewer sub-agent of L); spot-checked: PASS. The delivery only adds the item's proof; it has no new nodes. The statement and stmt_deps are identical to live, where the item is still unsplit, and there is no repair note, so the re-split rule does not apply. I checked the conventions of lem-trf-derived-colimit-bar: on E=J^op, face d_j deletes j_{n-j} and the last face applies H(j_0→j_1), so ∂^K=(-1)^n∂^B. Its n=2 display agrees with Stacks 08PG (sites-cohomology l.10044); reindexing is per 08PH (l.10117). Step 1: λ_n=(-1)^{n(n+1)/2} satisfies λ_n=(-1)^nλ_{n-1}, giving the chain-map condition; λ_0=1 and λ²=1. Step 2: εd(j_0→j_1,x)=0 because !_{j_1}f=!_{j_0}, and εe=1. Step 3: the append-terminal contraction holds case by case (k_0 s=1, k_r s_n=s_{n-1}k_{r-1}, d_1 s_0=1−eε); I also checked n=1 by hand. Step 4: the quasi-isomorphism follows from the definition. Step 5: the reindexing formula gives (a,x)↦H(!_{u a})x. On *, the differential is 0 for odd n and 1 for even n>0. Only degree zero matters under σ. The route stays inside unit sk-i-curve-zero, proof_deps equals the union of the step uses, and no SGA is cited. Duplicate check: universal-evaluation clause (1) has the same sign isomorphism but only for polynomial-algebra categories, so it does not specialize. section-comma-bar-contraction is a coslice statement without the sign or reindexing clauses, and the preorder bar node covers preorders only. The parent polynomial-top steps 3–4 get exactly the clauses they use. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TerminalBarEvaluationCompatibility",
+  "declaration": "CategoryTheory.terminalBarCompatibility",
+  "declarations": [
+   "CategoryTheory.terminalBarSignIso",
+   "CategoryTheory.IsBarCoconeAugmentation",
+   "CategoryTheory.IsTerminalBarAugmentation",
+   "CategoryTheory.terminalBarPoint",
+   "CategoryTheory.TerminalBarCompatibility",
+   "CategoryTheory.terminalBarCompatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TerminalBarEvaluationCompatibility.lean",
+  "statement": "theorem terminalBarCompatibility (B : CategoryColimitBarSystem.{u}) : TerminalBarCompatibility B",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The first-vertex dependency realizes its bar on the same underlying complex using signed forwardGenerator coordinates. The comparison is therefore Iso.refl on the underlying complex and has the prescribed scalar matrix in those coordinates. The theorem packages the sign formulas, strict naturalities, and existence and uniqueness of the canonical terminal augmentation, without choosing any data from a postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e42d3f69",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Read node, worker report, module, and DerivedColimitBar (bar, generator, map, formula, differential) and SimplicialDerivedColimitComputation (forwardGenerator = (-1)^(n(n+1)/2) • generator, forwardDifferential, forwardMap). σ = Iso.refl is correct because the first-vertex model is the same complex in signed coordinates, so the sign field gives exactly the λ_n matrix; degreeZero, coefficient and reindex naturality, and cocone compatibility are stated. Terminal t is IsInitial in E = Jᵒᵖ; ∃ ε with degree-0 formula F.map (ht.to _).op and zero elsewhere, uniqueness, QuasiIso, and IsIso of Q.map in D(R); arbitrary-v reindex formula and the point (const t) identity augmentation are strict chain-map equalities, also after σ. Edge cases (empty E, n = 0, n = 1, zero ring) and single universe u are fine; no extra hypotheses. Record diff vs live is lean only, statement verbatim, docstrings and blueprint present, only the theorem is sorry. Advisory H4: the downstream parent's IsEvaluationAugmentation generalizes the two new predicates; not required because it lives in a downstream module. No compile run (no file changed); worker reports a clean compile."
+ }
+}

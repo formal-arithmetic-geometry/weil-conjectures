@@ -73,7 +73,105 @@
   "existing": true,
   "note": "The source library already provides the exact canonical adjunction. Its companion declarations upperStarIsoOpenImmersionRestriction and openImmersionRestriction_obj_val_obj give the node’s restriction computation clause. The current server module is the finite-coefficient implementation re-exported by the older OpenImmersion.Defs path; no new module is needed."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      359,
+      363
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.upperStarIsoOpenImmersionRestriction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      351,
+      357
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionRestriction_obj_val_obj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs",
+     "lines": [
+      264,
+      270
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.hasLeftKanExtension_op_overPullback",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension",
+     "lines": [
+      290,
+      298
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall",
+     "module": "WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify",
+     "lines": [
+      39,
+      49
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionLowerShriekUpperStarAdjunction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
+     "lines": [
+      366,
+      370
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.upperStarIsoOpenImmersionRestriction",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
+     "lines": [
+      357,
+      364
+     ],
+     "kind": "def",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.ProEtale.openImmersionRestriction_obj_val_obj",
+     "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs",
+     "lines": [
+      265,
+      271
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-finite-lower-shriek",
  "reviewed_lean": {
@@ -83,5 +181,24 @@
   "group": "NS",
   "result": "pass",
   "note": "Canonical adjunction and restriction declarations match the node; dependencies, hypotheses, universes, edge cases, report sections, and compiler evidence verified."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement"
+  ],
+  "statement": "For an open immersion $j\\colon U\\to X$, the extension by zero $j_!$ of\n[def-weil-extension-by-zero] is left adjoint to the pullback $j^*$ of\n[def-sfb-finite-upper-star]. The pullback is computed by restriction:\n$(j^*G)(T\\to U)\\cong G(T\\to U\\to X)$.",
+  "proof": [
+   {
+    "text": "The localization functor $\\ell$ is continuous and cocontinuous, so restriction along it,\n$G\\mapsto G\\circ\\ell^{\\mathrm{op}}$, is a functor $j^{-1}$ on sheaves. As for\n[def-sfb-finite-upper-lower-star-adjunction], $j_!=\\operatorname{sheafify}\\circ\n\\operatorname{Lan}_{\\ell^{\\mathrm{op}}}$ is left adjoint to $j^{-1}$. Since $j$ is weakly\nétale, $\\ell$ is left adjoint to base change along $j$, and this induces an adjunction\n$j^{-1}\\dashv j_*$, with $j_*$ as in [def-sfb-finite-lower-star]. Both $j^{-1}$ and $j^*$\nare then left adjoint to $j_*$ ([def-sfb-finite-upper-lower-star-adjunction]), so\n$j^*\\cong j^{-1}$, and $j_!\\dashv j^{-1}\\cong j^*$.",
+    "uses": [
+     "def-sfb-finite-upper-lower-star-adjunction",
+     "def-sfb-finite-lower-star"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

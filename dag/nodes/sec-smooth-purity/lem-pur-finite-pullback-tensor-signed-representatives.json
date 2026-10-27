@@ -1,0 +1,134 @@
+{
+ "id": "lem-pur-finite-pullback-tensor-signed-representatives",
+ "kind": "lemma",
+ "title": "Signed tensor/pullback exchange on flat K-flat representatives",
+ "status": "split",
+ "statement": "Fix l,E,n,f:X→Y and the finite coefficient conventions of [def-pur-finite-pullback-tensor-construction], with l invertible on both schemes. Let P,Q be unbounded cochain complexes of the normalized finite coefficient module sheaves on Y, both K-flat with flat terms [def-sfb-proetale-tensor-model]. Write M=Q_Y(P), N=Q_Y(Q), F for the finite derived pullback, mu for finitePullbackTensorConstruction and sigma_X,sigma_Y for the signed derived braidings fixed by the full K-flat model [def-pur-finite-pullback-tensor-braiding]. Then F(sigma_Y(M,N)) followed by mu(N,M) equals mu(M,N) followed by sigma_X(FM,FN). No boundedness, constructibility or flatness of the derived objects is assumed beyond the displayed flat K-flat complex representatives. This statement computes the representative case, not the extension to arbitrary derived inputs.",
+ "stmt_deps": [
+  "def-pur-finite-pullback-tensor-construction",
+  "def-sfb-proetale-tensor-model",
+  "def-pur-finite-pullback-tensor-braiding"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product, proof and final displayed total map); Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and the following symmetry paragraph); More on Algebra, Tag 0FNG (section-sign-rules, item-flip-tensor-product)."
+ },
+ "proof": [
+  {
+   "text": "Apply proEtaleCanonicalTensorPullback to P,Q and to Q,P. This provides preservation of the flat K-flat class and the two canonical total-tensor normalization squares.",
+   "uses": [
+    "def-sfb-proetale-tensor-model",
+    "def-sp-proetale-ordinary-tensor-pullback-total",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved proEtaleSignedTensorPullbackTotal on P,Q. It calculates the ordinary comparison on tensor unit sections, extends by the module sheafification adjunction, and uses the native Koszul braiding formula on each total summand. Additivity preserves the integer sign, including negative degrees. This gives the signed chain square before localization.",
+   "uses": [
+    "lem-pur-proetale-signed-tensor-pullback-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the derived quotient to the signed chain square. Use proEtaleCanonicalTensorPullback on (P,Q) and (Q,P) and pullbackTensorBraiding_existsUnique on the source and pulled-back complexes. Naturality of the exact pullback factorization gives the remaining side of the cube; cancel the source representative isomorphism and the tensor of the two target factorization isomorphisms. Identify the uniquely chosen finite tensor models with their explicit restrictions, and transport the square along the unit-normalized realization using naturality. The Lean proof performs these cancellations explicitly.",
+   "uses": [
+    "def-pur-finite-pullback-tensor-construction",
+    "def-pur-finite-pullback-tensor-braiding"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-proetale-tensor-model",
+  "def-sp-proetale-ordinary-tensor-pullback-total",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-proetale-signed-tensor-pullback-total",
+  "def-pur-finite-pullback-tensor-construction",
+  "def-pur-finite-pullback-tensor-braiding"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "W4",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product, proof and final displayed total map); Tag 06YS (lemma-K-flat-resolution); Tag 06YU (definition-derived-tor and the following symmetry paragraph); More on Algebra, Tag 0FNG (section-sign-rules, item-flip-tensor-product). Explicit signed total calculation and categorical cancellation of all representative and realization isomorphisms."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived pullback tensor comparison commutes with signed symmetry on K flat representatives",
+   "results": "8 hits, including TensorProduct.lift_comp_comm_eq, TensorProduct.gradedComm_symm and categorical pullback symmetry. No derived ringed-site normalization result.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived inverse image tensor isomorphism normalized on K flat resolutions and signed braiding",
+   "results": "8 hits: CategoryTheory.Tor'_obj_map, HomologicalComplex.leftUnitor'_inv_comm, CategoryTheory.Tor', CategoryTheory.Tor'_map_app, CategoryTheory.Tor, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor_obj.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "braiding.*pullback|pullback.*braiding|tensor.*[Kk][Ff]lat",
+   "results": "3 hits: AlgebraicGeometry/Limits.lean:451, CategoryTheory/Extensive.lean:123 and :125; these concern coproducts and categorical pullbacks.",
+   "date": "2026-10-26",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitePullbackTensorComparison",
+  "date": "2026-10-26",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The clause \"These actions commute with finite reduction and scalar extension to Qlb\"; via lem-pur-derived-pullback-tensor-iso and def-pur-finite-pullback-tensor-comparison, using the fixed finite tensor/pullback comparison and its signed coherence.",
+   "via": [
+    "def-pur-finite-pullback-tensor-comparison",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTensorSignedRepresentatives",
+  "file": "lean/Sheaf/Paper/FinitePullbackTensorSignedRepresentatives.lean",
+  "declaration": "WeilConjectures.finitePullbackTensor_signed_representatives",
+  "declarations": [
+   "WeilConjectures.finitePullbackTensor_signed_representatives"
+  ],
+  "statement": "theorem finitePullbackTensor_signed_representatives {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) [hX : ∀ x : X, Invertible (l : X.residueField x)] [hY : ∀ y : Y, Invertible (l : Y.residueField y)] (P Q : CochainComplex (normalizedDVRModules l E Y n) ℤ) (hP : proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n) P) (hQ : proEtaleFlatRepresentatives Y (integralCoefficientCommRingSheaf l E Y n) Q) : let M := DerivedCategory.Q.obj P let N := DerivedCategory.Q.obj Q (finiteDerivedPullback l E n f).map ((pullbackTensorBraiding (ProEt.topology Y) (integralCoefficientCommRingSheaf l E Y n) (finiteIntrinsicClosed l E Y n) (finiteIntrinsicTensorModels l E Y n)).hom.app (M,N)) ≫ ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY) N M).hom = ((@finitePullbackTensorConstruction l _ E _ _ _ X Y f n hX hY) M N).hom ≫ (pullbackTensorBraiding (ProEt.topology X) (integralCoefficientCommRingSheaf l E X n) (finiteIntrinsicClosed l E X n) (finiteIntrinsicTensorModels l E X n)).hom.app ((finiteDerivedPullback l E n f).obj M,(finiteDerivedPullback l E n f).obj N)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c1754",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261026T130643-L-3488572",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261026T202949-L-3495292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

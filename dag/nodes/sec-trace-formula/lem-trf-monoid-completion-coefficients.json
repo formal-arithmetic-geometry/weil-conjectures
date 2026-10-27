@@ -14,74 +14,70 @@
  ],
  "proof": [
   {
-   "text": "Choose nonzero generators g_1, ..., g_s of P (the list is empty when P={0}). Let alpha=min_i w(g_i)>0 when s>0. Every decomposition of p into q nonzero summands has q*alpha <= w(p), so the set of possible q is finite and nu(p) is attained. For each p choose a generator word; if nu(p)<n, a word of length <n can be chosen because its length is at most nu(p). There are only finitely many generator words of length <n, hence S_n={p:nu(p)<n} is finite. If u+v=p, concatenating decompositions gives nu(u)+nu(v)<=nu(p); the same weight bound shows that only finitely many u,v occur. Thus every convolution coefficient below is a finite sum.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6(i)--(ii), printed p. 70; positive-weight finiteness is the agent-supplied coefficient refinement"
-   }
-  },
-  {
-   "text": "For a finite sum F=sum_p c_p z^p in A[P], one has F in b^n exactly when c_p belongs to m^{max(n-nu(p),0)} for every p. For the forward implication, expand a product of n generators of b: if k factors are nonzero monomials, its coefficient at p is in m^{n-k}, and k<=nu(p); sums preserve the asserted containment. Conversely, if nu(p)<n choose a decomposition of p of length nu(p) and write c_p as a finite sum of products of n-nu(p) elements of m, while if nu(p)>=n choose n nonzero summands in a decomposition of p. Each resulting term lies in b^n, and the support of F is finite, so summing over p proves the reverse implication. The case p=0 uses nu(0)=0 and gives c_0 in m^n.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6(i)--(ii), printed p. 70; finite monomial filtration calculation"
-   }
-  },
-  {
-   "text": "Write B=lim_n A[P]/b^n. For x=(x_n)_n in B choose finite representatives F_n in A[P]. If m>=n, compatibility and the finite-level criterion give c_p(F_m)-c_p(F_n) in m^{max(n-nu(p),0)}. Therefore, for each p and k, the residue of c_p(F_n) modulo m^k is constant once n>=k+nu(p). Completeness and separatedness of A supply a unique a_p in A with these residues. This defines a coefficient map B to A^P. Conversely, for a family (a_p), the finite set S_n gives a compatible class in A[P]/b^n by summing the terms p in S_n with coefficients a_p modulo m^{n-nu(p)}; changing lifts changes no class by the finite-level criterion. These constructions are inverse because every coefficient is eventually visible modulo every power of m.",
+   "text": "Apply [lem-trf-positive-monoid-adic-filtration] with $I=\\mathfrak m$ and $J=\\mathfrak b$. Its hypotheses are exactly finite generation of $P$, the embedding in $G$, and positivity of $w$. It supplies the attained $\\nu$, finite decomposition sets and $S_n$, superadditivity of $\\nu$, and the coefficient criterion for $\\mathfrak b^n$ in $A[P]$.",
    "uses": [
-    "def-weil-pbc-adic-completion",
-    "def-weil-pbc-adically-complete-ring"
+    "lem-trf-positive-monoid-adic-filtration"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6(i)--(ii), printed p. 70; inverse-limit coefficient construction"
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
    }
   },
   {
-   "text": "Addition is coefficientwise. For multiplication, representatives multiply by the finite monoid-algebra convolution; for a fixed p only finitely many decompositions p=u+v occur by Step 1, and the stabilized coefficient is sum_{u+v=p} a_u b_v. This proves that the coefficient map is an A-algebra isomorphism onto A^P with convolution. A monomial az^p has the family with coefficient a at p and zero elsewhere, directly from its representatives.",
+   "text": "Apply [lem-trf-filtered-monoid-coefficient-limit] with $I=\\mathfrak m$, $R=A[P]$ and $J=\\mathfrak b$. Step 1 supplies its superadditivity, finite $S_n$, finite pair decompositions and coefficient criterion; the given completeness and separatedness supplies its bijective coefficient-completion map. Its $\\widehat R$ is $B$, with the same projections. It gives the $A$-algebra coefficient isomorphism, finite convolution and monomial formula, and $\\pi_n(a)=[\\sum_{p\\in S_n}a_pz^p]$.",
    "uses": [
+    "lem-trf-filtered-monoid-coefficient-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
+   }
+  },
+  {
+   "text": "The truncation formula and the finite-level criterion show that $\\ker\\pi_n$ consists exactly of the families with $a_p\\in\\mathfrak m^{\\max(n-\\nu(p),0)}$: outside $S_n$ the condition is vacuous. The projection is onto since every polynomial class has the canonical compatible sequence of its images at every level. Also $\\mathfrak b^nB\\subseteq\\ker\\pi_n$, because $\\pi_n$ kills the image of $\\mathfrak b^n$.",
+   "uses": [
+    "lem-trf-positive-monoid-adic-filtration",
+    "lem-trf-filtered-monoid-coefficient-limit",
     "def-weil-pbc-adic-completion"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6(i)--(ii), printed p. 70; coefficientwise ring operations"
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
    }
   },
   {
-   "text": "The projection pi_n is surjective because the transition maps A[P]/b^m \\to A[P]/b^n are surjective: lift a class at level n successively to a compatible inverse-limit sequence. Its kernel consists of families whose nth component is zero. By Step 3 and the finite-level criterion, this is exactly the coefficient condition a_p in m^{max(n-nu(p),0)}. Inclusion b^nB is immediate from the coefficient condition and convolution. For the reverse inclusion, apply the finite-pattern factorization lemma [lem-trf-finite-pattern-factorization] and spell out its finite partition as follows. Choose generators g_1,...,g_s of P and m_1,...,m_t of m. The set S={p:nu(p)<n} is finite by Step 1. For each p in S choose a nu(p)-term decomposition p=p_1+...+p_nu; expand a_p as a finite sum of products of n-nu(p) of the m_j. Each resulting a_p z^p is a product of n generators of b (the m_j constants and the z^{p_i}), so the whole S-part lies in b^nB. For p with nu(p)>=n, choose n nonzero summands and, in a generator word for each summand, choose one generator g_i; cancellativity in the embedding P subset G gives p=g_{i_1}+...+g_{i_n}+q with q in P. There are only finitely many tuples I=(i_1,...,i_n). Assign each such p to the first eligible tuple in a fixed order, and let c^I be the residual family with coefficient a_{g_{i_1}+...+g_{i_n}+q} on the assigned residual q and zero elsewhere. The high-nu part is the finite sum over I of z^{g_{i_1}}...z^{g_{i_n}}c^I, hence is in b^nB. Thus every family satisfying the coefficient condition lies in b^nB, so ker(pi_n)=b^nB.",
+   "text": "Let $c:B\\to A^P$ be the coefficient isomorphism and $\\mathfrak j=(\\mathfrak m z^0,z^p:p\\ne0)$ in $A^P$. The monomial formula sends every generator of $\\mathfrak b$ to the corresponding generator of $\\mathfrak j$. Thus $c(\\mathfrak b^nB)=\\mathfrak j^n$: expand a finite sum of products of $n$ generators times arbitrary coefficients; applying $c$ gives one inclusion and applying $c^{-1}$ gives the other. Apply [lem-trf-finite-pattern-factorization] to a family in $c(\\ker\\pi_n)$, using step 3 and the given Noetherian locality, finite generation, finite-rank free $G$ and positive $w$. It belongs to $\\mathfrak j^n$, so its inverse image belongs to $\\mathfrak b^nB$. Together with step 3, this proves equality.",
    "uses": [
-    "def-weil-pbc-adic-completion",
-    "lem-trf-finite-pattern-factorization"
+    "lem-trf-finite-pattern-factorization",
+    "lem-trf-filtered-monoid-coefficient-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05GG, lemma-hathat-finitely-generated, parts (1)--(2) and final paragraph; combined with the VI 1.6 finite monomial filtration"
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
    }
   },
   {
-   "text": "For a fixed n, the coefficient condition in Step 5 forces a_p=0 modulo the displayed coefficient quotient whenever nu(p)>=n, and leaves the class of a_p in A/m^{n-nu(p)} when nu(p)<n. Since S_n is finite by Step 1, taking these coefficients gives an A-module isomorphism B/b^nB = direct sum_{nu(p)<n} A/m^{n-nu(p)}. The inverse sends a finite tuple to the corresponding finite family, so the isomorphism is explicit.",
+   "text": "Send $x\\in B$ to $(c(x)_p\\bmod\\mathfrak m^{n-\\nu(p)})_{p\\in S_n}$. This $A$-linear map has kernel $\\mathfrak b^nB$ by steps 3--4, so its induced quotient map is injective. Given a tuple, lift its finitely many entries to $A$ and take the finite monomial sum. Its residue tuple is the original one by the monomial formula. Different lifts have differences in the displayed coefficient ideals, hence give the same class by steps 3--4. This gives an inverse to the quotient map: for any $x$, its difference from the chosen finite sum has zero residue tuple and is in the kernel. Finiteness of $S_n$ identifies these tuples with the asserted direct sum.",
    "uses": [
-    "def-weil-pbc-adic-completion"
+    "lem-trf-positive-monoid-adic-filtration",
+    "lem-trf-filtered-monoid-coefficient-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6(i)--(ii), printed p. 70; finite-level coefficient decomposition"
+    "place": "Exposé VI §1.6(i)--(ii), printed p. 70: agent-supplied coefficient refinement of the formal monoid models; not a verbatim theorem of ILO."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adically-complete-ring",
   "def-weil-pbc-adic-completion",
-  "lem-trf-finite-pattern-factorization"
+  "lem-trf-filtered-monoid-coefficient-limit",
+  "lem-trf-finite-pattern-factorization",
+  "lem-trf-positive-monoid-adic-filtration"
  ],
  "proof_origin": {
   "by": "agent",
@@ -154,20 +150,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "item": "lem-trf-monoid-completion-coefficients",
   "worker": "stage1",
-  "summary": "Audited the imported coefficient statement and found no finished Lean declaration or duplicate DAG node. Kept the statement unchanged. The split gives the positive-weight finiteness of nu and bounded decompositions, proves the finite-level coefficient criterion directly, constructs the inverse-limit coefficient-family isomorphism, checks convolution and monomials, proves surjectivity and the kernel formula (using finite generation of the maximal ideal and monoid), and derives the finite direct-sum quotient.",
+  "summary": "Repair of the live-DAG promotion return, continuing the retained human-ordered re-split. Rebased by applying only the proof, proof dependencies and split report to the current read-clone item; all other fields agree with the retained pre-split record and are preserved. The two statement-only nodes retain the positive-monoid finite-filtration argument and conditional inverse-limit reconstruction, with unchanged logged searches. Reread all cited current statements and checked every citation quote. The assembly explicitly identifies the extended ideal powers by both inclusions and now constructs the finite quotient inverse, proves independence of coefficient lifts, and checks both inverse identities. The parent statement is unchanged; report.md records argument preservation, source review, edge cases and current-base dry-run evidence.",
   "blueprint": "ILO VI 1.6(i)--(ii) formal chart model coefficient description and finite-level monomial filtration under the ancestor lem-trf-local-term-locality.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NH-80bb69fe9",
-  "group": "NH",
+  "reviewer": "NT-cc-Q09-53e42c2c7",
+  "group": "Q09",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-80bb69fe9 (reviewer sub-agent of L); spot-checked: Read the complete item, auxiliary node, cited statements, unit/chapter route, Illusie–Laszlo–Orgogozo VI §1.6, and Stacks Tag 05GG. Checked every proof step, hypotheses, non-elementary steps, completion/kernel argument, finite-pattern factorization, duplicates, route restrictions, and edge cases P={0}, P=N, n=1, and field coefficients. The auxiliary node is a genuine reusable lemma and not a restatement. No repairs are needed; review.md records the detailed checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-53e42c2c7 (reviewer sub-agent of L); spot-checked: Fourth head of the human's re-split (released note of 2026-10-22, still open). Heads 1776fd, 4945ee and 2098939 were each PASSed, then refused at landing because the split was completed only in the side DAG and still needs live promotion; that refusal is not a fault of the delivery. Live still has the old 6-step proof of 4467 characters, and neither new id is in live or side-live. Diff against 2098939: both new nodes and lem-trf-finite-pattern-factorization are identical; the item differs only in step 5 (the quotient inverse is spelled out: lifts give surjectivity, lifts are independent of choices, both inverse identities hold; correct) and in split_report. The item statement is unchanged against live, and all 5 cited statements are the same in the snapshot and live. I reread the mathematics in full. lem-trf-positive-monoid-adic-filtration (1209 chars) is true: L(0)={0}; ν is attained with ν≤w; ν is superadditive; the sets {w≤M}, the k-tuples summing to p and S_n are finite; F∈J^n ⇔ c_p∈I^{max(n−ν,0)} holds in both directions (a product of n generators with k nonzero monomial factors forces k≤ν(p); for ν≥n, group a decomposition into n nonzero blocks). lem-trf-filtered-monoid-coefficient-limit (1556 chars) is true: c is well defined for N≥j+ν(p); the inverse truncations are compatible because the extra exponents have ν≥n; c is multiplicative because superadditivity gives ν(u),ν(v)≤ν(p); separatedness gives uniqueness. Assembly (2590 chars, 5 steps): step 1 applies node 1 with I=m, J=b; step 2 applies node 2; step 3 gets the kernel from the truncation formula and the criterion, and surjectivity from the canonical image of a polynomial; step 4 gets c(b^nB)=j^n from the generators, then the factorization node, whose hypotheses all hold; step 5 gives the explicit finite quotient. Mapping from the old proof: steps 1–2 → node 1; steps 3–4 → node 2; step 5's partition is the statement of the already cited factorization node; step 6 → assembly step 5. Nothing is dropped, the two new nodes are of comparable size, and neither restates the item. Edge cases checked: P={0}, P=ℕ, P=⟨2,3⟩ (only superadditivity holds, as stated), n=1, A a field, I=0 or I=A. rg -L over dag/nodes finds no duplicate. ILO VI §1.6(i)–(ii) checked (printed p.70); the refinement is labelled agent-written. No SGA, no tool_uses. Maintainer: this needs live promotion by L, not another re-delivery."
  },
  "lean": {
   "module": "Sheaf.RingTheory.MonoidCompletionCoefficients",
@@ -187,5 +183,16 @@
   "result": "pass",
   "note": "Node record changed only in lean; lean.statement verbatim; single commit with 3 files. Every hypothesis matches (Noetherian, local, IsAdicComplete m, AddMonoid.FG P, injective P→+G, G≃+Z^r, positive weight) with no extra assumptions and independent universes u v w. b is pinned by equality; nu by IsGreatest with nu 0=0; the CommRing on P→A has pointwise add and finsum convolution with a finiteness clause; the AlgEquiv c is pinned by the monomial clause, with alg forced via algebraMap A B a = of(single 0 a) (checked by compile) and c forced to be the natural coefficient map via the kernel criterion and separatedness. Surjectivity of eval_n, ker = map(b^n), kernel membership with truncated n - nu p, finiteness of {nu<n} and Nonempty A-linear equiv to the finite direct sum all match the node. Edge cases P={0}, P=N, n=1, A a field are fine. No duplicate in Mathlib or side Sheaf (CompleteToricModel ideals use MvPolynomial with extra variables). Gates: no defs, sorry only, source/blueprint docstrings with proof plan, Mathlib-only imports, no line over 100 chars. nt_compile: exit 0, clean. Minor: the second reading is the author's own pass, accepted precedent."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-kflat-augmented-roos-comparison",
+ "kind": "statement",
+ "title": "K-flat tensor comparison for augmented derived Roos fibres",
+ "statement": "Let $(\\mathcal C,R)$ be a ringed site small in the module universe [def-weil-size-convention, def-weil-sheaf-of-modules-category]. Use the unbounded derived category $D(R)$ with localization $Q$ [def-weil-abstract-derived-category], signed direct-sum total tensor [def-pc-tensor-complex-sheaves], and derived products [def-weil-category-product]. Let $A$ be a K-flat complex of $R$-module sheaves [def-pc-kflat-complex], and write $T_A=QA\\otimes_R^{\\mathbf L}-$, computed by $\\operatorname{Tot}(A\\otimes_R-)$.\n\nLet $X=(X_n,t_n)$ be a strict tower of complexes [def-weil-inverse-system] and choose a K-injective [def-pur-kinjective-complex] tower resolution $X\\to I$ with injective terms. Total right derived inverse limit $L(X)$ is $Q\\lim_n I_n$; its natural Roos realization is the fibre of $1-s$ on the derived product [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Put $(A\\otimes X)_n=\\operatorname{Tot}(A\\otimes_R X_n)$ with transitions $1_A\\otimes t_n$. There is a natural morphism\n$$\\beta_{A,X}:T_A L(X)\\longrightarrow L(A\\otimes X)$$\nwith the following resolution normalization. Choose a K-injective tower resolution $A\\otimes I\\to J$ with injective terms, with components $q_n$. Put $P_I=\\prod_n I_n$, $P_J=\\prod_nJ_n$ (termwise products), and let\n$$b:\\operatorname{Tot}(A\\otimes_RP_I)\\longrightarrow P_J$$\nbe the chain map with $n$-th projection $q_n(1_A\\otimes\\mathrm{pr}_n)$. For a tower $V$, write $H(V)^k=P_V^k\\oplus P_V^{k-1}$ with differential $d(x,y)=(dx,(1-s)x-dy)$. Via $L(X)\\cong QH(I)$ and $L(A\\otimes X)\\cong QH(J)$, the morphism $\\beta_{A,X}$ is represented by the chain map\n$$\\operatorname{Tot}(A\\otimes_R H(I))\\longrightarrow H(J),\\qquad\n a\\otimes(x,y)\\longmapsto\\bigl(b(a\\otimes x),(-1)^p b(a\\otimes y)\\bigr)\\quad(a\\in A^p).$$\nHere the formula specifies the two summand maps of the total complex. These localized morphisms are independent of the chosen resolutions, natural in strict tower maps and K-flat tensor arguments, and compatible with quasi-isomorphisms in either argument.\n\nIf the canonical derived product map\n$$T_A\\bigl(\\prod_n^D QX_n\\bigr)\\longrightarrow\\prod_n^D T_A(QX_n),\\qquad \\mathrm{pr}_n\\circ\\phi=T_A(\\mathrm{pr}_n),$$\nis an isomorphism, then $\\beta_{A,X}$ is an isomorphism. No exactness of countable products of module sheaves is assumed.\n\nFor a complex $Z$ and a strict augmentation $\\gamma:\\Delta Z\\to X$, let $a_\\gamma:QZ\\to L(X)$ be the canonical augmented derived-limit map: on a resolution it is the compatible-family map into the ordinary limit followed by its derived comparison, equivalently the Roos map with coordinates $((\\gamma_n)_n,0)$ after composing into $I$. Let $a_{A\\otimes\\gamma}:Q\\operatorname{Tot}(A\\otimes_R Z)\\to L(A\\otimes X)$ be defined identically. Then, under the K-flat computation identification,\n$$\\beta_{A,X}\\circ T_A(a_\\gamma)=a_{A\\otimes\\gamma}.$$\nThis is equality of the whole maps into the normalized derived inverse limit, including the zero shifted-product coordinate, not just equality of their projections.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), using Tag 06YM (lemma-derived-tor-exact) and Tag 06YS (lemma-K-flat-resolution); agent refinement to the signed tensor comparison on augmented derived-product fibres."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-category-product",
+  "def-pc-kflat-complex",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-kinjective-complex",
+  "def-weil-strict-roos-model",
+  "def-sp-total-tensor-summand-interface"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact localized K-flat tensor functors, their normalized representative isomorphisms and transformations in the first argument. This includes levelwise tower descent and invariance for quasi-isomorphisms between K-flat arguments.",
+   "uses": [
+    "lem-sfb-kflat-roos-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), using Tag 06YM (lemma-derived-tor-exact) and Tag 06YS (lemma-K-flat-resolution); agent refinement to the signed tensor comparison on augmented derived-product fibres."
+   }
+  },
+  {
+   "text": "Use the universal derived-limit comparison. The right derivation is absolute on K-injectives; its universal unit equation defines beta and gives its pinned formula on every pair of resolutions, naturality in the tensor argument, and equality of the entire strict-augmentation maps.",
+   "uses": [
+    "lem-sfb-kflat-roos-derived-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), using Tag 06YM (lemma-derived-tor-exact) and Tag 06YS (lemma-K-flat-resolution); agent refinement to the signed tensor comparison on augmented derived-product fibres."
+   }
+  },
+  {
+   "text": "Take the ordinary-limit comparison theta and product comparison b with their prescribed projections. The commuting product square and inclusion square follow projection by projection. Apply the signed-map result to get psi with the two required summand formulas and the entire limit-inclusion equality. The injective-tower theorem makes the two inclusions quasi-isomorphisms. Their inverses convert the theta formula for beta into its stated signed Roos formula.",
+   "uses": [
+    "lem-sfb-kflat-roos-derived-comparison",
+    "lem-sfb-kflat-roos-signed-map",
+    "lem-pur-injective-tower-roos-shifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), using Tag 06YM (lemma-derived-tor-exact) and Tag 06YS (lemma-K-flat-resolution); agent refinement to the signed tensor comparison on augmented derived-product fibres."
+   }
+  },
+  {
+   "text": "For the product-isomorphism clause choose the existing functorial K-injective resolutions with injective terms. The resolved product criterion makes Qtheta invertible, so the pinned resolution formula makes beta invertible. The coefficient-universe Grothendieck theorem and the evaluation-left-adjoint separator construction supply the tower resolutions in the required universe.",
+   "uses": [
+    "lem-sfb-kflat-roos-product-criterion",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-pur-ringed-site-grothendieck-coefficient-universe"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), using Tag 06YM (lemma-derived-tor-exact) and Tag 06YS (lemma-K-flat-resolution); agent refinement to the signed tensor comparison on augmented derived-product fibres."
+   }
+  },
+  {
+   "text": "Assemble these clauses in the unchanged ComparisonFormulas predicate. Functoriality of localization inverts tower quasi-isomorphisms and completes the remaining invariance clause.",
+   "uses": [
+    "def-sfb-kflat-augmented-roos-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), using Tag 06YM (lemma-derived-tor-exact) and Tag 06YS (lemma-K-flat-resolution); agent refinement to the signed tensor comparison on augmented derived-product fibres."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-kflat-augmented-roos-interface",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-sfb-kflat-roos-derived-comparison",
+  "lem-sfb-kflat-roos-product-criterion",
+  "lem-sfb-kflat-roos-signed-map",
+  "lem-sfb-kflat-roos-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0941, 06YM, 06YP, 06YS and 06YT; absolute K-injective derivation using derived.tex Tags 070I and 070Y, followed by the explicit signed cone normalization and Tag 014A product criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Roos|homotopyLimit|homotopy_limit",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern additive functors on coefficients, ordinary module flatness, or total-complex tensor constructions; none supplies a natural augmented derived Roos comparison for tensor by an unbounded K-flat complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K flat tensor derived inverse limit comparison map preserves augmentation of strict towers of module sheaf complexes",
+   "results": "8 hits; TensorProduct.directLimitLeft_symm_of_tmul, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.rTensor_shortComplex_exact, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.iff_rTensor_preserves_shortComplex_exact, TensorProduct.directLimitRight_symm_of_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern additive functors on coefficients, ordinary module flatness, or total-complex tensor constructions; none supplies a natural augmented derived Roos comparison for tensor by an unbounded K-flat complex"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"homotopyLimit\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern additive functors on coefficients, ordinary module flatness, or total-complex tensor constructions; none supplies a natural augmented derived Roos comparison for tensor by an unbounded K-flat complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex tensoring a strict tower commutes with its derived product Roos mapping fibre via the canonical comparison and respects strict augmentations when tensor preserves derived products",
+   "results": "8 hits; HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasTensor, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor', Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern additive functors on coefficients, ordinary module flatness, or total-complex tensor constructions; none supplies a natural augmented derived Roos comparison for tensor by an unbounded K-flat complex"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product by a complex preserving countable derived products commutes naturally with the shifted cone of one minus transition including the map from a constant tower",
+   "results": "8 hits; CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.map_δ, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern additive functors on coefficients, ordinary module flatness, or total-complex tensor constructions; none supplies a natural augmented derived Roos comparison for tensor by an unbounded K-flat complex"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.mapHomologicalComplexIso|def mapHomologicalComplexIso",
+   "results": "1 hits; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern additive functors on coefficients, ordinary module flatness, or total-complex tensor constructions; none supplies a natural augmented derived Roos comparison for tensor by an unbounded K-flat complex"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product by a K-flat complex commutes with derived inverse limits if it preserves derived products, respecting the map from a constant tower",
+   "results": "8 hits; TensorProduct.directLimitLeft_rTensor_of, TensorProduct.directLimitLeft_tmul_of, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.toDirectLimit, Submodule.FG.rTensor.directLimit, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, Module.Flat.iff_preservesFiniteLimits_tensorLeft",
+   "date": "2026-10-22",
+   "verdict": "no match: direct limits of modules, ordinary flatness, unitors or additive functor cone comparisons do not state the unbounded K-flat tensor comparison for total derived tower limits with its augmentation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K-flat complex has a natural tensor comparison with the total derived inverse limit of strict towers of sheaves, compatible with augmentations",
+   "results": "8 hits; CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.Tor', CategoryTheory.Tor, AdicCompletion.ofTensorProduct_naturality, CategoryTheory.lan_flat_of_flat, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, Module.Flat.lTensor_shortComplex_exact",
+   "date": "2026-10-22",
+   "verdict": "no match: direct limits of modules, ordinary flatness, unitors or additive functor cone comparisons do not state the unbounded K-flat tensor comparison for total derived tower limits with its augmentation normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring the mapping fibre of one minus shift on the derived product of an inverse sequence, with signed cone comparison and constant tower unit",
+   "results": "8 hits; HomologicalComplex.leftUnitor', HomologicalComplex.leftUnitor, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.leftUnitor'_inv_comm, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.leftUnitor'_inv_comm_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CategoryTheory.Functor.comp_homologySequenceδ",
+   "date": "2026-10-22",
+   "verdict": "no match: direct limits of modules, ordinary flatness, unitors or additive functor cone comparisons do not state the unbounded K-flat tensor comparison for total derived tower limits with its augmentation normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-evaluation-duality-completion",
+  "date": "2026-10-22",
+  "group": "Q70"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "blueprint": {
+  "from": {
+   "node": "det-lem-int-tensor-product",
+   "place": "First proof paragraph: 'being exact, it preserves R lim of sequences, which is the fibre of a map between products', followed by applying tensor to the canonical completeness isomorphism; normalized augmented comparison required there.",
+   "via": [
+    "lem-sfb-evaluation-duality-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-kflat-augmented-roos-comparison",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Constructed the comparison into resolved ordinary limits, proved its choice independence and naturality using K-injective Hom bijections and explicit compatible homotopies, identified the exact signed Roos formula by the normalized kernel inclusions, and checked the product-isomorphism criterion and the whole strict-augmentation identity. Reused existing general tools; no new nodes are needed.",
+  "blueprint": "det-lem-int-tensor-product.proof.md, first paragraph: 'Being a right adjoint, it preserves products; being exact, it preserves R lim of sequences, which is the fibre of a map between products', and the following application to the canonical completeness isomorphism. This item supplies the normalized tensor/Rlim comparison and augmentation compatibility used by lem-sfb-evaluation-duality-completion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "why": "Signed total tensor, homotopies, cones and K-flat quasi-isomorphism preservation on arbitrary ringed sites; a generic homological tool, not a replacement for the integral tensor route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Total derived inverse limit of strict ringed-site towers, computed on K-injective tower resolutions; needed to normalize the actual comparison."
+   },
+   {
+    "node": "lem-pur-injective-tower-roos-shifts",
+    "why": "Injective tower transitions split and the specified kernel inclusion computes the Roos fibre and derived products without AB4*; generic resolution normalization."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Hom into K-injectives computes derived Hom, hence existence and uniqueness up to homotopy of tower resolution comparisons."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Resolve an arbitrary module-sheaf complex K-flatly to verify quasi-isomorphism invariance in the K-flat tensor argument."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Tower category is abelian with exact evaluation, so quasi-isomorphisms and homotopies used in the comparison are tower-theoretic."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Two isomorphic product components in the specified morphism of distinguished triangles imply the fibre component is invertible."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pc-kflat-resolution",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NO-8db9a2a5a",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-8db9a2a5a (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes, and every cited statement was read. Statement and stmt_deps are identical to the landed Q70-FIXed version, so no target is weakened, and no re-split note applies. Checked: (1) the H(V) differential squares to zero, and the coordinate change (y,x)->(x,-y) from the roos-shifts convention d(y,x)=(-dy-hx,dx) gives exactly (dx,(1-s)x-dy). (2) F_J b=b(1⊗F_I), checked projection by projection from t^J q_{n+1}=q_n(1⊗t^I_n). (3) Psi with the (-1)^p sign is a chain map; both second coordinates equal b(a⊗Fx)-b(a⊗dy)-(-1)^p b(da⊗y). (4) The K-injective Hom bijection in Tow(Mod R) gives u and v, unique up to homotopy; the compatible homotopy tuple h_n(1⊗π_n) gives resolution independence and naturality. (5) The iso criterion is robust: Psi = fib(b)∘φ' with φ' a chain iso, (fib(b),b,b) is a strict morphism of rotated cone triangles, Qb is the canonical product map by uniqueness of product maps, and lem-sf-triangle-morphism-iso applies. (6) The augmentation identity θ(A⊗c)=(q_n(1⊗c_n)) holds strictly before localization, with second coordinate 0. Edge cases: A=0, X=0, A=R[1] (minus sign), constant tower, zero γ. The step-1 three-sided square with a K-flat resolution is valid. Source check: Stacks sites-cohomology Tag 0941 (lemma-derived-limit-is-ok, line 5067ff) and blueprint det-lem-int-tensor-product.proof.md paragraph 1. No duplicate: lem-pe-kflat-roos-representative-invariance assumes exact products and is about B_n-towers. No SGA. proof_deps equals the union of uses. Accepted tool_uses: total-tensor-homotopy-cone-signs, ringed-strict-tower-homotopy-limit, injective-tower-roos-shifts, kinjective-hom-derived, pc-kflat-resolution, tower-category-levelwise-abelian, sf-triangle-morphism-iso, all generic homological black boxes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KFlatAugmentedRoosComparison",
+  "declaration": "CategoryTheory.kFlatAugmentedRoosComparison",
+  "declarations": [
+   "CategoryTheory.kFlatAugmentedRoosComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KFlatAugmentedRoosComparison.lean",
+  "statement": "theorem kFlatAugmentedRoosComparison {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r}) [HasDerivedCategory.{w} (SheafOfModules.TotalTensorSigns.Modules R)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.TotalTensorSigns.Modules R)] (RF : DerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.TotalTensorSigns.Modules R) ⥤ DerivedCategory.{w} (SheafOfModules.TotalTensorSigns.Modules R)) (η : roosLimitFunctor ⋙ DerivedCategory.Q.{w} ⟶ DerivedCategory.Q.{w} ⋙ RF) (_hRF : RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ SheafOfModules.TotalTensorSigns.Modules R) (.up ℤ))) : KFlatAugmentedRoos.ComparisonFormulas (SheafOfModules.TotalTensorSigns.total R) CochainComplex.IsKFlatIndependentCoefficients (fun A ↦ KFlatAugmentedRoos.SignedCoordinates A) RF η",
+  "branch": "newtargets-dag",
+  "by": "O3",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The five original interface definitions are re-exported verbatim from KFlatAugmentedRoosDefinitions, attached to def-sfb-kflat-augmented-roos-interface. The theorem signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d1cb9c98",
+  "group": "O3",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN on 30719beb. Lean module byte-identical (sha256 81d5e91a…). The only node change is the stmt_dep lem-weil-pbc-total-tensor-homotopy-cone-signs replaced by def-sp-total-tensor-summand-interface. That definition node (existing:true; owns Modules/tensor/total/ι in TotalTensorHomotopyConeSigns l.72/106/132/179) is on base. The theorem stays in proof_deps; the report's ownership sentence is corrected; the lean record and statement are unchanged. The previous full review of the mathematics carries over: signed ψ chain map via (x,-y), pinned dI/dJ/b/θ/ψ/β, resolution independence, naturality, qis clauses, canonical piComparison criterion, whole-map augmentation equality, independent universes, no hollow defs, 10-step docstring. Side-live item is not Lean-closed by another group. No compile needed (no change). Advisory: the second reading was by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-ced57",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261024T184854-L-3238630",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs clones/live (byte-identical statement); ComparisonFormulas old existential vs new Nonempty ComparisonData via proved comparisonFormulas_iff + change record; node lean records vs delivered declarations; sandbox compile of all 6 modules + #print axioms (propext, Classical.choice, Quot.sound only)"
+ }
+}

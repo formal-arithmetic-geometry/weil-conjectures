@@ -1,0 +1,272 @@
+{
+ "id": "lem-trf-coinduction-tensor-comparison-model",
+ "kind": "statement",
+ "title": "A counit-normalized chain model for the coinduction tensor comparison",
+ "statement": "Let $R\\to B$ be a homomorphism of commutative rings and let $U:D(B)\\to D(R)$ be restriction on the ordinary unbounded module derived categories [def-weil-abstract-derived-category]. Let $C_B:D(R)\\to D(B)$ be coinduction, right adjoint to $U$, with $C_B(K)$, its action $(b\\cdot h)(b')=h(b'b)$, and its evaluation-at-$1$ counit $\\epsilon_K:UC_B(K)\\to K$ as in [lem-trf-derived-coinduction-adjunction]. Put $D_B=C_B(R[0])$, and use the tensor functor [lem-pc-derived-tensor-second-factor-functor]. The adjunct of $1_K\\otimes\\epsilon_{R[0]}$, followed by the unit identification $K\\otimes_R^{\\mathbf L}R[0]\\cong K$, defines a canonical natural transformation\n$$\\sigma_K:K\\otimes_R^{\\mathbf L}D_B\\longrightarrow C_B(K).$$\nIt has the following representative for every $K$. Choose any K-flat complex $F$ [def-pc-module-kflat-complex] representing $K$, any K-injective resolution $R[0]\\to J$, and any K-injective resolution $q:F\\otimes_R J\\to I$ [def-pur-kinjective-complex], which exist by [def-pur-derived-internal-hom]. Write $V=\\operatorname{Hom}_R^\\bullet(B[0],J)$, using the product Hom complex [def-pur-hom-complex] and the direct-sum total tensor [def-pc-tensor-complex-sheaves]. Then $I$ represents $K$, $V$ represents $D_B$, and $F\\otimes_R V$ and $\\operatorname{Hom}_R^\\bullet(B[0],I)$ represent the source and target of $\\sigma_K$ in $D(B)$. The balanced formula\n$$t(f\\otimes h)(b)=q(f\\otimes h(b))$$\ndefines a $B$-linear chain map between these complexes whose localization is $\\sigma_K$. Its counit composite is represented by $f\\otimes h\\mapsto q(f\\otimes h(1))$. After scalar restriction this is the usual Hom/tensor evaluation comparison with these same representatives. The localized comparisons are independent of all the resolution choices, and for every $u:K\\to K'$ in $D(R)$ one has\n$$C_B(u)\\circ\\sigma_K=\\sigma_{K'}\\circ(u\\otimes1_{D_B}).$$\nNo perfectness, flatness or Noetherian hypothesis on $R\\to B$, or boundedness of $K$, is assumed; no invertibility of $\\sigma_K$ is asserted.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext), explicit tensor-counit adjunct on K-flat and K-injective representatives."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pc-module-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-kinjective-complex"
+ ],
+ "proof": [
+  {
+   "text": "Write $j:R[0]\\to J$ for the chosen resolution. By [def-pc-module-kflat-complex], $1_F\\otimes j:F\\cong F\\otimes_R R[0]\\to F\\otimes_R J$ is a quasi-isomorphism. Hence $a=q(1_F\\otimes j):F\\to I$ is a quasi-isomorphism and identifies $I$ with $K$. The resolutions $j,q$ exist by [def-pur-derived-internal-hom], specialized to the one-point ringed site. Apply [lem-trf-derived-coinduction-adjunction] to $J$ and $I$: $V=\\operatorname{Hom}_R^\\bullet(B[0],J)$ represents $D_B$ and $W=\\operatorname{Hom}_R^\\bullet(B[0],I)$ represents $C_B(K)$, with precisely the asserted $B$-actions and evaluation counits. Clause (2) of [lem-pc-derived-tensor-second-factor-functor], applied to the $B$-complex $V$ and the K-flat representative $F$, identifies $F\\otimes_R V$ with $K\\otimes_R^{\\mathbf L}D_B$. No flatness of $B$, or K-flatness of $V$ or $J$, enters this application.",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "def-pur-derived-internal-hom",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext); explicit calculation with the stated representatives"
+   }
+  },
+  {
+   "text": "For $f\\in F^p$ and $h\\in V^r=\\operatorname{Hom}_R(B,J^r)$ define $t(f\\otimes h)(b)=q(f\\otimes h(b))$. Additivity and $q(rf\\otimes h(b))=q(f\\otimes rh(b))$ prove that this descends to the $R$-balanced tensor product; $R$-linearity in $b$ makes the value an element of $W^{p+r}$. The action from [lem-trf-derived-coinduction-adjunction] gives $t(f\\otimes ch)(b)=q(f\\otimes h(bc))=(c\\,t(f\\otimes h))(b)$, so $t$ is $B$-linear. Since $B[0]$ has zero differential, [def-pur-hom-complex] gives $d_Vh=d_Jh$ and $d_W\\ell=d_I\\ell$. The tensor differential of [def-pc-tensor-complex-sheaves] and the chain-map equation for $q$ give\n$$d_Iq(f\\otimes h(b))=q(d_Ff\\otimes h(b))+(-1)^p q(f\\otimes d_Jh(b))=t(d_Ff\\otimes h+(-1)^pf\\otimes d_Vh)(b).$$\nThus $t$ is a chain map. In each total degree the source is a direct sum, so each input has finite support and the displayed prescription requires no exchange of infinite sums and products.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext); explicit calculation with the stated representatives"
+   }
+  },
+  {
+   "text": "Let $e_J:UV\\to J$ and $e_I:UW\\to I$ be evaluation at $1$. Direct substitution gives $e_I\\,Ut=q(1_F\\otimes e_J)$ as chain maps. By [lem-trf-derived-coinduction-adjunction], $e_J$ represents $\\epsilon_{R[0]}$ with target identified by $j$, and $e_I$ represents $\\epsilon_K$ with target identified by $a$. Clause (3) of [lem-pc-derived-tensor-second-factor-functor] represents tensoring this counit by $1_F\\otimes e_J$. In the derived category $[q]=[a][1_F\\otimes j]^{-1}$; after identifying $I$ with $K$ via $a$, the counit composite is consequently\n$$[1_F\\otimes j]^{-1}[1_F\\otimes e_J]:K\\otimes_R^{\\mathbf L}UD_B\\longrightarrow K,$$\nwhich is exactly the map $m_K=\\rho_K(1_K\\otimes\\epsilon_{R[0]})$ in the statement, with $\\rho_K:K\\otimes_R^{\\mathbf L}R[0]\\cong K$. The adjunction $U\\dashv C_B$ in [lem-trf-derived-coinduction-adjunction] identifies a map $z$ into $C_B(K)$ with $\\epsilon_K\\,Uz$. Hence $[t]$ is the unique adjunct of $m_K$, namely $\\sigma_K$.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext); explicit calculation with the stated representatives"
+   }
+  },
+  {
+   "text": "Upon restriction to $R$, [lem-trf-derived-coinduction-adjunction] identifies $UV$ and $UW$ with $R\\operatorname{Hom}_R(B[0],R[0])$ and $R\\operatorname{Hom}_R(B[0],K)$. By [def-pur-derived-internal-hom] these use the same K-injective representatives $J$ and $I$. The underlying chain map is\n$$F\\otimes_R\\operatorname{Hom}_R^\\bullet(B[0],J)\\longrightarrow\\operatorname{Hom}_R^\\bullet(B[0],I),\\quad f\\otimes h\\longmapsto(b\\longmapsto q(f\\otimes h(b))).$$\nThis is the ordinary Hom/tensor evaluation comparison on those representatives: evaluate $h$ at $b$, tensor with $f$, and apply $q$. The formula is the formula already verified in step 2, so scalar restriction introduces neither another map nor another sign. Step 3 identifies its localization with the canonical adjunct, rather than asserting any invertibility.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext); explicit calculation with the stated representatives"
+   }
+  },
+  {
+   "text": "The functor and canonical representative comparisons in [lem-trf-derived-coinduction-adjunction] and [lem-pc-derived-tensor-second-factor-functor] identify the source and target objects for any other resolution choices. Step 3 identifies each resulting map with the adjunct of the same $m_K$; injectivity of the adjunction bijection therefore proves independence of all choices. For $u:K\\to K'$ in $D(R)$, functoriality of tensor and its unit identification gives $u\\,m_K=m_{K'}\\,U(u\\otimes1_{D_B})$. Naturality of the counit gives\n$$\\epsilon_{K'}\\,U(C_B(u)\\sigma_K)=u\\,\\epsilon_K\\,U\\sigma_K=u\\,m_K,$$\nwhereas $\\epsilon_{K'}\\,U(\\sigma_{K'}(u\\otimes1_{D_B}))=m_{K'}\\,U(u\\otimes1_{D_B})$. These are equal by the preceding equation. Injectivity of the same adjunction bijection proves $C_B(u)\\sigma_K=\\sigma_{K'}(u\\otimes1_{D_B})$ for every derived morphism $u$, with no need to represent $u$ by a chain map.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tags 0A70 (lemma-right-adjoint) and 0A71 (lemma-RHom-ext); explicit calculation with the stated representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Explicit chain-level tensor-counit calculation supplementing Tags 0A70 and 0A71; K-flat computation from more-algebra.tex Tag 06Y6."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an arbitrary algebra, tensor with its derived dual has a natural comparison to derived coinduction represented by q(f tensor h(b)) and normalized by the evaluation counit",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:26Z\", \"tool\": \"leanfinder\", \"query\": \"For an arbitrary algebra, tensor with its derived dual has a natural comparison to derived coinduction represented by q(f tensor h(b)) and normalized by the evaluation counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.dualTensorIsoLinHomAux\", \"FDRep.dualTensorIsoLinHom_hom_hom\", \"FDRep.dualTensorIsoLinHom\", \"Representation.dualTensorHom_comm\", \"CharacterModule.dual_rTensor_conj_homEquiv\", \"Rep.ihom_coev_app_hom\", \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"FGModuleCat.FGModuleCatEvaluation_apply\"], \"digest\": \"6584811cbe8f131e\"} Read ChangeOfRings.lean:441-650: ordinary coextension action and adjunction only. Semantic hits give finite-dimensional representation duals, ordinary dualTensorHom, natural transformations of abstract derived functors, and Tor functors, none the specified unbounded complex comparison or its chain formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendScalarsAdj",
+   "sub": "Algebra/Category/ModuleCat",
+   "results": "{\"t\": \"2026-10-22T06:46:29Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|restrictCoextendScalarsAdj\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"8a042622d6b5ae6d\"} Read ChangeOfRings.lean:441-650: ordinary coextension action and adjunction only. Semantic hits give finite-dimensional representation duals, ordinary dualTensorHom, natural transformations of abstract derived functors, and Tor functors, none the specified unbounded complex comparison or its chain formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with an algebra valued dual has an evaluation normalized natural transformation to unbounded derived coinduction",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:30Z\", \"tool\": \"leansearch\", \"query\": \"Derived tensor with an algebra valued dual has an evaluation normalized natural transformation to unbounded derived coinduction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHom\", \"CategoryTheory.NatTrans.rightDerived\", \"FGModuleCat.FGModuleCatEvaluation\", \"Module.Dual.eval_naturality\", \"CategoryTheory.tensorRightHomEquiv\", \"transpose_dualTensorHom\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"IsBaseChange.toDualBaseChange_tmul\"], \"digest\": \"26393d3bef88e9f3\"} Read ChangeOfRings.lean:441-650: ordinary coextension action and adjunction only. Semantic hits give finite-dimensional representation duals, ordinary dualTensorHom, natural transformations of abstract derived functors, and Tor functors, none the specified unbounded complex comparison or its chain formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.counit",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:30Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read ChangeOfRings.lean:441-650: ordinary coextension action and adjunction only. Semantic hits give finite-dimensional representation duals, ordinary dualTensorHom, natural transformations of abstract derived functors, and Tor functors, none the specified unbounded complex comparison or its chain formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula comparison into the right derived scalar coextension functor is represented by a K flat tensor K injective Hom chain map",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-22T06:46:40Z\", \"tool\": \"leanfinder\", \"query\": \"The projection formula comparison into the right derived scalar coextension functor is represented by a K flat tensor K injective Hom chain map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor_map\", \"Rep.Tor_map\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor_obj\"], \"digest\": \"c9de45e01b00dd09\"} Read ChangeOfRings.lean:441-650: ordinary coextension action and adjunction only. Semantic hits give finite-dimensional representation duals, ordinary dualTensorHom, natural transformations of abstract derived functors, and Tor functors, none the specified unbounded complex comparison or its chain formula.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coextendScalars|restrictCoextendScalarsAdj",
+   "sub": "Algebra/Category/ModuleCat",
+   "results": "{\"t\": \"2026-10-23T12:32:08Z\", \"tool\": \"grep\", \"query\": \"coextendScalars|restrictCoextendScalarsAdj\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"], \"digest\": \"8a042622d6b5ae6d\"} Read ChangeOfRings.lean:441-540,590-675 and Contraction.lean:40-80. Hits concern ordinary coextension and module tensor/dual maps, finite or bounded derived functors, or K-injectivity. None states the arbitrary unbounded tensor-coinduction comparison with these representatives and all choice/naturality clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unbounded derived coinduction has a tensor comparison normalized by evaluation at one and represented using K flat and K injective resolutions",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:32:09Z\", \"tool\": \"leansearch\", \"query\": \"Unbounded derived coinduction has a tensor comparison normalized by evaluation at one and represented using K flat and K injective resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CochainComplex.isKInjective_of_iso\", \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass\", \"CochainComplex.isKProjective_of_op\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\"], \"digest\": \"76ebe02cb093851a\"} Read ChangeOfRings.lean:441-540,590-675 and Contraction.lean:40-80. Hits concern ordinary coextension and module tensor/dual maps, finite or bounded derived functors, or K-injectivity. None states the arbitrary unbounded tensor-coinduction comparison with these representatives and all choice/naturality clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.counit",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:32:09Z\", \"tool\": \"loogle\", \"query\": \"ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.Adjunction.counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read ChangeOfRings.lean:441-540,590-675 and Contraction.lean:40-80. Hits concern ordinary coextension and module tensor/dual maps, finite or bounded derived functors, or K-injectivity. None states the arbitrary unbounded tensor-coinduction comparison with these representatives and all choice/naturality clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation from derived tensor with RHom of an algebra into derived coinduction is represented by f tensor h maps to b maps to q(f tensor h(b))",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:32:10Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation from derived tensor with RHom of an algebra into derived coinduction is represented by f tensor h maps to b maps to q(f tensor h(b))\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.Tor_map\", \"Rep.homEquiv\", \"ModuleCat.monoidalClosedHomEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"Rep.ihom_ev_app_hom\", \"ModuleCat.RestrictionCoextensionAdj.app'\", \"CategoryTheory.Tor'_obj_map\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\"], \"digest\": \"666d1c0ad89e0dee\"} Read ChangeOfRings.lean:441-540,590-675 and Contraction.lean:40-80. Hits concern ordinary coextension and module tensor/dual maps, finite or bounded derived functors, or K-injectivity. None states the arbitrary unbounded tensor-coinduction comparison with these representatives and all choice/naturality clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualTensorHom|def restrictCoextendScalarsAdj|def coextendScalars",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:32:48Z\", \"tool\": \"grep\", \"query\": \"dualTensorHom|def restrictCoextendScalarsAdj|def coextendScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Trace.lean\"], \"digest\": \"81b04318258abd5b\"} Read ChangeOfRings.lean:441-540,590-675 and Contraction.lean:40-80. Hits concern ordinary coextension and module tensor/dual maps, finite or bounded derived functors, or K-injectivity. None states the arbitrary unbounded tensor-coinduction comparison with these representatives and all choice/naturality clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula morphism for restriction of scalars and its right adjoint on unbounded derived categories is the tensor Hom evaluation map",
+   "sub": "",
+   "results": "{\"t\": \"2026-10-23T12:32:50Z\", \"tool\": \"leanfinder\", \"query\": \"The projection formula morphism for restriction of scalars and its right adjoint on unbounded derived categories is the tensor Hom evaluation map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply\", \"ModuleCat.RestrictionCoextensionAdj.app'\"], \"digest\": \"f65e0d8d793364c8\"} Read ChangeOfRings.lean:441-540,590-675 and Contraction.lean:40-80. Hits concern ordinary coextension and module tensor/dual maps, finite or bounded derived functors, or K-injectivity. None states the arbitrary unbounded tensor-coinduction comparison with these representatives and all choice/naturality clauses.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-perfect-algebra-coinduction-tensor",
+  "date": "2026-10-22",
+  "group": "Q92"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Clauses (1) and (2), normal-cone specialization argument, specifically the sentence \"Varshavsky's theorem is proved by specialization to the normal cone of Z\"; technical algebraic duality input reached through trace specialization, relative duality, and algebraic shriek calculus in the recorded via chain. This node proves the perfect-algebra tensor/coinduction input for the one-variable refinement and open-immersion calculation. Extracted subargument of lem-trf-perfect-algebra-coinduction-tensor: old proof steps 1-3 and 7: B-linear model, counit normalization, scalar comparison and naturality without perfectness.",
+   "via": [
+    "lem-trf-perfect-algebra-coinduction-tensor",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-coinduction-tensor-comparison-model",
+  "worker": "stage1",
+  "summary": "Verified arbitrary unbounded representatives by K-flatness and the existing coinduction adjunction; expanded balancing, B-linearity, differential signs, the resolution zigzag and the counit equation. Naturality and independence follow by explicit equalities under the adjunction bijection. No statement correction and no new nodes.",
+  "blueprint": "Technical algebraic input below lem-trf-local-term-locality, clauses (1)-(2), paragraph beginning Varshavsky's theorem is proved by specialization to the normal cone; through the existing via chain and lem-trf-perfect-algebra-coinduction-tensor, this proves the general comparison used before imposing perfectness. Latest blueprint read at literature/blueprint/latest/blueprint/sec-trace-formula/sk-i-curve-zero/lem-trf-local-term-locality.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic ordinary-module K-flat tensor computation and functoriality, clauses (2)-(3); the trace-formula unit provides no replacement for this algebraic derived tensor tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q152-b0a15f8f7",
+  "group": "Q152",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q152-b0a15f8f7 (reviewer sub-agent of L); spot-checked: I read in full the item, every cited statement, and Stacks dualizing.tex 0A70 (line 2211) and 0A71 (line 2235). The delivery is a single commit with no new nodes and no repair note. Its statement and stmt_deps are byte-identical to the Q92 b5a72b26 FIX that added def-pur-kinjective-complex, so that fix is present on this base. Step 1: since F is K-flat, 1⊗j is a quasi-isomorphism, so a=q(1⊗j) is one too; clause (2) with N=V gives F⊗V = K⊗^L D_B. Step 2: I checked that t is balanced and B-linear (t(f⊗ch)(b)=q(f⊗h(bc))). The chain-map identity holds with sign (-1)^p because B[0] has zero differential, and the ⊕ total complex keeps the formula finite. Step 3: I recomputed ε_K U[t]=[a]^{-1}[q][1⊗e_J]=[1⊗j]^{-1}[1⊗e_J]=m_K, so [t]=σ_K by the adjunction bijection. Step 4 is a definitional identification on the same K-injective representatives. Step 5: independence of choices and naturality follow from counit naturality and the interchange law, for arbitrary derived u. Edge cases tested: B=R, K=0, Z→Z/2, the zero ring, unbounded K. Duplicate search (rg -L for coinduction/0A70/0A71) found nothing equal to the item; I read def-trf-derived-coinduction, lem-trf-derived-bimodule-tensor-hom, lem-trf-bimodule-resolved-hom-tensor-models and lem-trf-perfect-source-evaluation-quasi-isomorphism. There is no cycle and no SGA citation. I accept the tool_uses entry lem-pc-derived-tensor-second-factor-functor, the generic K-flat derived tensor; the worker wrote that entry itself (C8, formal only). proof_deps is exactly the union of the step uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CoinductionTensorComparisonModel",
+  "declaration": "ModuleCat.coinduction_tensor_comparison_model",
+  "declarations": [
+   "ModuleCat.coinductionTensorSource",
+   "ModuleCat.coinductionTensorSourceComparison",
+   "ModuleCat.coinductionTensorEvaluationFormula",
+   "ModuleCat.CoinductionTensorCounitNormalized",
+   "ModuleCat.coinductionTensorChainFormula",
+   "ModuleCat.coinduction_tensor_comparison_model"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/CoinductionTensorComparisonModel.lean",
+  "statement": "theorem coinduction_tensor_comparison_model (J : CochainComplex (ModuleCat.{u} R) ℤ) [J.IsKInjective] (η : 𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ) ⟶ J) [QuasiIso η] : (∃ d : (derivedCoinduction f).obj (DerivedCategory.Q.obj (𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ))) ≅ DerivedCategory.Q.obj ((coinductionComplexFunctor f).obj J), d.hom = (derivedCoinduction f).map (DerivedCategory.Q.map η) ≫ (derivedCoinductionModel f J).hom) ∧ (∀ (F : CochainComplex (ModuleCat.{u} R) ℤ), (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F → IsIso ((coinductionTensorSourceComparison f J).app F)) ∧ ∃ σ : coinductionTensorSource f J ⟶ derivedCoinduction f, CoinductionTensorCounitNormalized f J η σ ∧ (∀ τ : coinductionTensorSource f J ⟶ derivedCoinduction f, CoinductionTensorCounitNormalized f J η τ → τ = σ) ∧ (∀ (K K' : DerivedCategory (ModuleCat.{u} R)) (u : K ⟶ K'), σ.app K ≫ (derivedCoinduction f).map u = (coinductionTensorSource f J).map u ≫ σ.app K') ∧ (∀ (K : DerivedCategory (ModuleCat.{u} R)) (F : CochainComplex (ModuleCat.{u} R) ℤ) (hF : (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F) (c : DerivedCategory.Q.obj F ≅ K) (I : CochainComplex (ModuleCat.{u} R) ℤ) [I.IsKInjective] (q : F ⊗ J ⟶ I) [QuasiIso q], ∃ a : K ≅ DerivedCategory.Q.obj I, c.hom ≫ a.hom = DerivedCategory.Q.map ((ρ_ F).inv ≫ F ◁ η ≫ q) ∧ ∃ t : ((((mixedTensor f).flip.map₂CochainComplex).obj F).obj ((coinductionComplexFunctor f).obj J)) ⟶ ((coinductionComplexFunctor f).obj I), coinductionTensorChainFormula f F J I q t ∧ σ.app K ≫ (derivedCoinduction f).map a.hom ≫ (derivedCoinductionModel f I).hom = (coinductionTensorSource f J).map c.inv ≫ (coinductionTensorSourceComparison f J).app F ≫ DerivedCategory.Q.map t ∧ ∃ e : ((restrictScalars f).mapHomologicalComplex (.up ℤ)).obj ((((mixedTensor f).flip.map₂CochainComplex).obj F).obj ((coinductionComplexFunctor f).obj J)) ⟶ F ⊗ J, coinductionTensorEvaluationFormula f F J e ∧ ((restrictScalars f).mapHomologicalComplex (.up ℤ)).map t ≫ coinductionEvaluation f I = e ≫ q) ∧ (∀ (J' : CochainComplex (ModuleCat.{u} R) ℤ) [J'.IsKInjective] (η' : 𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ) ⟶ J') [QuasiIso η'] (σ' : coinductionTensorSource f J' ⟶ derivedCoinduction f), CoinductionTensorCounitNormalized f J' η' σ' → (∃ k : J ⟶ J', DerivedCategory.Q.map η ≫ DerivedCategory.Q.map k = DerivedCategory.Q.map η') ∧ (∀ (k : J ⟶ J'), DerivedCategory.Q.map η ≫ DerivedCategory.Q.map k = DerivedCategory.Q.map η' → IsIso (((DerivedCategory.exists_derivedTensor_second_factor_functor f).2.choose).map ((coinductionComplexFunctor f).map k)) ∧ (((DerivedCategory.exists_derivedTensor_second_factor_functor f).2.choose).map ((coinductionComplexFunctor f).map k)) ≫ σ' = σ))",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the published mixed tensor universal functor/computation map and canonical derived coinduction. The representative-normalized unique natural transformation is stated for arbitrary unbounded inputs, all K-flat and K-injective models, and comparison maps between unit resolutions commuting after localization. Helper definitions only name these existing functors and explicit formula predicates."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b67b3cff8",
+  "group": "NM",
+  "result": "pass",
+  "note": "Read item, all 8 stmt_deps, DerivedCoinductionAdjunction, DerivedTensorSecondFactorFunctor, MixedTotalTensor, Mathlib CoextendScalars (action h(b'b)), parent PerfectAlgebraCoinductionTensor. Statement verbatim in file; node differs from live only in lean. sigma pinned by K-flat counit normalization + uniqueness (= adjunct of rho(1⊗eps)); V represents D_B via C_B(Qη)≫model; representative clause for all F,c,I,q with a fixed by q(1⊗η), B-linear chain map t(h⊗(b⊗x))(b')=q(x⊗h(b'b)), localization equation and U(t)≫ev_I=e≫q; J'-independence clause true (qis between K-injectives is a homotopy equivalence, dependency gives IsIso T.map); naturality for all derived u; no extra hypotheses, no invertibility. Helpers real with source/blueprint docstrings; no name collisions; report sections present. Notes: common universe u inherited from coinduction dep; scalar-restriction clause rendered via the same CoextendScalars.equiv formula. No compile (no file changed)."
+ }
+}

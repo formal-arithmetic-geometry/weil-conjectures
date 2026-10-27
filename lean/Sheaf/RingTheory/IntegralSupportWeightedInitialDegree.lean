@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q73
 -/
 
-import Mathlib.Algebra.MonoidAlgebra.MapDomain
-import Mathlib.GroupTheory.Finiteness
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import Sheaf.AlgebraicGeometry.FineFanBlowup
+module
+
+public import Mathlib.Algebra.MonoidAlgebra.MapDomain
+public import Mathlib.GroupTheory.Finiteness
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
 import Sheaf.RingTheory.MonoidAlgebraDomainFraction
 
 /-!
@@ -17,6 +19,8 @@ Source: Illusie--Laszlo--Orgogozo, Exposé VIII, Lemma 3.2.9 and the monomial-ba
 normalization argument, printed p.104. The least-weight argument is expanded in the DAG
 (blueprint: lem-trf-integral-support-weighted-initial-degree).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 

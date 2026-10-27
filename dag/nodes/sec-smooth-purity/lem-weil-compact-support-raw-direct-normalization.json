@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-compact-support-raw-direct-normalization",
+ "kind": "statement",
+ "title": "Native direct evaluation satisfies the canonical derived unit equation",
+ "statement": "For any sequence of commutative rings $R_n$ with adjacent transition maps $q_n:R_{n+1}\\to R_n$, morphism of schemes $g:Z\\to Y$, and index $n$, the specified native evaluation comparison $\\mathrm{evalP}_{g,n}$ is unit-normalized relative to the ordinary comparison $\\mathrm{moduleEvalP}_{g,n}$ and the specified evaluation localization factors [def-sp-varying-ring-operations]. More precisely, on every cochain complex $I$ of native sequence modules, compose the unit of derived pushforward with evalP and then the image of the source evaluation localization factor: this equals the target evaluation localization factor followed by the localized map of moduleEvalP and the derived unit of level-n pushforward. This is the unitNormalized equation of [lem-pur-derived-square-normalization-naturality], with no cartesianness or finiteness condition on the sequence.",
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-pur-derived-square-normalization-naturality"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0D6J; Zheng Construction 4.1; derived adjunction unit normalization."
+ },
+ "proof": [
+  {
+   "text": "The moduleEvalG comparison is normalized by the two ordinary adjunction units. The inverse-mate identity therefore identifies the mate of moduleEvalG.inv with moduleEvalP.hom. Apply localized_mate_cochain_normalization to moduleEvalG.symm on the given cochain complex. Precompose by the target evaluation localization factor and cancel the inverse factor. Identify the cochain unit with rightDerivedFunctorUnitQ through the quotient localization factors. Finally unfold the specified evalP mate and its adjunctions: its expression is exactly the localized inverse-mate square just obtained, proving the unitNormalized equation on every complex.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-pur-derived-square-normalization-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-pur-derived-square-normalization-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6E and 0D6J; normalization of the specified localized adjunction mate."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image evaluation of inverse systems commutes with coefficient restriction transitions",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval, Module.DirectLimit.of_f and InverseSystem.limit; none concerns derived module-sheaf direct image.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a derived system commutes with coefficient transitions under extension by zero and direct image",
+   "results": "8 hits, including AdicCompletion.transitionMap_comp_eval and InverseSystem.globalEquiv_compatibility; none treats module-sheaf derived evaluation.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits, including CategoryTheory.NatTrans.naturality. It supplies the categorical naturality used to paste squares but not either geometric square.",
+   "date": "2026-10-27",
+   "verdict": "Generic naturality only."
+  },
+  {
+   "tool": "grep",
+   "query": "evalP.*[Tt]ransition|evalJ.*[Tt]ransition|[Tt]ransition.*eval[JP]",
+   "results": "0 hits in Mathlib. Local project search finds SystemPushforwardRestrictionTransition in different Geometry coordinates, and the assigned compact-support theorem.",
+   "date": "2026-10-27",
+   "verdict": "No native single-operation statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportNativeDirectTransition",
+  "date": "2026-10-27",
+  "group": "C9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-compact-support-native-direct-transition",
+   "place": "Step 2: the native evaluation unit equation before specialization of coefficients.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportRawDirectNormalization",
+  "file": "lean/Sheaf/Paper/CompactSupportRawDirectNormalization.lean",
+  "declaration": "WeilConjectures.compactSupportRawDirectNormalization",
+  "statement": "theorem compactSupportRawDirectNormalization\n    (R : ℕ → CommRingCat.{u + 1}) (q : ∀ n, R (n + 1) ⟶ R n)\n    {Z Y : Scheme.{u}} (g : Z ⟶ Y) (n : ℕ) :\n    CategoryTheory.ExactDerivedSquare.unitNormalized.{u + 1, u + 2}\n      (ProEtale.VaryingRing.push R q g) (ProEtale.StrictTower.moduleDirectImage (R n) g)\n      (ProEtale.VaryingRing.eval R q Z n) (ProEtale.VaryingRing.eval R q Y n)\n      (ProEtale.VaryingRing.ev R q Z n) (ProEtale.VaryingRing.ev R q Y n)\n      (ProEtale.VaryingRing.eval R q Z n).mapDerivedCategoryFactors\n      (ProEtale.VaryingRing.eval R q Y n).mapDerivedCategoryFactors\n      (ProEtale.VaryingRing.moduleEvalP R q g n).hom\n      (ProEtale.VaryingRing.evalP R q g n).hom",
+  "branch": "sheaf-dag",
+  "by": "C9",
+  "date": "2026-10-27",
+  "declarations": [
+   "WeilConjectures.compactSupportRawDirectNormalization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C9",
+  "result": "pass",
+  "landing": "20261027T034626-L-3667110",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

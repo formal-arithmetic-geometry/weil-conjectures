@@ -1,0 +1,131 @@
+{
+ "id": "lem-pur-strict-refinement-restriction-squares",
+ "kind": "statement",
+ "title": "Coefficient and arithmetic restriction preserve normalized strict refinements",
+ "statement": "Let $\\ell$ be prime and $E\\to F$ a $\\mathbf Q_\\ell$-algebra homomorphism between finite extensions of $\\mathbf Q_\\ell$, with integer rings $A$ and $B$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$, use the ordinary derived category of strict constant-$A$ or constant-$B$ module towers on its small pro-etale site [def-cbc-strict-constant-tower-operations]. Let $U_W$ be coefficient restriction and let $P_W^{(e)}$ be arithmetic selection of levels $e(n+1)$, with $e\\ge1$ [def-pur-constant-scalar-tower-adjunction, lem-pur-compact-support-strict-scalar-mate]. Fix a morphism $f:X\\to Y$, compactifications $c,d$ with quasi-compact open immersions, and a refinement $r:c\\to d$ [def-weil-compactifications-refinements]. Write $I_H^c=R_{p_c,H}J_{j_c,H}$ and $C_H(r):I_H^d\\to I_H^c$ for the actual normalized compositionC of [def-cbc-strict-tower-composition-maps]. Let $\\delta_c: I_A^c U_X\\to U_Y I_B^c$ denote pastedRestriction: first the ordinary open restriction square, then the unit-normalized proper restriction square. Let $\\sigma_c:P_Y^{(e)} I_B^c\\to I_B^c P_X^{(e)}$ denote reindexImage, using the prescribed derived composite units [lem-pur-compact-support-strict-scalar-mate]. Then for every derived strict $B$-tower $N$ on $X$,\n$$\\delta_c(N)\\circ C_A(r)(U_X N)=U_Y(C_B(r)(N))\\circ\\delta_d(N),$$\nand for every positive $e$,\n$$\\sigma_c(N)\\circ P_Y^{(e)}(C_B(r)(N))=C_B(r)(P_X^{(e)}N)\\circ\\sigma_d(N).$$\nThese are equalities in the derived categories of strict towers, before finite evaluation or inverse limit; no etale-origin or boundedness assumption is needed for equalities of these normalized transformations.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); auxiliary comparison Step 7 of lem-pur-compact-support-strict-scalar-refinement, on constant-ring strict towers."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-cbc-strict-constant-tower-operations",
+  "def-pur-constant-scalar-tower-adjunction",
+  "def-weil-compactifications-refinements",
+  "def-cbc-strict-tower-composition-maps",
+  "lem-pur-compact-support-strict-scalar-mate"
+ ],
+ "proof": [
+  {
+   "text": "Expand compositionC into the local identity-left proper/open seed, whiskered by the final proper image, followed by the proper compositor with r.hom_g transport. Apply strictRefinementSeedRestriction to c.i,d.i,r.hom and strictProperCompositionRestriction to r.hom,d.g,c.g.",
+   "uses": [
+    "lem-pur-strict-refinement-seed-restriction",
+    "lem-pur-strict-proper-composition-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At each object use naturality of the A-proper compositor to move the c-open coefficient comparison to its source. Substitute the coefficient proper-composition square, apply the final A-proper functor to the seed equation, and move the seed through the final properRestriction by its naturality. Functoriality and associativity give the first displayed equation.",
+   "uses": [
+    "lem-pur-strict-refinement-seed-restriction",
+    "lem-pur-strict-proper-composition-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For positive arithmetic selection substitute the reindexing proper-composition square, move the c-open reindex comparison through the proper compositor by naturality, then move the seed through the final reindexProper. Apply final proper image to the arithmetic seed equation. This gives the second displayed equation. NatTrans.ext combines the component identities.",
+   "uses": [
+    "lem-pur-strict-refinement-seed-restriction",
+    "lem-pur-strict-proper-composition-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-strict-refinement-seed-restriction",
+  "lem-pur-strict-proper-composition-restriction"
+ ],
+ "proof_origin": {
+  "by": "J8",
+  "kind": "Lean decomposition with proved pasting",
+  "source": {
+   "document": "literature/stacks-project/more-etale.tex",
+   "place": "Tags 0F7B (lemma-shriek-proper-and-open), 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); auxiliary comparison Step 7 of lem-pur-compact-support-strict-scalar-refinement, on constant-ring strict towers."
+  },
+  "note": "The original hole is closed by explicit functoriality and naturality. Two smaller component identities remain: the seed before any final proper image and proper composition without any open immersion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.unit_mateEquiv_symm",
+   "results": "CategoryTheory.unit_mateEquiv_symm",
+   "date": "2026-10-26",
+   "verdict": "Generic mate and module restriction lemmas only; no specialized strict refinement square."
+  },
+  {
+   "tool": "grep",
+   "query": "reindexImage|pastedRestriction",
+   "results": "No matches.",
+   "date": "2026-10-26",
+   "verdict": "Generic mate and module restriction lemmas only; no specialized strict refinement square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coefficient restriction and reindexing commute with the adjunction mate for a proper open refinement of compactifications",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction, CategoryTheory.Adjunction.restrictFullyFaithful, Matrix.adjugate_reindex, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, IsOpenMap.adjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app",
+   "date": "2026-10-26",
+   "verdict": "Generic mate and module restriction lemmas only; no specialized strict refinement square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportStrictScalarRefinement",
+  "date": "2026-10-26",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Coefficient change for compact support: auxiliary comparison Step 7, preservation of the normalized refinement under coefficient restriction and restriction to ramified indices.",
+   "via": [
+    "lem-pur-compact-support-strict-scalar-refinement"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictRefinementRestrictionSquares",
+  "file": "lean/Sheaf/Paper/StrictRefinementRestrictionSquares.lean",
+  "declaration": "WeilConjectures.PurStrictScalar.strictRefinementRestrictionSquares",
+  "statement": "theorem strictRefinementRestrictionSquares\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]\n    (i : E →ₐ[ℚ_[l]] F)\n    {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}\n    [QuasiCompact c.i] [QuasiCompact d.i] (r : c.Refinement d) :\n    (Functor.whiskerLeft (U l E F i X)\n        (compositionC (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) r) ≫\n        (pastedRestriction l E F i c).hom =\n      (pastedRestriction l E F i d).hom ≫ Functor.whiskerRight\n        (compositionC (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) r)\n        (U l E F i Y)) ∧\n    ∀ (e : ℕ) (he : 1 ≤ e),\n      Functor.whiskerRight\n          (compositionC (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) r)\n          (subsequence l F Y e) ≫ (reindexImage l F c e he).hom =\n        (reindexImage l F d e he).hom ≫ Functor.whiskerLeft (subsequence l F X e)\n          (compositionC (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) r)",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T065441-L-2984227",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261026T195641-L-3151598",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

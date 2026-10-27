@@ -1,0 +1,344 @@
+{
+ "id": "lem-sfb-minimal-parabolic-split-centralizers",
+ "kind": "statement",
+ "title": "Centralizers of maximal split tori in a minimal rational parabolic",
+ "statement": "Let $k$ be any field [def-weil-field] and let $G$ be a reductive $k$-group [def-sc-group-scheme, def-sfb-reductive-torus-centralizer-terminology]: smooth, affine of finite type and geometrically connected, with no nontrivial smooth connected normal unipotent subgroup after extension to an algebraic closure. Unipotent means admitting a faithful finite-dimensional matrix representation in which all geometric points are unipotent matrices. A split torus is a group scheme isomorphic over $k$ to $\\mathbf G_{m,k}^r$, $r\\geq0$, where $\\mathbf G_{m,k}=\\operatorname{Spec}k[z,z^{-1}]$ with multiplication of units. A parabolic $k$-subgroup $P\\subseteq G$ means a smooth geometrically connected closed subgroup [def-weil-closed-immersion] whose fppf right-coset sheaf $G/P$ is represented by a proper finite-type $k$-scheme [def-weil-proper-morphism, def-weil-finite-type-morphism]. Here the coset sheaf is the sheafification of $A\\mapsto G(A)/P(A)$ for faithfully flat finitely presented coverings of commutative $k$-algebras, and $G(A)=\\operatorname{Hom}_k(\\operatorname{Spec}A,G)$. A minimal parabolic is one containing no strictly smaller parabolic $k$-subgroup; proper means $P\\ne G$. Let $P$ be a minimal parabolic of $G$ and let $S_1,S_2\\subseteq P$ be closed split tori maximal under inclusion among closed split tori of $P$. For $S\\subseteq G$ define $C_G(S)(A)$ to consist of the $g\\in G(A)$ such that for every commutative $A$-algebra $B$ and every $s\\in S(B)$ the elements $g_B,s$ commute. The functors $C_G(S_i)$ are represented by reductive closed $k$-subgroups $L_i\\subseteq P$. Let $U=R_uP$ be the largest smooth geometrically connected normal unipotent $k$-subgroup of $P$. Multiplication gives isomorphisms $U\\rtimes L_i\\xrightarrow{\\sim}P$, where the action is conjugation and the underlying scheme is $U\\times_kL_i$. There exists $u\\in U(k)$ with $uL_1u^{-1}=L_2$ as subgroup schemes. This statement includes $P=G$ when $G$ has no proper parabolic. No perfectness or infinitude assumption is made on $k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.6(b),(c), printed pp.545--546, restricted to minimal parabolics. The missing minimality hypothesis in (b) is confirmed by the author errata, https://www.jmilne.org/math/Books/iagerrata.html, entry p.545 et seq. The same restriction makes (c) usable here. Only existence of the conjugator is asserted."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sfb-rational-parabolic-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "For each $i\\in\\{1,2\\}$ apply [lem-sfb-parabolic-prescribed-split-cocharacter] to $P$ and its given maximal split torus $S_i$. This supplies $\\lambda_i^0:\\mathbf G_m\\to S_i$ with $P=P_{\\lambda_i^0}$, as equality of the limit functors on all algebra-valued points. This application uses maximality inside $P$ exactly as assumed; it does not require that $S_i$ already be known maximal in $G$.",
+   "uses": [
+    "lem-sfb-parabolic-prescribed-split-cocharacter"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 25.1 and the cocharacter choice in 25.6(b), pp.544,546."
+   }
+  },
+  {
+   "text": "Fix $i$, write $S=S_i$ and $\\lambda^0=\\lambda_i^0$, and choose a closed faithful embedding $G\\hookrightarrow\\operatorname{GL}(V)$ by [lem-sfb-affine-group-faithful-linear-representation]. By [lem-sfb-split-torus-representation-weight-decomposition], choose a basis with $S$-characters $\\chi_1,\\ldots,\\chi_n$ (repetitions allowed). Use [lem-sfb-split-torus-hom-matrices] to identify characters and cocharacters of $S\\simeq\\mathbf G_m^r$ with integral exponent vectors and their usual pairing. Choose an integral vector $\\mu$ nonorthogonal to each nonzero difference $\\chi_a-\\chi_b$: substituting $(1,M,\\ldots,M^{r-1})$ into each of the finitely many nonzero integral linear forms excludes only finitely many integers $M$. For $r=0$ there are no such differences and take $\\mu=0$. Put $\\lambda_i=N\\lambda^0+\\mu$ for a positive integer $N$ larger than every $|\\langle\\chi_a-\\chi_b,\\mu\\rangle|$. Each nonzero pairing with $\\lambda^0$ retains its sign, and each nonzero difference has nonzero pairing with $\\lambda_i$. This is an integral choice, so no supply of rational field elements is needed.",
+   "uses": [
+    "lem-sfb-affine-group-faithful-linear-representation",
+    "lem-sfb-split-torus-representation-weight-decomposition",
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 13.51, p.274, finite weight separation; explicit large-N perturbation retaining the original chamber signs."
+   }
+  },
+  {
+   "text": "In that basis conjugation of a matrix entry $g_{ab}$ by a cocharacter $\\nu$ multiplies it by $t^{\\langle\\chi_a-\\chi_b,\\nu\\rangle}$. Over any $k$-algebra $A$, extension to $A[t]$ is equivalent to $g_{ab}=0$ for each negative exponent. The determinant stays the original invertible constant. Such an extension lies in the closed subgroup $G$: every defining equation vanishes after Laurent restriction, and $A[t]\\hookrightarrow A[t,t^{-1}]$ is injective. The sign preservation in step 2 therefore gives $P_{\\lambda_i}\\subseteq P_{\\lambda_i^0}=P$. By [lem-sfb-reductive-cocharacter-parabolic-geometry], $P_{\\lambda_i}$ is parabolic, so minimality of $P$ makes this inclusion equality. Commutation with $\\lambda_i$ forces $g_{ab}=0$ whenever its exponent is nonzero, by comparing Laurent coefficients over $A$. Step 2 makes those exactly the pairs with $\\chi_a\\ne\\chi_b$. These are also exactly the equations for commuting with $S_i$: the monomials for distinct characters are distinct basis elements of $A[z_1^{\\pm1},\\ldots,z_r^{\\pm1}]$. Thus $C_G(S_i)=Z_{\\lambda_i}$ as functors, including on nonreduced test algebras. In what follows write $L_i=Z_{\\lambda_i}$.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(b) proof, pp.265--266 (matrix equations and intersection with a faithful embedding); 13.51, p.274; corrected 25.6(b), p.546."
+   }
+  },
+  {
+   "text": "The cocharacter geometry node gives represented smooth geometrically connected closed groups $L_i=Z_{\\lambda_i}$ and $V_i=U_{\\lambda_i}$, a retraction $r_i:P\\to L_i$ with kernel $V_i$, a split-unipotent series for $V_i$, and the multiplication isomorphism $V_i\\rtimes L_i\\simeq P$. After extension to $\\bar k$, the same node identifies $L_{i,\\bar k}$ with the centralizer of $\\lambda_{i,\\bar k}$; the matrix equations of step 3 identify it also with $C_{G_{\\bar k}}(S_{i,\\bar k})$. Apply [lem-sfb-reductive-torus-fixed-subgroup] over the algebraically closed field $\\bar k$: $G_{\\bar k}$ is reductive by hypothesis and $S_{i,\\bar k}$ is a torus. This makes $L_{i,\\bar k}$ reductive. Unipotence of $V_i$ in the item's sense is read off in $G\\hookrightarrow\\operatorname{GL}(V)$: order the basis of step 2 by decreasing $\\langle\\chi_a,\\lambda_i\\rangle$. By the entry formula of step 3, a point $g\\in V_i(A)$ has $g_{ab}=0$ when $\\langle\\chi_a-\\chi_b,\\lambda_i\\rangle<0$ and $g_{ab}=\\delta_{ab}$ when it is $0$, so $g$ is block upper unitriangular and $(g-I)^n=0$. Together with smoothness, affineness, finite type and geometric connectedness already obtained, this is exactly reductivity of $L_i$ in the item.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-reductive-torus-fixed-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 17.59, printed p.371 (the all-field consequence of 17.57); Theorem 13.33 and 25.6(b)."
+   }
+  },
+  {
+   "text": "We verify that $V_i$ is the specified radical $U$, rather than just an arbitrary normal unipotent subgroup. Let $N\\subseteq P$ be any smooth geometrically connected normal unipotent $k$-subgroup. Over $F=\\bar k$, factor $r_{i,F}|_{N_F}$ by [lem-sfb-affine-homomorphism-flat-image] into a faithfully flat map onto a closed image $I\\subseteq L_{i,F}$. The map $r_{i,F}:P_F\\to L_{i,F}$ itself is faithfully flat: under $P_F\\simeq V_{i,F}\\times L_{i,F}$ its coordinate map is $F[L_i]\\to F[V_i]\\otimes_F F[L_i]$, and tensoring with a nonzero vector space is exact and detects zero. Thus [lem-sfb-unipotent-normal-quotient-image] applies to this map and $N_F$, and says $I$ is smooth connected normal and unipotent. Reductivity of $L_{i,F}$ forces $I=1$. Hence $N_F\\subseteq V_{i,F}$. This inclusion descends to $k$: every defining equation of $V_i$ pulls back to a function on $N$ whose tensor with $F$ is zero, so the function was zero, since a field extension is faithful on vector spaces. Conversely $V_i$ is smooth geometrically connected normal unipotent by step 4. It is therefore the largest such subgroup, so $V_1=U=V_2$. The two multiplication isomorphisms of step 4 are exactly $U\\rtimes L_i\\simeq P$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-unipotent-normal-quotient-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 17.60 proof, printed p.372: the reductive quotient identifies the cocharacter kernel with the unipotent radical; explicit image and descent argument."
+   }
+  },
+  {
+   "text": "Factor $\\lambda_1:\\mathbf G_m\\to P$ through its faithfully flat image $T\\subseteq P$ by [lem-sfb-affine-homomorphism-flat-image]. By [lem-sfb-field-split-torus-flat-quotient], $T$ is a split torus. Factor $r_2|_T$ the same way through a closed image $D\\subseteq L_2$, again a split torus by that quotient node. Under $P\\simeq U\\rtimes L_2$ the inverse image $H=r_2^{-1}(D)$ is exactly $U\\rtimes D$, with conjugation action. It is closed, and $T\\subseteq H$ because $r_2|_T$ factors through $D$. Each member of the series of $U$ from step 4 is smooth, connected and contains the rational identity point, so is geometrically connected by [lem-sbc-connected-rational-point-geometrically-connected]; with the unipotence of step 4, $U$ is split unipotent as the absorption lemma requires. Apply [lem-sfb-split-unipotent-torus-absorption] to this $U$, the split torus $D$ and this $T$. It gives $u\\in U(k)$ such that $uTu^{-1}\\subseteq D\\subseteq L_2$. Consequently $\\nu=\\operatorname{Int}(u)\\circ\\lambda_1$ factors through $L_2$. Conjugating the all-algebra limit and commuting formulas gives $P_\\nu=uPu^{-1}=P$ (since $u\\in P(k)$) and $C_G(\\nu)=uL_1u^{-1}$. Write the latter reductive group as $M$.",
+   "uses": [
+    "lem-sfb-affine-homomorphism-flat-image",
+    "lem-sfb-field-split-torus-flat-quotient",
+    "lem-sbc-connected-rational-point-geometrically-connected",
+    "lem-sfb-split-unipotent-torus-absorption"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 16.54, printed p.344, in place of the bare Springer reference in 25.6(c); explicit split-solvable reduction."
+   }
+  },
+  {
+   "text": "Since $L_2=C_G(\\lambda_2)$, the cocharacters $\\nu$ and $\\lambda_2$ commute on all test algebras. Thus $\\lambda_2$ factors through $M=C_G(\\nu)$ as well. We show $M=L_2$ using the cocharacter geometry and the weight decomposition. In a reductive closed subgroup $J\\subseteq G$ containing a cocharacter $\\eta$, if $J\\subseteq P_\\eta$, then $P^J_\\eta=J$: the extended orbit stays in $J$ because its defining equations vanish in $A[t,t^{-1}]$ and hence in $A[t]$. Apply [lem-sfb-reductive-cocharacter-parabolic-geometry] to the reductive group $J$. Its $U^J_\\eta$ is smooth geometrically connected and normal in $P^J_\\eta=J$; it is unipotent because, in a basis of $V$ splitting $V$ into $\\eta$-weights by [lem-sfb-split-torus-representation-weight-decomposition] (rank one), the argument of step 4 makes its points block upper unitriangular. Thus it is a smooth geometrically connected normal unipotent subgroup of $J$, so is trivial by reductivity after $\\bar k$ and faithful scalar extension. The same node gives $J=Z^J_\\eta$, so $J$ centralizes $\\eta$. Use this argument first with $(J,\\eta)=(M,\\lambda_2)$: here $M\\subseteq P=P_{\\lambda_2}$ and $\\lambda_2$ factors through $M$, giving $M\\subseteq L_2$. Then use $(J,\\eta)=(L_2,\\nu)$: here $L_2\\subseteq P=P_\\nu$ and $\\nu$ factors through $L_2$, giving $L_2\\subseteq M$. Hence $uL_1u^{-1}=M=L_2$. No dimension or rational-point-density inference is used.",
+   "uses": [
+    "lem-sfb-reductive-cocharacter-parabolic-geometry",
+    "lem-sfb-split-torus-representation-weight-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 13.33(b), pp.265--266; the reductive P(lambda)=G argument of Proposition 25.2, printed p.545, applied twice to the two Levi subgroups."
+   }
+  },
+  {
+   "text": "All constructions and inclusions above are over $k$ and on every algebra-valued test, so the equalities are subgroup-scheme equalities and the conjugator is the single rational point $u\\in U(k)$ of step 6. The empty character-difference set and the zero cocharacter were allowed in steps 1--3. In particular the argument includes $P=G$ when it is minimal; then $U=1$ by reductivity and the same argument gives $L_1=L_2=G$. No step uses infinitude or perfectness of $k$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Endpoint and rank-zero checks for the preceding argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-parabolic-prescribed-split-cocharacter",
+  "lem-sfb-affine-group-faithful-linear-representation",
+  "lem-sfb-split-torus-representation-weight-decomposition",
+  "lem-sfb-split-torus-hom-matrices",
+  "lem-sfb-reductive-cocharacter-parabolic-geometry",
+  "lem-sfb-reductive-torus-fixed-subgroup",
+  "lem-sfb-affine-homomorphism-flat-image",
+  "lem-sfb-unipotent-normal-quotient-image",
+  "lem-sfb-field-split-torus-flat-quotient",
+  "lem-sfb-split-unipotent-torus-absorption",
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 25.6(b), corrected to minimal P by the author errata; Theorem 13.33, Corollary 17.59, Proposition 17.60 and Proposition 16.54. Q126 supplies the weight perturbation and the split-solvable proof of the conjugacy clause, instead of treating 25.6(c) as an unexplained reference."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ll]evi.*[Pp]arabolic|[Mm]inimal.*[Pp]arabolic|[Cc]entraliz.*[Ss]plit.*[Tt]or",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"grep\", \"query\": \"[Ll]evi.*[Pp]arabolic|[Mm]inimal.*[Pp]arabolic|[Cc]entraliz.*[Ss]plit.*[Tt]or\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup centralizers, Sylow fusion and Lie Cartan normalizers do not provide reductive group-scheme Levi centralizers or a rational unipotent conjugator."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Centralizers of maximal split tori in a minimal rational parabolic are conjugate Levi subgroups by the unipotent radical",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"leansearch\", \"query\": \"Centralizers of maximal split tori in a minimal rational parabolic are conjugate Levi subgroups by the unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.centralizer\", \"ConjAct.stabilizer_eq_centralizer\", \"AddSubgroup.centralizer_univ\", \"Subgroup.centralizer_eq_comap_stabilizer\", \"Subgroup.centralizer_univ\", \"Subgroup.centralizer_eq_iInf\", \"Submonoid.coe_centralizer\", \"AddSubgroup.centralizer_eq_iInf\"], \"digest\": \"a013e6ac1b5a69c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup centralizers, Sylow fusion and Lie Cartan normalizers do not provide reductive group-scheme Levi centralizers or a rational unipotent conjugator."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"centralizer\", \"torus\"",
+   "results": "{\"t\": \"2026-10-24T04:44:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"centralizer\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup centralizers, Sylow fusion and Lie Cartan normalizers do not provide reductive group-scheme Levi centralizers or a rational unipotent conjugator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a minimal parabolic of a reductive group centralizers of maximal split tori are reductive Levi complements and conjugate under rational unipotent radical points",
+   "results": "{\"t\": \"2026-10-24T04:44:07Z\", \"tool\": \"leanfinder\", \"query\": \"In a minimal parabolic of a reductive group centralizers of maximal split tori are reductive Levi complements and conjugate under rational unipotent radical points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.hasCentralRadical_and_of_isIrreducible_of_isFaithful\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"Sylow.conj_eq_normalizer_conj_of_mem_centralizer\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"LieSubalgebra.normalizer_eq_self_of_isCartanSubalgebra\", \"ConjClasses.mk_bijOn\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\"], \"digest\": \"826cae578ce11771\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup centralizers, Sylow fusion and Lie Cartan normalizers do not provide reductive group-scheme Levi centralizers or a rational unipotent conjugator."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Levi factors from maximal split torus centralizers in a minimal parabolic subgroup are rationally unipotent conjugate",
+   "results": "{\"t\": \"2026-10-24T04:44:10Z\", \"tool\": \"leanfinder\", \"query\": \"Levi factors from maximal split torus centralizers in a minimal parabolic subgroup are rationally unipotent conjugate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"RootPairing.GeckConstruction.h_mem_cartanSubalgebra'\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"LieAlgebra.exists_isCartanSubalgebra_engel\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"LieSubalgebra.isCartanSubalgebra_iff_isUcsLimit\"], \"digest\": \"90438169e3544c9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract subgroup centralizers, Sylow fusion and Lie Cartan normalizers do not provide reductive group-scheme Levi centralizers or a rational unipotent conjugator."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]arabolic|[Cc]ocharacter|[Ll]evi",
+   "results": "{\"t\": \"2026-10-24T07:04:02Z\", \"tool\": \"grep\", \"query\": \"[Pp]arabolic|[Cc]ocharacter|[Ll]evi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/Ring/Compact.lean\", \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/NumberTheory/ModularForms/Cusps.lean\", \"Mathlib/Topology/Sheaves/LocallySurjective.lean\"], \"digest\": \"7b7083fcd61cb6ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Any split torus in a split solvable algebraic group is conjugate into a fixed torus complement by a rational point of the unipotent radical",
+   "results": "{\"t\": \"2026-10-24T07:04:03Z\", \"tool\": \"leansearch\", \"query\": \"Any split torus in a split solvable algebraic group is conjugate into a fixed torus complement by a rational point of the unipotent radical\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddGroupExtension.IsConj.refl\", \"GroupExtension.IsConj.refl\", \"GroupExtension.IsConj\", \"GroupExtension.IsConj.setoid\", \"LieAlgebra.radical_eq_top_of_isSolvable\", \"GroupExtension.Splitting.conjAct\", \"AddGroupExtension.IsConj\", \"LieAlgebra.instIsSolvableSubtypeMemLieSubalgebraTop\"], \"digest\": \"0f499c09a578ebec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"parabolic\", \"cocharacter\"",
+   "results": "{\"t\": \"2026-10-24T07:04:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"parabolic\\\", \\\"cocharacter\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A parabolic subgroup of a reductive group over a field is the limit subgroup of a cocharacter in any prescribed maximal split torus it contains",
+   "results": "{\"t\": \"2026-10-24T07:04:12Z\", \"tool\": \"leanfinder\", \"query\": \"A parabolic subgroup of a reductive group over a field is the limit subgroup of a cocharacter in any prescribed maximal split torus it contains\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subgroup.IsRegularAtInfty\", \"frattini\", \"Subgroup.widthInfty\", \"RootPairing.GeckConstruction.cartanSubalgebra'\", \"Subgroup.strictPeriods\", \"RootPairing.GeckConstruction.ωConjLieSubmodule_eq_top_iff\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\"], \"digest\": \"87b34fb5eb45b94b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]plit[Tt]orus|[Uu]nipotent.*[Cc]onjug|[Cc]ocharacter|[Pp]arabolic[Ss]ubgroup",
+   "results": "{\"t\": \"2026-10-24T07:08:11Z\", \"tool\": \"grep\", \"query\": \"[Ss]plit[Tt]orus|[Uu]nipotent.*[Cc]onjug|[Cc]ocharacter|[Pp]arabolic[Ss]ubgroup\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every parabolic subgroup of a reductive group is defined by a one parameter subgroup of a chosen maximal split torus contained in the parabolic",
+   "results": "{\"t\": \"2026-10-24T07:08:12Z\", \"tool\": \"leansearch\", \"query\": \"Every parabolic subgroup of a reductive group is defined by a one parameter subgroup of a chosen maximal split torus contained in the parabolic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.GeneralLinearGroup.isParabolic_iff_of_upperTriangular_of_det\", \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"Matrix.GeneralLinearGroup.IsParabolic\", \"Matrix.IsParabolic\", \"Subgroup\", \"Subgroup.one\", \"Sylow.subtype.congr_simp\", \"ClosedSubgroup\"], \"digest\": \"a03cf9c44d85fc11\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSolvable\", \"IsConj\"",
+   "results": "{\"t\": \"2026-10-24T07:08:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsSolvable\\\", \\\"IsConj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A prescribed maximal k split torus of a parabolic subgroup contains a k cocharacter whose associated parabolic equals that subgroup",
+   "results": "{\"t\": \"2026-10-24T07:08:13Z\", \"tool\": \"leanfinder\", \"query\": \"A prescribed maximal k split torus of a parabolic subgroup contains a k cocharacter whose associated parabolic equals that subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.IsKilling.biSup_corootSpace_eq_top\", \"LieAlgebra.corootSpace\", \"LieAlgebra.IsKilling.sl2SubmoduleOfRoot_eq_sup\", \"LieAlgebra.IsKilling.mem_sl2SubalgebraOfRoot_iff\", \"LieAlgebra.cartan_sup_iSup_rootSpace_eq_top\", \"LieAlgebra.IsKilling.biSup_corootSubmodule_eq_cartan\", \"RootPairing.GeckConstruction.cartanSubalgebra_le_lieAlgebra\", \"RootPairing.GeckConstruction.cartanSubalgebra'\"], \"digest\": \"6bb1b3c9f43c9691\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a semidirect product of a split unipotent algebraic group and a split torus every split torus subgroup is conjugate into the torus by a rational unipotent point",
+   "results": "{\"t\": \"2026-10-24T07:08:14Z\", \"tool\": \"leanfinder\", \"query\": \"In a semidirect product of a split unipotent algebraic group and a split torus every split torus subgroup is conjugate into the torus by a rational unipotent point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GroupExtension.IsConj\", \"SemidirectProduct.inr_splitting\", \"GroupExtension.IsConj.refl\", \"GroupExtension.Splitting.conjAct\", \"GroupExtension.IsConj.trans\", \"GroupExtension.Splitting.semidirectProductMulEquiv\", \"SemidirectProduct.inl_aut\", \"GroupExtension.Splitting.semidirectProductToGroupExtensionEquiv\"], \"digest\": \"9b0c077f2a9ef61a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Maximal split tori of a split solvable algebraic group are conjugate by a k rational element of its split unipotent kernel",
+   "results": "{\"t\": \"2026-10-24T07:08:15Z\", \"tool\": \"leanfinder\", \"query\": \"Maximal split tori of a split solvable algebraic group are conjugate by a k rational element of its split unipotent kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LieAlgebra.exists_isCartanSubalgebra_engel\", \"GroupExtension.IsConj\", \"GroupExtension.IsConj.refl\", \"LieAlgebra.exists_isCartanSubalgebra_engel_of_finrank_le_card\", \"GroupExtension.IsConj.trans\", \"LieAlgebra.zeroRootSubalgebra_normalizer_eq_self\", \"GroupExtension.IsConj.setoid\", \"ConjClasses.mk_bijOn\"], \"digest\": \"4b74cd6f9b8562d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  },
+  {
+   "tool": "grep",
+   "query": "def IsConj|def Splitting|isParabolic_iff_of_upperTriangular",
+   "results": "{\"t\": \"2026-10-24T07:10:31Z\", \"tool\": \"grep\", \"query\": \"def IsConj|def Splitting|isParabolic_iff_of_upperTriangular\", \"sub\": \"GroupTheory/GroupExtension\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/GroupTheory/GroupExtension/Defs.lean\"], \"digest\": \"ecd9f72965004525\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern Lie algebras, individual parabolic matrices or abstract-group splittings, not rational cocharacters of reductive group schemes or split-unipotent torus absorption."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-maximal-split-tori-conjugacy",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Remark 3.5, forward implication, printed p.5: integral conjugation into a fixed maximal split torus. Only the complete-DVR case is needed here; the statement is the conjugacy input, not a Cartan factorization. Supporting input: Residue-field base case: rational conjugacy of split tori, before lifting a fixed conjugator. This is over a field and contains no complete-DVR lifting assertion. Supporting field argument, conjugacy step: Milne Theorem 25.10, rational conjugacy of the maximal containing split torus with the prescribed one. Supporting rational-conjugacy argument: Milne 25.10, compare centralizers after putting both maximal split tori in a minimal parabolic; corrected 25.6(b),(c).",
+   "via": [
+    "lem-sfb-field-maximal-split-tori-conjugacy",
+    "lem-sfb-field-split-torus-rational-containment",
+    "lem-sfb-complete-dvr-torus-cocharacter-conjugacy",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-minimal-parabolic-split-centralizers",
+  "worker": "stage1",
+  "summary": "Kept the already corrected minimal-parabolic statement. Split the proof through prescribed-torus cocharacters, a written finite-weight perturbation, geometric reductivity and the universal property of the unipotent radical. Obtained rational conjugacy by absorbing one cocharacter image into a split-solvable torus complement and comparing commuting cocharacters in the two reductive complements. Created two genuinely supporting statement-only nodes; no Lean attachment or Mathlib leaf was found.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) prerequisite chain reaches Milne 25.6(b),(c) through rational split-torus conjugacy. Steps 1--5 supply corrected 25.6(b); steps 6--7 supply its rational unipotent conjugacy input using 16.54; step 8 checks the improper-minimal and rank-zero cases.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-connected-rational-point-geometrically-connected",
+    "why": "Generic scheme fact (connected with a rational point implies geometrically connected), used in step 6 to verify the geometric-connectedness hypothesis of the absorption lemma for the split-unipotent series of U; no node of the unit states it and the unit route is not replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-connected-rational-point-geometrically-connected"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-430abcfc1",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-430abcfc1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all ten cited statements in full, plus Milne iAG pp.544–546 (25.1, 25.2, 25.6, 25.8–25.10) and p.344 (16.54). Statement and stmt_deps are unchanged from live; this is not a re-split. The item is true with the minimality correction (the GL_2, P=G counterexample to printed 25.6(b) checks). Steps 1–8 are mathematically correct: the weight perturbation keeps the signs, minimality gives P_{λ_i}=P, C_G(S_i)=Z_{λ_i} holds on nonreduced test algebras, the k̄-only lemmas are used only after base change, the radical's maximality is proved, the step-6 absorption is valid, and the step-7 double-centralizer argument holds. New node prescribed-split-cocharacter is true. It follows from the converse of Milne 25.1 by Galois-averaging in a maximal torus of C_P(S): the averaged cocharacter lies in the maximal split subtorus, which equals S by maximality. That proof does not need rational conjugacy of split tori, so there is no hidden circularity with the parent lem-sfb-field-maximal-split-tori-conjugacy. New node split-unipotent-torus-absorption is Milne 16.54 applied to U⋊D. Tested on U=1, D=1 and G_a⋊G_m with weight p in char p. Neither new node duplicates an existing node or restates a clause of the item. The dependency closure reaches neither the item nor its parent. Batch-5: the three flagged trf nodes are generic Mathlib leaves (fppf coverings stable under base change, smooth fpqc descent, flat tensor preserves injections), not part of the trace formula or Poincaré duality, so they are accepted. FIX, item only: (1) step 4 adds the matrix proof that V_i=U_λ is unipotent in the item's sense, which steps 5 and 6 need; (2) step 6 makes the series of U geometrically connected, as the absorption lemma requires, via lem-sbc-connected-rational-point-geometrically-connected. This node is from another unit and is accepted as a tool use in split_report.tool_uses. (3) step 7 shows U^J_η is unipotent via the rank-one weight decomposition.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.MinimalParabolicSplitCentralizers",
+  "declaration": "AlgebraicGeometry.minimal_parabolic_split_centralizers",
+  "declarations": [
+   "AlgebraicGeometry.minimal_parabolic_split_centralizers"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/MinimalParabolicSplitCentralizers.lean",
+  "statement": "theorem minimal_parabolic_split_centralizers {k : Type u} [Field k] (G P : Grp (Over (Spec (.of k)))) (hG : ReductiveTorusCentralizer.IsReductive G) (iP : P ⟶ G) (hP : IsMinimalParabolicGroupScheme iP) (S : Fin 2 → Grp (Over (Spec (.of k)))) (iS : ∀ a : Fin 2, S a ⟶ P) (hclosed : ∀ a : Fin 2, IsClosedSubgroupScheme (iS a).hom.hom) (hsplit : ∀ a : Fin 2, ∃ r : ℕ, Nonempty (S a ≅ MultiplicativeType.splitTorus k r)) (hmax : ∀ (a : Fin 2) (T : Grp (Over (Spec (.of k)))) (j : T ⟶ P), IsClosedSubgroupScheme j.hom.hom → (∃ r : ℕ, Nonempty (T ≅ MultiplicativeType.splitTorus k r)) → ∀ f : S a ⟶ T, f ≫ j = iS a → IsIso f) : ∃ (U : Grp (Over (Spec (.of k)))) (iU : U ⟶ P), IsClosedSubgroupScheme iU.hom.hom ∧ IsNormalSubgroupScheme iU.hom.hom ∧ ConnectedSpace ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj U).X.left ∧ SolvableGroupStructure.IsUnipotent U ∧ (∀ (N : Grp (Over (Spec (.of k)))) (j : N ⟶ P), IsClosedSubgroupScheme j.hom.hom → IsNormalSubgroupScheme j.hom.hom → ConnectedSpace ((MultiplicativeType.baseChange (K := AlgebraicClosure k)).obj N).X.left → SolvableGroupStructure.IsUnipotent N → ∃ f : N ⟶ U, f ≫ iU = j) ∧ ∃ (L : Fin 2 → Grp (Over (Spec (.of k)))) (iL : ∀ a : Fin 2, L a ⟶ P), (∀ a : Fin 2, IsClosedSubgroupScheme (iL a).hom.hom ∧ ReductiveTorusCentralizer.IsReductive (L a) ∧ (∀ (A : Type u) [CommRing A] [Algebra k A], ReductiveTorusCentralizer.centralizerPoints (iS a ≫ iP) A = Set.range (fun l : StandardGroupSchemes.affine k A ⟶ (L a).X ↦ l ≫ (iL a ≫ iP).hom.hom)) ∧ IsIso ((fst U.X (L a).X ≫ iU.hom.hom) * (snd U.X (L a).X ≫ (iL a).hom.hom)) ∧ ∃ c : (L a).X ⊗ U.X ⟶ U.X, c ≫ iU.hom.hom = (fst _ _ ≫ (iL a).hom.hom) * (snd _ _ ≫ iU.hom.hom) * (fst _ _ ≫ (iL a).hom.hom)⁻¹) ∧ ∃ (u : 𝟙_ (Over (Spec (.of k))) ⟶ U.X) (e : L 0 ≅ L 1), (toUnit (L 0).X ≫ u ≫ iU.hom.hom) * (iL 0).hom.hom * (toUnit (L 0).X ≫ u ≫ iU.hom.hom)⁻¹ = e.hom.hom.hom ≫ (iL 1).hom.hom",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2cf068bb",
+  "group": "Q160",
+  "result": "fix",
+  "note": "Item theorem matches the node clause by clause (minimal parabolic in G; closed split tori maximal in P; U fixed as R_uP by its universal property; L_a = C_G(S_a) on all algebras, reductive, U x L_a -> P an iso with explicit conjugation; one rational u with u L0 u^-1 = L1). New node def-sfb-rational-parabolic-subgroup is a real, non-stronger definition. Records verbatim; stmt_deps changed only by adding the new node. H12 FIX: the new node now cites def-weil-surjective-morphism (fixes/def-sfb-rational-parabolic-subgroup.json; JSON only, no compile). Maintainer note: parallel Q134 delivery (lem-sfb-field-parabolic-isotropy-criterion 84831f00) adds the same notion as def-sfb-parabolic-subgroup / IsParabolicSubgroup, not landed; whichever lands second must cite the first (H4)."
+ }
+}

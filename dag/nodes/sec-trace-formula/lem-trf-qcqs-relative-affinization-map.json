@@ -1,0 +1,267 @@
+{
+ "id": "lem-trf-qcqs-relative-affinization-map",
+ "kind": "statement",
+ "title": "Canonical relative affinization of a qcqs morphism",
+ "statement": "Let $f:X\\to S$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-quasi-separated-morphism]. Give $\\mathcal A=f_*\\mathcal O_X$ its natural structure of a sheaf of commutative $\\mathcal O_S$-algebras [def-weil-pbc-comm-algebra-sheaf]. Then the underlying module of $\\mathcal A$ is quasi-coherent [pqf-def-coherent]. There exist an affine morphism [pqf-def-affine-morphism] $\\pi:Y=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$ and an algebra isomorphism $a:\\mathcal A\\xrightarrow{\\sim}\\pi_*\\mathcal O_Y$ with the relative-spectrum chart property [lem-weil-pbc-affine-morphism-relative-spec], together with a morphism $c:X\\to Y$ such that $\\pi\\circ c=f$. More precisely, for every affine open $U\\subseteq S$, set $X_U=f^{-1}(U)$ and $Y_U=\\pi^{-1}(U)$. The chart $h_U:Y_U\\xrightarrow{\\sim}\\operatorname{Spec}\\mathcal A(U)$ [def-weil-affine-spectrum] has section map $a_U$. Under $\\mathcal A(U)=\\Gamma(X_U,\\mathcal O_{X_U})$, the restricted morphism $c_U:X_U\\to Y_U$ satisfies $h_U\\circ c_U=j_{X_U}$, where $j_{X_U}:X_U\\to\\operatorname{Spec}\\Gamma(X_U,\\mathcal O_{X_U})$ is the morphism corresponding to the identity ring map under [lem-weil-pbc-morphism-into-affine-scheme].",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LY, lemma-canonical-morphism, full statement and proof; relative-spectrum charts from Tag 01LX, lemma-spec-properties"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-pbc-comm-algebra-sheaf",
+  "pqf-def-coherent",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "pqf-def-affine-morphism",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Give A = f_* O_X its natural structure algebra via f.c [def-weil-pbc-comm-algebra-sheaf]. The already proved source-library instance SheafOfModules.isQuasicoherent_unit gives quasi-coherence of the structure module O_X directly, without a separate rank-one tilde comparison. Apply [pqf-lem-pushforward-qcoh] to f and this unit module. Its pushforward is definitionally the underlying module of A, so this proves the first conjunct.",
+   "uses": [
+    "def-weil-pbc-comm-algebra-sheaf",
+    "pqf-lem-pushforward-qcoh"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LY, lemma-canonical-morphism, first sentence; Schemes Tag 01LC, lemma-push-forward-quasi-coherent; Tag 01HV, lemma-spec-sheaves, rank one"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-affine-morphism-relative-spec] to the quasi-coherent algebra $\\mathcal A$. This supplies $\\pi:Y=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$, affine, and the algebra isomorphism $a:\\mathcal A\\xrightarrow{\\sim}\\pi_*\\mathcal O_Y$. For each affine open $U\\subseteq S$, write $Y_U=\\pi^{-1}U$ and let $h_U:Y_U\\xrightarrow{\\sim}\\operatorname{Spec}\\mathcal A(U)$ be the isomorphism corresponding to $a_U$. These are exactly the charts and the section maps required in the statement; the cited clause asserts their existence for every affine $U$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LX, lemma-spec-properties (1),(3), with Tag 01LT, lemma-spec-affine"
+   }
+  },
+  {
+   "text": "Let $\\alpha=a^{-1}:\\pi_*\\mathcal O_Y\\to f_*\\mathcal O_X$. This is an $\\mathcal O_S$-algebra morphism, since $a$ is an algebra isomorphism. Apply [lem-weil-pbc-affine-algebra-local-maps] with target morphism $g=\\pi$ and source morphism $f$; only the target is required to be affine. For every affine open $U\\subseteq S$ obtain $k_U:X_U=f^{-1}U\\to Y$ with $\\pi\\circ k_U=f\\circ\\iota_U$. The same cited statement says that $k_U$ and $k_V$ agree on $X_U\\times_X X_V$ for arbitrary affine $U,V$, and that the induced section map from $\\Gamma(Y_U,\\mathcal O_Y)$ to $\\Gamma(X_U,\\mathcal O_{X_U})$ is $\\alpha_U$, under the canonical open-subscheme identifications. No affineness of $X_U$ or of $U\\cap V$ is used.",
+   "uses": [
+    "lem-weil-pbc-affine-algebra-local-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LY, lemma-canonical-morphism, proof: identity algebra map; Tag 01LT, lemma-spec-affine, local inverse construction"
+   }
+  },
+  {
+   "text": "The inverse images $X_U$ of all affine opens $U$ of $S$ form an open cover of $X$: for $x\\in X$ choose an affine neighbourhood of $f(x)$. The overlap agreement just obtained is agreement on $X_U\\cap X_V$, viewed as the fibre product of the two open inclusions. By [lem-weil-pbc-scheme-morphism-gluing], the $k_U$ glue to a unique $c:X\\to Y$. On each $X_U$ one has $(\\pi\\circ c)|_{X_U}=\\pi\\circ k_U=f|_{X_U}$. The equality clause of that same gluing statement therefore gives $\\pi\\circ c=f$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LY, lemma-canonical-morphism, proof expanded on the affine base cover; Schemes Tag 01JA, section-glueing-schemes"
+   }
+  },
+  {
+   "text": "Fix an affine open U. The section assertion for the local map k_U, together with i_U ≫ c = k_U from gluing, determines c.appLE over U: cancel the canonical top-section isomorphism to obtain exactly a.inv_U. Mathlib Scheme.Opens.toSpecΓ_SpecMap_appLE (naturality of the Gamma--Spec adjunction [lem-weil-pbc-morphism-into-affine-scheme]) then rewrites c_U ≫ (Y_U).toSpecΓ as (X_U).toSpecΓ ≫ Spec.map a.inv_U. Composing with Spec.map a.hom_U gives Spec.map (a.hom_U ≫ a.inv_U), which is the identity by a.hom_inv_id. This proves the required chart equation for every affine U, with all open-subscheme identifications included.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01LY, lemma-canonical-morphism, last assertion and proof; Tag 01LT, lemma-spec-affine, ring-map description; Schemes Tag 01I1, lemma-morphism-into-affine"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-comm-algebra-sheaf",
+  "pqf-lem-pushforward-qcoh",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-algebra-local-maps",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pc-scheme",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01LY, lemma-canonical-morphism; the identity-algebra construction is implemented via the existing affine-algebra local-map theorem, open-cover gluing, and naturality of Gamma--Spec on open subschemes. Quasi-coherence of O_X uses the proved source-library unit-module instance."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relative.?[Ss]pec|[Rr]elative.*[Ss]pectrum|[Aa]ffinization|[Aa]ffinisation",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"grep\", \"query\": \"relative.?[Ss]pec|[Rr]elative.*[Ss]pectrum|[Aa]ffinization|[Aa]ffinisation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Gamma-Spec adjunction and affine or quasi-affine results do not construct the relative spectrum of the direct-image algebra for arbitrary qcqs morphisms. Read GammaSpecAdjunction, QuasiAffine, Modules/Tilde:567-587 (affine pushforward special case only)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical map from a qcqs scheme morphism to the relative spectrum of its direct image structure algebra and compatibility with affine charts",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"leansearch\", \"query\": \"Canonical map from a qcqs scheme morphism to the relative spectrum of its direct image structure algebra and compatibility with affine charts\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.toSpecΓ",
+   "results": "{\"t\": \"2026-10-22T06:03:57Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.toSpecΓ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.SpecMap_ΓSpecIso_hom\", \"AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv\", \"AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv_assoc\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality\", \"AlgebraicGeometry.SpecMap_ΓSpecIso_inv_toSpecΓ_assoc\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc\"], \"digest\": \"aabb81dea0b47480\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Gamma-Spec adjunction and affine or quasi-affine results do not construct the relative spectrum of the direct-image algebra for arbitrary qcqs morphisms. Read GammaSpecAdjunction, QuasiAffine, Modules/Tilde:567-587 (affine pushforward special case only)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated scheme morphism f the algebra f pushforward O is quasi coherent and the canonical map X to its relative spectrum restricts on affine opens to the map into Spec of global sections",
+   "results": "{\"t\": \"2026-10-22T06:04:08Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi compact quasi separated scheme morphism f the algebra f pushforward O is quasi coherent and the canonical map X to its relative spectrum restricts on affine opens to the map into Spec of global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.ideal_map\", \"AlgebraicGeometry.Scheme.preimage_opensRange_toSpecΓ\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.isIso_ΓSpec_adjunction_unit_app_basicOpen\", \"AlgebraicGeometry.instQuasiCompactOfIsAffineHom\"], \"digest\": \"4620c0ab25150e26\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Gamma-Spec adjunction and affine or quasi-affine results do not construct the relative spectrum of the direct-image algebra for arbitrary qcqs morphisms. Read GammaSpecAdjunction, QuasiAffine, Modules/Tilde:567-587 (affine pushforward special case only)."
+  },
+  {
+   "tool": "grep",
+   "query": "quasi[Cc]oherent.*push|[Ii]sQuasicoherent.*push|relativeSpec|relativeSpec",
+   "results": "{\"t\": \"2026-10-22T06:05:02Z\", \"tool\": \"grep\", \"query\": \"quasi[Cc]oherent.*push|[Ii]sQuasicoherent.*push|relativeSpec|relativeSpec\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\"], \"digest\": \"869d6964639ef564\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Gamma-Spec adjunction and affine or quasi-affine results do not construct the relative spectrum of the direct-image algebra for arbitrary qcqs morphisms. Read GammaSpecAdjunction, QuasiAffine, Modules/Tilde:567-587 (affine pushforward special case only)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative affinization of an arbitrary qcqs scheme over a base scheme has a canonical map given by the identity of f star O and by Gamma Spec adjunction on each affine open",
+   "results": "{\"t\": \"2026-10-22T06:05:14Z\", \"tool\": \"leanfinder\", \"query\": \"Relative affinization of an arbitrary qcqs scheme over a base scheme has a canonical map given by the identity of f star O and by Gamma Spec adjunction on each affine open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"AlgebraicGeometry.IsAffineOpen.fromSpec\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\"], \"digest\": \"167e67896e5b098d\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: absolute Gamma-Spec adjunction and affine or quasi-affine results do not construct the relative spectrum of the direct-image algebra for arbitrary qcqs morphisms. Read GammaSpecAdjunction, QuasiAffine, Modules/Tilde:567-587 (affine pushforward special case only)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated morphism of schemes has a canonical factorization through the relative spectrum of the direct image of its structure sheaf, restricting to affinization on affine base opens",
+   "results": "{\"t\": \"2026-10-22T06:51:54Z\", \"tool\": \"leanfinder\", \"query\": \"A quasi compact quasi separated morphism of schemes has a canonical factorization through the relative spectrum of the direct image of its structure sheaf, restricting to affinization on affine base opens\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\"], \"digest\": \"66207f97aca06236\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  },
+  {
+   "tool": "grep",
+   "query": "relative.?[Ss]pec|[Aa]ffinization|[Aa]ffinisation",
+   "results": "{\"t\": \"2026-10-22T06:52:09Z\", \"tool\": \"grep\", \"query\": \"relative.?[Ss]pec|[Aa]ffinization|[Aa]ffinisation\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative spectrum of the direct image structure algebra for a quasi compact quasi separated morphism and canonical affinization map",
+   "results": "{\"t\": \"2026-10-22T06:52:10Z\", \"tool\": \"leansearch\", \"query\": \"Relative spectrum of the direct image structure algebra for a quasi compact quasi separated morphism and canonical affinization map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.toSpecΓ\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.isAffine_Spec\", \"AlgebraicGeometry.Scheme.isoSpec\", \"AlgebraicGeometry.IsAffineOpen.algebraMap_Spec_obj\", \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"AlgebraicGeometry.AffineScheme.Spec\", \"AlgebraicGeometry.IsAffine.mk\"], \"digest\": \"c93b37624a1b03a9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.toSpecΓ",
+   "results": "{\"t\": \"2026-10-22T06:52:10Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.toSpecΓ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpec.adjunction_unit_app\", \"AlgebraicGeometry.Scheme.toSpecΓ\", \"AlgebraicGeometry.SpecMap_ΓSpecIso_hom\", \"AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv\", \"AlgebraicGeometry.toSpecΓ_SpecMap_ΓSpecIso_inv_assoc\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality\", \"AlgebraicGeometry.SpecMap_ΓSpecIso_inv_toSpecΓ_assoc\", \"AlgebraicGeometry.Scheme.toSpecΓ_naturality_assoc\"], \"digest\": \"aabb81dea0b47480\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  },
+  {
+   "tool": "grep",
+   "query": "def toSpecΓ|lemma toSpecΓ_appTop|theorem toSpecΓ_appTop|pushforward.*[Qq]uasi|[Qq]uasi.*pushforward",
+   "results": "{\"t\": \"2026-10-22T06:52:29Z\", \"tool\": \"grep\", \"query\": \"def toSpecΓ|lemma toSpecΓ_appTop|theorem toSpecΓ_appTop|pushforward.*[Qq]uasi|[Qq]uasi.*pushforward\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Spec.lean\", \"Mathlib/AlgebraicGeometry/AlgebraicCycle/Basic.lean\"], \"digest\": \"44c4ad52a866d653\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative affinization over a scheme via the identity algebra map f pushforward O to itself and affine chart maps to Spec of sections",
+   "results": "{\"t\": \"2026-10-22T06:52:39Z\", \"tool\": \"leanfinder\", \"query\": \"Relative affinization over a scheme via the identity algebra map f pushforward O to itself and affine chart maps to Spec of sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsAffineHom\", \"AlgebraicGeometry.affineAnd\", \"AlgebraicGeometry.AffineScheme.mk\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"AlgebraicGeometry.affineAnd_apply\", \"AlgebraicGeometry.AffineScheme.ofHom\", \"AlgebraicGeometry.Scheme.AffineCover.map\"], \"digest\": \"37a3a4b80794adad\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  },
+  {
+   "tool": "grep",
+   "query": "toSpecΓ_appTop|def toSpecΓ|def toNormalization|def normalization|theorem isQuasicoherent_pushforward",
+   "results": "{\"t\": \"2026-10-22T06:54:33Z\", \"tool\": \"grep\", \"query\": \"toSpecΓ_appTop|def toSpecΓ|def toNormalization|def normalization|theorem isQuasicoherent_pushforward\", \"sub\": \"AlgebraicGeometry/GammaSpecAdjunction.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"466\", \"496\"], \"digest\": \"6b9de0593d1c6dfd\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: returned absolute Gamma-Spec maps, affine schemes, normalization, or affine pushforward facts; none states the relative-affinization factorization and all its charts for arbitrary qcqs f."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-quasi-affine-relative-spec-embedding",
+  "date": "2026-10-22",
+  "group": "NU"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Support for the geometric quotient presentation in lem-trf-local-term-locality, through its Tag 0247 quasi-affine descent lemma: Tag 01SO, lemma-base-change-quasi-affine; the relative-spectrum characterization Tag 01SM used in the first and last sentences of the Tag 01SO proof; Tag 01SM proof (2) implies (4), construction of the direct-image algebra, relative spectrum and can; old item steps 2 and 3",
+   "via": [
+    "lem-trf-quasi-affine-relative-spec-embedding",
+    "lem-trf-quasi-affine-base-change",
+    "lem-trf-quasi-affine-fpqc-effective-descent",
+    "lem-trf-separated-lqf-fppf-effective-descent",
+    "lem-trf-etale-affine-quotient-representable",
+    "lem-trf-etale-relation-quotient",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-qcqs-relative-affinization-map",
+  "worker": "stage1",
+  "summary": "Proved all clauses in five steps using existing nodes only. Expanded the identity-algebra construction via compatible local maps for a^-1, gluing, and the explicit a_U^-1 a_U identity on affine-base charts. Preserved the statement and inherited search records; repeated the item search under NB using the required logged service. No project attachment and no exact Mathlib match.",
+  "blueprint": "Support for the geometric quotient presentation in lem-trf-local-term-locality, through its Tag 0247 quasi-affine descent lemma: Tag 01SO, lemma-base-change-quasi-affine; the relative-spectrum characterization Tag 01SM used in the first and last sentences of the Tag 01SO proof; Tag 01SM proof (2) implies (4), construction of the direct-image algebra, relative spectrum and can; old item steps 2 and 3; realizes the qcqs relative-affinization construction used in Tag 01SM (2) implies (4), without changing the ancestor local-term route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NB-81b13df05",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-81b13df05 (reviewer sub-agent of L); spot-checked: I read the delivery in full: 0 new nodes, the item statement and stmt_deps are byte-identical to live, the item is still unsplit on side-live and is not on the route-pivot drop list, and nothing cites SGA. The source is Stacks Constructions 01LY (constructions.tex:694-720), which the statement matches with no added hypothesis. Step 1: O_X is quasi-coherent by the tilde-free-module lemma with n=1 and pqf-def-coherent, and A is quasi-coherent by pqf-lem-pushforward-qcoh, whose hypothesis is exactly qcqs. Step 2: the relative-spec node's clause (2) gives pi, a and the chart h_U as part of its statement, not its proof. Step 3: the affine-algebra-local-maps node with g=pi and alpha=a^{-1} gives k_U, agreement on overlaps and the section map alpha_U; that node assumes no affineness of X or U∩V, so E1 does not arise. Step 4: the gluing leaf gives c, and its uniqueness clause gives pi∘c=f. Step 5: (h_U∘c_U)^♯ = a_U^{-1}∘a_U = id, with the correct variance, and the morphism-into-affine bijection (valid for any scheme X_U) gives h_U∘c_U=j_{X_U}. Every non-leaf cited node is Lean-closed or a Mathlib leaf, so no tool_uses are needed. No cycle. The DAG nodes that cite 01LY (affine-morphism-relative-spec, structure-algebra-fully-faithful) cover affine sources only, so there is no duplicate. Edge cases checked: empty X, f=id, P^n over a field (c not an immersion), non-separated S. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsRelativeAffinizationMap",
+  "declaration": "AlgebraicGeometry.qcqs_relative_affinization_map",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsRelativeAffinizationMap.lean",
+  "statement": "theorem qcqs_relative_affinization_map {X S : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f] : (Scheme.CommAlgebraSheaf.toModule (Under.mk (⟨f.c⟩ : S.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj X.sheaf))).IsQuasicoherent ∧ ∃ (Y : Scheme.{u}) (π : Y ⟶ S), IsAffineHom π ∧ ∃ (a : (Under.mk (⟨f.c⟩ : S.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} f.base).obj X.sheaf) : S.CommAlgebraSheaf) ≅ (Under.mk (⟨π.c⟩ : S.sheaf ⟶ (TopCat.Sheaf.pushforward CommRingCat.{u} π.base).obj Y.sheaf) : S.CommAlgebraSheaf)) (c : X ⟶ Y) (hc : c ≫ π = f), ∀ (U : S.Opens), IsAffineOpen U → IsIso ((π ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (a.hom.right.hom.app (op U))) ∧ c.resLE (π ⁻¹ᵁ U) (f ⁻¹ᵁ U) (by rw [← Scheme.Hom.comp_preimage, hc]) ≫ (π ⁻¹ᵁ U).toSpecΓ ≫ Spec.map (a.hom.right.hom.app (op U)) = (f ⁻¹ᵁ U).toSpecΓ",
+  "branch": "sheaf-dag",
+  "by": "Q80",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e2619299",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Item record changes only the lean field; lean.statement matches the file verbatim; not dropped; no new nodes. Hypotheses are exactly [QuasiCompact f] [QuasiSeparated f] at arbitrary universe u. A = Under.mk ⟨f.c⟩ is the same form as 𝒪⁎ f in affine_morphism_relative_spec; the qcoh clause is IsQuasicoherent alone. ∃ Y π IsAffineHom, a : A ≅ 𝒪⁎ π in S.CommAlgebraSheaf, c with c ≫ π = f; for every affine U, IsIso((π⁻¹ᵁU).toSpecΓ ≫ Spec.map a_U) is the dependency's clause-(2) chart with the right variance, and c.resLE ≫ chart = (f⁻¹ᵁU).toSpecΓ, which is the Γ–Spec unit transported by topIso (Mathlib def at AffineScheme:337), i.e. j_{X_U}. The clauses are consistent (c♯ = a⁻¹ as in Stacks 01LY via affine_algebra_local_maps) and the last one pins c on each X_U. Edge cases: empty X/S/U, non-affine X_U and overlaps. No defs; proof is sorry; docstrings carry the source place, blueprint tag and 5 proof steps; imports are the stmt_dep and proof_dep modules; no pro-etale. Report has the Worker report and Second reading sections. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261023T123520-L-1203639",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

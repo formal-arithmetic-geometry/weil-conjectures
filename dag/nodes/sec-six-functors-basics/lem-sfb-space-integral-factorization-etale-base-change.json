@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-space-integral-factorization-etale-base-change",
+ "kind": "statement",
+ "title": "Etale base change preserves the universal integral factorization",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and work with algebraic spaces over $S$ [def-trf-algebraic-space] in the universes of [def-weil-size-convention], with sheaf fibre products [lem-trf-space-fibre-products-etale-covers] and atlas point topology [def-a1-space-point-topology]. A morphism $g:A\\to C$ is quasi-compact if for every quasi-compact scheme $T$ and every morphism $T\\to C$ the sheaf fibre product $A\\times_CT$ admits a representable surjective etale map from a quasi-compact scheme [def-weil-etale-morphism]. Separated means that the relative diagonal is representable by closed immersions [def-weil-closed-immersion]. Integral means representable by integral morphisms of schemes on every scheme test [def-weil-finite-integral-morphism]. Let $f:Y\\to X$ be quasi-compact and separated. Suppose $Y\\xrightarrow{i}N\\xrightarrow{n}X$ is a factorization of $f$ with $n$ integral, and for every integral $q:T\\to X$ and every $a:Y\\to T$ with $qa=f$, there is a unique $h:N\\to T$ with $hi=a$ and $qh=n$. Let $w:W\\to X$ be representable etale, meaning every scheme test is an etale morphism of schemes [def-weil-etale-morphism]. Put $Y_W=Y\\times_XW$, $N_W=N\\times_XW$, and let $i_W:Y_W\\to N_W$, $n_W:N_W\\to W$, and $f_W:Y_W\\to W$ be the induced maps. Then $n_W$ is integral, and for every algebraic space $T_W$, integral morphism $q_W:T_W\\to W$ and morphism $a_W:Y_W\\to T_W$ with $q_Wa_W=f_W$, there is a unique morphism $h_W:N_W\\to T_W$ satisfying $h_Wi_W=a_W$ and $q_Wh_W=n_W$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 0ABP (lemma-properties-normalization), part (1), expressed through the characterization in Tag 0823 (lemma-characterize-normalization)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-weil-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-sfb-space-quasi-compact-presheaf-map",
+  "def-sfb-presheaf-map-separated-diagonal"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=f_*\\mathcal O_Y$, using the small-etale module direct image. The structure sheaf is quasi-coherent (it has the presentation $0\\to\\mathcal O_Y\\xrightarrow{1}\\mathcal O_Y\\to0$ in the definition), so [lem-trf-space-qc-separated-quasi-coherent-pushforward] applies to the given quasi-compact separated $f$. Thus $\\mathcal A$ is a quasi-coherent algebra. Apply [lem-sfb-space-quasicoherent-integral-closure] to obtain $\\mathcal C\\subseteq\\mathcal A$. By [lem-sfb-space-relative-spec-correspondence], $B=\\operatorname{Spec}_X\\mathcal C$ is affine over $X$ and its structural map $b$ is integral, since every section of $\\mathcal C$ on an affine etale object satisfies a monic polynomial.",
+   "uses": [
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-space-relative-spec-correspondence",
+    "def-trf-space-quasi-coherent-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 03M9 (lemma-pushforward), 0820 (lemma-integral-closure), 081V (lemma-affine-equivalence-algebras)."
+   }
+  },
+  {
+   "text": "We spell out the relative-Spec mapping rule used below. For a map $v:Z\\to X$ and a quasi-coherent algebra $\\mathcal D$, maps $Z\\to\\operatorname{Spec}_X\\mathcal D$ over $X$ are sections of $Z\\times_X\\operatorname{Spec}_X\\mathcal D\\to Z$. By base-change compatibility and full faithfulness of [lem-sfb-space-relative-spec-correspondence], these are exactly algebra maps $v^*\\mathcal D\\to\\mathcal O_Z$; the pullback algebra is quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. The adjunction of [def-trf-space-etale-module-functors] identifies these with algebra maps $\\mathcal D\\to v_*\\mathcal O_Z$: the two formulas are $\\phi\\mapsto v_*\\phi\\circ\\eta$ and $\\psi\\mapsto\\varepsilon\\circ v^*\\psi$. They preserve multiplication, unit and structural scalars because on local tensors the latter map sends $r\\otimes d$ to $r\\psi(d)$; the inverse is restriction to $1\\otimes d$. The triangle identities make these inverse. This describes composition by substitution of algebra maps. Apply this rule to $\\mathcal C\\hookrightarrow f_*\\mathcal O_Y$ to define $j:Y\\to B$ over $X$.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 081X (remark-factorization-quasi-compact-quasi-separated), with Tag 081V; the mapping rule is the displayed section construction with the tensor adjunction expanded."
+   }
+  },
+  {
+   "text": "For any integral $q:T\\to X$ the definition [def-weil-finite-integral-morphism], on every scheme test, implies that $q$ is affine. Write $T=\\operatorname{Spec}_X\\mathcal D$ by [lem-sfb-space-relative-spec-correspondence]; its algebra $\\mathcal D$ is integral on every affine etale object. A map $a:Y\\to T$ over $X$ corresponds by Step 2 to $\\chi:\\mathcal D\\to\\mathcal A$. For $d\\in\\mathcal D(U)$ choose a monic relation $P(d)=0$. Applying $\\chi_U$ gives $P(\\chi_U(d))=0$, so $\\chi_U(d)\\in\\mathcal C(U)$. These factorizations are compatible with restrictions since $\\mathcal C$ is a subalgebra. They give a unique algebra map $\\bar\\chi:\\mathcal D\\to\\mathcal C$ lifting $\\chi$. Relative Spec gives $k:B\\to T$ over $X$. The equality $kj=a$ is exactly $\\iota\\bar\\chi=\\chi$ under Step 2. Any other such map corresponds to another lift through the injective $\\iota:\\mathcal C\\hookrightarrow\\mathcal A$, hence is equal to $k$. Thus $(j,b)$ has the stipulated initial property.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-relative-spec-correspondence",
+    "lem-sfb-space-quasicoherent-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0823 (lemma-characterize-normalization), proof of (1),(2): factor the algebra map through the integral-closure subalgebra."
+   }
+  },
+  {
+   "text": "By the assumed initial property of $(i,n)$ and the property established for $(j,b)$, obtain maps $u:N\\to B$ and $v:B\\to N$ over $X$ with $ui=j$ and $vj=i$. Both $vu$ and $1_N$ are extensions of $i$ over $X$, so uniqueness gives $vu=1_N$; likewise $uv=1_B$. Therefore $u$ is an isomorphism of factorizations. Its pullback $u_W:N_W\\xrightarrow{\\sim}B\\times_XW$ has inverse $v_W$, since the two identities remain identities after taking fibre products. It carries $i_W$ to $j_W$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0823 (lemma-characterize-normalization), uniqueness as an initial object; explicit inverse identities."
+   }
+  },
+  {
+   "text": "Let $\\mathcal A_W=\\mathcal A|_W$ and $\\mathcal C_W=\\mathcal C|_W$. By [lem-trf-space-etale-module-pushforward-restriction], restriction along the etale $w$ is tensor pullback, $\\mathcal A_W=(f_W)_*\\mathcal O_{Y_W}$, and structure sheaves restrict to structure sheaves. Both restricted algebras are quasi-coherent by [lem-sfb-space-module-pullback-quasicoherent]. Every affine etale object $U\\to W$ is also an etale object over $X$; the values of the restricted sheaves on it are the original values. Hence $\\mathcal C_W(U)$ is precisely the integral closure of $\\Gamma(U,\\mathcal O_U)$ in $\\mathcal A_W(U)$ by [lem-sfb-space-quasicoherent-integral-closure]. Relative-Spec base change [lem-sfb-space-relative-spec-correspondence] identifies $B\\times_XW=\\operatorname{Spec}_W\\mathcal C_W$ and $j_W$ with the inclusion $\\mathcal C_W\\hookrightarrow\\mathcal A_W$: the section construction of Step 2 restricts to the same inclusion on every etale chart. The integral-algebra criterion shows $B\\times_XW\\to W$ integral.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-space-relative-spec-correspondence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0ABP (lemma-properties-normalization) (1); restriction calculation using spaces-properties.tex Tag 03LX and spaces-morphisms.tex Tags 0820 and 081V."
+   }
+  },
+  {
+   "text": "Given $(q_W,a_W)$ in the conclusion, apply precisely the construction of Step 3 over $W$: write $T_W=\\operatorname{Spec}_W\\mathcal D_W$ using [lem-sfb-space-relative-spec-correspondence] and the affine property in [def-weil-finite-integral-morphism]. Step 2 turns $a_W$ into an algebra map $\\mathcal D_W\\to\\mathcal A_W$. Applying this map to a monic equation for any section of $\\mathcal D_W$ factors it uniquely through $\\mathcal C_W$, whose values were checked in Step 5 using [lem-sfb-space-quasicoherent-integral-closure]. This yields the unique $k_W:B\\times_XW\\to T_W$ extending $j_W$. Set $h_W=k_Wu_W$. Then $h_Wi_W=a_W$ and $q_Wh_W=n_W$. Conversely any candidate composed with $v_W$ is an extension of $j_W$, hence equals $k_W$, which proves uniqueness. Through the same isomorphism $u_W$, the integral morphism of Step 5 is $n_W$ (on each scheme test the affine ring descriptions are isomorphic), so $n_W$ is integral as well.",
+   "uses": [
+    "lem-sfb-space-relative-spec-correspondence",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-space-quasicoherent-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tags 0ABP (lemma-properties-normalization) (1) and 0823 (lemma-characterize-normalization): apply the algebra factorization on the restricted etale site."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-sfb-space-quasicoherent-integral-closure",
+  "lem-sfb-space-relative-spec-correspondence",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "def-trf-space-etale-module-functors",
+  "def-weil-finite-integral-morphism",
+  "lem-trf-space-etale-module-pushforward-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tags 0ABP (lemma-properties-normalization), 0823 (lemma-characterize-normalization), 0820 (lemma-integral-closure), and 081X (remark-factorization-quasi-compact-quasi-separated)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization of algebraic spaces commutes with etale base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"For schemes $X, Y, T, Z$ and morphisms $f: X \\to Y$, $f₁: X \\to T$, $f₂: T \\to Y$ (with $f₂$ integral), the composition of the normalization morphism $X \\to \\text{Normalization}(f)$ with the normalization \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, an integral morphism $ f_2: T \\to Y $, and a morphism $ h: Y \\to Z $, the composition of the normalization morphism $ \\text{no\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂),\\n  Cate\", \"doc\": \"For a scheme morphism $ f $ factoring as $ f_1 $ followed by $ f_2 $, the composition of the normalization morphism $ \\\\text{normalizationDesc} $ from the normalization of $ f $ to a target scheme $ T \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization f)\\n      (CategoryTheory.CategoryStr\", \"doc\": \"For a quasi-compact and quasi-separated scheme morphism $ f: X \\to Y $, the composition of the canonical morphism from $ X $ to the normalization of $ f $, followed by the canonical morphism from the n\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization declarations and base-change instances concern schemes or rings; they do not state the algebraic-space assertion and do not specialize to it in one line"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of the universal integral factorization under an etale morphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [Algebra.FormallyEtale S T], IsBaseChange T (KaehlerDifferential.map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsIntegralHom\", \"doc\": \"The property of being an integral morphism of schemes is stable under base change; that is, if a morphism $ f: X \\to Y $ of schemes is integral, then any base change (pullback) of $ f $ is also an inte\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) (B : Type u_1) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.Etale R A], Algebra.Etale B (TensorProduct R B A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization declarations and base-change instances concern schemes or rings; they do not state the algebraic-space assertion and do not specialize to it in one line"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "[loogle] OK 7 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : AlgebraicGeometry.Scheme.Hom.normalization (CategoryTheory.Limits.pullback.snd f g) ⟶ CategoryTheory.Limits.pullback (AlgebraicGeometry.Scheme.Hom.fromNormalization f\", \"doc\": \"The comparison lemma between the normalization of the pullback to the pullback of the\\nnormalization. This is an isomorphism when `g` is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.Smooth g] : CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g)\", \"doc\": \"Normalization commutes with smooth base change.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g) (CategoryTheory.Limits.pullback.snd (AlgebraicGeometry.Scheme.Hom.fromNorm\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization (CategoryTheory.Limits.pullback.snd f g)) (CategoryTheory.CategoryStruct.comp (Algebr\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.normalizationPullback f g) (CategoryTheory.CategoryStruct.\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \" {X S Y : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z) : CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization\", \"doc\": \"\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization declarations and base-change instances concern schemes or rings; they do not state the algebraic-space assertion and do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|normalization.*[Ee]tale|AlgebraicSpace",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"164\", \"text\": \"    f.normalizationPullback fT ≫ pullback.fst _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"184\", \"text\": \"      exact .of_iso' H (.refl _) (asIso <| f.normalizationPullback fT) (.refl _) (.refl _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"588\", \"text\": \"noncomputable def normalizationPullback :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"595\", \"text\": \"lemma normalizationPullback_snd :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"596\", \"text\": \"    f.normalizationPullback g ≫ pullback.snd _ _ = (pullback.snd f g).fromNormalization :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"601\", \"text\": \"lemma toNormalization_normalizationPullback_fst :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"602\", \"text\": \"    (pullback.snd f g).toNormalization ≫ f.normalizationPullback g ≫ pullback.fst _ _ =\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization declarations and base-change instances concern schemes or rings; they do not state the algebraic-space assertion and do not specialize to it in one line"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization of an algebraic space in another commutes with etale pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ f₁_1 : X ⟶ T) (e_f₁ : f₁ = f₁_1)\\n  (f₂ f₂_1 : T ⟶ Y) (e_f₂ : f₂ = f₂_1) [inst_2 : AlgebraicGeometry.IsIntegralHom f₂]\\n  (H : f =\", \"doc\": \"Given schemes $X, Y, T$ and morphisms $f: X \\\\to Y$, $f_1, f_1': X \\\\to T$, $f_2, f_2': T \\\\to Y$ such that $f_1 = f_1'$, $f_2 = f_2'$, and $f = f_1 \\\\circ f_2 = f_1' \\\\circ f_2'$, with $f$ quasi-compact, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_inl_normalizationCoprodIso_hom_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {U V : AlgebraicGeometry.Scheme} {iU : U ⟶ X} {iV : V ⟶ X}\\n  (e : CategoryTheory.Limits.IsColimit (CategoryTheory.Limits.BinaryCofan.mk iU iV))\\n  [inst_2 : Algebra\", \"doc\": \"For schemes $X,Y$ and morphism $f:X\\\\to Y$, with quasi-compact/quasi-separated conditions on $f$ and subobjects $U,V\\\\subset X$, the composition of the normalization morphism $\\\\mathrm{Normalization}(i_U\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme} (f₁ : X ⟶ T) (f₂ : T ⟶ Y)\\n  [inst_2 : AlgebraicGeometry.IsIntegralHom f₂] (H : f = CategoryTheory.CategoryStruct.comp f₁ f₂)\\n  {Z : \", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, an integral morphism $ f_2: T \\to Y $, and a morphism $ h: Y \\to Z $, the composition of the normalization morphism $ \\text{no\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {Z : AlgebraicGeometry.Scheme} (h : Y ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.toNormalization f)\\n      (CategoryTheory.CategoryStr\", \"doc\": \"For a quasi-compact and quasi-separated scheme morphism $ f: X \\to Y $, the composition of the canonical morphism from $ X $ to the normalization of $ f $, followed by the canonical morphism from the n\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned normalization declarations and base-change instances concern schemes or rings; they do not state the algebraic-space assertion and do not specialize to it in one line"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizationPullback|AlgebraicSpace",
+   "results": "{\"t\": \"2026-10-23T13:59:20Z\", \"tool\": \"grep\", \"query\": \"normalizationPullback|AlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"c4f89ded348fa949\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal integral factorization of an algebraic space morphism commutes with etale base change",
+   "results": "{\"t\": \"2026-10-23T13:59:21Z\", \"tool\": \"leansearch\", \"query\": \"Universal integral factorization of an algebraic space morphism commutes with etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Unramified.baseChange\", \"AlgebraicGeometry.universallyClosed_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSeparated.isStableUnderBaseChange\"], \"digest\": \"6acb679d7628740d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.normalizationPullback",
+   "results": "{\"t\": \"2026-10-23T13:59:21Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst\", \"AlgebraicGeometry.Scheme.Hom.normalizationPullback_snd_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationPullback_fst_assoc\"], \"digest\": \"81bddea5529a0466\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale base change preserves the universal integral factorization of a quasi compact separated morphism of algebraic spaces",
+   "results": "{\"t\": \"2026-10-23T13:59:29Z\", \"tool\": \"leanfinder\", \"query\": \"Etale base change preserves the universal integral factorization of a quasi compact separated morphism of algebraic spaces\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\"], \"digest\": \"1056b7e8235f260b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative normalization of algebraic spaces commutes with etale pullback",
+   "results": "{\"t\": \"2026-10-23T13:59:30Z\", \"tool\": \"leanfinder\", \"query\": \"Relative normalization of algebraic spaces commutes with etale pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\"], \"digest\": \"c8c554595ace3267\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern rings or schemes, not quasi-coherent algebra sheaves on algebraic spaces"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-sfb-space-integral-extension-qc-open",
+  "by": "worker",
+  "date": "2026-10-23"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+  "file": "Mathlib/AlgebraicGeometry/Normalization.lean",
+  "lines": "588, 595, 601, 611",
+  "reason": "Scheme-only result; extending to algebraic spaces requires etale descent and is not a one-line specialization."
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: finite surjective scheme cover in the first paragraph of the proof of Tag 0ADD. Supporting input to Tag 09YC(1): Tag 09YB (lemma-there-is-a-scheme-integral-over), clause (1). Supporting input to Tag 09YB: extend the integral scheme obtained by induction over the open image V. Supporting input to Tag 0G2D: restriction of relative normalization along the open immersion, via etale base change.",
+   "via": [
+    "lem-sfb-space-integral-extension-qc-open",
+    "lem-sfb-qcqs-space-integral-scheme-cover",
+    "lem-sfb-noetherian-space-finite-scheme-cover",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-integral-factorization-etale-base-change",
+  "worker": "stage1",
+  "summary": "Construct the relative integral-closure algebra, prove its initial property by factoring maps of algebras, identify the given factorization by mutually inverse universal maps, and restrict the same algebra on the etale site. One new statement-only node for Stacks 0820; all other inputs reused.",
+  "blueprint": "The existing blueprint.from chain ends at null (ancestor command confirms None). Preserve that provenance and its via list. This is the relative-normalization etale-restriction prerequisite in the alteration subroute recorded in from.place; the latest direct-image proof (3) is read as route context, not as a proof of this auxiliary lemma.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "why": "General algebraic-space quasi-coherent direct image; no same-unit replacement is needed."
+   },
+   {
+    "node": "lem-trf-space-etale-module-pushforward-restriction",
+    "why": "General algebraic-space small-etale restriction of module direct image and structure sheaf, needed to compute the pulled-back algebra."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+  "lem-trf-space-etale-module-pushforward-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-92280df29",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-92280df29 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-morphisms.tex: 0820 (l.9718) with its proof, 0822, 0ABP(1) whose proof just says 'immediate from the construction', 0823 whose proof omits the commutativity check, and 081X (l.3849). The item is 0ABP(1) for an abstract factorization with the 0823 initial property, under quasi-compact separated, a special case of qcqs. Item not weakened. The six steps follow Stacks and fill in its omitted checks. Step 1: f_*O_Y is quasi-coherent by 03M9 (the item's quasi-compactness test on quasi-compact schemes covers the cited affine test); C is the 0820 subalgebra; b is integral by the relative-spec iff clause. Step 2: the 081X mapping rule, via the base-change clause, full faithfulness over Z (id_Z is affine) and the f^*/f_* adjunction with its local-tensor formula. Step 3: a monic relation maps to a monic relation, so the map factors through C; this needs no injectivity of O_X->A. Uniqueness comes from injectivity of the inclusion plus the anti-equivalence. Step 4: elementary, uniqueness of initial objects. Step 5: 03LX restriction; an affine etale U->W is etale over X with the same sheaf values, so C|_W is the 0820 closure for A_W; relative-spec base change gives B_W. Step 6: Step 3 rerun over W, which needs only A_W quasi-coherent, then transported by u_W/v_W; n_W is integral. Edge cases checked: Y empty, W empty, f=id, non-reduced base, zero ring, structure map with nonzero kernel. New node lem-sfb-space-quasicoherent-integral-closure is a correct 0820 statement plus uniqueness, which holds because affine etale objects form a basis. It is statement-only, self-contained, and its four searches are recorded. Not a duplicate: stack-quasifinite-relative-normalization needs quasi-finite stack maps over a field, sibling space-relative-integral-factorization only asserts existence, and the scheme and ring nodes are about other objects. It is not a clause of the item. Tool_uses accepted for 03M9 and 03LX. Batch 5: every listed trf citation (03M9 pushforward, 03LX restriction, the quasi-coherent-module and etale-module-functor definitions, def-trf-algebraic-space reached through the relative-spec and pullback nodes) is general algebraic-space foundations, outside both assumptions and not a step of their proofs. No SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceIntegralFactorizationEtaleBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.integralFactorization_etale_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceIntegralFactorizationEtaleBaseChange.lean",
+  "statement": "theorem integralFactorization_etale_baseChange {S : Scheme.{u}} {Y X N W YW NW : AlgebraicSpace S} (f : Y ⟶ X) (i : Y ⟶ N) (n : N ⟶ X) (_hfactor : i ≫ n = f) (_hqc : IsQuasiCompactPresheafMap f.hom.hom) (_hsep : IsSeparatedPresheafMap f.hom.hom) (_hn : IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) n.hom.hom) (_huniversal : ∀ (T : AlgebraicSpace S) (q : T ⟶ X) (a : Y ⟶ T), IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) q.hom.hom → a ≫ q = f → ∃! h : N ⟶ T, i ≫ h = a ∧ h ≫ q = n) (w : W ⟶ X) (_hw : IsEtale w.hom.hom) (pY : YW ⟶ Y) (fW : YW ⟶ W) (pN : NW ⟶ N) (nW : NW ⟶ W) (_hY : IsPullback pY.hom fW.hom f.hom w.hom) (_hN : IsPullback pN.hom nW.hom n.hom w.hom) (iW : YW ⟶ NW) (_hiY : iW ≫ pN = pY ≫ i) (_hiW : iW ≫ nW = fW) : IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) nW.hom.hom ∧ ∀ (TW : AlgebraicSpace S) (qW : TW ⟶ W) (aW : YW ⟶ TW), IsRepresentableWith (fun _ _ p ↦ IsIntegralHom p.left) qW.hom.hom → aW ≫ qW = fW → ∃! hW : NW ⟶ TW, iW ≫ hW = aW ∧ hW ≫ qW = nW",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair H2 of returned head f45fb6357f61: cite the existing definition owners def-sfb-space-quasi-compact-presheaf-map and def-sfb-presheaf-map-separated-diagonal, replacing the two theorem dependencies absent from the live item. Drop the unused SpaceQuasiCompactAffineTests import. The affine-test predicate is equivalent to all quasi-compact scheme tests by finite affine-cover assembly, as explained in the module docstring and report. The Lean theorem signature and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0cafff6ab",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of f45fb6357f61, fully repaired. stmt_deps now cite def-sfb-space-quasi-compact-presheaf-map (Q97) and def-sfb-presheaf-map-separated-diagonal (Q32) instead of the two theorem nodes. Both dep records are identical to live. The SpaceQuasiCompactAffineTests import is dropped and every remaining import exists in live. The item JSON differs from live only by the lean record and the two stmt_deps. lean.statement is verbatim in the file, with sorry only and no defs. Read IsQuasiCompactPresheafMap, IsSeparatedPresheafMap, IsRepresentableWith and IsEtale. Clauses match the node: affine-test qc is equivalent to qc-scheme tests (explained in the docstring), the diagonal is closed-immersion representable, integral is IsIntegralHom on every scheme test, the uniqueness clauses are flat ∃! with both equations, w is not required to be surjective, and iW is pinned by its projection equations. One universe u. Edge cases (empty Y or W, identity w, non-finite integral q) are not excluded. No space-level integral predicate exists in the project (H4 ok). Source/blueprint docstrings and the six-step proof are present. No compile; no file changed."
+ }
+}

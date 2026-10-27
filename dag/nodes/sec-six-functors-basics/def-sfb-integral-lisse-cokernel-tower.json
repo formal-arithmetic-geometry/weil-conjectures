@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-integral-lisse-cokernel-tower",
+ "kind": "definition",
+ "title": "Canonical integral scalar cokernel towers and their functoriality",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A$ and chosen uniformizer $\\varpi$, and any scheme $X$. Use the continuous integral coefficient ring sheaf $A_X$ and scalar multiplication maps supplied by [def-per-integral-lisse-reduction-data], in the category $\\operatorname{Mod}(A_X)$ of sheaves of modules [def-weil-sheaf-of-modules-category]. For every $A_X$-module sheaf $M$ and $n\\in\\mathbf N$, define $Q_n(M)=\\operatorname{coker}(\\varpi^{n+1}:M\\to M)$, with cokernel projection $\\pi_{M,n}:M\\to Q_n(M)$. Define $t_{M,n}:Q_{n+1}(M)\\to Q_n(M)$ as the map induced by the identity on $M$, characterized by $t_{M,n}\\circ\\pi_{M,n+1}=\\pi_{M,n}$. Define the inverse tower $Q(M):\\mathbf N^{\\mathrm{op}}\\to\\operatorname{Mod}(A_X)$ by these objects and adjacent maps; all other transitions are their composites and the identity transitions are identities. For a module morphism $f:M\\to N$, define $Q(f):Q(M)\\to Q(N)$ by the cokernel-induced maps $Q_n(f)$ characterized by $\\pi_{N,n}\\circ f=Q_n(f)\\circ\\pi_{M,n}$. Define the functor $Q:\\operatorname{Mod}(A_X)\\to\\operatorname{Fun}(\\mathbf N^{\\mathrm{op}},\\operatorname{Mod}(A_X))$ with these object and morphism assignments. No local freeness, connectedness, nonempty-base or positive-rank assumption is imposed. This defines actual cokernels and maps, without asserting the additional quotient property of the adjacent transitions.",
+ "stmt_deps": [
+  "def-per-integral-lisse-reduction-data",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1), p.59: the functor M to (M/varpi^n M)_n, with its canonical quotient transitions and induced action on module maps; its scalar-cokernel construction on the ambient module category."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def.*(cokernel|Cokernel).*([Tt]ower|[Ff]unctor)|def ofOpSequence",
+   "results": "2 hits: Mathlib/CategoryTheory/Functor/OfSequence.lean, Mathlib/CategoryTheory/Functor/OfSequence.lean. No exact Mathlib match; the exact existing project declarations are in Sheaf.SixFunctors.IntegralLisseReductionConstruction.",
+   "date": "2026-10-22",
+   "verdict": "reuse existing project definitions; add definition-node ownership only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical inverse tower of cokernels of powers of a uniformizer on sheaves of modules and its functoriality",
+   "results": "8 hits: CategoryTheory.cokernelOpUnop_inv, TopModuleCat.isColimitCoker, ModuleCat.cokernelIsColimit, SheafOfModules.pushforwardNatIso_inv, CategoryTheory.cokernelOpOp_inv, CategoryTheory.cokernelUnopUnop_inv, CategoryTheory.Limits.PreservesCokernel.iso_inv, CategoryTheory.GrothendieckTopology.isoSheafify_inv. No exact Mathlib match; the exact existing project declarations are in Sheaf.SixFunctors.IntegralLisseReductionConstruction.",
+   "date": "2026-10-22",
+   "verdict": "reuse existing project definitions; add definition-node ownership only"
+  },
+  {
+   "tool": "loogle",
+   "query": "cokernel, Functor.ofOpSequence",
+   "results": "0 hits: ; loogle: unknown identifier 'cokernel'. No exact Mathlib match; the exact existing project declarations are in Sheaf.SixFunctors.IntegralLisseReductionConstruction.",
+   "date": "2026-10-22",
+   "verdict": "reuse existing project definitions; add definition-node ownership only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor taking a sheaf of integral modules to the inverse tower of cokernels of multiplication by powers of a uniformizer",
+   "results": "8 hits: ModuleCat.tilde, localCohomology.diagram, localCohomology, localCohomology.ringModIdeals, ModuleCat.tildeInType, localCohomology.ofDiagram, localCohomology.ofSelfLERadical, ModuleCat.tildeInModuleCat. No exact Mathlib match; the exact existing project declarations are in Sheaf.SixFunctors.IntegralLisseReductionConstruction.",
+   "date": "2026-10-22",
+   "verdict": "reuse existing project definitions; add definition-node ownership only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralLisseCokernel|cokernel tower|scalar quotient tower in dag/nodes, dag/lean_names_upstream.json, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search integral lisse cokernel",
+   "results": "No definition node owns these five declarations. The existing theorem nodes reference them but record only their own theorem. No integralLisseCokernel name upstream; exact five definitions occur in lean/Sheaf/SixFunctors/IntegralLisseReductionConstruction.lean. Blueprint search: 0 matches. def-trf-integral-scalar-tower-functors concerns a different ordinary tensor tower of unbounded complexes over completed rings, not this sheaf cokernel construction.",
+   "date": "2026-10-22",
+   "verdict": "existing project definitions have no definition-node owner"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-lisse-lattice-constant-reductions",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The actual scalar quotient objects, identity-induced transitions, tower isomorphism and reduction of the integral basis in the global compatible-basis argument.",
+   "via": [
+    "lem-sfb-lisse-lattice-constant-reductions",
+    "lem-sfb-lisse-lattice-potential-kummer-tameness",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralLisseReductionConstruction",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLisseCokernelFunctor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralLisseCokernel",
+   "AlgebraicGeometry.ProEtale.integralLisseCokernelTransition",
+   "AlgebraicGeometry.ProEtale.integralLisseCokernelTower",
+   "AlgebraicGeometry.ProEtale.integralLisseCokernelMap",
+   "AlgebraicGeometry.ProEtale.integralLisseCokernelFunctor"
+  ],
+  "statement": "def integralLisseCokernelFunctor :\n    ringedSiteModules.{u + 1} (integralLisseRing l E X) ⥤\n      (ℕᵒᵖ ⥤ ringedSiteModules.{u + 1} (integralLisseRing l E X))",
+  "branch": "sheaf-dag",
+  "by": "Q04",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "B3/H2 ownership repair requested by the independent return of 31c1e4f8f38e. Records the five existing definitions: the actual uniformizer^(n+1) cokernel, identity-induced transition, opposite-natural-number tower, induced cokernel map and functor. None is chosen from integralLisseCokernelTransition_quotient, and the construction does not use that theorem. No existing source or declaration is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-725e06760",
+  "group": "Q04",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-725e06760",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Re-push of 4a561903 (reviewer PASS; landing refused 'reach: def-sfb-integral-lisse-cokernel-tower is not reached from a target'). Item .lean byte-identical (sha256 189bb228…), item and def node JSON identical; only report/blueprint-index differ. Recomputed reach with dag_queue.Dag.distances_from on side-live (2026-10-23 12:33) + delivered records: def node reached at depth 14 via the item and the split route kummer-tameness → tame-pair-lattice-realization → … → det-thm-sf-ctf-stability-direct-images; all route nodes split, so the refusal was transient (an unsplit route node cuts reach), not a delivery fault. Statement re-read: arbitrary X incl. ∅, lisse = isFiniteLocallyFree (rank 0/varying), actual ϖ^(n+1) cokernel tower, (A_n)_X^d as cokernel of free (sound), independent Nonempty hypotheses, arbitrary b1 = B.app 0, B tower iso, mapIso b = B levelwise, bE ordinary changeOfRings pinned on pure tensors; d=0 ok. Def node: existing:true over 5 unchanged plain live defs (no .choose), statement verbatim, no other owner, item live lean null, no repair note. Single sorry, docstrings with source/blueprint + 6 steps. Advisory: lean.note 'already-landed' wording. No compile (no file changed)."
+ }
+}

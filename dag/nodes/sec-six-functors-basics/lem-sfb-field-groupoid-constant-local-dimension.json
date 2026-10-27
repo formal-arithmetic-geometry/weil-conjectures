@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-field-groupoid-constant-local-dimension",
+ "kind": "statement",
+ "title": "Constant local dimension of a locally finite type field groupoid",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $K$ be a field [def-weil-field], and let $U=\\operatorname{Spec}K$ be an $S$-scheme [def-weil-affine-spectrum]. Let $(U,R,s,t,e,i,c)$ be a groupoid in algebraic spaces over $S$ [def-trf-algebraic-space]: functorially on test schemes, $s,t$ give source and target, $e$ identities, $i$ inverses and $c:R\\times_{s,U,t}R\\to R$ composition [def-pc-fibre-product], satisfying the groupoid axioms. Suppose $s$ and $t$ are locally of finite type, meaning that their composites with every etale scheme chart of $R$ are locally of finite type [def-weil-finite-type-morphism]. For an algebraic space $X$, $|X|$ denotes the set of morphisms $\\operatorname{Spec}L\\to X$ with $L$ a field, two of them identified when their pullbacks to some common field extension agree. Define $\\dim_x(X)=\\dim_v(V)$ for $x\\in|X|$ using an etale scheme chart $V\\to X$ and a point $v$ above $x$, where $\\dim_v(V)$ is the infimum of Krull dimensions of open neighbourhoods of $v$, and define $\\dim X=\\sup_{x\\in|X|}\\dim_x(X)$. Then $\\dim_r(R)=\\dim R$ for every $r\\in|R|$. In particular, for a group algebraic space $H$ over $K$ that is locally of finite type (the case $s=t$ equal to the structural map), $\\dim_h(H)=\\dim H$ for every $h\\in|H|$.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 06FD (lemma-groupoid-on-field-locally-finite-type-dimension), clause (1), and Tag 06FE (lemma-group-over-field-locally-finite-type-dimension), clause (1); dimension conventions Tags 04N5 and 04N6."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-field",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-sfb-algebraic-space-groupoid",
+  "def-sfb-algebraic-space-etale-dimension"
+ ],
+ "proof": [
+  {
+   "text": "First record the one-field-base-change calculation needed below. Let $a:\\operatorname{Spec}L\\to U$ be any field-valued point and put $F_a=R\\times_{s,U,a}\\operatorname{Spec}L$. The fibre-product and atlas clauses of [lem-trf-space-fibre-products-etale-covers] give this algebraic space and a surjective etale chart $V_L=V\\times_U\\operatorname{Spec}L\\to F_a$ from any surjective etale scheme chart $V\\to R$. For a point $z\\in|F_a|$ above $x\\in|R|$, choose $w\\in V_L$ above $z$ and let $v\\in V$ be its image. The scheme map $V\\to U$ is locally of finite type by the hypothesis on $s$. Apply [lem-sc-fibre-dimension-after-base-change] to $V\\to\\operatorname{Spec}K$ and $\\operatorname{Spec}L\\to\\operatorname{Spec}K$. Since these bases have one point with residue fields $K,L$, its fibres are $V,V_L$ themselves, and it gives $\\dim_w(V_L)=\\dim_v(V)$. The chart definitions in the statement therefore give $\\dim_z(F_a)=\\dim_x(R)$. This is a direct specialization of the cited scheme equality, not a comparison of local-ring dimensions. Only one field base change of a locally finite type scheme map is used.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FY (morphisms-lemma-dimension-fibre-after-base-change), part (1), specialized to field spectra; chart calculation underlying spaces-morphisms.tex Tag 04NS, part (1)."
+   }
+  },
+  {
+   "text": "Fix $r,r_0\\in|R|$ and choose field-valued representatives $a_0:\\operatorname{Spec}L_0\\to R$ and $b_0:\\operatorname{Spec}L_1\\to R$. Their images under $t$ are equal as point classes of $U=\\operatorname{Spec}K$, whose only prime is $(0)$. By the definition of equality of point classes in the statement, there are field extensions into a common field $L$ for which the induced maps $a,b:\\operatorname{Spec}L\\to R$ satisfy $t a=t b$ as morphisms. They still represent $r,r_0$. Put $u=s a$ and $v=s b$. Both are maps $\\operatorname{Spec}L\\to U$, but need not be equal: the two resulting embeddings $K\\to L$ must be kept distinct.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0452 (lemma-two-fibres), common-field reduction; more-groupoids.tex Tags 02YF (lemma-two-fibres), parts (1)-(2), and 04LP (lemma-groupoid-on-field-homogeneous)."
+   }
+  },
+  {
+   "text": "Form $F_u=R\\times_{s,U,u}\\operatorname{Spec}L$ and $F_v=R\\times_{s,U,v}\\operatorname{Spec}L$ using [lem-trf-space-fibre-products-etale-covers]. The maps $a,b$ lift to $L$-valued points $\\widetilde a,\\widetilde b$ of these spaces. Use the convention that $c(f,g)=f\\circ g$. Then $q=c(i a,b)$ is an arrow from $v$ to $u$. On every $L$-scheme $T$, the rule $f\\mapsto c(f,q_T)$ defines a map $F_u(T)\\to F_v(T)$, since $s(f)=u_T=t(q_T)$. Its inverse is $g\\mapsto c(g,i(q_T))$: associativity and the inverse and identity axioms give $(f\\circ q)\\circ q^{-1}=f$ and $(g\\circ q^{-1})\\circ q=g$. The formulas commute with pullback of test schemes, so define inverse morphisms of algebraic spaces over $L$. Also $a\\circ(a^{-1}\\circ b)=b$, so this isomorphism carries $\\widetilde a$ to $\\widetilde b$. Compose any etale scheme chart of $F_u$ with this isomorphism to obtain a chart of $F_v$ with the same scheme and chart point. The definition of dimension thus gives $\\dim_{\\widetilde a}(F_u)=\\dim_{\\widetilde b}(F_v)$. Applying Step 1 to the two embeddings $u,v$ yields $\\dim_r(R)=\\dim_{r_0}(R)$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 0452 (lemma-two-fibres), source-fibre identification; explicit pointed right-translation version of more-groupoids.tex Tag 02YF (1)-(2) and Tag 04LP. Groupoid identities are written out here."
+   }
+  },
+  {
+   "text": "The identity $e:U\\to R$ supplies a point $r_0$, so $|R|$ is nonempty. Step 3 says that all terms of the defining supremum $\\dim R=\\sup_{r\\in|R|}\\dim_r(R)$ equal $\\dim_{r_0}(R)$. Their supremum is this same value, proving the first assertion. For a group algebraic space $H$ over $K$, take $U=\\operatorname{Spec}K$, $R=H$, $s=t$ its structural map, and $c,e,i$ its multiplication, identity and inverse. The group identities are exactly the groupoid identities in this case, and local finite type gives both required hypotheses. Apply the first assertion to get $\\dim_h(H)=\\dim H$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-groupoids.tex",
+    "place": "Tag 06FD (lemma-groupoid-on-field-locally-finite-type-dimension), clause (1), final supremum; Tag 06FE (lemma-group-over-field-locally-finite-type-dimension), clause (1), and equation-groupoid-from-group."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sc-fibre-dimension-after-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-more-groupoids.tex",
+  "place": "Tag 06FD (1), repaired using pointed source-fibre transport from Tag 0452 and more-groupoids.tex Tags 02YF (1)-(2), 04LP; scheme field-extension dimension calculation from morphisms.tex Tag 02FY (1). The source error in the double-restriction argument is detailed in report.md."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An internal groupoid in algebraic spaces with object space the spectrum of a field and locally finite type source and target has constant dimension at all points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] → Unique ↥(AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any field $ K $, the scheme $ \\\\operatorname{Spec}(K) $ has a unique carrier (underlying topological space), corresponding to the fact that the prime spectrum $ \\\\operatorname{Spec}(K) $ contains on\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"AlgebraicGeometry.IsAffine (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"The terminal object in the category of schemes is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [Subsingleton ↥X] [AlgebraicGeometry.IsReduced X] [JacobsonSpace ↥Y],\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $X$ is a reduced scheme with a single point (subsingleton) and $Y$ is a Jacobson space, then a morphism $f : X \\\\to Y$ is finite if and only if it is locally of finite type.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary category/manifold groupoids and scheme smooth relative dimension do not state constant point dimension for internal algebraic-space groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type groupoid over a field is equidimensional and its dimension equals the dimension at the identity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"contDiffGroupoid_zero_eq\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] {I : ModelWithCorners 𝕜 E H},\\n  contDiffGroupoid 0 I = continuousGroupoid H\", \"doc\": \"The groupoid of $C^0$ diffeomorphisms (continuous maps) constructed using the model with corners $I$ coincides with the continuous groupoid on the topological space $H$, i.e., $\\\\mathrm{contDiffGroupoi\"}\n  {\"name\": \"FiniteDimensional.of_locallyCompact_manifold\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/ExtChartAt\", \"type\": \"∀ {E : Type u_8} {𝕜 : Type u_9} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_10} [inst_3 : TopologicalSpace H] (M : Type u_11) [inst_4 : TopologicalSpace M]\\n  [ChartedSpace H M] [CompleteSpace 𝕜] (I : ModelWithCorners 𝕜 E H) [Nonempty M]\", \"doc\": \"If $ M $ is a non-empty, locally compact manifold modeled on a normed vector space $ E $ over a complete nontrivially normed field $ \\\\mathbb{K} $, then $ E $ must be finite-dimensional over $ \\\\mathbb{\"}\n  {\"name\": \"hasGroupoid_model_space\", \"module\": \"Mathlib/Geometry/Manifold/HasGroupoid\", \"type\": \"∀ (H : Type u_5) [inst : TopologicalSpace H] (G : StructureGroupoid H), HasGroupoid H G\", \"doc\": \"For any topological space $ H $ and its structure groupoid $ G $, the natural charted space structure on $ H $ (where $ H $ serves as its own model space via the identity map) is compatible with $ G $\"}\n  {\"name\": \"IsManifold.toHasGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} {inst : NontriviallyNormedField 𝕜} {E : Type u_2} {inst_1 : NormedAddCommGroup E}\\n  {inst_2 : NormedSpace 𝕜 E} {H : Type u_3} {inst_3 : TopologicalSpace H} {I : ModelWithCorners 𝕜 E H} {n : WithTop ℕ∞}\\n  {M : Type u_4} {inst_4 : TopologicalSpace M} {inst_5 : ChartedSpace H M} [self \", \"doc\": \"If $ M $ is a manifold with corners modeled on $ H $, equipped with a model with corners structure consisting of a nontrivially normed field $ \\\\mathbb{K} $, a normed vector space $ E $ over $ \\\\mathbb{\"}\n  {\"name\": \"IsManifold.mk'\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"∀ {𝕜 : Type u_1} [inst : NontriviallyNormedField 𝕜] {E : Type u_2} [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace 𝕜 E] {H : Type u_3} [inst_3 : TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) (n : WithTop ℕ∞)\\n  (M : Type u_4) [inst_4 : TopologicalSpace M] [inst_5 : ChartedSpace H M] [gr : \", \"doc\": \"Given a nontrivially normed field $\\\\mathbb{K}$, a normed vector space $E$ over $\\\\mathbb{K}$, a topological space $H$ with a model with corners $I$, a smoothness class $n$, and a topological space $M$ \"}\n  {\"name\": \"idRestrGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"The structure groupoid on a topological space $ H $ consisting of open partial homeomorphisms that are equivalent to identity maps on open subsets of $ H $. It is closed under composition, inverses, c\"}\n  {\"name\": \"contDiffGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/IsManifold/Basic\", \"type\": \"WithTop ℕ∞ →\\n  {𝕜 : Type u_1} →\\n    [inst : NontriviallyNormedField 𝕜] →\\n      {E : Type u_2} →\\n        [inst_1 : NormedAddCommGroup E] →\\n          [inst_2 : NormedSpace 𝕜 E] →\\n            {H : Type u_3} → [inst_3 : TopologicalSpace H] → ModelWithCorners 𝕜 E H → StructureGroupoid H\", \"doc\": \"The groupoid generated by the pregroupoid of C^n diffeomorphisms on a topological space $H$, constructed using the model with corners $I$. This groupoid consists of open partial homeomorphisms that ar\"}\n  {\"name\": \"idGroupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"(H : Type u_2) → [inst : TopologicalSpace H] → StructureGroupoid H\", \"doc\": \"For a topological space $ H $, this is the structure groupoid consisting of the identity open partial homeomorphism on $ H $ and all open partial homeomorphisms with empty source domain. It satisfies \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary category/manifold groupoids and scheme smooth relative dimension do not state constant point dimension for internal algebraic-space groupoids"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"krullDim\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary category/manifold groupoids and scheme smooth relative dimension do not state constant point dimension for internal algebraic-space groupoids"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*dimension|dimension.*groupoid|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary category/manifold groupoids and scheme smooth relative dimension do not state constant point dimension for internal algebraic-space groupoids"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension at any point of a locally finite type algebraic space groupoid on a field equals its global dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.relativeDimension\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"[IsStandardSmooth R S] : ℕ\", \"doc\": \"The relative dimension of a standard smooth algebra $ S $ over a commutative ring $ R $, defined as the dimension of $ S $ via its submersive presentation where $ S $ is isomorphic to a localized poly\"}\n  {\"name\": \"FiniteDimensional.finiteDimensional_subalgebra\", \"module\": \"Mathlib.LinearAlgebra.FiniteDimensional.Basic\", \"type\": \"[FiniteDimensional F E] (S : Subalgebra F E) : FiniteDimensional F S\", \"doc\": \"Any subalgebra of a finite-dimensional algebra over a field is itself finite-dimensional. Specifically, if $ E $ is a finite-dimensional vector space over a field $ F $ and $ S $ is a subalgebra of $ \"}\n  {\"name\": \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ (Spec <| .of K)) [IsIntegral X] [UniversallyClosed f] [LocallyOfFiniteType f] : f.appTop.hom.Finite\", \"doc\": \"Let $K$ be a field, and let $f: X \\\\to \\\\operatorname{Spec}(K)$ be a morphism from an integral scheme $X$. If $f$ is universally closed and locally of finite type, then the ring of global sections of $X\"}\n  {\"name\": \"CSA.fin_dim\", \"module\": \"Mathlib.Algebra.BrauerGroup.Defs\", \"type\": \"∀ {K : Type u} [inst : Field K] (self : CSA K), FiniteDimensional K ↑self.toAlgCat\", \"doc\": \"Every central simple algebra over a field $ K $ is a finite-dimensional vector space over $ K $.\"}\n  {\"name\": \"Algebra.Presentation.dimension_ofAlgEquiv\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Basic\", \"type\": \"(P : Presentation R S ι σ) {T : Type*} [CommRing T] [Algebra R T] (e : S ≃ₐ[R] T) :\\n  (P.ofAlgEquiv e).dimension = P.dimension\", \"doc\": \"If $ P $ is an algebra presentation of $ S $ over a commutative ring $ R $, and $ e : S \\\\simeq_{\\\\mathbb{A}[R]} T $ is an $ R $-algebra equivalence to another algebra $ T $, then the dimension of the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.sizeOf_spec\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace)\\n  (local_affine :\\n    ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n      ∃ U R,\\n        Nonempty (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))),\\n  sizeOf { toLocallyRingedSpace := toLocal\", \"doc\": \"The size of the scheme type constructed from a locally ringed space $ X $ with the local affine condition is equal to $ 1 + \\\\text{size}(X) $, where the additional unit accounts for the data specifying\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmooth\", \"type\": \"∀ {n : ℕ} {R : Type u} {S : Type v} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.IsStandardSmoothOfRelativeDimension n R S],\\n  ∃ ι σ, ∃ (x : Finite σ) (_ : Finite ι), ∃ P, P.dimension = n\", \"doc\": \"For any commutative ring $ R $, commutative ring $ S $ with an $ R $-algebra structure, and natural number $ n $, if $ S $ is a standard smooth algebra of relative dimension $ n $ over $ R $, then the\"}\n  {\"name\": \"Real.dimH_of_mem_nhds\", \"module\": \"Mathlib.Topology.MetricSpace.HausdorffDimension\", \"type\": \"{x : E} {s : Set E} (h : s ∈ 𝓝 x) : dimH s = finrank ℝ E\", \"doc\": \"If a set $ S $ is a neighborhood of a point $ x $ in a finite-dimensional real vector space $ E $, then the Hausdorff dimension of $ S $ is equal to the dimension of $ E $, i.e., $\\\\dim_H S = \\\\mathrm{f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: ordinary category/manifold groupoids and scheme smooth relative dimension do not state constant point dimension for internal algebraic-space groupoids"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every locally finite type groupoid in algebraic spaces on the spectrum of a field has equal dimension at every point",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsAffine, Algebra.IsStandardSmoothOfRelativeDimension.out, AlgebraicGeometry.instFieldCarrierFunctionField, AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsIntegral",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local dimension of a group algebraic space over a field is constant by translation between source fibres",
+   "results": "OK 8 hits: Algebra.IsStandardSmooth.relativeDimension, Module.rankAtStalk_self, Algebra.IsStandardSmoothOfRelativeDimension.out, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension.id, Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension, Algebra.Presentation.localizationAway_dimension_zero, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"topologicalKrullDim\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*dimension|dimension.*groupoid|AlgebraicSpace",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The dimension at a point of a locally finite type algebraic space groupoid over a field equals its dimension",
+   "results": "OK 8 hits: Algebra.IsStandardSmooth.relativeDimension, FiniteDimensional.finiteDimensional_subalgebra, AlgebraicGeometry.Scheme.mk.sizeOf_spec, Algebra.Presentation.dimension_ofAlgEquiv, CSA.fin_dim, Field.Algebra.IsSeparable.finSepDegree_eq, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, Algebra.IsStandardSmoothOfRelativeDimension.out",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|groupoid.*homogeneous|groupoid.*[Ff]ib[er]",
+   "results": "OK 0 hits: . Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homogeneity of a field groupoid after extending the field: isomorphic source fibres carrying chosen points to each other",
+   "results": "OK 8 hits: MonoidHom.fiberEquiv, AddMonoidHom.fiberEquiv, AddMonoidHom.fiberEquivOfSurjective, MonoidHom.fiberEquivOfSurjective, ContMDiffFiberwiseLinear.hasGroupoid, IsGaloisGroup.mulEquivCongr_apply_smul, HasFibers.Fib.hom_ext, StructureGroupoid.noConfusion",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"pullback\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For two points in an algebraic space groupoid on a field, source base changes along two embeddings into a common field are isomorphic with chosen points corresponding",
+   "results": "OK 8 hits: WeierstrassCurve.Affine.Point.map_baseChange, WeierstrassCurve.Affine.Point.baseChange, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Affine.Point.map, WeierstrassCurve.Affine.baseChange_equation, WeierstrassCurve.Affine.baseChange_slope, AlgebraicGeometry.Scheme.residueFieldCongr_trans, WeierstrassCurve.Affine.Point.map_id",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right composition in an internal groupoid identifies source fibres and carries any chosen arrow to another arrow with the same target",
+   "results": "OK 8 hits: CategoryTheory.Subgroupoid.coe_comp_coe, CategoryTheory.Subgroupoid.mul_mem_cancel_right, CategoryTheory.Groupoid.vertexGroup_mul, CategoryTheory.groupoidOfElements, CategoryTheory.Subgroupoid.mul, CategoryTheory.Subgroupoid.Discrete.Arrows, CategoryTheory.Subgroupoid.mul_mem_cancel_left, CategoryTheory.Groupoid.vertexGroupIsomOfMap_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary groupoid, monoid, manifold or scheme dimension declarations do not give the algebraic-space groupoid theorem or a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-groupoid-stabilizer-dimension",
+  "date": "2026-10-23",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Unramified diagonal yields an etale scheme atlas. Proof of the unramified-diagonal/etale-atlas criterion: Finite-type points admit field representatives with etale self-relation. Supporting input: Etale field cover of a reduced locally Noetherian singleton stack. Input for the field-cover construction: Identity component of an unramified field groupoid. Dimension input in the field-groupoid calculation: replace the arrow-space dimension by the stabilizer dimension (Stacks 06FF). Supporting input: Stacks 06FF, first sentence: reduce global dimensions of R and G to their local dimensions at the identity, using 06FD/06FE. This node makes no comparison between R and its stabilizer.",
+   "via": [
+    "lem-sfb-field-groupoid-stabilizer-dimension",
+    "lem-sfb-field-groupoid-identity-finite-relation",
+    "lem-sfb-unramified-diagonal-singleton-field-cover",
+    "lem-sfb-finite-type-point-etale-self-relation",
+    "lem-sfb-unramified-diagonal-etale-atlas",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-groupoid-constant-local-dimension",
+  "worker": "stage1",
+  "summary": "Kept the statement and all statement dependencies. Proved constant chart-local dimension by pointed right translation between single source base changes, using the existing scheme field-extension dimension equality and algebraic-space fibre products/etale covers. Wrote all groupoid formulas and all chart identifications explicitly; no new nodes are needed for these elementary specializations. Found and documented a counterexample to the double-restriction dimension assertion inside the source proof, not to its theorem. Searched project Lean, whole DAG/blueprint and Mathlib; no attachment or leaf.",
+  "blueprint": "Inherited from.place is already specific: 06FD/06FE are the constant-local-dimension inputs to 06FF, supporting the original alteration reduction in det-thm-sf-ctf-stability-direct-images proof (3). Steps 1-3 prove that input, and Step 4 gives its supremum and group clauses. Latest blueprint direct-images proof (3) uses the proper/open preservation tools; no current blueprint node restates this auxiliary field-groupoid theorem. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic scheme fibre-dimension equality, specialized to a field extension on a scheme atlas; the unit supplies no replacement for this local calculation."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and etale-atlas base change; used for source fibres and their scheme charts, not for a trace-formula argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-cded2b299",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-cded2b299 (reviewer sub-agent of L); spot-checked: Read the item's 4 steps, both cited statements and the sources in full: Stacks 06FD/06FE (spaces-more-groupoids l.889ff), 0452 (l.522), 02YF, 04LP, 02FY, 04NS; tags confirmed in tags/tags. No new nodes. The statement and its 6 stmt_deps are unchanged, and proof_deps equal the union of step uses. Step 1: the chart V x_R F_a = V x_U Spec L comes from pasting fibre products, V->U is locally of finite type by the hypothesis on s, and 02FY(1) over Spec K, Spec L gives dim_w(V_L)=dim_v(V). Step 2: Spec K has one point, so a common field L gives t a = t b, and u=sa, v=sb stay distinct. Step 3: q=c(ia,b) is composable since s(ia)=ta=tb and runs from v to u. f->f∘q is natural over L with inverse given by q^{-1}, and it sends ã to b̃. Charts transfer, so dim_r(R)=dim_{r0}(R). This is the pointed form of 0452. Step 4: e makes |R| nonempty, the supremum of a constant family is its value, and the group case holds. The report's counterexample to the source proof of 06FD is correct: k(T)⊗_k k(T) has dimension 1, and the double base change along t is not locally of finite type. The delivered proof avoids that step, and the statement is true. Small cases checked: identity groupoid, G_m, alpha_p, Aut(K)-arrows. lem-a1-groupoid-source-pullback-translation (schemes only, not pointed) is not a duplicate. Batch-5: lem-trf-space-fibre-products-etale-covers is Stacks 02X2/041F, foundational fibre products and étale covers of algebraic spaces. Its 141-node closure contains only definitions and generic foundations, with no trace-formula, trace-transport or Poincaré-duality node, so it is outside the assumptions and accepted. Both tool_uses are generic and accepted. No SGA cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FieldGroupoidConstantLocalDimension",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fieldGroupoid_localDimension_eq_dimension",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fieldGroupoid_localDimension_eq_dimension",
+   "AlgebraicGeometry.AlgebraicSpace.fieldGroup_localDimension_eq_dimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FieldGroupoidConstantLocalDimension.lean",
+  "statement": "theorem fieldGroupoid_localDimension_eq_dimension {S : Scheme.{u}} (K : Type u) [Field K] (b : Spec (CommRingCat.of K) ⟶ S) (R : AlgebraicSpace S) (s t : R.obj.obj ⟶ yoneda.obj (Over.mk b)) (e : yoneda.obj (Over.mk b) ⟶ R.obj.obj) (i : R.obj.obj ⟶ R.obj.obj) (c : Limits.pullback s t ⟶ R.obj.obj) (hgroupoid : IsPresheafGroupoid s t e i c) (hs : ∀ (V : Over S) (a : yoneda.obj V ⟶ R.obj.obj) (f : V ⟶ Over.mk b), IsEtale a → a ≫ s = yoneda.map f → LocallyOfFiniteType f.left) (ht : ∀ (V : Over S) (a : yoneda.obj V ⟶ R.obj.obj) (f : V ⟶ Over.mk b), IsEtale a → a ≫ t = yoneda.map f → LocallyOfFiniteType f.left) (r : Point R.obj.obj) : etaleLocalDimension R.obj.obj r = etaleDimension R.obj.obj",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6148c459a",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Statement matches Stacks 06FD(1)/06FE(1) and the node clause by clause: S, K, U=yoneda(Over.mk b), R : AlgebraicSpace S, s,t,e,i,c with c on pullback s t, IsPresheafGroupoid laws (c(a,b)=a∘b), hs/ht finite type on every étale chart (yoneda fully faithful, so never vacuous and no stronger), Point classes, etaleLocalDimension/etaleDimension (open-neighbourhood dimension, not stalk), ∀ r equality; group case uses p for both source and target with one hp and allows S=Spec K. Same arguments as the landed citer fieldGroupoid_dimension_eq_stabilizer. Edge cases: R nonempty via e, ∞ allowed, no reducedness/characteristic/universe restriction. lean.statement matches the file exactly; added stmt_deps def-sfb-algebraic-space-groupoid and def-sfb-algebraic-space-etale-dimension are in the project and used; node diff only stmt_deps+lean; both proofs `by sorry`; docstrings have source, blueprint tag and the 4 proof steps; no duplicate declaration; report has both required sections. No change made, so no compile run."
+ }
+}

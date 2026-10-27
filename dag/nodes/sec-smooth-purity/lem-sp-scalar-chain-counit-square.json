@@ -1,0 +1,153 @@
+{
+ "id": "lem-sp-scalar-chain-counit-square",
+ "kind": "statement",
+ "title": "Universal counit square for ordinary scalar balancing",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\varphi:A\\to B$ a homomorphism of finite commutative rings. Use the ordinary uncompleted pro-etale module categories and exact constant-ring inverse images [def-weil-pbc-proetale-modules, def-weil-pbc-proetale-operations]. Let $E_Z$ and $T_Z$ be ordinary and derived extension along $\\varphi_Z$, $r_Z$ restriction, and $e_Z:r_ZE_Z\\simeq(-)\\otimes_{A_Z}B_Z$ the uniquely pure-tensor-normalized ordinary identification [def-sp-proetale-scalar-mate-identifications, det-sp-scalar-extension-functor]. Let $b:r_Xf_B^*\\simeq f_A^*r_Y$ be the specified derived restriction comparison and $\\theta:f_B^*T_Y\\simeq T_Xf_A^*$ the inverse scalar mate [lem-weil-pbc-ring-sheaf-change-adjunction, def-sp-constant-scalar-pullback-comparison]. Let $t:f_A^*((-)\\otimes B_Y)\\simeq(f_A^*(-))\\otimes B_X$ be any natural ordinary tensor isomorphism with the unit-section formula of [lem-sp-proetale-scalar-balancing-chain]. For every cochain complex $P$ [def-pc-tensor-complex-sheaves], define $c_{t,P}:f_A^*r_YE_YP\\simeq r_XE_Xf_A^*P$ by applying $f_A^*e_Y$, then $t$, then $e_X^{-1}$ in each degree. This is an actual chain isomorphism, constructed degreewise, without any derived choice. Write $d_Z(P)=r_Z(\\varepsilon_Z(P))$ followed by the exact restriction localization factor, where $\\varepsilon_Z$ is the universal scalar cochain counit, and write $\\lambda_C$ for the exact pullback localization factor [lem-weil-pbc-exact-functor-derived-factorization]. Then\n$$f_A^*(d_Y(P));\\lambda_{r_YE_YP};Q(c_{t,P})=b^{-1}_{T_YQP};r_X(\\theta_{QP};T_X(\\lambda_P);\\varepsilon_X(f_A^*P));\\lambda^{r_X}_{E_Xf_A^*P}.$$\nThe notation $;$ means composition in the order written. No K-flatness, boundedness or coefficient flatness is assumed; this statement does not assert invertibility of either scalar counit.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4, lemma-derived-base-change and lemma-pullback-tensor-product; ordinary balancing: sites-modules.tex, Tag 03EL, lemma-tensor-product-pullback"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sp-proetale-scalar-mate-identifications",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sp-proetale-scalar-balancing-chain",
+  "def-sp-proetale-constant-coefficient-ring-map"
+ ],
+ "proof": [
+  {
+   "step": 1,
+   "text": "Use balancing-chain uniqueness and B-linearity to lift the transported ordinary tensor comparison to B-module sheaves. Transposing through the scalar and geometric adjunctions identifies its inverse with the ordinary scalar mate: both unit formulas send x to 1 tensor inverse-image(x). Reuse its proved ordinary lifting and mate-identification helpers; these do not use the derived normalization theorem.",
+   "uses": [
+    "lem-sp-proetale-scalar-balancing-chain",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-exc-unbounded-coefficient-pullback-model"
+   ],
+   "elementary": false
+  },
+  {
+   "step": 2,
+   "text": "Apply the normalized cochain representative formula for the derived mate, then exact scalar restriction. Use the termwise restriction/pullback localization square. The beta factors and ordinary tensor identifications cancel to give the stated c_t square on every complex.",
+   "uses": [
+    "lem-pur-derived-mate-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sp-constant-scalar-pullback-comparison",
+    "lem-weil-pbc-pulled-reduction-normalization-comparison",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-scalar-balancing-chain",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-exc-unbounded-coefficient-pullback-model",
+  "lem-pur-derived-mate-comparison",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-weil-pbc-pulled-reduction-normalization-comparison",
+  "lem-pod-derived-exact-square-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Parent normalization proof, Step 2: scalar counit square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors",
+   "date": "2026-10-27",
+   "results": "{\"t\": \"2026-10-27T07:24:33Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryFactors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\"], \"digest\": \"04498fc16b588432\"}",
+   "verdict": "Related ordinary adjunction and localization APIs; no matching normalized sheaf-derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryFactors",
+   "date": "2026-10-27",
+   "results": "{\"t\": \"2026-10-27T07:24:34Z\", \"tool\": \"loogle\", \"query\": \"Functor.mapDerivedCategoryFactors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Functor.mapDerivedCategoryFactors'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "Related ordinary adjunction and localization APIs; no matching normalized sheaf-derived comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with derived extension of scalars and tensor product",
+   "date": "2026-10-27",
+   "results": "{\"t\": \"2026-10-27T07:24:37Z\", \"tool\": \"leanfinder\", \"query\": \"Inverse image of sheaves of modules commutes with derived extension of scalars and tensor product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback_map_\\u03b9Free_comp_pullbackObjFreeIso_hom\"], \"digest\": \"62fbf8be9b431b16\"}",
+   "verdict": "Related ordinary adjunction and localization APIs; no matching normalized sheaf-derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal derived extension of scalars counit commutes with the inverse image tensor comparison on chain complexes of sheaves of modules",
+   "date": "2026-10-27",
+   "results": "{\"t\": \"2026-10-27T07:33:39Z\", \"tool\": \"leansearch\", \"query\": \"The universal derived extension of scalars counit commutes with the inverse image tensor comparison on chain complexes of sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"d3b18d75ff130777\"}",
+   "verdict": "Related ordinary adjunction and localization APIs; no matching normalized sheaf-derived comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.ProEtaleScalarTensorNormalization",
+  "date": "2026-10-27",
+  "group": "H7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-direct-image",
+   "place": "Proof Step 1, tensor-pullback identification in the counit transpose; scalar-tensor normalization Step 2",
+   "via": [
+    "lem-sp-proetale-scalar-tensor-normalization",
+    "lem-sp-direct-image-change-ring-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ProEtaleScalarChainCounitSquare",
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleScalarChainCounitSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarTensorChainCounitSquare",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarTensorChainIso",
+   "AlgebraicGeometry.ProEtale.scalarTensorChainCounitSquare"
+  ],
+  "statement": "theorem scalarTensorChainCounitSquare\n    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]\n    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (t : scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f ≅\n      proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X)\n    (ht : IsScalarBalancing φ f t)\n    (P : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ) :\n    (proEtaleConstantRingDerivedPullback A f).map\n      ((scalarMateRestriction φ Y).mapDerivedCategory.map\n          (scalarExtensionFunctorCounit φ Y P) ≫\n        (scalarMateRestriction φ Y).mapDerivedCategoryFactors.hom.app\n          ((reductionChangeComplex Y (proEtaleConstantRingMap (T := Y) φ)).obj P)) ≫\n      (proEtaleConstantRingPullback A f).mapDerivedCategoryFactors.hom.app\n        (((scalarMateRestriction φ Y).mapHomologicalComplex (.up ℤ)).obj\n          ((reductionChangeComplex Y (proEtaleConstantRingMap (T := Y) φ)).obj P)) ≫\n      DerivedCategory.Q.map (scalarTensorChainIso φ f t P).hom =\n    (proEtaleRingRestrictionDerivedPullback f\n      (proEtaleConstantRing Y A) (proEtaleConstantRing Y B)\n      (proEtaleConstantRing X A) (proEtaleConstantRing X B)\n      (proEtaleConstantRingMap (T := Y) φ) (proEtaleConstantRingMap (T := X) φ)\n      (proEtaleConstantRingComparison f A) (proEtaleConstantRingComparison f B)\n      (proEtaleConstantInverseImageMap_naturality f\n        (CommRingCat.ofHom (RingHom.ulift φ))).symm).inv.app\n          ((directImageScalarExtension φ Y).obj (DerivedCategory.Q.obj P)) ≫\n      (scalarMateRestriction φ X).mapDerivedCategory.map\n        ((directImageScalarPullbackIso φ f).hom.app (DerivedCategory.Q.obj P) ≫\n          (directImageScalarExtension φ X).map\n            ((proEtaleConstantRingPullback A f).mapDerivedCategoryFactors.hom.app P) ≫\n          scalarExtensionFunctorCounit φ X\n            (((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).obj P)) ≫\n      (scalarMateRestriction φ X).mapDerivedCategoryFactors.hom.app\n        ((reductionChangeComplex X (proEtaleConstantRingMap (T := X) φ)).obj\n          (((proEtaleConstantRingPullback A f).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "sheaf-dag",
+  "by": "H7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12d1d",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261027T103432-L-1077270",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-12d1d",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261027T103432-L-1077270",
+  "kind": "interface",
+  "note": "independent cc review: item Lean (statement byte-identical to live) + new ChainCounitSquare/RepresentativeSquare modules and nodes against the item node plan, DAG owners and clone import graph; adapted BalancingChain/UCPM diffs (one import line each) against the clone"
+ }
+}

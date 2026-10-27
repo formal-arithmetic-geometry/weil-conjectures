@@ -1,0 +1,462 @@
+{
+  "id": "lem-sf-ambient-pullback-tensor-coherence",
+  "kind": "statement",
+  "title": "Coherent module pullback and derived tensor on ambient coefficient categories",
+  "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\geq1$ [def-weil-l-adic-coefficient-extension]. All schemes are finite-type $k$-schemes; their structure maps are not required to be separated [def-weil-scheme-morphism-properties]. Use small pro-etale sites [def-weil-pbc-proetale-site]. For each $T$, choose either $\\mathscr M_T=\\operatorname{Mod}((A_n)_T)$ at one fixed $n$, or the category $\\mathscr M_T$ of module sheaves $M_n$ over $(A_n)_T$ with semilinear maps $M_{n+1}\\to\\operatorname{Res}_{A_{n+1}\\to A_n}M_n$ and compatible componentwise morphisms [def-weil-sheaf-of-modules-category, def-pc-sheaf-restrict-scalars, lem-coef-semilinear-derived-sections]. Use the ordinary unbounded derived category $D(\\mathscr M_T)$ [def-weil-abstract-derived-category]. For a scheme map $f$ write $f^*$ for exact constant-coefficient module inverse image and $P_f=D(f^*)$; for an open immersion $j$ write $j_!$ for exact extension by zero and $J_j=D(j_!)$. Use the specified adjunctions $P_f\\dashv S_f=Rf_*$ and $J_j\\dashv P_j$ [def-weil-pbc-proetale-operations, lem-pur-site-restriction-module-adjunction-exact]. System operations are constructed simultaneously on the ringed diagram site, before finite evaluation, scalar restriction or total limit [lem-coef-semilinear-derived-sections].\n\nFor composable $u:X\\to Y$, $v:Y\\to Z$, let $\\widetilde d_{v,u}:u^*v^*\\cong(vu)^*$ be the adjunction-compatible comparison induced by the canonical fibre-product section comparison for direct images [lem-weil-pbc-site-morphism-composition, def-weil-pbc-composite-adjunction]. With the canonical constant-ring maps $c_u:u^{-1}(A_n)_Y\\cong(A_n)_X$, its local tensor formula is\n$$ (m\\otimes a)\\otimes b\\longmapsto m\\otimes c_u(a)b. $$\nThis formula gives morphisms of semilinear systems, preserving all coefficient transitions. The constant-ring maps satisfy $c_{vu}=c_u\\circ u^{-1}(c_v)\\circ\\alpha_{u,v}$, where $\\alpha_{u,v}:(vu)^{-1}\\cong u^{-1}v^{-1}$ is the canonical inverse-image comparison. The comparisons $\\widetilde d$ preserve the composite adjunction units and are natural, associative and unital. Their exact localizations $d_{v,u}:P_uP_v\\cong P_{vu}$ have the same laws.\n\nLet $\\mu_f:P_f(F\\otimes^{\\mathbf L}G)\\cong P_fF\\otimes^{\\mathbf L}P_fG$ be the canonical derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The following equality of natural transformations holds in $D(\\mathscr M_X)$:\n$$ (d_{v,u,F}\\otimes d_{v,u,G})\\circ\\mu_u\\circ P_u(\\mu_v)=\\mu_{vu}\\circ d_{v,u,F\\otimes^{\\mathbf L}G}. $$\nThe ordinary module tensor comparisons satisfy the corresponding equality on sheaf tensor products. For K-flat flat-term complexes representing $F,G$, their successive pullbacks are K-flat with flat terms, and the two chain maps on their total tensor complexes coincide and represent this derived equality [def-pc-kflat-complex, def-pc-tensor-complex-sheaves]. All associators are canonical. The system equality is an equality before evaluation, for arbitrary unbounded system inputs, without a cartesian-system or flat-transition hypothesis.",
+  "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D3 (lemma-adjoint-push-pull-modules); sites.tex Tag 03CB (lemma-composition-morphisms-sites). Agent extension of the explicit tensor formula and K-flat comparison to both ambient coefficient settings; returned proof Steps 1 and 3."
+  },
+  "stmt_deps": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-pbc-proetale-site",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-proetale-operations",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-pc-kflat-complex",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-composite-adjunction",
+    "def-pc-tensor-complex-sheaves"
+  ],
+  "proof": [
+    {
+      "text": "Use [lem-trf-constant-coefficient-composition] with $h=u,k=v,A=A_n$: this is exactly the asserted equation for $c_{vu}$, with the direction of $\\alpha$ as written in the item. The canonical maps are also natural in $A_n\\to A_r$: the two composites send every constant section $a$ to the same reduced constant section. The constant-sheaf sheafification universal property [def-weil-pbc-constant-sheaf] makes these ring-sheaf maps equal; [prop-weil-pbc-proetale-constant-ring-map] identifies them with the specified $c_f$. Thus these are compatible maps of ring towers. For systems use the ringed sequence site of [def-coef-ringed-sequence-site]; its ring restrictions are precisely the quotient maps. The underlying geometric inverse image on sequence topoi is levelwise $f^{-1}$: the levelwise topos adjunction restricts to compatible families of maps by naturality of its hom bijection, and finite limits are componentwise. Together with the preceding ring-tower maps this is a morphism of ringed topoi. Its module inverse image is the exact system functor of [lem-coef-semilinear-derived-sections]. This supplies a single ringed-site setting for the rest of the proof, not an inference of morphism equality from derived evaluations. In the Lean implementation, finite exactness uses [lem-pur-coefficient-pullback-exact]. For systems apply [lem-sf-sequence-module-pullback-evaluation] to the sectionwise identity direct-image comparison; its inverse mate identifies ordinary pullback at each level. Componentwise exactness from [lem-coef-semilinear-derived-sections] then proves exactness of the simultaneous module pullback.",
+      "uses": [
+        "lem-trf-constant-coefficient-composition",
+        "def-weil-pbc-constant-sheaf",
+        "prop-weil-pbc-proetale-constant-ring-map",
+        "def-coef-ringed-sequence-site",
+        "lem-coef-semilinear-derived-sections",
+        "lem-pur-coefficient-pullback-exact",
+        "lem-sf-sequence-module-pullback-evaluation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 03CB (lemma-composition-morphisms-sites, sites.tex) and 03D3 (lemma-adjoint-push-pull-modules); constant-sheaf and sequence-site specialization"
+      }
+    },
+    {
+      "text": "At each level apply [lem-sf-proetale-tensor-composition-unit] with $h=u,k=v,R_T=(A_n)_T$ and Step 1's coefficient equation. It gives the natural invertible map $(m\\otimes a)\\otimes b\\mapsto m\\otimes c_u(a)b$, its inverse $m\\otimes b\\mapsto(m\\otimes1)\\otimes b$, and its composite-adjunction unit equation for precisely the direct-image section comparison in the item. These are also system morphisms. Indeed, if $\\theta:M_{n+1}\\to\\operatorname{Res}M_n$ is any semilinear transition, either route around the transition square sends $((m\\otimes a)\\otimes b)$ to $\\theta(m)\\otimes c_{u,n}(\\bar a)\\bar b$, since $\\overline{c_{u,n+1}(a)b}=c_{u,n}(\\bar a)\\bar b$. The inverse formula has the same property. This verifies every horizontal restriction as well as the vertical ones. Ordinary system morphisms and adjunction units are compatible componentwise maps by [lem-coef-semilinear-derived-sections]; hence the displayed unit equations are equalities of system morphisms. This uses no condition on $\\theta$ beyond semilinearity.",
+      "uses": [
+        "lem-sf-proetale-tensor-composition-unit",
+        "lem-coef-semilinear-derived-sections"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03D3 (lemma-adjoint-push-pull-modules); explicit comparison and unit equation of lem-sf-proetale-tensor-composition-unit"
+      }
+    },
+    {
+      "text": "For a third scheme map $w:W\\to X$, the two direct-image composition maps are equal: both identify the iterated fibre product over a site object with its single composite fibre product, preserving every projection, so [def-pc-fibre-product] gives equality. Apply [lem-trf-adjoint-composition-coherence] to these direct-image isomorphisms and the module adjunctions: its unit-compatible left-adjoint comparisons are Step 2's maps, so they are associative. The scalar check is $(((m\\otimes a)\\otimes b)\\otimes e)\\mapsto m\\otimes c_w(w^{-1}(c_u)(a))c_w(b)e$ along either route, using Step 1's equation. With an identity map the comparison is the scalar-action unitor $m\\otimes b\\mapsto mb$, inverse $m\\mapsto m\\otimes1$. Its unit equation is the identity-adjunction equation of [def-weil-pbc-composite-adjunction]; uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] identifies it with the specified identity comparison. Consequently the two unit laws follow by substitution in Step 2's formula. All these equations hold for ordinary systems because the maps have already been constructed there.",
+      "uses": [
+        "def-pc-fibre-product",
+        "lem-trf-adjoint-composition-coherence",
+        "def-weil-pbc-composite-adjunction",
+        "lem-weil-pbc-conjugate-iso-unit-equation"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tags 03CB (sites.tex) and 03D3; categories.tex Tags 0B65 and 0DV0; scalar associativity and identity"
+      }
+    },
+    {
+      "text": "The ordinary tensor comparison exists and is natural by [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. In the right-scalar convention its normalized formula is $(x\\otimes y)\\otimes a\\mapsto(x\\otimes a)\\otimes(y\\otimes1)$. Its inverse sends $(x\\otimes a)\\otimes(y\\otimes b)$ to $(x\\otimes y)\\otimes ab$; balancing verifies that both formulas are well defined and mutually inverse, so they give the canonical tensor comparison. For the inverse-image factor use [lem-pur-proetale-inverse-image-tensor-comparison], whose composition equation identifies the iterated pullbacks of $x\\otimes y$ with the tensor of the iterated pullbacks of $x$ and $y$. Now both routes in the ordinary tensor square in the statement send $((x\\otimes y)\\otimes a)\\otimes b$ to $(x\\otimes c_u(a)b)\\otimes(y\\otimes1)$. The inverse-image composition on $x,y$ is the same on both routes by that cited equation. Equality extends from these generators by the tensor/sheafification universal property [def-pur-sheaf-tensor-product]. This also holds for systems: at a transition each coefficient becomes its reduction and $x,y$ become $\\theta_M(x),\\theta_N(y)$, respectively. Step 1's ring-map naturality gives the same displayed answer after reduction on either route. Thus the tensor comparisons and the entire square are maps and an equality on the ringed sequence site itself. Arbitrary transitions are allowed; neither transition is being identified with a scalar-extension isomorphism.",
+      "uses": [
+        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "lem-pur-proetale-inverse-image-tensor-comparison",
+        "def-pur-sheaf-tensor-product"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03EL (lemma-tensor-product-pullback); canonical generator calculation for composite pullback"
+      }
+    },
+    {
+      "text": "Apply [lem-pur-cochain-pullback-tensor-coherence] to the ringed topoi of Step 1, either the finite sites or the sequence sites. Its comparison on possibly unbounded complexes is the direct-sum total of the ordinary comparisons and it satisfies the composition equation with the canonical scalar-multiplication compositor, which Step 2 identified with $\\widetilde d$. This is the displayed tensor square on complexes. More explicitly, in each summand of total degree $p+q$ its two maps are Step 4's equal maps. They preserve $d_P\\otimes1+(-1)^p1\\otimes d_Q$ because the ordinary comparison is natural in both module arguments; no factor is permuted. Equality on every summand yields equality on the whole direct sum by [def-pc-tensor-complex-sheaves]. In the system case these are chain maps of modules on the sequence site, so this equality precedes both localization and evaluation.",
+      "uses": [
+        "lem-pur-cochain-pullback-tensor-coherence",
+        "def-pc-tensor-complex-sheaves"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 07A4 (lemma-pullback-tensor-product); signed totalization of Tag 03EL"
+      }
+    },
+    {
+      "text": "Choose flat-term K-flat resolutions $P\\to F$ and $Q\\to G$ on this single ringed site by [lem-pc-kflat-resolution]. In the system case they resolve the entire systems, not separately chosen levels. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] successively to $v,u,vu$: the complexes $v^*P,v^*Q,u^*v^*P,u^*v^*Q,(vu)^*P,(vu)^*Q$ are all K-flat with flat terms, and their total tensors compute the required derived tensors. Exact pullback is computed termwise on every complex by [lem-weil-pbc-exact-functor-derived-factorization], so localization of the Step 2 compositor computes $d$, including on $\\operatorname{Tot}(P\\otimes Q)$. The canonical derived tensor comparison is the localized total ordinary comparison of Step 5, as in the K-flat construction of Tag 07A4 and [lem-coef-semilinear-derived-sections] for system operations. Therefore localizing Step 5 gives exactly $(d_F\\otimes d_G)\\mu_uP_u(\\mu_v)=\\mu_{vu}d_{F\\otimes^LG}$. By [lem-weil-pbc-site-derived-tensor-descent], these natural transformations are determined on flat-term K-flat representatives; hence the equality holds naturally for all unbounded inputs.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "lem-weil-pbc-exact-functor-derived-factorization",
+        "lem-coef-semilinear-derived-sections",
+        "lem-weil-pbc-site-derived-tensor-descent"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), 0G7D (lemma-factor-through-K-flat); derived.tex Tag 015F"
+      }
+    },
+    {
+      "text": "Finally apply the natural-transformation localization property [lem-weil-pbc-localization-universal-property] to the exact termwise pullbacks. It preserves composition, identities and natural isomorphisms, so Step 3's associativity, identity and naturality equations descend to $d$. This completes the exact-localization assertions in addition to the tensor square of Step 6. The chain-map comparison in Step 5 took place on the ringed sequence site and Step 6 resolved that site as a whole; thus the derived system equality is established there before evaluation. No faithfulness of evaluation on derived morphisms, flatness of coefficient transitions, or cartesian condition has entered.",
+      "uses": [
+        "lem-weil-pbc-localization-universal-property"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/categories.tex",
+        "place": "categories.tex Tag 04VG (lemma-properties-left-localization); full faithfulness of restriction along localization"
+      }
+    },
+    {
+      "text": "For tensorData_existsUnique, apply the ordinary ringed-site pullback generator theorem to the finite site or the single ringed sequence site. Base change is representably flat, including its product with the natural-number identity. Totalize the resulting natural ordinary comparison and descend it with the flat-term K-flat representative models. Assemble the normalized ordinary, chain and derived data with an abstract exact functor first, then specialize to the selected ambient pullback. The ambient pure-section abbreviation shares the independent-size canonical sheafification construction, so generator normalization and naturality transport to the constructed bundle. Conversely the ordinary uniqueness theorem identifies any other ordinary part; uniqueness of total and derived TensorComparisonModel data identifies the entire bundle. The final ambientPullbackTensorCoherence proof remains an open named theorem with the preceding planned steps. The exactness verification compares the underlying section functors by a componentwise natural isomorphism and reflects their finite limits.",
+      "uses": [
+        "lem-sf-site-pullback-tensor-generators",
+        "lem-sf-exact-tensor-model-construction-independent",
+        "lem-sf-tensor-comparison-model-uniqueness",
+        "def-sf-bundled-tensor-comparison",
+        "def-sf-ordinary-tensor-pullback-data"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YN, 07A4, 0G7E and 0G7D; sites-modules.tex Tag 03EL."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-trf-constant-coefficient-composition",
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-coef-ringed-sequence-site",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-proetale-tensor-composition-unit",
+    "def-pc-fibre-product",
+    "lem-trf-adjoint-composition-coherence",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-pur-coefficient-pullback-exact",
+    "lem-sf-sequence-module-pullback-evaluation",
+    "lem-sf-site-pullback-tensor-generators",
+    "lem-sf-exact-tensor-model-construction-independent",
+    "lem-sf-tensor-comparison-model-uniqueness",
+    "def-sf-bundled-tensor-comparison",
+    "def-sf-ordinary-tensor-pullback-data"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Ordinary tensor generator normalization (03EL), signed totalization (06YN), flat K-flat descent and rigidity (07A4, 0G7E, 0G7D); the final coherence theorem retains its stated seven-step plan."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "pullback_assoc|pullbackComp|leftDerivedUpperStarTensor",
+      "results": "25 hits; Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean",
+      "date": "2026-10-22",
+      "verdict": "no match: ordinary underived module pullback coherence is present, but not the combined constant-ring section formula, semilinear transition certificate and unbounded derived tensor/composition equation"
+    },
+    {
+      "tool": "loogle",
+      "query": "SheafOfModules.pullback_assoc",
+      "results": "1 hits; SheafOfModules.pullback_assoc",
+      "date": "2026-10-22",
+      "verdict": "no match: ordinary underived module pullback coherence is present, but not the combined constant-ring section formula, semilinear transition certificate and unbounded derived tensor/composition equation"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Pullback tensor comparison commutes with composition for unbounded derived sheaves of constant finite rings and inverse ring systems",
+      "results": "8 hits; CategoryTheory.Limits.pullback.mapDesc_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp_hom_app_left, CategoryTheory.Limits.pullback.map_comp, SheafOfModules.pullbackComp, CategoryTheory.MorphismProperty.Over.pullbackComp.congr_simp",
+      "date": "2026-10-22",
+      "verdict": "no match: ordinary underived module pullback coherence is present, but not the combined constant-ring section formula, semilinear transition certificate and unbounded derived tensor/composition equation"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Canonical pullback composition on proetale module sheaves is associative unital and compatible with derived tensor for semilinear coefficient systems",
+      "results": "8 hits; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality_assoc, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+      "date": "2026-10-22",
+      "verdict": "no match: ordinary underived module pullback coherence is present, but not the combined constant-ring section formula, semilinear transition certificate and unbounded derived tensor/composition equation"
+    },
+    {
+      "tool": "grep",
+      "query": "lemma pullback_assoc|def pullbackComp|conjugateEquiv_pullbackComp",
+      "results": "3 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+      "date": "2026-10-22",
+      "verdict": "no match: ordinary underived module pullback coherence is present, but not the combined constant-ring section formula, semilinear transition certificate and unbounded derived tensor/composition equation"
+    },
+    {
+      "tool": "grep",
+      "query": "pullback_assoc|pullbackComp|pullback.*[Tt]ensor",
+      "results": "5 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+      "date": "2026-10-22",
+      "verdict": "no match: these declarations give ordinary module pullback or abstract monoidal laws, not the stated semilinear-system comparison and its representative-normalized unbounded derived equation"
+    },
+    {
+      "tool": "loogle",
+      "query": "SheafOfModules.pullbackComp",
+      "results": "5 hits; SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+      "date": "2026-10-22",
+      "verdict": "no match: these declarations give ordinary module pullback or abstract monoidal laws, not the stated semilinear-system comparison and its representative-normalized unbounded derived equation"
+    },
+    {
+      "tool": "leansearch",
+      "query": "The composition comparison for inverse image of modules is a monoidal natural transformation compatible with tensor products",
+      "results": "8 hits; CategoryTheory.NatTrans.IsMonoidal.of_cartesianMonoidalCategory, CategoryTheory.NatTrans.IsMonoidal.comp, CategoryTheory.Functor.Monoidal.μNatIso, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural_assoc, CategoryTheory.CartesianMonoidalCategory.prodComparison_inv_natural, CategoryTheory.Functor.Monoidal.commTensorLeft_inv_app, CategoryTheory.Functor.Monoidal.μ_of_cartesianMonoidalCategory, CategoryTheory.NatTrans.instIsMonoidalProdProd'",
+      "date": "2026-10-22",
+      "verdict": "no match: these declarations give ordinary module pullback or abstract monoidal laws, not the stated semilinear-system comparison and its representative-normalized unbounded derived equation"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Pullback of module sheaves coherently preserves tensor products under composition and localizes to unbounded derived semilinear systems",
+      "results": "8 hits; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+      "date": "2026-10-22",
+      "verdict": "no match: these declarations give ordinary module pullback or abstract monoidal laws, not the stated semilinear-system comparison and its representative-normalized unbounded derived equation"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "lem-sf-ambient-proper-open-pasting",
+    "date": "2026-10-22",
+    "group": "Q144"
+  },
+  "chapter": "sec-six-functors",
+  "unit": "sk-rem-sf-pf-done",
+  "blueprint": {
+    "from": {
+      "node": "fix-prop-projection-formula",
+      "place": "Proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\": pullback and tensor/composition normalization (returned Steps 1,3).",
+      "via": [
+        "lem-sf-ambient-proper-open-pasting",
+        "lem-sf-composition-projection-mate"
+      ]
+    },
+    "same_as": [],
+    "is": null
+  },
+  "split_report": {
+    "date": "2026-10-22",
+    "item": "lem-sf-ambient-pullback-tensor-coherence",
+    "worker": "stage1",
+    "summary": "Q143: retained the complete statement; reused existing constant-ring, explicit module composition, cochain tensor and K-flat localization nodes. Wrote the coefficient-transition and tensor-generator calculations before simultaneous sequence-site localization. No new nodes and no Lean attachment.",
+    "blueprint": "Realizes the composition normalization inside fix-prop-projection-formula, proof sentence \"The composition, refinement, exchange and proper-coincidence identities are [prop-sf-pf-coherence]\", through the ambient proper/open pasting argument.",
+    "tool_uses": [
+      {
+        "node": "lem-trf-constant-coefficient-composition",
+        "why": "The actual canonical constant-ring structure maps obey the required composition equation. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "def-weil-pbc-constant-sheaf",
+        "why": "The sheafification universal property fixes equality and coefficient naturality on constant sections. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "prop-weil-pbc-proetale-constant-ring-map",
+        "why": "Identifies the specified constant-section maps and guarantees their invertibility, including the empty source. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "def-coef-ringed-sequence-site",
+        "why": "Presents entire semilinear systems as modules on one small ringed site. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-coef-semilinear-derived-sections",
+        "why": "Supplies the actual exact system pullback, adjunction and normalized K-flat tensor operations. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-sf-proetale-tensor-composition-unit",
+        "why": "Gives the explicit scalar formula and its adjunction-unit normalization at each finite coefficient. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "def-pc-fibre-product",
+        "why": "Uniqueness preserving the projections proves the direct-image section compositors associate. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-trf-adjoint-composition-coherence",
+        "why": "Transfers the verified direct-image associativity to the unit-compatible module comparators. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "def-weil-pbc-composite-adjunction",
+        "why": "Specifies the composite and identity adjunction units used to fix all comparison maps. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+        "why": "Uniqueness identifies the explicit identity unitor with the specified adjunction comparison. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+        "why": "Provides the canonical natural ordinary tensor comparison for arbitrary ringed topoi. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+        "why": "Controls the inverse-image tensor generators and their composition before scalar multiplication. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "def-pur-sheaf-tensor-product",
+        "why": "Its sheafified presheaf tensor presentation makes equality on local generators sufficient. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-pur-cochain-pullback-tensor-coherence",
+        "why": "Supplies the normalized total-complex tensor comparison and its composition equation on arbitrary small ringed sites. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "def-pc-tensor-complex-sheaves",
+        "why": "Specifies the direct-sum summands and differential used to verify chain equality. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Resolves the whole finite or sequence ringed site by flat-term K-flat complexes. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+        "why": "Preserves flat-term K-flat models and supplies the canonical derived tensor comparison. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-weil-pbc-exact-functor-derived-factorization",
+        "why": "Identifies the exact localized pullback with its termwise value on every complex. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-weil-pbc-site-derived-tensor-descent",
+        "why": "Allows verification of the bifunctor equality on flat-term K-flat representatives. No node of this interface unit supplies this generic construction."
+      },
+      {
+        "node": "lem-weil-pbc-localization-universal-property",
+        "why": "Descends the already verified comparison laws, preserving identities and composition. No node of this interface unit supplies this generic construction."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-trf-constant-coefficient-composition",
+    "def-weil-pbc-constant-sheaf",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-coef-ringed-sequence-site",
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-proetale-tensor-composition-unit",
+    "def-pc-fibre-product",
+    "lem-trf-adjoint-composition-coherence",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+  ],
+  "reviewed": {
+    "date": "2026-10-22",
+    "by": "L",
+    "reviewer": "NT-cc-Q143-32f291bf1",
+    "group": "Q143",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-32f291bf1 (reviewer sub-agent of L); spot-checked: Read all 7 steps in full. This is a no-new-node split under unit sk-rem-sf-pf-done, which has no steps; all 20 citations are declared as tool_uses and I accept them as generic. proof_deps equals the union of uses, every step is under 1500 characters, there is no repair note and no SGA citation. Batch-5 check: lem-trf-constant-coefficient-composition is the constant-ring-sheaf cocycle from Stacks 03CB/0H7J, with only pbc-definition proof_deps. lem-trf-adjoint-composition-coherence is the Mathlib leaf Adjunction.leftAdjointCompIso_assoc. Neither is part of the trace formula or Poincaré duality, or of their proofs, so both are accepted. Step 1: with h=u, k=v, A=A_n the trf node gives exactly c_{vu}=c_u∘u^{-1}(c_v)∘α_{u,v} in the item's direction. def-coef-normalized-dvr-tower confirms B_n=(A_n)_X with quotient transitions, so the sequence site uses the item's coefficients. Step 2: the a_{h,k}^{-1} of lem-sf-proetale-tensor-composition-unit is the unique adjunction-compatible composition iso (lem-weil-pbc-site-morphism-composition(3)), so it equals the trf α. I recomputed the transition square for an arbitrary semilinear θ: both routes give θ(m)⊗c_{u,n}(ā)b̄. Step 3: the fibre-product cocycle hypothesis holds, the lemma's a_{ijk} are Step 2's maps by unit uniqueness, and c_id=id gives the unitor. Step 5: matching lem-pur-cochain-pullback-tensor-coherence (its u=item v, its v=item u, a=d̃^{-1}) and inverting a gives exactly (d⊗d)μ_uP_u(μ_v)=μ_{vu}d, on any small ringed topos including the sequence site. Step 6: the proof of lem-weil-pbc-ringed-topoi-derived-tensor-pullback (def-weil-pbc-canonical-ringed-tensor-comparison) and Stacks 07A4 (sites-cohomology.tex:3684) build μ from the total ordinary comparison. Flat-term K-flat models plus the descent lemma give the equality for all unbounded inputs. Step 7: localization respects composition and identities. Edge cases checked: identity maps, empty source, non-flat Z/ℓ²→Z/ℓ, unbounded complexes, non-separated schemes. Advisory: lem-sfb-ringed-derived-monoidal-comparisons gives the general ringed-topos monoidality of Lh^*. The item is not a restatement of it, because the item pins d̃ to the fibre-product adjunction comparison and also asserts the coefficient cocycle and the system laws. Minor: the report mentions a citations.json that is not among the delivered files. No fixes."
+  },
+  "lean": {
+    "module": "Sheaf.Paper.AmbientPullbackTensorCoherence",
+    "declaration": "WeilConjectures.AmbientPullbackTensor.ambientPullbackTensorCoherence",
+    "declarations": [
+      "WeilConjectures.AmbientPullbackTensor.Site",
+      "WeilConjectures.AmbientPullbackTensor.siteCategory",
+      "WeilConjectures.AmbientPullbackTensor.topology",
+      "WeilConjectures.AmbientPullbackTensor.siteSmall",
+      "WeilConjectures.AmbientPullbackTensor.coefficients",
+      "WeilConjectures.AmbientPullbackTensor.Modules",
+      "WeilConjectures.AmbientPullbackTensor.Derived",
+      "WeilConjectures.AmbientPullbackTensor.base",
+      "WeilConjectures.AmbientPullbackTensor.baseContinuous",
+      "WeilConjectures.AmbientPullbackTensor.ringComponent",
+      "WeilConjectures.AmbientPullbackTensor.ringComponent_naturality",
+      "WeilConjectures.AmbientPullbackTensor.ringUnit",
+      "WeilConjectures.AmbientPullbackTensor.ringPush",
+      "WeilConjectures.AmbientPullbackTensor.ringPushRightAdjoint",
+      "WeilConjectures.AmbientPullbackTensor.ringPull",
+      "WeilConjectures.AmbientPullbackTensor.ringMap",
+      "WeilConjectures.AmbientPullbackTensor.moduleRingUnit",
+      "WeilConjectures.AmbientPullbackTensor.push",
+      "WeilConjectures.AmbientPullbackTensor.pushRightAdjoint",
+      "WeilConjectures.AmbientPullbackTensor.pull",
+      "WeilConjectures.AmbientPullbackTensor.adjunction",
+      "WeilConjectures.AmbientPullbackTensor.pullExact",
+      "WeilConjectures.AmbientPullbackTensor.pullAdditive",
+      "WeilConjectures.AmbientPullbackTensor.pullLimits",
+      "WeilConjectures.AmbientPullbackTensor.pullColimits",
+      "WeilConjectures.AmbientPullbackTensor.derivedPull",
+      "WeilConjectures.AmbientPullbackTensor.baseComp",
+      "WeilConjectures.AmbientPullbackTensor.ringPushComp",
+      "WeilConjectures.AmbientPullbackTensor.ringComp",
+      "WeilConjectures.AmbientPullbackTensor.pushComp_existsUnique",
+      "WeilConjectures.AmbientPullbackTensor.pushComp",
+      "WeilConjectures.AmbientPullbackTensor.comp",
+      "WeilConjectures.AmbientPullbackTensor.baseId",
+      "WeilConjectures.AmbientPullbackTensor.pushId_existsUnique",
+      "WeilConjectures.AmbientPullbackTensor.pushId",
+      "WeilConjectures.AmbientPullbackTensor.identity",
+      "WeilConjectures.AmbientPullbackTensor.derivedComp",
+      "WeilConjectures.AmbientPullbackTensor.derivedIdentity",
+      "WeilConjectures.AmbientPullbackTensor.generator",
+      "WeilConjectures.AmbientPullbackTensor.scalar",
+      "WeilConjectures.AmbientPullbackTensor.Tensor",
+      "WeilConjectures.AmbientPullbackTensor.TensorModels",
+      "WeilConjectures.AmbientPullbackTensor.tensor",
+      "WeilConjectures.AmbientPullbackTensor.tensorHom",
+      "WeilConjectures.AmbientPullbackTensor.pure",
+      "WeilConjectures.AmbientPullbackTensor.total",
+      "WeilConjectures.AmbientPullbackTensor.FlatRepresentative",
+      "WeilConjectures.AmbientPullbackTensor.TensorData",
+      "WeilConjectures.AmbientPullbackTensor.TensorData.Normalized",
+      "WeilConjectures.AmbientPullbackTensor.tensorData_existsUnique",
+      "WeilConjectures.AmbientPullbackTensor.tensorData",
+      "WeilConjectures.AmbientPullbackTensor.chainComp",
+      "WeilConjectures.AmbientPullbackTensor.CompositionLaws",
+      "WeilConjectures.AmbientPullbackTensor.ambientPullbackTensorCoherence"
+    ],
+    "file": "lean/Sheaf/Paper/AmbientPullbackTensorCoherence.lean",
+    "statement": "theorem ambientPullbackTensorCoherence (k₀ k : Type t) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k] [IsAlgClosure k₀ k] (_hell : ell ≠ ringChar k) {X Y Z : Scheme.{t}} (aX : X ⟶ Spec (CommRingCat.of k)) (aY : Y ⟶ Spec (CommRingCat.of k)) (aZ : Z ⟶ Spec (CommRingCat.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] [LocallyOfFiniteType aZ] [QuasiCompact aZ] (f : X ⟶ Y) (g : Y ⟶ Z) (_hf : f ≫ aY = aX) (_hg : g ≫ aZ = aY) (s : Option ℕ) (A : Tensor ell E Z s) (B : Tensor ell E Y s) (C : Tensor ell E X s) (TA : TensorModels ell E Z s A) (TB : TensorModels ell E Y s B) (TC : TensorModels ell E X s C) : CompositionLaws ell E (Spec (CommRingCat.of k)) s ∧ (IsIso (ringMap ell E f s) ∧ IsIso (ringMap ell E g s) ∧ IsIso (ringMap ell E (f ≫ g) s)) ∧ (ringMap ell E (f ≫ g) s = (ringComp f g s).hom.app (coefficients ell E Z s) ≫ (ringPull f s).map (ringMap ell E g s) ≫ ringMap ell E f s) ∧ ((tensorData ell E f s B C TB TC).Normalized ell E f s B C TB TC ∧ (tensorData ell E g s A B TA TB).Normalized ell E g s A B TA TB ∧ (tensorData ell E (f ≫ g) s A C TA TC).Normalized ell E (f ≫ g) s A C TA TC) ∧ (∀ M : Modules ell E Z s, ((adjunction ell E g s).comp (adjunction ell E f s)).unit.app M ≫ (push ell E f s ⋙ push ell E g s).map ((comp ell E f g s).hom.app M) = (adjunction ell E (f ≫ g) s).unit.app M ≫ (pushComp ell E f g s).hom.app ((pull ell E (f ≫ g) s).obj M)) ∧ (∀ (M : Modules ell E Z s) (U : Site Z s) (V : Site Y s) (W : Site X s) (p : V ⟶ (base g s).obj U) (q : W ⟶ (base f s).obj V) (m : M.val.obj (op U)) (a : (coefficients ell E Y s).obj.obj (op V)) (b : (coefficients ell E X s).obj.obj (op W)), ((comp ell E f g s).hom.app M).val.app (op W) (generator ell E f s ((pull ell E g s).obj M) V W q (generator ell E g s M U V p m a) b) = generator ell E (f ≫ g) s M U W (q ≫ (base f s).map p ≫ (baseComp f g s).inv.app U) m (scalar ell E f s V W q a * b)) ∧ (∀ (M N : Modules ell E Z s), (pull ell E f s).map ((tensorData ell E g s A B TA TB).model.ordinary M N).hom ≫ ((tensorData ell E f s B C TB TC).model.ordinary ((pull ell E g s).obj M) ((pull ell E g s).obj N)).hom ≫ tensorHom ell E X s ((comp ell E f g s).hom.app M) ((comp ell E f g s).hom.app N) = (comp ell E f g s).hom.app (tensor ell E Z s M N) ≫ ((tensorData ell E (f ≫ g) s A C TA TC).model.ordinary M N).hom) ∧ (∀ P Q : CochainComplex (Modules ell E Z s) ℤ, FlatRepresentative ell E Z s P → FlatRepresentative ell E Z s Q → (total ell E X s).map (Prod.mkHom (chainComp ell E f g s P) (chainComp ell E f g s Q)) ≫ (tensorData ell E (f ≫ g) s A C TA TC).model.chain P Q = (tensorData ell E f s B C TB TC).model.chain (((pull ell E g s).mapHomologicalComplex (.up ℤ)).obj P) (((pull ell E g s).mapHomologicalComplex (.up ℤ)).obj Q) ≫ ((pull ell E f s).mapHomologicalComplex (.up ℤ)).map ((tensorData ell E g s A B TA TB).model.chain P Q) ≫ chainComp ell E f g s ((total ell E Z s).obj (P, Q))) ∧ ∀ F G : Derived ell E Z s, (derivedPull ell E f s).map ((tensorData ell E g s A B TA TB).mu.hom.app (F, G)) ≫ (tensorData ell E f s B C TB TC).mu.hom.app ((derivedPull ell E g s).obj F, (derivedPull ell E g s).obj G) ≫ C.tensor.map (Prod.mkHom ((derivedComp ell E f g s).hom.app F) ((derivedComp ell E f g s).hom.app G)) = (derivedComp ell E f g s).hom.app (A.tensor.obj (F, G)) ≫ (tensorData ell E (f ≫ g) s A C TA TC).mu.hom.app (F, G)",
+    "branch": "newtargets-dag",
+    "by": "Q60",
+    "date": "2026-10-23",
+    "existing": false,
+    "note": "The finite level and entire semilinear-system cases are indexed by Option ℕ. Canonical comparators are adjunction mates of uniquely section-normalized direct-image isomorphisms. Tensor comparisons are uniquely normalized on pure tensor generators and on K-flat total complexes. Site Hom universe t and object universe t+1 remain distinct; coefficients live in max u (t+1)."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-23",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-d20af3ee3",
+    "group": "Q60",
+    "result": "pass",
+    "note": "Statement verbatim and declarations match; node changed only by lean field (first delivery). Clause check vs node: k=F̄_q/ℓ≠char, A_{n+1} via some n plus system via none, finite-type non-separated schemes, ringed-site push/pull with the specified adjunction, d̃ = leftAdjointCompIso mate of a section-pinned fibre-product pushComp (∃! true), generator formula (m⊗a)⊗b↦m⊗c_f(a)b true, ring cocycle c_fg=α;f^{-1}(c_g);c_f with IsIso, unit equation, CompositionLaws module+derived with eqToHom orientations checked, tensorData ∃!-pinned by pure-tensor/summand/K-flat derived normalization (determines μ), ordinary/chain (inverse orientation re-derived)/derived squares match node for arbitrary unbounded inputs. Edge cases: identities, empty, nonflat transitions, noncartesian systems, independent universes. Advisories: non-stmt_dep owner decls (sequence site, integral coefficients, proetale direct ring map, TensorComparisonModel); finite-case push/pull re-package coefficientProEtaleModule*; dep canonical derived tensor def unusable at independent universes; helper sorry instances true. No compile (no file changed)."
+  },
+  "reviewed_proof": {
+    "date": "2026-10-26",
+    "by": "L",
+    "reviewer": "C-16698",
+    "group": "Y9",
+    "result": "fix",
+    "landing": "20261026T071609-L-3954447",
+    "kind": "interface",
+    "note": "independent cc review: item node lem-sf-ambient-pullback-tensor-coherence and 6 new nodes vs delivered Lean (tensorData_existsUnique proved via sitePullbackTensorGenerators/modelOfOrdinary/tensorComparisonModel_unique, axioms clean); TensorData abbrev and pure rewrite vs change records and the original structure/tensorSection; both direct importers compiled against the sandbox-built delivery"
+  }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "lem-weil-sections-scalar-ordinary-tower",
+ "kind": "statement",
+ "title": "Ordinary sections coherence with independent coefficient universes",
+ "statement": "For a preorder-indexed compatible tower of commutative ring sheaves and coefficient rings, with coefficient rings allowed a smaller universe than sheaf sections, ordinary sheaf scalar extensions specified on objects and morphisms, and a pure-tensor normalized sections comparison, there exists a unique family of sheaf and module associators and action units satisfying the balanced formulas, their inverse formulas, the sections square, the identity square, and both four-stage associativity equations. Repeated indices are allowed. The section functor is evaluation at the specified terminal object followed by scalar restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CZ, 03CY; ordinary portion of lem-weil-sections-scalar-cochain-coherence, proof steps 1--4 and 6--8"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use extension/restriction adjunctions to construct the unique sheaf associators. The units insert 1 tensor x. Transposing twice gives c tensor (b tensor x) mapped to f(b)c tensor x, with inverse inserting 1. Construct the module maps by the identical ordinary tensor adjunction.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The normalized sections comparisons take double pure tensors to the same product of coefficients by lambda compatibility. Tensor generation gives the square. The identity case gives its unit version.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Both routes on three nested tensors multiply coefficients in the same order. Associativity proves the four-stage equations. Repeated use of the sheaf extension adjunction, rather than an assertion of global tensor generation, proves equality and uniqueness on sheaves.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CZ, 03CY; ordinary portion of lem-weil-sections-scalar-cochain-coherence, proof steps 1--4 and 6--8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary scalar extension associators on sheaves commute with evaluation at a terminal object and tensor comparison, including units and four-stage towers",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.ιFree_mapFree_inv_assoc, ModuleCat.extendScalars_assoc', SheafOfModules.pushforward_assoc, CategoryTheory.sheafToPresheaf_μ, SheafOfModules.pullback_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc. No normalized mixed-universe sections-tower statement.",
+   "date": "2026-10-24",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalarsComp",
+   "results": "11 hits including ModuleCat.extendScalarsComp, extendScalars_id_comp, extendScalars_comp_id, extendScalarsComp_hom_app_one_tmul, extendScalars_assoc, homEquiv_extendScalarsComp. These only address ordinary module associators.",
+   "date": "2026-10-24",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar_associator|mapDerivedCategoryCompIso|exact_derived_transformation_pasting",
+   "results": "msearch grep returned 0 hits. Local rg found RingedKFlatWord.scalar_associator, Functor.exactDerivedRestrictionComposition and ExactDerivedPasting.exact_derived_transformation_pasting; these cover constituent constructions.",
+   "date": "2026-10-24",
+   "verdict": "constituents only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointDerivedTensorTowerCoherence",
+  "date": "2026-10-24",
+  "group": "H6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final paragraph, coherence of point sections and ordinary scalar extension in finite coefficient towers; ordinary balanced tensor associators and units",
+   "via": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-point-derived-tensor-tower-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionsScalarOrdinaryTower",
+  "file": "lean/Sheaf/Paper/SectionsScalarOrdinaryTower.lean",
+  "declaration": "CategoryTheory.SectionsScalarOrdinaryTower.coherence",
+  "statement": "theorem coherence\n    (_hs : IsTerminal s)\n    (_fid : ∀ i, f i i le_rfl = 𝟙 (R i))\n    (_fcomp : ∀ i j k h g, f i j h ≫ f j k g = f i k (h.trans g))\n    (_aid : ∀ i, a i i le_rfl = 𝟙 (A i))\n    (_acomp : ∀ i j k h g, a i j h ≫ a j k g = a i k (h.trans g))\n    (_hm : ∀ i j h {F N} (v : F ⟶ N), (T i j h).map v = eqToHom (e i j h F) ≫\n      SheafOfModules.changeOfRingsHom (f i j h) F v ≫ eqToHom (e i j h N).symm)\n    (_compat : ∀ i j h,\n      ((f i j h).hom.app (op s)).hom.comp (lam i) = (lam j).comp (a i j h).hom)\n    (_normalized : ∀ i j h (F : S.{z, a, r, uC, vC} R i) (b : A j)\n      (n : (G.{z, a, r, uC, vC} s R A lam i).obj F),\n      (θ i j h).hom.app F\n        (modulePure.{z, a, r} A a i j h ((G.{z, a, r, uC, vC} s R A lam i).obj F) b n) =\n        pure (f i j h) (T i j h) (e i j h) F (op s) (lam j b) n) :\n    ∃! O : ScalarTower.OrdinaryMaps (S.{z, a, r, uC, vC} R) (M.{z, a, r} A) T (t.{z, a, r} A a),\n      Formula.{z, a, r, uC, vC} R A f a T e O ∧\n        ScalarTower.Coherent (G.{z, a, r, uC, vC} s R A lam) θ O",
+  "branch": "sheaf-dag",
+  "by": "H6",
+  "date": "2026-10-24",
+  "declarations": [
+   "CategoryTheory.ScalarTower.OrdinaryMaps",
+   "CategoryTheory.ScalarTower.Coherent",
+   "CategoryTheory.ScalarTower.comparison_exists_heq",
+   "CategoryTheory.SectionsScalarOrdinaryTower.S",
+   "CategoryTheory.SectionsScalarOrdinaryTower.M",
+   "CategoryTheory.SectionsScalarOrdinaryTower.t",
+   "CategoryTheory.SectionsScalarOrdinaryTower.modulePure",
+   "CategoryTheory.SectionsScalarOrdinaryTower.G",
+   "CategoryTheory.SectionsScalarOrdinaryTower.Formula",
+   "CategoryTheory.SectionsScalarOrdinaryTower.coherence",
+   "CategoryTheory.SectionsScalarOrdinaryTower.pure_transport",
+   "CategoryTheory.SectionsScalarOrdinaryTower.pure"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5b97f",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T202213-L-2692230",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-5b97f",
+  "group": "H6",
+  "result": "pass",
+  "landing": "20261025T202213-L-2692230",
+  "kind": "interface",
+  "note": "independent cc review: delivered PointDerivedTensorTowerCoherence + 2 new modules vs published item; original OrdinaryLaws/DerivedLaws/ChainLaws/PreservesModels text re-elaborated and proved equivalent field-by-field to the new records (modules = integralTowerModules by rfl); both direct importers compile unchanged; axioms of the new general results clean"
+ }
+}

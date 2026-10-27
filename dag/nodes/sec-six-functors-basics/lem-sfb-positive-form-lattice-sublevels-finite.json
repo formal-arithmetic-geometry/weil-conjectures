@@ -1,0 +1,225 @@
+{
+ "id": "lem-sfb-positive-form-lattice-sublevels-finite",
+ "kind": "statement",
+ "title": "Finite bounded sublevels of a positive rational lattice form",
+ "statement": "Let $M$ be a free abelian group with a finite $\\mathbf Z$-basis [def-weil-pbc-free-module], let $V=M\\otimes_{\\mathbf Z}\\mathbf Q$ [def-weil-pbc-module-tensor-product], and identify $M$ with its image under the injective map $m\\mapsto m\\otimes1$. Let $B:V\\times V\\to\\mathbf Q$ be a symmetric bilinear form, meaning that it is $\\mathbf Q$-linear in each argument and $B(v,w)=B(w,v)$. Assume $B(v,v)>0$ for every $v\\ne0$. For every $c\\in\\mathbf Q$, the set $\\{m\\in M:B(m\\otimes1,m\\otimes1)\\le c\\}$ is finite. The empty basis and negative $c$ are allowed.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Proposition 14.4(a), printed p.62, lattice-in-a-bounded-ellipsoid argument; rational bilinear-form formulation of the linear-algebra input implicit there."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Choose the given finite integer basis $e_1,\\ldots,e_r$. Base change of a free module gives the rational basis $f_j=e_j\\otimes1$ of $V$. Thus $m=\\sum_j z_je_j$ has $m\\otimes1=\\sum_j z_jf_j$, with uniquely determined $z_j\\in\\mathbf Z$. If $r=0$, then $M=\\{0\\}$ and the assertion holds. Also $B(v,v)\\ge0$ for every $v$: it is positive for $v\\ne0$ and is zero at $v=0$ by bilinearity. For $c<0$ the sublevel is empty. Hence assume $r>0$ and $c\\ge0$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-base-change-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Proposition 14.4(a), printed p.62; agent-written rational-coordinate expansion of the bounded-ellipsoid argument."
+   }
+  },
+  {
+   "text": "Apply the orthogonal-basis lemma over $\\mathbf Q$ to the finite-dimensional space $V$ and the symmetric bilinear form $B$. Write its basis as $(u_i)_{i=1}^n$ and put $d_i=B(u_i,u_i)>0$, since basis vectors are nonzero. For $v=\\sum_i x_iu_i$, expand bilinearly and use $B(u_i,u_j)=0$ for $i\\ne j$ to obtain $B(v,v)=\\sum_i d_ix_i^2$.",
+   "uses": [
+    "lem-sfb-rational-symmetric-form-orthogonal-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Proposition 14.4(a), printed p.62; agent-written rational-coordinate expansion of the bounded-ellipsoid argument."
+   }
+  },
+  {
+   "text": "For $v=m\\otimes1$ in the sublevel, all summands $d_ix_i^2$ are nonnegative, so $x_i^2\\le c/d_i$. The elementary inequality $|t|\\le1+t^2$ follows by considering $|t|\\le1$ and $|t|>1$. Consequently $|x_i|\\le R_i:=1+c/d_i$. Expand each $u_i$ in the rational basis: $u_i=\\sum_j a_{ji}f_j$, with fixed $a_{ji}\\in\\mathbf Q$. Comparing coefficients of $f_j$ gives $z_j=\\sum_i a_{ji}x_i$. Hence $|z_j|\\le K_j:=\\sum_i|a_{ji}|R_i$. These nonnegative rational bounds depend only on $B,c$ and the two chosen bases.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Proposition 14.4(a), printed p.62; agent-written rational-coordinate expansion of the bounded-ellipsoid argument."
+   }
+  },
+  {
+   "text": "Write each $K_j=p_j/q_j$ with integers $p_j\\ge0$, $q_j\\ge1$, and take $N_j=p_j+1\\in\\mathbf N$, so $K_j\\le N_j$. Each integer $z_j$ therefore belongs to the explicit list $-N_j,-N_j+1,\\ldots,N_j$. Enumerating these lists successively gives at most $\\prod_{j=1}^r(2N_j+1)$ tuples. The map $m\\mapsto(z_1,\\ldots,z_r)$ is injective by uniqueness of basis expansion. Thus the sublevel injects into this finite list of tuples and is finite.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Chapter I, proof of Proposition 14.4(a), printed p.62; agent-written rational-coordinate expansion of the bounded-ellipsoid argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-base-change-free",
+  "lem-sfb-rational-symmetric-form-orthogonal-basis"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, proof of Proposition 14.4(a), printed p.62; agent-written rational-coordinate expansion of the bounded-ellipsoid argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A positive definite quadratic form has finitely many integer lattice vectors of bounded value",
+   "results": "8 hits; top results: ZLattice.normBound_pos, ZLattice.tsumNormRPowBound_pos, NumberField.canonicalEmbedding.integerLattice.inter_ball_finite, ZLattice.tsumNormRPowBound, ZLattice.exists_finsetSum_norm_rpow_le_tsum, NumberField.mixedEmbedding.exists_ne_zero_mem_ringOfIntegers_of_norm_le, ZLattice.normBound, ZLattice.exists_forall_abs_repr_le_norm",
+   "date": "2026-10-22",
+   "verdict": "no match: PosDef gives positivity, Sylvester laws give equivalences of forms, and ZLattice results assume a norm/discrete real embedding; none is a one-line specialization to bounded sublevels of a rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuadraticMap.PosDef",
+   "results": "12 hits; top results: QuadraticMap.PosDef, QuadraticMap.PosDef.anisotropic, QuadraticMap.PosDef.nonneg, QuadraticMap.posDef_of_nonneg, QuadraticMap.posDef_iff_nonneg, QuadraticMap.PosDef.le_zero_iff, QuadraticMap.PosDef.add, QuadraticMap.PosDef.smul",
+   "date": "2026-10-22",
+   "verdict": "no match: PosDef gives positivity, Sylvester laws give equivalences of forms, and ZLattice results assume a norm/discrete real embedding; none is a one-line specialization to bounded sublevels of a rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "grep",
+   "query": "finite|compact|bounded|proper",
+   "results": "24 hits; top results: Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: PosDef gives positivity, Sylvester laws give equivalences of forms, and ZLattice results assume a norm/discrete real embedding; none is a one-line specialization to bounded sublevels of a rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive definite quadratic form takes bounded values on only finitely many points of a lattice",
+   "results": "8 hits; top results: QuadraticMap.PosDef.nonneg, QuadraticMap.posDef_iff_nonneg, QuadraticMap.PosDef, RootPairing.posRootForm_rootFormIn_posDef, QuadraticMap.posDef_of_nonneg, QuadraticMap.linMulLinSelfPosDef, Matrix.PosDef.dotProduct_mulVec_pos, QuadraticMap.PosDef.le_zero_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: PosDef gives positivity, Sylvester laws give equivalences of forms, and ZLattice results assume a norm/discrete real embedding; none is a one-line specialization to bounded sublevels of a rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational positive definite bilinear form on a free finite rank integer module has finite bounded sublevel sets",
+   "results": "8 hits; top results: ZLattice.normBound_pos, ZLattice.tsumNormRPowBound_pos, NumberField.canonicalEmbedding.integerLattice.inter_ball_finite, ZLattice.tsumNormRPowBound, NumberField.Units.dirichletUnitTheorem.unitLattice_inter_ball_finite, NumberField.mixedEmbedding.convexBodySum_isBounded, NumberField.mixedEmbedding.minkowskiBound_lt_top, ZLattice.exists_finsetSum_norm_rpow_le_tsum",
+   "date": "2026-10-22",
+   "verdict": "no match: PosDef gives positivity, Sylvester laws give equivalences of forms, and ZLattice results assume a norm/discrete real embedding; none is a one-line specialization to bounded sublevels of a rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuadraticMap\", \"finite\"",
+   "results": "0 hits; top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: PosDef gives positivity, Sylvester laws give equivalences of forms, and ZLattice results assume a norm/discrete real embedding; none is a one-line specialization to bounded sublevels of a rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalent.*weighted|weighted.*pos|finite.*Icc|finite.*bounded",
+   "results": "25 hits; Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/IsometryEquiv.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean, Mathlib/LinearAlgebra/QuadraticForm/Signature.lean",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits give positivity, diagonalization, or norm bounds for already embedded discrete lattices; none directly gives finiteness for the stated rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A positive definite quadratic form has finite bounded sublevel sets on an integer lattice",
+   "results": "8 hits; QuadraticMap.posDef_iff_nonneg, QuadraticMap.PosDef, RootPairing.posRootForm_rootFormIn_posDef, QuadraticMap.PosDef.nonneg, Matrix.PosDef.dotProduct_mulVec_pos, Matrix.PosDef, QuadraticMap.posDef_of_nonneg, Matrix.PosDef.of_toQuadraticForm'",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits give positivity, diagonalization, or norm bounds for already embedded discrete lattices; none directly gives finiteness for the stated rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "loogle",
+   "query": "QuadraticForm.PosDef",
+   "results": "0 hits; ; loogle: unknown identifier 'QuadraticForm.PosDef'",
+   "date": "2026-10-23",
+   "verdict": "no match: this query used an unknown identifier; corrected by the subsequent QuadraticMap name query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A positive definite quadratic form over the rationals is equivalent to a diagonal form with positive coefficients",
+   "results": "8 hits; Matrix.posDef_intCast_iff, Matrix.posDef_natCast_iff, QuadraticMap.PosDef, QuadraticMap.posDef_iff_nonneg, Matrix.PosDef.intCast, QuadraticMap.posDef_pi_iff, QuadraticForm.posDef_of_toMatrix', QuadraticMap.PosDef.nonneg",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits give positivity, diagonalization, or norm bounds for already embedded discrete lattices; none directly gives finiteness for the stated rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuadraticMap\", \"finite\"",
+   "results": "0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits give positivity, diagonalization, or norm bounds for already embedded discrete lattices; none directly gives finiteness for the stated rational form on an abstract finite free integer module"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A rational positive definite quadratic form has only finitely many integral vectors with bounded value",
+   "results": "8 hits; NumberField.Embeddings.finite_of_norm_le, NumberField.canonicalEmbedding.integerLattice.inter_ball_finite, ZLattice.normBound_pos, ZLattice.tsumNormRPowBound_pos, NumberField.Units.dirichletUnitTheorem.unitLattice_inter_ball_finite, NumberField.house.exists_ne_zero_int_vec_house_le, NumberField.mixedEmbedding.minkowskiBound_lt_top, NumberField.hermiteTheorem.finite_of_discr_bdd_of_isReal",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: hits give positivity, diagonalization, or norm bounds for already embedded discrete lattices; none directly gives finiteness for the stated rational form on an abstract finite free integer module"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-automorphisms-finite",
+  "date": "2026-10-22",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53. Supporting fact for Proposition 14.4(a): Chapter I, proof of Proposition 14.4(a), printed p.62, lattice-in-a-bounded-ellipsoid argument; rational bilinear-form formulation of the linear-algebra input implicit there.",
+   "via": [
+    "lem-sfb-polarized-abelian-automorphisms-finite",
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-positive-form-lattice-sublevels-finite",
+  "worker": "stage1",
+  "summary": "Expanded the finite-ellipsoid lattice argument algebraically over ℚ. Reused the existing base-change-of-free-basis leaf and introduced only the exact Mathlib orthogonal-basis leaf. Positivity gives bounds on orthogonal coordinates; the fixed change-of-basis coefficients give explicit finite integer boxes. Checked negative c, rank zero, zero c and non-integral coefficients. Milne p.62 contains a compactness typo, recorded in report.md; the item statement needs no change.",
+  "blueprint": "Auxiliary linear-algebra input under the inherited direct-image alteration/level-structure prerequisite chain: the finite-ellipsoid step of Milne I Proposition 14.4(a), as identified by blueprint.from.place. The current latest unit and the imported route were read; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N0-785ab7689",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-785ab7689 (reviewer sub-agent of L); spot-checked: Read Milne AV I Prop 14.4(a), printed p.62 (PDF p.68). The item is the sublevel-finiteness fact the citer lem-sfb-polarized-abelian-automorphisms-finite applies with c=2g; the statement is unchanged, its hypotheses are all needed, and its edge cases (rank 0, c<0) hold. Milne's 'End(A)⊗R is compact' is a slip for the level set, as the report says. Step 1 takes the rational basis e_j⊗1 from lem-weil-pbc-free-module-base-change-free, whose statement gives the basis explicitly, and handles r=0 and c<0. Step 2 uses the new leaf, and d_i>0 because basis vectors are nonzero. Steps 3-4 are genuinely elementary: |x_i|≤1+c/d_i, z_j=Σ_i a_ji x_i (index order checked), integer bounds N_j=p_j+1 and injectivity of coordinates. proof_deps equals the union of the uses. The new leaf matches Mathlib LinearMap.BilinForm.exists_orthogonal_basis (QuadraticForm/Basic.lean:1342-1343) with K=Q, IsOrthoᵢ as at SesquilinearForm/Basic.lean:80-87, and no nondegeneracy needed. It is statement-only and self-contained, records three kinds of search, and has blueprint.from consistent with the item (null node, inherited via). rg -L over dag/nodes for orthogonal basis, diagonalization, Sylvester, positive definite and bilinear form found only unrelated ultrametric/normed bases, Rosati positivity and nondegenerate pairings: no duplicate and no restatement of the item. Every cited node is a definition or a Mathlib leaf, so the unit route is clean and there are no tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.PositiveFormLatticeSublevelsFinite",
+  "declaration": "LinearMap.BilinForm.finite_lattice_sublevel",
+  "file": "lean/Sheaf/LinearAlgebra/PositiveFormLatticeSublevelsFinite.lean",
+  "statement": "theorem finite_lattice_sublevel {M : Type u} [AddCommGroup M] {ι : Type v} [Finite ι] (_b : Module.Basis ι ℤ M) (B : @LinearMap.BilinForm ℚ _ (M ⊗[ℤ] ℚ) _ ((TensorProduct.comm ℤ M ℚ).toAddEquiv.module ℚ)) (hsymm : ∀ x y : M ⊗[ℤ] ℚ, B x y = B y x) (hpos : ∀ x : M ⊗[ℤ] ℚ, x ≠ 0 → 0 < B x x) (c : ℚ) : {m : M | B (m ⊗ₜ[ℤ] (1 : ℚ)) (m ⊗ₜ[ℤ] (1 : ℚ)) ≤ c}.Finite",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93be51c86",
+  "group": "NY",
+  "result": "pass",
+  "note": "Only lean field changes vs live node; lean.statement is verbatim in the file. Clauses match: AddCommGroup M with finite ℤ-basis (ι may be empty, own universe), V = M ⊗[ℤ] ℚ with the canonical ℚ-action via AddEquiv.module along TensorProduct.comm (additive structure unchanged, q•(m⊗a)=m⊗qa), BilinForm ℚ with hsymm and hpos as in node, any c:ℚ, conclusion Set.Finite of lattice elements. No extra assumptions; empty basis, c<0 and c=0 covered. No definitions, proof only sorry, docstrings carry source place, blueprint id and 4 proof steps. No duplicate in Mathlib or live Sheaf (RationalPositiveDefiniteGram and PositiveDefiniteEntrywiseNeighbourhood are different statements). Citer has no Lean statement yet. Report sections present. No change, so no compile run."
+ }
+}

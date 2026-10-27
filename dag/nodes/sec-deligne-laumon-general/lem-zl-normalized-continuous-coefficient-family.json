@@ -1,0 +1,190 @@
+{
+ "id": "lem-zl-normalized-continuous-coefficient-family",
+ "kind": "statement",
+ "title": "Normalized continuous coefficient family at a fixed field",
+ "statement": "Fix a prime l and a finite normed Q_l-algebra field E. There exists a CoefficientFamily l E as defined in [def-zl-continuous-constructible-lattice-data]: at every scheme, completed integral coefficients identify with continuous integral functions with all positive quotient projections fixed; continuous rational functions identify with the prescribed rational coefficient sheaf with values fixed; localization is normalized. The canonical condensed charts are invertible, the inclusion square commutes, the integral and rational encodings preserve sections, maps, lisseness, locally closed inverse images and their actual units, and scalar comparisons preserve the tensor unit. No lattice or stratification is asserted.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Proposition 6.8.4 and Remark 6.8.15; agent transport between condensed internal and continuous sectionwise modules, expanded from old item steps 4-6 and blueprint paragraph 6."
+ },
+ "stmt_deps": [
+  "def-zl-continuous-constructible-lattice-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $A_W^c(V)=C(|V|,A)$ and $E_W^c(V)=C(|V|,E)$. The extending absolute value is nonarchimedean by lem-weil-l-adic-extension-absolute-value. Its metric balls are clopen (the ultrametric inequality makes the complement a union of balls) and separate distinct points; the same is true in the subspace $A$. Thus both rings are totally disconnected, so the canonical chart of the coefficient-realizations lemma is an isomorphism for each. Compose its integral chart with continuousCoefficientCompletion. The displayed evaluation formula in that theorem says that its projection to the quotient of exponent $n$ is $s\\mapsto (x\\mapsto s(x)\\bmod\\varpi^n)$ (its natural-number index is $n-1$). Hence the composite is precisely the specified map $A_W^{\\mathrm{cond}}\\to B_W$. The continuous immersion-coefficients theorem identifies $A_W^c[1/\\varpi]$ with $E_W^c$. The naturality in the continuous ring map $A\\hookrightarrow E$ of the coefficient-realizations lemma makes the inclusion square commute. The resulting rational chart is the unique localization of the integral chart, since it agrees on $A$ and sends $\\varpi^{-1}$ to $\\varpi^{-1}$. Thus these are also the finite-quotient-normalized coefficient maps named in the statement; uniqueness of maps into the inverse limit and out of localization leaves no further choice.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2), Definition 6.8.1; explicit chart and finite-quotient normalization in the cited nodes"
+   }
+  },
+  {
+   "text": "Apply the specified module encoding to these ring charts. By the internal-abelian-sheaf-module equivalence it retains the underlying abelian sheaf, its restrictions and its action evaluated on sections; a submodule inclusion therefore remains the same injective sheaf map. For a scalar ring map $R\\to S$, the internal relative tensor is the quotient of the tensor of abelian sheaves by the relations $(sr)\\otimes m=s\\otimes(rm)$. Under the section-action equivalence these are exactly the ordinary balanced relations. The identity on symbols $s\\otimes m$ therefore induces inverse maps after sheafification, naturally in the module and in the scalar map. In the integral-to-rational case this is the specified scalar-extension isomorphism in the cited encoding-scalar-extension lemma. For inverse image, apply the exact strong monoidal sheaf inverse image from the left-exact-site lemma (the scheme base-change site functor is specified in def-weil-proetale-inverse-image). It pulls the action and these relations to the identical pulled action and relations on both sides. Consequently the encodings commute with inverse images and ordinary scalar extension, using the coefficient charts of step 3. On two successive extensions or restrictions both composites send a generator to that same generator; thus the comparisons have the asserted composition and balanced-tensor normalizations.",
+   "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-proetale-inverse-image",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), Tag 03EL (lemma-tensor-product-pullback); sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi)"
+   }
+  },
+  {
+   "text": "The encoding-local-freeness lemma applies to both $A$ and $E$, which are totally disconnected topological rings. It identifies finite local freeness of the encoded sheaf with a pro-etale scheme cover making the original internal module finite free. These are exactly the two meanings of lisse in the statement. No constant-rank or nonempty-cover assumption occurs in that lemma. Thus the inverse rational encoding of $F$ is lisse on each member of its given finite lisse partition, with the same possibly varying finite ranks.",
+   "uses": [
+    "lem-weil-pbc-continuous-module-encoding-local-freeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3; specified encoding local-freeness criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-l-adic-extension-absolute-value",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-proetale-inverse-image",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-continuous-module-encoding-local-freeness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.13 first paragraph, Definitions 6.8.1 and 6.8.3, Lemma 6.8.2 and Remark 6.8.15; normalized internal/sectionwise assembly from existing DAG statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars under equivalence of internal modules and sheaves of modules preserves tensor generators",
+   "results": "ModuleCat.extendScalars and ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, Mathlib.Algebra.Category.ModuleCat.ChangeOfRings; ordinary module results only.",
+   "date": "2026-10-25",
+   "verdict": "No match for the internal sheaf encoding, normalized coefficient family, geometric coherence or reduced embedded lattice refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally free rational pro etale sheaves admit integral lattices on reduced finite locally closed refinement of a constructible partition",
+   "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.IsIntegral.component_integral; algebraic localizations and etale loci only.",
+   "date": "2026-10-25",
+   "verdict": "No match; these concern structure sheaves rather than the continuous coefficient rings and encoded internal modules."
+  },
+  {
+   "tool": "grep",
+   "query": "rg integralCoefficient|finiteContinuousCoefficient|stratified.*lattice Mathlib/AlgebraicGeometry Mathlib/Condensed; rg sectionModuleEquivalence|sectionModuleComapIso Mathlib/CategoryTheory Mathlib/Algebra/Category/ModuleCat",
+   "results": "No matching declarations in Mathlib. Repository search finds the existing generic coefficient, encoding and internal stratified-lattice dependencies, but no theorem with the combined normalized interfaces.",
+   "date": "2026-10-25",
+   "verdict": "No exact match; use existing DAG dependencies to prove the separate assembly steps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.DeligneLaumon.ContinuousConstructibleStratifiedLattices",
+  "date": "2026-10-25",
+  "group": "A3"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 6, normalized coefficient/lattice interpretation; original node proof steps 2, 4, 5.",
+   "via": [
+    "lem-zl-continuous-constructible-stratified-lattices",
+    "lem-zl-raw-heart-adic-lisse-stratification"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.DeligneLaumon.NormalizedContinuousCoefficientFamily",
+  "file": "lean/Sheaf/DeligneLaumon/NormalizedContinuousCoefficientFamily.lean",
+  "declaration": "WeilConjectures.StratifiedContinuousLattices.normalized_continuous_coefficient_family",
+  "statement": "theorem normalized_continuous_coefficient_family (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : Nonempty (CoefficientFamily l E)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-25"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-zl-normalized-continuous-coefficient-family",
+  "worker": "stage3",
+  "summary": "Isolated the indicated proper part of the existing argument as a named Lean theorem. No statement weakens the original Family conclusion.",
+  "blueprint": "Paragraph 6, normalized coefficient/embedded lattice interpretation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-completion",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-absolute-value",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-scalar-extension",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-module-encoding-local-freeness",
+    "why": "The same generic tool used by the original reviewed parent, below its unit route; its role remains within this component."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-302ea",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261025T122437-L-1771548",
+  "kind": "interface",
+  "note": "independent cc review: 22 interface decls in new ContinuousConstructibleLatticeData vs live item module (verbatim, re-exported publicly); item proof = Family constructor from 4 sorry components vs Family fields; item proof_deps vs the 4 new nodes; importer RawHeartAdicStrataBridge compiled rc 0 against the delivered modules"
+ }
+}

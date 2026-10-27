@@ -1,0 +1,114 @@
+{
+ "id": "lem-diagonal-closure-line-endpoint",
+ "kind": "statement",
+ "title": "Normalized derived endpoint of the closure root line",
+ "statement": "Let ell be prime, E a finite intermediate field in its fixed padic algebraic closure, and X a scheme with ell invertible in global sections. There is an adjoint-normalized Endpoint [def-sfb-diagonal-coefficient-endpoints] from the rational root line spRationalTwist X ell E to the closure root line spQbarTwist X ell along the actual closure coefficient inclusion, whose prescribed underlying map is closureLineMap [def-sfb-diagonal-coefficient-maps]. This statement contains no direct image or restriction square.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-maps"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), the bounded filtered-colimit comparison on a single shifted rational line"
+ },
+ "proof": [
+  {
+   "text": "Use the ordinary normalized closure-line isomorphism. Rational rank-one local freeness implies flatness: its signed dual is an inverse tensor equivalence, and the internal/section module comparison transports exactness. Apply the flat single-complex scalar endpoint, then the single image of the ordinary isomorphism. Naturality of the scalar adjunction and restriction/single comparison gives exactly the prescribed Endpoint normalization.",
+   "uses": [
+    "lem-diagonal-closure-ordinary-line",
+    "lem-route-sp-twists-locally-free",
+    "lem-weil-signed-line-tensor-equivalence",
+    "lem-c2-internal-section-module-flatness",
+    "lem-diagonal-flat-scalar-endpoint"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-diagonal-closure-ordinary-line",
+  "lem-route-sp-twists-locally-free",
+  "lem-weil-signed-line-tensor-equivalence",
+  "lem-c2-internal-section-module-flatness",
+  "lem-diagonal-flat-scalar-endpoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (2), the named step of the closure-line comparison; fully proved helper"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars identifies a rational Tate root line with the colimit over finite subextensions of an algebraic closure",
+   "results": "Eight hits about IntermediateField.extendScalars and algebra generator scalar extension; none concerning sheaf Tate lines.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of the colimit Tate root line along a finite subfield to the algebraic closure, normalized by the colimit leg",
+   "results": "Eight field embedding and Galois colimit hits; none about normalized module-sheaf scalar comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match. Reuse the project rational root diagram basis."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extendRestrictAdjunction in Mathlib/CategoryTheory/Monoidal/Mod*, and closureLineMap|spQbarTwist in project sources",
+   "results": "No Mathlib closure root-line statement. Project SpRationalRootDiagramBasis supplies compatible local bases; RegularScalarExtensionMultiplication supplies normalized scalar extension of the regular module. Blueprint search closure line scalar returns no matching imported node.",
+   "date": "2026-10-27",
+   "verdict": "A new ordinary comparison statement is needed, strictly below the combined derived endpoint and mate statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalClosureLineComparison",
+  "date": "2026-10-27",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (2), the flat single-complex endpoint of the ordinary closure-line isomorphism",
+   "via": [
+    "lem-diagonal-closure-line-comparison",
+    "lem-sfb-diagonal-finite-coefficient-closure"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalClosureLineEndpoint",
+  "file": "lean/Sheaf/Paper/DiagonalClosureLineEndpoint.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalClosure_lineEndpoint",
+  "statement": "theorem diagonalClosure_lineEndpoint (l : ℕ) [Fact l.Prime]\n    (E : PadicAlgCl.FiniteIntermediateField l) (X : Scheme.{u})\n    (hX : IsUnit (l : Γ(X, ⊤))) :\n    Nonempty (Endpoint (Profinite.padicSubfieldRingObjToPadicAlgCl l E)\n      (spRationalTwist X l E) (spQbarTwist X l) (closureLineMap l E X))",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T034629-L-3667501",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261027T034629-L-3667501",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

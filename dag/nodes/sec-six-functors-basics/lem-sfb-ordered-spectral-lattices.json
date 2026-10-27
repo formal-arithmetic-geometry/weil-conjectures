@@ -1,0 +1,162 @@
+{
+ "id": "lem-sfb-ordered-spectral-lattices",
+ "kind": "statement",
+ "title": "Ordered spectral-coefficient lattice inclusions",
+ "statement": "Let ell and p be distinct primes, k a field of characteristic p, E any finite dimensional extension of Q_ell equipped with its canonical spectral norm, and S a separated finite-type k-scheme. For the actual condensed continuous-function rings O_E and E [def-sfb-continuous-map-condensed-ring], their inclusion [def-sfb-continuous-map-condensed-ring-map], and any lisse E_S-module [sk-lem-coefficient-heart], there is a finite locally closed scheme stratification of S [def-constructible-stratification] with open prefixes. On every stratum there is a lisse O_E-module and a monomorphism into the scalar restriction of the corresponding restriction of L. The scalar-extension adjoint of this very monomorphism is invertible [sk-def-sfb-change-of-scalars]. The coefficient field may live in the same arbitrary universe as S; finite ranks may vary and may be zero. Empty schemes and empty strata are permitted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+  "place": "Proof (1), Ordered spectral-coefficient lattice inclusions"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-lem-coefficient-heart",
+  "def-constructible-stratification",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof": [
+  {
+   "text": "Finite dimensionality gives a small Q_ell-algebra model of E, by choosing a finite basis. Transport its spectral norm and valuation ring along this algebra equivalence. Postcomposition and its inverse give continuous-function ring isomorphisms, natural in profinite test objects and compatible with inclusion. The induced module equivalences transport finite free charts, monicity, and the adjunction unit. Apply [sk-lem-stratified-lattice] on S to this small model and transport its stratified lattice inclusions and their scalar-extension adjoints back to E. Reuse the already proved finite-free transport helpers of [lem-weil-pbc-condensed-lfp-local-triviality] to identify normalized lisse charts with the raw locally-free predicate.",
+   "uses": [
+    "sk-lem-stratified-lattice",
+    "def-sfb-continuous-map-condensed-ring-map",
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-condensed-lfp-local-triviality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), Ordered spectral-coefficient lattice inclusions"
+   }
+  },
+  {
+   "text": "Finite type over k makes S Noetherian. Apply the ordered common-refinement theorem [new-det-lem-coefficient-heart-common-stratification-refinement] to the obtained partition. For each refined piece take its fibre product over S with the original scheme stratum that contains its image. The projection is an immersion onto exactly the refined subset, and its other projection gives an actual morphism into the original stratum; this avoids inferring a scheme factorization merely from containment of images. Its image partition retains the disjointness, covering, and open-prefix conditions.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "new-det-lem-coefficient-heart-common-stratification-refinement",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), Ordered spectral-coefficient lattice inclusions"
+   }
+  },
+  {
+   "text": "Pull the lattice back along that actual refinement morphism. The canonical coefficient inverse image, whose finite-limit preservation is already part of the module pullback API, preserves the monomorphism and local finite free charts. The scalar/pullback comparison carries the scalar-extension adjoint to the pullback of the original adjoint, hence it is invertible. Pullback composition identifies its rational target with the restriction of L to the refined piece. Empty S gives an empty partition; rank zero and empty strata produce zero modules and do not require strict inclusions. The ordinaryScalarUnit helper of [new-integral-residue-pull-ordinary-unit], reused through a proof-only import all, identifies the adjoint of the pulled inclusion with the actual pullIso component followed by pullback of its old adjoint. The raw locally-free cover predicate and normalized lisse predicate are related by extension along the invertible condensedPullbackHom.",
+   "uses": [
+    "def-sfb-pull-iso",
+    "lem-weil-pbc-continuous-locally-free-pullback",
+    "new-integral-residue-pull-ordinary-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+    "place": "Proof (1), Ordered spectral-coefficient lattice inclusions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-stratified-lattice",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-change-of-scalars",
+  "pqf-lem-locnoeth-lft",
+  "new-det-lem-coefficient-heart-common-stratification-refinement",
+  "def-weil-closed-immersion",
+  "def-sfb-pull-iso",
+  "lem-weil-pbc-continuous-locally-free-pullback",
+  "new-integral-residue-pull-ordinary-unit",
+  "lem-weil-pbc-condensed-lfp-local-triviality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-generators.proof.md",
+  "place": "Proof (1), separated step of the lattice filtration argument",
+  "note": "S7: implemented all three steps using the existing stratified lattice theorem, explicit cross-universe spectral coefficient equivalences, actual fibre-product refinements, and the already proved ordinary scalar-unit comparison. No new admitted intermediate statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally free l-adic sheaf has integral lattice submodules on a finite stratification ordered with open prefixes",
+   "results": "SheafOfModules.ιFree, SheafOfModules.free, Submodule.IsLattice.free, Submodule.IsLattice, ZLattice.module_free; no theorem for these coefficient-module lattice inclusions.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite ordered stratification gives a filtration of an extension by zero with successive quotients the extensions of its restrictions",
+   "results": "IsModuleFiltration and its elementary ring/module variants; no lisse-sheaf lattice statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lattice.*filtrat|lisse.*filtrat|cokernelOfLEMkIso; Mathlib/CategoryTheory/Subobject and AlgebraicGeometry/Modules",
+   "results": "No lattice filtration result; category subobject and scheme module operations do not state the condensed module comparison. Also searched both source roots for the same concepts.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"comp\"",
+   "results": "12 hits: PresheafOfModules.sectionsMap_comp, PresheafOfModules.comp_app, PresheafOfModules.instModuleCarrierObjOppositeCommRingCatCarrierCarrierRingCatCompForget₂RingHomObj, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.map_comp_apply, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; no condensed scalar extension by zero comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LatticeSubquotientFiltration",
+  "date": "2026-10-25",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-generators",
+   "place": "Proof (1), Ordered spectral-coefficient lattice inclusions",
+   "via": [
+    "lem-sfb-lattice-subquotient-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrderedSpectralLattices",
+  "file": "lean/Sheaf/Paper/OrderedSpectralLattices.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_orderedSpectralLattices",
+  "statement": "theorem exists_orderedSpectralLattices (ℓ : ℕ) [Fact ℓ.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]\n    (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpℓ : p ≠ ℓ)\n    (S : Scheme.{u}) [S.Over (Spec (.of k))]\n    [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))]\n    [IsSeparated (S ↘ Spec (.of k))] :\n  letI := spectralNorm.nontriviallyNormedField ℚ_[ℓ] E\n  let A := coefficientHeartRingObj (Profinite.continuousMapRingSheafOfUniverse.{u, u}\n    (Padic.coefficientExtensionIntegers ℓ E))\n  letI : IsCommMonObj A := Sheaf.isCommMonObj_sheafCompose_obj _\n    (Profinite.continuousMapRingSheafOfUniverse.{u, u}\n      (Padic.coefficientExtensionIntegers ℓ E))\n      (fun U (a b : ULift.{u + 1} C(U.unop, Padic.coefficientExtensionIntegers ℓ E)) ↦\n        mul_comm a b)\n  let B := coefficientHeartRingObj (Profinite.continuousMapRingSheafOfUniverse.{u, u} E)\n  letI : IsCommMonObj B := Sheaf.isCommMonObj_sheafCompose_obj _\n    (Profinite.continuousMapRingSheafOfUniverse.{u, u} E)\n      (fun U (a b : ULift.{u + 1} C(U.unop, E)) ↦ mul_comm a b)\n  let c := (sheafCompose (coherentTopology Profinite.{u})\n    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n      (Profinite.continuousMapRingSheafMapOfUniverse.{u, u}\n        (Padic.coefficientExtensionIntegers ℓ E).subtype continuous_subtype_val)\n  ∀ L : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj B S),\n    IsLisseCoefficientModule B L →\n    ∃ R : S.FiniteLocallyClosedStratification,\n      (∀ b : Fin (R.n + 1),\n        IsOpen (⋃ i : Fin R.n, ⋃ (_ : i.val < b.val), R.stratum i)) ∧\n      ∃ M : ∀ b : Fin R.n,\n        Mod (Sheaf (Scheme.ProEt.topology (R.domain b)) Ab.{u + 1})\n          (condensedRingObj A (R.domain b)),\n        ∀ b : Fin R.n, IsLisseCoefficientModule A (M b) ∧\n          ∃ ι : M b ⟶ (Mod.comap ((upperStarFromPoint (R.domain b)).map c)).obj\n              ((CondensedRing.upperStar B (R.immersion b)).obj L),\n            Mono ι ∧ IsIso\n              (((Mod.extendRestrictAdjunction ((upperStarFromPoint (R.domain b)).map c)).homEquiv\n                (M b) ((CondensedRing.upperStar B (R.immersion b)).obj L)).symm ι)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b4848",
+  "group": "R9",
+  "result": "fix",
+  "landing": "20261025T164228-L-975356",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261025T211653-L-4021974",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

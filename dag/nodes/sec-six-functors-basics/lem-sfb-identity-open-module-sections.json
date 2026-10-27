@@ -1,0 +1,291 @@
+{
+ "id": "lem-sfb-identity-open-module-sections",
+ "kind": "statement",
+ "title": "Sectionwise module comparison over an identity open and its underived coherence",
+ "statement": "Let $\\Lambda$ be any commutative condensed ring [sk-def-sfb-condensed-ring]. For every scheme $T$, on small representatives of $T_{\\mathrm{pro\\acute et}}$ in the common coefficient universe [def-weil-pbc-proetale-site], put $\\Lambda_T=p_T^*\\Lambda$ and $\\mathcal M_T=\\operatorname{Mod}_{\\Lambda_T}$ [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects]. Use the specified module functors $f^*,f_*$ and coefficient comparisons from pullback from the point [sk-def-sfb-module-pushforward-pullback]. Let $j:U\\hookrightarrow Z$ and $j':U\\hookrightarrow Z'$ be open immersions [def-weil-open-immersion], and let $h:Z'\\to Z$ satisfy $hj'=j$ and $h^{-1}(j(U))=j'(U)$ as open subschemes.\nFor every $v:V\\to U$ in $U_{\\mathrm{pro\\acute et}}$, the projection $\\pi_{h,V}:V\\times_Z Z'\\to V$ is an isomorphism with inverse $(1_V,j'v)$, natural in $V$. The functor $j^*$ on module objects is sectionwise restriction to the localized site: $(j^*M)(V)=M(V\\to U\\to Z)$, with $\\Lambda_U$-action transported through the inverse of $\\alpha_j:j^*_{\\mathrm{Ab}}\\Lambda_Z\\xrightarrow{\\sim}\\Lambda_U$; the same assertion holds for $j'$. There is a unique natural module isomorphism $c_h:j^*h_*\\xrightarrow{\\sim}j'^*$ whose map at $M,V$ is $M(\\pi_{h,V}^{-1}):M(V\\times_Z Z')\\to M(V)$ under these restriction identifications. Thus its section map is the identity after $\\pi_{h,V}$; it is linear for the specified coefficient actions.\nLet $j'':U\\hookrightarrow Z''$ be an open immersion and $k:Z''\\to Z'$ satisfy $kj''=j'$ and $k^{-1}(j'(U))=j''(U)$. Write $\\mu_{h,k}:h_*k_*\\xrightarrow{\\sim}(hk)_*$ for the specified module compositor [def-sfb-module-lower-star-comp]. Then\n$$c_{hk}=c_k\\circ(c_hk_*)\\circ(j^*\\mu_{h,k}^{-1}).$$\nFor $h=1_Z$ and $j'=j$, $c_h$ is the identity after the canonical sectionwise comparison $(1_Z)_*\\cong1_{\\mathcal M_Z}$. All equations include functor associators and the canonical fibre-product identifications. No derived category, properness, density, or field of definition is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6G, lemma-restrict-direct-image-open (underived localized identity map), and Tag 0D6E, lemma-derived-pushforward-composition (underived compositor); returned item steps 1-2 and sectionwise parts of steps 5-6"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-proetale-site",
+  "def-weil-open-immersion",
+  "def-sfb-module-lower-star-comp"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib IsOpenImmersion.isPullback to the two open immersions and the inverse-image condition. This gives the cartesian square with vertices U,Z',U,Z and maps j',1_U,h,j. Its universal property implies that for P=V times_Z Z', the second projection is the first projection followed by v and j'. Therefore (1_V,j'v) is inverse to the first projection. Comparing the two projections proves naturality in V.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JO, section-fibre-products; universal-property calculation over the specified open"
+   }
+  },
+  {
+   "text": "Take beta from [lem-sfb-module-direct-image-open-pasting]. Its Sectionwise clause supplies bijectivity of all the specified open coprojections. The existing scalar-extension/comap-inverse comparison composed with the extension unit is identity on underlying sheaves (upperStarLowerStarAdjunction_homEquiv_hom and extendUnitHom_extendScalarsIsoComapInv_hom_app). Naturality along the graph arrow then proves exactly the displayed OpenRestriction action formula.",
+   "uses": [
+    "lem-sfb-module-direct-image-open-pasting",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-sfb-module-upper-lower-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site; coefficient transport from blueprint sk-def-sfb-change-of-scalars, clause (5)"
+   }
+  },
+  {
+   "text": "Apply beta to the cartesian representative (j',1_U,h,j) directly, and compose with lowerStarId on U. This defines c_h without a replacement of the specified module functors. Sectionwise normalization of beta, naturality of coprojections in site objects, and the section formula for lowerStarId show that c_h is restriction along (1_V,j'v): composing the sectionArrow with the inverse identity-pullback projection has exactly these two projections.",
+   "uses": [
+    "lem-sfb-module-direct-image-open-pasting",
+    "def-sfb-module-lower-star-comp",
+    "def-sfb-finite-lower-star",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; specialization of lem-sfb-module-direct-image-open-pasting (a)"
+   }
+  },
+  {
+   "text": "For two normalized comparisons, use surjectivity of each source coprojection to reduce equality on any section to the normalization formulas. Apply extensionality successively for additive group maps, presheaf natural transformations, sheaf maps, module maps and natural isomorphisms.",
+   "uses": [
+    "lem-sfb-module-direct-image-open-pasting",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; uniqueness of the specified sectionwise comparison"
+   }
+  },
+  {
+   "text": "Check composition on a source coprojection. Naturality of coprojections in module maps moves upperStar of lowerStarComp inverse through that coprojection. Apply the two normalization formulas and the section formula for lowerStarComp inverse from the Composition clause of [lem-sfb-module-direct-image-open-pasting]. Sheaf functoriality combines the three resulting restrictions. The composite geometric arrow and the direct inverse (1_V,j''v) agree by their two pullback projections, using j''k=j'. Thus the module transformations agree by sectionwise extensionality. This proves the required associator and inverse-compositor order directly.",
+   "uses": [
+    "lem-sfb-module-direct-image-open-pasting",
+    "def-sfb-module-lower-star-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites; open pasting specialized to identities on the common open"
+   }
+  },
+  {
+   "text": "The identity-morphism clause of Units for beta, applied to the same cartesian representative (j,1_U,1_Z,j), is exactly the Identity equation for the defined comparison.",
+   "uses": [
+    "lem-sfb-module-direct-image-open-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6, definition-pushforward, and Tag 04J0, lemma-localize-morphism-ringed-sites; identity normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "lem-sfb-module-direct-image-open-pasting",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-module-lower-star-comp",
+  "def-sfb-finite-lower-star",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 04IX, 04J0 and 03D6; cartesian identity-open specialization of existing module open pasting, with direct sectionwise composition calculation (V9)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrict.*[Pp]ushforward|pushforwardComp|restrictFunctorComp",
+   "results": "10 hits; scope Mathlib/AlgebraicGeometry. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski structure-sheaf formulas or generic sheaf-module compositors, not the pro-etale internal condensed-module comparison with the specified coefficient actions and section normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over a condensed coefficient ring, a map of schemes identical over an open has a sectionwise identity restriction of its direct image compatible with composition",
+   "results": "8 hits; scope Mathlib/(all). AlgebraicGeometry.Scheme.Hom.map_appLE', AlgebraicGeometry.Scheme.Hom.appLE_map', AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.Hom.app_eq, AlgebraicGeometry.Scheme.app_eq, AlgebraicGeometry.Scheme.Hom.appLE_map'_assoc, AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski structure-sheaf formulas or generic sheaf-module compositors, not the pro-etale internal condensed-module comparison with the specified coefficient actions and section normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image restricted to an open on which the morphism is the identity is a coherent natural isomorphism of module sheaf functors",
+   "results": "8 hits; scope Mathlib/(all). AlgebraicGeometry.Scheme.Modules.pushforwardCongr_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardId, SheafOfModules.pushforwardId, TopCat.Presheaf.Pushforward.id, AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app, AlgebraicGeometry.Scheme.ofRestrict_appIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardCongr. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski structure-sheaf formulas or generic sheaf-module compositors, not the pro-etale internal condensed-module comparison with the specified coefficient actions and section normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "12 hits; scope Mathlib/(all). CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski structure-sheaf formulas or generic sheaf-module compositors, not the pro-etale internal condensed-module comparison with the specified coefficient actions and section normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for direct image on localized pro etale sites with pulled back condensed module coefficients has section identity normalization and an underived cocycle law",
+   "results": "8 hits; scope Mathlib/(all). SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.Presentation.map_π_eq, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso, SheafOfModules.unitToPushforwardObjUnit, PresheafOfModules.restrictHomEquivOfIsLocallySurjective. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski structure-sheaf formulas or generic sheaf-module compositors, not the pro-etale internal condensed-module comparison with the specified coefficient actions and section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforwardId|localiz.*[Mm]od|restrict.*[Pp]ullback",
+   "results": "11 hits; scope Mathlib/Algebra/Category/ModuleCat/Sheaf. Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give Zariski structure-sheaf formulas or generic sheaf-module compositors, not the pro-etale internal condensed-module comparison with the specified coefficient actions and section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardComp|pushforwardId|restrictFunctorComp|restrict.*[Pp]ushforward",
+   "results": "10 hits; scope Mathlib/Algebra/Category/ModuleCat/Sheaf. Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf-module pushforward compositors and Zariski structure-sheaf restriction formulas do not state the pro-etale internal-module comparison with its specified condensed coefficient actions and normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism identical over an open has direct image restricting to the original module sheaf with canonical section maps and transitive composition",
+   "results": "8 hits; scope Mathlib/(all). AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.morphismRestrictRestrict, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.pushforwardId_hom_app_app, AlgebraicGeometry.morphismRestrictRestrictBasicOpen, AlgebraicGeometry.Scheme.Modules.restrictFunctorId, AlgebraicGeometry.Scheme.Modules.Hom.id_app. ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf-module pushforward compositors and Zariski structure-sheaf restriction formulas do not state the pro-etale internal-module comparison with its specified condensed coefficient actions and normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp, CategoryTheory.Sheaf",
+   "results": "7 hits; scope Mathlib/(all). SheafOfModules.pushforwardComp, SheafOfModules.pushforward_id_comp, SheafOfModules.pushforward_comp_id, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.conjugateEquiv_pullbackComp_inv. ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf-module pushforward compositors and Zariski structure-sheaf restriction formulas do not state the pro-etale internal-module comparison with its specified condensed coefficient actions and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of direct image to an open where a morphism is the identity for sheaves of modules over pulled back condensed rings, compatible with composition",
+   "results": "8 hits; scope Mathlib/(all). AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.restrict_map. ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf-module pushforward compositors and Zariski structure-sheaf restriction formulas do not state the pro-etale internal-module comparison with its specified condensed coefficient actions and normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image along localization of a site is restriction of sheaves and module pullback along an isomorphism of coefficient rings is scalar restriction along its inverse",
+   "results": "8 hits; scope Mathlib/(all). SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.restrictScalars, SheafOfModules.pullbackObjFreeIso, PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply. ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf-module pushforward compositors and Zariski structure-sheaf restriction formulas do not state the pro-etale internal-module comparison with its specified condensed coefficient actions and normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorAdjCounitIso|restrictFunctorIsoPullback|restrict_obj|restrictFunctorComp_hom_app_app|pushforwardComp_hom_app_app",
+   "results": "5 hits; scope Mathlib/AlgebraicGeometry/Modules. Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean. ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf-module pushforward compositors and Zariski structure-sheaf restriction formulas do not state the pro-etale internal-module comparison with its specified condensed coefficient actions and normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-identity-open-derived-restriction",
+  "date": "2026-10-22",
+  "group": "Q137"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "blueprint": {
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Tag 0D6G, lemma-restrict-direct-image-open (underived localized identity map), and Tag 0D6E, lemma-derived-pushforward-composition (underived compositor); returned item steps 1-2 and sectionwise parts of steps 5-6; Refinement isomorphisms and Independence: identity and transitivity on the common open",
+   "via": [
+    "lem-sfb-identity-open-derived-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-identity-open-module-sections",
+  "worker": "stage1",
+  "summary": "Proved the sectionwise identity-open comparison by an explicit inverse to the fibre-product projection, localization and inverse scalar transport, and specialization of the existing general open direct-image pasting theorem. Its section normalization gives uniqueness, composition and identity. No new nodes; arbitrary condensed rings and arbitrary schemes retained. Corrected source precision: 0D6E is derived, whereas the underived construction is 04J0/04IX/03D6.",
+  "blueprint": "Realizes det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms (identity/transitivity over the common open) and Independence (successive refinement comparisons), through the parent lem-sfb-identity-open-derived-restriction. No unit route replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic site localization identifies the open pro-etale site with the slice; this unit has no such site-construction theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-comparison",
+    "why": "Generic identification of actual module inverse image with slice restriction; no compactification argument is replaced."
+   },
+   {
+    "node": "lem-sfb-module-direct-image-open-pasting",
+    "why": "Generic underived module open base change and pasting for arbitrary condensed rings; specialized to the identity over the common open, not a replacement of the compactification-coherence route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-module-direct-image-open-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-a11ee2abc",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-a11ee2abc (reviewer sub-agent of L); spot-checked: I read the whole delivery: a one-level split of lem-sfb-identity-open-module-sections into 6 steps, with no new nodes. There is no re-split note, the statement, stmt_deps and source are unchanged, and there is no SGA citation. The dependency closure is acyclic, including the nodes added by the fix. Sources checked: Stacks 0D6G (sites-cohomology l.4374), whose proof rests on 04J0 (sites-modules l.2369, f'_*j_U^{-1}=j_V^{-1}f_*); 04IX and 03D6 checked in tags/tags. Step 1: the inverse (1_V,j'v) and its naturality are correct, and the hypothesis h^{-1}(jU)=j'(U) is needed. Step 2: clause (1) of the slice localization holds with no constant-ring restriction; alpha is invertible for any condensed ring; change-of-scalars clause (5) gives Ext_alpha = Res_{alpha^{-1}}, with the right direction. Step 3 had a gap, now repaired: h_U=pi_{h,U}: Z'x_ZU->U is only an isomorphism, so applying the pasting lemma's identity-morphism normalization was not literal, and the transport from (h_U)_*j_S^* to j'^* had no citation. The step now states h_U s_U=1 and j_S s_U=j'. (h_U)_* is identified with s_U^* via lower-star-comp and the upper/lower adjunction, and s_U^*j_S^* with j'^* via upper-star-comp. The resulting c_h is a composite of module isomorphisms, so it is linear. proof_deps was recomputed. Step 4: uniqueness holds because a module morphism is its underlying sheaf morphism. Step 5: pasting clause (d) with f=k and g=h has types and order matching the item, and the explicit check of sections along (1_V,j''v) confirms it. Step 6: the identity case is correct. lem-sfb-module-direct-image-open-pasting is strictly more general than the item, so it is a specialization, not a duplicate. Accepted tool uses: weakly-etale localization, ringed open comparison, and the open-pasting lemma; none of them replaces the unit's compactification route. Small cases checked: U empty, h=id, U=Z, and nonconstant Lambda.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IdentityOpenModuleSections",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.identityOpenModuleSections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.ProjectionGeometry",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.Comparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.Normalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.OpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.UniqueNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.Composition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.Identity",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.identityOpenModuleSections",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IdentityOpenModuleSections.identityOpenModuleSections_canonical"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IdentityOpenModuleSections.lean",
+  "statement": "theorem identityOpenModuleSections : ProjectionGeometry.{u} ∧ OpenRestriction Λ ∧ ∃ c : Comparisons Λ, UniqueNormalized Λ c ∧ Composition Λ c ∧ Identity Λ c",
+  "branch": "newtargets-dag",
+  "by": "Q92",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The predicates spell out exactly this node: inverse projection and its naturality, canonical open-section coordinates with explicit inverse-scalar-action normalization, unique normalized natural module isomorphisms, and composition and identity equations. Uses the existing module functors, coefficient maps, scalar-extension/comap-inverse comparison, and open-pasting coprojections; no copied module or restriction functor. Arbitrary commutative condensed coefficients and schemes; no admissibility or quasi-compactness hypotheses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dc97d791",
+  "group": "Q92",
+  "result": "pass",
+  "note": "Clauses checked one by one. ProjectionGeometry: actual pullback.fst is an iso with inverse (1_V,j'v), natural in V; true given h^-1(jU)=j'U. OpenRestriction: bijective coprojections plus the inverseImageActionIso coordinate law (consistent with extendUnit ≫ extendScalarsIsoComapInv = 1). ∃c Comparisons with UniqueNormalized (section map M(lift 1_V, V.hom≫j')). Composition: whiskerRight lowerStarComp(k,h).inv ≫ associator ≫ whiskerLeft k_* c_h ≫ c_k, in the node's order. Identity uses lowerStarId. Arbitrary commutative condensed Λ, Scheme.{u}/Ab.{u+1} upstream convention, no admissibility/qc/derived assumptions; edge cases (empty U, h=id, U=Z) covered. Item node changes only lean; 7 dependency nodes identical to live; statement verbatim; docstrings with source, blueprint and 6 steps; lines ≤100; proof-plan imports per brief l.114. No recompile (no change). Advisory: coprojection/inverseImageActionIso are plain defs owned only by theorem node lem-sfb-module-direct-image-open-pasting (a proof_dep, not a stmt_dep), and lowerStarId has no owner node. S2 cannot add existing nodes to stmt_deps; maintainer may add an existing:true def node on ModuleDirectImageOpenPasting."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d7f48",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261025T122654-L-1794778",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 3 additive API modules and 4 node files vs live clone, unit realized lists, and compiles of the item's 4 direct importers plus #print axioms in sandbox /tmp/rv_c8_d7f4"
+ }
+}

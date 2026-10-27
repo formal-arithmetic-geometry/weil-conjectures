@@ -1,0 +1,318 @@
+{
+ "id": "lem-sfb-scheme-etale-higher-image-comparison",
+ "kind": "statement",
+ "title": "Etale and Zariski quasi-coherent higher direct images agree",
+ "statement": "Let $f:X\\to Y$ be a quasi-compact and quasi-separated morphism of schemes [def-pc-scheme, def-pc-morphism-conventions]. Let $M$ be a quasi-coherent module on $(X_{\\mathrm{et}},\\mathcal O_{X,\\mathrm{et}})$ [def-trf-space-quasi-coherent-module]. Under the equivalence of [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], let $M_{\\mathrm{Zar}}$ be its quasi-coherent Zariski module, obtained by restriction to open subschemes, and write $N_{\\mathrm{et}}$ for the associated small etale module of a quasi-coherent Zariski module $N$. For every integer $q\\geq0$ there is a canonical isomorphism of small etale module sheaves, natural in $M$,\n$$ R^qf_{\\mathrm{et},*}M\\;\\cong\\;(R^qf_{\\mathrm{Zar},*}M_{\\mathrm{Zar}})_{\\mathrm{et}}. $$\nThe Zariski higher direct image on the right is quasi-coherent. Both higher direct images are computed by injective resolutions in the respective categories of all structure-sheaf modules; Zariski direct image is as in [def-pc-ringed-spaces-derived-direct-image], and etale direct image is as in [def-trf-space-etale-module-functors].",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 071N, lemma-higher-direct-images-small-etale, etale case; the associated-module equivalence is proposition-equivalence-quasi-coherent, part (2)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-morphism-conventions",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-trf-space-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=M_{\\mathrm{Zar}}$. The equivalence identifies $M$ canonically with $F_{\\mathrm{et}}$ and identifies its restriction to an etale $a:W\\to X$ with $(a^*F)_{\\mathrm{et}}$. Set $N_q=R^qf_{\\mathrm{Zar},*}F$. Clause (1) of [lem-pc-finite-support-hi] proves that every $N_q$ is quasi-coherent, using only the stated quasi-compactness and quasi-separatedness of $f$, with no quasi-compactness assumption on $Y$. Thus $(N_q)_{\\mathrm{et}}$ is defined.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-pc-finite-support-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 071N, lemma-higher-direct-images-small-etale, first sentence; Tag 03DX, proposition-equivalence-quasi-coherent, part (2)"
+   }
+  },
+  {
+   "text": "For an etale $g:U\\to Y$ put $X_U=X\\times_YU$, $p_U:X_U\\to U$ and $a_U:X_U\\to X$. The chart limit defining direct image is evaluation at $X_U$: a compatible chart family is exactly a section on $X_U$, since $X_U$ itself is its terminal chart. Choose an injective module resolution $M\\to I^\\bullet$. Consequently $(f_{\\mathrm{et},*}I^n)(U)=I^n(X_U)$ with its $\\mathcal O_U(U)$-action. Kernels are computed objectwise and images in sheaves are sheafifications of presheaf images. Therefore the cohomology sheaf of this complex is the module sheafification of\n$$P_q(U)=H^q(I^\\bullet(X_U)).$$\nIts restrictions are induced by $I^\\bullet(X_U)\\to I^\\bullet(X_V)$. Compose the derived-evaluation/slice comparison with the module/abelian evaluation comparison on the slice to identify this group with $H^q((X_U)_{\\mathrm{et}},M|_{X_U})$: the slice $X_{\\mathrm{et}}/X_U$ identifies with $(X_U)_{\\mathrm{et}}$, and its restricted ring is $\\mathcal O_{X_U}$ since both evaluate on a chart $W$ as $\\Gamma(W,\\mathcal O_W)$. The module sheafification interface gives the linear universal map $P_q\\to R^qf_{\\mathrm{et},*}M$. This is the quotient-of-cocycles computation, rather than an assertion that evaluation commutes with sheaf cohomology.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pe-ringed-site-derived-evaluation-slice",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 072W, lemma-higher-direct-images, proof, kernels and images of evaluated injective resolution; descent.tex Tag 071N, slice convention"
+   }
+  },
+  {
+   "text": "For every $U$, the equivalence in Step 1 identifies $M|_{X_U}$ with $(a_U^*F)_{\\mathrm{et}}$. Apply [lem-sfb-qcoh-cohomology-etale-pullback-naturality] to obtain the canonical linear identification\n$$P_q(U)\\cong H^q(X_U,a_U^*F).$$\nThis is an identification of presheaves of modules, not merely of separate groups: for $h:V\\to U$ over $Y$, the map $X_V\\to X_U$ is etale (it is a morphism between etale $X$-schemes, as in the slice equivalence); the cited comparison commutes with exactly this restriction. Its linearity identifies the $\\Gamma(U,\\mathcal O_U)$-actions via $p_U^\\sharp$. It is also natural in $F$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+    "lem-weil-pbc-etale-site-localization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 071N, proof, replacement of etale cohomology by Zariski cohomology using Tag 03DW"
+   }
+  },
+  {
+   "text": "Suppose $U$ is affine. By [lem-weil-pbc-qcqs-morphism-permanence](3), $p_U$ is quasi-compact and quasi-separated. Its higher images of $a_U^*F$ are quasi-coherent by [lem-pc-finite-support-hi](1). By [pqf-lem-affine-vanishing] all their positive cohomology on $U$ vanishes. Hence [lem-pc-leray-degenerate-sections](2) makes the canonical edge map an isomorphism\n$$H^q(X_U,a_U^*F)\\xrightarrow{\\sim}\\Gamma(U,R^qp_{U,*}a_U^*F).$$\nNo separatedness of $f$ or $X_U$ is used. Since $g$ is etale, it is flat by definition. The sheaf form of [lem-pc-flat-base-change-cohom] gives $g^*N_q\\xrightarrow{\\sim}R^qp_{U,*}a_U^*F$. Composing the inverse on sections with the edge map gives $P_q(U)\\cong\\Gamma(U,g^*N_q)=(N_q)_{\\mathrm{et}}(U)$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-finite-support-hi",
+    "pqf-lem-affine-vanishing",
+    "lem-pc-leray-degenerate-sections",
+    "def-weil-etale-morphism",
+    "lem-pc-flat-base-change-cohom",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 071N, last paragraph; coherent.tex Tags 01XK (lemma-quasi-coherence-higher-direct-images-application) and 02KH (lemma-flat-base-change-cohomology)"
+   }
+  },
+  {
+   "text": "The affine identifications are compatible with arrows: write $\\epsilon_U$ for the edge map and $b_U$ for flat base change. For $h:V\\to U$ between affine etale objects, let $\\rho$ denote pullback of the cohomology class and $\\sigma$ restriction on sections of $g^*N_q$. The section formula of [lem-weil-pbc-flat-base-change-map-sections] gives the compatibility of edge classes with each base change (here $h$ is an etale $U$-scheme by [lem-weil-pbc-etale-site-localization-open] applied to $Y$, hence flat by [def-weil-etale-morphism], and the second projections are flat by [lem-weil-pbc-flat-morphism-base-change]). Applying that formula to $g$, $h$ and $gh$, and using composition of pullback on their representing cochains, gives $\\epsilon_V\\rho\\epsilon_U^{-1}b_U=b_V\\sigma$: both composites pull back the same representing cocycle and then pass to its sheaf cohomology class. Thus $b_V^{-1}\\epsilon_V\\rho=\\sigma b_U^{-1}\\epsilon_U$. Together with Step 3 this is the required presheaf compatibility; all maps also commute with a map $F\\to F'$.\nEvery etale object has an affine open cover by [lem-weil-pbc-affine-opens-basis]. On an arbitrary $U$, restrict a class of $P_q(U)$ to its affine opens and apply these identifications. On overlaps the results agree, as may be checked on affine opens of the overlap; the sheaf condition for $(N_q)_{\\mathrm{et}}$ glues them uniquely. Hence there is a natural linear map $P_q\\to(N_q)_{\\mathrm{et}}$ which is bijective on affine objects. It is locally surjective, and any section of its kernel is locally zero, using the same affine covers. Its sheafification is therefore an isomorphism: local lifts glue uniquely after sheafification. By Step 2 this is the claimed canonical $R^qf_{\\mathrm{et},*}M\\cong(N_q)_{\\mathrm{et}}$, natural in $M$.",
+   "uses": [
+    "lem-pc-leray-degenerate-sections",
+    "lem-pc-flat-base-change-cohom",
+    "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-flat-base-change-map-sections",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 071N, final sentence; canonical maps in coherent.tex Tag 02KH and cohomology.tex Tag 01F4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-finite-support-hi",
+  "def-trf-space-etale-module-functors",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-sfb-qcoh-cohomology-etale-pullback-naturality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-lem-affine-vanishing",
+  "lem-pc-leray-degenerate-sections",
+  "def-weil-etale-morphism",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-flat-base-change-map-sections",
+  "lem-weil-pbc-flat-morphism-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 071N, lemma-higher-direct-images-small-etale, etale case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism of schemes the higher direct images of a quasi coherent module on the small etale site agree with the associated etale sheaves of its Zariski higher direct images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor X.Modules Y.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this functor maps the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure sheaf of $ Y\"}\n  {\"name\": \"SheafOfModules.IsQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this property asserts that a sheaf of $\\\\mathcal{R}$-modules is quasicoherent if, fo\"}\n  {\"name\": \"SheafOfModules.bijective_pushforwardSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given a continuous and final functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and a natural transformation $ \\\\phi : S \\\\to F_*R $ between sheaves \"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n      [inst_1 : CategoryTheory.Category.{v_2, u_2} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type w) →\\n            [inst_2 : CategoryTheory.Category.{w', w} A] →\\n              (J : CategoryTh\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the composition of the sheaf pushforward functor $ G_\\\\ast $ with the inclusion of sheaves into presheaves is naturally isomorphic to the\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"The hom component of the natural isomorphism between the composition of the sheaf pushforward cocontinuous functor and the sheaf-to-presheaf inclusion, and the composition of the presheaf inclusion wi\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pushforward comparisons and definitions of the etale topology do not compare the two higher direct image functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale versus Zariski comparison of quasi coherent higher direct images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pushforward comparisons and definitions of the etale topology do not compare the two higher direct image functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"higherDirectImage\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pushforward comparisons and definitions of the etale topology do not compare the two higher direct image functors"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*[Ee]tale|[Ee]tale.*higherDirectImage|zariski.*[Ee]tale.*[Cc]omparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pushforward comparisons and definitions of the etale topology do not compare the two higher direct image functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale versus Zariski comparison of quasi coherent higher direct images",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: underived pushforward comparisons and definitions of the etale topology do not compare the two higher direct image functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale versus Zariski comparison of quasi coherent higher direct images",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), (AlgebraicGeometry.Scheme.Etale.forget X).Full\", \"doc\": \"The forgetful functor from the category of étale schemes over a scheme $X$ to the over category over $X$ is full. This means that for any two étale morphisms $f : Y \\to X$ and $g : Z \\to X$, every morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Etale\", \"type\": \"CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived pullback, restriction, topology, or cohomology definitions; none proves this comparison and its etale-pullback compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi compact quasi separated morphism of schemes higher direct images of quasi coherent modules commute with change from Zariski to small etale topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τr =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pushforwardComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ of schemes, the counit component of the pseudofunctor's composition map $\\\\tau_{g \\\\circ f}$ is naturally isomorphic to the composition of counits $\\\\tau_g \\\\ci\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} {M : X.Modules} (f : X ⟶ Y) (g : Y ⟶ Z) (U : Z.Opens),\\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.pushforwardComp f g).hom.app M) U =\\n    CategoryTheory.CategoryStruct.id\\n      ((((AlgebraicGeometry.Scheme.Modules.pushforward f)\", \"doc\": \"For any open subset $U \\\\subseteq Z$, the component of the natural isomorphism between the pushforward functors composed along $g \\\\circ f$ and the composition of pushforwards along $g$ and $f$, evaluat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pushforwardComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.pushforward g) ≅\\n        AlgebraicGeometry.Scheme.Modules.pushforward (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the pushforward functor of sheaves of modules along the composition $g \\\\circ f$ is naturally isomorphic to the composition of the \"}\n  {\"name\": \"SheafOfModules.pushforward_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"The composition of pushforward functors for sheaves of modules, induced by continuous functors between sites with Grothendieck topologies and ring sheaf morphisms, satisfies an associativity condition\"}\n  {\"name\": \"SheafOfModules.pushforwardComp_hom_app_val_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"For any sheaf of modules $ M $ over a ring sheaf $ R $, object $ U $ in category $ \\\\mathcal{C} $, and element $ x $ in the module $ M(U) $, applying the natural isomorphism between composed pushforwar\"}\n  {\"name\": \"SheafOfModules.pushforwardComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F G : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n  {\"name\": \"SheafOfModules.pushforwardNatIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F G : CategoryTheory.Functor C D} {T : CategoryTheory.Sheaf J RingCat} {S : CategoryThe\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, continuous functors $F,G: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, a natural isomorphism $\\\\alpha: F \\\\cong G$, and sheave\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived pullback, restriction, topology, or cohomology definitions; none proves this comparison and its etale-pullback compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\", \"etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived pullback, restriction, topology, or cohomology definitions; none proves this comparison and its etale-pullback compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "higherDirectImage.*[Ee]tale|[Ee]tale.*higherDirectImage|zariski.*[Ee]tale.*[Cc]omparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived pullback, restriction, topology, or cohomology definitions; none proves this comparison and its etale-pullback compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale versus Zariski comparison of quasi coherent higher direct images",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern underived pullback, restriction, topology, or cohomology definitions; none proves this comparison and its etale-pullback compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-space-curve-qcoh-bound",
+  "date": "2026-10-23",
+  "group": "Q74"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Quasi-coherent cohomological dimension of algebraic-space curve families. Supporting cohomology input: comparison of the schematic local higher images with the ordinary scheme vanishing theorem.",
+   "via": [
+    "lem-sfb-proper-space-curve-qcoh-bound",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-scheme-etale-higher-image-comparison",
+  "worker": "stage1",
+  "summary": "Followed the proof of Stacks 071N. Reused qcqs higher-image quasi-coherence, flat base change and Leray; wrote the module-valued cohomology-presheaf calculation explicitly and isolated the additional etale-pullback compatibility of the cohomology comparison. No statement change.",
+  "blueprint": "Supporting local comparison for the curve-family quasi-coherent bound in the inherited plurinodal reduction chain of det-thm-sf-ctf-stability-direct-images, proof (3). The latest blueprint proof (3) no longer spells out that alteration route; this delivery only supplies its already-created cohomological prerequisite. The inherited blueprint ancestor is null, as confirmed by blueprint_refs.py ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "lem-pc-finite-support-hi",
+    "why": "Generic Finite support of higher direct images input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "lem-pe-ringed-site-derived-evaluation-slice",
+    "why": "Generic Derived module evaluation is abelian cohomology on the slice input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic The localized small etale site at an etale open is the small etale site of the open input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic Vanishing of higher cohomology on affines input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "lem-pc-leray-degenerate-sections",
+    "why": "Generic Degenerate Leray: H^q(X,F) = Gamma(Y, R^q f_* F) when the higher cohomology of the R^q f_* F vanishes input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic Cohomology and flat base change input used only in the qcqs scheme cohomology comparison; no node of the ctf-stability unit supplies this ringed-site/coherent-cohomology tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic Module and abelian cohomology over an object of a ringed site agree tool for the canonical coherent-cohomology comparison; the unit has no replacement for this input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-base-change-map-sections",
+    "why": "Generic The flat base change map on sections: pullback of cohomology classes tool for the canonical coherent-cohomology comparison; the unit has no replacement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-pc-finite-support-hi",
+  "lem-pe-ringed-site-derived-evaluation-slice",
+  "lem-weil-pbc-etale-site-localization-open",
+  "pqf-lem-affine-vanishing",
+  "lem-pc-leray-degenerate-sections",
+  "lem-pc-flat-base-change-cohom",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-flat-base-change-map-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-a37a29972",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-a37a29972 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full and checked them against Stacks 071N and 03DW; all five steps are correct. Step 2's chart limit is evaluation at the terminal chart X_U, and the presheaf computation is genuinely elementary. Steps 4-5: p_U is qcqs by permanence(3), the higher images are quasi-coherent by finite-support-hi(1), affine vanishing and degenerate Leray(2) give the edge isomorphism, and sheaf-form flat base change finishes. The restriction compatibility b_V sigma = eps_V rho eps_U^-1 b_U follows from the 02N7 section formula applied to g, h and gh. Gluing from affine objects avoids any affine-intersection assumption. The new node is true: eps_Z composed with a_et equals a composed with eps_Z' as morphisms of ringed topoi. I tested it at q=0, for open immersions and on empty cases. It is not a duplicate: I grepped 03DW, 071N and 03LC across the DAG, and the existing 03DW nodes cover only a fixed scheme with naturality in module maps. It is not a restatement of a clause of the item. Fix 1 (new node): c^q was given only as 'the canonical iso of lem-sc-etale-zariski-qcoh-comparison', which merely asserts that some natural isomorphisms exist, so read literally the pullback equation fails for twisted choices. I pinned c^q as the 03DW(2) map, using the recipe of def-weil-pbc-module-cohomology-fmap for the identity F -> eps_*F_et. I also cited that definition (a) for a^*_Zar (B3) and added it to stmt_deps. Fix 2 (item Step 5): it now cites the localization node and def-weil-etale-morphism for flatness of h. Batch-5: lem-trf-scheme-zariski-etale-quasi-coherent-equivalence is the generic 03DX/03LC equivalence of unit sk-i-curve-zero. Its closure (953 nodes) holds only sk-i-curve-zero foundations, with no trace-formula or Poincare-duality theorem and no nt- target, so the citation is acceptable. I accept the nine generic tool_uses. No SGA is cited.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeEtaleHigherImageComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.scheme_etale_higher_image_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.EtaleHigherImageContext",
+   "AlgebraicGeometry.Scheme.Modules.EtaleHigherImageSquare",
+   "AlgebraicGeometry.Scheme.Modules.EtaleHigherImageSquare.mate",
+   "AlgebraicGeometry.Scheme.Modules.EtaleHigherImageSquare.higherComparison",
+   "AlgebraicGeometry.Scheme.Modules.EtaleHigherImageSquare.derivedComparison",
+   "AlgebraicGeometry.Scheme.Modules.scheme_etale_derived_image_comparison",
+   "AlgebraicGeometry.Scheme.Modules.scheme_etale_higher_image_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeEtaleHigherImageComparison.lean",
+  "statement": "theorem scheme_etale_higher_image_comparison : ∃ c : ∀ X : Scheme.{u}, EtaleHigherImageContext X, ∀ (X Y : Scheme.{u}) (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f], ∃ s : EtaleHigherImageSquare f (c X) (c Y), ∀ (M : SmallEtaleModules X) [M.IsQuasicoherent], ((c X).toZariskiEtaleModuleContext.restriction.obj M).IsQuasicoherent ∧ ∀ q : ℕ, (((pushforward f).rightDerived q).obj ((c X).toZariskiEtaleModuleContext.restriction.obj M)).IsQuasicoherent ∧ IsIso ((s.higherComparison q).app M)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Canonical comparisons are derived mates of the restriction square specified on every Zariski open. Proof-only contexts supply exactness and enough injectives without adding hypotheses. Includes the bounded-below derived statement and its per-degree corollary; all module, pushforward, restriction and extension definitions are the recorded dependency constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c53469e70",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read item node, all 6 stmt_dep records, report (Worker report + Second reading by Q40 present), delivered module, and dependency sources (SchemeZariskiEtaleQuasiCoherentEquivalence, RingedSpaceDerivedDirectImage, DirectImage/Basic higherDirectImage, QcohCohomologyEtalePullbackNaturality, PlusBaseChange). Hypotheses exactly qc+qs f and IsQuasicoherent M; restriction/extension are the recorded equivalence functors; EtaleHigherImageContext is Prop-only (∃ c chooses no data, all fields true); EtaleHigherImageSquare iso uniquely pinned on every open as in the dep's r; higherComparison = rightDerivedBaseChange of the mate + counit, a NatTrans (naturality built in), with IsIso per q and Zariski quasi-coherence clause; derived plus-category form given separately per 2026-10-21 convention. Zariski R^q via (pushforward f).rightDerived = upstream higherDirectImage, and étale pushforward via the recorded smallEtaleModulePushforward: same objects as the node's. Record changes only the lean field; statement verbatim; theorems sorry; defs real; docstrings with source/blueprint; single bound universe u; edge cases q=0, empty, zero, identity, non-separated f, non-qc Y covered. No fixes, no compile needed."
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-zl-proper-support-coefficient-adjunction",
+ "kind": "statement",
+ "title": "Coefficient-compatible counits for proper support",
+ "statement": "Let D be a finite-field datum, ell a prime distinct from its characteristic, and Omega an algebraic closure of Q_ell in an independent universe. Let p:X→Y be proper over D.k between finite-type quasi-compact schemes. Let S be any specified normalized compact-support coefficient action for (id_X,p) [def-weil-compact-support-coefficient-action]. Let L be a coherent inverse-image stage family whose finite functors and comparison components are precisely the canonical rational pullback and scalar comparison [def-weil-derived-pullback-tensor-hom]. Given finite adjunctions a_E:L_E ⊣ S_E, there are natural automorphisms e_E of S_E such that the transported adjunction counits epsilon_E obey L_F(S_beta(h)_K);epsilon_F(T_X(h)K) = L_beta(h)^(-1)_(S_E K);T_X(h)(epsilon_E(K)) for every finite coefficient inclusion h:E≤F and every K at E. This asserts a normalization of already supplied finite adjunctions, not their existence, common-stage descent, an open adjunction, or a compactification compositor.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Proper image paragraph, together with SGA 4 XVII §5 and Bhatt--Scholze 6.7.2 and 6.7.6–6.7.7. Separate finite-stage compatibility assertion needed in the common-stage comparison."
+ },
+ "proof": [
+  {
+   "text": "The normalized integral proper adjunction is obtained by restricting the reduction/system adjunction and transporting identity-open removal; its rationalization gives finite adjunctions. The finite proper-support adjunction theorem establishes their existence separately. For any supplied adjunctions, right-adjoint uniqueness compares them with these normalized ones by natural automorphisms of their fixed right functors.",
+   "uses": [
+    "lem-zl-proper-support-finite-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On full derived quotient systems remove the identity-open factor. The normalized compact-support scalar arrow is the transpose of scalar extension of the direct-image counit. The scalar pullback comparison is the balanced-tensor comparison. Triangle identities show that the two displayed counit composites have the same transpose. The whole-system normalization preserves quotient transitions, so this is equality before total limit, not an inference from separate finite evaluations.",
+   "uses": [
+    "lem-weil-compact-support-system-transpose-normalization",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the fixed total-limit realization, restrict to constructible subcategories, and rationalize the equation on pure tensors. Conjugate by the canonical stage-transition isomorphisms and the supplied finite-functor equalities. This yields exactly the displayed counit equation. Empty schemes, zero objects, and identity field inclusions obey the same triangle identities. Finally transport the supplied adjunctions by the right-adjoint uniqueness automorphisms to get precisely these normalized counits; the transport formulas for unit and counit identify the stated equations.",
+   "uses": [
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-proper-support-finite-adjunction",
+  "lem-weil-compact-support-system-transpose-normalization",
+  "lem-fix-operation-reduction"
+ ],
+ "proof_origin": "C6 stage 3, 2026-10-25: separate finite proper-image part of the recorded compact-support comparison; common-stage descent and open/proper composition remain in the parent.",
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism compact support coefficient action is right adjoint to common-stage pullback",
+   "results": "Eight ordinary scheme-module and sheaf pullback adjunction results; no normalized compact-support coefficient action result.",
+   "date": "2026-10-25",
+   "verdict": "no exact match; use existing integral restriction and scalar-localization proofs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.IsRightAdjoint",
+   "results": "Ten basic adjunction and adjoint-uniqueness results, no prescribed compact-support functor identification.",
+   "date": "2026-10-25",
+   "verdict": "use adjoint uniqueness and restriction APIs"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Aa]djunction|[Pp]roper.*[Aa]djunction",
+   "results": "Sixteen generic adjunction declarations; no finite normalized support adjunction or coefficient-counit theorem. Local library reading found ProperIntegralTower.integralComparison and the proved localization helpers.",
+   "date": "2026-10-25",
+   "verdict": "construct the finite adjunction from these existing results"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CommonStageWeilShriek",
+  "date": "2026-10-25",
+  "group": "C6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-zl-common-stage-weil-shriek",
+   "place": "Proof of the proper-factor identification in the recorded compact-support comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProperSupportCoefficientAdjunction",
+  "file": "lean/Sheaf/Paper/ProperSupportCoefficientAdjunction.lean",
+  "declaration": "WeilConjectures.properSupportCoefficientAdjunction",
+  "statement": "theorem properSupportCoefficientAdjunction\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]\n    (p : X ⟶ Y) [p.IsOver (Spec (.of D.k))] [IsProper p]\n    [∀ x : X, Invertible (l : X.residueField x)]\n    [∀ y : Y, Invertible (l : Y.residueField y)] :\n    ∀ (S : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω\n        (Compactification.ofIsProper p))\n      (L : (stageSystem l Ω Y).Morphism\n        (stageSystem l Ω X)),\n      L.Φ = (fun E ↦ rationalDerivedPullback l (Coefficient.{u} l Ω E)\n        p) →\n      (∀ (E F : Index l Ω) (h : E ≤ F)\n        (K : Stage l Ω Y E),\n        HEq ((L.β h).app K)\n          (commonStagePullbackComparison l Ω p ⟨E, K⟩ F h)) →\n      ∀ a : ∀ E, L.Φ E ⊣ S.system.Φ E,\n      ∃ e : ∀ E, S.system.Φ E ≅ S.system.Φ E,\n        ∀ {E F : Index l Ω} (h : E ≤ F)\n          (K : Stage l Ω X E),\n          (L.Φ F).map ((S.system.β h).hom.app K) ≫\n            ((a F).ofNatIsoRight (e F)).counit.app (((stageSystem l Ω X).T h).obj K) =\n          (L.β h).inv.app ((S.system.Φ E).obj K) ≫\n            ((stageSystem l Ω X).T h).map\n              (((a E).ofNatIsoRight (e E)).counit.app K)",
+  "branch": "sheaf-dag",
+  "by": "C6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac105",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T122622-L-1790683",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac105",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261025T122622-L-1790683",
+  "kind": "interface",
+  "note": "independent cc review: item proofs of zlPull_open_isRightAdjoint/zlCommonStageShriek_recorded against node def-zl-common-stage-weil-shriek; new sorry properSupportCoefficientAdjunction against its node and the pinned SfCompactSupportCoefficientAction beta; ZlOpenUnit generalization (Type v, no IsSeparated, finite-stage EmptyFibre clause) against change record and node statement; 7 direct importers compiled against the delivered set"
+ }
+}

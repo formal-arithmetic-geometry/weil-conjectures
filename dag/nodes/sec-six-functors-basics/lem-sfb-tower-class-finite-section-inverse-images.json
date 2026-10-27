@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-tower-class-finite-section-inverse-images",
+ "kind": "statement",
+ "title": "Finite constant-ring inverse images with normalized set transpose",
+ "statement": "For the actual ell-power constant quotient rings on the pro-etale sites of any scheme map f, choose algebraic inverse images I_n whose module functors are the specified proEtaleConstantRingPullback. Choose their adjunctions to the specified sectionwise proEtaleConstantRingPushforward so that the bundled functors and adjunction equal the canonical constant-ring package. The ring-underlying comparisons commute with adjacent quotient transitions, and forgetting every module transpose gives exactly the set-sheaf transpose of its inverse-image underlying comparison. This is only a finite-level assertion: no functor on systems, derived geometry or tensor localization is included. The coefficient data are those of [def-sp-tower-shriek-data], the algebraic lifts are [def-weil-pbc-algebraic-inverse-image], and the specified operations are [def-weil-pbc-proetale-operations].",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes"
+ },
+ "proof": [
+  {
+   "text": "Unfold the equal-universe and independent-universe scalar-extension presentations at the matching universes. Their tensor objects and restriction-map characterizing properties coincide; proof irrelevance identifies the chosen restrictions, and the two module objects and induced morphisms agree definitionally. Apply the proved scalar-extension-along-a-ring-isomorphism comparison. Retain its inverse formula m maps to the sheafification unit of 1 tensor m, together with its simultaneous naturality in modules.",
+   "uses": [
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the unit-normalized ring comparison with the specified constant-ring isomorphism, and compose the natural module comparison with the underlying scalar-extension isomorphism. Use the existing generalized binary-graph transport helper from the algebraic inverse-image proof. On unit sections, ring operations are preserved by the composite ring homomorphism; addition and zero by the inverse scalar isomorphism; and the scalar action by its linearity and c inverse composed with c equals identity. This constructs the algebraic lift with modules definitionally the prescribed pullback. The construction does not choose an unnormalized algebraic presentation.",
+   "uses": [
+    "lem-sp-proetale-algebraic-inverse-image",
+    "lem-pur-proetale-unit-underlying-identifications",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of the underlying ring comparison by transposing through the set adjunction. Naturality of its unit reduces it to naturality of the ring adjunction unit and the coefficient square. Specialize the proved constant-section coefficient naturality to the actual adjacent quotient map. This gives the tower equation for the constructed ringUnderlying maps.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-pur-proetale-unit-underlying-identifications"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the canonical module adjunction itself. Its normalization theorem expresses every transpose as the model-site module transpose after insertion of 1 tensor m. Evaluate the module comparison on a set-unit section and apply the scalar-isomorphism inverse formula. The two expressions coincide sectionwise, proving equality of the underlying transpose. The module-functor equality and equality of the dependent functor-adjunction packages are reflexivity.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-proetale-unit-underlying-identifications"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "def-weil-pbc-proetale-operations",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "lem-pur-proetale-unit-underlying-identifications",
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound-operations.proof.md",
+  "place": "clause (2), finite unit and tensor maps and their transposes",
+  "note": "W8: complete finite normalization from the existing scalar-extension isomorphism, unit-normalized inverse-image comparisons, generalized operation-graph transport, coefficient naturality and canonical tensor-insertion adjunction; no new split-off statements."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of modules along ring isomorphism underlying set sheaf adjunction",
+   "results": "8 results: restrictScalars, restrictScalars_obj_val, fullyFaithfulForget_preimage_val and generic sheaf module tools. No prescribed project normalization.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project ring operations; finite compatibility still requires its own argument."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": "12 results including SheafOfModules.pullbackPushforwardAdjunction and its tensor-unit transpose formulas.",
+   "date": "2026-10-27",
+   "verdict": "Mathlib supplies the generic adjunction; the actual pro-etale model and constant-ring transport require normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackPushforwardAdjunction|changeOfRings",
+   "results": "25 Mathlib hits, including Sheaf/PullbackContinuous.lean and Sheaf/ChangeOfRings.lean. Local ProEtaleOperationsCanonicalAdjunction.lean fixes the actual tensor-insertion transpose.",
+   "date": "2026-10-27",
+   "verdict": "No theorem states the compatible tower of these prescribed finite lifts."
+  }
+ ],
+ "mathlib_match": null,
+ "merged_into": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerClassSectionGeometryExistence",
+  "date": "2026-10-27",
+  "group": "A8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "clause (2), finite normalization before constructing systems",
+   "via": [
+    "lem-sfb-tower-class-section-geometry-existence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TowerClassFiniteSectionInverseImages",
+  "file": "lean/Sheaf/Paper/TowerClassFiniteSectionInverseImages.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerClasses.finite_sectionInverseImages",
+  "statement": "theorem finite_sectionInverseImages {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    ∃ I : ∀ n, SheafOfModules.AlgebraicInverseImage\n        (Scheme.proEtaleSheafInverseImage f (Type (u + 1)))\n        (SpTowerShriek.B l E Y n) (SpTowerShriek.B l E X n),\n    ∃ a : ∀ n, (I n).modules ⊣ Scheme.proEtaleConstantRingPushforward\n        (SpTowerShriek.R l E n) f,\n      (∀ n, (I n).modules =\n        Scheme.proEtaleConstantRingPullback (SpTowerShriek.R l E n) f) ∧\n      (∀ n,\n        (⟨(I n).modules, Scheme.proEtaleConstantRingPushforward\n          (SpTowerShriek.R l E n) f, a n⟩ :\n          Σ L : SemilinearSections.Mod.{u + 1, u, u + 1}\n            (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n) ⥤\n            SemilinearSections.Mod.{u + 1, u, u + 1}\n              (Scheme.ProEt.topology X) (SpTowerShriek.B l E X n),\n          Σ P : SemilinearSections.Mod.{u + 1, u, u + 1}\n            (Scheme.ProEt.topology X) (SpTowerShriek.B l E X n) ⥤\n            SemilinearSections.Mod.{u + 1, u, u + 1}\n              (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n), L ⊣ P) =\n        (⟨Scheme.proEtaleConstantRingPullback (SpTowerShriek.R l E n) f,\n          Scheme.proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f,\n          Scheme.proEtaleConstantRingAdjunction (SpTowerShriek.R l E n) f⟩)) ∧\n      (∀ n,\n        (Scheme.proEtaleSheafInverseImage f (Type (u + 1))).map\n            ((sheafCompose (Scheme.ProEt.topology Y)\n              (CategoryTheory.forget CommRingCat.{u + 1})).map (SpTowerShriek.tau l E Y n)) ≫\n            (I n).ringUnderlying.hom =\n          (I (n + 1)).ringUnderlying.hom ≫\n            (sheafCompose (Scheme.ProEt.topology X)\n              (CategoryTheory.forget CommRingCat.{u + 1})).map (SpTowerShriek.tau l E X n)) ∧\n      (∀ n (M : SemilinearSections.Mod.{u + 1, u, u + 1}\n          (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n))\n        (N : SemilinearSections.Mod.{u + 1, u, u + 1}\n          (Scheme.ProEt.topology X) (SpTowerShriek.B l E X n))\n        (h : (I n).modules.obj M ⟶ N),\n        (SemilinearSections.underlying.{u + 1, u, u + 1}\n          (Scheme.ProEt.topology Y) (SpTowerShriek.B l E Y n)).map\n            ((a n).homEquiv M N h) =\n          (Scheme.proEtaleSheafAdjunction f (Type (u + 1))).homEquiv _ _\n            ((I n).moduleUnderlying.inv.app M ≫\n              (SemilinearSections.underlying.{u + 1, u, u + 1}\n                (Scheme.ProEt.topology X) (SpTowerShriek.B l E X n)).map h))",
+  "branch": "sheaf-dag",
+  "by": "A8",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A8",
+  "result": "pass",
+  "landing": "20261027T103406-L-1065685",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261027T123553-L-2321194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

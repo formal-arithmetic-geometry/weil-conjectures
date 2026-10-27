@@ -1,0 +1,118 @@
+{
+ "id": "lem-zl-contractible-realization-ordinary-unit",
+ "kind": "statement",
+ "title": "The ordinary realization sections unit",
+ "statement": "In the essentially small ringed-site setting of [def-zl-condensed-lisse-evaluation-model], let U be terminal and suppose ordinary internal-module sections at U preserve all colimits of size (u+1,u+1). For every functor L from A=O(U) modules to internal O-modules and every adjunction L ⊣ sections(U), its ordinary unit is invertible. There is no derived-category or monoidal-evaluation hypothesis.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2"
+ },
+ "stmt_deps": [
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the sectionwise/internal module equivalence. Morphisms from the coefficient module correspond to compatible families of sections, which are exactly sections at terminal U. The same functor is corepresented by L(A) by adjunction and evaluation at 1 in Hom_A(A,-). Uniqueness of corepresentations identifies L(A) with the coefficient module. The induced unit followed by sections of this isomorphism is the identity comparison A = O(U), so the unit on A is invertible. No tensor-extension construction is required.",
+   "uses": [
+    "def-zl-condensed-lisse-evaluation-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The natural transformation unit is an isomorphism on each free module I →₀ A: this is the coproduct of copies of A, both identity and L followed by sections preserve the coproduct, and isIso_app_coconePt_of_preservesColimit applies to its concrete finsupp cocone. This includes the empty indexing type.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For M take the free module Q on its underlying type and the evaluation surjection g:Q→M. Take the free module P on ker(g), with f sending its generators to their underlying elements of Q. Then f,g is exact and g is surjective, so ModuleCat.isColimitCokernelCofork identifies M as its cokernel. Both functors preserve this colimit and the unit is invertible on P,Q by the free-module case. Apply isIso_app_coconePt_of_preservesColimit to obtain the unit isomorphism on M, and then pointwise invertibility gives IsIso of the natural transformation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-zl-condensed-lisse-evaluation-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2",
+  "note": "M1 direct proof by uniqueness of corepresentations, coproducts and explicit free presentations; avoids constructing the tensor-sheafification adjunction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The left derived functor of sheafified scalar extension from modules over global sections is the composition of constant module realization and derived extension of rings",
+   "results": "IsLeftDerivedFunctor.mk, ModuleCat.extendScalars and its adjunction, and sheafification adjunction; no fixed-composite comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "Reuse ordinary tensor and localization APIs; no exact statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact coproduct preserving sections of module sheaves over global section ring fully faithful unit of left adjoint",
+   "results": "SheafOfModules.unitHomEquiv, freeHomEquiv, PresheafOfModules.sheafificationAdjunction; condensed locally constant adjunctions are special cases.",
+   "date": "2026-10-25",
+   "verdict": "Useful ordinary Hom equivalences; no general ringed-site fixed realization theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*tensor|constant.*module.*adjunction|derived.*tensor.*evaluation",
+   "results": "Mathlib presheaf module tensor, Sites.Point.Monoidal and presheaf closed tensor; no internal-section derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "The representative comparison and ordinary unit still require proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ContractibleEvaluationAdjunction",
+  "date": "2026-10-25",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Lemma 4.1(1), equations (3.1)-(3.2), Remark 3.2; ordinary realization, unit, or tensor comparison in Lemma 4.1(1).",
+   "via": [
+    "lem-zl-contractible-realization-adjunction",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContractibleRealizationOrdinaryUnit",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.Evaluation.contractible_realization_ordinary_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ContractibleRealizationOrdinaryUnit.lean",
+  "statement": "theorem contractible_realization_ordinary_unit\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]\n    (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O]\n    (U : C) (hU : IsTerminal U)\n    (hcol : PreservesColimitsOfSize.{u + 1, u + 1} (sections J O U)) :\n    ∀ (L : ModuleCat.{u + 1} (A J O U) ⥤ Mod (Sheaf J Ab.{u + 1}) O)\n      (adj : L ⊣ sections J O U), IsIso adj.unit",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261025T143331-L-983233",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261025T180849-L-4042841",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

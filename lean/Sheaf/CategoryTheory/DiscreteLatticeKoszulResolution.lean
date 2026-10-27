@@ -14,22 +14,8 @@ public import Mathlib.CategoryTheory.Action.Limits
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
-import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.InternalActionSitePresentation
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
-import Sheaf.CategoryTheory.InternalSectionTensorComparison
-import WeilConjectures.CategoryTheory.DoubleComplexTotal
-import WeilConjectures.Algebra.Homology.FirstQuadrantTotalComparison
-import Sheaf.CategoryTheory.DerivedInjectiveResolutionNaturality
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.Algebra.Homology.ModelCategory.Injective
+import Mathlib.CategoryTheory.Adjunction.Evaluation
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 
 /-! # Discrete lattice invariants and finite Koszul coordinates
 
@@ -77,7 +63,15 @@ Proof: the limit inclusion is monic, and its composites with the maps induced by
 and by the sum of the induced maps both equal (f+g) on the underlying module. -/
 theorem invariants_additive (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (r : ℕ) :
     (invariants R r).Additive := by
-  sorry
+  constructor
+  intro P Q f g
+  change limMap ((Action.functorCategoryEquivalence (Modules R) (Group r)).functor.map
+    (f + g)) = _
+  rw [Functor.map_add]
+  apply limit.hom_ext
+  intro j
+  simp only [invariants, Functor.comp_map, lim_map, limMap_π, Preadditive.add_comp,
+    NatTrans.app_add, Preadditive.comp_add]
 
 attribute [instance] invariants_additive
 
@@ -91,7 +85,35 @@ theorem resolutions (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X] (r : �
     (K : CochainComplex (Equivariant R r) ℤ) :
     ∃ (I : CochainComplex (Equivariant R r) ℤ) (s : K ⟶ I),
       I.IsKInjective ∧ QuasiIso s := by
-  sorry
+  have : IsGrothendieckAbelian.{u + 1} (Modules R) := inferInstance
+  let A := Modules R
+  let J := SingleObj (Group r)
+  have (a b : J) : HasColimitsOfShape (Discrete (a ⟶ b)) A :=
+    HasColimitsOfShape.of_small.{u + 1, u + 1} A _
+  let G := separator A
+  have hG := isSeparator_separator A
+  have hS : ObjectProperty.IsSeparating
+      (.ofObj fun j : J ↦ (evaluationLeftAdjoint A j).obj G) := by
+    intro F F' f g hfg
+    apply NatTrans.ext
+    funext j
+    apply hG.def
+    intro a
+    let adj := evaluationAdjunctionRight A j
+    apply (adj.homEquiv G F').symm.injective
+    have h := hfg _ (ObjectProperty.ofObj_apply _ j) ((adj.homEquiv G F).symm a)
+    exact (adj.homEquiv_naturality_right_symm a f).trans
+      (h.trans (adj.homEquiv_naturality_right_symm a g).symm)
+  have : HasSeparator (J ⥤ A) := ⟨_, hS.isSeparator_coproduct⟩
+  have : HasFilteredColimitsOfSize.{u + 1, u + 1} (J ⥤ A) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  have : AB5OfSize.{u + 1, u + 1} (J ⥤ A) := ⟨fun _ _ _ ↦ inferInstance⟩
+  have : IsGrothendieckAbelian.{u + 1} (J ⥤ A) := {}
+  have : IsGrothendieckAbelian.{u + 1} (Equivariant R r) :=
+    IsGrothendieckAbelian.of_equivalence
+      (Action.functorCategoryEquivalence (Modules R) (Group r)).symm
+  obtain ⟨I, hI, s, _, hs⟩ := Abelian.HasKInjectiveResolutions.exists_isKInjective K
+  exact ⟨I, s, hI, hs⟩
 
 /-- Use the standard localization universe without restricting the coefficient universe.
 Source: paragraph (3) (blueprint: lem-sfb-discrete-lattice-koszul-resolution). -/
@@ -221,7 +243,8 @@ theorem restrictionInvariants_naturality {R R' : Profinite.CondensedRing.{u}}
         (restrictionInvariants φ r Q).hom =
       (restrictionInvariants φ r P).hom ≫
         (invariants R r).map ((equivariantRestriction φ r).map f) := by
-  sorry
+  exact (preservesLimitNatIso (restriction φ)).hom.naturality
+    ((Action.functorCategoryEquivalence (Modules R') (Group r)).functor.map f)
 
 /-- The ordinary invariant comparison on a complex is the degreewise limit comparison.
 Source: paragraph (3) (blueprint: lem-sfb-discrete-lattice-koszul-resolution). -/

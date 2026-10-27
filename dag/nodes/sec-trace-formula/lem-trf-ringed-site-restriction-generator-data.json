@@ -1,0 +1,302 @@
+{
+ "id": "lem-trf-ringed-site-restriction-generator-data",
+ "kind": "statement",
+ "title": "Exact restriction and small free-sheaf presentations of its partial left adjoint",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites in a common module universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], and let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous [def-weil-pbc-special-cocontinuous-functor](1). Let $R$ be a sheaf of commutative rings on $\\mathcal D$, put $R'=R\\circ u$, and let $T:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(R')$ be restriction $N\\mapsto N\\circ u$, with the induced $R'$-action [def-weil-sheaf-of-modules-category]. Then $T$ is additive and exact. For either $(\\mathcal E,S)=(\\mathcal C,R')$ or $(\\mathcal D,R)$ and each $U\\in\\mathcal E$, define $E_U^S=(S[h_U])^\\#$, where $S[h_U](V)=\\bigoplus_{a:V\\to U}S(V)$ and restriction sends $e_a$ to $e_{a\\circ b}$ along $b:V'\\to V$ [def-weil-presheaf-modules-sheafification]. The evaluation map $\\operatorname{Hom}_S(E_U^S,M)\\to M(U)$ sending $f$ to the image of $e_{1_U}$ is a bijection, natural in $M$. For every $S$-module sheaf $M$, the map $\\bigoplus_{(U,s),\\ s\\in M(U)}E_U^S\\to M$ whose $(U,s)$-component corresponds to $s$ is an epimorphism. All its indexing sets are small in the fixed universe. The class $\\mathcal P$ of objects isomorphic to small sums of the $E_U^{R'}$ contains $0$, is closed under finite sums, and epimorphically generates $\\operatorname{Mod}(R')$. For every small family $(U_i)_{i\\in I}$ in $\\mathcal C$ there are bijections, natural in $N\\in\\operatorname{Mod}(R)$,\n$$\\operatorname{Hom}_{R'}\\!\\left(\\bigoplus_i E_{U_i}^{R'},TN\\right)\\cong\\prod_iN(uU_i)\\cong\\operatorname{Hom}_{R}\\!\\left(\\bigoplus_i E_{uU_i}^{R},N\\right),$$\nwhose components are these evaluation bijections.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0797, lemma-lower-shriek-modules, evaluation computation and reduction to partial adjoints; Tag 03EW, lemma-module-quotient-flat (3) and its proof. Exactness by the local-lifting argument for cocontinuity."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-pbc-special-cocontinuous-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "Continuity makes $R'=R\\circ u$ and the underlying abelian presheaf $N\\circ u$ sheaves by [lem-weil-pbc-site-continuous-pushforward-sheaf]. The sectionwise action and restrictions obey $(ax)|_V=a|_Vx|_V$, so they define $TN$ and its maps by [def-weil-sheaf-of-modules-category]. For morphisms $f,g$, $(T(f+g))_U=f_{uU}+g_{uU}$, hence $T$ is additive. Kernels are sectionwise by the same definition node, and $(\\ker f)(uU)=\\ker(f_{uU})$ with the same restrictions and action. Thus $T(\\ker f)=\\ker(Tf)$.",
+   "uses": [
+    "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00WW, lemma-pushforward-sheaf; sites-modules.tex Tag 03DA, lemma-abelian"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-continuous-cocontinuous-ringed-restriction] to $u,R$, forgetting commutativity. Both sites are small in the stipulated common universe, and both continuity and cocontinuity are hypotheses. Its identity structural map makes its module restriction precisely $T$, and it supplies $T\\dashv H$ for a module functor $H$. Cokernels exist by [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $q:B\\to Q$ is the cokernel of $f:A\\to B$, adjunction identifies maps $TQ\\to Z$ with maps $Q\\to HZ$, hence with maps $b:B\\to HZ$ satisfying $bf=0$. Naturality identifies these with maps $c:TB\\to Z$ satisfying $c(Tf)=0$, and identifies precomposition by $Tq$ with precomposition by $q$. Thus $Tq$ has the cokernel universal property. Together with step 1 this proves exactness.",
+   "uses": [
+    "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, lemma-lower-shriek-modules; Tag 03DB, lemma-limits-colimits; sites.tex Tag 00XR, lemma-when-shriek"
+   }
+  },
+  {
+   "text": "For either ringed site $(\\mathcal E,S)$, put $P_U(V)=\\bigoplus_{a:V\\to U}S(V)$. For $s\\in M(U)$ define $\\phi_{s,V}(\\sum_a r_ae_a)=\\sum_a r_aM(a)(s)$. Semilinearity of restrictions shows this is a morphism of module presheaves: along $b:V'\\to V$ both composites give $\\sum_a r_a|_{V'}M(ab)(s)$. Conversely, naturality and linearity force every $\\phi:P_U\\to M$ to have this formula with $s=\\phi_U(e_{1_U})$, since $e_a$ is the restriction of $e_{1_U}$ along $a$. This is the presheaf bijection $\\phi\\mapsto\\phi_U(e_{1_U})$ of [lem-weil-pbc-free-yoneda-presheaf-module], applied to $M$ regarded as a presheaf of $S$-modules, with the inverse formula and naturality stated there. By [def-weil-presheaf-modules-sheafification], $\\phi_s$ extends uniquely to $E_U^S=P_U^\\#\\to M$. These constructions are inverse. Here the image of $e_{1_U}$ in $E_U^S(U)$ means its image under the sheafification unit. For $h:M\\to N$, linearity and naturality give $h_V\\phi_{s,V}=\\phi_{h_U(s),V}$, and unique extension gives naturality of the evaluation bijection.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 0797, lemma-lower-shriek-modules, displayed evaluation computation"
+   }
+  },
+  {
+   "text": "For $\\mathcal G=S_U$ on $\\mathcal E/U$, the formula in [def-weil-extension-by-zero-presheaf] is exactly $P_U$: the summand for $a:V\\to U$ is $S(V)$, and restriction along $b$ sends $r_ae_a$ to $r_a|_{V'}e_{ab}$. The statement of [lem-pc-sites-modules-j-shriek-flat] identifies $j_{U!}S_U$ with the sheafification of precisely this presheaf; thus it is the specified $E_U^S$ (only this identification, not flatness, is used). Apply [lem-pc-sites-modules-quotient-j-shriek] to $\\mathcal E,S,M$; its hypotheses are precisely smallness of $\\mathcal E$ and commutativity of $S$. Its $(U,s)$ component $\\psi_s$ is the map attached to $s$; by step 3, $\\psi_s=\\phi_{\\theta(s)}$ for $\\theta(s)\\in M(U)$ its evaluation, and $s\\mapsto\\theta(s)$ is a bijection of $M(U)$, being the composite of two bijections $\\operatorname{Hom}_S(E_U^S,M)\\cong M(U)$. (For the standard adjunction $\\theta$ is the identity, since the adjoint of $1\\mapsto s$ sends the identity generator to $s$, but this is not needed.) Hence the required map $\\bigoplus_{(U,s)}E_U^S\\to M$ with components $\\phi_s$ is the canonical epimorphism precomposed with the isomorphism of sums reindexing each $M(U)$ by $\\theta$, so it is an epimorphism, for both $(\\mathcal C,R')$ and $(\\mathcal D,R)$.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sites-modules-quotient-j-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero; Tag 03EW, lemma-module-quotient-flat (3) and its proof"
+   }
+  },
+  {
+   "text": "All coproducts in question exist by [lem-weil-pbc-module-sheaves-colimits-forgetful]. In the fixed universe [def-weil-size-convention], the objects of either site form a small set and each $M(U)$ is small. Consequently $\\coprod_{U\\in\\operatorname{Ob}(\\mathcal E)}M(U)$ is a small indexing set; all $\\operatorname{Hom}_{\\mathcal E}(V,U)$ and the stipulated sets $I$ are small as well. The empty sum is $0$. The sum of two sums indexed by $I,J$ is the sum indexed by $I\\amalg J$: maps from either object are exactly pairs of families of component maps. Iteration proves closure under finite sums, also after replacing objects by isomorphic ones. Step 4 provides an epimorphism from such a small sum onto every $R'$-module sheaf, proving epimorphic generation by $\\mathcal P$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits; Tag 03EW, lemma-module-quotient-flat (3), indexing by (U,s)"
+   }
+  },
+  {
+   "text": "Use the coproducts supplied by [lem-weil-pbc-module-sheaves-colimits-forgetful]. A morphism from $\\bigoplus_i E_{U_i}^{R'}$ is uniquely its family of composites with the inclusions. Step 3 identifies those composites with sections in $(TN)(U_i)=N(uU_i)$. In the other site step 3 identifies the same sections with maps $E_{uU_i}^{R}\\to N$; the coproduct universal property assembles them uniquely to a map $\\bigoplus_i E_{uU_i}^{R}\\to N$. Reversing these operations is the inverse bijection. For $h:N\\to N'$, both routes act on the $i$th section by $h_{uU_i}$, by step 3, proving naturality and the claimed component normalization. When $I$ is empty both Hom sets and the empty product have exactly one element.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0797, lemma-lower-shriek-modules, evaluation formula and its direct-sum extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sites-modules-quotient-j-shriek",
+  "def-weil-size-convention",
+  "lem-weil-pbc-free-yoneda-presheaf-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 0797 (lemma-lower-shriek-modules) and 03EW (lemma-module-quotient-flat (3)); elementary explicit generator formulas, kernel computation, and adjunction proof of cokernel preservation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Small sums of free sheafified representable modules generate sheaves of modules and represent restriction along a continuous functor of sites",
+   "results": "8 hits; SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.GeneratingSections, SheafOfModules.free, SheafOfModules.Presentation.map_generators_I, SheafOfModules.LocalGeneratorsData, SheafOfModules.mapFree.  Digest 5e0a3ea0c1f80d0f.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For ringed sites the sheafifications of free Yoneda modules form generators whose coproducts corepresent precomposition of module sheaves",
+   "results": "8 hits; SheafOfModules.free, SheafOfModules.generatorsOfIsCokernelFree, PresheafOfModules.freeYoneda, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.ιFree, SheafOfModules.freeFunctor_obj, SheafOfModules.mapFree.  Digest 9afb82ec89089049.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"free\", \"SheafOfModules\"",
+   "results": "12 hits; PresheafOfModules.freeObj, PresheafOfModules.free, PresheafOfModules.free_obj, PresheafOfModules.freeObj_obj, PresheafOfModules.freeAdjunctionUnit, PresheafOfModules.freeObjDesc, PresheafOfModules.freeHomEquiv, PresheafOfModules.freeAdjunction.  Digest 9b41a29953992d7c.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"freeYonedaEquiv\"",
+   "results": "3 hits; PresheafOfModules.freeYonedaEquiv, PresheafOfModules.freeYonedaEquiv_symm_app, PresheafOfModules.freeYonedaEquiv_comp.  Digest f8cab323650fec35.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|free.*[Gg]enerator|[Gg]enerator.*free",
+   "results": "22 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean.  Digest 1b00a67dbf477b12. Mathlib subdirectory: Algebra/Category/ModuleCat.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|isSeparating|isDetecting",
+   "results": "0 hits; none.  Digest 4f53cda18c2baa0c. Mathlib subdirectory: Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafified free representable modules give epimorphic presentations and their sums represent evaluation after restriction of sites",
+   "results": "8 hits; SheafOfModules.GeneratingSections.epi, SheafOfModules.freeFunctor_obj, SheafOfModules.free, SheafOfModules.ιFree, SheafOfModules.Presentation.mk, PresheafOfModules.sheafify, SheafOfModules.Presentation, SheafOfModules.presentationOfIsCokernelFree.  Digest bdae05dddac978ba.",
+   "date": "2026-10-22",
+   "verdict": "no match: presheaf freeYonedaEquiv and presheaf presentations do not state the ringed sheaf presentation together with exact cocontinuous restriction and its family representers. Sheaf free/generating-section hits concern sums of the global unit, not the sheafified representables on all site objects."
+  },
+  {
+   "tool": "grep",
+   "query": "freeYoneda|IsCocontinuous|locallySurjective",
+   "results": "25 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean. Digest 6907221b2bc4eabe. Mathlib subdirectory: Algebra/Category/ModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: checked presheaf freeYonedaEquiv and partial presheaf representer, and sheaf free (sums of the unit); these do not state the ringed sheaf clauses together. Existing DAG tools suffice for the explicit proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of free representable modules represents evaluation and cocontinuous restriction is exact",
+   "results": "8 hits; PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.toSheafify, PresheafOfModules.sheafifyMap, Condensed.free, CategoryTheory.Sheaf.freeYoneda, SheafOfModules.free, SheafOfModules.ιFree. Digest c30125e677aa38fd",
+   "date": "2026-10-23",
+   "verdict": "no match: checked presheaf freeYonedaEquiv and partial presheaf representer, and sheaf free (sums of the unit); these do not state the ringed sheaf clauses together. Existing DAG tools suffice for the explicit proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.freeYonedaEquiv",
+   "results": "3 hits; PresheafOfModules.freeYonedaEquiv, PresheafOfModules.freeYonedaEquiv_symm_app, PresheafOfModules.freeYonedaEquiv_comp. Digest f8cab323650fec35",
+   "date": "2026-10-23",
+   "verdict": "no match: checked presheaf freeYonedaEquiv and partial presheaf representer, and sheaf free (sums of the unit); these do not state the ringed sheaf clauses together. Existing DAG tools suffice for the explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact restriction of sheaves of modules along a continuous cocontinuous functor and generators given by sheafified free representables",
+   "results": "8 hits; SheafOfModules.mapFree, SheafOfModules.Presentation.map, CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.LocalGeneratorsData, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.isFinitePresentation, SheafOfModules.isQuasicoherent. Digest 43f120747220188a",
+   "date": "2026-10-23",
+   "verdict": "no match: checked presheaf freeYonedaEquiv and partial presheaf representer, and sheaf free (sums of the unit); these do not state the ringed sheaf clauses together. Existing DAG tools suffice for the explicit proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cocontinuous continuous restriction functor on ringed sheaves is exact and free Yoneda modules corepresent evaluation",
+   "results": "8 hits; SheafOfModules.mapFree, PresheafOfModules.pushforwardCompCoyonedaFreeYonedaCorepresentableBy, Condensed.free, CategoryTheory.Functor.sheafAdjunctionCocontinuous, LightCondensed.free, Condensed.freeForgetAdjunction, SheafOfModules.instIsRightAdjointPushforward, CompHausLike.LocallyConstantModule.functor. Digest 9ddb6703b645c9fd",
+   "date": "2026-10-23",
+   "verdict": "no match: checked presheaf freeYonedaEquiv and partial presheaf representer, and sheaf free (sums of the unit); these do not state the ringed sheaf clauses together. Existing DAG tools suffice for the explicit proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-continuous-cocontinuous-derived-shriek",
+  "date": "2026-10-22",
+  "group": "N8"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Extracted argument: Returned proof steps 1, 2 and the representing-bijection part of step 3; Stacks 0797 with 03EW (3).",
+   "via": [
+    "lem-trf-continuous-cocontinuous-derived-shriek",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ringed-site-restriction-generator-data",
+  "worker": "stage1",
+  "summary": "Proved all clauses using existing ringed restriction adjunction, module-colimit, and canonical j-shriek quotient nodes. Wrote the free-generator evaluation and normalization formulas explicitly. No new nodes, no statement change, no Lean writing or builds.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors. Extracted argument: Returned proof steps 1, 2 and the representing-bijection part of step 3; Stacks 0797 with 03EW (3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+    "why": "Generic module restriction adjunction used to prove cokernel preservation; the curve unit has no such ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic existence and sectionwise descriptions of module limits and colimits, needed for sums and cokernels, not a replacement of the curve unit route."
+   },
+   {
+    "node": "lem-pc-sites-modules-quotient-j-shriek",
+    "why": "Generic canonical free-sheaf epimorphism; the item identifies its summands and components explicitly."
+   },
+   {
+    "node": "lem-weil-pbc-site-continuous-pushforward-sheaf",
+    "why": "Generic continuous restriction sheaf criterion needed for well-definedness, not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Its statement explicitly identifies j-shriek of the restricted ring with the sheafified sum over Hom(V,U); no flatness assertion is used, and the curve unit has no such module construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-cocontinuous-ringed-restriction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-pc-sites-modules-quotient-j-shriek",
+  "lem-weil-pbc-site-continuous-pushforward-sheaf",
+  "lem-pc-sites-modules-j-shriek-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-09093c0f7",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-09093c0f7 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full, plus Stacks 0797 (lemma-lower-shriek-modules l.8001-8039), 03EW(3) and 00XR. The statement is unchanged, has no new nodes and drops no hypothesis, and the parent derived-shriek node gets every clause it uses. Step 1 checks out: R∘u and N∘u are sheaves by 00WW, and kernels are sectionwise. Step 2 checks out: the cited ringed-restriction node makes restriction a LEFT adjoint (the correct direction, per 00XR), cokernels exist by colimits-forgetful (2), and the universal-property argument is correct. Steps 3, 5 and 6 are elementary and correct (smallness, empty sums, I=∅, naturality). Small cases tested: empty site; no arrows or several parallel arrows V→U; non-subcanonical site; u=id; M=0; repeated U_i. Two repairs. (C5) Step 3 re-derived without citation the presheaf bijection Hom(O[h_U],P)≅P(U) that already exists as the Mathlib leaf lem-weil-pbc-free-yoneda-presheaf-module (freeYonedaEquiv); I added it to the text, uses and proof_deps. (C3) In step 4, the statement of lem-pc-sites-modules-quotient-j-shriek does not fix its adjunction's normalization (the formula is only in its proof), so I replaced the step's claim 'component sends e_id to s' with a reindexing argument: ψ_s=φ_θ(s) with θ a bijection of M(U), so the required map is the canonical epi composed with an isomorphism of sums. All 5 declared tool_uses are generic module/site tools and I accept them. No duplicate of the whole item found (Grothendieck-abelian generator, localization adjunction and Ab-valued separator nodes checked). The corrected item is in fixes/dag/nodes/sec-trace-formula/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteRestrictionGeneratorData",
+  "declaration": "SheafOfModules.ringedSiteRestrictionGeneratorData",
+  "declarations": [
+   "SheafOfModules.freeYonedaSheaf",
+   "SheafOfModules.freeYonedaSheafEvaluation",
+   "SheafOfModules.freeYonedaSheafSection",
+   "SheafOfModules.freeYonedaSheafPresentation",
+   "SheafOfModules.IsFreeYonedaSheafSum",
+   "SheafOfModules.freeYonedaSheafGeneratorProperties",
+   "SheafOfModules.freeYonedaSheafSumProperties",
+   "SheafOfModules.siteModuleRestriction",
+   "SheafOfModules.ringedSiteRestrictionGeneratorData"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteRestrictionGeneratorData.lean",
+  "statement": "theorem ringedSiteRestrictionGeneratorData {C D : Type u} [SmallCategory C] [SmallCategory D] (J : GrothendieckTopology C) (K : GrothendieckTopology D) (F : C ⥤ D) [Functor.IsContinuous F J K] [Functor.IsCocontinuous F J K] (R : Sheaf K RingCat.{u}) (_hcomm : ∀ (V : Dᵒᵖ) (a b : R.obj.obj V), a * b = b * a) : (siteModuleRestriction J K F R).Additive ∧ PreservesFiniteLimits (siteModuleRestriction J K F R) ∧ PreservesFiniteColimits (siteModuleRestriction J K F R) ∧ freeYonedaSheafGeneratorProperties R ∧ freeYonedaSheafGeneratorProperties ((F.sheafPushforwardContinuous RingCat J K).obj R) ∧ freeYonedaSheafSumProperties ((F.sheafPushforwardContinuous RingCat J K).obj R) ∧ ∀ (I : Type u) (U : I → C), ∃ e₁ : ∀ N : ringedSiteModules.{u} R, ((∐ fun i : I ↦ freeYonedaSheaf ((F.sheafPushforwardContinuous RingCat J K).obj R) (U i)) ⟶ (siteModuleRestriction J K F R).obj N) ≃ (∀ i : I, N.val.obj (op (F.obj (U i)))), ∃ e₂ : ∀ N : ringedSiteModules.{u} R, (∀ i : I, N.val.obj (op (F.obj (U i)))) ≃ ((∐ fun i : I ↦ freeYonedaSheaf R (F.obj (U i))) ⟶ N), (∀ (N : ringedSiteModules.{u} R) (f : (∐ fun i : I ↦ freeYonedaSheaf ((F.sheafPushforwardContinuous RingCat J K).obj R) (U i)) ⟶ (siteModuleRestriction J K F R).obj N) (i : I), e₁ N f i = freeYonedaSheafEvaluation ((F.sheafPushforwardContinuous RingCat J K).obj R) (U i) ((siteModuleRestriction J K F R).obj N) (Sigma.ι (fun j : I ↦ freeYonedaSheaf ((F.sheafPushforwardContinuous RingCat J K).obj R) (U j)) i ≫ f)) ∧ (∀ (N : ringedSiteModules.{u} R) (g : (∐ fun i : I ↦ freeYonedaSheaf R (F.obj (U i))) ⟶ N) (i : I), (e₂ N).symm g i = freeYonedaSheafEvaluation R (F.obj (U i)) N (Sigma.ι (fun j : I ↦ freeYonedaSheaf R (F.obj (U j))) i ≫ g)) ∧ (∀ (N N' : ringedSiteModules.{u} R) (h : N ⟶ N') (f : (∐ fun i : I ↦ freeYonedaSheaf ((F.sheafPushforwardContinuous RingCat J K).obj R) (U i)) ⟶ (siteModuleRestriction J K F R).obj N), e₁ N' (f ≫ (siteModuleRestriction J K F R).map h) = fun i : I ↦ h.val.app (op (F.obj (U i))) (e₁ N f i)) ∧ (∀ (N N' : ringedSiteModules.{u} R) (h : N ⟶ N') (s : ∀ i : I, N.val.obj (op (F.obj (U i)))), e₂ N' (fun i : I ↦ h.val.app (op (F.obj (U i))) (s i)) = e₂ N s ≫ h)",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf5952c40",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Read node, 5 stmt_dep records, module, report (Worker report + Second reading by Q81 present), Mathlib Presheaf/Sheafification (unit = toSheafify by rfl) and Presheaf/Generator. Every clause matches: T = pushforward(𝟙 R') is Additive + preserves finite limits/colimits; freeYonedaSheaf = sheafification of free on yoneda (real data); evaluation after the sheafification unit = freeYonedaEquiv∘sheafificationHomEquiv, so bijectivity/naturality/component normalization hold for both rings; P class (zero, finite sums, epi generation) for R' only, as in the node; e₁/e₂ pinned by component equations, directions and naturality match. No extra hypotheses, universes Type u as stipulated, lean.statement verbatim, node differs from live only in lean, no new nodes, sorry only, docstrings with source/blueprint and steps 1-6. Edge cases (empty I, empty site, M=0, zero ring, F=id, parallel arrows, non-subcanonical) admitted. Advisory: live ModulePullbackInjectiveSectionAcyclic (Q20) has an identical theorem-owned helper freeRepresentable/homEvaluation; citing it would need a theorem stmt_dep, so not required. No compile (no file changed)."
+ }
+}

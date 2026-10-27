@@ -1,0 +1,397 @@
+{
+ "id": "lem-pur-module-strict-local-restriction-properties",
+ "kind": "statement",
+ "title": "Exactness and unique descent for module strict-local restriction",
+ "statement": "For every commutative ring $A$, scheme $B$, geometric point $s:\\operatorname{Spec}\\Omega\\to B$ with $\\Omega$ algebraically closed, and $g:S=B_{(s)}\\to B$, in the small affine-neighbourhood model of [def-pur-module-strict-local-section-restriction], the module geometric stalk preserves finite limits, global sections on $S$ preserve finite colimits, and there exists exactly one natural transformation $r:s^*\\to\\Gamma(S,g^{-1}(-))$ whose composite with every representative affine pointed germ is the section restriction defined there.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
+  "place": "Step 2: canonical module-valued strict-local comparison, constants, Kummer generators and restriction."
+ },
+ "stmt_deps": [
+  "def-pur-module-strict-local-section-restriction"
+ ],
+ "proof": [
+  {
+   "text": "First spell out the scalar passage, using the universal property in [def-weil-pbc-category-colimit]. If an abelian colimit has legs $c_i$ from $A$-modules, define multiplication by $a\\in A$ as the unique endomorphism with $a c_i=c_i a$. The module laws follow by precomposing with all $c_i$, and the induced map to any module cocone is linear by the same test. Thus this abelian colimit, with these actions, is also the module colimit. Dually, an abelian limit has the coordinatewise action and is the module limit: its universal maps are linear after every projection. These arguments also show that a linear map whose underlying additive map is invertible is a module isomorphism. For sheaf limits the construction is sectionwise: compatible local sections glue coordinate by coordinate, so the resulting presheaf is a sheaf. Consequently forgetting scalars preserves and detects these limits. Applied to the neighbourhood colimit defining [def-weil-pbc-geometric-stalks], the first construction identifies the underlying abelian module stalk, including its germ maps, with the abelian stalk. These are universal-property calculations, valid also for the empty diagram and the zero ring.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, representative-neighbourhood restriction construction; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "Apply [prop-weil-pbc-geometric-stalks-exact] at the given geometric point of $B$. It preserves the finite limits of underlying abelian sheaves. By step 1 the underlying diagram of a finite module-sheaf limit is the corresponding abelian-sheaf limit, and the underlying module stalk is the abelian stalk. Hence the canonical module comparison from the stalk of this limit to the limit of the stalks is an additive isomorphism. It is linear because its composites with the limit projections are the stalks of linear maps. Its inverse is linear by step 1. This proves preservation of finite limits for the module stalk.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, representative-neighbourhood restriction construction; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "Let $D$ be any finite diagram of $A$-module sheaves on the actual small-colimit scheme $S$. By [lem-pbc-u2-module-sheaf-underlying-preserves-colimit], its colimit cocone becomes an abelian-sheaf colimit after forgetting scalars. Apply [lem-weil-pbc-strict-henselization-scheme-sections-exact] to this cocone: the abelian global sections on this very $S$ preserve its colimit. Module global sections have exactly these underlying additive sections, since they evaluate at the terminal object. By the module-colimit construction in step 1, the resulting module sections cocone is therefore a colimit too. In detail its universal additive map to a module cocone commutes with multiplication by every $a$ after each colimit leg and hence is linear. This proves the finite-colimit assertion, including the empty diagram, without any finiteness hypothesis on $B$.",
+   "uses": [
+    "lem-pbc-u2-module-sheaf-underlying-preserves-colimit",
+    "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+    "def-pur-module-strict-local-section-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, representative-neighbourhood restriction construction; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "Use the initial small representative diagram and compatible geometric sections supplied by [def-weil-pbc-small-strict-local-section-cone]. The representatives form the small full subcategory of [def-weil-pbc-strict-henselization-limit] of the cofiltered category of pointed neighbourhoods, and every pointed neighbourhood receives a pointed map from one of them. Hence [lem-weil-pbc-colimit-initial-full-subcategory](1) shows that the stalk colimit of [def-weil-pbc-geometric-stalks] is computed on precisely the representatives in the statement: their germs form a colimit cocone. Write $H=g^{-1}F$, let $\\eta_F:F\\to g_*H$ be the adjunction unit, and let $\\sigma_i:S\\to V_i\\times_B S$ be the supplied sections. For a pointed transition $t:V_i\\to V_j$, their compatibility says $(t\\times_B S)\\sigma_i=\\sigma_j$. Before the final terminal-object comparison, the component $d_i$ of [def-pur-module-strict-local-section-restriction] is $H(\\sigma_i)\\eta_{F,V_i}$. Naturality of the unit and contravariant functoriality give the full cocone equation\n$$d_i F(t)=H(\\sigma_i)H(t\\times_B S)\\eta_{F,V_j}=H((t\\times_B S)\\sigma_i)\\eta_{F,V_j}=d_j.$$\nAll maps are $A$-linear. The common terminal-object/global-sections isomorphism preserves this equation. By [def-weil-pbc-category-colimit], there is a unique linear $r_F:F_s\\to\\Gamma(S,g^{-1}F)$ with $r_F\\iota_i=d_i$ for every representative germ $\\iota_i$. Only the geometric compatibility assertion of the small-cone node is used here; its abelian descent assertion is not substituted for module descent.",
+   "uses": [
+    "def-weil-pbc-small-strict-local-section-cone",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "def-weil-pbc-geometric-stalks",
+    "def-pur-module-strict-local-section-restriction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, representative-neighbourhood restriction construction; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  },
+  {
+   "text": "For a morphism of module sheaves $\\alpha:F\\to F\\prime$, naturality of the adjunction unit, of restriction, and of the terminal-object comparison in [def-pur-module-strict-local-section-restriction] gives $\\Gamma(S,g^{-1}\\alpha)d_{i,F}=d_{i,F\\prime}\\alpha_{V_i}$. Consequently the two maps $\\Gamma(S,g^{-1}\\alpha)r_F$ and $r_{F\\prime}\\alpha_s$ agree after every representative germ. The colimit uniqueness in [def-weil-pbc-category-colimit] makes them equal. Thus the $r_F$ form the required natural transformation. Any other natural transformation satisfying the germ equations has each component equal to $r_F$ by the same uniqueness; equality of components is equality of natural transformations. Together with steps 2 and 3 this proves all three assertions.",
+   "uses": [
+    "def-pur-module-strict-local-section-restriction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images, representative-neighbourhood restriction construction; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-module-strict-local-section-restriction",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-small-strict-local-section-cone",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-pbc-u2-module-sheaf-underlying-preserves-colimit",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, theorem-higher-direct-images, representative-neighbourhood restriction construction; Tag 03QO, lemma-vanishing-etale-cohomology-strictly-henselian; explicit scalar and colimit universal-property assembly by NZ"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical stalk isomorphism for relative affine line Kummer cohomology preserving global edge sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc\", \"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop\", \"AlgebraicGeometry.Scheme.fromSpecStalk_appTop\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*[Ss]talk|[Ee]dge.*[Ss]ection",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(cohom|[Dd]erived)|[Ee]dge.*[Ss]ection",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived strict henselization stalk comparison for affine and punctured lines preserving global edge classes and Kummer generators",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"AlgebraicGeometry.Spec_stalkClosedPointIso\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.exists_lift_of_germInjective\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical module strict henselization germ restriction and normalized derived Kummer stalk comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_assoc\", \"ModuleCat.Tilde.toOpen_germ_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ\", \"ModuleCat.Tilde.toOpen_germ\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(stalk|[Gg]lobal)|strictLocal.*[Rr]estriction",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical derived global realization of an ordinary Kummer class and its relative edge generator",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"adjoinRootXPowSubCEquiv_root\", \"KummerExtension.termK[_√_]\", \"adjoinRootXPowSubCEquiv\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp\", \"KummerDedekind.quotMapEquivQuotQuotMap.congr_simp\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"FractionalIdeal.map_canonicalEquiv_mk0\", \"NumberField.canonicalEmbedding.mem_span_latticeBasis\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"derived\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact match; reuse existing ingredients."
+  },
+  {
+   "tool": "rg",
+   "query": "normalizedKummer(DerivedClass|ClassToGlobal|GeneratorMap|EdgeGerm|UnitGerm) in lean/WeilConjectures and lean/Sheaf; normalized-kummer-(global|cohomology|generator)-arrows in dag/nodes; blueprint_refs.py search normalized Kummer generator",
+   "results": "No declarations or nodes; zero blueprint matches. Existing generic adjunction, edge and ordinary class APIs are reused.",
+   "date": "2026-10-24",
+   "verdict": "Canonical specialized arrows missing."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical stalk isomorphism for relative affine line Kummer cohomology preserving global edge sections",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc\", \"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop\", \"AlgebraicGeometry.Scheme.fromSpecStalk_appTop\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\"]}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "grep",
+   "query": "kummer.*[Ss]talk|[Ee]dge.*[Ss]ection",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*(cohom|[Dd]erived)|[Ee]dge.*[Ss]ection",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"cohomology\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived strict henselization stalk comparison for affine and punctured lines preserving global edge classes and Kummer generators",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"AlgebraicGeometry.Spec_stalkClosedPointIso\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply\", \"AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField\", \"AlgebraicGeometry.exists_lift_of_germInjective\"]}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical module strict henselization germ restriction and normalized derived Kummer stalk comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_assoc\", \"ModuleCat.Tilde.toOpen_germ_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_hom_eq_germ\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ_apply\", \"AlgebraicGeometry.LocallyRingedSpace.restrictStalkIso_inv_eq_germ\", \"ModuleCat.Tilde.toOpen_germ\"]}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer.*(stalk|[Gg]lobal)|strictLocal.*[Rr]estriction",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical derived global realization of an ordinary Kummer class and its relative edge generator",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"adjoinRootXPowSubCEquiv_root\", \"KummerExtension.termK[_√_]\", \"adjoinRootXPowSubCEquiv\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp\", \"KummerDedekind.quotMapEquivQuotQuotMap.congr_simp\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"FractionalIdeal.map_canonicalEquiv_mk0\", \"NumberField.canonicalEmbedding.mem_span_latticeBasis\"]}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"derived\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "module sheaf strict localization germ restriction canonical Kummer edge arrows",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"ModuleCat.Tilde.toOpen\", \"AlgebraicGeometry.StructureSheaf.localizationToStalk_mk'\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"ModuleCat.Tilde.toOpen_germ\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_hom_app\", \"TopCat.Presheaf.Γgerm\"]}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFiniteLimits\", \"sheafFiber\"",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\"]}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "grep",
+   "query": "relativeKummer|kummerExchange|moduleStrictLocal|Inclusion_over",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "Use generic existing APIs; module specialization absent."
+  },
+  {
+   "tool": "rg",
+   "query": "relativeKummerLinePullback|kummerExchangeEdge|moduleStrictLocalRestriction_properties|normalizedKummerInclusion_over in dag/nodes; declarations in lean/WeilConjectures and lean/Sheaf",
+   "results": "Only theorem nodes own the existing plain Kummer definitions; no definition node records them. No module-valued exactness/descent or over-k equation node exists.",
+   "date": "2026-10-24",
+   "verdict": "Attach existing plain definitions; add the missing helper statement nodes requested by R1/R2."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves on the small etale site geometric stalks preserve finite limits and strict henselian global sections preserve finite colimits with unique descent of germ restriction",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.toOpen_germ\", \"ModuleCat.Tilde.toOpen_germ_apply\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"ModuleCat.Tilde.toOpen_germ_assoc\", \"smoothSheafCommRing.forgetStalk\", \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\"]}",
+   "date": "2026-10-24",
+   "verdict": "No match for the whole three-clause item. Point.Basic supplies the generic finite-limit ingredient; reuse existing DAG nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|preservesFiniteColimits.*(forget|Forget)",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Category.lean\", \"Mathlib/CategoryTheory/Sites/Point/Category.lean\", \"Mathlib/CategoryTheory/Sites/Point/Category.lean\", \"Mathlib/CategoryTheory/Sites/Point/Category.lean\", \"Mathlib/CategoryTheory/Sites/Point/Category.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"]}",
+   "date": "2026-10-24",
+   "verdict": "No match for the whole three-clause item. Point.Basic supplies the generic finite-limit ingredient; reuse existing DAG nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFiniteLimits\", \"sheafFiber\"",
+   "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\"]}",
+   "date": "2026-10-24",
+   "verdict": "No match for the whole three-clause item. Point.Basic supplies the generic finite-limit ingredient; reuse existing DAG nodes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric point sheaf fiber preserves finite limits for modules and descent from a cofinal diagram of pointed neighborhoods",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"PresheafOfModules.isSheaf_of_isLimit\", \"CategoryTheory.GrothendieckTopology.Point.sheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsSheafSheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"SheafOfModules.Finite.hasFiniteLimits\", \"CategoryTheory.GrothendieckTopology.Point.presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\"]}",
+   "date": "2026-10-24",
+   "verdict": "No match for the whole three-clause item. Point.Basic supplies the generic finite-limit ingredient; reuse existing DAG nodes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of module sheaves on the spectrum of a strictly henselian local ring form an exact functor; compatible germ maps descend uniquely from a colimit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exact_of_isLocalized_maximal\", \"ModuleCat.Tilde.toOpen_germ_apply\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"Profinite.NobelingProof.succ_exact\", \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.toOpen_germ\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\", \"ModuleCat.Tilde.toOpen_germ_assoc\"]}",
+   "date": "2026-10-24",
+   "verdict": "No match for the whole three-clause item. Point.Basic supplies the generic finite-limit ingredient; reuse existing DAG nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-relative-kummer-normalized-stalks",
+  "date": "2026-10-24",
+  "group": "Q152"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-gm-relative-kummer",
+   "place": "Step 2: canonical module-valued strict-local comparison, constants, Kummer generators and restriction.",
+   "via": [
+    "lem-pur-relative-kummer-normalized-stalks"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleStrictLocalRestrictionProperties",
+  "declaration": "AlgebraicGeometry.Etale.moduleStrictLocalRestriction_properties",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleStrictLocalRestriction_properties"
+  ],
+  "statement": "theorem moduleStrictLocalRestriction_properties (A : Type (u + 1)) [CommRing A] {B : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ B) : PreservesFiniteLimits ((Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} A)) ∧ PreservesFiniteColimits (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology (ModuleCat.{u + 1} A)) ∧ ∃! r : (Scheme.pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} A) ⟶ upperStar (ModuleCat.{u + 1} A) (Scheme.strictHenselizationStructuralMap s) ⋙ Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology (ModuleCat.{u + 1} A), ∀ (F : Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} A)) (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)), (Scheme.pointSmallEtale s).toPresheafFiber ((Scheme.AffineEtale.Spec B).obj ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1) ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).2 F.obj ≫ r.app F = moduleStrictLocalSectionRestriction A s F j",
+  "branch": "sheaf-dag",
+  "by": "Q152",
+  "date": "2026-10-24",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleStrictLocalRestrictionProperties.lean"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-a5d8915ae",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-a5d8915ae (reviewer sub-agent of L); spot-checked: I read all five steps against the cited statements. The Lean def moduleStrictLocalSectionRestriction (unit, then section, then Γ comparison) uses the same strictLocalNeighbourhoodSection as strictLocalSectionCone. Step 1: the scalar-action, limit and colimit universal-property arguments are correct. Step 2: abelian stalk exactness plus the step-1 lift gives the module finite-limit clause. Step 3: the u2 forget-preserves-colimits lemma plus abelian sections exactness on the same T=Spec(strictHenselizationRing s) gives the finite-colimit clause; universes match (A : Type(u+1), Ab.{u+1}). Step 4: I checked the cocone equation's directions: d_i F(t) = H(σ_i)H(t×S)η_{V_j} = H(σ_j)η_{V_j} = d_j. Only the geometric clause of the small-cone def is used, not its abelian uniqueness. Step 5: naturality and uniqueness follow from colimit uniqueness. I checked Stacks 03Q9 and 03QO (labels at etale-cohomology.tex:8015 and 8207) and blueprint Step 2 of prop-pur-gm-relative-kummer. There are no new nodes and no module-valued duplicate; the abelian PointedEtaleSectionCone does not cover module coefficients. Edge cases A=0, empty diagrams and non-noetherian B are fine. FIX for one missing citation: step 4 computed the stalk colimit on the chosen representatives without a citation. It now cites lem-weil-pbc-colimit-initial-full-subcategory(1) and def-weil-pbc-strict-henselization-limit (cofiltered neighbourhoods, representative full subcategory). proof_deps and split_report.tool_uses are updated to match. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-pur-module-strict-local-restriction-properties.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a815deb3",
+  "group": "Q152",
+  "result": "pass",
+  "note": "Re-delivery of 5915004d, which was reviewed PASS but refused at landing because the new theorem nodes lem-pur-kummer-line-inclusion-over and lem-pur-module-strict-local-restriction-properties had status 'split'. A git diff of all 19 files between the two heads shows only those two status fields changed to 'unsplit' plus a report section; the 8 Lean modules and the other 8 records are byte-identical. Unsplit with mathlib_match null is what review_split.py requires for new statement nodes. Independent re-reading: Φ is pinned by IsIso h* ∧ ∃Φ, Φ≫h*=θ (θ = moduleStrictLocalTheta: germ restriction, derivedBaseChangeMapPlus, moduleLerayPlus, canonical coefficient iso); the all-q edge identity H^q(edgeGerm)≫H^q(Φ)≫H^q(h*)=H^q(v*); the unit sends a to ζ⊗a; for b=true the generatorPlus_{C_B}(t)≫H¹(edgeGerm)≫H¹(Φ)=generatorPlus_C(t) clause uses the unique ordinaryFiniteClass preimage; the line and G_m conservative consequences include both units; the constant-restriction clause holds. Hypotheses match the node with no extra instances. Edge cases covered: empty or non-Noetherian B, A=0, N=1, degrees, universes. The item statement text equals the base. Every lean.statement is verbatim in its file, including both existing:true attachments (17 plain decls, no .choose of a theorem) checked against the live sources. No hollow defs; sorry only in 3 theorems; no live id or name clashes. No compile (no file changed)."
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-pur-module-strict-local-restriction-properties",
+  "worker": "stage1",
+  "summary": "Replaced the one-step sketch by scalar universal-property calculations, abelian-to-module finite-limit and finite-colimit arguments, the explicit representative cocone equation, and colimit naturality/uniqueness. Reused existing nodes; no new nodes. Statement and Lean metadata unchanged.",
+  "blueprint": "prop-pur-gm-relative-kummer.proof.md, Step 2: strict-local stalk comparison and its canonical restriction on classes.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic exactness of abelian geometric stalks; scalar lifting proves the module assertion and does not replace the Kummer route."
+   },
+   {
+    "node": "lem-pbc-u2-module-sheaf-underlying-preserves-colimit",
+    "why": "Forgetting constant module coefficients preserves sheaf colimits; needed to apply abelian strict-local sections."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+    "why": "Exact abelian sections on the identical chosen small-colimit scheme; the unit has no separate sections-exactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-initial-full-subcategory",
+    "why": "Generic restriction of a cofiltered-index colimit to an initial full subcategory; computes the geometric stalk on the chosen affine representatives (reviewer FIX)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-pbc-u2-module-sheaf-underlying-preserves-colimit",
+  "lem-weil-pbc-strict-henselization-scheme-sections-exact",
+  "lem-weil-pbc-colimit-initial-full-subcategory"
+ ]
+}

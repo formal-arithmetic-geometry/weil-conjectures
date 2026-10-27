@@ -1,0 +1,165 @@
+{
+ "id": "lem-sf-finite-open-restriction-presentation",
+ "kind": "statement",
+ "title": "Single-coefficient section-normalized open restriction comparison",
+ "statement": "Fix a prime l, a finite extension E/Q_l, an arbitrary open immersion j:X→Z, section-normalized slice operations o [lem-sf-integral-open-reduction-comparison], and n≥0. The finite slice restriction functor has a unique natural isomorphism r to intrinsic open restriction [lem-weil-extension-by-zero-adjunction] satisfying SfFiniteOpenRestrictionNormalized. Precisely, evaluate on a slice object V and on any section of the fixed-scalar inverse realization of an ambient module N. Carry that section to N using the actual realization unit and counit and recompose the slice object via its canonical isomorphism to V.left. Carry it through the inverse of the slice-equivalence counit, then apply o.finite.functor to r and identify its forward functor by o.finiteFunctor. The result equals the realization-unit section of the fixed-scalar restriction at sliceSite(V). There is no adjacent coefficient comparison or extension comparison in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma extension-by-zero (03DI), its direct-sum construction and adjunction unit; extension-by-zero-exact (03DJ). Localization and constant coefficients: Stacks 098K and 00YV."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfFiniteOpenPresentation",
+  "date": "2026-10-27",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Finite slice open presentation: Single-coefficient section-normalized open restriction comparison.",
+   "via": [
+    "lem-sf-finite-open-presentation-coefficients",
+    "lem-sf-compact-support-slice-intrinsic-towers",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between left adjoints induced by an isomorphism of their right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso, CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRestriction.*sfIntrinsicOpenRestriction|localizedSystemExtension.*sfIntrinsicExtensionByZero|finiteExtension.*sfIntrinsicExtensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero restriction of scalars sends each summand generator to the same section",
+   "results": "8 hits: ContinuousLinearMap.restrictScalars_zero, Submodule.restrictScalars, RestrictScalars, DFinsupp.lmk, Function.ExtendByZero.linearMap, AlgebraicGeometry.RingedSpace.res_zero, ModuleCat.ExtendRestrictScalarsAdj.unit, LinearMap.restrictScalars_zero",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism of restriction functors under equivalence of sites preserving constant sheaf module sections",
+   "results": "8 hits: SheafOfModules.restrictScalars, AlgebraicGeometry.PresheafedSpace.toRestrictTop, CategoryTheory.Sheaf.isConstant_congr, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.SheafedSpace.restrictTopIso, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-extension-by-zero",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-sf-integral-compact-support-tower",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "Restrict intrinsic modules to the constant scalar presheaf. The module sheafification adjunction is fully faithful on its right adjoint. On a fixed-scalar sheaf its unit is invertible, because the underlying abelian presheaf is already a sheaf. Compose this unit with the actual realization counit to obtain fixedSectionIso, whose section functions are exactly sfFixedToIntrinsicSection and are bijective.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the ambient constant-scalar unit with the slice forgetful functor. Cocontinuity preserves its local bijectivity, so restriction to these constant scalars on the slice is fully faithful as well. The canonical sfFiniteOpenSliceObjectIso gives a natural recomposition isomorphism of fixed-scalar section diagrams. The equation o.finiteConstants supplies the scalar square for the concrete pushforward: after restriction to constants its comparison is the identity on sections. Use o.finiteFunctor to identify this pushforward with the supplied equivalence functor.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-sf-integral-open-operations",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the inverse ambient fixedSectionIso, slice recomposition and open realization unit. Cancel the fully faithful slice constant-scalar restriction to obtain an intrinsic slice comparison. Precompose it with the supplied slice-equivalence counit and cancel that equivalence functor to construct r. Its normalization follows from naturality of fixedSectionIso, the inverse identities of the slice-object isomorphism, and the slice-equivalence counit. For uniqueness cancel the faithful equivalence functor, its invertible counit and the finiteFunctor identification; the required maps agree on every section since the fixedSectionIso and slice-object section maps are surjective. No quasi-compactness assumption is used.",
+   "uses": [
+    "def-sf-integral-open-operations",
+    "def-sf-integral-open-reduction-comparison-data",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The retained left-comparison definition is the unique left-adjoint isomorphism obtained from the composite finite slice adjunction after transporting its right adjoint along the supplied r, and the intrinsic extension-by-zero adjunction.",
+   "uses": [
+    "lem-weil-extension-by-zero-adjunction",
+    "def-sf-integral-open-reduction-comparison-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "lem-weil-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Localization and scalar realization (Stacks 098K, 00YV), and the restriction/extension adjunction (03DI). Complete Lean proof using fully faithful restriction to constant scalars; the specified units and counits fix every section map."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfFiniteOpenRestrictionPresentation",
+  "file": "lean/Sheaf/Paper/SfFiniteOpenRestrictionPresentation.lean",
+  "declaration": "WeilConjectures.sfFiniteOpenRestriction_presentation",
+  "declarations": [
+   "WeilConjectures.sfFixedToIntrinsicSection",
+   "WeilConjectures.sfFiniteOpenSliceObjectIso",
+   "WeilConjectures.sfFiniteOpenAdjunction",
+   "WeilConjectures.SfFiniteOpenRestrictionNormalized",
+   "WeilConjectures.sfFiniteOpenRestriction_presentation",
+   "WeilConjectures.sfFiniteOpenLeftComparison"
+  ],
+  "statement": "theorem sfFiniteOpenRestriction_presentation (n : ℕ) :\n    ∃! r : IntegralOpenReduction.finiteRestriction l E j o n ≅\n        sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1)),\n      SfFiniteOpenRestrictionNormalized l E j o n r",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5c0c0",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261027T021322-L-2756951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261027T034744-L-3682048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

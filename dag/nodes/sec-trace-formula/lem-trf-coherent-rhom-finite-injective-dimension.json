@@ -17,65 +17,52 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded complex $I$ of injective $A$-modules representing $L$, and integers $a\\leq b$ such that $I^q=0$ outside $[a,b]$. Choose any complex $P$ representing $K$. By [lem-weil-pbc-bounded-below-injectives-kinjective], $I$ is K-injective. Thus [def-pur-derived-internal-hom], specialized to the one-object ringed site, computes $R\\operatorname{Hom}_A(QM,L)$ by $\\operatorname{Hom}_A^\\bullet(M,I)$ for every complex $M$, where $Q$ is localization. We use the $A$-module-valued total Hom complex of [def-sc-module-total-hom-complex], so all subsequent maps and cohomology isomorphisms are $A$-linear.",
+   "text": "Choose a bounded injective complex $I$ representing $L$, supported in $[a,b]$, and a complex $P$ representing $K$. The derived isomorphisms of [lem-trf-bounded-injective-rhom-model-support] compute $R\\operatorname{Hom}_A(QM,L)$ by $Q\\operatorname{Hom}_A^\\bullet(M,I)$, naturally in $M$; compose with $QI\\cong L$. All maps and cohomology comparisons retain the $A$-action.",
    "uses": [
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "def-pur-derived-internal-hom",
-    "def-sc-module-total-hom-complex"
+    "lem-trf-bounded-injective-rhom-model-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof: bounded injective computation and truncation comparison, expanded at the complex level."
    }
   },
   {
-   "text": "Fix $i\\in\\mathbf Z$ and put $n=b-i+1$. Let $T=\\tau_{\\leq n}P$ be the subcomplex with $T^q=P^q$ for $q<n$, $T^n=\\ker(d_P^n)$, and zero terms above $n$; put $C=P/T$. By [lem-weil-pbc-truncation-cohomology], $H^q(T)\\cong H^q(K)$ for $q\\leq n$ and $H^q(T)=0$ for $q>n$. Hence all cohomology modules of $T$ are finitely generated. Directly from this quotient, $C^q=0$ for $q<n$. In particular $0\\to T\\to P\\to C\\to0$ is short exact in every degree.",
+   "text": "Fix $i\\in\\mathbf Z$ and set $n=b-i+1$. Let $T=\\tau_{\\leq n}P$ and $C=P/T$. Thus $T^q=P^q$ for $q<n$, $T^n=\\ker d_P^n$, and $T^q=0$ for $q>n$. Consequently $C^q=0$ for $q<n$ and $0\\to T\\to P\\to C\\to0$ is degreewise short exact. By [lem-weil-pbc-truncation-cohomology], $H^q(T)\\cong H^q(K)$ for $q\\leq n$ and $H^q(T)=0$ above $n$, so all its cohomology is finite.",
    "uses": [
     "lem-weil-pbc-truncation-cohomology"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof: bounded injective computation and truncation comparison, expanded at the complex level."
    }
   },
   {
-   "text": "For $r>b-n$, every factor $\\operatorname{Hom}_A(C^p,I^{p+r})$ is zero: if $p<n$ then $C^p=0$, while if $p\\geq n$ then $p+r>b$ and $I^{p+r}=0$. The formula in [def-sc-module-total-hom-complex] therefore gives $\\operatorname{Hom}_A^r(C,I)=0$ for $r>b-n$. Since $b-n=i-1$, its cohomology in degrees $i$ and $i+1$ is zero.",
+   "text": "Apply [lem-trf-bounded-injective-total-hom-exact] to $0\\to T\\to P\\to C\\to0$ and the chosen $I$. This gives the degreewise short exact sequence $0\\to\\operatorname{Hom}_A^\\bullet(C,I)\\to\\operatorname{Hom}_A^\\bullet(P,I)\\to\\operatorname{Hom}_A^\\bullet(T,I)\\to0$ of complexes of $A$-modules.",
    "uses": [
-    "def-sc-module-total-hom-complex"
+    "lem-trf-bounded-injective-total-hom-exact"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof: bounded injective computation and truncation comparison, expanded at the complex level."
    }
   },
   {
-   "text": "Apply total Hom into $I$ to the short exact sequence of Step 2. For each $p,r$, restriction $\\operatorname{Hom}_A(P^p,I^{p+r})\\to\\operatorname{Hom}_A(T^p,I^{p+r})$ is surjective by the extension property defining injectivity in [def-sp-injective-resolutions]; its kernel consists exactly of maps factoring through $C^p$. In a fixed degree $r$, only the finitely many indices $a-r\\leq p\\leq b-r$ can contribute. Taking their product preserves this exactness by choosing one lift per factor. Precomposition commutes with the Hom differential [def-sc-module-total-hom-complex]. Consequently $0\\to\\operatorname{Hom}_A^\\bullet(C,I)\\to\\operatorname{Hom}_A^\\bullet(P,I)\\to\\operatorname{Hom}_A^\\bullet(T,I)\\to0$ is a degreewise short exact sequence of complexes of $A$-modules.",
+   "text": "The support clause of [lem-trf-bounded-injective-rhom-model-support], applied to $C^q=0$ for $q<n$, makes $\\operatorname{Hom}_A^r(C,I)=0$ for $r>b-n=i-1$. In particular its cohomology in degrees $i$ and $i+1$ vanishes. The long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] of Step 3 therefore makes $H^i\\operatorname{Hom}_A^\\bullet(P,I)\\to H^i\\operatorname{Hom}_A^\\bullet(T,I)$ an $A$-linear isomorphism. Step 1 identifies these modules with $H^iR\\operatorname{Hom}_A(K,L)$ and $H^iR\\operatorname{Hom}_A(QT,L)$.",
    "uses": [
-    "def-sp-injective-resolutions",
-    "def-sc-module-total-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
-   }
-  },
-  {
-   "text": "The long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] applied to Step 4 has the segment $H^i\\operatorname{Hom}_A^\\bullet(C,I)\\to H^i\\operatorname{Hom}_A^\\bullet(P,I)\\to H^i\\operatorname{Hom}_A^\\bullet(T,I)\\to H^{i+1}\\operatorname{Hom}_A^\\bullet(C,I)$. The two outer modules vanish by Step 3, so the middle map is an isomorphism. By Step 1 this identifies $H^iR\\operatorname{Hom}_A(K,L)$ with $H^iR\\operatorname{Hom}_A(QT,L)$.",
-   "uses": [
+    "lem-trf-bounded-injective-rhom-model-support",
     "lem-weil-pbc-complex-ses-homology-long-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/dualizing.tex",
-    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof; good truncation written at the complex level as in derived.tex Tag 08J5, remark-truncation-distinguished-triangle."
+    "place": "Tag 0G4H, lemma-finite-ext-into-bounded-injective, proof: bounded injective computation and truncation comparison, expanded at the complex level."
    }
   },
   {
-   "text": "Apply [lem-trf-bounded-above-coherent-rhom] to $QT$ and $L$, with upper bound $u=n$ and lower bound $v=a$. Step 2 verifies bounded-above finitely generated cohomology for $QT$. The chosen representative $I$ verifies $H^q(L)=0$ for $q<a$, and finite generation of all $H^q(L)$ is a hypothesis of the item. The cited lemma makes $H^iR\\operatorname{Hom}_A(QT,L)$ finitely generated. Step 5 transfers finite generation to $H^iR\\operatorname{Hom}_A(K,L)$. Since $i$ was arbitrary, this proves the assertion without a bound on $K$.",
+   "text": "Apply [lem-trf-bounded-above-coherent-rhom] to $QT,L$ with upper bound $u=n$ and lower bound $v=a$. Step 2 supplies bounded-above finite cohomology of $QT$; the representative $I$ gives $H^q(L)=0$ for $q<a$, and $L$ has finite cohomology by hypothesis. Hence $H^iR\\operatorname{Hom}_A(QT,L)$ is finitely generated. The isomorphism of Step 4 transfers finite generation to $H^iR\\operatorname{Hom}_A(K,L)$. This holds for every $i$ without a bound on $K$.",
    "uses": [
     "lem-trf-bounded-above-coherent-rhom"
    ],
@@ -87,11 +74,9 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "def-pur-derived-internal-hom",
-  "def-sc-module-total-hom-complex",
+  "lem-trf-bounded-injective-rhom-model-support",
   "lem-weil-pbc-truncation-cohomology",
-  "def-sp-injective-resolutions",
+  "lem-trf-bounded-injective-total-hom-exact",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-trf-bounded-above-coherent-rhom"
  ],
@@ -208,19 +193,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "item": "lem-trf-coherent-rhom-finite-injective-dimension",
   "worker": "stage1",
-  "summary": "Kept the full unbounded-input statement. Wrote the finite-degree truncation argument using a bounded injective representative, proved the Hom-complex bound and degreewise short exactness from definitions, and reused the existing long exact sequence. Added one statement-only algebraic bounded-above/bounded-below coherence input from the proof of Stacks 0D0C. Logged and read Mathlib searches, including ModuleCat.finite_ext, which is not the complex assertion.",
-  "blueprint": "Serves the already recorded auxiliary complete-local coherent-duality input of lem-trf-local-term-locality. Specifically expands the first paragraph of Stacks 0A7C via the full proof of 0G4H: truncation, Ext stabilization, and the final bounded-above coherent-Hom application. No chapter/unit route or realization changes."
+  "summary": "Repair of the mandatory work-spreading return: extracted two comparable statement-only nodes for contravariant total Hom exactness and the natural bounded-injective derived model with upper support bound. Kept the full unbounded-input statement, good truncation, long exact sequence argument and bounded-above coherence application. All six old arguments are accounted for in report.md.",
+  "blueprint": "Serves the already recorded auxiliary complete-local coherent-duality input of lem-trf-local-term-locality. Specifically expands the first paragraph of Stacks 0A7C via the full proof of 0G4H: truncation, Ext stabilization, and the final bounded-above coherent-Hom application. No chapter/unit route or realization changes. The re-split delegates old Step 4 to bounded-injective-total-hom-exact and old Steps 1 and 3 to bounded-injective-rhom-model-support; old Steps 2, 5 and 6 remain the short assembly."
  },
  "reviewed": {
-  "date": "2026-10-19",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q80-f3e68c91e",
-  "group": "Q80",
+  "reviewer": "NT-cc-Q160-db5f27db0",
+  "group": "Q160",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-f3e68c91e (reviewer sub-agent of L); spot-checked: Read all six item steps and the new node in full, together with Stacks 0G4H (whole proof), 0D0C (the algebra problem and its spectral sequences) and the 0A5S definition. The item statement is unchanged and keeps K unbounded. Step 1: bounded injectives are K-injective (Mathlib leaf), so def-pur-derived-internal-hom computes RHom by Hom^•(−,I) on the one-object site. Step 2: τ≤n with n=b−i+1, so C^q=0 for q<n. Step 3: Hom^r(C,I)=0 for r≥i (arithmetic checked). Step 4: degreewise exactness follows from injectivity and is elementary as marked. Step 5: the LES gives the H^i isomorphism. Step 6: the new node applies with u=n and v=a, all hypotheses checked. New node lem-trf-bounded-above-coherent-rhom: the D^-_fg × D^+_fg algebra assertion of 0D0C's proof, with lower bound v−u. It is true; tested on k[−u], k[−v] over a field (bound attained) and Z/2 → Z over Z. It is self-contained, statement-only, strictly smaller than the item (no injective-dimension hypothesis) and not a restated clause. Duplicate scan (0D0C/0G4H tags; Noetherian+Hom+fg statements, including lem-sc-sheaf-ext-coherent, lem-trf-finite-map-dualizing-transfer, lem-trf-semidualizing-rhom-conservative and def-per-algebraic-normalized-dualizing) found no duplicate or generalization. Blueprint from/via/same_as are correct. No cycle, no SGA, no off-unit non-leaf theorem used, so no tool_uses entry is needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-db5f27db0 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement and the whole Stacks 0G4H proof (plus 0D0C as used by the bounded-above node). The re-split is faithful to the 2026-10-22 batch-5 note. Old Steps 1 and 3 became lem-trf-bounded-injective-rhom-model-support (an isomorphism in D(A), natural in the source, plus the support bound Hom^r(M,I)=0 for r>b-n). Old Step 4 became lem-trf-bounded-injective-total-hom-exact (degreewise short exactness of Hom^•(-,I) for termwise-injective bounded I). Old Steps 2, 5 and 6 stay as assembly from the truncation leaf, the long-exact-sequence leaf and lem-trf-bounded-above-coherent-rhom. The parent proof is 2000 characters; the new statements are 1006 and 882 characters, and neither restates the item. Steps check out: n=b-i+1 gives b-n=i-1, so degrees i and i+1 of Hom(C,I) vanish and H^i(P-side) is isomorphic to H^i(T-side); the bounded-above node applies with u=n, v=a and all hypotheses met. Small cases: over a field k, M=k[-n] and I=k[-b] show the bound r>b-n is sharp; for Z-modules, 2Z->Z->Z/2 into Q/Z stays exact, while the target Z fails, so injectivity is needed. No duplicates: kinjective-homotopy-exact-injective-target, sfb-derived-internal-hom-sections-model, cbc-kinjective-derived-mapping-complex and pod-projective-hom-evaluation-model all state something different. Live still has the base split, so the delivery is not superseded. Batch-5 flag on both new sec-trace-formula citations: the item was already in the base batch-5 closure through lem-sf-dualizing-complex-bounded-duality (the coefficient-duality route). The new nodes are generic commutative algebra about Hom complexes, which neither the trace formula nor Poincare duality supplies or proves, and they are cited only by the item, so they add nothing to the closure. Accepted. FIX: the model/support node uses the one-object identity-covered ring site but did not cite def-pc-ring-hom-extension-shared-definitions, which the item and its sibling lem-trf-bounded-above-coherent-rhom both cite. I added it inline and to stmt_deps in fixes/dag/nodes/sec-trace-formula/lem-trf-bounded-injective-rhom-model-support.json; there is no cycle. No SGA source, no off-unit theorem, no tool_uses needed.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.CoherentRHomFiniteInjectiveDimension",
@@ -240,5 +225,16 @@
   "result": "pass",
   "note": "Every clause matches node and Stacks 0G4H: Noetherian CommRing A; K,L in D(RingSiteModules A) with independent universe w; hK/hL finite cohomology in all degrees, K unbounded; hI = derived iso to a bounded complex of injectives (0A5S); conclusion = finite H^i of the recorded derivedInternalHomOfUniverses (def-pur-derived-internal-hom). No extra or missing hypotheses; zero ring, K=0, L=0 and unbounded K covered. Dependency nodes identical to live; item changes only lean and stmt_deps (adds existing def-pc-ring-hom-extension-shared-definitions, as in the landed semidualizing/complete-local/pseudocoherent consumers). Statement verbatim; sorry-only; docstrings carry source, blueprint and the 6 steps; lines <=100; plain imports are exactly the proof_deps' modules (brief-stage2 l.104). No duplicate found, no parallel S2 race. nt_compile --json: rc 0, 2.1 s, clean. Advisory: onePointRingSheaf is owned by theorem node lem-pc-kflat-tensor-quasi-iso, reached via RingSiteModules as in the precedents."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

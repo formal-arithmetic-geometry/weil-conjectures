@@ -2,7 +2,7 @@
  "id": "lem-trf-algclosed-curve-model",
  "kind": "statement",
  "title": "Smooth proper models of one-variable fields over an algebraically closed field",
- "statement": "Let $k$ be an algebraically closed field (every nonconstant polynomial over $k$ has a root) [def-weil-field], and let $E/k$ be a finitely generated field extension of transcendence degree one [def-kun-transcendence-degree]. There exists a smooth integral proper finite-type $k$-scheme $C$ of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism, def-kun-topological-krull-dimension] and a $k$-isomorphism $k(C)\\cong E$, where $k(C)$ is the local ring at the generic point. For every valuation ring $B\\subseteq E$ [def-trf-valuation-ring] containing $k$, the generic-point morphism $\\operatorname{Spec}E\\to C$ extends to a $k$-morphism $\\operatorname{Spec}B\\to C$ [def-weil-affine-spectrum].",
+ "statement": "Let $k$ be an algebraically closed field (every nonconstant polynomial over $k$ has a root) [def-weil-field], and let $E/k$ be a finitely generated field extension of transcendence degree one [def-kun-transcendence-degree]. There exists a smooth integral proper finite-type $k$-scheme $C$ of dimension one [def-sbc-smooth-morphisms, def-pc-integral-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism, def-kun-topological-krull-dimension] and a $k$-isomorphism $k(C)\\cong E$, where $k(C)$ is the local ring at the generic point. For every valuation ring $B\\subseteq E$ [def-trf-valuation-ring] containing $k$ and having fraction field $E$ (equivalently, for each $x\\in E^\\times$, either $x\\in B$ or $x^{-1}\\in B$), the generic-point morphism $\\operatorname{Spec}E\\to C$ extends to a $k$-morphism $\\operatorname{Spec}B\\to C$ [def-weil-affine-spectrum].",
  "source": {
   "document": "literature/stacks-project/curves.tex",
   "place": "Tag 0BY1 (theorem-curves-rational-maps), existence of a normal projective model, and Tag 0BY3 (lemma-nonsingular-model-smooth), smoothness over a perfect field; the final clause is the proper valuative criterion (lemma-nagata-proper-valuative-criterion-existence-api)."
@@ -18,9 +18,62 @@
   "def-trf-valuation-ring",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose field generators $e_1,\\ldots,e_r$ of $E/k$. Apply [lem-trf-field-generators-affine-model] to obtain $U=\\operatorname{Spec}k[e_1,\\ldots,e_r]$, its closed immersion into $\\mathbb A^r_k$, and the $k$-isomorphism $\\theta:k(U)\\cong E$. This $U$ is integral and finite type, and $\\dim U=\\operatorname{trdeg}_kE=1$ by the hypothesis.",
+   "uses": [
+    "lem-trf-field-generators-affine-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXN, essential-surjectivity paragraph, with 00P0; old steps 1--2"
+   }
+  },
+  {
+   "text": "The field $k$ is perfect. To see this in the sense needed by the normalization theorem, let $\\alpha$ be algebraic over $k$ in any extension. Its irreducible minimal polynomial has a root $a\\in k$ by algebraic closedness. Division by $T-a$ and irreducibility force that polynomial to have degree one. Hence $\\alpha\\in k$ and is separable over $k$. Every algebraic extension of $k$ is therefore separable.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0BY3, lemma-nonsingular-model-smooth, perfect-field hypothesis"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-normalized-projective-closure] to this $U$, its specified affine-space closed immersion, and the perfect field $k$ from step 2. For the projective closure $X$ and its normalization $C$, this gives an integral smooth proper finite-type $k$-scheme $C$ of dimension one and a $k$-isomorphism $\\psi:k(C)\\cong k(U)$. Choose $\\theta\\circ\\psi:k(C)\\cong E$. The same $C$ and same field isomorphism will be used for every valuation ring.",
+   "uses": [
+    "lem-trf-normalized-projective-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tags 0BY1, final compactify-then-normalize alternative, and 0BY3; old steps 3--4 and 6"
+   }
+  },
+  {
+   "text": "Fix a valuation ring $B\\subseteq E$ as in the corrected statement, with $k\\subseteq B$ and $\\operatorname{Frac}B=E$. Compose the isomorphism $\\operatorname{Spec}E\\cong\\operatorname{Spec}k(C)$ with the generic-point morphism to $C$. This is a $k$-morphism, since the function-field isomorphism is over $k$. The maps induced by $k\\subseteq B\\subseteq E$ give a commutative square with upper arrow $\\operatorname{Spec}E\\to C$, lower arrow $\\operatorname{Spec}B\\to\\operatorname{Spec}k$, and right arrow the proper structural morphism of $C$. Apply [lemma-nagata-proper-valuative-criterion-existence-api] with $(Y,S,A,K)=(C,\\operatorname{Spec}k,B,E)$. Its extension is precisely a $k$-morphism $\\operatorname{Spec}B\\to C$ restricting to the prescribed generic-point morphism. This works for every such $B$, including $B=E$.",
+   "uses": [
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BX5, lemma-characterize-proper, condition (3); existing API node supplies its existence clause for arbitrary valuation rings"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-field-generators-affine-model",
+  "lem-trf-normalized-projective-closure",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0BY1 (theorem-curves-rational-maps), final parenthetical compactify-then-normalize route, together with Tag 0BY3 and the proper valuative criterion. The finite-type subalgebra is constructed explicitly as in varieties Tag 0BXN."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +109,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-22T04:31:54Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Smooth, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/NumberTheory/FunctionField.lean:57-74 and 99-138, AlgebraicGeometry/FunctionField.lean:31-100, and the Weierstrass reduction declarations: abstract function-field algebra and elliptic models do not construct a proper curve for an arbitrary one-variable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated field extension of transcendence degree one over an algebraically closed field has a smooth proper integral curve model admitting centers for all valuation rings of its function field",
+   "results": "{\"t\": \"2026-10-22T04:31:57Z\", \"tool\": \"leanfinder\", \"query\": \"Every finitely generated field extension of transcendence degree one over an algebraically closed field has a smooth proper integral curve model admitting centers for all valuation rings of its function field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField\", \"WeierstrassCurve.exists_isIntegral\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.integralModel\", \"functionField_iff\", \"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\"], \"digest\": \"32c46b5e16f7f756\"}; Read Mathlib/NumberTheory/FunctionField.lean:57-74 and 99-138, AlgebraicGeometry/FunctionField.lean:31-100, and the Weierstrass reduction declarations: abstract function-field algebra and elliptic models do not construct a proper curve for an arbitrary one-variable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "function[Ff]ield.*[Pp]rojective|[Pp]rojective.*function[Ff]ield|[Pp]rojective.*[Mm]odel",
+   "results": "{\"t\": \"2026-10-22T04:32:04Z\", \"tool\": \"grep\", \"query\": \"function[Ff]ield.*[Pp]rojective|[Pp]rojective.*function[Ff]ield|[Pp]rojective.*[Mm]odel\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read Mathlib/NumberTheory/FunctionField.lean:57-74 and 99-138, AlgebraicGeometry/FunctionField.lean:31-100, and the Weierstrass reduction declarations: abstract function-field algebra and elliptic models do not construct a proper curve for an arbitrary one-variable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every one variable function field over an algebraically closed field is the generic local ring of a nonsingular proper curve",
+   "results": "{\"t\": \"2026-10-22T04:32:04Z\", \"tool\": \"leansearch\", \"query\": \"Every one variable function field over an algebraically closed field is the generic local ring of a nonsingular proper curve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.functionField\", \"FunctionField.ringOfIntegers.instIsFractionRingSubtypeMemSubalgebraPolynomial\", \"functionField_iff\", \"AlgebraicGeometry.instIsFractionRingCarrierStalkCommRingCatPresheafFunctionField\", \"FunctionField.ringOfIntegers\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"Field.instIsLocalRing\", \"FunctionField.ringOfIntegers.instIsIntegralClosureSubtypeMemSubalgebraPolynomial\"], \"digest\": \"ed701d616ec1ad54\"}; Read Mathlib/NumberTheory/FunctionField.lean:57-74 and 99-138, AlgebraicGeometry/FunctionField.lean:31-100, and the Weierstrass reduction declarations: abstract function-field algebra and elliptic models do not construct a proper curve for an arbitrary one-variable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a regular projective curve with prescribed finitely generated field of rational functions over a perfect field",
+   "results": "{\"t\": \"2026-10-22T04:32:05Z\", \"tool\": \"leanfinder\", \"query\": \"Existence of a regular projective curve with prescribed finitely generated field of rational functions over a perfect field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField\", \"WeierstrassCurve.Projective\", \"WeierstrassCurve.instInhabitedSubtypeIsElliptic\", \"functionField_iff\", \"WeierstrassCurve.instInhabited\", \"WeierstrassCurve\", \"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.exists_isIntegral\"], \"digest\": \"0f2d02607dd46193\"}; Read Mathlib/NumberTheory/FunctionField.lean:57-74 and 99-138, AlgebraicGeometry/FunctionField.lean:31-100, and the Weierstrass reduction declarations: abstract function-field algebra and elliptic models do not construct a proper curve for an arbitrary one-variable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valued-curve-etale-parameter",
@@ -89,5 +177,63 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-algclosed-curve-model",
+  "worker": "stage1",
+  "summary": "Q53 repair under the released stage-1 re-split order: old steps 1--2 become a statement-only affine field-generator model node; old steps 3--4 and 6 become a statement-only normalized projective-closure node. Retained the elementary perfectness proof and the full valuative-criterion square, leaving a short assembly. Statement and all stage-2 ownership and binding records are preserved. Rebased the retained Q53 split against the current DAG after the live-promotion return; refreshed the normalized-closure node to cite the existing standard-chart interface, and rechecked all current assembly citations. Resumed promotion repair on 2026-10-23: rechecked current statements and preserved all live binding fields; resolved the newly introduced 00P0 duplicate-tag diagnostic by comparing the distinct flat-local component-dimension statement in report.md.",
+  "blueprint": "Preserves the inherited Temkin branch of lem-trf-local-term-locality and the compactify-then-normalize route of Stacks 0BY1/0BY3. The two new nodes partition old steps 1--4 and 6; elementary perfectness (old 5) and proper valuative extension (old 7) stay in the item. No chapter or unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Generic valuative-criterion tool for the final extension, with fraction field E explicitly verified."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-kun-compactification-affine",
+  "lem-kun-projective-implies-proper",
+  "lem-sc-normalization-properties",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "lem-sc-integral-function-field-affine-fraction"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-e400b72e0",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-e400b72e0 (reviewer sub-agent of L); spot-checked: This is the third push of the Q53 re-split, made after the promotion repair. 0ae8 gave FIX and 6b56 gave PASS. I compared the JSON with the 6b56 snapshot. Both new nodes, lem-trf-field-generators-affine-model and lem-trf-normalized-projective-closure, are byte-identical. In the item only split_report changed (date and summary); the statement, stmt_deps, the 4-step 1997-character proof, proof_deps and lean are unchanged. The report adds one Not-duplicates entry for the new base node lem-trf-flat-local-component-dimension-difference. That node treats a flat local map of essentially finite-type local algebras and minimal-prime dimension differences. It shares Stacks 00P0 with the affine node but is not a duplicate of it. The old dagsnap has been cleaned, so I reread every cited statement in the current snapshot. The valuative API (any valuation ring A with Frac A=K) still gives step 4 with (C, Spec k, B, E) and Frac B=E. def-sc-function-field covers any integral scheme. def-nagata-relative-projective-space supplies D_+(T_0), def-nagata-projective-space-base-change identifies it with the scheme def-kun-projective uses, and the scheme-theoretic closure applies to the qc/qs immersion U→P^n. Mathematics rechecked: A=k[e_i] has Frac A=E and dim=trdeg (00P0); algebraically closed ⇒ perfect; the closure X is reduced (056B), integral, projective, dimension 1, with U a dense open; the normalization C is finite (0BXR), proper, dimension 1 and smooth over perfect k (0BY1, 0BY3). Edge cases hold: r=0, k(t)→P^1, the cusp, nonsplit constant fields, B=E, and B=k excluded. Re-split: old steps 1–2 and 3, 4, 6 became the two nodes, old steps 5 and 7 stay as item steps 2 and 4, and nothing was dropped. Batch 5: both flagged citations are generic constructions (affine model 0BXN/00P0; normalized projective closure 0BY1/0BY3), not steps of the trace formula or Poincaré duality, and the item was already accepted as generic in the batch-5 closure. Accepted. No duplicates among the valuation-extension, dimension-comparison, hypersurface-model or compactification nodes. No SGA source is used. Accepted tool_use: the generic valuative criterion. Advisory: the item's tool_uses list is stale, as at 6b56. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.AlgClosedCurveModel",
+  "declaration": "AlgebraicGeometry.exists_smooth_proper_integral_curve_model",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/AlgClosedCurveModel.lean",
+  "statement": "theorem exists_smooth_proper_integral_curve_model (k E : Type u) [Field k] [IsAlgClosed k] [Field E] [Algebra k E] (hfg : (⊤ : IntermediateField k E).FG) (htrdeg : Algebra.trdeg k E = 1) : ∃ (C : Scheme.{u}) (s : C ⟶ Spec (.of k)) (_ : IsIntegral C) (e : C.functionField ≃+* E), Smooth s ∧ IsProper s ∧ LocallyOfFiniteType s ∧ QuasiCompact s ∧ topologicalKrullDim C = 1 ∧ Spec.map (CommRingCat.ofHom e.toRingHom) ≫ C.fromSpecStalk (genericPoint C) ≫ s = Spec.map (CommRingCat.ofHom (algebraMap k E)) ∧ ∀ (B : Subalgebra k E) [ValuationRing B] [IsFractionRing B E], ∃ f : Spec (.of B) ⟶ C, Spec.map (CommRingCat.ofHom B.val.toRingHom) ≫ f = Spec.map (CommRingCat.ofHom e.toRingHom) ≫ C.fromSpecStalk (genericPoint C) ∧ f ≫ s = Spec.map (CommRingCat.ofHom (algebraMap k B))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7f3cf96f",
+  "group": "O2",
+  "result": "pass",
+  "note": "Only the lean field differs from the live Q17 node, and lean.statement matches the file signature exactly. Every node clause is rendered: IsAlgClosed k; IntermediateField FG; trdeg=1; IsIntegral, Smooth, IsProper, LocallyOfFiniteType and QuasiCompact on s; topologicalKrullDim C=1; functionField≃+*E made k-linear by a Spec equation through s; ∀ B : Subalgebra k E with ValuationRing and IsFractionRing B E; ∃ f extending the same generic map, with f≫s = Spec(k→B). Directions and quantifier order are correct, and there is no extra hypothesis or stronger clause. Edge cases: E=k(t), E=k excluded, empty scheme excluded, B=E included, B=k excluded, higher rank and characteristics 0 and p covered. The single universe is forced by the B clause and is not a mathematical restriction. No duplicate: NormalSmoothProjectiveCompactification (finite fields) and ProperFunctionFieldMorphisms state different theorems. No definitions; docstrings carry the source places, the blueprint tag and all 7 steps; imported modules exist. Advisory: plain proof-dep imports unused by the statement. No fix, so no compile."
+ }
 }

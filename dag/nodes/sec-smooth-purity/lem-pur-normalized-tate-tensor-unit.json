@@ -1,0 +1,102 @@
+{
+ "id": "lem-pur-normalized-tate-tensor-unit",
+ "kind": "statement",
+ "title": "Zero-fold Tate tower comparison with the canonical scalar unit",
+ "statement": "For a Noetherian scheme T and prime ell invertible on T, let d be natural, M an AdicTower, e its finite twist identifications and h its equality to strictDerivedTower, all as in [def-pur-condensed-tate-integral-tower-data] and [def-weil-pbc-bounded-constructible-tower]. Assume ProjectionNormalized, the scalarComparison/proTwistMap square at every comparable pair for every normalized CoefficientLineComparison, and existence of those comparisons. If d=0, replacing each e_n by e_n followed by the specified finiteZeroIso gives the corresponding square with the canonical unitReduction. This asserts only the zero-exponent unit clause for an already given tower.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Zero-fold tensor clause of the normalized Tate tower argument"
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-integral-tower-data",
+  "def-weil-pbc-bounded-constructible-tower"
+ ],
+ "proof": [
+  {
+   "text": "For the zero tensor exponent, expand CoefficientLineComparison.tensorPower: it is scalarZeroLineIso, hence the canonical scalar unit comparison conjugated by the etale single-unit maps. Expand finiteZeroIso and unitReduction. Cancel the site-comparison unit isomorphisms and use naturality of pbcComparisonReduction at the single-unit isomorphism to obtain proScalar.map(finiteZeroIso_b) followed by unitReduction = proTwistMap_0 followed by finiteZeroIso_a. Choose the normalized root comparison supplied in the first step. Apply derivedRealization to this equation and use naturality of scalarComparison at finiteZeroIso_b. Compose its normalization square with derivedRealization.map(finiteZeroIso_a). This is exactly the required zero-degree square for e_0, including equal indices. Assemble the witnesses and all clauses.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Naturality calculation for the canonical scalar unit at zero tensor power"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatible primitive roots of unity give a normalized strict derived tensor power reduction tower with constructible rank one local models",
+   "results": "IsPrimitiveRoot.integralPowerBasis.congr_simp, primitiveRoots, rootsOfUnityEquivOfPrimitiveRoots; generic root facts, no sheaf tower or model theorem.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem in Mathlib."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse system of roots of unity sheaves tensor powers yields an adic tower with a common local model and constructible finite reductions",
+   "results": "BDeRhamPlus, BDeRham, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion; none has the required sheaf or normalization interface. Loogle Functor.map_comp supplies only composition glue.",
+   "date": "2026-10-27",
+   "verdict": "Generic completion tools do not state either component."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Tt]ower|root.*[Tt]ower|tensorPower.*zero",
+   "results": "Mathlib scalar towers and root polynomial facts; project search finds CondensedTateIntegralTowerData, the assigned theorem and its consumer, but no theorem constructing its normalized reductions or common models. Whole-blueprint keyword search gives no duplicate of either separate component.",
+   "date": "2026-10-27",
+   "verdict": "Use the project root-line, K-flat and tower declarations; the remaining component is new."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedTateTensorTower",
+  "date": "2026-10-27",
+  "group": "J1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-purity-transport",
+   "place": "Step 2: realize the normalized Tate-unit system with common bounds and stratification",
+   "via": [
+    "lem-pur-normalized-tate-tensor-tower",
+    "lem-pur-condensed-tate-integral-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NormalizedTateTensorTowerZero",
+  "file": "lean/Sheaf/Paper/NormalizedTateTensorTowerZero.lean",
+  "declaration": "AlgebraicGeometry.Scheme.PurityIntegralTower.normalizedTateTensorTower_zero",
+  "statement": "theorem normalizedTateTensorTower_zero\n    (T : Scheme.{u}) [IsNoetherian T] (ell : ℕ) [Fact ell.Prime]\n    (hT : IsUnit (ell : Γ(T, ⊤))) (d : ℕ)\n    (M : AdicTower T (datum.{u} ell))\n    (e : ∀ n : ℕ, M.level n ≅\n      (derivedRealization T ell n).obj (finiteTwist T ell n d))\n    (h : M.tower = strictDerivedTower T ell d)\n    (hp : ProjectionNormalized T ell hT d M e h)\n    (hsquare : ∀ (b a : ℕ) (hab : a ≤ b)\n      (r : CoefficientLineComparison\n        (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n        (ell ^ (b + 1)) (ell ^ (a + 1))\n        (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T),\n      (pbcDerivedExtend (pbcAdicQuotient T (datum.{u} ell) b a hab)).map (e b).hom ≫\n          (scalarComparison T ell b a hab).hom.app (finiteTwist T ell b d) ≫\n          (derivedRealization T ell a).map (proTwistMap d r) =\n        (M.normalization b a hab).hom ≫ (e a).hom)\n    (hcomparisons : ∀ (b a : ℕ) (hab : a ≤ b), Nonempty\n      (CoefficientLineComparison\n        (FiniteReduction.quotient.{u} ell (Nat.add_le_add_right hab 1))\n        (ell ^ (b + 1)) (ell ^ (a + 1))\n        (CharP.cast_eq_zero _ _) (CharP.cast_eq_zero _ _) T)) :\n    ∀ hd : d = 0, ∀ (b a : ℕ) (hab : a ≤ b),\n      let e₀ (n : ℕ) := e n ≪≫ (derivedRealization T ell n).mapIso\n        (eqToIso (congrArg (finiteTwist T ell n) hd) ≪≫ finiteZeroIso T ell n);\n      (pbcDerivedExtend (pbcAdicQuotient T (datum.{u} ell) b a hab)).map (e₀ b).hom ≫\n          (scalarComparison T ell b a hab).hom.app (𝟙_ _) ≫\n          (derivedRealization T ell a).map (unitReduction T ell b a hab).hom =\n        (M.normalization b a hab).hom ≫ (e₀ a).hom",
+  "branch": "sheaf-dag",
+  "by": "J1",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094426-L-224478",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J1",
+  "result": "pass",
+  "landing": "20261027T094426-L-224478",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

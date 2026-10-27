@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-koszul-prefix-quotient-criterion",
+ "kind": "statement",
+ "title": "Appending a tuple to a Koszul-regular prefix",
+ "statement": "Let $A$ be a commutative ring, $r,s\\geq0$, and $a_1,\\ldots,a_r,b_1,\\ldots,b_s\\in A$. Put $I=(a_1,\\ldots,a_r)$, and let $\\bar b_j$ be the image of $b_j$ in $A/I$. Assume $a_1,\\ldots,a_r$ is Koszul-regular [def-weil-pbc-koszul-regular-sequence]. Then the concatenation $a_1,\\ldots,a_r,b_1,\\ldots,b_s$ is Koszul-regular in $A$ if and only if $\\bar b_1,\\ldots,\\bar b_s$ is Koszul-regular in $A/I$. Both empty tuples and the zero ring are allowed; no proper-ideal or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0669 (lemma-join-koszul-regular-sequences) and 068M (lemma-truncate-koszul-regular); the joining and final truncation in the proof of Tag 07CZ (lemma-koszul-independence-presentation)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-koszul-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=A/I$, $P=K_\\bullet(A,a_1,\\ldots,a_r)$, $Q=K_\\bullet(A,b_1,\\ldots,b_s)$ and $C=K_\\bullet(A,a_1,\\ldots,a_r,b_1,\\ldots,b_s)$. The augmentation $\\epsilon:P\\to B[0]$ is reduction modulo $I$ in degree zero and zero in positive degrees. It is a chain map since $d_1(e_i)=a_i\\in I$. Since $d_0=0$ and $\\operatorname{im}d_1=I$, it induces $H_0(P)=A/I\\xrightarrow{1}B$. All positive homology of $P$ vanishes by the assumed Koszul regularity, and negative terms are zero. Thus $\\epsilon$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0669 (lemma-join-koszul-regular-sequences), proof, first sentence; 068M (lemma-truncate-koszul-regular), proof, first paragraph; low-degree formula from Tag 0623 (definition-koszul-complex)."
+   }
+  },
+  {
+   "text": "The finite direct-sum total complex $\\operatorname{Tot}(Q\\otimes_A P)$ has differential $d(y\\otimes x)=d_Qy\\otimes x+(-1)^q y\\otimes d_Px$ on $Q_q\\otimes P_p$. Define $\\theta:\\operatorname{Tot}(Q\\otimes_A P)\\to C$ by $y_J\\otimes x_I\\mapsto y_J\\wedge x_I$, where $x_I$ and $y_J$ are the increasing standard wedges in the prefix and tail blocks of $A^{r+s}$. Every increasing wedge in the combined basis splits uniquely into those two blocks, and $y_J\\wedge x_I=(-1)^{pq}x_I\\wedge y_J$, so this gives an invertible map in every degree. The explicit Koszul differential satisfies $d(y_J\\wedge x_I)=d_Qy_J\\wedge x_I+(-1)^q y_J\\wedge d_Px_I$: deleting a prefix basis vector crosses exactly the $q$ tail vectors. Hence $\\theta$ is a chain isomorphism. This is the joining identification with the tensor factors in the reverse order.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0664 (lemma-join-sequences-koszul-complex), statement and proof hint; the basis bijection and differential check expand the omitted proof using Tag 0623."
+   }
+  },
+  {
+   "text": "Reindex every chain complex as a cochain complex by $L^i=L_{-i}$; tensor degrees and signs agree because $(-1)^{-q}=(-1)^q$. The terms of $Q$ are finite free and $Q^i=0$ outside $[-s,0]$. They are flat by [lem-weil-pbc-projective-module-flat], so [lem-pc-module-bounded-flat-kflat] makes $Q$ K-flat as an ordinary $A$-module complex [def-pc-module-kflat-complex]. Apply clause (ii) of [lem-pc-mixed-tensor-kflat-quasi-iso] with both coefficient rings equal to $A$, ring map the identity, $F=Q$, and $u=\\epsilon:P\\to B[0]$. It gives a quasi-isomorphism $\\operatorname{Tot}(1_Q\\otimes\\epsilon):\\operatorname{Tot}(Q\\otimes_A P)\\to Q\\otimes_A B$. In particular this does not require $B$ to be flat or K-flat over $A$. Together with $\\theta$ it compares $C$ with $Q\\otimes_A B$ by a quasi-isomorphism.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex",
+    "lem-pc-mixed-tensor-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0669 and 068M, proof, total-tensor comparison; supporting Tag 064K (lemma-derived-tor-quasi-isomorphism) and Tag 06Y0 (lemma-K-flat-quasi-isomorphism), applied in the symmetric tensor order."
+   }
+  },
+  {
+   "text": "Write $\\bar Q=K_\\bullet(B,\\bar b_1,\\ldots,\\bar b_s)$. The map $Q_n\\otimes_A B\\to\\bar Q_n$, $y_J\\otimes\\bar c\\mapsto\\bar c\\,\\bar y_J$, is invertible: both modules are free over $B$ on the same increasing subsets $J$ of size $n$, with inverse $\\bar y_J\\mapsto y_J\\otimes1$. The differential formula in [def-weil-pbc-koszul-complex] reduces coefficient $b_j$ to $\\bar b_j$, so these maps form a chain isomorphism. For a complex of $B$-modules, forgetting to $A$-modules changes neither the sets of cycles nor boundaries, and therefore changes neither whether its homology is zero. The quasi-isomorphism in step 3 and the isomorphism in step 2 show that $H_n(C)=0$ for all $n>0$ if and only if $H_n(\\bar Q)=0$ for all $n>0$. Both complexes have zero negative terms. By [def-weil-pbc-koszul-regular-sequence], these are exactly the two asserted Koszul-regularity conditions.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0669 and 068M, proof, identification with the quotient-ring Koszul complex and conclusion."
+   }
+  },
+  {
+   "text": "All constructions include the empty subset as the degree-zero basis. If $r=0$, $I=0$, $P=A[0]$ and $\\epsilon$ is the identity. If $s=0$, $Q=A[0]$ and the conclusion compares the assumed regularity of the prefix with the automatic regularity of the empty tuple over $B$. If $A=0$ or $I=A$, the corresponding quotient complexes have zero terms; the same quasi-isomorphism still applies. Thus no properness of $I$, positive length, or Noetherian hypothesis was introduced.",
+   "uses": [
+    "def-weil-pbc-koszul-complex",
+    "def-weil-pbc-koszul-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0669 and 068M, unrestricted ring and finite-sequence hypotheses; boundary cases checked from Tags 0623 and 062E."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-koszul-regular-sequence",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Proofs of Tags 0669 (lemma-join-koszul-regular-sequences) and 068M (lemma-truncate-koszul-regular); the common total-tensor calculation, with explicit basis maps for Tag 0664 and quotient change of scalars."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If a prefix is Koszul regular, concatenation with another tuple is Koszul regular if and only if that tuple is Koszul regular in the quotient by the prefix",
+   "results": "Read search results: 8 hits; RingTheory.Sequence.isWeaklyRegular_append_iff', RingTheory.Sequence.isWeaklyRegular_append_iff, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.IsRegular.cons, RingTheory.Sequence.isWeaklyRegular_cons_iff', RingTheory.Sequence.isWeaklyRegular_cons_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclicity of the Koszul complex on f followed by g is equivalent to acyclicity on g modulo the Koszul regular sequence f",
+   "results": "Read search results: 8 hits; RingTheory.Sequence.isWeaklyRegular_append_iff, RingTheory.Sequence.isWeaklyRegular_append_iff', RingTheory.Sequence.map_first_exact_on_four_term_right_exact_of_isSMulRegular_last, RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.isWeaklyRegular_cons_iff, RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.isWeaklyRegular_cons_iff', QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Joining and truncating Koszul regular sequences over arbitrary commutative rings",
+   "results": "Read search results: 8 hits; RingTheory.Sequence.IsRegular, RingTheory.Sequence.IsRegular.nontrivial, RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsRegular.cons, RingTheory.Sequence.isWeaklyRegular_append_iff', RingTheory.Sequence.isRegular_iff, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, RingTheory.Sequence.IsRegular.of_faithfullyFlat",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\"",
+   "results": "Read search results: 0 hits; ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]oszul|[Kk]oszul[Rr]egular",
+   "results": "Read search results: 3 hits; Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/Algebra/Homology/LocalCohomology.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "isWeaklyRegular_append_iff|isWeaklyRegular_of_perm_of_subset_maximalIdeal",
+   "results": "Read search results: 5 hits; Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern weakly regular sequences or Noetherian local regular sequences, not Koszul regularity over arbitrary commutative rings; Mathlib RegularSequence.lean line 21 lists Koszul regular sequences as TODO."
+  },
+  {
+   "tool": "grep",
+   "query": "koszul|isWeaklyRegular_append_iff",
+   "results": "Read 5 hits: Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean, Mathlib/RingTheory/Regular/RegularSequence.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: no Koszul-regular prefix criterion; grep finds the RegularSequence TODO and weak-regular append lemmas, Loogle has zero hits, and LeanSearch returns generic quasi-isomorphism facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Koszul regular prefix makes the appended sequence Koszul regular exactly when the tail is Koszul regular in the quotient by the prefix",
+   "results": "Read 8 hits: RingTheory.Sequence.IsRegular.cons', RingTheory.Sequence.IsRegular.cons, RingTheory.Sequence.isRegular_cons_iff', RingTheory.Sequence.isRegular_cons_iff, RingTheory.Sequence.isWeaklyRegular_append_iff', RingTheory.Sequence.isWeaklyRegular_append_iff, RingTheory.Sequence.IsWeaklyRegular.cons', RingTheory.Sequence.isWeaklyRegular_cons_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: only weakly regular or regular sequence results, not Koszul regularity; arbitrary rings and unit ideals are essential here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul complex concatenation quasi isomorphic to Koszul complex modulo a Koszul regular prefix",
+   "results": "Read 8 hits: quasiIso_comp, HomologicalComplex.quasiIso, quasiIso_of_comp_right, CategoryTheory.ShortComplex.quasiIso_iff_comp_left, quasiIso_iff_comp_left, CategoryTheory.ShortComplex.QuasiIso.isIso, QuasiIso, CategoryTheory.ShortComplex.QuasiIso.mk",
+   "date": "2026-10-24",
+   "verdict": "no match: no Koszul-regular prefix criterion; grep finds the RegularSequence TODO and weak-regular append lemmas, Loogle has zero hits, and LeanSearch returns generic quasi-isomorphism facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Acyclicity of Koszul complex of concatenated lists is equivalent to acyclicity of the tail modulo an acyclic prefix",
+   "results": "Read 8 hits: RingTheory.Sequence.isWeaklyRegular_append_iff, RingTheory.Sequence.isWeaklyRegular_append_iff', Cycle.chain_range_succ, Cycle.chain_coe_cons, FreeAddGroup.isCyclicallyReduced_cons_append_iff, HomologicalComplex.Acyclic, HomologicalComplex.acyclic_iff, FreeGroup.isCyclicallyReduced_cons_append_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: only weakly regular or regular sequence results, not Koszul regularity; arbitrary rings and unit ideals are essential here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-koszul-polynomial-presentation-independence",
+  "date": "2026-10-24",
+  "group": "Q47"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), supporting alteration chain recorded in the item: coherent naive cotangent cohomology via the scheme-to-space comparison, Stacks Tag 0D0X; the final local algebra input in the proof of Tag 0D0X. Supporting local algebra: Tag 0D08 proof, second half, the zero on the left of Jacobi-Zariski for A to B to its strict henselization. Component for the ind-etale left-injectivity argument: Syntomic polynomial presentation kernels are locally Koszul-regular. The some-presentation to arbitrary-presentation passage in Definition 07D0 used by Tag 07D3. In Tag 07CZ: Tags 0669 (lemma-join-koszul-regular-sequences) and 068M (lemma-truncate-koszul-regular); the joining and final truncation in the proof of Tag 07CZ (lemma-koszul-independence-presentation).",
+   "via": [
+    "lem-sfb-koszul-polynomial-presentation-independence",
+    "lem-sfb-syntomic-polynomial-kernel-koszul-regular",
+    "lem-sfb-ind-etale-jacobi-zariski-left-injective",
+    "lem-sfb-strict-henselization-naive-cotangent",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-koszul-prefix-quotient-criterion",
+  "worker": "stage1",
+  "summary": "Checked both Stacks proofs and all boundary cases. Proved the criterion by the common Koszul total-tensor comparison, expanding the wedge-basis isomorphism and quotient differential explicitly. Reused the existing free-flat, bounded-flat K-flat, and mixed-tensor preservation nodes; no new nodes or statement changes. Project tag/concept searches found no exact finished declaration.",
+  "blueprint": "Realizes the inherited supporting local-algebra place of det-thm-sf-ctf-stability-direct-images proof (3), via the polynomial-presentation independence argument of Tag 07CZ: joining and truncating a Koszul-regular prefix (Tags 0669 and 068M). The inherited from.node is null, as confirmed by blueprint_refs.py ancestor; the current latest direct-images proof and unit were read.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic bounded-above flat ordinary-module K-flatness for the finite free tail; no node in this unit supplies the tensor-acyclicity theorem."
+   },
+   {
+    "node": "lem-pc-mixed-tensor-kflat-quasi-iso",
+    "why": "Generic tensor preservation of quasi-isomorphisms with one K-flat factor, clause (ii), with identity ring map; this implements the total-tensor resolution argument rather than replacing any unit-level step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pc-mixed-tensor-kflat-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-7f2e70500",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-7f2e70500 (reviewer sub-agent of L); spot-checked: I read the item in full; it was split with 0 new nodes and its statement is unchanged. Source checks: I read Stacks more-algebra.tex 0664 (lemma-join-sequences-koszul-complex, whose proof the source omits), 0669 (lemma-join-koszul-regular-sequences) and 068M (lemma-truncate-koszul-regular). The item is 0669 + 068M under the shared hypothesis that the prefix is Koszul-regular, and the hypotheses match one by one. The parent lem-sfb-koszul-polynomial-presentation-independence uses the forward direction in step 2 and the reverse in step 7, and the statement gives both. Steps: (1) The augmentation ε: P→A/I[0] is a quasi-isomorphism because d_1e_i=a_i and im d_1=I; this also holds when I=A. (2) The wedge map θ: Tot(Q⊗P)→C is a chain isomorphism; I checked the sign (−1)^{q+k+1} against the generator formula and derivation property in def-weil-pbc-koszul-complex. This step writes out the proof that 0664 omits. (3) Q is finite free and bounded, so flat (Mathlib leaf) and K-flat (lem-pc-module-bounded-flat-kflat). Clause (ii) of lem-pc-mixed-tensor-kflat-quasi-iso applies with R=A, f=id, F=Q, u=ε, and B is never assumed flat. (4) The basis identification Q⊗B≅K(A/I, b̄) holds, and A-module and B-module homology are the same sets, so H_n(C)≅H_n(K(b̄)) for all n and both directions follow. (5) The edge cases r=0, s=0, A=0 and I=A all check out. Small cases over ℤ, (2;3), (2;0), (2;2) and (1;·), agree with the statement. Duplicates: no DAG node states the criterion, and blueprint_refs finds 0 blueprint nodes for Koszul-regular. Mathlib searches of all three kinds are recorded and find no match; Koszul regular sequences are a TODO in RegularSequence.lean:21. I accept both declared tool_uses, lem-pc-module-bounded-flat-kflat and lem-pc-mixed-tensor-kflat-quasi-iso: they are generic black-box homological tools that already appear in this unit's lem-sfb-koszul-evaluation-pasting. No SGA source is cited. The null blueprint.from.node is inherited from the parent chain and is not a fault of this delivery. No fixes were made."
+ }
+}

@@ -6,6 +6,10 @@ Authors: SHEAF group G5
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import Sheaf.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange
+import Sheaf.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Naturality of the hyperplane Kummer class
 
@@ -58,6 +62,21 @@ def ordinaryFiniteP1SplittingMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
     ordinaryFiniteP1SplittingSource A N hA S ⟶ ordinaryFiniteP1SplittingTarget A N hA S :=
   biprod.desc (ordinaryFiniteP1Unit A N hA t S hS)
     (ordinaryFiniteP1ChernPushforward A N hA S c)
+
+private theorem splitting_map_naturality
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (F : C ⥤ D) [F.Additive] {X Y Z : C} {X' Y' Z' : D}
+    (a : X ⟶ Z) (b : Y ⟶ Z) (a' : X' ⟶ Z') (b' : Y' ⟶ Z')
+    (e : F.obj X ≅ X') (e' : F.obj Y ≅ Y') (v : F.obj Z ⟶ Z')
+    (ha : F.map a ≫ v = e.hom ≫ a') (hb : F.map b ≫ v = e'.hom ≫ b') :
+    F.map (biprod.desc a b) ≫ v =
+      biprod.lift (F.map biprod.fst ≫ e.hom) (F.map biprod.snd ≫ e'.hom) ≫
+        biprod.desc a' b' := by
+  let := preservesBinaryBiproducts_of_preservesBinaryCoproducts F
+  apply (cancel_epi (F.mapBiprod X Y).inv).mp
+  apply biprod.hom_ext' <;>
+    simp [← Functor.map_comp_assoc, ha, hb]
 
 /-- The hyperplane Kummer class and its two-component map are natural over every base.
 Over a Noetherian base this is the already normalized Chern morphism.
@@ -116,7 +135,37 @@ theorem exists_ordinaryFiniteP1KummerNaturality (N : ℕ) (hN : 0 < N)
             (projectiveLineTraceTransport N hN A hA) f hS ≫
           ordinaryFiniteP1SplittingMap A N hA
             (projectiveLineTraceTransport N hN A hA) S' hS' (c S' hS') := by
-  sorry
-
+  classical
+  have hex (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
+      ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶
+          (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,
+        ordinaryFiniteP1ChernSpec A N hA S
+          ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸
+            hS.map (ProjectiveLine S ↘ S).appTop.hom) c :=
+    (ordinaryFiniteClass_bijective_arbitraryBase A (ProjectiveLine S)
+      (Scheme.finiteEtaleTateLine (ProjectiveLine S) N A hA) 2).2 _
+  choose c hc using hex
+  refine ⟨c, ?_, ?_⟩
+  · intro S hS
+    refine ⟨hc S hS, ?_⟩
+    intro hnoeth
+    apply (ordinaryFiniteClass_bijective_arbitraryBase A (ProjectiveLine S)
+      (Scheme.finiteEtaleTateLine (ProjectiveLine S) N A hA) 2).1
+    exact (hc S hS).trans (projectiveLineTraceDatum N hN A hA S hS).chern_spec.symm
+  · intro S' S f hS hS'
+    let : (ordinaryFinitePullback A f).Additive :=
+      additive_leftDerivedUpperStar (ModuleCat.{u + 1} A) f
+    let t := projectiveLineTraceTransport N hN A hA
+    have hu := ordinaryFiniteP1_twisted_unit_baseChange A N hN hA t f hS hS'
+    have hh := ordinaryFiniteP1_chern_adjunct_baseChange A N hN hA t f hS hS'
+      (c S hS) (c S' hS') (hc S hS) (hc S' hS')
+    unfold ordinaryFiniteP1SplittingMap ordinaryFiniteP1DecompositionSourceMap
+    exact splitting_map_naturality (ordinaryFinitePullback A f)
+      (ordinaryFiniteP1Unit A N hA t S hS)
+      (ordinaryFiniteP1ChernPushforward A N hA S (c S hS))
+      (ordinaryFiniteP1Unit A N hA t S' hS')
+      (ordinaryFiniteP1ChernPushforward A N hA S' (c S' hS'))
+      (ordinaryFiniteShiftedLinePullback A N hA t f hS)
+      (ordinaryFiniteUnitPullback A f) _ hu hh
 
 end AlgebraicGeometry.Etale

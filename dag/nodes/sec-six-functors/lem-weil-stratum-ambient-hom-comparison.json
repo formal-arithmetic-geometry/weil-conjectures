@@ -15,17 +15,66 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Choose K-flat representatives for tensor variables and K-injective representatives for the internal Hom variable. Apply Hom-complex currying, the open and closed projection comparisons, the shriek adjunction, and the direct-image adjunction to define the comparison. Naturality descends from the representative maps. The inverse projection comparisons give a two-sided inverse for every component.",
-   "uses": [],
+   "text": "Transport the ringed open/closed localization adjunction through the canonical coefficient isomorphisms. Closed direct image is exact with invertible counit, complementary-open pullback vanishes, and closed/open pullbacks jointly reflect isomorphisms. Apply exact derived functors and homology to obtain the same detection and vanishing statements on unbounded derived categories.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-exc-open-closed-detection",
+    "lem-exc-proetale-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the native K-flat tensor model and the canonical tensor-pullback comparison. For closed direct image, the inverse-image unit on i_*N tensor K is invertible after both restrictions: on the closed part by the counit and on the complementary open because both objects vanish. Joint detection gives the closed projection isomorphism. This specializes the supported-unit argument already proved in ProEtaleClosedTensorProjection to the actual identified constant coefficient rings.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-weil-proetale-closed-tensor-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For open extension, form the inverse projection map by transposing the pullback tensor isomorphism and the invertible open unit. Its closed restriction is a map between zero objects, using disjoint-support vanishing and tensor pullback; its open restriction is invertible by the triangle identity. Joint detection proves it invertible. Compose open and closed projection isomorphisms.",
+   "uses": [
+    "def-trf-finite-pullback-coordinate-comparison",
+    "def-sp-finite-intrinsic-open-square",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-tensor-hom-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the ambient closed shriek adjunction with the exact open adjunction. Identify the composite constant pullback with pullback along i followed by j, and derive its direct-image adjunction. Turn the native tensor-Hom adjunctions into parametrized adjunctions, using evaluation naturality. Symmetry puts the composite projection formula in the required tensor order. The generic conjugate-isomorphism argument of EtaleGenericStratumMate applies to these pro-etale categories; uncurry and take the isomorphism hom to obtain the asserted natural transformation with all components invertible.",
+   "uses": [
+    "lem-exc-proetale-closed-support",
+    "def-trf-finite-pullback-coordinate-comparison",
+    "def-sp-finite-intrinsic-pullback",
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-etale-generic-stratum-mate",
+    "lem-weil-closed-tensor-dual-adjunction"
+   ],
    "elementary": false
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sp-finite-intrinsic-open-square",
+  "def-sp-finite-intrinsic-pullback",
+  "def-trf-finite-pullback-coordinate-comparison",
+  "lem-exc-open-closed-detection",
+  "lem-exc-proetale-closed-support",
+  "lem-sf-etale-generic-stratum-mate",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-weil-closed-tensor-dual-adjunction",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-closed-tensor-projection"
+ ],
  "proof_origin": {
-  "by": "V3 stage 3",
+  "by": "M8 stage 3",
   "document": "lean/Sheaf/Paper/StratumAmbientProjectionData.lean",
-  "place": "stratumAmbientHomComparison docstring; parent proof steps 8--10",
-  "note": "The theorem isolates the canonical componentwise comparison before NatIso.ofComponents packaging."
+  "place": "constantClosedData through stratumAmbientHomComparison",
+  "note": "Complete proof from existing localization, native tensor-Hom and canonical tensor-pullback declarations. Both support projection arguments and their composition are proved here; no new sorry or public declaration is introduced."
  },
  "mathlib_searches": [
   {
@@ -97,14 +146,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-23",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "V3",
+  "group": "M8",
   "result": "pass",
-  "landing": "20261020T235633-L-1199506",
+  "landing": "20261023T135051-L-2830910",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

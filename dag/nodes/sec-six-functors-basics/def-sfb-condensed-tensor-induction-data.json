@@ -1,0 +1,122 @@
+{
+ "id": "def-sfb-condensed-tensor-induction-data",
+ "kind": "definition",
+ "title": "Balanced tensor and sheafification data before reciprocity",
+ "statement": "Let R be a commutative condensed ring [sk-def-sfb-condensed-ring], on the small profinite site [def-weil-size-convention], and P a profinite group with closed subgroup H. Use the action-module categories of [def-sfb-condensed-action-module] and module sheafification of [def-weil-presheaf-modules-sheafification]. Present B_M(S) by finite formal sums of pairs (p,m), modulo additivity and R(S)-linearity in m and balancing (ph,m)=(p,hm). A TensorInductionPresheaf records the presheaf functor with these exact quotient sections, restrictions, functor maps and natural left multiplication action on generators. Its sheafTensor is the ordinary sheafification unit transported across a specified natural comparison. A TensorInductionSheafData records a functor L with this comparison, equivariance of the unit, the map formula on sheafified tensors, and an H-equivariant morphism identityTensor_M sending m to eta([1] tensor m). It does not include additivity, any Hom-set equivalence, any adjunction, or any extension property. TensorInductionSheafAdjunction is the original specification adding additivity and normalized adjunction formulas. All original definitions are moved verbatim, not chosen from an existence theorem.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Agent-formulated induction argument below paragraph (3); Balanced tensor and sheafification data before reciprocity. External reference WANTED, as for the parent."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-size-convention",
+  "def-sfb-condensed-action-module",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "universal balanced group algebra tensor presheaf and equivariant module sheafification",
+   "results": "PresheafOfModules.sheafify, sheafifyMap, sheafification, toSheafify, Sheafify.module, and toSheaf_map_sheafificationHomEquiv_symm.",
+   "date": "2026-10-26",
+   "verdict": "Ordinary module sheafification is used; none states balanced induction over varying section rings with internal continuous group action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of balanced group algebra tensor induction is left adjoint to restriction of internal group actions on sheaves of modules",
+   "results": "PresheafOfModules.sheafificationAdjunction; Rep.indResAdjunction; fixed-ring restriction adjoints. Loogle Rep.indResAdjunction confirms the abstract fixed-ring statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct match; use the ordinary sheafification API and prove the balanced-generator argument."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|TensorInductionPresheaf|Equivariant.*sheafif",
+   "results": "Mathlib.RepresentationTheory.Induced, the item, CondensedSplitCosetInduction, and EquivariantModuleSheafificationReflector.",
+   "date": "2026-10-26",
+   "verdict": "Split-coset induction has a stronger hypothesis and is unproved; the proved reflector supplies the sheafification step, not the tensor presheaf or normalized Frobenius transposes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CondensedTensorInductionAdjunction",
+  "group": "E2",
+  "date": "2026-10-26"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), induction argument: Balanced tensor and sheafification data before reciprocity",
+   "via": [
+    "lem-sfb-condensed-tensor-induction-adjunction",
+    "lem-sfb-condensed-split-coset-induction",
+    "lem-sfb-derived-invariants-normal-subgroup-comparison",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CondensedTensorInductionData",
+  "file": "lean/Sheaf/CategoryTheory/CondensedTensorInductionData.lean",
+  "declaration": "Profinite.CondensedAction.TensorInductionSheafData",
+  "statement": "structure TensorInductionSheafData (B : TensorInductionPresheaf R P H)",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-26",
+  "declarations": [
+   "Profinite.CondensedAction.inductionSectionRing",
+   "Profinite.CondensedAction.inductionRingSheaf",
+   "Profinite.CondensedAction.inductionSubgroupInclusion",
+   "Profinite.CondensedAction.inductionRelations",
+   "Profinite.CondensedAction.InductionSection",
+   "Profinite.CondensedAction.inductionTensor",
+   "Profinite.CondensedAction.TensorInductionPresheaf",
+   "Profinite.CondensedAction.TensorInductionPresheaf.tensor",
+   "Profinite.CondensedAction.TensorInductionPresheaf.sheafTensor",
+   "Profinite.CondensedAction.TensorInductionSheafAdjunction",
+   "Profinite.CondensedAction.TensorInductionSheafData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-7249c",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T081602-L-2013109",
+  "kind": "interface",
+  "note": "independent cc review: moved data block vs clone item (byte-identical), item theorem statement vs clone, item/new node lean records and proof_deps vs Lean, ActionModule definition vs the two sorried statements"
+ }
+}

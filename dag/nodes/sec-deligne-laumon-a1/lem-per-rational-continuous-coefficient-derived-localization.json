@@ -1,0 +1,307 @@
+{
+ "id": "lem-per-rational-continuous-coefficient-derived-localization",
+ "kind": "statement",
+ "title": "Exact derived continuous scalar localization and raw fraction descent",
+ "statement": "Let $\\ell$ be prime, let $E/\\mathbf Q_\\ell$ be finite, let $A=\\mathcal O_E$ and let $\\varpi$ be a uniformizer [def-weil-l-adic-coefficient-extension]. Let $\\mathcal S$ be a small site [def-weil-pbc-sites-and-cohomology], let $R$ be a sheaf of commutative rings with a specified map from the constant ring sheaf $A_{\\mathcal S}$, and put $S=R[1/\\varpi]$ by sheafified sectionwise localization [def-weil-pbc-ringed-section-localization]. Use module sheaves, sheaf tensor products and their unbounded derived categories [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-weil-abstract-derived-category], in universes in which these exist. Scalar actions on module morphisms are multiplication by constant sections and on derived morphisms are their induced actions [def-weil-pbc-scalar-localization-coefficient-actions]. The $E=A[1/\\varpi]$ action on $D(S)$ is given by the localized constant sections. Let $\\mathcal C$ be any full $A$-linear triangulated subcategory of $D(R)$, with the induced linear shifts [def-weil-linear-functor, def-weil-triangulated-category], and let $Q:\\mathcal C\\to\\mathcal C[1/\\varpi]$ be the raw scalar localization [def-weil-linear-scalar-localization], whose distinguished triangles are the triangles isomorphic to images of distinguished triangles of $\\mathcal C$.\n\nThe actual scalar functor $T(M)=S\\otimes_R M$, $T(f)=1\\otimes f$, is additive and exact. The derived scalar extension $F=S\\otimes_R^{\\mathbf L}-$ [lem-pur-derived-change-of-rings] is naturally isomorphic, as a triangulated $A$-linear functor, to the termwise exact derived functor $D(T)$. For every complex $K$ and every K-flat resolution $P\\to K$, the comparison is the derived isomorphism represented by $T(P)\\to T(K)$. In degree zero it is the ordinary scalar extension. There are natural isomorphisms $\\mathcal H^r(FK)\\cong S\\otimes_R\\mathcal H^r(K)$ for all $r\\in\\mathbf Z$ [def-weil-derived-cohomology-sheaves], induced by the cycle and boundary identifications, natural for all derived morphisms. In particular every cohomological vanishing interval is preserved.\n\nThe formulas $\\overline F(QK)=FK$ and $\\overline F(f/\\varpi^n)=\\varpi^{-n}F(f)$ determine an $E$-linear triangulated functor $\\overline F:\\mathcal C[1/\\varpi]\\to D(S)$ factoring $F|_{\\mathcal C}$. The fraction formula is independent of representatives: whenever $\\varpi^t(\\varpi^m f-\\varpi^n g)=0$ for some $t\\geq0$, its two images agree. It preserves addition, identities, composition and multiplication by every scalar $a/\\varpi^m\\in E$. Its shift comparison has components those of $F$ and is natural on fraction morphisms; on the image of an integral distinguished triangle its image is the distinguished triangle obtained by applying $F$. No boundedness or constructibility hypothesis on $\\mathcal C$ or its objects is imposed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), scalar-localization functor; Stacks Tag 015F (derived.tex, lemma-right-derived-exact-functor), Tag 010N (homology.tex, lemma-exact-functor), Tag 05R6 (derived.tex, proposition-construct-localization)."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-linear-functor",
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-scalar-localization-coefficient-actions",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-l-adic-integers-localization-uniformizer"
+ ],
+ "proof": [
+  {
+   "text": "Identify the ordinary functor d.E with the actual localized sheaf extension functor of lem-weil-pbc-scalar-localization-sheaf-exact using its object and map equations. Transport finite limits and finite colimits across this equality. Prove its specified A-linearity by the tensor balancing relation sectionwise and the sheafification adjunction.",
+   "uses": [
+    "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "def-weil-pbc-ringed-section-localization",
+    "def-weil-pbc-scalar-localization-coefficient-actions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of Tags 015F and 05R6, Homology 010N and sheaf localization 03ET; explicit raw fraction calculation for the functor in Bhatt–Scholze Proposition 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Use the exact termwise derived functor d.E.mapDerivedCategory and its canonical factorization. It is a left derived functor because the exact termwise functor inverts quasi-isomorphisms. Compare it with the universal pair d.T,d.ε by uniqueness of left derived functors. Transport shifts, triangulatedness and A-linearity across that unique counit-compatible isomorphism. Its counit equation and naturality give the formula for every K-flat comparison map.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of Tags 015F and 05R6, Homology 010N and sheaf localization 03ET; explicit raw fraction calculation for the functor in Bhatt–Scholze Proposition 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Compose the unique comparison with mapDerivedCategorySingleFunctor and mapDerivedCategoryHomologyFunctorIso. These supply the prescribed degree-zero and all-degree cohomology comparisons. Additivity preserves zero objects, so the latter comparison preserves every vanishing interval.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of Tags 015F and 05R6, Homology 010N and sheaf localization 03ET; explicit raw fraction calculation for the functor in Bhatt–Scholze Proposition 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Obtain the canonical localization algebra isomorphism A[1/t] ≃ E. The localized global-section action restricts to the original A-action. Prove that the two induced derived scalar actions agree by checking scalar identities after the cochain localization and then using natural-transformation extensionality for that localization.",
+   "uses": [
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "def-weil-pbc-scalar-localization-coefficient-actions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of Tags 015F and 05R6, Homology 010N and sheaf localization 03ET; explicit raw fraction calculation for the functor in Bhatt–Scholze Proposition 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Define the descended functor on each raw tensor Hom by the balanced additive map b tensor f ↦ eE(b) F(f). Tensor induction proves identities, composition, additivity and E-linearity. For the representative relation, apply F, cancel the unit image of t^k, and multiply by t^(-(n+m)); this gives equality of the displayed fraction images, including torsion and zero-ring cases. At denominator one the comparison is the identity natural isomorphism.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of Tags 015F and 05R6, Homology 010N and sheaf localization 03ET; explicit raw fraction calculation for the functor in Bhatt–Scholze Proposition 6.8.14(2)."
+   }
+  },
+  {
+   "text": "Use the proof of lem-weil-linear-scalar-localization-triangulated with its induced shifts in every integer degree, retaining the definitional formula for all shifts. The tensor-Hom comparison with rationalization proves the raw functor Q is a localization. Descend the shift comparison of F through Q; its components reduce to those of F because the comparison for Q and the denominator-one factorization are identities. A distinguished raw triangle is isomorphic to Q of an integral distinguished triangle, whose image under the descended functor is distinguished. Thus the explicit fraction functor is triangulated.",
+   "uses": [
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Assembly of Tags 015F and 05R6, Homology 010N and sheaf localization 03ET; explicit raw fraction calculation for the functor in Bhatt–Scholze Proposition 6.8.14(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-linear-scalar-localization",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-scalar-localization-coefficient-actions",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-scalar-localization-sheaf-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "C6: exact termwise derived functor and uniqueness of left derived functors (015F); explicit balanced tensor fraction functor and localization-induced shifts (05R6), with the all-degree refinement of the existing raw triangulation proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For continuous l adic coefficient sheaves, exact inversion of a uniformizer induces a triangulated derived functor, computed termwise, commuting naturally with all cohomology sheaves",
+   "results": "8 hits: localCohomology.diagram, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory.  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId.  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Linear, CategoryTheory.Functor.IsTriangulated",
+   "results": "0 hits: .  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An A linear triangulated subcategory of derived continuous integral coefficient sheaves has a rational scalar extension functor computed termwise, with natural cohomology comparison and explicit fraction formula",
+   "results": "8 hits: DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE.  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf localization away from a central scalar defines an exact functor from any linear triangulated subcategory to derived modules over the localized ring and descends to fractions",
+   "results": "8 hits: CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinear, CategoryTheory.Localization.functor_linear_iff.  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|localizedModule_functor_map_exact|scalar.*localiz",
+   "results": "25 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Module/LocalizedModule/Basic.lean.  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact sheaf scalar localization on a small ringed site induces a triangulated derived functor with cohomology comparison and a linear extension to fraction morphisms",
+   "results": "8 hits: LinearMap.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, PresheafOfModules.Sheafify.map_smul_eq, SheafOfModules.restrictScalars, LocalizedModule.smulOfIsLocalization, PresheafOfModules.Sheafify.SMulCandidate.h, LinearEquiv.extendScalarsOfIsLocalization.  No hit combines the actual sheaf localization, derived cohomology and raw triangulated fraction descent.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|localizedModule_functor_map_exact|scalar.*localiz",
+   "results": "25 hits: Mathlib/NumberTheory/RamificationInertia/Unramified.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean. Read the returned hits: these cover general exact derived functors, ordinary module localization, or categorical linear localization, not the actual sheaf scalar extension with every comparison and raw fraction clause of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization on module sheaves is exact and its unbounded derived functor descends linearly to fractions in a triangulated category",
+   "results": "8 hits: LocalizedModule.map_exact, IsLocalizedModule.map_exact, ModuleCat.localizedModule_functor_map_exact, localizedModuleIsLocalizedModule, ModuleCat.localizedModuleMkLinearMap, exact_of_localized_span, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.localizedModule_functor. Read the returned hits: these cover general exact derived functors, ordinary module localization, or categorical linear localization, not the actual sheaf scalar extension with every comparison and raw fraction clause of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "12 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.mapDerivedCategoryIdIso, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.NatTrans.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpMapDerivedCategoryId. Read the returned hits: these cover general exact derived functors, ordinary module localization, or categorical linear localization, not the actual sheaf scalar extension with every comparison and raw fraction clause of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension of scalars for sheaves after inverting a global section induces a linear triangulated functor computed termwise and commuting with cohomology",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Sheaf.cohomologyPresheafFunctor, DerivedCategory.instLinearCochainComplexIntQ. Read the returned hits: these cover general exact derived functors, ordinary module localization, or categorical linear localization, not the actual sheaf scalar extension with every comparison and raw fraction clause of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A linear triangulated functor whose target inverts a central scalar extends uniquely to the raw localization of hom modules with formula F(f divided by s power n) equals s inverse power n times F(f)",
+   "results": "8 hits: CategoryTheory.Localization.linear, CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Shift.linear_of_localization, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.instLinearLocalization', CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.instLinearLocalization. Read the returned hits: these cover general exact derived functors, ordinary module localization, or categorical linear localization, not the actual sheaf scalar extension with every comparison and raw fraction clause of this item.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rational-module-realization-functor",
+  "date": "2026-10-22",
+  "group": "Q136"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-smooth-pullback-t-exact",
+   "place": "First proof paragraph, the claim that cohomology sheaves of $Lf^*K$ are pullbacks: comparison between the raw rational category and continuous-coefficient sheaves, before the degree-zero calculation. Factorization of the continuous realization input: Construction and cohomology of raw rational module realization. Retained item proof steps 1, 2, 3. Retained proof steps 2, 3, 7 and 8: exact termwise/K-flat comparison, cohomology, linear fraction descent and distinguished triangles.",
+   "via": [
+    "lem-per-rational-module-realization-functor",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-smooth-pullback-support-dimension"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-per-rational-continuous-coefficient-derived-localization",
+  "worker": "stage1",
+  "summary": "Read the current blueprint, Bhatt–Scholze 6.8.2/6.8.14 and Stacks 015F/010N/05R6. Reuse actual sheaf-localization exactness and generic exact-derived comparison nodes; give explicit scalar and raw fraction calculations. Statement and statement dependencies unchanged; no new nodes.",
+  "blueprint": "Nearest ancestor lem-per-smooth-pullback-t-exact, first proof paragraph: cohomology sheaves of Lf^*K are pullbacks. This item supplies the exact scalar-localization realization used before that comparison, through its inherited chain of four intermediate nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-scalar-localization-sheaf-exact",
+    "why": "Generic exactness of actual change of rings on any small ringed site; the perverse unit has no competing sheaf-localization lemma."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic universal left-derived property of a termwise exact functor, needed to compare its normalized K-flat model; not a replacement of the perverse argument."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat construction and model normalization for actual change of rings, already part of the item statement."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic existence and description of the triangulation on raw scalar localization, with the linear-shift hypotheses verified."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Only its canonical symmetry is used to identify left and right conventions for actual scalar extension, not its closedness assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-scalar-localization-sheaf-exact",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-linear-scalar-localization-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q95-cc604e31f",
+  "group": "Q95",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-cc604e31f (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full against each cited statement (12 deps), Bhatt–Scholze 6.8.2/6.8.14(2), and Stacks 015F, 010N, 05R6 and 03ET (labels verified). The delivery has 0 new nodes, and statement and stmt_deps are unchanged. proof_deps equals the union of the step uses, there is no SGA citation and no cycle (only the parent rational-module-realization cites the item). The statement fits the parent's use (R=B_X, S=E_X, C=D^b_c). I tested the punctual site with R=A, R=A/ϖ and R=0 (S=0), and C={0}; the fraction equality criterion is exact for Hom⊗_A A[1/ϖ]. Steps 1, 2 and 4–8 are correct, and I checked them in detail: the comparison c_K = φ⁻¹Q(Tp)ε_P F(Qp)⁻¹, scalar centrality, cohomology descent via the natural-iso lifting clause, the ϖ^{n+m+t} computation, and shift naturality and triangle images. FIX in Step 3: lem-pur-derived-change-of-rings states F as a derived functor on K(R), while Step 2 is a Kan extension along CoCh(R). I added one elementary sentence: CoCh(R)→K(R) is the identity on objects and full, so the two universal properties coincide. The tool_uses are accepted as generic black boxes. No duplicate found among the pro-étale realization nodes. Fixed item at fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-rational-continuous-coefficient-derived-localization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalContinuousCoefficientDerivedLocalization",
+  "declaration": "CategoryTheory.rationalContinuousCoefficient_derivedLocalization",
+  "declarations": [
+   "CategoryTheory.scalarLocalizationSectionsMap_memOfUniverses",
+   "CategoryTheory.scalarLocalizationSectionsMapOfUniverses",
+   "CategoryTheory.scalarLocalizationCoefficientLinearOfUniverses",
+   "CategoryTheory.scalarLocalizationDerivedLinearOfUniverses",
+   "CategoryTheory.scalarLocalizationSections_isUnitOfUniverses",
+   "CategoryTheory.scalarLocalizationCoefficientMapOfUniverses",
+   "CategoryTheory.continuousCoefficientRestrictLinear",
+   "CategoryTheory.ContinuousScalarLocalizationAssertions",
+   "CategoryTheory.rationalContinuousCoefficient_derivedLocalization"
+  ],
+  "file": "lean/Sheaf/Paper/RationalContinuousCoefficientDerivedLocalization.lean",
+  "statement": "theorem rationalContinuousCoefficient_derivedLocalization (l : ℕ) [Fact l.Prime] (E : Type v) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (R : Sheaf J CommRingCat.{u}) (a : Padic.coefficientExtensionIntegers l E →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) [HasDerivedCategory.{wR} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasDerivedCategory.{wS} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj (ringedLocalizationRingOfUniverses R (a (Padic.coefficientExtensionUniformizer l E)))))] (d : SheafOfModules.DerivedChangeOfRingsCochainModel (ringedLocalizationRingUnitOfUniverses R (a (Padic.coefficientExtensionUniformizer l E)))) : ∃ eE : Localization.Away (Padic.coefficientExtensionUniformizer l E) ≃ₐ[ Padic.coefficientExtensionIntegers l E] E, ContinuousScalarLocalizationAssertions (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionUniformizer l E) E eE.toRingEquiv R a d",
+  "branch": "sheaf-dag",
+  "by": "Q113",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bca4c316",
+  "group": "Q113",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN c42d: the record of def-weil-pbc-scalar-localization-coefficient-actions is byte-identical to live (cmp), and all 13 dependency copies match live. The six OfUniverses helpers moved into the item module, textually identical apart from the blueprint docstrings, and listed in lean.declarations. No name clash in live; they are needed because the live module is C : Type u, SmallCategory. Item statement, stmt_deps and main signature are unchanged; lean.statement is now verbatim multiline. Clause check: d ranges over universal pairs; e is fixed by ε (and the K-flat formula follows); e0 is fixed via mapDerivedCategorySingleFunctor 0; h r is fixed via mapDerivedCategoryHomologyFunctorIso; vanishing holds on any Set ℤ; 𝒞 is any IsTriangulated P; the raw shift and distinguished triangles are fixed; G is fixed by hobj and b⊗f ↦ eE b • F f; universes uC vC u v wR wS are independent. Edge cases R=0, ϖ↦0, empty site, 𝒞={0}, n=0 and torsion are all allowed. Mechanical theorem stmt_dep lem-weil-l-adic-integers-localization-uniformizer: its module has no definitions; the item depends on the A-algebra iso A[1/ϖ]≃E that the theorem constructs (re-quantified as ∃ eE): PASS on that point. No compile (no file changed); worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C6",
+  "result": "pass",
+  "landing": "20261024T184745-L-3168347",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

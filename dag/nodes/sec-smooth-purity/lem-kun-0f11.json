@@ -120,7 +120,18 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
@@ -165,5 +176,27 @@
   "landing": "20261019T192847-L-1876935",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "proof"
+  ],
+  "statement": "Let $n\\ge1$, and let $f:X\\to Y$ be a\nquasi-compact and\nquasi-separated morphism with $\\kuncd(f)<\\infty$.\n\n1. **(1)** $Rf_*:D(X_{\\Et},\\kunZn)\\to D(Y_{\\Et},\\kunZn)$ commutes with\nset-indexed direct sums.\n1. **(2)** If $X$ is a qcqs scheme with $\\kuncd(X)<\\infty$, then\n$\\RGamma(X_{\\Et},-):D(X_{\\Et},\\kunZn)\\to D(\\kunZn)$ commutes with\nset-indexed direct sums.",
+  "proof": [
+   {
+    "text": "*Step 1 (sheaves).* A set-indexed direct sum of torsion sheaves is\nthe filtered colimit of its finite partial sums, with split-injective\ntransition maps, so for every $q$ the canonical map\n\n$$\n\\bigoplus_iR^qf_*F_i\\longrightarrow\nR^qf_*\\Bigl(\\bigoplus_iF_i\\Bigr)\n$$\n\nis an isomorphism by\n[lemma-weil-pbc-direct-image-filtered-colimit] (and the same argument\nwith $f$ the structure morphism gives the statement for\n$\\RGamma(X_{\\Et},-)$).\n*Step 2 (complexes).* For $K_i\\in D(X_{\\Et},\\kunZn)$ ([def-weil-pbc-derived-categories]) the\nhypercohomology spectral sequences of\n[thm-sp-truncation-e2] for the $K_i$ and for\n$\\bigoplus_iK_i$ have $E_2$-pages $R^pf_*\\mathcal H^q(K_i)$\nrespectively $R^pf_*\\mathcal H^q(\\bigoplus_iK_i)$, and\n$\\mathcal H^q(\\bigoplus_iK_i)=\\bigoplus_i\\mathcal H^q(K_i)$, so Step 1\nidentifies the second $E_2$-page with the direct sum of the first.\nThe truncation construction of the spectral sequence is compatible with\ndirect sums, so the spectral sequence of the direct sum is the direct\nsum of the spectral sequences; both converge in the half-plane sense of\n[lemma-weil-pbc-hypercohomology-convergence] (half-plane, since\n$p\\ge0$), and a direct sum of separated exhaustive filtrations is\nseparated and exhaustive. Hence the abutments agree, i.e.\n\n$$\n\\mathcal H^n\\Bigl(Rf_*\\bigoplus_iK_i\\Bigr)\n\\cong\\bigoplus_i\\mathcal H^n(Rf_*K_i)\n\\qquad(n\\in\\mathbf Z),\n$$\n\nwhich is the direct-sum statement; the finite-dimensionality hypothesis\n$\\kuncd(f)<\\infty$ of [def-kun-cd] is not needed for the argument\nand is retained only to match the classical formulation.",
+    "uses": [
+     "lemma-weil-pbc-direct-image-filtered-colimit",
+     "def-weil-pbc-derived-categories",
+     "thm-sp-truncation-e2",
+     "lemma-weil-pbc-hypercohomology-convergence",
+     "def-kun-cd"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

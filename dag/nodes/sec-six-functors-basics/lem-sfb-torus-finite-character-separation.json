@@ -1,0 +1,245 @@
+{
+ "id": "lem-sfb-torus-finite-character-separation",
+ "kind": "statement",
+ "title": "A rational torus point separates finitely many distinct algebraic characters",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $r\\geq0$ be an integer, and let $T$ be a $k$-group scheme [def-sc-group-scheme] isomorphic to $(\\mathbf G_{m,k})^r$, where $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga] for every commutative $k$-algebra $A$. A character of $T$ means a homomorphism of $k$-group schemes $\\chi:T\\to\\mathbf G_{m,k}$. For every finite set $\\Omega$ of pairwise distinct characters of $T$, there exists $s\\in T(k)$ such that $\\chi_k(s)\\ne\\psi_k(s)$ whenever $\\chi,\\psi\\in\\Omega$ and $\\chi\\ne\\psi$. Equivalently, evaluation at $s$ is injective on $\\Omega$. The assertion includes $r=0$ and $\\Omega=\\varnothing$, and imposes no characteristic restriction.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.42, proof, printed p.339: the proper closed character-equality loci S_ij and the choice of s outside their finite union; character and split-torus conventions in Theorem 12.9 and Definition 12.14, printed pp.233--236."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Fix an isomorphism $\\iota:(\\mathbf G_m)^r\\xrightarrow{\\sim}T$. By [lem-sfb-split-torus-hom-matrices] with target rank $1$, each $\\chi\\circ\\iota$ has a unique exponent vector $n_\\chi\\in\\mathbf Z^r$, with value $\\prod_a t_a^{n_{\\chi,a}}$ on every algebra. Distinct characters have distinct vectors, since composition with an isomorphism is injective. If $r=0$, there is only the empty vector, hence at most one character; the identity point suffices. Henceforth $r>0$.",
+   "uses": [
+    "lem-sfb-split-torus-hom-matrices"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), printed pp.233–234; Lemma 16.42, proof, printed p.339 (distinct weights)."
+   }
+  },
+  {
+   "text": "The field $k$ is infinite: otherwise the nonconstant polynomial $\\prod_{a\\in k}(X-a)-1$ would have no root, contradicting algebraic closedness [def-weil-algebraic-closure]. Work in $R=k[X_1,\\ldots,X_r]$ [def-weil-pbc-mv-polynomial-ring]. For each ordered pair $(\\chi,\\psi)\\in\\Omega^2$ with $\\chi\\ne\\psi$, put $c_a=\\max(0,-n_{\\chi,a},-n_{\\psi,a})$ and $P_{\\chi\\psi}=X^{c+n_\\chi}-X^{c+n_\\psi}$. The exponents are nonnegative and distinct, so the coefficient at $c+n_\\chi$ is $1$; thus $P_{\\chi\\psi}\\ne0$ in every characteristic.",
+   "uses": [
+    "def-weil-algebraic-closure",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, proof, printed p.339: explicit polynomial equations for the character-equality loci; elementary coordinate expansion."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-polynomial-ring-domain], $R$ is an integral domain. Therefore the finite product $Q=(\\prod_{a=1}^r X_a)\\prod_{\\chi\\ne\\psi}P_{\\chi\\psi}$ is nonzero: each variable is nonzero by its coefficient $1$, every pair factor was proved nonzero, and induction on the finite family uses the absence of zero divisors. An empty pair product is $1$.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, proof, printed p.339: finite union of proper character-equality loci; coordinate product argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-mvpolynomial-infinite-evaluation] to $Q$ and $0$ over the infinite domain $k$. If $Q(t)=0$ for every $t\\in k^r$, that statement gives $Q=0$, a contradiction. Thus choose $t$ with $Q(t)\\ne0$. Since evaluation is a ring homomorphism [def-weil-pbc-mv-polynomial-ring], every $t_a$ and every $P_{\\chi\\psi}(t)$ is nonzero.",
+   "uses": [
+    "lem-sfb-mvpolynomial-infinite-evaluation",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, proof, printed p.339: choice of a rational point outside the finite union, expanded using polynomial evaluation."
+   }
+  },
+  {
+   "text": "The nonzero coordinates give $t\\in(\\mathbf G_m)^r(k)$; set $s=\\iota_k(t)$. For each distinct pair, $P_{\\chi\\psi}(t)=(\\prod_a t_a^{c_a})(\\chi_k(s)-\\psi_k(s))$. The first factor is a unit, so $P_{\\chi\\psi}(t)\\ne0$ implies $\\chi_k(s)\\ne\\psi_k(s)$. This proves injectivity on $\\Omega$; when $\\Omega$ is empty or a singleton the pairwise conclusion is vacuous and the identity point also works.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 16.42, proof, printed p.339: the chosen point separates all distinct weights; explicit cancellation of the denominator-clearing monomial."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-split-torus-hom-matrices",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-sfb-mvpolynomial-infinite-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Lemma 16.42, proof, printed p.339; Theorem 12.9(a), printed pp.233–234. Agent-written coordinate expansion of the finite closed-locus avoidance sentence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many distinct algebraic characters of a split torus over an algebraically closed field take pairwise distinct values at some rational point",
+   "results": "8 hits; UnitAddTorus.mFourierSubalgebra_separatesPoints, ax_grothendieck_univ, exists_linearIndependent_algEquiv_apply, RootPairing.IsValuedIn.exists_value, MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity, ax_grothendieck_of_locally_finite, Module.Dual.exists_forall_ne_zero_of_forall_exists, RootPairing.Base.exists_mem_span_pairingIn_ne_zero_and_pairwise_ne. Read returned signatures. Source subdirectory: whole Mathlib / remote index. Logged digest 646b3dc3258d5bff.",
+   "date": "2026-10-24",
+   "verdict": "no match: Additive analytic tori, character modules, finite monoid characters, linear functionals and polynomial evaluation do not state separation by one point of an algebraic torus; reducing to a polynomial or a linear functional is a proof, not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"character\", \"injective\"",
+   "results": "8 hits; CharacterModule.dual_injective_of_surjective, CharacterModule.dual_surjective_of_injective, CharacterModule.surjective_of_dual_injective, CharacterModule.dual_injective_iff_surjective, CharacterModule.dual_surjective_iff_injective, Module.Flat.iff_characterModule_injective, Module.Flat.injective_characterModule_iff_rTensor_preserves_injective_linearMap, DirichletCharacter.changeLevel_injective. Read returned signatures. Source subdirectory: whole Mathlib / remote index. Logged digest 2e7f717ffc9c874e.",
+   "date": "2026-10-24",
+   "verdict": "no match: Additive analytic tori, character modules, finite monoid characters, linear functionals and polynomial evaluation do not state separation by one point of an algebraic torus; reducing to a polynomial or a linear functional is a proof, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|algebraic.?character|diagonalizable.?group|character.*separat",
+   "results": "0 hits; none. Read returned signatures. Source subdirectory: AlgebraicGeometry. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: Additive analytic tori, character modules, finite monoid characters, linear functionals and polynomial evaluation do not state separation by one point of an algebraic torus; reducing to a polynomial or a linear functional is a proof, not a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many distinct characters of a split algebraic torus can be separated by evaluation at a single rational point over an algebraically closed field",
+   "results": "8 hits; UnitAddTorus.mFourierSubalgebra_separatesPoints, polynomialFunctions_separatesPoints, Polynomial.natSepDegree_eq_of_isAlgClosed, Subalgebra.SeparatesPoints, IsSepClosed.of_isAlgClosed, Polynomial.natSepDegree, Field.finSepDegree_eq_of_isAlgClosed, SeparableClosure.hasEnoughRootsOfUnity. Read returned signatures. Source subdirectory: whole Mathlib / remote index. Logged digest ec1b089d8b55baf0.",
+   "date": "2026-10-24",
+   "verdict": "no match: Additive analytic tori, character modules, finite monoid characters, linear functionals and polynomial evaluation do not state separation by one point of an algebraic torus; reducing to a polynomial or a linear functional is a proof, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point of a split torus avoids the kernels of finitely many nontrivial algebraic characters over an infinite field",
+   "results": "8 hits; Module.Dual.exists_forall_ne_zero_of_forall_exists, Module.exists_dual_forall_apply_ne_zero, UnitAddTorus.mFourierSubalgebra_separatesPoints, Module.Dual.exists_forall_mem_ne_zero_of_forall_exists, RootPairing.exists_coroot_ne, ClassGroup.prod_finsetApprox_ne_zero, MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity, groupCohomology.Hilbert90.aux_ne_zero. Read returned signatures. Source subdirectory: whole Mathlib / remote index. Logged digest 3f76f0138ab501ce.",
+   "date": "2026-10-24",
+   "verdict": "no match: Additive analytic tori, character modules, finite monoid characters, linear functionals and polynomial evaluation do not state separation by one point of an algebraic torus; reducing to a polynomial or a linear functional is a proof, not a one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|character.*separat|separat.*character",
+   "results": "0 hits; none. Read returned signatures. Source subdirectory: RepresentationTheory. Logged digest 4f53cda18c2baa0c.",
+   "date": "2026-10-24",
+   "verdict": "no match: Additive analytic tori, character modules, finite monoid characters, linear functionals and polynomial evaluation do not state separation by one point of an algebraic torus; reducing to a polynomial or a linear functional is a proof, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many distinct characters of a split algebraic torus over an algebraically closed field can be separated by one rational point",
+   "results": "{\"t\": \"2026-10-23T22:10:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many distinct characters of a split algebraic torus over an algebraically closed field can be separated by one rational point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"UnitAddTorus.mFourierSubalgebra_separatesPoints\", \"krullTopology_isTotallySeparated\", \"fourierSubalgebra_separatesPoints\", \"ax_grothendieck_univ\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"MulChar.finite\", \"Module.Dual.exists_forall_ne_zero_of_forall_exists\", \"ax_grothendieck_of_locally_finite\"], \"digest\": \"59fe4844194cf1c1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic tori and Krull spaces concern different objects; module-dual avoidance requires linear functionals, while torus characters are Laurent monomials; finite monoid characters and root-pairing results do not give simultaneous algebraic-torus separation."
+  },
+  {
+   "tool": "loogle",
+   "query": "MulChar, UnitAddTorus, polynomialFunctions_separatesPoints",
+   "results": "{\"t\": \"2026-10-23T22:10:12Z\", \"tool\": \"loogle\", \"query\": \"MulChar, UnitAddTorus, polynomialFunctions_separatesPoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: combined query returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|character.*separat|finite.*closed",
+   "results": "{\"t\": \"2026-10-23T22:10:12Z\", \"tool\": \"grep\", \"query\": \"torus|character.*separat|finite.*closed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/AlgClosed/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"f0de569d3d767f4b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned finite-type/closed-point geometry hits or the empty RepresentationTheory search; no algebraic-torus character separation theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A point avoids the kernels of finitely many nontrivial characters of a split torus over an infinite field",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"leanfinder\", \"query\": \"A point avoids the kernels of finitely many nontrivial characters of a split torus over an infinite field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Dual.exists_forall_ne_zero_of_forall_exists\", \"Module.exists_dual_forall_apply_ne_zero\", \"Module.Dual.exists_forall_mem_ne_zero_of_forall_exists\", \"MulChar.exists_apply_ne_one_of_hasEnoughRootsOfUnity\", \"RootPairing.exists_coroot_ne\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"ClassGroup.prod_finsetApprox_ne_zero\", \"CharacterModule.exists_character_apply_ne_zero_of_ne_zero\"], \"digest\": \"f246e234e3c94c92\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: analytic tori and Krull spaces concern different objects; module-dual avoidance requires linear functionals, while torus characters are Laurent monomials; finite monoid characters and root-pairing results do not give simultaneous algebraic-torus separation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many distinct algebraic characters of a split torus take distinct values at one point",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"leansearch\", \"query\": \"Finitely many distinct algebraic characters of a split torus take distinct values at one point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulChar.noConfusion\", \"MulChar.noConfusionType\", \"AddChar.linearIndependent\", \"AddChar.instFintype\", \"MulChar.finite\", \"AddChar.instFintype.congr_simp\", \"MulChar.instFunLike\", \"WeakDual.CharacterSpace.instAlgHomClass\"], \"digest\": \"4c14df0b9590a387\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned character datatype, finite-character and character-space declarations do not state simultaneous separation by a torus point."
+  },
+  {
+   "tool": "grep",
+   "query": "torus|character.*separat|separat.*character",
+   "results": "{\"t\": \"2026-10-23T22:11:09Z\", \"tool\": \"grep\", \"query\": \"torus|character.*separat|separat.*character\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: inspected returned finite-type/closed-point geometry hits or the empty RepresentationTheory search; no algebraic-torus character separation theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-torus-regular-semisimple-element",
+  "date": "2026-10-24",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Corollary 13.10, printed p.257 (smoothness); Theorem 17.38, printed p.363 (connectedness), applied after extension to an algebraic closure; Proposition 1.92 and following paragraph, printed pp.33--34 (centralizer functor). Supporting input for the centralizer proof: Lemma 16.42 and its proof, printed p.339: a faithful representation and separation of its finitely many torus weights. The conclusion is equality of centralizer schemes, not just equality on field-valued points. Supporting input: Lemma 16.42, proof, choosing s outside the finitely many character-equality loci S_ij.",
+   "via": [
+    "lem-sfb-torus-regular-semisimple-element",
+    "lem-sfb-torus-centralizer-smooth-connected",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-torus-finite-character-separation",
+  "worker": "stage1",
+  "summary": "Expanded Milne 16.42 finite character-equality-locus avoidance in explicit monomial coordinates, reusing the existing torus hom-matrix theorem and polynomial-domain/evaluation leaves. Preserved the statement and all characteristics, treated rank zero and empty character families, and created no nodes.",
+  "blueprint": "Inherited support chain recorded in blueprint.from.place: det-thm-sf-ctf-stability-direct-images proof (3), alteration input, through the torus-centralizer argument of Milne Lemma 16.42. Steps 1–5 supply precisely its choice of s outside the character-equality loci; current latest unit sk-thm-sf-ctf-stability read. blueprint_refs ancestor returns None, retained as imported; searches for torus, Laurent, monomial, character and evaluation found no blueprint duplicate."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-775947181",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-775947181 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The live node is still unsplit with an identical statement, stmt_deps and source, so the statement is preserved and nothing supersedes it, and there is no repair note. The source checks out: Milne iAG2017 Lemma 16.42 proof, printed p.339 (the proper closed character-equality loci S_ij, with s chosen outside their finite union); the five steps are a correct coordinate expansion of that sentence. Step 1 uses lem-sfb-split-torus-hom-matrices with target rank 1 to get unique exponent vectors, which are distinct because ι is an isomorphism; r=0 is handled. Step 2 (elementary): k is infinite because prod(X-a)-1 would have no root, contradicting def-weil-algebraic-closure; after the shift c, P_chipsi has coefficient 1, so it is nonzero in every characteristic. Step 3: lem-weil-pbc-polynomial-ring-domain makes the product Q nonzero. Step 4: lem-sfb-mvpolynomial-infinite-evaluation applied to Q and 0 gives t with Q(t)≠0. Step 5: P(t)=t^c(chi(s)-psi(s)) with t^c a unit. proof_deps equals the union of the step uses and there is no cycle. Two cited nodes are in the same unit and the other three are Mathlib leaves, so no tool_uses are needed. A DAG-wide search for a torus character-separation statement found no duplicate. Edge cases checked: r=0, empty or singleton Omega, negative exponents, X^p-1 in characteristic p, and the algebraic closure of F_p. No SGA is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorusFiniteCharacterSeparation",
+  "declaration": "AlgebraicGeometry.exists_torus_point_injOn_characters",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorusFiniteCharacterSeparation.lean",
+  "statement": "theorem exists_torus_point_injOn_characters {k : Type u} [Field k] [IsAlgClosed k] (r : ℕ) (T : Grp (Over (Spec (.of k)))) (hT : Nonempty (T ≅ MultiplicativeType.splitTorus k r)) (Ω : Set (T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k))) (hΩ : Ω.Finite) : ∃ s : StandardGroupSchemes.affine k k ⟶ T.X, Set.InjOn (fun χ : T ⟶ Grp.mk (StandardGroupSchemes.multiplicative k) ↦ s ≫ χ.hom.hom) Ω",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b6f7974",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Every clause matches the node: IsAlgClosed k with no characteristic restriction; r:ℕ including 0; T : Grp (Over (Spec k)) with Nonempty (T ≅ splitTorus k r) as an iso of group schemes; characters are Grp morphisms to the Laurent G_m; Ω is a finite Set (empty allowed); s : affine k k ⟶ T.X is a k-point; the conclusion InjOn (s ≫ χ.hom.hom) on Ω has the node's quantifier order. Edge cases r=0, |Ω|≤1, char p and negative exponents are covered; single universe u. No new defs; inlining the raw hom type is consistent with the RankOneRoots/TrivialTorus Character abbrevs of uncited nodes; no duplicate declaration found. Node diff vs live is only stmt_deps (+def-sfb-tori-multiplicative-type, already landed and used for splitTorus) and lean; lean.statement is verbatim. Docstrings give the Milne 16.42 p.339 source place, the blueprint tag and all 5 proof steps; proof is sorry; report has Worker report and Second reading sections. No files changed, so no compile; advisory: proof dep lem-sfb-split-torus-hom-matrices has no Lean record yet."
+ }
+}

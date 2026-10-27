@@ -12,11 +12,10 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
-import Sheaf.Paper.ProEtaleConstantModuleEncoding
-import Sheaf.Paper.CompletionTriangleComparison
-import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
+import Sheaf.Paper.CompleteIntegralResidueFunctor
+import Sheaf.AlgebraicGeometry.PullbackBoundedConstructible
+import Mathlib.CategoryTheory.Triangulated.Adjunction
+public import Mathlib.Order.CompletePartialOrder
 
 /-! # Triangle closure of the complete integral residue class
 
@@ -78,6 +77,54 @@ def integralResidueClass (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     ObjectProperty (DerivedCategory (AdicCompletion.Modules l E X)) :=
   fun K ↦ IsDerivedComplete l E X K ∧ integralResidueEtaleOrigin l E X K
 
+-- The maximal ideal is the open norm ball of radius one, so its quotient is discrete.
+private theorem residue_discrete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    DiscreteTopology (Padic.coefficientExtensionRing l E 1) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let I := Padic.coefficientExtensionIdeal l E 1
+  apply QuotientAddGroup.discreteTopology (N := I.toAddSubgroup)
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hi : I = Padic.coefficientExtensionMaximalIdeal l E := by
+    change Ideal.span {Padic.coefficientExtensionUniformizer l E} ^ 1 = _
+    rw [pow_one, hgen]
+  have hs : (I.toAddSubgroup : Set (Padic.coefficientExtensionIntegers l E)) =
+      {x : Padic.coefficientExtensionIntegers l E | ‖(x : E)‖ < 1} := by
+    ext x
+    change x ∈ I ↔ ‖(x : E)‖ < 1
+    rw [hi]
+    exact h.2.1 x
+  rw [hs]
+  exact isOpen_lt (continuous_norm.comp continuous_subtype_val) continuous_const
+
+-- Normalization fixes the coefficient map on generators of the constant sheaf.
+private theorem encoding_forward_eq (A : Type u) [CommRing A] [TopologicalSpace A]
+    [IsTopologicalRing A] (X : Scheme.{u}) (e f : FiniteDiscreteOrdinary.Encoding A X) :
+    e.ordinary.functor ⋙ e.fixed.functor = f.ordinary.functor ⋙ f.fixed.functor := by
+  have hr : e.ringIso.hom = f.ringIso.hom := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext (Scheme.ProEt.topology X) _ _
+      (FiniteDiscreteOrdinary.sectionRing A X).property
+    ext U a
+    exact (e.normalization U a).trans (f.normalization U a).symm
+  have hi : e.ringIso = f.ringIso := Iso.ext hr
+  rw [e.ordinary_functor, f.ordinary_functor, e.fixed_functor, f.fixed_functor, hi]
+
+private theorem encoding_derived_forward_eq (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A] (X : Scheme.{u})
+    (e f : FiniteDiscreteOrdinary.Encoding A X) :
+    e.fixedDerived.functor = f.fixedDerived.functor := by
+  change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory =
+    (f.ordinary.functor ⋙ f.fixed.functor).mapDerivedCategory
+  congr 1
+  exact encoding_forward_eq A X e f
+
+set_option linter.unusedVariables false in
 /-- The complete integral residue class contains zero and is stable under isomorphisms,
 all integer shifts, and any two vertices of an ambient distinguished triangle.
 In particular, if its first and third vertices belong, the middle vertex is complete
@@ -130,6 +177,75 @@ theorem integralResidueClass_triangle_closure (l : ℕ) [Fact l.Prime]
           integralResidueClass l E X T.obj₁) ∧
         (integralResidueClass l E X T.obj₁ → integralResidueClass l E X T.obj₃ →
           IsDerivedComplete l E X T.obj₂ ∧ integralResidueEtaleOrigin l E X T.obj₂)) := by
-  sorry
+  classical
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let : Finite (Padic.coefficientExtensionRing l E 1) :=
+    Padic.finite_coefficientExtensionRing l E 1 (Nat.le_refl 1)
+  obtain ⟨_, _, hc, ht, _⟩ :=
+    CompleteIntegralResidue.complete_integral_residue_functor l E X
+  let := hc
+  let := ht
+  have : DiscreteTopology (Padic.coefficientExtensionRing l E 1) := residue_discrete l E
+  obtain ⟨e⟩ := FiniteDiscreteOrdinary.encoding_exists
+    (Padic.coefficientExtensionRing l E 1) X
+  -- Exact restriction gives exactness of its left adjoint, with compatible shifts.
+  let adj := Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X 0)
+  let := adj.leftAdjointCommShift ℤ
+  have := adj.commShift_of_rightAdjoint ℤ
+  have : (AdicCompletion.derivedReduction l E X 0).IsTriangulated :=
+    adj.isTriangulated_leftAdjoint
+  have : e.fixedDerived.functor.IsTriangulated := by
+    change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory.IsTriangulated
+    infer_instance
+  let F := AdicCompletion.derivedReduction l E X 0 ⋙ e.fixedDerived.functor ⋙
+    (@finiteCoefficientRealization X
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) _ _ ⊥
+      (discreteTopology_bot _)).mapDerivedCategory
+  let P := @isBoundedConstructibleFiniteCoefficient X
+    (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) _ _ ⊥
+    (discreteTopology_bot _)
+  have : P.IsTriangulated :=
+    @isBoundedConstructibleFiniteCoefficient_isTriangulated X
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) _ _ ⊥
+      (discreteTopology_bot _)
+  have : P.IsClosedUnderIsomorphisms := by
+    dsimp [P, isBoundedConstructibleFiniteCoefficient]
+    infer_instance
+  have : (@finiteCoefficientRealization X
+      (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) _ _ ⊥
+      (discreteTopology_bot _)).mapDerivedCategory.IsTriangulated := by infer_instance
+  have : F.IsTriangulated := by dsimp only [F]; infer_instance
+  -- Every normalized encoding has the same forward functor; fix any witness.
+  have heq : integralResidueClass l E X = IsDerivedComplete l E X ⊓ P.inverseImage F := by
+    funext K
+    apply propext
+    apply and_congr Iff.rfl
+    change (∃ f : FiniteDiscreteOrdinary.Encoding (Padic.coefficientExtensionRing l E 1) X,
+      P ((@finiteCoefficientRealization X
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E 1)) _ _ ⊥
+        (discreteTopology_bot _)).mapDerivedCategory.obj
+          (f.fixedDerived.functor.obj ((AdicCompletion.derivedReduction l E X 0).obj K)))) ↔ _
+    constructor
+    · rintro ⟨f, hf⟩
+      rw [encoding_derived_forward_eq _ X f e] at hf
+      exact hf
+    · intro hK
+      exact ⟨e, hK⟩
+  have : (integralResidueClass l E X).IsTriangulated := by
+    rw [heq]
+    infer_instance
+  have : (integralResidueClass l E X).IsClosedUnderIsomorphisms := by
+    rw [heq]
+    infer_instance
+  refine ⟨ObjectProperty.prop_zero _, ?_, ?_, ?_⟩
+  · intro K L i
+    exact (integralResidueClass l E X).prop_iff_of_iso i
+  · intro K n
+    exact (integralResidueClass l E X).prop_shift_iff_of_isStableUnderShift K n
+  · intro T hT
+    exact ⟨(integralResidueClass l E X).ext_of_isTriangulatedClosed₃ T hT,
+      (integralResidueClass l E X).ext_of_isTriangulatedClosed₂ T hT,
+      (integralResidueClass l E X).ext_of_isTriangulatedClosed₁ T hT,
+      (integralResidueClass l E X).ext_of_isTriangulatedClosed₂ T hT⟩
 
 end AlgebraicGeometry.ProEtale

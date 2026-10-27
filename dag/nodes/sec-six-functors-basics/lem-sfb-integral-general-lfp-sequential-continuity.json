@@ -1,0 +1,268 @@
+{
+ "id": "lem-sfb-integral-general-lfp-sequential-continuity",
+ "kind": "statement",
+ "title": "General-lfp integral complexes have sequential internal-Hom continuity",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ finite with valuation ring $R=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and $X$ a locally Noetherian, quasi-compact scheme [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. On the small pro-étale site [def-weil-pbc-proetale-site] put $B=p_X^*\\underline R$ [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use the ordinary unbounded derived category $D(B)$ [def-weil-abstract-derived-category] and $H_B=R\\mathcal Hom_B$ [sk-def-sfb-derived-tensor-hom]. Let $K\\in D(B)$ have bounded general-ring-object constructible cohomology [sk-def-sfb-bounded-constructible]: each cohomology sheaf admits a finite constructible locally closed stratification on whose strata it is pro-étale locally a cokernel $B^m\\to B^n$ with finite $m,n$ and arbitrary section-valued entries.\n\nThe underlying topological space of $X$ satisfies the descending chain condition on closed subsets. Each cohomology sheaf of $K$ admits a finite constructible stratification with pro-étale local models $B_V\\otimes_R P$, where $P$ is a finitely presented scalar $R$-module [sk-def-sfb-constructible]; torsion $P$ and degree-dependent stratifications are allowed. The category of $B$-module sheaves has exact small filtered colimits. For every sequential diagram $(M_n^\\bullet)$ of $B$-module complexes with a common termwise lower bound, the evaluation-induced map\n$$\\varinjlim_n H_B(K,M_n^\\bullet)\\longrightarrow H_B(K,\\varinjlim_n M_n^\\bullet)$$\nis an isomorphism in $D(B)$, independent of representatives. Colimits are exact termwise sheaf-module colimits, on the left using functorial internal-Hom representatives [def-weil-pbc-category-colimit]. No constructibility or completeness of $M_n$ is required.\n\nFor any complex $C$ representing $L\\in D(B)$ and any $c\\in\\mathbf Z$ with $H^q(L)=0$ for $q<c$, the complex $P$ defined by $P^q=0$ for $q<c$, $P^c=\\operatorname{coker}(d_C^{c-1})$, and $P^q=C^q$ for $q>c$, with induced differentials, receives a scalar-equivariant quasi-isomorphism $C\\to P$. Consequently the repeated-$\\ell$ tower on $P$ is a representative of the scalar tower on $L$ to which the displayed continuity isomorphism applies. No assumption beyond the cohomological lower bound is imposed on $L$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.11(3), pp. 60–61; agent extraction of the internal-sheaf continuity and general-lfp bridge, old item steps 1–4. Auxiliary source: Hemo–Richarz–Scholbach Theorems 4.13, 6.2(2)–(3); Stacks properties.tex Tag 01OZ, lemma-Noetherian-topology; homology.tex Tag 0118, section-truncations."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-constructible",
+  "def-weil-pbc-category-colimit",
+  "def-sfb-integral-condensed-ring"
+ ],
+ "proof": [
+  {
+   "text": "A quasi-compact locally Noetherian scheme is Noetherian. The existing Mathlib scheme instance gives NoetherianSpace X, which includes the descending-chain condition on closed subsets recorded in [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal].",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ, lemma-Noetherian-topology; descending-chain consequence of minimality"
+   }
+  },
+  {
+   "text": "For each degree $q$ with nonzero $H^q(K)$, apply implication (i)$\\Rightarrow$(ii) of [lem-sfb-integral-lfp-constant-model-comparison] to $M=H^q(K)$, $A=R$, and this Noetherian $X$. Its hypothesis (i) is exactly the assumed finite stratification with arbitrary section-valued finite presentation matrices. Its conclusion gives a finite constructible stratification and pro-étale local models $B_V\\otimes_R P$ for finitely presented scalar $R$-modules $P$. It allows torsion and does not require the old and new stratifications to coincide. Apply it separately in each of the finitely many relevant degrees; boundedness of the cohomology is unchanged. Hence $K$ has bounded cohomology constructible in the finite constant local model sense.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Theorem 6.2(2)–(3), Corollary 6.11(1); coefficient-specific general-lfp comparison isolated in the cited node, not asserted directly by the heart theorem"
+   }
+  },
+  {
+   "text": "Use the existing Grothendieck-abelian instance for internal module objects over the pulled-back commutative condensed ring. Its general categorical consequences give colimits and AB5 in the site universe; universe shrinking gives exact sequential colimits. Construct a functorial representative of derived Hom by functorial K-injective resolution followed by the ordinary Hom complex out of a homotopy representative of K. The right-derived-functor unit is invertible on K-injectives, and the resolution augmentation is a quasi-isomorphism. Their natural isomorphisms identify this model after localization with the existing derived internal Hom.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA, 03DB, 03EW; Grothendieck abelian module-sheaf category"
+   }
+  },
+  {
+   "text": "First identify the two existing models of the integral coefficient ring explicitly: the valuation subring of WithAbs E and the valuation subring of E with its transferred norm are isometrically ring-isomorphic, by the identity on underlying elements. Postcomposition on continuous maps produces an isomorphism of condensed rings. Restriction of scalars along its inverse is an exact monoidal equivalence, and preserves finite constant constructibility by the transport argument of [lem-sfb-condensed-coefficient-iso-constructible]. Tensor/Hom adjunctions identify the derived Hom functors under this equivalence. Use the cohomologically bounded diagram-continuity property proved inside [lem-sfb-constructible-internal-hom-continuity]: its closed-model, open-extension and triangulated generation steps give this stronger property before the final conversion from termwise bounds. Transport it through the coefficient equivalence. Lift the index category of natural numbers to the site universe and transfer the colimit cocone across that equivalence. For a termwise bounded-below diagram, the localized complexes have the same cohomological lower bound. Exact sequential colimits commute with cohomology; naturality of any representative identification e then shows that the canonical comparison is an isomorphism. Exact sequential colimits also preserve objectwise quasi-isomorphisms. For M to N, naturality of colimit.post transfers the colimit-cocone property to N even without a termwise bound on N. Compose the comparison for M, derived Hom of the localized colimit map, and the inverse comparison for N. Cancellation of the latter proves uniqueness of the required isomorphism.",
+   "uses": [
+    "lem-sfb-constructible-internal-hom-continuity",
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), internal-Hom filtered continuity; compare Bhatt–Scholze Lemma 6.8.12 (global direct sums only)"
+   }
+  },
+  {
+   "text": "For the final assertion construct $P$ with the terms in the statement. Since $d_C^c d_C^{c-1}=0$, $d_C^c$ factors through $C^c/\\operatorname{im}(d_C^{c-1})$ and defines $d_P^c$; its composite with $d_C^{c+1}$ is zero. Let $u:C\\to P$ be zero below $c$, the quotient map at $c$, and the identity above $c$. These formulas commute with differentials. At degree $c$ one has $\\ker(d_P^c)=\\ker(d_C^c)/\\operatorname{im}(d_C^{c-1})$ and no incoming image, so $H^c(u)$ is an isomorphism. At degree $c+1$, the image of $d_P^c$ is the image of $d_C^c$ because the quotient map is epic; in every higher degree the cohomology calculation is unchanged. Below $c$ both cohomologies vanish by hypothesis. Thus $u$ is a quasi-isomorphism by [def-weil-abstract-derived-category], including when $C$ itself is unbounded below.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical quotient truncation (with cohomological indexing)"
+   }
+  },
+  {
+   "text": "Every map in the construction of $u$ is $B$-linear, so $u\\circ\\ell=\\ell\\circ u$ in every degree: at $c$ this is $[\\ell x]=\\ell[x]$, and elsewhere it is immediate for zero or identity maps. Consequently the maps $u$ at all stages give a morphism from the repeated-$\\ell$ sequence of $C$ to that of $P$, each component a quasi-isomorphism. Under the localization [def-weil-abstract-derived-category] the latter sequence represents the scalar sequence of $L$. It has the common termwise lower bound $c$, so [lem-sfb-constructible-internal-hom-continuity], specialized exactly as in step 4, applies. Its representative-independence identifies the comparison with the one for the scalar sequence of $L$. This uses only the cohomological lower bound on $L$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, functoriality of canonical quotient truncation; HRS Lemma 5.3(2) for the continuity application"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-constructible-internal-hom-continuity",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "W4 Lean assembly of the six existing steps, using the native internal-module Grothendieck instance, the explicitly constructed isometric coefficient-ring identification, the cohomologically bounded continuity property inside the existing constructible-continuity proof, exact sequential colimits and the Mathlib good-truncation API. HRS Lemma 5.3(2), Theorem 6.2(2)-(3); Stacks 01OZ and 0118. No statement or definition changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from general locally finitely presented constructible integral pro-etale complexes preserves uniformly bounded below sequential colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"preservesColimit_coyoneda_of_finitePresentation\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    ∀ (F : CategoryTheory.Functor J (CategoryTheory.Under R))\\n      [CategoryTheory.Limits.PreservesColimit (\", \"doc\": \"Let $\\\\mathcal{J}$ be a filtered category, $R$ a commutative ring, and $S$ an object in the under category $R/\\\\mathcal{C}$ of commutative rings. If the ring homomorphism $\\\\text{Hom}(S)$ is finitely pre\"}\n  {\"name\": \"CommRingCat.preservesColimit_coyoneda_of_finitePresentation\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ {J : Type uJ} [inst : CategoryTheory.Category.{vJ, uJ} J] [CategoryTheory.IsFiltered J] (R : CommRingCat)\\n  (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    ∀ (F : CategoryTheory.Functor J (CategoryTheory.Under R))\\n      [CategoryTheory.Limits.PreservesColimit (\", \"doc\": \"In the category of commutative rings, if an object $ S $ in the under category of $ R $ is finitely presented over $ R $, then the coyoneda functor associated to $ S $ preserves colimits of diagrams $\"}\n  {\"name\": \"preservesFilteredColimits_coyoneda\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ (R : CommRingCat) (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.coyoneda.obj (Opposite.op S))\", \"doc\": \"For any commutative ring $ R $ and an object $ S = (T, f: R \\to T) $ in the under category of $ R $, if the ring homomorphism $ f $ is finitely presented, then the coyoneda functor applied to the oppos\"}\n  {\"name\": \"CommRingCat.preservesFilteredColimits_coyoneda\", \"module\": \"Mathlib/Algebra/Category/Ring/FinitePresentation\", \"type\": \"∀ (R : CommRingCat) (S : CategoryTheory.Under R),\\n  (CommRingCat.Hom.hom S.hom).FinitePresentation →\\n    CategoryTheory.Limits.PreservesFilteredColimits (CategoryTheory.coyoneda.obj (Opposite.op S))\", \"doc\": \"Let $ R $ be a commutative ring and $ S $ an object in the under category $ R/\\\\mathsf{CommRing} $. If the ring homomorphism $ S.\\\\mathsf{hom} : R \\\\to S $ is finitely presented, then the Coyoneda embedd\"}\n  {\"name\": \"Condensed.instAB5CondensedMod\", \"module\": \"Mathlib/Condensed/AB\", \"type\": \"∀ (R : Type (u + 1)) [inst : Ring R], CategoryTheory.AB5 (CondensedMod R)\", \"doc\": \"For any ring $ R $, the category of condensed modules over $ R $ satisfies the AB5 axiom, meaning it has all filtered colimits and these colimits are exact (preserve finite limits).\"}\n  {\"name\": \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightProfinite),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P.toCondensed) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStr\", \"doc\": \"Let $R$ be a commutative ring and $P$ be a light profinite space. The free light condensed $R$-module on the condensed set associated with $P$, denoted $\\\\mathcal{F}(P)$, is internally projective if an\"}\n  {\"name\": \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondSet),\\n  CategoryTheory.InternallyProjective ((LightCondensed.free R).obj P) ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : (LightCondensed.free R).obj (CategoryTheory.MonoidalCategoryStruct.tensorObj \", \"doc\": \"For any commutative ring $ R $, the category of light condensed $ R $-modules forms a monoidal closed category. This structure arises from the adjunction between sheafification and inclusion functors,\"}\n  {\"name\": \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"module\": \"Mathlib/Condensed/Light/InternallyProjective\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (P : LightCondMod R),\\n  CategoryTheory.InternallyProjective P ↔\\n    ∀ {A B : LightCondMod R} (e : A ⟶ B) [CategoryTheory.Epi e] (S : LightProfinite)\\n      (g : CategoryTheory.MonoidalCategoryStruct.tensorObj ((LightCondensed.free R).obj S.toCondensed) P ⟶ B),\\n     \", \"doc\": \"Let $R$ be a commutative ring. A light condensed $R$-module $P$ is internally projective if and only if for every epimorphism $e: A \\\\to B$ of light condensed $R$-modules, any light profinite space $S$\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf assertion or its representative and evaluation compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded constructible cohomology with arbitrary local presentation matrices over integral l-adic coefficients implies internal sheaf Hom continuity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LightCondMod.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(R : Type u) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → LightCondMod R\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructor form\"}\n  {\"name\": \"CondensedMod.ofSheafProfinite\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor Profiniteᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\text{Profinite}^\\\\text{op} \\\\to \\\\text{ModuleCat}\\\\, R $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constructs the correspondi\"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}\n  {\"name\": \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"∀ (R : Type u) [inst : Ring R],\\n  CategoryTheory.HasSheafify (CategoryTheory.coherentTopology LightProfinite) (ModuleCat R)\", \"doc\": \"For the coherent Grothendieck topology on the category of totally disconnected, second-countable compact Hausdorff spaces (light profinite spaces), there exists a sheafification functor from the categ\"}\n  {\"name\": \"LightCondMod\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [Ring R] → Type (u + 1)\", \"doc\": \"For a ring $ R $, the category of light condensed $ R $-modules, defined as the category of sheaves on the site of light profinite spaces with values in the category of left $ R $-modules. This is con\"}\n  {\"name\": \"LightCondAb.ofSheafLightProfinite\", \"module\": \"Mathlib/Condensed/Light/Explicit\", \"type\": \"(F : CategoryTheory.Functor LightProfiniteᵒᵖ (ModuleCat ℤ)) →\\n  [CategoryTheory.Limits.PreservesFiniteProducts F] → CategoryTheory.regularTopology.EqualizerCondition F → LightCondAb\", \"doc\": \"Given a functor $ F: \\\\mathbf{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{ModuleCat}\\\\, \\\\mathbb{Z} $ that preserves finite products and satisfies the Equalizer Condition for the regular topology, this constru\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"module\": \"Mathlib/Condensed/Light/AB\", \"type\": \"∀ {R : Type u} [inst : Ring R], CategoryTheory.IsGrothendieckAbelian.{u, u + 1, u + 1} (LightCondMod R)\", \"doc\": \"For any ring $ R $, the category of light condensed $ R $-modules is a Grothendieck abelian category. This follows from the fact that it is constructed as the category of sheaves on the site of light \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf assertion or its representative and evaluation compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"colimit\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.Finite.hasFiniteColimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : CategoryTheory.Limits.HasFiniteColimits (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hasColimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) [CategoryTheory.Limits.HasColimitsOfSize.{v₂, u₂, v, v + 1} AddCommGrpCat] : CategoryTheory.Limits.HasColimitsOfSize.{v₂, u₂, max u₁ v, max (max (max (v + 1) u) u₁) v₁} (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.hasColimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (J : Type u₂) [CategoryTheory.Category.{v₂, u₂} J] [CategoryTheory.Limits.HasColimitsOfShape J AddCommGrpCat] : CategoryTheory.Limits.HasColimitsOfShape J (PresheafOfModules R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) : CategoryTheory.Limits.PreservesFiniteColimits (PresheafOfModules.toPresheaf R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_preservesColimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) [CategoryTheory.Limits.HasColimitsOfSize.{v₂, u₂, v, v + 1} AddCommGrpCat] : CategoryTheory.Limits.PreservesColimitsOfSize.{v₂, u₂, max u₁ v, max u₁ v, max (max (max u u₁) (v + 1)) v₁, max (max u₁ (v + 1)) v\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.toPresheaf_preservesColimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (J : Type u₂) [CategoryTheory.Category.{v₂, u₂} J] [CategoryTheory.Limits.HasColimitsOfShape J AddCommGrpCat] : CategoryTheory.Limits.PreservesColimitsOfShape J (PresheafOfModules.toPresheaf R)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.Finite.evaluation_preservesFiniteColimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (X : Cᵒᵖ) : CategoryTheory.Limits.PreservesFiniteColimits (PresheafOfModules.evaluation R X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.evaluation_preservesColimitsOfSize\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) [CategoryTheory.Limits.HasColimitsOfSize.{v₂, u₂, v, v + 1} AddCommGrpCat] (X : Cᵒᵖ) : CategoryTheory.Limits.PreservesColimitsOfSize.{v₂, u₂, max u₁ v, v, max (max (max u u₁) (v + 1)) v₁, max u (v + 1)} (Pre\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.evaluation_preservesColimitsOfShape\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (R : CategoryTheory.Functor Cᵒᵖ RingCat) (J : Type u₂) [CategoryTheory.Category.{v₂, u₂} J] [CategoryTheory.Limits.HasColimitsOfShape J AddCommGrpCat] (X : Cᵒᵖ) : CategoryTheory.Limits.PreservesColimitsOfShape J (PresheafOfModules.evaluation R X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.evaluationJointlyReflectsColimits\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) (c : CategoryTheory.Limits.Cocone F) (hc : (X : Cᵒᵖ) → CategoryTheory.Limits.IsColimit ((PresheafOfModu\", \"doc\": \"A cocone in the category `PresheafOfModules R` is colimit if it is so after the application\\nof the functors `evaluation R X` for all `X`.\"}\n  {\"name\": \"PresheafOfModules.colimitPresheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ {X Y : Cᵒᵖ} (f : X ⟶ Y), CategoryTheory.Limits.PreservesColimit (F.comp (PresheafOfModules.evaluatio\", \"doc\": \"Given `F : J ⥤ PresheafOfModules.{v} R`, this is the presheaf of modules obtained by\\ntaking a colimit in the category of modules over `R.obj X` for all `X`.\"}\n  {\"name\": \"PresheafOfModules.colimitCocone\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ {X Y : Cᵒᵖ} (f : X ⟶ Y), CategoryTheory.Limits.PreservesColimit (F.comp (PresheafOfModules.evaluatio\", \"doc\": \"The (colimit) cocone for `F : J ⥤ PresheafOfModules.{v} R` that is constructed from\\nthe colimit of `F ⋙ evaluation R X` for all `X`.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf assertion or its representative and evaluation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|derivedHom|rhom).*(colimit|continu)|(constructible).*(hom|colimit)",
+   "results": "[grep] OK 22 hit(s)\n  {\"file\": \"Mathlib/Topology/Order/UpperLowerSetTopology.lean\", \"line\": \"427\", \"text\": \"@[simp] lemma map_id : map (OrderHom.id : α →o α) = ContinuousMap.id _ := rfl\"}\n  {\"file\": \"Mathlib/Topology/Order/UpperLowerSetTopology.lean\", \"line\": \"455\", \"text\": \"@[simp] lemma map_id : map (OrderHom.id : α →o α) = ContinuousMap.id _ := rfl\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Esakia.lean\", \"line\": \"274\", \"text\": \"theorem coe_id_continuousOrderHom : (EsakiaHom.id α : α →Co α) = ContinuousOrderHom.id α := rfl\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Esakia.lean\", \"line\": \"278\", \"text\": \"  ⟨g.toContinuousOrderHom.comp f.toContinuousOrderHom, fun a b h₀ => by\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Basic.lean\", \"line\": \"23\", \"text\": \"* `ContinuousOrderHom`: Continuous monotone functions, aka Priestley homomorphisms.\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Basic.lean\", \"line\": \"46\", \"text\": \"/-- `ContinuousOrderHomClass F α β` states that `F` is a type of continuous monotone maps.\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Basic.lean\", \"line\": \"88\", \"text\": \"/-- Reinterpret a `ContinuousOrderHom` as a `ContinuousMap`. -/\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Basic.lean\", \"line\": \"111\", \"text\": \"/-- Copy of a `ContinuousOrderHom` with a new `ContinuousMap` equal to the old one. Useful to fix\"}\n  {\"file\": \"Mathlib/Topology/Order/Hom/Basic.lean\", \"line\": \"114\", \"text\": \"  ⟨f.toOrderHom.copy f' h, h.symm.subst f.continuous_toFun⟩\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"687\", \"text\": \"    · simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe, Finset.mem_image, comp_apply,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"688\", \"text\": \"        BasicConstructibleSetData.map, RingHom.coe_coe, isEmptyRingEquiv_eq_coeff_zero, pow_one,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"696\", \"text\": \"    simp only [ConstructibleSetData.map, RingEquiv.toRingHom_eq_coe,\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean\", \"line\": \"721\", \"text\": \"          BasicConstructibleSetData.map, RingHom.coe_coe, S', e] at hxS\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean\", \"line\": \"67\", \"text\": \"    (isConstructible_comap_image (RingHom.finitePresentation_algebraMap.mpr ‹_›)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean\", \"line\": \"16\", \"text\": \"This file provides instances for when OrderHom.toFunctor preserves limits/colimits.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean\", \"line\": \"18\", \"text\": \"then `(toOrderHom f).toFunctor` preserves finite limits/colimits. If `f` preserves\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean\", \"line\": \"85\", \"text\": \"points, then the cofan constructed from `combPairHoms` is a colimit cocone. -/\"}\n  {\"file\": \"Mathlib/Order/OmegaCompletePartialOrder.lean\", \"line\": \"304\", \"text\": \"alias ⟨ωScottContinuous.map_ωSup_of_orderHom, ωScottContinuous.of_map_ωSup_of_orderHom⟩ :=\"}\n  {\"file\": \"Mathlib/Order/OmegaCompletePartialOrder.lean\", \"line\": \"488\", \"text\": \"This is just the bundled version of `OrderHom.continuous`. -/\"}\n  {\"file\": \"Mathlib/Order/OmegaCompletePartialOrder.lean\", \"line\": \"603\", \"text\": \"def id : α →𝒄 α := ⟨OrderHom.id, ωScottContinuous.id.map_ωSup⟩\"}\n  {\"file\": \"Mathlib/Order/OmegaCompletePartialOrder.lean\", \"line\": \"726\", \"text\": \"    rw [ωSup_bind, ← f.continuous, g.toOrderHom_eq_coe, ← g.continuous]\"}\n  {\"file\": \"Mathlib/Analysis/Normed/Operator/ContinuousAlgEquiv.lean\", \"line\": \"234\", \"text\": \"    [NonUnitalAlgEquivClass F 𝕜 _ _] [StarHomClass F _ _] [ContinuousMapClass F _ _] :\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf assertion or its representative and evaluation compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal derived sheaf Hom from bounded constructible integral coefficient complexes commutes with sequential colimits",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.etale.*constructible|constructible.*pro.etale|internalHom.*colimit|derivedInternalHom",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: hits do not state this derived sheaf assertion or its representative and evaluation compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Hh]om|[Hh]om.*constructible|sequential.*[Hh]om|[Hh]om.*sequential",
+   "results": "Read 19 hits: Mathlib/CategoryTheory/Limits/Shapes/Countable.lean, Mathlib/CategoryTheory/Limits/Shapes/Countable.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet.lean. No hit states bounded constructible pro-étale derived internal-Hom continuity; general colimit and monoidal closedness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sheaf internal Hom preserves bounded below filtered colimits for bounded constructible integral l-adic complexes",
+   "results": "Read 8 hits: HomologicalComplex.instHasFilteredColimitsOfSize, instPreservesHomologyFunctorAddCommGrpCatColim, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.sheafHom, CategoryTheory.instPreservesColimitsOfShapeSheafExtensiveTopologyFunctorOppositeSheafToPresheafOfPreservesFiniteProductsColim. No hit states bounded constructible pro-étale derived internal-Hom continuity; general colimit and monoidal closedness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"colimit\"",
+   "results": "Read 12 hits: PresheafOfModules.Finite.hasFiniteColimits, PresheafOfModules.hasColimitsOfSize, PresheafOfModules.hasColimitsOfShape, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, PresheafOfModules.toPresheaf_preservesColimitsOfSize, PresheafOfModules.toPresheaf_preservesColimitsOfShape, PresheafOfModules.Finite.evaluation_preservesFiniteColimits, PresheafOfModules.evaluation_preservesColimitsOfSize. No hit states bounded constructible pro-étale derived internal-Hom continuity; general colimit and monoidal closedness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from bounded constructible integral pro-etale sheaves commutes with uniformly bounded below sequential filtered colimits",
+   "results": "Read 8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.ihomPoints_symm_comp, instMonoidalClosedLightCondSet, LightCondensed.ihomPoints, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition. No hit states bounded constructible pro-étale derived internal-Hom continuity; general colimit and monoidal closedness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented locally constant integral l-adic coefficient module sheaves on a Noetherian scheme have bounded derived internal Hom commuting with direct limits",
+   "results": "Read 8 hits: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondensed.instIsGrothendieckAbelianLightCondMod, CondensedMod.ofSheafProfinite, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafCompHaus, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition. No hit states bounded constructible pro-étale derived internal-Hom continuity; general colimit and monoidal closedness results only.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-general-lfp-hom-inversion",
+  "date": "2026-10-22",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-sfb-dc-hom-preserves.proof.md, final paragraph, inverting ell; Lemma 6.8.12 and Proposition 6.8.11(3), pp. 60–61; agent extraction of the internal-sheaf continuity and general-lfp bridge, old item steps 1–4. Auxiliary source: Hemo–Richarz–Scholbach Theorems 4.13, 6.2(2)–(3); Stacks properties.tex Tag 01OZ, lemma-Noetherian-topology; homology.tex Tag 0118, section-truncations.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-general-lfp-sequential-continuity",
+  "worker": "stage1",
+  "summary": "Reused the existing integral general-lfp/finite-scalar-model equivalence and filtered internal-Hom continuity. Wrote out topological DCC, quotient truncation cohomology, scalar equivariance and the bounded representative application. No new nodes, no Lean writing or compilation; statement unchanged.",
+  "blueprint": [
+   "lem-sfb-dc-hom-preserves.proof.md, final paragraph: inverting ell; the general-lfp bridge and sequential continuity needed by lem-sfb-integral-general-lfp-hom-inversion. The inherited blueprint.from.node is null, as printed by blueprint_refs.py ancestor; no maintainer-owned ancestry field was altered."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic theorem for module sheaves on a small ringed site, used only for exact filtered colimits; the item unit has no separate AB5 result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-989a19ebf",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-989a19ebf (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and the 4 cited statements in full; no new nodes. The statement is byte-identical to live (side-live, unsplit, created by NZ 2026-10-22). There is no repair note, the item is not on a dropped list, there is no SGA citation, and there is no cycle (closure of the cited lemmas has neither the item nor hom-inversion). Step 1: noetherian-scheme-closed-subsets-minimal (locally Noetherian + quasi-compact, exactly the item's hypotheses) gives DCC through a minimal member, including empty X. Step 2: lfp-constant-model-comparison (i)=>(ii) applies because sk-def-sfb-bounded-constructible constructibility is def-sfb-constructible-module, which is literally (i). O_E carries the same condensed topology, torsion and different stratifications are allowed, and only finitely many degrees occur. Step 3: lem-pur-ringed-site-grothendieck-abelian applies because def-weil-pbc-proetale-site is V-small and B is commutative. I accept the off-unit tool use: it is generic AB5 and the unit's continuity node already depends on it. Step 4: constructible-internal-hom-continuity with I=N filtered and Lambda=O_E. Its Noetherian, K and common-lower-bound hypotheses are met. Its statement itself contains the evaluation map, the functorial termwise colimit, representative independence and no conditions on targets. Its derived category is the same unbounded localisation as the item's. Step 5: quotient truncation checked degree by degree (c, c+1, higher, below c), and on a complex with an exact tail below c. Step 6: B-linearity gives a levelwise quasi-isomorphism of the ell-towers; the bound c lets step 4 apply. BS 6.8.12 (p.61) and Stacks 01OZ (properties.tex:496) checked. Item proof_deps equals the union of the steps' uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralGeneralLfpSequentialContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.integralGeneralLfpSequentialContinuity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.Modules",
+   "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.hom",
+   "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.comparison",
+   "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.tower",
+   "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.derivedTower",
+   "AlgebraicGeometry.ProEtale.IntegralSequentialContinuity.integralGeneralLfpSequentialContinuity"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralGeneralLfpSequentialContinuity.lean",
+  "statement": "theorem integralGeneralLfpSequentialContinuity [CompactSpace X] [IsLocallyNoetherian X] (K : DerivedCategory (Modules l E X)) (_hK : boundedConstructible (condensedRingObj (integralCondensedCoefficientRing l E) X) K) : TopologicalSpace.NoetherianSpace X ∧ (∀ q : ℤ, IsConstantModelConstructible (integralCondensedCoefficientRing l E) X ((DerivedCategory.homologyFunctor _ q).obj K)) ∧ HasColimitsOfSize.{u + 1, u + 1} (Modules l E X) ∧ AB5OfSize.{u + 1, u + 1} (Modules l E X) ∧ (∃ F : CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ, Nonempty (F ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ hom l E X K)) ∧ (∀ (F : CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ) (e : F ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ hom l E X K) (M : ℕ ⥤ CochainComplex (Modules l E X) ℤ) (c : ℤ), (∀ (n : ℕ) (q : ℤ), q < c → IsZero ((M.obj n).X q)) → IsIso (comparison l E X K F e M)) ∧ (∀ (F G : CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ) (e : F ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ hom l E X K) (f : G ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ hom l E X K) (M N : ℕ ⥤ CochainComplex (Modules l E X) ℤ) (c : ℤ), (∀ (n : ℕ) (q : ℤ), q < c → IsZero ((M.obj n).X q)) → ∀ τ : M ⟶ N, (∀ n : ℕ, QuasiIso (τ.app n)) → ∃! a : DerivedCategory.Q.obj (colimit (M ⋙ F)) ≅ DerivedCategory.Q.obj (colimit (N ⋙ G)), a.hom ≫ comparison l E X K G f N = comparison l E X K F e M ≫ (hom l E X K).map (DerivedCategory.Q.map (colimMap τ))) ∧ (∀ (L : DerivedCategory (Modules l E X)) (C : CochainComplex (Modules l E X) ℤ) (eC : DerivedCategory.Q.obj C ≅ L) (c : ℤ), L.IsGE c → QuasiIso (C.πTruncGE c) ∧ (C.truncGE c).IsStrictlyGE c ∧ ((l • 𝟙 C) ≫ C.πTruncGE c = C.πTruncGE c ≫ (l • 𝟙 (C.truncGE c))) ∧ (∃ a : tower l E X (C.truncGE c) ⋙ DerivedCategory.Q ≅ derivedTower l E X L, ∀ n : ℕ, DerivedCategory.Q.map (C.πTruncGE c) ≫ a.hom.app n = eC.hom) ∧ ∀ (F : CochainComplex (Modules l E X) ℤ ⥤ CochainComplex (Modules l E X) ℤ) (e : F ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ hom l E X K), IsIso (comparison l E X K F e (tower l E X (C.truncGE c))))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The coefficient ring and its canonical MonObj/IsCommMonObj now come from definition node def-sfb-integral-condensed-ring, using the existing continuous-map construction and valuation-topology integers. The local-model comparison is a proof dependency only. All hypotheses and conclusions, canonical comparison, representative independence and good-truncation clauses are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-85e251c6b",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery repairs the H2 return of 65254fec as instructed: theorem stmt_dep lem-sfb-integral-lfp-constant-model-comparison is dropped; new def node def-sfb-integral-condensed-ring owns integralCondensedCoefficientRing := Profinite.continuousMapRingObjOfUniverse (latticeCoefficientIntegers l E) with the canonical MonObj/IsCommMonObj, citing the two owner nodes (def-sfb-continuous-map-condensed-ring, def-sfb-continuous-lattice-coefficients). It is the same term as the old helper, has universe u+1 with no extra equation, does not clash with any live name, has HRS Ex 3.1 docstrings and 4 searches, and its statement is verbatim. Item diff vs the reviewed delivery: only the ring rename, the stmt_dep swap and the comparison module demoted to a proof import; NL statement and proof unchanged. All signature declarations are owned by cited stmt_deps, the item statement is verbatim with a single sorry, and the report has its Worker and Second-reading sections. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261024T191601-L-437863",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

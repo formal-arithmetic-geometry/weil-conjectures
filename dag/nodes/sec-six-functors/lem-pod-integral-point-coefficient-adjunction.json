@@ -1,0 +1,290 @@
+{
+ "id": "lem-pod-integral-point-coefficient-adjunction",
+ "kind": "statement",
+ "title": "Exact coefficient adjunction and normalized sections at the integral point",
+ "statement": "Fix the finite-field datum with $k=\\overline{\\mathbf F}_q$ and $s=\\operatorname{Spec}k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne\\operatorname{char}k$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], put $A_m=(R/\\varpi^m)_s$ for $m\\ge1$ and $B=\\varprojlim_m A_m$ [def-weil-completed-integral-coefficients]. For an $R$-module $M$ let $\\underline M$ be its constant sheaf [def-weil-pbc-constant-sheaf] and put $L(M)=B\\otimes_{\\underline R}\\underline M$, using sheaf tensor [def-pur-sheaf-tensor-product]; apply $L$ and $\\Gamma=\\Gamma(s,-)$ termwise to complexes.\nThen $R$ is Noetherian (every ideal is finitely generated), $B$ is flat over $\\underline R$ [def-pc-flat-sheaf-modules], and $L$ and $\\Gamma$ on $B$-module sheaves are exact. The constant-value maps identify $\\Gamma A_m=R/\\varpi^m$ compatibly with quotient transitions, and identify $\\Gamma B=R$ by the ring map $r\\mapsto(r\\bmod\\varpi^m)_m$. There is an adjunction $L\\dashv\\Gamma$ whose natural bijection sends $h:L(M)\\to F$ to $x\\mapsto h_s(1\\otimes x)$ and whose inverse sends $t:M\\to\\Gamma F$ to $b\\otimes x\\mapsto b\\,t(x)|_U$ on every site object $U$. These are the actual constant-extension maps: the unit is $x\\mapsto1\\otimes x$ and the counit is multiplication of restricted sections.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "Second sentence: Third paragraph, actual adjunction/evaluation comparison at integral point coefficients: returned item steps 1-2, exact extension and sections and the constant-value unit"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-pod-point-derived-hom-models"
+ ],
+ "proof": [
+  {
+   "text": "The DVR theorem makes the valuation ring a principal ideal domain and therefore Noetherian. Use the existing canonical profinite-tower isomorphism of its positive quotient system, with its specified reduction formula.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence and normalized coefficient adjunction used in the point comparison"
+   }
+  },
+  {
+   "text": "Every covering sieve of the algebraically closed point contains the identity of the final object. Apply this to the equalizer and image sieves of the constant sheafification unit to prove bijectivity on final sections. Naturality of the sheafification unit gives the finite quotient-transition identity. The limit lift/projection identity gives the completed scalar formula. Joint injectivity of evaluated limit projections and the profinite-tower isomorphism give the completed scalar bijection.",
+   "uses": [
+    "lem-trf-point-sheafification-final",
+    "def-weil-pbc-sheafification",
+    "def-pur-sheaf-inverse-limit",
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence and normalized coefficient adjunction used in the point comparison"
+   }
+  },
+  {
+   "text": "Reproduce the finite-constant continuous-function comparison in the coefficient universe max u (t+1): open fibres give local surjectivity, nonempty objects detect constants pointwise, and empty objects use the empty covering. The continuous-function presheaf is a sheaf by fpqc descent. Sheafification uniqueness makes this comparison natural for quotient ring maps. At each point an evaluated completed section gives a compatible residue family, hence an integer by the profinite-tower isomorphism. If a nonzero integer annihilates the section, the evaluated integer vanishes in the domain. Joint injectivity of the finite projections implies that the section vanishes. Thus each completed section module is torsion free over the PID, and hence flat. Locally lift the finitely many scalar coefficients of any relation to constants by intersecting their image covering sieves. The sectionwise flat module equational criterion factors this relation, and the constant unit sends its matrix to a local factorization over the constant ring sheaf. Apply the independent-universe local equational criterion.",
+   "uses": [
+    "lem-pur-proetale-finite-constant-sections",
+    "lem-sfb-integers-profinite-tower",
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "lem-exc-site-local-relations-imply-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence and normalized coefficient adjunction used in the point comparison"
+   }
+  },
+  {
+   "text": "Construct the constant-module presheaf Hom equivalence by evaluation at the final object and restriction along its unique maps. Compose module sheafification with the proved sectionwise tensor/restriction adjunction to obtain the actual extension functor and normalized Hom formulas. Constant presheaves preserve finite limits objectwise, and module sheafification is exact. The existing independent-universe change-of-rings tensor comparison identifies the underlying abelian sheaf of extension with tensoring by the restricted coefficient unit. The flatness already proved in step 3 therefore gives exact extension; forgetting to abelian sheaves reflects finite limits. The adjunction gives finite colimits. Evaluating the two Hom formulas on identities identifies unit and counit. Independently use exact point sections and exact scalar restriction for exact Gamma. The additive exact functors preserve finite limits and colimits of unbounded complexes degreewise.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-pur-change-of-rings-tensor-comparison",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+    "place": "Second sentence and normalized coefficient adjunction used in the point comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-sheafification",
+  "lem-exc-site-local-relations-imply-flat",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pur-change-of-rings-tensor-comparison",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-sfb-integers-profinite-tower",
+  "lem-trf-point-sheafification-final",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/lem-pod-point-dualizing-complex.proof.md",
+  "place": "T3 repair: normalized limit calculations, local-relation flatness, direct ordinary adjunction and exactness from the independent-universe tensor comparison; no dependency on PointExactExtensionSections"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For the completed integral coefficient sheaf B on the proetale site of an algebraically closed point, constant scalar extension B tensor M is exact, left adjoint to exact sections, and the constant-value map R to sections of B is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    (T : Type u_3) →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $R$, $S$, and $T$ with $S$ an $R$-algebra, $T$ an $S$-algebra, and $T$ an $R$-algebra via the scalar tower $R \\\\to S \\\\to T$, if the algebra $S \\\\to T$ is formally étale, then the\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}\n  {\"name\": \"Algebra.Extension.tensorH1Cotangent\", \"module\": \"Mathlib/RingTheory/Etale/Kaehler\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : CommRing T] →\\n            [inst_3 : Algebra R S] →\\n              [inst_4 : Algebra R T] →\\n                [inst_5 : Algebra S T] →\\n                  [IsScalarTower\", \"doc\": \"Given commutative rings $ R, S, T $ with compatible algebra structures and an algebra homomorphism $ f: P \\\\to Q $, if $ f $ induces a formally étale ring homomorphism and the kernel map $ f.\\\\text{mapK\"}\n  {\"name\": \"Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {R S : Type u} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Algebra.FormallyUnramified R S]\\n  [Algebra.EssFiniteType R S],\\n  AlgebraicGeometry.IsOpenImmersion\\n    (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Algebra.TensorProduct.lmul' R).toRingHom))\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ S $ that is formally unramified and of essential finite type, the morphism $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(S \\\\otimes_R S) $ induced\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.plusPlusAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.ConcreteSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) (D : Type w) [CategoryTheory.Category.{w', w} D] {FD : D → D → Type u_1} {CD : D → Type t} [(X Y : D) → FunLike (FD X Y) (CD X) (CD Y)] [instCC : CategoryTheory.ConcreteCategory D FD] [∀ {X : C} (S : J.Cover\", \"doc\": \"The sheafification functor is left adjoint to the forgetful functor.\"}\n  {\"name\": \"CategoryTheory.sheafificationAdjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] [CategoryTheory.HasWeakSheafify J A] : CategoryTheory.presheafToSheaf J A ⊣ CategoryTheory.sheafToPresheaf J A\", \"doc\": \"The sheafification-inclusion adjunction.\"}\n  {\"name\": \"CategoryTheory.HasSheafify.mk'\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheafification\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] (J : CategoryTheory.GrothendieckTopology C) (A : Type u₂) [CategoryTheory.Category.{v₂, u₂} A] {F : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)} (adj : F ⊣ CategoryTheory.sheafToPresheaf J A) [CategoryTheory.Lim\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_2} [CategoryTheory.Category.{v_2, u_2} A] {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)} (adj : G ⊣ CategoryTheory.sheafToPresheaf J A) : J.W = (Cate\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_2} [CategoryTheory.Category.{v_2, u_2} A] {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)} (adj : G ⊣ CategoryTheory.sheafToPresheaf J A) {P₁ P₂ : Cate\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_adj_unit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_2} [CategoryTheory.Category.{v_2, u_2} A] {G : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (CategoryTheory.Sheaf J A)} (adj : G ⊣ CategoryTheory.sheafToPresheaf J A) (P : Category\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatIso\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1} {B : Type u_2} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Category.{v_2, u_2} B] (F : CategoryTheory.Functor A B) {G₁ : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (Categ\", \"doc\": \"The canonical natural isomorphism\\n`(whiskeringRight Cᵒᵖ A B).obj F ⋙ G₂ ≅ G₁ ⋙ sheafCompose J F`\\nwhen `F : A ⥤ B` preserves sheafification, and that `G₁` and `G₂` are\\nleft adjoints to the forget funct\"}\n  {\"name\": \"CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1} {B : Type u_2} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Category.{v_2, u_2} B] (F : CategoryTheory.Functor A B) {G₁ : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (Categ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions_of_hasSheafCompose\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1} {B : Type u_2} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Category.{v_2, u_2} B] (F : CategoryTheory.Functor A B) {G₁ : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (Categ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatTrans\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1} {B : Type u_2} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Category.{v_2, u_2} B] (F : CategoryTheory.Functor A B) {G₁ : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (Categ\", \"doc\": \"The canonical natural transformation\\n`(whiskeringRight Cᵒᵖ A B).obj F ⋙ G₂ ⟶ G₁ ⋙ sheafCompose J F`\\nwhen `F : A ⥤ B` is such that `J.HasSheafCompose F`, and that `G₁` and `G₂` are\\nleft adjoints to the\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.preservesSheafification_iff_of_adjunctions\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1} {B : Type u_2} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Category.{v_2, u_2} B] (F : CategoryTheory.Functor A B) {G₁ : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (Categ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.sheafComposeNatTrans_fac\", \"module\": \"Mathlib.CategoryTheory.Sites.PreservesSheafification\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1} {B : Type u_2} [CategoryTheory.Category.{v_1, u_1} A] [CategoryTheory.Category.{v_2, u_2} B] (F : CategoryTheory.Functor A B) {G₁ : CategoryTheory.Functor (CategoryTheory.Functor Cᵒᵖ A) (Categ\", \"doc\": \"\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale|completedIntegral|constant.*[Aa]djunction",
+   "results": "[grep] OK 7 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"line\": \"33\", \"text\": \"* `ΓCoconstantSheafAdj J A`: the adjunction between the global sections functor `Γ J A` and\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"line\": \"23\", \"text\": \"* `constantSheafΓAdj J A`: the adjunction between the constant sheaf functor and `Sheaf.Γ J A`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"line\": \"95\", \"text\": \"  (constantSheafΓAdj J A).rightAdjointUniq (constLimAdj.comp (sheafificationAdjunction J A))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"24\", \"text\": \"  faithful, a sheaf is constant if and only if the counit of the constant sheaf adjunction applied\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"72\", \"text\": \"  (constantPresheafAdj D hT).comp (sheafificationAdjunction J D)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"112\", \"text\": \"counit of the constant sheaf adjunction applied to it is an isomorphism.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"line\": \"144\", \"text\": \"  ((constantSheafAdj J D hT).comp (sheafEquiv J K G D).toAdjunction).leftAdjointUniq\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact scalar extension and exact global sections for the completed valuation ring sheaf on a geometric point",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valuation.HasExtension.val_smul\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \"(r : vR.integer) (a : vA.integer) : ↑(r • a : vA.integer) = (r : R) • (a : A)\", \"doc\": \"For elements $ r $ in the valuation ring of a commutative ring $ R $ and $ a $ in the valuation ring of an $ R $-algebra $ A $, the scalar multiplication $ r \\\\cdot a $ within the valuation ring of $ A\"}\n  {\"name\": \"Valuation.HasExtension.mk_smul_mk\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \"(r : R) (hr) (a : A) (ha) :\\n  (⟨r, hr⟩ : vR.integer) • (⟨a, ha⟩ : vA.integer) =\\n    ⟨r • a, Algebra.smul_def r a ▸ mul_mem ((val_map_le_one_iff vR vA _).mpr hr) ha⟩\", \"doc\": \"Let $R$ be a commutative ring and $A$ be an $R$-algebra. Let $v_R$ be a valuation on $R$ and $v_A$ be a valuation on $A$ that extends $v_R$. Let $\\\\mathcal{O}_{v_R} = \\\\{r \\\\in R \\\\mid v_R(r) \\\\le 1\\\\}$ and\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ΓSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \": Γ(Spec R, ⊤) ≅ R\", \"doc\": \"The global sections of the structure sheaf on the scheme $\\\\operatorname{Spec}(R)$ over its entire space are naturally isomorphic to the commutative ring $R$.\"}\n  {\"name\": \"Valuation.HasExtension.instIsScalarTowerInteger\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \": IsScalarTower vR.integer vA.integer A\", \"doc\": \"Let $R$ be a commutative ring with a valuation $v_R$, and let $A$ be an $R$-algebra with a valuation $v_A$ that extends $v_R$. Let $\\\\mathcal{O}_{v_R}$ and $\\\\mathcal{O}_{v_A}$ be the respective valuati\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \": ValuationSubring (v.adicCompletion K)\", \"doc\": \"The valuation subring of the adic completion of a Dedekind domain's fraction field with respect to a height one prime ideal, consisting of all elements in the completion whose valuation is less than o\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletion\", \"module\": \"Mathlib.RingTheory.DedekindDomain.AdicValuation\", \"type\": \"(r : S) (x : WithVal (v.valuation K)) : (↑(r • x) : v.adicCompletion K) = r • (↑x : v.adicCompletion K)\", \"doc\": \"For a Dedekind domain $ R $ with fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation $ v $ preserves scalar multiplication. Specificall\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.globalSectionsIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": CommRingCat.of R ≅ (structureSheaf R).1.obj (op ⊤)\", \"doc\": \"For a commutative ring $ R $, the canonical ring homomorphism from $ R $ to the global sections $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) $ of its structure sheaf is an isomorphis\"}\n  {\"name\": \"Valuation.HasExtension.instIsScalarTower_valuationSubring'\", \"module\": \"Mathlib.RingTheory.Valuation.Extension\", \"type\": \": IsScalarTower K₀ L₀ L\", \"doc\": \"Let $L/K$ be a field extension, and let a valuation on $L$ extend a valuation on $K$. Let $K₀$ and $L₀$ be the respective valuation subrings of $K$ and $L$. Then $K₀$, $L₀$, and $L$ form a scalar towe\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension from constant modules to a completed ring sheaf over a separably closed field is adjoint to sections with unit the constant section map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : J.HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          (M : SheafOfModules R) → (SheafOfModules.unit\", \"doc\": \"For a sheaf of rings $ R $ on a category $ \\\\mathcal{C} $ with Grothendieck topology $ J $ and a sheaf of modules $ M $ over $ R $, there is a canonical equivalence between the set of natural transform\"}\n  {\"name\": \"LightCondensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Light/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondensed.free R ⊣ LightCondensed.forget R\", \"doc\": \"The adjunction between the free light condensed $ R $-module functor (constructed by applying the free module functor and sheafifying with respect to the coherent Grothendieck topology on light profin\"}\n  {\"name\": \"Condensed.freeForgetAdjunction\", \"module\": \"Mathlib/Condensed/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → Condensed.free R ⊣ Condensed.forget R\", \"doc\": \"For any ring $ R $, the free condensed $ R $-module functor from condensed sets to condensed $ R $-modules is left adjoint to the forgetful functor that forgets the $ R $-module structure. This adjunc\"}\n  {\"name\": \"CondensedMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CondensedMod.LocallyConstant.functor R ⊣ Condensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction where the left adjoint assigns to each $ R $-module $ M $ the condensed $ R $-module of locally constant functions from discrete spaces to $ M $, and the rig\"}\n  {\"name\": \"LightCondMod.LocallyConstant.adjunction\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"(R : Type u) → [inst : Ring R] → LightCondMod.LocallyConstant.functor R ⊣ LightCondensed.underlying (ModuleCat R)\", \"doc\": \"For any ring $ R $, there is an adjunction between the locally constant module functor and the underlying functor in the category of light condensed $ R $-modules. This adjunction is constructed using\"}\n  {\"name\": \"PresheafOfModules.unitHomEquiv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {R : CategoryTheory.Functor Cᵒᵖ RingCat} → (M : PresheafOfModules R) → (PresheafOfModules.unit R ⟶ M) ≃ M.sections\", \"doc\": \"For a presheaf of rings $ R $ on a category $ \\\\mathcal{C} $ and a presheaf of modules $ M $ over $ R $, there is a canonical equivalence between the set of natural transformations from the unit preshe\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme}, (AlgebraicGeometry.Scheme.Modules.toPresheafOfModules X).IsRightAdjoint\", \"doc\": \"The forgetful functor from the category of sheaves of modules over a scheme $ X $ to the category of presheaves of modules over $ X $ is a right adjoint.\"}\n  {\"name\": \"CategoryTheory.Sheaf.ΓHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Sites/GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {A : Type u₂} →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} A] →\\n          [inst_2 : CategoryTheory.HasWeakSheafify J A] →\\n            [inst_3 : CategoryTheory.HasGlobalSection\", \"doc\": \"For any object $X$ in category $\\\\mathcal{A}$ and sheaf $F$ on $\\\\mathcal{C}$ with values in $\\\\mathcal{A}$, this establishes a natural bijection between morphisms from the constant sheaf at $X$ to $F$ a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not state the combined completed-coefficient point assertion; algebraic, sheafification or cone ingredients alone do not supply its remaining clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "completedIntegral|pro[Ee]tale|constantSheafAdj",
+   "results": "Logged 25 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/GlobalSections.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf adjunctions, ordinary scalar extension, or adic flatness ingredients do not give all assertions for this completed coefficient sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor of a completed coefficient ring sheaf with a constant module is an exact left adjoint to sections on the proetale site of an algebraically closed field",
+   "results": "Logged 8 hits: CategoryTheory.constantSheafΓAdj, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.constantSheafAdj, PresheafOfModules.sheafificationAdjunction, CompHausLike.LocallyConstant.adjunction, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf adjunctions, ordinary scalar extension, or adic flatness ingredients do not give all assertions for this completed coefficient sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction",
+   "results": "Logged 12 hits: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf adjunctions, ordinary scalar extension, or adic flatness ingredients do not give all assertions for this completed coefficient sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed coefficient sheaf on a proetale geometric point is flat over the constant discrete valuation ring and constant scalar extension is left adjoint to exact global sections",
+   "results": "Logged 8 hits: comonadicExtendScalars, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.flat_appLE, AdicCompletion.flat_of_isNoetherian, AlgebraicGeometry.Flat.instHasRingHomPropertyFlat, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.flat_iff, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf adjunctions, ordinary scalar extension, or adic flatness ingredients do not give all assertions for this completed coefficient sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings B on a site with terminal object, extension of scalars of constant modules B tensor M is left adjoint to global sections, and completed p-adic function coefficients are flat over the constant ring",
+   "results": "Logged 8 hits: BDeRhamPlus, comonadicExtendScalars, AdicCompletion.flat_of_isNoetherian, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.freeForgetAdjunction, Condensed.freeForgetAdjunction, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-22",
+   "verdict": "no match: generic sheaf adjunctions, ordinary scalar extension, or adic flatness ingredients do not give all assertions for this completed coefficient sheaf"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-point-completed-evaluation",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "thm-pod-identification-of-the-comparison",
+   "place": "Third paragraph, actual adjunction/evaluation comparison at integral point coefficients: returned item steps 1-2, exact extension and sections and the constant-value unit",
+   "via": [
+    "lem-pod-point-completed-evaluation",
+    "lem-pod-global-duality-map-identification"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pod-integral-point-coefficient-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Proved Noetherianity, normalized finite and completed sections, flatness by torsion-free section modules and sheafification, exactness, and the explicit adjunction with its unit and counit. Reused existing DAG nodes throughout; no new nodes.",
+  "blueprint": "thm-pod-identification-of-the-comparison.proof.md, third paragraph: the fifth tensor-Hom bijection and its point coefficient realization, expanded at integral coefficients; lem-pod-point-dualizing-complex.proof.md, second sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient DVR structure; no six-operations theorem supplies local-field arithmetic."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-complete",
+    "why": "Generic metric completeness of finite local-field extensions used to recover compatible residues."
+   },
+   {
+    "node": "lem-pur-proetale-finite-constant-sections",
+    "why": "Generic constant finite sheaf section formula, retaining normalization of constant values."
+   },
+   {
+    "node": "lem-weil-pbc-pid-torsion-free-module-flat",
+    "why": "Generic commutative algebra criterion for each section module."
+   },
+   {
+    "node": "lem-pc-sites-modules-sheafification-flat",
+    "why": "Generic sheafification flatness result for the constant ring presheaf."
+   },
+   {
+    "node": "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "why": "Generic sectionwise exactness and kernels of module presheaves."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Generic exactness of constant module sheafification."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic exact point evaluation for arbitrary ring-sheaf modules."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic tensor and sheafification comparison, preserving pure tensors."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic universal property of module sheafification for the explicit adjunct maps."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-pur-proetale-finite-constant-sections",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-e812f0540",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-e812f0540 (reviewer sub-agent of L); spot-checked: PASS: the delivery is one commit with the item and its report only, 0 new nodes, no repair note (an ordinary split) and no SGA. I read all six steps against the statements of the 13 cited nodes and found every claim checks out. Step 1: R is a PID by lem-weil-l-adic-extension-integers-dvr clause 2, hence Noetherian. Clause 5 gives varpi^m R as the norm ball. Cauchy completeness gives R = lim R/varpi^m, and the zero ideal and zero tuple are covered. Step 2: lem-pur-proetale-finite-constant-sections gives sections C(|V|,A) for finite A, compatible with constants and restriction. Its transition maps match the pointwise residues by the sheafification universal property. Sectionwise inverse limits then give Gamma B = R by r -> (r mod varpi^m). Step 3: B(U) injects into Map(|U|,R), so it is torsion free and flat over the PID with no finite generation needed. Presheaves over the constant presheaf R are presheaves of R-modules, so the presheaf tensor is exact objectwise. lem-pc-sites-modules-sheafification-flat allows a presheaf ring, so B is flat over R_s. Rejecting the sectionwise-flat node, which needs a sheaf ring, is correct. Step 4: the constant-module-sheaf functor is exact for all modules on a small site. The point-sections node covers any ring sheaf on s_proet with k algebraically closed, so Gamma is exact after restricting along R = Gamma B. Step 5: the special clause of lem-pc-sites-module-sheafification-tensor identifies L(M) with (U -> B(U) tensor_R M)^#. I checked balancedness, B(U)-linearity, the unique extension by the interface lemma over B, and both composites. The step does not say the isomorphism respects the B-actions, but this follows from the uniqueness clause of the interface. Step 6: the unit is x -> 1 tensor x and the counit is multiplication. I tested M=0, R, R/varpi and F=B. Duplicate search over citers of the completed-coefficient and point-sections nodes (six candidates read) found no node stating this flatness or adjunction, and the lean tree has no declaration for the item. The ten tool_uses are generic and I accept them. The parent lem-pod-point-completed-evaluation uses exactly the exact L, exact Gamma, Gamma B = R and the generator formulas. Nothing was written under fixes/."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPointCoefficientAdjunction",
+  "declaration": "WeilConjectures.IntegralPointCoefficientAdjunction.integral_point_coefficient_adjunction",
+  "declarations": [
+   "WeilConjectures.IntegralPointCoefficientAdjunction.R",
+   "WeilConjectures.IntegralPointCoefficientAdjunction.B",
+   "WeilConjectures.IntegralPointCoefficientAdjunction.alpha",
+   "WeilConjectures.IntegralPointCoefficientAdjunction.finiteValue",
+   "WeilConjectures.IntegralPointCoefficientAdjunction.integral_point_coefficient_adjunction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralPointCoefficientAdjunction.lean",
+  "statement": "theorem integral_point_coefficient_adjunction (D : FiniteFieldDatum.{t}) (hl : l ≠ D.p) : IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧ SheafOfModules.IsFlatOnSite ((SheafOfModules.restrictScalars.{max u (t + 1)} ((sheafCompose (Scheme.ProEt.topology (Spec (.of D.k))) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map (alpha D.k l E))).obj (SheafOfModules.unit (ring.{t, u} D.k (B D.k l E)))) ∧ (∀ n : ℕ, Function.Bijective (finiteValue D.k l E n)) ∧ (∀ (n : ℕ) (a : ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 2))), (integralCoefficientSheafTransition l E (Spec (.of D.k)) n).hom.app (op (finalObject D.k)) (finiteValue D.k l E (n + 1) a) = finiteValue D.k l E n (ULift.up (Padic.coefficientExtensionTransition l E (n + 1) a.down))) ∧ Function.Bijective (scalar.{t, u} D.k (B D.k l E) (alpha D.k l E) (op (finalObject D.k))) ∧ (∀ (n : ℕ) (r : R l E), (completedIntegralCoefficientProjection l E (Spec (.of D.k)) D hl n).hom.app (op (finalObject D.k)) (scalar.{t, u} D.k (B D.k l E) (alpha D.k l E) (op (finalObject D.k)) r) = finiteValue D.k l E n (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) r.down))) ∧ exactFunctor _ _ (sections.{t, u} D.k (B D.k l E) (alpha D.k l E)) ∧ ∃ (L : ModuleCat.{max u (t + 1)} (R l E) ⥤ Modules.{t, u} D.k (B D.k l E)) (hobj : ∀ M, L.obj M = extensionObject.{t, u} D.k (B D.k l E) (alpha D.k l E) M), (∀ (M N : ModuleCat.{max u (t + 1)} (R l E)) (f : M ⟶ N), L.map f = eqToHom (hobj M) ≫ extensionMorphism.{t, u} D.k (B D.k l E) (alpha D.k l E) f ≫ eqToHom (hobj N).symm) ∧ exactFunctor _ _ L ∧ ∃ adj : L ⊣ sections.{t, u} D.k (B D.k l E) (alpha D.k l E), ExplicitAdjunction.{t, u} D.k (B D.k l E) (alpha D.k l E) L hobj adj ∧ (∀ (M : ModuleCat.{max u (t + 1)} (R l E)) (x : M), (adj.unit.app M).hom x = generator.{t, u} D.k (B D.k l E) (alpha D.k l E) L hobj M (op (finalObject D.k)) 1 x) ∧ (∀ (F : Modules.{t, u} D.k (B D.k l E)) (U : (Spec (.of D.k)).ProEtᵒᵖ) (b : (B D.k l E).obj.obj U) (y : (sections.{t, u} D.k (B D.k l E) (alpha D.k l E)).obj F), (adj.counit.app F).val.app U (generator.{t, u} D.k (B D.k l E) (alpha D.k l E) L hobj ((sections.{t, u} D.k (B D.k l E) (alpha D.k l E)).obj F) U b y) = b • F.val.map (toFinal D.k U.unop).op y) ∧ exactFunctor _ _ (extensionComplex.{t, u} D.k (B D.k l E) (alpha D.k l E) L adj) ∧ exactFunctor _ _ (sectionComplex.{t, u} D.k (B D.k l E) (alpha D.k l E))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the already landed def-pod-point-derived-hom-models interface for actual constant modules, tensor scalar extension, sections, local tensor generators and both adjunction transposes. Independent site universe t and coefficient-extension universe u; finite level n denotes exponent n+1. The existential extension functor is fixed on both objects and maps by the existing constructions; exactness and the normalized adjunction are conclusions, never assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb09382da",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Diffed against live: only the lean record and the added stmt_dep def-pod-point-derived-hom-models (landed) change; the item is still S2-open. The statement is verbatim in the file and the proof is sorry; R, B, alpha and finiteValue are abbrevs of recorded declarations. Clauses checked against the actual declarations: Noetherian O_E. IsFlatOnSite of B restricted along the real limit-lift alpha (integralConstantToCompletionOfUniverses) over the constant R_s. Bijective toSheafify constant values Gamma A_{n+1}, with the transition n+2 -> n+1 matching integralCoefficientSheafTransition. Gamma B = R bijective, with the projection formula r mod varpi^(n+1). Exact sections. Existential L pinned on objects and maps to extensionObject/extensionMorphism (changeOfRings of sheafified constant modules), exact. adj with ExplicitAdjunction pinning both transposes on extensionElement generators at every U, plus unit and counit formulas. Termwise complex functors exact. No extra hypotheses; universes t, u independent, modules at max u (t+1) per the recorded interface. Edge cases: n=0 means m=1; zero module; empty U; zero ideal. All 23 imports exist in live or Mathlib. Docstrings carry source, blueprint tag and the six proof steps. Duplicate search: the ExplicitAdjunction users only assume it. Report sections present. No compile (no file changed). Advisory only: unused proof-plan imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261024T224941-L-1833177",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

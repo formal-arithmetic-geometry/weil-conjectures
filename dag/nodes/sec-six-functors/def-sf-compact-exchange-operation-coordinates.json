@@ -1,0 +1,152 @@
+{
+ "id": "def-sf-compact-exchange-operation-coordinates",
+ "kind": "definition",
+ "title": "Compact-support exchange in the supplied operation coordinates",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field setting and category of finite-type schemes over the specified algebraic closure in [def-sf-operation-stages]. Let $\\mathscr B(X)$ be a family of categories, $S$ a supplied operation stage on this family, $T_X$ its supplied tensor bifunctors, and $Q$ a compactified Cartesian square with arrows $f:X\\to Y$, $g:Y'\\to Y$, $g':X'\\to X$, $f':X'\\to Y'$ and its two compactifications $c,c'$. Let $A$ be exchange-stage data realizing the specified exchange and projection constructions [def-exchange-projection] on these operations, as in [def-sf-operation-stages]. Put $C=A.\\mathrm{stage}.\\mathrm{compactSupport}$, $H=A.\\mathrm{stage}.\\mathrm{horizontal}$, $H'=A.\\mathrm{stage}.\\mathrm{horizontal}'$ and $C'=A.\\mathrm{stage}.\\mathrm{compactSupport}'$. The given stage has its specified compact exchange $e:H\\circ C\\to C'\\circ H'$. Let $\\alpha:H\\circ C\\xrightarrow{\\sim}S(g)^*\\circ S(f,c)_!$ and $\\beta:C'\\circ H'\\xrightarrow{\\sim}S(f',c')_!\\circ S(g')^*$ be the equality isomorphisms induced by the recorded compactSupport, horizontal, horizontal' and compactSupport' equalities. Define the compact-support exchange in operation coordinates to be the natural transformation $S(g)^*\\circ S(f,c)_!\\to S(f',c')_!\\circ S(g')^*$ given by $\\beta\\circ e\\circ\\alpha^{-1}$. This is only a re-expression of the given canonical compact exchange through its recorded equalities; it chooses no new map and asserts no invertibility or base-change theorem.",
+ "stmt_deps": [
+  "def-sf-operation-stages",
+  "def-exchange-projection"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Clause (iii): the specified compact-support exchange in the middle base-change square, expressed in the operation functors of def-sf-operation-stages."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compact support exchange re-expressed using equality comparisons between pullback and support functors",
+   "results": {
+    "t": "2026-10-24T19:34:05Z",
+    "tool": "leansearch",
+    "query": "Compact support exchange re-expressed using equality comparisons between pullback and support functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HasCompactSupport",
+     "TestFunction.ofSupportedIn.congr_simp",
+     "CompactlySupported.term_→C_c_",
+     "ContDiffMapSupportedIn.ext_iff",
+     "ContDiffMapSupportedIn.compact_supp",
+     "CompactlySupportedContinuousMap.mk.injEq",
+     "CompactlySupportedContinuousMap.instFunLike",
+     "TestFunction.coe_ofSupportedIn"
+    ],
+    "digest": "649571227d529338"
+   },
+   "date": "2026-10-24",
+   "verdict": "no matching Mathlib definition; the named project operation-stage transport has no definition-node owner"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a compact support base change natural transformation through equalities of pullback and support functors",
+   "results": {
+    "t": "2026-10-24T19:34:08Z",
+    "tool": "leanfinder",
+    "query": "Transport a compact support base change natural transformation through equalities of pullback and support functors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "TopCat.Presheaf.pushforwardEq_hom_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_hom_app_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr",
+     "TopCat.Presheaf.pushforwardEq",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app",
+     "SheafOfModules.pushforwardCongr_hom_app_val_app",
+     "TopCat.Presheaf.pushforward_eq'",
+     "SheafOfModules.pushforwardCongr"
+    ],
+    "digest": "2d919d6311f8b610"
+   },
+   "date": "2026-10-24",
+   "verdict": "no matching Mathlib definition; the named project operation-stage transport has no definition-node owner"
+  },
+  {
+   "tool": "grep",
+   "query": "compactExchange|dualBaseChangeHigherExchange",
+   "results": {
+    "t": "2026-10-24T19:34:08Z",
+    "tool": "grep",
+    "query": "compactExchange|dualBaseChangeHigherExchange",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no matching Mathlib definition; the named project operation-stage transport has no definition-node owner"
+  },
+  {
+   "tool": "source grep and blueprint_refs.py",
+   "query": "compactExchange|dualBaseChangeHigherExchange|higherExchange in lean/WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search compact exchange; blueprint_refs.py search exchange",
+   "results": "No WeilConjectures match. Sheaf/Paper/DualBaseChange.lean:475 defines dualBaseChangeHigherExchange; RelativeProductBaseChangeFactorSquares.lean:321 defines higherExchange componentwise; SemilinearExchangeCubeCoherence.lean:132 defines compactExchange. All three are helpers in theorem/lemma modules, with no definition node owning this map. def-exchange-projection owns ExchangeProjectionStage.compactExchange, while def-sf-operation-stages owns SixFunctorExchangeData and its equality fields, not this transported natural transformation. The witnessed finite transport node def-pur-compact-exchange-witness-transport has different input and output data. Blueprint compact exchange search: 0 matching nodes; exchange search: 231 matches, including def-exchange-projection but no separate operation-coordinate transport definition.",
+   "date": "2026-10-24",
+   "verdict": "Unowned project construction found; the maintainer explicitly requests a definition-node module for it in this repair."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-middle-exchange-projection-base-change",
+  "date": "2026-10-24",
+  "group": "Q69"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-kunneth-coherence",
+   "place": "Clause (iii): express the compact-support exchange entering the middle exchange/projection square in the supplied operation coordinates.",
+   "via": [
+    "lem-sf-middle-exchange-projection-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.Paper.CompactExchangeOperationCoordinates",
+  "declaration": "WeilConjectures.sixFunctorCompactExchange",
+  "file": "lean/Sheaf/Paper/CompactExchangeOperationCoordinates.lean",
+  "statement": "def sixFunctorCompactExchange {D : FiniteFieldDatum.{u}} {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)] {S : SixFunctorPushStage D B} {T : ∀ X, B X ⥤ B X ⥤ B X} {Q : SixFunctorCompactifiedSquare D} (A : SixFunctorExchangeData S T Q) : S.support Q.f Q.compactification ⋙ S.pull Q.g ⟶ S.pull Q.g' ⋙ S.support Q.f' Q.compactification'",
+  "branch": "sheaf-dag",
+  "by": "Q69",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Definition-node ownership requested by the maintainer in H2 return of f0f249da78b4. The actual formula is the existing stage compact exchange conjugated by its four recorded operation equalities; this module does not import a theorem about exchange."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45602c347",
+  "group": "Q69",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45602c347",
+  "group": "Q69",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN f0f249da. Item module diff is only the import (DualBaseChange → CompactExchangeOperationCoordinates) and one call (dualBaseChangeHigherExchange → sixFunctorCompactExchange); signature and helpers unchanged; lean.statement verbatim. New def node def-sf-compact-exchange-operation-coordinates: body identical to DualBaseChange.lean:475-483 (eqToIso transport of A.stage.compactExchange via the compactSupport/horizontal/horizontal'/compactSupport' fields of SixFunctorExchangeData), real data, no sorry, imports only SixFunctorOperationDatumStages (def-sf-operation-stages, landed), stmt_deps def-sf-operation-stages + def-exchange-projection, docstrings carry source and blueprint tag, statement verbatim, no name clash. Mechanical finding: lem-weil-structure-direct-images-constructible supplies only theorem finiteFieldDatumPrimeUnit (IsUnit l), whose conclusion residueUnits needs for the Invertible instances of the canonical tensor comparisons; genuine theorem dependency, PASS on that point. Mathematics as read in full in f0f249da review (four coefficient clauses, cube, beta/chi/delta, equation direction, edge cases). No recompile (no file changed). Advisory: the three unowned transport copies could become abbrevs."
+ }
+}

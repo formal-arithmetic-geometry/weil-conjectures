@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-system-singleton-evaluation-mate",
+ "kind": "statement",
+ "title": "Normalized singleton comparison equals the evaluation mate",
+ "statement": "For arbitrary compatible exact geometric inverse images of strict systems [lem-pur-system-singleton-geometric-pullback], and any supplied ordinary geometric adjunctions, the conjugate of the specified normalized derived singleton comparison under the composite adjunctions equals the derived right mate of the exact evaluation square.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 03D2, 03DA, 07A6 and 0D6E; normalized adjunction and coefficient comparison argument."
+ },
+ "stmt_deps": [
+  "lem-pur-system-singleton-geometric-pullback",
+  "lem-pur-system-single-derived-extension",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pur-system-evaluation-normalization-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the right mate of the inverse-image/evaluation square under the normalized\nsingleton adjunctions. On a flat-term K-flat representative its inverse is the ordinary\nsingleton geometric comparison: transpose its ordinary multiplication identity using the\nsingleton unit, and then use the representative formula for the normalized derived\nadjunction. The representative clause in SystemSingletonGeometricComparisons identifies\nthis with the specified comparison on every resolving complex. Every derived object is\nisomorphic to such a representative, so naturality identifies the two singleton maps\non every object. Taking their conjugates under the two composite geometric/singleton\nadjunctions gives the claimed equality of right mates, by horizontal mate pasting.",
+   "uses": [
+    "lem-pur-system-singleton-geometric-pullback",
+    "lem-pur-system-single-derived-extension",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-singleton-geometric-pullback",
+  "lem-pur-system-single-derived-extension",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Adjunction transposition and derived composition; explicit argument in Lean docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with algebraic inverse image of sheaves of modules",
+   "results": "restrictScalars_obj_val and restrictScalars_map_val describe restriction; no general inverse-image comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "mateEquiv_counit",
+   "results": "Unknown identifier in search index. Local Mathlib adjunction mates supply counit identities.",
+   "date": "2026-10-25",
+   "verdict": "local generic tool used"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_mate_factorsh",
+   "results": "msearch index no match; rg locates derivedExact_mateEquiv_app_fac and library private normalization helpers.",
+   "date": "2026-10-25",
+   "verdict": "generic resolution normalization available; no whole item duplicate"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.SystemEvaluationScalarRestrictionNormalization",
+  "date": "2026-10-25",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "via": [
+    "lem-pur-system-evaluation-scalar-restriction-normalization",
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-pur-compact-support-completed-projection-coherence",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ],
+   "place": "Proof Step 2 of thm-pur-rational-and-qbar-purity: independence of finite coefficient extension; sk-thm-sf-compatibility clause (7). Extracted from quotient-diagram-projection-evaluation, old proof steps 3–4 and 9, actual evaluated counit, restriction/direct-image normalization and lower-level transitions.; this auxiliary supplies Normalized singleton comparison equals the evaluation mate."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SystemSingletonEvaluationMate",
+  "file": "lean/Sheaf/CategoryTheory/SystemSingletonEvaluationMate.lean",
+  "declaration": "SheafOfModules.systemSingletonEvaluationMate",
+  "statement": "theorem systemSingletonEvaluationMate\n    (hF : SystemSingletonGeometricComparisons SY TY SX TX F) (n : ℕ) :\n    (systemNormalizationEvaluation SY TY SX TX F H adj Hn adjn hF n).hom =\n      CategoryTheory.SystemEvaluationNormalization.derivedMate adj (adjn n) (F.evaluation n)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2c595",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261025T143323-L-980706",
+  "kind": "interface",
+  "note": "independent cc review: item stmt + 12 moved decls byte-identical to live clone; new sorried statements read against SystemGeometricInverseImageData/SystemSingletonGeometricComparisons; 5 direct importers of the adapted SystemSingleDerivedExtension compiled against the delivered module"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-diagonal-completed-coefficient-ring-comparison",
+ "kind": "statement",
+ "title": "The completed coefficient ring comparison fixed by finite reductions",
+ "statement": "Let l be prime and X any scheme. Reconstruct the section ring of the pulled-back condensed Z_l ring using [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. There is a unique ring-sheaf isomorphism from this reconstructed section ring to purTwistZlCompletion of [det-prop-diagonal-tower-limit] such that its inverse, followed by each positive finite reduction purZlReduction of [lem-pur-condensed-zl-reduction-mod-ell-power], equals the corresponding purTwistZlProjection followed by the canonical constant-ring/abelian-sheaf comparison sfbConstantRingAbIso of [det-prop-sfb-qlbar-colimit-x-pullback]. This is an assertion about coefficient rings alone and contains no module functor or Tate line.",
+ "stmt_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-prop-diagonal-tower-limit",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "det-prop-sfb-qlbar-colimit-x-pullback"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "paragraph (1), initial completed coefficient identification; expanded in lem-diagonal-completed-coefficient-realization, steps 1--3"
+ },
+ "proof": [
+  {
+   "text": "Use the normalized integral limit cone supplied by sfb_completed_coefficients. Its point projections agree with purZlPointReduction: compose with the quotient-to-residue and finite discrete-to-continuous isomorphisms, apply purPointMap_ext to the normalization on constant functions, and use purResidueComposite. Transport the limiting cone along the fixed constant pullback and residue-tower isomorphisms. Restrict to positive exponents using the initial functor n ↦ n+1 on NatOp. The projections are exactly purZlReduction.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-pur-condensed-zl-reduction-mod-ell-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reconstruct possibly noncommutative section rings by the internal monoid-to-ring functor. This preserves the limiting cone because forgetting to abelian sheaves preserves and reflects its limits. For a constant commutative ring, use the proved constantPresentation, its monoid compatibility and naturality, and constantRingAb_unit, to identify this reconstruction with the underlying ring of the constant commutative ring sheaf. Its underlying abelian map is the inverse of sfbConstantRingAbIso. These termwise isomorphisms commute with the finite quotient transitions, giving an isomorphism with the positive purTwistZlTower. Its specified completion cone is limiting after forgetting commutativity. The unique comparison between these two limiting cones gives the required ring-sheaf isomorphism, and the limit comparison projection formula gives its displayed normalization.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-pur-twist-coefficient-rings",
+    "det-prop-sfb-qlbar-colimit-x-pullback",
+    "lem-sfb-embedded-integral-completion-diagram"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the faithful forgetful functor to abelian sheaves. The projections of the reconstructed limiting cone jointly distinguish the inverse maps of any two isomorphisms with the prescribed normalization. Thus their inverses coincide, and Iso.ext_inv gives equality of the isomorphisms. All constructions and universal properties hold for every scheme, including the empty scheme.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-twist-coefficient-rings",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-prop-sfb-qlbar-colimit-x-pullback",
+  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "lem-sfb-embedded-integral-completion-diagram",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "E2",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md",
+  "place": "Integral coefficient identification, implemented by normalized limit comparison and the proved constant-presentation helpers.",
+  "group": "E2",
+  "date": "2026-10-27"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of rings given as an inverse limit of constant finite rings is canonically isomorphic to the pulled back condensed p adic integers with its normalized projections",
+   "results": "PadicInt.lift, PadicInt.limNthHom and general condensed discrete and sheaf pullback results; no normalized comparison with purTwistZlCompletion.",
+   "date": "2026-10-27",
+   "verdict": "Use the existing project integral-limit theorem; conversion to its fixed section-ring presentation remains necessary."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "Restriction functor and its additivity and underlying-presheaf equations. No completed coefficient comparison.",
+   "date": "2026-10-27",
+   "verdict": "Provides the scalar restriction used in the parent, not the ring or root comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "CompletedRealization|sectionRingSheaf|purTwistZlCompletion|ZMod tensor roots",
+   "results": "Read both library roots and Mathlib sheaf change-of-rings, IsLimit and roots-of-unity sources. The project has the section module equivalence, general integral limits, and the root-limit map, but no normalized ring comparison with this completion. Blueprint-wide searches found the general completed coefficient proposition, not this fixed comparison.",
+   "date": "2026-10-27",
+   "verdict": "The fixed ring comparison is a separate part of the argument, not an existing one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedCoefficientRealization",
+  "date": "2026-10-27",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "paragraph (1), initial coefficient identification and integral Tate line",
+   "via": [
+    "lem-diagonal-completed-coefficient-realization",
+    "lem-diagonal-completed-frame"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedCoefficientRingComparison",
+  "file": "lean/Sheaf/Paper/CompletedCoefficientRingComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.completedCoefficientRingComparison_existsUnique",
+  "statement": "theorem completedCoefficientRingComparison_existsUnique (l : ℕ) [Fact l.Prime]\n    (X : Scheme.{u}) :\n    ∃! e : (sheafCompose (Scheme.ProEt.topology X)\n        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj\n          (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}\n            (Scheme.ProEt.topology X)\n            (condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X)) ≅\n        Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l),\n      ∀ n : ℕ,\n        (sheafCompose (Scheme.ProEt.topology X)\n          (forget₂ RingCat.{u + 1} Ab.{u + 1})).map e.inv ≫\n            (purZlReduction l X (n + 1)).hom =\n          (sheafCompose (Scheme.ProEt.topology X)\n            (forget₂ RingCat.{u + 1} Ab.{u + 1})).map\n              ((sheafCompose (Scheme.ProEt.topology X)\n                (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map\n                  (Scheme.purTwistZlProjection X l n)) ≫\n            (sfbConstantRingAbIso X\n              (CommRingCat.of (ULift.{u + 1} (ZMod (l ^ (n + 1)))))).hom",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261026T202608-L-3472059",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261026T222620-L-674422",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

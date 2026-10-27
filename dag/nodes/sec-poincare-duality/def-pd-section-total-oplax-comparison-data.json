@@ -1,0 +1,202 @@
+{
+ "id": "def-pd-section-total-oplax-comparison-data",
+ "kind": "definition",
+ "title": "Specified total oplax comparisons and their section transports",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $X,Y$ be schemes with small pro-etale sites [def-weil-pbc-proetale-site], coefficient rings $R_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], and let $f:X\\to Y$. Use the internal and section module categories, fixed section equivalence $E_T$, specified pullbacks $F_i,F_s$, and operation comparison $a:E_XF_i\\cong F_sE_Y$ of [def-pd-section-module-operations-data], with the specified strong oplax structures and tensor/unit comparisons $c,c_0$ of [def-pd-proetale-section-module-functors] and named ordinary maps of [def-pd-ordinary-pullback-balanced-generators]. On arbitrary integer-indexed cochain complexes, use the signed direct-sum tensor total of [def-pc-tensor-complex-sheaves], and extend $E,F_i,F_s,a$ termwise. Define $A_{P,Q}:F_i(P\\otimes Q)\\cong F_iP\\otimes F_iQ$ and $b_{P,Q}:F_s(P\\otimes Q)\\cong F_sP\\otimes F_sQ$ as the canonical total oplax comparison isomorphisms: the canonical preserved-coproduct comparison followed on each summand by the specified ordinary oplax tensor map. Their inverses are the corresponding sums of the ordinary lax inverse maps. Define the transported internal comparison by $F_s(c_Y^{-1});a_{P\\otimes Q}^{-1};E_X(A_{P,Q});c_X;(a_P\\otimes a_Q)$. Define $c_{0,T}:E_T(R_T[0])\\cong R_T[0]$ by the existing degree-zero single-complex comparison and ordinary unit comparison. Define the internal and section total units by applying the degree-zero single-complex functor to their specified ordinary oplax units, after the termwise-single comparison. Define the transported internal total unit by $F_s(c_{0,Y}^{-1});a_{R_Y[0]}^{-1};E_X(\\eta_i);c_{0,X}$. These definitions use the full coproduct over $p+q=n$ and impose no boundedness or flatness hypotheses; they assert no normalization equations.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-pd-section-module-operations-data",
+  "def-pd-proetale-section-module-functors",
+  "def-pc-tensor-complex-sheaves",
+  "def-pd-ordinary-pullback-balanced-generators"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4 (lemma-pullback-tensor-product), displayed signed total comparison and its constituents from Modules on Sites Tag 03EL; fixed section conjugation from the item"
+ },
+ "proof": [
+  {
+   "text": "Every cache retains the canonical ordinary, graded or signed-cochain tensor data; the eight additional instances only cache existing tensor-existence and iterated-tensor properties. Explicitly typed reducible aliases retain the original three termwise functors. The explicitly typed tensor comparison is the existing uniquely normalized totalComparison. The equality of the actual internal oplax structure and the canonical composite is the existing proved adjunction-mate normalization. The section total tensor isomorphism stores the same oplax tensor map and its lax inverse explicitly, with the existing monoidal inverse laws; its forward map is definitionally the original mapBifunctorComparison. Thus no object, map or constraint changes.",
+   "uses": [
+    "def-pd-proetale-section-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, displayed total comparison; sites-modules Tag 03EL, normalized pullback tensor comparison."
+   }
+  },
+  {
+   "text": "Write the conjugation forward path as F(p inverse), r inverse, G(i), c, e, and the reverse path in the opposite order with each factor inverted. Cancel the five adjacent inverse pairs using associativity, functoriality and the isomorphism laws. These two proved equations define the same isomorphism with the two paths stored explicitly. Its forward map is definitionally the forward map of the original five-factor isomorphism composition, so Iso.ext identifies the isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, transport of the displayed total comparison; elementary categorical cancellation."
+   }
+  },
+  {
+   "text": "Expose naturality as the API of termwisePullComparison and actualInternalTotalIso. The former is NatIso.mapHomologicalComplex naturality with strict termwise functor composition. The latter is mapBifunctorComparison_naturality for the specified ordinary oplax map; identify tensorHom with mapBifunctorMap and take the hom of asIso. No construction or normalization changes.",
+   "uses": [
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write the endpoints of totalUnitComparison, actualInternalTotalUnit, sectionTotalUnit and conjugatedInternalTotalUnit using the shared names for the original canonical cochain units. The definitions and their arrows are otherwise unchanged, and the endpoint names unfold to exactly their old values.",
+   "uses": [
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The fifteen pre-existing tensor caches now live in the publicly imported cochain interface. All names, signatures, attributes, disabled-instance status, priorities and bodies are retained from the current shared source. totalSectionEquivalence returns the same cached termwise section equivalence; totalTensorComparison returns the same normalized comparison through cochainTensorComparison. All current shared conjugation constructors and inverse laws remain present.",
+   "uses": [
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Express totalInternalPull and totalSectionPull as retainedCochainFunctor applied to their original ordinary functors. The generic reflexivity equation identifies both with their original termwise lifts. Retain the original monoidal structure on totalSectionPull explicitly as totalSectionPullMonoidal, by converting to the original mapHomologicalComplex functor and taking its existing instance. totalSectionEquivalence uses the same retained section functor. No tensor map, unit map or coherence proof changes. All shared explicit conjugation constructors and inverse-law proofs remain present.",
+   "uses": [
+    "def-pd-section-cochain-tensor-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "U3: expose the forward projections of the existing actualInternalTotalIso and sectionTotalIso, and identify the native section tensorator and unit. Each proof unfolds the existing definition and is reflexivity. Preserve every G6 retained functor, cochain comparison, monoidal instance and naturality API.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pd-proetale-section-module-functors",
+  "def-pd-section-cochain-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Existing construction and proof, with G6 normalization of the total-comparison interface (Tag 07A4). The underlying functors and comparison maps are retained.",
+  "U3_note": "U3: expose the forward projections of the existing actualInternalTotalIso and sectionTotalIso, and identify the native section tensorator and unit. Each proof unfolds the existing definition and is reflexivity. Preserve every G6 retained functor, cochain comparison, monoidal instance and naturality API."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical signed direct sum total oplax tensor comparison for pullback of sheaf modules and its section equivalence conjugation",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback\", \"TensorProduct.directSum\", \"TensorProduct.directSumLeft\", \"SheafOfModules.pullbackObjFreeIso\", \"TensorProduct.finsuppLeft\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\"], \"note\": \"\", \"digest\": \"1a382fd6d4fd1bcb\"}",
+   "date": "2026-10-23",
+   "verdict": "no specialized notion: generic sheaf pullback or direct sums; upstream mapBifunctorComparison and mapCochainComplexμIso give the canonical total used here, but no DAG node owns the specialized internal/section conjugation and units"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical signed direct sum total oplax tensor comparison for pullback of sheaf modules and its section equivalence conjugation",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"note\": \"\", \"digest\": \"b52eea8080548ae0\"}",
+   "date": "2026-10-23",
+   "verdict": "no specialized notion: generic sheaf pullback or direct sums; upstream mapBifunctorComparison and mapCochainComplexμIso give the canonical total used here, but no DAG node owns the specialized internal/section conjugation and units"
+  },
+  {
+   "tool": "grep",
+   "query": "mapCochainComplexμIso|conjugatedInternalTotalIso|sectionTotalIso",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no specialized notion: generic sheaf pullback or direct sums; upstream mapBifunctorComparison and mapCochainComplexμIso give the canonical total used here, but no DAG node owns the specialized internal/section conjugation and units"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pd-section-oplax-total-comparison",
+  "date": "2026-10-23",
+  "group": "Q42"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Canonical total comparisons and fixed tensor/unit conjugations used in seeded nt-target-poincare-isiso Step 2 via module/ringed derived comparison Step 3.",
+   "via": [
+    "lem-pd-section-oplax-total-comparison",
+    "lem-pd-section-derived-tensor-normalization",
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "nt-target-poincare-isiso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-verdier-exchange",
+ "lean": {
+  "module": "Sheaf.Paper.SectionTotalOplaxComparisonData",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.conjugatedInternalTotalUnit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalOplax_eq",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalInternalPull",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionPull",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionPullMonoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalSectionEquivalence",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalTensorComparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.termwisePullComparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.actualInternalTotalIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.termwisePullComparison_naturality",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.actualInternalTotalIso_naturality",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionTotalIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionConjugation_hom_inv_id",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionConjugation_inv_hom_id",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionConjugationIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionConjugationIso_eq",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.conjugatedInternalTotalIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.totalUnitComparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.actualInternalTotalUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionTotalUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.conjugatedInternalTotalUnit",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.actualInternalTotalIso_hom",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionTotalIso_hom",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionTotalIso_δ",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionTotalUnit_η"
+  ],
+  "file": "lean/Sheaf/Paper/SectionTotalOplaxComparisonData.lean",
+  "statement": "def conjugatedInternalTotalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) : (totalSectionPull Λ f).obj (𝟙_ (CochainComplex (modules Λ Y) ℤ)) ⟶ 𝟙_ (CochainComplex (modules Λ X) ℤ)",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Repair of returned head bea2e48ea8ad: termwisePullComparison lifts the fixed operation comparison E_X F_i ≅ F_s E_Y to one internal cochain complex. It is different from SectionDerivedRealization.totalPullComparison, the tensor comparison F_s Tot(P ⊗ Q) → Tot(F_s P ⊗ F_s Q) on two section complexes; the latter name is reserved for that existing declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb282e2a8",
+  "group": "Q42",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb282e2a8",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Re-delivery after the bea2 landing refusal (name clash with live SectionDerivedRealization.totalPullComparison). Diff vs bea2: the only Lean change is the rename to termwisePullComparison (termwise lift of the fixed operation comparison on one internal complex, not the two-complex tensor comparison) plus 4 uses, node declarations and lean.note, and the report section. Grep of side-live Sheaf and WeilConjectures for all 21 delivered names: no collisions. New advisory (H4/H12): sectionTotalIso is the same map as live totalPullComparison. Reuse is impossible without adding [∀ X, HasDerivedCategory.{u+1} (modules Λ X)] (a FIX attempt failed to synthesize it, so it was discarded). A probe proved (sectionTotalIso Λ f P Q).hom = totalPullComparison Λ f P Q by unfold+simp, clean (data module 26.2 s, probe 9.2 s). Re-checked all 12 clauses against the node: conjugated hom and inv with TotalMapAgreement, summands, local formulas 5/6/8, unit, naturality, associator and unitors. Unrestricted ℤ-complexes, signed coproduct total, HasDerivedCategory.{u+1} on X only, no universe equality. Edge cases f=id, empty schemes, Λ=0, zero complexes, R[0], negative and odd degrees all within the binders. Both lean.statement fields verbatim; only sorry is the theorem proof; docstrings carry source and blueprint. Advisories: data-module docstring mentions a nonexistent proposition; public priority-3000 instance aliases; unused inherited stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-83a6c",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261026T222800-L-695347",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature + 4 rewritten public predicates rfl-equal to verbatim originals; tensor rfl-equal to old body; derivedMonoidal = Monoidal.transport (monoidal_eq); delivered files vs current clone (G6 b4e6cc1 kept); node proof/proof_deps vs Lean imports; axioms (sorryAx only via section_resolving_oplax_constraint_diagrams)"
+ }
+}

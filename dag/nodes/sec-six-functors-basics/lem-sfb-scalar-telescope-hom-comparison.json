@@ -1,0 +1,119 @@
+{
+ "id": "lem-sfb-scalar-telescope-hom-comparison",
+ "kind": "statement",
+ "title": "Normalized Hom comparison from scalar telescopes",
+ "statement": "Let $\\mathcal A$ be an abelian category with an ordinary derived category $D(\\mathcal A)$ and localization functor $Q$ [def-weil-abstract-derived-category], countable coproducts, and filtered colimits indexed by small categories, which are exact. Let $\\mathcal B$ be a category and $F:D(\\mathcal A)\\rightleftarrows\\mathcal B:U$ an adjunction with unit $\\eta$. Fix $p\\in\\mathbf N$. For every complex $C$, let $T_p(C)$ be the sequential complex diagram with constant object $C$ and transition $p\\operatorname{id}_C$. Suppose specified isomorphisms $\\beta_C:Q(\\operatorname{colim}T_p(C))\\simeq UF(QC)$ satisfy $Q(\\iota_{C,0})\\beta_C=\\eta_{QC}$. Let $H:D(\\mathcal A)\\to D(\\mathcal A)$ be additive, let $G$ be an endofunctor of complexes, and fix $e:QG\\simeq HQ$. For a complex $P$, suppose the canonical comparison $Q(\\operatorname{colimit.post}(T_p(P),G))$ is invertible. Then there is an isomorphism $t:UF(H(QP))\\simeq H(UF(QP))$ satisfying $\\eta_{H(QP)}t=H(\\eta_{QP})$. The only continuity hypothesis is the comparison for this one diagram and complex. If U is full, the same continuity comparison is invertible for every strictly bounded-below complex, L is bounded below, and H(UFL) is isomorphic to a restricted object, then any map UF(HL) → H(UFL) whose composite with the unit is H(η_L) is invertible.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2, Lemma 6.8.12 and Proposition 6.8.14(2); agent extraction of the coefficient and exact-equivalence transport."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use additivity and the representative natural isomorphism to identify the scalar transitions after Q. Exact sequential colimits and their telescope triangles give an isomorphism of derived colimits preserving their legs.",
+   "uses": [
+    "lem-sfb-internal-hom-localization-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose with the assumed canonical continuity comparison, the natural model isomorphism, and the two unit-normalized telescope isomorphisms. Naturality gives the stated zeroth-leg equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose a strictly bounded-below representative of L and apply the telescope comparison. Transport its isomorphism using unit naturality. Fullness of U makes precomposition with the unit injective on morphisms into a restricted object, so the transported isomorphism equals the specified normalized comparison.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-hom-localization-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Normalized telescope proof and coefficient transport, pp. 58–62."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "colimit.*post.*pre|colimit.*pre.*post|mapDerivedCategory.*colimit",
+   "results": "Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Shapes/Over.lean; Mathlib/CategoryTheory/Limits/Preserves/Limits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean; Mathlib/CategoryTheory/Limits/HasLimits.lean",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"post\", \"pre\"",
+   "results": "CategoryTheory.Limits.colimit.pre_post; CategoryTheory.preservesColimit_of_isIso_post; CategoryTheory.Limits.PreservesColimitsOfSize.underPost; CategoryTheory.Limits.PreservesFiniteColimits.underPost; CategoryTheory.Limits.PreservesColimitsOfShape.underPost",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on derived categories which preserves bounded below sequential colimits commutes with scalar localization telescopes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapDerivedCategory; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-24",
+   "verdict": "Generic exact-functor and colimit infrastructure; no theorem with the required coefficient and unit normalization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralGeneralLfpHomInversion",
+  "date": "2026-10-25",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md in literature/blueprint/latest: the finite-extension field case follows by inverting ell. This lemma supplies the exact derived scalar-telescope comparison for a continuous Hom model. blueprint_refs.py ancestor reports no imported ancestor for the parent.",
+   "via": [
+    "lem-sfb-integral-general-lfp-hom-inversion",
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ScalarTelescopeHomComparison",
+  "file": "lean/Sheaf/Algebra/Homology/ScalarTelescopeHomComparison.lean",
+  "declaration": "CategoryTheory.scalarTelescope_hom_comparison",
+  "statement": "theorem scalarTelescope_hom_comparison\n    {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]\n    [HasCountableCoproducts A] [HasFilteredColimitsOfSize.{0, 0} A]\n    [AB5OfSize.{0, 0} A]\n    {B : Type b} [Category.{h} B]\n    (F : DerivedCategory A ⥤ B) (U : B ⥤ DerivedCategory A) (adj : F ⊣ U)\n    (p : ℕ) (G : CochainComplex A ℤ ⥤ CochainComplex A ℤ)\n    (H : DerivedCategory A ⥤ DerivedCategory A) [H.Additive]\n    (e : G ⋙ DerivedCategory.Q ≅ DerivedCategory.Q ⋙ H)\n    (β : ∀ P : CochainComplex A ℤ,\n      DerivedCategory.Q.obj (colimit (Functor.ofSequence (fun _ : ℕ ↦ p • 𝟙 P))) ≅\n        U.obj (F.obj (DerivedCategory.Q.obj P)))\n    (hβ : ∀ P : CochainComplex A ℤ,\n      DerivedCategory.Q.map\n          (colimit.ι (Functor.ofSequence (fun _ : ℕ ↦ p • 𝟙 P)) 0) ≫ (β P).hom =\n        adj.unit.app (DerivedCategory.Q.obj P))\n    (P : CochainComplex A ℤ)\n    (hcont : IsIso (DerivedCategory.Q.map\n      (colimit.post (Functor.ofSequence (fun _ : ℕ ↦ p • 𝟙 P)) G))) :\n    ∃ t : U.obj (F.obj (H.obj (DerivedCategory.Q.obj P))) ≅\n        H.obj (U.obj (F.obj (DerivedCategory.Q.obj P))),\n      adj.unit.app (H.obj (DerivedCategory.Q.obj P)) ≫ t.hom =\n        H.map (adj.unit.app (DerivedCategory.Q.obj P))",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-25",
+  "declarations": [
+   "CategoryTheory.scalarTelescope_hom_comparison",
+   "CategoryTheory.scalarTelescope_normalized_comparison_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-04f4f",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T001230-L-4177136",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-04f4f",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T001230-L-4177136",
+  "kind": "interface",
+  "note": "independent cc review: item module vs clone d994cfa (theorem signature unchanged; ring abbrev→def same body and coefficientMap explicit type, both in change record); 3 new proved modules vs their node lean.statement (verbatim) and proof_deps (= union of uses); scratch compile of all 4 modules, #print axioms sorryAx traced only to published open upstream moduleObject_ringedSite_derived_comparison and finite_local_model_rhom_continuity"
+ }
+}

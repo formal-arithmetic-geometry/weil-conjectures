@@ -1,0 +1,113 @@
+{
+ "id": "def-pod-verdier-weil-conclusion",
+ "kind": "definition",
+ "title": "Predicate for rational and common-stage Weil duality with coefficient diagrams",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Fix the finite-field and coefficient datum of [def-weil-finite-field-fiber] and a separated finite-type model $X_0$. Use the actual common-stage duality and its finite rational data, internal-Hom identification and exceptional-unit dualizing normalization of [def-sf-common-stage-verdier-data], the derived coefficient operations of [def-weil-derived-pullback-tensor-hom], Weil pairs of [def-weil-weil-sheaf-complex], and constructible exceptional adjunctions of [def-weil-exceptional-inverse-image]. Define the predicate Conclusion as follows. There exist such duality data $B_X$, an identification with the recorded internal Hom, the specified exceptional-unit dualizing normalization, and finite/common Weil structures $W_X$. Their dual comparison uses $D(\\theta^{-1})$; evaluation and actual biduality obey the Weil equations. The canonical dualizing and dual scalar comparisons for every finite field inclusion, including identity inclusions, and the finite-to-common inclusion comparisons obey the corresponding Weil equations, with their prescribed evaluation/biduality diagrams. The dualizing Weil structure is normalized by the mate of the actual structure-morphism exchange and the unit-normalized constant object. For every separated finite-type $f_0:X_0\\to Y_0$ between separated finite-type models and every model compactification there exist corresponding $B_Y$, an actual exceptional functor on its geometric compactification, its internal-Hom/dualizing identifications and exceptional-duality formula, and $W_Y$, with that same dualizing normalization. The exceptional Frobenius comparison is the mate of inverse compact-support exchange; the actual units, counits, finite scalar and common-stage adjunction comparisons have their prescribed Weil equations. This paragraph defines a proposition packaging all these witnesses and diagrams; it does not assert that the proposition holds.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-sf-common-stage-verdier-data",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-exceptional-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-poincare-duality/sk-thm-frobenius/prop-weil-operations.proof.md",
+  "place": "Formal duality exchange sentence and the supplied canonical operation/evaluation/adjunction comparisons."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Frobenius stable domain with tensor Hom and lifted adjunctions for Verdier duality",
+   "results": "8 hits: frobeniusMorphism, frobeniusMorphism_mate, ModuleCat.monoidalClosedHomEquiv, SheafOfModules.PullbackConstruction.adjunction, tensorLeftAdjunction, expComparison_iso_of_frobeniusMorphism_iso, FunctorToTypes.adj, dualTensorHomEquiv. General infrastructure; no exact Mathlib interface.",
+   "date": "2026-10-24",
+   "verdict": "Existing project definitions are reused."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra, CategoryTheory.Adjunction",
+   "results": "0 hits; unknown identifier CategoryTheory.Endofunctor.IsoAlgebra (project declaration is not in the Mathlib index).",
+   "date": "2026-10-24",
+   "verdict": "No Mathlib match; project declarations read directly."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep VerdierPairing|CoefVerdierWeil|ProjectionLifts CategoryTheory; rg VerdierPairing.Domain|CoefVerdierWeil.Conclusion dag/nodes; rg VerdierPairing|CoefVerdierWeil.Conclusion lean/WeilConjectures lean/Sheaf/Paper Mathlib/CategoryTheory; blueprint_refs.py search Verdier pairing; blueprint_refs.py search Weil duality",
+   "results": "msearch: 0 hits. Blueprint searches: 0 nodes each. DAG exact-name hits only the two theorem nodes, with no definition owner. Project hits give the existing VerdierPairingThreeTransposes definitions; CoefVerdierWeil.Conclusion is in SixFunctors/CoefVerdierWeilEquivariance. No upstream/Mathlib duplicate.",
+   "date": "2026-10-24",
+   "verdict": "Add definition ownership of the existing declarations, as explicitly requested by H2; no source copy."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-formal-verdier-exchange-equivariance",
+  "date": "2026-10-24",
+  "group": "Q93"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Formal duality exchange sentence and the supplied canonical operation/evaluation/adjunction comparisons.",
+   "via": [
+    "lem-pod-formal-verdier-exchange-equivariance"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefVerdierWeilData",
+  "declaration": "WeilConjectures.CoefVerdierWeil.Conclusion",
+  "declarations": [
+   "WeilConjectures.CoefVerdierWeil.Conclusion"
+  ],
+  "statement": "def Conclusion : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership of unchanged published declarations required by returned head 7ca50a7fa9f8, H2. Only the definitions used by the consumer are listed; the theorem remains a proof dependency, not a statement dependency.",
+  "file": "lean/Sheaf/SixFunctors/CoefVerdierWeilData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a88edfb5d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a88edfb5d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Re-delivery of 7ca50a7f fixes both return points. H2: new existing:true definition nodes def-pod-verdier-pairing-domain-data (VerdierPairing Domain/C/phi/TensorHomData/weilTensor/weilHom/ClosedData/LiftedAdjunction/Realizes/geometricPullback/imageDual/tensorSource) and def-pod-verdier-weil-conclusion (CoefVerdierWeil.Conclusion) own the plain defs; the theorem nodes are proof_deps only; the item statement is byte-identical to live; stmt_deps only gain def nodes. H3: Projection has only iso plus an HEq pin to d.projection. ProjectionLifts gives primitive proper-adjunction (adj = d.properAdjunction), tensorBar, tensorPullback, openProjection and supportIdentification Weil lifts, each HEq-pinned. The PF square is derived formally (rightAdjointProjectionMap = homEquiv(mu then T(counit)), then R(openProjection), then conjugation) and is now a conclusion of Assertion. Checked: compositionMate formula against the conjugateIsoEquiv unfolding, the t/r/s transposes, the formalMap Weil square, the mate-substitution identity, and that Normalizes forces s = I.inv with invertibility only under I. CoefVerdierWeil.Conclusion for X0 and Y0 covers the duality paragraph. Edge cases fine; no lattice or ambient exceptional adjoint; one sorry; docstrings ok. Not recompiled (no file changed). Advisory: the domain-data node does not cite def-weil-exceptional-inverse-image."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-c479c",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261026T003041-L-142554",
+  "kind": "interface",
+  "note": "independent cc review: re-delivery c479 Lean/JSON byte-identical to 4fd08 (whose FIX never landed: report fix name refused); holes vs IntegralVerdier.SignedSymmetry (still unpinned in clone 03f3c71); 5 modules + 3 direct importers compiled"
+ }
+}

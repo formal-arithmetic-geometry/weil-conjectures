@@ -112,7 +112,18 @@
   "item": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
   "date": "2026-10-10"
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "split_report": {
@@ -161,5 +172,32 @@
    "Pi.isNormalRing_of_finite"
   ],
   "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $R_1,\\dots,R_n$ be commutative normal rings. Then their finite product $R=\\prod_iR_i$ is a normal ring: for every prime ideal $\\mathfrak p\\subset R$, the localization $R_{\\mathfrak p}$ is a normal domain.",
+  "proof": [
+   {
+    "text": "Let $I$ be the finite index set of factors and let $\\mathfrak p$ be any prime ideal of $R=\\prod_{i\\in I}R_i$. Every prime ideal of a finite product of rings is the inverse image of a prime ideal of one factor under the projection: there are an index $i\\in I$ and a prime ideal $\\mathfrak q\\subset R_i$ for which $\\mathfrak p=\\pi_i^{-1}(\\mathfrak q)$. This also deals with $I=\\varnothing$: the asserted existence of $i$ contradicts emptiness, so the zero product ring has no primes and the normal-ring condition is vacuous.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the index and prime just obtained, the coordinate projection $\\pi_i$ induces an isomorphism $R_{\\mathfrak p}\\cong(R_i)_{\\mathfrak q}$ (the other factors die after localizing at $\\mathfrak p$); this identifies $R_{\\mathfrak p}$ with $(R_i)_{\\mathfrak q}$ through the map induced by the coordinate projection. The hypothesis that $R_i$ is a normal ring means precisely that $(R_i)_{\\mathfrak q}$ is a normal domain.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Being a normal domain is invariant under ring isomorphisms, so the isomorphism of step 2 makes $R_{\\mathfrak p}$ a normal domain. Since $\\mathfrak p$ was arbitrary, the defining condition holds for $R$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

@@ -1,0 +1,114 @@
+{
+ "id": "lem-pur-adic-canonical-source-coherence",
+ "kind": "statement",
+ "title": "Canonical source coefficient unit, associativity and shift equations",
+ "statement": "Fix the geometric hypotheses, full finite-Tor categories, ordinary derived coefficient extensions and canonical source components of [def-pur-adic-purity-scalar-naturality-data]. For any proof of scalar closure and any family a of natural isomorphisms whose underlying components are exactly sourceScalarComponent, the source comparisons satisfy the ordinary tensor-unit equation, the displayed three-field tensor-associator equation and compatibility with the specified sourceShift and scalarShift structures. No purity gamma or exceptional comparison b is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport and compatibility; extracted assembly below lem-pur-adic-purity-scalar-naturality"
+ },
+ "stmt_deps": [
+  "def-pur-adic-purity-scalar-naturality-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the source_identity, source_composition and source_shift clauses of the operation-domain/source-comparison node. Its source component uses K-flat ordinary scalar extension; compare it to the exact-derived ordinary presentation by their universal counits and chi on complete inputs. The beta and pullback normalization equations give precisely sourceScalarComponent. The signed shifts agree by their representative descent normalizations. Full-inclusion faithfulness transports the unit, associator and shift equations, and aCanonical substitutes the given a.",
+   "uses": [
+    "lem-pur-adic-operation-domains-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-adic-operation-domains-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/_section.md",
+  "place": "Integral coefficient transport and compatibility; extracted assembly below lem-pur-adic-purity-scalar-naturality"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicPurityScalarNaturality",
+  "date": "2026-10-25",
+  "group": "R2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Integral coefficient transport: normalized natural comparisons and their unit, composition and shift equations",
+   "via": [
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A natural smooth purity isomorphism for integral adic constructible complexes compatible with extension of coefficient fields",
+   "results": "Eight hits concerning BDeRham, smooth algebras, local cohomology and adic completion.",
+   "date": "2026-10-25",
+   "verdict": "No match for normalized adic purity or its coefficient equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"homEquiv\"",
+   "results": "Adjunction.homEquiv and constructors for adjunctions.",
+   "date": "2026-10-25",
+   "verdict": "Generic adjunction bijections support the argument, but do not construct adic purity comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "adicPurity|purity.*scalar|scalar.*purity",
+   "results": "msearch: zero Mathlib hits; local rg found the existing item and its five planned dependencies.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the extracted interface transport statements."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral smooth cohomological purity is compatible with finite extensions of coefficient fields and ordinary tensor associators",
+   "results": "Eight hits including Algebra.Smooth.baseChange and ModuleCat.extendScalars_assoc′.",
+   "date": "2026-10-25",
+   "verdict": "Generic algebra smoothness and module scalar associators; no normalized constructible adic purity statement."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPurityCanonicalSourceCoherence",
+  "file": "lean/Sheaf/Paper/AdicPurityCanonicalSourceCoherence.lean",
+  "declaration": "WeilConjectures.AdicPurityScalarNaturality.canonicalSourceCoherence",
+  "declarations": [
+   "WeilConjectures.AdicPurityScalarNaturality.canonicalSourceCoherence"
+  ],
+  "statement": "theorem canonicalSourceCoherence (hC : ScalarClosed D C X Y)\n    (a : ∀ (E F : Field D C) (h : E ≤ F),\n      source D C f d E ⋙ scalar D C hC E F h true ≅\n        scalar D C hC E F h false ⋙ source D C f d F)\n    (ha : ∀ (E F : Field D C) (h : E ≤ F) (K : Cat D C E Y),\n      ((a E F h).hom.app K).hom = (sourceScalarComponent D C f d hC E F h K).hom) :\n    (∀ (E : Field D C) (K : Cat D C E Y),\n    (a E E le_rfl).hom.app K ≫\n        (source D C f d E).map ((scalarUnit D C hC E false).hom.app K) =\n      (scalarUnit D C hC E true).hom.app ((source D C f d E).obj K)) ∧\n    (∀ (E F L : Field D C) (h : E ≤ F) (k : F ≤ L) (K : Cat D C E Y),\n    (associator D C hC E F L h k true).hom.app ((source D C f d E).obj K) ≫\n        (a E L (h.trans k)).hom.app K =\n      (scalar D C hC F L k true).map ((a E F h).hom.app K) ≫\n        (a F L k).hom.app ((scalar D C hC E F h false).obj K) ≫\n        (source D C f d L).map ((associator D C hC E F L h k false).hom.app K)) ∧\n    (∀ (E F : Field D C) (h : E ≤ F),\n    ShiftCompatibility\n      (source D C f d E ⋙ scalar D C hC E F h true)\n      (scalar D C hC E F h false ⋙ source D C f d F)\n      (composeShift (source D C f d E) (scalar D C hC E F h true)\n        (sourceShift D C f d E) (scalarShift D C hC E F h true))\n      (composeShift (scalar D C hC E F h false) (source D C f d F)\n        (scalarShift D C hC E F h false) (sourceShift D C f d F)) (a E F h))",
+  "branch": "sheaf-dag",
+  "by": "R2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-adcfc",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261025T143842-L-1091556",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data module vs old item module (verbatim apart from the declared Coherence expose, OperationData regrouping and transparency options); the two new sorry statements vs the old item statement (each follows from it, neither restates it); 4 direct importers compiled against the delivered modules"
+ }
+}

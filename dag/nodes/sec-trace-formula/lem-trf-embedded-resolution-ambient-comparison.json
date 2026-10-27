@@ -21,104 +21,50 @@
  ],
  "proof": [
   {
-   "text": "Use the corrected local invariant $\\nu_H$ of [lem-trf-hilbert-samuel-resolution-invariant-calculus]. Starting with the empty ambient history, if $X_i$ is regular, stop. Otherwise take $m_i=\\max\\nu_{H_i}>\\bot$, give this stage the label $m_i$, and put $C_i=M_{H_i}$. Form the ordinary ambient blowup and its scheme-theoretic strict transform. Clause (1) gives precisely the asserted properties of $C_i$ and says that the next pair is again in the allowed class. The maximum value strictly decreases whenever a next nonterminal stage exists. Give the common label set $V\\setminus\\{\\bot\\}$ the reverse of its invariant order. Thus labels in every constructed tower are distinct and occur in the same prescribed order. For the empty scheme there is no positive maximum, so the recursion stops immediately; it also stops immediately for every regular input. Apply the same rule to a finite disjoint union, taking its maximum over the entire union, rather than renumbering its components independently.",
-   "uses": [
-    "lem-trf-hilbert-samuel-resolution-invariant-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11 and 2.3.13, pp.93--94; BMT 6.1 Addendum and 6.3: build the tower from full maximum loci, with corrected synchronization."
-   }
-  },
-  {
-   "text": "This recursion is exactly the maximum-stratum process of clause (4) of [lem-trf-hilbert-samuel-resolution-invariant-calculus], for the same functions $\\nu_H$ used in Step 1. Hence it stops after finitely many blowups. At its last stage there is no positive invariant value: otherwise clause (1) of [lem-trf-hilbert-samuel-resolution-invariant-calculus] would give the next nonempty center, contradicting termination. That same clause says that every local ring of $X_r$ is regular, so $X_r$ is regular. Since the recursion is defined to stop at this first regular stage, it omits the exceptional-divisor cleanup described in ILO 2.3.11. No well-foundedness of an arbitrary ordered label set is being assumed.",
-   "uses": [
-    "lem-trf-hilbert-samuel-resolution-invariant-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11, p.93: stop the strong algorithm when the strict transform is smooth; termination supplied separately by the maximum-process input."
-   }
-  },
-  {
-   "text": "Fix a smooth ambient map $v:Q\\to P$ and the finite labeled tower just constructed over $P$. Its ambient pullbacks are ordinary blowups: $v$ is flat by [lem-pc-smooth-flat], and [thm-nagata-blowup-flat-base-change], with the comparison of [def-nagata-blowup-flat-base-change-map], identifies each pulled-back stage with the blowup of the extended center ideal. The maps from the pulled-back ambient schemes and strict transforms to their originals are base changes of $v$, hence smooth by clause (2) of [lem-pc-proper-base-change], and flat by [lem-pc-smooth-flat]. To see scheme-theoretic equality of the strict transforms at the next stage, apply [lemma-nagata-strict-transform-ambient-closed] to $X_i\\hookrightarrow P_i$ and to its pullback: both strict transforms are the intrinsic blowups of these closed subschemes in the corresponding center ideals. Flat blowup base change identifies these intrinsic blowups as well. This proves the required cartesian identifications inductively; no assertion that mere topological closure commutes with pullback is used.",
-   "uses": [
-    "lem-pc-smooth-flat",
-    "thm-nagata-blowup-flat-base-change",
-    "def-nagata-blowup-flat-base-change-map",
-    "lemma-nagata-strict-transform-ambient-closed",
-    "lem-pc-proper-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.1.4 and 2.3.4; ordinary blowup and strict-transform calculus, using the existing generic scheme-theoretic comparison statements."
-   }
-  },
-  {
-   "text": "Induct through the ordered labels of the tower over $P$. Suppose that the algorithm over $Q$ has so far performed exactly the nonempty pulled-back centers of the earlier labels. At the current history, clause (2) of [lem-trf-hilbert-samuel-resolution-invariant-calculus] identifies the invariant on the pulled-back strict transform with the pulled-back invariant on $X_i$, and identifies the center ideals. If the stratum with label $m_i$ has nonempty inverse image, then $m_i$ is also the maximum value there: all its values are at most $m_i$ and some equal it. The rule of Step 1 therefore selects exactly this pulled-back center as the next center over $Q$, with the same label. If its inverse image is empty, clause (2) says its ideal is the unit ideal, so this is an identity stage and changes neither the strict transform nor its local invariant; skip it. After all labels over $P$ have been inspected, the pulled-back final history has invariant $\\bot$ everywhere, again by clause (2), and is regular by clause (1). Thus there are no additional stages over $Q$. This proves deletion of precisely the empty centers, including the case that $Q$ only meets the regular locus. The invariant comparison expressly allows the relative dimension to vary.",
-   "uses": [
-    "lem-trf-hilbert-samuel-resolution-invariant-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.4, 2.3.5(i)--(ii), 2.3.13; BMT 6.3: induction comparing maximum values, with empty stages retained as labels."
-   }
-  },
-  {
-   "text": "Now fix two ambient embeddings of the same $X$. At stage zero the intrinsic histories agree. If their histories through the preceding label agree, clause (3) of [lem-trf-hilbert-samuel-resolution-invariant-calculus] says the invariant functions, their maxima, and their reduced center ideals on the identified strict transforms agree. Their next labels and centers on those strict transforms are consequently identical. By [lemma-nagata-strict-transform-ambient-closed], each next strict transform is the blowup of this same intrinsic scheme in this same ideal. Identify them by that common blowup, retaining the center ideal and its place in the history. Induction gives the asserted intrinsic comparison at every label. They stop simultaneously because regularity is detected by $\\nu_H=\\bot$. This argument compares the strict-transform towers; it does not identify the two different ambient blowup schemes.",
+   "text": "Choose the simultaneous invariant calculus supplied by [lem-trf-hilbert-samuel-resolution-invariant-calculus], and call its entire value set, including its least element, $V$. Fix this SAME calculus for every embedded pair. Its clauses (1)--(4) satisfy the hypotheses of [lem-trf-maximum-history-finite-realization]. For each pair $A$, set $E(A)=T_\\nu(A)$ to its maximum-center realization. This supplies the finite ordinary embedded tower, all center conditions, regular final transform, and common label set $L=(V\\setminus\\{\\bot\\})^{\\mathrm{op}}$. It stops at first regularity, gives empty towers for empty or regular inputs, and takes maxima over entire finite disjoint unions. Retain its center ideals and lower-cut diagrams. The lemma determines this realization up to the canonical blowup identifications; Steps 2--3 compare these very realizations, rather than choosing independent algorithms on different pairs.",
    "uses": [
     "lem-trf-hilbert-samuel-resolution-invariant-calculus",
-    "lemma-nagata-strict-transform-ambient-closed"
+    "lem-trf-maximum-history-finite-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.11--2.3.13; BMT 6.1 Addendum (3), 6.3, paragraph on independence of the local embedding variety."
+    "place": "VIII 2.3.11, printed p.93 (stop before exceptional-divisor cleanup), and 2.3.13, p.94 (common invariant synchronization); old Steps 1--2."
    }
   },
   {
-   "text": "For a smooth identity map, extending the ideal does nothing and every nonempty label is retained. The identity is smooth, and composites are smooth by [lem-trf-smooth-composition]. For composable smooth maps $R\\xrightarrow{w}Q\\xrightarrow{v}P$, the center ideal at any retained label is obtained by two successive extensions of scalars; this is the same ideal as extension along $vw$, since the generators of either ideal are the images of the same original local sections. A center empty on $Q$ remains empty on $R$. A center nonempty on $Q$ but empty on $R$ is removed at the second restriction, just as in direct restriction. The comparisons of Step 3 all arise from the same blowup of these identical ideals, so the stage identifications coincide. This proves the identity and composition assertions, including their labels.",
+   "text": "For a smooth ambient map $v:Q\\to P$, take the Step 1 histories on $A=(X\\hookrightarrow P)$ and $B=(X\\times_PQ\\hookrightarrow Q)$ with their specified initial cartesian identification. Both use the fixed calculus, start empty, and stop at first regularity, as required by [lem-trf-maximum-history-smooth-deletion]. Its comparison is cartesian on ambient schemes and scheme-theoretic strict transforms, extends center ideals, and deletes precisely empty centers while retaining labels, for arbitrary relative dimensions. Its final-bottom assertion rules out additional stages over $Q$. For composable smooth ambient maps, all three Step 1 histories use this same calculus, so the lemma's identity and composition laws apply to these particular comparisons and their lower-cut diagrams, including identity stages at absent labels.",
    "uses": [
-    "def-nagata-blowup-flat-base-change-map",
-    "lemma-nagata-strict-transform-ambient-closed",
-    "lem-trf-smooth-composition"
+    "lem-trf-maximum-history-smooth-deletion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 2.3.4 and the ordinary blowup comparison; elementary compatibility once the centers and their extended ideals have been identified."
+    "place": "VIII 2.3.4--2.3.5, printed pp.91--92 (contracted pullback and synchronization), and 2.3.13, p.94 (arbitrary smooth morphisms); old Steps 3--4 and 6."
    }
   },
   {
-   "text": "Finally, an isomorphism of initial reduced schemes identifies their invariant histories by clause (3) of [lem-trf-hilbert-samuel-resolution-invariant-calculus]. Repeating the induction of Step 5 therefore compares the intrinsic towers along this isomorphism. For three embeddings, all three pairwise comparisons at the next stage are the maps induced by the identity on the same intrinsic scheme and its same center ideal; both composites are that identity-induced map on its blowup. Starting at $X$, induction proves transitivity at all stages. The same observation shows that these intrinsic comparisons agree with restriction or smooth ambient pullback, since clause (3) commutes with those operations and the extended ideals are equal. The comparisons are canonical at the level of the labeled blowups of ideals, even if an individual blowup morphism is an identity.",
+   "text": "For two embeddings of the same $X$, the identity $\\operatorname{id}_X$ identifies their initial strict transforms; their empty histories have no earlier center ideals to match. Apply [lem-trf-maximum-history-intrinsic-cocycle] to their Step 1 histories and this initial identity. This identifies their strict-transform diagrams and ideal centers with exactly the same active labels. Apply its general isomorphism case for functoriality in $X$ and its composition law for three embeddings. Its compatibility with restriction and smooth pullback gives the corresponding compatibility of these intrinsic comparisons. Together with Step 2 these towers and comparisons are the asserted assignment.",
    "uses": [
-    "lem-trf-hilbert-samuel-resolution-invariant-calculus",
-    "lemma-nagata-strict-transform-ambient-closed"
+    "lem-trf-maximum-history-intrinsic-cocycle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "BMT 6.1 Addendum (3)--(4) and 6.3; intrinsic invariant and ideal comparisons, with cocycle checked stage by stage."
+    "place": "VIII 2.3.11--2.3.13, printed pp.93--94 (intrinsic embedded-resolution input); intrinsic blowup induction of old Steps 5 and 7, written by an agent."
    }
   }
  ],
  "proof_deps": [
-  "def-nagata-blowup-flat-base-change-map",
-  "lem-pc-proper-base-change",
-  "lem-pc-smooth-flat",
   "lem-trf-hilbert-samuel-resolution-invariant-calculus",
-  "lem-trf-smooth-composition",
-  "lemma-nagata-strict-transform-ambient-closed",
-  "thm-nagata-blowup-flat-base-change"
+  "lem-trf-maximum-history-finite-realization",
+  "lem-trf-maximum-history-intrinsic-cocycle",
+  "lem-trf-maximum-history-smooth-deletion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "VIII 2.3.11--2.3.13, pp.93--94; construction from the separate local invariant calculus and termination inputs. Detailed BMT archival source WANTED; online arXiv:0905.3580 sections 6.1--6.3 read."
+  "place": "ILO VIII 2.3.1, 2.3.4--2.3.5, 2.3.11--2.3.13, pp.91--94; agent-written short assembly of conditional finite-history lemmas; BMT detailed archival reference WANTED."
  },
  "mathlib_searches": [
   {
@@ -244,29 +190,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-23",
   "item": "lem-trf-embedded-resolution-ambient-comparison",
   "worker": "stage1",
-  "summary": "Constructed the labeled embedded tower by successive full maxima of the local dimension-corrected invariant, took termination from the termination clause of the same invariant calculus, and proved smooth pullback and intrinsic ambient comparison by induction on the finite ordered labels, using equality of coherent center ideals and existing ordinary blowup calculus. No statement change. One new strictly lower invariant statement (maximum-stratum calculus with its termination clause, for one existentially given invariant) remains unsplit; no Mathlib match.",
-  "blueprint": "Preserves the recorded historical alteration branch of lem-trf-local-term-locality via smooth-functorial ordinary resolution. Realizes the embedded input singled out in ILO VIII 2.3.11--2.3.13; no change to the current contracting-correspondence unit route.",
-  "tool_uses": [
-   {
-    "node": "lem-pc-smooth-flat",
-    "why": "Generic ordinary blowup/strict-transform or smooth-flat comparison used as a black box to compare finite stages; the assigned trace-formula unit has no replacement for this scheme-theoretic tool."
-   },
-   {
-    "node": "thm-nagata-blowup-flat-base-change",
-    "why": "Generic ordinary blowup/strict-transform or smooth-flat comparison used as a black box to compare finite stages; the assigned trace-formula unit has no replacement for this scheme-theoretic tool."
-   },
-   {
-    "node": "lemma-nagata-strict-transform-ambient-closed",
-    "why": "Generic ordinary blowup/strict-transform or smooth-flat comparison used as a black box to compare finite stages; the assigned trace-formula unit has no replacement for this scheme-theoretic tool."
-   },
-   {
-    "node": "lem-pc-proper-base-change",
-    "why": "Generic smooth base-change stability, used to keep the cartesian ambient and strict-transform comparisons smooth; no unit route is replaced."
-   }
-  ]
+  "summary": "Repair of mandatory work-spreading re-split: three statement-only conditional history lemmas carry old Steps 1--2, 3--4 plus 6, and 5 plus 7. The unchanged item now assembles their conclusions using one specified simultaneous calculus. Full original arguments and the clause-by-clause task allocation are retained in report.md. All new lemmas searched with two semantic phrasings, LeanSearch, Loogle and Mathlib grep. Landing-return repair: compared returned head e32e2b43ad5 with live sheaf-dag e36b0810c721af37eda3f73c4cd6fda370c42062. The calculus and three history definitions are unchanged; the three extracted lemmas are absent on live. Retained the three-node decomposition, made the common-value-set identification explicit in assembly Step 1, and replaced old-step-only source places with exact ILO passages. Delivery is rebased by the authorized tool onto current origin/sheaf-dag. Landing-return repair of f5390e16a4e (2026-10-22 11:17 UTC): compared against server sheaf-dag b471fd941383fe7d9e907f1cb451264214c512a8; the live item still carries the original seven steps and the three extracted lemmas remain absent. Its cited invariant theorem and history definitions are unchanged. Assembly Step 1 now explicitly fixes one calculus for all pairs and sets E(A)=T_nu(A), so the smooth and intrinsic comparisons apply to the same realizations. Statement and statement dependencies remain unchanged. Current landing-return repair: compared returned 594b2fbf86852a55cdac2293fb01e9696790dac7 with live sheaf-dag 38f67988cdcaeac22a121250b11bbc240f6fe460. Only the four owned split fields differ on the parent; the invariant theorem and all three history definitions are unchanged. All three extracted nodes are still absent from live. Reopened all cited statements and verified four verbatim quotes. Step 3 now checks explicitly that the initial identity identifies the strict transforms and that empty histories have no earlier center ideals to match. The authorized delivery rebases this repaired split onto current live; maintainer promotion remains necessary. Landing-return repair: compared returned 594b2fbf868 with current server sheaf-dag ba57b5be0f76; invariant and history-definition records are unchanged, and three new nodes remain absent from live. Step 2 now checks the initial cartesian data, the absence of extra stages, and the same-calculus hypothesis for all three histories in composition. The delivery is rebuilt on current origin/sheaf-dag, retaining live maintainer records.",
+  "blueprint": "Preserves the recorded historical alteration branch of lem-trf-local-term-locality via smooth-functorial ordinary resolution. Realizes the embedded input singled out in ILO VIII 2.3.11--2.3.13; no change to the current contracting-correspondence unit route. Preserves the same historical branch; extracts the three finite-history arguments at ILO VIII 2.3.11--2.3.13 below that branch."
  },
  "tool_uses": [
   "lem-pc-smooth-flat",
@@ -275,12 +203,12 @@
   "lem-pc-proper-base-change"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-23",
   "by": "L",
-  "reviewer": "NT-cc-Q44-73173d966",
-  "group": "Q44",
+  "reviewer": "NT-cc-Q74-73814c766",
+  "group": "Q74",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-73173d966 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps, both new nodes, every cited statement, the parent's use of the item, and ILO VIII 2.2.7-2.3.17 (pp.90-95). BMT is not in literature/ (WANTED), so its content is judged only through ILO's account of it. The item statement is unchanged. It matches ILO 2.3.10/2.3.11, restricted to embedded finite-type Q-schemes, with the conventions of 2.3.1 and 2.3.4-2.3.5 and the synchronization fix of 2.3.13 (BMT 6.3). It keeps centres in Sing, stops at the first regular stage without cleanup, and its labels survive smooth pullback even when relative dimension varies. Step checks: Step 1 uses clause (1): centres are nonempty, regular, nowhere dense and coherent, and the maximum strictly drops. Step 3 uses flat blowup base change (lem-pc-smooth-flat, thm/def-nagata-blowup-flat-base-change, lem-pc-proper-base-change (2)) and Bl_C(X_i) = strict transform (lemma-nagata-strict-transform-ambient-closed); the argument is scheme-theoretic. Step 4: the induction over P's stages is right; when the inverse image is nonempty, the maximum over Q is m_i, an empty stratum gives a unit-ideal stage that is deleted, and the tower ends with nu = bottom. Step 5: the intrinsic histories agree by clause (3), and the next strict transform is the same intrinsic blowup. Step 6: extension of ideals composes. Step 7: blowup automorphisms are trivial, which gives the cocycle. Small cases tested: xy=0 in A^2 and A^3, (xy=0)xA^1, an open missing the node, a surface plus a nodal curve, and the empty scheme. A normalized invariant is required because raw Hilbert-Samuel functions are not invariant under a smooth factor or across dimensions; the node states this. There is no duplicate in the DAG; the only Hilbert-Samuel hits are dimension-theory nodes. Fault (B2/B3, interface): the calculus node only gives the existence of nu ('the BM construction supplies...'), and no node defines that construction. The termination node then claims termination for 'the' nu. Read that way, it is either an unsourced claim about any nu with (1)-(3), or a claim about an undefined object, which stage 2 would have to pick by choice (hollow data). FIX: the calculus node now says there exist one ordered V and functions nu_H, for all pairs and histories, with properties (1)-(4), where clause (4) is the termination statement with the same process and edge cases. The termination node is dropped, item Step 2 cites clause (4) for the same nu, and proof_deps and the summary are updated. The item statement is unchanged. Accepted tool_uses: lem-pc-smooth-flat, thm-nagata-blowup-flat-base-change, lemma-nagata-strict-transform-ambient-closed and lem-pc-proper-base-change, as generic blowup and smooth-base-change black boxes. No SGA is cited.; 2 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-73814c766 (reviewer sub-agent of L); spot-checked: PASS, no fixes. This is the 4th push of the 3-node maximum-history re-split. The earlier heads e32e2b43, f5390e16 and 594b2fbf all passed and were returned at landing only because the side completion was never promoted. The three new nodes (finite-realization, smooth-deletion, intrinsic-cocycle) have the same sha256 as on all earlier heads. Against 594b, the item changes only in proof and split_report. Statement, stmt_deps, proof_deps, proof_origin and tool_uses are unchanged. Live and side-live still have the 7-step base, so the delivery is not superseded. The HS invariant-calculus theorem and the three trf definitions are byte-identical in the snapshot, 594b and live; I re-read all of them in full. Step 1 is unchanged: HS clauses (1)-(4) are the conditions of the calculus-data definition, which gives E(A)=T_nu(A) with L=(V minus bottom)^op. Step 2 now names B=(X x_P Q in Q) with the specified cartesian identification, which is exactly smooth-deletion's hypothesis. B is an embedded pair because X x_P Q is smooth over the reduced X. The new 'final-bottom' sentence is the node's 'no extra stages' clause, and the composition law is applied to the three Step 1 histories, which share one calculus. Step 3 applies intrinsic-cocycle with a=id; the added sentence on the initial identity and empty histories is harmless. Functoriality, the cocycle and the restriction/pullback compatibility all come from the node's statement, and no P_i=Q_i identification is asserted. Edge cases checked: empty or regular X, v meeting only the regular locus, two-step deletion, and components of different dimensions. I re-read ILO VIII 2.3.1, 2.3.4-2.3.5 and 2.3.10-2.3.13 (pp.91-94) from the PDF: nowhere-dense centers, contracted pullback, disjoint-union synchronization, the stop before SNC cleanup, and BMT 6.3 full functoriality. BMT is marked WANTED. The only 'SGA' string in the item is 'No SGA is cited.' inside an old reviewer note in split_report, the same as on the base, so there is no route-lock hit. All 7 old steps are carried by the 3 nodes, each of comparable size. The assembly is 919/827/692 = 2438 characters. A duplicate search over dag/nodes found nothing new; the marked-ideal engine works at a different level. Advisory: the base-era tool_uses are generic and belong to smooth-deletion's later proof. Maintainer: promote this side completion instead of re-dispatching it."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EmbeddedResolutionAmbientComparison",
@@ -300,5 +228,16 @@
   "result": "pass",
   "note": "Re-delivery after the 4ec9a499 H13 RETURN. Lean files are byte-identical to that head; pqf-def-coherent is no longer touched (it matches live Q25); the new node's lean.note documents the upstream Stacks 01BV class IsFiniteTypeWithFiniteTypeKernels (option (a)). Clause-by-clause H3 match: Q-base pair (smooth, separated, LocallyOfFiniteType+QuasiCompact, closed immersion, IsReduced); finite labeled cut-indexed tower with blowup/strictTransform fields matching IdealSheafData.strictTransform (support.compl); centers in X_i, nonempty, regular, nowhere dense, coherent on P_i and X_i; finalRegular/stopAtRegular/emptyInput/regularInput; smooth pullback with cartesian squares at every cut, comap centers and retainedLabels iff; pullbackId/Comp; intrinsic comparison with labels, centers, id and cocycle. Comparison maps are pinned because maps over a blowup are unique, so nothing is hollow. No duplicate (OrdinaryBlowupTower is unlabeled and intrinsic). Both lean.statement fields verbatim; docstrings and 7-step proof plan present; imports per H9; sorry only in the item theorem. nt_compile --json clean (4.5 s, 2.9 s) with a failing control. Advisories: L in Type (u+1); live pqf record weaker than 01BV (maintainer)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

@@ -1,0 +1,122 @@
+{
+ "id": "lem-coef-rational-verdier-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-rational-verdier",
+   "place": "paragraph 3, associator equation; recorded DAG step 7, composition clause",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Associator equation for normalized rational Verdier scalar comparisons",
+ "statement": "Fix a finite-field datum $D$, a prime $\\ell\\ne D.p$, and a separated finite-type $D.k$-scheme $X$ [def-weil-finite-field-fiber, def-weil-proper-morphism, def-weil-finite-type-morphism]. Use the raw rational constructible categories and canonical coefficient functors [def-weil-rationalization-karoubi], and the normalized rational Verdier data and comparison predicate [def-sf-rational-verdier-data]. Let $F,G,H$ be finite extensions of $\\mathbf Q_\\ell$, $i:F\\to G$ and $j:G\\to H$ algebra embeddings, coherent integral dualizing data $w_F,w_G,w_H$ [def-sf-coherent-integral-dualizing-datum], rational Verdier data $A,B,C$, and comparisons $e_{FG},e_{GH},e_{FH}$ satisfying ExtensionProperties for $i,j,ji$. There is a natural isomorphism $a:T_{H/G}T_{G/F}\\cong T_{H/F}$ whose components on integral representatives are the localized canonical integral tensor associator [lem-coef-integral-finite-extension]. For every rational $K$, the composite $T_{H/G}(e_{FG,K})$ followed by $e_{GH,T_{G/F}K}$ equals $a_{A.DK}$ followed by $e_{FH,K}$ followed by $C.D(a_K)$. Identity embeddings are included; no existence of a simultaneous family of dualities or comparisons is asserted.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, associator equation; recorded DAG step 7, composition clause"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-rationalization-karoubi",
+  "def-sf-rational-verdier-data",
+  "def-sf-coherent-integral-dualizing-datum",
+  "lem-coef-integral-finite-extension"
+ ],
+ "proof": [
+  {
+   "text": "Localize the integral tensor associator and its inverse. Its naturality extends from pure tensors to sums. Apply localization to the integral beta composition equation for the three normalized ordinary presentations; the comparison normalizations identify its three beta factors and the rational scalar and dual pure-tensor formulas identify their images. This gives exactly the displayed rational associator equation on every integral representative, hence on every rational object.",
+   "uses": [
+    "lem-coef-integral-finite-extension",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+    "place": "paragraph 3, associator equation; recorded DAG step 7, composition clause"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-integral-finite-extension",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/thm-coef-rational-verdier.proof.md",
+  "place": "paragraph 3, associator equation; recorded DAG step 7, composition clause; proof written by B6 from the recorded integral rationalization plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization of a contravariant duality with canonical evaluation and coherent scalar extension",
+   "results": "LinearMap.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv (Mathlib.RingTheory.Localization.Module); no constructible-category duality or normalized coherence statement.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.op",
+   "results": "CategoryTheory.Equivalence.op and its functor/inverse formulas in Mathlib.CategoryTheory.Opposites; no raw scalar localization or normalized Verdier comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|ScalarLocalization|scalar localization",
+   "results": "25 hits in Mathlib, including CategoryTheory/Shift/CommShift.lean, Algebra/Homology/HomotopyCategory/Pretriangulated.lean, CategoryTheory/Localization/Triangulated.lean, CategoryTheory/Triangulated/Subcategory.lean; no normalized rational Verdier comparison. Local rg also found the existing project ScalarLocalization and RationalVerdier definitions, which are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.RationalVerdier",
+  "date": "2026-10-25",
+  "group": "B6"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.RationalVerdierComposition",
+  "file": "lean/Sheaf/SixFunctors/RationalVerdierComposition.lean",
+  "declaration": "WeilConjectures.RationalVerdier.extension_composition",
+  "statement": "theorem extension_composition\n    (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F]\n    (G : Type u) [Field G] [Algebra (Padic l) G] [FiniteDimensional (Padic l) G]\n    (H : Type u) [Field H] [Algebra (Padic l) H] [FiniteDimensional (Padic l) H]\n    (i : F →ₐ[Padic l] G) (j : G →ₐ[Padic l] H)\n    (wF : IntegralFiniteExtension.DualizingDatum l X D hl F)\n    (wG : IntegralFiniteExtension.DualizingDatum l X D hl G)\n    (wH : IntegralFiniteExtension.DualizingDatum l X D hl H)\n    (A : Datum D l hl X F wF) (B : Datum D l hl X G wG) (C : Datum D l hl X H wH)\n    (eFG : Extension D l hl X F G i wF wG A B)\n    (eGH : Extension D l hl X G H j wG wH B C)\n    (eFH : Extension D l hl X F H (j.comp i) wF wH A C)\n    (hFG : ExtensionProperties D l hl X F G i wF wG A B eFG)\n    (hGH : ExtensionProperties D l hl X G H j wG wH B C eGH)\n    (hFH : ExtensionProperties D l hl X F H (j.comp i) wF wH A C eFH) :\n    ∃ a : scalar l X F G i ⋙ scalar l X G H j ≅ scalar l X F H (j.comp i),\n      (∀ K : sfIntegralConstructibleCategory l F X,\n        HEq (a.hom.app ((sfRationalConstructibleLocalization l F X).obj K))\n          ((sfRationalConstructibleLocalization l H X).map\n            (ObjectProperty.homMk\n              (X := (integralScalar l X G H j).obj ((integralScalar l X F G i).obj K))\n              (Y := (integralScalar l X F H (j.comp i)).obj K)\n              (IntegralFiniteExtension.comp l F G i X H j K.obj K.property.1).hom))) ∧\n      ∀ K : sfRationalConstructibleCategory l F X,\n        (scalar l X G H j).map (eFG.comparison.hom.app (op K)) ≫\n          eGH.comparison.hom.app (op ((scalar l X F G i).obj K)) =\n        a.hom.app (A.dual.obj (op K)) ≫\n          eFH.comparison.hom.app (op K) ≫\n            C.dual.map (a.hom.app K).op",
+  "branch": "sheaf-dag",
+  "by": "B6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-06a6b",
+  "group": "B6",
+  "result": "fix",
+  "landing": "20261025T122531-L-1781499",
+  "kind": "interface",
+  "note": "independent cc review: delivered RationalVerdierModels vs clone RationalVerdier.lean (identical except irreducible completionChain via third_exists_first, change-recorded); four split statements vs Conclusion and IntegralVerdier.SignedSymmetry/delta definitions; 12 direct importers compiled against sandboxed delivery (11 ok, VerdierCoefficientRealization pre-existing missing olean)"
+ }
+}

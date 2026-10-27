@@ -1,0 +1,126 @@
+{
+ "id": "lem-sfb-brown-uniform-heart-ext-bound",
+ "kind": "statement",
+ "title": "Uniform heart Ext bound necessary for Brown compactness",
+ "statement": "Let X be a scheme and Λ a commutative condensed coefficient ring. Put S=Dctf(X,Λ) and L=Loc(S) [sk-def-localizing-closure]. If BrownHypothesesFor Λ X holds and K in L has underlying object in S, then there exists a natural N such that Hom(K,F[0][n])=0 for every module object F over Λ_X with F[0] in L and every n≥N. Consequently, if for every N there is such an F and an n≥N with a nonzero map K→F[0][n], the Brown bundle is false. This is a necessary bound conditional on Brown compactness, not a geometric vanishing assertion.",
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-hypotheses-criterion"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, generalized using DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit"
+ },
+ "proof": [
+  {
+   "text": "If there is no heart object with degree-zero image in L, take N=0 and the assertion is vacuous. Otherwise fix one such object F_0. For each n choose a heart object with a nonzero Hom group in degree n if one exists, and use F_0 otherwise. All chosen objects have degree-zero image in L. These choices are internal to a propositional proof.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the varying-heart eventual-vanishing theorem to this sequence. For any n above its bound, the existence of any nonzero map into any eligible heart object would imply the chosen object has a nonzero map in degree n; eventual vanishing contradicts this. Thus the same bound works for every heart object.",
+   "uses": [
+    "lem-sfb-brown-varying-heart-ext-bound"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the contrapositive, instantiate the unboundedness hypothesis at the uniform bound, then apply the bound to its heart object, degree and nonzero morphism. The resulting zero equality is a contradiction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "sk-def-localizing-closure",
+  "lem-sfb-brown-varying-heart-ext-bound"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/NotPreservesCoproducts.lean",
+  "place": "finite-support argument in not_preservesColimitsOfShape_of_forall_hom_ne_zero, generalized using DegreewiseLimits.lean, HomologicalComplex.isLimitFanMkProjOfIsColimit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A compact object in an unbounded derived category with exact countable products has uniformly bounded Ext into objects of the heart",
+   "results": "Eight derived-category size and t-structure results; no uniform vanishing theorem. Local source has the fixed-heart nonpreservation argument and the needed general degreewise-disjoint product lemma.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompactObj\"",
+   "results": "Zero hits. Read the source compactness equivalence and the finite-support theorem in the item.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually.*[Ee]xt|uniform.*[Ee]xt|[Ee]xt.*uniform",
+   "results": "No relevant Mathlib hit; local source search finds no varying-heart or uniform-heart Brown bound. Blueprint uniform constructible Ext results establish sufficient geometric bounds with extra assumptions, rather than this necessary consequence of Brown compactness.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "date": "2026-10-25",
+  "group": "E2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-brown-hypotheses",
+   "place": "proof paragraph 2, checking the compactness of the constructible finite-Tor representatives",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-brown-hypotheses",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "declaration": "CategoryTheory.BrownHypothesesFor.exists_uniform_hom_single_shift_bound",
+  "declarations": [
+   "CategoryTheory.BrownHypothesesFor.exists_uniform_hom_single_shift_bound",
+   "CategoryTheory.not_brownHypothesesFor_of_unbounded_ext"
+  ],
+  "statement": "theorem BrownHypothesesFor.exists_uniform_hom_single_shift_bound\n    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} (hB : BrownHypothesesFor Λ X)\n    (K : (localizingClosureProEtale Λ X).FullSubcategory)\n    (hK : constantModelBoundedConstructible Λ X K.obj ∧\n      DerivedCategory.finiteTorAmplitude _ K.obj) :\n    ∃ N : ℕ, ∀ F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X),\n      localizingClosureProEtale Λ X ((DerivedCategory.singleFunctor _ 0).obj F) →\n      ∀ n ≥ N, ∀ f : K.obj ⟶\n        ((DerivedCategory.singleFunctor _ 0).obj F)⟦(n : ℤ)⟧, f = 0",
+  "branch": "sheaf-dag",
+  "by": "E2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261025T033841-L-120540",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261027T112403-L-1578020",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.brownHypotheses"
+  ],
+  "sorry_after": [
+   "CategoryTheory.brownHypotheses"
+  ]
+ }
+}

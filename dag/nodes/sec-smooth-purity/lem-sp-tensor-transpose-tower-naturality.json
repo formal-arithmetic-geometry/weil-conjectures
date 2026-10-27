@@ -1,0 +1,146 @@
+{
+ "id": "lem-sp-tensor-transpose-tower-naturality",
+ "kind": "statement",
+ "title": "Naturality of the actual projection/counit tower map and its transpose",
+ "statement": "Let ell be prime and E a finite extension of Q_ell. Use the normalized strict varying-coefficient tower categories, tensor calculus, compactification projection and full constructible finite-Tor subcategories. Let f=j followed by p be an open/proper factorization, let F be its compact-support functor on the full tower category with right adjoint G, and assume the coefficient unit lies in that category. Fix normalized tensor structures on source and target. Put omega=G(unit), Q_K=pull(K) tensor omega. Assume each Q_K belongs to the full subcategory and each specified projection for (omega,K) is invertible. Then the actual projectionCounit composite is natural in arbitrary maps K to L, and its actual adjunction transpose tensorMate is natural in the same maps. Both equations hold in the ambient ordinary derived category of towers before any finite evaluation. No orientation, geometric smoothness, or algebraic-closure hypothesis is needed. The notation and specified arrows are the shared words [def-sp-tensor-transpose-evaluation-words], built from the tower, tensor, projection, adjunction and normalized coefficient notions in the statement dependencies.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(2), factorwise naturality before evaluation and naturality of the actual adjunction transpose"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-sbc-smooth-morphisms",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "sk-def-sp-normalized-towers",
+  "def-weil-derived-tensor",
+  "def-coefficient-twists-detailed",
+  "det-sp-tower-gluing",
+  "def-weil-derived-pullback-tensor-hom",
+  "thm-pur-diagonal-dualizing-object",
+  "det-sp-tower-shriek-levels",
+  "def-exchange-projection",
+  "def-pur-co-smoothness",
+  "def-pur-smooth-purity-map",
+  "def-sp-tensor-transpose-evaluation-words"
+ ],
+ "proof": [
+  {
+   "text": "Abbreviate $F=F_\\bullet$, $G=G_\\bullet$, $\\omega=\\omega_\\bullet$ and write $\\sigma$ for tensor symmetry. By [det-sp-tower-shriek-levels](2), the tensor operations and specified projection transformation are actual tower-derived operations and maps. Put $P_K=\\operatorname{PF}_{f,\\omega,K}:F\\omega\\otimes^LK\\to F(\\omega\\otimes^Lf^*K)$. Its invertibility is an explicit hypothesis. With $r_K:K\\otimes^L\\mathbf1_Y\\to K$, the map in the statement is precisely\n$$h_K=r_K(1_K\\otimes\\varepsilon_{\\mathbf1_Y})\\sigma_{F\\omega,K}P_K^{-1}F(\\sigma_{f^*K,\\omega}).$$\nAll factors exist before evaluation. For $u:K\\to L$ put $q_u=f^*u\\otimes1_\\omega:Q_K\\to Q_L$. Naturality of the specified transformation [def-exchange-projection] gives\n$$F(1_\\omega\\otimes f^*u)P_K=P_L(1_{F\\omega}\\otimes u).$$\nMultiplying by the two inverses gives the corresponding equation for $P^{-1}$. Substitution in the displayed formula, using naturality of symmetry and the unitor, yields $h_LF(q_u)=u h_K$. Thus $h$ is a natural tower morphism.",
+   "uses": [
+    "det-sp-tower-shriek-levels",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(2), factorwise naturality before evaluation and naturality of the actual adjunction transpose"
+   }
+  },
+  {
+   "text": "The hypothesis $Q_K\\in\\mathcal C_X$ permits application of the adjunction of [det-sp-tower-gluing]. Define $t_K=G(h_K)\\eta_{Q_K}$ in that category, hence in the ambient derived category because the subcategory is full. This is the adjoint transpose: naturality of the counit and the triangle identity give\n$$\\varepsilon_KF(t_K)=\\varepsilon_KFG(h_K)F(\\eta_{Q_K})=h_K\\varepsilon_{FQ_K}F(\\eta_{Q_K})=h_K.$$\nFor $u:K\\to L$, Step 1 and naturality of the unit give\n$$G(u)t_K=G(u h_K)\\eta_{Q_K}=G(h_L)GF(q_u)\\eta_{Q_K}=G(h_L)\\eta_{Q_L}q_u=t_Lq_u.$$\nThese equalities establish naturality inside the tower derived category itself.",
+   "uses": [
+    "det-sp-tower-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "(2), factorwise naturality before evaluation and naturality of the actual adjunction transpose"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-tower-shriek-levels",
+  "def-exchange-projection",
+  "det-sp-tower-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(2), factorwise naturality before evaluation and naturality of the actual adjunction transpose"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the adjoint transpose of an inverse projection formula and counit tensor map",
+   "results": "8 hits, including tensorRightHomEquiv_symm_naturality and tensorLeftHomEquiv_naturality: abstract categorical identities only. No finite tower evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left",
+   "results": "One hit: CategoryTheory.Adjunction.homEquiv_naturality_left. Used for naturality, not the finite tower evaluation.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "evaluation functor preserves adjunction transpose unit counit natural isomorphisms",
+   "results": "8 hits including evaluationAdjunctionLeft and evaluationAdjunctionRight counit formulas. No geometric tower evaluation comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|projectionCounit|tensorMate",
+   "results": "25 Mathlib hits: abstract Hom-equivalence naturality, no projectionCounit or tensorMate. Local rg finds the item definitions and GroundFieldRetagging only; no existing finite evaluation theorem.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TowerTensorTransposeEvaluation",
+  "date": "2026-10-25",
+  "group": "H9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Normalization and Purity paragraphs; tower-geometric gamma proof (2), factorwise naturality before finite evaluation",
+   "via": [
+    "lem-sp-tower-tensor-transpose-evaluation",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TensorTransposeTowerNaturality",
+  "file": "lean/Sheaf/Paper/TensorTransposeTowerNaturality.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTensorTranspose.tensor_transpose_tower_naturality",
+  "statement": "theorem tensor_transpose_tower_naturality :\n    (∀ (K L : SpTowerCalculus.C l E b q Y) (v : K ⟶ L),\n      (SpTowerShriek.F l E b o (SpTowerGamma.factorization j p)).map ((SpTowerGamma.tensorSource l\n        E b o q (j ≫ p) ((SpTowerGamma.exceptional l E b q G).obj ⟨SpTowerGamma.originalUnit l E b q\n        Y, hU⟩)).map v) ≫\n          SpTowerGamma.projectionCounit l E b o q (SpTowerGamma.factorization j p) tx ty hF G adj hU\n            L (hpf L) =\n        SpTowerGamma.projectionCounit l E b o q (SpTowerGamma.factorization j p) tx ty hF G adj hU K\n          (hpf K) ≫\n          (SpTowerGamma.realization l E b q Y).map v) ∧\n    (∀ (K L : SpTowerCalculus.C l E b q Y) (v : K ⟶ L),\n      (SpTowerGamma.tensorSource l E b o q (j ≫ p) ((SpTowerGamma.exceptional l E b q G).obj\n        ⟨SpTowerGamma.originalUnit l E b q Y, hU⟩)).map v ≫\n          SpTowerGamma.tensorMate l E b o q (SpTowerGamma.factorization j p) tx ty hF G adj hU L (hQ\n            L) (hpf L) =\n        SpTowerGamma.tensorMate l E b o q (SpTowerGamma.factorization j p) tx ty hF G adj hU K (hQ\n          K) (hpf K) ≫\n          (SpTowerGamma.exceptional l E b q G).map v)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fcb05",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T163710-L-784362",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-fcb05",
+  "group": "H9",
+  "result": "fix",
+  "landing": "20261025T163710-L-784362",
+  "kind": "interface",
+  "note": "independent cc review: item theorem stmt byte-identical to clone; new lemmas = item conjuncts (1)+(2) and (4) verbatim; six defs moved unchanged (diff: blueprint tags only); node lean.statements match files; item node diff only lean/proof/proof_deps/proof_origin"
+ }
+}

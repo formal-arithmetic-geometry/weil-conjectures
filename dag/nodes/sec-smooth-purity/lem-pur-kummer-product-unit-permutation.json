@@ -1,0 +1,224 @@
+{
+ "id": "lem-pur-kummer-product-unit-permutation",
+ "kind": "statement",
+ "title": "Unit and permutation invariance of supported Kummer products",
+ "statement": "Fix the finite datum $k,\\ell,E,n,A=A_{E,n}$ of [def-pur-conventions], with arbitrary $n\\geq1$, and the twists $A(r)$ of [def-coefficient-twists-detailed]. Let $X$ be any $k$-scheme and $c\\geq0$. For an ordered tuple $h=(h_1,\\ldots,h_c)$ of global regular functions on $X$, let $C_h\\hookrightarrow X$ be the closed subscheme locally defined by the ideal $(h_1,\\ldots,h_c)$, and put $D_a(h)=V(h_a)$ and $W_a(h)=X\\setminus D_a(h)$. Using the concrete Kummer classes of [def-pur-frame-class], the localization boundaries of [thm-pur-with-support-exactness], and the ordered supported cup product of [def-pur-supported-cup], write\n$$K_X(h)=\\mathop{\\bigcup}_{a=1}^c\\partial_{D_a(h)}\\kappa_{W_a(h)}(h_a|_{W_a(h)})\\in H^{2c}_{C_h}(X_{\\mathrm{proet}},A(c)),$$\nwhere supported cohomology is [def-pur-support-cohomology]. The product is left-associated; at $c=0$ it is $1\\in H^0(X,A)$ with $C_h=X$. This formula uses arbitrary functions, without smoothness, regularity, finite-type or separatedness hypotheses on $X$.\n\nFor every permutation $\\sigma$ of $\\{1,\\ldots,c\\}$ and every tuple of units $u_a\\in\\Gamma(X,\\mathcal O_X)^\\times$, set $h'_a=u_a h_{\\sigma(a)}$. Then $C_{h'}=C_h$ as closed subschemes and\n$$K_X(h')=K_X(h)\\quad\\text{in }H^{2c}_{C_h}(X_{\\mathrm{proet}},A(c)).$$\nThe equality uses the canonical identifications of support intersections and of $A(1)^{\\otimes_A c}$ with $A(c)$; it requires no choice of a generator of the rank-one twist. In particular it applies to the frame classes of [def-pur-frame-class] after the canonical identification of both zero schemes with the same pullback support.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-frame-class",
+  "thm-pur-with-support-exactness",
+  "def-pur-supported-cup",
+  "def-pur-support-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "The supports agree scheme-theoretically. On every affine open of $X$, multiplication of a generator by a unit does not change its principal ideal: $(u_a h_{\\sigma(a)})=(h_{\\sigma(a)})$, since the reverse inclusion follows by multiplying by $u_a^{-1}$. Reindexing a finite list does not change the sum of its principal ideals. Hence the two ideal sheaves, their closed subschemes, and their complementary opens coincide. The identifications of all intersections used below are those induced by these ideal equalities. If $c=0$, both supports are $X$ and both classes are the prescribed unit $1$, so the assertion holds. Assume $c>0$ below.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+   }
+  },
+  {
+   "text": "Fix one function $f$ and a global unit $u$ on $X$. Set $D=V(f)$ and $j:W=X\\setminus D\\hookrightarrow X$. The finite-level sheaf $A(1)$ is a finite-torsion coefficient sheaf, so the pro-etale localization exact sequence applies with no Cartier or smoothness hypothesis. Its consecutive arrows are\n$$H^1(X,A(1))\\xrightarrow{j^*}H^1(W,A(1))\\xrightarrow{\\partial_D}H^2_D(X,A(1)).$$\nThe Kummer pullback identity gives $\\kappa_W(u|_W)=j^*\\kappa_X(u)$. Exactness at the middle term therefore gives $\\partial_D\\kappa_W(u|_W)=0$. This uses a class already defined on $X$, not an assertion that a Kummer root of $u$ exists globally.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality",
+    "thm-pur-with-support-exactness",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+   }
+  },
+  {
+   "text": "The functions $f$ and $uf$ have the same $D$ and $W$ by step 1. Both are units on $W$. Kummer additivity and the additivity of the localization boundary give\n$$\\begin{aligned}\n\\partial_D\\kappa_W((uf)|_W)\n &=\\partial_D\\bigl(\\kappa_W(u|_W)+\\kappa_W(f|_W)\\bigr)\\\\\n &=\\partial_D\\kappa_W(u|_W)+\\partial_D\\kappa_W(f|_W)\n =\\partial_D\\kappa_W(f|_W),\n\\end{aligned}$$\nwhere the last equality is step 2. Thus multiplying any one defining function by a global unit leaves its degree-two supported boundary class unchanged. This calculation works for zero divisors and nilpotent functions as well as for regular functions.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality",
+    "thm-pur-with-support-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+   }
+  },
+  {
+   "text": "Check the coefficient identification used in swapping factors. Write $L=A(1)_X$, a sheaf locally free of rank one in degree zero by clause (3) of [lem-pur-twist-sheaf-locally-free]. By [def-coefficient-twists-detailed], $A(r)=L^{\\otimes_A r}$ for $r>0$. The symmetry $L\\otimes_A L\\to L\\otimes_A L$ is the identity: locally choose a basis $e$ only to verify this morphism equality, and calculate\n$$(ae)\\otimes(be)=ab(e\\otimes e)=ba(e\\otimes e)=(be)\\otimes(ae).$$\nTensor generators generate the sheaf tensor product, and equality of sheaf morphisms is local, so the identity holds globally and is independent of that temporary basis. Tensoring it with the identity on all remaining factors proves that an adjacent permutation acts trivially on $L^{\\otimes_A c}=A(c)$ under the specified associativity identifications. This checks equality of coefficient morphisms locally; it does not try to detect global cohomology classes by restriction to a cover.",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+   }
+  },
+  {
+   "text": "Put $\\alpha_a=\\partial_{D_a(h)}\\kappa_{W_a(h)}(h_a|_{W_a(h)})$. To exchange two adjacent factors, associativity of supported cups rewrites the left-associated product as the product of its prefix, the block $\\alpha_i\\cup\\alpha_{i+1}$, and its suffix; if either outside block is empty, simply omit it. The graded commutativity formula gives\n$$\\alpha_i\\cup\\alpha_{i+1}=(-1)^{2\\cdot2}\\alpha_{i+1}\\cup\\alpha_i=\\alpha_{i+1}\\cup\\alpha_i.$$\nThe support symmetry is the canonical identification of the two intersections from step 1, and the coefficient symmetry contributes the identity by step 4. Substitution of this equality in the surrounding products and reassociation therefore leave the class in $H^{2c}_{C_h}(X,A(c))$ unchanged. Every input to graded commutativity is a degree-two class with coefficient $A(1)$, so the sign is $+1$ even when $\\ell=2$.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+   }
+  },
+  {
+   "text": "Any ordering of the finite list $1,\\ldots,c$ can be put into the original order by moving the entry $1$ left to its first position through adjacent swaps, then moving the entry $2$ left within the remaining suffix, and continuing until the suffix is empty. At every move step 5 preserves the product, so $K_X(h_{\\sigma(1)},\\ldots,h_{\\sigma(c)})=K_X(h)$. For each position $a$, step 3 identifies the boundary factor of $u_a h_{\\sigma(a)}$ with the boundary factor of $h_{\\sigma(a)}$. Substitute these $c$ equalities in the defining left-associated product, successively, to obtain $K_X(h')=K_X(h_{\\sigma(1)},\\ldots,h_{\\sigma(c)})=K_X(h)$. The supports have already been identified as closed subschemes in step 1. Applied to a frame, the same ideal equality identifies its zero scheme with the given pullback support, so the final assertion follows too.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+    "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument. Agent-formulated auxiliary assertion for the corrected concrete pro-etale finite-coefficient construction; this is not a theorem quoted verbatim from Stacks."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-supported-cup-functoriality",
+  "thm-pur-with-support-exactness",
+  "lem-pur-twist-sheaf-locally-free",
+  "def-coefficient-twists-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
+  "place": "Proof, 'Unit multiples' and 'Permutations'; expanded using the existing concrete pro-etale operation laws, without the unrelated shear argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A supported product of Kummer boundary divisor classes is invariant under permuting its defining functions and multiplying them by units",
+   "results": "8 hits: Equiv.Perm.prod_comp, Equiv.Perm.prod_comp', Function.Bijective.prod_comp, Equiv.prod_comp, SymmetricPower.tprod_equiv, Function.FactorizedRational.mulSupport, MeromorphicOn.divisor_mul, MeromorphicOn.divisor_fun_mul.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kummer classes of units have zero localization boundary, and permuting degree two supported cup products leaves the product unchanged",
+   "results": "8 hits: WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul, IsDedekindDomain.selmerGroup.fromUnit, IsDedekindDomain.selmerGroup.fromUnit_ker, IsDedekindDomain.selmerGroup.fromUnitLift, WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal', ClassGroup.exists_mk0_eq_mk0, IsDedekindDomain.selmerGroup, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, \"kummer\"",
+   "results": "0 hits: none.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|cupProduct|cup_product",
+   "results": "0 hits: none.  Read the returned signatures: none states invariance of the concrete supported Kummer boundary product. Ordinary commutative products, symmetric tensors, Selmer groups, root systems, Witt polynomials and structure-sheaf arithmetic do not provide that cohomological assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported products of localization boundaries of Kummer classes are invariant under multiplication of functions by global units and permutations",
+   "results": "8 hits: IsLocalization.Away.mulNumerator, Localization.mk_prod, IsLocalization.integerMultiple, IsLocalization.commonDenom, IsLocalization.map_integerMultiple, IsLocalization.Away.sec_spec, Submonoid.LocalizationMap.lift_spec_mul, IsLocalization.finsetIntegerMultiple_image. The returned localization and group-cohomology/nonabelian Cech-cohomology declarations do not concern supported Kummer products of functions on a scheme. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|Kummer|cupProduct|cup_product",
+   "results": "25 hits: Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/KummerDedekind.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Ideal.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean, Mathlib/NumberTheory/NumberField/Cyclotomic/Three.lean. 25 hits concern Kummer-Dedekind theory, Kummer extensions and the valuation of binomial coefficients; no supported cohomological cup product or Kummer boundary declaration.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kummer boundary divisor classes in cohomology with supports are unchanged by multiplying equations by units and reordering them",
+   "results": "8 hits: CochainComplex.HomComplex.Cochain.units_smul_v, groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, Function.FactorizedRational.mulSupport, CochainComplex.HomComplex.δ_units_smul, CochainComplex.HomComplex.Cochain.shift_units_smul, NumberField.mixedEmbedding.fundamentalCone.unit_smul_mem_iff_mem_torsion, KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp, NumberField.mixedEmbedding.fundamentalCone.integerSetQuotEquivAssociates_apply. Returned cochain scalar identities, Hilbert 90, meromorphic multiplicative support, number-field cone and Kummer-Dedekind results; none states the concrete supported Kummer product assertion.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, \"kummer\"",
+   "results": "0 hits: . No declarations returned.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In sheaf cohomology with supports the degree two cup products of Kummer classes commute and a globally defined unit has zero boundary",
+   "results": "8 hits: groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units, CategoryTheory.PresheafOfGroups.OneCohomologyRelation, Algebra.Generators.H1Cotangent.δ_map, groupCohomology.H2π_eq_zero_iff, groupCohomology.δ_apply, groupCohomology.H2π_eq_iff, CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans, CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous. The returned localization and group-cohomology/nonabelian Cech-cohomology declarations do not concern supported Kummer products of functions on a scheme. No exact match or one-line specialization.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-frame-independence",
+  "date": "2026-10-22",
+  "group": "Q114"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "'Unit multiples' and 'Permutations'; returned proof steps 3--4, including the twist symmetry and adjacent-swap argument.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-kummer-product-unit-permutation",
+  "worker": "stage1",
+  "summary": "Expanded the unit-extension and even-degree permutation arguments for arbitrary functions and every finite coefficient index. Reused existing Kummer/cup functoriality and localization exactness, and verified rank-one twist symmetry at the sheaf-morphism level. No statement change and no new nodes. The abstract normalized-datum Lean matrix theorem does not attach this concrete statement.",
+  "blueprint": "lem-pur-frame-independence.proof.md, 'Unit multiples' and 'Permutations': steps 2--3 supply the exactness calculation, steps 4--6 supply the twist symmetry and adjacent-swap calculation; step 1 handles the scheme-theoretic supports and empty tuple.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Clause (3) supplies local rank-one freeness of the concrete finite twist for the coefficient flip calculation; this coefficient-theoretic tool is not a replacement for the unit/permutation proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-db52e272b",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-db52e272b (reviewer sub-agent of L); spot-checked: I read the item, the blueprint source lem-pur-frame-independence.proof.md ('Unit multiples' and 'Permutations') and the statements of all 8 cited nodes. The statement is true and not weakened. I tested c=0, h_a=0 (empty W), h_a a unit, nilpotent or zero-divisor h_a, repeated functions, empty X and ell=2 (sign (-1)^4=1). Step 2: the pullback formula v^*kappa_X(u)=kappa_{X'}(v^*u) in lem-pur-supported-cup-functoriality and the pro-etale finite-torsion exactness of thm-pur-with-support-exactness give boundary kappa(u)=0 for a global unit u. Step 3: Kummer additivity, and the boundary is a group homomorphism. Step 4: the flip on L(x)L is the identity for L locally free of rank one, a local check of a sheaf-morphism equality. Step 5: associativity and the signed symmetry, whose coefficient twist step 4 makes trivial and whose support twist step 1 makes trivial (I+J=J+I). Step 6: sorting by adjacent swaps plus substitution, elementary. The parent's step 3 identifies K_N with cl(f) of def-pur-frame-class, which is correct. There are no new nodes and no duplicates found (rg -L: regular-immersion-class-calculus is a different setting; shear-homotopy covers only shears). The graph stays acyclic. Tool use lem-pur-twist-sheaf-locally-free(3) for local rank-one freeness of the twist is accepted. Batch-5 flag: lem-poincare-compatible-primitive-roots is the twist foundation (local triviality of roots of unity), not a step of Poincare duality or the trace formula. It is reached through def-pur-frame-class, which is already a stmt_dep, and the new proof_deps add no trace or Poincare node to the closure, so the flag is accepted. No SGA is used and nothing was changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.KummerProductUnitPermutation",
+  "declaration": "WeilConjectures.PurityFiniteSetting.frameBoundaryProduct_unit_permutation",
+  "file": "lean/Sheaf/Paper/KummerProductUnitPermutation.lean",
+  "statement": "theorem frameBoundaryProduct_unit_permutation (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (c : ℕ) (h : Fin c → Γ(X, ⊤)) (σ : Equiv.Perm (Fin c)) (v : Fin c → Γ(X, ⊤)ˣ) : ∃ hs : Scheme.IdealSheafData.ofIdealTop (Ideal.span (Set.range (fun j : Fin c ↦ (v j : Γ(X, ⊤)) * h (σ j)))) = (Scheme.IdealSheafData.ofIdealTop (Ideal.span (Set.range h)) : X.IdealSheafData), P.frameBoundaryProduct X a c (fun j ↦ (v j : Γ(X, ⊤)) * h (σ j)) = (cupSingle P X).map (P.frameClosedCoefficientIso (X.zeroLocusSubschemeι (Set.range (fun j : Fin c ↦ (v j : Γ(X, ⊤)) * h (σ j)))) (X.zeroLocusSubschemeι (Set.range h)) (eqToIso (congrArg Scheme.IdealSheafData.subscheme hs)) (Scheme.IdealSheafData.eqToHom_comp_subschemeι hs)).hom ≫ P.frameBoundaryProduct X a c h",
+  "branch": "newtargets-dag",
+  "by": "Q142",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing concrete frameBoundaryProduct for arbitrary functions. Equality of defining ideal sheaves identifies the zero subschemes canonically; frameClosedCoefficientIso transports the supported-Hom sources. No geometric hypotheses or twist trivialization are added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fb57a532",
+  "group": "Q142",
+  "result": "pass",
+  "note": "Statement frameBoundaryProduct_unit_permutation matches the node: P : PurityFiniteSetting (finite datum, n>=1), an arbitrary k-scheme X with structure map a, h : Fin c -> Γ(X,⊤), σ : Perm, units v; the conclusion is ∃ equality of ofIdealTop ideal sheaves (scheme-theoretic C_h'=C_h) and K(h') = canonical frameClosedCoefficientIso transport ≫ K(h), using the def-pur-frame-class owner fold frameBoundaryProduct (left-associated, c=0 unit, own D_a/W_a per factor) and the same frameTwist X c. No added hypotheses. Edge cases c=0, unit/zero/nilpotent h_a, empty X and ell=2 are covered, and the statement is true. Only the lean record was added; the statement is verbatim; imports are the public owner plus exactly the four proof_dep modules; docstrings have the source, blueprint tag and 6 steps; sorry only. No duplicate (frameBoundaryProduct users and searches checked). Not dropped, not superseded. No compile per policy."
+ }
+}

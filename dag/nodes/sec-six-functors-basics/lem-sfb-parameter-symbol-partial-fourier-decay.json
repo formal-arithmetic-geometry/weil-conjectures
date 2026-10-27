@@ -1,0 +1,404 @@
+{
+ "id": "lem-sfb-parameter-symbol-partial-fourier-decay",
+ "kind": "statement",
+ "title": "Uniform partial Fourier decay for compact spatial symbol families",
+ "statement": "Use $\\mathbf R,\\mathbf C$ [def-weil-field], Euclidean norms and Lebesgue measure. Let $m,d\\geq1$, $p,q\\geq0$ and $r\\in\\mathbf Z$. Let $b(x,z,\\xi)$ be a smooth complex $q\\times p$ matrix on $\\mathbf R^d\\times\\mathbf R^m\\times\\mathbf R^m$. Suppose $b$ vanishes outside $L_x\\times L_z$ in $(x,z)$, for fixed compact sets $L_x,L_z$, and for all multi-indices $\\alpha,\\gamma,\\beta$ one has $\\|\\partial_x^\\alpha\\partial_z^\\gamma\\partial_\\xi^\\beta b(x,z,\\xi)\\|\\leq C_{\\alpha\\gamma\\beta}(1+|\\xi|)^{r-|\\beta|}$. Define the absolutely convergent partial Fourier integral $$B(x,\\eta,\\xi)=(2\\pi)^{-m}\\int_{\\mathbf R^m}e^{-iz\\cdot\\eta}b(x,z,\\xi)\\,dz.$$ Then $B$ is jointly smooth, vanishes for $x\\notin L_x$, and for every $\\alpha,\\delta,\\beta$ and integer $L\\geq0$ there is $C'_{\\alpha\\delta\\beta L}<\\infty$ such that $$\\|\\partial_x^\\alpha\\partial_\\eta^\\delta\\partial_\\xi^\\beta B(x,\\eta,\\xi)\\|\\leq C'_{\\alpha\\delta\\beta L}(1+|\\eta|)^{-L}(1+|\\xi|)^{r-|\\beta|}.$$ The mixed derivative equals the integral obtained by applying $\\partial_x^\\alpha\\partial_\\xi^\\beta$ to $b$ and multiplying the integrand by $(-iz)^\\delta$. For fixed indices and fixed support sets, $C'$ can be bounded by a constant times a finite sum of the input constants $C_{\\alpha\\gamma\\beta}$ (with finitely many $\\gamma$); in particular these estimates are uniform for a family with common supports and common input bounds.",
+ "source": {
+  "document": "literature/demailly-hodge-ams.pdf",
+  "place": "WANTED locally: Part I §3.B, (3.4)–(3.5), Proposition 3.7, printed pp.12–13. Agent-supplied parameter version of the compact-spatial Fourier-decay calculation; supplemental Demailly course pseudodiff.pdf, §3, (3.11) and the estimates after (3.15), printed pp.9–11, read online at https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf. The course gives the method, not this full parameter statement."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "If $p=0$ or $q=0$, the matrix space is zero and every assertion holds with $C'=0$; hence assume both positive. Put $t=(x,\\eta,\\xi)$ and $a(t,z)=e^{-iz\\cdot\\eta}b(x,z,\\xi)$. Every derivative of $b$ is zero off $L_x\\times L_z$: its complement is open and $b$ is identically zero there. Thus each matrix entry of every derivative of $a$ in $(t,z)$ is smooth and supported in $L_z$ as a function of $z$. Apply the continuous-compact-support integrability statement entrywise. The entrywise bounds give an integrable majorant of the matrix norm, so $B$ is absolutely convergent by the majorant statement. Writing the integrand as $\\sum_k h_k(z)c_k$ in a fixed real basis $(c_k)$ of the matrix space, additivity and the scalar-function clause $\\int h(z)c\\,dz=(\\int h)c$ of the Euclidean Bochner-calculus statement show that the matrix integral is computed entrywise. If $x\\notin L_x$ its integrand is zero and $B=0$.",
+   "uses": [
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-euclidean-bochner-integral-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+   }
+  },
+  {
+   "text": "Fix a parameter point $t_0$ and a bounded open ball $U$ about it with compact closure. For every $n\\geq0$ the real parameter derivative $D_t^n a(t,z)$ is a finite array of smooth compactly supported entries, hence is measurable and integrable in $z$ at fixed $t$. Its next derivative has norm bounded by $M_n\\mathbf1_{L_z}(z)$ for all $t\\in U$: differentiating the exponential produces only monomials in the bounded variable $z\\in L_z$, and the symbol bounds on the bounded $\\xi$-projection of $U$ bound the remaining factors. All norms on these finite arrays are bounded by fixed multiples of the sum of entry norms. The constant function $1$ on $L_z$ is integrable by the compact-set statement, so $M_n\\mathbf1_{L_z}$ is an integrable real majorant. Apply the dominated Fréchet-derivative theorem with $H=\\mathbf R^{d+2m}$ and codomain the finite-dimensional real space of $n$-linear maps into the matrix space. Its derivative bound holds simultaneously on $U$, and its measurability and integrability hypotheses hold by the preceding observations. Therefore $I_n(t)=\\int D_t^n a(t,z)\\,dz$ is differentiable, with derivative $I_{n+1}(t)$ under the usual identification of multilinear maps; this identification is a real-linear isomorphism of finite-dimensional spaces, which commutes with the integral by the coordinatewise computation of step 1.",
+   "uses": [
+    "lem-sfb-continuous-on-compact-integrable",
+    "lem-sfb-dominated-integral-frechet-derivative",
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-euclidean-bochner-integral-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+   }
+  },
+  {
+   "text": "Each $I_n$ is continuous because it is differentiable by step 2. Starting from $D^0 I_0=I_0$, induction gives $D^n I_0=I_n$ for every $n$; the inductive step is precisely $D I_n=I_{n+1}$ proved there. Hence $B=(2\\pi)^{-m}I_0$ is jointly smooth. Evaluation of a multilinear derivative on fixed coordinate vectors is a finite coordinate linear combination, so the coordinatewise computation of the integral (additivity and the scalar-function clause of the Euclidean Bochner-calculus statement) moves those evaluations through the integral. Direct differentiation of $a$ now gives, with $c=(2\\pi)^{-m}$, $$\\partial_x^\\alpha\\partial_\\eta^\\delta\\partial_\\xi^\\beta B=c\\int e^{-iz\\cdot\\eta}f_{x,\\xi}(z)\\,dz,\\qquad f_{x,\\xi}(z)=(-iz)^\\delta\\partial_x^\\alpha\\partial_\\xi^\\beta b(x,z,\\xi).$$ The exponential is independent of $x,\\xi$, and its $\\eta$-derivative is $(-iz)^\\delta$ times itself, so no extra terms occur.",
+   "uses": [
+    "lem-sfb-vector-integral-majorant-linearity",
+    "lem-sfb-euclidean-bochner-integral-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+   }
+  },
+  {
+   "text": "Fix $x,\\xi,\\eta$. For each entry $h$ of $f_{x,\\xi}$ and coordinate $j$, apply the integration-by-parts statement with $f(z)=e^{-iz\\cdot\\eta}$, $g(z)=h(z)$ and direction $e_j$. Both factors are smooth everywhere; $fg$, $(D f[e_j])g$ and $f(D g[e_j])$ are continuous compactly supported functions, hence meet its three integrability hypotheses. Since $D f[e_j]=-i\\eta_j f$, it gives $\\int e^{-iz\\cdot\\eta}\\partial_j h\\,dz=i\\eta_j\\int e^{-iz\\cdot\\eta}h\\,dz$. Apply this identity again to $\\partial_j h$ to get the multiplier $-\\eta_j^2$ for $\\partial_j^2 h$. Set $\\Delta_z=\\sum_j\\partial_j^2$. By finite integral linearity, the identity for $1-\\Delta_z$ has multiplier $1+|\\eta|^2$. Iterating it $N$ times is valid because every intervening derivative is still smooth with support in $L_z$. Thus, entrywise and hence as matrices, $$ (1+|\\eta|^2)^N\\partial_x^\\alpha\\partial_\\eta^\\delta\\partial_\\xi^\\beta B=c\\int e^{-iz\\cdot\\eta}(1-\\Delta_z)^N f_{x,\\xi}(z)\\,dz.$$",
+   "uses": [
+    "lem-sfb-scalar-integrable-integration-by-parts",
+    "lem-sfb-continuous-compact-support-integrable",
+    "lem-sfb-vector-integral-majorant-linearity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+   }
+  },
+  {
+   "text": "Expand $(1-\\Delta_z)^N$ as a finite linear combination of $\\partial_z^\\nu$ with $|\\nu|\\leq2N$, and apply Leibniz to $\\partial_z^\\nu(z^\\delta\\partial_x^\\alpha\\partial_\\xi^\\beta b)$. Its terms have the form a fixed coefficient times $z^{\\delta-\\kappa}\\partial_x^\\alpha\\partial_z^{\\nu-\\kappa}\\partial_\\xi^\\beta b$, with $\\kappa\\leq\\nu,\\delta$. Choose $R\\geq1$ with $|z|\\leq R$ on $L_z$. The polynomial factors have norm at most $R^{|\\delta|}$ there. Consequently, for a finite constant $A_{m,N,\\delta,R}$ depending only on the displayed indices and $L_z$, $$\\|(1-\\Delta_z)^Nf_{x,\\xi}(z)\\|\\leq A_{m,N,\\delta,R}\\sum_{|\\gamma|\\leq2N}C_{\\alpha\\gamma\\beta}(1+|\\xi|)^{r-|\\beta|}\\mathbf1_{L_z}(z).$$ Let $v_z=\\int_{L_z}1\\,dz<\\infty$, supplied by the compact-set integrability statement. The vector majorant estimate applied to step 4 yields $$\\|\\partial_x^\\alpha\\partial_\\eta^\\delta\\partial_\\xi^\\beta B\\|\\leq c v_z A_{m,N,\\delta,R}\\Big(\\sum_{|\\gamma|\\leq2N}C_{\\alpha\\gamma\\beta}\\Big)(1+|\\eta|^2)^{-N}(1+|\\xi|)^{r-|\\beta|}.$$",
+   "uses": [
+    "lem-sfb-continuous-on-compact-integrable",
+    "lem-sfb-vector-integral-majorant-linearity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+   }
+  },
+  {
+   "text": "Given $L\\geq0$, choose $N=\\lceil L/2\\rceil$. For $u\\geq0$, $(1+u)^2\\leq2(1+u^2)$ and $2N\\geq L$ imply $(1+u^2)^{-N}\\leq2^N(1+u)^{-L}$. Step 5 therefore gives the desired constant $$C'_{\\alpha\\delta\\beta L}=2^Nc v_z A_{m,N,\\delta,R}\\sum_{|\\gamma|\\leq2N}C_{\\alpha\\gamma\\beta}.$$ Input bound constants may be taken nonnegative, as their bounding inequalities already require. This formula uses only the indicated finite list of spatial symbol bounds. It is independent of $x,\\eta,\\xi$ and of the member of a family with common supports and common input bounds. Empty support sets give the zero function; $L=0$ uses $N=0$. Negative $r$ causes no change because $1+|\\xi|$ is strictly positive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+    "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-continuous-compact-support-integrable",
+  "lem-sfb-vector-integral-majorant-linearity",
+  "lem-sfb-euclidean-bochner-integral-calculus",
+  "lem-sfb-continuous-on-compact-integrable",
+  "lem-sfb-dominated-integral-frechet-derivative",
+  "lem-sfb-scalar-integrable-integration-by-parts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-differential-pseudodifferential-operators.pdf",
+  "place": "WANTED locally. Demailly, Differential and pseudodifferential operators on manifolds, §2 Fourier differentiation identities (printed p.3), §3 (3.11) (printed p.9), and the estimates after (3.15) (printed p.11); parameter and mixed-derivative extension written by the agent. Online source read: https://www-fourier.univ-grenoble-alpes.fr/~demailly/analytic_geometry_2019/pseudodiff.pdf"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "partialFourier|fourier.*symbol|symbol.*fourier|oscillatory",
+   "results": "{\"t\": \"2026-10-24T04:46:30Z\", \"tool\": \"grep\", \"query\": \"partialFourier|fourier.*symbol|symbol.*fourier|oscillatory\", \"sub\": \"Analysis/\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/Sobolev.lean\"], \"digest\": \"e990575b7fed5215\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform rapid decay of the partial Fourier transform of a compactly supported smooth family with a symbol parameter",
+   "results": "{\"t\": \"2026-10-24T04:46:31Z\", \"tool\": \"leansearch\", \"query\": \"Uniform rapid decay of the partial Fourier transform of a compactly supported smooth family with a symbol parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Real.zero_at_infty_fourier\", \"tendsto_integral_exp_smul_cocompact\", \"SchwartzMap.instFourierTransform\", \"tendsto_integral_exp_inner_smul_cocompact\", \"Real.zero_at_infty_fourierIntegral\", \"SchwartzMap.fourierTransformCLM\", \"SchwartzMap.instContinuousFourier\", \"SchwartzMap.instFourierTransform.congr_simp\"], \"digest\": \"2986bb368198522e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierIntegral\"",
+   "results": "{\"t\": \"2026-10-24T04:46:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"fourierIntegral\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Fourier.fourierIntegral\", \"Fourier.norm_fourierIntegral_le_integral_norm\", \"Fourier.fourierIntegral_def\", \"Fourier.fourierIntegral_const_smul\", \"Real.fourierIntegral_convergent_iff\", \"Fourier.fourierIntegral_comp_add_right\", \"VectorFourier.fourierIntegral\", \"VectorFourier.norm_fourierIntegral_le_integral_norm\"], \"digest\": \"d3bfece87f01b8a2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Partial Fourier transform in a compact spatial variable has rapid decay in the dual variable uniformly with symbol estimates in a frequency parameter",
+   "results": "{\"t\": \"2026-10-24T04:46:34Z\", \"tool\": \"leanfinder\", \"query\": \"Partial Fourier transform in a compact spatial variable has rapid decay in the dual variable uniformly with symbol estimates in a frequency parameter\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SchwartzMap.fourierTransformCLM\", \"SchwartzMap.fourier_evalCLM_eq\", \"SchwartzMap.fourierTransformCLE\", \"SchwartzMap.fourierTransformCLE_apply\", \"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\"], \"digest\": \"3d2f5e85901aaa77\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "grep",
+   "query": "pow_mul_norm_iteratedFDeriv_fourierIntegral_le|iteratedFDeriv_fourierIntegral",
+   "results": "{\"t\": \"2026-10-24T04:47:37Z\", \"tool\": \"grep\", \"query\": \"pow_mul_norm_iteratedFDeriv_fourierIntegral_le|iteratedFDeriv_fourierIntegral\", \"sub\": \"Analysis/Fourier/FourierTransformDeriv.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"68\", \"71\", \"519\", \"572\", \"582\"], \"digest\": \"1c3e168b3b875aac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform symbol seminorm bounds for a smooth parameter family under partial Fourier transform in a compactly supported variable",
+   "results": "{\"t\": \"2026-10-24T04:48:14Z\", \"tool\": \"leanfinder\", \"query\": \"Uniform symbol seminorm bounds for a smooth parameter family under partial Fourier transform in a compactly supported variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le\", \"Real.pow_mul_norm_iteratedFDeriv_fourier_le\", \"VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le\", \"SchwartzMap.seminormAux\", \"SchwartzMap.seminormAux_le_bound\", \"VectorFourier.norm_iteratedFDeriv_fourierPowSMulRight\", \"SchwartzMap.le_seminormAux\"], \"digest\": \"c456df188ae2ad1a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "grep",
+   "query": "pow_mul_norm_iteratedFDeriv_fourierIntegral_le|iteratedFDeriv_fourierIntegral",
+   "results": "{\"t\": \"2026-10-24T04:50:26Z\", \"tool\": \"grep\", \"query\": \"pow_mul_norm_iteratedFDeriv_fourierIntegral_le|iteratedFDeriv_fourierIntegral\", \"sub\": \"Analysis/Fourier/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\", \"Mathlib/Analysis/Fourier/FourierTransformDeriv.lean\"], \"digest\": \"4f3b3777b9f2335c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "grep",
+   "query": "fourierTransformCLM|fourierInv_fourier_eq",
+   "results": "{\"t\": \"2026-10-24T04:50:26Z\", \"tool\": \"grep\", \"query\": \"fourierTransformCLM|fourierInv_fourier_eq\", \"sub\": \"Analysis/Distribution/SchwartzSpace/\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Fourier.lean\"], \"digest\": \"ccdce74e70cbd079\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Fourier transform derivative estimates and the continuous Schwartz transform are ingredients, but do not state joint parameter smoothness and uniform mixed symbol seminorm estimates. Read FourierTransformDeriv.lean:519 and :632 and SchwartzSpace/Fourier.lean:51; this is not a one-line specialization. The Sobolev source hit is a Bessel multiplier."
+  },
+  {
+   "tool": "grep",
+   "query": "contDiff.*integral|integral.*contDiff|fourierIntegral.*fderiv|integral.*fderiv",
+   "results": {
+    "t": "2026-10-24T05:11:38Z",
+    "tool": "grep",
+    "query": "contDiff.*integral|integral.*contDiff|fourierIntegral.*fderiv|integral.*fderiv",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/FunctionalSpaces/SobolevInequality.lean",
+     "Mathlib/Analysis/Distribution/TemperedDistribution.lean",
+     "Mathlib/Analysis/Distribution/TemperedDistribution.lean"
+    ],
+    "digest": "35ad49fab98aa611"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: FourierTransformDeriv.lean:507–528 and :632ff give fixed-function Fourier smoothness and seminorm bounds; SchwartzSpace/Fourier.lean:51 gives the continuous Schwartz transform. None states the full joint-parameter mixed symbol estimate as a one-line specialization. ParametricIntegral.lean:210–218 supplies a separate differentiating-under-integral ingredient, already represented by lem-sfb-dominated-integral-frechet-derivative."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierIntegral\"",
+   "results": {
+    "t": "2026-10-24T05:11:39Z",
+    "tool": "loogle",
+    "query": "\"fourierIntegral\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Fourier.fourierIntegral",
+     "Fourier.norm_fourierIntegral_le_integral_norm",
+     "Fourier.fourierIntegral_def",
+     "Fourier.fourierIntegral_const_smul",
+     "Real.fourierIntegral_convergent_iff",
+     "Fourier.fourierIntegral_comp_add_right",
+     "VectorFourier.fourierIntegral",
+     "VectorFourier.norm_fourierIntegral_le_integral_norm"
+    ],
+    "digest": "d3bfece87f01b8a2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: FourierTransformDeriv.lean:507–528 and :632ff give fixed-function Fourier smoothness and seminorm bounds; SchwartzSpace/Fourier.lean:51 gives the continuous Schwartz transform. None states the full joint-parameter mixed symbol estimate as a one-line specialization. ParametricIntegral.lean:210–218 supplies a separate differentiating-under-integral ingredient, already represented by lem-sfb-dominated-integral-frechet-derivative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth dependence of integrals on parameters for smooth functions with compact support uniformly in the integration variable",
+   "results": {
+    "t": "2026-10-24T05:11:39Z",
+    "tool": "leanfinder",
+    "query": "Smooth dependence of integrals on parameters for smooth functions with compact support uniformly in the integration variable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "MeasureTheory.contDiffOn_convolution_right_with_param_aux",
+     "MeasureTheory.contDiffOn_convolution_left_with_param",
+     "continuousOn_integral_bilinear_of_locally_integrable_of_compact_support",
+     "MeasureTheory.contDiffOn_convolution_right_with_param",
+     "MeasureTheory.contDiffOn_convolution_right_with_param_comp",
+     "MeasureTheory.contDiffOn_convolution_left_with_param_comp",
+     "ExistsContDiffBumpBase.y_smooth",
+     "continuousOn_integral_of_compact_support"
+    ],
+    "digest": "256b632dcf3af5d3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: FourierTransformDeriv.lean:507–528 and :632ff give fixed-function Fourier smoothness and seminorm bounds; SchwartzSpace/Fourier.lean:51 gives the continuous Schwartz transform. None states the full joint-parameter mixed symbol estimate as a one-line specialization. ParametricIntegral.lean:210–218 supplies a separate differentiating-under-integral ingredient, already represented by lem-sfb-dominated-integral-frechet-derivative."
+  },
+  {
+   "tool": "grep",
+   "query": "pow_mul_norm_iteratedFDeriv_fourierIntegral_le|contDiff_fourierIntegral|hasFDerivAt_integral_of_dominated_of_fderiv_le",
+   "results": {
+    "t": "2026-10-24T05:14:23Z",
+    "tool": "grep",
+    "query": "pow_mul_norm_iteratedFDeriv_fourierIntegral_le|contDiff_fourierIntegral|hasFDerivAt_integral_of_dominated_of_fderiv_le",
+    "sub": "Analysis/",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Analysis/Calculus/ParametricIntegral.lean",
+     "Mathlib/Analysis/Calculus/ParametricIntegral.lean",
+     "Mathlib/Analysis/Calculus/ParametricIntegral.lean",
+     "Mathlib/Analysis/Calculus/ParametricIntegral.lean",
+     "Mathlib/Analysis/Calculus/ParametricIntegral.lean",
+     "Mathlib/Analysis/Calculus/ParametricIntervalIntegral.lean",
+     "Mathlib/Analysis/Calculus/ParametricIntervalIntegral.lean",
+     "Mathlib/Analysis/Calculus/ContDiff/Convolution.lean"
+    ],
+    "digest": "67fc484da0790568"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: FourierTransformDeriv.lean:507–528 and :632ff give fixed-function Fourier smoothness and seminorm bounds; SchwartzSpace/Fourier.lean:51 gives the continuous Schwartz transform. None states the full joint-parameter mixed symbol estimate as a one-line specialization. ParametricIntegral.lean:210–218 supplies a separate differentiating-under-integral ingredient, already represented by lem-sfb-dominated-integral-frechet-derivative."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth compactly supported symbol family has a jointly smooth partial Fourier transform with uniform rapid decay and frequency symbol estimates",
+   "results": {
+    "t": "2026-10-24T05:14:24Z",
+    "tool": "leansearch",
+    "query": "A smooth compactly supported symbol family has a jointly smooth partial Fourier transform with uniform rapid decay and frequency symbol estimates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SchwartzMap.fourierTransformCLM",
+     "HasCompactSupport.toSchwartzMap",
+     "SchwartzMap.instContinuousFourier",
+     "SchwartzMap.instFourierTransform",
+     "FourierTransform.term𝓕",
+     "SchwartzMap.instFourierTransform.congr_simp",
+     "SchwartzMap.instFourierPair",
+     "SchwartzMap.fourierTransformCLM_apply"
+    ],
+    "digest": "7a1d806dc4b68aef"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: FourierTransformDeriv.lean:507–528 and :632ff give fixed-function Fourier smoothness and seminorm bounds; SchwartzSpace/Fourier.lean:51 gives the continuous Schwartz transform. None states the full joint-parameter mixed symbol estimate as a one-line specialization. ParametricIntegral.lean:210–218 supplies a separate differentiating-under-integral ingredient, already represented by lem-sfb-dominated-integral-frechet-derivative."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Joint parameter smoothness and uniform rapid Fourier decay with mixed derivatives of compactly supported symbols",
+   "results": {
+    "t": "2026-10-24T05:14:25Z",
+    "tool": "leanfinder",
+    "query": "Joint parameter smoothness and uniform rapid Fourier decay with mixed derivatives of compactly supported symbols",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "VectorFourier.pow_mul_norm_iteratedFDeriv_fourierIntegral_le",
+     "VectorFourier.norm_fourierPowSMulRight_iteratedFDeriv_fourierIntegral_le",
+     "Real.pow_mul_norm_iteratedFDeriv_fourier_le",
+     "Real.pow_mul_norm_iteratedFDeriv_fourierIntegral_le",
+     "VectorFourier.norm_iteratedFDeriv_fourierPowSMulRight",
+     "SchwartzMap.decay",
+     "SchwartzMap.decay'",
+     "VectorFourier.contDiff_fourierIntegral"
+    ],
+    "digest": "f078bc7347ffe80e"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match for the complete item: FourierTransformDeriv.lean:507–528 and :632ff give fixed-function Fourier smoothness and seminorm bounds; SchwartzSpace/Fourier.lean:51 gives the continuous Schwartz transform. None states the full joint-parameter mixed symbol estimate as a one-line specialization. ParametricIntegral.lean:210–218 supplies a separate differentiating-under-integral ingredient, already represented by lem-sfb-dominated-integral-frechet-derivative."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-compact-oscillatory-amplitude-reduction",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Elliptic left parametrix as an identity on distributions. Supporting input: (3.4)–(3.5), global quantization before Proposition 3.6, and composition Proposition 3.7, printed pp.12–13; leading-symbol formulation and real conjugation symmetry made explicit. Supporting local analytic input: Local oscillatory-integral prerequisites for global quantization: amplitude reduction, smooth off-diagonal kernel, and distributional transposition. Supporting estimate: compact-spatial partial Fourier transform, with external parameters and mixed derivatives, before Taylor expansion of the shifted frequency.",
+   "via": [
+    "lem-sfb-compact-oscillatory-amplitude-reduction",
+    "lem-sfb-pseudodifferential-leading-calculus",
+    "lem-sfb-elliptic-distribution-parametrix",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-parameter-symbol-partial-fourier-decay",
+  "worker": "stage1",
+  "summary": "Retained the statement. Proved joint smoothness by applying the existing dominated Fréchet-integral derivative leaf at every derivative order; derived the mixed formula and the repeated Laplacian identity from existing scalar integration by parts. Expanded the finite differential operator to give an explicit finite-seminorm uniform bound. Reused five existing nodes; no new nodes or statement disputes.",
+  "blueprint": "Supporting compact-spatial Fourier-decay estimate before Taylor expansion in the inherited amplitude-reduction chain leading to det-thm-sf-ctf-stability-direct-images proof (3). The newest blueprint unit was read. No analytic Fourier-decay duplicate was found by whole-blueprint search. blueprint_refs.py ancestor reports the inherited from.node=None; retained that provenance and its exact from.place rather than inventing a blueprint id."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NM-1e8ce047a",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-1e8ce047a (reviewer sub-agent of L); spot-checked: Read the item, all five cited nodes (each a same-unit Mathlib leaf) and the parent's step 4 (lem-sfb-compact-oscillatory-amplitude-reduction). The Mathlib leaves were checked at ParametricIntegral.lean:210-216 and IntegrationByParts.lean:226-237. The statement is unchanged against clones/live, where the item is still unsplit, and it matches what the parent uses. There are no new nodes and no repair note, so the re-split rule does not apply. Demailly is not under literature/; it is listed as WANTED and the proof is marked by=agent, so I checked the mathematics directly. Step 2's domination on a bounded ball holds for either sign of r-|beta|. The step 3 induction is set up correctly. In step 4, integration by parts gives the multiplier i*eta_j, then -eta_j^2, so 1-Delta gives 1+|eta|^2. Step 5's Leibniz bound with |z|<=R is correct, and step 6's inequality (1+u)^2<=2(1+u^2) with N=ceil(L/2) is correct. Small cases checked: p=0 or q=0, empty supports, eta=0, L=0, negative r, and a separated example. FIX (C4): steps 1, 2 and 3 use the fact that finite-dimensional integrals are computed coordinatewise (the matrix integral, the identification L(H,L^n)=L^{n+1}, and moving evaluations through the integral). The cited vector-linearity node gives only additivity and constant homogeneity, which is not enough. I added the existing same-unit leaf lem-sfb-euclidean-bochner-integral-calculus to those three steps; its clause int h c=(int h)c is integral_smul_const. Each step gets one explanatory sentence, and proof_deps is updated. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-parameter-symbol-partial-fourier-decay.json. No tool_uses are needed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.ParameterSymbolPartialFourierDecay",
+  "declaration": "EuclideanSpace.parameterSymbol_partialFourier_decay",
+  "declarations": [
+   "EuclideanSpace.parameterSymbolDeriv",
+   "EuclideanSpace.parameterSymbolPartialFourier",
+   "EuclideanSpace.parameterSymbol_partialFourier_decay"
+  ],
+  "file": "lean/Sheaf/Analysis/ParameterSymbolPartialFourierDecay.lean",
+  "statement": "theorem parameterSymbol_partialFourier_decay (d m p q : ℕ) (hd : 1 ≤ d) (hm : 1 ≤ m) (r : ℤ) (Lx : Set (EuclideanSpace ℝ (Fin d))) (Lz : Set (EuclideanSpace ℝ (Fin m))) (hLx : IsCompact Lx) (hLz : IsCompact Lz) : ∃ (Γ : (Fin d → ℕ) → (Fin m → ℕ) → (Fin m → ℕ) → ℕ → Finset (Fin m → ℕ)) (K : (Fin d → ℕ) → (Fin m → ℕ) → (Fin m → ℕ) → ℕ → NNReal), ∀ (b : EuclideanSpace ℝ (Fin d) × EuclideanSpace ℝ (Fin m) × EuclideanSpace ℝ (Fin m) → EuclideanSpace ℂ (Fin p) →L[ℂ] EuclideanSpace ℂ (Fin q)) (C : (Fin d → ℕ) → (Fin m → ℕ) → (Fin m → ℕ) → NNReal), ContDiff ℝ ∞ b → (∀ x z ξ, x ∉ Lx ∨ z ∉ Lz → b (x, z, ξ) = 0) → (∀ α γ β x z ξ, ‖parameterSymbolDeriv α γ β b (x, z, ξ)‖ ≤ (C α γ β : ℝ) * (1 + ‖ξ‖) ^ (r - (∑ j, β j : ℕ))) → (∀ x η ξ, Integrable (fun z : EuclideanSpace ℝ (Fin m) ↦ Complex.exp (-Complex.I * (inner ℝ z η : ℂ)) • b (x, z, ξ)) volume) ∧ ContDiff ℝ ∞ (parameterSymbolPartialFourier b) ∧ (∀ x η ξ, x ∉ Lx → parameterSymbolPartialFourier b (x, η, ξ) = 0) ∧ (∀ α δ β x η ξ, parameterSymbolDeriv α δ β (parameterSymbolPartialFourier b) (x, η, ξ) = (2 * (Real.pi : ℂ)) ^ (-(m : ℤ)) • ∫ z : EuclideanSpace ℝ (Fin m), (Complex.exp (-Complex.I * (inner ℝ z η : ℂ)) * ∏ j, (-Complex.I * (z j : ℂ)) ^ (δ j)) • parameterSymbolDeriv α 0 β b (x, z, ξ)) ∧ (∀ α δ β (L : ℕ) x η ξ, ‖parameterSymbolDeriv α δ β (parameterSymbolPartialFourier b) (x, η, ξ)‖ ≤ ((K α δ β L : ℝ) * ∑ γ ∈ Γ α δ β L, (C α γ β : ℝ)) * (1 + ‖η‖) ^ (-(L : ℤ)) * (1 + ‖ξ‖) ^ (r - (∑ j, β j : ℕ)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0102e9c0",
+  "group": "NB",
+  "result": "pass",
+  "note": "Node unchanged except the lean field; lean.statement is verbatim in the file. Every hypothesis and conclusion matches the node: compact supports, smoothness, symbol bounds via parameterSymbolDeriv (xi, z, x fderiv order), B with the correct phase sign and (2pi)^-m, Integrable, ContDiff, vanishing off Lx, the (-iz)^delta derivative formula, and decay with Gamma/K chosen before b and C (uniform finite-sum bound, provable from steps 5-6). Edge cases p=0 or q=0, empty supports, L=0, negative r and zero indices are covered. H4: existing derivative helpers are 2-block or scalar, so this local helper is justified; no partial-Fourier declaration exists. Docstrings carry the source place, blueprint tag and six proof steps; proof is sorry only; Worker report and Second reading sections are present. No compile (no file changed). Q153 is delivering the same item in parallel; the maintainer must choose one to avoid a module collision."
+ }
+}

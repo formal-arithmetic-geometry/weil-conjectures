@@ -1,0 +1,253 @@
+{
+ "id": "lem-sfb-locally-closed-proj-finite-affine",
+ "kind": "statement",
+ "title": "Ambient principal affine neighbourhoods for finite sets in locally closed Proj subschemes",
+ "statement": "Let $S=\\bigoplus_{n\\ge0}S_n$ be a nonnegatively graded commutative ring, let $O\\subseteq\\operatorname{Proj}S$ be open, and let $j:X\\hookrightarrow O$ be a closed immersion of schemes [def-pc-proj] [def-pc-scheme] [def-weil-closed-immersion]. For every finite subset $E\\subseteq|X|$ there are an integer $d>0$ and a homogeneous element $f\\in S_d$ such that $j(E)\\subseteq D_+(f)\\subseteq O$ and $j^{-1}D_+(f)$ is an affine open subscheme of $X$. In particular every finite subset of a scheme admitting a locally closed immersion into $\\operatorname{Proj}S$ lies in an affine open. No finite generation of $S$, degree-one generation, base field, reducedness, or closed-point assumption on $E$ is imposed. The empty set is permitted, using the empty standard open $D_+(0)$.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), including the ambient standard-open choice; original field-quotient Step 10 uses this argument with S=e[x_0,...,x_n]."
+ },
+ "stmt_deps": [
+  "def-pc-proj",
+  "def-pc-scheme",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "If $E=\\varnothing$, set $d=1$ and $f=0\\in S_1$. Every prime contains $0$, so $D_+(0)=\\varnothing\\subseteq O$. Its inverse image is the empty open of $X$, which is affine by the standard-open and closed-immersion affine descriptions cited in Step 6. Hence assume $E\\ne\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+   }
+  },
+  {
+   "text": "By clause (0) of the standard-open inclusion lemma, for each $x\\in E$ choose $f_x\\in S_{d_x}$ with $d_x>0$ and $j(x)\\in D_+(f_x)\\subseteq O$. Since $E$ is finite, this is a finite family and $j(E)\\subseteq\\bigcup_{x\\in E}D_+(f_x)\\subseteq O$.",
+   "uses": [
+    "lem-weil-pbc-proj-standard-open-inclusion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+   }
+  },
+  {
+   "text": "Put $I=(f_x\\mid x\\in E)$. This is a graded ideal: in any expression $a=\\sum_x a_xf_x$, its degree-$n$ component is $\\sum_{x:d_x\\le n}(a_x)_{n-d_x}f_x$, again in $I$. Every generator has positive degree, so $I\\subseteq S_+$. By the description of Proj points, write $j(x)=\\mathfrak p_x$ with $\\mathfrak p_x$ a homogeneous prime. Since $f_x\\in I$ and $j(x)\\in D_+(f_x)$ means $f_x\\notin\\mathfrak p_x$, we have $I\\not\\subseteq\\mathfrak p_x$ for every $x\\in E$.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+   }
+  },
+  {
+   "text": "Apply graded prime avoidance to $I\\subseteq S_+$ and the finite family $(\\mathfrak p_x)_{x\\in E}$. It gives $d>0$ and $f\\in S_d\\cap I$ outside every $\\mathfrak p_x$. Thus $j(E)\\subseteq D_+(f)$. All hypotheses were verified in Step 3; repetitions among the image primes cause no problem.",
+   "uses": [
+    "lem-sc-graded-prime-avoidance",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+   }
+  },
+  {
+   "text": "If a point $\\mathfrak q$ lies outside $\\bigcup_{x\\in E}D_+(f_x)$, then it contains every $f_x$, hence contains their generated ideal $I$ and therefore $f$. Thus it lies outside $D_+(f)$. Taking contrapositives gives $D_+(f)\\subseteq\\bigcup_{x\\in E}D_+(f_x)\\subseteq O$. This ideal-membership argument is valid for arbitrary primes, without a closed-point assumption.",
+   "uses": [
+    "def-pc-proj"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+   }
+  },
+  {
+   "text": "By the standard-open description, $D_+(f)\\cong\\operatorname{Spec}(S_{(f)})$ is affine. Since it is an open contained in $O$, it has the same open subscheme structure whether viewed in $O$ or in $\\operatorname{Proj}S$. Apply the affine characterization of the given closed immersion $j:X\\hookrightarrow O$ to this affine open: for an ideal $J\\subseteq S_{(f)}$, $j^{-1}D_+(f)\\cong\\operatorname{Spec}(S_{(f)}/J)$. It is therefore affine, open in $X$, and contains $E$. This also proves affineness for the empty open in Step 1. Finally, a locally closed immersion factors as a closed immersion into an open $O$ by the definition of immersion, so the last assertion follows.",
+   "uses": [
+    "def-pc-proj",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "def-pc-proj",
+  "lem-sc-graded-prime-avoidance",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 01ZY, lemma-ample-finite-set-in-affine, proof of case (4), with the standard opens chosen inside the given O."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite.*affine|affine.*finite|exists.*affine",
+   "results": "OK 0 hits:  Subdirectory: AlgebraicGeometry/ProjectiveSpectrum",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj basic opens and their affine covers are present, but a single standard open containing a finite set and contained in a prescribed open requires graded prime avoidance. Upstream finite-set neighbourhoods over a field do not state this arbitrary-graded-ring ambient refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a locally closed immersion of a scheme into Proj every finite set of points has an affine open neighbourhood",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.hasAffineProperty, AlgebraicGeometry.IsImmersion.mk, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.IsImmersion.isLocallyClosed_range, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj basic opens and their affine covers are present, but a single standard open containing a finite set and contained in a prescribed open requires graded prime avoidance. Upstream finite-set neighbourhoods over a field do not state this arbitrary-graded-ring ambient refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsQuasiProjective\", \"Finite\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj basic opens and their affine covers are present, but a single standard open containing a finite set and contained in a prescribed open requires graded prime avoidance. Upstream finite-set neighbourhoods over a field do not state this arbitrary-graded-ring ambient refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an open subset of Proj and finitely many points in it there is a positive degree homogeneous element whose standard affine open contains them and stays in the given open",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.iSup_basicOpen_eq_top, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.basicOpen, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.iSup_basicOpen_eq_top'",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj basic opens and their affine covers are present, but a single standard open containing a finite set and contained in a prescribed open requires graded prime avoidance. Upstream finite-set neighbourhoods over a field do not state this arbitrary-graded-ring ambient refinement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite subset of a locally closed subscheme of Proj of a graded ring is contained in an affine open by homogeneous prime avoidance",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.iSup_basicOpen_eq_top",
+   "date": "2026-10-22",
+   "verdict": "no match: Proj basic opens and their affine covers are present, but a single standard open containing a finite set and contained in a prescribed open requires graded prime avoidance. Upstream finite-set neighbourhoods over a field do not state this arbitrary-graded-ring ambient refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*basicOpen|basicOpen.*finite|exists.*homogeneous.*notMem",
+   "results": "OK 0 hits:  Subdirectory: AlgebraicGeometry/ProjectiveSpectrum",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual affine standard opens, their covers, or irrelevant-ideal facts, not a single standard open containing an arbitrary finite set inside a prescribed open; Loogle Proj/Finite hits are about projective modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite subset of a locally closed subscheme of Proj has an affine neighbourhood cut out by a positive degree homogeneous element inside a prescribed ambient open",
+   "results": "OK 8 hits: AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.basicOpenIsoSpec, AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.basicOpenIsoSpec.congr_simp, AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual affine standard opens, their covers, or irrelevant-ideal facts, not a single standard open containing an arbitrary finite set inside a prescribed open; Loogle Proj/Finite hits are about projective modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"Finite\"",
+   "results": "OK 12 hits: Module.Finite.exists_comp_eq_id_of_projective, Module.instIsReflexiveOfFiniteOfProjective, dualTensorHom_bijective_of_finite_left_projective_right, dualTensorHom_bijective_of_finite_projective_right, Module.finitePresentation_of_projective, Module.finitePresentation_of_projective_of_exact, LinearMap.FiniteRangeSetoid.projection_equiv_id, LinearMap.FiniteRangeSetoid.projection_equiv_id_iff_isNoetherian",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual affine standard opens, their covers, or irrelevant-ideal facts, not a single standard open containing an arbitrary finite set inside a prescribed open; Loogle Proj/Finite hits are about projective modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given an open subset O of Proj of an arbitrary nonnegatively graded ring and finitely many points in O there is a positive degree homogeneous f with the points in D_+(f) contained in O",
+   "results": "OK 8 hits: ProjectiveSpectrum.basicOpen, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.basicOpen, ProjectiveSpectrum.isOpen_basicOpen, AlgebraicGeometry.Proj.openCoverOfISupEqTop, ProjectiveSpectrum.isOpen_iff, AlgebraicGeometry.mem_basicOpen_den, AlgebraicGeometry.Proj.iSup_basicOpen_eq_top",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual affine standard opens, their covers, or irrelevant-ideal facts, not a single standard open containing an arbitrary finite set inside a prescribed open; Loogle Proj/Finite hits are about projective modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ideal generated by positive degree homogeneous elements contains a homogeneous element outside any specified finite collection of homogeneous prime ideals none of which contains the ideal",
+   "results": "OK 8 hits: HomogeneousIdeal.mem_irrelevant_of_mem, HomogeneousIdeal.irrelevant_eq_span, AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant, ProjectiveSpectrum.not_irrelevant_le, HomogeneousIdeal.irrelevant_eq_closure, HomogeneousIdeal.irrelevant_le, HomogeneousIdeal.toIdeal_irrelevant_le, Ideal.IsHomogeneous.isPrime_of_homogeneous_mem_or_mem",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual affine standard opens, their covers, or irrelevant-ideal facts, not a single standard open containing an arbitrary finite set inside a prescribed open; Loogle Proj/Finite hits are about projective modules."
+  },
+  {
+   "tool": "grep",
+   "query": "isAffineOpen_basicOpen|basicOpenIsoSpec|openCoverOfISupEqTop",
+   "results": "OK 5 hits: 22, 138, 161, 180, 187 Subdirectory: AlgebraicGeometry/ProjectiveSpectrum/Basic.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: hits give individual affine standard opens, their covers, or irrelevant-ideal facts, not a single standard open containing an arbitrary finite set inside a prescribed open; Loogle Proj/Finite hits are about projective modules."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-admissible-finite-type-field-quotient",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), via lem-sfb-admissible-direct-image and the recorded alteration/admissible-quotient chain: Stacks 01ZY case (4), finite homogeneous generators chosen inside O, graded prime avoidance, and affine closed-immersion inverse image (original field-quotient Step 10).",
+   "via": [
+    "lem-sfb-admissible-finite-type-field-quotient",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-locally-closed-proj-finite-affine",
+  "worker": "stage1",
+  "summary": "Checked the prescribed ambient refinement directly against Stacks 01ZY case (4); split into the finite standard-open choice, componentwise gradedness of its generated ideal, existing graded prime avoidance, ideal-membership containment, and the existing affine description of a closed immersion. The statement and its hypotheses are unchanged. No new nodes are needed.",
+  "blueprint": "Realizes the finite-set affine-neighbourhood input to det-thm-sf-ctf-stability-direct-images, proof (3), through the recorded admissible-quotient ancestry. The inherited created.item chain stops at a Lean module rather than an imported node, so blueprint_refs.py ancestor prints None; the inherited null ancestor and via list are preserved, with a precise place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proj-standard-open-inclusion",
+    "why": "Only clause (0), the positive-degree standard-open basis for an arbitrary graded ring, chooses the f_x inside O. This generic Proj topology tool is not supplied by the six-functor unit."
+   },
+   {
+    "node": "lem-sc-graded-prime-avoidance",
+    "why": "The algebraic prime-avoidance theorem for a graded ideal I contained in S_+ produces f. This is the precise algebra tool used by Stacks 01ZY, not a change to the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proj-standard-open-inclusion",
+  "lem-sc-graded-prime-avoidance"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-38a83b3b1",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-38a83b3b1 (reviewer sub-agent of L); spot-checked: I read the item in full. There are no new nodes. The statement and stmt_deps are unchanged from Q22's import (created 2026-10-22), and there is no repair or re-split note, so this is a first split. The six steps follow Stacks properties.tex Tag 01ZY lemma-ample-finite-set-in-affine case (4), read at that place, with the open Proj S \\ T replaced by the prescribed open O; this is valid unchanged, so the statement is not weakened. Step 2 uses clause (0) of lem-weil-pbc-proj-standard-open-inclusion, the positive-degree standard-open basis. Step 3: the gradedness of I=(f_x) is computed componentwise (checked, including unequal degrees), I⊆S_+, and I⊄p_x. Step 4: lem-sc-graded-prime-avoidance has the same statement as Algebra 00JS lemma-graded-silly; every hypothesis is met, and it gives f∈S_d with d>0. Step 5: D_+(f)⊆∪D_+(f_x)⊆O by ideal membership. Step 6: D_+(f)=Spec S_(f) from def-pc-proj, plus the affine-open clause of def-weil-closed-immersion, gives j^{-1}D_+(f)=Spec(S_(f)/J). Edge cases checked: E=∅ (D_+(0)=∅), O=∅, S_+=0, nilpotent generators, non-Noetherian or not finitely generated S, generic points. Duplicate candidates (lem-sc-ample-finite-set-affine, lem-sc-ample-finite-principal-affine, lem-pd-projective-finite-affine-neighbourhood, lem-trf-componentwise-finite-set-affine-neighbourhood) do not state the item. The Mathlib grep found no leaf. The citer lem-sfb-admissible-finite-type-field-quotient is covered. No SGA citation. Accepted tool_uses: both cited lemmas are generic black-box tools. Maintainer note: blueprint.from.node is null, inherited from the parent chain (lem-sfb-admissible-direct-image has created.item = a Lean module); the nearest blueprint ancestor appears to be det-thm-sf-ctf-stability-direct-images. This is a base-chain fault, not this delivery's. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedProjFiniteAffine",
+  "declaration": "AlgebraicGeometry.Proj.exists_basicOpen_subset_isAffineOpen_preimage",
+  "declarations": [
+   "AlgebraicGeometry.Proj.exists_basicOpen_subset_isAffineOpen_preimage",
+   "AlgebraicGeometry.Proj.exists_isAffineOpen_of_isImmersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedProjFiniteAffine.lean",
+  "statement": "theorem exists_basicOpen_subset_isAffineOpen_preimage {S : Type u} [CommRing S] {σ : Type v} [SetLike σ S] [AddSubgroupClass σ S] (𝒜 : ℕ → σ) [GradedRing 𝒜] (O : (Proj 𝒜).Opens) {X : Scheme.{u}} (j : X ⟶ O.toScheme) [IsClosedImmersion j] (E : Set X) (_hE : E.Finite) : ∃ (d : ℕ) (f : S), 0 < d ∧ f ∈ 𝒜 d ∧ (j ≫ O.ι) '' E ⊆ (basicOpen 𝒜 f : Set (Proj 𝒜)) ∧ basicOpen 𝒜 f ≤ O ∧ IsAffineOpen ((j ≫ O.ι) ⁻¹ᵁ basicOpen 𝒜 f)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The first declaration states the ambient standard-open refinement; the second states the in-particular affine-open consequence for a locally closed immersion. Both retain arbitrary graded rings and empty finite subsets."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d33b2630e",
+  "group": "O1",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: arbitrary N-graded S, O : (Proj 𝒜).Opens, j : X ⟶ O.toScheme with IsClosedImmersion, finite E; ∃ d>0, f∈𝒜 d with (j≫O.ι)''E ⊆ D₊(f), D₊(f) ≤ O, IsAffineOpen of the preimage. The 'in particular' clause is exists_isAffineOpen_of_isImmersion. Checked against Stacks 01ZY case (4). Edge cases kept: E=∅ via f=0 (basicOpen_zero), O=∅, S₊=0, S₁=0. No extra assumptions; universe u forced by Proj. Node changes only in lean; statement verbatim in the file; stmt_deps are Mathlib leaves; proof-dependency imports exist in side-live. No duplicate among lem-sc-ample-finite-set-affine, lem-sc-ample-finite-principal-affine, lem-pd-projective-finite-affine-neighbourhood, lem-trf-componentwise-finite-set-affine-neighbourhood. Proofs are sorry; docstrings carry source and blueprint; report has both sections. Not recompiled per the brief (worker compiled clean)."
+ }
+}

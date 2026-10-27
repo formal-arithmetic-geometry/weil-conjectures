@@ -1,0 +1,322 @@
+{
+ "id": "lem-pur-tate-unit-flat-model-domains",
+ "kind": "statement",
+ "title": "K-flat Tate-unit models and uniform integral reduction domains",
+ "statement": "Fix the finite-field datum of [def-pur-conventions], a prime $\\ell\\ne p$, and a separated finite-type $k$-scheme $S$. On the small pro-etale site [def-weil-pbc-proetale-site], for each finite extension $L/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_L$ and uniformizer $\\varpi_L$ [def-weil-l-adic-coefficient-extension], put $R_L=\\widehat{\\mathcal O}_{L,S}$ [def-weil-completed-integral-coefficients] and $U_L=R_L[0]$. Use the unbounded derived categories of module sheaves [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category].\nFor integers $m\\ge0$ and $n\\in\\mathbf Z$, put $J_L=\\mathcal O_L(m)$, $V_L=U_L(m)$ and $W_L=V_L[n]$, with the twists of [def-coefficient-twists-detailed]. The complexes $R_L[0]$, $J_L[0]$, $(R_L\\otimes_{R_L}J_L)[0]$ and their integer shifts are K-flat with flat terms [def-pc-kflat-complex]. Their identity resolutions compute ordinary derived coefficient extension $C_{H/L}(K)=K\\otimes^L_{R_L}R_H$ [lem-pur-derived-change-of-rings] for every finite inclusion $L\\subseteq H$; the specified natural $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison] identifies these computations with the strict quotient-tower extensions [def-weil-integral-scalar-extension] on these complete objects, also when $H=L$.\nThe objects $U_L,V_L,W_L$ belong to $D^b_{ctf}(S,\\mathcal O_L)$ [def-weil-derived-complete-integral-detailed, def-weil-finite-tor-amplitude]. For every $j\\ge1$, their actual derived reductions [def-weil-integral-derived-reduction] are canonically isomorphic in the derived category to $(\\mathcal O_L/\\varpi_L^j)_S[0]$, $(\\mathcal O_L/\\varpi_L^j)_S(m)[0]$ and $(\\mathcal O_L/\\varpi_L^j)_S(m)[n]$, respectively. For every degree-zero module sheaf $M$ over $(\\mathcal O_L/\\varpi_L^j)_S$, tensoring these reductions with $M$ gives $M[0]$, $(M\\otimes(\\mathcal O_L/\\varpi_L^j)_S(m))[0]$ and $(M\\otimes(\\mathcal O_L/\\varpi_L^j)_S(m))[n]$, respectively, in the derived category. Thus their uniform containing Tor intervals are $[0,0]$, $[0,0]$ and $[-n,-n]$, independently of $j$. These are containing intervals even for $S=\\varnothing$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Agent auxiliary to coefficient transport, sk-thm-purity-transport Step 3; Old Steps 1-3: actual K-flat unit/line models and all uniform reduction Tor domains."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-coefficient-twists-detailed",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-integral-derived-reduction",
+  "prop-weil-twist-preserves",
+  "def-weil-constant-coefficient-objects",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [
+  {
+   "text": "By [prop-weil-twist-preserves], $J_L$ is locally free of rank one over $R_L$. The unit is free of rank one, and multiplication $r\\otimes z\\mapsto rz$, inverse $z\\mapsto1\\otimes z$, identifies $R_L\\otimes_{R_L}J_L$ with $J_L$. Apply [lem-sfb-locally-free-derived-scalars] to these three module sheaves to obtain flatness. Each displayed complex and each shift is a one-term bounded-above flat complex, so [lem-pc-bounded-above-flat-kflat-site] gives K-flatness. By [lem-pur-derived-change-of-rings](2), its identity resolution computes ordinary derived coefficient extension. The same calculation of the derived twist identifies $V_L$ with $J_L[0]$ and $W_L$ with $J_L[0][n]$.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-sfb-locally-free-derived-scalars",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 06YY, derived pullback on K-flat complexes; local flatness: sites-modules.tex Tag 0GN1, lemma-flatness-sheafification-refined"
+   }
+  },
+  {
+   "text": "Write $A_j=(\\mathcal O_L/\\varpi_L^j)_S$. For $U_L$, [lem-weil-constant-coefficient-objects-constructible](2) identifies the actual derived reduction with $A_j[0]$. For $V_L$, apply [lem-pur-derived-change-of-rings](2) to the K-flat identity model of Step 1 and the actual projection $R_L\\to A_j$. It yields $(J_L\\otimes_{R_L}A_j)[0]$, identified with $A_j(m)[0]$ by the finite-level reduction clause of [prop-weil-twist-preserves]. The same termwise computation on the shifted identity model yields $A_j(m)[0][n]$ for $W_L$: the single nonzero term moves from degree $0$ to degree $-n$. These are isomorphisms in the finite-coefficient derived category, with the canonical K-flat comparison maps.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-pur-derived-change-of-rings",
+    "prop-weil-twist-preserves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Finite-level twists; Stacks sites-cohomology.tex Tag 06YY for actual quotient derived change of rings"
+   }
+  },
+  {
+   "text": "The finite line $A_j(m)$ is locally free of rank one by [prop-weil-twist-preserves]. Apply [lem-sfb-locally-free-derived-scalars] to it and to $A_j$; then [lem-pc-bounded-above-flat-kflat-site] applies to their one-term shifts as well. Compute tensor with any degree-zero $A_j$-module sheaf $M$ using these K-flat identity models, as specified in [def-weil-derived-tensor]. The total tensor has just one term: respectively $M$, $M\\otimes_{A_j}A_j(m)$, and $M\\otimes_{A_j}A_j(m)$ in degrees $0,0,-n$, with zero differentials. The first identification is $a\\otimes x\\mapsto ax$, inverse $x\\mapsto1\\otimes x$; exchanging the degree-zero factors gives the displayed order of the other tensors. Thus cohomology vanishes outside $[0,0]$, $[0,0]$, $[-n,-n]$, uniformly in $j$.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-sfb-locally-free-derived-scalars",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; K-flat total-tensor computation; blueprint prop-weil-twist-preserves.proof.md, rank-one flatness argument"
+   }
+  },
+  {
+   "text": "By [lem-weil-constant-coefficient-objects-constructible](2), $U_L$ is derived complete and belongs to $D^b_c(S,\\mathcal O_L)$. Twisting preserves this category and derived completeness by [prop-weil-twist-preserves], so $V_L$ does too. Step 3 and the integral definition [def-weil-finite-tor-amplitude] place both in $D^b_{ctf}$, using the single interval $[0,0]$ for all positive reductions. Closure under shifts in [lem-weil-integral-ctf-triangulated] places $W_L$ in the same category, hence makes it derived complete; Step 3 supplies its precise containing interval $[-n,-n]$. If $S$ is empty or $M=0$, all terms vanish, so the same containing intervals still apply.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "prop-weil-twist-preserves",
+    "def-weil-finite-tor-amplitude",
+    "lem-weil-integral-ctf-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Twists preserve bounded constructibility, completeness and uniform Tor bounds; integral shift closure via lem-weil-integral-ctf-triangulated"
+   }
+  },
+  {
+   "text": "All the one-term objects in Step 1 and their shifts are now complete: $R_L\\otimes J_L\\cong J_L$, and shifts of the unit and line stay in $D^b_{ctf}$ by [lem-weil-integral-ctf-triangulated]. For each finite inclusion $L\\subseteq H$, apply [lem-weil-finite-free-completed-scalar-comparison] to each such object. Its specified natural map $\\chi_{H/L}$ is an isomorphism from the ordinary derived scalar extension computed in Step 1 to the strict quotient-tower scalar extension. The last clause of that node covers $H=L$: after multiplication it is the natural derived-completeness comparison. Thus the comparison used here has exactly the normalization required in the statement.",
+   "uses": [
+    "lem-weil-integral-ctf-triangulated",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 3.4-3.5 and Lemma 6.8.2(1), through the specified finite-free completed-scalar comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-twist-preserves",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-integral-ctf-triangulated",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Coefficient transport; assembly from existing flat-line, twist, constructibility and completed-scalar statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tate.*[Tt]or|[Tt]or.*Tate|[Kk]Flat.*single",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/ModelTheory/PartialEquiv.lean\", \"Mathlib/NumberTheory/EulerProduct/Basic.lean\", \"Mathlib/NumberTheory/EulerProduct/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/AlmostPrime.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Lemmas.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Basic.lean\", \"Mathlib/LinearAlgebra/LinearIndependent/Defs.lean\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Lean.mkFlatCtorOfStructCtorName\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed integral Tate units and their shifts have K-flat one-term models, constructible complete reductions and uniform Tor intervals",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"PreTilt.exists_smodEq_untiltAux\", \"instCommRingBDeRhamPlus\", \"AdicCompletion.flat_of_isNoetherian\", \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"IsAdicComplete.henselianRing\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "[Kk]Flat|[Tt]ate[Tt]wist|[Tt]or[Aa]mplitude",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains",
+   "directory": "Mathlib/Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed coefficient ring and integral Tate line shifted by n have uniform reduction Tor amplitude [-n,-n]",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"UniformSpace.Completion.coeRingHom\", \"AdicCompletion.map_val_apply\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"instNonarchimedeanRingCompletion\", \"UniformSpace.Completion.continuous_coeRingHom\", \"DerivedCategory.instLinearShiftFunctorInt\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A shifted invertible completed coefficient sheaf is derived complete constructible with finite reductions of Tor amplitude minus its shift",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.instIsGEObjSingleFunctor\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: general module, completion or shift infrastructure does not state the specified derived sheaf comparisons and domains"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|TorAmplitude|tateTwist",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern truncation support, K-projectivity, projective Tor, or discrete module completion; none states the completed Tate-line sheaf reduction and scalar comparison",
+   "directory": "Mathlib/Algebra/Homology"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived reduction of an invertible completed coefficient sheaf is a flat line in degree zero",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedZeroIsoSelf\", \"CategoryTheory.instIsIsoFunctorToRightDerivedZero\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"AdicCompletion.flat_of_isNoetherian\", \"Module.Flat.of_retract\", \"DerivedCategory.instHasZeroObject\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern truncation support, K-projectivity, projective Tor, or discrete module completion; none states the completed Tate-line sheaf reduction and scalar comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Lean.mkFlatCtorOfStructCtorName\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern truncation support, K-projectivity, projective Tor, or discrete module completion; none states the completed Tate-line sheaf reduction and scalar comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat shifted Tate coefficient lines have derived reductions with uniform Tor amplitude",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.right_fac_of_isStrictlyLE\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern truncation support, K-projectivity, projective Tor, or discrete module completion; none states the completed Tate-line sheaf reduction and scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFiniteLocallyFree|IsKFlat|KFlat|tateTwist",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern truncation support, K-projectivity, projective Tor, or discrete module completion; none states the completed Tate-line sheaf reduction and scalar comparison",
+   "directory": "Mathlib/Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally free sheaf in a single cochain degree computes derived tensor and its shifts have Tor amplitude concentrated in the negative shift",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.instIsKProjectiveObjIntShiftFunctor\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CochainComplex.isKProjective_shift_iff\", \"DerivedCategory.isGE_Q_obj_iff\"]}",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern truncation support, K-projectivity, projective Tor, or discrete module completion; none states the completed Tate-line sheaf reduction and scalar comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-shifted-tate-unit-scalar-coherence",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Old Steps 1-3: actual K-flat unit/line models and all uniform reduction Tor domains. Coefficient transport realizing sk-thm-purity-transport Step 3.",
+   "via": [
+    "lem-pur-shifted-tate-unit-scalar-coherence",
+    "lem-pur-adic-scalar-trace-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-tate-unit-flat-model-domains",
+  "worker": "stage1",
+  "summary": "Retained the full statement and statement dependencies. Gave five proof steps using existing generic line, K-flat, reduction, constructibility and completed-scalar nodes; no new nodes. Checked actual derived categories, arbitrary finite-level test modules, all integer shifts, identity inclusions and empty base.",
+  "blueprint": "Coefficient transport in thm-pur-rational-and-qbar-purity, realizing sk-thm-purity-transport Step 3; expands Old Steps 1-3 recorded by the parent split: models, actual reductions and uniform Tor domains.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-twist-preserves",
+    "why": "Generic twist theorem supplies rank-one lines, their finite reductions and preservation of integral constructibility/completeness; this compatibility unit has no separate local line theorem."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Generic ringed-site local finite freeness supplies flatness and degree-zero K-flatness for both completed and finite coefficient rings."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site criterion applies to the explicitly shifted one-term flat complexes."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of actual scalar extension and actual quotient derived reduction."
+   },
+   {
+    "node": "lem-weil-constant-coefficient-objects-constructible",
+    "why": "Coefficient-unit constructibility/completeness and actual finite reductions are input to Tate transport."
+   },
+   {
+    "node": "def-weil-derived-tensor",
+    "why": "The finite-level K-flat tensor convention is needed for arbitrary test module sheaves."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "The integral finite-Tor subcategory is defined by one interval for all positive reductions."
+   },
+   {
+    "node": "lem-weil-integral-ctf-triangulated",
+    "why": "Generic closure under shifts and isomorphisms for the integral finite-Tor category."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Specified natural comparison of ordinary and strict completed scalar extension, including identity inclusions."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-twist-preserves",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-integral-ctf-triangulated",
+  "lem-weil-finite-free-completed-scalar-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NP-ba514b077",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-ba514b077 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full, with the statements of all 9 proof_deps, the main stmt_deps (twists, derived reduction, D^b_c/D^b_ctf, χ comparison, integral scalar extension, Tor amplitude) and the main-20261015 sk-thm-purity-transport Step 3. The split has 0 new nodes. The statement and stmt_deps are identical to the Q95 creation, there is no repair note and there is no cycle. Step 1: prop-weil-twist-preserves (integral clause) makes O_L(m) locally free over Ô_{L,S}. lem-sfb-locally-free-derived-scalars then gives flat and K-flat, lem-pc-bounded-above-flat-kflat-site covers the shifts, and lem-pur-derived-change-of-rings(2) accepts the identity resolution. V_L=R[0]⊗^L J[0] is computed on the K-flat R[0] by multiplication. Step 2: constant-coefficient lemma (2) gives the actual reduction of U_L, change of rings along π_j gives (J⊗A_j)[0]=A_j(m) by the finite-level reduction clause of the twist proposition, and the shift degree −n is right. Step 3: A_j(m) is locally constant of rank one, so it is K-flat, and def-weil-derived-tensor allows any M. The single term gives [0,0],[0,0],[−n,−n]. Step 4: constant lemma, twist preservation and ctf shift closure. Step 5: every object is derived complete, so the χ lemma applies, including H=L. Edge cases checked: m=0, n=0,±1, S=∅, M=0, H=L, ramified H/L, ℓ≠p invertible. The nine declared tool_uses are generic black boxes and are accepted. One advisory: 'same calculation of the derived twist' is clear from the step itself. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurTateUnitFlatModelDomains",
+  "declaration": "WeilConjectures.PurityFiniteSetting.tateUnitFlatModelDomains",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.tateFlatModelModule",
+   "WeilConjectures.PurityFiniteSetting.tateFlatModel",
+   "WeilConjectures.PurityFiniteSetting.tateFlatDomainObject",
+   "WeilConjectures.PurityFiniteSetting.tateFlatReductionModule",
+   "WeilConjectures.PurityFiniteSetting.tateFlatReductionShift",
+   "WeilConjectures.PurityFiniteSetting.tateFlatTwistModelIso",
+   "WeilConjectures.PurityFiniteSetting.tateFlatLineReductionMap",
+   "WeilConjectures.PurityFiniteSetting.tateFlatTwistedReductionMap",
+   "WeilConjectures.PurityFiniteSetting.tateFlatReductionObject",
+   "WeilConjectures.PurityFiniteSetting.tateFlatReductionMap",
+   "WeilConjectures.PurityFiniteSetting.tateFlatTestTensor",
+   "WeilConjectures.PurityFiniteSetting.tateUnitFlatModelDomains"
+  ],
+  "file": "lean/Sheaf/Paper/PurTateUnitFlatModelDomains.lean",
+  "statement": "theorem tateUnitFlatModelDomains (m : ℕ) (n : ℤ) : ∃ μ : P.tateFlatModelModule E S m 2 ≅ P.tateFlatModelModule E S m 1, (∀ μ' : P.tateFlatModelModule E S m 2 ≅ P.tateFlatModelModule E S m 1, (∀ (U : S.ProEtᵒᵖ) (a : (completedIntegralCommRingSheafUnrestricted P.coefficients.l E S).obj.obj U) (z : (P.tateFlatModelModule E S m 1).val.obj U), μ'.hom.val.app U (SheafOfModules.siteSheafTensorTmul (A := completedIntegralCommRingSheafUnrestricted P.coefficients.l E S) (P.tateFlatModelModule E S m 0) (P.tateFlatModelModule E S m 1) U a z) = a • z) ↔ μ' = μ) ∧ (∀ (i : Fin 3) (s : ℤ), ∃ hP : integralOperationsGoodComplex P.coefficients.l E S (P.tateFlatModel E S m i s), IsDerivedCompleteUnrestricted P.coefficients.l E S (DerivedCategory.Q.obj (P.tateFlatModel E S m i s)) ∧ ((completedScalarComparison P.coefficients.l E E (AlgHom.id (Padic P.coefficients.l) E) S).app (DerivedCategory.Q.obj (P.tateFlatModel E S m i s)) ≫ (integralScalarExtensionComparisonOfUniverses P.coefficients.l E E (AlgHom.id (Padic P.coefficients.l) E) S).hom.app ⟨P.tateFlatModel E S m i s, hP⟩ = completedScalarCounit P.coefficients.l E E (AlgHom.id (Padic P.coefficients.l) E) S (P.tateFlatModel E S m i s) ≫ DerivedCategory.Q.map ((completedScalarIdentityMultiplication P.coefficients.l E S).hom.app (P.tateFlatModel E S m i s)) ≫ DerivedCategory.Q.map ((completedScalarIdentityUnit P.coefficients.l E S).app (P.tateFlatModel E S m i s))) ∧ ∀ (H : Type u) [Field H] [Algebra (Padic P.coefficients.l) H] [FiniteDimensional (Padic P.coefficients.l) H] (ι : E →ₐ[Padic P.coefficients.l] H), IsIso (completedScalarCounit P.coefficients.l E H ι S (P.tateFlatModel E S m i s)) ∧ IsIso ((completedScalarComparison P.coefficients.l E H ι S).app (DerivedCategory.Q.obj (P.tateFlatModel E S m i s))) ∧ (completedScalarComparison P.coefficients.l E H ι S).app (DerivedCategory.Q.obj (P.tateFlatModel E S m i s)) ≫ (integralScalarExtensionComparisonOfUniverses P.coefficients.l E H ι S).hom.app ⟨P.tateFlatModel E S m i s, hP⟩ = completedScalarCounit P.coefficients.l E H ι S (P.tateFlatModel E S m i s) ≫ DerivedCategory.Q.map ((completedScalarChainComparison P.coefficients.l E H ι S).app (P.tateFlatModel E S m i s))) ∧ (∀ i : Fin 3, finiteTorConstructibleIntegral P.coefficients.l E S (P.tateFlatDomainObject E S m n i) ∧ ∀ j : ℕ, IsIso (P.tateFlatReductionMap E S m j n μ i) ∧ (∀ M : scalarReductionTarget P.coefficients.l E S j, Nonempty ((finiteIntrinsicDerivedTensor P.coefficients.l E S j).obj ((scalarReductionDerivedExtension P.coefficients.l E S j).obj (P.tateFlatDomainObject E S m n i), (DerivedCategory.singleFunctor _ 0).obj M) ≅ P.tateFlatTestTensor E S m j n i M)) ∧ HasProEtaleTorAmplitude S (Padic.coefficientExtensionRing P.coefficients.l E (j + 1)) ((scalarReductionDerivedExtension P.coefficients.l E S j).obj (P.tateFlatDomainObject E S m n i)) (-tateFlatReductionShift n i) (-tateFlatReductionShift n i)) ∧ (∀ (i : Fin 3) (s : ℤ) (j : ℕ), IsIso ((scalarReductionCounit P.coefficients.l E S j).app ((HomotopyCategory.quotient _ (.up ℤ)).obj (P.tateFlatModel E S m i s))))",
+  "branch": "sheaf-dag",
+  "by": "Q91",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite indices enumerate exactly the three source models or U,V,W. Actual quotient-derived reduction arrows are specified using the coefficient projection, uniquely normalized Tate-line reduction, exact single-functor comparison, multiplication and the same universal derived shift. The unique multiplication is fixed on local pure tensors. No auxiliary residue invertibility assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b1f7c26c",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Re-delivery of 17c3 RETURN. Diff vs 17c3 snapshot: only item module, item JSON, new node def-weil-constant-coefficient-objects, report. R2 (H3) repaired exactly: ∃ μ, (∀ μ', pure-tensor(μ') ↔ μ' = μ) ∧ rest; the statement field matches the Lean text. R1 (H2) repaired: stmt_dep lem-weil-constant-coefficient-objects-constructible replaced by def-weil-constant-coefficient-objects (existing:true on Sheaf.Paper.ConstantCoefficientObjectsConstructible: finiteConstantCoefficientObject, integralConstantCoefficientObject, constantCoefficientProjection, constantCoefficientReductionMap, real non-sorry defs at l.55-93; no live owner/clash; verbatim statement; 8 stmt_deps exist, the theorem lem-weil-derived-scalar-extension-restriction-adjunction is genuine via .choose; source paragraph exists; no SGA); theorem kept in proof_deps; ConstantCoefficientScalarNormalization now a plain proof-dep import. Mechanical finding prop-weil-twist-preserves: genuine, tateFlatLineReductionMap uses the .choose of the ∃!-pinned TwistReductionMaps of twist_preserves_finiteness (l.403), an object the theorem constructs -> PASS on that point. All other clauses unchanged and re-verified (K-flat good models, all shifts, χ/counit IsIso + H=L normalization, actual U,V,W in finiteTorConstructibleIntegral, real canonical reduction maps, arbitrary M, uniform Tor [0,0],[0,0],[-n,-n]); edge cases m=0, n any sign, j=0, H=L, S=∅, M=0. Docstring now names the node source place. No compile (no file changed); worker reports clean scompile and dry run."
+ }
+}

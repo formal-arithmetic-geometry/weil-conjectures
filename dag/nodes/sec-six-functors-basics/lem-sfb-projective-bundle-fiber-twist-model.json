@@ -1,0 +1,174 @@
+{
+ "id": "lem-sfb-projective-bundle-fiber-twist-model",
+ "kind": "statement",
+ "title": "A standard projective-bundle fibre with its normalized line",
+ "statement": "Let S be a scheme [def-pc-scheme], E a quasi-coherent finite locally free module of rank r>=2 [def-amb-finite-locally-free-module], D a normalized tautological quotient for its canonical symmetric relative Proj [lem-trf-projective-bundle-quotient-geometry], and s a point of S. Write p:P(E)->S and i_s:p.fiber(s)->P(E) for the scheme-theoretic fibre [def-pc-scheme-fibre]. There is an isomorphism e from standard projective space with r homogeneous coordinates over Spec kappa(s) to p.fiber(s), such that e^* i_s^* D.line is isomorphic to the standard O(1) [def-pc-projective-space-twist], using tensor pullback [def-pc-module-pullback]. This asserts no classification of arbitrary invertible modules and no comparison of higher powers.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01OE, section-projective-bundle and example-projective-space; lemma-relative-proj-base-change, Tag 01O3."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-amb-finite-locally-free-module",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-pc-scheme-fibre",
+  "def-pc-module-pullback",
+  "def-pc-projective-space-twist"
+ ],
+ "proof": [
+  {
+   "text": "Choose a local rank-r frame of E at s. Pull it to Spec kappa(s). The resulting vector space E_s is free with exactly r basis vectors. Symmetric algebra commutes with this base change and sends the chosen basis to the standard polynomial generators; the maps preserve degree since they do so on the degree-one generators.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "def-trf-canonical-symmetric-graded-algebra",
+    "lem-weil-pbc-symmetric-algebra-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA and 01OE, section-projective-bundle and example-projective-space; lemma-relative-proj-base-change, Tag 01O3."
+   }
+  },
+  {
+   "text": "Relative-Proj base change identifies the fibre with Proj of this residue-field symmetric algebra. The ordered basis identifies this with standard projective space with r coordinates. Equivalently this follows by representing the same rank-one quotients; invert the comparison to obtain e from standard projective space to the fibre.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA and 01OE, section-projective-bundle and example-projective-space; lemma-relative-proj-base-change, Tag 01O3."
+   }
+  },
+  {
+   "text": "The normalization of D.chart identifies D.line with the degree-one relative-Proj twist on each affine base chart. Under the coefficientwise base-change and ordered polynomial comparisons its standard frame is T_i, and its transitions are T_i/T_j. The comparisons thus give isomorphisms with O(1) on every standard chart, agreeing on overlaps. Glue these isomorphisms and their inverses, using tensor-pullback composition to identify the twice-pulled-back line in the statement. This argument compares the given D, rather than a separately chosen quotient.",
+   "uses": [
+    "lem-trf-projective-bundle-quotient-geometry",
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-glue-sheaves-of-modules",
+    "lem-pc-module-pullback-identity-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OA and 01OE, section-projective-bundle and example-projective-space; lemma-relative-proj-base-change, Tag 01O3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-trf-canonical-symmetric-graded-algebra",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "def-pc-scheme-fibre",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-glue-sheaves-of-modules",
+  "lem-pc-module-pullback-identity-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OA and 01OE, section-projective-bundle and example-projective-space; lemma-relative-proj-base-change, Tag 01O3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The fiber of the projective bundle of a vector bundle at a point is projective space over the residue field and the tautological line pulls back to O(1)",
+   "results": "Eight hits: Scheme.Hom.fiber, fiberι, fiberOverSpecResidueField, the canonical Over instance and unrelated topological vector-bundle facts. None identifies the projective-bundle fibre with its normalized line.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fiber of the projective bundle of a finite locally free sheaf at a point is projective space over its residue field with tautological line O(1)",
+   "results": "Eight hits: set-theoretic Projectivization and basic Proj structure sheaves. None is the scheme-and-line comparison.",
+   "date": "2026-10-27",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*projective|projective.*fiber; canonical symmetric algebra pullback and RelativeProj.BaseChange; blueprint projective fibre and residue-field projective",
+   "results": "Mathlib grep: only unrelated stalk maps. Source RelativeProj.BaseChange supplies a scheme comparison given graded PullbackData; canonical symmetric algebra has affine restrictions, but no arbitrary-morphism comparison with normalized D.line. Existing ProjectiveBundleTautologicalGeometry uses different realization data and does not compare arbitrary TautologicalQuotient D. No duplicate in the current blueprint.",
+   "date": "2026-10-27",
+   "verdict": "New comparison statement needed."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberDegree",
+  "date": "2026-10-27",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "Fibre-degree proof step 1: identify the residue-field fibre and its degree-one line; no Picard calculation.",
+   "via": [
+    "lem-sfb-projective-bundle-fiber-degree",
+    "lem-sfb-projective-bundle-local-normal-form",
+    "lem-sfb-projective-bundle-picard-classification",
+    "lem-sfb-projective-frames-pgl",
+    "lem-sfb-ten-canonical-hilbert-parameter",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleFiberTwistModel",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleFiberTwistModel.lean",
+  "declaration": "AlgebraicGeometry.ProjectiveBundlePicardClassification.exists_projective_bundle_fiber_twist_model",
+  "statement": "theorem exists_projective_bundle_fiber_twist_model (S : Scheme.{u}) (E : S.Modules)\n    [E.IsQuasicoherent] (r : ℕ)\n    [SheafOfModules.IsFiniteLocallyFreeOfRank.{u, u, u} E r] (hr : 2 ≤ r)\n    (D : TautologicalQuotient E) (s : S) :\n    ∃ e : ℙ(ULift.{u} (Fin r); Spec (.of (S.residueField s))) ≅\n        (SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.fiber s,\n      Nonempty\n        ((tensorPullback e.hom).obj\n          ((tensorPullback\n            ((SymmetricAlgebraSheaf.gradedAlgebraData E).relProjHom.fiberι s)).obj D.line) ≅\n          ProjectiveSpace.twist (ULift.{u} (Fin r)) (Spec (.of (S.residueField s))) 1)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T123516-L-2314137",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261027T123516-L-2314137",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

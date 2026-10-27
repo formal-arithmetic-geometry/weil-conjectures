@@ -1,0 +1,170 @@
+{
+ "id": "lem-sp-ell-point-reduction-ring-map",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "via": [],
+   "place": "sk-def-sp-tate-twist (Lean Sheaf.Paper.ProEtaleTateTwistsOfUniverses, which imports Sheaf.Paper.ProEtaleTateTwists): the reduction O_{E,X} → (B_{E,n+1})_X of the integral Tate twist is coefficientMap of spEllPointReduction, a ring map by this instance"
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The condensed reduction O_E → O_E/ℓ^{n+1} is a map of ring objects",
+ "statement": "Let $\\ell$ be a prime, $E\\subseteq\\overline{\\mathbf Q}_\\ell$ a finite extension of $\\mathbf Q_\\ell$ with ring of integers $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], topologized by its absolute value [def-sfb-coefficient-extension-integers-topology], and $n\\ge0$. Give $\\mathcal O_E/\\ell^{n+1}\\mathcal O_E$ the discrete topology. The morphism of condensed abelian groups $\\underline{\\mathcal O_E}\\to\\underline{\\mathcal O_E/\\ell^{n+1}}$ between the continuous-function condensed rings [def-sfb-continuous-map-condensed-ring], given on each profinite set by composing continuous maps with the reduction $\\mathcal O_E\\to\\mathcal O_E/\\ell^{n+1}$, is a morphism of ring objects [sk-def-sfb-ring-object]: it is compatible with the units and the multiplications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "sk-def-sp-tate-twist: sk-def-sp-tate-twist (Lean Sheaf.Paper.ProEtaleTateTwistsOfUniverses, which imports Sheaf.Paper.ProEtaleTateTwists): the reduction O_{E,X} → (B_{E,n+1})_X of the integral Tate twist is coefficientMap of spEllPointReduction, a ring map by this instance; Lean: SHEAF file lean/Sheaf/Paper/ProEtaleTateTwists.lean, declaration AlgebraicGeometry.ProEtale.spEllPointReduction_isMonHom (module Sheaf.Paper.ProEtaleTateTwists, lines 155-162, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-coefficient-extension-integers-topology",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-ring-object"
+ ],
+ "proof": [
+  {
+   "text": "Put $O=\\mathcal O_E$, $I=\\ell^{n+1}O$ and $B=O/I$ with the discrete topology. The quotient map $q:O\\to B$ is a unital ring homomorphism: $q(a+b)=q(a)+q(b)$, $q(ab)=q(a)q(b)$ and $q(1)=1$ by the quotient operations. By [lem-sp-ell-quotient-finite-discrete], $q$ is continuous for exactly the absolute-value topology on $O$ and the discrete topology on $B$ in the statement. Thus postcomposition with $q$ sends a continuous function $S\\to O$ to a continuous function $S\\to B$.",
+   "uses": [
+    "lem-sp-ell-quotient-finite-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+    "place": "Integral-twist formula with finite coefficients O_E/ell^n; continuity supplied by the cited quotient lemma, as in spEllPointReduction in lean/Sheaf/Paper/ProEtaleTateTwists.lean:145-153."
+   }
+  },
+  {
+   "text": "For each profinite $S$, set $F_S(a)=q\\circ a$. By [def-sfb-continuous-map-condensed-ring] the section rings have pointwise operations. At every $s\\in S$, $F_S(ab)(s)=q(a(s)b(s))=q(a(s))q(b(s))=(F_S(a)F_S(b))(s)$ and $F_S(1)(s)=q(1)=1$; similarly $F_S(a+b)=F_S(a)+F_S(b)$ and $F_S(0)=0$. Hence $F_S$ is a unital ring homomorphism. For $u:S'\\to S$, $F_{S'}(a\\circ u)=q\\circ a\\circ u=F_S(a)\\circ u$. These are precisely the restriction maps in the cited node, so the $F_S$ form a natural transformation of the underlying ring presheaves. Since both are already sheaves by that node, this is a morphism of sheaves of rings.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/def-sfb-continuous-map-condensed-ring-map.proof.md",
+    "place": "First three sentences: continuity, sectionwise ring laws, and commutation with precomposition, specialized to the quotient map q."
+   }
+  },
+  {
+   "text": "Apply part 3 of [sk-def-sfb-ring-object] to the sheaf-of-rings morphism $F$ of step 2 on the coherent site of profinite sets. It states that a morphism of sheaves of rings is a morphism of their underlying ring objects, for the sheafified objectwise tensor product over $\\mathbf Z$. The underlying abelian-sheaf map has exactly the components $a\\mapsto q\\circ a$ specified in the item, so it is the given reduction map $f$. Consequently $f\\circ\\eta_O=\\eta_B$ and $f\\circ\\mu_O=\\mu_B\\circ(f\\otimes f)$. These are both required compatibility equations, for the canonical ring-object structures, and prove the claim.",
+   "uses": [
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/det-def-sfb-ring-object-sheaf.proof.md",
+    "place": "Final paragraph: a morphism of sheaves of rings gives a morphism for the canonical counit-transported ring objects."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ell-quotient-finite-discrete",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-ring-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-proetale-coefficients/sk-prop-pe-condensed-point/def-sfb-continuous-map-condensed-ring-map.proof.md",
+  "place": "Specialization of the full postcomposition proof to the ell-power quotient; continuity is the existing lem-sp-ell-quotient-finite-discrete. The source blueprint is agent-written. S6: realized by the existing sheafCompose ring-object instance; rational transition identity/composition are not used."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isMonHom_sheafCompose|continuousMapRingSheafMap|continuousMapRingObj",
+   "results": "{\"t\": \"2026-10-23T14:50:28Z\", \"tool\": \"grep\", \"query\": \"isMonHom_sheafCompose|continuousMapRingSheafMap|continuousMapRingObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration states the condensed ell-power reduction is a ring-object morphism; sheaf and p-adic hits concern different objects or only individual ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "a continuous ring homomorphism induces a monoid object morphism on sheaves of continuous functions",
+   "results": "{\"t\": \"2026-10-23T14:50:28Z\", \"tool\": \"leansearch\", \"query\": \"a continuous ring homomorphism induces a monoid object morphism on sheaves of continuous functions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.continuousFunctions.map\", \"ContinuousMap.C\", \"LocallyConstant.comapRingHom\", \"LocallyConstant.toContinuousMapMonoidHom\", \"ContinuousMap.compMonoidHom'\", \"AlgebraicGeometry.LocallyRingedSpace.Hom\", \"UniformSpace.Completion.mapRingHom\", \"LocallyConstant.mapRingHom\"], \"digest\": \"092cf29d3ef33ea5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration states the condensed ell-power reduction is a ring-object morphism; sheaf and p-adic hits concern different objects or only individual ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMonHom\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-23T14:50:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsMonHom\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration states the condensed ell-power reduction is a ring-object morphism; sheaf and p-adic hits concern different objects or only individual ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "postcomposition with the reduction ring homomorphism from integers of a finite p-adic extension to its discrete quotient induces a morphism of condensed ring objects",
+   "results": "{\"t\": \"2026-10-23T14:50:29Z\", \"tool\": \"leanfinder\", \"query\": \"postcomposition with the reduction ring homomorphism from integers of a finite p-adic extension to its discrete quotient induces a morphism of condensed ring objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"PadicInt.toZModHom\", \"Condensed.profiniteFree\", \"BDeRhamPlus\", \"PadicInt.toZMod\", \"PadicInt.toZModPow\", \"PadicInt.zmod_cast_comp_toZModPow\", \"PadicInt.toZMod_eq_residueField_comp_residue\"], \"digest\": \"69e4aebb1cfc15f6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration states the condensed ell-power reduction is a ring-object morphism; sheaf and p-adic hits concern different objects or only individual ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "compLeftContinuous|continuousFunctions.map",
+   "results": "{\"t\": \"2026-10-23T14:50:51Z\", \"tool\": \"grep\", \"query\": \"compLeftContinuous|continuousFunctions.map\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean\", \"Mathlib/Topology/ContinuousMap/StoneWeierstrass.lean\", \"Mathlib/Topology/ContinuousMap/Bounded/Basic.lean\", \"Mathlib/Topology/ContinuousMap/Bounded/Basic.lean\", \"Mathlib/Topology/ContinuousMap/Bounded/Basic.lean\", \"Mathlib/Topology/ContinuousMap/Algebra.lean\", \"Mathlib/Topology/ContinuousMap/Algebra.lean\"], \"digest\": \"637dff8ef9640429\"}",
+   "date": "2026-10-23",
+   "verdict": "partial: RingHom.compLeftContinuous gives sectionwise ring homomorphisms (Mathlib/Topology/ContinuousMap/Algebra.lean:478-482), not the condensed ring-object statement or continuity of this quotient."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"compLeftContinuous\"",
+   "results": "{\"t\": \"2026-10-23T14:50:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"compLeftContinuous\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"RingHom.compLeftContinuous\", \"AddMonoidHom.compLeftContinuous\", \"MonoidHom.compLeftContinuous\", \"AlgHom.compLeftContinuous\", \"ContinuousLinearMap.compLeftContinuous\", \"RingHom.compLeftContinuous_apply_apply\", \"AddMonoidHom.compLeftContinuous_apply\", \"MonoidHom.compLeftContinuous_apply\"], \"digest\": \"8dcd3da666fdf6a4\"}",
+   "date": "2026-10-23",
+   "verdict": "partial: RingHom.compLeftContinuous gives sectionwise ring homomorphisms (Mathlib/Topology/ContinuousMap/Algebra.lean:478-482), not the condensed ring-object statement or continuity of this quotient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forgetting a morphism of sheaves of rings to abelian sheaves preserves monoid object multiplication and unit",
+   "results": "{\"t\": \"2026-10-23T14:50:52Z\", \"tool\": \"leanfinder\", \"query\": \"forgetting a morphism of sheaves of rings to abelian sheaves preserves monoid object multiplication and unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.forget_map\", \"SheafOfModules.unit_val\", \"SheafOfModules.instAdditivePresheafOfModulesValRingCatForget\", \"SheafOfModules.unit\", \"SheafOfModules.forget_obj\", \"SheafOfModules.toSheaf\", \"SheafOfModules.forget\", \"SheafOfModules.forgetToSheafModuleCat\"], \"digest\": \"acc7ff244c3ee4ea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no declaration states the condensed ell-power reduction is a ring-object morphism; sheaf and p-adic hits concern different objects or only individual ingredients."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "sk-def-sp-tate-twist",
+  "date": "2026-10-23",
+  "why": "sorried declaration on the batch sorry route (local/sorry-route.json, 22:01 recompute) with no DAG node, so it was only worked as a stage-3 module item (the human's order 2026-10-23: every proof-related upstream sorry gets a node; a node without a written proof goes to stage 1); no sorry-free SHEAF proof found; recorded so that stage 1 splits it"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleTateTwistLevels",
+  "file": "lean/Sheaf/Paper/ProEtaleTateTwistLevels.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.spEllPointReduction_isMonHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spEllPointReduction_isMonHom"
+  ],
+  "statement": "@[instance] theorem spEllPointReduction_isMonHom\n    (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ) :\n    IsMonHom (spEllPointReduction.{u} ℓ E n) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-23",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by the 2026-10-23 maintainer audit of route sorries with no node"
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sp-ell-point-reduction-ring-map",
+  "worker": "stage1",
+  "summary": "Q118: split into continuity of the actual quotient map, explicit sectionwise ring and naturality identities, and the existing ring-sheaf-to-ring-object theorem. Reused existing nodes; no new nodes, no mathematical statement change, no Lean writing or compilation. Read current blueprint and both upstream and Sheaf interfaces; attached item theorem remains sorry.",
+  "blueprint": "Realizes the coefficient reduction implicit in sk-def-sp-tate-twist, formula O_{E,X}(1)=lim_n(O_E/ell^n)_X(1), using current blueprint sk-prop-pe-condensed-point/def-sfb-continuous-map-condensed-ring-map.proof.md and the canonical sheaf ring-object construction. The item is a helper, not the unit key node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-f9d212c67",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-f9d212c67 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and no fixes. The statement is unchanged and matches the Lean in ProEtaleTateTwists.lean:93-162: spTateEllIdeal = (ell^(n+1)), the target ring is continuousMapRingSheaf of the discrete quotient, and spEllPointReduction is sheafCompose forget2 of continuousMapRingSheafMap(Ideal.Quotient.mk), so the claim is IsMonHom. Step 1: q is a ring map by the quotient operations, and its continuity comes from the same-unit lem-sp-ell-quotient-finite-discrete (same ell, E, topology, n+1). That node's statement is true, since ell^(n+1)O_E is an open ball. Step 2 is elementary: pointwise ring identities and naturality under precomposition, taken from the statement of def-sfb-continuous-map-condensed-ring, give a morphism of sheaves of rings. Step 3: part 3 of sk-def-sfb-ring-object (I read it in full; it explicitly covers profinite sets with the coherent topology) says a morphism of sheaves of rings is a morphism of ring objects. I checked this against the final paragraph of det-def-sfb-ring-object-sheaf.proof.md and against upstream isMonHom_sheafCompose_map. proof_deps equals the union of uses, all off-unit citations are definitions so no tool use is needed, and no SGA is cited. Edge cases checked: n=0, ramified E, ell=2, empty S. Advisory only: the item specializes def-sfb-continuous-map-condensed-ring-map with phi=q, and steps 2-3 repeat that node's proof. They are correct, short and follow the upstream Lean route, so this is not a fault."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a7a45",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261026T200332-L-3306344",
+  "kind": "interface",
+  "note": "independent cc review: delivered Levels+Constructions+item concatenation vs published ProEtaleTateTwists.lean (verbatim, only headers + commonCover proof); new sorry lemmas vs node statements and tateTwist_finite_locallyFree clauses; 14 moved node lean.module/file vs physical location; 7 direct importers compiled OK against delivered set"
+ }
+}

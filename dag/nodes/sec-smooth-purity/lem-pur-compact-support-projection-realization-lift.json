@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-compact-support-projection-realization-lift",
+ "kind": "statement",
+ "title": "Normalized morphism underlying compact-support realization",
+ "statement": "Fix a finite-field datum D, a prime l distinct from its characteristic, a finite extension E of Q_l, separated finite-type schemes X,Y over D.k, and a separated finite-type map f:X→Y with a compactification c. Let S be any coefficient reduction/total-limit calculus on X. For every ambient integral derived object M on X, there exists a morphism rho from the actual completed proper/open image of M to the total limit of the native compact-support system S.reduction(M). For every n, reduction of rho to exponent n+1 followed by the specified scalarSupportCounit equals the actual proper/open coefficient comparison for that reduction. Neither invertibility nor uniqueness is asserted for arbitrary M.",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Normalized proper/open realization: the morphism and its finite adjunct equations",
+   "via": [
+    "lem-pur-compact-support-scalar-projection-identification",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A07, 0GL1 and 0941; formal adjunction transport of the existing strict reduction comparison."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-compactifications-refinements",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-compact-support-native-system-evaluation",
+  "def-pur-compact-support-scalar-limit-maps",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sp-coefficient-mate-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Apply qcqsCompactSupport_strictReductionComparison to obtain calculi SX,SY and the normalized whole-system map beta. Compare the left adjoints SX.reduction and S.reduction by uniqueness of left adjoints to coefficientSequenceLimit. Naturality of the limit projection, and the two unit_projection equations, show that this comparison preserves the reductionEvaluation coordinates. Whisker this comparison by the native proper/open functor and compose with beta at M. Transpose the resulting map under SY.reduction ⊣ coefficientSequenceLimit. At every finite level, naturality of the projection and SY.unit_projection identify the finite adjunct of this transpose with evaluation of beta followed by scalarSupportEvaluation. The normalized equation for beta cancels the finite input and image coordinate isomorphisms. Finally uniqueness of left adjoints compares the finite coefficient adjunction with pbcDerivedScalarAdjunction, proving exactly the displayed finite counit equation. This construction works for zero input and empty opens as well, and it requires no constructibility, invertibility or uniqueness claim.",
+   "uses": [
+    "lem-qcqs-compact-support-strict-reduction-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-pur-finite-compact-support-scalar-data",
+    "def-sf-finite-tor-integral-inclusion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-qcqs-compact-support-strict-reduction-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-pur-finite-compact-support-scalar-data",
+  "def-sf-finite-tor-integral-inclusion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B3",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A07, 0GL1 and 0941; formal adjunction application of the strict comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of total derived inverse limit adjunction with scalar extension and a map of quotient towers",
+   "results": "Eight unrelated search results; no normalized compact-support realization theorem.",
+   "date": "2026-10-27",
+   "verdict": "no matching geometric theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Generic adjunction Hom-equivalence identities; used for transposition and uniqueness of left adjoints.",
+   "date": "2026-10-27",
+   "verdict": "formal categorical tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*realization|realization.*support|normalizedLift; local rg qcqsCompactSupport_strictReductionComparison and homEquiv_unit",
+   "results": "The project strict reduction comparison supplies the whole-system map. Mathlib Adjunction.Basic and Adjunction.Unique provide naturality and unit_leftAdjointUniq_hom_app. No existing lift into an arbitrary input calculus with precisely the stated normalization was found.",
+   "date": "2026-10-27",
+   "verdict": "use existing geometric comparison and prove formal transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical morphism from proper pushforward of extension by zero to the derived inverse limit of its finite quotient reductions",
+   "results": "ProfiniteGrp.toLimit_fun, ProfiniteGrp.isIso_toLimit, Profinite.isIso_asLimitCone_lift and Module.DirectLimit.of.zero_exact. No normalized derived compact-support realization.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "B3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionRealizationLift",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionRealizationLift.lean",
+  "declaration": "WeilConjectures.PurScalarProjection.compactSupportProjectionRealization_lift",
+  "statement": "theorem compactSupportProjectionRealization_lift\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)\n    {X Y : Scheme.{u}}\n    [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]\n    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]\n    [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]\n    [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))]\n    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f]\n    [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f)\n    (S : CoefficientDerivedSystemCalculus.{u, u} l E X)\n    (M : DerivedCategory (scalarReductionSource l E X)) :\n    ∃ ρ : (image (completed l E) c).obj M ⟶\n        (PurStrictScalar.scalarSupport l E c S).obj M,\n      ∀ n : ℕ,\n        (pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) Y)).map\n            ρ ≫ PurStrictScalar.scalarSupportCounit l E c S n M =\n          (comparison (reduction l E (n + 1) (Nat.le_add_left 1 n)) c).app M",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-704ba",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261027T012808-L-2331698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-704ba",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261027T012808-L-2331698",
+  "kind": "interface",
+  "note": "independent cc review: moved realization_existsUnique/realization/gamma_identification signatures vs item original (verbatim, same variable block); item node decls/deps vs Lean; new-node stmt/proof deps vs declarations used in the three new modules; finite-mates dep swap vs its Lean (uses only openComparison_isIso, comparison_factorization)"
+ }
+}

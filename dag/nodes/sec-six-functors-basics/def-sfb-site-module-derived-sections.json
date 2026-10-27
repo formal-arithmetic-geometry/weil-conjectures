@@ -1,0 +1,148 @@
+{
+ "id": "def-sfb-site-module-derived-sections",
+ "kind": "definition",
+ "title": "Objectwise module sections and their unbounded derived functor",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Work in the universes and small-site convention of [def-weil-size-convention]. Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology], $\\mathcal O$ a sheaf of commutative rings, and $U$ an object of $\\mathcal C$. Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. Define $\\Gamma(U,-):\\mathcal A\\to\\operatorname{Ab}$ by sending a module sheaf $M$ to its abelian group $M(U)$, forgetting its $\\mathcal O(U)$-action, and a module-sheaf morphism to its component at $U$. On the unbounded derived categories [def-weil-abstract-derived-category], define $R\\Gamma(U,-):D(\\mathcal A)\\to D(\\operatorname{Ab})$ to be the total right derived functor of $\\Gamma(U,-)$. Concretely, choose a K-injective representative [def-pur-kinjective-complex], whose existence is supplied by [prop-pur-kinjective-resolutions-exist], apply $\\Gamma(U,-)$ termwise and localize the resulting abelian-group complex; morphisms are induced by the right-derived construction. The functor includes its standard natural comparison from termwise sections into its total right derived functor; on a K-injective complex this comparison is an isomorphism. All coefficient, module and section groups lie in a universe bounding both site universes; the localization universes are chosen as in the size convention.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section Cohomology of unbounded complexes (section-unbounded), example (2), defining Γ(U,-) and RΓ(U,-); Tag 0D6K (lemma-RGamma-commutes-with-Rlim), and Tag 0BKY."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation of module sheaves over an object of a ringed site and its unbounded right derived sections functor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.evaluation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(X : Cᵒᵖ) : SheafOfModules.{v} R ⥤ ModuleCat.{v} (R.val.obj X)\", \"doc\": \"The functor that maps a sheaf of modules over a sheaf of rings $ R $ to its module over $ R(X) $ by first forgetting the sheaf condition to obtain a presheaf of modules and then evaluating at the obje\"}\n  {\"name\": \"SheafOfModules.over\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M : SheafOfModules.{v} R) (X : D) : SheafOfModules.{v} (R.over X)\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $R$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$, and an object $X \\\\in \\\\mathcal{C}$, this constructs the sheaf of modules $\\\\mathc\"}\n  {\"name\": \"SheafOfModules\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J RingCat → Type (max (max (max u u₁) (v + 1)) v₁)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $F$ of rings on $\\\\mathcal{C}$, this defines the type of sheaves of modules over $F$, where each module satisfies the sheaf c\"}\n  {\"name\": \"PresheafOfModules.evaluation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf\", \"type\": \"(X : Cᵒᵖ) : PresheafOfModules.{v} R ⥤ ModuleCat (R.obj X)\", \"doc\": \"The evaluation functor at an object $ X $, which maps a presheaf of modules over $ R $ to its module over $ R(X) $ and a natural transformation to its component at $ X $. Specifically, for a presheaf \"}\n  {\"name\": \"SheafOfModules.sections\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"(M : SheafOfModules.{v} R) : Type _\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, the sections of a sheaf of modules $M$ over $R$ consist of families of elements $s_X \\\\in M(X)\"}\n  {\"name\": \"SheafOfModules.mk\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        (val : PresheafOfModules R.val) → CategoryTheory.Presheaf.IsSheaf J val.presheaf → SheafOfModules R\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, if a presheaf of modules over the underlying presheaf of $R$ satisfies the sheaf condition wi\"}\n  {\"name\": \"SheafOfModules.sectionsFunctor\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \": SheafOfModules.{v} R ⥤ Type _\", \"doc\": \"The functor from the category of sheaves of modules over a sheaf of rings $ R $ to the category of types, which maps each sheaf of modules to its global sections (families of elements satisfying compa\"}\n  {\"name\": \"CategoryTheory.sheafSectionsNatIsoEvaluation\", \"module\": \"Mathlib.CategoryTheory.Sites.Sheaf\", \"type\": \"{X : C} : (sheafSections J A).obj (op X) ≅ sheafToPresheaf J A ⋙ (evaluation _ _).obj (op X)\", \"doc\": \"For a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, the sheaf sections functor $\\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\text{Sheaf}(J, \\\\mathcal{A}) \\\\to \\\\mathcal{A}$ is \"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project abbreviations give the exact definition; no new Lean declaration is needed."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded right derived sections of sheaves of modules over an object of a ringed site",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.GeneratingSections.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this type represents the index set\"}\n  {\"name\": \"SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C} {D : Type u₂}\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} D] {R : CategoryTheory.Sheaf J RingCat}\\n  (F : CategoryTheory.Functor D (SheafOfModules R))\\n  [∀ (X : Cᵒᵖ),\\n      Small.{v, max u₂ v}\\n   \", \"doc\": \"For any object $X$ in the opposite category $\\\\mathcal{C}^{\\\\text{op}}$, the sections of the composed functor $F \\\\circ \\\\text{forget} \\\\circ \\\\text{evaluation}_X \\\\circ \\\\text{forget}$ form a small type in u\"}\n  {\"name\": \"SheafOfModules.GeneratingSections\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring sheafification and local bijectivity, this type represents the generatin\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.X\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this component $X$ of the local ge\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.I\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this type represents data providin\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.Presentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [J.WEqualsLocallyBijective AddCommGrpCat] →\\n            [J.HasSheafCompo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project abbreviations give the exact definition; no new Lean declaration is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "siteModuleSections|siteModuleDerivedSections|rightDerivedFunctor",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project abbreviations give the exact definition; no new Lean declaration is needed."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n siteModuleSections|siteModuleDerivedSections lean/.lake/packages/mathlib/Mathlib",
+   "results": "No hits.\n",
+   "date": "2026-10-24",
+   "verdict": "The exact abbreviations exist in Sheaf.CategoryTheory.Sites.RGammaDerivedLimit; Mathlib and upstream have no same-name declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n siteModuleSections|siteModuleDerivedSections lean/WeilConjectures",
+   "results": "No hits.\n",
+   "date": "2026-10-24",
+   "verdict": "The exact abbreviations exist in Sheaf.CategoryTheory.Sites.RGammaDerivedLimit; Mathlib and upstream have no same-name declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n siteModuleSections|siteModuleDerivedSections lean/Sheaf",
+   "results": "/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/SiteTruncationDerivedLimit.lean:558:      let F := siteModuleSections.{c, v, r} J.toGrothendieck O V\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:83:noncomputable abbrev siteModuleSections\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:100:noncomputable abbrev siteModuleDerivedSections\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:108:  (siteModuleSections.{c, v, r} J O U).rightDerivedFunctor\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:113:private theorem siteModuleDerivedSections_preservesCountableProducts\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:120:    PreservesLimitsOfShape (Discrete ℕ) (siteModuleDerivedSections.{c, v, r, w, w'} J O U) := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:125:  let F := siteModuleSections.{c, v, r} J O U\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:127:    dsimp [F, siteModuleSections]\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:233:    ∃ e : (siteModuleDerivedSections.{c, v, r, w, w'} J O U).obj (∏ᶜ K) ≅\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:234:        ∏ᶜ (fun n : ℕ ↦ (siteModuleDerivedSections.{c, v, r, w, w'} J O U).obj (K n)),\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:236:        (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (Pi.π K n)) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:238:        (fun n : ℕ ↦ (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (f n))\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:239:        ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).obj L)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:240:        ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).map p ≫ e.hom)\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:241:        (e.inv ≫ (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map δ ≫\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:242:          ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).commShiftIso (1 : ℤ)).hom.app L) ∧\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:243:      (∀ n : ℕ, (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map p ≫ e.hom ≫ Pi.π _ n =\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:244:        (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (p ≫ Pi.π K n)) := by\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:246:  let Φ := siteModuleDerivedSections.{c, v, r, w, w'} J O U\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/CategoryTheory/Sites/RGammaDerivedLimit.lean:247:  have := siteModuleDerivedSections_preservesCountableProducts.{c, v, r, w, w'} J O U\n/home/ubuntu/weil-conjectures-sheaf-shared/lean/Sheaf/AlgebraicGeometry/ProEtaleContinuousCohomologyLimit.lean:82:    siteModuleDerivedSections.{t + 1, t, t, w, w'} (Scheme.ProEt.topology X)\n",
+   "date": "2026-10-24",
+   "verdict": "The exact abbreviations exist in Sheaf.CategoryTheory.Sites.RGammaDerivedLimit; Mathlib and upstream have no same-name declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "python3 tools/blueprint_refs.py search \"derived sections\"",
+   "results": "d-real-cohom\tsec-purity-real-sheaves\tsplit\tFor any abelian sheaf $A$ on the etale site, ordinary cohomology means $H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution as in [def-weil-pbc-etale-cohomology]. For a constructible Weil sheaf $\\mathcal K$ of \ndet-lem-formal-closed-support-derived\tsec-six-functors-basics\tsplit\tIn the situation of [det-lem-formal-closed-support-sheaves], let $R\\underline\\Gamma_Z\\colon\\D(X_{\\mathrm{proét}},\\Lambda)\\to\\D(Z_{\\mathrm{proét}},\\Lambda)$ be the right derived functor of $\\underline\\Gamma_Z$, computed o\ndet-lem-int-ext-formula\tsec-six-functors-basics\tsplit\tUse the standing scheme setting [sk-def-sfb-dc-setting]: $\\ell$ is prime, $k$ is a field of characteristic $p>0$ with $p\\ne\\ell$, and $X$ is separated of finite type over $k$. Fix a finite extension $E/\\mathbf Q_\\ell$ wi\ndet-pe-wc-sections-derived\tsec-proetale-coefficients\tsplit\tLet $U$ and $\\mathcal R$ be as in [det-pe-wc-sections-exact], and let $K$ be an arbitrary (possibly unbounded) complex of $\\mathcal R$-modules on $X_{\\mathrm{proét}}$. Then the natural map $K(U)\\to R\\Gamma(U,K)$ is an is\ndet-prop-closed-adjoint-constructible-yoneda\tsec-six-functors-basics\tsplit\tFix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. Let $X,Z$ be separated finite-type $k$-schemes in the standing setting [sk-def-sfb-dc-setting], and let $i:Z\\hookrightarrow X$ be a closed immer\ndet-sf-comparison-affine-continuity\tsec-proetale-coefficients\tsplit\tLet $X$ be a scheme, $\\Lambda$ a ring, $K\\in D^+(X_{\\mathrm{ét}},\\Lambda)$, and let $U=\\varprojlim_{i\\in I}U_i$ be a pro-étale affine over $X$, the limit being cofiltered with affine transition maps and each $U_i$ affine\ndet-thm-int-restriction-closed\tsec-six-functors-basics\tsplit\tWork in the standing setting [sk-def-sfb-dc-setting]: fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and separated finite-type $k$-schemes. Fix a finite extension $E/\\mathbf Q_\\ell$ with valuati\nlem-weil-pbc-basis-derived-detection\tsec-proper-base-change\tsplit\tLet $X$ be an affine scheme and $R$ a commutative ring. Use the small skeleton and universes of the small pro-etale site $X_{\\mathrm{proet}}$ and the constant sheaf of rings $R_X$ of [def-weil-pbc-proetale-site]. Put $\\m\nlem-weil-pbc-comparison-global-cohomology\tsec-proper-base-change\tsplit\tLet $T$ be a scheme and $\\Lambda$ a finite discrete ring, with left $\\Lambda$-module sheaves. For $K\\in\\Dplus(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories], the unit $\\eta_K:K\\to R\\nu_{T,*}\\nu_T^*K$ of the bounded-\npur7710-def-constant-projection\tsec-smooth-purity\tunsplit\tFor a scheme $W$, $K\\in D(W_{\\Et},\\mathcal O_E/\\varpi^n)$ and $M\\in D(\\mathsf{Mod}_{\\mathcal O_E/\\varpi^n})$, define $$ P_{W,\\mathcal O_E/\\varpi^n,K,M}: R\\Gamma_{W,\\Et,\\mathcal O_E/\\varpi^n}K\\otimes^L_{\\mathcal O_E/\\varp\npur7710-def-derived-sections\tsec-smooth-purity\timported\tFor a scheme $W$ and $\\tau\\in\\{\\Et,\\Proet\\}$, the derived sections functor $$ R\\Gamma_{W,\\tau,\\mathcal O_E/\\varpi^n}:D(W_\\tau,\\mathcal O_E/\\varpi^n) \\longrightarrow D(\\mathsf{Mod}_{\\mathcal O_E/\\varpi^n}) $$ is the total\npur7710-def-derived-sections-field\tsec-smooth-purity\timported\tFor a scheme $W$ and $r\\geq1$, let $R\\Gamma_{W,\\Et,\\mathbf F_{\\ell^r}}:D(W_{\\Et},\\mathbf F_{\\ell^r})\\to D(\\mathsf{Mod}_{\\mathbf F_{\\ell^r}})$ be the total right derived functor, computed on K-injective resolutions, of gl\npur7710-def-kunneth-map\tsec-smooth-purity\timported\tFor $X,Y,Z,K,L$ as in Definition [pur7710-def-exterior-product], let $$ \\operatorname{Kun}_{\\mathcal O_E/\\varpi^n,K,L}: R\\Gamma_{X,\\Et,\\mathcal O_E/\\varpi^n}K\\otimes^L_{\\mathcal O_E/\\varpi^n}R\\Gamma_{Y,\\Et,\\mathcal O_E/\\\npur9-def-compact-cohomology\tsec-smooth-purity\timported\tLet $X$ be a separated $k$-scheme of finite type with structure morphism $a_X:X\\to\\operatorname{Spec}k$. Under Input “Finite-coefficient proper-adjoint input” (`pur713-input-proper-adjoint`, in [sk-def-sf-operations]) (n\npur9-def-kummer-class\tsec-smooth-purity\timported\tLet $W$ be a $k$-scheme and $t\\in\\Gamma(W,\\mathcal O_W^\\times)$. For $N\\geq1$, the Kummer sequence $0\\to\\mu_{\\ell^N,W}\\to\\mathbb G_{m,W}\\xrightarrow{\\omega\\mapsto\\omega^{\\ell^N}}\\mathbb G_{m,W}\\to0$ on $W_{\\Et}$ (the seq\nsk-d-real-cohom\tsec-purity-real-sheaves\timported\tFor any abelian sheaf $A$ on the etale site, ordinary cohomology means $H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution. For a constructible Weil sheaf $\\mathcal K$ on a curve, $H^i(C,\\mathcal K)$ and $H_c^\n16 blueprint nodes match 'derived sections'\n",
+   "date": "2026-10-24",
+   "verdict": "The returned nodes concern special sites, global sections or theorems; none owns general objectwise module sections and its unbounded derived functor."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-site-basis-inverse-limit-acyclic",
+  "date": "2026-10-24",
+  "group": "NC"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0D3X (lemma-spaces-defo-thy), proof, paragraphs beginning Let (R_n) be an inverse system and Let I_n = Ker(R_n to R_1), through the final deform-property argument. Supporting input: Tag 0D3E (lemma-Rlim-quasi-coherent), (2), (3), and its proof for affine etale objects (surjectivity on sections and affine acyclicity). General ringed-site input: Tag 0BKY, verifying affine-basis conditions in the proof of Tag 0D3E. Objectwise module sections and RΓ used to state the local acyclicity hypotheses of Tag 0BKY.",
+   "via": [
+    "lem-sfb-site-basis-inverse-limit-acyclic",
+    "lem-sfb-space-surjective-qcoh-limit",
+    "lem-sfb-proper-space-square-zero-effectivity",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.RGammaDerivedLimit",
+  "declaration": "CategoryTheory.siteModuleDerivedSections",
+  "declarations": [
+   "CategoryTheory.siteModuleSections",
+   "CategoryTheory.siteModuleDerivedSections"
+  ],
+  "statement": "abbrev siteModuleDerivedSections\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    (O : Sheaf J CommRingCat.{max c v r}) (U : C)\n    [HasDerivedCategory.{w} (ringedSiteModules.{max c v r, max c v r, v, c}\n      ((sheafCompose J\n        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))]\n    [HasDerivedCategory.{w'} AddCommGrpCat.{max c v r}]",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Owns the existing definition abbreviations at lines 83 and 100. They evaluate module sheaves into abelian groups and apply the unbounded total right-derived construction using siteModuleKInjectiveResolutions. The theorem site_rgamma_derivedLimit is separate and supplies no data in these definitions. No existing source module is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f9b1cfdb",
+  "group": "NC",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f9b1cfdb",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 90a09f1d5fc9 (H2). Lean module byte-identical to that head, whose mathematics the earlier review accepted clause by clause: module-sheaf H^p via RΓ(U,M[0]), R¹lim via lim.rightDerived 1, (lim F)[0]→RF(F[0]) comparison through singleMapHomologicalComplex and the IsRightDerivedFunctor unit, IsDerivedLimit, vanishing on B. stmt_deps now equal live plus only the new definition node def-sfb-site-module-derived-sections; the theorem dependency is removed. Statement verbatim equal to live. New node: Γ(U,-)/RΓ(U,-) per Stacks section-unbounded ex.(2); existing:true on RGammaDerivedLimit siteModuleDerivedSections and siteModuleSections; signature verbatim; cited ids = stmt_deps; the prop-pur-kinjective dependency is genuine (supplies the resolution instance); no other owner on live; landed module untouched. Report has Worker report and Second reading by NC. No file changed, so no compile."
+ }
+}

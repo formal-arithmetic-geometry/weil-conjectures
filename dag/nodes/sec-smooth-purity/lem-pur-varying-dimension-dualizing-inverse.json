@@ -1,0 +1,340 @@
+{
+ "id": "lem-pur-varying-dimension-dualizing-inverse",
+ "kind": "statement",
+ "title": "Finite-clopen assembly of the inverse of a smooth dualizing object of varying dimension",
+ "statement": "Fix the purity coefficient datum [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}(k)$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and $A_{E,j}=\\mathcal O_E/\\varpi_E^j$ for $j\\geq1$. Work on the small pro-etale sites [def-weil-pbc-proetale-site], with the derived operations [def-weil-derived-pullback-tensor-hom] and finite-Tor constructible categories [def-weil-finite-tor-amplitude]. For a scheme $T$, the coefficient unit $\\Lambda_T$ is $(A_{E,n})_T[0]$ at $\\Lambda=A_{E,n}$, $n\\geq1$, the completed sheaf $\\widehat{\\mathcal O}_{E,T}[0]$ at $\\Lambda=\\mathcal O_E$ [def-weil-completed-integral-coefficients], and its rationalized or common-stage image at $\\Lambda=E,\\overline{\\mathbf Q}_\\ell$.\n\nLet $g:V\\to B$ be a smooth [def-sbc-smooth-morphisms], separated finite-type morphism [def-weil-proper-morphism, def-weil-finite-type-morphism] between finite-type $k$-schemes. No section and no constant relative dimension are assumed. For $d\\geq0$ let $V_d$ be the locus of points $x\\in V$ for which $\\dim_x(V_{g(x)})=d$, and let $I=\\{d:V_d\\ne\\varnothing\\}$. Then $I$ is finite and the $V_d$ are pairwise disjoint open and closed subschemes covering $V$. Each restricted morphism $g_d:V_d\\to B$ is smooth separated of finite type and pure relative dimension $d$.\n\nFor every $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\overline{\\mathbf Q}_\\ell\\}$ put $\\omega_g=Rg^!\\Lambda_B$ and $\\omega_{g_d}=R(g_d)^!\\Lambda_B$, using the constructible exceptional inverse image [def-weil-exceptional-inverse-image]. If $j_d:V_d\\hookrightarrow V$ is the inclusion, there are derived isomorphisms $Lj_d^*\\omega_g\\simeq\\omega_{g_d}$. At the integral stage these are induced by comparisons on the actual strict coefficient systems, commuting with finite evaluation, rather than unrelated levelwise choices. The relative dualizing object and a two-sided tensor inverse belong to $D^b_{ctf}(V,\\Lambda)$: there is $P\\in D^b_{ctf}(V,\\Lambda)$ and isomorphisms\n$$\n e:\\omega_g\\otimes^L_\\Lambda P\\xrightarrow{\\sim}\\Lambda_V,\n \\qquad e':P\\otimes^L_\\Lambda\\omega_g\\xrightarrow{\\sim}\\Lambda_V.\n$$\nFor any inverses $P_d\\in D^b_{ctf}(V_d,\\Lambda)$ of $\\omega_{g_d}$, the inverse $P$ and these two maps may be chosen with components $P_d$ and the specified component inverse maps under the finite-clopen restriction equivalence. The cohomological and Tor intervals can be chosen as common bounds of the finitely many component intervals; integral Tor intervals are uniform in $j$. The empty source, hence the empty family $I$, is included. No Tate orientation is chosen.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility sentence of def-pur-section-invariant: returned proof steps 1-3, relative-dimension clopen partition, coherent exceptional restriction and assembly of dualizing inverse objects"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "def-pur-clopen-exceptional-all-coefficients",
+  "def-pur-clopen-strict-system-comparison",
+  "def-pur-clopen-coefficient-operations"
+ ],
+ "proof": [
+  {
+   "text": "By [sbc-lem-smooth-relative-dimension-locally-constant], the fibre-dimension function is locally constant. Its level sets $V_d$ are open, and each complement is the union of the other level sets, hence open. They are disjoint and cover $V$. The definition of finite type in [def-weil-finite-type-morphism], applied to the structure map to the affine $\\operatorname{Spec}k$, makes $V$ quasi-compact. Thus this open cover has a finite subcover. Disjointness implies that every nonempty level set occurs in that finite subcover, proving finiteness of $I$.",
+   "uses": [
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02G1, lemma-smooth-omega-finite-locally-free; finite-image consequence of quasi-compactness"
+   }
+  },
+  {
+   "text": "For each $d\\in I$, [lem-weil-pbc-smooth-restrict-open-subschemes](a) gives smoothness of $g_d$. A fibre of $g_d$ is the open subscheme $V_d\\cap V_b$ of the corresponding fibre of $g$, so its dimension at a point is unchanged: open neighbourhoods inside that open subset are cofinal among neighbourhoods of the point. Hence its dimension is $d$. By [lem-weil-pbc-closed-immersion-proper](a), $j_d$ is of finite type; apply [lem-sfb-finite-type-composition-base-change](1) to $gj_d$ and to $V_d\\to V\\to\\operatorname{Spec}k$. Thus $g_d$ and $V_d/k$ are of finite type. The diagonal of $g_d$ is the base change of the closed immersion $\\Delta_g$ along $V_d\\times_BV_d\\to V\\times_BV$, identifying its inverse image with $V_d$; [lem-weil-pbc-closed-immersion-base-change] proves separatedness. No absolute separatedness of $B$ or $V$ was used.",
+   "uses": [
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion; finite-clopen, orientation-free assembly"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-finite-clopen-exceptional-restriction] to this partition. Its unit case gives $a_d:Lj_d^*\\omega_g\\simeq\\omega_{g_d}$ at every coefficient stage. Its statement supplies these maps on the actual derived strict coefficient systems, with finite evaluations and site comparisons commuting; applying the specified scalar restriction and derived limit gives the integral maps. This is precisely the coherence required in the question, without lifting an arbitrary diagram of levelwise maps.",
+   "uses": [
+    "lem-pur-finite-clopen-exceptional-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion; finite-clopen, orientation-free assembly"
+   }
+  },
+  {
+   "text": "Fix $d\\in I$. At finite coefficients use [lem-pur-smooth-finite-dualizing-inverse], the pure-dimensional case of this step, to obtain a finite-Tor constructible inverse of the actual intrinsic exceptional image of the coefficient unit. Transport that inverse pair along the finite restriction comparison from Step 3. The new lemma isolates only the shifted-line and intrinsic coefficient-realization calculation, not the clopen gluing or prescribed map equations. Its proof plan applies [lem-pur-finite-setting-comparison-hypotheses], [thm-asd-smooth-tensor], [def-weil-exceptional-inverse-image] and [lem-pur-shifted-line-site-inverse].\n\nAt integral coefficients [def-weil-exceptional-inverse-image] constructs $M=\\omega_{g_d,\\mathcal O_E}$ from its actual normalized strict exceptional system; it is derived complete and its reduction at $n$ is $\\omega_{g_d,A_n}$. In particular its residue reduction is the shifted etale line just obtained at $n=1$. Apply [lem-pur-complete-residue-line-inverse] with $X=V_d$, $m=2d$. This gives $M$ and $M^\\vee$ in $D^b_{ctf}$ and both evaluation maps, with intervals uniform in $n$. At $E$ and $\\overline{\\mathbf Q}_\\ell$, apply the rationalization and common-stage functors of [def-weil-derived-pullback-tensor-hom] to this inverse pair; their tensor products and units are defined on integral representatives, and [def-weil-exceptional-inverse-image] defines the field exceptional objects by the same coefficient operations. The two inverse equations remain inverse equations under these functors.",
+   "uses": [
+    "lem-pur-smooth-finite-dualizing-inverse",
+    "lem-pur-finite-setting-comparison-hypotheses",
+    "thm-asd-smooth-tensor",
+    "def-weil-exceptional-inverse-image",
+    "lem-pur-shifted-line-site-inverse",
+    "lem-pur-complete-residue-line-inverse",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion; finite-clopen, orientation-free assembly"
+   }
+  },
+  {
+   "text": "Use the tensor-preserving equivalence of [lem-pur-finite-clopen-derived-decomposition]. The tuple $(\\omega_{g_d})_d$ belongs to the product of the component $D^b_{ctf}$ categories. Its inverse image is isomorphic to $\\omega_g$ by the isomorphisms $a_d$ of step 3, so $\\omega_g\\in D^b_{ctf}$. Given any specified component inverse pairs $(P_d,e_d,e'_d)$, take $P$ to be their tuple's inverse image. Define $e,e'$ by full faithfulness: their components, under the tensor/unit comparisons, are $e_d\\circ(a_d\\otimes1)$ and $e'_d\\circ(1\\otimes a_d)$. Lift the component inverse arrows as well. Their composites restrict to identities on every component; faithfulness makes both global composites identities. Hence $e,e'$ are the required isomorphisms with exactly the specified components. The same cited equivalence gives common cohomological and Tor bounds by taking minima of the finitely many lower bounds and maxima of the upper bounds; integral component intervals are uniform in the reduction index, so these common bounds are uniform too. If $V=\\varnothing$, use its empty-product clause: the unique object is the unit and its own inverse, all displayed maps are the unique isomorphism, and $[0,0]$ is an allowable vacuous bound. Every construction used duality and evaluation, with no choice of Tate orientation. In Lean the finite gluing is performed by the proved private categorical helper assemble_dualizing_inverse. It takes the inverse image of a tuple under the product restriction equivalence and applies preimageIso to the tuple of tensor-comparison, component-evaluation and inverse-unit isomorphisms. The map_preimage equation followed by cancellation of the unit comparison proves exactly both prescribed component equations. The ambient finite restriction equivalence is obtained from finiteClopen_unbounded_decomposition and finiteClopen_finite_restriction_identification, and finiteClopen_finiteTor_iff detects the good objects. The support and Tor interval clauses are finiteClopen_finite_bounds. The integral and field proof is still the remaining named theorem varyingDimension_dualizing_inverse, with the original plan above.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion; finite-clopen, orientation-free assembly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-pur-finite-clopen-exceptional-restriction",
+  "lem-pur-smooth-finite-dualizing-inverse",
+  "lem-pur-finite-setting-comparison-hypotheses",
+  "thm-asd-smooth-tensor",
+  "def-weil-exceptional-inverse-image",
+  "lem-pur-shifted-line-site-inverse",
+  "lem-pur-complete-residue-line-inverse",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-finite-clopen-derived-decomposition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "M6, 2026-10-27: complete geometric partition and categorical finite gluing in Lean; pure-dimensional finite inverse isolated as lem-pur-smooth-finite-dualizing-inverse. Integral and field assembly retain the stated proof plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated finite type morphism of schemes has a tensor invertible relative dualizing complex of finite Tor amplitude even when its relative dimension varies",
+   "results": "8 hits; Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, Algebra.Smooth.exists_finiteType",
+   "date": "2026-10-22",
+   "verdict": "no match: smooth algebra and scheme relative-dimension declarations, no derived dualizing object"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\"",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|cohomologicallySmooth|relativeDualizing",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative dualizing complex of a smooth morphism with locally constant varying relative dimension is tensor invertible",
+   "results": "8 hits; AlgebraicGeometry.isSmoothOfRelativeDimension_comp, Module.Invertible.instTensorProduct, Module.Invertible.instTensorProduct_2, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, RingHom.IsStandardSmoothOfRelativeDimension, Module.Invertible.instTensorProduct_1, AlgebraicGeometry.IsSmoothOfRelativeDimension.casesOn, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and ordinary invertible modules, not constructible derived dualizing objects"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a finite clopen partition by fiber dimension glue inverses of the smooth relative dualizing objects in the bounded constructible finite Tor derived category",
+   "results": "8 hits; AlgebraicGeometry.PresheafedSpace.GlueData.snd_invApp_t_app', AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t, AlgebraicGeometry.PresheafedSpace.GlueData.f_invApp_f_app, AlgebraicGeometry.PresheafedSpace.GlueData.ιInvApp_π, TopCat.GlueData.MkCore.t_inv, AlgebraicGeometry.PresheafedSpace.GlueData.ιInvAppπEqMap, AlgebraicGeometry.PresheafedSpace.GlueData.π_ιInvApp_π, AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme and presheafed-space gluing, not derived coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\"",
+   "results": "12 hits; ContinuousLinearMap.IsInvertible, ContinuousLinearMap.IsInvertible.inverse, ContinuousLinearMap.IsInvertible.of_isInvertible_inverse, ContinuousLinearMap.isInvertible_inverse_iff, ContinuousLinearMap.isInvertible_equiv, ContinuousLinearMap.IsInvertible.inverse_inverse, ContinuousLinearMap.isInvertible_zero_iff, ContinuousLinearMap.IsInvertible.bijective",
+   "date": "2026-10-22",
+   "verdict": "no match: ContinuousLinearMap.IsInvertible concerns continuous linear maps"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|exceptionalInverse|upperShriek|sectionInvariant",
+   "results": "10 hits; Mathlib/Tactic/Translate/ToDual.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: only unrelated comments using dualizing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of varying relative dimension has an invertible dualizing complex assembled across a finite clopen decomposition",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizingComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizingComplex|relativeDualizing|upperShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth relative dualizing objects are tensor invertible and tensor inverses glue on finite disjoint open and closed covers",
+   "results": "8 hits: Module.Invertible.instTensorProduct_2, Module.Invertible.instTensorProduct, Module.Invertible.instDual, Module.Invertible.instTensorProduct_1, Submodule.tensorInvEquiv, Algebra.FormallySmooth.instTensorProduct, CommRing.Pic.mk_dual, CommRing.Pic.inv_eq_dual",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite product decomposition of derived categories of sheaves on open closed subschemes preserves tensor inverses and uniform Tor amplitude",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Sheaf.monoidalCategory, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Tor', DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex of sheaves over the completed valuation ring whose residue reduction is a rank one locally constant sheaf shifted by m is tensor invertible with inverse shifted by minus m",
+   "results": "8 hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|tensorInvertible",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complex with residue reduction a locally constant rank one sheaf in a single degree has a two sided tensor inverse",
+   "results": "8 hits: Module.Invertible.rTensorInv_leftInverse, Submodule.tensorInvEquiv, Module.Invertible.rTensorInv, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, Module.Invertible.instTensorProduct_1, Module.Invertible.instTensorProduct, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedComplete\", \"Invertible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An adically complete derived sheaf whose reduction modulo a uniformizer is a shifted free rank one local system is locally a shifted completed coefficient line with dual evaluation isomorphisms",
+   "results": "8 hits: BDeRhamPlus, BDeRham, AdicCompletion.coe_eval, AdicCompletion.eval_of, AdicCompletion.val_smul_eq_evalₐ_smul, AdicCompletion.eval_apply, AdicCompletion, AdicCompletion.eval",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, algebraic completion, or general derived/sheaf infrastructure, not the stated completed coefficient sheaf criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-section-invariant",
+  "date": "2026-10-22",
+  "group": "Q115"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-section-invariant",
+   "place": "Final invertibility sentence of def-pur-section-invariant: returned proof steps 1-3, relative-dimension clopen partition, coherent exceptional restriction and assembly of dualizing inverse objects",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-varying-dimension-dualizing-inverse",
+  "worker": "stage1",
+  "summary": "Reused the existing locally constant dimension, finite-clopen decomposition and coherent exceptional restriction nodes. Wrote finite-clopen assembly for arbitrary specified inverse maps and the empty family. Added one general residue-line lifting lemma to justify the integral inverse without confusing finite-stage cohomological smoothness with all-stage purity. No statement change or Lean attachment.",
+  "blueprint": "Final invertibility assertion of def-pur-section-invariant, main-20261015, realized by relative-dimension partition, pure-dimension component inverses and finite-clopen assembly. Its containing convention unit has no proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-setting-comparison-hypotheses",
+    "why": "Supplies Noetherian target, invertible finite annihilator and compactification on the full nonseparated scheme domain, needed for the existing orientation-free smooth tensor theorem."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "The pure-dimension finite etale shifted-line theorem supplies the residue-line shape, rather than assuming an all-stage invertibility theorem."
+   },
+   {
+    "node": "lem-pur-shifted-line-site-inverse",
+    "why": "Transports the etale line dual and evaluations to finite pro-etale coefficients with the precise finite-Tor intervals."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic restriction of smoothness to the clopen source, not a replacement for the purity route."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic finite-type permanence for the clopen source and its restricted morphism."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic closed-immersion permanence for the restricted diagonal."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-setting-comparison-hypotheses",
+  "thm-asd-smooth-tensor",
+  "lem-pur-shifted-line-site-inverse",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-d6b095cee",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-d6b095cee (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, the Q115 parent re-split (old steps 1-3) and Bhatt-Scholze 6.6.7-6.6.11 (pp. 52-54). The item statement is unchanged and every old argument is carried. Step 1: the 02G1 local-constancy node plus quasi-compactness of V over Spec k give finitely many clopen V_d. Step 2: smoothness of g_d comes from the open-restriction lemma(a); finite type from the closed-immersion lemma(a) and composition. Separatedness: the diagonal of g_d is the base change of Delta_g, so no absolute separatedness is used. Pure dimension holds because dim_x is unchanged on an open part of a fibre. Step 3: the unit case of lem-pur-finite-clopen-exceptional-restriction; its statement gives the system-level integral coherence. Step 4: the finite-setting hypotheses and thm-asd-smooth-tensor give L[2d]; def-weil-exceptional-inverse-image transports it to the pro-etale site; lem-pur-shifted-line-site-inverse gives both evaluations with Tor intervals [-2d,-2d] and [2d,2d]. At the integral stage the definition gives a derived-complete object with residue nu^*L[2d], which is the hypothesis of the new node with m=2d. Field stages come from rationalizing integral representatives. Step 5: full faithfulness of the finite-clopen equivalence; e_d(a_d x 1) has the right direction; the empty family is covered. Old step 3 cited thm-pur-cohomological-smoothness, which is finite-level under def-pur-conventions; the new route fills that integral gap. New node lem-pur-complete-residue-line-inverse is true. By BS 6.6.8 M is locally a completed perfect C; C tensor k = k[m] forces C = R[m] over a DVR, so M = Line[m]; the dual and evaluations are the rank-one maps. Tested on R^[m], nontrivial monodromy, X empty, and R^/pi (excluded). It is not a restatement and not a duplicate: lem-weil-pbc-/lem-sfb-adic-residue-lisse-perfect-lift give only perfect local models, and lem-pur-integral-line-reduction-restriction starts from a given line. Maintainer note: the new node's future split should cite those three nodes. The node is statement-only with searches recorded and blueprint.from set. Batch-5: the reached lem-trf-fully-faithful-ess-surj-equivalence is the generic Mathlib leaf Functor.asEquivalence, outside both assumptions, and was already in the closure through lem-pur-finite-clopen-derived-decomposition (already in stmt_deps); accepted. Tool uses accepted: thm-asd-smooth-tensor, lem-pur-finite-setting-comparison-hypotheses and lem-pur-shifted-line-site-inverse, which are the finite inputs of thm-pur-cohomological-smoothness's own proof, plus three generic scheme-permanence lemmas. No cycle, no SGA citation, no weakening."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VaryingDimensionDualizingInverse",
+  "declaration": "WeilConjectures.PurityFiniteSetting.varyingDimension_dualizing_inverse",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.DualizingInverseAssembly",
+   "WeilConjectures.PurityFiniteSetting.smooth_dimension_clopen_partition",
+   "WeilConjectures.PurityFiniteSetting.varyingDimension_finite_dualizing_inverse",
+   "WeilConjectures.PurityFiniteSetting.varyingDimension_dualizing_inverse"
+  ],
+  "file": "lean/Sheaf/Paper/VaryingDimensionDualizingInverse.lean",
+  "statement": "theorem varyingDimension_dualizing_inverse (cpt : Compactification g) : ∃ R : ClopenExceptionalAllCoefficients P V B V g cpt (𝟙 V), ∃ Ri : ∀ i, ClopenExceptionalAllCoefficients P V B (Vi i) g cpt (j i), (∀ i, (Ri i).base.integral = R.base.integral ∧ (Ri i).base.rational = R.base.rational ∧ (Ri i).action.functor = R.action.functor) ∧ DualizingInverseAssembly (P.clopenIntegralTensor V) (P.clopenIntegralUnit V.left) (fun K ↦ finiteTorConstructibleIntegral P.coefficients.l P.extension V.left K.obj) (fun i ↦ P.clopenIntegralPullback (j i)) (fun i ↦ P.clopenIntegralTensor (Vi i)) (fun i ↦ P.clopenIntegralUnit (Vi i).left) (fun i K ↦ finiteTorConstructibleIntegral P.coefficients.l P.extension (Vi i).left K.obj) (R.base.integral.obj (P.clopenIntegralUnit B.left)) ∧ DualizingInverseAssembly (P.clopenRationalTensor V) (P.clopenRationalUnit V.left) ⊤ (fun i ↦ P.clopenRationalPullback (j i)) (fun i ↦ P.clopenRationalTensor (Vi i)) (fun i ↦ P.clopenRationalUnit (Vi i).left) (fun _ ↦ ⊤) (R.base.rational.obj (P.clopenRationalUnit B.left)) ∧ (∀ A : AlgebraicallyClosedCoefficients.Index P.coefficients.l P.coefficients.Qbar, DualizingInverseAssembly (P.clopenCommonStageTensor V) (P.clopenCommonStageUnit V.left A) ⊤ (fun i ↦ P.clopenCommonStagePullback (j i)) (fun i ↦ P.clopenCommonStageTensor (Vi i)) (fun i ↦ P.clopenCommonStageUnit (Vi i).left A) (fun _ ↦ ⊤) (R.action.functor.obj (P.clopenCommonStageUnit B.left A))) ∧ ∀ (K : sfIntegralConstructibleCategory P.coefficients.l P.extension V.left) (a b : ℤ), a ≤ b → ((∀ n : ℕ, Scheme.proEtaleCohomologicalSupport ((scalarReductionDerivedExtension P.coefficients.l P.extension V.left n).obj K.obj) ⊆ Set.Icc a b) ↔ ∀ (i : I) (n : ℕ), Scheme.proEtaleCohomologicalSupport ((scalarReductionDerivedExtension P.coefficients.l P.extension (Vi i).left n).obj ((P.clopenIntegralPullback (j i)).obj K).obj) ⊆ Set.Icc a b) ∧ ((∀ n : ℕ, Scheme.HasProEtaleTorAmplitude V.left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((scalarReductionDerivedExtension P.coefficients.l P.extension V.left n).obj K.obj) a b) ↔ ∀ (i : I) (n : ℕ), Scheme.HasProEtaleTorAmplitude (Vi i).left (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ((scalarReductionDerivedExtension P.coefficients.l P.extension (Vi i).left n).obj ((P.clopenIntegralPullback (j i)).obj K).obj) a b)",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "The declarations jointly state the geometric partition, all positive finite levels, strict-system coherent integral and field-stage restriction, prescribed inverse-map assembly and common interval detection. The assembly is stated on a labelled presentation of the nonempty dimension loci; smooth_dimension_clopen_partition supplies its existence. ClopenExceptionalAllCoefficients retains the normalized actual-system comparisons and their finite evaluations. No section, constant dimension or Tate orientation is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b52d386ca",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Re-delivery after RETURN e13b3399d63d (H2). Lean module byte-identical to the reviewed head. stmt_deps: theorem lem-pur-finite-clopen-exceptional-restriction (kept as proof_dep) replaced by new def nodes def-pur-clopen-exceptional-all-coefficients (existing:true, the 14 non-theorem decls of FiniteClopenExceptionalRestriction, statement verbatim with live l.512) and def-pur-clopen-coefficient-operations (existing:true, the 9 clopen pullback/tensor/unit defs of FiniteClopenDerivedDecomposition, statement verbatim with live l.241), plus the landed owner def-pur-clopen-strict-system-comparison of clopenFiniteExceptional. All added stmt_deps are definition nodes, so the theorem-stmt_dep finding no longer applies. New-node fields checked (kind, status, chapter, unit, created, blueprint.from/via, searches, inline cites = stmt_deps, deps exist on base); statements match the Lean binders and fields; the constant-coefficient constructibility theorem is a genuine .2.1 dependency; no competing owner in the live DAG. Item lean.statement verbatim. Mathematics (partition, restriction isos, inverse assembly with prescribed maps, uniform bounds, edge cases I=V=empty, d=0, level 1) re-read and correct; only sorry. No compile (no file changed). Advisory: some used notions are owned by nodes reached only transitively; existing module docstrings name the theorem nodes as blueprint."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261027T103449-L-1083839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

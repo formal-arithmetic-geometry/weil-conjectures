@@ -15,43 +15,43 @@
  },
  "proof": [
   {
-   "text": "reduce one flat-term K-flat representative with the strict quotient maps.\nChange of rings preserves its K-flatness; quotient tensor reassociation and finite\ninverse image preserve normalization. The strict Roos comparison, natural on chain\nmaps and their localization, identifies the actual integral pullback with total\nlimit of this pulled-back reduction system, preserving its projections. Apply the\nreduction/total-limit adjunction counit to this identification. Normalized DVR\neffectivity makes its evaluations invertible; the evaluation criterion in the\ncoefficient calculus makes the system map invertible. Naturality of the adjunction\nand Roos comparison gives a natural system isomorphism. The counit projection\nformula identifies its evaluation with the scalar adjoint of the defining tower\nprojection. Transport through the unit-normalized finite pullback presentation\nand the universal reduction counit gives exactly the displayed formula, for every\nrepresentative and every positive uniformizer exponent.",
+   "text": "Use the canonical source and target coefficient evaluation calculi chosen in integralSystemReduction. Obtain a Roos model on each scheme from normalizedCompletedOperationModels on its singleton family. Apply effectiveQuotientModelDescent with the identity coefficient inclusion to those very calculi and Roos models: its pullback model supplies the normalized natural realization, and its ambient effectivity clause makes the target whole-system counit invertible on each pulled-back reduction.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-coef-semilinear-derived-sections",
-    "lem-pur-kflat-change-of-rings",
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pur-integral-derived-operations",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-integral-operations-well-defined",
-    "lem-coef-normalized-dvr-effectivity",
-    "lem-pur-integral-operations-preserve-constructible",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-pur-normalized-completed-operation-models",
+    "lem-trf-effective-quotient-model-descent",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Whisker the normalized realization by target reduction and compose with the whole-system adjunction counit. On every constructible input the first factor is the image of an isomorphism and the second factor is invertible by effectivity. Restrict this natural transformation along the full constructible inclusion and use NatIso.ofComponents with the component inverses. The sequence-site and finite-system pullback presentations are definitionally identical.",
+   "uses": [
+    "def-trf-integral-comparison-realization-models",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "lem-pod-finite-system-pullback-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply integralPullbackCounitProjection to the selected source and target calculi, Roos model, normalized pullback realization, arbitrary good representative, and arbitrary level n. Cancel the inverse target reduction-evaluation isomorphism. Unfold only integralSystemPullbackReductionIso and the isomorphism-composition formulas: its four factors are exactly the right-hand side of the projection identity. This proves the required equality for every representative and every positive exponent.",
+   "uses": [
+    "lem-pod-integral-pullback-counit-projection",
+    "lem-pur-integral-operations-preserve-constructible"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-pur-normalized-completed-operation-models",
+  "lem-trf-effective-quotient-model-descent",
   "lem-coef-derived-system-evaluation-calculus",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-coef-semilinear-derived-sections",
-  "lem-pur-kflat-change-of-rings",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-pur-integral-derived-operations",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "lem-pur-integral-operations-well-defined",
-  "lem-coef-normalized-dvr-effectivity",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "def-trf-integral-comparison-realization-models",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pod-finite-system-pullback-coherence",
+  "lem-pod-integral-pullback-counit-projection",
+  "lem-pur-integral-operations-preserve-constructible"
  ],
- "proof_origin": "Extracted by A7 from the existing sourced integral-pullback composition plan; the Lean glue and category transport are written by A7.",
+ "proof_origin": "W5: Lean assembly of the existing C4 route, using canonical calculi, normalized realization, the effective whole-system counit, and the already recorded finite projection interface; lower import context preserved when removing the composition cycle.",
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -121,14 +121,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A7",
-  "result": "pass",
-  "landing": "20261020T051013-L-1525395",
+  "reviewer": "C-b269b",
+  "group": "W5",
+  "result": "fix",
+  "landing": "20261026T071427-L-3928454",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered item proof, restored counit-projection statement and node, and adapted IntegralComparisonSequenceSystems against the published clone; 38 direct importers and name users compiled against the delivered and the fixed module sets"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

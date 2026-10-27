@@ -1,0 +1,402 @@
+{
+ "id": "lem-sfb-smooth-fibrewise-dense-open-base-change",
+ "kind": "statement",
+ "title": "Fibrewise dense opens of smooth schemes survive base change",
+ "statement": "Let $f:Y\\to T$ be a smooth morphism of schemes [def-pc-scheme, def-sbc-smooth-morphisms], and let $j:V\\hookrightarrow Y$ be an open immersion [def-weil-open-immersion]. For $t\\in T$, let $Y_t=Y\\times_T\\operatorname{Spec}\\kappa(t)$ and $V_t=V\\times_T\\operatorname{Spec}\\kappa(t)$ be the scheme-theoretic fibres [def-pc-base-change, def-weil-residue-field]. Suppose $V_t$ is topologically dense in $Y_t$ for every $t$. For every morphism $g:T'\\to T$ of schemes, the open $V'=V\\times_TT'$ is dense in each fibre of $Y'=Y\\times_TT'\\to T'$. Moreover, if $j':V'\\hookrightarrow Y'$ is its inclusion, the map of sheaves $\\mathcal O_{Y'}\\to j'_*\\mathcal O_{V'}$ is injective (scheme-theoretic density). The assertions allow empty fibres and arbitrary $T'$; no irreducibility of the fibres is assumed.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 2.5, preliminaries on S-density and Lemma 1(b), printed pp.55-56 (PDF pp.61-62), applied also after base change; primary scan read at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf; local literature copy WANTED."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-open-immersion",
+  "def-pc-base-change",
+  "def-weil-residue-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $t\\prime\\in T\\prime$ with image $t\\in T$. By the fibre-product universal property, $Y\\prime_{t\\prime}\\simeq Y_t\\times_{\\kappa(t)}\\kappa(t\\prime)$, and similarly for $V$. The projection $q:Y\\prime_{t\\prime}\\to Y_t$ is open by [lem-sc-scheme-over-field-universally-open], applied with the field extension as the first factor. If $O$ is a nonempty open in $Y\\prime_{t\\prime}$, $q(O)$ is nonempty and open, so meets the dense open $V_t$. Consequently $O$ meets $q^{-1}(V_t)=V\\prime_{t\\prime}$. Thus every changed fibre has dense open, without an irreducibility hypothesis. The empty-fibre case is vacuous. The changed inclusion is open by [lem-weil-pbc-open-immersion-base-change].",
+   "uses": [
+    "def-pc-base-change",
+    "lem-sc-scheme-over-field-universally-open",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0383, lemma-scheme-over-field-universally-open; schemes.tex Tag 01JY"
+   }
+  },
+  {
+   "text": "It remains to prove schematic density for a smooth family with a fibrewise dense open; this argument will then apply to $(Y\\prime,V\\prime,T\\prime)$. Indeed [lem-pc-smooth-flat] supplies flatness and local finite presentation of $f$. Apply [lem-sfb-scheme-flat-smooth-point-base-change] at every point of $Y\\prime$. Every image point is smooth, so $Y\\prime\\to T\\prime$ is smooth locally everywhere and hence smooth by [lem-weil-pbc-smooth-local-on-source].",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-flat-smooth-point-base-change",
+    "lem-weil-pbc-smooth-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01VE, 01VF, 02V4 (case 1), and source-local smoothness"
+   }
+  },
+  {
+   "text": "Work on affine charts $\\operatorname{Spec}B\\subseteq Y$ over $\\operatorname{Spec}A\\subseteq T$ chosen from the local finite-presentation charts of [def-sbc-locally-finite-presentation]; they form a basis after shrinking about a point. Restriction is smooth by [lem-weil-pbc-smooth-local-on-source]. By [lem-pc-smooth-flat] and [lem-weil-pbc-flat-ring-map-iff-flat-affine], $B$ is a flat finitely presented $A$-algebra. Intersecting a dense open of each fibre with this open chart is dense in that chart fibre. Apply [lem-sfb-smooth-fibre-dense-quasi-compact-selection] to get a quasi-compact open $W\\subseteq V\\cap\\operatorname{Spec}B$ dense in every chart fibre. Cover $W$ by principal opens contained in it and take a finite subcover: write $W=\\bigcup_{i=1}^mD(b_i)$. This uses precisely quasi-compactness, not quasi-compactness of $V$.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-smooth-local-on-source",
+    "lem-pc-smooth-flat",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-sfb-smooth-fibre-dense-quasi-compact-selection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Lemma 3, printed pp.56-57; finite principal refinement on an affine scheme"
+   }
+  },
+  {
+   "text": "Put $M=\\prod_{i=1}^m B_{b_i}$ and let $u:B\\to M$ be the tuple of restriction homomorphisms. Each $B_{b_i}$ is flat over $A$ by [lem-pc-affine-flat-module-localization-preserves-flatness], since $B$ is $A$-flat. Hence $M$ is $A$-flat by [lem-weil-pbc-finite-product-flat-modules]. For a prime $\\mathfrak p\\subset A$, put $B(\\mathfrak p)=B\\otimes_A\\kappa(\\mathfrak p)$. The fibre of the smooth chart is reduced by [sbc-lem-smooth-geometrically-reduced]. The open $W_{\\mathfrak p}=\\bigcup_iD(\\bar b_i)$ is quasi-compact, with dense image. Its inclusion is quasi-separated since the diagonal of an open immersion is an isomorphism. Thus [lemma-nagata-reduced-dense-image-schematic] identifies its scheme-theoretic image with the entire fibre, and [lemma-nagata-scheme-image-ideal-qc] gives injectivity of restriction to $W_{\\mathfrak p}$. The sheaf axiom on the finite cover by $D(\\bar b_i)$ makes the map from its sections to the product of the principal-open section rings injective. Therefore $B(\\mathfrak p)\\to\\prod_i B(\\mathfrak p)_{\\bar b_i}$ is injective.",
+   "uses": [
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-finite-product-flat-modules",
+    "sbc-lem-smooth-geometrically-reduced",
+    "lemma-nagata-reduced-dense-image-schematic",
+    "lemma-nagata-scheme-image-ideal-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 056D, lemma-reduced-scheme-theoretically-dense; varieties.tex Tag 056T"
+   }
+  },
+  {
+   "text": "The preceding map is $u\\otimes_A\\kappa(\\mathfrak p)$. Indeed finite products of modules equal finite direct sums, and tensoring distributes over a finite direct sum by the maps $(x_i)_i\\otimes c\\mapsto(x_i\\otimes c)_i$ and their inverse given by summing the inclusions. By [lem-weil-pbc-localization-tensor-over-base], $B_{b_i}\\otimes_A\\kappa(\\mathfrak p)\\simeq(B\\otimes_A\\kappa(\\mathfrak p))_{\\bar b_i}$, carrying $(b/b_i^n)\\otimes c$ to $(b\\otimes c)/\\bar b_i^n$. Thus the restriction tuple agrees on every pure tensor, hence on every element. Apply [lem-sfb-flat-finitely-presented-module-fibre-injectivity] with $\\Sigma=\\{1\\}$ and $N=B$, free of rank one over itself. Its finite-presentation and both $A$-flatness hypotheses were verified above. Taking $Q=A$ gives injectivity of $u$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "lem-sfb-flat-finitely-presented-module-fibre-injectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0AT9, lemma-universally-injective-if-flat, with equation-star"
+   }
+  },
+  {
+   "text": "If a section on this affine chart restricts to zero on $V$, it restricts to zero on every $D(b_i)\\subseteq W\\subseteq V$, so its image under the injective tuple $u$ is zero. The section is therefore zero. For any open $H\\subseteq Y$ and a section vanishing on $H\\cap V$, restrict it to the affine chart basis inside $H$ just used; each restriction is zero, and the sheaf axiom implies the original section is zero. This is the required injectivity of $\\mathcal O_Y\\to j_*\\mathcal O_V$. Apply this conclusion to the changed smooth family from step 2 and its fibrewise dense open from step 1. If a chart or fibre is empty its section ring is zero; the empty product case forces $B=0$ by the same fibre criterion and causes no exception.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 2.5 Lemma 1(b), local-to-global restriction argument; extension to arbitrary opens via Lemma 3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-base-change",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-flat-smooth-point-base-change",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-sfb-smooth-fibre-dense-quasi-compact-selection",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-sfb-flat-finitely-presented-module-fibre-injectivity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "BLR 2.5 density route, with Tag 0AT9 replacing its Noetherian associated-prime argument; local BLR copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth finitely presented scheme, an open dense in every fibre remains fibrewise dense after every base change and is schematically dense",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism of schemes is multiplicative: the composition of two dominant morphisms is again a dominant morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isDominant_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsDominant f ↔ DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is dominant if and only if the underlying continuous function of its base map $ f_{\\\\text{base}} : X \\to Y $ has dense image in $ Y $, i.e., the closure of the image\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"IsSchemeTheoreticallyDense\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "schematic.*dense|dense.*schematic|universally.*dense",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An open dense in each fibre of a smooth scheme is universally schematically dense",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is smooth if, for every point $ x \\\\in X $, there exist affine open neighborhoods $ U \\\\subseteq Y $ containing $ f(x) $ and $ V \\\\subseteq X $ containing $ x $ such \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth) →\\n    AlgebraicGeometry.IsSmooth f\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if for every point $x \\\\in X$, there exist open sets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U V : X.Opens} (hU : Dense (X := X) U) (hU' : U ≤ V) : IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[IsOpenImmersion f] : UniversallyOpen f\", \"doc\": \"Every open immersion of schemes is a universally open morphism. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on the image), th\"}\n  {\"name\": \"AlgebraicGeometry.universallyOpen_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.UniversallyOpen f ↔ (AlgebraicGeometry.topologically @IsOpenMap).universally f\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally open if and only if for every base change $ Y' \\to Y $, the induced continuous map on topological spaces $ X \\times_Y Y' \\to Y' $ is an open map. This e\"}\n  {\"name\": \"exists_open_dense_of_open_dense_subtype\", \"module\": \"Mathlib.Topology.Constructions\", \"type\": \"(hs : Dense s) {u : Set s} (huo : IsOpen u) (hud : Dense u) : ∃ v : Set X, IsOpen v ∧ Dense v ∧ Subtype.val ⁻¹' v = u\", \"doc\": \"If $ s $ is a dense subset of a topological space $ X $, and $ u $ is an open and dense subset of $ s $ (in the subspace topology), then there exists an open dense subset $ v $ of $ X $ such that $ u \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative density for smooth schemes: a fibrewise dense open stays dense after arbitrary change of base",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsDominant.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f: X \\\\to Y $ is a dominant morphism of schemes, then the underlying continuous map between their topological spaces has a dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsDominant f],\\n  DenseRange ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any dominant morphism $ f: X \\to Y $ of schemes, the underlying continuous map between their topological spaces has dense image in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (self : X.PartialMap Y), Dense ↑self.domain\", \"doc\": \"For any partial map between schemes $X$ and $Y$, the open subset of $X$ on which the partial map is defined is dense in $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X.RationalMap Y), Dense ↑f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens}, Dense ↑U → AlgebraicGeometry.IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U V : X.Opens},\\n  Dense ↑U → ∀ (hU' : U ≤ V), AlgebraicGeometry.IsDominant (X.homOfLE hU')\", \"doc\": \"Given a scheme $X$ and open subsets $U \\\\subseteq V$ of its underlying topological space, if $U$ is dense in $X$, then the inclusion-induced morphism $X|_U \\\\to X|_V$ is dominant. This means the image o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: the returned dominance, rational-map, smoothness and open-map declarations do not give the stated relative density or birational-law conclusion; signatures inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme dense in every fibre of a smooth morphism remains fibrewise dense and schematically dense after arbitrary base change",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget",
+     "AlgebraicGeometry.Scheme.PartialMap.dense_domain",
+     "AlgebraicGeometry.IsDominant",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+     "AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain"
+    ],
+    "digest": "afa5a38694174cfc",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dominance and open maps do not give relative schematic density; source signatures read. Loogle IsSmooth identifier was unavailable in its index, so the empty response is not evidence of absence."
+  },
+  {
+   "tool": "grep",
+   "query": "fiber.*[Dd]ense|[Dd]ense.*fiber|[Ss]mooth.*[Dd]ominant",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dominance and open maps do not give relative schematic density; source signatures read. Loogle IsSmooth identifier was unavailable in its index, so the empty response is not evidence of absence."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSchemeTheoreticallyDominant, AlgebraicGeometry.IsSmooth",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+    "top": [],
+    "digest": "4f53cda18c2baa0c",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dominance and open maps do not give relative schematic density; source signatures read. Loogle IsSmooth identifier was unavailable in its index, so the empty response is not evidence of absence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fibrewise dense open in a smooth scheme is universally schematically dense",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSmooth.casesOn",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι",
+     "AlgebraicGeometry.IsSmooth.recOn",
+     "AlgebraicGeometry.UniversallyOpen.instOfIsOpenImmersion",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_homOfLE",
+     "AlgebraicGeometry.universallyOpen_iff",
+     "AlgebraicGeometry.UniversallyOpen",
+     "AlgebraicGeometry.isDominant_iff"
+    ],
+    "digest": "e9dd3377c605a4ab",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dominance and open maps do not give relative schematic density; source signatures read. Loogle IsSmooth identifier was unavailable in its index, so the empty response is not evidence of absence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative density for smooth schemes: an open dense in every fibre is schematically dense after every change of base",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsDominant.denseRange",
+     "AlgebraicGeometry.Scheme.Hom.denseRange",
+     "AlgebraicGeometry.IsDominant",
+     "AlgebraicGeometry.Scheme.PartialMap.dense_domain",
+     "AlgebraicGeometry.isDominant_iff",
+     "AlgebraicGeometry.Scheme.RationalMap.dense_domain",
+     "AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget",
+     "AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι"
+    ],
+    "digest": "599a50c8a96d00d0",
+    "sub": ""
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: dominance and open maps do not give relative schematic density; source signatures read. Loogle IsSmooth identifier was unavailable in its index, so the empty response is not evidence of absence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-birational-law-strictification",
+  "date": "2026-10-24",
+  "group": "Q15"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 2.5, preliminaries on S-density and Lemma 1(b), printed pp.55-56 (PDF pp.61-62), applied also after base change",
+   "via": [
+    "lem-sfb-birational-law-strictification",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-smooth-fibrewise-dense-open-base-change",
+  "worker": "stage1",
+  "summary": "Proved arbitrary-base-change fibre density by open field projections, then proved structure-sheaf injectivity on affine charts using BLR finite selection and Tag 0AT9. Created two genuine statement-only inputs; preserved arbitrary opens, nonreduced bases, and empty fibres.",
+  "blueprint": "Inherited BLR 2.5 prerequisite for the birational group-law strictification branch of the compactification/direct-image inputs to sk-thm-sf-ctf-stability. Nearest imported ancestor is null; latest unit proof is unchanged. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "def-pc-base-change",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-sc-scheme-over-field-universally-open",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "def-sbc-locally-finite-presentation",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-product-flat-modules",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lemma-nagata-reduced-dense-image-schematic",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   },
+   {
+    "node": "lem-weil-pbc-localization-tensor-over-base",
+    "why": "Generic scheme or module foundation for the relative-density argument; no node in this unit supplies this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-base-change",
+  "lem-sc-scheme-over-field-universally-open",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-smooth-local-on-source",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-weil-pbc-finite-product-flat-modules",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lemma-nagata-reduced-dense-image-schematic",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lem-weil-pbc-localization-tensor-over-base"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-d12ede7c2",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-d12ede7c2 (reviewer sub-agent of L); spot-checked: First split of the item (live is still unsplit with no proof). The statement is byte-identical to live. Source checks: the new node lem-sfb-smooth-fibre-dense-quasi-compact-selection is BLR §2.5 Lemma 3 exactly (read in the primary scan, printed p.56: X smooth and qc over S, U S-dense, so U contains a qc S-dense open). The new node lem-sfb-flat-finitely-presented-module-fibre-injectivity matches Stacks 0AT9 lemma-universally-injective-if-flat with its equation-star situation, hypothesis by hypothesis. Neither new node restates a clause of the item, and neither has proof or proof_deps. Duplicate checks: the 05DH, 05IA and 05IG universal-injectivity nodes are different statements, and the DAG has no Lemma-3 analogue. Steps: (1) the open projection Spec κ(t')×_{κ(t)} Y_t → Y_t, via lem-sc-scheme-over-field-universally-open, gives density of the changed fibres. (2) The pointwise flat-smooth base-change node shows Y'→T' is smooth; the DAG has no scheme-level smooth base-change leaf. (3) lfp affine charts form a basis; Lemma 3 applied to Spec B gives W = ⋃D(b_i). (4) Smooth fibres are reduced; the Nagata reduced-dense-image and scheme-image-injectivity nodes, with W_p qcqs, give B(p) ↪ ∏B(p)_{b̄_i}; each B_{b_i} and their finite product are A-flat. (5) The localization-tensor identification plus 0AT9 with Σ={1}, N=B and Q=A gives B ↪ ∏B_{b_i}. (6) The sheaf axiom on the chart basis, applied to (Y',V',T'). Edge cases: m=0, an empty fibre, the nonreduced T'=k[ε], a non-qc V. Batch-5: the closure of lem-sfb-scheme-flat-smooth-point-base-change reaches lem-trf-smooth-at-point-fibre-criterion and two related trf smoothness lemmas. These are generic commutative algebra on smoothness, not steps of the trace-formula or Poincaré-duality proofs, so the flag is accepted. The split_report.tool_uses (generic foundations from other units) are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFibrewiseDenseOpenBaseChange",
+  "declaration": "AlgebraicGeometry.Smooth.fibrewise_dense_open_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFibrewiseDenseOpenBaseChange.lean",
+  "statement": "theorem Smooth.fibrewise_dense_open_baseChange {Y T V : Scheme.{u}} (f : Y ⟶ T) [Smooth f] (j : V ⟶ Y) [IsOpenImmersion j] (hdense : ∀ t : T, Dense ((f.fiberι t) ⁻¹' Set.range j)) {T' : Scheme.{u}} (g : T' ⟶ T) : (∀ t' : T', Dense (((pullback.snd f g).fiberι t' ≫ pullback.fst f g) ⁻¹' Set.range j)) ∧ ∀ W : (pullback f g).Opens, Function.Injective ((((Over.pullback g).map (Over.homMk j rfl : Over.mk (j ≫ f) ⟶ Over.mk f)).left.app W))",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76c70ca69",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Single module SmoothFibrewiseDenseOpenBaseChange.lean; only the item lean field changed vs side-live; lean.statement verbatim; one sorry, no defs. [Smooth f], [IsOpenImmersion j], fibre density via f.fiberι preimage of range j (= V_t), arbitrary g, changed-fibre density via (pullback.snd f g).fiberι t' ≫ pullback.fst f g, and all-opens injectivity of the canonical j' = ((Over.pullback g).map (Over.homMk j rfl)).left — matches node clause by clause, no extra qc/irreducibility, single universe = node's category. True without qc of V (BLR §2.5 Lemma 3 + Stacks 0AT9 on affine charts). Docstrings carry the source place, blueprint tag and 6-step proof; no name collision; report has Worker report + Second reading by Q73 (a self-reading). No findings; no recompile per instructions."
+ }
+}

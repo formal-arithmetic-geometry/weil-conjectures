@@ -1,0 +1,224 @@
+{
+ "id": "lem-per-flat-base-change-reflexive-modules",
+ "kind": "statement",
+ "title": "Flat extension preserves finite reflexive modules",
+ "statement": "Let $A\\to B$ be a flat homomorphism [def-weil-pbc-flat-ring-map] of commutative Noetherian integral domains [def-weil-pbc-noetherian-ring], and let $M$ be a finitely generated $A$-module. A module $N$ over a commutative ring $R$ is called reflexive when the evaluation map $N\\to\\operatorname{Hom}_R(\\operatorname{Hom}_R(N,R),R)$ is an isomorphism. If $M$ is reflexive over $A$, then $M\\otimes_A B$ is a finitely generated reflexive $B$-module. No projectivity or local freeness of $M$, and no normality or finite-type assumption on either ring, is required.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), entire statement."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-per-reflexive-saturated-free-embedding] over $A$ to the finite reflexive module $M$. Choose $r\\ge0$ and an exact sequence $0\\to M\\xrightarrow{i}A^r\\xrightarrow{q}N\\to0$ with $N$ torsion free. This uses only that $A$ is a Noetherian domain and $M$ is finite and reflexive, all hypotheses of the item.",
+   "uses": [
+    "lem-per-reflexive-saturated-free-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), proof. First sentence, using Tag 0AV2."
+   }
+  },
+  {
+   "text": "The flat-map definition [def-weil-pbc-flat-ring-map] makes $B$ a flat $A$-module. Apply [lem-weil-pbc-flat-tensor-exact] to obtain an injective $i_B=i\\otimes1$ and $\\ker(q\\otimes1)=\\operatorname{im}i_B$. The last map $q_B=q\\otimes1$ is surjective: express an element of $N\\otimes_A B$ as a finite sum $\\sum_j n_j\\otimes b_j$, lift each $n_j$ to $x_j\\in A^r$ using surjectivity of $q$, and use $\\sum_j x_j\\otimes b_j$. Hence $0\\to M\\otimes_A B\\xrightarrow{i_B}A^r\\otimes_A B\\xrightarrow{q_B}N\\otimes_A B\\to0$ is short exact.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), proof. Middle sentence, flat exactness; surjectivity spelled out on pure tensors."
+   }
+  },
+  {
+   "text": "Choose generators $m_1,\\ldots,m_s$ of $M$. Each $m\\otimes b$, with $m=\\sum_j a_jm_j$, equals $\\sum_j f(a_j)b(m_j\\otimes1)$, where $f:A\\to B$ is the given homomorphism. Thus the finitely many $m_j\\otimes1$ generate $M\\otimes_A B$. The $B$-linear coordinate map $A^r\\otimes_A B\\to B^r$, $(a_i)\\otimes b\\mapsto(f(a_i)b)_i$, has inverse $(b_i)\\mapsto\\sum_i e_i\\otimes b_i$. Their composites are identities by expansion in the coordinate basis and the tensor balancing relation. This proves that the middle module is finite free, also when $r=0$ or $s=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), proof. Finite generation and the finite-free tensor calculation written explicitly."
+   }
+  },
+  {
+   "text": "Apply [lem-per-flat-base-change-torsion-free] to $A\\to B$ and the torsion-free module $N$ from Step 1. Its hypotheses are flatness and that both rings are domains; these are assumed. It follows that $N\\otimes_A B$ is torsion free over $B$, for all nonzero scalars of $B$, not merely the scalars coming from $A$.",
+   "uses": [
+    "lem-per-flat-base-change-torsion-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), proof. Middle sentence, using Tag 0AXM."
+   }
+  },
+  {
+   "text": "Transfer the short exact sequence of Step 2 through the coordinate isomorphism of Step 3. It embeds the finite $B$-module $M\\otimes_A B$ in $B^r$ with torsion-free quotient $N\\otimes_A B$ by Step 4. Since $B$ is a Noetherian domain, the converse implication of [lem-per-reflexive-saturated-free-embedding] proves that $M\\otimes_A B$ is reflexive. Together with the finite generation proved in Step 3 this is every clause of the assertion; no normality, projectivity, local freeness, or finite-type hypothesis has been used.",
+   "uses": [
+    "lem-per-reflexive-saturated-free-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), proof. Last sentence, using Tag 0AV2 over the target ring."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-reflexive-saturated-free-embedding",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-per-flat-base-change-torsion-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0EB9 (more-algebra-lemma-flat-pullback-reflexive), proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite reflexive module over a Noetherian domain remains reflexive after flat base change to another Noetherian domain",
+   "results": "{\"t\": \"2026-10-24T01:30:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite reflexive module over a Noetherian domain remains reflexive after flat base change to another Noetherian domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.left\", \"Module.free_of_flat_of_finrank_eq\", \"Module.Flat.instOfIsDedekindDomainOfIsTorsionFree\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Module.Flat.isBaseChange\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"Module.nonempty_basis_of_flat_of_finrank_eq\"], \"digest\": \"3677ff24718522cd\"}; Flatness stability, finite-projective reflexivity and dual tensor maps are not preservation of reflexivity for arbitrary finite reflexive modules. The tensor-dual equivalences require stronger finite-free hypotheses; no exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a module with a flat algebra commutes with taking its double dual when the module and its dual are finitely presented",
+   "results": "{\"t\": \"2026-10-24T01:32:06Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a module with a flat algebra commutes with taking its double dual when the module and its dual are finitely presented\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.AlgebraTensorModule.dualDistrib\", \"TensorProduct.dualDistribEquiv\", \"transpose_dualTensorHom\", \"map_dualTensorHom\", \"FGModuleCat.FGModuleCatEvaluation_apply'\", \"FGModuleCat.FGModuleCatEvaluation_apply\", \"TensorProduct.AlgebraTensorModule.dualDistrib_apply\", \"dualTensorHomEquiv\"], \"digest\": \"2288dbcc348d5f2a\"}; Flatness stability, finite-projective reflexivity and dual tensor maps are not preservation of reflexivity for arbitrary finite reflexive modules. The tensor-dual equivalences require stronger finite-free hypotheses; no exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat base change preserves reflexive finite modules",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"leansearch\", \"query\": \"flat base change preserves reflexive finite modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.instTensorProduct\", \"Module.Flat.isBaseChange\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"FinitePresentation.of_isBaseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\"], \"digest\": \"81ada47dfe509bb0\"}; Flatness stability, finite-projective reflexivity and dual tensor maps are not preservation of reflexivity for arbitrary finite reflexive modules. The tensor-dual equivalences require stronger finite-free hypotheses; no exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive, TensorProduct",
+   "results": "{\"t\": \"2026-10-24T01:30:26Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive, TensorProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Flatness stability, finite-projective reflexivity and dual tensor maps are not preservation of reflexivity for arbitrary finite reflexive modules. The tensor-dual equivalences require stronger finite-free hypotheses; no exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.IsReflexive",
+   "results": "{\"t\": \"2026-10-24T01:32:04Z\", \"tool\": \"loogle\", \"query\": \"Module.IsReflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.IsReflexive\", \"Module.IsReflexive.to_isTorsionFree\", \"MulOpposite.instModuleIsReflexive\", \"Module.equiv\", \"Module.IsReflexive.of_split\", \"Module.instIsReflexiveDual\", \"Module.Dual.instIsReflecive\", \"Module.evalEquiv\"], \"digest\": \"2897c181297b98fd\"}; Flatness stability, finite-projective reflexivity and dual tensor maps are not preservation of reflexivity for arbitrary finite reflexive modules. The tensor-dual equivalences require stronger finite-free hypotheses; no exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]eflexive.*(baseChange|base.change|[Ff]lat)|([Ff]lat|baseChange).*([Rr]eflexive)",
+   "results": "{\"t\": \"2026-10-24T01:30:25Z\", \"tool\": \"grep\", \"query\": \"[Rr]eflexive.*(baseChange|base.change|[Ff]lat)|([Ff]lat|baseChange).*([Rr]eflexive)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Flatness stability, finite-projective reflexivity and dual tensor maps are not preservation of reflexivity for arbitrary finite reflexive modules. The tensor-dual equivalences require stronger finite-free hypotheses; no exact match or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReflexive|dualDistribEquiv|baseChange",
+   "date": "2026-10-24",
+   "results": "{\"t\": \"2026-10-24T01:38:55Z\", \"tool\": \"grep\", \"query\": \"IsReflexive|dualDistribEquiv|baseChange\", \"sub\": \"LinearAlgebra/Dual\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Lemmas.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\", \"Mathlib/LinearAlgebra/Dual/Defs.lean\"], \"digest\": \"ae05e615d3797610\"}; Read Dual/Defs.lean lines 205-250, Dual/Lemmas.lean lines 251-270, and all of Dual/BaseChange.lean. Reflexive definition and finite-free dual base change do not supply the required general normal-domain/flat-base-change result.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change of a finite reflexive module over Noetherian integral domains is reflexive",
+   "results": "{\"t\": \"2026-10-24T01:58:53Z\", \"tool\": \"leansearch\", \"query\": \"Flat base change of a finite reflexive module over Noetherian integral domains is reflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Module.IsReflexive\", \"Module.FaithfullyFlat.instTensorProduct\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.of_isLocalizedModule\", \"IsBaseChange.toDualBaseChange\"], \"digest\": \"e4a091626b635725\"}; No preservation-of-reflexivity theorem found. Read Dual/BaseChange.lean in full, especially the Free and Module.Finite hypotheses before IsBaseChange.toDualBaseChange; those hypotheses do not cover arbitrary finite reflexive modules. The regular-scalar and flatness-stability results do not establish this assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars along a flat map of Noetherian domains preserves finite reflexive modules",
+   "results": "{\"t\": \"2026-10-24T01:59:01Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars along a flat map of Noetherian domains preserves finite reflexive modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.left\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Module.free_of_flat_of_finrank_eq\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Module.FaithfullyFlat\"], \"digest\": \"acc9f53d3fd8ea6a\"}; No preservation-of-reflexivity theorem found. Read Dual/BaseChange.lean in full, especially the Free and Module.Finite hypotheses before IsBaseChange.toDualBaseChange; those hypotheses do not cover arbitrary finite reflexive modules. The regular-scalar and flatness-stability results do not establish this assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reflexive.*(flat|baseChange)|(flat|baseChange).*reflexive",
+   "results": "{\"t\": \"2026-10-24T01:58:52Z\", \"tool\": \"grep\", \"query\": \"reflexive.*(flat|baseChange)|(flat|baseChange).*reflexive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No preservation-of-reflexivity theorem found. Read Dual/BaseChange.lean in full, especially the Free and Module.Finite hypotheses before IsBaseChange.toDualBaseChange; those hypotheses do not cover arbitrary finite reflexive modules. The regular-scalar and flatness-stability results do not establish this assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toDualBaseChange|Finite|Free",
+   "results": "{\"t\": \"2026-10-24T02:00:35Z\", \"tool\": \"grep\", \"query\": \"toDualBaseChange|Finite|Free\", \"sub\": \"LinearAlgebra/Dual/BaseChange.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"9\", \"10\", \"25\", \"89\", \"90\"], \"digest\": \"4a622bf5b9858509\"}; No preservation-of-reflexivity theorem found. Read Dual/BaseChange.lean in full, especially the Free and Module.Finite hypotheses before IsBaseChange.toDualBaseChange; those hypotheses do not cover arbitrary finite reflexive modules. The regular-scalar and flatness-stability results do not establish this assertion.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-weil-divisor-strict-local-cartier-test",
+  "date": "2026-10-24",
+  "group": "Q63"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. Flat extension of the finite reflexive fractional module in that step.",
+   "via": [
+    "lem-per-weil-divisor-strict-local-cartier-test",
+    "lem-per-very-tame-boundary-quotient-cartier",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-flat-base-change-reflexive-modules",
+  "worker": "stage1",
+  "summary": "Read Tag 0EB9 and its cited Tags 0AV2 and 0AXM, checked the project source for an attachment, and split the source proof using two new statement-only lemmas and the existing flat-tensor-exact Mathlib leaf. Finite generation, tensor surjectivity and the finite-free coordinate isomorphism are explicit elementary calculations. The statement is unchanged.",
+  "blueprint": "Historical regular-pair refinement under the ancestor's duality direction (latest blueprint proof Step 3, 'the duality symmetry of the middle perverse t-structure'); immediate use: lem-per-weil-divisor-strict-local-cartier-test, proof Step 4, 'The flat-reflexivity lemma makes this image finite reflexive'. The five steps supply the algebraic flat-reflexivity input to the strict-local divisor test; the inherited ancestor lineage is historical, not a new geometric proof dependency."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-c2dfd51fd",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c2dfd51fd (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read Stacks more-algebra.tex: 0EB9 (5332-5348, the item's source), 0AV2 (5308-5330, with lemma-sequence-reflexive) and 0AXM (4824-4838); tag labels confirmed in tags/tags. The item statement is unchanged from live and matches 0EB9 (flat map of Noetherian domains, finite module, reflexive meaning the evaluation map to the bidual is an isomorphism). The citer lem-per-weil-divisor-strict-local-cartier-test step 4 uses exactly this statement. The five steps follow the 0EB9 proof. Steps 1 and 5 use the two directions of the new embedding criterion over A and over B; finiteness comes from step 3, so step 5 is not circular. Step 2 uses the flat-tensor-exact Mathlib leaf for injectivity and middle exactness, and proves surjectivity directly on pure tensors. Step 3 (finite generation, A^r⊗B≅B^r) is genuinely elementary. Step 4 uses the new torsion-free lemma with all hypotheses in force, giving torsion-freeness for every nonzero scalar of B. Both new nodes are statement-only, self-contained and exactly the Stacks statements. Small cases: M=0, r=0, R a field, and (x,y)⊂k[x,y] (not reflexive, consistent with the criterion). For the torsion-free lemma: Z→Q; flat maps of domains are injective; k[x,y]→k[y] shows flatness is needed. Neither new node restates a clause of the item. Duplicate scan of snapshot and live statements and tag grep: no duplicates (lem-trf-flat-module-torsionfree-domain and the PID and divisorial-lattice nodes are different statements). The only cited nodes outside the unit are status-mathlib leaves, so no tool_uses are needed. No SGA. Not a re-split delivery."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatBaseChangeReflexive",
+  "declaration": "Module.finite_isReflexive_baseChange",
+  "file": "lean/Sheaf/RingTheory/FlatBaseChangeReflexive.lean",
+  "statement": "theorem finite_isReflexive_baseChange (A : Type u) (B : Type v) (M : Type w) [CommRing A] [CommRing B] [IsDomain A] [IsDomain B] [IsNoetherianRing A] [IsNoetherianRing B] [Algebra A B] [AddCommGroup M] [Module A M] [Module.Finite A M] [Module.IsReflexive A M] (hflat : (algebraMap A B).Flat) : Module.Finite B (B ⊗[A] M) ∧ Module.IsReflexive B (B ⊗[A] M)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f081b88f",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Read Stacks more-algebra 0EB9 (5333-5348), the node, both stmt_dep records (RingHom.Flat via algebraMap, equivalent to Module.Flat by RingHom.flat_algebraMap_iff; IsNoetherianRing), and Mathlib Module.IsReflexive (bijective Dual.eval = canonical evaluation iso). Every hypothesis matches (domains, Noetherian both, flat, Module.Finite, IsReflexive); no extra assumptions; universes u v w independent; conclusion is the conjunction Finite ∧ IsReflexive over B for B ⊗[A] M (factor order canonically swapped, documented). Edge cases: M=0 ok, zero ring excluded as in the source. No existing Mathlib/project result; live node lean null, otherwise identical. lean.statement verbatim in file; single sorry; no definitions; source and blueprint docstrings with 5 proof steps; imports used; report sections present. No findings; no compile needed (no file changed)."
+ }
+}

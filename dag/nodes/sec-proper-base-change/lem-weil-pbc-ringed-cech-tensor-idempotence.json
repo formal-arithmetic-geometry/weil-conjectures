@@ -1,0 +1,138 @@
+{
+ "id": "lem-weil-pbc-ringed-cech-tensor-idempotence",
+ "kind": "statement",
+ "title": "The extended Cech complex annihilates its augmentation cone",
+ "statement": "Let (C,J) be a small site, O a sheaf of commutative rings, r a natural number, and b a Fin r-indexed list of global sections. Let K be the actual ordered tensor extended Cech complex and epsilon its augmentation K -> O[0] [def-weil-pbc-ringed-extended-cech]. The ordinary total tensor K tensor Cone(epsilon), using the ordinary total tensor of cochain complexes, is acyclic. No derived-category existence hypothesis or bound on a test object is involved; the empty list is included.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099B, proof of lemma-derived-completion: contraction after localization and the finite positive Cech filtration"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof": [
+  {
+   "text": "1. The ring complex and each two-term localization factor are K-flat: their terms are zero, the ring unit, or a flat localization, and they are bounded above. Ordered tensor induction gives K-flatness of the extended Cech complex.",
+   "uses": [
+    "def-weil-pbc-ringed-extended-cech",
+    "lem-weil-pbc-ringed-localization-complex-models",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "2. Induct on the length of the ordered tensor. For the empty list the augmentation is the identity. For a head factor L and tail K, the tensor shuffle identifies (L tensor K) tensor (L tensor K) with (L tensor L) tensor (K tensor K), and identifies the tensor augmentation with the product of the head and tail tensor augmentations. The head map is a quasi-isomorphism by the singleton contraction. The tail map is a quasi-isomorphism by induction. Tensoring these maps with the K-flat opposite factors preserves quasi-isomorphisms; composing and then applying the unit isomorphism proves the successor case.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-factor-tensor-augmentation",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "3. Apply the tensor/mapping-cone comparison to identify K tensor Cone(epsilon) with Cone(id_K tensor epsilon). The map proved a quasi-isomorphism in step 2 has acyclic cone, which proves the stated acyclicity.",
+   "uses": [
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099B, proof of lemma-derived-completion: the one-generator localization contraction",
+  "note": "Induction on the concrete ordered tensor replaces the arbitrary finite positive-Cech filtration. The singleton localization contraction remains a separate, strictly smaller theorem; tensor shuffle, K-flatness, successor assembly and cone comparison are formalized."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The augmented extended Cech complex is tensor idempotent and RHom Cech completion has invertible unit on completed objects",
+   "results": "8 generic internal-Hom and condensed-category results; no extended localization Cech contraction theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"unit\"",
+   "results": "12 generic adjunction/unit results; none computes this augmented localization tensor complex.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "Cech.*idempot|completion.*idempot|tensor.*augmentation",
+   "results": "One unrelated Dold-Kan result. Local repository searches found the existing K-flat currying and general tensor/mapping-cone comparison, but no proof of this finite localization contraction.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor extended Cech complex with the cone of its augmentation is acyclic",
+   "results": "8 generic homotopy/acyclicity results; no concrete extended Cech tensor-augmentation calculation.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechCompletionUnitIdempotence",
+  "date": "2026-10-25",
+  "group": "K3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+   "place": "Step 1: acyclicity of the tensor of the extended Cech complex with its augmentation cone",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-comparison-existence",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedCechTensorIdempotence",
+  "file": "lean/Sheaf/CategoryTheory/RingedCechTensorIdempotence.lean",
+  "declaration": "CategoryTheory.ringed_cech_tensor_augmentation_cone_acyclic",
+  "statement": "theorem ringed_cech_tensor_augmentation_cone_acyclic (O : Sheaf J CommRingCat.{u})\n    (r : ℕ) (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) :\n    letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=\n      SheafOfModules.isGrothendieckAbelian _\n    letI : CategoryTheory.Limits.HasColimitsOfSize.{0, 0} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=\n      CategoryTheory.Limits.hasColimitsOfSizeShrink.{0, 0, u, u} _\n    letI := SheafOfModules.monoidalCategory O\n    letI := SheafOfModules.symmetricCategory O\n    letI := (SheafOfModules.tensorClosed O).1.some\n    letI := (SheafOfModules.tensorClosed O).2.1.some\n    letI : ∀ K L : ringedSiteComplex O, HomologicalComplex.HasMapBifunctor K L\n        (MonoidalCategory.curriedTensor (SheafOfModules.{u}\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))) (.up ℤ) :=\n      fun _ _ _ ↦ CategoryTheory.Limits.HasColimitsOfShape.has_colimit _\n    (HomologicalComplex.mapBifunctor (ringedExtendedCech O r b).1\n      (CochainComplex.mappingCone (ringedExtendedCech O r b).2)\n      (MonoidalCategory.curriedTensor (SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))) (.up ℤ)).Acyclic",
+  "branch": "sheaf-dag",
+  "by": "K3",
+  "date": "2026-10-25"
+ },
+ "proof_deps": [
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-weil-pbc-ringed-localization-complex-models",
+  "lem-weil-pbc-ringed-localization-factor-tensor-augmentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261025T095545-L-3442664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K3",
+  "result": "pass",
+  "landing": "20261025T202359-L-2712774",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

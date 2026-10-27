@@ -1,0 +1,114 @@
+{
+ "id": "lem-asd-presented-projective-line-raw-trace-adjustment",
+ "kind": "statement",
+ "title": "Raw projective-line trace adjustment",
+ "statement": "For a presentation e:X ≅ P1_Y of the proper map q, the shifted Tate coefficient on X admits an automorphism comparing the two explicit transported trace composites: one uses shifted-line pullback inverse and geometric push-pull; the other uses the adjunction-unit coefficient identification in the presented trace. This is an equality of explicit composites and asserts no adjunction. Interfaces: [def-asd-presented-projective-line-trace-model] and [def-sf-p1-integral-transport-data].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "stmt_deps": [
+  "def-asd-presented-projective-line-trace-model",
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply module-valued trace adjustment with B the shifted Tate line on X, L the shifted Tate line on P1_Y, both coefficient comparisons the specified shifted-line pullback, z the geometric push-pull comparison, trace the arbitrary-base splitting trace and final map the constant-complex unit comparison. Substitution gives the displayed equation without using the supported diagonal class.",
+   "uses": [
+    "lem-asd-module-trace-adjustment",
+    "def-asd-presented-projective-line-trace-model",
+    "def-sf-p1-integral-transport-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-module-trace-adjustment",
+  "def-asd-presented-projective-line-trace-model",
+  "def-sf-p1-integral-transport-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Under an equivalence of categories, lift the discrepancy between two coefficient isomorphisms to an automorphism and compare their transported trace composites",
+   "results": "Dold-Kan compatibility isomorphisms, algebraic trace invariance, graded-object comparison transitivity, and linear homCongr. No derived trace-adjustment statement.",
+   "date": "2026-10-26",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preimageIso",
+   "results": "Functor.preimageIso and its mapIso, hom, inv lemmas.",
+   "date": "2026-10-26",
+   "verdict": "Use the existing fully-faithful preimage construction to construct the automorphism."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|rightDerivedLowerStarCompOfEq",
+   "results": "Twenty-five Mathlib preimageIso uses in scheme restrictions, sheaves, Dold-Kan, and topology; no geometric derived-composition statement. The source library provides rightDerivedLowerStarCompOfEq.",
+   "date": "2026-10-26",
+   "verdict": "Generic equivalence API and the source composition comparison are sufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare the two explicit coefficient identifications in a projective line trace presentation by an automorphism",
+   "results": "Projectivization.map.congr_simp; WeierstrassCurve.Projective.Point.toAffine_smul; WeierstrassCurve.Affine.map_linePolynomial; WeierstrassCurve.Projective.Point.toAffine_of_equiv; Module.Basis.traceDual_repr_apply; Projectivization.map; WeierstrassCurve.Projective.Equation.map; Projectivization.map_id",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Both diagonal triangle calculations and the actual inverse-projection counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProjectiveLineTraceRawAdjustment",
+  "file": "lean/Sheaf/SixFunctors/ProjectiveLineTraceRawAdjustment.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_presentedFiniteP1RawAdjustment",
+  "statement": "theorem exists_presentedFiniteP1RawAdjustment\n    (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)\n    (t : OrdinaryFiniteTwistTransport A N hA)\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    (e : X ≅ ProjectiveLine Y) (w : e.hom ≫ (ProjectiveLine Y ↘ Y) = q)\n    (hY : IsUnit (N : Γ(Y, ⊤))) (d : ArbitraryBaseFiniteP1Splitting A N hA t Y hY) :\n    let B := (ordinaryFiniteLine A N hA X)⟦(2 : ℤ)⟧\n    let L := (ordinaryFiniteLine A N hA (ProjectiveLine Y))⟦(2 : ℤ)⟧\n    let g := (ProjectiveLine Y ↘ Y)\n    let bL := ordinaryFiniteShiftedLinePullback A N hA t e.hom\n      (finiteP1_unitOnPullback N g hY)\n    let v := bL\n    let z := SfP1Transport.pushPull A e\n    let τ := d.trace\n    let j := (SfP1Transport.constantUnit A Y).hom\n    ∃ a : B ≅ B,\n      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q).map a.hom ≫\n        ((rightDerivedLowerShriekIsoRightDerivedLowerStar\n            (ModuleCat.{u + 1} A) q).hom.app B ≫\n          (ordinaryFinitePushforward A q).map v.inv ≫\n          (rightDerivedLowerStarCompOfEq (ModuleCat.{u + 1} A) e.hom g q w).inv.app\n            ((ordinaryFinitePullback A e.hom).obj L) ≫\n          (ordinaryFinitePushforward A g).map (z.hom.app L) ≫ τ ≫ j) =\n      (rightDerivedLowerShriekIsoRightDerivedLowerStar\n          (ModuleCat.{u + 1} A) q).hom.app B ≫\n        ((rightDerivedLowerStarCongr (ModuleCat.{u + 1} A) w).inv.app B ≫\n          (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) e.hom g).inv.app B ≫\n          (ordinaryFinitePushforward A g).map\n            (asIso ((derivedUpperStarLowerStarAdjunction\n                (ModuleCat.{u + 1} A) e.hom).unit.app L) ≪≫\n              (ordinaryFinitePushforward A e.hom).mapIso bL).inv ≫ τ) ≫ j",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-space-pushout-compatible-etale-charts",
+ "kind": "statement",
+ "title": "Compatible etale scheme charts for infinitesimal pushouts",
+ "statement": "Work with algebraic spaces over a scheme $B$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention], and their sheaf fibre products [lem-trf-space-fibre-products-etale-covers]. A thickening is a representable closed immersion inducing a homeomorphism on underlying spaces; closed immersions are tested after base change to schemes [def-weil-closed-immersion]. The topology of an algebraic space is the quotient topology from a representable surjective etale scheme atlas. An affine map is representable and its scheme base changes have affine inverse images of affine opens. Let $T\\to T^+$ be a thickening of schemes and $T\\to S$ an affine scheme morphism over $B$. Let $P=S\\amalg_T T^+$, let $X/S$, $Y/T^+$ be algebraic spaces and fix $\\phi:X\\times_S T\\simeq Y\\times_{T^+}T$. Write $U=X\\times_S T$ and $Z=X\\amalg_U Y$ for the algebraic-space pushout [lem-sfb-space-affine-thickening-pushout]. For any scheme $X_1$ and representable surjective etale map $X_1\\to X$, there exist a scheme $Y_1$, a representable surjective etale map $Y_1\\to Y$, and an isomorphism $$X_1\\times_S T\\simeq Y_1\\times_{T^+}T$$ over $U$, compatible with $\\phi$. For any such compatible pair of scheme covers, set $U_1=X_1\\times_S T$ and form the scheme pushout $Z_1=X_1\\amalg_{U_1}Y_1$. The induced map $Z_1\\to Z$ is representable surjective etale, and the two squares with horizontal maps $X_1\\to Z_1$, $X\\to Z$ and $Y_1\\to Z_1$, $Y\\to Z$ and vertical cover maps are cartesian. No flatness or local finite presentation is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-pushouts.tex",
+  "place": "Tag 07W0, proof of lemma-equivalence-categories-spaces-over-pushout, construction of the compatible scheme charts and Tag 07W2, equation-cube-over; the construction in Tag 07VX, lemma-pushout-along-thickening. Etale lifting across the thickening is spaces-more-morphisms.tex Tag 05ZS, lemma-thickening-equivalence."
+ },
+ "stmt_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-affine-thickening-pushout",
+  "def-trf-scheme-algebraic-space",
+  "def-sfb-space-sheaf-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The map $U\\to Y$ is the base change of $T\\hookrightarrow T^+$, hence a thickening. On every scheme base change to $X$, the map $U\\to X$ is a scheme base change of the affine map $T\\to S$, so the affine-morphism permanence lemma makes it affine. Thus $U_1=X_1\\times_XU=X_1\\times_ST$ is a scheme and $U_1\\to U$ is representable surjective etale. Apply the equivalence on etale scheme objects across $U\\hookrightarrow Y$ to obtain a scheme $Y_1$ etale over $Y$ and the specified isomorphism $Y_1\\times_YU\\cong U_1$. Its composite with $U\\cong Y\\times_{T^+}T$ gives the required compatibility with $\\phi$. The map $U_1\\hookrightarrow Y_1$ is a thickening. Both horizontal maps in its square over $U\\hookrightarrow Y$ are homeomorphisms, and $U_1\\to U$ is surjective, so $Y_1\\to Y$ is surjective too. This proves existence of a compatible pair.",
+   "uses": [
+    "lem-sfb-space-thickening-base-change",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex; literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tags 05ZS (lemma-thickening-equivalence), 09ZX (lemma-base-change-thickening); Tag 07W0, first chart construction."
+   }
+  },
+  {
+   "text": "Now fix any compatible pair $(X_1,Y_1)$ of the statement. Applied to $U\\hookrightarrow Y$ and the affine map $U\\to X$, the geometric-pushout lemma says that $X\\hookrightarrow Z$ is a thickening. Apply the etale scheme-object equivalence to this thickening and the given $X_1\\to X$: obtain a scheme $E$ and a representable etale map $e:E\\to Z$ with a fixed isomorphism $E\\times_ZX\\cong X_1$ over $X$. The projection $X_1\\to E$ is a thickening by base change. The two horizontal maps $X_1\\to E$ and $X\\to Z$ are homeomorphisms and $X_1\\to X$ is surjective, so $e$ is surjective.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-space-thickening-base-change",
+    "lem-sfb-space-thickening-etale-scheme-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex; literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 07VX, lemma-pushout-along-thickening; Tag 05ZS, lemma-thickening-equivalence; Tag 09ZX."
+   }
+  },
+  {
+   "text": "Set $E_Y=E\\times_ZY$. The geometric-pushout lemma identifies $Y$ with $Z\\times_PT^+$, where $P$ is the scheme pushout $S\\amalg_TT^+$ and $Z\\to P$ is the induced map. Hence $E_Y\\cong E\\times_Z(Z\\times_PT^+)\\cong E\\times_PT^+$ is a fibre product of schemes, so $E_Y$ is a scheme; and $E_Y\\to Y$ is representable etale as a base change of the representable etale map $E\\to Z$. (The scheme property does not follow from representability of $E\\to Z$ alone, since $Y$ is only an algebraic space.) Over $U$ its restriction is canonically $E\\times_ZU\\cong(E\\times_ZX)\\times_XU\\cong U_1$, by the universal properties of the fibre products. The given compatibility identifies $Y_1\\times_YU$ with this same $U_1$. Full faithfulness of the etale scheme-object equivalence for $U\\hookrightarrow Y$ therefore lifts this isomorphism uniquely to $E_Y\\cong Y_1$: lift the map and its inverse, whose composites are identities because restriction is faithful. These identifications respect the maps from $U_1$ by their construction.",
+   "uses": [
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-sfb-space-thickening-etale-scheme-equivalence",
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex; literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 05ZS, lemma-thickening-equivalence, full faithfulness; Tag 07W0 chart identifications; Tag 07VX/07W0 identification of Y with the restriction of the pushout over T^+."
+   }
+  },
+  {
+   "text": "Apply etale base change of a pushout to $Z=X\\amalg_UY$ and $E\\to Z$. Step 3 identifies its three restricted objects with $X_1,U_1,Y_1$, so $E$ is their pushout in algebraic spaces. The scheme pushout $Z_1=X_1\\amalg_{U_1}Y_1$ exists and is also their algebraic-space pushout: the thickening $U_1\\hookrightarrow Y_1$ and affine map $U_1\\to X_1$ satisfy the geometric-pushout lemma. The universal properties give inverse maps $Z_1\\rightleftarrows E$ fixing both pieces; each composite is the identity since it agrees with it on both pieces. The induced map $Z_1\\to Z$ is therefore $e$ under this isomorphism, since both maps agree on $X_1,Y_1$. It is representable surjective etale. Finally $E\\times_ZX=X_1$ by step 2 and $E\\times_ZY\\cong Y_1$ by step 3, proving precisely the two asserted cartesian squares for this arbitrary compatible pair.",
+   "uses": [
+    "lem-sfb-space-pushout-etale-base-change",
+    "lem-sfb-space-affine-thickening-pushout",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-pushouts.tex; literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 07W3, final flat counit assertion (etale specialization); Tag 07SY, lemma-pushout-along-thickening-schemes; equation-cube-over (07W2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-thickening-base-change",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-thickening-etale-scheme-equivalence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sfb-space-affine-thickening-pushout",
+  "lem-sfb-space-pushout-etale-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-pushouts.tex; literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tags 07W0/07W2 compatible charts, with an alternative assembly by 05ZS lifting along X -> Z and the etale specialization of the flat counit in 07W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible etale scheme atlases of two algebraic spaces glue to an etale atlas of their pushout along a thickening",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.gluedScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"AlgebraicGeometry.Scheme.GlueData → AlgebraicGeometry.Scheme\", \"doc\": \"The scheme constructed by gluing the data in $ D $, defined as the colimit of the corresponding locally ringed space gluing diagram. This involves converting scheme gluing data to locally ringed space\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/Representability\", \"type\": \"{F : CategoryTheory.Sheaf AlgebraicGeometry.Scheme.zariskiTopology (Type u)} →\\n  {ι : Type u} →\\n    {X : ι → AlgebraicGeometry.Scheme} →\\n      {f : (i : ι) → CategoryTheory.yoneda.obj (X i) ⟶ F.val} →\\n        (∀ (i : ι), AlgebraicGeometry.IsOpenImmersion.presheaf (f i)) → AlgebraicGeometry.Scheme.Gl\", \"doc\": \"The structure defines gluing data for schemes using open immersions in the Zariski topology. It consists of an index type $\\\\iota$, a family of schemes $X_i$, and for each pair of indices $i,j$, a sche\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern the scheme etale category, open gluing, or etale composition, not compatible infinitesimal pushout atlases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an etale covering across an infinitesimal closed immersion and form compatible scheme pushout charts",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern the scheme etale category, open gluing, or etale composition, not compatible infinitesimal pushout atlases"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"pushout\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern the scheme etale category, open gluing, or etale composition, not compatible infinitesimal pushout atlases"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*pushout|pushout.*etale|Etale.*pushout|pushout.*Etale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern the scheme etale category, open gluing, or etale composition, not compatible infinitesimal pushout atlases"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale charts for algebraic space infinitesimal pushouts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"For commutative rings $ R $ and $ A $ with an $ R $-algebra structure, if $ A $ is both formally unramified over $ R $ and formally smooth over $ R $, then $ A $ is formally étale over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_unramified_and_smooth\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"For any commutative ring $ R $ and an $ R $-algebra $ A $, $ A $ is formally étale over $ R $ if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"RingHom.FormallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R → S $ between commutative rings is formally étale if the induced algebra structure on $ S $ over $ R $ satisfies the infinitesimal lifting property characterizing étale mor\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern the scheme etale category, open gluing, or etale composition, not compatible infinitesimal pushout atlases"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible etale atlases glue to a scheme etale cover of an infinitesimal pushout of algebraic spaces",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: no compatible etale algebraic-space pushout atlas theorem; hits concern scheme etale sites, open gluing or ring pushouts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift an arbitrary etale scheme atlas across a thickening and recover the cartesian scheme pushout chart",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.Scheme.Etale, StandardEtalePair.homEquiv_symm_apply, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, StandardEtalePair.lift, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-23",
+   "verdict": "no match: no compatible etale algebraic-space pushout atlas theorem; hits concern scheme etale sites, open gluing or ring pushouts"
+  },
+  {
+   "tool": "grep",
+   "query": "pushout.*etale|etale.*pushout|thickening.*pushout",
+   "results": "Actual search: 0 hits; . Subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: no compatible etale algebraic-space pushout atlas theorem; hits concern scheme etale sites, open gluing or ring pushouts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushout\", \"Etale\"",
+   "results": "Actual search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: no compatible etale algebraic-space pushout atlas theorem; hits concern scheme etale sites, open gluing or ring pushouts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible etale scheme covers of two algebraic spaces induce a cartesian etale cover of their infinitesimal pushout",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Pullback.openCoverOfLeftRight, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase, AlgebraicGeometry.Scheme.Pullback.diagonalCover_map, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.Cover.ι_fromGlued, AlgebraicGeometry.Scheme.Cover.sigma",
+   "date": "2026-10-23",
+   "verdict": "no match: no compatible etale algebraic-space pushout atlas theorem; hits concern scheme etale sites, open gluing or ring pushouts"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-lfp-space-pushout-gluing",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D56 (lemma-curves-RS-star). Underlying flat locally finitely presented gluing used by Tag 0D56 through Tag 0D1J, first paragraph of its proof; Tag 07W3. Supporting input: Etale scheme charts in Tag 07W3, proof of (1)-(5) and flat counit, via equation-cube-over (07W2).",
+   "via": [
+    "lem-sfb-flat-lfp-space-pushout-gluing",
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-pushout-compatible-etale-charts",
+  "worker": "stage1",
+  "summary": "Read Stacks 07VX, 07W0, 07W2, 07W3 and 05ZS. Constructed compatible covers using invariance of etale scheme objects, then lifted X_1 over the thickening X -> Z. Full faithfulness identifies its restriction over Y with any prescribed compatible Y_1; etale base change of the pushout identifies the lift with Z_1. Two new general statement-only inputs; existing geometric-pushout and thickening-base-change nodes reused. Normalized doubled TeX escapes, without changing the mathematical statement.",
+  "blueprint": "Carries the compatible scheme-chart input in the inherited det-thm-sf-ctf-stability-direct-images proof (3) ancestry, at Stacks 07W0/07W2 used in 07W3. Current latest blueprint direct-images proof (3) is the direct-image preservation step; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre products and preservation of representable surjective etale covers; no local unit node replaces this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-a250a73ba",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-a250a73ba (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, and Stacks 05ZS (spaces-more-morphisms l.1817), 07VX, 07W0/07W2 and 07W3 (spaces-pushouts l.859/1077/1158/1254). Statement unchanged vs live, where the item is still unsplit; no id collision, no re-split note. Steps 1, 2 and 4 are correct: U->Y is a thickening by base change; U->X is affine by permanence; X->Z is a thickening by the geometric-pushout node; the lift E->Z is surjective by the homeomorphisms; the new counit node plus the scheme-pushout clause give E ≅ Z_1 fixing both pieces, and the two squares are cartesian. Fault (C4/E1): step 3 said E_Y=E×_Z Y is a scheme 'since E->Z is representable étale' and cited the fibre-products node, which gives this only when the base is a scheme; Y is only a space (counterexample Z=E gives E×_Z Y=Y). The claim is true here: lem-sfb-space-affine-thickening-pushout gives Y≅Z×_P T^+ with P the scheme pushout, so E_Y≅E×_P T^+ is a scheme. FIX: step 3 text, uses (+lem-sfb-space-affine-thickening-pushout) and source place corrected in fixes/dag/nodes/sec-six-functors-basics/. New nodes: the thickening equivalence is exactly 05ZS (no duplicate: the existing nodes are first-order or scheme-only); the pushout base-change node is the 07W3 final counit for étale (hence flat) E, true in the 07W0 generality (no duplicate: the existing scheme and flat-lfp versions are narrower). Small cases checked: identity thickening, empty spaces, dual numbers, non-surjective E. Not circular and not a restatement of the item. Batch-5: def-trf-algebraic-space is a definition and lem-trf-space-fibre-products-etale-covers is generic 02X2 fibre products; neither is a trace-formula or Poincaré-duality step, so accepted. The proposed tool_use of the fibre-products node is accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpacePushoutCompatibleEtaleCharts",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_pushout_compatible_etale_charts",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.exists_pushout_compatible_etale_charts",
+   "AlgebraicGeometry.AlgebraicSpace.compatible_etale_charts_pushout"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpacePushoutCompatibleEtaleCharts.lean",
+  "statement": "theorem exists_pushout_compatible_etale_charts {B : Scheme.{u}} (T T' S : Over B) (i : T ⟶ T') (a : T ⟶ S) [IsClosedImmersion i.left] (hi : IsHomeomorph i.left.base) [IsAffineHom a.left] (X Y : AlgebraicSpace B) (x : X ⟶ schemeSpace S) (y : Y ⟶ schemeSpace T') (φ : enlargedFibreProduct x (ObjectProperty.homMk (X := schemeSpace T) ((Scheme.fppfTopology.over B).yoneda.map a)) ≅ enlargedFibreProduct y (ObjectProperty.homMk (X := schemeSpace T) ((Scheme.fppfTopology.over B).yoneda.map i))) (hφ : φ.hom.hom ≫ Limits.pullback.snd y.hom ((Scheme.fppfTopology.over B).yoneda.map i) = Limits.pullback.snd x.hom ((Scheme.fppfTopology.over B).yoneda.map a)) (X₁ : Over B) (c : schemeSpace X₁ ⟶ X) (hc : IsEtale c.hom.hom) (hcs : IsSurjective c.hom.hom) : ∃ (Y₁ U₁ : Over B) (d : schemeSpace Y₁ ⟶ Y) (r : U₁ ⟶ X₁) (s : U₁ ⟶ Y₁) (t : schemeSpace U₁ ⟶ enlargedFibreProduct x (ObjectProperty.homMk (X := schemeSpace T) ((Scheme.fppfTopology.over B).yoneda.map a))), IsEtale d.hom.hom ∧ IsSurjective d.hom.hom ∧ IsPullback (ObjectProperty.homMk ((Scheme.fppfTopology.over B).yoneda.map r)) t c (enlargedFibreProductFst x (ObjectProperty.homMk (X := schemeSpace T) ((Scheme.fppfTopology.over B).yoneda.map a))) ∧ IsPullback (ObjectProperty.homMk ((Scheme.fppfTopology.over B).yoneda.map s)) (t ≫ φ.hom) d (enlargedFibreProductFst y (ObjectProperty.homMk (X := schemeSpace T) ((Scheme.fppfTopology.over B).yoneda.map i)))",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The two theorem statements jointly render existence of compatible scheme charts and the atlas and cartesian-square properties for every compatible pair. Two pullback squares sharing t encode the chart overlap isomorphism over U, using exactly the supplied phi. Scheme pushout existence and the property of every scheme pushout are both stated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3b94d0f5",
+  "group": "NV",
+  "result": "pass",
+  "note": "Read node, module, report, deps SpaceAffineThickeningPushout (3 thms), AlgebraicSpace IsEtale/IsSurjective/IsRepresentableWith, EnlargedEtaleRingedSite schemeSpace/enlargedFibreProduct(+Fst), Stacks 07W0/07W2. Thickening = IsClosedImmersion + IsHomeomorph base, affine = IsAffineHom, φ over T via hφ, hz pushout span = dep recovery convention. Thm1: two IsPullback squares sharing t (second with t≫φ.hom) = iso X₁×_S T ≅ Y₁×_{T'}T over U compatible with φ; d étale surjective. Thm2: every compatible pair; scheme pushout exists; for every scheme pushout ∃ e (unique via space-pushout clause) étale surjective with both chart squares cartesian. Edge cases empty/identity/non-flat admitted; no extra hypotheses or universe restriction. Node statement unchanged vs live; added stmt_deps are existing owners on base; lean.statement verbatim; sorry-only, no defs, docstrings with source/blueprint/steps 1-4; report sections present; no duplicate. Not recompiled (no change)."
+ }
+}

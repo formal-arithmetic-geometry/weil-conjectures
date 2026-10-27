@@ -1,0 +1,178 @@
+{
+ "id": "lem-sfb-chevalley-character-cancellation",
+ "kind": "statement",
+ "title": "Chevalley line stabilizers with cancellation of their character",
+ "statement": "Let $k$ be a field [def-weil-field], $G$ an affine group scheme [def-sc-group-scheme, def-pc-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and $H\\subseteq G$ a closed subgroup scheme [def-sc-group-scheme-subgroup]. A finite-dimensional rational representation means a finite-dimensional $k$-vector space $V$ [def-weil-finite-dimensional-subspace] with a group-scheme homomorphism $G\\to\\mathrm{GL}(V)$; after a choice of basis, $\\mathrm{GL}(V)=\\mathrm{GL}_{\\dim V,k}$ [def-sc-general-linear-group]. Put $V_A=V\\otimes_k A$ for a commutative $k$-algebra $A$. A character of $H$ is a group-scheme homomorphism $\\chi:H\\to\\mathbf G_m$ [def-sc-gm-ga]. Say that $\\chi$ occurs if there are such a representation $V$ and a nonzero subspace $U\\subseteq V$ with $h u=\\chi_A(h)u$ for every $A$, $h\\in H(A)$ and $u\\in U_A$. Assume that whenever $\\chi$ occurs, $\\chi^{-m}$ occurs for some integer $m>0$, where $\\chi^{-m}_A(h)=\\chi_A(h)^{-m}$. Then there are a finite-dimensional rational representation $V$ of $G$ and a one-dimensional subspace $L\\subseteq V$ such that $H$ fixes $L$ pointwise and is its scheme-theoretic stabilizer. Explicitly, for every commutative $k$-algebra $A$,\n$$H(A)=\\{g\\in G(A):gL_A=L_A\\},\\qquad h|_{L_A}=\\mathrm{id}_{L_A}\\quad(h\\in H(A)).$$ Here $\\mathrm{GL}(V)(A)$ means the $A$-linear automorphisms of $V\\otimes_k A$; if $V=0$, this is the trivial group scheme $\\operatorname{Spec}k$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 4.27 and Corollary 4.29, printed pp.94--95; Remark 4.30, p.96, specifies the stabilizer on all algebras. The inverse character in Corollary 4.29 is written multiplicatively here."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sc-general-linear-group",
+  "def-weil-finite-dimensional-subspace",
+  "def-sc-gm-ga"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-chevalley-scheme-line-stabilizer] to obtain $(E,D)$ with stabilizer $H$ on every algebra. Choose $0\\ne e\\in D$. Restriction of the representation to $H$ acts on $D_A=Ae$ by a unit $\\chi_A(h)$. This is a character $H\\to\\mathbf G_m$ [def-sc-gm-ga]: in a basis beginning with $e$, its coordinate is the $(1,1)$ matrix coefficient restricted to $H$, its inverse is the same coefficient evaluated at $h^{-1}$, and matrix multiplication on $D$ gives multiplicativity. Thus $\\chi$ occurs. The hypothesis supplies $m>0$, a rational representation $F$, and a nonzero scalar-action subspace $U\\subseteq F$ of character $\\chi^{-m}$. Choose $0\\ne f\\in U$ and put $B=kf$. Then $H$ acts on $B_A$ by $\\chi_A^{-m}$.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer",
+    "def-sc-gm-ga"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 4.29, printed p.95, using Theorem 4.27 and Proposition 4.6; the scalar-action subspace is reduced to a line and the tensor-stabilizer calculation is written explicitly."
+   }
+  },
+  {
+   "text": "Set $V=E^{\\otimes m}\\otimes_k F$ and $L=k(e^{\\otimes m}\\otimes f)$. Tensor bases show that $V$ is finite-dimensional and $L$ is one-dimensional. Give $V$ the diagonal action $\\rho_E(g)^{\\otimes m}\\otimes\\rho_F(g)$. This is rational: in tensor bases its matrix entries are products of the entries of the original representation matrices; replacing $g$ by $g^{-1}$ supplies its inverse, and multiplication is respected on pure tensors. For every $A$ and $h\\in H(A)$, the generator of $L_A$ is multiplied by $\\chi_A(h)^m\\chi_A(h)^{-m}=1$. Thus $H(A)$ fixes $L_A$ pointwise and is contained in its stabilizer.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 4.29, printed p.95, using Theorem 4.27 and Proposition 4.6; the scalar-action subspace is reduced to a line and the tensor-stabilizer calculation is written explicitly."
+   }
+  },
+  {
+   "text": "Conversely let $A$ be any nonzero commutative $k$-algebra and $g\\in G(A)$ stabilize $L_A$. Write $x=\\rho_E(g)e$ and $y=\\rho_F(g)f$. There is a unit $c\\in A^\\times$ with $x^{\\otimes m}\\otimes y=c e^{\\otimes m}\\otimes f$, since restriction to $L_A$ is an automorphism of a free rank-one module. Extend $e,f$ to bases. Their coordinate functionals, composed with the inverse representation matrices, give $A$-linear functionals $\\lambda,\\mu$ with $\\lambda(x)=\\mu(y)=1$. Apply $\\mathrm{id}\\otimes\\lambda^{\\otimes(m-1)}\\otimes\\mu$ to the displayed tensor equality. It gives $x=a e$, where $a=c\\lambda(e)^{m-1}\\mu(f)$. Applying $\\lambda$ yields $1=a\\lambda(e)$, so $a$ is a unit. Therefore $gD_A=D_A$ and the equality in [lem-sfb-chevalley-scheme-line-stabilizer] gives $g\\in H(A)$. For the zero algebra all group-of-points sets are singletons, so the equality holds there too. All actions and subspaces are base extensions of the specified $k$-objects; hence these equalities hold naturally on every algebra and give exactly the claimed scheme-theoretic stabilizer.",
+   "uses": [
+    "lem-sfb-chevalley-scheme-line-stabilizer"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Corollary 4.29, printed p.95, using Theorem 4.27 and Proposition 4.6; the scalar-action subspace is reduced to a line and the tensor-stabilizer calculation is written explicitly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-chevalley-scheme-line-stabilizer",
+  "def-sc-gm-ga"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Corollary 4.29, printed p.95, using Theorem 4.27 and Proposition 4.6; the scalar-action subspace is reduced to a line and the tensor-stabilizer calculation is written explicitly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An affine algebraic subgroup is the stabilizer of a line fixed pointwise if occurring subgroup characters have negative positive multiples occurring in representations",
+   "results": "{\"t\": \"2026-10-23T13:22:53Z\", \"tool\": \"leanfinder\", \"query\": \"An affine algebraic subgroup is the stabilizer of a line fixed pointwise if occurring subgroup characters have negative positive multiples occurring in representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FixedPoints.subgroup\", \"MulAction.IwasawaStructure.T\", \"AddSubgroup.inertia\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"Representation.mem_invariants_iff_of_forall_mem_zpowers\", \"SubMulAction.ofFixingSubgroup_of_singleton\", \"SubMulAction.ofStabilizer\", \"SubMulAction.mem_ofFixingSubgroup_insert_iff\"], \"digest\": \"4722ba986cca59bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-action stabilizers and constructible-image Chevalley do not provide a rational group-scheme representation with the specified scheme-theoretic line stabilizer and trivial stabilizer character"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Chevalley theorem subgroup scheme stabilizer line trivial character tensor exterior power",
+   "results": "{\"t\": \"2026-10-23T13:22:54Z\", \"tool\": \"leansearch\", \"query\": \"Chevalley theorem subgroup scheme stabilizer line trivial character tensor exterior power\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ChevalleyThm.chevalley_mvPolynomialC\", \"IsCancelSMul.stabilizer_eq_bot\", \"MulAction.stabilizer_subgroup\", \"AddAction.stabilizer\", \"IsCancelVAdd.stabilizer_eq_bot\", \"MulAction.stabilizer_image_coe_quotient\", \"Ideal.Quotient.stabilizerHom.congr_simp\", \"Representation.invariants_eq_top\"], \"digest\": \"29b87870ce22f40c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-action stabilizers and constructible-image Chevalley do not provide a rational group-scheme representation with the specified scheme-theoretic line stabilizer and trivial stabilizer character"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stabilizer\", \"Submodule\"",
+   "results": "{\"t\": \"2026-10-23T13:22:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"stabilizer\\\", \\\"Submodule\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Submodule.stabilizer_coe\", \"Submodule.mem_stabilizer_submodule_iff_map_eq\", \"LinearEquiv.mem_stabilizer_fixedSubmodule\", \"LinearEquiv.mem_stabilizer_submodule_of_le_fixedSubmodule\"], \"digest\": \"1fd907e0769449c2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-action stabilizers and constructible-image Chevalley do not provide a rational group-scheme representation with the specified scheme-theoretic line stabilizer and trivial stabilizer character"
+  },
+  {
+   "tool": "grep",
+   "query": "Chevalley|stabilizer.*line|stabiliser.*line",
+   "results": "{\"t\": \"2026-10-23T13:22:54Z\", \"tool\": \"grep\", \"query\": \"Chevalley|stabilizer.*line|stabiliser.*line\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"94219d14698fc6fc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-action stabilizers and constructible-image Chevalley do not provide a rational group-scheme representation with the specified scheme-theoretic line stabilizer and trivial stabilizer character"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chevalley line stabilizer theorem with cancellation of the stabilizer character by tensor and exterior powers",
+   "results": "{\"t\": \"2026-10-23T13:25:19Z\", \"tool\": \"leanfinder\", \"query\": \"Chevalley line stabilizer theorem with cancellation of the stabilizer character by tensor and exterior powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor_aux\", \"Module.stabilizer_units_eq_bot_of_ne_zero\", \"Representation.ofCoinvariantsTprodLeftRegular_mk_tmul_single\", \"MulAction.stabilizerEquivStabilizer_compTriple\", \"MulAction.stabilizer_smul_eq_left\", \"MulAction.stabilizerEquivStabilizer_trans\", \"MulAction.stabilizer_mul_eq_left\", \"SubMulAction.ENat_card_ofStabilizer_add_one_eq\"], \"digest\": \"01062c9296242f5e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: abstract-action stabilizers and constructible-image Chevalley do not provide a rational group-scheme representation with the specified scheme-theoretic line stabilizer and trivial stabilizer character"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a subgroup of an affine group scheme cancellation of an occurring character by an occurring negative power gives a pointwise fixed line with exactly that subgroup as stabilizer",
+   "results": "{\"t\": \"2026-10-23T14:28:42Z\", \"tool\": \"leanfinder\", \"query\": \"For a subgroup of an affine group scheme cancellation of an occurring character by an occurring negative power gives a pointwise fixed line with exactly that subgroup as stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.IwasawaStructure.T\", \"SubMulAction.ofFixingSubgroup_of_singleton\", \"SubMulAction.fixingSubgroup_of_insert\", \"AddSubgroup.inertia\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"SubMulAction.ofFixingSubgroup_insert_map_apply\", \"SubAddAction.ofFixingAddSubgroup_of_singleton\", \"SubMulAction.mem_ofFixingSubgroup_insert_iff\"], \"digest\": \"245ffe50dabf4c5f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern abstract group actions, Galois fixing subgroups, or constructibility of images; none constructs a rational representation of an affine group scheme with a prescribed scheme-theoretic line stabilizer"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-subgroup-representation-kernel",
+  "date": "2026-10-23",
+  "group": "Q49"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: Affine normal quotients and the geometry of their exact sequences. Supporting argument: A closed normal subgroup is a representation kernel. Milne Lemma 5.17: Theorem 4.27 and Corollary 4.29, printed pp.94--95; Remark 4.30, p.96, specifies the stabilizer on all algebras. The inverse character in Corollary 4.29 is written multiplicatively here.",
+   "via": [
+    "lem-sfb-normal-subgroup-representation-kernel",
+    "lem-sfb-affine-normal-quotient-geometry",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-chevalley-character-cancellation",
+  "worker": "stage1",
+  "summary": "Retained the statement. Isolated the unconditional Chevalley line-stabilizer theorem as one statement-only prerequisite. Wrote character restriction, negative-power cancellation, and the reverse stabilizer inclusion by coordinate contractions over arbitrary algebras. No exterior-power lemma or tensor-stabilizer lemma is hidden in a citation.",
+  "blueprint": "Supports the inherited direct-image finiteness/alteration route through the normal-subgroup representation-kernel lemma. Realizes Milne Corollary 4.29, starting with Theorem 4.27. The blueprint ancestor tool reports None, retained from the item; same-as searches found no blueprint line-stabilizer statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-cc98545bb",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-cc98545bb (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 §4h in full: the definition of 'occurs', Thm 4.27 with its proof, Lemma 4.28, Cor 4.29 with the p.95 erratum, and Rem 4.30. The item statement matches Cor 4.29 together with the scheme-theoretic stabilizer of Rem 4.30 (additive -mχ written as χ^{-m}, m>0); it is unchanged and not weakened. Step 1: the new node's equality H(A)=Stab(D_A) makes h act on D_A=Ae by a unit, giving the character χ (the (1,1) matrix coefficient), so χ occurs; the hypothesis gives F and f with character χ^{-m}. Step 2: V=E^{⊗m}⊗F and L=k(e^{⊗m}⊗f); H acts on L by χ^mχ^{-m}=1. Step 3, recomputed: with λ=e*∘ρ_E(g)^{-1} and μ=f*∘ρ_F(g)^{-1}, contracting x^{⊗m}⊗y=c e^{⊗m}⊗f gives x=ae, and λ(x)=1 makes a a unit, so g stabilizes D_A and lies in H(A); this is valid over nonreduced A, and A=0, m=1 and p|m are handled. Edge cases tested: H=G, H trivial in G_a (unipotent 2×2 with line k(0,1)), trivial χ. The new node lem-sfb-chevalley-scheme-line-stabilizer states exactly Thm 4.27 + Rem 4.30 in the affine finite-type setting. It is statement-only and self-contained, with definitions cited, and records searches of all three kinds. It is not a restatement of the item (the item adds the character cancellation and the contraction argument). rg -L over the snapshot DAG and the blueprint (main-20261015, master) finds no duplicate: the near misses are the solvable flag realization, the comodule finite subrepresentation (Prop 4.7), the constructibility Chevalley and the parent kernel lemma. Same unit, so no tool_uses; no SGA; proof_deps equal the union of uses; no cycle. blueprint.from.node is null, inherited from the imported chain. Only cosmetic issue: B=kf is named and unused. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChevalleyCharacterCancellation",
+  "declaration": "AlgebraicGeometry.chevalley_character_cancellation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChevalleyCharacterCancellation.lean",
+  "statement": "theorem chevalley_character_cancellation {k : Type u} [Field k] (G H : Over (Spec (.of k))) [GrpObj G] [GrpObj H] [IsAffine G.left] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] (i : H ⟶ G) [IsClosedSubgroupScheme i] (hc : ∀ (χ : H ⟶ StandardGroupSchemes.multiplicative k) [IsMonHom χ], (∃ (n : ℕ) (ρ : GeneralLinearGroup.RationalHom G (ULift.{u} (Fin n))) (_ : IsMonHom ρ) (U : Submodule k (ULift.{u} (Fin n) → k)), U ≠ ⊥ ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (h : points H A) (v : ULift.{u} (Fin n) → A), v ∈ Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (U : Set (ULift.{u} (Fin n) → k))) → Matrix.toLin' (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (h ≫ i ≫ ρ)) v = ((Spec.preimage (h ≫ χ).left).hom (LaurentPolynomial.T 1)) • v) → ∃ (m : ℕ), 0 < m ∧ ∃ (n : ℕ) (ρ : GeneralLinearGroup.RationalHom G (ULift.{u} (Fin n))) (_ : IsMonHom ρ) (U : Submodule k (ULift.{u} (Fin n) → k)), U ≠ ⊥ ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (h : points H A) (v : ULift.{u} (Fin n) → A), v ∈ Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (U : Set (ULift.{u} (Fin n) → k))) → Matrix.toLin' (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (h ≫ i ≫ ρ)) v = ((Spec.preimage (h ≫ χ).left).hom (LaurentPolynomial.T (-(m : ℤ)))) • v) : ∃ (n : ℕ) (ρ : GeneralLinearGroup.RationalHom G (ULift.{u} (Fin n))) (_ : IsMonHom ρ) (L : Submodule k (ULift.{u} (Fin n) → k)), Module.finrank k L = 1 ∧ ∀ (A : Type u) [CommRing A] [Algebra k A], (∀ g : points G A, (∃ h : points H A, h ≫ i = g) ↔ Submodule.map (Matrix.toLin' (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (g ≫ ρ))) (Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (L : Set (ULift.{u} (Fin n) → k)))) = Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (L : Set (ULift.{u} (Fin n) → k)))) ∧ (∀ (h : points H A) (v : ULift.{u} (Fin n) → A), v ∈ Submodule.span A ((fun w : ULift.{u} (Fin n) → k ↦ fun j ↦ algebraMap k A (w j)) '' (L : Set (ULift.{u} (Fin n) → k))) → Matrix.toLin' (GeneralLinearGroup.homMulEquiv (ULift.{u} (Fin n)) k A (h ≫ i ≫ ρ)) v = v)",
+  "branch": "sheaf-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b732766ce",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Read the item node, the 8 stmt_dep records, the module and the report. Checked the exact declarations: points, RationalHom, homMulEquiv, IsClosedSubgroupScheme, StandardGroupSchemes.multiplicative (Laurent Hopf). Every clause matches. Field; affine G of finite type as LocallyOfFiniteType+QuasiCompact per the record; closed subgroup via the recorded class; representations as RationalHom G (ULift (Fin n)) with IsMonHom; U_A/L_A as A-spans of the base change; χ_A(h) = Spec.preimage((h≫χ).left)(T 1) and χ^{-m} via T(-m); hypothesis with m:ℕ, 0<m; conclusion finrank L = 1, ∀A stabilizer iff (submodule equality) and pointwise fixed. No extra assumptions; n=0, zero/nonreduced A, m=1, char|m and trivial χ covered; single universe u consistent with the interfaces. Node copy differs from live only in lean; lean.statement verbatim; docstrings carry source, blueprint and 3 proof steps; sorry only; no new defs; no duplicate found (NaturalRepresentation is lemma-owned). No compile (no changes)."
+ }
+}

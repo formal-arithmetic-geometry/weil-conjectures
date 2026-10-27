@@ -14,73 +14,57 @@
  ],
  "proof": [
   {
-   "text": "Use the supplied structural map c, its finite projection equations and its constant integral square; the completed structural-map theorem constructs these data uniquely. The remaining construction extends this fixed ring map to coefficient and strict diagram comparisons.",
+   "text": "Obtain the coefficient-only comparison C, retaining the supplied source, target and structural map.",
    "uses": [
-    "def-weil-completed-integral-coefficients",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-pur-completed-coefficient-structure-map"
+    "lem-pur-completed-coefficient-image-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
-   }
+   "elementary": false
   },
   {
-   "text": "Each ordinary coefficient square is the identity on underlying sections. Transport to an equivalent small site large enough for the coefficient universe and apply normalized ringed derived composition. Compare its exact derived restrictions to the supplied factors. The universal unit equation gives Square.normalization, and uniqueness gives identity, successive-quotient and projection coherence.",
+   "text": "Use the Grothendieck structure of module towers to choose a normalized total derived levelwise pushforward T. Construct evaluation squares with identity ordinary comparison by the generic derived coefficient-comparison helper, since tower evaluation preserves K-injectives. Invert the supplied exact factor isomorphisms to put its unit equation in Square.normalization form.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-pur-ringed-derived-composition-cocycle",
-    "lem-weil-proetale-direct-image-restriction-of-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
-   }
-  },
-  {
-   "text": "Use the sequence ringed sites to apply the diagram restriction comparison before evaluation. Its ordinary isomorphism is the identity on underlying sections. The system and fixed-ring tower evaluation comparisons are identified by their normalized universal units, retaining every semilinear transition.",
-   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "lem-pur-diagram-ring-restriction-pushforward",
-    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend C and the now fixed tower image T to the strict-system square, retaining its evaluation section identities.",
+   "uses": [
+    "lem-pur-completed-coefficient-strict-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Direct image preserves ordinary tower limits, detected after forgetting to abelian presheaves. Use preservesLimitNatIso, whose components are limit.post. The target derived-limit unit is invertible on pushed K-injective towers by the acyclicity lemma. The generic normalized derived-composition helper gives limitComparison and limitNormalization for the supplied images and limits.",
+   "uses": [
+    "lem-pur-completed-coefficient-tower-limit-acyclic",
     "lem-weil-ringed-tower-pushforward-limit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
-   }
+   "elementary": false
   },
   {
-   "text": "Ordinary direct image commutes with inverse limit by limit.post. Derive both factorizations on tower ringed sites to obtain limitComparison and its unit normalization. Both projection composites induce the same ordinary projection after precomposition with the universal derived unit; uniqueness gives limitProjection. Normalize comparisons with the supplied site models by their own factorization and universal unit equations.",
+   "text": "Prove limitProjection by rightDerived_ext for the composite of source inverse limit and completed pushforward. Cancel the source evaluation factor, use limitNormalization, naturality of the target projection, and normalization of the evaluation square. The two limitProjection_normalization equations reduce the equality to limit.post followed by a projection equals pushforward of that projection; the evaluation ordinary map is identity by its section identity. Assemble the full DiagramComparisonData and retain the three supplied-model equalities.",
    "uses": [
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-kinjective-total-derived"
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof on tower topoi"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-completed-integral-coefficients",
-  "lem-pur-coefficient-system-derived-comparison",
-  "lem-pur-completed-coefficient-structure-map",
+  "lem-pur-completed-coefficient-image-comparisons",
+  "lem-pur-completed-coefficient-strict-image",
+  "lem-pur-completed-coefficient-tower-limit-acyclic",
   "lem-pur-diagram-ring-restriction-pushforward",
-  "lem-pur-ringed-derived-composition-cocycle",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-ringed-tower-pushforward-limit-comparison"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-evaluation-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-mate/fix-prop-adjunctions.proof.md",
-  "place": "A separate construction or argument of completed-coefficient comparison; see source and complete Lean docstring."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition (line 4011); Tag 0A07, lemma-Rf-commutes-with-Rlim (line 5150), first proof; explicit construction of tower evaluation and normalized limit comparison, with universal-unit proof of projection compatibility; coefficient, strict-system and acyclicity subarguments isolated."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -152,13 +136,25 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "C-74e11",
-  "group": "F6",
+  "reviewer": "COMPILER",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261021T233657-L-848362",
+  "landing": "20261026T092539-L-3442285",
   "kind": "interface",
-  "note": "independent cc review: delivered Models module vs clone item module (verbatim move, public imports kept); comparison signature byte-identical; 3 new sorry statements read against Stacks 099N/0A0E/0D6E and the old ComparisonData fields; 9 direct importers + 7 delivered modules compiled in /tmp/f6ccp all rc=0; #print axioms probe"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
  }
 }

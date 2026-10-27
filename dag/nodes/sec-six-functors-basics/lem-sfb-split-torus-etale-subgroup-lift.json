@@ -1,0 +1,365 @@
+{
+ "id": "lem-sfb-split-torus-etale-subgroup-lift",
+ "kind": "statement",
+ "title": "Etale lifting of a split torus subgroup at an algebraically closed residue field",
+ "statement": "Let $A$ be a commutative ring, put $S=\\operatorname{Spec}A$ [def-weil-affine-spectrum], and let $s\\in S$ have algebraically closed residue field $k=\\kappa(s)$ [def-weil-algebraic-closure]. Let $G\\to S$ be a smooth affine group scheme of finite presentation [def-sbc-smooth-morphisms, def-sbc-locally-finite-presentation]. An $S$-group scheme has multiplication, identity and inverse satisfying the diagrams of [def-sc-group-scheme], with $S$ in place of the field base. Write $\\mathbf G_{m,S}=\\operatorname{Spec}_S\\mathcal O_S[t,t^{-1}]$ with multiplication of units, and $\\mathbf G_{m,S}^0=1_S$. Let $r\\geq0$ and let $j_0:\\mathbf G_{m,k}^r\\hookrightarrow G_s$ be a closed subgroup immersion [def-weil-closed-immersion]. There exist a commutative $A$-algebra $C$, an affine etale morphism $p:U=\\operatorname{Spec}C\\to S$ [def-weil-etale-morphism], a point $u\\in U$ with $p(u)=s$ and $\\kappa(u)=k$ via $p$, and a closed subgroup immersion $j:\\mathbf G_{m,U}^r\\hookrightarrow G\\times_S U$ whose fibre at $u$ is $j_0$ under this residue-field identification. No reductivity or connectedness of $G$ and no henselian hypothesis on $A$ is required.",
+ "source": {
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "WANTED locally; Brian Conrad, Reductive group schemes (2014), Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field; read online at https://math.stanford.edu/~conrad/papers/luminysga3smf.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-algebraic-closure",
+  "def-sbc-smooth-morphisms",
+  "def-sbc-locally-finite-presentation",
+  "def-sc-group-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-sfb-relative-split-torus"
+ ],
+ "proof": [
+  {
+   "text": "Write $G=\\operatorname{Spec}H$. The affine smoothness equivalence identifies $A\\to H$ as a smooth ring map. By the smooth-algebra finite-type model theorem, the smooth $A$-algebra $H$ descends to a smooth finitely presented $A_i$-algebra $H_i$, with $A_i\\subset A$ a finitely generated $\\mathbf Z$-subalgebra. Enlarge $A_i$ to descend the group structure as well: the comultiplication, counit and antipode are specified on finitely many algebra generators, and their defining identities are finitely many equalities on these generators. The finite-data lemma descends their coefficients and the finite polynomial witnesses for those equalities to one subalgebra. Thus $G_i=\\operatorname{Spec}H_i$ is a smooth affine group with $G_i\\times_{A_i}A\\simeq G$. Smoothness is retained because every enlargement replaces $H_i$ by its scalar extension.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-weil-pbc-smooth-algebra-finite-type-model",
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6, printed p.84, initial finite-type reduction; affine finite-coefficient elaboration using Stacks Tags 00TP and 05N9"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset A$ correspond to $s$ and $\\mathfrak p_i=\\mathfrak p\\cap A_i$. As the finitely generated subrings containing our model vary, the fields $k_i=\\operatorname{Frac}(A_i/\\mathfrak p_i)$ are nested subfields with union $k=\\operatorname{Frac}(A/\\mathfrak p)$. Apply finite-presentation algebra-map descent to the coordinate map of $j_0$, with target $k[x_1^{\\pm1},\\ldots,x_r^{\\pm1}]$, to obtain $j_i:\\mathbf G_{m,k_i}^r\\to(G_i)_{k_i}$ at one stage. The same lemma's equality clause, applied to comultiplication, counit and antipode on the finitely many algebra generators, ensures that $j_i$ is a group homomorphism. Apply closed-immersion descent to this morphism along $\\operatorname{Spec}k=\\varprojlim\\operatorname{Spec}k_i$, enlarging the stage once more, to make $j_i$ a closed immersion. Its scalar extension is the specified map $j_0$, not just a subgroup isomorphic to its image. All schemes in this application are affine of finite presentation over their field, hence qcqs, and the initial morphism is locally of finite type.",
+   "uses": [
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6, printed p.84, initial finite-type reduction; Stacks Tags 05N9 (2)-(3), 01ZP"
+   }
+  },
+  {
+   "text": "Put $R=(A_i)_{\\mathfrak p_i}$ and $\\widehat R=\\varprojlim R/(\\mathfrak p_iR)^n$. The excellence of $\\mathbf Z$ and stability of excellence under finite type and localization make both $A_i$ and $R$ excellent; by its definition they are Noetherian G-rings. The completion lemmas make $\\widehat R$ Noetherian and local with residue field $k_i$ and maximal ideal $(\\mathfrak p_iR)\\widehat R$. Applied to $M=R$ and the finitely generated ideal $\\mathfrak p_iR$, the module-completion theorem makes $\\widehat R$ complete for this maximal ideal. This verifies every base-ring hypothesis of the complete-local lifting lemma.",
+   "uses": [
+    "lem-trf-integers-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6, printed p.84, passage to the completed local ring; Stacks Tags 07QW, 07QU, 07QT, 0316, 05GI, 05GG"
+   }
+  },
+  {
+   "text": "The base change $G_i\\times_{A_i}\\widehat R$ is smooth. Apply the complete-local split-torus homomorphism lifting lemma to $j_i$ to obtain a closed subgroup homomorphism $\\widehat j:\\mathbf G_{m,\\widehat R}^r\\hookrightarrow G_i\\times_{A_i}\\widehat R$ reducing exactly to $j_i$. Write $\\widehat R$ as the directed union of its finitely generated $A_i$-subalgebras $B_\\alpha$. The torus and $G_i$ are fixed affine finitely presented models. Finite-presentation algebra-map descent, followed by its equality clause for the three Hopf-map identities, descends $\\widehat j$ to a group homomorphism $j_B$ over some $B=B_\\alpha$. Closed-immersion descent makes $j_B$ closed after increasing $\\alpha$. The systems here have affine qcqs bases; both source and target are finitely presented over each base, so the morphism to which closed-immersion descent is applied is locally of finite type. The residue map $B\\hookrightarrow\\widehat R\\to k_i$ identifies its fibre with $j_i$.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-sfb-complete-local-split-torus-hom-lift",
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-weil-pbc-descend-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6, printed p.84, lifting by Corollary B.3.5 and descent to a finite type subalgebra of the completion"
+   }
+  },
+  {
+   "text": "Since $A_i$ is Noetherian and $B$ is a finite type $A_i$-algebra, write $B=A_i[z_1,\\ldots,z_N]/(F_1,\\ldots,F_M)$ using finite-type-to-finite-presentation. The inclusion $B\\to\\widehat R$ is a solution of these finitely many equations. Apply Artin approximation over $A_i$ at $\\mathfrak p_i$, with precision $1$: its hypotheses hold because $A_i$ is Noetherian and $(A_i)_{\\mathfrak p_i}=R$ is a G-ring. It gives an etale $A_i$-algebra $A'_i$, a point $u_i$ over $\\mathfrak p_i$ with residue field $k_i$, and a map $B\\to A'_i$ whose reduction to $k_i$ is the given residue map. Pulling $j_B$ back by this map gives a closed group homomorphism over $U_i=\\operatorname{Spec}A'_i$. Its fibre at $u_i$ is $j_i$: agreement modulo the maximal ideal on the generators $z_a$ implies agreement on every element of $B$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-trf-artin-approximation-etale-local-map",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6 and Theorem 3.1.7, printed p.84; precise approximation formulation Stacks Tag 0CAR (lemma-approximation-property-variant), with N=1"
+   }
+  },
+  {
+   "text": "Set $C=A\\otimes_{A_i}A'_i$ and $U=\\operatorname{Spec}C= S\\times_{\\operatorname{Spec}A_i}U_i$. Etale base-change stability makes $U\\to S$ etale; it is affine because it is induced by this ring map. The base change of $\\operatorname{Spec}k_i\\to U_i$ along $s:\\operatorname{Spec}k\\to\\operatorname{Spec}A_i$ is $\\operatorname{Spec}k$, since $k\\otimes_{k_i}k_i=k$. It defines a point $u$ over $s$ with residue field exactly $k$. Pull back the closed subgroup homomorphism from step 5 to $U$; closed-immersion base-change stability gives the required $j$. Its fibre at $u$ is $(j_i)_k=j_0$ by step 2. The split source remains $\\mathbf G_{m,U}^r$ throughout. Rank zero uses the same empty-product construction; the argument imposes no connectedness, reductivity or henselian condition on the original base.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/conrad-reductive-group-schemes.pdf",
+    "place": "Proposition 3.1.6, printed p.84, return by base change from the finite-type model; no separate torus splitting is needed"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-weil-pbc-smooth-algebra-finite-type-model",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-trf-integers-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-sfb-complete-local-split-torus-hom-lift",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-trf-artin-approximation-etale-local-map",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/conrad-reductive-group-schemes.pdf",
+  "place": "Agent assembly following the online direct proof of Proposition 3.1.6, printed p.84, using a fixed split source and Corollary B.3.5, printed pp.292-293; the PDF is WANTED locally. Generic algebraic-geometry inputs are supplied by existing Stacks nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Tt]orus|[Tt]ori|[Mm]ultiplicative[Tt]ype",
+   "results": "{\"t\": \"2026-10-24T02:53:42Z\", \"tool\": \"grep\", \"query\": \"[Tt]orus|[Tt]ori|[Mm]ultiplicative[Tt]ype\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\"], \"digest\": \"d3bec982850ddbdf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field ring-map lifts, standard etale presentations and affine transition limits do not lift torus subgroup embeddings; the broad grep only matched substrings of functoriality and toRingHom, and the word-boundary grep had no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a split multiplicative torus subgroup of a smooth affine group scheme fibre after an etale neighborhood with the same residue field",
+   "results": "{\"t\": \"2026-10-24T02:53:42Z\", \"tool\": \"leansearch\", \"query\": \"Lift a split multiplicative torus subgroup of a smooth affine group scheme fibre after an etale neighborhood with the same residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ULift.sub\", \"Ideal.ResidueField.liftₐ\", \"Ideal.ResidueField.lift\", \"Subgroup.instCanLiftSetCoeAndMemOfNatForallForallForallForallHMulForallForallInv\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsOpenImmersion.lift\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"Algebra.FormallyEtale.of_isSeparable\"], \"digest\": \"36fd7bea78a84506\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field ring-map lifts, standard etale presentations and affine transition limits do not lift torus subgroup embeddings; the broad grep only matched substrings of functoriality and toRingHom, and the word-boundary grep had no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T02:53:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field ring-map lifts, standard etale presentations and affine transition limits do not lift torus subgroup embeddings; the broad grep only matched substrings of functoriality and toRingHom, and the word-boundary grep had no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed split torus subgroup of a fibre of a smooth affine group scheme lifts to a closed split torus over a residually trivial etale neighborhood",
+   "results": "{\"t\": \"2026-10-24T02:53:45Z\", \"tool\": \"leanfinder\", \"query\": \"A closed split torus subgroup of a fibre of a smooth affine group scheme lifts to a closed split torus over a residually trivial etale neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.instIsAffineFiberOfIsAffineHom\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\"], \"digest\": \"61f381dd7288b0a4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field ring-map lifts, standard etale presentations and affine transition limits do not lift torus subgroup embeddings; the broad grep only matched substrings of functoriality and toRingHom, and the word-boundary grep had no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Embeddings of a split diagonalizable group with free character lattice into a smooth affine group lift etale locally from a residue field",
+   "results": "{\"t\": \"2026-10-24T02:53:46Z\", \"tool\": \"leanfinder\", \"query\": \"Embeddings of a split diagonalizable group with free character lattice into a smooth affine group lift etale locally from a residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.lift_X_left\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePresentation.lift_bijective\", \"StandardEtalePair.lift\", \"StandardEtalePair.lift_X\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"f8e4e34dd6c78cc1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field ring-map lifts, standard etale presentations and affine transition limits do not lift torus subgroup embeddings; the broad grep only matched substrings of functoriality and toRingHom, and the word-boundary grep had no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(torus|tori)\\b|multiplicative.type",
+   "results": "{\"t\": \"2026-10-24T02:54:21Z\", \"tool\": \"grep\", \"query\": \"\\\\b(torus|tori)\\\\b|multiplicative.type\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: residue-field ring-map lifts, standard etale presentations and affine transition limits do not lift torus subgroup embeddings; the broad grep only matched substrings of functoriality and toRingHom, and the word-boundary grep had no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A split torus homomorphism into a smooth affine group scheme over a complete noetherian local ring lifts from the residue field",
+   "results": "{\"t\": \"2026-10-24T03:19:49Z\", \"tool\": \"leanfinder\", \"query\": \"A split torus homomorphism into a smooth affine group scheme over a complete noetherian local ring lifts from the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.of_split\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.lift\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"Ideal.ResidueField.liftₐ\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\"], \"digest\": \"7c513b3d3ff42a17\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(torus|tori)\\b|multiplicative.type|diagonalizable",
+   "results": "{\"t\": \"2026-10-24T03:20:41Z\", \"tool\": \"grep\", \"query\": \"\\\\b(torus|tori)\\\\b|multiplicative.type|diagonalizable\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary etale maps, local-ring residue maps or ambient scheme closed-immersion factorization; none constructs or lifts a torus group homomorphism. A second semantic phrasing was inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split torus in the fibre of a smooth affine group scheme extends over an etale neighborhood of the base point",
+   "results": "{\"t\": \"2026-10-24T03:20:42Z\", \"tool\": \"leansearch\", \"query\": \"A split torus in the fibre of a smooth affine group scheme extends over an etale neighborhood of the base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Extension.formallySmooth_iff_split_injection\", \"AddGroupExtension.IsConj.refl\", \"exists_nhds_split_inv\"], \"digest\": \"774a01371df040ca\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary etale maps, local-ring residue maps or ambient scheme closed-immersion factorization; none constructs or lifts a torus group homomorphism. A second semantic phrasing was inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"GroupScheme\"",
+   "results": "{\"t\": \"2026-10-24T03:20:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"GroupScheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary etale maps, local-ring residue maps or ambient scheme closed-immersion factorization; none constructs or lifts a torus group homomorphism. A second semantic phrasing was inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a diagonalizable group to a smooth affine group over the residue field lifts over a complete local base as a group homomorphism",
+   "results": "{\"t\": \"2026-10-24T03:21:16Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a diagonalizable group to a smooth affine group over the residue field lifts over a complete local base as a group homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.homInfinitesimal\", \"IsLocalRing.ResidueField.lift_residue_apply\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"IsLocalRing.ResidueField.lift\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.lift\", \"IsLocalRing.ResidueField.lift_comp_residue\"], \"digest\": \"28257c7bebd38d8a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift group scheme homomorphisms from a split torus over a complete noetherian local ring preserving a closed immersion",
+   "results": "{\"t\": \"2026-10-24T03:21:16Z\", \"tool\": \"leansearch\", \"query\": \"Lift group scheme homomorphisms from a split torus over a complete noetherian local ring preserving a closed immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.lift_fac\", \"AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc\", \"AlgebraicGeometry.IsClosedImmersion.lift\", \"AlgebraicGeometry.IsClosedImmersion.lift.congr_simp\", \"IsAdicComplete.liftAlgHom\", \"IsAdicComplete.liftRingHom\", \"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"Algebra.FormallySmooth.lift\"], \"digest\": \"1a3992c4f30ed7cc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_mkₐ_comp_eq_of_isAdicComplete|exists_adicCompletionEvalOneₐ_comp_eq",
+   "results": "{\"t\": \"2026-10-24T03:22:12Z\", \"tool\": \"grep\", \"query\": \"exists_mkₐ_comp_eq_of_isAdicComplete|exists_adicCompletionEvalOneₐ_comp_eq\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\"], \"digest\": \"27b8ecea39bf910b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"exists_mk\"",
+   "results": "{\"t\": \"2026-10-24T03:23:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"FormallySmooth\\\", \\\"exists_mk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\"], \"digest\": \"f37ced4758d53cbc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: formal-smoothness lifts algebra maps, not Hopf algebra maps; completion lifts do not ensure group-law compatibility or closedness. Read Mathlib/RingTheory/Smooth/AdicCompletion.lean:82-99."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale local extension of a prescribed closed embedding of a split multiplicative group into a smooth affine group scheme",
+   "results": "{\"t\": \"2026-10-24T03:23:46Z\", \"tool\": \"leanfinder\", \"query\": \"Etale local extension of a prescribed closed embedding of a split multiplicative group into a smooth affine group scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.Etale.forget\"], \"digest\": \"2e94c8517c253e7e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern ordinary etale maps, local-ring residue maps or ambient scheme closed-immersion factorization; none constructs or lifts a torus group homomorphism. A second semantic phrasing was inspected."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-model-reductive-neutral-lift",
+  "date": "2026-10-24",
+  "group": "Q13"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.5 and Section 3.6, followed by Proposition 4.3, first paragraph of proof, printed pp.6-8: apply the neutral-component argument to the smooth model, after its special neutral fibre has been shown reductive Supporting Proposition 3.1.6, printed pp.83-84, and Proposition B.3.4, printed pp.290-292: etale lifting of the multiplicative type subgroup followed by etale splitting, at a point with algebraically closed residue field",
+   "via": [
+    "lem-sfb-smooth-model-reductive-neutral-lift",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-split-torus-etale-subgroup-lift",
+  "worker": "stage1",
+  "summary": "Kept the statement exactly. Descended the prescribed split-source embedding to a finite-type model, lifted over its completed local ring using one new complete-local homomorphism theorem, descended to a finite-type parameter algebra and applied existing Artin approximation with N=1. Checked exact fibre equality and rank zero; no SGA route is used. Conrad source read online and requested locally.",
+  "blueprint": "Supports det-thm-sf-ctf-stability-direct-images, proof (3), through the inherited reductive-neutral-lift prerequisite in blueprint.from.place. This is the torus-lifting input; the unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Descends the finitely many coefficients and equations of the group operations at one stage. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Uses only its smoothness-under-arbitrary-base-change clause to retain smooth affine group models. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Descends coordinate algebra maps and their Hopf-map equations along directed affine base limits. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-descend-closed-immersion",
+    "why": "Ensures a descended finite-presentation group homomorphism is closed when its limit is closed. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-trf-integers-excellent",
+    "why": "Provides the excellent integer-ring seed for the finite-type local base used by Artin approximation. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Supplies excellence, hence Noetherianity and the G-ring condition, for the finite-type model and its local ring. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Provides Noetherianity of the completed local base for the deformation lifting theorem. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-trf-artin-approximation-etale-local-map",
+    "why": "Approximates the formal parameter point by a residually identical etale point. This is a generic tool; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Identifies scheme smoothness of the affine group with ring smoothness before applying the finite-type algebra model theorem; the same equivalence returns a smooth group scheme model. This is a generic tool not stated in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-descend-closed-immersion",
+  "lem-trf-integers-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-trf-artin-approximation-etale-local-map",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-c88d426f2",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-c88d426f2 (reviewer sub-agent of L); spot-checked: Read the item, its 6 steps, the new node and every cited statement. The item is still unsplit live with the same statement, there is no repair note and the statement is unchanged. Source: Conrad's PDF was fetched online and read. The new node is exactly Cor. B.3.5 (pp.292-293) for H=G_m^r, minus the conjugacy clause; the added finite-presentation hypothesis follows from smoothness. Steps 1-6 follow Prop. 3.1.6 (p.84): descend to a finite-type model (00TP and the finite-data lemma), descend j_0 over k=∪k_i with 05N9(2)(3) and 01ZP, complete the excellent local ring (07QW/07QU, 0316, 05GI, 05GG), lift with the new node, re-descend to a finite-type B inside R̂, apply Stacks 0CAR (checked in smoothing.tex) with N=1, then base-change back to A (02GO, 01QR). Fixing the split source G_m^r removes the need for B.3.4. Every step checked; κ(u)=k holds because k⊗_{A_i}k_i=k and u_i is an open-and-closed point of the étale fibre. Edge cases checked: r=0, non-Noetherian A, k_i not algebraically closed, disconnected G. No duplicate of the new node in the DAG, and it is not a restated clause of the item. No SGA cited. Batch-5: lem-trf-integers-excellent, lem-exc-finite-type-localization-excellent (whose closure reaches a regular-sequence dimension formula) and lem-trf-artin-approximation-etale-local-map are generic commutative algebra, given by neither assumed statement and not trace-formula-specific steps, so accepted. The tool_uses are generic and accepted. Note for the new node's future split: Conrad's Thm B.3.2 defers to SGA3 IX 7.1, so that split needs a non-SGA write-up."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SplitTorusEtaleSubgroupLift",
+  "declaration": "AlgebraicGeometry.splitTorus_etale_subgroup_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SplitTorusEtaleSubgroupLift.lean",
+  "statement": "theorem splitTorus_etale_subgroup_lift (A : Type u) [CommRing A] (s : Spec (.of A)) [IsAlgClosed ((Spec (.of A)).residueField s)] (G : Grp (Over (Spec (.of A)))) [Smooth G.X.hom] [IsAffineHom G.X.hom] [LocallyOfFinitePresentation G.X.hom] (r : ℕ) (j₀ : (Over.pullback ((Spec (.of A)).fromSpecResidueField s)).mapGrp.obj (relativeSplitTorus (Spec (.of A)) r) ⟶ (Over.pullback ((Spec (.of A)).fromSpecResidueField s)).mapGrp.obj G) (hj₀ : IsClosedImmersion j₀.hom.hom.left) : ∃ (C : CommRingCat.{u}) (p : Spec C ⟶ Spec (.of A)), Etale p ∧ ∃ (q : Spec ((Spec (.of A)).residueField s) ⟶ Spec C) (hq : (Spec (.of A)).fromSpecResidueField s = q ≫ p), IsIso (p.residueFieldMap (q (IsLocalRing.closedPoint ((Spec (.of A)).residueField s)))) ∧ ∃ j : (Over.pullback p).mapGrp.obj (relativeSplitTorus (Spec (.of A)) r) ⟶ (Over.pullback p).mapGrp.obj G, IsClosedImmersion j.hom.hom.left ∧ pullback.map (relativeSplitTorus (Spec (.of A)) r).X.hom ((Spec (.of A)).fromSpecResidueField s) (relativeSplitTorus (Spec (.of A)) r).X.hom p (𝟙 _) q (𝟙 _) ((Category.comp_id _).trans (Category.id_comp _).symm) ((Category.comp_id _).trans hq) ≫ j.hom.hom.left ≫ pullback.fst G.X.hom p = j₀.hom.hom.left ≫ pullback.fst G.X.hom ((Spec (.of A)).fromSpecResidueField s)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The neighbourhood is encoded by C and p: Spec C → Spec A, equivalent to an A-algebra by Spec.homEquiv. The point is q: Spec κ(s) → Spec C with q ≫ p the canonical residue point and an isomorphism on residue fields. The tori are pullbacks of the existing relativeSplitTorus over Spec A; the final equality uses the canonical pullback map and projection to G to specify precisely the fibre embedding."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-123afd842",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Clause-by-clause check of splitTorus_etale_subgroup_lift against the node: Spec A for an arbitrary comm ring; IsAlgClosed on the actual residue field; G : Grp(Over Spec A) with Smooth, IsAffineHom and LocallyOfFinitePresentation (lfp is redundant with Smooth but not stronger); j0 a Grp morphism between the pullbacks along fromSpecResidueField of the landed relativeSplitTorus and of G, with IsClosedImmersion; r : ℕ. Conclusion: C : CommRingCat.{u}, Etale p, point q with fromSpecResidueField s = q ≫ p, and IsIso of p.residueFieldMap at u gives kappa(u)=k via p; j a closed Grp morphism over Spec C; the pullback.map ≫ j ≫ fst = j0 ≫ fst equation states exactly fibre at u = j0, since j0 is over Spec k. Node diff vs live: only the lean record and the added stmt_dep def-sfb-relative-split-torus (landed, Q110, real hopfSpec data). lean.statement verbatim; only sorry; docstrings carry the Conrad Prop 3.1.6/B.3.4/B.3.5 places, the blueprint id and the 6 proof steps; all imports exist; same convention as the landed completeLocal_splitTorus_hom_lift. Edge cases r=0, A=0 vacuous, non-Noetherian A, single universe u: all fine. No file changed, no compile run. Advisory: the 'Second reading by Q28' section is self-described as the author's own pass."
+ }
+}

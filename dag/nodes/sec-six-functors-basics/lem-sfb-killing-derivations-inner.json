@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-killing-derivations-inner",
+ "kind": "statement",
+ "title": "Inner derivations of a Lie algebra with nondegenerate Killing form",
+ "statement": "Let $k$ be a field [def-weil-field] and $L$ a finite-dimensional $k$-Lie algebra [def-wf-lie-algebra]. Suppose the Killing form $B(x,y)=\\operatorname{Tr}_L(\\operatorname{ad}(x)\\operatorname{ad}(y))$ is nondegenerate: if $B(x,y)=0$ for all $y$ then $x=0$, where $\\operatorname{ad}(x)y=[x,y]$ and trace is [def-weil-endomorphism-trace]. For every $k$-linear derivation $D:L\\to L$, meaning $D([x,y])=[D(x),y]+[x,D(y)]$, there exists $z\\in L$ with $D(x)=[z,x]$ for every $x\\in L$. No characteristic-zero assumption is required.",
+ "source": {
+  "document": "Mathlib/Algebra/Lie/Derivation/Killing.lean",
+  "place": "LieDerivation.IsKilling.exists_eq_ad, line 109; field and Lie-algebra variables at line 36 and finite/Killing hypotheses in the section. Statement uses nondegeneracy of the Killing form, not a group integration theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-wf-lie-algebra",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every derivation of a finite dimensional Lie algebra with nondegenerate Killing form is inner",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LieDerivation.IsKilling.exists_eq_ad\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L] (D : LieDerivation R L L), ∃ x, (LieDerivation.ad R L) x = D\", \"doc\": \"In a Lie algebra over a commutative ring $ R $ with a non-degenerate Killing form, every derivation is inner. Specifically, for any derivation $ D $ of the Lie algebra, there exists an element $ x $ i\"}\n  {\"name\": \"LieDerivation.IsKilling.instIsKilling_range_ad\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L], LieAlgebra.IsKilling R ↥(LieDerivation.ad R L).range\", \"doc\": \"The Killing form on the image of the adjoint representation of a Lie algebra is non-degenerate.\"}\n  {\"name\": \"LieDerivation.IsKilling.range_ad_eq_top\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L], (LieDerivation.ad R L).range = ⊤\", \"doc\": \"For a Lie algebra over a commutative ring with non-degenerate Killing form, the image of the adjoint representation (mapping elements to their adjoint derivations) equals the entire space of derivatio\"}\n  {\"name\": \"LieDerivation.IsKilling.ad_apply_eq_zero_iff\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L] (x : L), (LieDerivation.ad R L) x = 0 ↔ x = 0\", \"doc\": \"For any element $x$ in the Lie algebra $L$ over a commutative ring $R$, the adjoint derivation $\\\\mathrm{ad}_x$ is zero if and only if $x$ is zero.\"}\n  {\"name\": \"LieDerivation.IsKilling.killingForm_restrict_range_ad_nondegenerate\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  [LieAlgebra.IsKilling R L],\\n  ((killingForm R (LieDerivation R L L)).restrict (LieDerivation.ad R L).range.toSubmodule).Nondegenerate\", \"doc\": \"The restriction of the Killing form on the Lie algebra $ \\\\mathfrak{g} $ to the image of the adjoint representation $ \\\\mathrm{ad}(\\\\mathfrak{g}) $ is non-degenerate, meaning that for any nonzero element\"}\n  {\"name\": \"LieAlgebra.IsKilling.instSemisimple\", \"module\": \"Mathlib/Algebra/Lie/Killing\", \"type\": \"∀ (K : Type u_2) (L : Type u_3) [inst : Field K] [inst_1 : LieRing L] [inst_2 : LieAlgebra K L]\\n  [LieAlgebra.IsKilling K L] [Module.Finite K L], LieAlgebra.IsSemisimple K L\", \"doc\": \"If a Lie algebra $ L $ over a field $ K $ is finite-dimensional as a vector space and its Killing form is non-degenerate, then $ L $ is a semisimple Lie algebra. This means that $ L $ has no nontrivia\"}\n  {\"name\": \"LieDerivation.IsKilling.killingForm_restrict_range_ad\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ (R : Type u_1) (L : Type u_2) [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L],\\n  (killingForm R (LieDerivation R L L)).restrict (LieDerivation.ad R L).range.toSubmodule =\\n    killingForm R ↥(LieDerivation.ad R L).range\", \"doc\": \"For a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$ that is finitely generated as an $R$-module, the restriction of the Killing form on $\\\\mathfrak{g}$ to the image of the adjoint representati\"}\n  {\"name\": \"LieDerivation.IsKilling.ad_mem_ker_killingForm_ad_range_of_mem_orthogonal\", \"module\": \"Mathlib/Algebra/Lie/Derivation/Killing\", \"type\": \"∀ {R : Type u_1} {L : Type u_2} [inst : Field R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L] [Module.Finite R L]\\n  {D : LieDerivation R L L},\\n  D ∈ (killingForm R (LieDerivation R L L)).orthogonal (LieDerivation.ad R L).range.toSubmodule →\\n    ∀ (x : L),\\n      (LieDerivation.ad R L) (D x) ∈\\n     \", \"doc\": \"For any Killing derivation $ D $ and element $ x $ in the Lie algebra $ L $, the adjoint of $ D(x) $ lies in the kernel of the Killing form restricted to the image of the adjoint representation $ \\\\mat\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: LieDerivation.IsKilling.exists_eq_ad, Mathlib/Algebra/Lie/Derivation/Killing.lean:109"
+  },
+  {
+   "tool": "loogle",
+   "query": "LieDerivation.IsKilling.exists_eq_ad",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"LieDerivation.IsKilling.exists_eq_ad\", \"module\": \"Mathlib.Algebra.Lie.Derivation.Killing\", \"type\": \" {R : Type u_1} {L : Type u_2} [Field R] [LieRing L] [LieAlgebra R L] [Module.Finite R L] [LieAlgebra.IsKilling R L] (D : LieDerivation R L L) : ∃ x, (LieDerivation.ad R L) x = D\", \"doc\": \"Every derivation of a finite-dimensional Killing Lie algebra is an inner derivation.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: LieDerivation.IsKilling.exists_eq_ad, Mathlib/Algebra/Lie/Derivation/Killing.lean:109"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_eq_ad",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Fermat.lean\", \"line\": \"181\", \"text\": \"    obtain ⟨n, rfl⟩ := Nat.exists_eq_add_of_le' hn\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"line\": \"321\", \"text\": \"  rcases Nat.exists_eq_add_of_lt hp_prime.1.pos with ⟨p', rfl⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/RingHoms.lean\", \"line\": \"391\", \"text\": \"  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le h; clear h\"}\n  {\"file\": \"Mathlib/NumberTheory/Padics/Hensel.lean\", \"line\": \"327\", \"text\": \"  have hex : ∃ m, k = n + m := Nat.exists_eq_add_of_le hnk\"}\n  {\"file\": \"Mathlib/Topology/Algebra/InfiniteSum/Nonarchimedean.lean\", \"line\": \"83\", \"text\": \"  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le h\"}\n  {\"file\": \"Mathlib/GroupTheory/FreeGroup/CyclicallyReduced.lean\", \"line\": \"238\", \"text\": \"    obtain ⟨n, rfl⟩ := Nat.exists_eq_add_one_of_ne_zero hn\"}\n  {\"file\": \"Mathlib/Geometry/RingedSpace/Basic.lean\", \"line\": \"205\", \"text\": \"  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le' h\"}\n  {\"file\": \"Mathlib/GroupTheory/OrderOfElement.lean\", \"line\": \"595\", \"text\": \"  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn\"}\n  {\"file\": \"Mathlib/GroupTheory/OrderOfElement.lean\", \"line\": \"612\", \"text\": \"  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn\"}\n  {\"file\": \"Mathlib/GroupTheory/OrderOfElement.lean\", \"line\": \"676\", \"text\": \"  obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn\"}\n  {\"file\": \"Mathlib/GroupTheory/Exponent.lean\", \"line\": \"460\", \"text\": \"  obtain ⟨a, ha⟩ := Nat.exists_eq_add_of_lt hpe\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"105\", \"text\": \"    obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le h\"}\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"line\": \"115\", \"text\": \"  · obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le' h\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"line\": \"147\", \"text\": \"  obtain ⟨k, hk⟩ := Nat.exists_eq_add_of_lt (len_lt_of_mono i h₁)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/FunctorGamma.lean\", \"line\": \"148\", \"text\": \"  obtain ⟨k', hk'⟩ := Nat.exists_eq_add_of_lt (len_lt_of_mono i' h₂)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/DoldKan/NCompGamma.lean\", \"line\": \"44\", \"text\": \"  obtain ⟨k, hk⟩ := Nat.exists_eq_add_of_lt (len_lt_of_mono i fun h => by\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultiplePrimitivity.lean\", \"line\": \"240\", \"text\": \"    obtain ⟨m, hm⟩ := Nat.exists_eq_add_of_le hn\"}\n  {\"file\": \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"line\": \"796\", \"text\": \"theorem exists_eq_add_translationNumber (hf : Continuous f) : ∃ x, f x = x + τ f := by\"}\n  {\"file\": \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"line\": \"810\", \"text\": \"    exact f.exists_eq_add_translationNumber hf\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/Jordan.lean\", \"line\": \"404\", \"text\": \"  obtain ⟨n, hn⟩ := Nat.exists_eq_add_of_le' hα3\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/Jordan.lean\", \"line\": \"442\", \"text\": \"  obtain ⟨n, hn⟩ := Nat.exists_eq_add_of_le' hα4\"}\n  {\"file\": \"Mathlib/RingTheory/MvPowerSeries/Basic.lean\", \"line\": \"754\", \"text\": \"    obtain ⟨m', hm'⟩ := Nat.exists_eq_add_of_le this\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean\", \"line\": \"292\", \"text\": \"  obtain ⟨p, rfl⟩ := Nat.exists_eq_add_of_le hmn\"}\n  {\"file\": \"Mathlib/GroupTheory/GroupAction/MultipleTransitivity.lean\", \"line\": \"309\", \"text\": \"  obtain ⟨p, rfl⟩ := Nat.exists_eq_add_of_le hmn\"}\n  {\"file\": \"Mathlib/Logic/Denumerable.lean\", \"line\": \"211\", \"text\": \"  let ⟨k, hk⟩ := Nat.exists_eq_add_of_lt h\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: broad grep was truncated; the separately recorded focused grep supplies the exact declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "All derivations of a finite dimensional Killing Lie algebra are adjoint derivations",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LieDerivation.IsKilling.exists_eq_ad\", \"module\": \"Mathlib.Algebra.Lie.Derivation.Killing\", \"type\": \"(D : 𝔻) : ∃ x, ad R L x = D\", \"doc\": \"In a Lie algebra over a commutative ring $ R $ with a non-degenerate Killing form, every derivation is inner. Specifically, for any derivation $ D $ of the Lie algebra, there exists an element $ x $ i\"}\n  {\"name\": \"LieDerivation.ad\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \": L →ₗ⁅R⁆ LieDerivation R L L\", \"doc\": \"The linear map $ \\\\mathrm{ad} : L \\\\to \\\\mathrm{Der}(L) $ that sends each element $ x \\\\in L $ to the adjoint derivation $ \\\\mathrm{ad}_x $, defined by $ \\\\mathrm{ad}_x(y) = [x, y] $ for all $ y \\\\in L $. Th\"}\n  {\"name\": \"LieDerivation.IsKilling.range_ad_eq_top\", \"module\": \"Mathlib.Algebra.Lie.Derivation.Killing\", \"type\": \": 𝕀 = ⊤\", \"doc\": \"For a Lie algebra over a commutative ring with non-degenerate Killing form, the image of the adjoint representation (mapping elements to their adjoint derivations) equals the entire space of derivatio\"}\n  {\"name\": \"LieDerivation.mem_ad_idealRange_iff\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \"{D : LieDerivation R L L} : D ∈ (ad R L).idealRange ↔ ∃ x : L, ad R L x = D\", \"doc\": \"A Lie derivation $ D : L \\\\to L $ belongs to the Lie ideal generated by the adjoint derivations $ \\\\mathrm{ad}_x $ (for $ x \\\\in L $) if and only if there exists an element $ x \\\\in L $ such that $ D = \\\\m\"}\n  {\"name\": \"LieDerivation.coe_ad_apply_eq_ad_apply\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \"(x : L) : ad R L x = LieAlgebra.ad R L x\", \"doc\": \"For any element $x$ in a Lie algebra $\\\\mathfrak{g}$ over a commutative ring $R$, the adjoint derivation $\\\\mathrm{ad}_x : \\\\mathfrak{g} \\\\to \\\\mathfrak{g}$ defined by $\\\\mathrm{ad}_x(y) = [x, y]$ is equal \"}\n  {\"name\": \"LieDerivation.IsKilling.ad_mem_ker_killingForm_ad_range_of_mem_orthogonal\", \"module\": \"Mathlib.Algebra.Lie.Derivation.Killing\", \"type\": \"{D : LieDerivation R L L} (hD : D ∈ 𝕀ᗮ) (x : L) :\\n  ad R L (D x) ∈ (LinearMap.ker (killingForm R 𝕀)).map (LieHom.range (ad R L)).subtype\", \"doc\": \"For any Killing derivation $ D $ and element $ x $ in the Lie algebra $ L $, the adjoint of $ D(x) $ lies in the kernel of the Killing form restricted to the image of the adjoint representation $ \\\\mat\"}\n  {\"name\": \"LieDerivation.ad_apply_lieDerivation\", \"module\": \"Mathlib.Algebra.Lie.Derivation.AdjointAction\", \"type\": \"(x : L) (D : LieDerivation R L L) : ad R L (D x) = -⁅x, D⁆\", \"doc\": \"For any element $ x $ in the Lie algebra $ L $ and any Lie derivation $ D $ from $ L $ to itself, the adjoint action of $ D x $ is equal to the negative of the Lie bracket of $ x $ and $ D $, i.e., $\\\\\"}\n  {\"name\": \"LieDerivation.IsKilling.ad_apply_eq_zero_iff\", \"module\": \"Mathlib.Algebra.Lie.Derivation.Killing\", \"type\": \"(x : L) : ad R L x = 0 ↔ x = 0\", \"doc\": \"For any element $x$ in the Lie algebra $L$ over a commutative ring $R$, the adjoint derivation $\\\\mathrm{ad}_x$ is zero if and only if $x$ is zero.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "match: LieDerivation.IsKilling.exists_eq_ad, Mathlib/Algebra/Lie/Derivation/Killing.lean:109"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma exists_eq_ad",
+   "results": "[grep] OK 1 hit(s): Mathlib/Algebra/Lie/Derivation/Killing.lean:109: lemma exists_eq_ad (D : 𝔻) : ∃ x, ad R L x = D := by",
+   "date": "2026-10-24",
+   "verdict": "match: exact declaration read at line 109; search subdirectory Algebra/Lie/Derivation"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "LieDerivation.IsKilling.exists_eq_ad",
+  "file": "Mathlib/Algebra/Lie/Derivation/Killing.lean",
+  "how": "exact: lines 106--113, with the finite-dimensional field instance Module.Finite and LieAlgebra.IsKilling, whose meaning is nondegeneracy of the Killing form (Mathlib/Algebra/Lie/Killing.lean:46--64). No semisimplicity-to-Killing implication is part of this leaf.",
+  "line": 109
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-split-charzero-lie-group-integration",
+  "date": "2026-10-24",
+  "group": "Q34"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Positive-characteristic Andersen–Haboush argument: trivial pushforward of M_((p^r-1)rho), before the Serre twisting calculation. Supporting input: Lemma 2.3, second assertion, and Lemma 2.1, printed pp.153--155: H^0(u,V(lambda))=K v_lambda for p-restricted dominant lambda. With roots positive in Lie(B), V(lambda)=Gamma(M_{-w0 lambda}). Supporting input: Simple-root distributions and infinitesimal subalgebra calculus. Supporting input: pinning-compatible integral-to-geometric distribution comparison, with all positive root divided powers, before simple-root generation. Integral-root-model prerequisite before the comparison: integral Chevalley construction and a positive-root coordinate chart; integral matrix-closure construction: the big cell and its Weyl translates, before identifying the special fibre. Supporting input: Integral closure atlas, exhaustion of each special fibre: exclude extra components using the generic and special identity-component big-cell dimensions. Supporting input: Lemma 3.7 (first assertion, the Iwahori--Matsumoto maximal-boundedness statement) and its application in Proposition 4.3, second paragraph, printed pp.7-8; Cartan double-coset input used to prove the maximal-boundedness prerequisite, before the torus-powers argument. Supporting input: Theorem 1.3, implication (1) to (3), printed pp.1, 6; Definition 3.4 and Lemma 3.6, printed pp.5-6. The complete-DVR cocharacter form, before the non-complete descent of Theorem 4.1. Supporting input: Section 2, Claim 2, printed p.2; Section 3, proof of Theorem 1.3, (1) implies (2), printed p.6, removes the residue-field and splitness restrictions. Supporting input: Claim 2: choose a linear embedding and use reductivity to make the homogeneous quotient affine. Supporting input: Alper, Adequate moduli spaces and geometrically reductive group schemes, Theorem 9.7.5, Proposition 9.3.1(i), Lemma 9.2.5(2),(3), printed pp.522,524,527--528. WANTED local copy; read https://content.algebraicgeometry.nl/2014-4/2014-4-022.pdf. Supporting input: Lemmas 9.7.2(1),(2), Remark 9.7.3, Lemma 9.7.4 and their combination in Theorem 9.7.5, printed pp.526--528. Use primitive v, not an arbitrary invariant vector; select arbitrarily large Steinberg weights when char(kappa)>0. Supporting integral input: Lemma 9.7.4(1),(2), printed p.527; Seshadri Property II, p.247. Part (2) is char(kappa)=p>0, as in the arXiv HTML; the PDF text extraction loses the not-equal sign. Repair of 4ec34095fce: Part II, 3.18--3.19, natural restriction embedding in the proof of the Steinberg theorem, with the infinitesimal induced object of II.3.7 and II.9.1; use this pre-Kempf argument, not II.8.8 or II.8.19. Supporting input: Extension of the infinitesimal Steinberg module from the Borel thickening. Supporting independent pre-Kempf input: specialize an integral highest-weight lattice of classical Weyl dimension; used to bound the source of the matrix-coefficient map into the infinitesimally induced module. Numerical characteristic-zero input: apply Weyl’s dimension formula before choosing and reducing the cyclic divided-power lattice. Supporting input to the classical dimension calculation: Theorems 22.53 and 23.70(a)--(e), printed pp.481 and 507--508; proof of 23.70(d) identifies the split torus through the integral weight grading. The lattice and root comparison is part of its diagram (V,Phi,P(Phi)). Supporting input: Mathlib inner-derivation theorem, used to compute the tangent Lie algebra of the tensor envelope.",
+   "via": [
+    "lem-sfb-split-charzero-lie-group-integration",
+    "lem-sfb-characteristic-zero-weyl-dimension",
+    "lem-sfb-integral-specialization-highest-weight-dimension",
+    "lem-sfb-steinberg-borel-thickening-extension",
+    "lem-sfb-steinberg-infinitesimal-restriction-injective",
+    "lem-sfb-dvr-rho-section-self-duality",
+    "lem-sfb-dvr-primitive-endomorphism-detector",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

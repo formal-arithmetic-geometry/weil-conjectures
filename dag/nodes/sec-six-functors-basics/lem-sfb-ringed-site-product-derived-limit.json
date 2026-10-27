@@ -1,0 +1,295 @@
+{
+ "id": "lem-sfb-ringed-site-product-derived-limit",
+ "kind": "statement",
+ "title": "Product-preserving functors on ringed sites preserve derived inverse limits",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] and $\\mathcal O$ a sheaf of commutative rings on it. Put $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ [def-weil-sheaf-of-modules-category]. Let $F:\\mathcal A\\to\\operatorname{Ab}$ be an additive functor [def-sp-left-exact-additive] preserving countable products: for every $(M_n)_{n\\in\\mathbf N}$, the canonical map $F(\\prod_nM_n)\\to\\prod_nF(M_n)$ is an isomorphism. Let $RF:D(\\mathcal A)\\to D(\\operatorname{Ab})$ be its unbounded right derived functor, computed by termwise $F$ on K-injective resolutions [def-sfb-right-derived-functor, def-pur-kinjective-complex], in the ordinary derived categories [def-weil-abstract-derived-category]. For every inverse sequence $K_n$ with transitions $f_n:K_{n+1}\\to K_n$ and every derived-limit triangle [def-weil-derived-limit]\n$$L\\xrightarrow{p}P\\xrightarrow{1-s}P\\xrightarrow{\\delta}L[1],\\qquad P=\\prod_nK_n,\\quad \\operatorname{pr}_n s=f_n\\operatorname{pr}_{n+1},$$\nthe maps $RF(\\operatorname{pr}_n)$ identify $RF(P)$ with $\\prod_nRF(K_n)$. Under this identification, applying $RF$ to the displayed triangle, with its shift comparison on the last map, gives a derived-limit triangle for $(RF(K_n),RF(f_n))$ in $D(\\operatorname{Ab})$. In particular $RF(L)$ is a derived limit of the image tower with projections $RF(\\operatorname{pr}_n\\circ p)$.",
+ "source": {
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 08U1, label lemma-RF-commutes-with-Rlim, specialized to module sheaves on a small ringed site and target Ab; the source category is Grothendieck by prop-pur-kinjective-resolutions-exist."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-left-exact-additive",
+  "def-sfb-right-derived-functor",
+  "def-pur-kinjective-complex",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-category-product"
+ ],
+ "proof": [
+  {
+   "text": "Write $Q_{\\mathcal A}$ and $Q_{\\rm Ab}$ for localization. Products of module sheaves exist sectionwise: $(\\prod_n M_n)(U)=\\prod_n M_n(U)$ with componentwise action and restrictions. A matching family glues uniquely in each $M_n$, hence in their product; maps into it are precisely families of module-sheaf maps. This verifies the product universal property directly from [def-weil-sheaf-of-modules-category]. By [prop-pur-kinjective-resolutions-exist], the smallness of $\\mathcal C$ ensures that every complex in $\\mathcal A$ has a K-injective resolution. Choose K-injective complexes $I_n$ and isomorphisms $a_n:Q_{\\mathcal A}I_n\\xrightarrow{\\sim}K_n$. The product complex $I=\\prod_n I_n$ exists degreewise by the sectionwise construction above.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; Tag 08U1, first sentence; ringed-site specialization in sites-cohomology.tex, Section 07A5"
+   }
+  },
+  {
+   "text": "By [lem-pc-ringed-space-product-kinjective], applied to the abelian category $\\mathcal A$ and the set $\\mathbf N$, $I$ is K-injective and $Q_{\\mathcal A}I$, with the localized coordinate projections $Q_{\\mathcal A}(r_n)$, is a product of $Q_{\\mathcal A}I_n$. Thus there is a unique product isomorphism $a:Q_{\\mathcal A}I\\xrightarrow{\\sim}P$ with $\\operatorname{pr}_n a=a_n Q_{\\mathcal A}(r_n)$. Its inverse is obtained from the inverse factor isomorphisms and the product universal property; the two composites are identities because all their projections are identities.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6, lemma-product-K-injective, both assertions; also Injectives Tag 07D9, lemma-derived-products, product clause"
+   }
+  },
+  {
+   "text": "Let $\\eta_J:Q_{\\rm Ab}(FJ)\\to RF(Q_{\\mathcal A}J)$ be the natural derived-functor unit of [def-sfb-right-derived-functor]. It is invertible for $J=I,I_n$. The canonical maps $F(I^j)\\to\\prod_nF(I_n^j)$ are isomorphisms by the hypothesis on $F$. Their coordinates are $F(r_n^j)$, so they commute with differentials: the two composites have coordinate $F(d_{I_n}r_n)=F(r_n d_I)$. They therefore give an isomorphism of complexes $F(I)\\xrightarrow{\\sim}\\prod_nF(I_n)$. Abelian groups have exact countable products by [lem-pc-abelian-groups-exact-products]; consequently [lem-weil-derived-limit-products-core] makes $Q_{\\rm Ab}(\\prod_nF(I_n))$ a product of the $Q_{\\rm Ab}(F(I_n))$, with its localized projections. Transport this product cone along the displayed complex isomorphism, the units $\\eta_I,\\eta_{I_n}$, and $a,a_n$. Naturality gives $RF(Q_{\\mathcal A}r_n)\\eta_I=\\eta_{I_n}Q_{\\rm Ab}(F(r_n))$; combined with the equation for $a$, this says the transported legs are exactly $RF(\\operatorname{pr}_n)$. Thus the canonical comparison $e:RF(P)\\xrightarrow{\\sim}P'=\\prod_n RF(K_n)$ satisfies $\\pi_n e=RF(\\operatorname{pr}_n)$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-pc-abelian-groups-exact-products",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 08U1, lemma-RF-commutes-with-Rlim, final paragraph; Derived Categories Tags 070Y and 07KC"
+   }
+  },
+  {
+   "text": "The source has K-injective resolutions by step 1. The target $\\operatorname{Ab}$ has them too: take the site with one object, its identity morphism and only the maximal covering sieve, with ring $\\mathbf Z$, and apply [prop-pur-kinjective-resolutions-exist]. A module sheaf on this site is exactly an abelian group with its unique $\\mathbf Z$-action, and maps, differentials, homotopies and quasi-isomorphisms are the usual ones, so the resolution supplied there is a resolution in $\\operatorname{Ab}$. Thus both resolution hypotheses in [lem-pc-right-derived-functor-triangulated] hold. It gives a triangulated $RF$ and its shift isomorphism $\\sigma_L:RF(L[1])\\xrightarrow{\\sim}RF(L)[1]$. Applying it to the specified triangle gives a distinguished triangle with arrows $RF(p),RF(1-s),\\sigma_L RF(\\delta)$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 08U1, sentence asserting exactness of RF; Tag 079P for the singleton ringed-site specialization"
+   }
+  },
+  {
+   "text": "Use the isomorphisms $(1,e,e)$ on the three vertices of this image triangle. The resulting distinguished triangle has arrows $eRF(p)$, $b=eRF(1-s)e^{-1}$ and $\\sigma_L RF(\\delta)e^{-1}$; it is distinguished by invariance under triangle isomorphisms [def-weil-triangulated-category]. For every $n$, additivity and functoriality of $RF$ give\n$$\\pi_n b=RF(\\operatorname{pr}_n(1-s))e^{-1}=RF(\\operatorname{pr}_n-f_n\\operatorname{pr}_{n+1})e^{-1}=\\pi_n-RF(f_n)\\pi_{n+1}.$$\nThe product universal property therefore identifies $b$ with $1-s'$ for the image tower. By [def-weil-derived-limit] the resulting triangle is a derived-limit triangle. Finally $\\pi_n eRF(p)=RF(\\operatorname{pr}_n)RF(p)=RF(\\operatorname{pr}_n\\circ p)$, giving precisely the required projections. The formula for the last arrow explicitly includes the shift comparison.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 08U1, reduction to countable products; Derived Categories Tag 08TC, definition-derived-limit, with the projection calculation written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-ringed-space-product-kinjective",
+  "def-sfb-right-derived-functor",
+  "lem-pc-abelian-groups-exact-products",
+  "lem-weil-derived-limit-products-core",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-weil-triangulated-category",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 08U1, lemma-RF-commutes-with-Rlim; K-injective product model from Derived Categories Tag 0BK6 and exact target products from Tag 07KC; naturality and triangle-map calculations written out by Q19"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "trunc.*[Dd]erived[Ll]imit|[Dd]erived[Ll]imit.*trunc|rightDerived.*preserves|rightDerived.*[dD]erived[Ll]imit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasi coherent cohomology on an algebraic space implies convergence of the lower truncation tower to the complex as a homotopy limit",
+   "results": "OK 8 hits: CochainComplex.quasiIso_ιTruncLE_iff, CochainComplex.quasiIso_πTruncGE_iff, CochainComplex.quasiIso_truncGEMap_iff, HomologicalComplex.instQuasiIsoAtιTruncLEF, HomologicalComplex.truncGE'.quasiIsoAt_restrictionToTruncGE', HomologicalComplex.truncLE'.quasiIsoAt_truncLE'ToRestriction, HomologicalComplex.quasiIso_truncLEMap_iff, HomologicalComplex.quasiIso_πTruncGE_iff_isSupported",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"PreservesLimitsOfShape\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor from a Grothendieck abelian category to abelian groups preserving countable products has a right derived functor preserving homotopy limits of inverse sequences",
+   "results": "OK 8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.leftDerived, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi coherent complex on an algebraic space is the derived inverse limit of its bounded below canonical truncations",
+   "results": "OK 8 hits: SheafOfModules.QuasicoherentData.X, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|leftComplete|[Ll]eft[Cc]omplete|truncGE.*limit",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The unbounded right derived functor of an additive countable product preserving functor from a Grothendieck category to Ab preserves derived inverse limits",
+   "results": "OK 8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv, CategoryTheory.rightExactFunctor_le_additiveFunctor",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"truncGE\", \"limit\"",
+   "results": "OK 1 hits: HomologicalComplex.truncGE'.isLimitKernelFork",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derivation of a countable product preserving functor into an AB4 star abelian category commutes with R lim",
+   "results": "OK 8 hits: CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, CategoryTheory.CountableAB4Star.of_countableAB5Star, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Limits.colimitPointwiseProductToProductColimit_app, CategoryTheory.NatTrans.leftDerived_comp_assoc, CategoryTheory.NatTrans.leftDerived_comp",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left completeness for quasi coherent derived categories of algebraic spaces: E is the homotopy inverse limit of tau greater than minus n E",
+   "results": "OK 8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso, DerivedCategory.instHasLeftCalculusOfFractionsHomotopyCategoryIntUpQuasiIso, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern individual truncations, local presentations, ordinary right derived functors or AB4* axioms; none states either unbounded space reconstruction or preservation of derived inverse limits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The unbounded right derived functor of an additive functor on module sheaves preserving countable products preserves homotopy inverse limits",
+   "results": "OK 8 hits: CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rightDerived is defined on objects via nonnegative injective resolutions; mapDerivedCategory requires an exact underived functor; pointwise derived-functor existence does not assert product or Roos-triangle preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Pp]roduct|rightDerived.*[Ll]imit|[dD]erived[Ll]imit.*[Ff]unctor",
+   "results": "OK 1 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rightDerived is defined on objects via nonnegative injective resolutions; mapDerivedCategory requires an exact underived functor; pointwise derived-functor existence does not assert product or Roos-triangle preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A product preserving additive functor on a Grothendieck abelian category induces an unbounded derived functor preserving derived inverse limits",
+   "results": "OK 8 hits: CategoryTheory.Functor.instAdditiveOfIsHomological, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.preservesFiniteProductsOfAdditive, CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive, CategoryTheory.Functor.instPreservesLimitsOfShapeDiscreteWalkingPairOfIsHomological, CategoryTheory.Functor.preservesFiniteLimits_of_preservesHomology, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rightDerived is defined on objects via nonnegative injective resolutions; mapDerivedCategory requires an exact underived functor; pointwise derived-functor existence does not assert product or Roos-triangle preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctor\", \"PreservesLimitsOfShape\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rightDerived is defined on objects via nonnegative injective resolutions; mapDerivedCategory requires an exact underived functor; pointwise derived-functor existence does not assert product or Roos-triangle preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right derivation of a countable product preserving functor from a Grothendieck abelian category to an AB4 star category commutes with homotopy limits of towers",
+   "results": "OK 8 hits: CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp_assoc, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory_comp",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary rightDerived is defined on objects via nonnegative injective resolutions; mapDerivedCategory requires an exact underived functor; pointwise derived-functor existence does not assert product or Roos-triangle preservation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+  "date": "2026-10-24",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Right adjoint of quasi-coherent pushforward for qcqs algebraic spaces. Supporting input: 0E55 Brown hypotheses: qcqs derived direct image and direct-sum comparison 08FA/08FB. Auxiliary input: Uniform upper bound for unbounded quasi-coherent space pushforward. Supporting input: 08FA proof of (2): apply 08F7 to the functor Gamma(V times_Y X, -). 08F7 proof (2), second sentence: RF(E) = R lim RF(E_n), by Injectives 08U1.",
+   "via": [
+    "lem-sfb-space-product-preserving-derived-functor-upper-bound",
+    "lem-sfb-space-derived-pushforward-upper-bound",
+    "lem-sfb-space-derived-pushforward-coproducts",
+    "lem-sfb-qcqs-space-pushforward-right-adjoint",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-ringed-site-product-derived-limit",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08U1 using the existing general K-injective-product theorem and the exact-product derived-category theorem, rather than duplicating the scheme-only product-preservation nodes. Wrote the canonical projection comparison from the natural derived unit, checked the target K-injective hypothesis via the singleton Z-ringed site, and calculated the transition and connecting maps of the image triangle. No new nodes or mathematical statement changes.",
+  "blueprint": "Inherited auxiliary branch of det-thm-sf-ctf-stability-direct-images, direct-image argument (3): the 08F7/08FA upper-bound prerequisite uses 08U1 to pass RF through the lower-truncation derived limit. This split supplies exactly that 08U1 input; no change to the unit or chapter route. The current latest unit text was read; this created item has no blueprint.is and its inherited nearest ancestor is null.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic Tag 0BK6 holds in every abelian category and computes products of K-injective representatives; the scheme-only product-preservation theorem does not cover a general small ringed site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-ringed-space-product-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-ac086a9af",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-ac086a9af (reviewer sub-agent of L); spot-checked: Faithful split of Stacks 08U1 (injectives.tex line 2066, read in full: statement and proof). The item statement is unchanged against live, which is still unsplit, so nobody else has split it. stmt_deps gains def-weil-category-product, which is correct since the statement uses products. There are no new nodes and no SGA. Step 1: sectionwise products in Mod(O) follow directly from the module-sheaf definition (elementary), and prop-pur-kinjective-resolutions-exist gives unbounded K-injective resolutions on a small ringed site. Step 2: lem-pc-ringed-space-product-kinjective (generic 0BK6) gives that the product of the I_n is K-injective and is the product in D(A). Its bridge notion of K-injective agrees with def-pur-kinjective-complex because acyclic complexes are closed under shift. Step 3: the natural unit of def-sfb-right-derived-functor is invertible on K-injectives. F(I) is isomorphic to the product of the F(I_n) as complexes, with the differential check written out. lem-weil-derived-limit-products-core (07KC), with Ab's exact products from lem-pc-abelian-groups-exact-products, makes the termwise product cone limiting without assuming F(I_n) is K-injective. I recomputed the legs: pi_n e = RF(pr_n). Step 4: lem-pc-right-derived-functor-triangulated needs K-injective resolutions in the target too. The step gets them in Ab from prop-pur applied to the one-object site with the trivial topology and ring Z; the route is roundabout but valid, and the hypothesis is discharged rather than ignored. Step 5 (elementary): the triangle isomorphism (1,e,e) gives last arrow sigma_L RF(delta) e^-1. I recomputed pi_n b = pi_n - RF(f_n) pi_{n+1}, so b = 1-s' with no sign slip, and the projections are RF(pr_n p). Edge cases checked: zero functor, zero tower, zero transitions (derived limit is 0), and non-left-exact F. The scheme-only nodes lem-pc-derived-functor-commutes-derived-limit and lem-pc-right-derived-functor-countable-products are narrower specializations, not duplicates. Accepted generic off-unit tool uses: 0BK6 product-of-K-injectives (declared in split_report.tool_uses), triangulated RF, 07KC products core (Lean-closed), Ab exact products (Mathlib leaf), and prop-pur (Lean-closed). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteProductDerivedLimit",
+  "declaration": "CategoryTheory.ringedSite_product_preserving_derivedLimit",
+  "declarations": [
+   "CategoryTheory.ringedSiteProductResolutionWitness",
+   "CategoryTheory.Functor.quasiIsoResolutionProductRFComparison",
+   "CategoryTheory.Functor.quasiIsoResolutionProductRFCommShift",
+   "CategoryTheory.ringedSiteProductRF",
+   "CategoryTheory.ringedSiteProductRFShift",
+   "CategoryTheory.ringedSite_product_preserving_derivedLimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteProductDerivedLimit.lean",
+  "statement": "theorem ringedSite_product_preserving_derivedLimit [PreservesLimitsOfShape (Discrete ℕ) F] (K : ℕ → DerivedCategory (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))) [HasProduct K] (f : ∀ n : ℕ, K (n + 1) ⟶ K n) (L : DerivedCategory (ringedSiteModules.{max c v r, max c v r, v, c} ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))) (p : L ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ L⟦(1 : ℤ)⟧) (hK : IsDerivedLimitTriangle f L p δ) : ∃ (hP : HasProduct (fun n : ℕ ↦ (ringedSiteProductRF.{c, v, r, w, w'} J O F).obj (K n))) (e : (ringedSiteProductRF.{c, v, r, w, w'} J O F).obj (∏ᶜ K) ≅ @piObj _ _ _ _ hP), (∀ n : ℕ, e.hom ≫ @Pi.π _ _ _ _ hP n = (ringedSiteProductRF.{c, v, r, w, w'} J O F).map (Pi.π K n)) ∧ @IsDerivedLimitTriangle _ _ _ _ _ _ _ _ hP (fun n : ℕ ↦ (ringedSiteProductRF.{c, v, r, w, w'} J O F).map (f n)) ((ringedSiteProductRF.{c, v, r, w, w'} J O F).obj L) ((ringedSiteProductRF.{c, v, r, w, w'} J O F).map p ≫ e.hom) (e.inv ≫ (ringedSiteProductRF.{c, v, r, w, w'} J O F).map δ ≫ (ringedSiteProductRFShift.{c, v, r, w, w'} J O F (1 : ℤ)).hom.app L) ∧ (∀ n : ℕ, (ringedSiteProductRF.{c, v, r, w, w'} J O F).map p ≫ e.hom ≫ @Pi.π _ _ _ _ hP n = (ringedSiteProductRF.{c, v, r, w, w'} J O F).map (p ≫ Pi.π K n))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d102771da",
+  "group": "Q23",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records, Stacks 08U1 place, module, report, and dependency Lean (RightDerivedFunctorOfQuasiIsoResolutions incl. ∃! _unique, RGammaDerivedLimit siteModuleKInjectiveResolutions, IsDerivedLimitTriangle, RightDerivedFunctor.Triangulated CommShift). All hypotheses match: small site C:Type c/Hom v, O:Sheaf J CommRingCat.{max c v r} (same convention as landed lem-kun, no restriction), A = ringedSiteModules, F additive into AddCommGrpCat with PreservesLimitsOfShape (Discrete ℕ) F, RF = recorded rightDerivedFunctorOfQuasiIsoResolutions with a Prop resolution witness, independent HasDerivedCategory universes w/w', tower with HasProduct and IsDerivedLimitTriangle. Conclusion: ∃ hP e with e.hom≫π_n = RF(pr_n); IsDerivedLimitTriangle at the same hP with first arrow RF p≫e.hom and last arrow e.inv≫RF δ≫shift.hom.app L (types checked); projections RF(p≫pr_n). Shift is canonical: CommShift.ofIso of the ∃!-pinned unit-compatible comparison with the recorded sorry-free upstream instance. Node differs from live only in lean; statement field verbatim; 6 declarations listed; only theorem is sorry; docstrings have source and blueprint tags; no new nodes or dep record changes; no generic duplicate in live (scheme-only or narrower hits). Non-blocking: imports theorem module RGammaDerivedLimit only for a Prop instance, no cycle. No compile (no change)."
+ }
+}

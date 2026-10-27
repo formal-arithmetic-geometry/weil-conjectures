@@ -1,0 +1,269 @@
+{
+ "id": "lem-sf-rational-localization-triangle-orthogonality",
+ "kind": "statement",
+ "title": "Normalized rational localization triangles and cross-object orthogonality",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$, a prime $\\ell\\ne p$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R=\\mathcal O_E$ and uniformizer $t$ [def-weil-finite-field-fiber], [def-weil-l-adic-coefficient-extension]. Let $X$ be a separated finite-type $k$-scheme, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. For $T=X,U,Z$ use the derived-complete integral category $\\mathcal C_T=D^b_c(T,R)$ and its raw rationalization $\\mathcal C_T[1/t]=D^b_c(T,E)$, with no Karoubi completion [def-weil-derived-complete-integral-detailed], [def-weil-rationalization-karoubi]. Write $Q_T$ for the identity-on-objects localization functor, with $\\operatorname{Hom}(Q_TK,Q_TL)=\\operatorname{Hom}(K,L)\\otimes_RE$.\n\nThe actual rational functors $i^*,j^*,i_*,j_!$ of [def-weil-derived-pullback-tensor-hom], [def-weil-derived-direct-image], [def-weil-integral-rational-qbar-compact-support] are exact $E$-linear functors obtained by rationalizing their integral counterparts. The adjunctions $j_!\\dashv j^*$ and $i^*\\dashv i_*$ rationalize as adjunctions, including their specified units and counits, for every rational morphism, without requiring an integral representative of that morphism. In particular, the open counit $\\varepsilon^E$ and closed unit $\\eta^E$ have components $Q_X(\\varepsilon^R_K)$ and $Q_X(\\eta^R_K)$.\n\nFor every integral $K\\in\\mathcal C_X$ and every distinguished integral completion\n$$j_!j^*K\\xrightarrow{\\varepsilon^R_K}K\\xrightarrow{\\eta^R_K}i_*i^*K\\xrightarrow{\\delta}j_!j^*K[1],$$\nits image under $Q_X$, with the canonical shift comparison, is a distinguished triangle with the rational counit and unit. For arbitrary $N\\in D^b_c(U,E)$, $M\\in D^b_c(Z,E)$ and $m\\in\\mathbf Z$, writing $\\widetilde N,\\widetilde M$ for the same objects in the integral categories, the canonical identification is\n$$\\operatorname{Hom}_{D^b_c(X,E)}(j_!N[m],i_*M)\\cong\\operatorname{Hom}_{D^b_c(X,R)}(j_!\\widetilde N[m],i_*\\widetilde M)\\otimes_RE=0.$$\nThese identifications use the normalized operations and adjunction maps, not alternative functors with merely isomorphic vertices.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "Rational-stage paragraph: raw localization, specified operations and adjunction maps, and cross-object Hom groups; original detailed step 10."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-system-operation-exchange-realization",
+  "def-weil-compact-support-finite-action"
+ ],
+ "proof": [
+  {
+   "text": "Apply integralSupportFunctorNormalization to obtain the inherited geometry, specified integral support functors, exact linear shifts, open adjunction and disjointness. The adjoint shifts give exact linear integral pullbacks. Reduction is fully faithful on complete objects, by its invertible reconstruction unit. Compose the reduction Hom equivalence, the normalized pullback/reduction isomorphism, the system pullback/direct-image adjunction, and reduction/total-limit adjunction to construct the closed integral adjunction. Evaluating its unit at the identity gives the required whole-system closed-unit equation. The open counit equation follows from openSystemCounit by naturality of the reduction/limit counit.",
+   "uses": [
+    "lem-sf-integral-support-functor-normalization",
+    "def-weil-system-operation-exchange-realization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the specified additive rational pullbacks and compact-support tensor action. Construct the closed rational image by the semilinear extension for the identity coefficient map. All four functors satisfy Q Fq = F Q by their pure tensor formulas. Raw Q is a categorical localization: compare its tensor Hom modules with Rationalization.tensorHomEquiv, obtaining a fully faithful essentially surjective comparison. Descend the integral shift comparisons using Functor.commShiftOfLocalization. Naturality of the factorization equality supplies the shift equation in every integer degree. The torsion-cone denominators admit left fractions, so localization is essentially surjective on arrows. Mathlib isTriangulated_of_precomp descends exactness of each extended functor, and tensor induction proves coefficient-field linearity on all rational arrows.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Adjunction.localization to the two specified integral adjunctions and the literal functor factorization equalities. Its unit and counit component formulas are the integral maps tensored with one, up to transports along those equalities, which give the required HEq statements. The construction is natural on all localized arrows.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the exact localization Q to every given integral distinguished completion. Transport its three vertices along the literal object formulas of the rational operations. The localized unit and counit HEq equations fix its first two arrows; equality transport retains the last arrow Q(delta) followed by the specified Q shift comparison.",
+   "uses": [
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For arbitrary independent integral N,M and any integer m, precompose with the shift comparison J(N[m]) isomorphic to J(N)[m] and use the open adjunction. Disjointness makes the resulting target P(I(M)) zero, so the integral cross Hom is a subsingleton. Tensoring a subsingleton module gives a subsingleton. Transport the rational Hom along the object equalities and Q shift isomorphism to its scalar-first tensor Hom, also a subsingleton. The unique additive equivalence of the two zero groups satisfies the prescribed pure-tensor coordinate equation.",
+   "uses": [
+    "lem-sf-integral-support-functor-normalization",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-support-functor-normalization",
+  "def-weil-system-operation-exchange-realization",
+  "lem-pur-semilinear-scalar-localization",
+  "def-weil-rationalization-karoubi"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-open-closed-triangle-all-stages.proof.md",
+  "place": "T4 Lean assembly from integral normalization and raw scalar localization; adjunction localization uses Mathlib component formulas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rationalizing bounded constructible integral adic categories preserves the open closed localization triangle, its adjunction maps, and orthogonality between arbitrary open and closed objects",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.ObjectProperty.isLocal_trW; CategoryTheory.ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle; CategoryTheory.ObjectProperty.leftOrthogonal.map_bijective_of_isTriangulated; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.ObjectProperty.isColocal_trW",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar localization of linear triangulated categories preserves specified triangles and zero cross Hom groups",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'; CategoryTheory.Triangulated.Localization.pretriangulated; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization; CategoryTheory.Triangulated.Localization.isTriangulated; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.Functor.isHomological_of_localization",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Raw rationalization of integral adic sheaves carries localization triangles and cross-object orthogonality to coefficient fields",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Triangulated.Localization.isTriangulated_functor; CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'; CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW; CategoryTheory.Triangulated.Localization.instAdditiveLocalizationShiftFunctorInt; CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization; CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization; AlgebraicGeometry.Γ_restrict_isLocalization",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization, CategoryTheory.Functor",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Localization'; ",
+   "date": "2026-10-22",
+   "verdict": "invalid query; corrected with the later Loogle query"
+  },
+  {
+   "tool": "grep",
+   "query": "rationali[sz].*(triang|orthogon)|locali[sz].*(orthogon|proetale)|openClosed.*[Rr]ational",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"localization\", CategoryTheory.Functor",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Localization.Construction.lift; CategoryTheory.Localization.Construction.liftToPathCategory; CategoryTheory.Localization.Construction.whiskeringLeftEquivalence; CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor; CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.inverse; CategoryTheory.Localization.Construction.fac; CategoryTheory.Localization.Construction.liftToPathCategory_obj; CategoryTheory.Localization.Construction.uniq; CategoryTheory.Localization.Construction.lift_obj; CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.functor_obj_obj_obj; CategoryTheory.Localization.Construction.NatTransExtension.app; CategoryTheory.Localization.Construction.WhiskeringLeftEquivalence.counitIso",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightOrthogonal.map_bijective_of_isTriangulated|leftOrthogonal.map_bijective_of_isTriangulated|theorem isTriangulated_functor|def scalarExtension",
+   "results": "[grep] OK 2 hit(s); Mathlib/CategoryTheory/Triangulated/Orthogonal.lean:108 lemma rightOrthogonal.map_bijective_of_isTriangulated; Mathlib/CategoryTheory/Triangulated/Orthogonal.lean:124 lemma leftOrthogonal.map_bijective_of_isTriangulated",
+   "date": "2026-10-22",
+   "verdict": "no match: generic topology, site, localization, or mate infrastructure does not state the specified constructible coefficient-stage assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "localization_unit_app|localization_counit_app|localization.*[Aa]djunction",
+   "results": "Hits: Mathlib/CategoryTheory/CatCommSq.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bousfield.lean, Mathlib/CategoryTheory/Localization/Bousfield.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic localization/derived functor infrastructure does not identify these normalized integral and rational constructible operations or prove their cross-object vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rationalizing linear adjoint functors preserves the unit counit and localization triangles of constructible sheaves",
+   "results": "Hits: CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived'",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic localization/derived functor infrastructure does not identify these normalized integral and rational constructible operations or prove their cross-object vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"localization\"",
+   "results": "Hits: CategoryTheory.Adjunction.isLocalization, CategoryTheory.Adjunction.isLocalization', CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_counit_app",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic localization/derived functor infrastructure does not identify these normalized integral and rational constructible operations or prove their cross-object vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raw scalar localization transports an adjunction and its specified unit and counit, open closed sheaf triangles, and orthogonality",
+   "results": "Hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.hasLeftCalculusOfFractions, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.hasRightCalculusOfFractions",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic localization/derived functor infrastructure does not identify these normalized integral and rational constructible operations or prove their cross-object vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact scalar extension of linear functors on triangulated categories and zero Hom from extension by zero to closed pushforward",
+   "results": "Hits: CategoryTheory.Abelian.Ext.mapExactFunctor_zero, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁, CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift, CategoryTheory.Functor.IsHomological.exact, CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: generic localization/derived functor infrastructure does not identify these normalized integral and rational constructible operations or prove their cross-object vanishing"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-open-closed-triangle-all-stages",
+  "date": "2026-10-22",
+  "group": "O1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-open-closed-triangle-all-stages",
+   "place": "Rational-stage paragraph: raw localization, specified operations and adjunction maps, and cross-object Hom groups; original detailed step 10.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-rational-localization-triangle-orthogonality",
+  "worker": "stage1",
+  "summary": "Repair of explicit 2026-10-22 batch5 re-split return: extract two independent statement-only integral normalization tasks; preserve all prior integral arguments verbatim in the report and retain the rational tensor-arrow calculation, every-triangle quantifier, and independent-object orthogonality in the short assembly. Item statement and Lean metadata unchanged.",
+  "blueprint": "Rational-stage paragraph, all three sentences, with integral normalizations from the preceding integral-stage paragraph. New pullback node carries old steps 1 and inverse-image parts of 2–3; new support node carries support parts of 2–3 and old step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic scalar-localization extension of functors, transformations, equations and specified shift comparisons; the unit supplies no separate rational-adjunction theorem."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic exactness of the raw scalar-localization functor Q_X of a linear triangulated category; it carries every integral distinguished completion to a distinguished rational triangle with the localized shift comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-roos-unit-adjunction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-finite-constructibility-interval",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-a1-integral-pullback-completed-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NR-0548f9381",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-0548f9381 (reviewer sub-agent of L); spot-checked: Re-split under the released 2026-10-22 batch-5 note (old proof 6907 characters in 8 steps). The item statement and every other field match the live node byte for byte, so the Q03 stage-2 Lean record stays valid. The item is not dropped and not superseded. Old step 1 and the inverse-image parts of old steps 2-3 became the new node lem-sf-integral-immersion-pullback-normalization: gamma comes from lem-a1-integral-pullback-completed-comparison, c from lem-sf-immersion-completed-pullback-comparison, the coefficient identifications from lem-weil-pbc-profinite-coefficient-inverse-image and the adic hypotheses from lem-sf-open-roos-unit-adjunction. The support parts of old steps 2-3 and all of old step 4 became the new node lem-sf-integral-support-functor-normalization: J_R uses the compactification (j,id_X) of def-weil-integral-rational-qbar-compact-support with d_j from lem-sf-integral-open-reduction-comparison, including its unit and counit. I_R comes from def-weil-derived-direct-image, inverse to the comparison of prop-weil-pbc-direct-image-limits. The same constructibility interval comes from the open and immersion interval lemmas, and the adjunctions from lem-sc-derived-adjunction-from-underived plus preservation of the full subcategories. Both new statements match the integral-stage paragraph of main-20261015 prop-sf-open-closed-triangle-all-stages.proof.md. Both are self-contained, statement-only, of comparable size (2349 and 3071 characters), and neither restates the item. I found no duplicates; besides the report's list I checked lem-weil-extension-by-zero-adjunction, lem-sf-integral-pullback-linear-adjunction and lem-coef-integral-compact-support. There is no cycle. Edge cases U, Z or X empty, negative shifts and torsion objects all hold. Old steps 5-8, the rational transport through lem-pur-semilinear-scalar-localization with R=S, phi=id and u=t, and lem-weil-linear-scalar-localization-triangulated, stay as the 4-step assembly. That is correct, since turning them into a node would restate the item (D1). FIX: step 1 had dropped old step 5's sentence that uniqueness of the extension identifies the actual rational operations, together with the localized shift comparisons, and step 4 relies on it. I restored it; the assembly is now 2580 characters. The off-unit tool_uses for the two generic localization lemmas are accepted. No SGA source is used. Advisory: the mathlib_searches verdicts in both new nodes share one template rationale, including on 0-hit entries; the no-match conclusions are correct.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfRationalLocalizationOrthogonality",
+  "declaration": "WeilConjectures.sfRationalLocalizationTriangleOrthogonality",
+  "declarations": [
+   "WeilConjectures.sfLocalizationSystemDirectId",
+   "WeilConjectures.sfLocalizationPullReduction",
+   "WeilConjectures.sfLocalizationOpenRealization",
+   "WeilConjectures.SfRationalizedExactFunctor",
+   "WeilConjectures.SfRationalCrossHom",
+   "WeilConjectures.SfRationalLocalizationOrthogonality",
+   "WeilConjectures.sfRationalLocalizationTriangleOrthogonality"
+  ],
+  "file": "lean/Sheaf/Paper/SfRationalLocalizationOrthogonality.lean",
+  "statement": "theorem sfRationalLocalizationTriangleOrthogonality (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) {Z U X : Scheme.{u}} [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hij : Set.range j.base = (Set.range i.base)ᶜ) : Nonempty (SfRationalLocalizationOrthogonality l E D i j)",
+  "branch": "sheaf-dag",
+  "by": "Q03",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The structured conclusion retains the specified operations, canonical coherent-system integral adjunction normalization, all four localized unit/counit equations, every given distinguished completion, and independent-object Hom tensor E coordinates. Two already landed definition dependencies are added for the normalized strict-system direct-image action and the recorded compact-support Hom action; no dependency record or source statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-733b451ae",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Read item, all 10 stmt_dep records, the module, report (Worker report + Second reading by Q03 present) and the dependency sources (SfRationalizationKaroubi, DerivedPullbackTensorHom, SystemOperationExchangeRealization, IntegralPullbackComparisonRealization, IntegralComparisonSequenceSystems, CompactSupportFiniteAction). Hypotheses match the node exactly: FiniteFieldDatum, l≠p, X sep. finite type over k, closed i with complementary open j (hij); no extra assumptions or universe restriction. Recorded operations used: constructibleIntegralPullback/rationalDerivedPullback, compact-support functors with (j,id_X), directImageFunctor (= SfIntegralDirectImage via directImage_roos). The rational i_* field is pinned by objects+tensors+additivity. Integral open counit and closed unit are pinned by system-category normalizations (reduction fully faithful on complete objects; sfLocalizationSystemDirectId = rightAdjointUniq of the actual identity adjunction). Rational adjunction components are HEq-pinned to Q(unit/counit) on every object. The triangles clause takes every δ to a distinguished rational triangle whose last arrow is Q(δ) followed by Q's canonical shift comparison. Orthogonality covers arbitrary independent N, M and every m in Z. Edge cases empty U/Z/X, negative m, torsion objects. stmt_deps adds 2 def nodes used in the signature; closure check finds no cycle. lean.statement is verbatim; 7 declarations each carry source and blueprint docstrings; single sorry; all imports exist in live. First stage-2 delivery (live lean record absent). No compile (no file changed); worker's scompile was clean. Advisories: integral CommShift is existential (no canonical one among stmt_deps; FieldShriekLowerBound precedent); the ∃! coordinate clause is redundant given the Subsingleton clauses; proof-only plain imports."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261025T005415-L-3482198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

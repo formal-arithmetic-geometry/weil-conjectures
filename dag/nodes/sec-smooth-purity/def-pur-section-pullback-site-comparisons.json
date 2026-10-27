@@ -1,0 +1,112 @@
+{
+ "id": "def-pur-section-pullback-site-comparisons",
+ "kind": "definition",
+ "title": "Canonical finite section and pullback site-comparison arrows",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Use the finite purity datum P [def-pur-conventions], actual finite exceptional inverse image [def-weil-exceptional-inverse-image], derived pullback [def-weil-derived-pullback-tensor-hom], and the etale/pro-etale comparison morphism nu [def-weil-pbc-site-comparison-morphism]. For every morphism b:B′→B of schemes and every ordinary-etale derived coefficient complex K, define pullComparison as the composite of the exact/derived pullback comparisons with the canonical commutation b* nu_B* ≅ nu_B′* b*. For a separated quasi-compact morphism g:V→B smooth of pure relative dimension d≥0 [def-sbc-smooth-morphisms], a finite-type k-structure aB on B, and any map s:B→V, define sourceComparison:C_pro(g,s)≅nu_B* C_et(g,s) by specializing the canonical finite section comparison [def-pur-finite-section-comparison] to the sourceSection and sourceEtale presentations of [lem-pur-dnc-section-geometry]. These are the real composition and coefficient-unit comparison arrows; neither DNC invariance nor a chosen isomorphism of their endpoints is part of this definition.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sbc-smooth-morphisms",
+  "def-pur-finite-section-comparison",
+  "lem-pur-dnc-section-geometry"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+  "place": "Step 3, first paragraph: finite site transport and its pullback coherence for the two diagonal source objects."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "sourceOrdinary|sourceLift_geometry|tensorMateEtalePrecompLocalityIso|unboundedEtaleLowerShriekCongr|pullComparison|sourceComparison [CategoryTheory]",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the published Sheaf definitions; no replacement construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical etale chart self-product section comparison, exceptional adjoint locality, compact-support congruence and etale pro-etale pullback comparison",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.arrowResLEAppIso\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.of_comp\"]}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the published Sheaf definitions; no replacement construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "pullback.map, conjugateIsoEquiv",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'pullback.map'\", \"top\": []}",
+   "date": "2026-10-24",
+   "verdict": "No exact Mathlib match. Reuse the published Sheaf definitions; no replacement construction."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "Exact helper names in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search chart source / etale locality / compact support congruence / section comparison",
+   "results": "The exact declarations are in ChartDncVectorFactors, TensorMateEtalePrecomp, UnboundedEtaleCompactSupportComparisons and PurityDncInvariance. No definition node owns these exact declarations. def-pur-finite-section-comparison owns the underlying sectionComparison only. No exact upstream WeilConjectures match. Blueprint searches: 0 chart source, 2 etale locality (generic smoothness nodes), 0 compact support congruence, 1 section comparison (det-sp-orientation-charts).",
+   "date": "2026-10-24",
+   "verdict": "Record existing:true definition ownership at the original modules, as required by the immutable-head H2 review."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-chart-diagonal-source-mate",
+  "date": "2026-10-24",
+  "group": "Q58"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-orientation-charts",
+   "place": "Step 3, first paragraph: finite site transport and its pullback coherence for the two diagonal source objects.",
+   "via": [
+    "lem-pur-chart-diagonal-source-mate"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "lean": {
+  "module": "Sheaf.Paper.PurityDncInvariance",
+  "declaration": "WeilConjectures.PurityFiniteSetting.Dnc.sourceComparison",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.Dnc.pullComparison",
+   "WeilConjectures.PurityFiniteSetting.Dnc.sourceComparison"
+  ],
+  "statement": "def sourceComparison (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}}\n    (d : ℕ) (g : V ⟶ B) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]\n    (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB]\n    (s : B ⟶ V) :\n    sourceSection P d g aB s ≅\n      (ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.obj\n          (sourceEtale P d g aB s)",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Definition ownership requested by the immutable-head H2 review of 28bbd8b6d51c. The published declarations remain in their original module, with no move, copy, or mathematical change. The theorem conclusion of the former owning record is not used."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fd81382f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fd81382f",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 28bbd8b6. Lean module byte-identical to the previously reviewed version except the imports, now public (TensorMateEtalePrecomp, PurityDncInvariance, UnboundedEtaleCompactSupportComparisons, EtaleCompactSupportNormalization). Item node: only lean plus stmt_deps changed; theorem dep lem-pur-chart-dnc-vector-factors replaced; added deps all definitions (def-pur-diagonal-dnc-chart-data, def-sp-etale-compact-support-normalization, and 4 new existing:true owners: def-pur-chart-source-comparison for ChartFactors.selfMap/sourceLift/sourceOrdinary/source, def-pur-etale-exceptional-precomp-locality for tensorMateEtalePrecompLocalityIso, def-pur-compact-support-morphism-congruence for unboundedEtaleLowerShriekCongr (subst/Iso.refl), def-pur-section-pullback-site-comparisons for Dnc.pullComparison/sourceComparison). Each new lean.statement verbatim in side-live; bodies match node text; statement citations equal stmt_deps; deps exist; no cycle; no parallel def owner landed; item lean.statement verbatim and all 10 decls present. Maths re-checked: hypotheses not stronger (no surjectivity/Noetherian/compactification hypotheses, d=0 included), mate clause is (Le*α_p)∘a=c_e∘α_h with correct endpoints, O = W∖(Z∖Δ), viaQ with target-étale unit D_v and pinned η_e, restriction over all V≤O with section; edge cases and universes (u/u+1) fine; only sorry proofs; docstrings carry source and blueprint id. Advisory: new def nodes cite theorem lem-pur-dnc-section-geometry for Dnc.sourceSection/sourceEtale/sectionBaseChange (sole owner, constructed data); Dnc.compactifiable used only for instances (Nagata cited). No file changed; no compile run; worker scompile clean."
+ }
+}

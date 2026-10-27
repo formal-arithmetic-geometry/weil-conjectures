@@ -1,0 +1,489 @@
+{
+ "id": "lem-sfb-separated-space-atlas-cohomology-bound",
+ "kind": "statement",
+ "title": "Cohomology bound from an affine atlas of a separated algebraic space",
+ "statement": "Work in the universes of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme] and $Y$ a quasi-compact separated algebraic space over $S$ [def-trf-algebraic-space]. Quasi-compact means that every open cover of $|Y|$ has a finite subcover, and separated means that the absolute representable diagonal is a closed immersion [def-weil-closed-immersion]. Let $v:V\\to Y$ be a representable surjective etale morphism from an affine scheme [def-weil-etale-morphism, def-weil-affine-spectrum]. Let $d\\geq1$ be an integer such that for every algebraically closed field $\\Omega$ and every geometric point $\\operatorname{Spec}\\Omega\\to Y$, the geometric fibre $V\\times_Y\\operatorname{Spec}\\Omega$ has at most $d$ points [lem-trf-space-fibre-products-etale-covers, def-weil-geometric-point]. Then for every quasi-coherent $\\mathcal O_Y$-module $N$ [def-weil-sheaf-of-modules-category, def-trf-space-quasi-coherent-module] and every integer $q\\geq d$,\n$$H^q(Y_{\\mathrm{et}},N_{ab})=0.$$\nHere $N_{ab}$ is the underlying abelian sheaf and cohomology is the right derived functor of abelian-sheaf global sections [def-sp-left-exact-additive, def-sp-injective-resolutions]. The bound uses only the atlas and its fibre bound, with no dimension, Noetherian or finite-generation hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 072B, proposition-vanishing, using a bound on geometric fibre cardinalities (equivalently the degrees for etale geometric fibres), as in the proof by the alternating spectral sequence."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-etale-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-affine-spectrum",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-weil-geometric-point"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-space-change-base-to-integers] to the structural map $S\\to\\operatorname{Spec}\\mathbf Z$. This preserves the atlas, its sheaf fibre products, small etale ringed sites and therefore the module and its abelian-sheaf cohomology. Thus we may work over $\\operatorname{Spec}\\mathbf Z$, retaining the assumed absolute separatedness of $Y$.",
+   "uses": [
+    "lem-sfb-space-change-base-to-integers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "For $r\\geq1$ put $T_r=V^{\\times_Yr}$. These are affine etale charts of $Y$, by induction: $T_1=V$ and [lem-trf-space-separated-affine-chart-overlap], applied to the separated map $Y\\to\\operatorname{Spec}\\mathbf Z$ and the affine etale charts $T_r,V$, says that $T_{r+1}$ is affine and its projections are etale. In particular $T_2$ is affine. The diagonal $V\\to T_2$ is a pairwise equality locus and is open and closed by [lem-sfb-etale-atlas-distinct-tuple-geometry]. Its scheme structure is the induced open-subscheme structure; a clopen open immersion is a closed immersion, since the sheaf map is identity on that open and has zero target on its open complement. Thus $v$ is separated, as required by the spectral-sequence lemma.",
+   "uses": [
+    "lem-trf-space-separated-affine-chart-overlap",
+    "lem-sfb-etale-atlas-distinct-tuple-geometry",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-alternating-sign-cohomology-spectral] to $v$ and $A=N_{ab}$. Write $W_p\\subset T_{p+1}$ for the complement of all pairwise equality loci, $G_p=\\mathfrak S_{p+1}$, $Q_p=W_p/G_p$, $g_p:Q_p\\to Y$, and $L_p$ for its sign local system. It supplies the first-quadrant sequence $E_1^{p,b}=H^b((Q_p)_{\\mathrm{et}},g_p^{-1}N_{ab}\\otimes_{\\mathbf Z}L_p)\\Rightarrow H^{p+b}(Y_{\\mathrm{et}},N_{ab})$, including stabilization and the finite abutment filtration. The $G_p$-action is free on all scheme tests, the quotient is the fppf orbit sheaf, and $L_p$ is trivialized by the covering $W_p\\to Q_p$.",
+   "uses": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "Each $W_p$ is open and closed in the affine $T_{p+1}$. Indeed the finitely many equality loci are clopen by [lem-sfb-etale-atlas-distinct-tuple-geometry]. Its open inclusion is a closed immersion: on the decomposition into it and its open complement the structure-sheaf map is respectively the identity and the map to zero. By the affine-open characterization in [def-weil-closed-immersion], a closed subscheme of the affine $T_{p+1}$ is affine. This also covers $p=0$, where no diagonal is removed.",
+   "uses": [
+    "lem-sfb-etale-atlas-distinct-tuple-geometry",
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "Fix $p$ and put $W_p=\\operatorname{Spec}B$. The action relation $R=\\coprod_{g\\in G_p}W_p\\rightrightarrows W_p$ is affine: it is $\\operatorname{Spec}\\prod_g B$, by [lem-weil-pbc-affine-morphism-permanence](4). Each projection is finite locally free by [lem-weil-pbc-finite-free-algebra-spectrum], since $\\prod_g B$ has the finite basis indexed by $G_p$ over $B$; for the action projection, conjugate by $(g,w)\\mapsto(g,gw)$. Freeness from step 3 makes $R$ an equivalence relation on every scheme test. Apply [lem-a1-finite-flat-affine-relation-quotient]: the fppf orbit sheaf is represented by the affine spectrum of the equalizer ring. Hence the already specified $Q_p$ is an affine scheme. This argument never divides by $|G_p|$.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-sfb-space-alternating-sign-cohomology-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "Set $M_p=g_p^*N\\otimes_{\\mathbf Z}L_p$, with $\\mathcal O_{Q_p}$ acting on the first factor. Because $g_p$ is etale, its pullback on the small etale site is restriction [def-trf-algebraic-space]; hence $(g_p^*N)_{ab}=g_p^{-1}N_{ab}$. By the local-presentation definition [def-trf-space-quasi-coherent-module], restriction of $N$ has local presentations by sums of the structure sheaf. Refine each presentation cover by a cover trivializing $L_p$ supplied in step 3. There $L_p\\simeq\\underline{\\mathbf Z}$, so $M_p\\simeq g_p^*N$ and has exactly the same presentation. Those covers exhibit $M_p$ as quasi-coherent by that definition. Its underlying abelian sheaf is the coefficient in $E_1^{p,b}$. This proves the twist assertion directly, without an exactness claim about taking sign invariants.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-trf-space-quasi-coherent-module",
+    "lem-sfb-space-alternating-sign-cohomology-spectral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072A, lemma-quasi-coherent-twist, proof by etale-local trivialization; Tag 0727, lemma-twist."
+   }
+  },
+  {
+   "text": "For each $p$, use [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] on the affine scheme $Q_p$: the quasi-coherent module $M_p$ is isomorphic to $F_{p,\\mathrm{et}}$ for a quasi-coherent Zariski module $F_p$. Therefore [lem-sc-etale-affine-qcoherent] gives $H^b((Q_p)_{\\mathrm{et}},(M_p)_{ab})=0$ for every $b>0$. Consequently $E_1^{p,b}=0$ in every positive row. These groups are on $Q_p$, not on $W_p$; the latter notation in the last lines of the printed proof of 072B is a typographical slip.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-affine-qcoherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "If $p\\geq d$, the geometric-fibre tuple description of [lem-sfb-etale-atlas-distinct-tuple-geometry] makes $W_p$ empty. Explicitly, an etale scheme over an algebraically closed field is a disjoint union of copies of its spectrum: apply [lem-weil-pbc-etale-fibre-discrete-separable-points] and the definition of algebraic closedness [def-weil-algebraic-closure]. Thus the at-most-$d$ points in the assumed geometric fibre give at most $d$ possible entries for a distinct tuple, while $p+1>d$. If $W_p$ had a point, its canonical residue-field point [lem-weil-pbc-morphism-from-spec-field], followed by an algebraic closure, would produce just such a forbidden tuple over a geometric point of $Y$. Hence $W_p=\\varnothing$, and its surjective quotient $Q_p$ is empty. A sheaf of abelian groups on the empty scheme has zero sections, since the empty covering is a covering. In particular $E_1^{p,0}=0$ for $p\\geq d$.",
+   "uses": [
+    "lem-sfb-etale-atlas-distinct-tuple-geometry",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "def-weil-algebraic-closure",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "lem-sfb-space-alternating-sign-cohomology-spectral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  },
+  {
+   "text": "For $q\\geq d$, every first-page term of total degree $q$ vanishes: a term with second index positive vanishes by step 7, and the remaining term has first index $q\\geq d$ and vanishes by step 8. A zero entry stays zero on subsequent pages, as the next entry is the kernel of its outgoing differential modulo the image of its incoming differential. Thus each $E_\\infty^{p,q-p}$ is zero. In the finite filtration supplied by [lem-sfb-space-alternating-sign-cohomology-spectral], all successive quotients vanish; starting with $F^{q+1}=0$ and inducting backwards gives $H^q(Y_{\\mathrm{et}},N_{ab})=0$. The case $Y=\\varnothing$ is included by the same argument.",
+   "uses": [
+    "lem-sfb-space-alternating-sign-cohomology-spectral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-change-base-to-integers",
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-sfb-etale-atlas-distinct-tuple-geometry",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-sfb-space-alternating-sign-cohomology-spectral",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "def-weil-algebraic-closure",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 072B, proposition-vanishing, proof; with Tag 0728, lemma-alternating-spectral-sequence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated quasi compact algebraic space has vanishing quasi coherent sheaf cohomology in degrees at least the maximum geometric fibre size of an affine etale atlas",
+   "results": {
+    "t": "2026-10-23T21:11:37Z",
+    "tool": "leanfinder",
+    "query": "A separated quasi compact algebraic space has vanishing quasi coherent sheaf cohomology in degrees at least the maximum geometric fibre size of an affine etale atlas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs"
+    ],
+    "digest": "27b4ae547fae9253"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent cohomological dimension of a separated algebraic space is bounded by the degree of a surjective etale morphism from an affine scheme",
+   "results": {
+    "t": "2026-10-23T21:12:43Z",
+    "tool": "leanfinder",
+    "query": "Quasi coherent cohomological dimension of a separated algebraic space is bounded by the degree of a surjective etale morphism from an affine scheme",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource",
+     "AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource",
+     "AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass",
+     "AlgebraicGeometry.IsSmoothOfRelativeDimension",
+     "AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit",
+     "AlgebraicGeometry.IsEtale",
+     "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme"
+    ],
+    "digest": "f26d8551e7b85224"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"IsSeparated\"",
+   "results": {
+    "t": "2026-10-23T21:12:37Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"IsSeparated\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*(bound|vanish)|cohomologicalDimension|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T21:12:37Z",
+    "tool": "grep",
+    "query": "cohomology.*(bound|vanish)|cohomologicalDimension|AlgebraicSpace",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A separated algebraic space has a cohomology vanishing bound determined by the fibres of an affine etale cover",
+   "results": {
+    "t": "2026-10-23T21:12:10Z",
+    "tool": "leansearch",
+    "query": "A separated algebraic space has a cohomology vanishing bound determined by the fibres of an affine etale cover",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+     "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover",
+     "AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion",
+     "AlgebraicGeometry.IsSeparated.of_isAffineHom",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+     "AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace"
+    ],
+    "digest": "4793fd5d50b9c8c4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: read returned types; scheme separatedness, section restriction, cosimplicial complexes, topological orbit quotients and general cohomology presheaves do not assert this algebraic-space result"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|cohomologicalDimension|cohomology.*(vanish|bound)",
+   "results": {
+    "t": "2026-10-23T21:56:14Z",
+    "tool": "grep",
+    "query": "AlgebraicSpace|cohomologicalDimension|cohomology.*(vanish|bound)",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern affine covers, scheme sections, separatedness or cotangent modules, not the asserted algebraic-space cohomology bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"IsSeparated\"",
+   "results": {
+    "t": "2026-10-23T21:56:14Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"IsSeparated\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern affine covers, scheme sections, separatedness or cotangent modules, not the asserted algebraic-space cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent cohomology of a separated algebraic space vanishes above the geometric fibre cardinality of an affine etale atlas",
+   "results": {
+    "t": "2026-10-23T21:56:15Z",
+    "tool": "leanfinder",
+    "query": "Quasi coherent cohomology of a separated algebraic space vanishes above the geometric fibre cardinality of an affine etale atlas",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+     "AlgebraicGeometry.Scheme.zero_of_zero_cover",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "Algebra.formallyEtale_iff"
+    ],
+    "digest": "a23f620078384f15"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern affine covers, scheme sections, separatedness or cotangent modules, not the asserted algebraic-space cohomology bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomological dimension of a separated algebraic space bounded by an affine etale cover degree",
+   "results": {
+    "t": "2026-10-23T21:58:00Z",
+    "tool": "leansearch",
+    "query": "Cohomological dimension of a separated algebraic space bounded by an affine etale cover degree",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.Scheme.AffineCover.mk.sizeOf_spec",
+     "AlgebraicGeometry.IsSeparated.hasAffineProperty",
+     "AlgebraicGeometry.Scheme.directedAffineCover",
+     "AlgebraicGeometry.Scheme.AffineCover.ctorIdx",
+     "AlgebraicGeometry.Scheme.AffineCover.cover_I₀",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+     "AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover"
+    ],
+    "digest": "12aab9b09827c282"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern affine covers, scheme sections, separatedness or cotangent modules, not the asserted algebraic-space cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine etale atlas with geometric fibres of cardinality at most d gives vanishing in degrees at least d for quasi coherent modules",
+   "results": {
+    "t": "2026-10-23T21:58:01Z",
+    "tool": "leanfinder",
+    "query": "An affine etale atlas with geometric fibres of cardinality at most d gives vanishing in degrees at least d for quasi coherent modules",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "Algebra.etaleLocus_eq_compl_support",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "Algebra.Etale.formallyEtale",
+     "Algebra.basicOpen_subset_etaleLocus_iff"
+    ],
+    "digest": "ad9ae987ab247994"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern affine covers, scheme sections, separatedness or cotangent modules, not the asserted algebraic-space cohomology bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-qcoh-cohomology-finite-bound",
+  "date": "2026-10-24",
+  "group": "NO"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Perfect generators detect lower cohomological bounds on algebraic spaces. 0GFI proof, first paragraph and the 0GFG truncation reduction: apply 09MB. Supporting input for Tag 09MB: the finite quasi-coherent cohomological bound and the unbounded truncation argument for global sections. Ordinary-sheaf input: Stacks 072C, lemma-vanishing-quasi-separated, finite bound independent of the quasi-coherent module. Supporting input: Tag 072C proof, last paragraph: apply Proposition 072B to each separated configuration quotient with its own affine atlas.",
+   "via": [
+    "lem-sfb-space-qcoh-cohomology-finite-bound",
+    "lem-sfb-space-global-sections-amplitude",
+    "lem-sfb-space-perfect-ext-window",
+    "lem-sfb-space-generator-detects-lower-bound",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-separated-space-atlas-cohomology-bound",
+  "worker": "stage1",
+  "summary": "Checked 072B against 0728 and 072A; reused existing tuple geometry, affine overlap and finite-relation quotient nodes, proved the sign twist locally by presentations, applied ordinary affine etale acyclicity, and wrote the empty-column and finite-filtration arguments. No new nodes. Corrected the proof indexing Q_p versus W_p without changing the item statement.",
+  "blueprint": "Supporting ordinary-sheaf input for 072C in the inherited chain from det-thm-sf-ctf-stability-direct-images proof (3); current latest blueprint checked. The inherited blueprint ancestor is null, as blueprint_refs.py ancestor reports; retained its exact place and via chain. No blueprint node states this atlas bound.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-separated-affine-chart-overlap",
+    "why": "Generic affine overlaps of affine charts of a separated space over an affine base used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic base change, affineness of the source, and quasi-compactness and separatedness of affine morphisms used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic the spectrum of a finite free algebra is finite locally free used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic affine quotient of a finite locally free relation used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic zariski and small etale quasi-coherent modules agree functorially used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-sc-etale-affine-qcoherent",
+    "why": "Generic etale acyclicity of a quasi-coherent module on an affine used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "why": "Generic the fibres of an etale morphism are disjoint unions of spectra of finite separable field extensions used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-from-spec-field",
+    "why": "Generic morphisms from the spectrum of a field correspond to a point and a residue field embedding used as a black box in the Stacks 072B assembly; this supporting quasi-coherent cohomology argument is below the unit and is not replaced by a six-functor preservation assertion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-separated-affine-chart-overlap",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-sc-etale-affine-qcoherent",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-a886a97d8",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-a886a97d8 (reviewer sub-agent of L); spot-checked: Q85 lem-sfb-separated-space-atlas-cohomology-bound a886a9: one-level split of an item that had no proof before. No new nodes. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so nothing is superseded. There is no repair note, so the re-split rule does not apply. proof_deps equals the union of the step uses, and there is no cycle. I read Stacks 072B/0728/0727/072A in full against the 9 steps. Step 1: base change to Z (clauses 1 and 3 keep the fibres, sites and structure sheaf; the separatedness is absolute). Step 2: T_r affine by induction with 03M9 applied over Spec Z, and v separated because the diagonal is the clopen equality locus of the tuple node. Step 3: the spectral node, used only for what its statement says. Step 4: W_p is a clopen subscheme of an affine, hence affine. Step 5: R=Spec ∏_g B has finite free projections, and j is injective because the action is free (gw=g'w forces w into an equality locus off W_p); 03BM then gives Q_p=Spec C. The presheaf U(H)/R(H) and the orbit presheaf have the same fppf sheafification; this is elementary and not a fault. Step 6: twist quasi-coherent by local presentations (072A). Step 7: 03DX essential surjectivity plus affine étale acyclicity, so the rows b>0 vanish; this is on Q_p, not W_p, which correctly fixes the slip in the printed 072B. Step 8: an étale fibre over an algebraically closed field is a disjoint union of copies of Spec Ω, so there are no distinct (p+1)-tuples when p+1>d and W_p=Q_p=∅. Step 9: the finite filtration gives the vanishing. Edge cases checked: Y empty, d=1, p=0, characteristic 2, non-noetherian. Duplicates: only the 072C parent cites this item; no other node states 072B. Batch-5 check: all 85 trace-formula-chapter nodes in the closure are sk-i-curve-zero algebraic-space foundations or Mathlib leaves. The 5 listed citations (change-base, 03M9 affine overlap, tuple geometry, 03BM quotient via finite-presentation descent, 03DX Zariski/étale qcoh) are generic and are neither statements nor proof steps of the trace formula or Poincaré duality. Accepted. The declared tool_uses are generic black boxes and are accepted."
+ }
+}

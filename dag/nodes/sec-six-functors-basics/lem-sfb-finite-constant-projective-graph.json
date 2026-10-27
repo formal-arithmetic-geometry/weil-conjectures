@@ -1,0 +1,363 @@
+{
+ "id": "lem-sfb-finite-constant-projective-graph",
+ "kind": "statement",
+ "title": "Projectivity over a separated target after finite extension of constants",
+ "statement": "Let $k$ be a field and $F/k$ a finite field extension [def-weil-field, def-pc-field-extension]. Let $R$ be an $F$-scheme admitting a closed immersion into some finite-dimensional projective space over $F$ [def-kun-projective, def-weil-closed-immersion]. Let $S$ be a separated $k$-scheme, meaning that $S\\to S\\times_k S$ is a closed immersion [def-weil-proper-morphism], and let $c:R\\to S$ be a $k$-morphism, using the $k$-structure on $R$ obtained from $F/k$. There exist an integer $N\\geq0$ and a closed immersion $i:R\\hookrightarrow\\mathbf P^N_k$ over $k$ such that $(i,c):R\\hookrightarrow\\mathbf P^N_k\\times_k S\\cong\\mathbf P^N_S$ is a closed immersion over $S$ [def-nagata-projective-space-base-change]. For every morphism $S'\\to S$ of schemes [def-pc-scheme], the base change $c':R\\times_S S'\\to S'$ admits the induced closed immersion into $\\mathbf P^N_{S'}$ [def-pc-fibre-product]. In particular $c'$ is proper and projective both in the finite-projective-space convention [def-kun-projective] and in the projective-bundle convention [def-trf-projective-bundle-morphism]. In the latter convention the ambient bundle is $\\mathbf P_{S'}(\\mathcal O_{S'}^{\\oplus(N+1)})=\\mathbf P^N_{S'}$ [def-nagata-relative-projective-space]. Empty $R$ and arbitrary, possibly non-quasi-projective, separated targets $S$ are permitted.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4Q (lemma-projective-permanence), proof by the closed graph, applied after finite descent of constants; Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective), 01WE (lemma-H-projective-composition), 01WF (lemma-H-projective-base-change), 01W8 (definition-projective)."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-nagata-projective-space-base-change",
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-kun-projective",
+  "def-trf-projective-bundle-morphism",
+  "def-nagata-relative-projective-space",
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-closed-immersion"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=\\operatorname{Spec}k$ and $u:\\operatorname{Spec}F\\to B$. The target $B$ has just one point [def-weil-affine-spectrum], so its only affine opens are itself and the empty open. The inverse image of the whole base is $\\operatorname{Spec}F$, and $F$ is a finite $k$-module by the finite-extension hypothesis; the empty restriction is finite as well. Thus $u$ is finite by [def-weil-finite-integral-morphism]. The trivial invertible sheaf $\\mathcal O_B$ is ample by [def-weil-pbc-ample-invertible-module]: $B$ is quasi-compact because it has one point, and the section $1$ in tensor degree $1$ has nonvanishing locus the whole affine scheme $B$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WH (definition-integral), finite clause; properties.tex Tag 01PS (definition-ample), applied to the one-point affine scheme Spec k."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-projective-bundle] to the finite morphism $u$. It is projective in the projective-bundle convention. Since $B$ admits the ample invertible sheaf just verified, [lem-trf-projective-bundle-to-h-projective] makes $u$ projective in the finite-projective-space convention. This step makes no separability assumption on $F/k$.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-to-h-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I (lemma-finite-projective); Tag 087S (lemma-projective-over-quasi-projective-is-H-projective), clause (1)."
+   }
+  },
+  {
+   "text": "Write $r:R\\to\\operatorname{Spec}F$ for the given structure map. Its assumed closed immersion into a finite-dimensional projective space makes $r$ H-projective by [def-kun-projective]. Apply [lem-trf-h-projective-composition] to $r$ and $u$. Unpacking [def-kun-projective] for $u r$ gives an integer $N\\geq0$ and a closed immersion $i:R\\hookrightarrow\\mathbf P^N_k$ over $B$. Fix this $N$ and $i$ for all subsequent base changes.",
+   "uses": [
+    "def-kun-projective",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WE (lemma-H-projective-composition), applied to R -> Spec F -> Spec k; Tag 01W8 (definition-projective), H-projective clause."
+   }
+  },
+  {
+   "text": "Let $s:S\\to B$ be the separated structure map. Apply [lem-weil-pbc-fibre-product-change-of-base-closed-immersion] with $X=R$, $Y=T=S$, $f=c$, $g=\\mathrm{id}_S$ and $h=s$. It gives a closed immersion $R\\times_S S\\to R\\times_B S$. By [def-pc-fibre-product], projection identifies $R\\times_S S$ with $R$, with inverse $(\\mathrm{id}_R,c)$: both composite maps have the identity projections. Under this identification the closed immersion is precisely $\\gamma=(\\mathrm{id}_R,c):R\\hookrightarrow R\\times_B S$. Replacing the source by an isomorphic scheme preserves the closed embedding and the surjective structure-sheaf map in [def-weil-closed-immersion].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+    "def-pc-fibre-product",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q (lemma-projective-permanence), first map in its factorization; schemes.tex Tag 01KR (lemma-fibre-product-after-map), separated clause."
+   }
+  },
+  {
+   "text": "Put $P=\\mathbf P^N_k\\times_B S$. The map $b:R\\times_B S\\to P$ with components $(i\\operatorname{pr}_R,\\operatorname{pr}_S)$ is the base change of $i$ along $P\\to\\mathbf P^N_k$. Indeed $R\\times_{\\mathbf P^N_k}P\\cong R\\times_B S$, with mutually inverse maps $(z,(p,t))\\mapsto(z,t)$ and $(z,t)\\mapsto(z,(i(z),t))$, interpreted by the projections of [def-pc-fibre-product]. Thus [lem-weil-pbc-closed-immersion-base-change] makes $b$ a closed immersion, and [lem-weil-pbc-closed-immersion-comp] makes $j=b\\gamma$ a closed immersion. Its components are exactly $i$ and $c$. Apply [lemma-nagata-projective-space-base-change-pullback] to $S\\to B$ and the coordinate set $\\{0,\\ldots,N\\}$; exchanging the two projections identifies $P$ over $S$ with $\\mathbf P^N_S$. Hence the required specific map $(i,c)$ is a closed immersion over $S$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "lemma-nagata-projective-space-base-change-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q (lemma-projective-permanence), second map and composite; Tags 01QR (lemma-base-change-closed-immersion), 01QS (lemma-composition-closed-immersion), 01WF (lemma-H-projective-base-change)."
+   }
+  },
+  {
+   "text": "For an arbitrary $t:S'\\to S$, base change $j:R\\hookrightarrow\\mathbf P^N_S$ along $\\mathbf P^N_S\\times_S S'\\to\\mathbf P^N_S$. Its source identifies with $R\\times_S S'$: the two maps between the iterated fibre products are specified by the projections $(z,(p,t'))\\mapsto(z,t')$ and $(z,t')\\mapsto(z,(j(z),t'))$, inverse by [def-pc-fibre-product]. The resulting immersion is closed by [lem-weil-pbc-closed-immersion-base-change], and its target is $\\mathbf P^N_{S'}$ by [lemma-nagata-projective-space-base-change-pullback]. Its structural projection is $c'$ by the same projections. This proves the induced embedding with the same $N$, so $c'$ is projective by [def-kun-projective]. There is no flatness, quasi-compactness or separatedness condition on $t$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WF (lemma-H-projective-base-change), proof, with Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-free-projective-bundle-base-change-space] with base $S'$ and $r=N$. Write its isomorphism as $\\theta:Q\\xrightarrow{\\sim}\\mathbf P^N_{S'}$, where $Q=\\operatorname{Proj}_{S'}(\\operatorname{Sym}(\\mathcal O_{S'}^{\\oplus(N+1)}))$. For the induced immersion $j'$ of Step 6, use the specific composite $\\theta^{-1}j':R\\times_S S'\\hookrightarrow Q$. The identity $q\\theta=p$ in that cited statement gives $p\\theta^{-1}j'=qj'=c'$, so this is an embedding over the required base. The standard basis exhibits $\\mathcal E=\\mathcal O_{S'}^{\\oplus(N+1)}$ as finite free, hence finite type and quasi-coherent: on every affine open it is the sheaf associated to the free module on the same $N+1$ basis elements, which is exactly the affine-local criterion of [pqf-def-coherent]. The composite $\\theta^{-1}j'$ therefore satisfies [def-trf-projective-bundle-morphism], and [lem-trf-projective-bundle-proper] gives properness of $c'$. Closed immersion is unchanged by the ambient isomorphism, directly from [def-weil-closed-immersion]. All constructions also apply when $R$ or $S'$ is empty; no step requires $S$ to be quasi-projective or to admit an ample sheaf.",
+   "uses": [
+    "lem-trf-free-projective-bundle-base-change-space",
+    "def-trf-projective-bundle-morphism",
+    "lem-trf-projective-bundle-proper",
+    "def-weil-closed-immersion",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "constructions.tex Tag 01NF (definition-projective-space), paragraph identifying relative Proj, and Tag 01O3 (lemma-relative-proj-base-change); morphisms.tex Tags 01W8 (definition-projective), 01WC (lemma-locally-projective-proper)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "def-kun-projective",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "def-trf-projective-bundle-morphism",
+  "lem-trf-projective-bundle-proper",
+  "pqf-def-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0B3I and 087S for the constants morphism; 01WE for composition; the closed-graph proof of 0C4Q; 01WF for arbitrary base change; 01W8 and 01WC for bundle projectivity and properness. Free bundle comparison: constructions.tex Tags 01NF and 01O3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective scheme over a finite field extension is projective over the smaller field and every morphism from it to a separated scheme is projective",
+   "results": "8 hits: AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsFinite.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProjective\", \"IsSeparated\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a projective scheme to a separated scheme is projective via its closed graph",
+   "results": "8 hits: AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal, AlgebraicGeometry.isSeparated_iff, AlgebraicGeometry.IsSeparated.mk, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism to a separated k scheme from a scheme admitting a closed immersion into projective space over a finite extension of k is H projective",
+   "results": "8 hits: AlgebraicGeometry.Proj.instIsSeparated, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]rojective|[Hh]Projective|[Hh]_projective",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: returned results do not state this combined geometric assertion or a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A projective scheme over a finite field extension is projective over the smaller field and every morphism from it to a separated scheme has a closed graph embedding into projective space over the target",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.Proj.instIsSeparated",
+     "AlgebraicGeometry.Proj.instQuasiCompactToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+     "AlgebraicGeometry.IsSeparated.instMap",
+     "AlgebraicGeometry.isProper_iff",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give closed immersion definitions, separatedness or properness of Proj, not the finite-constant embedding and graph assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "IsHProjective|IsProjective|projective.*of_comp|finite.*projective",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "sub": "AlgebraicGeometry"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no projectivity/cancellation declarations in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme projective over a finite extension of a field has a closed immersion into projective space over the original field",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.IsClosedImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.mk",
+     "AlgebraicGeometry.IsClosedImmersion.instIsAffineHom",
+     "AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion",
+     "AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+     "AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion",
+     "AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono",
+     "AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits give closed immersion definitions, separatedness or properness of Proj, not the finite-constant embedding and graph assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProjective\", \"IsSeparated\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits for the projectivity and separatedness query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricting scalars along a finite extension of fields preserves existence of a finite dimensional projective space embedding; closed graphs make maps to separated targets projective",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "Projectivization.finite_of_finite",
+     "IntermediateField.FG.of_restrictScalars",
+     "Algebra.FormallyUnramified.projective_of_restrictScalars",
+     "Projectivization.finite_iff_of_finite",
+     "Projectivization.map",
+     "Projectivization.instFiniteDimensionalSubtypeMemSubmoduleSubmodule",
+     "Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq",
+     "Projectivization.map_mk"
+    ],
+    "note": "",
+    "sub": ""
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern linear projectivization or projective modules, not scheme projectivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gabber-global-snc-alteration",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof (3), projectivity of the final alteration: old item Step 6 closed-graph argument and the projectivity/properness part of Step 7; this added input has no imported blueprint ancestor.",
+   "via": [
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-constant-projective-graph",
+  "worker": "stage1",
+  "summary": "Q101 repair of return L: reconciled the retained delivery with the current unsplit DAG item, re-read every statement dependency and every proof citation, and verified that all 23 retained step/node quotations still match the current statements. Retained the finite-constants/closed-graph route and all search records; made the final bundle embedding explicit as theta inverse composed with the induced base-change immersion and checked its structural map. Statement unchanged; no new nodes.",
+  "blueprint": "The item is an added geometric input with no imported blueprint ancestor (ancestor command prints None). Its existing from.place locates det-thm-sf-ctf-stability-direct-images proof (3), the final alteration projectivity argument. Steps 1-3 supply finite descent of constants; Steps 4-5 the closed graph; Steps 6-7 the required base-change, projectivity and properness clauses. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Finite morphisms are projective in the bundle convention; this generic geometric input is not supplied by the constructible-functor unit."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Converts bundle projectivity over the ample base Spec k to finite-space projectivity, without imposing ampleness on S."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Composes the H-projective structure maps through Spec F; this is the generic projective-composition theorem."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-pullback",
+    "why": "Identifies the finite-coordinate ambient projective spaces after base change; the unit has no projective-space construction theorem."
+   },
+   {
+    "node": "lem-trf-free-projective-bundle-base-change-space",
+    "why": "Supplies the actual scheme isomorphism between the base-change projective-space and free-bundle relative-Proj interfaces."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Gives properness from the obtained bundle embedding over an arbitrary base."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "lem-trf-free-projective-bundle-base-change-space",
+  "lem-trf-projective-bundle-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-90268bc79",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-90268bc79 (reviewer sub-agent of L); spot-checked: This re-delivery answers return L of d30dd8615e6 (side completion never promoted; the earlier reader passed it). The live item is still unsplit with no reviewed record and there is no repair note, so no other group has superseded it. The statement is byte-identical to live and only split-owned fields change. Against d30dd8615e6, only Step 7 changed: it now uses the specific composite theta^{-1}j' and checks p theta^{-1} j' = q j' = c' with the cited q theta = p, which is an improvement. The three added stmt_deps (def-weil-field, def-pc-field-extension, def-weil-closed-immersion) are cited inline in the statement. I re-read every cited statement in this snapshot. Step 1: Spec F -> Spec k is finite, and O_{Spec k} is ample with n=1, s=1. Step 2: 0B3I, then 087S, with ampleness needed only on Spec k. Step 3: 01WE gives N and i. Step 4: the separated fibre-product closed-immersion node with X=R, Y=T=S, f=c, g=id gives the graph (Stacks 0C4Q proof, morphisms.tex l.10824). Step 5: base change of i plus composition gives exactly (i,c), and the nagata pullback lemma gives P^N_k x_k S = P^N_S. Step 6: arbitrary S'->S with the same N. Step 7: the free-bundle comparison theta, O^{N+1} of finite type and quasi-coherent by pqf-def-coherent, then def-trf-projective-bundle-morphism and the proper node. Edge cases checked: F=k with N=0, R empty, S' empty, inseparable F/k, separated S without an ample sheaf. lem-per-h-projective-permanence gives only some embedding, so it is not a duplicate. There are no new nodes and no SGA. Batch 5: the closures of the five flagged trf nodes (finite-projective-bundle, projective-bundle-to-h-projective, h-projective-composition, free-projective-bundle-base-change-space, projective-bundle-proper) contain no nt-assume, nt-target, trace-transport, trace-formula or Poincare-duality theorem node. They are generic projective geometry, neither assumption gives them and they are no step of the LTF or PD proofs, so I accept them. They are declared in tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteConstantProjectiveGraph",
+  "declaration": "AlgebraicGeometry.exists_finiteConstant_projectiveGraph",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteConstantProjectiveGraph.lean",
+  "statement": "theorem exists_finiteConstant_projectiveGraph (k F : Type u) [Field k] [Field F] [Algebra k F] [Module.Finite k F] (R S : Scheme.{u}) [R.Over (Spec (.of F))] [S.Over (Spec (.of k))] [IsHProjective (R ↘ Spec (.of F))] [IsSeparated (S ↘ Spec (.of k))] (c : R ⟶ S) (hc : c ≫ S ↘ Spec (.of k) = (R ↘ Spec (.of F)) ≫ Spec.map (CommRingCat.ofHom (algebraMap k F))) : ∃ (N : ℕ) (i : R ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of k))), IsClosedImmersion i ∧ i ≫ ProjectiveSpace (ULift.{u} (Fin (N + 1))) (Spec (.of k)) ↘ Spec (.of k) = (R ↘ Spec (.of F)) ≫ Spec.map (CommRingCat.ofHom (algebraMap k F)) ∧ ∃ j : R ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) S, IsClosedImmersion j ∧ j ≫ ProjectiveSpace (ULift.{u} (Fin (N + 1))) S ↘ S = c ∧ j ≫ ProjectiveSpace.map (ULift.{u} (Fin (N + 1))) (S ↘ Spec (.of k)) = i ∧ ∀ (S' : Scheme.{u}) (t : S' ⟶ S), ∃ j' : pullback c t ⟶ ProjectiveSpace (ULift.{u} (Fin (N + 1))) S', IsClosedImmersion j' ∧ j' ≫ ProjectiveSpace (ULift.{u} (Fin (N + 1))) S' ↘ S' = pullback.snd c t ∧ j' ≫ ProjectiveSpace.map (ULift.{u} (Fin (N + 1))) t = pullback.fst c t ≫ j ∧ IsProper (pullback.snd c t) ∧ IsHProjective (pullback.snd c t) ∧ IsProjectiveBundle (pullback.snd c t) ∧ ∃ θ : RelativeProjectiveSpace.scheme S' N ≅ ProjectiveSpace (ULift.{u} (Fin (N + 1))) S', θ.hom ≫ ProjectiveSpace (ULift.{u} (Fin (N + 1))) S' ↘ S' = RelativeProjectiveSpace.π S' N ∧ IsClosedImmersion (j' ≫ θ.inv) ∧ (j' ≫ θ.inv) ≫ RelativeProjectiveSpace.π S' N = pullback.snd c t",
+  "branch": "sheaf-dag",
+  "by": "Q108",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cafa2aaf8",
+  "group": "Q108",
+  "result": "pass",
+  "note": "First S2 delivery, only lean record changed. Checked every clause. Hypotheses: Field k, F, Algebra, Module.Finite (no separability), IsHProjective (R↘Spec F) per upstream def, IsSeparated (S↘Spec k), hc k-morphism. Conclusion: N, closed immersion i over k; j with j≫proj=c and j≫ProjectiveSpace.map=i (canonical pullback.lift, pins (i,c)); ∀ S' t, j' pinned by snd/fst≫j; IsProper, IsHProjective, IsProjectiveBundle; ∃ θ free bundle ≅ ℙ(N;S') over S' with j'≫θ⁻¹ closed immersion (∃ rather than the ∃!-pinned lemma θ, harmless since the property does not depend on θ). Edge cases (empty R/S', F=k, inseparable, non-ample S), universes, verbatim statement, docstrings/source/blueprint, proof imports existing, sorry only, report sections present. No compile needed (no fix)."
+ }
+}

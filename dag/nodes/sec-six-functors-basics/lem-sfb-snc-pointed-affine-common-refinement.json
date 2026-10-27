@@ -1,0 +1,366 @@
+{
+ "id": "lem-sfb-snc-pointed-affine-common-refinement",
+ "kind": "statement",
+ "title": "Pointed common refinements of affine SNC stratum charts",
+ "statement": "Let $k$ be a field, $Y$ a regular separated finite-type $k$-scheme [def-weil-regular-scheme], $D=\\bigcup_{a\\in A}D_a$ a finite labelled strict normal crossings boundary [def-trf-strict-normal-crossings-boundary], and $I\\subseteq A$. Put $Y_I=Y\\setminus\\bigcup_{a\\notin I}D_a$ and let $S$ be the reduced intersection of the $D_i$, $i\\in I$, in $Y_I$. Fix $s:\\operatorname{Spec}\\Omega\\to S$ [def-weil-geometric-point]. For each of finitely many indices $a$, let $V_a=\\operatorname{Spec}B_a\\to Y_I$ be affine etale [def-weil-etale-morphism], with a lift of $s$, labelled equations $t_{a,i}\\in B_a$, $i\\in I$, where $t_{a,i}$ generates the ideal of the closed subscheme $V_a\\times_{Y}D_i$ of $V_a$, having the regular-parameter property at every point [def-weil-pbc-regular-system-of-parameters], and nonempty connected regular residual scheme $\\operatorname{Spec}(B_a/J_a)$, $J_a=(t_{a,i})$. There is an affine etale chart $W=\\operatorname{Spec}B\\to Y_I$ of the same type (its equations $t_i$ generate the ideals of the $W\\times_YD_i$), with a lift of $s$, and pointed etale maps $W\\to V_a$ over $Y_I$. The maps $B_a\\to B$ carry $J_a$ onto the ideal $J=(t_i)$ after extension, and induce compatible maps $B_a^h\\to B^h$ on pair henselizations [lem-weil-pbc-pair-henselization]. For the pointed universal covers [lem-sfb-pointed-finite-etale-limit-cover] of these henselizations and of their residual schemes, the induced maps on their rings $H_a\\to H$ and $H_a/J_aH_a\\to H/JH$ commute with the base, henselization, and reduction maps. These maps compose under further pointed refinements, using the canonical identifications of the cover systems.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "0A02 (lemma-henselization), universal property; pione.tex 09ZS (lemma-gabber); ILO VIII Remark 4.2.2(i), p.118, and naturality of the pointed finite-etale limit cover. Agent fibre-product and affine-component refinement."
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-weil-pbc-pair-henselization",
+  "lem-sfb-pointed-finite-etale-limit-cover"
+ ],
+ "proof": [
+  {
+   "text": "First all the given $B_a$ are Noetherian. Indeed $Y_I$ is locally Noetherian by regularity and restriction to an open. An etale map is locally of finite presentation, hence locally of finite type (a finite presentation supplies finitely many generators), so local Noetherianity ascends to $V_a$; its affine coordinate ring is Noetherian. Independently choose one reference affine open $V_0=\\operatorname{Spec}B_0\\subseteq Y_I$ from the labelled affine stratum charts, containing the image of $s$. The geometric point factors through this open. The reference chart has globally labelled equations $t_{0,i}$, regular Noetherian coordinate ring and nonempty connected regular residual scheme. This extra reference is also available when the given finite family is empty.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-etale-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-sfb-snc-labelled-affine-stratum-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); ILO VIII Remark 4.2.2(i), p.118, via the labelled affine chart lemma."
+   }
+  },
+  {
+   "text": "Starting with $P_0=V_0$, enumerate the finitely many given charts and set $P_{j+1}=P_j\\times_{Y_I}V_{a_j}$. The universal property supplies the point $s_{j+1}$ from the two lifts of $s$. Inductively the projections and structure maps are etale: the new projections are base changes of etale maps and their composites are etale. Choose an affine open $X=\\operatorname{Spec}C$ containing the resulting point. Its maps to $V_0$, all $V_a$ and $Y_I$ are etale, since an open immersion is etale. Pull the $t_{0,i}$ back to $c_i\\in C$. The etale-coordinate parameter theorem, including its $r=0$ case, makes $X$ regular locally Noetherian and preserves the vanishing parameter subtuple at every point; thus $C$ is Noetherian. For $I\\ne\\varnothing$, the coordinate-intersection theorem makes $R=\\operatorname{Spec}(C/(c_i))$ regular and reduced, and identifies it scheme-theoretically with the intersection of all the pulled-back $D_i$. For $I=\\varnothing$ put $R=X$. The point lies on $R$ in both cases.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-trf-etale-coordinate-divisor-parameters",
+    "lem-trf-etale-coordinate-intersection-geometry",
+    "pqf-lem-affine-open-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QP (lemma-dimension-etale-extension), 0AH0 (lemma-regular-etale-extension); schemes.tex 01IT (lemma-basis-affine-opens); agent finite fibre-product induction."
+   }
+  },
+  {
+   "text": "The quotient $C/(c_i)$ is Noetherian: an ascending chain of its ideals pulls back to an ascending chain of ideals of $C$. Its spectrum $R$ is therefore a Noetherian space. Let $K$ be the connected component through the marked point; it is open by the Noetherian component theorem and closed: the closure of a connected set is connected (a separation of the closure by two relative opens would restrict to a separation of the dense set), so maximality of the component forces it to equal its closure. Choose its idempotent $e\\in C/(c_i)$ and lift $e$ to $f\\in C$. Set $B=C_f$, $W=\\operatorname{Spec}B$ and $t_i=c_i/1$. The principal-open theorem identifies $W=D(f)\\subseteq X$; the point factors through it since $e$ has value $1$ at that point. Localizing the quotient gives $B/(t_i)=(C/(c_i))_e$, whose spectrum is exactly $K$. Thus the residual scheme is nonempty connected and regular. Restriction preserves the labelled equations and their parameter property, so $W$ is the required chart, with the pointed etale maps of step 2. This also handles $I=\\varnothing$ without introducing a nonexistent parameter.",
+   "uses": [
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EE (lemma-disjoint-decomposition); topology.tex 04MF (lemma-locally-Noetherian-locally-connected), 04ME (lemma-locally-connected). Agent lift of the residual idempotent; quotient/localization identity from their universal properties."
+   }
+  },
+  {
+   "text": "Write $\\varphi_a:B_a\\to B$ for a chart map. For every label $i$, both $\\varphi_a(t_{a,i})$ and $t_i$ generate the ideal of the same closed subscheme $W\\times_YD_i$: this is the defining pullback of its ideal and the specified labelled equations. Summing these equal ideals gives $J_aB=J$. In particular $\\varphi_a$ induces $\\bar\\varphi_a:B_a/J_a\\to B/J$, carrying the residual marked point to the prescribed one. Apply pair henselization to all these pairs; the structure maps identify each residue quotient with the original one and make the target pair henselian. Apply the henselization universal property to $B_a\\to B\\to B^h$ and $(B^h,JB^h)$. It gives the unique extension $\\varphi_a^h:B_a^h\\to B^h$. Its reduction is $\\bar\\varphi_a$ because both maps agree after the surjective quotient map from $B_a$.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A02 (lemma-henselization), residual quotient and last paragraph (adjunction). Labelled-ideal equality is elementary pullback of the specified ideals."
+   }
+  },
+  {
+   "text": "Apply the henselian pointed-residual-cover lift theorem to $(B_a,J_a)$ and $(B,J)$: Noetherianity was checked in steps 1--3 and the residual schemes are nonempty connected. Put $E_a=B_a^h$, $E=B^h$. The theorem supplies connected affine bases $\\operatorname{Spec}E_a$, $\\operatorname{Spec}E$, their pointed universal covers $T_a=\\operatorname{Spec}H_a$, $T=\\operatorname{Spec}H$, and identifies $\\operatorname{Spec}(H_a/J_aH_a)$ and $\\operatorname{Spec}(H/JH)$ as the residual pointed universal covers. All these bases are qcqs since they are affine. Apply pointed-limit functoriality to $\\operatorname{Spec}E\\to\\operatorname{Spec}E_a$ induced by $\\varphi_a^h$. Its marked points are compatible by the reduction calculation in step 4. We get the pointed map $F_a:T\\to T_a$, hence $\\Phi_a:H_a\\to H$, with $\\Phi_a\\eta_{H_a/E_a}=\\eta_{H/E}\\varphi_a^h$. Composing with $B_a\\to E_a$ proves the required base and henselization squares.",
+   "uses": [
+    "lem-sfb-henselian-pointed-residual-cover-lift",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-pointed-limit-finite-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 09ZS (lemma-gabber) and Tag 0BND (theorem-fundamental-group), (1),(3); agent application of the existing pointed-limit naturality statement."
+   }
+  },
+  {
+   "text": "Since $\\Phi_a$ extends $\\varphi_a$, it sends $J_aH_a$ into $JH$, and therefore induces $\\bar\\Phi_a:H_a/J_aH_a\\to H/JH$ with $q\\Phi_a=\\bar\\Phi_a q_a$. This is precisely the pointed universal-cover map for $\\operatorname{Spec}(B/J)\\to\\operatorname{Spec}(B_a/J_a)$: the quotient morphism of covers is pointed and lies over this residual map, and uniqueness in pointed-limit functoriality identifies it with that map. This uses the actual residual-cover identifications from step 5, not merely an equivalence of finite cover objects. Under a further pointed refinement $W'\\to W$, the two candidate extensions $B_a^h\\to (B')^h$ agree by the henselization universal property, since they extend the same map on $B_a$. The two maps from the universal cover over $W'$ to $T_a$ agree by pointed-limit uniqueness. Passing to rings and then their quotients proves composition and all reduction squares. Finally these same uniqueness assertions identify different cofinal cover systems by inverse pointed maps and make the identifications commute with every refinement. Thus the asserted compatibility is independent of the presentation of each pointed cover system.",
+   "uses": [
+    "lem-weil-pbc-henselization-universal-property",
+    "lem-sfb-henselian-pointed-residual-cover-lift",
+    "lem-sfb-pointed-limit-finite-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND (theorem-fundamental-group), (3); more-algebra.tex Tag 0A02 (lemma-henselization). Agent quotient calculation and uniqueness assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-etale-morphism",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-sfb-snc-labelled-affine-stratum-charts",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-etale-coordinate-divisor-parameters",
+  "lem-trf-etale-coordinate-intersection-geometry",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-universal-property",
+  "lem-sfb-henselian-pointed-residual-cover-lift",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-pointed-limit-finite-splitting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "0A02 (lemma-henselization); pione.tex 09ZS (lemma-gabber), 0BND (theorem-fundamental-group); ILO VIII Remark 4.2.2(i), p.118. Agent pointed fibre-product and residual-idempotent refinement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pointed affine strict normal crossings charts admit common etale refinements compatible with henselizations and universal finite etale residual covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and directed covers do not include pointed henselization and residual universal-cover comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre products of pointed normal crossings stratum charts refine their pair henselizations and naturally map their universal covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_f\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x x_1 : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).f x x_1 = CategoryTheory.Limits.pullback.fst (𝒰.f x) (𝒰.f x_1)\", \"doc\": \"For any scheme $X$ and its open cover $\\\\mathcal{U}$, and for any two indices $x, x_1$ in the index set $I_0$ of $\\\\mathcal{U}$, the morphism $f$ in the glued cover data from the pullback $V(x, x_1) = U\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_t\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x x_1 : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).t x x_1 = (CategoryTheory.Limits.pullbackSymmetry (𝒰.f x) (𝒰.f x_1)).hom\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and any indices $x, x_1$ in the index set $I_0(\\\\mathcal{U})$, the transpose morphism $t(x, x_1)$ in the glued cover data constructed from $\\\\mathcal{U}$\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.fV\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          (i j : 𝒰.I₀) →\\n            AlgebraicGeometry.Scheme.Pullback.v 𝒰 f g i j ⟶\\n  \", \"doc\": \"For indices $i, j$ in the zeroth component of an open cover $\\\\mathcal{U}$ of a scheme $X$, this morphism maps the pullback scheme $v(\\\\mathcal{U}, f, g, i, j)$ to the pullback of the composed morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.v\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (𝒰 : X.OpenCover) →\\n    (f : X ⟶ Z) →\\n      (g : Y ⟶ Z) →\\n        [∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] →\\n          𝒰.I₀ → 𝒰.I₀ → AlgebraicGeometry.Scheme\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, this constructs the pullback scheme of the composition $\\\\mathcal{U}.f(\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_t'\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (x y z : 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).t' x y z = AlgebraicGeometry.Scheme.Cover.gluedCoverT' 𝒰 x y z\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$ and indices $x, y, z \\\\in I_0(\\\\mathcal{U})$, the coherence morphism $t'$ in the glued cover data constructed from $\\\\mathcal{U}$ coincides with the morph\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.p_comm\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Pullback.p1 𝒰 f g) f =\\n    CategoryTheory.Categor\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$ and morphisms $f: X \\\\to Z$, $g: Y \\\\to Z$, the composition of the first projection morphism $p_1$ from the glued pullback scheme to $X$ with $f$ equals t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.gluing_V\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g]\\n  (x : 𝒰.I₀ × 𝒰.I₀),\\n  (AlgebraicGeometry.Scheme.Pullback.gluing 𝒰 f g).V x =\\n    match x with\\n    | (i, j) => Al\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and indices $i, j \\\\in \\\\mathcal{U}.I_0$, the $V$-component of the gluing data is defined as the pullback scheme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.lift_comp_ι\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (f : X ⟶ Z) (g : Y ⟶ Z)\\n  [inst : ∀ (i : 𝒰.I₀), CategoryTheory.Limits.HasPullback (CategoryTheory.CategoryStruct.comp (𝒰.f i) f) g] (i : 𝒰.I₀),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.Limits.pullback.lift\\n        (CategoryTheo\", \"doc\": \"For an open cover $\\\\mathcal{U}$ of a scheme $X$, morphisms $f: X \\\\to Z$ and $g: Y \\\\to Z$, and index $i \\\\in \\\\mathcal{U}.I_0$, the composition of the second projection from the pullback $X \\\\times_Z Y$ t\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and directed covers do not include pointed henselization and residual universal-cover comparison maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointed affine strict normal crossings charts admit common etale refinements compatible with henselizations and universal finite etale residual covers",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.LocallyDirected.directed\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} {X : AlgebraicGeometry.Scheme}\\n  {𝒰 : AlgebraicGeometry.Scheme.Cover (AlgebraicGeometry.Scheme.precoverage P) X}\\n  {inst : CategoryTheory.Category.{v_1, u_1} 𝒰.I₀} [self : 𝒰.LocallyDirected] {i j : 𝒰.I₀}\\n  (x : ↥(CategoryTheory.Limits.\", \"doc\": \"For any scheme $X$ with a locally directed cover $\\\\mathcal{U}$ under a combined precoverage, and for any two indices $i,j$ in the zeroth component $\\\\mathcal{U}_0$, every point $x$ in the fiber product\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝓤 : X.OpenCover) : X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineCover\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"(X : Scheme.{u}) : OpenCover X\", \"doc\": \"For a scheme $X$, this constructs an open cover consisting of affine open immersions $\\\\{\\\\operatorname{Spec}(R_x) \\\\to X\\\\}_{x \\\\in X}$ whose images form a jointly surjective family, ensuring every point \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski\", \"type\": \": (Scheme.AffineZariskiSite.directedCover X).LocallyDirected\", \"doc\": \"For any scheme $X$, the directed affine Zariski cover of $X$ satisfies the locally directed condition: it forms a directed system of affine open subsets with inclusion morphisms that are open immersio\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \"{i j k : 𝒰.I₀} (fi : i ⟶ k) (fj : j ⟶ k) (xi : 𝒰.X i) (xj : 𝒰.X j) (h : 𝒰.trans fi xi = 𝒰.trans fj xj) :\\n  ∃ (l : 𝒰.I₀) (fli : l ⟶ i) (flj : l ⟶ j) (x : 𝒰.X l), 𝒰.trans fli x = xi ∧ 𝒰.trans flj x = xj\", \"doc\": \"Given a locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ have equal transitions $\\\\mathcal{U}.\\\\text{trans}(f_i, x_i) = \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{i : I} (a : D.obj i ⟶ X) (ha : t.app i = a ≫ f) {j : I} (b : D.obj j ⟶ X) (hb : t.app j = b ≫ f)\\n  (hab : c.π.app i ≫ a = c.π.app j ≫ b) : ∃ (k : I) (hik : k ⟶ i) (hjk : k ⟶ j), D.map hik ≫ a = D.map hjk ≫ b\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and directed covers do not include pointed henselization and residual universal-cover comparison maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPolynomial\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and directed covers do not include pointed henselization and residual universal-cover comparison maps"
+  },
+  {
+   "tool": "grep",
+   "query": "([Pp]ointed|[Hh]ensel).*(commonRefinement|common_refinement)|commonRefinement.*[Ee]tale",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: affine refinements and directed covers do not include pointed henselization and residual universal-cover comparison maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointed affine etale charts of a regular scheme with labelled normal crossings parameters have a common pointed affine etale refinement compatible with henselizations and universal finite etale covers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_unramfiedLocus_inter_smoothLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = Algebra.unramifiedLocus R A ∩ Algebra.smoothLocus R A\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the étale locus of $ A $ over $ R $ coincides with the intersection of the unramified locus and the smooth locus of $ A $ over $ R $. Formally,\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general affine covers, smooth charts, ideal-sheaf maps, or classifying-space covers; none gives the pointed SNC refinement with henselization and residual finite-etale cover compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functoriality of henselization of ring ideal pairs and pointed universal profinite etale covers under common affine neighbourhood refinement",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  (I : X.IdealSheafData) → {U V : ↑X.affineOpens} → U ≤ V → (I.glueDataObj U ⟶ I.glueDataObj V)\", \"doc\": \"For affine open subsets $U \\\\subseteq V$ of a scheme $X$ with ideal sheaf data $\\\\mathcal{I}$, this morphism is induced by the quotient map $\\\\mathcal{O}_X(V)/\\\\mathcal{I}(V) \\\\to \\\\mathcal{O}_X(U)/\\\\mathcal\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {I J K : X.IdealSheafData} (hIJ : I ≤ J) (hJK : J ≤ K) (U : ↑X.affineOpens),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom hJK U)\\n      (AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom hIJ U) =\\n    AlgebraicGeomet\", \"doc\": \"For a scheme $X$ with ideal sheaves $\\\\mathcal{I} \\\\leq \\\\mathcal{J} \\\\leq \\\\mathcal{K}$ and an affine open subset $U \\\\subseteq X$, the composition of the morphisms $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {I J : X.IdealSheafData} → I ≤ J → (U : ↑X.affineOpens) → J.glueDataObj U ⟶ I.glueDataObj U\", \"doc\": \"For a scheme $X$ and ideal sheaf data $\\\\mathcal{I} \\\\leq \\\\mathcal{J}$, this constructs the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathcal{J}(U)) \\\\to \\\\operatorname{Spec}(\\\\mathcal{O}_X(U)/\\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"A morphism $ i' \\to i $ in the index category $\\\\mathcal{I}$, chosen to ensure compatibility of the induced morphism $X \\to \\\\varprojlim D$ with the diagonal cover's open subsets. This morphism satisfies \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.fromAffineRefinement\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (𝓤 : X.OpenCover) → 𝓤.affineRefinement.openCover ⟶ 𝓤\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs a morphism from the affine refinement of $\\\\mathcal{U}$ to $\\\\mathcal{U}$ itself. The affine refinement is an open cov\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.i'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [∀ (i : I), CompactSpace ↥(D.obj i)] →\\n  \", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D: \\\\mathcal{I} \\\\to \\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X \\\\to S$, this function returns \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general affine covers, smooth charts, ideal-sheaf maps, or classifying-space covers; none gives the pointed SNC refinement with henselization and residual finite-etale cover compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Common pointed etale refinements of affine normal crossings charts with natural henselization and universal cover reduction maps",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝓤 : X.OpenCover) : X.AffineOpenCover\", \"doc\": \"Given a scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, this function constructs an affine open cover by refining $\\\\mathcal{U}$ with affine open covers of its components. Specifically, it binds the\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \"{i j k : 𝒰.I₀} (fi : i ⟶ k) (fj : j ⟶ k) (xi : 𝒰.X i) (xj : 𝒰.X j) (h : 𝒰.trans fi xi = 𝒰.trans fj xj) :\\n  ∃ (l : 𝒰.I₀) (fli : l ⟶ i) (flj : l ⟶ j) (x : 𝒰.X l), 𝒰.trans fli x = xi ∧ 𝒰.trans flj x = xj\", \"doc\": \"Given a locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ have equal transitions $\\\\mathcal{U}.\\\\text{trans}(f_i, x_i) = \\\\ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \"{i : I} (a : D.obj i ⟶ X) (ha : t.app i = a ≫ f) {j : I} (b : D.obj j ⟶ X) (hb : t.app j = b ≫ f)\\n  (hab : c.π.app i ≫ a = c.π.app j ≫ b) : ∃ (k : I) (hik : k ⟶ i) (hjk : k ⟶ j), D.map hik ≫ a = D.map hjk ≫ b\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \": Scheme.OpenCover.{u} (D.obj A.i')\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Directed\", \"type\": \"{i j : 𝒰.I₀} (xi : 𝒰.X i) (xj : 𝒰.X j) (h : 𝒰.f i xi = 𝒰.f j xj) :\\n  ∃ (k : 𝒰.I₀) (fi : k ⟶ i) (fj : k ⟶ j) (xk : 𝒰.X k), 𝒰.trans fi xk = xi ∧ 𝒰.trans fj xk = xj\", \"doc\": \"For any locally directed cover $\\\\mathcal{U}$ of a scheme $X$, if two elements $x_i \\\\in \\\\mathcal{U}.X(i)$ and $x_j \\\\in \\\\mathcal{U}.X(j)$ satisfy $\\\\mathcal{U}.f(i)(x_i) = \\\\mathcal{U}.f(j)(x_j)$ in $X$, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general affine covers, smooth charts, ideal-sheaf maps, or classifying-space covers; none gives the pointed SNC refinement with henselization and residual finite-etale cover compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"Etale\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general affine covers, smooth charts, ideal-sheaf maps, or classifying-space covers; none gives the pointed SNC refinement with henselization and residual finite-etale cover compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "henselization|universalCover|pointedLimitMap",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"58\", \"text\": \"* `classifyingSpaceUniversalCover`\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"87\", \"text\": \"def classifyingSpaceUniversalCover [Monoid G] :\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"96\", \"text\": \"namespace classifyingSpaceUniversalCover\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"106\", \"text\": \"    classifyingSpaceUniversalCover G :=\"}\n  {\"file\": \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"line\": \"116\", \"text\": \"    cechNerveTerminalFrom G ≅ classifyingSpaceUniversalCover G ⋙ forget _ := by\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: hits give general affine covers, smooth charts, ideal-sheaf maps, or classifying-space covers; none gives the pointed SNC refinement with henselization and residual finite-etale cover compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-snc-universal-residual-charts",
+  "date": "2026-10-22",
+  "group": "Q16"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: geometric henselian SNC charts, pointed universal residual covers, and prime-to-characteristic parameter-root tower underlying the tame-boundary calculation. Extraction of returned proof steps 19: Pointed common refinements of affine SNC stratum charts.",
+   "via": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-tame-stratum-kummer-descent",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-snc-pointed-affine-common-refinement",
+  "worker": "stage1",
+  "summary": "No exact sorry-free project attachment found. Reused existing nodes throughout, with no new lemmas. Constructed finite pointed products, preserved labelled parameters etale locally, and used a lifted residual idempotent to obtain an affine connected-residual chart. Used the actual pair-henselization universal property and pointed-limit uniqueness to prove all base, reduction and composition diagrams. Statement unchanged; empty input family and empty boundary included.",
+  "blueprint": "Realizes inherited paragraph (3), open direct image, via lem-sfb-snc-universal-residual-charts old step 19: common pointed affine SNC charts and compatible henselization/universal residual-cover maps. The ancestor command returns None; inherited from.node and via are preserved. Whole-blueprint searches found no exact duplicate.",
+  "tool_uses": [
+   {
+    "node": "def-weil-regular-scheme",
+    "why": "local Noetherianity of the given regular base; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "local finite presentation, hence local finite type, of each chart; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "ascent of local Noetherianity along the given etale charts; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Noetherianity of an affine coordinate ring; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "def-pc-fibre-product",
+    "why": "existence and universal property of the finite pointed product; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "etaleness of the product projections; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "etaleness after composition and open restriction; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "affine neighborhood of the product point; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-trf-etale-coordinate-divisor-parameters",
+    "why": "etale preservation of regular local parameter systems, including zero labels; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-trf-etale-coordinate-intersection-geometry",
+    "why": "regularity and reducedness of the entire scheme-theoretic residual intersection; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-sc-affine-noetherian-underlying-space",
+    "why": "Noetherian topology of the residual spectrum; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "openness of the component containing the marked point; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-spec-clopen-idempotent",
+    "why": "residual idempotent defining that component; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-principal-localization-open-immersion",
+    "why": "affine open defined by a lift of the residual idempotent; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "henselian target and canonical residue identification; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-universal-property",
+    "why": "unique extension and composition of pair maps; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "qcqs hypotheses for the pointed limit theorem; this is a generic geometric/algebraic tool, and no replacement of the unit direct-image route is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-regular-scheme",
+  "def-weil-etale-morphism",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-trf-etale-coordinate-divisor-parameters",
+  "lem-trf-etale-coordinate-intersection-geometry",
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-henselization-universal-property",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q76-8dbca438b",
+  "group": "Q76",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q76-8dbca438b (reviewer sub-agent of L); spot-checked: I read the item and all 20 cited statements; there are no new nodes and the statement is unchanged. The six steps hold. (1) B_a is Noetherian by regularity, étale is locally of finite type, and the locally Noetherian and affine-open lemmas apply. The reference chart V_0 comes from labelled-affine-stratum-charts, whose hypotheses match exactly, so the case of zero given charts is covered. (2) A pointed iterated fibre product over Y_I, with étaleness by base change and composition and an affine open X=Spec C. trf divisor-parameters, with U=V_0 and z=t_{0,i}, gives regularity and parameter transport; trf intersection-geometry, for I nonempty, gives V(c_i) as the scheme-theoretic intersection of the pulled-back D_i, regular and reduced. (3) The Noetherian quotient gives an open component, closedness is proved, and the clopen component gives an idempotent e. Its lift f is not treated as idempotent (E4 avoided), and B=C_f has residual (C/(c_i))_e equal to the component through the point. This is needed: with residue field k' larger than k, the residual k'⊗_k k' is disconnected. (4) J_aB=J comes from equal ideals of W×_Y D_i, not equal generators. The extension B_a^h to B^h comes from lem-weil-pbc-henselization-universal-property, since the pair-henselization node excludes the adjunction clause, and its reduction is the quotient map. (5)-(6) The residual-cover lift gives H and identifies H/JH with the residual pointed limit. Pointed-limit-finite-splitting uniqueness gives Phi_a, the residual quotient map, composition and the identifications between cover systems. Matching a cofinal-subsystem limit with the N-indexed one is elementary. Sources checked: Stacks 0A02 (more-algebra.tex:2980), 09ZS (pione.tex:1471), 0BND (pione.tex:1217), ILO VIII 4.2.2(i); no SGA. Batch-5 finding: lem-trf-etale-coordinate-divisor-parameters (Stacks 07QP/0AH0/00U4) and lem-trf-etale-coordinate-intersection-geometry (Stacks 00NQ/00NP/07QP, ILO VIII 4.1.8/4.2.4) are unsplit generic commutative-algebra statements. Their proof_deps are empty and their stmt_deps are only definitions, so they add no trace-formula or Poincaré-duality proof to the closure. Neither assumption gives them and citing the assumption leaves would not supply them, so I accept both. Accepted tool_uses: the generic pbc/pqf/sc/trf/sfb tool nodes listed in split_report. The blueprint from.node=null is inherited from the parent. No repair note, not dropped, first delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCPointedAffineCommonRefinement",
+  "declaration": "AlgebraicGeometry.exists_sncPointedAffineCommonRefinement",
+  "declarations": [
+   "AlgebraicGeometry.SNCPointedAffineChart",
+   "AlgebraicGeometry.SNCPointedAffineChart.ideal",
+   "AlgebraicGeometry.SNCAffineRefinement",
+   "AlgebraicGeometry.SNCAffineCoverData",
+   "AlgebraicGeometry.SNCAffineCoverMap",
+   "AlgebraicGeometry.HasSNCPointedAffineCommonRefinement",
+   "AlgebraicGeometry.exists_sncPointedAffineCommonRefinement",
+   "AlgebraicGeometry.sncAffineCoverMap_unique",
+   "AlgebraicGeometry.sncAffineCoverMap_composition"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCPointedAffineCommonRefinement.lean",
+  "statement": "theorem exists_sncPointedAffineCommonRefinement {k : Type u} [Field k] (Y : Scheme.{u}) (a : Y ⟶ Spec (.of k)) [LocallyOfFiniteType a] [QuasiCompact a] [IsSeparated a] (_hY : IsRegularScheme Y) (D : Y.IdealSheafData) (_hD : IsStrictNormalCrossingsBoundary D) (n : ℕ) (C : Fin n → Y.IdealSheafData) (_hC : Function.Injective (fun i ↦ (C i).support) ∧ (∀ i, IsIntegral (C i).subscheme ∧ IsRegularScheme (C i).subscheme) ∧ D.support = ⨆ i, (C i).support ∧ ∀ J : Finset (Fin n), ∀ z : (⨆ i ∈ J, C i).subscheme, IsRegularScheme ((⨆ i ∈ J, C i).subscheme) ∧ ringKrullDim (Y.presheaf.stalk ((⨆ i ∈ J, C i).subschemeι z)) = ringKrullDim ((⨆ i ∈ J, C i).subscheme.presheaf.stalk z) + (J.card : ℕ)) (I : Finset (Fin n)) (U : Y.Opens) (_hU : U = (⨆ j : {j : Fin n // j ∉ I}, (C j.val).support).compl) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ ((⨆ i ∈ I, (C i).comap U.ι).radical).subscheme) {A : Type w} [Finite A] (Q : A → SNCPointedAffineChart (Ω := Ω) (fun i : I ↦ (C i.val).comap U.ι) (s ≫ ((⨆ i ∈ I, (C i).comap U.ι).radical).subschemeι)) : HasSNCPointedAffineCommonRefinement Q",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Explicit chart, pointed refinement and cover-diagram data belong to this node. The existence theorem includes every input cover and the common chart; companion statements give the unique comparison and composition on the base quotient, henselization, cover and cover quotient. No parameter-root tower or restriction on the characteristic is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c63f78a46",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read the item node (unchanged vs live except lean; no new nodes, no statement_change, no repair note), the 7 stmt_dep records/declarations (IsRegularScheme, IsStrictNormalCrossingsBoundary source, inline geometric point, Etale, IsRegularSystemOfParameters, pair_henselization diagram, UniversalCover.cover/proj/pt in UniversalCoverConstruction), Mathlib IdealSheafData.comap (= ker of pullback.fst, i.e. ideal of V×_Y D_i) and the citer SNCUniversalResidualCharts. All clauses match: k field and Y regular separated finite type exact; _hC is verbatim the SNC existential body; U and S as in the citer's sncStratumOpen/Ideal (equal via comap_sup); charts carry étale v, equations generating comap ideals, the vanishing-subtuple-extends-to-RSOP parameter clause (no stronger assumption, B regular automatically), connected regular residual scheme, pointed lift. Conclusion gives W, pointed étale refinements, J_aB=J, cover data with the actual pair-henselization colimit, universal cover and residual cover isomorphisms pinned by base and point, and all squares; companions give existence and uniqueness for any refinement/data and composition on 4 levels. Checked the uniqueness of every map field and the truth of existence by hand. Edge cases (A=∅, I=∅, empty stratum, dim 0, any characteristic, universes u/v/w) fine. lean.statement verbatim, 9 decls present, lines ≤100, docstrings with source and blueprint, proofs sorry, plain imports are proof-dep modules. No existing declaration found. No file changed, so no compile. Advisory only: _hD redundant with _hC, Nodup implied; the citer's chart could later extend SNCPointedAffineChart."
+ }
+}

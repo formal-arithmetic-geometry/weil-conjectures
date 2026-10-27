@@ -1,0 +1,158 @@
+{
+ "id": "def-pur-rational-twisted-pullback-compositor",
+ "kind": "definition",
+ "title": "Canonical rational twisted pullback compositor",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $\\ell$ be prime, $E/\\mathbf Q_\\ell$ a finite field extension, and $f:X\\to Y$, $g:Y\\to Z$ morphisms of schemes [def-pc-scheme] on which $\\ell$ is invertible. Use the raw rational constructible categories [def-weil-pbc-rational-category], their specified completed derived pullback and tensor [def-weil-derived-pullback-tensor-hom], and Tate coefficients [def-coefficient-twists-detailed]. For $d,e\\in\\mathbf N$, write $B_{r,W}=E_W(r)[2r]$ and $H_{h,r}(K)=B_{r,\\mathrm{source}(h)}\\otimes^L Lh^*K$, in the source coordinates of [def-pur-canonical-purity-source-transports]. Define the natural isomorphism $u_{f,g,d,e}:H_{gf,d+e}\\xrightarrow{\\sim}H_{f,d}H_{g,e}$ as follows. Identify each $B_{r,W}$ with the rationalization of the one-term integral root-line complex in degree $-2r$ using the canonical localization and single-complex shift comparisons. The multiplication $B_{d,X}\\otimes^L B_{e,X}\\to B_{d+e,X}$ and the pullback $Lf^*B_{e,Y}\\to B_{e,X}$ are the rationalizations of the root-normalized one-term product and pullback of [def-sf-orientation-integral-line-comparisons]. Tensor the inverse multiplication with the pullback compositor $L(gf)^*\\to Lf^*Lg^*$; apply the tensor associator, the inverse line-pullback in the $e$ block, and the inverse monoidal pullback comparison. All associators, pullback compositors and monoidal maps are those of [lem-pur-derived-pullback-tensor-iso]. Their ordered composite is $u$, naturally in every rational object. No purity isomorphism enters its construction.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-rational-category",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-coefficient-twists-detailed",
+  "def-sf-orientation-integral-line-comparisons",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-pur-canonical-purity-source-transports"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Final composition-compatibility paragraph, using sk-prop-sp-composition ordered twist splitting; item proof Step 6 canonical factors"
+ },
+ "proof": [
+  {
+   "text": "For the naturality obligation, use the integral pullback compositor of [lem-pod-integral-pullback-composition]. Its naturality square holds on integral arrows. The pure-tensor formula of [def-weil-derived-pullback-tensor-hom] and the normalization in [lem-pur-derived-pullback-tensor-iso] identify both rational composites with the same scalar times this square. Tensor-product induction extends the equation to every rational arrow.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor reduction comparison in [lem-pur-derived-pullback-tensor-iso] is natural: it is reduction of the normalized tensor-model comparison followed by the reconstruction counit. Coherent reduction is faithful by [lem-pod-integral-system-reduction-fully-faithful]. Conjugate the natural system associator through this comparison, and use the defining integral associator equation to obtain naturality in the third variable. Its localization normalization and the bilinear pure-tensor formula of [def-weil-derived-pullback-tensor-hom] give the corresponding rational square, first on pure tensors and then on sums.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pod-integral-system-reduction-fully-faithful",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the rational monoidal pullback natural isomorphism of [lem-pur-derived-pullback-tensor-iso] with its first argument the fixed shifted line. Compose its inverse with inverse line pullback. Tensoring with a fixed isomorphism is natural by functoriality. Paste this square with the preceding two squares and the fixed inverse line multiplication. The outside square is component_naturality for the already defined component, so NatIso.ofComponents defines the compositor without changing any canonical factor.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-integral-system-reduction-fully-faithful",
+  "lem-pur-derived-pullback-tensor-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Naturality of the five canonical factors in the composition-transport construction; P1 gives explicit coherent-reduction and pure-tensor calculations for the existing definitions."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical compositor for rational Tate twisted derived pullbacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Over.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.Comma.Over.Pullback\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [HasPullbacksAlong f] [HasPullbacksAlong g] :\\n  pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"Let $f: X \\\\to Y$ and $g: Y \\\\to Z$ be composable morphisms in a category $\\\\mathcal{C}$ which has pullbacks along $f$ and $g$. For a morphism $h: A \\\\to B$, the pullback functor $\\\\text{pullback } h$ maps\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  conjugateEquiv ((pullbackPushforwardAdjunction.{v} φ).comp (pullbackPushforwardAdjunction.{v} ψ))\\n      (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\\n    (pushforwardComp.{v} φ ψ).hom\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.comp\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] : ChosenPullbacksAlong (f ≫ g)\", \"doc\": \"Given composable morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ in a category $\\\\mathcal{C}$, if there is a structure of chosen pullbacks along $f$ and along $g$, then this defines a structure of chosen pullb\"}\n  {\"name\": \"CategoryTheory.ChosenPullbacksAlong.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.LocallyCartesianClosed.ChosenPullbacksAlong\", \"type\": \"{X Y Z : C} (f : X ⟶ Y) (g : Y ⟶ Z) [ChosenPullbacksAlong f] [ChosenPullbacksAlong g] [ChosenPullbacksAlong (f ≫ g)] :\\n  pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"For composable morphisms $f: X \\\\to Y$ and $g: Y \\\\to Z$ in a category $\\\\mathcal{C}$ that has chosen pullbacks along $f$, $g$, and their composition $g \\\\circ f$, the pullback functor along the composite\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"PresheafOfModules.pullback_id_comp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (F := 𝟭 C) (𝟙 S) φ = isoWhiskerRight (pullbackId S) (pullback φ) ≪≫ Functor.leftUnitor _\", \"doc\": \"The composition of the pullback functor associated to the identity natural transformation with another pullback functor is naturally isomorphic to the original pullback functor, via the left unitor is\"}\n  {\"name\": \"CategoryTheory.MonoOver.pullbackComp\", \"module\": \"Mathlib.CategoryTheory.Subobject.MonoOver\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) : pullback (f ≫ g) ≅ pullback g ⋙ pullback f\", \"doc\": \"Let $f: X \\\\to Y$ and $g: Y \\\\to Z$ be composable morphisms in a category $\\\\mathcal{C}$ with pullbacks. For a morphism $h: A \\\\to B$, the pullback functor $\\\\text{pullback}(h)$ maps the category of monomo\"}\n",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension compatibility of smooth purity and composition of twisted pullbacks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso_hom_base\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ (R S T : Type u) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T] [inst_3 : Algebra R S]\\n  [inst_4 : Algebra R T],\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.pullbackSpecIso R S T).hom\\n      (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (algebraMap R (TensorProduct R S\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "twisted.*composit|composit.*twisted",
+   "results": "[grep] OK 0 hit(s)\n\nLocal rg in lean/WeilConjectures and lean/Sheaf, same expression:\nlean/WeilConjectures/FieldTheory/MatrixDescentInvariantsSpan.lean:74:finite Galois over K. The identity and composition hypotheses make the twisted\nlean/WeilConjectures/EtaleCohomology/Purity/Smooth/ProjectiveLineClass.lean:193:/-- The *decomposition map* of the projective line `q : ℙ¹_S ⟶ S`, twisted by `(1)[2]`:\nlean/WeilConjectures/SixFunctors/ProEtale/Adic/LisseCover/TwistedModule.lean:148:/-- Restricting twisted sections twice is restricting along the composite. -/\nlean/WeilConjectures/SixFunctors/ProEtale/Adic/LisseCover/TwistedModule.lean:161:/-- Restricting twisted sections twice is restricting along the composite. -/\nlean/Sheaf/CategoryTheory/InternalActionSiteBasic.lean:88:/-- The twisted category, with its actual objects, arrows, and composition.\nlean/Sheaf/CategoryTheory/InternalActionSiteBasic.lean:258:/-- The label-1 arrows in a twisted sieve are closed under base precomposition.\nlean/Sheaf/Paper/CoordinateSectionTensorTrace.lean:42:the coefficient first, identifies the twisted compact composite with identity\nlean/Sheaf/Paper/TwistedPullbackCanonicalShifts.lean:13:(blueprint: def-pur-twisted-pullback-composite-shifts).\nlean/Sheaf/Paper/TwistedPullbackCanonicalShifts.lean:48:(blueprint: def-pur-twisted-pullback-composite-shifts). -/\nlean/Sheaf/Paper/TwistedPullbackCanonicalShifts.lean:55:(blueprint: def-pur-twisted-pullback-composite-shifts). -/\nlean/Sheaf/Paper/TwistedPullbackCanonicalShifts.lean:63:(blueprint: def-pur-twisted-pullback-composite-shifts). -/\nlean/Sheaf/Paper/TwistedPullbackCanonicalShifts.lean:72:(blueprint: def-pur-twisted-pullback-composite-shifts). -/\nlean/Sheaf/Paper/PurShiftedTateUnitScalarCoherence.lean:134:/-- The specified q: canonical shift, then the shifted composite of beta and twisted\nlean/Sheaf/Paper/TwistedCoordinateSectionNormalization.lean:105:identity projection for ps=id. Consequently the twisted compact composite is\nlean/Sheaf/AlgebraicGeometry/ProEtaleProjectiveLineTraceSystem.lean:66:/-- The untwisted decomposition arrows on all bases.\nlean/Sheaf/Paper/AmbientDiagonalPurityBaseChange.lean:347:/-- The canonical identification from iterated twisted pullback to the composite one.\nlean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Untwist.lean:132:theorem isIso_p1DecompositionMap_of_twisted\nlean/Sheaf/Paper/PurityTwistCancellation.lean:462:/-- Cancellation in the specified purity composite, with both the untwisted and\nlean/Sheaf/Paper/AffineLineCompositeTranspose.lean:392:/-- The normalized compact-support compositor alpha at the actual twisted source.\nlean/Sheaf/AlgebraicGeometry/TwistedCohomologyDevissageClosure.lean:86:Their composite is the identity. Applying the twisted cohomology functor gives a retract.\nlean/Sheaf/AlgebraicGeometry/GeoP1Cohomology.lean:681:    apply Etale.isIso_p1DecompositionMap_of_twisted A N hN hA\nlean/Sheaf/Paper/TowerClassProjective.lean:153:/-- The unit component of the twisted projective-line decomposition.\nlean/Sheaf/AlgebraicGeometry/ProjectiveLineDiagonalTraceCalculation.lean:31:`projectiveLineTrace_chern`. The decomposition `b` restricts to the shifted twisted unit\nlean/Sheaf/Paper/CompositeIntegrationCounit.lean:91:/-- Coefficient factorization of the actual composite twisted-pullback counit, at both\nlean/Sheaf/AlgebraicGeometry/FundamentalGroup/WeilTwistedPaths.lean:118:`τ : a ⇝ b` its twisted loop has the decomposition-group action of geometric Frobenius.\nlean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Decomposition.lean:70:1. Use lem-asd-ordinary-finite-p1-adjunction for the twisted decomposition b_q.\nlean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Decomposition.lean:130:    apply isIso_p1DecompositionMap_of_twisted A N hN hA t S hS\nlean/Sheaf/AlgebraicGeometry/ProjectiveLineTrace.lean:24:The decomposition is characterized by its shifted twisted unit and the scalar Kummer\nlean/Sheaf/AlgebraicGeometry/SpP1BaseChangeOfNormalized.lean:25:The two components of the ordinary untwisted decomposition commute with\nlean/Sheaf/AlgebraicGeometry/SpP1BaseChangeOfNormalized.lean:32:twisted decomposition. Precompose with its pulled-back isomorphism and cancel.\nlean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Arrows.lean:139:/-- The shifted twisted unit, the first component of the projective-line decomposition.\n",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-iterated-purity-scalar-pasting",
+  "date": "2026-10-25",
+  "group": "NQ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-pur-rational-purity-trace-coherence",
+   "place": "Composition-coherence transport paragraph; canonical twisted-compositor factors used in item Step 6",
+   "via": [
+    "lem-pur-iterated-purity-scalar-pasting",
+    "lem-pur-composition-comparison-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.RationalTwistedPullbackCompositor",
+  "declaration": "WeilConjectures.RationalTwistedPullback.compositor",
+  "declarations": [
+   "WeilConjectures.RationalTwistedPullback.line",
+   "WeilConjectures.RationalTwistedPullback.integralModelIso",
+   "WeilConjectures.RationalTwistedPullback.model",
+   "WeilConjectures.RationalTwistedPullback.modelIso",
+   "WeilConjectures.RationalTwistedPullback.product",
+   "WeilConjectures.RationalTwistedPullback.pull",
+   "WeilConjectures.RationalTwistedPullback.component",
+   "WeilConjectures.RationalTwistedPullback.component_naturality",
+   "WeilConjectures.RationalTwistedPullback.compositor"
+  ],
+  "file": "lean/Sheaf/Paper/RationalTwistedPullbackCompositor.lean",
+  "statement": "def compositor : RationalSmoothPurityCanonical.rationalSource l E (f ≫ g) (d + e) ≅ RationalSmoothPurityCanonical.rationalSource l E g e ⋙ RationalSmoothPurityCanonical.rationalSource l E f d",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-25",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0ffc1514",
+  "group": "NQ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0ffc1514",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery after RETURN bda5 (H13/H4+H2). Both Interface modules deleted; the item imports landed RationalScalarComparisonData + AdicPurityScalarNaturality and every referenced name resolves (Data.lean H:131 G:143 T:148 b:155 coefficientTranspose:228 SourceLocalizationNormalization:360; AdicPurityScalarNaturalityData Field:57 Data:733 composeShift:466). stmt_deps: the theorem lem-pur-rational-scalar-comparison-identification is replaced by def-pur-rational-scalar-comparison-data; relative to live only that node and the new compositor node are added; the item changes only lean and stmt_deps. Compositor module and node byte-identical to bda5 (previously judged sound: real data, node factor order, no purity). Item module diff is only the namespace swap. Re-checked q/A/beta order, both pasting equations with sources and targets, gamma/a/b pinning, edge cases (E=L, towers, d=0/e=0, identity morphisms, empty schemes, K=0, shifts), universe u, verbatim lean.statement, lines <=100, sorry only in theorems. Advisory: Data/Field are owned by def-pur-adic-purity-scalar-naturality-data, reached via the genuinely text-cited theorem lem-pur-adic-purity-scalar-naturality, as in landed siblings. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261026T023630-L-587528",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

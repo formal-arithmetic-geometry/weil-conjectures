@@ -1,0 +1,235 @@
+{
+ "id": "lem-trf-presheaf-pullback-etale-point-lifting",
+ "kind": "statement",
+ "title": "Scheme tests and field-extension lifts for a pulled-back sheaf family",
+ "statement": "Let $S$ be a scheme [def-pc-scheme]. Work with sheaves of sets on its big fppf site [def-pc-fppf-site, def-weil-pbc-sites-and-cohomology]. Let $g:G\\to H$ and $h_i:H_i\\to H$ for $i\\in I$ be natural transformations. For each $i$ define the pointwise presheaf $P_i(T)=\\{(x,y)\\in G(T)\\times H_i(T):g(x)=h_i(y)\\}$, with projection $\\pi_i:P_i\\to G$. Assume each $h_i$ is representable etale in the scheme-test convention [def-trf-algebraic-space]. For every $S$-scheme $T$ and $t:h_T\\to G$, there is a canonical isomorphism $h_T\\times_GP_i\\cong h_T\\times_HH_i$, where the map $h_T\\to H$ is $g\\circ t$. The right side is represented by a scheme etale over $T$. Consequently each $\\pi_i$ is representable etale; if $G=h_T$ is represented by a scheme, $P_i$ is represented by a scheme. Suppose also that $(h_i)_{i\\in I}$ is jointly surjective on field-valued point classes [def-trf-algebraic-space-jointly-surjective-family]. Then for every field $K$ [def-weil-field], $s:\\operatorname{Spec}K\\to S$, and $x\\in G(\\operatorname{Spec}K,s)$, there exist $i\\in I$, a field extension $e:K\\to M$, and $y\\in H_i(\\operatorname{Spec}M,s\\circ\\operatorname{Spec}e)$ with $h_i(y)=g(x)|_M$; the pair $(x|_M,y)$ belongs to $P_i(\\operatorname{Spec}M)$ and projects to $x|_M$. Thus $(\\pi_i)_{i\\in I}$ is jointly surjective on point classes. This assertion includes $I=\\varnothing$: its hypothesis forces $G$ to have no field-valued points.",
+ "source": {
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 041F (lemma-etale), part (3), with its omitted details supplied by spaces-properties.tex Tag 03BU (definition-points) and Tag 03H4 (lemma-points-cartesian), common-field-extension proof."
+ },
+ "stmt_deps": [
+  "def-pc-fppf-site",
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-field",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-trf-sheaf-pullback-cone"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate the explicit compatible-pair cone at each test scheme. Its vertex and both projections are definitionally Mathlib Types.pullbackCone for the evaluated maps. Transport Types.pullbackLimitCone.isLimit along the identity cospan comparison and the identity cone isomorphism. Mathlib evaluationJointlyReflectsLimits then proves the presheaf cone limiting, including its naturality and uniqueness. Apply Mathlib closure of the sheaf property under limits to the cospan of sheaves G, H_i, H, using their sheaf-condition proofs [def-weil-pbc-sites-and-cohomology]. This also includes empty covers.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), part (3), omitted proof; details supplied here from the sheaf and scheme-test definitions."
+   }
+  },
+  {
+   "text": "Fix i, T/S and t:h_T→G. Paste the explicit pullback square for t and P_i→G horizontally with the explicit square for G→H and H_i→H, taking the flipped squares. The resulting square exhibits h_T×_G P_i as the pullback of t≫g and h_i. The explicit h_T×_H H_i is another such pullback. Mathlib uniqueness of limit objects supplies their comparison isomorphism; its projection lemmas give exactly the two equations in the statement. Sectionwise this is (a,(x,y))↦(a,y), with inverse (a,y)↦(a,(t(a),y)).",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), part (3), omitted proof; details supplied here from the sheaf and scheme-test definitions."
+   }
+  },
+  {
+   "text": "Apply the scheme-test definition [def-trf-algebraic-space] of IsEtale(h_i) to t≫g, obtaining U,p,q and an étale p with IsPullback q (yoneda.map p) h_i (t≫g). The original explicit pullback square lifts (yoneda.map p≫t,q) to a map k:h_U→P_i. Cancel that explicit square from the representing square to obtain IsPullback k (yoneda.map p) π_i t. Thus π_i is representable étale. If e:G≅h_T is a representing isomorphism, test this property along e.inv:h_T→G. In the resulting pullback the bottom map is an isomorphism, so the top map h_U→P_i is an isomorphism. Its inverse represents P_i.",
+   "uses": [
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), part (3), omitted proof; details supplied here from the sheaf and scheme-test definitions."
+   }
+  },
+  {
+   "text": "Let $K,s,x$ be as in the statement. Apply [def-trf-algebraic-space-jointly-surjective-family] to the element $g_K(x)\\in H(\\operatorname{Spec}K,s)$. The hypothesis gives $i$, a field embedding $e:K\\to M$, and $y\\in H_i(\\operatorname{Spec}M,s\\circ\\operatorname{Spec}e)$ with $h_i(y)=g_K(x)|_M$. Naturality of $g$ says $g_M(x|_M)=g_K(x)|_M$. Therefore $p=(x|_M,y)$ satisfies the defining equality of $P_i(\\operatorname{Spec}M)$ and $\\pi_i(p)=x|_M$. This is exactly the extension-lifting condition for joint surjectivity of $(\\pi_i)$ in the cited definition. The extension itself witnesses equality of the projected point class with the class of $x$.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BU (definition-points), preceding presheaf point equivalence; Tag 03H4 (lemma-points-cartesian), common-extension proof."
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$ and a field-valued point $x$ of $G$ existed, $g_K(x)$ would be a field-valued point of $H$. The hypothesis in [def-trf-algebraic-space-jointly-surjective-family] applied to it would supply an element $i\\in\\varnothing$, a contradiction. Hence $G$ has no such points, and the universal extension-lifting assertion for the empty pulled-back family holds vacuously. This includes the empty base scheme.",
+   "uses": [
+    "def-trf-algebraic-space-jointly-surjective-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-topologies.tex",
+    "place": "Tag 041F (lemma-etale), part (3), omitted proof; details supplied here from the sheaf and scheme-test definitions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-topologies.tex",
+  "place": "Tag 041F(3), whose proof is omitted; pointwise explicit type pullbacks and Mathlib evaluationJointlyReflectsLimits, closure of sheaves under limits, pullback pasting/cancellation, and the field-extension argument of Tag 03H4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a representable etale natural transformation on scheme presheaves preserves etaleness and lifts field valued points after field extension",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, Algebra.Etale.comp, StandardEtalePair.HasMap.map, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.relativelyRepresentable, AlgebraicGeometry.IsEtale",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "IsJointlySurjective|AlgebraicSpace|relativelyRepresentable.*[Bb]ase",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/PullbackCarrier.lean, Mathlib/AlgebraicGeometry/Cover/Over.lean, Mathlib/AlgebraicGeometry/Cover/Over.lean, Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Cover/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a family of presheaves jointly surjective after field extension is jointly surjective on field valued points",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme presheaves G and H, a compatible pair of field valued points after extension defines a point of their pointwise pullback; representable etale maps remain representable etale",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.Triplet.exists_preimage, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint, AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, AlgebraicGeometry.Scheme.Pullback.Triplet.mk', AlgebraicGeometry.Scheme.exists_preimage_of_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_s, AlgebraicGeometry.Scheme.Pullback.Triplet.hx, AlgebraicGeometry.Scheme.instHasPullbacksEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: generic relative-representability or scheme permanence results do not give this explicit sheaf construction and its full asserted identifications"
+  },
+  {
+   "tool": "grep",
+   "query": "relativelyRepresentable|AlgebraicSpace|IsJointlySurjective",
+   "results": "24 hits: Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean; Mathlib/AlgebraicGeometry/PullbackCarrier.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability, scheme pullback, and scheme etale permanence hits do not state the full sheaf scheme-test identification and field-extension lifting assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of a representable etale natural transformation and lifting field valued point classes of a jointly surjective family",
+   "results": "8 hits: Algebra.Etale.baseChange; AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange; CategoryTheory.instIsStableUnderBaseChangeJointlySurjectivePrecoverage; CategoryTheory.isStableUnderBaseChange_comap_jointlySurjectivePrecoverage; CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange; AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability, scheme pullback, and scheme etale permanence hits do not state the full sheaf scheme-test identification and field-extension lifting assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.relativelyRepresentable",
+   "results": "12 hits: CategoryTheory.Functor.relativelyRepresentable; CategoryTheory.Functor.relativelyRepresentable.isMultiplicative; CategoryTheory.Functor.relativelyRepresentable.isStableUnderBaseChange; CategoryTheory.Functor.relativelyRepresentable.respectsIso; CategoryTheory.Functor.relativelyRepresentable.of_isIso; CategoryTheory.MorphismProperty.relative.rep; CategoryTheory.Functor.relativelyRepresentable.pullback; CategoryTheory.Functor.relativelyRepresentable.isomorphisms_le",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability, scheme pullback, and scheme etale permanence hits do not state the full sheaf scheme-test identification and field-extension lifting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback of representable etale maps of sheaves is representable etale and a jointly surjective family on field valued points lifts after a field extension",
+   "results": "8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_fst_triplet_of_prop; AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving.exists_preimage_snd_triplet_of_prop; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability, scheme pullback, and scheme etale permanence hits do not state the full sheaf scheme-test identification and field-extension lifting assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of sets on schemes a compatible pair of sections defines a fibre product section and scheme test pullbacks reassociate canonically",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.p_comm; AlgebraicGeometry.Scheme.Pullback.t'_snd_snd; AlgebraicGeometry.Scheme.Pullback.t'_fst_snd; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_snd; AlgebraicGeometry.Scheme.Pullback.t'_fst_fst_fst; AlgebraicGeometry.Scheme.Pullback.t_snd; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_fst; AlgebraicGeometry.Scheme.Pullback.t'_snd_fst_snd",
+   "date": "2026-10-22",
+   "verdict": "no match: generic representability, scheme pullback, and scheme etale permanence hits do not state the full sheaf scheme-test identification and field-extension lifting assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-fibre-products-etale-covers",
+  "date": "2026-10-22",
+  "group": "Q119"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Polarized descent input below the historical ancestor lem-trf-local-term-locality: fibre products and etale-cover base changes used to apply the section-algebra proof to every scheme test. Re-split task: Scheme tests and field-extension lifts for a pulled-back sheaf family (old proof steps [6, 7]).",
+   "via": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-trf-presheaf-pullback-etale-point-lifting",
+  "worker": "stage1",
+  "summary": "Expanded the omitted scheme-test and point-lifting details into five explicit elementary arguments: componentwise sheaf gluing, inverse natural transformations for the iterated pullback, application of the scheme-test definition, compatible field-extension sections, and the empty-family case. No statement change and no new nodes. All cited statements were read, and exact quotes recorded in citations.json.",
+  "blueprint": "Realizes the historical polarized-descent helper below lem-trf-local-term-locality, at the existing from.place and via chain: old steps 6 and 7 of lem-trf-space-fibre-products-etale-covers, scheme tests and extension lifts. It does not replace any step of the unit contracting-correspondence argument.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-27542f473",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-27542f473 (reviewer sub-agent of L); spot-checked: PASS, no fixes; review.md is in the run directory. First split of a statement-only node that Q119 created from old steps 6-7 of lem-trf-space-fibre-products-etale-covers. The statement is unchanged (byte-identical), there are no new nodes and tool_uses is empty. Sources: spaces-topologies.tex lemma-etale = 041F(3), whose proof is 'Omitted', so agent proof_origin is right; spaces-properties.tex lemma-points-cartesian = 03H4 (common-extension proof), which steps 4-5 realize. Every step takes only statements from the cited definitions. Step 1: the equalizer condition makes P_i a sheaf; separation in H gives g(x)=h_i(y); the empty covering is fine. Step 2: (a,(x,y))<->(a,y) is a natural isomorphism over h_T because x=t(a). Step 3: the scheme-test definition applied to g∘t gives representable étale; t=id gives P_i as a scheme. Step 4: def-trf-algebraic-space-jointly-surjective-family applied to g_K(x) in H, plus naturality of g, gives (x|_M,y) in P_i. Step 5: I empty is vacuous. Small cases checked: identities; h_U->h_X étale with G=h_Y gives h_{Y x_X U}; empty base, empty G, I empty. No added hypotheses and nothing weakened. Searches: LeanFinder, Loogle and grep ran; the Q15 LeanSearch was rate-limited and honestly recorded unavailable; the inherited Q119 LeanSearch ran. No match. Blueprint from/same_as are consistent; no SGA. Advisory for the maintainer: clause (3) of lem-trf-presheaf-field-lift-family-calculus (unsplit, Q118, 2026-10-22) contains the item's joint-surjectivity clause as the case F'=G, a=g, and the report's duplicate search missed it. Not a return: the item carries more content and its inline proof is a genuinely elementary instance of the definition (C1). A later cleanup may make one clause cite the other."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PresheafPullbackEtalePointLifting",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.presheafPullback_etale_point_lifting",
+  "file": "lean/Sheaf/AlgebraicGeometry/PresheafPullbackEtalePointLifting.lean",
+  "statement": "theorem presheafPullback_etale_point_lifting {S : Scheme.{u}} {I : Type w} (G H : Sheaf (Scheme.fppfTopology.over S) (Type u)) (Hᵢ : I → Sheaf (Scheme.fppfTopology.over S) (Type u)) (g : G.obj ⟶ H.obj) (h : ∀ i : I, (Hᵢ i).obj ⟶ H.obj) (he : ∀ i : I, IsEtale (h i)) : (∀ i : I, Presheaf.IsSheaf (Scheme.fppfTopology.over S) (sheafPullbackCone g (h i)).pt) ∧ (∀ (i : I) (T : Over S) (t : yoneda.obj T ⟶ G.obj), (∃ e : (sheafPullbackCone t (sheafPullbackCone g (h i)).fst).pt ≅ (sheafPullbackCone (t ≫ g) (h i)).pt, e.hom ≫ (sheafPullbackCone (t ≫ g) (h i)).fst = (sheafPullbackCone t (sheafPullbackCone g (h i)).fst).fst ∧ e.hom ≫ (sheafPullbackCone (t ≫ g) (h i)).snd = (sheafPullbackCone t (sheafPullbackCone g (h i)).fst).snd ≫ (sheafPullbackCone g (h i)).snd) ∧ ∃ (U : Over S) (p : U ⟶ T) (q : yoneda.obj U ⟶ (Hᵢ i).obj), IsPullback q (yoneda.map p) (h i) (t ≫ g) ∧ Etale p.left) ∧ (∀ i : I, IsEtale (sheafPullbackCone g (h i)).fst) ∧ (∀ (i : I) (T : Over S) (_ : G.obj ≅ yoneda.obj T), ∃ U : Over S, Nonempty ((sheafPullbackCone g (h i)).pt ≅ yoneda.obj U)) ∧ (IsJointlySurjective h → (∀ (K : Type u) [Field K] (s : Spec (CommRingCat.of K) ⟶ S) (x : G.obj.obj (op (Over.mk s))), ∃ (i : I) (M : Type u) (_ : Field M) (e : K →+* M) (y : (Hᵢ i).obj.obj (op (Over.mk (Spec.map (CommRingCat.ofHom e) ≫ s)))), (h i).app _ y = H.obj.map (Over.homMk (Spec.map (CommRingCat.ofHom e)) rfl).op (g.app _ x) ∧ ∃ p : (sheafPullbackCone g (h i)).pt.obj (op (Over.mk (Spec.map (CommRingCat.ofHom e) ≫ s))), p.val = (G.obj.map (Over.homMk (Spec.map (CommRingCat.ofHom e)) rfl).op x, y) ∧ (sheafPullbackCone g (h i)).fst.app _ p = G.obj.map (Over.homMk (Spec.map (CommRingCat.ofHom e)) rfl).op x) ∧ IsJointlySurjective (fun i : I ↦ (sheafPullbackCone g (h i)).fst) ∧ (IsEmpty I → ∀ (K : Type u) [Field K] (s : Spec (CommRingCat.of K) ⟶ S), IsEmpty (G.obj.obj (op (Over.mk s)))))",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Uses the explicit sheafPullbackCone owned by def-trf-sheaf-pullback-cone, installed by maintenance commit 13dcc879ed57f40510112dfe29082edac34a38ac. No diagonal-representability theorem is imported or used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3028cb334",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery after the H2/C5 RETURN (run 3541852335f0). The base now has def-trf-sheaf-pullback-cone owning SheafPullbackCone.lean (a real PullbackCone.combine construction, not hollow), and the base item node already cites it in stmt_deps. The delivered node differs from the base only in its lean field; the module differs from the earlier delivery only in its import. lean.statement is verbatim and there is one sorry. Clause check: arbitrary fppf sheaves, I : Type w, IsEtale = IsRepresentableWith(Etale) exact; P_i sheaf conjunct; comparison iso pinned by both projections; étale representing square along t≫g; IsEtale of π_i; G≅h_T ⇒ P_i representable; field lift with p.val=(x|_M,y) and its projection, conventions as in IsJointlySurjective; joint surjectivity of π_i; empty-I clause. Edge cases (empty I, empty base or G, identities, universes) fine. Docstrings carry the source places, blueprint tag and proof steps 1-5; both report sections present. No compile (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261023T152001-L-428684",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

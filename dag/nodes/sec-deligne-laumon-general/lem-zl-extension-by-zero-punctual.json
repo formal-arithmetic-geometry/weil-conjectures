@@ -19,126 +19,79 @@
   "def-weil-local-frobenius-trace",
   "def-zl-weil-ind-sheaf-category",
   "def-zl-weil-compact-support-cohomology",
-  "def-pur-completed-coefficient-presentation-transport"
+  "def-pur-completed-coefficient-presentation-transport",
+  "def-zl-open-weil-coefficient-fibres"
  ],
  "proof": [
   {
-   "text": "By [lem-pod-separated-finite-type-base-change], $U$ and $X$ are separated finite-type $k$-schemes. All the geometric hypotheses of the coefficient comparisons hold. The schemes $U$ and $X$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: apply it over the field $k$, whose only ideals are $0$ and $k$. For every affine open $V\\subset X$, its intersection with $U$ is an open subscheme of the Noetherian scheme $X$, so is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Thus $j$ is quasi-compact. Choose a closed immersion $i:Z\\hookrightarrow X$ with image $X\\setminus U$ by [lem-weil-pbc-closed-subset-closed-subscheme]; the same choice may be made over $k_0$ and base changed. The finite-type, separated and prime-to-characteristic hypotheses are those of the statement; no properness of $j$ is required.",
+   "text": "For the auxiliary declaration zlOpenWeilPull_isRightAdjoint, use the existing common-stage open-heart adjunction with its prescribed underlying pullback [lem-zl-common-stage-open-heart-adjunction]. Geometric Frobenius and its inverse preserve the constructible heart by [lem-a1-constructible-pullback-t-exact]; their inverse equivalence is the normalized common-stage isomorphism transport [lem-pod-isomorphism-field-transport]. Thus the heart Frobenius functors are autoequivalences. The canonical heart square of [def-zl-weil-ind-sheaf-category] has an invertible inverse mate [lem-stage3-inverse-mate-equivalences]. Lift the adjunction to invertible Frobenius algebras by [lem-sf-fixed-pair-adjunction-lift]. Explicitly identify an invertible algebra in the heart with a Weil object whose underlying carrier lies in the heart: both directions preserve the carrier, structure isomorphism and arrows. The normalization equation of the heart square identifies the resulting restriction functor with zlWeilPull. Transport the lifted adjunction through these equivalences. The main theorem uses the comparison steps below.",
    "uses": [
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-closed-subset-closed-subscheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme)"
-   }
-  },
-  {
-   "text": "Fix a finite coefficient field $E$, write $R=\\mathcal O_E$, and let $K\\in D^b_c(U,R)$. With the compactification $(j,\\operatorname{id}_X)$, [def-weil-integral-rational-qbar-compact-support] defines $Rj_!K$ as the total derived limit of the extensions by zero of its reduction tower. The comparison $d_j(K)$ in [lem-sf-integral-open-reduction-comparison] identifies exactly this total limit with localized ringed-site extension by zero for the completed coefficient sheaves. It respects the strict quotient transitions and the open adjunction unit and counit. By [lem-pur-site-restriction-module-adjunction-exact] this latter functor is exact on module sheaves. In particular, for its termwise action, kernels, images and their quotients give $\\mathcal H^r(j_!K)=j_!\\mathcal H^r(K)$ in every degree. The total limit lies in $D^b_c(X,R)$ by [lem-sf-integral-compact-support-constructible], applied to the same compactification. Thus it is the genuine constructible integral functor, and preserves both standard cohomological bounds.",
-   "uses": [
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-sf-integral-open-reduction-comparison",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-integral-compact-support-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DJ (lemma-extension-by-zero-exact), together with Tag 0E8I and sites-cohomology Tag 0GL1 (lemma-j-shriek-and-tensor); strict completed comparison as stated in lem-sf-integral-open-reduction-comparison"
-   }
-  },
-  {
-   "text": "The classes $D^{\\le0}$ and $D^{\\ge0}$ in the rationalized category are the isomorphism closures of the corresponding integral classes, and at $\\Qlb$ they are the isomorphism closures of the finite-field-stage classes [def-weil-constructible-standard-tstructure]. The functor at $E$ is the rationalization of the functor of step 2, and at $\\Qlb$ it is $(E,K)\\mapsto(E,Rj_!K)$ [def-weil-integral-rational-qbar-compact-support]. Hence each of the two classes is preserved: choose a representative in the requisite class, apply step 2, then apply the functor to the representing isomorphism. Compatibility with coefficient extension and the descent of the functor and comparison maps are supplied by clause (1) of [prop-functor-package]. Their intersection, the constructible heart [def-weil-constructible-heart], is therefore preserved. This establishes that the output is a sheaf without treating $\\Qlb$ as a discrete non-torsion coefficient ring on the small etale site.",
-   "uses": [
-    "def-weil-constructible-standard-tstructure",
-    "def-weil-integral-rational-qbar-compact-support",
-    "prop-functor-package",
-    "def-weil-constructible-heart"
+    "lem-zl-common-stage-open-heart-adjunction",
+    "def-zl-weil-ind-sheaf-category",
+    "lem-pod-isomorphism-field-transport",
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-sf-fixed-pair-adjunction-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
-    "place": "proof (1), finite-stage and common-stage passage"
+    "place": "proof (1), coefficient and heart passage"
    }
   },
   {
-   "text": "Apply [lem-cbc-completed-extension-zero-comparison] first to base change along $j:U\\to X$, and then along $i:Z\\to X$. The pulled-back open immersions are respectively $\\operatorname{id}_U$ and $\\varnothing\\to Z$. At finite coefficients [lem-cbc-proetale-extension-zero] computes their extensions as the identity and zero. The completed comparison is induced by these finite maps, so gives $j^*Rj_!K\\simeq K$ and $i^*Rj_!K=0$ for integral $K$. These are the canonical comparisons, natural in $K$; the first restricts to the identity at every finite level. Rationalization and common-stage passage in step 3 give the same identities at $\\Qlb$. For a geometric point $\\bar x$ inside $U$, use its unique factorization $\\bar x=j\\bar u$; outside $U$, its map from a field factors through $i$. Apply the coefficient-fibre comparison $(h^*\\mathcal G)_{\\bar v}\\cong\\mathcal G_{h\\bar v}$ of [lem-per-adic-heart-pullback-fibres], with $h=j$ or $i$, to the sheaf $\\mathcal G=Rj_!\\mathcal F$. This proves the stated natural stalk formula for every geometric point, including points not over closed points of $X_0$.",
+   "text": "Retain the finite-limit and finite-colimit preservation of the common-stage open-heart left adjoint. Its Frobenius lift preserves them by the fixed-pair preservation instances; the heart-pair equivalences preserve all limits and colimits. Uniqueness of left adjoints transfers exactness to zlOpenWeilShriek. Finite products imply additivity.",
    "uses": [
-    "lem-cbc-completed-extension-zero-comparison",
-    "lem-cbc-proetale-extension-zero",
-    "lem-per-adic-heart-pullback-fibres"
+    "lem-zl-common-stage-open-heart-adjunction",
+    "lem-sf-fixed-pair-adjunction-lift"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.1.12 (restriction identities), Lemma 6.8.2 and Proposition 6.8.14 (coefficient passage); completed comparison as stated in lem-cbc-completed-extension-zero-comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $g_U,g_X$ be geometric Frobenius. Their squares with $j$, and the squares of their powers, are Cartesian by [lem-trf-frobenius-open-square]. The canonical base-change isomorphism $b:g_X^*j_!\\simeq j_!g_U^*$ of [prop-functor-package], with its coefficient compatibilities and equivariance, defines the output Weil structure by $\\theta'=j_!\\theta\\circ b$. A Weil morphism $a$ satisfies $a\\theta=\\theta_1 g_U^*a$ [def-weil-weil-sheaf-complex]; applying $j_!$ and naturality of $b$ gives the same equation for $j_!a$. Thus this is a functor on Weil sheaves. Restrict $b$ to $U$: it is the identity comparison under step 4, as it is at finite levels. Consequently $j^*\\theta'=\\theta$ under $j^*j_!\\simeq\\operatorname{id}$. For a closed $x\\in U_0$ of degree $d$, the pasted comparison for $g_X^d$ restricts in the same way, so $j^*(\\theta'^{[d]})=\\theta^{[d]}$. In the formula for $F_x$ of [def-weil-local-frobenius-trace], the geometric point, its return $g_X^d\\bar x=\\bar xg_s^d$, and the point transport are the same after factoring through $U$; naturality identifies the final map induced by $\\theta'^{[d]}$ with that induced by $\\theta^{[d]}$. Thus the stalk identification conjugates the two local operators. At a closed point outside $U_0$ the stalk is zero.",
+   "text": "Apply carrier realization to the canonical adjunction and each given integral finite-stage presentation.",
    "uses": [
-    "lem-trf-frobenius-open-square",
-    "prop-functor-package",
-    "def-weil-weil-sheaf-complex",
-    "def-weil-local-frobenius-trace"
+    "lem-zl-open-weil-carrier-realization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
-    "place": "proof (2), same stalk with the same local Frobenius; canonical Frobenius-square construction as in def-trf-weil-extension-zero"
-   }
+   "elementary": false
   },
   {
-   "text": "Take a short exact sequence of constructible Weil sheaves on $U_0$. Its images are constructible Weil sheaves by steps 3 and 5. At any geometric point inside $U$, naturality of step 4 identifies the image sequence, including both arrows, with the original stalk sequence; outside $U$ all three terms and both arrows are zero. Exactness and detection of short exact sequences by constructible coefficient fibres in [lem-dl-a1-constructible-fibres-exact] show that the image sequence is short exact, also after retaining its commuting Weil structures. This proves exactness of $j_!$.",
+   "text": "Apply the natural geometric fibre comparison to the canonical adjunction.",
    "uses": [
-    "lem-dl-a1-constructible-fibres-exact"
+    "lem-zl-open-weil-geometric-fibres"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S5 (proposition-describe-jshriek), stalkwise exactness argument; adic constructible coefficient detection as stated in lem-dl-a1-constructible-fibres-exact"
-   }
+   "elementary": false
   },
   {
-   "text": "For a closed point $x\\in U_0$, its residue field and hence $q_x$ do not change under the open immersion. Step 5 gives identical local eigenvalues. Thus each inequality $|\\iota(\\alpha)|\\le q_x^{w/2}$, or equality $|\\iota(\\alpha)|=q_x^{w/2}$, is unchanged. For $x\\notin U_0$ the zero vector space has no eigenvalues, so both universally quantified conditions are vacuous. These are precisely the punctual upper bound specified in the statement and the purity condition of [def-weil-punctual-weights]. This includes the zero sheaf, empty open immersion and identity open immersion.",
+   "text": "Apply finite-stage Frobenius compatibility to the canonical adjunction.",
    "uses": [
-    "def-weil-punctual-weights"
+    "lem-zl-open-weil-finite-stage-frobenius"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
-    "place": "proof (2), extension by zero preserves punctual purity and upper bounds"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For each eigenvalue of the output use spectrum transport to obtain an input closed point and the identical residue cardinality. Apply the input upper bound or purity equality at that point and rewrite the cardinality. The argument works for every real weight and every complex embedding.",
+   "uses": [
+    "lem-zl-open-weil-punctual-spectrum"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-sf-integral-open-reduction-comparison",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-integral-compact-support-constructible",
-  "def-weil-constructible-standard-tstructure",
-  "prop-functor-package",
-  "def-weil-constructible-heart",
-  "lem-cbc-completed-extension-zero-comparison",
-  "lem-cbc-proetale-extension-zero",
-  "lem-per-adic-heart-pullback-fibres",
-  "lem-trf-frobenius-open-square",
-  "def-weil-weil-sheaf-complex",
-  "def-weil-local-frobenius-trace",
-  "lem-dl-a1-constructible-fibres-exact",
-  "def-weil-punctual-weights"
+  "lem-zl-common-stage-open-heart-adjunction",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-pod-isomorphism-field-transport",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-sf-fixed-pair-adjunction-lift",
+  "lem-zl-open-weil-carrier-realization",
+  "lem-zl-open-weil-geometric-fibres",
+  "lem-zl-open-weil-finite-stage-frobenius",
+  "lem-zl-open-weil-punctual-spectrum"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
-  "place": "proof (1) and (2), expanded using Stacks Tags 03DJ, 03S5, 0E8I, 0GL1 and the existing completed-coefficient comparison nodes"
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "proof (1) and (2); S8: exactness retained through the existing adjunction lift, remaining comparisons separated and weight clauses assembled from the weight-independent spectrum transport"
  },
  "mathlib_searches": [
   {
@@ -232,11 +185,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-zl-extension-by-zero-punctual",
   "worker": "stage1",
-  "summary": "Expanded the extension-by-zero argument through its actual completed integral, rationalized and common-stage coefficient categories; reused all existing nodes and created none. Checked exactness on constructible fibres and wrote out the Frobenius-iterate comparison. Corrected the ill-defined reference to local Frobenius at arbitrary geometric points, retaining the full geometric-stalk formula and stating Frobenius equivariance at closed points. Made the punctual upper eigenvalue bound explicit.",
-  "blueprint": "lem-zl-quasi-finite.proof.md (1): extension by zero is exact and finite/common-stage passage; (2): same stalk and local Frobenius on the open, zero stalk on the complement, and punctual weight preservation. This item is a supporting node, not the unit key node.",
+  "summary": "Repair of human re-split order: unchanged statement and statement dependencies. Reviewer FIX: the delivered standard-bounds and Weil-iterate nodes duplicate the same-day Q37 re-split nodes lem-zl-open-extension-texact-coefficient-stages, lem-zl-open-weil-unit-and-empty-fibre and lem-zl-residue-compatible-pullback-frobenius (landed after this branch) and are dropped; steps 2-4 cite those. The restriction node is narrowed to the complementary vanishing Li^*Rj_!=0 at all stages, which the Q37 empty-fibre clause gives only at k-points and the item needs at every geometric point.",
+  "blueprint": "lem-zl-quasi-finite proof (1): parent geometry/exactness, Q37 open-extension coefficient stages, Q37 open unit and the new complementary-vanishing node; proof (2): Q37 open Weil unit and residue-compatible pullback Frobenius plus the parent elementary eigenvalue argument.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -251,40 +204,28 @@
     "why": "Supplies a closed complement for the restriction calculation."
    },
    {
-    "node": "lem-sf-integral-open-reduction-comparison",
-    "why": "Identifies the actual completed strict reduction-tower functor with exact ringed-site extension; the unit has no coefficient comparison of its own."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic exactness of localized ringed-site extension by zero, with completed coefficient sheaves."
-   },
-   {
-    "node": "lem-sf-integral-compact-support-constructible",
-    "why": "Supplies constructible landing for the integral total limit."
-   },
-   {
-    "node": "prop-functor-package",
-    "why": "Supplies compatible coefficient descent and canonical base change with Frobenius coherence, without replacing the unit weight argument."
-   },
-   {
-    "node": "lem-cbc-completed-extension-zero-comparison",
-    "why": "Supplies restriction/base-change identities at the completed integral stage."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero",
-    "why": "Supplies the finite-level identity/zero computation and natural stalk prescription."
-   },
-   {
     "node": "lem-per-adic-heart-pullback-fibres",
     "why": "Supplies coefficient-fibre comparison on the rational/common-stage constructible heart."
    },
    {
-    "node": "lem-trf-frobenius-open-square",
-    "why": "Supplies the Cartesian geometric-Frobenius squares, including powers."
-   },
-   {
     "node": "lem-dl-a1-constructible-fibres-exact",
     "why": "Supplies exactness detection for adic constructible coefficient fibres, including Weil sheaves."
+   },
+   {
+    "node": "lem-zl-open-extension-texact-coefficient-stages",
+    "why": "Same-chapter excision-unit statement of the actual open compact-support identification, constructibility and t-exactness at all stages; the quasi-finite unit has no node for it."
+   },
+   {
+    "node": "lem-zl-open-weil-unit-and-empty-fibre",
+    "why": "Supplies the open unit isomorphism, its Weil lift and the Frobenius exchange beta for Rj_!; generic open-immersion tool from the excision unit."
+   },
+   {
+    "node": "lem-zl-residue-compatible-pullback-frobenius",
+    "why": "Supplies the intertwining of local Frobenius under pullback along an immersion with unchanged residue field."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of point transports, so a Weil isomorphism intertwines the local operators."
    }
   ]
  },
@@ -300,32 +241,27 @@
   "lem-cbc-proetale-extension-zero",
   "lem-per-adic-heart-pullback-fibres",
   "lem-trf-frobenius-open-square",
-  "lem-dl-a1-constructible-fibres-exact"
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-zl-open-extension-texact-coefficient-stages",
+  "lem-zl-open-weil-unit-and-empty-fibre",
+  "lem-zl-residue-compatible-pullback-frobenius",
+  "lem-weil-frobenius-point-transport-natural"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-NJ-025fb935a",
+  "reviewer": "NT-cc-NJ-ff8ebab84",
   "group": "NJ",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-025fb935a (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, report, all cited node statements, and cited Stacks/Bhatt–Scholze sources. Seven proof steps are valid, hypotheses and coefficient categories match, Frobenius is correctly restricted to closed points, edge cases were checked, no forbidden route machinery or duplicate/new-node faults found. Review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-ff8ebab84 (reviewer sub-agent of L); spot-checked: Read the released re-split note (≥2 nodes, assembly ≤3000), the base 7-step proof (live node, unchanged since 10-18, not superseded), the item, all 3 new nodes, every cited node statement, the blueprint lem-zl-quasi-finite proof (1)/(2) and the unit route. The split as delivered is a faithful move of the base argument: old steps 2–5 go to new nodes and old steps 1, 6, 7 stay as short parent steps. Item statement and stmt_deps are byte-identical to base. Fault: Q37's same-day re-split of lem-zl-immersion-weil-local-behavior landed 17:59, after this branch's 15:47 commit, and duplicates two of the new nodes. (1) lem-zl-open-compact-support-standard-bounds = lem-zl-open-extension-texact-coefficient-stages (same integral identification, unit and counit, exactness, constructibility and both standard halves at O_E/E/Qlb; Q37's version is stronger). (2) lem-zl-open-weil-iterate-comparison is carried by lem-zl-open-weil-unit-and-empty-fibre (β, Weil lift, η a Weil isomorphism) plus lem-zl-residue-compatible-pullback-frobenius (c_K F_z = F_x c_K for pullback along an immersion). The iterate equations follow by induction from aθ = θ'G(a) and lem-weil-frobenius-point-transport-natural(2). Both nodes dropped. (3) lem-zl-open-compact-support-restriction-identities: its c_j half is Q37's η. Its z_i half (Li^*Rj_! ≅ 0) is not covered, because Q37's empty-fibre clause holds only at Spec k points and the item needs every Spec Ω point, including those over non-closed points. Repurposed under the same id to that vanishing alone, at all stages, with the integral normalization as completed base change along i to ∅ ↪ Z. No live alternative applies: lemma-openclosed-vanishing-lowershriek, lem-sfb-open-module-restriction-identities and lem-cbc-open-closed-recollement are other settings, and lem-per-qbar-dual-recollement is on the drop list. Parent steps 2–4 now cite the Q37 nodes and the repurposed node, and the Q37 nodes plus point-transport-natural are declared as tool_uses. Assembly is 2881 characters; statement and stmt_deps unchanged. Live-DAG closure adds only the 3 Q37 nodes: no trace-formula or Poincaré-duality node, no cycle. Batch-5 flag: def-weil-local-frobenius-trace is a general definition and already an item stmt_dep → accepted. Edge cases checked: U empty, U = X, zero sheaf, all real w. Maintainer notes: count waiver (1 node, the rest carried by open Q37 nodes); the inherited identification of PBC adic fibres with the Fib_s fibres of the local Frobenius (same as base and as the Q37 item); Q37 item clause 2 overlaps this item at closed points.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ExtensionByZeroPunctual",
   "declaration": "WeilConjectures.extensionByZero_punctual",
   "declarations": [
-   "WeilConjectures.zlOpen_quasiCompact",
-   "WeilConjectures.zlOpenFiber_isOpenImmersion",
    "WeilConjectures.zlOpenWeilPull_isRightAdjoint",
    "WeilConjectures.zlOpenWeilShriek",
-   "WeilConjectures.zlWeilHeartCarrier",
-   "WeilConjectures.zlFiniteWeilHeartCarrier",
-   "WeilConjectures.zlWeilStageSquare_naturality",
-   "WeilConjectures.zlWeilStageSquare",
-   "WeilConjectures.zlWeilHeartStage_mem",
-   "WeilConjectures.zlWeilHeartStage",
-   "WeilConjectures.zlClosedCoefficientFiber",
-   "WeilConjectures.ZlPunctualUpperBound",
+   "WeilConjectures.zlOpenWeilShriek_exact",
    "WeilConjectures.extensionByZero_punctual"
   ],
   "file": "lean/Sheaf/Paper/ExtensionByZeroPunctual.lean",
@@ -343,5 +279,26 @@
   "result": "pass",
   "note": "Read the node, the dependency nodes, the report and all three delivered modules, plus the live declarations they use. Hypotheses match the node (separated finite-type k0-schemes, open immersion j0, l != p, Qbar with iota); quasi-compactness of j0 is derived, and no properness, Noetherian or universe restriction is added. j_! is the left adjoint of the recorded zlWeilPull on the sfCommonStageWeilSheaf hearts: canonical, not hollow, mathematically j_!. Conclusions present: exactness (additive, finite limits, finite colimits); carrier iso with sfQbarCompactSupportValue for (j,id) plus a natural finite-stage comparison with sfCompactSupportFiniteFunctor; natural fibre iso inside U and zero fibre outside U at every geometric point; natural closed-fibre iso intertwining localClosedFrobeniusCohomology at closed points of U0; preservation of upper bounds and purity for all real w with q_x = card of the residue field. Edge cases (empty U, identity immersion, zero sheaf, any w, eigenvalues outside the field of definition) are covered. Section 1(B) repairs are justified: the punctual-weights node is re-pointed from the old WeilSheaf predicates to the recorded heart and its definitions match the node; the adic-fibre node's new module re-exports the original, repeats its twelve clauses verbatim and adds the intrinsic fibre via purCoefficientModel. Item changes only in lean and stmt_deps (three landed nodes added, as the brief allows); statements verbatim; new names unique; docstrings, sorry-only proofs, imports and line lengths conform. nt_compile.py on the three snapshot files: clean, 4.3/3.6/11.2 s, reproduced twice. Minor notes only: landed citers still use the old upstream weight predicates (a stage-3 bridge); the Frobenius clause is stated on the recorded local-Frobenius fibre, which is where that operator lives."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-b5981",
+  "group": "S8",
+  "result": "fix",
+  "landing": "20261025T203144-L-2787764",
+  "kind": "interface",
+  "note": "independent cc review: item extensionByZero_punctual and its 4 new sorried lemmas against the base item conjuncts, SfPunctualEigenvalue and the owning nodes of the declarations used; moved declarations diffed against the clone; importer ReducedFrontierMixedGluing compiled with the 6 delivered modules"
+ }
 }

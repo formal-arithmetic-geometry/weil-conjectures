@@ -1,0 +1,241 @@
+{
+ "id": "lem-sfb-group-neutral-component-translates",
+ "kind": "statement",
+ "title": "Neutral components and translations for finite-type group schemes",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], and let $G/k$ be a group scheme [def-sc-group-scheme] of finite type [def-weil-finite-type-morphism]. A connected component means a maximal connected subset of the underlying space, where connectedness is as in [def-weil-connected-scheme]. The component $C$ containing the identity is open and closed. Equipped with its open subscheme structure [def-weil-open-immersion], it is a closed subgroup scheme of $G$ [def-sc-group-scheme-subgroup]. There are finitely many connected components. For every connected component $D$, there is a point $g\\in G(k)$ for which left translation $t_g:G\\to G$, $x\\mapsto gx$, restricts to an isomorphism of $k$-schemes $C\\xrightarrow{\\sim}D$, with $D$ also given its open subscheme structure. No reducedness, smoothness, affineness, properness or characteristic-zero hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R, proposition-connected-component (canonical closed identity subgroup), finite-type case; Milne, literature/milne-algebraic-groups_iAG2017.pdf, Proposition 1.34, Corollary 1.35 and dimension discussion before Proposition 1.37, printed pp.16-18 (finite components and translations)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-connected-scheme",
+  "def-weil-open-immersion",
+  "def-sc-group-scheme-subgroup"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-locally-algebraic-group-identity-component] to $G$: finite type includes locally finite type. Its $G^0$ is precisely the open subscheme $C$ on the identity component, is open and closed, and is a subgroup scheme. Its inclusion is also a closed immersion by [def-weil-closed-immersion]: on every open $V$ of $G$, restriction $\\mathcal O_G(V)\\to\\mathcal O_C(V\\cap C)$ is surjective, since a section on $V\\cap C$ extends by zero on the disjoint open $V\\setminus C$. Thus this is a closed subgroup with the stipulated open, not reduced, scheme structure.",
+   "uses": [
+    "lem-sfb-locally-algebraic-group-identity-component",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0B7R, proposition-connected-component; finite-type assembly as in Milne, Algebraic Groups (2017), Proposition 1.34 and pp.16-18."
+   }
+  },
+  {
+   "text": "Let $D$ be any connected component and choose $x\\in D$. The closed subset $Z=\\overline{\\{x\\}}$ is connected: every nonempty relatively open subset of $Z$ contains $x$, so two such opens cannot disconnect it. Moreover $D\\cup Z$ is connected, since its two connected subsets meet at $x$; a separation would have to put both in the same part. Maximality of $D$ therefore gives $Z\\subseteq D$. By [lem-sc-lft-over-field-jacobson-space], the closed points of $G$ in $Z$ are dense in the nonempty space $Z$, hence one exists, say $z$. By [lem-weil-pbc-closed-point-residue-field-base], the composite $\\operatorname{Spec}\\kappa(z)\\to G\\to\\operatorname{Spec}k$ is an isomorphism. Composing its inverse with $\\operatorname{Spec}\\kappa(z)\\to G$ gives $g\\in G(k)$ with image $z\\in D$.",
+   "uses": [
+    "lem-sc-lft-over-field-jacobson-space",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478, lemma-locally-finite-type-Jacobson; Tag 01TB in morphisms.tex, lemma-jacobson-finite-type-points; elementary connectedness argument as in Topology Tag 004T."
+   }
+  },
+  {
+   "text": "By [lem-sc-translation-automorphism], $t_g=L_g$ is an isomorphism with inverse $t_{g^{-1}}$; its definition is [def-sc-group-scheme-translate]. In particular $t_g(e)=g$. Its underlying homeomorphism carries $C$ to the component of $g$: the image is connected and contains $g$, and the inverse image of any larger connected subset would contradict maximality of $C$. Components meeting at $g$ agree, since their union is connected; hence $t_g(C)=D$. As $C$ is open, $D$ is open. Restrict $t_g$ and its inverse to these opens; the homeomorphisms and structure-sheaf isomorphisms restrict, so they are inverse isomorphisms of the open subschemes by [def-weil-open-immersion]. This proves the asserted scheme isomorphism, including nilpotents.",
+   "uses": [
+    "lem-sc-translation-automorphism",
+    "def-sc-group-scheme-translate",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 1b, Proposition 1.34 and dimension discussion before Proposition 1.37, printed pp.16-18; translation homogeneity of 1.8."
+   }
+  },
+  {
+   "text": "Connected components cover $G$: for a point $x$, the union of all connected subsets containing $x$ is connected (a separation would put every such subset in the part containing $x$), and is maximal. Distinct components are disjoint, since the union of two meeting connected subsets is connected. Step 3 makes this an open cover. By [def-weil-finite-type-morphism], $G\\to\\operatorname{Spec}k$ is quasi-compact, so $G$ is quasi-compact and this cover has a finite subcover. Every component is nonempty and disjoint from the others, so none can be omitted; the set of components is therefore finite.",
+   "uses": [
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 004T, lemma-connected-components, parts (3)-(4); quasi-compactness applied to the component cover."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme-translate",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-sc-translation-automorphism",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "lem-weil-pbc-closed-point-residue-field-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0B7R, assembled with existing Jacobson and translation nodes; elementary specialization, maximal-connected-subset and quasi-compactness arguments written by Q43, following Milne 1.34 and pp.16-18."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "identityComponent|image_mulLeft_connectedComponent|GrpObj.*connectedComponent",
+   "results": "{\"t\": \"2026-10-23T09:53:51Z\", \"tool\": \"grep\", \"query\": \"identityComponent|image_mulLeft_connectedComponent|GrpObj.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full Mathlib match: ordinary topological-group or Galois-category results do not construct subgroup schemes. Upstream GroupScheme/Basic.lean supplies several ingredients but no single declaration states this full conjunction; see report."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type group scheme over an algebraically closed field has finitely many connected components each isomorphic to its identity component",
+   "results": "{\"t\": \"2026-10-23T09:53:52Z\", \"tool\": \"leansearch\", \"query\": \"A finite type group scheme over an algebraically closed field has finitely many connected components each isomorphic to its identity component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"Subgroup.connectedComponentOfOne\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"AlgebraicGeometry.Scheme.compactSpace_of_isAffine\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\"], \"digest\": \"8392722cdb21b787\"}",
+   "date": "2026-10-23",
+   "verdict": "no full Mathlib match: ordinary topological-group or Galois-category results do not construct subgroup schemes. Upstream GroupScheme/Basic.lean supplies several ingredients but no single declaration states this full conjunction; see report."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"identityComponent\"",
+   "results": "{\"t\": \"2026-10-23T09:53:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"identityComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full Mathlib match: ordinary topological-group or Galois-category results do not construct subgroup schemes. Upstream GroupScheme/Basic.lean supplies several ingredients but no single declaration states this full conjunction; see report."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The identity component of a finite type group scheme is open and closed and the other connected components are its translates",
+   "results": "{\"t\": \"2026-10-23T09:53:57Z\", \"tool\": \"leanfinder\", \"query\": \"The identity component of a finite type group scheme is open and closed and the other connected components are its translates\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.instTotallyDisconnectedSpaceAutFunctorFintypeCat\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components\", \"CategoryTheory.PreGaloisCategory.fiber_in_connected_component\"], \"digest\": \"3f549b1c5e4dc2d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no full Mathlib match: ordinary topological-group or Galois-category results do not construct subgroup schemes. Upstream GroupScheme/Basic.lean supplies several ingredients but no single declaration states this full conjunction; see report."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebraic group over an algebraically closed field is a finite disjoint union of translates of an open and closed neutral subgroup",
+   "results": "{\"t\": \"2026-10-23T09:55:35Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type algebraic group over an algebraically closed field is a finite disjoint union of translates of an open and closed neutral subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"Subgroup.quotient_finite_of_isOpen'\", \"Subgroup.quotient_finite_of_isOpen\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"AddSubgroup.instFiniteQuotientSubtypeMemOpenAddSubgroupOfIsTopologicalAddGroupOfCompactSpace\", \"AddSubgroup.quotient_finite_of_isOpen'\", \"AddSubgroup.quotient_finite_of_isOpen\"], \"digest\": \"a718427158ba1fc7\"}",
+   "date": "2026-10-23",
+   "verdict": "no full Mathlib match: ordinary topological-group or Galois-category results do not construct subgroup schemes. Upstream GroupScheme/Basic.lean supplies several ingredients but no single declaration states this full conjunction; see report."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type group scheme over an algebraically closed field has a clopen identity subgroup and every connected component is a rational translate",
+   "results": "{\"t\": \"2026-10-23T11:48:26Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type group scheme over an algebraically closed field has a clopen identity subgroup and every connected component is a rational translate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"instTotallySeparatedSpaceAlgEquivOfIsIntegral\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup\", \"CategoryTheory.PreGaloisCategory.has_decomp_connected_components'\"], \"digest\": \"40b413bcee2184c4\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: these hits give ordinary topological groups, Galois categories, or individual topology ingredients, not the full scheme-theoretic statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"identityComponent\"",
+   "results": "{\"t\": \"2026-10-23T11:50:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"identityComponent\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: these hits give ordinary topological groups, Galois categories, or individual topology ingredients, not the full scheme-theoretic statement."
+  },
+  {
+   "tool": "grep",
+   "query": "identityComponent|image_mulLeft_connectedComponent|GrpObj.*connectedComponent",
+   "results": "{\"t\": \"2026-10-23T11:50:01Z\", \"tool\": \"grep\", \"query\": \"identityComponent|image_mulLeft_connectedComponent|GrpObj.*connectedComponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: these hits give ordinary topological groups, Galois categories, or individual topology ingredients, not the full scheme-theoretic statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type group schemes over algebraically closed fields have finitely many connected components which are translates of the identity subgroup",
+   "results": "{\"t\": \"2026-10-23T11:50:02Z\", \"tool\": \"leansearch\", \"query\": \"Finite type group schemes over algebraically closed fields have finitely many connected components which are translates of the identity subgroup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"Subgroup.connectedComponentOfOne\", \"AlgebraicGeometry.IsArtinianScheme.finite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"FiniteGrp.isFinite\"], \"digest\": \"ad30e734534baf6c\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: these hits give ordinary topological groups, Galois categories, or individual topology ingredients, not the full scheme-theoretic statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isOpen_connectedComponent|finite_connectedComponents|isClosed_connectedComponent",
+   "results": "{\"t\": \"2026-10-23T11:51:05Z\", \"tool\": \"grep\", \"query\": \"isOpen_connectedComponent|finite_connectedComponents|isClosed_connectedComponent\", \"sub\": \"Topology\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Topology/DiscreteQuotient.lean\", \"Mathlib/Topology/Separation/Regular.lean\", \"Mathlib/Topology/Separation/Connected.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/Clopen.lean\", \"Mathlib/Topology/Connected/LocallyConnected.lean\", \"Mathlib/Topology/Connected/LocallyConnected.lean\"], \"digest\": \"db674b5e6f8192e1\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: these hits give ordinary topological groups, Galois categories, or individual topology ingredients, not the full scheme-theoretic statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonreduced algebraic group is a finite disjoint union of open and closed copies of its neutral component via rational translations",
+   "results": "{\"t\": \"2026-10-23T11:52:22Z\", \"tool\": \"leanfinder\", \"query\": \"A nonreduced algebraic group is a finite disjoint union of open and closed copies of its neutral component via rational translations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"NonarchimedeanGroup.instTotallySeparated\", \"Subgroup.quotient_finite_of_isOpen\", \"NonarchimedeanAddGroup.instTotallySeparated\", \"Subgroup.instFiniteQuotientOfContinuousMulOfCompactSpace\", \"Subgroup.instFiniteQuotientSubtypeMemOpenSubgroupOfIsTopologicalGroupOfCompactSpace\", \"Subgroup.quotient_finite_of_isOpen'\", \"IsAddQuotientCoveringMap.disjoint\"], \"digest\": \"5f96576b4ca838a5\"}",
+   "date": "2026-10-23",
+   "verdict": "no full match: these hits give ordinary topological groups, Galois categories, or individual topology ingredients, not the full scheme-theoretic statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-closed-subgroup-reduced-component",
+  "date": "2026-10-23",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: Reduced identity components of closed abelian subgroups. Supporting input: identity component and translations input for dimension equality.",
+   "via": [
+    "lem-sfb-abelian-closed-subgroup-reduced-component",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-group-neutral-component-translates",
+  "worker": "stage1",
+  "summary": "Reused the existing locally algebraic identity-component theorem, Jacobson-space and closed-residue-field leaves, and translation automorphisms. Proved rational representatives for every component using the closure of one point, restricted translation to the open subschemes, and used quasi-compactness of the disjoint open cover to obtain finiteness. No new nodes. Mathematical statement unchanged; normalized doubled TeX backslashes.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: Reduced identity components of closed abelian subgroups. Supporting input: identity component and translations input for dimension equality.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-translation-automorphism",
+    "why": "Generic group-scheme translation isomorphisms, already Lean-closed; the unit has no separate translation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-translation-automorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-9ab49ff39",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-9ab49ff39 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, every cited node's statement and the sources: Stacks groupoids 0B7R l.1013-1049; Milne iAG2017 1.34, 1.35 and the dimension paragraph p.17; Stacks 0478/01TB/004T. The statement is unchanged and the hypotheses match the sources: k algebraically closed, G of finite type, no reducedness. There are no new nodes and no re-split note. Step 1: lem-sfb-locally-algebraic-group-identity-component applies (algebraically closed, locally finite type). The closed-immersion argument by extension by zero is correct, since O_G(V)=O_G(V∩C)×O_G(V∖C), so G^0 is a closed subgroup scheme in the sense of def-sc-group-scheme-subgroup in both wordings. Step 2: closure of {x} is irreducible and lies in D. The Jacobson node gives a closed point there, and the residue-field-base node (algebraically closed, lft) gives a k-point. Step 3: L_g with inverse L_{g^-1} maps C onto D by maximality in both directions, and restricting to the open subschemes gives a scheme isomorphism with nilpotents kept. I accept the tool_use lem-sc-translation-automorphism (Lean-closed, generic). Step 4: the components form a disjoint open cover of a quasi-compact space, so they are finite; marking this elementary is correct. proof_deps equals the union of the uses and there is no cycle. Duplicate search: the GL(V) nodes lem-wf-algebraic-component-cosets and def-wf-algebraic-components are not duplicates. The identity-component node lacks the translate and finiteness clauses. The citer lem-sfb-abelian-closed-subgroup-reduced-component uses exactly what this item states. Edge cases checked: trivial group, Z/n, mu_p, alpha_p, mu_p×Z/2, abelian variety, and mu_3 over Q to show algebraic closure is needed. No SGA. review_split's 'no such node' messages are an artifact of the symlinked chapter directories; I read every node directly."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupNeutralComponentTranslates",
+  "declaration": "AlgebraicGeometry.GrpObj.finiteTypeGroup_neutralComponent_translates",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupNeutralComponentTranslates.lean",
+  "statement": "theorem GrpObj.finiteTypeGroup_neutralComponent_translates (k : Type u) [Field k] [IsAlgClosed k] (G : Over (Spec (.of k))) [GrpObj G] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] : IsClopen (connectedComponent (GrpObj.onePoint G)) ∧ IsClosedSubgroupScheme (GrpObj.identityComponentι G) ∧ Finite (ConnectedComponents G.left) ∧ ∀ x : G.left, ∃ D : G.left.Opens, (D : Set G.left) = connectedComponent x ∧ ∃ (g : 𝟙_ (Over (Spec (.of k))) ⟶ G) (e : GrpObj.identityComponent G ≅ Over.mk (D.ι ≫ G.hom)), e.hom.left ≫ D.ι = (GrpObj.identityComponentι G).left ≫ (GrpObj.mulLeft G g).left",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee5956c81",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Clause-by-clause match: IsAlgClosed k, GrpObj on Over(Spec k), LocallyOfFiniteType+QuasiCompact; IsClopen of the identity component; IsClosedSubgroupScheme on identityComponentι with the canonical restricted GrpObj (open subscheme structure, not reduced); Finite (ConnectedComponents G.left); ∀ x, ∃ open D = connectedComponent x, ∃ rational g and an iso in Over (Spec k) pinned by e.hom.left ≫ D.ι = ι.left ≫ (mulLeft G g).left. No extra hypotheses, single universe u. Node differs from live only in lean; lean.statement is verbatim the file signature; proof sorry; source/blueprint docstrings and 4 proof steps present. Basic/AmpleFamily give only the pieces (isClopen, finite_connectedComponents, image_mulLeft, sigmaIdentityComponentIso), not the conjunction, so no H4 issue. The plain import is the live step-1 proof_dep module. Edge cases: trivial, α_p, constant groups, non-closed x, empty impossible. No recompile (no file changed); worker reports clean compiles."
+ }
+}

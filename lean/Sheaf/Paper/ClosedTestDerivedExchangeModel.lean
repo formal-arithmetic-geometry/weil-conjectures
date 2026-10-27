@@ -5,40 +5,16 @@ Authors: SHEAF group Q26
 -/
 module
 
-public import Sheaf.Paper.CondensedModuleDerivedPushpull
-public import Sheaf.AlgebraicGeometry.CondensedLisseProEtaleLocality
-public import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
-public import WeilConjectures.RingTheory.ProEtale.WContractible
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-public import Sheaf.CategoryTheory.AdjunctionSquareExchange
-public import Sheaf.Paper.CondensedQcqsPushforwardContinuity
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
+public import Sheaf.Paper.ClosedTestDerivedExchangeMaps
 
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
-import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
-import Sheaf.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
-import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationExact
-import Sheaf.AlgebraicGeometry.ProEtaleSpecializationCounit
-import Sheaf.AlgebraicGeometry.ProEtaleSpecializationUnitComparison
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
-import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import Mathlib.CategoryTheory.Functor.Derived.Adjunction
-import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
-import Sheaf.Paper.RingedDerivedSliceLocalization
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.InternalSectionScalarAdjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
+
+import Sheaf.Paper.ClosedTestSectionLocalization
+import Sheaf.Paper.ClosedTestClosedEvaluation
+import Sheaf.Paper.NonaffineClosedTestExchangeIdentification
 
 /-!
 # The canonical derived exchange on closed lifted tests
@@ -64,6 +40,8 @@ Source: Stacks Project, Tags 09BL and 0D6F, and the unit--counit calculation
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u
 
@@ -72,237 +50,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel
 
-/-- Cache the existing monoidal structure, without changing its data.
-Source: internal-module convention
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-instance (priority := 2500) condensedMonoidal :
-    MonoidalCategory (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-  inferInstance
-
-/-- Cache the existing pro-etale sheaf monoidal structure, without changing its data.
-Source: internal-module convention
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-instance (priority := 2500) proetaleMonoidal (X : Scheme.{u}) :
-    MonoidalCategory (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=
-  inferInstance
-
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
-
-/-- Cache the recorded abelian structure on the same internal module category.
-Source: internal-module and K-injective convention
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-instance (priority := 2500) moduleAbelian (X : Scheme.{u}) :
-    Abelian (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
-  inferInstance
-
-/-- Cache additivity of the recorded terminal-object sections functor.
-The body uses the existing additive forgetful and evaluation instances.
-Source: global sections convention
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-instance (priority := 2500) moduleSectionsAdditive (X : Scheme.{u}) :
-    (condensedModuleSections Λ X).Additive :=
-  inferInstance
-
-/-- Exact pullback, from the recorded module inverse image.
-Source: Tags 09BL and 0D6F (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def pull {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)) ⥤
-    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) :=
-  (CondensedRing.upperStar Λ f).mapDerivedCategory
-
-/-- The canonical derived adjunction with exact inverse image.
-Source: Tag 09T5 (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def adj {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    pull Λ f ⊣ CondensedRing.moduleObjectDerivedPushforward Λ f :=
-  (CondensedRing.upperStarLowerStarAdjunction Λ f).mapDerivedCategoryRightDerivedAdjunction
-
-/-- Composition of exact pullbacks, using the recorded ordinary composition.
-Source: Tag 09T5 (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def pullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    pull Λ (f ≫ g) ≅ pull Λ g ⋙ pull Λ f :=
-  Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
-
-/-- The canonical pullback comparison of a commutative square.
-Source: Tag 09BL, specified mate (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def square {X U T Z : Scheme.{u}} {f : X ⟶ U} {s : Z ⟶ U}
-    {h : T ⟶ X} {fZ : T ⟶ Z} (w : CommSq h fZ f s) :
-    pull Λ s ⋙ pull Λ fZ ≅ pull Λ f ⋙ pull Λ h :=
-  (pullComp Λ fZ s).symm ≪≫
-    eqToIso (congrArg (fun b : T ⟶ U ↦ pull Λ b) w.w.symm) ≪≫ pullComp Λ h f
-
-/-- The specified exchange, constructed as the adjunction mate.
-Source: Tag 09BL, unit--counit calculation
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def exchange {X U T Z : Scheme.{u}} {f : X ⟶ U} {s : Z ⟶ U}
-    {h : T ⟶ X} {fZ : T ⟶ Z} (w : CommSq h fZ f s) :
-    CondensedRing.moduleObjectDerivedPushforward Λ f ⋙ pull Λ s ⟶
-      pull Λ h ⋙ CondensedRing.moduleObjectDerivedPushforward Λ fZ :=
-  Adjunction.squareExchange (adj Λ f) (adj Λ fZ) (pull Λ s) (pull Λ h) (square Λ w)
-
-/-- Canonical global-section composition before deriving.
-Source: Tag 0D6E, sectionwise identity
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def pushSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    CondensedRing.lowerStar Λ f ⋙ condensedModuleSections Λ Y ≅
-      condensedModuleSections Λ X :=
-  Functor.isoWhiskerLeft (CondensedRing.lowerStar Λ f)
-      (Functor.isoWhiskerLeft (Mod.forget (condensedRingObj Λ Y))
-        (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology Y) Ab.{u + 1}
-          (Scheme.ProEt.isTerminalMkId Y))).symm ≪≫
-    Functor.isoWhiskerLeft (Mod.forget (condensedRingObj Λ X))
-      (ProEtale.globalSectionsLowerStarIso Ab.{u + 1} f) ≪≫
-    Functor.isoWhiskerLeft (Mod.forget (condensedRingObj Λ X))
-      (Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology X) Ab.{u + 1}
-        (Scheme.ProEt.isTerminalMkId X))
-
-/-- K-injective preservation is supplied by the existing exact inverse-image adjunction.
-Source: Tag 08BJ (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-instance lowerStarPreservesKInjective {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (CondensedRing.lowerStar Λ f).PreservesKInjectiveComplexes :=
-  (CondensedRing.upperStarLowerStarAdjunction Λ f).preservesKInjectiveComplexes
-
-/-- Derived composition for global sections, normalized by the ordinary section identity.
-Source: Tag 0D6E (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def pushDerivedSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    CondensedRing.moduleObjectDerivedPushforward Λ f ⋙
-        (condensedModuleSections Λ Y).rightDerivedFunctor ≅
-      (condensedModuleSections Λ X).rightDerivedFunctor :=
-  Functor.rightDerivedFunctorCompIso' _ _ (pushSectionsIso Λ f)
-
-/-- Canonical derived restriction: the derived unit, followed by section composition.
-Source: Tags 09T5 and 0D6E
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def restriction {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (condensedModuleSections Λ Y).rightDerivedFunctor ⟶
-      pull Λ f ⋙ (condensedModuleSections Λ X).rightDerivedFunctor :=
-  Functor.whiskerRight (adj Λ f).unit
-      (condensedModuleSections Λ Y).rightDerivedFunctor ≫
-    Functor.whiskerLeft (pull Λ f) (pushDerivedSectionsIso Λ f).hom
-
-/-- Derived sections on the source of b, after the existing exact pullback.
-For a pro-etale b this is the canonical localized-site derived sections.
-Source: Tag 0D6F (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def sectionsOver {X W : Scheme.{u}} (b : W ⟶ X) :
-    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)) ⥤ DerivedCategory Ab.{u + 1} :=
-  pull Λ b ⋙ (condensedModuleSections Λ W).rightDerivedFunctor
-
-/-- Restriction between two schemes over X, with the canonical pullback composition.
-Source: Tags 0D6E--0D6F (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def restrictionOver {X W W' : Scheme.{u}} (b : W ⟶ X) (a : W' ⟶ W) :
-    sectionsOver Λ b ⟶ sectionsOver Λ (a ≫ b) :=
-  Functor.whiskerLeft (pull Λ b) (restriction Λ a) ≫
-    Functor.whiskerRight (pullComp Λ a b).inv
-      (condensedModuleSections Λ W').rightDerivedFunctor
-
-/-- The canonical Leray/base-change section comparison of a commutative square.
-It is defined without an invertibility assumption.
-Source: Tags 09BL and 0D6E (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def sectionComparison {X U T W : Scheme.{u}} {f : X ⟶ U} {b : W ⟶ U}
-    {h : T ⟶ X} {fW : T ⟶ W} (w : CommSq h fW f b) :
-    CondensedRing.moduleObjectDerivedPushforward Λ f ⋙ sectionsOver Λ b ⟶
-      sectionsOver Λ h :=
-  Functor.whiskerRight (exchange Λ w)
-      (condensedModuleSections Λ W).rightDerivedFunctor ≫
-    Functor.whiskerLeft (pull Λ h) (pushDerivedSectionsIso Λ fW).hom
-
-/-- Restriction to V from its closed-site lift, along the actual closed inclusion.
-The equality uses the geometric pullback statement, not an arbitrary comparison map.
-Source: Tag 09BL (2) (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def closedComparison (A : Type u) [CommRing A] (I : Ideal A)
-    (V : (Spec (.of (A ⧸ I))).AffineProEt) :
-    sectionsOver Λ ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom ⟶
-      pull Λ (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ⋙
-        sectionsOver Λ V.hom :=
-  restrictionOver Λ _ (Scheme.AffineProEt.closedSiteLiftInclusion A I V) ≫
-    (eqToIso (congrArg (fun b ↦ sectionsOver Λ b)
-      ((Scheme.AffineProEt.affine_closed_site_functor_properties A I).2.2.2.2.2.2.2
-        V).2.1.w)).hom ≫
-    Functor.whiskerRight (pullComp Λ V.hom
-      (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)))).hom
-      (condensedModuleSections Λ V.left).rightDerivedFunctor
-
-/-- The closed subscheme morphism Spec(A/I) → Spec A.
-Source: Tag 09BL (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-abbrev closedMap (A : Type u) [CommRing A] (I : Ideal A) :=
-  Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
-
-/-- The map from the closed test fibre to its lifted test fibre, by the pullback property.
-Source: Tag 09BK (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def testMap (A : Type u) [CommRing A] (I : Ideal A)
-    {X XZ : Scheme.{u}} {f : X ⟶ Spec (.of A)}
-    {h : XZ ⟶ X} {fZ : XZ ⟶ Spec (.of (A ⧸ I))}
-    (w : CommSq h fZ f (closedMap A I))
-    (V : (Spec (.of (A ⧸ I))).AffineProEt) :
-    pullback fZ V.hom ⟶ pullback f ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom :=
-  pullback.lift (pullback.fst fZ V.hom ≫ h)
-    (pullback.snd fZ V.hom ≫ Scheme.AffineProEt.closedSiteLiftInclusion A I V)
-    (by
-      rw [Category.assoc, w.w, ← Category.assoc, pullback.condition, Category.assoc]
-      rw [Category.assoc,
-        ((Scheme.AffineProEt.affine_closed_site_functor_properties A I).2.2.2.2.2.2.2
-          V).2.1.w])
-
-/-- Restriction on the two actual test fibres, including its canonical target identification.
-Source: Tags 09BL and 0D6F (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def testRestriction (A : Type u) [CommRing A] (I : Ideal A)
-    {X XZ : Scheme.{u}} {f : X ⟶ Spec (.of A)}
-    {h : XZ ⟶ X} {fZ : XZ ⟶ Spec (.of (A ⧸ I))}
-    (w : CommSq h fZ f (closedMap A I))
-    (V : (Spec (.of (A ⧸ I))).AffineProEt) :
-    sectionsOver Λ (pullback.fst f ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom) ⟶
-      pull Λ h ⋙ sectionsOver Λ (pullback.fst fZ V.hom) :=
-  restrictionOver Λ _ (testMap A I w V) ≫
-    (eqToIso (congrArg (fun b ↦ sectionsOver Λ b)
-      (pullback.lift_fst _ _ _))).hom ≫
-    Functor.whiskerRight (pullComp Λ (pullback.fst fZ V.hom) h).hom
-      (condensedModuleSections Λ (pullback fZ V.hom)).rightDerivedFunctor
-
-/-- The canonical test-section form of the specified exchange.
-Source: Tag 09BL, mate definition
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def evaluatedExchange (A : Type u) [CommRing A] (I : Ideal A)
-    {X XZ : Scheme.{u}} {f : X ⟶ Spec (.of A)}
-    {h : XZ ⟶ X} {fZ : XZ ⟶ Spec (.of (A ⧸ I))}
-    (w : CommSq h fZ f (closedMap A I))
-    (V : (Spec (.of (A ⧸ I))).AffineProEt) :
-    CondensedRing.moduleObjectDerivedPushforward Λ f ⋙ pull Λ (closedMap A I) ⋙
-        sectionsOver Λ V.hom ⟶
-      pull Λ h ⋙ CondensedRing.moduleObjectDerivedPushforward Λ fZ ⋙
-        sectionsOver Λ V.hom :=
-  Functor.whiskerRight (exchange Λ w) (sectionsOver Λ V.hom)
-
-/-- Restriction between tests with a specified commuting triangle.
-Source: Tag 0D6F (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def sectionsArrow {X W W' : Scheme.{u}} {b : W ⟶ X} {b' : W' ⟶ X}
-    (a : W' ⟶ W) (ha : a ≫ b = b') :
-    sectionsOver Λ b ⟶ sectionsOver Λ b' :=
-  restrictionOver Λ b a ≫ (eqToIso (congrArg (fun q ↦ sectionsOver Λ q) ha)).hom
-
-/-- The induced map of test fibres, given by the actual pullback universal property.
-Source: Tag 09BL (blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def fibreMap {X U W W' : Scheme.{u}} (f : X ⟶ U) {b : W ⟶ U} {b' : W' ⟶ U}
-    (a : W' ⟶ W) (ha : a ≫ b = b') : pullback f b' ⟶ pullback f b :=
-  pullback.lift (pullback.fst f b') (pullback.snd f b' ≫ a)
-    (by rw [Category.assoc, ha, pullback.condition])
-
-/-- Test-object naturality of the canonical Leray section comparison.
-The commuting triangle is the triangle of the actual affine-site map.
-Source: Tag 09BL, natural evaluation, and Tag 0D6F
-(blueprint: lem-sfb-closed-test-derived-exchange-model). -/
-def TestNaturality {X U W W' : Scheme.{u}} (f : X ⟶ U)
-    {b : W ⟶ U} {b' : W' ⟶ U} (a : W' ⟶ W) (ha : a ≫ b = b') : Prop :=
-  ∀ K : DerivedCategory.Plus
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
-    (sectionComparison Λ (IsPullback.of_hasPullback f b).toCommSq).app K.obj ≫
-        (sectionsArrow Λ (fibreMap f a ha) (pullback.lift_fst _ _ _)).app K.obj =
-      (sectionsArrow Λ a ha).app
-          ((CondensedRing.moduleObjectDerivedPushforward Λ f).obj K.obj) ≫
-        (sectionComparison Λ (IsPullback.of_hasPullback f b').toCommSq).app K.obj
 
 /-- The two section comparisons and the closed evaluation comparison respect every map
 of admissible affine tests, with the maps induced by the specified closed-site functor.
@@ -333,7 +82,25 @@ theorem closed_test_test_naturality
           (sectionsArrow Λ ((Scheme.AffineProEt.closedSiteLift A I).map r).left
               (MorphismProperty.Over.w ((Scheme.AffineProEt.closedSiteLift A I).map r))).app
                 K.obj ≫ (closedComparison Λ A I V').app K.obj) := by
-  sorry
+  have hw (T : (Spec (.of (A ⧸ I))).AffineProEt) : WeaklyEtale T.hom :=
+    proAffineEtale_le_weaklyEtale _ T.prop
+  have hwLift (T : (Spec (.of (A ⧸ I))).AffineProEt) :
+      WeaklyEtale ((Scheme.AffineProEt.closedSiteLift A I).obj T).hom :=
+    proAffineEtale_le_weaklyEtale _ ((Scheme.AffineProEt.closedSiteLift A I).obj T).prop
+  have := hw V
+  have := hw V'
+  have := hwLift V
+  have := hwLift V'
+  refine ⟨?_, ?_, ?_⟩
+  · exact ClosedTestSectionSteps.proetale_section_localization Λ f
+      ((Scheme.AffineProEt.closedSiteLift A I).obj V).hom
+      ((Scheme.AffineProEt.closedSiteLift A I).obj V').hom
+      ((Scheme.AffineProEt.closedSiteLift A I).map r).left
+      (MorphismProperty.Over.w ((Scheme.AffineProEt.closedSiteLift A I).map r))
+  · exact ClosedTestSectionSteps.proetale_section_localization Λ fZ V.hom V'.hom
+      r.left (MorphismProperty.Over.w r)
+  · intro K
+    exact ClosedTestSectionSteps.closed_derived_evaluation Λ A I V V' r K.obj
 
 /-- Canonical section comparison commutes with pro-etale base change and isomorphisms
 of squares. All maps of the cube, including its test-fibre face, are retained.
@@ -369,6 +136,137 @@ theorem section_comparison_base_change_naturality
         (sectionComparison Λ w'.toCommSq).app ((pull Λ a).obj K.obj) := by
   sorry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsCommMonObj Λ] in
+private theorem pushSectionsIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    Functor.whiskerRight (CondensedRing.lowerStarComp Λ f g).hom
+        (condensedModuleSections Λ Z) ≫ (pushSectionsIso Λ (f ≫ g)).hom =
+      Functor.whiskerLeft (CondensedRing.lowerStar Λ f) (pushSectionsIso Λ g).hom ≫
+        (pushSectionsIso Λ f).hom := by
+  apply NatTrans.ext
+  funext M
+  let σZ := Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology Z) Ab.{u + 1}
+    (Scheme.ProEt.isTerminalMkId Z)
+  let σY := Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology Y) Ab.{u + 1}
+    (Scheme.ProEt.isTerminalMkId Y)
+  let σX := Sheaf.ΓNatIsoSheafSections (Scheme.ProEt.topology X) Ab.{u + 1}
+    (Scheme.ProEt.isTerminalMkId X)
+  change ((sheafSections (Scheme.ProEt.topology Z) Ab.{u + 1}).obj
+      (op (Scheme.ProEt.mk (𝟙 Z)))).map
+        ((CondensedRing.lowerStarComp Λ f g).hom.app M).hom ≫
+      (σZ.inv.app ((CondensedRing.lowerStar Λ (f ≫ g)).obj M).X ≫
+        (ProEtale.globalSectionsLowerStarIso Ab.{u + 1} (f ≫ g)).hom.app M.X ≫
+          σX.hom.app M.X) =
+    (σZ.inv.app ((CondensedRing.lowerStar Λ g).obj
+        ((CondensedRing.lowerStar Λ f).obj M)).X ≫
+      (ProEtale.globalSectionsLowerStarIso Ab.{u + 1} g).hom.app
+        ((CondensedRing.lowerStar Λ f).obj M).X ≫
+      σY.hom.app ((CondensedRing.lowerStar Λ f).obj M).X) ≫
+        (σY.inv.app ((CondensedRing.lowerStar Λ f).obj M).X ≫
+          (ProEtale.globalSectionsLowerStarIso Ab.{u + 1} f).hom.app M.X ≫
+            σX.hom.app M.X)
+  rw [reassoc_of% σZ.inv.naturality]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [CondensedRing.lowerStarComp_hom_app_hom,
+    reassoc_of% ProEtale.globalSectionsLowerStarIso_comp]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem derivedPushComp_eq_conjugate {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    Functor.rightDerivedFunctorCompIso' (CondensedRing.lowerStar Λ f)
+        (CondensedRing.lowerStar Λ g) (CondensedRing.lowerStarComp Λ f g) =
+      conjugateIsoEquiv ((adj Λ g).comp (adj Λ f)) (adj Λ (f ≫ g))
+        (pullComp Λ f g) := by
+  apply Iso.ext
+  apply Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv
+    (CondensedRing.upperStarLowerStarAdjunction Λ f)
+    (CondensedRing.upperStarLowerStarAdjunction Λ g)
+    (CondensedRing.upperStarLowerStarAdjunction Λ (f ≫ g))
+  exact congrArg Iso.hom (CondensedRing.conjugateIsoEquiv_upperStarComp Λ f g).symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem derived_unit_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    (adj Λ (f ≫ g)).unit.app M ≫
+        (CondensedRing.moduleObjectDerivedPushforward Λ (f ≫ g)).map
+          ((pullComp Λ f g).hom.app M) =
+      (adj Λ g).unit.app M ≫
+        (CondensedRing.moduleObjectDerivedPushforward Λ g).map
+          ((adj Λ f).unit.app ((pull Λ g).obj M)) ≫
+        (Functor.rightDerivedFunctorCompIso' (CondensedRing.lowerStar Λ f)
+          (CondensedRing.lowerStar Λ g) (CondensedRing.lowerStarComp Λ f g)).hom.app
+            ((pull Λ f).obj ((pull Λ g).obj M)) := by
+  have hu := unit_conjugateEquiv ((adj Λ g).comp (adj Λ f)) (adj Λ (f ≫ g))
+    (pullComp Λ f g).hom M
+  rw [← conjugateIsoEquiv_apply_hom, ← derivedPushComp_eq_conjugate,
+    Adjunction.comp_unit_app] at hu
+  rw [← hu, Category.assoc]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pushDerivedSectionsIso_comp {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    Functor.whiskerRight
+        (Functor.rightDerivedFunctorCompIso' (CondensedRing.lowerStar Λ f)
+          (CondensedRing.lowerStar Λ g) (CondensedRing.lowerStarComp Λ f g)).hom
+        (condensedModuleSections Λ Z).rightDerivedFunctor ≫
+        (pushDerivedSectionsIso Λ (f ≫ g)).hom =
+      Functor.whiskerLeft (CondensedRing.moduleObjectDerivedPushforward Λ f)
+          (pushDerivedSectionsIso Λ g).hom ≫ (pushDerivedSectionsIso Λ f).hom := by
+  exact Functor.rightDerivedFunctorCompIso'_assoc
+    (CondensedRing.lowerStar Λ f) (CondensedRing.lowerStar Λ g)
+    (condensedModuleSections Λ Z) (CondensedRing.lowerStar Λ (f ≫ g))
+    (condensedModuleSections Λ Y) (condensedModuleSections Λ X)
+    (CondensedRing.lowerStarComp Λ f g) (pushSectionsIso Λ g)
+    (pushSectionsIso Λ (f ≫ g)) (pushSectionsIso Λ f) (pushSectionsIso_comp Λ f g)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restriction_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))) :
+    (restriction Λ (f ≫ g)).app M ≫
+        (condensedModuleSections Λ X).rightDerivedFunctor.map
+          ((pullComp Λ f g).hom.app M) =
+      (restriction Λ g).app M ≫ (restriction Λ f).app ((pull Λ g).obj M) := by
+  let GZ := (condensedModuleSections Λ Z).rightDerivedFunctor
+  let GY := (condensedModuleSections Λ Y).rightDerivedFunctor
+  let GX := (condensedModuleSections Λ X).rightDerivedFunctor
+  let Rf := CondensedRing.moduleObjectDerivedPushforward Λ f
+  let Rg := CondensedRing.moduleObjectDerivedPushforward Λ g
+  let Rfg := CondensedRing.moduleObjectDerivedPushforward Λ (f ≫ g)
+  let P := (pull Λ f).obj ((pull Λ g).obj M)
+  let d := Functor.rightDerivedFunctorCompIso' (CondensedRing.lowerStar Λ f)
+    (CondensedRing.lowerStar Λ g) (CondensedRing.lowerStarComp Λ f g)
+  have hη := congrArg GZ.map (derived_unit_comp Λ f g M)
+  have hd := NatTrans.congr_app (pushDerivedSectionsIso_comp Λ f g) P
+  have hn := (pushDerivedSectionsIso Λ g).hom.naturality
+    ((adj Λ f).unit.app ((pull Λ g).obj M))
+  have hn' := (pushDerivedSectionsIso Λ (f ≫ g)).hom.naturality
+    ((pullComp Λ f g).hom.app M)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hd hn hn'
+  dsimp only [restriction, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app]
+  change (GZ.map ((adj Λ (f ≫ g)).unit.app M) ≫
+      (pushDerivedSectionsIso Λ (f ≫ g)).hom.app ((pull Λ (f ≫ g)).obj M)) ≫
+        GX.map ((pullComp Λ f g).hom.app M) =
+    (GZ.map ((adj Λ g).unit.app M) ≫
+      (pushDerivedSectionsIso Λ g).hom.app ((pull Λ g).obj M)) ≫
+        GY.map ((adj Λ f).unit.app ((pull Λ g).obj M)) ≫
+          (pushDerivedSectionsIso Λ f).hom.app P
+  simp only [Category.assoc]
+  rw [← hn']
+  rw [← GZ.map_comp_assoc, hη]
+  simp only [Functor.map_comp, Category.assoc] at hd ⊢
+  change GZ.map ((adj Λ g).unit.app M) ≫
+      GZ.map (Rg.map ((adj Λ f).unit.app ((pull Λ g).obj M))) ≫
+        GZ.map (d.hom.app P) ≫ (pushDerivedSectionsIso Λ (f ≫ g)).hom.app P = _
+  rw [hd]
+  rw [← reassoc_of% hn]
+
 /-- The derived restriction appearing in the closed-test normalization commutes with
 pro-etale localization, using the specified composition constraints.
 Source: Tags 09T5 and 0D6E--0D6F
@@ -394,7 +292,38 @@ theorem derived_restriction_localization
         (restriction Λ a').app ((pull Λ t).obj K.obj) ≫
         (condensedModuleSections Λ W').rightDerivedFunctor.map
           ((pullComp Λ a' t).inv.app K.obj) := by
-  sorry
+  let G := (condensedModuleSections Λ W').rightDerivedFunctor
+  have hc₁ := restriction_comp Λ k a K.obj
+  have hc₂ := restriction_comp Λ a' t K.obj
+  have restriction_congr (p q : W' ⟶ T) (hpq : p = q) :
+      (restriction Λ p).app K.obj ≫
+          G.map ((eqToIso (congrArg (fun r : W' ⟶ T ↦ pull Λ r) hpq)).hom.app K.obj) =
+        (restriction Λ q).app K.obj := by
+    cases hpq
+    change (restriction Λ p).app K.obj ≫ G.map (𝟙 _) = _
+    rw [G.map_id]
+    exact Category.comp_id ((restriction Λ p).app K.obj)
+  have he := restriction_congr (k ≫ a) (a' ≫ t) w.w
+  calc
+    _ = (restriction Λ (k ≫ a)).app K.obj ≫
+        G.map ((eqToIso (congrArg (fun q : W' ⟶ T ↦ pull Λ q) w.w)).hom.app K.obj) := by
+      simp only [← Category.assoc]
+      rw [← hc₁]
+      change (((restriction Λ (k ≫ a)).app K.obj ≫ G.map _) ≫ G.map _) ≫ G.map _ = _
+      simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id_app, G.map_id]
+      dsimp only [G]
+      exact (Category.assoc _ _ _).symm.trans
+        (congrArg (fun q ↦ q ≫ G.map
+          ((eqToIso (congrArg (fun q : W' ⟶ T ↦ pull Λ q) w.w)).hom.app K.obj))
+          (Category.comp_id ((restriction Λ (k ≫ a)).app K.obj)))
+    _ = (restriction Λ (a' ≫ t)).app K.obj := he
+    _ = _ := by
+      simp only [← Category.assoc]
+      rw [← hc₂]
+      change _ = ((restriction Λ (a' ≫ t)).app K.obj ≫ G.map _) ≫ G.map _
+      simp only [Category.assoc, ← G.map_comp, Iso.hom_inv_id_app, G.map_id]
+      dsimp only [G]
+      exact (Category.comp_id ((restriction Λ (a' ≫ t)).app K.obj)).symm
 
 section Coefficients
 
@@ -598,6 +527,9 @@ theorem closed_test_derived_exchange_model
             (evaluatedExchange Λ A I w.toCommSq V) ≫ eRight.hom =
           eLeft.hom ≫ Functor.whiskerLeft DerivedCategory.Plus.ι
             (testRestriction Λ A I w.toCommSq V) := by
-  sorry
+  obtain ⟨eLeft, eRight, hLeft, hRight, hExchange, _⟩ :=
+    NonaffineClosedTestExchangeIdentification.nonaffine_closed_test_exchange_identification
+      Λ A I f h fZ w V
+  exact ⟨eLeft, eRight, hLeft, hRight, hExchange⟩
 
 end AlgebraicGeometry.ProEtale.ClosedTestDerivedExchangeModel

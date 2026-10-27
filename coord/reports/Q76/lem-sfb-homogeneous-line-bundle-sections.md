@@ -1,0 +1,29 @@
+# Stage-1 worker report
+
+Files written:
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-homogeneous-line-bundle-sections.json`: existing item split into six proof steps; no new nodes.
+- `citations.json`: verbatim statements for every node cited by every proof step.
+- `report.md`: this report.
+
+Attachments: none. A search of the project source under `lean/WeilConjectures/` (the current read clone of the upstream library) found no declaration tagged `(blueprint: lem-sfb-homogeneous-line-bundle-sections)` or any declaration stating the item exactly.
+
+Mathlib verdict: no match. I ran the required LeanFinder, LeanSearch, Loogle and Mathlib grep searches on 2026-10-23. The hits concern continuous/group representations, general sheaf presentations, and global-sections notation; none states algebraic homogeneous line bundles on a flag quotient or their regular semi-invariant functions. The complete query records are in `searches.jsonl` and in the item’s `mathlib_searches` field.
+
+WANTED: none; Milne’s *Algebraic Groups* (IAG 2017) is present in `literature/milne-algebraic-groups_iAG2017.pdf`. The Stacks descent and gluing sources are present in `literature/stacks-project/`.
+
+The imported node had no proof and its blueprint ancestor metadata was inherited with a null ancestor from an earlier support chain. I left its statement and maintainer fields unchanged, and supplied the missing proof. The statement’s character convention was checked against Milne: the right action is `(g,z)·b=(gb,χ(b)⁻¹z)`, hence sections satisfy `f(gb)=χ(b)⁻¹f(g)`. No statement correction was needed.
+
+The proof uses existing statements only. Step 1 verifies that the B-torsor is an fpqc cover using the existing reductive Borel-pair, affine finite-type Noetherian, Noetherian compactness, fpqc definition, and base-change statements. Step 2 uses the exact fpqc quasi-coherent descent statement, including its finite locally free rank-one clause, to descend the character cocycle. Step 3 reads the descended module in local frames, uses the existing scheme-gluing statement, base-change and representable-fpqc descent statements to identify the quotient construction, and uses the proper-field invertible-coherent statement for coherence. Step 4 descends the left G-action by representable fpqc descent and checks identity/composition after pullback. Step 5 uses the existing fpqc descent-of-sections statement to identify global sections with functions satisfying the character equation, including the functor-of-points formulation. Step 6 gives the left-translation calculation and checks group-scheme equivariance using the same fpqc section tool after base change and an elementary kernel calculation over the field F.
+
+## Not duplicates
+
+No new nodes were created, so there are no duplicate pairs to report.
+
+## Review by Q76
+
+I read the item source and the relevant Milne passages: Section 18c (pp.389–390) gives the B-torsor quotient and associated line bundle; Definition 22.21 (p.468) gives the right inverse-character condition; the proof of Theorem 22.48 (p.479) explicitly identifies sections with those functions. I also read each cited DAG node. The reductive Borel-pair node supplies the torsor isomorphism and surjectivity; the affine finite-type Noetherian and Noetherian compactness nodes justify the fpqc-cover definition; the fpqc-descent node explicitly states effective quasi-coherent descent and reflection of finite local freeness, so it supports the rank-one conclusion; the gluing node supplies the scheme from local frames; the representable-descent node supplies uniqueness and compatibility of descended maps; the proper-field coherence node supplies coherence of the invertible sheaf; and the fpqc section-descent node supplies existence and uniqueness of descended global sections. I verified the hypotheses where used: F is algebraically closed, G is affine finite type, Q is proper over F, π is a B-torsor and hence faithfully flat and surjective, and the section sheaf is quasi-coherent. I corrected the imported empty proof by spelling out the cocycle, quotient, left-action, and functor-of-points arguments; no statement or dependency was silently weakened.
+
+For the source audit I read Stacks descent.tex, Tag 023T (`proposition-fpqc-descent-quasi-coherent`), Tag 05B2 (`lemma-finite-locally-free-descends`), Tag 03DT (`lemma-sheaf-condition-holds`), Tag 023Q (`lemma-fpqc-universal-effective-epimorphisms`), topologies.tex Tag 022D (`lemma-fpqc`), topology.tex Tag 04ZA (`lemma-Noetherian-quasi-compact`), and coherent.tex Tag 01XZ (`lemma-coherent-Noetherian`). The scheme-gluing input is the standard gluing of the explicit scalar transitions, using the existing gluing node, whose statement was read in full. These generic tools leave the unit's alteration-support route in place; the two off-unit statements requiring declarations are recorded in `split_report.tool_uses`. The latest blueprint unit and direct-image proof (3) were read; this item supports the inherited alteration chain and does not realize the unit's key statement, so no unit record is changed.
+
+Small cases: when G=B=1, Q is Spec F, the descended line and its sections are F and the action is trivial. When G=B is a split torus, Q is Spec F, E(χ) is generated by χ⁻¹ on G, and left translation acts on that generator with weight χ, agreeing with the quotient fibre action. These tests verify both inverse signs. The trivial character gives the trivial fibre descent datum, so no nonzero or dominant-character assumption is hidden. No new statement-only nodes are introduced, and every non-elementary step cites its actual inputs; no proof step exceeds 2000 characters. I refined step 4 to descend the base action explicitly and step 6 to justify arbitrary coefficient algebra A by tensoring the linear kernel over F, rather than silently applying a global-cohomology base-change theorem.

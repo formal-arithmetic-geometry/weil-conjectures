@@ -78,5 +78,42 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-curve-estimates",
  "unit": "sk-lem-curve-dense-open",
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261025",
+  "commit": "b767183f5ce5f281d407f582da76ab91d6176fe0",
+  "changed": [
+   "statement"
+  ],
+  "statement": "Let $j\\colon U\\hookrightarrow C$ be a dense open in a reduced curve and\n$i\\colon Z\\hookrightarrow C$ its finite complementary closed subscheme. For a\nclassical constructible sheaf $F$ killed by a prime $r$ there is an exact\nsequence\n\n$$\n0\\longrightarrow j_!j^*F\\longrightarrow F\\longrightarrow i_*i^*F\\longrightarrow0.\n$$\n\nConsequently the assertions $(C_1)$–$(C_8)$ of [def-weil-pbc-eight-curve-assertions]\nfor $F$ and for $j_!j^*F$ are equivalent.",
+  "proof": [
+   {
+    "text": "The exact sequence is the open–closed sequence of classical sheaves; it can be\nchecked on geometric stalks on $C_{\\mathrm{ét}}$ and then pulled back. The\nlast term has finite sections and no positive cohomology\n([sk-lem-curve-finite-support]), so the long exact sequence gives\n\n$$\n\\begin{split}\n0\\to H^0(C,j_!j^*F)\\to H^0(C,F)\\to H^0(Z,i^*F)\\to{}\\qquad\\qquad\\\\\nH^1(C,j_!j^*F)\\to H^1(C,F)\\to0,\n\\end{split}\n$$\n\nand isomorphisms in degrees at least two. The sequence is natural under field\nextension and its point term is unchanged, so the five lemma gives the\nequivalence of the invariance assertions. For $(C_8)$ apply the same\nidentifications in degree two to each open subset of $C$. See also (Stacks,\nTag 0GJA).",
+    "uses": [
+     "sk-lem-curve-finite-support"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Consequence.* If $j$ is dense, this lemma and the calculation for constant\n$\\mathbf F_r$ on $C$ via [sk-lem-curve-normalization] show that\n$j_!\\underline{\\mathbf F_r}$ satisfies the assertions $(C_1)$–$(C_8)$ of\n[def-weil-pbc-eight-curve-assertions]. An\narbitrary open is dense in the reduced union of the components it meets,\nwhich is a closed subscheme of $C$. Apply the dense case there and pass back\nto $C$, using that direct image along a finite morphism is exact (Stacks,\nTag 0A3Q).",
+    "uses": [
+     "sk-lem-curve-normalization",
+     "def-weil-pbc-eight-curve-assertions"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261025, weil-conjectures-blueprint b767183f5c) states or proves this differently; a worker who touches the node follows it"
+ }
 }

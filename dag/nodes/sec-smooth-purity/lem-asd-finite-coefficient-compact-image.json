@@ -1,0 +1,132 @@
+{
+ "id": "lem-asd-finite-coefficient-compact-image",
+ "kind": "statement",
+ "title": "Compact-image finiteness with generic finite coefficients",
+ "statement": "Let k be a field and Lambda a finite commutative ring whose exponent is invertible in k [sbc-def-coefficient-conventions]. Let X and S be finite-type k-schemes [def-weil-pbc-scheme-conventions] and f:X -> S a morphism with a compactification [def-amb-etale-compact-support]. If K is bounded constructible [def-weil-pbc-constructible-complexes], then Rf_!K is bounded constructible. For each Noetherian base change T -> S, its canonical compact-support exchange is an isomorphism. The coefficient ring need not be the prime field.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.proof.md",
+  "place": "Compactification, extension by zero and proper finiteness; the adopted source gives the generic finite-coefficient version in CompactSupportBaseChange.lean."
+ },
+ "stmt_deps": [
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-scheme-conventions",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-constructible-complexes"
+ ],
+ "proof": [
+  {
+   "text": "Choose the compactification f=pj. Its middle scheme is Noetherian because it is proper over the finite-type k-scheme S. Exact extension by zero sends the bounded constructible K to a bounded constructible complex, and proper direct-image finiteness sends this to a bounded constructible complex on S. This composite is the actual compact direct image.",
+   "uses": [
+    "lem-fin-extension-by-zero",
+    "lem-fin-proper-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.proof.md",
+    "place": "Compactification, extension by zero and proper finiteness; the adopted source gives the generic finite-coefficient version in CompactSupportBaseChange.lean."
+   }
+  },
+  {
+   "text": "After any Noetherian base change, compute compact exchange in the base-changed compactification. It is the composite of proper base change and extension-by-zero base change, and each factor is an isomorphism. Canonical compactification comparison transports this to the canonical compact-support functors. This is precisely the existing proved source theorem boundedConstructible_rightDerivedLowerShriek_and_isIso.",
+   "uses": [
+    "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+    "thm-weil-pbc-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-compact-bounded-and-base-change.proof.md",
+    "place": "Compactification, extension by zero and proper finiteness; the adopted source gives the generic finite-coefficient version in CompactSupportBaseChange.lean."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-extension-by-zero",
+  "lem-fin-proper-bounded-constructible",
+  "sbc-prop-extension-by-zero-and-arbitrary-base-change",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/CompactSupportBaseChange.lean",
+  "place": "Complete existing proof of boundedConstructible_rightDerivedLowerShriek_and_isIso; no source edit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact direct image preserves bounded constructible etale complexes over finite coefficient rings",
+   "results": "Eight Chevalley and topological constructibility hits; no etale derived compact-support result. Local adopted-source search finds the complete generic finite-coefficient theorem.",
+   "date": "2026-10-26",
+   "verdict": "source match"
+  },
+  {
+   "tool": "loogle",
+   "query": "boundedConstructible_rightDerivedLowerShriek_and_isIso",
+   "results": "No Mathlib declaration by this name; it belongs to the adopted source.",
+   "date": "2026-10-26",
+   "verdict": "source match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*LowerShriek",
+   "results": "No Mathlib hits. The adopted source has CompactSupportBaseChange.lean with the complete generic statement and proof.",
+   "date": "2026-10-26",
+   "verdict": "source match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support direct image preserves bounded constructible finite Tor amplitude for finite coefficient rings",
+   "results": "Eight compact-support function and finite-module functor results; no etale compact-image finiteness theorem.",
+   "date": "2026-10-26",
+   "verdict": "no exact Mathlib match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothCompactDualModel",
+  "date": "2026-10-26",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-smooth-compact-dual-model",
+   "place": "Compact-image finiteness at generic finite coefficients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_and_isIso",
+  "statement": "theorem boundedConstructible_rightDerivedLowerShriek_and_isIso {k : Type u} [Field k]\n    [HasInvertibleExponent Λ (Spec (.of k))] {X S : Scheme.{u}} (f : X ⟶ S)\n    [HasCompactification f] (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))\n    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aS] [QuasiCompact aS]\n    (_hf : f ≫ aS = aX)\n    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))\n    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :\n    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S\n        ((R(f)_![ModuleCat.{u + 1} Λ]).obj K) ∧\n      ∀ (S' X' : Scheme.{u}) [IsNoetherian S'] (v : S' ⟶ S) (vX : X' ⟶ X) (f' : X' ⟶ S')\n        [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback vX f' f v),\n        IsIso ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-26",
+  "note": "Existing source declaration: section parameters are Lambda : Type (u+1), [CommRing Lambda], [Finite Lambda]. This node records its generic coefficient interface; no new Lean theorem or hole is added."
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-e3e16",
+  "group": "B3",
+  "result": "fix",
+  "landing": "20261026T065155-L-2731829",
+  "kind": "interface",
+  "note": "independent cc review: item SmoothCompactDualModel + 4 modules and 8 nodes against the packet, the clone (signatures, SmoothBaseChange import cycle, canonical-map definitions) and a sandbox compile of all delivered modules with the unchanged importer SmoothGenericDirectImage (exit 0) and #print axioms"
+ }
+}

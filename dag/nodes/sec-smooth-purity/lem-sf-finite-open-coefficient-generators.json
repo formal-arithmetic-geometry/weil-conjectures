@@ -1,0 +1,175 @@
+{
+ "id": "lem-sf-finite-open-coefficient-generators",
+ "kind": "statement",
+ "title": "The intrinsic adjacent coefficient map on an extension generator",
+ "statement": "Fix l,E,j:X→Z,o as in [lem-sf-integral-open-reduction-comparison] and n≥0. Suppose r₀ and r₁ are the section-normalized right restriction comparisons at n and n+1 of [lem-sf-finite-open-restriction-presentation]. Construct their left comparisons by composing the actual slice adjunction with o.finite.toAdjunction, transporting the right adjoint along rᵢ, and applying left-adjoint uniqueness with the intrinsic adjunction. For M at level n, W in Z_proet, a:W→openObject(j) and x in M(sliceSite(Over.mk(a))), evaluate the higher left comparison, the canonical equality between normalized adjacent restriction and the specified coefficient restriction, and sfOpenRestriction on the higher finiteExtensionSection of x. The result is the lower left comparison applied to the lower finiteExtensionSection of x, followed by the ambient canonical restriction comparison. Explicit scalar and unscalar identity maps transport section carriers along the quotient, avoiding conversion by unfolding that quotient. The predicate SfFiniteOpenCoefficientGenerator is the resulting pointwise equality of the two section functions. This is exactly sfFiniteOpenCoefficient_generator; it asserts equality only on the represented generator, assumes no OpenData or ordinary slice coefficient isomorphism, and concerns only one adjacent quotient.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma extension-by-zero (03DI), its direct-sum construction and adjunction unit; extension-by-zero-exact (03DJ). Localization and constant coefficients: Stacks 098K and 00YV."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SfFiniteOpenPresentation",
+  "date": "2026-10-27",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-integral-rational-qbar-compact-support",
+   "place": "Finite slice open presentation: The intrinsic adjacent coefficient map on an extension generator.",
+   "via": [
+    "lem-sf-finite-open-presentation-coefficients",
+    "lem-sf-compact-support-slice-intrinsic-towers",
+    "lem-sf-integral-compact-support-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between left adjoints induced by an isomorphism of their right adjoints",
+   "results": "8 hits: CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.ofNatIsoLeft, CategoryTheory.Adjunction.ofNatIsoRight, CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.natIsoOfRightAdjointNatIso, CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.leftAdjointCompIso_hom",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteRestriction.*sfIntrinsicOpenRestriction|localizedSystemExtension.*sfIntrinsicExtensionByZero|finiteExtension.*sfIntrinsicExtensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero restriction of scalars sends each summand generator to the same section",
+   "results": "8 hits: ContinuousLinearMap.restrictScalars_zero, Submodule.restrictScalars, RestrictScalars, DFinsupp.lmk, Function.ExtendByZero.linearMap, AlgebraicGeometry.RingedSpace.res_zero, ModuleCat.ExtendRestrictScalarsAdj.unit, LinearMap.restrictScalars_zero",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Isomorphism of restriction functors under equivalence of sites preserving constant sheaf module sections",
+   "results": "8 hits: SheafOfModules.restrictScalars, AlgebraicGeometry.PresheafedSpace.toRestrictTop, CategoryTheory.Sheaf.isConstant_congr, AlgebraicGeometry.Scheme.restrictFunctorΓ, AlgebraicGeometry.SheafedSpace.restrictTopIso, CategoryTheory.Equivalence.transportIsoSheafToPresheaf, CategoryTheory.Equivalence.sheafCongr, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr",
+   "date": "2026-10-27",
+   "verdict": "Generic adjunction or scalar restriction tools, no comparison for these specified open slice and intrinsic presentations."
+  }
+ ],
+ "mathlib_match": null,
+ "stmt_deps": [
+  "lem-sf-finite-open-restriction-presentation",
+  "lem-sf-integral-open-reduction-comparison",
+  "def-weil-extension-by-zero",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sf-integral-compact-support-tower",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "def-sp-open-scalar-restriction-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Identify the adjacent normalized scalar restriction with the specified finite coefficient restriction by ofOpSequence_map_homOfLE_succ. Equality transport on a module section is heterogeneously the identity, by equality induction; this gives the presentation_section equation without unfolding quotient rings.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved intrinsic unit-generator section API of lem-sf-intrinsic-open-unit-generators. Its actual realization unit and counit identify intrinsic restricted sections with ambient sections, and evaluating the intrinsic adjunction unit defines the canonical intrinsic generator.",
+   "uses": [
+    "lem-sf-intrinsic-open-unit-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The supplied SfFiniteOpenRestrictionNormalized equation states that the right comparison, transported forward through o.finite and its counit, inverts openEvaluate. Check this first on sections in inverse-realization coordinates; their surjectivity extends it to all sections. The transported left-adjoint uniqueness unit equation, followed by the finiteFunctor equality, then identifies the left comparison on each actual direct-sum finiteExtensionSection with the intrinsic unit generator. The direct-sum unit formula comes from localizedSystemAdjunction_existsUnique. This is a single-coefficient identity, applied at n and n+1.",
+   "uses": [
+    "lem-sf-finite-open-restriction-presentation",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-extension-by-zero-adjunction",
+    "lem-sf-intrinsic-open-unit-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The proved sfOpenUnitGenerator_restriction equation carries the intrinsic generator under sfOpenRestriction to the same generator at the other coefficient. Its proof uses the published normalized coefficient-square unit equation and the actual realization unit/counit identities.",
+   "uses": [
+    "lem-sf-intrinsic-open-unit-generators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use naturality of the intrinsic generator under the source presentation isomorphism, whose section map is the identity. The higher left comparison followed by sfOpenRestriction is therefore the lower intrinsic generator. The lower left comparison followed by the ambient presentation isomorphism has the same value. Transitivity proves the stated generator equality, with the scalar/unscalar wrappers retained in the public statement.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-weil-inverse-system",
+  "lem-sf-intrinsic-open-unit-generators",
+  "lem-sf-finite-open-restriction-presentation",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Lemma extension-by-zero (03DI), direct-sum unit and adjunction; 03DJ; canonical realization of constant coefficients (00YV). Lean proof uses the published unit normalizations, uniqueness of adjoints, and realization unit/counit identities."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfFiniteOpenCoefficientGenerators",
+  "file": "lean/Sheaf/Paper/SfFiniteOpenCoefficientGenerators.lean",
+  "declaration": "WeilConjectures.sfFiniteOpenCoefficient_generator",
+  "declarations": [
+   "WeilConjectures.sfFiniteOpenPresentation_restriction_eq",
+   "WeilConjectures.sfFiniteOpenPresentationRestriction",
+   "WeilConjectures.sfSheafScalarSection",
+   "WeilConjectures.sfSheafUnscalarSection",
+   "WeilConjectures.sfNormalizedDVRSection",
+   "WeilConjectures.sfNormalizedDVRUnsection",
+   "WeilConjectures.sfNormalizedDVRSection_heq",
+   "WeilConjectures.sfFiniteOpenIntrinsicCoefficient",
+   "WeilConjectures.sfFiniteOpenLowerCoefficient",
+   "WeilConjectures.SfFiniteOpenCoefficientGenerator",
+   "WeilConjectures.sfFiniteOpenCoefficient_generator"
+  ],
+  "statement": "theorem sfFiniteOpenCoefficient_generator (n : ℕ)\n    (r₀ : IntegralOpenReduction.finiteRestriction l E j o n ≅\n      sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 1)))\n    (r₁ : IntegralOpenReduction.finiteRestriction l E j o (n + 1) ≅\n      sfIntrinsicOpenRestriction j (Padic.coefficientExtensionRing l E (n + 2)))\n    (_h₀ : SfFiniteOpenRestrictionNormalized l E j o n r₀)\n    (_h₁ : SfFiniteOpenRestrictionNormalized l E j o (n + 1) r₁)\n    (M : normalizedDVRModules l E X n) (W : Z.ProEt)\n    (a : W ⟶ IntegralOpenReduction.openObject j)\n    : SfFiniteOpenCoefficientGenerator l E j o n r₀ r₁ M W a",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-5c0c0",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261027T021322-L-2756951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261027T050645-L-250250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

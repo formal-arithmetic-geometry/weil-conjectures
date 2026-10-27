@@ -1,0 +1,203 @@
+{
+ "id": "lem-route-ringed-internal-hom-exact",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "via": [
+    "lem-sfb-ringed-complete-triangulated",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ],
+   "place": "Proof of det-lem-integral-models-stacks: the derived-complete condition in the first two sentences and its equivalence under restriction of scalars; internal-Hom exactness is the generic tool used along lem-sfb-integral-cohomological-adic-criterion, lem-sfb-adic-stratified-perfect, and lem-sfb-ringed-complete-triangulated to establish closure under triangles."
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Internal derived Hom preserves distinguished triangles in each variable and commutes with shifts.",
+ "statement": "Let $\\mathcal C$ be a small category with a Grothendieck topology $J$ [def-weil-pbc-sites-and-cohomology], and let $\\mathcal O$ be a sheaf of commutative rings on this site. Write $\\mathcal A=\\operatorname{Mod}(\\mathcal O)$ for its category of module sheaves [def-weil-sheaf-of-modules-category] and $\\mathcal D=D(\\mathcal A)$ for the unbounded derived category [def-weil-abstract-derived-category], assuming this localization is available in the chosen universes. Let $H:\\mathcal D^{\\mathrm{op}}\\times\\mathcal D\\to\\mathcal D$ be the K-injective derived internal Hom $H(P,Q)=R\\mathcal Hom_{\\mathcal O}(P,Q)$ of [def-pur-derived-internal-hom]. Then both of the following hold.\n\n(1) For every $L\\in\\mathcal D$, the functor $F_L:\\mathcal D\\to\\mathcal D$, $Q\\mapsto H(L,Q)$, admits natural isomorphisms $F_L(Q[n])\\cong F_L(Q)[n]$ for all $n\\in\\mathbf Z$, coherent with zero and addition of shifts, for which it is triangulated [def-weil-triangulated-category].\n\n(2) For every $M\\in\\mathcal D$, the functor $G_M:\\mathcal D^{\\mathrm{op}}\\to\\mathcal D$, $P^{\\mathrm{op}}\\mapsto H(P,M)$, admits coherent commutation with all integral shifts and is triangulated for that structure. Here the opposite triangulated category has shift $(P^{\\mathrm{op}})[n]=(P[-n])^{\\mathrm{op}}$; thus the shift comparison is equivalently $H(P[n],M)\\cong H(P,M)[-n]$.\n\nIn each clause, triangulated means that the functor sends distinguished triangles to distinguished triangles using its stated shift comparison. No boundedness, finite-generation or perfectness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "lem-sfb-ringed-complete-triangulated: the Lean of this node (its declaration uses) reaches CategoryTheory.ringedInternalHom_exact, a sorry on the sorry route of batch3, batch4, batch5 with no node; Lean: SHEAF file lean/Sheaf/Algebra/Homology/RingedInternalHomExactRestriction.lean, declaration CategoryTheory.ringedInternalHom_exact (module Sheaf.Algebra.Homology.RingedInternalHomExactRestriction, lines 445-478, proof `sorry`)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "The abbreviation ringedSiteModules denotes precisely the category of module sheaves [def-weil-sheaf-of-modules-category], and $H$ is the K-injective bifunctor of [def-pur-derived-internal-hom]. Thus the small ringed site in the statement is exactly the input of [lem-weil-pbc-ringed-internal-hom-exact-restriction]; no change of coefficients or restriction to a bounded subcategory is involved.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), applied through the existing ringed-site internal-Hom calculus node."
+   }
+  },
+  {
+   "text": "Fix $L$. The shift and triangle clause of [lem-weil-pbc-ringed-internal-hom-exact-restriction], applied in its second variable, gives the natural commutation $H(L,Q[n])\\cong H(L,Q)[n]$ and preservation of distinguished triangles with these comparisons. Take this shift structure on $F_L$. Preservation of distinguished triangles is exactly triangulatedness [def-weil-triangulated-category], so this proves (1). The cited clause is for arbitrary objects of the unbounded category.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), applied through the existing ringed-site internal-Hom calculus node."
+   }
+  },
+  {
+   "text": "Fix $M$. Apply the same clause of [lem-weil-pbc-ringed-internal-hom-exact-restriction] in its contravariant first variable. It supplies the compatible comparisons $H(P[m],M)\\cong H(P,M)[-m]$ and the reversed distinguished triangles, including their boundary maps. Since shift by $n$ in $\\mathcal D^{\\mathrm{op}}$ is shift by $-n$ in $\\mathcal D$, put $m=-n$: the comparison becomes $G_M((P^{\\mathrm{op}})[n])\\cong G_M(P^{\\mathrm{op}})[n]$. This is the same coherent shift structure expressed on the opposite category, and the reversed-triangle assertion is preservation of its distinguished triangles. By [def-weil-triangulated-category], $G_M$ is triangulated, proving (2). The first and second clauses together give the required conjunction of universally quantified assertions.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), applied through the existing ringed-site internal-Hom calculus node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC (lemma-RHom-triangulated), applied through the existing ringed-site internal-Hom calculus node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rlw 'ringedInternalHom_exact' lean/.lake/packages/mathlib/Mathlib/",
+   "results": "none",
+   "date": "2026-10-25",
+   "verdict": "no match",
+   "note": "name grep by tools/route_nodes.py only; the stage-1 worker adds LeanSearch / Loogle / LeanFinder searches"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|ringedInternalHom|internalHom.*[Tt]riangulated",
+   "results": "No hits",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern triangulated categories, exact functors between abelian categories or ordinary sheaf Hom, not derived internal Hom in both variables on a ringed site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of sheaves of modules on a ringed site preserves distinguished triangles and commutes with shifts in both arguments",
+   "results": "CategoryTheory.sheafHom, CategoryTheory.sheafHom', CategoryTheory.Functor.IsHomological.mk, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, SheafOfModules.hom_ext, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern triangulated categories, exact functors between abelian categories or ordinary sheaf Hom, not derived internal Hom in both variables on a ringed site"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.IsTriangulated, MonoidalClosed",
+   "results": "No hits; loogle: unknown identifier 'Functor.IsTriangulated'",
+   "date": "2026-10-25",
+   "verdict": "invalid query: unknown identifier; retried with fully qualified CategoryTheory.Functor.IsTriangulated"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a small ringed site the unbounded derived internal Hom is a triangulated functor in each variable with compatible integer shifts",
+   "results": "CategoryTheory.Functor.instIsHomologicalCompOfIsTriangulated, DerivedCategory.instIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instHasShiftInt, CategoryTheory.Functor.IsHomological.mk'",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern triangulated categories, exact functors between abelian categories or ordinary sheaf Hom, not derived internal Hom in both variables on a ringed site"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived sheaf Hom functor is exact as a functor from the opposite derived category and as a functor in its second argument",
+   "results": "Ext, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, HasDerivedCategory.standard, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Sheaf.instIsGrothendieckAbelian, HasDerivedCategory, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern triangulated categories, exact functors between abelian categories or ordinary sheaf Hom, not derived internal Hom in both variables on a ringed site"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsTriangulated",
+   "results": "CategoryTheory.Functor.IsTriangulated.instId, CategoryTheory.Functor.IsTriangulated, CategoryTheory.Functor.IsTriangulated.instAdditive, CategoryTheory.Functor.IsTriangulated.instPreservesLimitsOfShapeDiscreteWalkingPair, CategoryTheory.Functor.IsTriangulated.instPreservesZeroMorphisms, CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.isTriangulated_of_iso, CategoryTheory.Functor.isTriangulated_iff_of_iso",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern triangulated categories, exact functors between abelian categories or ordinary sheaf Hom, not derived internal Hom in both variables on a ringed site"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated|CommShift",
+   "results": "Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean; searched Mathlib/CategoryTheory/Triangulated",
+   "date": "2026-10-25",
+   "verdict": "no match: the hits concern triangulated categories, exact functors between abelian categories or ordinary sheaf Hom, not derived internal Hom in both variables on a ringed site"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "maintainer",
+  "item": "lem-sfb-ringed-complete-triangulated",
+  "date": "2026-10-25",
+  "tool": "tools/route_nodes.py",
+  "why": "PROVISIONAL: sorried declaration on the sorry route (local/sorry-route.json) with no DAG node, recorded automatically after the route recompute (the human, 2026-10-23: every proof-related upstream sorry gets a node, and a node without a written proof goes to stage 1). The statement is only the Lean signature and docstring: the stage-1 worker writes it in words with [node] citations and stmt_deps, does the Mathlib searches (LeanSearch, Loogle or LeanFinder, local grep), fills blueprint.same_as, and splits it"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Algebra.Homology.RingedInternalHomExactRestriction",
+  "file": "lean/Sheaf/Algebra/Homology/RingedInternalHomExactRestriction.lean",
+  "declaration": "CategoryTheory.ringedInternalHom_exact",
+  "declarations": [
+   "CategoryTheory.ringedInternalHom_exact"
+  ],
+  "statement": "theorem ringedInternalHom_exact\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}\n    RingCat.{u})).obj R))] :\n    (∀ L : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}\n    RingCat.{u})).obj R))), ∃ _ : ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).obj (op\n    L)).CommShift ℤ,\n    ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).obj (op L)).IsTriangulated) ∧\n    (∀ M : (DerivedCategory (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u}\n    RingCat.{u})).obj R))), ∃ _ : ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).flip.obj\n    M).CommShift ℤ,\n    ((Functor.curry.obj (derivedInternalHom.{u, w} J R)).flip.obj M).IsTriangulated) := by\n  sorry",
+  "by": "maintainer",
+  "date": "2026-10-25",
+  "note": "SHEAF declaration attached as it stands, proof still `sorry`; recorded by tools/route_nodes.py"
+ },
+ "split_report": {
+  "date": "2026-10-25",
+  "item": "lem-route-ringed-internal-hom-exact",
+  "worker": "stage1",
+  "group": "NF",
+  "summary": "Replaced the machine-made statement containing a Lean docstring and proof sketch by the exact two-clause natural-language statement. Reused the stronger reviewed ringed-site internal-Hom calculus node; no new nodes. Checked the definition of the actual bifunctor, the opposite shift sign, the unbounded hypotheses, and the absence of a dependency cycle. Read Stacks 08JC and searched Mathlib using all required services and a second phrasing.",
+  "blueprint": "The first two sentences of det-lem-integral-models-stacks.proof.md identify completeness across restriction of scalars; this item is the generic triangulated internal-Hom tool on the recorded route through lem-sfb-ringed-complete-triangulated, not a replacement of the integral-models argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic internal-Hom calculus on any small ringed site; its exactness and shift clause supplies the tool needed by ringed completeness, without replacing a unit step. No node of sk-lem-integral-models provides that general calculus."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "NT-cc-NF-69b396cc0",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-69b396cc0 (reviewer sub-agent of L); spot-checked: I read the item, the reused node lem-weil-pbc-ringed-internal-hom-exact-restriction (statement, all 8 steps and its Q09 pass review), the statements of all 5 stmt_deps, the citer lem-sfb-ringed-complete-triangulated (its step 1 already uses this interface), Stacks sites-cohomology.tex l.8947-8962 (Tag 08JC lemma-RHom-triangulated) and blueprint sk-lem-integral-models-stacks.proof.md. The statement is the exact text of the Lean ringedInternalHom_exact: a small site, a commutative sheaf of rings, HasDerivedCategory, and for each variable 'there exists a CommShift ℤ for which the functor is triangulated'. The opposite-category shift (P^op)[n]=(P[-n])^op matches Mathlib's convention. Nothing is weakened and no boundedness condition is added. Step 1 (elementary) only checks that the item's objects are those of the reused node. Step 2 takes from its statement the covariant shift and triangle clause. Step 3 takes the contravariant clause, rewriting the source shift H(P[m],M)≅H(P,M)[-m] with m=-n on the opposite category; any one-arrow sign difference is absorbed by the existential choice of CommShift. I checked n=0 and n=±1, the empty site and the zero ring. A DFS over the reused node's closure (247 nodes) does not reach the item, so there is no cycle. I searched dag/nodes for duplicates: lem-sf-hom-triangulated (étale site, constant ring) and lem-weil-native-internal-hom-contravariant-exact (native closed Hom) are narrower or different interfaces, so citing the stronger existing node is right. No new nodes, so D1 does not apply. I accept the off-unit tool use (declared in split_report). Searches cover all three required kinds. Advisory: the item's maintainer-owned source.document still says algebraization.tex, but its real source is sites-cohomology 08JC. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261025T164521-L-1029987",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.ringedInternalHom_restriction"
+  ],
+  "sorry_after": []
+ }
+}

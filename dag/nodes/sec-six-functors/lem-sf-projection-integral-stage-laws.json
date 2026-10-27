@@ -1,0 +1,139 @@
+{
+ "id": "lem-sf-projection-integral-stage-laws",
+ "kind": "statement",
+ "title": "Integral coefficient-stage compact-support projection laws",
+ "statement": "Let S be the specified six-functor operation datum [def-fix-six-functor-datum] for finite-field datum D, coefficient datum C, finite extension E of Q_l and positive finite level n. The canonical compact-support projection of [def-sf-constructible-projection-mates] satisfies CompactSupportProjectionLaws at S.higher.integral on S.integralFiniteTorDomain, and at every (S.closure.coefficientStages E0).integral on the predicate finiteTorConstructibleIntegral for its coefficient ring. The tensor and exchange maps are exactly the recorded integralTensor and integralExchange maps. The laws include invertibility, naturality, compactification independence, composition, the associativity pentagon and proper-counit identification. The first input is an arbitrary bounded constructible integral object; only the second input has the stated uniform finite-Tor restriction.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "Finite formula, adic reconstruction, field transport and coherence paragraphs; coefficient-stage decomposition"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "The finite-stage projection theorem gives isomorphisms at all positive reductions. Apply the normalized arrow comparison to the actual integral projection. Evaluation conservativity makes its derived coefficient-system reduction invertible. The reduction/total-limit adjunction has invertible units on complete objects, so naturality of the unit reflects this isomorphism back to the integral category. Translate canonical completeness to the legacy Roos completeness predicate using an auxiliary finite-field datum of characteristic different from l.",
+   "uses": [
+    "lem-sf-projection-finite-stage-laws",
+    "lem-sf-integral-stage-projection-reduction",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pod-unrestricted-normalized-reconstruction",
+    "lem-sf-derived-complete-legacy-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Successive-reduction, adic reconstruction and coherence sentences"
+   }
+  },
+  {
+   "text": "Naturality follows directly by evaluating the naturality of the specified projection natural transformation in its two arguments. The existing compactification comparison theorem supplies compactification independence.",
+   "uses": [
+    "lem-fix-projection-compactification-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Successive-reduction, adic reconstruction and coherence sentences"
+   }
+  },
+  {
+   "text": "Take composition, pentagon and proper coincidence from the structural-identity bridge. Assemble the six fields of CompactSupportProjectionLaws. For each finite coefficient field, form a six-functor datum using its finite level 1 and the original closure and normalization data, and apply the same argument.",
+   "uses": [
+    "lem-sf-integral-stage-projection-structural-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+    "place": "Successive-reduction, adic reconstruction and coherence sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-projection-finite-stage-laws",
+  "lem-sf-integral-stage-projection-reduction",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pod-unrestricted-normalized-reconstruction",
+  "lem-sf-derived-complete-legacy-comparison",
+  "lem-fix-projection-compactification-comparison",
+  "lem-sf-integral-stage-projection-structural-identities"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md",
+  "place": "T2: finite-stage comparison and all-reductions conservativity, direct naturality and compactification comparison, plus structural system identities. Finite reductions detect isomorphisms only; system realization establishes map equalities."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for compactly supported direct image at finite, integral and rational coefficient stages",
+   "results": "Profinite.NobelingProof.πs', Profinite.NobelingProof.πs, Profinite.NobelingProof.πJ, Profinite.NobelingProof.πs'_apply_apply, Profinite.NobelingProof.coe_πs', Profinite.NobelingProof.coe_πs, Profinite.NobelingProof.πs_apply_apply, Profinite.NobelingProof.CC_comp_zero",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient-stage projection laws found. "
+  },
+  {
+   "tool": "loogle",
+   "query": "CompactSupportProjectionLaws",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient-stage projection laws found. loogle: unknown identifier 'CompactSupportProjectionLaws'"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupportProjectionFormula|CompactSupportFiniteProjection.Laws",
+   "results": "No hits.",
+   "date": "2026-10-26",
+   "verdict": "No compact-support coefficient-stage projection laws found. "
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportProjectionFormula",
+  "date": "2026-10-26",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-projection-formula",
+   "place": "Integral coefficient-stage compact-support projection laws; coefficient-stage part of the original conjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportProjectionIntegralStages",
+  "file": "lean/Sheaf/Paper/CompactSupportProjectionIntegralStages.lean",
+  "declaration": "WeilConjectures.compactSupportProjectionFormula_integralStages",
+  "statement": "theorem compactSupportProjectionFormula_integralStages\n    {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}\n    {E : Type u} [Field E] [Algebra (Padic C.l) E]\n    [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}\n    (S : SixFunctorOperationDatum D C E n hn) :\n    CompactSupportProjectionLaws S.higher.integral S.higher.integralTensor\n      S.higher.integralExchange S.integralFiniteTorDomain ∧\n    ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,\n      CompactSupportProjectionLaws (S.closure.coefficientStages E₀).integral\n        (S.closure.coefficientStages E₀).integralTensor\n        (S.closure.coefficientStages E₀).integralExchange\n        (fun X K ↦ finiteTorConstructibleIntegral C.l\n          (AlgebraicallyClosedCoefficients.Coefficient.{u} C.l C.Qbar E₀) X.obj.left K.obj)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261025T201914-L-2644369",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T2",
+  "result": "pass",
+  "landing": "20261026T002801-L-115546",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

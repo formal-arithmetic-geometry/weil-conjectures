@@ -1,0 +1,296 @@
+{
+ "id": "lem-trf-maximum-history-intrinsic-cocycle",
+ "kind": "statement",
+ "title": "Intrinsic comparison and cocycle for maximum histories",
+ "statement": "Let $V$ be totally ordered with least element $\\bot$, and fix a resolution invariant calculus $\\nu$ [def-trf-resolution-invariant-calculus-data]. Let $A=(X\\hookrightarrow P)$ and $B=(Y\\hookrightarrow Q)$ be embedded rational pairs [def-trf-labeled-embedded-resolution], and let $a:X\\xrightarrow{\\sim}Y$ be an isomorphism. Suppose $T_A,T_B$ are finite admissible maximum-extension histories [def-trf-admissible-embedded-history], each starting empty and stopping at its first regular strict transform, and label their extensions by their positive maxima in $L=(V\\setminus\\{\\bot\\})^{\\mathrm{op}}$.\n\nThe isomorphism $a$ extends canonically to an intrinsic comparison of their labeled strict-transform histories. They have the same active labels and stop simultaneously. At every preceding label, the comparison identifies the two local invariant functions, their maximum values, and the reduced center ideals on the strict transforms. If $a_i:X_i\\xrightarrow{\\sim}Y_i$ is the comparison before a label and $I_i,J_i$ are the corresponding intrinsic center ideals, then $I_i=a_i^*J_i\\,\\mathcal O_{X_i}$, and the next comparison is the map of the intrinsic ordinary blowups in these ideals induced by $a_i$. It agrees with the strict transforms in the two ambient blowups and commutes with the transition maps. The comparison retains the ordered earlier ideals even when an intrinsic blowup is an identity. There is no assertion identifying $P_i$ with $Q_i$.\n\nFor $a=\\operatorname{id}_X$ this gives the comparison for two embeddings of the same reduced scheme, with the identity comparison when the embeddings coincide. For three pairs and isomorphisms $X\\xrightarrow{a}Y\\xrightarrow{b}Z$, the comparison for $b\\circ a$ equals the composite of the comparisons for $a$ and $b$ at every label. Thus three embeddings of the same scheme satisfy the cocycle law. The comparison also commutes with restriction and smooth ambient pullback whenever a diagram of initial pairs and isomorphisms is cartesian: after identifying the pulled-back histories and deleting empty centers, the pulled-back intrinsic comparison equals the comparison for the pulled-back initial isomorphism. The same assertions hold on all lower cuts of $L$, inserting identity stages at absent labels, and include length-zero and empty histories.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO Expose VIII 2.3.1, 2.3.4--2.3.5 and 2.3.11--2.3.13, printed pp.91--94; conditional history argument extracted from lem-trf-embedded-resolution-ambient-comparison, old Steps 5 and 7: intrinsic blowup induction, transport by isomorphisms, and the cocycle. BMT Theorem 6.1 Addendum and section 6.3 are the underlying detailed reference, archival copy WANTED; no Stacks tag states this conditional resolution-history lemma."
+ },
+ "stmt_deps": [
+  "def-trf-resolution-invariant-calculus-data",
+  "def-trf-labeled-embedded-resolution",
+  "def-trf-admissible-embedded-history",
+  "def-trf-finite-maximum-labeled-history"
+ ],
+ "proof": [
+  {
+   "text": "Write $H_i,K_i$ for the prefixes after $i$ extensions of the given histories, of lengths $r,s$. Every prefix is admissible: it is obtained from the empty history by its first $i$ maximum extensions. Inductively construct an intrinsic comparison of these prefixes over $a$, retaining all earlier center ideals in order. For $i=0$ the sole component is $a$, and there are no transition or ideal conditions. This is an intrinsic comparison of empty histories by [def-trf-admissible-embedded-history]. No identification of their ambient schemes is part of the induction.",
+   "uses": [
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.1, 2.3.4--2.3.5, pp.91--92; agent-written induction base"
+   }
+  },
+  {
+   "text": "Suppose the comparison through $i$ has been constructed, with final component $a_i:X_i\\xrightarrow{\\sim}Y_i$. Apply the intrinsic-value condition of [def-trf-resolution-invariant-calculus-data] to these two admissible prefixes. It gives $\\nu_{H_i}(x)=\\nu_{K_i}(a_i(x))$ for every $x$. Since $a_i$ is bijective on points, the two images in $V$ are equal. The regular-bottom condition implies that $X_i$ is regular exactly when $Y_i$ is regular: each is regular exactly when its invariant is bottom at every point. This includes empty schemes. If $i=r$ or $i=s$, first-regular stopping therefore forces both histories to stop here. Otherwise both have a next extension, their positive maxima are the same greatest element $m_i$, and the label of the next extension is the same element of $L$.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94; agent deduction from the stipulated calculus, not a new existence theorem"
+   }
+  },
+  {
+   "text": "At a nonterminal prefix let $I_i,J_i$ be the ideals on $X_i,Y_i$ of the next centers. Each center is the reduced full maximum locus, since these are maximum extensions. Thus they are reduced maximum-stratum ideals for the same $m_i$. The intrinsic-ideal condition of [def-trf-resolution-invariant-calculus-data], applied to the comparison already constructed, gives $I_i=a_i^*J_i\\,\\mathcal O_{X_i}$. These ideals are coherent, and in particular of finite type and quasi-coherent, by the maximum-geometry condition. Importantly, the condition is applied to prefixes already compared; no comparison of their next stages is assumed.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.11--2.3.13, pp.93--94; intrinsic ideal clause of the conditional calculus"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-strict-transform-is-blowup] separately to $X_i\\hookrightarrow P_i$ and $Y_i\\hookrightarrow Q_i$, with their specified ambient center ideals. Their extensions to $X_i,Y_i$ are $I_i,J_i$, because the centers are specified closed subschemes of the strict transforms. The lemma identifies the given next strict transforms with $B_i=\\operatorname{Bl}_{I_i}(X_i)$ and $D_i=\\operatorname{Bl}_{J_i}(Y_i)$, compatibly with their transition maps. These are the scheme-theoretic strict transforms, so no inference from topological containment is being made. The centers are coherent by Step 3, meeting also the finite-presentation convention in the definition of strict transform.",
+   "uses": [
+    "thm-nagata-strict-transform-is-blowup",
+    "def-trf-admissible-embedded-history"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080E, lemma-strict-transform (1), with the morphism the closed immersion into the ambient scheme"
+   }
+  },
+  {
+   "text": "Let $p:B_i\\to X_i$ and $q:D_i\\to Y_i$ be their blowup maps. By [thm-nagata-blowup-principalizes-center], $I_i\\mathcal O_{B_i}$ and $J_i\\mathcal O_{D_i}$ are invertible ideals. Step 3 gives $J_i\\mathcal O_{B_i}=I_i\\mathcal O_{B_i}$ along $a_i p$. Use [thm-nagata-blowup-universal-property] with its canonical quotient onto this extended ideal to obtain $f_i:B_i\\to D_i$ with $qf_i=a_ip$. Apply it to $a_i^{-1}$ to obtain $g_i:D_i\\to B_i$. Both $g_if_i$ and $1_{B_i}$ lie over $X_i$ and induce the same canonical quotient onto $I_i\\mathcal O_{B_i}$, so uniqueness gives $g_if_i=1$; likewise $f_ig_i=1$. Conjugate $f_i$ by the identifications of Step 4 to define $a_{i+1}$. The equation $qf_i=a_ip$ supplies its transition square. Keep all previous components and ideal equalities; appending this one gives the next prefix comparison. An identity intrinsic blowup still contributes its recorded center and label.",
+   "uses": [
+    "thm-nagata-blowup-principalizes-center",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0804 and 0806, lemma-blowing-up-gives-effective-Cartier-divisor and lemma-universal-property-blowing-up; universal-lift construction applied in both directions"
+   }
+  },
+  {
+   "text": "Finite induction using Steps 2--5 constructs all components and proves $r=s$: if one length were smaller, Step 2 at that terminal prefix would force the other to stop there as well. Every corresponding center and label agrees. The strict-progress clause of [def-trf-resolution-invariant-calculus-data] makes consecutive positive maxima strictly decrease in $V$, hence the active labels strictly increase in $L$ and never repeat. Thus the constructed prefix comparison is the required label-preserving natural isomorphism of the finite strict-transform histories [def-trf-labeled-embedded-resolution]. It identifies local values and center ideals at each prefix by Steps 2--3. This induction uses the finiteness in the hypothesis; it does not assume $V$ well-founded or invoke the existence of a resolution algorithm.",
+   "uses": [
+    "def-trf-resolution-invariant-calculus-data",
+    "def-trf-labeled-embedded-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.1 and 2.3.11--2.3.13, pp.91,93--94; agent-written termination of the finite comparison induction"
+   }
+  },
+  {
+   "text": "For the identity initial isomorphism and the same history, its identity components are the constructed ones: inductively the next identity and the constructed map induce the same canonical quotient, so [thm-nagata-blowup-universal-property] identifies them. For two embeddings of the same $X$, use $a=1_X$ in Steps 1--6. For three histories write their components $a_i,b_i,c_i$, where $c$ starts at $ba$. At $i=0$, $c_0=b_0a_0$. If $c_i=b_ia_i$, both $c_{i+1}$ and $b_{i+1}a_{i+1}$ are maps from the same intrinsic blowup into the third intrinsic blowup over $b_ia_i$. Successive ideal extension sends its center ideal to the same extended ideal in the source, with the same canonical quotient: locally both operations send a section to its image and then multiply by source functions. Uniqueness gives equality at $i+1$. Induction proves the cocycle at every stage. Taking the three initial maps to be identities gives the change-of-embedding cocycle. This identifies the constructed comparisons; no assertion that every ideal-preserving diagram isomorphism is unique is needed.",
+   "uses": [
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0806, lemma-universal-property-blowing-up; agent-written identity and composition induction"
+   }
+  },
+  {
+   "text": "For the cartesian smooth ambient diagrams in the statement, [lem-trf-maximum-history-smooth-deletion] identifies each pulled-back history with its maximum history, retaining original labels and deleting exactly empty inverse-image centers. Its comparisons are cartesian on strict transforms and extend their center ideals. Let $a_i'$ be the pulled-back intrinsic isomorphism at a cut, with projections $u_i:X_i'\\to X_i$ and $v_i:Y_i'\\to Y_i$. Assuming the desired equality at this cut, the extended ideals satisfy $I_i'=I_i\\mathcal O_{X_i'}=(a_i')^*J_i'\\mathcal O_{X_i'}$: both sides are generated locally by the images of the same sections of $J_i$, since $v_i a_i'=a_i u_i$. Consequently emptiness of the two pulled-back centers agrees. At a retained label, the pulled-back next comparison and the comparison constructed for $a_i'$ both lie over $a_i'$ and induce the canonical quotient onto $I_i'\\mathcal O_{\\operatorname{Bl}_{I_i'}X_i'}$. By [thm-nagata-blowup-universal-property] they coincide. At a deleted label both transitions are the specified identities; omission leaves the equality intact. The initial equality is the assumed cartesian square, so induction proves compatibility at every retained label. Restriction is the open-immersion case of this same smooth pullback assertion.",
+   "uses": [
+    "lem-trf-maximum-history-smooth-deletion",
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0805 and 0806, lemma-flat-base-change-blowing-up and lemma-universal-property-blowing-up; ILO VIII 2.3.4--2.3.5 and 2.3.13, contracted smooth comparisons"
+   }
+  },
+  {
+   "text": "For a lower cut $D$ of $L$, let $k(D)$ be the number of common active labels in $D$. Assign to it the component $a_{k(D)}$ already constructed. If $D\\subseteq E$, the transition is the composite of the intervening finite-stage transitions, so its naturality square follows by composing their commuting squares. If no active label lies between the cuts, $k(D)=k(E)$ and this square is the identity square. Identity, composition, and pullback equalities at cuts are therefore the equalities at these components, already proved. Unit-ideal identity stages at absent labels are the convention of [def-trf-labeled-embedded-resolution]; they do not remove recorded earlier ideals. When the initial scheme is regular or empty, Step 2 applies at $i=0$, both lengths are zero, and every cut comparison is the given initial isomorphism. Thus all zero-length and empty-history cases are included.",
+   "uses": [
+    "def-trf-labeled-embedded-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.4--2.3.5, pp.91--92; explicit extension of the finite comparison to the lower-cut convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-admissible-embedded-history",
+  "def-trf-resolution-invariant-calculus-data",
+  "thm-nagata-strict-transform-is-blowup",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property",
+  "def-trf-labeled-embedded-resolution",
+  "lem-trf-maximum-history-smooth-deletion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.1, 2.3.4--2.3.5, 2.3.11--2.3.13; explicit conditional intrinsic-history induction using Stacks Tags 02OS (blowup principalizes the center), 0806 (universal property) and 080E (strict transform is a blowup)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-maximum-history-intrinsic-cocycle: Intrinsic invariant equality and center ideal equality extend to canonical comparisons of finite strict transform blowup histories with isomorphism and cocycle laws",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"leansearch\", \"query\": \"lem-trf-maximum-history-intrinsic-cocycle: Intrinsic invariant equality and center ideal equality extend to canonical comparisons of finite strict transform blowup histories with isomorphism and cocycle laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cocycle.ext_iff\", \"CochainComplex.HomComplex.Cocycle.ext\", \"groupCohomology.cocyclesMk₀_eq\", \"groupCohomology.cocyclesIso₀_inv_comp_iCocycles\", \"CategoryTheory.CatCenter.ext_iff\", \"groupCohomology.cocyclesIso₀\", \"CategoryTheory.CatCenter.localization.congr_simp\", \"CategoryTheory.Limits.CatCospanTransformMorphism.ext_iff\"], \"digest\": \"12a02cbcea2ba9d4\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-intrinsic-cocycle: Intrinsic invariant equality and center ideal equality extend to canonical comparisons of finite strict transform blowup histories with isomorphism and cocycle laws",
+   "results": "{\"t\": \"2026-10-22T06:09:45Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-intrinsic-cocycle: Intrinsic invariant equality and center ideal equality extend to canonical comparisons of finite strict transform blowup histories with isomorphism and cocycle laws\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.mk.inj\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk.inj\", \"AlgebraicGeometry.Scheme.AffineCover.mk.inj\", \"StandardEtalePresentation.mk.inj\", \"AlgebraicGeometry.ValuativeCommSq.mk.inj\", \"AlgebraicGeometry.Scheme.GlueData.mk.inj\", \"StandardEtalePair.mk.inj\", \"WeierstrassCurve.VariableChange.ext\"], \"digest\": \"5bd24f529f1837f7\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-intrinsic-cocycle: Extend an isomorphism of reduced schemes to maximum center histories in two smooth ambient embeddings by intrinsic blowups of equal ideals, functorially",
+   "results": "{\"t\": \"2026-10-22T06:10:33Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-intrinsic-cocycle: Extend an isomorphism of reduced schemes to maximum center histories in two smooth ambient embeddings by intrinsic blowups of equal ideals, functorially\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IsLocallyDirected.fst_inv_eq_snd_inv\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued\", \"AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι\", \"AlgebraicGeometry.Scheme.Cover.instIsIsoCommRingCatStalkMapFromGlued\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq_hom_fac\", \"AlgebraicGeometry.IsOpenImmersion.isoOfRangeEq\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjCarrierIso\"], \"digest\": \"a5febeb331391612\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone",
+   "results": "{\"t\": \"2026-10-22T06:09:34Z\", \"tool\": \"grep\", \"query\": \"desingulari[sz]|maximum.stratum|embedded.*resolution|Bierstone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: read the returned signatures; generic order chains, smoothness, affine limits, gluing and closed-immersion comparisons do not realize or compare maximum-center embedded blowup histories with their labeled ideals"
+  },
+  {
+   "tool": "grep",
+   "query": "maximum.history|intrinsic.*cocycle|resolution.*invariant|blowup.*[Ii]so",
+   "results": "{\"t\": \"2026-10-23T09:39:47Z\", \"tool\": \"grep\", \"query\": \"maximum.history|intrinsic.*cocycle|resolution.*invariant|blowup.*[Ii]so\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/LowDegree.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean\"], \"digest\": \"8d86b08f600467a0\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: returned signatures concern open-cover cocycles, ordinary embeddings, uniform-space completions, smooth ring maps, or group (co)homological resolutions; none states maximum-center embedded resolution histories or their intrinsic blowup comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical intrinsic comparisons of maximum-center embedded resolution histories preserve invariant labels and satisfy composition",
+   "results": "{\"t\": \"2026-10-23T09:39:47Z\", \"tool\": \"leansearch\", \"query\": \"Canonical intrinsic comparisons of maximum-center embedded resolution histories preserve invariant labels and satisfy composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AbstractCompletion.compare_coe\", \"Function.Embedding.instTrans\", \"SimpleGraph.Embedding.comp\", \"AbstractCompletion.inverse_compare\", \"CategoryTheory.MorphismProperty.TransfiniteCompositionOfShape.ofOrderIso\", \"ComplexShape.instIsRelIffNatIntEmbeddingUpNat\", \"AlgebraicGeometry.IsImmersion.comp\", \"CategoryTheory.ObjectProperty.instIsStableUnderTransfiniteCompositionIsLocal\"], \"digest\": \"b41214814b812ee8\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: returned signatures concern open-cover cocycles, ordinary embeddings, uniform-space completions, smooth ring maps, or group (co)homological resolutions; none states maximum-center embedded resolution histories or their intrinsic blowup comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "{\"t\": \"2026-10-23T09:39:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: returned signatures concern open-cover cocycles, ordinary embeddings, uniform-space completions, smooth ring maps, or group (co)homological resolutions; none states maximum-center embedded resolution histories or their intrinsic blowup comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-intrinsic-cocycle: An isomorphism of reduced schemes canonically compares admissible maximum-center resolution histories by intrinsic blowups and the comparisons satisfy a cocycle",
+   "results": "{\"t\": \"2026-10-23T09:39:56Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-intrinsic-cocycle: An isomorphism of reduced schemes canonically compares admissible maximum-center resolution histories by intrinsic blowups and the comparisons satisfy a cocycle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_snd\", \"AlgebraicGeometry.Scheme.Cover.glued_cover_cocycle_fst\", \"AlgebraicGeometry.Scheme.Pullback.cocycle\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_snd\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_snd_snd\", \"AlgebraicGeometry.Scheme.Pullback.cocycle_fst_fst_snd\"], \"digest\": \"4bd452c4440af91d\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: returned signatures concern open-cover cocycles, ordinary embeddings, uniform-space completions, smooth ring maps, or group (co)homological resolutions; none states maximum-center embedded resolution histories or their intrinsic blowup comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-maximum-history-intrinsic-cocycle: Functorial lifting of isomorphisms through a finite sequence of blowups with equal transported center ideals, compatible with smooth base change",
+   "results": "{\"t\": \"2026-10-23T09:39:58Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-maximum-history-intrinsic-cocycle: Functorial lifting of isomorphisms through a finite sequence of blowups with equal transported center ideals, compatible with smooth base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"RingHom.isStandardSmoothOfRelativeDimension_respectsIso\", \"RingHom.isStandardSmooth_respectsIso\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp_assoc\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient_comp\"], \"digest\": \"dec20455ad78f102\"}",
+   "date": "2026-10-23",
+   "verdict": "No match: returned signatures concern open-cover cocycles, ordinary embeddings, uniform-space completions, smooth ring maps, or group (co)homological resolutions; none states maximum-center embedded resolution histories or their intrinsic blowup comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-embedded-resolution-ambient-comparison",
+  "date": "2026-10-22",
+  "group": "Q74"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Refinement in this split: Expose VIII, Theorem 2.3.10 restricted to finite-type Q-schemes, with tower conventions 2.1.4, 2.3.1, 2.3.4 and Remark 2.3.5(i), printed pp.87,91--93. This is ordinary resolution, not the normalized toric conclusion; no Stacks tag states this characteristic-zero resolution theorem. Lower input: embedded characteristic-zero resolution and invariant synchronization discussed in ILO VIII 2.3.11 and 2.3.13; the intrinsic gluing argument is supplied in this item. Re-split of lem-trf-embedded-resolution-ambient-comparison, old Steps 5 and 7: intrinsic blowup induction, transport by isomorphisms, and the cocycle.",
+   "via": [
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-trf-smooth-functorial-ordinary-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-maximum-history-intrinsic-cocycle",
+  "worker": "stage1",
+  "summary": "Checked the exact invariant-calculus and history interfaces, and split the conditional comparison into an explicit finite prefix induction, intrinsic blowup lifting, quotient-based identity/cocycle induction, smooth-deletion compatibility, and lower-cut assembly. Reused existing geometric nodes; no new node or Lean declaration. Statement unchanged.",
+  "blueprint": "Historical nearby-duality/alteration branch recorded in blueprint.from: lem-trf-local-term-locality old proof (1)--(2), through ambient-comparison old Steps 5 and 7. Current latest blueprint instead uses contracting correspondences; this delivery only splits the assigned historical supporting lemma and changes no chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-strict-transform-is-blowup",
+    "why": "Generic identification of a scheme-theoretic strict transform with the blowup in the extended ideal; the resolution unit supplies no replacement."
+   },
+   {
+    "node": "thm-nagata-blowup-principalizes-center",
+    "why": "Generic principalization of the center on a blowup supplies the invertible ideal required for the universal lift."
+   },
+   {
+    "node": "thm-nagata-blowup-universal-property",
+    "why": "Generic existence and uniqueness of blowup lifts gives each intrinsic stage comparison and its identity, cocycle and pullback equations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-strict-transform-is-blowup",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-3d6242b92",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-3d6242b92 (reviewer sub-agent of L); spot-checked: First split of a statement-only node: 9 steps, no new nodes, statement unchanged, no re-split note applies. I read all steps and every cited statement, using the blueprint_update forms of the three generic Nagata blowup nodes. The mathematics is sound. (1) Prefixes of the histories are admissible by the definition's least class. (2) The calculus's intrinsic-value clause plus ν=⊥ iff regular gives simultaneous stopping and equal maxima and labels. (3) The intrinsic-ideal clause gives I_i=a_i^*J_i·O, applied only to the comparison already built, so there is no circularity. (4) strict-transform-is-blowup applies because 𝒞·O_{X_i} is the ideal of the center, since the center lies in X_i. (5) Principalization plus uniqueness in the universal property give inverse lifts, because g f and 1 both lie over X_i. (6) Strict progress gives strictly increasing labels. (7) The identity and the cocycle follow by uniqueness over b_i a_i. (8) The smooth-deletion statement supplies the cartesian identifications, extended ideals and identity stages that the uniqueness argument needs, and the deleted labels agree because I'_i=(a'_i)^*J'_i; restriction is the open-immersion case, which the definition includes. (9) Lower cuts work because the active labels form initial segments. Edge cases checked: empty, regular, one step, disjoint union, identity blowup, open restriction missing the centers. No duplicate node found (rg -L over dag/nodes). The ILO VIII 2.3.1–2.3.15 source (pp.91–94) is background only, so proof_origin agent is right. No SGA. The generic Nagata tool_uses in split_report are accepted. FIX: proof_origin.place cited Stacks 0804 (affine blowup charts) and 0805 (flat base change), which no step uses, and the report misnamed 0804 as the Cartier-divisor lemma, which is 02OS. Corrected to 02OS, 0806, 080E in fixes/dag/nodes/sec-trace-formula/lem-trf-maximum-history-intrinsic-cocycle.json; no other field changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.MaximumHistoryIntrinsicCocycle",
+  "declaration": "AlgebraicGeometry.exists_maximum_history_intrinsic_cocycle",
+  "file": "lean/Sheaf/AlgebraicGeometry/MaximumHistoryIntrinsicCocycle.lean",
+  "statement": "theorem exists_maximum_history_intrinsic_cocycle {V : Type w} [LinearOrder V] [OrderBot V] (ν : ResolutionInvariantCalculus.{u} V) : ∃ c : ∀ {A B : EmbeddedResolutionPair.{u}} (H : FiniteMaximumLabeledHistory ν A) (K : FiniteMaximumLabeledHistory ν B) (e : A.X ≅ B.X), LabeledEmbeddedResolutionIntrinsicComparison e H.tower K.tower, (∀ {A B : EmbeddedResolutionPair.{u}} (H : FiniteMaximumLabeledHistory ν A) (K : FiniteMaximumLabeledHistory ν B) (e : A.X ≅ B.X), H.length = K.length ∧ (∀ (D : LowerSet (OrderDual {v : V // v ≠ ⊥})) (x : H.tower.intrinsic.obj (op D)), H.valueAtCut D x = K.valueAtCut D (((c H K e).iso.app (op D)).hom x)) ∧ ∀ l ∈ H.tower.labels, IsIntrinsicBlowupHistoryComparison (c H K e) l) ∧ (∀ {A : EmbeddedResolutionPair.{u}} (H : FiniteMaximumLabeledHistory ν A), (c H H (Iso.refl A.X)).iso = Iso.refl H.tower.intrinsic) ∧ (∀ {A B C : EmbeddedResolutionPair.{u}} (H : FiniteMaximumLabeledHistory ν A) (K : FiniteMaximumLabeledHistory ν B) (M : FiniteMaximumLabeledHistory ν C) (e : A.X ≅ B.X) (f : B.X ≅ C.X), (c H M (e ≪≫ f)).iso = (c H K e).iso ≪≫ (c K M f).iso) ∧ (∀ {A B A' B' : EmbeddedResolutionPair.{u}} (H : FiniteMaximumLabeledHistory ν A) (K : FiniteMaximumLabeledHistory ν B) (H' : FiniteMaximumLabeledHistory ν A') (K' : FiniteMaximumLabeledHistory ν B') (f : EmbeddedResolutionSmoothMap A' A) (g : EmbeddedResolutionSmoothMap B' B) (e : A.X ≅ B.X) (e' : A'.X ≅ B'.X) (p : LabeledEmbeddedResolutionPullback f H'.tower H.tower) (q : LabeledEmbeddedResolutionPullback g K'.tower K.tower), IsPullback e'.hom f.intrinsic g.intrinsic e.hom → (c H' K' e').iso.hom ≫ q.intrinsic = p.intrinsic ≫ (c H K e).iso.hom)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-24",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.IsIntrinsicBlowupHistoryComparison",
+   "AlgebraicGeometry.exists_maximum_history_intrinsic_cocycle"
+  ],
+  "fixed_by": "NT-stage2-cc-20e3f3872"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20e3f3872",
+  "group": "Q34",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and the deps (LabeledEmbeddedResolutionTower/Pullback/IntrinsicComparison, history Extension/IsMaximumStep/Admissible, ResolutionInvariantCalculus): equal lengths, valueAtCut equality on all cuts, labels and ideal comap via the comparison structure, IsIntrinsicBlowupHistoryComparison (non-vacuous, unique lift), identity, cocycle, cartesian smooth pullback (true by flatness and the 0806 uniqueness); no stronger hypotheses; edge cases (empty or regular input, V={⊥}, all labels deleted, identity blowups) covered. New def node def-trf-finite-maximum-labeled-history matches its statement, is not hollow, no duplicate found, and is cited as a stmt_dep. Records verbatim; item statement unchanged from live. FIX: the item module docstrings cited Stacks 0804 (affine blowup charts) for invertibility of the extended center (step 5, header, theorem docstring), which is 02OS, the same error Q60 fixed in proof_origin; corrected to 02OS in fixes/lean/Sheaf/AlgebraicGeometry/MaximumHistoryIntrinsicCocycle.lean, no declaration change; nt_compile --json with the sibling module: 16.8 s and 9.0 s, exit 0, clean."
+ }
+}

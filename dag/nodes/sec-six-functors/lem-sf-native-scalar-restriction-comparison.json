@@ -1,0 +1,119 @@
+{
+ "id": "lem-sf-native-scalar-restriction-comparison",
+ "kind": "statement",
+ "title": "Normalized native module comparison commutes with restriction",
+ "statement": "Let ell be prime, let theta_X identify the condensed finite-subextension coefficient ring R_X with the underlying abelian native coefficient algebra B_X by [lem-sf-locally-finite-coefficient-ring-realization], and let E_X be native scalar forgetting followed by restriction of scalars along theta_X. For every scheme morphism h:S to T there is a natural isomorphism h_native^* followed by E_S is isomorphic to E_T followed by h_condensed^*. The ordinary target here is the existing category of internal abelian modules over R_X; no immersion or finite-type assumption on h is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CW, 03CY and 03EK; agent internal-action and adjunction comparison, native module comparison step 4"
+ },
+ "stmt_deps": [
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "def-sf-native-weil-derived-framework",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof": [
+  {
+   "text": "Direct image of native scalar sheaves commutes strictly with forgetting scalars, by its existing monoidal comparison. Apply mapModCompIso and mapModComapIso and collapse successive scalar restrictions with comapComp. The resulting coefficient maps are equal by the direct-image naturality clause of theta. Thus native direct image followed by E_T is naturally isomorphic to E_S followed by condensed direct image.",
+   "uses": [
+    "lem-sf-locally-finite-coefficient-ring-realization",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Each E_X is an equivalence by ambient scalar forgetting and scalar change along the ring isomorphism theta_X. Use the adjunctions E_X inverse left adjoint to E_X, together with the two inverse-image/direct-image adjunctions. Conjugating the direct-image isomorphism gives condensed inverse image followed by E_S inverse isomorphic to E_T inverse followed by native inverse image. Whisker with E_T and E_S and cancel the equivalence unit and counit to obtain the claimed comparison.",
+   "uses": [
+    "lem-sf-native-scalar-forgetting-equivalence",
+    "def-sf-native-weil-derived-framework"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-locally-finite-coefficient-ring-realization",
+  "sk-def-sfb-module-objects",
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "def-sf-native-weil-derived-framework"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CW, 03CY and 03EK; agent internal-action and adjunction comparison, native module comparison step 4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Modules over an algebra in sheaves of vector spaces equal modules over its underlying ring sheaf",
+   "results": "SheafOfModules, SheafOfModules.toSheaf and Scheme.Modules describe sectionwise modules; none compares ambient scalar-enriched internal modules.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal modules over a sheaf of algebras in vector spaces are equivalent to modules over its underlying sheaf of abelian groups",
+   "results": "SheafOfModules.toSheaf, forget, unit and forgetToSheafModuleCat. No internal scalar-forgetting equivalence or normalized coefficient restriction comparison.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*IsEquivalence|forget.*[Ee]quivalence.*[Mm]od",
+   "results": "Only ModuleCat Z to AddCommGrpCat equivalence in Mathlib/Algebra/Category/Grp/Injective.lean:52. Project mapMod and change-of-scalars APIs supply component constructions, not these comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeModuleConstructibilityComparison",
+  "date": "2026-10-25",
+  "group": "Z7"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Internal-Hom realization paragraph of lem-fix-weil-operations; native module comparison step 4",
+   "via": [
+    "lem-sf-weil-verdier-module-constructibility-comparison",
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeScalarRestrictionComparison",
+  "file": "lean/Sheaf/Paper/NativeScalarRestrictionComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeScalarForgetting_pullbackIso",
+  "statement": "theorem nativeScalarForgetting_pullbackIso (ℓ : ℕ) [Fact ℓ.Prime]\n    {S T : Scheme.{u}} (h : S ⟶ T) :\n    let θ := (locallyFiniteCoefficientRing_realization ℓ).choose\n    letI (X : Scheme.{u}) : IsMonHom (θ X).hom :=\n      (locallyFiniteCoefficientRing_realization ℓ).choose_spec.1 X\n    Nonempty (adicUpperStar ℓ h ⋙ AdicSheaf.forgetAb ℓ S ⋙ Mod.comap (θ S).hom ≅\n      AdicSheaf.forgetAb ℓ T ⋙ Mod.comap (θ T).hom ⋙\n        CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ) h)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6325a",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T043435-L-1768238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-6325a",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T043435-L-1768238",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new modules/nodes vs clone 939ea7ddad9: statements/bodies unchanged except the main sorry→proof; unit realized empty so CartesianCoefficients drop bypasses nothing; axioms of the main theorem clean; 4 direct importers compile against the delivered modules"
+ }
+}

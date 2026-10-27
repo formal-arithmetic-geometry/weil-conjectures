@@ -13,44 +13,54 @@
  },
  "proof": [
   {
-   "text": "Replace each site by an equivalent small model in universe max(s,h). Reindex ring sheaves, module sheaves and the algebraic inverse-image presentation along these equivalences. The equivalences preserve the adjunction, finite limits and the specified object and morphism equations for scalar extension. Equivalence of sheaf categories transports all sectionwise operation graphs and pure-pairing equations.",
-   "uses": [],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2, 03D7, 03EK and 03EL"
-   }
-  },
-  {
-   "text": "On the models, use the normalized algebraic inverse-image tensor comparison and the scalar-extension tensor comparison. Compose their isomorphisms with the object identifications defining T. Define q by scalar-extension insertion followed by the inverse object identification; the map equations give naturality. On pure sections both comparisons send the inserted pure tensor to the corresponding tensor of inserted sections, which is exactly the required generalized normalization. Transport this construction back to the original sites.",
+   "text": "Use the existing independently sized normalizedTensorator_exists construction, with its specified scalarInsertion. Assemble the common five-field comparison record; insertion is definitionally the prescribed sheafification of 1 tensor m. The shared-size interface abbreviates this common record at coefficient universe max(s,h).",
    "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "lem-weil-pbc-scalar-extension-tensor-comparison"
+    "lem-pur-independent-ringed-tensorator-existence",
+    "def-weil-pbc-canonical-ringed-tensor-comparison"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+    "place": "Tag 03EL and Section 03EK; the balanced tensor and sheafification universal properties."
    }
   },
   {
-   "text": "The equation on inserted 1 tensor m fixes each q. To compare two tensor isomorphisms, test their maps on generalized pure tensors: finite-product preservation transports the two factors, and sheafification of the balanced tensor presentation makes these tests jointly epimorphic. Thus the hom maps agree. Their inverses are then equal, and proof irrelevance identifies the remaining fields. This proves the stated Subsingleton together with existence.",
-   "uses": [],
-   "elementary": false,
+   "text": "The insertion normalization determines q sectionwise. For the tensorator, use the universal generalized pair of sections and preservation of binary products to apply the pure-tensor formula to every pair of inverse-image sections. Applying inverse tensorators identifies their values on inserted pure tensors. Scalar-extension and sheafification universal properties show those tensors generate. Thus mu agrees, and proof irrelevance identifies the remaining fields.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D2, 03D7, 03EK and 03EL"
+    "place": "Tag 03EL and Section 03EK; the balanced tensor and sheafification universal properties."
+   }
+  },
+  {
+   "text": "For the accompanying unit normalization, construct the inverse-image rank-one module isomorphism from the given ring and module underlying isomorphisms and their action compatibility. Construct the scalar-extension unit isomorphism by sectionwise scalar multiplication followed by module sheafification. Transport along hobj and hmap using the specified natural scalar-extension presentation. The pure formula with the second module the coefficient ring proves the right-unitor equation on scalar-extension generators; sheafification extends it to all sections. The equation at the coefficient module determines the unit isomorphism uniquely by tensor-unit cancellation. These proofs are private helpers with independent site and coefficient universes, specialized in the public theorems.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL and Section 03EK; the balanced tensor and sheafification universal properties."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-  "lem-weil-pbc-scalar-extension-tensor-comparison"
+  "lem-pur-independent-ringed-tensorator-existence",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-algebraic-inverse-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL and Section 03EK; transport along equivalent small sites preserves the normalized tensor construction and its uniqueness."
+  "place": "Tag 03EL and Section 03EK. Reuse the existing independently sized tensorator construction, prove uniqueness on inserted pure tensors, and construct the normalized unit from the rank-one module and sectionwise scalar multiplication followed by sheafification."
  },
  "mathlib_searches": [
   {
@@ -116,10 +126,14 @@
  },
  "lean_audit": {
   "master": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   },
   "slopmaster2": {
-   "state": "none"
+   "state": "none",
+   "decls": [],
+   "missing": []
   }
  },
  "reviewed": {
@@ -133,13 +147,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-21",
+  "date": "2026-10-26",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F1",
-  "result": "pass",
-  "landing": "20261021T193149-L-938028",
+  "reviewer": "C-97d77",
+  "group": "H7",
+  "result": "fix",
+  "landing": "20261026T100301-L-4171286",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered item + node vs published clone; item compiled against published RingedTopoiTensorComparisonData; 3 failing importers vs their published compiles"
  }
 }

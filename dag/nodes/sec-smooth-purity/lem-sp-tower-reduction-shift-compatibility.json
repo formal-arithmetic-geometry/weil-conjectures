@@ -1,0 +1,257 @@
+{
+ "id": "lem-sp-tower-reduction-shift-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "tower-geometric gamma proof (1): 'a map of tower sheaves after removing the shift'; compatibility of the canonical reduction maps with the shift removed in lem-sp-strict-line-heart-assembly step 3",
+   "via": [
+    "lem-sp-strict-line-heart-assembly",
+    "det-sp-tower-gamma"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Canonical tower reductions commute with shifts",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a scheme $T$. Put $R_n=(\\mathcal O_E/\\ell^n)_T$ for $n\\geq1$. Use the strict semilinear coefficient towers $\\operatorname{Tow}(T,\\mathcal O_E)$ [sk-def-sp-coefficient-towers], their ordinary derived category $D(\\operatorname{Tow}(T,\\mathcal O_E))$ with its shift [def-weil-abstract-derived-category], the exact evaluations $C\\mapsto C_n$ and the canonical derived reduction maps $\\rho^C_{n,m}:(C_n)_{R_m}\\to C_m$, $m\\leq n$, of [det-sp-coefficient-towers-abelian], and derived scalar extension $(-)_{R_m}:D(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^n)\\to D(T_{\\mathrm{proét}},\\mathcal O_E/\\ell^m)$ [det-sp-scalar-extension-functor]. For $r\\in\\mathbf Z$ let $\\epsilon_{n,r}(C):(C[r])_n\\xrightarrow{\\sim}C_n[r]$ be the shift comparison of the exact evaluation [lem-sf-exact-functor-derived-triangulated], and let $\\sigma_r(M):(M[r])_{R_m}\\xrightarrow{\\sim}M_{R_m}[r]$ be the shift comparison of the triangulated functor $(-)_{R_m}$. Then for every $C\\in D(\\operatorname{Tow}(T,\\mathcal O_E))$, every $r\\in\\mathbf Z$ and all $m\\leq n$,\n$$\\epsilon_{m,r}(C)\\circ\\rho^{C[r]}_{n,m}=\\rho^C_{n,m}[r]\\circ\\sigma_r(C_n)\\circ(\\epsilon_{n,r}(C))_{R_m}.$$\nNo flatness of $R_m$ over $R_n$, boundedness or constructibility is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "(1), 'a map of tower sheaves after removing the shift' (the reduction maps of the shifted tower are the shifted reduction maps)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sp-coefficient-towers",
+  "def-weil-abstract-derived-category",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-scalar-extension-functor",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact evaluation functors F_n and F_m and the ordinary natural reduction alpha supplied by det-sp-coefficient-towers-abelian. Its reduction_rep field already gives the representative formula on every complex: rho(QK)=S(p_n(K)) followed by epsilon(F_n K), Q(alpha_K), and p_m(K) inverse. No additional derived Hom comparison is needed at this stage.",
+   "uses": [
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU (lemma-derived-shift), with sites-cohomology.tex Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); explicit compatibility calculation for the blueprint tower orientation"
+   }
+  },
+  {
+   "text": "For any additive functors F,H,G and natural transformation alpha:F composed with H to G, its termwise cochain transformation commutes with every integer shift. The mapHomologicalComplex shift comparisons have identity components. In degree j both sides are alpha at K^(j+r), and the two differentials have the same shift sign. This calculation applies to the ordinary reduction without using its tensor formula.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU (lemma-derived-shift), with sites-cohomology.tex Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); explicit compatibility calculation for the blueprint tower orientation"
+   }
+  },
+  {
+   "text": "Apply rightKanExtension_coherentShift to the actual scalar cochain universal pair. Its chosen coherent shift is definitionally spTowerScalarShift, and choose_spec says its universal counit epsilon commutes with shifts. Whisker the evaluation factorization, epsilon and the termwise reduction, insert the standard functor associators, and compose them with the inverse evaluation factorization. All these natural transformations commute with shifts. The representative formula identifies this composite with precomposition of rho by Q.",
+   "uses": [
+    "lem-pur-right-kan-extension-coherent-shift",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "det-sp-coefficient-towers-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU (lemma-derived-shift), with sites-cohomology.tex Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); explicit compatibility calculation for the blueprint tower orientation"
+   }
+  },
+  {
+   "text": "To descend shift compatibility, apply localization natTrans_ext to the two shift-square natural transformations. On QK, the shift-compatible precomposition from the preceding step gives the desired square after precomposing with F(S(Q shift comparison)). Naturality of rho gives that precomposition, and its isomorphism can be cancelled. Thus rho commutes with shifts on all derived objects. Expand the composite functor shift comparison and take the component at C to obtain exactly the displayed equation. No universal comparison is inverted.",
+   "uses": [
+    "def-sfb-left-derivability-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU (lemma-derived-shift), with sites-cohomology.tex Tags 06YY (lemma-derived-base-change) and 07A6 (lemma-adjoint); explicit compatibility calculation for the blueprint tower orientation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-pur-right-kan-extension-coherent-shift",
+  "lem-pur-derived-change-of-rings",
+  "def-sfb-left-derivability-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05SU, lemma-derived-shift; W9 Lean proof from the existing reduction_rep normalization, degreewise cochain shifts, coherent right Kan shifts, and faithful localization precomposition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "commShift.*(reduction|extendScalars)|extendScalars.*CommShift in Mathlib/ (recursive), and NatTrans.CommShift in Mathlib/CategoryTheory/Shift/CommShift.lean",
+   "results": "no file for the first pattern; NatTrans.CommShift (CommShift.lean lines 282-359) is only the general notion of a shift-compatible natural transformation, not this statement about tower reductions",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived scalar extension reduction maps of strict semilinear towers commute with integer shifts",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalarsComp, CategoryTheory.Abelian.Ext.smul_comp, ModuleCat.ExtendScalars.map'_comp. Read the returned hits; they concern ordinary module extension, general shift-compatible transformations or derived-functor comparisons and do not identify the canonical reductions of strict sheaf towers.",
+   "date": "2026-10-23",
+   "verdict": "no match for this item; generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, CategoryTheory.Adjunction",
+   "results": "4 hits: CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.CommShift.commShift_unit, CategoryTheory.Adjunction.CommShift.mk', CategoryTheory.Adjunction.CommShift.mk. Read the returned hits; they concern ordinary module extension, general shift-compatible transformations or derived-functor comparisons and do not identify the canonical reductions of strict sheaf towers.",
+   "date": "2026-10-23",
+   "verdict": "no match for this item; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "reduction.*[Ss]hift|[Ss]hift.*reduction|NatTrans.CommShift",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/SmallShiftedHom.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean, Mathlib/CategoryTheory/Triangulated/Functor.lean. Read the returned hits; they concern ordinary module extension, general shift-compatible transformations or derived-functor comparisons and do not identify the canonical reductions of strict sheaf towers.",
+   "date": "2026-10-23",
+   "verdict": "no match for this item; generic ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings canonical transition maps of inverse systems commute with shifts",
+   "results": "8 hits: CategoryTheory.NatTrans.CommShift.shift_comm, CategoryTheory.Functor.commShiftMapCochainComplex, CategoryTheory.Equivalence.commShiftInverse, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.NatTrans.CommShift, CategoryTheory.NatTrans.CommShift.of_iso_symm, CategoryTheory.shiftFunctorComm. Read the returned hits; they concern ordinary module extension, general shift-compatible transformations or derived-functor comparisons and do not identify the canonical reductions of strict sheaf towers.",
+   "date": "2026-10-23",
+   "verdict": "no match for this item; generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift.*[Cc]ounit|[Cc]ounit.*commShift|mapDerivedCategoryNatTrans|natTrans_ext",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Preadditive.lean, Mathlib/CategoryTheory/Localization/Preadditive.lean, Mathlib/CategoryTheory/Center/Localization.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Trifunctor.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean. Read the returned hits; they concern ordinary module extension, general shift-compatible transformations or derived-functor comparisons and do not identify the canonical reductions of strict sheaf towers.",
+   "date": "2026-10-23",
+   "verdict": "no match for this item; generic ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functor comparison natural transformation from derived tensor to ordinary tensor is compatible with shifts and localization",
+   "results": "8 hits: CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Functor.leftDerivedNatTrans_app, CategoryTheory.Functor.leftDerivedNatTrans_comp, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Functor.leftDerivedNatTrans_fac, CategoryTheory.Functor.leftDerivedNatTrans_fac_assoc. Read the returned hits; they concern ordinary module extension, general shift-compatible transformations or derived-functor comparisons and do not identify the canonical reductions of strict sheaf towers.",
+   "date": "2026-10-23",
+   "verdict": "no match for this item; generic ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-strict-line-heart-assembly",
+  "date": "2026-10-22",
+  "group": "Q146"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sp-tower-reduction-shift-compatibility",
+  "worker": "stage1",
+  "summary": "Retained the statement and all six statement dependencies. Proved the precise shift square using the normalized derived Hom representative equation, an explicit degreewise linearization calculation, the existing counit-normalized scalar shift theorem and faithful localization precomposition. Searched the live project, whole DAG, blueprint and Mathlib; no attachment and no new nodes are required. All cited statements were read and quoted in citations.json.",
+  "blueprint": "Realizes the tower orientation's 'a map of tower sheaves after removing the shift' in det-sp-tower-gamma (1), through lem-sp-strict-line-heart-assembly step 3 and the integral purity source comparison of det-sp-integral-adjunction-bijection, current blueprint Purity paragraph.",
+  "tool_uses": [
+   {
+    "node": "def-coef-semilinear-system-models",
+    "why": "Defines the actual horizontal transition and its normalized derived scalar adjunct; this is a generic strict-system construction, not an alternative geometric route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Provides the shift-compatible exact-evaluation factorization on complexes, needed to compare the displayed canonical evaluation shifts."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-hom-comparison",
+    "why": "Identifies the derived adjunct of the ordinary linearized transition preceded by the universal comparison, fixing the actual reduction map."
+   },
+   {
+    "node": "sk-def-sp-coefficient-towers",
+    "why": "Provides the actual strict semilinear transitions used in the degreewise calculation."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Fixes the cochain shifts, signs and localization convention."
+   },
+   {
+    "node": "lem-pur-coefficient-scalar-shifts",
+    "why": "Provides coherent integer scalar shifts normalized by the universal comparison for arbitrary coefficient maps; the integral-adjunction unit has no replacement for this generic compatibility."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Provides the universal unbounded K-flat scalar-extension presentation without a flatness hypothesis."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Provides the canonical natural reduction maps on the ordinary derived tower category."
+   },
+   {
+    "node": "def-sfb-left-derivability-structure",
+    "why": "Provides the fully faithful precomposition property of localization used to descend the equality of natural transformations."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "det-sp-coefficient-towers-abelian",
+  "def-sfb-left-derivability-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-5d86fb0c8",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-5d86fb0c8 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged; 6 stmt_deps), all 4 steps and every cited statement. Delivery shape: one commit, no new nodes, not superseded (unsplit on live and side-live), no re-split note, no SGA cited. Statement: the reductions F∘ev_n⇒ev_m are shift-compatible. This is true and is exactly what parent lem-sp-strict-line-heart-assembly step 2 uses, with r=-s. Small cases checked: r=0, m=n (unitor), r=±1 (sign of -d), and the non-flat quotient Z/ℓ²→Z/ℓ (λ is never inverted). Step 1: transpose definition (def-coef-semilinear-system-models) plus the homEquiv formula of lem-pur-sheaf-ring-derived-hom-comparison and injectivity give p_m ρ=Q_m(q_K)λF(p_n); this matches the reduction_rep in the proof of det-sp-coefficient-towers-abelian. Step 2: the degreewise linearization calculation is correctly elementary. Step 3: lem-pur-coefficient-scalar-shifts gives the counit-normalized CommShift for any universal scalar pair, so a singleton family is fine. That shift is unique by the Kan property, so it is the statement's σ_r. The factorization lemma (2) gives p^{K[r]}=p[r]ε. I checked the 3-line display: naturality of σ at p_n, then Step 1 shifted, then cancel p_m[r]. Step 4: both sides are natural, and def-sfb-left-derivability-structure (precomposition with a localization is fully faithful) descends the equality. Cited sources checked: Stacks 05SU/09T5/06YY/07A6 and blueprint main-20261015 gamma proof (1). proof_deps equals the union of uses; no cycle; no merged ids. I accept all 9 tool_uses as generic tools. No duplicate found (nearest are the R⊣L shift nodes of sk-thm-sf-compatibility, a different object). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerReductionShiftCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_reduction_shift_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTowerScalarShift",
+   "AlgebraicGeometry.ProEtale.SpTowerReductionShiftCompatibility",
+   "AlgebraicGeometry.ProEtale.sp_tower_reduction_shift_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/TowerReductionShiftCompatibility.lean",
+  "statement": "theorem sp_tower_reduction_shift_compatibility (D : SpCoefficientTowersAbelian l E T) : SpTowerReductionShiftCompatibility l E T D",
+  "branch": "sheaf-dag",
+  "by": "Q43",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The transparent proposition spells out the displayed square using the existing ordinary derived tower category, exact evaluations and canonical reduction. Its scalar shift is determined by the actual universal cochain comparison, using coherent right Kan shift transport. Independent site and coefficient universes are retained, with no flatness, boundedness or constructibility assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa0c97218",
+  "group": "Q43",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause. The reduction maps come from the recorded tower presentation D, pinned by reduction_rep and ordinaryReduction_eq; the shift comparisons of the exact evaluations are Mathlib's canonical ones. The scalar shift σ is the counit-normalized shift from rightKanExtension_coherentShift; the right Kan property makes the witness unique, and the model's own shift is only existential. I checked the composition order of the square arrow by arrow. The statement quantifies over all C, all integer r and all m≤n, with index k meaning level k+1. There is no flatness, boundedness or constructibility assumption, and the site and coefficient universes stay independent. Only the lean field of the node changed, the statement field is verbatim, the only sorry is the theorem's proof, docstrings and both report sections are present, and the instance-attribute bracket follows the tower modules' convention. No duplicate owner was found. Advisory: det-sp-scalar-extension-functor's recorded scalarExtensionFunctor is single-universe and cannot be composed with the reduction maps, so the statement correctly uses the reduction dependency's own scalar model. No compile was run because no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261025T144307-L-1224769",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

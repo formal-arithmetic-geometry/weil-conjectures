@@ -25,123 +25,49 @@
    }
   },
   {
-   "text": "Apply eventual flatness with $A_i=R_i$, $B_i=S_i$ and target module $N_i$. Step 1 supplies Noetherian local stages, finite modules, local commuting transitions, the transition localizations, module base-change isomorphisms and algebraic colimits (in particular preservation of the base colimit by forgetting to sets); the limit module $N$ is $R$-flat by hypothesis. Thus some $N_{i_1}$ is $R_{i_1}$-flat. For every $j\\ge i_1$, apply localized-base-change quotient flatness with $I=0$, $(R,S,R',S')=(R_{i_1},S_{i_1},R_j,S_j)$ and module $N_{i_1}$. Its conclusion, together with $N_j=N_{i_1}\\otimes_{S_{i_1}}S_j$, gives $R_j$-flatness of $N_j$. Restrict to this tail; a tail of a directed set is cofinal.",
+   "text": "Apply the residue-tensor comparison lemma to the source diagram from Step 1. Its finite stage modules, essentially finite type stage algebras, local cocones, localized ring transitions, module base-change identifications and algebraic colimits are all supplied by approximation. Writing $k=R/\\mathfrak m_R$ and $k_i=R_i/\\mathfrak m_i$, obtain $i_1$ such that $\\Psi_j$ is injective for all $j\\ge i_1$; by the explicit isomorphisms of that lemma, this is injectivity of $(M_j/\\mathfrak m_jM_j)\\otimes_{k_j}k\\to M/\\mathfrak m_RM$, $[x]\\otimes[r]\\mapsto[r\\mu_j(x)]$, the comparison map hypothesized in Step 3.",
    "uses": [
-    "lem-weil-pbc-colimit-eventually-flat",
-    "lem-weil-pbc-localized-base-change-quotient-flat"
+    "lem-trf-eventual-residue-tensor-comparison-injective"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, first proof paragraph, invoking 00R6; Tag 00MO localized quotient flatness at I=0"
+    "place": "Tag 046Y (lemma-mod-injective-general), middle proof paragraph, construction of the Noetherian residue-tensor diagram and stabilization of its comparison kernels; old steps 3--5."
    }
   },
   {
-   "text": "Put $k=R/\\mathfrak m_R$, $k_i=R_i/\\mathfrak m_i$, $D_i=S_i\\otimes_{R_i}k$, $P_i=M_i\\otimes_{R_i}k$ and $P=M\\otimes_Rk$. Locality makes $k_i\\to k$ a field embedding. We have $P_i=(M_i/\\mathfrak m_iM_i)\\otimes_{k_i}k$, $D_i=(S_i/\\mathfrak m_iS_i)\\otimes_{k_i}k$ and $P=M/\\mathfrak m_RM$: the identifications send $x\\otimes c$ to $[x]\\otimes c$ and $x\\otimes[r]$ to $[rx]$. Tensor-over-quotient gives these identifications. Since $S_i$ is a localization of a finite type $R_i$-algebra, localization commuting with tensor identifies $D_i$ with a localization of a finite type $k$-algebra (base change its finitely many polynomial generators and relations). A field is Noetherian, so finite-type Noetherianity followed by localization Noetherianity makes $D_i$ Noetherian. A finite generating family of $M_i$ gives the generating family $x_a\\otimes1$ of $P_i$ over $D_i$. Consequently the kernel of the $D_i$-linear comparison $\\Psi_i:P_i\\to P$, $x\\otimes c\\mapsto\\mu_i(x)\\otimes c$, is finite by the Noetherian submodule theorem.",
+   "text": "Apply the Noetherian arrow-stage lemma to the same approximation and $i_1$. Both stage rings are Noetherian and both stage modules are finite; all required local maps, commuting arrow squares, localized base-change transitions and ring/group colimits come from Step 1. The limit target $N$ is $R$-flat and $\\overline u$ is injective by hypothesis; Step 2 supplies its remaining comparison hypothesis. Thus at every $j$ in a common tail, $u_j$ is injective and $C_j=N_j/u_j(M_j)$ is flat over $R_j$.",
    "uses": [
-    "lem-weil-pbc-tensor-over-quotient-ring",
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-finite-type-algebra-noetherian",
-    "lem-weil-pbc-localization-noetherian",
-    "lem-weil-pbc-noetherian-submodule-finite"
+    "lem-trf-noetherian-arrow-eventual-injective-flat-cokernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, middle proof paragraph, Noetherian fibre ring and finite kernel"
+    "place": "Tag 046Y (lemma-mod-injective-general), first paragraph (eventual target flatness) and final paragraph (faithful field extension, fibre square and stage criterion); Tag 00R6 (lemma-colimit-eventually-flat), Tag 00ME (lemma-mod-injective), and the first proof paragraph of Tag 00MO (lemma-another-variant-local-criterion-flatness); old steps 2, 6, 7."
    }
   },
   {
-   "text": "For $i\\le j$, write $C_{ji}=S_i\\otimes_{R_i}R_j$ and $S_j=W_{ji}^{-1}C_{ji}$ as in Step 1. Tensor the ring localization and the corresponding localization $M_i\\otimes_{R_i}R_j\\to M_j$ over $R_j$ with $k$. The localization-tensor theorem identifies $D_j$ with the localization of $D_i=C_{ji}\\otimes_{R_j}k$ at the image of $W_{ji}$, and identifies $P_j$ with that localization of $P_i$. These maps are the actual transitions, since their pure-tensor formulas are $s\\otimes c\\mapsto s_{ji}(s)\\otimes c$ and $x\\otimes c\\mapsto m_{ji}(x)\\otimes c$. Apply varying-ring tensor/colimit commutation to the system $R_i$, the modules $M_i$, and the constant additive diagram $k$ with its compatible $R_i$-actions. It gives $\\varinjlim P_i=M\\otimes_Rk=P$ with precisely the maps $\\Psi_i$. All rings, modules and the small index set are taken in one common containing universe.",
+   "text": "Apply the localized-arrow limit lemma. Step 1 supplies the actual compatible additive colimits, the canonical identifications $M_j\\otimes_{S_j}S\\cong M$, $N_j\\otimes_{S_j}S\\cong N$ carrying $u_j\\otimes1$ to $u$, and the LIMIT localization $S_j\\otimes_{R_j}R\\to S$ for every $j$. Step 3 supplies eventual stage injectivity and flat cokernels. The lemma gives injectivity of $u$, its canonical cokernel comparison $C_j\\otimes_{S_j}S\\cong N/u(M)$, and flatness of $N/u(M)$ over $R$.",
    "uses": [
-    "lem-weil-pbc-localization-tensor-over-base",
-    "lem-weil-pbc-filtered-colimit-tensor-varying-rings"
+    "lem-trf-localized-arrow-injective-flat-cokernel-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, middle proof paragraph, comparison maps and localization identification; Tag 00DD tensor/colimit commutation"
-   }
-  },
-  {
-   "text": "Fix any index $i_0$. Step 3 makes $\\ker\\Psi_{i_0}$ finite over $D_{i_0}$; Step 4 supplies the localization transitions and the additive colimit required by kernel stabilization. That lemma gives $i_2\\ge i_0$ for which $\\Psi_j$ is injective for every $j\\ge i_2$. Its finite-kernel hypothesis concerns the source module $M_j$; no injectivity assertion about a target comparison for $N_j$ is needed.",
-   "uses": [
-    "lem-trf-localization-system-kernel-stabilization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, middle proof paragraph, conclusion that all sufficiently late Psi have zero kernel"
-   }
-  },
-  {
-   "text": "For $j\\ge i_2$ set $F_j=M_j/\\mathfrak m_jM_j$. The map $k_j\\to k=k_j\\otimes_{k_j}k$ is faithfully flat by the field-extension base-change theorem with $D=k_j$. Universal injectivity for faithfully flat maps gives an injective map $F_j\\to F_j\\otimes_{k_j}k$, $x\\mapsto x\\otimes1$. Compose it with the injective $\\Psi_j$ from Step 5. Thus the actual map $a_j:F_j\\to M/\\mathfrak m_RM$ is injective. In the fibre square, $b_j\\overline{u_j}=\\overline u\\,a_j$, where $b_j:N_j/\\mathfrak m_jN_j\\to N/\\mathfrak m_RN$ is the cocone map. If $\\overline{u_j}(x)=0$, this equality and injectivity of $\\overline u$ give $a_j(x)=0$, hence $x=0$. This proves injectivity of $\\overline{u_j}$ without assuming $b_j$ injective.",
-   "uses": [
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-faithfully-flat-universally-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, end of middle paragraph and start of final paragraph, faithful field extension and fibre square"
-   }
-  },
-  {
-   "text": "Apply the Noetherian local injectivity criterion at every $j\\ge i_2$ on the tail chosen in Step 2. Its base is $R_j$, its Noetherian local auxiliary ring is $S_j$, its finite source is $M_j$ and its flat $R_j$-module target is $N_j$; $u_j$ is $R_j$-linear. Step 6 supplies injectivity modulo $\\mathfrak m_j$. Hence $u_j$ is injective and $C_j=N_j/u_j(M_j)$ is flat over $R_j$.",
-   "uses": [
-    "lem-weil-pbc-flat-mod-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, final paragraph, application of Tag 00ME"
-   }
-  },
-  {
-   "text": "Let $x\\in M$ with $u(x)=0$. Represent $x=\\mu_j(x_j)$ at a stage $j$ in the eventual-injectivity tail. Compatibility gives $\\nu_j(u_j(x_j))=0$ in $N$. Apply the elementwise colimit vanishing criterion to the underlying abelian groups (equivalently $\\mathbf Z$-modules): there is $l\\ge j$ with $n_{lj}(u_j(x_j))=0$. This equals $u_l(m_{lj}(x_j))$, so Step 7 implies $m_{lj}(x_j)=0$ and therefore $x=0$. Thus $u$ is injective. This argument uses a later stage for each kernel element, never an identification $M_j=M$.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, final sentence, injectivity of the colimit map"
-   }
-  },
-  {
-   "text": "Fix one $j$ in that tail. Apply tensor right exactness over $S_j$ to $M_j\\xrightarrow{u_j}N_j\\to C_j\\to0$ and the $S_j$-algebra $S$. The compatible limit base-change identifications in Step 1 identify its first map with $u:M\\to N$; hence they give a canonical isomorphism $C_j\\otimes_{S_j}S\\cong N/u(M)$, sending $[y]\\otimes s$ to $s[\\nu_j(y)]$. Apply localized-base-change quotient flatness at $I=0$ with $(R,S,R',S')=(R_j,S_j,R,S)$ and module $C_j$. Its localization hypothesis is the LIMIT localization $S_j\\otimes_{R_j}R\\to S$ in Step 1, and its flatness hypothesis is Step 7. Its conclusion is that $C_j\\otimes_{S_j}S$ is flat over $R$. The displayed isomorphism proves the required flatness of $N/u(M)$.",
-   "uses": [
-    "lem-weil-pbc-tensor-right-exact",
-    "lem-weil-pbc-localized-base-change-quotient-flat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 046Y, final sentence, flatness of the limit cokernel; Tag 00MO at I=0"
+    "place": "Tag 046Y (lemma-mod-injective-general), final sentence (passage of stage injectivity and flat cokernel to the limit), expanded using Tag 00D7 (lemma-zero-directed-limit), Tag 00DF (lemma-tensor-product-exact), and the first proof paragraph of Tag 00MO (lemma-another-variant-local-criterion-flatness); old steps 8--9."
    }
   }
  ],
  "proof_deps": [
   "lem-trf-local-module-arrow-noetherian-descent",
-  "lem-trf-localization-system-kernel-stabilization",
-  "lem-weil-pbc-colimit-eventually-flat",
-  "lem-weil-pbc-faithfully-flat-universally-injective",
-  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
-  "lem-weil-pbc-finite-type-algebra-noetherian",
-  "lem-weil-pbc-flat-mod-injective",
-  "lem-weil-pbc-localization-noetherian",
-  "lem-weil-pbc-localization-tensor-over-base",
-  "lem-weil-pbc-localized-base-change-quotient-flat",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-tensor-over-quotient-ring",
-  "lem-weil-pbc-tensor-right-exact"
+  "lem-trf-eventual-residue-tensor-comparison-injective",
+  "lem-trf-noetherian-arrow-eventual-injective-flat-cokernel",
+  "lem-trf-localized-arrow-injective-flat-cokernel-limit"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Tag 046Y (lemma-mod-injective-general), full proof; simultaneous approximation and localization-kernel subclaims isolated; final colimit injectivity and localized-base-change cokernel flatness expanded"
+  "place": "Tag 046Y (lemma-mod-injective-general), full proof, assembled from simultaneous approximation and three independent statement-only stage/limit lemmas."
  },
  "mathlib_searches": [
   {
@@ -206,29 +132,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-22",
   "item": "lem-trf-valuation-general-mod-injective",
   "worker": "stage1",
-  "summary": "Repair of return 56efc7aa2b75: replace unsupported simultaneous descent by an explicit statement-only arrow-approximation lemma with Noetherian stages; apply 00R6 only with all hypotheses, and propagate flatness via localized base change. Establish finite source-comparison kernels over Noetherian fibre algebras and isolate their localization stabilization. Supply the faithful-field injection and exact fibre square, prove injectivity elementwise in the colimit, and prove cokernel flatness by tensor right exactness and the actual limit localization. Correct created.item/group as requested; statement unchanged.",
-  "blueprint": "The 046Y helper on the local-term-locality/valuation branch: first paragraph is Step 1 (simultaneous approximation) and Step 2 (00R6), middle paragraph is Steps 3--6 (finite fibre kernels, localization stabilization and faithful field extension), final paragraph is Steps 7--9 (00ME, colimit injectivity and flat cokernel). Whole-blueprint searches for 046Y, 00QX, module descent, simultaneous, kernel stabilization and localization colimit give no equivalent imported node.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-colimit-eventually-flat",
-    "why": "Tag 00R6 is exactly the generic eventual-flatness tool invoked by 046Y; this unit has no corresponding algebraic descent tool."
-   },
-   {
-    "node": "lem-weil-pbc-filtered-colimit-tensor-varying-rings",
-    "why": "Tensor/colimit commutation for the varying base rings with the constant limit residue field identifies the comparison cocone; this is a generic algebraic tool."
-   },
-   {
-    "node": "lem-weil-pbc-flat-mod-injective",
-    "why": "Tag 00ME is the exact Noetherian local criterion invoked by 046Y."
-   },
-   {
-    "node": "lem-weil-pbc-localized-base-change-quotient-flat",
-    "why": "Localized base-change flatness at I=0 propagates stage flatness and proves limit cokernel flatness; this is generic module algebra, not another geometric route."
-   }
-  ]
+  "summary": "Repair of the 2026-10-22 re-split return: statement unchanged; old steps 3--5 become the residue-tensor comparison task, old steps 2/6/7 the Noetherian arrow-stage task, and old steps 8--9 the localized-arrow limit task. All three are statement-only unsplit nodes. Old step 1 remains, followed by their short assembly. The report preserves all nine original arguments verbatim, records honest searches and checks each application.",
+  "blueprint": "The existing 046Y helper on the Tag 0GSG valuation-ring branch below lem-trf-local-term-locality: approximation realizes the first paragraph of 046Y; the new residue comparison node realizes its middle paragraph; the arrow-stage node realizes eventual target flatness and the final local criterion; the limit node expands its final sentence. Nearest blueprint ancestor and its via chain are retained. Whole-blueprint searches found no equivalent node.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-colimit-eventually-flat",
@@ -237,12 +146,12 @@
   "lem-weil-pbc-localized-base-change-quotient-flat"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-Q110-d689bb7f4",
-  "group": "Q110",
+  "reviewer": "NT-cc-Q32-7c9fc069e",
+  "group": "Q32",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q110-d689bb7f4 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, unit/chapter route, delivery instructions A–F, and Stacks Tags 046Y, 00QV, 00QX, 00R6, 00D7 and supporting algebra nodes. All hypotheses and conclusions check; the nine proof steps cite statements that supply their claims, both auxiliary nodes are smaller and nonduplicate, edge cases pass, and all steps are under 2,000 characters. No route-pivot machinery or prohibited SGA source appears. Full review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-7c9fc069e (reviewer sub-agent of L); spot-checked: Read in full: the 046Y source (algebra.tex 32770-32870), the base nine-step proof (side live), the repair note, and the statements of approximation, kernel stabilization and 00R6. The re-split conforms to the note. Old step 1 is kept. Old steps 3-5 become node A (residue-tensor comparison), old steps 2/6/7 node B (Noetherian arrow stage: 00R6 + 00MO I=0 + faithful field extension + 00ME), and old steps 8-9 node C (limit: elementwise vanishing + right exactness + 00MO I=0). Each is a self-contained statement of comparable size (about 2.3k/1.8k/1.2k chars of old argument), and the assembly is about 2.1k chars. All three new statements are true; I checked each hypothesis against approximation clauses (1)-(4) and tested singleton, M=0, field-base and zero-limit cases. No duplicates: rg over the DAG for 046Y / Psi / u_j(M_j), and the blueprint search for 046Y returns 0. Batch-5 flags on the three new trf nodes are accepted: they are generic 046Y commutative algebra, their stmt_deps are definitions only, and the item is already in the batch-5 closure via the non-trf citer lem-pur-relative-regular-equations-base-change. One FIX: node A said only that 'natural identifications' exist, so item Step 2 could not transfer injectivity of Psi_j (domain M_j tensor_{R_j} k) to the map (M_j/m_jM_j) tensor_{k_j} k -> M/mM that node B assumes. I made the canonical isomorphisms and the corresponding map [x] tensor [r] -> [r mu_i(x)] explicit in node A, and Step 2 now applies them; uses and proof_deps are unchanged. The item statement and Lean record are untouched; no SGA source is used.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -262,5 +171,30 @@
   "date": "2026-10-17",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261023T123438-L-1189098",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "Algebra.local_essentially_finite_presentation_mod_injective"
+  ],
+  "sorry_after": []
+ }
 }

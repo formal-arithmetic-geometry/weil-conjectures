@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-universal-fixed-subscheme",
+ "kind": "statement",
+ "title": "The universal fixed-point functor is a closed subscheme",
+ "statement": "Let $k$ be a field [def-weil-field], let $G$ be a separated finite-type $k$-group scheme [def-sc-group-scheme, def-weil-finite-type-morphism], and let $Y$ be a separated finite-type $k$-scheme [def-pc-scheme]. Separated means that the diagonal is a closed immersion [def-weil-closed-immersion]. Let $b:G\\times_kY\\to Y$ be an action: after every base change $b(1,y)=y$ and $b(g,b(g',y))=b(gg',y)$, with products as in [def-pc-fibre-product]. For every commutative $k$-algebra $B$, put\n$$\\mathrm{Fix}_b(B)=\\{y\\in Y(B): b_{B'}(g,y_{B'})=y_{B'}\\text{ for every commutative }B\\text{-algebra }B'\\text{ and }g\\in G(B')\\}.$$\nHere $Y(B)$ means $k$-morphisms $\\operatorname{Spec}B\\to Y$ [def-weil-affine-spectrum, def-weil-pbc-algebra-hom-quotient]. This subfunctor is represented by a closed subscheme $Y^G\\hookrightarrow Y$: the inclusion identifies $Y^G(B)$ with $\\mathrm{Fix}_b(B)$ for every $B$. The restricted action $G\\times_kY^G\\to Y$ equals the projection followed by $Y^G\\hookrightarrow Y$. For every $k$-scheme $W$ and morphism $u:W\\to Y$, $u$ factors through $Y^G$ if and only if $b\\circ(\\mathrm{id}_G\\times u)=u\\circ p_W$ as morphisms $G\\times_kW\\to Y$. No smoothness or reducedness of $G$, $Y$, $B$, or $W$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 7.1 and proof, printed pp.138–139, together with its preceding largest-fixed-closed-subscheme formulation. The final factorization clause is its representing property, tested on affine charts of W. This theorem in the stated generality has no Stacks tag."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient"
+ ],
+ "proof": [
+  {
+   "text": "Put $X=Y\\times_kY$ and $d=\\Delta_Y:Y\\hookrightarrow X$, closed by the separatedness hypothesis. The scheme $X$ is finite type: its second projection is a base change of $Y\\to\\operatorname{Spec}k$, and its structure morphism is the composite with $Y\\to\\operatorname{Spec}k$, so both assertions of [lem-sfb-finite-type-composition-base-change] apply. It is also separated. Indeed, after rearranging the four factors using [def-pc-fibre-product], its diagonal is $\\Delta_Y\\times_k\\Delta_Y$. Factor this map by first applying $\\Delta_Y$ to the first factor and then to the second. Each factor is a base change of $d$, hence closed by [lem-weil-pbc-closed-immersion-base-change]. Their composite is closed directly from [def-weil-closed-immersion]: over an affine target the successive closed subschemes are $\\operatorname{Spec}(A/I)$ and $\\operatorname{Spec}((A/I)/J)$, the latter being a quotient of $A$ by the inverse image of $J$. Thus the affine quotient criterion proves the composite closed (the elementary argument of Stacks Tag 01QS, label morphisms-lemma-composition-closed-immersion). This verifies all target-scheme hypotheses of the factorization-locus lemma without assuming $Y$ affine.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1, pp.138–139, diagonal construction; finite-type closure as Stacks 01T3/01T4; elementary closed-composite argument as Stacks 01QS."
+   }
+  },
+  {
+   "text": "Let $F=(b,p_Y):G\\times_kY\\to X$, defined by [def-pc-fibre-product]. Apply [lem-sfb-constant-source-closed-factorization-locus] with constant source $G$, parameter scheme $Y$, target $X$, closed subscheme $d:Y\\hookrightarrow X$, and family $F$. The hypotheses on $G$ and $Y$ are exactly the assumptions of the item, and Step 1 checked $X$. Obtain a closed immersion $l:L\\hookrightarrow Y$ such that, for every $k$-scheme $W$ and $u:W\\to Y$, $u$ factors through $L$ exactly when $(b\\circ(\\mathrm{id}_G\\times u),u\\circ p_W)$ factors through $d$. By the product universal property, a pair $(a,c)$ factors through the diagonal precisely when $a=c$: the lift must be $a=c$, and conversely $d\\circ a=(a,a)$. Therefore $u$ factors through $L$ if and only if $b\\circ(\\mathrm{id}_G\\times u)=u\\circ p_W$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-sfb-constant-source-closed-factorization-locus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1, pp.138–139, Cartesian diagram; 1.76–1.78 and their proofs 1.100–1.105, pp.36–38, expressed by the existing constant-source factorization lemma."
+   }
+  },
+  {
+   "text": "Fix a commutative $k$-algebra $B$ and $y:\\operatorname{Spec}B\\to Y$. Write $a=b\\circ(\\mathrm{id}_G\\times y)$ and $c=y\\circ p_B$ on $G_B=G\\times_k\\operatorname{Spec}B$. If $a=c$, precomposing with the map $(g,\\operatorname{Spec}(B'\\leftarrow B)):\\operatorname{Spec}B'\\to G_B$ of [def-pc-fibre-product] gives $b_{B'}(g,y_{B'})=y_{B'}$ for every $B$-algebra $B'$ and $g\\in G(B')$. Conversely, suppose all these equalities hold. Cover $G_B$ by affine opens $V=\\operatorname{Spec}R$ using [lem-weil-pbc-affine-opens-basis]. The projection $V\\to\\operatorname{Spec}B$ makes $R$ a $B$-algebra by [def-weil-affine-spectrum], and the other projection gives $g\\in G(R)$. The map $(g,V\\to\\operatorname{Spec}B)$ is the inclusion $V\\hookrightarrow G_B$, by its two projections. The assumed equality for $B'=R$ says exactly $a|_V=c|_V$. Hence $a=c$ by [lem-weil-pbc-scheme-morphism-gluing]. This uses every affine chart, rather than just geometric points, and applies with nilpotents in $B$ or $R$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1, p.138, all R-algebras R prime in the definition; affine-chart expansion of the equality of the two natural maps, p.139. Stacks 01IT and 00AN justify the affine test."
+   }
+  },
+  {
+   "text": "Set $Y^G=L$. By [lem-pc-proper-monomorphism-closed], $l$ is a monomorphism, so composition with $l$ injects $L(B)$ into $Y(B)$. Steps 2 and 3 identify its image with $\\mathrm{Fix}_b(B)$. These identifications are natural in $B$, since both maps to $Y(B)$ are composition with $l$ and scalar extension is precomposition with the induced spectrum map. Finally take $W=L$ and $u=l$ in Step 2: $l$ factors through itself by the identity, so $b\\circ(\\mathrm{id}_G\\times l)=l\\circ p_L$. This is the restricted-action assertion. Step 2 already proves the required equivalence for every scheme $W$, with no finiteness, smoothness, or reducedness assumption on $W$.",
+   "uses": [
+    "lem-pc-proper-monomorphism-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 7.1 and its preceding largest fixed closed subscheme formulation, pp.138–139; Stacks 04XV for monicity of a closed immersion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-composition-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "lem-sfb-constant-source-closed-factorization-locus",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-pc-proper-monomorphism-closed"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 7.1, printed pp.138–139, using the existing parameterized form of 1.76–1.78 (proved in 1.100–1.105, pp.36–38); affine-chart verification of universal point tests."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fixedPoint|fixed.point|fixedSubscheme|fixed.subscheme",
+   "results": "{\"t\": \"2026-10-24T09:35:25Z\", \"tool\": \"grep\", \"query\": \"fixedPoint|fixed.point|fixedSubscheme|fixed.subscheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract fixed sets, representation invariants, and a closed equalizer for two morphisms do not represent the universally fixed subfunctor for a group scheme; a closed equalizer in G times Y alone is not this subscheme of Y."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The locus where a group scheme action fixes a point universally is a representable closed subfunctor of a separated scheme",
+   "results": "{\"t\": \"2026-10-24T09:35:26Z\", \"tool\": \"leansearch\", \"query\": \"The locus where a group scheme action fixes a point universally is a representable closed subfunctor of a separated scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MulAction.fixedPoints\", \"FixedPoints.submonoid\", \"MulAction.stabilizer\", \"MulAction.fixedPoints_of_subsingleton\", \"FixedPoints.mem_subgroup\", \"MulAction.fixedBy\", \"AddAction.fixedPoints_of_subsingleton\", \"fixingAddSubgroup\"], \"digest\": \"86774b79761c1621\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract fixed sets, representation invariants, and a closed equalizer for two morphisms do not represent the universally fixed subfunctor for a group scheme; a closed equalizer in G times Y alone is not this subscheme of Y."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"fixed\"",
+   "results": "{\"t\": \"2026-10-24T09:35:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"fixed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract fixed sets, representation invariants, and a closed equalizer for two morphisms do not represent the universally fixed subfunctor for a group scheme; a closed equalizer in G times Y alone is not this subscheme of Y."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The fixed point functor of an algebraic group scheme acting on a separated scheme is represented by a closed subscheme including points fixed after all algebra extensions",
+   "results": "{\"t\": \"2026-10-24T09:35:31Z\", \"tool\": \"leanfinder\", \"query\": \"The fixed point functor of an algebraic group scheme acting on a separated scheme is represented by a closed subscheme including points fixed after all algebra extensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.invariantsFunctor_obj_carrier\", \"Rep.invariantsFunctor\", \"Rep.invariantsAdjunction\", \"Rep.instIsRightAdjointModuleCatInvariantsFunctor\", \"FixedPoints.isSeparable\", \"Rep.toInvariants\", \"Representation.invariants_eq_inter\", \"Rep.quotientToInvariantsFunctor_obj_V\"], \"digest\": \"d1b04df36f913ed6\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract fixed sets, representation invariants, and a closed equalizer for two morphisms do not represent the universally fixed subfunctor for a group scheme; a closed equalizer in G times Y alone is not this subscheme of Y."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fixed loci for actions of group schemes on separated schemes are closed subschemes representing universally invariant points",
+   "results": "{\"t\": \"2026-10-24T09:37:06Z\", \"tool\": \"leanfinder\", \"query\": \"Fixed loci for actions of group schemes on separated schemes are closed subschemes representing universally invariant points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\"], \"digest\": \"994bc994d4dae8d9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: abstract fixed sets, representation invariants, and a closed equalizer for two morphisms do not represent the universally fixed subfunctor for a group scheme; a closed equalizer in G times Y alone is not this subscheme of Y."
+  },
+  {
+   "tool": "grep",
+   "query": "fixedPoint|fixed.point|fixedSubscheme|fixed.subscheme",
+   "results": "{\"t\": \"2026-10-24T10:05:16Z\", \"tool\": \"grep\", \"query\": \"fixedPoint|fixed.point|fixedSubscheme|fixed.subscheme\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary group-action fixed sets and representation invariants do not give universal scheme-valued fixed points. Scheme equalizers are closed in G times Y, not the desired parameter subscheme of Y; the local representability theorem requires an open covering presentation, which does not establish this closed locus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Representability of the universal fixed point functor of a group scheme action by a closed subscheme",
+   "results": "{\"t\": \"2026-10-24T10:05:16Z\", \"tool\": \"leansearch\", \"query\": \"Representability of the universal fixed point functor of a group scheme action by a closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"FixedPoints.mem_subgroup\", \"MulAction.fixedPoints_of_subsingleton\", \"AddAction.fixedPoints_of_subsingleton\", \"AddAction.vadd_mem_fixedBy_iff_mem_fixedBy\", \"MulAction.smul_inv_mem_fixedBy_iff_mem_fixedBy\", \"AddAction.IsFixedBlock.univ\", \"FixedPoints.subalgebra\"], \"digest\": \"87534b112abbf9bb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary group-action fixed sets and representation invariants do not give universal scheme-valued fixed points. Scheme equalizers are closed in G times Y, not the desired parameter subscheme of Y; the local representability theorem requires an open covering presentation, which does not establish this closed locus."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Scheme\", \"fixed\"",
+   "results": "{\"t\": \"2026-10-24T10:05:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"Scheme\\\", \\\"fixed\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary group-action fixed sets and representation invariants do not give universal scheme-valued fixed points. Scheme equalizers are closed in G times Y, not the desired parameter subscheme of Y; the local representability theorem requires an open covering presentation, which does not establish this closed locus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A group scheme action on a separated finite type scheme has a closed subscheme representing points fixed after every algebra extension",
+   "results": "{\"t\": \"2026-10-24T10:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"A group scheme action on a separated finite type scheme has a closed subscheme representing points fixed after every algebra extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionιOfIsSeparated\", \"AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated\", \"AlgebraicGeometry.Scheme.IsSeparated\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.isClosedImmersion_equalizer_ι_left\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.IsSeparated.hasAffineProperty\"], \"digest\": \"49530b2169947394\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary group-action fixed sets and representation invariants do not give universal scheme-valued fixed points. Scheme equalizers are closed in G times Y, not the desired parameter subscheme of Y; the local representability theorem requires an open covering presentation, which does not establish this closed locus."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed representing scheme of universally invariant points for an algebraic group action including nonreduced test algebras",
+   "results": "{\"t\": \"2026-10-24T10:06:29Z\", \"tool\": \"leanfinder\", \"query\": \"Closed representing scheme of universally invariant points for an algebraic group action including nonreduced test algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.invariantsFunctor_obj_carrier\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk\", \"AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.instIsClosedImmersionISchemeOfSubsingletonCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsClosedImmersion.SpecMap_residue\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.IsClosedImmersion.Spec_map_residue\"], \"digest\": \"dd6727f7d8a2709a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary group-action fixed sets and representation invariants do not give universal scheme-valued fixed points. Scheme equalizers are closed in G times Y, not the desired parameter subscheme of Y; the local representability theorem requires an open covering presentation, which does not establish this closed locus."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fixed-point-action-finite-jets",
+  "date": "2026-10-24",
+  "group": "Q94"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Milne Proposition 8.9, printed p.150: The universal fixed-point functor is a closed subscheme. Supports the fixed-point representation argument in the existing Barsotti–Chevalley chain below det-thm-sf-ctf-stability-direct-images proof (3).",
+   "via": [
+    "lem-sfb-fixed-point-action-finite-jets",
+    "lem-sfb-general-group-centre-zero-dimension-affine",
+    "lem-sfb-pseudoabelian-proper-algclosed",
+    "lem-sfb-barsotti-chevalley-decomposition",
+    "lem-sfb-smooth-connected-semiabelian-subgroup",
+    "lem-sfb-semiabelian-closed-subgroup-trivial-torsion-finite",
+    "lem-sfb-generically-isomorphic-semiabelian-open-immersion",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-universal-fixed-subscheme",
+  "worker": "stage1",
+  "group": "N6",
+  "summary": "Applied the existing closed factorization locus to (b,p_Y) and the diagonal. Verified product hypotheses, expanded equality on all algebra extensions by affine charts, and deduced representability, the restricted action, and the arbitrary-scheme factorization property. Statement unchanged; no new nodes.",
+  "blueprint": "Auxiliary to the fixed-point finite-jet argument, in the inherited Barsotti–Chevalley chain supporting the direct-image clause of sk-thm-sf-ctf-stability. Current latest blueprint searched for fixed subscheme, fixed-point and factorization locus: no equivalent blueprint node. The ancestor command returns null, retained in from.node; the existing from.place and via chain are preserved."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N6-d5e61d321",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-d5e61d321 (reviewer sub-agent of L); spot-checked: I read Milne iAG2017 Theorem 7.1 and its proof on printed pp.138–139. The item's Fix_b functor and its separatedness hypotheses match the source. Statement and stmt_deps are unchanged and there are no new nodes. Step 1: X=Y×Y is finite type by clauses (1) and (2) of lem-sfb-finite-type-composition-base-change. It is separated because its diagonal is Δ_Y×Δ_Y, built from base changes of Δ_Y (closed by lem-weil-pbc-closed-immersion-base-change). That composites of closed immersions are closed is argued correctly in two lines from the affine criterion in def-weil-closed-immersion; the step names Stacks 01QS without a node. lem-weil-pbc-closed-immersion-products states this fact, but it is a split node of unit sk-thm-br, so citing it would be a cross-unit tool use; the inline argument is acceptable. Step 2 applies lem-sfb-constant-source-closed-factorization-locus (same unit, no cycle) with constant source G, parameter Y, target X, closed immersion Δ_Y and family (b,p_Y). All hypotheses hold, and f∘(id×u)=(b∘(id×u),u∘p_W) factors through Δ exactly when the two maps are equal. The lemma quantifies over all k-schemes T, so the arbitrary-W clause is exact. Step 3 shows equality on G_B is equivalent to the Fix_b condition via affine charts Spec R of G_B (basis and gluing nodes): the chart inclusion is (g,V→Spec B), and no affine intersections or geometric points are assumed. Step 4 gets monicity from lem-pc-proper-monomorphism-closed, identifies the image, gets naturality, and takes W=L for the restricted action; marking it elementary is justified. Small cases: trivial action; Y empty; G_m scaling on A^1; μ_p scaling in characteristic p, where the universal 1+t forces x=0; α_p translation gives the empty scheme; B=0. No duplicate: the torus and μ_n fixed-scheme nodes assume representability or concern special groups. No SGA citation, no fixes and no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniversalFixedSubscheme",
+  "declaration": "AlgebraicGeometry.exists_universal_fixed_subscheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/UniversalFixedSubscheme.lean",
+  "statement": "theorem exists_universal_fixed_subscheme {k : Type u} [Field k] (G Y : Over (Spec (.of k))) [GrpObj G] [IsSeparated G.hom] [LocallyOfFiniteType G.hom] [QuasiCompact G.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [ModObj G Y] : ∃ (F : Over (Spec (.of k))) (i : F ⟶ Y), IsClosedImmersion i.left ∧ (∀ (A : CommAlgCat.{u} k) (y : (algSpec (.of k)).obj (op A) ⟶ Y), (∃! z : (algSpec (.of k)).obj (op A) ⟶ F, z ≫ i = y) ↔ ∀ (A' : CommAlgCat.{u} k) (f : A ⟶ A') (g : (algSpec (.of k)).obj (op A') ⟶ G), g • ((algSpec (.of k)).map f.op ≫ y) = (algSpec (.of k)).map f.op ≫ y) ∧ (G ◁ i) ≫ ModObj.smul (M := G) (X := Y) = snd G F ≫ i ∧ ∀ (W : Over (Spec (.of k))) (v : W ⟶ Y), (∃ w : W ⟶ F, w ≫ i = v) ↔ (G ◁ v) ≫ ModObj.smul (M := G) (X := Y) = snd G W ≫ v",
+  "branch": "sheaf-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf4ade1af",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Checked against Milne iAG2017 Thm 7.1 pp.138-139 and all 8 stmt_dep records. Field k; GrpObj G on Over(Spec k) as def-sc-group-scheme prescribes; separated and finite type (LocallyOfFiniteType+QuasiCompact) on G.hom and Y.hom; action = Mathlib ModObj G Y, with g • x = lift g x ≫ smul; tensor = pullback via the global Over S instance (Pullbacks.lean:712). Clauses: IsClosedImmersion i.left; for all A : CommAlgCat.{u} k and y, ∃! lift ↔ fixed for every f : A ⟶ A' and every g (∃! = ∃ since i is mono); (G ◁ i) ≫ smul = snd ≫ i; for every W, factorization ↔ invariance, with no instances on W. Neither weaker nor stronger; quantifier order kept; universes bound. Edge cases ok: empty Y and zero algebra, trivial action, μ_p and α_p non-reduced tests. lean.statement verbatim, occurring once in the file; stmt_deps unchanged; no definitions; proof only sorry; source and blueprint docstrings with the 4 proof steps; report has a worker section and the standard second-reading note; searches show no duplicate. No changes, so no compile. No findings."
+ }
+}

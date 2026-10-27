@@ -10,9 +10,10 @@ public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.CategoryTheory.RingedKoszulSystem
 public import Mathlib.CategoryTheory.Category.ULift
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.Paper.IntrinsicCompletionCompleted
+public import Sheaf.Paper.WeilCompletedKoszulSite
+import Sheaf.Paper.WeilCompletedKoszulCoefficientComparison
+import Sheaf.Paper.WeilCompletedTensorTransport
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 
 /-!
 # Finite exterior and tensor-dual Koszul comparison
@@ -21,9 +22,10 @@ Source: Stacks Project, algebraization.tex, Tag 0A0E,
 lemma-derived-completion-koszul, and sites-cohomology.tex, Tags 0941 and 0A0A.
 (blueprint: lem-weil-pbc-completed-fiber-roos-comparison).
 
-The site and coefficient transports and the termwise-limit comparison are constructed
-here. The remaining source lemma concerns only finite Koszul levels, power transitions
-and the augmentation. Products, cones and derived transport are proved by consumers.
+The site and coefficient transports are publicly re-exported from the lower site module.
+The termwise-limit comparison is constructed here. The finite comparison is assembled
+from coefficient comparison and tensor transport, including transitions and augmentation.
+Products, cones and derived transport are proved by consumers.
 -/
 
 @[expose] public noncomputable section
@@ -31,119 +33,10 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
 universe u
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
 variable (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-
-/-- The pro-etale category with its morphisms lifted to the coefficient universe.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-abbrev completedCechSite := AsSmall.{0} X.ProEt
-
-/-- The canonical equivalence with the category whose Hom universe has been lifted.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-abbrev completedCechSiteEquiv : X.ProEt ≌ completedCechSite X := AsSmall.equiv
-
-/-- The topology induced along the inverse of the canonical site equivalence.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-abbrev completedCechTopology :=
-  (completedCechSiteEquiv X).inverse.inducedTopology (ProEt.topology X)
-
-/-- The actual completed ring sheaf pulled to the canonical small site.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-abbrev completedCechRing : Sheaf (completedCechTopology X) CommRingCat.{u + 1} :=
-  ((completedCechSiteEquiv X).inverse.sheafPushforwardContinuous CommRingCat.{u + 1}
-    (completedCechTopology X) (ProEt.topology X)).obj (pbcAdicCompletion X d)
-
-/-- The module-sheaf equivalence induced by the canonical ringed-site equivalence.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-def completedCechModulesEquiv :
-    pbcModules X (pbcAdicCompletion X d) ≌ ringedSiteModules.{u + 1, u + 1, u + 1, u + 1}
-      ((sheafCompose (completedCechTopology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-        (completedCechRing X d)) := by
-  let e := completedCechSiteEquiv X
-  let J := ProEt.topology X
-  let K := completedCechTopology X
-  let R := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-    (pbcAdicCompletion X d)
-  let R' : Sheaf K RingCat.{u + 1} :=
-    (e.inverse.sheafPushforwardContinuous RingCat.{u + 1} K J).obj R
-  let φ : R ⟶ (e.functor.sheafPushforwardContinuous RingCat.{u + 1} J K).obj R' :=
-    ⟨Functor.whiskerRight (NatTrans.op e.unitInv) R.obj⟩
-  let ψ : R' ⟶ (e.inverse.sheafPushforwardContinuous RingCat.{u + 1} K J).obj R := 𝟙 _
-  have h₁ : Functor.whiskerRight (NatTrans.op e.counit) R'.obj =
-      ψ.hom ≫ e.inverse.op.whiskerLeft φ.hom := by
-    apply NatTrans.ext
-    funext U
-    change R.obj.map (e.inverse.map (e.counit.app U.unop)).op =
-      R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op
-    rw [e.unitInv_app_inverse]
-  have h₂ : φ.hom ≫ e.functor.op.whiskerLeft ψ.hom ≫
-      Functor.whiskerRight (NatTrans.op e.unit) R.obj = 𝟙 R.obj := by
-    apply NatTrans.ext
-    funext U
-    change R.obj.map (e.unitInv.app U.unop).op ≫
-      (𝟙 _ ≫ R.obj.map (e.unit.app U.unop).op) = 𝟙 _
-    rw [Category.id_comp, ← R.obj.map_comp, ← op_comp, e.unitIso.hom_inv_id_app]
-    exact R.obj.map_id _
-  exact (SheafOfModules.pushforwardPushforwardEquivalence.{u + 1} e φ ψ h₁ h₂).symm
-
-/-- The standard derived category in the original ambient derived universe.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-instance : HasDerivedCategory.{u + 2} (ringedSiteModules.{u + 1, u + 1, u + 1, u + 1}
-    ((sheafCompose (completedCechTopology X)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-      (completedCechRing X d))) := HasDerivedCategory.standard _
-
-/-- The exact module equivalence is additive because it preserves products and zero.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-instance : (completedCechModulesEquiv X d).functor.Additive := by
-  exact Functor.additive_of_preserves_binary_products _
-
-/-- The equivalence induced on unbounded derived categories by the module equivalence.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-def completedCechDerivedEquiv : PbcCompletedDerived X d ≌
-    ringedSiteDerived.{u + 1, u + 2} (completedCechRing X d) :=
-  (completedCechModulesEquiv X d).mapDerivedCategory
-
-/-- The compatible-residue scalar map, followed by the fixed coefficient comparison.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-def completedCechScalarMap :
-    (Functor.const (completedCechSite X)ᵒᵖ).obj (CommRingCat.of A) ⟶
-      (completedCechRing X d).obj :=
-  Functor.whiskerLeft (completedCechSiteEquiv X).inverse.op
-    (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A)) ≫
-      (adicDatumScalar X (intrinsicPresentationDatum d)).hom ≫
-        (pbcCompletedComparison X d).hom.hom)
-
-/-- The actual compatible-residue scalar as a global section on the canonical small site.
-Source: Stacks, Tag 0A0E, with the canonical equivalence of ringed sites
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-def completedCechScalar (a : A) :
-    ((completedCechRing X d).obj ⋙ CategoryTheory.forget CommRingCat.{u + 1}).sections := by
-  refine ⟨fun U ↦ (completedCechScalarMap X d).app U a, ?_⟩
-  intro U V f
-  exact congrArg (fun g ↦ g a) ((completedCechScalarMap X d).naturality f).symm
-
-
-/-- The strict-tower derived category in the same ambient universe.
-Source: Stacks, Tag 0941
-(blueprint: lem-weil-pbc-completed-fiber-roos-comparison). -/
-instance : HasDerivedCategory.{u + 2} (ℕᵒᵖ ⥤
-    ringedSiteModules.{u + 1, u + 1, u + 1, u + 1}
-      ((sheafCompose (completedCechTopology X)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-        (completedCechRing X d))) := HasDerivedCategory.standard _
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical comparison between limits of complexes and termwise limits.
@@ -189,8 +82,121 @@ def completedKoszulTermwiseLimitIso {B : Type*} [Category B] [Abelian B] [HasLim
         rfl)
 
 
+private theorem tensorComparison_transition
+    {D E V : Type*} [Category* D] [Category* E] [Category* V]
+    (L : D ⥤ V) (H : D ⥤ E) (U : E ⥤ V) (s : L ≅ H ⋙ U)
+    {x y : D} (f : x ⟶ y) {a b : E} (α : H.obj y ⟶ a) (β : H.obj x ⟶ b)
+    (g : b ⟶ a) (h : H.map f ≫ α = β ≫ g) :
+    L.map f ≫ (s.hom.app y ≫ U.map α) =
+      (s.hom.app x ≫ U.map β) ≫ U.map g := by
+  rw [← Category.assoc, s.hom.naturality, Functor.comp_map, Category.assoc,
+    ← U.map_comp, h, U.map_comp, Category.assoc]
+
+private theorem towerComplex_map_eq
+    {S : Type*} [SmallCategory S] {J : GrothendieckTopology S}
+    (O : Sheaf J CommRingCat) (r : ℕ)
+    (b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (N : ringedSiteComplex O) {m n : ℕᵒᵖ} (f : m ⟶ n) (q : ℤ) :
+    ((ringedKoszulTensorTowerComplex O r b N).asFunctor.map f).f q =
+      (((ringedKoszulTensor O).obj N).map ((ringedKoszulDualTower O r b).map f)).f q := rfl
+
+private def towerTransposeIso
+    {S : Type*} [SmallCategory S] {J : GrothendieckTopology S}
+    (O : Sheaf J CommRingCat) (r : ℕ)
+    (b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (N : ringedSiteComplex O) (m : ℕ) :
+    ((ringedKoszulTensor O).obj N).obj ((ringedKoszulDualTower O r b).obj (op m)) ≅
+      (ringedKoszulTensorTowerComplex O r b N).asFunctor.obj (op m) :=
+  HomologicalComplex.Hom.isoOfComponents (fun _ ↦ Iso.refl _) (by
+    intro p q hpq
+    have h : p + 1 = q := hpq
+    subst q
+    simp only [ringedKoszulTensorTowerComplex, HomologicalComplex.asFunctor_obj_d,
+      CochainComplex.of_d, Iso.refl_hom]
+    rfl)
+
+private theorem towerTransposeIso_hom_f
+    {S : Type*} [SmallCategory S] {J : GrothendieckTopology S}
+    (O : Sheaf J CommRingCat) (r : ℕ)
+    (b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (N : ringedSiteComplex O) (m : ℕ) (q : ℤ) :
+    ((towerTransposeIso O r b N m).hom).f q = 𝟙 _ := rfl
+
+private theorem towerTranspose_transition
+    {S : Type*} [SmallCategory S] {J : GrothendieckTopology S}
+    (O : Sheaf J CommRingCat) (r : ℕ)
+    (b : Fin r → (O.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (N : ringedSiteComplex O) {m n : ℕ} (f : op m ⟶ op n)
+    {P Q : ringedSiteComplex O} (g : P ⟶ Q)
+    (α : Q ⟶ ((ringedKoszulTensor O).obj N).obj
+      ((ringedKoszulDualTower O r b).obj (op n)))
+    (β : P ⟶ ((ringedKoszulTensor O).obj N).obj
+      ((ringedKoszulDualTower O r b).obj (op m)))
+    (h : g ≫ α = β ≫ ((ringedKoszulTensor O).obj N).map
+      ((ringedKoszulDualTower O r b).map f)) :
+    g ≫ α ≫ (towerTransposeIso O r b N n).hom =
+      (β ≫ (towerTransposeIso O r b N m).hom) ≫
+        (ringedKoszulTensorTowerComplex O r b N).asFunctor.map f := by
+  apply HomologicalComplex.Hom.ext
+  funext q
+  simpa only [HomologicalComplex.comp_f, towerTransposeIso_hom_f,
+    Category.comp_id, towerComplex_map_eq] using
+    congrArg (fun k ↦ HomologicalComplex.Hom.f k q) h
+
+private theorem tensor_unit_component
+    {V : Type*} [Category* V] [Preadditive V] [HasZeroObject V]
+    [MonoidalCategory V] [MonoidalPreadditive V]
+    [∀ (K L : CochainComplex V ℤ),
+      HomologicalComplex.HasMapBifunctor K L (curriedTensor V) (.up ℤ)]
+    (N K Q : CochainComplex V ℤ) (f : K ⟶ Q)
+    (v : (HomologicalComplex.single V (.up ℤ) 0).obj (𝟙_ V) ⟶ Q)
+    (u : 𝟙_ V ⟶ K.X 0)
+    (h : u ≫ f.f 0 =
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ v.f 0) (q : ℤ) :
+    ((ρ_ (N.X q)).inv ≫ N.X q ◁ u ≫
+      HomologicalComplex.ιMapBifunctor N K (curriedTensor V) (.up ℤ)
+        q 0 q (add_zero q)) ≫
+      (HomologicalComplex.mapBifunctorMap (𝟙 N) f (curriedTensor V) (.up ℤ)).f q =
+    (HomologicalComplex.rightUnitor N).inv.f q ≫
+      (HomologicalComplex.mapBifunctorMap (𝟙 N) v (curriedTensor V) (.up ℤ)).f q := by
+  rw [Category.assoc, Category.assoc, HomologicalComplex.ι_mapBifunctorMap]
+  simp only [HomologicalComplex.id_f, curriedTensor_map_app, id_whiskerRight,
+    curriedTensor_obj_map]
+  erw [Category.id_comp, ← whiskerLeft_comp_assoc, h]
+  change _ = (HomologicalComplex.rightUnitor' N).inv q ≫ _
+  rw [HomologicalComplex.rightUnitor'_inv, Category.assoc, Category.assoc,
+    HomologicalComplex.ι_mapBifunctorMap]
+  simp only [HomologicalComplex.id_f, curriedTensor_map_app, id_whiskerRight,
+    curriedTensor_obj_map, whiskerLeft_comp, Category.assoc]
+  erw [Category.id_comp]
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem ringedTensor_unit_component
+    {S : Type*} [SmallCategory S] {J : GrothendieckTopology S}
+    (O : Sheaf J CommRingCat) (N K Q : ringedSiteComplex O)
+    (f : K ⟶ Q) (v : ringedSiteRingComplex O ⟶ Q)
+    (u : SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) ⟶ K.X 0)
+    (h : u ≫ f.f 0 =
+      (HomologicalComplex.singleObjXSelf (.up ℤ) 0 _).inv ≫ v.f 0) (q : ℤ) :
+    letI := SheafOfModules.monoidalCategory O
+    ((ρ_ (N.X q)).inv ≫ N.X q ◁ u ≫
+      HomologicalComplex.ιMapBifunctor N K (curriedTensor _) (.up ℤ)
+        q 0 q (add_zero q)) ≫ (((ringedKoszulTensor O).obj N).map f).f q =
+      ((ringedKoszulRightUnitIso O N).inv ≫ ((ringedKoszulTensor O).obj N).map v).f q := by
+  let := SheafOfModules.monoidalCategory O
+  let := SheafOfModules.tensorPreadditive O
+  exact tensor_unit_component N K Q f v u h q
+
+attribute [local irreducible] towerTransposeIso
+attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundTrip
+attribute [local irreducible] completedCechModulesEquiv
+attribute [local irreducible] completedKoszulConstant completedKoszulPower
+attribute [local irreducible] ringedKoszulDualTower ringedKoszulDiagram
+
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The finite exterior Koszul tower agrees with the ordered tensor-dual tower.
 
 Source: Stacks Project, more-algebra.tex Tag 0664, Lemma 15.29.12
@@ -241,7 +247,54 @@ theorem completedKoszulFiniteComparison
         G.map ((intrinsicPresentationRoundTrip X d).hom.app (C.X q) ≫
           (intrinsicPresentationModulesBack X d).map
             ((completedKoszulTensorUnit X (intrinsicPresentationDatum d) r a P m).f q)) ≫
-              (e m).hom.f q = (ringedKoszulTensorUnitComponent O r b N (op m)).f q) := by
-  sorry
+              (e m).hom.f q = (ringedKoszulTensorUnitComponent O r b N (op m)).f q)  := by
+  let G := (completedCechModulesEquiv X d).functor
+  let F := intrinsicPresentationModulesBack X d ⋙ G
+  let H := F.mapHomologicalComplex (.up ℤ)
+  let P := (intrinsicPresentationComplex X d).obj C
+  let O := completedCechRing X d
+  let b := fun i ↦ completedCechScalar X d (a i)
+  let N := (G.mapHomologicalComplex (.up ℤ)).obj C
+  let K := completedKoszulPowerSheaf X (intrinsicPresentationDatum d) r a
+  let τ := fun m ↦ ((completedKoszulConstant X (intrinsicPresentationDatum d)
+    ).mapHomologicalComplex (.up ℤ)).map (completedKoszulTransition (A := A) r a m)
+  let U := (ringedKoszulTensor O).obj N
+  obtain ⟨k, hk, hku⟩ := completedKoszulCoefficientComparison X d r a
+  obtain ⟨s, hs⟩ := completedCechTensorTransport X d C
+  let T := ringedKoszulTensorTowerComplex O r b N
+  let j := towerTransposeIso O r b N
+  let e := fun m ↦ (s.app (K m) ≪≫ U.mapIso (k m)) ≪≫ j m
+  refine ⟨e, ?_, ?_⟩
+  · intro m
+    have ht : H.map (completedKoszulTensorTransition X (intrinsicPresentationDatum d) r a P m) ≫
+      (s.hom.app (K m) ≫ U.map (k m).hom) =
+        (s.hom.app (K (m + 1)) ≫ U.map (k (m + 1)).hom) ≫
+          U.map ((ringedKoszulDualTower O r b).map (homOfLE (Nat.le_succ m)).op) := by
+      exact tensorComparison_transition _ H U s (τ m) (k m).hom (k (m + 1)).hom
+        ((ringedKoszulDualTower O r b).map (homOfLE (Nat.le_succ m)).op) (hk m)
+    exact towerTranspose_transition O r b N (homOfLE (Nat.le_succ m)).op
+      (H.map (completedKoszulTensorTransition X (intrinsicPresentationDatum d) r a P m))
+      (s.hom.app (K m) ≫ U.map (k m).hom)
+      (s.hom.app (K (m + 1)) ≫ U.map (k (m + 1)).hom) ht
+  · intro m q
+    let := SheafOfModules.monoidalCategory O
+    dsimp only [e, j]
+    erw [Iso.trans_hom, HomologicalComplex.comp_f, towerTransposeIso_hom_f,
+      Category.comp_id]
+    erw [Iso.trans_hom, HomologicalComplex.comp_f, Functor.mapIso_hom,
+      ← Category.assoc]
+    have hu := hs r a m q
+    have hv := ringedTensor_unit_component (completedCechRing X d)
+      ((G.mapHomologicalComplex (.up ℤ)).obj C)
+      (((intrinsicPresentationModulesBack X d ⋙ G).mapHomologicalComplex (.up ℤ)).obj
+        (completedKoszulPowerSheaf X (intrinsicPresentationDatum d) r a m)) _ (k m).hom
+      (ringedKoszulDualUnit (completedCechRing X d) r
+        (fun i ↦ completedCechScalar X d (a i)) m)
+      (completedCechCoefficientUnit X d ≫ F.map
+        (completedKoszulSheafUnitZero X (intrinsicPresentationDatum d) r a m))
+      ((Category.assoc _ _ _).trans (hku m)) q
+    dsimp only [F, G] at hv
+    have hw := congrArg (fun f ↦ f ≫ (U.map (k m).hom).f q) hu
+    exact hw.trans hv
 
 end AlgebraicGeometry.Scheme

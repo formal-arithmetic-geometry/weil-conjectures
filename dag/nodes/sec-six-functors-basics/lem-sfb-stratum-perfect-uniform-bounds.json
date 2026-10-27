@@ -1,0 +1,717 @@
+{
+ "id": "lem-sfb-stratum-perfect-uniform-bounds",
+ "kind": "statement",
+ "title": "Uniform models and Tor bounds on a locally closed stratum",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ in it, with ring of integers $\\mathcal O_E$. An admissible coefficient $\\Gamma$ here is a finite discrete commutative ring, $\\mathcal O_E$, $E$, or $\\overline{\\mathbf Q}_\\ell$ (including $\\mathbf Z_\\ell,\\mathbf Q_\\ell$ by $E=\\mathbf Q_\\ell$). Regard these as condensed rings [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]. For a scheme $T$, set $\\Gamma_T=p_T^*\\Gamma$ [sk-def-sfb-pulled-back-coefficients] on its small pro-étale site [sk-def-pe-site], and use ordinary uncompleted unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Scalar modules in a tensor denote constant sheaves, as in [det-def-sfb-constructible-local-model].\n\nFix a field $k$ of characteristic $p>0$, $p\\ne\\ell$, a separated finite-type $k$-scheme $X$, and a locally closed immersion $a:S\\hookrightarrow X$, with its induced $k$-structure [sk-def-sfb-dc-setting, def-weil-open-immersion, def-weil-closed-immersion]. Then $S$ is Noetherian, quasi-compact and quasi-separated, has a finite affine open cover, and is separated of finite type over $k$; $a$ is separated of finite type [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme, def-weil-quasi-separated-morphism, def-weil-finite-type-morphism, def-weil-proper-morphism].\n\nLet $Q\\in D(\\Gamma_S)$ have a specified pro-étale covering on which it is the termwise scalar realization of bounded finite-projective $R=\\Gamma(*)$-complexes [def-pc-perfect-ring-complex]. There is a finite affine pro-étale covering $\\{V_i\\to S\\}_{i=1}^n$ refining that covering and retaining those scalar models $Q_i^\\bullet$, and integers $r\\le s$ such that $Q_i^q=0$ outside $[r,s]$. For all $q$,\n$$H^q(Q)|_{V_i}\\simeq\\Gamma_{V_i}\\otimes_RH^q(Q_i^\\bullet),$$\nwith $H^q(Q_i^\\bullet)$ finitely presented [def-sc-finitely-presented-module], and $H^q(Q)=0$ outside $[r,s]$. For every $\\Gamma_S$-module sheaf $N$ in degree zero,\n$$ (Q\\otimes^{\\mathbf L}_{\\Gamma_S}N)|_{V_i}\\simeq(\\Gamma_{V_i}\\otimes_RQ_i^\\bullet)\\otimes_{\\Gamma_{V_i}}N|_{V_i},$$\nand its cohomology vanishes outside $[r,s]$. Thus $Q$ has bounded cohomology constructible on the single stratum $S$ and Tor amplitude in $[r,s]$, so $Q\\in\\Dctf(S,\\Gamma)$ [det-def-sfb-constructible-tor-amplitude]. For empty $S$ the cover may be empty and one may take $r=s=0$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(2) Local models, uniform global cohomology and Tor bounds; original steps 6–9 and the geometry checks in step 10"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-pe-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "det-def-sfb-constructible-local-model",
+  "sk-def-sfb-dc-setting",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-perfect-ring-complex",
+  "def-sc-finitely-presented-module",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $0$ and $k$. Thus $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Factor the immersion as $S\\xrightarrow{i}U\\xrightarrow{j}X$ with $i$ closed and $j$ open. Apply [lem-sfb-noetherian-open-closed-finite-presentation] to this factorization: $a=ji$ is quasi-compact and locally of finite presentation, hence of finite type. By [lem-sfb-finite-type-composition-base-change], $S$ is of finite type over $k$, and hence Noetherian by the first cited lemma. The immersion $a$ is separated by [lem-weil-pbc-separated-cancellation](a); composition with the separated structural map of $X$ is separated by [lem-weil-pbc-proper-fp-permanence](e). Now [lem-weil-pbc-qcqs-over-affine] gives qcqs for $S$, and [lem-weil-pbc-qcqs-finite-affine-open-cover] gives a finite affine open cover. None of this requires $S$ to be reduced.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sfb-noetherian-open-closed-finite-presentation",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01T3 (lemma-composition-finite-type); the cited immersion and qcqs tools"
+   }
+  },
+  {
+   "text": "First suppose $S$ is nonempty. Apply [lem-sfb-finite-scalar-perfect-refinement] with $B=\\Gamma_S$, $R=\\Gamma(*)$, and the specified covering and specified complexes. It supplies a finite nonempty affine refinement retaining those very complexes, their restricted representing isomorphisms, and degreewise splittings into finite free coefficient sheaves. Enumerate its finite index set as $1,\\ldots,n$ and call the retained scalar complexes $Q_i^\\bullet$. Choose bounds $a_i\\le b_i$ for these complexes and put $r=\\min_i a_i$, $s=\\max_i b_i$. Then $r\\le a_i\\le b_i\\le s$, so $Q_i^q=0$ outside $[r,s]$. These integers are chosen before, and independently of, any tensor test module.",
+   "uses": [
+    "lem-sfb-finite-scalar-perfect-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0989 (definition-fpqc-covering), 098A (lemma-recognize-proetale-covering), 098C (lemma-proetale); finite extrema of the retained bounds"
+   }
+  },
+  {
+   "text": "For each chart put $B_i=\\Gamma_{V_i}$ and $E_i^\\bullet=C_{V_i}(Q_i^\\bullet)$. The chart models of the preceding step use $B|_{V_i}$; [lem-sfb-coefficient-sections-localization] identifies the pro-étale slice with $(V_i)_{\\mathrm{proét}}$, and [sk-prop-sfb-cartesian-coefficients](1) identifies this restricted coefficient ring with $B_i$. Apply [lem-sfb-admissible-scalar-model-cohomology] on $V_i$. It gives finite presentation of every $H^q(Q_i^\\bullet)$ and $H^q(E_i^\\bullet)\\simeq B_i\\otimes_RH^q(Q_i^\\bullet)$, for all the admissible coefficients, including integral coefficients. Restriction of module sheaves is exact by [lem-sfb-ringed-site-restriction-kflat]; hence [lem-sp-exact-functor-preserves-homology](c) applied to a representative of $Q$ identifies $H^q(Q)|_{V_i}$ with $H^q(Q|_{V_i})$. The representing isomorphism $Q|_{V_i}\\simeq E_i^\\bullet$ therefore gives the required cohomology isomorphism.",
+   "uses": [
+    "lem-sfb-coefficient-sections-localization",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-admissible-scalar-model-cohomology",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2) Local models, cohomology calculation; exact scalar realization on each retained chart"
+   }
+  },
+  {
+   "text": "Each term $E_i^q$ is a retract of $B_i^{m_{iq}}$: apply scalar realization to the finite-projective inclusion and projection, obtaining $p\\,u=1$. We check flatness explicitly, rather than assuming that scalar realization is exact for this purpose. Tensoring a short exact sequence with $B_i^{m_{iq}}$ gives its finite direct sum, which is exact. Tensoring with $E_i^q$ is a retract of this operation via $u\\otimes1$ and $p\\otimes1$. In the resulting sequence injectivity follows by applying $u$ and then using injectivity in the finite sum; a middle element in the kernel lifts in the finite sum and its lift projects by $p$ to a preimage; the same lift-and-project argument gives surjectivity. Thus tensoring with $E_i^q$ is exact, which is precisely flatness [def-pc-flat-sheaf-modules]. Moreover $E_i^q=0$ outside $[r,s]$ by the retained model. Consequently [lem-pc-bounded-above-flat-kflat-site] makes $E_i^\\bullet$ K-flat.",
+   "uses": [
+    "lem-sfb-finite-scalar-perfect-refinement",
+    "def-pc-flat-sheaf-modules",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); explicit tensor-retract exactness argument"
+   }
+  },
+  {
+   "text": "Fix any $\\Gamma_S$-module sheaf $N$ in degree zero. Choose a flat-term K-flat resolution $T^\\bullet$ of a representative of $Q$, using [lem-pc-kflat-resolution]. The one-sided comparison [lem-trf-site-one-sided-tensor-normalization] represents $Q\\otimes^{\\mathbf L}N$ by $T^\\bullet\\otimes N[0]$. Restrict to $V_i$. The restriction is K-flat by [lem-sfb-ringed-site-restriction-kflat] and has flat terms by [lem-weil-pbc-slice-restriction-flat]. The degreewise comparison [lem-sfb-localized-site-tensor-restriction] identifies the restricted tensor complex with $(T^\\bullet|_{V_i})\\otimes N|_{V_i}[0]$: in degree $q$ there is only the single tensor $T^q\\otimes N$, so no infinite-sum interchange is needed. The one-sided comparison on the slice identifies its localization with $Q|_{V_i}\\otimes^{\\mathbf L}N|_{V_i}$. Replace $Q|_{V_i}$ by $E_i^\\bullet$ and apply the same comparison using its K-flatness from Step 4. This proves exactly the displayed derived isomorphism with $E_i^\\bullet\\otimes_{B_i}N|_{V_i}[0]$. Its degree-$q$ term is $E_i^q\\otimes_{B_i}N|_{V_i}$, zero for $q\\notin[r,s]$, so its cohomology is zero in those degrees. No flatness or finite generation of $N$ is used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-trf-site-one-sided-tensor-normalization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding one-sided construction), 0E8K (lemma-restriction-K-flat); sites-modules.tex Tag 0E8J (lemma-restriction-flat)"
+   }
+  },
+  {
+   "text": "For $q\\notin[r,s]$, Step 3 and the scalar degree bounds show $H^q(Q)|_{V_i}=0$. Step 5, with exact restriction and its homology comparison, likewise shows $H^q(Q\\otimes^{\\mathbf L}N)|_{V_i}=0$ for every $N$. A module sheaf $F$ vanishing on every member of this covering is zero: for any test object $W$, pull the covering back to $W$ using [lem-weil-pbc-fpqc-covering-axioms](3) and the covering description [sk-def-pe-site]. The restriction of any section of $F(W)$ is zero on every $W\\times_SV_i$, since those objects lie over $V_i$. The uniqueness part of the sheaf axiom forces the section to be zero. Apply this to the two cohomology sheaves just considered. This gives global cohomology vanishing outside $[r,s]$ and, since $N$ was arbitrary, global Tor amplitude in $[r,s]$.",
+   "uses": [
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "sk-def-pe-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098C (lemma-proetale), base change of coverings; separatedness axiom for sheaves"
+   }
+  },
+  {
+   "text": "For every $q$, the isomorphisms of Step 3 and finite presentation of $H^q(Q_i^\\bullet)$ give a finite constant local model for $H^q(Q)$ on the very same cover, by [det-def-sfb-constructible-local-model]. Use the single stratum $S$ of itself: its underlying subset is open and closed and hence constructible, so this is an allowed finite locally closed stratification. By [det-def-sfb-constructible-tor-amplitude](1)--(4), Step 6 puts $Q$ in $\\Dbc(S,\\Gamma)$ with Tor amplitude in $[r,s]$, and therefore in $\\Dctf(S,\\Gamma)$. This uses ordinary uncompleted derived categories throughout, including for $\\mathcal O_E$.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2) Local models; membership in the ordinary constructible finite-Tor subcategory"
+   }
+  },
+  {
+   "text": "If $S$ is empty, every object of its small pro-étale site is empty and has the empty covering [sk-def-pe-site]. The sheaf axiom identifies sections of an abelian sheaf on that object with the terminal abelian group, hence with zero. Thus all module sheaves, all cohomology sheaves and all tensor tests are zero. Take the empty refinement and $r=s=0$. The cohomology model assertions on its members are vacuous; the required boundedness, constructibility and Tor assertions follow immediately from [det-def-sfb-constructible-tor-amplitude].",
+   "uses": [
+    "sk-def-pe-site",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "(2) Local models; empty-scheme boundary case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-noetherian-open-closed-finite-presentation",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-sfb-finite-scalar-perfect-refinement",
+  "lem-sfb-coefficient-sections-localization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-admissible-scalar-model-cohomology",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "sk-def-pe-site",
+  "det-def-sfb-constructible-local-model",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "(2) Local models, expanded using the existing geometry, scalar-realization and ringed-site K-flat tools"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale locally bounded perfect scalar complex on a locally closed stratum of a separated finite type scheme has uniform cohomology and Tor bounds and constructible cohomology",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.Scheme.etaleTopology",
+      "module": "Mathlib/AlgebraicGeometry/Sites/Etale",
+      "type": "CategoryTheory.GrothendieckTopology AlgebraicGeometry.Scheme",
+      "doc": "The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co"
+     },
+     {
+      "name": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C",
+      "doc": "Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph"
+     },
+     {
+      "name": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U",
+      "doc": "Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that"
+     },
+     {
+      "name": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr",
+      "doc": "Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis"
+     },
+     {
+      "name": "Algebra.etaleLocus_eq_compl_support",
+      "module": "Mathlib/RingTheory/Etale/Locus",
+      "type": "∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ",
+      "doc": "The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\Omega_{A/R} $ and the first cotangent cohomology modu"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.smallEtaleTopology",
+      "module": "Mathlib/AlgebraicGeometry/Sites/Etale",
+      "type": "(X : AlgebraicGeometry.Scheme) → CategoryTheory.GrothendieckTopology X.Etale",
+      "doc": "For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri"
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)",
+      "doc": "For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper"
+     },
+     {
+      "name": "AlgebraicGeometry.IsEtale.of_comp",
+      "module": "Mathlib/AlgebraicGeometry/Morphisms/Etale",
+      "type": "∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f",
+      "doc": "If the composition of a morphism $ f: X \to Y $ with a morphism $ g: Y \to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism."
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme covers, locally Noetherian schemes, or unrelated meanings of perfect; none states the coefficient-complex uniform cohomology and Tor assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\", \"constructible\"",
+   "results": {
+    "summary": "[loogle] OK 0 hit(s)",
+    "hits": []
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme covers, locally Noetherian schemes, or unrelated meanings of perfect; none states the coefficient-complex uniform cohomology and Tor assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Tt]or|[Tt]or.*[Pp]erfect|[Pp]ro[Ee]tale.*[Cc]onstructible",
+   "results": {
+    "summary": "[grep] OK 25 hit(s)",
+    "hits": [
+     {
+      "file": "Mathlib/Combinatorics/Matroid/Map.lean",
+      "line": "102",
+      "text": "* [H. Perfect, Independence Spaces and Combinatorial Problems][perfect1969matroid]"
+     },
+     {
+      "file": "Mathlib/Combinatorics/SimpleGraph/Tutte.lean",
+      "line": "144",
+      "text": "lemma not_isTutteViolator_of_isPerfectMatching {M : Subgraph G} (hM : M.IsPerfectMatching)"
+     },
+     {
+      "file": "Mathlib/Combinatorics/SimpleGraph/Tutte.lean",
+      "line": "272",
+      "text": "lemma exists_isTutteViolator (h : ∀ (M : G.Subgraph), ¬M.IsPerfectMatching)"
+     },
+     {
+      "file": "Mathlib/Combinatorics/SimpleGraph/Tutte.lean",
+      "line": "319",
+      "text": "theorem tutte : (∃ M : Subgraph G, M.IsPerfectMatching) ↔ ∀ u, ¬ G.IsTutteViolator u := by"
+     },
+     {
+      "file": "Mathlib/Combinatorics/SimpleGraph/Tutte.lean",
+      "line": "320",
+      "text": "  refine ⟨by rintro ⟨M, hM⟩; apply not_isTutteViolator_of_isPerfectMatching hM, ?_⟩"
+     },
+     {
+      "file": "Mathlib/GroupTheory/IsPerfect.lean",
+      "line": "13",
+      "text": "A group `G` is perfect if it equals its commutator subgroup, that is `⁅G, G⁆ = G`."
+     },
+     {
+      "file": "Mathlib/GroupTheory/IsPerfect.lean",
+      "line": "21",
+      "text": "* `Group.IsPerfect`: a group `G` is *perfect* if it equals its own commutator,"
+     },
+     {
+      "file": "Mathlib/GroupTheory/IsPerfect.lean",
+      "line": "40",
+      "text": "/-- A group `G` is perfect if `G` equals its commutator subgroup `⁅G, G⁆`. -/"
+     },
+     {
+      "file": "Mathlib/GroupTheory/IsPerfect.lean",
+      "line": "45",
+      "text": "attribute [simp] IsPerfect.commutator_eq_top"
+     },
+     {
+      "file": "Mathlib/GroupTheory/IsPerfect.lean",
+      "line": "47",
+      "text": "lemma isPerfect_def : IsPerfect G ↔ commutator G = ⊤ :="
+     },
+     {
+      "file": "Mathlib/GroupTheory/GroupAction/Iwasawa.lean",
+      "line": "82",
+      "text": "theorem isSimpleGroup [Nontrivial M] (is_perfect : commutator M = ⊤)"
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/PerfectPairing/Basic.lean",
+      "line": "140",
+      "text": "`V` in `N` are perfectly complementary w.r.t. `p` if their dual annihilators are complementary,"
+     },
+     {
+      "file": "Mathlib/LinearAlgebra/Projectivization/PSL/PSL2.lean",
+      "line": "104",
+      "text": "  have : Group.IsPerfect SL(2, F) := ⟨SL2.commutator_eq_top ha hasq⟩"
+     },
+     {
+      "file": "Mathlib/Topology/Algebra/Module/PerfectSpace.lean",
+      "line": "11",
+      "text": "/-! # Vector spaces over nontrivially normed fields are perfect spaces -/"
+     },
+     {
+      "file": "Mathlib/Topology/CantorBendixson.lean",
+      "line": "13",
+      "text": "# Cantor-Bendixson derivatives and perfect kernel"
+     },
+     {
+      "file": "Mathlib/Topology/CantorBendixson.lean",
+      "line": "25",
+      "text": "* `CantorBendixson.perfectKernel s`: the largest perfect subset of `s`, defined as the"
+     },
+     {
+      "file": "Mathlib/Topology/CantorBendixson.lean",
+      "line": "30",
+      "text": "* `CantorBendixson.iteratedDerivedSet_constant_iff_preperfect`: a set is preperfect if and only"
+     },
+     {
+      "file": "Mathlib/Topology/CantorBendixson.lean",
+      "line": "34",
+      "text": "* `CantorBendixson.perfect_perfectKernel`: the perfect kernel of a closed set is perfect."
+     },
+     {
+      "file": "Mathlib/Topology/CantorBendixson.lean",
+      "line": "35",
+      "text": "* `CantorBendixson.subset_perfectKernel_of_perfect`: the perfect kernel is the largest perfect"
+     },
+     {
+      "file": "Mathlib/FieldTheory/IsPerfectClosure.lean",
+      "line": "451",
+      "text": "theorem equiv_toRingHom : (equiv i j p).toRingHom = PerfectRing.lift i j p := rfl"
+     },
+     {
+      "file": "Mathlib/FieldTheory/IsPerfectClosure.lean",
+      "line": "457",
+      "text": "    (equiv i j p).symm.toRingHom = PerfectRing.lift j i p := rfl"
+     },
+     {
+      "file": "Mathlib/Topology/Perfect.lean",
+      "line": "31",
+      "text": "* `exists_countable_union_perfect_of_isClosed`: One version of the **Cantor-Bendixson Theorem**:"
+     },
+     {
+      "file": "Mathlib/Topology/Perfect.lean",
+      "line": "50",
+      "text": "accumulation point, perfect set, dense-in-itself, cantor-bendixson."
+     },
+     {
+      "file": "Mathlib/RingTheory/Perfectoid/FontaineTheta.lean",
+      "line": "17",
+      "text": "homomorphism from the Witt vector `𝕎 R♭` of the tilt of a perfectoid ring `R`"
+     },
+     {
+      "file": "Mathlib/Topology/MetricSpace/Perfect.lean",
+      "line": "30",
+      "text": "accumulation point, perfect set, cantor-bendixson."
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme covers, locally Noetherian schemes, or unrelated meanings of perfect; none states the coefficient-complex uniform cohomology and Tor assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Quasicompact pro-etale local perfect scalar models have a finite affine trivializing cover and a common Tor interval",
+   "results": {
+    "summary": "[leansearch] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.Scheme.quasiCompactCover",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "(S : Scheme.{u}) : ObjectProperty (PreZeroHypercover.{v} S)",
+      "doc": "For a scheme $ S $, this defines the predicate on pre-zero hypercovers of $ S $ that determines whether a given pre-zero hypercover is quasi-compact."
+     },
+     {
+      "name": "AlgebraicGeometry.QuasiCompactCover.of_finite",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "{𝒰 : S.Cover K} [Scheme.JointlySurjective K] [∀ i, AlgebraicGeometry.QuasiCompact (𝒰.f i)] [Finite 𝒰.I₀] :\n  QuasiCompactCover 𝒰.toPreZeroHypercover",
+      "doc": "A pre-zero hypercover of a scheme is quasi-compact if it arises from a finite family of quasi-compact morphisms whose images cover the scheme, under a jointly surjective precoverage."
+     },
+     {
+      "name": "AlgebraicGeometry.QuasiCompactCover.homCover",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "{X S : Scheme.{u}} (f : X ⟶ S) (hf : P f) [Surjective f] [AlgebraicGeometry.QuasiCompact f] :\n  QuasiCompactCover (f.cover hf).toPreZeroHypercover",
+      "doc": "Given a surjective morphism $ f: X \to S $ of schemes that satisfies a morphism property $ P $ and is quasi-compact, the singleton presieve $\\{f\\}$ forms a quasi-compact covering sieve in the precovera"
+     },
+     {
+      "name": "AlgebraicGeometry.quasiCompactCover_iff",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "∀ {S : AlgebraicGeometry.Scheme} (𝒰 : CategoryTheory.PreZeroHypercover S),\n  AlgebraicGeometry.QuasiCompactCover 𝒰 ↔\n    ∀ {U : S.Opens},\n      AlgebraicGeometry.IsAffineOpen U →\n        IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U",
+      "doc": "A pre-zero hypercover $\\mathcal{U}$ of a scheme $S$ is quasi-compact if and only if for every affine open subset $U \\subseteq S$, the open set $U$ is the union of images of finitely many compact open "
+     },
+     {
+      "name": "AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "∀ {S : AlgebraicGeometry.Scheme} {𝒰 : CategoryTheory.PreZeroHypercover S} [self : AlgebraicGeometry.QuasiCompactCover 𝒰]\n  {U : S.Opens},\n  AlgebraicGeometry.IsAffineOpen U →\n    IsCompactOpenCovered (fun x => ⇑(CategoryTheory.ConcreteCategory.hom (𝒰.f x).base)) ↑U",
+      "doc": "For a scheme $ S $ and a quasi-compact pre-zero hypercover $ \\mathcal{U} $ of $ S $, if $ U $ is an affine open subset of $ S $, then $ U $ is covered by the images of finitely many compact open subse"
+     },
+     {
+      "name": "AlgebraicGeometry.Scheme.quasiCompactCover_iff",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "(S : Scheme.{u}) (𝒰 : PreZeroHypercover.{v} S) : S.quasiCompactCover 𝒰 ↔ QuasiCompactCover 𝒰",
+      "doc": "For a scheme $ S $ and a pre-zero hypercover $ \\mathcal{U} $ of $ S $, the quasi-compact cover property defined by $ S $ is equivalent to the general quasi-compact cover predicate applied to $ \\mathca"
+     },
+     {
+      "name": "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+      "module": "Mathlib.AlgebraicGeometry.Morphisms.Affine",
+      "type": "[IsAffineHom f] : QuasiCompact f",
+      "doc": "Every affine morphism of schemes is quasi-compact."
+     },
+     {
+      "name": "AlgebraicGeometry.QuasiCompactCover.instPullback₁Scheme",
+      "module": "Mathlib.AlgebraicGeometry.Cover.QuasiCompact",
+      "type": "[QuasiCompactCover 𝒰] {T : Scheme.{u}} (f : T ⟶ S) : QuasiCompactCover (𝒰.pullback₁ f)",
+      "doc": "Given a quasi-compact cover $\\mathcal{U}$ of a scheme $S$ and a morphism $f : T \\to S$ of schemes, the pullback of $\\mathcal{U}$ along $f$ forms a quasi-compact cover of $T$. This asserts that the pro"
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme covers, locally Noetherian schemes, or unrelated meanings of perfect; none states the coefficient-complex uniform cohomology and Tor assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a noetherian scheme locally perfect coefficient complexes are bounded constructible of finite Tor amplitude using a finite pro-etale refinement",
+   "results": {
+    "summary": "[leanfinder] OK 8 hit(s)",
+    "hits": [
+     {
+      "name": "AlgebraicGeometry.IsLocallyNoetherian",
+      "module": "Mathlib/AlgebraicGeometry/Noetherian",
+      "type": "AlgebraicGeometry.Scheme → Prop",
+      "doc": "A scheme is locally Noetherian if it admits an open cover by Noetherian schemes."
+     },
+     {
+      "name": "AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+      "module": "Mathlib/AlgebraicGeometry/Noetherian",
+      "type": "∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X",
+      "doc": "If $ Y $ is a locally Noetherian scheme and $ f: X \\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme."
+     },
+     {
+      "name": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr",
+      "doc": "Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis"
+     },
+     {
+      "name": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C",
+      "doc": "Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph"
+     },
+     {
+      "name": "AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top",
+      "module": "Mathlib/AlgebraicGeometry/Noetherian",
+      "type": "∀ {X : AlgebraicGeometry.Scheme} {ι : Sort u_1} [Finite ι] {S : ι → ↑X.affineOpens},\n  ⨆ i, ↑(S i) = ⊤ →\n    (AlgebraicGeometry.IsNoetherian X ↔ ∀ (i : ι), IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑(S i))))",
+      "doc": "For a scheme $X$ and a finite family of affine open subsets $\\{S_i\\}$ whose union is $X$, $X$ is Noetherian if and only if the ring of sections $\\Gamma(X, S_i)$ is a Noetherian ring for every $i$."
+     },
+     {
+      "name": "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+      "module": "Mathlib/AlgebraicGeometry/Noetherian",
+      "type": "∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))",
+      "doc": "For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\mathcal{O}_X(U) $ is Noetherian."
+     },
+     {
+      "name": "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+      "module": "Mathlib/AlgebraicGeometry/AffineTransitionLimit",
+      "type": "∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U",
+      "doc": "Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that"
+     },
+     {
+      "name": "AlgebraicGeometry.noetherianSpace_of_isAffine",
+      "module": "Mathlib/AlgebraicGeometry/Noetherian",
+      "type": "∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\n  TopologicalSpace.NoetherianSpace ↥X",
+      "doc": "If $X$ is an affine scheme and the ring of global sections $\\Gamma(X, \\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every "
+     }
+    ]
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern scheme covers, locally Noetherian schemes, or unrelated meanings of perfect; none states the coefficient-complex uniform cohomology and Tor assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Locally bounded perfect scalar complexes of sheaves on a quasi compact pro etale site have uniform Tor amplitude and constructible cohomology",
+   "results": {
+    "t": "2026-10-24T08:21:42Z",
+    "tool": "leanfinder",
+    "query": "Locally bounded perfect scalar complexes of sheaves on a quasi compact pro etale site have uniform Tor amplitude and constructible cohomology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "SheafOfModules.IsFiniteType",
+     "CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "SheafOfModules.isQuasicoherent"
+    ],
+    "digest": "999c8ab51d705168"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-presentation, Grothendieck-category and derived-category support facts do not state the pro-etale scalar-model constructibility and Tor result."
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|finite_affine_proetale|scalarPerfect",
+   "results": {
+    "t": "2026-10-24T08:21:58Z",
+    "tool": "grep",
+    "query": "torAmplitude|TorAmplitude|finite_affine_proetale|scalarPerfect",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-presentation, Grothendieck-category and derived-category support facts do not state the pro-etale scalar-model constructibility and Tor result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally perfect complex of coefficient sheaves on a quasi compact scheme has bounded constructible cohomology and finite Tor amplitude",
+   "results": {
+    "t": "2026-10-24T08:21:59Z",
+    "tool": "leansearch",
+    "query": "A locally perfect complex of coefficient sheaves on a quasi compact scheme has bounded constructible cohomology and finite Tor amplitude",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "HomologicalComplex.locallySmall",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation",
+     "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+     "HomologicalComplex.instHasFiniteLimits",
+     "SheafOfModules.instIsFiniteTypeOfIsFinitePresentation",
+     "SheafOfModules.IsFinitePresentation.exists_quasicoherentData",
+     "SheafOfModules.QuasicoherentData.I",
+     "DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp"
+    ],
+    "digest": "412c96d4ea1e7b84"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-presentation, Grothendieck-category and derived-category support facts do not state the pro-etale scalar-model constructibility and Tor result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"proetale\", \"Perfect\"",
+   "results": {
+    "t": "2026-10-24T08:21:59Z",
+    "tool": "loogle",
+    "query": "\"proetale\", \"Perfect\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-presentation, Grothendieck-category and derived-category support facts do not state the pro-etale scalar-model constructibility and Tor result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex locally represented by finite projective modules on a finite covering has a common bound for cohomology and derived tensor with every module sheaf",
+   "results": {
+    "t": "2026-10-24T08:25:07Z",
+    "tool": "leanfinder",
+    "query": "A bounded complex locally represented by finite projective modules on a finite covering has a common bound for cohomology and derived tensor with every module sheaf",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.isFinitePresentation",
+     "SheafOfModules.Presentation.IsFinite",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType",
+     "SheafOfModules.LocalGeneratorsData.IsFiniteType",
+     "SheafOfModules.IsFinitePresentation",
+     "SheafOfModules.localGeneratorsDataOfIsFiniteType",
+     "SheafOfModules.IsFiniteType",
+     "CochainComplex.IsKProjective"
+    ],
+    "digest": "4f68f269f4061ea7"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: returned finite-presentation, Grothendieck-category and derived-category support facts do not state the pro-etale scalar-model constructibility and Tor result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-scalar-six-ctf",
+  "date": "2026-10-24",
+  "group": "N5"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "(2) Local models, uniform global cohomology and Tor bounds; original steps 6–9 and the geometry checks in step 10",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stratum-perfect-uniform-bounds",
+  "worker": "stage1",
+  "summary": "Eight-step proof reusing existing nodes only. Verified the locally closed stratum geometry, retained scalar models on a finite affine cover, exact scalar cohomology with finitely presented models, flatness by explicit retracts, one-sided K-flat tensor calculation and sheaf descent of uniform bounds. Empty stratum treated separately. Statement unchanged.",
+  "blueprint": "Realizes det-prop-scalar-six-ctf proof (2), its local perfect cohomology and Tor assertions, with the finite-cover uniformization and geometry required by this item.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-scalar-perfect-refinement",
+    "why": "Extracts the finite affine refinement, retains the supplied scalar complexes and finite-free splittings; does not assert the cohomology or Tor conclusion of this item."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Generic Coefficient sections over pro-étale objects agree with global sections after pullback tool used with its stated hypotheses; this unit has no separate result giving this fact."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic Inverse image of the coefficient sheaves tool used with its stated hypotheses; this unit has no separate result giving this fact."
+   },
+   {
+    "node": "lem-sfb-ringed-site-restriction-kflat",
+    "why": "Exact restriction to any ringed slice and preservation of K-flatness."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat tool used with its stated hypotheses; this unit has no separate result giving this fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site tool used with its stated hypotheses; this unit has no separate result giving this fact."
+   },
+   {
+    "node": "lem-trf-site-one-sided-tensor-normalization",
+    "why": "Computes ordinary uncompleted derived tensor with a K-flat factor and an arbitrary test complex."
+   },
+   {
+    "node": "lem-weil-pbc-slice-restriction-flat",
+    "why": "Generic Flatness survives restriction to a slice tool used with its stated hypotheses; this unit has no separate result giving this fact."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic Restriction to a localized site commutes with the sheaf tensor product tool used with its stated hypotheses; this unit has no separate result giving this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-scalar-perfect-refinement",
+  "lem-sfb-coefficient-sections-localization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-kflat-resolution",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-4c52920cf",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-4c52920cf (reviewer sub-agent of L); spot-checked: I read the item and the statement of every cited node in full. This is a first split: no new nodes, proof_deps equal the union of the uses, all ten Stacks tags match tags/tags, and nothing cites SGA. Source: blueprint det-prop-scalar-six-ctf proof (2), identical in main-20261015 and latest. The integral case runs in ordinary uncompleted categories through the own-unit node lem-sfb-admissible-scalar-model-cohomology, which asserts that scalar realization is exact for O_E; that holds because C(π0,O_E) is torsion-free and hence flat. S1: the immersion is closed into open, so lem-sfb-noetherian-open-closed-finite-presentation gives quasi-compact and lfp; finite type and Noetherian follow over Spec k; separatedness comes from cancellation (a) and permanence (e); qcqs-over-affine and the finite affine cover follow. S2: the refinement node's statement (S nonempty and quasi-compact) gives finite J, affine V_j, retained F and splittings; min/max are taken over a nonempty finite set, before N is chosen. S3: slice identification plus α_f iso, then the scalar-model node on W=V_i, then exact restriction with exact-functor (c). S4: retract argument P∘I=1, correct flatness, then the bounded-above flat complex is K-flat. S5: K-flat flat-term resolution; the one-sided comparison works for arbitrary N[0]; restriction keeps K-flatness and flat terms; natural degreewise tensor restriction; E_i⊗N has terms only in [r,s]. S6: elementary vanishing on the cover through base change of covers and the separation axiom. S7: matches the local-model and Tor-amplitude definitions (1)-(4) literally, with S qcqs as a single constructible stratum. S8: empty case. Edge cases tested: empty S; Z/4 with [Z/4 -2-> Z/4]; integral torsion cohomology; Q̄_ℓ; disjoint local amplitudes; non-flat N. Duplicate search (rg over dag/nodes) found only a dualizability node and module-level Tor nodes, none restating the item. No cycle. All nine declared tool_uses are accepted as generic black boxes outside the unit's route. Two implicit identifications are noted, neither a fault: the map from constant R to Γ_S in Step 2 (fixed by the local-model definition), and the layer-B relative derived tensor versus the site derived tensor in Step 5 (both are K-flat derived functors, so they agree up to isomorphism)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratumPerfectUniformBounds",
+  "declaration": "AlgebraicGeometry.ProEtale.StratumPerfectBounds.stratum_perfect_uniform_bounds",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StratumPerfectBounds.Scalars",
+   "AlgebraicGeometry.ProEtale.StratumPerfectBounds.Modules",
+   "AlgebraicGeometry.ProEtale.StratumPerfectBounds.realized",
+   "AlgebraicGeometry.ProEtale.StratumPerfectBounds.Assertion",
+   "AlgebraicGeometry.ProEtale.StratumPerfectBounds.stratum_perfect_uniform_bounds"
+  ],
+  "file": "lean/Sheaf/Paper/StratumPerfectUniformBounds.lean",
+  "statement": "theorem stratum_perfect_uniform_bounds (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hpl : p ≠ ℓ) (_hΛ : (∃ (A : Type u) (_ : CommRing A), Finite A ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (cartesianFinitePointRing A))) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1))) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) (X S : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (a : S ⟶ X) [IsImmersion a] : IsNoetherian S ∧ CompactSpace S ∧ QuasiSeparatedSpace S ∧ (∃ (m : ℕ) (U : Fin m → S.Opens), (∀ j, IsAffineOpen (U j)) ∧ ∀ x : S, ∃ j, x ∈ U j) ∧ LocallyOfFiniteType (a ≫ (X ↘ Spec (.of k))) ∧ QuasiCompact (a ≫ (X ↘ Spec (.of k))) ∧ IsSeparated (a ≫ (X ↘ Spec (.of k))) ∧ LocallyOfFiniteType a ∧ QuasiCompact a ∧ IsSeparated a ∧ Assertion.{u, i} Λ S",
+  "branch": "sheaf-dag",
+  "by": "Q110",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The assertion uses the existing internal module category, equivalent to sectionwise module sheaves, and the actual canonical scalar extension from Gamma(*). It retains the supplied scalar complexes on a finite affine refinement, all uniform cohomology and arbitrary-module Tor conclusions, the geometry of the stratum, and its empty case. The algebraic closure is the recorded finite-subextension-valued object; finite discrete coefficients have no ell-primary restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c8ba11595",
+  "group": "Q110",
+  "result": "fix",
+  "note": "Lean and record correct. Checked clause by clause against det-prop-scalar-six-ctf (2) and the stmt_dep declarations. Hypotheses: coefficient disjunction same as landed siblings (CartesianUntwistedAssertions; finite rings without ell-primary condition, finite-subextension Qbar); CharP k p with 0<p and p≠ℓ; X/k separated finite type; IsImmersion a with composite k-structure; cover universe i free; F bounded with retract-of-finiteFree terms; local isos to the canonical finiteConstantScalarExtension. Conclusions: Noetherian, qcqs, finite affine cover, LOFT/QC/separated for S/k and a; finite affine refinement that is a genuine proetalePrecoverage covering retaining F(α j), uniform r≤s chosen before N; Mod.IsFinitelyPresented scalar cohomology with H^q(Q)|V ≅ ext(H^q F); global H^q vanishing; derived local tensor iso for arbitrary N; global Tor vanishing; HasFiniteConstantLocalModel for every H^q, constantModelBoundedConstructible and torAmplitudeIn r s (= Dctf with the interval); IsEmpty S → n=r=s=0. Only lean field changed vs side-live; statement verbatim; imports follow brief §3; helpers not hollow; only sorry. Sole fault H11: second reading is a self-check ('no second agent was started') → fixes/lem-sfb-stratum-perfect-uniform-bounds.report.md keeps the worker report verbatim and adds a clause-by-clause second reading. Advisory: upperStar, Mod.finiteFree and Mod.IsFinitelyPresented have no stmt_dep owner record (same usage as landed HasFiniteConstantLocalModel). No Lean changed, so no compile."
+ }
+}

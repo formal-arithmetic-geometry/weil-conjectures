@@ -1,0 +1,278 @@
+{
+ "id": "lem-sfb-space-integral-closure-smooth-pullback",
+ "kind": "statement",
+ "title": "Integral closure of quasi-coherent algebras commutes with smooth space pullback",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $g:Y\\to X$ a smooth morphism of algebraic spaces over $S$ [def-trf-algebraic-space], meaning that every compatible pair of etale scheme charts $U\\to Y$, $V\\to X$ with a map $U\\to V$ over $g$ gives a smooth scheme morphism [def-sbc-smooth-morphisms], in the universes of [def-weil-size-convention]. Let $\\mathcal B$ be a commutative $\\mathcal O_X$-algebra on the small etale site whose underlying module is quasi-coherent [def-trf-space-quasi-coherent-module]. Write $\\operatorname{IC}_X(\\mathcal B)\\subseteq\\mathcal B$ for the unique quasi-coherent subalgebra of [lem-sfb-space-quasicoherent-integral-closure], characterized on affine etale tests by elements satisfying monic polynomials over the base ring. Tensor pullback [def-trf-space-etale-module-functors] of this inclusion identifies $g^*\\operatorname{IC}_X(\\mathcal B)$ with $\\operatorname{IC}_Y(g^*\\mathcal B)$ as subalgebras of $g^*\\mathcal B$. The identification is the one induced by pulling back the inclusion, hence is compatible with isomorphisms of $\\mathcal B$ and with identity and composite smooth pullbacks. No finite-type, reducedness, injectivity of the structure map, or Noetherian hypothesis on $\\mathcal B$ or the spaces is imposed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 082E (lemma-integral-closure-smooth-pullback); compatibility is the equality as subalgebras in this lemma. Integral closure itself is the existing Tag 0820 node, not a new assertion here."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "lem-sfb-space-quasicoherent-integral-closure",
+  "def-trf-space-etale-module-functors",
+  "def-sfb-space-algebra-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\operatorname{IC}_X(\\mathcal B)$. The integral-closure node supplies its quasi-coherence and its inclusion in $\\mathcal B$; pullback preserves quasi-coherence for both modules. Choose affine etale charts $V_i\\to X$ covering $X$. Their base changes cover $Y$; choose affine etale scheme charts $U_{ij}$ covering $Y\\times_X V_i$. Thus each $U=\\operatorname{Spec}T$ maps to $V=\\operatorname{Spec}R$ over $g$, and these $U$ cover $Y$. By the chartwise smoothness hypothesis $R\\to T$ is smooth. Write $B=\\mathcal B(V)$ and $C=\\mathcal C(V)=\\operatorname{IC}_R(B)$. The normalized tensor-composition comparison identifies $(g^*\\mathcal B)|_U$ with the pullback to $U$ of $\\mathcal B|_V$, and does the same for $\\mathcal C$ and its inclusion. The affine-chart calculus identifies these restricted quasi-coherent modules with their associated modules on the affine schemes. For the scheme map $h:U\\to V$, the Zariski--etale comparison identifies the etale tensor pullback of the etale module associated with a quasi-coherent Zariski module $M$ on $V$ with the etale module associated with the Zariski pullback $h^*M$, naturally in $M$, and its sections on the open $U$ are those of $h^*M$. Applying affine pullback sections to $h^*$ of the Zariski modules of $B$ and $C$ gives $(g^*\\mathcal B)(U)=T\\otimes_R B$ and $(g^*\\mathcal C)(U)=T\\otimes_R C$. Naturality of that sections isomorphism identifies the pulled-back inclusion with $1_T\\otimes(C\\hookrightarrow B)$, sending $t\\otimes c$ to $t\\otimes c$. These identifications respect algebra multiplication because on local tensor sections multiplication is $(t\\otimes b)(t^{\\prime}\\otimes b^{\\prime})=tt^{\\prime}\\otimes bb^{\\prime}$.",
+   "uses": [
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-space-module-pullback-quasicoherent",
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "def-sbc-smooth-morphisms",
+    "lem-trf-space-chart-adjunction-tensor-realization",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 082E (lemma-integral-closure-smooth-pullback), affine reduction, expanded using Tags 0820, 03GA, 03LZ and 01I9."
+   }
+  },
+  {
+   "text": "Apply smooth ring base change to $R\\to T$ and $R\\to B$. It says that $T\\otimes_R C\\to\\operatorname{IC}_T(T\\otimes_R B)$ is an isomorphism induced by the same tensor of the inclusion. Composing with the subalgebra inclusion into $T\\otimes_R B$ is therefore injective and has image exactly that integral closure. The space integral-closure node applied to the quasi-coherent algebra $g^*\\mathcal B$ identifies this target with $\\operatorname{IC}_Y(g^*\\mathcal B)(U)$. The restrictions to $U$ of the quasi-coherent modules $g^*\\mathcal C$, $g^*\\mathcal B$ and $\\operatorname{IC}_Y(g^*\\mathcal B)$ are the associated modules of their sections on $U$, so these statements about sections on $U$ hold for the restricted sheaf maps on the etale site of $U$. Consequently the pulled-back map is locally a monomorphism and has exactly the required subalgebra as image. The ring theorem imposes no condition on $R\\to B$ beyond being a commutative algebra map.",
+   "uses": [
+    "lem-sfb-integral-closure-smooth-base-change",
+    "lem-sfb-space-quasicoherent-integral-closure",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 082E (lemma-integral-closure-smooth-pullback), affine reduction, expanded using Tags 0820, 03GA, 03LZ and 01I9."
+   }
+  },
+  {
+   "text": "These local maps all come from the single sheaf map $g^*(\\mathcal C\\hookrightarrow\\mathcal B)$. On overlaps their factorizations through $\\operatorname{IC}_Y(g^*\\mathcal B)$ agree, since its inclusion in $g^*\\mathcal B$ is injective on sections. The sheaf gluing axiom therefore gives a global comparison map. Its local inverses also agree: after the same injective inclusion they are inverses of the very same map. They glue to its inverse. This proves the asserted identification as subalgebras, including monicity of the pulled-back inclusion. The argument uses an etale cover, not an assertion that every affine chart of $Y$ maps into a single affine chart of $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 082E (lemma-integral-closure-smooth-pullback), affine reduction, expanded using Tags 0820, 03GA, 03LZ and 01I9."
+   }
+  },
+  {
+   "text": "An algebra isomorphism carries an element satisfying a monic polynomial to one satisfying the image monic polynomial, and its inverse gives the converse. The resulting integral-closure maps commute with the inclusions. The comparison above is uniquely determined by its composite with the inclusion, so is natural in algebra isomorphisms. For the identity pullback the tensor unit sends $a\\otimes c$ to $ac$, hence gives the identity on this subalgebra. For successive smooth pullbacks, the tensor-composition comparison sends $a\\otimes(b\\otimes c)$ to $a\\,h^\\sharp(b)\\otimes c$. Both the successive and composite comparisons send this local tensor to that same element in the pulled-back ambient algebra. Local tensors generate the sheafified tensor product, so the maps agree; injectivity of the integral-closure inclusion gives the claimed equality into the subalgebra.",
+   "uses": [
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 082E (lemma-integral-closure-smooth-pullback), affine reduction, expanded using Tags 0820, 03GA, 03LZ and 01I9."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-quasicoherent-integral-closure",
+  "lem-sfb-space-module-pullback-quasicoherent",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sbc-smooth-morphisms",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-sfb-integral-closure-smooth-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 082E (lemma-integral-closure-smooth-pullback); chart reduction and compatibility expanded using the cited tensor comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a quasi coherent algebra on a scheme is quasi coherent and commutes with smooth pullback",
+   "results": "{\"t\": \"2026-10-23T13:16:03Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure of a quasi coherent algebra on a scheme is quasi coherent and commutes with smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"158acca82e0e7621\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T13:16:03Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_bijective_of_smooth\"], \"digest\": \"07d15de121f31b30\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure subalgebra sheaf of a quasi coherent algebra on a scheme commutes with smooth pullback",
+   "results": "{\"t\": \"2026-10-23T13:17:02Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure subalgebra sheaf of a quasi coherent algebra on a scheme commutes with smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure\", \"integralClosure\", \"integralClosure.isIntegralClosure\", \"Ring.NormalClosure\", \"AlgHom.mapIntegralClosure\", \"integralClosure.AlgebraIsIntegral\", \"IsIntegralClosure.lift\", \"Ring.instAlgebraNormalClosure\"], \"digest\": \"dc9cc3177ad0e48d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|toIntegralClosure_bijective_of_smooth",
+   "results": "{\"t\": \"2026-10-23T13:17:02Z\", \"tool\": \"grep\", \"query\": \"integralClosure|toIntegralClosure_bijective_of_smooth\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"2520c2942b5bf338\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary commutative algebras R to B and smooth R algebra S, S tensor R integralClosure R B is isomorphic to integralClosure S of S tensor R B",
+   "results": "{\"t\": \"2026-10-23T13:36:42Z\", \"tool\": \"leanfinder\", \"query\": \"For arbitrary commutative algebras R to B and smooth R algebra S, S tensor R integralClosure R B is isomorphic to integralClosure S of S tensor R B\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"Algebra.IsIntegral.tensorProduct\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_injective_of_flat\", \"IsIntegral.tmul\"], \"digest\": \"501a2b3cd0a03823\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "^lemma TensorProduct.toIntegralClosure_bijective_of_smooth|^def TensorProduct.toIntegralClosure",
+   "results": "{\"t\": \"2026-10-23T13:36:42Z\", \"tool\": \"grep\", \"query\": \"^lemma TensorProduct.toIntegralClosure_bijective_of_smooth|^def TensorProduct.toIntegralClosure\", \"sub\": \"RingTheory/Smooth/IntegralClosure.lean\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"39\"], \"digest\": \"65135d19bbecd1b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective_of_smooth|normalizationObjIso",
+   "results": "{\"t\": \"2026-10-23T13:47:06Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_bijective_of_smooth|normalizationObjIso\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\"], \"digest\": \"eaf10616b2925db6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of a sheaf of quasi coherent algebras on an algebraic space is compatible with smooth pullback",
+   "results": "{\"t\": \"2026-10-23T14:29:23Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure of a sheaf of quasi coherent algebras on an algebraic space is compatible with smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.rec\", \"completeIntegralClosure\", \"IsIntegralClosure\", \"integralClosure.AlgebraIsIntegral\", \"integralClosure\", \"IsIntegralClosure.of_isIntegrallyClosed\", \"IsIntegralClosure.mk\", \"integralClosure.isIntegralClosure\"], \"digest\": \"12bbf9bf946a4e6a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of algebraic spaces pullback of the integral closure subsheaf of a quasi coherent algebra is the integral closure of its pullback",
+   "results": "{\"t\": \"2026-10-23T14:29:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth morphism of algebraic spaces pullback of the integral closure subsheaf of a quasi coherent algebra is the integral closure of its pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"06dec23f64c5a9b9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the ring comparison TensorProduct.toIntegralClosure_bijective_of_smooth (Mathlib/RingTheory/Smooth/IntegralClosure.lean:380) is relevant but does not state the sheaf comparison on algebraic spaces. Read its source; scheme normalization hits also do not specialize to this sheaf assertion in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth morphism of algebraic spaces the tensor pullback of the integral closure subalgebra of a quasi coherent algebra equals the integral closure of the pulled back algebra",
+   "results": "{\"t\": \"2026-10-23T16:12:41Z\", \"tool\": \"leanfinder\", \"query\": \"For a smooth morphism of algebraic spaces the tensor pullback of the integral closure subalgebra of a quasi coherent algebra equals the integral closure of the pulled back algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Algebra.IsPushout.isIntegral'\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\"], \"digest\": \"5db215227b0d2ac0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-space sheaf assertion is not stated; returned normalization declarations concern schemes, and TensorProduct.toIntegralClosure concerns rings only. The smooth ring theorem is isolated as a Mathlib leaf, not used to claim a one-line sheaf specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure sheaf for algebraic spaces commutes with smooth pullback",
+   "results": "{\"t\": \"2026-10-23T16:12:41Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure sheaf for algebraic spaces commutes with smooth pullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"completeIntegralClosure\", \"IsLocalization.Away.integralClosure\", \"IsLocalization.integralClosure\", \"IsIntegralClosure.rec\", \"AlgHom.mapIntegralClosure\", \"Ring.NormalClosure\", \"integralClosure_map_algEquiv\", \"integralClosure.AlgebraIsIntegral\"], \"digest\": \"bd4fdbc4587b9be6\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-space sheaf assertion is not stated; returned normalization declarations concern schemes, and TensorProduct.toIntegralClosure concerns rings only. The smooth ring theorem is isolated as a Mathlib leaf, not used to claim a one-line sheaf specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure|IntegralClosure",
+   "results": "{\"t\": \"2026-10-23T16:12:42Z\", \"tool\": \"grep\", \"query\": \"integralClosure|IntegralClosure\", \"sub\": \"AlgebraicGeometry/Normalization\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-space sheaf assertion is not stated; returned normalization declarations concern schemes, and TensorProduct.toIntegralClosure concerns rings only. The smooth ring theorem is isolated as a Mathlib leaf, not used to claim a one-line sheaf specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of a quasi coherent algebra on the small etale site of an algebraic space is compatible with smooth change of base",
+   "results": "{\"t\": \"2026-10-23T16:12:43Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization of a quasi coherent algebra on the small etale site of an algebraic space is compatible with smooth change of base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc\", \"AlgebraicGeometry.Scheme.Hom.normalization\"], \"digest\": \"2d747cf925155869\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: algebraic-space sheaf assertion is not stated; returned normalization declarations concern schemes, and TensorProduct.toIntegralClosure concerns rings only. The smooth ring theorem is isolated as a Mathlib leaf, not used to claim a one-line sheaf specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-quasifinite-relative-normalization",
+  "date": "2026-10-23",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: the integral Zariski-main factorization in Alper Lemma 8.3.1, with its actual relative-normalization algebra retained. Supporting input: smooth pullback comparison for integral-closure algebras on the relation algebraic spaces, before descending to the stack.",
+   "via": [
+    "lem-sfb-stack-quasifinite-relative-normalization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-integral-closure-smooth-pullback",
+  "worker": "stage1",
+  "summary": "Read Tag 082E and its affine reduction; expanded the chart cover, canonical tensor inclusion, local equality and compatibility. Added one exact Mathlib leaf for Tag 03GG; reused existing quasi-coherence, integral-closure and chart-calculus nodes. Clarified space smoothness by its chart test and replaced the scheme-Zariski pullback reference by the existing space-etale tensor pullback definition.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), compactification/direct-image route, through the inherited alteration and relative-normalization chain; this item supplies the smooth integral-closure comparison on relation spaces in the stack relative-normalization step.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Canonical tensor pullback and composition on algebraic-space charts are used as a general module-theoretic tool; this unit has no replacement for its normalization formula."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Base change of etale scheme covers constructs compatible affine charts; this is a general algebraic-space cover tool, not a change of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Ordinary affine scheme tensor-pullback sections and their naturality calculate the restriction after the cited space chart comparison; this is a general affine module computation."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Comparison of etale tensor pullback with Zariski pullback of quasi-coherent modules on affine scheme charts (Stacks 03DX/03LC); a general module tool, already in the closure of lem-sfb-space-qcoh-affine-chart-calculus, added by the reviewer to bridge step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-010720f7d",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-010720f7d (reviewer sub-agent of L); spot-checked: I read Stacks 082E (spaces-more-morphisms l.6122; its proof reduces to the affine case and then cites 03GG) and 03GG (algebra l.40692). Mathlib RingTheory/Smooth/IntegralClosure.lean: toIntegralClosure is defined at 34-45 and sends t⊗c to t⊗c; toIntegralClosure_bijective_of_smooth is at line 380 with no extra hypotheses. The new leaf lem-sfb-integral-closure-smooth-base-change is exactly 03GG and a one-line specialization. Small cases T=R, B=0, T=0, Z→Z/2 and R[t] are consistent. It duplicates no existing node: the etale, ind-etale, geonormal and weakly-etale nodes are all narrower. The item statement changes against live are a chart-test spelling of space smoothness (equivalent to the standard notion: U→Y×_XV is etale and Y×_XV→V is a base change of g) and the pullback reference corrected to the etale-site definition. Neither weakens the statement. Live still has the item unsplit, there is no re-split note, and the base had no proof. Steps 1-4: I checked every cited statement. Step 3's gluing is genuinely elementary and uses the refined etale cover, so it does not assume each chart of Y lands in one chart of X. Step 4's identity and composite formulas are in the chart-adjunction node. Two faults, both fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-space-integral-closure-smooth-pullback.json. (1) C1/C4: step 1 goes from the etale tensor pullback P_h to the Zariski affine-pullback sections node with no bridge. I added lem-trf-scheme-zariski-etale-quasi-coherent-equivalence ((a^*F)_et≃a_et^*F_et, natural) to step 1, proof_deps and tool_uses; it is already in the closure of the chart calculus. I also added a clarifying sentence and chart-calculus citation in step 2: on affine U the restricted quasi-coherent maps are determined by their sections. (2) B4: three literal TAB characters (\\to written unescaped) in the item statement are repaired. Batch 5: the closures of def-trf-space-etale-module-functors, lem-trf-space-fibre-products-etale-covers, lem-trf-space-chart-adjunction-tensor-realization, lem-sfb-space-module-pullback-quasicoherent and lem-sfb-space-qcoh-affine-chart-calculus (and the added Zariski-etale node) contain no trace-formula or Poincare node. These are general algebraic-space and module foundations, so I accepted them. No SGA is cited. blueprint.from.node=null is inherited from the base chain; no action.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceIntegralClosureSmoothPullback",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.integralClosure_smooth_pullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceIntegralClosureSmoothPullback.lean",
+  "statement": "theorem integralClosure_smooth_pullback {S : Scheme.{u}} {X Y : AlgebraicSpace S} (g : Y ⟶ X) (hg : ∀ (U : Y.EtaleSite) (V : X.EtaleSite) (a : U.obj.left ⟶ V.obj.left), yoneda.map a ≫ V.obj.hom = U.obj.hom ≫ g.hom.hom → Smooth a.left) (B : X.CommAlgebraSheaf) (hB : B.toModule.IsQuasicoherent) (C : Subobject B) (hC : (C : X.CommAlgebraSheaf).toModule.IsQuasicoherent ∧ ∀ (V : X.EtaleSite), IsAffine (X.etaleForget.obj V) → ∀ b : B.right.obj.obj (op V), b ∈ Set.range ((Subobject.arrow C).right.hom.app (op V)) ↔ (B.hom.hom.app (op V)).hom.IsIntegralElem b) (P : AlgebraTensorPullbackModel g) (D : Subobject (P.functor.obj B)) (hD : (D : Y.CommAlgebraSheaf).toModule.IsQuasicoherent ∧ ∀ (U : Y.EtaleSite), IsAffine (Y.etaleForget.obj U) → ∀ b : (P.functor.obj B).right.obj.obj (op U), b ∈ Set.range ((Subobject.arrow D).right.hom.app (op U)) ↔ ((P.functor.obj B).hom.hom.app (op U)).hom.IsIntegralElem b) : ∃! e : P.functor.obj (C : X.CommAlgebraSheaf) ≅ (D : Y.CommAlgebraSheaf), e.hom ≫ Subobject.arrow D = P.functor.map (Subobject.arrow C)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f268c4dd",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Item matches node and Stacks 082E: one universe u; hg is the ∀-chart smooth test; B : CommAlgebraSheaf with quasi-coherent module; C and D carry the landed Tag 0820 predicate word for word (unique, so equal to IC_X(B) and IC_Y(g^*B)); ∃! algebra iso e with e.hom ≫ arrow D = P.functor.map (arrow C) gives equality as subalgebras via the pulled-back inclusion; compatibilities follow from uniqueness; no extra hypotheses. New def node def-sfb-space-algebra-tensor-pullback is justified (no space algebra pullback in live; only scheme-level ones exist); moduleIso to moduleTensorPullback plus tensor_one/tensor_mul pin down the algebra structure; normalized uniqueness theorem is equivalent to the node; .choose selection OK; H12 fields complete. Item changed only stmt_deps (new node) and lean; dependency nodes identical to live; statement verbatim; docstrings with proof steps, ≤100-char lines, proof-dep imports plain. Advisory: hg spells out landed MapIsLocally (@Smooth) g (def-sfb-space-morphism-properties not citable in S2); CommAlgebraSheaf owner def-sfb-space-quasi-coherent-algebra reached only indirectly (stage-1 omission). No compile run (no fix made)."
+ }
+}

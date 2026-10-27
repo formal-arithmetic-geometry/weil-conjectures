@@ -1,0 +1,202 @@
+{
+ "id": "lem-sfb-integral-blowup-projective-geometry",
+ "kind": "statement",
+ "title": "Integrality and projectivity of an ordinary finite-type blowup",
+ "statement": "Let $T$ be an integral scheme [def-pc-integral-scheme] and let $\\mathcal I\\subseteq\\mathcal O_T$ be a nonzero quasi-coherent ideal of finite type, meaning that its restriction to every affine open corresponds to a finitely generated ideal [pqf-def-coherent]. Let $b:B=\\operatorname{Bl}_{\\mathcal I}(T)\\to T$ be its ordinary blowup [def-nagata-global-blowup]. Then $B$ is integral and $b$ is projective in the projective-bundle sense [def-trf-projective-bundle-morphism].",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02ND (lemma-blow-up-integral-scheme) and 02NS (lemma-blowing-up-projective), projectivity clause (1)."
+ },
+ "stmt_deps": [
+  "def-pc-integral-scheme",
+  "pqf-def-coherent",
+  "def-nagata-global-blowup",
+  "def-trf-projective-bundle-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-integral-blowup-chart-density]. The domain charts cover $B$, so $B$ is reduced. The same lemma says that $U=T\\setminus V(\\mathcal I)$ is nonempty integral and that $b^{-1}(U)$ meets every nonempty chart in a dense open; hence $b^{-1}(U)$ is dense in $B$. By [thm-nagata-global-blowup-complement], this open is isomorphic to $U$, so is nonempty and irreducible. A space with a dense irreducible subspace is irreducible: two nonempty opens meet that subspace and then meet each other there. Thus $B$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-sfb-integral-blowup-chart-density",
+    "thm-nagata-global-blowup-complement",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02ND (lemma-blow-up-integral-scheme); assembly of returned Steps 1 and 2 using the chart-density lemma."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-blowup-rees-symmetric-presentation] to obtain the graded surjection $\\operatorname{Sym}(\\mathcal I)\\twoheadrightarrow\\mathcal R$ and the isomorphism $B\\cong\\operatorname{Proj}_T(\\mathcal R)$ over $T$. Clause 3 of [prop-nagata-relative-proj-functoriality] turns that surjection into a closed immersion $\\operatorname{Proj}_T(\\mathcal R)\\hookrightarrow\\operatorname{Proj}_T(\\operatorname{Sym}(\\mathcal I))$ over $T$. Precompose with the isomorphism to obtain a closed immersion $B\\hookrightarrow\\mathbf P_T(\\mathcal I)$ whose structural composite is $b$. The given quasi-coherence and finite type of $\\mathcal I$ supply the module $\\mathcal E=\\mathcal I$ in [def-trf-projective-bundle-morphism], so $b$ is projective in that sense.",
+   "uses": [
+    "lem-sfb-blowup-rees-symmetric-presentation",
+    "prop-nagata-relative-proj-functoriality",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), clause (1), proof; constructions.tex Tag 07ZK (lemma-surjective-generated-degree-1-map-relative-proj)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-trf-projective-bundle-morphism",
+  "lem-sfb-blowup-rees-symmetric-presentation",
+  "lem-sfb-integral-blowup-chart-density",
+  "prop-nagata-relative-proj-functoriality",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02ND (lemma-blow-up-integral-scheme, via algebra.tex 052R) and 02NS (lemma-blowing-up-projective) clause (1), proofs; ported from the dropped node lem-per-integral-blowup-projective-geometry onto live nagata/pbc nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of an integral scheme along a nonzero finitely generated quasi-coherent ideal is integral and projective",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.isIntegral_appTop_of_universallyClosed",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization preserves integrality and Proj can be proper, but neither states integrality and projective-bundle projectivity of an ordinary blowup; ReesAlgebra.lean only constructs the algebra"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization preserves integrality and Proj can be proper, but neither states integrality and projective-bundle projectivity of an ordinary blowup; ReesAlgebra.lean only constructs the algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "[Bb]low[Uu]p|[Bb]low_up|[Bb]lowup",
+   "results": "OK 6 hits: Mathlib/RingTheory/ReesAlgebra.lean, Mathlib/Algebra/HierarchyDesign.lean, Mathlib/Tactic/ITauto.lean, Mathlib/Tactic/Linarith/Frontend.lean, Mathlib/Tactic/GRewrite/Core.lean, Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization preserves integrality and Proj can be proper, but neither states integrality and projective-bundle projectivity of an ordinary blowup; ReesAlgebra.lean only constructs the algebra"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An ordinary blowup along a finite type ideal on an integral scheme is integral and factors as a closed immersion into a projective bundle",
+   "results": "OK 8 hits: AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsIntegralHom.instCompScheme, AlgebraicGeometry.IsIntegral.mk, AlgebraicGeometry.IsClosedImmersion.Spec_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: normalization preserves integrality and Proj can be proper, but neither states integrality and projective-bundle projectivity of an ordinary blowup; ReesAlgebra.lean only constructs the algebra"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|IsProjectiveBundle|IsProjective",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary Proj, normalization, integral morphisms or the integral-scheme predicate, not the conjunction of ordinary blowup integrality and projective-bundle projectivity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary blowing up of an integral scheme preserves integrality and is a closed subscheme of the projectivization of the center ideal",
+   "results": "8 hits; AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.Scheme.Hom.isIntegral_app, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed, AlgebraicGeometry.Scheme.IdealSheafData.subscheme; digest 58bfcb941ea4b275",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary Proj, normalization, integral morphisms or the integral-scheme predicate, not the conjunction of ordinary blowup integrality and projective-bundle projectivity"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegral, \"blowup\"",
+   "results": "0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary Proj, normalization, integral morphisms or the integral-scheme predicate, not the conjunction of ordinary blowup integrality and projective-bundle projectivity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The blowup of an integral scheme along a nonzero finite type quasi coherent ideal is integral and projective in a projective bundle",
+   "results": "8 hits; AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc; digest c6dc418cc631e4c9",
+   "date": "2026-10-22",
+   "verdict": "no match: results concern ordinary Proj, normalization, integral morphisms or the integral-scheme predicate, not the conjunction of ordinary blowup integrality and projective-bundle projectivity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+  "date": "2026-10-22",
+  "group": "NC"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; ordinary finite-type blowup geometry in steps 8 and 12 of the one-curve resolution. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19).",
+   "via": [
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-blowup-projective-geometry",
+  "worker": "stage1",
+  "summary": "Repair of the 2026-10-22 batch5 re-split return: two independent statement-only nodes carry the entire returned chart/generic-point/density argument and the symmetric-quotient/Rees-relative-Proj comparison, respectively. The item keeps its exact statement and only assembles integrality and projectivity from those inputs. Original proof arguments, search results and provenance are retained in report.md.",
+  "blueprint": "Inherited det-thm-sf-ctf-stability-direct-images proof (3), one-curve resolution steps 8 and 12: chart-density input now carries returned Steps 1 and 2; Rees presentation input carries the construction/comparison of returned Step 3. The two assembly steps prove the same ordinary-blowup geometry. The ancestor tool reports None; the inherited null ancestor and via chain are preserved.",
+  "tool_uses": [
+   {
+    "node": "def-trf-projective-bundle-morphism",
+    "why": "General definition (EGA/ILO projective-bundle convention), already a statement dependency of the item on the base; it is not a step of the trace formula or of Poincare duality."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Generic relative-Proj closed-immersion theorem applied to the graded quotient of the Rees presentation; it is the same algebraic-geometry tool used by the returned proof, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-projective-bundle-morphism",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q85-a6819cd08",
+  "group": "Q85",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-a6819cd08 (reviewer sub-agent of L); spot-checked: Valid batch-5 re-split of the live item. The released repair note (clones/live and side-live coord/repair-notes) gives 4205 characters in 3 steps. The base is NW's FIX port (3 steps, live, S2 Lean-bound). Released re-split notes keep a node S1-open, so I judged the delivery on its merits. Apart from proof, proof_deps and split_report, the item is field-identical to side-live: statement, stmt_deps, lean and tool_uses are unchanged, and nothing is weakened. Every old argument has a home. Old step 1 and the geometric half of old step 2 (I_V≠0 via the generic stalk, b^{-1}(V)≅Proj R_A(I_V) compatibly with restriction, cover by Spec A[I/f_i], 052R domain charts, empty zero charts, C_i∩b^{-1}(U)=D(f_i) dense) went to the new node lem-sfb-integral-blowup-chart-density. Old step 3 up to B≅Proj_T(R) (graded surjection Sym(I)→⊕I^n with q_0=id, Γ(V,I^n)=I^n, affine and restriction compatibility) went to the new node lem-sfb-blowup-rees-symmetric-presentation. The item is a 2-step assembly of about 1300 characters. Step 1: domain cover ⇒ reduced; chartwise-dense ⇒ b^{-1}(U) dense; thm-nagata-global-blowup-complement ⇒ irreducible and nonempty; def-pc-integral-scheme ⇒ integral. Step 2: prop-nagata-relative-proj-functoriality clause 3 gives the closed immersion into P_T(I), and E=I has finite type as def-trf-projective-bundle-morphism requires. I checked both new statements: U is open as Supp(O/I); D(f_j)⊆D(f_i) on the chart, so the preimage is exactly D(f_i); small cases I=O, principal I, 0 generators, I=0, empty T. Both are true and neither restates the item or concludes integrality or projectivity. Sources checked: Stacks 0804 (divisors.tex l.8322), 02ND (l.8529), 02NS(1) proof (l.8623), 052R (algebra.tex l.17323). Duplicates: the nagata conrad/admissible density lemmas need qcqs or scheme-theoretic density hypotheses and state no domain charts; no node states B≅Proj_T(R) or the Sym→Rees quotient; upstream relProjReesIso (Rees.lean:187) is only a reuse hint. All 3 Mathlib search kinds are recorded and Mathlib has no blowup. No dropped-route or SGA citations. tool_uses prop-nagata-relative-proj-functoriality and def-trf-projective-bundle-morphism are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralBlowupProjectiveGeometry",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.isIntegral_blowup_and_isProjectiveBundle",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralBlowupProjectiveGeometry.lean",
+  "statement": "theorem isIntegral_blowup_and_isProjectiveBundle {T : Scheme.{u}} [IsIntegral T] (I : T.IdealSheafData) (hI : I ≠ ⊥) (hfinite : ∀ U : T.affineOpens, (I.ideal U).FG) : IsIntegral I.blowup ∧ IsProjectiveBundle I.blowupMap",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8e5ff804f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Node copy differs from live only by the added lean field; lean.statement is verbatim in the file; only proof is sorry, no definitions or new nodes. Clauses: [IsIntegral T], I : T.IdealSheafData, I ≠ ⊥, ∀ affine U, (I.ideal U).FG (the node's explicit affine finite-type form, same as upstream isProper_blowupMap) ⇒ IsIntegral I.blowup ∧ IsProjectiveBundle I.blowupMap (closed immersion into relProj Sym E, E quasi-coherent of finite type, matching Stacks 01W8(1) used by 02NS(1)). Recorded blowup/blowupMap (Gluing.lean:255/260) need no extra assumptions. Hypotheses are exactly those of 02ND+02NS(1), no Noetherian or local-freeness assumption, single universe u. Edge cases: empty T and I=⊥ excluded as the node requires, I=⊤ and empty affines covered. No duplicate: no projectivity node, upstream says projectivity unformalized, project-Lean hits are specialised consumers. Docstrings carry source place, blueprint id and the 3 proof steps; all imported modules exist; report has both sections. No compile, since no file was changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}

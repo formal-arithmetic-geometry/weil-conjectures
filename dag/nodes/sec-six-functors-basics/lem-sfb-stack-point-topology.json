@@ -1,0 +1,284 @@
+{
+ "id": "lem-sfb-stack-point-topology",
+ "kind": "statement",
+ "title": "Continuity and atlas quotient topology for arbitrary algebraic stacks",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], with the universes of [def-weil-size-convention]. Stacks in groupoids, morphisms and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids], and algebraic spaces use [def-trf-algebraic-space]. Here an algebraic stack is a stack in groupoids with diagonal representable by algebraic spaces and a representable smooth surjective scheme atlas; smoothness is tested on scheme charts using [def-sbc-smooth-morphisms]. For an algebraic stack $\\mathcal A$, let $|\\mathcal A|$ be the set of morphisms $\\operatorname{Spec}K\\to\\mathcal A$ from fields [def-weil-field], where two representatives are equivalent when their pullbacks to a common field extension are 2-isomorphic. The topology defined by a smooth surjective scheme atlas is independent of the atlas: for every such $p:U\\to\\mathcal A$, the map $|p|:|U|\\to|\\mathcal A|$ is surjective and a subset $D\\subseteq|\\mathcal A|$ is closed if and only if $|p|^{-1}(D)$ is closed in $|U|$. Every morphism $a:\\mathcal A\\to\\mathcal B$ of algebraic stacks induces a continuous map $|a|:|\\mathcal A|\\to|\\mathcal B|$. On schemes and algebraic spaces these topologies agree with the usual Zariski and etale-atlas topologies, respectively.",
+ "source": {
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XL (lemma-topology-points); atlas point-surjectivity: Tag 04XI (lemma-characterize-surjective); compatibility with spaces and schemes: discussion following Tag 04XG (definition-points)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-field",
+  "def-sfb-stack-point-topological-space",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-a1-space-point-topology",
+  "def-a1-algebraic-space-point-classes"
+ ],
+ "proof": [
+  {
+   "text": "Composition with a stack morphism preserves the equivalence of field-valued representatives: whisker the given isomorphism over their common field extension with that morphism. Thus the point maps are well defined, preserve composition, and turn 2-commutative squares into commutative squares of sets, by the fibre-groupoid conventions of [def-sfb-stable-pointed-moduli-groupoids]. For any atlas $p:U\\to\\mathcal A$, the surjectivity assertion in [lem-sfb-stack-chartwise-smooth-etale-calculus] gives, for every field-valued object $x$ of $\\mathcal A$, an extension of its field and an object of $U$ whose image is isomorphic to $x$ after extension. Hence $|p|$ is surjective. For schemes, [lem-weil-pbc-morphism-from-spec-field] factors every field map through the residue-field map of its image point. Consequently the field-class points of a scheme identify with its ordinary points: each representative is equivalent to that residue-field representative, and equivalent representatives have the same image point. This identification is the one in [def-a1-algebraic-space-point-classes].",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-weil-pbc-morphism-from-spec-field",
+    "def-a1-algebraic-space-point-classes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XG (definition-points), following discussion; Tag 04XI (lemma-characterize-surjective), reverse implication"
+   }
+  },
+  {
+   "text": "Choose a smooth surjective scheme atlas $p:U\\to\\mathcal A$ and declare $W\\subseteq|\\mathcal A|$ open exactly when $|p|^{-1}(W)$ is open. Preimages preserve unions and finite intersections, so this defines a topology. Given a second such atlas $p\\prime:U\\prime\\to\\mathcal A$, form $Z=U\\times_{\\mathcal A}U\\prime$ with projections $r:Z\\to U$ and $s:Z\\to U\\prime$. The representable-diagonal result [lem-sfb-stack-diagonal-space-source-representability], with schemes viewed as spaces by [def-trf-scheme-algebraic-space], says $Z$ is an algebraic space. By [lem-sfb-stack-chartwise-smooth-etale-calculus], both projections are smooth and surjective, hence flat and locally of finite presentation. They are continuous by [lem-a1-space-point-open-calculus] and open by [lem-sfb-flat-lfp-space-universally-open]. They are surjective on point sets by the field-extension lifting interpretation of surjectivity in the calculus node. All these assertions use the existing algebraic-space topology, with no topology on stack points presupposed.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points), first paragraph: comparison of two presentations"
+   }
+  },
+  {
+   "text": "A continuous open surjection $h:E\\to F$ reflects openness of subsets: if $h^{-1}(B)$ is open, then $B=h(h^{-1}(B))$ is open; the converse is continuity. Apply this to the two projections of step 2. The 2-isomorphism $pr\\simeq p\\prime s$ gives $|r|^{-1}(|p|^{-1}(W))=|s|^{-1}(|p\\prime|^{-1}(W))$. Therefore $|p|^{-1}(W)$ is open if and only if this common preimage is open, if and only if $|p\\prime|^{-1}(W)$ is open. The topology is independent of the atlas. Taking complements gives precisely the asserted closed-set criterion for every atlas. Together with step 1 this gives a surjective quotient map for every atlas.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points), end of first paragraph"
+   }
+  },
+  {
+   "text": "Let $a:\\mathcal A\\to\\mathcal B$ be arbitrary. Choose scheme atlases $p:U\\to\\mathcal A$ and $q:V\\to\\mathcal B$. Regard $U$ as mapping to $\\mathcal B$ by $ap$. The representable-diagonal result [lem-sfb-stack-diagonal-space-source-representability] makes $Z=U\\times_{\\mathcal B}V$ an algebraic space, using [def-trf-scheme-algebraic-space]. Its projection $r:Z\\to U$ is smooth and surjective by [lem-sfb-stack-chartwise-smooth-etale-calculus], so it is continuous, open and surjective on points by that node, [lem-a1-space-point-open-calculus], and [lem-sfb-flat-lfp-space-universally-open]. Write $t:Z\\to V$ for the other projection, which is continuous by [lem-a1-space-point-open-calculus]. If $D$ is open in $|\\mathcal B|$, then $|q|^{-1}(D)$ is open by the atlas criterion already proved. The equality $|r|^{-1}(|p|^{-1}(|a|^{-1}(D)))=|t|^{-1}(|q|^{-1}(D))$ shows the left side is open. Since $|r|$ is an open surjection, step 3 implies that $|p|^{-1}(|a|^{-1}(D))$ is open. The atlas criterion for $p$ now says $|a|^{-1}(D)$ is open. Thus every $|a|$ is continuous. This argument uses a fibre product of two schemes over $\\mathcal B$, not an assumed scheme fibre product over a stack.",
+   "uses": [
+    "lem-sfb-stack-diagonal-space-source-representability",
+    "def-trf-scheme-algebraic-space",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-flat-lfp-space-universally-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XL (lemma-topology-points), continuity paragraph; its compatible-presentation argument performed before the optional etale scheme refinement"
+   }
+  },
+  {
+   "text": "For an algebraic space $A$ regarded as a stack, its point classes are exactly [def-a1-algebraic-space-point-classes]: the fibre groupoids are discrete, so a 2-isomorphism is equality. Given any smooth surjective scheme atlas $p:U\\to A$, its map on the usual algebraic-space point spaces is continuous by [lem-a1-space-point-open-calculus], open by [lem-sfb-flat-lfp-space-universally-open], and surjective by step 1. Here smooth implies flat and locally of finite presentation by [lem-sfb-stack-chartwise-smooth-etale-calculus]. It is therefore a quotient map by the two-line argument of step 3. Thus the topology defined in step 2 agrees with the usual etale-atlas topology [def-a1-space-point-topology]. For a scheme use its identity as a smooth surjective atlas, viewing it as a space by [def-trf-scheme-algebraic-space]; the identification of step 1 then makes the defining inverse-image condition exactly its Zariski topology. No quasi-compactness, separation, or finiteness assumption was used.",
+   "uses": [
+    "def-a1-algebraic-space-point-classes",
+    "lem-a1-space-point-open-calculus",
+    "lem-sfb-flat-lfp-space-universally-open",
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-a1-space-point-topology",
+    "def-trf-scheme-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Discussion following Tag 04XG (definition-points), and following Tag 04XM (definition-topological-space); spaces-properties.tex Tag 03BX (lemma-topology-points)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-scheme-algebraic-space",
+  "lem-a1-space-point-open-calculus",
+  "lem-sfb-flat-lfp-space-universally-open",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-stack-diagonal-space-source-representability",
+  "lem-weil-pbc-morphism-from-spec-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-properties.tex",
+  "place": "Tag 04XL (lemma-topology-points), proof, with continuity checked through the algebraic-space fibre product before scheme refinement; point identification following Tag 04XG (definition-points)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every morphism of algebraic stacks induces a continuous map on field valued point spaces and smooth scheme atlases give quotient maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A property on morphisms $ f : X \\\\to Y $ between schemes, defined inductively to characterize when $ f $ satisfies the conditions of a preimmersion in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Hom.continuous and Flat.isQuotientMap_of_surjective apply only to schemes; neither gives the point topology or continuity theorem for arbitrary algebraic stacks. The latter additionally assumes quasi-compactness. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|DeligneMumford|topology.points",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Hom.continuous and Flat.isQuotientMap_of_surjective apply only to schemes; neither gives the point topology or continuity theorem for arbitrary algebraic stacks. The latter additionally assumes quasi-compactness. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Continuous\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Hom.continuous and Flat.isQuotientMap_of_surjective apply only to schemes; neither gives the point topology or continuity theorem for arbitrary algebraic stacks. The latter additionally assumes quasi-compactness. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The topology on algebraic stack points is the quotient topology of a smooth surjective scheme atlas",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f] [QuasiCompact f] [Surjective f] : Topology.IsQuotientMap f\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.subcanonical_zariskiTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": zariskiTopology.Subcanonical\", \"doc\": \"The Zariski topology on the category of schemes is the Grothendieck topology where covering families are collections of open immersions whose images cover the target scheme. This topology satisfies th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.BigZariski\", \"type\": \": zariskiTopology.{u} = zariskiPretopology.toGrothendieck\", \"doc\": \"The Zariski topology on the category of schemes is equal to the Grothendieck topology generated by the Zariski pretopology, which is constructed from covering families of open immersions that are join\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": GrothendieckTopology Scheme.{u}\", \"doc\": \"The Grothendieck topology on the category of schemes generated by the étale pretopology, which uses étale morphisms (smooth morphisms of relative dimension 0) as covering families. This topology is co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": zariskiTopology ≤ etaleTopology\", \"doc\": \"The Zariski topology on the category of schemes is less than or equal to the étale topology in the partial order of Grothendieck topologies, meaning that every covering sieve in the Zariski topology i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.forgetToTop_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.Scheme.forgetToTop.obj X = (AlgebraicGeometry.SheafedSpace.forget CommRingCat).obj X.toSheafedSpace\", \"doc\": \"For any scheme $X$, the underlying topological space obtained by the forgetful functor from schemes to topological spaces is equal to the composition of the forgetful functors from schemes to sheafed \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U) {Z : CommRingCat}\\n  (h : R ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.g\", \"doc\": \"For a scheme $ X $, the type of open subsets of its underlying topological space.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Hom.continuous and Flat.isQuotientMap_of_surjective apply only to schemes; neither gives the point topology or continuity theorem for arbitrary algebraic stacks. The latter additionally assumes quasi-compactness. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuity of maps of underlying topological spaces of Artin algebraic stacks and final topology from smooth presentations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.continuous\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), Continuous ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"For any schemes $X$ and $Y$, every morphism $f : X \\to Y$ (as a morphism of locally ringed spaces) is continuous with respect to the underlying topological spaces of $X$ and $Y$.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.toΓSpec_continuous\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ (X : AlgebraicGeometry.LocallyRingedSpace), Continuous X.toΓSpecFun\", \"doc\": \"The prime spectrum map induced by the global sections of a locally ringed space $ X $ is continuous with respect to the Zariski topology on $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ and the original topology\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsImmersion f]\\n  [AlgebraicGeometry.IsLocallyArtinian Y], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $ f: X \\\\to Y $ is an immersion of schemes and $ Y $ is locally Artinian (i.e., every point of $ Y $ has an open neighborhood with Artinian coordinate ring), then $ X $ is also locally Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: Scheme.Hom.continuous and Flat.isQuotientMap_of_surjective apply only to schemes; neither gives the point topology or continuity theorem for arbitrary algebraic stacks. The latter additionally assumes quasi-compactness. No algebraic-stack declaration appeared in grep or Loogle."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|ArtinStack|stack.*quotient.*topolog",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The underlying topological space of an algebraic stack has the quotient topology of any smooth atlas and every morphism of stacks is continuous",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Hom.continuous, AlgebraicGeometry.Scheme.forgetToTop, AlgebraicGeometry.Scheme.forgetToTop_obj_eq_coe, AlgebraicGeometry.Scheme.instCoeFunHomForallCarrierCarrierCommRingCat, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.LocallyRingedSpace.toTopCat, AlgebraicGeometry.topologically, AlgebraicGeometry.Scheme.forgetToTop_map",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack topology declaration; scheme continuity and scheme quasi-compact flat quotient maps do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicStack\", \"Continuous\"",
+   "results": "0 hits. ",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth surjective atlas of an arbitrary algebraic stack defines an atlas independent quotient topology on field valued point classes, and all stack morphisms are continuous",
+   "results": "8 hits. AlgebraicGeometry.surjective_eq_topologically, AlgebraicGeometry.Flat.isQuotientMap_of_surjective, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtSource, AlgebraicGeometry.SurjectiveOnStalks.instIsZariskiLocalAtTarget, AlgebraicGeometry.SurjectiveOnStalks.instHasRingHomPropertySurjectiveOnStalks, AlgebraicGeometry.SurjectiveOnStalks.instIsMultiplicativeScheme, AlgebraicGeometry.instSurjectiveDescI₀SchemeF, AlgebraicGeometry.SurjectiveOnStalks",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack topology declaration; scheme continuity and scheme quasi-compact flat quotient maps do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "isQuotientMap_of_surjective|theorem continuous|lemma continuous",
+   "results": "5 hits. Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/EffectiveEpi.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack topology declaration; scheme continuity and scheme quasi-compact flat quotient maps do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Underlying topological spaces of Artin stacks and final topology from smooth presentations, invariance under change of presentation",
+   "results": "8 hits. AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.PresheafedSpace.GlueData.toTopGlueData, AlgebraicGeometry.instIsLocallyArtinianToScheme, SingularManifold.topSpaceM, Manifold.LocalPresentationAt.mk.inj, AlgebraicGeometry.PresheafedSpace.colimit_carrier, AlgebraicGeometry.instIsLocallyArtinianXScheme, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: no algebraic-stack topology declaration; scheme continuity and scheme quasi-compact flat quotient maps do not state the item."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-representable-stack-universally-closed-test",
+  "date": "2026-10-22",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: passage from an inertia-free finite stack cover to a scheme finite over the coarse scheme. Composition of the coarse morphism with the finite cover, followed by interpretation on the inertia-free source as an algebraic space. The creation chain has no machine-resolvable blueprint ancestor, as blueprint_refs.py ancestor reports. The main-20261015 blueprint node explicitly named by this inherited place, paragraph (3), Rj_* preservation, records the intended alteration-moduli route. Supporting input: Scheme-base-change test for universal closedness of representable stack maps. Supporting topology and algebraicity inputs to the scheme-base-change test (Stacks 0512), below paragraph (3) of det-thm-sf-ctf-stability-direct-images.",
+   "via": [
+    "lem-sfb-representable-stack-universally-closed-test",
+    "lem-sfb-stack-proper-locally-quasifinite-composition",
+    "lem-sfb-inertia-free-finite-cover-coarse",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-stack-point-topology",
+  "worker": "stage1",
+  "summary": "Read Tags 04XG, 04XI, 04XL and algebraic-space topology and openness sources. Proved atlas point-surjectivity, independence by two open surjective projections, continuity by a scheme-atlas fibre product, and agreement with space and scheme topologies. All non-elementary inputs already have DAG nodes, so no new nodes are needed. Retained the existing statement and all five recorded Mathlib searches after reading their results.",
+  "blueprint": "Supporting topology input below latest det-thm-sf-ctf-stability-direct-images, proof (3), within the inherited alteration/moduli prerequisite chain. Implements the atlas quotient and continuity prerequisites for the representable-stack universal-closedness test; no change of the unit or chapter route. blueprint_refs.py ancestor gives no machine-resolvable ancestor, as in the inherited blueprint.from record.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic continuity of algebraic-space point maps; the unit has openness but no separate general continuity statement for spaces."
+   },
+   {
+    "node": "def-a1-algebraic-space-point-classes",
+    "why": "Identifies the existing field-valued point classes of algebraic spaces when viewed as discrete groupoids."
+   },
+   {
+    "node": "def-a1-space-point-topology",
+    "why": "Names the usual etale-atlas topology on algebraic spaces in the compatibility clause."
+   },
+   {
+    "node": "def-trf-scheme-algebraic-space",
+    "why": "Uses the existing Yoneda realization of schemes as algebraic spaces for applying space-source representability."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "def-a1-algebraic-space-point-classes",
+  "def-a1-space-point-topology",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-c22ede354",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-c22ede354 (reviewer sub-agent of L); spot-checked: I read the whole item and all 9 nodes it cites, and checked the proof against Stacks stacks-properties.tex l.762-1035. That range covers 04XG and the discussion after it, the points-cartesian lemma, 04XI with its proof and 04XL with its full proof. The statement and stmt_deps are unchanged from live, which still has the item unsplit with no review, so no target is weakened. There are no new nodes, and no repair note exists. Step 1: well-definedness comes from whiskering, and atlas surjectivity from the field-extension lifting clause of lem-sfb-stack-chartwise-smooth-etale-calculus (the 04XI direction 2 to 1). Scheme points are identified with field classes through the Mathlib leaf lem-weil-pbc-morphism-from-spec-field. Step 2: Z=U×_A U' is an algebraic space by lem-sfb-stack-diagonal-space-source-representability. Both projections are base changes of smooth surjective atlases, so they are flat and locally of finite presentation. They are continuous by lem-a1-space-point-open-calculus, open by lem-sfb-flat-lfp-space-universally-open with identity base change, and surjective on points. For a scheme, the space topology equals the Zariski topology by the flat-lfp node's statement that the topology is the quotient for any étale atlas. Step 3 is the elementary argument that an open surjection reflects open sets. Step 4 proves continuity through U×_B V, where r is the base change of q. This correctly replaces Stacks 04T1, and nothing is assumed about a. Step 5 identifies the topology with the usual one for spaces and schemes. Edge cases checked: empty stacks, the identity atlas of a scheme, an étale atlas of a space, nontrivial stabilizers, and a nonsmooth a. There is no cycle: I traversed the full closure. The stronger node lem-sfb-stack-point-topology-flat-lfp-open cites this item in Q22's split, so it is a citer and not a duplicate. The DM-only node lem-sfb-stack-topology-open-substacks is not a duplicate either. The four declared tool_uses are accepted: three definitions plus the generic space-continuity lemma lem-a1-space-point-open-calculus. Batch-5 flags: all 7 citations reach sec-trace-formula only through the general definitions def-trf-algebraic-space or def-trf-scheme-algebraic-space. They are general foundations for algebraic spaces, not the trace formula, Poincaré duality, or any step of their proofs. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackPointTopology",
+  "declaration": "CategoryTheory.stack_point_topology",
+  "declarations": [
+   "CategoryTheory.stack_point_topology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackPointTopology.lean",
+  "statement": "theorem stack_point_topology {S : Scheme.{u}} : (∀ (F : BasedCategory.{v₁, w₁} (Over S)), IsAlgebraicModuliStack F → ∀ (U : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj U)) F), IsSmoothModuliAtlas F U p → Function.Surjective (moduliSchemePointMap p) ∧ ∀ D : Set (ModuliPoints F), IsClosed D ↔ IsClosed (moduliSchemePointMap p ⁻¹' D)) ∧ (∀ (F : BasedCategory.{v₁, w₁} (Over S)) (G : BasedCategory.{v₂, w₂} (Over S)), IsAlgebraicModuliStack F → IsAlgebraicModuliStack G → ∀ a : BasedFunctor F G, Continuous (moduliPointMap a)) ∧ (∀ A : AlgebraicSpace S, ∃ e : AlgebraicSpace.Point A.obj.obj ≃ₜ ModuliPoints (discreteModuli A.obj.obj), ∀ x : AlgebraicSpace.PointRepresentative A.obj.obj, e (Quot.mk _ x) = Quot.mk _ (moduliSpaceFieldObject x)) ∧ (∀ U : Over S, ∃ e : U.left ≃ₜ ModuliPoints (discreteModuli (yoneda.obj U)), ∀ x : U.left, e x = moduliSchemePointMap (BasedFunctor.id _) x)",
+  "branch": "newtargets-dag",
+  "by": "Q139",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b4e32de3",
+  "group": "Q139",
+  "result": "pass",
+  "note": "Re-delivery is byte-identical in Lean to the 6d4a FIX: def-sfb-stack-point-topological-space is existing:true on Q146's landed StackPointTopologyFlatLfpOpen (moduliSchemePointMap, moduliPointTopologicalSpace, moduliSpaceFieldObject); only the record's branch (newtargets-dag, already used by 46 existing:true records) and note differ. The 09:28 landing refusal '#check fails: Compiled in 0.5 s' was published-build lag: Q146 landed 09:17 and the olean was still absent from lib/ at 09:36. Reproducing the exact non-module import+#check probe through nt_compile --json printed all three signatures, rc 0, 36.5 s. Mathematics read against Stacks 04XG/04XI/04XL: surjectivity and closed criterion for every smooth atlas (iSup topology, no atlas chosen), continuity for every BasedFunctor, space and scheme homeomorphisms pinned to the canonical maps; no extra hypotheses or universe ties; edge cases fine. Statements verbatim, stmt_deps own all declarations used, no DAG cycle, sorry only, report sections present. Maintainer: land once the published build has StackPointTopologyFlatLfpOpen.olean; at stage 3 move the three defs to a shared module, since Q146's proof cites this item."
+ }
+}

@@ -1,0 +1,260 @@
+{
+ "id": "lem-kun-tensor-base-change-exact-transformation",
+ "kind": "statement",
+ "title": "Exactness and shift compatibility of the tensor base-change transformation",
+ "statement": "Let $\\Lambda$ be a commutative ring and let $X,X',S',T,Y$ be schemes. Let $p:X'\\to X$, $f':X'\\to S'$, $g:T\\to S'$, $h:Y\\to X'$ and $e:Y\\to T$ be morphisms with $f'h=ge$ and $Y=X'\\times_{S'}T$. Use the unbounded constant-coefficient module derived categories [def-weil-pbc-derived-categories], their derived tensor [def-kun-derived-tensor], and exact inverse images and K-injective direct images with adjunctions as in [def-kun-unbounded-exchange]. Define bifunctors to $D(X'_{\\Et},\\Lambda)$ by\n$$A(E,F)=p^{-1}E\\otimes^L_\\Lambda(f')^{-1}Rg_*F,\\qquad B(E,F)=Rh_*(h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}F),$$\nfor $E\\in D(X_{\\Et},\\Lambda)$ and $F\\in D(T_{\\Et},\\Lambda)$. Let $\\alpha_{E,F}:A(E,F)\\to B(E,F)$ be the $h^{-1}\\dashv Rh_*$ adjoint of\n$$h^{-1}A(E,F)\\xrightarrow{\\sim}h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}g^{-1}Rg_*F\\xrightarrow{1\\otimes e^{-1}\\varepsilon_{g,F}}h^{-1}p^{-1}E\\otimes^L_\\Lambda e^{-1}F,$$\nwhere the first map is the inverse of the inverse-image tensor comparison of [def-kun-derived-tensor], invertible by [lem-kun-inverse-image-monoidal], composed with the inverse-image composition isomorphism for $f'h=ge$ of [def-kun-unbounded-exchange], and $\\varepsilon_g$ is the derived counit. Then $A$ and $B$ are exact functors in each variable [def-weil-triangulated-category], and $\\alpha$ is natural in both variables and commutes with their canonical integer-shift comparisons. Precisely, with either variable fixed, writing $C$ for the other input and $\\chi_{A,m,C}:A(C[m])\\xrightarrow{\\sim}A(C)[m]$, and likewise $\\chi_B$, one has\n$$\\chi_{B,m,C}\\alpha_{C[m]}=\\alpha_C[m]\\chi_{A,m,C}\\qquad(m\\in\\mathbf Z).$$\nThe comparisons are those induced by termwise exact inverse image, K-injective direct image, and the signed total-complex tensor shifts. No assertion that $\\alpha$ is invertible is included.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+  "place": "Proof paragraph 1 of lem-kun-0f1n (Stacks Tag 0F1N): the two functors used in the telescope reduction must be exact, and their actual counit-mate transformation must commute with shifts; previous expanded proof Steps 2-3."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "def-kun-unbounded-exchange",
+  "def-weil-triangulated-category",
+  "lem-kun-inverse-image-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "All functors here act on the unbounded module derived categories, not just on bounded-below abelian sheaves. By prop-weil-pbc-inverse-image-modules-exact, each inverse image is an exact additive module functor and identifies with ringed-topos module pullback, since the pulled-back constant coefficient ring is the constant coefficient ring. Apply lem-weil-pbc-exact-functor-derived-factorization to obtain its exact termwise derived functor with the identity comparisons on shifted complexes. The construction in def-kun-unbounded-exchange supplies the unbounded K-injective right derived direct images. Apply lem-pc-right-derived-functor-triangulated to the additive module direct images to obtain exactness with their K-injective shifts. Tensoring with either fixed derived object is exact by lem-kun-derived-tensor-triangulated. For fixed F, A is tensor with the fixed object (f')^{-1}Rg_*F after p^{-1}; for fixed E it is tensor with p^{-1}E after (f')^{-1}Rg_*. For fixed F, B is Rh_* after tensor with e^{-1}F after h^{-1}p^{-1}; for fixed E it is Rh_* after tensor with h^{-1}p^{-1}E after e^{-1}. Apply lem-weil-pbc-triangulated-functor-composite to these four composites. This proves separate exactness and identifies the composite comparisons with the chi_A and chi_B specified in the statement.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-kun-unbounded-exchange",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-weil-pbc-triangulated-functor-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "definition-derived-tor; derived.tex Tags 015F (lemma-right-derived-exact-functor) and 05SU (lemma-derived-shift); exact-functor composition"
+   }
+  },
+  {
+   "text": "Write L=h^{-1}, R=Rh_*, P=p^{-1}E and V=(f')^{-1}Rg_*F. The first comparison L(P tensor^L V) -> LP tensor^L LV is the canonical inverse tensorator. Use lem-weil-pbc-pullback-tensor-canonical-shift-unit for the ringed-topos morphism induced by h and the constant coefficient rings. It applies without boundedness or properness. Its normalization on flat-term K-flat representatives is exactly the comparison used here: both are the localization of the inverse of the ordinary pullback tensor map on each total-tensor summand. The identification of exact module pullback with inverse image is supplied by prop-weil-pbc-inverse-image-modules-exact; lem-weil-pbc-exact-functor-derived-factorization computes this exact pullback termwise with its prescribed shifts. Thus the comparison is not being replaced by a different monoidal structure. By lem-kun-inverse-image-monoidal it is invertible, and by the two displayed shift equations of lem-weil-pbc-pullback-tensor-canonical-shift-unit it commutes with shifts in P and in V. After substitution P=p^{-1}E and V=(f')^{-1}Rg_*F, naturality in the shifted input and the composite comparisons give these same equations for shifts of E or F.",
+   "uses": [
+    "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4 (lemma-pullback-tensor-product), its canonical K-flat normalization; signed-shift square expanded using the existing canonical-shift lemma"
+   }
+  },
+  {
+   "text": "Let theta:h^{-1}(f')^{-1} -> e^{-1}g^{-1} be the inverse-image composition isomorphism of def-kun-unbounded-exchange. Its definition is termwise descent of the sheaf composition isomorphism. On a representative complex K shifted by m, its degree r component is theta_{K^{r+m}}. The two termwise shifts in its shift square are identities on that object, so the square commutes in every degree, for each integer m, including negative m. Naturality of the sheaf composition isomorphism makes this an equality of chain maps. By lem-weil-pbc-exact-functor-derived-factorization these are the canonical derived shift comparisons, and clause (3) of lem-weil-pbc-localization-universal-property descends the equality to all derived objects. Naturality descends in the same way by clause (2). This argument uses only the given commutative square and its prescribed composition map; it does not apply a bounded-below comparison theorem to an unbounded object.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), termwise inverse-image composition; localization of the prescribed square"
+   }
+  },
+  {
+   "text": "Put D(E,F)=h^{-1}p^{-1}E tensor^L e^{-1}F, so B=RD, and denote the displayed map LA -> D by beta. Apply lem-sp-canonical-right-derived-adjunction-shift to each exact additive module adjunction u^{-1} -| u_* for u=g,h, supplied by prop-weil-pbc-inverse-image-modules-exact and def-kun-unbounded-exchange. Its K-injective existence hypotheses are part of that unbounded construction. Hence both the unit and counit commute with the fixed termwise/K-injective shifts for every integer m. In particular e^{-1}epsilon_g commutes with shifts in F. The tensor shift structure of lem-weil-pbc-derived-tensor-shift-descent is natural in arbitrary derived morphisms of the other factor, not only chain maps: therefore 1 tensor e^{-1}epsilon_g commutes with shifts in E as well. Its compatibility in F is its counit shift equation tensored with the fixed first factor. Combine these equations with Steps 2 and 3, cancelling the intermediate shift comparisons. For either varying input C, with a_C:A(C[m])->A(C)[m], d_C:D(C[m])->D(C)[m], and l_M:L(M[m])->LM[m], the result is\n$$d_C\\,\\beta_{C[m]}=\\beta_C[m]\\,l_{A(C)}\\,L(a_C).$$\nEach constituent is natural in both inputs: the tensorator, theta and counit are natural, and tensor is a bifunctor. Composition gives naturality of beta.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-derived-tensor-shift-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors) and 0A8D (lemma-adjoint-is-exact); sites-cohomology.tex Tag 07A6 (lemma-adjoint); more-algebra.tex Tag 0FNH (item-shift-tensor)"
+   }
+  },
+  {
+   "text": "Let eta be the unit of L -| R. The adjunct formula is alpha_C=R(beta_C) eta_{A(C)}. Thus naturality of beta and eta proves naturality of alpha in each variable, hence bifunctorial naturality. Write r_N:R(N[m])->RN[m] for the canonical K-injective shift. The specified comparison of B=RD is chi_B=r_{D(C)} R(d_C). For either varying input use Step 4 and then naturality of eta, naturality of r, and the unit shift equation from lem-sp-canonical-right-derived-adjunction-shift:\n$$\\begin{aligned}\n\\chi_B\\alpha_{C[m]}\n&=r_D R(d_C\\beta_{C[m]})\\eta_{A(C[m])}\\\\\n&=r_D R(\\beta_C[m])R(l_A)RL(a_C)\\eta_{A(C[m])}\\\\\n&=r_D R(\\beta_C[m])R(l_A)\\eta_{A(C)[m]}a_C\\\\\n&=(R\\beta_C)[m]r_{LA}R(l_A)\\eta_{A(C)[m]}a_C\\\\\n&=(R\\beta_C)[m]\\eta_{A(C)}[m]a_C\n=\\alpha_C[m]\\chi_A.\n\\end{aligned}$$\nHere A=A(C), D=D(C); composition is read right to left. The unit equation is precisely r_{LA}R(l_A)eta_{A[m]}=eta_A[m]. It holds for the fixed shifts, so the computation gives the requested equality for every m in Z without choosing new comparisons. The same calculation applies with E or F varying. This concludes the argument for the actual specified mate.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D (lemma-adjoint-is-exact): explicit unit-and-counit-compatible mate calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-kun-unbounded-exchange",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-kun-inverse-image-monoidal",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-derived-tensor-shift-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1n.proof.md",
+  "place": "Paragraph 1: exactness and shift compatibility required by the telescope reduction; assembly from the cited unbounded tensor and canonical adjunction lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor base change counit mate for sheaves of modules is a natural transformation of triangulated bifunctors compatible with shifts in each variable",
+   "results": "Hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic CommShift identities assume the compatibility to be established; underived sheaf adjunctions, ordinary etale algebra, and tensor unitor identities do not establish the actual derived counit-mate shift squares"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula and exchange mate commutes with both tensor shift isomorphisms in unbounded derived categories of etale module sheaves",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, HomologicalComplex.leftUnitor'_inv_comm, LightCondensed.free_internallyProjective_iff_tensor_condition', KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap",
+   "date": "2026-10-22",
+   "verdict": "no match: generic CommShift identities assume the compatibility to be established; underived sheaf adjunctions, ordinary etale algebra, and tensor unitor identities do not establish the actual derived counit-mate shift squares"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.CommShift, \"tensor\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic CommShift identities assume the compatibility to be established; underived sheaf adjunctions, ordinary etale algebra, and tensor unitor identities do not establish the actual derived counit-mate shift squares"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorBaseChange|tensor_base_change|projection.*[Cc]ommShift|[Cc]ommShift.*projection",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: generic CommShift identities assume the compatibility to be established; underived sheaf adjunctions, ordinary etale algebra, and tensor unitor identities do not establish the actual derived counit-mate shift squares"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor base change natural transformation compatible with cohomological shifts",
+   "results": "Hits: CategoryTheory.NatTrans.CommShiftCore.shift_app_comm, CategoryTheory.NatTrans.shift_comm, CategoryTheory.NatTrans.CommShiftCore.shift_comm, IsBaseChange.tensorEquiv, CategoryTheory.NatTrans.CommShiftCore.mk, CategoryTheory.NatTrans.shift_app, CategoryTheory.NatTrans.CommShiftCore.app_shift, CategoryTheory.NatTrans.CommShiftCore.shift_app",
+   "date": "2026-10-22",
+   "verdict": "no match: generic CommShift identities assume the compatibility to be established; underived sheaf adjunctions, ordinary etale algebra, and tensor unitor identities do not establish the actual derived counit-mate shift squares"
+  },
+  {
+   "tool": "grep",
+   "query": "class CommShift|class CommShiftCore|lemma shift_app_comm|lemma shift_comm",
+   "results": "Mathlib/CategoryTheory/Shift/CommShift.lean:147 functor CommShift; :301 component equality; :346 natural transformation CommShift; :362 and :368 shift commutation identities. These identities assume the natural transformation has the shift-compatible structure.",
+   "date": "2026-10-22",
+   "verdict": "no match: this supplies definitions and identities conditional on CommShift, not the structure for the actual derived tensor base-change mate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit mate for derived tensor base change of etale module sheaves commutes with both integer shifts and is natural in both arguments",
+   "results": "Hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardSections_unitHomEquiv, KaehlerDifferential.isBaseChange_of_formallyEtale, SheafOfModules.pullbackObjUnitToUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: these are conditional generic shift/counit identities, underived adjunctions or unrelated tensor base-change results; none supplies the specified derived tensor mate and both canonical shift squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor base change counit mate commutes with integer shifts in both variables",
+   "results": "Hits: CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, HomologicalComplex₂.shiftFunctor₁₂CommIso, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt",
+   "date": "2026-10-22",
+   "verdict": "no match: these are conditional generic shift/counit identities, underived adjunctions or unrelated tensor base-change results; none supplies the specified derived tensor mate and both canonical shift squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation built by a derived adjunction counit and inverse image tensor comparison is compatible with shifts of either tensor argument",
+   "results": "Hits: CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.CommShift.CompatibilityUnit, CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app, CategoryTheory.Adjunction.CommShift.commShift_counit, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.CommShift.compatibilityUnit_right",
+   "date": "2026-10-22",
+   "verdict": "no match: these are conditional generic shift/counit identities, underived adjunctions or unrelated tensor base-change results; none supplies the specified derived tensor mate and both canonical shift squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-0f1n",
+  "date": "2026-10-22",
+  "group": "Q38"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "blueprint": {
+  "from": {
+   "node": "lem-kun-0f1n",
+   "place": "Proof paragraph 1 of lem-kun-0f1n (Stacks Tag 0F1N): the two functors used in the telescope reduction must be exact, and their actual counit-mate transformation must commute with shifts; previous expanded proof Steps 2-3.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-kun-tensor-base-change-exact-transformation",
+  "worker": "stage1",
+  "summary": "Proved separate exactness by composition and wrote the naturality and both integer-shift squares for the prescribed counit mate. Reused existing generic unbounded tensor and adjunction coherence statements; no new nodes or statement changes.",
+  "blueprint": "lem-kun-0f1n proof paragraph 1: the exact shift-compatible transformation required to apply the telescope reduction.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Identifies the constant-coefficient inverse image as exact additive module pullback and supplies its adjunction. No node of the Kunneth unit states this generic coherence tool; it does not replace its telescope route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic unbounded K-injective right derived exactness with its fixed canonical shifts. No node of the Kunneth unit states this generic coherence tool; it does not replace its telescope route."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+    "why": "Supplies both shift squares for the normalized canonical ringed-topos tensorator. No node of the Kunneth unit states this generic coherence tool; it does not replace its telescope route."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Supplies unit and counit shift compatibility for the fixed unbounded exact/K-injective adjunction, rather than a newly transported shift. No node of the Kunneth unit states this generic coherence tool; it does not replace its telescope route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "Supplies tensor-shift naturality in arbitrary derived morphisms of the other input. No node of the Kunneth unit states this generic coherence tool; it does not replace its telescope route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-pullback-tensor-canonical-shift-unit",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-weil-pbc-derived-tensor-shift-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-afe844976",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-afe844976 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps (949–1306 characters each, proof_deps equal to the union of the step uses, no cycle, no SGA) and every cited node's statement. The statement equals the Q38-FIXed version, so it is unchanged against base. The square check holds: def-kun-unbounded-exchange applied with g↦f', f↦g, f'↦h, g'↦e gives θ:h^{-1}f'^{-1}→e^{-1}g^{-1} on a cartesian square, and ε_g is that node's derived counit. The coefficient category is the unbounded D(−,Λ) for arbitrary Λ. Step 1: exact inverse images (prop-…-exact plus the factorization leaf), K-injective Ru_* (lem-pc-right-derived-functor-triangulated), tensor exactness, and the four composites. Step 2: lem-kun-inverse-image-monoidal and pullback-tensor-canonical-shift-unit both name the Stacks 07A4 comparison (sites-cohomology l.3684), which I checked is built on flat-term K-flat Tot(f*P⊗f*Q). Its two shift equations need no boundedness. Step 3: θ is termwise, so the shift square is a chain identity, and it descends by localization clauses (2)/(3); valid for all m. Step 4: the CommShift adjunction node gives the unit and counit shift equations; derived-tensor-shift-descent gives naturality of tensor shifts in arbitrary derived morphisms, needed for 1⊗e^{-1}ε_g. Step 5: I recomputed χ_B α_{C[m]}=α_C[m]χ_A from naturality of η and r and the unit equation r R(l) η=η[m], and it is correct. This is the second conclusion of the existing abstract mate node, so marking it elementary is right. Signs: by 0FNH the F-shift has (−1)^p from the first factor on both A and B, and β preserves first-factor degree. Edge cases m=0, zero inputs, identity maps, Λ=0 and empty schemes all hold. Duplicate scan: lem-sc-projection-comparison-exact, lem-sf-finite-exchange-projection-commshift, lem-sfb-ringed-projection-first-shift and the abstract mate node are not this statement. Accepted tool_uses: prop-weil-pbc-inverse-image-modules-exact, lem-pc-right-derived-functor-triangulated, lem-weil-pbc-pullback-tensor-canonical-shift-unit, lem-sp-canonical-right-derived-adjunction-shift, lem-weil-pbc-derived-tensor-shift-descent. Advisory: I accepted, without a separate node, that the CommShift node's 'canonical D(L)⊣R(R)' adjunction is the def-kun-unbounded-exchange derived adjunction (counit termwise on K-injectives). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TensorBaseChangeExactTransformation",
+  "declaration": "AlgebraicGeometry.Etale.tensorBaseChange_exact_natural_shift",
+  "declarations": [
+   "AlgebraicGeometry.Etale.tensorBaseChangeSourceLeft",
+   "AlgebraicGeometry.Etale.tensorBaseChangeSourceRight",
+   "AlgebraicGeometry.Etale.tensorBaseChangeTargetLeft",
+   "AlgebraicGeometry.Etale.tensorBaseChangeTargetRight",
+   "AlgebraicGeometry.Etale.tensorBaseChange_exact_natural_shift"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorBaseChangeExactTransformation.lean",
+  "statement": "theorem tensorBaseChange_exact_natural_shift (p : X' ⟶ X) (f' : X' ⟶ S') (g : T ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (sq : IsPullback h e f' g) : (∀ F : DerivedCategoryModule Λ T, (tensorBaseChangeSourceLeft Λ p f' g F).IsTriangulated ∧ (tensorBaseChangeTargetLeft Λ p h e F).IsTriangulated) ∧ (∀ E : DerivedCategoryModule Λ X, (tensorBaseChangeSourceRight Λ p f' g E).IsTriangulated ∧ (tensorBaseChangeTargetRight Λ p h e E).IsTriangulated) ∧ (∀ (E E' : DerivedCategoryModule Λ X) (F F' : DerivedCategoryModule Λ T) (φ : E ⟶ E') (ψ : F ⟶ F'), (tensorBaseChangeSourceLeft Λ p f' g F).map φ ≫ (tensorBaseChangeSourceRight Λ p f' g E').map ψ ≫ tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq.w (L((p)^*[ModuleCat.{u + 1} Λ]).obj E') F' = tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq.w (L((p)^*[ModuleCat.{u + 1} Λ]).obj E) F ≫ (tensorBaseChangeTargetLeft Λ p h e F).map φ ≫ (tensorBaseChangeTargetRight Λ p h e E').map ψ) ∧ (∀ (m : ℤ) (E : DerivedCategoryModule Λ X) (F : DerivedCategoryModule Λ T), tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq.w (L((p)^*[ModuleCat.{u + 1} Λ]).obj (E⟦m⟧)) F ≫ ((tensorBaseChangeTargetLeft Λ p h e F).commShiftIso m).hom.app E = ((tensorBaseChangeSourceLeft Λ p f' g F).commShiftIso m).hom.app E ≫ (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq.w (L((p)^*[ModuleCat.{u + 1} Λ]).obj E) F)⟦m⟧') ∧ (∀ (m : ℤ) (E : DerivedCategoryModule Λ X) (F : DerivedCategoryModule Λ T), tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq.w (L((p)^*[ModuleCat.{u + 1} Λ]).obj E) (F⟦m⟧) ≫ ((tensorBaseChangeTargetRight Λ p h e E).commShiftIso m).hom.app F = ((tensorBaseChangeSourceRight Λ p f' g E).commShiftIso m).hom.app F ≫ (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq.w (L((p)^*[ModuleCat.{u + 1} Λ]).obj E) F)⟦m⟧')",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Uses the existing tensorBaseChangeMap with first argument L(p).obj E. The four transparent aliases spell out its source and target with either argument fixed. L(u) is canonically identified with exact termwise inverse image by leftDerivedUpperStarIsoMapDerivedCategory, and its CommShift is transported along that comparison; tensor and direct-image shifts are the existing canonical ones. No new mate or tensor construction, no boundedness or coefficient-finiteness assumption, and no isomorphism conclusion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91b798bf1",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: arbitrary Λ:Type(u+1) CommRing (recorded encoding), IsPullback h e f' g for f'h=ge and Y=X'×_{S'}T, unbounded DerivedCategoryModule, A and B as four transparent functor composites, α = existing tensorBaseChangeMap(L(p)E,F), which is the h-adjoint of the oplax tensorator, leftDerivedUpperStarComp θ and the g-counit (read in Kunneth/Ordinary.lean). Four IsTriangulated, two-variable naturality and both shift squares for all m in the node's order, no IsIso. Shift structures are fixed instances: L via ofIso of leftDerivedUpperStarIsoMapDerivedCategory, signed tensor obj/flip, R via rightAdjointCommShift, which equals the K-injective shift by canonicalRightDerivedAdjunctionShift plus uniqueness (advisory for stage 3). Records: only the item's lean changed, the 5 deps equal live, statement verbatim, docstrings with source, blueprint and the 5 steps, lines ≤100, imports = stated proof_deps, one sorry, no hollow defs. Advisory: upstream tensorBaseChangeMap has no recording node and its owner lem-kun-0f1n is the parent, the same pattern as the landed lem-kun-0f1n. No compile (no file changed)."
+ }
+}

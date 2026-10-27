@@ -1,0 +1,282 @@
+{
+ "id": "lem-sf-open-total-tensor-coefficient-interchange",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "kind": "statement",
+ "title": "Strict coefficient interchange for the open total-tensor map",
+ "statement": "Let $\\mathcal C$ be a Grothendieck site small in the module universe, $B$ a sheaf of commutative rings, and $V\\in\\mathcal C$ [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Write $j^*$ for restriction to $(\\mathcal C/V,B_V)$, with $B_V=j^*B$, and $j_{B!}\\dashv j^*$ for exact module extension by zero and restriction [def-pur-localized-ringed-site, lem-pur-site-restriction-module-adjunction-exact]. Let $A_\\bullet=(A_n,q_{m,n})_{m\\ge n\\ge1}$ be a strict inverse system of commutative $B$-algebra sheaves with unital $B$-algebra maps, including identity and composition laws, and put $A_{n,V}=j^*A_n$ [def-weil-inverse-system]. All tensors are sheafified tensors of module sheaves, and all complexes are possibly unbounded cochain complexes with signed direct-sum total tensor [def-weil-sheaf-of-modules-category, def-pur-sheaf-tensor-product, def-pc-cochain-complex-modules, def-pc-tensor-complex-sheaves]. For a $B_V$-complex $Q$ and a $B$-complex $F$ put\n$$Q_n=Q\\otimes_{B_V}A_{n,V},\\quad F_n=F\\otimes_BA_n,\\quad G=\\operatorname{Tot}(j_{B!}Q\\otimes_BF),\\quad G_V=\\operatorname{Tot}(Q\\otimes_{B_V}j^*F).$$\nLet $\\gamma^B:G\\xrightarrow\\sim j_{B!}G_V$ and the corresponding $\\gamma^{A_n}$ be the ordinary slice tensor chain isomorphisms whose inverses are the open-unit transposes; on extension-presheaf generators their forward maps send $[x]_f\\otimes y$ to $[x\\otimes j^*y]_f$ [lem-sf-ringed-slice-tensor-generators, lem-sf-ringed-open-total-tensor-kflat]. Brackets mean the image of the direct-sum summand indexed by $f:W\\to V$, followed by sheafification [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification]. Use the coefficient-linear maps\n$$r_{L,n}:(j_{B!}L)\\otimes_BA_n\\xrightarrow\\sim j_{A_n!}(L\\otimes_{B_V}A_{n,V}),\\qquad [z]_f\\otimes a\\longmapsto[z\\otimes j^*a]_f,$$\nfor complexes $L$ on $\\mathcal C/V$, and the identity-on-summands scalar-restriction identification $\\operatorname{Res}_{B\\to A_n}j_{A_n!}\\cong j_{B!}\\operatorname{Res}_{B_V\\to A_{n,V}}$ [lem-sf-cbc-slice-tensor-generator-coherence]. These preserve all quotient transitions. Define\n$$T_n=\\operatorname{Tot}(((j_{B!}Q)\\otimes_B A_n)\\otimes_{A_n}F_n),\\quad S_n=\\operatorname{Tot}(Q_n\\otimes_{A_{n,V}}j^*F_n),\\qquad \\gamma_n=\\gamma^{A_n}_{Q_n,F_n}\\circ\\operatorname{Tot}(r_{Q,n}\\otimes1).$$\n\nLet $b^X_n:G\\otimes_BA_n\\xrightarrow\\sim T_n$ and $b^V_n:G_V\\otimes_{B_V}A_{n,V}\\xrightarrow\\sim S_n$ be the balanced coefficient chain isomorphisms, with formula $(x\\otimes y)\\otimes a\\mapsto(x\\otimes a)\\otimes(y\\otimes1)$ and inverse $(x\\otimes a)\\otimes(y\\otimes b)\\mapsto(x\\otimes y)\\otimes ab$ [lem-pur-cochain-pullback-tensor-coherence]. Then the following is an equality of $A_n$-linear chain maps, simultaneously for all $n$:\n$$\\gamma_n b^X_n=j_{A_n!}(b^V_n)\\,r_{G_V,n}\\,(\\gamma^B\\otimes1).$$\nBoth sides send $([x]_f\\otimes y)\\otimes a$ to $[(x\\otimes j^*a)\\otimes(j^*y\\otimes1)]_f$ on homogeneous presheaf generators. The maps and their inverses preserve each bidegree $(p,q)$, intertwine $d(x\\otimes y)=dx\\otimes y+(-1)^p x\\otimes dy$, and commute with every $q_{m,n}$ before localization. After scalar restriction this is an equality of chain maps of strict $B$-module towers; its localization is an equality in their derived category. It is natural in both complexes and in unital maps of coefficient towers. No flatness, boundedness, completeness, or surjectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, label lemma-j-shriek-and-tensor, and sites-cohomology.tex Tag 0GL1, label lemma-j-shriek-and-tensor. Agent refinement of the ordinary slice tensor construction: coefficient interchange and its strict scalar-unit augmentation, extracted from the returned item proof, steps 3, 6 and 7."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-pur-localized-ringed-site",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sf-ringed-slice-tensor-generators",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sf-cbc-slice-tensor-generator-coherence",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-sf-open-total-tensor-coefficient-data",
+  "def-sf-open-total-tensor-coefficient-normalization",
+  "def-sf-open-total-tensor-coefficient-coherence"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the three normalized chain comparisons from lem-sf-open-total-normalized-comparisons. Use lem-sf-open-total-generator-calculus to compute both composites on source generators, and the inverse left composite on the two-scalar target generators.",
+   "uses": [
+    "lem-sf-open-total-normalized-comparisons",
+    "lem-sf-open-total-generator-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "To detect equality of coefficient-linear chain maps from the source, apply the scalar-extension adjunction degreewise. Precompose with gamma inverse, then apply the extension/restriction adjunction. The coproduct universal property tests all homogeneous insertions; the tensor and sheafification adjunctions reduce these tests to pure tensors. The adjunction units and GammaNormalization inverse formula identify these tests with the original source generators, with scalar 1. The two computed values agree, giving equality of the left and right chain maps.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-sf-open-total-tensor-coefficient-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the source strict diagram D from lem-sf-open-total-source-coefficient-family. After scalar restriction, let i_A be the left comparison and define the target transition E(h)=i_A^{-1} D(h) i_B, in left-to-right composition order. Cancellation proves E(identity)=identity, E(hk)=E(h)E(k) and strictness of the left comparison. Equality of the left and right maps gives strictness of the right comparison.",
+   "uses": [
+    "lem-sf-open-total-source-coefficient-family",
+    "def-sf-open-total-tensor-coefficient-coherence"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On a target generator with scalar entries a,b, the inverse formula gives source(ab). The source transition sends it to source(h(ab)); multiplicativity gives source(h(a)h(b)). Applying the new left comparison returns the two-scalar target generator with entries h(a),h(b), by the inverse formula and the inverse-hom identity. Thus the transported target transitions are precisely the required coefficient transitions. Complex naturality is supplied by the generator-calculus lemma.",
+   "uses": [
+    "lem-sf-open-total-generator-calculus",
+    "lem-sf-open-total-source-coefficient-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extensionality of natural transformations and the levelwise equality give equality after precomposition by any coefficient tower. Applying transpose and the actual localization functor to that equality proves the localized equation. This uses no assumption on flatness, boundedness, completeness or surjectivity.",
+   "uses": [
+    "def-sf-open-total-tensor-coefficient-normalization",
+    "def-sf-open-total-tensor-coefficient-coherence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-open-total-normalized-comparisons",
+  "lem-sf-open-total-generator-calculus",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-open-total-tensor-coefficient-normalization",
+  "lem-sf-open-total-source-coefficient-family",
+  "def-sf-open-total-tensor-coefficient-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I (lemma-j-shriek-and-tensor); A6 Lean reduction into normalized construction, homogeneous calculus and proved strict-family transport, 2026-10-26."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "12 hits: SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|ExtensionByZero|jShriek|lowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for extension by zero of sheaves of modules commutes with coefficient change and tensor product scalar unit maps before localization of complexes",
+   "results": "8 hits: IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalizedModule.rTensor, IsLocalizedModule.isBaseChange, IsLocalization.tensor, PresheafOfModules.Sheafify.map_smul, IsLocalization.tensorRight, IsLocalization.tensorProduct_isLocalizedModule, PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on a localized ringed site intertwines the tensor product change of scalars isomorphism and the tensor scalar unit as an equality of strict augmented coefficient tower chain maps",
+   "results": "8 hits: IsLocalizedModule.map_lTensor, IsLocalizedModule.mapExtendScalars_apply_apply, IsLocalization.tensorProduct_tensorProduct, IsLocalizedModule.rTensor, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, IsLocalization.moduleTensorEquiv, ModuleCat.extendScalarsComp_hom_app_one_tmul, IsLocalization.moduleLid",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules|restrictScalars|[Mm]onoidal",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary sheaf extension by zero projection isomorphism and coefficient reduction send each homogeneous extension generator tensor coefficient to the same generator, compatibly with the scalar unit augmentation of an inverse system",
+   "results": "8 hits: GradedTensorProduct.of_symm_of, GradedTensorProduct.auxEquiv, AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget, GradedTensorProduct.liftEquiv, GradedTensorProduct.symm_of_of, AlgebraicGeometry.Proj.awayMap_awayToSection, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, GradedTensorProduct.auxEquiv_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For complexes on a localized ringed site, the two composites from the constant tower of an open tensor product to the extended tensor coefficient tower agree on scalar unit augmentations",
+   "results": "8 hits: IsLocalization.tensorProduct_compatibleSMul, PiTensorProduct.isScalarTower', LocalSubring.instIsScalarTowerSubtypeMemSubringToSubringOfPrime, Algebra.tensorH1CotangentOfIsLocalization, PiTensorProduct.instIsScalarTower, TensorProduct.CompatibleSMul.isScalarTower, IsLocalization.instIsLocalizedModuleTensorProductMap, TensorProduct.isPushout",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary ring sheaves and an algebra tower, the two chain maps obtained by open extension projection formula then tensor scalar change, or tensor scalar change then open projection formula, are equal before localization",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc, ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, ModuleCat.Tilde.openToLocalization, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_apply, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc",
+   "date": "2026-10-22",
+   "verdict": "no match: module localization, graded tensor products, structure-sheaf restriction and the category of module sheaves do not give the open total-tensor coefficient-interchange or strict scalar-unit augmentation equation. Read Sheaf/PullbackContinuous.lean:50-63; it defines a module pullback adjunction only."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|ExtensionByZero|jShriek|lowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, completion, direct limits, or definitions of module sheaves; none states the normalized slice-site total tensor coefficient interchange. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905-916,1006-1010 and Sheaf/PullbackContinuous.lean:50-63."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of module sheaves commutes with coefficient extension and the tensor projection formula on unbounded cochain complexes",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, CategoryTheory.Abelian.Ext.zero_comp, groupCohomology.instPreservesZeroMorphismsRepCochainComplexModuleCatNatCochainsFunctor, HomologicalComplex.extendMap_zero, CochainComplex.HomComplex.Cochain.ofHom_zero, CategoryTheory.InjectiveResolution.cochainComplex, PresheafOfModules.Sheafify.zero_smul, PresheafOfModules.Sheafify.smul_zero",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, completion, direct limits, or definitions of module sheaves; none states the normalized slice-site total tensor coefficient interchange. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905-916,1006-1010 and Sheaf/PullbackContinuous.lean:50-63."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules",
+   "results": "12 hits: SheafOfModules, SheafOfModules.unit, SheafOfModules.instCategory, SheafOfModules.sections, SheafOfModules.Hom, SheafOfModules.instPreadditive, SheafOfModules.sectionsFunctor, SheafOfModules.sectionsFunctor_obj",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, completion, direct limits, or definitions of module sheaves; none states the normalized slice-site total tensor coefficient interchange. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905-916,1006-1010 and Sheaf/PullbackContinuous.lean:50-63."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The two composites of balanced scalar extension and slice extension tensor product comparisons agree on pure tensors and on inverse system transitions",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_tmul, ModuleCat.extendScalarsComp_hom_app_one_tmul, TensorProduct.directLimitLeft_rTensor_of, TensorProduct.fromDirectLimit_of_tmul, TensorProduct.directLimitLeft_symm_of_tmul, TensorProduct.directLimitRight_symm_of_tmul",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, completion, direct limits, or definitions of module sheaves; none states the normalized slice-site total tensor coefficient interchange. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905-916,1006-1010 and Sheaf/PullbackContinuous.lean:50-63."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a slice site, the extension by zero tensor projection isomorphism commutes with ordinary extension of coefficients as an equality of chain maps",
+   "results": "8 hits: ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, LightCondensed.free_internallyProjective_iff_tensor_condition, ModuleCat.extendScalars_id_comp, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, completion, direct limits, or definitions of module sheaves; none states the normalized slice-site total tensor coefficient interchange. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905-916,1006-1010 and Sheaf/PullbackContinuous.lean:50-63."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp_hom_app_one_tmul|extendRestrictScalarsAdj_unit_app_apply",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern ordinary modules, completion, direct limits, or definitions of module sheaves; none states the normalized slice-site total tensor coefficient interchange. Read Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean:905-916,1006-1010 and Sheaf/PullbackContinuous.lean:50-63."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-tensor-quotient-augmentation",
+  "date": "2026-10-22",
+  "group": "NX"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Proof, base-change paragraph: \"On the j_! factor both composites take values in the essential image of j prime shriek ... and both restrict to the identity\"; the finite-reduction compatibility clause. This is the ordinary cochain coefficient-interchange calculation (returned item steps 3 and 6).",
+   "via": [
+    "lem-sf-open-tensor-quotient-augmentation",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-open-total-tensor-coefficient-interchange",
+  "worker": "stage1",
+  "summary": "Proved strict coefficient interchange by computing both normalized composites on homogeneous extension-presheaf tensors, descending by universal properties, and checking signs, all tower transitions, inverses, and naturality. Reused existing comparison statements; no new node and no statement change.",
+  "blueprint": "prop-sf-pf-coherence: ordinary open-factor normalization in the base-change paragraph and its final finite-reduction/scalar-extension compatibility clause. The proof supplies the cochain-level generator calculation extracted through lem-sf-pf-open-factor-coherence and lem-sf-open-tensor-quotient-augmentation.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic ordinary cochain scalar-change tensor comparison, specialized to an identity underlying topos; the unit needs this balanced comparison as a tool, not a replacement route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact localized-site module adjunction, used to identify j shriek and its coproduct comparison; this is a structural tool for the open factor."
+   },
+   {
+    "node": "lem-sf-ringed-slice-tensor-generators",
+    "why": "Generic normalized ordinary ringed-slice tensor isomorphism, supplying the prescribed generators and open-unit transpose; the unit uses this structural tool on its open factor."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic restriction-tensor comparison on a localized ringed site (already a statement dependency of lem-sf-ringed-slice-tensor-generators); it types the balanced comparison b^V_n into S_n=Tot(Q_n otimes j^*F_n). Added by the cc reviewer."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NV-0609a0b6a",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-0609a0b6a (reviewer sub-agent of L); spot-checked: The item lem-sf-open-total-tensor-coefficient-interchange (unit sk-prop-sf-pf-coherence) is split into 7 steps with no new nodes. Its statement and blueprint are byte-identical to the NX snapshot. There is no re-split note, and the parent lem-sf-open-tensor-quotient-augmentation step 3 uses the statement exactly. Stacks 0E8I (sites-modules.tex:4051) and 0GL1 (sites-cohomology.tex:4578) give only the ordinary and derived j_! tensor isomorphism. The square is correctly marked as an agent refinement, and no SGA is used. I checked against the cited statements: the generator formulas of lem-sf-ringed-slice-tensor-generators (ψ, κ, uniqueness on generators); lem-sf-cbc-slice-tensor-generator-coherence (η, κ, strict r, naturality); and lem-pur-cochain-pullback-tensor-coherence specialized to the identity topos with B→A_n. Steps 2 and 3 (both sides give [(x⊗a|)⊗(y|⊗1)]_f), steps 4 and 5 (sign (-1)^p, degree-0 coefficient), step 6 (q(ab)=q(a)q(b)) and step 7 are correct and elementary. Small cases checked: Q=0 or F=0, constant tower, Z→Z/2 non-flat, zero ring, negative degrees. No duplicate found: cbc localized strict descent and coefficient-linear descent are derived statements; scalar-unit augmentation makes a different claim. FIX for two C3/C4 faults in step 1. (i) γ was taken as Φ^{-1} of lem-sf-ringed-open-total-tensor-kflat, whose components are the unnormalized isomorphism of lem-weil-pbc-ringed-slice-extension-tensor. The fix defines γ degreewise from ψ, with the chain property from naturality of ψ and j_! preserving sums by the adjunction. (ii) b^V_n lands in Tot(Q_n⊗(j^*F⊗A_{n,V})), not in S_n with j^*F_n, and the uncited lem-sfb-localized-site-tensor-restriction is needed to identify the two. It is now cited in steps 1 and 3 and added to proof_deps and tool_uses. I accept the worker's three tool_uses. Statement and stmt_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.OpenTotalTensorCoefficientInterchange",
+  "declaration": "SheafOfModules.OpenTotalTensorCoefficient.interchange_exists",
+  "declarations": [
+   "SheafOfModules.OpenTotalTensorCoefficient.interchange_exists"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/OpenTotalTensorCoefficientInterchange.lean",
+  "statement": "theorem interchange_exists : ∃ e : Comparisons.{c, v, r} R V, GammaNormalization.{c, v, r} R V e ∧ LinearNormalization.{c, v, r} R V e ∧ RestrictionNormalization.{c, v, r} R V e ∧ Nonempty (StrictCoherence.{c, v, r} R V e)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f13a90b2b",
+  "group": "Q147",
+  "result": "fix",
+  "note": "Read item, 17 dep records (identical to live), 4 modules, 3 new def nodes, used decls in LocalizedStrictTensorData/CochainCoefficientArrows/LocalizedModuleExactForSystems. All clauses match: gamma (all B), linear r, restriction identification pinned forward+inverse on generators; b^X=existing epsilon, b^V=epsilon+pinned restriction iso; left/right composites typed as γ_n b^X_n and j_!(b^V)r(γ⊗1); equation, generator (a,1), inverse (ab), transitions pinned on coefficient entries for all Under R maps, tower and localized equations, naturality in u,v; no extra hypotheses; universes independent (max c v r). Gates: sorry only in theorem, no hollow defs, docstrings with source/blueprint and the 7 steps, statement verbatim. FIX: new node def-sf-open-total-tensor-coefficient-data cited theorem nodes lem-pur-cochain-pullback-tensor-coherence / lem-sf-ringed-slice-tensor-generators for plain defs owned by def-pur-cochain-coefficient-arrows / def-sf-localized-strict-tensor-comparison-data (both on base); fixes/def-sf-open-total-tensor-coefficient-data.json swaps both in statement cites and stmt_deps; check_new_node clean; JSON-only fix, no compile. Advisories: localizeTower duplicates DT's Q, redundant theorem-module imports, copied LinearNormalization docstring."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261026T091052-L-3303553",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

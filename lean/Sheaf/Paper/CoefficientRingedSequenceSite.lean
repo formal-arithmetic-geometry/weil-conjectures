@@ -285,6 +285,44 @@ private theorem transition_generic
     ext U x
     exact congrArg (fun f ↦ f x) (hσ M U)
 
+-- Match named functor endpoints before inspecting their concrete construction.
+private theorem transition_presented
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    (R : Sheaf (coefficientSequenceTopology J) RingCat.{u})
+    {m n : ℕ} (_h : n ≤ m) (S T : Sheaf J RingCat.{u})
+    [Functor.IsContinuous (Prod.sectR m C) J (coefficientSequenceTopology J)]
+    [Functor.IsContinuous (Prod.sectR n C) J (coefficientSequenceTopology J)]
+    (φ : S ⟶ ((Prod.sectR m C).sheafPushforwardContinuous RingCat J
+      (coefficientSequenceTopology J)).obj R)
+    (ψ : T ⟶ ((Prod.sectR n C).sheafPushforwardContinuous RingCat J
+      (coefficientSequenceTopology J)).obj R)
+    (κ : S ⟶ T)
+    (α : Prod.sectR n C ⟶ Prod.sectR m C)
+    (he : φ ≫ (Functor.sheafPushforwardContinuousNatTrans α RingCat J
+      (coefficientSequenceTopology J)).app R = κ ≫ ψ)
+    (Fm : SheafOfModules.{u} R ⥤ SheafOfModules.{u} S)
+    (Fn : SheafOfModules.{u} R ⥤ SheafOfModules.{u} T)
+    (H : SheafOfModules.{u} T ⥤ SheafOfModules.{u} S)
+    (hFm : Fm = SheafOfModules.pushforward φ)
+    (hFn : Fn = SheafOfModules.pushforward ψ)
+    (hH : H = SheafOfModules.restrictScalars κ)
+    (hm : ∀ (M : SheafOfModules.{u} R) (U : Cᵒᵖ),
+      (Fm.obj M).val.presheaf.obj U =
+        M.val.presheaf.obj (op (m, U.unop)))
+    (hn : ∀ (M : SheafOfModules.{u} R) (U : Cᵒᵖ),
+      (H.obj (Fn.obj M)).val.presheaf.obj U =
+          M.val.presheaf.obj (op (n, U.unop))) :
+    ∃! τ : Fm ⟶ Fn ⋙ H,
+      ∀ (M : SheafOfModules.{u} R) (U : Cᵒᵖ),
+        eqToHom (hm M U).symm ≫
+          (forget₂ (ModuleCat.{u} (S.obj.obj U)) AddCommGrpCat.{u}).map
+            ((τ.app M).val.app U) ≫ eqToHom (hn M U) =
+          M.val.presheaf.map (α.app U.unop).op := by
+  subst Fm
+  subst Fn
+  subst H
+  exact transition_generic J R _h S T φ ψ κ α he hm hn
+
 private theorem horizontal_map
     {C : Type c} [Category.{v} C] {A : Type*} [Category* A]
     (F : ℕᵒᵖ ⥤ Cᵒᵖ ⥤ A) {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) :
@@ -457,7 +495,8 @@ noncomputable instance coefficientSequenceEssentiallySmall :
 
 /-- The ordinary unbounded localization of strict coefficient systems.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
-noncomputable abbrev coefficientSequenceDerived :=
+@[reducible]
+noncomputable def coefficientSequenceDerived :=
   @DerivedCategory (coefficientSequenceModules l E W) _ _ (HasDerivedCategory.standard _)
 
 /-- The standard localization instance for strict coefficient-system modules.
@@ -591,7 +630,8 @@ noncomputable instance coefficientSequenceEvaluation_additiveInstance (n : ℕ) 
 
 /-- Ordinary derived evaluation descended from exact sequence evaluation.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
-noncomputable abbrev coefficientSequenceDerivedEvaluation (n : ℕ) :
+@[reducible]
+noncomputable def coefficientSequenceDerivedEvaluation (n : ℕ) :
     coefficientSequenceDerived l E W ⥤ normalizedDVRDerived l E W n :=
   letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
   letI := HasDerivedCategory.standard (normalizedDVRModules l E W n)
@@ -676,6 +716,8 @@ private theorem coefficientSequenceRingHorizontal {m n : ℕ} (h : n ≤ m) :
       (congrArg (fun f ↦ f.hom.app U) hsys)
   exact he
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 set_option maxHeartbeats 500000 in
 -- Comparing the concrete pushforward and scalar-restriction interfaces is expensive.
 /-- The actual quotient transition, characterized on every section of every system.
@@ -699,13 +741,16 @@ theorem coefficientSequenceTransition_exists {m n : ℕ} (h : n ≤ m) :
   let φm := eqToHom (coefficientSequenceEvaluationRing_eq l E W m).symm
   let φn := eqToHom (coefficientSequenceEvaluationRing_eq l E W n).symm
   have he := coefficientSequenceRingHorizontal l E W h
-  exact transition_generic (Scheme.ProEt.topology W)
+  have hgeneric := transition_presented (Scheme.ProEt.topology W)
     ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
       (coefficientSequenceCommRingSheaf l E W)) h
     (integralCoefficientSheaf l E W m) (integralCoefficientSheaf l E W n)
     φm φn (normalizedDVRQuotient l E W h) α he
+    (coefficientSequenceEvaluation l E W m) (coefficientSequenceEvaluation l E W n)
+    (normalizedDVRModuleRes l E W h) (by rfl) (by rfl) (by rfl)
     (fun M U ↦ coefficientSequenceEvaluationAb_eq l E W M m U)
     (fun M U ↦ coefficientSequenceRestrictedEvaluationAb_eq l E W M h U)
+  exact hgeneric
 
 
 /-- The canonical quotient transition, chosen by its unique actual restriction formula.
@@ -905,12 +950,14 @@ noncomputable instance coefficientSequenceRestriction_colimits :
 
 /-- The standard unbounded derived category of completed-coefficient towers.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
-noncomputable abbrev coefficientSequenceRestrictedDerived :=
+@[reducible]
+noncomputable def coefficientSequenceRestrictedDerived :=
   @DerivedCategory (ℕᵒᵖ ⥤ scalarReductionSource l E W) _ _ (HasDerivedCategory.standard _)
 
 /-- The exact functor U_W on ordinary unbounded derived system categories.
 Source: Stacks 0941 (blueprint: def-coef-ringed-sequence-site). -/
-noncomputable abbrev coefficientSequenceDerivedRestriction :
+@[reducible]
+noncomputable def coefficientSequenceDerivedRestriction :
     coefficientSequenceDerived l E W ⥤ coefficientSequenceRestrictedDerived l E W :=
   letI := HasDerivedCategory.standard (coefficientSequenceModules l E W)
   letI := HasDerivedCategory.standard (ℕᵒᵖ ⥤ scalarReductionSource l E W)

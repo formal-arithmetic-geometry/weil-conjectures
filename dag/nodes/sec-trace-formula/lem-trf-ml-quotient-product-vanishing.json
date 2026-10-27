@@ -1,0 +1,204 @@
+{
+ "id": "lem-trf-ml-quotient-product-vanishing",
+ "kind": "statement",
+ "title": "Mittag-Leffler vanishing under the tensor of a quotient-product map",
+ "statement": "Let $R$ be a commutative ring, $M$ a Mittag-Leffler $R$-module [def-trf-mittag-leffler-module], $E$ an $R$-module, $J$ any set, and $(N_j)_{j\\in J}$ a family of submodules of $E$. Put $P=\\prod_{j\\in J}E/N_j$, the module of all families with componentwise operations, and let $q:E\\to P$ send $e$ to $(e+N_j)_j$. Tensor products and induced tensor maps are [def-weil-pbc-module-tensor-product]. The linear map $\\beta:P\\otimes_R M\\to\\prod_{j\\in J}((E/N_j)\\otimes_R M)$ defined on pure tensors by $\\beta((a_j)_j\\otimes m)=(a_j\\otimes m)_j$ is injective. For every $x\\in E\\otimes_R M$, if $x$ belongs to the image of $N_j\\otimes_R M\\to E\\otimes_R M$ induced by inclusion for every $j\\in J$, then $(q\\otimes\\mathrm{id}_M)(x)=0$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AS6 (lemma-minimal-contains), proof: the two displayed quotient-product maps and the implication between their zero images (returned Steps 2 and 3); no flatness is assumed in this auxiliary."
+ },
+ "stmt_deps": [
+  "def-trf-mittag-leffler-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For any $R$-modules $A,B$, write $s_{A,B}:A\\otimes_R B\\to B\\otimes_R A$ for the $R$-linear isomorphism $\\tau_{A,B}$ of [lem-weil-pbc-module-tensor-comm], so $s_{A,B}(a\\otimes b)=b\\otimes a$. Its inverse is $s_{B,A}$: the composites $s_{B,A}s_{A,B}$ and $s_{A,B}s_{B,A}$ fix every pure tensor, hence are identities because pure tensors generate [def-weil-pbc-module-tensor-product]. This supplies the change of tensor order needed below.",
+   "uses": [
+    "lem-weil-pbc-module-tensor-comm",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AS6 (lemma-minimal-contains), tensor order in the two displayed quotient-product maps; symmetry of the tensor product (Tag 00CX universal property)"
+   }
+  },
+  {
+   "text": "Put $Q_j=E/N_j$. The Mittag-Leffler definition [def-trf-mittag-leffler-module], applied to this family, makes $\\theta:M\\otimes_R P\\to\\prod_j(M\\otimes_R Q_j)$ injective. The map $((a_j)_j,m)\\mapsto(a_j\\otimes m)_j$ is bilinear componentwise, so the tensor universal property defines $\\beta$. On a generator $a\\otimes m$, with $a=(a_j)_j$, both $(\\prod_j s_{M,Q_j})\\theta s_{P,M}$ and $\\beta$ give $(a_j\\otimes m)_j$; hence they agree on the entire tensor product. The product of the swaps has inverse the componentwise product of their inverses, and $s_{P,M}$ is invertible by Step 1. Since $\\theta$ is injective, this factorization proves injectivity of $\\beta$.",
+   "uses": [
+    "def-trf-mittag-leffler-module",
+    "lem-weil-pbc-module-tensor-comm",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 059M (proposition-ML-tensor), condition (2); Tag 0AS6 (lemma-minimal-contains), implication between the two displayed maps"
+   }
+  },
+  {
+   "text": "Write $\\pi_j:P\\to Q_j$ for projection, $p_j:E\\to Q_j$ for the quotient map and $i_j:N_j\\hookrightarrow E$ for inclusion. Then $\\pi_jq=p_j$ and $p_ji_j=0$. On each pure tensor $e\\otimes m$, the $j$th coordinate of $\\beta(q\\otimes\\mathrm{id}_M)$ equals $(e+N_j)\\otimes m$, so that coordinate map is $p_j\\otimes\\mathrm{id}_M$ by generation. Fix $j$ and choose $y_j\\in N_j\\otimes_R M$ mapping to $x$, as the hypothesis permits. Tensor functoriality gives $(p_j\\otimes\\mathrm{id}_M)(x)=((p_ji_j)\\otimes\\mathrm{id}_M)(y_j)=0$. Thus every coordinate of $\\beta((q\\otimes\\mathrm{id}_M)(x))$ is zero. By Step 2 and $\\beta(0)=0$, injectivity gives $(q\\otimes\\mathrm{id}_M)(x)=0$.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0AS6 (lemma-minimal-contains), vanishing in the first displayed product and then in the tensor of the product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-trf-mittag-leffler-module",
+  "lem-weil-pbc-module-tensor-comm"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0AS6 (lemma-minimal-contains), the two displayed quotient-product maps; Tag 059M (proposition-ML-tensor), condition (2). Tensor-order and coordinate details expanded from the cited definitions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Mittag Leffler module: comparison from product of quotients tensor M to product of quotient tensors is injective and tensors supported in every submodule map to zero in product of quotients tensor M",
+   "results": "{\"t\": \"2026-10-22T06:47:27Z\", \"tool\": \"leanfinder\", \"query\": \"Mittag Leffler module: comparison from product of quotients tensor M to product of quotient tensors is injective and tensors supported in every submodule map to zero in product of quotients tensor M\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Submodule.FG.lTensor.directedSystem\", \"Submodule.FG.rTensor.directedSystem\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"LinearMap.rTensor_injective_of_fg\", \"Submodule.FG.lTensor.directLimit_apply'\", \"Submodule.FG.rTensor.directLimit_apply'\"], \"digest\": \"48149d16c3062f5e\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: piRightHom constructs the comparison; piRight assumes a finite index. The other hits give quotient right exactness or injectivity for flat modules, not this arbitrary-family Mittag-Leffler comparison and vanishing assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"piRight\"",
+   "results": "{\"t\": \"2026-10-22T06:47:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"piRight\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"TensorProduct.piRightHom\", \"TensorProduct.piRightInv\", \"TensorProduct.piRight\", \"TensorProduct.piRightHom_tmul\", \"TensorProduct.piRightHomBil\", \"TensorProduct.piRight_symm_apply\", \"TensorProduct.piRight_symm_single\", \"TensorProduct.piRight_apply\"], \"digest\": \"c9383cbf1988e25f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: piRightHom constructs the comparison; piRight assumes a finite index. The other hits give quotient right exactness or injectivity for flat modules, not this arbitrary-family Mittag-Leffler comparison and vanishing assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "piRightHom|piLeftHom|Mittag|rTensor.*pi|pi.*rTensor",
+   "results": "{\"t\": \"2026-10-22T06:47:16Z\", \"tool\": \"grep\", \"query\": \"piRightHom|piLeftHom|Mittag|rTensor.*pi|pi.*rTensor\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Finiteness.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Finiteness.lean\"], \"digest\": \"c3d1c453a94575b8\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: piRightHom constructs the comparison; piRight assumes a finite index. The other hits give quotient right exactness or injectivity for flat modules, not this arbitrary-family Mittag-Leffler comparison and vanishing assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product with a Mittag Leffler module detects zero in products of quotients",
+   "results": "{\"t\": \"2026-10-22T06:47:17Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product with a Mittag Leffler module detects zero in products of quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FaithfullyFlat.lTensor_reflects_triviality\", \"PiTensorProduct.zero_tprodCoeff'\", \"Module.FaithfullyFlat.one_tmul_eq_zero_iff\", \"TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk\", \"TensorProduct.quotientTensorQuotientEquiv\", \"TensorProduct.zero_tmul\", \"TensorProduct.tensorQuotientEquiv\", \"Module.FaithfullyFlat.lTensor_nontrivial\"], \"digest\": \"69a02836a83f76a6\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: piRightHom constructs the comparison; piRight assumes a finite index. The other hits give quotient right exactness or injectivity for flat modules, not this arbitrary-family Mittag-Leffler comparison and vanishing assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor belonging to the image of each submodule tensor M is annihilated by the product of quotient maps tensor M if M has injective tensor to product comparison",
+   "results": "{\"t\": \"2026-10-22T06:48:11Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor belonging to the image of each submodule tensor M is annihilated by the product of quotient maps tensor M if M has injective tensor to product comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensor_mkQ\", \"rTensor_mkQ\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"lTensor.toFun\", \"TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective\", \"TensorProduct.rTensor_injective_of_forall_vanishesTrivially\", \"rTensor.toFun\", \"Ideal.pi_mkQ_rTensor\"], \"digest\": \"d070ee295a82e9ba\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: piRightHom constructs the comparison; piRight assumes a finite index. The other hits give quotient right exactness or injectivity for flat modules, not this arbitrary-family Mittag-Leffler comparison and vanishing assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Mittag|piRightHom|piLeftHom",
+   "results": "{\"t\": \"2026-10-23T14:51:52Z\", \"tool\": \"grep\", \"query\": \"Mittag|piRightHom|piLeftHom\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\", \"Mathlib/LinearAlgebra/TensorProduct/Pi.lean\"], \"digest\": \"96692654a003788d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Pi.lean constructs piRightHom at lines 46-63 and proves an isomorphism only after Fintype at line 65; no arbitrary-family Mittag-Leffler injectivity or quotient-product vanishing."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensoring the diagonal map to a product of quotient modules kills a tensor in every submodule image when the tensor product comparison is injective",
+   "results": "{\"t\": \"2026-10-23T14:51:53Z\", \"tool\": \"leansearch\", \"query\": \"Tensoring the diagonal map to a product of quotient modules kills a tensor in every submodule image when the tensor product comparison is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tensorQuotientEquiv\", \"TensorProduct.tensorQuotientEquiv_apply_mk_tmul\", \"TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective\", \"TensorProduct.tensorQuotEquivQuotSMul\", \"TensorProduct.quotientTensorEquiv\", \"TensorProduct.quotTensorEquivQuotSMul\", \"TensorProduct.quotientTensorQuotientEquiv\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\"], \"digest\": \"9c8930133547aa42\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: quotientTensorEquiv and tensorQuotientEquiv (Quotient.lean lines 105 and 131) describe individual quotients; they do not give injectivity into an arbitrary product or the stated implication."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"piRightHom\"",
+   "results": "{\"t\": \"2026-10-23T14:51:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"TensorProduct\\\", \\\"piRightHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"TensorProduct.piRightHom\", \"TensorProduct.piRightHom_tmul\", \"TensorProduct.piRightHomBil\", \"Algebra.TensorProduct.piRightHom\", \"Algebra.TensorProduct.piRightHom_one\", \"Algebra.TensorProduct.piRightHom_mul\"], \"digest\": \"a2357207144e611e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: piRightHom and its pure-tensor formula construct the comparison, and the algebra versions concern algebras; none states the Mittag-Leffler injectivity and vanishing implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Mittag Leffler module M, the comparison from product of modules tensor M to product of tensors is injective; a tensor supported in each submodule maps to zero in the tensor of the product of quotients",
+   "results": "{\"t\": \"2026-10-23T14:52:01Z\", \"tool\": \"leanfinder\", \"query\": \"For a Mittag Leffler module M, the comparison from product of modules tensor M to product of tensors is injective; a tensor supported in each submodule maps to zero in the tensor of the product of quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.rTensor_injective_of_forall_vanishesTrivially\", \"TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective\", \"LinearMap.rTensor_injective_of_fg\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"Module.Flat.tensorProduct_mapIncl_injective_of_right\", \"Submodule.injective_tensorToSpan\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\"], \"digest\": \"3c40128c28185c89\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern tensoring submodule inclusions, equational vanishing, or flatness and completion. They do not assert the arbitrary-product comparison for a Mittag-Leffler module or the quotient-product implication."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injectivity of the tensor product map to an arbitrary Cartesian product for Mittag-Leffler modules, using coordinate quotient maps to show a tensor is zero",
+   "results": "{\"t\": \"2026-10-23T14:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Injectivity of the tensor product map to an arbitrary Cartesian product for Mittag-Leffler modules, using coordinate quotient maps to show a tensor is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.rTensor_injective_of_forall_vanishesTrivially\", \"TensorProduct.forall_vanishesTrivially_iff_forall_rTensor_injective\", \"TensorProduct.forall_vanishesTrivially_iff_forall_fg_rTensor_injective\", \"TensorProduct.vanishesTrivially_of_sum_tmul_eq_zero_of_rTensor_injective\", \"TensorProduct.vanishesTrivially_iff_sum_tmul_eq_zero_of_rTensor_injective\", \"LinearMap.rTensor_injective_of_fg\", \"TensorProduct.rTensor_injective_of_forall_fg_rTensor_injective\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\"], \"digest\": \"8338ba8f490481d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits concern tensoring submodule inclusions, equational vanishing, or flatness and completion. They do not assert the arbitrary-product comparison for a Mittag-Leffler module or the quotient-product implication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-flat-ml-minimal-support",
+  "group": "Q107",
+  "date": "2026-10-22"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Supporting algebra for the flat Mittag-Leffler criterion in the inherited projectivity/flatification branch: Tag 0AS6 least-support argument; the two displayed quotient-product maps and the implication between their zero images (returned Steps 2 and 3); no flatness is assumed in this auxiliary.",
+   "via": [
+    "lem-trf-flat-ml-minimal-support",
+    "lem-trf-flat-mittag-leffler-criterion",
+    "lem-trf-product-noetherian-flat-mittag-leffler",
+    "lem-trf-completion-flat-mittag-leffler",
+    "lem-trf-local-flat-pure-complete-projective",
+    "lem-trf-local-noetherian-fibres-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-ml-quotient-product-vanishing",
+  "worker": "stage1",
+  "summary": "Expanded the two quotient-product maps of Tag 0AS6 into an elementary proof from the existing tensor universal property and the tensor-comparison definition of Mittag-Leffler. Constructed the swap and its inverse, factored the comparison, and calculated each quotient coordinate on a chosen support lift. Statement unchanged; no flatness or exactness invoked; no new nodes. Project attachment search and five fresh logged Mathlib searches found no exact declaration.",
+  "blueprint": "Supporting algebra in the inherited projectivity/flatification branch below lem-trf-local-term-locality: the Tag 0AS6 quotient-product implication isolated by lem-trf-flat-ml-minimal-support, Step 2. The latest blueprint locality proof was read; no change to its route or statement. Whole-blueprint searches for Mittag and quotient-product found no same statement."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-692a02296",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-692a02296 (reviewer sub-agent of L); spot-checked: Read all three steps, both cited definitions and Stacks algebra.tex lemma-minimal-contains (Tag 0AS6, line 21534) together with Tag 059M; tags/tags confirms both labels. The item isolates the step of the Stacks proof where zero in ∏(F/F_i⊗M) gives zero in (∏F/F_i)⊗M. It states this without flatness and phrases the hypothesis as 'x is in the image of each N_j⊗M'. That is correct and not a weakening: the parent lem-trf-flat-ml-minimal-support uses it in its Step 2 with exactly the same P and q, and adds flatness only in its Step 3. Step 2: checked β = (∏ swaps)∘θ∘swap on generators; θ is injective by def-trf-mittag-leffler-module (M on the left). Step 3: p_j i_j = 0 and the j-th coordinate of β(q⊗id) is p_j⊗id, so each j needs only its own lift and no compatible lifts. Edge cases tested: J empty, J a singleton, all N_j = E, some N_j = 0, the non-flat M = Z/2 over Z, and the zero ring. No re-split note applies, there are no new nodes and no SGA citations. One fix (C5): Step 1 re-derived tensor symmetry from the universal property, but the DAG already has the Mathlib leaf lem-weil-pbc-module-tensor-comm (TensorProduct.comm). Step 1 now cites that leaf for the swap, and Steps 1–2 uses and proof_deps include it. It is a Mathlib leaf, so it adds no cycle and needs no tool_use. Corrected item file: fixes/dag/nodes/sec-trace-formula/lem-trf-ml-quotient-product-vanishing.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MittagLefflerQuotientProductVanishing",
+  "declaration": "Module.isMittagLeffler_quotient_product_vanishing",
+  "file": "lean/Sheaf/RingTheory/MittagLefflerQuotientProductVanishing.lean",
+  "statement": "theorem isMittagLeffler_quotient_product_vanishing {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] {E : Type t} [AddCommGroup E] [Module R E] {J : Type w} (hML : Module.IsMittagLeffler.{u, v, w, t} R M) (N : J → Submodule R E) : Function.Injective (LinearMap.pi (fun j : J => LinearMap.rTensor M (LinearMap.proj j : (∀ k : J, E ⧸ N k) →ₗ[R] E ⧸ N j))) ∧ ∀ x : TensorProduct R E M, (∀ j : J, x ∈ Set.range (LinearMap.rTensor M (N j).subtype)) → LinearMap.rTensor M (LinearMap.pi (fun j : J => (N j).mkQ)) x = 0",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6156b44c1",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsMittagLeffler.{u,v,w,t} (index=w, test max u v t holds E⧸N j via ULift; same param order as landed users), arbitrary J/N, P=∀k E⧸N k, q=pi mkQ, β=pi (rTensor M (proj j)) with P⊗M order, injectivity unconditional, vanishing under ∀j x∈range(rTensor (N j).subtype). Matches Stacks 0AS6 displayed maps; flatness correctly absent. Edge cases (J empty, N j=⊤/⊥, zero ring, non-flat ML) fine. Only lean field changed vs live; lean.statement verbatim in file; single sorry; no defs; docstrings with source+blueprint+3 proof steps; report has Worker report and Second reading by Q15. No duplicate in Mathlib/project. No file changed, so no recompile."
+ }
+}

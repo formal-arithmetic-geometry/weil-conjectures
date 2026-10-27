@@ -1,0 +1,41 @@
+## Worker report
+
+Files written: dag/nodes/sec-six-functors-basics/lem-sfb-bounded-pseudocoherent-residue-model.json (item, split; no Mathlib match), citations.json, searches.jsonl, report.md. No new nodes and no Mathlib leaves. No Lean files, compilation, library writes, repository git commands or subagents.
+
+Attachments: none. Searches in lean/WeilConjectures for the exact blueprint tag, pseudo-coherence, bounded models and residue models found no declaration supplying this item's full conclusion. Existing MinimalFreeModel and MinimalComplex results supply narrower inputs, not this item.
+
+WANTED: none.
+
+The item statement is unchanged and agrees with Stacks 0BYP (more-algebra.tex, lemma-lift-bounded-pseudo-coherent-to-perfect), with its finite-dimensionality observation supplied explicitly from a bounded-above finite-free representative (also 0BCC). A key detail is retaining the original a in the conclusion: the initial cut uses t=min(a,c)-1, whereas the final local minimal model has zero ranks below the original a. Bounded below is a cohomology bound, not a bound on the chosen free resolution. No statement dispute was found.
+
+I read the chapter and unit records, the current literature/blueprint/latest direct-images proof, and the local Stacks proofs of 0BYP, 068U (lemma-cut-complex-in-two), 0BCC (lemma-lift-pseudo-coherent-from-residue-field), and 0BCD (lemma-lift-perfect-from-residue-field). The latest blueprint direct-images proof uses compactification; the inherited creation chain records an older, much longer alteration prerequisite leading through the nodal relative dualizing line. Neither the unit nor chapter is changed. blueprint_refs.py ancestor returns None for this inherited chain, and the null ancestor is preserved with the inherited detailed place. Blueprint searches for pseudo-coherent, 0BYP, 0BCC, cut-complex, finite-free model and residue found no imported node stating this ring theorem. DAG tag and concept searches found the generic cancellation and local minimal-model inputs already present, avoiding new copies. Scheme local-model nodes have different objects and are not invoked as ring-level theorems.
+
+The prescribed msearch.py calls are recorded verbatim in searches.jsonl and appended to the item's previous search records. Two semantic phrasings, Loogle and grep produced no match. Hits concern ranks/free loci of individual modules or bounded representatives without free terms. I read FreeLocus.lean (rankAtStalk_eq, lines 379ff; locally constant rank, lines 186ff) and TStructure.lean (exists_iso_Q_obj_of_isGE_of_isLE, lines 180ff); neither gives this theorem. Prior Q75 search records are retained rather than rewritten or claimed as this worker's calls.
+
+Nothing remains unfinished in this one-level split; reused nodes retain their own independent statuses.
+
+## Not duplicates
+
+No new nodes. Existing lem-weil-pbc-free-complex-residue-degree-cancellation and lem-sc-perfect-local-pseudocoherent-free-model are reused. The latter is local-ring 0BCC; the item obtains a principal-open model over the original ring. Existing scheme statements lem-sc-perfect-finite-free-residue-model and lem-sc-bounded-free-stalk-model-spread concern sheaf complexes, not arbitrary ring objects, and are not used through unstated equivalences.
+
+## Review by Q06
+
+I checked the actual statements of every cited node with the Stacks sources open, and citations.json contains a verbatim statement quote for every citation occurrence. No dependency is cited merely for its proof or its title. The four generic theorem tools outside this unit are declared in split_report.tool_uses, without editing the maintainer's top-level tool_uses.
+
+Step 1 uses precisely the bounded-above finite-free representative in def-pc-ring-pseudo-coherent-complex. Finite-dimensional cohomology is a subquotient of a finite-dimensional vector space. Choosing t strictly below a and c makes both vanishing assertions hold, including when c<a or a<c. This is elementary and needs no pseudo-coherence base-change theorem.
+
+Step 2 uses the full chain-level conclusion of lem-weil-pbc-free-complex-residue-degree-cancellation: a homotopy equivalence, a zero degree, and preservation of all zero degrees. It does not infer this stronger data from the derived splitting alone. The zero middle term gives the two actual subcomplexes A and B. Q is bounded above, and B is bounded on both sides.
+
+Step 3 invokes lem-weil-pbc-localization-module-exact, whose statement is exactness of localized module sequences for any multiplicative subset. Applying it to cycles and boundaries gives the displayed localized cohomology; it is not necessary to assume the ring Noetherian or the cohomology finite. Acyclicity of A makes projection a quasi-isomorphism. These are the immediate cycle/image calculation from the quoted exactness statement.
+
+Step 4 deliberately tensors the homotopy equivalence, whose homotopy identities are preserved by any additive tensor functor. It does not tensor the acyclic tail and assert that it stays acyclic. In degrees above t the split low tail contributes no cohomology; in the other degrees the residue ranks vanish by t<a. This validates every rank used subsequently.
+
+Step 5 reads the local-ring and residue-field clauses of def-weil-pbc-localization-at-prime. The residue description agrees with Frac(R/p) by sending a residue fraction (r/s) mod p to bar(r)/bar(s). Conversely nonzero denominators of R/p lift outside p; equality is the same cross-multiplication criterion. The representative B_p is bounded finite free, hence pseudo-coherent under the quoted definition. The local minimal-model theorem explicitly assumes finite d_i and eventual upper vanishing; step 1 proves both. Its statement gives ranks in every degree, not merely an existence theorem for some free model. Zero ranks make the model bounded. Replacing zero modules by literal zero and transporting along bases is a termwise definition, not an additional theorem.
+
+Step 6 uses lem-pc-ring-derived-map-representative, whose statement is the bijection from homotopy-category morphisms for bounded-above projective source complexes. Both complexes are bounded finite free, so it applies in both directions; its injectivity supplies the two homotopies. I read the matching Mathlib Qh_map_bijective at KProjective.lean:43 and its quasiIso_iff proof immediately below. Only finitely many matrix entries are now present.
+
+Step 7 is the elementary finite fraction calculation under the two localization definitions, written entrywise. It specifies all identities to descend, including both comparison chain equations and both contracting identities. The annihilator criterion is applied to every error entry. No claim that a localized identity holds at a finite stage without proof is left. Finiteness comes from step 6 and not from finite generation of cohomology. This is not a hidden separate comparison lemma: its only operations are choosing finitely many denominator and annihilator witnesses and taking their product.
+
+Step 8 assembles the matrices and uses the exactness statement of lem-weil-pbc-localization-module-exact again to preserve step 3's quasi-isomorphism. Products outside a prime stay outside it; successive localizations have the same fractions as localization at the product by the defining fraction rule. The result represents the original derived object and has terms in the original [a,b], including zero ranks inside that interval.
+
+I checked the B--E return checklist against this split: no statement-only new node to restate a clause, no new duplicate or unsearched leaf, no proof step uses a node stronger than its statement, all non-elementary input theorems are cited, no SGA route, no circular citation, and no changed target or hidden boundedness assumption. No proof step exceeds 2000 characters. Edge cases: K=0 (all ranks zero and b=a is allowed), a>u (again every rank is zero), empty matrix/denominator lists (product 1), nonreduced rings and nonmaximal primes (annihilator witnesses are essential), and a bounded-cohomology complex whose free resolution extends arbitrarily far left (cutting removes the tail only after localization). The crucial corrections during this reading were to avoid tensoring the acyclic tail and to descend both homotopies, not just the differentials.

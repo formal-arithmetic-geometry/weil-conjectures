@@ -1,0 +1,115 @@
+{
+ "id": "lem-pur-functor-square-representative-descent",
+ "kind": "statement",
+ "title": "Unique normalized descent of a functor-square comparison",
+ "statement": "For categories C,D,E,H,A,B,X,Y and functors q:C→D, p:E→H, k:C→E, t:C→A, s:E→B, Q:A→X, Qprime:B→Y, T:D→X, Tprime:H→Y, S:A→B, F:X→Y, G:D→H, suppose precomposition by q from functors D→Y to functors C→Y is fully faithful. Suppose given natural isomorphisms r:qT≅tQ, rprime:pTprime≅sQprime, epsilon:QF≅SQprime, eta:qG≅kp, and c:tSQprime≅ksQprime. Then there is a unique natural isomorphism alpha:TF≅GTprime with F(r_P) epsilon_(tP) c_P = alpha_(qP) Tprime(eta_P) rprime_(kP).",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VK, lemma-properties-right-localization, universal property; abstract fully faithful restriction argument using Mathlib Functor.FullyFaithful.preimageIso.",
+  "note": "Agent-formulated general category tool for the normalized representative square, proved in full."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "On representatives, form a1 by applying F to r componentwise, a2 by whiskering epsilon by t, b1 by applying Tprime to eta componentwise, and b2 by whiskering rprime by k. Compose a1, a2, c, inverse b2 and inverse b1 to obtain the natural isomorphism between the restrictions of TF and GTprime. Lift it by FullyFaithful.preimageIso. The map-preimage equality and cancellation of isomorphisms prove the required normalized component square. For any other normalized alpha, cancel b1 and b2 in the two component equations. Faithfulness of restriction and extensionality of natural transformations then give equality of the isomorphisms. This also handles empty representative categories whenever restriction is fully faithful.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VK, lemma-properties-right-localization, universal property; abstract fully faithful restriction argument using Mathlib Functor.FullyFaithful.preimageIso.",
+    "note": "Agent-formulated general category tool for the normalized representative square, proved in full."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H1",
+  "date": "2026-10-26",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tag 04VK, lemma-properties-right-localization, universal property; abstract fully faithful restriction argument using Mathlib Functor.FullyFaithful.preimageIso.",
+  "note": "Agent-formulated general category tool for the normalized representative square, proved in full."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized comparison square on representatives descends uniquely to a natural isomorphism when precomposition of functors is fully faithful",
+   "results": "Functor.FullyFaithful.preimageIso gives the lift. fullyFaithfulCancelRight concerns postcomposition. Other hits are Yoneda and categorical pullback square tools, not the normalized five-isomorphism square.",
+   "date": "2026-10-26",
+   "verdict": "Use preimageIso and prove the normalized equation and uniqueness."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "preimageIso, preimageIso_hom, preimageIso_inv and isoEquiv_symm_apply found. The proof uses preimageIso and map_preimage directly.",
+   "date": "2026-10-26",
+   "verdict": "Direct Mathlib ingredient used; no existing normalized square statement."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|fullyFaithfulWhiskeringLeft|liftNatIso",
+   "results": "25 Mathlib hits include Localization.liftNatIso and uses of preimageIso; project rg found no functorSquareRepresentativeDescent or suitable isoDescent declaration. TensorPullbackRepresentativeDescent supplies the different two-variable tensor construction.",
+   "date": "2026-10-26",
+   "verdict": "No duplicate general square theorem."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "H1",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "date": "2026-10-26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Final paragraph locates reduction and scalar compatibility at sk-prop-scalar-six. This is the general normalized localization-square argument used to establish the assigned finite-reduction comparison.",
+   "via": [
+    "lem-pur-integral-operations-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FunctorSquareRepresentativeDescent",
+  "file": "lean/Sheaf/CategoryTheory/FunctorSquareRepresentativeDescent.lean",
+  "declaration": "CategoryTheory.functorSquareRepresentativeDescent",
+  "statement": "theorem functorSquareRepresentativeDescent\n    {C : Type uC} [Category.{vC} C] {D : Type uD} [Category.{vD} D]\n    {E : Type uE} [Category.{vE} E] {H : Type uH} [Category.{vH} H]\n    {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]\n    {X : Type uX} [Category.{vX} X] {Y : Type uY} [Category.{vY} Y]\n    (q : C ⥤ D) (p : E ⥤ H) (k : C ⥤ E)\n    (t : C ⥤ A) (s : E ⥤ B) (Q : A ⥤ X) (Q' : B ⥤ Y)\n    (T : D ⥤ X) (T' : H ⥤ Y) (S : A ⥤ B) (F : X ⥤ Y) (G : D ⥤ H)\n    (ff : ((Functor.whiskeringLeft C D Y).obj q).FullyFaithful)\n    (r : q ⋙ T ≅ t ⋙ Q) (r' : p ⋙ T' ≅ s ⋙ Q')\n    (ε : Q ⋙ F ≅ S ⋙ Q') (η : q ⋙ G ≅ k ⋙ p)\n    (c : t ⋙ S ⋙ Q' ≅ k ⋙ s ⋙ Q') :\n    ∃! α : T ⋙ F ≅ G ⋙ T', ∀ P : C,\n      F.map (r.hom.app P) ≫ ε.hom.app (t.obj P) ≫ c.hom.app P =\n        α.hom.app (q.obj P) ≫ T'.map (η.hom.app P) ≫ r'.hom.app (k.obj P)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-26"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-26",
+  "item": "Sheaf.Paper.IntegralOperationsScalarComparisons",
+  "worker": "stage3 H1",
+  "summary": "Fully proved general category argument; no new hole. Isolates normalized descent from concrete integral operation models.",
+  "blueprint": "Final paragraph locates reduction and scalar compatibility at sk-prop-scalar-six. This is the general normalized localization-square argument used to establish the assigned finite-reduction comparison."
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f87f7",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T021328-L-2757675",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-f87f7",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261027T021328-L-2757675",
+  "kind": "interface",
+  "note": "independent cc review: old item (clone 7dea68d0df6) vs 6 delivered modules: 23 moved decls identical in signature/body, public re-export chain item→Models→ScalarRoosComparison; new sorry integralScalarPullbackRoosQuasiIso read against its node (true: finite-free product commutation + cofinal Roos); all 51 direct importers compiled against delivered modules: 47 OK, 4 timeouts that also time out against the published original"
+ }
+}

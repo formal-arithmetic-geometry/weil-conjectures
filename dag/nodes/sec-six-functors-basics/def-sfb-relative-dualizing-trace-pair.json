@@ -1,0 +1,135 @@
+{
+ "id": "def-sfb-relative-dualizing-trace-pair",
+ "kind": "definition",
+ "title": "Affine-test relative dualizing trace pairs",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $Y$ be a scheme over $S$, and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Regard $Y$ as its represented algebraic space [def-trf-scheme-algebraic-space] and fix $f:X\\to Y$. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], and the full subcategories with quasi-coherent cohomology [def-trf-space-quasi-coherent-module]. Use the canonical small-etale module calculus [def-sfb-space-derived-module-calculus], derived tensor pullback and its identity and composition comparisons [def-sfb-space-derived-pullback], the counit-mate exchange $\\beta:La^*Rf_*\\to Rf'_*Lp^*$ [def-sfb-space-module-derived-exchange], the normalized affine derived-section and structure-object comparisons [def-sfb-space-affine-sections-compositors], and the canonical structure pullback $La^*\\mathcal O_Y\\to\\mathcal O_{Y'}$: the map adjoint, under the derived pullback--pushforward adjunction [def-sfb-space-affine-hom-comparison], to the regular-function structure map $\\mathcal O_{Y'}\\to a_*\\mathcal O$ [def-sfb-space-module-structure-map], taken on the small models [def-sfb-space-small-ringed-model] through the module direct image [def-trf-space-etale-module-functors], placed in degree zero and followed by the universal right-derived unit to $Ra_*$. A trace pair is $(K,t)$ with $K\\in D(\\mathcal O_X)$ and $t:Rf_*K\\to\\mathcal O_Y$. An isomorphism of trace pairs $e:(K,t)\\to(L,s)$ satisfies $s\\circ Rf_*e=t$. In a commuting scheme-base square, an isomorphism $e:Lp^*K\\to K'$ is trace compatible when $t'\\circ Rf'_*e\\circ\\beta_K=(La^*t)$ followed by the canonical structure pullback. The affine-test dualizing property says that $K$ has quasi-coherent cohomology and, for every affine $a:Y'\\simeq\\operatorname{Spec}A\\to Y$ and every cartesian realization $X'$ of $X\\times_YY'$, there exists a trace $t':Rf'_*Lp^*K\\to\\mathcal O_{Y'}$ trace compatible with $(K,t)$ and the identity on $Lp^*K$, such that for every $E\\in D_{\\mathrm{QCoh}}(\\mathcal O_{X'})$ composition with $t'$, followed by the normalized derived-section comparisons, gives a bijection $\\operatorname{Hom}_{D(\\mathcal O_{X'})}(E,Lp^*K)\\to\\operatorname{Hom}_{D(A)}(R\\Gamma(X',E),A[0])$. These maps are natural in $E$ by their composition formula. On proper flat finitely presented morphisms this is the relative dualizing complex condition of Tag 0E5X; the first remark there permits omission of relative perfectness from this defining property.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-scheme-algebraic-space",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "def-trf-space-quasi-coherent-module",
+  "def-sfb-space-derived-module-calculus",
+  "def-sfb-space-derived-pullback",
+  "def-sfb-space-module-derived-exchange",
+  "def-sfb-space-affine-sections-compositors",
+  "def-sfb-space-module-structure-map",
+  "def-sfb-space-affine-hom-comparison",
+  "def-sfb-space-small-ringed-model",
+  "def-trf-space-etale-module-functors"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-duality.tex",
+  "place": "Tag 0E5X, definition-relative-dualizing-proper-flat and the first two following remarks; trace preservation in Tag 0E5Z and base change in Tag 0E6C."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative dualizing trace pair with affine Hom characterization for a proper flat algebraic space",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.trace_eq_contract'\", \"module\": \"Mathlib.LinearAlgebra.Trace\", \"type\": \": LinearMap.trace R M = contractLeft R M ∘ₗ (dualTensorHomEquiv R M M).symm.toLinearMap\", \"doc\": \"For a commutative semiring $ R $ and a free $ R $-module $ M $, the trace of a linear operator on $ M $ is equal to the composition of the contraction map $ \\\\text{contractLeft} $ with the inverse of t\"}\n  {\"name\": \"Submodule.mem_traceDual_iff_isIntegral\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \"{I : Submodule B L} {x} : x ∈ Iᵛ ↔ ∀ a ∈ I, IsIntegral A (traceForm K L x a)\", \"doc\": \"For a submodule $ I $ of $ L $ over $ B $, an element $ x $ belongs to the trace dual $ I^\\\\vee $ if and only if for every $ a \\\\in I $, the value of the trace bilinear form $ \\\\text{Tr}(x,a) $ is integr\"}\n  {\"name\": \"Submodule.mem_traceDual\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \"{I : Submodule B L} {x} : x ∈ Iᵛ ↔ ∀ a ∈ I, traceForm K L x a ∈ (algebraMap A K).range\", \"doc\": \"An element $ x $ belongs to the trace dual $ I^\\\\vee $ of a submodule $ I \\\\subseteq L $ if and only if for every $ a \\\\in I $, the value of the trace bilinear form $ \\\\text{traceForm}_{K/L}(x, a) $ lies \"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[IsAffine X] [IsAffine Y] : Flat f ∧ Surjective f ↔ f.appTop.hom.FaithfullyFlat\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is flat and surjective if and only if the induced ring homomorphism on global sections $f_{\\text{appTop}}$ is faithfully flat.\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"LinearMap.trace_eq_contract_apply\", \"module\": \"Mathlib.LinearAlgebra.Trace\", \"type\": \"(x : Module.Dual R M ⊗[R] M) : (LinearMap.trace R M) ((dualTensorHom R M M) x) = contractLeft R M x\", \"doc\": \"For any element $x$ in the tensor product $M^* \\\\otimes_R M$ of the dual module $M^*$ and module $M$ over a commutative semiring $R$, the trace of the linear operator obtained by applying the canonical\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": IsFinite f ↔ IsProper f ∧ IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching trace-pair definition. The results concern scalar traces, ordinary flatness or the etale site; none defines this affine-test dualizing trace pair."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative dualizing trace pair on the small etale site of an algebraic space defined by affine universal Hom bijections",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Etale (CategoryTheory.Over X)\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$, which sends each étale morphism to its underlying morphism into $X$ and each commutative triangle of ét\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.Etale.forget X).FullyFaithful\", \"doc\": \"The forgetful functor from the category of étale schemes over $X$ to the over category over $X$ is fully faithful, meaning it induces a bijection on hom-sets between any pair of objects.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching trace-pair definition. The results concern scalar traces, ordinary flatness or the etale site; none defines this affine-test dualizing trace pair."
+  },
+  {
+   "tool": "grep",
+   "query": "RelativeDualizingTracePair|IsRelativeDualizingTracePair|relativeDualizingTrace",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching trace-pair definition. The results concern scalar traces, ordinary flatness or the etale site; none defines this affine-test dualizing trace pair."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-proper-flat-space-derived-duality",
+  "date": "2026-10-24",
+  "group": "Q119"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Affine-test trace-pair definition, Stacks 0E5X.",
+   "via": [
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "status": "split",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeDualizingTracePair",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.IsRelativeDualizingTracePair",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.traceSchemeMap",
+   "AlgebraicGeometry.AlgebraicSpace.traceSmallStructureMap",
+   "AlgebraicGeometry.AlgebraicSpace.traceDirectImageComparison",
+   "AlgebraicGeometry.AlgebraicSpace.traceDerivedStructureMap",
+   "AlgebraicGeometry.AlgebraicSpace.RelativeDualizingTracePair",
+   "AlgebraicGeometry.AlgebraicSpace.TracePreserving",
+   "AlgebraicGeometry.AlgebraicSpace.TraceBaseChangeCompatible",
+   "AlgebraicGeometry.AlgebraicSpace.affineDualizingTraceHom",
+   "AlgebraicGeometry.AlgebraicSpace.IsRelativeDualizingTracePair"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeDualizingTracePair.lean",
+  "statement": "def IsRelativeDualizingTracePair {Y : Over S} {X : AlgebraicSpace S} {f : X ⟶ schemeSpace Y} (P : RelativeDualizingTracePair Y f) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q119",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Real structure and predicate data only. All comparison and structure maps are the already recorded canonical maps. The Hom bijection is imposed on the explicit map obtained by applying derived sections to composition with the trace, rather than on an arbitrary equivalence. Reviewer FIX: the canonical derived structure pullback is defined here (traceDerivedStructureMap, rfl-equal to the landed relativeClosedKernelDerivedStructureMap) instead of being taken from the theorem node lem-sfb-space-relative-flat-closed-kernel-base-change, which is no longer a statement dependency.",
+  "fixed_by": "NT-stage2-cc-feb851a4e"
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-feb851a4e",
+  "group": "Q119",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-feb851a4e",
+  "group": "Q119",
+  "result": "fix",
+  "note": "Mathematics correct: hypotheses match the node with nothing extra (proper gives qc+qs so local finite presentation = finite presentation); the Hom bijection is stated on the explicit trace-composition map (RGamma compositor and fixed A[0] comparison), and the trace on the pulled-back complex is pinned by the base-change equation because exchange is invertible for proper flat f; pseudo-coherence and local cohomological bounds, unique trace-preserving iso, arbitrary base change, identity and composition laws all correct; the scheme comparison leaves some connecting isos free but the claim for every comparison is true and includes the canonical one. No duplicate (the scheme RelativeDualizingPair is the 0E2T diagonal notion). Finding fixed (H2/H13): new node def-sfb-relative-dualizing-trace-pair cited theorem lem-sfb-space-relative-flat-closed-kernel-base-change only for the plain def relativeClosedKernelDerivedStructureMap, which no def node owns. Fixes: RelativeDualizingTracePair.lean now defines traceSmallStructureMap, traceDirectImageComparison and traceDerivedStructureMap with the landed bodies (rfl probe compiled) and drops the theorem-module import; the whole new-node json swaps the theorem stmt_dep and citation for def-sfb-space-module-structure-map, def-sfb-space-affine-hom-comparison, def-sfb-space-small-ringed-model and def-trf-space-etale-module-functors, and adds the helpers to declarations. Item unchanged. nt_compile --json on the fixed def module plus the item: clean, rc=0, 3.8 s and 5.1 s. Advisory: the item uses some owner declarations (affineIdentityChart, small-model declarations) reached only transitively through def nodes; the second reading is a self-check."
+ }
+}

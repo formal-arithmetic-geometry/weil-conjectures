@@ -1,0 +1,137 @@
+{
+ "id": "def-sfb-space-hilbert-family-values",
+ "kind": "definition",
+ "title": "Hilbert-family values for a morphism of algebraic spaces",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $S$ be a scheme [def-pc-scheme], $a:A\\to B$ a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. For a scheme test $T\\to B$, use $A_T=T\\times_B A$ and its structural projection as in [def-sfb-space-relative-morphism-values]. A Hilbert-family value is a closed subspace $D\\subset A_T$ in the sense of [def-sfb-space-closed-subspace] whose structural map $D\\to T$ is proper, flat, locally of finite presentation, quasi-compact and quasi-separated; quasi-separated means the relative diagonal is quasi-compact. Use the chartwise and topological properties of [def-sfb-space-morphism-properties] and quasi-compactness of [def-sfb-proper-curve-moduli]. Thus the last three conditions say finite presentation. The inclusion is the arrow of the closed subobject, so isomorphic presentations over $A_T$ are identified. If $A=Z\\times_B W$ as in [def-sfb-space-relative-morphism-values], the first and second projections of $D$ are its inclusion followed by the canonical projections to $Z_T$ and $W$ (the latter, together with $D\\to T$, determines the projection to $W_T$).",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sfb-space-relative-morphism-values",
+  "def-sfb-space-closed-subspace",
+  "def-sfb-space-morphism-properties",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Paragraph before Tag 0D1A and Tags 0D1A--0D1B, including the definition of the Hilbert functor and the first-projection criterion."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Hilbert functor proper flat finitely presented closed subspaces and relative morphisms of algebraic spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toIsSeparated : AlgebraicGeometry.IsSeparated f]\\n  [toUniversallyClosed : AlgebraicGeometry.UniversallyClosed f]\\n  [toLocallyOfFiniteType : AlgebraicGeometry.LocallyOfFiniteType f], AlgebraicGeometry.IsProper f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is proper if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V \\\\subseteq f^{-1}(U)$, the ring homomorphism $\\\\Gamma(U, \\\\mathc\"}\n  {\"name\": \"AlgebraicGeometry.Flat.comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [hf : Flat f] [hg : Flat g] : Flat (f ≫ g)\", \"doc\": \"Flat morphisms of schemes form a category, where the objects are schemes and the morphisms are flat morphisms between them. Composition and identity morphisms are inherited from the category of scheme\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space Hilbert-family or relative-morphism definition. Reuse the existing algebraic-space, sheaf pullback, closed-subspace and morphism-property interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative morphism functor of algebraic spaces and Hilbert functor of proper flat finitely presented closed subspaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"CategoryTheory.Functor Type vᵒᵖ (CategoryTheory.Functor AlgebraicGeometry.Scheme AlgebraicGeometry.Scheme)\", \"doc\": \"The functor assigns to each type $n$ in the opposite category of types the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$, and to each morphism $i: n \\\\to m$ in the opposite category the reindexing mo\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The functor constructs a mapping from the over category over $ D(i') $ to the category of schemes by first applying the post-composition with $ D $, then taking the pullback along the affine open imme\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → CategoryTheory.Functor Y.IdealSheafDataᵒᵖ (CategoryTheory.Over Y)\", \"doc\": \"For a scheme $Y$, this functor maps each ideal sheaf data $\\\\mathcal{I}$ on $Y$ to its associated closed subscheme $\\\\operatorname{Subscheme}(\\\\mathcal{I})$ equipped with the canonical morphism to $Y$, a\"}\n  {\"name\": \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"AlgebraicGeometry.Scheme.Γ.IsRightAdjoint\", \"doc\": \"The contravariant global sections functor from the category of schemes to the category of commutative rings is a right adjoint functor. This establishes an adjunction between the opposite category of \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type vᵒᵖ) (S : AlgebraicGeometry.Scheme),\\n  (AlgebraicGeometry.AffineSpace.functor.obj n).obj S = AlgebraicGeometry.AffineSpace (Opposite.unop n) S\", \"doc\": \"For any type $ n $ in the opposite category of types and any scheme $ S $, the affine space $ \\\\mathbb{A}^n_S $ obtained by applying the affine space functor's object mapping to $ n $ and $ S $ is equa\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.over\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"(n : Type v) → (S : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.AffineSpace n S).CanonicallyOver S\", \"doc\": \"For any scheme $ S $ and type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is equipped with a canonical morphism to $ S $, making it an object in the category of schemes over $ S $. This structure arise\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"(X : AlgebraicGeometry.Scheme) →\\n  (CategoryTheory.MorphismProperty.Over @AlgebraicGeometry.IsClosedImmersion ⊤ X)ᵒᵖ ≌ X.IdealSheafData\", \"doc\": \"For any scheme $X$, there is an equivalence of categories between the opposite category of the over category of closed immersions into $X$ with the top morphism property and the category of ideal shea\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space Hilbert-family or relative-morphism definition. Reuse the existing algebraic-space, sheaf pullback, closed-subspace and morphism-property interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hilbert\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Metric.PiNatEmbed.exists_embedding_to_hilbert_cube\", \"module\": \"Mathlib.Topology.MetricSpace.PiNat\", \"type\": \" {X : Type u_3} [MetricSpace X] [TopologicalSpace.SeparableSpace X] : ∃ F, Topology.IsEmbedding F\", \"doc\": \"\"}\n  {\"name\": \"HilbertSpace\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Defs\", \"type\": \" (𝕜 : Type u_4) (E : Type u_5) [RCLike 𝕜] [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] [CompleteSpace E] : Type\", \"doc\": \"A Hilbert space is a complete normed inner product space.\"}\n  {\"name\": \"HilbertSpace.mk\", \"module\": \"Mathlib.Analysis.InnerProductSpace.Defs\", \"type\": \" {𝕜 : Type u_4} {E : Type u_5} [RCLike 𝕜] [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] [CompleteSpace E] : HilbertSpace 𝕜 E\", \"doc\": \"\"}\n  {\"name\": \"HilbertBasis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" (ι : Type u_1) (𝕜 : Type u_2) [RCLike 𝕜] (E : Type u_3) [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] : Type (max (max u_1 u_2) u_3)\", \"doc\": \"A Hilbert basis on `ι` for an inner product space `E` is an identification of `E` with the `lp`\\nspace `ℓ²(ι, 𝕜)`.\"}\n  {\"name\": \"HilbertBasis.instFunLike\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] : FunLike (HilbertBasis ι 𝕜 E) ι E\", \"doc\": \"`b i` is the `i`th basis vector.\"}\n  {\"name\": \"HilbertBasis.toOrthonormalBasis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] [Fintype ι] (b : HilbertBasis ι 𝕜 E) : OrthonormalBasis ι 𝕜 E\", \"doc\": \"A finite Hilbert basis is an orthonormal basis.\"}\n  {\"name\": \"HilbertBasis.toSchauderBasis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (b : HilbertBasis ℕ 𝕜 E) : SchauderBasis 𝕜 E\", \"doc\": \"Every Hilbert basis indexed by `ℕ` is a Schauder basis (`SchauderBasis`) with\\ncoordinate functionals `x ↦ ⟪b i, x⟫`. The expansion `x = ∑ i, ⟪b i, x⟫ • b i` converges.\"}\n  {\"name\": \"HilbertBasis.toUnconditionalSchauderBasis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (b : HilbertBasis ι 𝕜 E) : UnconditionalSchauderBasis ι 𝕜 E\", \"doc\": \"A Hilbert basis of is an unconditional Schauder basis (`UnconditionalSchauderBasis`),\\nwith coordinate functionals `x ↦ ⟪b i, x⟫`. The basis expansion `x = ∑' i, ⟪b i, x⟫ • b i`\\nconverges unconditional\"}\n  {\"name\": \"OrthonormalBasis.toHilbertBasis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] [CompleteSpace E] [Fintype ι] (b : OrthonormalBasis ι 𝕜 E) : HilbertBasis ι 𝕜 E\", \"doc\": \"An orthonormal basis is a Hilbert basis.\"}\n  {\"name\": \"HilbertBasis.orthonormal\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (b : HilbertBasis ι 𝕜 E) : Orthonormal 𝕜 ⇑b\", \"doc\": \"\"}\n  {\"name\": \"HilbertBasis.toSchauderBasis_basis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (b : HilbertBasis ℕ 𝕜 E) (a : ℕ) : ↑b.toSchauderBasis a = b a\", \"doc\": \"\"}\n  {\"name\": \"HilbertBasis.toUnconditionalSchauderBasis_basis\", \"module\": \"Mathlib.Analysis.InnerProductSpace.l2Space\", \"type\": \" {ι : Type u_1} {𝕜 : Type u_2} [RCLike 𝕜] {E : Type u_3} [NormedAddCommGroup E] [InnerProductSpace 𝕜 E] (b : HilbertBasis ι 𝕜 E) (a : ι) : ↑b.toUnconditionalSchauderBasis a = b a\", \"doc\": \"\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space Hilbert-family or relative-morphism definition. Reuse the existing algebraic-space, sheaf pullback, closed-subspace and morphism-property interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "SpaceHilbertFamily|HilbertFunctor|hilbertFunctor|RelativeMorphism|SchemeTest",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/KanComplex/MulStruct.lean\", \"line\": \"33\", \"text\": \"  RelativeMorphism (boundary n) (Subcomplex.ofSimplex x)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"line\": \"15\", \"text\": \"we introduce a type `RelativeMorphism A B φ` of morphisms `X ⟶ Y` which induce\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"line\": \"38\", \"text\": \"structure RelativeMorphism where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"line\": \"43\", \"text\": \"namespace RelativeMorphism\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"line\": \"52\", \"text\": \"    RelativeMorphism A (Subcomplex.ofSimplex y) φ where\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean\", \"line\": \"59\", \"text\": \"    RelativeMorphism (.ofSimplex x) (.ofSimplex y)\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.AlgebraicTopology.SimplicialSet.RelativeMorphism\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"line\": \"18\", \"text\": \"a particular case of `SSet.RelativeMorphism.Homotopy` that is defined in\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"line\": \"19\", \"text\": \"the file `Mathlib/AlgebraicTopology/SimplicialSet/RelativeMorphism.lean`).\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"line\": \"39\", \"text\": \"def RelativeMorphism.botEquiv :\"}\n  {\"file\": \"Mathlib/AlgebraicTopology/SimplicialSet/Homotopy.lean\", \"line\": \"40\", \"text\": \"    RelativeMorphism (⊥ : X.Subcomplex) (⊥ : Y.Subcomplex)\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching algebraic-space Hilbert-family or relative-morphism definition. Reuse the existing algebraic-space, sheaf pullback, closed-subspace and morphism-property interfaces."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG and local Lean: Hilbert functor, relative morphisms, SchemeTests, ClosedSubspace; blueprint_refs.py search Hilbert functor / relative morphisms",
+   "results": "DAG def-sfb-proper-hilbert-presheaf and def-sfb-relative-morphisms-presheaf and lemma lem-sfb-graphs-open-in-hilbert apply only to schemes. def-pc-hilb-functor is finite locally free fixed degree. No general-space family or relative-morphism value definition. Local rg found the existing SchemeTests in Sheaf.TraceFormula.SpaceLinePresentationDefs and ClosedSubspace in Sheaf.AlgebraicGeometry.AlgebraicSpaceClosedSubspace, reused rather than copied. Existing enlargedFibreProduct, enlargedFibreProductFst and schemeSpace reused. blueprint_refs search Hilbert functor: four fixed-degree scheme nodes; search relative morphisms: zero. ancestor item: None. No id matching the two new definition nodes exists.",
+   "date": "2026-10-24",
+   "verdict": "New notion definitions needed, with all existing components reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-graphs-open-in-hilbert",
+  "date": "2026-10-24",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "The scheme-test relative morphism values and graph-Hilbert families used by Tags 0D1A--0D1B. det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tags 0D52 (lemma-curves-stack) and 0D53 (lemma-curves-diagonal), with situation-curves. Supporting input: The four Mor functors in the fibre-product argument of quot-lemma-spaces-diagonal, used by quot-lemma-curves-diagonal. Supporting input: Tags 0D1A--0D1B, the graph open immersion used by quot-proposition-Mor.",
+   "via": [
+    "lem-sfb-space-graphs-open-in-hilbert",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceHilbertFamily",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.SpaceHilbertFamily",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHilbertFamily",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHilbertFamily.space",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHilbertFamily.inclusion",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHilbertFamily.first",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceHilbertFamily.second"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceHilbertFamily.lean",
+  "statement": "abbrev SpaceHilbertFamily {S : Scheme.{u}} {A B : AlgebraicSpace S} (a : A ⟶ B) (T : SchemeTests B.obj.obj)",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5461388a6",
+  "group": "NI",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5461388a6",
+  "group": "NI",
+  "result": "fix",
+  "note": "Lean matches node and Stacks 0D1A/0D1B clause by clause: Z->B MapIsProper/Flat/lfp+qc+qs; W->B only MapIsSeparated; Mor/Hilb values, transitions (precomposition, IsPullback inverse image) and graph (relativeSpaceGraph=(id,f)) pinned; injectivity, image iff IsIso first, unique pr2∘pr1^-1 recovery, open V (IsOpenImmersion j.left.left) with universal criterion, uliftYoneda IsPullback; universes u/u+1 fine; edge cases ok; no hollow defs, docstrings, verbatim statements, lines<=100. FIX: new node def-sfb-space-relative-morphism-values cited theorem lem-trf-space-enlarged-etale-ringed-site-model for enlargedFibreProduct/schemeSpace -> fixes/def-sfb-space-relative-morphism-values.json swaps to landed owners def-trf-scheme-algebraic-space + def-sfb-space-sheaf-fibre-product (TeX cites updated); no Lean change. Advisory: MapIsQuasiCompact/SchemeTests owners only transitively cited; parallel unlanded N8 hilbertFamilies / Q09 homTestFiber duplicate these notions in theorem modules; second reading is an author rereading."
+ }
+}

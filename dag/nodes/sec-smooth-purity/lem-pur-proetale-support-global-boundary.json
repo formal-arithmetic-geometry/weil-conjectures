@@ -1,336 +1,253 @@
 {
-  "id": "lem-pur-proetale-support-global-boundary",
-  "kind": "statement",
-  "title": "Normalization of the global boundary of the pro-etale support triangle",
-  "statement": "Fix a finite commutative ring $A$. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules] and their derived categories [def-weil-pbc-derived-categories], with exact $i_*$ and $i^*,j^*$ as in [def-weil-pbc-proetale-operations]. Put $i^!_0M=i^*\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], and write $S=Ri^!_0$ on $D^+$, with its support counit $\\epsilon:i_*SK\\to K$ as in [lem-pur-support-localization-triangle]. Let $K\\in D^+(X_{\\mathrm{proet}},A)$, represented by a bounded-below complex of injective module sheaves $I$. Let $\\beta:Rj_*j^*K\\to(i_*SK)[1]$ be the third arrow of the support triangle constructed from this injective resolution with the cone convention [def-pur-support-triangle, def-weil-abstract-derived-category]. Derived global sections identify that entire triangle with\n$$R\\Gamma_Z(X,K)\\longrightarrow R\\Gamma(X,K)\\longrightarrow R\\Gamma(U,j^*K)\\longrightarrow R\\Gamma_Z(X,K)[1],$$\nwhere the first term is identified by the sectionwise support kernel and the third by the direct-image/sections comparison. More precisely, the sequence of complexes of $A$-modules\n$$0\\to\\Gamma_Z(X,I)\\to I(X)\\to(j^*I)(U)\\to0$$\nis degreewise short exact, $j^*I$ computes $j^*K$, and its usual cochain connecting homomorphism equals $H^q(R\\Gamma(X,\\beta))$ under these identifications. For every $q\\in\\mathbf Z$, a cocycle $c\\in(j^*I)^q(U)$ and a lift $b\\in I^q(X)$, that homomorphism sends $[c]$ to $[db]\\in H^{q+1}(\\Gamma_Z(X,I))$. Thus it is precisely the supported-cohomology boundary $\\partial$ of [thm-pur-with-support-exactness], with no extra sign. These identifications and the boundary are natural in $K$.",
-  "source": {
+ "id": "lem-pur-proetale-support-global-boundary",
+ "kind": "statement",
+ "title": "Normalization of the global boundary of the pro-etale support triangle",
+ "statement": "Fix a finite commutative ring $A$. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with quasi-compact complementary open immersion $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-finite-type-morphism]. Work with ordinary constant-$A$ module sheaves on the small pro-etale sites [def-weil-pbc-proetale-modules] and their derived categories [def-weil-pbc-derived-categories], with exact $i_*$ and $i^*,j^*$ as in [def-weil-pbc-proetale-operations]. Put $i^!_0M=i^*\\ker(M\\to j_*j^*M)$ [def-pur-flasque-support], and write $S=Ri^!_0$ on $D^+$, with its support counit $\\epsilon:i_*SK\\to K$ as in [lem-pur-support-localization-triangle]. Let $K\\in D^+(X_{\\mathrm{proet}},A)$, represented by a bounded-below complex of injective module sheaves $I$. Let $\\beta:Rj_*j^*K\\to(i_*SK)[1]$ be the third arrow of the support triangle constructed from this injective resolution with the cone convention [def-pur-support-triangle, def-weil-abstract-derived-category]. Derived global sections identify that entire triangle with\n$$R\\Gamma_Z(X,K)\\longrightarrow R\\Gamma(X,K)\\longrightarrow R\\Gamma(U,j^*K)\\longrightarrow R\\Gamma_Z(X,K)[1],$$\nwhere the first term is identified by the sectionwise support kernel and the third by the direct-image/sections comparison. More precisely, the sequence of complexes of $A$-modules\n$$0\\to\\Gamma_Z(X,I)\\to I(X)\\to(j^*I)(U)\\to0$$\nis degreewise short exact, $j^*I$ computes $j^*K$, and its usual cochain connecting homomorphism equals $H^q(R\\Gamma(X,\\beta))$ under these identifications. For every $q\\in\\mathbf Z$, a cocycle $c\\in(j^*I)^q(U)$ and a lift $b\\in I^q(X)$, that homomorphism sends $[c]$ to $[db]\\in H^{q+1}(\\Gamma_Z(X,I))$. Thus it is precisely the supported-cohomology boundary $\\partial$ of [thm-pur-with-support-exactness], with no extra sign. These identifications and the boundary are natural in $K$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP, section-cohomology-support, first triangle and long exact sequence; cone-to-quotient normalization (old item Step 8)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-operations",
+  "def-pur-flasque-support",
+  "lem-pur-support-localization-triangle",
+  "def-pur-support-triangle",
+  "def-weil-abstract-derived-category",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof": [
+  {
+   "text": "The ringed-site module kernel-comparison lemma gives enough injectives in $\\operatorname{Mod}(A_X)$. Apply the injective support-row lemma to the given $i,j,A,I$. It gives the actual supported-kernel inclusion, the sheaf row and its short exact section row, as well as the injective representatives of all three derived objects. In particular $j^*I$ represents $j^*K$, and the sectionwise kernel and direct-image identifications fix the first and third global objects and the first two maps.",
+   "uses": [
+    "lem-pur-support-injective-exact-models",
+    "lem-pur-module-restriction-kernel-comparison"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, section-cohomology-support, first triangle and long exact sequence; cone-to-quotient normalization (old item Step 8)"
+    "place": "Tag 09XP, section-cohomology-support, first restriction row and triangle; Tag 09XQ, lemma-sections-with-support-acyclic; ringed-site module form using Tag 093X, sites-cohomology.tex, lemma-restriction-along-monomorphism-surjective"
+   }
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "def-weil-finite-type-morphism",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-proetale-operations",
-    "def-pur-flasque-support",
-    "lem-pur-support-localization-triangle",
-    "def-pur-support-triangle",
-    "def-weil-abstract-derived-category",
+  {
+   "text": "Apply the derived cone-comparison lemma with $T=\\Gamma(X,-)$ to this sheaf row. Its hypotheses hold by step 1, including exactness of the section row. The support localization theorem identifies the sheaf cone triangle with the specified support triangle. The unit-normalized comparison then identifies its entire derived-global triangle with the section-row triangle; its third arrow is $(-\\operatorname{pr}_{\\Gamma_Z(X,I)})q_X^{-1}$, with $q_X(b,a)=v_X(b)$. This also fixes the direct-image/sections comparison on the third term.",
+   "uses": [
+    "lem-pur-derived-injective-cone-comparison",
+    "lem-pur-support-localization-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014Z, section-canonical-delta-functor, cone-to-quotient triangle; definition-cone; Tag 05TH, lemma-injective-acyclic, bounded-below injective evaluation"
+   }
+  },
+  {
+   "text": "Use the cone-boundary descent lemma with $\\mathcal C=\\operatorname{Mod}(A_X)$, $S=\\Gamma_Z(X,-)$, $F=\\Gamma(X,-)$ and $G=\\Gamma(U,j^*(-))$. Step 1 applied to each injective sheaf in degree zero verifies exactness on injectives. The lemma identifies the third arrow of step 2 with the derived injective snake boundary and gives $[c]\\mapsto[db]$ for every integer degree and every lift, with no extra sign. The supported-cohomology exactness theorem supplies $\\partial$ for precisely this kernel/restriction row, so this is its boundary. The natural row identifications of step 1 and the natural triangle comparison of step 2, together with the descent lemma for chain maps modulo homotopy, give naturality in every derived morphism $K\\to K\\prime$ and independence of the injective resolution.",
+   "uses": [
+    "lem-pur-injective-cone-boundary-descent",
     "thm-pur-with-support-exactness"
-  ],
-  "proof": [
-    {
-      "text": "Write $\\mathcal E=i_*i^!_0I$, $\\mathcal B=I$, and $\\mathcal C=j_*j^*I$. The supported-kernel comparison identifies $\\mathcal E$ with $\\ker(\\mathcal B\\to\\mathcal C)$, and the injective support exactness lemma gives $0\\to\\mathcal E\\xrightarrow{u}\\mathcal B\\xrightarrow{v}\\mathcal C\\to0$ degreewise. The first map is the kernel inclusion under this comparison, not an arbitrarily scaled map. The support localization theorem identifies its associated cone triangle with the triangle of the statement, with first arrow the support counit and second arrow the open unit.",
-      "uses": [
-        "def-pur-flasque-support",
-        "lem-pur-support-exact",
-        "lem-pur-support-localization-triangle"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results"
-      }
-    },
-    {
-      "text": "The ringed open-closed lemma supplies the exact left adjoint $j_!$ of $j^*$. Thus $j^*I$ is termwise injective by the right-adjoint injectivity lemma. Exactness of $j^*$ shows that it represents $j^*K$. Both $i_*$ and $j_*$ preserve injectives by the same lemma, since their left adjoints $i^*,j^*$ are exact. The injective support global model says that $i^!_0I$ is termwise injective and represents $SK$. Therefore $\\mathcal E,\\mathcal B,\\mathcal C$ are bounded-below complexes of injectives on $X$. The derived-unit comparisons for such complexes compute $R\\Gamma(X,-)$ by ordinary sections; they compute $R\\Gamma(U,j^*K)$ by $\\Gamma(U,j^*I)$ and $R\\Gamma_Z(X,K)$ by $\\Gamma_Z(X,I)$.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "def-weil-pbc-proetale-operations",
-        "lem-sp-right-adjoint-preserves-injectives",
-        "lem-pur-proetale-injective-support-global-model",
-        "lem-weil-pbc-right-derived-plus-injective",
-        "def-pur-support-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results"
-      }
-    },
-    {
-      "text": "On the chosen small model of the pro-etale site, the complementary open $U\\to X$ is a monomorphism into the terminal object. Apply the ringed-site injective restriction lemma to each $I^r$, with the constant ring sheaf $A_X$: $I^r(X)\\to I^r(U)$ is surjective. This uses injectivity as an $A_X$-module, without asserting injectivity of the underlying abelian sheaf. Set $E=\\Gamma_Z(X,I)$, $F=I(X)$, and $G=\\Gamma(U,j^*I)$. Sections preserve the kernel in step 1, so $0\\to E\\xrightarrow{u_X}F\\xrightarrow{v_X}G\\to0$ is degreewise short exact. The equality $\\Gamma(X,j_*j^*I)=\\Gamma(U,j^*I)$ is the defining section formula for direct image, and identifies $\\Gamma(X,v)$ with restriction.",
-      "uses": [
-        "lem-pur-ringed-site-injective-mono-restriction",
-        "def-pur-flasque-support",
-        "def-weil-pbc-proetale-operations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results"
-      }
-    },
-    {
-      "text": "Let $P=\\operatorname{Cone}(u)$ with the convention of the statement. Its terms $I^r\\oplus\\mathcal E^{r+1}$ are injective: given a map from a subobject into this finite direct sum, extend each component by injectivity and pair the two extensions. Thus $P$ too is a bounded-below injective complex. The derived-unit comparisons consequently identify $R\\Gamma(X,P)$ with $\\Gamma(X,P)=\\operatorname{Cone}(u_X)$, since sections preserve finite direct sums and the displayed differential matrix. They identify the cone inclusion with the inclusion of $F$ and the third map with $-\\operatorname{pr}_E$, including the shift: sections sends the shifted differential $-d$ to $-d$. The first term is $E$ by the sectionwise supported-kernel comparison. Hence these comparisons identify the entire derived-global cone triangle and its first two arrows, not just its three objects.",
-      "uses": [
-        "def-pur-support-triangle",
-        "def-weil-abstract-derived-category",
-        "lem-weil-pbc-right-derived-plus-injective",
-        "lem-pur-proetale-injective-support-global-model"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 014Z, section-canonical-delta-functor, cone-to-quotient construction with third arrow -p composed with inverse(q); definition-cone"
-      }
-    },
-    {
-      "text": "The cone-to-quotient lemma applies to the sheaf sequence of step 1 and the module sequence of step 3. Their comparison maps are respectively $q:P\\to\\mathcal C$, $(b,a)\\mapsto v(b)$, and $q_X:\\operatorname{Cone}(u_X)\\to G$, $(b,a)\\mapsto v_X(b)$, and both are quasi-isomorphisms. The derived-unit comparisons are natural for $q$, so $R\\Gamma(X,q)$ is identified with $\\Gamma(X,q)=q_X$ between the injective models. Inverting these maps identifies the global third arrow with $(-\\operatorname{pr}_E)\\circ q_X^{-1}:G\\to E[1]$. Together with step 4 this gives the asserted identification of the whole support triangle with the global supported-cohomology triangle and the direct-image/sections comparison on its third object.",
-      "uses": [
-        "lem-pc-cone-short-exact-quasi-iso",
-        "lem-weil-pbc-right-derived-plus-injective",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 014Z, section-canonical-delta-functor, cone-to-quotient construction with third arrow -p composed with inverse(q); definition-cone"
-      }
-    },
-    {
-      "text": "Fix any integer $q$ and a cocycle $c\\in G^q$. Step 3 gives a lift $b\\in F^q$. Since $v_X(db)=dc=0$, there is a unique $a\\in E^{q+1}$ with $u_X(a)=db$. Then $u_X(da)=d^2b=0$ and injectivity of $u_X$ gives $da=0$. In the cone, $d(b,-a)=(db-u_X(a),da)=0$ and $q_X(b,-a)=c$. The third arrow is minus projection, so it sends this cocycle to $a$. Thus the induced boundary sends $[c]$ to $[a]=[db]$ under the kernel identification. Both minus signs are necessary: one in $(b,-a)$ and one in the third arrow.",
-      "uses": [
-        "def-pur-support-triangle",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 014Z, section-canonical-delta-functor, cone-to-quotient construction with third arrow -p composed with inverse(q); definition-cone"
-      }
-    },
-    {
-      "text": "The result is independent of choices: another lift $b+u_X(t)$ changes $a$ to $a+dt$, and replacing $c$ by $c+dg$ permits the lift $b+dh$ for any lift $h$ of $g$, leaving $a$ unchanged. Addition and $A$-linearity follow by adding and scaling lifts. This is exactly the usual cochain snake construction for the short exact sequence in step 3. The derived injective boundary normalization identifies that snake boundary with the natural derived supported-cohomology boundary, whose long exact sequence is the one in the support exactness theorem. The kernel functor used there is precisely $\\Gamma_Z$, so the map just computed is $\\partial$ with no sign change.",
-      "uses": [
-        "lem-pur-derived-injective-boundary",
-        "def-pur-support-cohomology",
-        "thm-pur-with-support-exactness"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results"
-      }
-    },
-    {
-      "text": "For a chain map $f:I\\to I\\prime$, restriction and the kernel inclusion give a morphism of the short exact sequences of steps 1 and 3. On cones it is $(b,a)\\mapsto(fb,fa)$; this commutes with $q_X$ and minus projection. On cocycles, $fb$ lifts $fc$ and $d(fb)=f(db)$, giving the boundary square explicitly; the general long-exact-sequence naturality lemma gives the same square. Finally each bounded-below injective complex is K-injective, and morphisms into a K-injective are computed in the homotopy category. Thus every derived morphism between the represented objects is given by such a chain map, uniquely up to homotopy. All additive functors here carry a homotopy to its termwise image, so the comparisons and squares are independent of that representative and natural in $K$, including comparison between two injective resolutions.",
-      "uses": [
-        "lem-weil-pbc-complex-ses-long-exact-naturality",
-        "lem-weil-pbc-dplus-injective-representative",
-        "lem-weil-pbc-kinjective-hom-derived",
-        "lem-pur-support-localization-triangle"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pur-flasque-support",
-    "lem-pur-support-exact",
-    "lem-pur-support-localization-triangle",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations",
-    "lem-sp-right-adjoint-preserves-injectives",
-    "lem-pur-proetale-injective-support-global-model",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "def-pur-support-cohomology",
-    "lem-pur-ringed-site-injective-mono-restriction",
-    "def-pur-support-triangle",
-    "def-weil-abstract-derived-category",
-    "lem-pc-cone-short-exact-quasi-iso",
-    "lem-pur-derived-injective-boundary",
-    "thm-pur-with-support-exactness",
-    "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results; derived.tex Tag 014Z, section-canonical-delta-functor for the explicit sign calculation"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Derived global sections of the proetale closed support localization triangle have connecting map equal to the kernel restriction snake boundary with the same sign",
-      "results": "CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.triangleOfSES_mor₃; DerivedCategory.triangleOfSESδ; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.HomologySequence.δ; CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj",
-      "date": "2026-10-21",
-      "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"mappingCone\", \"δ\"",
-      "results": "CochainComplex.mappingCone.δ_inl; CochainComplex.mappingCone.δ_snd; CochainComplex.mappingCone.δ_liftCochain; CochainComplex.mappingCone.δ_descCochain; CochainComplex.mappingCone.inr_triangleδ; CochainComplex.mappingCone.inr_triangleδ_assoc; CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.homologySequenceδ_triangleh; HomotopyCategory.spectralObjectMappingCone_δ'_app",
-      "date": "2026-10-21",
-      "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "support.*boundary|boundary.*support|support.*connecting",
-      "results": "No hits.",
-      "date": "2026-10-21",
-      "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Injective resolution localization cohomology boundary sends restricted cocycle to differential of a lift with no extra sign",
-      "results": "CategoryTheory.InjectiveResolution.self; CochainComplex.mappingCone.δ_liftCochain; CategoryTheory.InjectiveResolution.ofCocomplex; CategoryTheory.InjectiveResolution.of_def; CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.InjectiveResolution.descFOne",
-      "date": "2026-10-21",
-      "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Global sections short exact injective support restriction sequence computes the localization triangle connecting homomorphism",
-      "results": "CochainComplex.isKInjective_of_injective_aux; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; CochainComplex.cm5b; CategoryTheory.ShortComplex.ShortExact.singleδ; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p; DerivedCategory.triangleOfSESδ",
-      "date": "2026-10-21",
-      "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived global sections of closed support localization triangle for proetale module sheaves, boundary is differential of a lift",
-      "results": "PresheafOfModules.DifferentialsConstruction.instHasDifferentials, Algebra.Generators.H1Cotangent.δ_map, PresheafOfModules.DifferentialsConstruction.isUniversal', Algebra.Generators.H1Cotangent.δ, PresheafOfModules.DifferentialsConstruction.derivation', Algebra.Generators.H1Cotangent.δ_eq_δAux, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.Derivation.Universal.fac",
-      "date": "2026-10-21",
-      "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"mappingCone\", \"homologySequenceδ\"",
-      "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh",
-      "date": "2026-10-21",
-      "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
-    },
-    {
-      "tool": "grep",
-      "query": "support.*boundary|boundary.*support|support.*connecting",
-      "results": "No hits.",
-      "date": "2026-10-21",
-      "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Cohomology with support localization triangle for a closed immersion of schemes and boundary as differential of a lift",
-      "results": "CochainComplex.mappingCone.δ_liftCochain, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, DerivedCategory.triangleOfSESδ.congr_simp, AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, DerivedCategory.triangleOfSESδ, AlgebraicGeometry.liftCoborder_app",
-      "date": "2026-10-21",
-      "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Injective sheaves restriction to open subset gives exact sequence of global sections with support and cone boundary",
-      "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
-      "date": "2026-10-21",
-      "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pur-retracted-support-localization-comparison",
-    "date": "2026-10-21",
-    "group": "Q40"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1",
-  "blueprint": {
-    "from": {
-      "node": "prop-pur-affine-line-orientation-uniqueness",
-      "place": "Proof Steps 1 and 3; sk-prop-a1 first localization triangle and global supported-class paragraph; Tag 09XP, section-cohomology-support, first triangle and long exact sequence; cone-to-quotient normalization (old item Step 8)",
-      "via": [
-        "lem-pur-retracted-support-localization-comparison"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-21",
-    "item": "lem-pur-proetale-support-global-boundary",
-    "worker": "stage1",
-    "summary": "Verified the pro-etale module hypotheses and the global degreewise exact sequence using the ringed-site restriction theorem. Used existing injective support models and adjoint injectivity to compute the full derived-global triangle on injectives. Wrote the cone/quotient roof and the cocycle calculation with both minus signs, then checked choices and derived naturality. No new nodes and no statement correction.",
-    "blueprint": "prop-pur-affine-line-orientation-uniqueness, proof Steps 1 and 3, and current sk-prop-a1 proof first localization triangle and global supported-class paragraph: normalization of the supported boundary used for the orientation class.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-support-exact",
-        "why": "Generic the exact sequence of supported sections for injective objects used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
-      },
-      {
-        "node": "lem-pur-support-localization-triangle",
-        "why": "Generic localization triangle for the exceptional inverse image used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-ringed-open-closed",
-        "why": "Generic ringed pro-etale open-closed localization used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
-      },
-      {
-        "node": "lem-pur-ringed-site-injective-mono-restriction",
-        "why": "Generic injective modules on a ringed site restrict surjectively along monomorphisms used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
-      },
-      {
-        "node": "lem-pur-derived-injective-boundary",
-        "why": "Generic normalized derived connecting maps from sequences exact on injectives used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
-      },
-      {
-        "node": "thm-pur-with-support-exactness",
-        "why": "Generic long exact sequence for cohomology with support used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pur-support-exact",
-    "lem-pur-support-localization-triangle",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-pur-ringed-site-injective-mono-restriction",
-    "lem-pur-derived-injective-boundary",
-    "thm-pur-with-support-exactness"
-  ],
-  "reviewed": {
-    "date": "2026-10-21",
-    "by": "L",
-    "reviewer": "NT-cc-Q90-5202c71ae",
-    "group": "Q90",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-5202c71ae (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item and its report, no new nodes; the item was created by Q40 on 2026-10-21 and no re-split note applies. I read the statement of every cited node, Stacks 09XP (section-cohomology-support: the restriction I(X)->I(U) of an injective is surjective by 093X and its kernel is Gamma_Z, which gives the global triangle) and Stacks 014Z (the triangle with third arrow -p∘q^{-1}, q=(b,a)->v(b)). The cone conventions of def-pur-support-triangle and def-weil-abstract-derived-category agree with Stacks (third arrow -p). Step 1: lem-pur-support-exact gives the exact sequence with the first map pinned as the kernel inclusion (j quasi-compact). Step 2: injectivity comes from the exact left adjoints j_!, i^*, j^*; the global-model sibling gives i^!_0 I injective and SK; the derived-plus lemma (2) gives the comparisons alpha. Step 3: U->X is a monomorphism into the final object of the small pro-etale site, so lem-pur-ringed-site-injective-mono-restriction gives surjectivity on sections as A_X-modules; surjectivity is not inferred from sheaf epimorphy. Steps 4-5: a finite sum of injectives is injective (written out); naturality of alpha at q and at E[1] gives the global third arrow (-pr)∘q_X^{-1}. Step 6: I recomputed d(b,-a)=(db-u(a),da)=0 and -pr(b,-a)=a, so [c]->[db] with no sign; if the third arrow were +p the answer would be -[db]. Step 7: the class does not depend on choices; lem-pur-derived-injective-boundary applies (the row is exact on injectives by step 3) and pins delta by the snake map, and thm-pur-with-support-exactness builds its boundary with that same lemma (its proof steps 1 and 4). Step 8: naturality follows from complex-ses naturality plus the K-injective Hom bijection, and the support-localization lemma gives independence of the resolution. Edge cases checked: Z=X, U=empty; Z=empty; A=0; every degree q. Duplicate search (rg -L for Gamma_Z(X,I) and connecting/support boundary, plus the Q40 siblings): nothing states this normalization; the parent's step 3 uses the item exactly for [c]->[db]=∂[c], and the item's third-term model agrees with ell_j of direct-image-global-evaluation. No SGA; proof_deps equals the union of uses; the route goes through sk-prop-a1-kummer; tool use of lem-weil-pbc-proetale-ringed-open-closed accepted, and the declared kummer-unit entries are on route anyway. Advisories, inherited from Q40 and not faults of this delivery: (1) the thm's statement only asserts a long exact sequence and its pro-etale factor is stated for A_{E,n}, while the item allows any finite A; the step-7 argument works for any A and the parent uses A_{E,n}. (2) Enough injectives in Mod(A_X) on the pro-etale site is used without citing a node, as part of the cited derived-category setting. No fixes written, no nodes dropped."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.ProEtaleSupportGlobalBoundary",
-    "declaration": "AlgebraicGeometry.ProEtale.supportGlobalTriangleComparison",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.supportGlobalEvaluation",
-      "AlgebraicGeometry.ProEtale.supportGlobalRestriction",
-      "AlgebraicGeometry.ProEtale.supportGlobalOpenObjectIso",
-      "AlgebraicGeometry.ProEtale.supportGlobalOpenSectionIso",
-      "AlgebraicGeometry.ProEtale.supportGlobalOpenSectionIso_naturality",
-      "AlgebraicGeometry.ProEtale.supportGlobalOpenEvaluationIso",
-      "AlgebraicGeometry.ProEtale.supportGlobalOpenDerivedIso",
-      "AlgebraicGeometry.ProEtale.supportGlobalRestriction_zero",
-      "AlgebraicGeometry.ProEtale.supportGlobalRow",
-      "AlgebraicGeometry.ProEtale.supportGlobalModels_kInjective",
-      "AlgebraicGeometry.ProEtale.supportGlobalUnitIso",
-      "AlgebraicGeometry.ProEtale.supportGlobalTriangleComparison",
-      "AlgebraicGeometry.ProEtale.supportGlobalComparisonNatural",
-      "AlgebraicGeometry.ProEtale.supportGlobalBoundaryNormalization"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportGlobalBoundary.lean",
-    "statement": "theorem supportGlobalTriangleComparison (I : CochainComplex.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) [∀ n : ℤ, Injective (I.obj.X n)] : ∃ (hR : (supportGlobalRow A j I).ShortExact) (hq : IsIso (DerivedCategory.Q.map (supportConeQuotient A i j hPair I.obj))) (hqR : IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.descShortComplex (supportGlobalRow A j I)))) (a : (((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).obj (supportedSectionsComplex A i j hPair I.obj)) ≅ (supportGlobalRow A j I).X₁) (b : (((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).obj (supportCComplex A j I.obj)) ≅ (supportGlobalRow A j I).X₃), a.hom ≫ (supportGlobalRow A j I).f = ((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).map (supportModelSequence A i j hPair I.obj).f ∧ ((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).map (supportModelSequence A i j hPair I.obj).g ≫ b.hom = (supportGlobalRow A j I).g ∧ ∃ e : (((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).rightDerivedFunctor ).mapTriangle.obj (supportModelTriangle A i j hPair I.obj hq)) ≅ supportSequenceTriangle (supportGlobalRow A j I) hqR, e.hom.hom₁ = (supportGlobalUnitIso A (supportedSectionsComplex A i j hPair I.obj) (supportGlobalModels_kInjective A i j hPair I).2.1).hom ≫ DerivedCategory.Q.map a.hom ∧ e.hom.hom₂ = (supportGlobalUnitIso A I.obj (supportGlobalModels_kInjective A i j hPair I).1).hom ∧ e.hom.hom₃ = (supportGlobalUnitIso A (supportCComplex A j I.obj) (supportGlobalModels_kInjective A i j hPair I).2.2).hom ≫ DerivedCategory.Q.map b.hom ∧ ∀ q : ℤ, DerivedCategory.HomologySequence.δ (supportSequenceTriangle (supportGlobalRow A j I) hqR) q (q + 1) rfl = (DerivedCategory.homologyFunctorFactors (ModuleCat.{u + 1} A) q).hom.app (supportGlobalRow A j I).X₃ ≫ hR.δ q (q + 1) rfl ≫ (DerivedCategory.homologyFunctorFactors (ModuleCat.{u + 1} A) (q + 1)).inv.app (supportGlobalRow A j I).X₁",
-    "branch": "sheaf-dag",
-    "by": "Q02",
-    "date": "2026-10-21",
-    "existing": false,
-    "note": "The complete node is stated by supportGlobalTriangleComparison, supportGlobalBoundaryNormalization and supportGlobalComparisonNatural. The triangle comparison fixes every component by the right-derived unit and the sectionwise kernel/restriction squares; its final equality identifies its homology boundary with the usual snake boundary. The boundary theorem uses the existing SupportSequenceBoundary and SupportSequenceExact interfaces for every finite commutative coefficient ring, and quantifies all integer degrees, all injective representatives, all identifications with K, and all cocycle lifts. The real-data open-evaluation and derived-composition isomorphisms identify the third term with RΓ(U,j^*K)."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-21",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-62d42f1ea",
-    "group": "Q02",
-    "result": "pass",
-    "note": "Shape: node changed only in the lean field; statement verbatim; 14 declarations with Source/blueprint docstrings; 6 sorry theorems; defs carry real data. Triangle: RΓ applied to supportModelTriangle is iso to the section-level quotient triangle; components pinned by derived units and by a, b, which mono/epi equations make unique; third arrow is the 014Z −p∘q⁻¹, Mathlib's triangleOfSESδ form; δ clause true and unsigned by Mathlib homologySequenceδ_triangleh. Boundary: ∃ δ SupportSequenceBoundary on all of D⁺, exact, fixed on every injective model, so unique, not an unnormalized existential; cocycle formula [c]↦[db] for all q∈ℤ. Third term RΓ(U,j^*K) via canonical open-section and derived-composition isos. Naturality via comparison squares plus natural units. Edge cases: Z=X, Z=∅, A=0, negative q; no universe restriction beyond the dependency convention. Advisories: statement uses supportedSectionsComplex, injectiveBoundaryRow, supportAMap/supportCMap/SupportComplex, supportedSectionsFunctor from nodes outside stmt_deps; report's claim that the global-model proof dep has no Lean record is out of date (Q62 landed it); proof-only imports not tested one by one; thm-pur-with-support-exactness pro-étale part is A_{E,n}-only (inherited). No compile: no file changed."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014Z, section-canonical-delta-functor, negative projection and functoriality; Tag 070I, lemma-K-injective; Tag 070J, lemma-bounded-below-injectives-K-injective; homology.tex Tag 0117, lemma-long-exact-sequence-cochain"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pur-support-injective-exact-models",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-pur-derived-injective-cone-comparison",
+  "lem-pur-support-localization-triangle",
+  "lem-pur-injective-cone-boundary-descent",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP, section-cohomology-support, injective restriction sequence and first distinguished triangle; pro-etale module specialization using cited ringed-site results; derived.tex Tag 014Z, section-canonical-delta-functor for the explicit sign calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of the proetale closed support localization triangle have connecting map equal to the kernel restriction snake boundary with the same sign",
+   "results": "CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.triangleOfSES_mor₃; DerivedCategory.triangleOfSESδ; CategoryTheory.ShortComplex.ShortExact.singleδ; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; DerivedCategory.HomologySequence.δ; CochainComplex.mappingCone.homologySequenceδ_triangleh; CochainComplex.homologySequenceδ_quotient_mapTriangle_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"δ\"",
+   "results": "CochainComplex.mappingCone.δ_inl; CochainComplex.mappingCone.δ_snd; CochainComplex.mappingCone.δ_liftCochain; CochainComplex.mappingCone.δ_descCochain; CochainComplex.mappingCone.inr_triangleδ; CochainComplex.mappingCone.inr_triangleδ_assoc; CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.homologySequenceδ_triangleh; HomotopyCategory.spectralObjectMappingCone_δ'_app",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*boundary|boundary.*support|support.*connecting",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injective resolution localization cohomology boundary sends restricted cocycle to differential of a lift with no extra sign",
+   "results": "CategoryTheory.InjectiveResolution.self; CochainComplex.mappingCone.δ_liftCochain; CategoryTheory.InjectiveResolution.ofCocomplex; CategoryTheory.InjectiveResolution.of_def; CategoryTheory.InjectiveResolution.ofCocomplex_d_0_1; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.InjectiveResolution.descFOne",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections short exact injective support restriction sequence computes the localization triangle connecting homomorphism",
+   "results": "CochainComplex.isKInjective_of_injective_aux; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply; CochainComplex.cm5b; CategoryTheory.ShortComplex.ShortExact.singleδ; CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p; DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections of closed support localization triangle for proetale module sheaves, boundary is differential of a lift",
+   "results": "PresheafOfModules.DifferentialsConstruction.instHasDifferentials, Algebra.Generators.H1Cotangent.δ_map, PresheafOfModules.DifferentialsConstruction.isUniversal', Algebra.Generators.H1Cotangent.δ, PresheafOfModules.DifferentialsConstruction.derivation', Algebra.Generators.H1Cotangent.δ_eq_δAux, PresheafOfModules.DifferentialsConstruction.relativeDifferentials', PresheafOfModules.Derivation.Universal.fac",
+   "date": "2026-10-21",
+   "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"homologySequenceδ\"",
+   "results": "CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-21",
+   "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*boundary|boundary.*support|support.*connecting",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology with support localization triangle for a closed immersion of schemes and boundary as differential of a lift",
+   "results": "CochainComplex.mappingCone.δ_liftCochain, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.lift_fac, DerivedCategory.triangleOfSESδ.congr_simp, AlgebraicGeometry.IsClosedImmersion.lift_fac_assoc, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, DerivedCategory.triangleOfSESδ, AlgebraicGeometry.liftCoborder_app",
+   "date": "2026-10-21",
+   "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Injective sheaves restriction to open subset gives exact sequence of global sections with support and cone boundary",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Sheaf.isLocallyInjective_iff_injective, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instMonoSheafAddCommGrpCatFShortComplex, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.instIsLocallyInjectiveHomObjForgetTypeImageι, Profinite.NobelingProof.succ_exact, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
+   "date": "2026-10-21",
+   "verdict": "no match: general cone and Mayer-Vietoris results do not state the pro-etale supported-kernel/global-section comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-retracted-support-localization-comparison",
+  "date": "2026-10-21",
+  "group": "Q40"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1",
+ "blueprint": {
+  "from": {
+   "node": "prop-pur-affine-line-orientation-uniqueness",
+   "place": "Proof Steps 1 and 3; sk-prop-a1 first localization triangle and global supported-class paragraph; Tag 09XP, section-cohomology-support, first triangle and long exact sequence; cone-to-quotient normalization (old item Step 8)",
+   "via": [
+    "lem-pur-retracted-support-localization-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-proetale-support-global-boundary",
+  "worker": "stage1",
+  "summary": "Repair of the human re-split return: kept the statement verbatim and extracted all eight old arguments into three independent statement-only unsplit nodes (old steps 1--3, 4--5, 6--8). The parent now assembles exact injective models, the derived-unit cone comparison, and the signed boundary descent. Full old arguments and edge-case/source review retained in report.md.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness, proof Steps 1 and 3, and current sk-prop-a1 proof first localization triangle and global supported-class paragraph: normalization of the supported boundary used for the orientation class.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-support-localization-triangle",
+    "why": "Generic localization triangle for the exceptional inverse image used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
+   },
+   {
+    "node": "thm-pur-with-support-exactness",
+    "why": "Generic long exact sequence for cohomology with support used on the specified ordinary module categories; it supplies an injective, cone, or derived-category tool for the existing localization route, without replacing the unit argument."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Its general ringed-site statement supplies enough injectives in the ordinary pro-etale constant-module category, a hypothesis of both generic derived lemmas; it does not replace the orientation route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-support-exact",
+  "lem-pur-support-localization-triangle",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-pur-derived-injective-boundary",
+  "thm-pur-with-support-exactness",
+  "lem-pur-module-restriction-kernel-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q131-2dfe8748a",
+  "group": "Q131",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-2dfe8748a (reviewer sub-agent of L); spot-checked: This is the re-split answering the human note of 2026-10-21, released 2026-10-22 in clones/live coord/repair-notes. The old proof had 8 steps and 5521 characters, was S1-PASSed (Q90) and S2-PASSed (Q02), and nobody else has re-split it live. The item statement and stmt_deps are unchanged. I compared each old step with the delivery and every argument is now its own node. Old steps 1-3 (sheaf support row with the kernel inclusion; injectivity of j^*I, i_*, j_*, i^!_0 I through exact left adjoints; surjective global restriction via lem-pur-ringed-site-injective-mono-restriction, since U->X is a mono; the section row and Gamma(X,j_*j^*I)=Gamma(U,j^*I)) went to lem-pur-support-injective-exact-models. Old steps 4-5 (cone termwise injective, chi: T(P)=Cone(Tu), q and q_T quasi-isomorphisms, naturality of the unit at q giving third arrow (-pr)q_T^{-1}) went to the generic lem-pur-derived-injective-cone-comparison. Old steps 6-8 went to the generic lem-pur-injective-cone-boundary-descent. I recomputed its sign: d(b,-a)=(db-u(a),da)=0 and -pr(b,-a)=a, so [c]->[a]=[db]. Changing the lift or the representative leaves the class unchanged; the roof depends only on Q(G h) and Q(S h), so it descends to D^+ through 070I/070J, and its cohomology is the delta of lem-pur-derived-injective-boundary. The new nodes are 1756, 1917 and 1997 characters, all unsplit and statement-only, with grep, loogle, leanfinder and leansearch searches and Stacks sources whose labels exist (derived.tex definition-cone and section-canonical-delta-functor, which fixes the third arrow as -p q^{-1}; etale-cohomology.tex section-cohomology-support; sites-cohomology.tex lemma-restriction-along-monomorphism-surjective; homology.tex lemma-long-exact-sequence-cochain). The parent is a 3-step, 1813-character assembly. Step 1 now cites lem-pur-module-restriction-kernel-comparison for enough injectives in Mod(A_X), which fixes the implicit use noted in Q90. Step 2 applies the cone comparison with T=Gamma(X,-) and uses the support-localization triangle. Step 3 applies the boundary descent with S=Gamma_Z, F=Gamma, G=Gamma(U,j^*-), with exactness on injectives from node A on J[0], and identifies the result with the boundary of thm-pur-with-support-exactness. Edge cases: Z empty, Z=X with U empty, A=0, all integer degrees, and the toy row S=0, F=G=id. All three statements are true. Advisories: the cone comparison's 'T-image exact' hypothesis is automatic because the row is degreewise split; its shift square relies on RT being triangulated, which is standard but not stated in lem-weil-pbc-right-derived-plus-injective. Duplicate scan: lem-pc-derived-functor-termwise-split-ses-triangle is the closest, but it is for Rg_* of ringed spaces on K-injective complexes, so it is not a duplicate. Also distinct: exact-functor-ses-triangle-image, sc-p1-right-derived-triangle-connecting, pur-derived-injective-boundary (cohomology delta only), kernel-shifted-cone-boundary, etale-injective-support-sequence, proetale-injective-support-global-model, right-derived-injective-sequence. No SGA source; item tool_uses inherited and accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSupportGlobalBoundary",
+  "declaration": "AlgebraicGeometry.ProEtale.supportGlobalTriangleComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.supportGlobalEvaluation",
+   "AlgebraicGeometry.ProEtale.supportGlobalRestriction",
+   "AlgebraicGeometry.ProEtale.supportGlobalOpenObjectIso",
+   "AlgebraicGeometry.ProEtale.supportGlobalOpenSectionIso",
+   "AlgebraicGeometry.ProEtale.supportGlobalOpenSectionIso_naturality",
+   "AlgebraicGeometry.ProEtale.supportGlobalOpenEvaluationIso",
+   "AlgebraicGeometry.ProEtale.supportGlobalOpenDerivedIso",
+   "AlgebraicGeometry.ProEtale.supportGlobalRestriction_zero",
+   "AlgebraicGeometry.ProEtale.supportGlobalRow",
+   "AlgebraicGeometry.ProEtale.supportGlobalModels_kInjective",
+   "AlgebraicGeometry.ProEtale.supportGlobalUnitIso",
+   "AlgebraicGeometry.ProEtale.supportGlobalTriangleComparison",
+   "AlgebraicGeometry.ProEtale.supportGlobalComparisonNatural",
+   "AlgebraicGeometry.ProEtale.supportGlobalBoundaryNormalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportGlobalBoundary.lean",
+  "statement": "theorem supportGlobalTriangleComparison (I : CochainComplex.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) [∀ n : ℤ, Injective (I.obj.X n)] : ∃ (hR : (supportGlobalRow A j I).ShortExact) (hq : IsIso (DerivedCategory.Q.map (supportConeQuotient A i j hPair I.obj))) (hqR : IsIso (DerivedCategory.Q.map (CochainComplex.mappingCone.descShortComplex (supportGlobalRow A j I)))) (a : (((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).obj (supportedSectionsComplex A i j hPair I.obj)) ≅ (supportGlobalRow A j I).X₁) (b : (((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).obj (supportCComplex A j I.obj)) ≅ (supportGlobalRow A j I).X₃), a.hom ≫ (supportGlobalRow A j I).f = ((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).map (supportModelSequence A i j hPair I.obj).f ∧ ((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).mapHomologicalComplex (.up ℤ)).map (supportModelSequence A i j hPair I.obj).g ≫ b.hom = (supportGlobalRow A j I).g ∧ ∃ e : (((supportGlobalEvaluation A (Scheme.ProEt.mk (𝟙 X))).rightDerivedFunctor ).mapTriangle.obj (supportModelTriangle A i j hPair I.obj hq)) ≅ supportSequenceTriangle (supportGlobalRow A j I) hqR, e.hom.hom₁ = (supportGlobalUnitIso A (supportedSectionsComplex A i j hPair I.obj) (supportGlobalModels_kInjective A i j hPair I).2.1).hom ≫ DerivedCategory.Q.map a.hom ∧ e.hom.hom₂ = (supportGlobalUnitIso A I.obj (supportGlobalModels_kInjective A i j hPair I).1).hom ∧ e.hom.hom₃ = (supportGlobalUnitIso A (supportCComplex A j I.obj) (supportGlobalModels_kInjective A i j hPair I).2.2).hom ≫ DerivedCategory.Q.map b.hom ∧ ∀ q : ℤ, DerivedCategory.HomologySequence.δ (supportSequenceTriangle (supportGlobalRow A j I) hqR) q (q + 1) rfl = (DerivedCategory.homologyFunctorFactors (ModuleCat.{u + 1} A) q).hom.app (supportGlobalRow A j I).X₃ ≫ hR.δ q (q + 1) rfl ≫ (DerivedCategory.homologyFunctorFactors (ModuleCat.{u + 1} A) (q + 1)).inv.app (supportGlobalRow A j I).X₁",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The complete node is stated by supportGlobalTriangleComparison, supportGlobalBoundaryNormalization and supportGlobalComparisonNatural. The triangle comparison fixes every component by the right-derived unit and the sectionwise kernel/restriction squares; its final equality identifies its homology boundary with the usual snake boundary. The boundary theorem uses the existing SupportSequenceBoundary and SupportSequenceExact interfaces for every finite commutative coefficient ring, and quantifies all integer degrees, all injective representatives, all identifications with K, and all cocycle lifts. The real-data open-evaluation and derived-composition isomorphisms identify the third term with RΓ(U,j^*K)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62d42f1ea",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Shape: node changed only in the lean field; statement verbatim; 14 declarations with Source/blueprint docstrings; 6 sorry theorems; defs carry real data. Triangle: RΓ applied to supportModelTriangle is iso to the section-level quotient triangle; components pinned by derived units and by a, b, which mono/epi equations make unique; third arrow is the 014Z −p∘q⁻¹, Mathlib's triangleOfSESδ form; δ clause true and unsigned by Mathlib homologySequenceδ_triangleh. Boundary: ∃ δ SupportSequenceBoundary on all of D⁺, exact, fixed on every injective model, so unique, not an unnormalized existential; cocycle formula [c]↦[db] for all q∈ℤ. Third term RΓ(U,j^*K) via canonical open-section and derived-composition isos. Naturality via comparison squares plus natural units. Edge cases: Z=X, Z=∅, A=0, negative q; no universe restriction beyond the dependency convention. Advisories: statement uses supportedSectionsComplex, injectiveBoundaryRow, supportAMap/supportCMap/SupportComplex, supportedSectionsFunctor from nodes outside stmt_deps; report's claim that the global-model proof dep has no Lean record is out of date (Q62 landed it); proof-only imports not tested one by one; thm-pur-with-support-exactness pro-étale part is A_{E,n}-only (inherited). No compile: no file changed."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

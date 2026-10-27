@@ -1,0 +1,113 @@
+{
+ "id": "lem-pur-adic-exceptional-normalization-mate",
+ "kind": "statement",
+ "title": "Exceptional quotient normalization and the actual transition mate",
+ "statement": "Fix a finite-field datum D, its coefficient datum C with ell different from the residue characteristic, a finite intermediate extension E/Q_ell, separated finite-type D.k-schemes X,Y, a smooth separated finite-type quasi-compact morphism f:X→Y of pure relative dimension d≥0, and a finite-Tor constructible integral object K in D(R_Y). Use the canonical systems and maps of [def-pur-adic-normalized-purity-systems]. For every natural n≤m (index j means exponent j+1), the image of exceptionalNormalization under the finite scalar-extension/restriction Hom adjunction is heterogeneously equal to exceptionalTransition followed by the canonical quotient restriction comparison purAdicQuotientRestrictionIso. This identifies two specified arrows, without choosing any new map, and asserts no invertibility or purity square.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "stmt_deps": [
+  "def-pur-adic-normalized-purity-systems"
+ ],
+ "proof": [
+  {
+   "text": "Put $H_n=Lf_n^*(-)(d)[2d]$ and $J_n=Rf_n^!$. Write $h_{m,n,L}:\\operatorname{red}_{m,n,X}H_mL\\xrightarrow{\\sim}H_n\\operatorname{red}_{m,n,Y}L$ and $b_{m,n,L}:\\operatorname{red}_{m,n,X}J_mL\\xrightarrow{\\sim}J_n\\operatorname{red}_{m,n,Y}L$ for the vertical comparisons in [thm-pur-finite-reduction-of-purity]. The exceptional comparison is the one of [lem-coef-finite-exceptional]: it identifies counits under the compact-support coefficient comparison. The transitions of the actual exceptional system of [def-pur-adic-exceptional-system-realization] are those same adjunction mates; equality follows by the injectivity of the adjunction Hom bijection, since their transposes are the same compact-support comparison followed by the counit. Hence $\\rho^V_{m,n}=J_n(a_{m,n})b_{m,n,K_m}$. Its cocycle is the quotient cocycle of $b$ and $a$, using naturality of $b$. Apply the tensor/restriction Hom bijection to the exceptional normalization and cancel its canonical coordinate comparisons. The resulting transpose is exactly the actual system transition followed by the quotient restriction identification. Equal indices are included by the triangle identity.",
+   "uses": [
+    "lem-coef-finite-exceptional",
+    "thm-pur-finite-reduction-of-purity",
+    "def-pur-adic-exceptional-system-realization",
+    "def-pur-adic-exceptional-reduction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-exceptional-reduction",
+  "def-pur-adic-exceptional-system-realization",
+  "lem-coef-finite-exceptional",
+  "thm-pur-finite-reduction-of-purity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport-coefficient-change.proof.md",
+  "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Adjunction mate of finite exceptional coefficient comparison equals the transition of the exceptional inverse system",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.Bicategory.mateEquiv, CategoryTheory.mateEquiv_square, CategoryTheory.abelianOfAdjunction, CategoryTheory.unit_mateEquiv, CategoryTheory.Functor.adjunction",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction mate of finite exceptional coefficient comparison equals the transition of the exceptional inverse system",
+   "date": "2026-10-25",
+   "results": "8 hits: CompHausLike.LocallyConstant.adjunction_left_triangle, Condensed.profiniteSolidCounit, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, localCohomology.diagramComp, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_symm_apply",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional_normalization_mate|finiteReductionExceptionalComparison",
+   "date": "2026-10-25",
+   "results": "0 hits: ",
+   "verdict": "No exact Mathlib result. Reuse the project constructions and standard categorical lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicNormalizedPurityLift",
+  "date": "2026-10-25",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-adic-reconstruction",
+   "place": "Paragraph (1), actual normalized towers, with det-sp-tower-gamma (3) and the original normalized-purity-lift proof steps 1--3.",
+   "via": [
+    "lem-pur-adic-normalized-purity-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicExceptionalNormalizationMate",
+  "file": "lean/Sheaf/Paper/AdicExceptionalNormalizationMate.lean",
+  "declaration": "WeilConjectures.AdicNormalizedPurity.exceptional_normalization_mate",
+  "declarations": [
+   "WeilConjectures.AdicNormalizedPurity.exceptional_normalization_mate"
+  ],
+  "statement": "theorem exceptional_normalization_mate\n    (K : DerivedCategory (scalarReductionSource C.l E Y))\n    (hK : finiteTorConstructibleIntegral C.l E Y K) {m n : ℕ} (h : n ≤ m) :\n    HEq (((purAdicFiniteSetting D C E m).finiteReductionAdjunction (n + 1)\n        (Nat.succ_pos n) (Nat.add_le_add_right h 1) X).homEquiv _ _\n          (exceptionalNormalization D C E f d K hK h))\n        (exceptionalTransition D C E f d K hK h ≫\n          (purAdicQuotientRestrictionIso D C E X h).hom.app _)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-60f67",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261025T095710-L-3469215",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (identical); 10 moved defs vs old item bodies (identical); 2 new sorry lemmas vs item clauses 2.3 and 3 (verbatim); tower-full copy vs SequentialTowerEvaluationFull (universe-general re-proof, axioms clean)"
+ }
+}

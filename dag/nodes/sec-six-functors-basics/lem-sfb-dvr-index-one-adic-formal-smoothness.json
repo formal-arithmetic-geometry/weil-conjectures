@@ -1,0 +1,233 @@
+{
+ "id": "lem-sfb-dvr-index-one-adic-formal-smoothness",
+ "kind": "statement",
+ "title": "Index-one DVR extensions with separable residue extension are adically formally smooth",
+ "statement": "Let $R\\to S$ be an injective local homomorphism of discrete valuation rings [def-sc-discrete-valuation-ring], where local means that the inverse image of $\\mathfrak m_S$ is $\\mathfrak m_R$. Suppose $\\mathfrak m_RS=\\mathfrak m_S$, and suppose the induced residue field extension $(S/\\mathfrak m_S)/(R/\\mathfrak m_R)$ is separable in the possibly transcendental sense of [def-weil-pbc-separable-field-extension]. Then $S$ is formally smooth over $R$ for the $\\mathfrak m_S$-adic topology [def-weil-pbc-formally-smooth-adic]. Neither completeness nor finite generation of the residue field extension is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09E7, lemma-extension-dvrs-formally-smooth, implication (2) to (1)."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof": [
+  {
+   "text": "Write $\\varphi:R\\to S$ for the given map. By [def-sc-discrete-valuation-ring], both rings are local domains and every ideal is principal. Thus every ideal is finitely generated, so both rings are Noetherian by [def-weil-pbc-noetherian-ring]. Also $R$ is a PID. For $0\\ne r\\in R$ and $s\\in S$, $rs=0$ means $\\varphi(r)s=0$. Injectivity gives $\\varphi(r)\\ne0$; since $S$ is a domain, $s=0$. Hence $S$ is torsion free as an $R$-module. Apply [lem-weil-pbc-pid-torsion-free-module-flat] to conclude that $R\\to S$ is flat.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-pid-torsion-free-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09E7, lemma-extension-dvrs-formally-smooth, (2) implies (1); Tag 0AUW, lemma-dedekind-torsion-free-flat, (1)."
+   }
+  },
+  {
+   "text": "Put $k=R/\\mathfrak m_R$ and $L=S/\\mathfrak m_S$. The local-map condition induces the stated field embedding $k\\hookrightarrow L$. The closed fibre used in [lem-weil-pbc-flat-formally-smooth-closed-fibre-adic] is $\\overline S=S/\\mathfrak m_RS$. The hypothesis $\\mathfrak m_RS=\\mathfrak m_S$ identifies this quotient with $L$, by the map sending the class of $s$ to its residue class. This identification preserves the $k$-algebra structure, and its maximal ideal $\\mathfrak m_S/\\mathfrak m_RS$ is zero. For any $k$-algebra $D$, square-zero ideal $J$ and map $L\\to D/J$, [lem-sfb-separable-field-square-zero-lifting] supplies a $k$-algebra lift $L\\to D$, since $L/k$ is separable in the assumed, possibly transcendental sense. In particular this holds for every map continuous for the zero-adic topology. By [def-weil-pbc-formally-smooth-adic], $\\overline S$ is formally smooth over $k$ for its maximal-ideal-adic topology.",
+   "uses": [
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "lem-sfb-separable-field-square-zero-lifting",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0322, proposition-characterize-separable-field-extensions: characteristic-zero assertion (3), positive-characteristic implication (1) to (6); used by More on Algebra Tag 09E7."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-formally-smooth-closed-fibre-adic] with $A=R$ and $B=S$. The map is local by hypothesis, both rings are Noetherian and the map is flat by step 1, and step 2 gives precisely formal smoothness of its closed fibre for the quotient maximal ideal. The criterion gives that $S$ is formally smooth over $R$ for the $\\mathfrak m_S$-adic topology. The cited criterion and separable-field lifting theorem impose neither completeness nor finite generation, so none has been added.",
+   "uses": [
+    "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NQ, proposition-fs-flat-fibre-fs, (2) implies (3), as cited by Tag 09E7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+  "lem-sfb-separable-field-square-zero-lifting",
+  "def-weil-pbc-formally-smooth-adic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09E7, lemma-extension-dvrs-formally-smooth, (2) implies (1), using Tags 07NQ and 0322 as its proof specifies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "formallySmooth.*(residue|valuation)|formally_smooth.*(residue|valuation)|FormallySmooth.*PerfectField",
+   "results": "{\"t\": \"2026-10-24T05:16:07Z\", \"tool\": \"grep\", \"query\": \"formallySmooth.*(residue|valuation)|formally_smooth.*(residue|valuation)|FormallySmooth.*PerfectField\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/Field.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"051dd55770b487b0\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly unramified extension of discrete valuation rings with perfect residue field is formally smooth in the adic topology",
+   "results": "{\"t\": \"2026-10-24T05:16:08Z\", \"tool\": \"leansearch\", \"query\": \"A weakly unramified extension of discrete valuation rings with perfect residue field is formally smooth in the adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"RingHom.FormallySmooth\", \"Algebra.Unramified.formallyUnramified\", \"Algebra.Smooth.formallySmooth\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallySmooth.exists_kerProj_comp_eq_id\"], \"digest\": \"6bf12bfd0e0ca501\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T05:16:08Z\", \"tool\": \"loogle\", \"query\": \"IsDiscreteValuationRing, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local homomorphism with formally smooth closed fiber implies adic formal smoothness for Noetherian local rings",
+   "results": "{\"t\": \"2026-10-24T05:16:09Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local homomorphism with formally smooth closed fiber implies adic formal smoothness for Noetherian local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"AdicCompletion.flat_of_isNoetherian\", \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth.flat\"], \"digest\": \"22c2ea0eb02948eb\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective local map of discrete valuation rings of ramification index one with perfect source residue field of characteristic p is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-24T05:16:10Z\", \"tool\": \"leanfinder\", \"query\": \"An injective local map of discrete valuation rings of ramification index one with perfect source residue field of characteristic p is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"RingHom.FormallyUnramified.ofLocalizationPrime\", \"Algebra.IsSmoothAt\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.IsUnramifiedAt\"], \"digest\": \"5d16085cf16dc55a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmoothAdic|formally.smooth.*adic|discrete.valuation.*smooth",
+   "results": "{\"t\": \"2026-10-24T05:18:26Z\", \"tool\": \"grep\", \"query\": \"FormallySmoothAdic|formally.smooth.*adic|discrete.valuation.*smooth\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\"], \"digest\": \"89b17bc757dc030d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An extension of discrete valuation rings with ramification index one and a separable possibly transcendental residue field extension is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-24T05:18:35Z\", \"tool\": \"leanfinder\", \"query\": \"An extension of discrete valuation rings with ramification index one and a separable possibly transcendental residue field extension is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallySmooth.of_perfectField\", \"Algebra.instFiniteResidueFieldOfFormallyUnramified\", \"Algebra.IsUnramifiedAt\"], \"digest\": \"d6f6cee5495b1bee\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weakly unramified extension of discrete valuation rings with separable residue field extension is adically formally smooth",
+   "results": "{\"t\": \"2026-10-24T06:59:13Z\", \"tool\": \"leansearch\", \"query\": \"A weakly unramified extension of discrete valuation rings with separable residue field extension is adically formally smooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified\", \"Algebra.Unramified.formallyUnramified\", \"RingHom.FormallySmooth\", \"Algebra.FormallyEtale.instFormallySmooth\", \"Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"91b3257f17e1ec9d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective local map of discrete valuation rings with ramification index one and separable residue extension is formally smooth for the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-24T06:59:14Z\", \"tool\": \"leanfinder\", \"query\": \"An injective local map of discrete valuation rings with ramification index one and separable residue extension is formally smooth for the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyUnramified.of_map_maximalIdeal\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Algebra.isUnramifiedAt_iff_map_eq\", \"Algebra.instFormallyUnramifiedResidueField_1\", \"Algebra.instFormallyUnramifiedResidueField\", \"RingHom.FormallyUnramified.ofLocalizationPrime\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"0f4ad3346480af29\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat local homomorphism of Noetherian local rings with formally smooth closed fiber is formally smooth in the maximal ideal adic topology",
+   "results": "{\"t\": \"2026-10-24T07:01:43Z\", \"tool\": \"leanfinder\", \"query\": \"Flat local homomorphism of Noetherian local rings with formally smooth closed fiber is formally smooth in the maximal ideal adic topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"RingHom.FormallySmooth.localizationPreserves\", \"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.FormallySmooth.localization_map\", \"Algebra.FormallySmooth.localization_base\", \"Algebra.Smooth.flat\"], \"digest\": \"d3ae873e4aad8165\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no adic DVR index-one criterion. Unramified/LocalRing.lean uses EssFiniteType and concerns formal unramifiedness. Smooth/Field.lean:44 covers separably generated fields, not every separable extension in the finite-subextension sense; its perfect-field instance at line 53 requires EssFiniteType. Smooth/AdicCompletion.lean:93 assumes ordinary formal smoothness and lifts into a complete target; it does not establish adic formal smoothness of an arbitrary DVR extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-epp-compatible-coefficient-dvrs",
+  "date": "2026-10-24",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting algebra for det-thm-sf-ctf-stability-direct-images, proof (3), via the Epp coefficient-DVR preparation. Stacks 09F9, theorem-epp, final preparation paragraph: the index-one map to the upper coefficient DVR is adically formally smooth. The latest blueprint no longer states this auxiliary algebra result.",
+   "via": [
+    "lem-sfb-epp-compatible-coefficient-dvrs",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dvr-index-one-adic-formal-smoothness",
+  "worker": "stage1",
+  "summary": "Q19: expanded Stacks 09E7 (2) to (1) into torsion-free PID flatness, explicit closed-fibre identification and separable-field lifting, followed by the general flat local closed-fibre criterion. Reused existing nodes throughout; no new nodes or changed hypotheses. Rechecked project source, Mathlib candidates, sources, citation statements and dependency closure.",
+  "blueprint": "Historical supporting algebra for det-thm-sf-ctf-stability-direct-images, proof (3), through Epp coefficient-DVR preparation; newest blueprint direct-images proof (3) no longer states this auxiliary algebra. Retained the existing null ancestor and provenance chain; realized the requested Stacks 09E7 implication, without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic",
+    "why": "Generic local Noetherian algebra criterion (Stacks 07NQ), explicitly invoked by 09E7; no node of this unit gives that general flat closed-fibre implication."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-formally-smooth-closed-fibre-adic"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-a65a53a79",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a65a53a79 (reviewer sub-agent of L); spot-checked: I read Stacks 09E7 (more-algebra l.32989), whose proof is just 07NQ plus 0322, and checked 07NQ (l.10081), 0322 and 0AUW against tags/tags. The item statement is unchanged; its injectivity hypothesis follows from m_R S = m_S anyway, so it does not weaken the target. Step 1: the DVR def node makes both rings PIDs and Noetherian, the torsion-freeness argument is written out, and the PID torsion-free-flat Mathlib leaf has no finiteness hypothesis. Step 2: since m_R S = m_S, the closed fibre S/m_R S is exactly L with quotient maximal ideal 0. The 0-adic lifting condition of def-weil-pbc-formally-smooth-adic is then exactly the statement of lem-sfb-separable-field-square-zero-lifting, which allows any separable extension including transcendental ones. Step 3: the closed-fibre criterion (07NQ (2)⇒(3)) gets locality from the item's hypothesis, Noetherian and flat from step 1, and the fibre condition from step 2. Edge cases: Z_(p)→Z[x]_(p) passes; t↦u² fails the hypothesis and step 2 correctly breaks; an inseparable residue extension fails the lifting node, as it should. The dependency closure has 344 nodes, none missing, no cycle. I found no duplicate in a DAG search for 09E7, 07NQ and the label. There are no new nodes. Accepted tool_use: lem-weil-pbc-flat-formally-smooth-closed-fibre-adic, the generic 07NQ criterion from unit sk-thm-p1, used as a black box exactly as the source uses it. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.DvrIndexOneAdicFormalSmoothness",
+  "declaration": "Algebra.formallySmoothAdic_of_dvr_index_one",
+  "file": "lean/Sheaf/RingTheory/DvrIndexOneAdicFormalSmoothness.lean",
+  "statement": "theorem formallySmoothAdic_of_dvr_index_one (R : Type u) (S : Type v) [CommRing R] [CommRing S] [IsDomain R] [IsDomain S] [IsDiscreteValuationRing R] [IsDiscreteValuationRing S] [Algebra R S] [IsLocalHom (algebraMap R S)] (hinj : Function.Injective (algebraMap R S)) (hindex : Ideal.map (algebraMap R S) (IsLocalRing.maximalIdeal R) = IsLocalRing.maximalIdeal S) (hsep : IsSeparableExtension (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField S)) : FormallySmoothAdic R S (IsLocalRing.maximalIdeal S)",
+  "branch": "newtargets-dag",
+  "by": "Q128",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5f0aebe1",
+  "group": "Q128",
+  "result": "pass",
+  "note": "Lean matches node and Stacks 09E7 (2)=>(1) clause by clause: DVRs (IsDiscreteValuationRing with IsDomain), IsLocalHom, injective, Ideal.map m_R = m_S, IsSeparableExtension on the canonical residue-field algebra, conclusion FormallySmoothAdic R S m_S. No extra assumptions; universes u,v independent. lean.statement equals the file signature up to whitespace. Docstrings give the source place, the blueprint id and the 3 proof steps (07NQ criterion formallySmoothAdic_of_flat_closedFiber exists with fitting hypotheses). Proof is sorry only, no new nodes, no duplicate in side-live/live/Mathlib (09E7 appears only in proof plans). Report has Worker report and Second reading sections. Nothing recompiled since no file changed."
+ }
+}

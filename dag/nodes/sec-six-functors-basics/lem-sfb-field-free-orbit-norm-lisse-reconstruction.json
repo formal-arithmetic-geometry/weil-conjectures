@@ -1,0 +1,491 @@
+{
+ "id": "lem-sfb-field-free-orbit-norm-lisse-reconstruction",
+ "kind": "statement",
+ "title": "Norm-continuous reconstruction from finite free internal actions",
+ "statement": "Let $k$ be a field, $k^s/k$ a separable closure, $s=\\operatorname{Spec}k$, $\\bar s=\\operatorname{Spec}k^s$, and $G=\\operatorname{Aut}_k(k^s)$ with its Krull topology. Work on sites small in compatible coefficient universes [def-weil-size-convention, def-weil-pbc-proetale-site]. Put $\\underline G(P)=C(P,G)$ for profinite $P$, and $T[P]=\\varprojlim_i\\coprod_{P_i}T$ over finite quotients [lem-weil-pbc-profinite-test-object-functor]. For a commutative condensed ring $R$ put $R_T=p_T^*R$, use internal module categories and ordinary unbounded derived categories, and write $\\mathcal A_G(R)$ for internal $R$-modules with $\\underline G$-action [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-module-objects, sk-def-sfb-derived-categories, def-sfb-condensed-action-module].\n\nLet $\\ell$ be a prime, $E/\\mathbf Q_\\ell$ finite with its norm topology, and now put $R(P)=C(P,E)$ [def-sfb-continuous-map-condensed-ring]. Suppose given a ringed-topos field presentation over the condensed topos: an additive equivalence $E_R:\\operatorname{Mod}_{R_s}\\simeq\\mathcal A_G(R)$ with $(E_RN)(P)=N(\\bar s[P])$ naturally in profinite $P$, with the regular ring comparison $E_R(R_s)\\cong R$ (trivial action), and whose composite with forgetting the action is identified with restriction to $\\bar s$ followed by $L\\mapsto(P\\mapsto L(\\bar s[P]))$. Then its restriction to finite-rank lisse modules [def-sfb-lisse-coefficient-module] has the following explicit reconstruction, in the norm-continuous categories of [def-sfb-norm-continuous-monodromy-data].\n\nA module $N$ is lisse exactly when the underlying condensed module of $E_RN$ is isomorphic to $R^{\\oplus n}$ for some finite $n\\geq0$. A trivialization over the separably closed field may be taken on a nonempty profinite chart $P\\to *$ and pulled back along a chosen $x:*\\to P$, giving this finite free module. Conversely such a free underlying module trivializes $N$ on the covering $\\bar s\\to s$. The identification $R(P)^n=C(P,E^n)$ is coordinatewise. Every finite-dimensional norm-topological $E$-space $W$ is homeomorphic by any linear basis to $E^n$.\n\nFor each $n$, internal $\\underline G$-linear actions on $R^n$ are in bijection with continuous matrix homomorphisms $A:G\\to\\operatorname{GL}_n(E)$, where continuity is for the matrix topology induced by the norm topology of $E$. The bijection sends an internal action to the $n^2$ coordinate functions obtained by applying its operation at $G$ to $\\operatorname{id}_G\\in C(G,G)$ and to the constant basis vectors. The group laws give $A(1)=1$, $A(gh)=A(g)A(h)$. For every profinite $P$, variable element $g\\in C(P,G)$ and section $w\\in C(P,E^n)$, the action is\n$$(g\\cdot w)(p)=A(g(p))w(p).$$\nConversely this formula defines an internal action from every continuous $E$-linear norm-topological action; the two constructions are inverse. The associated joint action $G\\times E^n\\to E^n$ is continuous.\n\nAn internal $R$-linear map $R^n\\to R^m$ is uniquely a constant matrix $B\\in\\operatorname{Mat}_{m\\times n}(E)$, determined at $*$ on the basis and acting pointwise at every $P$. It is equivariant exactly when $BA(g)=A'(g)B$ for all $g\\in G$. These are precisely the continuous equivariant $E$-linear maps. Therefore $E_R$ restricts to an equivalence between lisse $R_s$-modules and finite-dimensional norm-topological continuous $E$-representations of $G$, realized by $W\\mapsto C(-,W)$, preserving every variable scalar, variable group action, test restriction and equivariant linear map. Rank zero, empty profinite tests, and $G=1$ are included; the norm topology is never replaced by the discrete topology.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Example 4.1.10; Definition 6.8.3 and Proposition 6.8.4; Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 14, 15, 16. Agent formulation; complete inherited argument and citation mapping retained in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-condensed-action-module",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-norm-continuous-monodromy-data"
+ ],
+ "proof": [
+  {
+   "text": "Write $v:\\bar s\\to s$ and $M=U(E_RN)$ for the underlying condensed module. By [lem-sfb-field-separable-cech-coordinates], $v$ is a pro-etale cover and every lisse module over $\\bar s$ is finite free. Lisseness pulls back by its covering definition [def-sfb-lisse-coefficient-module]. Apply [lem-sfb-field-action-topos-coefficients] to the separably closed field $k^s$ itself (trivial Galois group): $\\Phi:L\\mapsto(P\\mapsto L(\\bar s[P]))$ is an equivalence $\\operatorname{Sh}(\\bar s_{\\mathrm{proet}})\\simeq\\operatorname{Cond}$ with $\\Phi(R_{\\bar s})\\cong R$ as rings, so it is an equivalence of module categories $\\operatorname{Mod}_{R_{\\bar s}}\\simeq\\operatorname{Mod}_R$ preserving finite sums. By hypothesis $M\\cong\\Phi(N|_{\\bar s})$. Lisse $N$ therefore gives $M\\cong\\Phi(R_{\\bar s})^n\\cong R^n$. Conversely $M\\cong R^n$ gives, by full faithfulness of $\\Phi$, $N|_{\\bar s}\\cong R_{\\bar s}^n$, so the single cover $v$ witnesses lisseness. For the chart clause one can take $P=*$ after this trivialization. More generally any trivializing nonempty profinite chart $P\\to *$ has a section $x:*\\to P$ obtained by choosing a point; pulling its trivialization back along $x$ gives the same finite-free conclusion. This uses finite rank, including rank zero, and no finiteness condition on $k$.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-field-action-topos-coefficients",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10 and Definition 6.8.3; agent expansion of the finite-free geometric restriction criterion"
+   }
+  },
+  {
+   "text": "The map $(f_1,\\ldots,f_n)\\mapsto(p\\mapsto(f_1(p),\\ldots,f_n(p)))$ identifies $R(P)^n$ with $C(P,E^n)$: a map into the finite product is continuous exactly when its coordinates are. For a basis $b_1,\\ldots,b_n$ of a norm-topological finite-dimensional $E$-space $W$, the inverse linear maps $E^n\\to W$, $(a_j)\\mapsto\\sum_j a_jb_j$, and $W\\to E^n$ are both continuous by [lem-sfb-finite-dimensional-linear-map-continuous]. Its field hypotheses hold for this finite normed extension of $\\mathbf Q_\\ell$, as its statement explicitly includes; both spaces are Hausdorff and finite dimensional. Thus each basis is a homeomorphism. Postcomposition by these inverse maps identifies $C(P,W)$ with $R(P)^n$, naturally in $P$ and pointwise scalars.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.3 and the finite-dimensional topological linear algebra in Corollary 6.8.5; agent coordinate argument"
+   }
+  },
+  {
+   "text": "Use the sectionwise natural linear operations defining internal actions [def-sfb-condensed-action-module]. If $\\alpha$ is an action on $R^n$, let $e_j$ denote its constant basis sections and set $a_{ij}=\\operatorname{pr}_i(\\alpha_G(\\operatorname{id}_G,e_j))\\in R(G)=C(G,E)$. Here $G$ is a profinite test. Define $A(g)_{ij}=a_{ij}(g)$. All entries are continuous by their membership in $R(G)$, hence $A:G\\to\\operatorname{Mat}_n(E)$ is continuous for the finite product matrix topology. These formulas also make sense for the empty basis.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.3, point presentation; explicit extraction of matrix entries from the internal action"
+   }
+  },
+  {
+   "text": "For any continuous $g:P\\to G$, naturality of $\\alpha$ along the test map $g$ gives $\\alpha_P(g,e_j)=g^*\\alpha_G(\\operatorname{id}_G,e_j)$. Write $w=\\sum_jw_je_j$ with $w_j\\in R(P)$. Linearity in the second variable now gives $\\alpha_P(g,w)=\\sum_jw_j\\alpha_P(g,e_j)$, so at every $p\\in P$ this is $A(g(p))w(p)$. Thus the extracted entries determine the entire internal action, including variable scalars, rather than just its values on constant vectors.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.3; agent naturality and finite-basis calculation"
+   }
+  },
+  {
+   "text": "Apply the action identities at the point test to $g,h\\in G$ and the vectors $e_j$. They give $A(1)e_j=e_j$ and $A(gh)e_j=A(g)A(h)e_j$ for every $j$, hence $A(1)=I$ and $A(gh)=A(g)A(h)$. Taking $h=g^{-1}$ shows that $A(g)$ is invertible. Since $A$ is continuous as a matrix-valued map and its values lie in $\\operatorname{GL}_n(E)$, it is continuous for the specified induced topology on that subspace. This is the continuous matrix representation of [def-sfb-norm-continuous-monodromy-data].",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-sfb-norm-continuous-monodromy-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.3 and Definition 6.8.3; agent verification of the group and continuity laws"
+   }
+  },
+  {
+   "text": "Conversely, let $A:G\\to\\operatorname{GL}_n(E)$ have continuous entries and satisfy the group laws. Define $\\alpha_P(g,w)_i=\\sum_j(a_{ij}\\circ g)w_j$ in $R(P)$. Finite sums and products of continuous $E$-valued functions are continuous [def-sfb-continuous-map-condensed-ring]; composition with $f:Q\\to P$ gives $f^*\\alpha_P(g,w)=\\alpha_Q(g\\circ f,f^*w)$. The matrix identities give the group laws and the displayed sum gives $R(P)$-linearity, exactly the operations of [def-sfb-condensed-action-module]. Extraction at $(G,\\operatorname{id}_G,e_j)$ returns $a_{ij}$, while step 4 returns every original $\\alpha_P$, so the constructions are inverse. Moreover $(g,v)\\mapsto\\sum_j a_{ij}(g)v_j$ is continuous on $G\\times E^n$ for each $i$, proving joint continuity. Conversely a jointly continuous linear action has continuous entries by restriction to the fixed vectors $e_j$.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.3, continuous topological group modules; explicit inverse construction"
+   }
+  },
+  {
+   "text": "Let $\\phi:R^n\\to R^m$ be an internal linear map and let the $j$th column of $B$ be $\\phi_*(e_j)\\in E^m$. Naturality along $P\\to *$ makes $\\phi_P(e_j)$ this constant column, and $R(P)$-linearity gives $\\phi_P(w)=\\sum_jw_jB_j=Bw$. Conversely this formula is linear and commutes with every test restriction. For the actions above, equivariance is precisely $BA(g)=A'(g)B$: necessity follows at $*$ on each $e_j$, and sufficiency follows pointwise from step 4 for every variable $g:P\\to G$. Each such linear map on finite-dimensional $E$-spaces is continuous by [lem-sfb-finite-dimensional-linear-map-continuous]. Composition and identities are ordinary matrix multiplication and identity matrices.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.3 and finite-dimensional topological linear algebra in Corollary 6.8.5; agent calculation of all morphisms"
+   }
+  },
+  {
+   "text": "Steps 3--7 give mutually inverse descriptions of actions and arrows on finite-free underlying condensed modules. For any $W$ in [def-sfb-norm-continuous-monodromy-data], choose a basis and use step 2 to identify $C(-,W)$ with $R^n$; the coordinate action of step 6 is exactly $(g\\cdot w)(p)=g(p)\\cdot w(p)$. A change of basis is an invertible constant matrix and is an intertwiner by step 7, so these identifications are natural and independent of the chosen coordinates up to the specified linear isomorphism. Since $E_R$ is an equivalence and, by step 1, $N$ is lisse exactly when $E_RN$ has finite-free underlying module, $E_R$ restricts to an equivalence from lisse modules onto the full subcategory of $\\mathcal A_G(R)$ with finite-free underlying module; every $C(-,W)$ with the action of step 6 lies in it. Composing gives the asserted equivalence. The formulas preserve addition, constant and variable scalars, all test restrictions and equivariant maps, and send the regular module to the trivial representation on $E$. When $n=0$ all sums and columns are empty and the unique action is the zero-dimensional representation; when $P=\\varnothing$ each section module has one element and all equations hold; when $G=1$ the group law forces the identity action. All continuous functions throughout use the original norm topology.",
+   "uses": [
+    "def-sfb-norm-continuous-monodromy-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.3 and Section 4.3; agent assembly of the normalized equivalence and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-field-separable-cech-coordinates",
+  "lem-sfb-field-action-topos-coefficients",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "def-sfb-condensed-action-module",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-sfb-continuous-map-condensed-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), geometric/coefficient normalization; the inherited field-action proof steps 14--16 are expanded using the separable-Cech node and finite-dimensional continuity leaf. Bhatt--Scholze Example 4.1.10, Section 4.3 and Definition 6.8.3 supply the source framework."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free condensed modules on a field with internal Galois action are continuous norm topological finite dimensional l adic representations",
+   "results": {
+    "t": "2026-10-22T06:05:51Z",
+    "tool": "leanfinder",
+    "query": "Finite locally free condensed modules on a field with internal Galois action are continuous norm topological finite dimensional l adic representations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.finFree",
+     "Condensed.profiniteFree",
+     "CondensedMod.LocallyConstant.functor",
+     "Condensed.profiniteSolid",
+     "LocallyConstant.freeOfProfinite",
+     "LightCondMod.LocallyConstant.functor",
+     "CondensedMod.ofSheafProfinite",
+     "LightCondMod.LocallyConstant.functorToPresheaves"
+    ],
+    "digest": "c99ca2016a0cf901"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Free condensed modules and continuous coinduction do not reconstruct all variable internal actions or the norm lisse field equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An internal action of a profinite group on continuous function modules C P E n is recovered by evaluating at identity and basis vectors",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "leanfinder",
+    "query": "An internal action of a profinite group on continuous function modules C P E n is recovered by evaluating at identity and basis vectors",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.Iobj_ρ_apply",
+     "ContinuousCohomology.I_obj_ρ_apply",
+     "ContinuousCohomology.I",
+     "ContinuousCohomology.Iobj",
+     "TannakaDuality.FiniteGroup.ofRightFDRep",
+     "TannakaDuality.FiniteGroup.ofRightFDRep_hom",
+     "TannakaDuality.FiniteGroup.sumSMulInv",
+     "TannakaDuality.FiniteGroup.rightRegular"
+    ],
+    "digest": "45c6aa054d0c6ecf"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Free condensed modules and continuous coinduction do not reconstruct all variable internal actions or the norm lisse field equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ContinuousLinearMap\"",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"ContinuousLinearMap\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Free condensed modules and continuous coinduction do not reconstruct all variable internal actions or the norm lisse field equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional norm continuous representations from internal condensed module group actions",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "leansearch",
+    "query": "Finite dimensional norm continuous representations from internal condensed module group actions",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Proetale).*(lisse|Lisse|representation|Representation)|(lisse|Lisse).*Condensed",
+   "results": {
+    "t": "2026-10-22T06:06:08Z",
+    "tool": "grep",
+    "query": "(Condensed|Proetale).*(lisse|Lisse|representation|Representation)|(lisse|Lisse).*Condensed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Tactic/Linter/DirectoryDependency.lean"
+    ],
+    "digest": "5e2fbdff2b98750b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Free condensed modules and continuous coinduction do not reconstruct all variable internal actions or the norm lisse field equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal linear actions of a profinite condensed group on finite free modules over a normed field are continuous matrix representations",
+   "results": {
+    "t": "2026-10-23T04:24:56Z",
+    "tool": "leanfinder",
+    "query": "Internal linear actions of a profinite condensed group on finite free modules over a normed field are continuous matrix representations",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.I",
+     "ContinuousCohomology.I_obj_ρ_apply",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul",
+     "ContinuousCohomology.I_map_hom",
+     "ContinuousCohomology.Iobj",
+     "CategoryTheory.PreGaloisCategory.toAut_continuous",
+     "Module.Basis.continuous_toMatrix",
+     "ContinuousCohomology.instLinearActionTopModuleCatI"
+    ],
+    "digest": "0a0449d5a04535f3"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ordinary continuous coinduction or free/discrete condensed modules do not identify all internal variable actions or establish the lisse field equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Proetale).*(lisse|Lisse|representation|Representation)|(lisse|Lisse).*Condensed",
+   "results": {
+    "t": "2026-10-23T04:26:44Z",
+    "tool": "grep",
+    "query": "(Condensed|Proetale).*(lisse|Lisse|representation|Representation)|(lisse|Lisse).*Condensed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Tactic/Linter/DirectoryDependency.lean"
+    ],
+    "digest": "5e2fbdff2b98750b"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ordinary continuous coinduction or free/discrete condensed modules do not identify all internal variable actions or establish the lisse field equivalence."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional norm continuous representations from internal condensed module group actions",
+   "results": {
+    "t": "2026-10-23T04:26:44Z",
+    "tool": "leansearch",
+    "query": "Finite dimensional norm continuous representations from internal condensed module group actions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.norm",
+     "LinearMap.continuousLinearMapClassOfFiniteDimensional",
+     "Rep.norm_hom",
+     "Representation.norm",
+     "Representation.leftRegular_norm_apply",
+     "Representation.norm_self_apply",
+     "Representation.self_comp_norm",
+     "Representation.asModule"
+    ],
+    "digest": "fef36e4e4dd192ea"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ordinary continuous coinduction or free/discrete condensed modules do not identify all internal variable actions or establish the lisse field equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ContinuousLinearMap\"",
+   "results": {
+    "t": "2026-10-23T04:26:44Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"ContinuousLinearMap\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ordinary continuous coinduction or free/discrete condensed modules do not identify all internal variable actions or establish the lisse field equivalence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A condensed module linear map between finite powers of the continuous function ring is a constant matrix and a profinite internal action is continuous",
+   "results": {
+    "t": "2026-10-23T04:26:54Z",
+    "tool": "leanfinder",
+    "query": "A condensed module linear map between finite powers of the continuous function ring is a constant matrix and a profinite internal action is continuous",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteSolid",
+     "Condensed.profiniteFree",
+     "CondensedMod.LocallyConstant.functor",
+     "Condensed.finFree",
+     "LightCondMod",
+     "LightCondMod.LocallyConstant.functorToPresheaves",
+     "ContinuousCohomology.I",
+     "CondensedMod.LocallyConstant.functorToPresheaves"
+    ],
+    "digest": "3f99f77379be3acb"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ordinary continuous coinduction or free/discrete condensed modules do not identify all internal variable actions or establish the lisse field equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "def equivFunL|theorem continuous_equivFun|def toContinuousLinearEquiv",
+   "results": {
+    "t": "2026-10-23T04:27:43Z",
+    "tool": "grep",
+    "query": "def equivFunL|theorem continuous_equivFun|def toContinuousLinearEquiv",
+    "sub": "Analysis/Normed/Module",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for a proof input only, not for the item: finite-dimensional coordinate homeomorphism is supplied already by lem-sfb-finite-dimensional-linear-map-continuous. No new node is created."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite basis of a finite dimensional normed space is a homeomorphism with coordinate space",
+   "results": {
+    "t": "2026-10-23T04:27:44Z",
+    "tool": "leansearch",
+    "query": "A finite basis of a finite dimensional normed space is a homeomorphism with coordinate space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "FiniteDimensional.fintypeBasisIndex",
+     "Module.Basis.ofZLatticeBasis",
+     "continuous_equivFun_basis",
+     "IsLocalFrameOn.fintype_of_finiteDimensional",
+     "Module.Basis.coe_toOrthonormalBasis_repr",
+     "IsLocalFrameOn.fintypeOfFiniteDimensional",
+     "AffineEquiv.toHomeomorphOfFiniteDimensional",
+     "OrthonormalBasis.repr"
+    ],
+    "digest": "359c6a67199225ea"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for a proof input only, not for the item: finite-dimensional coordinate homeomorphism is supplied already by lem-sfb-finite-dimensional-linear-map-continuous. No new node is created."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis.equivFunL",
+   "results": {
+    "t": "2026-10-23T04:27:44Z",
+    "tool": "loogle",
+    "query": "Module.Basis.equivFunL",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Module.Basis.equivFunL",
+     "Module.Basis.equivFunL_apply",
+     "Module.Basis.equivFunL_symm_apply_repr",
+     "Module.Basis.opNorm_le",
+     "Module.Basis.opNNNorm_le",
+     "Module.Basis.parallelepiped_eq_map",
+     "NumberField.mixedEmbedding.fundamentalCone.abs_det_completeBasis_equivFunL_symm"
+    ],
+    "digest": "3a6784aeb228cb98"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for a proof input only, not for the item: finite-dimensional coordinate homeomorphism is supplied already by lem-sfb-finite-dimensional-linear-map-continuous. No new node is created."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every basis of a finite dimensional normed vector space over a complete nontrivially normed field gives a continuous linear equivalence with a finite product of the field",
+   "results": {
+    "t": "2026-10-23T04:27:52Z",
+    "tool": "leanfinder",
+    "query": "Every basis of a finite dimensional normed vector space over a complete nontrivially normed field gives a continuous linear equivalence with a finite product of the field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "continuous_equivFun_basis",
+     "ContinuousLinearEquiv.ofFinrankEq",
+     "Module.Basis.coe_constrL",
+     "ContinuousLinearEquiv.piRing",
+     "Module.Basis.constrL_basis",
+     "toEuclidean",
+     "FiniteDimensional.nonempty_continuousLinearEquiv_of_finrank_eq",
+     "LinearEquiv.toLinearEquiv_toContinuousLinearEquiv"
+    ],
+    "digest": "a71039cc69e3eacb"
+   },
+   "date": "2026-10-23",
+   "verdict": "match for a proof input only, not for the item: finite-dimensional coordinate homeomorphism is supplied already by lem-sfb-finite-dimensional-linear-map-continuous. No new node is created."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-field-action-derived-section-transport",
+  "date": "2026-10-22",
+  "group": "Q81"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), geometric/coefficient normalization beneath lem-sfb-geometric-condensed-finite-scalar-model; extracted returned field-action proof steps 14, 15, 16.",
+   "via": [
+    "lem-sfb-field-action-derived-section-transport",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-field-free-orbit-norm-lisse-reconstruction",
+  "worker": "stage1",
+  "summary": "Statement retained. Eight explicit proof steps reconstruct every variable internal action and every morphism from finite matrices. Reuse the existing separable-Cech coordinates node for the geometric cover/triviality and the existing Mathlib continuity leaf for basis homeomorphisms and all linear arrows. No new nodes; all additional calculations are finite-basis, naturality, product-topology or group-law calculations. Recorded actual Q105 searches, checked all cited statements and the rank-zero, empty-test and trivial-group cases. Maintainer-reader fix (Q105, 2026-10-23): the undefined hypothesis 'ringed-topos field presentation' is spelled out as the additive equivalence with section, regular-ring and forgetting normalizations that both citers supply; step 1 now cites lem-sfb-field-action-topos-coefficients (for k^s) for the module equivalence Mod(R_sbar) ~ Mod_R used to transport the free trivialization back; step 8 states the use of the equivalence.",
+  "blueprint": "Paragraph (3) of the ctf stability direct-image proof, through the inherited geometric/coefficient normalization chain: returned field-action steps 14 (lisse iff free), 15 (actions from continuous matrices), 16 (intertwiners and equivalence). The ancestor tool reports null; the existing null ancestor and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q105-c630c92c8",
+  "group": "Q105",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-c630c92c8 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, every cited statement, both citers (field-action-derived-section-transport step 6, geometric-finite-cohomology-model step 4), Bhatt–Scholze Example 4.1.10 / Lemma 4.2.12 / Definition 6.8.3, and the blueprint direct-images paragraph (3). The item is still unsplit live with the same statement, there is no repair note, no new nodes and no SGA. Steps 2-7 are correct: the basis maps are homeomorphisms by the Mathlib leaf. The action is extracted at (G, id_G); naturality plus R(P)-linearity gives (g·w)(p)=A(g(p))w(p). The group laws hold at the point. The converse construction and its inverse are checked. Morphisms are constant matrices, and equivariance is equivalent to BA=A'B. Edge cases n=0, P empty, G=1, nonconstant g and w, and char k=ℓ all work. There is no duplicate: cor-galois-lisse-representations uses a different (étale ℓ-adic, ℓ-invertible) coefficient category. Two faults are repaired in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-field-free-orbit-norm-lisse-reconstruction.json. (1) B3/step 8: 'ringed-topos field presentation' is defined by no node, and the equivalence conclusion needs E_R to be an equivalence. The statement now spells it out as an additive equivalence Mod_{R_s}≃A_G(R) with (E_RN)(P)=N(s̄[P]), E_R(R_s)≅R with trivial action, and forgetting = restriction to s̄ followed by L↦(P↦L(s̄[P])). Both citers supply exactly this. Step 8 now uses the equivalence explicitly. (2) C1/step 1: the converse M≅R^n ⇒ N|_s̄≅R_s̄^n needs Mod(R_s̄)≃Mod_R. Step 1 now cites lem-sfb-field-action-topos-coefficients (same unit, reviewed, no cycle) applied to k^s with trivial group; proof_deps is updated to match. No tool_uses.; 1 file(s) fixed by the reviewer"
+ }
+}

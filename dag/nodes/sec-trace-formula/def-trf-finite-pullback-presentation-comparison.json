@@ -1,0 +1,116 @@
+{
+ "id": "def-trf-finite-pullback-presentation-comparison",
+ "kind": "definition",
+ "title": "Unit-normalized finite pullback presentation comparison",
+ "status": "split",
+ "statement": "Let $\\ell$ be a prime and $E/\\mathbf Q_\\ell$ a finite extension with its fixed valuation ring and uniformizer, and put $A=\\mathcal O_E/\\varpi_E^{n+1}$ for $n\\geq0$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be any morphism of schemes, using the small pro-etale sites [def-weil-pbc-proetale-site]. Let $F_f$ be the intrinsic finite derived pullback [def-weil-derived-pullback-tensor-hom], and let $P_f$ be the constant-ring tensor derived pullback [def-weil-pbc-proetale-operations], both from $D(Y_{\\mathrm{proet}},A)$ to $D(X_{\\mathrm{proet}},A)$. Define $b_f:F_f\\xrightarrow{\\sim}P_f$ by applying the exact termwise-derived functor to the composite of the inverse intrinsic inverse-image/module-pullback adjunction comparison and the unique unit-normalized module-pullback presentation comparison of [lem-weil-pbc-proetale-derived-pullback-composition]. Thus both underlying ordinary comparisons are the existing adjunction comparisons that preserve $x\\mapsto x\\otimes1$; this defines the specified change of presentation, not an arbitrary natural isomorphism.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D3, module pullback adjunction; Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition; the finite presentation comparisons in the extracted local-normalization Step 2 of the blueprint common-stage Frobenius transport sentence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Unit normalized comparison of intrinsic finite coefficient derived pullback and constant ring tensor derived pullback",
+   "results": "8 hits: Polynomial.coe_normUnit, VectorField.mpullback_smul_apply, Seminorm.pullback, VectorField.mpullback_eq_pullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, Seminorm.pullback.congr_simp, PowerSeries.normUnit_X, Polynomial.normUnit_X",
+   "date": "2026-10-22",
+   "verdict": "Use the existing Sheaf declaration; no new Lean definition. No separate DAG definition node owns this presentation comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategoryNatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'Functor.mapDerivedCategoryNatIso'",
+   "date": "2026-10-22",
+   "verdict": "Use the existing Sheaf declaration; no new Lean definition. No separate DAG definition node owns this presentation comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "pointPowerPullbackModel|inverseImageFiniteIntrinsicPullbackComparison|integralFinitePullbackModel",
+   "results": "0 hits: ; direct rg in lean/WeilConjectures found no pointPowerPullbackModel; lean/Sheaf has its definition at TraceFormula/PointTransportComposition.lean:178; six DAG records mention it, but none is a definition node for this comparison. blueprint_refs.py search pointPowerPullbackModel and finite pullback presentation both returned 0 matches.",
+   "date": "2026-10-22",
+   "verdict": "Use the existing Sheaf declaration; no new Lean definition. No separate DAG definition node owns this presentation comparison."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-iterated-return-transport-scalar-calculus",
+  "date": "2026-10-22",
+  "group": "Q65"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Last sentence, Frobenius transport: the finite-coefficient return-square comparison in local normalization Step 2.",
+   "via": [
+    "lem-trf-iterated-return-transport-scalar-calculus",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.TraceFormula.PointTransportComposition",
+  "declaration": "WeilConjectures.pointPowerPullbackModel",
+  "statement": "def pointPowerPullbackModel (n : ℕ) {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    finiteDerivedPullback l E n f ≅\n      proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E (n + 1)) f",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "The existing plain definition at lines 178–188 is exactly this comparison. The theorem node lem-trf-point-transport-composition lists it as a helper but its mathematical statement gives the transport composition law, not this definition. This definition node owns that existing notion without copying a module or changing either existing node record. Its only section parameters are l, its prime instance, E and its field/algebra/finite-dimensional instances; it has no finite-field datum, characteristic restriction, or invertibility binder."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81ad7445",
+  "group": "Q65",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e81ad7445",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Item module unchanged since ed72 (PASS). The repair of the L duplicate return made def-trf-realized-pullback-comparisons publicly import Sheaf.Paper.LocalFrobeniusTransportNormalization and use LocalFrobeniusTransport.rationalScalar_existsUnique. That module's node lem-trf-local-frobenius-transport-normalization has this item in proof_deps: an import cycle at stage 3, plus an uncited owner (H12) whose citation closes a DAG cycle (C6). FIX: fixes/RealizedPullbackComparisons.lean drops the import and defines integralComparisonRationalScalar as NatIso.ofComponents of integralComparisonRationalScalarComponent (eqToIso of the recorded rationalDerivedPullback/sfRationalScalarExtension object clauses, Q_M.mapIso of isoMk(integralComparisonScalar C f), eqToIso), the same components as the old HEq pin, with a named sorry theorem …Component_naturality (not a duplicate). fixes/def-trf-realized-pullback-comparisons.json updates the statement sentence, declarations (+2), full signature and note; stmt_deps unchanged and cover all uses. nt_compile --json: fixed module 20.3 s clean; with the unchanged item module 19.0 s + 18.0 s clean. Mechanical theorem-stmt_dep finding: sfRationalScalarUnit/Comp and fieldScalarUnit are .choose of ∃! theorems, objects constructed → PASS on that point. Mathematics re-checked (m=r+1, v via eqToIso w, I recursion, naturality at 3 stages, both scalar identities incl. whole systems, unit/tower, edge cases m=1, z=id, E=M, n=0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E7",
+  "result": "pass",
+  "landing": "20261025T162312-L-412692",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.pointPowerFiniteSigma_existsUnique",
+   "WeilConjectures.point_transport_composition"
+  ],
+  "sorry_after": [
+   "WeilConjectures.point_transport_composition"
+  ]
+ }
+}

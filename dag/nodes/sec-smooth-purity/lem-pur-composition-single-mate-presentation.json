@@ -1,0 +1,142 @@
+{
+ "id": "lem-pur-composition-single-mate-presentation",
+ "kind": "statement",
+ "title": "Single-map tensor-mate presentation",
+ "statement": "Fix the finite purity datum P of [def-pur-conventions]. Let f:X\\to Y be a smooth separated morphism of pure relative dimension d\\geq0 between finite-type k-schemes, over k. Let K\\in D^b_{ctf}(Y,A) in the intrinsic small pro-etale category. Write E_T for the canonical equivalence from constant ModuleCat coefficient coordinates to the intrinsic category, M=E_Y^{-1}K, S_f=Lf^*, and G_f=Rf^! in constant coefficient coordinates [lem-pur-composition-tensor-mate]. Let o_f=\\vartheta_f\\circ\\operatorname{modelOrientationUnit}_f be the specified orientation \\omega_f=G_f(1_Y)\\cong A_X(d)[2d] of [def-pur-composition-model-orientation-coordinates], where \\vartheta_f is the diagonal orientation of [def-pur-smooth-purity-map]. Define J_{f,d,K}:T_f^dK\\cong E_X(S_fM\\otimes A_X(d)[2d]) to be E_X of the canonical twist/shift reassociation followed by the tensor of the inverse exact/left-derived pullback comparison with the identity of the shifted Tate power. Then, with diagrammatic composition, the specified smooth purity map satisfies\n\\[\\gamma_{f,K}=J_{f,d,K};E_X((1_{S_fM}\\otimes o_f^{-1});\\theta_{f,M}).\\]\nHere theta is precisely the standing inverse-projection/counit transpose of [lem-pur-composition-tensor-mate], and the source and exceptional target are the original ones of [def-pur-smooth-purity-map]. No composition law or second morphism is assumed.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-smooth-purity-map",
+  "def-pur-composition-comparisons",
+  "def-pur-composition-model-orientation-coordinates",
+  "lem-pur-composition-tensor-mate"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 2: the K-form; Single-map tensor-mate presentation"
+ },
+ "proof": [
+  {
+   "text": "Choose a bounded etale representative of K using constructible origin. The universal characterization of the specified smoothPurityTensorMap computes it as inverse diagonal orientation followed by smoothPurityTheta in this representative.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "lem-sf-proetale-constructible-origin"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute the transpose of this theta in the standing Hom bijection. Naturality of the exact comparison, the derived projection comparison and the adjunction triangles identify it with inverse projection followed by the standing counit and the unit constraint. The coefficient-unit comparison is exactly modelOrientationUnit, so the inverse orientation becomes o_f inverse. Equality follows from injectivity of that Hom bijection.",
+   "uses": [
+    "thm-sf-ambient-adjoint-class",
+    "lem-pur-composition-tensor-mate",
+    "def-pur-composition-model-orientation-coordinates",
+    "lem-pur-projection-formula-coefficient-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Precompose with the exact/left-derived pullback comparison and the fixed shift reassociation. These are the two factors of J. Apply the intrinsic realization functor to get the displayed identity. In rank zero the same factors are the unit constraints.",
+   "uses": [
+    "def-pur-smooth-purity-map",
+    "def-pur-composition-comparisons"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-smooth-purity-map",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "lem-pur-composition-tensor-mate",
+  "def-pur-composition-model-orientation-coordinates",
+  "lem-pur-projection-formula-coefficient-coherence",
+  "def-pur-composition-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "Step 2, interface expansion of the specified canonical maps"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a smooth purity morphism is the tensor product with the inverse orientation followed by the exceptional adjunction tensor mate",
+   "results": "8 hits, including tensorRightHomEquiv and tensorRightAdjunction; no smooth purity presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits, including homEquiv and its unit/counit formulas; no site comparison presentation.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "purity.*mate|orientation.*theta",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity map as inverse diagonal orientation followed by tensor adjunction mate",
+   "results": "8 hits, including mateEquiv and tensorRightAdjunction; no smooth purity statement.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 2: the tensor formula is compatible with composition by its definition; twist isomorphisms are compatible with pullback composition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurityCompositionCoherence",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompositionSingleMatePresentation",
+  "file": "lean/Sheaf/Paper/CompositionSingleMatePresentation.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.composition_single_mate_presentation",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.compositionMateSource",
+   "WeilConjectures.PurityFiniteSetting.composition_single_mate_presentation"
+  ],
+  "statement": "theorem composition_single_mate_presentation (f : X ⟶ Y)\n    [f.IsOver (Spec (.of P.field.k))]\n    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (d : ℕ) [SmoothOfRelativeDimension d f]\n    (K : Scheme.proEtaleDerivedCategory Y P.Ring)\n    (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y K) :\n    letI := P.noetherian (Y ↘ Spec (.of P.field.k))\n    letI := Dnc.compactifiable P f (Y ↘ Spec (.of P.field.k))\n    letI : IsNoetherianRing P.Coefficient := isNoetherian_of_finite _ _\n    letI := ProEtale.upperStarPreservesFlat_moduleCat P.Coefficient\n    letI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace\n      (Y ↘ Spec (.of P.field.k))\n    let M := (Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj K\n    P.smoothPurityMap f d K hK =\n      (P.compositionMateSource f d K).hom ≫\n        (Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.map\n          ((S P.Coefficient f).obj M ◁\n            (P.modelOrientation d f (Y ↘ Spec (.of P.field.k))).inv ≫\n              theta P.Coefficient f M)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6e650",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261026T001447-L-738",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-6e650",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261026T001447-L-738",
+  "kind": "interface",
+  "note": "independent cc review: thm-pur-composition-coherence node and its two new lemma nodes against PurityCompositionCoherence / CompositionSingleMatePresentation / CompositionIteratedMateExpansion; PurityCompositionComparisons against the clone's old item module (verbatim extraction); all 14 direct importers compiled in sandbox"
+ }
+}

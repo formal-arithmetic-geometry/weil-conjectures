@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-bounded-bialgebra-top-degree-exterior",
+ "kind": "statement",
+ "title": "Exterior criterion for a bounded connected graded bialgebra",
+ "statement": "Let $k$ be a perfect field [def-weil-field]: in characteristic $p>0$ every element has a $p$th root. Let $H=\\bigoplus_{i\\geq0}H^i$ be a graded unital associative $k$-algebra, finite dimensional as a $k$-vector space, with $H^0=k\\cdot1$ and $1\\ne0$. Assume $xy=(-1)^{ij}yx$ for $x\\in H^i,y\\in H^j$. Give $H\\otimes_kH$ multiplication $(a\\otimes b)(c\\otimes d)=(-1)^{\\deg b\\deg c}ac\\otimes bd$. Suppose $\\Delta:H\\to H\\otimes_kH$ is a degree-preserving coassociative unital algebra map, and projection $\\varepsilon:H\\to H^0=k$ satisfies $(\\varepsilon\\otimes1)\\Delta=(1\\otimes\\varepsilon)\\Delta=\\mathrm{id}_H$. Let $g\\geq0$ satisfy $\\dim_kH^1=g$ and $H^i=0$ for $i>g$. Then every $v\\in H^1$ has $v^2=0$, and multiplication induces an isomorphism of graded $k$-algebras $\\bigwedge_k^*H^1\\xrightarrow{\\sim}H$, sending $v_1\\wedge\\cdots\\wedge v_i$ to $v_1\\cdots v_i$, with the exterior algebra defined in [def-weil-pbc-exterior-algebra].",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55, equality case, with the coassociative algebra-map and counit hypotheses made explicit. Its proof invokes Borel 1953; that structure theorem is not supplied by the existing primitive-product lemma."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-borel-graded-bialgebra-monomial-basis] to $H$: perfectness, finite dimension, connectedness, the signed algebra-map condition, coassociativity and both counit identities are precisely the stated hypotheses. Obtain homogeneous $x_j$, positive degrees $d_j$ and heights $N_j\\geq2$, with the indicated bounded ordered monomials a basis.",
+   "uses": [
+    "lem-sfb-borel-graded-bialgebra-monomial-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, proof: the Borel (1953) structure theorem and the equality-case degree argument."
+   }
+  },
+  {
+   "text": "In this homogeneous basis the degree-one monomials are exactly the single generators with $d_j=1$, so their number is $g$. The basis monomial $\\prod_jx_j^{N_j-1}$ is nonzero in degree $D=\\sum_j(N_j-1)d_j$, hence $D\\leq g$. Each of the $g$ degree-one generators contributes at least $1$ to $D$, and every additional generator contributes positively. Thus there are exactly $g$ generators, all $d_j=1$, and every $N_j=2$. The basis is therefore the squarefree ordered products of these generators. This includes $g=0$, when the basis is $\\{1\\}$.",
+   "uses": [
+    "lem-sfb-borel-graded-bialgebra-monomial-basis"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, proof: the Borel (1953) structure theorem and the equality-case degree argument."
+   }
+  },
+  {
+   "text": "Write $v=\\sum_jc_jx_j\\in H^1$. Since $x_j^2=0$ and $x_ix_j+x_jx_i=0$, expansion gives $v^2=\\sum_jc_j^2x_j^2+\\sum_{i<j}c_ic_j(x_ix_j+x_jx_i)=0$. This uses no division by $2$, so it also proves the assertion in characteristic $2$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, proof: the Borel (1953) structure theorem and the equality-case degree argument."
+   }
+  },
+  {
+   "text": "For each $i$, the product map $(v_1,\\ldots,v_i)\\mapsto v_1\\cdots v_i$ is multilinear and alternating: move repeated factors together using the sign rule, then use $v^2=0$. By [lem-trf-exterior-power-universal-property] it factors uniquely through $\\phi_i:\\bigwedge_k^iH^1\\to H^i$ with the displayed product formula. For $i=0$ this is $k\\to H^0$, $c\\mapsto c1$.",
+   "uses": [
+    "lem-trf-exterior-power-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, proof: the Borel (1953) structure theorem and the equality-case degree argument."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exterior-power-free-basis], the increasing wedges in the basis $x_1,\\ldots,x_g$ are a basis in each exterior degree. Their images under $\\phi_i$ are precisely the squarefree monomial basis in degree $i$ from Step 2, so every $\\phi_i$ is bijective (both sides are zero for $i>g$). Their direct sum is unital and multiplicative: on spanning pure wedges both orders of multiplication give the same concatenated product in $H$, by [def-weil-pbc-exterior-algebra]. Thus it is the asserted graded algebra isomorphism, induced by multiplication and independent of the chosen basis.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-exterior-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "I Lemma 12.2, printed p.55, proof: the Borel (1953) structure theorem and the equality-case degree argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-graded-bialgebra-monomial-basis",
+  "lem-trf-exterior-power-universal-property",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "def-weil-pbc-exterior-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "I Lemma 12.2, printed p.55, proof: the Borel (1953) structure theorem and the equality-case degree argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A connected finite dimensional graded commutative bialgebra over a perfect field vanishing above dimension H1 is an exterior algebra on H1",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ExteriorAlgebra\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"(R : Type u1) → [inst : CommRing R] → (M : Type u2) → [inst_1 : AddCommGroup M] → [Module R M] → Type (max u2 u1)\", \"doc\": \"The exterior algebra $ \\\\Lambda_R(M) $ over a commutative ring $ R $ and an $ R $-module $ M $ is defined as the Clifford algebra associated with the zero quadratic form on $ M $. This enforces the fun\"}\n  {\"name\": \"ExteriorAlgebra.gradedAlgebra\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading\", \"type\": \"(R : Type u_1) →\\n  (M : Type u_2) →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → GradedAlgebra fun i => ⋀[R]^i M\", \"doc\": \"The exterior algebra $\\\\Lambda_R(M)$ over a commutative ring $R$ and $R$-module $M$ is a graded algebra indexed by the natural numbers $\\\\mathbb{N}$, where each grade $i$ corresponds to the $i$-th exter\"}\n  {\"name\": \"ExteriorAlgebra.GradedAlgebra.ι_sq_zero\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (m : M),\\n  (ExteriorAlgebra.GradedAlgebra.ι R M) m * (ExteriorAlgebra.GradedAlgebra.ι R M) m = 0\", \"doc\": \"For any element $ m $ in an $ R $-module $ M $, the square of its image under the canonical inclusion map $ \\\\iota: M \\\\to \\\\bigoplus_{i \\\\in \\\\mathbb{N}} \\\\bigwedge^i_R M $ into the graded exterior algebra\"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"ExteriorAlgebra.induction\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"∀ {R : Type u1} [inst : CommRing R] {M : Type u2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {C : ExteriorAlgebra R M → Prop},\\n  (∀ (r : R), C ((algebraMap R (ExteriorAlgebra R M)) r)) →\\n    (∀ (x : M), C ((ExteriorAlgebra.ι R) x)) →\\n      (∀ (a b : ExteriorAlgebra R M), C a → C b → C (a * b)\", \"doc\": \"For any property $ C $ on the exterior algebra $ \\\\Lambda_R(M) $, if $ C $ holds for all elements in the image of the canonical algebra homomorphism $ R \\\\to \\\\Lambda_R(M) $ and for all elements in the i\"}\n  {\"name\": \"ExteriorAlgebra.instNontrivial\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"∀ {R : Type u1} [inst : CommRing R] {M : Type u2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Nontrivial R],\\n  Nontrivial (ExteriorAlgebra R M)\", \"doc\": \"Given a nontrivial commutative ring $ R $ and an $ R $-module $ M $, the exterior algebra $ \\\\Lambda_R(M) $ is nontrivial. This follows because the exterior algebra contains $ R $ as its degree-0 compo\"}\n  {\"name\": \"ExteriorAlgebra.lift\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"(R : Type u1) →\\n  [inst : CommRing R] →\\n    {M : Type u2} →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          {A : Type u_1} →\\n            [inst_3 : Semiring A] →\\n              [inst_4 : Algebra R A] → { f // ∀ (m : M), f m * f m = 0 } ≃ (ExteriorAlgebra R M →ₐ[R] A)\", \"doc\": \"The equivalence between linear maps $ f : M \\\\to A $ (where $ A $ is an $ R $-algebra) satisfying $ f(m)^2 = 0 $ for all $ m \\\\in M $, and $ R $-algebra homomorphisms from the exterior algebra $ \\\\Lambda\"}\n  {\"name\": \"ExteriorAlgebra.GradedAlgebra.ι_apply\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (m : M),\\n  (ExteriorAlgebra.GradedAlgebra.ι R M) m = (DirectSum.of (fun i => ↥(⋀[R]^i M)) 1) ⟨(ExteriorAlgebra.ι R) m, ⋯⟩\", \"doc\": \"For any element $ m $ in an $ R $-module $ M $, the canonical inclusion map $ \\\\iota: M \\\\to \\\\bigoplus_{i \\\\in \\\\mathbb{N}} \\\\bigwedge^i_R M $ sends $ m $ to the element $ \\\\iota(m) $ in the first exterior \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ExteriorAlgebra.lift constructs a map only after square-zero generators are supplied; neither it, the grading API, nor ordinary ungraded HopfAlgebra definitions prove the bounded graded bialgebra criterion. Borel grep hits concern measurable spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"ExteriorAlgebra\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ExteriorAlgebra.lift constructs a map only after square-zero generators are supplied; neither it, the grading API, nor ordinary ungraded HopfAlgebra definitions prove the bounded graded bialgebra criterion. Borel grep hits concern measurable spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|graded.*bialgebra|bialgebra.*graded|Hopf.*exterior|exterior.*Hopf",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"536\", \"text\": \"variable {Ω : Type*} {m mΩ : MeasurableSpace Ω} {hm : m ≤ mΩ} [StandardBorelSpace Ω]\"}\n  {\"file\": \"Mathlib/Probability/Moments/SubGaussian.lean\", \"line\": \"872\", \"text\": \"variable [StandardBorelSpace Ω]\"}\n  {\"file\": \"Mathlib/Probability/Moments/Basic.lean\", \"line\": \"528\", \"text\": \"variable [OpensMeasurableSpace E] [MeasurableSpace F] [BorelSpace F] [SecondCountableTopology F]\"}\n  {\"file\": \"Mathlib/Probability/Moments/Basic.lean\", \"line\": \"553\", \"text\": \"variable [BorelSpace E] [MeasurableSpace F] [BorelSpace F]\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Function.lean\", \"line\": \"83\", \"text\": \"  borelize X\"}\n  {\"file\": \"Mathlib/Probability/Moments/CovarianceBilinDual.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.MeasureTheory.Constructions.BorelSpace.ContinuousLinearMap\"}\n  {\"file\": \"Mathlib/Probability/Moments/CovarianceBilinDual.lean\", \"line\": \"21\", \"text\": \"Let `μ` be a finite measure on a normed space `E` with the Borel σ-algebra. We then define\"}\n  {\"file\": \"Mathlib/Probability/Moments/CovarianceBilinDual.lean\", \"line\": \"225\", \"text\": \"variable [NormedSpace ℝ E] [BorelSpace E]\"}\n  {\"file\": \"Mathlib/Probability/Moments/CovarianceBilinDual.lean\", \"line\": \"233\", \"text\": \"omit [BorelSpace E] in\"}\n  {\"file\": \"Mathlib/Probability/Moments/CovarianceBilin.lean\", \"line\": \"46\", \"text\": \"  [MeasurableSpace E] [BorelSpace E] {μ : Measure E}\"}\n  {\"file\": \"Mathlib/Probability/Moments/CovarianceBilin.lean\", \"line\": \"114\", \"text\": \"    [MeasurableSpace F] [BorelSpace F] [SecondCountableTopology F] [CompleteSpace F]\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"41\", \"text\": \"  {X : Type*} [TopologicalSpace X] [R1Space X] [MeasurableSpace X] [BorelSpace X]\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"57\", \"text\": \"  borelize M\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"93\", \"text\": \"  borelize M\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"104\", \"text\": \"  [TopologicalSpace X] [R1Space X] [MeasurableSpace X] [BorelSpace X]\"}\n  {\"file\": \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"line\": \"129\", \"text\": \"  {X : Type*} [TopologicalSpace X] [R1Space X] [MeasurableSpace X] [BorelSpace X]\"}\n  {\"file\": \"Mathlib/MeasureTheory/MeasurableSpace/Card.lean\", \"line\": \"48\", \"text\": \"This construction is very similar to that of the Borel hierarchy. -/\"}\n  {\"file\": \"Mathlib/Probability/Independence/Conditional.lean\", \"line\": \"22\", \"text\": \"On standard Borel spaces, the conditional expectation with respect to `m'` defines a kernel\"}\n  {\"file\": \"Mathlib/Probability/Independence/Conditional.lean\", \"line\": \"80\", \"text\": \"variable (m' : MeasurableSpace Ω) {mΩ : MeasurableSpace Ω} [StandardBorelSpace Ω] (hm' : m' ≤ mΩ)\"}\n  {\"file\": \"Mathlib/Probability/Independence/Conditional.lean\", \"line\": \"116\", \"text\": \"    {mΩ : MeasurableSpace Ω} [StandardBorelSpace Ω]\"}\n  {\"file\": \"Mathlib/Probability/Independence/Conditional.lean\", \"line\": \"122\", \"text\": \"variable (m' : MeasurableSpace Ω) {mΩ : MeasurableSpace Ω} [StandardBorelSpace Ω]\"}\n  {\"file\": \"Mathlib/Probability/Independence/Conditional.lean\", \"line\": \"176\", \"text\": \"variable (m' : MeasurableSpace Ω) {mΩ : MeasurableSpace Ω} [StandardBorelSpace Ω] (hm' : m' ≤ mΩ)\"}\n  {\"file\": \"Mathlib/Probability/Independence/CharacteristicFunction.lean\", \"line\": \"34\", \"text\": \"  [BorelSpace E] [SecondCountableTopology E]\"}\n  {\"file\": \"Mathlib/Probability/Independence/CharacteristicFunction.lean\", \"line\": \"36\", \"text\": \"  [BorelSpace F] [SecondCountableTopology F]\"}\n  {\"file\": \"Mathlib/Probability/Independence/CharacteristicFunction.lean\", \"line\": \"132\", \"text\": \"    [BorelSpace E] [SecondCountableTopology E] {X : ι → Ω → E}\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ExteriorAlgebra.lift constructs a map only after square-zero generators are supplied; neither it, the grading API, nor ordinary ungraded HopfAlgebra definitions prove the bounded graded bialgebra criterion. Borel grep hits concern measurable spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded connected graded Hopf algebra whose first degree dimension equals top degree is exterior on primitive degree one elements",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ExteriorAlgebra.gradedAlgebra\", \"module\": \"Mathlib.LinearAlgebra.ExteriorAlgebra.Grading\", \"type\": \": GradedAlgebra (fun i : ℕ ↦ ⋀[R]^i M)\", \"doc\": \"The exterior algebra $\\\\Lambda_R(M)$ over a commutative ring $R$ and $R$-module $M$ is a graded algebra indexed by the natural numbers $\\\\mathbb{N}$, where each grade $i$ corresponds to the $i$-th exter\"}\n  {\"name\": \"ExteriorAlgebra.algebraMap_eq_one_iff\", \"module\": \"Mathlib.LinearAlgebra.ExteriorAlgebra.Basic\", \"type\": \"(x : R) : algebraMap R (ExteriorAlgebra R M) x = 1 ↔ x = 1\", \"doc\": \"The canonical ring homomorphism from a commutative ring $ R $ to the exterior algebra $ \\\\Lambda_R(M) $ satisfies $ \\\\phi(x) = 1 $ if and only if $ x = 1 $ in $ R $, where $ \\\\phi $ denotes the algebra m\"}\n  {\"name\": \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.FiniteType\", \"type\": \": ∃ s : Finset S, Algebra.adjoin (A := S) (𝒜 0) s = ⊤ ∧ ∀ i ∈ s, SetLike.IsHomogeneousElem 𝒜 i\", \"doc\": \"For any graded algebra $\\\\mathcal{A}$ over a commutative semiring, there exists a finite set $s$ of homogeneous elements such that the subalgebra generated by the zero-graded component $\\\\mathcal{A}(0)$\"}\n  {\"name\": \"ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower\", \"module\": \"Mathlib.LinearAlgebra.ExteriorAlgebra.Grading\", \"type\": \": SetLike.GradedMonoid fun i : ℕ ↦ ⋀[R]^i M\", \"doc\": \"The exterior algebra $\\\\Lambda_R(M)$ over a commutative ring $R$ and $R$-module $M$ is equipped with a graded monoid structure indexed by the natural numbers $\\\\mathbb{N}$, where each grade $i$ correspo\"}\n  {\"name\": \"GradedAlgebra\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Basic\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {A : Type u_3} →\\n      [DecidableEq ι] →\\n        [AddMonoid ι] →\\n          [inst : CommSemiring R] →\\n            [inst_1 : Semiring A] → [inst_2 : Algebra R A] → (ι → Submodule R A) → Type (max u_1 u_3)\", \"doc\": \"A structure on an algebra $ A $ over a commutative semiring $ R $, indexed by an additive monoid $ \\\\iota $, where each element $ i \\\\in \\\\iota $ corresponds to an $ R $-submodule $ \\\\sigma_i $ of $ A $. \"}\n  {\"name\": \"GradedTensorProduct.of_one\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.Internal\", \"type\": \": of R 𝒜 ℬ 1 = 1\", \"doc\": \"The canonical linear equivalence between the tensor product and the graded tensor product of algebras over a commutative ring $ R $ maps the multiplicative identity element $ 1 $ to the multiplicative\"}\n  {\"name\": \"ExteriorAlgebra.GradedAlgebra.liftι_eq\", \"module\": \"Mathlib.LinearAlgebra.ExteriorAlgebra.Grading\", \"type\": \"(i : ℕ) (x : ⋀[R]^i M) : GradedAlgebra.liftι R M x = DirectSum.of (fun i => ⋀[R]^i M) i x\", \"doc\": \"For each natural number $i$ and element $x$ in the $i$-th exterior power $\\\\bigwedge^i_R M$, the canonical graded algebra homomorphism $\\\\Lambda_R(M) \\\\to \\\\bigoplus_{i \\\\in \\\\mathbb{N}} \\\\bigwedge^i_R M$ ma\"}\n  {\"name\": \"TensorProduct.gradedComm_one\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Graded.External\", \"type\": \"[DirectSum.GSemiring 𝒜] [DirectSum.GSemiring ℬ] : gradedComm R 𝒜 ℬ 1 = 1\", \"doc\": \"The graded commutator between degree 1 components of two graded $ R $-algebras $ \\\\mathcal{A} $ and $ \\\\mathcal{B} $ is trivial, i.e., swapping tensor factors in $ \\\\mathcal{A}(1) \\\\otimes_R \\\\mathcal{B}(1\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ExteriorAlgebra.lift constructs a map only after square-zero generators are supplied; neither it, the grading API, nor ordinary ungraded HopfAlgebra definitions prove the bounded graded bialgebra criterion. Borel grep hits concern measurable spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Milne Hopf algebra lemma dimension of degree one equals largest possible nonzero cohomology degree implies exterior algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ExteriorAlgebra.instNontrivial\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"∀ {R : Type u1} [inst : CommRing R] {M : Type u2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Nontrivial R],\\n  Nontrivial (ExteriorAlgebra R M)\", \"doc\": \"Given a nontrivial commutative ring $ R $ and an $ R $-module $ M $, the exterior algebra $ \\\\Lambda_R(M) $ is nontrivial. This follows because the exterior algebra contains $ R $ as its degree-0 compo\"}\n  {\"name\": \"ExteriorAlgebra\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Basic\", \"type\": \"(R : Type u1) → [inst : CommRing R] → (M : Type u2) → [inst_1 : AddCommGroup M] → [Module R M] → Type (max u2 u1)\", \"doc\": \"The exterior algebra $ \\\\Lambda_R(M) $ over a commutative ring $ R $ and an $ R $-module $ M $ is defined as the Clifford algebra associated with the zero quadratic form on $ M $. This enforces the fun\"}\n  {\"name\": \"ExteriorAlgebra.gradedAlgebra\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading\", \"type\": \"(R : Type u_1) →\\n  (M : Type u_2) →\\n    [inst : CommRing R] → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → GradedAlgebra fun i => ⋀[R]^i M\", \"doc\": \"The exterior algebra $\\\\Lambda_R(M)$ over a commutative ring $R$ and $R$-module $M$ is a graded algebra indexed by the natural numbers $\\\\mathbb{N}$, where each grade $i$ corresponds to the $i$-th exter\"}\n  {\"name\": \"ExteriorAlgebra.GradedAlgebra.ι_sq_zero\", \"module\": \"Mathlib/LinearAlgebra/ExteriorAlgebra/Grading\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (m : M),\\n  (ExteriorAlgebra.GradedAlgebra.ι R M) m * (ExteriorAlgebra.GradedAlgebra.ι R M) m = 0\", \"doc\": \"For any element $ m $ in an $ R $-module $ M $, the square of its image under the canonical inclusion map $ \\\\iota: M \\\\to \\\\bigoplus_{i \\\\in \\\\mathbb{N}} \\\\bigwedge^i_R M $ into the graded exterior algebra\"}\n  {\"name\": \"groupCohomology.H1ofAutOnUnitsUnique\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"(K L : Type) →\\n  [inst : Field K] →\\n    [inst_1 : Field L] →\\n      [inst_2 : Algebra K L] → [FiniteDimensional K L] → Unique ↑(groupCohomology.H1 (Rep.ofAlgebraAutOnUnits K L))\", \"doc\": \"For any finite field extension $ L/K $, the first group cohomology module $ H^1(\\text{Aut}(L/K), L^\\times) $ is trivial, meaning it contains only the zero element. This implies every 1-cocycle in this c\"}\n  {\"name\": \"CommSemiring.toHopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"(R : Type u) → [inst : CommSemiring R] → HopfAlgebra R R\", \"doc\": \"Every commutative semiring $ R $ admits a canonical Hopf algebra structure over itself, where the antipode map is the identity function. This structure is constructed by equipping $ R $ with its natur\"}\n  {\"name\": \"HopfAlgebra\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [CommSemiring R] → [Semiring A] → Type (max u v)\", \"doc\": \"An inductive structure defining a Hopf algebra over a commutative semiring $ R $ and a semiring $ A $, encapsulating the algebraic and coalgebraic operations along with the antipode map required for t\"}\n  {\"name\": \"HopfAlgebraStruct\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/Basic\", \"type\": \"(R : Type u) → (A : Type v) → [CommSemiring R] → [Semiring A] → Type (max u v)\", \"doc\": \"The inductive structure defining a Hopf algebra over a commutative semiring $ R $, with $ A $ as a semiring, encompassing the necessary operations and axioms for a Hopf algebra.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: ExteriorAlgebra.lift constructs a map only after square-zero generators are supplied; neither it, the grading API, nor ordinary ungraded HopfAlgebra definitions prove the bounded graded bialgebra criterion. Borel grep hits concern measurable spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "graded.*bialgebra|bialgebra.*graded|Hopf.*exterior|exterior.*Hopf|Borel",
+   "results": "No hits in Mathlib/RingTheory (subdirectory RingTheory); command result n_hits=0.",
+   "date": "2026-10-24",
+   "verdict": "no match: targeted algebra source search contains no bounded graded Hopf exterior criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|monogenic|truncated.*polynomial|[Gg]raded.*[Hh]opf|[Hh]opf.*[Gg]raded",
+   "results": "{\"t\": \"2026-10-23T20:14:58Z\", \"tool\": \"grep\", \"query\": \"Borel|monogenic|truncated.*polynomial|[Gg]raded.*[Hh]opf|[Hh]opf.*[Gg]raded\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\", \"Mathlib/RingTheory/LocalRing/Etale.lean\"], \"digest\": \"1357a201be4c4039\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite dimensional graded commutative connected bialgebra has homogeneous generators whose bounded ordered monomials form a basis",
+   "results": "{\"t\": \"2026-10-23T20:14:58Z\", \"tool\": \"leansearch\", \"query\": \"Finite dimensional graded commutative connected bialgebra has homogeneous generators whose bounded ordered monomials form a basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra\", \"AddMonoidAlgebra.grade.gradedAlgebra\", \"Module.Basis.symmetricAlgebra\", \"AddMonoidAlgebra.gradeBy.gradedMonoid\", \"MvPolynomial.instFiniteSubtypeMemSubmoduleRestrictDegreeOfFinite\", \"MvPolynomial.HomogeneousSubmodule.gradedMonoid\"], \"digest\": \"d9f998a66def6afb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Bialgebra\", \"GradedAlgebra\"",
+   "results": "{\"t\": \"2026-10-23T20:14:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Bialgebra\\\", \\\"GradedAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel structure theorem finite dimensional connected graded commutative Hopf algebra is tensor product of monogenic truncated polynomial algebras",
+   "results": "{\"t\": \"2026-10-23T20:14:59Z\", \"tool\": \"leanfinder\", \"query\": \"Borel structure theorem finite dimensional connected graded commutative Hopf algebra is tensor product of monogenic truncated polynomial algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tacticHopf_tensor_induction_With__\", \"HopfAlgCat.tensorObj_instRing\", \"TensorProduct.instHopfAlgebra\", \"HopfAlgCat.tensorObj_carrier\", \"CommSemiring.toHopfAlgebra\", \"LaurentPolynomial.instHopfAlgebra\", \"HopfAlgCat.tensorObj_instHopfAlgebra\", \"LaurentPolynomial.comul_T\"], \"digest\": \"342896f65ac502a1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "Borel|[Hh]opf|[Bb]ialgebra|monomial.*basis",
+   "results": "{\"t\": \"2026-10-23T20:15:28Z\", \"tool\": \"grep\", \"query\": \"Borel|[Hh]opf|[Bb]ialgebra|monomial.*basis\", \"sub\": \"LinearAlgebra/ExteriorAlgebra\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded connected graded bialgebra over a perfect field with dimension H1 equal to its degree bound is the exterior algebra on H1",
+   "results": "{\"t\": \"2026-10-23T20:15:29Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded connected graded bialgebra over a perfect field with dimension H1 equal to its degree bound is the exterior algebra on H1\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ExteriorAlgebra\", \"ExteriorAlgebra.gradedAlgebra\", \"ExteriorAlgebra.GradedAlgebra.ι_sq_zero\", \"ExteriorAlgebra.GradedAlgebra.ι_apply\", \"ExteriorAlgebra.instGradedMonoidNatSubmoduleExteriorPower\", \"ExteriorAlgebra.instNontrivial\", \"ExteriorAlgebra.induction\", \"ExteriorAlgebra.GradedAlgebra.liftι\"], \"digest\": \"290bea22b40347b5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HopfAlgebra\", \"Basis\"",
+   "results": "{\"t\": \"2026-10-23T20:16:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"HopfAlgebra\\\", \\\"Basis\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite connected graded commutative Hopf algebra over a perfect field admits homogeneous nilpotent generators with independent ordered monomials below their nilpotence heights",
+   "results": "{\"t\": \"2026-10-23T20:16:36Z\", \"tool\": \"leanfinder\", \"query\": \"A finite connected graded commutative Hopf algebra over a perfect field admits homogeneous nilpotent generators with independent ordered monomials below their nilpotence heights\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous_ne_zero\", \"GradedAlgebra.exists_finset_adjoin_eq_top_and_homogeneous\", \"HomogeneousLocalization.Away.adjoin_mk_prod_pow_eq_top\", \"HomogeneousLocalization.Away.span_mk_prod_pow_eq_top\", \"linearIndep_groupLikeVal\", \"linearIndepOn_isGroupLikeElem\", \"TensorAlgebra.gradedAlgebra\", \"AddMonoidAlgebra.gradeBy.gradedAlgebra\"], \"digest\": \"00033e15af2fe2ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: homogeneous generation does not give independent bounded monomials or pure-power relations; ordinary Hopf tensor-product structure and exterior-algebra definitions do not give Borel decomposition or the degree-bound criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-coherent-exterior-base-change",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Canonical rigidified ample line module on smooth relative Jacobians. Prerequisite for the diagonal construction: Relative dual abelian spaces and normalized Poincare identities. Auxiliary for this split: Infinitesimal lifting of algebraically trivial rigidified line modules. Supporting input: Injectivity of the reduced coproduct in degree-two coherent cohomology. Supporting input: the relative exterior coherent-cohomology theorem, before the reduced-coproduct calculation; not a Picard infinitesimal-lifting assertion. Auxiliary: The field bialgebra equality case used on geometric fibres before the relative lifting argument.",
+   "via": [
+    "lem-sfb-abelian-coherent-exterior-base-change",
+    "lem-sfb-abelian-h2-reduced-coproduct-injective",
+    "lem-sfb-abelian-picard-infinitesimal-lift",
+    "lem-sfb-abelian-space-poincare-calculus",
+    "lem-sfb-smooth-jacobian-canonical-line",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-bounded-bialgebra-top-degree-exterior",
+  "worker": "stage1",
+  "summary": "Q32 checked Milne I Lemma 12.2 and retained the full bialgebra hypotheses. Isolated the general Borel homogeneous monomial-basis theorem, then wrote the weighted top-degree argument, characteristic-two square-zero expansion, and the canonical exterior comparison. Reused existing exterior universal-property and basis leaves.",
+  "blueprint": "Supporting field-bialgebra equality case below the coherent exterior base-change input of the inherited direct-image/alteration route; Milne I Lemma 12.2, proof, first sentence followed by its equality argument. Latest blueprint direct-images proof (3) read; no chapter or unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-ffc1e2788",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-ffc1e2788 (reviewer sub-agent of L); spot-checked: Pass with no fixes. Source: I read Milne AV I Lemma 12.2 (printed p.55, with formula (3)). The item is the lemma's equality case, stated with stronger explicit hypotheses (signed algebra map, coassociative, counital), and its statement is unchanged. Small cases: g=0; k[t]/(t^2); the exterior algebra on 2 generators; char-2 k[t]/(t^3), which the bound correctly excludes. Steps: S1 cites the new Borel node, whose hypotheses are exactly the item's minus the bound. S2 counts degrees on the homogeneous basis: exactly g degree-1 generators, and the nonzero top monomial has degree D<=g, which forces r=g, all d_j=1 and all N_j=2. S3 expands v^2 with no division by 2, so it holds in char 2. S4 shows the product map is alternating and applies the Mathlib leaf exteriorPower.alternatingMapLinearEquiv. S5 uses the free-basis leaf and concatenation in def-weil-pbc-exterior-algebra: basis goes to basis, the map is multiplicative and canonical. New node lem-sfb-borel-graded-bialgebra-monomial-basis is the correct Borel structure theorem: perfect field, finite-dimensional, monomial basis with heights N_j>=2, weak enough for char 2. It is exactly the input Milne quotes and does not restate the item (no degree bound). It is statement-only with 4 kinds of Mathlib search recorded (no match exists); Borel 1953 is reported as WANTED. Duplicate search (rg -L over dag/nodes for Borel/Hopf/bialgebra/monogenic/Lemma 12.2/exterior): graded-primitive-product, coherent-group-bialgebra, perfect-derived-bialgebra-exterior-rigidity and connected-finite-order are not duplicates. Route: every citation is in the same unit, a definition or a Mathlib leaf; no SGA. Batch-5 flag: lem-trf-exterior-power-universal-property is a generic Mathlib leaf for the universal property of exterior powers. It has empty proof_deps, its closure reaches neither the trace formula nor Poincare duality, and it is no step of their proofs, so it is accepted. Advisory: the new node lacks a lean_audit field."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.BoundedBialgebraExterior",
+  "declaration": "GradedAlgebra.bounded_bialgebra_exterior",
+  "file": "lean/Sheaf/RingTheory/BoundedBialgebraExterior.lean",
+  "statement": "theorem bounded_bialgebra_exterior (k : Type u) [Field k] [PerfectField k] (H : Type v) [Ring H] [Algebra k H] [Nontrivial H] [FiniteDimensional k H] (𝒜 : ℕ → Submodule k H) [GradedAlgebra 𝒜] (hconnected : 𝒜 0 = Submodule.span k {(1 : H)}) (hcomm : ∀ (i j : ℕ) (x : 𝒜 i) (y : 𝒜 j), (x : H) * (y : H) = (-1 : k) ^ (i * j) • ((y : H) * (x : H))) (Δ : H →ₗ[k] H ⊗[k] H) (ε : H →ₗ[k] k) (hdegree : ∀ (n : ℕ) (x : 𝒜 n), Δ x ∈ Submodule.span k {z | ∃ (i j : ℕ) (a : 𝒜 i) (b : 𝒜 j), i + j = n ∧ z = (a : H) ⊗ₜ[k] (b : H)}) (hunit : Δ 1 = (1 : H) ⊗ₜ[k] (1 : H)) (hmul : ∀ x y : H, GradedTensorProduct.of k 𝒜 𝒜 (Δ (x * y)) = GradedTensorProduct.of k 𝒜 𝒜 (Δ x) * GradedTensorProduct.of k 𝒜 𝒜 (Δ y)) (hcoassoc : ∀ x : H, TensorProduct.assoc k H H H (TensorProduct.map Δ LinearMap.id (Δ x)) = TensorProduct.map LinearMap.id Δ (Δ x)) (hprojection : ∀ x : H, algebraMap k H (ε x) = GradedAlgebra.proj 𝒜 0 x) (hcounit : ∀ x : H, TensorProduct.lid k H (TensorProduct.map ε LinearMap.id (Δ x)) = x ∧ TensorProduct.rid k H (TensorProduct.map LinearMap.id ε (Δ x)) = x) (g : ℕ) (hdim : Module.finrank k (𝒜 1) = g) (hbound : ∀ i : ℕ, g < i → 𝒜 i = ⊥) : (∀ x : 𝒜 1, (x : H) * (x : H) = 0) ∧ ∃ e : ExteriorAlgebra k (𝒜 1) ≃ₐ[k] H, (∀ (n : ℕ) (x : Fin n → 𝒜 1), e (ExteriorAlgebra.ιMulti k n x) = (List.ofFn fun i ↦ (x i : H)).prod) ∧ (∀ n : ℕ, (ExteriorAlgebra.exteriorPower k n (𝒜 1)).map e.toLinearMap = 𝒜 n)",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-23",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df8a0f148",
+  "group": "O1",
+  "result": "pass",
+  "note": "I read the item against Milne AV I Lemma 12.2 (p.55, equality case) and the stage-1-accepted bialgebra hypotheses. Every hypothesis has a matching Lean hypothesis and none is stronger: perfect field; graded algebra, finite dimensional, H^0 = k·1, 1 ≠ 0; sign rule (-1)^{ij}; Δ degree-preserving and an algebra map for the signed tensor product (GradedTensorProduct sign checked against Mathlib's tmul_coe_mul_coe_tmul); coassociativity; ε = degree-0 projection; both counit identities; dim H^1 = g; H^i = 0 for i > g. Conclusion: v² = 0 on H^1, plus an algebra iso ExteriorAlgebra k (𝒜 1) ≃ₐ[k] H pinned by the ιMulti product formula and graded via exteriorPower images. Edge cases g = 0, empty product and char 2 checked; universes u and v independent and bound. lean.statement is verbatim in the file. stmt_deps are Mathlib leaves (Field, ExteriorAlgebra). The node differs from live only in its lean field, and there is no parallel delivery. Docstrings carry the source place, the blueprint id and the five proof steps; the only proof is sorry; nothing is defined. The report has both sections. Plain imports serve the proof_deps. No recompile per the 2026-10-21 instruction, and no fixes."
+ }
+}

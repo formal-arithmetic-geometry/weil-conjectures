@@ -1,0 +1,236 @@
+{
+ "id": "lem-a1-flat-relation-qc-image-intersections",
+ "kind": "statement",
+ "title": "Flat quasi-compact relation images as intersections of quasi-compact opens",
+ "statement": "Let $R,V$ be schemes [def-pc-scheme], with $V$ quasi-separated [def-weil-quasi-separated-morphism], and let $s,t:R\\to V$ be flat quasi-compact morphisms [def-weil-flat-morphism, def-weil-finite-type-morphism]. For every quasi-compact open subset $H\\subseteq|V|$ [def-weil-pbc-quasi-compact-scheme], put $E=t(s^{-1}(H))$. Then $E$ is quasi-compact in the induced topology and is closed under generalization: if $y\\in E$ and $y\\in\\overline{\\{y'\\}}$, then $y'\\in E$. There exists a quasi-compact open $H_2\\subseteq V$ containing $E$. For every such $H_2$, the set $\\mathcal U=\\{U\\subseteq H_2:U\\text{ is open and quasi-compact, and }E\\subseteq U\\}$ is nonempty and $E=\\bigcap_{U\\in\\mathcal U}U$. Each member of $\\mathcal U$ is also a quasi-compact open subset of $V$, so the displayed equality is an intersection of a nonempty set-indexed family of quasi-compact opens of $V$. No equivalence relation or invariance hypothesis on $s,t$ is required.",
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0APA (lemma-first-observation), proof: quasi-compact generalization-stable image, containing quasi-compact open and spectral intersection argument. The proof uses no groupoid law."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-quasi-compact-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=s^{-1}(H)$, an open subset of $R$ by continuity. Cover $H$ by affine opens contained in $H$, using [lem-weil-pbc-affine-opens-basis]. Quasi-compactness of $H$ gives a finite subcover $H=H_1\\cup\\cdots\\cup H_n$. By the definition in [def-weil-finite-type-morphism], every $s^{-1}(H_i)$ is quasi-compact. Their finite union $A$ is quasi-compact: restrict an open cover to each of these finitely many sets and combine its finite subcovers. Apply [lem-weil-pbc-continuous-image-quasi-compact] to the continuous restriction $t|_A:A\\to V$. Its image is $E$, so $E$ is quasi-compact in the induced topology.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, proof"
+   }
+  },
+  {
+   "text": "Let $y=t(r)\\in E$, with $r\\in A$, and let $y\\in\\overline{\\{y\\prime\\}}$. Apply [lem-weil-pbc-flat-generalizations-lift] to the flat morphism $t$: there is $r\\prime$ with $r\\in\\overline{\\{r\\prime\\}}$ and $t(r\\prime)=y\\prime$. Since $A$ is open and contains $r$, its being an open neighbourhood of $r\\in\\overline{\\{r\\prime\\}}$ forces $r\\prime\\in A$. Thus $y\\prime\\in E$. This proves generalization stability without using any groupoid identity.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, proof"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-opens-basis], choose affine open neighbourhoods in $V$ of the points of $E$. They are quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Compactness of $E$ supplies finitely many of them covering $E$. Their union is a quasi-compact open $H_2$ of $V$: for an open cover of this union, take a finite subcover on each of the finitely many affine opens. If $E=\\varnothing$, the empty union gives $H_2=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, proof"
+   }
+  },
+  {
+   "text": "Fix any quasi-compact open $H_2$ containing $E$. The open subscheme $H_2$ is quasi-separated: cover it by affine opens using [lem-weil-pbc-affine-opens-basis]; these are affine opens of $V$, so their pairwise intersections are quasi-compact by clause (1) of [lem-weil-pbc-quasi-separated-affine-cover-criterion] for $V$. Clause (2) of that node applied to this cover gives quasi-separatedness of $H_2$. Hence [lem-weil-pbc-qcqs-scheme-spectral] makes $H_2$ spectral. The subspace topology on $E$ induced from $H_2$ is the one induced from $V$, so $E$ is still quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-scheme-spectral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-spectral-generalizations-of-quasi-compact] in $H_2$ to $E$. The set $W=\\{x\\in H_2:\\overline{\\{x\\}}^{H_2}\\cap E\\ne\\varnothing\\}$ equals the intersection of all quasi-compact opens of $H_2$ containing $E$. Here $W=E$: reflexivity gives $E\\subseteq W$, while if $e\\in E\\cap\\overline{\\{x\\}}^{H_2}$ then $e\\in\\overline{\\{x\\}}^V$, and step 2 gives $x\\in E$. Thus $E=\\bigcap_{U\\in\\mathcal U}U$ inside $H_2$. The family $\\mathcal U$ is a set, being a subfamily of the power set of $|H_2|$, and is nonempty since it contains $H_2$ itself. Every member is open in $V$ because $H_2$ is open, and is quasi-compact in $V$ because the induced topology on it is unchanged. Nonemptiness ensures the same intersection taken inside $V$ has no extra point outside $H_2$. This proves every clause, including the empty case, using no equivalence relation or invariance property.",
+   "uses": [
+    "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0APA, lemma-first-observation, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For flat quasi compact morphisms s and t from a scheme R to a quasi separated scheme V the image t of s inverse of a quasi compact open is an intersection of quasi compact opens",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.Scheme.Hom.isQuasiSeparated_preimage, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.Scheme.Hom.isCompact_preimage, AlgebraicGeometry.QuasiSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-compact preimages and flat generalizing maps are ingredients, but no hit gives the image construction together with a containing quasi-compact open and its nonempty intersection description."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a quasi compact open under a flat scheme map is quasi compact stable under generalization and an intersection of quasi compact opens",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.quasiCompact_iff, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.isCompact_preimage, RingHom.Flat.generalizingMap_comap, AlgebraicGeometry.Scheme.instQuasiCompactToImage, AlgebraicGeometry.QuasiCompact.mk",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-compact preimages and flat generalizing maps are ingredients, but no hit gives the image construction together with a containing quasi-compact open and its nonempty intersection description."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsCompact\", \"generization\"",
+   "subdirectory": "",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-compact preimages and flat generalizing maps are ingredients, but no hit gives the image construction together with a containing quasi-compact open and its nonempty intersection description."
+  },
+  {
+   "tool": "grep",
+   "query": "image.*[Ii]nter.*[Cc]ompact|[Gg]eneri[cz]ation.*[Cc]ompact",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "1 hits: Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-compact preimages and flat generalizing maps are ingredients, but no hit gives the image construction together with a containing quasi-compact open and its nonempty intersection description."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat quasi compact maps s t from R to a quasi separated scheme V image t of s preimage of a compact open is the intersection of all compact open neighborhoods inside a compact open",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isCompact_preimage, AlgebraicGeometry.QuasiCompact.isCompact_preimage_singleton, AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.quasiCompact_iff, AlgebraicGeometry.Scheme.Hom.isQuasiSeparated_preimage, AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.quasiCompact_iff_compactSpace, AlgebraicGeometry.Scheme.instQuasiCompactToImage",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: hits give compact preimages, generalizing maps, compact-open interpolation or intersections of arbitrary opens, not all clauses for the relation image."
+  },
+  {
+   "tool": "grep",
+   "query": "isCompact_preimage|generalizingMap|exists_isCompact_and_isOpen_between",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Fiber.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean, Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap.lean",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: hits give compact preimages, generalizing maps, compact-open interpolation or intersections of arbitrary opens, not all clauses for the relation image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A compact subset stable under generalization in a scheme equals the intersection of its compact open neighborhoods",
+   "subdirectory": "",
+   "results": "8 hits: IsCompact.nhdsKer, IsCompact.mem_nhdsSet_inf_of_forall, stableUnderGeneralization_iff_exists_sInter_eq, AlgebraicGeometry.quasiSeparatedSpace_iff_affine, TopologicalSpace.CompactOpens.toCompacts, IsRetrocompact, IsCompact.mem_inf_nhdsSet_of_forall, AlgebraicGeometry.isCompact_basicOpen",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: hits give compact preimages, generalizing maps, compact-open interpolation or intersections of arbitrary opens, not all clauses for the relation image."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompact, IsCompact",
+   "subdirectory": "",
+   "results": "6 hits: AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen, AlgebraicGeometry.Scheme.Hom.isCompact_preimage, AlgebraicGeometry.QuasiCompact.isCompact_preimage, AlgebraicGeometry.QuasiCompact.mk, AlgebraicGeometry.quasiCompact_iff, AlgebraicGeometry.Scheme.Hom.isCompact_preimage_singleton",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: hits give compact preimages, generalizing maps, compact-open interpolation or intersections of arbitrary opens, not all clauses for the relation image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a prespectral space a compact set stable under generalization is the intersection of compact open supersets",
+   "subdirectory": "",
+   "results": "8 hits: PrespectralSpace.isBasis_opens, PrespectralSpace.exists_isCompact_and_isOpen_between, stableUnderGeneralization_iff_exists_sInter_eq, PrespectralSpace.isTopologicalBasis, PrespectralSpace, prespectralSpace_iff, SpectralSpace.toPrespectralSpace, SpectralSpace.toQuasiSeparatedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match for the complete item: hits give compact preimages, generalizing maps, compact-open interpolation or intersections of arbitrary opens, not all clauses for the relation image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-fpqc-invariant-intersection-neighbourhoods",
+  "date": "2026-10-22",
+  "group": "Q47"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, groupoid paragraph and translation (a),(b): construct v in W in E, with W and E invariant. Extraction of returned proof steps 3, 6-7: quasi-compact generalization-stable saturation and spectral intersection.",
+   "via": [
+    "lem-a1-fpqc-invariant-intersection-neighbourhoods",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-a1-flat-relation-qc-image-intersections",
+  "worker": "stage1",
+  "summary": "Read Stacks 0APA and its cited flat-generalization and spectral inputs. Kept the statement and wrote the compact-image, generalization-lifting, finite-affine-neighbourhood and spectral-intersection arguments with existing nodes only. Checked arbitrary H_2 and empty E, and wrote out relative-to-ambient topology and nonempty-family bookkeeping. No new nodes.",
+  "blueprint": "Realizes the Gabber fpqc-descent input below lem-a1-affine-hc0, via the existing blueprint.from chain: the quasi-compact generalization-stable saturation and spectral intersection extracted from the proof of 0APA in the 0APK route. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+    "why": "Generic spectral-space intersection theorem used exactly as in Stacks 0APA; no node in this unit supplies that general topological statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-0e8504102",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-0e8504102 (reviewer sub-agent of L); spot-checked: Ordinary split with no repair note: 0 new nodes and the statement is unchanged against the earlier unsplit snapshot; only status, proof, proof_deps, proof_origin, searches and split_report changed. I read Stacks groupoids.tex 0APA (lemma-first-observation) in full: the hypotheses (s,t flat and quasi-compact, V quasi-separated) are kept and the proof uses no groupoid law. The item's extra clauses are the intermediate facts of the source proof and are what the parent fpqc-invariant-intersection-neighbourhoods uses. Steps: (1) 01IT affine cover of H, then the quasi-compact clause of def-weil-finite-type-morphism on each s^-1(H_i), a finite union, and 04Z9 for t|_A, giving quasi-compactness in the induced topology. (2) 03HV, direction checked; r' lies in the open neighbourhood A. (3) Elementary: finitely many affine (hence quasi-compact) opens cover E. (4) 01KO clause (1) for V (the only use of V quasi-separated) and clause (2) for H_2, then 094L makes H_2 spectral; no intersection of affines is assumed affine. (5) 0A31 node applied in H_2, with W=E via step 2 and closure in H_2 inside closure in V; opens of H_2 are open in V and H_2 itself makes the family nonempty. Edge cases checked: H empty, E empty with H_2 empty, a DVR spectrum, specialization direction. The DAG stays acyclic. No duplicate: rg -L for 0APA finds only the item and its parent. Accepted tool_use: lem-weil-pbc-spectral-generalizations-of-quasi-compact as a generic spectral-space lemma used as in 0APA; all other cited nodes are Mathlib leaves. No SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatRelationQcImageIntersections",
+  "declaration": "AlgebraicGeometry.flat_relation_qc_image_intersections",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatRelationQcImageIntersections.lean",
+  "statement": "theorem flat_relation_qc_image_intersections {R V : Scheme.{u}} [QuasiSeparatedSpace V] (s t : R ⟶ V) [Flat s] [QuasiCompact s] [Flat t] [QuasiCompact t] (H : V.Opens) (hH : IsCompact (H : Set V)) : IsCompact (t '' (s ⁻¹' (H : Set V))) ∧ (∀ y ∈ t '' (s ⁻¹' (H : Set V)), ∀ y' : V, y ∈ closure ({y'} : Set V) → y' ∈ t '' (s ⁻¹' (H : Set V))) ∧ (∃ H₂ : V.Opens, IsCompact (H₂ : Set V) ∧ t '' (s ⁻¹' (H : Set V)) ⊆ (H₂ : Set V)) ∧ (∀ H₂ : V.Opens, IsCompact (H₂ : Set V) → t '' (s ⁻¹' (H : Set V)) ⊆ (H₂ : Set V) → {U : Set V | U ⊆ (H₂ : Set V) ∧ IsOpen U ∧ IsCompact U ∧ t '' (s ⁻¹' (H : Set V)) ⊆ U}.Nonempty ∧ t '' (s ⁻¹' (H : Set V)) = ⋂₀ {U : Set V | U ⊆ (H₂ : Set V) ∧ IsOpen U ∧ IsCompact U ∧ t '' (s ⁻¹' (H : Set V)) ⊆ U})",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae3b9635d",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Read Stacks 0APA (groupoids.tex lemma-first-observation): the node keeps its hypotheses and drops the unused groupoid laws. Lean matches every clause in order: E = t '' (s ⁻¹' H); IsCompact E; generalization closure in the right direction (y ∈ closure {y'} → y' ∈ E); ∃ compact open H₂ ⊇ E; ∀ such H₂ the family {U ⊆ H₂ | IsOpen ∧ IsCompact ∧ E ⊆ U} is nonempty with ⋂₀ = E. Relatively open in H₂ = open in V since H₂ is open. QuasiSeparatedSpace V ↔ QuasiSeparated (terminal.from V) by quasiSeparatedSpace_iff_quasiSeparated, the standard convention. [Flat]/[QuasiCompact] on s and t, nothing stronger. Edge cases (empty H/E/H₂, identity, non-qc V) fine; universe bound. Statement field verbatim; node copy changes only lean; no new nodes, no definitions, sorry only, source and blueprint docstrings with the 5 proof steps; SpectralGeneralizations import is a valid module. No recompile, per instruction; worker reports a clean compile in both modes. No findings."
+ }
+}

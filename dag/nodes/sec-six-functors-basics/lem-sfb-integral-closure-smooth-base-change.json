@@ -1,0 +1,91 @@
+{
+ "id": "lem-sfb-integral-closure-smooth-base-change",
+ "kind": "statement",
+ "title": "Integral closure commutes with smooth ring base change",
+ "statement": "Let $R,T,B$ be commutative rings equipped with homomorphisms $R\\to T$ and $R\\to B$. Assume that $R\\to T$ is smooth [def-weil-pbc-smooth-ring-map]. Let $C\\subseteq B$ be the integral closure of $R$ in $B$ [def-weil-pbc-integral-closure]. Give $T\\otimes_R B$ and $T\\otimes_R C$ their tensor-product algebra structures, with $(t\\otimes b)(t^{\\prime}\\otimes b^{\\prime})=tt^{\\prime}\\otimes bb^{\\prime}$ [def-weil-pbc-module-tensor-product]. Then the canonical $T$-algebra map $T\\otimes_R C\\longrightarrow\\operatorname{IC}_T(T\\otimes_R B)$, $t\\otimes c\\longmapsto t\\otimes c$, is an isomorphism, where the target is the integral closure of $T$ in $T\\otimes_R B$. No injectivity, nonzero-ring, reducedness, Noetherian or finiteness assumption on $B$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 03GG (lemma-integral-closure-commutes-smooth)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-smooth-ring-map",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change of arbitrary commutative rings commutes with integral closure via the canonical tensor product map",
+   "results": "{\"t\": \"2026-10-23T16:08:48Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change of arbitrary commutative rings commutes with integral closure via the canonical tensor product map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"RingHom.isIntegral_isStableUnderBaseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"Algebra.IsAlgebraic.isBaseChange_of_isFractionRing\", \"Algebra.Smooth.baseChange\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"Algebra.IsIntegral.tensorProduct\"], \"digest\": \"7394c0e6c57884f3\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle locates TensorProduct.toIntegralClosure_bijective_of_smooth; the source at Mathlib/RingTheory/Smooth/IntegralClosure.lean:380 states bijectivity of the canonical algebra map defined at line 39 for arbitrary commutative R,T,B. Other hits are related constructions, not extra hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-23T16:08:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_bijective_of_smooth\"], \"digest\": \"07d15de121f31b30\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle locates TensorProduct.toIntegralClosure_bijective_of_smooth; the source at Mathlib/RingTheory/Smooth/IntegralClosure.lean:380 states bijectivity of the canonical algebra map defined at line 39 for arbitrary commutative R,T,B. Other hits are related constructions, not extra hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective_of_smooth|def TensorProduct.toIntegralClosure",
+   "results": "{\"t\": \"2026-10-23T16:08:49Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_bijective_of_smooth|def TensorProduct.toIntegralClosure\", \"sub\": \"RingTheory/Smooth/IntegralClosure.lean\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"26\", \"39\", \"368\", \"380\"], \"digest\": \"20c9be86cf7ab2c0\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle locates TensorProduct.toIntegralClosure_bijective_of_smooth; the source at Mathlib/RingTheory/Smooth/IntegralClosure.lean:380 states bijectivity of the canonical algebra map defined at line 39 for arbitrary commutative R,T,B. Other hits are related constructions, not extra hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure commutes with smooth scalar extension for arbitrary algebras",
+   "results": "{\"t\": \"2026-10-23T16:08:49Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure commutes with smooth scalar extension for arbitrary algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsIntegralClosure.of_isIntegrallyClosed\", \"minpoly.instIsScalarTowerSubtypeMemSubringSubalgebraIntegralClosure\", \"TensorProduct.toIntegralClosure\", \"integralClosure\", \"IsIntegralClosure.lift\", \"completeIntegralClosure\", \"IsIntegralClosure.isIntegral_algebra\", \"minpoly.instSMulSubtypeMemSubringSubalgebraIntegralClosure\"], \"digest\": \"253d01309730462b\"}",
+   "date": "2026-10-23",
+   "verdict": "match: Loogle locates TensorProduct.toIntegralClosure_bijective_of_smooth; the source at Mathlib/RingTheory/Smooth/IntegralClosure.lean:380 states bijectivity of the canonical algebra map defined at line 39 for arbitrary commutative R,T,B. Other hits are related constructions, not extra hypotheses."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TensorProduct.toIntegralClosure_bijective_of_smooth",
+  "file": "Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+  "line": 380,
+  "how": "specializes in one line: take S := T at line 380 and use AlgEquiv.ofBijective on the canonical T-algebra map TensorProduct.toIntegralClosure defined at lines 39-43. That definition is the tensor of the inclusion with codomain restricted to the integral closure, so sends t tensor c to t tensor c. The smooth-ring notion is the existing Mathlib leaf def-weil-pbc-smooth-ring-map (Algebra.Smooth)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-integral-closure-smooth-pullback",
+  "date": "2026-10-24",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite diagonal from an affine adequate moduli space. Supporting input: Lemma 8.3.1 applied to the diagonal, keeping its closed-point and integral-base hypotheses explicit Supporting input: the integral Zariski-main factorization in Alper Lemma 8.3.1, with its actual relative-normalization algebra retained. Supporting input: smooth pullback comparison for integral-closure algebras on the relation algebraic spaces, before descending to the stack. Affine ring input of Tag 082E: Tag 03GG, lemma-integral-closure-commutes-smooth.",
+   "via": [
+    "lem-sfb-space-integral-closure-smooth-pullback",
+    "lem-sfb-stack-quasifinite-relative-normalization",
+    "lem-sfb-adequate-integral-comparison-finite",
+    "lem-sfb-adequate-quasifinite-diagonal-finite",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

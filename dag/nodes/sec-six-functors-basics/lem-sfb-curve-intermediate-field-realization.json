@@ -1,0 +1,249 @@
+{
+ "id": "lem-sfb-curve-intermediate-field-realization",
+ "kind": "statement",
+ "title": "Realizing an intermediate field as a compatible proper smooth curve factorization",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field], [def-weil-algebraic-closure]. Let $X,Y$ be smooth proper integral $k$-curves of dimension one [def-sc-curves], [def-pc-integral-scheme], and let $f:X\\to Y$ be a nonconstant $k$-morphism, meaning that it does not factor through a $k$-rational point of $Y$. Put $L=k(X)$ and $K=k(Y)$ [def-sc-function-field], and identify $K$ with its image in $L$ under $f^*$. For any intermediate field $K\\subseteq E\\subseteq L$ [def-pc-field-extension], the extensions $E/K$ and $L/E$ are finite [def-pc-field-tower], and $E/k$ is finitely generated of transcendence degree one [def-kun-transcendence-degree]. There exist a smooth proper integral $k$-curve $Z$ of dimension one, a $k$-isomorphism $\\theta:k(Z)\\xrightarrow{\\sim}E$, and nonconstant $k$-morphisms $a:X\\to Z$ and $b:Z\\to Y$ such that\n$$f=b\\circ a,\\qquad a^*=\\iota_{E,L}\\circ\\theta,\\qquad b^*=\\theta^{-1}\\circ\\iota_{K,E},$$\nwhere $\\iota$ denotes the indicated field inclusions. In particular, these maps identify the induced extensions $k(X)/a^*k(Z)$ and $k(Z)/b^*k(Y)$ with $L/E$ and $E/K$, respectively.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof, the sentence realizing the intermediate field as X -> Z -> Y; Tag 0BY1 (curves-theorem-curves-rational-maps), equivalence of (1) and (6); Tag 0BY3 (curves-lemma-nonsingular-model-smooth), smoothness over a perfect field."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-curves",
+  "def-pc-integral-scheme",
+  "def-sc-function-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-proper-curve-function-field-morphisms] to $X,Y,f$. Its hypotheses are exactly our algebraically closed base, smooth proper integral curves of dimension one, and nonconstancy. Thus $f^*$ is a $k$-embedding, $L/K$ is finite, and $K/k,L/k$ are finitely generated of transcendence degree one. After the stipulated identification of $K$ with its image, apply [lem-sfb-finite-field-tower-intermediate] to $K\\subseteq E\\subseteq L$; this proves finiteness of $E/K$ and $L/E$.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "lem-sfb-finite-field-tower-intermediate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof: intermediate-field factorization, expanded using Tag 0BY1 (curves-theorem-curves-rational-maps) and Tag 0BY3 (curves-lemma-nonsingular-model-smooth)."
+   }
+  },
+  {
+   "text": "Write $K=k(t_1,\\ldots,t_r)$, and choose a finite $K$-spanning family $e_1,\\ldots,e_s$ of $E$, which exists by [def-weil-finite-dimensional-subspace] and step 1. The subfield $k(t_1,\\ldots,t_r,e_1,\\ldots,e_s)$ contains every sum $\\sum_i c_i e_i$ with $c_i\\in K$, hence equals $E$. Therefore $E/k$ is finitely generated.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BU1 (fields-lemma-finite-finitely-generated), proof, applied to E/K and combined with generators of K/k."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-is-integral], applied to the finite-dimensional $E$-algebra $L$, every element of $L$ satisfies a monic polynomial over $E$; over a field such a polynomial is nonzero. Thus $L/E$ is algebraic. Apply [lem-kun-transcendence-degree-tower] to $k\\subseteq E\\subseteq L$: $\\operatorname{trdeg}_E L=0$ and $1=\\operatorname{trdeg}_kL=\\operatorname{trdeg}_kE+0$, so $\\operatorname{trdeg}_kE=1$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof: intermediate-field factorization, expanded using Tag 0BY1 (curves-theorem-curves-rational-maps) and Tag 0BY3 (curves-lemma-nonsingular-model-smooth)."
+   }
+  },
+  {
+   "text": "Apply the existence clause of [lem-trf-algclosed-curve-model] to the algebraically closed field $k$ and the extension $E/k$ just shown finitely generated of transcendence degree one. It supplies a smooth proper integral finite-type $k$-scheme $Z$ of dimension one and a $k$-isomorphism $\\theta:k(Z)\\xrightarrow{\\sim}E$. Properness includes separatedness, so this is a curve in [def-sc-curves]. The additional valuation-ring clause of the cited node is not needed.",
+   "uses": [
+    "lem-trf-algclosed-curve-model",
+    "def-sc-curves",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof: intermediate-field factorization, expanded using Tag 0BY1 (curves-theorem-curves-rational-maps) and Tag 0BY3 (curves-lemma-nonsingular-model-smooth)."
+   }
+  },
+  {
+   "text": "The maps $\\alpha=\\iota_{E,L}\\circ\\theta:k(Z)\\hookrightarrow L$ and $\\beta=\\theta^{-1}\\circ\\iota_{K,E}:K\\hookrightarrow k(Z)$ are $k$-embeddings, since each inclusion and $\\theta$ preserve $k$. The surjectivity of the correspondence in [lem-sfb-proper-curve-function-field-morphisms], first for $(X,Z)$ and then for $(Z,Y)$, gives nonconstant $k$-morphisms $a:X\\to Z$ and $b:Z\\to Y$ with $a^*=\\alpha$ and $b^*=\\beta$. All three curves satisfy that correspondence hypotheses by the original assumptions and step 4.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof: intermediate-field factorization, expanded using Tag 0BY1 (curves-theorem-curves-rational-maps) and Tag 0BY3 (curves-lemma-nonsingular-model-smooth)."
+   }
+  },
+  {
+   "text": "First $b\\circ a$ is nonconstant: both maps send generic point to generic point by [lem-sfb-proper-curve-function-field-morphisms]. If their composite factored through a $k$-point $y:\\operatorname{Spec}k\\to Y$, then $y$ would map to the generic point of $Y$. The residue-field homomorphism of [def-weil-residue-field] would therefore give a $k$-embedding $K\\hookrightarrow k$. For each $x\\in K$, subtract its scalar image in $k$; injectivity forces $x$ to equal that scalar in $K$, so $K=k$, contradicting $\\operatorname{trdeg}_kK=1$. Now the composition clause of [lem-sfb-proper-curve-function-field-morphisms] applies and gives $(b\\circ a)^*=a^*\\circ b^*=\\iota_{E,L}\\circ\\theta\\circ\\theta^{-1}\\circ\\iota_{K,E}=\\iota_{K,L}=f^*$. Injectivity of that correspondence for $(X,Y)$ gives $b\\circ a=f$. Finally $a^*k(Z)=E$ inside $L$, and $\\theta(b^*K)=K$ inside $E$; the identity on $L$ and $\\theta$ identify the stated extensions with $L/E$ and $E/K$, respectively.",
+   "uses": [
+    "lem-sfb-proper-curve-function-field-morphisms",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/curves.tex",
+    "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof: intermediate-field factorization, expanded using Tag 0BY1 (curves-theorem-curves-rational-maps) and Tag 0BY3 (curves-lemma-nonsingular-model-smooth)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-proper-curve-function-field-morphisms",
+  "lem-sfb-finite-field-tower-intermediate",
+  "def-weil-finite-dimensional-subspace",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-kun-transcendence-degree-tower",
+  "lem-trf-algclosed-curve-model",
+  "def-sc-curves",
+  "def-weil-proper-morphism",
+  "def-weil-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Tag 0CD2 (curves-proposition-unwind-morphism-smooth), proof: intermediate-field factorization, expanded using Tag 0BY1 (curves-theorem-curves-rational-maps) and Tag 0BY3 (curves-lemma-nonsingular-model-smooth)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "intermediate.*(curve|functionField)|(curve|functionField).*intermediate",
+   "results": "0 hits; ",
+   "date": "2026-10-22",
+   "verdict": "No match: rational-map/function-field correspondences and field structures do not construct a smooth proper intermediate model with both global maps and the prescribed pullbacks."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize an intermediate function field of a morphism of nonsingular projective curves as a factorization through a smooth proper curve",
+   "results": "8 hits; AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, IntermediateField.toSubalgebra, IntermediateField.casesOn",
+   "date": "2026-10-22",
+   "verdict": "No match: rational-map/function-field correspondences and field structures do not construct a smooth proper intermediate model with both global maps and the prescribed pullbacks."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"RationalMap\"",
+   "results": "7 hits; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.eq_of_fromFunctionField_eq, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.Scheme.RationalMap.equivFunctionFieldOver, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.equivFunctionField",
+   "date": "2026-10-22",
+   "verdict": "No match: rational-map/function-field correspondences and field structures do not construct a smooth proper intermediate model with both global maps and the prescribed pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An intermediate field between the function fields of a nonconstant morphism of smooth proper integral curves over an algebraically closed field has a smooth proper curve model realizing a factorization of that morphism",
+   "results": "8 hits; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.isField_of_universallyClosed, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, WeierstrassCurve.Affine.FunctionField",
+   "date": "2026-10-22",
+   "verdict": "No match: rational-map/function-field correspondences and field structures do not construct a smooth proper intermediate model with both global maps and the prescribed pullbacks."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An intermediate field of a finite function field extension of smooth proper curves has a smooth proper curve model and compatible factor morphisms",
+   "results": "8 hits; FunctionField, WeierstrassCurve.Affine.FunctionField, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, functionField_iff, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, Algebra.Smooth.exists_finiteType, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe rational maps, number-theoretic function fields, or intermediate-field data; none constructs a smooth proper model with both global morphisms and the prescribed pullbacks. Read Mathlib AlgebraicGeometry/Birational/RationalMap.lean for the rational-map candidates."
+  },
+  {
+   "tool": "grep",
+   "query": "intermediate.*(curve|functionField)|(curve|functionField).*intermediate",
+   "results": "0 hits; ; directory: AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe rational maps, number-theoretic function fields, or intermediate-field data; none constructs a smooth proper model with both global morphisms and the prescribed pullbacks. Read Mathlib AlgebraicGeometry/Birational/RationalMap.lean for the rational-map candidates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"functionField\", \"RationalMap\"",
+   "results": "7 hits; AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.eq_of_fromFunctionField_eq, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.Scheme.RationalMap.equivFunctionFieldOver, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.equivFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe rational maps, number-theoretic function fields, or intermediate-field data; none constructs a smooth proper model with both global morphisms and the prescribed pullbacks. Read Mathlib AlgebraicGeometry/Birational/RationalMap.lean for the rational-map candidates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Realize an intermediate function field of a morphism of nonsingular projective curves as a factorization through a smooth proper curve",
+   "results": "8 hits; AlgebraicGeometry.Scheme.descResidueField_stalkClosedPointTo_fromSpecResidueField, AlgebraicGeometry.specTargetImageFactorization, AlgebraicGeometry.Scheme.RationalMap.ofFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_toRationalMap, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField, IntermediateField.toSubalgebra, IntermediateField.casesOn",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe rational maps, number-theoretic function fields, or intermediate-field data; none constructs a smooth proper model with both global morphisms and the prescribed pullbacks. Read Mathlib AlgebraicGeometry/Birational/RationalMap.lean for the rational-map candidates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A one variable algebraic function field over an algebraically closed field admits a smooth projective curve and embeddings of function fields extend uniquely to morphisms",
+   "results": "8 hits; FunctionField, IsAlgClosed.lift_def, WeierstrassCurve.Affine.FunctionField, functionField_iff, NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed, AlgebraicGeometry.Scheme.PartialMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField, AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits describe rational maps, number-theoretic function fields, or intermediate-field data; none constructs a smooth proper model with both global morphisms and the prescribed pullbacks. Read Mathlib AlgebraicGeometry/Birational/RationalMap.lean for the rational-map candidates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-curve-frobenius-separable-factorization",
+  "date": "2026-10-22",
+  "group": "Q33"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Inherited det-thm-sf-ctf-stability-direct-images clause (3), high-genus-cover auxiliary branch, via the Frobenius-separable factorization: realizes the intermediate field in Stacks 0CD2 by the model and fully faithful function-field functor of 0BY1, with smoothness from 0BY3.",
+   "via": [
+    "lem-sfb-curve-frobenius-separable-factorization",
+    "lem-sfb-finite-curve-genus-monotonicity",
+    "lem-sfb-high-genus-equivariant-cover",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-curve-intermediate-field-realization",
+  "worker": "stage1",
+  "summary": "Revalidated the retained split against the current DAG after the side-completion promotion return. All quoted dependency clauses remain valid. In step 6 establish nonconstancy before invoking the function-field composition clause, then verify both extension identifications. Retained the exact finite-intermediate-tower Mathlib leaf and the original statement. No Lean written or compiler run.",
+  "blueprint": "The inherited clause (3) auxiliary curve branch, specifically the intermediate-field sentence of the 0CD2 proof: steps 1-3 prepare the field, step 4 realizes its model (0BY1/0BY3), steps 5-6 give the two arrows and their compatibility (full faithfulness in 0BY1). No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-algclosed-curve-model",
+    "why": "Generic smooth proper model existence for a one-variable field, exactly the existence part of 0BY1/0BY3 required by 0CD2. No node of this unit states that existence; its valuation-ring clause and trace-formula application are unused."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-algclosed-curve-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NX-8e460dcb2",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-8e460dcb2 (reviewer sub-agent of L); spot-checked: Re-delivery after promotion return cf479a9c, which named no maths fault. Diff vs the prior snapshot: only step 6 is reordered, now proving nonconstancy of b∘a before the composition clause. Live and side-live still have the item unsplit and no leaf, so no supersession. Item statement and stmt_deps are identical to live. Source: Stacks 0CD2 proof sentence (curves.tex:2671ff) expanded by 0BY1/0BY3. Hypotheses match. Steps checked: 1 uses the bijection/finiteness/trdeg clauses of lem-sfb-proper-curve-function-field-morphisms, then the new leaf. 2 elementary: K-spanning family gives E/k finitely generated. 3 uses finite⇒integral and the trdeg tower, 1=trdeg_k E+0. 4 uses the existence clause of lem-trf-algclosed-curve-model; proper includes separated, so a curve. 5 uses surjectivity for (X,Z) and (Z,Y). 6: k-point through η_Y gives φ:K→k with x=φ(x), so K=k, contradicting trdeg 1; then composition and injectivity give b∘a=f, and θ gives the extension identifications. New leaf lem-sfb-finite-field-tower-intermediate is true and generic, exact Mathlib IntermediateField.finiteDimensional_left/right (Algebraic.lean:52-53, read). It is not a duplicate (rg over the snapshot) and not a relabel of the item, whose clause needs geometric finiteness. Batch-5 flag lem-trf-algclosed-curve-model: generic 0BY1/0BY3 model existence, given by neither assumption. Its dependency closure is pure algebraic geometry with no trace, Lefschetz or Poincaré nodes, so accepted, and the declared split_report.tool_uses entry is accepted. Edge cases E=K, E=L and inseparable towers checked. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.IntermediateFieldRealization",
+  "declaration": "AlgebraicGeometry.exists_curve_intermediate_field_realization",
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/IntermediateFieldRealization.lean",
+  "statement": "theorem exists_curve_intermediate_field_realization (k : Type u) [Field k] [IsAlgClosed k] (X Y : Scheme.{u}) (sX : X ⟶ Spec (.of k)) (sY : Y ⟶ Spec (.of k)) [IsIntegral X] [IsIntegral Y] [IsCurve sX] [IsCurve sY] [Smooth sX] [Smooth sY] [IsProper sX] [IsProper sY] (hXdim : topologicalKrullDim X = 1) (hYdim : topologicalKrullDim Y = 1) (f : X ⟶ Y) (hf : f ≫ sY = sX) (hf_nonconstant : ¬ ∃ y : Spec (.of k) ⟶ Y, y ≫ sY = 𝟙 _ ∧ sX ≫ y = f) : ∃ hfη : f (genericPoint X) = genericPoint Y, ∀ (E : Type u) [Field E] (i : Y.functionField →+* E) (j : E →+* X.functionField), j.comp i = (f.functionFieldMap hfη).hom → @Module.Finite Y.functionField E _ _ (@Algebra.toModule _ _ _ _ i.toAlgebra) ∧ @Module.Finite E X.functionField _ _ (@Algebra.toModule _ _ _ _ j.toAlgebra) ∧ @IntermediateField.FG k _ E _ (i.comp sY.curveFunctionFieldBaseMap).toAlgebra ⊤ ∧ @Algebra.trdeg k E _ _ (i.comp sY.curveFunctionFieldBaseMap).toAlgebra = 1 ∧ ∃ (Z : Scheme.{u}) (sZ : Z ⟶ Spec (.of k)) (_ : IsIntegral Z) (θ : Z.functionField ≃+* E) (a : X ⟶ Z) (b : Z ⟶ Y), IsCurve sZ ∧ Smooth sZ ∧ IsProper sZ ∧ topologicalKrullDim Z = 1 ∧ θ.toRingHom.comp sZ.curveFunctionFieldBaseMap = i.comp sY.curveFunctionFieldBaseMap ∧ a ≫ sZ = sX ∧ b ≫ sY = sZ ∧ a ≫ b = f ∧ (¬ ∃ z : Spec (.of k) ⟶ Z, z ≫ sZ = 𝟙 _ ∧ sX ≫ z = a) ∧ (¬ ∃ y : Spec (.of k) ⟶ Y, y ≫ sY = 𝟙 _ ∧ sZ ≫ y = b) ∧ ∃ (haη : a (genericPoint X) = genericPoint Z) (hbη : b (genericPoint Z) = genericPoint Y), (a.functionFieldMap haη).hom = j.comp θ.toRingHom ∧ (b.functionFieldMap hbη).hom = θ.symm.toRingHom.comp i ∧ (a.functionFieldMap haη).hom.fieldRange = j.fieldRange ∧ (b.functionFieldMap hbη).hom.fieldRange.map θ.toRingHom = i.fieldRange",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Intermediate fields are represented by field embeddings i : k(Y) →+* E and j : E →+* k(X) whose composite is the actual generic-stalk map of f. Their injectivity is automatic for fields. The k-algebra on E is explicitly the composite of i with the canonical scalar map of Y. The final range identities express both induced extension identifications."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0553f742c",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Lean statement matches the node clause by clause: alg-closed k; X,Y smooth proper integral IsCurve with topologicalKrullDim 1; f over k, nonconstant via rational-point factorization; intermediate E encoded as i,j with j∘i = f*; Module.Finite E/K and L/E; FG ⊤ and trdeg 1 under i∘baseY; ∃ Z sZ θ with θ k-linear, a,b over k and nonconstant, a≫b=f, a* = j∘θ, b* = θ⁻¹∘i, and the two range identities. Source Stacks 0CD2 (curves.tex:2671-2693) via 0BY1/0BY3, narrowed to alg-closed k as the node is. Edge cases E=K, E=L, f=id, inseparable extensions covered; single universe u is not a restriction. lean.statement verbatim; stmt_dep records identical to side-live; item differs only in lean; new module, no name clash; only sorry; docstrings with source, blueprint id and the 6 proof steps. Advisory: curveFunctionFieldBaseMap and functionFieldMap owners are not stmt_deps, as already accepted for the correspondence item. No file changed, so no compile run."
+ }
+}

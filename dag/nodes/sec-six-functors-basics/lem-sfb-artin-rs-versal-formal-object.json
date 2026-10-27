@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-artin-rs-versal-formal-object",
+ "kind": "statement",
+ "title": "Rim-Schlessinger and finite tangent space give a versal formal object",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring] and $S=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Work in the universes of [def-weil-size-convention]. Let $\\mathcal X$ be a category fibred in groupoids on $S$-schemes [def-pc-scheme], meaning that cartesian pullbacks exist along every base morphism and each fibre is a groupoid. A local ring has a unique maximal ideal; an Artinian ring satisfies the descending chain condition on ideals. Assume the Rim-Schlessinger property: whenever $B'=B\\amalg_A A'$ is a pushout of spectra of Artinian local rings of finite type over $R$ and $A\\to A'$ is a closed immersion defined by a nilpotent ideal, restriction gives an equivalence $\\mathcal X(B')\\simeq\\mathcal X(B)\\times_{\\mathcal X(A)}\\mathcal X(A')$. Fix a field $k$ of finite type over $R$ [def-weil-field, def-weil-finite-type-morphism] and $x_0\\in\\mathcal X(k)$. Assume the tangent space of deformations of $x_0$ is finite-dimensional over $k$: this is the vector space of isomorphism classes of objects over $k[\\epsilon]/(\\epsilon^2)$ with an identified restriction $x_0$. A formal object over a complete Noetherian local $R$-algebra $(C,\\mathfrak m)$ with residue field identified with $k$ is a system $\\xi_n\\in\\mathcal X(C/\\mathfrak m^n)$, $n\\geq1$, with compatible transition isomorphisms; completeness means $C\\cong\\varprojlim_n C/\\mathfrak m^n$ [def-weil-pbc-adic-completion]. Such a system is versal if, for every surjection $B'\\to B$ of Artinian local $R$-algebras with residue field identified with $k$, every local $R$-map $C\\to B$ inducing the identity on $k$, every $z\\in\\mathcal X(B')$, and every isomorphism $z|_B\\cong\\xi_B$ compatible with the specified identifications over $k$, there exist a local $R$-lift $C\\to B'$ and an isomorphism $z\\cong\\xi_{B'}$ extending the prescribed isomorphism. Here $\\xi_B$ denotes pullback from $\\xi_n$ for any $n$ with $\\mathfrak m^n$ mapping to zero in $B$, and similarly for $B'$. Then there exist such a complete Noetherian local $R$-algebra $(C,\\mathfrak m)$ with residue field $k$ and a versal formal object $(\\xi_n)$ with a specified isomorphism $\\xi_1\\cong x_0$. No effectivity or limit-preservation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "Tag 07WU (lemma-deformation-category), remark-deformation-category-implies; Formal Deformation Theory, Tag 06IW (formal-defos.tex, lemma-versal-object-existence). This is their specialization to the deformation category of a fixed field-valued object."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-weil-field",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [
+  {
+   "text": "For $A\\in\\mathcal C_{R,k}$ define $\\mathcal F(A)$ to consist of pairs $(x,\\iota:x|_k\\cong x_0)$, with arrows preserving $\\iota$. Transport along a ring map is pullback in $\\mathcal X$ along its spectrum map. The fibred-groupoid axioms provide the composition isomorphisms. Over $k$ the marked pair $(x_0,1)$ is terminal and every pair is uniquely isomorphic to it, so this is a predeformation category. For $A_1\\to A\\leftarrow A_2$ with $A_2\\to A$ surjective, the test-algebra lemma gives an Artinian local ring $P=A_1\\times_A A_2$ with residue field $k$. Since $k$ is of finite type over $R$, the residue-field criterion makes $A_1$, $A_2$, $A$ and $P$ of finite type over $R$. Its spectrum is the scheme pushout by the affine pinching lemma. The kernel of $A_2\\to A$ lies in the nilpotent maximal ideal, so the stated (RS) hypothesis applies. Passing from its equivalence to groupoids of objects with a chosen identification with $x_0$ preserves equivalence: an object and its marking lift by essential surjectivity, while a compatible arrow lifts uniquely by full faithfulness. Thus $\\mathcal F$ satisfies (RS). This gives precisely the datum of the cited definition. In particular its tangent set is the given tangent space, with the same marking. The localization assertion in the test-algebra lemma permits use of the Stacks formal-deformation results even if $R\\to k$ is not finite as a module map.",
+   "uses": [
+    "def-sfb-artin-deformation-test-category",
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-affine-closed-pinching-pushout",
+    "lem-sfb-artinian-finite-type-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/artin.tex",
+    "place": "Tags 07WU (lemma-deformation-category), 07WV (remark-deformation-category-implies); construction of 07T4"
+   }
+  },
+  {
+   "text": "Put $d=\\dim_kT\\mathcal F$ and choose a basis $\\theta_1,\\ldots,\\theta_d$. Choose algebra generators $a_1,\\ldots,a_s$ of $k$ over $R$; these exist by the finite type hypothesis. In the completed-polynomial lemma take $P=R[Y_1,\\ldots,Y_s,X_1,\\ldots,X_d]$ with $Y_i\\mapsto a_i$ and $X_i\\mapsto0$, and denote its completion by $S$ and its maximal ideal by $\\mathfrak m$. Let $W=k^d$ with basis $v_i$. Sending $Y_i$ to $(a_i,0)$ and $X_i$ to $(0,v_i)$ defines $P\\twoheadrightarrow k[W]$. It extends to $S\\twoheadrightarrow k[W]$ by the Artinian-map bijection in that lemma; surjectivity follows because the image already contains $k$ and all $v_i$. Put $J_1=\\mathfrak m$ and let $J_2$ be its kernel, so $\\mathfrak m^2\\subseteq J_2\\subseteq J_1$. Choose $\\xi_1$ to be the marked object over $k$, and choose $\\xi_2\\in\\mathcal F(S/J_2)$ with class $\\sum_i\\theta_i\\otimes v_i$ under the tangent-tensor bijection. Its restriction has a unique isomorphism to $\\xi_1$. The tangent-tensor lemma says that the induced maps $S/J_2\\to k[\\epsilon]$ realize every tangent class. The construction includes $d=0$, when $W=0$ and $J_2=J_1$.",
+   "uses": [
+    "lem-sfb-artin-completed-polynomial-test-ring",
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), Steps 1--2; polynomial completion in place of a formally smooth base followed by power series"
+   }
+  },
+  {
+   "text": "Inductively suppose $n\\geq2$, $J_n\\subseteq J_{n-1}$, $\\mathfrak m^n\\subseteq J_n$, and compatible marked objects through $\\xi_n\\in\\mathcal F(S/J_n)$ have been chosen. Apply the least-liftable-ideal lemma to $B=S/(\\mathfrak m J_n)\\twoheadrightarrow S/J_n$ and $\\xi_n$. This is an Artinian test algebra because $\\mathfrak m^{n+1}\\subseteq\\mathfrak mJ_n$, and its kernel $J_n/(\\mathfrak mJ_n)$ is killed by its maximal ideal. Let $J_{n+1}\\subseteq S$ be the inverse image of the least liftable ideal. Then $\\mathfrak mJ_n\\subseteq J_{n+1}\\subseteq J_n$, $\\mathfrak m^{n+1}\\subseteq J_{n+1}$, and there is $\\xi_{n+1}\\in\\mathcal F(S/J_{n+1})$ with a chosen isomorphism restricting it to $\\xi_n$. Choose these successively. Crucially, for every ideal $K$ with $\\mathfrak mJ_n\\subseteq K\\subseteq J_n$ admitting a lift of $\\xi_n$, leastness gives $J_{n+1}\\subseteq K$. This records both the inductive invariant and the universal property needed below.",
+   "uses": [
+    "lem-sfb-artin-minimal-liftable-ideal",
+    "lem-sfb-artin-completed-polynomial-test-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), induction step; Tag 06SZ (lemma-largest-closed-where-lift)"
+   }
+  },
+  {
+   "text": "Set $J=\\bigcap_{n\\geq1}J_n$ and $C=S/J$. Since $J\\subseteq\\mathfrak m$, this is a proper quotient. The complete-local-quotient lemma makes $C$ Noetherian complete local with residue field $k$. The descending-ideal lemma applies because $\\mathfrak m^n\\subseteq J_n$ and identifies $(J_n/J)$ with a cofinal filtration for its maximal-ideal topology. The formal-filtration comparison sends the compatible system $(\\xi_n)$ to a formal object $\\xi$ on $C$, compatibly identifying its value at $S/J_n$ with $\\xi_n$. In particular its first residue object is $x_0$ with its marking. Every tangent map from $S/J_2$ obtained in step 2 factors through $C$, because $J\\subseteq J_2$. Its value under $\\xi$ is the value of $\\xi_2$, by the evaluation clause of the comparison. Consequently the tangent map for $\\xi$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-sfb-artin-descending-ideal-adic-topology",
+    "lem-sfb-artin-formal-filtration-comparison",
+    "lem-sfb-artin-rs-tangent-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), passage to the quotient and the first versality condition"
+   }
+  },
+  {
+   "text": "To check the remaining condition of the tangent-ring-lift criterion, take a small extension $B\\twoheadrightarrow A$, a local $a:C\\to A$, an object $y\\in\\mathcal F(B)$ and the prescribed isomorphism $y|_A\\cong\\xi_A$. The maximal ideal of $A$ is nilpotent by the test-algebra lemma; hence $a$ kills some power of the maximal ideal of $C$. Cofinality in step 4 gives $n\\geq2$ such that $a$ factors through $S/J_n\\to A$. The evaluation clause of the filtration comparison identifies $\\xi_A$ with the restriction of $\\xi_n$, including the chosen arrow to $A$. Form $B_n=(S/J_n)\\times_A B$. It is a test algebra and $p:B_n\\to S/J_n$ is a small extension by the test-algebra lemma. The (RS) equivalence for $\\mathcal F$ lifts the triple consisting of $\\xi_n$, $y$, and the prescribed isomorphism to an object over $B_n$ restricting to $\\xi_n$. If $p$ has a section $t$, the composite $C\\to S/J_n\\xrightarrow{t}B_n\\to B$ already lifts $a$. It remains to handle the case without a section.",
+   "uses": [
+    "lem-sfb-artin-local-test-algebra",
+    "lem-sfb-artin-formal-filtration-comparison",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), versality proof up to the section case"
+   }
+  },
+  {
+   "text": "In the nonsplit case the essential-surjection lemma applies to $p:B_n\\to S/J_n$. The completed-polynomial lifting property lifts $S\\to S/J_n\\to A$ to $h:S\\to B$. Together with the quotient map $S\\twoheadrightarrow S/J_n$ this defines $g:S\\to B_n$, $s\\mapsto(s\\bmod J_n,h(s))$. It is local and induces the identity on $k$. Its composite with $p$ is surjective, so the complete-source clause of the essential-surjection lemma makes $g$ surjective. Put $K=\\ker(g)$. Since $p\\circ g$ is the quotient map, $K\\subseteq J_n$. Since $g(J_n)\\subseteq\\ker(p)$ and that kernel is killed by the maximal ideal of $B_n$, locality gives $g(\\mathfrak mJ_n)=0$, hence $\\mathfrak mJ_n\\subseteq K$. Under $S/K\\cong B_n$, the object supplied in step 5 is a lift of $\\xi_n$ to $S/K$. Step 3 therefore gives $J_{n+1}\\subseteq K$. Thus $g$ factors through $S/J_{n+1}$, and projecting to $B$ gives a lift $S/J_{n+1}\\to B$ of $S/J_{n+1}\\to S/J_n\\to A$. Precomposing with $C\\to S/J_{n+1}$ gives the required local lift $C\\to B$.",
+   "uses": [
+    "lem-sfb-artin-small-extension-essential",
+    "lem-sfb-artin-completed-polynomial-test-ring",
+    "lem-sfb-artin-minimal-liftable-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tag 06IW (lemma-versal-object-existence), essential-surjection and minimal-ideal argument"
+   }
+  },
+  {
+   "text": "Steps 5--6 establish the underlying-ring lifting condition for every small extension and every prescribed deformation comparison. Step 4 established tangent surjectivity. The tangent-ring-lift criterion now supplies the object isomorphism extending that prescribed comparison and gives versality for every Artinian surjection. Forget the markings in the resulting formal system to obtain objects in $\\mathcal X(C/\\mathfrak m_C^n)$; its retained residue marking gives $\\xi_1\\cong x_0$. Versality in $\\mathcal X$ follows from versality in $\\mathcal F$: given a surjection $B'\\to B$, a local $C\\to B$, $z\\in\\mathcal X(B')$ and $\\beta:z|_B\\cong\\xi_B$, mark $z$ by the composite $z|_k\\cong(z|_B)|_k\\cong\\xi_B|_k\\cong x_0$ obtained from $\\beta$ and the marking of $\\xi$. Then $\\beta$ is an arrow of $\\mathcal F(B)$. Versality in $\\mathcal F$ gives a local lift $C\\to B'$ and a marked arrow $z\\cong\\xi_{B'}$ restricting to $\\beta$, which is in particular an isomorphism in $\\mathcal X(B')$. This is exactly the claimed formal versal object. All operations took place on Artinian quotients and compatible formal systems; none required an effective object over $C$ or preservation of limits.",
+   "uses": [
+    "lem-sfb-artin-tangent-ring-lift-criterion",
+    "def-sfb-artin-deformation-test-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/formal-defos.tex",
+    "place": "Tags 06IU (lemma-versal-criterion) and 06IW (lemma-versal-object-existence), conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-artin-deformation-test-category",
+  "lem-sfb-artin-local-test-algebra",
+  "lem-sfb-affine-closed-pinching-pushout",
+  "lem-sfb-artinian-finite-type-residue-criterion",
+  "lem-sfb-artin-completed-polynomial-test-ring",
+  "lem-sfb-artin-rs-tangent-tensor",
+  "lem-sfb-artin-minimal-liftable-ideal",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-sfb-artin-descending-ideal-adic-topology",
+  "lem-sfb-artin-formal-filtration-comparison",
+  "lem-sfb-artin-small-extension-essential",
+  "lem-sfb-artin-tangent-ring-lift-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/formal-defos.tex",
+  "place": "Tag 06IW (lemma-versal-object-existence), with Artin Tag 07WU. The polynomial-completion choice realizes the same formally smooth presentation construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Rim Schlessinger deformation category with finite dimensional tangent space admits a versal formal object over a complete Noetherian local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.instFormallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyEtale R A], Algebra.FormallySmooth R A\", \"doc\": \"Every formally étale algebra over a commutative ring is also formally smooth.\"}\n  {\"name\": \"Algebra.smooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u_4) [inst : CommRing R] (A : Type u) [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.Smooth R A ↔\\n    autoParam (Algebra.FormallySmooth R A) Algebra.Smooth.formallySmooth._autoParam ∧\\n      autoParam (Algebra.FinitePresentation R A) Algebra.Smooth.finitePresentation._autoParam\", \"doc\": \"For any commutative ring $ R $ and commutative ring $ A $ equipped with an $ R $-algebra structure, $ A $ is smooth over $ R $ if and only if $ A $ is formally smooth over $ R $ and finitely presented\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib/RingTheory/RingHom/Smooth\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Algebra.FormallyUnramified R A ∧ Algebra.FormallySmooth R A\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is formally étale if and only if it is both formally unramified and formally smooth over $ R $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FormallyUnramified R A] [Algebra.FormallySmooth R A], Algebra.FormallyEtale R A\", \"doc\": \"If an algebra $ A $ over a commutative ring $ R $ is both formally unramified and formally smooth, then $ A $ is formally étale.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a formally versal deformation of an object of a category fibred in groupoids satisfying Artinian pushout gluing",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n        (D ⟶ (CategoryTheory.Functor.const I).obj S) → (X ⟶ S) → Type (u + 1)\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this inductive type encode\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsLocallyDirected.glueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"{J : Type w} →\\n  [inst : CategoryTheory.Category.{v, w} J] →\\n    (F : CategoryTheory.Functor J AlgebraicGeometry.Scheme) →\\n      [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f)] →\\n        [(F.comp AlgebraicGeometry.Scheme.forget).IsLocallyDirected] →\\n          [Quiver.IsThin J]\", \"doc\": \"A structure ensuring compatibility when gluing schemes via open immersions, defined by directed unions of open subsets and coherence conditions involving pullbacks and isomorphisms between overlapping\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰 → CategoryTheory.Functor 𝒰.I₀ AlgebraicGeometry.Scheme\", \"doc\": \"Given a scheme $S$ with an open cover $\\\\mathcal{U}$, a category structure on the zeroth component $\\\\mathcal{U}_0$, and a locally directed cover structure on $\\\\mathcal{U}$, this functor maps the catego\"}\n  {\"name\": \"CategoryTheory.GlueData.ofGlueData'\", \"module\": \"Mathlib/CategoryTheory/GlueData\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v, u₁} C] → CategoryTheory.GlueData' C → CategoryTheory.GlueData C\", \"doc\": \"A function that converts gluing data $ D $ of type $ \\\\text{GlueData}' $ into standard gluing data $ \\\\text{GlueData} $ by defining transition objects $ V_{i,j} $ conditionally (using $ D.U $ for equal \"}\n  {\"name\": \"CategoryTheory.GlueData.J\", \"module\": \"Mathlib/CategoryTheory/GlueData\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v, u₁} C] → CategoryTheory.GlueData C → Type v\", \"doc\": \"A function that, given a category $ C $ in $ \\\\mathrm{Type} \\\\, u₁ $ with its category structure and a gluing data instance, constructs an indexing category (or diagram category) in universe $ v $, whic\"}\n  {\"name\": \"CategoryTheory.GlueData'\", \"module\": \"Mathlib/CategoryTheory/GlueData\", \"type\": \"(C : Type u₁) → [CategoryTheory.Category.{v, u₁} C] → Type (max u₁ (v + 1))\", \"doc\": \"An inductive structure defining the data required to glue categories, where objects reside in Type u and morphisms form types in Type (max u (v + 1)), ensuring hom-sets are appropriately sized for bot\"}\n  {\"name\": \"CategoryTheory.GlueData\", \"module\": \"Mathlib/CategoryTheory/GlueData\", \"type\": \"(C : Type u₁) → [CategoryTheory.Category.{v, u₁} C] → Type (max u₁ (v + 1))\", \"doc\": \"An inductive type constructor that takes a category $ C $ in $ \\\\mathrm{Type} \\\\, u₁ $ equipped with its category structure and returns a type in the universe $ \\\\max(u₁, v+1) $, used to define data nece\"}\n  {\"name\": \"CategoryTheory.GlueData'.J\", \"module\": \"Mathlib/CategoryTheory/GlueData\", \"type\": \"{C : Type u₁} → [inst : CategoryTheory.Category.{v, u₁} C] → CategoryTheory.GlueData' C → Type v\", \"doc\": \"A structure defining the data required to glue categories, where objects reside in Type u and morphisms form types in Type (max u (v + 1)), ensuring hom-sets are appropriately sized for both object an\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schlessinger finite tangent space versal formal deformation existence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : FiniteDimensional (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"RingHom.smooth_def\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \"{f : R →+* S} : f.Smooth ↔ f.FormallySmooth ∧ f.FinitePresentation\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is smooth if and only if it is formally smooth and finitely presented as an $ R $-algebra. This means $ S $ must satisfy the formal smoothness lifting property, be \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.Smooth.formallySmooth\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u_4} {inst : CommRing R} {A : Type u} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.Smooth R A], Algebra.FormallySmooth R A\", \"doc\": \"If $ A $ is a smooth algebra over a commutative ring $ R $, then $ A $ satisfies the formal smoothness lifting property for algebra homomorphisms over $ R $.\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_le_one_iff\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : finrank (ResidueField R) (CotangentSpace R) ≤ 1 ↔ (maximalIdeal R).IsPrincipal\", \"doc\": \"For any Noetherian local ring $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ over the residue field $ R/\\\\mathfrak{m} $ is at most one if and only if the maximal ideal $ \"}\n  {\"name\": \"Algebra.FormallySmooth.casesOn\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"{R : Type u} →\\n  {A : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing A] →\\n        [inst_2 : Algebra R A] →\\n          {motive : Algebra.FormallySmooth R A → Sort u_1} →\\n            (t : Algebra.FormallySmooth R A) →\\n              ((projective_kaehlerDifferential : Module.Projective A Ω[\", \"doc\": \"Given a property $ P $ of formally smooth $ R $-algebras, if $ P $ holds for any algebra $ A $ where the Kähler differentials $ \\\\Omega_{A/R} $ are projective as an $ A $-module and the first cohomolog\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Schlessinger\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  },
+  {
+   "tool": "grep",
+   "query": "Schlessinger|\\b[Vv]ersal\\b|[Dd]eformation[Cc]ategory",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"15\", \"text\": \"weak limit satisfies the same \\\"versal property\\\" as a limit, without the uniqueness\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/WeakLimits/Basic.lean\", \"line\": \"194\", \"text\": \"/-- The versal morphism from any other cone to a weak limit cone. -/\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/Basic.lean\", \"line\": \"36\", \"text\": \"apply them to infinitesimal smooth (or versal) extensions later.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern smooth rings or schemes, residue fields, categorical gluing or unrelated universal properties; none states this assertion about deformations in a fibred groupoid"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-smooth-point-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity",
+   "via": [
+    "lem-sfb-artin-smooth-point-neighbourhood",
+    "lem-sfb-artin-representable-diagonal-criterion",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-artin-rs-versal-formal-object",
+  "worker": "stage1",
+  "summary": "Constructed the marked deformation category, tangent-surjective second-order object, least-liftable-ideal tower and complete local quotient. Proved the underlying ring lift using the essential-surjection dichotomy, then applied the separate tangent correction criterion. Nine searched statement-only supporting nodes; no statement change or effectivity assumption.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 07Y4 (lemma-diagonal-representable), specialized to Spec Z; section-axioms [-1] through [3], definition-versal and definition-openness-versality. The specialization uses that Z and its localizations are G-rings. Local supporting input: first sentence of the proof of Tag 07Y4: apply lemma-get-smooth to each finite type field and object. Supporting input in Tag 07XY: first three sentences of the proof, construction of a versal formal object before effectivity; detailed construction realizing the formal-versality prerequisite in Tag 07XY.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic complete-local quotient theorem, used only to keep the constructed quotient complete and Noetherian; no deformation-unit substitute."
+   },
+   {
+    "node": "lem-sfb-artinian-finite-type-residue-criterion",
+    "why": "Generic residue-field criterion used to apply the finite-type (RS) hypothesis to Artinian ring pullbacks."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-sfb-artinian-finite-type-residue-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-08eb21b56",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-08eb21b56 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and all 9 new nodes in full against Stacks: formal-defos 06IW (whole proof, l.3867-4040), 06IU (l.3717; only predeformation + (S1)(S2), no dim hypothesis), 06SZ (smallest element), 06SE, 06H6, 06H0(4), 06IH/06I0/06J7, 06GH/06GE, and artin.tex 07WU/07WV. The split follows 06IW step by step. Its one change is to use the completion S of R[Y,X] at ker e instead of the smooth hull R[[X]]; the proof needs only lifting along surjections in C_{R,k}, and the completed-polynomial node states exactly that. Checks: k[W] in C_{R,k} and S onto k[W]; mJ_n ⊆ J_{n+1} ⊆ J_n and m^{n+1} ⊆ J_{n+1}; J proper, so C=S/J is complete local by 0325 and the J_n/J are cofinal by Chevalley; B_n=(S/J_n)×_A B; the split case via the section; the non-split case with K=ker g, where mJ_n ⊆ K ⊆ J_n, giving J_{n+1} ⊆ K. Every new node is a true, separate Stacks lemma and none restates the item. The localization clause holds: R minus p maps to units, and k is finite over κ(p) by Zariski's lemma. Tested cases: d=0, s=0 (Z→F_p), Z/p^2→F_p essential, k[ε]→k split. The duplicate scan over all snapshot statements found no duplicates. Item statement is unchanged; no blueprint target and no SGA. I accept the cross-unit tool_use lem-weil-pbc-complete-local-quotient; the residue-criterion entry is the item's own unit. The FIX is in the item file only. (1) Step 1 now states that A1, A2, A and P are of finite type over R by the residue-field criterion, because the item's (RS) is stated for finite-type Artinian rings. (2) Step 7 now derives X-versality, with an unmarked z, from F-versality: mark z through β and the marking of ξ, then the marked arrow is an X-isomorphism. Step 7 also gains def-sfb-artin-deformation-test-category in uses.; 1 file(s) fixed by the reviewer"
+ }
+}

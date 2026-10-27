@@ -1,0 +1,163 @@
+{
+ "id": "lem-pur-tensor-pullback-frames",
+ "kind": "statement",
+ "title": "Tensor pairing of frames under ordinary pullback",
+ "statement": "For any morphism f:X to T of schemes [def-pc-scheme], module sheaves L,M on T [def-weil-sheaf-of-modules-category], and maps x:f*O to f*L, y:f*O to f*M, define their tensor frame as f*(lambda inverse), followed by the inverse monoidal tensor comparison on the unit, x tensor y, and the monoidal comparison on L,M. This construction is invertible for invertible x,y. It commutes with composition of scheme pullbacks and with the pullback of global maps. Scaling either input by a global section r of O_X scales the output by r. The construction agrees with the expression using the canonical pullback unit isomorphism, by strong monoidal left unitality [lem-pc-scheme-pullback-monoidal-existing].",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Lemma tensor-product-pullback (Tag 01CD); existing source pullback tensor-composition and monoidal-unit comparison theorems, Tags 0095 and 0096."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-scheme-pullback-monoidal-existing"
+ ],
+ "proof": [
+  {
+   "text": "Define the tensor pairing by the ordinary pullback monoidal comparison; all factors are isomorphisms when the input maps are, so the pairing is too. Monoidal naturality cancels the two tensor comparisons for global maps.",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing",
+    "lem-sc-pullback-tensor-composition",
+    "lem-sc-pullback-monoidal-unit-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For composition of two strong monoidal functors, tensor compatibility of the comparison isomorphism gives compatibility of its inverse by cancellation. Naturality with the unit splitting and the two input maps proves the tensor pairing composition equation. Specialize to ordinary scheme pullback using its proved tensor composition equation.",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A scalar endomorphism commutes with every module map by linearity. On pure tensors, multiplying either factor by r equals multiplying the tensor by r. The tensor sheafification universal property extends this equality to all sections. Move this scalar through the unit splitting to obtain the two scalar equations.",
+   "uses": [
+    "lem-pc-scheme-pullback-monoidal-existing"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write presheaf restriction on the over-category explicitly as the module pseudofunctor pullHom, simplifying op-unop before comparing types. The composition formula gives compatibility of tensor frames with pullHom. Compatibility of pullHom with composition of module maps and its formula on a global mapped morphism give the presheaf pairing equation and the restricted-global-map equation.",
+   "uses": [
+    "lem-sc-pullback-tensor-composition"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-scheme-pullback-monoidal-existing",
+  "lem-sc-pullback-tensor-composition",
+  "lem-sc-pullback-monoidal-unit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 0095 and 0096; full strong-monoidal coherence and pure-tensor calculation implemented by G2."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "relative.*(add|tensor)|etaleIsoTorsor.*tensor",
+   "results": "{\"t\": \"2026-10-24T11:57:31Z\", \"tool\": \"grep\", \"query\": \"relative.*(add|tensor)|etaleIsoTorsor.*tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/Topology/CWComplex/Classical/Finite.lean\", \"Mathlib/GroupTheory/Index.lean\", \"Mathlib/GroupTheory/Index.lean\", \"Mathlib/GroupTheory/Index.lean\", \"Mathlib/GroupTheory/Index.lean\", \"Mathlib/GroupTheory/Index.lean\", \"Mathlib/LinearAlgebra/AffineSpace/AffineSubspace/Shift.lean\"], \"digest\": \"28ddc148b5e68d6d\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching general sheaf-torsor pairing or relative addition theorem; hits concern other cohomology or ordinary torsor typeclasses."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, tensorHom",
+   "results": "{\"t\": \"2026-10-24T11:57:32Z\", \"tool\": \"loogle\", \"query\": \"IsIso, tensorHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching general sheaf-torsor pairing or relative addition theorem; hits concern other cohomology or ordinary torsor typeclasses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of frame torsors of invertible modules with specified sections and relative cohomology addition",
+   "results": "{\"t\": \"2026-10-24T11:57:33Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of frame torsors of invertible modules with specified sections and relative cohomology addition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRing.Pic.mk_tensor\", \"Algebra.Extension.tensorH1Cotangent\", \"CommRing.Pic.mul_eq_tensor\", \"rTensor.inverse_of_rightInverse\", \"lTensor.inverse_of_rightInverse\", \"Algebra.Extension.tensorCotangentInvFun\", \"Algebra.Extension.tensorCotangentInvFun_smul_mk\", \"Algebra.Extension.H1Cotangent.val_add\"], \"digest\": \"349ddcaec463d87e\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching general sheaf-torsor pairing or relative addition theorem; hits concern other cohomology or ordinary torsor typeclasses."
+  },
+  {
+   "tool": "grep",
+   "query": "Torsor.*(binary|pairing|quotient)|relativeTorsor.*add",
+   "results": "{\"t\": \"2026-10-24T14:16:52Z\", \"tool\": \"grep\", \"query\": \"Torsor.*(binary|pairing|quotient)|relativeTorsor.*add\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Convex/ConvexSpace/AffineSpace.lean\"], \"digest\": \"94a47316d7ac2842\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching general sheaf-torsor pairing or relative addition theorem; hits concern other cohomology or ordinary torsor typeclasses."
+  },
+  {
+   "tool": "loogle",
+   "query": "Torsor, Sheaf",
+   "results": "{\"t\": \"2026-10-24T14:16:53Z\", \"tool\": \"loogle\", \"query\": \"Torsor, Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Sheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching general sheaf-torsor pairing or relative addition theorem; hits concern other cohomology or ordinary torsor typeclasses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural pairing of abelian sheaf torsors equivariant in both variables is the quotient by the antidiagonal action",
+   "results": "{\"t\": \"2026-10-24T14:16:54Z\", \"tool\": \"leanfinder\", \"query\": \"A natural pairing of abelian sheaf torsors equivariant in both variables is the quotient by the antidiagonal action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.Sheaf.Hom.addCommGroup\", \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux\", \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul\", \"SheafOfModules.freeHomEquiv\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\"], \"digest\": \"cb929081c027f9b7\"}",
+   "date": "2026-10-24",
+   "verdict": "No matching general sheaf-torsor pairing or relative addition theorem; hits concern other cohomology or ordinary torsor typeclasses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CartierPairTensorAddition",
+  "date": "2026-10-24",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-divisor-class",
+   "place": "Proof clause (b): tensor local frames; coherence for the tensor-frame quotient in CartierPairTensorAddition step 3.",
+   "via": [
+    "lem-pur-cartier-pair-tensor-addition"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TensorPullbackFrames",
+  "file": "lean/Sheaf/AlgebraicGeometry/TensorPullbackFrames.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_comp",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_map",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_comp",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_scalar_left",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_scalar_right",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_eq_unit",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_pullHom",
+   "AlgebraicGeometry.Scheme.Modules.tensorPullbackFrames_presheaf_map",
+   "AlgebraicGeometry.Scheme.Modules.pullbackMap_presheaf_map"
+  ],
+  "statement": "theorem tensorPullbackFrames_comp {X Y Z : Scheme.{u}} (f : Y ⟶ X) (g : Z ⟶ Y)\n    (L M : X.Modules)\n    (x : (Scheme.Modules.pullback f).obj (Scheme.Modules.unit X) ⟶\n      (Scheme.Modules.pullback f).obj L)\n    (y : (Scheme.Modules.pullback f).obj (Scheme.Modules.unit X) ⟶\n      (Scheme.Modules.pullback f).obj M) :\n    (Scheme.Modules.pullbackComp g f).inv.app (Scheme.Modules.unit X) ≫\n      (Scheme.Modules.pullback g).map\n        (tensorPullbackFrames L M f x y) ≫\n      (Scheme.Modules.pullbackComp g f).hom.app (L ⊗ M) =\n    tensorPullbackFrames L M (g ≫ f)\n      ((Scheme.Modules.pullbackComp g f).inv.app (Scheme.Modules.unit X) ≫\n        (Scheme.Modules.pullback g).map x ≫ (Scheme.Modules.pullbackComp g f).hom.app L)\n      ((Scheme.Modules.pullbackComp g f).inv.app (Scheme.Modules.unit X) ≫\n        (Scheme.Modules.pullback g).map y ≫ (Scheme.Modules.pullbackComp g f).hom.app M)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T003320-L-3227535",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261025T003320-L-3227535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

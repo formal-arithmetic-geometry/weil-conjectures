@@ -1,0 +1,341 @@
+{
+ "id": "lem-sfb-space-h1-vanishing-affine-base-change",
+ "kind": "statement",
+ "title": "Affine morphisms and affine scalar extension preserve first-cohomology vanishing",
+ "statement": "Let $X$ be an algebraic space over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-trf-algebraic-space], quasi-compact and quasi-separated, meaning that its point space is quasi-compact and its absolute diagonal is quasi-compact on scheme tests [def-a1-space-point-topology]. Use quasi-coherent modules on the small etale ringed site [def-trf-space-quasi-coherent-module] and cohomology $H^q=R^q\\Gamma$ of underlying additive sheaves [def-weil-pbc-sites-and-cohomology]. Suppose $H^1(X,F)=0$ for every quasi-coherent $F$. Put $A=\\Gamma(X,\\mathcal O_X)$ and let $p:X\\to\\operatorname{Spec}A$ induce the identity on global functions [def-weil-affine-spectrum]. An affine morphism of algebraic spaces means a representable morphism whose scheme base changes are affine [pqf-def-affine-morphism]. (1) For every affine morphism $f:Y\\to X$, the space $Y$ is quasi-compact and quasi-separated, and $H^1(Y,G)=0$ for every quasi-coherent $G$. (2) For every unital ring map $A\\to A\\prime$, put $X\\prime=X\\times_{\\operatorname{Spec}A}\\operatorname{Spec}A\\prime$ [lem-trf-space-fibre-products-etale-covers]. The projection $X\\prime\\to X$ is affine, the space $X\\prime$ is quasi-compact and quasi-separated, its diagonal over $\\operatorname{Spec}A\\prime$ is quasi-compact, and the canonical map $$A\\prime\\longrightarrow\\Gamma(X\\prime,\\mathcal O_{X\\prime})$$ induced by $X\\prime\\to\\operatorname{Spec}A\\prime$ is an isomorphism of rings. The zero ring and empty spaces are allowed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V0 (lemma-vanishing-base-change), both parts, under Situation 07UY (situation-vanishing); quasi-compact and quasi-separated permanence: spaces-morphisms.tex Tag 073B (lemma-quasi-compact-quasi-separated-permanence)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-a1-space-point-topology",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-affine-spectrum",
+  "pqf-def-affine-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-sfb-space-affine-quasifinite-properties",
+  "def-sfb-proper-curve-moduli",
+  "def-trf-scheme-algebraic-space"
+ ],
+ "proof": [
+  {
+   "text": "First compare the two readings of quasi-compactness. For an algebraic space, a quasi-compact point space gives an affine, hence quasi-compact, representable surjective etale scheme chart [lem-sfb-qc-space-affine-etale-atlas]; conversely the target of such a chart from a quasi-compact scheme has quasi-compact point space [lem-a1-space-finite-affine-subatlas]. Applied to a space and to the pullbacks of its absolute diagonal along affine scheme tests, which are algebraic spaces by [lem-trf-space-fibre-products-etale-covers], this shows that the chart notions of quasi-compact and quasi-separated in [lem-sfb-space-affine-locality] agree with the point-space notions of the statement and of [lem-sfb-space-qcqs-permanence]. For (1), [lem-sfb-space-affine-locality] gives that $Y$ is quasi-compact and quasi-separated. For quasi-coherent $G$ on $Y$, [lem-sfb-space-affine-module-base-change] says that $f_*G$ is quasi-coherent. The additive-sheaf cohomology comparison [lem-sfb-space-affine-cohomology], with $q=1$, identifies $H^1(Y,G)$ with $H^1(X,f_*G)$. The latter is zero by the hypothesis on $X$. This proves all of (1).",
+   "uses": [
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-space-affine-locality",
+    "lem-sfb-space-affine-module-base-change",
+    "lem-sfb-space-affine-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V0 (lemma-vanishing-base-change), proof of (1); Tag 0D2U (lemma-relative-affine-cohomology) is the existing combined affine-vanishing/Leray comparison. Comparison of quasi-compactness: spaces-properties.tex Tags 03H6 (lemma-quasi-compact-affine-cover) and 03E4 (lemma-quasi-compact-space)."
+   }
+  },
+  {
+   "text": "Write $Z=\\operatorname{Spec}A$, $Z'=\\operatorname{Spec}A'$ and $q:Z'\\to Z$, with $f:X'\\to X$ and $p':X'\\to Z'$ the projections. Every affine scheme test $\\operatorname{Spec}B\\to Z$ has fibre product $\\operatorname{Spec}(A'\\otimes_A B)$ by [lem-weil-pbc-fibre-product-affine-spectra]. Thus $q$ is affine by the scheme-test definition; its base change $f$ is affine by [lem-sfb-space-affine-locality]. That node also gives that $X'$ is quasi-compact and quasi-separated in its chart sense, hence in the point-space sense by the comparison of step 1 through [lem-sfb-qc-space-affine-etale-atlas] and [lem-a1-space-finite-affine-subatlas]. The affine scheme $Z'$ is quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-sfb-space-qcqs-permanence] applied to $p':X'\\to Z'$ gives that $p'$ is quasi-separated. This is exactly the requested quasi-compactness of its relative diagonal.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sfb-space-affine-locality",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-qcqs-permanence",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-finite-affine-subatlas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V0(2), first sentence; spaces-morphisms.tex Tags 03WI (lemma-base-change-affine) and 073B (lemma-quasi-compact-quasi-separated-permanence)."
+   }
+  },
+  {
+   "text": "On an affine etale scheme test $V=\\operatorname{Spec}B\\to Z$, [lem-trf-space-chart-limit-enlarged-sections] identifies $(q_*\\mathcal O_{Z'})(V)$ with the regular functions on $Z'\\times_ZV$. By [lem-weil-pbc-fibre-product-affine-spectra] these functions are $A'\\otimes_A B$; $a'\\in A'$ pulls back to $a'\\otimes1$. On the other hand [lem-weil-pbc-spec-module-tilde-sections] and [lem-weil-pbc-module-pullback-affine-sections] give the very same values and pure-tensor pullback maps for $\\widetilde{A'}_{\\mathrm{et}}$, as defined in [def-sc-etale-qcoherent-module]. These formulas commute with every ring map of affine etale tests. Restriction and the sheaf gluing axiom therefore give $q_*\\mathcal O_{Z'}\\simeq\\widetilde{A'}_{\\mathrm{et}}$, preserving $a'\\mapsto a'\\otimes1$.",
+   "uses": [
+    "lem-trf-space-chart-limit-enlarged-sections",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-sc-etale-qcoherent-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V0(2), identification of the affine direct-image algebra before applying Tag 07U8; explicit affine-test calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-affine-module-base-change] to the affine morphism $q:Z'\\to Z$, the base change $p:X\\to Z$, and $\\mathcal O_{Z'}$. It gives the canonical isomorphism $p^*q_*\\mathcal O_{Z'}\\xrightarrow{\\sim}f_*p'^*\\mathcal O_{Z'}$, and $p'^*\\mathcal O_{Z'}\\simeq\\mathcal O_{X'}\\otimes_{p'^{-1}\\mathcal O_{Z'}}p'^{-1}\\mathcal O_{Z'}=\\mathcal O_{X'}$ by the tensor-pullback identification of [lem-trf-space-chart-adjunction-tensor-realization], so the target is $f_*\\mathcal O_{X'}$. After step 3 the source is $p^*\\widetilde{A'}_{\\mathrm{et}}=A'\\otimes_A\\mathcal O_X$. With $M=A'$, [lem-sfb-space-acyclic-global-module-sections] now gives a bijection $A'\\xrightarrow{\\sim}\\Gamma(X,A'\\otimes_A\\mathcal O_X)$. Compose with global sections of the preceding sheaf isomorphism and the defining equality $\\Gamma(X,f_*\\mathcal O_{X'})=\\Gamma(X',\\mathcal O_{X'})$.",
+   "uses": [
+    "lem-sfb-space-affine-module-base-change",
+    "lem-sfb-space-acyclic-global-module-sections",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V0(2), final displayed calculation, using Tags 07U8 (lemma-affine-base-change) and 07UZ (lemma-vanishing-compute)."
+   }
+  },
+  {
+   "text": "For $a'\\in A'$, the map in step 4 first gives $a'\\otimes1$. By the defining counit formula for the canonical base-change map in [lem-sfb-space-affine-module-base-change] and the local tensor formula of [lem-trf-space-chart-adjunction-tensor-realization], its image is the pullback of $a'$ along $p':X'\\to Z'$. Consequently the bijection just proved is the canonical ring homomorphism in (2), hence is a ring isomorphism. No step excludes $A'=0$ or $X=\\varnothing$: spectra, tensor products, direct images and the cited module computation all include these cases.",
+   "uses": [
+    "lem-sfb-space-affine-module-base-change",
+    "lem-trf-space-chart-adjunction-tensor-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V0(2), identifying the displayed equality with the canonical map; the base-change adjunction formula of Tag 07U8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-space-affine-locality",
+  "lem-sfb-space-affine-module-base-change",
+  "lem-sfb-space-affine-cohomology",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-qcqs-permanence",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "def-sc-etale-qcoherent-module",
+  "lem-sfb-space-acyclic-global-module-sections",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V0 (lemma-vanishing-base-change), with Tag 0D2U for the affine Leray comparison and the affine-test and canonical-map identifications expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For algebraic spaces vanishing H1 of all quasi coherent modules is preserved by affine morphisms and affinization base change has the prescribed global ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes $ f : X \\to Y $ with affine target $ Y $ satisfies this property if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism induced by $ f $ on the glob\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.HasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  [AlgebraicGeometry.HasRingHomProperty P Q],\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.sourceAffineLocally fun {R S} [CommRing R]\", \"doc\": \"A morphism of schemes with affine target satisfies property $ P $ if and only if for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ satisfies property $ \"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ (Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) {X Y : AlgebraicGeometry.Scheme}\\n  (f : X ⟶ Y) [inst : AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.affineAnd (fun {R S} [CommRing R] [CommRing S] => Q) f ↔\\n    AlgebraicGeometry.IsAffine X ∧ Q (CommRingCat\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ with affine target $ Y $ satisfies the affineAnd $ Q $ property if and only if the scheme $ X $ is affine and the condition $ Q $ holds for the ring homomorphism in\"}\n  {\"name\": \"AlgebraicGeometry.sourceAffineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"({R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) →\\n  AlgebraicGeometry.AffineTargetMorphismProperty\", \"doc\": \"A morphism of schemes with affine target satisfies the property $ P $ if, for every affine open subset $ U $ of the source scheme, the restriction of the morphism to $ U $ also satisfies $ P $.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R] [CommRing S] => Q\", \"doc\": \"For a morphism property $ P $ of schemes and a ring homomorphism property $ Q $ satisfying compatibility conditions (respecting isomorphisms, localization preservation, and spanning), the property $ P\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_eq_affineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => Q) →\\n    AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) =\\n      @AlgebraicGeometry.\", \"doc\": \"For a local property $ Q $ of ring homomorphisms, the property of being affine and satisfying $ Q $ locally on affine opens of the target is equivalent to the intersection of being an affine morphism \"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff'\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n      AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing\", \"doc\": \"Let `f: X \\\\to Y` be a morphism of schemes, and let `Q` be a property of ring homomorphisms that is respected by isomorphisms. The following conditions on `f` are equivalent:\\\\n1. For every affine open \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affineAnd and stability-under-base-change results concern scheme morphism properties and do not compute quasi-coherent cohomology or global sections of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomologically affine qcqs algebraic space base change Spec of an algebra over global functions has global sections equal to that algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.AffineSpace\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"Type v → AlgebraicGeometry.Scheme → AlgebraicGeometry.Scheme\", \"doc\": \"For a scheme $ S $ and a type $ n $, the affine space $ \\\\mathbb{A}^n_S $ is constructed as the fiber product (pullback) of $ S $ and the affine $ n $-space over the integers $ \\\\operatorname{Spec}(\\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isPullback_toSpecΓ_toSpecΓ\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine],\\n  CategoryTheory.IsPullback f X.toSpecΓ Y.toSpecΓ (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Let $f: X \\\\to Y$ be an affine morphism of schemes, and assume that $Y$ is a quasi-affine scheme. Let $\\\\text{toSpecΓ}_X: X \\\\to \\\\mathrm{Spec}(\\\\Gamma(X, \\\\mathcal{O}_X))$ and $\\\\text{toSpecΓ}_Y: Y \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ (n : Type v) {X : AlgebraicGeometry.Scheme}\\n  (f :\\n    X ⟶\\n      AlgebraicGeometry.Spec\\n        { carrier := MvPolynomial n (ULift.{u, 0} ℤ), commRing := MvPolynomial.instCommRingMvPolynomial })\\n  (i : n),\\n  (AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv n) f i =\\n    (CategoryTheory.ConcreteC\", \"doc\": \"For any scheme $X$ and index set $n$, there is a natural bijection between the set of morphisms from $X$ to the affine space $\\\\mathbb{A}^n_\\\\mathbb{Z}$ (realized as $\\\\operatorname{Spec}(\\\\mathbb{Z}[x_1,\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.SpecMap_iff_of_affineAnd\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme},\\n  AlgebraicGeometry.HasAffineProperty P (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.RespectsIso fun {R S\", \"doc\": \"For a morphism $ f : R → S $ of commutative rings, the induced morphism of schemes $ \\\\operatorname{Spec}(f) : \\\\operatorname{Spec}(S) → \\\\operatorname{Spec}(R) $ satisfies the morphism property $ P $ if\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_SpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {R S : CommRingCat} (φ : R ⟶ S),\\n  AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n S).hom\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.Spec.map (CommRingCat.ofH\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ \\\\varphi: R \\\\to S $, and a natural number $ n $, the induced morphism between affine spaces $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} \\\\to \\\\mat\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme), AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any scheme $ S $ and type $ n $, the canonical morphism from the affine space $ \\\\mathbb{A}^n_S $ to the base scheme $ S $ is an affine morphism of schemes. This follows from the construction of $ \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.mapSpecMap\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {R S : CommRingCat} →\\n    (φ : R ⟶ S) →\\n      CategoryTheory.Arrow.mk (AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ)) ≅\\n        CategoryTheory.Arrow.mk\\n          (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (MvPolynomial.map (CommRingCat.Hom.hom φ))))\", \"doc\": \"For a ring homomorphism $\\\\varphi: R \\\\to S$ and a type $n$, the isomorphism in the arrow category asserts that the composition of the isomorphism $\\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} \\\\cong \\\\operatorn\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.map_Spec_map\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {R S : CommRingCat} (φ : R ⟶ S),\\n  AlgebraicGeometry.AffineSpace.map n (AlgebraicGeometry.Spec.map φ) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.AffineSpace.SpecIso n S).hom\\n      (CategoryTheory.CategoryStruct.comp\\n        (AlgebraicGeometry.Spec.map (CommRingCat.ofH\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ φ: R → S $, the induced morphism $ \\\\mathbb{A}^n_{\\\\operatorname{Spec}(S)} → \\\\mathbb{A}^n_{\\\\operatorname{Spec}(R)} $ between affine s\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affineAnd and stability-under-base-change results concern scheme morphism properties and do not compute quasi-coherent cohomology or global sections of algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"pushforward\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affineAnd and stability-under-base-change results concern scheme morphism properties and do not compute quasi-coherent cohomology or global sections of algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|vanishing.*base.?change|cohomologically.?affine",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affineAnd and stability-under-base-change results concern scheme morphism properties and do not compute quasi-coherent cohomology or global sections of algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine base change of a quasi compact quasi separated algebraic space with zero first quasi coherent cohomology preserves vanishing and global functions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"{P : MorphismProperty Scheme.{u}} (_ : HasAffineProperty P (affineAnd Q)) (hQi : RingHom.RespectsIso Q)\\n  (hQb : RingHom.IsStableUnderBaseChange Q) : P.IsStableUnderBaseChange\", \"doc\": \"If $ Q $ is a ring homomorphism property that is invariant under ring isomorphisms and stable under base change, then the property of a morphism of schemes with affine target being affine and satisfyi\"}\n  {\"name\": \"AlgebraicGeometry.affineAnd_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.AffineAnd\", \"type\": \"(hQi : RingHom.RespectsIso Q) (hQb : RingHom.IsStableUnderBaseChange Q) : (affineAnd Q).IsStableUnderBaseChange\", \"doc\": \"If a ring homomorphism property $ Q $ is invariant under ring isomorphisms and stable under base change, then the property of being an affine morphism with affine target and satisfying $ Q $ on global\"}\n  {\"name\": \"AlgebraicGeometry.IsStableUnderBaseChange.of_pullback_fst_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[P'.RespectsIso] [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange]\\n  (H : ∀ {R : CommRingCat.{u}} {S X : Scheme.{u}} (f : Spec R ⟶ S) (g : X ⟶ S), P' f → P (pullback.fst f g) → P g)\\n  {X Y Z T : Scheme.{u}} [IsAffine T] (p : T ⟶ X) (hp : P' p) (f : X ⟶ Z) (g : Y ⟶ Z) (h : P' f)\\n  (hf : P (pu\", \"doc\": \"Let $ P' $ be a morphism property stable under composition and respecting isomorphisms, and let $ P $ be a property stable under base change. Suppose $ T $ is an affine scheme, and consider morphisms \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiCompact\", \"doc\": \"If a morphism of schemes is quasi-compact, then any base change (pullback) of the morphism is also quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Affine\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @IsAffineHom\", \"doc\": \"The property of being an affine morphism of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ is affine, then any base change (pullback) of $ f $ is also an affine morphism.\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) : Prop\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': Z\"}\n  {\"name\": \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"(P : AffineTargetMorphismProperty) [P.toProperty.RespectsIso]\\n  (H : ∀ ⦃X Y S : Scheme⦄ [IsAffine S] [IsAffine X] (f : X ⟶ S) (g : Y ⟶ S), P g → P (pullback.fst f g)) :\\n  P.IsStableUnderBaseChange\", \"doc\": \"A morphism property $ P $ with affine target is stable under base change if, whenever $ g: Y \\\\to S $ has property $ P $ and there is a pullback square involving $ g $, then the induced morphism $ g': \"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparated_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \": MorphismProperty.IsStableUnderBaseChange @QuasiSeparated\", \"doc\": \"The property of being quasi-separated for morphisms of schemes is stable under base change. That is, if a morphism $ f: X \\to Y $ of schemes is quasi-separated, then any base change (pullback) of $ f $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: affineAnd and stability-under-base-change results concern scheme morphism properties and do not compute quasi-coherent cohomology or global sections of algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs algebraic space X with H1 vanishing for all quasi coherent modules and A its global functions every A module M has Gamma X of M tensor O_X canonically equal to M",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, ModuleCat.tilde, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.isSheaf, ModuleCat.instModuleCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecOfRingCatValRingCatSheafTopTildeInType, SheafOfModules.unitHomEquiv, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, Sheaf, cohomology",
+   "results": "Search note: loogle: unknown identifier 'AlgebraicGeometry'. Returned 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishing.base.change|vanishing.compute|cohomologically.affine|AlgebraicSpace",
+   "results": "Returned 0 hits: . Source subdirectory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of module tensor structure sheaf on a quasi compact quasi separated algebraic space with vanishing first cohomology",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.ΓSpecIso, AlgebraicGeometry.Scheme.ΓSpecIso_inv, SheafOfModules.sections, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.termΓ(_,_), AlgebraicGeometry.Scheme.Γ_def, ModuleCat.tildeInModuleCat, AlgebraicGeometry.StructureSheaf.to_global_factors_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map M to global sections of pullback of the associated sheaf of M along X to Spec Gamma X is bijective if all quasi coherent modules on X have vanishing H1",
+   "results": "Returned 8 hits: SheafOfModules.bijective_pushforwardSections, SheafOfModules.QuasicoherentData.I, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv",
+   "results": "Returned 6 hits: SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "grep",
+   "query": "globalSections|adjunction|unitHomEquiv",
+   "results": "Returned 10 hits: Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean. Source subdirectory Mathlib/AlgebraicGeometry/Modules",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine morphisms of algebraic spaces preserve vanishing first cohomology of quasi coherent modules and arbitrary affine base change over global functions computes the new global ring",
+   "results": "Returned 8 hits: AlgebraicGeometry.sourceAffineLocally, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.affineAnd_apply, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.targetAffineLocally_affineAnd_iff', AlgebraicGeometry.HasRingHomProperty.iff_of_isAffine, AlgebraicGeometry.HasRingHomProperty.appTop, AlgebraicGeometry.HasAffineProperty.iff_of_isAffine",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomologically affine algebraic spaces affine base change global sections",
+   "results": "Returned 8 hits: AlgebraicGeometry.affineAnd_isStableUnderBaseChange, AlgebraicGeometry.isAffineHom_isStableUnderBaseChange, AlgebraicGeometry.Scheme.ΓSpecIso_inv, AlgebraicGeometry.Scheme.Γ_def, AlgebraicGeometry.AffineScheme.Γ, AlgebraicGeometry.IsAffine.casesOn, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.IsAffine.recOn",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme spectrum, module-sheaf adjunction and affine morphism results do not assert the H1-acyclic algebraic-space calculation. The tilde adjunction unit is an isomorphism on Spec of a ring, not on an arbitrary X; bijective_pushforwardSections only compares sections with their direct image."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-acyclic-affinization-geometry",
+  "date": "2026-10-23",
+  "group": "Q08"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. Geometric prerequisites to Tag 07V6: separatedness and universal injectivity of the absolute canonical map, before the affine presentation argument. Tag 07V4 first reduction to field base change, and Tag 07V5 transfer of H1 vanishing to the integral scheme cover, using Tag 07V0.",
+   "via": [
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-sfb-space-serre-affineness",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-h1-vanishing-affine-base-change",
+  "worker": "stage1",
+  "summary": "Retained the statement and statement dependencies. Reused existing affine comparison, base change and qcqs permanence nodes, isolated only the general module computation of Tag 07UZ, and checked the canonical ring map on local tensors. No project attachment or Mathlib match. Reviewer FIX: steps 1-2 cite the comparison of chart and point-space quasi-compactness; step 4 cites the identification of the tensor pullback of the structure sheaf.",
+  "blueprint": "Retains the inherited null ancestor and via chain. Latest blueprint det-thm-sf-ctf-stability-direct-images proof (3), the alteration prerequisite chain recorded in from.place, and specifically the field-base-change reduction in Tags 07V4/07V5. This split supplies Tag 07V0 without using the downstream Serre affineness theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine coordinate calculation on scheme tests; the unit has no replacement for tensor-product coordinates."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme quasi-separatedness used for Spec A prime; no same-unit scheme leaf replaces it."
+   },
+   {
+    "node": "lem-trf-space-chart-limit-enlarged-sections",
+    "why": "Generic identification of module direct images with sections on a pullback; no route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-module-tilde-sections",
+    "why": "Generic construction and sections of the associated module on Spec A; no route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-pullback-affine-sections",
+    "why": "Generic affine pullback tensor calculation identifies the associated etale module; no route is replaced."
+   },
+   {
+    "node": "lem-trf-space-enlarged-etale-ringed-site-model",
+    "why": "Generic ringed-topos model identifies global sections with sections of the direct image."
+   },
+   {
+    "node": "lem-trf-space-chart-adjunction-tensor-realization",
+    "why": "Generic canonical-unit tensor formulas identify the actual base-change ring map."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic comparison: a surjective etale chart from a quasi-compact scheme has quasi-compact point space; used to match the chart and point-space notions of quasi-compactness, as already accepted for lem-sfb-space-qcqs-permanence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-trf-space-chart-limit-enlarged-sections",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-chart-adjunction-tensor-realization",
+  "lem-a1-space-finite-affine-subatlas"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-216cd27b9",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-216cd27b9 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-cohomology 07UY, 07UZ and 07V0 with their proofs, and spaces-properties 03E4/03H6. The item keeps 07V0 exactly: X qcqs, H^1 of every quasi-coherent module vanishes, A=Γ(X,O_X). It adds only true consequences (Y and X' qcqs, p' quasi-separated, the map is the canonical ring map); nothing is weakened. The new node lem-sfb-space-acyclic-global-module-sections is the 07UZ global-sections assertion for every A-module. It is statement-only, complete, carries tag and label, and records its searches (Loogle marked unavailable). It is not a clause of the item, and no duplicate exists: rg -L for 07UZ and M⊗_A O_X finds only serre-affineness and acyclic-affinization-geometry, which state other things. Steps 1-5 checked against the cited statements. Step 1: affine-locality gives Y qcqs, affine-module-base-change gives f_*G quasi-coherent, affine-cohomology q=1 gives H^1(Y,G)=H^1(X,f_*G)=0. Step 2: affine tests give Spec(A'⊗B), so q and its base change f are affine; qcqs-permanence then gives the relative diagonal of p' quasi-compact. Step 3: q_*O ≅ Ã'_et by matching chart-limit sections with tilde/affine-pullback sections; elementary is acceptable. Steps 4-5: affine base change with g=p (no flatness needed), the 07UZ node with M=A', and a mate computation showing the map is p'^♯. Small cases A'=0, X=∅, non-flat A/I and infinitely generated A' all hold. FIX (C4): the item and qcqs-permanence define quasi-compactness by the point space, but affine-locality defines it by a chart. Steps 1-2 now cite the 03E4/03H6 comparison through lem-sfb-qc-space-affine-etale-atlas and lem-a1-space-finite-affine-subatlas, and the latter is added to tool_uses. Step 4 now states p'^*O_{Z'}=O_{X'} and cites chart-adjunction-tensor-realization for it. proof_deps recomputed. Statement, stmt_deps and the new node are unchanged. Batch-5: every listed trf/a1/sfb citation is a general definition or generic étale ringed-site infrastructure for algebraic spaces (closures traversed; no trace-formula, Poincaré, nt-* or trace-transport node), so they are outside both assumptions. No cycle, no SGA source. Blueprint from.node is null by inheritance from the base node, not a fault of this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceH1AffineBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.affine_preserves_qcqs_h1_vanishing",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.affine_preserves_qcqs_h1_vanishing",
+   "AlgebraicGeometry.AlgebraicSpace.affine_baseChange_global_functions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceH1AffineBaseChange.lean",
+  "statement": "theorem affine_preserves_qcqs_h1_vanishing [HasSheafify X.etaleTopology AddCommGrpCat.{u}] [HasSheafify Y.etaleTopology AddCommGrpCat.{u}] [HasExt.{u + 1} (Sheaf X.etaleTopology AddCommGrpCat.{u})] [HasExt.{u + 1} (Sheaf Y.etaleTopology AddCommGrpCat.{u})] (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (hH : ∀ (F : X.Modules) (_ : F.IsQuasicoherent), Subsingleton (Sheaf.H ((SheafOfModules.toSheaf X.structureSheaf).obj F) 1)) (f : Y ⟶ X) (hf : MapIsAffine f) : CompactSpace (Point Y.obj.obj) ∧ IsAbsolutelyQuasiSeparated Y ∧ ∀ (G : Y.Modules) (_ : G.IsQuasicoherent), Subsingleton (Sheaf.H ((SheafOfModules.toSheaf Y.structureSheaf).obj G) 1)",
+  "branch": "sheaf-dag",
+  "by": "Q68",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "Two statements, one per clause of the node. Global functions are expressed by a limit cone of the actual regular-function diagram on the small etale site. Its projections are normalized by p and p prime, fixing the canonical ring maps. HasSheafify and HasExt are only infrastructure choices for Mathlib Sheaf.H, with the original section universe unchanged. The four added dependencies are landed definition owners: def-sfb-space-absolute-quasi-separated, def-sfb-space-affine-quasifinite-properties, def-sfb-proper-curve-moduli, and def-trf-scheme-algebraic-space. The last owns the existing schemeSpace construction in EnlargedEtaleRingedSite; the enlarged-site theorem remains only a proof dependency. This repairs the H2/H4 return for 3af2476e46d0 without changing either Lean statement or any accepted stage-1 field."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b719f6b48",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Re-delivery of returned head 3af2476e46d0. The Lean module is byte-identical to that head. The node differs only in stmt_deps, where lem-trf-space-enlarged-etale-ringed-site-model is replaced by def-trf-scheme-algebraic-space (landed Q87 2026-10-18, existing:true owner of schemeSpace), and in lean.note; report.md was updated. This is exactly the correction the return asked for, and the live node still has lean:null. Independent H3 check against Stacks 07UY/07V0: point-space qc, IsAbsolutelyQuasiSeparated, Sheaf.H 1 vanishing for all quasi-coherent modules, A=Γ pinned by the limit cone plus hp, arbitrary φ with an IsPullback presheaf square, MapIsAffine f, relative-diagonal MapIsQuasiCompact, and the canonical-cone IsLimit for B. No extra assumptions; universe u is kept; empty spaces and the zero ring are allowed. Every signature declaration has an owner in stmt_deps, except Point, which is reached through def-a1-space-point-topology (advisory). No hollow definitions, both proofs are sorry, docstrings are OK, and the statement is verbatim. No compile was run because no file was changed."
+ }
+}

@@ -114,7 +114,65 @@
   "def-sc-invertible-module"
  ],
  "proof_split_by": "labels",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.picardPresheafDegree_map",
+    "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
+    "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.picardPresheafDegree_map",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+     "lines": [
+      94,
+      114
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.isLocallyConstant_picardPresheafDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+     "lines": [
+      138,
+      152
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardFibreDegree_eq_picardPresheafDegree",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Jacobian",
+     "lines": [
+      258,
+      277
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.picardPresheafDegree_mul_map_snd",
+     "module": "WeilConjectures.AlgebraicGeometry.Picard.Degree",
+     "lines": [
+      175,
+      187
+     ],
+     "kind": "theorem",
+     "sorry": false,
+     "partial": "`lem-pd-degree-locally-constant`, part 2"
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-picard-degree-decomposition",
  "split_report": {
@@ -145,5 +203,55 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state rests_on_sorry)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $f:X\\to S$ be a proper morphism of schemes which is locally of finite\npresentation, let $T$ be an $S$-scheme, let $\\mathcal{L}$ be an invertible\n$\\mathcal{O}_{X_T}$-module and let $\\deg_T(\\mathcal{L})$ be its fibrewise degree\n([def-pd-fibrewise-degree]); $f_T:X_T\\to T$ is the projection. Then:\n\n1. if $f$ is moreover flat, the function $t\\mapsto\\deg_T(\\mathcal{L})(t)$ is\nlocally constant on $T$;\n1. for every invertible\n$\\mathcal{O}_T$-module $\\mathcal{N}$ one has\n$\\deg_T(\\mathcal{L}\\otimes_{\\mathcal{O}_{X_T}}f_T^*\\mathcal{N}) =\\deg_T(\\mathcal{L})$;\n1. for every morphism $g:T'\\to T$ of $S$-schemes one has\n$\\deg_{T'}\\bigl(g_{X}^*\\mathcal{L}\\bigr)=\\deg_T(\\mathcal{L})\\circ g$,\nwhere $g_X:X_{T'}\\to X_T$ is the\nbase change of $g$;\n1. if $S=\\Spec(k)$ for a field $k$, then for every field extension $K/k$ and\nevery morphism $\\tau:\\Spec(K)\\to T$ of $k$-schemes, with image point $t$ and\nbase change $\\tau_X:X_K\\to X_T$, the degree of the invertible module\n$\\tau_X^*\\mathcal{L}$ on the proper $K$-scheme $X_K$\n([def-pc-degree-line-bundle]) is $\\deg_T(\\mathcal{L})(t)$.",
+  "proof": [
+   {
+    "text": "We work throughout in the situation of [def-pd-fibrewise-degree], so\nthat the degree is the [def-pc-degree-line-bundle] and $\\chi$ is the\n[def-pc-euler-characteristic] of the fibre, and fibre products are those\nof [def-pc-base-change].",
+    "uses": [
+     "def-pd-fibrewise-degree",
+     "def-pc-degree-line-bundle",
+     "def-pc-euler-characteristic",
+     "def-pc-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(1) Local constancy.* Assume that $f$ is flat. The projection\n$f_T:X_T\\to T$ is the base change of $f$, hence proper, flat and locally\nof finite presentation; over an affine open $T_0\\subseteq T$ it is\nquasi-compact and quasi-separated, hence of finite presentation.\n$\\mathcal{L}$ is invertible,\nhence of finite presentation and (as $X_T$ is flat over $T$) flat over\n$T$. Fix $t\\in T$ and an affine open $T_0\\ni t$. By\n[lem-pc-rf-perfect-base-change](1), applied to $X_{T_0}\\to T_0$, there are an open\n$U\\ni t$ and a bounded complex $P$ of finite free $\\mathcal O_U$-modules,\nconcentrated in degrees $[0,d]$, with $P^i\\cong\\mathcal O_U^{n_i}$, such\nthat $\\mathcal H^q(g^*P)\\cong R^qf'_*\\mathcal L'$ for every $g:T'\\to U$\n($f'$, $\\mathcal L'$ the base changes). For $s\\in U$ take\n$g=g_s:\\Spec\\kappa(s)\\to U$: the target is a point, on which the higher\ndirect images are the cohomology groups of the fibre, so\n$H^q(X_s,\\mathcal L_s)\\cong H^q(P\\otimes\\kappa(s))$ for all $q$.\nTherefore\n\n$$\n\\chi\\bigl(X_s,\\mathcal{L}_s\\bigr)\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}H^i(P\\otimes\\kappa(s))\n=\\sum_i(-1)^i\\dim_{\\kappa(s)}\\bigl(P^i\\otimes\\kappa(s)\\bigr)\n=\\sum_i(-1)^in_i ,\n$$\n\nthe middle equality being the Euler characteristic of a bounded complex\nof finite dimensional vector spaces. So $s\\mapsto\\chi(X_s,\\mathcal{L}_s)$\nis constant on $U$, hence locally constant on $T$. The same argument for\n$\\mathcal{O}_{X_T}$ shows that\n$s\\mapsto\\chi(X_s,\\mathcal{O}_{X_s})$ is locally\nconstant. Subtracting gives (1).",
+    "uses": [
+     "lem-pc-rf-perfect-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2) Twisting by a pullback.* Fix $t\\in T$. The fibre of\n$\\mathcal{L}\\otimes f_T^*\\mathcal{N}$ over $t$ is\n$\\mathcal{L}_t\\otimes f_t^*\\mathcal{N}_t$, where $\\mathcal{N}_t$ is the\npullback of $\\mathcal N$ to $\\Spec\\kappa(t)$ and $f_t:X_t\\to\\Spec\\kappa(t)$.\nAn invertible module on the point $\\Spec\\kappa(t)$\n([def-sc-invertible-module]) is a one-dimensional vector space, hence\ntrivial, so $f_t^*\\mathcal{N}_t\\cong\\mathcal O_{X_t}$ and\n$\\mathcal{L}_t\\otimes f_t^*\\mathcal{N}_t\\cong\\mathcal{L}_t$. Isomorphic modules\nhave the same cohomology, hence the same Euler characteristic, and the\nfibrewise degrees of $\\mathcal{L}\\otimes f_T^*\\mathcal{N}$ and $\\mathcal{L}$\nagree at $t$.",
+    "uses": [
+     "def-sc-invertible-module"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(3) Base change.* For $t'\\in T'$ with image $t\\in T$ the residue field\n$\\kappa(t')$ is an extension of $\\kappa(t)$, the fibre of $X_{T'}\\to T'$\nover $t'$ is $X_{t'}=X_t\\times_{\\kappa(t)}\\Spec\\kappa(t')$ (fibre products\ncompose), and under this identification\n$(g_X^*\\mathcal{L})_{t'}=(\\mathcal{L}_t)_{\\kappa(t')}$. Since $X_t$ is proper\nover $\\kappa(t)$ (base change of the proper morphism $f$), the equality is\n[lem-pc-degree-base-change](1) applied to $X_t$ and the field extension\n$\\kappa(t')\\big/\\kappa(t)$.",
+    "uses": [
+     "lem-pc-degree-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(4) Field-valued points.* Apply (3) to $g=\\tau:T'=\\Spec(K)\\to T$. The\nscheme $\\Spec(K)$ has a single point, with residue field $K$, and the fibre of\n$X_K\\to\\Spec(K)$ over it is $X_K$ itself; so the fibrewise degree of\n$\\tau_X^*\\mathcal{L}$ at that point is the degree of $\\tau_X^*\\mathcal{L}$ on the\nproper $K$-scheme $X_K$ ([def-pc-degree-line-bundle]), and (3) identifies it\nwith $\\deg_T(\\mathcal{L})(t)$.",
+    "uses": [
+     "def-pc-degree-line-bundle"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

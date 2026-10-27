@@ -1,0 +1,265 @@
+{
+ "id": "lem-a1-lattice-residue-system-realization",
+ "kind": "statement",
+ "title": "Coherent finite residue systems and completed realization of an integral representation",
+ "statement": "Let $X$ be a nonempty connected Noetherian separated scheme on which the prime $\\ell$ is invertible [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth, def-weil-scheme-morphism-properties]. Fix a geometric point $\\bar x$ and the profinite group $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$ [def-weil-geometric-point, def-galois-fibre-functor]. Let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Let $\\Lambda$ be a finite free $A$-module of rank $r\\geq0$, with a $\\Pi$-action by $A$-linear automorphisms, jointly continuous for the $\\varpi$-adic topology. Set $A_n=A/\\varpi^n$ and $\\Lambda_n=\\Lambda/\\varpi^n\\Lambda$ for $n\\geq1$.\n\nThere are finite locally constant etale $A_n$-module sheaves $F_n$, etale locally free of rank $r$ [def-weil-pbc-etale-site, def-weil-sheaf-of-modules-category], and equivariant fibre identifications $(F_n)_{\\bar x}\\cong\\Lambda_n$ under the finite-coefficient Galois correspondence [cor-galois-lisse-representations](1). The actions on the finite sets $\\Lambda_n$ are continuous for the discrete topology. There are transition maps $t_{n,j}:F_n\\to F_j$ for all $n\\geq j\\geq1$, linear for $A_n\\to A_j$, whose fibre maps are the quotient maps $\\Lambda_n\\to\\Lambda_j$. They satisfy $t_{n,n}=1$ and $t_{j,i}t_{n,j}=t_{n,i}$. Their adjoints\n$$A_j\\otimes_{A_n}F_n\\xrightarrow{\\sim}F_j$$\nare isomorphisms, compatible with the tensor associativity maps for every $n\\geq j\\geq i$ [def-pur-sheaf-tensor-product].\n\nOn $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_n(A_n)_X$ [def-weil-completed-integral-coefficients], and let $\\nu_X^*$ be the etale-to-pro-etale inverse image [def-weil-pbc-site-comparison-morphism]. Then $N_\\Lambda=\\varprojlim_n\\nu_X^*F_n$, with the induced $B_X$-action, is locally free of rank $r$, and the limit projections induce compatible isomorphisms $N_\\Lambda/\\varpi^nN_\\Lambda\\cong\\nu_X^*F_n$. The construction, including the transitions, adjoint isomorphisms and limit projections, is functorial in continuous equivariant $A$-linear maps of finite free modules.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1), pp. 59-60, and the integral-lattice construction in the proof of Lemma 7.4.7, p. 70; finite Galois correspondence and coherent residue transitions as in literature/stanford-weil2-seminar/L19.pdf, Proposition 1.1.9, third bullet"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-connected-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-geometric-point",
+  "def-galois-fibre-functor",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "cor-galois-lisse-representations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose an $A$-basis of $\\Lambda$, identifying $\\Lambda_n$ with $A_n^r$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR with finite residue field $k=A/(\\varpi)$. Multiplication by $\\varpi^a$ identifies $k$ with $\\varpi^aA/\\varpi^{a+1}A$: injectivity follows by cancellation in the domain $A$. The filtration by these subquotients shows that $A_n$ and $\\Lambda_n$ are finite. The action descends because $\\varpi^n\\Lambda$ is invariant. For a fixed lift $v\\in\\Lambda$ of $\\bar v\\in\\Lambda_n$, the orbit map $g\\mapsto gv$ is continuous by the assumed joint continuity. Each coset of $\\varpi^n\\Lambda$ is open, so $g\\mapsto g\\bar v$ is continuous into the discrete set $\\Lambda_n$. Since this set is discrete, these orbit maps give joint continuity of the quotient action. All quotient maps are equivariant.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite residue actions; algebraic expansion of the integral-lattice argument of Lemma 7.4.7"
+   }
+  },
+  {
+   "text": "Apply [cor-galois-lisse-representations](1) at each finite ring $A_n$, choosing its quasi-inverse and fibre comparison, to obtain $F_n$ with fibre $\\Lambda_n$. These choices make the construction at each level functorial. To verify the asserted free rank, the action on the finite set $\\Lambda_n$ has open normal kernel $K_n$: it is the intersection of the finitely many open point stabilizers. By [thm-galois-fundamental], the finite continuous $\\Pi$-set $\\Pi/K_n$ gives a pointed finite etale cover, on which monodromy is restricted to $K_n$. The action is then trivial. The finite module equivalence identifies the restriction of $F_n$ with the constant module $A_n^r$. Thus $F_n$ is etale locally free of rank $r$, including $r=0$.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.7, integral case; Stanford L19 Proposition 1.1.9, third bullet"
+   }
+  },
+  {
+   "text": "For $n\\geq j$, regard $F_j$ as an $A_n$-module sheaf by restriction along $A_n\\to A_j$; it is still finite locally constant. Full faithfulness in [cor-galois-lisse-representations](1) lifts $q_{n,j}:\\Lambda_n\\to\\Lambda_j$ uniquely to $t_{n,j}$. The equations $q_{n,n}=1$ and $q_{j,i}q_{n,j}=q_{n,i}$ imply the identical equations for the sheaf maps by faithfulness over $A_n$. The scalar-extension comparison in that same node identifies the adjoint of $t_{n,j}$ with $A_j\\otimes_{A_n}\\Lambda_n\\to\\Lambda_j$, $b\\otimes[v]_n\\mapsto b[v]_j$. In the chosen basis this is the coordinatewise identity $A_j\\otimes_{A_n}A_n^r\\cong A_j^r$, hence an isomorphism, reflected by the equivalence. For $n\\geq j\\geq i$, the two maps after tensor associativity both send $c\\otimes b\\otimes[v]_n$ to $cb[v]_i$; pure tensors generate the tensor module. The correspondence's compatibility with composite scalar extension therefore gives exactly the required coherent adjoint isomorphisms.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Stanford L19 Proposition 1.1.9, third bullet; finite scalar-extension calculation in Proposition 6.8.4(1)"
+   }
+  },
+  {
+   "text": "The adjacent transitions just constructed make $(F_n)$ a normalized finite locally free etale system of constant rank $r$. Apply the reduction equivalence of [lem-per-lisse-completed-system-comparison] to this system. Its inverse is the actual sheaf limit $N_\\Lambda=\\varprojlim_n\\nu_X^*F_n$, with the coordinate action of that node's coefficient sheaf $B^{\\mathrm{pbc}}_X=\\varprojlim_n(A/\\varpi^n)_X$ of continuous-function quotients. It is not literally our $B_X$, a limit of constant sheaves: [lem-weil-pbc-integral-coefficient-presentation-comparison] gives the unique ring isomorphism $e_X:B^{\\mathrm{pbc}}_X\\to B_X$ with $\\pi_ne_X=\\bar e_n\\pi^{\\mathrm{pbc}}_n$, where $\\bar e_n$ is induced by constant functions. Hence the coordinate $B_X$-action on $N_\\Lambda$ is the $B^{\\mathrm{pbc}}_X$-action restricted along $e_X^{-1}$. This restriction carries $(B^{\\mathrm{pbc}}_X)^s|_U$ to $B_X^s|_U$, fixes $\\varpi$, and leaves the underlying limit projections unchanged. That node gives local finite freeness and identifies its actual quotient projections $N_\\Lambda/\\varpi^nN_\\Lambda\\to\\nu_X^*F_n$ with isomorphisms, compatible with the tower. Its hypotheses hold: $X$ is Noetherian separated and $\\ell$ is invertible. The rank is $r$: on a local free chart of rank $s$ the reduction modulo $\\varpi$ is free of rank $s$ over the constant field $k$, while $F_1$ has rank $r$; at any geometric point of the chart the resulting finite-dimensional $k$-spaces have equal dimension, so $s=r$. Empty charts can be discarded.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "lem-weil-pbc-integral-coefficient-presentation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), with its quotient and inverse-limit maps"
+   }
+  },
+  {
+   "text": "For a continuous equivariant $A$-linear map $u:\\Lambda\\to\\Lambda'$, reduction gives $u_n:\\Lambda_n\\to\\Lambda'_n$ satisfying $q'_{n,j}u_n=u_jq_{n,j}$. Full faithfulness of [cor-galois-lisse-representations](1) gives maps $F_n(u)$ satisfying the same squares, preserving identities and composition. The scalar-extension comparison is natural, so its square with the adjoint isomorphisms commutes: on fibres both routes send $b\\otimes[v]_n$ to $b[u(v)]_j$. On compatible sections define $N(u)((s_n)_n)=(\\nu_X^*F_n(u)(s_n))_n$, as allowed by [def-pur-sheaf-inverse-limit]. This formula is $B_X$-linear, commutes with every limit projection and respects identities and composition coordinatewise. The quotient comparisons of [lem-per-lisse-completed-system-comparison] are induced by those projections, so their naturality follows from the same projection equations. This proves all the functoriality asserted.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "def-pur-sheaf-inverse-limit",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1), morphisms of towers and natural quotient projections"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "cor-galois-lisse-representations",
+  "thm-galois-fundamental",
+  "def-pur-sheaf-tensor-product",
+  "lem-per-lisse-completed-system-comparison",
+  "def-pur-sheaf-inverse-limit",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1), p. 59 (proof left to the reader), integral case of Lemma 7.4.7, p. 70; finite residue construction also Stanford L19 Proposition 1.1.9, third bullet. Explicit assembly using existing finite Galois and completed-system nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(lattice|[Ll]ocal[Ss]ystem).*(reduction|quotient|tower)|(normalized|compatible).*tower",
+   "results": "9 hits: Mathlib/Topology/DiscreteQuotient.lean, Mathlib/Algebra/Lie/Free.lean, Mathlib/Algebra/Module/LinearMap/Defs.lean, Mathlib/Algebra/Module/LinearMap/Defs.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/FieldTheory/NormalizedTrace.lean, Mathlib/RingTheory/TensorProduct/Nontrivial.lean. Full returned hits retained in research/tower-grep.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract finite Galois-set lifting, condensed discrete modules and unrelated algebraic towers do not state coherent etale module residue systems with completed pro-etale realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous action of an etale fundamental group on a finite free module over a complete discrete valuation ring defines a compatible normalized tower of finite locally constant etale sheaves",
+   "results": "8 hits: groupCohomology.exists_mul_galRestrict_of_norm_eq_one, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, InfiniteGalois.algEquivToLimit, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, InfiniteGalois.toAlgEquivAux_eq_liftNormal, InfiniteGalois.asProfiniteGaloisGroupFunctor, InfiniteGalois.mk_toAlgEquivAux, Algebra.Etale.comp. Full returned hits retained in research/tower-leanfinder.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract finite Galois-set lifting, condensed discrete modules and unrelated algebraic towers do not state coherent etale module residue systems with completed pro-etale realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous integral lattice representation gives a normalized inverse system of finite locally constant etale module sheaves",
+   "results": "8 hits: ContinuousMap.instLatticeOfTopologicalLattice.congr_simp, CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functorIso, ContinuousMap.instLatticeOfTopologicalLattice, CondensedMod.LocallyConstant.functorIsoDiscrete, Module.Basis.continuous_coe_repr, CondensedMod.isDiscrete_tfae, Profinite.asLimitCone. Full returned hits retained in research/tower-leansearch.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract finite Galois-set lifting, condensed discrete modules and unrelated algebraic towers do not state coherent etale module residue systems with completed pro-etale realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"LocallyConstant\"",
+   "results": "12 hits: CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, CompHausLike.LocallyConstant.presheaf_ext, Condensed.locallyConstantPresheaf, LightCondensed.locallyConstantPresheaf, LightCondensed.isColimitLocallyConstantPresheafDiagram, Condensed.isColimitLocallyConstantPresheaf, Condensed.isColimitLocallyConstantPresheafDiagram, LightCondensed.isColimitLocallyConstantPresheaf. Full returned hits retained in research/tower-loogle.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract finite Galois-set lifting, condensed discrete modules and unrelated algebraic towers do not state coherent etale module residue systems with completed pro-etale realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotient representations of a stable integral lattice descend via the Galois fibre functor to sheaves with coherent reduction transition maps",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup, Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor, instFiniteObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups, ProfiniteGrp.toFiniteQuotientFunctor, instNonemptyObjOpenNormalSubgroupStabilizerHomSurjectiveAuxFunctor, InfiniteGalois.asProfiniteGaloisGroupFunctor. Full returned hits retained in research/tower2-leanfinder.txt",
+   "date": "2026-10-22",
+   "verdict": "no match: abstract finite Galois-set lifting, condensed discrete modules and unrelated algebraic towers do not state coherent etale module residue systems with completed pro-etale realization"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|[Ll]ocal[Ss]ystem|[Ll]ocally[Cc]onstant).*(adic|[Ii]nverse[Ll]imit|residue|[Cc]omplet)",
+   "results": "No hits",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Galois sets, condensed modules, algebraic etaleness or categorical sheaf limits, not the integral residue-system realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An integral continuous representation of the etale fundamental group defines a locally free completed coefficient sheaf on the proetale site by the inverse limit of its residue sheaves",
+   "results": "ProfiniteGrp.isIso_toLimit, Profinite.lim, Profinite.isoAsLimitConeLift, ProfiniteGrp.toLimit_fun_continuous, Condensed.lanSheafProfinite, Profinite.asLimitConeIso, ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, Profinite.asLimitCone",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Galois sets, condensed modules, algebraic etaleness or categorical sheaf limits, not the integral residue-system realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsLimit\"",
+   "results": "PresheafOfModules.isLimitLimitCone, CategoryTheory.Presheaf.isLimitOfIsSheaf, CategoryTheory.Presheaf.IsSheaf.isLimitMultifork, CategoryTheory.Presheaf.isLimit_iff_isSheafFor, CategoryTheory.Presheaf.isSheaf_iff_isLimit, CategoryTheory.Presheaf.isLimit_iff_isSheafFor_presieve, CategoryTheory.Presheaf.isSheaf_iff_isLimit_pretopology, CategoryTheory.Sheaf.isSheaf_of_isLimit",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Galois sets, condensed modules, algebraic etaleness or categorical sheaf limits, not the integral residue-system realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous action of the etale fundamental group on a finite free module over a complete discrete valuation ring gives compatible finite locally constant residue sheaves whose proetale inverse limit is locally free",
+   "results": "Condensed.profiniteFree, CompHausLike.LocallyConstantModule.functor, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CondensedMod.ofSheafProfinite, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.iff_exists_algEquiv_prod",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Galois sets, condensed modules, algebraic etaleness or categorical sheaf limits, not the integral residue-system realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized towers of finite locally free etale module sheaves are equivalent to locally free modules over completed proetale coefficient sheaves",
+   "results": "Algebra.Etale.formallyEtale, Algebra.Etale.exists_subalgebra_fg, Algebra.Etale.comp, Algebra.FormallyEtale.instForallOfFinite, Algebra.FormallyEtale.localization_base, Algebra.FormallyEtale.localization_map, StandardEtalePair.instFormallyEtaleRing, Algebra.FormallyEtale.comp",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract Galois sets, condensed modules, algebraic etaleness or categorical sheaf limits, not the integral residue-system realization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-normal-completed-integral-model",
+  "date": "2026-10-22",
+  "group": "Q95"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "First sentence of the proof of lem-a1-affine-hc0, global lisse sections: integral-model input through lem-a1-degree-zero-compact-support-sections and lem-a1-smooth-lisse-integral-lattice; returned integral-model proof steps 3 and 4, quotient representations, coherent finite sheaves and their completed realization",
+   "via": [
+    "lem-a1-normal-completed-integral-model"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-lattice-residue-system-realization",
+  "worker": "stage1",
+  "summary": "Read Bhatt--Scholze Proposition 6.8.4(1) and Lemma 7.4.7 and Stanford L19 Proposition 1.1.9. Reused finite module Galois equivalence and completed-system comparison; wrote continuity, finite free charts, coherent quotient transitions, scalar adjoints, rank and naturality explicitly. No new nodes and no change of statement.",
+  "blueprint": "Supports the first paragraph of the current lem-a1-affine-hc0 proof: the lisse integral module and its finite locally constant reductions, through the existing integral-model dependency chain. The inherited blueprint.from.node is null; retained as required for maintainer-owned ancestry.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Finite-coefficient exact tensor equivalence with scalar extension is the generic Galois tool for constructing each finite residue sheaf and its maps."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Finite covers classified by finite monodromy sets supply local free charts for the residue sheaves."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The coefficient valuation ring is a domain with principal maximal ideal and finite residue field, used to prove residue finiteness."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "The generic normalized-system equivalence supplies the pro-etale limit and its actual quotient projections; this unit does not prove that equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-integral-coefficient-presentation-comparison",
+    "why": "Generic identification of the continuous-function completed coefficient sheaf of the completed-system comparison with the constant-sheaf completed coefficients of def-weil-completed-integral-coefficients used in the item statement (added by the maintainer review)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-galois-lisse-representations",
+  "thm-galois-fundamental",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-weil-pbc-integral-coefficient-presentation-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-6011ef51e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-6011ef51e (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes. Its statement and stmt_deps are unchanged from the base, and it is an ordinary first split (a child of the Q95 re-split, so the re-split note does not apply here). Sources checked: Bhatt–Scholze Prop. 6.8.4(1) on p. 59 and Lemma 7.4.7 on p. 70 (the O_E case is 'clear as GL_n(O_E) is profinite'), and Stanford L19 Prop. 1.1.9, third bullet. Step checks: step 1 is genuinely elementary (finiteness from the ϖ-adic filtration and the finite residue field of the DVR node; continuity into the discrete set Λ/ϖ^nΛ). Step 2: cor-galois(1) applies at each finite A_n; the open normal kernel K_n plus the stabilizer clause of thm-galois-fundamental give rank r, including r=0. Step 3: the lift of q_{n,j} by full faithfulness, the scalar-extension and composite clauses, and the pure-tensor coherence are all correct. Step 5: functoriality is coordinatewise through def-pur-sheaf-inverse-limit. FIX (C1/E4) in step 4: lem-per-lisse-completed-system-comparison works over B_X = lim of the Cont(π0,A/ϖ^n) sheaves of def-weil-pbc-adic-coefficient-datum, but the item's B_X is the limit of constant sheaves from def-weil-completed-integral-coefficients, and the step identified the two without a citation. Step 4 now cites lem-weil-pbc-integral-coefficient-presentation-comparison (the unique ring isomorphism e_X compatible with the projections) and carries local freeness, ϖ and the projections across it. I added that node to step uses, proof_deps and tool_uses; it creates no cycle. I accepted reading 'the inverse is lim ν^*N_n' as including the projection-induced quotient isomorphisms. Batch-5 flag: def-pod-lisse-l-adic-sheaves, reached through the completed-system comparison, is a general definition and the comparison is the general BS 6.8.4 equivalence. Neither is part of the trace-formula or Poincaré-duality proofs, so I accepted the citation; the added node's closure is generic as well. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LatticeResidueSystemRealization",
+  "declaration": "AlgebraicGeometry.Scheme.LatticeResidue.realization_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.LatticeResidue.Lattices",
+   "AlgebraicGeometry.Scheme.LatticeResidue.residueConstant",
+   "AlgebraicGeometry.Scheme.LatticeResidue.integralConstant",
+   "AlgebraicGeometry.Scheme.LatticeResidue.Realization",
+   "AlgebraicGeometry.Scheme.LatticeResidue.realization_exists"
+  ],
+  "file": "lean/Sheaf/Paper/LatticeResidueSystemRealization.lean",
+  "statement": "theorem realization_exists [ConnectedSpace X] [IsFundamentalGroup (FiniteEtale.fiber x) G] : ∃ c : GaloisLisseFiniteCorrespondence x G, Nonempty (Realization l E G X x c)",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "All positive levels are indexed by exponent n+1. Existing A-linear normalized towers encode A_n-linear sheaves by annihilation. Cokernel universal properties of the actual transitions and projections express their adjoint tensor isomorphisms, with associativity and naturality forced by uniqueness. The completed coefficient ring is the recorded literal limit of constant quotient sheaves; no continuous-function coefficient presentation is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-186e08b0d",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Read node, report, module and all used decls (GaloisLisseFiniteCorrespondence incl. finiteEtaleAction, IsContinuousIntegral, LisseIntegralSheaf, completedIntegralCoefficientSheafUnrestricted/integralCoefficientSheafSystem, supportSiteComparisonCoefficientPullback = sheafPullback (toProEt X), IsFiniteLocallyFreeOfRank). Every hypothesis/clause matches: connected Noetherian separated X, ℓ invertible, finite free continuous lattices (rank 0 incl.), FLC levels killed by ϖ^(n+1) with explicit étale rank-r charts, fibre maps pinned as cokernel of ϖ^(n+1) + germ-pinned κ + c.γ-equivariance, discrete continuity, functorial transitions, adjoint isos as the cokernel property (equivalent; associativity automatic), literal constant-sheaf B_X, limit cone of ν^*F_n with residue-constant-pinned action, rank r, projection = cokernel of ϖ^(n+1), naturality squares. No hollow defs, only theorem sorry, docstrings/blueprint/proof steps present, statement verbatim, only lean record changed. Advisories: same-worker second reading (dispatcher policy); decls of def-pod-lisse-l-adic-sheaves, def-pod-l-adic-representations, lem-weil-pbc-comparison-pullback used outside stmt_deps; def-pur-sheaf-tensor-product decls unused (equivalent cokernel rendering). No compile (no file changed); worker reports clean compile."
+ }
+}

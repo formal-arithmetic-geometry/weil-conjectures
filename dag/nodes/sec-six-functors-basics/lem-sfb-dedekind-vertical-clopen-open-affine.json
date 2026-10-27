@@ -1,0 +1,271 @@
+{
+ "id": "lem-sfb-dedekind-vertical-clopen-open-affine",
+ "kind": "statement",
+ "title": "Affineness of a fibrewise closed open with full generic fibre over a Dedekind base",
+ "statement": "Let $B$ be a Noetherian integrally closed domain of Krull dimension at most one, put $S=\\operatorname{Spec}B$ and $K=\\operatorname{Frac}B$ [def-weil-affine-spectrum], and let $p:X\\to S$ be any morphism of schemes [def-pc-scheme]. Let $i:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] which is quasi-compact as a morphism [def-weil-finite-type-morphism]: the inverse image of every affine open of $X$ is quasi-compact. For $s\\in S$ write $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ and $U_s=U\\times_S\\operatorname{Spec}\\kappa(s)$ [def-pc-base-change, def-weil-residue-field]. Assume that $U\\times_S\\operatorname{Spec}K=X\\times_S\\operatorname{Spec}K$ as open subschemes, and that $|U_s|$ is closed in $|X_s|$ for every $s\\in S$. Then $i$ is an affine morphism [pqf-def-affine-morphism]. No flatness, finite-type, quasi-compactness or separatedness hypothesis on $p$ or $X$ is imposed. Empty fibres and $U=X$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 07ZT, lemma-complement-locally-principal-closed-subscheme, principal-open calculation. The Dedekind fibrewise-closed boundary reduction is agent-written, explained in report.md; no group or group-homomorphism affineness result is assumed."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-weil-residue-field",
+  "pqf-def-affine-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [
+  {
+   "text": "Identify $U$ with its image open in $X$ using [def-weil-open-immersion]. Fix an affine open $V=\\operatorname{Spec}A\\subseteq X$, let $\\varphi:B\\to A$ be its structural ring map, and write $Z=V\\setminus U=V_A(I)$ for an ideal $I\\subseteq A$, using the description of Zariski closed subsets in [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. Put $M=\\varphi(B\\setminus\\{0\\})$. By [lem-weil-pbc-localization-spectrum-embedding], $\\operatorname{Spec}(M^{-1}A)$ maps onto precisely those primes of $A$ whose contraction to $B$ is zero. By [def-pc-scheme-fibre] these are the points of the generic fibre in $V$. The full-generic-fibre hypothesis therefore says that no prime of $M^{-1}A$ contains all the elements $f/1$ with $f\\in I$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E0 (lemma-Zariski-topology), 00E3 (lemma-spec-localization); Schemes Tag 01K1 (lemma-fibre-topological)."
+   }
+  },
+  {
+   "text": "The opens $D(f/1)$ for $f\\in I$ cover $\\operatorname{Spec}(M^{-1}A)$, so [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i) gives a finite expression $1=\\sum_{j=1}^r(a_j/\\varphi(s_j))(f_j/1)$, with $a_j\\in A$, $f_j\\in I$, and $0\\ne s_j\\in B$. Put $d=\\prod_js_j$ and $d_j=\\prod_{k\\ne j}s_k$. Multiplying the equality by $d$ and using the equality relation of [def-weil-pbc-module-localization] gives $0\\ne t\\in B$ with $\\varphi(t)(\\varphi(d)-\\sum_ja_j\\varphi(d_j)f_j)=0$ in $A$. Thus $b=td\\ne0$ and $\\varphi(b)=\\sum_j\\varphi(t)a_j\\varphi(d_j)f_j\\in I$. Consequently $Z\\subseteq V_A(\\varphi(b))$ and $D_V(\\varphi(b))\\subseteq U$. Empty sums and the zero localized ring cause no problem: take $d=1$ and use the same equality relation.",
+   "uses": [
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0 (lemma-Zariski-topology), unit-ideal criterion; Section 00CM and Tag 07JZ (definition-localization-module), explicit fractions calculation."
+   }
+  },
+  {
+   "text": "The closed subset $E=V_B(b)\\subseteq S$ is finite and consists of closed points. Indeed $S$ is locally Noetherian by [def-weil-pbc-noetherian-ring] and the definition [pqf-def-locnoeth], and quasi-compact by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](iii). Hence [lem-sc-noetherian-closed-subset-finite-components] writes $E$ as finitely many irreducible closed subsets. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes](2) each such subset is $V_B(\\mathfrak m)$ for a prime containing $b$. Since $b\\ne0$, this prime is nonzero. In a domain of dimension at most one a nonzero prime is maximal: a larger prime would give the chain $(0)\\subsetneq\\mathfrak m\\subsetneq\\mathfrak q$ of length two. Thus $V_B(\\mathfrak m)=\\{\\mathfrak m\\}$, by part (1) of the same cited node. The chain length convention is [def-weil-pbc-krull-dimension-ring]. This proves both assertions about $E$.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA8 (lemma-Noetherian-irreducible-components), with Algebra Tag 00ES (lemma-irreducible) and the dimension bound."
+   }
+  },
+  {
+   "text": "Let $x\\in Z$, put $s=p(x)\\in E$, and set $T=S\\setminus(E\\setminus\\{s\\})$, an open neighbourhood of $s$. By [def-pc-scheme-fibre] the closed subset $|U_s|\\subseteq|X_s|$ identifies with $U\\cap p^{-1}(s)$. Since $s$ is closed in $S$, this is closed in $X$, and hence its intersection with $V$ is closed in $V$. Therefore\n$$W=(V\\cap p^{-1}(T))\\setminus(U\\cap p^{-1}(s))$$\nis open in $X$ and contains $x$. By [lem-weil-pbc-affine-opens-basis], choose an affine open $W_x$ with $x\\in W_x\\subseteq W$.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01K1 (lemma-fibre-topological), 01IT (lemma-basis-affine-opens); elementary closed-subspace topology."
+   }
+  },
+  {
+   "text": "On $W_x$ one has $U\\cap W_x=D_{W_x}(\\varphi(b)|_{W_x})$. To check this, a point of $W_x$ where $b$ vanishes lies over a point of $E\\cap T=\\{s\\}$ and cannot belong to $U$, by the definition of $W$. At a point where $b$ does not vanish, the inclusion $D_V(\\varphi(b))\\subseteq U$ of step 2 applies. This proves equality of the underlying opens and therefore equality as open subschemes, by [def-weil-open-immersion]. Clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme] makes this principal open affine, even if its defining element is a zero divisor or nilpotent. For $x\\in U$, [lem-weil-pbc-affine-opens-basis] instead gives an affine neighbourhood $W_x\\subseteq U$, whose inverse image in $U$ is itself.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-affine-ideals-closed-subscheme",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 07ZT (lemma-complement-locally-principal-closed-subscheme), principal-open calculation; Schemes Tags 01I3 and 01IT."
+   }
+  },
+  {
+   "text": "Perform this construction in affine charts covering $X$. The resulting affine opens $W_x$ cover $X$, and the inverse image of each under $i$ is affine by step 5. Apply [pqf-lem-affine-local-target] to this cover to conclude that $i$ is affine. The construction only used the Noetherian domain and dimension bound on $B$, the full generic fibre, and fibrewise closedness. It imposed no finiteness or flatness on the chart algebra $A$. If a boundary is empty, only the neighbourhoods inside $U$ are needed; an empty principal open is affine as well.",
+   "uses": [
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01S8 (lemma-characterize-affine), (2) implies (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+  "def-weil-pbc-module-localization",
+  "pqf-def-locnoeth",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "pqf-lem-affine-local-target"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 07ZT principal-open argument; agent-written vertical-boundary reduction using Tags 00E0, 00E3, 00ES, 0BA8, 01K1 and 01S8, with the complete calculation in steps 1–5."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion over a Dedekind base is affine if it contains the whole generic fibre and its intersection with each fibre is closed",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffineOpen_opensRange\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  AlgebraicGeometry.IsAffineOpen (AlgebraicGeometry.Scheme.Hom.opensRange f)\", \"doc\": \"Let $X$ and $Y$ be schemes with $X$ affine. If $f: X \\\\to Y$ is an open immersion, then the image of $f$ forms an affine open subset of $Y$.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} (hU : AlgebraicGeometry.IsAffineOpen U),\\n  AlgebraicGeometry.IsOpenImmersion hU.fromSpec\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, the morphism from $ \\\\operatorname{Spec}(\\\\Gamma(U)) $ to $ X $ constructed by composing the canonical isomorphism $ \\\\operatorname{Spec}(\\\\Gamma(U)) \\\\co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f]\\n  {U V : Y.AffineZariskiSite} (i : U ⟶ V),\\n  AlgebraicGeometry.IsOpenImmersion\\n    ((((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n                (Algebrai\", \"doc\": \"The composition of the opposite of the open subset functor, the right opposite of the normalization diagram, and the Spec functor yields an open immersion for morphisms in the affine Zariski site of a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f] {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen ((AlgebraicGeometry.Scheme.Hom.opensFunctor f).obj U) ↔\\n    AlgebraicGeometry.IsAffineOpen U\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes and an open subset $ U $ of $ X $, the image $ f(U) $ is an affine open subset of $ Y $ if and only if $ U $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsClosedImmersion fun X x f [AlgebraicGeometry.IsAffine x] =>\\n  AlgebraicGeometry.IsAffine X ∧\\n    Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.appTop f))\", \"doc\": \"Every closed immersion of schemes has the affine property, meaning that the domain scheme is affine and the induced morphism on global sections is surjective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.reduce_to_affine_nbhd\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (P : (X : AlgebraicGeometry.Scheme) → ↥X → Prop),\\n  (∀ (R : CommRingCat) (x : ↥(AlgebraicGeometry.Spec R)), P (AlgebraicGeometry.Spec R) x) →\\n    (∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] (x : ↥X),\\n        P X x → P Y ((CategoryTheory.ConcreteCategory.ho\", \"doc\": \"If a property $ P $ holds for all affine schemes $ \\\\operatorname{Spec}(R) $ at every point, and if $ P $ is preserved under open immersions (i.e., whenever $ P $ holds for a point $ x $ in a scheme $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [X.IsQuasiAffine], AlgebraicGeometry.IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-open image lemmas assume the source already affine, toSpecΓ only gives an open immersion, and cofiltered-limit lemmas assume affine transition maps. None gives the vertical-boundary criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact open subset with vertical boundary and closed intersections with fibres over a Dedekind ring has affine inclusion",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U \\\\subseteq Y $, the preimage $ f^{-1}(U) $ is a compact subset of the topological space underlying \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_iff_forall_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.QuasiCompact f ↔\\n    ∀ (U : Y.Opens), AlgebraicGeometry.IsAffineOpen U → IsCompact ↑((TopologicalSpace.Opens.map f.base).obj U)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is quasi-compact if and only if for every affine open subset $ U $ of $ Y $, the preimage $ f^{-1}(U) $ is a compact subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"Given a cofiltered diagram $ D: I^{\\\\text{op}} \\\\to \\\\text{Sch} $ of schemes where all transition morphisms are affine, each scheme in the diagram is compact and quasi-separated, and an open cover $ \\\\{U_\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.exists_isAffineOpen_preimage_eq\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of quasi-separated schemes with affine transition morphisms, every affine open subset of the limit scheme is the preimage of an affine open subset in some scheme of the diagram\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-open image lemmas assume the source already affine, toSpecΓ only gives an open immersion, and cofiltered-limit lemmas assume affine transition maps. None gives the vertical-boundary criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a Dedekind scheme an open subscheme with full generic fibre and clopen fibres has an affine open immersion",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(f : X ⟶ Y) [H : IsOpenImmersion f] {U : X.Opens} : IsAffineOpen (f ''ᵁ U) ↔ IsAffineOpen U\", \"doc\": \"For an open immersion $ f: X \\to Y $ of schemes and an open subset $ U $ of $ X $, the image $ f(U) $ is an affine open subset of $ Y $ if and only if $ U $ is an affine open subset of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] : IsImmersion f\", \"doc\": \"Any open immersion between schemes is an immersion. Specifically, if a morphism $ f: X \\to Y $ of schemes satisfies the open immersion condition (being a topological open embedding with stalk isomorphi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[X.IsQuasiAffine] : IsOpenImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an open immersion. This establishes that the unit of the $ \\\\Gamma $-$ \\\\operatorname{Spec} \"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Preimmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsOpenImmersion f] : IsPreimmersion f\", \"doc\": \"Every open immersion between schemes is a preimmersion. Specifically, if $ f: X \\to Y $ is an open immersion of schemes (i.e., a morphism whose underlying continuous map is a topological open embedding\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{R : CommRingCat.{u}} (f : R) : IsOpenImmersion (Spec.map (CommRingCat.ofHom (algebraMap R (Localization.Away f))))\", \"doc\": \"The morphism from the spectrum of the localization of a commutative ring $ R $ at an element $ f $ to the spectrum of $ R $ is an open immersion. This corresponds to the inclusion of the principal ope\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": MorphismProperty (Scheme.{u})\", \"doc\": \"A morphism $ f: X \\\\to Y $ between schemes is an open immersion if its underlying morphism of locally ringed spaces satisfies the open immersion condition: the continuous map is a topological open embe\"}\n  {\"name\": \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"[IsOpenImmersion f] : IsSmoothOfRelativeDimension 0 f\", \"doc\": \"Every open immersion of schemes is smooth of relative dimension 0. That is, if $ f: X \\to Y $ is an open immersion (a morphism that is a topological open embedding with isomorphic stalks on its image),\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF\", \"module\": \"Mathlib.AlgebraicGeometry.Cover.Open\", \"type\": \"{X : Scheme.{u}} (𝒰 : X.AffineOpenCover) (j : 𝒰.I₀) : IsOpenImmersion (𝒰.f j)\", \"doc\": \"For any scheme $X$ and its affine open cover $\\\\mathcal{U}$, each morphism $\\\\mathcal{U}.f(j)$ from the affine scheme $\\\\operatorname{Spec}(R_j)$ (associated to index $j$) to $X$ is an open immersion. Th\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-open image lemmas assume the source already affine, toSpecΓ only gives an open immersion, and cofiltered-limit lemmas assume affine transition maps. None gives the vertical-boundary criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsAffineHom",
+   "results": "[loogle] OK 5 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S} [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), Algebr\", \"doc\": \"(Implementation) The diagram restricted to `Over i'`. See the section docstring.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.c'\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S} [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), Algebr\", \"doc\": \"(Implementation) The limit cone restricted to `Over i'`. See the section docstring.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc'\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S} [∀ (i : I), CompactSpace ↥(D.obj i)] [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), Algebr\", \"doc\": \"(Implementation)\\nThe limit cone restricted to `Over i'` is still a limit because the diagram is cofiltered.\\nSee the section docstring.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.exists_of_isCofiltered_of_finite\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I] [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I), CompactSpa\", \"doc\": \"Variant of `Scheme.exists_isOpenCover_and_isAffine_of_finite` in terms of `Scheme.OpenCover`.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq\", \"module\": \"Mathlib.AlgebraicGeometry.AffineTransitionLimit\", \"type\": \" {I : Type u} [CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme} {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S} [∀ (i : I), CompactSpace ↥(D.obj i)] [AlgebraicGeometry.LocallyOfFiniteType f] [CategoryTheory.IsCofi\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-open image lemmas assume the source already affine, toSpecΓ only gives an open immersion, and cofiltered-limit lemmas assume affine transition maps. None gives the vertical-boundary criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]edekind|vertical.*bound|[Cc]lopen.*[Ff]ib",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"210\", \"text\": \"open IsDiscreteValuationRing IsDedekindDomain.HeightOneSpectrum\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean\", \"line\": \"270\", \"text\": \"open IsDiscreteValuationRing IsLocalRing IsDedekindDomain.HeightOneSpectrum\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"442\", \"text\": \"nonrec lemma Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"443\", \"text\": \"    [LocallyOfFiniteType f] {x : X} (hx : f.QuasiFiniteAt x) : IsClopen {f.asFiber x} := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean\", \"line\": \"64\", \"text\": \"open ArithmeticFunction IsDedekindDomain NumberField\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"351\", \"text\": \"  exact (H.ge (Set.mem_univ a)).isClopen_singleton_asFiber.isOpen\"} Search subdirectory: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-24",
+   "verdict": "no match: affine-open image lemmas assume the source already affine, toSpecΓ only gives an open immersion, and cofiltered-limit lemmas assume affine transition maps. None gives the vertical-boundary criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open subscheme containing the generic fibre over a Dedekind domain and closed in each fibre has affine inclusion",
+   "results": "Actual logged hits: AlgebraicGeometry.instIsAffineHomιBasicOpen, AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.IsAffineOpen.fromSpec, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.exists_isAffineOpen_mem_and_subset. Read the principal-basic-open and affine-image candidates: they require a principal equation or already affine source, and do not supply the fibrewise vertical-boundary reduction.",
+   "date": "2026-10-24",
+   "verdict": "no match: the whole Dedekind fibrewise criterion is not supplied by these declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]edekind|[Cc]lopen.*[Ff]ib|vertical.*bound",
+   "results": "Actual logged hits: Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/Reduction.lean, Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean, Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean. Read the principal-basic-open and affine-image candidates: they require a principal equation or already affine source, and do not supply the fibrewise vertical-boundary reduction.",
+   "date": "2026-10-24",
+   "verdict": "no match: the whole Dedekind fibrewise criterion is not supplied by these declarations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact open immersion over a Dedekind domain with full generic fibre and clopen fibres is affine",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion, AlgebraicGeometry.instQuasiCompactOfIsAffineHom, AlgebraicGeometry.Scheme.IsQuasiAffine.mk, AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion, AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.quasiCompact_iff_forall_affine, AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen. Read the principal-basic-open and affine-image candidates: they require a principal equation or already affine source, and do not supply the fibrewise vertical-boundary reduction.",
+   "date": "2026-10-24",
+   "verdict": "no match: the whole Dedekind fibrewise criterion is not supplied by these declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffineHom, AlgebraicGeometry.IsOpenImmersion",
+   "results": "Actual logged hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', AlgebraicGeometry.ExistsHomHomCompEqCompAux.c', AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.Scheme.OpenCover.exists_of_isCofiltered_of_finite, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_eq. Read the principal-basic-open and affine-image candidates: they require a principal equation or already affine source, and do not supply the fibrewise vertical-boundary reduction.",
+   "date": "2026-10-24",
+   "verdict": "no match: the whole Dedekind fibrewise criterion is not supplied by these declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion whose complement is locally the zero set of one function is an affine morphism",
+   "results": "Actual logged hits: AlgebraicGeometry.instIsAffineHomιBasicOpen, AlgebraicGeometry.isAffineOpen_opensRange, AlgebraicGeometry.Scheme.Hom.isAffineOpen_iff_of_isOpenImmersion, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec, AlgebraicGeometry.IsAffineOpen.image_of_isOpenImmersion, AlgebraicGeometry.IsAffineOpen.preimage_of_isOpenImmersion, AlgebraicGeometry.Scheme.AffineOpenCover.instIsOpenImmersionF, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion. Read the principal-basic-open and affine-image candidates: they require a principal equation or already affine source, and do not supply the fibrewise vertical-boundary reduction.",
+   "date": "2026-10-24",
+   "verdict": "no match: the whole Dedekind fibrewise criterion is not supplied by these declarations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dedekind-finite-kernel-hom-affine",
+  "date": "2026-10-24",
+  "group": "Q03"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction and the inherited relative-semisimple-affineness prerequisite; Conrad Proposition 6.3.16, printed p.229, quasi-finite group homomorphism assertion. Boundary input after generic saturation and fibrewise closedness: reduce each missing closed fibre locally to one principal base equation.",
+   "via": [
+    "lem-sfb-dedekind-finite-kernel-hom-affine",
+    "lem-sfb-relative-semisimple-affineness",
+    "lem-sfb-rational-split-integral-prolongation",
+    "lem-sfb-pinned-split-root-classification",
+    "lem-sfb-reductive-etale-integral-models",
+    "lem-sfb-reductive-symmetric-power-dvr-reduction",
+    "lem-sfb-reductive-ring-invariant-power-lifting",
+    "lem-sfb-dvr-reductive-linear-affine-quotient",
+    "lem-sfb-reductive-nodal-equivariant-torsor-extension",
+    "lem-sfb-complete-dvr-cocharacter-cartan",
+    "lem-sfb-split-reductive-dvr-cartan-decomposition",
+    "lem-sfb-split-reductive-integral-maximal-bounded",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-dedekind-vertical-clopen-open-affine",
+  "worker": "stage1",
+  "summary": "Proved the vertical boundary criterion on arbitrary affine charts by an explicit localization-denominator equation, finite closed base support, fibrewise closedness, principal opens and affine-target locality. Reused all required existing nodes; no new nodes, no statement change, no Lean or build.",
+  "blueprint": "Realizes the inherited boundary input below det-thm-sf-ctf-stability-direct-images, proof (3), through the canonical-envelope step of lem-sfb-dedekind-finite-kernel-hom-affine. The current blueprint does not itself state this auxiliary criterion; no chapter or unit route changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-8d91ec145",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-8d91ec145 (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and the statements of all 20 cited nodes, plus the parent lem-sfb-dedekind-finite-kernel-hom-affine (step 6 is its only use) and Stacks divisors.tex 07ZT (lines 2436-2446). The statement is unchanged and true. The proof is correct. Step 1: the boundary is Z=V(I); the localization embedding sends Spec M^{-1}A, M=phi(B\\{0}), onto the primes over the generic point, and the fibre homeomorphism puts those inside U. Step 2: clearing denominators with the equality relation gives 0≠b=td with phi(b)∈I; I checked the zero-localization case (phi(t)=0, so b=t). Step 3: S is a Noetherian scheme, so V(b) has finitely many components, and dim≤1 makes each a closed point. Step 4: W=(V∩p^{-1}(T))\\(U∩p^{-1}(s)) is open and contains x. This only needs closed-subspace topology. Step 5: U∩W_x=D(phi(b)) checked in both directions; it is affine by clause (0) of the affine-ideals node. Step 6: the affine-cover clause of 01S8. Normality and qc of i are unused but kept; nothing is weakened. The five off-unit units (sk-thm-p1, sk-thm-properbasechange, sk-thm-reduction, sk-thm-curveestimate, sk-prop-nagata-sketch-zmt) are all in the transitive uses of sk-thm-sf-ctf-stability, so no tool_uses are needed. There are no new nodes. An rg -L search over dag/nodes found no existing node stating this criterion. Edge cases checked: field B, empty X or fibres, U=X, zero-divisor b, non-qc X. No SGA is cited and no fixes were made."
+ }
+}

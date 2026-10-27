@@ -1,0 +1,382 @@
+{
+ "id": "lem-pur-etale-chart-compact-support-normalization",
+ "kind": "statement",
+ "title": "Unbounded compact-support normalization on a closed affine chart",
+ "statement": "Let $k$ be a field of characteristic $p>0$, let $\\ell\\ne p$ be prime, let $E/\\mathbf Q_\\ell$ be finite, choose a uniformizer $t$ of its valuation ring, and put $A=\\mathcal O_E/t^n$ with $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X,Y$ be separated finite-type $k$-schemes, $f:X\\to Y$ a $k$-morphism, and $u:U\\hookrightarrow X$, $v:V\\hookrightarrow Y$ affine open immersions. Let $r\\ge0$, $P=\\mathbf A^r_V$ with projection $\\pi$, and $i:U\\hookrightarrow P$ a closed immersion satisfying $fu=v\\pi i$ [def-weil-pbc-scheme-conventions, def-sbc-affine-space]. Put $W=P\\setminus i(U)$ and $j:W\\hookrightarrow P$. Then $A$ is finite, $\\ell^n A=0$, and $\\ell^n$ is invertible on these schemes. The schemes $X,Y,U,V,P,W$ are Noetherian (admitting finite affine covers by spectra of Noetherian rings [def-weil-pbc-noetherian-ring]) and finite type over $k$; the open immersions $u,v,j$ are quasi-compact. The displayed maps and their composites are separated finite-type and admit compactifications. Use ordinary unbounded small-etale constant-$A$ module derived categories and compact support [def-weil-pbc-derived-categories, def-amb-etale-compact-support]. Exact open extension gives $u_!\\dashv u^*$ and $v_!\\dashv v^*$ with the extension-by-zero evaluation counits. If $F=Rf_{!,A}$ and $H=R\\pi_{!,A}$, there is a canonical refinement-independent natural isomorphism on the entire derived categories\n$$\\lambda:Fu_!\\xrightarrow{\\sim}v_!Hi_*.$$\nHere $i_*$ is exact termwise closed direct image [lem-exc-closed-support-triangle]. Specify $\\lambda$ as the composite $Fu_!\\cong R(fu)_!=R(v\\pi i)_!\\cong Rv_!R\\pi_!Ri_!\\cong v_!Hi_*$, using the unbounded composition comparisons [lem-amb-unbounded-compact-support-comparisons], the identity-proper compactifications for open factors with the source-open normalization [lem-amb-compact-support-open-source-composition], and the canonical quasi-finite support comparison for the closed factor [lem-sfb-quasifinite-compact-support-exact]. These normalizations use the ordinary open adjunctions and the exact closed direct image, with no bounded-below restriction.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality and Charts, arbitrary-map closed-chart supplement; returned proof Steps 1–2: domain hypotheses and normalized unbounded left compositor; Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-affine-space",
+  "def-weil-pbc-derived-categories",
+  "def-amb-etale-compact-support",
+  "lem-exc-closed-support-triangle",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-compact-support-open-source-composition",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "Use Padic.finite_coefficientExtensionRing for finiteness. Extract the integer-ring maximal-ideal characterization and uniformizer generation from extension_integers_dvr. The spectral absolute value of ell is its p-adic norm, which is less than one; hence ell lies in the uniformizer ideal. Ideal.pow_mem_pow puts ell^n in its nth power, so its image in the coefficient quotient is zero. Characteristic p and primality of ell show ell is nonzero in k: p dividing ell would force p=1 or p=ell. Map the unit ell^n in k to global sections along each displayed structure morphism.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Locality and Charts supplement: finite coefficient hypotheses"
+   }
+  },
+  {
+   "text": "Apply Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace to obtain Noetherian X and Y. The open maps u and v give locally Noetherian U and V, and affineness makes them compact. Mathlib already makes the finite-dimensional affine-space projection locally of finite presentation; its affine source gives compactness. Thus P is Noetherian. The open embedding j induces a Noetherian topology on W, and its locally finite type map to P gives local Noetherianness. Consequently W is Noetherian and every arrow with one of these sources is quasi-compact. These arguments include r=0 and empty schemes.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T3, 01T6; properties.tex Tags 01OW, 01OX"
+   }
+  },
+  {
+   "text": "Use comp_over for f and cancel the structure morphism to obtain separatedness and local finite type of f. The remaining displayed maps are open or closed immersions, affine-source maps, or composites, so the usual Mathlib instances supply separatedness and local finite type. Every source is Noetherian, hence every arrow is quasi-compact. Every target is compact and quasi-separated. The Nagata HasCompactification instance then provides compactifications for all eighteen arrows. Discharge the two finite lists by their membership cases.",
+   "uses": [
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-separated-cancellation",
+    "lemma-nagata-finite-type-to-separated-target",
+    "lem-weil-pbc-qcqs-over-affine",
+    "sk-thm-nagata-compactification",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KN, 01KV; finite-type cancellation 01T8/03GI; Nagata as in sk-thm-nagata-compactification"
+   }
+  },
+  {
+   "text": "A closed immersion is finite, so WeilConjectures.SixFunctors.Finite.Exact provides exact direct image directly. Choose the already-defined derivedOpenImmersionLowerShriekUpperStarAdjunction for both open adjunctions. The specified equalities are reflexive. Form e from exactly the seven isomorphism factors in EtaleChartCompactSupportNormalization, including the canonical proper comparison and exact-derived closed direct image. No new adjunction descent or quasi-finite-support existence package is required.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-amb-etale-compact-support",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F51 (lemma-proper-f-shriek), 0F7B; morphisms.tex 01W5, 01QR"
+   }
+  },
+  {
+   "text": "For compactifications cf,cp define mu by transporting e with rightDerivedLowerShriekIso A cf on the source side and its inverse for cp on the target side, exactly as required. Apply unboundedEtaleCompactSupport_comparison_coherence to f and the affine-space projection. Its cocycle with the chosen compactification identifies the left transport; invert and cancel the projection cocycle for the right transport. Apply Iso.ext and NatTrans.ext; functoriality and associativity reduce the refinement square to those two cocycle identities.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J (lemma-shriek-composition); specified open and closed normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-sbc-affine-space",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-l-adic-numbers",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-separated-cancellation",
+  "lemma-nagata-finite-type-to-separated-target",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "sk-thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Locality and Charts; direct assembly from existing normalized derived isomorphisms and comparison cocycles, Stacks Tags 0F7B and 0F7J; Q6, 2026-10-23"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On unbounded ordinary etale derived categories compact support along an affine closed chart agrees with extension by zero then affine space compact support then exact closed pushforward",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.comp",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.corepresentableBy; CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.representableBy; CategoryTheory.Adjunction.ext; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ext_iff; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.toEquivalence; CategoryTheory.Adjunction.toEquivalence_functor; CategoryTheory.Adjunction.toEquivalence_inverse",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "closedChartCompactSupport|compactSupport.*[Cc]ompos|etale.*shriek",
+   "results": "[grep] OK 0 hit(s); none",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical compactification independent composition of etale compact support with open and closed immersions",
+   "results": "[leansearch] OK 8 hit(s); HasCompactSupport.comp_isClosedEmbedding; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; HasCompactMulSupport.comp_isClosedEmbedding; AlgebraicGeometry.IsOpenImmersion.comp; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact; AlgebraicGeometry.IsClosedImmersion.comp; AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion; HasCompactMulSupport.comp_homeomorph",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite torsion ring closed immersion direct image equals compact support on unbounded derived etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.IdealSheafData.support_map; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.Scheme.Hom.support_ker; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter; AlgebraicGeometry.Scheme.Hom.range_subset_ker_support",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern general adjunctions, cohomological concentration, etale morphisms, structure-sheaf modules or constructible subsets; none states this ordinary-etale constant-coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unbounded etale compact support composition for open immersion and closed affine chart, canonical refinement independent normalization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec; AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE; AlgebraicGeometry.Scheme.Hom.normalizationOpenCover; AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset; AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated; AlgebraicGeometry.exists_map_preimage_le_map_preimage; AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern normalization schemes, structure-sheaf module pseudofunctors, topological function supports, or abstract adjunctions, not ordinary unbounded etale constant-coefficient compact support."
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Cc]ompos|etale.*shriek|closedChartCompactSupport",
+   "results": "0 hits: none",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern normalization schemes, structure-sheaf module pseudofunctors, topological function supports, or abstract adjunctions, not ordinary unbounded etale constant-coefficient compact support."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical composition of derived etale compact support with extension by zero and closed immersion direct image",
+   "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding; HasCompactSupport.extend_zero; HasCompactSupport.comp_left; hasCompactSupport_comp_left; HasCompactSupport.tsupport_extend_zero; HasCompactMulSupport.comp_isClosedEmbedding; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.IsClosedImmersion.of_comp",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern normalization schemes, structure-sheaf module pseudofunctors, topological function supports, or abstract adjunctions, not ordinary unbounded etale constant-coefficient compact support."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.comp",
+   "results": "12 hits: CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.unit; CategoryTheory.Adjunction.corepresentableBy; CategoryTheory.Adjunction.comp; CategoryTheory.Adjunction.representableBy; CategoryTheory.Adjunction.ext; CategoryTheory.Adjunction.ext_counit; CategoryTheory.Adjunction.ext_iff",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern normalization schemes, structure-sheaf module pseudofunctors, topological function supports, or abstract adjunctions, not ordinary unbounded etale constant-coefficient compact support."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived functor with proper support is a pseudofunctor on schemes, open extension by zero and closed immersion pushforward are exact on etale module sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_obj_obj; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj",
+   "date": "2026-10-22",
+   "verdict": "no match: inspected hits concern normalization schemes, structure-sheaf module pseudofunctors, topological function supports, or abstract adjunctions, not ordinary unbounded etale constant-coefficient compact support."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-etale-closed-chart-exceptional-preservation",
+  "date": "2026-10-22",
+  "group": "Q105"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Locality and Charts, arbitrary-map closed-chart supplement; returned proof Steps 1–2: domain hypotheses and normalized unbounded left compositor; Stacks Tags 0F7B (lemma-shriek-proper-and-open), 0F7J (lemma-shriek-composition)",
+   "via": [
+    "lem-pur-etale-closed-chart-exceptional-preservation",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pur-etale-chart-compact-support-normalization",
+  "worker": "stage1",
+  "summary": "Verified the finite coefficient and Noetherian compactifiability inputs, derived open adjunctions, exact proper-support closed comparison, and assembled the prescribed unbounded compositor. No new nodes. No change to the statement.",
+  "blueprint": "Nearest imported ancestor is null (new-target chain); realizes Locality and Charts of sk-lem-sp-reduction-exceptional.proof.md, arbitrary-map closed-chart supplement, Steps 1–2 of the returned parent split.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-compact-support-open-source-composition",
+    "why": "Generic prerequisite for For each open factor $a=u,v$, choose the compactification $(a,\\mathrm{id})$. In the compact-support definition; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic prerequisite for For each open factor $a=u,v$, choose the compactification $(a,\\mathrm{id})$. In the compact-support definition; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-cbc-proper-support-sheaf-composition",
+    "why": "Generic prerequisite for The closed immersion $i$ is proper by the closed-immersion-proper theorem. Its base change to a residue field ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic prerequisite for A field is Noetherian because its only ideals are zero and the unit ideal. Thus $\\operatorname{Spec}k$ is Noet; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Generic prerequisite for The closed immersion $i$ is proper by the closed-immersion-proper theorem. Its base change to a residue field ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic prerequisite for By the valuation-ring theorem, $\\mathcal O_E$ is a DVR with finite residue field and maximal ideal $t\\mathcal ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Generic prerequisite for The affine-source theorem makes the structure maps of $U,V,P$ separated. Separated cancellation applied to $W\\; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic prerequisite for The closed immersion $i$ is proper by the closed-immersion-proper theorem. Its base change to a residue field ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic prerequisite for The closed immersion $i$ is proper by the closed-immersion-proper theorem. Its base change to a residue field ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic prerequisite for For $a=u,v$, exact extension by zero preserves quasi-isomorphisms on arbitrary complexes. The open adjunction ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic prerequisite for For $a=u,v$, exact extension by zero preserves quasi-isomorphisms on arbitrary complexes. The open adjunction ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic prerequisite for A field is Noetherian because its only ideals are zero and the unit ideal. Thus $\\operatorname{Spec}k$ is Noet; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic prerequisite for For $a=u,v$, exact extension by zero preserves quasi-isomorphisms on arbitrary complexes. The open adjunction ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic prerequisite for A field is Noetherian because its only ideals are zero and the unit ideal. Thus $\\operatorname{Spec}k$ is Noet; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic prerequisite for A field is Noetherian because its only ideals are zero and the unit ideal. Thus $\\operatorname{Spec}k$ is Noet; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic prerequisite for The affine-source theorem makes the structure maps of $U,V,P$ separated. Separated cancellation applied to $W\\; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Generic prerequisite for The affine-source theorem makes the structure maps of $U,V,P$ separated. Separated cancellation applied to $W\\; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic prerequisite for For $a=u,v$, exact extension by zero preserves quasi-isomorphisms on arbitrary complexes. The open adjunction ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic prerequisite for By the valuation-ring theorem, $\\mathcal O_E$ is a DVR with finite residue field and maximal ideal $t\\mathcal ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lemma-nagata-finite-type-to-separated-target",
+    "why": "Generic prerequisite for The affine-source theorem makes the structure maps of $U,V,P$ separated. Separated cancellation applied to $W\\; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic prerequisite for A field is Noetherian because its only ideals are zero and the unit ideal. Thus $\\operatorname{Spec}k$ is Noet; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic prerequisite for For $a=u,v$, exact extension by zero preserves quasi-isomorphisms on arbitrary complexes. The open adjunction ; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "Generic prerequisite for The affine-source theorem makes the structure maps of $U,V,P$ separated. Separated cancellation applied to $W\\; used as a black box to verify or normalize the existing closed-chart compact-support route, not to replace a purity step."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme fact (composite of separated morphisms is separated, clause (e)) used in Step 4 only to verify that W is separated over k; not a purity step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-weil-pbc-separated-cancellation",
+  "lemma-nagata-finite-type-to-separated-target",
+  "sk-thm-nagata-compactification",
+  "lem-weil-pbc-proper-fp-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-132d73869",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-132d73869 (reviewer sub-agent of L); spot-checked: Verdict FIX: one citation repair in Step 4; no new nodes; statement unchanged. I read the full item, all 8 proof steps, every cited node's statement, the main-20261015 sk-lem-sp-reduction-exceptional.proof.md (Locality/Charts) and the parent lem-pur-etale-closed-chart-exceptional-preservation, whose Step 1 uses exactly this λ and these hypotheses. Steps checked: S1 holds for any ramification index (ℓ∈m_E=tO_E, so ℓ^n kills A, which is finite by finite-quotients (2)). S2 and S3 prove Noetherianity and quasi-compactness of u, v, j through affine opens with no quasi-separatedness assumed, and P=Spec R[x] covers r=0. S5 descends the termwise adjunction through localization (2) and (3). S6 meets every hypothesis of the quasi-finite theorem: fibres of i are empty or a point; i^supp_!=i_* comes from the proper clause, and the triangle node is not used for exactness. S7 (a,id) with Rid_*=id holds unboundedly, and the source-open compositor is pinned. S8 composite equals the statement's formula, and refinement independence follows from associativity and refinement compatibility. Small cases checked: r=0, U=∅, i=id, n=1, nonreduced charts. Fault fixed: Step 4 derived 'W separated over k' from separated cancellation, which runs in the wrong direction. It now uses cancellation (a) for j and lem-weil-pbc-proper-fp-permanence (e), composition of separated morphisms, for W→Spec k; uses, proof_deps and tool_uses are updated. Batch-5 flag on lem-cbc-proper-support-sheaf-composition accepted: it is a general proper-support sheaf statement that neither the trace formula nor Poincaré duality provides, used here only for i^supp_!=i_*; it is already a stmt_dep of the base-cited lem-sfb-quasifinite-compact-support-exact, so the closure is unchanged. No SGA citation; no duplicates; no re-split note for this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleChartCompactSupportNormalization",
+  "declaration": "AlgebraicGeometry.Etale.etaleChartCompactSupportNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleChartCompactSupportNormalization",
+   "AlgebraicGeometry.Etale.etaleChartCompactSupportNormalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleChartCompactSupportNormalization.lean",
+  "statement": "theorem etaleChartCompactSupportNormalization (ell : ℕ) [Fact ell.Prime] (E : Type (u + 1)) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E] (n : ℕ) (hn : 1 ≤ n) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hell : ell ≠ p) {X Y U V W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsAffine U] [IsAffine V] (u : U ⟶ X) (v : V ⟶ Y) [IsOpenImmersion u] [IsOpenImmersion v] (r : ℕ) (i : U ⟶ AffineSpace (ULift.{u} (Fin r)) V) [IsClosedImmersion i] (j : W ⟶ AffineSpace (ULift.{u} (Fin r)) V) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) (h : u ≫ f = (i ≫ (AffineSpace (ULift.{u} (Fin r)) V ↘ V)) ≫ v) : EtaleChartCompactSupportNormalization (Padic.coefficientExtensionRing ell E n) (ell ^ n) k f u v r i j h",
+  "branch": "sheaf-dag",
+  "by": "Q58",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Full coefficient and geometric consequences are conclusions. The Prop-valued helper packages these consequences, the ordinary normalized open adjunctions, exact termwise closed direct image, and a natural isomorphism fixed by the explicit canonical composite. Its compactification-model versions satisfy the change-of-compactification square. Universally bound instances are the already asserted consequences, not added assumptions. The parent module is deliberately not imported: its proof depends on this item, although its existing comparison supplies a useful check of the composite."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7e11cf91",
+  "group": "Q58",
+  "result": "pass",
+  "note": "Read item, source place (Locality/Charts closed-chart supplement; Stacks 0F7B/0F7J), module, report and the exact declarations: unboundedEtaleLowerShriekCompIso/Congr, rightDerivedLowerShriekIso/OfCompactificationIso (inf-refinement), rightDerivedLowerShriekIsoOfIsOpenImmersion, rightDerivedLowerShriekIsoRightDerivedLowerStar, Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory, Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction (mapDerivedCategoryAdjunction, evaluation counit), HasCompactification (Prop). Hypotheses match the node: A=O_E/t^n with n>=1 (E : Type (u+1) is the standard coefficient universe), char p>0 with ell!=p, separated finite-type X,Y, k-morphism f, affine open u,v, closed chart i into A^r_V with fu=v pi i, W as the complement open. Coefficient, Noetherian, finite-type, invertibility, compactifiability and i_* exactness are conclusions; the universally bound instances are Props proved earlier. lambda is pinned to exactly the node composite (factor types checked; source-open form of the open-source theorem; no bounded-below restriction). The closed factor uses the canonical proper forget-supports comparison plus the exact direct-image comparison (node Step 6); the quasi-finite dep only gives an existential comparison. Edge cases r=0, empty schemes, i=id, repeated list entries, n=1 ramified all OK. Gates: lines <=100, statement verbatim, docstrings with source/blueprint and steps 1-8, only theorem sorry, no pro-etale substitute. Advisories: A1 the mu refinement square holds for any e (follows from the dep cocycle), so it adds nothing beyond the e pin, and the report overstates it; A2 plain def unboundedEtaleLowerShriekCompIso (owner def-sf-etale-support-compositor) is reached through the theorem stmt_dep recorded at stage 1, stmt_deps unchanged since base, so advisory only; A3 the landed parent closedChartCompactSupportComparison is the same composite ending at R(i_*), not H4 since the item cannot import its parent and defines no second map; A4 plain proof-plan imports and an unused stmt_dep import are harmless. No compile, since no file was changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261023T151930-L-423880",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

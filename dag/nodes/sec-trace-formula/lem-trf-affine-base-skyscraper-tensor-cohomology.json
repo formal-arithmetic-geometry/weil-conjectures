@@ -1,0 +1,200 @@
+{
+ "id": "lem-trf-affine-base-skyscraper-tensor-cohomology",
+ "kind": "statement",
+ "title": "Cohomology of the affine tensor test by an inverse-image base skyscraper",
+ "statement": "Let $R\\to A$ be a homomorphism of commutative rings, $f:U=\\operatorname{Spec}A\\to V=\\operatorname{Spec}R$ its scheme morphism [def-pc-scheme], and $M^\\bullet$ an arbitrary complex of $A$-modules. Put $\\mathcal B=f^{-1}\\mathcal O_V$ and $C^\\bullet=\\operatorname{Res}_{\\mathcal B}\\widetilde{M^\\bullet}$ along the canonical structure map [def-pc-module-pullback, lem-pc-affine-qcoh-derived-equivalence]. For $x=\\mathfrak q\\in U$, put $\\mathfrak p=\\mathfrak q\\cap R$ and $s=f(x)$. Let $L$ be any $R_{\\mathfrak p}$-module and $\\mathcal G=i_{s,*}L$ the ringed-module skyscraper on $V$ using the affine germ isomorphism $\\mathcal O_{V,s}\\cong R_{\\mathfrak p}$ [lem-weil-pbc-spec-tilde-stalk-localization, def-pc-ringed-module-skyscraper]. For every integer $i$, the derived comparison of [lem-trf-affine-relative-stalk-resolution-iso] induces an isomorphism of $R_{\\mathfrak p}$-modules\n$$\\bigl(H^i(QC^\\bullet\\otimes^{\\mathbf L}_{\\mathcal B}f^{-1}\\mathcal G)\\bigr)_x\\cong H^i(Q(M^\\bullet_{\\mathfrak q})\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}L).$$\nThe left side is the actual module stalk with scalars transported along the isomorphism $e_x:R_{\\mathfrak p}\\cong\\mathcal B_x$ of [lem-trf-affine-relative-stalk-resolution-iso] [def-pc-module-stalk-functor], the localization $M^\\bullet_{\\mathfrak q}$ is termwise [def-weil-pbc-module-localization], and both derived tensors are computed by K-flat resolutions [def-trf-ringed-complex-derived-tensor-vanishing, def-pc-module-kflat-complex]. There are no boundedness or finiteness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/perfect.tex",
+  "place": "Tag 0DHY, lemma-tor-dimension-rel-affine, stalk argument; cohomology consequence of the derived inverse-image base-skyscraper tensor comparison."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-module-pullback",
+  "lem-pc-affine-qcoh-derived-equivalence",
+  "def-pc-ringed-module-skyscraper",
+  "lem-trf-affine-relative-stalk-resolution-iso",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-module-localization",
+  "def-trf-ringed-complex-derived-tensor-vanishing",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-spec-tilde-stalk-localization"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=QC^\\bullet\\otimes^{\\mathbf L}_{\\mathcal B}f^{-1}\\mathcal G$, and use exactly the functor $S_x$ of [lem-trf-affine-relative-stalk-resolution-iso], including its restriction of scalars along $e_x$. That statement supplies its exactness and its induced functor on derived categories. For any complex $T^\\bullet$ representing $K$, exactness gives $S_x(\\ker d^i)=\\ker(S_xd^i)$, $S_x(\\operatorname{im}d^{i-1})=\\operatorname{im}(S_xd^{i-1})$, and preserves their quotient. Thus $S_xH^i(K)\\cong H^i(S_xK)$, naturally in $K$, by the formula $H^i=\\ker d^i/\\operatorname{im}d^{i-1}$. These identifications also show that termwise $S_x$ preserves quasi-isomorphisms, so the calculation is independent of the representative. Its left side is precisely the actual stalk $(H^i(K))_x$ with the stipulated $R_{\\mathfrak p}$-action.",
+   "uses": [
+    "lem-trf-affine-relative-stalk-resolution-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk, proof: exact stalks commute with cohomology; with the affine identifications of Tag 0DHY, lemma-tor-dimension-rel-affine in perfect.tex."
+   }
+  },
+  {
+   "text": "Apply the skyscraper specialization in [lem-trf-affine-relative-stalk-resolution-iso] with the given $R\\to A$, $M^\\bullet$, $x=\\mathfrak q$, $\\mathfrak p=\\mathfrak q\\cap R$ and arbitrary $R_{\\mathfrak p}$-module $L$. It gives $\\beta:S_xK\\xrightarrow{\\sim}Q(M^\\bullet_{\\mathfrak q})\\otimes^{\\mathbf L}_{R_{\\mathfrak p}}L$ in $D(R_{\\mathfrak p})$, for the very skyscraper and K-flat derived tensors in the statement. Apply the cohomology functor $H^i$ to $\\beta$ and its inverse; their composites are identities because functors preserve composition and identities. Compose the resulting isomorphism with Step 1. This is the required isomorphism induced by the derived comparison. All maps are $R_{\\mathfrak p}$-linear, since both $S_x$ and $H^i$ take values with those scalars, and Step 1 used the same $e_x$. The kernel/image/quotient computation uses only degrees $i-1,i,i+1$, so it applies to every integer $i$ and unbounded complexes without further hypotheses.",
+   "uses": [
+    "lem-trf-affine-relative-stalk-resolution-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 09U9, lemma-tor-amplitude-stalk, proof: exact stalks commute with cohomology; with the affine identifications of Tag 0DHY, lemma-tor-dimension-rel-affine in perfect.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-affine-relative-stalk-resolution-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 09U9, lemma-tor-amplitude-stalk, proof: exact stalks commute with cohomology; with the affine identifications of Tag 0DHY, lemma-tor-dimension-rel-affine in perfect.tex."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stalk.*homology|homology.*stalk|stalk.*tensor|tensor.*stalk",
+   "results": "{\"t\": \"2026-10-22T06:47:27Z\", \"tool\": \"grep\", \"query\": \"stalk.*homology|homology.*stalk|stalk.*tensor|tensor.*stalk\", \"sub\": \"AlgebraicGeometry/Modules\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary tilde stalkIso, skyscraper adjunction and structure-sheaf localization do not give cohomology of the relative derived tensor with an inverse-image base skyscraper."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"homology\"",
+   "results": "{\"t\": \"2026-10-22T06:47:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary tilde stalkIso, skyscraper adjunction and structure-sheaf localization do not give cohomology of the relative derived tensor with an inverse-image base skyscraper."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology stalk of a complex of associated sheaves tensor a base skyscraper equals localized module complex tensor the stalk module",
+   "results": "{\"t\": \"2026-10-22T06:47:28Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology stalk of a complex of associated sheaves tensor a base skyscraper equals localized module complex tensor the stalk module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"skyscraperPresheafStalkAdjunction\", \"ModuleCat.Tilde.stalkIso\", \"StalkSkyscraperPresheafAdjunctionAuxs.to_skyscraper_fromStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap_toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"stalkSkyscraperSheafAdjunction\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"StalkSkyscraperPresheafAdjunctionAuxs.germ_fromStalk_assoc\"], \"digest\": \"d9b5e68099d7a655\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary tilde stalkIso, skyscraper adjunction and structure-sheaf localization do not give cohomology of the relative derived tensor with an inverse-image base skyscraper."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme inverse image skyscraper coefficient tensor cohomology stalk comparison over the contracted prime localization",
+   "results": "{\"t\": \"2026-10-22T06:47:39Z\", \"tool\": \"leanfinder\", \"query\": \"Affine scheme inverse image skyscraper coefficient tensor cohomology stalk comparison over the contracted prime localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_spec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq\"], \"digest\": \"24d74a1c617bd5ed\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary tilde stalkIso, skyscraper adjunction and structure-sheaf localization do not give cohomology of the relative derived tensor with an inverse-image base skyscraper."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the stalk of a derived tensor with inverse image of a base skyscraper module on an affine scheme equals cohomology of the localized complex derived tensor that module",
+   "results": "{\"t\": \"2026-10-22T06:47:39Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of the stalk of a derived tensor with inverse image of a base skyscraper module on an affine scheme equals cohomology of the localized complex derived tensor that module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom_aux\", \"AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom\", \"ModuleCat.Tilde.stalkIso_inv\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.localizationToStalk_mk\"], \"digest\": \"a2563205061c7097\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: ordinary tilde stalkIso, skyscraper adjunction and structure-sheaf localization do not give cohomology of the relative derived tensor with an inverse-image base skyscraper."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of a derived tensor of a scalar restricted associated sheaf complex with the inverse image of a base skyscraper is the cohomology of the localized complex tensor the coefficient module over the contracted local ring",
+   "results": "{\"t\": \"2026-10-23T14:10:51Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of a derived tensor of a scalar restricted associated sheaf complex with the inverse image of a base skyscraper is the cohomology of the localized complex tensor the coefficient module over the contracted local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.openToLocalization\", \"CategoryTheory.Sheaf.H\", \"ModuleCat.tilde\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"ModuleCat.Tilde.res_const\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\"], \"digest\": \"bf57f88192e49ef9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary tilde/localization, skyscraper, restriction-stalk or sheaf-cohomology declarations do not state the relative unbounded derived-tensor cohomology formula over R_p."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"homology\"",
+   "results": "{\"t\": \"2026-10-23T14:11:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary tilde/localization, skyscraper, restriction-stalk or sheaf-cohomology declarations do not state the relative unbounded derived-tensor cohomology formula over R_p."
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraper.*tensor|tensor.*skyscraper|stalk.*homology|homology.*stalk",
+   "results": "{\"t\": \"2026-10-23T14:14:22Z\", \"tool\": \"grep\", \"query\": \"skyscraper.*tensor|tensor.*skyscraper|stalk.*homology|homology.*stalk\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary tilde/localization, skyscraper, restriction-stalk or sheaf-cohomology declarations do not state the relative unbounded derived-tensor cohomology formula over R_p."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Stalk cohomology of derived tensor of inverse image base skyscraper with associated sheaf complex equals localized module complex derived tensor local ring module",
+   "results": "{\"t\": \"2026-10-23T14:14:23Z\", \"tool\": \"leansearch\", \"query\": \"Stalk cohomology of derived tensor of inverse image base skyscraper with associated sheaf complex equals localized module complex derived tensor local ring module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"skyscraperPresheafStalkOfSpecializes\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"ModuleCat.Tilde.stalkIso\", \"skyscraperPresheafStalkAdjunction\", \"ModuleCat.Tilde.toStalk\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"ModuleCat.Tilde.localizationToStalk\"], \"digest\": \"58df96a4e361e40f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary tilde/localization, skyscraper, restriction-stalk or sheaf-cohomology declarations do not state the relative unbounded derived-tensor cohomology formula over R_p."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact stalk functor commutes with cohomology of unbounded complexes of modules over a ringed space and transports a derived tensor isomorphism to a local ring linear cohomology isomorphism",
+   "results": "{\"t\": \"2026-10-23T14:14:25Z\", \"tool\": \"leanfinder\", \"query\": \"Exact stalk functor commutes with cohomology of unbounded complexes of modules over a ringed space and transports a derived tensor isomorphism to a local ring linear cohomology isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.stalkIso_hom\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"ModuleCat.Tilde.stalkIso\", \"ModuleCat.Tilde.stalkIso_inv\", \"TopCat.Presheaf.isIso_of_stalkFunctor_map_iso\", \"TopCat.Presheaf.app_isIso_of_stalkFunctor_map_iso\", \"TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\"], \"digest\": \"aeb22d96db33281f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary tilde/localization, skyscraper, restriction-stalk or sheaf-cohomology declarations do not state the relative unbounded derived-tensor cohomology formula over R_p."
+  },
+  {
+   "tool": "grep",
+   "query": "stalkIso|restrictStalkNatIso|skyscraperPresheafStalkOfSpecializes",
+   "results": "{\"t\": \"2026-10-23T14:15:01Z\", \"tool\": \"grep\", \"query\": \"stalkIso|restrictStalkNatIso|skyscraperPresheafStalkOfSpecializes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/Restrict.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\"], \"digest\": \"9709f6be11d0edda\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned ordinary tilde/localization, skyscraper, restriction-stalk or sheaf-cohomology declarations do not state the relative unbounded derived-tensor cohomology formula over R_p."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-affine-relative-tor-amplitude-criterion",
+  "date": "2026-10-22",
+  "group": "O3"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Affine comparison for a given coherent relative dualizing pair. Relative Tor amplitude in the affine reduction, using the generic affine relative-Tor criterion. Re-split: per-degree consequence of the derived affine inverse-image base-skyscraper comparison used in the inverse-image-test assertion (former Step 4).",
+   "via": [
+    "lem-trf-affine-relative-tor-amplitude-criterion",
+    "lem-trf-affine-relative-dualizing-comparison",
+    "lem-trf-relative-dualizing-pair-rigidity",
+    "lem-trf-relative-duality-polynomial-chart",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-base-skyscraper-tensor-cohomology",
+  "worker": "stage1",
+  "summary": "Q42: kept the statement and its scalar conventions unchanged. Derived the cohomology formula in two steps from the exact stalk functor and the skyscraper-specialized derived comparison already stated by lem-trf-affine-relative-stalk-resolution-iso. Wrote out kernels, images, quotients and the application of cohomology to the comparison and its inverse. No new nodes; no boundedness or flatness assumption added. Read the current blueprint, Stacks 0DHY and 09U9, all statement dependencies, and the project Lean searches.",
+  "blueprint": "The existing ancestry locates this auxiliary per-degree consequence under the semistable/relative-duality affine-Tor branch of lem-trf-local-term-locality. It realizes the cohomology consequence of the derived affine inverse-image base-skyscraper comparison in the parent affine relative-Tor criterion (former Step 4), keeping its existing route and ancestry."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-ded7048f9",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-ded7048f9 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes and makes no changes. The item is the per-degree consequence of the derived-form node lem-trf-affine-relative-stalk-resolution-iso (unsplit, same unit sk-i-curve-zero), and that node is its only proof_dep, as brief §3 (Merten, 2026-10-21) requires. Step 1 (elementary): S_x H^i ≅ H^i S_x. The exactness it relies on is stated in the cited node ('the exact stalk and scalar transport'), not taken from its proof; this matches Stacks 09U9 cohomology.tex l.12434-12438. Step 2: H^i of the skyscraper specialization, which the cited node states for every R_p-module L with linearity under e_x; this matches Stacks 0DHY perfect.tex l.2350-2354. The statement is unchanged. Its scalar and coefficient conventions (e_x, germ iso O_{V,s}≅R_p, K-flat derived tensors via def-trf-ringed-complex-derived-tensor-vanishing and def-pc-module-kflat-complex) agree with the cited node; def-weil-derived-tensor is pro-étale and does not apply. It matches the parent tor-amplitude criterion's Step-4 use. Small cases agree: Z, q=(2), M=L=Z/2 gives Z/2 in degree -1 on both sides; the generic point gives 0=0; L=0 or M=0 gives 0. All 10 stmt_deps exist and none is merged. There is no cycle, no duplicate per-degree node, no SGA citation and no tool use. All 11 Mathlib searches ran and none matches."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineBaseSkyscraperTensorCohomology",
+  "declaration": "AlgebraicGeometry.nonempty_affineBaseSkyscraperTensorCohomologyIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineBaseSkyscraperTensorCohomology.lean",
+  "statement": "theorem nonempty_affineBaseSkyscraperTensorCohomologyIso {R A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) (x : PrimeSpectrum A) (M : CochainComplex (ModuleCat.{u} A) ℤ) [HasDerivedCategory.{wB} (RingedSpace.Modules (AffineRelativeStalk.ringedSpace φ))] [HasDerivedCategory.{wT} (ModuleCat.{u} (Localization.AtPrime (PrimeSpectrum.comap φ x).asIdeal))] (L : ModuleCat.{u} (Localization.AtPrime (PrimeSpectrum.comap φ x).asIdeal)) (i : ℤ) : Nonempty ((AffineRelativeStalk.stalkFunctor φ x).obj ((DerivedCategory.homologyFunctor (RingedSpace.Modules (AffineRelativeStalk.ringedSpace φ)) i).obj (AffineRelativeStalk.tensorWithInverseImage φ M (AffineRelativeStalk.skyscraper φ x L))) ≅ (DerivedCategory.homologyFunctor (ModuleCat.{u} (Localization.AtPrime (PrimeSpectrum.comap φ x).asIdeal)) i).obj (AffineRelativeStalk.localizedTensor φ x M L))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7c953639",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Node diff vs live: lean field only; lean.statement matches the file verbatim. Every clause maps onto the recorded AffineRelativeStalk helpers: ringedSpace (f^{-1}O_V), restrictedTilde along tensorPullbackRingMap, skyscraper via Spec.stalkIso, tensorWithInverseImage (siteDerivedTensorIndependentCoefficients), stalkFunctor = moduleStalkFunctor then restrictScalars along scalarMap e_x, applied to homologyFunctor i of the sheaf derived tensor (actual stalk of H^i), and localizedTensor (K-flat module tensor with L[0]); every i in Z; iso in ModuleCat R_p. Nonempty is faithful because the dependency lem-trf-affine-relative-stalk-resolution-iso only states existence; its derived form is that node (Merten 2026-10-21 rule satisfied). No extra hypotheses; universes match the dependency (independent wB/wT). Edge cases A=0, M=0, L=0, phi=id, non-flat phi, non-closed points and degree -1 Tor checked. No new definitions; proof is sorry only; docstrings carry source, blueprint id and proof steps; all 10 stmt_deps recorded and imported publicly. Not recompiled (no file changed); worker reports a clean server compile."
+ }
+}

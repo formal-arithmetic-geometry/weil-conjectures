@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-rank-zero-family-readings",
+ "kind": "statement",
+ "title": "Counit readings of the identity-section Rees family",
+ "statement": "Fix $P$ [def-pur-conventions] and a separated finite-type $k$-scheme $B$. Let $X=(B,1_B,1_B)$ be the standard rank-zero pair [def-pur-section-restriction-data]. Let $F$ be its actual Rees family section invariant, $C$ its source invariant, and $\\theta_1,\\theta_0$ the canonical endpoint maps. There exists $\\kappa:F\\simeq a^*C$ whose one reading with the canonical composition-and-identity section constraint is $\\theta_1$, and whose zero reading is $\\theta_0$ followed by the counit-normalized restriction along the canonical normal collapse $N_X\\to X$. This statement concerns the geometric endpoint maps and contains no DNC isomorphism $\\delta$.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+  "place": "Items (3),(4),(5), standard Rees calculation, with d=0; sk-thm-dnc Local construction"
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-section-restriction-data",
+  "lem-pur-section-constant-trivialization"
+ ],
+ "proof": [
+  {
+   "text": "Use standardZeroGeometry to make the actual augmented rank-zero Rees family the Cartesian pullback of the identity pair along the affine-line projection. Define kappa as the inverse of baseComparison for this square. The actual one- and zero-fibre squares are the published geometric squares. Their composites with the family square are respectively the identity square and the canonical normal-collapse square, because the family projection equations and the two section-projection equations identify their arrows.",
+   "uses": [
+    "def-pur-section-restriction-data",
+    "lem-pur-dnc-section-geometry"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For etale structural morphisms, normalize a section invariant by pulling back eta and then applying the coefficient-unit comparison. EtaBaseChange and monoidality of pullback composition show that sectionBaseChange preserves this normalization. Composition of the counit-normalized rho maps shows that restriction preserves it too. Thus, over the identity base, baseComparison followed by restriction equals the identity-square baseComparison. Expand the canonical pro-etale site-comparison transports and cancel the middle source comparisons to carry this equality to the actual section invariants. Apply this to the canonical rank-zero normal collapse.",
+   "uses": [
+    "lem-pur-finite-etale-dualizing-normalization",
+    "lem-kun-derived-pullback-composition-monoidal",
+    "def-pur-section-restriction-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply baseComparison composition and identity laws to each endpoint square pasted with the family square. Equality of the geometric arrows identifies the pasted comparison with the corresponding collapse comparison. Postcompose with identity at one and restriction at zero. Cancel the derived pullback of baseComparison and the inverse-image compositor. The resulting prefix is exactly lineCounit, giving both prescribed endpoint readings of the explicitly constructed kappa. No delta or normalization of delta is used.",
+   "uses": [
+    "lem-pur-section-base-comparison-laws",
+    "def-pur-section-restriction-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-section-restriction-data",
+  "lem-pur-dnc-section-geometry",
+  "lem-pur-finite-etale-dualizing-normalization",
+  "lem-kun-derived-pullback-composition-monoidal",
+  "lem-pur-section-base-comparison-laws"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-geometry/lem-pur-dnc-section-geometry.proof.md",
+  "place": "Items (3),(4),(5), standard Rees calculation, with d=0; sk-thm-dnc Local construction; K9 implements coefficient-unit normalization and base-square pasting in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image composition is coherent with sections and change of base",
+   "results": "8 hits, including AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl and CategoryTheory.GrothendieckTopology.overMapPullbackComp_inv_app_val_app; none states the required derived pro-etale endpoint equations.",
+   "date": "2026-10-26",
+   "verdict": "No exact match; use the source library derived pullback constraints."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedUpperStarComp\"",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib declaration of the source-library comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "lineCounit|section_constant_trivialization|rank_zero_family_readings",
+   "results": "0 hits.",
+   "date": "2026-10-26",
+   "verdict": "No exact Mathlib statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PuritySectionNormalizedSpecialization",
+  "date": "2026-10-26",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Step 1, canonicality of DNC under restriction; constant-family normalization and standard rank-zero case",
+   "via": [
+    "lem-pur-section-normalized-specialization",
+    "lem-pur-section-etale-restriction-coherence",
+    "lem-pur-diagonal-dnc-chart-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurityRankZeroFamilyReadings",
+  "file": "lean/Sheaf/Paper/PurityRankZeroFamilyReadings.lean",
+  "declaration": "WeilConjectures.PurityFiniteSetting.SectionRestriction.rank_zero_family_readings",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.SectionRestriction.rank_zero_family_readings"
+  ],
+  "statement": "theorem rank_zero_family_readings (P : PurityFiniteSetting.{u})\n    {B : Scheme.{u}} (aB : B ⟶ Spec (.of P.field.k)) [IsSeparated aB]\n    [LocallyOfFiniteType aB] [QuasiCompact aB] :\n    ∃ κ : invariant P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB)\n        (familyPair (standardZero B)) ≅\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n        (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).leftDerivedFunctor.obj\n          (invariant P aB (standardZero B)),\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n          (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso κ ≪≫\n        (lineCounit P B _ (AffineSpace.oneSection_comp_over _ B)).app _ =\n          endpointOne P aB (standardZero B) ∧\n      (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient)\n          (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso κ ≪≫\n        (lineCounit P B _ (AffineSpace.zeroSection_comp_over _ B)).app _ =\n          endpointZero P aB (standardZero B) ≪≫\n            restriction P aB (standardZeroNormalMap P aB)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261026T200728-L-3337844",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261026T235917-L-1468010",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

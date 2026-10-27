@@ -20,182 +20,33 @@
  ],
  "proof": [
   {
-   "text": "First establish the actual tensor–Hom bijection, rather than take it from a definition of the operations. On any of the small ringed sites $\\mathcal C$ in the datum, write $H(P,Q)=R\\mathcal Hom(P,Q)$. The two cited statements give, naturally in $L,P,Q$,\n$$\\operatorname{Hom}(L,H(P,Q))\n\\cong H^0(\\mathcal C,H(L,H(P,Q)))\n\\cong H^0(\\mathcal C,H(L\\otimes^L P,Q))\n\\cong\\operatorname{Hom}(L\\otimes^L P,Q).$$\nThe outer bijections are the global-sections identification and the middle one is internal-Hom currying. Interchanging the tensor factors gives the convention $P\\otimes^L L$ used below. These bijections are the adjunction with evaluation as counit. At finite coefficients this is the ambient, uncompleted tensor–Hom adjunction; no site-perfectness assumption is made.",
+   "text": "Obtain a normalized presentation p and its realization equations from lem-sf-tensor-exchange-normalized-models. This supplies only the adjunction ingredients, not any exchange isomorphism.",
    "uses": [
-    "lem-pur-rhom-global-sections",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "lem-sf-tensor-exchange-normalized-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JA (lemma-section-RHom-over-U), 08J9 (lemma-internal-hom); direct composition of their statements"
-   }
+   "elementary": false
   },
   {
-   "text": "At $R=\\mathcal O_E$, let $P,L,Q$ be integral bounded constructible objects on a scheme $W$, and put $T=P\\otimes^L_{\\widehat R_W}L$, using the ordinary ambient tensor only in this paragraph. The completed tensor in the datum is\n$$P\\widehat\\otimes^L_R L=R\\varprojlim_n\\operatorname{Res}_n(P_n\\otimes^L_{A_n}L_n).$$\nIts tower is the quotient tower of $T$: on K-flat representatives, the balancing isomorphism is $(p\\otimes a)\\otimes(l\\otimes b)\\mapsto(p\\otimes l)\\otimes ab$, with inverse $(p\\otimes l)\\otimes a\\mapsto(p\\otimes1)\\otimes(l\\otimes a)$. It commutes with differentials and quotient transitions. The constant/completed-coefficient comparison identifies this quotient limit, with its unit, with the Koszul completion of $T$ over $\\widehat R_W$. It also identifies the local and Koszul completeness conditions. The integral definition makes $Q$ isomorphic to a quotient limit of its reductions; that limit is a completion by the same comparison, hence $Q$ satisfies the local completeness condition needed by the reflector. Apply the reflector's mapping property, then step 1:\n$$\\operatorname{Hom}(P\\widehat\\otimes^L_R L,Q)\n\\cong\\operatorname{Hom}(P\\otimes^L_{\\widehat R_W}L,Q)\n\\cong\\operatorname{Hom}(L,H(P,Q)).$$\nEvery arrow is natural and induced by the completion unit or evaluation. This proves the needed completed tensor–Hom adjunction by composing existing statements; it does not identify the two tensor objects. The Noetherian coefficient ring is $R$, the ideal is $(\\varpi_E)$, and the site is small, exactly as required by the cited completion comparison and reflector.",
+   "text": "Apply lem-sf-tensor-exchange-coherent-conclusions to this very presentation and its normalization. Obtain its stage Conclusions, finite RingShifts, inverse-exchange naturality and four actual coefficient witnesses.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-derived-complete",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
+    "lem-sf-tensor-exchange-coherent-conclusions"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099M (lemma-naive-completion), with algebraization.tex Tags 099B and 0A0E, and the completed-coefficient comparison of the cited node"
-   }
+   "elementary": false
   },
   {
-   "text": "Check the domain for Yoneda first at $\\Lambda=A_{E,n}$. Write\n$$A_{M,N}=Rf_*H(M,f^!N),\\qquad B_{M,N}=H(Rf_!M,N).$$\nThe exceptional adjunction restricts to the finite-Tor subcategories, so $f^!N$ and $Rf_!M$ lie there. The dimension-finiteness lemma supplies nonnegative integer bounds $d_X,d_Y$ for $X,Y$ (take zero for an empty scheme). To apply finite constructible internal-Hom preservation without assuming that either scheme is separated over $k$, argue as follows for $W=X,Y$. The finite-type definition gives a finite affine cover $W=\\bigcup_{i=1}^tU_i$ by spectra of finitely generated $k$-algebras; these are Noetherian by the affine Noetherian lemma. Their inclusions are separated finite-type morphisms, so the finite-Tor pullback lemma restricts both inputs with the same Tor intervals. Each $U_i$ is separated over $k$. Apply the internal-Hom corollary on $U_i$, with the single bound $d_W$, and identify its output with the restriction of $H$ by the ringed-site internal-Hom restriction statement. The resulting Tor interval $[c-b-2d_W,e-a+2d_W]$ is independent of $i$. It holds globally: restriction is exact and commutes with tensor, and a cohomology sheaf vanishing on all $U_i$ vanishes. Constructibility also assembles explicitly: intersect each finite local stratification with $U_i\\setminus\\bigcup_{j<i}U_j$. These form a finite disjoint locally closed constructible stratification of $W$, with the same locally constant finite restrictions; the common Tor interval bounds the nonzero cohomology degrees. Thus the definitions give bounded constructible finite-Tor internal Homs globally. Apply this argument to $(M,f^!N)$ on $X$ and $(Rf_!M,N)$ on $Y$, and apply the pro-etale direct-image theorem to the first internal Hom. Both $A_{M,N}$ and $B_{M,N}$ therefore lie in the same full category $D^b_{ctf}(Y,A_{E,n})$. For an empty cover the objects are zero. No properness or site-perfectness hypothesis is used.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "cor-weil-finite-constructible-hom",
-    "cor-sf-direct-image-ctf-proetale",
-    "lem-kun-dimension-finite-type",
-    "def-weil-finite-type-morphism",
-    "lem-wf-affine-noetherian-components",
-    "lem-sf-pullback-tor-amplitude",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-    "place": "Proof, construction and detection; replaces the asserted unproved detection of ambient outputs by independently established finite-Tor membership"
-   }
-  },
-  {
-   "text": "For $\\Lambda=R=\\mathcal O_E$, the exceptional adjunction again makes $f^!N$ and $Rf_!M$ integral bounded constructible. The integral internal-Hom statement, with the finite-level bounds checked by the affine-cover argument in step 3, gives $H(M,f^!N)$ and $B_{M,N}$ in $D^b_c(-,R)$, with the stated uniform finite-level Tor bounds. For $H=H(M,f^!N)$, direct image preserves derived completeness and identifies $(Rf_*H)_n$ with $Rf_*(H_n)$. If $H_n$ has Tor interval $[c,d]$, the finite pro-etale direct-image theorem bounds all these reductions in $[c,d+2d_X]$, independent of $n$, and gives constructibility. Consequently $A_{M,N}$ satisfies the integral definition, including its uniform cohomological bound. The residue-Tor theorem identifies $D^b_c(-,R)$ with $D^b_{ctf}(-,R)$, so both $A_{M,N}$ and $B_{M,N}$ are objects of the full finite-Tor category used below. This uses completed coefficient sheaves throughout, rather than a silent identification with constant-coefficient or condensed-module categories.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "cor-coef-integral-internal-hom",
-    "prop-weil-pbc-direct-image-limits",
-    "cor-sf-direct-image-ctf-proetale",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-coef-integral-residue-tor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-    "place": "Proof, coefficient passage; integral completeness and uniform domain bounds supplied explicitly"
-   }
-  },
-  {
-   "text": "Let $\\Lambda$ now be finite or integral and $L\\in D^b_{ctf}(Y,\\Lambda)$. Using the adjunctions from steps 1–2, the projection isomorphism, and the two functor adjunctions, form the natural bijection $h_L$:\n$$\\begin{aligned}\n\\operatorname{Hom}_Y(L,B_{M,N})\n&\\cong\\operatorname{Hom}_Y(Rf_!M\\otimes^L L,N)\\\\\n&\\cong\\operatorname{Hom}_Y(Rf_!(M\\otimes^L Lf^*L),N)\\\\\n&\\cong\\operatorname{Hom}_X(M\\otimes^L Lf^*L,f^!N)\\\\\n&\\cong\\operatorname{Hom}_X(Lf^*L,H(M,f^!N))\\\\\n&\\cong\\operatorname{Hom}_Y(L,A_{M,N}).\n\\end{aligned}$$\nAt the integral stage every tensor in this chain is completed tensor. For the second arrow precompose with $\\operatorname{PF}_{f,M,L}^{-1}$: its direction is from $Rf_!(M\\otimes^LLf^*L)$ to $Rf_!M\\otimes^LL$. The projection theorem needs $M$ bounded constructible and $L$ finite-Tor, both available. All intermediate inputs to the exceptional adjunction are bounded constructible: the finite-Tor pullback lemma applies to $L$ and gives bounded constructibility of $Lf^*L$, tensor with the finite-Tor $M$ preserves it, and integral pullback and completed tensor preserve it by their integral preservation theorem. Hence the ordinary $D^b_c$ exceptional adjunction suffices here. The last arrow is the ordinary pullback–direct-image adjunction on bounded constructible objects. These checks justify every bijection without invoking the preservation summary that depends back on this item.",
-   "uses": [
-    "fix-prop-adjunctions",
-    "fix-prop-projection-formula",
-    "lem-sf-pullback-tor-amplitude",
-    "lem-sf-tensor-ctf",
-    "lem-pur-integral-operations-preserve-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-    "place": "Proof, Step 1, all five adjunction arrows and their domains"
-   }
-  },
-  {
-   "text": "Apply the fully faithful Yoneda embedding to the full category $\\mathcal C=D^b_{ctf}(Y,\\Lambda)$, which contains both objects by steps 3–4. The natural bijections $h_L$ identify $\\operatorname{Hom}_{\\mathcal C}(-,B_{M,N})$ with $\\operatorname{Hom}_{\\mathcal C}(-,A_{M,N})$. Explicitly set\n$$a=h_{B_{M,N}}(1_{B_{M,N}}):B_{M,N}\\to A_{M,N},\\qquad\nb=h_{A_{M,N}}^{-1}(1_{A_{M,N}}):A_{M,N}\\to B_{M,N}.$$\nNaturality in $L$ says $h_L(u)=a\\circ u$ and $h_L^{-1}(v)=b\\circ v$. Thus $ab=1_A$ and $ba=1_B$. The required canonical isomorphism has forward map $b$. Naturality of the five bijections in $M$ (contravariantly) and $N$ (covariantly) implies naturality of this isomorphism by the uniqueness part of Yoneda. In particular no extension-by-zero generator theorem, geometric-stalk detection, or unproved equivalence of whole sites is needed.",
-   "uses": [
-    "lem-galois-yoneda-fully-faithful"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 001P (lemma-yoneda), fully faithful embedding applied to the specified full category"
-   }
-  },
-  {
-   "text": "Verify the coefficient squares for this specified map by transposition. In the direction $A\\to B$, the map sends a test morphism $u:L\\to A$ first to its $Lf^*\\dashv Rf_*$ transpose, then to its tensor–Hom transpose $M\\otimes^LLf^*L\\to f^!N$, then to its $Rf_!\\dashv f^!$ transpose, then precomposes with $\\operatorname{PF}_{f,M,L}$ and transposes tensor–Hom once more. Each transposition is a bijection. For a coefficient functor $T$, insert the comparison maps at these five places. Tensor/evaluation and unit/counit preservation, together with projection-formula compatibility, makes the composite equal whether $T$ is applied before or after these five operations. Therefore the two routes around the exchange comparison square have the same transpose and are equal. Between finite quotients use the general finite-Tor internal-Hom comparison, not the site-perfect-only clause of the elementary operation-reduction lemma; finite direct image has its finite-Tor comparison as well. For integral reduction use the arbitrary-first-variable integral Hom comparison. For exceptional inverse image use precisely the coefficient comparisons assumed in exceptional admissibility. Integral scalar extension of Hom uses its stated scalar-extension theorem. This proves compatibility of the actual exchange morphisms, rather than just their isomorphism classes.",
-   "uses": [
-    "lem-fix-operation-reduction",
-    "fix-prop-projection-formula",
-    "def-weil-exceptional-adjoint-admissibility",
-    "thm-coef-finite-hom",
-    "lem-coef-finite-direct-image",
-    "lem-coef-integral-hom-reduction",
-    "lem-pur-integral-operations-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-    "place": "Proof, final coefficient-comparison sentence, with the transposition composite and the finite/integral domains stated explicitly"
-   }
-  },
-  {
-   "text": "The shift compatibility is checked on the same Hom bijection. Under the canonical shift identifications, for any integer $r$,\n$$\\operatorname{Hom}(L,A_{M,N[r]})\\cong\\operatorname{Hom}(L[-r],A_{M,N}),\\qquad\n\\operatorname{Hom}(L,B_{M,N[r]})\\cong\\operatorname{Hom}(L[-r],B_{M,N}).$$\nThe five arrows for $(L,N[r])$ identify with those for $(L[-r],N)$: a tensor factor shifted by $r$ shifts the tensor by $r$, and each right adjoint's shift comparison is the transpose of the corresponding comparison for its left adjoint. The tensor–Hom comparisons have the signs of the shifted Hom complex; shifting its first variable gives $H(M[r],Q)=H(M,Q)[-r]$, while shifting its second gives $H(M,Q[r])=H(M,Q)[r]$. Both transposition routes therefore use the same signed evaluation map. In the projection definition, the proper projection map is the transpose of $(\\varepsilon_p\\otimes1)\\circ\\mu_p$, and the compact-support map is its composite with $Rp_*(\\gamma)$, where $\\gamma$ is the extension-by-zero tensor comparison followed by pullback composition. Shifting either tensor factor shifts each of these composites by the total-tensor convention, using $d_{C[r]}=(-1)^rd_C$; the evaluation comparison uses that same convention. The shifted composite is therefore the specified shifted projection transformation. Thus $h$ for the shifted arguments is the shifted $h$. By uniqueness in step 6 this proves the shift square for the exchange, in the second variable and, with the negative shift, in the first. Completion commutes with these identifications since its Koszul-limit construction is exact and the completion unit is natural.",
-   "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "fix-prop-adjunctions",
-    "fix-prop-projection-formula",
-    "def-exchange-projection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-    "place": "Statement, shifts; direct graded transposition calculation using the specified comparisons"
-   }
-  },
-  {
-   "text": "Pass to the two field stages using their actual definitions. Rationalization keeps the integral objects and replaces each Hom group by its tensor product with $E$. Send the inverse pair $(a,b)$ of step 6 to its images there; their composites remain identities. The integral tensor–Hom bijection and its naturality localize, and the prescribed operations on objects and morphisms are the ones of the datum, so this gives the displayed exchange over $E$. For $\\overline{\\mathbf Q}_\\ell$, represent the finitely many input objects and maps over a common finite extension $E$. Define the exchange by its $E$-stage map. Step 7 identifies this representative after any larger finite extension, so its class is independent of the representative. The inverse is represented by the inverse at that same stage; naturality and the coefficient and shift equations hold over a common stage and therefore in the directed colimit of Hom groups. This supplies every coefficient stage in the statement without using a theorem on integral or field exceptional adjoints that depends back on this item.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-fix-operation-reduction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-    "place": "Proof, realization and field-stage passage, with rationalized Hom groups and common finite stages spelled out"
-   }
+   "text": "Construct CorePackage field by field from p and these Conclusions, RingShifts and coefficient data. Its stage, ring, partial realizations and projections are definitionally those of p. Therefore the NormalizedDatum witness already obtained is exactly the remaining existential conjunction of Package, with no transport or change of projection. Pair the constructed core with that witness. All choices occur only inside the proof.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "cor-coef-integral-internal-hom",
-  "cor-sf-direct-image-ctf-proetale",
-  "cor-weil-finite-constructible-hom",
-  "def-exchange-projection",
-  "def-pur-integral-derived-operations",
-  "def-weil-algebraically-closed-coefficients",
-  "def-weil-derived-complete",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-exceptional-adjoint-admissibility",
-  "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-finite-type-morphism",
-  "def-weil-rationalization-karoubi",
-  "fix-prop-adjunctions",
-  "fix-prop-projection-formula",
-  "lem-coef-finite-direct-image",
-  "lem-coef-integral-hom-reduction",
-  "lem-coef-integral-residue-tor",
-  "lem-fix-operation-reduction",
-  "lem-galois-yoneda-fully-faithful",
-  "lem-kun-dimension-finite-type",
-  "lem-pur-integral-operations-preserve-constructible",
-  "lem-pur-integral-operations-scalar-extension",
-  "lem-pur-rhom-global-sections",
-  "lem-sf-pullback-tor-amplitude",
-  "lem-sf-tensor-ctf",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-wf-affine-noetherian-components",
-  "prop-weil-pbc-direct-image-limits",
-  "thm-coef-finite-hom"
+  "lem-sf-tensor-exchange-normalized-models",
+  "lem-sf-tensor-exchange-coherent-conclusions"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
-  "place": "Proof, five-arrow adjunction route; domain check and completed tensor adjunction expanded using Stacks Tags 08JA, 08J9, 099M, 099B, 0A0E and 001P"
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Lean assembly of normalized adjunction ingredients and coherent exchange, preserving Step 1 and all coefficient-stage arguments"
  },
  "mathlib_searches": [
   {
@@ -309,48 +160,27 @@
   "def-weil-exceptional-adjoint-admissibility"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-biduality-general",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "item": "fix-lem-tensor-adjunction",
   "worker": "stage1",
-  "summary": "Kept the statement and its stronger admissibility hypothesis. Expanded ringed-site and completed integral tensor–Hom adjunctions using existing statements. Established both Yoneda outputs in the finite-Tor category independently of this exchange, then gave the five adjunction bijections, the explicit inverse pair, transposition checks, and field coefficient passage. Removed the unsupported geometric-generator/site-equivalence detection claims. Reused existing nodes throughout: no new nodes or Mathlib leaves. Second reading: supplied the finite affine-cover argument required by the separated internal-Hom corollary, cited finite dimension and intrinsic finite-Tor pullback, made projection shift composition explicit, and refreshed current projection citation quotes.",
-  "blueprint": "Realizes Proof Step 1 verbatim as the five-arrow adjunction route. Below this unit (whose steps list is empty), replaces Proof Step 2 detection with independent finite/integral domain membership and fully faithful Yoneda; expands the final coefficient/shift passage.",
+  "summary": "Repair of the 2026-10-22 human re-split: four statement-only unsplit nodes carry returned steps 1–2, 3–4, 7+9, and 8. The item retains its statement and only assembles the domain/adjunction lemmas, the five Hom bijections, Yoneda inverse pair, and the coefficient/shift identities. All nine original arguments are preserved verbatim in the report and mapped to their new obligations. No Lean written or compiler invoked. Maintainer reader Q151 FIX: the ambient tensor–Hom adjunction is cited from the existing same-unit node lem-sf-ringed-derived-closed-symmetric-monoidal, and the finite direct-image bound is cited from cor-sf-direct-image-ctf-proetale, instead of being restated inside the new nodes.",
+  "blueprint": "Proof Step 1 is the unchanged five-arrow route; Step 2 is the previously reviewed finite-Tor membership/Yoneda detection. Completion, uniform bounds, coefficient passage and signed shifts are exposed as four parallel statement-only obligations.",
   "tool_uses": [
-   {
-    "node": "cor-sf-direct-image-ctf-proetale",
-    "why": "Independent finite-stage direct-image Tor/constructibility bound, including a uniform bound for integral reductions."
-   },
-   {
-    "node": "def-pur-integral-derived-operations",
-    "why": "Fixes the actual completed tensor, rather than ordinary tensor, used in the integral adjunction."
-   },
-   {
-    "node": "def-weil-algebraically-closed-coefficients",
-    "why": "Actual common-stage Hom colimit and finite fields of definition."
-   },
-   {
-    "node": "def-weil-derived-complete",
-    "why": "Identifies an integral object with a derived limit of its reduction tower, without choosing an arbitrary canonical lift."
-   },
-   {
-    "node": "def-weil-derived-complete-integral-detailed",
-    "why": "Supplies exactly the completeness and uniform reduction bounds needed for the integral output domain."
-   },
-   {
-    "node": "def-weil-derived-pullback-tensor-hom",
-    "why": "Identifies the specified operations at field stages with their integral/common-stage coefficient passage."
-   },
-   {
-    "node": "def-weil-exceptional-adjoint-admissibility",
-    "why": "Names the stronger optional hypothesis kept in the statement, including its actual higher-stage comparison obligations."
-   },
-   {
-    "node": "def-weil-rationalization-karoubi",
-    "why": "Actual same-object rationalization and localized Hom groups."
-   },
    {
     "node": "fix-prop-adjunctions",
     "why": "Provides both actual functor adjunctions and the exceptional finite-Tor restriction used by the five-arrow chain."
@@ -358,10 +188,6 @@
    {
     "node": "fix-prop-projection-formula",
     "why": "The projection isomorphism is the central arrow of the blueprint route, with its coefficient compatibility."
-   },
-   {
-    "node": "lem-fix-operation-reduction",
-    "why": "Coefficient comparisons preserve evaluations, units and counits, and define rational/common-stage operations."
    },
    {
     "node": "lem-galois-yoneda-fully-faithful",
@@ -372,60 +198,8 @@
     "why": "Integral completed tensor and pullback preserve the domains of the adjunction chain."
    },
    {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Actual scalar-extension comparison for integral RHom and evaluation-compatible operations."
-   },
-   {
-    "node": "lem-pur-rhom-global-sections",
-    "why": "Global H^0 of ringed-site RHom computes derived Hom; supplies the actual Hom adjunction missing from the operation definition."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic comparison of Koszul/quotient completion over the completed coefficient sheaf; avoids conflating constant and completed coefficients."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "why": "Generic ringed-site currying and signed shift identities; needed to obtain the tensor–Hom bijection."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "why": "The mapping property of completion proves the completed tensor adjunction in two bijections; not supplied in this unit."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Exact strict derived inverse limit supplies the shift comparison for the completion construction."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Completeness and finite-reduction comparisons for ordinary direct image, needed for integral Yoneda membership."
-   },
-   {
     "node": "lem-sf-pullback-tor-amplitude",
     "why": "Intrinsic finite-Tor pullback, for affine restrictions and the intermediate input in the adjunction chain; the older pullback node uses an etale-origin constructibility notion."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Finite uniform dimension bounds on the two finite-type schemes, needed by the Hom and direct-image bounds."
-   },
-   {
-    "node": "def-weil-finite-type-morphism",
-    "why": "Finite affine covers used to apply separated internal-Hom preservation locally."
-   },
-   {
-    "node": "lem-wf-affine-noetherian-components",
-    "why": "Noetherian affine charts make the finite-cover disjoint refinement constructible."
-   },
-   {
-    "node": "def-weil-finite-tor-amplitude",
-    "why": "Tests global Tor bounds by restriction of the cohomology of tensor products."
-   },
-   {
-    "node": "def-weil-finite-torsion-constructibility",
-    "why": "Finite local stratifications assemble to the intrinsic global constructibility condition."
-   },
-   {
-    "node": "def-exchange-projection",
-    "why": "Specified projection-map composite used for the shift calculation."
    }
   ]
  },
@@ -459,12 +233,12 @@
   "def-exchange-projection"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-Codex-N6-bc483632c",
-  "group": "N6",
+  "reviewer": "NT-cc-Q151-736057164",
+  "group": "Q151",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-bc483632c (reviewer sub-agent of L); spot-checked: Read the item, report, blueprint route, all 34 cited node statements, exact projection/base-change definitions, and cited Stacks locations. Verified all nine proof steps, coefficient categories, hypotheses, shifts, edge cases, dependency acyclicity, and absence of duplicate/new-node faults. Wrote review.md; no repairs required."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-736057164 (reviewer sub-agent of L); spot-checked: Answers the human re-split note (released 2026-10-22). The live item is unchanged and split, so the delivery is not superseded and the item is not dropped. Statement unchanged; it matches main-20261015 sk-thm-sf-package/fix-lem-tensor-adjunction.md, and the five-arrow route is kept. Old steps 1–2, 3–4, 7+9 and 8 become four statement-only unsplit nodes of comparable size. Steps 5–6 remain as the assembly (five-arrow chain, Yoneda inverse pair; ab=1, ba=1 checked). Each argument is kept; old step 5 is condensed with all its citations. Checked: directions of PF, Γ and h; node C at L=A, u=1_A gives α_B∘T(b)=b'∘α_A; the shift signs in node D (N[r] uses L[−r], M[r] uses L[r]). Node A is supported by lem-weil-pbc-constant-completion-equivalence (O=Â Koszul/quotient comparison) and the Koszul reflector. Node B's non-separated generality is needed because def-fix-six-functor-datum allows non-separated finite-type X, Y. The comparisons in node C exist (thm-coef-finite-hom, lem-coef-integral-hom-reduction, lem-pur-integral-operations-scalar-extension, admissibility clause for f^!). Two repairable duplicate faults (C5/D1), now fixed. (1) Node A paragraph 1 restated the closed-structure clause of the existing same-unit node lem-sf-ringed-derived-closed-symmetric-monoidal. It is now notation only, and the node states only Hom(P⊗̂L,Q)≅Hom(P⊗_B L,Q) via the completion unit. (2) Node B's finite direct-image sentence was word for word cor-sf-direct-image-ctf-proetale, which is already an accepted tool use of the item. It is removed, and the integral clause is kept. Item step 1 now cites both existing nodes (step 2 also cites the closed structure); proof_deps updated. Assembly is 2440 characters; neither cited node reaches the item, so no cycle. Maintainer note: the off-route lem-pod-hom-chain-ctf-domains overlaps node B on membership only.; 3 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.TensorAdjunctionExchange",
@@ -476,36 +250,9 @@
   "date": "2026-10-19",
   "existing": false,
   "declarations": [
-   "WeilConjectures.TensorAdjunctionExchange.Model",
-   "WeilConjectures.TensorAdjunctionExchange.Model.left",
-   "WeilConjectures.TensorAdjunctionExchange.Model.right",
-   "WeilConjectures.TensorAdjunctionExchange.Model.inverseComponent",
-   "WeilConjectures.TensorAdjunctionExchange.Conclusion",
-   "WeilConjectures.TensorAdjunctionExchange.Change",
-   "WeilConjectures.TensorAdjunctionExchange.Change.homX",
-   "WeilConjectures.TensorAdjunctionExchange.Change.homY",
-   "WeilConjectures.TensorAdjunctionExchange.Change.star",
-   "WeilConjectures.TensorAdjunctionExchange.Compatible",
-   "WeilConjectures.TensorAdjunctionExchange.PartialRealization",
-   "WeilConjectures.TensorAdjunctionExchange.RingModel",
-   "WeilConjectures.TensorAdjunctionExchange.Projection",
-   "WeilConjectures.TensorAdjunctionExchange.RingShifts",
-   "WeilConjectures.TensorAdjunctionExchange.ChangeShifts",
-   "WeilConjectures.TensorAdjunctionExchange.Admissible",
-   "WeilConjectures.TensorAdjunctionExchange.CorePackage",
-   "WeilConjectures.TensorAdjunctionExchange.OperationRealization",
-   "WeilConjectures.TensorAdjunctionExchange.finiteInclusion",
-   "WeilConjectures.TensorAdjunctionExchange.Package",
-   "WeilConjectures.TensorAdjunctionExchange.tensor_adjunction",
-   "WeilConjectures.TensorAdjunctionExchange.compactificationSpace",
-   "WeilConjectures.TensorAdjunctionExchange.compactificationOpen",
-   "WeilConjectures.TensorAdjunctionExchange.compactificationProper",
-   "WeilConjectures.TensorAdjunctionExchange.projectionSquare",
-   "WeilConjectures.TensorAdjunctionExchange.tensorComponent",
-   "WeilConjectures.TensorAdjunctionExchange.tensorBraiding",
-   "WeilConjectures.TensorAdjunctionExchange.ProjectionRealized"
+   "WeilConjectures.TensorAdjunctionExchange.tensor_adjunction"
   ],
-  "note": "Repairs H3 F1/F2 at dc185ea524b5: integral projection is normalized at every RingStage.integral; rational/common projections equal the supplied datum exchange components through actual tensor realizations and signed braidings; all scalar-extension coefficient fields have published higher-operation and integral-normalization realizations."
+  "note": "Repairs H3 F1/F2 at dc185ea524b5: integral projection is normalized at every RingStage.integral; rational/common projections equal the supplied datum exchange components through actual tensor realizations and signed braidings; all scalar-extension coefficient fields have published higher-operation and integral-normalization realizations. S1: coefficient shift witnesses belong to the four specified coefficient comparisons; arbitrary unnormalized tensor comparisons need not respect shifts. Change.ShiftCompatible abbreviates the existing ChangeShifts evidence. C3: presentation definitions moved to their independent owner to avoid an import cycle; theorem assembled from normalized_models and coherent_conclusions. The old unrestricted coefficientShifts block in the shared source is reconciled with the already reviewed S1 witness-specific repair."
  },
  "reviewed_lean": {
   "date": "2026-10-19",
@@ -514,5 +261,56 @@
   "group": "NO",
   "result": "pass",
   "note": "New head (sha 35fc279b, differs from returned e9bea81d). F1′ repaired: projection pinned at finite/integral (Projection.normalized), at every rational L via _rationalProjection ProjectionRealized against (coefficientOperations L).rationalExchange (projectionSquare f c) (= six.higher at E), and at closed against six.closure.commonStageExchange; tensors from published normalizations, braidings published; given-c vs Q.compactification by U.comparison. u·P rescaling only absorbable by joint realization-iso rescaling (pull·u/star·u⁻¹ or tx/homX), which leaves the ambient exchange unchanged, so not a counterexample. F2′ repaired: integralAt/rationalAt are real OperationRealizations against a normalized SixFunctorHigherOperations at every L (pull/tensor equalities, supportConstruction, exchange projection built from HEq-pinned pieces); tautologies and projectionCanonical removed. F3: report now cites existing clauses; both sections present. lean.statement verbatim; declarations list exact; single sorry with nine-step docstring; imports unchanged; not dropped; admissibility record change is formatting only. nt_compile --json clean, 11.6 s. Advisory: common-field operations not tied to six.closure.coefficientStages (the tie fails to typecheck for general L and clashes with _originalCoefficient when E = Coefficient i)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023",
+  "commit": "c9b5f3ad18a6654dbbee6f7d7b4b4af85e01463f",
+  "changed": [
+   "proof"
+  ],
+  "statement": "In the six-functor datum of\n[def-fix-six-functor-datum], let $f$ be\nexceptionally\nadmissible, and let $M\\in D^b_{ctf}(X,\\Lambda)$ and\n$N\\in D^b_{ctf}(Y,\\Lambda)$. There is a canonical isomorphism\n\n$$\nRf_*R\\mathcal Hom_X\\bigl(M,f^!N\\bigr)\n\\xrightarrow{\\ \\sim\\ }\nR\\mathcal Hom_Y\\bigl(Rf_!M,N\\bigr),\n$$\n\nnatural in $M$ and $N$, compatible with finite reduction, scalar\nextension, and shifts.",
+  "proof": [
+   {
+    "text": "Step 1: the construction. For every\n$L\\in D^b_{ctf}(Y,\\Lambda)$, the derived tensor–internal-Hom\nadjunction of [def-weil-derived-pullback-tensor-hom] and the\nadjunction of [fix-prop-adjunctions] give the chain\n\n$$\n\\begin{aligned}\n\\Hom_Y\\bigl(L,R\\mathcal Hom_Y(Rf_!M,N)\\bigr)\n&\\cong\\Hom_Y(Rf_!M\\otimes^L_{\\Lambda}L,N)\\\\\n&\\cong\\Hom_Y\\bigl(Rf_!(M\\otimes^L_{\\Lambda}Lf^*L),N\\bigr)\\\\\n&\\cong\\Hom_X\\bigl(M\\otimes^L_{\\Lambda}Lf^*L,f^!N\\bigr)\\\\\n&\\cong\\Hom_X\\bigl(Lf^*L,R\\mathcal Hom_X(M,f^!N)\\bigr)\\\\\n&\\cong\\Hom_Y\\bigl(L,Rf_*R\\mathcal Hom_X(M,f^!N)\\bigr),\n\\end{aligned}\n$$\n\nwhere the second isomorphism is the inverse of the projection formula\nof [fix-prop-projection-formula] (applicable since $M$ and\n$L$ lie in the finite-Tor subcategories), and the first, third, and\nfourth are the tensor–internal-Hom adjunction of\n[def-weil-derived-pullback-tensor-hom] with the adjunction\n$Rf_!\\dashv Rf^!$ of [fix-prop-adjunctions], the last being\nthe adjunction $Lf^*\\dashv Rf_*$ of\n[fix-prop-adjunctions]. Step 2: detection. The adjunction chain is natural in\n$L\\in D^b_{ctf}(Y,\\Lambda)$, so it defines a canonical map of the two\nobjects of $D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$, for every admissible\ncondensed $\\Lambda$. To see that it is an isomorphism, take\n$L=e_!\\Lambda_V[r]$, where $e:V\\to Y$ is a quasi-compact étale map and\n$r\\in\\mathbf Z$. Such an extension by zero lies in $D^b_{ctf}(Y,\\Lambda)$,\nso it is in the domain used in step 1, and the resulting Hom groups are the\ncohomology groups of the two objects on $V$. Hence the cone $C$ satisfies\n$H^r(V,C)=0$ for every quasi-compact étale $V\\to Y$ and every $r$. For finite\n$\\Lambda$ the objects are classical, and conservativity of geometric stalks\n([lemma-weil-pbc-geometric-stalk-conservative]) shows $C=0$, without first\nassuming that either output belongs to the finite-Tor subcategory.\n\nFor $\\Lambda=\\mathcal O_E,E,\\Qlb$ write $\\phi_{M,N}$ for the map of Step 1.\nBoth of its sides are values of the exact functors\n$Rf_*R\\mathcal Hom_X(M,Rf^!(-))$ and $R\\mathcal Hom_Y(Rf_!M,-)$ on $N$, and of\nthe exact contravariant functors $Rf_*R\\mathcal Hom_X(-,f^!N)$ and\n$R\\mathcal Hom_Y(Rf_!(-),N)$ on $M$. Every map in the chain of Step 1 is a\ncomposite of units, counits and evaluation maps of the adjunctions and of the\nprojection formula, and the coefficient comparison maps of\n[sk-prop-scalar-six] for $f^*$, $Rf_*$, $Rf_!$, $f^!$, $\\otimes^L$ and\n$R\\mathcal Hom$ are isomorphisms on $D^b_{ctf}$ that respect these maps. Hence,\nfor every coefficient map $\\Lambda\\to\\Lambda'$ of [sk-prop-scalar-six], the\ncomparison maps identify $(\\phi_{M,N})_{\\Lambda'}$ with\n$\\phi_{M_{\\Lambda'},N_{\\Lambda'}}$; this is the asserted compatibility with\nfinite reduction and scalar extension.",
+    "uses": [
+     "def-weil-derived-pullback-tensor-hom",
+     "fix-prop-adjunctions",
+     "fix-prop-projection-formula",
+     "lemma-weil-pbc-geometric-stalk-conservative"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$\\Lambda=\\mathcal O_E$.* Both objects are derived complete, and by the\ncompatibility just proved the reduction of $\\phi_{M,N}$ modulo $\\pi_E$ is\n$\\phi$ for the finite ring $A_{E,1}=\\mathcal O_E/\\pi_E$, an isomorphism by the\nfinite case. So $C\\otimes^L_{\\mathcal O_E}\\mathcal O_E/\\pi_E=0$, and derived\nNakayama gives $C=0$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*$\\Lambda=E$.* The map $\\phi_{M,N}$ is natural in $M$ and $N$ and compatible\nwith shifts, so for fixed $N$ a distinguished triangle $M'\\to M\\to M''\\to$ in\n$D^b_{ctf}(X,E)$ gives a morphism of distinguished triangles between the two\nsides, and likewise in $N$. Therefore the pairs $(M,N)$ for which $\\phi_{M,N}$\nis an isomorphism form, in each variable, a class closed under shifts,\nisomorphisms and cones. By [sk-lem-integral-models] (4) every object of\n$\\Dbc(X,E)=D^b_{ctf}(X,E)$ is obtained by finitely many cones and shifts from\nobjects $(a_!L_0)[1/\\ell]=(a_!L_0)_E$ with $a_!L_0\\in D^b_{ctf}(X,\\mathcal O_E)$\n([sk-lem-integral-models], first paragraph and (3)), and likewise on $Y$. So it\nsuffices to treat $M=(M_0)_E$ and $N=(N_0)_E$ with $M_0\\in\nD^b_{ctf}(X,\\mathcal O_E)$ and $N_0\\in D^b_{ctf}(Y,\\mathcal O_E)$. Then\n$\\phi_{M,N}$ is identified with $(\\phi_{M_0,N_0})_E$, which is an isomorphism\nby the case $\\mathcal O_E$.",
+    "uses": [
+     "sk-lem-integral-models"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$\\Lambda=\\Qlb$.* By [det-lem-coefficient-finite-descent-objects] there are a\nfinite $E/\\Ql$ and models $M_E\\in\\Dbc(X,E)$, $N_E\\in\\Dbc(Y,E)$ with\n$(M_E)_{\\Qlb}\\cong M$ and $(N_E)_{\\Qlb}\\cong N$: a model over $E$ extends to a\nmodel over every finite $F\\supseteq E$, so one $E$ serves for both. Since\n$\\phi$ is natural, $\\phi_{M,N}$ is isomorphic to\n$\\phi_{(M_E)_{\\Qlb},(N_E)_{\\Qlb}}$, which is identified with\n$(\\phi_{M_E,N_E})_{\\Qlb}$, an isomorphism by the case $E$.\n\nThe same Yoneda argument directly in\n$D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$ is the one of [sk-thm-sf-tensor-hom].\nNaturality follows by transposing it to the same tensor and counit\ncomposites. This asserts compatibility of\nthe specified maps; it does not supply a separate internal-Hom reduction\nisomorphism outside the domains where that comparison has been proved.",
+    "uses": [
+     "det-lem-coefficient-finite-descent-objects",
+     "sk-thm-sf-tensor-hom"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (main-20261023, weil-conjectures-blueprint c9b5f3ad18) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-d65d2",
+  "group": "C3",
+  "result": "fix",
+  "landing": "20261025T162044-L-231227",
+  "kind": "interface",
+  "note": "independent cc review: pp.all #print of the 19 moved decls + tensor_adjunction (clone S1 item compiled in base sandbox) vs delivered Presentation/item: identical; sorry halves read against Model/RingModel/Projection/NormalizedDatum pinning; importer VerdierHomChainComposition rc 0"
  }
 }

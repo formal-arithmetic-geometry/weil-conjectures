@@ -1,0 +1,230 @@
+{
+ "id": "lem-sfb-root-datum-realization",
+ "kind": "statement",
+ "title": "Existence of split reductive groups realizing reduced root data",
+ "statement": "Let $F$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. A reduced root datum is a free abelian group $M$ of finite rank, a finite subset $R\\subset M\\setminus\\{0\\}$, and a bijection $\\alpha\\mapsto\\alpha^\\vee$ onto a subset of $M^\\vee=\\operatorname{Hom}_{\\mathbf Z}(M,\\mathbf Z)$, such that $\\langle\\alpha,\\alpha^\\vee\\rangle=2$, each reflection $s_\\alpha(m)=m-\\langle m,\\alpha^\\vee\\rangle\\alpha$ permutes $R$, the group these reflections generate on $M$ is finite, and $\\mathbf Q\\alpha\\cap R=\\{\\alpha,-\\alpha\\}$. For every reduced root datum $(M,R,M^\\vee,R^\\vee)$ there exist a split reductive $F$-group scheme $G$ [def-sc-group-scheme], a split maximal torus $S\\subseteq G$, and an isomorphism from its root datum to the prescribed datum, including an identification $X^*(S)\\simeq M$ carrying roots and coroots to $R,R^\\vee$. Reductive, split maximal torus, characters, cocharacters and the group root datum have the meanings of [lem-sfb-reductive-borel-pair-structure]. Empty root sets and rank zero are allowed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.55, printed p.501; Definition C.28, printed pp.613--614."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "lem-sfb-reductive-borel-pair-structure"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-root-datum-lattice-embedding] to the prescribed datum. It gives the rational root system $(V,R)$, its weight lattice $P$, the central lattice $C$, and $j:M\\hookrightarrow L=P\\oplus C$ with finite cokernel. Put $N=j(M)$. Thus $N$ has finite index in $L$, contains every $(\\alpha,0)$, and $\\alpha^\\vee(m)=\\bar c_\\alpha(\\pi_Vm)$. This retains the central directions, even when the roots do not span $M\\otimes\\mathbf Q$.",
+   "uses": [
+    "lem-sfb-root-datum-lattice-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Appendix C.29, C.35, C.43--C.44, pp.614--618; rational form of the reduction in Exercise 21-4, p.461."
+   }
+  },
+  {
+   "text": "Use [lem-sfb-chevalley-admissible-representation] for $(V,R)$. Choose its rational Lie algebra, faithful representation $\\rho$ on $W$, and integral lattice $\\Lambda$. In particular the weights generate the full lattice $P$, the lattice splits into its weight sublattices, and every $D_{\\alpha,m}=\\rho(e_\\alpha)^m/m!$ is integral and is zero for all sufficiently large $m$. All the hypotheses for the root-exponential construction are therefore available, over the given $F$ in any characteristic.",
+   "uses": [
+    "lem-sfb-chevalley-admissible-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 23h, pp.503--510; full-weight choice in Corollary 23.73, p.511."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-chevalley-root-exponential-group] to these data and $F$. On $\\Lambda\\otimes F$ form $x_\\alpha(a)=\\sum_m(D_{\\alpha,m}\\otimes1)a^m$. Here reduction to $F$ is applied to the integral matrices, so no factorial is inverted in $F$. The subgroup they generate is the split semisimple group $H$ with maximal torus $T_H=D_F(P)$ and root datum $(P,R,\\bar c_\\alpha)$. This supplies an actual group before any isogeny or quotient is considered.",
+   "uses": [
+    "lem-sfb-chevalley-root-exponential-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Equation (153) and Theorem 23.72, pp.510--511."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-central-character-sublattice-quotient] to $H$, $C$ and $N\\subseteq P\\oplus C$. The needed finite index and inclusion of all $(\\alpha,0)$ were verified in step 1. It constructs the finite central subgroup $K=D_F((P\\oplus C)/N)$ of $H\\times D_F(C)$ and the split reductive quotient $G=(H\\times D_F(C))/K$. Its split maximal torus $S$ has character lattice $N$, roots $(\\alpha,0)$, and coroots $n\\mapsto\\bar c_\\alpha(\\operatorname{pr}_P n)$. This use includes nonreduced $K$; no separability assumption on the quotient of tori is made.",
+   "uses": [
+    "lem-sfb-central-character-sublattice-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Exercise 21-4, p.461; 19.26--19.27, pp.404--405; Proposition 23.5, pp.485--486."
+   }
+  },
+  {
+   "text": "Identify $X^*(S)=N$ with $M$ by $j^{-1}$. Each root $(\\alpha,0)=j(\\alpha)$ is carried to $\\alpha$. For every $m\\in M$ the constructed coroot evaluates on $j(m)$ as $\\bar c_\\alpha(\\operatorname{pr}_P j(m))=\\bar c_\\alpha(\\pi_Vm)=\\alpha^\\vee(m)$. Hence the dual identification also carries every coroot to the prescribed one, and this is an isomorphism of the full root data. For $R=\\varnothing$ the cited constructions give $V=P=0$, $C=M$, $j$ an isomorphism, $H=K=1$ and $G=D_F(M)$. For $M=0$ this is the trivial group. Thus neither edge case needs an additional hypothesis.",
+   "uses": [
+    "lem-sfb-root-datum-lattice-embedding",
+    "lem-sfb-central-character-sublattice-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Definition 23.2, p.484; Exercise 21-4, p.461; toral root datum after C.43, p.618."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-root-datum-lattice-embedding",
+  "lem-sfb-chevalley-admissible-representation",
+  "lem-sfb-chevalley-root-exponential-group",
+  "lem-sfb-central-character-sublattice-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 23.55 via the Chevalley-lattice proof of Section 23h and Exercise 21-4; explicit finite-index embedding and central-quotient assembly. The four non-elementary inputs remain statement-only nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "root.datum|rootDatum|central.isogen|isogeny.theorem",
+   "results": "{\"t\": \"2026-10-23T14:42:41Z\", \"tool\": \"grep\", \"query\": \"root.datum|rootDatum|central.isogen|isogeny.theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\"], \"digest\": \"2757f456872bed70\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootDatum",
+   "results": "{\"t\": \"2026-10-23T14:42:41Z\", \"tool\": \"loogle\", \"query\": \"RootDatum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RootDatum\"], \"digest\": \"8e82126c1b12f7bc\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every reduced root datum is realized by a split reductive algebraic group over a field, semisimple when roots span its rational character space",
+   "results": "{\"t\": \"2026-10-23T14:42:49Z\", \"tool\": \"leanfinder\", \"query\": \"Every reduced root datum is realized by a split reductive algebraic group over a field, semisimple when roots span its rational character space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.nonempty_base\", \"RootPairing.IsReduced\", \"RootPairing.EmbeddedG2.toIsReduced\", \"RootSystem.mk'\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.isRootSystem_mk''\", \"LieAlgebra.IsKilling.instIsReducedSubtypeWeightMemLieSubalgebraFinsetRootDualRootSystem\", \"RootPairing.GeckConstruction.instIsIrreducible\"], \"digest\": \"4a0e592331b9701b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every reduced root datum occurs as the character and cocharacter root datum of a split reductive algebraic group",
+   "results": "{\"t\": \"2026-10-23T14:45:46Z\", \"tool\": \"leansearch\", \"query\": \"Every reduced root datum occurs as the character and cocharacter root datum of a split reductive algebraic group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootPairing.isReduced_iff'\", \"RootPairing.IsG2.toIsReduced\", \"RootPairing.isReduced_iff\", \"RootPairing.IsReduced.mk\", \"RootSystem.mk'\", \"RootPairing.EmbeddedG2.toIsReduced\", \"RootPairing.IsNotG2.toIsReduced\"], \"digest\": \"a69ae4631708839b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence theorem of split reductive algebraic groups with prescribed character lattice roots and coroots",
+   "results": "{\"t\": \"2026-10-23T14:45:47Z\", \"tool\": \"leanfinder\", \"query\": \"Existence theorem of split reductive algebraic groups with prescribed character lattice roots and coroots\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootSystem.mk'\", \"RootPairing.isRootSystem_mk''\", \"RootPairing.nonempty_base\", \"RootPairing.mk''\", \"RootPairing.baseOf_root_eq_baseOf_coroot\", \"RootPairing.EmbeddedG2\", \"RootPairing.IsG2.toEmbeddedG2\", \"RootPairing.EmbeddedG2.instIsG2OfIsIrreducible\"], \"digest\": \"2c33e1ac97779115\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the returned types and Mathlib/LinearAlgebra/RootSystem/Defs.lean:81-109 and Hom.lean:58-78; these define abstract root pairings and their maps, not algebraic-group realization or group-scheme isogenies. RootSystem.mk' constructs a root system, and the Geck construction constructs a Lie algebra in characteristic zero, neither a reductive group scheme. The AlgebraicGeometry grep has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every reduced root datum is realized by a split reductive algebraic group over a field",
+   "results": "{\"t\": \"2026-10-23T20:48:28Z\", \"tool\": \"leanfinder\", \"query\": \"Every reduced root datum is realized by a split reductive algebraic group over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootPairing.nonempty_base\", \"RootSystem.mk'\", \"RootPairing.EmbeddedG2.toIsReduced\", \"RootPairing.IsReduced\", \"RootDatum\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.isRootSystem_mk''\", \"RootPairing.mk''\"], \"digest\": \"a8e5351bda4d1d3e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootDatum defines an abstract root pairing (Mathlib/LinearAlgebra/RootSystem/Defs.lean:81--109). RootSystem.mk′ and GeckConstruction results construct root systems or characteristic-zero Lie algebras, not group schemes. No exact project declaration was found by tag, root datum, rootDatum or Chevalley searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Construct a split reductive group with any given reduced integral root pairing",
+   "results": "{\"t\": \"2026-10-23T20:51:16Z\", \"tool\": \"leanfinder\", \"query\": \"Construct a split reductive group with any given reduced integral root pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootSystem.mk'\", \"RootPairing.EmbeddedG2\", \"RootPairing.isRootSystem_mk''\", \"RootPairing.GeckConstruction.instHasTrivialRadical\", \"RootPairing.IsReduced\", \"RootPairing.GeckConstruction.instIsIrreducible\", \"RootPairing.instIsRootSystemOfNonemptyOfNeZeroOfNatOfIsIrreducible\", \"RootPairing.IsG2\"], \"digest\": \"cf7a2a92b799b8a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootDatum defines an abstract root pairing (Mathlib/LinearAlgebra/RootSystem/Defs.lean:81--109). RootSystem.mk′ and GeckConstruction results construct root systems or characteristic-zero Lie algebras, not group schemes. No exact project declaration was found by tag, root datum, rootDatum or Chevalley searches."
+  },
+  {
+   "tool": "loogle",
+   "query": "RootDatum",
+   "results": "{\"t\": \"2026-10-23T20:48:57Z\", \"tool\": \"loogle\", \"query\": \"RootDatum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"RootDatum\"], \"digest\": \"8e82126c1b12f7bc\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootDatum defines an abstract root pairing (Mathlib/LinearAlgebra/RootSystem/Defs.lean:81--109). RootSystem.mk′ and GeckConstruction results construct root systems or characteristic-zero Lie algebras, not group schemes. No exact project declaration was found by tag, root datum, rootDatum or Chevalley searches."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Split reductive group existence with prescribed roots coroots and character lattice",
+   "results": "{\"t\": \"2026-10-23T20:50:09Z\", \"tool\": \"leansearch\", \"query\": \"Split reductive group existence with prescribed roots coroots and character lattice\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RootDatum\", \"RootSystem.mk'\", \"RootPairing.coroot_mem_or_neg_mem_closure_of_root\", \"RootPairing.disjoint_corootSpan_ker_corootForm\", \"RootPairing.IsRootSystem.mk\", \"LieAlgebra.IsKilling.rootSystem\", \"RootPairing.rootSpan_eq_top_iff\", \"RootPairing.IsRootSystem.casesOn\"], \"digest\": \"ce03d682e3471c4f\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootDatum defines an abstract root pairing (Mathlib/LinearAlgebra/RootSystem/Defs.lean:81--109). RootSystem.mk′ and GeckConstruction results construct root systems or characteristic-zero Lie algebras, not group schemes. No exact project declaration was found by tag, root datum, rootDatum or Chevalley searches."
+  },
+  {
+   "tool": "grep",
+   "query": "RootDatum|root.datum|split.reductive",
+   "results": "{\"t\": \"2026-10-23T20:50:08Z\", \"tool\": \"grep\", \"query\": \"RootDatum|root.datum|split.reductive\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\", \"Mathlib/LinearAlgebra/RootSystem/Defs.lean\"], \"digest\": \"2757f456872bed70\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: RootDatum defines an abstract root pairing (Mathlib/LinearAlgebra/RootSystem/Defs.lean:81--109). RootSystem.mk′ and GeckConstruction results construct root systems or characteristic-zero Lie algebras, not group schemes. No exact project declaration was found by tag, root datum, rootDatum or Chevalley searches."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-central-lattice-enlargement",
+  "date": "2026-10-23",
+  "group": "Q123"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Borel pairs and actual rho section modules. Supporting input: Integrality of the half sum of positive roots supporting the rho section modules in the Steinberg endomorphism detection input. Supporting lattice proof: Appendix C.35, printed p.615; Theorem 23.55 and Corollary 23.56, printed p.501; Theorem 23.9, printed p.487; Proposition 23.5, printed pp.485--486, centrality and isomorphism criteria. Theorem 23.55: realize the explicitly constructed reduced root datum on L.",
+   "via": [
+    "lem-sfb-central-lattice-enlargement",
+    "lem-sfb-simply-connected-character-lattice",
+    "lem-sfb-rho-section-modules",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-root-datum-realization",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split the existence proof into the rational lattice embedding, an admissible full-weight Chevalley representation, the root-exponential semisimple group and a finite central diagonalizable quotient; then check root and coroot identifications explicitly. Four new statement-only inputs, no Mathlib leaves. Checked empty root sets, rank zero and characteristic-dividing kernels.",
+  "blueprint": "Nearest blueprint ancestor is null, as blueprint_refs.py ancestor confirms. Retain the inherited place and via chain: root-datum realization supports central-lattice-enlargement in the alteration prerequisite under det-thm-sf-ctf-stability-direct-images (3). Latest blueprint unit/direct-image texts read; whole-blueprint searches found no root-datum realization, lattice, Chevalley or central-quotient node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-e8e8dfaed",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-e8e8dfaed (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and Milne iAG2017 at the cited places: Ex. 21-4 (p.461) and §23h, 23.63-23.73 (pp.503-511). The item statement is unchanged and matches Milne 23.55 and C.28. Live and side-live still have the item unsplit, and there is no repair note, so this is not a re-split. No SGA is cited. The route is Milne's: the Ex. 21-4 reduction made explicit as the quotient (H×D(C))/D((P⊕C)/N), followed by Chevalley's admissible-lattice construction. I checked each new node independently and found them true. Lattice embedding: E=V⊕Z via E^W, P is the dual of the coroot lattice, π_V(M)⊆P, j has finite cokernel; tested on R=∅ and rank 1. Admissible representation: Serre existence, Chevalley basis, admissible lattice, (152), and a full-weight faithful sum of fundamental representations. Root-exponential group: Thm 23.72 with T=D_F(P) acting through the weights, which corrects Milne's too-large scalar torus (SL2 example); T⊆H through the coroot elements h_α(t). Central quotient: K lies in the common kernel of the roots, which is the centre; X^*(S)=N; roots and coroots are as stated, including the nonreduced K=μ2 in characteristic 2 (SL2→PGL2). Steps 1-4 take from each node only what its statement says, with all hypotheses supplied. Step 5 is elementary substitution, and the R=∅ and M=0 edge cases hold. This is not a D1/D2 relabelling: the four nodes are Milne's four ingredients, of comparable size and each smaller than the item. The duplicate search found nothing equivalent; the only citer of the item is central-lattice-enlargement, and none of the new nodes cites it, so there is no cycle. Batch-5 flag: borel-pair-structure is cited only as a convention stmt_dep (already a stmt_dep of the item on the base). Its closure reaches lem-trf-fppf-covering-base-change, a Mathlib leaf on fppf coverings that is neither a trace-formula/Poincaré-duality statement nor a step of their proofs, so the flag is accepted. Advisory, no change: the base node borel-pair-structure only asserts that coroots exist; the canonical coroot is the intended meaning. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.RootDatumRealization",
+  "declaration": "AlgebraicGeometry.exists_split_reductive_root_datum_realization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/RootDatumRealization.lean",
+  "statement": "theorem exists_split_reductive_root_datum_realization {F : Type u} [Field F] [IsAlgClosed F] (M : Type v) [AddCommGroup M] [Module.Free ℤ M] [Module.Finite ℤ M] (R : Set M) (hR : R.Finite) (hzero : (0 : M) ∉ R) (c : R → Module.Dual ℤ M) (hc : Function.Injective c) (hnorm : ∀ α : R, c α α = 2) (hperm : ∀ α : R, Set.BijOn (Module.preReflection (α : M) (c α)) R R) (hW : Finite (Subgroup.closure (Set.range (fun α : R ↦ Module.reflection (hnorm α))))) (hred : ∀ α : R, ((ℚ ∙ (TensorProduct.mk ℤ ℚ M 1 α) : Submodule ℚ (ℚ ⊗[ℤ] M)) : Set _) ∩ ((TensorProduct.mk ℤ ℚ M 1) '' R) = {TensorProduct.mk ℤ ℚ M 1 α, -(TensorProduct.mk ℤ ℚ M 1 α)}) : ∃ (G S : Grp (Over (Spec (.of F)))) (iS : S ⟶ G), ReductiveTorusCentralizer.IsReductive G ∧ ReductiveTorusCentralizer.IsMaximalTorus iS ∧ (∃ r : ℕ, Nonempty (S ≅ MultiplicativeType.splitTorus F r)) ∧ ∃ (_ : IsCommMonObj S.X) (_ : IsCommMonObj (StandardGroupSchemes.multiplicative F)) (aG : ModObj S.X G.X) (Φ : Finset (Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)))) (P : RootDatum Φ (Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ S))) (eX : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)) ≃ₗ[ℤ] M) (eY : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ S) ≃ₗ[ℤ] Module.Dual ℤ M) (eR : Φ ≃ R), P.IsReduced ∧ aG.smul = (iS.hom.hom ⊗ₘ 𝟙 G.X) ≫ GrpObj.conj G.X ∧ (∀ α : Φ, P.root α = α.val) ∧ (∀ (χ : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ S)), ν.toMul.hom.hom ≫ χ.toMul.hom.hom = (𝟙 (StandardGroupSchemes.multiplicative F)) ^ (P.toLinearMap χ ν)) ∧ (∀ χ : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F)), χ ∈ Φ ↔ χ ≠ 0 ∧ @TorusCharacterTangent.weightSpace F _ S G aG χ.toMul ≠ ⊥) ∧ (∀ (χ : Additive (S ⟶ Grp.mk (StandardGroupSchemes.multiplicative F))) (ν : Additive (Grp.mk (StandardGroupSchemes.multiplicative F) ⟶ S)), (eY ν) (eX χ) = P.toLinearMap χ ν) ∧ (∀ α : Φ, eX (P.root α) = (eR α : M)) ∧ (∀ α : Φ, eY (P.coroot α) = c (eR α))",
+  "branch": "sheaf-dag",
+  "by": "NN",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Input uses the explicit finite-lattice reflection axioms of Milne C.28, not an assumed abstract RootPairing. Output uses the actual character/cocharacter Hom groups and the reductive Borel-pair conventions. Both lattice equivalences, the root-index equivalence and pairing/root/coroot compatibility are included; universes of F and M are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21bec2100",
+  "group": "NN",
+  "result": "fix",
+  "note": "Lean exact against Milne 23.55/C.28 and the node: hypotheses are identical to the landed RootDatumLattice.lattice_embedding encoding; conclusion copies the reductive_borel_pair_structure root-datum block clause for clause, plus eX/eY (mutually dual via the pairing) and eR, which take roots to R and coroots to c, so the isomorphism is fully pinned. Edge cases R=∅, M=0, non-spanning roots, all characteristics and independent universes u,v are covered. lean.statement is verbatim; node differs from live only by lean; docstrings and blueprint tag present; proof is sorry only; no definitions; proof-only imports exist and are acyclic; no existing realization theorem. Sole fault H11: the 'Second reading by NN' section said no independent reading was made. FIX: fixes/lem-sfb-root-datum-realization.report.md keeps the worker report verbatim and adds a clause-by-clause second reading. No Lean file changed, so nothing compiled."
+ }
+}

@@ -42,6 +42,8 @@ target module that imports none of those modules reuses its ordinary walk. Only 
 project) reads "own"; "route", "batches", "targets" and "assumed" are unchanged and are what tools/queue.py,
 tag_batches.py and repair_queue.py read. A failed own walk does not make `ok` false: the batch is left out of "own" and
 listed in "own_failed" as "batchN:module".
+2026-10-27 (the human): no refresh from a build taken during a cluster quarantine (quarantine_hold): the previous route
+is kept and the next published build is tried; `--force` refreshes anyway.
 Usage: tools/sorry_route.py [N ...]      (default: every open batch; the file always describes the batches it lists)
        tools/sorry_route.py --check N [MODULE ...]   print batch N's route (its target modules, or the MODULEs given) with
                                                      its assumptions, without writing local/sorry-route.json"""
@@ -110,7 +112,34 @@ def walk(mod, stops=(), stop_mods=()):
     res = {}
     for m, d in re.findall(r"^ROUTE (\S+) (\S+)$", out, re.M):
         res.setdefault(m, set()).add(d)
+    # 2026-10-23: a module in the target's closure whose compiled file is missing (quarantined, or restored and not built
+    # yet; tools/sorry_route.lean prints `MISSING m`) is open, not done: its DAG-recorded declarations that the walk
+    # met (`UNOWNED n`: used, but declared by no loaded module) go on the route; a missing module with no DAG-recorded
+    # declaration goes on it alone (unknown, counted open). What it uses below is not walked (its imports are unknown).
+    missing = sorted(set(re.findall(r"^MISSING (\S+)", out, re.M)))
+    if missing:
+        unowned = set(re.findall(r"^UNOWNED (\S+)$", out, re.M))
+        hit = []
+        for m in missing:
+            known = _dag_decls().get(m, set())
+            if not known or known & unowned:
+                res.setdefault(m, set()).update(known & unowned); hit.append(m)
+        print(f"{mod}: no compiled file: {', '.join(missing)}; on the route (open): {', '.join(hit) or 'none'}", file=sys.stderr)
     return res
+
+
+_DD = None
+def _dag_decls():
+    """{module: set(declarations)} recorded by the DAG nodes (lean.module, lean.declaration(s))"""
+    global _DD
+    if _DD is None:
+        import dag_queue as dq
+        _DD = {}
+        for d in dq.load().values():
+            m, l = dq.module_of(d), d.get("lean")
+            if m and isinstance(l, dict):
+                _DD.setdefault(m, set()).update(([l["declaration"]] if l.get("declaration") else []) + list(l.get("declarations") or []))
+    return _DD
 
 
 _SNAPSHOTS = {}   # route time -> per-batch source baselines (changed_since)
@@ -125,6 +154,33 @@ def build_commit():
         pass
     r = subprocess.run(["git", "rev-parse", "HEAD"], cwd=R, capture_output=True, text=True)
     return r.stdout.strip() or None
+
+
+HOLD_MODULES, HOLD_FRACTION = 100, 0.05
+
+
+def quarantine_hold(commit):
+    """Why a route must not be read from the build at `commit`, or None (2026-10-27, the human): a build taken while a
+    cluster of modules sat in quarantine/ (7a9ad4b1ca at 13:23: 5703 quarantined, restored at 13:42) misses all of them,
+    and a route read from it made every restored module look split since the route. Held when the build's tree has more
+    than HOLD_MODULES modules in quarantine/, or misses more than HOLD_FRACTION of HEAD's lean/ modules that sit in its
+    quarantine/. Unknown commit (git fails): None."""
+    def tree(c, root):
+        r = subprocess.run(["git", "ls-tree", "-r", "--name-only", c, "--", root], cwd=R, capture_output=True, text=True)
+        if r.returncode != 0: return None
+        return {p[len(root) + 1:] for p in r.stdout.split() if p.endswith(".lean")}
+    if not commit: return None
+    q, lean, head = tree(commit, "quarantine"), tree(commit, "lean"), tree("HEAD", "lean")
+    if q is None or lean is None or head is None: return None
+    # 2026-10-27: count only modules missing from the build's lean/ (verified restored modules keep a stale quarantine/
+    # copy until the reconcile removes it; 1262 such copies held the route at 17:41 although nothing was missing)
+    q = q - lean
+    if len(q) > HOLD_MODULES:
+        return f"{len(q)} modules in quarantine/ and missing from lean/ at build {commit[:10]}"
+    gone = (head - lean) & q
+    if head and len(gone) > HOLD_FRACTION * len(head):
+        return f"build {commit[:10]} misses {len(gone)} of HEAD's {len(head)} modules (in quarantine/)"
+    return None
 
 
 def load():
@@ -242,8 +298,13 @@ def check(n, mods):
 def main():
     if sys.argv[1:2] == ["--check"]:
         return check(int(sys.argv[2]), sys.argv[3:])
-    ns = [int(a) for a in sys.argv[1:]] or open_batches()
+    ns = [int(a) for a in sys.argv[1:] if a != "--force"] or open_batches()
     commit = build_commit()   # before the walks: a build published meanwhile is newer than what they read
+    hold = None if "--force" in sys.argv else quarantine_hold(commit)
+    if hold:   # keep the previous route (2026-10-27, the human); the caller retries on the next published build
+        print(f"route not refreshed: {hold}; keeping local/sorry-route.json (--force to refresh anyway)", file=sys.stderr)
+        print(f"route held: {hold}")
+        return 0
     try:
         previous = json.loads((R / "local" / "sorry-route.json").read_text())
     except (OSError, ValueError):

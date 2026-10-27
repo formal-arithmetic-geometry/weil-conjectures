@@ -3,13 +3,15 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
-import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
-import Sheaf.AlgebraicGeometry.FineFanBlowup
-import Sheaf.GroupTheory.FineMonoidUnitSplitting
-import Sheaf.GroupTheory.FineMonoidFiniteSaturation
-import Sheaf.TraceFormula.FsFaceSharpening
-import Sheaf.AlgebraicGeometry.AffineFanLocalizationSections
-import Sheaf.AlgebraicGeometry.AffineFanHomUniversal
+module
+
+public import Sheaf.AlgebraicGeometry.MonoschemeToricRealization
+public import Sheaf.AlgebraicGeometry.FineFanBlowup
+public import Sheaf.GroupTheory.FineMonoidUnitSplitting
+public import Sheaf.GroupTheory.FineMonoidFiniteSaturation
+public import Sheaf.TraceFormula.FsFaceSharpening
+public import Sheaf.AlgebraicGeometry.AffineFanLocalizationSections
+public import Sheaf.AlgebraicGeometry.AffineFanHomUniversal
 
 /-!
 # Sharpening and fan desingularization rules
@@ -17,6 +19,8 @@ import Sheaf.AlgebraicGeometry.AffineFanHomUniversal
 Source: ILO, Exposé VIII, Lemma 3.1.25, Lemma 3.1.26, Theorem 3.1.27 and
 Remark 3.1.28, printed p.102 (blueprint: lem-trf-sharpening-fan-bijection).
 -/
+
+@[expose] public section
 
 set_option autoImplicit false
 set_option warn.sorry false

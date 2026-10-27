@@ -1,0 +1,220 @@
+{
+ "id": "lem-a1-etale-affine-finite-fibre-refinement",
+ "kind": "statement",
+ "title": "Finite-fibre affine refinement of a locally quasi-finite etale-source composite",
+ "statement": "Let $W,Z$ be affine schemes and $X$ any scheme [def-pc-scheme]. Let $q:X\\to W$ be etale [def-weil-etale-morphism] and surjective on underlying points, and let $h:W\\to Z$ be a morphism such that $h\\circ q$ is locally quasi-finite [pqf-def-quasifinite]. There exist an integer $m\\geq0$ and affine open subschemes $A_1,\\ldots,A_m\\subseteq X$ such that $W=\\bigcup_{j=1}^m q(A_j)$ and each restricted composite $h\\circ(q|_{A_j}):A_j\\to Z$ is quasi-finite and has finite fibres [pqf-def-quasifinite]. Moreover, for every $z\\in Z$, $h^{-1}(\\{z\\})=\\bigcup_{j=1}^m q(\\{a\\in A_j:h(q(a))=z\\})$ as subsets of $W$, and $h^{-1}(\\{z\\})$ is finite. There is no quasi-compactness assumption on $X$ or $q$, no separation assumption and no Noetherian assumption. The integer $m$ may be zero when $W$ is empty.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03X4 (lemma-locally-quasi-finite-etale-local-source), finite-fibres paragraph, expanded to arbitrary etale source using Topologies Tag 0218 (lemma-etale-affine) and Morphisms Tags 01TH, 01SH, 01S7, 01TJ, 02NH."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Cover $X$ by its affine open subschemes $A$ using [lem-weil-pbc-affine-opens-basis]. Since $q$ is an open map by [lem-weil-pbc-etale-morphism-open-map], every $q(A)$ is open in $W$. Surjectivity of $q$ implies these images cover $W$. The affine scheme $W$ is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so the definition of quasi-compactness selects finitely many of these images covering $W$. Denote the corresponding affine opens by $A_1,\\ldots,A_m$. If $W$ is empty, take the empty family.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 0218 (lemma-etale-affine), supplying the omitted proof for a singleton covering by affine opens and finite subcover selection."
+   }
+  },
+  {
+   "text": "For each selected $A_j$, restrict the locally quasi-finite morphism $h\\circ q:X\\to Z$ to the source open $A_j$ and the target open $Z$ itself. By [lem-weil-pbc-lqf-restriction-to-opens], $f_j=h\\circ(q|_{A_j}):A_j\\to Z$ is locally quasi-finite. Its source and target are affine, so [lem-weil-pbc-morphism-affine-schemes-affine] makes $f_j$ affine, and clause (3) of [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact. Now [pqf-lem-qf-locqf-qc] gives that $f_j$ is quasi-finite. By the forward implication of [pqf-lem-qf-finitefibres], $f_j^{-1}(\\{z\\})$ is finite for every $z\\in Z$.",
+   "uses": [
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TH (lemma-quasi-finite-at-point-characterize), 01SH (lemma-morphism-affines-affine), 01S7 (lemma-affine-separated), 01TJ (lemma-quasi-finite-locally-quasi-compact), 02NH (lemma-quasi-finite)."
+   }
+  },
+  {
+   "text": "Fix $z\\in Z$. If $a\\in A_j$ satisfies $h(q(a))=z$, then $q(a)\\in h^{-1}(\\{z\\})$. Conversely, if $w\\in h^{-1}(\\{z\\})$, the image cover from step 1 gives $j$ and $a\\in A_j$ with $q(a)=w$; then $h(q(a))=h(w)=z$. This proves the stated equality of subsets. Each term on its right is the image under $q$ of the finite set $f_j^{-1}(\\{z\\})$ from step 2, hence finite. A union of finitely many finite sets is finite. For $m=0$ the equality is between empty sets. This proves every asserted fibre statement without any quasi-compactness assumption on $X$ or $q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4 (lemma-locally-quasi-finite-etale-local-source), sentence: finite fibres of the surjective source imply finite fibres of the target; expanded as a finite union of set images."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "pqf-lem-qf-locqf-qc",
+  "pqf-lem-qf-finitefibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03X4 (lemma-locally-quasi-finite-etale-local-source), finite-fibres paragraph, expanded using the omitted proof of Topologies Tag 0218 and Morphisms Tags 01TH, 01SH, 01S7, 01TJ, 02NH."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For surjective etale p X to affine W and h W to affine Z with h p locally quasi finite, a finite affine open refinement of X has finite fibres to Z and h has finite fibres",
+   "results": "{\"t\": \"2026-10-22T07:53:48Z\", \"tool\": \"leanfinder\", \"query\": \"For surjective etale p X to affine W and h W to affine Z with h p locally quasi finite, a finite affine open refinement of X has finite fibres to Z and h has finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.finiteType_appLE\"], \"digest\": \"04181586411106d9\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finite_preimage_singleton\", \"Surjective\"",
+   "results": "{\"t\": \"2026-10-22T07:53:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"finite_preimage_singleton\\\", \\\"Surjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_preimage_singleton|finite.*[Aa]ffine.*[Ee]tale|[Ee]tale.*[Rr]efin",
+   "results": "{\"t\": \"2026-10-22T07:53:37Z\", \"tool\": \"grep\", \"query\": \"finite_preimage_singleton|finite.*[Aa]ffine.*[Ee]tale|[Ee]tale.*[Rr]efin\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\"], \"digest\": \"79d2e4aad19ddcfa\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite fibres descend from a locally quasi finite composite through a surjective etale morphism onto an affine scheme using a finite affine refinement",
+   "results": "{\"t\": \"2026-10-22T07:53:37Z\", \"tool\": \"leansearch\", \"query\": \"Finite fibres descend from a locally quasi finite composite through a surjective etale morphism onto an affine scheme using a finite affine refinement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"Algebra.QuasiFinite.mk\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.IsFinite.recOn\"], \"digest\": \"d4797a0e0de90869\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite affine open refinement of an arbitrary surjective etale source map gives finite fibres of an affine target map when its composite is locally quasi finite",
+   "results": "{\"t\": \"2026-10-22T07:57:53Z\", \"tool\": \"leanfinder\", \"query\": \"Finite affine open refinement of an arbitrary surjective etale source map gives finite fibres of an affine target map when its composite is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.locallyOfFiniteType_iff\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"AlgebraicGeometry.IsFinite.finite_app\"], \"digest\": \"da3691985381590a\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Surjective\", \"finite\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-22T07:58:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"Surjective\\\", \\\"finite\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ff]ib(re|er).*descen|descen.*finite.*[Ff]ib(re|er)|finite.*affine.*refinement",
+   "results": "{\"t\": \"2026-10-22T07:58:26Z\", \"tool\": \"grep\", \"query\": \"finite.*[Ff]ib(re|er).*descen|descen.*finite.*[Ff]ib(re|er)|finite.*affine.*refinement\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Mathlib Scheme.Hom.finite_preimage_singleton (QuasiFinite.lean:174) requires a quasi-compact morphism, unavailable for X to Z. It applies only after constructing finitely many affine source pieces; none of the returned statements constructs those pieces and descends their finite fibres along q. isFinite_iff concerns finite morphisms, a stronger hypothesis."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "{\"t\": \"2026-10-24T00:41:39Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.LocallyQuasiFinite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite_preimage_singleton requires a quasi-compact map; affineRefinement refines an open cover of its own scheme. Neither constructs finitely many source opens covering W by their q-images together with the fibre-image equality. isFinite imposes stronger hypotheses. Existing DAG nodes supply the individual affine and finite-fibre tools."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_preimage_singleton|affine.*refinement|refinement.*affine",
+   "results": "{\"t\": \"2026-10-24T00:41:39Z\", \"tool\": \"grep\", \"query\": \"finite_preimage_singleton|affine.*refinement|refinement.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Group/Abelian.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/Cover/Open.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"0e05715be66294ac\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite_preimage_singleton requires a quasi-compact map; affineRefinement refines an open cover of its own scheme. Neither constructs finitely many source opens covering W by their q-images together with the fibre-image equality. isFinite imposes stronger hypotheses. Existing DAG nodes supply the individual affine and finite-fibre tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine open refinement of a surjective etale morphism with locally quasi finite composite gives finite fibres on the target",
+   "results": "{\"t\": \"2026-10-24T00:41:40Z\", \"tool\": \"leansearch\", \"query\": \"Finite affine open refinement of a surjective etale morphism with locally quasi finite composite gives finite fibres on the target\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.Scheme.OpenCover.affineRefinement\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.HasAffineProperty.iff_of_openCover\"], \"digest\": \"f6999aa74d1757cd\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite_preimage_singleton requires a quasi-compact map; affineRefinement refines an open cover of its own scheme. Neither constructs finitely many source opens covering W by their q-images together with the fibre-image equality. isFinite imposes stronger hypotheses. Existing DAG nodes supply the individual affine and finite-fibre tools."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A surjective etale map to an affine scheme admits finitely many affine open source pieces whose images cover the target and a locally quasi finite composite on each piece has finite fibres",
+   "results": "{\"t\": \"2026-10-24T00:41:40Z\", \"tool\": \"leanfinder\", \"query\": \"A surjective etale map to an affine scheme admits finitely many affine open source pieces whose images cover the target and a locally quasi finite composite on each piece has finite fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"Algebra.IsStandardEtale.of_surjective\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"AlgebraicGeometry.IsFinite.finite_app\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\"], \"digest\": \"9e0aea2a1c628074\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: finite_preimage_singleton requires a quasi-compact map; affineRefinement refines an open cover of its own scheme. Neither constructs finitely many source opens covering W by their q-images together with the fibre-image equality. isFinite imposes stronger hypotheses. Existing DAG nodes supply the individual affine and finite-fibre tools."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-scheme-lqf-etale-source-locality",
+  "date": "2026-10-22",
+  "group": "Q22"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Auxiliary representability branch beneath lem-a1-affine-hc0, through lem-a1-separated-etale-space-scheme and the proof of Stacks 03XX/03XW: the base-change and saturated-open hypotheses. This node supplies the scheme-source locality used to compare the pulled-back atlas with an arbitrary etale chart; see spaces-morphisms.tex, lemma-base-change-quasi-finite-locus, proof, chart diagram. Extraction from lem-a1-scheme-lqf-etale-source-locality: Finite-fibre affine refinement of a locally quasi-finite etale-source composite.",
+   "via": [
+    "lem-a1-scheme-lqf-etale-source-locality",
+    "lem-a1-space-separated-lqf-permanence",
+    "lem-a1-etale-quasi-affine-image-scheme",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-a1-etale-affine-finite-fibre-refinement",
+  "worker": "stage1",
+  "summary": "Q31 checked the unchanged statement and wrote the finite affine selection, restriction/quasi-finite argument, and exact fibre-image equality. All geometric tools already exist in the DAG; no new nodes. No source quasi-compactness, separation, or Noetherian hypotheses were added.",
+  "blueprint": "Auxiliary representability branch beneath lem-a1-affine-hc0, through lem-a1-separated-etale-space-scheme and lem-a1-scheme-lqf-etale-source-locality: expands the finite-fibres paragraph of Stacks 03X4 using 0218; the latest blueprint lem-a1-affine-hc0 finite-level support paragraph is the ancestor context.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic scheme-source open restriction, used on h composed with q; this auxiliary branch has no separate restriction theorem."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic equivalence of quasi-finite with locally quasi-finite and quasi-compact, applied to the affine pieces. The unit contains no replacement for this scheme theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-d62cbdf2c",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-d62cbdf2c (reviewer sub-agent of L); spot-checked: Read the full item, all 8 cited statements and the Stacks sources: descent 03X4 (finite-fibres sentence of its proof) and topologies 0218 (finite affine refinement, proof 'Omitted'; step 1 writes it out), with tags 01TH/01SH/01S7/01TJ/02NH confirmed in tags/tags. Step 1: the affine opens form a basis (Mathlib leaf), an étale map is open (leaf), W is quasi-compact (leaf). With surjectivity this gives finitely many images covering W, and nothing is assumed about X. Step 2: lqf-restriction-to-opens with U=A_j, V=Z gives a locally quasi-finite f_j. A_j and Z are affine, so f_j is affine (01SH), hence quasi-compact (permanence clause 3). The reverse direction of pqf-lem-qf-locqf-qc then makes f_j quasi-finite, and the forward direction of pqf-lem-qf-finitefibres gives finite fibres. Every hypothesis holds where it is used, and all nodes share the 01TD notion of quasi-finite. Step 3 is genuinely elementary (set equality by double inclusion, then a finite union of finite images). Edge cases checked: W empty (m=0), Z empty, X an infinite disjoint union, z outside the image of h. Statement unchanged and true; stmt_deps complete. No new nodes, so no relabelling and no cycle (the parent cites the item, not the reverse). The DAG search for 03X4/0218 finds no duplicate. Tool uses accepted: lqf-restriction-to-opens (01TH(4)) and pqf-lem-qf-locqf-qc (01TJ) are generic black boxes; qf-finitefibres is Lean-closed; the other citations are Mathlib leaves. No SGA cited. proof_deps equals the union of uses; blueprint and split_report fields are present. Advisory: the report mentions citations.json and searches.jsonl, which are not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAffineFiniteFibreRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_affine_finite_fibre_refinement",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAffineFiniteFibreRefinement.lean",
+  "statement": "theorem exists_etale_affine_finite_fibre_refinement {X W Z : Scheme.{u}} [IsAffine W] [IsAffine Z] (q : X ⟶ W) [Etale q] [Surjective q] (h : W ⟶ Z) (hcomp : (q ≫ h).IsLocallyQuasiFinite) : ∃ (m : ℕ) (A : Fin m → X.Opens), (∀ j : Fin m, IsAffineOpen (A j)) ∧ (⋃ j : Fin m, q '' (A j : Set X)) = Set.univ ∧ (∀ j : Fin m, ((A j).ι ≫ q ≫ h).IsQuasiFinite ∧ ((A j).ι ≫ q ≫ h).HasFiniteFibres) ∧ (∀ z : Z, h ⁻¹' {z} = ⋃ j : Fin m, ((A j).ι ≫ q) '' (((A j).ι ≫ q ≫ h) ⁻¹' {z})) ∧ h.HasFiniteFibres",
+  "branch": "sheaf-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a43d2c3ea",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Statement matches node clause-by-clause: affine W,Z, arbitrary X; [Etale q][Surjective q] (Function.Surjective); hcomp uses the 01TD IsLocallyQuasiFinite (with finite type), not Mathlib LocallyQuasiFinite; ∃ m:ℕ, A:Fin m→X.Opens affine; ⋃ q''A_j = univ; (A j).ι≫q≫h IsQuasiFinite ∧ HasFiniteFibres; ∀ z fibre equality as images in Set W; h.HasFiniteFibres. No extra qc/separated/Noetherian/universe assumptions. Edge cases W=∅ (m=0), Z=∅, z∉im h, infinite X OK. Sorry-only theorem, source/blueprint docstrings with proof steps, statement verbatim, no duplicate found, live node unchanged outside lean. Advisory: plain proof-tool imports unused by the statement. Not recompiled (no change); worker compile clean."
+ }
+}

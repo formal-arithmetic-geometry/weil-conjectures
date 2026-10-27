@@ -1,0 +1,181 @@
+{
+ "id": "lem-sfb-polarized-abelian-automorphisms-finite",
+ "kind": "statement",
+ "title": "Finiteness of the automorphism group of a polarized abelian variety",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure] and let $A/k$ be an abelian variety [def-sc-abelian-variety]. Write $A^\\vee=\\operatorname{Pic}^0_{A/k}$ for the dual abelian variety representing algebraically trivial invertible sheaves rigidified at the identity. Let $\\lambda:A\\to A^\\vee$ be the polarization induced by an ample [def-sc-ample] invertible sheaf [def-sc-invertible-module] $L$, so $\\lambda(x)=[t_x^*L\\otimes L^{-1}]$, where $t_x$ is translation by $x$. For a $k$-group automorphism $a$ [def-sc-group-scheme], let $a^\\vee$ denote pullback on $A^\\vee$. Then the group $\\operatorname{Aut}_k(A,\\lambda)=\\{a:A\\xrightarrow{\\sim}A\\text{ a }k\\text{-group automorphism}:a^\\vee\\lambda a=\\lambda\\}$ is finite.",
+ "source": {
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-abelian-variety",
+  "def-sc-ample",
+  "def-sc-invertible-module",
+  "def-sc-group-scheme",
+  "def-sfb-abelian-dual-poincare-datum",
+  "def-sfb-abelian-dual-hom-classification"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-abelian-hom-finite-free] with $B=A$. Thus $M=\\operatorname{End}_k(A)$ is a free abelian group with a finite integral basis, and its unit is $1=\\mathrm{id}_A$. Put $V=M\\otimes_{\\mathbf Z}\\mathbf Q$ and write $\\iota(m)=m\\otimes1$. In the chosen basis $\\iota$ is $\\mathbf Z^r\\hookrightarrow\\mathbf Q^r$, so it is injective, including when $r=0$. Composition extends bilinearly to $V$, hence $\\iota(mn)=\\iota(m)\\iota(n)$ and $\\iota(1)=1$. We use this injection to regard integral endomorphisms as rational ones in the following steps.",
+   "uses": [
+    "lem-sfb-abelian-hom-finite-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(a), p.62, discreteness input; Theorem 10.15, p.49."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-rosati-trace-positive] to $A,L,\\lambda$. Write $\\mu=\\lambda^{-1}$ in rational homomorphisms. We obtain on $V$ the symmetric positive definite rational bilinear form $B_\\lambda(u,v)=\\operatorname{Tr}_A(u^\\dagger v)$, where $u^\\dagger=\\mu u^\\vee\\lambda$, and $\\operatorname{Tr}_A(1)=2\\dim A$. This uses the given ample polarization, with no principal-polarization assumption.",
+   "uses": [
+    "lem-sfb-rosati-trace-positive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "§14 p.61 and Theorem 14.3, p.62; Proposition 14.4(a), first paragraph."
+   }
+  },
+  {
+   "text": "For $a\\in\\operatorname{Aut}_k(A,\\lambda)$, regard $a$ as $\\iota(a)\\in V$ using step 1. The defining equation $a^\\vee\\lambda a=\\lambda$ gives $a^\\dagger a=\\mu a^\\vee\\lambda a=\\mu\\lambda=1$. Consequently $B_\\lambda(\\iota(a),\\iota(a))=\\operatorname{Tr}_A(1)=2\\dim A$. Thus every such $a$, as an element of $M$, belongs to $S=\\{m\\in M:B_\\lambda(\\iota(m),\\iota(m))\\le2\\dim A\\}$. The products in this calculation are compositions of rational homomorphisms, so no inverse of $\\lambda$ in the integral endomorphism ring is asserted.",
+   "uses": [
+    "lem-sfb-rosati-trace-positive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(a), p.62, calculation of the trace norm."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-positive-form-lattice-sublevels-finite] to $M$, the rational form $B_\\lambda$, and $c=2\\dim A$. Its finite-basis hypothesis was established in step 1, and symmetry, rational bilinearity and strict positivity on nonzero rational vectors were established in step 2. It follows that $S$ is finite. Forgetting the inverse and the proof of preservation sends $\\operatorname{Aut}_k(A,\\lambda)$ injectively into $S$: equality of the underlying group-scheme endomorphisms is equality of automorphisms. Thus $\\operatorname{Aut}_k(A,\\lambda)$ is finite.",
+   "uses": [
+    "lem-sfb-positive-form-lattice-sublevels-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-abelian-varieties_AV.pdf",
+    "place": "Proposition 14.4(a), p.62, final lattice/compactness inference, with compactness applied to the ellipsoid."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-abelian-hom-finite-free",
+  "lem-sfb-rosati-trace-positive",
+  "lem-sfb-positive-form-lattice-sublevels-finite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-abelian-varieties_AV.pdf",
+  "place": "Chapter I, Proposition 14.4(a), printed p.62; supporting Theorems 10.15 and 14.3 and Proposition 10.20."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The automorphism group of an abelian variety preserving a polarization is finite",
+   "results": "8 hits; logged top results: AlgEquiv.fintype, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, FintypeCat.instFiniteAut, Finite.algEquiv, IsGaloisGroup.finite, AlgEquiv.card_le, CategoryTheory.PreGaloisCategory.instGroupAutGalois, CategoryTheory.PreGaloisCategory.card_aut_le_card_fiber_of_connected",
+   "date": "2026-10-22",
+   "verdict": "no match: finite field automorphisms, finite-object automorphisms and root-system polarizations are different notions; none establishes finiteness of polarized abelian-variety automorphisms"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"polarization\"",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite field automorphisms, finite-object automorphisms and root-system polarizations are different notions; none establishes finiteness of polarized abelian-variety automorphisms"
+  },
+  {
+   "tool": "grep",
+   "query": "polariz.*[Aa]ut|[Aa]ut.*polariz|[Aa]belian[Vv]ariety",
+   "results": "0 hits; logged top results: ",
+   "date": "2026-10-22",
+   "verdict": "no match: finite field automorphisms, finite-object automorphisms and root-system polarizations are different notions; none establishes finiteness of polarized abelian-variety automorphisms"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Polarized abelian varieties have finitely many group automorphisms",
+   "results": "8 hits; logged top results: CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, AlgEquiv.fintype.congr_simp, AlgEquiv.fintype, instFintypeAlgEquivOfIsDomainOfIsIntegrallyClosedOfFiniteOfIsTorsionFree, FintypeCat.instFiniteAut, CategoryTheory.PreGaloisCategory.card_aut_le_card_fiber_of_connected, RootPairing.Polarization, RootPairing.polarizationEquiv_toLinearMap",
+   "date": "2026-10-22",
+   "verdict": "no match: finite field automorphisms, finite-object automorphisms and root-system polarizations are different notions; none establishes finiteness of polarized abelian-variety automorphisms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isometries of a polarized abelian variety form a finite group",
+   "results": "8 hits; logged top results: NumberField.Units.instFintypeSubtypeUnitsRingOfIntegersMemSubgroupTorsion, FintypeCat.instFiniteAut, AlgEquiv.fintype, NumberField.IsCMField.index_unitsMulComplexConjInv_range_dvd, CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected, FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers, CategoryTheory.PreGaloisCategory.instCompactSpaceAutFunctorFintypeCat, NumberField.Units.instFiniteIntAdditiveQuotientUnitsRingOfIntegersSubgroupTorsion",
+   "date": "2026-10-22",
+   "verdict": "no match: finite field automorphisms, finite-object automorphisms and root-system polarizations are different notions; none establishes finiteness of polarized abelian-variety automorphisms"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-polarized-abelian-odd-level-rigidity",
+  "date": "2026-10-22",
+  "group": "Q96"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Prime-to-characteristic level rigidity for polarized abelian varieties. Supporting input in the level-rigidity proof: Chapter I, Proposition 14.4(a), printed p.62; polarization convention in I §11, printed p.53.",
+   "via": [
+    "lem-sfb-polarized-abelian-odd-level-rigidity",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-polarized-abelian-automorphisms-finite",
+  "worker": "stage1",
+  "summary": "N5 repaired the side-completion landing refusal against the current live unsplit DAG on 2026-10-23, retaining the previously amended proof and searches. The current item differs only in split-owned proof/status/report fields; both supporting ids remain absent from live. Reopened all twelve external dependency statements and verified the four verbatim step citations. The proof explicitly embeds integral endomorphisms into rational endomorphisms, uses the two-sided rational polarization inverse, computes the Rosati trace norm, and injects into a finite rational-form lattice sublevel. Milne Proposition 10.20 is correctly labelled; the false compactness sentence is replaced by the finite-sublevel inference. No statement or source-route change was needed.",
+  "blueprint": "Supporting polarization-stabilizer input for the level-rigidity prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), via the inherited alteration/stable-curve chain. Steps 1–4 realize Milne I Proposition 14.4(a); ancestor command returns None, retained in from.node."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-N5-9f287ef61",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9f287ef61 (reviewer sub-agent of L); spot-checked: PASS with no fixes. I read the item, both new nodes, every cited statement and Milne AV I §14 p.61, Th 14.3 and Prop 14.4(a) p.62, Th 10.15 and Prop 10.20 pp.49–52. This is the 4th push of the same mathematics. Compared with PASSed head e20354f9, the new nodes are identical and only the item's split_report date and summary changed. Live and side-live still have the item unsplit with an empty proof, the new ids are absent and there is no repair note. The earlier returns at 07:16, 11:33 and 16:13 were landing refusals ('completed in this project's DAG but not in …'), not mathematical returns. Step 1: lem-sfb-abelian-hom-finite-free with B=A gives the finite Z-basis and the unit id_A; ι is Z^r↪Q^r, injective also for r=0. Step 2: the Rosati node literally states μ=λ⁻¹ (rational), u†=μu^∨λ, the symmetric positive Q-form Tr(u†v) and Tr(1)=2g. Step 3 is elementary: a†a=μa^∨λa=1, so B(a,a)=2g, and λ is never inverted integrally. Step 4 applies the lattice node with c=2g; Aut(A,λ)→S is injective by uniqueness of inverses. Milne's 'End(A)⊗R is compact' is false, since the space contains R·id; the delivery repairs it through the sublevel node and records it as a source error without weakening the theorem. Rosati node: it agrees with Milne's Tr(uv†) by trace cyclicity and Tr(x†)=Tr(x). Checked on g=0, an elliptic curve with End=Z, a CM curve, and −L (not ample, excluded). Lattice node: a rational kernel argument shows the Gram matrix is real positive definite, so each sublevel is a compact ellipsoid meeting Z^r in a finite set. Checked r=0, c<0, c=0, and x² on Z² (semidefinite, shows strict positivity is needed). Neither node restates a clause of the item. rg finds no duplicate Rosati, positive-definite or sublevel node, and no SGA citation. Everything is in unit sk-thm-sf-ctf-stability, so no tool_uses are needed. There is no cycle: the item's only citer is the odd-level-rigidity parent. Maintainer note: L should promote or land this content instead of returning it again."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AbelianVariety.PolarizedAutomorphismsFinite",
+  "declaration": "AlgebraicGeometry.polarized_abelian_automorphisms_finite",
+  "file": "lean/Sheaf/AlgebraicGeometry/AbelianVariety/PolarizedAutomorphismsFinite.lean",
+  "statement": "theorem polarized_abelian_automorphisms_finite {k : Type u} [Field k] [IsAlgClosed k] (A : Over (Spec (.of k))) [GrpObj A] [IsAbelianVariety A] (D : AbelianDualPoincareDatum A) (L : A.left.Modules) [Scheme.Modules.IsInvertible L] (hL : IsAmple A.hom L) (lambda : A ⟶ D.dual) (hlambda : ClassifiesAbelianDifference D L lambda) : Finite {a : A ≅ A // IsMonHom a.hom ∧ ∃ aDual : D.dual ⟶ D.dual, ClassifiesAbelianDualHom D D a.hom aDual ∧ a.hom ≫ lambda ≫ aDual = lambda}",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the landed normalized dual Poincare datum and rigidified dual-pullback classification. The finite subtype contains exactly the k-group automorphisms satisfying a-dual lambda a=lambda; neither a principal polarization nor an arbitrarily specified dual action is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d5e3194c",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of 01b666 (returned R1/H2: theorem node lem-sfb-abelian-poincare-biduality cited for the plain def ClassifiesAbelianDualHom). The Lean file is byte-identical (sha c4f4edde), so the prior H3 clause table holds: alg-closed k, GrpObj+IsAbelianVariety A, supplied AbelianDualPoincareDatum, ample invertible L, ClassifiesAbelianDifference λ, IsMonHom iso a, rigidified ∃ aDual, a≫λ≫aDual=λ, Finite subtype. The item diff is only the stmt_dep swap to the new def-sfb-abelian-dual-hom-classification; nothing is lost relative to live. The new def node is existing:true on the unchanged PoincareBiduality module, owning poincareRigidificationBaseChange and ClassifiesAbelianDualHom; its statement is verbatim in the file and its text matches the bodies (variance g:D_B→D_A, axis equality h, iso i, rigidification compatibility, base-change composite). No clash, no move or copy, no cycle; deps are all landed defs. Gates OK (sorry only, docstrings, no stronger assumptions, single universe). Advisory: the reused defs' docstrings carry the biduality blueprint tag by design. No compile (no file changed)."
+ }
+}

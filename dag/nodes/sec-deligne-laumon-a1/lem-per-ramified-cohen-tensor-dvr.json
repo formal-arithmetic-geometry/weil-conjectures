@@ -1,0 +1,275 @@
+{
+ "id": "lem-per-ramified-cohen-tensor-dvr",
+ "kind": "statement",
+ "title": "Ramified base change along a Cohen coefficient extension",
+ "statement": "Let $p$ be prime, let $A$ be a Cohen ring [def-weil-pbc-cohen-ring] with perfect residue field $k=A/pA$ (bijective Frobenius), and let $W$ be a complete discrete valuation ring of mixed characteristic $(0,p)$ [def-sc-discrete-valuation-ring, def-weil-pbc-adically-complete-ring]. Fix a uniformizer $\\pi\\in W$ and a local ring map $a:A\\to W$ inducing an isomorphism $k\\xrightarrow{\\sim}W/\\pi W$. Let $B$ be a Cohen ring and let $b:A\\to B$ be a local ring map; write $L=B/pB$, so its residue map specifies a field inclusion $k\\to L$. Form the ordinary algebra tensor product $T=W\\otimes_A B$ with product $(w\\otimes z)(w'\\otimes z')=ww'\\otimes zz'$ [lem-weil-pbc-algebra-tensor-pushout-universal-property]. Then $T$ is a complete discrete valuation ring of mixed characteristic $(0,p)$, $W\\to T$, $w\\mapsto w\\otimes1$, is injective, local and flat [def-weil-pbc-flat-ring-map], $\\pi\\otimes1$ is a uniformizer, and $T/(\\pi\\otimes1)T\\cong L$ by $w\\otimes z\\mapsto\\bar w\\bar z$, where $\\bar w\\in k\\subset L$ and $\\bar z\\in L$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé IV 4.3.5, printed p.60, V=W′_0 tensor over W(k′_0) I(k′); complete DVR assertion underlying 4.2.5, printed p.59. Ordinary tensor is complete because W is finite free over its perfect-residue Cohen subring."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "The Cohen rings $A,B$ and the DVR $W$ are local PIDs. By [lem-weil-pbc-pid-noetherian-normal] they are Noetherian, so [lem-weil-pbc-dvr-unit-times-uniformizer-power] applies to each. Since $p$ is nonzero in $W$ and the map $a$ is local, write $p=u\\pi^e$ in $W$, with $u$ a unit and $e\\ge1$. In particular $p^nW=\\pi^{en}W$ and $\\bigcap_n p^nW=0$, the latter following from the assumed $\\pi$-adic completeness [def-weil-pbc-adically-complete-ring]. Both $a$ and $b$ are injective: a nonzero element of $A$ is $vp^r$ with $v$ a unit; its image is nonzero in the domains $W$ and $B$ because $p$ is nonzero there. We use the given residue isomorphism to identify $W/\\pi W$ with $k=A/pA$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00PD (lemma-characterize-dvr) and 0317 (definition-complete); apply the DVR element decomposition and the definition of separatedness"
+   }
+  },
+  {
+   "text": "The classes of $1,\\pi,\\ldots,\\pi^{e-1}$ form a $k$-basis of $W/pW=W/\\pi^eW$. For spanning, for any $w$ choose $a_0\\in A$ with residue $w\\bmod\\pi$, write $w-a(a_0)=\\pi w_1$, and repeat this operation $e$ times. For independence, lift the coefficients of a nonzero $k$-linear combination to $A$, and take its least index $j$ having nonzero residue. Coefficients of smaller index map into $pW=\\pi^eW$. Modulo $\\pi^eW$ the sum is therefore $\\pi^j(a(a_j)+\\pi z)$, with $a(a_j)+\\pi z$ a unit. It cannot lie in $\\pi^eW$: cancellation would put that unit in $\\pi W$, since $j<e$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031D (lemma-finite-over-complete-ring), verification of its finite-reduction hypothesis by successive residue subtraction"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-over-complete-ring] with ring $A$, ideal $pA$, module $W$ and the chosen lifts $1,\\pi,\\ldots,\\pi^{e-1}$. Its hypotheses are: completeness of $A$ from its Cohen-ring hypothesis, $\\bigcap_n p^nW=0$ from Step 1, and finite generation of $W/pW$ from Step 2. The strengthened conclusion about any lifts of generators shows that these very powers generate $W$ over $A$. They are independent as well. In a relation $\\sum_{i<e}a(a_i)\\pi^i=0$, Step 2 implies $a_i\\in pA$ for every $i$. Divide the coefficients by $p$ and cancel the nonzero $p$ in $W$; repetition gives $a_i\\in\\bigcap_n p^nA=0$ [def-weil-pbc-adically-complete-ring]. Thus the displayed powers are an $A$-basis of $W$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031D (lemma-finite-over-complete-ring), including its proof for the specified generators; Tag 0317 (definition-complete) for separation"
+   }
+  },
+  {
+   "text": "Write $\\pi^e=\\sum_{i<e}a(c_i)\\pi^i$ in that basis and put $P(X)=X^e-\\sum_{i<e}c_iX^i\\in A[X]$. Step 2 gives $c_i\\in pA$. Write $c_i=pd_i$. In $W$ the relation gives $a(c_0)=\\pi^e(1-u\\sum_{1\\le i<e}a(d_i)\\pi^i)$; the parenthesis is a unit, since it is $1$ modulo $\\pi$. If $c_0\\in p^2A$, this would put $\\pi^e$ in $\\pi^{2e}W\\subseteq\\pi^{e+1}W$, a contradiction by cancellation. Hence $P$ is monic with all lower coefficients in $pA$ and constant coefficient outside $p^2A$. Evaluation induces $A[X]/(P)\\to W$. By [lem-weil-pbc-monic-quotient-free] its source has basis $1,X,\\ldots,X^{e-1}$; the map takes this basis to the basis of Step 3, so it is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER (lemma-weakly-unramified-goes-up-along-totally-ramified), proof, polynomial presentation; coefficient argument expanded here"
+   }
+  },
+  {
+   "text": "Let $P_B$ be obtained by applying $b$ to the coefficients and put $Q=B[X]/(P_B)$, with $x$ the class of $X$. The presentation of Step 4 gives a map $W\\to Q$ sending $\\pi$ to $x$, compatible with the coefficient map $B\\to Q$. The tensor universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $T\\to Q$, $w\\otimes z\\mapsto w(x)z$. Conversely evaluation $X\\mapsto\\pi\\otimes1$ defines $Q\\to T$, since $P_B(\\pi\\otimes1)=0$. These maps are inverse: on $Q$ their composite fixes $B$ and $x$, which generate $Q$; on $T$ it fixes every pure tensor, by the presentation of $W$. Thus $T\\cong Q$ as $B$-algebras, with $\\pi\\otimes1$ corresponding to $x$. Since $c_0=pd_0\\notin p^2A$, $d_0$ is a unit of $A$, so $b(c_0)=pb(d_0)\\notin p^2B$. Every other lower coefficient still lies in $pB$. Apply [lem-sfb-eisenstein-quotient-dvr] to the DVR $B$, uniformizer $p$, degree $e\\ge1$, and polynomial $P_B$. It yields that $Q$, hence $T$, is a DVR with maximal ideal generated by $x$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-sfb-eisenstein-quotient-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER (lemma-weakly-unramified-goes-up-along-totally-ramified), proof, Eisenstein presentation after scalar extension"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-monic-quotient-free], $Q$ has $B$-basis $1,x,\\ldots,x^{e-1}$. In the $A$-basis of Step 3 and this $B$-basis, $W\\to Q$ takes the coefficient vector $(a_i)_{i<e}$ to $(b(a_i))_{i<e}$. It is injective by the injectivity of $b$ in Step 1. The residue map $Q\\to B/pB=L$ sends $x$ to $0$ and each coefficient to its residue. Indeed quotienting by $x$ leaves $B/(b(c_0))=B/pB$, because $b(c_0)$ is $p$ times a unit. For $w=\\sum_{i<e}a(a_i)\\pi^i$, the image of $w\\otimes z$ is $\\overline{b(a_0)}\\bar z=\\bar w\\bar z$, the required formula. Its restriction to $W$ has kernel $\\pi W$ because $k\\to L$ is a field inclusion. Thus $W\\to T$ is local. The injective map $W\\to T$ gives characteristic zero, and the computed residue field has characteristic $p$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09ER (lemma-weakly-unramified-goes-up-along-totally-ramified), proof, explicit basis and residue identifications"
+   }
+  },
+  {
+   "text": "The same basis identifies $Q/p^nQ$ with $(B/p^nB)^e$ compatibly for all $n$. A compatible sequence therefore consists of $e$ compatible coefficient sequences, each lifted uniquely to $B$ by its Cohen-ring completeness. Their finite linear combination in the basis gives the unique lift to $Q$. Thus $Q$ is $p$-adically complete [def-weil-pbc-adically-complete-ring]. The identity $p=u\\pi^e$ in $W$ gives $pQ=x^eQ$, since the image of $u$ remains a unit; hence $p^nQ=x^{en}Q$. These powers are cofinal among the powers of $x$. Explicitly, from compatible residues modulo $x^m$ take the subsequence $m=en$, lift uniquely by $p$-completeness, and for each $m$ reduce an equality modulo $x^{en}$ with $en\\ge m$ to recover that residue. Uniqueness follows from the same subsequence. Consequently $Q$ and $T$ are complete for their maximal ideals.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0317 (definition-complete); finite coordinate calculation and cofinal subsequence argument written out"
+   }
+  },
+  {
+   "text": "Finally $T$ is torsion free as a $W$-module: if $0\\ne w\\in W$ and $wt=0$ in $T$, its image is nonzero by Step 6, so $t=0$ because $T$ is a domain by Step 5. Since $W$ is a PID, [lem-weil-pbc-pid-torsion-free-module-flat] makes $T$ flat over $W$. By [def-weil-pbc-flat-ring-map] this is precisely flatness of the map $w\\mapsto w\\otimes1$. Together with Steps 5--7 this proves every assertion for the ordinary algebra tensor product.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW (lemma-dedekind-torsion-free-flat), part (1), PID case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-pbc-flat-ring-map",
+  "lem-sfb-eisenstein-quotient-dvr",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-pid-torsion-free-module-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09ER (lemma-weakly-unramified-goes-up-along-totally-ramified), proof; finiteness supplied by Algebra Tag 031D. Expands the coefficient tensor construction in ILO Exposé IV 4.3.5, printed p.60."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Ramified base change of Cohen rings W tensor over unramified perfect residue Cohen ring with Cohen ring of larger residue field is a complete discrete valuation ring with the same uniformizer",
+   "results": "OK 8 hits: Algebra.Unramified.baseChange, Algebra.instFormallyUnramifiedResidueField, RingHom.FormallyUnramified.isStableUnderBaseChange, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.instFormallyUnramifiedResidueField_1, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.FormallyUnramified.iff_map_maximalIdeal_eq, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base-change lemmas and DVR characterizations presuppose properties not given here; no Cohen coefficient tensor construction. WittVector.Complete.lean provides completeness of perfect-field Witt vectors only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of a ramified complete discrete valuation ring over a perfect residue Cohen subring with a Cohen ring extension is a complete DVR",
+   "results": "OK 8 hits: instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, Tilt, instCommRingBDeRhamPlus, IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion, PreTilt.isDomain, Tilt.instField, Algebra.instFormallyUnramifiedResidueField",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base-change lemmas and DVR characterizations presuppose properties not given here; no Cohen coefficient tensor construction. WittVector.Complete.lean provides completeness of perfect-field Witt vectors only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor a complete ramified discrete valuation ring over its perfect residue Cohen subring with a larger Cohen ring preserves discrete valuation and uniformizer",
+   "results": "OK 8 hits: Algebra.Unramified.baseChange, ValuativeRel.uniformizer.congr_simp, of_isDiscreteValuationRing, Valuation.Uniformizer.ext_iff, Valuation.IsUniformizer.not_isUnit, Valuation.Uniformizer.ext, ValuativeRel.le_uniformizer_iff, IsDiscreteValuationRing.TFAE",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base-change lemmas and DVR characterizations presuppose properties not given here; no Cohen coefficient tensor construction. WittVector.Complete.lean provides completeness of perfect-field Witt vectors only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"TensorProduct\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base-change lemmas and DVR characterizations presuppose properties not given here; no Cohen coefficient tensor construction. WittVector.Complete.lean provides completeness of perfect-field Witt vectors only."
+  },
+  {
+   "tool": "grep",
+   "query": "Eisenstein.*(tensor|Tensor|complete)|Cohen.*[Tt]ensor|[Tt]ensor.*Cohen",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-24",
+   "verdict": "no match: unramified base-change lemmas and DVR characterizations presuppose properties not given here; no Cohen coefficient tensor construction. WittVector.Complete.lean provides completeness of perfect-field Witt vectors only."
+  },
+  {
+   "tool": "grep",
+   "query": "Cohen.*[Tt]ensor|[Tt]ensor.*Cohen|[Ee]isenstein.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-24T08:34:18Z\", \"tool\": \"grep\", \"query\": \"Cohen.*[Tt]ensor|[Tt]ensor.*Cohen|[Ee]isenstein.*[Tt]ensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give unramified base change, adic completion properties, or Eisenstein irreducibility; none states the complete Cohen tensor DVR assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of a complete ramified discrete valuation ring with a Cohen ring over its coefficient ring is a complete DVR",
+   "results": "{\"t\": \"2026-10-24T08:34:18Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product of a complete ramified discrete valuation ring with a Cohen ring over its coefficient ring is a complete DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.tensor_map_id_left_eq_map\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian.congr_simp\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"Algebra.TensorProduct.instRing\", \"IsDiscreteValuationRing.TFAE\", \"IsDiscreteValuationRing.toIsLocalRing\", \"Algebra.FormallyUnramified.base_change\"], \"digest\": \"02416ed30928f3c4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give unramified base change, adic completion properties, or Eisenstein irreducibility; none states the complete Cohen tensor DVR assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDiscreteValuationRing\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T08:34:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDiscreteValuationRing\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give unramified base change, adic completion properties, or Eisenstein irreducibility; none states the complete Cohen tensor DVR assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change of a ramified complete discrete valuation ring along an extension of Cohen rings is a complete discrete valuation ring with the same uniformizer",
+   "results": "{\"t\": \"2026-10-24T08:34:20Z\", \"tool\": \"leanfinder\", \"query\": \"Base change of a ramified complete discrete valuation ring along an extension of Cohen rings is a complete discrete valuation ring with the same uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.FormallyUnramified.isStableUnderBaseChange\", \"Algebra.Unramified.baseChange\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"Algebra.IsUnramifiedAt.of_liesOver\", \"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsUnramifiedAt.of_liesOver_of_ne_bot\", \"Algebra.IsUnramifiedAt.comp\", \"Algebra.Unramified.comp\"], \"digest\": \"1b075635c42a83cf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give unramified base change, adic completion properties, or Eisenstein irreducibility; none states the complete Cohen tensor DVR assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "eisenstein|uniformizer",
+   "results": "{\"t\": \"2026-10-24T08:36:32Z\", \"tool\": \"grep\", \"query\": \"eisenstein|uniformizer\", \"sub\": \"RingTheory/Polynomial/Eisenstein\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Distinguished.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\", \"Mathlib/RingTheory/Polynomial/Eisenstein/Criterion.lean\"], \"digest\": \"386139b7ff2411ae\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give unramified base change, adic completion properties, or Eisenstein irreducibility; none states the complete Cohen tensor DVR assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tensor product of an Eisenstein extension of a complete DVR with a complete DVR in which the base uniformizer remains a uniformizer is a complete DVR",
+   "results": "{\"t\": \"2026-10-24T08:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor product of an Eisenstein extension of a complete DVR with a complete DVR in which the base uniformizer remains a uniformizer is a complete DVR\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsDiscreteValuationRingSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"instCommRingBDeRhamPlus\", \"Tilt\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.instIsTorsionFreeSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\", \"Tilt.instField\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'\"], \"digest\": \"6f5132ce5ea58e9e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: results give unramified base change, adic completion properties, or Eisenstein irreducibility; none states the complete Cohen tensor DVR assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-equivariant-cohen-coefficient-lift",
+  "date": "2026-10-24",
+  "group": "NK"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, Gabber finiteness and its equivariant Cohen presentation, through ILO IV 4.3.5: Exposé IV 4.3.5, printed p.60, V=W′_0 tensor over W(k′_0) I(k′); complete DVR assertion underlying 4.2.5, printed p.59. Ordinary tensor is complete because W is finite free over its perfect-residue Cohen subring.",
+   "via": [
+    "lem-per-equivariant-cohen-coefficient-lift",
+    "lem-per-prime-to-ell-equivariant-cohen-presentation",
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-ramified-cohen-tensor-dvr",
+  "worker": "stage1",
+  "summary": "Proved by a finite power basis and an Eisenstein presentation, using existing DAG nodes only. Checked the source tensor in ILO IV 4.3.5, Stacks 031D and 09ER, and all cited statements. No statement correction, attachment, or new nodes. Ordinary tensor completeness is established explicitly by finitely many B-coordinates and the cofinal equality p^nT=(pi tensor 1)^(en)T.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3: Gabber finiteness, through the equivariant Cohen coefficient construction of ILO IV 4.3.5. Steps 1--4 justify finiteness and the coefficient polynomial; Steps 5--8 justify the tensor DVR and its structural properties.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-over-complete-ring",
+    "why": "Generic complete-ring lifting of specified module generators; applied to W over A after verifying the finite reduction and separatedness."
+   },
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "Generic PID Noetherianity needed for the stated hypotheses of the DVR element decomposition."
+   },
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "Generic monic polynomial quotient basis, used for the presentations and injectivity; no perverse-sheaf assertion is replaced."
+   },
+   {
+    "node": "lem-sfb-eisenstein-quotient-dvr",
+    "why": "Generic Eisenstein quotient DVR theorem used after constructing and checking the polynomial; it does not assume a Cohen tensor conclusion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-over-complete-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-sfb-eisenstein-quotient-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-49f1b15f8",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-49f1b15f8 (reviewer sub-agent of L); spot-checked: Read the item in full; the delivery has no new nodes or fixes, and the statement and stmt_deps match the base unsplit node in clones/live and side-live. Source: ILO IV 4.3.5 (printed p.60) forms V=W0'⊗_{W(k0')}I(k') with k0' perfect and W0' totally ramified over W(k0') (4.3.4); the item matches it hypothesis by hypothesis. Route: Stacks 09ER, where B[t]/(P) with P Eisenstein is a DVR, with finiteness from 031D. Step checks: S1 gives the decompositions p=uπ^e (e>=1) and v·p^r, so a and b are injective. S2 (elementary) shows 1..π^{e-1} is a k-basis of W/π^eW, with the independence argument at the least nonzero index. S3 meets all three hypotheses of the finite-over-complete node and proves independence by dividing by p repeatedly. S4: I recomputed a(c_0)=π^e(1-uΣ_{i>=1}a(d_i)π^i), so c_0∉p²A and A[X]/(P)≅W. S5 builds T≅Q with both maps well defined and both composites the identity; the Eisenstein hypotheses (coefficients in pB, constant term p times a unit, e>=1) are checked. S6 computes the residue B/(b(c_0))=L by w⊗z↦w̄z̄, and shows W→T is injective and local. S7 proves completeness through the basis and p^nQ=x^{en}Q. S8 gets flatness from torsion-freeness over a PID. Edge cases e=1, W=A, b=id and L imperfect or infinite over k all hold. Unused perfectness of k is kept, which matches the source. No duplicate found in the DAG (searched 09ER, totally ramified and Cohen tensor wording; lem-per-finite-etale-cohen-extension is a different statement). Accepted as generic tools: finite-over-complete, PID-Noetherian, monic-quotient-free, Eisenstein DVR, PID torsion-free flat. The only citer, lem-per-equivariant-cohen-coefficient-lift, uses exactly the stated clauses. No SGA is cited and there is no cycle."
+ }
+}

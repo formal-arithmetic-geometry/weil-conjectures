@@ -1,0 +1,165 @@
+{
+ "id": "lem-trf-conductor-resolution-comparison",
+ "kind": "statement",
+ "title": "Canonical comparison of conductor-prepended towers",
+ "statement": "Let $N$ be a smooth normalized resolution rule on all normal reduced finite-type rational schemes [def-trf-smooth-normalized-resolution-rule]. For a smooth map $h:Y\\to X$ of reduced finite-type rational inputs and $A_X=N(P(X))$, $A_Y=N(P(Y))$ [def-trf-conductor-resolution-preparation], let $B_X,B_Y$ be their explicit conductor-extended towers [lem-trf-conductor-resolution-tower]. There exists a cartesian normalized resolution comparison $c$ from $B_Y$ to $B_X$ over $h$ [def-per-qe-normalized-resolution-rule]. For any other such comparison $d$, the contraction indices of $c,d$ agree at every original level and their actual surviving-level maps are heterogeneously equal. No identity, composition, surjectivity law or global resolution rule is asserted here.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, 2.2.3--2.2.9 and 2.3.2--2.3.5(i), printed pp.90--93; agent formalization of the conductor-prepending refinement in the parent proof."
+ },
+ "stmt_deps": [
+  "def-trf-conductor-resolution-preparation",
+  "lem-trf-conductor-resolution-tower",
+  "def-trf-smooth-normalized-resolution-rule"
+ ],
+ "proof": [
+  {
+   "text": "Use the conductor smooth base-change square to obtain the unique smooth map P(Y) to P(X), and apply the supplied comparison of N to this map.",
+   "uses": [
+    "def-trf-conductor-resolution-preparation",
+    "lem-trf-conductor-smooth-base-change",
+    "lem-trf-normalized-blowup-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Handle the three conductor cases. Unit on X implies unit on Y and comparison is the rebased tail. If both are nonunit prepend the conductor square. If only Y is unit, prepend the pulled unit stage then delete its isomorphism over the normal Y. Shift the retained tail indices accordingly. The initial equations follow from the conductor square; subsequent cartesian, center and arrow equations are those of the supplied tail comparison. Each stage deleted is unit and an isomorphism; each other stage is retained in its original order.",
+   "uses": [
+    "lem-trf-conductor-resolution-tower",
+    "lem-trf-normalized-blowup-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness of the retained-index map follows by recursion from its first value zero and whether each extended ideal is unit. Given the equal indices, equality of level maps is proved by induction: normalized blowup maps over a fixed preceding-level map agree over the dense complement of the center and hence on the reduced source, since the normalized blowup is separated over the preceding level. This determines exactly the maps used downstream, even if the auxiliary pulled models differ.",
+   "uses": [
+    "def-trf-normalized-blowup",
+    "lem-trf-normalized-blowup-calculus"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-conductor-resolution-preparation",
+  "def-trf-normalized-blowup",
+  "lem-trf-conductor-resolution-tower",
+  "lem-trf-conductor-smooth-base-change",
+  "lem-trf-normalized-blowup-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VIII, 2.2.3--2.2.9 and 2.3.2--2.3.5(i), printed pp.90--93; agent formalization of the conductor-prepending refinement in the parent proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "conductor.*(resolution|blowup)|normalizedBlowup|normalized_blowup",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conductor\", \"blowup\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a smooth functorial normalized resolution rule on normal schemes to reduced schemes by prepending the normalized blowup of the conductor ideal",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Functorial laws for normalized blowup resolution tower comparisons: ordered deletion of unit centers commutes with composition and surjective base change deletes no stage",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, CategoryTheory.FreeMonoidalCategory.normalize, CategoryTheory.FreeMonoidalCategory.normalizeObj', AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp, Functor.Comp.lawfulFunctor, CategoryTheory.FreeMonoidalCategory.fullNormalize, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prepend a conductor normalized blowup to a finite resolution tower and omit the stage when the conductor ideal is the unit ideal",
+   "results": "OK 8 hits: conductor, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, Ideal.Factors.isScalarTower, Ring.instIsScalarTowerNormalClosure, AlgebraicGeometry.Scheme.Hom.normalizationDesc, Mathlib.Tactic.Module.NF.cons, KummerDedekind.emultiplicity_factors_map_eq_emultiplicity",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  },
+  {
+   "tool": "grep",
+   "query": "NormalizedTower|NormalizedContraction|normalizedResolution",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NormalizedTower\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-26",
+   "verdict": "No match: relative normalization or ring conductors, not finite normalized resolution towers with ordered unit-stage deletion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConductorNormalizedResolutionExtension",
+  "date": "2026-10-26",
+  "group": "W9"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, Theorems 3.1.27 and 3.2.20, and Remark 3.2.21, pp.102,106; construction in 3.2.19 over k=Q. Supporting source: Expose VIII, Theorem 2.3.10, normalized restriction in 2.3.9 and Remark 2.3.12(i), equivariance in Corollary 2.3.17, printed pp.93--95; application in 3.2.19, p.106. Re-split of the retained toric-resolution proof, steps 3--4: Expose VIII, 2.2.3--2.2.9, 2.3.4--2.3.5(i) and 2.3.12(i), printed pp.90--93; agent conductor-prepending refinement of the retained proof. The conductor comparison uses Stacks Tag 07T8 (algebra.tex, lemma-annihilator-flat-base-change) through lem-trf-conductor-smooth-base-change; the tag alone does not assert this extension of a resolution rule. Formalizes parent steps 3--8: explicit towers, comparisons, and their laws.",
+   "via": [
+    "lem-trf-conductor-extension-of-normalized-resolution",
+    "lem-trf-toric-normalized-desingularization",
+    "lem-trf-functorial-fan-desingularization",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConductorResolutionComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConductorResolutionComparison.lean",
+  "declaration": "AlgebraicGeometry.rationalConductorTower_comparison",
+  "statement": "theorem rationalConductorTower_comparison\n    (N : SmoothNormalizedResolutionRule NormalRationalResolutionInput.{u}\n      (fun X ↦ X.val.scheme))\n    (X Y : RationalResolutionInput.{u}) (h : Y.scheme ⟶ X.scheme) (hh : Smooth h) :\n    ∃ c : QENormalizedResolutionComparison h\n      (rationalConductorTower X (N.tower (normalConductorPreparedRationalInput X)))\n      (rationalConductorTower Y (N.tower (normalConductorPreparedRationalInput Y))),\n      ∀ d : QENormalizedResolutionComparison h\n        (rationalConductorTower X (N.tower (normalConductorPreparedRationalInput X)))\n        (rationalConductorTower Y (N.tower (normalConductorPreparedRationalInput Y))),\n        (∀ i, d.contraction.index i = c.contraction.index i) ∧\n          (∀ i, HEq (d.levelMap i) (c.levelMap i))",
+  "branch": "sheaf-dag",
+  "by": "W9",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d6715",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261026T093016-L-3494238",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-d6715",
+  "group": "W9",
+  "result": "fix",
+  "landing": "20261026T093016-L-3494238",
+  "kind": "interface",
+  "note": "independent cc review: item signature vs clone (identical); moved preparation section vs clone (verbatim); new sorry leaves vs NormalizedContraction/QENormalizedResolutionComparison definitions (true); node lean records vs Lean declarations"
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "id": "lem-sfb-holomorphic-circle-integral-parameters",
+ "kind": "statement",
+ "title": "Holomorphic dependence of a circle Cauchy integral on complex parameters",
+ "statement": "Work over $\\mathbf C$ [def-weil-field]. Let $d\\geq0$, let $P\\subset\\mathbf C^d$ be open, let $c\\in\\mathbf C$, and let $R>0$ and $0<\\epsilon<R$. Put $A=\\{\\zeta\\in\\mathbf C:R-\\epsilon<|\\zeta-c|<R+\\epsilon\\}$ and $D=\\{z\\in\\mathbf C:|z-c|<R\\}$. Let $g:A\\times P\\to\\mathbf C$ be holomorphic, meaning locally represented by a convergent complex power series in all $d+1$ coordinates. For $(z,w)\\in D\\times P$ the positively oriented circle integral\n$$H(z,w)=\\frac{1}{2\\pi i}\\int_{|\\zeta-c|=R}\\frac{g(\\zeta,w)}{\\zeta-z}\\,d\\zeta$$\nexists and defines a holomorphic function $H:D\\times P\\to\\mathbf C$ in the same power-series sense. The circle is parametrized by $\\zeta=c+Re^{it}$ for $0\\leq t\\leq2\\pi$.",
+ "source": {
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.B, formulas (3.8)--(3.9), printed p.22, parameter-integral consequence of the uniform Cauchy expansions, with I §3.A (3.3), printed p.21. This consequence is formulated by the worker, not a separately numbered theorem. WANTED locally; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf"
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [
+  {
+   "text": "Fix $(z_0,w_0)\\in D\\times P$; if $P=\\varnothing$ there is nothing to prove. Put $K=\\{|\\zeta-c|=R\\}\\subset A$, $\\delta=R-|z_0-c|>0$, and choose $0<r<\\delta$ and $0<\\rho<s$ with the closed parameter polydisc $Q_s$ about $w_0$ contained in $P$. Holomorphy implies continuity by [lem-sfb-complex-analytic-function-operations]; since $|\\zeta-z|\\geq R-|z-c|>0$ on $K$, the parametrized integrand is continuous and its integral exists. Apply [lem-sfb-compact-parameter-taylor-expansion] to $U=A$, this compact $K$, $w_0,s$. It gives continuous $a_\\alpha$ and $M$ with $g(\\zeta,w_0+v)=\\sum_\\alpha a_\\alpha(\\zeta)v^\\alpha$ and $|a_\\alpha(\\zeta)|\\leq Ms^{-|\\alpha|}$, uniformly on $K\\times Q_\\rho$.",
+   "uses": [
+    "lem-sfb-complex-analytic-function-operations",
+    "lem-sfb-compact-parameter-taylor-expansion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A (3.3), I §3.B (3.8)–(3.9), worker-written parameter-integral assembly; local PDF missing."
+   }
+  },
+  {
+   "text": "For $|u|\\leq r$ and $\\zeta\\in K$, $|\\zeta-z_0|\\geq\\delta$. Apply [lem-sfb-scalar-geometric-series] with $q=u/(\\zeta-z_0)$ and multiply by $(\\zeta-z_0)^{-1}$. This gives the kernel expansion\n$$\\frac1{\\zeta-z_0-u}=\\sum_{n\\geq0}\\frac{u^n}{(\\zeta-z_0)^{n+1}}.$$\nIts terms have absolute value at most $\\delta^{-1}(r/\\delta)^n$; its tail from $n=N$ is at most $\\delta^{-1}(r/\\delta)^N/(1-r/\\delta)$, independently of $\\zeta,u$. Thus convergence is absolute and uniform on the stated sets.",
+   "uses": [
+    "lem-sfb-scalar-geometric-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A (3.3), I §3.B (3.8)–(3.9), worker-written parameter-integral assembly; local PDF missing."
+   }
+  },
+  {
+   "text": "Put $p=r/\\delta<1$ and $q=\\rho/s<1$. The product terms $a_\\alpha(\\zeta)u^nv^\\alpha/(\\zeta-z_0)^{n+1}$ are bounded by $M\\delta^{-1}p^nq^{|\\alpha|}$. On the box $n<N$, $\\alpha_j<N$, the sum of these majorants is\n$$\\frac M\\delta\\Bigl(\\sum_{n<N}p^n\\Bigr)\\prod_{j=1}^d\\Bigl(\\sum_{k<N}q^k\\Bigr)\\ \\longrightarrow\\ \\frac{M}{\\delta(1-p)(1-q)^d}$$\nby [lem-sfb-scalar-geometric-series]. The sum outside the box is bounded by this last constant times $p^N+dq^N$ (union over the coordinates outside the box), which tends to zero. Every finite subset of $\\mathbf N\\times\\mathbf N^d$ is contained in a box. These bounds prove absolute uniform convergence of the double series and identify its sum with the product of the two expansions by multiplying the finite rectangular sums and taking their limits. Since the majorant family $M\\delta^{-1}p^nq^{|\\alpha|}$ is summable over $\\mathbf N\\times\\mathbf N^d$ (its finite subsums are bounded by $M/[\\delta(1-p)(1-q)^d]$), [lem-sfb-absolute-series-domination] with $I=\\mathbf N\\times\\mathbf N^d$ shows that the complex product terms, their supremum norms, and any family bounded by these majorants are summable.",
+   "uses": [
+    "lem-sfb-scalar-geometric-series",
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A (3.3), I §3.B (3.8)–(3.9), worker-written parameter-integral assembly; local PDF missing."
+   }
+  },
+  {
+   "text": "Write $\\gamma(t)=c+Re^{it}$, so $|\\gamma'(t)|=R$. The functions\n$$f_{n,\\alpha}(t)=\\frac{a_\\alpha(\\gamma(t))u^nv^\\alpha\\gamma'(t)}{(\\gamma(t)-z_0)^{n+1}}$$\nare continuous on $\\mathbf R$ and their supremum norms on $[0,2\\pi]$ are summable by step 3, with the additional factor $R$. Apply [lem-sfb-normal-series-interval-integration] with $J=\\mathbf N\\times\\mathbf N^d$: termwise integration gives\n$$H(z_0+u,w_0+v)=\\sum_{n,\\alpha}b_{n,\\alpha}u^nv^\\alpha,\\qquad b_{n,\\alpha}=\\frac1{2\\pi i}\\int_0^{2\\pi}\\frac{a_\\alpha(\\gamma(t))\\gamma'(t)}{(\\gamma(t)-z_0)^{n+1}}\\,dt.$$\nThe bound clause of the same node gives $|b_{n,\\alpha}|\\leq RM\\delta^{-n-1}s^{-|\\alpha|}$. Consequently, by [lem-sfb-absolute-series-domination] and the majorant of step 3, the coefficient series on $|u|\\leq r$, $|v_j|\\leq\\rho$ is absolutely convergent, bounded by $RM/[\\delta(1-p)(1-q)^d]$. It is the required convergent power series in all $d+1$ coordinates. Since the point was arbitrary, this is exactly holomorphy as defined in the item; no gluing theorem is needed.",
+   "uses": [
+    "lem-sfb-normal-series-interval-integration",
+    "lem-sfb-absolute-series-domination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+    "place": "I §3.A (3.3), I §3.B (3.8)–(3.9), worker-written parameter-integral assembly; local PDF missing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-complex-analytic-function-operations",
+  "lem-sfb-compact-parameter-taylor-expansion",
+  "lem-sfb-scalar-geometric-series",
+  "lem-sfb-absolute-series-domination",
+  "lem-sfb-normal-series-interval-integration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/demailly-complex-analytic-differential-geometry.pdf",
+  "place": "I §3.A (3.3), I §3.B (3.8)–(3.9), worker-written parameter-integral assembly; local PDF missing."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A contour Cauchy integral of a holomorphic function depending on several complex parameters is jointly holomorphic inside the circle and in the parameters",
+   "results": "[leanfinder] OK 8 hit(s): DiffContOnCl.circleIntegral_sub_inv_smul, DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, DiffContOnCl.circleIntegral_eq_zero, DifferentiableOn.circleIntegral_sub_inv_smul, DiffContOnCl.circleIntegral_one_div_sub_center_pow_smul, DiffContOnCl.deriv_eq_smul_circleIntegral, Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable, Complex.two_pi_I_inv_smul_circleIntegral_sub_inv_smul_of_differentiable_on_off_countable",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral\", AnalyticAt",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "analytic.*integral|integral.*analytic|circleTransform",
+   "results": "[grep] OK 2 hit(s): Mathlib/Analysis/Complex/Liouville.lean, Mathlib/Analysis/Complex/Poisson.lean; Mathlib/Analysis",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integrating holomorphic functions with parameters over a fixed circle produces a jointly holomorphic function",
+   "results": "[leansearch] OK 8 hit(s): circleIntegrable_def, circleIntegral, DiffContOnCl.circleIntegral_sub_inv_smul, CircleIntegrable.out, DiffContOnCl.two_pi_i_inv_smul_circleIntegral_sub_inv_smul, circleIntegral_def_Icc, circleIntegral.integral_sub_inv_smul_sub_smul, CircleIntegrable",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integrating a continuous family of complex analytic functions over a compact interval is analytic as a function of finitely many complex parameters",
+   "results": "[leanfinder] OK 8 hit(s): Complex.wedgeIntegral, cfc_integral, Complex.integral_boundary_rect_of_continuousOn_of_hasFDerivAt_real, Complex.integral_boundary_rect_of_hasFDerivAt_real_off_countable, continuousAt_gaussian_integral, Complex.integral_boundary_rect_eq_zero_of_continuousOn_of_differentiableOn, Complex.VerticalIntegrable, Complex.integral_boundary_rect_eq_zero_of_differentiable_on_off_countable",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integral\", DifferentiableOn",
+   "results": "[loogle] OK 9 hit(s): intervalIntegral.differentiableOn_integral_of_continuous, DifferentiableOn.circleIntegral_sub_inv_smul, DifferentiableOn.deriv_eq_smul_circleIntegral, DifferentiableOn.circleIntegral_one_div_sub_center_pow_smul, Complex.integral_boundary_rect_eq_zero_of_differentiableOn, Complex.integral_boundary_rect_eq_zero_of_continuousOn_of_differentiableOn, Complex.integral_boundary_rect_of_differentiableOn_real, Complex.two_pi_I_inv_smul_circleIntegral_sub_sq_inv_smul_of_differentiable",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "integral.*dominated|integral.*[Pp]aram|[Pp]aram.*integral",
+   "results": "[grep] OK 5 hit(s): 9, 14, 16, 28, 33; Mathlib/Analysis/Calculus/ParametricIntegral.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: the Cauchy and Herglotz--Riesz results concern the pole variable alone; generic dominated parametric differentiation needs uniform bounds and a further joint-analyticity argument, so is not a one-line specialization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hartogs-punctured-affine-extension",
+  "date": "2026-10-24",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Cauchy-integral proof of the isolated-puncture input: I §3.B, formulas (3.8)--(3.9), uniform Cauchy expansions with parameters.",
+   "via": [
+    "lem-sfb-hartogs-punctured-affine-extension",
+    "lem-sfb-analytic-projective-structure-cohomology",
+    "lem-sfb-gaga-derived-coherent-sections",
+    "lem-sfb-algebraic-dolbeault-derivative-comparison",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-holomorphic-circle-integral-parameters",
+  "worker": "stage1",
+  "summary": "Repair of D1/D2, G2, C2, E5: removed the whole-conclusion local integral auxiliary. A parameter-only Taylor lemma supplies continuous coefficients and uniform Cauchy bounds; two Mathlib leaves supply scalar geometric sums and normal-series integration. The item explicitly expands the kernel, proves double-series convergence using rectangular sums and quantified tails, and integrates to construct the coefficients of H. Statement unchanged.",
+  "blueprint": "Cauchy-integral proof of the isolated-puncture input, uniform parameter expansions (Demailly I §3.B (3.8)–(3.9)) and integration of the Cauchy kernel; supporting the GAGA input of det-thm-sf-ctf-stability-direct-images proof (3). The latest blueprint and entire DAG were searched; no equivalent blueprint node exists. Inherited null ancestor and via chain retained."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-2a1bb0778",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-2a1bb0778 (reviewer sub-agent of L); spot-checked: Read in full: the item, all three new nodes, every cited statement, the Mathlib source at the given lines, the citer lem-sfb-hartogs-punctured-affine-extension, and the prior return 5718260e (D1/D2, G2, C2, E5). The return is repaired. The node that restated the conclusion is gone and nothing cites it. The new lem-sfb-compact-parameter-taylor-expansion concerns g alone, with no pole and no H, so it is strictly smaller than the item and not a duplicate (checked against cauchy-circle-formula, rp-taylor-sum-on-disc, weighted-taylor, germ-taylor-jets, coordinate-division and cauchy-transform-parameters). It is true: Cauchy integrals over the polydisc torus give continuous coefficients with Cauchy bounds M s^-|α| and the majorant M(1-ρ/s)^-d. Tested on d=0, K empty and g=w^β. The two Mathlib leaves are correct one-declaration-per-clause matches: hasSum_geometric_of_norm_lt_one at Normed.lean:359, hasSum_geometric_of_lt_one at Basic.lean:316, intervalIntegral.hasSum_intervalIntegral_of_summable_norm at DominatedConvergence.lean:219 (tsum form at :238), and norm_integral_le_of_norm_le_const at IntervalIntegral/Basic.lean:769. Neither leaf is a duplicate: lem-wf-real-geometric-summability gives no sum value, and integrable-majorant-estimate does no termwise integration. The steps are correct: δ>0, z0+u stays in D, the kernel ratio is at most r/δ<1, the product majorant is Mδ^-1 p^n q^|α|, the box tail is at most C(p^N+dq^N), the f_{n,α} are continuous on R, and |b_{n,α}| ≤ RMδ^{-n-1}s^-|α|. The item's local power-series definition of holomorphy is met directly. The item statement is unchanged and true (d=0, g=1, g=1/ζ, P empty). FIX (C4): step 3 drew complex-valued summability over N×N^d from lem-rp-nonnegative-summable-comparison, which covers only real, nonnegative, N-indexed sequences. Steps 3 and 4 now cite the same-unit Mathlib leaf lem-sfb-absolute-series-domination for any index set, and proof_deps is updated. The Demailly I §3.A/§3.B PDF is still WANTED, and the proof is correctly marked agent-written. There are no tool_uses and no SGA source.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.Complex.HolomorphicCircleIntegralParameters",
+  "declaration": "Complex.analyticOnNhd_circleIntegral_parameters",
+  "file": "lean/Sheaf/Analysis/Complex/HolomorphicCircleIntegralParameters.lean",
+  "statement": "theorem analyticOnNhd_circleIntegral_parameters (d : ℕ) (P : Set (Fin d → ℂ)) (hP : IsOpen P) (c : ℂ) (R ε : ℝ) (hR : 0 < R) (hε : 0 < ε) (hεR : ε < R) (g : (ℂ × (Fin d → ℂ)) → ℂ) (hg : AnalyticOnNhd ℂ g ({ζ : ℂ | R - ε < ‖ζ - c‖ ∧ ‖ζ - c‖ < R + ε} ×ˢ P)) : (∀ z ∈ Metric.ball c R, ∀ w ∈ P, CircleIntegrable (fun ζ : ℂ ↦ g (ζ, w) / (ζ - z)) c R) ∧ AnalyticOnNhd ℂ (fun x : ℂ × (Fin d → ℂ) ↦ (2 * (Real.pi : ℂ) * I)⁻¹ * circleIntegral (fun ζ : ℂ ↦ g (ζ, x.2) / (ζ - x.1)) c R) (Metric.ball c R ×ˢ P)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d40d52db",
+  "group": "NI",
+  "result": "pass",
+  "note": "Item Complex.analyticOnNhd_circleIntegral_parameters: lean.statement verbatim in file; only node change vs side-live is the lean record (live null). Clauses match node: d:ℕ (d=0 ok), P open, c, 0<R, 0<ε<R, annulus literal, D=Metric.ball c R, g total with AnalyticOnNhd on open A×ˢP, conjunct 1 CircleIntegrable for z∈D,w∈P, conjunct 2 AnalyticOnNhd of (2πI)⁻¹*circleIntegral(g(ζ,x.2)/(ζ-x.1)) c R on ball×ˢP; Mathlib circleMap c+R e^{tI} gives positive orientation, kernel sign correct. Edge cases: P=∅ vacuous, d=0 one-variable Cauchy, circle ⊂ A since ε>0, statement true. No duplicate in Mathlib (CauchyIntegral, Poisson, RemovableSingularity etc. vary only the pole) or project lean (Hartogs citer only cites it). No defs, sorry-only proof, source place + blueprint docstrings + 4-step proof plan present, imports OK. Advisory: 'Second reading by NI' is an in-thread self-check under the direct-delivery dispatcher policy, not an independent reading. No file changed, so no compile."
+ }
+}

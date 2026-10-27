@@ -1,0 +1,202 @@
+{
+ "id": "lem-per-gabber-ramero-henselian-section-lifting",
+ "kind": "statement",
+ "title": "Bounded-precision section lifting over a henselian principal pair",
+ "statement": "Let $R$ be a Noetherian commutative ring [def-weil-pbc-noetherian-ring], let $t\\in R$ be a non-zero-divisor, and assume $(R,tR)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Let $C$ be a finitely presented commutative $R$-algebra [def-weil-pbc-finitely-presented-algebra] on which multiplication by the image of $t$ is injective. Suppose $t^r\\in H_{C/R}$ for an integer $r\\geq0$ [def-per-gabber-ramero-obstruction-ideal]. Let $n>r$ and let $s_{n+r}:C/t^{n+r}C\\to R/t^{n+r}R$ be an $R$-algebra homomorphism. There exists an $R$-algebra homomorphism $s:C\\to R$ whose reduction modulo $t^n$ is the reduction of $s_{n+r}$. No agreement modulo a higher power is asserted.",
+ "source": {
+  "document": "https://math.huji.ac.il/~temkin/papers/Non_Embedded_Desingularization.pdf",
+  "place": "Theorem 3.2.3 (Gabber–Ramero), equivalently [GR, 5.4.13] with the auxiliary ideal zero; a section is written contravariantly as an algebra map. Read online 2026-10-24; archival copy WANTED; no Stacks tag for this specialized assertion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-per-gabber-ramero-obstruction-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Choose a presentation $C=P/J$, $P=R[x_1,\\ldots,x_d]$, with $J$ finitely generated, by [def-weil-pbc-finitely-presented-algebra]. By [def-per-gabber-ramero-obstruction-ideal], membership $t^r\\in H_{C/R}\\subseteq H_P$ supplies $h$ with $h\\delta=t^r\\operatorname{id}_{J/J^2}$. Choose representatives $a_{0,i}\\in R$ of $s_{n+r}(x_i)$. Then $f(a_0)\\in t^{n+r}R$ for every $f\\in J$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-per-gabber-ramero-obstruction-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf",
+    "place": "Definitions 5.4.1 and (5.4.4), setup 5.4.7"
+   }
+  },
+  {
+   "text": "Set $q_0=n+r$ and $q_{k+1}=2(q_k-r)$. Inductively apply [lem-per-gabber-ramero-improve-precision] to choose $a_{k+1}\\in R^d$ such that $f(a_{k+1})\\in t^{q_{k+1}}R$ for all $f\\in J$ and $a_{k+1}-a_k\\in(t^{q_k-r}R)^d$. The base is Step 1. The formula $q_k=2r+2^k(n-r)$ follows by induction, so every $q_k>2r$, as required for each application. Both $q_k$ and $q_k-r$ tend to infinity, and $q_k-r\\geq n$.",
+   "uses": [
+    "lem-per-gabber-ramero-improve-precision"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf",
+    "place": "Lemma 5.4.8 and Claim 5.4.14 in the proof of Proposition 5.4.13; explicit recurrence"
+   }
+  },
+  {
+   "text": "In $\\widehat R=\\varprojlim_mR/t^mR$ [def-weil-pbc-adic-completion], define $\\widehat a_i$ by its $m$-th residue, the eventually constant value of $a_{k,i}\\bmod t^m$. This is well-defined: once $q_k-r\\geq m$, every later difference lies in $t^mR$. These residues are compatible under reduction. For $f\\in J$ and any $m$, choose $k$ with $q_k\\geq m$ and $q_k-r\\geq m$; coordinatewise evaluation gives $f(\\widehat a)\\bmod t^m=f(a_k)\\bmod t^m=0$. Thus evaluation factors through $C=P/J$ to give $\\widehat s:C\\to\\widehat R$. Since every difference is in $t^nR$, its $n$-th coordinate is exactly the reduction of $s_{n+r}$.",
+   "uses": [
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf",
+    "place": "Claim 5.4.14, inverse-limit assembly written coordinatewise"
+   }
+  },
+  {
+   "text": "By [lem-per-gabber-ramero-ideal-calculus], the nonsmooth locus of $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ is $V(H_{C/R})$. A prime not containing $t$ cannot contain $H_{C/R}$, since $t^r\\in H_{C/R}$. Hence this morphism is smooth on $\\operatorname{Spec}C\\setminus V(tC)$. Apply [lem-per-elkik-generic-smooth-section-approximation] to $(R,tR)$, $C$, $\\widehat s$ and $N=n$. Its hypotheses are precisely Noetherianity, henselianity, finite presentation and this smoothness. It gives $s:C\\to R$ whose reduction modulo $t^n$ is the $n$-th coordinate of $\\widehat s$, which is the required reduction of $s_{n+r}$.",
+   "uses": [
+    "lem-per-gabber-ramero-ideal-calculus",
+    "lem-per-elkik-generic-smooth-section-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf",
+    "place": "Lemma 5.4.2(ii), Lemma 5.4.12 and proof of Proposition 5.4.13"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-per-gabber-ramero-obstruction-ideal",
+  "lem-per-gabber-ramero-improve-precision",
+  "def-weil-pbc-adic-completion",
+  "lem-per-gabber-ramero-ideal-calculus",
+  "lem-per-elkik-generic-smooth-section-approximation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://pro.univ-lille.fr/fileadmin/user_upload/pages_pros/lorenzo_ramero/releaseLNM.pdf",
+  "place": "Proposition 5.4.13 (Noetherian case): Lemma 5.4.8 iteration followed by Lemma 5.4.12. Read online; archival copy WANTED. Explicit quotient-coordinate assembly."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Gabber Ramero lifting of a section modulo t n to a henselian ring when it extends modulo t n plus r and t r annihilates cotangent obstructions",
+   "results": "{\"t\": \"2026-10-24T05:07:12Z\", \"tool\": \"leanfinder\", \"query\": \"Gabber Ramero lifting of a section modulo t n to a henselian ring when it extends modulo t n plus r and t r annihilates cotangent obstructions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PreTilt.untiltFun\", \"HenselianRing\", \"PreTilt.exists_smodEq_untiltAux\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing\", \"HenselianRing.is_henselian\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.exists_lift\"], \"digest\": \"7c87af4151e2e5ba\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary conormal, smoothness, nilpotent lifting or localization APIs, not this obstruction-ideal or bounded-approximation assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T05:07:03Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary conormal, smoothness, nilpotent lifting or localization APIs, not this obstruction-ideal or bounded-approximation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|Gabber|Ramero|henselian.*section|section.*henselian",
+   "results": "{\"t\": \"2026-10-24T05:07:03Z\", \"tool\": \"grep\", \"query\": \"Elkik|Gabber|Ramero|henselian.*section|section.*henselian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary conormal, smoothness, nilpotent lifting or localization APIs, not this obstruction-ideal or bounded-approximation assertion",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded precision lifting of sections of a finite presentation algebra over a henselian pair with principal regular ideal",
+   "results": "{\"t\": \"2026-10-24T05:07:03Z\", \"tool\": \"leansearch\", \"query\": \"Bounded precision lifting of sections of a finite presentation algebra over a henselian pair with principal regular ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.FinitePresentation.exists_lift_of_isLocalizedModule\", \"IsAdicComplete.mk_liftAlgHom\", \"RingHom.FinitePresentation\", \"AdicCompletion.liftAlgHom\", \"StandardEtalePresentation.lift_bijective\", \"Ideal.ResidueField.liftₐ_algebraMap\", \"Algebra.FormallySmooth.exists_lift\", \"IsAdicComplete.liftRingHom\"], \"digest\": \"ef5b1e31cb428154\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary conormal, smoothness, nilpotent lifting or localization APIs, not this obstruction-ideal or bounded-approximation assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate solutions in a henselian pair lift with loss equal to the conductor of the nonsmoothness ideal",
+   "results": "{\"t\": \"2026-10-24T05:07:14Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate solutions in a henselian pair lift with loss equal to the conductor of the nonsmoothness ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianRing.is_henselian\", \"HenselianRing\", \"HenselianLocalRing.is_henselian\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"hensels_lemma\", \"PreTilt.exists_smodEq_untiltAux\", \"HenselianLocalRing.TFAE\"], \"digest\": \"17f7021d2d73ec5d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations provide ordinary conormal, smoothness, nilpotent lifting or localization APIs, not this obstruction-ideal or bounded-approximation assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Gabber|Ramero|Elkik|bounded.*precision",
+   "results": "{\"t\": \"2026-10-24T07:09:34Z\", \"tool\": \"grep\", \"query\": \"Gabber|Ramero|Elkik|bounded.*precision\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hensel roots and smooth nilpotent/completion lifts do not state the Gabber–Ramero bounded-loss assertion for a possibly singular algebra.",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, Algebra.FormallySmooth",
+   "results": "{\"t\": \"2026-10-24T07:09:34Z\", \"tool\": \"loogle\", \"query\": \"HenselianRing, Algebra.FormallySmooth\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hensel roots and smooth nilpotent/completion lifts do not state the Gabber–Ramero bounded-loss assertion for a possibly singular algebra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An approximate algebra section modulo t to the n plus r lifts to a henselian ring agreeing modulo t to the n",
+   "results": "{\"t\": \"2026-10-24T07:09:35Z\", \"tool\": \"leansearch\", \"query\": \"An approximate algebra section modulo t to the n plus r lifts to a henselian ring agreeing modulo t to the n\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAdicComplete.henselianRing\", \"HenselianLocalRing.is_henselian\", \"HenselianRing.mk\", \"HenselianLocalRing\", \"HenselianLocalRing.mk\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.recOn\", \"Field.henselian\"], \"digest\": \"240b8fb389353c34\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hensel roots and smooth nilpotent/completion lifts do not state the Gabber–Ramero bounded-loss assertion for a possibly singular algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded precision section lifting for a finitely presented algebra over a henselian principal pair with Gabber Ramero obstruction ideal",
+   "results": "{\"t\": \"2026-10-24T07:09:45Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded precision section lifting for a finitely presented algebra over a henselian principal pair with Gabber Ramero obstruction ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianRing\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"IsAdicComplete.henselianRing\", \"HenselianRing.is_henselian\", \"HenselianLocalRing\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"Algebra.FormallySmooth.exists_lift\"], \"digest\": \"864a994b67d2042a\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hensel roots and smooth nilpotent/completion lifts do not state the Gabber–Ramero bounded-loss assertion for a possibly singular algebra."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate solutions over henselian rings with nonsmoothness ideal bounded by a power of a regular parameter lift with bounded loss",
+   "results": "{\"t\": \"2026-10-24T07:16:14Z\", \"tool\": \"leanfinder\", \"query\": \"Approximate solutions over henselian rings with nonsmoothness ideal bounded by a power of a regular parameter lift with bounded loss\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hensels_lemma\", \"HenselianRing\", \"HenselianRing.is_henselian\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.is_henselian\", \"PowerSeries.IsWeierstrassDivisorAt.divCoeff\", \"PowerSeries.IsWeierstrassDivisorAt.seq\"], \"digest\": \"60fc97a756f01e72\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary Hensel roots and smooth nilpotent/completion lifts do not state the Gabber–Ramero bounded-loss assertion for a possibly singular algebra."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-smooth-span-lifting",
+  "date": "2026-10-24",
+  "group": "NZ"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited auxiliary formal-resolution branch of ancestor Step 3, via the item's recorded creation chain; Theorem 3.2.3 (Gabber–Ramero), equivalently [GR, 5.4.13] with the auxiliary ideal I=R, so that tI=tR; a section is written contravariantly as an algebra map. The latest ancestor proof has no separate formal-resolution sentence.",
+   "via": [
+    "lem-per-elkik-smooth-span-lifting",
+    "lem-per-rig-formal-resolution-intrinsic",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-gabber-ramero-henselian-section-lifting",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Split the GR proof into one-step precision improvement and Elkik formal-section approximation, with explicit recurrence and inverse-limit assembly. Corrected auxiliary ideal zero to the unit ideal in the source citation. Two new statement-only nodes, no Mathlib leaves.",
+  "blueprint": "Inherited auxiliary formal-resolution branch attributed to ancestor lem-per-artin-gabber-affine-curve Step 3 via the existing creation chain. The latest blueprint proof no longer contains this branch; reported as inherited provenance mismatch. The present four steps realize Temkin Theorem 3.2.3 through GR Proposition 5.4.13."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-8160b8981",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-8160b8981 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement (obstruction-ideal def, ideal-calculus, adic completion, fp algebra, henselian, smooth). The statement is unchanged from the NZ copy. Temkin and GR are not in literature/ (WANTED). Stacks smoothing.tex has no Théorème 2 bis, so the absence of a tag is correct. I checked the mathematics directly. Step 1: H_{C/R}⊆H_P gives hδ=t^r·id with the same δ, and f(a_0)∈t^{n+r}. Step 2: q_k=2r+2^k(n−r)>2r, q_k−r≥n, and the induction has a base and a step. Step 3: the inverse-limit assembly and the n-th coordinate are correct. Step 4: V(H) is the nonsmooth locus, t^r∈H gives smoothness off V(t), and Elkik is applied to the same henselian pair (R,tR) with N=n. improve-precision proved by hand (Newton step ε=−t^{-r}h(a)f(a) with t a non-zero-divisor; true even for q>r); d=0, J=0 and unit t checked. The Elkik node is a correct special case of Elkik II Thm 2 bis / GR 5.4.12 (the U-condition is automatic); I=0 and I=R checked. No duplicates: the G-ring approximation, étale-away lifting and complete adic-lift nodes all differ. No restated clause and no cycle. FIX (B3): improve-precision used ∂/∂x_i with no definition node; now cites def-weil-pbc-polynomial-partial-derivative in statement and stmt_deps. FIX: the report says the source was corrected from 'auxiliary ideal zero' to the unit ideal, but item source.place and blueprint.from.place still said zero; both now say I=R (tI=tR).; 2 file(s) fixed by the reviewer"
+ }
+}

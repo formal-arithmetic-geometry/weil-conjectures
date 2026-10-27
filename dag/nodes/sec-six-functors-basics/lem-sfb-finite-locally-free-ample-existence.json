@@ -1,0 +1,277 @@
+{
+ "id": "lem-sfb-finite-locally-free-ample-existence",
+ "kind": "statement",
+ "title": "Existence of an ample invertible module descends along finite locally free surjections",
+ "statement": "Let $f:Y\\to X$ be a surjective finite locally free morphism of schemes [def-pc-scheme] [def-weil-surjective-morphism] [def-pc-finite-locally-free]. If $Y$ admits an ample invertible $\\mathcal O_Y$-module [def-sc-invertible-module] [def-weil-pbc-ample-invertible-module], then $X$ admits an ample invertible $\\mathcal O_X$-module, with ampleness in the absolute sense. No normality, Noetherianity, properness, finite-type hypothesis over a field, or descent datum for the supplied module is assumed.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 0BD4, proposition-push-down-ample, case (1)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-surjective-morphism",
+  "def-pc-finite-locally-free",
+  "def-sc-invertible-module",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose an ample invertible module $M$ on $Y$. By [def-weil-pbc-ample-invertible-module], $Y$ is quasi-compact. Pull an open cover of $X$ back to $Y$ and choose a finite subcover there; surjectivity of $f$ implies that the corresponding finitely many opens cover $X$. Hence $X$ is quasi-compact. Finiteness of $f$ is part of [def-pc-finite-locally-free].",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "def-weil-surjective-morphism",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0 (divisors-lemma-norm-ample), quasi-compactness paragraph; 0BD4 case (1)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-locally-free-degree-locally-constant], write $X=\\coprod_{d\\geq0}X_d$ as open and closed subschemes with $f_d:f^{-1}X_d\\to X_d$ finite locally free of degree $d$. Surjectivity implies $X_0=\\varnothing$: a degree-zero fibre has zero coordinate algebra and hence empty spectrum, whereas every fibre here has a point. For each $d\\geq1$ choose the family $\\nu^{(d)}$ supplied by [lem-sfb-finite-locally-free-function-norm] for $f_d$. Given $V\\subseteq X$ open and $b\\in\\Gamma(f^{-1}V,\\mathcal O_Y)$, define $\\nu_V(b)$ to be the unique regular function whose restriction to $V\\cap X_d$ is $\\nu^{(d)}_{V\\cap X_d}(b|_{f^{-1}(V\\cap X_d)})$. Existence and uniqueness are exactly the structure-sheaf gluing axiom on the disjoint open cover [def-pc-scheme]; overlaps are empty. Multiplicativity, preservation of $1$ and restriction compatibility can each be checked on that cover and follow from the corresponding property of $\\nu^{(d)}$. If $b(y)=0$, the point $f(y)$ lies in a positive-degree piece and the vanishing property there gives $\\nu_V(b)(f(y))=0$. Thus one such family exists for $f$ without a constant-degree assumption. For empty $X$ use the unique function on every empty open.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-sfb-finite-locally-free-function-norm",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD2 (divisors-lemma-finite-locally-free-has-norm) on the degree pieces of Morphisms Tag 04MH (morphisms-lemma-finite-locally-free); the disjoint-cover assembly supplies the varying-degree case of 0BD4(1)."
+   }
+  },
+  {
+   "text": "Use the family $\\nu_V$ constructed in step 2. By [lem-sfb-finite-trivialize-invertible-upstairs] choose an open cover $(V_i)$ of $X$ and generating sections $e_i$ of $M|_{f^{-1}V_i}$. Apply [lem-sfb-norm-frame-tensor-section-gluing] to these data and fix the resulting invertible module $N$ and frames $q_i$ on $X$. For every $n\\geq1$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ this supplies a section $t\\in\\Gamma(X,N^{\\otimes n})$, locally given by $t=\\nu_{V_i}(b_i)q_i^{\\otimes n}$ when $s=b_i e_i^{\\otimes n}$. The module $N$ is fixed before choosing $s$ or $n$.",
+   "uses": [
+    "lem-sfb-finite-trivialize-invertible-upstairs",
+    "lem-sfb-norm-frame-tensor-section-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0BD2, 0BCY (divisors-lemma-norm-invertible) and 0BCZ (divisors-lemma-norm-map-invertible); the norm line in 0BD0."
+   }
+  },
+  {
+   "text": "For $x\\in V_i$, frames identify nonvanishing of $s$ at points over $x$ with nonvanishing of $b_i$, and nonvanishing of $t$ at $x$ with nonvanishing of $\\nu_{V_i}(b_i)$. All hypotheses of [lem-sfb-finite-function-norm-nonvanishing] hold: $f$ is finite, and steps 2 and 3 supply a multiplicative unital restriction-compatible family with the residue-field vanishing property. Its equivalence therefore gives $$X_t=\\{x\\in X:f^{-1}(\\{x\\})\\subseteq Y_s\\}.$$ This does not require a single integer degree or a scalar-power identity.",
+   "uses": [
+    "lem-sfb-finite-function-norm-nonvanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCZ, the zero-locus assertion, and Section 0BCX; applied to the local frame coefficients."
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and an affine open neighbourhood $V\\subseteq X$, which exists by [def-pc-scheme]. The fibre $E=f^{-1}(\\{x\\})$ is finite by [lem-weil-pbc-finite-closed-map-finite-fibres]. Apply [lem-sc-ample-finite-principal-affine] to $Y,M,E$ and the open $f^{-1}V$. It gives $n>0$ and $s\\in\\Gamma(Y,M^{\\otimes n})$ with $E\\subseteq Y_s\\subseteq f^{-1}V$. Take its norm section $t$ from step 3. The identity in step 4 implies $x\\in X_t$. If $z\\in X_t$, surjectivity gives $y\\in f^{-1}(\\{z\\})$; then $y\\in Y_s\\subseteq f^{-1}V$, hence $z\\in V$. Thus $x\\in X_t\\subseteq V$.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-sc-ample-finite-principal-affine",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0, choice of the finite fibre and Properties Tag 09NV (properties-lemma-ample-finite-set-in-principal-affine)."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-affine-cap-section-open] to the invertible module $N$, its positive tensor power $n$, its global section $t$, and the affine open $V$. It gives $V\\cap X_t$ affine. Since $X_t\\subseteq V$, this is $X_t$ itself. For every $x\\in X$ we have therefore produced a positive-power global section of the single module $N$ with affine nonvanishing open containing $x$. Together with quasi-compactness from step 1 these are exactly the conditions of [def-weil-pbc-ample-invertible-module], so $N$ is ample. If $X$ is empty the pointwise condition is vacuous and the same construction applies.",
+   "uses": [
+    "lem-sc-affine-cap-section-open",
+    "def-weil-pbc-ample-invertible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BD0, final sentence; Properties Tag 01PV (properties-lemma-affine-cap-s-open) and Definition 01PS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-surjective-morphism",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-sfb-finite-locally-free-function-norm",
+  "def-pc-scheme",
+  "lem-sfb-finite-trivialize-invertible-upstairs",
+  "lem-sfb-norm-frame-tensor-section-gluing",
+  "lem-sfb-finite-function-norm-nonvanishing",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0BD4(1) and 0BD0; norm construction 0BD2, 0BCY, 0BCZ. The varying-degree norm is assembled on the open and closed degree pieces of Morphisms Tag 04MH; no global scalar-power identity is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free surjective morphism of schemes whose source admits an ample invertible sheaf has a target admitting an ample invertible sheaf",
+   "results": "OK: 8 hits. AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.Surjective, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite.casesOn",
+   "date": "2026-10-24",
+   "verdict": "no match: IsFinite, Surjective and finite implies proper do not assert existence or ampleness of invertible modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The norm of an ample line bundle for a finite locally free surjective morphism is ample",
+   "results": "OK: 8 hits. AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.IsFinite.finite_app, AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.finite_app, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization",
+   "date": "2026-10-24",
+   "verdict": "no match: normalization and finite morphism affine-section results do not construct or prove ampleness of a norm line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free surjective morphism Y to X, if Y admits an ample invertible module then X admits one",
+   "results": "OK: 8 hits. AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.instHasOfPrecompPropertySchemeSurjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.of_surjective_of_isAffine",
+   "date": "2026-10-24",
+   "verdict": "no match: jointly-surjective morphism properties, affine-space surjectivity and affine closed-immersion criteria have no ampleness clause."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits."
+  },
+  {
+   "tool": "grep",
+   "query": "\\b(IsAmple|isAmple)\\b|norm_ample|push_down_ample",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: zero hits in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free surjective morphism of schemes with an ample invertible sheaf on its source has an ample invertible sheaf on its target",
+   "results": "OK: 8 hits. AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving, AlgebraicGeometry.instHasOfPrecompPropertySchemeSurjective, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.isJointlySurjectivePreserving, AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource, AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource, AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits contain no absolute ampleness or ample invertible-module descent theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "IsAmple|norm_ample|push_down_ample",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits contain no absolute ampleness or ample invertible-module descent theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The norm of an ample line bundle along a finite locally free surjective morphism is ample",
+   "results": "OK: 8 hits. FiniteField.norm_surjective, Algebra.norm_localization, Algebra.norm, Algebra.intNorm_eq_norm, Algebra.norm_eq_iff, Subalgebra.LinearDisjoint.norm_algebraMap, Ideal.relNorm, IntermediateField.LinearDisjoint.norm_algebraMap",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits contain no absolute ampleness or ample invertible-module descent theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAmple\"",
+   "results": "OK: 0 hits. ",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits contain no absolute ampleness or ample invertible-module descent theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ample-existence-field-extension",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Field-extension reduction in the opening sentence of the proof of Groupoids Tag 0BF7. Supporting input: final finite locally free descent in the proof of Stacks Varieties Tag 0BDC, supplied by Divisors Tag 0BD4(1).",
+   "via": [
+    "lem-sfb-ample-existence-field-extension",
+    "lem-sfb-finite-type-group-ample-line",
+    "lem-sfb-algebraic-group-ample-difference",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-finite-locally-free-ample-existence",
+  "worker": "stage1",
+  "summary": "Repaired the returned delivery against the current DAG. The existing function-norm node assumes positive constant degree; it is reused on the degree pieces supplied by the existing finite-locally-free-degree-locally-constant node. Disjoint-cover sheaf gluing produces the required varying-degree family. The remaining norm-line, nonvanishing and affine-section argument is retained. No new node or Mathlib leaf is delivered, and the item statement is unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Comparison of the full cohomology frame in the item with Deligne 3.3--3.5 Picard torsion frames; relative Picard existence for the pulled-back stable family. Supporting input for the present split: A relatively ample line module on the stable-curve multidegree-zero Picard space. Supporting input: Generic ampleness criterion for smooth connected group schemes. Raynaud input: existence, locally on a normal base, of an ample extension of a positive power of a symmetric line on the dense abelian open; comparison with the supplied line is a separate proof step. Cubical proof input: extension of cubical objects and isomorphisms, without positivity; supporting input: Local prolongation of a tensor power of a symmetric line; Moret-Bailly II 3.3.3, printed p.53, opening parenthesis: the generic line is a difference of two ample lines; Stacks supplies this for all finite-type algebraic groups, not only abelian varieties. Supporting input for the present split: existence of one ample invertible module on a finite-type group scheme, before choosing a high twist of the supplied line. Field-extension reduction in the opening sentence of the proof of Groupoids Tag 0BF7. Supporting input: final finite locally free descent in the proof of Stacks Varieties Tag 0BDC, supplied by Divisors Tag 0BD4(1). The steps supply the finite-locally-free existence descent invoked at the end of Stacks 0BDC. No imported blueprint node states the item; blueprint_refs.py ancestor returns None, retained as null.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Finite fibres are a generic finite-morphism tool; the unit has no alternate finite-fibre assertion."
+   },
+   {
+    "node": "lem-sc-ample-finite-principal-affine",
+    "why": "Properties 09NV is the finite-set section tool used by Stacks 0BD0."
+   },
+   {
+    "node": "lem-sc-affine-cap-section-open",
+    "why": "Properties 01PV is the affine-section intersection tool used by Stacks 0BD0."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "The generic open-and-closed degree decomposition permits use of the existing constant-degree determinant norm in the varying-degree case of Stacks 0BD4(1); the unit has no other degree-decomposition statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-sc-ample-finite-principal-affine",
+  "lem-sc-affine-cap-section-open",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-b4c811acc",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-b4c811acc (reviewer sub-agent of L); spot-checked: Read the full item (6 steps), every cited node's statement, and Stacks divisors.tex 0BCX–0BD4 with their proofs. The item statement and stmt_deps are byte-identical to side-live, and it matches 0BD4(1): finite locally free and surjective, absolute ampleness per 01PS. No new nodes, no repair note. Step 1: quasi-compactness passes down a surjection; the step is elementary and correct. Step 2: the degree decomposition comes from lem-weil-pbc-finite-locally-free-degree-locally-constant. X_0 is empty because of surjectivity. The live Q91 function-norm node (constant degree d>=1) is applied only on pieces with d>=1, and the families are glued over a disjoint cover by the sheaf axiom. Multiplicativity, unit, restriction and vanishing are each checked piece by piece, and no power identity is claimed. This repairs the refused landing of a4091b2972e (the drop-nodes target already existed) and closes a silent constant-degree gap in Stacks 0BD4(1)->0BD2. Step 3: 0BUT needs only finiteness, and the frame-gluing node needs only a multiplicative, unital, restriction-compatible family, giving N fixed before n and s. Step 4: the nonvanishing node's hypotheses (finite f plus the vanishing property) are met, and the frames give X_t={x: f^{-1}x ⊆ Y_s}. Step 5: finite fibre, then 09NV with W=f^{-1}V, and surjectivity is used correctly to get X_t ⊆ V. Step 6: 01PV covers tensor powers, so X_t is affine and N satisfies 01PS. Edge cases checked: empty X, the identity, degrees 1⊔2, and k[ε] (norm a^2). No duplicates: ample-reflection, normal-ample-descent, branch-ample-descent, finite-norm-invertible-sections (needs fixed d and the a^d identity) and pullback-section-norm all state different things. proof_deps equals the union of uses, and there is no cycle. All four declared tool_uses are accepted: finite fibres, 09NV, 01PV and the 04MH degree decomposition. No SGA. The null blueprint.from.node is inherited from the base node, not a fault of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteLocallyFreeAmpleExistence",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.exists_isAmple_of_finiteLocallyFree_surjective",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocallyFreeAmpleExistence.lean",
+  "statement": "theorem exists_isAmple_of_finiteLocallyFree_surjective {X Y : Scheme.{u}} (f : Y ⟶ X) [Surjective f] [f.IsFiniteLocallyFree] (hY : ∃ M : Y.Modules, ∃ hM : M.IsInvertible, @IsAmple Y M hM) : ∃ N : X.Modules, ∃ hN : N.IsInvertible, @IsAmple X N hN",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-49832afb2",
+  "group": "N5",
+  "result": "pass",
+  "note": "Read the item node, its 5 stmt_dep records, Stacks divisors.tex 0BD4(1), the module and report. Signature {X Y : Scheme.{u}} (f : Y ⟶ X) [Surjective f] [f.IsFiniteLocallyFree] (∃ M, ∃ hM : M.IsInvertible, @IsAmple Y M hM) → ∃ N, ∃ hN, @IsAmple X N hN matches the node clause by clause: absolute IsAmple (Ample.lean:48), finite locally free class with no degree field, no extra hypotheses (Proper/UniversallyClosed/QuasiFinite are non-public proof imports). Edge cases (empty, varying degree, identity) are covered. lean.statement is verbatim; the node differs from side-live only in the lean record. Proof is by sorry; docstrings carry 0BD4/0BD0, the blueprint tag and all 6 steps. Public imports are exactly the stmt_dep modules. No duplicate in Sheaf/WeilConjectures/Mathlib. The report has the Worker report and Second reading by N5 sections. Not recompiled (unchanged)."
+ }
+}

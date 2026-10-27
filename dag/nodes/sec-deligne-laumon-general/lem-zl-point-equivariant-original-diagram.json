@@ -1,0 +1,168 @@
+{
+ "id": "lem-zl-point-equivariant-original-diagram",
+ "kind": "statement",
+ "title": "Original-field equivariant point diagram",
+ "statement": "Fix a finite-field datum D, l different from its characteristic, an algebraic closure Omega of Q_l, and a finite coefficient subfield F. Put E = Coefficient(l,Omega,F), the specified Shrink model of F. Use the diagram definitions of [def-zl-point-equivariant-diagram-realization]. Given a finite category I, a diagram V of finite-dimensional E-modules and invertible operators A_i commuting with every arrow, prescribe a heart object MStar, its Weil isomorphism thetaStar and fibre identification etaStar at iStar, whose conjugated local Frobenius is A_iStar. There exist a raw constructible diagram G, heart witnesses hG, natural Weil and fibre isomorphisms theta and eta, and fibre transport isomorphisms t. The lifted heart diagram exactly realizes all relations, monomorphisms, short exact sequences and cokernel universal properties of V. Each t_i has the specified point-transport hom, and omega_E(theta_i) = t_i.inv ≫ eta_i.hom ≫ A_i.hom ≫ eta_i.inv. The object, Weil isomorphism and fibre identification at iStar equal the prescribed data, using HEq for dependent identifications. This assertion makes no coefficient-extension claim and does not assert the inverse or conjugated Frobenius formulas, which the caller derives by iso inversion and cancellation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-diagram lifting argument of lem-zl-point-equivariant-diagram-lift."
+ },
+ "stmt_deps": [
+  "def-zl-point-equivariant-diagram-realization"
+ ],
+ "proof": [
+  {
+   "text": "Put $T=Lg_s^*$ and $\\omega=\\omega_E$. By [lem-zl-point-heart-finite-stage], $\\omega:\\Sh_c(s,E)\\to\\mathrm{Vect}_{E,\\mathrm{fd}}$ is an exact equivalence. For each $i\\ne i_*$ choose a preimage $M_i$ and an isomorphism $\\eta_i:\\omega M_i\\cong D(i)$. At $i_*$ take literally $M_{i_*}=M_*$ and $\\eta_{i_*}=\\eta_*$, rather than a chosen preimage. Essential surjectivity supplies the other objects independently; fullness and faithfulness will supply all maps, so no compatibility of these choices is required. For the Shrink coefficient model, transport this exact equivalence along the canonical Shrink algebra equivalence using the specified scalar/fibre comparison; the scalar unit and inverse comparisons identify the resulting fibre with the recorded H^0 fibre functor.",
+   "uses": [
+    "lem-zl-point-heart-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6."
+   }
+  },
+  {
+   "text": "Since $g_s$ is a scheme automorphism, [prop-constructible-truncations] implies $T M_i\\in\\Sh_c(s,E)$. Put $t_i=H^0(\\iota_{M_i}):\\omega M_i\\to\\omega(T M_i)$; it is invertible by [lem-weil-frobenius-cohomology-transport-iso](1). Write $a_i=\\eta_i^{-1}A_i\\eta_i$ and $b_i=a_i t_i^{-1}$. Fullness of the equivalence [lem-zl-point-heart-finite-stage] gives unique maps $\\theta_i:T M_i\\to M_i$ and $v_i:M_i\\to T M_i$ with images $b_i$ and $t_i a_i^{-1}$. Both composites have image the identity, hence faithfulness gives $\\theta_i v_i=1$ and $v_i\\theta_i=1$. Thus these are actual inverse Weil maps over $E$, defining Weil sheaves by [def-weil-weil-sheaf-complex]. The prescribed compatibility gives $\\omega(\\theta_*)=a_{i_*}t_{i_*}^{-1}$, so uniqueness makes $\\theta_{i_*}$ literally $\\theta_*$. The inverse realizes $(a_it_i^{-1})^{-1}=t_ia_i^{-1}$, with the source and target transport included.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-frobenius-cohomology-transport-iso",
+    "lem-zl-point-heart-finite-stage",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6."
+   }
+  },
+  {
+   "text": "For $u:i\\to j$ put $w_u=\\eta_j^{-1}D(u)\\eta_i$. Fullness of [lem-zl-point-heart-finite-stage] gives a unique $f_u:M_i\\to M_j$ with $\\omega(f_u)=w_u$. For composable $u,v$, $w_{vu}=w_vw_u$, and $w_{1_i}=1$; faithfulness gives $f_{vu}=f_vf_u$ and $f_{1_i}=1$. The same cancellation of the intermediate $\\eta$ shows that any equation between paths in $D$ holds for the $f_u$. In particular the underlying diagram and all its relations are realized without modifying $M_*$ or $\\eta_*$ on arrows incident with $i_*$.",
+   "uses": [
+    "lem-zl-point-heart-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6."
+   }
+  },
+  {
+   "text": "By [lem-weil-frobenius-point-transport-natural](2), $\\omega(Tf_u)t_i=t_jw_u$. The given equivariance says $w_ua_i=a_jw_u$. Consequently\n$$\\omega(f_u\\theta_i)=w_ua_it_i^{-1}=a_jw_ut_i^{-1}=a_jt_j^{-1}\\omega(Tf_u)=\\omega(\\theta_jTf_u).$$\nFaithfulness in [lem-zl-point-heart-finite-stage] gives $f_u\\theta_i=\\theta_jTf_u$, exactly the morphism condition of [def-weil-weil-sheaf-complex]. Thus the lifted diagram is a diagram of Weil sheaves, not merely a diagram in the underlying heart.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-zl-point-heart-finite-stage",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6."
+   }
+  },
+  {
+   "text": "The fibre isomorphisms $\\eta_i$ identify the underlying lifted diagram with $D$. Hence every designated short exact sequence, monomorphism, and cokernel diagram in $D$ is realized in the heart: [lem-zl-point-heart-finite-stage] explicitly preserves and reflects kernels, cokernels, zero objects and short exact sequences. For a cokernel this includes its universal property, not just the vanishing of the composite; comparison with any other cokernel in the heart is its unique isomorphism commuting with the quotient map. All maps in such diagrams are Weil morphisms by the preceding calculation.",
+   "uses": [
+    "lem-zl-point-heart-finite-stage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraph 7, dimension-zero Jordan filtration: inverse-transport lifting, Weil equivariance, exact quotients and coefficient extension; old item steps 5–6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-zl-point-heart-finite-stage",
+  "prop-constructible-truncations",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "def-weil-weil-sheaf-complex",
+  "lem-weil-frobenius-point-transport-natural"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+  "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-diagram lifting argument of lem-zl-point-equivariant-diagram-lift."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Lift a finite diagram of vector spaces with automorphisms through an exact point heart equivalence, and extend it compatibly to finite and algebraically closed coefficients",
+   "results": "createsLimitsOfShapeOfEquiv, abelianOfEquivalence, FGModuleCat.ulift; no normalized point Weil diagram or scalar realization theorem.",
+   "date": "2026-10-25",
+   "verdict": "The results are generic transfer tools, not this point-heart and specified transport comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful.preimageIso",
+   "results": "Functor.FullyFaithful.preimageIso and its hom/inv equations lift individual isomorphisms.",
+   "date": "2026-10-25",
+   "verdict": "Useful for lifting a supplied fibre isomorphism, but not for point-heart equivalence, prescribed-object diagrams or normalized coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lift a diagram through a fully faithful functor with chosen object preimages and isomorphisms, preserving one prescribed object",
+   "results": "Functor.essImage.liftFunctor and its obj/map lemmas; relativelyRepresentable.lift.",
+   "date": "2026-10-25",
+   "verdict": "Generic diagram lifting exists, but does not supply the original point-heart objects, specified point transport, or coefficient extension compatibilities."
+  },
+  {
+   "tool": "grep",
+   "query": "preimageIso|lift.*[Dd]iagram|map.*[Ss]hortExact",
+   "results": "Mathlib Functor.FullyFaithful and EssentialImage; ShortComplex.shortExact_of_iso. Repository search finds the assigned module only for the Zl diagram predicates. Blueprint search for equivariant diagram and scalar diagram returns zero matches.",
+   "date": "2026-10-25",
+   "verdict": "No duplicate of the specialized point-diagram steps or their definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointEquivariantDiagramLift",
+  "date": "2026-10-25",
+  "group": "R6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-zl-real-mixed-by-curves",
+   "place": "Paragraph 7, dimension-zero Jordan filtration; explicit point-diagram lifting argument of lem-zl-point-equivariant-diagram-lift.",
+   "via": [
+    "lem-zl-point-equivariant-diagram-lift"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointEquivariantOriginalDiagram",
+  "file": "lean/Sheaf/Paper/PointEquivariantOriginalDiagram.lean",
+  "declaration": "WeilConjectures.zl_point_equivariant_original_diagram",
+  "statement": "theorem zl_point_equivariant_original_diagram (F : Padic.FiniteCoefficientFields l Ω) (I : Type w) [SmallCategory I] [FinCategory I] (V : I ⥤ ModuleCat.{u} (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)) (hV : ∀ i, FiniteDimensional (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (V.obj i)) (A : ∀ i, V.obj i ≅ V.obj i) (hA : ∀ {i j : I} (f : i ⟶ j), (A i).hom ≫ V.map f = V.map f ≫ (A j).hom) (iStar : I) (MStar : sfRationalHeart l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (Spec (.of D.k))) (thetaStar : (zlDiagramPullback D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj MStar.obj ≅ MStar.obj) (etaStar : (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj MStar.obj ≅ V.obj iStar) (hStar : etaStar.inv ≫ zlDiagramTransport D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) MStar.obj ≫ (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).map thetaStar.hom ≫ etaStar.hom = (A iStar).hom) : ∃ (G : I ⥤ sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (Spec (.of D.k))) (hG : ∀ i, sfRationalHeartProperty l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (Spec (.of D.k)) (G.obj i)) (theta : G ⋙ zlDiagramPullback D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) ≅ G) (eta : G ⋙ zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) ≅ V) (t : ∀ i, (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj (G.obj i) ≅ (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj ((zlDiagramPullback D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).obj (G.obj i))), ZlDiagramExactRealization (zlDiagramHeart D l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) G hG) V ∧ (∀ i, (t i).hom = zlDiagramTransport D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F) (G.obj i) ∧ (zlDiagramFiber D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω F)).map (theta.app i).hom = (t i).inv ≫ (eta.app i).hom ≫ (A i).hom ≫ (eta.app i).inv) ∧ G.obj iStar = MStar.obj ∧ HEq (theta.app iStar) thetaStar ∧ HEq (eta.app iStar) etaStar",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac0df",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123650-L-1887771",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-ac0df",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261025T123650-L-1887771",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature byte-identical to clone; 17 defs verbatim in new PointEquivariantDiagramData (public re-export); three new sorry statements checked against item and nodes; node fields vs Lean proof; no importers"
+ }
+}

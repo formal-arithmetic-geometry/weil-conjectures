@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-curve-tangent-finiteness",
+ "kind": "statement",
+ "title": "Finite tangent and infinitesimal automorphism spaces of curves",
+ "statement": "On schemes over $\\operatorname{Spec}\\mathbf Z$ [def-pc-scheme, def-weil-affine-spectrum], let $\\mathcal C(T)$ be the groupoid of flat proper finitely presented morphisms $X\\to T$ of algebraic spaces whose geometric fibres have dimension at most one [def-weil-geometric-fibre, def-kun-topological-krull-dimension]. Arrows in $\\mathcal C(T)$ are $T$-isomorphisms and pullback is cartesian base change; arrows over $T'\\to T$ are isomorphisms $X'\\cong X\\times_TT'$ [def-pc-fibre-product]. Algebraic spaces are as in [def-trf-algebraic-space], with the universe convention [def-weil-size-convention]. Flatness and local finite presentation for their morphisms are tested on etale scheme charts using [def-weil-flat-morphism, def-sbc-locally-finite-presentation]. A morphism of algebraic spaces is proper if it is separated, of finite type and universally closed: separated means its diagonal is a closed immersion, finite type means quasi-compact and locally of finite type on etale charts, and universally closed means closed on underlying spaces after every algebraic-space base change (the scheme conventions are [def-weil-proper-morphism, def-weil-finite-type-morphism]). Let $K$ be any field [def-weil-field] and $x=(X\\to\\operatorname{Spec}K)\\in\\mathcal C(K)$. The isomorphism classes of objects in $\\mathcal C(K[\\epsilon]/(\\epsilon^2))$ with a chosen identification of special fibre with $X$ form the tangent $K$-vector space $T_x$, and the automorphisms of the trivial deformation $X\\times_K\\operatorname{Spec}(K[\\epsilon]/(\\epsilon^2))$ which restrict to the identity on $X$ form the infinitesimal automorphism $K$-vector space $\\operatorname{Inf}_x$. Both vector spaces are finite-dimensional. The vector operations are the usual deformation operations: pullback by $\\epsilon\\mapsto a\\epsilon$ gives scalar multiplication and the addition map on square-zero directions gives addition.",
+ "source": {
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-geometric-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-field",
+  "def-sfb-proper-curve-moduli",
+  "def-sfb-marked-curve-deformations"
+ ],
+ "proof": [
+  {
+   "text": "For $M=K$, the split square-zero algebra $K\\oplus K$ is $K[\\epsilon]/(\\epsilon^2)$ via $(a,b)\\mapsto a+b\\epsilon$; its square-zero ideal is $K\\epsilon\\cong K$. Apply [lem-sfb-flat-space-split-deformation-ext] to the flat algebraic space $X/K$. With the trivial deformation as zero, the vector space $V$ of all marked flat deformations of $X$ over the dual numbers is identified with $\\operatorname{Ext}^1(\\mathrm{NL}_{X/K},\\mathcal O_X)$, since $\\mathcal O_X\\otimes_KK\\cong\\mathcal O_X$. The group of automorphisms of the trivial deformation reducing to the identity is likewise identified with $\\operatorname{Ext}^0(\\mathrm{NL}_{X/K},\\mathcal O_X)$. The identifications respect scalar pullback and square-zero addition.",
+   "uses": [
+    "lem-sfb-flat-space-split-deformation-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1K (lemma-spaces-tangent-space), displayed Ext formulas, via defos.tex Tag 0D17."
+   }
+  },
+  {
+   "text": "Forgetting properness, finite presentation, and the fibre-dimension condition includes the marked curve-deformation groupoid as a full subgroupoid of the marked flat-deformation groupoid. Indeed, in both categories arrows are all isomorphisms over the same base respecting the same marking. Consequently it induces an injection $j:T_x\\hookrightarrow V$ on isomorphism classes. Both groupoids contain the trivial deformation, so $j$ preserves zero. The infinitesimal automorphism group in the item is exactly the ambient infinitesimal automorphism group: the object is the same trivial family and both arrow definitions impose precisely the same conditions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D57 (lemma-curves-tangent-space), fully faithful inclusion equation-curves-over-proper-spaces."
+   }
+  },
+  {
+   "text": "The curve operations remain in the image of $j$. Put $D=\\operatorname{Spec}(K[\\epsilon]/(\\epsilon^2))$. For two marked curve deformations over $D$, their markings give gluing data over $\\operatorname{Spec}K$. By [lem-sfb-curve-infinitesimal-pushout] these glue in $\\mathcal C$ over $P=D\\amalg_{\\operatorname{Spec}K}D$. Its ring is $K[\\epsilon_1,\\epsilon_2]/(\\epsilon_1,\\epsilon_2)^2$: explicitly it is the fibre product of two copies of $K[\\epsilon]/(\\epsilon^2)$ over $K$. Pulling this family back along $D\\to P$ with both $\\epsilon_i\\mapsto\\epsilon$ gives their sum in $\\mathcal C(D)$. Scalar pullback $\\epsilon\\mapsto a\\epsilon$ also belongs to $\\mathcal C(D)$ by its specified base-change functor. Forgetting to flat deformations performs these identical gluing and pullback operations, so [lem-sfb-flat-space-split-deformation-ext] gives $j(u+v)=j(u)+j(v)$ and $j(au)=a\\,j(u)$. In particular $a=-1$ supplies additive inverses. The image is a vector subspace of $V$; injectivity transfers every vector-space identity to $T_x$. For infinitesimal automorphisms the same cited Ext identification already gives the vector structure, with composition as addition. This also proves that the structures just obtained are the deformation operations specified in the statement.",
+   "uses": [
+    "lem-sfb-curve-infinitesimal-pushout",
+    "lem-sfb-flat-space-split-deformation-ext"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tags 0D57 and 0D56 (lemma-curves-RS-star); linear deformation operations in artin.tex sections tangent-spaces and inf."
+   }
+  },
+  {
+   "text": "A field is Noetherian, since its only ideals are $0$ and $K$. The structure morphism $X\\to\\operatorname{Spec}K$ is locally of finite presentation because it is finitely presented by hypothesis. Apply [lem-sfb-space-naive-cotangent-coherent] to obtain that $X$ is locally Noetherian, that $\\mathcal O_X$ is coherent, and that $\\mathrm{NL}_{X/K}$ has coherent cohomology only in degrees $-1,0$. Thus $E=\\mathrm{NL}_{X/K}$ has coherent cohomology bounded above and $F=\\mathcal O_X[0]$ has coherent cohomology bounded below.",
+   "uses": [
+    "lem-sfb-space-naive-cotangent-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1K (lemma-spaces-tangent-space), coherence paragraph using Tag 0D0Z."
+   }
+  },
+  {
+   "text": "Use the properness of $X/K$ and the bounds from step 4 in [lem-sfb-proper-space-coherent-ext-finite], with $A=K$, $E=\\mathrm{NL}_{X/K}$, $F=\\mathcal O_X[0]$, and $n=0,1$. Both displayed Ext groups are finitely generated $K$-modules, hence finite-dimensional vector spaces. In particular $V$ is finite-dimensional, and so is the infinitesimal automorphism space under the identification of step 1.",
+   "uses": [
+    "lem-sfb-proper-space-coherent-ext-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D1K (lemma-spaces-tangent-space), final application of spaces-perfect.tex Tag 0D0T."
+   }
+  },
+  {
+   "text": "Let $d=\\dim_KV<\\infty$. Any $d+1$ elements of $T_x$ have linearly dependent images in $V$. Since $j$ is linear and injective, a nontrivial linear relation between those images gives the same nontrivial relation in $T_x$. Starting with the empty independent list and adjoining a vector outside the current span must therefore stop after at most $d$ choices, yielding a finite basis of $T_x$. Together with step 5 this proves both finiteness assertions. The argument applies to every field $K$, and consequently also to fields of finite type over $\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/quot.tex",
+    "place": "Tag 0D57 (lemma-curves-tangent-space), deduction of both clauses from ambient finiteness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-curve-infinitesimal-pushout",
+  "lem-sfb-flat-space-split-deformation-ext",
+  "lem-sfb-proper-space-coherent-ext-finite",
+  "lem-sfb-space-naive-cotangent-coherent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/quot.tex",
+  "place": "Tag 0D57 (lemma-curves-tangent-space), expanded through Tag 0D1K (lemma-spaces-tangent-space) and its cited Ext classification/coherence/finiteness lemmas."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "First order deformations and infinitesimal automorphisms of a proper curve have finite dimensional tangent spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_2) [inst : Field R], Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper algebraic spaces of dimension at most one have finite dimensional deformation and infinitesimal automorphism spaces",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [Finite ↥X] [DiscreteTopology ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is finite and discrete, then $X$ is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"tangent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "curveStack|infinitesimalAutomorphism|deformation.*finrank",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First order deformations and infinitesimal automorphisms of a proper curve have finite dimensional tangent spaces",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type u} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type*}\\n  [TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type*} [TopologicalSpace M] [ChartedSpace H M] (_x : M) :\\n  Type u\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : FiniteDimensional (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"FiniteDimensional.proper_real\", \"module\": \"Mathlib.Analysis.Normed.Module.FiniteDimension\", \"type\": \"(E : Type u) [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] : ProperSpace E\", \"doc\": \"Every finite-dimensional real normed vector space is a proper space, meaning that every closed ball in the space is compact.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"instTopologicalSpaceTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The topology on the tangent space $ T_xM $ at a point $ x $ of a charted space $ M $ modeled on a normed vector space $ E $, induced by the normed vector space structure of $ E $ through the model wit\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \"[FinitePresentation R S] [Module.Projective S Ω[S⁄R]] : Module.Finite S (H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: returned scheme, ring, gluing, or universal-property results do not state this algebraic-space or moduli-stack assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First order deformations and infinitesimal automorphisms of a proper algebraic curve are finite dimensional",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.EssFiniteType R A]\\n  [Algebra.FormallySmooth R A], Module.FinitePresentation A Ω[A⁄R]\", \"doc\": \"If $ A $ is an $ R $-algebra that is essentially of finite type and formally smooth over a commutative ring $ R $, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is finitely presented as an \"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallySmooth R A], Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"If $ A $ is a formally smooth algebra over a commutative ring $ R $, then the first cohomology group $ H^1 $ of the cotangent complex of $ A $ over $ R $ is trivial (i.e., contains at most one element\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}\n  {\"name\": \"IsLocalRing.finrank_cotangentSpace_eq_zero\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ (R : Type u_2) [inst : Field R], Module.finrank (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R) = 0\", \"doc\": \"For any field $ R $, the finite rank of its cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the maximal ideal) as a module over the residue field $ R/\\\\mathfrak{m} $ is zero.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: local ring cotangent spaces and formally smooth ring maps are not deformation spaces of proper algebraic spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional Ext groups of the naive cotangent complex classify proper curve deformations",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n  {\"name\": \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmooth R S], Subsingleton (Algebra.H1Cotangent R S)\", \"doc\": \"For any commutative ring $ R $ and a standard smooth $ R $-algebra $ S $, the first cohomology group $ H^1(\\\\Lambda_{S/R}) $ of the cotangent complex is trivial, meaning any two elements in this group \"}\n  {\"name\": \"Algebra.formallySmooth_iff\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and the first cohomology group $ H^1 $ of the cotangent comple\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallySmooth R A ↔ Module.Projective A Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally smooth if and only if its module of Kähler differentials $ \\\\Omega_{A/R} $ is a projective $ A $-module and its first cohomology group of the cotangent complex $ H^1(\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"module\": \"Mathlib/RingTheory/Smooth/Kaehler\", \"type\": \"∀ {R : Type u_1} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : Algebra.Extension R S), Function.Bijective ⇑(Algebra.Extension.H1Cotangent.map P.toInfinitesimal)\", \"doc\": \"The linear map from the first cotangent cohomology module $ H^1(P) $ to $ H^1(P/I^2) $, induced by the infinitesimal extension homomorphism $ P \\to P/I^2 $, is bijective.\"}\n  {\"name\": \"Algebra.SubmersivePresentation.subsingleton_h1Cotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : Finite σ] (P : Algebra.SubmersivePresentation R S ι σ),\\n  Subsingleton P.toExtension.H1Cotangent\", \"doc\": \"For any submersive presentation $ P $ of an $ R $-algebra, the first cohomology group $ H^1 $ of the cotangent complex associated to the algebra extension $ P.toExtension $ is a subsingleton, meaning \"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: local ring cotangent spaces and formally smooth ring maps are not deformation spaces of proper algebraic spaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"deformation\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: local ring cotangent spaces and formally smooth ring maps are not deformation spaces of proper algebraic spaces."
+  },
+  {
+   "tool": "grep",
+   "query": "deform.*proper|proper.*deform|infinitesimal.*automorph",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "No match: local ring cotangent spaces and formally smooth ring maps are not deformation spaces of proper algebraic spaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tangent and infinitesimal automorphism spaces of a proper algebraic curve are finite dimensional",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgEquiv.fintype\", \"module\": \"Mathlib.FieldTheory.Fixed\", \"type\": \"(K : Type u) (V : Type v) [Field K] [Field V] [Algebra K V] [FiniteDimensional K V] : Fintype (V ≃ₐ[K] V)\", \"doc\": \"Given a field $ K $ and a finite-dimensional $ K $-algebra $ V $, the group of $ K $-algebra automorphisms of $ V $ is finite. This follows because each automorphism is uniquely determined by its acti\"}\n  {\"name\": \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"[IsNoetherianRing R] : FiniteDimensional (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any Noetherian local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is finite-dimensional as a vector space over the \"}\n  {\"name\": \"TangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type*} [NontriviallyNormedField 𝕜] {E : Type u} [NormedAddCommGroup E] [NormedSpace 𝕜 E] {H : Type*}\\n  [TopologicalSpace H] (I : ModelWithCorners 𝕜 E H) {M : Type*} [TopologicalSpace M] [ChartedSpace H M] (_x : M) :\\n  Type u\", \"doc\": \"The tangent space at a point $ x $ on a charted space $ M $ modeled on a normed vector space $ E $ via a model with corners $ I $ is identified with the normed vector space $ E $ itself. This definiti\"}\n  {\"name\": \"instTopologicalSpaceTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \"{𝕜 : Type u_2} →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_1} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace 𝕜 E] →\\n          {H : Type u_3} →\\n            [inst_3 : TopologicalSpace H] →\\n              (I : ModelWithCorners 𝕜 E H) →\\n                {M : Type u_4}\", \"doc\": \"The topology on the tangent space $ T_xM $ at a point $ x $ of a charted space $ M $ modeled on a normed vector space $ E $, induced by the normed vector space structure of $ E $ through the model wit\"}\n  {\"name\": \"FiniteDimensional.proper_real\", \"module\": \"Mathlib.Analysis.Normed.Module.FiniteDimension\", \"type\": \"(E : Type u) [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] : ProperSpace E\", \"doc\": \"Every finite-dimensional real normed vector space is a proper space, meaning that every closed ball in the space is compact.\"}\n  {\"name\": \"instInhabitedTangentSpace\", \"module\": \"Mathlib.Geometry.Manifold.IsManifold.Basic\", \"type\": \": Inhabited (TangentSpace I x)\", \"doc\": \"The tangent space at a point $ x $ on a manifold modeled on a normed vector space $ E $ is inhabited by the zero vector.\"}\n  {\"name\": \"TangentSpace.vectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Tangent\", \"type\": \": VectorBundle 𝕜 E (TangentSpace I : M → Type _)\", \"doc\": \"The tangent space at each point of a manifold $ M $ modeled on a normed vector space $ E $ forms a vector bundle over $ M $, where each fiber is canonically isomorphic to $ E $. This structure is indu\"}\n  {\"name\": \"IsLocalRing.instModuleResidueFieldCotangentSpace\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \": Module (ResidueField R) (CotangentSpace R)\", \"doc\": \"For any commutative local ring $ R $, the cotangent space $ \\\\mathfrak{m}/\\\\mathfrak{m}^2 $ (where $ \\\\mathfrak{m} $ is the unique maximal ideal of $ R $) is equipped with a canonical module structure ov\"}\n",
+   "date": "2026-10-22",
+   "verdict": "No match: local ring cotangent spaces and formally smooth ring maps are not deformation spaces of proper algebraic spaces."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-nodal-curve-stack-smooth",
+  "date": "2026-10-22",
+  "group": "Q36"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D57 (lemma-curves-tangent-space), both clauses (finite type fields over Z and arbitrary fields).",
+   "via": [
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-curve-tangent-finiteness",
+  "worker": "stage1",
+  "summary": "Expanded the fully faithful curve inclusion and the proper-space cotangent Ext proof of Stacks 0D57/0D1K. Constructed the naive cotangent complex explicitly, exposed the deformation classification, coherent bounds, and proper Ext finiteness as statement-only prerequisites, and used the existing curve infinitesimal pushout to justify the vector subspace argument. Statement unchanged; no smoothness, reducedness, projectivity, or finite-type-over-Z hypothesis added.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof (3) alteration route uses nodal-curve moduli; the present item serves the tangent-finiteness prerequisite (Stacks 0D57) of lem-sfb-nodal-curve-stack-smooth, in the inherited blueprint.from.place. Steps 1,4,5 expand the ambient tangent calculation; steps 2,3,6 implement the fully faithful curve restriction."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-4f9cf9d51",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-4f9cf9d51 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item, all 6 steps, the 4 new nodes and every node they cite. I checked the sources at the cited places: quot.tex 0D57/0D1K, defos 0D17 (lemma-deform-spaces), spaces-perfect 0D0T (lemma-ext-finite: K in D^-_Coh, L in D^+_Coh, and the bound directions match), spaces-more-morphisms 0D0V/0D0Z, the spaces-morphisms locally-Noetherian lemma, and sites-modules 08TW (canonical presentation). The new naive-cotangent definition matches 08TW/0D0V. The deformation-Ext node is 0D17 for Spec K ⊂ Spec(K⊕M), using the trivial origin, with O_X⊗M as f^*C by flatness. Its linearity clause is standard and is what 0D1K uses implicitly. The coherence node follows from 0D0Z and the locally-Noetherian lemma. The Ext-finiteness node is 0D0T verbatim. No new node restates the item, and no duplicates turned up in a DAG search by tags and keywords. Step 3 really proves linearity: the existing lem-sfb-curve-infinitesimal-pushout applies (Spec K→D is a thickening, Spec K→D is affine, and the pushout ring is K[ε1,ε2]/(ε1,ε2)^2), and the flat node then gives compatibility with the operations. Step 4: K is Noetherian and finitely presented implies lfp. Step 5: A=K, n=0,1, X proper. Small cases checked: M=0, X=∅, X=Spec K, P^1. Batch-5 finding: all three flagged citations are of def-trf-algebraic-space, a general definition. Its closure of 127 nodes contains no trace-formula or Poincaré-duality theorem, and the item's base statement already cites it, so I accepted it. No SGA source, no tool_uses needed, the item is not dropped and has no repair note, and it is still unsplit on live and side-live. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveTangentFiniteness",
+  "declaration": "AlgebraicGeometry.ProperCurveFamily.finite_tangent_and_infinitesimalAut",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveTangentFiniteness.lean",
+  "statement": "theorem finite_tangent_and_infinitesimalAut {S : Scheme.{u}} (K : Type u) [Field K] (a : Spec (.of K) ⟶ S) (X : ProperCurveFamily (Over.mk a)) : ∃ (tadd : AddCommGroup (Tangent X)) (tmod : @Module K (Tangent X) _ tadd.toAddCommMonoid) (iadd : AddCommGroup (InfinitesimalAut X)) (imod : @Module K (InfinitesimalAut X) _ iadd.toAddCommMonoid), @FiniteDimensional K (Tangent X) _ tadd tmod ∧ @FiniteDimensional K (InfinitesimalAut X) _ iadd imod ∧ (∀ t : Tangent X, IsTangentZero X t ↔ t = tadd.zero) ∧ (∀ t s r : Tangent X, IsTangentAdd X t s r ↔ r = tadd.add t s) ∧ (∀ (c : K) (t s : Tangent X), IsTangentSMul X c t s ↔ s = tmod.smul c t) ∧ iadd.zero.val = Iso.refl _ ∧ (∀ α β : InfinitesimalAut X, (iadd.add α β).val.hom = α.val.hom ≫ β.val.hom) ∧ (∀ (c : K) (α β : InfinitesimalAut X), IsInfinitesimalAutSMul X c α β ↔ β = imod.smul c α)",
+  "branch": "sheaf-dag",
+  "by": "Q140",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a998129b4",
+  "group": "Q140",
+  "result": "pass",
+  "note": "Third delivery: both Lean modules and both node JSONs are byte-identical to the twice-PASSed heads 8b9b7ed9/2346c11d; only a report self-check section was added. The earlier landing refusals were reachability states of the base (they list other groups' nodes); the item is now reached from a target on live and side-live, and the new node is in its stmt_deps. Clause by clause against 0D57/artin: arbitrary S ⊇ Spec Z, any field, the landed ProperCurveFamily (flat/proper/fp/fibre dim ≤ 1); Tangent = Quot of marked deformations over the dual numbers by iso over base + marking; InfinitesimalAut = artin kernel (fixes reduction and D-projection, not X-projection). Zero/scalar (ε↦cε, c=0 ok)/add (via D_{K×K}; i≫b=j checked at ring level; RS 0D56 gives →) and Inf refl/composition/σ_c^*α are pinned by iffs; FiniteDimensional is on the pinned structures; no extra hypotheses; universe u, carriers u+1. Statement fields verbatim; stmt_deps resolve; no sorry in defs; docstrings and the 6 proof steps present. ArtinCriterion.MarkedDeformation on side-live is a theorem-node BasedCategory helper, not an H4 duplicate (maintainer note: nodal-curve-stack-smooth needs a bridge in stage 3). Not recompiled (no change)."
+ }
+}

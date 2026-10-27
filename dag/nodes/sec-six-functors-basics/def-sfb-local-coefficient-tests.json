@@ -1,0 +1,130 @@
+{
+ "id": "def-sfb-local-coefficient-tests",
+ "kind": "definition",
+ "title": "Local Euclidean coefficient test spaces",
+ "statement": "Over $\\mathbf R$ [def-weil-field], let $m,q\\geq0$ be integers and $V\\subseteq\\mathbf R^m$ open. Define $\\mathscr D(V,\\mathbf R^q)$ to be the real vector space of smooth functions $f:\\mathbf R^m\\to\\mathbf R^q$ whose support $\\overline{\\{z:f(z)\\ne0\\}}$ is a compact subset of $V$. For each compact $K\\subseteq V$, its fixed-support space $\\mathscr D_K$ consists of the smooth functions zero outside $K$, with the topology induced by the maps $f\\mapsto D^j f$ into bounded continuous $j$-multilinear-map-valued functions with their supremum norm, for $j\\geq0$. Equip $\\mathscr D(V,\\mathbf R^q)$ with the finest locally convex real vector-space topology making every inclusion $\\mathscr D_K\\to\\mathscr D(V,\\mathbf R^q)$ continuous. Here locally convex means that zero has a basis of convex neighborhoods. These are coefficient tests; their density and bundle interpretation requires a specified chart and frame.",
+ "source": {
+  "document": "Mathlib/Analysis/Distribution/TestFunction.lean",
+  "place": "specializes in one line per clause: TestFunction V (EuclideanSpace ℝ (Fin q)) ⊤, lines 67–75, and TestFunction.topologicalSpace, lines 266–278. Fixed-support functions are ContDiffMapSupportedIn, Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean:97–103; its induced topology is at 525–526, with derivative structureMapLM at 489–491 and its smooth-case formula at 505–507. This describes the actual iterated-Frechet-derivative topology, without asserting a separate topology-comparison theorem."
+ },
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported smooth vector valued test functions on an open Euclidean set with locally convex inductive limit topology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TestFunction\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{E : Type u_3} →\\n  [inst : NormedAddCommGroup E] →\\n    [NormedSpace ℝ E] →\\n      TopologicalSpace.Opens E →\\n        (F : Type u_4) → [inst : NormedAddCommGroup F] → [NormedSpace ℝ F] → ℕ∞ → Type (max u_3 u_4)\", \"doc\": \"An inductive type parameterized by normed additive commutative groups $E$ and $F$ over $\\\\mathbb{R}$, an open subset of $E$, and an extended natural number $\\\\mathbb{N}^\\\\top$. It represents a family of \"}\n  {\"name\": \"TestFunction.originalTop\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{E : Type u_3} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : NormedSpace ℝ E] →\\n      (Ω : TopologicalSpace.Opens E) →\\n        (F : Type u_4) →\\n          [inst_2 : NormedAddCommGroup F] →\\n            [inst_3 : NormedSpace ℝ F] → (n : ℕ∞) → TopologicalSpace (TestFunction Ω F n)\", \"doc\": \"The topology on the space of test functions $ \\\\mathcal{D}^n(\\\\Omega, F) $ is defined as the inductive limit (final topology) over all compact subsets $ K \\\\subseteq \\\\Omega $. For each compact $ K $, the\"}\n  {\"name\": \"TestFunction.toTestFunctionClass\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{E : Type u_3} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : NormedSpace ℝ E] →\\n      {Ω : TopologicalSpace.Opens E} →\\n        {F : Type u_4} →\\n          [inst_2 : NormedAddCommGroup F] →\\n            [inst_3 : NormedSpace ℝ F] → {n : ℕ∞} → TestFunctionClass (TestFunction Ω F n) Ω F n\", \"doc\": \"For normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, an open subset $\\\\Omega \\\\subseteq E$, and an extended natural number $n \\\\in \\\\mathbb{N}^\\\\top$, the space of test functions $\\\\mathcal{D}^n(\\\\Omega, \"}\n  {\"name\": \"TestFunctionClass\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"Type u_6 →\\n  {E : outParam (Type u_7)} →\\n    [inst : NormedAddCommGroup E] →\\n      [NormedSpace ℝ E] →\\n        outParam (TopologicalSpace.Opens E) →\\n          (F : outParam (Type u_8)) →\\n            [inst : NormedAddCommGroup F] → [NormedSpace ℝ F] → outParam ℕ∞ → Type (max (max u_6 u_7) u_8)\", \"doc\": \"An inductive type defining a class of functions between normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, parameterized by open subsets of $E$, a degree of differentiability $k \\\\in \\\\mathbb{N}^\\\\top$,\"}\n  {\"name\": \"TestFunction.topologicalSpace\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{E : Type u_3} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : NormedSpace ℝ E] →\\n      (Ω : TopologicalSpace.Opens E) →\\n        (F : Type u_4) →\\n          [inst_2 : NormedAddCommGroup F] →\\n            [inst_3 : NormedSpace ℝ F] → (n : ℕ∞) → TopologicalSpace (TestFunction Ω F n)\", \"doc\": \"The space of $ C^n $-smooth test functions with compact support in an open subset $ \\\\Omega \\\\subseteq E $ is equipped with the coarsest topology that is finer than the inductive limit topology over com\"}\n  {\"name\": \"TestFunction.ofSupportedInLM\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"(𝕜 : Type u_1) →\\n  [inst : NontriviallyNormedField 𝕜] →\\n    {E : Type u_3} →\\n      [inst_1 : NormedAddCommGroup E] →\\n        [inst_2 : NormedSpace ℝ E] →\\n          {Ω : TopologicalSpace.Opens E} →\\n            {F : Type u_4} →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [inst_4 : \", \"doc\": \"Given a compact subset $ K $ contained in an open subset $ \\\\Omega \\\\subseteq E $, this linear map embeds the space $ \\\\mathcal{D}^n_K(E, F) $ of $ C^n $-smooth test functions with support in $ K $ into \"}\n  {\"name\": \"TestFunction.instLocallyConvexSpaceReal\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"∀ {E : Type u_3} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4}\\n  [inst_2 : NormedAddCommGroup F] [inst_3 : NormedSpace ℝ F] {n : ℕ∞}, LocallyConvexSpace ℝ (TestFunction Ω F n)\", \"doc\": \"The space of $ C^n $-smooth test functions with compact support in an open subset $ \\\\Omega \\\\subseteq E $, taking values in a normed vector space $ F $ over $ \\\\mathbb{R} $, is equipped with a locally c\"}\n  {\"name\": \"TestFunction.ofSupportedIn\", \"module\": \"Mathlib/Analysis/Distribution/TestFunction\", \"type\": \"{E : Type u_3} →\\n  [inst : NormedAddCommGroup E] →\\n    [inst_1 : NormedSpace ℝ E] →\\n      {Ω : TopologicalSpace.Opens E} →\\n        {F : Type u_4} →\\n          [inst_2 : NormedAddCommGroup F] →\\n            [inst_3 : NormedSpace ℝ F] →\\n              {n : ℕ∞} →\\n                {K : TopologicalSpace.Comp\", \"doc\": \"Given a compact subset $ K $ of an open set $ \\\\Omega \\\\subseteq E $ and a $ C^n $-differentiable function $ f : E \\\\to F $ with support contained in $ K $, this constructor produces a test function on $\"}",
+   "date": "2026-10-24",
+   "verdict": "match: TestFunction and its LF topology, with the existing fixed-support smooth function topology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Test functions with topology final among locally convex spaces over fixed compact support smooth functions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TestFunction.originalTop\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \": TopologicalSpace 𝓓^{n}(Ω, F)\", \"doc\": \"The topology on the space of test functions $ \\\\mathcal{D}^n(\\\\Omega, F) $ is defined as the inductive limit (final topology) over all compact subsets $ K \\\\subseteq \\\\Omega $. For each compact $ K $, the\"}\n  {\"name\": \"TestFunction.instLocallyConvexSpaceReal\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \": LocallyConvexSpace ℝ 𝓓^{n}(Ω, F)\", \"doc\": \"The space of $ C^n $-smooth test functions with compact support in an open subset $ \\\\Omega \\\\subseteq E $, taking values in a normed vector space $ F $ over $ \\\\mathbb{R} $, is equipped with a locally c\"}\n  {\"name\": \"TestFunction.topologicalSpace\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \": TopologicalSpace 𝓓^{n}(Ω, F)\", \"doc\": \"The space of $ C^n $-smooth test functions with compact support in an open subset $ \\\\Omega \\\\subseteq E $ is equipped with the coarsest topology that is finer than the inductive limit topology over com\"}\n  {\"name\": \"TestFunction.ofSupportedIn\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \"{K : Compacts E} (K_sub_Ω : (K : Set E) ⊆ Ω) (f : 𝓓^{n}_{K}(E, F)) : 𝓓^{n}(Ω, F)\", \"doc\": \"Given a compact subset $ K $ of an open set $ \\\\Omega \\\\subseteq E $ and a $ C^n $-differentiable function $ f : E \\\\to F $ with support contained in $ K $, this constructor produces a test function on $\"}\n  {\"name\": \"TestFunctionClass.mk\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \"{B : Type u_6} →\\n  {E : outParam (Type u_7)} →\\n    [inst : NormedAddCommGroup E] →\\n      [inst_1 : NormedSpace ℝ E] →\\n        {Ω : outParam (TopologicalSpace.Opens E)} →\\n          {F : outParam (Type u_8)} →\\n            [inst_2 : NormedAddCommGroup F] →\\n              [inst_3 : NormedSpace ℝ F] →\\n   \", \"doc\": \"The constructor TestFunctionClass.mk defines a class of functions $ B $ from a normed vector space $ E $ to another normed vector space $ F $ over $ \\\\mathbb{R} $, parameterized by an open subset $ \\\\Om\"}\n  {\"name\": \"TestFunction.coe_mk\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \"{f : E → F} {contDiff : ContDiff ℝ n f} {hasCompactSupport : HasCompactSupport f} {tsupport_subset : tsupport f ⊆ Ω} :\\n  TestFunction.mk f contDiff hasCompactSupport tsupport_subset = f\", \"doc\": \"For normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, an open subset $\\\\Omega \\\\subseteq E$, and an extended natural number $n \\\\in \\\\mathbb{N}^\\\\top$, if a function $f : E \\\\to F$ is $C^n$-smooth, has co\"}\n  {\"name\": \"TestFunction.toTestFunctionClass\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \": TestFunctionClass 𝓓^{n}(Ω, F) Ω F n\", \"doc\": \"For normed vector spaces $E$ and $F$ over $\\\\mathbb{R}$, an open subset $\\\\Omega \\\\subseteq E$, and an extended natural number $n \\\\in \\\\mathbb{N}^\\\\top$, the space of test functions $\\\\mathcal{D}^n(\\\\Omega, \"}\n  {\"name\": \"ContDiffMapSupportedIn.locallyConvexSpace\", \"module\": \"Mathlib.Analysis.Distribution.ContDiffMapSupportedIn\", \"type\": \": LocallyConvexSpace ℝ 𝓓^{n}_{K}(E, F)\", \"doc\": \"The space of continuously differentiable maps of class $ C^n $ from normed vector spaces $ E $ to $ F $ over $ \\\\mathbb{R} $, with support contained in a compact set $ K \\\\subseteq E $, forms a locally \"}",
+   "date": "2026-10-24",
+   "verdict": "match: TestFunction and its LF topology, with the existing fixed-support smooth function topology."
+  },
+  {
+   "tool": "loogle",
+   "query": "TestFunction",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TestFunction\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] (Ω : TopologicalSpace.Opens E) (F : Type u_4) [NormedAddCommGroup F] [NormedSpace ℝ F] (n : ℕ∞) : Type (max u_3 u_4)\", \"doc\": \"The type of bundled `n`-times continuously differentiable maps with compact support\"}\n  {\"name\": \"TestFunction.instAdd\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : Add (TestFunction Ω F n)\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.instAddCommGroup\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : AddCommGroup (TestFunction Ω F n)\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.instNeg\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : Neg (TestFunction Ω F n)\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.instSub\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : Sub (TestFunction Ω F n)\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.instZero\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : Zero (TestFunction Ω F n)\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.originalTop\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] (Ω : TopologicalSpace.Opens E) (F : Type u_4) [NormedAddCommGroup F] [NormedSpace ℝ F] (n : ℕ∞) : TopologicalSpace (TestFunction Ω F n)\", \"doc\": \"The \\\"original topology\\\" on `𝓓^{n}(Ω, F)`, defined as the supremum over all compacts `K ⊆ Ω` of\\nthe topology on `𝓓^{n}_{K}(E, F)`. In other words, this topology makes `𝓓^{n}(Ω, F)` the inductive\\nlimit \"}\n  {\"name\": \"TestFunction.topologicalSpace\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] (Ω : TopologicalSpace.Opens E) (F : Type u_4) [NormedAddCommGroup F] [NormedSpace ℝ F] (n : ℕ∞) : TopologicalSpace (TestFunction Ω F n)\", \"doc\": \"The canonical LF topology on `𝓓^{n}(Ω, F)`. This makes `𝓓^{n}(Ω, F)` the inductive\\nlimit of the `𝓓^{n}_{K}(E, F)`s **in the category of locally convex topological vector spaces**\\n(over ℝ). See `TestFu\"}\n  {\"name\": \"TestFunction.uniformSpace\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : UniformSpace (TestFunction Ω F n)\", \"doc\": \"\"}\n  {\"name\": \"TestFunction.toFun\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} (self : TestFunction Ω F n) : E → F\", \"doc\": \"The underlying function. Use coercion instead.\"}\n  {\"name\": \"TestFunction.Simps.coe\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} (f : TestFunction Ω F n) : E → F\", \"doc\": \"See note [custom simps projection].\"}\n  {\"name\": \"TestFunction.instFunLike\", \"module\": \"Mathlib.Analysis.Distribution.TestFunction\", \"type\": \" {E : Type u_3} [NormedAddCommGroup E] [NormedSpace ℝ E] {Ω : TopologicalSpace.Opens E} {F : Type u_4} [NormedAddCommGroup F] [NormedSpace ℝ F] {n : ℕ∞} : FunLike (TestFunction Ω F n) E F\", \"doc\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "match: TestFunction and its LF topology, with the existing fixed-support smooth function topology."
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalSpace|locallyConvex|continuous_iff_continuous_comp",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"32\", \"line\": \"- `TestFunction.topologicalSpace`\", \"text\": \" the canonical LF topology on `𝓓^{n}(Ω, F)`. It is the\"}\n  {\"file\": \"37\", \"line\": \"- `TestFunction.continuous_iff_continuous_comp`\", \"text\": \" a linear map from `𝓓^{n}(E, F)`\"}\n  {\"file\": \"56\", \"line\": \"open Function Seminorm SeminormFamily Set TopologicalSpace UniformSpace\", \"text\": \"\"}\n  {\"file\": \"249\", \"line\": \"variable {V \", \"text\": \" Type*} [AddCommGroup V] [Module ℝ V] [t : TopologicalSpace V]\"}\n  {\"file\": \"250\", \"line\": \"  [IsTopologicalAddGroup V] [ContinuousSMul ℝ V] [LocallyConvexSpace ℝ V]\", \"text\": \"\"}",
+   "date": "2026-10-24",
+   "verdict": "match: TestFunction and its LF topology, with the existing fixed-support smooth function topology."
+  },
+  {
+   "tool": "grep",
+   "query": "structure ContDiffMapSupportedIn|instance topologicalSpace|def seminorm",
+   "results": "{\"t\": \"2026-10-24T04:19:15Z\", \"tool\": \"grep\", \"query\": \"structure ContDiffMapSupportedIn|instance topologicalSpace|def seminorm\", \"sub\": \"Analysis/Distribution/\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean\", \"Mathlib/Analysis/Distribution/TestFunction.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\", \"Mathlib/Analysis/Distribution/SchwartzSpace/Basic.lean\"], \"digest\": \"158109e394fe83b5\"}",
+   "date": "2026-10-24",
+   "verdict": "match: TestFunction and its LF topology, with the existing fixed-support smooth function topology."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "TestFunction, TestFunction.topologicalSpace, ContDiffMapSupportedIn, ContDiffMapSupportedIn.topologicalSpace",
+  "file": "Mathlib/Analysis/Distribution/TestFunction.lean",
+  "line": 67,
+  "how": "specializes in one line per clause: TestFunction V (EuclideanSpace ℝ (Fin q)) ⊤, lines 67–75, and TestFunction.topologicalSpace, lines 266–278. Fixed-support functions are ContDiffMapSupportedIn, Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean:97–103; its induced topology is at 525–526, with derivative structureMapLM at 489–491 and its smooth-case formula at 505–507. This describes the actual iterated-Frechet-derivative topology, without asserting a separate topology-comparison theorem."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "def-sfb-smooth-bundle-test-distributions",
+  "date": "2026-10-24",
+  "group": "NY"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero branch of Milne 22.51: apply Kodaira to M_(lambda+2rho). Supporting injectivity argument for Kodaira: Popa Theorem 1.6.6 used in the proof of Theorem 1.6.1. Supporting input: Popa Theorem 1.6.6 proof: Hodge-theory vanishing of the differential on structure-sheaf cohomology of the smooth projective root cover. Supporting input: Harmonic representatives on complex projective manifolds. Supporting analytic input: the decomposition of all forms underlying the representative assertion Analytic prerequisite: Kong Theorem 6.5(4), the general real elliptic-operator decomposition used on the realified type bundle. Supporting input: WANTED locally; Demailly, Complex Analytic and Differential Geometry, June 21, 2012, VI §2, Gårding inequality (2.3) and Sobolev lemma (2.1), printed p.289; smooth-right-hand-side consequence for bundle-valued systems; read online https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf Further analytic input: VI §2, weak Gårding inequality (2.3), printed p.289 (PDF page 289), finite-order regularity and norm estimate for an operator on one bundle. Parametrix proof of the finite-order weak estimate: Symbol classes and real bundle pseudodifferential operators. Underlying notion: distributional bundle sections and their test-density pairing, used before local symbol quantization. Supporting input: compactly supported coefficient tests on a chart, including their LF topology",
+   "via": [
+    "def-sfb-smooth-bundle-test-distributions",
+    "def-sfb-symbol-pseudodifferential-operators",
+    "lem-sfb-weak-garding-sobolev-estimate",
+    "lem-sfb-elliptic-adjoint-regularity",
+    "lem-sfb-elliptic-smooth-fredholm-decomposition",
+    "lem-sfb-hermitian-dolbeault-orthogonal-decomposition",
+    "lem-sfb-projective-harmonic-representatives",
+    "lem-sfb-hodge-first-differential-zero",
+    "lem-sfb-kollar-smooth-divisor-injectivity",
+    "lem-sfb-kodaira-vanishing",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Mathlib.Analysis.Distribution.TestFunction",
+  "declaration": "TestFunction",
+  "statement": "structure TestFunction : Type _",
+  "branch": "mathlib",
+  "by": "NS",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "Exact existing TestFunction Ω (EuclideanSpace ℝ (Fin q)) ⊤ with its locally convex inductive-limit topology. The support is tsupport and compactly contained in Ω, including empty Ω and q = 0.",
+  "declarations": [
+   "TestFunction",
+   "TestFunction.topologicalSpace"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1e3c19af7",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery of e8af (RETURN H4+H9). H4 fixed: helper def-sfb-metric-bundle-sobolev-data now imports and cites NO's landed def-sfb-bundle-sobolev-space and keeps only l2Pairing/sobolevPairing/classPairing/Tests/testPairing/testDensity/IsDistribution/HilbertCompletion, with no name clash in side-live lean/Sheaf; the dependency landed 13:18 CST, before base 47f81f2. H9 fixed: HilbertCompletion.scalar removed, so the Module instance comes only from InnerProductSpace. Clause check: L as completion of q0 with an injective dense map; e : L.Space ≃ shared L2, fixed on smooth sections, preserving inner product and norm (hence canonical); IsDistribution with testDensity ⟨e v, φ(c x)⟩/√det G is the correct Jacobian/frame rule, and L2 → families is injective; ∀P Localization: H completion of sobolevPairing (α=0 included); j bounded, injective, extends the identity; image ↔ shared MemSobolev s; ∀Q: two-sided norm bounds and MemSobolev ↔ localized HasWeakDerivatives on ⊤ (compact support makes local L² global L²); IsCompactOperator and the sequence form; s≥1, m≥1. Edge cases: empty N, r=0, α=0, independent universes u,v. lean.statement verbatim for item and helper; the 4 Mathlib binding records (IsManifold/ContMDiffVectorBundle/ContMDiffSection/TestFunction) match Mathlib and do not conflict with live; item statement, proof and proof_deps unchanged; only sorry; docstrings carry source, blueprint tag and the 6 steps; proof-only import exists on live. Advisory: ∀P ranges over the shared oriented Localization with atlas trivializations; it is nonempty via h_oriented. No compile (no FIX)."
+ }
+}

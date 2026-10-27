@@ -23,12 +23,26 @@ Source: Stacks Project, algebraization.tex, Tags 099E and 099F
 -/
 
 @[expose] public section
+set_option linter.privateModule false
 
 universe u w
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace CategoryTheory
+
+private theorem compose_three_squares {D : Type*} [Category D]
+    {A₁ A₂ B₁ B₂ C₁ C₂ D₁ D₂ : D}
+    {f : A₁ ⟶ A₂} {g : B₁ ⟶ B₂} {h : C₁ ⟶ C₂} {k : D₁ ⟶ D₂}
+    {a : A₁ ⟶ B₁} {a' : A₂ ⟶ B₂} {b : B₁ ⟶ C₁} {b' : B₂ ⟶ C₂}
+    {c : C₁ ⟶ D₁} {c' : C₂ ⟶ D₂}
+    (ha : f ≫ a' = a ≫ g) (hb : g ≫ b' = b ≫ h) (hc : h ≫ c' = c ≫ k) :
+    f ≫ (a' ≫ b' ≫ c') = (a ≫ b ≫ c) ≫ k := by
+  calc
+    _ = (f ≫ a') ≫ b' ≫ c' := by simp only [Category.assoc]
+    _ = a ≫ (g ≫ b') ≫ c' := by rw [ha]; simp only [Category.assoc]
+    _ = a ≫ b ≫ (h ≫ c') := by rw [hb]; simp only [Category.assoc]
+    _ = _ := by rw [hc]; simp only [Category.assoc]
 
 set_option maxHeartbeats 1200000 in
 -- Descending evaluation compares several expanded product-localization functors.
@@ -104,12 +118,7 @@ theorem completion_unit_natural
               Q.map ((homComplexFunctor (R := O)).obj
                 (Opposite.op (ringedSiteRingComplex O)) |>.map (I.map f)) := by
           simpa only [← Q.map_comp] using congrArg Q.map ha
-        rw [← Category.assoc, hη']
-        simp only [Category.assoc]
-        rw [← Category.assoc (Q.map (I.map f)), ha']
-        simp only [Category.assoc]
-        rw [hc]
-        rfl }
+        exact compose_three_squares hη' ha' hc }
   let W := HomologicalComplex.quasiIso A (ComplexShape.up ℤ)
   let full := Localization.fullyFaithfulWhiskeringLeft Q W (DerivedCategory A)
   let d : 𝟭 (DerivedCategory A) ⟶ F := full.preimage t

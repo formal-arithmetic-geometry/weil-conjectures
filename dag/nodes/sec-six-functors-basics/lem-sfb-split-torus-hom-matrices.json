@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-split-torus-hom-matrices",
+ "kind": "statement",
+ "title": "Homomorphisms of split tori are Laurent monomials with integer exponents",
+ "statement": "Let $k$ be a field [def-weil-field] and let $r,s\\geq0$ be integers. Let $T_r=\\mathbf G_m^r$ and $T_s=\\mathbf G_m^s$ be products of the multiplicative group scheme [def-sc-gm-ga, def-sc-group-scheme], with $T_0=\\operatorname{Spec}k$ the trivial group. Then there is an isomorphism of abelian groups\n$$\\mathbf Z^{\\{1,\\ldots,s\\}\\times\\{1,\\ldots,r\\}}\\xrightarrow{\\sim}\\operatorname{Hom}_{k\\text{-grp}}(T_r,T_s),\\qquad (m_{ji})\\longmapsto\\left((x_i)_i\\longmapsto\\left(\\prod_{i=1}^r x_i^{m_{ji}}\\right)_{j=1}^s\\right).$$\nThe source has entrywise addition, the target has pointwise multiplication, and the formula holds on $U$-points for every $k$-scheme $U$, with $x_i\\in\\Gamma(U,\\mathcal O_U)^\\times$. The empty product is $1$.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 12.9(a), printed pp.233–234, fully faithful character anti-equivalence; D(Z)=G_m and finite direct sums carried to products."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-gm-ga",
+  "def-sc-group-scheme",
+  "def-sfb-tori-multiplicative-type"
+ ],
+ "proof": [
+  {
+   "text": "Put $L_n=\\mathbf Z^n$ with its standard basis $b_i$ and $A_n=k[L_n]=\\bigoplus_{v\\in L_n}ke^v$, $e^ve^w=e^{v+w}$. By [def-sc-gm-ga], $\\mathbf G_m=\\operatorname{Spec}k[t,t^{-1}]$ with $m^*(t)=t\\otimes t$, $\\varepsilon(t)=1$, $i^*(t)=t^{-1}$; the monomials $t^m$, $m\\in\\mathbf Z$, form a $k$-basis [def-weil-laurent-polynomial-ring], so $t^m\\mapsto e^m$ identifies $k[t,t^{-1}]$ with $A_1$ and these maps with $\\Delta(e^m)=e^m\\otimes e^m$, $\\varepsilon(e^m)=1$, $S(e^m)=e^{-m}$. Applying [lem-weil-pbc-fibre-product-affine-spectra] $n-1$ times gives $T_n\\cong\\operatorname{Spec}(A_1^{\\otimes n})$, and the map $A_1^{\\otimes n}\\to A_n$, $e^{v_1}\\otimes\\cdots\\otimes e^{v_n}\\mapsto e^{(v_1,\\ldots,v_n)}$, of [lem-weil-pbc-algebra-tensor-pushout-universal-property] (2) is a $k$-algebra isomorphism, since it sends the tensor basis bijectively onto the basis $(e^v)_v$. The product group law is componentwise, so $T_n=\\operatorname{Spec}A_n$ with $\\Delta(e^v)=e^v\\otimes e^v$, $\\varepsilon(e^v)=1$, $S(e^v)=e^{-v}$ and $e^{(v_i)}$ the function $\\prod_ix_i^{v_i}$; for $n=0$ this is $\\operatorname{Spec}k$. By [def-weil-affine-spectrum], a $k$-group morphism $f:T_r\\to T_s$ gives a $k$-algebra map $f^*:A_s\\to A_r$. The multiplication diagram of [def-sc-group-scheme], read using [lem-weil-pbc-fibre-product-affine-spectra], gives $\\Delta_r f^*=(f^*\\otimes f^*)\\Delta_s$; preservation of the identity gives $\\varepsilon_r f^*=\\varepsilon_s$. Here the tensor map sends $a\\otimes b$ to $f^*(a)\\otimes f^*(b)$ by the tensor universal property. Thus each $a_j=f^*(e^{b_j})$ satisfies $\\Delta_r(a_j)=a_j\\otimes a_j$ and $\\varepsilon_r(a_j)=1$.",
+   "uses": [
+    "def-sc-gm-ga",
+    "def-weil-laurent-polynomial-ring",
+    "def-weil-affine-spectrum",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), proof of full faithfulness, with Proposition 12.3 and Remark 12.6; affine products are Stacks Tag 01I4, lemma-fibre-product-affine-schemes."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-group-algebra-group-like-basis] to $M=L_r$ and each $a_j$. It yields $a_j=e^{v_j}$ with $v_j=(m_{j1},\\ldots,m_{jr})\\in\\mathbf Z^r$. These exponents are unique: if $e^v=e^w$ with $v\\ne w$, their coefficients at $v$ would be respectively $1$ and $0$, impossible over a field. Since $f^*$ preserves multiplication and inverses, it sends $e^{\\sum_j n_jb_j}$ to $e^{\\sum_j n_jv_j}$ for every integer tuple $(n_j)$. By $k$-linearity its value on every finite sum is determined. Thus $f$ determines a unique matrix $(m_{ji})$.",
+   "uses": [
+    "lem-sfb-group-algebra-group-like-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Lemma 12.4 and Remark 12.6, printed p.232; Theorem 12.9(a), printed p.233."
+   }
+  },
+  {
+   "text": "Conversely, given $(m_{ji})$, set $v_j=(m_{ji})_i$ and $h:\\mathbf Z^s\\to\\mathbf Z^r$, $h(n)=\\sum_j n_jv_j$. Define $F:A_s\\to A_r$ by $F(\\sum_n c_ne^n)=\\sum_n c_ne^{h(n)}$. The equations $h(n+n')=h(n)+h(n')$ and $h(0)=0$ show directly, by distributing finite sums, that $F$ is a unital $k$-algebra map. On each $e^n$ the equations $\\Delta_rF=(F\\otimes F)\\Delta_s$, $\\varepsilon_rF=\\varepsilon_s$ and $S_rF=FS_s$ read respectively $e^{h(n)}\\otimes e^{h(n)}=e^{h(n)}\\otimes e^{h(n)}$, $1=1$ and $e^{-h(n)}=e^{h(-n)}$; extend by linearity. The cited affine product and spectrum identifications therefore make $\\operatorname{Spec}F:T_r\\to T_s$ a group morphism. Its images of the coordinate generators are $e^{v_j}$. Step 2 and uniqueness of ring maps in [def-weil-affine-spectrum] prove that the two constructions are inverse.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-sc-group-scheme",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), construction of the fully faithful map (76); Remark 12.6 for the finite-sum coordinate calculation."
+   }
+  },
+  {
+   "text": "Let $U$ be any $k$-scheme and put $R=\\Gamma(U,\\mathcal O_U)$. The natural affine-target bijection [lem-a1-locally-ringed-space-affine-adjunction] identifies a $U$-point of $T_r$ with a $k$-algebra map $\\theta:A_r\\to R$. Such a map is uniquely specified by units $x_i=\\theta(e^{b_i})$: its value on $e^v$ is $\\prod_i x_i^{v_i}$, and conversely this formula extended to finite sums is a unital algebra map. Pullback along $f$ is composition $\\theta\\circ f^*$, so its $j$th unit is $\\theta(e^{v_j})=\\prod_i x_i^{m_{ji}}$. This proves the asserted formula for all $U$, including nonaffine and nonreduced $U$; naturality follows because restriction of sections commutes with products and inverses.",
+   "uses": [
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 12.3, functor D(M)(R)=Hom(M,R^times); Lemma 12.4, evaluation character; extension to arbitrary U by Stacks Tag 01I1, lemma-morphism-into-affine."
+   }
+  },
+  {
+   "text": "For matrices $M,N$ the product of the resulting maps has $j$th coordinate $\\prod_i x_i^{m_{ji}}\\prod_i x_i^{n_{ji}}=\\prod_i x_i^{m_{ji}+n_{ji}}$, since $R^\\times$ is abelian. Thus it is the map of $M+N$ (equality also follows on the universal point $U=T_r$), the zero matrix gives the identity-valued map, and $-M$ gives pointwise inverse. The bijection is an isomorphism of abelian groups. If $s=0$ there are no rows and only the map to the trivial group. If $r=0$, every row is the sole vector of $\\mathbf Z^0$ and its coordinate is the empty product $1$, giving only the identity section of $T_s$. These also cover $r=s=0$ and the empty test scheme.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 12.9(a), isomorphism (76), restricted to free groups; empty direct sums/products in Proposition 12.3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "def-sc-group-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-sfb-group-algebra-group-like-basis",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-sc-gm-ga",
+  "def-weil-laurent-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 12.3, Lemma 12.4, Remark 12.6 and Theorem 12.9(a), printed pp.231–234; explicit finite-free-coordinate specialization, with arbitrary-scheme points via Stacks Tag 01I1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms of split algebraic tori over a field are integer matrices given by Laurent monomials",
+   "results": "{\"t\": \"2026-10-23T09:42:34Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms of split algebraic tori over a field are integer matrices given by Laurent monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.embeddingsMatrixReindex\", \"Algebra.embeddingsMatrix\", \"NumberField.mixedEmbedding.matrixToStdBasis\", \"ModularGroup.coeHom\", \"Algebra.embeddingsMatrix_apply\", \"NumberField.mixedEmbedding.stdBasis_repr_eq_matrixToStdBasis_mul\", \"NumberField.basisMatrix\", \"RootPairing.Base.algebraMap_cartanMatrixIn_apply\"], \"digest\": \"7b2f0d105595abb8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "{\"t\": \"2026-10-23T09:43:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "\\btorus\\b|\\btori\\b|AbelianVariety|abelian.variety|diagonalizable",
+   "results": "{\"t\": \"2026-10-23T09:44:54Z\", \"tool\": \"grep\", \"query\": \"\\\\btorus\\\\b|\\\\btori\\\\b|AbelianVariety|abelian.variety|diagonalizable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Dynamics/Circle/RotationNumber/TranslationNumber.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/LinearAlgebra/Eigenspace/Semisimple.lean\", \"Mathlib/Algebra/Module/Lattice.lean\", \"Mathlib/Analysis/InnerProductSpace/JointEigenspace.lean\", \"Mathlib/MeasureTheory/Integral/TorusIntegral.lean\"], \"digest\": \"066bf1747131698c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of powers of the multiplicative group scheme are classified by integer matrices",
+   "results": "{\"t\": \"2026-10-23T09:44:54Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms of powers of the multiplicative group scheme are classified by integer matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"zpowersHom_apply\", \"zpowGroupHom\", \"MulHom.mulHomClass\", \"powersMulHom\", \"MonoidHom.instIntPow\", \"zpowersMulHom\", \"CategoryTheory.Grp.Hom.hom_zpow\", \"MulHomClass\"], \"digest\": \"11bd7bdec7c6ca64\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The character functor on diagonalizable algebraic groups identifies maps of split tori with homomorphisms of free integer lattices",
+   "results": "{\"t\": \"2026-10-23T09:44:58Z\", \"tool\": \"leanfinder\", \"query\": \"The character functor on diagonalizable algebraic groups identifies maps of split tori with homomorphisms of free integer lattices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonalHomEquiv_apply\", \"Rep.diagonalHomEquiv\", \"Rep.diagonalHomEquiv_symm_apply\", \"CharacterModule.instLinearMapClassIntAddCircleRatOfNat\", \"CharacterModule\", \"CharacterModule.homEquiv_apply_apply\", \"CharacterModule.dual_apply\", \"MulChar.toUnitHom_eq\"], \"digest\": \"0f7f9cf9fd2c4b69\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned abstract characters, representations, analytic tori and scheme morphism definitions do not identify homomorphisms of these group schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homomorphisms of split multiplicative group schemes are integer matrices given by Laurent monomials",
+   "results": "{\"t\": \"2026-10-23T11:20:09Z\", \"tool\": \"leanfinder\", \"query\": \"Homomorphisms of split multiplicative group schemes are integer matrices given by Laurent monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModularGroup.coeHom\", \"Matrix.GeneralLinearGroup.upperRightHom\", \"Matrix.GeneralLinearGroup.upperRightHom_apply\", \"Matrix.SpecialLinearGroup.mapGL\", \"Matrix.SpecialLinearGroup.coe_matrix_coe\", \"Matrix.SpecialLinearGroup.mapGL_coe_matrix\", \"RootPairing.GeckConstruction.f\", \"Matrix.SpecialLinearGroup.map_apply_coe\"], \"digest\": \"69122b8cce093a84\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned matrix/group/lattice declarations or no scheme-theoretic torus result; none classifies these group-scheme morphisms. The group-algebra ingredient is a separate Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "splitTorus|SplitTorus|diagonalizable|diagonalisable|split torus|split tori",
+   "results": "{\"t\": \"2026-10-23T11:22:55Z\", \"tool\": \"grep\", \"query\": \"splitTorus|SplitTorus|diagonalizable|diagonalisable|split torus|split tori\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned matrix/group/lattice declarations or no scheme-theoretic torus result; none classifies these group-scheme morphisms. The group-algebra ingredient is a separate Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Homomorphisms of split algebraic tori as group schemes correspond to maps between finite free integer lattices",
+   "results": "{\"t\": \"2026-10-23T11:22:55Z\", \"tool\": \"leansearch\", \"query\": \"Homomorphisms of split algebraic tori as group schemes correspond to maps between finite free integer lattices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Lat.Hom\", \"AlgebraicGeometry.Scheme.Hom\", \"FreeAddGroup.map\", \"FreeAbelianGroup.map\", \"RootPairing.Hom.mk.noConfusion\", \"FreeAbelianGroup.liftMonoid\", \"Lat.ofHom\", \"Module.Finite.addMonoidHom\"], \"digest\": \"2bddfaa7eaac700a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned matrix/group/lattice declarations or no scheme-theoretic torus result; none classifies these group-scheme morphisms. The group-algebra ingredient is a separate Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"torus\"",
+   "results": "{\"t\": \"2026-10-23T11:22:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"torus\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: returned matrix/group/lattice declarations or no scheme-theoretic torus result; none classifies these group-scheme morphisms. The group-algebra ingredient is a separate Mathlib leaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semiabelian-hom-finite-free",
+  "date": "2026-10-23",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Scheme representability of the stable abelian-level normalization. Supporting input: freeness at normalized boundary branches. Deligne Lemma 3.5.1 applied to the closed-fibre curve only after the extended injection has forced trivial action on its Picard torsion. Supporting input in Deligne Lemma 3.5.1: the finite-rank integral endomorphism input for the torus and abelian quotient, retaining their extension. Supporting input: Homomorphisms of split tori are Laurent monomials with integer exponents.",
+   "via": [
+    "lem-sfb-semiabelian-hom-finite-free",
+    "lem-sfb-stable-picard-torsion-faithfulness",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-split-torus-hom-matrices",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Replaced the empty proof with the affine-coordinate argument for Milne 12.9(a): classify images of basis generators using a new Mathlib leaf for Milne 12.4, construct the inverse matrix map, compute arbitrary-scheme points and addition, and check zero ranks. Step 1 derives the Hopf coordinates of T_n directly from def-sc-gm-ga and the affine fibre product (reviewer FIX: the sec-trace-formula lattice-coordinate node is no longer cited, keeping the batch-5 closure off the trace-formula proof branch). Retained the null computed blueprint ancestor: the created.item chain ends at the missing Lean-module id Sheaf.SixFunctors.CtfStabilityDirectImages. The explicit place records the intended blueprint prerequisite.",
+  "blueprint": "Supporting integral Hom calculation along det-thm-sf-ctf-stability-direct-images (3), through the existing alteration/stable-level/Picard branch named in blueprint.from.place. Steps 1–3 give its split-torus Hom prerequisite, Steps 4–5 its functorial and additive normalization. No change to the unit or chapter route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-86eab9aa5",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-86eab9aa5 (reviewer sub-agent of L); spot-checked: The mathematics is correct. The item (Hom(G_m^r,G_m^s) ≅ Z^{s×r} as monomial maps on all U-points) matches Milne iAG Thm 12.9(a), pp.233–234, over an arbitrary field. I tested r=0, s=0, negative and zero exponents, and Frobenius over F_p; all check. The new Mathlib leaf lem-sfb-group-algebra-group-like-basis is Milne Lemma 12.4 (p.232) and exactly AddMonoidAlgebra.isGroupLikeElem_iff_mem_range_single_one (MonoidAlgebra.lean:235; a field gives IsDomain; the IsGroupLikeElem fields are the two equations). It is not a duplicate and does not restate a clause of the item. Steps 2–5 are correct: uniqueness by coefficients, an explicit inverse checked on the basis, U-points through lem-a1-locally-ringed-space-affine-adjunction for arbitrary locally ringed U (Stacks 01I1), and additivity in R^×. Batch-5 flag: the item newly cited lem-trf-lattice-torus-coordinates-action. That is a sec-trace-formula split node on the toric-resolution branch of the trace-formula proof, and its proof closure pulls monoscheme/fan nodes into batch 5. I did not accept it as a tool_use. FIX: Step 1 now derives T_n = Spec k[Z^n] and its Hopf maps directly from def-sc-gm-ga, def-weil-laurent-polynomial-ring (monomial basis), iterated lem-weil-pbc-fibre-product-affine-spectra and the tensor-basis isomorphism; the rest of the step is unchanged. The trf node is removed from the uses of Steps 1, 3 and 4 and from proof_deps, and def-sc-gm-ga and def-weil-laurent-polynomial-ring (both on base) are added. tool_uses is emptied. Statement and stmt_deps are unchanged. No SGA, and no duplicates found by rg -L over dag/nodes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.SplitTorusHomMatrices",
+  "declaration": "AlgebraicGeometry.MultiplicativeType.splitTorus_hom_matrices",
+  "declarations": [
+   "AlgebraicGeometry.MultiplicativeType.splitTorusProjection",
+   "AlgebraicGeometry.MultiplicativeType.splitTorusCoordinate",
+   "AlgebraicGeometry.MultiplicativeType.splitTorus_hom_matrices"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/SplitTorusHomMatrices.lean",
+  "statement": "theorem splitTorus_hom_matrices (k : Type u) [Field k] (r s : ℕ) : ∃ (p : ∀ (n : ℕ) (U : Over (Spec (.of k))), (U ⟶ (splitTorus k n).X) ≃* (Fin n → Γ(U.left, ⊤)ˣ)) (e : Matrix (Fin s) (Fin r) ℤ ≃ (splitTorus k r ⟶ splitTorus k s)), (∀ (n : ℕ) (U : Over (Spec (.of k))) (x : U ⟶ (splitTorus k n).X) (i : Fin n), ↑(p n U x i) = x.left.appTop (splitTorusCoordinate k n i)) ∧ (∀ (M : Matrix (Fin s) (Fin r) ℤ) (U : Over (Spec (.of k))) (x : U ⟶ (splitTorus k r).X) (j : Fin s), p s U (x ≫ (e M).hom.hom) j = ∏ i : Fin r, p r U x i ^ M j i) ∧ (∀ M N : Matrix (Fin s) (Fin r) ℤ, (e (M + N)).hom.hom = (e M).hom.hom * (e N).hom.hom)",
+  "branch": "sheaf-dag",
+  "by": "Q36",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the already landed product splitTorus; explicit coordinate projections normalize all U-point identifications. The equivalence plus its operation law is the asserted abelian-group isomorphism, with pointwise multiplication of underlying morphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53d837fcf",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Read the item node (only changes: lean record plus stmt_dep def-sfb-tori-multiplicative-type, the landed definition node owning splitTorus, no cycle), all 4 stmt_deps and the module. The Lean matches Milne 12.9(a) as stated in the node: field k, r,s : ℕ, recorded splitTorus (rank 0 = tensor unit), e : Matrix (Fin s) (Fin r) ℤ ≃ Grp homs, additivity as pointwise product of underlying morphisms. The U-point identification p for every U : Over (Spec k) is pinned by the actual Laurent coordinate pullback, and the monomial row formula with ℤ-powers of units (Finset.prod empty = 1) pins e; nothing is arbitrary. Edge cases r=0, s=0, both zero, empty U, negative exponents, char p checked; no universe restriction. lean.statement verbatim; helpers have real data; only sorry; docstrings carry source places, blueprint id and proof steps 1-5; report has both sections. Advisory: the projection/coordinate helpers repeat SplitTorusFrames.coordinate/scalar and similar helpers, all owned by theorem nodes (citing them would be H2), so the local helpers are acceptable. No files changed, no compile run."
+ }
+}

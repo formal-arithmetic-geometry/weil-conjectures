@@ -9,8 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Sheaf.AlgebraicGeometry.FibreStalkQuotient
-import Sheaf.AlgebraicGeometry.ClosedPointField
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finite residue field points are closed in fibres
@@ -36,26 +35,33 @@ Source: Stacks Project, Morphisms, Tags 01TE and 01TF
 (blueprint: lem-trf-finite-residue-point-closed-in-fibre).
 
 Proof:
-1. Form the scheme-theoretic fibre `f.fiber (f x)`.  Base change preserves
-   local finite type, so its projection to `Spec (S.residueField (f x))` is
-   locally of finite type.  Write `ξ = f.asFiber x` for the point induced by
-   `x`.
-2. For a specialization of `ξ`, choose an affine open neighbourhood.  The
-   affine-pair criterion identifies this open's coordinate algebra as a
-   finitely generated algebra over `S.residueField (f x)`.  The fibre stalk
-   quotient and residue-field naturality identify the residue field at `ξ`
-   with `X.residueField x`, carrying the stated finite-dimensional structure.
-   The finite-type-over-a-field closed-point criterion therefore makes `ξ`
-   closed in the affine open.
-3. Every specialization of `ξ` is consequently equal to `ξ`; the affine-open
-   neighbourhood argument shows that the singleton of `ξ` is closed in the
-   whole fibre.
+1. The composite of `f.asFiberHom x : Spec κ(x) ⟶ f.fiber (f x)` with
+   the fibre structure map is `Spec.map (f.residueFieldMap x)`. The given
+   finite-dimensional extension is a finite-type algebra, so this composite
+   is locally of finite type. Cancellation makes `f.asFiberHom x` locally
+   of finite type as well.
+2. The fibre is Jacobson because it is locally of finite type over a field.
+   A locally finite type morphism from the spectrum of a field to a Jacobson
+   scheme is finite. Its image is therefore closed.
+3. The image of `f.asFiberHom x` is exactly `{f.asFiber x}`.
 -/
 theorem isClosed_singleton_asFiber_of_finiteDimensional
     {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (x : X)
     (hfinite : @FiniteDimensional (S.residueField (f x)) (X.residueField x) _ _
       (f.residueFieldMap x).hom.toAlgebra.toModule) :
     IsClosed ({f.asFiber x} : Set (f.fiber (f x))) := by
-  sorry
+  let := (f.residueFieldMap x).hom.toAlgebra
+  have := hfinite
+  have : LocallyOfFiniteType
+      (f.asFiberHom x ≫ f.fiberToSpecResidueField (f x)) := by
+    rw [f.asFiberHom_fiberToSpecResidueField]
+    apply (HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)).mpr
+    change Algebra.FiniteType (S.residueField (f x)) (X.residueField x)
+    infer_instance
+  have : LocallyOfFiniteType (f.asFiberHom x) :=
+    locallyOfFiniteType_of_comp _ (f.fiberToSpecResidueField (f x))
+  have : IsFinite (f.asFiberHom x) :=
+    isFinite_iff_locallyOfFiniteType_of_jacobsonSpace.mpr inferInstance
+  simpa only [f.range_asFiberHom x] using (f.asFiberHom x).isClosedMap.isClosed_range
 
 end AlgebraicGeometry.Scheme.Hom

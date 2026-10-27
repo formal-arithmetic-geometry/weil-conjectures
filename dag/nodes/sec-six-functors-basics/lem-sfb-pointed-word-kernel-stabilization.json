@@ -1,0 +1,358 @@
+{
+ "id": "lem-sfb-pointed-word-kernel-stabilization",
+ "kind": "statement",
+ "title": "Stabilization of kernels of pointed product maps from powers of a connected smooth group",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure]. Let $G$ be a smooth connected affine $k$-group scheme of finite type and $J$ an affine $k$-group scheme of finite type [def-sc-group-scheme, def-sbc-smooth-morphisms, def-weil-connected-scheme, def-weil-finite-type-morphism]. Let $r\\geq1$ and let $\\varphi:G^r\\to J$ be a $k$-morphism carrying the identity tuple to $e_J$; $\\varphi$ need not be a homomorphism. Powers are fibre products over $k$ [def-pc-fibre-product]. For each $n\\geq1$ put $w_n:G^{rn}\\to J$, $w_n(x_1,\\ldots,x_n)=\\varphi(x_1)\\cdots\\varphi(x_n)$, where $x_i\\in G^r$, and $I_n=\\ker(w_n^*:k[J]\\to k[G^{rn}])$ [def-weil-affine-spectrum, def-weil-pbc-algebra-hom-quotient]. Every $G^m$, $m\\geq1$, is geometrically integral [def-pc-geometrically-irreducible, def-pc-integral-scheme]. There is $N\\geq1$ for which $I_n=I_N$ for all $n\\geq N$, and $I_N$ is a prime ideal. Consequently $\\bigcap_{n\\geq1}I_n=I_N$, the affine scheme $Z=\\operatorname{Spec}(k[J]/I_N)$ is integral, and $w_N$ factors through a morphism $G^{rN}\\to Z$ with dense image and injective pullback on coordinate algebras.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 6.20(a), printed p.130, prime-kernel stabilization argument, generalized from the commutator map to an arbitrary pointed map G^r to J; Section 2h, printed pp.54–56, product maps; smooth connected group-variety geometry used there"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-algebraic-closure",
+  "def-sc-group-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "The identity section gives a point of $G$ with residue field $k$: its residue-field maps $k\\to\\kappa(e)\\to k$ compose to the identity and the second is an injective field map, hence both are isomorphisms. Apply [lem-trf-connected-point-geometrically-connected] to this point and the assumed connectedness of $G$. Thus $G$ is geometrically connected. Apply [lem-trf-smooth-connected-fibre-normal-integrality] to $G\\to\\operatorname{Spec}k$. The base has just one point, its fibre is $G$, and the smoothness and nonempty geometric connectedness hypotheses hold. For every field extension $K/k$ it gives integrality of $G_K$. Consequently $G$ is geometrically integral, and in particular geometrically irreducible, by [def-pc-geometrically-irreducible, def-pc-integral-scheme].",
+   "uses": [
+    "lem-trf-connected-point-geometrically-connected",
+    "lem-trf-smooth-connected-fibre-normal-integrality",
+    "def-pc-geometrically-irreducible",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.20(a), smooth connected geometry; Stacks 04KV (lemma-geometrically-connected-if-connected-and-point), 056T (lemma-smooth-geometrically-normal), and 057J (lemma-normal-morphism-irreducible)"
+   }
+  },
+  {
+   "text": "Induct on $m\\geq1$, with base $m=1$ from Step 1, to prove that $G^m$ is affine, smooth over $k$, and geometrically irreducible. In the induction step, $G^{m+1}=G^m\\times_kG$ is affine by [lem-weil-pbc-fibre-product-affine-spectra]. Its projection to $G^m$ is the base change of $G\\to\\operatorname{Spec}k$, hence smooth by clause (2) of [lem-pc-proper-base-change]; composing with the smooth structure map of $G^m$ is smooth by [lem-trf-smooth-composition]. Apply [lem-sc-geometrically-irreducible-product] to the two factors for geometric irreducibility. Finally [sbc-lem-smooth-geometrically-reduced] gives geometric reducedness of $G^m$. For every $K/k$, $(G^m)_K$ is therefore both reduced and nonempty irreducible, hence integral by [def-pc-integral-scheme]. This proves geometric integrality of every power, and its affine coordinate algebra $k[G^m]$ is a domain.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-composition",
+    "lem-sc-geometrically-irreducible-product",
+    "sbc-lem-smooth-geometrically-reduced",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.20(a), powers; Stacks 01JQ (lemma-fibre-product-affines), 01VB (lemma-base-change-smooth), 01VA (lemma-composition-smooth), 038F (lemma-bijection-irreducible-components), and 056T"
+   }
+  },
+  {
+   "text": "Write $A=k[J]$ and $B_n=k[G^{rn}]$. Iterated multiplication in $J$, composed with the copies of $\\varphi$, defines $w_n$ using [def-sc-group-scheme, def-pc-fibre-product]. Let $s_n:G^{rn}\\to G^{r(n+1)}$ append the identity tuple of $G^r$. The equation $\\varphi(e,\\ldots,e)=e_J$ and the unit law give $w_{n+1}\\circ s_n=w_n$, as morphisms (equivalently on points over every $k$-algebra). By contravariant functoriality in [def-weil-affine-spectrum], $w_n^*=s_n^*\\circ w_{n+1}^*$, whence $I_{n+1}\\subseteq I_n$. Step 2 makes each $B_n$ a nonzero domain. Thus $1\\notin I_n$, and if $ab\\in I_n$ then $w_n^*(a)w_n^*(b)=0$, so one factor vanishes and $a\\in I_n$ or $b\\in I_n$. This is precisely primality of $I_n$.",
+   "uses": [
+    "def-sc-group-scheme",
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2h, printed p.54, identity-appending maps and kernels; Proposition 6.20(a), prime kernels"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-dimension-finite-type] to the finite-type $k$-scheme $J$, obtaining a finite integer bound $d$ on lengths of strict chains of nonempty irreducible closed subsets, for $\\kundim J$ as defined by [def-kun-dimension], which is the Krull dimension of the underlying space $|J|$ in the sense of [def-kun-topological-krull-dimension]. For each prime $I_n\\subset A$, $V(I_n)$ is the closure of the point $I_n$ in $\\operatorname{Spec}A=J$: the closed set $V(L)$ contains that point exactly when $L\\subseteq I_n$, in which case it contains all primes containing $I_n$. Such a closure is nonempty irreducible: if it is covered by two closed subsets, its distinguished point lies in one, and its whole closure lies there. For primes $Q\\subsetneq P$, $V(P)\\subsetneq V(Q)$, since the point $Q$ belongs to $V(Q)$ but not to $V(P)$. Hence any finite strictly decreasing subsequence of the $I_n$ of length $t$ yields a strict chain of irreducible closed subsets of $J$ of length $t$, so $t\\leq d$.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "def-kun-dimension",
+    "def-kun-topological-krull-dimension",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.20(a), chain termination: explicit finite-dimensional argument; Stacks Topology 0055 (definition-Krull)"
+   }
+  },
+  {
+   "text": "If the descending sequence were not eventually constant, then for every $a\\geq1$ there would be $b>a$ with $I_b\\ne I_a$, and hence $I_b\\subsetneq I_a$. Starting with $a=1$ and choosing such a later index repeatedly $d+1$ times gives a strictly decreasing subsequence with $d+1$ strict inclusions, contradicting Step 4. Therefore some $N\\geq1$ satisfies $I_n=I_N$ for every $n\\geq N$. This argument uses only the finite bound of Step 4 and descent from Step 3; it does not assert that equality at just one adjacent pair forces stabilization. Primality of $I_N$ was proved in Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.20(a), stabilization, expanded bounded-chain argument"
+   }
+  },
+  {
+   "text": "For $n<N$ descent gives $I_N\\subseteq I_n$, while for $n\\geq N$ equality holds. Thus $\\bigcap_{n\\geq1}I_n=I_N$. Set $C=A/I_N$. Since $I_N$ is proper prime, $C$ is nonzero, and $\\bar a\\bar b=0$ implies $ab\\in I_N$, hence $\\bar a=0$ or $\\bar b=0$; thus $C$ is a domain. The zero prime is a generic point of $Z=\\operatorname{Spec}C$ by the closed-set computation in Step 4, so $Z$ is nonempty irreducible. Every stalk $C_{\\mathfrak p}$ is a domain: $C\\to C_{\\mathfrak p}$ is injective and a zero product of fractions has zero numerator product in $C$. Thus its stalks have no nonzero nilpotents, giving reducedness by [def-pc-reduced-scheme], and then integrality by [def-pc-integral-scheme]. The formula $\\bar a\\mapsto w_N^*(a)$ is well defined because $I_N=\\ker(w_N^*)$, and injective by the same equality. By [def-weil-affine-spectrum, def-weil-pbc-algebra-hom-quotient] it defines $v:G^{rN}\\to Z$ with $w_N=i\\circ v$, where $i:Z\\to J$ is induced by $A\\to C$. Its pullback is exactly this injective map.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proposition 6.20(a), quotient by the stabilized prime kernel; Section 2h, printed p.54, quotient factorization"
+   }
+  },
+  {
+   "text": "Let $h:C\\hookrightarrow B_N$ be the pullback just constructed. The zero ideal of the domain $B_N$ is a point of $G^{rN}$; its image under $\\operatorname{Spec}h$ is $h^{-1}(0)=0$ by injectivity. The closure of the zero prime in $\\operatorname{Spec}C$ is $V(0)=\\operatorname{Spec}C$, by the closed-set computation in Step 4. Thus the image of $v$ contains a dense point, so is dense in $Z$. This proves the last clause without any claim that $\\varphi$ is a homomorphism or that its image is closed under inverses.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Section 2h, printed p.55, schematic dominance and density; direct affine generic-point proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-connected-point-geometrically-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "def-pc-geometrically-irreducible",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-composition",
+  "lem-sc-geometrically-irreducible-product",
+  "sbc-lem-smooth-geometrically-reduced",
+  "def-sc-group-scheme",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-kun-dimension-finite-type",
+  "def-kun-dimension",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-pc-reduced-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Proposition 6.20(a), printed p.130, and Section 2h pp.54–55; pointed-map generalization with explicit finite-dimensional prime-chain argument and existing Stacks geometry inputs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "wordMap|word_map|stabili.*image|image.*stabili|Antitone.*IsPrime|IsPrime.*Antitone",
+   "results": "{\"t\": \"2026-10-23T13:36:54Z\", \"tool\": \"grep\", \"query\": \"wordMap|word_map|stabili.*image|image.*stabili|Antitone.*IsPrime|IsPrime.*Antitone\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/Data/Finset/Card.lean\", \"Mathlib/Data/Finset/Card.lean\", \"Mathlib/Data/Finset/Card.lean\", \"Mathlib/Data/Finset/Card.lean\", \"Mathlib/Data/Finset/Card.lean\", \"Mathlib/Dynamics/Ergodic/Action/OfMinimal.lean\", \"Mathlib/Algebra/Pointwise/Stabilizer.lean\", \"Mathlib/Algebra/Pointwise/Stabilizer.lean\"], \"digest\": \"8f25f32236ab49b3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.eventually_iSup_ker_pow_eq (RingTheory/Noetherian/Defs.lean:181) is ascending kernels of powers of one linear endomorphism, not these descending prime kernels of maps to varying coordinate algebras; Scheme.Hom.image and isConstructible_image do not assert stabilization or integral powers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "iterated products pointed morphism smooth connected variety prime kernels stabilize",
+   "results": "{\"t\": \"2026-10-23T13:36:55Z\", \"tool\": \"leansearch\", \"query\": \"iterated products pointed morphism smooth connected variety prime kernels stabilize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.eventually_iSup_ker_pow_eq\", \"Pi.map_iterate\", \"Module.End.ker_pow_constant\", \"LinearMap.iterateKer\", \"LinearMap.ker_le_of_iterateMapComap_eq_succ\", \"LinearMap.iterateKer_coe\", \"CategoryTheory.MorphismProperty.IsStableUnderFiniteProducts\", \"LinearMap.iterateMapComap_eq_succ\"], \"digest\": \"dba6abab21f49e35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.eventually_iSup_ker_pow_eq (RingTheory/Noetherian/Defs.lean:181) is ascending kernels of powers of one linear endomorphism, not these descending prime kernels of maps to varying coordinate algebras; Scheme.Hom.image and isConstructible_image do not assert stabilization or integral powers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.IsPrime\", \"antitone\"",
+   "results": "{\"t\": \"2026-10-23T13:36:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ideal.IsPrime\\\", \\\"antitone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.eventually_iSup_ker_pow_eq (RingTheory/Noetherian/Defs.lean:181) is ascending kernels of powers of one linear endomorphism, not these descending prime kernels of maps to varying coordinate algebras; Scheme.Hom.image and isConstructible_image do not assert stabilization or integral powers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernels of iterated product word maps from a smooth connected affine variety stabilize at a prime ideal",
+   "results": "{\"t\": \"2026-10-23T13:36:58Z\", \"tool\": \"leanfinder\", \"query\": \"kernels of iterated product word maps from a smooth connected affine variety stabilize at a prime ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ax_grothendieck_zeroLocus\", \"MvPolynomial.ker_eval₂Hom_universalFactorizationMap\", \"AlgHom.ker_kerSquareLift\", \"Algebra.Generators.map_ofComp_ker\", \"Algebra.Generators.map_toComp_ker\", \"Algebra.Generators.sq_ker_comp_le_ker_compLocalizationAwayAlgHom\", \"Algebra.Generators.ker_comp_eq_sup\", \"AlgebraicGeometry.Scheme.Hom.ideal_ker_le\"], \"digest\": \"6d81fbd0dca382aa\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.eventually_iSup_ker_pow_eq (RingTheory/Noetherian/Defs.lean:181) is ascending kernels of powers of one linear endomorphism, not these descending prime kernels of maps to varying coordinate algebras; Scheme.Hom.image and isConstructible_image do not assert stabilization or integral powers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite product image of an irreducible variety in an algebraic group stabilizes scheme theoretic image",
+   "results": "{\"t\": \"2026-10-23T13:36:59Z\", \"tool\": \"leanfinder\", \"query\": \"finite product image of an irreducible variety in an algebraic group stabilizes scheme theoretic image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.Hom.image\", \"ax_grothendieck_zeroLocus\", \"AlgebraicGeometry.Scheme.range_fromSpecResidueField\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.range_eq_range_of_surjective\", \"AlgebraicGeometry.Scheme.Hom.closePoints_subset_preimage_closedPoints\"], \"digest\": \"d383236e36aa4c08\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.eventually_iSup_ker_pow_eq (RingTheory/Noetherian/Defs.lean:181) is ascending kernels of powers of one linear endomorphism, not these descending prime kernels of maps to varying coordinate algebras; Scheme.Hom.image and isConstructible_image do not assert stabilization or integral powers"
+  },
+  {
+   "tool": "grep",
+   "query": "eventually_iSup_ker_pow_eq|ker_pow_constant",
+   "results": "{\"t\": \"2026-10-23T13:41:50Z\", \"tool\": \"grep\", \"query\": \"eventually_iSup_ker_pow_eq|ker_pow_constant\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Noetherian/Defs.lean\"], \"digest\": \"5b52e80ec43edb6a\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: LinearMap.eventually_iSup_ker_pow_eq (RingTheory/Noetherian/Defs.lean:181) is ascending kernels of powers of one linear endomorphism, not these descending prime kernels of maps to varying coordinate algebras; Scheme.Hom.image and isConstructible_image do not assert stabilization or integral powers"
+  },
+  {
+   "tool": "grep",
+   "query": "wellFounded|well_founded|finiteDimensional|FiniteDimensional",
+   "results": "{\"t\": \"2026-10-23T14:54:56Z\", \"tool\": \"grep\", \"query\": \"wellFounded|well_founded|finiteDimensional|FiniteDimensional\", \"sub\": \"RingTheory/KrullDimension\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Basic.lean\", \"Mathlib/RingTheory/KrullDimension/Basic.lean\"], \"digest\": \"0acb7393e9c2f437\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type algebra over a field has finite Krull dimension",
+   "results": "{\"t\": \"2026-10-23T14:54:56Z\", \"tool\": \"leansearch\", \"query\": \"A finite type algebra over a field has finite Krull dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Order.krullDim_ne_top_of_finiteDimensionalOrder\", \"FiniteRingKrullDim\", \"ringKrullDim_eq_zero_of_field\", \"Module.finite_iff_krullDimLE_zero\", \"ringKrullDim_eq_zero_of_isField\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"ringKrullDim_lt_top\", \"Order.finiteDimensionalOrder_iff_krullDim_ne_bot_and_top\"], \"digest\": \"0f8df58748024000\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PrimeSpectrum\", \"WellFounded\"",
+   "results": "{\"t\": \"2026-10-23T14:54:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"PrimeSpectrum\\\", \\\"WellFounded\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finitely generated algebra over a field prime ideals satisfy descending chain condition",
+   "results": "{\"t\": \"2026-10-23T14:54:57Z\", \"tool\": \"leanfinder\", \"query\": \"In a finitely generated algebra over a field prime ideals satisfy descending chain condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_prime\", \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"IsNoetherianRing.of_prime_ne_bot\", \"FiniteRingKrullDim\", \"IsArtinianRing.setOf_isPrime_finite\", \"IsArtinianRing.instFinitePrimeSpectrum\", \"finite_of_finite_type_of_isJacobsonRing\", \"Module.finite_of_isArtinianRing\"], \"digest\": \"c87563cdabc71909\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An antitone sequence of prime ideals in a noetherian ring is eventually constant",
+   "results": "{\"t\": \"2026-10-23T14:54:58Z\", \"tool\": \"leanfinder\", \"query\": \"An antitone sequence of prime ideals in a noetherian ring is eventually constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"Ideal.finiteHeight_of_isNoetherianRing\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"PrimeSpectrum.exist_mem_one_of_mem_two\", \"PrimeSpectrum.instNoetherianSpace\", \"minimalPrimes.finite_of_isNoetherianRing\", \"PrimeSpectrum.finite_setOf_isMin\", \"Ideal.finite_minimalPrimes_of_isNoetherianRing\"], \"digest\": \"79305234a1ad06d1\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "wordMap|word_map|pointed.*product|prime.*stabili|stabili.*prime",
+   "results": "{\"t\": \"2026-10-23T15:02:41Z\", \"tool\": \"grep\", \"query\": \"wordMap|word_map|pointed.*product|prime.*stabili|stabili.*prime\", \"sub\": \"\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"Mathlib/NumberTheory/RamificationInertia/HilbertTheory.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/NumberField/Cyclotomic/Galois.lean\", \"Mathlib/FieldTheory/Fixed.lean\", \"Mathlib/Geometry/Convex/Cone/TensorProduct.lean\"], \"digest\": \"b7a1469d3abdf68e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ideal.IsPrime\", \"Antitone\"",
+   "results": "{\"t\": \"2026-10-23T15:02:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Ideal.IsPrime\\\", \\\"Antitone\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme theoretic images of product powers of a pointed morphism from an integral variety stabilize",
+   "results": "{\"t\": \"2026-10-23T15:02:42Z\", \"tool\": \"leansearch\", \"query\": \"Scheme theoretic images of product powers of a pointed morphism from an integral variety stabilize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.image\", \"AlgebraicGeometry.specTargetImageFactorization\", \"AlgebraicGeometry.Scheme.Hom.toImage_imageι\", \"AlgebraicGeometry.Scheme.instQuasiCompactToImage\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.Scheme.range_fromSpecStalk\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"fe6e9a4157212c97\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernels of iterated pointed product morphisms from a connected smooth affine algebraic group eventually stabilize",
+   "results": "{\"t\": \"2026-10-23T15:02:43Z\", \"tool\": \"leanfinder\", \"query\": \"Kernels of iterated pointed product morphisms from a connected smooth affine algebraic group eventually stabilize\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.eventually_iSup_ker_pow_eq\", \"Module.End.ker_pow_constant\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"Module.End.ker_pow_eq_ker_pow_finrank_of_le\", \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen\", \"LinearMap.iterateKer_coe\"], \"digest\": \"42de995096dfa69e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match for the item: ascending linear-endomorphism kernels and scheme-image factorizations do not give this stabilization theorem; finite dimension and finite height hits are supporting tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-smooth-connected-derived-subgroup",
+  "date": "2026-10-23",
+  "group": "Q130"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Central covering of a reductive group by a torus and a simply connected semisimple group. Milne central-cover construction: Multiplication by a central torus with semisimple quotient and the derived group. Supporting input: Smooth connected derived subgroups and commutators on rational points. Supporting lemma for the derived-subgroup argument: Stabilization of kernels of pointed product maps from powers of a connected smooth group.",
+   "via": [
+    "lem-sfb-smooth-connected-derived-subgroup",
+    "lem-sfb-central-torus-semisimple-derived-product",
+    "lem-sfb-reductive-torus-simply-connected-cover",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-pointed-word-kernel-stabilization",
+  "worker": "stage1",
+  "summary": "Proved the item in seven steps using only existing DAG nodes. Checked the smooth connected geometry and all powers, constructed identity-appending morphisms, proved primality directly, bounded strict prime drops by the dimension of J, and wrote out stabilization, quotient factorization and generic-point density. No new nodes. Normalized doubled TeX escapes; no mathematical statement change.",
+  "blueprint": "Retains the inherited blueprint.from.place and ancestry returned by blueprint_refs.py (no imported blueprint ancestor is recorded). This auxiliary realizes the prime-kernel stabilization prerequisite in the Milne derived-subgroup part of the alteration/moduli chain serving det-thm-sf-ctf-stability-direct-images proof (3). Read the latest sk-thm-sf-ctf-stability unit and its direct-images proof; neither states this auxiliary result. The local split preserves that route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-connected-point-geometrically-connected",
+    "why": "Generic Stacks 04KV connectedness criterion applied at the identity point; no statement in the item unit supplies it."
+   },
+   {
+    "node": "lem-trf-smooth-connected-fibre-normal-integrality",
+    "why": "Generic smooth-fibre geometry over Spec k, giving integrality after every field extension; this is the geometry used by Milne, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Only clause (2), smoothness under base change, for projections of powers of G."
+   },
+   {
+    "node": "lem-sc-geometrically-irreducible-product",
+    "why": "Generic product irreducibility theorem used inductively for powers of G."
+   },
+   {
+    "node": "sbc-lem-smooth-geometrically-reduced",
+    "why": "Generic smoothness-to-geometric-reducedness implication, completing integrality of powers."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of the given finite-type target J bounds strict prime drops. The node is already Lean-closed; this is a generic dimension tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-connected-point-geometrically-connected",
+  "lem-trf-smooth-connected-fibre-normal-integrality",
+  "lem-pc-proper-base-change",
+  "lem-sc-geometrically-irreducible-product",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-ab57a92d3",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-ab57a92d3 (reviewer sub-agent of L); spot-checked: I read the whole item, a 7-step split with no new nodes. The statement is byte-identical to the base, and the item is still unsplit in live and side-live, so it is not superseded. Source checks: Milne iAG2017 Prop 6.20(a) (PDF p.142) and §2h (printed pp.54-55). The identity-appending maps give descending kernels I_{n+1}⊆I_n, which matches Step 3. Using the finite dimension of the finite-type J (lem-kun-dimension-finite-type) in place of Milne's Noetherian termination is valid. Stacks 04KV and 056T were read at their labels. Step checks: Step 1 has κ(e)=k via the section, then 04KV for geometric connectedness, then the smooth-fibre integrality node over Spec k, all hypotheses met. Step 2 is a proper induction on G^m: affine by pullbackSpecIso, smooth by base change clause (2) and composition, geometrically irreducible by the product node, geometrically reduced by sbc-lem-smooth-geometrically-reduced, hence integral and k[G^m] a domain. Steps 3-7 are correct elementary algebra and topology: primality of the kernels into domains, the chain bound by d, stabilization by d+1 strict drops, Z integral via the generic point and domain stalks, the factorization w_N=i∘v with injective pullback, and density via the generic point. Edge cases tested: trivial G or constant φ, G=J=G_m with φ=id, nonreduced J such as α_p, non-homomorphic φ, characteristic p. Searching for duplicates found only the citer lem-sfb-smooth-connected-derived-subgroup, which uses exactly these clauses. I accept the declared tool_uses as generic black-box geometry; there are no SGA citations. Batch-5 flags: I computed the closures of lem-trf-connected-point-geometrically-connected (generic Galois/clopen connectedness, Stacks 04KV), lem-trf-smooth-connected-fibre-normal-integrality (Stacks 057J/056T, from those chapters only the Mathlib leaf lem-pod-separated-finite-type-base-change) and lem-trf-smooth-composition (Mathlib smooth_comp). None reaches trace-formula or Poincaré statements, sk-thm-trace-transport or batch-4 targets, so all three are generic and OK. FIX (C4): Step 4 takes kundim J<∞ from lem-kun-dimension-finite-type but did not cite def-kun-dimension, the notion that node's statement uses. I added it to the step's uses and to proof_deps, with text identifying it with the topological Krull dimension of def-kun-topological-krull-dimension. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-pointed-word-kernel-stabilization.json. coord/dag-sync.md is absent from the snapshot.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointedWordKernelStabilization",
+  "declaration": "AlgebraicGeometry.pointedProductWordKernel_stabilization",
+  "declarations": [
+   "AlgebraicGeometry.pointedProductWord",
+   "AlgebraicGeometry.pointedProductWordKernel",
+   "AlgebraicGeometry.pointedProductWordKernel_stabilization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PointedWordKernelStabilization.lean",
+  "statement": "theorem pointedProductWordKernel_stabilization (k : Type u) [Field k] [IsAlgClosed k] (G J : Over (Spec (.of k))) [GrpObj G] [GrpObj J] [IsAffine G.left] [IsAffine J.left] [Smooth G.hom] [ConnectedSpace G.left] [LocallyOfFiniteType J.hom] (r : ℕ) (hr : 1 ≤ r) (φ : (∏ᶜ fun _ : Fin r ↦ G) ⟶ J) (hφ : Pi.lift (fun _ : Fin r ↦ (1 : 𝟙_ (Over (Spec (.of k))) ⟶ G)) ≫ φ = 1) : (∀ m : ℕ, 1 ≤ m → GeometricallyIntegral (∏ᶜ fun _ : Fin m ↦ G).hom) ∧ ∃ N : ℕ, 1 ≤ N ∧ (∀ n : ℕ, N ≤ n → pointedProductWordKernel φ n = pointedProductWordKernel φ N) ∧ (pointedProductWordKernel φ N).IsPrime ∧ (⨅ n : {n : ℕ // 1 ≤ n}, pointedProductWordKernel φ n.val) = pointedProductWordKernel φ N ∧ IsIntegral (Spec (.of (Γ(J.left, ⊤) ⧸ pointedProductWordKernel φ N))) ∧ ∃ v : (∏ᶜ fun _ : Fin N ↦ (∏ᶜ fun _ : Fin r ↦ G)).left ⟶ Spec (.of (Γ(J.left, ⊤) ⧸ pointedProductWordKernel φ N)), v ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (pointedProductWordKernel φ N))) ≫ J.left.isoSpec.inv = (pointedProductWord φ N).left ∧ DenseRange v.base ∧ Function.Injective v.appTop",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The canonical word on the n-fold product of G^r is G^(rn) with its block coordinates. Finite type of G and quasi-compactness of J follow from the smoothness and affineness binders; no extra homomorphism assumption is made on φ. The two auxiliary definitions are the word map and its kernel belonging to this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3f4ac2d35",
+  "group": "NU",
+  "result": "pass",
+  "note": "Only the lean field changes; no new nodes; statement verbatim. Hypotheses match the node and none is stronger: G finite type follows from Smooth+IsAffine, phi has no IsMonHom, J is not assumed reduced. Pointedness uses 1 = toUnit≫η. Word = ordered List.prod with Hom.mul_def lift≫μ. I_n = RingHom.ker of the global-section pullback. Domain (G^r)^n vs G^{rn} is canonically isomorphic with equal kernels. Conclusions present: GeometricallyIntegral of powers m≥1, ∃N≥1 constant tail, I_N prime, iInf over n≥1, IsIntegral Spec(A/I_N), factorization through the canonical closed immersion (v unique) with DenseRange and injective appTop. Edge cases: r=1, N=1, nonreduced J, char p, noncommutative J; m=0 and n=0 excluded as in the node. Stmt_dep records (GrpObj, Smooth, ConnectedSpace, LocallyOfFiniteType, Spec/isoSpec, quotient, GeometricallyIntegral, IsIntegral) match; no theorem stmt_deps. No duplicate names in side-live; imports exist; docstrings carry the source place and 7 proof steps; only sorry. No compile run (no file changed)."
+ }
+}

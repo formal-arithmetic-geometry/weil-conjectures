@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-ringed-site-locally-finite-tor-dimension",
+ "kind": "definition",
+ "title": "Locally finite Tor dimension on a ringed site",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $(\\mathcal C,J,\\mathcal O)$ be a ringed site small relative to the universe of its module sheaves [def-weil-size-convention], with $\\mathcal O$ a sheaf of commutative rings. Let $K\\in D(\\mathcal O)$, using module sheaves [def-weil-sheaf-of-modules-category] and their unbounded derived category [def-weil-abstract-derived-category]. Say $K$ locally has finite Tor dimension if for every $U\\in\\mathcal C$ there is a covering sieve $S$ on $U$ such that for every $f:V\\to U$ in $S$ the canonical derived restriction $K|_V$ [def-weil-pbc-ringed-site-derived-restriction] has finite Tor amplitude, using the general ringed-site degree-zero module test underlying [def-weil-proetale-tor-amplitude]. Explicitly, there are integers $a\\le b$, chosen after $V$, such that for every $\\mathcal O_V$-module sheaf $F$ and every $j<a$ or $j>b$, $H^j(K|_V\\otimes^{\\mathbf L}_{\\mathcal O_V}F[0])=0$. The tensor is the canonical K-flat derived tensor used by that test; the interval may vary with the covering member.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FZ (definition-tor-amplitude), clause (3), using clauses (1) and (2) on each localized site."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "locally finite Tor dimension ringed site covering interval",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"locallyFinite_of_finite\", \"module\": \"Mathlib.Topology.LocallyFinite\", \"type\": \"[Finite ι] (f : ι → Set X) : LocallyFinite f\", \"doc\": \"A finite family of sets in a topological space is locally finite, i.e., for every point $x$ in the space, there exists a neighborhood of $x$ that intersects only finitely many sets in the family.\"}\n  {\"name\": \"LocallyFinite.exists_finset_nhds_support_subset\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {X : Type u_1} {R : Type u_8} {ι : Type u_9} [inst : TopologicalSpace X] {U : ι → Set X} [inst_1 : Zero R]\\n  {f : ι → X → R},\\n  (LocallyFinite fun i => Function.support (f i)) →\\n    (∀ (i : ι), tsupport (f i) ⊆ U i) →\\n      (∀ (i : ι), IsOpen (U i)) →\\n        ∀ (x : X), ∃ is, ∃ n ∈ nhds x, n ⊆ ⋂ i\", \"doc\": \"Let $X$ be a topological space, $R$ a type with zero, and $\\\\{f_i\\\\}_{i \\\\in \\\\iota}$ a family of functions $X \\\\to R$. If the family of supports $\\\\{\\\\text{supp}(f_i)\\\\}$ is locally finite and each topologic\"}\n  {\"name\": \"LocallyFinite\", \"module\": \"Mathlib.Topology.LocallyFinite\", \"type\": \"(f : ι → Set X)\", \"doc\": \"A family of sets $\\\\{f_i\\\\}_{i \\\\in I}$ in a topological space $X$ is called locally finite if for every point $x \\\\in X$, there exists a neighborhood $t$ of $x$ such that the set of indices $i$ for which\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{ι} {S : ι → X.affineOpens} (hS : (⨆ i, S i : X.Opens) = ⊤) (hS' : ∀ i, IsNoetherianRing Γ(X, S i)) :\\n  IsLocallyNoetherian X\", \"doc\": \"If a scheme $ X $ admits an affine open cover $ \\\\{S_i\\\\} $ such that the union of all $ S_i $ is $ X $ and each ring of global sections $ \\\\Gamma(S_i) $ is Noetherian, then $ X $ is a locally Noetherian\"}\n  {\"name\": \"Set.finite_Ioo\", \"module\": \"Mathlib.Order.Interval.Finset.Defs\", \"type\": \": (Ioo a b).Finite\", \"doc\": \"In a locally finite order, the open interval $(a, b)$ is a finite set.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_iff_of_affine_openCover\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"(𝒰 : Scheme.OpenCover.{v, u} X) [∀ i, IsAffine (𝒰.X i)] :\\n  IsLocallyNoetherian X ↔ ∀ (i : 𝒰.I₀), IsNoetherianRing Γ(𝒰.X i, ⊤)\", \"doc\": \"A scheme $X$ is locally Noetherian if and only if, for every affine open cover $\\\\{U_i\\\\}$ of $X$, the ring of global sections $\\\\Gamma(U_i, \\\\mathcal{O}_X)$ is a Noetherian ring for each index $i$.\"}\n  {\"name\": \"BumpCovering.locallyFinite_tsupport\", \"module\": \"Mathlib.Topology.PartitionOfUnity\", \"type\": \": LocallyFinite fun i => tsupport (f i)\", \"doc\": \"For a bump covering $\\\\{f_i\\\\}$ subordinate to an open cover of a subset $S \\\\subseteq X$ in a topological space $X$, the family of topological supports $\\\\{\\\\mathrm{tsupport}(f_i)\\\\}$ is locally finite. Th\"}\n  {\"name\": \"RingHom.locally_iff_finite\", \"module\": \"Mathlib.RingTheory.RingHom.Locally\", \"type\": \"(f : R →+* S) :\\n  Locally P f ↔\\n    ∃ (s : Finset S) (_ : Ideal.span (s : Set S) = ⊤), ∀ t ∈ s, P ((algebraMap S (Localization.Away t)).comp f)\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ is locally $ P $ if and only if there exists a finite set $ s \\\\subset S $ such that the ideal generated by $ s $ is the entire ring $ S $, and for each $ t \\\\in s $,\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching general ringed-site m-approximation or local Tor predicate. Existing perfectness, universal Tor tests and scheme-only pseudo-coherence are reused where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "m pseudo coherent approximations on a ringed site and locally finite Tor dimension",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        {M : SheafOfModules R} →\\n          [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n            [inst_\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules, this proposition asserts that the \"}\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a sheaf of modules $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ that satisfies the finite presentation condition (locally isomorphic to the cokernel of a morphism b\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [inst_2 : ∀ (X : C), (J.over X).WEqualsLoca\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, and a sheaf $\\\\mathcal{F}$ of $\\\\mathcal{R}$-modules of finite type, this function const\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No matching general ringed-site m-approximation or local Tor predicate. Existing perfectness, universal Tor tests and scheme-only pseudo-coherence are reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "PseudoCoherent|LocallyFiniteTor (msearch.py Mathlib)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No matching general ringed-site m-approximation or local Tor predicate. Existing perfectness, universal Tor tests and scheme-only pseudo-coherence are reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "def .*PseudoCoherent|def .*Locally.*Tor|def IsPerfectOnRingedSite (rg of lean/WeilConjectures and lean/Sheaf)",
+   "results": "lean/Sheaf/RingTheory/RelativeMPseudoCoherent.lean:40:def IsMPseudoCoherentRelativeTo (R : Type u) {A : Type u}\nlean/Sheaf/AlgebraicGeometry/RelativePseudoCoherentComplex.lean:38:def IsMPseudoCoherentRelativeTo\nlean/Sheaf/AlgebraicGeometry/RelativePseudoCoherentComplex.lean:58:def IsPseudoCoherentRelativeTo\nlean/Sheaf/AlgebraicGeometry/AlgebraicSpacePseudoCoherentComplex.lean:34:def IsPseudoCoherent {S : Scheme.{u}} (X : AlgebraicSpace S)\nlean/Sheaf/AlgebraicGeometry/EtaleSchemeActionTorsorGroupoid.lean:38:def IsEtaleLocallyTrivial (X : TorsorObject G V) : Prop :=\nlean/Sheaf/Paper/StrictPerfectCoefficientPackage.lean:92:def IsPerfectOnRingedSite (R : Sheaf J CommRingCat.{u})\nlean/Sheaf/AlgebraicGeometry/MPseudoCoherentComplex.lean:35:def IsMPseudoCoherent (Y : Scheme.{u})\nlean/Sheaf/AlgebraicGeometry/SpaceSupportedPerfectApproximation.lean:48:def IsMPseudoCoherent {S : Scheme.{u}} (X : AlgebraicSpace S)\nlean/Sheaf/AlgebraicGeometry/LocallyFreeExtCohomology.lean:51:def locallyFreeHomAbelianFunctor {X : Scheme.{u}} (F : X.Modules) :\nlean/Sheaf/Paper/StrictPerfectCoefficientPackageOfUniverses.lean:63:def IsPerfectOnRingedSiteOfUniverses (R : Sheaf J CommRingCat.{max uC vC r})\nlean/Sheaf/Paper/TorsionCompletionDefinitions.lean:188:def IsLocallyPowerTorsionLimit (X : Scheme.{t}) {A : Type u} [CommRing A] (I : Ideal A)\nlean/WeilConjectures/ConstructibleSheaf/ConstantModuleLocallyConstant.lean:37:noncomputable def locallyConstantModulePresheafFunctor (X : Scheme.{u})\nlean/WeilConjectures/RingTheory/RingPseudoCoherent.lean:40:def IsPseudoCoherent {A : Type u} [CommRing A] [HasDerivedCategory.{w} (ModuleCat.{v} A)]\nlean/WeilConjectures/RingTheory/MPseudoCoherent.lean:31:def IsMPseudoCoherent {R : Type u} [CommRing R]\nlean/WeilConjectures/AlgebraicGeometry/LocallyFiniteTorDimension.lean:34:def HasLocallyFiniteTorDimension (X : Scheme.{u})\nlean/WeilConjectures/AlgebraicGeometry/PseudoCoherentComplex.lean:35:def IsPseudoCoherent (Y : Scheme.{u})\n",
+   "date": "2026-10-24",
+   "verdict": "No matching general ringed-site m-approximation or local Tor predicate. Existing perfectness, universal Tor tests and scheme-only pseudo-coherence are reused where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "definition nodes: locally has finite tor dimension|m.-pseudo-coherent.*ringed site|ringed site.*m.-pseudo-coherent; blueprint_refs.py search",
+   "results": "Only def-pc-locally-finite-tor-dimension (scheme-only). blueprint search ringed site pseudo-coherent: 0 blueprint nodes match. General ringed-site perfectness is already carried by def-weil-pbc-strict-perfect-coefficient-package.",
+   "date": "2026-10-24",
+   "verdict": "No existing node gives either missing general-site predicate."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-perfect-criterion",
+  "date": "2026-10-24",
+  "group": "Q99"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Definitions used in Stacks 08G8: perfectness iff pseudo-coherence and locally finite Tor dimension.",
+   "via": [
+    "lem-sfb-ringed-site-perfect-criterion",
+    "lem-sfb-etale-detects-perfect",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteLocallyFiniteTor",
+  "declaration": "SheafOfModules.HasLocallyFiniteTorDimensionOnRingedSite",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteLocallyFiniteTor.lean",
+  "statement": "def HasLocallyFiniteTorDimensionOnRingedSite {C : Type u} [Category.{v} C] {J : GrothendieckTopology C} [HasSheafify J AddCommGrpCat.{max u v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}] [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max u v r}] [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}] (R : Sheaf J CommRingCat.{max u v r}) [HasDerivedCategory.{w} (ringedSiteModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))] [hDU : ∀ U : C, HasDerivedCategory.{w'} (ringedSiteModules.{max u v r} (((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R).over U))] (K : DerivedCategory (ringedSiteModules.{max u v r} ((sheafCompose J (forget₂ CommRingCat.{max u v r} RingCat.{max u v r})).obj R))) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Q99",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d2f703b1",
+  "group": "Q99",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d2f703b1",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Lean exact against Stacks 08G8 (+08FT/08FU/08FZ/08G5). Statement unchanged; stmt_deps gain the two new def nodes plus the landed owner def-weil-pbc-strict-perfect-coefficient-package (allowed: STMT_DEPS MAY GAIN LANDED NODES). Perfectness = existing IsPerfectOnRingedSiteOfUniverses (one definition per notion); new def-sfb-ringed-site-pseudocoherent-complex (for all m, covering sieve, strictly perfect P, derived alpha into canonical restriction K|_V, IsIso H^j for j>m, Epi H^m) and def-sfb-ringed-site-locally-finite-tor-dimension (covering sieve, interval chosen after V, existing HasFiniteRingedSiteTorAmplitudeOfUniverses on R.over V testing all O_V-modules) are faithful, have real bodies and no duplicate (pc version scheme-only). Biconditional; no qc/coherence/bounds; universes u v r w w' independent; edge cases (empty site/cover, K=0, zero ring, a=b, negative m) consistent. lean.statement verbatim x3; docstrings/source/blueprint/5-step proof present; sorry only. Sole fault H11: second reading was the worker's self-check -> fixes/lem-sfb-ringed-site-perfect-criterion.report.md (worker report + New nodes verbatim + independent clause-by-clause reading). No Lean changed, no compile run."
+ }
+}

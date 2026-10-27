@@ -1,0 +1,303 @@
+{
+ "id": "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+ "kind": "statement",
+ "title": "Transfer of ringed-site resolving tensor localization across an exact equivalence",
+ "statement": "Let $(C,J)$ be a site small relative to the coefficient universe [def-weil-pbc-sites-and-cohomology, def-weil-size-convention], $R$ a sheaf of commutative rings, and $\\mathcal M=\\operatorname{Mod}(R)$ [def-weil-sheaf-of-modules-category], with sheaf tensor [def-pur-sheaf-tensor-product]. Let $\\mathcal A$ be an abelian category [def-sp-abelian] with symmetric monoidal structure [def-sfb-monoidal-category] with symmetry $\\beta_{X,Y}:X\\otimes Y\\xrightarrow{\\sim}Y\\otimes X$ natural in both variables, with $\\beta_{Y,X}\\circ\\beta_{X,Y}=\\mathrm{id}$ and the hexagon identity $\\alpha_{Y,Z,X}\\circ\\beta_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(\\mathrm{id}_Y\\otimes\\beta_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(\\beta_{X,Y}\\otimes\\mathrm{id}_Z)$, with countable coproducts and tensor additive and preserving those coproducts in each variable. Use ordinary unbounded derived categories and homotopy categories [def-weil-abstract-derived-category], and signed direct-sum total tensors [def-sfb-preserves-kflat-quasi-iso]. Flatness means tensor exactness, and K-flatness means the equivalent acyclic-tensor and two-sided quasi-isomorphism tests; on $\\mathcal M$ use [def-pc-flat-sheaf-modules, def-pc-kflat-complex].\nSuppose $F:\\mathcal M\\to\\mathcal A$ and $G:\\mathcal A\\to\\mathcal M$ are additive exact quasi-inverse equivalences, equipped with coherent strong monoidal comparisons [def-sfb-strong-monoidal-functor] that are symmetric: the inverse tensorator $c_{X,Y}:F(X\\otimes Y)\\cong FX\\otimes FY$ satisfies $c_{Y,X}\\circ F(\\beta_{X,Y})=\\beta_{FX,FY}\\circ c_{X,Y}$, and $G$ carries the inverse comparisons. Suppose their termwise functors preserve and reflect flat objects and K-flat complexes, and have specified coherent signed-total comparisons $\\tau_{P,Q}:F_{\\rm Ch}(P\\otimes Q)\\cong F_{\\rm Ch}P\\otimes F_{\\rm Ch}Q$, inverse for $G$.\nWrite $\\mathcal P_R\\subset K(\\mathcal M)$ and $\\mathcal P_{\\mathcal A}\\subset K(\\mathcal A)$ for the full subcategories of flat-term K-flat complexes, $W_R,W_{\\mathcal A}$ for their quasi-isomorphisms, and $Q_R,Q_{\\mathcal A}$ for the homotopy-to-derived localizations. Then the termwise unit and counit induce mutually inverse equivalences $D(F),D(G)$, and $W_{\\mathcal A}^{-1}\\mathcal P_{\\mathcal A}\\to D(\\mathcal A)$ is an equivalence. The total tensor on $\\mathcal A$ induces its ordinary unbounded K-flat derived tensor with canonical model maps $m_{\\mathcal A;P,Q}:Q_{\\mathcal A}(P\\otimes Q)\\cong Q_{\\mathcal A}P\\otimes^{\\mathbf L}Q_{\\mathcal A}Q$. Let $-\\otimes_R^{\\mathbf L}-$ and $m_{R;P,Q}:Q_R(P\\otimes_RQ)\\cong Q_RP\\otimes_R^{\\mathbf L}Q_RQ$ ($P,Q\\in\\mathcal P_R$) be the ringed-site derived tensor and its canonical model isomorphisms [lem-weil-pbc-site-derived-tensor-descent], and $\\kappa_P:D(F)Q_RP\\cong Q_{\\mathcal A}F_{\\rm Ch}P$ the exact-functor localization comparison.\nThere is a natural isomorphism $t_{K,L}:D(F)(K\\otimes_R^{\\mathbf L}L)\\cong D(F)K\\otimes^{\\mathbf L}D(F)L$, uniquely determined on flat-term K-flat $P,Q$ by\n$$(\\kappa_P\\otimes\\kappa_Q)\\circ t_{Q_RP,Q_RQ}\\circ D(F)(m_{R;P,Q})=m_{\\mathcal A;FP,FQ}\\circ Q_{\\mathcal A}(\\tau_{P,Q})\\circ\\kappa_{P\\otimes Q}.$$\nThis comparison and the localized ordinary unit comparison respect associators, both unitors and the native Koszul symmetries. The same formula computes $t$ on any K-flat representatives, even without flat terms, using their K-flat tensor model comparisons; it agrees with any independently specified ordinary K-flat derived tensor carrying these model maps. No functorial choice of resolutions in $\\mathcal A$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sfb-strong-monoidal-functor",
+  "def-sfb-monoidal-category",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing exact-equivalence mapDerivedCategory, with its specified mapDerivedCategoryFactors comparison. The termwise equivalence restricts to the full subcategories of all K-flat complexes by the preservation and reflection hypotheses.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+   }
+  },
+  {
+   "text": "For every target complex apply the independent-coefficient K-flat resolution theorem to its inverse image. Apply the forward exact functor to the resulting quasi-isomorphism and compose with the termwise counit. Flatness and K-flatness transfer by hypothesis. The existing restriction-localization theorem, proved using refinements of fractions, makes the flat-term target homotopy subcategory a localization. Its abstract localization is therefore equivalent to the target derived category.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+   }
+  },
+  {
+   "text": "Transport the given source symmetric monoidal derived category across the exact derived equivalence, using Mathlib monoidal equivalence transport. No native-derived-tensor construction is needed because the source TensorModel and its coherence are explicit hypotheses.",
+   "uses": [
+    "lem-sfb-symmetric-monoidal-equivalence-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+   }
+  },
+  {
+   "text": "The source TensorModel makes its restricted complex-to-derived functor strong monoidal and braided: use the inverses of the model pair and unit isomorphisms. The supplied total comparison makes the restricted termwise equivalence strong monoidal and braided. Transport the source localization functor along this equivalence and the exact-functor factorization isomorphism. This constructs a strong monoidal and braided localization on all target K-flat complexes. Its inverse tensorator and inverse unit are the target model maps. Monoidal functor laws prove all TensorModel fields. K-flat units and products are closed directly by the unitors and associator applied to the two-sided quasi-isomorphism test.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sfb-symmetric-monoidal-equivalence-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+   }
+  },
+  {
+   "text": "The monoidality equation for the exact-functor localization isomorphism, inverted, is exactly the prescribed tensor normalization on every K-flat pair. Its unit equation gives precisely the localized ordinary unit comparison. The transported derived equivalence is braided, giving the native symmetry equation. For uniqueness, apply two-variable localization extensionality to the source flat-term K-flat homotopy localization. On representatives cancel the invertible source model map and the tensor of factorization comparisons; the two normalization equations then coincide.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+   }
+  },
+  {
+   "text": "For any independently specified target TensorModel, descend each model strong monoidal localization to the full K-flat homotopy subcategory; fullness of the homotopy quotient descends naturality, and its native associator and unitor equations descend coherence. This subcategory localizes by the target replacements constructed above. Apply Mathlib Localization.Monoidal.functorCoreMonoidalOfComp to the identity functor, using the old model on the source localization and the new model on its lift. This constructs the identity comparison. Its unit and tensor maps compute to the new model inverse followed by the old model. The symmetry equation follows on K-flat representatives from the symmetry laws of the two models and then on every object by essential surjectivity. Compose the old normalized tensor comparison with the inverse tensorator of this identity comparison. Oplax monoidal naturality and the model formula show that this composite is normalized for the new model. The uniqueness argument just proved identifies it with every independently normalized comparison.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-product-localization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D, lemma-factor-through-K-flat; agent-written transfer of the resolving-localization and coherent derived comparison argument to an exactly equivalent coefficient category."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-symmetric-monoidal-equivalence-transport",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-product-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "K8: exact-equivalence transport of coherent K-flat model maps, resolving localization by the existing fraction restriction theorem, and monoidal localization for independence of the target presentation; Stacks Tags 06YS, 0G7D, 06YT and 06YU."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(KFlat.*[Ll]ocali|[Ll]ocali.*KFlat|leftDerivedTensorComparison|mapCochainComplexMonoidal)",
+   "results": "{\"t\": \"2026-10-22T05:55:34Z\", \"tool\": \"grep\", \"query\": \"(KFlat.*[Ll]ocali|[Ll]ocali.*KFlat|leftDerivedTensorComparison|mapCochainComplexMonoidal)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor factorization, monoidal localization with a globally monoidal weak-equivalence class, and functorial resolution criteria do not supply this resolving-subcategory transfer and the prescribed K-flat tensor normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact tensor equivalence transports the localization of flat term K flat complexes and its coherent derived tensor comparison",
+   "results": "{\"t\": \"2026-10-22T05:55:34Z\", \"tool\": \"leansearch\", \"query\": \"An exact tensor equivalence transports the localization of flat term K flat complexes and its coherent derived tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_exact\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.Flat.localizedModule\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"Module.Flat.rTensor_exact\", \"IsLocalization.moduleTensorEquiv\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"cca91a5bc7f9a07b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor factorization, monoidal localization with a globally monoidal weak-equivalence class, and functorial resolution criteria do not supply this resolving-subcategory transfer and the prescribed K-flat tensor normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-22T05:55:35Z\", \"tool\": \"loogle\", \"query\": \"\\\"Localization\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.instCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.instMonoidalCategoryLocalizedMonoidal\", \"CategoryTheory.Localization.Monoidal.monoidalCategoryStruct\", \"CategoryTheory.Localization.Monoidal.toMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instEssSurjLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.instIsLocalizationLocalizedMonoidalToMonoidalCategory\", \"CategoryTheory.Localization.Monoidal.ε'\", \"CategoryTheory.Localization.Monoidal.pentagon\"], \"digest\": \"4438ce1bd86d1571\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor factorization, monoidal localization with a globally monoidal weak-equivalence class, and functorial resolution criteria do not supply this resolving-subcategory transfer and the prescribed K-flat tensor normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a resolving localization by flat term K flat complexes across an exact equivalence to an arbitrary abelian category and descend a specified coherent total tensor comparison to unbounded derived categories",
+   "results": "{\"t\": \"2026-10-22T05:55:45Z\", \"tool\": \"leanfinder\", \"query\": \"Transport a resolving localization by flat term K flat complexes across an exact equivalence to an arbitrary abelian category and descend a specified coherent total tensor comparison to unbounded derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"HasDerivedCategory.standard\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso\", \"CategoryTheory.Functor.instLiftingHomologicalComplexHomologicalComplexUpToQuasiIsoQQuasiIsoCompMapHomologicalComplexMapHomologicalComplexUpToQuasiIso\"], \"digest\": \"49e0065e6ac0b950\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor factorization, monoidal localization with a globally monoidal weak-equivalence class, and functorial resolution criteria do not supply this resolving-subcategory transfer and the prescribed K-flat tensor normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence carrying flat term K flat resolutions and their total tensor comparison induces an equivalence of resolving localizations with coherent derived tensor unit and braiding maps",
+   "results": "{\"t\": \"2026-10-22T05:56:46Z\", \"tool\": \"leanfinder\", \"query\": \"An exact equivalence carrying flat term K flat resolutions and their total tensor comparison induces an equivalence of resolving localizations with coherent derived tensor unit and braiding maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor_obj\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.LocalizerMorphism.isLocalizedEquivalence_of_functorial_right_resolutions\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"38f2e1bddea898ec\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: exact-functor factorization, monoidal localization with a globally monoidal weak-equivalence class, and functorial resolution criteria do not supply this resolving-subcategory transfer and the prescribed K-flat tensor normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory|[Kk]Flat.*[Ll]ocaliz",
+   "results": "{\"t\": \"2026-10-22T06:53:32Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory.*[Ee]quivalence|[Ee]quivalence.*mapDerivedCategory|[Kk]Flat.*[Ll]ocaliz\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: ordinary monoidal transport is a useful leaf, but does not assert resolving-class localization or K-flat model normalization; the flat module and Tor hits do not supply these clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact symmetric monoidal equivalence induces the normalized equivalence on unbounded derived K flat tensor products",
+   "results": "{\"t\": \"2026-10-22T06:53:33Z\", \"tool\": \"leansearch\", \"query\": \"An exact symmetric monoidal equivalence induces the normalized equivalence on unbounded derived K flat tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.transportStruct\", \"CategoryTheory.Monoidal.Transported.instSymmetricCategory\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv.tensor\", \"CategoryTheory.Equivalence.IsTriangulated.symm\", \"CategoryTheory.Monoidal.transport\", \"CategoryTheory.FreeMonoidalCategory.normalizeIsoAux\", \"CategoryTheory.FreeMonoidalCategory.HomEquiv.below.tensor\", \"CategoryTheory.FreeMonoidalCategory.normalizeIso\"], \"digest\": \"a0204c0e3bbbf545\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: ordinary monoidal transport is a useful leaf, but does not assert resolving-class localization or K-flat model normalization; the flat module and Tor hits do not supply these clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsEquivalence\"",
+   "results": "{\"t\": \"2026-10-22T06:53:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategory\\\", \\\"IsEquivalence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: ordinary monoidal transport is a useful leaf, but does not assert resolving-class localization or K-flat model normalization; the flat module and Tor hits do not supply these clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact monoidal equivalence transports localization of flat term K flat complexes and normalized derived tensor comparisons",
+   "results": "{\"t\": \"2026-10-22T06:53:41Z\", \"tool\": \"leanfinder\", \"query\": \"Exact monoidal equivalence transports localization of flat term K flat complexes and normalized derived tensor comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.Tor'_obj_obj\", \"Module.Flat.iff_rTensor_exact'\"], \"digest\": \"7418630810ffb59b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match for the item: ordinary monoidal transport is a useful leaf, but does not assert resolving-class localization or K-flat model normalization; the flat module and Tor hits do not supply these clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-constant-scalar-restriction-tensor",
+  "date": "2026-10-22",
+  "group": "N9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Auxiliary coefficient equivalence serving the fourth blueprint proof paragraph (restriction of the adjunction); retained constant-scalar comparison proof steps 7-8.",
+   "via": [
+    "lem-sfb-constant-scalar-restriction-tensor",
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-ringed-equivalence-resolving-tensor-descent",
+  "worker": "stage1",
+  "summary": "Proved exact-equivalence localization and resolving-class descent, constructed the target derived tensor by ordinary symmetric monoidal transport, defined its model isomorphisms explicitly and descended the normalized comparison; checked arbitrary K-flat representatives and native signed coherence. One general Mathlib leaf; no new unresolved lemma and no change of statement.",
+  "blueprint": "Fourth paragraph of sk-prop-sf-rf-shriek-preservation: the auxiliary ordinary coefficient equivalence used in restricting the adjunction, through lem-sf-module-object-ordinary-coefficient-equivalence and lem-sfb-constant-scalar-restriction-tensor steps 7–8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The item explicitly assumes this general ringed-site resolving localization and its fixed model maps."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic ordinary categorical descent of functors, natural maps and equations."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site flat-term K-flat replacement, also applied to G of an arbitrary complex."
+   },
+   {
+    "node": "lem-sf-ringed-derived-native-tensor",
+    "why": "Generic ringed-site native symmetric tensor and model coherence, including arbitrary K-flat models; it supplies the source tensor structure only."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NK-b0334cdc2",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-b0334cdc2 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 10 steps, the new Mathlib leaf, every cited node's statement, the parent step (lem-sfb-constant-scalar-restriction-tensor step 3), Stacks sites-cohomology.tex (06YS l.3207, 0G7D l.3418, 0FPT l.13136, whose proof Stacks omits) and Mathlib Monoidal/Transport.lean 130-222 and Braided/Transport.lean 25-83. Fault, repaired (E5): step 4 used two different derived tensors together, the native one of lem-sf-ringed-derived-native-tensor and the statement's tensor ⊗_R^L with its model maps m_R from lem-weil-pbc-site-derived-tensor-descent, without identifying them. The fix adds one sentence: on pairs of flat-term K-flat complexes, the native model comparison composed with m_R^{-1} is a natural isomorphism, and the extension clause of lem-weil-pbc-site-derived-tensor-descent extends it uniquely to all of D(R)^2. Only the step-4 text changes; uses are unchanged. All other steps check out: (1) the termwise unit and counit descend and give the triangle identities by clauses 2-3 of the localization leaf; (2) the flat-term K-flat subcategory of A localizes D(A) through the equivalence F_P and the ringed localization L_R; (3) product localization, with identities quasi-isomorphisms; (5) the model maps m_A for arbitrary K-flat complexes are a typed composite of isomorphisms; (6) the oplax associativity residual and the signed (-1)^{pq} symmetry residual are correctly typed, and a tensor of K-flat complexes is K-flat; (7) the 5-map theta extends uniquely to t and gives exactly the displayed normalization; (8) the factorization a⊗b=(1⊗b)(a⊗1) uses only the two-sided K-flat test; (9) coherence reduces to the coherence of tau; (10) uniqueness against another K-flat derived tensor carrying the same model maps. Edge cases checked: the zero ring, F the identity, and degrees p,q including the odd/odd sign. The new leaf lem-sfb-symmetric-monoidal-equivalence-transport matches Mathlib clause by clause (transportStruct l.138, transport l.162, monoidal functor and unit/counit instances l.198-221, braiding = functor applied to β l.31, Braided instances l.39/67, instSymmetricCategory l.81). It duplicates no existing node; new-lem-kun-exact-monoidal-equivalence-derived needs functorial resolutions and a derived tensor already on the target. No cycle; no SGA. Accepted tool_uses: site-derived-tensor-descent, localization-universal-property, pc-kflat-resolution and ringed-derived-native-tensor, all generic and replacing no step of the unit route.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedEquivalenceResolvingTensorDescent",
+  "declaration": "CategoryTheory.RingedEquivalenceTensorDescent.ringed_equivalence_resolving_tensor_descent",
+  "declarations": [
+   "CategoryTheory.RingedEquivalenceTensorDescent.gradedTensor",
+   "CategoryTheory.RingedEquivalenceTensorDescent.gradedGood12",
+   "CategoryTheory.RingedEquivalenceTensorDescent.gradedGood23",
+   "CategoryTheory.RingedEquivalenceTensorDescent.gradedFour",
+   "CategoryTheory.RingedEquivalenceTensorDescent.tensorLeftEmpty",
+   "CategoryTheory.RingedEquivalenceTensorDescent.tensorRightEmpty",
+   "CategoryTheory.RingedEquivalenceTensorDescent.countableCochainMonoidal",
+   "CategoryTheory.RingedEquivalenceTensorDescent.TensorModel",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedForgetSheafCompose",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedWeakSheafify",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedModuleAbelian",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedModuleMonoidal",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedModuleMonoidalPreadditive",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedModuleSymmetric",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedModuleCoproducts",
+   "CategoryTheory.RingedEquivalenceTensorDescent.Modules",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedLeftCountable",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedRightCountable",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringedCochainMonoidal",
+   "CategoryTheory.RingedEquivalenceTensorDescent.resolvingRinged",
+   "CategoryTheory.RingedEquivalenceTensorDescent.resolvingTarget",
+   "CategoryTheory.RingedEquivalenceTensorDescent.derivedEquivalence",
+   "CategoryTheory.RingedEquivalenceTensorDescent.InverseTotalComparisons",
+   "CategoryTheory.RingedEquivalenceTensorDescent.TensorComparison",
+   "CategoryTheory.RingedEquivalenceTensorDescent.comparisonOfCore",
+   "CategoryTheory.RingedEquivalenceTensorDescent.NormalizationEquation",
+   "CategoryTheory.RingedEquivalenceTensorDescent.unitComparison",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ResolvingNormalization",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ComparisonSpec",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ModelAgreement",
+   "CategoryTheory.RingedEquivalenceTensorDescent.TransferSpec",
+   "CategoryTheory.RingedEquivalenceTensorDescent.ringed_equivalence_resolving_tensor_descent",
+   "CategoryTheory.RingedEquivalenceTensorDescent.countableHomotopyMonoidal",
+   "CategoryTheory.RingedEquivalenceTensorDescent.countableHomotopyBraided"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedEquivalenceResolvingTensorDescent.lean",
+  "statement": "theorem ringed_equivalence_resolving_tensor_descent [e.functor.Braided] [e.inverse.Braided] [NatTrans.IsMonoidal e.unitIso.hom] [NatTrans.IsMonoidal e.counitIso.hom] (gc : (e.inverse.mapHomologicalComplex (.up ℤ)).CoreMonoidal) (hInverse : InverseTotalComparisons (leftCountable := leftCountable) e tc gc) (hUnitF : tc.εIso = e.functor.mapCochainComplexεIso) (hUnitG : gc.εIso = e.inverse.mapCochainComplexεIso) (hSymF : ∀ P Q : CochainComplex (Modules R) ℤ, (e.functor.mapHomologicalComplex (.up ℤ)).map (β_ P Q).hom ≫ (tc.μIso Q P).inv = (tc.μIso P Q).inv ≫ (β_ ((e.functor.mapHomologicalComplex (.up ℤ)).obj P) ((e.functor.mapHomologicalComplex (.up ℤ)).obj Q)).hom) (hSymG : ∀ P Q : CochainComplex A ℤ, (e.inverse.mapHomologicalComplex (.up ℤ)).map (β_ P Q).hom ≫ (gc.μIso Q P).inv = (gc.μIso P Q).inv ≫ (β_ ((e.inverse.mapHomologicalComplex (.up ℤ)).obj P) ((e.inverse.mapHomologicalComplex (.up ℤ)).obj Q)).hom) (hFlatF : ∀ M : Modules R, SheafOfModules.IsFlatOnSite (J := J) (R := R) M ↔ exactFunctor A A (tensorRight (e.functor.obj M))) (hFlatG : ∀ M : A, exactFunctor A A (tensorRight M) ↔ SheafOfModules.IsFlatOnSite (J := J) (R := R) (e.inverse.obj M)) (hKFlatF : ∀ P : CochainComplex (Modules R) ℤ, CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ↔ CochainComplex.IsKFlatForTotalTensor ((e.functor.mapHomologicalComplex (.up ℤ)).obj P)) (hKFlatG : ∀ P : CochainComplex A ℤ, P.IsKFlatForTotalTensor ↔ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) ((e.inverse.mapHomologicalComplex (.up ℤ)).obj P)) : (∃ L : ((HomotopyCategory.quasiIso A (.up ℤ)).inverseImage (resolvingTarget A).ι).Localization ⥤ DerivedCategory A, L.IsEquivalence ∧ Nonempty (((HomotopyCategory.quasiIso A (.up ℤ)).inverseImage (resolvingTarget A).ι).Q ⋙ L ≅ (resolvingTarget A).ι ⋙ DerivedCategory.Qh)) ∧ ∃ (dA : MonoidalCategory (DerivedCategory A)) (sA : @SymmetricCategory (DerivedCategory A) _ dA), TransferSpec (leftCountable := leftCountable) e mR tc (fun P hP ↦ (hKFlatF P).mp hP) dA sA",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14a0b630b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the node matches the Lean: the flat-term K-flat localization equivalence on A, the normalization equation in diagram order (κ = mapDerivedCategoryFactors, τ = tc.μIso.inv), uniqueness over all t' normalized on flat-term K-flat pairs, CoreMonoidal coherence with unitComparison and the Koszul symmetry square, normalization on arbitrary K-flat representatives, and ModelAgreement against any other K-flat tensor model. The existential target model is pinned by TensorModel and ModelAgreement. Statement verbatim; only the lean field changed; docstrings with source, blueprint tag and 10 proof steps; no hollow defs; sorry only in the theorem; universes c v r a b wR wA independent; report has both sections. Advisory: the source tensor is a universally quantified TensorModel instead of the dep's declaration, which has only a chosen bifunctor and a Nonempty model iso; this is a faithful generalization (the native tensor exists only at universe max c v u). derivedEquivalence is an unused alias. No recompile, per instructions."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261023T135023-L-2825679",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

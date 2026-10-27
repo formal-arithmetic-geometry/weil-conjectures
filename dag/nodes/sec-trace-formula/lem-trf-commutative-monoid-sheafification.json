@@ -121,5 +121,35 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CommutativeMonoidSheafification",
+  "declaration": "CategoryTheory.commutative_monoid_sheafification",
+  "file": "lean/Sheaf/CategoryTheory/CommutativeMonoidSheafification.lean",
+  "statement": "theorem commutative_monoid_sheafification {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (P : Cᵒᵖ ⥤ CommMonCat.{max u v t}) : (Presheaf.IsSheaf J P ↔ Presheaf.IsSheaf J (P ⋙ forget CommMonCat.{max u v t})) ∧ ∃ (L : Sheaf J CommMonCat.{max u v t}) (η : P ⟶ L.obj), (∀ H : Sheaf J CommMonCat.{max u v t}, Function.Bijective (fun f : L ⟶ H ↦ η ≫ f.hom)) ∧ Presheaf.IsSheaf J (L.obj ⋙ forget CommMonCat.{max u v t}) ∧ (∀ H : Sheaf J (Type (max u v t)), Function.Bijective (fun f : L.obj ⋙ forget CommMonCat.{max u v t} ⟶ H.obj ↦ Functor.whiskerRight η (forget CommMonCat.{max u v t}) ≫ f))",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The recorded generic Mathlib declarations require HasWeakSheafify and forgetful-preservation instances; the advertised one-line specialization does not synthesize HasSheafify on X.Etale with coefficients CommMonCat.{max (u+1) v} for an independent v. This interface states the full node in a coefficient universe containing both site universes, retaining the underlying-set universal property with the same unit, instead of imposing an extra universe equality or a sheafification hypothesis. No existing Mathlib or upstream declaration of this explicit existential interface was found."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13215ac19",
+  "group": "Q08",
+  "result": "fix",
+  "note": "Read node, 4 stmt_deps, ILO VI 1.1 place, both delivered modules, report (Worker report + Second reading present), live EtaleLogStructure (CommMonCat.{u}), divisorialChartCongruence, etaleStructurePresheaf, landed PrelogPushoutPresentation (theorem-node module, so inline restatement is right), sibling prelog-pushout-hom-extension (universe u) and the 3 citers. Fault: the delivery puts coefficients in max(u+1) v with ULift, claiming universe u is too small, so 'L is a log structure [def-trf-fs-log-blowup]' is never stated and universe-u prelogs (the case every citer needs) are covered only via ULift; Mathlib AffineEtale gives HasSheafify X.smallEtaleTopology CommMonCat.{u}. FIX: restated in universe u (ring = X.etaleStructurePresheaf.obj V) and added ∃ Λ : EtaleLogStructure X, Λ.toEtalePrelogStructure = {monoidSheaf := L, alpha := α}; all other clauses kept; proof step 5 extended with the stalk argument. nt_compile --json with the delivered dependency module: 10.1 s + 14.5 s, no errors. Advisory: the dependency repair CommutativeMonoidSheafification (max u v t) is correct but no longer needed; maintainer may use --revert-nodes. Edge cases (empty V, zero ring, γ into units, non-cancellative M, H of any size) ok."
+ }
 }

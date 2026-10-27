@@ -1,0 +1,53 @@
+# O1 stage-1 report: lem-trf-completed-algebraic-closure-cartesian
+
+## Files written
+
+- `dag/nodes/sec-trace-formula/lem-trf-completed-algebraic-closure-cartesian.json`: existing statement split into eight proof steps. No statement or statement dependency changed. Existing searches retained and actual current searches appended.
+- `citations.json`: one entry for each of the thirteen step/node citations; each quote is the complete verbatim statement read from the referenced node.
+- New nodes: **0**. New Mathlib leaves: **0**. All proof inputs already exist in the DAG.
+
+## Attachments
+
+None. Searches under `lean/WeilConjectures/` for the exact blueprint tag, the item id, spectral norms, orthogonality, completed algebraic closures and cartesian terminology found no declaration stating this item. The hits for orthogonality concern characters and idempotents, and the cartesian hits concern scheme squares, not ultrametric vector spaces. No Lean was written or compiled.
+
+## Literature wanted
+
+WANTED: Bosch–Güntzer–Remmert, *Non-Archimedean Analysis*, archival copy at `literature/bosch-guentzer-remmert-nonarchimedean-analysis.pdf`; especially Proposition 3.4.1/3, Proposition 2.4.3/7 and Corollary 2.4.3/10, for this item. The primary Arizona scan was read through rasterized pages in this sandbox: PDF pp.108–110 (printed pp.100–102), PDF p.155 (printed p.147, proof of Proposition 3.4.1/3), and PDF p.224 (printed p.218, opening of Section 5.3.4). The local archival PDF is absent. Accordingly `proof_origin.by` is `agent`, and the proof is explicitly assembled from the cited existing statements. The source's Proposition 3.4.1/3 uses coefficient approximation and nearby roots in an algebraic extension, followed by completeness. Proposition 2.4.3/7 gives the strict basis-perturbation argument used in steps 6–8. Corollary 2.4.3/10 explains the general completion criterion. No SGA route is used.
+
+## Findings and changes
+
+The imported statement is correct, including positive characteristic, non-discrete valuations and the empty basis. No STATEMENT-DISPUTED correction is needed. There was no prior sandbox split or report to preserve. The live item's historical sources, searches, blueprint provenance and statement have all been retained.
+
+A tempting Mathlib hit is `IsAlgClosed.of_denseRange`, read in `Mathlib/Analysis/Normed/Field/Dense.lean:45–48` after following `PadicComplex.isAlgClosed` at `NumberTheory/Padics/Complex.lean:245`. It assumes `CharZero L`; the item does not. Consequently that theorem is neither an attachment nor a leaf covering the item. Our nearby-root proof uses `Polynomial.exists_aroots_norm_sub_lt_of_norm_coeff_sub_lt`, read at `Analysis/Normed/Field/Approximation.lean:114–124`, through the existing leaf `lem-sfb-roots-coefficient-proximity`, which has no characteristic restriction.
+
+The initial exploratory searches suggested possible new leaves for spectral multiplicativity, normed-field completion and root continuity. Whole-DAG searches then found **all three already represented**, as `lem-trf-spectral-norm-algebraic-extension`, `lem-sfb-normed-field-completion` and `lem-sfb-roots-coefficient-proximity`; none was created. The precise finite-field-generation statement also already exists as `lem-weil-pbc-algebraic-generators-finite-extension`. For subspaces we cite `lem-trf-cartesian-subspace`, rather than the larger scalar-tower lemma. Searches covered the whole DAG, blueprint searches for cartesian, orthogonal basis, spectral norm, normed field, continuity of roots, roots_norm_sub, spectral and monic polynomials, and the current `literature/blueprint/latest` ancestor. No blueprint node restates this analytic result; `same_as` remains empty.
+
+The current blueprint ancestor concerns contracting correspondences, whereas this item's historical analytic input descends through Temkin and BGR. This split keeps its existing historical provenance and does not replace any unit step or edit a unit/chapter. Every cited statement outside this unit is already a Mathlib leaf, so no off-unit tool declaration is needed.
+
+## Not duplicates
+
+No new nodes, so there are no new/existing pairs to justify. All duplicate candidates discovered during searches were reused.
+
+## Review by O1
+
+I read the item and its existing statement dependencies, the chapter and unit records, the current blueprint ancestor and its proof, and the BGR scan passages named above. BGR's spectral extension and completion are the same objects as in the item. Its cartesian assertion means every finite-dimensional subspace has an exact orthogonal basis; it does not assert a global Hamel basis of an infinite-dimensional completion. The field is assumed complete and nontrivially valued wherever the spectral-norm and finite-space inputs need that hypothesis. Stability is used only for finite extensions inside the algebraic closure.
+
+For step 1 I opened the statements of `lem-trf-spectral-norm-algebraic-extension` and `lem-sfb-normed-field-completion`. The first supplies an extending **multiplicative**, nonarchimedean spectral norm on the entire algebraic extension, and the second supplies a complete normed field and an isometric ring inclusion, not just a completion as an additive group. Density is part of the specified metric completion. Passing the ultrametric inequality to convergent sequences is written explicitly; nontriviality is inherited from the isometric inclusion of k. Thus no unproved theorem about the completion being algebraically closed is smuggled into this step.
+
+For step 2 I read `def-weil-algebraic-closure`, which includes existence and the root property, and reused the spectral-extension statement with base k', which step 1 has proved complete and nontrivially valued. The monic approximation leaf `lem-sfb-monic-dense-approximation` allows an arbitrary dense subfield D and requires no norm on D; here D=k^a and K=k'. Its statement supplies the monic polynomial of exactly the same degree and the coefficient bounds for every index. The positive tolerance uses n>=1 and M>=1, so its real powers have positive bases.
+
+For step 3 I opened `lem-weil-alg-closed-linear-factorization` and `lem-sfb-roots-coefficient-proximity`. The former gives linear factorization in k^a; after inclusion it gives the splitting hypothesis required by the latter for Omega/k'. Norm compatibility is provided by the spectral extension. The latter actually supplies a root with the stated quantitative distance, without separability or characteristic-zero assumptions. The finite-product-zero calculation is written to ensure this root lies in k^a, not merely in Omega. This is the key distinction that makes the density argument valid.
+
+For step 4 I checked `lem-sfb-finite-dimensional-subspace-closed`. Its scalar field is **k'**, not k or k^a, and the image of k' is one-dimensional over itself. The ambient Omega need not be complete: the cited statement only asks it to be Hausdorff and a topological vector space. The norm inequalities verifying continuity of the operations are included. Step 3 gives arbitrary positive-radius approximation, so a lies in the closure of this closed subspace. Division by the leading coefficient reduces every nonconstant polynomial to the monic case, establishing the exact algebraic-closedness definition. No hidden completeness assumption on Omega is made.
+
+For step 5 I read `lem-weil-pbc-algebraic-generators-finite-extension`: finitely many algebraic elements in any ambient field generate a finite extension, with no separability assumption. It is used on a basis of the finite subspace U. The definition `def-trf-stable-nonarchimedean-field` gives orthogonal bases for the **spectral** norm of every finite extension. I therefore wrote out why the restricted norm from k^a equals the spectral norm on E, by equality of their minimal polynomials over the same base k. The statement of `lem-trf-cartesian-subspace` then gives an orthogonal basis of U with the restricted norm; the scalar-tower lemma's stronger second clause is unnecessary. Each cited node really states the clause used, independently of its own proof status.
+
+For step 6 I read `lem-trf-finite-ultrametric-almost-orthogonal-basis`: its complete, nontrivial, nonarchimedean scalar field is k, its space is V, and r=1/2 lies strictly between zero and one. This gives a positive lower coordinate bound alpha, since V has positive dimension and its basis vectors have nonzero norms. Density supplies the w_i. Step 7 is the elementary argument from BGR Proposition 2.4.3/7: a strict error less than alpha times the largest coefficient gives exactly equal norms, by both ultrametric inequalities. Injectivity, surjectivity onto the defined span, and linearity are all explained in basis coordinates. Step 8 uses the already proved step 5 and transfers its basis across this explicit linear isometry, displaying all three norm equalities. These final two steps are elementary, not citations of a new copy of the item's conclusion.
+
+I checked B1–B9 and C1–C8 against the files: no new unsplit nodes or hollow notions, no unrun search recorded, no Mathlib leaf claimed for an inner-product notion of orthogonality, no new Stacks tags needing nodes, and every non-elementary input has a cited node whose statement I opened. Citations are literal statements, not quotations from dependency proofs. The proof dependencies equal the union of uses. There is no path through this item's parent stability lemma or through any descendant that could introduce a cycle. Every step is under 900 characters, so none reaches the 2000-character long-step review threshold. The perturbation and finite-product calculations are written out rather than hidden in words such as “transport”.
+
+I tested the zero subspace, one-dimensional subspaces, k already algebraically closed, the discretely valued example Q_p with completion C_p, and positive-characteristic complete fields. Zero is handled separately before taking a minimum over a basis. Repeated roots and inseparable polynomials cause no failure: the root-proximity statement requires monicity and splitting, not distinct roots, and the factorization argument allows repeated factors. No spherical completeness, discreteness or finite-dimensionality of k^a/k or k'/k is used. The only changes during this review were choosing the existing narrower subspace node and replacing the characteristic-zero candidate by the characteristic-free explicit root argument.
+
+## Unfinished work
+
+None for the authorized stage-1 split. Existing unsplit proof dependencies retain their own queue items. No Lean, compiler, Lake, repository write, launcher edit or subagent was used.

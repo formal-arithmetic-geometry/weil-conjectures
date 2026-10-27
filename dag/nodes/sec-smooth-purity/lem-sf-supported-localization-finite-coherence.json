@@ -1,0 +1,132 @@
+{
+ "id": "lem-sf-supported-localization-finite-coherence",
+ "kind": "statement",
+ "title": "Finite coefficient coherence of supplied supported localization records",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "V4",
+  "item": "Sheaf.Paper.SfCommonStageLocalizationConstruction",
+  "date": "2026-10-25"
+ },
+ "statement": "Fix a field $k$, a prime $\\ell$ invertible in $k$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a separated finite-type $k$-scheme $X$, and complementary closed/open immersions $i:Z\\hookrightarrow X$ and $j:U\\hookrightarrow X$. For every finite coefficient field $E\\subset\\Omega$, suppose $S_E$ is a supplied rational supported localization record of [def-sf-localization-stage-data]. Then there is finite input $D$ of [lem-sf-exceptional-common-stage-descent] satisfying its Hypotheses and GeometricNormalization $i,j$. At every $E$ its closed/open pullbacks, closed/open images and exceptional functor are literally the five functors of $S_E$; its three adjunctions equal those of $S_E$ after these functor equalities. No common-stage functor, adjunction, distinguished triangle or Hom-colimit assertion is made.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Step 12, finite coefficient-extension coherence before common-stage descent; Vanishing paragraph and step 9 for exact shifts."
+ },
+ "stmt_deps": [
+  "def-sf-localization-stage-data",
+  "lem-sf-exceptional-common-stage-descent"
+ ],
+ "proof": [
+  {
+   "text": "The specified pullback equalities identify the supplied finite left adjoints with rationalDerivedPullback. Apply the canonical rational coefficient pullback comparison to i and j. Its functor family and components are uniquely normalized, and its right mates are invertible for every supplied pointwise right adjoint. Transport these maps along the supplied pullback equalities. The mate counit equation and the bijection on adjunction transposes give the unit, identity and tower equations, hence coherent closed and open image stage systems with precisely the supplied functors. No adjoint existence at common stages is used.",
+   "uses": [
+    "lem-sf-rational-direct-image-coefficient-compatibility",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact shift structure on the rationalized completed pullbacks, and give the supplied right adjoints the shifts induced by their adjunctions. The adjunction shift theorem and exactness of right adjoints give the five exact functors and the three compatible adjunctions. The normalized tensor/pullback comparisons and their projection mates commute with these shifts and the scalar unit. This proves inputShift, inputUnit, closedMate and openMate for these precise comparisons.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Closed pushforward is fully faithful, so its restriction adjunction counit is invertible. Open restriction of open direct image is identity: the open site is a localization and U times_X U equals U. The supplied image normalization identifies these ordinary completed images and their rationalizations with the supplied right adjoints. These facts are invariant under the unique adjoint isomorphism, so both supplied counits are invertible. The open adjunction identifies each Hom from a shifted closed image to an open direct image with Hom from its open restriction; disjointness makes that restriction zero. The supplied rational supported record gives the distinguished triangle with the actual exceptional counit and open unit. These facts complete Hypotheses. Canonical pullback comparisons give GeometricNormalization for every invertibility witness; such witnesses are unique.",
+   "uses": [
+    "prop-sf-closed-unit-all-stages",
+    "def-weil-derived-direct-image",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Step 12, finite coefficient-extension coherence before common-stage descent; Vanishing paragraph and step 9 for exact shifts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rational supported localization adjunctions admit coherent coefficient extension comparisons before descent to a filtered common stage category",
+   "results": "Adjunction.localization, Adjunction.derived, Adjunction.derived', localization_counit_app and generic localization adjunction helpers.",
+   "date": "2026-10-25",
+   "verdict": "No exact geometric coefficient-coherence package. Generic adjunction localization alone does not give the prescribed coefficient comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished triangle from a right adjunction counit to an open adjunction unit with closed to open orthogonality has a unique boundary and the closed exceptional unit is invertible",
+   "results": "Adjunction.isTriangulated_rightAdjoint, isTriangulated_leftAdjoint, Adjunction.IsTriangulated constructors and ObjectProperty.rightOrthogonal.map_bijective_of_isTriangulated.",
+   "date": "2026-10-25",
+   "verdict": "Adjoint exactness is available, but not the normalized finite coefficient package. Boundary uniqueness and the exceptional consequences are proved in the consumer."
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction.*CommShift|counit_isIso_of_R_fully_faithful|mateEquiv",
+   "results": "Mathlib.CategoryTheory.Shift.Adjunction, Mathlib.CategoryTheory.Triangulated.Adjunction, Mathlib.CategoryTheory.Adjunction.Mates.mateEquiv_counit and Mathlib.CategoryTheory.Adjunction.FullyFaithful.counit_isIso_of_R_fully_faithful.",
+   "date": "2026-10-25",
+   "verdict": "Generic mate, shift and full-faithfulness infrastructure; none asserts finite geometric scalar coherence."
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Step 12: finite coefficient-extension coherence, before the sentence applying common-stage descent.",
+   "via": [
+    "lem-sf-common-stage-localization-construction"
+   ]
+  },
+  "same_as": []
+ },
+ "proof_deps": [
+  "lem-sf-rational-direct-image-coefficient-compatibility",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "prop-sf-closed-unit-all-stages",
+  "def-weil-derived-direct-image"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SfLocalizationFiniteCoherence",
+  "file": "lean/Sheaf/Paper/SfLocalizationFiniteCoherence.lean",
+  "declaration": "WeilConjectures.sfSupportedLocalization_finite_coherence",
+  "declarations": [
+   "WeilConjectures.sfSupportedLocalization_finite_coherence"
+  ],
+  "statement": "theorem sfSupportedLocalization_finite_coherence\n    (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : IsUnit (l : k))\n    (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]\n    (X : Scheme.{u}) (t : X ⟶ Spec (.of k))\n    [IsSeparated t] [LocallyOfFiniteType t] [QuasiCompact t]\n    {Z U : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)\n    [IsClosedImmersion i] [IsOpenImmersion j]\n    (hij : Set.range j = (Set.range i)ᶜ)\n    (S : ∀ E : Index l Ω, SfRationalLocalization l (Coefficient.{u} l Ω E)\n      k hl t i j) :\n    ∃ D : FiniteData l Ω X Z U, Hypotheses D ∧ GeometricNormalization i j D ∧\n      ∀ E : Index l Ω,\n        D.closedPull.Φ E = (S E).supported.iPull ∧\n        D.openPull.Φ E = (S E).supported.jPull ∧\n        D.closedPush.Φ E = (S E).supported.iPush ∧\n        D.openPush.Φ E = (S E).supported.jPush ∧\n        D.exceptional E = (S E).supported.exceptional ∧\n        HEq (D.closedAdj E) (S E).supported.closedAdjunction ∧\n        HEq (D.openAdj E) (S E).supported.openAdjunction ∧\n        HEq (D.exceptionalAdj E) (S E).supported.exceptionalAdjunction",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164554-L-1036225",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261025T164554-L-1036225",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

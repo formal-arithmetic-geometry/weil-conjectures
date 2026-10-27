@@ -1,0 +1,126 @@
+{
+ "id": "lem-zl-ind-proper-open-higher",
+ "kind": "statement",
+ "title": "Proper/open interchange for higher images under a proper refinement",
+ "statement": "Fix a finite-field datum D=(p,a,q,k₀,k) [def-weil-finite-field-fiber], a prime l≠p, an algebraic closure Ω of Q_l, and finite-type k₀-schemes. Write C(T) for the existing common-stage constructible Weil heart [def-weil-weil-sheaf-complex], I(T) for the category of all Frobenius-equivariant ind-objects of its underlying constructible heart, and y_T:C(T)→I(T) for its specified fully faithful embedding. Inverse image and its chosen adjoints are exactly those normalized by the Yoneda Kan unit in [def-zl-weil-ind-sheaf-category]. Let j₁:X→Z₁ and j₂:X→Z₂ be open immersions [def-weil-open-immersion], let p₁:Z₁→Y and p₂:Z₂→Y be proper [def-weil-proper-morphism], and let r:Z₁→Z₂ be proper with r∘j₁=j₂ and p₂∘r=p₁. For every n∈ℕ and F∈C(X), there is an isomorphism Rⁿp₁,*(j₁,!y_X(F))≅Rⁿp₂,*(j₂,!y_X(F)) in I(Y). The square identifying the open copies of X need not be Cartesian.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-open-immersion",
+  "def-weil-proper-morphism"
+ ],
+ "source": {
+  "document": "SGA 4, exposé XVII, 5.1.4–5.1.6; Bhatt–Scholze 6.7–6.8",
+  "place": "Proper/open interchange, with top map id_X, followed by proper-image transitivity, transported through the normalized ind-adjunctions."
+ },
+ "proof": [
+  {
+   "text": "Proper/open interchange gives Rr_*j₁!≅j₂!. To see this even when the open square is not Cartesian, restrict first to X⊂Z₂. The copy of X in r⁻¹(X) is a section of a proper map and is an open immersion; it is therefore both open and closed. The extension by zero is zero on its complement. Proper base change gives the identity on X and zero higher images. On Z₂\\X, proper base change gives zero, since the source extension has zero restriction there. Open and closed restrictions jointly detect the comparison isomorphism. Thus j₁!F is r_*-acyclic and r_*j₁!F≅j₂!F.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse image makes the proper ordinary right adjoints preserve injectives. The Grothendieck spectral sequence for p₂,*∘r_*, evaluated on the r_*-acyclic object j₁!y_X(F), collapses to identify Rⁿp₂,*(j₂!y_X(F)) with Rⁿ(p₂r)_*(j₁!y_X(F)). The adjunction for composite pullback identifies (p₂r)_* with p₁,* using the specified equality p₂r=p₁.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All comparisons are the unit/counit mates of the specified pullback squares. They commute with Frobenius and finite coefficient extension. The Yoneda Kan normalization transports the proper/open comparison to the ambient ind-categories and lifts it to their fixed pairs. Taking the inverse of the preceding comparison gives the stated orientation. The identity proper map and empty open give the identity and zero comparisons respectively.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-zl-weil-ind-sheaf-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "SGA 4, exposé XVII, 5.1.4–5.1.6; Bhatt–Scholze 6.7–6.8",
+  "place": "Proper/open interchange, with top map id_X, followed by proper-image transitivity, transported through the normalized ind-adjunctions. Application to the specific ind-model is written by Q9."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper pushforward of extension by zero is unchanged by a proper refinement of a compactification",
+   "results": "8 hits: HasCompactSupport.extend_zero, HasCompactSupport.tsupport_extend_zero, SheafOfModules.pushforwardComp, AlgebraicGeometry.Scheme.Cover.pushforwardIso_X, AlgebraicGeometry.Scheme.Cover.pushforwardIso_f, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Cover.pushforwardIso_I₀",
+   "date": "2026-10-24",
+   "verdict": "no exact match; only generic category/sheaf results"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq_refl, CategoryTheory.Adjunction.leftAdjointUniq_inv_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_leftAdjointUniq_hom, CategoryTheory.Adjunction.leftAdjointUniq_trans, CategoryTheory.Adjunction.leftAdjointUniq_trans_app, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit",
+   "date": "2026-10-24",
+   "verdict": "no exact match; only generic category/sheaf results"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|ProperOpen|proper.*open|open.*proper",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/ColimitsOver.lean, Mathlib/AlgebraicGeometry/ResidueField.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/Sites/Etale.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/QuasiCompact.lean, Mathlib/AlgebraicGeometry/Sites/BigZariski.lean",
+   "date": "2026-10-24",
+   "verdict": "no exact match; only generic category/sheaf results"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.WeilCompactSupportCohomology",
+  "date": "2026-10-25",
+  "group": "Q9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "First proof paragraph: canonical higher compact-support images with their natural Weil structures; Proper/open interchange for higher images under a proper refinement.",
+   "via": [
+    "def-zl-weil-compact-support-cohomology",
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.WeilIndProperOpenHigher",
+  "file": "lean/Sheaf/Paper/WeilIndProperOpenHigher.lean",
+  "declaration": "WeilConjectures.zlIndWeilProperOpenHigher",
+  "statement": "theorem zlIndWeilProperOpenHigher\n    {X₀ Z₁ Z₂ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]\n    [LocallyOfFiniteType Z₂.hom] [QuasiCompact Z₂.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (j₁ : X₀ ⟶ Z₁) (j₂ : X₀ ⟶ Z₂)\n    [IsOpenImmersion j₁.left] [IsOpenImmersion j₂.left]\n    (p₁ : Z₁ ⟶ Y₀) (p₂ : Z₂ ⟶ Y₀)\n    [IsProper p₁.left] [IsProper p₂.left]\n    (r : Z₁ ⟶ Z₂) [IsProper r.left]\n    (_hi : j₁ ≫ r = j₂) (_hp : r ≫ p₂ = p₁)\n    (n : ℕ) (F : sfCommonStageWeilSheaf D l hl X₀ Ω) :\n    Nonempty\n      (((zlIndWeilPush D l hl Ω p₁).rightDerived n).obj\n          ((zlIndWeilOpenShriek D l hl Ω j₁).obj\n            ((zlWeilIndEmbedding D l hl Ω X₀).obj F)) ≅\n        ((zlIndWeilPush D l hl Ω p₂).rightDerived n).obj\n          ((zlIndWeilOpenShriek D l hl Ω j₂).obj\n            ((zlWeilIndEmbedding D l hl Ω X₀).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "Q9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261025T003335-L-3230640",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261025T003335-L-3230640",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

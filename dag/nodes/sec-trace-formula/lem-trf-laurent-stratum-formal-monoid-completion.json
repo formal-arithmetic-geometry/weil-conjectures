@@ -1,0 +1,332 @@
+{
+ "id": "lem-trf-laurent-stratum-formal-monoid-completion",
+ "kind": "statement",
+ "title": "Formal monoid completion over the completed regular Laurent stratum",
+ "statement": "Let $L$ be a field or a Cohen ring [def-weil-pbc-cohen-ring] with maximal ideal $\\mathfrak m_L$, let $K$ be a finite free abelian group, let $T$ be a sharp fine saturated additive monoid [def-trf-fs-log-blowup], sharp meaning that $0$ is its only invertible element, and let $n\\ge0$. Put $E=L[K][t_1,\\ldots,t_n]$, choose any prime $\\mathfrak p\\subset E$ containing $(\\mathfrak m_L,t_1,\\ldots,t_n)$, and set\n$$E_*=E_{\\mathfrak p},\\quad D=\\widehat {E_*},\\quad U=E[T],\\quad\\mathfrak r=\\mathfrak pU+([v]:v\\in T\\setminus\\{0\\}),\\quad Z=U_{\\mathfrak r}.$$\nLocalizations and maximal-ideal completions use [def-weil-pbc-localization-at-prime, def-weil-pbc-adic-completion]. Monoid rings $E[M]$ consist of finite sums $\\sum c_u[u]$ with $[u][v]=[u+v]$.\nThen $D$ is a nonzero complete regular Noetherian local ring [def-weil-regular-scheme, def-weil-pbc-noetherian-ring] with residue field $\\operatorname{Frac}(E/\\mathfrak p)$. Write\n$$\\mathfrak b=(\\mathfrak m_{E_*},[v]:v\\ne0)E_*[T],\\quad\\mathfrak a=(\\mathfrak m_D,[v]:v\\ne0)D[T],\\quad H=D[[T]]=\\varprojlim_jD[T]/\\mathfrak a^j.$$\nThe canonical maps induce compatible isomorphisms for all $j\\ge1$,\n$$Z/\\mathfrak m_Z^j\\cong E_*[T]/\\mathfrak b^j\\cong D[T]/\\mathfrak a^j,$$\nand hence a continuous isomorphism $\\widehat Z\\cong H$ with continuous inverse, sending every coefficient $e\\in E$ to its image in $D$ and every $[v]$ to $[v]$. Moreover $H/([v]:v\\ne0)H\\cong D$, by the coefficient map and the augmentation killing the nonzero $T$-monomials. The construction allows $T=\\{0\\}$, $K=0$, and $n=0$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6, printed p. 70; agent-supplied construction of the coefficient stratum before its relation and calculation of all monomial-adic quotients, returned proof Steps 9--10 and the augmentation identification in Step 13."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cohen-ring",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-noetherian-ring"
+ ],
+ "proof": [
+  {
+   "text": "The zero-variable case of [lem-weil-pbc-power-series-field-cohen-regular-complete] makes $L$ regular local, for either allowed kind of coefficient ring. By [lem-weil-pbc-regular-local-localization] it is a regular ring. Choose a basis of $K$ of size $h$. The assignments $x_i\\mapsto[e_i]$, $x_i^{-1}\\mapsto[-e_i]$ identify $E$ with $L[x_1,\\ldots,x_h,t_1,\\ldots,t_n][(x_1\\cdots x_h)^{-1}]$: the inverse sends $[\\sum a_ie_i]t^b$ to $x^at^b$, extended coefficientwise. For $h=0$ the product is $1$. Apply [lem-trf-polynomial-ring-regular-base] and [lem-weil-pbc-localization-of-regular-ring] to this presentation. Thus $E$ is Noetherian and regular; its prime localization $A=E_*$ is regular local by the definition [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-polynomial-ring-regular-base",
+    "lem-weil-pbc-localization-of-regular-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032C (remark-Noetherian-complete-local-ring-universally-catenary), zero variables; 0AFS (lemma-localization-of-regular-local-is-regular); regular polynomial input is the cited Mathlib leaf. Laurent presentation is explicit agent algebra."
+   }
+  },
+  {
+   "text": "Write $\\mathfrak m=\\mathfrak m_A$. Since $A$ is Noetherian local, [lem-weil-pbc-completion-regular-local] and [lem-weil-pbc-adic-completion-noetherian] make $D$ regular and Noetherian. By [lem-weil-pbc-local-completion-local-ring], $\\mathfrak m_D=\\mathfrak mD$ and $D/\\mathfrak m_D\\cong A/\\mathfrak m$. Completeness for $\\mathfrak mD$ follows from [lem-weil-pbc-adic-completion-mod-ideal], since $\\mathfrak m$ is finitely generated. The fraction description [def-weil-pbc-localization-at-prime] gives $A/\\mathfrak m\\cong\\operatorname{Frac}(E/\\mathfrak p)$: $e/s\\mapsto\\bar e/\\bar s$; every nonzero class of $E/\\mathfrak p$ is an allowed denominator, and the fraction equality is the same after reduction. This is a nonzero field, so its surjective preimage $D$ is nonzero.",
+   "uses": [
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NY (lemma-completion-regular); algebra.tex Tags 0316 (lemma-completion-Noetherian-Noetherian), 05GG (lemma-hathat-finitely-generated), 05GI (lemma-radical-completion)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-sharp-fs-orthant-embedding] to $T$. Identify it with its image $P\\subseteq\\mathbf N^r\\subseteq\\mathbf Z^r$; take $w(a)=\\sum_i a_i$. Injectivity makes $w$ strictly positive away from zero. This supplies precisely the ambient free group and positive weight required below, without any freeness assumption on $T$ itself. Choose a finite generating list of $T$ and omit its zero entries. The corresponding nonzero monomials generate the whole nonzero-monomial ideal: a nonzero exponent is a sum of generators and hence has a nonzero generator as a summand. In particular $U=E[T]$ and $B=A[T]$ are finite type algebras. By [lem-weil-pbc-finite-type-algebra-noetherian] they are Noetherian; [lem-weil-pbc-localization-noetherian] makes $Z$ Noetherian. The same argument gives that $D[T]$ is Noetherian. All ideals used for completions are therefore finitely generated.",
+   "uses": [
+    "lem-trf-sharp-fs-orthant-embedding",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70, agent construction; orthant input is the cited DAG statement; Noetherian input: Stacks algebra.tex Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Sharpness implies that a sum of two exponents is zero only when both are zero, so augmentation $U\\to E$ is a ring map. Its composite with $E\\to E/\\mathfrak p$ has kernel exactly $\\mathfrak r$; hence $\\mathfrak r$ is prime. A polynomial lies outside $\\mathfrak r$ exactly when its constant coefficient is outside $\\mathfrak p$. By [def-weil-pbc-localization-at-prime], $Z$ is local with maximal ideal $\\mathfrak rZ$. Every $s\\in E\\setminus\\mathfrak p$ is invertible in $Z$, so $B=A[T]\\to Z$ is defined by $[v]\\mapsto[v]$ and $e/s\\mapsto(e/1)(s/1)^{-1}$. Its coefficient maximal ideal is generated by fractions $e/s$ with $e\\in\\mathfrak p$, and therefore $\\mathfrak bZ=\\mathfrak rZ=\\mathfrak m_Z$. This defines the canonical map $B/\\mathfrak b^j\\to Z/\\mathfrak m_Z^j$ for every $j\\ge1$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70: agent-supplied augmentation and localization calculation."
+   }
+  },
+  {
+   "text": "For $s\\in U\\setminus\\mathfrak r$, its image in $B$ is $c+h$, with $c\\in A^\\times$ its constant coefficient and $h$ in the nonzero-monomial ideal. In $B/\\mathfrak b^j$, $h^j=0$, and an inverse of $s$ is\n$$c^{-1}\\sum_{i=0}^{j-1}(-c^{-1}h)^i.$$\nIndeed multiplication gives $1-(-c^{-1}h)^j=1$. Define $Z\\to B/\\mathfrak b^j$ by $u/s\\mapsto\\bar u\\bar s^{-1}$. The equality of fractions in [def-weil-pbc-localization-at-prime] proves well-definedness: a cross-product difference annihilated by some element outside $\\mathfrak r$ maps to zero because that annihilator maps to a unit. The map kills $\\mathfrak m_Z^j$ since it sends every generator of $\\mathfrak rZ$ into $\\mathfrak b/\\mathfrak b^j$. It is inverse to the map of Step 4: both composites fix coefficients and monomials, and a homomorphism fixing an invertible element fixes its inverse. Thus $Z/\\mathfrak m_Z^j\\cong B/\\mathfrak b^j$. These maps commute with reduction: they all extend the same map from $U$, and send each denominator to the unique inverse of its image.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70: agent-supplied finite nilpotent geometric-series inverse; no assertion of this Laurent comparison is attributed to ILO."
+   }
+  },
+  {
+   "text": "Use [lem-trf-positive-monoid-adic-filtration] with $P$ from Step 3, first over $A$ with ideal $\\mathfrak m$, and then over $D$ with ideal $\\mathfrak m_D$. It gives a finite set $S_j=\\{v:\\nu(v)<j\\}$ and identifies the coefficient modules of the two quotients as\n$$B/\\mathfrak b^j=\\bigoplus_{v\\in S_j} A/\\mathfrak m^{j-\\nu(v)},\\qquad D[T]/\\mathfrak a^j=\\bigoplus_{v\\in S_j}D/\\mathfrak m_D^{j-\\nu(v)}.$$\nHere equality denotes the canonical additive coefficient identification supplied by the ideal-membership formula: monomials outside $S_j$ vanish, and coefficients at $v\\in S_j$ are reduced by exactly that power. Since $\\mathfrak m_D=\\mathfrak mD$, [lem-weil-pbc-adic-completion-mod-power] identifies each pair of summands via $A\\to D$. Thus the canonical ring map $B/\\mathfrak b^j\\to D[T]/\\mathfrak a^j$ is bijective. It is already a ring map, since it applies $A\\to D$ coefficientwise and preserves monomials. Both quotient maps at $j+1$ and $j$ are induced by that single ring map, so their squares with reduction commute.",
+   "uses": [
+    "lem-trf-positive-monoid-adic-filtration",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70: agent coefficient calculation from the cited filtration statement; coefficient completion input: Stacks algebra.tex Tag 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Compose the isomorphisms of Steps 5--6 to obtain $e_j:Z/\\mathfrak m_Z^j\\cong D[T]/\\mathfrak a^j$. Their reduction compatibility permits [lem-trf-adic-inverse-limit-iso], giving $\\widehat Z\\cong H$. It sends the tuple for $e\\in E$ to the tuple of its image in $D$ and fixes the tuple of every $[v]$, because every $e_j$ does. For every $j$, the isomorphism takes the kernel of the $j$th projection onto the kernel of the $j$th projection. These are the respective $j$th powers of the extended defining ideals by [lem-weil-pbc-adic-completion-mod-power], applied to the finitely generated ideals $\\mathfrak m_Z$ and $\\mathfrak a$ (Step 3). Hence both the map and its inverse are continuous for the adic topologies.",
+   "uses": [
+    "lem-trf-adic-inverse-limit-iso",
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00M9 (section-completion), compatible sequences, and 05GG (lemma-hathat-finitely-generated), projection kernels."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-formal-monoid-residue-domain] with coefficient ring $D$, monoid $P$ and weight $w$. Step 2 supplies a nonzero complete separated Noetherian local coefficient ring, and Step 3 supplies the finitely generated submonoid of a finite rank free group and strict positivity. Its completion is exactly $H$. Its stated constant-coefficient homomorphism has kernel $([v]:v\\ne0)H$ and induces $H/([v]:v\\ne0)H\\cong D$, with inverse given by coefficients. All constructions allow an empty list of nonzero monoid generators: for $T=\\{0\\}$ the filtration has $\\nu(0)=0$, the sole summand in Step 6 is $A/\\mathfrak m^j$, and the last assertion identifies $H=D$. Empty Laurent and polynomial variable lists were allowed in Step 1, so $K=0$ and $n=0$, separately or simultaneously, require no additional hypothesis.",
+   "uses": [
+    "lem-trf-formal-monoid-residue-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6, printed p. 70: formal monoid models; augmentation-kernel refinement is the cited agent-formulated DAG lemma, not a quotation from ILO."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-polynomial-ring-regular-base",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "def-weil-pbc-localization-at-prime",
+  "lem-trf-sharp-fs-orthant-embedding",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-positive-monoid-adic-filtration",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "lem-trf-adic-inverse-limit-iso",
+  "lem-trf-formal-monoid-residue-domain"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6, printed p. 70 supplies formal monoid models, not this theorem. Agent-supplied Laurent coefficient comparison using existing regularity, filtration, and completion nodes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The completion of a monoid algebra at a prime generated by coefficient prime and nonzero sharp monomials equals the formal monoid algebra over the completed coefficient local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"instCommRingBDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) →\\n      [inst_1 : Fact (Nat.Prime p)] →\\n        [inst_2 : Fact ¬IsUnit ↑p] → [inst_3 : IsAdicComplete (Ideal.span {↑p}) R] → CommRing (BDeRhamPlus R p)\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $ is equipped with a canonical commutative ring s\"}\n  {\"name\": \"LaurentSeries.powerSeriesAlgEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃ₐ[K] ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is an algebra isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X\"}\n  {\"name\": \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → Algebra K (LaurentSeries.RatFuncAdicCompl K)\", \"doc\": \"For any field $ K $, the $ X $-adic completion of the rational function field $ K(X) $, which is the field of formal Laurent series $ K((X)) $, inherits a canonical algebra structure over $ K $. This \"}\n  {\"name\": \"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    Algebra K ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"The valuation subring of the adic completion of the rational function field $ K(X) $ with respect to the ideal generated by $ X $, consisting of elements with valuation $ \\\\leq 1 $, carries a canonical\"}\n  {\"name\": \"LaurentSeries.algebraMap_C_mem_adicCompletionIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (x : K),\\n  ((LaurentSeries.LaurentSeriesRingEquiv K).toRingHom.comp HahnSeries.C) x ∈\\n    IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)\", \"doc\": \"The multiplicative type synonym for the integers $\\\\mathbb{Z}$, equipped with the standard linear order, forms an ordered commutative monoid. This means that the monoid operation (interpreted as additi\"}\n  {\"name\": \"LaurentSeries.RatFuncAdicCompl\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [Field K] → Type u_2\", \"doc\": \"For a field $ K $, this is the adic completion of the rational function field $ \\\\text{RatFunc}(K) $ with respect to the ideal generated by $ X $ in the polynomial ring $ K[X] $. It corresponds to comp\"}\n  {\"name\": \"LaurentSeries.powerSeriesRingEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃+* ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is a ring isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X $. \"}\n\nLaurentSeries.powerSeriesAlgEquiv concerns one-variable valued Laurent series over a field; it does not compute the completion at an arbitrary prime of this Laurent coefficient monoid algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a localized Laurent polynomial coefficient ring with a sharp saturated monoid is the monoid power series ring over a complete regular local coefficient ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LaurentSeries.of_powerSeries_localization\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R], IsLocalization (Submonoid.powers PowerSeries.X) (LaurentSeries R)\", \"doc\": \"For any commutative ring $ R $, the ring of Laurent series $ R((X)) $ is the localization of the power series ring $ R[[X]] $ at the submonoid generated by the formal variable $ X $. This localization\"}\n  {\"name\": \"LaurentSeries.powerSeriesRingEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃+* ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is a ring isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X $. \"}\n  {\"name\": \"LaurentSeries.exists_powerSeries_of_memIntegers\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] {x : LaurentSeries.RatFuncAdicCompl K},\\n  x ∈ IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K) →\\n    ∃ F, (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) = x\", \"doc\": \"For any element $ x $ in the adic completion of the integers with respect to the ideal generated by $ X $ in the field of rational functions $ K $, there exists a power series $ F $ such that the Laur\"}\n  {\"name\": \"LaurentSeries.powerSeriesAlgEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) →\\n  [inst : Field K] →\\n    PowerSeries K ≃ₐ[K] ↥(IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K))\", \"doc\": \"There is an algebra isomorphism between the formal power series ring $ K⟦X⟧ $ and the adic completion of the valuation subring of rational functions $ \\\\text{RatFunc}(K) $ at the ideal generated by $ X\"}\n  {\"name\": \"LaurentSeries.mem_integers_of_powerSeries\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K] (F : PowerSeries K),\\n  (LaurentSeries.LaurentSeriesRingEquiv K) ((HahnSeries.ofPowerSeries ℤ K) F) ∈\\n    IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)\", \"doc\": \"Every power series over a field $ K $, when converted to a Laurent series via the canonical equivalence, belongs to the adic completion of the ring of integers in the field of rational functions $ K(X\"}\n  {\"name\": \"LaurentSeries.powerSeries_ext_subring\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K],\\n  Subring.map (LaurentSeries.LaurentSeriesRingEquiv K).toRingHom (LaurentSeries.powerSeries_as_subring K) =\\n    (IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers (RatFunc K) (Polynomial.idealX K)).toSubring\", \"doc\": \"The image of the power series subring under the canonical embedding into the Laurent series ring equals the subring obtained by completing the polynomial ring $ K[X] $ with respect to the ideal genera\"}\n  {\"name\": \"LaurentSeries.LaurentSeriesRingEquiv\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"(K : Type u_2) → [inst : Field K] → LaurentSeries K ≃+* LaurentSeries.RatFuncAdicCompl K\", \"doc\": \"For any field $ K $, this is the inverse of the canonical ring isomorphism between the ring of Laurent series $ K((X)) $ and the $ X $-adic completion of the rational function field $ K(X) $. It estab\"}\n  {\"name\": \"LaurentSeries.coe_X_compare\", \"module\": \"Mathlib/RingTheory/LaurentSeries\", \"type\": \"∀ (K : Type u_2) [inst : Field K],\\n  (LaurentSeries.ratfuncAdicComplRingEquiv K) ↑RatFunc.X = (HahnSeries.ofPowerSeries ℤ K) PowerSeries.X\", \"doc\": \"Under the ring equivalence between the adic completion of rational functions over $ K $ and Laurent series over $ K $, the image of the formal variable $ X $ (viewed as a rational function and adic-co\"}\n\nLaurentSeries.powerSeriesAlgEquiv concerns one-variable valued Laurent series over a field; it does not compute the completion at an arbitrary prime of this Laurent coefficient monoid algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\", \"AddMonoidAlgebra\"",
+   "results": "[loogle] OK 0 hit(s)\n\nLaurentSeries.powerSeriesAlgEquiv concerns one-variable valued Laurent series over a field; it does not compute the completion at an arbitrary prime of this Laurent coefficient monoid algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(monoid.*complet|complet.*monoid|Laurent.*regular|regular.*Laurent)",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"45\", \"text\": \"  __ := f.toAddMonoidHom.completion f.continuous\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"54\", \"text\": \"lemma toAddMonoidHom_completion (f : α →SL[σ] β) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"55\", \"text\": \"    f.completion.toAddMonoidHom = f.toAddMonoidHom.completion f.continuous := rfl\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"77\", \"text\": \"    simp [← Completion.coe_smul, AddMonoidHom.extension_coe f.toAddMonoidHom f.continuous]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/LinearMapCompletion.lean\", \"line\": \"80\", \"text\": \"lemma toAddMonoidHom_fromCompletion (f : α →SL[σ] β) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"26\", \"text\": \"* `AddMonoidHom.completion`: promotes a continuous group morphism\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"97\", \"text\": \"instance : AddMonoid (Completion α) where\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"122\", \"text\": \"instance : SubNegMonoid (Completion α) where\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"215\", \"text\": \"def AddMonoidHom.extension [CompleteSpace β] [T0Space β] (f : α →+ β) (hf : Continuous f) :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/GroupCompletion.lean\", \"line\": \"227\", \"text\": \"theorem AddMonoidHom.extension_coe [CompleteSpace β] [T0Space β] (f : α →+ β)\"}\n  {\"file\": \"Mathlib/Topology/Algebra/InfiniteSum/Group.lean\", \"line\": \"204\", \"text\": \"theorem multipliable_iff_cauchySeq_finset [CommMonoid α] [CompleteSpace α] {f : β → α} :\"}\n  {\"file\": \"Mathlib/Topology/Algebra/InfiniteSum/Order.lean\", \"line\": \"297\", \"text\": \"This criterion is useful when applied in a linearly ordered monoid which is also a complete or\"}\n  {\"file\": \"Mathlib/Probability/Martingale/Centering.lean\", \"line\": \"86\", \"text\": \"    [CompleteSpace E] [PartialOrder E] [IsOrderedAddMonoid E]\"}\n  {\"file\": \"Mathlib/Probability/Martingale/Centering.lean\", \"line\": \"96\", \"text\": \"    [CompleteSpace E] [PartialOrder E] [IsOrderedAddMonoid E]\"}\n  {\"file\": \"Mathlib/Probability/Martingale/OptionalStopping.lean\", \"line\": \"45\", \"text\": \"    [NormedSpace ℝ E] [CompleteSpace E] [PartialOrder E] [IsOrderedAddMonoid E]\"}\n  {\"file\": \"Mathlib/Probability/Martingale/Basic.lean\", \"line\": \"409\", \"text\": \"variable [CompleteSpace E] [PartialOrder E] [IsOrderedAddMonoid E] [ClosedIciTopology E]\"}\n  {\"file\": \"Mathlib/Algebra/Notation/Support.lean\", \"line\": \"21\", \"text\": \"assert_not_exists Monoid CompleteLattice\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformRing.lean\", \"line\": \"85\", \"text\": \"  { AddMonoidWithOne.unary, ((inferInstance : AddCommGroup (Completion α))),\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformRing.lean\", \"line\": \"147\", \"text\": \"  simp only [Completion.extensionHom, RingHom.coe_mk, MonoidHom.coe_mk, OneHom.coe_mk,\"}\n  {\"file\": \"Mathlib/Topology/Algebra/UniformRing.lean\", \"line\": \"148\", \"text\": \"    UniformSpace.Completion.extension_coe <| uniformContinuous_addMonoidHom_of_continuous hf]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean\", \"line\": \"677\", \"text\": \"theorem isComplete_ker {M' : Type*} [UniformSpace M'] [CompleteSpace M'] [AddCommMonoid M']\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean\", \"line\": \"682\", \"text\": \"theorem isComplete_eqLocus {M' : Type*} [UniformSpace M'] [CompleteSpace M'] [AddCommMonoid M']\"}\n  {\"file\": \"Mathlib/Topology/Algebra/Module/Basic.lean\", \"line\": \"197\", \"text\": \"instance Submodule.topologicalClosure.completeSpace {M' : Type*} [AddCommMonoid M'] [Module R M']\"}\n  {\"file\": \"Mathlib/Data/NNRat/Defs.lean\", \"line\": \"42\", \"text\": \"assert_not_exists CompleteLattice IsOrderedMonoid\"}\n  {\"file\": \"Mathlib/Data/Finset/Attach.lean\", \"line\": \"29\", \"text\": \"assert_not_exists List.sublistsLen Multiset.powerset CompleteLattice IsOrderedMonoid\"}\n\nLaurentSeries.powerSeriesAlgEquiv concerns one-variable valued Laurent series over a field; it does not compute the completion at an arbitrary prime of this Laurent coefficient monoid algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A local monoid algebra completion is obtained by completing its coefficient local ring and then completing at the monomial ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"AdicCompletion.subalgebra\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subalgebra R ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subalgebra of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_\"}\n  {\"name\": \"AdicCompletion.liftAlgHom.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"∀ {S : Type u_5} [inst : CommRing S] (I : Ideal S) {R : Type u_6} {A : Type u_7} [inst_1 : CommRing R]\\n  [inst_2 : CommRing A] [inst_3 : Algebra R A] [inst_4 : Algebra R S] (f f_1 : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (e_f : f = f_1) (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R ⋯).comp (f n\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} → [inst : CommRing S] → (I : Ideal S) → [IsAdicComplete I S] → S ≃ₐ[S] AdicCompletion I S\", \"doc\": \"Given a commutative ring $ S $, an ideal $ I $, and the condition that $ S $ is $ I $-adically complete, this constructs an $ S $-algebra equivalence between $ S $ and its $ I $-adic completion $ \\\\var\"}\n  {\"name\": \"AdicCompletion.mkₐ\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion.AdicCauchySequence I R →ₐ[R] AdicCompletion I R\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, this constructs the canonical $ S $-algebra homomorphism from $ R $ to its $ I $-adic complet\"}\n  {\"name\": \"PowerSeries.instIsLocalRing\", \"module\": \"Mathlib.RingTheory.PowerSeries.Inverse\", \"type\": \": IsLocalRing R⟦X⟧\", \"doc\": \"If $ R $ is a local ring, then the ring of univariate power series over $ R $, denoted $ R⟦X⟧ $, is also a local ring.\"}\n  {\"name\": \"MonoidAlgebra.ring\", \"module\": \"Mathlib.Algebra.MonoidAlgebra.Defs\", \"type\": \"[Monoid M] : Ring R[M]\", \"doc\": \"For any ring $ R $ and monoid $ M $, the monoid algebra $ R[M] $, consisting of finite support functions from $ M $ to $ R $, is equipped with a ring structure. Addition is defined pointwise, and mult\"}\n\nLaurentSeries.powerSeriesAlgEquiv concerns one-variable valued Laurent series over a field; it does not compute the completion at an arbitrary prime of this Laurent coefficient monoid algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Mm]onoid.*[Cc]omplet|[Cc]omplet.*[Mm]onoid|Laurent.*regular",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"line\": \"662\", \"text\": \"  simp [valuation, valueGroup, valueMonoid, ← (toCompletion_surjective K v).range_comp]; rfl\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation.lean\", \"line\": \"792\", \"text\": \"lemma adicCompletion_valueGroup_eq : MonoidWithZeroHom.valueGroup (.ofClass (Valued.v\"}\n\nLaurentSeries.powerSeriesAlgEquiv concerns one-variable valued Laurent series over a field; it does not compute the completion at an arbitrary prime of this Laurent coefficient monoid algebra.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completion of a monoid algebra at the augmentation and a coefficient prime equals the monoid power series algebra over the completed coefficient local ring",
+   "results": "{\"t\": \"2026-10-23T11:02:30Z\", \"tool\": \"leanfinder\", \"query\": \"Completion of a monoid algebra at the augmentation and a coefficient prime equals the monoid power series algebra over the completed coefficient local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.powerSeriesAlgEquiv\", \"LaurentSeries.powerSeriesRingEquiv\", \"LaurentSeries.of_powerSeries_localization\", \"LaurentSeries.coe_X_compare\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"LaurentSeries.ratfuncAdicComplRingEquiv\", \"LaurentSeries.powerSeries_ext_subring\", \"LaurentSeries.LaurentSeriesAlgEquiv\"], \"digest\": \"6304ab7825879835\"}; LaurentSeries power-series/valuation-completion equivalences and one-variable localization; none identifies the stated arbitrary Laurent coefficient prime and sharp monoid completion.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AddMonoidAlgebra.*[Cc]ompletion|[Cc]ompletion.*AddMonoidAlgebra|[Ll]aurent.*[Cc]ompletion",
+   "results": "{\"t\": \"2026-10-23T11:03:24Z\", \"tool\": \"grep\", \"query\": \"AddMonoidAlgebra.*[Cc]ompletion|[Cc]ompletion.*AddMonoidAlgebra|[Ll]aurent.*[Cc]ompletion\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\", \"Mathlib/RingTheory/LaurentSeries.lean\"], \"digest\": \"a07003422599c569\"}; Four LaurentSeries valuation-completion references; no localized arbitrary-monoid completion theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completion of localized monoid algebra at the coefficient prime and nonconstant monomials",
+   "results": "{\"t\": \"2026-10-23T11:03:25Z\", \"tool\": \"leansearch\", \"query\": \"completion of localized monoid algebra at the coefficient prime and nonconstant monomials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.localization\", \"localizationAlgebra\", \"HomogeneousLocalization.AtPrime\", \"instIsLocalizationAlgebraMapSubmonoidPrimeComplLocalization\", \"isLocalizedModule_iff_isLocalization'\", \"instIsScalarTowerLocalizationAlgebraMapSubmonoidPrimeComplFractionRing\", \"instIsSeparableFractionRingAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl\", \"Localization.AtPrime.algebra_localization_localization\"], \"digest\": \"f83ca589ce050892\"}; Localization and extension algebra instances; none supplies the finite quotient or completed monoid isomorphisms.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, AddMonoidAlgebra",
+   "results": "{\"t\": \"2026-10-23T11:03:25Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, AddMonoidAlgebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No hits for AdicCompletion with AddMonoidAlgebra.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*(quotient|equiv)|equiv.*(quotient|[Cc]ompletion)|AddMonoidAlgebra",
+   "results": "{\"t\": \"2026-10-23T11:04:11Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*(quotient|equiv)|equiv.*(quotient|[Cc]ompletion)|AddMonoidAlgebra\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\", \"Mathlib/RingTheory/AdicCompletion/Functoriality.lean\"], \"digest\": \"78bc055f718da6b7\"}; AdicCompletion evaluation, completeness and functoriality API; no arbitrary sharp monoid algebra or Laurent stratum quotient comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite quotients of a sharp monoid ring by powers of the maximal ideal and monomial ideal are unchanged on completing the coefficient local ring",
+   "results": "{\"t\": \"2026-10-23T11:04:20Z\", \"tool\": \"leanfinder\", \"query\": \"Finite quotients of a sharp monoid ring by powers of the maximal ideal and monomial ideal are unchanged on completing the coefficient local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.factor_evalₐ_eq_eval\", \"AdicCompletion.mk_smul_top_ofAlgEquiv_symm\", \"AdicCompletion.Ideal.mk_eq_mk\", \"AdicCompletion.mk_ofAlgEquiv_symm\", \"AdicCompletion.subring\", \"AdicCompletion.evalOneₐ_of\", \"AdicCompletion.mkₐ_apply_coe\", \"AdicCompletion.evalₐ_mk\"], \"digest\": \"4ab804d064d4b1e8\"}; AdicCompletion evaluation and coefficient-quotient formulas, not the localized sharp-monoid finite-quotient comparison.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-formal-monoid-extension-model",
+  "date": "2026-10-22",
+  "group": "Q157"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration input under lem-trf-local-term-locality proof (1)--(2), through lem-trf-nodal-pair-projective-resolution: the injective chart at the end of ILO VI Proposition 1.9, using VI 1.8. Independent completed-local algebra input for the toric chart case of VI 1.8: VI 1.6, printed p. 70 (the two formal models), and VIII 3.1.1--3.1.5, printed pp. 98--99 (face localization). The algebraic base-change statement is an agent-supplied local-model input, not a quotation of VI 1.8; its intended independent argument is in report.md. Re-split task: VI 1.6, printed p. 70; agent-supplied construction of the coefficient stratum before its relation and calculation of all monomial-adic quotients, returned proof Steps 9--10 and the augmentation identification in Step 13.",
+   "via": [
+    "lem-trf-formal-monoid-extension-model",
+    "lem-trf-log-smooth-log-regular",
+    "lem-trf-nodal-log-regularity",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-laurent-stratum-formal-monoid-completion",
+  "worker": "stage1",
+  "summary": "Q74: unchanged statement, eight proof steps, no new nodes. Reused the existing generic regularity/localization/completion results and trace-unit monoid filtration, orthant embedding and augmentation-kernel statements; wrote the finite denominator inverses and coefficientwise quotient comparisons explicitly. No exact project declaration or Mathlib leaf found.",
+  "blueprint": "Historical auxiliary Laurent coefficient completion on the existing from/via chain under lem-trf-local-term-locality (1)--(2), through the nodal/log-regular models: steps 1--2 establish the coefficient stratum, 3 supplies positive monoid coordinates, 4--6 prove the finite quotient comparisons, 7 passes to the compatible limits, and 8 proves the augmentation quotient. The current latest locality proof uses Varshavsky; this split does not replace its unit/chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "Only its zero-variable regular local assertion for the given field/Cohen coefficient is used; no coefficient regularity node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic passage from the regular-local coefficient to a regular ring; the unit has no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic preservation of regularity under the Laurent localization; no theorem of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic regularity of the maximal-adic completion of the regular-local coefficient stratum."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic Noetherianity of the coefficient completion; the trace unit has no generic completion-Noetherianity node."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic Noetherianity of the prime-local monoid ring used to identify its adic topology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-field-cohen-regular-complete",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-localization-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-f93964ad3",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-f93964ad3 (reviewer sub-agent of L); spot-checked: Pass with no fixes. I read the item and every one of the 17 cited statements in full; the report's split carries the mathematics correctly and nothing needed repair. Shape: one commit with the item and the Q74 report, and no new nodes. Compared with clones/live and side-live, where the item is still unsplit and has no repair note, only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed; statement, stmt_deps, blueprint and source are unchanged. proof_deps equals the union of the step uses, and there is no SGA. Step 1: Stacks 032C with zero variables makes L regular local; regular-local-localization makes it a regular ring; the explicit Laurent presentation plus the polynomial Mathlib leaf and localization-of-regular-ring make E regular and Noetherian, so A=E_p is regular local. Step 2: completion-regular-local, adic-completion-noetherian and local-completion-local-ring (m_D=mD, residue field) give D; adic-completion-mod-ideal(1) gives completeness, and the definition includes separatedness; the residue field Frac(E/p)=kappa(p) is correct. Step 3: the orthant embedding gives the weight w=sum of coordinates, strictly positive on T minus 0; finite type and localization give Noetherianity, so the ideals m, m_Z and a are finitely generated. Step 4: sharpness makes the augmentation a ring map, r is the kernel of U->E/p, and bZ=rZ=m_Z. Step 5: the inverse comes from a finite geometric series, s=c+h with h^j in b^j, and well-definedness from the fraction equality; Z equals A[T] localized at b. Step 6: the filtration membership formula and mod-power (A/m^k = D/m_D^k) give the coefficientwise ring isomorphism. Step 7: adic-inverse-limit-iso gives the isomorphism of completions; continuity holds because the projection kernels are m_Z^j and a^j, via mod-power. Step 8: formal-monoid-residue-domain's kernel clause gives H/([v])H=D, with its hypotheses supplied by Steps 2-3. Small cases checked: T={0}, K=0, n=0 over a field and over a Cohen ring; k[x^{±1}] with p=0; Z_p[x^{±1}] with p=(p); T=N; and a non-free saturated T. ILO VI 1.6 (p.70) checked: it gives only the formal models, so proof_origin=agent is correct. The six generic sk-thm-p1 tool_uses are accepted. Advisory notes: (1) lem-sfb-laurent-monoid-completion (NR) is closely related but not a duplicate: its base is a complete E' with Laurent variables only and an extra S-direction, while this item has polynomial t-variables and the localization Z; the Q74 report does not mention it. (2) The inherited blueprint.from chain under lem-trf-local-term-locality is historical, since that proof now uses Varshavsky; it is untouched here and is a maintainer note."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.LaurentStratumFormalMonoidCompletion",
+  "declaration": "AddMonoidAlgebra.LaurentStratum.completion",
+  "declarations": [
+   "AddMonoidAlgebra.LaurentStratum.CoefficientRing",
+   "AddMonoidAlgebra.LaurentStratum.LocalCoefficients",
+   "AddMonoidAlgebra.LaurentStratum.CompletedCoefficients",
+   "AddMonoidAlgebra.LaurentStratum.completion"
+  ],
+  "file": "lean/Sheaf/RingTheory/LaurentStratumFormalMonoidCompletion.lean",
+  "statement": "theorem completion (L : Type u) [CommRing L] [IsLocalRing L] (hL : IsField L ∨ ∃ p₀ : ℕ, IsCohenRing p₀ L) (K : Type v) [AddCommGroup K] [Module.Free ℤ K] [Module.Finite ℤ K] (T : Type w) [AddCommMonoid T] (hfs : AlgebraicGeometry.IsFineSaturatedMonoid (Multiplicative T)) (hsharp : ∀ t : T, IsUnit (Multiplicative.ofAdd t) → t = 0) (n : ℕ) (p : Ideal (CoefficientRing L K n)) [p.IsPrime] (hp : Ideal.map (algebraMap L (CoefficientRing L K n)) (IsLocalRing.maximalIdeal L) ⊔ Ideal.span (Set.range (MvPolynomial.X : Fin n → CoefficientRing L K n)) ≤ p) (r : Ideal (AddMonoidAlgebra (CoefficientRing L K n) T)) (hr : r = Ideal.map (algebraMap (CoefficientRing L K n) (AddMonoidAlgebra (CoefficientRing L K n) T)) p ⊔ Ideal.span {z | ∃ t : T, t ≠ 0 ∧ z = single t (1 : CoefficientRing L K n)}) : ∃ _ : IsRegularLocalRing (CompletedCoefficients p), Nontrivial (CompletedCoefficients p) ∧ IsAdicComplete (IsLocalRing.maximalIdeal (CompletedCoefficients p)) (CompletedCoefficients p) ∧ (∃ k : (CompletedCoefficients p ⧸ IsLocalRing.maximalIdeal (CompletedCoefficients p)) ≃+* FractionRing (CoefficientRing L K n ⧸ p), ∀ e₀ : CoefficientRing L K n, k (Ideal.Quotient.mk _ (algebraMap (LocalCoefficients p) (CompletedCoefficients p) (algebraMap (CoefficientRing L K n) (LocalCoefficients p) e₀))) = algebraMap (CoefficientRing L K n ⧸ p) (FractionRing (CoefficientRing L K n ⧸ p)) (Ideal.Quotient.mk p e₀)) ∧ ∃ _ : r.IsPrime, ∀ (b : Ideal (AddMonoidAlgebra (LocalCoefficients p) T)), b = Ideal.map (algebraMap (LocalCoefficients p) (AddMonoidAlgebra (LocalCoefficients p) T)) (IsLocalRing.maximalIdeal (LocalCoefficients p)) ⊔ Ideal.span {z | ∃ t : T, t ≠ 0 ∧ z = single t (1 : LocalCoefficients p)} → ∀ (a : Ideal (AddMonoidAlgebra (CompletedCoefficients p) T)), a = Ideal.map (algebraMap (CompletedCoefficients p) (AddMonoidAlgebra (CompletedCoefficients p) T)) (IsLocalRing.maximalIdeal (CompletedCoefficients p)) ⊔ Ideal.span {z | ∃ t : T, t ≠ 0 ∧ z = single t (1 : CompletedCoefficients p)} → ∃ f : AddMonoidAlgebra (LocalCoefficients p) T →+* Localization.AtPrime r, (∀ (t : T) (e₀ : CoefficientRing L K n), f (single t (algebraMap (CoefficientRing L K n) (LocalCoefficients p) e₀)) = algebraMap (AddMonoidAlgebra (CoefficientRing L K n) T) (Localization.AtPrime r) (single t e₀)) ∧ ∃ (q : ∀ j : ℕ, 0 < j → (AddMonoidAlgebra (LocalCoefficients p) T ⧸ b ^ j) ≃+* (Localization.AtPrime r ⧸ IsLocalRing.maximalIdeal (Localization.AtPrime r) ^ j)) (s : ∀ j : ℕ, 0 < j → (AddMonoidAlgebra (LocalCoefficients p) T ⧸ b ^ j) ≃+* (AddMonoidAlgebra (CompletedCoefficients p) T ⧸ a ^ j)), (∀ (j : ℕ) (hj : 0 < j) (x : AddMonoidAlgebra (LocalCoefficients p) T), q j hj (Ideal.Quotient.mk (b ^ j) x) = Ideal.Quotient.mk _ (f x)) ∧ (∀ (j : ℕ) (hj : 0 < j) (x : AddMonoidAlgebra (LocalCoefficients p) T), s j hj (Ideal.Quotient.mk (b ^ j) x) = Ideal.Quotient.mk (a ^ j) (mapRingHom T (algebraMap (LocalCoefficients p) (CompletedCoefficients p)) x)) ∧ (∀ (i j : ℕ) (hij : i ≤ j) (hi : 0 < i) (hj : 0 < j) (x : AddMonoidAlgebra (LocalCoefficients p) T ⧸ b ^ j), Ideal.Quotient.factorPow (IsLocalRing.maximalIdeal (Localization.AtPrime r)) hij (q j hj x) = q i hi (Ideal.Quotient.factorPow b hij x)) ∧ (∀ (i j : ℕ) (hij : i ≤ j) (hi : 0 < i) (hj : 0 < j) (x : AddMonoidAlgebra (LocalCoefficients p) T ⧸ b ^ j), Ideal.Quotient.factorPow a hij (s j hj x) = s i hi (Ideal.Quotient.factorPow b hij x)) ∧ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime r)) (Localization.AtPrime r) ≃+* AdicCompletion a (AddMonoidAlgebra (CompletedCoefficients p) T), (∀ (j : ℕ) (hj : 0 < j) (x : AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime r)) (Localization.AtPrime r)), AdicCompletion.evalₐ a j (e x) = s j hj ((q j hj).symm (AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (Localization.AtPrime r)) j x))) ∧ @Continuous _ _ (Ideal.map (algebraMap (Localization.AtPrime r) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime r)) (Localization.AtPrime r))) (IsLocalRing.maximalIdeal (Localization.AtPrime r))).adicTopology (Ideal.map (algebraMap (AddMonoidAlgebra (CompletedCoefficients p) T) (AdicCompletion a (AddMonoidAlgebra (CompletedCoefficients p) T))) a).adicTopology e ∧ @Continuous _ _ (Ideal.map (algebraMap (AddMonoidAlgebra (CompletedCoefficients p) T) (AdicCompletion a (AddMonoidAlgebra (CompletedCoefficients p) T))) a).adicTopology (Ideal.map (algebraMap (Localization.AtPrime r) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime r)) (Localization.AtPrime r))) (IsLocalRing.maximalIdeal (Localization.AtPrime r))).adicTopology e.symm ∧ (∀ (t : T) (e₀ : CoefficientRing L K n), e (AdicCompletion.of (IsLocalRing.maximalIdeal (Localization.AtPrime r)) (Localization.AtPrime r) (algebraMap (AddMonoidAlgebra (CoefficientRing L K n) T) (Localization.AtPrime r) (single t e₀))) = AdicCompletion.of a (AddMonoidAlgebra (CompletedCoefficients p) T) (single t (algebraMap (LocalCoefficients p) (CompletedCoefficients p) (algebraMap (CoefficientRing L K n) (LocalCoefficients p) e₀)))) ∧ ∃ ε : AdicCompletion a (AddMonoidAlgebra (CompletedCoefficients p) T) →+* CompletedCoefficients p, (∀ (t : T) (d : CompletedCoefficients p), ε (AdicCompletion.of a (AddMonoidAlgebra (CompletedCoefficients p) T) (single t d)) = @ite (CompletedCoefficients p) (t = 0) (Classical.propDecidable (t = 0)) d 0) ∧ ∃ g : (AdicCompletion a (AddMonoidAlgebra (CompletedCoefficients p) T) ⧸ Ideal.span {z | ∃ t : T, t ≠ 0 ∧ z = AdicCompletion.of a (AddMonoidAlgebra (CompletedCoefficients p) T) (single t 1)}) ≃+* CompletedCoefficients p, (∀ x : AdicCompletion a (AddMonoidAlgebra (CompletedCoefficients p) T), g (Ideal.Quotient.mk _ x) = ε x) ∧ ∀ d : CompletedCoefficients p, g.symm d = Ideal.Quotient.mk _ (AdicCompletion.of a (AddMonoidAlgebra (CompletedCoefficients p) T) (single 0 d))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-23",
+  "existing": false,
+  "note": "All rings are the literal Mathlib constructions. Three abbreviations name the coefficient polynomial ring, its prime localization, and its maximal-adic completion. The ideals r, b, a are determined by displayed equalities. Quotient maps, inverse-limit comparison, residue map and augmentation quotient are normalized on their canonical coefficients and monomials. IsRegularLocalRing includes the Noetherian and local clauses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31a6ed556",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read item node, 6 stmt_deps, ILO VI 1.6 source place, module, report. Every hypothesis/conclusion clause matches: L local + (IsField ∨ IsCohenRing), K Module.Free/Finite ℤ, T fs (IsFineSaturatedMonoid on Multiplicative T) + sharp, n arbitrary, p any prime ⊇ (m_L, t_i); r,b,a pinned by equalities; r.IsPrime concluded and supplies the instance for Z; D: IsRegularLocalRing (contains Noetherian+local) + Nontrivial + IsAdicComplete; residue iso to Frac(E/p) normalized on E; f pinned on single t (e0/1) (determines it); q,s induced by f / mapRingHom with factorPow compatibilities; e pinned levelwise by evalₐ, continuous both ways for the extended-ideal adic topologies, normalized on single t e0; ε and g pinned (g.symm = coefficient map ⇒ ε = g∘mk). Edge cases T={0}, K=0, n=0, field/Cohen, non-maximal p OK; j≥1 as in node. lean.statement verbatim; only lean changed vs side-live; no hollow defs, sorry only, source+blueprint docstrings, 8-step plan. No compile run (no changes; worker compiled). Advisories: IsFineSaturatedMonoid owned by def-trf-log-regular-pair via the fs-log-blowup module (established landed pattern); CoefficientRing abbrev = same expression as CompleteToricModel.PolynomialRing. lem-sfb-laurent-monoid-completion is not a duplicate."
+ }
+}

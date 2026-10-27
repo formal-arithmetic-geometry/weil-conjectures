@@ -310,20 +310,14 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-87ebdae9b (reviewer sub-agent of L); spot-checked: I read the full delivery: one commit, the item plus the report, no new nodes. The statement and stmt_deps match the unsplit version the item was created with in the N2 runs, so nothing is weakened. Source: ILO XVII §1.2 and §1.2.2, pp. 259-260. The source only says the set-sheaf equivalence with arrows M_s→M_η̄ is clear, so the proof by: agent fills in a missing proof. Steps 2-3 move lem-exc-abelian-sheaves-gmodules up to Λ-modules by transporting the ring of endomorphisms, with no finite-ring hypothesis. That node allows any algebraically closed Ω ⊇ K^sep, so it fits the item's Ω. Step 4 identifies the generic germ map with F(η)=Hom(Z,F)=V^H and gets (j_*F)_s̄=F(η) from the strictly henselian sections node, whose hypotheses hold. Steps 6-8 build the inverse j_*F ×_{i_*B} i_*C(W) and check both composites: i⁻¹q is the identity by the triangle identity and the counit of lem-kun-04ca, j⁻¹i_*=0, and on global sections the triple gives W→V^H as b. Isomorphisms are detected at s̄ and η̄, which cover T. Step 9 proves the kernel and cokernel universal properties, including continuity on quotients. Step 10 gives the sections clauses. Small cases checked: the constant sheaf, i_*C(W), j_!F, Λ=0, and a cokernel that gains invariants. There is no SGA citation and no cycle (a closure of 313 nodes contains neither the item nor lem-per-trait-residue-model). rg searches for trait triples, recollement and gluing found no duplicate. I accept the seven declared tool_uses as generic étale black boxes. FIX (C1/C4, small): step 5 identified V=(j⁻¹M)_η̄ with the statement's generic stalk M_η̄ of T without citing anything. I added a sentence citing lemma-openclosed-stalk-upperstar and added that node to step 5's uses (it was already in proof_deps). Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-trait-sheaf-gluing.json.; 1 file(s) fixed by the reviewer"
  },
- "lean": {
+ "lean": null,
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/TraitSheafGluing.lean",
   "module": "Sheaf.AlgebraicGeometry.TraitSheafGluing",
   "declaration": "AlgebraicGeometry.Etale.traitSheaves_equiv_specialization",
-  "declarations": [
-   "AlgebraicGeometry.Etale.traitGlobalGerm",
-   "AlgebraicGeometry.Etale.traitSheaves_equiv_specialization"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/TraitSheafGluing.lean",
-  "statement": "theorem traitSheaves_equiv_specialization (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] (K : Type u) [Field K] [Algebra R K] [IsFractionRing R K] (Ks Ω : Type u) [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] (Ωs : Type u) [Field Ωs] [IsAlgClosed Ωs] (s : Spec (.of Ωs) ⟶ Spec (.of R)) (hs : s default = IsLocalRing.closedPoint R) (Λ : Type (u + 1)) [CommRing Λ] : ∃ (Eη : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌ Rep.DiscreteContinuousRep.{u + 1, u, u + 1} Λ (Gal(Ks/K))) (E : Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ) ≌ TraitSpecialization.{u, u + 1, u + 1} Λ (Gal(Ks/K))) (c : E.functor ⋙ traitSpecializationClosed Λ (Gal(Ks/K)) ≅ (Scheme.pointSmallEtale s).sheafFiber) (g : Eη.functor ⋙ traitDiscreteRepInclusion Λ (Gal(Ks/K)) ⋙ forget₂ (Rep.{u + 1} Λ (Gal(Ks/K))) (ModuleCat.{u + 1} Λ) ≅ (Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber) (r : upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom (algebraMap R K))) ⋙ Eη.functor ≅ E.functor ⋙ traitSpecializationGeneric Λ (Gal(Ks/K))) (w : Sheaf.Γ (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ) ≅ E.functor ⋙ traitSpecializationClosed Λ (Gal(Ks/K))) (σ : Sheaf.Γ (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ) ≅ Eη.functor ⋙ traitDiscreteRepInclusion Λ (Gal(Ks/K)) ⋙ Rep.invariantsFunctor Λ (Gal(Ks/K))), (∀ M : Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ), w.hom.app M ≫ c.hom.app M = traitGlobalGerm Λ s M) ∧ (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (m : (Sheaf.Γ _ (ModuleCat.{u + 1} Λ)).obj F), g.hom.app F (σ.hom.app F m).val = traitGlobalGerm Λ (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) F m) ∧ (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) (h : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω) (_hτ : (algebraMap Ks Ω).comp h.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : (Spec (.of K)).Etale) (x x' : (Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X) (_hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), g.hom.app F ((Eη.functor.obj F).obj.ρ h (g.inv.app F ((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z))) = ((Scheme.pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x' F.obj z)) ∧ (∀ M : Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ), globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom (algebraMap R K))) M ≫ σ.hom.app ((upperStar (ModuleCat.{u + 1} Λ) (Spec.map (CommRingCat.ofHom (algebraMap R K)))).obj M) ≫ (Rep.invariantsFunctor Λ (Gal(Ks/K))).map ((traitDiscreteRepInclusion Λ (Gal(Ks/K))).map (r.hom.app M)) = w.hom.app M ≫ traitSpecializationInvariantArrow Λ (Gal(Ks/K)) (E.functor.obj M)) ∧ (∀ (A B : TraitSpecialization.{u, u + 1, u + 1} Λ (Gal(Ks/K))) (f : A ⟶ B), HasKernel f ∧ HasCokernel f ∧ PreservesLimit (parallelPair f 0) (traitSpecializationClosed Λ (Gal(Ks/K))) ∧ PreservesLimit (parallelPair f 0) (traitSpecializationModule Λ (Gal(Ks/K))) ∧ PreservesColimit (parallelPair f 0) (traitSpecializationClosed Λ (Gal(Ks/K))) ∧ PreservesColimit (parallelPair f 0) (traitSpecializationModule Λ (Gal(Ks/K))))",
-  "branch": "newtargets-dag",
-  "by": "N5",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.TraitSheafGluing deleted (dead: no target reaches it); this node is not reached either."
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.TraitSheafGluing deleted (dead: no target reaches it); this node is not reached either."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -333,5 +327,16 @@
   "result": "pass",
   "note": "Both delivered modules compile clean via nt_compile --json (1.8 s, 4.8 s). The item Lean matches every node clause: strictly henselian DVR via IsStrictlyHenselianLocalRing and IsDiscreteValuationRing, arbitrary algebraically closed Ω containing Ks, Gal(Ks/K) with the Krull topology, geometric closed point s, Λ : Type (u+1) per the def-weil-pbc-derived-categories convention. The triple category is the exact Comma(Rep.trivialFunctor, ι DiscreteContinuousRep). The equivalence is pinned to the canonical functor by germ equations for w≫c and σ, a per-germ Galois action matching the existing pointSmallEtaleHom convention, and the restriction=a conjunct through r. Componentwise kernels/cokernels are stated via preservation by both projections. New def node def-per-trait-specialization-triples is correct and non-duplicate, with real invariant-arrow data. Records are verbatim; the only item change is the lean record plus the new stmt_dep. Report sections are present. Advisory H9: eight non-public proof-route imports are unused by the statement (it compiles without them)."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

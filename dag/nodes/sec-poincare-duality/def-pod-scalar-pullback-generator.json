@@ -1,0 +1,159 @@
+{
+ "id": "def-pod-scalar-pullback-generator",
+ "kind": "definition",
+ "title": "Local finite-scalar pullback tensor generator",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$ [def-weil-l-adic-coefficient-extension]. For every scheme $W$, let $B_{E,W,n}=(\\mathcal O_E/\\varpi_E^{n+1})_W$ and $R_{E,W}=\\varprojlim_n B_{E,W,n}$ be the actual coefficient sheaves [def-weil-completed-integral-coefficients] on its small pro-etale site [def-weil-pbc-proetale-site]. Let $g:X\\to Y$ be any scheme morphism, $P$ any cochain complex of $R_{E,Y}$-module sheaves, $i\\in\\mathbf Z$, and $n\\in\\mathbf N$. Write $D_{E,n}(P)=\\operatorname{Res}_n g_n^*(P\\otimes_{R_{E,Y}}B_{E,Y,n})$ using the recorded termwise reduction and module pullback [def-pur-integral-derived-operations], with sheaf tensors [def-pur-sheaf-tensor-product] and the canonical inverse-image adjunction unit $\\gamma_{g,n}$ [def-weil-proetale-inverse-image]. For a pro-etale test object $V\\to Y$, a section $p\\in P^i(V)$, a section $a\\in B_{E,Y,n}(V)$ and a section $b\\in B_{E,X,n}(X\\times_Y V)$, define the local finite-scalar pullback generator in $D_{E,n}(P)^i(X\\times_Y V)$ by $\\operatorname{gen}_{g,E,n,P,i,V}(p,a,b)=b\\,\\gamma_{g,n}(p\\otimes a)$, equivalently $(g^{-1}(p\\otimes a))\\otimes b$. Here $n$ denotes positive exponent $n+1$, all coefficients and restrictions are the actual quotient sheaf data, and no flatness, K-flatness, constructibility or isomorphism condition on $g$ is required.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "First proof sentence, through lem-fix-weil-operations first paragraph (pullback and inverse automorphism squares); extract the returned comparison-agreement proof Step 3: identify balanced scalar association with the explicit two-coordinate cone map and its normalized completion augmentations. Agent-extracted normalization lemma; this identity is not asserted verbatim in the blueprint. Definition of the local generator in the displayed d_n formula; existing helper in Sheaf.Paper.ScalarPullbackStrictConeNaturality, lines 58–77 (Stacks 03D2, 03EK)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Local inverse image tensor generator with a finite quotient scalar for completed integral pullback",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "lTensor.inverse_comp_lTensor",
+     "lTensor.inverse_of_rightInverse_comp_lTensor",
+     "rTensor.inverse_of_rightInverse_apply",
+     "lTensor.inverse",
+     "TensorProduct.tensorQuotEquivQuotSMul",
+     "lTensor.inverse_apply",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+     "rTensor.inverse_of_rightInverse_comp_rTensor"
+    ],
+    "digest": "e18791c8237cc501"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project definition instead of duplicating it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "scalarPullbackGenerator local inverse image tensor generator multiplied by a finite quotient scalar",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Presentation.tensorModelOfHasCoeffsInv",
+     "Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul",
+     "Algebra.Extension.tensorCotangentInvFun_smul_mk",
+     "Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul",
+     "Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val",
+     "Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul",
+     "Algebra.Extension.tensorCotangentInvFun",
+     "KaehlerDifferential.cotangentComplexBaseChange_tmul"
+    ],
+    "digest": "b5d863687a8912e3"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project definition instead of duplicating it."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPullbackGenerator|integralOperationsPullbackGenerator",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match; reuse the existing project definition instead of duplicating it."
+  },
+  {
+   "tool": "rg / blueprint_refs.py",
+   "query": "scalarPullbackGenerator|scalar-pullback-generator in dag/nodes, lean/Sheaf, lean/WeilConjectures, dag/lean_names_upstream.json; blueprint_refs.py search scalarPullbackGenerator",
+   "results": "Only ScalarPullbackStrictConeNaturality.lean defines it. The theorem node lem-weil-scalar-pullback-strict-cone-naturality lists this helper, but no definition node owns it. No upstream hit; zero blueprint nodes match.",
+   "date": "2026-10-23",
+   "verdict": "Add definition-only ownership with existing:true, as required by the immutable return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-explicit-scalar-cone-word-coordinates",
+  "date": "2026-10-23",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "First proof sentence, through lem-fix-weil-operations first paragraph (pullback and inverse automorphism squares); extract the returned comparison-agreement proof Step 3: identify balanced scalar association with the explicit two-coordinate cone map and its normalized completion augmentations. The local generator on the source of d_n, including its finite scalar b.",
+   "via": [
+    "lem-pod-explicit-scalar-cone-word-coordinates",
+    "lem-pod-isomorphism-scalar-comparison-agreement",
+    "lem-pod-pullback-identities-scalar-extension",
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "module": "Sheaf.Paper.ScalarPullbackStrictConeData",
+  "declaration": "WeilConjectures.scalarPullbackGenerator",
+  "declarations": [
+   "WeilConjectures.scalarPullbackGenerator"
+  ],
+  "statement": "def scalarPullbackGenerator {X Y : AlgebraicGeometry.Scheme.{t}} (g : X ⟶ Y)\n    (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)\n    (V : Y.ProEt) (p : (P.X i).val.obj (op V))\n    (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))\n    (b : (integralCoefficientCommRingSheaf l E X n).obj.obj\n      (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V))) :\n    ((((integralOperationsPullbackLevel l E g n).obj P).X i).val.obj\n      (op ((AlgebraicGeometry.Scheme.proEtaleBaseChange g).obj V)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-27",
+  "existing": true,
+  "note": "The existing definition is moved verbatim to ScalarPullbackStrictConeData and publicly re-exported by its former module. Signature, body and mathematical meaning are unchanged.",
+  "file": "lean/Sheaf/Paper/ScalarPullbackStrictConeData.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb3522b78",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb3522b78",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 2b8fc6801169 (H2). Lean module is byte-identical (sha256 4bbd5c31); only item stmt_deps and lean.note changed, plus one new node. H2 repaired as prescribed: theorem node lem-weil-scalar-pullback-strict-cone-naturality replaced in stmt_deps by the new def-pod-scalar-pullback-generator (existing:true on Sheaf.Paper.ScalarPullbackStrictConeNaturality; lean.statement verbatim with lines 62-69 in side-live and live; plain def b • integralOperationsPullbackGenerator(...), no .choose; no other owner node). The theorem stays in proof_deps. New node passes H12: id/chapter/unit, kind, status split, statement [ids] = stmt_deps, source, 3 search kinds, mathlib_match null, empty proof, created, blueprint.from/via, lean_audit none. A1 done: def-coef-ringed-sequence-site, def-coef-derived-system-calculus-data and def-sf-additive-roos-map added; all landed with lean records, files identical to live (brief allows adding landed nodes). Substance re-read: betaA/betaB use the actual counits; alpha.hom ≫ betaB = betaA ≫ L(kappa) matches beta_B∘alpha_K = L(kappa_C)∘beta_A; five effectivity hypotheses; kappa^D localization; d_n formula with p⊗1, ι a, ι b·π s; both cone coordinates (degrees i and i-1); chi quotient tuple with zero shift; naturality. Edge cases E=L, g=id, K=0, ramified ι admitted; no flatness or Tor hypothesis. Item still split in live (not superseded). Report has Worker report, Second reading by NA and New nodes sections. No compile (no FIX). Advisories: the new node cites def-pur-integral-derived-operations, not the finer owners def-a1-integral-finite-pullback-tower, def-pur-integral-finite-pullback and def-weil-integral-reduction-tower; inherited A2 (scalarPullbackLevel/Chain/Completed owned by a theorem node, reached via the base stmt_dep)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-eebdd",
+  "group": "J3",
+  "result": "fix",
+  "landing": "20261027T123457-L-2304317",
+  "kind": "interface",
+  "note": "independent cc review: item theorem vs published (byte-identical signature); moved 13-def block vs published item (byte-identical); new nodes' lean.statement vs Lean signatures; both direct importers compiled against delivered modules; #print axioms"
+ }
+}

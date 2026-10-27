@@ -203,18 +203,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-d97dcb5e7 (reviewer sub-agent of L); spot-checked: Read the item and report in full. There are no new nodes. The statement is unchanged and matches Stacks 0FWF (2)⇒(1) with the definition of geometrically integral (algebra.tex), with no added hypotheses. The agent-written proof is correct, step by step. Step 1: S⊗k≅S gives 1_S≠0, and a basis through 1_S comes from the Basis.extend leaf. Step 2: unique finite coordinates via the balanced maps s⊗t↦λ_i(s)t; 1⊗f is injective and multiplicative; S⊗K≠0. Step 3: a finitely generated A⊂K containing the coefficients and the two inverted coefficients; x_A y_A=0 by injectivity. Step 4: maximal ideal and quotient-field Mathlib leaves, then the Zariski-lemma leaf (finite_of_finite_type_of_isJacobsonRing) makes A/m a finite extension. Step 5: the units' images are nonzero, which contradicts the hypothesis. Tested S=0, k[ε]/ε², a finite inseparable extension, polynomial rings in infinitely many variables, and finite k. The parent lem-per-strict-local-regular-integral-fibres uses exactly this conclusion. A grep of dag/nodes for 0FWF and geometric-integrality nodes finds no duplicate. All citations are Mathlib leaves or definitions, so there is no route departure, no tool_uses, no cycle and no SGA source. Only cosmetic issues remain (T\\prime in Step 2), and no changes were made."
  },
- "lean": {
-  "module": "Sheaf.RingTheory.GeometricIntegralityFiniteFieldTest",
-  "declaration": "Algebra.isDomain_tensorProduct_of_finite_field_extensions",
-  "file": "lean/Sheaf/RingTheory/GeometricIntegralityFiniteFieldTest.lean",
-  "statement": "theorem isDomain_tensorProduct_of_finite_field_extensions (k : Type u) (S : Type v) [Field k] [CommRing S] [Algebra k S] (hfinite : ∀ (L : Type (max u v w)) [Field L] [Algebra k L] [FiniteDimensional k L], IsDomain (S ⊗[k] L)) (K : Type w) [Field K] [Algebra k K] : IsDomain (S ⊗[k] K)",
-  "branch": "newtargets-dag",
-  "by": "NS",
-  "date": "2026-10-18",
-  "existing": false,
-  "fixed_by": "NT-stage2-cc-6ec90fccc",
-  "note": "2026-10-20 (U): module Sheaf.RingTheory.GeometricIntegralityFiniteFieldTest deleted (dead: no target reaches it); this node is not reached either."
- },
+ "lean": null,
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
@@ -223,5 +212,23 @@
   "result": "fix",
   "note": "Statement matches node and Stacks 0FWF (2)=>(1) clause by clause (field k, CommRing S with Algebra k S, S ⊗[k] L, IsDomain, all FiniteDimensional field extensions in Type (max u v w), which is equivalent to the node's hypothesis and not vacuous, conclusion for arbitrary K : Type w); no extra hypotheses; lean.statement verbatim; edge cases S=0, L=k, finite k, char p inseparable, transcendental K, non-Noetherian S covered; no H4 duplicate in Mathlib, live or side; proof_deps are Mathlib leaves, so no imports needed. H8 fault: the docstring gave Stacks' reduced+irreducible route instead of the node's 5-step coefficient-specialization proof (the worker report wrongly says the node has an empty proof). fixes/GeometricIntegralityFiniteFieldTest.lean replaces only that docstring with node Steps 1-5 and their cited nodes; the signature is unchanged; it compiles cleanly via nt_compile --json (1.3 s), as does the delivered file."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean_removed": {
+  "commit": "f6bf55e2b05",
+  "path": "lean/Sheaf/RingTheory/GeometricIntegralityFiniteFieldTest.lean",
+  "module": "Sheaf.RingTheory.GeometricIntegralityFiniteFieldTest",
+  "declaration": "Algebra.isDomain_tensorProduct_of_finite_field_extensions",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement"
+ }
 }

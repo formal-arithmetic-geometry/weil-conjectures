@@ -1,0 +1,307 @@
+{
+ "id": "lem-trf-generic-nilpotent-affine-preparation",
+ "kind": "statement",
+ "title": "Affine nilpotent preparation over the reduced integral base",
+ "statement": "Let $f:X\\to T$ be a finite type morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism], with $T$ irreducible [def-weil-irreducible-components], generic point $\\xi$ [def-sc-generic-point], and nonreduced scheme-theoretic fibre $X_\\xi$ [def-pc-scheme-fibre, def-pc-reduced-scheme]. Put $i:T'=T_{\\mathrm{red}}\\to T$ [def-weil-pbc-scheme-reduction] and $X'=X\\times_T T'$ [def-pc-base-change]. Then $T'$ is integral [def-pc-integral-scheme], $i$ is a homeomorphism on underlying spaces, and the projection $X'\\to T'$ is of finite type. For each $t'\\in T'$ with image $t\\in T$, the residue-field map $\\kappa(t)\\to\\kappa(t')$ [def-weil-residue-field] is an isomorphism and the projection induces a canonical isomorphism $X'_{t'}\\cong X_t$ over these fields. There exist a nonempty affine open $V=\\operatorname{Spec}A\\subseteq T'$ containing its generic point $\\xi'$, an affine open $U=\\operatorname{Spec}B\\subseteq X'\\times_{T'}V$ [def-weil-affine-spectrum], and $b\\in B$, $n\\geq1$, such that $A$ is a domain, $B$ is a finite type $A$-algebra [def-weil-pbc-finite-type-algebra], $b^n=0$, and $b\\otimes1\\ne0$ in $B\\otimes_A K$ [def-weil-module-base-change], where $K=\\operatorname{Frac}(A)=\\kappa(\\xi')$ is the localization of $A$ at its zero prime [def-weil-pbc-localization-at-prime]. Moreover, for every $a\\in A$, the further restriction $V_a=D(a)=\\operatorname{Spec}A_a$ has $U\\times_VV_a=\\operatorname{Spec}B_a$ as an affine open of $X'\\times_{T'}V_a$, compatibly with the structure maps; here subscripts denote localization [def-weil-ring-localization-away].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof from reduction of the base through the second shrinking making h nilpotent"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre",
+  "def-pc-reduced-scheme",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-base-change",
+  "def-pc-integral-scheme",
+  "def-weil-residue-field",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-module-base-change",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-reduction-universal-homeomorphism] to $T$: $i:T_{\\mathrm{red}}\\to T$ is a homeomorphism and $T_{\\mathrm{red}}$ is reduced. The homeomorphism carries irreducibility and the generic point to $T'$; explicitly $\\overline{\\{\\xi'\\}}=T'$. Thus $T'$ is nonempty, reduced and irreducible, hence integral by [def-pc-integral-scheme]. Apply clause (2) of [lem-sfb-finite-type-composition-base-change] to $f$ and $i$ to obtain that $f':X'\\to T'$ is finite type.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "def-sc-generic-point",
+    "def-pc-integral-scheme",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, first proof paragraph; Tags 054M, 01ON, 01T4"
+   }
+  },
+  {
+   "text": "For $t'\\in T'$, the map $\\kappa(t)\\to\\kappa(t')$ is an isomorphism by [lem-weil-pbc-closed-immersion-residue-field-iso], since the reduction map is a closed immersion. By [lem-weil-pbc-fibre-of-base-change], $X'_{t'}=X_t\\times_{\\operatorname{Spec}\\kappa(t)}\\operatorname{Spec}\\kappa(t')$ with its projection to $X_t$. Since the field map is invertible, the inverse field map and the identity of $X_t$ give the inverse to that projection by the fibre-product universal property [def-pc-fibre-product]. This proves the claimed canonical comparison, including at $\\xi'$, where it preserves the nonreducedness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, first proof paragraph: reduction identifies fibres"
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $V_0=\\operatorname{Spec}A_0$ of $\\xi'$ using [lem-weil-pbc-affine-opens-basis]. Integrality gives that $A_0$ is a domain [def-pc-integral-scheme]. Its generic point is $(0)$ and its stalk there is its fraction field $K$ by [lem-weil-pbc-spec-domain-stalks-function-field]; the residue field of this field is itself [def-weil-residue-field]. The generic fibre of $Y_0=X'\\times_{T'}V_0$ is the fibre from step 2: the inverse maps are given by the same projection pairs in the fibre-product universal property [def-pc-fibre-product]. This family is finite type by clause (2) of [lem-sfb-finite-type-composition-base-change].",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-weil-residue-field",
+    "def-pc-fibre-product",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, first paragraph: replace the integral base by an affine open"
+   }
+  },
+  {
+   "text": "The nonreduced generic fibre has a point $x$ with nonreduced local ring, by [def-pc-reduced-scheme]. Its image $y\\in Y_0$ has an affine neighbourhood $U_0=\\operatorname{Spec}B_0$ by [lem-weil-pbc-affine-opens-basis]. The map $A_0\\to B_0$ is finite type by [lem-weil-pbc-lft-affine-pairs]. Apply [lem-weil-pbc-affine-chart-base-change-iso] to $Y_0\\to V_0$ and $\\operatorname{Spec}K\\to V_0$ with these charts: the inverse image of $U_0$ in the generic fibre is $\\operatorname{Spec}(K\\otimes_{A_0}B_0)$, with its projection induced by $b\\mapsto1\\otimes b$. It contains $x$. Its local ring at $x$ is a prime localization of its coordinate ring by [lem-weil-pbc-affine-open-stalk-localization]. If this coordinate ring were reduced, that local ring would be reduced by [lem-weil-pbc-localization-preserves-reduced], a contradiction. Therefore it contains a nonzero nilpotent $h$, with $h^n=0$ for some $n\\geq1$. Tensor symmetry identifies this ring with $B_0\\otimes_{A_0}K$: the maps $k\\otimes c\\mapsto c\\otimes k$ and $c\\otimes k\\mapsto k\\otimes c$ are inverse by the balancing relations, and respect multiplication on pure tensors.",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-chart-base-change-iso",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-preserves-reduced"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, proof: pick an affine open and a nonzero nilpotent generic section; Tags 01T2, 01JR, 01I4, 01HV"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-base-change], $B_0\\otimes_{A_0}K$ is the localization of $B_0$ at the images of $A_0\\setminus\\{0\\}$. Write $h=c/s$, with $c\\in B_0$ and $s\\in A_0$ nonzero. The equation $h^n=0$ says that $c^n/1=0$, so the zero criterion in that cited statement gives $u\\in A_0\\setminus\\{0\\}$ with $u c^n=0$ in $B_0$. Set $g=su\\ne0$. By [lem-weil-pbc-affine-open-section-vanishing-prime], $V=D(g)\\subseteq V_0$ is affine with ring $A=(A_0)_g$; it contains $(0)=\\xi'$. By [lem-weil-pbc-open-fibre-product] and [lem-weil-pbc-fibre-product-affine-spectra], $U=U_0\\times_{V_0}V$ is an affine open of $X'\\times_{T'}V$ with ring $B_0\\otimes_{A_0}A=B=(B_0)_g$, the last equality again by [lem-weil-pbc-localization-base-change]. These comparisons respect both projections.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, the two shrinkings making the generic section a nilpotent section; Tags 00DK, 01HV, 01I3, 01JR, 01I4"
+   }
+  },
+  {
+   "text": "In $B=(B_0)_g$ both $s$ and $u$ are units: their inverses are respectively $u/g$ and $s/g$. Put $b=c/s$. Then $b^n=c^n/s^n=0$, since $u c^n=0$ and $u$ is invertible. The universal property [lem-weil-pbc-ring-localization-universal-property] identifies the fraction field of $A=(A_0)_g$ with $K$: all nonzero fractions from $A_0$ become invertible in $K$, and conversely $A_0\\subset A$ gives the inverse map between the two fraction fields. Their maps are inverse because they agree on the numerators and inverses. The same universal property identifies $B\\otimes_AK$ with $B_0\\otimes_{A_0}K$: both are the ring obtained from $B_0$ by inverting every nonzero element of $A_0$ [lem-weil-pbc-localization-base-change]. Under this comparison $b\\otimes1=h\\ne0$. The nonempty affine open $V$ of the integral scheme $T'$ has domain ring $A$ [def-pc-integral-scheme]. Finally $B$ is finite type over $A$: if $c_1,\\ldots,c_r$ generate $B_0$ over $A_0$, their images generate $(B_0)_g$ over $(A_0)_g$, as each fraction $P(c_1,\\ldots,c_r)/g^e$ is the same polynomial with coefficients in $(A_0)_g$.",
+   "uses": [
+    "lem-weil-pbc-ring-localization-universal-property",
+    "lem-weil-pbc-localization-base-change",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, second shrinking; explicit localization arithmetic"
+   }
+  },
+  {
+   "text": "Let now $a\\in A$, including $a=0$. By [lem-weil-pbc-affine-open-section-vanishing-prime], $V_a=D(a)=\\operatorname{Spec}A_a$ as an open subscheme with the localization structure map. Apply [lem-weil-pbc-open-fibre-product] to the open $U$ and this base restriction: $U\\times_V V_a$ is open in $X'\\times_{T'}V_a$ with its natural projections. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] and localization base change [lem-weil-pbc-localization-base-change] identify it with $\\operatorname{Spec}(B\\otimes_A A_a)=\\operatorname{Spec}B_a$, respecting both structure maps. This is the final compatibility assertion.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0575, shrinking affine base and source; Tags 01JR, 01I4, 00DK"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-integral-scheme",
+  "def-pc-reduced-scheme",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-affine-chart-base-change-iso",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-closed-immersion-residue-field-iso",
+  "lem-weil-pbc-fibre-of-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-localization-base-change",
+  "lem-weil-pbc-localization-preserves-reduced",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0575, lemma-nonreduced-in-neighbourhood, proof from reduction through the two shrinkings; local affine and localization details expanded using Tags 01JR, 01I4, 01HV, 00DK"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "nonreduced|nonReduced|nilpotent.*generic|generic.*nilpotent",
+   "results": "OK 0 hits; ; digest 4f53cda18c2baa0c. Directory Mathlib/AlgebraicGeometry.  The reducedness/open-cover and geometrically reduced fibre results do not construct a generically nonzero nilpotent section or compare fibres over a reduced base. Read Mathlib/AlgebraicGeometry/Properties.lean:68-145, Geometrically/Reduced.lean:38-77, and RingTheory/Spectrum/Prime/Polynomial.lean:35-56; the last test assumes a finite free algebra and concerns nilpotence, not this preparation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonzero nilpotent in the generic fibre of a finite type scheme extends to a nilpotent section of an affine chart after shrinking the reduced integral base",
+   "results": "OK 8 hits; IsNilpotent, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, PrimeSpectrum.basicOpen_eq_bot_iff, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero; digest 1d3f972c50215f7f.  The reducedness/open-cover and geometrically reduced fibre results do not construct a generically nonzero nilpotent section or compare fibres over a reduced base. Read Mathlib/AlgebraicGeometry/Properties.lean:68-145, Geometrically/Reduced.lean:38-77, and RingTheory/Spectrum/Prime/Polynomial.lean:35-56; the last test assumes a finite free algebra and concerns nilpotence, not this preparation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.Hom.fiber",
+   "results": "OK 1 hits; AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced; digest 0557b5eff9c88189.  The reducedness/open-cover and geometrically reduced fibre results do not construct a generically nonzero nilpotent section or compare fibres over a reduced base. Read Mathlib/AlgebraicGeometry/Properties.lean:68-145, Geometrically/Reduced.lean:38-77, and RingTheory/Spectrum/Prime/Polynomial.lean:35-56; the last test assumes a finite free algebra and concerns nilpotence, not this preparation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type morphism over an irreducible scheme with nonreduced generic fibre admits an affine chart over its reduced base carrying a generically nonzero nilpotent section after shrinking",
+   "results": "OK 8 hits; AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isReduced_of_isReduced_stalk, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced; digest 3c3fb7fc6753e69f.  The reducedness/open-cover and geometrically reduced fibre results do not construct a generically nonzero nilpotent section or compare fibres over a reduced base. Read Mathlib/AlgebraicGeometry/Properties.lean:68-145, Geometrically/Reduced.lean:38-77, and RingTheory/Spectrum/Prime/Polynomial.lean:35-56; the last test assumes a finite free algebra and concerns nilpotence, not this preparation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent element in the fraction field base change of a finitely generated algebra over a domain spreads to a nilpotent after localizing at one nonzero base element",
+   "results": "OK 8 hits; isNilpotent_tensor_residueField_iff, PrimeSpectrum.mem_image_comap_basicOpen, PrimeSpectrum.mem_image_comap_zeroLocus_sdiff, Algebra.FormallyUnramified.of_isLocalization, TrivSqZeroExt.isNilpotent_inl_iff, Algebra.FormallyUnramified.localization_base, Algebra.IsGeometricallyReduced, RingHom.FormallyUnramified.ofLocalizationSpanTarget; digest 4013d5c03f92a4e2.  The reducedness/open-cover and geometrically reduced fibre results do not construct a generically nonzero nilpotent section or compare fibres over a reduced base. Read Mathlib/AlgebraicGeometry/Properties.lean:68-145, Geometrically/Reduced.lean:38-77, and RingTheory/Spectrum/Prime/Polynomial.lean:35-56; the last test assumes a finite free algebra and concerns nilpotence, not this preparation.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme with nonreduced generic fibre admits an affine chart over the reduced integral base with a generically nonzero nilpotent section",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.IsReduced, AlgebraicGeometry.isReduced_of_isIntegral, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.isReduced_of_isAffine_isReduced, AlgebraicGeometry.affine_isReduced_iff, AlgebraicGeometry.AffineSpace.not_isIntegralHom, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced; digest af4b8f6b7dce39e2. Read Properties.lean:68-145, Geometrically/Reduced.lean:38-77, Spectrum/Prime/Polynomial.lean:39-46. The hits provide local reducedness or nilpotence criteria, not the affine nilpotent preparation; the charpoly criterion requires a finite free algebra, absent here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonreduced|nonReduced|nilpotent.*generic|generic.*nilpotent",
+   "results": "OK 0 hits; ; digest 4f53cda18c2baa0c. Read Properties.lean:68-145, Geometrically/Reduced.lean:38-77, Spectrum/Prime/Polynomial.lean:39-46. The hits provide local reducedness or nilpotence criteria, not the affine nilpotent preparation; the charpoly criterion requires a finite free algebra, absent here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nilpotent element of the generic fibre of a scheme spreads out to a nonzero nilpotent on an affine open",
+   "results": "OK 8 hits; IsNilpotent, PrimeSpectrum.basicOpen_eq_bot_iff, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot, isNilpotent_tensor_residueField_iff, AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_of_isNilpotent, AlgebraicGeometry.Scheme.isNilpotent_iff_basicOpen_eq_bot_of_isCompact, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen; digest f3a16c1c9bf0a951. Read Properties.lean:68-145, Geometrically/Reduced.lean:38-77, Spectrum/Prime/Polynomial.lean:39-46. The hits provide local reducedness or nilpotence criteria, not the affine nilpotent preparation; the charpoly criterion requires a finite free algebra, absent here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsReduced, AlgebraicGeometry.Scheme.Hom.fiber",
+   "results": "OK 1 hits; AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced; digest 0557b5eff9c88189. Read Properties.lean:68-145, Geometrically/Reduced.lean:38-77, Spectrum/Prime/Polynomial.lean:39-46. The hits provide local reducedness or nilpotence criteria, not the affine nilpotent preparation; the charpoly criterion requires a finite free algebra, absent here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nonzero nilpotent in a localized algebra over the fraction field of a domain extends to a nilpotent on a principal open subset of the base",
+   "results": "OK 8 hits; AlgebraicGeometry.LocallyRingedSpace.basicOpen_eq_bot_of_isNilpotent, PrimeSpectrum.mem_image_comap_basicOpen, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred, AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero, isReduced_localizationPreserves, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover; digest f5aa687018d3f773. Read Properties.lean:68-145, Geometrically/Reduced.lean:38-77, Spectrum/Prime/Polynomial.lean:39-46. The hits provide local reducedness or nilpotence criteria, not the affine nilpotent preparation; the charpoly criterion requires a finite free algebra, absent here.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nonreduced-fibre-open",
+  "date": "2026-10-22",
+  "group": "Q90"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Constructibility input below lem-trf-local-term-locality: the negative generic-fibre alternative (Stacks 0577) uses ordinary nonreduced spreading (0575) after the 0550 base preparation. In the 0575 subargument: Tag 0575, lemma-nonreduced-in-neighbourhood, proof from reduction of the base through the second shrinking making h nilpotent.",
+   "via": [
+    "lem-trf-nonreduced-fibre-open",
+    "lem-trf-generic-fibre-not-geometrically-reduced-open",
+    "lem-trf-generic-constancy-geometric-reducedness",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-trf-local-noetherian-approximation",
+    "lem-trf-local-fibres-integral-projective",
+    "lem-trf-local-generic-basis-universal-injective",
+    "lem-trf-free-subtraction-flatness",
+    "lem-trf-flattening-module-by-admissible-blowup",
+    "lem-trf-flattening-by-admissible-blowup",
+    "lem-trf-flatification-horizontal-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-generic-nilpotent-affine-preparation",
+  "worker": "stage1",
+  "summary": "Expanded the reduction, residue-field fibre comparison, bad affine generic chart, and both denominator shrinkings of Stacks 0575. Reused existing geometric and localization nodes; no new nodes and no statement change. Checked the universal restriction compatibility including a=0.",
+  "blueprint": "Constructibility branch below lem-trf-local-term-locality, through the existing 0577 negative generic-fibre alternative and 0575 ordinary nonreduced spreading; this item realizes precisely the 0575 affine/nilpotent preparation recorded in blueprint.from.place. The latest locality proof itself has no separate version of this commutative-algebra preparation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-closed-immersion-residue-field-iso",
+    "why": "General closed-immersion residue-field comparison used only for the reduction map; the trace-formula unit has no replacement for this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-closed-immersion-residue-field-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-d3b176d70",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-d3b176d70 (reviewer sub-agent of L); spot-checked: I read Stacks 0575 (more-morphisms.tex:7110, lemma-nonreduced-in-neighbourhood) in full. The item realizes the proof from the reduction step through the second shrinking, before generic flatness. Statement, stmt_deps, source and blueprint are byte-identical to live; the item is still unsplit on live and side-live; there are no new nodes and no repair note. proof_deps equal the union of uses, every cited id exists, and there is no SGA citation. Step 1: the reduction is reduced and a homeomorphism, so T' is integral, and clause (2) of the finite-type base-change node applies with no hypothesis on the base map. Step 2: the residue fields are isomorphic because the reduction is a closed immersion; I checked by hand the inverse of the cartesian fibre square built from (id, Spec r^-1 ∘ π). Step 3: V0 = Spec A0 with A0 a domain; ξ' = (0) with stalk and residue field K. Step 4: the affine-chart base-change node applies with T = Spec K, A = K, R = A0; the stalk is a prime localization, so the chart ring has a nonzero nilpotent h. Step 5: by localization base change, h = c/s and u c^n = 0 with u ≠ 0; g = su ≠ 0 needs only A0 a domain, and B0 may have torsion; D(g) is affine and U = Spec (B0)_g. Step 6 (elementary) checked: s and u are units, b^n = 0, and b⊗1 = h ≠ 0 because both sides are the localization of B0 at A0∖{0}; finite type follows from the generators. Step 7: the D(a) restriction holds, including a = 0. Test cases: k[ε][x]/(x²), and ℤ[x]/(p x²), where u = g = p and the second shrinking is needed. No duplicate: the 0575 nodes are the parent, two Q90 siblings covering the free-annihilator steps, and a Q66 consumer. The sk-thm-p1 tools (closed-immersion residue field, affine-chart base change, reduction universal homeomorphism) are generic scheme facts and are accepted. Cosmetic only: step 1 lists def-sc-generic-point in its uses without a bracket in the text."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericNilpotentAffinePreparation",
+  "declaration": "AlgebraicGeometry.exists_generic_nilpotent_affine_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericNilpotentAffinePreparation.lean",
+  "statement": "theorem exists_generic_nilpotent_affine_preparation {X T : Scheme.{u}} (f : X ⟶ T) [LocallyOfFiniteType f] [QuasiCompact f] [IrreducibleSpace T] (ξ : T) (hξ : IsGenericPoint ξ (Set.univ : Set T)) (hgeneric : ¬ IsReduced (f.fiber ξ)) : IsIntegral T.nilradical.subscheme ∧ IsHomeomorph T.nilradical.subschemeι ∧ LocallyOfFiniteType (pullback.snd f T.nilradical.subschemeι) ∧ QuasiCompact (pullback.snd f T.nilradical.subschemeι) ∧ (∀ t' : T.nilradical.subscheme, IsIso (T.nilradical.subschemeι.residueFieldMap t') ∧ ∃ e : (pullback.snd f T.nilradical.subschemeι).fiber t' ≅ f.fiber (T.nilradical.subschemeι t'), e.hom ≫ f.fiberι (T.nilradical.subschemeι t') = (pullback.snd f T.nilradical.subschemeι).fiberι t' ≫ pullback.fst f T.nilradical.subschemeι ∧ e.hom ≫ f.fiberToSpecResidueField (T.nilradical.subschemeι t') = (pullback.snd f T.nilradical.subschemeι).fiberToSpecResidueField t' ≫ Spec.map (T.nilradical.subschemeι.residueFieldMap t')) ∧ ∃ ξ' : T.nilradical.subscheme, IsGenericPoint ξ' (Set.univ : Set T.nilradical.subscheme) ∧ T.nilradical.subschemeι ξ' = ξ ∧ ∃ (A : CommRingCat.{u}) (B K : CommAlgCat.{u} A), IsDomain A ∧ IsFractionRing A K ∧ ∃ (eK : CommRingCat.of K ≅ T.nilradical.subscheme.residueField ξ') (j : Spec A ⟶ T.nilradical.subscheme) (k : Spec (.of B) ⟶ pullback (pullback.snd f T.nilradical.subschemeι) j), IsOpenImmersion j ∧ ξ' ∈ Set.range j ∧ IsOpenImmersion k ∧ k ≫ pullback.snd (pullback.snd f T.nilradical.subschemeι) j = Spec.map (CommRingCat.ofHom (algebraMap A B)) ∧ Spec.map eK.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ j = T.nilradical.subscheme.fromSpecResidueField ξ' ∧ (algebraMap A B).FiniteType ∧ (∃ (b : B) (n : ℕ), 1 ≤ n ∧ b ^ n = 0 ∧ b ⊗ₜ[A] (1 : K) ≠ 0) ∧ ∀ a : A, Set.range (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a)))) = (↑(PrimeSpectrum.basicOpen a) : Set (PrimeSpectrum A)) ∧ ∃ ka : Spec (.of (Localization.Away (algebraMap A B a))) ⟶ pullback (pullback.snd f T.nilradical.subschemeι) (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a))) ≫ j), IsOpenImmersion ka ∧ IsPullback (Spec.map (CommRingCat.ofHom (algebraMap B (Localization.Away (algebraMap A B a))))) (ka ≫ pullback.snd (pullback.snd f T.nilradical.subschemeι) (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a))) ≫ j)) (Spec.map (CommRingCat.ofHom (algebraMap A B))) (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a)))) ∧ ka ≫ pullback.fst (pullback.snd f T.nilradical.subschemeι) (Spec.map (CommRingCat.ofHom (algebraMap A (Localization.Away a))) ≫ j) = Spec.map (CommRingCat.ofHom (algebraMap B (Localization.Away (algebraMap A B a)))) ≫ k ≫ pullback.fst (pullback.snd f T.nilradical.subschemeι) j",
+  "branch": "sheaf-dag",
+  "by": "Q82",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aeeccc80e",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Item lean record + one sorry theorem; no new defs/nodes/dep repairs. All node clauses matched against the recorded dependency declarations (finite type = LOFT∧QC, nilradical.subscheme reduction, fiber/IsReduced, IsIntegral, IsHomeomorph, residueFieldMap iso, fibre iso pinned by both projections, ξ' generic with i ξ'=ξ, open-immersion affine charts with A-algebra equation, IsDomain, RingHom.FiniteType, IsFractionRing + eK pinned to fromSpecResidueField, 1≤n ∧ b^n=0 ∧ b⊗1≠0, ∀a range=D(a), ka open immersion, IsPullback square + fst compatibility). Edge cases a=0, empty T, n≥1, single universe u ok; no stronger hypotheses. lean.statement verbatim; source/blueprint docstrings, 7-step proof docstring; report has Worker report + Second reading by Q82. Not recompiled (no change). Note: zero-prime localization via IsFractionRing (equivalent for a domain)."
+ }
+}

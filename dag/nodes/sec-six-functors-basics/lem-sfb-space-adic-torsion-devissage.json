@@ -1,0 +1,232 @@
+{
+ "id": "lem-sfb-space-adic-torsion-devissage",
+ "kind": "statement",
+ "title": "Algebraization from bounded exceptional torsion and closed thickenings",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], and use algebraic spaces over $S$ and their small etale structure sheaves [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. Modules, tensor pullback and direct image are on these ringed sites [def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors]. Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $I\\subseteq A$, and assume $A\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}A/I^n$. Fix $\\operatorname{Spec}A\\to S$ [def-weil-affine-spectrum], a separated finite-type algebraic space $X\\to\\operatorname{Spec}A$ [def-sfb-space-morphism-properties], and a quasi-coherent ideal $K\\subseteq\\mathcal O_X$. Put $J=I\\mathcal O_X$, and for $e\\geq1$ let $X_e^K\\hookrightarrow X$ be the closed subspace cut out by $K^e$ [def-weil-closed-immersion]. Coherent modules, adic systems and the bounded-kernel convention are [def-sfb-space-coherent-adic-system]; proper support is the closed-carrier convention [def-sfb-space-proper-quot-functor]. Assume, for every $e\\geq1$, completion is an equivalence from coherent modules on $X_e^K$ with support proper over $A$ to $\\mathrm{Coh}(X_e^K,J\\mathcal O_{X_e^K})$ with proper support. Let $M\\in\\mathrm{Coh}(X,J)$ have proper support. Suppose a coherent module $H$ on $X$ with proper support and a map $a:M\\to\\widehat H_J$ are given, such that some power $K^t$ kills every ordinary component kernel and cokernel of $a$. Then there are a coherent module $F$ on $X$ with proper support over $A$ and an isomorphism $\\widehat F_J\\xrightarrow{\\sim}M$ of adic systems. No flatness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BC (lemma-existence-tricky), with Situation 08B7 (situation-existence) and the bounded-kernel convention of Tag 08BA (remark-inverse-systems-kernel-cokernel-annihilated-by)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-sfb-space-coherent-adic-system",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-sfb-space-morphism-properties",
+  "def-weil-closed-immersion",
+  "def-sfb-space-proper-quot-functor"
+ ],
+ "proof": [
+  {
+   "text": "$X$ is Noetherian by the finite-type separated inheritance statement of [lem-sfb-space-noetherian-coherent-acc]. Work with the componentwise definitions in [def-sfb-space-coherent-adic-system]. For $e\\geq1$ put $Q_{e,n}=M_n/K^eM_n$. Quotients are coherent by the affine-chart calculus and Noetherian coherence. The identities $Q_{e,n+1}/J^nQ_{e,n+1}=M_{n+1}/(K^e+J^n)M_{n+1}\\simeq Q_{e,n}$ show that $Q_e=(Q_{e,n})_n$ is $J$-adic. Its first term is a quotient of $M_1$, hence has proper support: stalk support decreases under quotients, and the proper-support closed-subset and carrier statements apply. The dictionary [lem-sfb-space-closed-adic-dictionary], applied to the ideal $K^e$, identifies $Q_e$ with a coherent adic system on the Noetherian closed subspace $X_e^K$, preserving proper support and commuting with completion. The assumed equivalence gives a coherent proper-support module $G_e$ killed by $K^e$, with a chosen isomorphism $\\widehat G_{e,J}\\simeq Q_e$.",
+   "uses": [
+    "lem-sfb-space-noetherian-coherent-acc",
+    "def-sfb-space-coherent-adic-system",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-closed-adic-dictionary",
+    "lem-sfb-space-proper-support-closed-operations",
+    "lem-sfb-space-module-proper-carrier-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC (lemma-existence-tricky), proof"
+   }
+  },
+  {
+   "text": "Both $Q_{e+1}$ and $Q_e$ have coherent terms killed by $K^{e+1}$; the dictionary identifies them, with proper support, on $X_{e+1}^K$. Fullness of the assumed completion equivalence there lifts $Q_{e+1}\\to Q_e$ to $G_{e+1}\\to G_e$. All equalities of its composites hold by faithfulness. Since $(G_{e+1}/K^eG_{e+1})/J^n=G_{e+1}/(K^e+J^n)G_{e+1}\\simeq Q_{e,n}$, both $G_{e+1}/K^eG_{e+1}$ and $G_e$ complete to $Q_e$; full faithfulness gives $G_{e+1}/K^eG_{e+1}\\simeq G_e$ with the prescribed quotient map. The quotient has proper support by the closed-subset and carrier statements. Thus $N=(G_e)_e$ is $K$-adic with proper support. The chosen completion isomorphisms form an isomorphism of double diagrams $\\sigma_{e,n}:G_e/J^nG_e\\simeq M_n/K^eM_n$. Here the only quotient identity used is $(P/LP)/TP=P/(L+T)P$, checked on affine charts.",
+   "uses": [
+    "lem-sfb-space-closed-adic-dictionary",
+    "def-sfb-space-coherent-adic-system",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-proper-support-closed-operations",
+    "lem-sfb-space-module-proper-carrier-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC (lemma-existence-tricky), proof"
+   }
+  },
+  {
+   "text": "The maps $a_n$ modulo $K^e$ give $Q_{e,n}\\to H/(J^n+K^e)H$. The dictionary identifies $G_e$ and $H/K^eH$ with coherent modules on $X_e^K$ and identifies their completion diagrams naturally, including quotient transitions. Fullness of the assumed completion equivalence there gives $d_e:G_e\\to H/K^eH$. Both its source and target have proper support. Faithfulness on $X_{e+1}^K$ shows that these maps commute with $e$-transitions, since their completions do. Thus $d:N\\to\\widehat H_K$ satisfies the comparison square with $a$ and $\\sigma$. Quotient interchange is induced by the two projections from $H$, so this square is precisely the square required by [lem-sfb-space-second-adic-torsion-transfer]. That lemma gives $K^{4t}\\ker d_e=K^{4t}\\operatorname{coker}d_e=0$ for every $e$.",
+   "uses": [
+    "lem-sfb-space-closed-adic-dictionary",
+    "lem-sfb-space-proper-support-closed-operations",
+    "lem-sfb-space-module-proper-carrier-support",
+    "lem-sfb-space-second-adic-torsion-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC (lemma-existence-tricky), proof"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-easy-torsion-algebraization] with completion ideal $K$, system $N$ and map $d$. Obtain coherent $F$, $b:F\\to H$ with actual kernel and cokernel killed by $K^s$ for some $s\\geq1$, and $\\gamma:N\\simeq\\widehat F_K$ with $d=\\widehat b_K\\gamma$. No proper-support assertion is taken from this lemma. For every $n$, reduction of $b$ modulo $J^n$ still has kernel and cokernel killed by $K^{2s}$: locally for $f,g\\in K^s$, lift $fy$ through $b$ and multiply the lift by $g$. This defines $c_{fg}:H\\to F$, independently of the lift, with $c_{fg}b=fg$ and $bc_{fg}=fg$. After quotienting by $J^n$ these identities show that $fg$ kills both errors. Products $fg$ generate $K^{2s}$. This is a computation of ordinary module maps on the cited affine charts. It uses no exactness of tensor pullback. Also $(M_n/K^eM_n)_e$ is $K$-adic by the quotient identities.",
+   "uses": [
+    "lem-sfb-space-easy-torsion-algebraization",
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "def-sfb-space-coherent-adic-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC (lemma-existence-tricky), proof"
+   }
+  },
+  {
+   "text": "Fix $n$. Apply the easy torsion-algebraization lemma to the $K$-adic completion of $a_n:M_n\\to H/J^nH$. Its component errors are killed by $K^{2t}$, by the same product-lift calculation as in step 4 applied to $a_n$ and quotient ideal $K^e$. One admissible triple is $(M_n,a_n,\\mathrm{id})$. Another is $(F/J^nF,b\\bmod J^n,\\gamma_n)$: $\\gamma_n$ is obtained by quotienting $\\gamma$ by $J^n$ and using $\\sigma_{e,n}$ and $(F/K^eF)/J^n=F/(K^e+J^n)F$. The comparison square from step 3 gives the required equality over $H/J^nH$, and step 4 gives the actual torsion bound. Uniqueness of the triple supplies an isomorphism $\\varphi_n:F/J^nF\\simeq M_n$. To check the $n$-transition, reduce $\\varphi_{n+1}$ modulo $J^n$ and use the defining adic identifications. This produces another isomorphism of the same triples at $n$, because $\\sigma$, $\\gamma$ and $a$ commute with transitions. Uniqueness forces it to equal $\\varphi_n$. Hence $(\\varphi_n)_n:\\widehat F_J\\simeq M$.",
+   "uses": [
+    "lem-sfb-space-easy-torsion-algebraization",
+    "def-sfb-space-coherent-adic-system",
+    "lem-sfb-space-qcoh-affine-chart-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC (lemma-existence-tricky), proof"
+   }
+  },
+  {
+   "text": "It remains to prove proper support of $F$. At a geometric stalk outside $V(K)$, $K^s$ is the unit ideal, so $\\ker b$ vanishes. Its support is therefore contained in $\\operatorname{Supp}(F)\\cap V(K)=\\operatorname{Supp}(F/KF)=\\operatorname{Supp}(G_1)$. For the middle equality, at a point of $V(K)$ the ideal $K$ is in the maximal ideal of the local ring; if $F/KF=0$, the finite-module Nakayama statement [lem-weil-pbc-nakayama-one-plus-ideal-annihilator] gives an annihilator congruent to $1$ modulo $K$, hence a unit, so $F=0$ there. Finiteness and coherent kernels follow on charts from the cited calculus and Noetherian coherence. In the stalkwise exact sequence $0\\to\\ker b\\to F\\to\\operatorname{im}b\\to0$, the image has support contained in $\\operatorname{Supp}(H)$, so $\\operatorname{Supp}(F)\\subseteq\\operatorname{Supp}(G_1)\\cup\\operatorname{Supp}(H)$. This union is proper, and its closed subset $\\operatorname{Supp}(F)$ is proper. The carrier equivalence gives a proper closed carrier for $F$, as required.",
+   "uses": [
+    "lem-sfb-space-qcoh-affine-chart-calculus",
+    "lem-sfb-space-noetherian-coherent-acc",
+    "lem-weil-pbc-nakayama-one-plus-ideal-annihilator",
+    "lem-sfb-space-proper-support-closed-operations",
+    "lem-sfb-space-module-proper-carrier-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-more-morphisms.tex",
+    "place": "Tag 08BC (lemma-existence-tricky), proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-space-noetherian-coherent-acc",
+  "def-sfb-space-coherent-adic-system",
+  "lem-sfb-space-qcoh-affine-chart-calculus",
+  "lem-sfb-space-closed-adic-dictionary",
+  "lem-sfb-space-proper-support-closed-operations",
+  "lem-sfb-space-module-proper-carrier-support",
+  "lem-sfb-space-second-adic-torsion-transfer",
+  "lem-sfb-space-easy-torsion-algebraization",
+  "lem-weil-pbc-nakayama-one-plus-ideal-annihilator"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-more-morphisms.tex",
+  "place": "Tag 08BC (lemma-existence-tricky), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Algebraize a coherent adic system with proper support from an approximate coherent model and Grothendieck existence on powers of the exceptional closed subspace",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Prop\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the proposition that $ M $ is adic complete with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"AdicCompletion.instAlgebraAdicCauchySequence\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Algebra R (AdicCompletion.AdicCauchySequence I R)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, the type of $ I $-adic Cauchy sequences in $ R $ is equipped with an algebra structure over $ R $, where the canonical algebra map sends each element o\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"AdicCompletion.subalgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subalgebra R ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subalgebra of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern module completion, formally smooth rings and local sheaf presentations, not the algebraic-space devissage statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent formal module algebraization via a map to a completed coherent sheaf with bounded kernel and cokernel supported on an ideal and equivalences on all its thickenings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofAlgEquiv_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"(x : S) : ofAlgEquiv I x = of I S x\", \"doc\": \"For a commutative ring $ S $ and an ideal $ I $, if $ S $ is $ I $-adically complete, then the canonical $ S $-algebra homomorphism from $ S $ to its $ I $-adic completion $ \\\\varprojlim S/I^nS $ is an\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} → [inst : CommRing S] → (I : Ideal S) → [IsAdicComplete I S] → S ≃ₐ[S] AdicCompletion I S\", \"doc\": \"Given a commutative ring $ S $, an ideal $ I $, and the condition that $ S $ is $ I $-adically complete, this constructs an $ S $-algebra equivalence between $ S $ and its $ I $-adic completion $ \\\\var\"}\n  {\"name\": \"AdicCompletion.mkₐ\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → AdicCompletion.AdicCauchySequence I R →ₐ[R] AdicCompletion I R\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, this constructs the canonical $ S $-algebra homomorphism from $ R $ to its $ I $-adic complet\"}\n  {\"name\": \"AdicCompletion.ofLinearEquiv\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) →\\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → [IsAdicComplete I M] → M ≃ₗ[R] AdicCompletion I M\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, an $ R $-module $ M $ with additive commutative group structure, and the condition that $ M $ is $ I $-adically complete, this constructs an $ R $-linea\"}\n  {\"name\": \"SheafOfModules.isQuasicoherent\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \": ObjectProperty (SheafOfModules.{u} R)\", \"doc\": \"A property asserting that a sheaf of modules over a ring sheaf satisfies local bijectivity conditions between hom-sets and module morphisms, ensuring compatibility with the ring structure and sheaf ax\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"A proposition asserting that a quasicoherent sheaf $\\\\mathcal{M}$ over a ring sheaf $\\\\mathcal{O}$ on a site $(\\\\mathcal{C}, J)$ satisfies the finite presentation condition: for every object $X \\\\in \\\\math\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"(h : Function.Surjective (algebraMap R A)) :\\n  Algebra.FormallySmooth R A ↔ IsIdempotentElem (RingHom.ker (algebraMap R A))\", \"doc\": \"Given a commutative ring $ R $ and an $ R $-algebra $ A $, if the canonical algebra map $ R \\\\to A $ is surjective, then $ A $ is formally smooth over $ R $ if and only if the kernel of this map is an \"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"(f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R (Ideal.pow_le_pow_right hle)).comp (f n) = f m) : A →ₐ[R] S\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern module completion, formally smooth rings and local sheaf presentations, not the algebraic-space devissage statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAdicComplete\", \"SheafOfModules\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern module completion, formally smooth rings and local sheaf presentations, not the algebraic-space devissage statement."
+  },
+  {
+   "tool": "grep",
+   "query": "existence.tricky|adic.*devissage|coherent.*algebraization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: returned declarations concern module completion, formally smooth rings and local sheaf presentations, not the algebraic-space devissage statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-supported-adic-existence",
+  "date": "2026-10-24",
+  "group": "Q73"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Supporting subargument for proper-support Grothendieck existence in Stacks Tag 08BE, serving the inherited compactification/direct-image prerequisite chain of sk-thm-sf-ctf-stability; the final application of 08BC after all exceptional thickenings have been handled.",
+   "via": [
+    "lem-sfb-space-supported-adic-existence",
+    "lem-sfb-space-coherent-formal-effectivity",
+    "lem-sfb-space-coherent-stack-general",
+    "lem-sfb-space-quot-representability",
+    "lem-sfb-space-hilbert-representability",
+    "lem-sfb-space-hom-representability",
+    "lem-sfb-curve-descent-isom-spaces",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-space-adic-torsion-devissage",
+  "worker": "stage1",
+  "summary": "Followed Stacks 08BC through the double quotient system; isolated easy torsion algebraization and torsion transfer, wrote the quotient and uniqueness arguments and the proper-support argument; no flatness used. Repair 2026-10-24: re-read the current closed-adic dictionary after the landing return; steps 1-3 now identify explicitly the coherent killed-module subcategories, completion compatibility and proper-support hypotheses. Revalidated all step quotations against the current DAG and replaced the three stale dictionary quotations.",
+  "blueprint": "Supporting Stacks 08BC proper-support existence argument in the inherited direct-image/compactification chain. blueprint_refs.py ancestor reports None because the imported created.item chain terminates without a blueprint id; retain that ancestry and explain the mathematical connection to the latest compactification paragraph in report.md."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-5b2f57e61",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-5b2f57e61 (reviewer sub-agent of L); spot-checked: Read Stacks spaces-more-morphisms.tex Situation 08B7, lemma-fully-faithful, Remark 08BA, Lemma 08BB and Lemma 08BC with its proof. The item statement matches 08BC hypothesis by hypothesis and is byte-identical to live, which is still unsplit. No repair note applies and no other group has split the item. All 7 cited sfb statements are identical in the snapshot and in live, so the earlier landing refusal over the closed-adic dictionary statement is fixed. Steps 1-2 build Q_e and G_e and the double isomorphisms sigma; I checked the double-quotient identities, and the dictionary is applied only to coherent modules killed by K^e or K^{e+1}. Step 3 builds d by fullness and faithfulness and applies the transfer node with exactly its hypotheses. Step 4 applies 08BB with L=K. Its product-lift argument (c_{fg}, with b c = c b = fg) correctly gives K^{2s} for b mod J^n. Step 5 uses uniqueness of triples with both actual-torsion bounds checked, plus the n-transition. Step 6 uses the Nakayama Mathlib leaf at geometric stalks to show Supp(F) is contained in Supp(G_1) union Supp(H), then the closed-subset/finite-union clauses and the carrier equivalence. New node easy-torsion-algebraization is exactly 08BB, including unique-isomorphism uniqueness; tested L=0, L=O_X, zero modules. New node second-adic-torsion-transfer is the two omitted 08BC bounds. I proved it independently: K^{2t} kills the errors of d_e mod J^n. Artin-Rees then gives D=JD for D = K^{2t}·ker or K^{2t}·coker. D is killed by K^e and has proper support, so faithfulness of the assumed completion on X_e^K gives D=0. So the node is true even without completeness of A. Tested K=0, K=O_X, J=0. Neither new node restates the item. The scheme analogues lem-weil-pbc-easy-algebraization-torsion-triple and lem-weil-pbc-devissage-second-adic-system-torsion are scheme-only, so these are not duplicates. Route: every cited statement is in unit sk-thm-sf-ctf-stability; the Nakayama node is a Mathlib leaf; no tool_uses; no SGA. Batch-5: every flagged citation is either a general definition (def-trf-algebraic-space, def-trf-space-quasi-coherent-module, def-trf-space-etale-module-functors, def-sfb-*) or a generic coherent-module lemma on algebraic spaces that reaches sec-trace-formula only through def-trf-algebraic-space. None is a step of the trace formula or Poincare duality, so all are accepted. Null blueprint.from.node is inherited from the item's created.item chain and is not a delivery fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceAdicTorsionDevissage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.coherentAdic_algebraization_of_bounded_exceptional_torsion",
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceAdicTorsionDevissage.lean",
+  "statement": "theorem coherentAdic_algebraization_of_bounded_exceptional_torsion {S : Scheme.{u}} {A : Type u} [CommRing A] [IsNoetherianRing A] (I : Ideal A) [IsAdicComplete I A] (aS : Spec (.of A) ⟶ S) (X : AlgebraicSpace S) (f : X ⟶ schemeSpace (Over.mk aS)) (hsep : MapIsSeparated f) (hft : MapIsFiniteType f) (J K : QuasiCoherentIdeal X) (hJ : ∀ T : X.EtaleSite, IsAffine (X.etaleForget.obj T) → idealSectionImage J.val.arrow T = Ideal.map (((Scheme.ΓSpecIso (.of A)).inv ≫ (yoneda.preimage (T.obj.hom ≫ f.hom.hom)).left.appTop).hom) I) (hthickenings : ∀ e : ℕ, 1 ≤ e → (∀ F G : CoherentProperSupportModules f, AdicPowerKills K e F.obj → AdicPowerKills K e G.obj → Function.Bijective (fun v : F ⟶ G ↦ (coherentAdicCompletionDiagram J).map v.hom)) ∧ (∀ N : ℕᵒᵖ ⥤ X.Modules, IsCoherentAdicSystem J N → CoherentAdicHasProperSupportOver f N → (∀ n : ℕ, AdicPowerKills K e (N.obj (op n))) → ∃ F : CoherentProperSupportModules f, AdicPowerKills K e F.obj ∧ Nonempty ((coherentAdicCompletionDiagram J).obj F.obj ≅ N))) (M : ℕᵒᵖ ⥤ X.Modules) (hM : IsCoherentAdicSystem J M) (hMproper : CoherentAdicHasProperSupportOver f M) (H : CoherentProperSupportModules f) (a : M ⟶ (coherentAdicCompletionDiagram J).obj H.obj) (ha : CoherentAdicKernelCokernelKilled K a) : ∃ F : CoherentProperSupportModules f, Nonempty ((coherentAdicCompletionDiagram J).obj F.obj ≅ M)",
+  "branch": "sheaf-dag",
+  "by": "Q72",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b747701f",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery fixes the earlier H13/H2 return: SpaceCoherentAdicSystem.lean only gains 3 appended definitions (ModuleHasProperClosedCarrier, CoherentProperSupportModules, CoherentAdicHasProperSupportOver); the def-sfb-space-coherent-adic-system record keeps live module/declaration CoherentAdicSystem/statement and all 14 live names plus the 3 new (only by/declarations/note differ); the separate SpaceCoherentAdicProperSupport module is dropped. Item statement and stmt_deps byte-identical to live (still unsplit); lean.statement verbatim. Checked against Stacks 08B7/08BC: Noetherian I-adically complete A, separated finite-type f over arbitrary S via aS, J=I O_X via affine-chart hJ, X_e equivalence as Hom-bijective plus essentially surjective completion on K^e-killed proper-support modules/systems, M coherent J-adic with proper support at level 1, H proper-support coherent, one t>=1 kills all component kernels/cokernels, conclusion: essential image. New support defs are real carrier data and reduce to the live predicate at S=Spec A. Edge cases K=0, K=O_X, I=0, I=top, empty X OK; no universe restriction; sorry only; docstrings OK. Advisory: QuasiCoherentIdeal/idealSectionImage owners reached only through the cited def node. No files changed, nothing compiled."
+ }
+}

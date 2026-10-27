@@ -1,0 +1,488 @@
+{
+ "id": "lem-sfb-quasifinite-normal-dense-open-immersion",
+ "kind": "statement",
+ "title": "A finite-type birational monomorphism to a normal Noetherian scheme is open",
+ "statement": "Let $f:X\\to Z$ be a morphism of schemes [def-pc-scheme] of finite type [def-weil-finite-type-morphism]. Assume $Z$ is Noetherian, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact, and normal, meaning that every local ring is an integrally closed domain [def-weil-pbc-normal-ring]. Assume $X$ is reduced [def-pc-reduced-scheme]. Suppose $f$ is a monomorphism: for every scheme $T$, the map $\\operatorname{Hom}(T,X)\\to\\operatorname{Hom}(T,Z)$ induced by $f$ is injective. Suppose there is a dense open subscheme $H\\subseteq Z$ such that $f^{-1}(H)$ is dense in $X$ and $f:f^{-1}(H)\\to H$ is an isomorphism. Then $f$ is an open immersion [def-weil-open-immersion]. No flatness of $f$, irreducibility of $Z$, or properness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02LR, lemma-quasi-finite-separated-quasi-affine, normal-target consequence; morphisms.tex Tag 0CT8, lemma-monomorphism-loc-finite-type-loc-quasi-finite, and Tag 0AB1, lemma-finite-birational-over-normal. Bosch–Lütkebohmert–Raynaud, Néron Models, 2.3 Theorem 2′ (Zariski's Main Theorem, weak form), printed p.46 (PDF p.53), as used in 5.3 Lemma 3, printed p.121."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-normal-ring",
+  "def-pc-reduced-scheme",
+  "def-weil-open-immersion"
+ ],
+ "proof": [
+  {
+   "text": "By clause (2) of [rem-pc-regular-normal], write $Z=\\coprod_i Z_i$ as a finite disjoint union of normal integral open subschemes. Both hypotheses of that clause hold: $Z$ is Noetherian and all its local rings are normal domains. The $Z_i$ cover $Z$; no choice of a component is needed when $Z$ is empty. By [lem-weil-pbc-affine-opens-basis], cover each $Z_i$ by nonempty affine opens $V$. Each such $V$ is also open and affine in $Z$. We prove that $f_V:f^{-1}(V)\\to V$ is an open immersion for each $V$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0357, lemma-normal-locally-finite-nr-irreducibles; Tag 033M, lemma-normal-Noetherian"
+   }
+  },
+  {
+   "text": "Fix one such $V$, put $W=f^{-1}(V)$ and $H_V=H\\cap V$. The open $V$ of integral $Z_i$ is nonempty and irreducible and has the same local rings there, hence is integral and normal. Density of $H$ makes $H_V$ nonempty; an open subset of an irreducible space is irreducible if nonempty. The given isomorphism identifies $f^{-1}(H_V)$ with $H_V$. Since $W$ is open in $X$, density of $f^{-1}(H)$ in $X$ makes $f^{-1}(H_V)=W\\cap f^{-1}(H)$ dense in $W$. The closure of an irreducible subspace is irreducible: two relatively open sets meeting its closure both meet the subspace and therefore meet each other. Thus $W$ is nonempty and irreducible. Its local rings are those of reduced $X$, so it is reduced by [def-pc-reduced-scheme]. Consequently $W$ and $V$ are integral by [def-pc-integral-scheme].",
+   "uses": [
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OK and 01ON, definition-integral and lemma-characterize-integral; elementary open-subspace argument"
+   }
+  },
+  {
+   "text": "The affine-cover definition [def-weil-finite-type-morphism] shows that $f_V$ is of finite type: an affine open of $V$ is an affine open of $Z$, with the same inverse image in $X$ and in $W$. It is a monomorphism, since two maps to $W$ equal after $f_V$ are equal as maps to $X$ by the hypothesis on $f$, and maps to an open subscheme are determined by their maps to $X$. Apply [lem-trf-monomorphism-finite-type-composite-lqf] with $g=\\mathrm{id}_V$. It gives separatedness and unramifiedness of $f_V$. Apply [lem-weil-pbc-unramified-fibre-point-isolated] at each point of $W$, taking the unramified neighbourhood to be all of $W$. Every point is isolated in its fibre; finite type therefore makes $f_V$ quasi-finite by [pqf-def-quasifinite].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-trf-monomorphism-finite-type-composite-lqf",
+    "lem-weil-pbc-unramified-fibre-point-isolated",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CT8, lemma-monomorphism-loc-finite-type-loc-quasi-finite; Tag 02G7, lemma-unramified-over-field, fibre isolation"
+   }
+  },
+  {
+   "text": "The affine scheme $V$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Apply [pqf-lem-normalization-open] to the separated finite-type quasi-finite map $f_V$. Its relative-normalization factorization is $W\\xrightarrow{j}N\\xrightarrow{p}V$, with $j$ a quasi-compact open immersion, $p$ integral and $p\\circ j=f_V$. Finite type gives quasi-compactness of $f_V$, and separatedness gives quasi-separatedness, since its diagonal is a closed immersion. Thus [lem-weil-pbc-relative-normalization] applies to this same relative normalization; clause (iv), using integrality of $W$ from step 2, makes $N$ integral.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-normalization-open",
+    "lem-weil-pbc-relative-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LR, lemma-quasi-finite-separated-quasi-affine; morphisms.tex Tags 035H/035I and 0AXN for the same normalization"
+   }
+  },
+  {
+   "text": "The nonempty integral schemes $W,N,V$ have unique generic points by [lem-sc-scheme-sober]. A generic point belongs to every nonempty open. The open immersion $j$ identifies the generic point of $W$ with that of $N$ and their local rings. Likewise the isomorphism $f^{-1}(H_V)\\simeq H_V$, between nonempty opens of $W$ and $V$, identifies their generic points and local rings; these are exactly the maps induced by $f_V$. Since $p\\circ j=f_V$, the generic point of $N$ maps to that of $V$ under $p$, and the induced generic local-ring map is an isomorphism. By [lem-sc-integral-function-field-affine-fraction], these generic local rings are their function fields. Hence $p$ induces an isomorphism $k(V)\\xrightarrow{\\sim}k(N)$.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; schemes.tex Tag 01IS, lemma-scheme-sober"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-integral-birational-normal-isomorphism] to $p:N\\to V$. Its source and target are integral by steps 2 and 4, it is integral by step 4, its generic-point and function-field conditions are step 5, and all local rings of $V$ are integrally closed domains by step 2. It follows that $p$ is an isomorphism. Thus $f_V=p\\circ j$ identifies $W$ with an open subscheme of $V$, so is an open immersion by [def-weil-open-immersion].",
+   "uses": [
+    "lem-trf-integral-birational-normal-isomorphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, lemma-finite-birational-over-normal, integral variant"
+   }
+  },
+  {
+   "text": "For each $V$ let $O_V\\subseteq V$ be the open image just obtained. On $V\\cap V\\prime$, both identifications restrict the single map $f$ to $f^{-1}(V\\cap V\\prime)$, and their images there are $O_V\\cap V\\prime=V\\cap O_{V\\prime}$. Their inverses agree, being inverses of the same restricted isomorphism. Therefore they glue to an isomorphism $X\\simeq O=\\bigcup_V O_V$ over $Z$, with $O$ open in $Z$. Equivalently, the local inverse maps glue by the sheaf axiom on open subschemes. By [def-weil-open-immersion], $f$ is an open immersion. If $Z$ is empty, the existence of $f$ forces $X$ empty and the same empty gluing gives the identity of the empty scheme.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01HE/01IO, open subschemes and open immersions; gluing inverse maps on an open cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "lem-weil-pbc-unramified-fibre-point-isolated",
+  "pqf-def-quasifinite",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-normalization-open",
+  "lem-weil-pbc-relative-normalization",
+  "lem-sc-scheme-sober",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-trf-integral-birational-normal-isomorphism",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Assembly of Tag 02LR with morphisms.tex Tag 0CT8 and Tag 0AB1, integral variant; component reduction from properties.tex Tags 0357/033M. The dense-open birational comparison is written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite type birational monomorphism to a normal Noetherian scheme is an open immersion when its isomorphism locus is schematically dense in its source",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective",
+     "AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec",
+     "AlgebraicGeometry.IsOpenImmersion.of_isIso",
+     "AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.IsPreimmersion",
+     "AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2baeeb61587990e3"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|isOpenImmersion.*[Nn]ormal|[Nn]ormal.*isOpenImmersion",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/RationalMap.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Composition.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "29b4b41a3f722e6c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi finite separated birational morphism from a reduced scheme to a normal scheme is an open immersion",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.isOpenImmersion_eq_inf",
+     "AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.isReduced_of_isOpenImmersion",
+     "AlgebraicGeometry.LocallyQuasiFinite",
+     "AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal",
+     "AlgebraicGeometry.IsOpenImmersion.mono"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "eaf2b3b80c129fa4"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsNormal",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.IsNormal'",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.NormalScheme",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "loogle: unknown identifier 'AlgebraicGeometry.NormalScheme'",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective morphism of schemes to a normal scheme that is an isomorphism over a dense open and has no components outside that open is an open immersion",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion.of_forall_source_exists",
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec",
+     "AlgebraicGeometry.IsImmersion",
+     "AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective",
+     "AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.IsOpenImmersion.of_openCover_source"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2ddebbceb954c890"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"normal\"",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType",
+     "AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization"
+    ],
+    "n_hits": 2,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2a1a3371c3a46d85"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: the normalization open-immersion theorem still requires an identification of the relative normalization with the normal target; flat-monomorphism results require flatness, which is not assumed. No result states this dense-open criterion."
+  },
+  {
+   "tool": "grep",
+   "query": "birational|isOpenImmersion.*[Nn]ormal|[Nn]ormal.*isOpenImmersion",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Dominant.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean",
+     "Mathlib/AlgebraicGeometry/Birational/Birational.lean"
+    ],
+    "n_hits": 12,
+    "note": "",
+    "subdirectory": "AlgebraicGeometry",
+    "digest": "68dc2fa47aefcde6"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give open-immersion definitions, flat monomorphisms (flatness not assumed), and the open immersion into relative normalization; the normal-target identification still needs the argument in steps 1-6."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type birational monomorphism from a reduced scheme to a normal Noetherian scheme is an open immersion",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion",
+     "AlgebraicGeometry.IsImmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.IsOpenImmersion.le_monomorphisms",
+     "AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap",
+     "AlgebraicGeometry.isOpenImmersion_eq_inf",
+     "AlgebraicGeometry.IsOpenImmersion.iff_stalk_iso"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "f39526c50300e95b"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give open-immersion definitions, flat monomorphisms (flatness not assumed), and the open immersion into relative normalization; the normal-target identification still needs the argument in steps 1-6."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"normal\"",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType",
+     "AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization"
+    ],
+    "n_hits": 2,
+    "note": "",
+    "subdirectory": "",
+    "digest": "2a1a3371c3a46d85"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give open-immersion definitions, flat monomorphisms (flatness not assumed), and the open immersion into relative normalization; the normal-target identification still needs the argument in steps 1-6."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi finite separated birational morphism from a reduced scheme to a normal scheme is an open immersion",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec",
+     "AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact",
+     "AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization",
+     "AlgebraicGeometry.IsPreimmersion",
+     "AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+     "AlgebraicGeometry.Scheme.Hom.toNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "9b0c1c93359d2026"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give open-immersion definitions, flat monomorphisms (flatness not assumed), and the open immersion into relative normalization; the normal-target identification still needs the argument in steps 1-6."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsOpenImmersion\", \"birational\"",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": "",
+    "subdirectory": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give open-immersion definitions, flat monomorphisms (flatness not assumed), and the open immersion into relative normalization; the normal-target identification still needs the argument in steps 1-6."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type monomorphism is an open immersion if the target is normal and the source reduced and both have isomorphic dense open subschemes",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.IsOpenImmersion.le_monomorphisms",
+     "AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec",
+     "AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono",
+     "AlgebraicGeometry.IsOpenImmersion.mono",
+     "AlgebraicGeometry.IsImmersion",
+     "AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono",
+     "AlgebraicGeometry.isReduced_of_isOpenImmersion",
+     "AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion"
+    ],
+    "n_hits": 8,
+    "note": "",
+    "subdirectory": "",
+    "digest": "29f81220a08626c2"
+   },
+   "date": "2026-10-24",
+   "verdict": "no match: results give open-immersion definitions, flat monomorphisms (flatness not assumed), and the open immersion into relative normalization; the normal-target identification still needs the argument in steps 1-6."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-strict-law-graph-charts",
+  "date": "2026-10-24",
+  "group": "NU"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 5.3 Lemma 3, last sentence of proof: apply Zariski Main to the birational pair projections after proving them monomorphisms; generic normal-target criterion behind BLR 2.3 Theorem 2′.",
+   "via": [
+    "lem-sfb-strict-law-graph-charts",
+    "lem-sfb-strict-law-complete-square-group",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-quasifinite-normal-dense-open-immersion",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Prove the dense-open criterion componentwise using existing normal decomposition, monomorphism, relative-normalization Zariski Main and integral birational normal-isomorphism nodes; no new nodes. Check generic local-ring comparison and glue the open images explicitly.",
+  "blueprint": "Latest 20261024 chapter and sk-thm-sf-ctf-stability direct-images statement/proof read. This is the below-unit BLR 5.3 Lemma 3 Zariski Main input named in inherited from.place and used by lem-sfb-strict-law-graph-charts step 5. Ancestor tool returns None: preserve inherited null ancestor and via. No blueprint node found with this statement; same_as remains empty. Steps 1-2 reduce components, 3-4 realize 0CT8 and 02LR, 5-6 give the normal-target consequence, 7 assembles it.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Use only clause (2), decomposition of a normal Noetherian scheme into integral open components. Generic scheme tool needed to cover the nonirreducible target; no node of this unit states that decomposition."
+   },
+   {
+    "node": "lem-trf-monomorphism-finite-type-composite-lqf",
+    "why": "Use with g the identity to get separatedness and unramifiedness of a locally finite type scheme monomorphism. It is a scheme tool, not the trace-formula route; the unit has only the more cumbersome algebraic-space version."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-fibre-point-isolated",
+    "why": "Use fibre isolation to match precisely the quasi-finite definition required by the existing Zariski Main node. Generic scheme tool, not a base-change-theorem proof step."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Use clause (iv): normalization in integral W is integral. Generic relative-normalization construction underlying 02LR; no same-unit node gives this clause."
+   },
+   {
+    "node": "lem-trf-integral-birational-normal-isomorphism",
+    "why": "Use integral, not necessarily finite, birational maps to normal integral targets being isomorphisms, exactly Stacks 0AB1. This generic algebraic-geometry tool is needed for the integral normalization factor, and no same-unit node states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-trf-monomorphism-finite-type-composite-lqf",
+  "lem-weil-pbc-unramified-fibre-point-isolated",
+  "lem-weil-pbc-relative-normalization",
+  "lem-trf-integral-birational-normal-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-72eeca779",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-72eeca779 (reviewer sub-agent of L); spot-checked: Shape OK: one commit, the item and the report only, Review by Q07 present. Statement and stmt_deps unchanged. The base proof was empty, so this is not a re-split. No new nodes. Read Stacks 02LR (more-morphisms l.12426), 0CT8 (morphisms l.3977) and 0AB1 'finite (or even integral)' (morphisms l.14630). Seven steps checked against each cited statement. (1) rem-pc-regular-normal(2) gives normal integral open components; Noetherian and normal hold. (2) Elementary: H_V is nonempty and irreducible; f^{-1}(H_V)≅H_V is dense in the open W, so W is irreducible; reduced X makes W integral. (3) lem-trf-monomorphism-finite-type-composite-lqf (g=id) gives separated and unramified; lem-weil-pbc-unramified-fibre-point-isolated gives isolated fibre points; with finite type, f_V is quasi-finite by pqf-def-quasifinite(3). (4) V affine is qcqs, so pqf-lem-normalization-open gives W→N (open immersion) and N→V (integral); relative-normalization (iv) makes N integral. (5) Generic-point and function-field comparison is correct, and p induces k(V)≅k(N). (6) The 0AB1 integral-variant node applies with normality on V, so p is an isomorphism. (7) Open immersion is local on the target. Edge cases tested: cusp normalization, blow-up, an extra point over the boundary (needs the density of f^{-1}H), non-reduced X, empty Z. rg -L duplicate search found no existing node stating this criterion. Batch-5 flags: lem-trf-monomorphism-finite-type-composite-lqf (0CT8) and lem-trf-integral-birational-normal-isomorphism (0AB1) are generic scheme and commutative-algebra lemmas, not steps of the trace formula or Poincaré duality. Their closures (49 and 32 nodes) contain no other trf, PD or nt- node. Accepted. The off-unit generic tools in the split_report are accepted for the maintainer to record."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasifiniteNormalDenseOpenImmersion",
+  "declaration": "AlgebraicGeometry.isOpenImmersion_of_mono_dense_open_isIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasifiniteNormalDenseOpenImmersion.lean",
+  "statement": "theorem isOpenImmersion_of_mono_dense_open_isIso {X Z : Scheme.{u}} (f : X ⟶ Z) [LocallyOfFiniteType f] [QuasiCompact f] [IsLocallyNoetherian Z] [CompactSpace Z] [IsReduced X] [Mono f] (hnormal : ∀ z : Z, IsDomain (Z.presheaf.stalk z) ∧ IsIntegrallyClosed (Z.presheaf.stalk z)) (hdense : ∃ H : Z.Opens, Dense (H : Set Z) ∧ Dense (f ⁻¹ᵁ H : Set X) ∧ IsIso (f ∣_ H)) : IsOpenImmersion f",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69b8dcd96",
+  "group": "Q114",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: LocallyOfFiniteType+QuasiCompact (finite type), IsLocallyNoetherian+CompactSpace, stalkwise IsDomain∧IsIntegrallyClosed (def-weil-pbc-normal-ring record), IsReduced X, Mono f, ∃ H dense with f⁻¹ᵁH dense in X and IsIso (f ∣_ H) ⇒ IsOpenImmersion f; no extra assumptions. lean.statement verbatim; node unchanged vs live (live lean null). Sorry-only theorem, no defs, docstrings with source/blueprint and all 7 proof steps. Math checked vs Stacks 0CT8/02LR/0AB1; edge cases: empty Z/H, H=Z, disconnected Z, source-density counterexample. No existing Mathlib/project match (ZMT normalization lemmas, FlatMono need more). Imported modules exist. No findings."
+ }
+}

@@ -1,0 +1,279 @@
+{
+ "id": "lem-trf-prescribed-open-fppf-sheaf-representation",
+ "kind": "statement",
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "proof": [
+  {
+   "text": "The jointly surjective etale family generates a covering sieve S on T: etale maps are flat and locally of finite presentation. For each Z over T, pull S back along Z to T and transport it to Over T via Sieve.overEquiv. This gives a covering sieve R(Z). Every arrow W to Z in R(Z) supplies a factorization of W to T through some T_i. Pullback covering stability is the sieve form of the base-change covering assertion [lem-trf-fppf-covering-base-change].",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topologies.tex",
+    "place": "Tag 021O, lemma-fppf (3); the etale-to-fppf implication is the definition of etale used here."
+   }
+  },
+  {
+   "text": "The pullback U_i to T_i is an open immersion, hence a monomorphism by [lem-weil-pbc-open-immersion-monomorphism]. Thus Hom over T_i from any W to U_i is a subsingleton. The local representing isomorphism makes F(W) a subsingleton whenever W to T factors through T_i. Applying separatedness from [def-weil-pbc-sites-and-cohomology] on R(Z) shows that F(Z) is a subsingleton for every Z. Transport between equal structural maps uses the identity isomorphism of their underlying schemes.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, lemma-descending-property-open-immersion, gluing the section on the descended open; here overlap agreement follows from uniqueness of maps to U. Sheaf equalizer: Sites Tag 00VM, definition-sheaf-sets."
+   }
+  },
+  {
+   "text": "For each arrow W to U in R(U), choose a factorization W to T_i to T. The maps W to U and W to T_i give a map W to U_i by [def-pc-fibre-product], and alpha_i produces a section on W. Every section type is a subsingleton by step 2, so this family is compatible. The sheaf condition [def-weil-pbc-sites-and-cohomology] glues it to a section b of F(U). This construction also applies to the empty covering.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, lemma-descending-property-open-immersion, the morphism obtained by gluing; explicit natural-transformation and restriction calculation for the sheaf version."
+   }
+  },
+  {
+   "text": "For a section x in F(Z) and any point z of Z, choose a point t_i above its image in T. There is a point p of Z times_T T_i above z and t_i: this is the pointwise joint-surjectivity assertion in [lem-trf-fppf-covering-base-change], implemented by Scheme.Pullback.exists_preimage_pullback. Restrict x to this pullback and apply the inverse local representing isomorphism to obtain a map to U_i. Composing with U_i to U and evaluating at p shows that the image of z lies in U. Therefore the image of Z to T is contained in U. Apply [lem-weil-pbc-morphism-factors-through-open-subscheme] to obtain a map Z to U over T.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-trf-fppf-covering-base-change",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, lemma-descending-property-open-immersion, final paragraph factoring an arbitrary scheme-valued point through U; factorization criterion: Schemes Tag 01HI, lemma-restrict-map-to-opens."
+   }
+  },
+  {
+   "text": "Use the universe-lifted Yoneda equivalence to define eta from h_U to F by a mapping to its pullback of b. Each component is injective because maps to an open are a subsingleton by [lem-weil-pbc-open-immersion-monomorphism]. It is surjective because any section provides a map to U by step 4, and all sections agree by step 2. The componentwise bijections give a natural isomorphism alpha.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-descent.tex",
+    "place": "Tag 041X, lemma-descending-property-open-immersion, final bijectivity assertion, expanded sectionwise using Sites Tag 00VM, definition-sheaf-sets."
+   }
+  },
+  {
+   "text": "The prescribed local restrictions and the section formula hold because their two sides lie in the same subsingleton section type. Any competing natural isomorphism agrees componentwise for the same reason, so equals alpha. The factorization of step 4 is unique by [lem-weil-pbc-open-immersion-monomorphism], and its pullback section equals x by subsingletonness. If there is a map to U, pulling back b supplies a section, while step 4 rules out sections when no such map exists. No finiteness, reducedness or nonemptiness assumption was used.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-monomorphism",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00VM, definition-sheaf-sets, equalizer uniqueness and remark-sheaf-condition-empty-covering; naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-pc-fppf-site",
+  "lem-trf-fppf-covering-base-change",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme"
+ ],
+ "proof_origin": {
+  "by": "D7 stage 3",
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X, lemma-descending-property-open-immersion, final two paragraphs; the Lean proof first descends subterminality by separatedness, then glues b and proves support, and obtains the natural isomorphism using uliftYonedaEquiv."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-open-immersion-etale-local",
+  "date": "2026-10-22",
+  "group": "Q109"
+ },
+ "title": "Representation of an fppf sheaf by a prescribed etale-locally representing open",
+ "statement": "Let $T$ be a scheme [def-pc-scheme] and let $F$ be a sheaf of sets on the big fppf site $(\\mathit{Sch}/T)_{fppf}$ [def-pc-fppf-site, def-weil-pbc-sites-and-cohomology], within the universes of [def-weil-size-convention]. Let $\\{q_i:T_i\\to T\\}_{i\\in I}$ be a set-indexed jointly surjective family of etale morphisms [def-weil-etale-morphism], and let $U\\subseteq T$ be a specified open subscheme [def-weil-open-immersion]. Put $U_i=U\\times_TT_i$ [def-pc-fibre-product]. For every $i$, suppose given a natural isomorphism $\\alpha_i:h_{U_i/T_i}\\xrightarrow{\\sim}F|_{T_i}$ of presheaves on $\\mathit{Sch}/T_i$, where $h_{U_i/T_i}(Z)=\\operatorname{Mor}_{T_i}(Z,U_i)$ and $F|_{T_i}(Z\\to T_i)=F(Z\\to T_i\\to T)$. There exists a unique natural isomorphism $\\alpha:h_{U/T}\\xrightarrow{\\sim}F$, where $h_{U/T}(Z)=\\operatorname{Mor}_T(Z,U)$, whose restriction to every $T_i$ is $\\alpha_i$ under the fibre-product identification. If $b=\\alpha_U(\\operatorname{id}_U)\\in F(U)$, its component on any $g:Z\\to T$ sends $v:Z\\to U$ over $T$ to $v^*b$. Every $x\\in F(Z)$ determines a unique factorization $v:Z\\to U$ of $g$, and $x=v^*b$; consequently $F(Z)$ is a singleton when $g$ factors through $U$ and is empty otherwise. No compatibility hypothesis on the local isomorphisms, finiteness of $I$, quasi-compactness of the schemes, or algebraic-space hypothesis on $F$ is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fppf-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-descent.tex",
+  "place": "Tag 041X (lemma-descending-property-open-immersion), proof after the descended open is supplied: glue local sections to U, factor arbitrary scheme points through U, and prove bijectivity; big-fppf-sheaf version of old steps 5-7 of lem-trf-space-open-immersion-etale-local."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An fppf sheaf locally represented by the base changes of a fixed open subscheme U of a scheme T is represented by U over T",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.Modules.restrict_obj; AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf; AlgebraicGeometry.affineOpensRestrict; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "represent.*(sheaf|open)|sheaf.*represent",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Mathlib/AlgebraicGeometry/Sites/Representability.lean; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let F be an fppf sheaf mapping to the functor of points of T and let U be an open subscheme of T. If after an etale cover of T the sheaf F is represented by the pullbacks of U, then sections glue to a natural isomorphism from the functor of points of U to F over T",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_toGlued; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf; AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_comp; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recovering a sheaf of sets as the functor of points of a specified open subscheme from etale local identifications using gluing of sections and factorization through open subsets",
+   "results": "8 hits: AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk; AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_toGlued; AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.sheafification_reflective; CategoryTheory.isIso_sheafificationAdjunction_counit; CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction; CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso; CategoryTheory.GrothendieckTopology.W_iff; CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction; CategoryTheory.instIsIsoFunctorOppositeSheafToPresheafToSheafCompComposeAndSheafify; CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*(local|cover)|locally.*(bijective|isomorph)|represent.*open",
+   "results": "25 hits: Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/Point/Basic.lean; Mathlib/CategoryTheory/Sites/LocallySurjective.lean; Mathlib/CategoryTheory/Sites/Point/Over.lean; Mathlib/CategoryTheory/Sites/Point/Over.lean; Mathlib/CategoryTheory/Sites/Point/Conservative.lean; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Let T be a scheme, U an open subscheme, F an fppf sheaf on schemes over T, and T_i an etale cover. Natural isomorphisms from Hom over T_i into U times T_i to the restriction of F glue uniquely to a natural isomorphism Hom over T into U with F",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf; AlgebraicGeometry.Scheme.LocalRepresentability.yonedaIsoSheaf; AlgebraicGeometry.Scheme.Cover.instIsIsoFromGlued; AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso; AlgebraicGeometry.Scheme.LocalRepresentability.comp_toGlued_eq; AlgebraicGeometry.Scheme.Cover.gluedCover_t'; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t; AlgebraicGeometry.Scheme.GlueData.isoCarrier; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf sheaf on Sch over T locally represented by U times T_i over an etale cover T_i is represented by the specified open subscheme U",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U; AlgebraicGeometry.Scheme.Cover.gluedCover_U; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f; AlgebraicGeometry.Scheme.LocalRepresentability.representableBy; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map; AlgebraicGeometry.Scheme.openCoverOfIsOpenCover_X; AlgebraicGeometry.Scheme.Opens.toScheme; Read Sites/Representability.lean: it requires Zariski-locally-surjective relatively representable open maps and constructs a glued scheme, whereas here only etale-local identifications with a prescribed U are given. Sites/LocallyBijective.lean detects invertibility of an already constructed morphism; constructing the map and proving its local properties here is additional work. No exact or one-line match.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "represent.*(sheaf|open)|sheaf.*represent",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean, Mathlib/AlgebraicGeometry/Sites/Representability.lean. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:19-31, 180-205: Zariski relatively representable open covering and a glued scheme, not the prescribed etale-local representation here. Sites/LocallyBijective.lean:37-96 detects invertibility of an already given sheaf map; constructing our global map and its local properties requires the proof above. Other hits concern structure-sheaf restrictions, cover indices or sheafification. No exact or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An fppf sheaf with etale local representations by a prescribed open subscheme is globally represented by that open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_U, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.IsOpenImmersion.ofRestrict, AlgebraicGeometry.Scheme.Opens.stalkIso. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:19-31, 180-205: Zariski relatively representable open covering and a glued scheme, not the prescribed etale-local representation here. Sites/LocallyBijective.lean:37-96 detects invertibility of an already given sheaf map; constructing our global map and its local properties requires the proof above. Other hits concern structure-sheaf restrictions, cover indices or sheafification. No exact or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.IsIso",
+   "results": "12 hits: CategoryTheory.sheafification_reflective, CategoryTheory.isIso_sheafificationAdjunction_counit, CategoryTheory.instIsIsoFunctorOppositeHomFullSubcategoryIsSheafAppSheafCounitSheafificationAdjunction, CategoryTheory.GrothendieckTopology.W_sheafToPresheaf_map_iff_isIso, CategoryTheory.GrothendieckTopology.W_iff, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.instIsIsoFunctorOppositeSheafToPresheafToSheafCompComposeAndSheafify, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:19-31, 180-205: Zariski relatively representable open covering and a glued scheme, not the prescribed etale-local representation here. Sites/LocallyBijective.lean:37-96 detects invertibility of an already given sheaf map; constructing our global map and its local properties requires the proof above. Other hits concern structure-sheaf restrictions, cover indices or sheafification. No exact or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An fppf sheaf locally represented by pullbacks of a fixed open subscheme along an etale covering is uniquely represented by that open subscheme",
+   "results": "8 hits: AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, AlgebraicGeometry.instUniqueI₀SchemeCover, AlgebraicGeometry.Scheme.Cover.instUniqueI₀Sigma, AlgebraicGeometry.Scheme.LocalRepresentability.glueData_J, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.Scheme.LocalRepresentability.instIsIsoSheafZariskiTopologyTypeYonedaGluedToSheaf, AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:19-31, 180-205: Zariski relatively representable open covering and a glued scheme, not the prescribed etale-local representation here. Sites/LocallyBijective.lean:37-96 detects invertibility of an already given sheaf map; constructing our global map and its local properties requires the proof above. Other hits concern structure-sheaf restrictions, cover indices or sheafification. No exact or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Recover a sheaf as the functor of points of an open subscheme using unique maps into the open and descent of sections along a covering",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Opens.topIso, AlgebraicGeometry.Scheme.OpenCover.ext_elem, AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.Scheme.Opens.topIso_inv, AlgebraicGeometry.Scheme.Opens.topIso_hom, AlgebraicGeometry.Scheme.toOpen_eq, AlgebraicGeometry.Scheme.Opens.ι_app_self. Read Mathlib/AlgebraicGeometry/Sites/Representability.lean:19-31, 180-205: Zariski relatively representable open covering and a glued scheme, not the prescribed etale-local representation here. Sites/LocallyBijective.lean:37-96 detects invertibility of an already given sheaf map; constructing our global map and its local properties requires the proof above. Other hits concern structure-sheaf restrictions, cover indices or sheafification. No exact or one-line specialization.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 041X (lemma-descending-property-open-immersion), proof after the descended open is supplied: glue local sections to U, factor arbitrary scheme points through U, and prove bijectivity; big-fppf-sheaf version of old steps 5-7 of lem-trf-space-open-immersion-etale-local.",
+   "via": [
+    "lem-trf-space-open-immersion-etale-local",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-prescribed-open-fppf-sheaf-representation",
+  "worker": "stage1",
+  "summary": "Proved the prescribed-open sheaf representation directly by six steps: base-change the covering, force overlap agreement by open-immersion monicity, glue b, define the natural map and verify each local restriction, factor arbitrary sections using image containment in the open, and prove componentwise bijectivity and uniqueness. Reused three existing Mathlib lemma nodes; no new nodes. Statement unchanged; empty cover, empty open, nonreduced test schemes and arbitrary set-indexed covers checked.",
+  "blueprint": "Nearest blueprint ancestor lem-trf-local-term-locality via the existing trace-specialization and geometric-descent chain; specifically the final two paragraphs of Stacks 041X used in steps 5-7 of lem-trf-space-open-immersion-etale-local. This is the prescribed-open representation subargument, not a change to the contracting-correspondence route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-44f67a147",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-44f67a147 (reviewer sub-agent of L); spot-checked: I read the whole item and its six steps; the delivery adds no new nodes and no tool_uses, and the statement is unchanged. Source: Stacks 041X (lemma-descending-property-open-immersion), final paragraph. It glues U' to X into U to X using the sheaf condition, then factors T-points through U. The item generalizes this to an arbitrary fppf sheaf, a prescribed open U and an étale jointly surjective family. Step 1: étale implies flat and lfp, so the family is an fppf covering; base change (lem-trf-fppf-covering-base-change) gives the covering {p_i} and also {r_i} (Z=U). Step 2: the fibre-product universal property plus open-immersion monicity make F(W) have at most one element for any W over T_i, so b_i and b_j agree on U_i×_U U_j and the equalizer gives b; no compatibility of the α_i is needed (it holds automatically for subterminal presheaves). Step 3: α_W(r_i w)=w^*r_i^*b=w^*b_i=α_i(W)(w), with the pullback order checked. Step 4: j r_i w_i=q_i∘(Z_i→T_i)=g p_i gives g(Z)⊆U, then factorization through the open via IsOpenImmersion.lift (valid for nonreduced Z), and v p_i=v_i by monicity. Step 5: p_i^*(v^*b)=p_i^*x, and equalizer injectivity gives surjectivity; a domain with at most one element gives bijectivity and the natural inverse. Step 6: r_i^*c=β_{U_i}(r_i)=b_i gives c=b, hence uniqueness. Edge cases checked: I=∅ (T=U=∅, empty-cover sheaf axiom), U=∅, U=T, infinite I, non-quasi-compact and nonreduced schemes. Duplicate search (041X, subterminal, locally represent): the sibling lem-trf-local-open-representatives-support-descent descends the open with no sheaf condition, and the sfb space/stack nodes have different hypotheses, so none duplicates the item. The parent lem-trf-space-open-immersion-etale-local step 4 applies the item with matching hypotheses. Blueprint from/place kept, same_as []. No SGA. Delivery errors A–F clear."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrescribedOpenFppfSheafRepresentation",
+  "declaration": "AlgebraicGeometry.Scheme.existsUnique_prescribedOpen_fppfSheaf_representation",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrescribedOpenFppfSheafRepresentation.lean",
+  "statement": "theorem existsUnique_prescribedOpen_fppfSheaf_representation (T : Scheme.{u}) (F : Sheaf (fppfTopology.over T) (Type (max u v))) (I : Type w) (Tᵢ : I → Scheme.{u}) (q : ∀ i, Tᵢ i ⟶ T) [∀ i, Etale (q i)] (hq : ∀ t : T, ∃ i, ∃ s : Tᵢ i, q i s = t) (U : T.Opens) (αᵢ : ∀ i, yoneda.obj (Over.mk (pullback.snd U.ι (q i))) ⋙ uliftFunctor.{v} ≅ (Over.map (q i)).op ⋙ F.obj) : ∃ α : yoneda.obj (Over.mk U.ι) ⋙ uliftFunctor.{v} ≅ F.obj, (∀ (i : I) (W : Over (Tᵢ i)) (a : W ⟶ Over.mk (pullback.snd U.ι (q i))), α.hom.app (op ((Over.map (q i)).obj W)) ⟨(Over.map (q i)).map a ≫ Over.homMk (pullback.fst U.ι (q i)) pullback.condition⟩ = (αᵢ i).hom.app (op W) ⟨a⟩) ∧ (∀ β : yoneda.obj (Over.mk U.ι) ⋙ uliftFunctor.{v} ≅ F.obj, (∀ (i : I) (W : Over (Tᵢ i)) (a : W ⟶ Over.mk (pullback.snd U.ι (q i))), β.hom.app (op ((Over.map (q i)).obj W)) ⟨(Over.map (q i)).map a ≫ Over.homMk (pullback.fst U.ι (q i)) pullback.condition⟩ = (αᵢ i).hom.app (op W) ⟨a⟩) → β = α) ∧ (∀ (Z : Over T) (a : Z ⟶ Over.mk U.ι), α.hom.app (op Z) ⟨a⟩ = F.obj.map a.op (α.hom.app (op (Over.mk U.ι)) ⟨𝟙 (Over.mk U.ι)⟩)) ∧ (∀ (Z : Over T) (x : F.obj.obj (op Z)), ∃! a : Z ⟶ Over.mk U.ι, x = F.obj.map a.op (α.hom.app (op (Over.mk U.ι)) ⟨𝟙 (Over.mk U.ι)⟩)) ∧ (∀ Z : Over T, (Nonempty (Z ⟶ Over.mk U.ι) → Nonempty (F.obj.obj (op Z)) ∧ Subsingleton (F.obj.obj (op Z))) ∧ (¬ Nonempty (Z ⟶ Over.mk U.ι) → IsEmpty (F.obj.obj (op Z))))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-73735eb2a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read node, Stacks 041X source (spaces-descent.tex l.1497-1541), all 7 stmt_dep records, module and report. Statement field verbatim; node changed only in lean. Clauses match: F Sheaf (fppfTopology.over T) (Type (max u v)); I : Type w arbitrary/empty; Etale q_i + joint surjectivity; U : T.Opens; α_i into (Over.map q_i).op ⋙ F.obj; restriction clause on all W,a via Over.map + homMk pullback.fst; proper ∃α ∧ ∀β(restr→β=α); α_Z(a)=a^*b; ∃! factorization with x=a^*b; Nonempty∧Subsingleton / IsEmpty alternative. No extra hypotheses or universe equalities; edge cases I=∅, U=∅, U=T, nonreduced, infinite I covered. No duplicate (FppfLocalOpenSubfunctorDescent is a different statement; Mathlib LocalRepresentability is Zariski gluing). Docstrings carry source, blueprint and 6 proof steps; sorry only; no definitions. No files changed, no compile run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261026T081500-L-1979288",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-point-fibre-representative-transport",
+ "kind": "statement",
+ "title": "The point-fibre representative is unchanged by enlargement of its coefficient field",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$. Let $S$ be the coefficient stage system at $s=\\operatorname{Spec}k$ of [def-weil-algebraically-closed-coefficients]. For pairs $A,B$ of that system, finite coefficient subfields $G\\subset H\\subset\\Omega$, inclusions $h_A:A.stage\\le G$ and $h_B:B.stage\\le G$, and a stage map $f:A_G\\to B_G$, let $S.\\operatorname{tr}_{H/G}(f)=\\alpha_A^{-1}\\,T_{H/G}(f)\\,\\alpha_B$ be its further extension using the specified source associators. The arrow on representatives $R$ and object map $O$ are exactly [def-weil-point-fibre-stage-constructions]. Then, as morphisms $O(A)\\to O(B)$ in [def-weil-point-fd-qlbar-category], $$R_H(S.\\operatorname{tr}_{H/G}(f))=R_G(f).$$ No functor from the pair category and no independence of representatives is assumed.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Evaluation at the geometric point and the final paragraph on descent of objects and morphisms to finite coefficient fields; retained stagewise construction spelled out by lem-weil-point-sections-scalar-extension."
+ },
+ "stmt_deps": [
+  "def-weil-point-fibre-stage-constructions",
+  "def-weil-finite-field-fiber",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category"
+ ],
+ "proof": [
+  {
+   "text": "Normalize the small rational scalar comparison by its defining equation after the fully faithful module carrier lift. The sections tower equation and the pure-tensor tensor/lift comparison identify the two composites for a tower of coefficient extensions. Cancel the normalization isomorphisms, using naturality to move them past scalar extension. Transport through the Shrink coefficient square to obtain the tower equation for the actual finite-stage comparisons. This argument applies to every rational object, since its underlying object is an integral object; the normalization is stated on exactly those objects.",
+   "uses": [
+    "def-weil-point-fibre-stage-constructions",
+    "lem-weil-point-sections-scalar-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a tower G ≤ H, substitute source transport alpha_A inverse, T(f), alpha_B into the displayed representative at H. Apply the comparison tower equation at A and B. Naturality of the comparison for G ≤ H moves the middle T(f) across it. Cancel the adjacent inverse comparison factors. The canonical target-stage comparison satisfies the tensor-tower associativity equation, so its remaining factors cancel and leave precisely the representative at G. No transition is required to be faithful, and repeated coefficient fields and zero objects obey the same cancellation.",
+   "uses": [
+    "def-weil-point-fibre-stage-constructions",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-point-fd-qlbar-category",
+    "lem-weil-derived-field-scalar-extension-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-point-fibre-stage-constructions",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Evaluation at the geometric point and the final paragraph on descent of objects and morphisms to finite coefficient fields; retained stagewise construction spelled out by lem-weil-point-sections-scalar-extension."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A family of functors compatible with scalar extension descends to a functor on common-stage morphisms",
+   "results": "ModuleCat.extendScalars, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, ModuleCat.coextendScalars, ModuleCat.ExtendScalars.map', ModuleCat.ExtendScalars.obj', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.ExtendScalars.map'_comp, CommRingCat.moduleCatExtendScalarsPseudofunctor",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project constructions and the common-stage calculus are reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of functors on a directed system of categories induces a functor from their filtered two colimit",
+   "results": "CategoryTheory.Functor.IsLocallyDirected, DirectLimit.map_def, DirectLimit.map, DirectLimit.map₂_def, DirectLimit.map₂_def₂, CategoryTheory.Functor.exists_map_eq_of_isLocallyDirected, DirectLimit, CategoryTheory.Functor.IsLocallyDirected.cond",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project constructions and the common-stage calculus are reused"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem.*(lift|desc)|pointQbarFibreRepresentative|pointStageFibreScalarIso",
+   "results": "No Mathlib source matches.",
+   "date": "2026-10-26",
+   "verdict": "no exact match; existing project constructions and the common-stage calculus are reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteCoefficientPoint",
+  "date": "2026-10-26",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Evaluation at the geometric point and the final paragraph on descent of objects and morphisms to finite coefficient fields; retained stagewise construction spelled out by lem-weil-point-sections-scalar-extension.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointFibreRepresentativeTransport",
+  "file": "lean/Sheaf/Paper/PointFibreRepresentativeTransport.lean",
+  "declaration": "WeilConjectures.pointQbarFibreRepresentative_transport",
+  "declarations": [
+   "WeilConjectures.pointQbarFibreRepresentative_transport"
+  ],
+  "statement": "theorem pointQbarFibreRepresentative_transport (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (G H : Padic.FiniteCoefficientFields l Ω) (hA : A.stage ≤ G) (hB : B.stage ≤ G) (h : G ≤ H) (f : A.toStage hA ⟶ B.toStage hB) : pointQbarFibreRepresentative D l hl Ω A B H (hA.trans h) (hB.trans h) ((GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω (Spec (.of D.k))).tr h f) = pointQbarFibreRepresentative D l hl Ω A B G hA hB f",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5aa9e",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T023120-L-522042",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-5aa9e",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261026T023120-L-522042",
+  "kind": "interface",
+  "note": "independent cc review: the moved 51 public declarations, diffed against the published FiniteCoefficientPoint.lean (bodies unchanged); the descent proof against pointQbarFibre_existsUnique (axioms: sorryAx only via the new transport theorem); the transport sorry against the pinned stageSystem associators and the proved sections tower clause; the 89 direct importers compiled against the delivered modules"
+ }
+}

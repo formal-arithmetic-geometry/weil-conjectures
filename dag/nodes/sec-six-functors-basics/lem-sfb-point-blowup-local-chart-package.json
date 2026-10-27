@@ -1,0 +1,410 @@
+{
+ "id": "lem-sfb-point-blowup-local-chart-package",
+ "kind": "statement",
+ "title": "Local chart package for a regular point blowup in dimension at most two",
+ "statement": "Let $T$ be a regular scheme [def-weil-regular-scheme] with $\\dim T\\le2$ [def-kun-topological-krull-dimension], let $x\\in T$ be a closed point with its reduced induced structure, and let $b:W=\\operatorname{Bl}_xT\\to T$ be the global blowup [def-nagata-global-blowup]. There is an affine neighbourhood $V=\\operatorname{Spec}R$ of $x$ with $R$ Noetherian and regular [def-weil-pbc-noetherian-ring]. Write $\\mathfrak p\\subset R$ for the maximal ideal of $x$, $A=\\mathcal O_{T,x}\\cong R_{\\mathfrak p}$ (the stalk [def-weil-pbc-module-stalk]) and $\\mathfrak m=\\mathfrak pA$ [def-weil-pbc-localization-at-prime]. Then $f:b^{-1}V\\to V$ is proper [def-weil-proper-morphism]. The ring $A$ is a regular local domain, and $d=\\dim A\\in\\{0,1,2\\}$ [def-weil-pbc-krull-dimension-ring]. The canonical flat blowup comparison, with the fibre-product factors exchanged if necessary, identifies\n$$Z=(b^{-1}V)\\times_V\\operatorname{Spec}A\\cong\\operatorname{Bl}_{\\mathfrak m}(\\operatorname{Spec}A)=\\operatorname{Proj}\\mathcal R_A(\\mathfrak m)$$\nover $\\operatorname{Spec}A$ [def-pc-fibre-product, def-nagata-affine-blowup, def-nagata-blowup-flat-base-change-map]. The global and affine blowups in this display agree under their gluing comparison for the one-element affine cover. Their coefficient maps on functions agree. The closed fibre of $Z$ is canonically the original scheme fibre over $x$. If $d=0$, then $\\mathfrak m=0$ and $Z$ is empty; if $d=1$, the structural map $Z\\to\\operatorname{Spec}A$ is an isomorphism. If $d=2$, choose $s,t$ generating $\\mathfrak m$. They are nonzero and form a regular sequence [def-weil-pbc-regular-sequence], and $Z$ is covered by the affine opens\n$$U_s=\\operatorname{Spec}C_s,\\quad C_s=A[\\mathfrak m/s]\\subset A_s,\\qquad U_t=\\operatorname{Spec}C_t,\\quad C_t=A[\\mathfrak m/t]\\subset A_t,$$\nas $A$-schemes [def-nagata-blowup-chart-ring, def-weil-ring-localization-away]. Their intersection is the basic open where $t/s$ is invertible on $U_s$ and where $s/t$ is invertible on $U_t$. There is an $A$-algebra map from its ring of sections to $A_{st}$ whose composites with restriction from $C_s$ and $C_t$ are their natural localization inclusions. In particular chart values of any section of $Z$ have equal images in $A_{st}$.",
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0804 (lemma-blowing-up-affine) and 0805 (lemma-flat-base-change-blowing-up); algebra.tex Tags 00NP and 00NQ; resolve.tex Tag 0AGS, first proof paragraph (two-chart cover)"
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-nagata-global-blowup",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-pc-fibre-product",
+  "def-nagata-affine-blowup",
+  "def-nagata-blowup-flat-base-change-map",
+  "def-weil-pbc-regular-sequence",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-module-stalk"
+ ],
+ "proof": [
+  {
+   "text": "By regularity choose an affine neighbourhood $V=\\operatorname{Spec}R$ with $R$ Noetherian and regular. The closed point $x$ corresponds to a maximal ideal $\\mathfrak p$, and the affine-stalk localization theorem identifies the germ map with $R\\to A=R_{\\mathfrak p}$, with maximal ideal $\\mathfrak m=\\mathfrak pA$. Thus $A$ is regular local. It is a nonzero domain by the regular-local-domain theorem. By the local-dimension theorem, $\\dim A$ is the supremum of lengths of chains of irreducible closed subsets of $T$ starting at $\\overline{\\{x\\}}$; these are among the chains defining $\\dim T$. Consequently $0\\le d=\\dim A\\le2$, so $d\\in\\{0,1,2\\}$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sc-regular-local-domain",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IS (definition-regular); Tag 02IT (lemma-characterize-regular); Tag 02IZ (lemma-codimension-local-ring); schemes.tex Tag 01HV (lemma-spec-sheaves); algebra.tex Tag 00NP (lemma-regular-domain)"
+   }
+  },
+  {
+   "text": "The reduced closed point restricts on $V$ to $\\operatorname{Spec}(R/\\mathfrak p)$. The affine-restriction clause of the Rees presentation identifies $b^{-1}V\\to V$ with $\\operatorname{Proj}(\\mathcal R_R(\\mathfrak p))\\to\\operatorname{Spec}R$. Since $R$ is Noetherian, its ideal $\\mathfrak p$ is finitely generated. The affine-blowup properness theorem therefore proves that $f:b^{-1}V\\to V$ is proper. No global quasi-compactness or integrality of $T$ is required.",
+   "uses": [
+    "lem-sfb-blowup-rees-symmetric-presentation",
+    "def-weil-pbc-noetherian-ring",
+    "lemma-nagata-affine-blowup-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine); Tag 02NS (lemma-blowing-up-projective); algebra.tex Tag 00FM (section-Noetherian)"
+   }
+  },
+  {
+   "text": "Apply the affine-stalk localization theorem also to the affine scheme $V$ at $x$. Its germ map identifies $\\mathcal O_{V,x}$ with $R_{\\mathfrak p}=A$ compatibly with the coefficient map $R\\to A$ already fixed in step 1. Thus the canonical spectrum-of-stalk morphism of $V$ is exactly $g:\\operatorname{Spec}A\\to V$. The canonical-stalk-spectrum flatness theorem makes this particular map flat. The inverse image of the centre is cut out by $\\mathfrak pA=\\mathfrak m$: indeed the base-changed quotient is $A/\\mathfrak pA$, since fractions from $R\\setminus\\mathfrak p$ are units after base change. Apply the comparison with $X=V$. The global blowup of $V$ in its ideal $\\mathfrak p$ and $b^{-1}V$ are both identified over $V$ with $\\operatorname{Proj}(\\mathcal R_R(\\mathfrak p))$ by the affine-restriction clause of the Rees presentation (applied to $V$, and to $T$ as in step 2), so the target $\\operatorname{Spec}A\\times_V\\operatorname{Bl}_{\\mathfrak p}(V)$ is $\\operatorname{Spec}A\\times_V b^{-1}V$. The flat blowup comparison is then an isomorphism $\\operatorname{Bl}_{\\mathfrak m}(\\operatorname{Spec}A)\\to\\operatorname{Spec}A\\times_V b^{-1}V$. Exchange the factors by the unique morphism interchanging the two projections. Its inverse exchanges them again, by the fibre-product universal property. Inverting the comparison gives the required identification with $Z$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-sbc-canonical-stalk-spectrum-flat",
+    "def-weil-pbc-localization-at-prime",
+    "def-nagata-blowup-flat-base-change-map",
+    "thm-nagata-blowup-flat-base-change",
+    "def-pc-fibre-product",
+    "lem-sfb-blowup-rees-symmetric-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0805 (lemma-flat-base-change-blowing-up); algebra.tex Tag 00HT (lemma-flat-localization)"
+   }
+  },
+  {
+   "text": "On the affine base $\\operatorname{Spec}A$, the Rees presentation identifies the global blowup with $\\operatorname{Proj}(\\mathcal R_A(\\mathfrak m))$, which is the affine blowup by definition. This is the comparison from the one-element affine cover: the presentation restricts to the same affine model and the cover-independence theorem characterizes the comparison by that property. Both structural coefficient maps are $a\\mapsto a$ in degree zero; in the flat comparison the degree-zero map is likewise the canonical coefficient identification, as specified in its definition. Hence these are identifications over $\\operatorname{Spec}A$ with the stated maps on functions.",
+   "uses": [
+    "lem-sfb-blowup-rees-symmetric-presentation",
+    "def-nagata-affine-blowup",
+    "prop-nagata-global-blowup-cover-independent",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine), affine Rees construction; Tag 0805 (lemma-flat-base-change-blowing-up), degree-zero coefficients"
+   }
+  },
+  {
+   "text": "The residue field of the closed point of $\\operatorname{Spec}A$ is $\\kappa(x)=A/\\mathfrak m=R/\\mathfrak p$: every nonzero element of the field $R/\\mathfrak p$ is already invertible. Thus both $Z\\times_{\\operatorname{Spec}A}\\operatorname{Spec}\\kappa(x)$ and the original scheme fibre $W\\times_T\\operatorname{Spec}\\kappa(x)$ represent the same pairs of morphisms with equal composites to $T$. The mutually inverse maps are the maps keeping the $W$ and residue-field projections. Their composites are identities by uniqueness in the fibre-product universal property. This proves the canonical closed-fibre identification, including when that fibre is empty.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product), universal property; algebra.tex Tag 00CO (definition-localization)"
+   }
+  },
+  {
+   "text": "If $d=0$, the definition of regular locality says that $\\mathfrak m$ is generated by the empty family, so $\\mathfrak m=0$. Apply the affine-blowup chart cover to $\\mathfrak m=(0)$. Its only chart ring $A[\\mathfrak m/0]$ is a subalgebra of $A_0=0$, hence is the zero ring. Its spectrum is empty because a prime ideal must be proper, and this chart covers $Z$. Therefore $Z$ is empty. If $d=1$, choose a generator $s$ of $\\mathfrak m$. By the regular-parameter theorem $s$ is a nonzerodivisor in the nonzero domain $A$. Every $a\\in\\mathfrak m$ is $sc$ and $a/s=c$ in $A_s$, so $A[\\mathfrak m/s]$ is exactly the image of $A$, and $A\\to A_s$ is injective: $s^na=0$ implies $a=0$. The single chart in the chart-cover theorem is consequently $\\operatorname{Spec}A$, with coefficient map the identity, and its chart map is an isomorphism over $\\operatorname{Spec}A$ by the affine chart theorem. Since it covers $Z$, the structural map $Z\\to\\operatorname{Spec}A$ is an isomorphism.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "def-weil-ring-localization-away",
+    "prop-nagata-affine-blowup-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0804 (lemma-blowing-up-affine); algebra.tex Tag 00NQ (lemma-regular-ring-CM) and Tag 00CO (definition-localization)"
+   }
+  },
+  {
+   "text": "Suppose $d=2$ and choose $s,t$ generating $\\mathfrak m$, as permitted by regular locality. The regular-parameter theorem makes $(s,t)$ a regular sequence. Both elements are nonzero: the first acts injectively on nonzero $A$, and the second acts injectively on nonzero $A/(s)$; zero could not do so. Applying the chart-cover theorem to $(s,t)$ gives $U_s=\\operatorname{Spec}A[\\mathfrak m/s]$ and $U_t=\\operatorname{Spec}A[\\mathfrak m/t]$, as $A$-schemes. Their maps into Proj are the chart maps $\\chi_s,\\chi_t$ onto $D_+(su),D_+(tu)$, where $u$ is the Rees variable. The defining chart isomorphism sends $au^n/(su)^n$ to $a/s^n$ and in degree zero sends $a$ to $a$. In particular it sends $(tu)/(su)$ to $t/s$, with the analogous formula for $s/t$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence",
+    "prop-nagata-affine-blowup-chart-cover",
+    "prop-nagata-affine-blowup-chart",
+    "def-nagata-affine-blowup-chart-map",
+    "def-nagata-homogeneous-away-to-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0AGS (lemma-cohomology-of-blowup), first proof paragraph; divisors.tex Tag 0804; algebra.tex Tag 00NQ"
+   }
+  },
+  {
+   "text": "The intersection of the two Proj opens is $D_+((su)(tu))$. In the localization at $su$, the equation $tu=(su)((tu)/(su))$ shows that avoiding $tu$ is equivalent to avoiding $(tu)/(su)$: $su$ is already invertible. Under $\\chi_s$ this is $D_{U_s}(t/s)$; exchanging $s,t$ gives $D_{U_t}(s/t)$. The affine-basic-open sections theorem identifies its section ring $B$ with $(C_s)_{t/s}$ and with $(C_t)_{s/t}$, with the natural localization restriction maps. The Proj overlap equivalences are induced by further homogeneous localization, so the two identifications use the same fractions on the intersection, as specified by the Proj chart-ring coherence theorem and the definition of the Proj restriction maps.",
+   "uses": [
+    "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+    "def-nagata-homogeneous-away-to-chart",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lemma-nagata-proj-chart-ring-cocycle",
+    "def-pc-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M3 (section-proj), intersection of standard opens; Tag 01M4 (lemma-standard-open), localization restrictions; schemes.tex Tags 01HV and 01I3"
+   }
+  },
+  {
+   "text": "The inclusions $C_s\\subseteq A_s\\to A_{st}$ and $C_t\\subseteq A_t\\to A_{st}$ are the natural fraction maps. In $A_{st}$ both $s$ and $t$ are units: $s^{-1}=t/(st)$ and $t^{-1}=s/(st)$. Thus the first inclusion extends to $B=(C_s)_{t/s}$ by $c/(t/s)^n\\mapsto c(s/t)^n$. This respects localization relations since $t/s$ is a unit. On $C_t$ it is the natural inclusion: $C_t=A[s/t]$, because for $a=rs+qt\\in\\mathfrak m$ one has $a/t=r(s/t)+q$. The overlap sends the generator $s/t$ to the inverse of $t/s$, and fixes $A$, so the composites agree on these algebra generators. Hence this is the required $A$-algebra map $B\\to A_{st}$. The restrictions of a section of $Z$ to the two charts have the same restriction to their intersection by the presheaf composition law; applying this one map proves equality of their images in $A_{st}$.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "def-weil-ring-localization-away",
+    "def-pc-proj",
+    "lemma-nagata-proj-chart-ring-cocycle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01M3 (section-proj), homogeneous-localization restriction maps; algebra.tex Tag 00CO (definition-localization)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sc-regular-local-domain",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-kun-topological-krull-dimension",
+  "lem-sfb-blowup-rees-symmetric-presentation",
+  "def-weil-pbc-noetherian-ring",
+  "lemma-nagata-affine-blowup-proper",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "def-nagata-blowup-flat-base-change-map",
+  "thm-nagata-blowup-flat-base-change",
+  "def-pc-fibre-product",
+  "def-nagata-affine-blowup",
+  "prop-nagata-global-blowup-cover-independent",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-nagata-blowup-chart-ring",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-regular-sequence",
+  "prop-nagata-affine-blowup-chart",
+  "def-nagata-affine-blowup-chart-map",
+  "def-nagata-homogeneous-away-to-chart",
+  "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lemma-nagata-proj-chart-ring-cocycle",
+  "def-pc-proj"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 0804, 0805 and 02NS; algebra.tex Tags 00NP, 00NQ; resolve.tex Tag 0AGS, first proof paragraph; constructions.tex Tags 01M3 and 01M4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localizing the blowup at a reduced closed point of a regular scheme of dimension at most two gives the maximal ideal blowup with empty zero dimensional case identity one dimensional case and two affine ratio charts in dimension two",
+   "results": "{\"t\": \"2026-10-22T06:25:53Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing the blowup at a reduced closed point of a regular scheme of dimension at most two gives the maximal ideal blowup with empty zero dimensional case identity one dimensional case and two affine ratio charts in dimension two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'\", \"AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo\", \"AlgebraicGeometry.stalkClosedPointIso\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\", \"AlgebraicGeometry.StructureSheaf.instIsLocalHomCarrierOfAtPrimeAsIdealStalkCommRingCatPresheafStructureSheafRingHomHomLocalizationToStalk\"], \"digest\": \"ff7a9f2b6e3dbc28\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj standard-open and pullback formulas do not give the reduced-point base change, dimension cases or ratio-chart package for a regular local blowup."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj standard-open and pullback formulas do not give the reduced-point base change, dimension cases or ratio-chart package for a regular local blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|blowing",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"grep\", \"query\": \"blow.?up|blowing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj standard-open and pullback formulas do not give the reduced-point base change, dimension cases or ratio-chart package for a regular local blowup."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowup of a two dimensional regular local ring has affine charts A[m/s] and A[m/t] with intersection obtained by inverting t/s",
+   "results": "{\"t\": \"2026-10-22T06:25:42Z\", \"tool\": \"leansearch\", \"query\": \"Blowup of a two dimensional regular local ring has affine charts A[m/s] and A[m/t] with intersection obtained by inverting t/s\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso.congr_simp\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso\"], \"digest\": \"89f814cffbc8cc9b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: generic Proj standard-open and pullback formulas do not give the reduced-point base change, dimension cases or ratio-chart package for a regular local blowup."
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|blowing",
+   "results": "{\"t\": \"2026-10-23T04:04:53Z\", \"tool\": \"grep\", \"query\": \"blow.?up|blowing\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned general affine-cover, stalk or Proj chart declarations do not state the regular-point blowup package or its three dimension cases."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular local ring blowup maximal ideal affine chart cover and overlap localization",
+   "results": "{\"t\": \"2026-10-23T04:04:53Z\", \"tool\": \"leansearch\", \"query\": \"Regular local ring blowup maximal ideal affine chart cover and overlap localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop\", \"AlgebraicGeometry.Proj.affineOpenCover\", \"AlgebraicGeometry.StructureSheaf.localRingLocalizations\", \"Localization.AtPrime.isLocalRing\"], \"digest\": \"151235aa96eb1db9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned general affine-cover, stalk or Proj chart declarations do not state the regular-point blowup package or its three dimension cases."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"blowup\"",
+   "results": "{\"t\": \"2026-10-23T04:04:53Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"blowup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned general affine-cover, stalk or Proj chart declarations do not state the regular-point blowup package or its three dimension cases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup at a closed point of a regular surface localization maximal ideal two ratio charts overlap",
+   "results": "{\"t\": \"2026-10-23T04:04:54Z\", \"tool\": \"leanfinder\", \"query\": \"Blowup at a closed point of a regular surface localization maximal ideal two ratio charts overlap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_fst\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"AlgebraicGeometry.Spec_stalkClosedPointIso\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff\", \"AlgebraicGeometry.SpecToEquivOfLocalRing\", \"AlgebraicGeometry.SpecToEquivOfLocalRing_apply_snd_coe\"], \"digest\": \"bb99d23398f08d2f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned general affine-cover, stalk or Proj chart declarations do not state the regular-point blowup package or its three dimension cases."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proj of the Rees algebra of a maximal ideal in a regular local ring of dimension two has two affine blowup algebras",
+   "results": "{\"t\": \"2026-10-23T04:05:21Z\", \"tool\": \"leanfinder\", \"query\": \"Proj of the Rees algebra of a maximal ideal in a regular local ring of dimension two has two affine blowup algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.projIsoSpecTopComponent\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_fromSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.toFun\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.asIdeal.prime\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.toSpec_bijective\"], \"digest\": \"75c832fdcd2be08c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: the returned general affine-cover, stalk or Proj chart declarations do not state the regular-point blowup package or its three dimension cases."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-regular-point-blowup-functions",
+  "date": "2026-10-22",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.; finer split of lem-sfb-regular-point-blowup-functions, old steps 1, 4--8: affine proper model, maximal-ideal base change, dimension bound and cases, and ratio-chart overlap",
+   "via": [
+    "lem-sfb-regular-point-blowup-functions",
+    "lem-sfb-point-blowdown-factorization",
+    "lem-sfb-common-nodal-model",
+    "lem-sfb-semistable-log-pluricanonical-lattices",
+    "lem-sfb-stable-pointed-isom-finite",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-point-blowup-local-chart-package",
+  "worker": "stage1",
+  "summary": "Proved all local chart clauses using existing DAG statements: regular affine/stalk and dimension bound, affine properness, the canonical flat comparison with explicit factor order, affine/global coefficient compatibility, residue fibre, dimensions zero and one, and two-chart overlap with an explicit map to A_st. No new nodes or statement changes. Repair after returned head e0844703125: re-read all current cited statements and preserve the current item statement; make the coefficient-compatible identification of the stalk of V explicit in step 3 and specify each generic tool use individually. Delivery is reconstructed on the current origin/sheaf-dag by deliver.py.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §3.8, last paragraph, printed pp.608--609: finite unramified Isom for unordered stable marked curves, and extension over a normal base. This is rigidity of stable pointed curves themselves, independent of any modification map.; rigidity input: Invariance of logarithmic pluricanonical lattices of semistable models; Common domination of marked nodal models over a discrete valuation ring; Factorization through a regular surface point blowdown; the regular-functions input in the first paragraph of the point-blowdown factorization proof.; finer split of lem-sfb-regular-point-blowup-functions, old steps 1, 4--8: affine proper model, maximal-ideal base change, dimension bound and cases, and ratio-chart overlap",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Steps 1 and 3 need the coefficient-compatible identification of the affine germ map with localization at the prime of x; the constructibility unit has no such local scheme interface."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Step 1 uses that the regular local stalk A is a nonzero domain, before the one-generator and ratio-chart arguments; this is a commutative algebra tool absent from the constructibility unit."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Step 1 bounds dim A by dim T using the stated generalization-chain formula for arbitrary schemes; no finite-type hypothesis is available, and the constructibility unit has no replacement."
+   },
+   {
+    "node": "lemma-nagata-affine-blowup-proper",
+    "why": "Step 2 applies properness to the finitely generated maximal ideal on the chosen Noetherian affine neighbourhood; the constructibility route requires this local blowup tool."
+   },
+   {
+    "node": "lem-sbc-canonical-stalk-spectrum-flat",
+    "why": "Step 3 needs flatness of the particular spectrum-of-stalk map before applying the blowup comparison; this generic scheme fact is not supplied by the constructibility unit."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Step 3 uses that the constructed comparison for the flat localization map is an isomorphism, with the stated order of factors; the constructibility unit has no blowup base-change substitute."
+   },
+   {
+    "node": "prop-nagata-global-blowup-cover-independent",
+    "why": "Step 4 identifies the one-affine-cover comparison by its identity on common affine refinements; this gluing tool fixes the comparison required by the local package."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Steps 6 and 7 apply the regular-parameter theorem to one or two generators of the maximal ideal of A; the constructibility unit supplies no regular local algebra replacement."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Steps 6 and 7 use the affine chart cover for the zero, principal and two-generated ideals; this is the generic blowup construction used by the local geometric prerequisite."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart",
+    "why": "Step 7 needs the chart morphisms to be isomorphisms over Spec A, not merely ring maps; this generic affine blowup tool supplies the required scheme charts."
+   },
+   {
+    "node": "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+    "why": "Step 8 uses the intersection identity for standard Proj opens in the Rees algebra; it is a topology tool for the specified blowup charts, absent from the constructibility unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Step 8 needs both the affine basic-open section ring and its localization restriction map; this generic scheme interface identifies the actual overlap section ring."
+   },
+   {
+    "node": "lemma-nagata-proj-chart-ring-cocycle",
+    "why": "Steps 8 and 9 use localization-induced Proj overlap equivalences to compare the two chart fractions on the same intersection; this construction tool fixes the compatibility needed by the local package."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sc-regular-local-domain",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lemma-nagata-affine-blowup-proper",
+  "lem-sbc-canonical-stalk-spectrum-flat",
+  "thm-nagata-blowup-flat-base-change",
+  "prop-nagata-global-blowup-cover-independent",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "prop-nagata-affine-blowup-chart-cover",
+  "prop-nagata-affine-blowup-chart",
+  "lem-weil-pbc-projective-spectrum-basic-opens-basis",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lemma-nagata-proj-chart-ring-cocycle"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-3a9831b40",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-3a9831b40 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement, including the blueprint_update texts. Statement, stmt_deps and source are unchanged from earlier head e0844703125a. There are no new nodes, so there is no duplicate or restated-clause issue; the only citer is the parent lem-sfb-regular-point-blowup-functions, which is unaffected. The new step-3 opening, which uses affine-stalk localization (c) to identify Spec O_{V,x} -> V with Spec(R -> R_p), is correct. The earlier FIX from run e0844703125a is missing from this head, so its two faults are back. I checked both again against the cited statements. (1) C1/E4, step 3: def-nagata-blowup-flat-base-change-map with X=V has target Spec A x_V Bl_p(V), but the step writes b^{-1}V with no justification. Fixed by identifying both with Proj R_R(p) over V through the affine-restriction clause of lem-sfb-blowup-rees-symmetric-presentation, now cited. (2) C1, step 6, d=1: the chart-cover node only gives an open cover. That the chart is Spec A over Spec A needs prop-nagata-affine-blowup-chart, now cited. proof_deps is unchanged and every step is under 2000 characters. Steps 1, 2, 4, 5 and 7-9 are correct. The d<=2 bound follows from codimension of the closure of {x} <= dim T. s and t are nonzero because a regular sequence acts injectively on A and on A/(s), both nonzero. The overlap is (C_s)_{t/s} = (C_t)_{s/t}, and C_t = A[s/t] gives the map to A_st. Small cases checked: Spec k gives an empty blowup; a DVR gives Z = Spec A; k[s,t]_(s,t) and Z_(p)[t]_(p,t) give charts A[t/s] and A[s/t]. Sources: Stacks divisors 0804 (l.8322), 0805 (l.8351) and resolve 0AGS (l.569); no SGA. Batch-5 finding: def-trf-canonical-symmetric-graded-algebra, reached through the Rees presentation, is a general Sym-algebra definition and is not part of the trace formula or Poincare duality, so the citation is accepted. All 13 tool_uses are accepted as generic interfaces. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-point-blowup-local-chart-package.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PointBlowupLocalChartPackage",
+  "declaration": "AlgebraicGeometry.PointBlowupLocal.point_blowup_local_chart_package",
+  "declarations": [
+   "AlgebraicGeometry.PointBlowupLocal.ratioChart",
+   "AlgebraicGeometry.PointBlowupLocal.chartSections",
+   "AlgebraicGeometry.PointBlowupLocal.leftInclusion",
+   "AlgebraicGeometry.PointBlowupLocal.rightInclusion",
+   "AlgebraicGeometry.PointBlowupLocal.TwoCharts",
+   "AlgebraicGeometry.PointBlowupLocal.model",
+   "AlgebraicGeometry.PointBlowupLocal.projection",
+   "AlgebraicGeometry.PointBlowupLocal.toBlowup",
+   "AlgebraicGeometry.PointBlowupLocal.Comparisons",
+   "AlgebraicGeometry.PointBlowupLocal.point_blowup_local_chart_package"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PointBlowupLocalChartPackage.lean",
+  "statement": "theorem point_blowup_local_chart_package (T : Scheme.{u}) (hregular : IsRegularScheme T) (hdim : topologicalKrullDim T ≤ 2) (x : T) (hx : IsClosed ({x} : Set T)) : IsRegularLocalRing (T.presheaf.stalk x) ∧ IsDomain (T.presheaf.stalk x) ∧ (ringKrullDim (T.presheaf.stalk x) = 0 ∨ ringKrullDim (T.presheaf.stalk x) = 1 ∨ ringKrullDim (T.presheaf.stalk x) = 2) ∧ ∃ (V : T.affineOpens) (hxV : x ∈ V.1), IsNoetherianRing Γ(T, V.1) ∧ IsRegularRing Γ(T, V.1) ∧ (V.2.primeIdealOf ⟨x, hxV⟩).asIdeal.IsMaximal ∧ (∃ e : Localization.AtPrime (V.2.primeIdealOf ⟨x, hxV⟩).asIdeal ≃+* T.presheaf.stalk x, e.toRingHom.comp (algebraMap _ _) = (T.presheaf.germ V.1 x hxV).hom) ∧ Ideal.map (T.presheaf.germ V.1 x hxV).hom (V.2.primeIdealOf ⟨x, hxV⟩).asIdeal = IsLocalRing.maximalIdeal (T.presheaf.stalk x) ∧ IsProper ((Scheme.IdealSheafData.vanishingIdeal ⟨{x}, hx⟩).blowupMap ∣_ V.1) ∧ Comparisons T x hx V hxV",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The auxiliary definitions expand the clauses and canonical arrows of this one package. TwoCharts is stated on the affine Rees model; Comparisons specifies its identification with the actual local fibre product through the published blowupFlatBaseChangeIso and the normalized singleton-cover comparison. No new independent notion or additional hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3de9ccc10",
+  "group": "Q127",
+  "result": "fix",
+  "note": "H3: d=2 TwoCharts was ∃ s t; node 'choose s,t generating m; they are nonzero, regular sequence, charts...' is for every choice → FIX TwoCharts := (∃ generators) ∧ ∀ s t ∈ m with m=(s,t) → clauses (true by 00NQ; theorem signature/lean.statement unchanged, record pinned). H11: second reading was a self-review → report.md replaced with worker report + independent clause reading. Otherwise exact: hyps (regular, dim≤2, closed x, no global Noetherian), germ-pinned R_p≃A, m=pA, IsProper(b∣_V), regular local domain, d∈{0,1,2}; e pinned by both projections, published blowupFlatBaseChangeIso (blowup-first target), ea pinned to AffineBlowup.hom≫blowupι ⊤, over-base coefficient eqs; fibre ef pinned; d=0/1 exact; charts via ratioChart, rs/rt, basic opens, ψ pinned. Fixed module compiled clean via nt_compile --json (3.5 s)."
+ }
+}

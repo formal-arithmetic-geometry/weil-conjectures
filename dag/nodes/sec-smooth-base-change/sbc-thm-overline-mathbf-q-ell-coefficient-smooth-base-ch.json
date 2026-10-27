@@ -23,9 +23,10 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sbc-finite-stage-rational-exchange-coherence] for the given square. It gives the actual finite-stage operations, their composite comparisons $b^F,b^G$, and the canonical exchange $\\alpha_E$, with normalized unit, tower and exchange equations. Write $F_E=Lf^*_{\\mathrm{comp},E}Rg_{*,\\mathrm{comp},E}$ and $G_E=Rh_{*,\\mathrm{comp},E}Le^*_{\\mathrm{comp},E}$; both take values on $X$.",
+   "text": "Apply lem-sbc-finite-stage-rational-exchange-coherence. Its four HasOperationCoherence witnesses give the canonical integral push and pull comparisons; their model equalities identify them with pushModel and pullModel. The finite-projection characterization of the coefficient maps identifies the two tensors (tensorModel_eq). The raw beta normalization equations, after cancellation of the source comparison inverse, give leftBeta_eq and rightBeta_eq. The Karoubi families and their canonical exchange supply the remaining Presentation fields.",
    "uses": [
-    "lem-sbc-finite-stage-rational-exchange-coherence"
+    "lem-sbc-finite-stage-rational-exchange-coherence",
+    "prop-weil-pbc-scalar-extension"
    ],
    "elementary": false,
    "source": {
@@ -34,10 +35,9 @@
    }
   },
   {
-   "text": "Apply [lem-sbc-coherent-pair-functor-descent] to these four operation families and to their exchange. Its composition clause identifies the descended composites with the required two operations. A morphism $[M,u]$ is sent by $F$ to $[M,(b^F_{M/F})^{-1}F_M(u)b^F_{M/E}]$, and similarly by $G$. The exchange component is $[E,\\alpha_E(K_E)]$; outer Karoubi extension gives a natural transformation in the ambient category of [def-sbc-ambient-complete-coefficient-categories]. Thus it is the specified canonical exchange.",
+   "text": "The compatible StageSystem transformation descends on the actual pair quotient by lem-sbc-coherent-pair-functor-descent. For any pair Q and overfield M, write the stage-inclusion map at M. Multiplying alpha.comm on the right by the inverse target beta shows its arrow is exactly Presentation.atStage, including M=Q.stage. This proves the second conjunct on all ambient pairs.",
    "uses": [
-    "lem-sbc-coherent-pair-functor-descent",
-    "def-sbc-ambient-complete-coefficient-categories"
+    "lem-sbc-coherent-pair-functor-descent"
    ],
    "elementary": false,
    "source": {
@@ -46,11 +46,13 @@
    }
   },
   {
-   "text": "By [def-weil-pbc-qbar-category], choose $K=(E,K_E)$ and its finite-level etale admissible lattice $(L,\\iota)$ from [sbc-def-admissible-lattices]. Here $L_n=L\\otimes^L_{\\widehat{\\mathcal O}_{E,T}}(\\mathcal O_E/\\varpi^{n+1})_T$ has a bounded constructible etale antecedent for every $n\\geq0$. The hypotheses give smooth $f$, qcqs $g$, four noetherian schemes, finite-dimensional $X,T$, and invertible $\\ell$ on $S$. Hence [sbc-thm-e-coefficient-smooth-base-change] gives the raw canonical exchange and a raw inverse $v_E$ at $K_E$, independent of the lattice. The ambient finite-stage category is its Karoubi envelope, not an identified raw category.",
+   "text": "Choose an admissible finite representative (E,J,L) of K. The finite-E theorem sbc-thm-e-coefficient-smooth-base-change makes the canonical raw exchange at the ambient image of J invertible. Mathlib functorExtension₂CompWhiskeringLeftToKaroubiIso transports this component through the identity inner projector. StageSystem.Morphism.isIso_descNatTrans_app then preserves invertibility on the ambient pair. Apply the same Mathlib identity-projector comparison for the outer envelope. The representative-characterized object formulas for pbcRawPairToComplete and pbcCompletePairInclusion and the Mathlib comparison for the constructible-to-ambient functor identify this object with the published raw-Qbar inclusion. Naturality transports invertibility along its specified representative isomorphism to K. Only identity projectors are needed; no arbitrary-projector inverse lemma or constructible direct-image landing is used.",
    "uses": [
+    "def-sbc-ambient-complete-coefficient-categories",
     "def-weil-pbc-qbar-category",
     "sbc-def-admissible-lattices",
-    "sbc-thm-e-coefficient-smooth-base-change"
+    "sbc-thm-e-coefficient-smooth-base-change",
+    "lem-sbc-coherent-pair-functor-descent"
    ],
    "elementary": false,
    "source": {
@@ -59,9 +61,8 @@
    }
   },
   {
-   "text": "Apply [lem-sbc-common-stage-inverse-through-karoubi] to the raw families of step 1 and $v_E$, with both projectors identities. Its inverse formula gives the inverse of the descended component in the ambient outer Karoubi category. Its scalar-conjugation formula identifies every common-overfield representative with that field's canonical exchange; its presentation formula identifies the component for any isomorphic presentation of $K$. The common-stage preservation assumption permits the finite-E theorem at those representatives. Lattice independence follows from [sbc-thm-e-coefficient-smooth-base-change]. These are ambient inverse equations and impose no constructible direct-image landing.",
+   "text": "Apply the lattice-independence clause of sbc-thm-e-coefficient-smooth-base-change to L and L′ and reverse its equality. This is the final conjunct. All geometric hypotheses and the common-overfield admissibility premise remain exactly as stated.",
    "uses": [
-    "lem-sbc-common-stage-inverse-through-karoubi",
     "sbc-thm-e-coefficient-smooth-base-change"
    ],
    "elementary": false,
@@ -73,17 +74,17 @@
  ],
  "proof_deps": [
   "lem-sbc-finite-stage-rational-exchange-coherence",
+  "prop-weil-pbc-scalar-extension",
   "lem-sbc-coherent-pair-functor-descent",
   "def-sbc-ambient-complete-coefficient-categories",
   "def-weil-pbc-qbar-category",
   "sbc-def-admissible-lattices",
-  "sbc-thm-e-coefficient-smooth-base-change",
-  "lem-sbc-common-stage-inverse-through-karoubi"
+  "sbc-thm-e-coefficient-smooth-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
-  "place": "Qbar_l-coefficient smooth base change, lines 1439-1469; explicit common-stage descent proof replacing the imported inverse-limit claim"
+  "place": "sketch32 lines 1191-1228, 1291-1338 and 1412-1455; M8 Lean assembly via the existing finite-stage coherence and Mathlib identity-projector comparisons"
  },
  "mathlib_searches": [
   {
@@ -146,7 +147,18 @@
   "sbc-thm-e-coefficient-smooth-base-change"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-smooth-base-change",
  "unit": "sk-rem-rest",
  "split_report": {
@@ -179,6 +191,10 @@
    "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.pullModel",
    "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.tensorModel_eq",
    "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.tensorModel",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.IntegralPushNormalization",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.IntegralPullNormalization",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.LeftBetaNormalization",
+   "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.RightBetaNormalization",
    "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.IntegralComparisons",
    "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.Presentation",
    "AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.Presentation.ambientExchange",
@@ -200,5 +216,15 @@
   "group": "Q158",
   "result": "pass",
   "note": "Read the item node, all 7 statement dependencies' declarations, the blueprint source (order 1446) and sketch32 lines 1412-1460, the module and the report. Hypotheses match the node: smooth f, qc+qs g, four noetherian and finite-dimensional schemes, l a unit on S only (other corners derived via sbcPrimeUnitOnSource), and an admissible-lattice representative whose lattices persist at every overfield including M=E. The conclusion is IsIso of the specified exchange on the raw pbcQbarCategory with values in the ambient category over X; the component equals atStage at every overfield (stage independence); the exchange uses no lattice, and a third conjunct records sbcTransportedExchange equality for any two admissible lattices; no constructible landing. Every data field of the existential Presentation is fixed by its equations (localization is identity on objects; leftBeta_eq/rightBeta_eq are the correct composites (P_M^f d^g)(p^f D_E^g) and (D_M^h p^e)(d^h P_E^e)), so it is the canonical exchange. The postponed tensorModel_eq is true (same integer/quotient maps, unique completed map). pullModel picks from an exists-unique statement. The upstream StageSystem.Morphism.functor has the same representative formula as the dependency's functor. No hollow definitions; docstrings present; only lean changed; statement verbatim; standard second-reading text. nt_compile.py on the local overlay: exit 0, no diagnostics, 49.9 s (near the 60 s limit under load). No findings requiring correction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-66f35",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261022T040208-L-2831428",
+  "kind": "interface",
+  "note": "independent cc review: item QbarCoefficientSmoothBaseChange + 4 unclaimed support modules (StageSystemFunctorDescent, AmbientCompleteRawSystem, AmbientCompleteCoefficientCategories, FiniteStageRationalExchangeData) against live base, node sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch and 4 support nodes, 5 change records; sandbox compile of all 5 modules + 7 unchanged importers rc 0; #print axioms clean except the expected sorryAx from dependency statements that are still sorry"
  }
 }

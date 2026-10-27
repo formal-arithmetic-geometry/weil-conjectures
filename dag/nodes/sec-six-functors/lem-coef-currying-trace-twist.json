@@ -1,0 +1,151 @@
+{
+ "id": "lem-coef-currying-trace-twist",
+ "kind": "statement",
+ "title": "An arbitrary compact-support isomorphism can destroy a trace pairing",
+ "statement": "For every nontrivial commutative ring A there is an A-linear automorphism e of A×A such that sum(e(x))=x₁ for every x. Consequently sum(e(h·(0,1)))=0 for all h although (0,1) is nonzero. This is the elementary two-component normalization test for the pairing in [lem-coef-tower-natural-currying].",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Elementary linear-algebra test of the finite counit pairing in paragraph 2."
+ },
+ "proof": [
+  {
+   "text": "Use e(x,y)=(x-y,y) with inverse (x,y)=(x+y,y). The coordinate sum is x. The product h·(0,1) has first coordinate zero, and the second basis vector is nonzero by nontriviality. The formulas use no division and include characteristic two.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Elementary linear-algebra test of the finite counit pairing in paragraph 2.",
+  "by": "agent"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of tensor Hom transpose of a dinatural pairing in a derived category of towers",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "CategoryTheory.tensorRightHomEquiv_naturality",
+     "CategoryTheory.tensorLeftHomEquiv_naturality",
+     "CategoryTheory.tensorRightHomEquiv_symm_naturality",
+     "CategoryTheory.tensorLeftHomEquiv_symm_naturality",
+     "CategoryTheory.tensorRightHomEquiv_tensor",
+     "CategoryTheory.tensorLeftHomEquiv_tensor",
+     "CategoryTheory.tensorLeftHomEquiv",
+     "CategoryTheory.tensorRightHomEquiv"
+    ]
+   },
+   "date": "2026-10-25",
+   "verdict": "Generic tensor-Hom naturality exists, but the chosen CoefCurryingHomModel is specified by its own transpose/evaluation fields. Apply these fields and functor map_comp directly."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": {
+    "n_hits": 6,
+    "top": [
+     "CategoryTheory.Functor.map_comp",
+     "PresheafOfModules.map_comp",
+     "PresheafOfModules.map_comp_assoc",
+     "PresheafOfModules.mk",
+     "PresheafOfModulesOfCommRing.mk",
+     "AlgebraicGeometry.PresheafedSpace.map_comp_c_app"
+    ]
+   },
+   "date": "2026-10-25",
+   "verdict": "Generic tensor-Hom naturality exists, but the chosen CoefCurryingHomModel is specified by its own transpose/evaluation fields. Apply these fields and functor map_comp directly."
+  },
+  {
+   "tool": "grep",
+   "query": "transpose_evaluation|gamma.*naturality|isIso_of.*homology",
+   "results": {
+    "n_hits": 9,
+    "top": [
+     "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/Homology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/LeftHomology.lean",
+     "Mathlib/Algebra/Homology/ShortComplex/RightHomology.lean"
+    ]
+   },
+   "date": "2026-10-25",
+   "verdict": "Generic tensor-Hom naturality exists, but the chosen CoefCurryingHomModel is specified by its own transpose/evaluation fields. Apply these fields and functor map_comp directly."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom transpose naturality for a dinatural pairing; exact derived evaluation of module towers reflects isomorphisms",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "transpose_dualTensorHom",
+     "Module.Dual.transpose",
+     "dualTensorHomEquivOfBasis",
+     "CategoryTheory.NatTrans.tensor_naturality",
+     "CategoryTheory.tensorLeftHomEquiv_naturality",
+     "Mathlib.Tactic.Monoidal.naturality_tensorHom",
+     "CategoryTheory.tensorRightHomEquiv_naturality",
+     "RootPairing.Hom.weight_coweight_transpose_apply"
+    ]
+   },
+   "date": "2026-10-25",
+   "verdict": "No specialized coefficient-tower theorem found. Use the exposed model equations, exact evaluation and elementary linear algebra."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CoefTowerNaturalCurrying",
+  "date": "2026-10-25",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Edge-case test of arbitrary eTrace in step 5",
+   "via": [
+    "lem-coef-tower-natural-currying"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CoefCurryingTraceTwist",
+  "file": "lean/Sheaf/SixFunctors/CoefCurryingTraceTwist.lean",
+  "declaration": "WeilConjectures.coefCurrying_trace_twist",
+  "statement": "theorem coefCurrying_trace_twist (A : Type*) [CommRing A] [Nontrivial A] :\n    ∃ e : (A × A) ≃ₗ[A] (A × A),\n      (∀ x : A × A, (e x).1 + (e x).2 = x.1) ∧\n      (0, 1) ≠ (0 : A × A) ∧\n      ∀ h : A × A,\n        (e (h.1 * 0, h.2 * 1)).1 + (e (h.1 * 0, h.2 * 1)).2 = 0",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T094821-L-3261786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261025T094821-L-3261786",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

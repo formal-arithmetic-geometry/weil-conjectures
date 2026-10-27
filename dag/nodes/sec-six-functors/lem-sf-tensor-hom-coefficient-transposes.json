@@ -1,0 +1,359 @@
+{
+ "id": "lem-sf-tensor-hom-coefficient-transposes",
+ "kind": "statement",
+ "title": "Coefficient transposition and field descent of the five-arrow Hom chain",
+ "statement": "Fix the finite-field, finite-type scheme and four coefficient-stage conventions of [def-fix-six-functor-datum], and a separated finite-type $f:X\\to Y$ exceptionally admissible in the sense of [def-weil-exceptional-adjoint-admissibility]. For finite or integral $\\Lambda$, let $M\\in D^b_{ctf}(X,\\Lambda)$ and $N,L\\in D^b_{ctf}(Y,\\Lambda)$. Put $H=R\\mathcal Hom$, $A=Rf_*H_X(M,f^!N)$ and $B=H_Y(Rf_!M,N)$. Use the specified adjunctions of [fix-prop-adjunctions] and the specified compact-support projection $\\operatorname{PF}_{f,M,L}:Rf_!M\\otimes^LL\\to Rf_!(M\\otimes^LLf^*L)$ of [def-exchange-projection]. Integral tensors are completed. Suppose the following five adjunction/projection bijections are defined on the indicated full domains, and denote their composite by $\\Gamma_{M,N,L}$:\n$$\\operatorname{Hom}_Y(L,A)\\cong\\operatorname{Hom}_X(Lf^*L,H_X(M,f^!N))\\cong\\operatorname{Hom}_X(M\\otimes^LLf^*L,f^!N)\\cong\\operatorname{Hom}_Y(Rf_!(M\\otimes^LLf^*L),N)\\cong\\operatorname{Hom}_Y(Rf_!M\\otimes^LL,N)\\cong\\operatorname{Hom}_Y(L,B).$$\nThe fourth arrow is precomposition with $\\operatorname{PF}_{f,M,L}$, and all transposes use the canonical evaluations, units and counits.\n\nLet $T$ be finite quotient reduction $A_{E,n}\\to A_{E,m}$, $n\\geq m\\geq1$, integral reduction $R\\to A_{E,n}$, or integral scalar extension $\\mathcal O_E\\to\\mathcal O_F$ for a finite coefficient-field extension $E\\subset F$. For the specified coefficient comparisons of the operations, write $\\alpha_A:T(A)\\xrightarrow{\\sim}A'$ and $\\alpha_B:T(B)\\xrightarrow{\\sim}B'$, where primes mean the same formulas on the changed inputs. For every $u:L\\to A$,\n$$\\alpha_B\\circ T(\\Gamma_{M,N,L}(u))=\\Gamma_{TM,TN,TL}(\\alpha_A\\circ T(u)).$$\nThis is an equality of actual morphisms, is coherent under successive coefficient changes, and applies to all the stated finite-Tor inputs without a site-perfectness hypothesis.\n\nUse raw rationalization [def-weil-rationalization-karoubi] and the common-stage category [def-weil-algebraically-closed-coefficients], with the induced operations of [def-weil-derived-pullback-tensor-hom]. The integral $\\mathcal O_E$-linear bijections $\\Gamma$ induce $E$-linear bijections on the localized Hom groups. If an inverse pair $a:B\\to A$, $b:A\\to B$ represents $\\Gamma^{-1},\\Gamma$ by postcomposition, its images remain inverse and represent these localized bijections. For algebraically closed coefficients, the same bijections and representing inverse maps, formed over any common finite coefficient field for the finitely many inputs, are independent of enlarging that field and of its representatives. Naturality, composition, coefficient-comparison and shift equations satisfied at the integral stages pass to these rational and common-stage maps.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/fix-lem-tensor-adjunction.md",
+  "place": "Proof, final coefficient-comparison sentence and field-stage passage; returned detailed steps 7 and 9: transposition square, localization and common finite fields"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-weil-exceptional-adjoint-admissibility",
+  "fix-prop-adjunctions",
+  "def-exchange-projection",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-sf-ctf-coefficient-stage-selectors",
+  "def-pod-ctf-pairing-maps",
+  "def-sf-tensor-hom-chain-data",
+  "def-sf-coefficient-gamma-representatives"
+ ],
+ "proof": [
+  {
+   "text": "Fix a permitted coefficient change, writing $T_X,T_Y$ for its functors. All intermediate comparisons below are the specified ones, not arbitrary isomorphisms between their endpoints. The full-domain and comparison-isomorphism hypotheses in the statement are retained. The operation comparisons preserve tensor associators, evaluations, units and counits by [lem-fix-operation-reduction]. In the finite-quotient case we do not use that lemma's site-perfect internal-Hom invertibility assertion: use instead the canonical evaluation transpose $c_H:TH(K,Q)\\to H(TK,TQ)$. Its transpose identity, naturality and compatibility with tensor-Hom transposition are [lem-coef-evaluation-transpose-coherence]; that statement expressly needs no invertibility of $c_H$. The specified internal-Hom comparisons are these evaluation transposes (for integral reduction this is also explicitly [lem-coef-integral-hom-reduction]). Consequently the calculation applies on the hypothesized domains, even when $M$ or $Rf_!M$ is not site-perfect. This argument proves compatibility of the comparisons; existence or invertibility outside those domains is not inferred.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "lem-coef-evaluation-transpose-coherence",
+    "lem-coef-integral-hom-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "For the first arrow put $P=Lf^*$, $S=Rf_*$, $H=H_X(M,f^!N)$ and write $p:T_XP\\xrightarrow{\\sim}P'T_Y$, $s:T_YS\\xrightarrow{\\sim}S'T_X$. The inverse-adjunction transpose of $u:L\\to SH$ is $q=\\varepsilon_H\\circ P(u)$. Counit compatibility gives\n$$\\varepsilon'_{T_XH}\\circ P'(s_H)=T_X(\\varepsilon_H)\\circ p_{SH}^{-1}.$$\nNaturality of $p$ therefore gives\n$$\\varepsilon'_{T_XH}\\circ P'(s_H\\circ T_Yu)=T_X(q)\\circ p_L^{-1}.$$\nThese are the counit-mate identity [lem-amb-mate-unit-counit] for $p^{-1}$ and its specified mate $s$, with the comparison normalization of [lem-fix-operation-reduction]. Postcompose by the internal-Hom input comparison $T_XH\\to H'_X(T_XM,f'^!T_YN)$; naturality of the adjunction then gives exactly the first coefficient square.",
+   "uses": [
+    "lem-amb-mate-unit-counit",
+    "lem-fix-operation-reduction",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "The second arrow sends $q:PL\\to H_X(M,f^!N)$ to\n$$v=\\operatorname{ev}_{M,f^!N}\\circ(1_M\\otimes q):M\\otimes PL\\to f^!N.$$\nThe evaluation-transpose identity of [lem-coef-evaluation-transpose-coherence], with the tensor symmetry when changing its displayed $T\\otimes K$ order to our $K\\otimes T$ order, says that the transpose of $c_H\\circ T_Xq$ is $T_Xv$ precomposed with the canonical tensor comparison. Its symmetry compatibility is a hypothesis of that lemma and is part of the specified tensor comparisons. The completed tensor is used throughout at the integral stage, where the chain's completed adjunction is assumed. Finally compose with the comparisons for $PL$ and $f^!N$. Naturality in the two Hom variables gives the required second square. No dualizability or site-perfect replacement is made.",
+   "uses": [
+    "lem-coef-evaluation-transpose-coherence",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "Write $F=Rf_!$, $E=f^!$, with counit $\\mu:FE\\to1$, and set $Q=M\\otimes PL$. The third arrow is $v\\mapsto w=\\mu_N\\circ F(v)$. Let $c_F:T_YF\\xrightarrow{\\sim}F'T_X$ and $c_E:T_XE\\xrightarrow{\\sim}E'T_Y$ be the specified comparisons. The mate-counit identity is\n$$\\mu'_{T_YN}\\circ F'(c_{E,N})=T_Y(\\mu_N)\\circ c_{F,EN}^{-1}.$$\nUsing naturality of $c_F$ gives\n$$\\mu'_{T_YN}\\circ F'(c_{E,N}\\circ T_Xv)=T_Y(w)\\circ c_{F,Q}^{-1}.$$\nThis is [lem-amb-mate-unit-counit] applied to $F\\dashv E$, $F'\\dashv E'$ and $c_F^{-1}$; [lem-fix-operation-reduction] fixes the counit-compatible comparison, including the admissible exceptional comparison. Thus the third square commutes, after the tensor/pullback identification of $T_XQ$ with the changed $Q$. The adjunctions are exactly those stipulated in [fix-prop-adjunctions], not ambient adjunctions on a larger domain.",
+   "uses": [
+    "lem-amb-mate-unit-counit",
+    "lem-fix-operation-reduction",
+    "fix-prop-adjunctions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "Let $U=FM\\otimes L$, $V=F(M\\otimes PL)$, and denote their coefficient comparisons by $d_U:T_YU\\to U'$ and $d_V:T_YV\\to V'$. Compatibility of the specified projection in [fix-prop-projection-formula] gives\n$$d_V\\circ T_Y(\\operatorname{PF})=\\operatorname{PF}'\\circ d_U.$$\nIn the coordinates of step 4, $w'=T_Y(w)\\circ d_V^{-1}$, so\n$$w'\\circ\\operatorname{PF}'=T_Y(w\\circ\\operatorname{PF})\\circ d_U^{-1}.$$\nThis proves the fourth square in the direction required here: precomposition by PF. For the fifth arrow, apply the evaluation-transpose formula [lem-coef-evaluation-transpose-coherence] to $FM$ and $N$ on $Y$, as in step 3 but in the inverse direction. Since the tensor-Hom bijection is injective, equality of the two uncurried maps is equality of their curried maps. Composing the five squares now yields\n$$\\alpha_B\\circ T_Y(\\Gamma(u))=\\Gamma'(\\alpha_A\\circ T_Yu).$$\nThe endpoint comparisons obtained by composing the operation comparisons are precisely $\\alpha_A,\\alpha_B$ in the statement.",
+   "uses": [
+    "fix-prop-projection-formula",
+    "lem-coef-evaluation-transpose-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "For two successive changes $T,U$, paste the five squares. Tensor reassociation on coefficient complexes is $((x\\otimes b)\\otimes c)\\mapsto x\\otimes bc$; its two iterates coincide by associativity of coefficient multiplication. For completed integral scalar extension the compatibility with those same associators is [lem-fix-scalar-completion-associator]; pullback, tensor and Hom comparisons have their tower compatibility in [lem-pur-integral-operations-scalar-extension]. The compact-support comparisons respect successive quotient reductions by [lem-fix-compact-support-coefficient-change]; the integral transition and scalar cocycles are part of the supplied other-stage comparison data in [def-exchange-projection]. Ordinary and exceptional right-adjoint comparisons are the specified mates, so their cocycles and identity laws follow from the pasting and identity clauses of [lem-weil-pbc-mate-pasting]. Internal-Hom comparisons satisfy the composite and identity equations of [lem-coef-evaluation-transpose-coherence]. Hence, in the canonical composite coordinates, $\\alpha_A^{UT}=\\alpha_A^U\\circ U(\\alpha_A^T)$ and likewise for $B$. Substitution gives\n$$\\alpha_B^U U(\\alpha_B^T)UT(\\Gamma u)=\\Gamma''\\bigl(\\alpha_A^U U(\\alpha_A^T)UTu\\bigr).$$\nThis is the direct-change equation with exactly its specified comparisons. For integral reduction followed by finite reduction, the quotient reassociation and retained integral transition identifications give the same argument.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-fix-compact-support-coefficient-change",
+    "def-exchange-projection",
+    "lem-weil-pbc-mate-pasting",
+    "lem-coef-evaluation-transpose-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "Implemented localization route: test-object naturality in [lem-pod-hom-chain-counit-formula], applied to an arrow followed by the identity, identifies integralHomEquiv with postcomposition by integralGammaIso.hom from [def-sf-coefficient-gamma-representatives]. The representing isomorphism and Mathlib Linear.homCongr give integral linearity directly, avoiding an additional direct-sum argument. LinearEquiv.baseChange gives the scalar-localized and E-linear equivalences, with its defining pure-tensor formula. A generic tensor induction using ScalarLocalization.composition_tmul shows that base change of postcomposition is postcomposition with the localized representative. Apply this to the forward map and its inverse; functoriality preserves the two inverse equations. Expanding rationalGamma as Iso.homCongr and applying the same composition_tmul identity proves rationalGamma_formula. The integral, rational and common representatives used here are the existing constructions, not new data. The remaining naturality, coefficient and signed-shift transport assertions are still separate unfinished theorems of this module; the following is their retained plan. Integral equalities pass to fractions by bilinearity; [lem-pur-semilinear-scalar-localization] handles equations of natural transformations with semilinear coefficient changes. For E contained in F the image of the uniformizer is invertible, so the coefficient square holds on localized arrows.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-integral-constructible-linear",
+    "lem-pod-hom-chain-counit-formula",
+    "def-sf-coefficient-gamma-representatives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  },
+  {
+   "text": "For algebraically closed coefficients, choose a common finite coefficient field $F$ for all finitely many input objects and arrow representatives. Such stages and the equality criterion are the definition [def-weil-algebraically-closed-coefficients]. Define $\\Gamma([F,u])=[F,\\Gamma_F(u)]$, using the operation comparisons for its endpoints. Step 7 localizes the integral scalar-extension square of step 5, so extension from $F$ to a larger $G$ changes $\\Gamma_F(u)$ into $\\Gamma_G(u_G)$ with exactly the specified endpoint identifications. If two representatives agree over some further field, their images therefore agree there too; this proves independence of both stage and representative. The same construction using $\\Gamma_F^{-1}$ is inverse, since both composites are identity at a common field. For representing $a,b$, taking their classes preserves $ab=1$ and $ba=1$ and the postcomposition formulas. Finally every naturality, composition, coefficient-comparison or shift equation involves finitely many arrows: choose one field for all of them, apply the rational equation there, and take its class. The operations on these classes are exactly the induced operations of [def-weil-derived-pullback-tensor-hom].",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+    "place": "Step 1 and final coefficient-comparison and field-stage sentences; explicit transposition and scalar-localization calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-operation-reduction",
+  "lem-coef-evaluation-transpose-coherence",
+  "lem-coef-integral-hom-reduction",
+  "lem-amb-mate-unit-counit",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-fix-scalar-completion-associator",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-fix-compact-support-coefficient-change",
+  "def-exchange-projection",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-integral-constructible-linear",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-hom-chain-counit-formula",
+  "def-sf-coefficient-gamma-representatives"
+ ],
+ "proof_origin": {
+  "by": "Z7",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md",
+  "place": "Localization paragraph, step 7; shorter implemented route through the existing representing isomorphism. Steps 1–6 and 8 remain the plan for unchanged holes."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The five adjunction tensor Hom projection bijections commute with coefficient reduction and scalar extension and descend under localization of Hom groups and filtered common field stages",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.monoidalClosedHomEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.homEquiv_extendScalarsComp, CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction, CategoryTheory.IsGrothendieckAbelian.instIsLeftAdjointModuleCatMulOppositeEndTensorObj",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv gives a generic square transpose, not normalization of these five pro-etale coefficient transposes and their rational/common-stage descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coefficient comparison square for a projection formula mate; preservation under scalar localization and filtered colimit of coefficient fields",
+   "results": "8 hits: Algebra.Presentation.relation_comp_localizationAway_inl, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit, Algebra.Generators.compLocalizationAwayAlgHom_relation_eq_zero, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, Algebra.Generators.compLocalizationAwayAlgHom_X_inl, AlgebraicGeometry.Proj.awayMap_awayToSection, Algebra.Generators.compLocalizationAwayAlgHom, Algebra.Generators.map_comp_cotangentCompAwaySec",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv gives a generic square transpose, not normalization of these five pro-etale coefficient transposes and their rational/common-stage descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the five tensor Hom and exceptional adjunction transposes under change of coefficients and rationalization",
+   "results": "8 hits: CategoryTheory.ihom.coev_naturality, CategoryTheory.ihom.coev_naturality_assoc, CategoryTheory.NatTrans.tensor_naturality, ModuleCat.monoidalClosedHomEquiv, CategoryTheory.FunctorToTypes.adj, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorLeftHomEquiv_naturality, ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv gives a generic square transpose, not normalization of these five pro-etale coefficient transposes and their rational/common-stage descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv gives a generic square transpose, not normalization of these five pro-etale coefficient transposes and their rational/common-stage descent"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|conjugate.*[Nn]aturality",
+   "results": "5 hits: Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: mateEquiv gives a generic square transpose, not normalization of these five pro-etale coefficient transposes and their rational/common-stage descent"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv|homEquiv_naturality|scalar.*localization",
+   "results": "25 hits: Mathlib/CategoryTheory/Generator/Sheaf.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Endofunctor/Algebra.lean, Mathlib/CategoryTheory/Category/Pointed.lean, Mathlib/CategoryTheory/Category/Cat/CartesianClosed.lean; Mathlib/CategoryTheory",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and scalar-localization results do not state compatibility of this specified five-arrow pro-etale chain with its completed and common-stage realizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor Hom exchange adjunction compatibility with coefficient reduction scalar extension and rationalization of derived sheaves",
+   "results": "8 hits: lTensorHomEquivHomLTensor, ModuleCat.monoidalClosedHomEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, TensorProduct.lTensorHomToHomLTensor, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and scalar-localization results do not state compatibility of this specified five-arrow pro-etale chain with its completed and common-stage realizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and scalar-localization results do not state compatibility of this specified five-arrow pro-etale chain with its completed and common-stage realizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Five successive tensor Hom adjunction and projection formula bijections commute with coefficient change and descend to localized Hom groups and common finite fields",
+   "results": "8 hits: IsLocalizedModule.map_lTensor, Algebra.tensorH1CotangentOfIsLocalization_toLinearMap, IsLocalization.moduleTensorEquiv, Algebra.tensorH1CotangentOfIsLocalization, Module.FinitePresentation.linearEquivMapExtendScalars, IsLocalization.tensorProduct_tensorProduct, Module.FinitePresentation.linearEquivMapExtendScalars_symm_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and scalar-localization results do not state compatibility of this specified five-arrow pro-etale chain with its completed and common-stage realizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of mates of adjunctions and monoidal internal Hom comparisons under a strong monoidal functor, with extension of linear equivalences by scalar localization",
+   "results": "8 hits: CategoryTheory.mateEquiv_apply, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv, CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv_naturality_two_symm, CategoryTheory.tensorLeftHomEquiv_naturality, CategoryTheory.tensorRightHomEquiv_naturality, CategoryTheory.tensorRightHomEquiv_symm_naturality, CategoryTheory.coev_expComparison",
+   "date": "2026-10-22",
+   "verdict": "no match: generic adjunction and scalar-localization results do not state compatibility of this specified five-arrow pro-etale chain with its completed and common-stage realizations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "fix-lem-tensor-adjunction",
+  "date": "2026-10-22",
+  "group": "Q151"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-tensor-adjunction",
+   "place": "Proof, final coefficient-comparison sentence and field-stage passage; returned detailed steps 7 and 9: transposition square, localization and common finite fields",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-tensor-hom-coefficient-transposes",
+  "worker": "stage1",
+  "summary": "Expanded each of the five coefficient squares using the specified counits and evaluation, then pasted them and wrote explicit localization and common-stage representative arguments. Reused existing generic transpose, comparison and scalar-localization nodes; no new nodes, no statement change, no Lean or compiler. Retained all full-domain and specified-comparison hypotheses; did not infer site-perfectness or comparison invertibility on larger domains.",
+  "blueprint": "fix-lem-tensor-adjunction, Proof Step 1 and final sentences about comparison squares, realizations and field stages; expands the coefficient and field-stage obligation extracted from returned steps 7 and 9.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Specified operation comparisons preserve the units, counits and tensor structure; its restricted finite-Hom invertibility claim is not used."
+   },
+   {
+    "node": "lem-amb-mate-unit-counit",
+    "why": "Generic counit identity identifies the actual ordinary and exceptional coefficient transposes."
+   },
+   {
+    "node": "fix-prop-adjunctions",
+    "why": "Provides the stipulated adjunctions whose units and counits define the chain."
+   },
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "Provides compatibility of the specified compact-support projection with coefficient change."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic associator normalization identifies completed scalar extension with balanced reassociation, including identity and pentagon."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Gives identity and finite-extension tower coherence for pullback, tensor and internal-Hom comparisons."
+   },
+   {
+    "node": "lem-fix-compact-support-coefficient-change",
+    "why": "Gives successive-quotient coherence for the specified compact-support coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic pasting and identity laws transfer the left-operation comparison cocycles to their right mates."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension theorem for equations under raw semilinear localization."
+   },
+   {
+    "node": "lem-weil-integral-constructible-linear",
+    "why": "Supplies the actual constant-section R-linear Hom modules and bilinear composition for the naturality argument establishing linearity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-operation-reduction",
+  "lem-amb-mate-unit-counit",
+  "fix-prop-adjunctions",
+  "fix-prop-projection-formula",
+  "lem-fix-scalar-completion-associator",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-fix-compact-support-coefficient-change",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-integral-constructible-linear"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-NW-5975ac3b2",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-5975ac3b2 (reviewer sub-agent of L); spot-checked: I read the full item (8 steps; no new nodes). Statement and stmt_deps are byte-identical to live, which is unsplit, has no repair note and is not superseded. The source is main-20261015 sk-thm-sf-package/fix-lem-tensor-adjunction.proof.md: the five-arrow chain of Step 1 and the final sentence on coefficient comparisons, realizations and field stages. The steps write out that sentence. I checked each step's algebra against the cited statements. Step 2: lem-amb-mate-unit-counit with alpha=p^{-1}, beta=s, then naturality of p, giving T_X(q)p_L^{-1}. Step 4: alpha=c_F^{-1}, with c_E the mate, as the admissibility clause of def-weil-exceptional-adjoint-admissibility requires. Steps 3 and 5: the transpose clause of lem-coef-evaluation-transpose-coherence, whose evaluation preservation pins the Hom comparison and which needs no invertibility. Step 5: from d_V T(PF)=PF' d_U, w'PF'=T(w PF)d_U^{-1}, verified. The endpoint maps alpha_A and alpha_B match the statement. Step 6: cocycles from lem-fix-scalar-completion-associator, lem-pur-integral-operations-scalar-extension, lem-fix-compact-support-coefficient-change, the def-exchange-projection transitions, lem-weil-pbc-mate-pasting (1),(2),(4) and the Hom cocycle and identity. Step 7: R-linearity by naturality in L under r1_L and biproducts; Hom⊗E as in def-weil-rationalization-karoubi; the image of the uniformizer is a unit in F, as lem-pur-semilinear-scalar-localization needs. Step 8: the common-stage criterion of def-weil-algebraically-closed-coefficients and the theta-conjugated action of def-weil-derived-pullback-tensor-hom. Edge cases checked: n=m and E=F (identity clauses), f=id, zero or torsion Hom, and ramified extensions (a^I, not equal uniformizer powers). There is no SGA and no cycle, and proof_deps equals the union of the uses. The off-route tools are all declared and accepted as generic comparison tools that the blueprint sentence itself names: lem-fix-operation-reduction, fix-prop-projection-formula, lem-fix-scalar-completion-associator, lem-pur-integral-operations-scalar-extension, lem-fix-compact-support-coefficient-change and lem-pur-semilinear-scalar-localization. I compared the pod hom-chain nodes, lem-sfb-scalar-hom-chain-coefficient-coherence, lem-coef-completed-tensor-hom-transpose, lem-coef-dual-formula-scalar-transpose and the sibling signed-transposes node: none is a duplicate. Advisory for stage 2: step 3 takes symmetry compatibility of the coefficient tensor comparisons as part of the specified comparisons, but lem-fix-operation-reduction names only associators, evaluations, units and counits. This is standard for scalar extension and is not counted as a fault."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorHomCoefficientTransposes",
+  "declaration": "WeilConjectures.TensorHomCoefficientTransposes.tensorHomCoefficientTransposes",
+  "declarations": [
+   "WeilConjectures.TensorHomCoefficientTransposes.coefficient_square",
+   "WeilConjectures.TensorHomCoefficientTransposes.successive_square",
+   "WeilConjectures.TensorHomCoefficientTransposes.tensorHomCoefficientTransposes",
+   "WeilConjectures.TensorHomCoefficientTransposes.localized_bijection",
+   "WeilConjectures.TensorHomCoefficientTransposes.localized_representatives",
+   "WeilConjectures.TensorHomCoefficientTransposes.rationalGamma_formula",
+   "WeilConjectures.TensorHomCoefficientTransposes.common_stage_bijection",
+   "WeilConjectures.TensorHomCoefficientTransposes.common_stage_representatives",
+   "WeilConjectures.TensorHomCoefficientTransposes.common_stage_postcomposition",
+   "WeilConjectures.TensorHomCoefficientTransposes.equations_pass_to_fields",
+   "WeilConjectures.TensorHomCoefficientTransposes.shift_equations_pass_to_fields",
+   "WeilConjectures.TensorHomCoefficientTransposes.field_coefficient_square"
+  ],
+  "file": "lean/Sheaf/Paper/TensorHomCoefficientTransposes.lean",
+  "statement": "theorem tensorHomCoefficientTransposes (S : SixFunctorOperationDatum D C E n hn) (i : Bool) (S' : SixFunctorOperationDatum D C E' n' hn') (j : Bool) {X Y : SixFunctorSpace D} (f : X ⟶ Y) (c : Compactification f.hom.left) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] (_hadm : Admissible S (ringStage i) f c) (R : Domain S (ringStage i) f c) (R' : Domain S' (ringStage j) f c) (a : PurCompactSupport.Change (coefficients S i) (coefficients S' j)) (_ha : Permitted S i S' j a) (TX : (PodCoefficientStage.domain S (ringStage i) X).FullSubcategory ⥤ (PodCoefficientStage.domain S' (ringStage j) X).FullSubcategory) (TY : (PodCoefficientStage.domain S (ringStage i) Y).FullSubcategory ⥤ (PodCoefficientStage.domain S' (ringStage j) Y).FullSubcategory) (_hX : TX ⋙ inclusion S' j X ≅ inclusion S i X ⋙ pbcDerivedExtend (a.map X.obj.left)) (_hY : TY ⋙ inclusion S' j Y ≅ inclusion S i Y ⋙ pbcDerivedExtend (a.map Y.obj.left)) (d : Comparison S (ringStage i) S' (ringStage j) f c R R' TX TY) (_hA : ∀ M N, IsIso (d.source M N)) (_hB : ∀ M N, IsIso (d.target M N)) : Square d",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned 0d7a5c753f0a: plain restriction/chain data are owned by a new existing:true definition node; selector and canonical pairing definition owners are cited. Successive changes conclude direct endpoint cocycles. Rational and common Gamma are fixed by the actual localized integral Gamma representative; enlargement compatibility, representative formulas, naturality, coefficient squares and signed-shift transport are conclusions about those maps. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c2dc5fd5",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Repair of 0d7a RETURN verified. H2: theorem stmt_deps det-thm-sf-ctf-stability-adjunctions/lem-pod-hom-chain-counit-formula replaced by existing:true def-sf-tensor-hom-chain-data (statement verbatim at live PodHomChainCounitFormula.lean:175) plus landed def-pod-ctf-pairing-maps and def-sf-ctf-coefficient-stage-selectors; no race owner; other snapshot node records identical to live. H3: successive_square concludes direct.source/target cocycles + Square direct from component cocycles (checked provable); integralGammaIso = (Γ(1_A), Γ⁻¹(1_B)) with named sorry inverse laws (true by test-object naturality); rational/common Γ are images of it; rationalGamma_formula ties to localized Γ; common_stage_bijection concludes transport compatibility + ∃! descent; common_stage_representatives assumes Γz=z≫b; equations_pass_to_fields states N- and test-naturality; field_coefficient_square holds for every rY. Clauses, Permitted (3 changes, identity cases), no site-perfectness, single universe u, no hollow defs, docstrings and verbatim statements checked. Advisory: uncited landed def owners def-pur-integral-compact-support-coefficient-data / def-sp-coefficient-mate-comparisons / def-weil-pbc-bounded-constructible-tower; shift clause is functorial image (as node step 7); PodHomChain.* duplicates of PodCtfPairing.* (maintainer note); self second reading (H11 minor). No file changed, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261025T165007-L-1152939",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

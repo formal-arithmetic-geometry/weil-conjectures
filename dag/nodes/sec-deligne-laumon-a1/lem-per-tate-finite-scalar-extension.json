@@ -1,0 +1,252 @@
+{
+ "id": "lem-per-tate-finite-scalar-extension",
+ "kind": "statement",
+ "title": "Finite coefficient extension of a Tate algebra is ordinary tensor extension",
+ "statement": "For a complete field $F$ with a nontrivial real-valued nonarchimedean absolute value and $r\\geq0$, write $T_r(F)=F\\langle x_1,\\ldots,x_r\\rangle$ for the ring of series $\\sum_{\\nu\\in\\mathbf N^r}c_\\nu x^\\nu$ such that for every $\\epsilon>0$ only finitely many $|c_\\nu|\\geq\\epsilon$, with coefficientwise addition and Cauchy multiplication. Let $K\\hookrightarrow L$ be an isometric finite field extension of complete fields as above. Applying the inclusion to coefficients gives $\\varphi:T_r(K)\\to T_r(L)$. The map $$T_r(K)\\otimes_K L\\longrightarrow T_r(L),\\qquad h\\otimes\\lambda\\longmapsto\\lambda\\varphi(h)$$ is an isomorphism of $L$-algebras, where the tensor is the ordinary algebraic tensor product [def-weil-pbc-module-tensor-product], with $(h\\otimes\\lambda)(h^{\\prime}\\otimes\\lambda^{\\prime})=hh^{\\prime}\\otimes\\lambda\\lambda^{\\prime}$. For every $K$-basis $e_1,\\ldots,e_d$ of $L$, the constant series $e_1,\\ldots,e_d$ form a basis of $T_r(L)$ as a $T_r(K)$-module via $\\varphi$; in particular $\\varphi$ is flat [def-weil-pbc-flat-ring-map]. No separability assumption is made, and $r=0$ is included.",
+ "source": {
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Conrad, Several approaches to non-archimedean geometry, Exercise 2.2.3(3) (analytic scalar extension); finite-degree ordinary-tensor specialization formulated by the agent using bounded coordinate projections in a finite-dimensional normed vector space. PDF p.13 read online 2026-10-24, archival copy WANTED."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map",
+  "def-trf-restricted-series-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Fix any $K$-basis $e_1,\\ldots,e_d$ of $L$, and write $p_j:L\\to K$ for its $K$-linear coordinate maps, so $a=\\sum_j e_jp_j(a)$. The norm $|\\cdot|_L$ makes $L$ a Hausdorff topological $K$-vector space: the scalar norm identity follows from the isometry $K\\hookrightarrow L$, and addition and scalar multiplication are continuous by the norm inequalities. The domain has finite dimension and $K$ is complete and nontrivially normed. Thus [lem-sfb-finite-dimensional-linear-map-continuous] makes each $p_j$ continuous. Applying [lem-trf-continuous-linear-map-norm-bound] with $V=L$, $W=K$ and their absolute-value norms gives $C_j>0$ with $|p_j(a)|\\leq C_j|a|$ for all $a\\in L$.",
+   "uses": [
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "lem-trf-continuous-linear-map-norm-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2, printed p.3, and Exercise 2.2.3(3), printed p.13 (PDF pages 3 and 13); agent proof of the finite-degree ordinary-tensor specialization, using the cited finite-dimensional continuity and norm-bound nodes."
+   }
+  },
+  {
+   "text": "For $f=\\sum_\\nu a_\\nu x^\\nu\\in T_r(L)$ set $f_j=\\sum_\\nu p_j(a_\\nu)x^\\nu$. Given $\\epsilon>0$, the set where $|p_j(a_\\nu)|\\geq\\epsilon$ is contained in the finite set where $|a_\\nu|\\geq\\epsilon/C_j$. Hence $f_j\\in T_r(K)$. Isometry shows that coefficient inclusion $\\varphi$ preserves the restriction condition. Coefficientwise addition and the finite Cauchy sums show that it is a unital ring map. Constants and finite sums of restricted series remain restricted: for addition use the union of the two exceptional sets, and for multiplication by a nonzero constant scale the threshold by its absolute value. Consequently $f=\\sum_j e_j\\varphi(f_j)$. If $\\sum_j e_j\\varphi(h_j)=0$, each coefficient is a $K$-linear relation between the $e_j$, so all coefficients of every $h_j$ vanish. Thus these constants form a $T_r(K)$-basis; the construction of $f_j$ is $T_r(K)$-linear since each coefficient of a product is a finite sum and $p_j$ is $K$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2, printed p.3, and Exercise 2.2.3(3), printed p.13 (PDF pages 3 and 13); agent proof of the finite-degree ordinary-tensor specialization, using the cited finite-dimensional continuity and norm-bound nodes."
+   }
+  },
+  {
+   "text": "Put $A=T_r(K)$, $B=T_r(L)$. The map $(h,\\lambda)\\mapsto\\lambda\\varphi(h)$ is $K$-bilinear, so [def-weil-pbc-module-tensor-product] gives a $K$-linear map $\\mu:A\\otimes_KL\\to B$ with the prescribed pure-tensor formula. Define $\\eta:B\\to A\\otimes_KL$ by $\\eta(f)=\\sum_j f_j\\otimes e_j$, using the coordinates just constructed. These coordinates are $K$-linear, so $\\eta$ is $K$-linear. The coefficient expansion gives $\\mu\\eta(f)=f$. Conversely the $j$th coordinate of $\\lambda\\varphi(h)$ is $p_j(\\lambda)h$, and bilinearity yields $\\eta\\mu(h\\otimes\\lambda)=\\sum_j (p_j(\\lambda)h)\\otimes e_j=h\\otimes\\sum_j p_j(\\lambda)e_j=h\\otimes\\lambda$. Pure tensors generate by the cited tensor-product statement, so $\\eta\\mu$ is the identity. This uses the ordinary algebraic tensor product throughout.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2, printed p.3, and Exercise 2.2.3(3), printed p.13 (PDF pages 3 and 13); agent proof of the finite-degree ordinary-tensor specialization, using the cited finite-dimensional continuity and norm-bound nodes."
+   }
+  },
+  {
+   "text": "For pure tensors, $\\mu((h\\otimes\\lambda)(h'\\otimes\\lambda'))=\\lambda\\lambda'\\varphi(hh')=(\\lambda\\varphi(h))(\\lambda'\\varphi(h'))$. Bilinearity and generation by pure tensors extend this equality to arbitrary pairs of tensors. Also $\\mu(1\\otimes1)=1$, and $\\mu(h\\otimes c\\lambda)=c\\mu(h\\otimes\\lambda)$ for every $c\\in L$, first on pure tensors and then on their finite sums. Thus the bijection $\\mu$ is a unital $L$-algebra homomorphism, hence an $L$-algebra isomorphism.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2, printed p.3, and Exercise 2.2.3(3), printed p.13 (PDF pages 3 and 13); agent proof of the finite-degree ordinary-tensor specialization, using the cited finite-dimensional continuity and norm-bound nodes."
+   }
+  },
+  {
+   "text": "To verify flatness directly, let $u:N\\to P$ be any injective $A$-linear map. The basis above identifies $N\\otimes_AB$ with $N^d$: on a pure tensor send $n\\otimes\\sum_j b_je_j$ to $(b_jn)_j$, with inverse $(n_j)_j\\mapsto\\sum_j n_j\\otimes e_j$. The first map is induced by an $A$-bilinear map, and the two compositions are the identity by the tensor relations and pure-tensor generation of [def-weil-pbc-module-tensor-product]. Use the identical formulas for $P$. Under these identifications $u\\otimes\\mathrm{id}_B$ is $(n_j)_j\\mapsto(u(n_j))_j$, which is injective coordinatewise. By [def-weil-pbc-flat-ring-map], $B$ is flat over $A$ and $\\varphi$ is flat. When $r=0$, the multi-index set has one element, so the same formulas give $K\\otimes_KL\\cong L$ and the given basis of $L$. No step uses separability or a trace pairing.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+    "place": "Definition 1.1.2, printed p.3, and Exercise 2.2.3(3), printed p.13 (PDF pages 3 and 13); agent proof of the finite-degree ordinary-tensor specialization, using the cited finite-dimensional continuity and norm-bound nodes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-trf-continuous-linear-map-norm-bound",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "https://math.stanford.edu/~conrad/papers/aws.pdf",
+  "place": "Definition 1.1.2, printed p.3, and Exercise 2.2.3(3), printed p.13 (PDF pages 3 and 13); agent proof of the finite-degree ordinary-tensor specialization, using the cited finite-dimensional continuity and norm-bound nodes. Conrad motivates analytic scalar extension but does not supply this finite-basis proof; archival copy WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension L of a complete nonarchimedean field K, the coefficient extension of a Tate algebra is its ordinary tensor product with L and is finite free",
+   "results": "{\"t\": \"2026-10-24T07:04:09Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite extension L of a complete nonarchimedean field K, the coefficient extension of a Tate algebra is its ordinary tensor product with L and is finite free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LaurentSeries.instAlgebraSubtypeAdicCompletionPolynomialRatFuncIdealXMemValuationSubringAdicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"IsDedekindDomain.FiniteAdeleRing.instAlgebra_1\", \"IsDedekindDomain.FiniteAdeleRing.instAlgebra\", \"NumberField.AdeleRing.instAlgebra\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'\", \"IsDedekindDomain.HeightOneSpectrum.instAlgebraSubtypeAdicCompletionMemValuationSubringAdicCompletionIntegers\"], \"digest\": \"d372528431ed1ae1\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor freeness and analytic scalar restriction do not identify the restricted-series coefficient extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateAlgebra\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"TateAlgebra\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor freeness and analytic scalar restriction do not identify the restricted-series coefficient extension"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|tate.*(tensor|extension)",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|RestrictedPowerSeries|tate.*(tensor|extension)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/Norm/RelNorm.lean\", \"Mathlib/RingTheory/RamificationInertia/Basic.lean\", \"Mathlib/RingTheory/Valuation/Extension.lean\", \"Mathlib/Tactic/NormNum/Core.lean\", \"Mathlib/CategoryTheory/Bicategory/Kan/Adjunction.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Comon_.lean\", \"Mathlib/LinearAlgebra/TensorAlgebra/Basic.lean\"], \"digest\": \"1a0eaed959249b92\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor freeness and analytic scalar restriction do not identify the restricted-series coefficient extension"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite complete nonarchimedean field extension commutes with restricted power series algebra tensor product finite free",
+   "results": "{\"t\": \"2026-10-24T07:03:57Z\", \"tool\": \"leansearch\", \"query\": \"Finite complete nonarchimedean field extension commutes with restricted power series algebra tensor product finite free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Finite.tensorProductMap\", \"HasFPowerSeriesAt.restrictScalars\", \"Algebra.TensorProduct.instFree\", \"HasFPowerSeriesOnBall.restrictScalars\", \"FiniteField.instFiniteExtension_1\", \"Algebra.FiniteType.baseChange\", \"HasFPowerSeriesWithinAt.restrictScalars\", \"Algebra.FormallyUnramified.base_change\"], \"digest\": \"a2957d1a2b3019da\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor freeness and analytic scalar restriction do not identify the restricted-series coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted series with coefficients in a finite dimensional complete valued field extension decompose uniquely along a basis into restricted series over the ground field",
+   "results": "{\"t\": \"2026-10-24T07:04:10Z\", \"tool\": \"leanfinder\", \"query\": \"Restricted series with coefficients in a finite dimensional complete valued field extension decompose uniquely along a basis into restricted series over the ground field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasFPowerSeriesWithinAt.restrictScalars\", \"HasFPowerSeriesAt.restrictScalars\", \"HasFPowerSeriesWithinOnBall.restrictScalars\", \"HasFPowerSeriesOnBall.restrictScalars\", \"FormalMultilinearSeries.restrictScalars\", \"FormalMultilinearSeries.ofScalars_series_eq_iff\", \"MvPowerSeries.WithPiTopology.as_tsum\", \"LaurentSeries.exists_powerSeries_of_memIntegers\"], \"digest\": \"bd372e1803080fea\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor freeness and analytic scalar restriction do not identify the restricted-series coefficient extension"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRestricted|restricted.*(tensor|finite|regular|maximal)|residueFieldOfPowerSeries",
+   "results": "{\"t\": \"2026-10-24T07:06:04Z\", \"tool\": \"grep\", \"query\": \"IsRestricted|restricted.*(tensor|finite|regular|maximal)|residueFieldOfPowerSeries\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\", \"Mathlib/RingTheory/PowerSeries/Inverse.lean\"], \"digest\": \"afdc74bddcbd311c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary tensor freeness and analytic scalar restriction do not identify the restricted-series coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every coordinate projection along a basis of a finite dimensional normed vector space over a complete nontrivially normed field is bounded and continuous",
+   "results": "{\"t\": \"2026-10-24T07:32:39Z\", \"tool\": \"leanfinder\", \"query\": \"Every coordinate projection along a basis of a finite dimensional normed vector space over a complete nontrivially normed field is bounded and continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuous_equivFun_basis\", \"Module.Basis.continuous_coe_repr\", \"Module.Basis.exists_opNNNorm_le\", \"Module.Basis.exists_opNorm_le\", \"Module.Basis.opNorm_le\", \"IsBoundedLinearMap.fst\", \"ContinuousLinearMap.norm_single_le_one\", \"EuclideanSpace.projₗ\"], \"digest\": \"a2d906dcfcc82f1d\"}",
+   "date": "2026-10-24",
+   "verdict": "matches supporting finite-dimensional coordinate continuity, already covered by existing DAG leaves; not the Tate algebra item"
+  },
+  {
+   "tool": "grep",
+   "query": "TateAlgebra|RestrictedPowerSeries|IsRestricted",
+   "results": "{\"t\": \"2026-10-24T07:33:24Z\", \"tool\": \"grep\", \"query\": \"TateAlgebra|RestrictedPowerSeries|IsRestricted\", \"sub\": \"RingTheory/PowerSeries\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\", \"Mathlib/RingTheory/PowerSeries/Restricted.lean\"], \"digest\": \"bcaa25a332a22389\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series closure only; no coefficient extension tensor isomorphism or finite-basis decomposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate algebra restricted multivariate power series finite field extension ordinary tensor product isomorphism",
+   "results": "{\"t\": \"2026-10-24T07:33:24Z\", \"tool\": \"leansearch\", \"query\": \"Tate algebra restricted multivariate power series finite field extension ordinary tensor product isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.tensorEquiv\", \"polyEquivTensor'\", \"polyEquivTensor\", \"coe_polyEquivTensor'\", \"PiTensorProduct.constantBaseRingEquiv\", \"IsLocalization.moduleLid\", \"MvPolynomial.algebraTensorAlgEquiv\", \"Algebra.TensorProduct.rid\"], \"digest\": \"c809b09c62bd2a46\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series closure only; no coefficient extension tensor isomorphism or finite-basis decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TateAlgebra\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-24T07:33:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"TateAlgebra\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series closure only; no coefficient extension tensor isomorphism or finite-basis decomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor|equiv|map",
+   "results": "{\"t\": \"2026-10-24T07:37:35Z\", \"tool\": \"grep\", \"query\": \"tensor|equiv|map\", \"sub\": \"RingTheory/MvPowerSeries/Restricted.lean\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series closure only; no coefficient extension tensor isomorphism or finite-basis decomposition"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"MvPowerSeries\", \"IsRestricted\"",
+   "results": "{\"t\": \"2026-10-24T07:37:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"MvPowerSeries\\\", \\\"IsRestricted\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"MvPowerSeries.IsRestricted\", \"MvPowerSeries.IsRestricted.addSubgroup\", \"MvPowerSeries.isRestricted_X\", \"MvPowerSeries.isRestricted_one\", \"MvPowerSeries.IsRestricted.subring\", \"MvPowerSeries.isRestricted_zero\", \"MvPowerSeries.isRestricted_abs_iff\", \"MvPowerSeries.IsRestricted.neg\"], \"digest\": \"f4ae6e14012af6c7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series closure only; no coefficient extension tensor isomorphism or finite-basis decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite isometric extension L of complete nonarchimedean fields K, the ordinary tensor product K restricted power series algebra tensor L is the L restricted power series algebra",
+   "results": "{\"t\": \"2026-10-24T07:37:39Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite isometric extension L of complete nonarchimedean fields K, the ordinary tensor product K restricted power series algebra tensor L is the L restricted power series algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"LaurentSeries.instAlgebraRatFuncAdicCompl\", \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"AdicCompletion.ofTensorProduct_tmul\", \"AdicCompletion.tensor_map_id_left_eq_map\", \"LaurentSeries.powerSeriesAlgEquiv\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"2d525892060919c2\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: restricted-series closure only; no coefficient extension tensor isomorphism or finite-basis decomposition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-affinoid-residual-conormal-injective",
+  "date": "2026-10-24",
+  "group": "Q159"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Analytic prerequisite: finite coefficient extension as ordinary tensor.",
+   "via": [
+    "lem-per-affinoid-residual-conormal-injective",
+    "lem-per-geometric-affinoid-jacobian-unit",
+    "lem-per-regular-generic-continuous-jacobian",
+    "lem-per-rig-principal-formal-algebraization",
+    "lem-per-rig-regular-formal-resolution",
+    "lem-per-small-singular-locus-resolution",
+    "lem-per-qe-ordinary-regular-resolution",
+    "lem-per-characteristic-zero-log-resolution-independence",
+    "lem-per-complete-local-rigidification-comparison",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-tate-finite-scalar-extension",
+  "worker": "stage1",
+  "summary": "Five explicit steps: continuous and bounded coordinate projections using two existing Mathlib leaves; restricted-series basis decomposition; mutually inverse ordinary tensor maps; multiplicativity and L-linearity; direct coordinate proof of flatness. No new nodes. Mathematical statement unchanged; corrected doubled TeX escapes. Includes rank-zero-variable and inseparable cases.",
+  "blueprint": "Inherited formal-algebraization branch supporting ancestor Step 3, via lem-per-regular-generic-continuous-jacobian and lem-per-geometric-affinoid-jacobian-unit: the residue-fibre continuous conormal criterion in the proof of Temkin Proposition 3.3.2, printed pp.20–21. The latest blueprint ancestor Step 3 discusses duality, without a separate formal-algebraization sentence. Analytic prerequisite: finite coefficient extension as ordinary tensor. This is an analytic prerequisite on the already inherited formal-algebraization branch, not a replacement of the current perverse-duality proof. The newest ancestor proof was read and has no literal Tate-algebra assertion."
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-517a667df",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-517a667df (reviewer sub-agent of L); spot-checked: First split; live is unsplit, with no repair note. One commit with item and report and no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to live; the report's 'TeX normalization' claim changed nothing. The statement is true; I tested r=0, L=K, Q_p(√p)/Q_p and purely inseparable F_p((t))⊂F_p((s)). Step 1: K is complete and nontrivial; L is a finite-dimensional Hausdorff K-space, and the isometry gives |cv|=|c||v|. With these hypotheses LinearMap.continuous_of_finiteDimensional (lem-sfb leaf, FiniteDimension.lean:283) gives continuity, and ContinuousLinearMap.bound (lem-trf leaf, Operator/Basic.lean:132) gives a separate C_j for each coordinate. Step 2: the coordinate series are restricted via ε/C_j. Expansion and uniqueness hold coefficientwise, and (φ(h)f)_j=h f_j because Cauchy coefficients are finite sums; I checked this. Step 3: μ comes from the universal property, η=Σ f_j⊗e_j, and both composites are the identity (coordinates of λφ(h) are p_j(λ)h; pure tensors generate). Step 4: multiplicativity, unit and L-linearity hold. Step 5: N⊗_A B≅N^d is A-balanced via step-2 linearity, and u⊗id is coordinatewise, which gives flatness exactly as def-weil-pbc-flat-ring-map defines it. proof_deps equals the union of the uses. No duplicate: I read lem-per-regular-affinoid-complete-field-extension, the trf Gauss-completion node, def-trf-restricted-series-presentation and the parent; Mathlib Restricted.lean has restrictedness only. Off-unit citations are Mathlib leaves, so no tool_uses. Batch-5: lem-trf-continuous-linear-map-norm-bound is a generic Mathlib-leaf boundedness lemma with no proof_deps. Neither the trace-formula nor the Poincaré assumption gives it, and it is not part of their proofs, so I accept it. The parent's step 3 uses only flatness, for an L that is a finite extension of a complete field, which matches the item's hypotheses. Source is Conrad's AWS notes, online only, WANTED; the proof is marked agent. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TateFiniteScalarExtension",
+  "declaration": "RestrictedSeries.tate_finite_scalar_extension",
+  "declarations": [
+   "RestrictedSeries.constantsAlgebra",
+   "RestrictedSeries.tate_finite_scalar_extension"
+  ],
+  "file": "lean/Sheaf/RingTheory/TateFiniteScalarExtension.lean",
+  "statement": "theorem tate_finite_scalar_extension (K : Type u) (L : Type v) [NontriviallyNormedField K] [NontriviallyNormedField L] [IsUltrametricDist K] [IsUltrametricDist L] [CompleteSpace K] [CompleteSpace L] [Algebra K L] [FiniteDimensional K L] (hι : Isometry (algebraMap K L)) (r : ℕ) : ∃ φ : ↥(MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) →+* ↥(MvPowerSeries.IsRestricted.subring (R := L) (fun _ : Fin r ↦ (1 : ℝ))), (∀ f ν, MvPowerSeries.coeff ν (φ f).val = algebraMap K L (MvPowerSeries.coeff ν f.val)) ∧ (∃ e : @AlgEquiv L (↥(MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) ⊗[K] L) ↥(MvPowerSeries.IsRestricted.subring (R := L) (fun _ : Fin r ↦ (1 : ℝ))) inferInstance inferInstance inferInstance (Algebra.TensorProduct.rightAlgebra (R := K)) inferInstance, ∀ f c, e (f ⊗ₜ[K] c) = constants L r c * φ f) ∧ (∀ (ι : Type w) (b : Module.Basis ι K L), ∃ bT : @Module.Basis ι ↥(MvPowerSeries.IsRestricted.subring (R := K) (fun _ : Fin r ↦ (1 : ℝ))) ↥(MvPowerSeries.IsRestricted.subring (R := L) (fun _ : Fin r ↦ (1 : ℝ))) inferInstance inferInstance φ.toAlgebra.toModule, ∀ i, bT i = constants L r (b i)) ∧ φ.Flat",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Uses the existing restricted-series subring and constants. The existential coefficient map is uniquely specified at every coefficient, and the L-algebra equivalence is uniquely specified on every pure tensor. constantsAlgebra is the real algebra structure induced by the existing constants ring homomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80b32fcaa",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Node diff vs live: only lean + stmt_deps (added def-trf-restricted-series-presentation, a landed def node supplying RestrictedSeries.constants; H2 ok); lean.statement verbatim in file. Clause check: complete nontrivial ultrametric K,L; FiniteDimensional K L; Isometry (algebraMap K L); r:ℕ incl. 0; T_r = Mathlib IsRestricted.subring at c≡1 (exactly the node's cofinite condition). φ pinned coefficientwise; AlgEquiv over L with explicit rightAlgebra on T_K⊗[K]L, pinned e(f⊗c)=constants c*φ f; ∀ ι:Type w, ∀ K-basis b, ∃ T_K-basis bT of T_L via φ.toAlgebra with bT i = constants (b i); φ.Flat = RingHom.Flat. Nothing stronger than the node, universes independent. Edge cases r=0, L=K, inseparable, zero checked; statement true. constantsAlgebra = (constants R r).toAlgebra is real data, docstrings present, no competing instance or name clash in Mathlib/side-live/runs. Single sorry, docstrings carry source+blueprint+5 proof steps, no line >100, no pro-etale. No compile (none required; no file changed). Advisory: later consumers should reuse RestrictedSeries.constantsAlgebra."
+ }
+}

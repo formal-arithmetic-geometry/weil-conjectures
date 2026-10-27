@@ -1,0 +1,112 @@
+{
+ "id": "def-zl-finite-restriction-coefficient-descent-data",
+ "kind": "definition",
+ "title": "Data for normalized raw rational finite restriction descent",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, schemes $X,Y,s$, and arrows $f:X\\to Y$ and $y:s\\to Y$. For an integral comparison diagram $I$ [def-zl-finite-restriction-integral-diagram], define RationalComparisons to consist of three morphisms between the prescribed coefficient stage systems, two compatible Hom records for exchange and restriction, and the literal object, pure-tensor map, component, and scalar-comparison normalization equalities. Define its descended transformations by StageSystem.Morphism.descNatTrans. For a finite-field datum D and ell different from its characteristic, SectionsCompatible means integral naturality of the prescribed inverse sections-tensor/completion comparison and naturality of the prescribed rational fibre scalar comparison. For geometry G [def-zl-finite-restriction-geometric-comparisons], DirectImageDescent means existence of a stage-system morphism with exactly G.rationalImage.rational as its stage functors and the inverse theta comparisons as beta, together with TExactDescent and HeartExactDescent [def-zl-finite-restriction-finite-data]. These definitions are moved verbatim from the coefficient-descent module; no object or map is redefined.",
+ "stmt_deps": [
+  "def-zl-finite-restriction-integral-diagram",
+  "def-zl-finite-restriction-geometric-comparisons",
+  "def-zl-finite-restriction-finite-data",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-sections-scalar-extension",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Data for normalized raw rational finite restriction descent; Proposition 6.8.14 and Remark 6.8.15, finite restriction descent steps."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite diagrams and distinguished triangles in a directed colimit of triangulated categories descend to one stage",
+   "results": "Eight results on distinguished triangles, truncation triangles, and octahedra; no normalized finite coefficient restriction assembly.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible functors between directed systems of categories descend to the common stage category and preserve t-exactness",
+   "results": "Eight results on derived exact functors and localization. No assembly of the fixed completed integral and rational coefficient comparisons. Existing project StageSystem interfaces are reused.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*descent|scalar.*counit|counit.*scalar",
+   "results": "Eleven Mathlib hits on algebraic scalar adjunction counits and affine groups. None states normalized geometric coefficient descent. Project rg also found the existing StageSystem quotient and strict direct-image comparisons.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRestrictionCoefficientDescent",
+  "date": "2026-10-25",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-pushforward",
+   "place": "Data for normalized raw rational finite restriction descent in finite coefficient restriction descent",
+   "via": [
+    "lem-zl-finite-restriction-coefficient-descent",
+    "lem-zl-finite-adic-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteRestrictionCoefficientDescentData",
+  "file": "lean/Sheaf/Paper/FiniteRestrictionCoefficientDescentData.lean",
+  "declaration": "WeilConjectures.FiniteRestrictionCoefficient.RationalComparisons",
+  "declarations": [
+   "WeilConjectures.FiniteRestrictionCoefficient.RationalComparisons",
+   "WeilConjectures.FiniteRestrictionCoefficient.RationalComparisons.descendedExchange",
+   "WeilConjectures.FiniteRestrictionCoefficient.RationalComparisons.descendedRestriction",
+   "WeilConjectures.FiniteRestrictionCoefficient.SectionsCompatible",
+   "WeilConjectures.FiniteRestrictionCoefficient.DirectImageDescent"
+  ],
+  "statement": "structure RationalComparisons (I : IntegralComparisons l f y Ω)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-77b39",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T122609-L-1789509",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-77b39",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261025T122609-L-1789509",
+  "kind": "interface",
+  "note": "independent cc review: item finiteRestrictionCoefficientDescent (unchanged signature) proved from finitePoints + 4 private proofs + 2 new sorry'd assembly statements (integral = integral conjuncts of item; rational = ∃R, DirectImageDescent ∧ HeartExactDescent, true via HasComparisonLaws pinning); 5 defs moved verbatim to FiniteRestrictionCoefficientDescentData with change record and public re-export; no importers; nodes checked against Lean"
+ }
+}

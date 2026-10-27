@@ -1,0 +1,296 @@
+{
+ "id": "lem-sfb-smooth-atlas-automorphism-diagonal-test",
+ "kind": "statement",
+ "title": "Unramified diagonal tested on the automorphism space of a smooth atlas",
+ "statement": "Let $S$ be a scheme, $\\mathcal X$ an algebraic stack over $S$, and $p:P\\to\\mathcal X$ a smooth surjective morphism with $P$ a scheme. Let $G_p$ denote the algebraic space representing $T\\mapsto\\operatorname{Aut}_{\\mathcal X(T)}(p|_T)$ on $P$-schemes. Then $\\Delta_{\\mathcal X/S}:\\mathcal X\\to\\mathcal X\\times_S\\mathcal X$ is unramified if and only if $G_p\\to P$ is unramified. An algebraic stack here is a stack in groupoids on schemes over $S$ with diagonal representable by algebraic spaces and a smooth surjective scheme atlas. Fibred groupoids, stacks, representability and 2-fibre products use [def-sfb-stable-pointed-moduli-groupoids]; algebraic spaces use [def-trf-algebraic-space]. Smoothness and surjectivity of a representable map are tested after scheme base change on etale scheme charts, using [def-sbc-smooth-morphisms] and ordinary surjectivity on points. Unramifiedness for morphisms of algebraic spaces is tested etale locally on source and target using [def-weil-unramified-morphism]. Unramifiedness of the representable diagonal is tested after every scheme base change using this algebraic-space convention.",
+ "source": {
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), part (4), for the structure morphism to S, with Tag 050Q (lemma-inertia) identifying atlas pullback of inertia with G_p; smooth-local descent of representable unramifiedness is the property listed in stacks-properties.tex, section-properties-morphisms, using spaces-descent.tex Tag 042A (lemma-descending-property-unramified)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-weil-unramified-morphism",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-open-moduli-substack",
+  "def-sfb-moduli-inertia"
+ ],
+ "proof": [
+  {
+   "text": "First identify the diagonal base changes. For an $S$-scheme $T$ and objects $a,b\\in\\mathcal X(T)$, the base change of $\\Delta_{\\mathcal X/S}$ along $(a,b):T\\to\\mathcal X\\times_S\\mathcal X$ represents $\\operatorname{Isom}_T(a,b)$. Indeed its objects over $T'\\to T$ are triples $(z,\\alpha:z\\xrightarrow{\\sim}a_{T'},\\beta:z\\xrightarrow{\\sim}b_{T'})$; send this to $\\beta\\alpha^{-1}$. The inverse sends $\\phi:a_{T'}\\xrightarrow{\\sim}b_{T'}$ to $(a_{T'},1,\\phi)$, and $\\alpha$ gives the unique compatible isomorphism to that triple. These operations commute with pullback. In particular, take $T=P$ and $a=b=p$ to obtain $G_p$. If the diagonal is unramified, its scheme base change $G_p\\to P$ is unramified by the testing convention in the statement. This proves the forward implication.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 0CL0 (lemma-diagonal-diagonal), proof of (4), diagonal base-change square; Tag 050Q (lemma-inertia), automorphism square."
+   }
+  },
+  {
+   "text": "For the converse assume $G_p\\to P$ unramified. Fix an arbitrary $S$-scheme $T$ and $a,b\\in\\mathcal X(T)$. Put $I=\\operatorname{Isom}_T(a,b)$ and $H=\\operatorname{Aut}_T(b)$. The Isom local-finite-type theorem says that both are algebraic spaces locally of finite type over $T$, and that $H$ is a group algebraic space with composition as multiplication. These assertions apply to $a,b$ and to $b,b$ without any finite type hypothesis on $T$ or $\\mathcal X$.",
+   "uses": [
+    "lem-sfb-stack-isom-space-locally-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04XR (lemma-isom-locally-finite-type), also used in the proof of Tag 050Q (lemma-inertia)."
+   }
+  },
+  {
+   "text": "Form the 2-fibre product $W=T\\times_{b,\\mathcal X,p}P$. Its objects on a test scheme $V$ are $(t:V\\to T,v:V\\to P,\\theta:b_t\\xrightarrow{\\sim}p_v)$. The pullback of the diagonal along $(b,p):T\\times_S P\\to\\mathcal X\\times_S\\mathcal X$ is equivalent to $W$: as in step 1, send $(z,\\alpha:z\\xrightarrow{\\sim}b_t,\\beta:z\\xrightarrow{\\sim}p_v)$ to $\\theta=\\beta\\alpha^{-1}$, with inverse $(b_t,1,\\theta)$. These operations preserve compatible arrows, pullbacks and both projections. Thus $W$ is an algebraic space by representability of the diagonal. Its projection $q:W\\to T$ is smooth and surjective by base change of the atlas. The current chartwise calculus uses field-extension local lifting for surjectivity: for every $t:\\operatorname{Spec}K\\to T$, the atlas supplies, after $K\\hookrightarrow L$, a lift $v:\\operatorname{Spec}L\\to P$ and an isomorphism $b_{t_L}\\simeq p_v$. This is precisely a point of $W$ above $t_L$. Its statement equates this condition, for a representable map, with surjectivity on every scheme base change and surjective etale scheme chart. Thus its surjectivity convention agrees with the one required for descent. The same calculus makes $q$ flat and locally of finite presentation. Hence $q$ has exactly the hypotheses of the representable-unramified descent theorem. Write $u:W\\to P$ for the other projection.",
+   "uses": [
+    "lem-sfb-stack-chartwise-smooth-etale-calculus",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Section 04XB (section-properties-morphisms), base change of representable smooth surjections; Tag 04XD (lemma-check-property-covering)."
+   }
+  },
+  {
+   "text": "The tautological isomorphism on $W$ gives\n$$W\\times_T H\\ \\simeq\\ W\\times_P G_p.$$\nHere is the identification on each scheme $V\\to W$: its data include $t:V\\to T$, $v:V\\to P$ and $\\theta:b_t\\xrightarrow{\\sim}p_v$. Send $h\\in\\operatorname{Aut}(b_t)$ to $\\theta h\\theta^{-1}\\in\\operatorname{Aut}(p_v)$, with inverse $g\\mapsto\\theta^{-1}g\\theta$. The two composites are identities. For every $f:V\\prime\\to V$, pullback preserves composition and inverses, so $f^*(\\theta h\\theta^{-1})=(f^*\\theta)(f^*h)(f^*\\theta)^{-1}$; the inverse formula has the same compatibility. They therefore define inverse maps of the algebraic spaces over $W$. No global lift of $b$ to $P$ is asserted.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 050Q (lemma-inertia), identification of atlas pullback with automorphisms; conjugation on the defining 2-fibre product."
+   }
+  },
+  {
+   "text": "Base-change stability of unramified algebraic-space morphisms makes $W\\times_P G_p\\to W$ unramified. Step 4 therefore makes $W\\times_T H\\to W$ unramified. Apply representable-unramified descent to $H\\to T$ and $q:W\\to T$: $H$ and $T$ are algebraic spaces, $H\\to T$ is representable by algebraic spaces, and step 3 supplies the surjective flat locally finitely presented cover. It follows that $H\\to T$ is unramified.",
+   "uses": [
+    "lem-sfb-space-unramified-permanence",
+    "lem-sfb-stack-representable-unramified-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 04XD (lemma-check-property-covering) for unramifiedness; spaces-morphisms.tex Tag 03ZJ (lemma-base-change-unramified)."
+   }
+  },
+  {
+   "text": "Composition gives an action $H\\times_T I\\to I$, $(g,\\phi)\\mapsto g\\phi$. Associativity and the identity law are those in the groupoid $\\mathcal X(V)$ for each scheme $V\\to T$. The map\n$$H\\times_T I\\longrightarrow I\\times_T I,\\qquad(g,\\phi)\\longmapsto(g\\phi,\\phi)$$\nhas inverse $(\\psi,\\phi)\\mapsto(\\psi\\phi^{-1},\\phi)$. Both composites are identities on all test schemes and the formulas respect pullback, so these are inverse morphisms of algebraic spaces. Thus $I$ is a pseudo $H$-torsor. This uses neither nonempty fibres nor a cover on which $a$ and $b$ are isomorphic.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-morphisms.tex",
+    "place": "Tag 04YP (lemma-isom-pseudo-torsor-aut), composition action; the same action in Tag 0CPK (lemma-isom-pseudo-torsor-aut-over-space)."
+   }
+  },
+  {
+   "text": "Apply the unramified pseudo-torsor lemma with base $B=T$, group $H$ and pseudo torsor $I$. Step 2 supplies local finite type for both $H$ and $I$, step 5 supplies unramifiedness of $H\\to T$, and step 6 supplies the pseudo-torsor isomorphism. Hence $I\\to T$ is unramified. Since $T,a,b$ were arbitrary, step 1 identifies every scheme base change of $\\Delta_{\\mathcal X/S}$ with such a map $I\\to T$. By the representable-diagonal testing convention, the diagonal is unramified, proving the converse.",
+   "uses": [
+    "lem-sfb-unramified-pseudo-torsor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-groupoids.tex",
+    "place": "Tag 0DSK (lemma-pseudo-torsor-implications), part (1), as used in stacks-morphisms.tex Tag 0CL0 (lemma-diagonal-diagonal), proof of (4)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-stack-isom-space-locally-finite-type",
+  "lem-sfb-stack-chartwise-smooth-etale-calculus",
+  "lem-sfb-space-unramified-permanence",
+  "lem-sfb-stack-representable-unramified-descent",
+  "lem-sfb-unramified-pseudo-torsor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-morphisms.tex",
+  "place": "Tag 0CL0 (lemma-diagonal-diagonal), proof of (4): Isom pseudo torsor under automorphisms; the atlas reduction uses Tag 04XD (lemma-check-property-covering) of stacks-properties.tex. The 2-fibre-product and conjugation calculations are written out."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an algebraic stack a smooth surjective scheme atlas has locally finite type automorphism algebraic space, which is unramified exactly when the diagonal of the stack is unramified",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y)\\n  [AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)],\\n  AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.FormallyUnramified fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FormallyUnramified\", \"doc\": \"The property of a morphism of schemes being formally unramified corresponds to the associated ring homomorphism being formally unramified, meaning there are no nontrivial derivations from the target r\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.FormallyUnramified\", \"doc\": \"The property of being formally unramified is multiplicative; that is, the composition of two formally unramified morphisms of schemes is again formally unramified.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack has unramified diagonal if and only if its inertia pulled back to a smooth atlas is unramified",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[FormallyUnramified f] [LocallyOfFiniteType f] : IsOpenImmersion (pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"[IsOpenImmersion (pullback.diagonal f)] : FormallyUnramified f\", \"doc\": \"If the diagonal morphism of a morphism $ f $ of schemes is an open immersion, then $ f $ is formally unramified. This instance asserts that the condition of the diagonal being an open immersion suffic\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.instDiagonalScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Immersion\", \"type\": \": IsImmersion (pullback.diagonal f)\", \"doc\": \"For any morphism $ f $ of schemes, the diagonal morphism from $ X $ to the pullback of $ f $ against itself is an immersion. This asserts that the canonical diagonal map associated to a morphism of sc\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \": MorphismProperty.IsStableUnderComposition @FormallyUnramified\", \"doc\": \"The composition of two formally unramified morphisms of schemes is also formally unramified.\"}\n  {\"name\": \"AlgebraicGeometry.formallyUnramified_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.FormallyUnramified f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if and only if for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V $ maps into $ U $\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Inertia\", \"Unramified\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicStack|inertia.*unramified|automorphism.*locally.*finite.*type",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/NumberField/Completion/Ramification.lean\", \"line\": \"114\", \"text\": \"theorem inertiaDeg_eq_one (hw : w ∈ unramifiedPlacesOver L v) : v.inertiaDeg w = 1 :=\"}\n  {\"file\": \"Mathlib/RingTheory/DedekindDomain/Different.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.NumberTheory.RamificationInertia.Unramified\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth locally on an algebraic stack the unramified inertia criterion for Deligne Mumford morphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned scheme/ring, sheaf or manifold declarations do not state this theorem about algebraic spaces and algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "PseudoTorsor|pseudo.?torsor|AlgebraicSpace|AlgebraicStack",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally finite type pseudo torsor under an unramified group algebraic space is unramified",
+   "results": "Returned Algebra.Unramified.mk, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, Algebra.Unramified.finiteType, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.FormallyUnramified.mk, AlgebraicGeometry.FormallyUnramified.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"Torsor\"",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo torsor X under an unramified group algebraic space G over B is unramified over B when X and G are locally of finite type",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.FormallyUnramified.instIsStableUnderCompositionScheme, Algebra.Unramified.formallyUnramified, AlgebraicGeometry.formallyUnramified_iff.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic stack has unramified diagonal if and only if the automorphism algebraic space of a smooth surjective atlas is unramified",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Unramified\", \"diagonal\"",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An algebraic stack has unramified diagonal exactly when the inertia over a smooth atlas is unramified",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, Algebra.FormallyEtale.iff_formallyUnramified_and_formallySmooth, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.FormallyEtale.iff_unramified_and_smooth, AlgebraicGeometry.formallyUnramified_iff.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a simply transitive group action on an algebraic space, local finite type and an unramified group imply the acted-on space is unramified, allowing empty fibres",
+   "results": "Returned Algebra.Unramified.finiteType, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.Unramified.comp, Algebra.Unramified.formallyUnramified, Algebra.unramifiedLocus_eq_univ_iff, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.FormallyUnramified.instHasRingHomPropertyFormallyUnramified.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deligne Mumford criterion: unramified stabilizers on a smooth presentation detect an unramified diagonal of an algebraic stack",
+   "results": "Returned AlgebraicGeometry.FormallyUnramified.instOfIsOpenImmersionDiagonalScheme, AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.FormallyUnramified.of_comp, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.formallyUnramified_iff, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "unramified.*torsor|torsor.*unramified|IsPretransitive|IsTorsor",
+   "results": "No hits.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyUnramified.*diagonal|isOpenImmersion_diagonal|class FormallyUnramified",
+   "results": "Returned Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean, Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme/ring results do not state the assertion about algebraic spaces or algebraic stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-algebraic-stack-dm-point-stabilizer",
+  "date": "2026-10-22",
+  "group": "Q04"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: The Deligne--Mumford locus in the stack of proper curves. Supporting input: Stabilizer criterion for membership in the DM locus. Atlas construction and field-point test of Tag 0DSN, supporting the infinitesimal DM-locus input. Proof steps 3 and 4: identify the descended open as the maximal open with unramified relative diagonal.",
+   "via": [
+    "lem-sfb-algebraic-stack-dm-point-stabilizer",
+    "lem-sfb-curve-stack-infinitesimal-dm-locus",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-smooth-atlas-automorphism-diagonal-test",
+  "worker": "stage1",
+  "group": "Q21",
+  "summary": "Checked the unchanged diagonal criterion against Stacks 0CL0(4), 050Q, 04XR, 04XD and 0DSK. The seven-step proof identifies diagonal base changes, descends automorphism unramifiedness from the smooth atlas by conjugation, and applies the general locally finite type pseudo-torsor lemma to each Isom space. One statement-only supporting node is retained. Repair of returned head 41c3f70b4f4: rebuilt against the current DAG and re-read all cited statements. The changed chartwise calculus now spells out field-extension local lifting and its equivalence with scheme-base-change/chart surjectivity. Expanded step 3 to verify these conventions agree with representable-unramified descent and refreshed its citation to the current full statement. Other citation quotes still agree verbatim; no statement or dependency route changed. Reused the retained actual Mathlib searches.",
+  "blueprint": "Realizes the inherited place in det-thm-sf-ctf-stability-direct-images proof (3), through the supplied alteration/moduli/DM-locus prerequisite chain, specifically the atlas criterion used in steps 3 and 4 of lem-sfb-algebraic-stack-dm-point-stabilizer. It does not change the unit or chapter route. The ancestor tool returns None for this seeded new-target chain; blueprint.from.node and via are retained as supplied."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-df05b2ae9",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-df05b2ae9 (reviewer sub-agent of L); spot-checked: 6th delivery (38e1, 791e, ef5d, ce2d and 41c3 all PASSed). 41c3 was returned on 2026-10-23 05:16 because the statement of lem-sfb-stack-chartwise-smooth-etale-calculus changed. The statement now defines surjectivity as field-extension local lifting and says this is equivalent to the chart test for representable maps. Diff against the 41c3 snapshot: the new node lem-sfb-unramified-pseudo-torsor is byte-identical. In the item only step 3 and split_report changed; statement, stmt_deps, source, unit and chapter are unchanged. Every other cited statement is unchanged. The item is still unsplit live and on side-live, and there is no repair note. Step 3 now argues that, since p is surjective (chart test, which the chartwise statement equates with lifting), for t:Spec K→T there is, after some K⊂L, a pair v:Spec L→P with b_{t_L}≅p_v. That is an L-point of W over t_L, so q:W→T satisfies the lifting condition. The chartwise equivalence turns this into surjectivity after every scheme base change, which is the convention of lem-sfb-stack-representable-unramified-descent. Smooth gives flat and lfp. This is correct. I re-read the whole proof. Step 1: diagonal base change along (a,b) is Isom via (z,α,β)↦βα⁻¹, which gives the forward direction. Step 2: I and H are lft algebraic spaces by the Isom node. Step 4: W×_T H≅W×_P G_p by conjugation by θ. Step 5: H→T is unramified by permanence plus descent. Step 6: I is a pseudo H-torsor, empty I included. Step 7: apply the 0DSK node. proof_deps equals the union of the uses, and every step is under 2000 characters. Sources checked: Stacks 0CL0 (stacks-morphisms.tex l.1372), and 04TW (l.603) and 0DSK(1) (l.704) in spaces-groupoids.tex; 04TW needs no surjectivity. The new node states 0DSK(1) exactly and is not a duplicate. Small cases checked: X empty, X=G, G trivial; the lft hypothesis on X is necessary. No SGA source is cited. Batch-5: def-trf-algebraic-space is a general definition and lem-trf-space-fibre-products-etale-covers is a foundational algebraic-space lemma. The three sfb citations reach sec-trace-formula only through def-trf-algebraic-space. None of these is part of the trace formula or of Poincare duality, so all are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothAtlasAutomorphismDiagonalTest",
+  "declaration": "CategoryTheory.unramifiedModuliDiagonal_iff_smoothAtlas_automorphismSpace",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothAtlasAutomorphismDiagonalTest.lean",
+  "statement": "theorem unramifiedModuliDiagonal_iff_smoothAtlas_automorphismSpace {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) (hF : IsAlgebraicModuliStack F) (P : Over S) (p : BasedFunctor (discreteModuli (yoneda.obj P)) F) (hp : IsSmoothModuliAtlas F P p) (G : AlgebraicSpace S) (π : G.obj.obj ⟶ yoneda.obj P) (hG : HasSpaceBaseChange (moduliInertiaProjection F) P p G π) : HasUnramifiedModuliDiagonal F ↔ SpaceMapIsUnramified G P π",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59a1c8992",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Each part of the node's statement matches the Lean: IsAlgebraicModuliStack for the stack; IsSmoothModuliAtlas for the smooth surjective atlas p; hG presents the inertia pullback along p with projection π, which is G_p by Stacks 050Q; HasUnramifiedModuliDiagonal (tested over T x_S U) iff SpaceMapIsUnramified G P π. No extra hypotheses; quantifying over every presentation G is harmless. lean.statement is verbatim. The three added stmt_deps (algebraic-moduli-stack, open-moduli-substack, moduli-inertia) are landed def nodes owning the declarations used. The plain proof-dep import follows brief §3. No new definitions; the theorem-owned helper IsModuliAutomorphismSpace is correctly avoided (would be a cycle). Proof only sorry, docstrings with source places and blueprint tag, 7 proof steps, lines under 100 chars, universes bound, report sections present. Edge cases (empty stack, scheme stack, empty Isom, non-qc atlas) covered. No findings."
+ }
+}

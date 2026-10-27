@@ -1,0 +1,133 @@
+{
+ "id": "lem-sf-contravariant-comparison-iso-locus",
+ "kind": "statement",
+ "title": "Thick isomorphism locus of an exact contravariant transformation",
+ "statement": "Let C,D be pretriangulated categories [def-weil-triangulated-category] with additive integer shifts. Let B,E:C^op->D be triangulated functors and beta:B->E a natural transformation commuting with integer shifts. Then the object property P(K):=IsIso(beta_K) on C is triangulated and stable under retracts.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Zero maps between zero objects are invertible. The shift square transports invertibility. Apply the induced triangle morphism to the reversed distinguished triangle; its first and third components force the middle component invertible.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+   }
+  },
+  {
+   "text": "Naturality makes beta at a retract a retract in the arrow category. Isomorphisms are stable under such retracts, proving retract closure and closure under isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 and 08JC; signed internal Hom and its evaluation transpose, as expanded in steps 1--6 of lem-sf-site-hom-comparison-thick."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q1",
+  "date": "2026-10-25",
+  "note": "Complete Lean proof using existing triangle two-of-three, shifts, zero objects and arrow retracts; no sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The isomorphism locus of a natural transformation between triangulated functors is thick",
+   "results": "Functor.isTriangulated_of_iso and distinguished-triangle functor APIs found. No ObjectProperty isomorphism-locus theorem; use NatTrans triangle two-of-three and MorphismProperty retract stability.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Signed contravariant derived internal Hom exactness and its evaluation comparison commuting with shifts",
+   "results": "CochainComplex.shiftEval; CochainComplex.HomComplex.Cochain.leftUnshift_v; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt. These supply shift calculations and exact derived functors, not the native closed Hom signed structure or its comparison.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom contravariant exact functor signed shifts and closed comparison natural transformation commutes with shifts",
+   "results": "Exact-functor localization shift instances and CategoryTheory.Adjunction.IsTriangulated.commShift. No signed first-variable closed Hom or comparison shift theorem.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*[Tt]riangulat|[Tt]riangulat.*isIso; ihomComparison.*[Ss]hift|[Ss]hift.*ihomComparison",
+   "results": "No Mathlib match. Upstream mapTriangle and two-of-three, RetractArrow stability, and map_pre_app_comp_ihomComparison_app prove the categorical glue; upstream exists_distinguished_ihom_pre does not specify signed connecting maps.",
+   "date": "2026-10-25",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SiteHomComparisonThick",
+  "date": "2026-10-25",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-site-hom-comparison-thick",
+   "place": "Thick isomorphism locus of an exact contravariant transformation",
+   "via": [
+    "lem-weil-finite-duality-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ContravariantIsoLocus",
+  "file": "lean/Sheaf/CategoryTheory/ContravariantIsoLocus.lean",
+  "declaration": "CategoryTheory.contravariantComparison_isoLocus",
+  "statement": "theorem contravariantComparison_isoLocus :\n    let P : ObjectProperty C := fun K ↦ IsIso (β.app (op K))\n    P.IsTriangulated ∧ P.IsStableUnderRetracts",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50959",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T164119-L-953435",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-50959",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261025T164119-L-953435",
+  "kind": "interface",
+  "note": "independent cc review: item proof assembly + 3 new nodes/modules against lem-sf-site-hom-comparison-thick, change record site-hom-native-shifts, existing nativeInternalHom_contravariant_exact (sign convention), unit sk-prop-sf-rf-shriek-preservation realized; importer LisseFlatHomSiteComparison compiled against delivery"
+ }
+}

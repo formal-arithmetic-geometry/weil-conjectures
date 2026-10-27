@@ -1,0 +1,234 @@
+{
+ "id": "lem-sfb-normalized-comparison-tower-restriction",
+ "kind": "statement",
+ "title": "Common restricted value of the two coefficient-tower paths",
+ "statement": "Let $\\mathcal C_X^e,\\mathcal C_S^e$ be categories [def-nagata-category], for three coefficient labels $e=r,s,t$. Give functors $L^e:\\mathcal C_X^e\\to\\mathcal C_S^e$, $E^e:\\mathcal C_S^e\\to\\mathcal C_X^e$, and natural isomorphisms $\\rho^e:L^eE^e\\xrightarrow{\\sim}1$. Products of functors mean functional composition with canonical associators inserted. For each pair $ij=rs,st,rt$ give functors $F_Y^{ij}:\\mathcal C_Y^i\\to\\mathcal C_Y^j$, $Y=X,S$, and natural isomorphisms\n$$q^{ij}:L^jF_X^{ij}\\xrightarrow{\\sim}F_S^{ij}L^i,\\qquad h^{ij}:F_X^{ij}E^i\\xrightarrow{\\sim}E^jF_S^{ij}$$\nsuch that\n$$\\rho^jF_S^{ij}\\circ L^j(h^{ij})=F_S^{ij}(\\rho^i)\\circ(q^{ij}E^i).\\tag{N}$$\nGive natural isomorphisms $t_Y:F_Y^{st}F_Y^{rs}\\xrightarrow{\\sim}F_Y^{rt}$ for $Y=X,S$ satisfying\n$$q^{rt}\\circ(L^t t_X)=(t_SL^r)\\circ F_S^{st}(q^{rs})\\circ(q^{st}F_X^{rs}).\\tag{Q}$$\nFor $M\\in\\mathcal C_S^r$ define arrows from $A=F_X^{st}F_X^{rs}E^rM$ to $B=E^tF_S^{rt}M$ by\n$$h_L=E^t(t_S(M))\\circ h^{st}(F_S^{rs}M)\\circ F_X^{st}(h^{rs}(M)),\\qquad h_R=h^{rt}(M)\\circ t_X(E^rM).$$\nBoth restricted paths have the following common value, naturally in $M$:\n$$\\begin{aligned}\n\\rho^t(F_S^{rt}M)\\circ L^t(h_L)\n&=t_S(M)\\circ F_S^{st}F_S^{rs}(\\rho^r(M))\\circ F_S^{st}(q^{rs}(E^rM))\\circ q^{st}(F_X^{rs}E^rM)\\\\\n&=\\rho^t(F_S^{rt}M)\\circ L^t(h_R).\n\\end{aligned}\\tag{L}$$\nIn particular $L^t(h_L)=L^t(h_R)$. No faithfulness of $L^t$ or equality of the unrestricted paths is asserted.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(3), compatibility with coefficient associativity: the two restricted tower paths (L), isolated from returned parent steps 6 and 7; agent-extracted formal calculation, not a separate Stacks theorem"
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [
+  {
+   "text": "Fix $M$ and abbreviate $U=E^rM$, $V=F_S^{rs}M$, $W=F_S^{rt}M$, $a=h^{rs}(M)$, $b=h^{st}(V)$, $c=h^{rt}(M)$, $u=t_S(M)$ and $v=t_X(U)$. Set\n$$P=\\rho^t(W)\\circ L^t(h_L),\\quad R=\\rho^t(W)\\circ L^t(h_R),\\quad C=u\\circ F_S^{st}F_S^{rs}(\\rho^r(M))\\circ F_S^{st}(q^{rs}(U))\\circ q^{st}(F_X^{rs}U).$$\nUse the associativity and identity laws of [def-nagata-category] to omit parentheses. A functor preserves identity morphisms and composition; a natural transformation $\\alpha:F\\to G$ has $G(f)\\circ\\alpha_A=\\alpha_B\\circ F(f)$ for $f:A\\to B$; an isomorphism has a two-sided inverse. These are the definitions used below, with the components of natural isomorphisms regarded as arrows. All displayed composites have source $L^tF_X^{st}F_X^{rs}U$ and target $W$ when completed to $P,R,C$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 1"
+   }
+  },
+  {
+   "text": "Expand $h_L$ and use functoriality of $L^t$. Naturality of $\\rho^t:L^tE^t\\to1$ at $u:F_S^{st}V\\to W$ gives\n$$\\rho^t(W)\\circ L^tE^t(u)=u\\circ\\rho^t(F_S^{st}V).$$\nSubstitute this identity into the expansion, and then substitute (N) for the pair $st$ at the object $V$:\n$$P=u\\circ F_S^{st}(\\rho^s(V))\\circ q^{st}(E^sV)\\circ L^tF_X^{st}(a).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 2"
+   }
+  },
+  {
+   "text": "The arrow $a:F_X^{rs}U\\to E^sV$ belongs to $\\mathcal C_X^s$. Apply the defining naturality equation of $q^{st}:L^tF_X^{st}\\to F_S^{st}L^s$ to this particular arrow:\n$$q^{st}(E^sV)\\circ L^tF_X^{st}(a)=F_S^{st}L^s(a)\\circ q^{st}(F_X^{rs}U).$$\nSubstituting into the previous expression and combining adjacent functor images gives\n$$P=u\\circ F_S^{st}(\\rho^s(V)\\circ L^s(a))\\circ q^{st}(F_X^{rs}U).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 3"
+   }
+  },
+  {
+   "text": "Equation (N) for $rs$ evaluated at $M$ is exactly\n$$\\rho^s(V)\\circ L^s(a)=F_S^{rs}(\\rho^r(M))\\circ q^{rs}(U).$$\nSubstitute it in the expression from step 3 and distribute $F_S^{st}$ over this composition. The result is $P=C$, including every factor and its order in the first equality of (L).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 4"
+   }
+  },
+  {
+   "text": "Expand $h_R=c\\circ v$ and apply (N) for $rt$ at $M$. This gives\n$$R=F_S^{rt}(\\rho^r(M))\\circ q^{rt}(U)\\circ L^t(v).$$\nEquation (Q) evaluated at $U$ replaces its last two factors, so\n$$R=F_S^{rt}(\\rho^r(M))\\circ t_S(L^rU)\\circ F_S^{st}(q^{rs}(U))\\circ q^{st}(F_X^{rs}U).$$",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 5"
+   }
+  },
+  {
+   "text": "The arrow $\\rho^r(M):L^rU\\to M$ belongs to $\\mathcal C_S^r$. The defining naturality equation of $t_S:F_S^{st}F_S^{rs}\\to F_S^{rt}$ at this arrow is\n$$F_S^{rt}(\\rho^r(M))\\circ t_S(L^rU)=t_S(M)\\circ F_S^{st}F_S^{rs}(\\rho^r(M)).$$\nSubstituting in step 5 gives $R=C$. Together with step 4 this is the two equalities in (L). Compose $P=R$ on the left with the specified inverse of $\\rho^t(W)$; associativity and its inverse identity give $L^t(h_L)=L^t(h_R)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 6"
+   }
+  },
+  {
+   "text": "The equality is natural in $M$. Here is the elementary verification needed for the composites: for $\\alpha:F\\to G$, $\\beta:G\\to H$ and $f:M\\to N$,\n$$H(f)\\circ\\beta_M\\circ\\alpha_M=\\beta_N\\circ G(f)\\circ\\alpha_M=\\beta_N\\circ\\alpha_N\\circ F(f).$$\nApplying a functor to a naturality equation preserves it, by preservation of composition; evaluating a natural transformation after a functor preserves it by substituting that functor's image of $f$. Thus each factor in $P,R,C$ is a whiskered component of one of the given natural isomorphisms, and the displayed two-line calculation proves that each composite is natural. More explicitly, writing $T=F_S^{rt}$ and $D=L^tF_X^{st}F_X^{rs}E^r$, each $J=P,R,C$ satisfies $T(f)\\circ J_M=J_N\\circ D(f)$. Hence the component equalities just proved are equalities of natural transformations, as claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(3), final compatibility sentence; agent-written component calculation, step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(3), compatibility with coefficient associativity; formal consequences of the stated (N), (Q) and naturality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two coefficient tower comparison composites have equal restrictions by naturality and compatibility of inverse image comparisons",
+   "results": "8 hits: ModuleCat.restrictScalarsComp'App_inv_naturality, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, ModuleCat.restrictScalarsComp'App_hom_naturality, ModuleCat.restrictScalarsComp'App_hom_naturality_assoc, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.mapEq_trans, CategoryTheory.GradedObject.comapEq_trans, ModuleCat.restrictScalarsComp', Action.resComp; ",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality, whiskering, Kan-extension or scalar-restriction primitives do not state this normalization calculation; several naturality substitutions and the specified normalization identities are required"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality, CategoryTheory.Iso",
+   "results": "2 hits: CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk; ",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality, whiskering, Kan-extension or scalar-restriction primitives do not state this normalization calculation; several naturality substitutions and the specified normalization identities are required"
+  },
+  {
+   "tool": "grep",
+   "query": "(whisker_exchange|naturality_assoc|exchange.*whisker)",
+   "results": "25 hits: Mathlib/CategoryTheory/FiberedCategory/Grothendieck.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality, whiskering, Kan-extension or scalar-restriction primitives do not state this normalization calculation; several naturality substitutions and the specified normalization identities are required"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of coefficient associativity identifies the restrictions of two paths in a normalized extension comparison tower",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible natural isomorphism between composite functors makes two normalized restriction square paths equal after restriction",
+   "results": "8 hits: CategoryTheory.SmallObject.SuccStruct.arrowMap_restrictionLE, CategoryTheory.SmallObject.SuccStruct.extendToSuccRestrictionLEIso, CategoryTheory.SmallObject.SuccStruct.Iteration.subsingleton.MapEq.w, CategoryTheory.CatCommSq.iso_hom_naturality, localCohomology.diagramComp, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.CatCommSq.iso_hom_naturality_assoc, Action.resCongr_hom; ",
+   "date": "2026-10-22",
+   "verdict": "no match: naturality, whiskering, Kan-extension or scalar-restriction primitives do not state this normalization calculation; several naturality substitutions and the specified normalization identities are required"
+  },
+  {
+   "tool": "grep",
+   "query": "(normalized.*comparison|comparison.*tower|whisker_exchange)",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean, Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply naturality or specialized scalar restriction, not the full two normalized paths under (N) and (Q); the proof requires the explicit sequence of substitutions recorded here"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "9 hits: CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply naturality or specialized scalar restriction, not the full two normalized paths under (N) and (Q); the proof requires the explicit sequence of substitutions recorded here"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equality of restricted composites of natural isomorphisms using two normalization squares and a compatible composition isomorphism",
+   "results": "8 hits: CategoryTheory.Square.isoMk, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.Iso.coreComp, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjComp, CategoryTheory.NatIso.naturality_2_assoc, CategoryTheory.Limits.CategoricalPullback.toCatCommSqOver_mapIso_mkNatIso_eq_mkIso, CategoryTheory.bicategoricalIsoComp, Mathlib.Tactic.Monoidal.normalizeIsoComp; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply naturality or specialized scalar restriction, not the full two normalized paths under (N) and (Q); the proof requires the explicit sequence of substitutions recorded here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two normalized natural isomorphisms between functors have equal restrictions along a coefficient tower using naturality and composition compatibility",
+   "results": "8 hits: IsScalarTower.AlgEquiv.restrictNormalHom_comp, AlgEquiv.restrictNormal_trans, IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply, ModuleCat.restrictScalarsComp'App_inv_naturality, AlgEquiv.restrictNormal_commutes, ModuleCat.restrictScalarsComp'App_inv_naturality_assoc, Action.resCongr_hom, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_eq; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply naturality or specialized scalar restriction, not the full two normalized paths under (N) and (Q); the proof requires the explicit sequence of substitutions recorded here"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality rewrites and cancellation of an invertible component prove equality of two normalized functor comparison composites",
+   "results": "8 hits: CategoryTheory.NatIso.naturality_2', CategoryTheory.NatIso.naturality_2'_assoc, CategoryTheory.NatIso.naturality_1', CategoryTheory.NatIso.naturality_1'_assoc, CategoryTheory.NatIso.cancel_natIso_hom_right_assoc, CategoryTheory.NatIso.cancel_natIso_hom_right, CategoryTheory.NatIso.cancel_natIso_hom_left, CategoryTheory.Functor.map_comp_heq; ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits supply naturality or specialized scalar restriction, not the full two normalized paths under (N) and (Q); the proof requires the explicit sequence of substitutions recorded here"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normalized-immersion-comparison-coherence",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(3), last sentence \"compatible with this one\": comparison of the two restricted coefficient-tower paths",
+   "via": [
+    "lem-sfb-normalized-immersion-comparison-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normalized-comparison-tower-restriction",
+  "worker": "stage1",
+  "summary": "Q11 supplies the explicit component calculation: naturality of rho^t, normalization st, naturality of q^st, normalization rs prove the left path formula; normalization rt, compatibility Q and naturality of t_S prove the right path formula. Cancel the specified inverse of rho^t and verify naturality of composites. No new nodes: every step is substitution of a hypothesis or a defining naturality/functor/category equation. Statement unchanged.",
+  "blueprint": "det-prop-scalar-six-pullback proof (3), final sentence: the coefficient-associativity compatibility for the two normalized restricted tower paths. Steps 2–4 compute the left path, steps 5–6 the right path, step 7 verifies naturality."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-cb3a2ae74",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-cb3a2ae74 (reviewer sub-agent of L); spot-checked: I read the item in full: statement, 7 steps and the report. The statement is unchanged from the NN-created node, there are no new nodes, and there is no re-split note or dropped entry for this item. Source: det-prop-scalar-six-pullback proof (3), last sentence. The blueprint gives no argument there, so proof_origin=agent is correct. The item supplies the restricted-path (L) that parent lem-sfb-normalized-immersion-comparison-coherence cites in its tower step, and its hypotheses (N), (Q) and the ρ/q/h/t isos match what the parent supplies. Checked steps: 2 = ρ^t naturality at u=t_S(M), then (N)_st at V. 3 = q^st naturality at a=h^rs(M), an arrow in C_X^s. 4 = (N)_rs at M under F_S^st, giving P=C with factor order as in (L). 5 = (N)_rt at M, then (Q) at U; each arrow's source and target checked. 6 = t_S naturality at ρ^r(M), giving R=C; L^t(h_L)=L^t(h_R) follows by cancelling the iso ρ^t(W), with no faithfulness used. 7 = naturality of the composites. All steps are genuinely elementary, and def-nagata-category, a Mathlib-leaf category definition, is cited correctly for assoc/id. Edge cases: identity data, empty categories and non-faithful L^t are all fine, and the item makes no unrestricted overclaim. Duplicate search: lem-sfb-scalar-inverse-image-tower-diagram is a concrete instance of hypothesis (Q), not (L); no duplicate found. No off-unit tool, no SGA citation, no changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedComparisonTowerRestriction",
+  "declaration": "CategoryTheory.normalizedComparisonTower_restriction",
+  "declarations": [
+   "CategoryTheory.normalizedComparisonTowerLeftPath",
+   "CategoryTheory.normalizedComparisonTowerRightPath",
+   "CategoryTheory.normalizedComparisonTower_restriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormalizedComparisonTowerRestriction.lean",
+  "statement": "theorem normalizedComparisonTower_restriction {Xr : Type uXr} [Category.{vXr} Xr] {Xs : Type uXs} [Category.{vXs} Xs] {Xt : Type uXt} [Category.{vXt} Xt] {Sr : Type uSr} [Category.{vSr} Sr] {Ss : Type uSs} [Category.{vSs} Ss] {St : Type uSt} [Category.{vSt} St] (Lr : Xr ⥤ Sr) (Ls : Xs ⥤ Ss) (Lt : Xt ⥤ St) (Er : Sr ⥤ Xr) (Es : Ss ⥤ Xs) (Et : St ⥤ Xt) (ρr : Er ⋙ Lr ≅ 𝟭 Sr) (ρs : Es ⋙ Ls ≅ 𝟭 Ss) (ρt : Et ⋙ Lt ≅ 𝟭 St) (FXrs : Xr ⥤ Xs) (FXst : Xs ⥤ Xt) (FXrt : Xr ⥤ Xt) (FSrs : Sr ⥤ Ss) (FSst : Ss ⥤ St) (FSrt : Sr ⥤ St) (qrs : FXrs ⋙ Ls ≅ Lr ⋙ FSrs) (qst : FXst ⋙ Lt ≅ Ls ⋙ FSst) (qrt : FXrt ⋙ Lt ≅ Lr ⋙ FSrt) (hrs : Er ⋙ FXrs ≅ FSrs ⋙ Es) (hst : Es ⋙ FXst ≅ FSst ⋙ Et) (hrt : Er ⋙ FXrt ≅ FSrt ⋙ Et) (Nrs : ∀ M : Sr, Ls.map (hrs.hom.app M) ≫ ρs.hom.app (FSrs.obj M) = qrs.hom.app (Er.obj M) ≫ FSrs.map (ρr.hom.app M)) (Nst : ∀ M : Ss, Lt.map (hst.hom.app M) ≫ ρt.hom.app (FSst.obj M) = qst.hom.app (Es.obj M) ≫ FSst.map (ρs.hom.app M)) (Nrt : ∀ M : Sr, Lt.map (hrt.hom.app M) ≫ ρt.hom.app (FSrt.obj M) = qrt.hom.app (Er.obj M) ≫ FSrt.map (ρr.hom.app M)) (tX : FXrs ⋙ FXst ≅ FXrt) (tS : FSrs ⋙ FSst ≅ FSrt) (Q : ∀ U : Xr, Lt.map (tX.hom.app U) ≫ qrt.hom.app U = qst.hom.app (FXrs.obj U) ≫ FSst.map (qrs.hom.app U) ≫ tS.hom.app (Lr.obj U)) : (Functor.whiskerRight (normalizedComparisonTowerLeftPath Er Es Et FXrs FXst FSrs FSst FSrt hrs hst tS) Lt ≫ Functor.whiskerLeft FSrt ρt.hom = Functor.whiskerLeft (Er ⋙ FXrs) qst.hom ≫ Functor.whiskerRight (Functor.whiskerLeft Er qrs.hom) FSst ≫ Functor.whiskerRight (Functor.whiskerRight ρr.hom FSrs) FSst ≫ tS.hom) ∧ (Functor.whiskerLeft (Er ⋙ FXrs) qst.hom ≫ Functor.whiskerRight (Functor.whiskerLeft Er qrs.hom) FSst ≫ Functor.whiskerRight (Functor.whiskerRight ρr.hom FSrs) FSst ≫ tS.hom = Functor.whiskerRight (normalizedComparisonTowerRightPath Er Et FXrs FXst FXrt FSrt hrt tX) Lt ≫ Functor.whiskerLeft FSrt ρt.hom) ∧ Functor.whiskerRight (normalizedComparisonTowerLeftPath Er Es Et FXrs FXst FSrs FSst FSrt hrs hst tS) Lt = Functor.whiskerRight (normalizedComparisonTowerRightPath Er Et FXrs FXst FXrt FSrt hrt tX) Lt",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "The two path helpers are the explicit natural-transformation composites named h_L and h_R in the node; all three conclusion clauses are natural-transformation equalities, hence hold naturally in M. Functor composition is definitionally associative in Mathlib; canonical associators have identity components."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5ba1be5c",
+  "group": "NX",
+  "result": "pass",
+  "note": "Each hypothesis matches the node: 6 categories with 12 independent universes; L, E, F functors; isos rho Ee⋙Le≅𝟭, q FXij⋙Lj≅Li⋙FSij, h Ei⋙FXij≅FSij⋙Ej, t; (N) for rs/st/rt componentwise and (Q) at every U, in diagrammatic order. Helpers h_L = whiskerRight hrs FXst ≫ whiskerLeft FSrs hst ≫ whiskerRight tS Et and h_R = whiskerLeft Er tX ≫ hrt are genuine composites, not hollow. Conjuncts 1-2 are the two equalities of (L), factor by factor; conjunct 3 is L^t(h_L)=L^t(h_R). All are natural-transformation equalities, so natural in M, with no unrestricted overclaim. Statement verbatim in file, one sorry, source and blueprint docstrings, 7-step proof plan, Mathlib-only import, stmt_deps unchanged (def-nagata-category = Mathlib Category). Live node is split with no lean record and the item is not dropped. No compile run since no file changed; worker reports a clean ~3 s compile. Advisory: the NX second reading is an author self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "U6",
+  "result": "pass",
+  "landing": "20261022T144250-L-1557936",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.normalizedComparisonTower_restriction"
+  ],
+  "sorry_after": []
+ }
+}

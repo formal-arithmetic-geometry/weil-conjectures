@@ -1,0 +1,285 @@
+{
+ "id": "lem-sfb-etale-zariski-module-geometric-stalk",
+ "kind": "statement",
+ "title": "Geometric stalk of Zariski-to-etale module pullback",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], and let $\\epsilon_T:(T_{\\mathrm{et}},\\mathcal O_{T,\\mathrm{et}})\\to(T_{\\mathrm{Zar}},\\mathcal O_T)$ be the canonical morphism of ringed sites, with tensor module pullback and restriction direct image [lem-trf-zariski-etale-tensor-sections]. Let $\\bar x:\\operatorname{Spec}\\Omega\\to T$ be a geometric point [def-weil-geometric-point] with image $x$. Put $R=\\mathcal O_{T,x}$ and let $K\\subseteq\\Omega$ be the separable algebraic closure of the residue field $\\kappa(x)$ [def-weil-residue-field] in $\\Omega$ [def-weil-pbc-relative-separable-closure]. Write $R^{\\mathrm{sh}}$ for the strict henselization of the local ring $R$ relative to $K$ [def-sc-ring-strict-henselization]. Geometric stalks mean the pointed-etale-neighbourhood colimits [def-weil-pbc-geometric-stalks]; Zariski module stalks are [def-pc-module-stalk-functor]. There is a canonical $R$-algebra isomorphism\n$$\\mathcal O_{T,\\mathrm{et},\\bar x}\\cong R^{\\mathrm{sh}}.$$\nFor every sheaf $M$ of $\\mathcal O_T$-modules [def-weil-sheaf-of-modules-category], without any quasi-coherence hypothesis, there is a natural isomorphism of $R^{\\mathrm{sh}}$-modules\n$$(\\epsilon_T^*M)_{\\bar x}\\cong M_x\\otimes_R R^{\\mathrm{sh}}.$$\nThe ring map used on the right is the structural map of the strict henselization, and the isomorphisms commute with every module morphism $M\\to N$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, lemma-describe-etale-local-ring; sites-modules.tex Tag 05V5, lemma-pullback-stalk, applied to epsilon_T and its geometric point; combined in spaces-perfect.tex proof of Tag 08H8, lemma-epsilon-flat."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-weil-geometric-point",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-geometric-stalks",
+  "def-pc-module-stalk-functor",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-residue-field",
+  "def-weil-pbc-relative-separable-closure"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A\\subseteq T$ containing $x$, and let $\\mathfrak p$ correspond to $x$. The affine-open stalk localization identifies $A_{\\mathfrak p}$ with $R$, carrying $a/1$ to its germ. Compute the structure-ring stalk as the pointed-neighbourhood colimit. Restrict to affine neighbourhoods mapping into $U$: every neighbourhood admits such a refinement by applying the affine-shrink lemma to the inverse image of $U$. The pointed-neighbourhood category is cofiltered, so the full-subcategory colimit lemma applies. To stay within small indices, choose representatives from the set of affine etale schemes of the essential-smallness lemma, with each possible lift of $\\bar x$; those lifts form a set of scheme morphisms. This is a small full subcategory and every affine pointed object is isomorphic to a representative. The same full-subcategory lemma therefore justifies the restriction to representatives. Thus the stalk is canonically the colimit of the rings $B$ for affine pointed etale $\\operatorname{Spec}B\\to U$. All identifications preserve restriction maps and the germs of elements of $A$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-colimit-initial-full-subcategory",
+    "lem-weil-pbc-affine-etale-essentially-small-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, proof, affine neighbourhood and cofinal system."
+   }
+  },
+  {
+   "text": "A lift $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}B$ over $\\bar x$ is exactly a prime $\\mathfrak q$ over $\\mathfrak p$ and a compatible embedding $\\kappa(\\mathfrak q)\\to\\Omega$, by the geometric-point description. The etale residue-field lemma makes every element of $\\kappa(\\mathfrak q)$ separable algebraic over $\\kappa(x)$, so this embedding has image in $K$ by its definition. Conversely an embedding into $K$ gives the lift by $K\\subseteq\\Omega$. These operations are inverse on objects; on arrows the affine spectrum correspondence identifies a pointed scheme map with an $A$-algebra map $B\\to B'$ preserving the residue embedding. Hence the opposite affine-neighbourhood diagram is precisely the ring diagram of etale residue triples over $(A,\\mathfrak p,K)$, not just a diagram with the same objects. The equivalence clause of the colimit lemma identifies their colimits with the same coprojections.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-etale-residue-field-extension-separable",
+    "def-weil-pbc-relative-separable-closure",
+    "def-weil-pbc-etale-residue-triples",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, proof, translation into triples and factorization through the separable closure."
+   }
+  },
+  {
+   "text": "Apply the strict-henselization-triples lemma to the ring $A$, prime $\\mathfrak p$, and separable closure $K$: the relative-separable-closure definition ensures that $K$ is indeed a separable closure because $\\Omega$ is algebraically closed. Its canonical colimit identification gives $\\mathcal O_{T,\\mathrm{et},\\bar x}\\cong(A_{\\mathfrak p})^{\\mathrm{sh}}$. Substitute the germ-preserving localization $A_{\\mathfrak p}\\cong R$ from step 1 to obtain $\\alpha:\\mathcal O_{T,\\mathrm{et},\\bar x}\\cong R^{\\mathrm{sh}}$. This is an $R$-algebra isomorphism: every $a\\notin\\mathfrak p$ becomes invertible already in the refinement $D(a)\\subset U$, so the map out of $A$ on both sides extends uniquely to $A_{\\mathfrak p}$; on $b/a$ it is the germ of $b$ times the inverse germ of $a$. Thus the induced scalar map is the structural strict-henselization map required in the statement.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-relative-separable-closure",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, last sentence, applying algebra.tex Tag 04GW, lemma-strict-henselization-different."
+   }
+  },
+  {
+   "text": "Let $p$ be the etale topos point whose inverse image is the geometric stalk, supplied by the geometric-stalk-topos-point lemma, and put $q=\\epsilon_Tp$. For any set $E$ its direct image has, on a Zariski open $W$, the value $(q_*E)(W)=(p_*E)(W)=\\operatorname{Map}(\\operatorname{Hom}_T(\\operatorname{Spec}\\Omega,W),E)$, since $\\epsilon_{T,*}$ is restriction. The Hom set is a singleton if $x\\in W$ and empty otherwise, so this is exactly the ordinary skyscraper at $x$, including its restriction maps. Explicitly a morphism $F\\to q_*E$ is a compatible family $F(W)\\to E$ for opens $W\\ni x$; by the defining colimit of germs this is a map $F_x\\to E$. Thus its left adjoint $q^{-1}$ is canonically the ordinary stalk at $x$. The correspondence preserves addition, multiplication and scalar action because they are induced on germs. In particular the composition comparison identifies $(\\epsilon_T^{-1}M)_p$ with $M_x$ and $(\\epsilon_T^{-1}\\mathcal O_T)_p$ with $R$.",
+   "uses": [
+    "lem-fix-geometric-stalk-topos-point",
+    "lem-trf-zariski-etale-tensor-sections",
+    "def-weil-geometric-point",
+    "def-pc-module-stalk-functor",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-perfect.tex",
+    "place": "Tag 08H8, lemma-epsilon-flat, proof: image of the geometric point on the Zariski site; explicit skyscraper calculation, using the point model of etale-cohomology.tex Tag 04FM."
+   }
+  },
+  {
+   "text": "Apply the general ringed-topos tensor-pullback stalk comparison to $u=\\epsilon_T$, the point $p$ of step 4, and the arbitrary $\\mathcal O_T$-module $M$. Its hypotheses require only a morphism of ringed topoi and a module, both supplied here. It gives a natural isomorphism $(\\epsilon_T^*M)_{\\bar x}\\cong M_x\\otimes_R\\mathcal O_{T,\\mathrm{et},\\bar x}$, using precisely the stalk of the structure map as its ring map. Compose with $1\\otimes\\alpha$ from step 3. The resulting comparison is $R^{\\mathrm{sh}}$-linear, with inverse obtained by $1\\otimes\\alpha^{-1}$ and the inverse pullback-stalk comparison. For a morphism $h:M\\to N$, naturality of that comparison gives the tensor map $h_x\\otimes1$; composing with the fixed $1\\otimes\\alpha$ preserves this equality. This proves the claimed naturality and both clauses, without any quasi-coherence assumption.",
+   "uses": [
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-trf-zariski-etale-tensor-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk; application in spaces-perfect.tex Tag 08H8, lemma-epsilon-flat, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-affine-etale-essentially-small-cover",
+  "def-weil-geometric-point",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-etale-residue-field-extension-separable",
+  "def-weil-pbc-relative-separable-closure",
+  "def-weil-pbc-etale-residue-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-trf-zariski-etale-tensor-sections",
+  "def-pc-module-stalk-functor",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-ringed-topos-pullback-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 04HX, lemma-describe-etale-local-ring, with sites-modules.tex Tag 05V5, lemma-pullback-stalk, as combined in spaces-perfect.tex Tag 08H8, lemma-epsilon-flat."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Ss]trict[Hh]enseli|pullback.*[Ss]talk|[Ss]talk.*pullback",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"154\", \"text\": \"  let e : CommRingCat.of R ≅ (Spec <| .of R).presheaf.stalk (pullback.fst i₂ f x) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"157\", \"text\": \"  let α := e.hom ≫ (pullback.fst i₂ f).stalkMap x\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"160\", \"text\": \"    (IsLocalHom (((pullback.fst i₂ f).stalkMap x).hom.comp e.hom.hom))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"161\", \"text\": \"  let β := (pullback i₂ f).presheaf.stalkSpecializes h₁ ≫ Scheme.stalkClosedPointTo lft\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion.lean\", \"line\": \"176\", \"text\": \"  let φ : (pullback i₂ f).presheaf.stalk x ⟶ CommRingCat.of R := CommRingCat.ofHom <|\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"881\", \"text\": \"is a pullback square and `g` is an open immersion, then the stalk map induced by `snd` at `p`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"line\": \"884\", \"text\": \"noncomputable def stalkMapIsoOfIsPullback {P X Y Z : Scheme.{u}}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"103\", \"text\": \"    (fun Z ↦ Y.fromSpecStalk _) g f _ _ (fun _ ↦ .of_hasPullback _ _) (coproductIsCoproduct _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite.lean\", \"line\": \"406\", \"text\": \"        (Scheme.stalkMapIsoOfIsPullback (.of_hasPullback f ι) x))\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"19\", \"text\": \"We also show that (`AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback`)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean\", \"line\": \"112\", \"text\": \"lemma isEmbedding_pullback {X Y S : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) [SurjectiveOnStalks g] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean\", \"line\": \"104\", \"text\": \"  have := pullback_fst (P := @SurjectiveOnStalks) f g inferInstance\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion.lean\", \"line\": \"110\", \"text\": \"    (SurjectiveOnStalks.isEmbedding_pullback f g)\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"231\", \"text\": \"section stalkPullback\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"234\", \"text\": \"def stalkPullbackHom (f : X ⟶ Y) (F : Y.Presheaf C) (x : X) :\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"235\", \"text\": \"    F.stalk (f x) ⟶ ((pullback C f).obj F).stalk x :=\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"236\", \"text\": \"  (stalkFunctor _ (f x)).map ((pullbackPushforwardAdjunction C f).unit.app F) ≫\"}\n  {\"file\": \"Mathlib/Topology/Sheaves/Stalks.lean\", \"line\": \"242\", \"text\": \"lemma germ_stalkPullbackHom\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern Zariski stalks, affine-etale basis equivalences, or generic sheaf/category constructions; none states the small-etale structure-ring strict-henselization and module tensor-stalk comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme T and its small etale to Zariski ringed site map epsilon the geometric stalk of epsilon star M is M at x tensor the strict henselization of O at x",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] {x : ↥X} (f : X.presheaf.stalk x ⟶ R)\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)] (U : X.Opens)\\n  (hU :\\n    (CategoryTheory.ConcreteCategory.hom\\n          (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map f)\", \"doc\": \"Let $X$ be a scheme, $x \\\\in X$ a point, and $f: \\\\mathcal{O}_{X,x} \\\\to R$ a local homomorphism from the stalk of the structure sheaf at $x$ to a local ring $R$. This induces a scheme morphism $\\\\phi: \\\\o\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R : CommRingCat} [inst : IsLocalRing ↑R] (f : AlgebraicGeometry.Spec R ⟶ X)\\n  (U : X.Opens) (hU : (CategoryTheory.ConcreteCategory.hom f.base) (IsLocalRing.closedPoint ↑R) ∈ U),\\n  CategoryTheory.CategoryStruct.comp\\n      (X.presheaf.germ U ((CategoryTheory.ConcreteC\", \"doc\": \"Let $f: \\\\operatorname{Spec}(R) \\\\to X$ be a morphism from the spectrum of a local commutative ring $R$ to a scheme $X$. Let $p \\\\in \\\\operatorname{Spec}(R)$ be the closed point, and let $x = f(p)$ be its\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk_appTop\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x : ↥X},\\n  AlgebraicGeometry.Scheme.Hom.appTop (X.fromSpecStalk x) =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.germ ⊤ x trivial)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso (X.presheaf.stalk x)).inv\\n        ((AlgebraicGeomet\", \"doc\": \"The morphism on global sections induced by the embedding $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ is equal to the composition of the germ map $\\\\Gamma(X, \\\\mathcal{O}_X) \\\\to \\\\mathcal{O}_{X,x}$, th\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"{R S : CommRingCat} →\\n  (f : R ⟶ S) →\\n    (p : PrimeSpectrum ↑R) →\\n      S ⟶\\n        ((TopCat.Presheaf.pushforward CommRingCat (AlgebraicGeometry.Spec.topMap f)).obj\\n              (AlgebraicGeometry.Spec.structureSheaf ↑S).val).stalk\\n          p\", \"doc\": \"For a commutative ring $ R $ and an open subset $ U $ of its prime spectrum $ \\\\operatorname{Spec}(R) $, this constructs the canonical ring homomorphism from $ R $ to the ring of sections $ \\\\mathcal{O}\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑S)\\n  (x : CategoryTheory.ToType { carrier := ↑R, commRing := R.commRing }),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap (AlgebraicGeometry.Spec.sheafedSpaceMap f).hom p))\\n      ((CategoryTheory.C\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $p$ be a prime ideal in $S$. The homomorphism $f$ induces a map on the stalks of the structure sheaves, $f^\\\\#_p: \\\\mathcal{O}_{\\\\mathrm{S\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.fromSpecStalk_app\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} {x : ↥X} (hxU : x ∈ U),\\n  AlgebraicGeometry.Scheme.Hom.app (X.fromSpecStalk x) U =\\n    CategoryTheory.CategoryStruct.comp (X.presheaf.germ U x hxU)\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso (X.presheaf.stalk x)).inv\\n  \", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, the application of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X$ at an open subset $U \\\\subseteq X$ containing $x$ is given by the composition of t\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ (R S : CommRingCat) (p : PrimeSpectrum ↑R) [inst : Algebra ↑R ↑S] (a : ↑{ carrier := ↑S, commRing := S.commRing }),\\n  (AlgebraicGeometry.StructureSheaf.toPushforwardStalkAlgHom R S p) a =\\n    (((TopCat.Presheaf.pushforward CommRingCat\\n                  (AlgebraicGeometry.Spec.topMap (CommRingCat.o\", \"doc\": \"Given commutative rings $ R $ and $ S $ where $ S $ is an $ R $-algebra, and a point $ p $ in the prime spectrum $ \\\\operatorname{Spec}(S) $, this constructs the canonical $ R $-algebra homomorphism fr\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑R),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.StructureSheaf.toPushforwardStalk f p) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.toStalk (↑R) p)\\n      ((TopCat.Presheaf.stalkFunctor CommRingCat p).ma\", \"doc\": \"For a ring homomorphism $ f : R \\to S $ and a point $ p $ in $ \\\\operatorname{Spec}(R) $, the composition of $ f $ with the canonical morphism from $ R $ to the pushforward of the structure sheaf on $ \\\\\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern Zariski stalks, affine-etale basis equivalences, or generic sheaf/category constructions; none states the small-etale structure-ring strict-henselization and module tensor-stalk comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stalk of pullback of a module under a morphism of ringed topoi equals tensor product of the stalk and target local ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toStalk M x) (ModuleCat.Tilde.stalkToFiberLinearMap M x) =\\n    ModuleCat.ofHom (LocalizedModule.mkLinearMap x.asIdeal.primeCompl ↑M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, there exists a canonical morphism from the stalk of the sheaf $ \\\\widetilde{M} $\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)),\\n  (ModuleCat.Tilde.stalkIso M x).hom = ModuleCat.Tilde.stalkToFiberLinearMap M x\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_toStalk_apply\", \"module\": \"Mathlib/AlgebraicGeometry/Spec\", \"type\": \"∀ {R S : CommRingCat} (f : R ⟶ S) (p : PrimeSpectrum ↑S)\\n  (x : CategoryTheory.ToType { carrier := ↑R, commRing := R.commRing }),\\n  (CategoryTheory.ConcreteCategory.hom\\n        (AlgebraicGeometry.PresheafedSpace.Hom.stalkMap (AlgebraicGeometry.Spec.sheafedSpaceMap f).hom p))\\n      ((CategoryTheory.C\", \"doc\": \"Let $f: R \\\\to S$ be a homomorphism of commutative rings, and let $p$ be a prime ideal in $S$. The homomorphism $f$ induces a map on the stalks of the structure sheaves, $f^\\\\#_p: \\\\mathcal{O}_{\\\\mathrm{S\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ≅ ((TopCat.Pre\", \"doc\": \"For any category $\\\\mathcal{C}$ with colimits, topological spaces $X$ and $Y$, a continuous map $f: X \\\\to Y$, a presheaf $\\\\mathcal{F}$ on $Y$, and a point $x \\\\in X$, there is an isomorphism between the\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) {Z : ModuleCat R}\\n  (h : ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl ↑M) ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.Tilde.toStalk M x)\\n      (CategoryTheory.CategoryStruct.comp (Mo\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, there exists a canonical morphism from the stalk of the sheaf $ \\\\widetilde{M} $ at the point correspon\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ ((TopCat.Pre\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackInv\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\\n      {X Y : TopCat} →\\n        (f : X ⟶ Y) →\\n          (F : TopCat.Presheaf C Y) →\\n            (x : ↑X) →\\n              ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ F.stalk ((Categor\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $F$ be a presheaf on $Y$ with values in a category $C$ that has colimits, and $x$ be a point in $X$. This definition constructs the can\"}\n  {\"name\": \"ModuleCat.Tilde.toStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (M : ModuleCat R) → (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) → ModuleCat.of R ↑M ⟶ M.tildeInModuleCat.stalk x\", \"doc\": \"For a point $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, this defines the canonical morphism from the module $ M $ (viewed as an object in the category of $ R $-modules) to the stalk of the\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern Zariski stalks, affine-etale basis equivalences, or generic sheaf/category constructions; none states the small-etale structure-ring strict-henselization and module tensor-stalk comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric stalk of etale structure sheaf is strict henselization and module pullback stalk tensor formula",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(f : X ⟶ Y) [IsOpenImmersion f] (x : X) :\\n  restrictFunctor f ⋙ toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ x ≅\\n    toPresheaf _ ⋙ TopCat.Presheaf.stalkFunctor _ (f x)\", \"doc\": \"For an open immersion of schemes $f: X \\\\to Y$ and a point $x \\\\in X$, this definition establishes a natural isomorphism between the functor that computes the stalk at $x$ of the pullback of a sheaf of \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(p : PrimeSpectrum R) : IsLocalization.AtPrime ((structureSheaf R).presheaf.stalk p) p.asIdeal\", \"doc\": \"For any commutative ring $ R $ and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R), \\\\mathfrak{p}} $ of the structure sheaf at $ \\\\mathfrak{p} $ is canonically i\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.instIsIsoCommRingCatStalkToFiberRingHom\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum R) : IsIso (stalkToFiberRingHom R x)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the ring homomorphism from the stalk $ \\\\mathcal{O}_x $ of the structure sheaf at $ x $ to the localizat\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"(x : PrimeSpectrum.Top R) : (structureSheaf R).presheaf.stalk x ≅ CommRingCat.of (Localization.AtPrime x.asIdeal)\", \"doc\": \"For a commutative ring $ R $ and a point $ x $ in its prime spectrum $ \\\\operatorname{Spec}(R) $, the stalk $ \\\\mathcal{O}_{\\\\operatorname{Spec}(R),x} $ of the structure sheaf at $ x $ is isomorphic to t\"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n  {\"name\": \"ModuleCat.Tilde.toOpen_germ_apply\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (x : ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (hx : x ∈ U) (x_1 : CategoryTheory.ToType (ModuleCat.of R ↑M)),\\n  (CategoryTheory.ConcreteCategory.hom (M.tildeInModuleCat.ger\", \"doc\": \"Let $R$ be a commutative ring, $M$ be an $R$-module, and $\\\\widetilde{M}$ be the sheaf of modules on the prime spectrum $\\\\operatorname{Spec}(R)$ associated to $M$. Let $U$ be an open subset of $\\\\operat\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Field (X.residueField x)\", \"doc\": \"For any scheme $X$ and any point $x$ in $X$, the stalk of the structure sheaf at $x$ is a local ring, i.e., $\\\\mathcal{O}_{X,x}$ is a local ring.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace\", \"type\": \"(x : X) : IsLocalRing (X.presheaf.stalk x)\", \"doc\": \"For any locally ringed space $X$ and any point $x$ in $X$, the stalk of the structure sheaf (a presheaf of commutative rings) at $x$ is a local ring. This asserts the defining property of a locally ri\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern Zariski stalks, affine-etale basis equivalences, or generic sheaf/category constructions; none states the small-etale structure-ring strict-henselization and module tensor-stalk comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ≅ ((TopCat.Presheaf.pullback C f).obj F).stalk x\", \"doc\": \"The isomorphism `ℱ_{f(x)} ≅ (f⁻¹ℱ)ₓ`.\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ ((TopCat.Presheaf.pullback C f).obj F).stalk x\", \"doc\": \"The morphism `ℱ_{f x} ⟶ (f⁻¹ℱ)ₓ` that factors through `(f_*f⁻¹ℱ)_{f x}`.\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) : ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ F.stalk ((CategoryTheory.ConcreteCategory.hom f) x)\", \"doc\": \"The morphism `(f⁻¹ℱ)ₓ ⟶ ℱ_{f(x)}`.\"}\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) : ((TopCat.Presheaf.pullback C f).obj F).obj (Opposite.op U) ⟶ F.stalk ((CategoryTheory.ConcreteCategory.h\", \"doc\": \"The morphism `(f⁻¹ℱ)(U) ⟶ ℱ_{f(x)}` for some `U ∋ x`.\"}\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) : CategoryTheory.CategoryStruct.comp (TopCat.Presheaf.germToPullbackStalk C f F U x hx) (TopCat.Presheaf.s\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (V : TopologicalSpace.Opens ↑X) (hV : x ∈ V) : CategoryTheory.CategoryStruct.comp (((TopCat.Presheaf.pullback C f).obj F).germ V x hV) (TopCat.Presheaf\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germToPullbackStalk_stalkPullbackHom_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U) {Z : C} (h : ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ Z) : CategoryTheory.CategoryStruct.comp (Top\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (V : TopologicalSpace.Opens ↑X) (hV : x ∈ V) {Z : C} (h : F.stalk ((CategoryTheory.ConcreteCategory.hom f) x) ⟶ Z) : CategoryTheory.CategoryStruct.comp\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) : CategoryTheory.CategoryStruct.comp (((TopCat.P\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (U : TopologicalSpace.Opens ↑Y) (hU : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) : CategoryTheory.CategoryStruct.comp (F.germ U ((CategoryTheory.Co\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X) (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) {Z : C} (h : F.stalk ((CategoryTheory.ConcreteCa\", \"doc\": \"\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] [CategoryTheory.Limits.HasColimits C] {X Y : TopCat} (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (U : TopologicalSpace.Opens ↑Y) (hU : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) {Z : C} (h : ((TopCat.Presheaf.pullback C f).obj F).stalk x ⟶ Z) :\", \"doc\": \"\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: these results concern Zariski stalks, affine-etale basis equivalences, or generic sheaf/category constructions; none states the small-etale structure-ring strict-henselization and module tensor-stalk comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric fibre of the small etale structure ring is the strict henselization of the local ring and pullback of arbitrary modules has tensor product fibre",
+   "results": "Actual command results: Algebra.Etale.baseChange, Algebra.IsEtaleAt, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.etaleLocus, Algebra.FormallyEtale.instTensorProduct, Algebra.Etale.exists_subalgebra_fg, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-23",
+   "verdict": "no match: residue/localization and general algebra results do not identify the small-etale structure stalk or arbitrary Zariski module pullback stalk"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]trict[Hh]enseli|[Ss]talk.*[Tt]ensor|[Tt]ensor.*[Ss]talk",
+   "results": "Actual command results: Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks.lean; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-23",
+   "verdict": "no match: residue/localization and general algebra results do not identify the small-etale structure stalk or arbitrary Zariski module pullback stalk"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The stalk of a module pulled back from the Zariski site to the etale site is extension of scalars to the strict henselization",
+   "results": "Actual command results: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, PresheafOfModules.pullback, AlgebraicGeometry.localRingHom_comp_stalkIso, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.instIsLocalizedModuleCarrierOfStalkTildeInModuleCatPrimeComplAsIdealHomToStalk, ModuleCat.Tilde.toStalk, ModuleCat.Tilde.localizationToStalk_mk, AlgebraicGeometry.StructureSheaf.IsLocalization.to_stalk",
+   "date": "2026-10-23",
+   "verdict": "no match: residue/localization and general algebra results do not identify the small-etale structure stalk or arbitrary Zariski module pullback stalk"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"tensor\"",
+   "results": "Actual command results: RingHom.SurjectiveOnStalks.tensorProductMap, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, Module.rankAtStalk_tensorProduct, Module.rankAtStalk_tensorProduct_of_isScalarTower, Module.rankAtStalk_eq_finrank_tensorProduct",
+   "date": "2026-10-23",
+   "verdict": "no match: residue/localization and general algebra results do not identify the small-etale structure stalk or arbitrary Zariski module pullback stalk"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The etale local ring at a geometric point is canonically isomorphic to the strict henselization of the Zariski local ring",
+   "results": "Actual command results: RingHom.Etale.ofLocalizationSpan, RingHom.Etale.ofLocalizationSpanTarget, Algebra.IsEtaleAt, Algebra.mem_etaleLocus_iff, AlgebraicGeometry.stalkClosedPointIso, Algebra.exists_etale_of_isEtaleAt, Algebra.Etale.of_isLocalizationAway, Algebra.etaleLocus",
+   "date": "2026-10-23",
+   "verdict": "no match: residue/localization and general algebra results do not identify the small-etale structure stalk or arbitrary Zariski module pullback stalk"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-etale-zariski-equivalence",
+  "date": "2026-10-23",
+  "group": "NZ"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof, reduction to prestable curves, and 0E78 proof, decomposition by genus before imposing stability. Supporting input: 0E1J proof, perfectness and arbitrary derived base change before extracting the positive-degree perfect summand. Supporting input to this derived direct-image specialization: Tags 08H8 (lemma-epsilon-flat), 071Q (lemma-derived-quasi-coherent-small-etale-site), including its quasi-inverse and counit proof, and 08GH (remark-match-total-direct-images); tensor normalization from descent.tex Tag 03FH (remark-change-topologies-ringed-sites). Stalk input for 08H8: 04HX and 05V5, before using faithful flatness.",
+   "via": [
+    "lem-sfb-derived-etale-zariski-equivalence",
+    "lem-sfb-proper-flat-space-derived-base-change",
+    "lem-sfb-curve-h0-genus-strata",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-etale-zariski-module-geometric-stalk",
+  "worker": "stage1",
+  "summary": "Checked Stacks 04HX, 04GW, 05V5 and the application in 08H8. Kept the statement and its hypotheses unchanged. Reused the existing affine-neighbourhood, residue-triple and general ringed-topos tensor-stalk nodes; wrote the affine diagram identification, smallness, structural ring map and Zariski point comparison explicitly. No new nodes. No exact project attachment or Mathlib match found.",
+  "blueprint": "Supporting stalk input in the inherited from.place chain for det-thm-sf-ctf-stability-direct-images (3), via lem-sfb-derived-etale-zariski-equivalence and 08H8. Read the current latest sk-thm-sf-ctf-stability and direct-images proof. This split supplies the stalk calculation below the existing unit route; it changes neither the unit nor its route. Whole-blueprint searches for strict henselization, etale local ring, stalk and pullback stalk found no duplicate of the two-clause item. The inherited nearest blueprint ancestor is null; retained that provenance and its specified place/via.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Identify the affine pointed residue-triple colimit with the strict henselization of the ordinary local ring. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Realize the geometric stalk as a topos point with the explicit skyscraper right adjoint. No statement of this unit supplies this generic input."
+   },
+   {
+    "node": "lem-trf-zariski-etale-tensor-sections",
+    "why": "Use the existing generic statement as a tool below the unit route. No statement of this unit supplies this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-trf-zariski-etale-tensor-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-b3e917bf8",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-b3e917bf8 (reviewer sub-agent of L); spot-checked: PASS, no changes (fixes/ empty). This is the first delivery of the item: the live node is still unsplit and there is no repair note. Only the proof, proof_deps, proof_origin, status, searches and split_report changed; the statement and stmt_deps are unchanged. No new nodes, and no SGA anywhere. Statement against the sources: Stacks 04HX (etale-cohomology.tex l.4257) gives the ring clause relative to the separable closure K of κ(x) in Ω, which is def-sc-ring-strict-henselization. Stacks 05V5 (sites-modules.tex l.6969) gives the module clause for any module, with no quasi-coherence needed. Step 1: affine-shrink with W=f⁻¹(U), then cofilteredness and colimit-initial-full-subcategory (1), used twice (restriction to U, then to small representatives); this is 04HX's cofinality sentence written out. Step 2: geometric-point plus étale residue separability puts the residue image in K; arrows become A-algebra maps preserving ψ; colimit lemma (2) gives the equivalence with the residue triples. Step 3: the parenthetical of strict-henselization-triples equals Stacks 04GW (algebra.tex l.43400), pairs (S,χ) correspond to triples, and the R-algebra compatibility is checked on b/a. Step 4 (elementary): ε_* on sets is restriction by sites-and-cohomology (3), Hom_T(Spec Ω,W) is a singleton exactly when x∈W, so the Zariski image of the point is the ordinary stalk. Step 5: the general ringed-topos pullback-stalk node (any morphism, any module), composed with 1⊗α; naturality is h_x⊗1. Small cases: T=Spec k gives M⊗k^sep (K, not Ω); separably closed k gives M back; M=0 and M=O_T check out. The three declared tool_uses (strict-henselization-triples, geometric-stalk-topos-point, zariski-etale-tensor-sections) are generic black boxes and accepted. Advisories: lem-weil-pbc-etale-local-ring-triples (slopmaster2 closed) already states steps 1–2, which stage 3 can use; the item's blueprint from.node is null, inherited and unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleZariskiModuleGeometricStalk",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleZariski_module_geometric_stalk",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.etaleStructureGeometricStalk",
+   "AlgebraicGeometry.Scheme.Modules.etaleStructureModuleAdditiveStalk",
+   "AlgebraicGeometry.Scheme.Modules.EtaleZariskiModuleStalkComparison",
+   "AlgebraicGeometry.Scheme.Modules.etaleZariski_module_geometric_stalk"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleZariskiModuleGeometricStalk.lean",
+  "statement": "theorem etaleZariski_module_geometric_stalk {T : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) [Algebra (IsLocalRing.ResidueField (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω)))) Ω] (hΩ : algebraMap (IsLocalRing.ResidueField (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω)))) Ω = (T.descResidueField (stalkClosedPointTo t)).hom) [Algebra (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω))) (separableClosure (IsLocalRing.ResidueField (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω)))) Ω)] [IsScalarTower (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω))) (IsLocalRing.ResidueField (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω)))) (separableClosure (IsLocalRing.ResidueField (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω)))) Ω)] (H : Type u) [CommRing H] [Algebra (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω))) H] (P : Algebra.StrictHenselizationPresentationIn.{u, u} (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω))) (separableClosure (IsLocalRing.ResidueField (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω)))) Ω) H) : ∃ c : ZariskiEtaleModuleContext T, ∃ α : etaleStructureGeometricStalk t ≃+* H, (∀ (W : T.Opens) (hx : t (IsLocalRing.closedPoint Ω) ∈ W) (w : (pointSmallEtale t).fiber.obj ((AlgebraicGeometry.gabberOpenEtale T).obj W)) (r : Γ(T, W)), α ((pointSmallEtale t).toPresheafFiber _ w T.etaleStructurePresheaf (T.restrictFunctorΓ.inv.app (op W) r)) = algebraMap (T.presheaf.stalk (t (IsLocalRing.closedPoint Ω))) H (T.presheaf.germ W (t (IsLocalRing.closedPoint Ω)) hx r)) ∧ (∀ (V : T.Etale) (v : (pointSmallEtale t).fiber.obj V) (r : Γ(V.left, ⊤)), (P.residueMap (α ((pointSmallEtale t).toPresheafFiber V v T.etaleStructurePresheaf r))).val = (v.left.appTop ≫ (ΓSpecIso (.of Ω)).hom) r) ∧ Nonempty (EtaleZariskiModuleStalkComparison t c H α)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbc69b826",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 04HX/05V5/08H8. ZariskiEtaleModuleContext has only Prop fields, so ∃ c adds nothing and c.extension is the canonical SheafOfModules.pullback. R = T.presheaf.stalk x; κ = IsLocalRing.ResidueField R (body of Scheme.residueField); hΩ ties the embedding to the one induced by t; K = separableClosure κ Ω; the Algebra R K and IsScalarTower instances force the composite and can always be supplied. H comes with a StrictHenselizationPresentationIn.{u,u} whose identification is a CommAlgCat R iso, so algebraMap R H is the structural map. α is fixed by the Zariski-germ equation (R-algebra compatibility) and the residueMap/evaluation equation (residue embedding). pointedEtaleStalk and Point.sheafFiber are colimits of the same diagram. The module comparison holds for all T.Modules with no quasi-coherence: H-action fixed by scalar_germ, H-linear iso to H ⊗_R M_x, naturality id⊗h_x, and unit_germ makes it unique. lean.statement matches the file exactly; only the lean field changed; no hollow definitions, sorry only; docstrings carry source and proof steps; both report sections present (second reading is the worker's own, not blocking). Edge cases checked: empty T, M=0, M=O_T, Spec k, universes. No compile needed since nothing was changed; worker reports clean compiles."
+ }
+}

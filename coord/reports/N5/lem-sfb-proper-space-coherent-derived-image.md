@@ -1,0 +1,62 @@
+# Stage-1 report: lem-sfb-proper-space-coherent-derived-image
+
+## Files written
+
+- dag/nodes/sec-six-functors-basics/lem-sfb-proper-space-coherent-derived-image.json: item, split into five proof steps; statement and statement dependencies unchanged.
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-proper-coherent-higher-images.json: new statement-only node, unsplit, no Mathlib match; Stacks 08AR.
+- dag/nodes/sec-six-functors-basics/lem-sfb-space-coherent-kernel-cokernel-extension.json: new statement-only node, unsplit, no Mathlib match; Stacks 07UC.
+- citations.json: exact statement quotations for all eleven step/node citations.
+- searches.jsonl: actual search-command log; the new nodes copy only searches that ran. write_split.py regenerates the sandbox JSON.
+
+## Attachments
+
+None. Searched the whole project WeilConjectures source by the item id, proper/coherent/derived-image terminology, algebraic-space terminology, and the new inputs' Stacks tags and kernel/cokernel terminology. Existing proper coherent direct-image declarations are for schemes on their Zariski ringed spaces, not the algebraic-space small-etale assertion. No exact project declaration with all the item's clauses was found.
+
+## Literature
+
+WANTED: none.
+
+Read spaces-perfect.tex, Tag 0D0R, lemma-direct-image-coherent-bdd-below, and its referenced bounded lemma Tag 08GK, lemma-direct-image-coherent. The first proof of 0D0R explicitly permits the same spectral-sequence argument as the bounded case; I use this route, not its alternative truncation-triangle argument. Read derived.tex Tag 015J, lemma-two-ss-complex-functor, including its bounded-below hypothesis, second page, convergence and finite-filtration clauses. Read spaces-cohomology.tex Tags 08AR, lemma-proper-pushforward-coherent, 07UC, lemma-coherent-abelian-Noetherian, and 07UB, lemma-coherent-Noetherian. Also inspected the module adjunction in sites-modules.tex Tag 03D7, injectives.tex Tag 079Q's module-sheaf example, and the standard truncation triangle in derived.tex Tag 08J5. All source citations are local Stacks documents, with tag and label; no SGA is used.
+
+The current blueprint consulted is literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/, especially _section.md and sk-thm-sf-ctf-stability-direct-images.proof.md. This is a supporting coherent-Ext input deep under the inherited alteration/moduli branch, not a replacement of the unit's six-functor route. Read the recorded chapter and unit as well; the unit record is an older imported sketch and is not edited. The ancestor command reports blueprint.from.node = None for this existing created-node chain; that inherited value and its via chain are preserved, and new nodes prepend this item exactly as the command prescribes. Whole-DAG and blueprint searches for coherent, coherent higher, higher direct image, coherent cohomology, coherent abelian, kernel cokernel, coherent modules, weak Serre, 08AR and 07UC found no existing node giving either new assertion.
+
+## What was wrong and what changed
+
+The live item had a statement and literature reference but no proof. Its statement is correct for the specialization S=Y and proper f, so there is no statement dispute or correction. The proof now spells out why the first-quadrant spectral sequence preserves the lower bound and why finite filtrations preserve coherence. It does not infer an upper cohomological bound for an unbounded-above input. I checked the source tag mapping: the bounded lemma is 08GK (lemma-direct-image-coherent), not 0D0Q; the saved sources use 08GK.
+
+No new node restates the derived conclusion. The higher-image node concerns a single coherent module and a fixed nonnegative derived degree, on arbitrary locally Noetherian algebraic-space targets. The closure node concerns only the heart's kernels, cokernels and extensions. The general hypercohomology theorem already exists and is reused as thm-sp-truncation-e2, rather than creating another spectral-sequence node. The zero module and finite filtration induction are written inside the item's argument. Every proof step is under 2000 characters.
+
+Mathlib hits were read, not treated as exact matches by their names. Tilde.lean:566-587 concerns underived quasi-coherence, not coherent higher images; IsProper and Noetherian hits concern schemes. SheafOfModules.instAbelian concerns the entire module category. FGModuleCat.instAbelian in Algebra/Category/FGModuleCat/Abelian.lean concerns finite modules over one Noetherian ring, and supplies no etale coherent-sheaf comparison. Quasicoherent.lean:236-279 defines finite presentations and quasi-coherence; it does not prove our closure theorem. Loogle's IsCoherent hits describe coherent topologies on spaces. Second semantic phrasings were run for each new node before declaring absence. The item's original searches are retained, and the new higher-image and derived-image searches supplement them.
+
+## Not duplicates
+
+lem-sfb-space-proper-coherent-higher-images vs lem-sfb-proper-space-coherent-derived-image: the new node is the ordinary higher direct image of one coherent module, with arbitrary locally Noetherian algebraic-space target; the item has a derived complex, globally bounded below coherent cohomology and a Noetherian scheme target. The spectral-sequence proof, including all page and abutment steps, stays in the item.
+lem-sfb-space-proper-coherent-higher-images vs lem-sfb-space-noetherian-coherent-support: support closure and coherent quasi-coherent subquotients contain no higher-direct-image conclusion.
+lem-sfb-space-proper-coherent-higher-images vs lem-sfb-space-coherent-derived-internal-hom: the existing statement is about derived internal Hom on one space, not proper direct image.
+lem-sfb-space-proper-coherent-higher-images vs lem-sfb-proper-space-coherent-ext-finite: the existing statement concerns global Ext as a finite module over an affine base, not coherent sheaves of higher direct images on a general base.
+lem-sfb-space-coherent-kernel-cokernel-extension vs lem-sfb-proper-space-coherent-derived-image: the new node is the kernel/cokernel/extension closure in a small-etale module category, with no proper map or derived complex.
+lem-sfb-space-coherent-kernel-cokernel-extension vs lem-sfb-space-noetherian-coherent-support: the existing node gives coherent quasi-coherent submodules and quotients and their support; it gives neither coherence of kernels/cokernels of arbitrary maps between coherent modules nor extension closure, the latter being needed for the finite abutment filtration.
+lem-sfb-space-coherent-kernel-cokernel-extension vs lem-sfb-space-coherent-derived-internal-hom: internal Hom preservation of bounded coherent cohomology does not state heart kernel/cokernel/extension closure.
+lem-sfb-space-coherent-kernel-cokernel-extension vs lem-sfb-proper-space-coherent-ext-finite: finite global Ext groups do not state closure properties of sheaves on arbitrary locally Noetherian algebraic spaces.
+lem-sfb-space-proper-coherent-higher-images vs lem-pc-coherent-hi: the existing result is for schemes on Zariski sites; the new theorem handles algebraic spaces on their small etale sites. This comparison/descent theorem is not a one-line specialization of scheme finiteness.
+lem-sfb-space-coherent-kernel-cokernel-extension vs lem-weil-pbc-coherent-modules-kernel-cokernel-sum: the existing theorem is for schemes or topological ringed spaces, with coherent defined in the Zariski/ringed-space sense; the new theorem is for modules on algebraic-space small etale sites with the chartwise finite-module meaning. No identification of these coefficient categories is assumed.
+
+## Review by N5
+
+I read delivery-errors B through E, the source statements, the node statements cited in every step, and both new statements after writing them. For the item I used the actual first proof sentence of 0D0R and the spectral-sequence proof of 08GK. The source's proper-support hypotheses cause no omission: f is proper here, and we use 08AR directly on each cohomology module. This also avoids asserting proper supports or source Noetherianity using an uncited geometric lemma.
+
+Step 1 uses the standard-t-structure node's explicit equivalence with complexes zero below the cohomology bound, not just a definition of a truncation. The ring-sheaves-Grothendieck node explicitly permits arbitrary ring sheaves on small sites, so it applies to both structure sheaves on small etale sites; these are not constant coefficient rings. The module-adjunction node states the exact adjunction for the ringed-topos morphism in the item's statement. The right-adjoint-preserves-limits node then gives left exactness; additivity follows directly from the given action of direct image on module maps. These statements supply all hypotheses needed by the next step. These are generic tool uses, recorded in split_report.tool_uses where required.
+
+Step 2 uses thm-sp-truncation-e2's actual full statement: its E2 identification, p<0 and q<a vanishing, pointwise stabilization, finite filtration and graded-abutment isomorphism. It is not a citation to a mere definition of a spectral sequence. Its K-injective convention agrees with the item's total right derived functor, and def-sfb-right-derived-functor explicitly supplies the canonical calculation on K-injective resolutions. The comparison is therefore of the same ordinary derived objects; there is no coefficient change and no exchange map. I checked that the source complex can be strictly bounded below although G was given only cohomologically bounded below, using the node cited in step 1.
+
+Step 3 uses exactly the conclusion of the new 08AR node, read in spaces-cohomology.tex with its properness and locally Noetherian target hypotheses. Here Y is already Noetherian; every H^q(G) is coherent by the item's hypothesis. The new node's definition of coherent agrees with the item and Tag 07UB. It does not require a uniform upper bound, flatness or a schematic source. In small cases f=id and G=F[-q], the entry in total degree q is F and no spurious degree is forced.
+
+Step 4 uses exactly the new 07UC node, read with its 07UB coherence convention. Kernel and cokernel closure give images and the successive-page cohomology; extension closure gives the middle terms of the abutment filtration. Only finitely many page operations are taken at any one bidegree because of the cited stabilization assertion, and only finitely many extensions occur at any fixed total degree. I checked the empty/zero module case and an extension with zero endpoint; the statement requires coherent endpoints, and never asserts that every arbitrary submodule of a coherent etale sheaf is coherent. That stronger Serre assertion would be unjustified.
+
+Step 5 uses the cited spectral-sequence bounds and exhaustive separated finite filtration, not a claim that vanishing graded pieces imply zero for an infinite nonseparated filtration. If n<a there is no allowable term, so finite induction gives zero. The zero-coherence clause in the closure node covers these degrees. For G=0 and for the empty source the same argument gives zero; for shifts by any integer a it gives precisely the shifted lower bound. No claim is made about boundedness above. This checks the item's negative-degree clause as well as coherence.
+
+For the new nodes themselves I read 08AR and 07UC, introduced every scheme, space, sheaf and derived-degree notation, and supplied chartwise coherence and properness meanings rather than using a tag as a definition. I verified their source labels against tags/tags. They have statements only, empty proofs and proof dependencies, correct creation records and blueprint ancestry, and all required search kinds in the actual log. I opened the same-tag existing nodes listed above and distinguished their statements; I did not use the support node for extension closure or a Zariski scheme theorem for etale algebraic spaces. The citation file's quotes are literal substrings checked against the current statements. No step exceeds the long-step threshold. Server check_dag and review_split have passed; the required final delivery dry run follows this report.
+
+## Unfinished
+
+No part of this one-level split remains unfinished. The two new statement-only inputs intentionally remain unsplit for later workers. No Lean was written, no compiler or build was run, no repository or launcher file was changed, and no agent was started.

@@ -134,7 +134,53 @@
   "lemma-constructible-pullback-locally-constant"
  ],
  "proof_split_by": "paragraphs",
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.cokernel",
+    "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.cokernel",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      363,
+      373
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      351,
+      361
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Scheme.IsLocallyConstantSheaf.kernel_and_cokernel",
+     "module": "WeilConjectures.ConstructibleSheaf.KernelCokernel",
+     "lines": [
+      212,
+      282
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lead_note": "15:52 UTC (L, found by the worker of thm-constructible-serre): the audit said closed but listed only the kernel and cokernel declarations; the extension clause is of_shortExact (KernelCokernel.lean 344-359), which has a sorry; state set to rests_on_sorry, the node is an item again (the torsor argument of its extension step is unreviewed). 16:17 UTC: the extension clause must follow Stacks 03RX (3), not the blueprint torsor argument (false for Lambda = Z/4); returned to H1 with that route; HUMAN entry.",
@@ -165,11 +211,16 @@
   "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "blueprint_update": {
-  "snapshot": "main-20261015",
-  "statement": "Let $\\mathcal A=\\mathrm{Mod}_\\Lambda$ with $\\Lambda$ a ring. The kernel\nand the cokernel of a morphism between finite locally constant sheaves are\nfinite locally constant. If $\\Lambda$ is finite, the middle term of a short\nexact sequence whose outer terms are finite locally constant is finite\nlocally constant.",
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $\\mathcal A=\\mathrm{Mod}_\\Lambda$ with $\\Lambda$ a ring. The cokernel\nof a morphism between finite locally constant sheaves is finite locally\nconstant; if $\\Lambda$ is Noetherian, so is the kernel. If $\\Lambda$ is\nfinite, the middle term of a short exact sequence whose outer terms are\nfinite locally constant is finite locally constant.",
   "proof": [
    {
-    "text": "Restricting to an étale cover trivialising both sheaves\n([lemma-constructible-flc-biproduct]), we may assume the morphism is\n$\\varphi\\colon M_X\\to N_X$ with $M$, $N$ finite (the stalks of the constant\nsheaf $M_X$ are $M$). By [lemma-constructible-hom-constant-locally]\nkernel and cokernel are locally constant with finite stalks.",
+    "text": "Restricting to an étale cover trivialising both sheaves\n([lemma-constructible-flc-biproduct]), we may assume the morphism is\n$\\varphi\\colon M_X\\to N_X$ with $M$, $N$ finitely generated (the stalks of\nthe constant sheaf $M_X$ are $M$). By [lemma-constructible-hom-constant-locally]\n$\\varphi$ is étale locally induced by a linear map $f\\colon M\\to N$, so\nkernel and cokernel are étale locally the constant sheaves at $\\ker f$ and\n$\\operatorname{coker}f$. The module $\\operatorname{coker}f$ is finitely\ngenerated as a quotient of $N$; the module $\\ker f$ is finitely generated\nwhen $\\Lambda$ is Noetherian, as a submodule of the finitely generated module\n$M$.",
     "uses": [
      "lemma-constructible-flc-biproduct",
      "lemma-constructible-hom-constant-locally"
@@ -177,13 +228,11 @@
     "elementary": false
    },
    {
-    "text": "For an extension $0\\to M_X\\to\\mathcal E\\to N_X\\to0$, again on a\ntrivialising cover, consider the sheaf $P$ of sections of\n$\\mathcal E\\to N_X$: over $U\\to X$ its sections are the morphisms\n$s\\colon N_U\\to\\mathcal E|_U$ with $\\pi\\circ s=\\mathrm{id}$. It is a torsor\nunder the sheaf $\\mathcal{H}om(N_X,M_X)=\\Hom_\\Lambda(N,M)_X$ (two sections\ndiffer by a morphism $N_U\\to M_U$, and locally sections exist since the\nsequence is locally split in the étale topology: the stalks are finite\nmodules and a surjection of sheaves is locally surjective on sections).\nThe group $\\Hom_\\Lambda(N,M)$ is finite, so by\n[lemma-constructible-torsor-trivialises] $P$ has a section over an\nétale cover $(U_i\\to X)$, and over $U_i$ the sequence splits:\n$\\mathcal E|_{U_i}\\cong M_{U_i}\\oplus N_{U_i}=(M\\oplus N)_{U_i}$. Hence\n$\\mathcal E$ is locally constant, with finite stalks $M\\oplus N$.",
-    "uses": [
-     "lemma-constructible-torsor-trivialises"
-    ],
-    "elementary": false
+    "text": "For an extension $0\\to\\mathcal E'\\to\\mathcal E\\to\\mathcal E''\\to0$ with\n$\\Lambda$ finite and outer terms finite locally constant, work on an étale\ncover on which $\\mathcal E'\\cong M_X$ and $\\mathcal E''\\cong N_X$ with $M$,\n$N$ finitely generated, hence finite. Choose a surjection\n$p\\colon\\Lambda^b\\to N$ with kernel $K$, a finite module. Since\n$\\mathcal E\\to N_X$ is an epimorphism of sheaves, it is locally surjective on\nsections, so after refining the cover the images under $p$ of the $b$ basis\nvectors lift to sections $y_1,\\dots,y_b$ of $\\mathcal E$. For $k\\in K$ the\nsection $\\sum_ik_iy_i$ maps to zero in $N_X$, hence is a section of\n$M_X$; as $K$ is finite, after a further refinement all these finitely many\nsections are constant, and $k\\mapsto\\sum_ik_iy_i$ is the constant map at a\nlinear map $\\alpha\\colon K\\to M$. Let $L=M\\amalg_K\\Lambda^b$ be the pushout\nof $\\alpha$ and the inclusion $K\\to\\Lambda^b$; then\n$0\\to M\\to L\\to N\\to0$ is exact, and the sections $y_i$ together with\n$M_X\\to\\mathcal E$ define a morphism from the constant short exact sequence\n$0\\to M_X\\to L_X\\to N_X\\to0$ to $0\\to M_X\\to\\mathcal E\\to N_X\\to0$ which is\nthe identity on the outer terms. By the five lemma $L_X\\cong\\mathcal E$\nthere. Hence $\\mathcal E$ is locally constant, with finite stalks $L$.\n(An extension of finite constant sheaves need not be étale locally split:\nfor $\\Lambda=\\mathbf Z/4$ the constant extension\n$0\\to\\mathbf Z/2\\to\\mathbf Z/4\\to\\mathbf Z/2\\to0$ splits on no nonempty\nétale scheme; this is why one passes through the pushout $L$.)",
+    "uses": [],
+    "elementary": null
    }
   ],
-  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
  }
 }

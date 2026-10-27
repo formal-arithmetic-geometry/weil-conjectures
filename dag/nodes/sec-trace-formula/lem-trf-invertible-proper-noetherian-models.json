@@ -1,0 +1,253 @@
+{
+ "id": "lem-trf-invertible-proper-noetherian-models",
+ "kind": "statement",
+ "title": "Compatible Noetherian proper models carrying an invertible module",
+ "statement": "Let $f:Y\\to X$ be a proper morphism [def-weil-proper-morphism] of schemes [def-pc-scheme], with $X$ affine, and let $M$ be an invertible $\\mathcal O_Y$-module [def-sc-invertible-module]. There exist a small nonempty directed partially ordered set $I$ with a least element $0$, an inverse system of proper morphisms $f_i:Y_i\\to X_i$, transition morphisms $q_{ji}:Y_j\\to Y_i$ and $r_{ji}:X_j\\to X_i$ for $j\\geq i$, and projections $a_i:Y\\to Y_i$ and $b_i:X\\to X_i$, with the following properties. All transition morphisms and projections are affine [pqf-def-affine-morphism]; $f_iq_{ji}=r_{ji}f_j$ and $f_i a_i=b_i f$. The cones $(Y,a_i)$ and $(X,b_i)$ are limits: every compatible cone from a scheme $T$ to either system factors uniquely through its displayed cone. Each $X_i$ is affine and of finite type over $\\operatorname{Spec}\\mathbf Z$ [def-weil-finite-type-morphism, def-weil-affine-spectrum]. Each $X_i$ and $Y_i$ is Noetherian (locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme]), and $Y_i$ is quasi-separated [def-weil-quasi-separated-morphism]. There is an invertible module $M_0$ on $Y_0$ and an isomorphism $a_0^*M_0\\cong M$. For $M_i=q_{i0}^*M_0$, every $M_i$ is invertible, $q_{ji}^*M_i\\cong M_j$, and $a_i^*M_i\\cong M$, with the isomorphisms induced by pullback composition [def-pc-module-pullback].",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, proof: approximation and compatible invertible modules, through the sentence beginning Let y_i; includes affine projections and restriction to a directed tail."
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-affine-scheme-qcqs], the affine scheme $X$ is quasi-compact and quasi-separated. Apply the affine-base clause of [lem-weil-pbc-proper-limit-noetherian] to $f$. Write its small nonempty directed indexing set as $K$, its models as $f_k:Y_k\\to X_k$, its transitions as $q_{lk},r_{lk}$, and its limit projections as $a_k,b_k$. Each $X_k$ is affine and of finite type over $\\operatorname{Spec}\\mathbf Z$, each $f_k$ is proper, both systems have affine transitions, and both cones are limits. The approximation gives $f_kq_{lk}=r_{lk}f_l$ and $f_ka_k=b_kf$. No finite-presentation hypothesis on the original $f$ is introduced.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-proper-limit-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood, first approximation paragraph; limits.tex Tag 0A0P, lemma-proper-limit-of-proper-finite-presentation-noetherian, with the affine-base clause of its cited DAG statement."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], every $X_k$ is Noetherian, since it is of finite type over $\\operatorname{Spec}\\mathbf Z$. Properness includes finite type by [def-weil-proper-morphism], so apply the same Noetherian permanence statement to $f_k$ to deduce that $Y_k$ is Noetherian. Thus both are locally Noetherian and quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated], every $Y_k$ is quasi-separated. These supply all the stage hypotheses for invertible-module descent.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OY, lemma-locally-Noetherian-quasi-separated; morphisms.tex Tag 01W1, definition-proper."
+   }
+  },
+  {
+   "text": "Apply clause (1) of [lem-weil-pbc-limit-cone-affine-projections-opens] to each of the two limit cones from step 1. Since both systems have affine transitions, every $a_k:Y\\to Y_k$ and $b_k:X\\to X_k$ is affine. This verifies the projection clause separately from the transition clause of approximation.",
+   "uses": [
+    "lem-weil-pbc-limit-cone-affine-projections-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 01YX, lemma-directed-inverse-system-has-limit, clause (1), applied to the two given limit cones."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-invertible-affine-limit-descent] to the $Y_k$ system and $M$. The index set is small, nonempty and directed, the stages are quasi-compact and quasi-separated by step 2, the transitions are affine by step 1, and $Y$ is their scheme limit. Obtain $c\\in K$, an invertible $\\mathcal O_{Y_c}$-module $N$, and an isomorphism $a_c^*N\\cong M$.",
+   "uses": [
+    "lem-trf-invertible-affine-limit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0B8W, lemma-descend-invertible-modules, clause (2), invoked in Tag 0D2S immediately after approximation."
+   }
+  },
+  {
+   "text": "The order $\\le$ on $K$ is a preorder: write $k\\sim l$ when $k\\le l$ and $l\\le k$. Choose one representative in each $\\sim$-class, taking $c$ itself as the representative of its own class, and let $K'\\subseteq K$ be the set of chosen representatives. On $K'$ the induced order is a partial order, since two equivalent representatives are equal, and $K'$ is cofinal in $K$, since every $k$ is $\\le$ its representative. Restrict to $I=\\{k\\in K'\\mid k\\geq c\\}$, with $c$ labelled $0$. This is a small partially ordered set with least element $c$; it is directed and cofinal in $K$: given $k,l\\in K$ choose $m\\geq k,l,c$ in $K$ and replace $m$ by its representative. Here is the limit check, for either scheme system $Z_k$. Given a compatible cone $t_i:T\\to Z_i$ over $I$, for arbitrary $k\\in K$ choose $l\\in I$ with $l\\geq k$ and set $t_k=Z_{lk}t_l$. For two choices $l,l'\\in I$, choose $m\\in I$ with $m\\geq l,l'$; compatibility gives $Z_{lk}t_l=Z_{mk}t_m=Z_{l'k}t_{l'}$. Thus the extension is independent of the choice, is compatible with all transitions of $K$, and is the unique extension of the tail cone. The original limit property gives its unique map to $Z$. Hence the restricted cones with vertices $Y$ and $X$ are still limits. All stage properties, affine transitions and affine projections persist: they are the same schemes and maps at the retained indices. Put $M_0=N$ on $Y_0=Y_c$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0D2S, lemma-ample-in-neighbourhood, sentence After shrinking I; elementary directed-tail cone argument, written out here."
+   }
+  },
+  {
+   "text": "For $i\\in I$ define $M_i=q_{i0}^*M_0$. By [lem-weil-pbc-invertible-pullback-invertible] every $M_i$ is invertible. The composition isomorphisms explicitly supplied by [def-pc-module-pullback], together with $q_{i0}q_{ji}=q_{j0}$ and $q_{i0}a_i=a_0$, give\n$$q_{ji}^*M_i=q_{ji}^*q_{i0}^*M_0\\cong q_{j0}^*M_0=M_j,\\qquad a_i^*M_i\\cong a_0^*M_0\\cong M.$$\nAt the least index identify $q_{00}^*M_0$ with $M_0$ by the identity-pullback isomorphism of the same definition. These are the required isomorphisms induced by pullback composition. Together with the proper models, commutative squares and limit properties already established, this gives every clause of the statement.",
+   "uses": [
+    "lem-weil-pbc-invertible-pullback-invertible",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tag 0B8L, lemma-pullback-invertible; more-morphisms.tex Tag 0D2S, compatible invertible modules; composition and identity pullbacks as stated in def-pc-module-pullback."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-proper-limit-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-limit-cone-affine-projections-opens",
+  "lem-trf-invertible-affine-limit-descent",
+  "lem-weil-pbc-invertible-pullback-invertible",
+  "def-pc-module-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0D2S, lemma-ample-in-neighbourhood, approximation and compatible invertible-module paragraph through Let y_i; Limits Tags 0A0P, 0B8W and 01YX, with the directed-tail cone argument made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism over an affine scheme and an invertible sheaf admit compatible proper Noetherian models over finitely generated integer algebras with affine transition maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  AlgebraicGeometry.IsFinite f ↔ AlgebraicGeometry.IsProper f ∧ AlgebraicGeometry.IsAffineHom f\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is finite if and only if it is proper and affine, i.e., $ \\\\text{IsFinite}(f) \\\\leftrightarrow \\\\text{IsProper}(f) \\\\land \\\\text{IsAffineHom}(f) $.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"Let $ P $ be a morphism property on schemes that is Zariski-local at the source and contains identity morphisms. For any compact scheme $ X $, there exists an affine scheme $ Y $ and a surjective morp\"}\n  {\"name\": \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] [Algebra.FiniteType (↥(𝒜 0)) A],\\n  AlgebraicGeometry.IsProper (AlgebraicGeometry.Proj.toSpecZero 𝒜)\", \"doc\": \"If the zero-graded component $ \\\\mathcal{A}_0 $ of a graded ring $ \\\\mathcal{A} $ is a finitely generated $ A $-algebra, then the canonical morphism from the projective spectrum $ \\\\operatorname{Proj}(\\\\m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P] [P.ContainsIdentities],\\n  ∃ Y p, AlgebraicGeometry.Surjective p ∧ P p ∧ AlgebraicGeometry.IsAffine Y\", \"doc\": \"For any compact scheme $ X $ and a Zariski-local-at-the-source morphism property $ P $ that holds for identity morphisms, there exists an affine scheme $ Y $ and a surjective morphism $ p : Y \\to X $ s\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern properness, local Noetherianity, morphism descent or structure-sheaf sections; none constructs compatible proper models carrying the given invertible module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvertible\", \"IsLimit\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern properness, local Noetherianity, morphism descent or structure-sheaf sections; none constructs compatible proper models carrying the given invertible module."
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*(noetherian|limit)|proper.*noetherian|noetherian.*proper",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern properness, local Noetherianity, morphism descent or structure-sheaf sections; none constructs compatible proper models carrying the given invertible module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descending a line bundle on a proper scheme to a compatible inverse system of Noetherian proper models",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P]\\n  (H :\\n    ∀ {R S : CommRingCat.{u}} {Y : Scheme.{u}} (φ : R ⟶ S) (g : Y ⟶ Spec R),\\n      P' (Spec.map φ) → P (pullback.fst (Spec.map φ) g) → P g) :\\n  P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If $ P $ is a morphism property that is Zariski local at the target, and for any ring homomorphism $ \\\\phi : R \\\\to S $ and morphism $ g : Y \\\\to \\\\operatorname{Spec}(R) $, the conditions $ P'(\\\\operatorna\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsZariskiLocalAtTarget P]\\n  [P'.IsStableUnderBaseChange],\\n  (∀ {R : CommRingCat} {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ AlgebraicGeometry.Spec R)\\n      (g : Y ⟶ AlgebraicGeometry.Spec R), P' f → P (CategoryTheo\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties in the category of schemes. If $\\\\mathcal{P}$ is Zariski local at the target and $\\\\mathcal{P}'$ is stable under base change, then for any com\"}\n  {\"name\": \"InverseSystem.limit\", \"module\": \"Mathlib.Order.DirectedInverseSystem\", \"type\": \"(i : ι) : Set (∀ l : Iio i, F l)\", \"doc\": \"The limit of an inverse system is the set of all compatible families $\\\\{F_j\\\\}$ where each $F_j$ belongs to the set $F(j)$, and for any indices $j \\\\leq k$, the transition map $f_{jk}$ satisfies $f_{jk}\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometry.Surjective ≤ P' →\\n    ∀ [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n      (∀ {R S : Com\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties of schemes where $\\\\mathcal{P}'$ is stable under base change and composition, and $\\\\mathcal{P}$ is stable under base change. If the intersect\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"(hP : HasAffineProperty P (affineAnd Q)) [MorphismProperty.DescendsAlong (@IsAffineHom) P']\\n  (hQ : RingHom.RespectsIso Q) (hQQ' : RingHom.CodescendsAlong Q Q') : P.DescendsAlong (P' ⊓ @QuasiCompact)\", \"doc\": \"If a morphism property $ P $ is defined by requiring the source scheme to be affine and satisfying a ring-theoretic condition $ Q $, and if $ Q $ is invariant under ring isomorphisms and satisfies a c\"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Descent\", \"type\": \"[IsZariskiLocalAtTarget P] [P'.IsStableUnderBaseChange]\\n  (H :\\n    ∀ {R : CommRingCat.{u}} {X Y : Scheme.{u}} (f : X ⟶ Spec R) (g : Y ⟶ Spec R), P' f → P (pullback.fst f g) → P g) :\\n  P.DescendsAlong P'\", \"doc\": \"Let $\\\\mathcal{P}$ and $\\\\mathcal{P}'$ be morphism properties on schemes. If $\\\\mathcal{P}'$ is stable under base change, and for every commutative ring $R$ and morphisms $f : X \\\\to \\\\operatorname{Spec}(R\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsProper f],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"If $ f: X \\\\to Y $ is a proper morphism of schemes, then $ f $ is locally of finite type.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern properness, local Noetherianity, morphism descent or structure-sheaf sections; none constructs compatible proper models carrying the given invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximate a proper scheme and its line bundle by schemes of finite type over the integers retaining compatible pullback isomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes locally of finite type, if two morphisms from objects in the diagram to a scheme $X$ satisfy compatibility conditions with respect to a cone, then there exists an index $k$ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (t : D ⟶ (CategoryTheory.Functor.const I).obj S) (f : X ⟶ S)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [∀ (i : I), Com\", \"doc\": \"Given a diagram of schemes with a morphism locally of finite type, if two morphisms from an object in the diagram to a scheme agree after composition with the diagram's morphism and a cone's projectio\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} →\\n            [inst_1 : ∀ (i : I), CompactSpace ↥(D.obj\", \"doc\": \"The open cover of the diagram object $ D(i') $ formed by refining the open cover $ \\\\mathcal{U}_{D₀} $ with affine open immersions, ensuring each point lies in an affine open subscheme and compatibilit\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"{n : Type v} →\\n  {S X : AlgebraicGeometry.Scheme} →\\n    (X ⟶ S) → (n → ↑(X.presheaf.obj (Opposite.op ⊤))) → (X ⟶ AlgebraicGeometry.AffineSpace n S)\", \"doc\": \"Given a morphism $ f : X \\\\to S $ and a vector $ v $ consisting of global sections of the structure sheaf of $ X $, this function constructs the corresponding morphism from $ X $ to the affine space $ \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: Hits concern properness, local Noetherianity, morphism descent or structure-sheaf sections; none constructs compatible proper models carrying the given invertible module."
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*(noetherian|limit)|proper.*noetherian|noetherian.*proper",
+   "results": "Actual logged search: 20 hits; Mathlib/LinearAlgebra/InvariantBasisNumber.lean, Mathlib/LinearAlgebra/InvariantBasisNumber.lean, Mathlib/CategoryTheory/Subobject/NoetherianObject.lean, Mathlib/CategoryTheory/Subobject/NoetherianObject.lean, Mathlib/CategoryTheory/Subobject/NoetherianObject.lean, Mathlib/CategoryTheory/Subobject/NoetherianObject.lean, Mathlib/CategoryTheory/Subobject/NoetherianObject.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/GrpLimits.lean",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern affine-limit sections, eventual morphism equality, finite/proper morphisms or finite presentation of sheaves; none constructs proper models carrying the given invertible module."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descend an invertible sheaf to a finite stage in a Noetherian approximation of a proper scheme",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, SheafOfModules.isFinitePresentation, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instIsProperOfIsFinite, AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact, SheafOfModules.QuasicoherentData.IsFinitePresentation",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern affine-limit sections, eventual morphism equality, finite/proper morphisms or finite presentation of sheaves; none constructs proper models carrying the given invertible module."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsLimit\"",
+   "results": "Actual logged search: 0 hits; ",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern affine-limit sections, eventual morphism equality, finite/proper morphisms or finite presentation of sheaves; none constructs proper models carrying the given invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Approximation of proper schemes over affine bases by finite type integer schemes and descent of finite locally free modules",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern affine-limit sections, eventual morphism equality, finite/proper morphisms or finite presentation of sheaves; none constructs proper models carrying the given invertible module."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A proper morphism over an affine scheme with a line bundle is an inverse limit of proper Noetherian schemes with affine transitions carrying a descended line bundle",
+   "results": "Actual logged search: 8 hits; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit, AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.exists_appTop_π_eq_of_isAffine_of_isLimit",
+   "date": "2026-10-23",
+   "verdict": "no match: returned declarations concern affine-limit sections, eventual morphism equality, finite/proper morphisms or finite presentation of sheaves; none constructs proper models carrying the given invertible module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-ample-neighbourhood",
+  "date": "2026-10-22",
+  "group": "Q66"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Subsidiary ampleness argument: Tag 0D2S, lemma-ample-in-neighbourhood, proof: approximation and compatible invertible modules, through the sentence beginning Let y_i; includes affine projections and restriction to a directed tail.",
+   "via": [
+    "lem-trf-ample-neighbourhood",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-invertible-proper-noetherian-models",
+  "worker": "stage1",
+  "group": "Q77",
+  "summary": "Retained the statement and original provenance. Reused existing proper approximation, affine projection, Noetherian permanence and invertible-module descent nodes; wrote the directed-tail universal property and defined later modules by pullback. No new nodes. Project and Mathlib searches found no complete attachment or leaf for the item.",
+  "blueprint": "Realizes the proper-model and compatible-invertible-module prerequisite of the fibrewise-ampleness argument recorded in blueprint.from.place via lem-trf-ample-neighbourhood. The exact source is the initial approximation paragraph of Stacks 0D2S; this auxiliary approximation does not appear verbatim in the ancestor blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proper-limit-noetherian",
+    "why": "Generic proper Noetherian approximation over an affine base, exactly the 0A0P input called for by 0D2S. No statement of sk-i-curve-zero supplies this approximation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proper-limit-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-d77be85f0",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-d77be85f0 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and all nine cited statements. Source: Stacks 0D2S (more-morphisms.tex:14154), proof through 'Let y_i'. I also read limits.tex 0A0P (proper-limit-of-proper-finite-presentation-noetherian) and 0B8W (descend-invertible-modules (2)); their hypotheses (qcqs base and stages, affine transitions, proper models over finite-type Z-schemes) match the cited DAG nodes. Steps 1-4 and 6 are correct. Step 1: affine-scheme-qcqs gives the hypothesis of proper-limit-noetherian, whose affine clause gives X_k affine of finite type over Z and f_k a_k = b_k f. Step 2: Noetherian stages via finite-type-over-noetherian applied twice (properness includes finite type), and Y_k quasi-separated via locally-noetherian-quasi-separated. Step 3: projections are affine by limit-cone-affine-projections (1). Step 4: every hypothesis of invertible-affine-limit-descent holds. Step 6: invertibility via invertible-pullback-invertible (Lean-closed), and the isomorphisms via the composition and identity isomorphisms of def-pc-module-pullback, using q_{i0}q_{ji}=q_{j0} and q_{i0}a_i=a_0. Fault in step 5: the approximation node's directed set is only a preorder (its Lean record has Preorder Λ, and the project convention is Preorder+Nonempty+IsDirected). The item requires a partially ordered I with least element 0, and the step asserted this for the tail {k>=c} without argument. FIX: step 5 now chooses one representative per class of k<=l<=k, keeping c as its own representative (Categories remark-preorder-versus-partial-order). It shows the set of representatives is partially ordered and cofinal, and restricts the extension argument to I = representatives >= c. No module changes because c is kept. Edge cases checked: X empty (A=0, singleton system), M=O_Y, non-Noetherian A and f not of finite presentation (never used). Duplicate search over dag/nodes (0D2S, 0B8W, ample-in-neighbourhood, invertible+proper+limit) found no node with this combined statement. The only citer, lem-trf-ample-neighbourhood, uses the clauses as stated. Accepted tool_use: lem-weil-pbc-proper-limit-noetherian (generic 0A0P; no sk-i-curve-zero node gives it). No SGA. No new nodes, statement unchanged, not a re-split item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.InvertibleProperNoetherianModels",
+  "declaration": "AlgebraicGeometry.invertible_proper_noetherian_models",
+  "file": "lean/Sheaf/AlgebraicGeometry/InvertibleProperNoetherianModels.lean",
+  "statement": "theorem invertible_proper_noetherian_models {X Y : Scheme.{u}} (f : Y ⟶ X) [IsProper f] [IsAffine X] (M : Y.Modules) [M.IsInvertible] : ∃ (I : Type u) (_ : PartialOrder I) (_ : OrderBot I) (_ : IsDirected I (· ≤ ·)) (Ys Xs : Iᵒᵖ ⥤ Scheme.{u}) (fs : Ys ⟶ Xs) (a : (Functor.const Iᵒᵖ).obj Y ⟶ Ys) (b : (Functor.const Iᵒᵖ).obj X ⟶ Xs), Nonempty (IsLimit (Cone.mk Y a)) ∧ Nonempty (IsLimit (Cone.mk X b)) ∧ (∀ (i j : Iᵒᵖ) (h : i ⟶ j), IsAffineHom (Ys.map h) ∧ IsAffineHom (Xs.map h)) ∧ (∀ i : Iᵒᵖ, IsAffineHom (a.app i) ∧ IsAffineHom (b.app i)) ∧ (∀ i : Iᵒᵖ, IsProper (fs.app i)) ∧ (∀ i : Iᵒᵖ, a.app i ≫ fs.app i = f ≫ b.app i) ∧ (∀ i : Iᵒᵖ, IsAffine (Xs.obj i) ∧ LocallyOfFiniteType (specULiftZIsTerminal.from (Xs.obj i)) ∧ QuasiCompact (specULiftZIsTerminal.from (Xs.obj i))) ∧ (∀ i : Iᵒᵖ, IsNoetherian (Xs.obj i) ∧ IsNoetherian (Ys.obj i) ∧ QuasiSeparatedSpace (Ys.obj i)) ∧ ∃ (M₀ : (Ys.obj (op (⊥ : I))).Modules), M₀.IsInvertible ∧ ∃ (e₀ : (Scheme.Modules.tensorPullback (a.app (op (⊥ : I)))).obj M₀ ≅ M) (e : ∀ (i j : I) (hij : i ≤ j), (Scheme.Modules.tensorPullback (Ys.map (homOfLE hij).op)).obj ((Scheme.Modules.tensorPullback (Ys.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀) ≅ (Scheme.Modules.tensorPullback (Ys.map (homOfLE (bot_le : (⊥ : I) ≤ j)).op)).obj M₀) (d : ∀ i : I, (Scheme.Modules.tensorPullback (a.app (op i))).obj ((Scheme.Modules.tensorPullback (Ys.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀) ≅ M), (∀ i : I, ((Scheme.Modules.tensorPullback (Ys.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).obj M₀).IsInvertible) ∧ (∀ (i j : I) (hij : i ≤ j), e i j hij = ((Scheme.Modules.tensorPullbackSectionComp (Ys.map (homOfLE hij).op) (Ys.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).symm.app M₀) ≪≫ eqToIso (congrArg (fun g ↦ (Scheme.Modules.tensorPullback g).obj M₀) (Ys.map_comp (homOfLE hij).op (homOfLE (bot_le : (⊥ : I) ≤ i)).op).symm)) ∧ (∀ i : I, d i = ((Scheme.Modules.tensorPullbackSectionComp (a.app (op i)) (Ys.map (homOfLE (bot_le : (⊥ : I) ≤ i)).op)).symm.app M₀) ≪≫ eqToIso (congrArg (fun g ↦ (Scheme.Modules.tensorPullback g).obj M₀) ((Cone.mk Y a).w (homOfLE (bot_le : (⊥ : I) ≤ i)).op)) ≪≫ e₀)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31145f5ec",
+  "group": "Q44",
+  "result": "pass",
+  "note": "I read the item node (only the lean field changed), all 10 stmt_dep records, the module and the report. Every clause matches the node: I : Type u, PartialOrder, OrderBot, IsDirected; Ys/Xs functors with fs, a, b; Nonempty IsLimit for both cones with the actual vertices; affine transitions and projections; IsProper fs; a≫fs = f≫b; X_i affine and finite type via specULiftZIsTerminal (LocallyOfFiniteType ∧ QuasiCompact); IsNoetherian X_i and Y_i; QuasiSeparatedSpace Y_i; invertible M₀ with e₀ : a_0^*M₀ ≅ M. M_i is literally q_i0^*M₀, and every M_i is invertible. e and d are pinned to tensorPullbackSectionComp.symm ≫ eqToIso(map_comp / cone.w) (≫ e₀); I checked the directions against live TensorPullbackSectionAdjunction.lean:84. Universes are consistent with exists_proper_limit_noetherian (Λ : Type u). No extra hypotheses; empty schemes and a one-element I are covered. lean.statement matches the file verbatim, the proof is sorry, the docstrings carry source and blueprint. Advisory: QuasiSeparatedSpace instead of the cited QuasiSeparated(terminal.from), equivalent by Mathlib quasiSeparatedSpace_iff_quasiSeparated; unused proof-only private imports. I compiled nothing because I changed no file."
+ }
+}

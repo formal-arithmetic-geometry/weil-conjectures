@@ -1,0 +1,265 @@
+{
+ "id": "lem-sfb-relative-flat-affine-charts",
+ "kind": "statement",
+ "title": "Compatible affine charts and the flat stalk locus",
+ "statement": "Let $S,X,Y$ be schemes [def-pc-scheme] and let $p:X\\to S$, $q:Y\\to S$, $f:X\\to Y$ satisfy $q\\circ f=p$. Assume $p$ is locally of finite presentation [def-sbc-locally-finite-presentation] and $q$ is locally of finite type [def-weil-finite-type-morphism]. For every $x\\in X$ there exist affine open neighbourhoods $W=\\operatorname{Spec}A$ of $p(x)$, $V=\\operatorname{Spec}B\\subset q^{-1}(W)$ of $f(x)$, and $Z=\\operatorname{Spec}C\\subset p^{-1}(W)\\cap f^{-1}(V)$ of $x$ [def-weil-affine-spectrum], such that the induced ring maps $A\\to B\\to C$ make $B$ finite type over $A$ and $C$ finitely presented over both $A$ and $B$ [def-weil-pbc-finite-type-algebra, def-weil-pbc-finitely-presented-algebra]. For every $z\\in Z$, let $\\mathfrak r\\subset C$ be its prime and $\\mathfrak b\\subset B$ its inverse image. The canonical identifications $\\mathcal O_{X,z}\\cong C_{\\mathfrak r}$ and $\\mathcal O_{Y,f(z)}\\cong B_{\\mathfrak b}$ identify the stalk map of $f$ with the localization of $B\\to C$ [def-weil-pbc-localization-at-prime]. The subset $E=\\{\\mathfrak r\\in\\operatorname{Spec}C:C_{\\mathfrak r}\\text{ is flat as a }B\\text{-module}\\}$ is open [def-weil-pbc-flat-ring-map], and under $Z\\cong\\operatorname{Spec}C$ its points are exactly the $z\\in Z$ where $f$ is flat [def-weil-flat-morphism]. No flatness hypothesis on $p$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ, lemma-base-change-criterion-flatness-fibre, proof first two sentences, expanded using Tag 0399, theorem-openness-flatness; morphisms.tex Tag 02FV, lemma-finite-presentation-permanence (1). Affine-chart and stalk-localization form, not the parameter-base-change assertion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-flat-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix $x\\in X$. By the affine-opens basis lemma choose an affine open $W\\ni p(x)$, then an affine open $V\\ni f(x)$ inside the open $q^{-1}(W)$, and then an affine open $Z\\ni x$ inside the open $p^{-1}(W)\\cap f^{-1}(V)$. We choose an affine refinement of this intersection; we do not assert that the intersection is affine. Write their section rings as $A,B,C$. Restriction of the structure-sheaf maps gives $A\\to B\\to C$; their composite is the map induced by $p$, since $q\\circ f=p$ and the sheaf maps commute with restrictions. The affine-spectrum dictionary identifies these opens with the indicated spectra.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01IT (lemma-basis-affine-opens), 01IJ (definition-scheme); affine refinement and functoriality"
+   }
+  },
+  {
+   "text": "Apply the finite-presentation cancellation lemma to the given $S$-morphism $f$: its hypotheses are exactly that $p$ is locally of finite presentation and $q$ is locally of finite type. Thus $f$ is locally of finite presentation. The all-affine-pairs lemmas now apply to $(q,V,W)$, $(p,Z,W)$ and $(f,Z,V)$, respectively. They give that $B$ is finite type over $A$, $C$ is finitely presented over $A$, and $C$ is finitely presented over $B$. All three required image containments were built into step 1.",
+   "uses": [
+    "lem-a1-map-over-base-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02FV (lemma-finite-presentation-permanence (1)), 01T2 (lemma-locally-finite-type-characterize), 01TQ (lemma-locally-finite-presentation-characterize)"
+   }
+  },
+  {
+   "text": "Let $\\varphi:B\\to C$ be the chart map and let $z\\in Z$ correspond to $\\mathfrak r$. The affine-spectrum morphism sends $\\mathfrak r$ to $\\mathfrak b=\\varphi^{-1}\\mathfrak r$, so $f(z)$ has that prime in $V$. The affine-open stalk-localization lemma gives $C_{\\mathfrak r}\\cong\\mathcal O_{X,z}$ and $B_{\\mathfrak b}\\cong\\mathcal O_{Y,f(z)}$, sending fractions to the corresponding quotients of germs. The stalk map sends the germ of $b\\in B$ to the germ of $\\varphi(b)$ by the definition of a sheaf morphism. Consequently it sends $b/t$ to $\\varphi(b)/\\varphi(t)$ for $t\\notin\\mathfrak b$; here $\\varphi(t)\\notin\\mathfrak r$. Every fraction has this form, which proves the asserted identification of the entire stalk map.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HV (lemma-spec-sheaves (6)); stalk map evaluated on germs and inverses"
+   }
+  },
+  {
+   "text": "Use openness of flatness with base ring $B$, finitely presented $B$-algebra $C$ from step 2, and module $M=C$. This module is finitely presented over itself: it has one generator $1$ and no relations, or the presentation $C^0\\to C\\to C\\to0$ with the last map the identity. Its localization at $\\mathfrak r$ is exactly $C_{\\mathfrak r}$. The cited theorem therefore says exactly that $E=\\{\\mathfrak r:C_{\\mathfrak r}\\text{ is flat over }B\\}$ is open.",
+   "uses": [
+    "lem-weil-pbc-openness-of-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RC (theorem-openness-flatness), applied to M=C"
+   }
+  },
+  {
+   "text": "The localized ring $C_{\\mathfrak r}$ is a $B_{\\mathfrak b}$-module via the map in step 3, since every $t\\in B\\setminus\\mathfrak b$ maps to a unit. Apply flatness over a localization with $A=B$, $W=B\\setminus\\mathfrak b$, $A\\prime=B_{\\mathfrak b}$ and $M=C_{\\mathfrak r}$. It gives flatness over $B$ if and only if flatness over $B_{\\mathfrak b}$. Under the stalk identifications in step 3, the latter is precisely flatness of $f$ at $z$ by its definition. Thus the chart identifies $E$ with the claimed stalk-flat locus. The only hypotheses used were those in steps 1 and 2; none requires $p$ to be flat.",
+   "uses": [
+    "lem-weil-pbc-flat-over-localization",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HT (lemma-flat-localization (2)); Morphisms Tag 01U3 (definition-flat)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "lem-a1-map-over-base-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-openness-of-flatness",
+  "lem-weil-pbc-flat-over-localization",
+  "def-weil-flat-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 05VJ (lemma-base-change-criterion-flatness-fibre), first two proof sentences, expanded by Morphisms 02FV, 01T2, 01TQ, Schemes 01IT, 01HV, and Algebra 00RC, 00HT(2); only affine charts and openness, not parameter base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|isOpen.*flat|flat.*localization",
+   "results": "{\"t\": \"2026-10-23T09:40:50Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|isOpen.*flat|flat.*localization\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Flat.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatMono.lean\"], \"digest\": \"923f7d82769babc1\"}; no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification.",
+   "date": "2026-10-23",
+   "verdict": "no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine charts of a locally finitely presented morphism identify the flat locus with the open locus of flat localizations of its coordinate algebra",
+   "results": "{\"t\": \"2026-10-23T09:40:50Z\", \"tool\": \"leansearch\", \"query\": \"Affine charts of a locally finitely presented morphism identify the flat locus with the open locus of flat localizations of its coordinate algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.casesOn\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.recOn\"], \"digest\": \"e6a17fceb9c36a44\"}; no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification.",
+   "date": "2026-10-23",
+   "verdict": "no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"Flat\"",
+   "results": "{\"t\": \"2026-10-23T09:40:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry.LocallyOfFinitePresentation\\\", \\\"Flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification.",
+   "date": "2026-10-23",
+   "verdict": "no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible affine charts for a morphism between locally finitely presented and locally finite type S schemes identify its stalk flat locus with the open locus of base flat localized modules",
+   "results": "{\"t\": \"2026-10-23T09:40:52Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible affine charts for a morphism between locally finitely presented and locally finite type S schemes identify its stalk flat locus with the open locus of base flat localized modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.UniversallyOpen.of_flat\"], \"digest\": \"0b9e076194e7e0b1\"}; no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification.",
+   "date": "2026-10-23",
+   "verdict": "no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "At every point of a morphism of families with source locally finitely presented and target locally finite type there are compatible affine charts A to B to C with C finitely presented over both A and B, and the flat stalk locus is the open set where C localized at a prime is B flat",
+   "results": "{\"t\": \"2026-10-23T09:41:31Z\", \"tool\": \"leanfinder\", \"query\": \"At every point of a morphism of families with source locally finitely presented and target locally finite type there are compatible affine charts A to B to C with C finitely presented over both A and B, and the flat stalk locus is the open set where C localized at a prime is B flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"d929cab4c2115306\"}; no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification.",
+   "date": "2026-10-23",
+   "verdict": "no match: finitePresentation_appLE gives finiteness only after local finite presentation is known; flat_iff and flat_appLE concern an everywhere-flat map. None supplies compatible charts together with the open pointwise base-flat localization locus and the stalk-map identification."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible affine neighborhoods of a morphism over a base with source locally finitely presented and target locally finite type, with open flat stalk locus",
+   "results": "{\"t\": \"2026-10-23T11:20:30Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible affine neighborhoods of a morphism over a base with source locally finitely presented and target locally finite type, with open flat stalk locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\"], \"digest\": \"f004c109c8f2dc6d\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine finiteness and basis declarations supply components only; UniversallyOpen.of_flat assumes flatness everywhere and asserts openness of a map, not openness of its pointwise flat locus. No hit supplies all chart, stalk-map and flat-locus clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "flatLocus|flat_locus|finitePresentation_appLE|finiteType_appLE",
+   "results": "{\"t\": \"2026-10-23T11:21:14Z\", \"tool\": \"grep\", \"query\": \"flatLocus|flat_locus|finitePresentation_appLE|finiteType_appLE\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/SpreadingOut.lean\", \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Proper.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"f9d91ca34d577a85\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine finiteness and basis declarations supply components only; UniversallyOpen.of_flat assumes flatness everywhere and asserts openness of a map, not openness of its pointwise flat locus. No hit supplies all chart, stalk-map and flat-locus clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine charts of a locally finitely presented morphism with flat stalks forming an open subset",
+   "results": "{\"t\": \"2026-10-23T11:21:15Z\", \"tool\": \"leansearch\", \"query\": \"Affine charts of a locally finitely presented morphism with flat stalks forming an open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpens\", \"AlgebraicGeometry.IsAffineOpen\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Scheme.affineBasicOpen\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.IsAffineOpen.instIsAffineToSchemeBasicOpen\", \"AlgebraicGeometry.Flat.mk\"], \"digest\": \"27b04021b16b41ba\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine finiteness and basis declarations supply components only; UniversallyOpen.of_flat assumes flatness everywhere and asserts openness of a map, not openness of its pointwise flat locus. No hit supplies all chart, stalk-map and flat-locus clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "{\"t\": \"2026-10-23T11:21:15Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFinitePresentation.iff_locallyOfFiniteType\"], \"digest\": \"e97402c1736d86df\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine finiteness and basis declarations supply components only; UniversallyOpen.of_flat assumes flatness everywhere and asserts openness of a map, not openness of its pointwise flat locus. No hit supplies all chart, stalk-map and flat-locus clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an S morphism from a locally finitely presented X to a locally finite type Y there are affine charts with finitely presented coordinate map and the pointwise flat locus is open",
+   "results": "{\"t\": \"2026-10-23T11:23:41Z\", \"tool\": \"leanfinder\", \"query\": \"For an S morphism from a locally finitely presented X to a locally finite type Y there are affine charts with finitely presented coordinate map and the pointwise flat locus is open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFinitePresentation_iff\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation\"], \"digest\": \"ad2e95f5d5c79a5b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: affine finiteness and basis declarations supply components only; UniversallyOpen.of_flat assumes flatness everywhere and asserts openness of a map, not openness of its pointwise flat locus. No hit supplies all chart, stalk-map and flat-locus clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-relative-flat-locus-base-change",
+  "date": "2026-10-23",
+  "group": "Q83"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, passage from Hilbert schemes to the morphism scheme and its evaluation; quot.tex Tag 0D1B, applying spaces-more-morphisms-lemma-where-isomorphism to the first projection of the universal closed family; Stacks Tag 05XD proof: first sentence, applying Tag 05XC to construct W_1; Tag 05XC reduction to the flat case, expanded via Tag 05XB: the source flat locus is open and commutes with arbitrary parameter base change (scheme form Tag 05VK).; repair extraction, old steps 1–2: compatible affine refinement, finite-presentation cancellation, openness and identification of the stalk-flat chart locus",
+   "via": [
+    "lem-sfb-relative-flat-locus-base-change",
+    "lem-sfb-universal-surjective-flat-open",
+    "lem-sfb-universal-isomorphism-open",
+    "lem-sfb-graphs-open-in-hilbert",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-relative-flat-affine-charts",
+  "worker": "stage1",
+  "group": "Q44",
+  "summary": "Five-step proof from affine refinement, the existing finite-presentation cancellation lemma, all-affine-pair finiteness, explicit fractions in the stalk maps, general algebraic openness of flatness, and flatness over a localized base. Statement unchanged; no new nodes. Checked source hypotheses and every cited statement, including the absence of a flatness assumption on p.",
+  "blueprint": "Realizes the existing blueprint.from.place extraction of old steps 1–2 of lem-sfb-relative-flat-locus-base-change (compatible charts, finite-presentation cancellation, and identification/openness of the stalk-flat chart locus). The inherited ancestor is null, as blueprint_refs.py ancestor reports; latest det-thm-sf-ctf-stability-direct-images proof (3) provides the unit context, with the detailed Stacks route carried by the inherited from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-openness-of-flatness",
+    "why": "Generic algebraic openness theorem 00RC for a finitely presented algebra and module, applied to C over B; it supplies the openness input to the inherited 05VJ route and does not replace a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-openness-of-flatness"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-bc00aaec3",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-bc00aaec3 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Read the item, all 5 steps, every cited node's statement, and Stacks 05VJ (more-morphisms l.4702; first two proof sentences: 02FV then 0399/00RC). The statement is unchanged; it is the affine-chart and flat-locus part of 05VJ with no flatness assumption on p. It gives exactly what the parent's step 0 uses: E is open and E equals U∩Z on each chart. Tested: the closed immersion Spec Z/2 to Spec Z (C_(2) is torsion, so E is empty and open); identity maps (E is all of Spec C); empty X; non-maximal primes. Step 1: the charts satisfy the needed containments (f(x) in q^{-1}W), the intersection is never assumed affine (E1), and the composite A to C equals p's map because q∘f=p. Step 2: the hypotheses of 02FV(1) match exactly; the pair lemmas 01T2/01TQ apply to (V,W), (Z,W) and (Z,V) with the containments built in step 1. Step 3: 01HV(b,c) gives the germ fractions, b/t goes to φ(b)/φ(t), and the prime of f(z) is φ^{-1}𝔯. Step 4: 00RC applies with R=B, S=C finitely presented over B, M=C. Step 5: 00HT(2) with W=B∖𝔟; the B-module structures agree, so flatness of C_𝔯 over B is flatness of f at z. proof_deps equals the union of uses. No new nodes. Duplicate search over 0399 and lfp flat-locus statements found none: flat-loci, polynomial-chart, finite-flat-target, Noetherian-neighbourhood and relative-universal-flat-open are all different. Not superseded: still unsplit in live and side-live. Tool use accepted: lem-weil-pbc-openness-of-flatness (generic 00RC). lem-a1-map-over-base-finite-presentation is slopmaster2-closed (locallyOfFinitePresentation_of_comp). No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RelativeFlatAffineCharts",
+  "declaration": "AlgebraicGeometry.exists_relative_flat_affine_charts",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeFlatAffineCharts.lean",
+  "statement": "theorem exists_relative_flat_affine_charts {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (f : X ⟶ Y) (hf : f ≫ q = p) [LocallyOfFinitePresentation p] [LocallyOfFiniteType q] (x : X) : ∃ (W : S.Opens) (V : Y.Opens) (Z : X.Opens) (_hW : IsAffineOpen W) (hV : IsAffineOpen V) (hZ : IsAffineOpen Z) (_hxW : p x ∈ W) (_hxV : f x ∈ V) (_hxZ : x ∈ Z) (hVW : V ≤ q ⁻¹ᵁ W) (hZW : Z ≤ p ⁻¹ᵁ W) (hZV : Z ≤ f ⁻¹ᵁ V), q.appLE W V hVW ≫ f.appLE V Z hZV = p.appLE W Z hZW ∧ (q.appLE W V hVW).hom.FiniteType ∧ (p.appLE W Z hZW).hom.FinitePresentation ∧ (f.appLE V Z hZV).hom.FinitePresentation ∧ (∀ z : Z, (hZ.primeIdealOf z).comap (f.appLE V Z hZV).hom = hV.primeIdealOf ⟨f z, hZV z.2⟩ ∧ ∃ (eC : X.presheaf.stalk z ≃+* Localization.AtPrime (hZ.primeIdealOf z).asIdeal) (eB : Y.presheaf.stalk (f z) ≃+* Localization.AtPrime ((hZ.primeIdealOf z).comap (f.appLE V Z hZV).hom).asIdeal), (∀ c : Γ(X, Z), eC (X.presheaf.germ Z z z.2 c) = algebraMap Γ(X, Z) (Localization.AtPrime (hZ.primeIdealOf z).asIdeal) c) ∧ (∀ b : Γ(Y, V), eB (Y.presheaf.germ V (f z) (hZV z.2) b) = algebraMap Γ(Y, V) (Localization.AtPrime ((hZ.primeIdealOf z).comap (f.appLE V Z hZV).hom).asIdeal) b) ∧ ∀ b, eC (f.stalkMap z (eB.symm b)) = Localization.localRingHom ((hZ.primeIdealOf z).comap (f.appLE V Z hZV).hom).asIdeal (hZ.primeIdealOf z).asIdeal (f.appLE V Z hZV).hom rfl b) ∧ IsOpen {r : PrimeSpectrum Γ(X, Z) | ((algebraMap Γ(X, Z) (Localization.AtPrime r.asIdeal)).comp (f.appLE V Z hZV).hom).Flat} ∧ ∀ z : Z, ((algebraMap Γ(X, Z) (Localization.AtPrime (hZ.primeIdealOf z).asIdeal)).comp (f.appLE V Z hZV).hom).Flat ↔ (f.stalkMap z).hom.Flat",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d30ead7df",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read node, Stacks 05VJ (more-morphisms l.4702), all 9 stmt_dep records, module and report. Every clause matches: lfp p / lft q instances only (no Flat p); affine W,V,Z with memberships and V≤q⁻¹W, Z≤p⁻¹W, Z≤f⁻¹V; appLE composite = p.appLE; FiniteType/FinitePresentation on the three chart maps; prime of f(z) = comap; eC/eB germ-normalized (canonical) with the stalk map = Localization.localRingHom; IsOpen of {r | C_r flat over B}; ∀z equivalence with (f.stalkMap z).hom.Flat = def-weil-flat-morphism 'flat at z'. Node identical to side-live apart from lean; lean.statement verbatim; imports exist; no duplicate (RelativeFlatLocusBaseChange needs base flatness). Edge cases (empty X, identity, Spec F2→Spec Z, non-maximal primes, single universe) fine. Sorry only, docstrings with source/blueprint and 5 steps. No findings, no compile needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261026T091958-L-3391216",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.exists_relative_flat_affine_charts"
+  ],
+  "sorry_after": []
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-sf-projection-identity-proper-counit",
+ "kind": "statement",
+ "title": "Identity calculation for the proper counit projection",
+ "statement": "Fix a six-functor operation datum $S$ of [def-fix-six-functor-datum] and a finite-type space $X$ of its space category. At any of its four coefficient stages write $U=S.\\mathrm{pull}(\\operatorname{id}_X)$ and $R=S.\\mathrm{direct}(\\operatorname{id}_X)$. Let $e:U\\xrightarrow{\\sim}\\operatorname{id}$ satisfy $e_{UM}\\circ\\kappa_M=t_M$ for every object $M$, where $\\kappa$ is the supplied compositor for the pair of identity maps and $t$ is the canonical equality transport along $\\operatorname{id}_X\\circ\\operatorname{id}_X=\\operatorname{id}_X$. Let $d:R\\xrightarrow{\\sim}\\operatorname{id}$ be the right-adjoint uniqueness isomorphism obtained from $e$ and the supplied adjunction $U\\dashv R$. For the proper direct-image counit projection $\\pi$ of [def-sf-constructible-projection-mates], one has $$(1_K\\otimes e_L)\\circ d_{K\\otimes UL}\\circ\\pi_{\\operatorname{id};K,L}=d_K\\otimes1_L.$$ At finite coefficients $K$ is arbitrary bounded constructible and $L$ is bounded constructible finite-Tor, and $e_L$ is restricted through the full inclusion of the finite-Tor subcategory. At integral coefficients $K,L$ are bounded constructible and only $L$ belongs to the datum's uniform finite-Tor domain. At rational and common coefficients both inputs are arbitrary bounded constructible objects. There is no compactification parameter, no assertion of existence of $e$, and no uniqueness assertion.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence"
+ },
+ "stmt_deps": [
+  "def-fix-six-functor-datum",
+  "def-sf-constructible-projection-mates"
+ ],
+ "proof": [
+  {
+   "text": "Apply lem-sf-projection-identity-tensor-unit at the direct image of K and L. At finite coefficients use the explicit partial tensor comparison and the finite proper transpose from lem-sf-finite-proper-projection-transpose. At higher coefficients unfold the equality transports in compactSupportProperProjection to obtain the supplied adjunction rightAdjointProjectionMap; its counit transpose is the defining generic adjunction identity.",
+   "uses": [
+    "lem-sf-projection-identity-tensor-unit",
+    "lem-sf-finite-proper-projection-transpose",
+    "def-sf-constructible-projection-mates",
+    "def-exchange-projection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let d be rightAdjointUniq after transporting the left adjoint by e. Mathlib rightAdjointUniq_hom_app_counit gives e at R(M) followed by d_M = ε_M. Precompose the desired equation by invertible e at tensor(RK,L). Naturality of e and the preceding counit identity turn the left side into the counit transpose of the projection followed by tensor(identity,e_L). On the right replace e at that tensor by the tensor-unit equation. Naturality of the tensor map d_K moves e_L to the right, and functoriality combines tensor(e_RK,identity) and tensor(d_K,identity) into tensor(ε_K,identity). Both sides are now identical. Cancel e. The same proved private categorical lemma handles the finite partial tensor and each higher tensor, without a Tor condition on K.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-sf-constructible-projection-mates",
+  "lem-sf-finite-proper-projection-transpose",
+  "lem-sf-projection-identity-tensor-unit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-prop-sf-pf-coherence/prop-sf-pf-coherence.proof.md",
+  "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A functor isomorphic to the identity has a unique unit compatible with its composition isomorphism",
+   "results": "Eight hits, including Adjunction.unitAsIsoOfIso, isIso_unit_of_iso and leftAdjointIdIso. These concern generic adjunctions, not the supplied coefficient-stage pullback units or tensor comparison.",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for the normalized six-functor operation data."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Identity pullback functors have a natural identity unit normalized by composition and the proper counit projection formula becomes identity under this unit",
+   "results": "Eight hits for Over.pullbackId and ChosenPullbacksAlong identity unit and counit lemmas; these concern ordinary over-category pullbacks.",
+   "date": "2026-10-27",
+   "verdict": "No theorem for finite, completed, rationalized and common-stage sheaf operations."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*(assoc|identity|tensorAction)",
+   "results": "Mathlib search returned generic projection/identity hits only. Repository search found ProjectionSystemCoherence (an identity equation on explicit system models), CoherentRationalPullbackIdentity and CommonStagePullbackIdentity (units requiring a simultaneous comparison system), and the existing constructible proper-coincidence laws. None states either of these two assertions on an arbitrary supplied SixFunctorDatum.",
+   "date": "2026-10-27",
+   "verdict": "Reuse the constructible proper-coincidence laws in the parent. State only the remaining normalized-unit and proper-counit steps. The source-library projection mate lemma remains available for their proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFormulaCoherence",
+  "date": "2026-10-27",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "First paragraph, identity sentence: the identity adjunctions give the identity mate; proper-case sentence and compactification independence",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProjectionIdentityProperCounit",
+  "file": "lean/Sheaf/Paper/ProjectionIdentityProperCounit.lean",
+  "declaration": "WeilConjectures.projectionIdentity_properCounit",
+  "declarations": [
+   "WeilConjectures.projectionIdentity_properCounit"
+  ],
+  "statement": "theorem projectionIdentity_properCounit (S : SixFunctorOperationDatum D C E n hn) :\n    (∀ X : SixFunctorSpace D,\n      letI : IsProper (𝟙 X : X ⟶ X).hom.left := by\n        change IsProper (𝟙 X.obj.left)\n        infer_instance\n      ∀ (e : S.finite.pull (𝟙 X) ≅ 𝟭 (sixFunctorFiniteCategory D C E n hn X)),\n      (∀ M : sixFunctorFiniteCategory D C E n hn X,\n        (S.finite.pullComposition (𝟙 X) (𝟙 X)).hom.app M ≫\n            e.hom.app ((S.finite.pull (𝟙 X)).obj M) =\n          eqToHom (congrArg (fun f ↦ (S.finite.pull f).obj M)\n            (Category.id_comp (𝟙 X)))) →\n      let d := ((S.finite.pullDirectAdjunction (𝟙 X)).ofNatIsoLeft e).rightAdjointUniq\n        Adjunction.id\n      ∀ (K : sixFunctorFiniteCategory D C E n hn X) (L : finiteTorConstructibleCategory C.l E n hn\n        X.obj.left),\n        CompactSupportFiniteProjection.properComponent S.toSixFunctorFiniteOperations (𝟙 X) K L ≫\n            d.hom.app (((CompactSupportFiniteProjection.partialTensor\n              S.toSixFunctorFiniteOperations X).obj K).obj\n              ((CompactSupportFiniteProjection.torPull S.toSixFunctorFiniteOperations (𝟙 X)).obj\n              L)) ≫\n            ((CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations X).obj\n              K).map (ObjectProperty.isoMk\n              (finiteTorConstructible C.l E n hn X.obj.left)\n              (X := (CompactSupportFiniteProjection.torPull\n                S.toSixFunctorFiniteOperations (𝟙 X)).obj L) (Y := L)\n              ((intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).ι.mapIso\n                (e.app ⟨L.obj, L.property.1⟩))).hom =\n          ((CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations X).map\n            (d.hom.app K)).app L) ∧\n    (∀ X : SixFunctorSpace D,\n      letI : IsProper (𝟙 X : X ⟶ X).hom.left := by\n        change IsProper (𝟙 X.obj.left)\n        infer_instance\n      ∀ (e : S.higher.integral.pull (𝟙 X) ≅ 𝟭 (sfIntegralConstructibleCategory C.l E X.obj.left)),\n      (∀ M : sfIntegralConstructibleCategory C.l E X.obj.left,\n        (S.higher.integral.pullComposition (𝟙 X) (𝟙 X)).hom.app M ≫\n            e.hom.app ((S.higher.integral.pull (𝟙 X)).obj M) =\n          eqToHom (congrArg (fun f ↦ (S.higher.integral.pull f).obj M)\n            (Category.id_comp (𝟙 X)))) →\n      let d := ((S.higher.integral.pullDirectAdjunction (𝟙 X)).ofNatIsoLeft e).rightAdjointUniq\n        Adjunction.id\n      ∀ (K : sfIntegralConstructibleCategory C.l E X.obj.left) (L :\n        sfIntegralConstructibleCategory C.l E X.obj.left),\n        S.integralFiniteTorDomain X L →\n        compactSupportProperProjection S.higher.integralExchange (𝟙 X) K L ≫\n            d.hom.app (((S.higher.integralTensor X).obj K).obj ((S.higher.integral.pull (𝟙 X)).obj\n              L)) ≫\n            ((S.higher.integralTensor X).obj K).map (e.app L).hom =\n          ((S.higher.integralTensor X).map (d.hom.app K)).app L) ∧\n    (∀ X : SixFunctorSpace D,\n      letI : IsProper (𝟙 X : X ⟶ X).hom.left := by\n        change IsProper (𝟙 X.obj.left)\n        infer_instance\n      ∀ (e : S.higher.rational.pull (𝟙 X) ≅ 𝟭 (sfRationalConstructibleCategory C.l E X.obj.left)),\n      (∀ M : sfRationalConstructibleCategory C.l E X.obj.left,\n        (S.higher.rational.pullComposition (𝟙 X) (𝟙 X)).hom.app M ≫\n            e.hom.app ((S.higher.rational.pull (𝟙 X)).obj M) =\n          eqToHom (congrArg (fun f ↦ (S.higher.rational.pull f).obj M)\n            (Category.id_comp (𝟙 X)))) →\n      let d := ((S.higher.rational.pullDirectAdjunction (𝟙 X)).ofNatIsoLeft e).rightAdjointUniq\n        Adjunction.id\n      ∀ (K : sfRationalConstructibleCategory C.l E X.obj.left) (L :\n        sfRationalConstructibleCategory C.l E X.obj.left),\n        compactSupportProperProjection S.higher.rationalExchange (𝟙 X) K L ≫\n            d.hom.app (((S.higher.rationalTensor X).obj K).obj ((S.higher.rational.pull (𝟙 X)).obj\n              L)) ≫\n            ((S.higher.rationalTensor X).obj K).map (e.app L).hom =\n          ((S.higher.rationalTensor X).map (d.hom.app K)).app L) ∧\n    (∀ X : SixFunctorSpace D,\n      letI : IsProper (𝟙 X : X ⟶ X).hom.left := by\n        change IsProper (𝟙 X.obj.left)\n        infer_instance\n      ∀ (e : S.closure.commonStage.pull (𝟙 X) ≅ 𝟭 (generalAlgebraicallyClosedConstructibleCategory\n        C.l C.Qbar X.obj.left)),\n      (∀ M : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left,\n        (S.closure.commonStage.pullComposition (𝟙 X) (𝟙 X)).hom.app M ≫\n            e.hom.app ((S.closure.commonStage.pull (𝟙 X)).obj M) =\n          eqToHom (congrArg (fun f ↦ (S.closure.commonStage.pull f).obj M)\n            (Category.id_comp (𝟙 X)))) →\n      let d := ((S.closure.commonStage.pullDirectAdjunction (𝟙 X)).ofNatIsoLeft e).rightAdjointUniq\n        Adjunction.id\n      ∀ (K : generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left) (L :\n        generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar X.obj.left),\n        compactSupportProperProjection S.closure.commonStageExchange (𝟙 X) K L ≫\n            d.hom.app (((S.closure.commonStageTensor X).obj K).obj ((S.closure.commonStage.pull (𝟙\n              X)).obj L)) ≫\n            ((S.closure.commonStageTensor X).obj K).map (e.app L).hom =\n          ((S.closure.commonStageTensor X).map (d.hom.app K)).app L)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "C-00817",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261027T012828-L-2337118",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y7",
+  "result": "pass",
+  "landing": "20261027T034813-L-3688246",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

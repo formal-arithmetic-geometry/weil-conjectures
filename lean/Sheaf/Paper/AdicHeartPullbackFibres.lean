@@ -17,8 +17,14 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.Constructible
 public import Mathlib.CategoryTheory.Whiskering
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.CompletedPullbackTriangles
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcUniformCompleteTriangulated
+import Sheaf.Paper.PbcConstructibleReductionPullback
+import Sheaf.Paper.PbcConstructibleReductionCriterion
+import Sheaf.Paper.PbcUniformReductionCriterion
 
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
@@ -92,25 +98,37 @@ attribute [instance] Base.over Base.finiteTypeLocal Base.finiteTypeCompact Base.
 
 variable {k : Type u} [Field k] (l : ℕ) [Fact l.Prime] [hl : Fact (IsUnit (l : k))]
 
+set_option linter.unusedSectionVars false in
 include hl in
 /-- Finite type over a field gives exactly the hypotheses of the recorded adic categories.
 Source: BS 6.8.11 and 6.8.14 (blueprint: lem-per-adic-heart-pullback-fibres).
 Proof: finite type over the noetherian one-point scheme Spec k gives noetherianity.
-The finite-type fibre-dimension bound on its unique fibre gives a finite dimension bound.
+The source library bounds the dimension of a quasi-compact finite-type k-scheme.
 The unit l in k maps to a unit in every local ring of the scheme. -/
 theorem base_properties (W : Base k) :
     IsNoetherian W.scheme ∧ (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) ∧
       (∀ x : W.scheme, IsUnit (l : W.scheme.presheaf.stalk x)) := by
-  sorry
+  have hloc : IsLocallyNoetherian W.scheme :=
+    LocallyOfFiniteType.isLocallyNoetherian (W.scheme ↘ Spec (.of k))
+  have hcompact : CompactSpace W.scheme :=
+    QuasiCompact.compactSpace_of_compactSpace (W.scheme ↘ Spec (.of k))
+  refine ⟨⟨⟩, exists_topologicalKrullDim_le (W.scheme ↘ Spec (.of k)), ?_⟩
+  intro x
+  simpa only [map_natCast] using hl.out.map
+    (((Scheme.ΓSpecIso (.of k)).inv ≫ (W.scheme ↘ Spec (.of k)).appTop) ≫
+      W.scheme.presheaf.germ ⊤ x trivial).hom
 
 /-- The two geometric finiteness properties do not depend on the coefficient prime.
 Source: BS 6.8 (blueprint: lem-per-adic-heart-pullback-fibres).
-Proof: finite type over the noetherian affine point gives noetherianity; the sole
-fibre of the structure morphism has a finite dimension bound by
-lem-fin-finite-type-fibre-dimension-bound. -/
+Proof: finite type over the noetherian affine point gives noetherianity. Apply the
+source library theorem exists_topologicalKrullDim_le directly to the structure morphism. -/
 theorem base_geometric_properties (W : Base k) :
     IsNoetherian W.scheme ∧ (∃ n : ℕ, topologicalKrullDim W.scheme ≤ n) := by
-  sorry
+  have hloc : IsLocallyNoetherian W.scheme :=
+    LocallyOfFiniteType.isLocallyNoetherian (W.scheme ↘ Spec (.of k))
+  have hcompact : CompactSpace W.scheme :=
+    QuasiCompact.compactSpace_of_compactSpace (W.scheme ↘ Spec (.of k))
+  exact ⟨⟨⟩, exists_topologicalKrullDim_le (W.scheme ↘ Spec (.of k))⟩
 
 /-- The noetherian structure supplied by the finite-type hypothesis.
 Source: BS 6.8 (blueprint: lem-per-adic-heart-pullback-fibres). -/
@@ -197,7 +215,41 @@ theorem integralPull_mem {V T : Base k} (h : V.scheme ⟶ T.scheme)
     (K : PbcBoundedConstructibleComplete T.scheme (pbcIntegralDatum l E)) :
     PbcIsBoundedConstructibleComplete V.scheme (pbcIntegralDatum l E)
       ((pbcActualCompletedPull h (pbcIntegralDatum l E)).obj K.obj) := by
-  sorry
+  let d := pbcIntegralDatum l E
+  obtain ⟨a, b, hp⟩ := (pbcUniformReductionCriterion l E T.scheme K.obj).mp
+    ⟨K.property.2.1, K.property.2.2⟩
+  have hb : ∀ (n : ℕ) (q : ℤ), (q < a ∨ b < q) →
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((pbcCompletedReduction T.scheme d n).obj K.obj)) := by
+    intro n q hq
+    let R := pbcRestrict (pbcLevelConstantComparison T.scheme d n).hom
+    have := (hp n).1
+    have := (hp n).2.1
+    have hz : IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((pbcConstantReduction T.scheme d n).obj K.obj)) := by
+      rcases hq with hq | hq
+      · exact DerivedCategory.isZero_of_isGE _ a q hq
+      · exact DerivedCategory.isZero_of_isLE _ b q hq
+    have hz' := hz.of_iso ((R.mapDerivedCategoryHomologyFunctorIso q).app
+      ((pbcCompletedReduction T.scheme d n).obj K.obj))
+    have : R.Faithful := by
+      constructor
+      intro M N α β hαβ
+      apply SheafOfModules.Hom.ext
+      exact (PresheafOfModules.restrictScalars _).map_injective
+        (congrArg SheafOfModules.Hom.val hαβ)
+    apply (IsZero.iff_id_eq_zero _).mpr
+    apply R.map_injective
+    simpa using (IsZero.iff_id_eq_zero _).mp hz'
+  obtain ⟨hc, hcons, hbounds⟩ := pbc_constructible_reduction_pullback l E h a b K.obj
+    K.property.1 (fun n ↦ (hp n).2.2) hb
+  have hstrict :=
+    (pbc_constructible_reduction_criterion l E V.scheme a b _ hbounds).mpr ⟨hc, hcons⟩
+  let e := (pbcActualCompletedPullback_tower d h).exists.choose.app
+    ⟨K.obj, K.property.1⟩
+  let := (pbcIntegralUniformComplete_isTriangulated l E V.scheme
+    (baseDimension V).out (basePrimeUnit l V).out).1
+  exact ObjectProperty.prop_of_iso _ e hstrict
 
 /-- The actual completed pullback on integral objects and arrows, rationalized on tensor Homs.
 Source: BS Remark 6.8.15 (blueprint: lem-per-adic-heart-pullback-fibres). -/
@@ -471,7 +523,8 @@ theorem pullFamily_existsUnique {V T : Base k} (h : V.scheme ⟶ T.scheme) :
         F.Φ L = rationalPull l (pbcFiniteField.{u} l Qbar L) h) ∧
       PbcPullbackBetaSpec l Qbar h
         (fun L ↦ integralPull_mem l (pbcFiniteField.{u} l Qbar L) h) F := by
-  sorry
+  simpa only [stages, rationalPull, pbcDescentPullback] using
+    (pbcQbarPullFamily_existsUnique l Qbar h)
 
 /-- The unique scalar-compatible completed pullback family.
 Source: BS Remark 6.8.15 (blueprint: lem-per-adic-heart-pullback-fibres). -/

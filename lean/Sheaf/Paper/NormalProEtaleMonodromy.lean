@@ -15,14 +15,9 @@ public import Sheaf.Paper.LisseCompletedSystemComparison
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent
-import Sheaf.Paper.EtaleLocalMonodromyRealization
-import Sheaf.Paper.LatticeSheafLocallyConstant
-import Sheaf.SecPurity.NormalLocallyConstantFiniteSection
-import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
+import Sheaf.Paper.EtaleLocalMonodromyRealizationBase
+import Sheaf.Paper.IntegralFibreMonodromyReconstruction
+import Sheaf.Paper.NormalLisseCompletedLattice
 
 /-!
 # Normal pro-etale monodromy
@@ -39,7 +34,6 @@ simultaneous finite-level normalization for every invariant lattice.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -113,6 +107,48 @@ theorem normal_proEtale_monodromy (l : ℕ) [Fact l.Prime]
       IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x))
     [∀ x : X, Invertible (l : X.residueField x)] :
     Nonempty (NormalProEtaleMonodromy l E p) := by
-  sorry
+  classical
+  let : ConnectedSpace X := p.connected
+  let : CompactSpace X := p.compact
+  let : IsNoetherian X := ⟨⟩
+  let P : ProEtale.CompletedLisse.Base l :=
+    { E := E
+      field := inferInstance
+      algebra := inferInstance
+      finiteDimensional := inferInstance
+      X := X
+      noetherian := inferInstance
+      separated := inferInstance
+      invertible := inferInstance }
+  obtain ⟨S⟩ := ProEtale.CompletedLisse.completed_system_comparison.{u} l
+  let C := S.comparison P
+  obtain ⟨R⟩ := exists_sf_monodromy_realization l E
+  let J := R X p
+  let Q : ObjectProperty (SfRationalModules l E X) :=
+    fun F ↦ F.IsFiniteLocallyFree
+  let F : SfContinuousRepresentations l E p ⥤ Q.FullSubcategory :=
+    Q.lift J.functor J.lisse
+  let : J.functor.Full := J.fullyFaithful.full
+  let : J.functor.Faithful := J.fullyFaithful.faithful
+  let : F.Full := inferInstanceAs (Q.lift J.functor J.lisse).Full
+  let : F.Faithful := inferInstanceAs (Q.lift J.functor J.lisse).Faithful
+  let : F.EssSurj := ⟨fun L ↦ by
+    obtain ⟨M, ⟨eM⟩⟩ :=
+      ProEtale.CompletedLisse.normal_lisse_completed_lattice l P hnormal C L.obj L.property
+    obtain ⟨_, _, _, _, _, _, _, _, _, _, _, _, _, V, _, _, _, _, _, _, _, _, ⟨eV⟩⟩ :=
+      integral_fibre_monodromy_reconstruction l P p C J M
+    exact ⟨V, ⟨Q.isoMk (eV ≪≫ eM)⟩⟩⟩
+  let : F.IsEquivalence := {}
+  exact ⟨{
+    finiteCorrespondence := J.finiteCorrespondence
+    functor := J.functor
+    fullyFaithful := J.fullyFaithful
+    additive := J.additive
+    linear := J.linear
+    lisse := J.lisse
+    normalization := J.normalization
+    naturality := J.naturality
+    equivalence := F.asEquivalence.symm
+    equivalence_realization := ⟨Q.liftCompιIso J.functor J.lisse⟩ }⟩
 
 end AlgebraicGeometry.Scheme

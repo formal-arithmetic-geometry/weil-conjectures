@@ -1,0 +1,198 @@
+{
+ "id": "def-sf-open-quotient-koszul-models",
+ "kind": "definition",
+ "title": "Canonical DVR coefficient, completion and open comparison models",
+ "statement": "Fix the prime, finite extension, valuation ring, small pro-etale coefficient categories and adic datum of [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site, def-weil-pbc-adic-coefficient-datum]. OpenDvrCoefficientModel consists of finite-constant and limit-projection-normalized coefficient ring isomorphisms and their actual scalar restriction equivalence. OpenDvrCompletionModel records simultaneous quotient towers, normalized total limits, strict K-flat augmentations, the specified Koszul and intrinsic unit equations and the quotient-completeness criterion [def-weil-derived-complete, prop-weil-pbc-koszul-reconstruction, lem-coef-derived-system-evaluation-calculus]. These coefficient and completion structures retain normalized comparisons as fields. The separate OpenDvrOpenModel interface is recorded in its own definition node.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E (lemma-derived-completion-koszul), with sites-modules.tex Tag 093M (lemma-completion-flat). Agent completed-coefficient augmentation comparison and open-completeness bridge, extracted arguments 3-4 of the returned item; completed open preservation is the theorem lem-cbc-completed-extension-zero-comparison."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-derived-complete",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Unchanged extraction of the canonical comparison interfaces."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of ring sheaf module categories transports strict quotient tensor towers and the total derived inverse limit adjunction unit",
+   "results": "OK 8 hits: LightCondensed monoidal and internally projective declarations; none identifies these normalized strict quotient constructions.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"unit\", \"equivalence\"",
+   "results": "OK 4 hits: CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, instIsIsoFunctorCounitOfIsEquivalence_1, instIsIsoFunctorUnitOfIsEquivalence, instIsIsoFunctorUnitOfIsEquivalence_1.",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary adjunction equivalence units, not adic completion."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Cc]omplet|[Cc]omplet.*Koszul",
+   "results": "OK 0 hits in Mathlib.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion over a discrete valuation ring is preserved by extension by zero along a quasicompact open immersion, using a Koszul quotient tower and its derived inverse limit",
+   "results": "OK 8 hits: AdicCompletion ring/module definitions and basic zero identities, IsAdicComplete.bot, Valuation.Completion, DerivedCategory.instHasZeroObject; none identifies the normalized derived sheaf completion or its coefficient comparisons.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.OpenQuotientKoszulCompleteness",
+  "date": "2026-10-24",
+  "group": "M3"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-coherence",
+   "place": "Integral coefficient comparison interfaces, same statement-level data as the parent.",
+   "via": [
+    "lem-sf-open-quotient-koszul-completeness",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-sf-integral-compactification-system-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.OpenQuotientKoszulModels",
+  "file": "lean/Sheaf/SixFunctors/OpenQuotientKoszulModels.lean",
+  "declaration": "WeilConjectures.OpenDvrCoefficientModel",
+  "declarations": [
+   "WeilConjectures.openDvrAbSheafify",
+   "WeilConjectures.openDvrAbLocallyBijective",
+   "WeilConjectures.openDvrEssentiallySmall",
+   "WeilConjectures.openDvrResolution",
+   "WeilConjectures.OpenDvrCoefficientModel",
+   "WeilConjectures.OpenDvrCoefficientModel.derived",
+   "WeilConjectures.OpenDvrCoefficientModel.towers",
+   "WeilConjectures.OpenDvrCoefficientModel.ordinaryTowers",
+   "WeilConjectures.OpenDvrCoefficientModel.complexes",
+   "WeilConjectures.OpenDvrCoefficientModel.towerComplexes",
+   "WeilConjectures.OpenDvrCompletionModel",
+   "WeilConjectures.openDvrSystem"
+  ],
+  "statement": "structure OpenDvrCoefficientModel\n    (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))\n    (T : Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "M3",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "C-04b5d",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261024T190304-L-4015494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261027T034706-L-3674777",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "statement_change": {
+  "date": "2026-10-27",
+  "by": "K7 stage 2",
+  "old_statement": "Fix the prime, finite extension, valuation ring, small pro-etale coefficient categories and adic datum of [def-weil-l-adic-coefficient-extension, def-weil-pbc-proetale-site, def-weil-pbc-adic-coefficient-datum]. OpenDvrCoefficientModel consists of finite-constant and limit-projection-normalized coefficient ring isomorphisms and their actual scalar restriction equivalence. OpenDvrCompletionModel records simultaneous quotient towers, normalized total limits, strict K-flat augmentations, the specified Koszul and intrinsic unit equations and the quotient-completeness criterion. OpenDvrOpenModel records finite-constant-normalized and completed-projection-normalized open restriction of coefficients, actual scalar restriction equivalence and the exact open-extension adjunction of [lem-sf-open-tensor-normalization]. The coefficient and completion structures retain the complete normalized comparisons as fields, rather than arbitrary isomorphisms of objects.",
+  "what": "Separate the unrelated open-extension interface from the coefficient/completion interfaces. Their mathematical definitions and Lean signatures do not change. The old bundled definition dependency on open tensor normalization introduced a spurious circular dependency when the coefficient-only intrinsic criterion was used below proper base change.",
+  "source": {
+   "document": "literature/stacks-project/algebraization.tex",
+   "place": "Tag 0A0E (lemma-derived-completion-koszul), with sites-modules.tex Tag 093M (lemma-completion-flat). Agent completed-coefficient augmentation comparison and open-completeness bridge, extracted arguments 3-4 of the returned item; completed open preservation is the theorem lem-cbc-completed-extension-zero-comparison."
+  },
+  "citers": [
+   {
+    "id": "lem-sf-open-dvr-augmented-reduction-comparison",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-augmented-tower-comparison",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-derived-tower-comparison",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-intrinsic-criterion",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-intrinsic-open-transport",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-limit-comparison",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-ordinary-tensor-transport",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-ringed-identification",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-roos-completion-comparison",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-dvr-strict-reduction-comparison",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   },
+   {
+    "id": "lem-sf-open-quotient-koszul-completeness",
+    "holds": true,
+    "note": "Existing Lean statement is unchanged. Open-model citations are redirected to def-sf-open-dvr-open-model where appropriate; coefficient and completion citations retain the original id."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-l-adic-coefficient-extension",
+   "def-weil-pbc-proetale-site",
+   "def-weil-pbc-adic-coefficient-datum",
+   "def-weil-derived-complete",
+   "prop-weil-pbc-koszul-reconstruction",
+   "lem-coef-derived-system-evaluation-calculus",
+   "lem-sf-open-tensor-normalization"
+  ]
+ }
+}

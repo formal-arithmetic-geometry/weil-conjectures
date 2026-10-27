@@ -13,11 +13,14 @@
   "def-fix-six-functor-datum",
   "def-weil-open-closed-recollement",
   "def-weil-weil-sheaf-complex",
-  "def-exchange-projection"
+  "def-exchange-projection",
+  "def-zl-frobenius-compact-support-comparison",
+  "def-zl-field-weil-shriek-shift-data",
+  "def-zl-common-stage-weil-shriek"
  ],
  "proof": [
   {
-   "text": "Write $A=j_!j^*K$, $B=K$, $C=i_*i^*K$. At a finite coefficient stage and at the integral stage, use [prop-sf-open-closed-triangle-all-stages] to obtain the functorial distinguished triangle $\\Delta_K=(A\\xrightarrow{\\varepsilon}B\\xrightarrow{\\eta}C\\xrightarrow{\\delta}A[1])$. Its first two maps are the actual open counit and closed unit; its vertices belong to the stated bounded constructible categories. We use the functorial triangle supplied by that theorem, including its third arrow, rather than an arbitrary completion of a pair of maps.",
+   "text": "Put $A=j_!j^*K$, $C=i_*i^*K$. The functorial triangle $\\Delta_K=(A\\xrightarrow\\varepsilon K\\xrightarrow\\eta C\\xrightarrow\\delta A[1])$, with its actual counit and unit, is [prop-sf-open-closed-triangle-all-stages]. At finite coefficients transport the unique natural boundary of sfOpenClosedTriangle_finite through the operation datum's normalized open and direct adjunction comparisons. Their counit and unit equations identify the first two maps; conjugation by the two vertex isomorphisms preserves distinguishedness and uniqueness.",
    "uses": [
     "prop-sf-open-closed-triangle-all-stages"
    ],
@@ -28,12 +31,9 @@
    }
   },
   {
-   "text": "First take $\\Lambda=A_n$ and fix a compactification $c$ of $f$. By [lem-compact-support-direct-image-triangulated], $F=Rf^c_{!,n}$ sends $\\Delta_K$ to a distinguished triangle, whose third arrow is $F(\\delta)$ followed by the shift comparison. The compact-support construction identifies the open immersion functor with extension by zero by taking its identity proper factor. Apply the canonical composition and proper-coincidence isomorphisms of [lem-sf-package-compactified-tower-comparisons] to obtain $a:F(A)\\xrightarrow{\\sim}R(fj)_!j^*K$ and $b:F(C)\\xrightarrow{\\sim}R(fi)_!i^*K$. Keep the middle vertex $F(K)=Rf_!K$. The resulting three arrows are $F(\\varepsilon)a^{-1}$, $bF(\\eta)$, and $a[1]F(\\delta)b^{-1}$, with the shift comparison understood in the last expression. This is an isomorphic distinguished triangle. Naturality of $a,b$ and functoriality of $\\Delta_K$ give functoriality of all three arrows. The compactification comparisons in the cited theorem identify these formulas for different choices of $c$. The pullback, direct-image and compact-support preservation clauses (i), (iii), (iv) of [thm-sf-ctf-stability] ensure that all these vertices are in the finite-Tor constructible categories when the input is.",
+   "text": "At $A_n$, $F=Rf_{!,n}^c$ is exact [lem-compact-support-direct-image-triangulated]. Clauses (i),(iii),(iv) of [thm-sf-ctf-stability] keep the vertices in $D^b_{ctf}$. The Lean proof uses Functor.map_distinguished, conjugates by the specified open/closed composition comparisons and S.finiteSupport, and uses uniqueness of the source connecting map for the formula for every source boundary. Pullback and compact-support finite-Tor stability are transported through S.finitePullback and S.finiteSupport; Tor amplitude is invariant under object isomorphism.",
    "uses": [
     "lem-compact-support-direct-image-triangulated",
-    "def-compact-support-direct-image-detailed",
-    "lem-sf-package-compactified-tower-comparisons",
-    "def-weil-triangulated-category",
     "thm-sf-ctf-stability"
    ],
    "elementary": false,
@@ -43,11 +43,10 @@
    }
   },
   {
-   "text": "For an integral input, reduction $r_n=-\\otimes^L_{\\widehat R_X}(A_n)_X$ is exact by [lem-pur-derived-change-of-rings], so $r_n\\Delta_K$ is distinguished. The operation comparisons of [lem-fix-operation-reduction] identify its vertices with $j_!j^*K_n,K_n,i_*i^*K_n$ and identify its first two maps with the finite counit and unit. The uniqueness clause of [prop-sf-open-closed-triangle-all-stages] then identifies its third map with $\\delta_{K_n}$ as well. This use of uniqueness is made before applying $Rf_{!,n}$; no vanishing or uniqueness is assumed for the compact-support image triangle. Thus the finite images in step 2 are precisely the images of the reduced integral triangle, including the connecting map.",
+   "text": "The integral refinement is assembled in Lean from [lem-sf-package-integral-recollement-source] and [lem-sf-package-integral-support-tower-normalization]. Install the two exact shift structures and use sfPackageLocalizationImage on the source boundary through the composite strict-tower/total-limit functor, with its specified support comparison. Lift the resulting natural ambient boundary through the fully faithful constructible inclusion, after composing with the inverse inclusion shift comparison. Fullness gives the lift, faithfulness gives naturality, and the shift isomorphism cancellation proves that its ambient image is the constructed boundary. Naturality of the support comparison gives the map equation; the composite shift gives the final equation.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-fix-operation-reduction",
-    "prop-sf-open-closed-triangle-all-stages"
+    "lem-sf-package-integral-recollement-source",
+    "lem-sf-package-integral-support-tower-normalization"
    ],
    "elementary": false,
    "source": {
@@ -56,9 +55,11 @@
    }
   },
   {
-   "text": "Keep the same compactification $c$ for every $n$. Apply the exact $R$-linear functor $\\mathcal T_f^c$ of [lem-weil-compact-support-reduction-tower-functor] to $\\Delta_K$. This produces one distinguished triangle in $D(\\operatorname{Tow}(\\operatorname{Mod}(\\widehat R_Y)))$, not merely three families of finite objects. Its three arrows are $\\mathcal T_f^c(\\varepsilon)$, $\\mathcal T_f^c(\\eta)$, and $\\mathcal T_f^c(\\delta)$ with the specified shift comparison. The theorem identifies its $n$th evaluation on objects and morphisms with $\\operatorname{Res}_nRf^c_{!,n}(r_n\\Delta_K)$. By step 3 these are the finite recollement-image triangles. For each of $A,B,C$, its $m$-to-$n$ transition is the image of the quotient map $A_m\\twoheadrightarrow A_n$ followed by the specified restriction-of-scalars comparison. Because these are actual maps in the derived tower category, their compatibility with every triangle arrow, including the shifted third arrow, is part of this single tower triangle. No arbitrary lifting from levelwise derived arrows is used.",
+   "text": "The outer vertex identifications are exactly the composition, open-identification and proper-identity isomorphisms already in the operation datum. The generic exact-image proof conjugates the distinguished image triangle by these outer isomorphisms and the middle realization comparison. Naturality proves the first two squares and shift functoriality proves the third. No separate theorem about simultaneous compactification refinements is used.",
    "uses": [
-    "lem-weil-compact-support-reduction-tower-functor"
+    "def-fix-six-functor-datum",
+    "def-sf-package-localization-boundary-data",
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
@@ -67,64 +68,33 @@
    }
   },
   {
-   "text": "Apply the exact total-limit functor of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to the tower triangle of step 4. By [def-weil-integral-rational-qbar-compact-support], interpreted with the coherent lift just used, $R\\lim\\mathcal T_f^c(M)$ is the actual integral compact-support value $Rf_!^cM$ for $M=A,B,C$, and on a map it is the induced total-limit map. Thus all three integral arrows are the total limits of the corresponding tower arrows. In particular the third arrow is $R\\lim(\\mathcal T_f^c(\\delta))$ followed by the two shift comparisons, fixing its sign and its functoriality. The canonical composition and proper-coincidence identifications of [lem-sf-package-compactified-tower-comparisons] now identify the outer vertices with $R(fj)_!j^*K$ and $R(fi)_!i^*K$, just as in step 2. That theorem identifies these as the specified completed comparisons and includes their quotient transitions. Conjugating the whole triangle by these identifications gives exactly the integral triangle claimed in the statement.",
+   "text": "Obtain an integral tower boundary at the base field using sfPackageLocalizationIntegralTower. Apply [lem-sf-package-localization-rational-transport]. For a finite coefficient subfield E0, form an operation datum with higher stage S.closure.coefficientStages E0 and finite stage (S.coefficientIntegralNormalization E0).finiteLevels 0; retain the same closure and its recorded normalizations and coherence. The existing integral-tower theorem then supplies the tower boundary at E0. Apply rational transport at E0, and choose these natural transformations (each is a uniquely determined extension). Apply [lem-sf-package-localization-boundary-descent] to this family. Assemble the base rational boundary, the finite-field family, the descended boundary and all their equations into the required field-system witness.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-sf-package-compactified-tower-comparisons"
+    "lem-sf-package-localization-rational-transport",
+    "lem-sf-package-localization-boundary-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-    "place": "prop-functor-package proof, The recollement-image part of the sentence \"Clause (3) follows from ...\" and the sentence \"Clause (5) is ...\""
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "Clause (3), exact compact-support image of recollement, followed by coefficient passage"
    }
   },
   {
-   "text": "There is no unbounded output being silently admitted to the small integral category: the three inputs $A,B,C$ are bounded constructible by step 1, and [lem-sf-integral-compact-support-constructible] applies to each input with the fixed compactification $c$. It says that the total limits are derived complete and their reductions are bounded constructible in one finite cohomological interval independent of $n$. Consequently the entire triangle of step 5 is a triangle of the integral constructible category, whose inclusion is exact by [lem-weil-integral-constructible-triangulated].",
-   "uses": [
-    "lem-sf-integral-compact-support-constructible",
-    "lem-weil-integral-constructible-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-    "place": "prop-functor-package proof, The recollement-image part of the sentence \"Clause (3) follows from ...\" and the sentence \"Clause (5) is ...\""
-   }
-  },
-  {
-   "text": "Apply raw scalar localization to the integral triangle; it is exact by the definition [def-weil-rationalization-karoubi]. The exact transport theorem [prop-weil-pbc-rational-transport] preserves the shift comparison and extends every natural transformation with component $u\\otimes1$. Therefore it carries all three arrows, including the connecting map, to the rational triangle. The coefficient compatibilities of [lem-fix-operation-reduction] identify the localized vertices and counit/unit with the specified rational operations and maps. For $E\\subset L$, apply the exact functor of [lem-weil-scalar-extension-exact-triangulated]; the same operation comparisons identify the triangle over $L$, with its third arrow the image of the one over $E$. At $\\overline{\\mathbf Q}_\\ell$, choose one common finite field stage for the triangle and its maps. By [def-weil-algebraically-closed-coefficients], its image is distinguished and equality of represented morphisms is equality after a further common extension. The descent theorem [prop-weil-pbc-descent-functors] therefore descends the compatible transformations and their equations. This proves independence of the chosen stage for the whole triangle, not just its vertices.",
-   "uses": [
-    "def-weil-rationalization-karoubi",
-    "prop-weil-pbc-rational-transport",
-    "lem-fix-operation-reduction",
-    "lem-weil-scalar-extension-exact-triangulated",
-    "def-weil-algebraically-closed-coefficients",
-    "prop-weil-pbc-descent-functors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-    "place": "prop-functor-package proof, The recollement-image part of the sentence \"Clause (3) follows from ...\" and the sentence \"Clause (5) is ...\""
-   }
-  },
-  {
-   "text": "All constructions above allow either stratum to be empty: the recollement theorem has no nonemptiness hypothesis, the fixed-compactification functors and total limit apply to its triangle, and the conjugating composition maps remain isomorphisms. Thus these are also the required specializations for $U=\\varnothing$ and $Z=\\varnothing$. For Weil structures, which [def-weil-weil-sheaf-complex] defines at $E$ and $\\overline{\\mathbf Q}_\\ell$, the three maps of $\\Delta_K$ are equivariant by [prop-sf-open-closed-triangle-all-stages]. By [lem-fix-weil-operations], compact-support image, units, counits and composition comparisons are equivariant. Hence each of the three conjugated image maps in step 2 or step 5, after field passage, is a morphism of Weil pairs. This asserts equivariance of an underlying distinguished triangle, without imposing a triangulated structure on the category of fixed pairs.",
-   "uses": [
-    "prop-sf-open-closed-triangle-all-stages",
-    "def-weil-weil-sheaf-complex",
-    "lem-fix-weil-operations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-    "place": "prop-functor-package proof, The recollement-image part of the sentence \"Clause (3) follows from ...\" and the sentence \"Clause (5) is ...\""
-   }
-  },
-  {
-   "text": "Finally apply [fix-prop-projection-formula] to the specified $K\\in D^b_c(X,\\Lambda)$ and $L\\in D^b_{ctf}(Y,\\Lambda)$. Its morphism is the canonical projection transformation of the same operation datum, with precisely this source and target. It is invertible, natural in both arguments, and compatible with composition, compactification comparisons, finite reduction on these finite-Tor domains, scalar extension and proper coincidence. At the integral stage the operations are the completed operations named in [def-weil-derived-pullback-tensor-hom]. Thus this application gives exactly the last paragraph of the item, without replacing the canonical map by an unspecified isomorphism or asserting a projection formula for nonproper ordinary direct image.",
+   "text": "Apply [fix-prop-projection-formula] to the stated $K,L$. Its canonical map, domains and all listed compatibilities are exactly those claimed. Integral tensor and pullback are completed [def-weil-derived-pullback-tensor-hom].",
    "uses": [
     "fix-prop-projection-formula",
     "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+    "place": "prop-functor-package proof, The recollement-image part of the sentence \"Clause (3) follows from ...\" and the sentence \"Clause (5) is ...\""
+   }
+  },
+  {
+   "text": "The main conjunction is assembled from the existing finite-image, integral-tower, and common-stage refinement declarations in this module. Its integral boundary is the ambient boundary retained by the tower witness. Its rational and common-stage triangles are retained by the single field-system witness. The four projection laws are direct components of compactSupportProjectionFormula from [fix-prop-projection-formula]. The integral-tower and common-stage refinements retain their original proof obligations; no new hole is introduced by this assembly.",
+   "uses": [
+    "fix-prop-projection-formula"
    ],
    "elementary": false,
    "source": {
@@ -136,31 +106,22 @@
  "proof_deps": [
   "prop-sf-open-closed-triangle-all-stages",
   "lem-compact-support-direct-image-triangulated",
-  "def-compact-support-direct-image-detailed",
-  "lem-sf-package-compactified-tower-comparisons",
-  "def-weil-triangulated-category",
   "thm-sf-ctf-stability",
-  "lem-pur-derived-change-of-rings",
-  "lem-fix-operation-reduction",
-  "lem-weil-compact-support-reduction-tower-functor",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-integral-rational-qbar-compact-support",
-  "lem-sf-integral-compact-support-constructible",
-  "lem-weil-integral-constructible-triangulated",
-  "def-weil-rationalization-karoubi",
-  "prop-weil-pbc-rational-transport",
-  "lem-weil-scalar-extension-exact-triangulated",
-  "def-weil-algebraically-closed-coefficients",
-  "prop-weil-pbc-descent-functors",
-  "def-weil-weil-sheaf-complex",
-  "lem-fix-weil-operations",
+  "lem-sf-package-integral-recollement-source",
+  "lem-sf-package-integral-support-tower-normalization",
+  "def-fix-six-functor-datum",
+  "def-sf-package-localization-boundary-data",
+  "def-weil-triangulated-category",
+  "lem-sf-package-localization-rational-transport",
+  "lem-sf-package-localization-boundary-descent",
   "fix-prop-projection-formula",
   "def-weil-derived-pullback-tensor-hom"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
-  "place": "prop-functor-package proof, The recollement-image part of the sentence \"Clause (3) follows from ...\" and the sentence \"Clause (5) is ...\"; strict-tower details use the existing coherent tower and total-limit tools."
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/prop-functor-package.proof.md",
+  "place": "Clause (3), rationalization and common-stage passage",
+  "note": "C5: CommonStages assembled by reusing IntegralTower at every coefficient field and reducing coefficient passage to rational boundary transport and scalar compatibility/descent. These are two strictly smaller, documented intermediate obligations. Existing finite, integral and projection arguments retained."
  },
  "mathlib_searches": [
   {
@@ -259,10 +220,10 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sf-package-localization-projection-realization",
   "worker": "stage1",
-  "summary": "Reused the all-stage recollement triangle, the exact coherent compact-support reduction-tower lift, and exact total derived limit. Wrote the conjugation formulas for all three arrows, checked finite connecting maps before compact-support image, and retained the strict quotient transitions through the limit. Added no nodes. The existing projection theorem has exactly the required domains and compatibilities; the item statement is unchanged.",
+  "summary": "Returned D1/C5 repair: dropped all three conjunction blocks, retained direct citations of existing inputs in the parent, and created only the reduced-boundary comparison and the coherent total-limit choice of integral functor maps. Parent statement and route unchanged; full historical proof retained in report.",
   "blueprint": "Realizes the recollement-image part of prop-functor-package.proof.md, Clause (3), and its Clause (5) projection assertion. The existing sk-thm-sf-package unit record still contains the older clause numbering; no unit route is replaced.",
   "tool_uses": [
    {
@@ -274,20 +235,12 @@
     "why": "Supplies finite compact-support exactness, explicitly required by the current blueprint clause (3). No theorem of the package assembly unit itself supplies this input."
    },
    {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic exactness of derived coefficient reduction; needed to compare the connecting maps before compact-support image. No theorem of the package assembly unit itself supplies this input."
-   },
-   {
     "node": "lem-fix-operation-reduction",
     "why": "The canonical operation comparisons preserve units and counits under finite reduction and coefficient transport. No theorem of the package assembly unit itself supplies this input."
    },
    {
     "node": "lem-weil-compact-support-reduction-tower-functor",
     "why": "Generic coherent tower-valued exact functor; the package unit has no other statement lifting all triangle arrows with quotient transitions. No theorem of the package assembly unit itself supplies this input."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic exact total derived inverse limit on strict ringed-site towers; essential for the coherent connecting arrow. No theorem of the package assembly unit itself supplies this input."
    },
    {
     "node": "lem-sf-integral-compact-support-constructible",
@@ -340,11 +293,58 @@
   "thm-sf-ctf-stability"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q136-63f7b3781",
-  "group": "Q136",
+  "reviewer": "NT-cc-Q143-3af48312f",
+  "group": "Q143",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-63f7b3781 (reviewer sub-agent of L); spot-checked: I read the delivery in full: the item only, no new nodes, statement unchanged. Route: blueprint main-20261015 prop-functor-package proof. Clause (3) is the image of the recollement triangle under exact finite compact support, plus composition and proper coincidence; clause (5) is fix-prop-projection-formula. The item cites prop-sf-open-closed-triangle-all-stages, the pro-étale all-stage node in the same unit as the blueprint's lem-cbc-open-closed-recollement, instead of that étale finite-ring node; this is the correct typing, not a replacement route. Composition and proper coincidence go through the sibling lem-sf-package-compactified-tower-comparisons. Steps: (1) gives the triangle and Hom(j_!j^*K[m],i_*i^*K)=0, which makes the third arrow unique (I re-derived this via TR3). (2) The finite Rf^c_! is exact, the conjugation formulas give an isomorphic triangle, and thm-sf-ctf-stability (i),(iii),(iv) keeps the vertices in ctf. (3) r_n is exact by lem-pur-derived-change-of-rings. The reduction comparisons preserve units and counits; the integral open counit is the ordinary L⊣J counit of the all-stages proof, so this applies. The finite third map is fixed by uniqueness before compact support. (4) The exact R-linear tower functor T_f^c puts all three arrows and the quotient transitions into one triangle of D(Tow). (5) Rlim on strict towers is exact and gives a derived limit in the sense of def-weil-derived-limit. def-weil-integral-rational-qbar-compact-support fixes Rf_!K only as 'the derived limit', and lem-sf-integral-compact-support-constructible covers every derived limit. So taking Rlim T as the representative is legitimate, and it makes integral Rf_! exact and O_E-linear. (6) Constructibility of each vertex, and lem-weil-integral-constructible-triangulated. (7) Raw localization, prop-weil-pbc-rational-transport (transformations as u⊗1), exact scalar extension, and Q̄_ℓ descent of transformations. (8) U=∅, Z=∅, X=∅ and K=0 all degenerate correctly. Weil equivariance comes from the all-stages node and lem-fix-weil-operations, with no triangulated structure on the fixed pairs. (9) fix-prop-projection-formula has exactly the item's domains and compatibilities, with completed integral operations. Other checks: no cycle (the closure excludes the item and prop-functor-package); proof_deps equals the union of uses; tool_uses are declared and I accept them all as generic tools; no SGA. lem-weil-pbc-etale-compact-support-open-closed-triangle (étale, D^+, only the existence of a triangle) and lem-pur-compact-top-localization are not duplicates. Mathlib searches cover all three kinds."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-3af48312f (reviewer sub-agent of L); spot-checked: This re-delivery answers the D1/C5 RETURN a63cd2aa exactly. The three conjunction nodes are gone, the parent keeps the single-citation applications (7 steps, 2640 chars, statement byte-identical), and there are two new nodes for the two real arguments. Old steps 1-9 map to: parent 1, parent 2+4, new boundary node, parent 3, new total-limit node + parent 4, parent 3, parent 5-6, parent 7. No argument of substance was dropped; each shortened sentence applies one cited statement. Source checked: main-20261015 prop-functor-package.proof.md, clause (3) and clause (5) = fix-prop-projection-formula. I read every cited statement and the parent steps check, including the conjugation arrows F(eps)a^-1, bF(eta), a[1]s_F F(delta)b^-1 by TR1, raw rationalization, common-stage descent of the equations, Weil equivariance only at E and Qbar, and empty U or Z. lem-sf-recollement-reduction-boundary is true: r_n is exact, lem-fix-operation-reduction gives a_n and b_n and preserves the unit and counit, and the TR3 fill-in phi has phi-b_n factoring through j_!j^*K_n[1], whose Hom into i_*i^*K_n is 0 by the all-stages prop, so the third square holds. It is no duplicate of the localization, supported-triangle or reduction nodes. lem-sf-compact-support-total-limit-realization is true: the evaluation isomorphisms of the tower functor carry the Roos triangle of lem-weil-pbc-ringed-strict-tower-homotopy-limit to the defining derived-limit triangle of the object-only def-weil-integral-rational-qbar-compact-support, and the composite is exact and R-linear with the composite shift. It is no duplicate: def-sf-operation-stages and the tower datum only adopt L∘T, and representative-independence, compactification-completed-realization and the trf system realization state other things. FIX (B3/C4): the boundary node took the integral Delta_K from def-weil-open-closed-recollement, which is defined at finite level only. The fix states the integral counit/unit and any distinguishing delta_K, and any finite recollement triangle delta_{K_n}, as hypotheses. It adds no theorem stmt_dep, does not weaken the claim, and changes only the statement. 12 tool_uses accepted as generic inputs carried over from base. No SGA, no cycle, small cases K=0, U or Z empty, f=id checked.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfPackageLocalizationProjectionRealization",
+  "declaration": "WeilConjectures.sfPackageLocalizationProjectionRealization",
+  "declarations": [
+   "WeilConjectures.sfPackageLocalizationFiniteImage",
+   "WeilConjectures.sfPackageLocalizationIntegralTower",
+   "WeilConjectures.sfPackageLocalizationCommonStages",
+   "WeilConjectures.sfPackageLocalizationProjectionRealization"
+  ],
+  "file": "lean/Sheaf/Paper/SfPackageLocalizationProjectionRealization.lean",
+  "statement": "theorem sfPackageLocalizationProjectionRealization (_hij : Set.range j.hom.left.base = (Set.range i.hom.left.base)ᶜ) : SfPackageLocalizationConclusion S.finite i j f hj c cj ci (intrinsicFiniteTorsionConstructible C.l E n hn Y.obj.left).ι (S.finiteTorDomain X) ∧ SfPackageLocalizationConclusion S.higher.integral i j f hj c cj ci (sfIntegralConstructible C.l E Y.obj.left).ι (fun _ ↦ True) ∧ SfPackageLocalizationConclusion S.higher.rational i j f hj c cj ci (𝟭 (sfRationalConstructibleCategory C.l E Y.obj.left)) (fun _ ↦ True) ∧ SfPackageLocalizationConclusion S.closure.commonStage i j f hj c cj ci (𝟭 (generalAlgebraicallyClosedConstructibleCategory C.l C.Qbar Y.obj.left)) (fun _ ↦ True) ∧ CompactSupportFiniteProjection.Laws S.toSixFunctorFiniteOperations ∧ CompactSupportProjectionLaws S.higher.integral S.higher.integralTensor S.higher.integralExchange S.integralFiniteTorDomain ∧ CompactSupportProjectionLaws S.higher.rational S.higher.rationalTensor S.higher.rationalExchange (fun _ _ ↦ True) ∧ CompactSupportProjectionLaws S.closure.commonStage S.closure.commonStageTensor S.closure.commonStageExchange (fun _ _ ↦ True)",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Repair of returned head 47e2b3d69259: tower-pinned rational boundaries, one coherent finite-stage family shared by inclusions and scalar transitions, Weil equations on those boundaries, and canonical proper/open adjunction comparisons. No arbitrary existential operation comparisons."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-523d164aa",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Re-delivery fixes both H3 findings of the 47e2 RETURN. F1: SfPackageLocalizationTowerBoundary keeps the full strict-tower pin (designated tower, projection normalization, Realizes for every distinguished source completion, map and shift equations) and adds δ = ι(δI) ≫ commShift, so δI is the tower boundary and 2δ is excluded. Rationalization holds for every pinned δI with the canonical sfRationalLocalizationCommShift. A single FieldSystem uses one δE family (each pinned to its own E0 tower) for the common-stage inclusion and all E0≤L transition squares, with canonical shifts. The Weil theorems take the pinned boundaries as hypotheses. F2: pullback comparisons are eqToIso of the datum's rationalPullback/commonStagePullback; support comparisons are datum comparison + factored identification + leftAdjointUniq/rightAdjointUniq against fieldWeilOpenAdj/ProperAdj (resp. zlCommonStage adjunctions), so they are canonical and use no Nonempty. Only lean and stmt_deps changed; the 3 added deps are landed definition nodes. lean.statement is verbatim; 10 theorems with 10 sorry; defs carry real data; the 2 new helper lemmas are true; max line length 98; docstrings and report sections OK. Edge cases U or Z empty, n=1, E0=L, K=0 are covered. Advisories: decls owned by uncited nodes (sfProjectionWeilMap from theorem lem-sf-projection-weil-tensor-domain-bridge, sfCompactSupportTerm, CompactSupportProjectionChange, tower datum, projection laws), present since 47e2; the existential tower CommShift is inherited from upstream. No FIX, no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-01a3e",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261026T065346-L-2862420",
+  "kind": "interface",
+  "note": "independent cc review: BoundaryData sections vs published item (verbatim except declared abbrev->def), moved private helpers verbatim, CommonStages assembly vs the IntegralTower/RationalTransport/BoundaryDescent signatures, item node proof_deps vs Lean imports, rationalization L = canonical localization (no new objects)"
  }
 }

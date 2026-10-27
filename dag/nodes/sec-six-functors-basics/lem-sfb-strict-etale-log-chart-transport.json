@@ -1,0 +1,157 @@
+{
+ "id": "lem-sfb-strict-etale-log-chart-transport",
+ "kind": "statement",
+ "title": "Pointwise transport of fs log charts along strict etale neighbourhoods",
+ "statement": "Let $f:X\\to Y$ and $r:U\\to V$ be log morphisms of locally Noetherian fs log schemes [def-trf-fs-log-blowup], with strict etale $a:U\\to X$ and $b:V\\to Y$ [def-per-strict-log-morphism]. Assume $f\\circ a$ and $b\\circ r$ have the same specified log composite. For each point $z\\in U$, there is a compatible smooth fs chart for $f$ containing $a(z)$ if and only if there is one for $r$ containing $z$. The same equivalence holds for compatible etale charts [def-per-fs-log-smooth-etale]. No surjectivity of $a$ or $b$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; VIII 3.3.4(ii), p.107; X 1.2, pp.136--139. The pointwise chart calculus of parent proof step 5, written by F3."
+ },
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "def-per-strict-log-morphism"
+ ],
+ "proof": [
+  {
+   "text": "For descent, concatenate a compatible chart for r with a and b. Strictness identifies both chart log structures with the restricted structures from X and Y, with compatibility fixed on sections by the common composite. The monoid map and its kernel and cokernel are unchanged. The new comparison is the old one followed by an etale map induced by b, so it retains smoothness or etaleness.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-per-fs-log-smooth-etale",
+    "def-per-strict-log-morphism",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For ascent, pull back the target chart along b and the source chart along a, refining around z to obtain compatible chart points. The induced source comparison to the pulled-back old source chart is etale by cancellation of etale maps over X. Strictness fixes the transported charts. The chart comparison is an etale map followed by a scheme base change of the original comparison, so smoothness or etaleness persists. The kernel and cokernel order conditions persist under the local ring maps.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "def-per-fs-log-smooth-etale",
+    "def-per-strict-log-morphism",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-per-fs-log-smooth-etale",
+  "def-per-strict-log-morphism",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, p.69; VIII 3.3.4(ii), p.107; X 1.2, pp.136--139. The pointwise chart calculus of parent proof step 5, written by F3. The proof text records the construction, not a claim that ILO writes every relative-section detail."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Formal logarithmic smoothness is stable under composition and strict base change and chart smoothness is etale local",
+   "results": "OK 8 hits: RingHom.isStandardSmooth_stableUnderComposition, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.isStandardSmooth_isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.FormallySmooth.comp, RingHom.FormallySmooth.stableUnderComposition, RingHom.Smooth.isStableUnderBaseChange",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log morphisms form a category, unique and local infinitesimal lifts compose, strict log fibre products preserve lifts, strict etale chart transport, and saturated blowup chart covers",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instCategory, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.IsEtale, AlgebraicGeometry.FormallyUnramified.instIsMultiplicativeScheme, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"EtaleLogMap\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleLogMap|FSLogChart|IsSaturatedLogBlowup|EtaleLogHom",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-23",
+   "verdict": "No logarithmic match. Returned results concern ordinary schemes or rings; these log interfaces are project definitions."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FSLogSmoothCompositionStrictBaseChange",
+  "date": "2026-10-23",
+  "group": "F3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction via ILO X Lemma 2.2, printed pp.149--150, successive modification of one marked nodal curve; log-smooth composition in step 6 and preservation under the saturated log-blowup tower in step 9. Replacement of the dropped artin-gabber tool requested in return C1 (route pivot 2026-10-19). Supporting input: Pointwise transport of fs log charts along strict etale neighbourhoods.",
+   "via": [
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-equivariant-nodal-smooth-pair-resolution",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictEtaleLogChartTransport",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictEtaleLogChartTransport.lean",
+  "declaration": "AlgebraicGeometry.strictEtale_logChart_transport",
+  "declarations": [
+   "AlgebraicGeometry.strictEtale_logChart_transport"
+  ],
+  "statement": "theorem strictEtale_logChart_transport\n    {X Y U V : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y)\n    (a : EtaleLogHom U X) (b : EtaleLogHom V Y) (r : EtaleLogHom U V)\n    (c : EtaleLogHom U Y) (ha : a.IsStrict) (hea : Etale a.base)\n    (hb : b.IsStrict) (heb : Etale b.base)\n    (haf : a.CompEq f c) (hrb : r.CompEq b c) (z : U.scheme) :\n    ((∃ d : FSLogChart f, a.base z ∈ Set.range d.V.hom ∧ d.IsSmoothChart) ↔\n      ∃ d : FSLogChart r, z ∈ Set.range d.V.hom ∧ d.IsSmoothChart) ∧\n    ((∃ d : FSLogChart f, a.base z ∈ Set.range d.V.hom ∧ d.IsEtaleChart) ↔\n      ∃ d : FSLogChart r, z ∈ Set.range d.V.hom ∧ d.IsEtaleChart)",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-23"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261023T151841-L-417408",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

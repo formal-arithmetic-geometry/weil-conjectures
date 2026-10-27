@@ -24,116 +24,43 @@
  ],
  "proof": [
   {
-   "text": "Use the internal/section equivalences at $R_T$ and $S_T$. By [lem-pe-internal-section-tensor-comparison] they preserve flat-term K-flat complexes and identify balanced tensors by the identity on local pure tensors. By [lem-pd-section-derived-pushpull-normalization] they identify the specified unbounded pull-push adjunctions, including their counits. By [lem-pd-section-derived-tensor-normalization] the actual module-object pullback tensor map becomes the canonical ringed tensor map. Scalar extension and its $S_T$-action are identified as well: the balanced tensor with $S_T$ is sent to the same balanced tensor, with $s'$ acting on its $S_T$ factor. Thus the specified formulas for $b$ and $\\lambda$ become precisely the sectionwise formulas, on K-flat representatives and hence in the derived categories. It suffices to prove the equality there and carry it back through these equivalences.",
+   "text": "Use the canonical scalar-unit normalized ordinary strong monoidal structure and preservation of flat modules from [def-sfb-internal-scalar-tensor-comparison]. The existing generic Functor.leftDerivedTensorComparison applies to extension of scalars without exactness: Mod.preservesKFlatQuasiIso supplies preservation of quasi-isomorphisms between K-flat complexes. Its universal counit identity, transported through the homotopy quotient to cochain complexes, is precisely ScalarTensorNormalized on every pair of complexes. Restrict the normalization to flat-term K-flat pairs and uncurry the natural isomorphism. The unique normalized family of [lem-sfb-quotient-section-tensor-normalization] determines its value at T: replace that value in the family and invoke family uniqueness. Componentwise equality of the uncurried isomorphisms gives equality of the original curried isomorphisms. This proves scalarTensorIso_existsUnique without a new existence hypothesis.",
    "uses": [
-    "lem-pe-internal-section-tensor-comparison",
-    "lem-pd-section-derived-pushpull-normalization",
-    "lem-pd-section-derived-tensor-normalization"
+    "def-sfb-internal-scalar-tensor-comparison",
+    "def-sfb-internal-derived-scalar-comparisons",
+    "lem-sfb-quotient-section-tensor-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0FPI (lemma-adjoints-push-pull-compatibility); internal/section normalization in the cited nodes"
-   }
+   "elementary": false
   },
   {
-   "text": "Abbreviate $D_{n,T}$ to $D_T$ and suppress $f$ in $L_R,F_R,L_S,F_S,\\lambda,\\rho$. Consider the ringed-topos square with vertical morphisms $(T,S_T)\\to(T,R_T)$ given by the identity topos and $R_T\\to S_T$, and horizontal morphisms induced by $f$. The ring maps in its two composites coincide: both are the quotient map pulled from the point, because the structural maps $\\alpha_f:f^{-1}(\\Lambda_Y)\\to\\Lambda_X$ are by definition the components at $\\Lambda=\\mathcal O_E$ and $\\Lambda=A/\\pi^n$ of one natural isomorphism $f^*p_Y^*\\cong p_X^*$ [sk-def-sfb-coefficient-morphisms], so they commute with $p^*$ of the quotient $\\mathcal O_E\\to A/\\pi^n$. The scalar/pullback comparison $L_SD_Y\\to D_XL_R$ is the composition comparison around this square. Its flat-term K-flat formula is exactly $f^{-1}(x\\otimes s)\\mapsto f^{-1}x\\otimes f^{-1}s$, so it is the particular $\\lambda$ of [lem-sfb-integral-quotient-direct-image-comparison]. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to the two composites and their identical structural ring map. It gives monoidality of this comparison, without requiring flatness of $R_T\\to S_T$.",
+   "text": "Uncurry the selected scalar tensor isomorphisms componentwise. Their all-complex counit normalization implies QuotientSectionTensor.TensorNormalized by restricting to flat-term K-flat pairs. Apply [lem-sfb-quotient-pullback-tensor-coherence] to this family and the given normalized c. Its final conjunct gives the tensor compatibility equation for the actual pullback tensor maps. Precompose the equation with c inverse to obtain Adjunction.ComparisonCompatible.",
    "uses": [
-    "lem-sfb-integral-quotient-direct-image-comparison",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "sk-def-sfb-coefficient-morphisms"
+    "lem-sfb-quotient-pullback-tensor-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D (lemma-derived-pullback-composition), Tag 07A4 (lemma-pullback-tensor-product); coefficient square of blueprint paragraph (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $t_R,t_S$ for the two pullback tensor maps. The monoidality just obtained says, for $U,V\\in D_R(Y)$,\n$$b_{X,L_RU,L_RV}\\circ D_X(t_{R,U,V})\\circ\\lambda_{U\\otimes V}\n=(\\lambda_U\\otimes\\lambda_V)\\circ t_{S,D_YU,D_YV}\\circ L_S(b_{Y,U,V}).\\tag{*}$$\nIndeed, the tensorator of $L_SD_Y$ is $t_S\\circ L_S(b_Y)$ and that of $D_XL_R$ is $b_X\\circ D_X(t_R)$. The scalar tensorator here is the specified $b$: both normalized maps send $(u\\otimes v)\\otimes s$ to $(u\\otimes1)\\otimes(v\\otimes s)$. Thus (*) specializes the monoidal composition equation of [lem-sfb-ringed-derived-monoidal-comparisons] with these tensorators. There is no permutation of the homogeneous variables and hence no extra Koszul sign.",
+   "text": "Apply [lem-sp-categorical-projection-mate-square] to the two actual adjunctions, the scalar functors D_Y and D_X, the given c and the two selected scalar tensor isomorphisms. Its projection transformations are the actualProjection transformations of [def-sfb-module-object-projection-map]. Its mate is definitionally rho from [def-sfb-internal-derived-scalar-comparisons]. The symmetry of its conclusion is exactly ProjectionComparisonEquation at K and M. No projection or mate is inverted.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product), Tag 0D6D (lemma-derived-pullback-composition); monoidal equation for the coefficient square"
-   }
-  },
-  {
-   "text": "Put $C=F_RK$, $W=C\\otimes^L_{R_Y}M$, $H=K\\otimes^L_{R_X}L_RM$, and\n$$q=(1\\otimes\\lambda_M^{-1})\\circ b_{X,K,L_RM}:D_XH\\longrightarrow D_XK\\otimes^L_{S_X}L_SD_YM=:Z.$$\nFor $a:D_YW\\to F_SZ$ write $a^\\flat=\\varepsilon^S_Z\\circ L_S(a)$. The adjunction [sk-def-sfb-module-derived-pushpull] makes this operation a bijection. From the defining adjunct of $\\rho$ in [lem-sfb-integral-quotient-direct-image-comparison] we have, for every $J\\in D_R(X)$,\n$$\\varepsilon^S_{D_XJ}\\circ L_S(\\rho_J)=D_X(\\varepsilon^R_J)\\circ\\lambda_{F_RJ}.\\tag{**}$$\nThis follows by applying the Hom bijection to its own inverse; it does not use invertibility of $\\rho$.",
-   "uses": [
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-sfb-integral-quotient-direct-image-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); blueprint paragraph (3), adjunct normalization"
-   }
-  },
-  {
-   "text": "Let $a_L$ be the left-hand composite in the statement. Expand the adjunct of the actual $\\pi^S$ by [def-sfb-module-object-projection-map]. Naturality of $t_S$ in its first input, followed by (**) at $J=K$, gives\n$$\\begin{aligned}\na_L^\\flat&=(\\varepsilon^S_{D_XK}\\otimes1)\\circ t_{S,F_SD_XK,D_YM}\\circ L_S(\\rho_K\\otimes1)\\circ L_S(b_{Y,C,M})\\\\\n&=(D_X(\\varepsilon^R_K)\\otimes1)\\circ(\\lambda_C\\otimes1)\\circ t_{S,D_YC,D_YM}\\circ L_S(b_{Y,C,M}).\n\\end{aligned}$$\nThe tensor maps are natural bifunctorial comparisons by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. These equalities only compose the defining counit equation with the displayed maps.",
-   "uses": [
+    "lem-sp-categorical-projection-mate-square",
     "def-sfb-module-object-projection-map",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-internal-derived-scalar-comparisons"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map); Tag 07A4 (lemma-pullback-tensor-product)"
-   }
-  },
-  {
-   "text": "Apply (*) at $(C,M)$, and cancel the invertible second component $\\lambda_M$. The expression in step 5 becomes\n$$(D_X(\\varepsilon^R_K)\\otimes1)\\circ(1\\otimes\\lambda_M^{-1})\\circ b_{X,L_RC,L_RM}\\circ D_X(t_{R,C,M})\\circ\\lambda_W.$$\nNaturality of $b_X$ at $(\\varepsilon^R_K,1)$ now rewrites it as\n$$a_L^\\flat=q\\circ D_X\\bigl((\\varepsilon^R_K\\otimes1)\\circ t_{R,C,M}\\bigr)\\circ\\lambda_W.\\tag{***}$$\nThis naturality is the simultaneous naturality of the scalar pullback tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity geometric morphism with structural ring map $R_X\\to S_X$.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4 (lemma-pullback-tensor-product); scalar-extension specialization and naturality"
-   }
-  },
-  {
-   "text": "Let $a_R=F_S(q)\\circ\\rho_H\\circ D_Y(\\pi^R_{f,K,M})$ be the right-hand composite. Counit naturality, then (**) at $H$, then naturality of $\\lambda$ at $\\pi^R:W\\to F_RH$ give\n$$\\begin{aligned}\na_R^\\flat&=q\\circ\\varepsilon^S_{D_XH}\\circ L_S(\\rho_H)\\circ L_SD_Y(\\pi^R)\\\\\n&=q\\circ D_X(\\varepsilon^R_H)\\circ\\lambda_{F_RH}\\circ L_SD_Y(\\pi^R)\\\\\n&=q\\circ D_X\\bigl(\\varepsilon^R_H\\circ L_R(\\pi^R)\\bigr)\\circ\\lambda_W.\n\\end{aligned}$$\nBy the defining adjunct of the actual integral projection map [def-sfb-module-object-projection-map],\n$$\\varepsilon^R_H\\circ L_R(\\pi^R)=(\\varepsilon^R_K\\otimes1)\\circ t_{R,C,M}.$$\nThe last expression for $a_R^\\flat$ is therefore (***). Here only the naturality and inverse Hom-bijection identities of the adjunction [sk-def-sfb-module-derived-pushpull] are used.",
-   "uses": [
-    "def-sfb-module-object-projection-map",
-    "sk-def-sfb-module-derived-pushpull"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map), Tag 07A6 (lemma-adjoint); blueprint paragraph (3), reduction of the actual projection map"
-   }
-  },
-  {
-   "text": "The Hom bijection of [sk-def-sfb-module-derived-pushpull] is injective, so $a_L^\\flat=a_R^\\flat$ implies $a_L=a_R$ in $D_S(Y)$. Substituting $q,H,W,Z$ gives exactly the equality in the statement, with its specified source and target. Each component used above is natural, so the equality is natural in $K,M$. The proof used no inverse of either projection morphism, no bound on the complexes, and no properness or completeness hypothesis; $n\\ge1$ and the coefficient setting are unchanged.",
-   "uses": [
-    "sk-def-sfb-module-derived-pushpull"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); blueprint paragraph (3), projection formula comparison"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sfb-internal-derived-scalar-comparisons",
+  "def-sfb-internal-scalar-tensor-comparison",
   "def-sfb-module-object-projection-map",
-  "lem-pd-section-derived-pushpull-normalization",
-  "lem-pd-section-derived-tensor-normalization",
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-sfb-integral-quotient-direct-image-comparison",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-coefficient-morphisms"
+  "lem-sfb-quotient-pullback-tensor-coherence",
+  "lem-sfb-quotient-section-tensor-normalization",
+  "lem-sp-categorical-projection-mate-square"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
-  "place": "Paragraph (3), assertion that reduction of the canonical projection formula map is the torsion projection map; expanded by the counit calculation using Stacks Tags 0B56, 07A4, 0D6D and 07A6."
+  "place": "Paragraph (3), projection formula reduction; implemented using the existing nonflat derived tensor universal property and the categorical projection-mate identity (Stacks 07A4, 0B56 and 07A6)."
  },
  "mathlib_searches": [
   {
@@ -221,45 +148,41 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-integral-quotient-projection-comparison",
   "worker": "stage1",
-  "summary": "Kept the statement unchanged. Compared the specified counit adjuncts using the monoidal coefficient square, explicit scalar/pullback normalizations, and naturality. Reused existing generic internal/section normalization and ringed monoidal-composition nodes; no new nodes. Mathlib and project searches do not cover the quotient scalar/internal-module statement exactly.",
-  "blueprint": "Realizes det-thm-sfb-proper-base-change-integral paragraph (3), sentence asserting that reduction of the actual canonical projection map is the torsion projection map; original ten-step proof step 8. Steps 1-3 identify its tensor and scalar comparisons; steps 4-8 prove the actual counit-adjunct equality.",
+  "summary": "Repaired the spreading-work return with two comparable statement-only tasks for quotient scalar/section normalization and coefficient-square tensor coherence. Kept the item statement unchanged. Reused the existing closed categorical projection-mate square instead of duplicating its counit-transpose calculation; the report retains every old argument and maps all eight steps.",
+  "blueprint": "det-thm-sfb-proper-base-change-integral paragraph (3), reduction of the canonical projection formula map: returned step 1 is the first new node, steps 2-3 the second, and steps 4-8 the existing projection-mate-square argument specialized in assembly steps 3-4.",
   "tool_uses": [
    {
-    "node": "lem-pe-internal-section-tensor-comparison",
-    "why": "Generic exact tensor equivalence with flat/K-flat preservation identifies internal scalar tensors with sectionwise tensors; this unit does not reprove that presentation comparison."
-   },
-   {
-    "node": "lem-pd-section-derived-pushpull-normalization",
-    "why": "Generic comparison for every scheme morphism identifies the independently specified internal and ringed adjunctions, including their counits."
-   },
-   {
-    "node": "lem-pd-section-derived-tensor-normalization",
-    "why": "Generic normalization for arbitrary schemes identifies the actual internal derived pullback tensor map with the ringed map; the unit has no substitute."
-   },
-   {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Generic monoidality of ringed pullback composition yields the scalar/pullback coefficient-square coherence, before the unit-specific projection adjunct calculation."
+    "node": "lem-sp-categorical-projection-mate-square",
+    "why": "Generic categorical identity for a tensor-compatible square of two adjunctions, already proved upstream; specializes with the actual quotient comparisons after establishing their normalizations. It replaces no geometric step of the unit."
    }
   ]
  },
  "tool_uses": [
-  "lem-pe-internal-section-tensor-comparison",
-  "lem-pd-section-derived-pushpull-normalization",
-  "lem-pd-section-derived-tensor-normalization",
-  "lem-sfb-ringed-derived-monoidal-comparisons"
+  "lem-sp-categorical-projection-mate-square"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-Q29-6cd2b0334",
-  "group": "Q29",
+  "reviewer": "NT-cc-ND-cea323ead",
+  "group": "ND",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-6cd2b0334 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full, plus blueprint main-20261015 sk-thm-sfb-proper-base-change-integral paragraph (3) and Stacks sites-cohomology Tag 0B56 at l.13660-13675; tags 07A4, 07A6, 0D6D, 0FPI and 03EL are checked in tags/tags. This is the first split of the node: no new nodes, statement and stmt_deps unchanged, no SGA, no cycle, every cited id exists and none is merged. I re-derived (*) as the monoidality of lambda = c1 c2^{-1}, with tensorators t_S L_S(b_Y) and b_X D_X(t_R), no sign; (**) from the adjunct of rho; and both transposes a_L^flat and a_R^flat, which agree as (***). The subscripts K/H and the orientation of lambda^{-1} are right. Small cases: f=id, K=0 or M=0, n=1, the non-flat Z_l->F_l, unbounded complexes. lem-sfb-coefficient-projection-square needs exact scalar extension, so it does not apply here and is not a duplicate; it is an advisory overlap, since this argument would remove its exactness hypothesis. Batch 5: lem-pd-section-derived-pushpull-normalization and lem-pd-section-derived-tensor-normalization are generic comparisons between the internal and sectionwise settings. Their closures, 631 and 689 nodes, contain no nt-assume leaf, no PD or trace-formula theorem and no sk-thm-trace-transport; the only trf node is the generic fact that localizations are essentially surjective. They are neither assumption nor proof step of either, so I accept them. I also accept the 4 declared tool_uses. One fault repaired (C3): step 2 claimed the two structural ring maps coincide without citing a node. I added sk-def-sfb-coefficient-morphisms, by which alpha_f is the component of the natural iso f^*p_Y^* = p_X^*, to the text, uses and proof_deps; the corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-quotient-projection-comparison.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-cea323ead (reviewer sub-agent of L); spot-checked: I read the re-split in full: the item, both new nodes, every cited statement, blueprint main-20261015 sk-thm-sfb-proper-base-change-integral paragraph (3), Stacks Tag 0D6D (l.3657) and Tag 07A4 (l.3683), and the human repair note. Every old step is carried by a cited statement. Old step 1 is now new node lem-sfb-quotient-section-tensor-normalization. Old steps 2-3 (commutative coefficient square, lambda as the composition comparison, tensor equation (*)) are now new node lem-sfb-quotient-pullback-tensor-coherence. Old steps 4-8 are the existing, sorry-free lem-sp-categorical-projection-mate-square. I checked its Lean (ProjectionMapMate.lean) against the item: (F,G,F',G',N_D,N_C,alpha)=(L_R,F_R,L_S,F_S,D_Y,D_X,lambda). ComparisonCompatible is the new coherence equation precomposed with lambda^-1. The mate's counit identity is the defining adjunct of rho, so the mate is rho. rightAdjointProjectionMap is def-sfb-module-object-projection-map. The conclusion matches the item's equality term by term. Reusing this node instead of making a duplicate is the right answer to the note. The two new nodes are comparable (about 2.8k and 2.65k characters), and neither restates the item. The assembly is 1850 characters and is pure citation plus elementary endpoint bookkeeping. Both nodes are true. For A, uniqueness follows from flat-term K-flat resolutions and existence from the chain isomorphism (U⊗V)⊗S ≅ (U⊗S)⊗_S(V⊗S), with no sign. B is Tag 0D6D plus monoidality of composition comparisons, with the ring square commuting by naturality of alpha_f. I tested both on f=id, zero inputs, n=1 and non-flat Z_l->F_l (l=2). Neither duplicates an existing node: def-sfb-internal-scalar-tensor-comparison needs exact extension, and lem-sfb-coefficient-projection-square needs exact extension and remains an advisory overlap. No cycle, no SGA; the blueprint fields and searches are proper (leansearch is recorded as unavailable). Batch 5: lem-sfb-integral-quotient-direct-image-comparison was already a stmt_dep of the item. Its closure already contains lem-pd-section-derived-pushpull-normalization, which old step 1 cited too, so the item's batch-5 closure is unchanged. That node is a generic internal/section adjunction dictionary; its 718-node closure has no nt-assume leaf, no PD or trace-formula theorem and no sk-thm-trace-transport. It is neither assumption nor a proof step of either, so I accept it. I accept the categorical tool use. Maintainer note: the item's top-level tool_uses still lists four nodes from the earlier split that the item proof no longer cites."
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "lean": {
   "module": "Sheaf.Paper.IntegralQuotientProjectionComparison",
   "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_projection_comparison",
@@ -289,5 +212,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Item lem-sfb-integral-quotient-projection-comparison, N5 94e1015d. The delivery adds only the module and the item's lean record, plus the landed, used def stmt_dep def-sfb-internal-scalar-tensor-comparison (no cycle). All other nodes are byte-identical to side-live; no dependency records or modules are touched. Clause by clause: the n index (exponent n+1), R/S, D/L/F/adj and rho are the direct-image dependency's own. c is quantified with PullNormalized, which pins lambda uniquely (counits are isomorphisms on flat-term K-flat inputs), so it is the dependency's specified lambda, not an arbitrary map. actualProjection is rightAdjointProjectionMap of adj with leftDerivedUpperStarTensor, the same body as moduleObjectProjectionMap. The ProjectionComparisonEquation composites and endpoints match the node exactly, including lambda inverse on the right and the S_Y-linear category. b is scalarTensorIso, chosen from a true exists-unique: its normalization is the universal derived-functor property with the delta of internalScalarMonoidal, defined before that module's exactness variable, and on S-balanced tensors it equals the node's (u⊗1)⊗(v⊗s). The landed internalScalarTensorIso needs exact extension, which fails for the non-flat quotient, so a local helper is justified. No extra hypotheses or universe restriction. Docstrings carry source and blueprint tag, the main docstring carries the 8 proof steps, the statement is verbatim, and only the theorems use sorry. Edge cases checked: f=id, K=0 or M=0, empty schemes, first quotient, Z_l to F_l, l=2, unbounded. Compile not reproduced (worker reports 36.1 s and 33.2 s clean; no fix made). Advisories: decls owned by def-sfb-integral-quotient-coefficients and def-sfb-internal-derived-scalar-comparisons are not in stmt_deps (reached via the direct-image dependency); accessor duplicating moduleObjectProjectionMap; unused recorded Lean of def-weil-pbc-projection-formula-map and lem-weil-pbc-ringed-topoi-derived-tensor-pullback; second reading is a self-reread; linter.all false."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261024T190253-L-4009918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,121 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; step 1 of the parent comparison. The shorter route uses Stacks Tags 03EK and 07A4 through free ambient modules and extension of scalars."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "Internal-Hom paragraph; step 1 of the parent, implemented via the monoidal free-module and extension-of-scalars left adjoint, then inverse equivalence."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NativeCoefficientTensorComparison",
+  "date": "2026-10-26",
+  "group": "H2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "id": "lem-sf-native-scalar-forgetting-monoidal",
+ "title": "Ambient scalar forgetting admits a strong monoidal structure",
+ "statement": "Let l be prime and Y any scheme. Let U=AdicSheaf.forgetAb l Y be the scalar-forgetting functor of [lem-sf-native-scalar-forgetting-equivalence]. Equip its source and target module categories with the ordinary relative tensor of [def-sfb-modobj-relative-tensor]. Then Nonempty U.Monoidal: the existing functor U admits a strong monoidal structure. This assertion is entirely underived and contains no representative complexes or arbitrary closed structures.",
+ "stmt_deps": [
+  "lem-sf-native-scalar-forgetting-equivalence",
+  "def-sfb-modobj-relative-tensor"
+ ],
+ "proof": [
+  {
+   "text": "Let F be free ambient modules on abelian sheaves, G its lax monoidal forgetful right adjoint, and B the native coefficient algebra. Apply F.mapMod to modules over G(B), and then extend scalars along the counit F(G(B)) to B. The first functor is strong monoidal by [def-sfb-mapmod-strong-monoidal]; the second by [lem-sfb-internal-extension-monoidal]. Their composite L is strong monoidal.",
+   "uses": [
+    "def-sfb-mapmod-strong-monoidal",
+    "lem-sfb-internal-extension-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the lifted free-forgetful adjunction [def-sfb-modobj-transport-adjunction] with extension-restriction adjunction [def-sfb-modobj-extend-restrict-adjunction]. On the right, mapMod commutes with comap; the two restriction maps compose to the identity by the right triangle equation. This gives L left adjoint to U. By [lem-sf-native-scalar-forgetting-equivalence], U is an equivalence, hence L is an equivalence. Its inverse has the inverse monoidal structure (Mathlib Equivalence.inverseMonoidal), and uniqueness of right adjoints identifies this inverse with U. Transport that monoidal structure along this isomorphism. The monoidal structure on scalar extension is supplied by its already proved theorem; this construction introduces no new proof hole.",
+   "uses": [
+    "def-sfb-modobj-transport-adjunction",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "lem-sf-native-scalar-forgetting-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-mapmod-strong-monoidal",
+  "lem-sfb-internal-extension-monoidal",
+  "def-sfb-modobj-transport-adjunction",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-sf-native-scalar-forgetting-equivalence"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting ambient vector space scalars preserves the relative tensor product of internal modules over a sheaf of commutative algebras",
+   "results": "Eight hits about ordinary module localization and section modules; none identifies the native scalar-forgetting functor and its normalized internal relative tensor.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A lax monoidal forgetful functor from vector space sheaves to abelian sheaves induces a strong monoidal equivalence on modules over an algebra",
+   "results": "Eight hits about monModuleEquiv and sheafification monoidality, not scalar forgetting of native internal coefficient modules. Local mapModCoreMonoidal requires strong monoidality of the ambient functor, which this functor does not have.",
+   "date": "2026-10-26",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*CoreMonoidal|forgetAb.*[Tt]ensor|forget.*[Mm]onoidal.*[Mm]odule",
+   "results": "Two unrelated Tannakian hits from msearch. The local source search found the proved Mod.exists_extendScalarsMonoidal in Sheaf.CategoryTheory.ModuleObjects.ScalarExtensionMonoidal, and the generic monoidal mapMod of a strong ambient functor. Combining them gives the monoidal left adjoint used here; no existing native forgetting theorem was found. Blueprint search forgetting ambient found zero matching imported statements.",
+   "date": "2026-10-26",
+   "verdict": "partial match"
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 1 of the parent coefficient tensor comparison, providing only an ordinary monoidal structure by inverse equivalence, before totalization or derivation. The nearest imported ancestor is null (blueprint_refs.py ancestor). Blueprint search forgetting ambient found no match.",
+   "via": [
+    "lem-sf-native-coefficient-tensor-comparison",
+    "lem-sf-native-geometric-hom-comparison",
+    "lem-sf-weil-verdier-dual-preserves-weil-complexes"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NativeScalarForgettingMonoidal",
+  "file": "lean/Sheaf/Paper/NativeScalarForgettingMonoidal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.nativeScalarForgetting_monoidal",
+  "statement": "theorem nativeScalarForgetting_monoidal (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :\n    Nonempty (AdicSheaf.forgetAb l Y).Monoidal",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T065852-L-3274992",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261026T065852-L-3274992",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

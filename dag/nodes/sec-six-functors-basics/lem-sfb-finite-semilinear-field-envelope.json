@@ -1,0 +1,288 @@
+{
+ "id": "lem-sfb-finite-semilinear-field-envelope",
+ "kind": "statement",
+ "title": "Finite normal field envelope retaining a semilinear finite group",
+ "statement": "Let $K\\subseteq L$ be a finite extension of fields [def-weil-field, def-pc-field-extension, def-pc-field-tower], let $H$ be a finite group, and let $A:H\\to\\operatorname{Aut}(K)$ be a group homomorphism, not necessarily injective. Put $F=K^H=\\{x\\in K:A_h(x)=x\\text{ for all }h\\in H\\}$. There is a tower $F\\subseteq K\\subseteq L\\subseteq M$ with $M/F$ finite and normal. For this tower define the group\n$$J=\\{(h,\\sigma)\\in H\\times\\operatorname{Aut}_F(M):\\sigma|_K=A_h\\},\\qquad \\rho:J\\to H,\\quad (h,\\sigma)\\mapsto h,$$\nwith componentwise multiplication. Then $J$ is finite, $\\rho$ is surjective, and $J$ acts on $M$ by $(h,\\sigma)\\cdot m=\\sigma(m)$, compatibly with $A$ on $K$. If $N=\\ker\\rho$, the map $\\operatorname{Aut}_K(M)\\to N$, $\\sigma\\mapsto(1,\\sigma)$ is a group isomorphism compatible with the actions on $M$, and $M^N/K$ is finite purely inseparable. Also $K/F$ is finite Galois and $M/K$ is finite normal. If $L/K$ is separable, the same witnesses can be chosen with $M/F$ finite Galois; then $M/K$ is finite Galois and $M^N=K$.\n\nNormal means that every element's minimal polynomial over the base splits in the larger field. Separable has the meaning of [def-weil-pbc-separable-algebraic-extension]; finite Galois means finite, normal and separable. Purely inseparable has the meaning of [def-weil-pbc-finite-purely-inseparable-extension]. A fixed field is the subfield of elements fixed by every indicated automorphism.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Agent combination of Tag 09I3 lemma-galois-over-fixed-field, Tag 09DT lemma-normal-closure, Tag 0EXM lemma-normal-closure-galois, Tag 0BME lemma-lift-maps (2), and Tag 030M lemma-normal-case; compatible-pair group retaining the original H."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-pc-field-tower",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-finite-purely-inseparable-extension"
+ ],
+ "proof": [
+  {
+   "text": "Put $H_0=A(H)\\subseteq\\operatorname{Aut}(K)$. It is a finite group, since it is an image of $H$, and its inclusion acts faithfully on $K$. An element is fixed by $H_0$ exactly when it is fixed by every $A_h$, so $K^{H_0}=F$. Apply [lem-wf-finite-field-action-fixed-degree] to this faithful action. It gives that $K/F$ is finite, separable and normal. Each $A_h$ fixes $F$ pointwise and is an $F$-automorphism of $K$.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3, lemma-galois-over-fixed-field; reduction of a nonfaithful action to its image."
+   }
+  },
+  {
+   "text": "Choose finite spanning sets $b_i$ for $K/F$ and $c_j$ for $L/K$. Writing $x=\\sum_j k_jc_j$ and $k_j=\\sum_i f_{ij}b_i$ shows that the finitely many products $b_ic_j$ span $L/F$. Thus $L/F$ is finite. Apply [lem-weil-pbc-finite-extension-in-finite-normal-extension] to $L/F$ to obtain $M/L$ with $M/F$ finite and normal. Use this tower $F\\subseteq K\\subseteq L\\subseteq M$ for the general-case construction.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-in-finite-normal-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09DT, lemma-normal-closure, existence; spanning-set argument as in Tag 09G9, lemma-multiplicativity-degrees."
+   }
+  },
+  {
+   "text": "Inside $H\\times\\operatorname{Aut}_F(M)$ take the subset $J$ in the statement. It contains $(1,1)$. For $(h,\\sigma),(g,\\tau)\\in J$ and $k\\in K$, $(\\sigma\\tau)(k)=\\sigma(A_g(k))=A_h(A_g(k))=A_{hg}(k)$. Also $\\sigma^{-1}(k)=A_{h^{-1}}(k)$, by applying $\\sigma^{-1}$ to $\\sigma(A_{h^{-1}}(k))=k$. Hence $J$ is closed under products and inverses and inherits the componentwise group law. Its first projection is the homomorphism $\\rho$. Its second projection acts by field automorphisms: $(jj')\\cdot m=j\\cdot(j'\\cdot m)$ and $1\\cdot m=m$ follow from composition. For $j=(h,\\sigma)$ and $k\\in K$, $j\\cdot k=A_h(k)$ proves compatibility.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent compatible-pair construction; elementary subgroup and action calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-extension-finitely-many-embeddings] with base $F$, domain $M$ and codomain $M$. The set of $F$-algebra maps $M\\to M$ is finite. Forgetting the inverse injects $\\operatorname{Aut}_F(M)$ into this set. Therefore this group is finite, as are $H\\times\\operatorname{Aut}_F(M)$ and its subset $J$.",
+   "uses": [
+    "lem-weil-pbc-finite-extension-finitely-many-embeddings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09H8, lemma-count-embeddings-explicitly; finite embedding-count bound in the cited node."
+   }
+  },
+  {
+   "text": "Fix $h\\in H$. Both $K/F$ and $M/F$ are normal by steps 1 and 2. Apply [lem-weil-pbc-normal-subextension-automorphism-extends] with $k=F$, intermediate field $K$, ambient field $M$ and automorphism $A_h$. It gives $\\sigma\\in\\operatorname{Aut}_F(M)$ with $\\sigma|_K=A_h$. Thus $(h,\\sigma)\\in J$ maps to $h$, proving $\\rho$ surjective. No homomorphic choice of lifts is needed.",
+   "uses": [
+    "lem-weil-pbc-normal-subextension-automorphism-extends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BME, lemma-lift-maps (2); intermediate field is normal here as required by the cited specialization."
+   }
+  },
+  {
+   "text": "An element of $N=\\ker\\rho$ is exactly a pair $(1,\\sigma)$ with $\\sigma|_K=A_1=1$. Such a $\\sigma$ is a $K$-automorphism of $M$; conversely, every $K$-automorphism fixes $F\\subseteq K$ and supplies such a pair. Hence $\\sigma\\mapsto(1,\\sigma)$ and $(1,\\sigma)\\mapsto\\sigma$ are mutually inverse homomorphisms between $\\operatorname{Aut}_K(M)$ and $N$. Their actions both evaluate to $\\sigma(m)$ on $m\\in M$, so their fixed fields coincide and contain $K$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Agent compatible-pair construction; elementary kernel and action identification."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-normal-extension-normal-over-intermediate] to $F\\subseteq K\\subseteq M$ to obtain that $M/K$ is algebraic and normal. A finite $F$-spanning set of $M$ also spans over $K$, so $M/K$ is finite. By [lem-weil-pbc-normal-extension-fixed-field-purely-inseparable] its fixed field under $\\operatorname{Aut}_K(M)$ is purely inseparable over $K$. Step 6 identifies this field with $M^N$. It is finite over $K$: a $K$-linearly independent subset of the subspace $M^N\\subseteq M$ is linearly independent in $M$, so has cardinality at most $\\dim_K M$.",
+   "uses": [
+    "lem-weil-pbc-normal-extension-normal-over-intermediate",
+    "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HN, lemma-normal-goes-up; Tag 030M, lemma-normal-case (2) and its fixed-field identification; elementary subspace dimension bound."
+   }
+  },
+  {
+   "text": "Assume $L/K$ is separable. Since $K/F$ is separable by step 1, [lem-zl-separable-permanence] gives that $L/F$ is separable. Its finiteness was established in step 2 before choosing $M$. Apply [lem-weil-pbc-finite-galois-receiving-separable-extensions] to the singleton family $L/F$. It gives a finite Galois extension $M/F$ and an $F$-embedding $L\\hookrightarrow M$. Identify $L$ with its image and use the induced copies of $K$ and $F$, obtaining a tower extending the specified $F\\subseteq K\\subseteq L$. Use this $M$ in steps 3--7, whose construction only required finiteness and normality over $F$.",
+   "uses": [
+    "lem-zl-separable-permanence",
+    "lem-weil-pbc-finite-galois-receiving-separable-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09HB, lemma-separable-permanence; Tags 09DT, lemma-normal-closure and 0EXM, lemma-normal-closure-galois, in the singleton specialization of the cited node."
+   }
+  },
+  {
+   "text": "For the witnesses of step 8, [lem-sfb-separable-algebraic-intermediate-base] applied to $F\\subseteq K\\subseteq M$ makes $M/K$ separable. Together with step 7 this makes $M/K$ finite Galois. Apply [lem-weil-pbc-finite-galois-fixed-field] to $M/K$: the elements fixed by every $K$-automorphism are exactly $K$. The action-compatible identification in step 6 therefore gives $M^N=K$.",
+   "uses": [
+    "lem-sfb-separable-algebraic-intermediate-base",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09H2, lemma-separable-goes-up (2); Tag 09DW, theorem-galois-theory, fixed-field clause."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-extension-in-finite-normal-extension",
+  "lem-weil-pbc-finite-extension-finitely-many-embeddings",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-weil-pbc-normal-extension-normal-over-intermediate",
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+  "lem-zl-separable-permanence",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+  "lem-sfb-separable-algebraic-intermediate-base",
+  "lem-weil-pbc-finite-galois-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Combination of Tags 09I3, 09DT, 0BME (2), 09HN, 030M (2), 09HB, 0EXM, 09H2 and 09DW; compatible-pair construction and explicit elementary calculations by Q25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on a field has a finite normal extension containing a prescribed finite extension, with a surjective group of compatible lifts and purely inseparable fixed field",
+   "results": "{\"t\": \"2026-10-22T06:11:25Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group acting on a field has a finite normal extension containing a prescribed finite extension, with a surjective group of compatible lifts and purely inseparable fixed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fixedByFinite\", \"FixedPoints.normal\", \"IsGaloisGroup.fixedPoints\", \"IsGalois.of_fixed_field\", \"FixedPoints.toAlgAut_surjective\", \"IsGalois.of_fixedField_normal_subgroup\", \"IsGaloisGroup.intermediateField\", \"IsGalois.fixingSubgroup_normal_of_isGalois\"], \"digest\": \"c29a02a9d98454f2\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and normal-closure results are ingredients, but none constructs the compatible-pair group retaining a nonfaithful H and proves all envelope clauses in one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given finite extension L/K and a finite possibly nonfaithful group H acting on K, construct a finite normal extension M of K containing L and a finite group surjecting onto H acting on M with kernel Aut_K(M) and purely inseparable fixed field",
+   "results": "{\"t\": \"2026-10-22T06:12:32Z\", \"tool\": \"leansearch\", \"query\": \"Given finite extension L/K and a finite possibly nonfaithful group H acting on K, construct a finite normal extension M of K containing L and a finite group surjecting onto H acting on M with kernel Aut_K(M) and purely inseparable fixed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.intermediateField\", \"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.isGalois\", \"IsGaloisGroup.of_isGalois\", \"normalClosure.normal\", \"IntermediateField.normal_iff_forall_map_le\", \"IntermediateField.subgroupEquivAlgEquiv\"], \"digest\": \"c17723332695b50f\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and normal-closure results are ingredients, but none constructs the compatible-pair group retaining a nonfaithful H and proves all envelope clauses in one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "(surjective.*restrictNormal|restrictNormal.*surjective|normalClosure|fixedField.*[Ii]nsep)",
+   "results": "{\"t\": \"2026-10-22T06:12:56Z\", \"tool\": \"grep\", \"query\": \"(surjective.*restrictNormal|restrictNormal.*surjective|normalClosure|fixedField.*[Ii]nsep)\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/Differential/Liouville.lean\", \"Mathlib/FieldTheory/Differential/Liouville.lean\", \"Mathlib/FieldTheory/IsSepClosed.lean\", \"Mathlib/FieldTheory/IsSepClosed.lean\", \"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"Mathlib/FieldTheory/AbelRuffini.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\", \"Mathlib/FieldTheory/KrullTopology.lean\"], \"digest\": \"d51991f6bfe37bd0\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and normal-closure results are ingredients, but none constructs the compatible-pair group retaining a nonfaithful H and proves all envelope clauses in one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, AlgEquiv.restrictNormal",
+   "results": "{\"t\": \"2026-10-22T06:12:57Z\", \"tool\": \"loogle\", \"query\": \"Normal, AlgEquiv.restrictNormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgEquiv.restrictNormal\", \"AlgEquiv.restrictNormal_commutes\", \"AlgEquiv.restrictNormal_trans\", \"AlgEquiv.restrictNormal_apply\", \"AlgEquiv.restrictNormal_eq_one_iff\", \"AlgEquiv.restrict_liftNormal\"], \"digest\": \"8cc0d3591624c989\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and normal-closure results are ingredients, but none constructs the compatible-pair group retaining a nonfaithful H and proves all envelope clauses in one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend all automorphisms of K to a finite normal overfield of L using the fixed field of a finite group and the fibre product group of compatible pairs",
+   "results": "{\"t\": \"2026-10-22T06:13:27Z\", \"tool\": \"leanfinder\", \"query\": \"Extend all automorphisms of K to a finite normal overfield of L using the fixed field of a finite group and the fibre product group of compatible pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"finGaloisGroupMap\", \"InfiniteGalois.toAlgEquivAux_eq_liftNormal\", \"Normal.algHomEquivAut\", \"AlgEquiv.restrictNormalHom\", \"Normal.algHomEquivAut_symm_apply\", \"Normal.algHomEquivAut_apply\", \"IsGalois.normalAutEquivQuotient_apply\", \"InfiniteGalois.normalAutEquivQuotient_apply\"], \"digest\": \"93cdcbcc58b86206\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: fixed-field and normal-closure results are ingredients, but none constructs the compatible-pair group retaining a nonfaithful H and proves all envelope clauses in one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Normal, AlgEquiv.restrictNormal",
+   "results": "{\"t\": \"2026-10-23T04:25:10Z\", \"tool\": \"loogle\", \"query\": \"Normal, AlgEquiv.restrictNormal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"AlgEquiv.restrictNormal\", \"AlgEquiv.restrictNormal_commutes\", \"AlgEquiv.restrictNormal_trans\", \"AlgEquiv.restrictNormal_apply\", \"AlgEquiv.restrictNormal_eq_one_iff\", \"AlgEquiv.restrict_liftNormal\"], \"digest\": \"8cc0d3591624c989\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field, normal-lifting and restriction results are ingredients, not the full compatible-pair envelope construction"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*normal|normal.*semilinear|compatible.*[Aa]ut|restrictNormalHom_surjective",
+   "results": "{\"t\": \"2026-10-23T04:25:14Z\", \"tool\": \"grep\", \"query\": \"semilinear.*normal|normal.*semilinear|compatible.*[Aa]ut|restrictNormalHom_surjective\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PolynomialGaloisGroup.lean\", \"Mathlib/FieldTheory/AbelRuffini.lean\", \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"Mathlib/FieldTheory/Galois/Abelian.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Galois/Basic.lean\", \"Mathlib/FieldTheory/Galois/Basic.lean\", \"Mathlib/FieldTheory/Galois/Basic.lean\"], \"digest\": \"5c09b167bee199ae\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field, normal-lifting and restriction results are ingredients, not the full compatible-pair envelope construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting on K admits a finite normal field containing a given finite extension L of K with a surjective group of compatible automorphism pairs",
+   "results": "{\"t\": \"2026-10-23T04:25:18Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group acting on K admits a finite normal field containing a given finite extension L of K with a surjective group of compatible automorphism pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGaloisGroup.isGalois\", \"FixedPoints.normal\", \"IsGaloisGroup.finite\", \"FixedPoints.toAlgAut_surjective\", \"top_fixedByFinite\", \"fixedByFinite\", \"IsGaloisGroup.intermediateField\", \"IsGalois.of_fixed_field\"], \"digest\": \"dc792e9b03608cd3\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field, normal-lifting and restriction results are ingredients, not the full compatible-pair envelope construction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift a possibly nonfaithful finite group action on a field K to a finite normal extension containing L using the group of compatible pairs",
+   "results": "{\"t\": \"2026-10-23T04:26:04Z\", \"tool\": \"leansearch\", \"query\": \"Lift a possibly nonfaithful finite group action on a field K to a finite normal extension containing L using the group of compatible pairs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.toAlgEquivAux_eq_liftNormal\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.isGalois\", \"AlgEquiv.liftNormal\", \"IsNormalClosure.lift\", \"IsGaloisGroup.intermediateField\", \"IsGaloisGroup.of_isGalois\", \"IsGalois.of_fixed_field\"], \"digest\": \"2fa7766f7a9b67f4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field, normal-lifting and restriction results are ingredients, not the full compatible-pair envelope construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibre product of a finite field automorphism group with restriction from the Galois group of a normal closure, surjective projection and purely inseparable kernel fixed field",
+   "results": "{\"t\": \"2026-10-23T04:26:15Z\", \"tool\": \"leanfinder\", \"query\": \"Fibre product of a finite field automorphism group with restriction from the Galois group of a normal closure, surjective projection and purely inseparable kernel fixed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IntermediateField.restrictRestrictAlgEquivMapHom_surjective\", \"IntermediateField.restrictNormalHom_ker\", \"AlgEquiv.restrictNormalHom_surjective\", \"Polynomial.Gal.restrict_surjective\", \"AlgEquiv.restrictNormalHom\", \"finGaloisGroupMap\", \"galRestrictHom\", \"InfiniteGalois.normalAutEquivQuotient_apply\"], \"digest\": \"934f3ecd1058e1ac\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: fixed-field, normal-lifting and restriction results are ingredients, not the full compatible-pair envelope construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-semilinear-galois-alteration-domination",
+  "date": "2026-10-22",
+  "group": "Q141"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; prerequisite: de Jong (1997), §§3.2 and 3.8, pp.605,608, and Situation 5.3, p.613; general semilinear conjugate-product/projective-domination form of ILO X Theorem 3.4 Step 4, pp.160--161. Nonseparable extensions use the purely inseparable-then-Galois convention of ILO X Remark 3.3.2, p.158. Re-split of the semilinear domination argument, old steps 1--3 and 15.",
+   "via": [
+    "lem-sfb-semilinear-galois-alteration-domination",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-finite-semilinear-field-envelope",
+  "worker": "stage1",
+  "group": "Q25",
+  "summary": "Preserved the statement and all inherited searches and ancestry. Nine steps reuse ten existing field-theory results; no new nodes. Pass to the faithful image only to prove K/F Galois, then retain H in the compatible-pair group. Wrote subgroup, action, kernel and spanning calculations. Separable case uses existing tower and Galois-overfield statements. Read exact cited statements and Stacks sources; checked edge cases and citation witnesses.",
+  "blueprint": "Whole-blueprint searches for normal closure, fixed field, semilinear and 09I3 found no equivalent imported node. Ancestor command reports None: retain inherited null from.node and via list. Realizes the finite-field-envelope prerequisite of det-thm-sf-ctf-stability-direct-images proof (3), via the inherited semilinear alteration-domination ancestry and ILO X alteration route; no unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+    "why": "Generic normal-field fixed-field theorem for M/K without separability; no replacement in the stability unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-galois-receiving-separable-extensions",
+    "why": "Generic finite Galois overfield existence for the singleton L/F, implementing the normal-closure route; no replacement in the stability unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-normal-extension-fixed-field-purely-inseparable",
+  "lem-weil-pbc-finite-galois-receiving-separable-extensions"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-5f79af300",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-5f79af300 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with the item and its report, no new nodes, and a statement byte-identical to the one Q141 created (status unsplit). Nine steps cite ten existing field-theory nodes. proof_deps equals the union of uses, and the closure of the deps has no cycle and no SGA citation. Step by step: (1) 09I3 is applied to the image A(H) acting faithfully, and its fixed field is F. (2) The spanning set b_i c_j gives L/F finite, and 09DT gives M finite normal over F. (3) The subgroup and action follow from (στ)|_K=A_hA_g and σ^{-1}|_K=A_{h^{-1}}. (4) The embedding bound gives Aut_F(M) finite. (5) 0BME(2) needs K/F normal, which holds by step 1 (I read fields.tex 1946ff), so ρ is onto. (6) N equals Aut_K(M). (7) 09HN gives M/K normal, and 030M(2) (E_insep=E^{Aut}, fields.tex 3666) gives M^N/K purely inseparable and finite. (8) 09HB with the singleton normal-closure node gives a Galois M receiving L. (9) 09H2 with 09DW gives M^N=K. Small cases agree with the statement: H trivial, A trivial, and in char p M=K(a^{1/p}) gives M^N=M, which is purely inseparable but not equal to K, as the general clause says. I accept the two off-unit tool_uses from sk-thm-p1 (the purely inseparable fixed field and the Galois receiving field), although the worker wrote them where C8 leaves that to L. Maintainer note: lem-sfb-equivariant-galois-polynomial-envelope (Q50) already states the same J/ρ/N construction in the separable case only. That overlap is between two existing nodes and is not this delivery's fault. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.FiniteSemilinearFieldEnvelope",
+  "declaration": "exists_finiteSemilinearFieldEnvelope",
+  "declarations": [
+   "FiniteSemilinearFieldEnvelope",
+   "exists_finiteSemilinearFieldEnvelope"
+  ],
+  "file": "lean/Sheaf/FieldTheory/FiniteSemilinearFieldEnvelope.lean",
+  "statement": "theorem exists_finiteSemilinearFieldEnvelope (K : Type u) (L : Type v) (H : Type w) [Field K] [Field L] [Algebra K L] [Group H] [FiniteDimensional K L] [Finite H] (A : H →* (K ≃+* K)) : Nonempty (FiniteSemilinearFieldEnvelope K L H A)",
+  "branch": "sheaf-dag",
+  "by": "Q49",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1559417b6",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Clause-by-clause match of FiniteSemilinearFieldEnvelope/exists_finiteSemilinearFieldEnvelope against the node: F via mem_base iff; tower via IsScalarTower K L M and base K M; M/F finite normal; J as Subgroup of H × Aut_base(M) with exact mem_pairs iff; rho first coordinate, finite, surjective; evaluation action with action_on_base; kernelEquiv Aut_K(M) ≃* rho.ker pinned to (1,σ) and action-compatible; M^N as an IntermediateField with mem_fixed iff, finite and purely inseparable; K/F finite Galois; M/K finite normal; separable-case implications on the same witnesses (Galois over F and over K, fixed = ⊥). No faithfulness or extra assumptions; universes u, v, w independent; carrier Type (max u v) is output data. Stmt_dep records Field/Algebra/FieldTower/Algebra.IsSeparable/IsPurelyInseparable match. One sorry; docstrings carry the source and blueprint id plus the 9 proof steps; lean.statement verbatim; no H4 duplicate found; no pro-étale. No fixes."
+ }
+}

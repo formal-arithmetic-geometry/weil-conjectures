@@ -1,0 +1,287 @@
+{
+ "id": "lem-sfb-stack-test-fibre-restriction-injectives",
+ "kind": "statement",
+ "title": "Exact restriction to a stack test fibre preserves injective modules",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. Let $S$ be a scheme [def-pc-scheme], let $h:\\mathcal X\\to\\mathcal Y$ be a morphism of algebraic stacks over $S$ [def-sfb-algebraic-moduli-stack], and let $y\\in\\mathcal Y(V)$ be an object over an $S$-scheme $V$. Categories fibred in groupoids and their $2$-fibre products have the conventions of [def-sfb-stable-pointed-moduli-groupoids]. Give these categories their inherited big fppf sites and structure sheaves [def-sfb-stack-quasi-coherent-algebra], or their big etale sites with the same objects, arrows and structure sheaves and coverings lying over jointly surjective etale scheme families [def-weil-etale-morphism]. Fix $\\tau\\in\\{\\mathrm{et},\\mathrm{fppf}\\}$, put $\\mathcal X_y=\\mathcal X\\times_{\\mathcal Y}(\\mathit{Sch}/V)$, and write $p_y:\\mathcal X_y\\to\\mathcal X$ for the projection. Precomposition, with its original restriction maps, defines an exact additive functor on all structure-module sheaves [def-weil-sheaf-of-modules-category]\n$$p_y^{-1}:\\operatorname{Mod}(\\mathcal X_\\tau,\\mathcal O_{\\mathcal X})\\longrightarrow\\operatorname{Mod}(\\mathcal X_{y,\\tau},\\mathcal O_{\\mathcal X_y}).$$\nOn an object $(x,T\\to V,\\alpha)$ over $T$ it has value $M(x)$ with the original $\\Gamma(T,\\mathcal O_T)$-action; in particular $p_y^{-1}\\mathcal O_{\\mathcal X}=\\mathcal O_{\\mathcal X_y}$. If $I$ is injective in $\\operatorname{Mod}(\\mathcal X_\\tau,\\mathcal O_{\\mathcal X})$ [def-sp-injective-resolutions], then $p_y^{-1}I$ is injective in $\\operatorname{Mod}(\\mathcal X_{y,\\tau},\\mathcal O_{\\mathcal X_y})$. No representability, quasi-compactness, quasi-separatedness or flatness is assumed for $h$, and no quasi-coherence condition is imposed on the modules.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 06X2 (lemma-pullback-injective-modules), specialized to the test-fibre projection; Tag 06WY (lemma-fibre-products), equalizers for algebraic stacks; Tag 06TS (lemma-functoriality-sheaves), exact inverse image by precomposition. This is the injective-preservation input used in the proof of lemma-pushforward-restriction."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-etale-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\mathcal X_y$ and $u=p_y$. The fibrewise triple construction of [def-sfb-stable-pointed-moduli-groupoids] makes $\\mathcal C$ fibred in groupoids: pull back the object $x$, the map to $V$, and the isomorphism $\\alpha$ along the same base arrow. Its lifting uniqueness follows componentwise. Both total categories are small in the stipulated universe. Thus [lem-sfb-fibred-site-functor-continuity], with the base scheme site in the chosen topology $\\tau$, makes $u$ continuous and cocontinuous. It applies for both topologies because their coverings are exactly the inherited scheme coverings. Since $u$ leaves the underlying scheme and base arrow unchanged, $R=\\mathcal O_{\\mathcal X}$ satisfies $R\\circ u=\\mathcal O_{\\mathcal C}$ as ring sheaves, including restriction maps. Apply [lem-trf-ringed-site-restriction-generator-data] to obtain an additive exact restriction functor $T$ on all module sheaves. Its formula on $(x,v,\\alpha)$ is $TM(x,v,\\alpha)=M(x)$ with its original action and restrictions, so this is the functor and the structure-ring equality asserted in the statement.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-fibred-site-functor-continuity",
+    "def-sfb-stack-quasi-coherent-algebra",
+    "lem-trf-ringed-site-restriction-generator-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06TS, lemma-functoriality-sheaves; section-modules, precomposition and unchanged structure ring"
+   }
+  },
+  {
+   "text": "The functor $u$ is faithful. Indeed an arrow of triples consists of an arrow $a:x\\to x'$ and an arrow of $\\mathit{Sch}/V$ with the same base scheme map, satisfying the compatibility with $\\alpha,\\alpha'$. For fixed $a$ that second arrow is unique, so two parallel arrows with the same image in $\\mathcal X$ coincide. This uses no faithfulness assumption on $h$.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06X2 hypotheses; fibrewise description of the test-fibre projection"
+   }
+  },
+  {
+   "text": "Both total categories have fibre products: for arrows to a common object lift the underlying scheme fibre product of [def-pc-fibre-product]; [lem-sfb-cartesian-lift-pullback-square] gives its universal property because every arrow is cartesian. Applying $u$ leaves this base square unchanged and still gives cartesian arrows, so its image is again a pullback by the same lemma. Thus $u$ preserves fibre products.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "lem-sfb-cartesian-lift-pullback-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY (1), lemma-fibre-products; Tag 06WZ (1), lemma-fibre-products-morphism"
+   }
+  },
+  {
+   "text": "For parallel arrows $A,B:z\\to z'$ in $\\mathcal C$, write $z=(x,v,\\alpha)$. By [lem-sfb-algebraic-stack-total-equalizers], let $e:w\\to x$ equalize $u(A),u(B)$ in $\\mathcal X$, and let $t:W\\to T$ be its base map. The triple $\\widetilde w=(w,v t,t^*\\alpha)$ uses the canonical cartesian identifications $h(w)\\simeq t^*h(x)$; it has a canonical arrow $\\widetilde e:\\widetilde w\\to z$ above $e$. Faithfulness makes $A\\widetilde e=B\\widetilde e$. Any equalizing arrow $k:z''\\to z$ has a unique factorization $u(k)=e l$ in $\\mathcal X$. This $l$ lifts to a morphism $z''\\to\\widetilde w$: its map to $V$ is forced by $v''=v\\,p(k)=v t\\,p(l)$, and its isomorphism compatibility is exactly that of $k$ after the cartesian identifications. Faithfulness gives uniqueness. Hence $\\widetilde e$ is an equalizer and $u$ preserves it.",
+   "uses": [
+    "lem-sfb-algebraic-stack-total-equalizers",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06WY (3), lemma-fibre-products; Tag 06WZ (2), lemma-fibre-products-morphism, with the test-fibre lifting written out"
+   }
+  },
+  {
+   "text": "For $z$ over $T$, apply [lem-sfb-fibred-test-object-ringed-localization] to the categories fibred in groupoids $\\mathcal C$ and $\\mathcal X$ in the chosen topology $\\tau$: the functors $p_z:\\mathcal C/z\\to\\mathit{Sch}/T$ and $p_{u(z)}:\\mathcal X/u(z)\\to\\mathit{Sch}/T$, sending an arrow into the distinguished object to its underlying scheme map, are equivalences of ringed sites for the localized topologies and the restricted structure sheaves, and both identify the ring on an object over $W$ with $\\Gamma(W,\\mathcal O_W)$. Since $u$ is a functor over $\\mathit{Sch}/S$ that leaves underlying scheme maps unchanged, the induced slice functor $u_z:\\mathcal C/z\\to\\mathcal X/u(z)$ satisfies $p_{u(z)}\\circ u_z=p_z$ strictly. Hence $u_z$ is an equivalence of categories (two out of three), and a family in $\\mathcal C/z$ covers if and only if its image in $\\mathit{Sch}/T$ is a $\\tau$-covering, if and only if its image under $u_z$ covers. The ring sheaves $\\mathcal O_{\\mathcal C}|_z$ and $\\mathcal O_{\\mathcal X}|_{u(z)}\\circ u_z$ both take the value $\\Gamma(W,\\mathcal O_W)$ with the same pullbacks, as already noted in step 1. Thus $u_z$ is an equivalence of ringed slice sites.",
+   "uses": [
+    "lem-sfb-fibred-test-object-ringed-localization",
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-sfb-stack-quasi-coherent-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06W9, lemma-localizing-structure-sheaf (via lem-sfb-fibred-test-object-ringed-localization); proof of Tag 06X2, equivalence of localized ringed sites"
+   }
+  },
+  {
+   "text": "Steps 1, 3, 4 and 5 verify every hypothesis of [lem-sfb-ringed-site-slice-equivalence-exact-shriek] for $u$, $R=\\mathcal O_{\\mathcal X}$ and $R'=\\mathcal O_{\\mathcal C}$. Obtain an exact additive $L\\dashv T$. In particular $L$ preserves monomorphisms. Apply [lem-exc-rg-right-adjoint-preserves-injectives] to this adjunction: for each injective module $I$ on $\\mathcal X$, the module $TI$ on $\\mathcal C$ is injective. Concretely a map $M\\to TI$ along a monomorphism $M\\hookrightarrow N$ transposes to $LM\\to I$; extend it across the monomorphism $LM\\hookrightarrow LN$ and transpose back. Together with step 1 this proves all clauses, for arbitrary $h$ and arbitrary module sheaves.",
+   "uses": [
+    "lem-sfb-ringed-site-slice-equivalence-exact-shriek",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 06X2, final paragraph: exact left adjoint and Homology Tag 015Z"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "lem-sfb-fibred-site-functor-continuity",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "lem-trf-ringed-site-restriction-generator-data",
+  "def-pc-fibre-product",
+  "lem-sfb-cartesian-lift-pullback-square",
+  "lem-sfb-algebraic-stack-total-equalizers",
+  "lem-sfb-fibred-test-object-ringed-localization",
+  "lem-sfb-ringed-site-slice-equivalence-exact-shriek",
+  "lem-exc-rg-right-adjoint-preserves-injectives"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tags 06WY, 06WZ and 06X2, with the triple-category verification for the test-fibre projection; Tag 06TS for restriction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stack.*injective|injective.*stack|faithful.*pullback|pullback.*faithful",
+   "results": "{\"t\": \"2026-10-23T21:16:36Z\", \"tool\": \"grep\", \"query\": \"stack.*injective|injective.*stack|faithful.*pullback|pullback.*faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/Basic.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Representable.lean\"], \"digest\": \"f894e0fac591c065\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback by a faithful morphism of algebraic stacks on big sites preserves injective modules",
+   "results": "{\"t\": \"2026-10-23T21:16:36Z\", \"tool\": \"leansearch\", \"query\": \"Pullback by a faithful morphism of algebraic stacks on big sites preserves injective modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.injective_of_map_injective\", \"CategoryTheory.Subobject.instFaithfulPullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"CategoryTheory.IsPullback.of_map_of_faithful\", \"CategoryTheory.Over.faithful_pullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"PresheafOfModules.instFaithfulFunctorOppositeAbToPresheaf\"], \"digest\": \"985866db7ac94fea\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesInjectiveObjects\"",
+   "results": "{\"t\": \"2026-10-23T21:16:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"preservesInjectiveObjects\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\", \"CategoryTheory.Functor.preservesInjectiveObjects_comp\", \"ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall\"], \"digest\": \"fdf1dde2fc293b82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of injective structure module sheaves to the two fibre product of algebraic stacks with a test scheme is exact and preserves injective objects on big etale and fppf sites",
+   "results": "{\"t\": \"2026-10-23T21:16:37Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of injective structure module sheaves to the two fibre product of algebraic stacks with a test scheme is exact and preserves injective objects on big etale and fppf sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"PresheafOfModules.IsLocallyInjective\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"CategoryTheory.Presheaf.isLocallyInjective_forget\", \"CategoryTheory.Presheaf.isLocallyInjective_of_isLocallyInjective_fac\", \"CategoryTheory.Presheaf.isLocallyInjective_of_injective\"], \"digest\": \"1823f1661c66bed8\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Precomposition with the projection from the fibre stack over an object of the target sends an injective resolution of modules to an injective resolution",
+   "results": "{\"t\": \"2026-10-23T21:16:38Z\", \"tool\": \"leanfinder\", \"query\": \"Precomposition with the projection from the fibre stack over an object of the target sends an injective resolution of modules to an injective resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.of\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolution\", \"CategoryTheory.HasInjectiveResolutions.out\", \"CategoryTheory.InjectiveResolution.instHasInjectiveResolutions\", \"CategoryTheory.InjectiveResolution.descFSucc\", \"CategoryTheory.injectiveResolution\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CategoryTheory.InjectiveResolution.instInjectiveXNatOfCocomplex\"], \"digest\": \"667e7141c0412a62\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On big stack sites the inverse image along the projection from X times over Y a scheme V has an exact left adjoint and therefore preserves injective O modules",
+   "results": "{\"t\": \"2026-10-23T21:18:49Z\", \"tool\": \"leanfinder\", \"query\": \"On big stack sites the inverse image along the projection from X times over Y a scheme V has an exact left adjoint and therefore preserves injective O modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"digest\": \"277904b55e610d56\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "grep",
+   "query": "stack.*injective|injective.*stack|fibred.*module|module.*fibred",
+   "results": "{\"t\": \"2026-10-23T21:21:43Z\", \"tool\": \"grep\", \"query\": \"stack.*injective|injective.*stack|fibred.*module|module.*fibred\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read the hits; the abstract adjunction theorem requires an exact left adjoint already constructed, while scheme pullbacks and local injectivity of sheaf morphisms do not establish preservation of injective module objects for this big-stack fibre projection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of structure module sheaves along a test scheme fiber projection of algebraic stacks is exact and preserves injective objects on big etale and fppf sites",
+   "results": "{\"t\": \"2026-10-23T22:11:45Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of structure module sheaves along a test scheme fiber projection of algebraic stacks is exact and preserves injective objects on big etale and fppf sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallyInjectiveHomObjForgetTypeYonedaGluedToSheaf\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.isLocallyDirected_of_equifibered_of_injective\", \"CategoryTheory.Sheaf.isLocallyInjective_forget\", \"PresheafOfModules.IsLocallyInjective\", \"PresheafOfModules.instIsLocallyInjectiveToSheafify\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\"], \"digest\": \"c29bfb8d18bef1de\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic right-adjoint injectivity transfer is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; returned scheme module and locally injective morphism declarations do not construct the exact left adjoint for this big-stack fibre projection."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along a faithful map of categories fibered in groupoids preserves injective structure sheaf modules",
+   "results": "{\"t\": \"2026-10-23T22:11:43Z\", \"tool\": \"leansearch\", \"query\": \"Pullback along a faithful map of categories fibered in groupoids preserves injective structure sheaf modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Over.faithful_pullback\", \"SheafOfModules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"CategoryTheory.Subobject.instFaithfulPullback\", \"HasFibers.mkPullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"CategoryTheory.IsPullback.of_map_of_faithful\", \"HasFibers.pullbackMap\"], \"digest\": \"98747cbd5e0eab64\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic right-adjoint injectivity transfer is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; returned scheme module and locally injective morphism declarations do not construct the exact left adjoint for this big-stack fibre projection."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesInjectiveObjects\"",
+   "results": "{\"t\": \"2026-10-23T22:11:43Z\", \"tool\": \"loogle\", \"query\": \"\\\"preservesInjectiveObjects\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.PreservesInjectiveObjects\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_isEquivalence\", \"CategoryTheory.Functor.PreservesInjectiveObjects.injective_obj\", \"CategoryTheory.Functor.PreservesInjectiveObjects.mk\", \"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\", \"CategoryTheory.Functor.preservesInjectiveObjects_comp\", \"ModuleCat.instPreservesInjectiveObjectsUliftFunctorOfSmall\"], \"digest\": \"fdf1dde2fc293b82\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic right-adjoint injectivity transfer is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; returned scheme module and locally injective morphism declarations do not construct the exact left adjoint for this big-stack fibre projection."
+  },
+  {
+   "tool": "grep",
+   "query": "stack.*injective|injective.*stack|fibred.*equalizer|fibered.*equalizer",
+   "results": "{\"t\": \"2026-10-23T22:11:42Z\", \"tool\": \"grep\", \"query\": \"stack.*injective|injective.*stack|fibred.*equalizer|fibered.*equalizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective.lean\", \"Mathlib/RingTheory/Ideal/MinimalPrime/Localization.lean\"], \"digest\": \"e457b88000cee8f0\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: generic right-adjoint injectivity transfer is already the Mathlib leaf lem-exc-rg-right-adjoint-preserves-injectives; returned scheme module and locally injective morphism declarations do not construct the exact left adjoint for this big-stack fibre projection."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+  "date": "2026-10-24",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison. Injective-resolution input: restriction to a test-scheme fibre preserves injectives.",
+   "via": [
+    "lem-sfb-stack-higher-image-fibre-cohomology-presheaf",
+    "lem-sfb-stack-lqc-lfp-topology-comparison",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-test-fibre-restriction-injectives",
+  "worker": "stage1",
+  "summary": "Q22 follows the Stacks exact-lower-shriek route. Verified continuity, ring identity, faithfulness, fibre products, equalizers and equivalences on slices for the actual test-fibre category; reused exact module restriction and the Mathlib adjunction transfer leaf. Two strictly smaller statement-only prerequisites expose total-stack equalizers and exact module lower shriek. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Etale-fppf comparison under locally finitely presented flat comparisons. Sheafified fibre-cohomology formula used to assemble the higher-direct-image comparison. Injective-resolution input: restriction to a test-scheme fibre preserves injectives. The six steps supply precisely the recorded test-fibre injective-resolution prerequisite of direct-image clause (3); no change of route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-ringed-site-restriction-generator-data",
+    "why": "Generic exactness of module restriction under continuous cocontinuous site functors; used only after checking those hypotheses for the inherited stack sites. No geometric unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-ringed-site-restriction-generator-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-7fdbb06fc",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-7fdbb06fc (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, against Stacks 06WY/06WZ (with the next lemma), 06X1, 06X2 and sites-modules 04BH/0797/0798. New node lem-sfb-algebraic-stack-total-equalizers is 06WY(2)/(3): Isom is representable because the DAG's algebraic stack has a representable diagonal, so the equalizer M = U x_{e,G,i} U is a scheme. It is true and strictly smaller than the item. New node lem-sfb-ringed-site-slice-equivalence-exact-shriek is 0797 + 0798 + 04BH: in each slice (g')_! O = O, so L = g_!^Ab, which is exact. It is true and not a duplicate of the trf restriction/derived-shriek nodes or of the pbc ringed-restriction node. Item steps: step 1 gives continuity via fibred-site-functor-continuity and exact T via the trf node; step 2 faithfulness and step 3 fibre products via cartesian-lift-pullback-square are correct; in step 4 I checked the t^*alpha triple, the lift of l, and uniqueness by faithfulness; step 6 uses node 2 and the Mathlib leaf map_injective. Edge cases checked: h = id, BG stabilizers, empty V, closed immersion T -> V (no flatness needed). FIX (C5): step 5 re-proved as elementary the 06W9 slice equivalence, which is already the reviewed same-unit base node lem-sfb-fibred-test-object-ringed-localization. Step 5 now cites it for both C and X and gets u_z by two out of three; proof_deps updated; there is no cycle. Batch 5: def-sfb-algebraic-moduli-stack and def-sfb-stable-pointed-moduli-groupoids are general definitions; lem-trf-ringed-site-restriction-generator-data is a generic site-exactness lemma that neither assumption gives and that is not a trace-formula or Poincaré step, so I accept it, and also as the declared tool_use. No SGA. Statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackTestFibreRestrictionInjectives",
+  "declaration": "CategoryTheory.moduliTestFibreRestriction_exact_preservesInjectives",
+  "declarations": [
+   "CategoryTheory.moduliTestFibreTopology",
+   "CategoryTheory.moduliTestFibreStructure_isSheaf",
+   "CategoryTheory.moduliTestFibreModuleRings",
+   "CategoryTheory.moduliTestFibre",
+   "CategoryTheory.moduliTestFibreProjection",
+   "CategoryTheory.moduliTestFibreProjection_isContinuous",
+   "CategoryTheory.moduliTestFibreRestrictedRings",
+   "CategoryTheory.moduliTestFibreRestriction",
+   "CategoryTheory.moduliTestFibreRestriction_exact_preservesInjectives"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackTestFibreRestrictionInjectives.lean",
+  "statement": "theorem moduliTestFibreRestriction_exact_preservesInjectives {S : AlgebraicGeometry.Scheme.{u}} {X : BasedCategory.{v, w} (Over S)} {Y : BasedCategory.{v', w'} (Over S)} (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (h : BasedFunctor X Y) {V : Over S} (y : BasedFunctor (discreteModuli (yoneda.obj V)) Y) (etale : Bool) : (moduliTestFibreRestriction hX.1.1 hY.1.1 h y etale).Additive ∧ PreservesFiniteLimits (moduliTestFibreRestriction hX.1.1 hY.1.1 h y etale) ∧ PreservesFiniteColimits (moduliTestFibreRestriction hX.1.1 hY.1.1 h y etale) ∧ (moduliTestFibreRestriction hX.1.1 hY.1.1 h y etale).PreservesInjectiveObjects",
+  "branch": "sheaf-dag",
+  "by": "Q60",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The test object is encoded by its map h_V to Y, following the recorded moduli-groupoid convention and 2-Yoneda. Bool true selects big etale and false big fppf. The target structure ring is literally precomposition of the recorded regular-function ring, so section carriers, scalar actions and restriction maps are retained. Explicit independent scheme/site universes; modules live in their common maximum. All definitions contain real data; the three theorem obligations have sorry proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-716ade5ff",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Item node differs from live only in lean; lean.statement verbatim in file; 9 declarations listed; report has Worker report + Second reading by Q60. Clauses match: IsAlgebraicModuliStack X,Y; arbitrary BasedFunctor h; test object as BasedFunctor from discreteModuli (yoneda.obj V) (recorded 2-Yoneda convention); fibre = recorded moduliTwoFiberProduct/moduliTwoFiberFst; Bool selects etalePrecoverage.comap (jointly surjective etale, same pattern as landed FibredCoverDetectsExactness) or recorded moduliFppfTopology; restriction = Mathlib SheafOfModules.pushforward (𝟙 _) along continuous projection, ring = precomposed O_X so p^-1 O_X = O_{X_y} by definition (fibre's own moduliStructurePresheaf has a larger ULift universe; canonical ULift iso for citers); conclusion Additive ∧ PreservesFiniteLimits ∧ PreservesFiniteColimits ∧ PreservesInjectiveObjects. The two sorried helper theorems (etale sheaf condition, IsContinuous in the correct direction) are true obligations of the item's own statement and carry source docstrings. fibredBigEtaleTopology (universe-restricted, uncited) and moduliRawPrecomposition (theorem node, fppf/equal universes) are not usable here, so no H4 duplicate. Edge cases (empty fibre, h=id, stabilizers, zero module, independent universes) covered; no hollow defs, only sorry proofs, docstrings with Stacks tags, blueprint ID and the 6-step proof. No file changed, so no compile."
+ }
+}

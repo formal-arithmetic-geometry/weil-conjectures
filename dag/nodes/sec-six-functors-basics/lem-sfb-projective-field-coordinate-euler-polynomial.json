@@ -1,0 +1,310 @@
+{
+ "id": "lem-sfb-projective-field-coordinate-euler-polynomial",
+ "kind": "statement",
+ "title": "Construction and uniqueness of the coordinate Euler polynomial over a field",
+ "statement": "Let $k$ be a field [def-weil-field], $n\\geq0$, and $i:X\\hookrightarrow\\mathbf P^n_k=\\operatorname{Proj}(k[z_0,\\ldots,z_n])$ a closed immersion [def-pc-scheme, def-weil-closed-immersion, def-pc-proj]. Put $\\mathcal O_X(d)=i^*\\mathcal O_{\\mathbf P^n_k}(d)$ for $d\\in\\mathbf Z$ [def-pc-projective-space-twist, def-pc-module-pullback]. Then $X$ is proper [def-weil-proper-morphism] and Noetherian (it is quasi-compact and locally Noetherian [pqf-def-locnoeth]), and $\\mathcal O_X$ is coherent [pqf-def-coherent]. There is a unique polynomial $Q_X\\in\\mathbf Q[x]$ such that $Q_X(d)=\\chi(X,\\mathcal O_X(d))$ for every $d\\in\\mathbf Z$ [def-pc-euler-characteristic]; it is numerical, meaning $Q_X(d)\\in\\mathbf Z$ for every integer $d$. There exists a homogeneous ideal $J\\subseteq k[z_0,\\ldots,z_n]$ with $X=\\operatorname{Proj}(k[z_0,\\ldots,z_n]/J)$ as a closed subscheme of $\\mathbf P^n_k$. For every such ideal $J$, with quotient grading as in [def-sfb-coordinate-quotient-grading], $Q_X(d)=\\dim_k(k[z_0,\\ldots,z_n]/J)_d$ for all sufficiently large $d\\geq0$, and $Q_X$ is the unique rational polynomial with that eventual equality. No saturation assumption on $J$ is required; $J=(1)$ and $X=\\varnothing$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BEM (lemma-numerical-polynomial-from-euler), r=1 and F=O_X; Tag 08AE (lemma-hilbert-polynomial-H0); constructions.tex Tag 03GL (lemma-closed-in-projective-space); coherent.tex Tag 0AG7 (lemma-recover-tail-graded-module). Properness/Noetherianity/coherence preparation is returned proof step 1; polynomial and coordinate comparison are step 4."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-proj",
+  "def-pc-projective-space-twist",
+  "def-pc-module-pullback",
+  "def-weil-proper-morphism",
+  "pqf-def-locnoeth",
+  "pqf-def-coherent",
+  "def-pc-euler-characteristic",
+  "def-sfb-coordinate-quotient-grading",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-sfb-coordinate-quotient-immersion"
+ ],
+ "proof": [
+  {
+   "text": "The standard opens $U_j=D_+(z_j)$ form a finite affine cover of $P=\\mathbf P^n_k=\\operatorname{Proj}(B)$, $B=k[z_0,\\ldots,z_n]$, by [def-pc-proj]. By the affine description in [def-weil-closed-immersion], each $i^{-1}(U_j)$ is affine, so $X$ is quasi-compact; since the only opens of $\\operatorname{Spec}k$ are $\\varnothing$ and $\\operatorname{Spec}k$, the structure morphism $X\\to\\operatorname{Spec}k$ is quasi-compact [def-weil-finite-type-morphism]. The convention [def-pc-projective-morphism] asks for a closed immersion into $\\mathbf P(\\{0,\\ldots,n\\};\\operatorname{Spec}k)=\\operatorname{Spec}k\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Proj}(\\mathbf Z[T_0,\\ldots,T_n])$ [def-nagata-projective-space-base-change], which is not given as $\\operatorname{Proj}(B)$. Apply [lem-nagata-affine-proj-scalar-extension] with $R=\\mathbf Z$, $S=k$, $A=\\mathbf Z[T_0,\\ldots,T_n]$ and the $k$-algebra isomorphism $\\beta:k\\otimes_{\\mathbf Z}A\\to B$, $c\\otimes T_j\\mapsto cz_j$, of [lem-weil-pbc-polynomial-scalar-extension]; $\\beta$ sends $k\\otimes A_m$ onto $B_m$ because it sends monomials to monomials of the same degree. The resulting cartesian square identifies $P$, with its structure morphism $p_B$, with $\\mathbf P(\\{0,\\ldots,n\\};\\operatorname{Spec}k)$ and its first projection. Composing $i$ with this isomorphism gives a closed immersion $X\\hookrightarrow\\mathbf P(\\{0,\\ldots,n\\};\\operatorname{Spec}k)$ over $\\operatorname{Spec}k$, so $X\\to\\operatorname{Spec}k$ is projective under [def-pc-projective-morphism]. Apply [lem-pc-projective-proper] to conclude properness.",
+   "uses": [
+    "def-pc-proj",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
+    "def-pc-projective-morphism",
+    "def-nagata-projective-space-base-change",
+    "lem-nagata-affine-proj-scalar-extension",
+    "lem-weil-pbc-polynomial-scalar-extension",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC, lemma-locally-projective-proper, with the given projective-space factorization; constructions.tex Tag 01N2, lemma-base-change-map-proj, for Proj(k[z_0,...,z_n]) = Spec k x_Z P^n_Z (Tag 01NF, definition-projective-space)."
+   }
+  },
+  {
+   "text": "Properness includes finite type by [def-weil-proper-morphism]. The scheme $\\operatorname{Spec}k$ is Noetherian: its single affine ring is the field $k$, whose ideals are $0$ and $k$. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. On every affine open $\\operatorname{Spec}R\\subset X$, the structure sheaf is $\\widetilde R$ and is generated by $1$; it is consequently quasi-coherent of finite type by [pqf-def-coherent]. Apply [pqf-lem-coherent-ft-locnoeth] to obtain coherence of $\\mathcal O_X$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-def-coherent",
+    "pqf-lem-coherent-ft-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01XZ, lemma-coherent-Noetherian; morphisms.tex Tag 01T6, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Put $L=i^*\\mathcal O_P(1)$. The rank-one trivializations of [def-pc-projective-space-twist], pulled back using [def-pc-module-pullback], show that $L$ is invertible in the sense of [def-sc-invertible-module]. On $i^{-1}(U_j)$, the transition for $L^{\\otimes d}$ is $(z_j/z_l)^d$, also for negative $d$ by taking the dual basis; it is the transition for $i^*\\mathcal O_P(d)$. Sending these local bases to one another gives $L^{\\otimes d}\\cong\\mathcal O_X(d)$ for every integer $d$. Likewise, [def-weil-pbc-proj-twisting-sheaf] gives $\\widetilde{B(d)}|_{U_j}=(B_{z_j})_d$, free with basis $z_j^d$ over $(B_{z_j})_0$, where $B=k[z_0,\\ldots,z_n]$. Its transition is the same $(z_j/z_l)^d$. Thus the ambient twists used here and in the cited coordinate and section lemmas agree, including at $d=0$.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "def-pc-module-pullback",
+    "def-sc-invertible-module",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MN, definition-twist (1); explicit degree-one chart trivializations and their transition functions."
+   }
+  },
+  {
+   "text": "Apply [lem-sc-snapper-numerical-polynomial] to the proper $k$-scheme $X$, the coherent module $\\mathcal F=\\mathcal O_X$, and the single invertible module $L$. It supplies a rational numerical polynomial $Q_X$ whose value at every $d\\in\\mathbf Z$ is $\\chi(X,\\mathcal O_X\\otimes L^{\\otimes d})=\\chi(X,\\mathcal O_X(d))$, using step 3 and the tensor unit. Its values at all integers are integers, exactly the numerical assertion. No ampleness, reducedness, or nonemptiness is needed by that cited statement.",
+   "uses": [
+    "lem-sc-snapper-numerical-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BEM, lemma-numerical-polynomial-from-euler, r=1 and F=O_X."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-projective-closed-subscheme-homogeneous-ideal] with $R=k$ to the given immersion. Its explicitly defined homogeneous ideal $J$ gives $X=\\operatorname{Proj}(B/J)$ as a closed subscheme of this fixed $P$; this proves existence of a defining ideal, including for empty $X$.",
+   "uses": [
+    "lem-sfb-projective-closed-subscheme-homogeneous-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 03GL, lemma-closed-in-projective-space."
+   }
+  },
+  {
+   "text": "Now let $J$ be any homogeneous ideal with that same closed subscheme, and set $A=B/J$ with its quotient grading. Apply [lem-sfb-projective-coordinate-ring-euler-polynomial] to its quotient immersion. Because this is an identification over $P$, the twist is the same $i^*\\mathcal O_P(d)$; the cited statement gives, for all $d\\ge m_0$, $\\dim_k A_d=\\chi(X,\\mathcal O_X(d))=Q_X(d)$. That statement expressly permits unsaturated $J$, the unit ideal, and empty $X$. Thus the eventual equality holds for every defining ideal, without changing the polynomial constructed in step 4.",
+   "uses": [
+    "lem-sfb-projective-coordinate-ring-euler-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0AG7, lemma-recover-tail-graded-module; varieties.tex Tag 08AE, lemma-hilbert-polynomial-H0."
+   }
+  },
+  {
+   "text": "For uniqueness, apply [lem-sfb-projective-twist-euler-section-uniqueness] with $\\mathcal F=\\mathcal O_X$, which is quasi-coherent and has the finite presentation $\\mathcal O_X^{\\oplus0}\\to\\mathcal O_X\\xrightarrow{\\mathrm{id}}\\mathcal O_X\\to0$. Step 3 and the tensor unit identify its $E_m$ with $\\mathcal O_X(m)$. For $m\\ge b$ its statement gives $\\chi(X,\\mathcal O_X(m))=\\dim_kH^0(X,\\mathcal O_X(m))$. If a rational polynomial $R$ has the same Euler values at every integer, both $R$ and $Q_X$ therefore agree eventually with this section-dimension function, so the cited uniqueness clause gives $R=Q_X$. If instead $R$ agrees eventually with $\\dim_k(B/J)_m$ for any defining $J$, step 6 yields the same conclusion after taking the maximum of the finitely many thresholds. This proves both uniqueness assertions, also when the function is zero and $X$ is empty.",
+   "uses": [
+    "lem-sfb-projective-twist-euler-section-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01YS, lemma-coherent-projective (4), and varieties.tex Tag 08AE; uniqueness is the explicit uniqueness clause of the cited node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-projective-space-base-change",
+  "def-pc-module-pullback",
+  "def-pc-proj",
+  "def-pc-projective-morphism",
+  "def-pc-projective-space-twist",
+  "def-sc-invertible-module",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-weil-proper-morphism",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-pc-projective-proper",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-sfb-projective-closed-subscheme-homogeneous-ideal",
+  "lem-sfb-projective-coordinate-ring-euler-polynomial",
+  "lem-sfb-projective-twist-euler-section-uniqueness",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-polynomial-scalar-extension",
+  "pqf-def-coherent",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Assembly of Tag 0BEM with the existing Tag 03GL, Tag 0AG7 and Tag 08AE nodes; preparatory Tags 01WC, 01T6, 01XZ and the explicit twist-chart comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective closed subscheme over a field has a unique numerical polynomial equal to Euler characteristics of all integer twists and eventually dimensions of its graded coordinate ring",
+   "results": "{\"t\": \"2026-10-22T06:01:27Z\", \"tool\": \"leanfinder\", \"query\": \"A projective closed subscheme over a field has a unique numerical polynomial equal to Euler characteristics of all integer twists and eventually dimensions of its graded coordinate ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.ext\", \"ProjectiveSpectrum.ext_iff\", \"ProjectiveSpectrum.mk.inj\", \"ProjectiveSpectrum\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec\", \"AlgebraicGeometry.Proj.ext_iff\"], \"digest\": \"c9167d171a39445b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj, properness, stalk rank and homogeneous-ideal declarations do not give this combination of conclusions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hilbertPoly\"",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"hilbertPoly\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Polynomial.preHilbertPoly\", \"Polynomial.hilbertPoly\", \"Polynomial.natDegree_preHilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.leadingCoeff_preHilbertPoly\", \"Polynomial.hilbertPoly_zero_left\", \"Polynomial.preHilbertPoly_eq_choose_add_sub\", \"Polynomial.preHilbertPoly_eq_choose_sub_add\"], \"digest\": \"373e42d56614798b\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits, if any, concern formal power-series Hilbert polynomials or unrelated invertibility; no scheme/graded-quotient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "numericalPolynomial|eulerChar|HilbertPolynomial",
+   "results": "{\"t\": \"2026-10-22T06:02:50Z\", \"tool\": \"grep\", \"query\": \"numericalPolynomial|eulerChar|HilbertPolynomial\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching declarations in the searched source directory."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristics of all twists on a closed projective scheme over a field are a unique numerical polynomial agreeing eventually with homogeneous coordinate dimensions",
+   "results": "{\"t\": \"2026-10-22T06:02:51Z\", \"tool\": \"leansearch\", \"query\": \"Euler characteristics of all twists on a closed projective scheme over a field are a unique numerical polynomial agreeing eventually with homogeneous coordinate dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IncidenceAlgebra.eulerChar\", \"IncidenceAlgebra.eulerChar_prod\", \"WeierstrassCurve.Projective.polynomial_relation\", \"MvPolynomial.IsHomogeneous\", \"MvPolynomial.IsHomogeneous.sum_X_mul_pderiv\", \"LinearMap.polyCharpoly_coeff_isHomogeneous\", \"Matrix.charpoly.univ_coeff_card\", \"LinearMap.charpoly\"], \"digest\": \"21e154ae018dbbff\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern flat modules, Krull dimension, incidence-algebra Euler characteristics or basic Proj, not this complete statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Euler polynomial of the structure sheaf of a projective closed subscheme exists at all integer twists and is independent of the chosen homogeneous defining ideal",
+   "results": "{\"t\": \"2026-10-22T06:03:02Z\", \"tool\": \"leanfinder\", \"query\": \"The Euler polynomial of the structure sheaf of a projective closed subscheme exists at all integer twists and is independent of the chosen homogeneous defining ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.commRingStructureSheafInTypeObj\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.zero_apply\", \"AlgebraicGeometry.Proj.one_apply\", \"ProjectiveSpectrum\", \"AlgebraicGeometry.Proj.ext\"], \"digest\": \"1bb5a43ce2838bee\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: basic Proj, properness, stalk rank and homogeneous-ideal declarations do not give this combination of conclusions."
+  },
+  {
+   "tool": "grep",
+   "query": "hilbertPoly|numericalPolynomial|eulerChar",
+   "results": "{\"t\": \"2026-10-23T04:10:31Z\", \"tool\": \"grep\", \"query\": \"hilbertPoly|numericalPolynomial|eulerChar\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: No matching declarations in Mathlib/AlgebraicGeometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"hilbertPoly\"",
+   "results": "{\"t\": \"2026-10-23T04:10:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"hilbertPoly\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Polynomial.preHilbertPoly\", \"Polynomial.hilbertPoly\", \"Polynomial.natDegree_preHilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.leadingCoeff_preHilbertPoly\", \"Polynomial.hilbertPoly_zero_left\", \"Polynomial.preHilbertPoly_eq_choose_add_sub\", \"Polynomial.preHilbertPoly_eq_choose_sub_add\"], \"digest\": \"373e42d56614798b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Polynomial.hilbertPoly and existsUnique_hilbertPoly treat rational power-series coefficients, not scheme cohomology or graded coordinate rings; read Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18-44."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert polynomial equals Euler characteristic of all tensor powers of a line bundle on a projective scheme over a field",
+   "results": "{\"t\": \"2026-10-23T04:10:32Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert polynomial equals Euler characteristic of all tensor powers of a line bundle on a projective scheme over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.hilbertPoly\", \"Polynomial.hilbertPoly_zero_right\", \"Polynomial.existsUnique_hilbertPoly\", \"Polynomial.hilbertPoly_smul\", \"Polynomial.preHilbertPoly\", \"Polynomial.hilbertPoly_succ\", \"Polynomial.hilbertPoly_linearMap\", \"Polynomial.hilbertPoly_X_pow_succ\"], \"digest\": \"6dc940af837a5c35\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: Polynomial.hilbertPoly and existsUnique_hilbertPoly treat rational power-series coefficients, not scheme cohomology or graded coordinate rings; read Mathlib/RingTheory/Polynomial/HilbertPoly.lean:18-44."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Euler characteristics of all integer twists of a projective closed subscheme over a field form a unique numerical polynomial agreeing eventually with coordinate ring dimensions",
+   "results": "{\"t\": \"2026-10-23T04:10:39Z\", \"tool\": \"leanfinder\", \"query\": \"Euler characteristics of all integer twists of a projective closed subscheme over a field form a unique numerical polynomial agreeing eventually with coordinate ring dimensions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"ProjectiveSpectrum.mk.inj\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Proj.ext\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.projIsoSpec\", \"AlgebraicGeometry.Proj.ext_iff\", \"AlgebraicGeometry.projIsoSpecTopComponent\"], \"digest\": \"ccae3cc208e81deb\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The returned Proj/properness/localization declarations do not construct the all-integer Euler polynomial or prove its coordinate comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Snapper theorem polynomial Euler characteristic of powers of invertible sheaves on a proper scheme",
+   "results": "{\"t\": \"2026-10-23T04:10:40Z\", \"tool\": \"leanfinder\", \"query\": \"Snapper theorem polynomial Euler characteristic of powers of invertible sheaves on a proper scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Proj.pow_apply\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\"], \"digest\": \"37da621702194794\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: The returned Proj/properness/localization declarations do not construct the all-integer Euler polynomial or prove its coordinate comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-flat-projective-hilbert-polynomial-locality",
+  "date": "2026-10-22",
+  "group": "Q42"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong §§3.9--3.12, Claim 3.10 and Lemma 3.13, printed p.609. Agent-formulated version: the proof of Lemma 3.13 uses only that rational exceptional curves have constant image in each target fibre; this property replaces its genus-at-least-two and pure-curve target hypotheses. This statement does not assert existence of a semistable source.; de Jong 3.9, projective Hilbert schemes underlying the relative morphism scheme; Hilbert construction prerequisite: Local constancy and base change of projective fibre Hilbert polynomials; re-split of the returned proof: returned step 1 (proper Noetherian field fibres and coherence) and step 4 (Snapper, homogeneous ideal, eventual coordinate comparison and uniqueness)",
+   "via": [
+    "lem-sfb-flat-projective-hilbert-polynomial-locality",
+    "lem-sfb-projective-hilbert-polynomial-representability",
+    "lem-sfb-high-genus-hom-closure",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-projective-field-coordinate-euler-polynomial",
+  "worker": "stage1",
+  "summary": "Q09 retains the statement and statement dependencies verbatim. Seven steps prove properness/Noetherianity/coherence, compare all integer twists by their explicit chart transitions, specialize the existing general Snapper node, choose an ideal by the existing 03GL node, compare every quotient by the existing coordinate/Euler node, and apply the existing section-polynomial uniqueness node. No new nodes are needed. Logged searches exclude a complete Mathlib match.",
+  "blueprint": "The inherited from.place identifies the field preparation and polynomial/coordinate comparison extracted from returned steps 1 and 4 of lem-sfb-flat-projective-hilbert-polynomial-locality. These are realized by steps 1-4 and 5-7 respectively. tools/blueprint_refs.py ancestor reports None; the inherited null from.node and via chain are retained. Whole-blueprint searches for numerical polynomial and Hilbert polynomial return only the ample Hilbert-polynomial/degree nodes, none stating this complete field-coordinate theorem.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic projective-to-proper theorem for the specified embedding; the unit does not reprove properness."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence applied over Spec k; no replacement of the direct-image route."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic characterization of coherence on a locally Noetherian scheme applied to its structure sheaf."
+   },
+   {
+    "node": "lem-sc-snapper-numerical-polynomial",
+    "why": "Generic numerical Euler-polynomial theorem, specialized to one invertible sheaf; exactly the inherited field-polynomial route."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Generic scalar extension of affine Proj (Stacks 01N2), used only to identify Proj(k[z_0,...,z_n]) with the base-changed projective space of the projective-morphism convention; added by the Q09 maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-sc-snapper-numerical-polynomial",
+  "lem-nagata-affine-proj-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ab3ea0d5e",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ab3ea0d5e (reviewer sub-agent of L); spot-checked: Read the item, all 16 cited statements and Stacks 0BEM, 08AE, 01WC, 01T6, 03GL, 0AG7, 01N2 and 01NF in full. One fault, C1/C4, repaired. Step 1 went straight from the closed immersion into Proj(k[z_0..z_n]) to 'projective' under def-pc-projective-morphism. That convention asks for a closed immersion into P(n;S)=S x_Z Proj(Z[T]) [def-nagata-projective-space-base-change], a model built without gluing and with no chart interface. The identification Proj(k[z]) = Spec k x_Z P^n_Z (Stacks 01N2) was used without a node. FIX: step 1 now cites lem-nagata-affine-proj-scalar-extension (01N2, with R=Z, S=k) and the Mathlib leaf lem-weil-pbc-polynomial-scalar-extension, composes i with the resulting cartesian identification, and states that X->Spec k is quasi-compact as a morphism [def-weil-finite-type-morphism]. proof_deps is recomputed and the 01N2 node is added to tool_uses; its closure has no cycle and no trf/pd nodes. Steps 2-7 are correct. Step 2: 01T6 plus 01XZ. Step 3: transition multipliers (z_j/z_l)^d match between the glued twist and the twist of B(d) on Proj(B), including d<0 and d=0. Step 4: Snapper with r=1, F=O_X. Step 5: 03GL over R=k, equality as closed subschemes. Step 6: coordinate-ring node for any J, unsaturated J and J=(1) included. Step 7: section-uniqueness node with F=O_X, which is finitely presented. Edge cases checked: n=0; J=(z_0^a), unsaturated with X empty and Q=0; J=(1); J=0 gives C(d+n,n) at all integers; non-reduced points. No new nodes; DAG search found no duplicate of the item; no cycle; no SGA. Accepted tool uses: lem-pc-projective-proper, lem-weil-pbc-finite-type-over-noetherian, pqf-lem-coherent-ft-locnoeth and lem-sc-snapper-numerical-polynomial are generic off-unit black boxes. Batch-5: the Snapper closure meets the trace-formula/PD chapters only in three generic nodes: def-trf-schematically-dense-open (a definition), lem-trf-affine-open-limit-descent and lem-pod-separated-finite-type-base-change. All three are already in the batch-5 closure. None is part of either assumption or of their proofs, and Snapper's numerical polynomial is coherent-cohomology algebra outside both assumptions. Accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveFieldCoordinateEulerPolynomial",
+  "declaration": "AlgebraicGeometry.exists_projectiveField_coordinateEulerPolynomial",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveFieldCoordinateEulerPolynomial.lean",
+  "statement": "theorem exists_projectiveField_coordinateEulerPolynomial (k : Type u) [Field k] (n : ℕ) {X : Scheme.{u}} (i : X ⟶ Proj.projectiveSpaceOverAffine (ULift.{u} (Fin (n + 1))) k) [IsClosedImmersion i] : IsProper (i ≫ Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) k) ∧ IsNoetherian X ∧ RingedSpace.IsCoherent X.toRingedSpace (SheafOfModules.unit X.ringCatSheaf) ∧ ∃ Q : Polynomial ℚ, (∀ d : ℤ, Q.eval (d : ℚ) = (@Scheme.Modules.eulerChar k _ X (OverClass.ofHom (i ≫ Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) k)) ((Scheme.Modules.tensorPullback i).obj (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k) d)) : ℚ)) ∧ (∀ R : Polynomial ℚ, (∀ d : ℤ, R.eval (d : ℚ) = (@Scheme.Modules.eulerChar k _ X (OverClass.ofHom (i ≫ Proj.projectiveSpaceOverAffineToSpec (ULift.{u} (Fin (n + 1))) k)) ((Scheme.Modules.tensorPullback i).obj (Proj.twist (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k) d)) : ℚ)) → R = Q) ∧ (∀ d : ℤ, ∃ z : ℤ, Q.eval (d : ℚ) = (z : ℚ)) ∧ (∃ J : HomogeneousIdeal (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k), ∃ e : Proj (coordinateQuotientPiece J) ≅ X, e.hom ≫ i = coordinateQuotientImmersion J) ∧ (∀ J : HomogeneousIdeal (MvPolynomial.homogeneousSubmodule (ULift.{u} (Fin (n + 1))) k), (∃ e : Proj (coordinateQuotientPiece J) ≅ X, e.hom ≫ i = coordinateQuotientImmersion J) → (∃ b : ℕ, ∀ d : ℕ, b ≤ d → Q.eval (d : ℚ) = (Module.finrank k (coordinateQuotientPiece J d) : ℚ)) ∧ (∀ R : Polynomial ℚ, (∃ b : ℕ, ∀ d : ℕ, b ≤ d → R.eval (d : ℚ) = (Module.finrank k (coordinateQuotientPiece J d) : ℚ)) → R = Q))",
+  "branch": "sheaf-dag",
+  "by": "NY",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cff42aac7",
+  "group": "NY",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN at 20932675af92. The Lean file is byte-identical (sha b0643212). In the item's stmt_deps the theorem lem-sfb-projective-coordinate-ring-euler-polynomial is replaced by the new def-sfb-coordinate-quotient-immersion; the theorem stays in proof_deps. Statement, proof and other fields are unchanged against side-live apart from the lean record and the stmt_deps (+def-weil-pbc-proj-twisting-sheaf, +def-sfb-coordinate-quotient-immersion). New def node: q_J = Ideal.Quotient.mk and j_J = Proj.map with the surjective irrelevant-ideal bound (Stacks 01N0/00JL), no saturation condition, J=B allowed; stmt_deps field/quotient-grading/scheme/proj; existing:true on the live module for coordinateQuotientGradedMap/coordinateQuotientImmersion (read at lines 43-57, not hollow, no .choose of the theorem, statement verbatim); no move or copy; no duplicate in side-live or the sheaf DAG. All item clauses and edge cases re-checked (n=0, J=(1)/empty X, unsaturated J, d<0, universes). sorry only, docstrings present, report sections present. No compile (no file changed). Advisory A1 retained: the twist text cites def-pc-projective-space-twist while the Lean uses Proj.twist."
+ }
+}

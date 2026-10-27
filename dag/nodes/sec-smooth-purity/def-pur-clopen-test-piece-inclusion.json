@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-clopen-test-piece-inclusion",
+ "kind": "definition",
+ "title": "Pro-etale component test object and its ambient inclusion",
+ "statement": "Let $X,Y$ be schemes [def-pc-scheme] and $j:Y\\to X$ a morphism. For an object $H\\to X$ of the small pro-etale site [def-weil-pbc-proetale-site], define the component test object $H_Y$ to be the fibre product $H\\times_XY$ [def-pc-fibre-product], with its second projection to $Y$, as an object of $Y_{\\mathrm{proet}}$. If $j$ is an open immersion [def-weil-open-immersion], regard $H_Y$ as an object of $X_{\\mathrm{proet}}$ by composition with $j$. Define its ambient inclusion $H_Y\\to H$ to be the first fibre-product projection, with its morphism-over-$X$ structure given by the pullback commutativity equation. These constructions apply in particular to a clopen component; no closedness assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR (lemma-glue-sheaves), test-object fibre products in the explicit gluing formula; small pro-etale specialization."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical pro-etale test object pullback along open immersion and inclusion",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.pullbackConeOfLeft, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.instSndPullbackConeOfLeft, AlgebraicGeometry.Scheme.IsLocallyDirected.exists_of_pullback_V_V, AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι, AlgebraicGeometry.IsOpenImmersion.isPullback_lift_id, AlgebraicGeometry.IsOpenImmersion.isPullback, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.Scheme.pullback_map_isOpenImmersion",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions clopenTestPiece and clopenTestInclusion without copying them."
+  },
+  {
+   "tool": "loogle",
+   "query": "MorphismProperty.Over.pullback, MorphismProperty.Over.homMk",
+   "results": "0 hits: ; loogle: unknown identifier 'MorphismProperty.Over.pullback'",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions clopenTestPiece and clopenTestInclusion without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "clopenTestPiece|clopenTestInclusion",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions clopenTestPiece and clopenTestInclusion without copying them."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A canonical component test object and inclusion for an open immersion of schemes in the small pro-etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion, AlgebraicGeometry.IsAffineOpen.isOpenImmersion_fromSpec, AlgebraicGeometry.Scheme.Opens.ι_app_self, AlgebraicGeometry.Scheme.Opens.ι, AlgebraicGeometry.Scheme.instIsOpenImmersionF, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway",
+   "date": "2026-10-22",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions clopenTestPiece and clopenTestInclusion without copying them."
+  },
+  {
+   "tool": "grep",
+   "query": "clopenTestPiece|clopenTestInclusion (dag/nodes, lean/WeilConjectures, lean/Sheaf)",
+   "results": "No WeilConjectures matches. Project definitions at ProEtaleClopenRingedModuleGluing.lean:64-74. DAG matches only the gluing theorem and strict-tower-Roos theorem records; neither is a definition node for these constructions. blueprint_refs.py search \"clopen test\": 0 blueprint nodes.",
+   "date": "2026-10-22",
+   "verdict": "Existing plain definitions have no owning definition node; attach them with existing: true."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-proper-open-clopen-projector",
+  "date": "2026-10-22",
+  "group": "Q55"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-complete-proetale",
+   "place": "Proof final sentence on compatibility of comparisons with completed maps; the clopen component section restrictions in the proper/open square projector refinement, steps 3-4 of lem-cbc-proper-open-clopen-projector.",
+   "via": [
+    "lem-cbc-proper-open-clopen-projector",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClopenRingedModuleGluing",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.clopenTestInclusion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.clopenTestPiece",
+   "AlgebraicGeometry.Scheme.ProEt.clopenTestInclusion"
+  ],
+  "statement": "def clopenTestInclusion {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]\n    (U : X.ProEt) :\n    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).obj\n      (clopenTestPiece j U) ⟶ U",
+  "branch": "sheaf-dag",
+  "by": "Q55",
+  "date": "2026-10-22",
+  "existing": true,
+  "note": "Return H2 repair: these unchanged plain definitions at lines 64-74 construct the pullback test object and the first-projection morphism using MorphismProperty.Over.pullback and Over.homMk. Neither uses the conclusion of lem-pur-clopen-ringed-module-gluing. This definition node owns precisely these constructions; it does not restate or depend on the gluing theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-806b73907",
+  "group": "Q55",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-806b73907",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 31d3d2752a31. Lean byte-identical to the returned head. The only item change is stmt_deps: lem-pur-clopen-ringed-module-gluing replaced by the new def-pur-clopen-test-piece-inclusion (existing:true on unchanged ProEtaleClopenRingedModuleGluing, declarations clopenTestPiece/clopenTestInclusion lines 62-74, verbatim signature, Stacks 04TR, stmt_deps scheme/proetale-site/fibre-product/open-immersion own the bodies). check_existing and check_new_node clean against side-live; branch sheaf-dag valid; live item has no lean record, no repair note, no competing owner. Full re-read of the module: square hypotheses with both r,p proper and k,i qc open immersions; clopen geometry; restriction-pair bijection; projector pinned by open-unit, zero-complement and uniqueness clauses; tower/complex/derived equations as transformation identities; cartesian alpha = beta B r k i p h.symm hsq.flip type-checked; V=S,r=1 specialization; edge cases and universes OK; real def bodies, sorry proofs, docstrings, both report sections present. Advisories: alpha/s≫q=1/t∘pi=eta conjuncts true by definition; proof dep lem-cbc-tower-open-beta-normalization unstated (stage 3); item TeX does not cite the new node (statement unchanged). No compile (no fix; Lean unchanged)."
+ }
+}

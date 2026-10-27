@@ -1,0 +1,128 @@
+{
+ "id": "lem-sfb-internal-discrete-quotient-comparison",
+ "kind": "statement",
+ "title": "Discrete quotient comparison for reconstructed small section rings",
+ "statement": "Let $X$ be a scheme, $A$ a commutative ring, and $I$ an ideal of $A$. Write $J$ for the coefficient-sized small pro-etale model topology and $B=\\operatorname{ULift}(A)$ for the coefficient universe lift. Let $K$ be the image of $I$ under the inverse universe-lift ring equivalence. The discrete condensed ring, inverse image, reconstructed section ring, and small-site maps are those of [def-sfb-integral-models-stacks-data]. There exist ring-sheaf isomorphisms from the constant sheaf $B$ to the reconstructed small ring of the pulled-back discrete $A$, and from the constant quotient sheaf $B/K$ to the reconstructed small ring of the pulled-back discrete $A/I$, such that the square formed by these isomorphisms and the actual quotient maps commutes. Constants and their quotient map are those of [lem-weil-pbc-constant-completion-equivalence]. This asserts a comparison of coefficient presentations only; no kernel formula or generating sections are asserted.",
+ "stmt_deps": [
+  "def-sfb-integral-models-stacks-data",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), comparison of constant and pulled-back coefficient presentations; Stacks 00YV and 099I (sites-proposition-functoriality-algebraic-structures-topoi; algebraization-lemma-restriction-derived-complete-equivalence)"
+ },
+ "proof": [
+  {
+   "text": "Use the monoidal constant-sheaf comparison for scheme inverse image on the additive group of ULift A. The constant-commute-compose comparison identifies the underlying abelian ring of the discrete ring sheaf with that constant abelian ring. Their composite is an isomorphism of internal commutative rings.",
+   "uses": [
+    "def-sfb-constant-sheaf-scheme-pullback-comparison",
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reconstruct section rings and precompose along the AsSmall site equivalence. Both operations preserve isomorphisms. Constant sheaves commute with this site equivalence by the terminal-sections adjunction. This gives the first isomorphism and the corresponding one for A/I.",
+   "uses": [
+    "def-sfb-integral-models-stacks-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ring equivalence ULift A to A induces a quotient equivalence from (ULift A)/K to A/I, whose inverse universe lift gives ULift(A/I). Compose its constant-sheaf image with the second comparison. Naturality of all comparison maps in the quotient homomorphism gives the displayed square.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-constant-sheaf-scheme-pullback-comparison",
+  "def-sfb-integral-models-stacks-data",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "Proof (1), coefficient-presentation identification before the principal-kernel calculation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant sheafification commutes with pullback and with an equivalence of sites naturally in a ring homomorphism",
+   "date": "2026-10-25",
+   "results": "8 hits: CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.constantSheaf, SheafOfModules.sheafificationCompPullback, CategoryTheory.sheafifyComposeIso, CategoryTheory.constantCommuteCompose, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "verdict": "General constant-sheaf comparison APIs apply, but no theorem identifies the actual reconstructed small-ring quotient square."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.constantSheafSheafCongrIso",
+   "date": "2026-10-25",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.Equivalence.constantSheafSheafCongrIso'",
+   "verdict": "General constant-sheaf comparison APIs apply, but no theorem identifies the actual reconstructed small-ring quotient square."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSchemeIso|constantSheafSheafCongrIso|constantCommuteCompose",
+   "date": "2026-10-25",
+   "results": "5 hits: Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "verdict": "General constant-sheaf comparison APIs apply, but no theorem identifies the actual reconstructed small-ring quotient square."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.InternalConstantResidueGenerator",
+  "date": "2026-10-25",
+  "group": "C7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Integral-models proof (1): actual and constant completion comparison, coefficient-presentation step",
+   "via": [
+    "lem-sfb-internal-completion-stacks-comparison",
+    "lem-sfb-internal-integral-residue-criterion",
+    "lem-sfb-internal-constant-residue-generator"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.InternalDiscreteQuotientComparison",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/InternalDiscreteQuotientComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_quotient_comparison",
+  "statement": "theorem discrete_quotient_comparison (X : Scheme.{u}) (A : Type u) [CommRing A]\n    (I : Ideal A) :\n    let J := Scheme.coefficientProEtaleModelTopology.{u, u} X\n    let B := ULift.{u + 1} A\n    let K : Ideal B := Ideal.map\n      (ULift.ringEquiv : B ≃+* A).symm.toRingHom I\n    let R := condensedRingObj (discreteObj A) X\n    let S := condensedRingObj (discreteObj (A ⧸ I)) X\n    ∃ e : ConstantCompletion.constant J B ≅ smallRing X R,\n      ∃ f : ConstantCompletion.finite J B K 0 ≅ smallRing X S,\n        ConstantCompletion.quotient J B K 0 ≫ f.hom =\n          e.hom ≫ smallMap X (R := R) (S := S)\n            ((upperStarFromPoint X).map (discreteMap (Ideal.Quotient.mk I)))",
+  "branch": "sheaf-dag",
+  "by": "C7",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C7",
+  "result": "pass",
+  "landing": "20261025T162121-L-298830",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261025T203205-L-2790148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discrete_quotient_comparison"
+  ],
+  "sorry_after": []
+ }
+}

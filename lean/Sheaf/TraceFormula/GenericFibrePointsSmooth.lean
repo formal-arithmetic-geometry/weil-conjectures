@@ -7,9 +7,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.Sober
-import Sheaf.AlgebraicGeometry.SmoothAtPointFibreCriterion
-import Sheaf.RingTheory.GeometricReducednessFiniteInseparableTest
+import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionStrataCover
 import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 
 /-! # Smoothness at generic points of geometrically reduced fibres
 
@@ -21,7 +21,6 @@ literature/stacks-project/morphisms.tex, Tag 01V9
 @[expose] public section
 
 set_option autoImplicit false
-set_option warn.sorry false
 
 universe u
 
@@ -54,6 +53,17 @@ theorem generic_fibre_points_smooth
     (hC : C ∈ irreducibleComponents (p.fiber s))
     (z : p.fiber s) (hz : IsGenericPoint z C) :
     ∃ W : Z.Opens, p.fiberι s z ∈ W ∧ Smooth (W.ι ≫ p) := by
-  sorry
+  have : GeometricallyReduced (p.fiberToSpecResidueField s) := hred s
+  have hdense := GeometricallyReduced.dense_smoothLocus (p.fiberToSpecResidueField s)
+  have hzgen : z ∈ genericPoints (p.fiber s) := by
+    change closure {z} ∈ irreducibleComponents (p.fiber s)
+    rw [hz.def]
+    exact hC
+  have hzsm := generic_points_mem_dense_open_fibre_of_flat_restrict p ⊤ s
+    (by trivial) _ (p.fiberToSpecResidueField s).smoothLocus.2 hdense hzgen
+  refine ⟨p.smoothLocus, p.fiberι_mem_smoothLocus hzsm, ?_⟩
+  rw [← Scheme.Hom.smoothLocus_eq_top_iff, ← Scheme.Hom.preimage_smoothLocus_eq]
+  ext x
+  simp
 
 end AlgebraicGeometry

@@ -1,0 +1,120 @@
+{
+ "id": "lem-sfb-diagonal-trace-ordinary-scalars",
+ "kind": "statement",
+ "title": "Ordinary normalized scalar restrictions for diagonal trace coefficients",
+ "statement": "Fix a prime l, E=ULift Q_l, a scheme morphism f:X→S and localizations at X and S [def-sfb-diagonal-trace-models]. Given coefficient-system Base b and its normalized geometric operations g over f [def-sp-tower-shriek-data], and normalized Chern data cS,cX [def-sp-tower-class-chern], there exist exact Restrictions rS,rX retaining all underlying sections, restrictions, transitions, maps and the residue action [def-sfb-diagonal-trace-models], together with Coefficients records for cS,cX [def-sfb-diagonal-trace-coefficients]. The ordinary functors g.push ⋙ rS.F and rX.F ⋙ diagonalTraceSystemPush l f are naturally isomorphic by a map that is heterogeneously the identity on every section at every level. Also diagonalTracePush l f ⋙ diagonalCompletedRestriction l S and diagonalCompletedRestriction l X ⋙ lowerStar f are naturally isomorphic, with the same sectionwise identity normalization. No right derived functor or derived square is part of this assertion.",
+ "stmt_deps": [
+  "def-sp-tower-shriek-data",
+  "def-sp-tower-class-chern",
+  "def-sfb-diagonal-trace-models",
+  "def-sfb-diagonal-trace-coefficients"
+ ],
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1), scalar restrictions and direct-image comparisons before R lim"
+ },
+ "proof": [
+  {
+   "text": "Apply exists_diagonalTraceCoefficientRestriction separately at S and X with the given normalized Chern data. This supplies both exact Restrictions and their Coefficients records, before considering direct image.",
+   "uses": [
+    "lem-sfb-diagonal-trace-coefficient-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply diagonalTraceVaryingScalarSquare to g and these two supplied Restrictions to obtain the varying square and its sectionwise identity.",
+   "uses": [
+    "lem-sfb-diagonal-trace-varying-scalar-square"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use diagonalTraceCompletedScalarSquare, proved directly from finite coefficient projections and constant-sheaf naturality, for the completed square. Assemble the two coefficient records and the two normalized ordinary squares in the original existential order.",
+   "uses": [
+    "lem-sfb-diagonal-trace-completed-scalar-square"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-diagonal-trace-coefficient-restriction",
+  "lem-sfb-diagonal-trace-varying-scalar-square",
+  "lem-sfb-diagonal-trace-completed-scalar-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F8",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-trace.proof.md",
+  "place": "paragraph (1): single-site coefficient construction, varying square for supplied restrictions, and a direct proof of the completed square"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars for sheaves of modules commutes with direct image and preserves exact sequences",
+   "results": "8 hits; RestrictScalars, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.restrictScalars, AlgebraicGeometry.Scheme.Modules.restrict, ModuleCat.RestrictScalars.obj', PresheafOfModules.restrictScalars, PresheafOfModules.pushforward_obj_map_apply'",
+   "date": "2026-10-27",
+   "verdict": "The ordinary restriction functors exist in Mathlib, but none of these hits constructs the specified finite coefficient/root cones and both section-normalized ordinary squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\"",
+   "results": "12 hits; LinearMap.restrictScalars_id, LinearMap.restrictScalars, LinearMap.restrictScalars_injective, LinearMap.restrictScalars_self, LinearMap.restrictScalars_inj, LinearMap.coe_restrictScalars, LinearMap.restrictScalars_apply, LinearMap.restrictScalars_zero",
+   "date": "2026-10-27",
+   "verdict": "The ordinary restriction functors exist in Mathlib, but none of these hits constructs the specified finite coefficient/root cones and both section-normalized ordinary squares."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|IsKInjective",
+   "results": "10 hits; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-27",
+   "verdict": "The ordinary restriction functors exist in Mathlib, but none of these hits constructs the specified finite coefficient/root cones and both section-normalized ordinary squares."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DiagonalTraceScalarComparisons",
+  "date": "2026-10-27",
+  "group": "J9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-trace",
+   "place": "paragraph (1), scalar restrictions and direct-image comparisons before R lim"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DiagonalTraceOrdinaryScalars",
+  "file": "lean/Sheaf/Paper/DiagonalTraceOrdinaryScalars.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalTrace.exists_diagonalTraceOrdinaryScalars",
+  "statement": "theorem exists_diagonalTraceOrdinaryScalars (l : ℕ) [Fact l.Prime]\n    {X S : Scheme.{u}}\n    [DiagonalTraceLocalizations l X] [DiagonalTraceLocalizations l S]\n    (f : X ⟶ S) (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))\n    (g : SpTowerShriek.Geometry l (ULift.{u} (Padic l)) b f)\n    (cS : Chern l (ULift.{u} (Padic l)) S)\n    (cX : Chern l (ULift.{u} (Padic l)) X)\n    (nS : cS.Normalized l (ULift.{u} (Padic l)))\n    (nX : cX.Normalized l (ULift.{u} (Padic l)))\n    :\n    let E := ULift.{u} (Padic l)\n    ∃ (rS : Restriction l E S) (rX : Restriction l E X),\n      letI : rS.F.Additive := rS.additive\n      letI : rX.F.Additive := rX.additive\n      letI : PreservesFiniteLimits rS.F := rS.limits\n      letI : PreservesFiniteColimits rS.F := rS.colimits\n      letI : PreservesFiniteLimits rX.F := rX.limits\n      letI : PreservesFiniteColimits rX.F := rX.colimits\n      Nonempty (Coefficients l E S cS rS) ∧\n      Nonempty (Coefficients l E X cX rX) ∧\n      ∃ varyingOrdinary : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f,\n      ∃ varying_sections : ∀ (M : Systems X (Arings l E X)) (n : ℕ) (U : S.ProEtᵒᵖ)\n          (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U),\n        HEq (((varyingOrdinary.hom.app M).app (op n)).hom.app U x) x,\n      ∃ completedOrdinary : diagonalTracePush l f ⋙ diagonalCompletedRestriction l S ≅\n        diagonalCompletedRestriction l X ⋙\n          lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f,\n      ∀ (M : DiagonalCompleted l X) (U : S.ProEtᵒᵖ)\n          (x : ((diagonalTracePush l f ⋙ diagonalCompletedRestriction l S).obj M).obj.obj U),\n        HEq ((completedOrdinary.hom.app M).hom.app U x) x",
+  "branch": "sheaf-dag",
+  "by": "J9",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J9",
+  "result": "pass",
+  "landing": "20261027T012858-L-2343300",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261027T034642-L-3670718",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

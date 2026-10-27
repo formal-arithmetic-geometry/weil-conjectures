@@ -21,104 +21,51 @@
  ],
  "proof": [
   {
-   "text": "Work on the small sites fixed in the statement. By [lem-weil-proetale-weakly-etale-localization](1), the sites of $U$ identify with the slices at $j$ and $j'$. Here only the site equivalence is used, not the constant-coefficient assertion (2). By [lem-sfb-coefficient-sections-localization], applied to the objects $j:U\\to Z$ of $Z_{\\mathrm{pro\\acute et}}$ and $j':U\\to Z'$ of $Z'_{\\mathrm{pro\\acute et}}$, the abelian inverse images $j^*_{\\mathrm{Ab}}$, $j'^*_{\\mathrm{Ab}}$ are restriction to these localized sites, and the coefficient maps $\\alpha_j:j^*_{\\mathrm{Ab}}\\Lambda_Z\\xrightarrow{\\sim}\\Lambda_U$, $\\alpha_{j'}$ are isomorphisms; that node holds for every commutative condensed ring, so it covers all admissible $\\Lambda$ of [sk-def-localizing-closure], including $\\overline{\\mathbf Q}_\\ell$ with its $\\ell$-adic topology. Under [def-pur-localized-ringed-site], restriction evaluates a module on $V\\to U$ by evaluating the original module on the composite $V\\to T$. Since $\\alpha_j$ is invertible, the extension of scalars in $j^*=\\operatorname{Ext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\mathrm{Ab}})$ [sk-def-sfb-module-pushforward-pullback] is canonically the identity on underlying sheaves, with $\\Lambda_U$ acting through $\\alpha_j^{-1}$. Thus $j^*$ and $j'^*$ are precisely these restriction functors with those coefficient identifications. By [lem-sfb-internal-module-operations-transport], the internal module categories and their specified pullbacks and pushforwards identify by additive exact equivalences with sectionwise modules over the reconstructed coefficient ring sheaves $B_T$. Such an equivalence identifies complexes, acyclic complexes and homotopy classes, hence preserves and reflects K-injectivity. Finally [det-prop-sfb-module-pullback-exact-main] gives that the module pullback $f^*$ is additive and exact for every morphism of schemes $f$ and every commutative condensed ring; in particular $j^*$, $j'^*$ and every $k^*$ below are exact.",
+   "text": "Use the canonical mate witnesses of lem-sfb-identity-open-module-sections. Their homs are identityOpenRestriction by its definition. The section normalization gives the specified formula and their isomorphism structures give underived invertibility. ProjectionGeometry supplies an inverse to the site arrow with exactly its two prescribed projections.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-coefficient-sections-localization",
-    "def-pur-localized-ringed-site",
-    "sk-def-sfb-module-pushforward-pullback",
-    "lem-sfb-internal-module-operations-transport",
-    "det-prop-sfb-module-pullback-exact-main",
-    "sk-def-localizing-closure"
+    "lem-sfb-identity-open-module-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE, lemma-localize-given-products; localized module restrictions with the cited coefficient-section localization and module-pullback exactness"
-   }
+   "elementary": false
   },
   {
-   "text": "For $v:V\\to U$, the projection $V\\times_Z Z'\\to V$ is an isomorphism with inverse $(1_V,j'v)$. Indeed the other projection factors through $h^{-1}(j(U))=j'(U)$; under that open-subscheme identification its map to $U$ equals $v$ after projection, since $hj'=j$ and the open immersion $j$ is a monomorphism. These two maps are inverse by the fibre-product universal property. They commute with every arrow $V_1\\to V_2$ over $U$. By [def-sfb-finite-lower-star], $(h_*M)(V\\to Z)=M(V\\times_Z Z')$. Therefore step 1 gives a natural underived isomorphism $c_h:j^*h_*\\xrightarrow{\\sim}j'^*$, identity on $M(V)$ after this fibre-product identification. Its coefficient action is the same on both sides: in [sk-def-sfb-module-pushforward-pullback] the direct image action uses the adjunct structural map, and restriction identifies this map with the identity coefficient map on $U$ for the localized identity morphism. The pullbacks from the point are identified by the composition identifications stipulated in the statement. Consequently the section identity is linear, commutes with restrictions and all module morphisms, and defines $c_h$ and its inverse.",
+   "text": "The general cochain normalization of the derived square mate in lem-sbc-unbounded-exact-adjunction-square identifies the actual mate on a K-injective with the ordinary mate. Open inverse image preserves K-injectives. Compose with module_derived_identity_normalization, use naturality and cancel resolution and exact-factorization isomorphisms. This proves the representative formula. Underived invertibility then implies derived invertibility on QI and hence everywhere by naturality along K-injective representative isomorphisms.",
    "uses": [
-    "def-weil-open-immersion",
-    "def-sfb-finite-lower-star",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6G, lemma-restrict-direct-image-open: underived restriction identity, specialized to the identity localized map"
-   }
-  },
-  {
-   "text": "By [prop-pur-kinjective-resolutions-exist], every complex of sectionwise $B_T$-modules on our small site has a K-injective resolution. The exact equivalences in step 1 transport these to internal modules. For $K\\in D_{Z'}$, choose a K-injective $I$ and $a:K\\xrightarrow{\\sim}QI$, where $Q$ denotes localization. By [sk-def-sfb-module-derived-pushpull], $Rh_*K$ is represented by $h_*I$. Exactness of $j^*$ and $j'^*$ from step 1 means that they act termwise on all complexes and preserve quasi-isomorphisms. Hence, under the canonical identifications $j^*Rh_*K\\cong Q(j^*h_*I)$ and $j'^*K\\cong Q(j'^*I)$ (the latter induced by $a$), define $r_{h,K}$ by $Q(c_{h,I})$. It is an isomorphism. By [lem-weil-pbc-kinjective-hom-derived], each derived morphism between K-injective representatives is represented by a unique homotopy class of chain maps. The degreewise naturality of $c_h$ therefore proves naturality of $r_h$. Changing $I$ or $a$ uses the unique corresponding homotopy class between K-injectives; the same naturality square shows that the resulting $r_{h,K}$ agrees. This proves the stated canonical normalization and independence of resolutions.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-sfb-module-derived-compositor-coherence",
     "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "det-prop-sfb-module-pullback-exact-main"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6G, lemma-restrict-direct-image-open, K-injective computation; existence from Tag 079P, injectives-theorem-K-injective-embedding-grothendieck, and independence from Tag 070I, derived-lemma-K-injective"
-   }
+   "elementary": false
   },
   {
-   "text": "To compare successive maps, take a K-injective complex $I$ on $Z''$. The adjunction $k^*\\dashv k_*$ of [sk-def-sfb-module-pushforward-pullback] has additive left adjoint $k^*$, exact by [det-prop-sfb-module-pullback-exact-main] (step 1). Thus [lem-weil-pbc-right-adjoint-preserves-kinjective], with $v=k^*$ and $u=k_*$, makes $k_*I$ K-injective on $Z'$. We can compute $Rk_*$ on $I$, and then $Rh_*$ on the already K-injective $k_*I$, with no intermediate replacement. The same argument applies to $h_*k_*I$. This checks the preservation hypothesis required for computing all the comparisons below on this one representative.",
+   "text": "Evaluate both composition paths on QI for K-injective I. Direct image preserves K-injectives by exact pullback and its adjunction. Naturality moves the restriction past the k_* resolution comparison. Apply the representative formula twice and module_derived_compositor_normalization. The remaining equality is Q applied degreewise to the underived composition equation of lem-sfb-identity-open-module-sections. Naturality along K-injective representative isomorphisms extends equality to all derived objects.",
    "uses": [
-    "sk-def-sfb-module-pushforward-pullback",
-    "det-prop-sfb-module-pullback-exact-main",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+    "lem-sfb-identity-open-module-sections",
+    "lem-sfb-module-derived-compositor-coherence",
+    "det-prop-sfb-module-pullback-exact-main"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives; exact module inverse image supplies its left-adjoint hypothesis"
-   }
+   "elementary": false
   },
   {
-   "text": "The composite $hk$ satisfies $(hk)j''=j$ and $(hk)^{-1}(j(U))=k^{-1}(j'(U))=j''(U)$, so steps 2–3 also define $r_{hk}$. By [lem-sfb-module-derived-compositor-coherence], on the representatives of step 4 the map $\\kappa_{h,k}$ is the inverse of the termwise module compositor. At $V\\to U$ its underlying map is induced by the canonical identification\n$$(V\\times_Z Z')\\times_{Z'}Z''\\cong V\\times_Z Z''.$$\nThe identification of step 2 for $h$ is the projection to $V$ with inverse $(1_V,j'v)$; the identification for $k$ has inverse $(1_V,j''v)$. Their composite, after the displayed associator, is exactly the inverse $(1_V,j''v)$ for $hk$: both have the same projection to $V$ and the same projection $j''v$ to $Z''$, so the fibre-product universal property makes them equal. Evaluating the two composites on $I$ therefore gives the same map $I(V)\\to I(V)$, namely the identity. All maps are module maps by step 2 and the cited module compositor. Thus already as maps of complexes,\n$$c_{hk,I}=c_{k,I}\\circ c_{h,k_*I}\\circ (j^*\\kappa_{h,k})_I.$$\nLocalize this equality and use the canonical representative identifications from steps 3–4. This gives exactly $r_{hk}=r_k\\circ(r_hRk_*)\\circ(j^*\\kappa_{h,k})$. It holds for every $K\\cong QI$ and is an equality of natural transformations by step 3.",
+   "text": "On QI cancel the exact-restriction factorization. The representative formula and module_derived_identity_normalization reduce the identity law to Q of the underived identity equation of lem-sfb-identity-open-module-sections. Extend from K-injective representatives by naturality. The given quasi-compactness hypotheses remain unchanged and no properness or density is used.",
    "uses": [
+    "lem-sfb-identity-open-module-sections",
     "lem-sfb-module-derived-compositor-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition, together with Tag 0D6G, lemma-restrict-direct-image-open; explicit fibre-product computation of their coherence"
-   }
-  },
-  {
-   "text": "For $h=1_Z$ the condition $hj'=j$ identifies $j'$ with $j$, and the projection $V\\times_Z Z\\to V$ and its inverse $(1_V,jv)$ are the usual identity base-change maps. Hence $c_{1_Z}$ is the sectionwise identity after the underived identity-direct-image comparison. By [lem-sfb-module-derived-compositor-coherence], the canonical derived identity comparison is precisely the one induced by that sectionwise identity. On every K-injective representative $r_{1_Z}$ is therefore the identity after that comparison, and step 3 gives the claimed natural identity. None of the constructions used properness, density or a field of definition.",
-   "uses": [
-    "lem-sfb-module-derived-compositor-coherence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6E and 0D6G: identity normalization of the same termwise direct-image and restriction constructions"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-localized-ringed-site",
-  "def-sfb-finite-lower-star",
-  "def-weil-open-immersion",
   "det-prop-sfb-module-pullback-exact-main",
-  "lem-sfb-coefficient-sections-localization",
-  "lem-sfb-internal-module-operations-transport",
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-sfb-identity-open-module-sections",
   "lem-sfb-module-derived-compositor-coherence",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-pur-kinjective-resolutions-exist",
-  "sk-def-localizing-closure",
-  "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-module-pushforward-pullback"
+  "sk-def-sfb-module-derived-pushpull"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6G (lemma-restrict-direct-image-open) and 0D6E (lemma-derived-pushforward-composition), with the sectionwise composition and identity normalization written out"
+  "place": "Tags 0D6G and 0D6E; canonical mate cochain normalization, sectionwise composition and identity assembled in Lean by C8"
  },
  "mathlib_searches": [
   {
@@ -212,16 +159,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "item": "lem-sfb-identity-open-derived-restriction",
   "worker": "stage1",
-  "summary": "Six steps identify open restriction, construct the linear sectionwise identity, descend it through K-injective representatives, verify preservation of K-injectives by direct image, and compute the prescribed composition and identity formulas on the same representatives. Statement and statement dependencies unchanged; no new nodes. All cited statements and Stacks sources were read, exact coefficient actions and small-site hypotheses checked, and fresh logged Mathlib searches read. Reviewer FIX (Codex maintainer reader, 2026-10-21): step 1 and step 4 now cite lem-sfb-coefficient-sections-localization (inverse image along an open = restriction, invertible alpha) and det-prop-sfb-module-pullback-exact-main (exact module pullback), both for every commutative condensed ring, instead of sk-prop-sfb-cartesian-coefficients, which does not cover the l-adic-topology Qbar_l of sk-def-localizing-closure.",
+  "summary": "Repair of the 2026-10-22 human re-split return: two substantial statement-only unsplit children separate the sectionwise geometric/module calculation from K-injective descent with arbitrary exact postfunctors. The parent is a short four-step assembly. All six returned arguments are preserved verbatim with their allocation in report.md; statement, statement dependencies, Lean attachment, import/blueprint and maintainer fields are retained. Logged searches and full citation review completed.",
   "blueprint": "Realizes the normalized open restriction implicit in det-sf-comp-coherence-cocycle, Refinement isomorphisms and Independence. The sectionwise calculation gives the identity and transitivity comparisons required on the common open; it does not use the parent as a lemma.",
   "tool_uses": [
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Its site equivalence identifies the open pro-etale sites with slices; this generic localization tool does not impose constant coefficients."
-   },
    {
     "node": "lem-sfb-internal-module-operations-transport",
     "why": "Its exact equivalences and comparisons allow sectionwise ringed-module computation for internal condensed modules, preserving the actual module operations."
@@ -235,35 +178,22 @@
     "why": "Specifies the ordinary unbounded total module direct image computed on K-injectives, without a bounded or completed substitute."
    },
    {
-    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "why": "The generic additive exact-left-adjoint theorem permits computing Rk_* and then Rh_* using I and k_*I without an intervening resolution."
-   },
-   {
-    "node": "lem-sfb-coefficient-sections-localization",
-    "why": "States that abelian inverse image along an object V->B of B_proet is restriction to the localized site, with invertible alpha, for every commutative condensed ring; replaces sk-prop-sfb-cartesian-coefficients, whose Qbar_l is the finite-subextension ring and so does not cover the l-adic-topology Qbar_l of sk-def-localizing-closure."
-   },
-   {
     "node": "det-prop-sfb-module-pullback-exact-main",
     "why": "Exactness of module pullback for every morphism of schemes and every commutative condensed ring (needed for j^*, j'^* and the exact left adjoint k^* of step 4); no node of the unit gives it."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-internal-module-operations-transport",
-  "prop-pur-kinjective-resolutions-exist",
   "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-sfb-coefficient-sections-localization",
   "det-prop-sfb-module-pullback-exact-main"
  ],
  "reviewed": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-cc-N0-784156575",
-  "group": "N0",
+  "reviewer": "NT-cc-Q137-5ca5e9e5d",
+  "group": "Q137",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-784156575 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the statement of every cited node, Stacks 0D6G/03CE and the blueprint main-20261015 det-sf-comp-coherence-cocycle.proof.md ('Refinement isomorphisms', 'Independence'). The item is not in the dropped list. It is unsplit on live and side-live, and it has no repair note: the 2026-10-21 re-split note is for lem-sfb-base-change-identity-open-restriction. There are no new nodes, no cycle and no SGA citation.\n\nThe statement is correct. The composite r_{hk}=r_k∘(r_h Rk_*)∘(j^*κ) type-checks. The preimage condition is necessary (the fold map U⊔U→U fails without it), and it is preserved by hk.\n\nWhat checks out:\n- Step 2: V×_Z Z'≅V via (1_V,j'v), because h restricted to j'(U) is j∘j'^{-1}.\n- Step 3: the K-injective resolution, uniqueness and naturality arguments are right.\n- Step 4: the right-adjoint-preserves-K-injective lemma is applied with both hypotheses checked.\n- Step 5: the fibre-product universal property and the compositor statement as cited are used correctly.\n- Step 6: uses the stated identity normalization.\n\nTwo faults, repaired in the fix:\n- E1/C4: steps 1 and 4 take the invertibility of α and the exactness of module pullback from sk-prop-sfb-cartesian-coefficients. That node's Q̄_ℓ is the finite-subextension condensed ring, but the Q̄_ℓ of sk-def-localizing-closure is C(−,Q̄_ℓ) with the ℓ-adic topology, so one coefficient case is not covered.\n- C4: no cited statement says that the abelian inverse image along the open j is restriction to the slice.\n\nThe fix rewrites step 1 and step 4:\n- They now cite lem-sfb-coefficient-sections-localization: u^*_Ab is restriction and α_u is invertible, for every commutative condensed ring.\n- They also cite det-prop-sfb-module-pullback-exact-main: f^* is exact for every f and every commutative condensed ring.\n- Step 1 now says that Ext along the invertible α is the identity on underlying sheaves.\n- The cartesian-coefficients citation is removed; proof_deps and split_report.tool_uses are updated, and the two added nodes are declared as tool uses with reasons.\n- The statement and stmt_deps are unchanged.\n\nAccepted tool uses: weakly-etale-localization, internal-module-operations-transport, kinjective-resolutions-exist, module-derived-pushpull, right-adjoint-preserves-kinjective, coefficient-sections-localization, module-pullback-exact-main.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-5ca5e9e5d (reviewer sub-agent of L); spot-checked: FIX: I read the item, both new nodes, every cited statement, the repair note, blueprint det-sf-comp-coherence-cocycle.proof.md (Refinement isomorphisms l.13-18, Independence l.24-36) and Stacks 0D6G/070I/08BJ. The re-split note is met. There are 2 new nodes of comparable size: lem-sfb-identity-open-module-sections (A, geometric) and lem-sfb-exact-postcomposition-kinjective-descent (B, abstract). Each of the six old steps went to A, to B or to a citation, and none was dropped. The parent is a 4-step assembly. Statement and stmt_deps are unchanged against the landed N0/N9 state, the item is not dropped, and nothing cites SGA.\n\nA is true. Since h p2 = j v p1, p2 lands in j'(U), so (1,j'v) is the inverse of the projection. Composition via the associator and identity both check, and A holds for any commutative condensed ring, including the l-adic Qbar_l. The preimage hypothesis is needed: the fold map U⊔U→U is a counterexample without it.\n\nB is true. r_c is Q(c_I) composed with the inverse of D(E0)(gamma_I) on K-injectives, and it is unique. In the composition clause, JI is K-injective by 08BJ and Q(c'_I)Q(c_JI)Q(E0 d_I) = Q(b_I).\n\nNeither node duplicates an existing one. I compared them with def-sfb-identity-open-restriction-arrows, the open-square mates, module-direct-image-open-pasting, kinjective-direct-image-open-word-model (needs alpha invertible for every letter), kinjective-exact-square-comparison (strict sH'=Hr) and the normalized-derived-comparison family.\n\nI fixed two faults in the parent:\n(1) Step 3 did not name E2=j''^*, c'=c_k, b=c_hk, and did not cite the exact left adjoint (hk)^* or the resolutions on Z''. I added these, with det-prop-sfb-module-pullback-exact-main.\n(2) Step 4 used B's identity clause, which needs H=1 literally, but here H=(1_Z)_*. It now derives r_1 = D(j^*)iota^d from B's uniqueness clause and the identity comparison of compositor-coherence.\nThe new proof is 2973 characters. The fix is a whole-node file at fixes/dag/nodes/sec-six-functors-basics/lem-sfb-identity-open-derived-restriction.json.\n\nAdvisory: B's phrase that the comparisons 'agree under' exact equivalences is loose but unused. Accepted tool_uses: internal-module-operations-transport, kinjective-resolutions-exist, module-derived-pushpull, module-pullback-exact-main.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.IdentityOpenDerivedRestriction",
@@ -291,5 +221,31 @@
   "group": "N9",
   "result": "fix",
   "note": "Re-delivery after the 4fee98f5 H2 RETURN. The item Lean is byte-identical; clauses re-checked (Λ admissible predicate; qc open immersions; w: j'≫h=j; hw preimage equality; r_h = open-square mate + moduleDerivedIdentity with IsIso, section identity via (1_V,j'v), K-injective representative formula; composition j^*κ, then r_h Rk_*, then r_k; identity normalization; no extra hypotheses; sorry-only proofs; docstrings OK). H2 repaired: theorem lem-sfb-derived-direct-image-open-coherence replaced in stmt_deps by new def node def-sfb-open-square-restriction-mates, existing:true on the unchanged Q13 DerivedDirectImageOpenCoherence. Its 5 listed decls are all plain defs (mateEquiv/unit), not .choose; the statement matches the live signature verbatim; no other owner, no cycle, no added theorem stmt_dep. nt_compile --json clean in 33.7 s (60 s limit). FIX: whole-node fixes/def-sfb-open-square-restriction-mates.json corrects the TeX χ/Dχ, written diagrammatically (j^*f'^*≅f^*i^*), to applicative f'^*j^*≅i^*f^* and D(f'^*)D(j^*)≅D(i^*)D(f^*), consistent with β/ρ and the Lean. All other fields are unchanged. Advisory: moduleDerivedCompositor/Identity are plain defs of the base theorem stmt_dep."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261025T204732-L-3000559",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_derived_restriction_comp"
+  ],
+  "sorry_after": []
  }
 }

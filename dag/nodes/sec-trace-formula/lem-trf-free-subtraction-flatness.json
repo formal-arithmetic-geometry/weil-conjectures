@@ -29,36 +29,37 @@
    }
   },
   {
-   "text": "Fix q∈Spec(A) lying over p∈Spec(R). Every element of R∖p maps into A∖q, so M_q=(M_p)_q for the A_p-modules M_p=M⊗_R R_p, and α_q is the localization at q of α_p. Let L be an R_p-module. Then L⊗_{R_p}N_q=(L⊗_{R_p}N_p)⊗_{A_p}(A_p)_q and similarly for A_q^{⊕r}, and (A_p)_q is a flat A_p-module (localization is exact), so injectivity of L⊗_{R_p}α_p from the preceding step gives injectivity of L⊗_{R_p}α_q; thus α_q is R_p-universally injective (this is Algebra Tag 05CM, lemma-universally-injective-localize, part (1), written out). As q was arbitrary, [lem-trf-universal-injective-check-stalks] applies to R→A and α in the direction from the localized maps to the global one: L⊗_Rα is injective for every R-module L. Thus α is universally injective over R.",
-   "uses": [
-    "lem-trf-universal-injective-check-stalks"
-   ],
-   "elementary": false,
+   "text": "For any R-module L and base prime p, identify the localization of (A^r tensor_R L → N tensor_R L) at p with (A_p^r tensor_R L → N_p tensor_R L). The source and target identifications use IsLocalizedModule.restrictScalars, IsLocalizedModule.rTensor, and the localization fraction criterion. Tensor cancellation identifies this map with α_p tensor_{R_p} (R_p tensor_R L), which is injective by step 1. The comparisons commute with α on pure tensors. Apply Mathlib injective_of_localized_maximal over R to conclude that α tensor_R L is injective. Tensor symmetry gives the left tensor convention. ULift transports testing modules to a universe containing the modules and recovers exactly the stated testing universe.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Tag 05CL, lemma-universally-injective-check-stalks, applied after the local 05I3 argument."
    }
   },
   {
-   "text": "Let q∈Spec(A) lie over p. If N_q is R_p-flat, apply [lem-trf-local-generic-basis-universal-injective] to R_p→A_p (flat, finitely presented, with geometrically integral fibres by the preceding steps), the finite A_p-module N_p, the same α_p and the prime qA_p over pR_p; its residue-field hypothesis is the fixed isomorphism α⊗κ(ξ_p), so (coker α_p)_{qA_p}=H_q is R_p-flat. Conversely, assume H_q is R_p-flat. By the preceding step α_q:A_q^{⊕r}→N_q is R_p-universally injective, so for every R_p-module L the row 0→L⊗A_q^{⊕r}→L⊗N_q→L⊗H_q→0 (tensor over R_p) is exact: on the right by right exactness of the tensor product, on the left by universal injectivity. The module A_q is R_p-flat: A_q is a flat A-module and A is R-flat, so A_q is R-flat, and for R_p-modules L'→L tensoring over R_p agrees with tensoring over R. Let L'→L be an injection of R_p-modules and compare the two exact rows. Take x∈L'⊗N_q mapping to 0 in L⊗N_q. Its image in L'⊗H_q maps to 0 in L⊗H_q, hence is 0 by flatness of H_q; so x is the image of some y∈L'⊗A_q^{⊕r}. The image of y in L⊗A_q^{⊕r} maps to 0 in L⊗N_q, hence is 0 by left exactness of the lower row, and then y=0 by flatness of A_q^{⊕r}. So x=0 and N_q is R_p-flat (this is the first assertion of Algebra Tag 00HM, lemma-flat-ses, written out). Hence N_q is flat if and only if H_q is flat.",
+   "text": "For any q in Spec A, localize α and the quotient map N → N/range α. Localization preserves exactness and surjectivity. Apply lem-trf-local-universal-injective-localization to the universal injectivity proved above; tensor right exactness makes this localized sequence universally short exact. If N_q is R-flat, lem-trf-local-ui-flat-cokernel gives R-flatness of the localized quotient. For the converse, the localized source (A^r)_q is flat over A_q, hence over A and R by transitivity. Universal injectivity, tested at R (using ULift), implies injectivity of the localized α. The already proved source-library theorem Module.Flat.of_exact_of_flat_of_flat then says that the extension of the flat quotient by this flat source is flat. Thus N_q is R-flat if and only if the localized quotient is R-flat; these are equivalent to the R_p-flatness formulations by Module.flat_iff_of_isLocalization.",
    "uses": [
-    "lem-trf-local-generic-basis-universal-injective"
+    "lem-trf-local-universal-injective-localization",
+    "lem-trf-local-ui-flat-cokernel"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/flat.tex",
-    "place": "Tag 05I3, lemma-induction-step, implication (1)⇒(2) and (5)⇒(1), after localization at q; Algebra lemma-flat-ses for the extension."
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05CM (universal injectivity under localization), 058P (flat cokernel of a universally exact sequence), 00HM (extensions of flat modules)."
    }
   }
  ],
  "proof_deps": [
   "lem-trf-local-generic-basis-universal-injective",
-  "lem-trf-universal-injective-check-stalks"
+  "lem-trf-local-universal-injective-localization",
+  "lem-trf-local-ui-flat-cokernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/flat.tex",
-  "place": "Tag 05I3, lemma-induction-step; globalization by Algebra Tag 05CL."
+  "place": "Tag 05I3, lemma-induction-step; globalization by Algebra Tag 05CL.",
+  "note": "B4 stage 3: local Tag 05I3 followed by Mathlib injective_of_localized_maximal on the base ring replaces the contracted-prime stalk criterion; the universally exact cokernel and flat-extension results replace the second local-criterion application. All transport and combination steps are proved; no new open statements."
  },
  "mathlib_searches": [
   {
@@ -160,5 +161,26 @@
   "existing": false,
   "note": "The generic primes ξ are specified uniquely by the kernels of the canonical maps into the fibre rings. Flatness of each localized module is expressed over R, equivalently over R_p for its canonical localized-base action, by Module.flat_iff_of_isLocalization; no hypothesis or conclusion is changed."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261023T131301-L-2078455",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

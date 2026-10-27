@@ -1,0 +1,522 @@
+{
+ "id": "lem-sfb-trait-affine-generic-affinization-locus",
+ "kind": "statement",
+ "title": "Quasi-affine locus of the affinization with affine generic fibre",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], with fraction field $F=\\operatorname{Frac}R$ (localization at its nonzero elements) and residue field $k=R/\\mathfrak m_R$, and put $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $Y\\to T$ be smooth, separated and of finite type [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism]; separated means its diagonal is a closed immersion [def-weil-closed-immersion]. Assume its generic fibre $Y_F$ is affine [def-pc-base-change]. Put $A=\\Gamma(Y,\\mathcal O_Y)$, and let $a:Y\\to\\operatorname{Spec}A$ be the canonical $T$-morphism corresponding to $\\mathrm{id}_A$ under [lem-weil-pbc-morphism-into-affine-scheme]. This morphism is separated and of finite type. Let $W\\subseteq Y$ be its quasi-finite locus: the points at which $a$ is quasi-finite in the sense of [pqf-def-quasifinite]. Then $W$ is a quasi-compact open subscheme [def-weil-open-immersion], $W_F=Y_F$, and $a|_W$ is an open immersion. In particular $W$ is quasi-affine, meaning a quasi-compact open subscheme of an affine scheme [def-nagata-quasi-affine-morphism]. If $Y_k\\ne\\varnothing$, then $W_k\\ne\\varnothing$. No claim that $W_k$ meets every component is imposed, and no group law or descent datum is assumed. The conclusions include $Y=\\varnothing$ and empty special fibre.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Lemma 6, printed p.161 (PDF p.167), and the proof of Theorem 1, printed p.162 (PDF p.168), assertions (i) and (iii) for the quasi-finite locus of the canonical affinization; the latter uses Zariski Main Theorem 2.3/2-prime. Local PDF WANTED; primary scan read online.",
+  "url": "https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf"
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "pqf-def-quasifinite",
+  "def-weil-open-immersion",
+  "def-nagata-quasi-affine-morphism",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a uniformizer $\\pi$ of $R$. A DVR is a PID, so $R$ is a Noetherian integrally closed domain of dimension one. Its prime localizations are normal, hence $T$ is normal. The finite-type-over-Noetherian lemma makes $Y$ Noetherian; separatedness over the affine $T$ makes $Y$ separated as a scheme. Every open of the Noetherian scheme $Y$ is quasi-compact by the Noetherian-open lemma. In particular intersections of affine opens are quasi-compact, so $Y$ is quasi-separated; it is also quasi-compact. These facts also show that the canonical map $a$ is quasi-compact: its source is quasi-compact and its affine target is quasi-separated.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-separated-over-affine-scheme-separated",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OV, 01T6, 01KN, 01KU and 03GI; Algebra 00PD."
+   }
+  },
+  {
+   "text": "Choose a finite affine cover $V_j=\\operatorname{Spec}C_j$ of $Y$ with each $C_j$ finitely generated over $R$, as in the finite-type definition. On each such chart write $C=C_j$. The same finite list of algebra generators generates $C$ over $A$, since $R\\to C$ factors through the section map $A\\to C$. Thus $a$ is locally of finite type, and its quasi-compactness in step 1 makes it finite type. The composite $Y\\xrightarrow a\\operatorname{Spec}A\\to T$ is the original separated morphism; separated cancellation gives separatedness of $a$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-separated-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Finite-type definition on affine charts; Schemes Tag 01KV."
+   }
+  },
+  {
+   "text": "Apply relative normalization to $a$, writing $Y\\xrightarrow i C\\xrightarrow n\\operatorname{Spec}A$. In its affine-chart clause (iii), take the entire target. The algebra map $A\\to\\Gamma(Y,\\mathcal O_Y)=A$ is the identity by the definition of $a$. Its integral closure inside $A$ is exactly $A$: each element satisfies its monic linear polynomial. Consequently $C$ is affine and $n$ induces the identity of $A$, so $n$ is an isomorphism by the affine spectrum--sections correspondence. The normalization isolated-fibre theorem applies because $a$ is separated and finite type. Its isolated-fibre subset is precisely $W$: quasi-finite points are isolated, and conversely an isolated fibre point has the required quasi-finite affine neighbourhoods. Thus its isomorphism $i^{-1}(O)\\simeq O$ identifies $W$ with an open of $C$. Composing with $n$ proves that $a|_W$ is an open immersion. The Noetherian-open lemma makes $W$ quasi-compact, hence quasi-affine by its displayed embedding in $\\operatorname{Spec}A$. No Noetherianity of $A$ is used.",
+   "uses": [
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-sfb-scheme-normalization-isolated-fibre-open",
+    "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 035H, 035I and 03GW; fibre criterion 01TH."
+   }
+  },
+  {
+   "text": "Apply the qcqs functions localization comparison to $Y\\to T$ with multiplicative set $R\\setminus\\{0\\}$. It identifies $A\\otimes_R F$ with $\\Gamma(Y_F,\\mathcal O)$ through the actual pullback of functions. Naturality of the affine adjunction identifies $a_F$ with the canonical map of the affine scheme $Y_F$, so $a_F$ is an isomorphism. For a point $z$ of the generic open of $\\operatorname{Spec}A$, the scheme fibre of $a$ over $z$ equals that of $a_F$, hence consists of a single reduced point. The isolated-fibre criterion puts every point of $Y_F$ in $W$. Therefore $W_F=Y_F$, including the empty generic fibre.",
+   "uses": [
+    "lem-sfb-qcqs-functions-local-comparison",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02KH in degree zero and Schemes 01I1; fibre criterion 01TH."
+   }
+  },
+  {
+   "text": "It remains to treat $Y_k\\ne\\varnothing$. Apply the Dedekind smooth fibre-dense affine lemma with $D=R$ to obtain an affine open $U\\subseteq Y$ dense in both fibres. Its stated geometric density implies ordinary density: a nonempty affine open in a fibre remains nonempty after extending its field to an algebraic closure, since its nonzero coordinate vector space stays nonzero on tensoring with a field extension. If the open missed $U$, its base change would contradict geometric density. Smoothness gives flatness, and the flat-DVR Cartier lemma says that multiplication by $\\pi$ is injective in each stalk, with special-fibre ideal $(\\pi)$. Smooth base change and the smooth-field lemma make $Y_k$ normal and reduced; normal ascent makes $Y$ normal.",
+   "uses": [
+    "lem-sfb-dedekind-smooth-fibre-dense-affine",
+    "lem-pc-smooth-flat",
+    "lem-sbc-flat-dvr-special-fiber-cartier",
+    "lem-pc-proper-base-change",
+    "lem-trf-smooth-geometrically-normal",
+    "lem-sfb-smooth-normal-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.4 Lemma 4 and pp.155--156 construction; Stacks 056T, 034F, 02OO."
+   }
+  },
+  {
+   "text": "The Noetherian topology and normal-component theorem decompose $Y$ into finitely many disjoint open integral components. The generic point of any component lies over $F$: otherwise $\\pi$ would be zero at that generic stalk, contradicting its being a non-zero-divisor there. Thus $Y_F$ is dense in $Y$. Since $U_F$ is dense in $Y_F$, $U$ is dense in $Y$. The same component theorem applies to the normal Noetherian special fibre $Y_k$, giving generic points of its finitely many components, each belonging to $U_k$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-trf-normal-topologically-noetherian-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OZ and 0357; BLR 6.5 Lemma 6, density preparation."
+   }
+  },
+  {
+   "text": "Put $Z=|Y|\\setminus|U|$. Each generic point $\\xi$ of a component of $Z$ has $\\dim\\mathcal O_{Y,\\xi}=1$ by the affine-boundary lemma. Such a $\\xi$ cannot lie in $Y_k$. Indeed, a generic point $\\zeta$ of a component of $Y_k$ containing $\\xi$ generalizes $\\xi$, and a generic point $\\eta$ of the component of $Y$ containing $\\zeta$ generalizes $\\zeta$. Here $\\eta\\ne\\zeta$ by step 6. If $\\xi\\ne\\zeta$, this gives a chain of length two, contradicting the stalk-dimension formula. If $\\xi=\\zeta$, it belongs to $U_k$ by step 6, contradicting $\\xi\\in Z$. Therefore all generic points of $Z$ lie in $Y_F$. Since $Z$ is a finite union of their closures, $Z=\\overline{Z\\cap Y_F}$ (closure inside $Y$).",
+   "uses": [
+    "lem-sfb-affine-open-boundary-codimension-one",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 0BCV, lemma-complement-affine-open; Tag 02IZ, stalk dimension and generalizations."
+   }
+  },
+  {
+   "text": "Choose $x\\in Y_k$ and let $Y_i$ be its integral open-and-closed component, with generic point $\\eta$. By step 6, $\\eta\\in U_F$. Since $Y_F$ is affine, its principal-open basis gives $g\\in\\Gamma(Y_F,\\mathcal O)$ with $\\eta\\in D(g)\\subseteq U_F$. The localization comparison of step 4 writes $g=b/r$ with $b\\in A$ and $0\\ne r\\in R$. Thus $D(b)_F=D(g)$. The germ $b_x$ is nonzero: on the integral component $Y_i$, restriction of a section to its generic point and to any other stalk embeds into the same fraction field. Explicitly, on any nonempty affine chart its ring is a domain, and the stalk maps are its prime localizations, so a section zero on a neighbourhood of $x$ would vanish at $\\eta$. This contradicts $\\eta\\in D(b)$.",
+   "uses": [
+    "lem-weil-pbc-spec-localization-away-basic-open",
+    "lem-sfb-qcqs-functions-local-comparison",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Lemma 6, choosing the generic principal open; Tags 00E0, 02KH and 01HV."
+   }
+  },
+  {
+   "text": "The local ring $B=\\mathcal O_{Y,x}$ is Noetherian: take a Noetherian affine chart and localize at the prime of $x$. The ideal $(\\pi)B$ lies in its maximal ideal, hence in its Jacobson radical. Krull intersection, with the cyclic finite module $M=B$, gives $\\bigcap_n\\pi^nB=0$. Since $b_x\\ne0$, the set of $n$ for which $b\\in\\pi^n A$ is bounded and nonempty, and therefore has a largest element $n$. Choose $f\\in A$ with $b=\\pi^n f$. Then $f\\notin\\pi A$, while $D(f)_F=D(b)_F\\subseteq U_F$ because $\\pi$ is invertible over $F$. This proves that division by a maximal power of $\\pi$ terminates, rather than assuming $A$ itself Noetherian or $\\pi$-adically separated.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IQ, lemma-intersection-powers-ideal-module (2); local rings of a locally Noetherian scheme."
+   }
+  },
+  {
+   "text": "The natural map $A/\\pi A\\to\\Gamma(Y_k,\\mathcal O)$ is injective. To see this directly, if a section restricts to zero on $Y_k$, its germs belong to the ideal $(\\pi)$, so locally it is $\\pi h$. The local quotients $h$ agree on overlaps because multiplication by $\\pi$ is injective, and the sheaf axiom glues them to a global quotient. Hence the kernel is exactly $\\pi A$. Since $f\\notin\\pi A$, its restriction to $Y_k$ is nonzero. It is nonvanishing at some point of $Y_k$: otherwise on every affine chart it would lie in every prime ideal, hence be nilpotent, and reducedness would force it to be zero. Consequently $(Y_f)_k\\ne\\varnothing$.",
+   "uses": [
+    "lem-sbc-flat-dvr-special-fiber-cartier",
+    "lem-trf-smooth-geometrically-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 preparation before Lemma 6: reduction modulo the uniformizer; Stacks 02OO and 056T."
+   }
+  },
+  {
+   "text": "The closed set $Y\\setminus Y_f$ contains $Z\\cap Y_F$ since $D(f)_F\\subseteq U_F$. By step 7 it therefore contains $Z$, so $Y_f\\subseteq U$. Inside the affine $U$, this is exactly the principal open $U_{f|_U}$ and hence is affine. Apply the affine-principal-affinization isomorphism lemma to the qcqs scheme $Y$: it identifies $a:Y_f\\to D(f)\\subseteq\\operatorname{Spec}A$ with an isomorphism. Every point of $Y_f$ thus has an isolated fibre for $a$, so the isolated-fibre criterion gives $Y_f\\subseteq W$. Step 10 proves $W_k\\ne\\varnothing$. If $Y_k$ is empty there is no special-fibre assertion; if $Y$ is empty all maps and opens above are empty and steps 1--4 already prove the conclusions. The construction makes no componentwise special-fibre density claim.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-a1-affine-principal-affinization-isomorphism",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 6.5 Lemma 6, closing argument; Stacks Tags 01P8 and 01TH."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-sfb-scheme-normalization-isolated-fibre-open",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-qcqs-functions-local-comparison",
+  "lem-sfb-dedekind-smooth-fibre-dense-affine",
+  "lem-pc-smooth-flat",
+  "lem-sbc-flat-dvr-special-fiber-cartier",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-sfb-smooth-normal-ascent",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-sfb-affine-open-boundary-codimension-one",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-a1-affine-principal-affinization-isomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "BLR 6.5 Lemma 6 and proof of Theorem 1, pp.161--162, read in primary online scan; detailed algebraic expansion and equivalent relative-normalization form of Zariski Main (Stacks 03GW). Local BLR PDF WANTED."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The quasi finite locus of the canonical affinization of a smooth separated finite type scheme over a DVR with affine generic fibre is quasi affine and meets the special fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.LocallyQuasiFinite f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.h\", \"doc\": \"For a locally quasi-finite morphism $ f: X \\\\to Y $ of schemes, if $ U \\\\subseteq Y $ is an affine open subset and $ V \\\\subseteq X $ is an affine open subset contained in $ f^{-1}(U) $, then the induced\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.LocallyQuasiFinite f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          \", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is locally quasi-finite if and only if for every pair of affine open subsets $U \\\\subseteq Y$ and $V \\\\subseteq X$ such that $f(V) \\\\subseteq U$, the induced ring homom\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffineHom f] [Y.IsQuasiAffine], X.IsQuasiAffine\", \"doc\": \"If $ f: X \\\\to Y $ is an affine morphism of schemes and $ Y $ is quasi-affine, then $ X $ is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] [∀ (i : I)\", \"doc\": \"In a cofiltered diagram of schemes where each scheme is compact and quasi-separated, and all transition morphisms are affine, if the limit of the diagram is quasi-affine, then there exists an object i\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal flat scheme over a discrete valuation ring with affine generic fibre some principal open meeting the special fibre is affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.local_affine\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"∀ (self : AlgebraicGeometry.Scheme) (x : ↑self.toTopCat),\\n  ∃ U R, Nonempty (self.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"For any scheme $X$ and any point $x$ in its underlying topological space, there exists an open neighborhood $U$ of $x$ and a commutative ring $R$ such that the restriction of $X$ to $U$ is isomorphic \"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.domain\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), IsDomain self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\to Y $, the associated ring $ R $ is an integral domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"AlgebraicGeometry.flat_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.Flat f ↔\\n    ∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingC\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is flat if and only if for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that the image of $V$ under the \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCommSq.valuationRing\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} (self : AlgebraicGeometry.ValuativeCommSq f), ValuationRing self.R\", \"doc\": \"For any valuative commutative square involving a morphism of schemes $ f: X \\\\to Y $, the associated ring $ R $ is a valuation ring, meaning it is an integral domain such that for every non-zero elemen\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_appLE\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for every affine open subset $ U \\\\subseteq Y $ and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the induced ri\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"IsQuasiAffine\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "affinization|((quasi.?finite|quasiFinite).*(locus|generic))",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/RingTheory/QuasiFinite/Weakly.lean\", \"line\": \"26\", \"text\": \"which requires not only `q` to be quasi-finite, but also all primes below it (i.e. all generic\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"20\", \"text\": \"`f : X ⟶ Y` is separated and of finite type, then the map from the quasi-finite locus `U ⊆ X` of\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"203\", \"text\": \"2. `f.toNormalization ⁻¹ᵁ U` is the quasi-finite locus of `f`\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"316\", \"text\": \"def Scheme.Hom.quasiFiniteLocus [LocallyOfFiniteType f] : X.Opens :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"321\", \"text\": \"lemma Scheme.Hom.mem_quasiFiniteLocus [LocallyOfFiniteType f]\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"322\", \"text\": \"    {x : X} : x ∈ f.quasiFiniteLocus ↔ f.QuasiFiniteAt x := .rfl\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A smooth separated scheme over a DVR with affine generic fibre has a quasi affine open containing the generic fibre and meeting the nonempty special fibre",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[X.IsQuasiAffine] : X.IsSeparated\", \"doc\": \"Every quasi-affine scheme is a separated scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_affine_mem_range_and_range_subset\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X : Scheme.{u}} {x : X} {U : X.Opens} (hxU : x ∈ U) :\\n  ∃ R, ∃ (f : Spec R ⟶ X), IsOpenImmersion f ∧ x ∈ Set.range f ∧ Set.range f ⊆ U\", \"doc\": \"For any point $x$ in an open subset $U$ of a scheme $X$, there exists an affine scheme $\\\\operatorname{Spec}(R)$ and an open immersion $f: \\\\operatorname{Spec}(R) \\\\to X$ such that $x$ lies in the image \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"(X : Scheme.{u}) [CompactSpace X] (H : ∀ x : X, ∃ r : Γ(X, ⊤), IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) :\\n  IsQuasiAffine X\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : X.IsQuasiAffine → Sort u_1} →\\n    (t : X.IsQuasiAffine) →\\n      ([toCompactSpace : CompactSpace ↥X] → [toIsImmersion : AlgebraicGeometry.IsImmersion X.toSpecΓ] → motive ⋯) →\\n        motive t\", \"doc\": \"For any scheme $X$ and a type family over the property of $X$ being quasi-affine, if we can construct an element of this type when $X$ is compact and the canonical morphism $X \\\\to \\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.IsAffineOpen\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : Scheme} (U : X.Opens) : Prop\", \"doc\": \"A predicate indicating that an open subset $ U $ of a scheme $ X $ is affine, meaning the restricted scheme structure on $ U $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n",
+   "date": "2026-10-24",
+   "verdict": "no match: read the returned signatures; they give generalizing maps, scheme-theoretic dominance, quasi-affine criteria or the general quasi-finite locus, not the horizontal fibre-density or special-fibre assertion stated here."
+  },
+  {
+   "tool": "grep",
+   "query": "affinization|quasiFiniteLocus",
+   "results": "5 hits; read the returned signatures: Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: ZariskisMainTheorem.lean gives the general normalization quasi-finite locus theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affinization of a smooth scheme over a discrete valuation ring with affine generic fibre has quasi finite points on its special fibre",
+   "results": "8 hits; read the returned signatures: AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.IsAffine.recOn, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.LocallyQuasiFinite.recOn",
+   "date": "2026-10-24",
+   "verdict": "no match: only basic quasi-finite predicates, instances and affine scheme definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quasiFiniteLocus\"",
+   "results": "7 hits; read the returned signatures: AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus, AlgebraicGeometry.instLocallyQuasiFiniteCompSchemeιQuasiFiniteLocus, AlgebraicGeometry.Scheme.Hom.mem_quasiFiniteLocus, AlgebraicGeometry.instIsOpenImmersionCompSchemeιQuasiFiniteLocusToNormalization, AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_eq_top, AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_eq_top_iff, AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus_comp",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole item: the normalization theorem supplies a proof tool only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The quasi finite locus of the canonical map from a finite type scheme to the spectrum of its global sections is an open immersion",
+   "results": "8 hits; read the returned signatures: AlgebraicGeometry.Scheme.instIsOpenImmersionToSpecΓOfIsQuasiAffine, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.locallyOfFiniteType_of_isOpenImmersion, AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite, AlgebraicGeometry.locallyQuasiFinite_iff",
+   "date": "2026-10-24",
+   "verdict": "no match: quasi-affine canonical embedding and general quasi-finite instances do not give the trait special-fibre conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated finite type scheme over a DVR with affine generic fibre has an affine principal open meeting its special fibre",
+   "results": "8 hits; read the returned signatures: AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.affineOpenCover_X, AlgebraicGeometry.Scheme.local_affine, AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.instIsAffineXSchemeAffineCover, AlgebraicGeometry.reduce_to_affine_nbhd, AlgebraicGeometry.exists_affineOpens_le_appLE_of_appLE, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint",
+   "date": "2026-10-24",
+   "verdict": "no match: affine charts, IsQuasiAffine and generic-point affine descriptions omit this trait assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-generic-effective-dense-affine",
+  "date": "2026-10-24",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "BLR 6.5 Lemma 6, printed p.161 (PDF p.167), and the proof of Theorem 1, printed p.162 (PDF p.168), assertions (i) and (iii) for the quasi-finite locus of the canonical affinization; the latter uses Zariski Main Theorem 2.3/2-prime. Local PDF WANTED; primary scan read online.",
+   "via": [
+    "lem-sfb-trait-generic-effective-dense-affine",
+    "lem-sfb-smooth-group-field-trait-descent",
+    "lem-sfb-strict-birational-law-realization",
+    "lem-sfb-trait-birational-group-envelope",
+    "lem-sfb-bounded-group-local-neron-criterion",
+    "lem-sfb-abelian-neron-model",
+    "lem-sfb-semiabelian-neron-lft-existence",
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-trait-affine-generic-affinization-locus",
+  "worker": "stage1",
+  "summary": "NZ: retained the statement and supplied its proof using existing nodes only. Checked BLR 6.5 pp.161--162, expanded the uniformizer division using local Krull intersection, proved the horizontal-boundary closure argument, and identified the relative normalization of the canonical affinization directly from its affine chart. No finiteness assumption on the global section algebra and no componentwise density claim were added.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs ancestor returns None). This realizes the BLR 6.5 affinization step of lem-sfb-trait-generic-effective-dense-affine; latest-blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-pid-noetherian-normal",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-sc-dvr-dimension-one",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-sc-separated-over-affine-scheme-separated",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-separated-cancellation",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-into-affine-scheme",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-sbc-flat-dvr-special-fiber-cartier",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-trf-smooth-geometrically-normal",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-trf-normal-topologically-noetherian-components",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-spec-localization-away-basic-open",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   },
+   {
+    "node": "lem-a1-affine-principal-affinization-isomorphism",
+    "why": "Generic scheme or commutative-algebra tool used in the cited assembly step; the BLR trait-affinization route requires this fact, and no alternate result of this unit replaces it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-separated-over-affine-scheme-separated",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-separated-cancellation",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-pc-smooth-flat",
+  "lem-sbc-flat-dvr-special-fiber-cartier",
+  "lem-pc-proper-base-change",
+  "lem-trf-smooth-geometrically-normal",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-trf-normal-topologically-noetherian-components",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-spec-localization-away-basic-open",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-a1-affine-principal-affinization-isomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-8a7263b9c",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-8a7263b9c (reviewer sub-agent of L); spot-checked: I read all 11 steps against the statements of every cited node; there are no new nodes and the item statement is unchanged. Step 3 uses relative normalization (iii) on the whole of Spec A: the integral closure of A in A is A, so n is an isomorphism, and the Zariski Main node gives a|_W as an open immersion. W equals the isolated-fibre set in both directions (quasi-finite-at-point-isolated; affine-pairs matches the pqf-def-quasifinite clause). Step 4 uses the qcqs localization with S=R\\{0}, so a_F is an isomorphism and W_F=Y_F. Steps 5-7: the Dedekind dense-affine hypotheses all hold. π is a non-zero-divisor from the Cartier lemma (π=ud, d=vπ ⇒ uv=1), and no generic point lies in Y_k. The boundary lemma with the stalk-dimension chain shows Z is the closure of Z∩Y_F. Steps 8-11: the germ b_x is nonzero on the integral component. Krull intersection is applied in the Noetherian ring O_{Y,x} (not A) and gives a maximal π-power division, so f∉πA. ker(A→Γ(Y_k))=πA, and Y_k is reduced, so (Y_f)_k≠∅. Y_f⊂U, and the principal-affinization isomorphism gives Y_f⊂W. Edge cases checked: Y empty, Y_k empty, Y affine, disconnected Y. Batch-5: lem-trf-smooth-geometrically-normal and lem-trf-normal-topologically-noetherian-components are general scheme facts, not trace-formula or Poincaré content. The Dedekind node reaches sec-trace-formula only through the latter, so all three citations are accepted. The off-unit generic tool_uses are accepted. The BLR PDF is absent locally, so the item statement was not re-checked at the source place; it is unchanged and its proof was verified independently. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitAffineGenericAffinizationLocus",
+  "declaration": "AlgebraicGeometry.trait_affine_generic_affinization_locus",
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitAffineGenericAffinizationLocus.lean",
+  "statement": "theorem trait_affine_generic_affinization_locus (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of R)) [Smooth f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (hGeneric : IsAffine (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))))) : IsSeparated Y.toSpecΓ ∧ LocallyOfFiniteType Y.toSpecΓ ∧ QuasiCompact Y.toSpecΓ ∧ ∃ W : Y.Opens, (∀ y : Y, y ∈ W ↔ Y.toSpecΓ.IsQuasiFiniteAtPoint y) ∧ IsCompact (W : Set Y) ∧ (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))))) ⁻¹ᵁ W = ⊤ ∧ IsOpenImmersion (W.ι ≫ Y.toSpecΓ) ∧ W.toScheme.IsQuasiAffine ∧ (Nonempty (pullback (C := Scheme.{u}) f (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))) → Nonempty (pullback (C := Scheme.{u}) (W.ι ≫ f) (Spec.map (CommRingCat.ofHom (IsLocalRing.residue R)))))",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2a62d1447",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion matches node and BLR 6.5 Lemma 6 / proof of Thm 1(i),(iii): DVR+FractionRing+residue, Smooth/IsSeparated/LocallyOfFiniteType/QuasiCompact f, affine generic pullback; canonical Y.toSpecΓ separated+finite type; W pinned exactly by the pqf IsQuasiFiniteAtPoint predicate, IsCompact, generic preimage = ⊤, W.ι ≫ toSpecΓ open immersion, Scheme.IsQuasiAffine (same notion IsQuasiAffineHom uses), special-fibre nonemptiness implication. Node changes only lean; statement verbatim in file; no defs, sorry-only, docstrings carry source place, blueprint id and all 11 proof steps; imports exist in side-live; edge cases (Y empty, empty fibres, universes) fine. Not recompiled (no change). Minor: LocallyOfFiniteType is redundant given Smooth."
+ }
+}

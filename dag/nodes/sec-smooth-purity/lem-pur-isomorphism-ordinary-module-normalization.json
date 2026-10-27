@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-isomorphism-ordinary-module-normalization",
+ "kind": "statement",
+ "title": "Normalized ordinary and sectionwise module pullbacks",
+ "statement": "For a prime l, a finite extension E of Q_l and a scheme isomorphism g:X→Y, there is a natural isomorphism b from ordinaryPull to inverseImageIntegralModules. For every completed module sheaf M and every pro-etale V over Y, b carries the ordinary adjunction-unit section x to the restriction of x along the counit of the postcomposition/base-change site adjunction. All functors are those of [def-fix-qcqs-completion-ordinary-models, lem-weil-proetale-isomorphism-inverse-image]. No goodness, boundedness, completeness or nonemptiness hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL, specializing the adjunction and quotient insertion to expanded clause 4 of def-weil-frobenius-coefficient-twists."
+ },
+ "stmt_deps": [
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Project both completed direct ring maps to every finite coefficient sheaf. The limit-lift formula for inverseImageCompletedCoefficientMap and naturality of the site sheaf adjunction unit reduce the first map to sectionwiseConstantDirectMap. This is the same finite constant-section map that normalizes ordinaryCompletedRingMap. Direct image preserves the coefficient limit, so its projections are jointly monic.",
+   "uses": [
+    "lem-weil-isomorphism-derived-pullback",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the module adjunction induced by the site adjunction and the inverse coefficient isomorphism. Its unit is section restriction along the site counit. Transport the right adjoint through equality of the ring maps, and use leftAdjointUniq and unit_leftAdjointUniq_hom_app.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-fix-qcqs-completion-ordinary-models"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-isomorphism-derived-pullback",
+  "def-fix-qcqs-completion-ordinary-models",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "D5",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D2 and 03EL; expanded coefficient-twist clause 4.",
+  "note": "Fully proved helper factored from the ordinary completion-chain argument after profiling and simplifying equality transports."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two left adjoints to the same functor are naturally isomorphic and the isomorphism commutes with the adjunction units",
+   "results": "8 hits including unit_leftAdjointUniq_hom_app and homEquiv_leftAdjointUniq_hom_app; these are used, after constructing the ringed-site adjunction.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits including leftAdjointUniq and its unit equations; used in the proof.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_leftAdjointUniq_hom_app",
+   "results": "3 Mathlib hits in Adjunction/Unique, Sites/LeftExact and Sites/CoverLifting; none supplies the completed coefficient normalization.",
+   "date": "2026-10-27",
+   "verdict": "infrastructure used; no exact coefficient-specific theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IsomorphismOrdinaryCompletionChain",
+  "date": "2026-10-27",
+  "group": "D5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-isomorphism-ordinary-completion-chain",
+   "place": "Proof steps 1–2: ordinary module normalization, strict quotient insertion and finite augmentation compatibility.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IsomorphismOrdinaryModuleNormalization",
+  "file": "lean/Sheaf/Paper/IsomorphismOrdinaryModuleNormalization.lean",
+  "declaration": "WeilConjectures.IntegralOnSlice.isomorphismOrdinaryModuleNormalization",
+  "statement": "theorem isomorphismOrdinaryModuleNormalization\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :\n    ∃ b : ordinaryPull l E g ≅ inverseImageIntegralModules l E g,\n    ∀ (M : integralTowerModules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)),\n      (b.hom.app M).val.app (op ((proEtaleBaseChange g).obj V))\n        (((ordinaryAdjunction l E g).unit.app M).val.app (op V) x) =\n      M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ g\n        (inferInstance : WeaklyEtale g) trivial).counit.app V).op x",
+  "branch": "sheaf-dag",
+  "by": "D5",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T181513-L-3467157",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261026T181513-L-3467157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

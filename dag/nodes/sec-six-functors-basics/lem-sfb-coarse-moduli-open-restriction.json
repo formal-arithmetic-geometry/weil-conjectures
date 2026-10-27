@@ -1,0 +1,242 @@
+{
+ "id": "lem-sfb-coarse-moduli-open-restriction",
+ "kind": "statement",
+ "title": "Coarse moduli schemes restrict to open substacks",
+ "statement": "Let $k$ be a field [def-weil-field]. Let $\\mathcal X$ be a finite-type Deligne--Mumford stack over $k$ with finite diagonal and a coarse moduli scheme $q:\\mathcal X\\to Q$, with stack, coarse moduli, algebraic space and 2-fibre product as in [def-sfb-stable-pointed-moduli-groupoids]. Finite diagonal means that every scheme base change of the diagonal is a finite scheme morphism [def-weil-finite-integral-morphism]. Let $\\mathcal U\\subset\\mathcal X$ be an open substack: for every scheme $T\\to\\mathcal X$, its 2-base change is an open subscheme of $T$. Then there is a unique open subscheme $V\\subset Q$ with $\\mathcal U\\simeq\\mathcal X\\times_Q V$, and the restriction $q|_{\\mathcal U}:\\mathcal U\\to V$ is a coarse moduli morphism, initial among maps to algebraic spaces and bijective on geometric isomorphism classes. Schemes and finite type are [def-pc-scheme, def-weil-finite-type-morphism].",
+ "source": {
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT (theorem-keel-mori), universal-homeomorphism and uniform categorical properties; Tag 0DUV (lemma-etale-separated-over-keel-mori), applied to an open immersion. Open-substack formulation is the agent-written consequence, not a verbatim lemma."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-integral-morphism",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sfb-finite-stack-scheme-tests",
+  "def-sfb-open-moduli-substack"
+ ],
+ "proof": [
+  {
+   "text": "Apply the finite-diagonal Keel--Mori node to $\\mathcal X/k$. Its hypotheses are the given Deligne--Mumford property and finite relative diagonal; no smoothness or tameness is required. Obtain $c:\\mathcal X\\to M$, uniform categorical and a universal homeomorphism, where $M$ is an algebraic space. In particular $|c|$ is a homeomorphism. This invocation is independent of the given coarse scheme $Q$ and of the open $\\mathcal U$.",
+   "uses": [
+    "lem-sfb-keel-mori-uniform-topological-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori) and Tag 0DUG (definition-categorical-quotient); open-restriction consequence with stacks-properties.tex Tag 06FJ (lemma-open-substacks)."
+   }
+  },
+  {
+   "text": "Use the categorical part of the definition of the given coarse map $q$ and the categorical part of $c$. They supply unique maps $a:Q\\to M$ and $b:M\\to Q$ over $k$ with $aq=c$ and $bc=q$. Hence $(ba)q=q$ and $(ab)c=c$; uniqueness of factorization for $q$ and $c$ gives $ba=\\mathrm{id}_Q$ and $ab=\\mathrm{id}_M$. Thus $a$ identifies $Q$ with $M$ and identifies $q$ with $c$. In particular $|q|$ is a homeomorphism. It also identifies every flat base change of $q$ with the corresponding flat base change of $c$, so $q$ is uniform categorical. This uses only uniqueness of the two universal properties, not scheme representability of $M$ in advance.",
+   "uses": [
+    "lem-sfb-keel-mori-uniform-topological-moduli",
+    "def-sfb-stable-pointed-moduli-groupoids"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori) and Tag 0DUG (definition-categorical-quotient); open-restriction consequence with stacks-properties.tex Tag 06FJ (lemma-open-substacks)."
+   }
+  },
+  {
+   "text": "By the stack-topology node $W=|\\mathcal U|$ is open in $|\\mathcal X|$. Define $V$ to be the open subscheme of $Q$ with underlying subset $|q|(W)$, using the open-subscheme convention. The homeomorphism from step 2 gives $|q|^{-1}(|V|)=W$. The 2-base change $\\mathcal X\\times_Q V$ is an open substack: after any scheme $T\\to\\mathcal X$ it is the inverse-image open subscheme $T\\times_Q V$ of $T$. The inverse-image assertion of the stack-topology node says its point subset is $|q|^{-1}(|V|)$, hence it is the same open substack as $\\mathcal U$ by injectivity of that node's classification. This identifies the inclusion of $\\mathcal U$ with the displayed 2-base change, over $\\mathcal X$. If an open $V'\\subseteq Q$ has the same pullback, that classification gives $|q|^{-1}(|V'|)=W$; applying the bijection $|q|$ gives $|V'|=|V|$, hence $V'=V$.",
+   "uses": [
+    "lem-sfb-stack-topology-open-substacks",
+    "def-pc-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-properties.tex",
+    "place": "Tag 06FJ (lemma-open-substacks) and the inverse-image compatibility of open substacks; construction of the inverse-image open on scheme charts."
+   }
+  },
+  {
+   "text": "The open inclusion $V\\hookrightarrow Q$ is flat: its map on each local ring is an isomorphism, so tensoring over that map is, after identifying the rings, the identity functor and preserves exact sequences. This verifies flatness directly from the definitions of open immersion and flat morphism. Apply the uniform categorical property of $q$ established in step 2 to this flat base change. It says that for every algebraic space $Z/k$, each map $\\mathcal X\\times_Q V\\to Z$ factors uniquely through $V$. Under the equivalence of step 3 the projection is exactly $q|_{\\mathcal U}$. It is therefore initial among maps from $\\mathcal U$ to algebraic spaces.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-flat-morphism",
+    "lem-sfb-keel-mori-uniform-topological-moduli"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori) and Tag 0DUG (definition-categorical-quotient); open-restriction consequence with stacks-properties.tex Tag 06FJ (lemma-open-substacks)."
+   }
+  },
+  {
+   "text": "Fix an algebraically closed field extension $\\Omega/k$. By the 2-fibre-product definition and step 3, objects of $\\mathcal U(\\Omega)$ are exactly the objects $x\\in\\mathcal X(\\Omega)$ for which $q(x)\\in Q(\\Omega)$ factors through $V$, with the same isomorphisms between them. Indeed an open inclusion is a monomorphism, so the lift to $V$ is unique when it exists. The coarse property of $q$ is a bijection between isomorphism classes of $\\mathcal X(\\Omega)$ and $Q(\\Omega)$. Restricting this bijection to the indicated subsets gives the required bijection between isomorphism classes of $\\mathcal U(\\Omega)$ and $V(\\Omega)$. Together with step 4 and uniqueness of $V$ from step 3 this proves every assertion, including the empty-open case.",
+   "uses": [
+    "def-sfb-stable-pointed-moduli-groupoids",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-more-morphisms.tex",
+    "place": "Tag 0DUT (theorem-keel-mori) and Tag 0DUG (definition-categorical-quotient); open-restriction consequence with stacks-properties.tex Tag 06FJ (lemma-open-substacks)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "lem-sfb-keel-mori-uniform-topological-moduli",
+  "lem-sfb-stack-topology-open-substacks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/stacks-more-morphisms.tex",
+  "place": "Tag 0DUT (theorem-keel-mori) and Tag 0DUG (definition-categorical-quotient); open-restriction consequence with stacks-properties.tex Tag 06FJ (lemma-open-substacks). Agent-written consequence: explicit categorical uniqueness, topological restriction and restriction of the geometric-point bijection."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An open substack of a finite inertia algebraic stack corresponds to an open subset of its coarse moduli space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.instCoeOut\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CoeOut X.Opens AlgebraicGeometry.Scheme\", \"doc\": \"For any scheme $X$, there is a canonical coercion from its open subsets to schemes, defined by restricting the scheme structure via the open embedding. This ensures each open subset $U$ of $X$ is equi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"AlgebraicGeometry.Scheme → Type u_1\", \"doc\": \"For a scheme $X$, the type of open subsets of its underlying topological space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → X.Opens → AlgebraicGeometry.Scheme\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.instCanonicallyOverToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (U : X.Opens) → (↑U).CanonicallyOver X\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this instance equips $U$ with the structure of a scheme by restricting $X$ through the canonical open immersion $U \\to X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.exists_toScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : X.Opens} {P : ↥↑U → Prop}, (∃ x, P x) ↔ ∃ x, ∃ (hx : x ∈ U), P ⟨x, hx⟩\", \"doc\": \"For any open subset $ U $ of a scheme $ X $ and any property $ P $ on the restricted scheme $ U $, there exists an element $ (x, \\\\text{hx}) $ in $ U $ satisfying $ P $ if and only if there exists an e\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.instIsOpenImmersionι\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (U : X.Opens), AlgebraicGeometry.IsOpenImmersion U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, the canonical inclusion morphism $X|_U \\to X$ from the restricted scheme to $X$ is an open immersion. This follows from the \"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isOpen_range\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [H : AlgebraicGeometry.IsOpenImmersion f],\\n  IsOpen (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes, if $ f $ is an open immersion, then the image of $ f $ is an open subset of $ Y $.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coarse moduli space formation commutes with restriction to an open substack",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict_carrier\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)), ↑(X.restrict h).toPresheafedSpace = U\", \"doc\": \"Restricting a scheme $X$ to an open subset $U$ via an open immersion results in a scheme whose underlying topological space is exactly $U$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (isoRestrict f).inv ≫ f = Y.ofRestrict _\", \"doc\": \"For an open immersion $ f : X ⟶ Y $ between sheafed spaces, the composition of the inverse of the isomorphism $ X ≅ Y|_U $ (where $ U $ is the image of $ f $'s base map) with $ f $ equals the canonica\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{X Y : LocallyRingedSpace} (f : X ⟶ Y) [H : LocallyRingedSpace.IsOpenImmersion f] : X ≅ Y.restrict H.base_open\", \"doc\": \"Given an open immersion $ f: X \\\\to Y $ between locally ringed spaces, this constructs an isomorphism between $ X $ and the restriction of $ Y $ to the open subset defined by the underlying open embedd\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coarse\", \"Open\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|KeelMori",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: scheme restriction, scheme morphism properties and ordinary functor representability do not state this theorem about algebraic stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open substack of a finite inertia algebraic stack is pulled back from an open in its coarse moduli space",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionLeftSchemeDiscretePUnitιOverTopMorphismProperty\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [inst : AlgebraicGeometry.IsZariskiLocalAtSource P]\\n  {S : AlgebraicGeometry.Scheme} {J : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} J]\\n  (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [inst_2 : ∀ {i j : J} (f : i ⟶ j), Alge\", \"doc\": \"For each object $j$ in the category $J$, the left component of the inclusion morphism from $F(j)$ to the colimit of the functor $F : J \\to \\text{Sch}$ is an open immersion of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsJointlySurjectivePreservingIsOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Sites/MorphismProperty\", \"type\": \"AlgebraicGeometry.Scheme.IsJointlySurjectivePreserving AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"In the category of schemes, the property of being an open immersion is preserved under jointly surjective families of morphisms.\"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionMapSchemeCompOverOverTopMorphismPropertyForgetForget\", \"module\": \"Mathlib/AlgebraicGeometry/LimitsOver\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) {S : AlgebraicGeometry.Scheme} {J : Type u_1}\\n  [inst : CategoryTheory.Category.{v_1, u_1} J] (F : CategoryTheory.Functor J (P.Over ⊤ S))\\n  [∀ {i j : J} (f : i ⟶ j), AlgebraicGeometry.IsOpenImmersion (F.map f).left] {i j : J} (f : i ⟶ \", \"doc\": \"For any morphism $ f $ in the appropriate category, applying the composition of the forgetful functors (first forgetting the morphism property and then forgetting the over category structure) results \"}\n  {\"name\": \"AlgebraicGeometry.instIsOpenImmersionAppOverSchemeOpensDiagramι\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) (i : I)\\n  (U : (D.obj i).Opens) (j : CategoryTheory.Over i),\\n  AlgebraicGeometry.IsOpenImmersion ((AlgebraicGeometry.opensDiagramι D i U).app j)\", \"doc\": \"For a diagram $D : I \\to \\text{Sch}$ of schemes indexed by a category $I$, and an open subset $U$ of $D(i)$, the natural transformation $\\\\iota$ associated to the open subset diagram functor has componen\"}\n  {\"name\": \"AlgebraicGeometry.isOpenMap_of_generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base) →\\n    IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism of schemes is locally of finite presentation and a generalizing map, then it is an open map.\"}\n  {\"name\": \"AlgebraicGeometry.isOpenImmersion_eq_inf\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion =\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsOpenEmbedding) ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] x => Function.Bijective ⇑x\", \"doc\": \"A morphism of schemes is an open immersion if and only if it is a topological open embedding and induces bijective maps on all stalks.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.isOpenImmersion_diagonal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.FormallyUnramified f]\\n  [AlgebraicGeometry.LocallyOfFiniteType f],\\n  AlgebraicGeometry.IsOpenImmersion (CategoryTheory.Limits.pullback.diagonal f)\", \"doc\": \"If a morphism of schemes is formally unramified and locally of finite type, then its diagonal morphism in the pullback is an open immersion.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coarse moduli spaces commute with restriction to open substacks",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictRestrictComm\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"(X : Scheme.{u}) (U V : X.Opens) : (U.ι ⁻¹ᵁ V).toScheme ≅ V.ι ⁻¹ᵁ U\", \"doc\": \"For any scheme $X$ and open subsets $U,V \\\\subseteq X$, the scheme obtained by restricting $X$ first to $U$ and then to $V$ is isomorphic to the scheme obtained by restricting $X$ first to $V$ and then\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsProper f] : IsProper (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is a proper morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (f : X ⟶ Y) [IsOpenImmersion f] (U) : Γ(M.restrict f, U) = Γ(M, f ''ᵁ U)\", \"doc\": \"For any open subset $U$ of $X$, the sections of the restricted module sheaf over $U$ are equal to the sections of the original module sheaf over the image $f(U)$ in $Y$, where $f : X \\to Y$ is an open \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrict_carrier\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {U : TopCat} (X : AlgebraicGeometry.Scheme) {f : U ⟶ { carrier := ↥X, str := X.instTopologicalSpaceCarrierCarrier }}\\n  (h : Topology.IsOpenEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f)), ↑(X.restrict h).toPresheafedSpace = U\", \"doc\": \"Restricting a scheme $X$ to an open subset $U$ via an open immersion results in a scheme whose underlying topological space is exactly $U$.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [UniversallyClosed f] : UniversallyClosed (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is universally closed, then the restriction of $ f $ to $ V $ is also universally closed. This means that the pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Opens.toScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X : Scheme.{u}} (U : X.Opens) : Scheme.{u}\", \"doc\": \"Given a scheme $X$ and an open subset $U$ of its underlying topological space, this function constructs the scheme structure on $U$ by restricting $X$ through the canonical open embedding $U \\to X$. Th\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [IsIntegralHom f] : IsIntegralHom (f ∣_ V)\", \"doc\": \"If $ f: X \\to Y $ is an integral morphism of schemes and $ V $ is an open subset of $ Y $, then the restriction of $ f $ to $ V $ is also an integral morphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ofRestrict_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"(V W e) :\\n  (X.ofRestrict h).appLE V W e =\\n    X.presheaf.map (homOfLE (show X.ofRestrict h ''ᵁ _ ≤ _ by exact Set.image_subset_iff.mpr e)).op\", \"doc\": \"Given a scheme $X$, an open subset $U$ of its underlying topological space, and an open immersion $h: U \\to X$, the morphism from the restricted scheme $X|_U$ to $X$ constructed via $h$ is an open imme\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Coarse\", \"Open\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "grep",
+   "query": "coarseModuli|coarse_moduli|KeelMori",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A categorical quotient of an algebraic stack restricts to open subsets of the quotient",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open\", \"module\": \"Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f g : X ⟶ Y)\\n  (U :\\n    TopologicalSpace.Opens\\n      ↑↑(CategoryTheory.Limits.coequalizer (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom f)\\n              (AlgebraicGeometry.LocallyRingedSpace.Hom.toShHom g)).toPresheafedSpace)\\n  (s :\\n    ↑((Category\", \"doc\": \"The image of the basic open set defined by a section under the coequalizer projection morphism in the category of locally ringed spaces is an open subset of the coequalizer space.\"}\n  {\"name\": \"AlgebraicGeometry.opensRestrict\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"{X : AlgebraicGeometry.Scheme} → (U : X.Opens) → (↑U).Opens ≃ { V // V ≤ U }\", \"doc\": \"For a scheme $X$ and an open subset $U$ of $X$, there is a canonical equivalence between the open subsets of $U$ and the open subsets of $X$ contained in $U$. This equivalence arises from the open imm\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Functor X.Opens (CategoryTheory.Over X)\", \"doc\": \"The functor from the category of open subsets of a scheme $X$ (viewed as a preorder category) to the over category $\\\\mathcal{T}/X$, which maps each open subset $U$ to its canonical inclusion morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_f\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀), (𝒰.restrict U).f x = 𝒰.f x ∣_ U\", \"doc\": \"For any scheme $X$, open cover $\\\\mathcal{U}$ of $X$, open subset $U \\\\subseteq X$, and index $x \\\\in \\\\mathcal{U}.I_0$, the morphism $f_x$ in the restricted open cover $\\\\mathcal{U}|_U$ is equal to the re\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.OpenCover.restrict_X\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover) (U : X.Opens) (x : 𝒰.I₀),\\n  (𝒰.restrict U).X x = ↑((TopologicalSpace.Opens.map (𝒰.f x).base).obj U)\", \"doc\": \"Given a scheme $X$, an open cover $\\\\mathcal{U}$ of $X$, and an open subset $U \\\\subseteq X$, the object mapping of the restricted open cover $\\\\mathcal{U}|_U$ at each index $x \\\\in I_0$ corresponds to th\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctor_obj_left\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (X.restrictFunctor.obj U).left = ↑U\", \"doc\": \"For any scheme $X$ and open subset $U$ of $X$, the left component of the object part of the restriction functor applied to $U$ is equal to the canonical inclusion morphism $U \\to X$.\"}\n  {\"name\": \"AlgebraicGeometry.opensDiagramι\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme) →\\n      (i : I) → (U : (D.obj i).Opens) → AlgebraicGeometry.opensDiagram D i U ⟶ (CategoryTheory.Over.forget i).comp D\", \"doc\": \"For a diagram $D : I \\to \\text{Sch}$ of schemes indexed by a category $I$, and an open subset $U$ of $D(i)$, this natural transformation maps each object $j$ in the over category $I/i$ to the inclusion \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.restrictFunctor_obj_hom\", \"module\": \"Mathlib/AlgebraicGeometry/Restrict\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens), (X.restrictFunctor.obj U).hom = U.ι\", \"doc\": \"For any scheme $X$ and open subset $U$ of $X$, the morphism associated to $U$ by the restriction functor from the preorder category of open subsets of $X$ to the over category $\\\\mathcal{T}/X$ is the c\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes, ringed spaces, ordinary category limits or sheaves of modules; none states this assertion for Deligne--Mumford stacks"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-abelian-level-coarse-moduli",
+  "date": "2026-10-22",
+  "group": "ND"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-direct-images",
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Coarse existence input only; the coarse map is not asserted to be an equivalence. Supporting input: Coarse moduli schemes restrict to open substacks. The inherited creation chain ends at a Lean module rather than a DAG node; the explicit main-20261015 anchor is paragraph (3) of det-thm-sf-ctf-stability-direct-images, the alteration-moduli prerequisite below the Rj_* preservation input.",
+   "via": [
+    "lem-sfb-abelian-level-coarse-moduli",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-coarse-moduli-open-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Compared the given coarse scheme with the uniform categorical Keel--Mori space by explicit inverse maps, constructed the unique open using the homeomorphism and open-substack classification, and verified categorical and geometric-point restriction separately. Added two general statement-only inputs; all remaining arguments are explicit consequences of their statements and definitions. No SGA, no Lean writes and no compiler.",
+  "blueprint": "Realizes the stable-moduli prerequisite under paragraph (3) of det-thm-sf-ctf-stability-direct-images in main-20261015: restricting the stable coarse scheme to the smooth open before the full-level cover. The inherited null ancestor was repaired to this explicit blueprint anchor, as already done for the moduli-groupoid definition; the creation chain itself is broken at a Lean module id. No unit route or chapter is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-85156180b",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-85156180b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks sources: 0DUG, 0DUT, 06FJ, 04XL, 04XH and 0CI7. New node lem-sfb-keel-mori-uniform-topological-moduli is true by Keel-Mori (0DUT): finite diagonal gives finite inertia because inertia is the base change of the diagonal along itself, and a DM stack over Spec k is an algebraic stack. Uniform categorical means the 0DUG(2) version over algebraic spaces over k. The universal-homeomorphism clause is restricted to DM test stacks, which is weaker than the source. New node lem-sfb-stack-topology-open-substacks matches 04XL (the topology is independent of the etale atlas) and 06FJ (open substacks correspond to open subsets). Its inverse-image clause follows from 04XH. Neither new node duplicates an existing node: searches for keel, 0DUT, open substack, point space and categorical moduli found only the coarse proper/quasi-finite, inertia-free cover, DM-locus and algebraic-space topology nodes, which state other things. Neither restates a clause of the item. Step 2's isomorphism Q = M is valid because the def-sfb coarse definition is initial among algebraic spaces. Steps 3-5 are correct: V is the open on |q|(W), uniqueness follows from bijectivity of |q|, an open immersion is flat, and the geometric-point bijection restricts to the saturated subset. Advisory: the inherited statement's uniqueness holds only for U = X x_Q V over X, which is what step 3 proves and what the citer uses; I left the statement unchanged. Batch-5 check: def-sfb-stable-pointed-moduli-groupoids reaches def-trf-projective-bundle-morphism only through definitions, and def-trf-algebraic-space is a general definition. Neither is a step of the trace formula or Poincare duality, so all three listed citations are accepted. The item's blueprint anchor is now det-thm-sf-ctf-stability-direct-images (3), consistent with def-sfb-stable-pointed-moduli-groupoids. No SGA citation, no tool_uses, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoarseModuliOpenRestriction",
+  "declaration": "CategoryTheory.coarseModuli_open_restriction",
+  "declarations": [
+   "CategoryTheory.coarseOpenOver",
+   "CategoryTheory.coarseOpenInclusion",
+   "CategoryTheory.coarseModuli_open_restriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoarseModuliOpenRestriction.lean",
+  "statement": "theorem coarseModuli_open_restriction (k : Type u) [Field k] (X : BasedCategory.{v₁, w₁} (Over (Spec (.of k)))) (hX : IsDeligneMumfordModuliStack X) (hft : HasFiniteTypeEtaleModuliAtlas X) (hdiag : HasFiniteModuliDiagonal X) (Q : Over (Spec (.of k))) (q : BasedFunctor X (discreteModuli (yoneda.obj Q))) (hq : IsCoarseModuliScheme X Q q) (U : OpenModuliSubstack X) : ∃! V : Q.left.Opens, ∃ e : BasedFunctor U.category (moduliTwoFiberProduct q (discreteModuliMap (yoneda.map (coarseOpenInclusion Q V)))), e.toFunctor.IsEquivalence ∧ Nonempty (ModuliTwoIso (e.comp (moduliTwoFiberFst q (discreteModuliMap (yoneda.map (coarseOpenInclusion Q V))))) (fullModuliInclusion X U.property)) ∧ IsCoarseModuliScheme U.category (coarseOpenOver Q V) (e.comp (moduliTwoFiberSnd q (discreteModuliMap (yoneda.map (coarseOpenInclusion Q V)))))",
+  "branch": "sheaf-dag",
+  "by": "Q121",
+  "date": "2026-10-22",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df0fc3e0e",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Lean matches node clause by clause: k field; X BasedCategory over Spec k with IsDeligneMumfordModuliStack, HasFiniteTypeEtaleModuliAtlas (LFT+QC atlas = finite type), HasFiniteModuliDiagonal (Z→T×U finite, both projections pinned); Q,q,IsCoarseModuliScheme; U OpenModuliSubstack. Conclusion ∃! V : Q.left.Opens with based equivalence U ≃ X×_Q V, ModuliTwoIso of e⋙fst with fullModuliInclusion (over X, Q63 advisory respected), and IsCoarseModuliScheme of e⋙snd (both clauses), which is the actual restriction of q because h_Q is discrete. Helpers coarseOpenOver/coarseOpenInclusion are canonical data. Diff vs live: lean + 2 landed owner stmt_deps only. No name collision in live lean/. Edge cases (empty U, U=X, empty X, any char) covered; universes free; statement verbatim; docstrings carry source, blueprint and 5 steps; plain Flat import = proof_dep module; lines ≤95. No change, so no compile; relied on worker's clean scompile."
+ }
+}

@@ -221,20 +221,37 @@
   "module": "Sheaf.AlgebraicGeometry.CompletelyDecomposedEtaleFiniteSubcover",
   "declaration": "AlgebraicGeometry.completelyDecomposed_etale_finite_subcover",
   "file": "lean/Sheaf/AlgebraicGeometry/CompletelyDecomposedEtaleFiniteSubcover.lean",
-  "statement": "theorem completelyDecomposed_etale_finite_subcover (X : Scheme.{u}) [IsNoetherian X] {I : Type w} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) (het : ∀ i : I, Etale (f i)) (hcover : ∀ x : X, ∃ (i : I) (z : U i), f i z = x ∧ IsIso ((f i).residueFieldMap z)) : ∃ I₀ : Set I, I₀.Finite ∧ ∀ x : X, ∃ i ∈ I₀, ∃ z : U i, f i z = x ∧ IsIso ((f i).residueFieldMap z)",
+  "statement": "theorem completelyDecomposed_etale_finite_subcover (X : Scheme.{u}) [IsNoetherian X] {I : Type w} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) [∀ i : I, Etale (f i)] (hcover : ∀ x : X, ∃ (i : I) (z : U i), f i z = x ∧ IsIso ((f i).residueFieldMap z)) : ∃ I₀ : Set I, I₀.Finite ∧ ∀ x : X, ∃ (i : I) (_ : i ∈ I₀) (z : U i), f i z = x ∧ IsIso ((f i).residueFieldMap z)",
   "branch": "newtargets-dag",
-  "by": "Q11",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.CompletelyDecomposedEtaleFiniteSubcover deleted (dead: no target reaches it); this node is not reached either."
+  "by": "Q131",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "lean_removed": {
+  "commit": "8a6a58ff1c5",
+  "path": "lean/Sheaf/AlgebraicGeometry/CompletelyDecomposedEtaleFiniteSubcover.lean",
+  "module": "Sheaf.AlgebraicGeometry.CompletelyDecomposedEtaleFiniteSubcover",
+  "declaration": "AlgebraicGeometry.completelyDecomposed_etale_finite_subcover",
+  "reason": "module deleted as dead (no target reaches it; this node is not reached either); the declaration exists nowhere else in lean/, so the node has no Lean statement"
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-27cfb97e2",
-  "group": "Q11",
+  "reviewer": "NT-stage2-cc-d72bea8ec",
+  "group": "Q131",
   "result": "pass",
-  "note": "I read the statement clause by clause against the node and ILO II 2.2.4 (ℓ=∞), and it matches. [IsNoetherian X] is equivalent to the finite affine Noetherian cover. I : Type w has no extra assumptions. Etale (f i) for each i. The hypothesis is f i z = x ∧ IsIso ((f i).residueFieldMap z), on the actual induced map. The conclusion ∃ I₀ : Set I, I₀.Finite with the same lift condition has the same quantifier order. No qc/separated/finiteness on U_i. Empty X, empty I and empty U_i are handled. All 4 stmt_deps are existing Mathlib records used as recorded. The node differs from live only in lean. lean.statement is verbatim the file signature. Docstrings carry the source, blueprint tag and 5 proof steps. The only proof is sorry. No duplicate in side lean/Sheaf. nt_compile --json: 2.6 s, no errors or warnings. Advisory H9: proof-only plain imports are unused by the statement."
+  "note": "Node diff vs side-live is lean-only: the lean record is restored after lean_removed, existing:false, with a real module. The statement matches the node and ILO II 2.2.4 (ℓ=∞) clause by clause: [IsNoetherian X] ≡ finite affine Noetherian cover (isNoetherian_iff_of_finite_affine_openCover); I : Type w arbitrary; Etale (f i); the hypothesis uses the canonical residueFieldMap with f i z = x; ∃ finite I₀ is chosen before ∀ x; no qc/separated assumption on U i. lean.statement is verbatim the file. Edge cases (empty X, I, U i) and universes are fine. The 4 Mathlib stmt_dep records are used as recorded. Docstrings carry the source, the blueprint tag and the 5 proof steps; sorry only; no defs; no duplicate in side lean. Same signature passed on 2026-10-18 (Q11, clean compile). Advisory H9: proof-only plain imports are unused."
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
 }

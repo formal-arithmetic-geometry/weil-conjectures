@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-section-tensor-conjugate-computation",
+ "kind": "statement",
+ "title": "K-flat computation of conjugated normalized scalar tensor comparisons",
+ "statement": "Let a, T, s and t be as in [def-sfb-internal-section-scalar-pullback-comparison-data] and [def-sfb-internal-derived-scalar-comparisons], with SectionScalarNormalized a T s and TensorNormalized a T t. Suppose o is an ordinary section extension/restriction to tensor-right isomorphism satisfying the local generator equation from [def-sfb-section-scalar-tensor-normalization-data], and e is a derived section extension/restriction to sectionScalarTensor isomorphism satisfying the conjugation identity there for every internal derived object. Then for every flat-term K-flat section complex P, e satisfies exactly the computation equation in SectionTensorNormalized, with o on its ordinary side. The comparison isomorphisms, ordinary generator equation and final conjugation identity are hypotheses; this theorem proves only the remaining K-flat computation equation.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1), reduction comparison in the specified coefficient category; extracted old step 2. Stacks sites-cohomology.tex Tags 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint)."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-section-scalar-pullback-comparison-data",
+  "def-sfb-section-scalar-tensor-normalization-data",
+  "def-sfb-internal-derived-scalar-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "On a termwise section image EP, precompose both computation paths by the section restriction isomorphism, restricted scalar comparison and restricted scalar image of αP. Naturality of e moves αP through e, and he identifies the prefix with F(t.derived) followed by θ. The right-tensor computation square replaces the tensor-side representative factors. TensorNormalized then replaces the internal tensor computation with the internal restricted scalar counit, and the scalar computation transport square identifies the result with the section scalar path. Cancel the isomorphic prefix.",
+   "uses": [
+    "lem-sfb-section-tensor-right-computation",
+    "lem-sfb-section-scalar-computation-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Both paths are components of natural transformations between the same functors on section cochain complexes. Choose the termwise internal preimage of the given P and its equivalence counit j. Transport K-flatness along tensoring with j⁻¹, and termwise flatness along the canonical site-tensor comparison and tensor-right of each j⁻¹ component. Apply the image calculation. Naturality of the two paths and cancellation of the image of j prove the result on P.",
+   "uses": [
+    "def-pur-site-sheaf-tensor-presentation-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-section-tensor-right-computation",
+  "lem-sfb-section-scalar-computation-transport",
+  "def-pur-site-sheaf-tensor-presentation-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.proof.md",
+  "place": "Paragraph (1): paste the separate tensor and scalar computation squares and descend by naturality along the termwise section equivalence."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of exact section equivalence with derived scalar extension tensor K flat computation counits",
+   "results": "ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply; ModuleCat.ExtendRestrictScalarsAdj.counit_app; Module.Flat.rTensor_exact (generic scalar and exactness facts, no section-derived normalization).",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of conjugated scalar tensor comparison with K flat computation counits under exact section equivalence",
+   "results": "Module.Flat.iff_rTensor_exact; Module.FaithfullyFlat.rTensor_reflects_exact and analogous left tensor facts.",
+   "date": "2026-10-26",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryCompIso_fac|mapDerivedCategoryNatIso_fac",
+   "results": "msearch returned no hits. Local source search finds generic localization factor identities in WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate; no scalar tensor compatibility theorem.",
+   "date": "2026-10-26",
+   "verdict": "Generic factors only, not this comparison equation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SectionTensorNormalizationTransport",
+  "date": "2026-10-26",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-integral",
+   "place": "Integral proof paragraph (1), compatibility of scalar reduction and derived tensor, original transport node proof step 2: representative computation.",
+   "via": [
+    "lem-sfb-section-tensor-normalization-transport",
+    "lem-sfb-internal-scalar-pullback-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SectionTensorConjugateComputation",
+  "file": "lean/Sheaf/Paper/SectionTensorConjugateComputation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.QuotientChange.section_tensor_conjugate_computation",
+  "statement": "theorem section_tensor_conjugate_computation (a : Λ ⟶ Λ') [IsMonHom a]\n    (T : Scheme.{u}) (s : SectionScalarComparison a T)\n    (hs : SectionScalarNormalized a T s) (t : TensorNormalization a T)\n    (ht : TensorNormalized a T t)\n    (o : s.pair.extension ⋙ SheafOfModules.scalarRestriction.{u + 1, u, u + 1}\n      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)) ≅\n        tensorRight ((ModuleRingedComparison.equivalence Λ T).functor.obj (B₀ a T)))\n    (ho : (∀ (M : ModuleRingedComparison.modules Λ T) (U : T.ProEtᵒᵖ)\n      (z : (ModuleRingedComparison.ring Λ' T).obj.obj U) (x : M.val.obj U),\n    (o.hom.app M).val.app U\n      ((eqToHom (s.pair.extension_obj M).symm).val.app U\n        ((toSheafify (Scheme.ProEt.topology T)\n          (SheafOfModules.changeOfRingsPresheaf\n            (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T)\n              (coefficientMap a T)) M).presheaf).app U\n              (z ⊗ₜ[(ModuleRingedComparison.ring Λ T).obj.obj U,((sectionScalarMap\n                  (Scheme.ProEt.topology T) (coefficientMap a T)).hom.app U).hom] x))) =\n      ModuleRingedComparison.sectionPureTensor Λ T M\n        ((ModuleRingedComparison.equivalence Λ T).functor.obj (B₀ a T)) U x z))\n    (e : s.pair.derived ⋙ SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n      (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T)) ≅\n        sectionScalarTensor a T)\n    (he : ∀ M : DerivedCategory (Modules Λ T),\n    (ModuleRingedComparison.derivedEquivalence Λ T).functor.map (t.derived.hom.app M) ≫\n        (ModuleRingedComparison.tensorComparison Λ T).hom.app (M, B a T) =\n      (sectionScalarRestriction a T s).hom.app ((D a T).obj M) ≫\n        (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n          (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T))).map\n            (s.derived.hom.app M) ≫\n        e.hom.app ((ModuleRingedComparison.derivedEquivalence Λ T).functor.obj M)) :\n    (∀ (P : CochainComplex (ModuleRingedComparison.modules Λ T) ℤ),\n    CochainComplex.IsKFlatIndependentCoefficients (R := ModuleRingedComparison.ring Λ T) P →\n    (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n      (R := ModuleRingedComparison.ring Λ T) (P.X n)) →\n    e.hom.app (DerivedCategory.Q.obj P) ≫\n        (ModuleRingedComparison.tensor Λ T).map\n          (Prod.mkHom (𝟙 _) (sectionScalarCoefficient a T).hom) ≫\n        (ModuleRingedComparison.qTensor Λ T).app\n          (P, (CochainComplex.singleFunctor _ 0).obj\n            ((ModuleRingedComparison.equivalence Λ T).functor.obj (B₀ a T))) ≫\n        DerivedCategory.Q.map (CochainComplex.mapBifunctorSingle₂Iso\n          (curriedTensor (ModuleRingedComparison.modules Λ T))\n          ((ModuleRingedComparison.equivalence Λ T).functor.obj (B₀ a T)) P).hom =\n      (SheafOfModules.scalarDerivedRestriction.{u + 1, u, u + 1, u + 1}\n        (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T) (coefficientMap a T))).map\n          (SheafOfModules.scalarPairComplexComparison.{u + 1, u, u + 1, u + 1}\n          s.pair.extension s.pair.extension_additive\n            s.pair.derived s.pair.counit P) ≫\n        (SheafOfModules.scalarRestrictionComparison.{u + 1, u, u + 1, u + 1}\n          (sectionScalarMap.{u + 1, u + 1, u} (Scheme.ProEt.topology T)\n            (coefficientMap a T))).hom.app\n            ((SheafOfModules.scalarComplex.{u + 1, u, u + 1}\n              s.pair.extension s.pair.extension_additive).obj P) ≫\n        DerivedCategory.Q.map ((Functor.mapHomologicalComplexCompIso o (.up ℤ)).hom.app P))",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-26"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261025T210243-L-3501642",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X8",
+  "result": "pass",
+  "landing": "20261026T024232-L-650396",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-ringed-tensor-constraint-completion",
+ "kind": "statement",
+ "title": "Complete normalized tensor constraints from simultaneous K-flat representatives",
+ "statement": "Let (C,J,R) be a small ringed site [def-weil-size-convention, def-weil-sheaf-of-modules-category]. Fix its unbounded derived category and internal Hom [def-weil-abstract-derived-category, def-pur-derived-internal-hom], a closed structure S, a simultaneous K-flat total-tensor comparison T with the prescribed uncurrying model [def-coef-ringed-tensor-hom-model], a symmetry s on S, and a unit identification u from the monoidal unit to Q(R[0]). Assume R[0] is K-flat, that s is induced by a chain map with the signed interchange formula, that the right unitor after u is induced by a chain map with the scalar-action formula, and that the associator is induced by a chain map with the unsigned reassociation formula on all simultaneous K-flat representatives. Then there exists full tensor coherence [lem-sf-ringed-derived-closed-symmetric-monoidal] for this same S,T,s with coefficient-unit identification exactly u: it has natural one-K-flat tensor comparisons agreeing with T, and actual chain isomorphisms with the specified braiding, associator, and left and right scalar-unit formulas.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT, monoidal constraints descended from ordinary tensor complexes; Tag 06YT, computation on K-flat representatives."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [
+  {
+   "text": "Extend the simultaneous comparison to a natural one-K-flat comparison by functorial flat resolution. It agrees with the original comparison on all K-flat pairs.",
+   "uses": [
+    "lem-sfb-ringed-tensor-comparison-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The actual braiding and associator of tensor complexes satisfy the stipulated generator formulas. Total-coproduct and sheafification universal properties detect maps on binary generators; apply tensor-Hom currying to detect nested generators. Thus the stipulated chain maps equal those actual isomorphisms. The same argument for the right unitor uses that the unit has only its degree-zero term. Transfer all three derived constraint equations using agreement of the extended comparison on K-flat pairs. The existing independently sized tensor-Hom currying API used by the flat-resolution construction detects the nested sheaf tensors.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-tensor-complex-constraints",
+    "lem-pur-module-tensor-generator-calculus",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the actual signed interchange with the right unitor to obtain the left unitor. Its degree-zero interchange sign is one, so its generator formula is scalar multiplication. Braiding naturality and the braided unit identity give its derived constraint equation. Assemble all fields of full tensor coherence, retaining the original unit identification u.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-tensor-comparison-extension",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-tensor-complex-constraints",
+  "lem-pur-module-tensor-generator-calculus",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0FPT, monoidal constraints descended from ordinary tensor complexes; Tag 06YT, computation on K-flat representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maps of total tensor complexes are determined on local pure tensor generators; normalized associators and unitors on K-flat representatives determine derived monoidal coherence",
+   "results": "Search completed; no exact coefficient-model completion lemma.",
+   "date": "2026-10-21",
+   "verdict": "No exact result for the coefficient model interface; use tensor extensionality and ordinary constraint formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorHomEquiv\"",
+   "results": "LinearAlgebra.Contraction equivalences, no derived sheaf constraint completion.",
+   "date": "2026-10-21",
+   "verdict": "No exact result for the coefficient model interface; use tensor extensionality and ordinary constraint formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedTensorConstraintModels|RingedDerivedTensorAssociatorModel",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact result for the coefficient model interface; use tensor extensionality and ordinary constraint formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complete tensor comparison isomorphisms on K-flat complexes to monoidal coherence by identifying symmetry, associator and unitors on pure tensors.",
+   "results": "8 hits: HomologicalComplex.rightUnitor; HomologicalComplex.leftUnitor; HomologicalComplex.rightUnitor'; CategoryTheory.Functor.Monoidal.μIso; HomologicalComplex.associator; CategoryTheory.MonoidalCategory.tensorIso; HomologicalComplex.leftUnitor'; CategoryTheory.MonoidalCoherence.assoc",
+   "date": "2026-10-22",
+   "verdict": "No exact match. The complex unitors and associator are used in the proof, but the result identifying the prescribed normalized comparison with them is absent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "date": "2026-10-21",
+  "group": "U7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-site-duality-maps",
+   "place": "Coherence interface required by the signed and unsigned localization normalizations."
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedTensorConstraintCompletion",
+  "file": "lean/Sheaf/Algebra/Homology/RingedTensorConstraintCompletion.lean",
+  "declaration": "CategoryTheory.ringedTensorConstraint_completion",
+  "statement": "theorem ringedTensorConstraint_completion\n    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))\n    (T : CoefficientTensorModels.{r, c, v, w} J R S)\n    (s : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R))\n      _ S.monoidal)\n    (u : S.monoidal.tensorUnit ≅ DerivedCategory.Q.obj\n      (ringedTensorUnitComplex.{c, v, r} J R))\n    (M : RingedTensorConstraintModels.{c, v, r, w} J R S T s u) :\n    ∃ K : RingedDerivedTensorCoherence.{c, v, r, w} J R S T s, K.unitIso = u",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.RingedTensorConstraintModels",
+   "CategoryTheory.ringedTensorConstraint_completion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-bebe7",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261022T114252-L-597874",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, 5 adapted modules, 5 new modules, 7 node files and 2 change records matched against the base in clones/live (verbatim move, identical #check signatures, import-only adaptations of unclaimed modules, unchanged statements), #print axioms in a sandbox, and the reader gate: 57 of 63 direct importers compiled against the sandbox, 3 after recompiling a stale importer, 3 not compilable against the lagging published build either"
+ }
+}

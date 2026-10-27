@@ -1,0 +1,222 @@
+{
+ "id": "lem-sfb-noetherian-space-topology",
+ "kind": "statement",
+ "title": "Noetherian topology of a Noetherian algebraic space",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $X$ an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and locally Noetherian on etale scheme charts [pqf-def-locnoeth]. Here quasi-compact means that every open cover has a finite subcover. Then the atlas point space $|X|$ [def-a1-space-point-topology] is Noetherian: every nonempty family of closed subsets has a member minimal under inclusion.",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04ZF, lemma-Noetherian-topology, clause (2); Noetherianity expressed as well-founded strict inclusion on closed subsets."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "pqf-def-locnoeth",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-a1-space-affine-etale-cover], the quotient topology of a representable surjective etale scheme atlas of $X$ makes $|t|$ continuous for every representable etale $t:h_T\\to X$ from a scheme; hence it coincides with the final topology of [def-a1-space-point-topology], and the quasi-compactness hypothesis on $|X|$ is that of [lem-sfb-qc-space-affine-etale-atlas]. By [lem-sfb-qc-space-affine-etale-atlas], quasi-compactness of $|X|$ gives an affine scheme $W$ and a representable surjective etale morphism $p:h_W\\to X$. By [lem-a1-space-point-open-calculus], its point map $q=|p|:|W|\\to|X|$ is continuous and surjective.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-a1-space-point-open-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H6, lemma-quasi-compact-affine-cover; Tag 03H5, lemma-characterize-surjective; Tag 03BX, lemma-topology-points; Tag 04ZF, lemma-Noetherian-topology, choice of etale presentation."
+   }
+  },
+  {
+   "text": "The hypothesis that $X$ is locally Noetherian on etale scheme charts applies to $p$, so $W$ is locally Noetherian. Since $W$ is affine, [lem-weil-pbc-affine-scheme-qcqs] says that it is quasi-compact. Thus $W$ is a Noetherian scheme (locally Noetherian and quasi-compact); no quasi-separatedness assumption on $X$ has been used.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 04ZF, lemma-Noetherian-topology, proof: the etale chart is locally Noetherian; Tag 03H6, lemma-quasi-compact-affine-cover; affine quasi-compactness is algebra.tex Tag 00E8, lemma-quasi-compact."
+   }
+  },
+  {
+   "text": "Let $\\mathcal C$ be any nonempty family of closed subsets of $|X|$. Continuity of $q$ makes $\\mathcal D=\\{q^{-1}(C):C\\in\\mathcal C\\}$ a nonempty family of closed subsets of $|W|$. Apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal] to the Noetherian scheme $W$ and $\\mathcal D$. Choose $C_0\\in\\mathcal C$ whose inverse image is a minimal member of $\\mathcal D$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OZ, lemma-Noetherian-topology; minimal-closed-subset form of Noetherianity. The inverse-image argument follows topology.tex Tag 04Z8, lemma-image-Noetherian, proof of (1)."
+   }
+  },
+  {
+   "text": "If $C\\in\\mathcal C$ satisfied $C\\subsetneq C_0$, then $q^{-1}(C)\\subseteq q^{-1}(C_0)$. Choose $x\\in C_0\\setminus C$ and, by surjectivity of $q$, $w\\in|W|$ with $q(w)=x$. Then $w\\in q^{-1}(C_0)\\setminus q^{-1}(C)$, so the inclusion is strict, contradicting minimality. Hence $C_0$ is minimal in $\\mathcal C$, as required. This includes $X=\\varnothing$, where the only closed subset is $\\varnothing$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 04Z8, lemma-image-Noetherian, proof of (1), written for minimal members rather than descending sequences."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-a1-space-point-open-calculus",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 04ZF, lemma-Noetherian-topology, (2), using the affine etale presentation of Tag 03H6 and the elementary inverse-image proof of topology.tex Tag 04Z8 (lemma-image-Noetherian, (1))."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The underlying topological space of a quasi compact locally Noetherian algebraic space is Noetherian",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isNoetherian_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsNoetherian X ↔ AlgebraicGeometry.IsLocallyNoetherian X ∧ CompactSpace ↥X\", \"doc\": \"For any scheme $X$, the scheme $X$ is Noetherian if and only if $X$ is locally Noetherian and the underlying topological space of $X$ is compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], CompactSpace ↥X\", \"doc\": \"Every Noetherian scheme is a compact space, meaning its underlying topological space satisfies the finite subcover property for open covers.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}\n  {\"name\": \"AlgebraicGeometry.quasiCompact_of_noetherianSpace_source\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} [TopologicalSpace.NoetherianSpace ↥X] (f : X ⟶ Y), AlgebraicGeometry.QuasiCompact f\", \"doc\": \"Any morphism of schemes with a Noetherian source is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"NoetherianSpace\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic_space|Noetherian.*[Tt]opolog",
+   "results": "[grep] OK 12 hit(s)\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"14\", \"text\": \"A Noetherian space is a topological space that satisfies any of the following equivalent conditions:\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"23\", \"text\": \"Many examples of Noetherian spaces come from algebraic topology. For example, the underlying space\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"100\", \"text\": \"instance {α} : NoetherianSpace (CofiniteTopology α) := by\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"140\", \"text\": \"theorem NoetherianSpace.discrete [NoetherianSpace α] [T2Space α] : DiscreteTopology α :=\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"153\", \"text\": \"  noetherianSpace_of_surjective CofiniteTopology.of.symm continuous_of_indiscreteTopology\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"27\", \"text\": \"* `AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology`: A scheme is\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"28\", \"text\": \"  locally Artinian if and only if it is LocallyNoetherian and it has the discrete topology.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"30\", \"text\": \"* `AlgebraicGeometry.IsArtinianScheme.iff_isNoetherian_and_discreteTopology`: A scheme is Artinian\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"31\", \"text\": \"  if and only if it is Noetherian and has the discrete topology.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Artinian.lean\", \"line\": \"67\", \"text\": \"    [IsLocallyNoetherian X] (h : topologicalKrullDim X ≤ 0) : IsLocallyArtinian X where\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"176\", \"text\": \"/-- If `R` is a Noetherian ring, `Spec R` is a Noetherian topological space. -/\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"318\", \"text\": \"/-- A Noetherian scheme has a Noetherian underlying topological space. -/\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Noetherian algebraic space has descending chain condition on closed subsets",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.instWellFoundedLTClosedsOfNoetherianSpace\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] : WellFoundedLT (Closeds α)\", \"doc\": \"In a Noetherian topological space, the collection of closed subsets forms a well-founded order under strict inclusion, meaning every non-empty family of closed subsets contains a minimal element with \"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : NoetherianSpace X\", \"doc\": \"Every Noetherian scheme has an underlying topological space that satisfies the Noetherian condition, meaning every descending chain of closed subsets stabilizes.\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \": Prop\", \"doc\": \"A topological space is Noetherian if the strict inclusion relation on its open subsets is well-founded, meaning every non-empty collection of open sets contains an element that is minimal with respect\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.range\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] (f : α → β) (hf : Continuous f) : NoetherianSpace (Set.range f)\", \"doc\": \"If $ \\\\alpha $ is a Noetherian topological space and $ f : \\\\alpha \\\\to \\\\beta $ is a continuous function, then the image $ \\\\mathrm{range}(f) $ equipped with the subspace topology inherits the Noetherian \"}\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Noetherian\", \"type\": \": NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} [IsNoetherianRing R] : NoetherianSpace (Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"TopologicalSpace.noetherianSpace_TFAE\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \": TFAE [NoetherianSpace α, WellFoundedLT (Closeds α), ∀ s : Set α, IsCompact s, ∀ s : Opens α, IsCompact (s : Set α)]\", \"doc\": \"For a topological space $\\\\alpha$, the following are equivalent: (1) $\\\\alpha$ is Noetherian; (2) the closed subsets of $\\\\alpha$ form a well-founded order under inclusion; (3) every subset of $\\\\alpha$ i\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Topology of etale quotient of Noetherian scheme is Noetherian and closed subsets have minimal elements",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R)\", \"doc\": \"If $ R $ is a Noetherian ring, then the scheme $ \\\\operatorname{Spec}(R) $ is locally Noetherian. This means the prime spectrum of $ R $, equipped with the Zariski topology and structure sheaf, admits \"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsNoetherian X], (irreducibleComponents ↥X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A], IsOpen (Algebra.etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat}, AlgebraicGeometry.IsLocallyNoetherian (AlgebraicGeometry.Spec R) ↔ IsNoetherianRing ↑R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {R : CommRingCat} [IsNoetherianRing ↑R], TopologicalSpace.NoetherianSpace ↥(AlgebraicGeometry.Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.noetherianSpace_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] [IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  TopologicalSpace.NoetherianSpace ↥X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a Noetherian ring, then the underlying topological space of $X$ is a Noetherian topological space (i.e., every \"}",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected the hits; they concern schemes, affine modules, general topology, or generic sheaf infrastructure, and do not state this algebraic-space assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact locally Noetherian algebraic space has Noetherian underlying topology",
+   "results": "Eight hits: AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.noetherianSpace_of_isAffine, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier, AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian. These are scheme declarations; the algebraic-space assertion is absent.",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes and general topology do not give the algebraic-space assertion as a one-line specialization; the chart and point-map inputs are existing DAG lemmas"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"NoetherianSpace\"",
+   "results": "OK, 0 hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes and general topology do not give the algebraic-space assertion as a one-line specialization; the chart and point-map inputs are existing DAG lemmas"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic_space|noetherianSpace_of_isAffine",
+   "results": "Mathlib/AlgebraicGeometry/Noetherian.lean:181 noetherianSpace_of_isAffine; :185 noetherianSpace_of_isAffineOpen; :190, :213, :230 applications. No AlgebraicSpace or algebraic_space hits. Read Noetherian.lean:318-333 for the scheme instance.",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes and general topology do not give the algebraic-space assertion as a one-line specialization; the chart and point-map inputs are existing DAG lemmas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The topology of an etale quotient of a Noetherian affine scheme is Noetherian",
+   "results": "Eight hits: AlgebraicGeometry.IsNoetherian.noetherianSpace; AlgebraicGeometry.noetherianSpace_of_isAffine; TopologicalSpace.NoetherianSpace.set; AlgebraicGeometry.IsLocallyNoetherian.component_noetherian; AlgebraicGeometry.isNoetherian_iff; AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.noetherianSpace_of_isAffineOpen; AlgebraicGeometry.isLocallyNoetherian_of_affine_cover. Scheme and general-topology facts only; no algebraic-space theorem.",
+   "date": "2026-10-23",
+   "verdict": "no match: schemes and general topology do not give the algebraic-space assertion as a one-line specialization; the chart and point-map inputs are existing DAG lemmas"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-space-coherent-devissage",
+  "date": "2026-10-23",
+  "group": "Q48"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, first proof paragraph: Noetherian induction on closed supports.",
+   "via": [
+    "lem-sfb-space-coherent-devissage",
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-noetherian-space-topology",
+  "worker": "stage1",
+  "summary": "Q151: retained the statement and all prior searches. Reused an affine etale atlas, point-map continuity/surjectivity, affine quasi-compactness, and the Mathlib leaf for minimal closed subsets of a Noetherian scheme. The argument descending minimal closed inverse images is written explicitly, with no new nodes. Checked the empty space and absence of quasi-separatedness hypotheses. No Lean attachment states the algebraic-space assertion.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Higher-rank coherent devissage on a Noetherian algebraic space. Tag 07UT, first proof paragraph: Noetherian induction on closed supports. The split supplies only the Noetherian-induction prerequisite for coherent devissage, using 04ZF; the current blueprint direct-image proof (3) is unchanged. The ancestor command returns None for the inherited creation chain, so blueprint.from.node remains null rather than inventing an ancestor.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-space-point-open-calculus",
+    "why": "Generic point-map continuity and surjectivity for a representable surjective algebraic-space atlas; this unit has no separate point-map criterion. It supplies only the atlas topology tool, without replacing the unit route."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic identification of the quotient topology of one etale atlas with the final topology over all representable etale scheme maps (03BX), needed to match the item's quasi-compactness with the atlas node's hypothesis; this unit has no point-topology node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-space-point-open-calculus",
+  "lem-a1-space-affine-etale-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-a9bc3893a",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-a9bc3893a (reviewer sub-agent of L); spot-checked: Read the item's four steps in full, every cited statement, and the sources: Stacks 04ZF(2) (spaces-properties l.4189), 03H6, topology 04Z8(1), 01OZ, 0051, 03BX. The proof is correct. The affine atlas (lem-sfb-qc-space-affine-etale-atlas) gives a point map q that is continuous and surjective (lem-a1-space-point-open-calculus, generic tool, accepted). W is Noetherian because the item's hypothesis makes every etale scheme chart locally Noetherian and the Mathlib leaf affine-qcqs gives quasi-compactness. The Mathlib leaf for minimal closed subsets gives a minimal inverse image, and lifting along surjective q makes it minimal in the original family. Checked X empty, families containing the empty set, no quasi-separatedness and no injectivity of q. There are 0 new nodes, and the statement is identical to the live node, which is still unsplit, so no other group has split it. No duplicate exists: grep 04ZF finds only the item and its citer lem-sfb-space-coherent-devissage. FIX (C1): step 1 only asserted that the atlas node's quasi-compactness, taken in the quotient topology of one atlas, is the same as the item's, taken in the final topology of def-a1-space-point-topology. I cited lem-a1-space-affine-etale-cover (03BX: every |t| is continuous in the quotient topology) in step 1 and proof_deps, with a tool_uses entry. Batch 5: both flagged citations reach sec-trace-formula only through def-trf-algebraic-space and algebraic-space fibre-product/atlas foundations (lem-trf-space-fibre-products-etale-covers etc.). These are general definitions, not part of the trace formula or Poincare duality or their proofs, so they are outside the assumptions and I am not returning on them. Recorded source detail: the 03H6 proof says 'finite surjective' but proves only etale surjective, and the split does not use 'finite'.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceNoetherianTopology",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_minimal_closed_of_quasiCompact_locallyNoetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceNoetherianTopology.lean",
+  "statement": "theorem exists_minimal_closed_of_quasiCompact_locallyNoetherian {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : CompactSpace (Point X.obj.obj)) (hln : ∀ T : X.EtaleSite, IsLocallyNoetherian (X.etaleForget.obj T)) : ∀ C : Set (Set (Point X.obj.obj)), C.Nonempty → (∀ Z ∈ C, IsClosed Z) → ∃ Z ∈ C, ∀ Z' ∈ C, ¬ Z' ⊂ Z",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-906142ad4",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Every clause matches the node and Stacks 04ZF(2) (spaces-properties l.4188): arbitrary S : Scheme.{u}; X : AlgebraicSpace S; quasi-compactness = CompactSpace (Point X.obj.obj) on the recorded final topology pointTopologicalSpace; local Noetherianity = ∀ T : X.EtaleSite, IsLocallyNoetherian (etaleForget.obj T), over all representable étale charts, the convention of landed modules and not stronger; conclusion ∃ Z ∈ C, ∀ Z' ∈ C, ¬ Z' ⊂ Z over nonempty families of closed sets. Edge cases checked: empty X, ∅ ∈ C, several minimal members, non-quasi-separated X, universes (Point : Type (u+1)). Node differs from side-live only in lean; statement verbatim; the 4 stmt_deps are used and unchanged; source and blueprint docstrings present; proof is sorry only; no hollow definitions; imports exist. Grep of the project Lean trees for duplicates: only docstring citations of the item id. Report has Worker report and Second reading by Q132 sections. No file changed, so no compile run. No findings."
+ }
+}

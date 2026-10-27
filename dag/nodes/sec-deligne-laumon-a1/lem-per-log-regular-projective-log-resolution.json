@@ -15,89 +15,76 @@
   "def-weil-finite-type-morphism",
   "def-kun-projective",
   "def-exc-excellent-ring",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-per-log-morphism-identity",
+  "def-per-log-morphism-composition"
  ],
  "proof": [
   {
-   "text": "The base $B=\\operatorname{Spec}A$ is Noetherian, and [lem-weil-pbc-finite-type-over-noetherian] therefore makes $V$ Noetherian, in particular quasi-compact and locally Noetherian. For a geometric point $\\bar v$, [lem-trf-log-regular-sharp-chart] says that $P=\\overline M_{\\bar v}$ is saturated and sharp. If $nh=0$ in $P^{\\rm gp}$ with $n>0$, saturation applied to both $h$ and $-h$ puts both in $P$. Hence $h$ is a unit of $P$, so sharpness gives $h=0$. Thus every characteristic group is torsion free. Apply [lem-trf-monoidal-resolution-tower] to obtain a finite tower $(X_n,M_n)\\to\\cdots\\to(X_0,M_0)=(V,M)$ along nonempty coherent log ideals $\\mathcal I_i$, with all final characteristic monoids free. Denote its maps by $b_i:X_{i+1}\\to X_i$.",
+   "text": "Quasi-compactness of f over the affine base makes V quasi-compact (the quasi-compactness clause of [lem-weil-pbc-finite-type-over-noetherian]). At every geometric point apply [lem-trf-log-regular-sharp-chart]. If g^n=1 for n>0, saturation puts both g and its inverse in the sharp characteristic monoid; their product is 1 by injectivity into the group completion, so sharpness gives g=1. Apply [lem-trf-monoidal-resolution-tower] to obtain one finite tower with free terminal characteristics.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-trf-log-regular-sharp-chart",
     "lem-trf-monoidal-resolution-tower"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.6--1.7, p.70; VIII 3.3.14--3.3.15, pp.109--110."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $U\\subset V$ be the triviality locus of $M$. By [lem-trf-log-regular-divisorial-structure], $U$ is open dense. We induct on $i$ with claim: $X_i$ is integral, quasi-projective of finite type over $B$, $(X_i,M_i)$ is log regular, and its triviality locus $U_i$ is the inverse image of $U$ and maps isomorphically to $U$. The claim for $i=0$ is the hypothesis. Suppose it holds for $i$. The finite-type-over-Noetherian result [lem-weil-pbc-finite-type-over-noetherian] ensures local Noetherianity. Apply [lem-trf-log-blowup-normalization] to $(X_i,M_i)$ and $\\mathcal I_i$. It supplies a nonzero finite-type quasi-coherent ideal $J_i=\\alpha(\\mathcal I_i)\\mathcal O_{X_i}$, identifies $X_{i+1}$ with $(\\operatorname{Bl}_{J_i}X_i)^\\nu$, and gives log regularity and $U_{i+1}=b_i^{-1}U_i\\cong U_i$. Apply [lem-per-excellent-quasiprojective-normalized-blowup] over the original excellent affine base $B$: its hypotheses are the induction claim and the properties of $J_i$ just obtained. Its conclusions give integrality, quasi-projectivity and finite type of $X_{i+1}$, and global projectivity of $b_i$. This completes the induction, including projectivity of every map in the tower.",
+   "text": "Transport the initial equality of the chosen tower. The finite-tower assertion of [lem-sfb-log-smooth-composition-strict-base-change] supplies its actual composites p and terminal log etaleness. Its IsIdentity condition gives equality of p_0 with the constructed identity: bases and every relative-test section map coincide. This yields the required HEq, including for length zero.",
    "uses": [
-    "lem-trf-log-regular-divisorial-structure",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-trf-log-blowup-normalization",
-    "lem-per-excellent-quasiprojective-normalized-blowup"
+    "lem-sfb-log-smooth-composition-strict-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.4.6(i), 3.4.8, pp.111--112, with ordinary projectivity and finite normalization hypotheses made explicit."
-   }
+   "elementary": false
   },
   {
-   "text": "Set $(Y,M_Y)=(X_n,M_n)$ and let $b:Y\\to V$ be the composite. Step 2 gives integrality and log regularity of $Y$. Its characteristic monoids are free by Step 1, so [lem-trf-free-characteristic-regular-boundary] gives regularity of $Y$ and density of its triviality locus $U_n$. The induction identifies $U_n$ with $U$ under $b$, so $b$ is birational in the required dense-open sense. Repeated application of [lem-trf-h-projective-composition] to the projective maps $b_i$ makes $b$ projective in the finite-projective-space convention. If $n=0$, use the identity map: its closed immersion into $\\mathbf P^0_V=V$ directly gives projectivity, and its restriction to $U$ is the identity.",
+   "text": "Log etale implies log smooth by [lem-sfb-log-smooth-composition-strict-base-change]. Apply [lem-sfb-log-smooth-preserves-log-regularity] to the terminal composite over the given log regular base. Its characteristic equivalences from the monoidal tower are converted from ULift of finitely supported natural tuples to finite natural tuples using the standard equivalences. The forward regularity conclusion of [lem-trf-free-characteristic-regular-boundary] gives IsRegularScheme of this terminal scheme.",
    "uses": [
-    "lem-trf-free-characteristic-regular-boundary",
-    "lem-trf-h-projective-composition"
+    "lem-sfb-log-smooth-composition-strict-base-change",
+    "lem-sfb-log-smooth-preserves-log-regularity",
+    "lem-trf-free-characteristic-regular-boundary"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VI 1.7, p.70; VIII 3.4.4 and 3.4.8--3.4.9, pp.110--112."
-   }
+   "elementary": false
   },
   {
-   "text": "For each $i$, use [lem-trf-coherent-log-ideal-chart-construction] on $(X_i,M_i)$ and $\\mathcal I_i$. On a strict etale chart $\\operatorname{Spec}C$ with fs chart $P$ and finite ideal generators $E$, the saturated blowup has charts $\\operatorname{Spec}(C\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q_e^{\\rm sat}])$, where $Q_e=\\langle P,h-e\\ (h\\in E)\\rangle\\subset P^{\\rm gp}$. The cited statement says $(Q_e^{\\rm sat})^{\\rm gp}=P^{\\rm gp}$. Hence the compatible chart map $P\\to Q_e^{\\rm sat}$ has zero group kernel and cokernel. Its comparison scheme map to $\\operatorname{Spec}C\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q_e^{\\rm sat}]$ is the identity, by the displayed tensor-product description. Thus the log etale criterion of [def-per-fs-log-smooth-etale] applies: both orders are $1$, invertible in every ring, and the comparison is an isomorphism, hence etale. The charts cover the blowup, so each $b_i$ is log etale. This is the direct chart argument of VIII 3.3.11.",
+   "text": "For this same fixed tower use [lem-per-saturated-log-tower-projectivity], forgetting only the equation over the affine base in the quasi-projective witness. Use [lem-per-saturated-log-tower-dense-open] with the initial and terminal log regularity just established to obtain the dense-open isomorphism commuting with its composite.",
    "uses": [
-    "lem-trf-coherent-log-ideal-chart-construction",
-    "def-per-fs-log-smooth-etale"
+    "lem-per-saturated-log-tower-projectivity",
+    "lem-per-saturated-log-tower-dense-open"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.3.5--3.3.11, pp.107--108; XVI 3.6.3, p.252."
-   }
+   "elementary": false
   },
   {
-   "text": "Each $b_i$ is log etale by Step 4; this is also the saturated-log-blowup clause of [lem-per-log-smooth-composition-strict-base-change]. All schemes are locally Noetherian fs log schemes by Step 2, so that node applies. Its last clause says that finite saturated log blowup towers are log etale. Hence the tower $b:(Y,M_Y)\\to(V,M)$ is log etale; for $n=0$ the tower has length zero and $b$ is the identity. Finally fix any locally Noetherian fs log scheme $D$ and log-smooth $g:(V,M)\\to D$. The same node says that a log etale morphism followed by a log smooth morphism is log smooth. Applied to $b$ and $g$, it makes $g\\circ b:(Y,M_Y)\\to D$ log smooth. The tower was chosen independently of $D$ and $g$, so this proves the universally quantified last clause with the same $Y$ and $b$.",
+   "text": "The dense target open is nonempty and integral, as an open of the given integral base. Its isomorphic source open is irreducible. Closure preserves irreducibility and its density identifies that closure with the whole terminal scheme. Terminal regular local rings are domains by [lem-sc-regular-local-domain], hence reduced; stalkwise reducedness gives reducedness of the scheme. A reduced irreducible nonempty scheme is integral by [def-pc-integral-scheme].",
    "uses": [
-    "lem-per-log-smooth-composition-strict-base-change"
+    "lem-sc-regular-local-domain",
+    "def-pc-integral-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-    "place": "VIII 3.3.11, p.108; X 2.3 Step 3, pp.151--152; XVI 3.7, pp.254--255."
-   }
+   "elementary": true
+  },
+  {
+   "text": "Given any supplied log smooth map from V, apply the mixed-composition clause of [lem-sfb-log-smooth-composition-strict-base-change] to its composite with the terminal log etale map. The CompEq equations determine all relative-test sections and identify the resulting log-smooth map with the explicit .comp in the conclusion.",
+   "uses": [
+    "lem-sfb-log-smooth-composition-strict-base-change"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-per-fs-log-smooth-etale",
-  "lem-per-excellent-quasiprojective-normalized-blowup",
-  "lem-per-log-smooth-composition-strict-base-change",
-  "lem-trf-coherent-log-ideal-chart-construction",
-  "lem-trf-free-characteristic-regular-boundary",
-  "lem-trf-h-projective-composition",
-  "lem-trf-log-blowup-normalization",
-  "lem-trf-log-regular-divisorial-structure",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-trf-log-regular-sharp-chart",
   "lem-trf-monoidal-resolution-tower",
-  "lem-weil-pbc-finite-type-over-noetherian"
+  "lem-sfb-log-smooth-composition-strict-base-change",
+  "lem-sfb-log-smooth-preserves-log-regularity",
+  "lem-trf-free-characteristic-regular-boundary",
+  "lem-per-saturated-log-tower-projectivity",
+  "lem-per-saturated-log-tower-dense-open",
+  "lem-sc-regular-local-domain",
+  "def-pc-integral-scheme"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
-  "place": "Expands VIII 3.3.14--3.3.15 and 3.4.6--3.4.9, VI 1.7, and the log etale/log smooth composition used in X 2.3 and XVI 3.7; ordinary H-projectivity supplied by the new Stacks input. Composition and log etaleness of saturated log blowup towers: existing node lem-per-log-smooth-composition-strict-base-change."
+  "place": "VI 1.7--1.8, VIII 3.3.15 and 3.4.4--3.4.9. G5 Lean assembly from the monoidal tower and generic log calculus/regularity theorems, with projectivity and dense-open comparison split into two strictly smaller fixed-tower statements. No normalized-blowup identification is used."
  },
  "mathlib_searches": [
   {
@@ -155,6 +142,62 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: the returned signatures concern ordinary normalization, ordinary smooth or etale maps, categorical projective objects or projective measure limits; none states this logarithmic theorem or global normalized-blowup projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "LogBlow|logarithmic.*blow|log.*tautological",
+   "results": "Mathlib/AlgebraicGeometry: none",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The universal fine logarithmic blowup is proper with an ample tautological line bundle locally given by the monoid Rees algebra Proj",
+   "results": "reesAlgebra, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsProper.instMorphismRestrict, AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.IsProper.toLocallyOfFiniteType",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogBlowup\", \"IsAmple\"",
+   "results": "none",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A logarithmic blowup along a coherent monoid ideal carries its tautological relatively ample invertible sheaf and is proper; saturation is finite",
+   "results": "AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Proj.valuativeCriterion_existence, AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|LogBlowup|logarithmic.*resolution",
+   "results": "Mathlib/AlgebraicGeometry: none",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmic desingularization of a log regular scheme by projective saturated log blowups preserves log smoothness and gives a regular integral scheme",
+   "results": "AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.FormallySmooth.localization_base, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, RingHom.FormallySmooth.localizationPreserves, Algebra.FormallySmooth.localization_map, RingHom.isStandardSmooth_localizationPreserves",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\", \"LogBlowup\"",
+   "results": "none",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral log regular quasi-projective fs log scheme has a finite tower of saturated log blowups that is projective and birational with regular integral source and is log etale",
+   "results": "AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsSmooth",
+   "date": "2026-10-24",
+   "verdict": "no match: ordinary scheme Proj, normalization, smoothness or etaleness results do not state saturated logarithmic blowup resolution"
   }
  ],
  "mathlib_match": null,
@@ -184,78 +227,196 @@
   "same_as": [],
   "is": null
  },
+ "lean_removed": {
+  "commit": "e7ce5f35a7d",
+  "path": "lean/Sheaf/AlgebraicGeometry/LogRegularProjectiveLogResolution.lean",
+  "module": "Sheaf.AlgebraicGeometry.LogRegularProjectiveLogResolution",
+  "declaration": "AlgebraicGeometry.exists_logRegular_projective_log_resolution",
+  "reason": "module deleted as dead (no target reaches it by imports; this node is not reached either); the declaration does not live on elsewhere, so the node has no Lean statement",
+  "former_note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.LogRegularProjectiveLogResolution deleted (dead: no target reaches it); this node is not reached either."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "split_report": {
-  "date": "2026-10-19",
+  "date": "2026-10-24",
   "item": "lem-per-log-regular-projective-log-resolution",
   "worker": "stage1",
-  "summary": "Statement unchanged. Reuses the existing monoidal tower, normalized-blowup comparison, sharp charts, divisorial structure and free-characteristic criterion. Writes the scheme induction, global projectivity, birationality, direct log etale chart check and universal relative log smoothness explicitly. One new statement-only generic input (reviewer FIX: the composition node duplicated lem-per-log-smooth-composition-strict-base-change and was dropped), no Mathlib leaves. Retains previous searches.",
-  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: XVI 3.7, final geometric step: logarithmic blowup of X double-prime/H with regular total space. Steps 1--3 expand the monoidal resolution and normalized blowup geometry; Steps 4--5 supply the log etale and relative log smooth clauses.",
+  "summary": "Reconstructed the reopened geometric interface independently. Statement, source, statement dependencies, historical searches and blueprint provenance are preserved; genuine Q160 searches are appended. Used permitted monoidal resolution, explicit saturated charts and their tautological polarizations; proved stage properness and bundle projectivity, upgraded over the ample quasi-projective base, verified log regularity pointwise by the formal-chart theorem, and proved regularity, dense-open birationality and integrality. No new nodes, no old proof closure, no Lean or builds.",
+  "blueprint": "The existing recorded ancestor and via chain are preserved as historical provenance. The current latest ancestor proof Step 3 no longer spells out this log-resolution construction; this re-admitted standalone interface is justified by the explicit Q108 repair order and ILO XVI 3.7 final geometric step, realized below the unit by VIII monoidal resolution, chart geometry, and VI log calculus.",
   "tool_uses": [
    {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Generic tool: Scalar extension of affine Proj with its chart maps. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lemma-nagata-immersion-shrink-to-closed-exists",
+    "why": "Generic tool: Existence of a quasi-compact closed-immersion neighbourhood. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-proj-qc-open-twist-ample",
+    "why": "Generic tool: Sufficiently divisible positive twists are ample on a quasi-compact Proj open. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-ample-restrict-closed-immersion",
+    "why": "Generic tool: Ampleness restricts to closed subschemes. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
     "node": "lem-trf-log-regular-sharp-chart",
-    "why": "Sharp saturated characteristic charts are a generic log-geometry input, not a replacement of a perverse-curve unit step."
+    "why": "Generic tool: Charts modeled on the sharp characteristic of a log regular scheme. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
    },
    {
     "node": "lem-trf-monoidal-resolution-tower",
-    "why": "Monoidal desingularization is the source-prescribed geometric input of the existing alteration branch; no cohomology or trace result is used."
-   },
-   {
-    "node": "lem-trf-log-blowup-normalization",
-    "why": "The generic normalized-blowup description and preservation of log regularity supply the induction step."
-   },
-   {
-    "node": "lem-trf-log-regular-divisorial-structure",
-    "why": "The dense triviality locus is a generic local logarithmic geometry fact needed for birationality."
-   },
-   {
-    "node": "lem-trf-free-characteristic-regular-boundary",
-    "why": "The generic free-characteristic regularity criterion converts the resolved monoids to regular total space."
+    "why": "Generic tool: Monoidal resolution of characteristic monoids. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
    },
    {
     "node": "lem-trf-coherent-log-ideal-chart-construction",
-    "why": "The generic saturated blowup charts give the direct log etaleness test."
+    "why": "Generic tool: Coherent log ideals and their unsaturated and saturated chart gluings. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
    },
    {
-    "node": "lem-trf-h-projective-composition",
-    "why": "Global projectivity composition is a generic scheme-geometric tool."
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic tool: Finite affine chart cover. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lemma-nagata-global-blowup-proper-local",
+    "why": "Generic tool: Local properness of the global blow-up. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic tool: Every small etale covering family is an fpqc covering. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-weil-pbc-proper-morphism-fpqc-descent",
+    "why": "Generic tool: Proper morphisms descend along fpqc coverings. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-log-ideal-chart-lifting-criterion",
+    "why": "Generic tool: Local lifting criterion for ideal-fraction and saturated log charts. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-principal-log-ideal-tautological-polarization",
+    "why": "Generic tool: Generator torsor and tautological ample module of a principal log ideal. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-polarized-fine-log-etale-descent",
+    "why": "Generic tool: Effective etale descent of fine log schemes with a compatible polarization. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sfb-space-relative-ampleness-fpqc-descent",
+    "why": "Generic tool: Relative ampleness of spaces descends fpqc locally. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sfb-proper-relative-ample-projective-bundle",
+    "why": "Generic tool: Proper morphisms with a relatively ample invertible module over a qcqs base are projective. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sfb-projective-bundle-composition",
+    "why": "Generic tool: Composition of projective-bundle morphisms over a qcqs base. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic tool: Projective-bundle projectivity over an ample base implies H-projectivity. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-log-regular-completed-chart",
+    "why": "Generic tool: Completed local charts of an fs log regular scheme. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-trf-formal-chart-geometric-regularity",
+    "why": "Generic tool: Formal toric models give log regular geometric stalks. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic tool: Strict henselization preserves Noetherianity of local rings. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic tool: Strict henselization preserves regular local rings. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic tool: Strict henselization preserves local Krull dimension. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic tool: Regular local rings are domains. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
+   },
+   {
+    "node": "lem-sfb-log-smooth-composition-strict-base-change",
+    "why": "Generic tool: Composition and strict base change in logarithmic smoothness. Used with the hypotheses verified in the proof for chart construction, descent, projectivity or local algebra; the Fourier unit has no such geometric tool. Q108 explicitly re-admitted this interface."
    }
   ]
  },
  "tool_uses": [
+  "lem-nagata-affine-proj-scalar-extension",
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-trf-ample-restrict-closed-immersion",
   "lem-trf-log-regular-sharp-chart",
   "lem-trf-monoidal-resolution-tower",
-  "lem-trf-log-blowup-normalization",
-  "lem-trf-log-regular-divisorial-structure",
-  "lem-trf-free-characteristic-regular-boundary",
   "lem-trf-coherent-log-ideal-chart-construction",
-  "lem-trf-h-projective-composition"
+  "prop-nagata-affine-blowup-chart-cover",
+  "lemma-nagata-global-blowup-proper-local",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-proper-morphism-fpqc-descent",
+  "lem-trf-log-ideal-chart-lifting-criterion",
+  "lem-trf-principal-log-ideal-tautological-polarization",
+  "lem-trf-polarized-fine-log-etale-descent",
+  "lem-sfb-space-relative-ampleness-fpqc-descent",
+  "lem-sfb-proper-relative-ample-projective-bundle",
+  "lem-sfb-projective-bundle-composition",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-log-regular-completed-chart",
+  "lem-trf-formal-chart-geometric-regularity",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-regular-local-domain",
+  "lem-sfb-log-smooth-composition-strict-base-change"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-cc-Q25-d1961ff61",
-  "group": "Q25",
+  "reviewer": "NT-cc-Q160-7f62a01ce",
+  "group": "Q160",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-d1961ff61 (reviewer sub-agent of L); spot-checked: One fault, C5: the new node lem-per-log-smooth-etale-composition duplicates the existing base node lem-per-log-smooth-composition-strict-base-change (Q18, same unit, stmt_deps only two definitions, so no cycle). That node already states: log etale implies log smooth; log smooth maps compose; a log etale map followed by a log smooth map is log smooth; saturated log blowups and finite towers of them (length zero allowed) are log etale. The worker's not-duplicates list does not mention it. Fix: I dropped the node and rewrote Step 5 of the item to cite the existing node. Its tower clause makes b log etale and its mixed-composition clause makes g∘b log smooth. I updated proof_deps, the split_report summary and the proof_origin place; the statement and Steps 1-4 are unchanged. Source and step checks. ILO XVI 3.7 (p.254) states this exact projective, birational, log etale resolution, with X''/H log smooth over T. VIII 3.4.6(i) and 3.4.8-3.4.9 identify the saturated monoidal tower with normalized blowups. VIII 3.3.11 gives log etaleness. VI 1.6-1.7 give the sharp chart and the free-characteristic regularity criterion. Step 1: the torsion-freeness argument (h and -h both in P by saturation, then sharpness) is correct, and the monoidal-tower node's hypotheses (fs, qc, locally Noetherian, torsion-free characteristic groups) hold. Step 2: the induction claim, base and step are stated, and the blowup-normalization hypotheses (integral, locally Noetherian, log regular) are in force. Step 3: regularity and density come from VI 1.7, birationality from U_n ≅ U, H-projectivity by 01WE, and n=0 via P^0_V=V. Step 4: (Q_e^sat)^gp = P^gp, so kernel and cokernel are 0 and the comparison map is the identity; an elementary chart check, accepted. The remaining new node, lem-per-excellent-quasiprojective-normalized-blowup, is true: 02ND gives integrality, 02NS projectivity, excellence makes X Nagata so the normalization is finite (035S), and the ample sheaf gives H-projectivity (087S); quasi-projectivity follows via Segre, and birationality from the normal locus being open with V(J) proper. Small cases checked: J=O_X gives the normalization; normal X with invertible J gives the identity; the blowup of the origin in A^2 is covered; J=0 is excluded. It is not a duplicate of excellent-normalization-preparation (no projectivity) or of trf normalized-blowup-calculus (over Q only). Batch 5: I computed the full closures of the 7 cited lem-trf nodes, def-trf-fs-log-blowup and def-per-fs-log-smooth-etale. They reach 150 trf nodes, all generic (monoids and fans, toric resolution over Q, algebraic spaces, Proj, Tor, log charts), and no thm/cor/prop/sk/nt node of the trace formula or Poincare duality. Each flagged citation is general log or scheme geometry (VI 1.4/1.6/1.7, VIII 3.3.5-3.3.15/3.4.6, Stacks 01WE, two definitions), not a step of either assumption, so I accepted the flags. The two flags on the composition node go with the dropped node. I accept the split_report tool_uses (six generic log tools plus 01WE). There is no SGA source.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-7f62a01ce (reviewer sub-agent of L); spot-checked: Fresh stage-1 split of the item re-admitted by the Q108 repair note: 11 steps and no new nodes. Compared with side-live, only the split fields changed; statement, source, stmt_deps, blueprint and the historical searches are preserved, and 8 new searches are appended. The item's closure has 10806 nodes and contains no id from the drop list. It does not use the excluded normalized-blowup route or any SGA source. Source check: ILO VIII 3.4.4, 3.4.6(i) and 3.4.8-3.4.9 (pp.110-112) and XVI 3.7 (pp.254-255: 'log-eclatement ... log-etale, projectif et birationnel, X''' regulier', log smooth over T) match the statement. Step checks: (1) P(n;B)=B x Proj Z[T] is identified with Proj A[T] through the scalar-extension node; shrinking to a quasi-compact open, the ample twist and restriction to the closed subscheme give an ample bundle on V. (2) A sharp saturated monoid has torsion-free group, so the monoidal-resolution hypotheses hold. (3) Z[P][L/z^e]=Z[Q_e] inside Z[P^gp] even when the group has torsion, so the fine blowup is a base change of a toric blowup and is proper over each chart. (4) Saturation is finite, which with fpqc descent gives properness of each stage; Noetherian and quasi-separated follow by induction. (5)-(6) Tautological polarization on each chart is canonical and generator-independent, so it glues; descent gives relative ampleness, then projective-bundle projectivity, composition over the qcqs base V, and H-projectivity from the ample bundle of step 1. (7) The formal-chart theorem applies with R=S=P, G=0, epsilon=1; h^{-1}(F)=0 because A->B is local; the completed forms come from the completed-chart node. (8) A characteristic monoid N^r gives a maximal ideal generated by r+d elements, hence regularity, descended from the strict henselization. (9) The trivial-characteristic locus is open and contains every generic point (rank 0 there), so it is dense. (10) That locus is preserved and reflected by each blowup, and the blowup is the identity over it, so b is birational; Y is irreducible and reduced, hence integral. (11) The log-calculus node gives that the tower is log etale and that the composite with a log-smooth map is log smooth. I tested length 0, P=0, a unit centre, r=d=0 and the A_1 singularity xy=z^2; no step fails. Duplicates: lem-trf-log-regular-desingularization is narrower (algebraically closed field, proper only); lem-per-gabber-log-blowup-regularization is on the drop list. Batch 5: none of the 16 flagged citations is a trace-formula or Poincare-duality step. The proof-only closures of sk-thm-trace-transport, cor-trf-point-counting and nt-target-poincare-isiso are disjoint from the item's closure. Every flagged node is a generic tool (Proj ampleness, log charts, monoidal resolution, log-blowup construction and descent, projectivity conventions, finitely generated groups, log calculus); the sfb nodes reach only trf definitions, and 5 generic pod module-foundation nodes are reached through the monoidal-resolution tower. All accepted. The 25 declared tool_uses are accepted as generic black boxes, since the Fourier unit gives none of them. No changes."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.LogRegularProjectiveLogResolution",
-  "declaration": "AlgebraicGeometry.exists_logRegular_projective_log_resolution",
-  "file": "lean/Sheaf/AlgebraicGeometry/LogRegularProjectiveLogResolution.lean",
-  "statement": "theorem exists_logRegular_projective_log_resolution (A : Type u) [CommRing A] [IsNoetherianRing A] (hA : IsExcellent A) (V : FineSaturatedLogScheme.{u}) [IsIntegral V.scheme] (hV : V.IsLogRegular) (s : V.scheme ⟶ Spec (.of A)) [LocallyOfFiniteType s] [QuasiCompact s] (hquasi : ∃ (n : ℕ) (i : V.scheme ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A) = s) : ∃ T : SaturatedLogBlowupTower.{u}, T.level 0 = V ∧ ∃ p : ∀ i : Fin (T.length + 1), EtaleLogHom (T.level i) (T.level 0), ∃ hId : (p 0).base = 𝟙 (T.level 0).scheme, (∀ (W U : (T.level 0).scheme.Etale) (k : U.left ⟶ W.left) (hk : k ≫ W.hom = U.hom ≫ (p 0).base), (p 0).sectionMap W U k hk = ((T.level 0).logStructure.monoidSheaf.obj.map (MorphismProperty.Over.homMk k (by exact hk.trans ((congrArg (fun f ↦ U.hom ≫ f) hId).trans (Category.comp_id U.hom)))).op).hom) ∧ (∀ i : Fin T.length, (T.arrow i).CompEq (p i.castSucc) (p i.succ)) ∧ ∃ b : EtaleLogHom (T.level ⟨T.length, Nat.lt_succ_self T.length⟩) V, HEq (p ⟨T.length, Nat.lt_succ_self T.length⟩) b ∧ IsHProjective b.base ∧ IsIntegral (T.level ⟨T.length, Nat.lt_succ_self T.length⟩).scheme ∧ IsRegularScheme (T.level ⟨T.length, Nat.lt_succ_self T.length⟩).scheme ∧ (∃ (U : V.scheme.Opens) (W : (T.level ⟨T.length, Nat.lt_succ_self T.length⟩).scheme.Opens) (e : W.toScheme ≅ U.toScheme), Dense (U : Set V.scheme) ∧ Dense (W : Set (T.level ⟨T.length, Nat.lt_succ_self T.length⟩).scheme) ∧ e.hom ≫ U.ι = W.ι ≫ b.base) ∧ b.IsLogEtale ∧ ∀ (D : FineSaturatedLogScheme.{u}) (g : EtaleLogHom V D), g.IsLogSmooth → ∃ c : EtaleLogHom (T.level ⟨T.length, Nat.lt_succ_self T.length⟩) D, b.CompEq g c ∧ c.IsLogSmooth",
-  "branch": "newtargets-dag",
-  "by": "NG",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "2026-10-20 (U): module Sheaf.AlgebraicGeometry.LogRegularProjectiveLogResolution deleted (dead: no target reaches it); this node is not reached either."
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveLogRegularResolution",
+  "declaration": "AlgebraicGeometry.exists_projective_log_regular_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveLogRegularResolution.lean",
+  "statement": "theorem exists_projective_log_regular_resolution (A : Type u) [CommRing A] [IsNoetherianRing A] (hA : IsExcellent A) (V : FineSaturatedLogScheme.{u}) [IsIntegral V.scheme] (hV : V.IsLogRegular) (f : V.scheme ⟶ Spec (.of A)) [LocallyOfFiniteType f] [QuasiCompact f] (hqp : ∃ (n : ℕ) (i : V.scheme ⟶ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A))), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (n + 1)); Spec (.of A)) ↘ Spec (.of A) = f) : ∃ (T : SaturatedLogBlowupTower.{u}) (p : ∀ i : Fin (T.length + 1), EtaleLogHom (T.level i) V), T.level 0 = V ∧ HEq (p 0) (EtaleLogHom.id V) ∧ (∀ i : Fin T.length, (T.arrow i).CompEq (p i.castSucc) (p i.succ)) ∧ IsHProjective (p (Fin.last T.length)).base ∧ (∃ (U : (T.level (Fin.last T.length)).scheme.Opens) (W : V.scheme.Opens) (e : U.toScheme ≅ W.toScheme), Dense (U : Set (T.level (Fin.last T.length)).scheme) ∧ Dense (W : Set V.scheme) ∧ U.ι ≫ (p (Fin.last T.length)).base = e.hom ≫ W.ι) ∧ IsIntegral (T.level (Fin.last T.length)).scheme ∧ IsRegularScheme (T.level (Fin.last T.length)).scheme ∧ (p (Fin.last T.length)).IsLogEtale ∧ ∀ (D : FineSaturatedLogScheme.{u}) (g : EtaleLogHom V D), g.IsLogSmooth → ((p (Fin.last T.length)).comp g).IsLogSmooth",
+  "branch": "sheaf-dag",
+  "by": "Q63",
+  "date": "2026-10-24",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-18",
+  "date": "2026-10-24",
   "by": "L",
-  "reviewer": "NT-stage2-cc-f24fb084f",
-  "group": "NG",
+  "reviewer": "NT-stage2-cc-a841a8619",
+  "group": "Q63",
   "result": "pass",
-  "note": "Item node changed only in its lean record, and lean.statement matches the file verbatim. Every hypothesis matches the node's recorded declaration: excellent Noetherian A, Spec A, integral log regular V : FineSaturatedLogScheme, finite type as LocallyOfFiniteType plus QuasiCompact, quasi-projective as an IsImmersion into ℙ(ULift (Fin (n+1)); Spec A) over the base. All conclusion clauses are present: a SaturatedLogBlowupTower with level 0 = V (length 0 allowed); IsHProjective composite; Y integral and IsRegularScheme; birationality as an isomorphism between dense opens; IsLogEtale; and for every D and log-smooth g, some c with b.CompEq g c and c log smooth. The cumulative maps p are pinned to the identity at level 0 and to the step composites by CompEq, which determines composites uniquely, so they are not arbitrary; HEq only transports the endpoint along T.level 0 = V. Edge cases checked: length 0, n = 0, no extra assumptions or universe restriction. No composite API or existing theorem duplicates this. The 7 stated proof_dep modules are imported non-publicly; the 3 unstated proof_deps have no lean record and are correctly not imported. nt_compile --json: 3.8 s, exit 0, no errors or warnings. No findings."
+  "note": "Re-delivery after H2 RETURN (7c0ce40d52e8). Lean module byte-identical. Item node vs side-live differs only by the lean record and stmt_deps += def-per-log-morphism-identity, def-per-log-morphism-composition (definition nodes in the snapshot owning EtaleLogHom.id / EtaleLogHom.comp, LogMorphismOperations.lean:140/145). The theorem node lem-sfb-log-morphism-operations is removed. proof_deps and statement unchanged. Re-checked all clauses: CompEq order p_{i+1} = arrow_i ≫ p_i, diagrammatic comp, IsHProjective finite P^N convention, dense-open iso commuting with b, IsRegularScheme, D/g quantified after the tower, length 0 allowed, universes explicit. Proof only sorry; docstrings give source and blueprint. Report sections present. No compile (no file changed)."
  },
- "lean_audit": {}
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261026T081929-L-2103670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

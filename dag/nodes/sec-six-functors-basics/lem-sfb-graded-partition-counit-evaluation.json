@@ -1,0 +1,247 @@
+{
+ "id": "lem-sfb-graded-partition-counit-evaluation",
+ "kind": "statement",
+ "title": "Augmentation projections of weighted subset-partition sums",
+ "statement": "Let $E$ be a finite set, $X$ a set, and $V_n$ the free abelian group on symbols $[x,I]$ with $x\\in X$, $I\\subseteq E$ and $|I|=n$, for $n\\geq0$, extended by zero for $n<0$ [def-weil-pbc-free-module]. For each subset $A\\subseteq E$ choose a function $t_A:X\\to X$ with $t_\\varnothing=\\mathrm{id}_X$. For every ordered pair of disjoint subsets choose an integer $c(A,B)$ such that $c(\\varnothing,I)=c(I,\\varnothing)=1$. In the total graded tensor group $T_n=\\bigoplus_{a+b=n}V_a\\otimes_{\\mathbf Z}V_b$, using [def-weil-pbc-module-tensor-product], define the degree-preserving homomorphism\n$$P[x,I]=\\sum_{A\\sqcup B=I}c(A,B)[x,A]\\otimes[t_A(x),B].$$\nLet $e:V\\to\\mathbf Z[0]$ be $e[x,\\varnothing]=1$ in degree zero and zero in all other degrees. Here $\\mathbf Z[0]$ is $\\mathbf Z$ in degree zero and zero elsewhere. The canonical graded unit maps\n$$U_L:\\mathbf Z[0]\\otimes V\\longrightarrow V,\\quad n\\otimes z\\longmapsto nz,\\qquad U_R:V\\otimes\\mathbf Z[0]\\longrightarrow V,\\quad z\\otimes n\\longmapsto nz$$\nare isomorphisms with inverses $z\\mapsto1\\otimes z$ and $z\\mapsto z\\otimes1$. The projections of $P$ satisfy, on every generator,\n$$(e\\otimes1)P[x,I]=1\\otimes[x,I],\\qquad(1\\otimes e)P[x,I]=[x,I]\\otimes1.$$\nIn the first projection all terms with $A\\ne\\varnothing$ vanish; in the second all terms with $B\\ne\\varnothing$ vanish. Under $\\mathbf Z\\otimes\\mathbf Z\\cong\\mathbf Z$, the double projection is\n$$(e\\otimes e)P[x,I]=\\begin{cases}1&I=\\varnothing,\\\\0&I\\ne\\varnothing.\\end{cases}$$\nIn particular $U_L(e\\otimes1)P=1_V=U_R(1\\otimes e)P$ and $(e\\otimes e)P=e$ as graded homomorphisms.\nIf $d_n:V_n\\to V_{n-1}$ makes $V$ a chain complex [def-weil-pbc-module-chain-complex-homology] and $e_0d_1=0$, equip tensors with $d_T(x\\otimes y)=dx\\otimes y+(-1)^a x\\otimes dy$ for $x\\in V_a$. Then $e$, $e\\otimes1$, $1\\otimes e$, $e\\otimes e$, and the unit isomorphisms $U_L,U_R$ and their inverses commute with the differentials. No assertion that $P$ commutes with $d$ is assumed or made. These statements also hold when $E$ or $X$ is empty. If $E=\\varnothing$ and $X=\\{x\\}$, then $V_0\\cong\\mathbf Z$ by $[x,\\varnothing]\\mapsto1$, all positive degrees vanish, and $P(1)=1\\otimes1$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Integral cubical chain diagonal, original proof steps 5–6: empty-part projections, tensor unit maps, differential compatibility, and double augmentation, generalized to arbitrary normalized weights and shifts. Agent-written algebraic expansion below paragraph (3); exact external reference WANTED. See the retained original proof in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "Each $I$ has finitely many ordered disjoint partitions: choose $A\\subseteq I$ and put $B=I\\setminus A$. Each summand of $P[x,I]$ has degree $|A|+|B|=|I|$. By the finite-basis-expansion definition in [def-weil-pbc-free-module], extending this prescription to a finite integral linear combination defines a unique homomorphism in each degree. The same argument defines $e$, and all maps from negative source degrees are zero.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "By the bilinear universal property of [def-weil-pbc-module-tensor-product], $(m,z)\\mapsto mz$ and $(z,m)\\mapsto mz$ induce $U_L,U_R$. The maps $z\\mapsto1\\otimes z$ and $z\\mapsto z\\otimes1$ are linear by bilinearity. Their composites with the unit maps are identities because $1z=z$, $1\\otimes(mz)=m\\otimes z$, and $(mz)\\otimes1=z\\otimes m$. Pure tensors generate, so these are inverse homomorphisms. Only degree-zero unit factors are nonzero, giving the graded assertions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "Apply $e\\otimes1$ termwise, using bilinearity from [def-weil-pbc-module-tensor-product]. If $A\\ne\\varnothing$, then $e[x,A]=0$. The only surviving partition is $(\\varnothing,I)$, whose coefficient is $1$ and whose second factor is $[t_\\varnothing(x),I]=[x,I]$. Its image is $1\\otimes[x,I]$. Applying $U_L$ gives $[x,I]$. Equality on all generators extends to $U_L(e\\otimes1)P=1_V$ by [def-weil-pbc-free-module].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "For $1\\otimes e$ the terms with $B\\ne\\varnothing$ vanish. The surviving partition $(I,\\varnothing)$ has coefficient $1$, and $e[t_I(x),\\varnothing]=1$ regardless of $t_I(x)$. Thus its image is $[x,I]\\otimes1$, and $U_R$ gives $[x,I]$. For $e\\otimes e$, both parts must be empty: this is impossible unless $I=\\varnothing$, when the unique term gives $1\\otimes1$, identified with $1$. Bilinearity [def-weil-pbc-module-tensor-product] and basis expansion [def-weil-pbc-free-module] give both homomorphism equalities.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "Assume now the differential hypotheses. The equation for a chain map in [def-weil-pbc-module-chain-complex-homology] gives $ed=0=d e$: the target $\\mathbf Z[0]$ has zero differential, and $e_{n-1}d_n$ is zero unless $n=1$, where it is the assumed $e_0d_1=0$. This includes $n=0$ since $V_{-1}=0$.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "For homogeneous $x\\in V_a$, $y\\in V_b$, the stated tensor differential squares to $d^2x\\otimes y+((-1)^{a-1}+(-1)^a)dx\\otimes dy+x\\otimes d^2y=0$. Terms containing $dx$ vanish at $a=0$. Thus it defines a complex by [def-weil-pbc-module-chain-complex-homology]. Its formula is well-defined by bilinearity [def-weil-pbc-module-tensor-product], and extends from pure tensors to finite sums in the graded direct sum.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "Put $L=e\\otimes1$. On $x\\otimes y$ of bidegree $(a,b)$, $Ld_T(x\\otimes y)=e(dx)\\otimes y+(-1)^a e(x)\\otimes dy$. The first term is zero by step 5. For $a>0$, $e(x)=0$; for $a=0$, the sign is $1$, so the remaining term is exactly $dL(x\\otimes y)$. For $R=1\\otimes e$, $Rd_T(x\\otimes y)=dx\\otimes e(y)+(-1)^a x\\otimes e(dy)=dx\\otimes e(y)=dR(x\\otimes y)$. Here step 5 kills $e(dy)$, and the target unit differential is zero. Pure tensors generate [def-weil-pbc-module-tensor-product], so both are chain maps in the sense of [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "For the double projection, applying $e\\otimes e$ to $d_T(x\\otimes y)$ gives $e(dx)\\otimes e(y)+(-1)^a e(x)\\otimes e(dy)=0$ by step 5, as required for its zero-differential target. For the unit maps and inverses, the four equations are $U_Ld(m\\otimes z)=m\\,dz=d(mz)$, $U_Rd(z\\otimes m)=m\\,dz=d(mz)$, $d(1\\otimes z)=1\\otimes dz$, and $d(z\\otimes1)=dz\\otimes1$. Thus all commute with differentials; generation by pure tensors [def-weil-pbc-module-tensor-product] gives the equations on the whole modules, exactly the chain-map criterion [def-weil-pbc-module-chain-complex-homology].",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  },
+  {
+   "text": "If $X=\\varnothing$, every free module is zero by [def-weil-pbc-free-module], so the identities hold on the zero groups. If $E=\\varnothing$, only $I=\\varnothing$ occurs, so all positive degrees vanish and its unique partition gives $P[x,\\varnothing]=[x,\\varnothing]\\otimes[x,\\varnothing]$. For $X=\\{x\\}$, the basis identification $[x,\\varnothing]\\mapsto1$ gives $V_0\\cong\\mathbf Z$ and $P(1)=1\\otimes1$. No step requires $P$ to commute with the differentials.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: agent-written elementary algebra below the tame-boundary route; the blueprint paragraph itself contains no partition-diagonal formula."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a graded free abelian group on pairs of vertices and finite direction sets a partition sum has counit given by the unique empty part",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MvPolynomial.psumPart_zero\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs\", \"type\": \"∀ (σ : Type u_5) (R : Type u_6) [inst : CommSemiring R] [inst_1 : Fintype σ],\\n  MvPolynomial.psumPart σ R (Nat.Partition.indiscrete 0) = 1\", \"doc\": \"For any commutative semiring $ R $ and any type $ \\\\sigma $, the product of power sum symmetric polynomials corresponding to the indiscrete partition of 0 (i.e., the partition consisting of the single \"}\n  {\"name\": \"MvPolynomial.psumPart_indiscrete\", \"module\": \"Mathlib/RingTheory/MvPolynomial/Symmetric/Defs\", \"type\": \"∀ (σ : Type u_5) (R : Type u_6) [inst : CommSemiring R] [inst_1 : Fintype σ] {n : ℕ},\\n  n ≠ 0 → MvPolynomial.psumPart σ R (Nat.Partition.indiscrete n) = MvPolynomial.psum σ R n\", \"doc\": \"For any non-zero natural number $ n $, the product of power sum symmetric polynomials corresponding to the indiscrete partition of $ n $ in the multivariate polynomial ring $ R[\\\\sigma] $ equals the po\"}\n  {\"name\": \"OrderedFinpartition.instUniqueZero\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"Unique (OrderedFinpartition 0)\", \"doc\": \"The type of ordered finite partitions of $0$ has a unique element, namely the empty partition. This instance asserts that there is exactly one ordered finite partition of the natural number $0$, which\"}\n  {\"name\": \"Nat.Partition.indiscrete\", \"module\": \"Mathlib/Combinatorics/Enumerative/Partition/Basic\", \"type\": \"(n : ℕ) → n.Partition\", \"doc\": \"The partition of a natural number $ n $ consisting of the single part $ n $, constructed by taking the multiset $ \\\\{n\\\\} $ and verifying its sum equals $ n $.\"}\n  {\"name\": \"OrderedFinpartition.default_eq\", \"module\": \"Mathlib/Analysis/Calculus/ContDiff/FaaDiBruno\", \"type\": \"∀ {n : ℕ}, default = OrderedFinpartition.atomic n\", \"doc\": \"For any natural number $ n $, the default ordered finite partition of $ n $ coincides with the atomic ordered finite partition, which consists of $ n $ singleton sets each containing exactly one eleme\"}\n  {\"name\": \"Nat.Partition.UniquePartitionZero\", \"module\": \"Mathlib/Combinatorics/Enumerative/Partition/Basic\", \"type\": \"Unique (Nat.Partition 0)\", \"doc\": \"The type of partitions of the natural number zero has a unique element, which is the empty partition. This instance asserts that every partition of zero is equal to the canonical empty partition, maki\"}\n  {\"name\": \"Nat.Partition.ofSym_one\", \"module\": \"Mathlib/Combinatorics/Enumerative/Partition/Basic\", \"type\": \"∀ {σ : Type u_1} [inst : DecidableEq σ] (s : Sym σ 1), Nat.Partition.ofSym s = Nat.Partition.indiscrete 1\", \"doc\": \"For any singleton symmetric multiset $ s $ of size 1 over a type $ \\\\sigma $, the partition generated by $ \\\\text{ofSym}(s) $ is equal to the indiscrete partition $ \\\\{1\\\\} $.\"}\n  {\"name\": \"Nat.Partition.instInhabited\", \"module\": \"Mathlib/Combinatorics/Enumerative/Partition/Basic\", \"type\": \"{n : ℕ} → Inhabited n.Partition\", \"doc\": \"For every natural number $ n $, the type of partitions of $ n $ is inhabited, with the indiscrete partition (consisting of the single part $ n $) as a canonical element.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: graded-ring decompositions, integer partitions and existing coalgebra counits do not state weighted subset-partition evaluation or construct this diagonal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A signed subset partition diagonal on a nonnegative graded module has left and right augmentations the identity and its double augmentation is the vertex augmentation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DirectSum.decompose_one\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {A : Type u_3} {σ : Type u_4} [inst : DecidableEq ι] [inst_1 : AddMonoid ι] [inst_2 : Semiring A]\\n  [inst_3 : SetLike σ A] [inst_4 : AddSubmonoidClass σ A] (𝒜 : ι → σ) [inst_5 : GradedRing 𝒜],\\n  (DirectSum.decompose 𝒜) 1 = 1\", \"doc\": \"The decomposition of the multiplicative identity element $1$ in the graded ring $A$ corresponds to the element of the direct sum $\\\\bigoplus_{i \\\\in \\\\iota} \\\\sigma_i$ that has $1$ in the zeroth graded co\"}\n  {\"name\": \"DirectSum.decompose_symm_one\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {A : Type u_3} {σ : Type u_4} [inst : DecidableEq ι] [inst_1 : AddMonoid ι] [inst_2 : Semiring A]\\n  [inst_3 : SetLike σ A] [inst_4 : AddSubmonoidClass σ A] (𝒜 : ι → σ) [inst_5 : GradedRing 𝒜],\\n  (DirectSum.decompose 𝒜).symm 1 = 1\", \"doc\": \"The inverse of the decomposition equivalence maps the multiplicative identity element of the direct sum $\\\\bigoplus_{i \\\\in \\\\iota} \\\\mathcal{M}(i)$ to the multiplicative identity element $1$ of the origi\"}\n  {\"name\": \"DirectSum.coe_decompose_mul_of_left_mem\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {A : Type u_3} {σ : Type u_4} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] {a b : A} {i : ι} [inst_8 : Sub ι\", \"doc\": \"In a graded ring $ A $ indexed by an additive monoid $ \\\\iota $, if $ a $ belongs to the $ i $-th graded component $ \\\\mathcal{A}_i $, then for any $ b \\\\in A $ and index $ n $, the $ n $-th component of\"}\n  {\"name\": \"DirectSum.coe_decompose_mul_of_left_mem_of_le\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {A : Type u_3} {σ : Type u_4} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] {a b : A} {n i : ι} [inst_8 : Sub\", \"doc\": \"In a graded ring $ A $ decomposed as a direct sum of its graded components $ \\\\mathcal{A}_i $, if $ a \\\\in \\\\mathcal{A}_i $ and $ i \\\\leq n $, then the $ n $-th component of the product $ a \\\\cdot b $ equa\"}\n  {\"name\": \"CliffordAlgebra.GradedAlgebra.ι\", \"module\": \"Mathlib/LinearAlgebra/CliffordAlgebra/Grading\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : AddCommGroup M] →\\n        [inst_2 : Module R M] →\\n          (Q : QuadraticForm R M) → M →ₗ[R] DirectSum (ZMod 2) fun i => ↥(CliffordAlgebra.evenOdd Q i)\", \"doc\": \"The canonical $ R $-linear map embedding an $ R $-module $ M $ into the $ \\\\mathbb{Z}/2 $-graded structure of its Clifford algebra, specifically mapping each element of $ M $ to the odd (degree-1) comp\"}\n  {\"name\": \"DirectSum.coe_decompose_mul_of_right_mem\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {A : Type u_3} {σ : Type u_4} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] {a b : A} {i : ι} [inst_8 : Sub ι\", \"doc\": \"In a graded ring $ A $ decomposed as a direct sum of graded components $ \\\\mathcal{A}_i $, if $ b \\\\in \\\\mathcal{A}_i $ and $ a \\\\in A $, then the $ n $-th graded component of the product $ a \\\\cdot b $ is\"}\n  {\"name\": \"TensorProduct.gradedComm_one\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/Graded/External\", \"type\": \"∀ (R : Type u_1) {ι : Type u_2} [inst : CommSemiring ι] [inst_1 : Module ι (Additive ℤˣ)] [inst_2 : DecidableEq ι]\\n  (𝒜 : ι → Type u_3) (ℬ : ι → Type u_4) [inst_3 : CommRing R] [inst_4 : (i : ι) → AddCommGroup (𝒜 i)]\\n  [inst_5 : (i : ι) → AddCommGroup (ℬ i)] [inst_6 : (i : ι) → Module R (𝒜 i)] [inst\", \"doc\": \"The graded commutator between degree 1 components of two graded $ R $-algebras $ \\\\mathcal{A} $ and $ \\\\mathcal{B} $ is trivial, i.e., swapping tensor factors in $ \\\\mathcal{A}(1) \\\\otimes_R \\\\mathcal{B}(1\"}\n  {\"name\": \"DirectSum.coe_decompose_mul_of_right_mem_of_le\", \"module\": \"Mathlib/RingTheory/GradedAlgebra/Basic\", \"type\": \"∀ {ι : Type u_1} {A : Type u_3} {σ : Type u_4} [inst : Semiring A] [inst_1 : DecidableEq ι] [inst_2 : AddCommMonoid ι]\\n  [inst_3 : PartialOrder ι] [CanonicallyOrderedAdd ι] [inst_5 : SetLike σ A] [inst_6 : AddSubmonoidClass σ A]\\n  (𝒜 : ι → σ) [inst_7 : GradedRing 𝒜] {a b : A} {n i : ι} [inst_8 : Sub\", \"doc\": \"In a graded ring $ A $, if $ b $ is an element of the $ i $-th graded component $ \\\\mathcal{A}_i $ and $ i \\\\leq n $, then the $ n $-th component of the decomposition of the product $ a \\\\cdot b $ is equ\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: graded-ring decompositions, integer partitions and existing coalgebra counits do not state weighted subset-partition evaluation or construct this diagonal."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor augmentation and unit isomorphisms of nonnegative chain complexes are chain maps and evaluate a partition sum on its empty factor",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"counit\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"TensorProduct.counit_tmul\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \" {R : Type u_1} {S : Type u_2} {A : Type u_3} {B : Type u_4} [CommSemiring R] [CommSemiring S] [AddCommMonoid A] [AddCommMonoid B] [Algebra R S] [Module R A] [Module S A] [Module R B] [IsScalarTower R S A] [CoalgebraStruct R B] [CoalgebraStruct S A] (x : A) (y : B) : CoalgebraStruct.counit (x ⊗ₜ[R] \", \"doc\": \"\"}\n  {\"name\": \"TensorProduct.counit_def\", \"module\": \"Mathlib.RingTheory.Coalgebra.TensorProduct\", \"type\": \" {R : Type u_1} {S : Type u_2} {A : Type u_3} {B : Type u_4} [CommSemiring R] [CommSemiring S] [AddCommMonoid A] [AddCommMonoid B] [Algebra R S] [Module R A] [Module S A] [Module R B] [IsScalarTower R S A] [CoalgebraStruct R B] [CoalgebraStruct S A] : CoalgebraStruct.counit = ↑(TensorProduct.Algebra\", \"doc\": \"\"}\n  {\"name\": \"Bialgebra.TensorProduct.counitAlgHom_def\", \"module\": \"Mathlib.RingTheory.Bialgebra.TensorProduct\", \"type\": \" (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [CommSemiring R] [CommSemiring S] [Semiring A] [Semiring B] [Bialgebra S A] [Bialgebra R B] [Algebra R A] [Algebra R S] [IsScalarTower R S A] : Bialgebra.counitAlgHom S (TensorProduct R A B) = (↑(Algebra.TensorProduct.rid R S S)).comp (Alg\", \"doc\": \"\"}\n  {\"name\": \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"module\": \"Mathlib.RingTheory.Bialgebra.TensorProduct\", \"type\": \" (R : Type u_1) (S : Type u_2) (A : Type u_3) (B : Type u_4) [CommSemiring R] [CommSemiring S] [Semiring A] [Semiring B] [Bialgebra S A] [Bialgebra R B] [Algebra R A] [Algebra R S] [IsScalarTower R S A] : CoalgebraStruct.counit = ((↑(Algebra.TensorProduct.rid R S S)).comp (Algebra.TensorProduct.map \", \"doc\": \"\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: graded-ring decompositions, integer partitions and existing coalgebra counits do not state weighted subset-partition evaluation or construct this diagonal."
+  },
+  {
+   "tool": "grep",
+   "query": "(partition|powerset|cubical).*(counit|augmentation)|(counit|augmentation).*(partition|powerset|cubical)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: graded-ring decompositions, integer partitions and existing coalgebra counits do not state weighted subset-partition evaluation or construct this diagonal."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of a weighted subset partition diagonal on a free graded abelian group is projection to degree zero",
+   "results": "Actual logged hits: GradedRing.projZeroRingHom_apply, AddMonoidAlgebra.decomposeAux_coe, FreeAbelianGroup.toFinsupp_comp_toFreeAbelianGroup, GradedRing.proj_recompose, MvPolynomial.weightedHomogeneousComponent_directSum, GradedAlgebra.proj_recompose, GradedRing.proj_apply, GradedAlgebra.proj_apply",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern graded ring projections or graded unit constraints, not the weighted subset-partition evaluation and differential clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "(partition|powerset|cubical).*(counit|augmentation)|(counit|augmentation).*(partition|powerset|cubical)",
+   "results": "No hits.",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern graded ring projections or graded unit constraints, not the weighted subset-partition evaluation and differential clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Applying the degree zero augmentation to either factor of a subset partition diagonal leaves only the empty subset term",
+   "results": "Actual logged hits: AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_zero, AlgebraicTopology.AlternatingFaceMapComplex.ε_app_f_succ, Finset.diag_empty, SetLike.GradeZero.subsemiring, Nat.finMulAntidiag_zero_right, DirectSum.of_zero_mul, MvPolynomial.esymmPart_zero, DirectSum.GradeZero.commSemiring",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern graded ring projections or graded unit constraints, not the weighted subset-partition evaluation and differential clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"lid\"",
+   "results": "Actual logged hits: TensorProduct.lid, TensorProduct.lid_eq_rid, TensorProduct.lidOfCompatibleSMul, TensorProduct.comm_trans_lid, TensorProduct.lid_tmul, TensorProduct.lid_symm_apply, TensorProduct.lidOfCompatibleSMul_tmul, TensorProduct.includeRight_lid",
+   "date": "2026-10-23",
+   "verdict": "partial match only: TensorProduct.lid/rid and their evaluation formulas cover ordinary module unit constraints (Associator.lean lines 41–89), not the partition projections or chain compatibility; the proof constructs these elementary inverses directly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An augmentation that sends every vertex to one is a left and right counit for a graded coproduct obtained by summing over disjoint subsets with normalized coefficients",
+   "results": "Actual logged hits: CategoryTheory.GradedObject.Monoidal.rightUnitor, CategoryTheory.GradedObject.Monoidal.leftUnitor, CategoryTheory.GradedObject.Monoidal.tensorUnit, CategoryTheory.GradedObject.mapBifunctorLeftUnitorCofan, CategoryTheory.GradedObject.single₀, CategoryTheory.GradedObject.Monoidal.instHasTensorTensorUnit, CategoryTheory.GradedObject.Monoidal.instHasTensorTensorUnit_1, CategoryTheory.GradedObject.mapBifunctorRightUnitorCofan",
+   "date": "2026-10-23",
+   "verdict": "no match: hits concern graded ring projections or graded unit constraints, not the weighted subset-partition evaluation and differential clauses."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-integral-cubical-chain-diagonal",
+  "date": "2026-10-22",
+  "group": "Q87"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Integral cubical chain diagonal, original proof steps 5–6: empty-part projections, tensor unit maps, differential compatibility, and double augmentation, generalized to arbitrary normalized weights and shifts. Route: paragraph (3), ordinary open direct image, of det-thm-sf-ctf-stability-direct-images; the formula is an agent expansion, not a statement in that paragraph. Ancestor lookup returns None, as for the item.",
+   "via": [
+    "lem-sfb-integral-cubical-chain-diagonal",
+    "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+    "lem-sfb-discrete-lattice-cup-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-graded-partition-counit-evaluation",
+  "worker": "stage1",
+  "summary": "Q149: proved the finite partition projections, tensor-unit inverses, and every differential-commutation equation directly from the three existing definitions. Checked empty sets and arbitrary normalized weights; no new nodes or statement changes. Read current blueprint and recorded fresh Mathlib searches.",
+  "blueprint": "Paragraph (3), open direct image, of det-thm-sf-ctf-stability-direct-images; realizes the empty-part and differential-compatibility subargument in steps 5–6 of the original integral cubical diagonal expansion, which is agent-written and absent from the blueprint paragraph."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-73143c810",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-73143c810 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item JSON plus the report, no new nodes and no fixes. The statement is byte-identical to the live and side-live versions, where the item is still unsplit with no repair note. Only split-owned fields changed (status, proof, proof_deps, proof_origin, split_report, and mathlib_searches, where the old records are kept and new ones appended). The three cited nodes are mathlib-status definitions (def-weil-pbc-free-module, def-weil-pbc-module-tensor-product, def-weil-pbc-module-chain-complex-homology). I read them, and they supply exactly what the steps take: unique basis expansions, the bilinear universal property and generation by pure tensors, and d²=0 with the chain-map equation. Blueprint main-20261015 and latest give an identical direct-images proof file; paragraph (3) has no partition algebra, and the proof is honestly marked by:agent with a WANTED line. I checked the 9 steps by hand. (e⊗1)P keeps only the term (∅,I), using t_∅=id and c(∅,I)=1. (1⊗e)P keeps only (I,∅), using c(I,∅)=1, with t_I arbitrary. (e⊗e)P=e. e∘d=0 holds exactly from e_0d_1=0 and V_{-1}=0. d_T²=0 by the sign cancellation. e⊗1 and 1⊗e are chain maps, with the a=0 sign case handled; U_L, U_R and their inverses are chain maps by Z-linearity. P is correctly not claimed to be a chain map. Small cases checked: I empty, a singleton and a 2-element I with arbitrary weights and shifts; X=∅; E=∅; E=∅ with X={x}. The parent (lem-sfb-integral-cubical-chain-diagonal step 3) instantiates the item with c=ε(A,C) and t_A=+u_A, which meets every hypothesis. Duplicate search over the cubical, partition and augmentation siblings found none: graded-equivariance only overlaps on d_T²=0, which here is an elementary in-step computation, not a duplicate. Only definition nodes are cited, so there is no route issue and no tool_uses. Minor, left unchanged: the step sources name the moving symlink blueprint/latest, which is currently identical to main-20261015."
+ }
+}

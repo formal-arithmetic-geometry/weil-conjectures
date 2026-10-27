@@ -1,0 +1,252 @@
+{
+ "id": "lem-sfb-proper-homogeneous-torus-borel-stabilizer",
+ "kind": "statement",
+ "title": "A torus-fixed point in a proper homogeneous space has a Borel stabilizer through that torus",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field]. All groups are affine group schemes [def-sc-group-scheme] of finite type over $k$ [def-weil-finite-type-morphism], and subgroups are closed subgroup schemes [def-sc-group-scheme-subgroup]. Smoothness and connectedness are as in [def-sbc-smooth-morphisms, def-weil-connected-scheme]. A torus is a group scheme isomorphic to $(\\mathbf G_m)^r$ for an integer $r\\geq0$, with $\\mathbf G_m(A)=A^\\times$ [def-sc-gm-ga]; a maximal torus is a torus subgroup maximal under inclusion. A group is solvable if its successive commutator subgroup schemes eventually become trivial [def-sfb-solvable-group-structure]; a Borel subgroup is a maximal smooth connected solvable subgroup. Let $G$ be smooth and connected, and let $Y$ be a nonempty smooth connected proper finite-type $k$-scheme [def-pc-scheme, def-weil-proper-morphism, def-weil-finite-type-morphism] with an action $a:G\\times_kY\\to Y$ satisfying the unit and multiplication identities. Assume that $G(k)$ acts transitively on $Y(k)$. Let $T\\subseteq G$ be a maximal torus, and let $y\\in Y(k)$ be fixed scheme-theoretically by $T$, meaning that $a(t,y_A)=y_A$ for every commutative $k$-algebra $A$ and every $t\\in T(A)$. There exists a Borel subgroup $B_0\\subseteq G$ containing $T$ and fixing $y$ scheme-theoretically: for every such $A$ and every $b\\in B_0(A)$, $a(b,y_A)=y_A$. No smoothness of the full scheme-theoretic stabilizer of $y$ is assumed.",
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.16 and its proof, printed p.356 (a complete orbit stabilizer contains a Borel); Theorem 17.10, printed pp.354--355 (conjugacy of maximal tori inside the reduced identity stabilizer); proof of Theorem 17.65, printed p.374, sentence asserting a Borel subgroup between T and the parabolic dual-line stabilizer."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-finite-type-morphism",
+  "def-sc-group-scheme-subgroup",
+  "def-sbc-smooth-morphisms",
+  "def-weil-connected-scheme",
+  "def-sc-gm-ga",
+  "def-sfb-solvable-group-structure",
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sfb-borel-subgroup-scheme",
+  "def-sfb-reductive-torus-centralizer-terminology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Borel subgroup $B$ of $G$ by [lem-sfb-borel-conjugation-cover]. Its restricted action on $Y$ has a scheme-theoretically fixed point $z\\in Y(k)$ by [lem-sfb-solvable-proper-fixed-point]: $B$ is smooth connected solvable and $Y$ is nonempty proper of finite type. Transitivity gives $g\\in G(k)$ with $z=gy$. Put $C=g^{-1}Bg$. Conjugation is a group-scheme automorphism and preserves smoothness, connectedness, solvability and maximality, so $C$ is Borel. For every $k$-algebra $A$ and $c=g_A^{-1}bg_A\\in C(A)$, $cy_A=g_A^{-1}bz_A=y_A$. Thus $C$ fixes $y$ scheme-theoretically.",
+   "uses": [
+    "lem-sfb-borel-conjugation-cover",
+    "lem-sfb-solvable-proper-fixed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.16, converse proof, printed p.356; Corollary 17.3, p.353; Definition 17.6, p.353."
+   }
+  },
+  {
+   "text": "Let $H=G_y$ be the closed scheme-theoretic stabilizer supplied by [lem-sfb-homogeneous-orbit-quotient-geometry]. The preceding identity gives $C\\subseteq H$ and the hypothesis gives $T\\subseteq H$, both on all algebras. By [lem-sfb-locally-algebraic-group-identity-component], $K=(H^0)_{\\mathrm{red}}$ is a smooth connected finite-type group scheme. It is a closed subgroup of the affine group $G$, hence affine. No reducedness or smoothness of $H$ is used.",
+   "uses": [
+    "lem-sfb-homogeneous-orbit-quotient-geometry",
+    "lem-sfb-locally-algebraic-group-identity-component"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.10 and reduction to the identity component of the stabilizer; Stacks groupoids.tex Tags 0B7R (proposition-connected-component), 047R (lemma-reduced-subgroup-scheme-perfect), 047P (lemma-reduced-group-scheme-prefect-field-characteristic-p-smooth)."
+   }
+  },
+  {
+   "text": "Both $C$ and $T$ factor through $K$. Indeed $C$ is connected and is reduced by [sbc-lem-smooth-geometrically-reduced] applied over $k$. For $T\\simeq\\mathbf G_m^r$, [lem-trf-split-lattice-torus-projection] with $L=\\mathbf Z^r$ gives a domain coordinate ring $k[L]$, so $T$ is reduced and connected: the zero prime is a generic point, and every nonempty open contains it. The image of either connected group contains the identity and lies in the connected component $H^0$. Since $H^0$ is open, the morphism factors through that open subscheme. On affine opens every nilpotent section pulls back to zero on a reduced source; the quotient description in [def-weil-pbc-scheme-reduction] then gives factorization through $(H^0)_{\\mathrm{red}}$. These factorizations preserve the subgroup embeddings.",
+   "uses": [
+    "sbc-lem-smooth-geometrically-reduced",
+    "lem-trf-split-lattice-torus-projection",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.10, printed pp.354--355, applied to the reduced identity stabilizer; elementary factorization through its open identity component and nilradical quotient."
+   }
+  },
+  {
+   "text": "By [lem-sfb-borel-maximal-torus-conjugacy], the Borel $C$ contains a torus $S$ maximal in $G$. Both $S$ and $T$ are tori in $K$. Each is maximal in $K$, since any strictly larger torus in $K$ would also be a strictly larger torus in $G$. Apply the conjugacy clause of the same node to the smooth connected affine group $K$: there is $h\\in K(k)$ with $hSh^{-1}=T$ as subgroup schemes.",
+   "uses": [
+    "lem-sfb-borel-maximal-torus-conjugacy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Theorem 17.10 and paragraph following Definition 17.12, printed pp.354--355."
+   }
+  },
+  {
+   "text": "Set $B_0=hCh^{-1}$. Conjugation preserves the Borel property, and $T=hSh^{-1}\\subseteq B_0$. Since $h\\in K(k)\\subseteq H(k)$ fixes $y$, for any $k$-algebra $A$ and $b=h_Ach_A^{-1}\\in B_0(A)$ the action identities give $by_A=h_Ac(h_A^{-1}y_A)=h_Acy_A=h_Ay_A=y_A$. This proves every asserted containment and fixed-point identity, including on nonreduced test algebras.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+    "place": "Proof of Theorem 17.65, printed p.374, the containment T in a Borel in the parabolic stabilizer; final conjugation calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-borel-conjugation-cover",
+  "lem-sfb-solvable-proper-fixed-point",
+  "lem-sfb-homogeneous-orbit-quotient-geometry",
+  "lem-sfb-locally-algebraic-group-identity-component",
+  "sbc-lem-smooth-geometrically-reduced",
+  "lem-trf-split-lattice-torus-projection",
+  "def-weil-pbc-scheme-reduction",
+  "lem-sfb-borel-maximal-torus-conjugacy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Theorem 17.16 (converse proof), Theorem 17.10 and paragraph after Definition 17.12; reduced identity component made explicit using Stacks Tags 0B7R, 047R, 047P."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a smooth connected affine algebraic group acting transitively on a proper variety the stabilizer of a point fixed by a maximal torus contains a Borel subgroup containing that torus",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [Nontrivial X] [MulAction.IsPreprimitive G X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a)\", \"doc\": \"Let $G$ be a group acting on a non-trivial set $X$. If the action is preprimitive, then for any element $a \\\\in X$, the stabilizer subgroup of $a$ is a maximal subgroup of $G$.\"}\n  {\"name\": \"MulAction.IwasawaStructure.T\", \"module\": \"Mathlib/GroupTheory/GroupAction/Iwasawa\", \"type\": \"{M : Type u_1} →\\n  [inst : Group M] → {α : Type u_2} → [inst_1 : MulAction M α] → MulAction.IwasawaStructure M α → α → Subgroup M\", \"doc\": \"Given a group $M$ acting on a type $\\\\alpha$, the function $T$ maps each element $a \\\\in \\\\alpha$ to a subgroup of $M$ defined by the Iwasawa structure on the group action. Specifically, for each $a$, $T\"}\n  {\"name\": \"normalClosure_of_stabilizer_eq_top\", \"module\": \"Mathlib/GroupTheory/GroupAction/Jordan\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α],\\n  2 < ENat.card α →\\n    MulAction.IsMultiplyPretransitive G α 2 → ∀ {a : α}, Subgroup.normalClosure ↑(MulAction.stabilizer G a) = ⊤\", \"doc\": \"For a group $G$ acting 2-multiply pretransitively on a set $\\\\alpha$ with cardinality greater than 2, and for any element $a \\\\in \\\\alpha$, the normal closure of the stabilizer subgroup of $a$ in $G$ is \"}\n  {\"name\": \"Subgroup.isComplement'_stabilizer\", \"module\": \"Mathlib/GroupTheory/Complement\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {H : Subgroup G} {α : Type u_2} [inst_1 : MulAction G α] (a : α),\\n  (∀ (h : ↥H), h • a = a → h = 1) → (∀ (g : G), ∃ h, h • g • a = a) → H.IsComplement' (MulAction.stabilizer G a)\", \"doc\": \"For a group $G$ acting on a set $\\\\alpha$, an element $a \\\\in \\\\alpha$, and a subgroup $H \\\\leq G$, if (1) the only element of $H$ that fixes $a$ is the identity, and (2) for every $g \\\\in G$ there exists \"}\n  {\"name\": \"MulAction.isCoatom_stabilizer_iff_preprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [MulAction.IsPretransitive G X] [Nontrivial X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a) ↔ MulAction.IsPreprimitive G X\", \"doc\": \"For a pretransitive group action of $G$ on a nontrivial set $X$, the stabilizer subgroup of any element $a \\\\in X$ is a coatom in the subgroup lattice of $G$ if and only if the action is preprimitive. \"}\n  {\"name\": \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"module\": \"Mathlib/Topology/Algebra/ConstMulAction\", \"type\": \"∀ {Γ : Type u_4} [inst : Group Γ] {T : Type u_5} [inst_1 : TopologicalSpace T] [inst_2 : MulAction Γ T]\\n  [ProperlyDiscontinuousSMul Γ T] (x : T), (↑(MulAction.stabilizer Γ x)).Finite\", \"doc\": \"For a properly discontinuous action of a discrete group $\\\\Gamma$ on a topological space $T$, the stabilizer subgroup of any point $x \\\\in T$ is a finite subset of $\\\\Gamma$.\"}\n  {\"name\": \"MulAction.stabilizer_subgroup\", \"module\": \"Mathlib/Algebra/Pointwise/Stabilizer\", \"type\": \"∀ {G : Type u_1} [inst : Group G] (s : Subgroup G), MulAction.stabilizer G ↑s = s\", \"doc\": \"For a group $G$ and a subgroup $s$ of $G$, the stabilizer of $s$ (when considered as a subset of $G$) under the group action is equal to $s$ itself, i.e., $\\\\text{stabilizer}_G(s) = s$.\"}\n  {\"name\": \"AddAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : AddGroup G] {X : Type u_4} [inst_1 : AddAction G X] [Nontrivial X]\\n  [AddAction.IsPreprimitive G X] (a : X), IsCoatom (AddAction.stabilizer G a)\", \"doc\": \"For any non-trivial additive group action that is preprimitive, the stabilizer subgroup of any element $a$ in the set $X$ is a coatom in the complete lattice of additive subgroups of $G$. This means t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroup stabilizers, modular parabolic matrices, or homogeneous graded ideals, not Borel subgroups of stabilizers in a proper algebraic homogeneous space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A parabolic subgroup containing a maximal torus contains a Borel subgroup through that torus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular\", \"module\": \"Mathlib.NumberTheory.ModularForms.Cusps\", \"type\": \"{g} (hg : g ∈ 𝒢) (hg10 : g 1 0 = 0) : g.IsParabolic ↔ (∃ x ≠ 0, g = upperRightHom x) ∨ (∃ x ≠ 0, g = -upperRightHom x)\", \"doc\": \"For a matrix $ g $ in the subgroup of $ \\\\mathrm{GL}(2, R) $ with determinant $ \\\\pm 1 $ and $ g_{1,0} = 0 $, $ g $ is parabolic if and only if there exists a non-zero $ x \\\\in R $ such that $ g $ equals\"}\n  {\"name\": \"Subgroup.le_normalizer\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Defs\", \"type\": \": H ≤ normalizer H\", \"doc\": \"For any subgroup $ H $ of a group $ G $, $ H $ is contained in its normalizer $ N_G(H) $, i.e., $ H \\\\leq N_G(H) $.\"}\n  {\"name\": \"Subgroup.conj_smul_le_of_le\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{P H : Subgroup G} (hP : P ≤ H) (h : H) : MulAut.conj (h : G) • P ≤ H\", \"doc\": \"If $ P $ is a subgroup of $ H $ and $ h $ is an element of $ H $, then the conjugate subgroup $ hPh^{-1} $ (obtained by conjugating $ P $ by $ h $) is contained within $ H $. This follows from the fac\"}\n  {\"name\": \"IsPGroup.exists_le_sylow\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{P : Subgroup G} (hP : IsPGroup p P) : ∃ Q : Sylow p G, P ≤ Q\", \"doc\": \"For any group $G$ and any $p$-subgroup $P$ of $G$, there exists a Sylow $p$-subgroup $Q$ of $G$ such that $P$ is a subgroup of $Q$.\"}\n  {\"name\": \"AddSubgroup.mem_sup_right\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Lattice\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {S T : AddSubgroup G} {x : G}, x ∈ T → x ∈ S ⊔ T\", \"doc\": \"For any additive group $G$ and its subgroups $S$ and $T$, if $x \\\\in T$, then $x \\\\in S \\\\vee T$, where $S \\\\vee T$ denotes the supremum of $S$ and $T$ in the lattice of subgroups of $G$.\"}\n  {\"name\": \"Sylow.subtype.congr_simp\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] (P P_1 : Sylow p G) (e_P : P = P_1) {N : Subgroup G} (h : ↑P ≤ N),\\n  P.subtype h = P_1.subtype ⋯\", \"doc\": \"If $ P $ is a Sylow $ p $-subgroup of a group $ G $ and is contained in a subgroup $ N $ of $ G $, then $ P $ is also a Sylow $ p $-subgroup of $ N $.\"}\n  {\"name\": \"Subgroup.conj_smul_subgroupOf\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Pointwise\", \"type\": \"{P H : Subgroup G} (hP : P ≤ H) (h : H) : MulAut.conj h • P.subgroupOf H = (MulAut.conj (h : G) • P).subgroupOf H\", \"doc\": \"For subgroups $P$ and $H$ of a group $G$ with $P \\\\subseteq H$, and for any element $h \\\\in H$, conjugating $P$ by $h$ and taking its intersection with $H$ (via $\\\\mathrm{subgroupOf}$) is equivalent to f\"}\n  {\"name\": \"AddSubgroup.normal_addSubgroupOf\", \"module\": \"Mathlib.Algebra.Group.Subgroup.Basic\", \"type\": \"∀ {G : Type u_1} [inst : AddGroup G] {H N : AddSubgroup G} [N.Normal], (N.addSubgroupOf H).Normal\", \"doc\": \"If $ N $ is a normal additive subgroup of an additive group $ G $, then $ N $ is also a normal additive subgroup of any additive subgroup $ H $ of $ G $ that contains $ N $. This follows from the fact\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroup stabilizers, modular parabolic matrices, or homogeneous graded ideals, not Borel subgroups of stabilizers in a proper algebraic homogeneous space."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPretransitive\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroup stabilizers, modular parabolic matrices, or homogeneous graded ideals, not Borel subgroups of stabilizers in a proper algebraic homogeneous space."
+  },
+  {
+   "tool": "grep",
+   "query": "parabolic[Ss]ubgroup|[Bb]orel[Ss]ubgroup|proper.*homogeneous",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Radical.lean\", \"line\": \"30\", \"text\": \"property is strictly necessary; for a counterexample of how `Ideal.IsHomogeneous.isPrime_iff`\"}\n  {\"file\": \"Mathlib/RingTheory/GradedAlgebra/Homogeneous/Submodule.lean\", \"line\": \"27\", \"text\": \"module. However, most interesting properties of homogeneous submodules do rely on the base ring\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroup stabilizers, modular parabolic matrices, or homogeneous graded ideals, not Borel subgroups of stabilizers in a proper algebraic homogeneous space."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed orbit in projective space has a parabolic stabilizer and every maximal torus of the stabilizer belongs to a Borel subgroup of the ambient group",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"normalClosure_of_stabilizer_eq_top\", \"module\": \"Mathlib/GroupTheory/GroupAction/Jordan\", \"type\": \"∀ {G : Type u_1} {α : Type u_2} [inst : Group G] [inst_1 : MulAction G α],\\n  2 < ENat.card α →\\n    MulAction.IsMultiplyPretransitive G α 2 → ∀ {a : α}, Subgroup.normalClosure ↑(MulAction.stabilizer G a) = ⊤\", \"doc\": \"For a group $G$ acting 2-multiply pretransitively on a set $\\\\alpha$ with cardinality greater than 2, and for any element $a \\\\in \\\\alpha$, the normal closure of the stabilizer subgroup of $a$ in $G$ is \"}\n  {\"name\": \"MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [Nontrivial X] [MulAction.IsPreprimitive G X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a)\", \"doc\": \"Let $G$ be a group acting on a non-trivial set $X$. If the action is preprimitive, then for any element $a \\\\in X$, the stabilizer subgroup of $a$ is a maximal subgroup of $G$.\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]\\n  (a : ↑(NumberField.mixedEmbedding.fundamentalCone.integerSet K)),\\n  MulAction.stabilizer (↥(NumberField.Units.torsion K)) a = ⊥\", \"doc\": \"For any element $ a $ in the intersection of the fundamental cone and the integer lattice in the mixed embedding space of a number field $ K $, the stabilizer subgroup of the action of the torsion uni\"}\n  {\"name\": \"MulAction.IsBlock.of_orbit\", \"module\": \"Mathlib/GroupTheory/GroupAction/Blocks\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {X : Type u_2} [inst_1 : MulAction G X] {H : Subgroup G} {a : X},\\n  MulAction.stabilizer G a ≤ H → MulAction.IsBlock G (MulAction.orbit (↥H) a)\", \"doc\": \"If the stabilizer subgroup of an element $a$ in a group action is contained within a subgroup $H$, then the orbit of $a$ under $H$ forms a block. This means that for any $g_1, g_2 \\\\in G$, if the trans\"}\n  {\"name\": \"MulAction.stabilizer_orbit_eq\", \"module\": \"Mathlib/GroupTheory/GroupAction/Blocks\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {X : Type u_2} [inst_1 : MulAction G X] {a : X} {H : Subgroup G},\\n  MulAction.stabilizer G a ≤ H → MulAction.stabilizer G (MulAction.orbit (↥H) a) = H\", \"doc\": \"If the stabilizer subgroup of an element $ a $ under a group action is contained within a subgroup $ H $, then the stabilizer subgroup of the orbit of $ a $ under $ H $ is equal to $ H $ itself. Forma\"}\n  {\"name\": \"MulAction.isCoatom_stabilizer_iff_preprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : Group G] {X : Type u_4} [inst_1 : MulAction G X] [MulAction.IsPretransitive G X] [Nontrivial X]\\n  (a : X), IsCoatom (MulAction.stabilizer G a) ↔ MulAction.IsPreprimitive G X\", \"doc\": \"For a pretransitive group action of $G$ on a nontrivial set $X$, the stabilizer subgroup of any element $a \\\\in X$ is a coatom in the subgroup lattice of $G$ if and only if the action is preprimitive. \"}\n  {\"name\": \"MulAction.IsBlock.orbit_stabilizer_eq\", \"module\": \"Mathlib/GroupTheory/GroupAction/Blocks\", \"type\": \"∀ {G : Type u_1} [inst : Group G] {X : Type u_2} [inst_1 : MulAction G X] {B : Set X} [MulAction.IsPretransitive G X],\\n  MulAction.IsBlock G B → ∀ {a : X}, a ∈ B → MulAction.orbit (↥(MulAction.stabilizer G B)) a = B\", \"doc\": \"For a transitive group action of $ G $ on $ X $, if $ B \\\\subseteq X $ is a block under the action and $ a \\\\in B $, then the orbit of $ a $ under the stabilizer subgroup $ \\\\text{Stab}(B) $ is equal to \"}\n  {\"name\": \"AddAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive\", \"module\": \"Mathlib/GroupTheory/GroupAction/Primitive\", \"type\": \"∀ (G : Type u_3) [inst : AddGroup G] {X : Type u_4} [inst_1 : AddAction G X] [Nontrivial X]\\n  [AddAction.IsPreprimitive G X] (a : X), IsCoatom (AddAction.stabilizer G a)\", \"doc\": \"For any non-trivial additive group action that is preprimitive, the stabilizer subgroup of any element $a$ in the set $X$ is a coatom in the complete lattice of additive subgroups of $G$. This means t\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: the hits concern abstract subgroup stabilizers, modular parabolic matrices, or homogeneous graded ideals, not Borel subgroups of stabilizers in a proper algebraic homogeneous space."
+  },
+  {
+   "tool": "grep",
+   "query": "BorelSubgroup|borel_subgroup|parabolicSubgroup|proper.*homogeneous",
+   "results": "[grep] OK 2 hit(s); returned names/files: Mathlib/RingTheory/GradedAlgebra/Radical.lean, Mathlib/RingTheory/GradedAlgebra/Homogeneous/Submodule.lean",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group actions, topological closed subgroups, modular-form parabolics or graded homogeneous ideals, not algebraic Borel subgroups and proper homogeneous schemes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A parabolic subgroup of a smooth connected algebraic group containing a maximal torus contains a Borel subgroup through that torus",
+   "results": "[leansearch] OK 8 hit(s); returned names/files: Subgroup.HasDetPlusMinusOne.isParabolic_iff_of_upperTriangular, Subgroup.le_normalizer, ClosedSubgroup.ctorIdx, Subgroup.conj_smul_le_of_le, NormalizerCondition, Sylow.subtype.congr_simp, ClosedSubgroup, AddSubgroup.addSubgroupOf_eq_top",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group actions, topological closed subgroups, modular-form parabolics or graded homogeneous ideals, not algebraic Borel subgroups and proper homogeneous schemes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"BorelSubgroup\"",
+   "results": "[loogle] OK 0 hit(s); returned names/files: ",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group actions, topological closed subgroups, modular-form parabolics or graded homogeneous ideals, not algebraic Borel subgroups and proper homogeneous schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A maximal torus fixing a point in a proper homogeneous algebraic variety is contained in a Borel subgroup fixing that point",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files: MulAction.IwasawaStructure.T, MulAction.IsPreprimitive.isCoatom_stabilizer_of_isPreprimitive, MulAction.IwasawaStructure.is_generator, MulAction.fixingSubgroup_le_stabilizer, orbit_fixingSubgroup_compl_subset, IntermediateField.fixingSubgroup_isOpen, SubMulAction.IsPretransitive.isPretransitive_ofFixingSubgroup_inter, normalClosure_of_stabilizer_eq_top",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group actions, topological closed subgroups, modular-form parabolics or graded homogeneous ideals, not algebraic Borel subgroups and proper homogeneous schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Borel fixed point theorem for a connected solvable algebraic group acting on a complete variety and conjugacy of maximal tori",
+   "results": "[leanfinder] OK 8 hit(s); returned names/files: MulAction.IwasawaStructure.is_conj, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, MulAction.IwasawaStructure.is_generator, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive, MulAction.IwasawaStructure.commutator_le",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern abstract group actions, topological closed subgroups, modular-form parabolics or graded homogeneous ideals, not algebraic Borel subgroups and proper homogeneous schemes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-luna-borel-attraction-charts",
+  "date": "2026-10-24",
+  "group": "Q39"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Reductive group-scheme structure of PGL. Supporting input: Corollary 17.62(b)--(d), printed pp.372--373; Sections 6.44--6.46, printed p.135, and Chapter 19(a)--(b), printed pp.397--400. The quotient is by the smooth central torus, with the usual algebraic-group quotient of Theorem 5.28 and Propositions 5.24--5.27. Supporting lemma: The scheme-theoretic centre of a reductive group is of multiplicative type. Supporting input for Corollary 17.62(a): Proposition 17.61(a), printed p.372; centralizer functor as in Proposition 1.92, printed pp.33--34. Only the self-centralizer assertion (a) is used, not the centre containment assertion (b). Supporting input in the proof of Proposition 17.61(a): Theorem 17.56, first displayed equality, printed p.371; proof in section 17h, printed pp.373--375. Only the first equality is stated; its full generality in smooth connected affine groups is retained. Supporting input: Theorem 17.65, used in the final two paragraphs of Section 17h to trap an orbit inside an affine chart. The containment-only form of its proof avoids presupposing the Chevalley equality. Supporting input for Theorem 17.65: Theorem 17.16 and its proof, printed p.356 (a complete orbit stabilizer contains a Borel); Theorem 17.10, printed pp.354--355 (conjugacy of maximal tori inside the reduced identity stabilizer); proof of Theorem 17.65, printed p.374, sentence asserting a Borel subgroup between T and the parabolic dual-line stabilizer.",
+   "via": [
+    "lem-sfb-luna-borel-attraction-charts",
+    "lem-sfb-chevalley-borel-intersection",
+    "lem-sfb-reductive-torus-self-centralizer",
+    "lem-sfb-reductive-centre-multiplicative-type",
+    "lem-sfb-reductive-radical-quotient",
+    "lem-sfb-pgl-reductive-structure",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-proper-homogeneous-torus-borel-stabilizer",
+  "worker": "stage1",
+  "summary": "Retained the full statement, including arbitrary characteristic and possibly non-smooth stabilizer. Expanded Milne 17.16 and 17.10 into five steps using existing DAG nodes; no new nodes. Checked scheme-theoretic fixed points on all algebras, reduced identity-component factorization, conjugacy hypotheses and maximality in the ambient group. Removed one repeated statement dependency. No project Lean attachment or Mathlib match found.",
+  "blueprint": "The inherited from.place locates this at the Borel-in-parabolic-stabilizer sentence in Milne 17.65 below det-thm-sf-ctf-stability-direct-images (3). Steps 1-2 realize the fixed-point/stabilizer input; steps 3-5 insert the prescribed torus by conjugacy. Read the latest blueprint unit and direct-image proof; no unit route is replaced. blueprint_refs.py ancestor reports None, matching the inherited from.node, which is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-split-lattice-torus-projection",
+    "why": "Generic split torus coordinate-domain statement, used to verify reducedness and connectedness before factoring T through the reduced identity stabilizer; no unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-split-lattice-torus-projection"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-c5e101a9d",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-c5e101a9d (reviewer sub-agent of L); spot-checked: I read the delivery in full and it passes; no fixes. Five steps, no new nodes, statement unchanged from live. No repair note exists and live is still unsplit, so nothing supersedes it. Source: Milne iAG2017, printed pp.352-355 (pdf +10): Cor 17.3, Def 17.6, Thm 17.9, Thm 17.10, Def 17.12, and the converse proof of Thm 17.16. These agree with the item. Steps: Step 1 takes Borel existence from borel-conjugation-cover and a scheme-theoretic fixed point z from solvable-proper-fixed-point (hypotheses checked: B smooth connected solvable, Y nonempty proper finite type); transitivity gives C=g^-1Bg fixing y on all A. Step 2 takes the stabilizer H from orbit-quotient-geometry (Y proper, hence separated) and gets K=(H^0)_red smooth connected finite type from the identity-component node; K is closed in G, hence affine. Step 3 factors C through K (smooth over k, so reduced) and T through K (k[Z^r] is a domain by the lattice node), going through the open H^0 and then the reduction; this is correctly marked elementary. Step 4 uses clause 1 of borel-maximal-torus-conjugacy to get S maximal in G inside C; S and T are maximal in K; clause 2 applied to K gives h in K(k) with hSh^-1=T. Step 5: B0=hCh^-1 contains T and fixes y on all A. Edge cases r=0, G solvable, Y a point and a non-smooth stabilizer in characteristic p all work. Duplicate scan: torus-commuting-point-common-borel, general-borel-flag-variety and flag-torus-fixed-geometry are different statements; no cycle. The tool_use of lem-trf-split-lattice-torus-projection (generic torus integrality) is accepted. Batch-5 flags: all four citations are accepted as generic. Solvable-proper-fixed-point and homogeneous-orbit-quotient-geometry reach only mathlib-status fppf covering base change; borel-maximal-torus-conjugacy reaches only mathlib-status smooth fpqc base descent; split-lattice-torus-projection is commutative algebra. None is the trace formula, Poincare duality or a step of their proofs."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.ProperHomogeneousTorusBorelStabilizer",
+  "declaration": "AlgebraicGeometry.exists_borel_stabilizer_containing_maximal_torus",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/ProperHomogeneousTorusBorelStabilizer.lean",
+  "statement": "theorem exists_borel_stabilizer_containing_maximal_torus {k : Type u} [Field k] [IsAlgClosed k] (G : Grp (Over (Spec (.of k)))) [IsAffine G.X.left] [LocallyOfFiniteType G.X.hom] [QuasiCompact G.X.hom] [Smooth G.X.hom] [ConnectedSpace G.X.left] (Y : Over (Spec (.of k))) [ModObj G.X Y] [Smooth Y.hom] [ConnectedSpace Y.left] [IsProper Y.hom] (htrans : ∀ y₁ y₂ : 𝟙_ (Over (Spec (.of k))) ⟶ Y, ∃ g : 𝟙_ (Over (Spec (.of k))) ⟶ G.X, g • y₁ = y₂) (T : Grp (Over (Spec (.of k)))) (iT : T ⟶ G) (hT : ReductiveTorusCentralizer.IsMaximalTorus iT) (y : 𝟙_ (Over (Spec (.of k))) ⟶ Y) (hy : ∀ (A : Type u) [CommRing A] [Algebra k A] (t : StandardGroupSchemes.affine k A ⟶ T.X), (t ≫ iT.hom.hom) • (toUnit (StandardGroupSchemes.affine k A) ≫ y) = toUnit (StandardGroupSchemes.affine k A) ≫ y) : ∃ (B₀ : Grp (Over (Spec (.of k)))) (iB : B₀ ⟶ G), IsBorelGroupScheme iB.hom.hom ∧ (∃ j : T ⟶ B₀, j ≫ iB = iT) ∧ ∀ (A : Type u) [CommRing A] [Algebra k A] (b : StandardGroupSchemes.affine k A ⟶ B₀.X), (b ≫ iB.hom.hom) • (toUnit (StandardGroupSchemes.affine k A) ≫ y) = toUnit (StandardGroupSchemes.affine k A) ≫ y",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a140f85c9",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Clause-by-clause match: alg-closed k; G affine (IsAffine), finite type (LocallyOfFiniteType+QuasiCompact), smooth, connected; Y smooth, connected (incl. nonempty), proper (incl. finite type); ModObj action; htrans over all k-points; T via the recorded IsMaximalTorus (geometric torus = split over alg-closed k, rank 0 ok); hy and conclusion on every u-small k-algebra A; B0 by landed IsBorelGroupScheme; T ≤ B0 by Grp factorization. No smooth-stabilizer, reductivity or extra assumption; single universe u is harmless. Diff vs side-live: lean + two needed stmt_deps (def-sfb-borel-subgroup-scheme, def-sfb-reductive-torus-centralizer-terminology). lean.statement verbatim; sorry only; source/blueprint docstrings and 5 proof steps; no new defs; no existing duplicate found; report has Worker report and Second reading by Q104. No file changed, so no compile."
+ }
+}

@@ -1,0 +1,305 @@
+{
+ "id": "lem-sfb-space-serre-affineness",
+ "kind": "statement",
+ "title": "Serre affineness criterion for algebraic spaces",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $X$ be an algebraic space over $S$ [def-trf-algebraic-space]. Assume $X$ is quasi-compact and quasi-separated, meaning that every open cover has a finite subcover and the diagonal is quasi-compact on scheme tests. Modules and quasi-coherence are on the small etale ringed site [def-trf-space-quasi-coherent-module]. Write $H^q(X,M)=R^q\\Gamma(X_{\\mathrm{et}},M)$ for cohomology of the underlying additive sheaf [def-weil-pbc-sites-and-cohomology]. If $H^1(X,F)=0$ for every quasi-coherent $\\mathcal O_X$-module $F$, then $X$ is represented by an affine scheme.",
+ "source": {
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V6, proposition-vanishing-affine, with the precise hypothesis H^1=0 in situation-vanishing (Tag 07UY)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-trf-space-quasi-coherent-module",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sfb-space-absolute-quasi-separated",
+  "def-a1-space-point-topology"
+ ],
+ "proof": [
+  {
+   "text": "Put $A=\\Gamma(X,\\mathcal O_X)$. By [lem-sfb-space-acyclic-affinization-geometry], the absolute canonical map $p:X\\to\\operatorname{Spec}A$ exists, is separated, and is universally injective. All its hypotheses are the assumptions of the item. Choose a disjoint-affine etale atlas by [lem-a1-space-affine-etale-cover] and a finite subatlas by [lem-a1-space-finite-affine-subatlas]. By [lem-weil-pbc-finite-affine-coproduct-spectrum], this finite disjoint union is an affine scheme $U=\\operatorname{Spec}B$. Denote its surjective etale map by $\\varphi:U\\to X$.",
+   "uses": [
+    "lem-sfb-space-acyclic-affinization-geometry",
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-space-finite-affine-subatlas",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6, first sentence and Tags 07V4, 07V5; Tag 03H6 affine atlas construction."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-affine-etale-polynomial-generators] with $f=p$ and $V=\\operatorname{Spec}A$. Separatedness and the affine surjective etale chart were established in step 1. Obtain a surjection $e:P=\\mathcal O_X[z_1,\\ldots,z_m]\\twoheadrightarrow\\varphi_*\\mathcal O_U$ with quasi-coherent kernel $K$. The hypothesis gives $H^1(X,K)=0$. The long exact sequence of [lem-weil-pbc-derived-functor-long-exact], applied to the underlying additive sheaves of $0\\to K\\to P\\to\\varphi_*\\mathcal O_U\\to0$, makes $\\Gamma(X,P)\\to\\Gamma(X,\\varphi_*\\mathcal O_U)=B$ surjective. The abelian sheaf category has enough injectives and its global-sections functor is left exact by [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "lem-sfb-space-affine-etale-polynomial-generators",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6, polynomial surjection and vanishing of H^1 of its kernel."
+   }
+  },
+  {
+   "text": "The underlying additive sheaf of $P$ is the filtered colimit of its finite sums of monomial summands $\\mathcal O_X$. Apply [lem-sfb-space-cohomology-filtered-colimit] at $q=0$. Sections of each finite sum are the corresponding finite sum of $A$, since finite sums of abelian sheaves are finite products and sections preserve products. Thus every section of $P$ is a finite polynomial with coefficients in $A$, and multiplication sends the monomial summands to their products. Therefore $\\Gamma(X,P)=A[z_1,\\ldots,z_m]$ as rings. The surjection in step 2 shows that $B$ is generated as an $A$-algebra by the finite tuple $(g_i)$.",
+   "uses": [
+    "lem-sfb-space-cohomology-filtered-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6, displayed global-sections polynomial ring; Tag 073E with p=0."
+   }
+  },
+  {
+   "text": "Regard $X$ as an algebraic space over $\\operatorname{Spec}\\mathbf Z$ through $X\\to S\\to\\operatorname{Spec}\\mathbf Z$ [def-trf-algebraic-space]: on all schemes $T$ put $X'(T)=\\coprod_{a:T\\to S}X(T\\xrightarrow{a}S)$. This is an fppf sheaf with representable diagonal, and its representable surjective etale scheme charts are those of $X$. The assignment $X\\mapsto(X',X'\\to h_S)$ is an equivalence between algebraic spaces over $S$ and algebraic spaces over $\\operatorname{Spec}\\mathbf Z$ with a map to $h_S$. It keeps fibre products, field-valued points, the atlas topology and the small etale ringed site (Stacks, Spaces, Tag 04SG). In this sense $p$ is a morphism of algebraic spaces over $\\operatorname{Spec}\\mathbf Z$, as in the construction of Tag 05Z1. The nodes below that are stated over a base scheme are applied with base $\\operatorname{Spec}\\mathbf Z$. The scheme morphism $U=\\operatorname{Spec}B\\to\\operatorname{Spec}A$ is locally of finite type: the single affine cover $U$ has finitely generated coordinate algebra, exactly the definition [def-weil-finite-type-morphism]. Apply [lem-sfb-space-local-properties-chart-test] with target chart the identity of $\\operatorname{Spec}A$ and source chart $U\\to X$; it gives local finite type of $p$. By universal injectivity, each field fibre of $p$ has at most one point, hence is discrete (its only possible subsets are empty and the whole space). Now [lem-sfb-space-discrete-fibres-locally-quasifinite] gives local quasi-finiteness of $p$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-space-discrete-fibres-locally-quasifinite",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6, B finite type and application of Tag 06RW. Change of base scheme to Spec Z: spaces.tex Tag 04SG (lemma-category-of-spaces-over-smaller-base-scheme); spaces-properties.tex Tag 05Z1."
+   }
+  },
+  {
+   "text": "The separated locally quasi-finite morphism $p$ has scheme target. Apply [lem-a1-separated-locally-qf-space-representable] to obtain a scheme $Z$ over $\\operatorname{Spec}A$ representing $X'$. Its point space is quasi-compact because it is the point space of $X$. For each quasi-coherent Zariski ideal $I\\subseteq\\mathcal O_Z$, its associated etale module $I_{\\mathrm{et}}$ is quasi-coherent by [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], so $H^1(Z_{\\mathrm{et}},I_{\\mathrm{et}})=0$ by the original hypothesis transported along the representing isomorphism. The comparison [lem-sc-etale-zariski-qcoh-comparison] at $q=1$ gives $H^1(Z,I)=0$ in scheme module cohomology. Hence [lem-pqf-quasicompact-h1-zero] applies and makes $Z$ affine. This proves the required representability by an affine scheme. The transported structural map $Z\\to S$ is a scheme morphism: evaluate the natural transformation $h_Z\\simeq X'\\to h_S$ at $\\mathrm{id}_Z$; naturality identifies every component with composition by that map. By the equivalence recalled in step 4 [def-trf-algebraic-space], $h_Z$ with this map to $h_S$ corresponds to $X$, so the $S$-scheme $Z$ represents $X$ as an algebraic space over $S$.",
+   "uses": [
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "lem-pqf-quasicompact-h1-zero",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-cohomology.tex",
+    "place": "Tag 07V6, final two sentences; Tag 03XX representability and Tag 01XF scheme criterion. Return to the base S: spaces.tex Tag 04SG."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-pqf-quasicompact-h1-zero",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-sfb-space-acyclic-affinization-geometry",
+  "lem-sfb-space-affine-etale-polynomial-generators",
+  "lem-sfb-space-cohomology-filtered-colimit",
+  "lem-sfb-space-discrete-fibres-locally-quasifinite",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-cohomology.tex",
+  "place": "Tag 07V6 (proposition-vanishing-affine), entire proof, with Tags 07V4 and 07V5 as geometric inputs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space with vanishing first cohomology for every quasi coherent module is an affine scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [CompactSpace ↥X],\\n  (∀ (x : ↥X), ∃ r, AlgebraicGeometry.IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) → X.IsQuasiAffine\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], CompactSpace ↥X\", \"doc\": \"Every quasi-affine scheme has an underlying topological space that satisfies the compactness property (every open cover has a finite subcover).\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffine\", \"IsQuasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]erre.*[Aa]ffine|[Aa]ffine.*[Vv]anishing|[Ii]sAffine.*[Cc]ohomology",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated algebraic space with vanishing first cohomology for every quasi coherent module is an affine scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $X$ is affine if the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, where $\\\\Gamma(X)$ denotes the ring of global sections of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"(X : Scheme.{u}) [CompactSpace X] (H : ∀ x : X, ∃ r : Γ(X, ⊤), IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) :\\n  IsQuasiAffine X\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) [IsAffine X] : QuasiSeparatedSpace X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : AffineScheme.{u}) : IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.isAffine_of_isEmpty\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [IsEmpty ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is empty, then $X$ is an affine scheme.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre affineness criterion for algebraic spaces from exactness of global sections on quasi coherent sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_eq_affineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => Q) →\\n    AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) =\\n      @AlgebraicGeometry.\", \"doc\": \"For a local property $ Q $ of ring homomorphisms, the property of being affine and satisfying $ Q $ locally on affine opens of the target is equivalent to the intersection of being an affine morphism \"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_iff_affineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => Q) →\\n    ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n      AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [Comm\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the property that $ f $ is locally $ \\text{affineAnd } Q $ on the target is equivalent to $ f $ being an affine morphism and $ Q $ holding locally on affine op\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no match: results give scheme-only geometry, definitions, or general sheaf infrastructure; no algebraic-space assertion or one-line specialization states this node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated algebraic space with vanishing first cohomology for every quasi coherent module is an affine scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiCompact fun X x x_1 x_2 => CompactSpace ↥X\", \"doc\": \"For any quasi-compact morphism of schemes $ f: X \\to Y $ where the target $ Y $ is affine, the underlying topological space of $ Y $ is compact. This instance establishes that the quasi-compactness pro\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The full subcategory of schemes consisting of those isomorphic to the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, forming the essential image of the contravariant Spec functor f\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineTerminalScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"AlgebraicGeometry.IsAffine (⊤_ AlgebraicGeometry.Scheme)\", \"doc\": \"The terminal object in the category of schemes is an affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only geometry and general ring/sheaf infrastructure; no algebraic-space criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffine\", \"IsQuasicoherent\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only geometry and general ring/sheaf infrastructure; no algebraic-space criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ss]erre.*[Aa]ffine|[Aa]ffine.*[Vv]anishing|[Ii]sAffine.*[Cc]ohomology",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only geometry and general ring/sheaf infrastructure; no algebraic-space criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated algebraic space with vanishing first cohomology for every quasi coherent module is an affine scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsAffine.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $ X $ is affine if and only if the canonical morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an isomorphism of schemes, where $ \\\\Gamma(X) $ denotes the ring of global sections of\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{X : AlgebraicGeometry.Scheme} →\\n  {motive : AlgebraicGeometry.IsAffine X → Sort u} →\\n    (t : AlgebraicGeometry.IsAffine X) → ((affine : CategoryTheory.IsIso X.toSpecΓ) → motive ⋯) → motive t\", \"doc\": \"A scheme $X$ is affine if the canonical morphism from $X$ to $\\\\operatorname{Spec}(\\\\Gamma(X))$ is an isomorphism, where $\\\\Gamma(X)$ denotes the ring of global sections of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"[IsAffine X] : X.IsQuasiAffine\", \"doc\": \"Every affine scheme is quasi-affine. That is, if a scheme $X$ is affine (isomorphic to the spectrum of a ring), then it satisfies the property of being quasi-affine (isomorphic to an open subscheme of\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen\", \"module\": \"Mathlib.AlgebraicGeometry.QuasiAffine\", \"type\": \"(X : Scheme.{u}) [CompactSpace X] (H : ∀ x : X, ∃ r : Γ(X, ⊤), IsAffineOpen (X.basicOpen r) ∧ x ∈ X.basicOpen r) :\\n  IsQuasiAffine X\", \"doc\": \"Let $X$ be a compact scheme. If for every point $x \\\\in X$, there exists a global section $r$ of the structure sheaf of $X$ such that the basic open set $\\\\text{basicOpen}(X, r)$ is affine and contains \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsSeparatedOfIsAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"{X : Scheme.{u}} [IsAffine X] : X.IsSeparated\", \"doc\": \"Every affine scheme is separated.\"}\n  {\"name\": \"AlgebraicGeometry.quasiSeparatedSpace_of_isAffine\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(X : Scheme) [IsAffine X] : QuasiSeparatedSpace X\", \"doc\": \"Every affine scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is itself quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"(X : AffineScheme.{u}) : IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.isAffine_of_isEmpty\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [IsEmpty ↥X], AlgebraicGeometry.IsAffine X\", \"doc\": \"If the underlying topological space of a scheme $X$ is empty, then $X$ is an affine scheme.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only geometry and general ring/sheaf infrastructure; no algebraic-space criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Serre affineness criterion for algebraic spaces from exactness of global sections on quasi coherent sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyIsAffineHomIsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Affine\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsAffineHom fun X x x_1 x_2 => AlgebraicGeometry.IsAffine X\", \"doc\": \"If a morphism from a scheme $ X $ to an affine scheme $ Y $ is affine, then $ X $ itself is an affine scheme. This instance establishes that the property of being an affine morphism, when applied to a\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.affineAnd_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop}\\n  (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme),\\n  (RingHom.RespectsIso fun {R S} [CommRing R] [CommRing S] => Q) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R] [CommRing S] => Q\", \"doc\": \"For a morphism property $ P $ of schemes and a ring homomorphism property $ Q $ satisfying compatibility conditions (respecting isomorphisms, localization preservation, and spanning), the property $ P\"}\n  {\"name\": \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.QuasiSeparated fun X x x_1 x_2 => QuasiSeparatedSpace ↥X\", \"doc\": \"Every morphism of schemes with an affine target scheme is quasi-separated, meaning its diagonal morphism is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating whether a given scheme is affine.\"}\n  {\"name\": \"AlgebraicGeometry.isAffine_affineScheme\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.AffineScheme), AlgebraicGeometry.IsAffine X.obj\", \"doc\": \"The category of affine schemes is the full subcategory of the category of schemes consisting of schemes isomorphic to the prime spectrum of a commutative ring. This subcategory is the essential image \"}\n  {\"name\": \"AlgebraicGeometry.targetAffineLocally_affineAnd_eq_affineLocally\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/AffineAnd\", \"type\": \"∀ {Q : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop},\\n  (RingHom.PropertyIsLocal fun {R S} [CommRing R] [CommRing S] => Q) →\\n    AlgebraicGeometry.targetAffineLocally (AlgebraicGeometry.affineAnd fun {R S} [CommRing R] [CommRing S] => Q) =\\n      @AlgebraicGeometry.\", \"doc\": \"For a local property $ Q $ of ring homomorphisms, the property of being affine and satisfying $ Q $ locally on affine opens of the target is equivalent to the intersection of being an affine morphism \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A property of a scheme indicating that it is quasi-affine.\"}\n  {\"name\": \"AlgebraicGeometry.HasAffineProperty.instTargetAffineLocallyOfIsLocal\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Basic\", \"type\": \"∀ (Q : AlgebraicGeometry.AffineTargetMorphismProperty) [Q.IsLocal],\\n  AlgebraicGeometry.HasAffineProperty (AlgebraicGeometry.targetAffineLocally Q) Q\", \"doc\": \"If a property $ Q $ of morphisms with affine targets is local on the target scheme, then any morphism that satisfies $ Q $ locally on affine opens of the target scheme must satisfy $ Q $ globally.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme-only geometry and general ring/sheaf infrastructure; no algebraic-space criterion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-noetherian-space-finite-affine-descent",
+  "date": "2026-10-22",
+  "group": "N0"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces.",
+   "via": [
+    "lem-sfb-noetherian-space-finite-affine-descent",
+    "lem-sfb-separated-space-dimension-one-scheme",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-space-serre-affineness",
+  "worker": "stage1",
+  "summary": "Followed the affine-etale presentation proof of Tag 07V6. Three smaller statement-only inputs isolate affinization geometry, finite global polynomial generators for a separated affine etale chart, and the discrete-field-fibre criterion. Reused the existing atlas, schemehood, colimit, and scheme cohomology-comparison nodes. Statement unchanged.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0ADD (lemma-codim-1-point-in-schematic-locus), applied at every point; a locally finite-type space over a field is locally Noetherian and dimension at most one bounds all local dimensions. Supporting input: affineness of the finite image of W in the last sentence of the proof of Tag 0ADD. Supporting input for the proof of Tag 07VP: Serre affineness criterion for algebraic spaces. The current latest direct-image support route remains unchanged; these steps supply its downstream Serre affineness input, not a replacement for a unit step.",
+  "tool_uses": [
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic Morphisms of finite type input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Generic Sites, morphisms of sites and cohomology on an object of a site input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-a1-separated-locally-qf-space-representable",
+    "why": "Generic Separated locally quasi-finite algebraic spaces over schemes are schemes input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic Affine etale cover by a disjoint union of affines input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-a1-space-finite-affine-subatlas",
+    "why": "Generic Finite affine component subatlases of quasi-compact point spaces input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-pqf-quasicompact-h1-zero",
+    "why": "Generic Serre's quasi-compact vanishing criterion input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-sc-etale-zariski-qcoh-comparison",
+    "why": "Generic Etale and Zariski cohomology of quasi-coherent modules agree, naturally in the module input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "why": "Generic Zariski and small etale quasi-coherent modules agree functorially input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic Long exact sequence of the right derived functors of a left exact functor input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "why": "Generic Finite coproducts of affine schemes are spectra of product rings input to the Stacks 07V6 argument; this unit has no corresponding algebraic-space/scheme comparison tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-a1-separated-locally-qf-space-representable",
+  "lem-a1-space-affine-etale-cover",
+  "lem-a1-space-finite-affine-subatlas",
+  "lem-pqf-quasicompact-h1-zero",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-7392a3b9f",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-7392a3b9f (reviewer sub-agent of L); spot-checked: Read in full: the item, the 3 new nodes, every cited statement, and the Stacks sources 07UY, 07UZ, 07V0, closed-set separation, 07V4, 07V5, 07V6 (whole proof), 06RW, 05Z1 and 04SG. The steps follow 07V6. Step 1: geometry node, then 03FX atlas, then 03E4 finite subatlas, then the finite coproduct is Spec B. Step 2: polynomial surjection with quasi-coherent kernel plus the 015B long exact sequence give Gamma(P)->B onto. Step 3: 073E at q=0 gives Gamma(P)=A[z]. Step 4: chart test, then universal injectivity, then 06RW give p locally quasi-finite. Step 5: 03XX, 03DX and 03DW comparison, then 01XF; every hypothesis is matched. The new statements are true: X separated over affine V makes phi affine, R is affine and t is finitely presented, so finitely many s(g_i) suffice. I tested X empty, X = Spec A and Spec A u Spec A_f. None of the new nodes is a duplicate: lem-sfb-space-field-discreteness-criterion covers a field base only, and the 0ACK criterion is a different statement. None restates a clause of the item. One fault (B3/C1/E4): 05Z1 builds p : X -> Spec A over Z, and Spec A is not an S-scheme. Yet steps 4-5 apply nodes stated over S (chart test, 06RW, the 03XX node with 'T a scheme over S') without stating the change of base 04SG, and 'absolute morphism' was undefined in both new nodes. FIX: step 4 now states the 04SG equivalence (X' over Spec Z with the same charts, points and etale site) and applies those nodes over Spec Z; step 5 returns from X' to X over S; def-trf-algebraic-space was added to uses and proof_deps. Both new nodes now define 'absolute' as over Spec Z and cite 04SG in the source place. Accepted tool_uses: 10 generic tools (03XX, 03FX, 03E4, 01XF, 03DW, 03DX, 015B, finite-type definition, sites-and-cohomology definition, the Mathlib coproduct leaf). Batch-5 flags: every flagged citation is a general algebraic-space definition or foundation fact (algebraic space, qcoh, etale module functors, point topology, atlases, representability, colimits, chart test, Zariski-etale qcoh equivalence). None is part of the trace formula or Poincare duality or their proofs, so all are accepted.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceSerreAffineness",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_scheme_of_qcqs_h1_zero",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceSerreAffineness.lean",
+  "statement": "theorem exists_affine_scheme_of_qcqs_h1_zero {S : Scheme.{u}} (X : AlgebraicSpace S) (hqc : CompactSpace (Point X.obj.obj)) (hqs : IsAbsolutelyQuasiSeparated X) (hH : ∀ (F : X.Modules) (_ : F.IsQuasicoherent), Subsingleton (@Sheaf.H _ _ X.etaleTopology ((SheafOfModules.toSheaf X.structureSheaf).obj F) inferInstance (HasExt.standard (Sheaf X.etaleTopology AddCommGrpCat.{u})) 1)) : ∃ Z : Over S, IsAffine Z.left ∧ Nonempty (yoneda.obj Z ≅ X.obj.obj)",
+  "branch": "sheaf-dag",
+  "by": "O1",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The full original small etale site and module universe are retained. The existing etaleAlgebraModulesHasSheafify instance supplies sheafification; HasExt.standard supplies the large Ext model with no additional hypotheses. Quasi-separatedness uses the existing absolute affine-test criterion, valid for arbitrary base S."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5092c1216",
+  "group": "O1",
+  "result": "pass",
+  "note": "Re-delivery of a04b (RETURN H2). The Lean module is byte-identical to the a04b module already judged exact. In the item node only stmt_deps changed: it gains the landed def-sfb-space-absolute-quasi-separated (IsAbsolutelyQuasiSeparated) and def-a1-space-point-topology (pointTopologicalSpace). Both have lean records on live and are accepted by stage2_delivery's STMT_DEPS MAY GAIN LANDED NODES path; no cycle. Compared with live, only lean and stmt_deps differ. Clauses rechecked against Stacks 07UY/07V6: arbitrary S, CompactSpace on the point space, absolute qs (0AHR(3) affine test), H1 of the underlying additive sheaf vanishing for all qcoh F (Subsingleton of Sheaf.H with HasExt.standard), conclusion an affine Over S representing X. Empty X and non-qs base covered; no extra hypotheses. Proof is sorry, no definitions, docstrings carry source/blueprint/5 steps, report has both sections. No file changed, so nothing compiled."
+ }
+}

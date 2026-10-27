@@ -1,0 +1,209 @@
+{
+ "id": "lem-sfb-integral-direct-image-reduction-tower",
+ "kind": "statement",
+ "title": "Finite direct-image quotient tower with its canonical units",
+ "statement": "Use the canonical coefficient and functor definitions of [sk-def-pe-derived-completion], [sk-def-sfb-module-derived-pushpull] and [sk-def-sfb-coefficient-change]. For every prime l, finite extension E of Q_l, scheme morphism j : U → X and positive quotient exponent n+1 (Lean index n), with the canonical internal coefficient rings and derived functors, Finite quotient projection isomorphisms identify the whole reduction sequence,\nincluding its transitions and augmentation, before taking any derived limit.\nAssume the specified scalar mates and their finite geometric projections are invertible;\nthis statement supplies the remaining transition and unit compatibility.\nSource: Stacks 099N, 0944; blueprint integral open direct image, Completeness paragraph\n(blueprint: lem-sfb-integral-direct-image-reduction-tower).\n\nLean statement (under the displayed l, E and j parameters):\ntheorem integral_direct_image_reduction_tower\n    (K : DerivedCategory (AdicCompletion.Modules l E U))\n    (hχ : ∀ n : ℕ, IsIso (integralReductionPullbackMap l E j n))\n    (hproj : ∀ n : ℕ, letI := hχ n; IsIso (integralFiniteProjection l E j n K)) :\n    let F := CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j\n    ∃ a : ∀ n : ℕ,\n      F.obj (AdicCompletion.integralLevel l E U K n) ≅\n        AdicCompletion.integralLevel l E X (F.obj K) n,\n      (∀ n : ℕ, F.map (AdicCompletion.integralStep l E U K n) ≫ (a n).hom =\n        (a (n + 1)).hom ≫ AdicCompletion.integralStep l E X (F.obj K) n) ∧\n      ∀ n : ℕ, F.map ((Mod.derivedExtendMapDerivedCategoryAdjunction\n        (AdicCompletion.quotient l E U n)).unit.app K) ≫ (a n).hom =\n          (Mod.derivedExtendMapDerivedCategoryAdjunction\n            (AdicCompletion.quotient l E X n)).unit.app (F.obj K)",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+  "external": [
+   {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+   },
+   {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "lemma-pushforward-Noetherian-case (099N)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-pe-derived-completion",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-coefficient-change",
+  "lem-sfb-integral-direct-image-reduction-cone"
+ ],
+ "proof": [
+  {
+   "text": "Retain the completed-coefficient identification from the integral-limit unit in the coefficient route. The finite tower argument below works on the specified internal categories and does not take a derived limit.",
+   "uses": [
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "Conjugate the inverse supplied scalar pullback isomorphism under the composite scalar and geometric adjunctions. This constructs restriction followed by integral direct image as finite direct image followed by restriction. The iterated mate formula and the scalar mate unit identity identify its augmentation with the specified integralFiniteProjection. Compose with restriction of the inverse finite projection supplied by hproj to define each level comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "Use the proved specialization of the derived restriction tower square to the two consecutive quotient ring maps. Geometric mates preserve this pasted square; the canonical scalarSixPullHom supplies the scalar comparison for the finite quotient transition, whose invertibility is already proved. The iterated mate identity identifies these geometric mates with the inverse restriction/direct-image comparisons. Inverting the resulting square gives coherence with restrictComp.",
+   "uses": [
+    "lem-sfb-integral-restriction-pullback-tower-square",
+    "lem-sfb-scalar-six-derived-pullback-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "The canonical derivedStep is the adjunct of the smaller quotient unit followed by the inverse restriction compositor, by reductionUnit_compatible and injectivity of the scalar adjunction Hom equivalence. Apply the proved generic adjointTransitionComparison to the coherent restriction squares and finite projection isomorphisms, using the already established augmentation equations. Cancel the level isomorphisms to obtain the displayed integralStep equation. The augmentation equation follows by cancelling the finite projection against its inverse. This uses no boundedness or nonzero hypotheses.",
+   "uses": [
+    "lem-pe-integral-reduction-transition-comparison",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+    "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+    "external": [
+     {
+      "document": "literature/stacks-project/sites-cohomology.tex",
+      "place": "lemma-derived-base-change (06YY), lemma-adjoint (07A6), lemma-projection-formula (0944)"
+     },
+     {
+      "document": "literature/stacks-project/proetale.tex",
+      "place": "lemma-pushforward-Noetherian-case (099N)"
+     }
+    ]
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-sfb-integral-restriction-pullback-tower-square",
+  "lem-sfb-scalar-six-derived-pullback-normalization",
+  "lem-pe-integral-reduction-transition-comparison",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Completeness paragraph; B6 formal proof by iterated adjunction mates, exact restriction tower coherence and adjoint transition uniqueness, 2026-10-25."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient projection isomorphisms commute with quotient transitions and tensor units for the entire derived adic reduction tower under direct image",
+   "results": "Eight results for ordinary scalar extension, tensor or ideal-adic constructions; none states this internal sheaf derived comparison.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with exact pullback of sheaves of modules and direct image preserves derived adic completeness",
+   "results": "Eight results for ordinary pullback composition or module scalar operations; none states the derived internal comparison.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*cone|reduction.*tower|integralReductionPullbackMap|integralFiniteProjection|integral_direct_image_reduction_tower",
+   "results": "No matches. Generic mate identities and triangle five lemma are available but do not supply coefficient normalization.",
+   "date": "2026-10-25",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageLimits",
+  "date": "2026-10-25",
+  "group": "F7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Completeness paragraph: commute direct image with each finite quotient and retain transitions and units",
+   "via": [
+    "lem-sfb-internal-integral-direct-image-limits"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageReductionTower",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralDirectImageReductionTower.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_direct_image_reduction_tower",
+  "statement": "theorem integral_direct_image_reduction_tower\n    (K : DerivedCategory (AdicCompletion.Modules l E U))\n    (hχ : ∀ n : ℕ, IsIso (integralReductionPullbackMap l E j n))\n    (hproj : ∀ n : ℕ, letI := hχ n; IsIso (integralFiniteProjection l E j n K)) :\n    let F := CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j\n    ∃ a : ∀ n : ℕ,\n      F.obj (AdicCompletion.integralLevel l E U K n) ≅\n        AdicCompletion.integralLevel l E X (F.obj K) n,\n      (∀ n : ℕ, F.map (AdicCompletion.integralStep l E U K n) ≫ (a n).hom =\n        (a (n + 1)).hom ≫ AdicCompletion.integralStep l E X (F.obj K) n) ∧\n      ∀ n : ℕ, F.map ((Mod.derivedExtendMapDerivedCategoryAdjunction\n        (AdicCompletion.quotient l E U n)).unit.app K) ≫ (a n).hom =\n          (Mod.derivedExtendMapDerivedCategoryAdjunction\n            (AdicCompletion.quotient l E X n)).unit.app (F.obj K)",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-25"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-49639",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T101007-L-3646565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261026T001007-L-4161119",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

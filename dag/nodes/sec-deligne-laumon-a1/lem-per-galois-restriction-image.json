@@ -1,0 +1,281 @@
+{
+ "id": "lem-per-galois-restriction-image",
+ "kind": "statement",
+ "title": "Image of absolute Galois restriction for an arbitrary field inclusion",
+ "statement": "Let $K\\subseteq L$ be fields [def-pc-field-extension]. Choose separable closures $K^s/K$ and $L^s/L$ [def-kun-separably-closed] and a compatible embedding $K^s\\subseteq L^s$. Give $G_K=\\operatorname{Gal}(K^s/K)$ and $G_L=\\operatorname{Gal}(L^s/L)$ their Krull topologies, whose identity-neighbourhood bases are the subgroups fixing finite intermediate extensions pointwise. Put $E=K^s\\cap L$ inside $L^s$. Restriction is a well-defined continuous homomorphism $r:G_L\\to G_K$, its image is closed, and\n$$r(G_L)=\\{\\sigma\\in G_K:\\sigma(e)=e\\text{ for all }e\\in E\\}.$$\nNo algebraicity or separability of $L/K$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tags 0BML (theorem-inifinite-galois-theory) and 0BMJ (lemma-galois-profinite), applied to the closed restriction image and its fixed field; Krull restriction continuity from the finite-subset neighbourhood basis."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-separable-closure-exists-galois](2), with the intermediate field equal to the base, to both chosen closures: $K^s/K$ and $L^s/L$ are Galois. If $a\\in K^s$, its minimal polynomial over $K$ splits in $K^s$. Every $\\tau\\in G_L$ fixes $K$ and sends $a$ to another root, hence into $K^s$. Applying this also to $\\tau^{-1}$ proves $\\tau(K^s)=K^s$. Restriction therefore defines $r:G_L\\to G_K$, and $r(\\tau\\upsilon)(a)=\\tau(\\upsilon(a))=(r(\\tau)r(\\upsilon))(a)$.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030J, definition-separable-algebraic (normal and Galois); normality of the separable closures"
+   }
+  },
+  {
+   "text": "By [lem-exc-galois-krull-finite-limit], each of $G_K,G_L$ is topologically isomorphic to the compatible-family limit of its finite Galois groups, indexed by the nonempty directed set of finite Galois intermediate fields. Apply [lem-dl-a1-finite-group-limit-profinite] to these systems: both groups are compact Hausdorff totally disconnected topological groups.",
+   "uses": [
+    "lem-exc-galois-krull-finite-limit",
+    "lem-dl-a1-finite-group-limit-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 0BU2 (lemma-infinite-galois-limit), 0BMJ (lemma-galois-profinite); Topology Tag 08ZY (lemma-profinite)"
+   }
+  },
+  {
+   "text": "For a finite intermediate field F/K in Ks, use IntermediateField.essFiniteType_iff to choose a finite generating set S of F. Let T be its image in Ls and A = IntermediateField.adjoin L T. All elements of T are integral over L because Ls/L is algebraic, so Mathlib IntermediateField.finiteDimensional_adjoin makes A finite-dimensional. The open subgroup fixing A lies in the inverse image of the subgroup fixing F: fixing T implies fixing S after restriction, and hence fixing K(S)=F by forall_mem_adjoin_smul_eq_self_iff. Thus every identity neighbourhood has neighbourhood preimage, and continuous_of_continuousAt_one proves continuity. This directly uses the finite-algebraic-generation API instead of separately constructing the finite integral subalgebra and showing it is a field.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BMJ, lemma-galois-profinite: Krull finite-subset neighbourhoods; finite algebraic generation made explicit"
+   }
+  },
+  {
+   "text": "By [lem-dl-a1-compact-hausdorff-closed-map], the continuous map $r$ from the compact space $G_L$ to the Hausdorff space $G_K$ has closed image. Thus $H=r(G_L)$ is a closed subgroup of $G_K$.",
+   "uses": [
+    "lem-dl-a1-compact-hausdorff-closed-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YD, lemma-closed-map"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-etale-galois-fixed-field-subgroup] to the Galois extension $L^s/L$ and its intermediate field $L$. Its full group $G_L$ has fixed field exactly $L$. Thus, for $a\\in K^s$, being fixed by every element of $H$ is equivalent to being fixed by every $\\tau\\in G_L$ in $L^s$, and hence equivalent to $a\\in L$. Therefore $(K^s)^H=K^s\\cap L=E$. In particular $H$ fixes $E$ pointwise.",
+   "uses": [
+    "lem-exc-etale-galois-fixed-field-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BML, theorem-inifinite-galois-theory: base field equals full-group fixed field"
+   }
+  },
+  {
+   "text": "Package the closed range H as a ClosedSubgroup of Gal(Ks/K). Apply the closed-subgroup identity InfiniteGalois.fixingSubgroup_fixedField (already in the Mathlib attachment of lem-exc-etale-open-subgroup-fixed-field-galois) to obtain fixingSubgroup(fixedField H)=H. Substitute the elementwise fixed-field identification of the preceding step into mem_fixingSubgroup_iff. This proves exactly that H consists of automorphisms fixing the preimage of L. The general closed-subgroup correspondence proves this directly, so no separate intersection of open overgroups is needed. No algebraicity or separability assumption on L/K is introduced.",
+   "uses": [
+    "lem-exc-etale-open-subgroup-fixed-field-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 0BML, theorem-inifinite-galois-theory: closed-subgroup determination by finite subextensions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-dl-a1-finite-group-limit-profinite",
+  "lem-dl-a1-compact-hausdorff-closed-map",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-exc-etale-open-subgroup-fixed-field-galois"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tags 0BML (theorem-inifinite-galois-theory), 0BMJ (lemma-galois-profinite), 0BU2 (lemma-infinite-galois-limit); restriction image computed by its fixed field. Lean proof by T3, 2026-10-26: finiteDimensional_adjoin handles finite generation, and the closed-subgroup Galois correspondence replaces the final open-overgroup intersection; statement and unit route unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a field extension K inside L the image of the continuous map of absolute Galois groups is the subgroup fixing the intersection of L with the separable closure of K",
+   "results": "{\"t\": \"2026-10-24T10:18:46Z\", \"tool\": \"leanfinder\", \"query\": \"For a field extension K inside L the image of the continuous map of absolute Galois groups is the subgroup fixing the intersection of L with the separable closure of K\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fixedByFinite\", \"InfiniteGalois.fixingSubgroup_isClosed\", \"IntermediateField.map_fixingSubgroup\", \"IntermediateField.fixingSubgroup\", \"InfiniteGalois.isOpen_mulEquivToLimit_image_fixingSubgroup\", \"IntermediateField.fixingSubgroup_isClosed\", \"IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup\", \"IsGaloisGroup.fixedPoints_fixingSubgroup\"], \"digest\": \"040cdd65243dca3d\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Field.absoluteGaloisGroup.map/mapOfAlgebra gives continuity using algebraic closures, not this image identity. Read Galois/Basic.lean:631-645: restrictRestrictAlgEquivMapHom_surjective assumes two finite-dimensional extensions. InfiniteGalois.fixingSubgroup_fixedField is an input, not the asserted arbitrary-field restriction-image theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"absoluteGaloisGroup.map\"",
+   "results": "{\"t\": \"2026-10-24T10:18:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"absoluteGaloisGroup.map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroup.map\", \"Field.absoluteGaloisGroup.mapOfAlgebra\", \"Field.absoluteGaloisGroup.mapOfAlgebra_toFun_apply\", \"Field.absoluteGaloisGroup.map_toFun_apply\", \"Field.absoluteGaloisGroup.mapOfAlgebra_toFun_symm_apply\", \"Field.absoluteGaloisGroup.map_toFun_symm_apply\"], \"digest\": \"7603b1c77e4bc974\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Field.absoluteGaloisGroup.map/mapOfAlgebra gives continuity using algebraic closures, not this image identity. Read Galois/Basic.lean:631-645: restrictRestrictAlgEquivMapHom_surjective assumes two finite-dimensional extensions. InfiniteGalois.fixingSubgroup_fixedField is an input, not the asserted arbitrary-field restriction-image theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "range.*restrict|restrict.*range|mapOfAlgebra",
+   "results": "{\"t\": \"2026-10-24T10:18:47Z\", \"tool\": \"grep\", \"query\": \"range.*restrict|restrict.*range|mapOfAlgebra\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Basic.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Basic.lean\", \"Mathlib/FieldTheory/Normal/Closure.lean\"], \"digest\": \"6f0c745b42954e36\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Field.absoluteGaloisGroup.map/mapOfAlgebra gives continuity using algebraic closures, not this image identity. Read Galois/Basic.lean:631-645: restrictRestrictAlgEquivMapHom_surjective assumes two finite-dimensional extensions. InfiniteGalois.fixingSubgroup_fixedField is an input, not the asserted arbitrary-field restriction-image theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of absolute Galois restriction fixes the relative separable algebraic closure of the base in the extension field",
+   "results": "{\"t\": \"2026-10-24T10:18:47Z\", \"tool\": \"leansearch\", \"query\": \"The image of absolute Galois restriction fixes the relative separable algebraic closure of the base in the extension field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"separableClosure.map_eq_of_algEquiv\", \"Field.absoluteGaloisGroup\", \"SeparableClosure\", \"separableClosure.isSeparable\", \"galRestrict'_id\", \"separableClosure.isAlgebraic\", \"IntermediateField.restrictNormalHom_ker\", \"separableClosure.le_restrictScalars\"], \"digest\": \"9c762b6ab0f03d19\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Field.absoluteGaloisGroup.map/mapOfAlgebra gives continuity using algebraic closures, not this image identity. Read Galois/Basic.lean:631-645: restrictRestrictAlgEquivMapHom_surjective assumes two finite-dimensional extensions. InfiniteGalois.fixingSubgroup_fixedField is an input, not the asserted arbitrary-field restriction-image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The closed image of restriction of automorphisms of a separable closure along a field extension equals the fixing subgroup of the relative separable closure",
+   "results": "{\"t\": \"2026-10-24T10:18:49Z\", \"tool\": \"leanfinder\", \"query\": \"The closed image of restriction of automorphisms of a separable closure along a field extension equals the fixing subgroup of the relative separable closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isClosed_restrictScalars_separableClosure\", \"InfiniteGalois.fixingSubgroup_isClosed\", \"IntermediateField.fixingSubgroup_isClosed\", \"IntermediateField.map_fixingSubgroup\", \"IntermediateField.fixingSubgroup\", \"InfiniteGalois.fixingSubgroup_fixedField\", \"fixedByFinite\", \"IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup\"], \"digest\": \"f2e9652e8391c92b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Field.absoluteGaloisGroup.map/mapOfAlgebra gives continuity using algebraic closures, not this image identity. Read Galois/Basic.lean:631-645: restrictRestrictAlgEquivMapHom_surjective assumes two finite-dimensional extensions. InfiniteGalois.fixingSubgroup_fixedField is an input, not the asserted arbitrary-field restriction-image theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of restriction of absolute Galois groups along any field inclusion is the subgroup fixing the relative separable algebraic closure",
+   "results": "{\"t\": \"2026-10-24T10:53:34Z\", \"tool\": \"leanfinder\", \"query\": \"The image of restriction of absolute Galois groups along any field inclusion is the subgroup fixing the relative separable algebraic closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"fixedByFinite\", \"IntermediateField.map_fixingSubgroup\", \"Field.absoluteGaloisGroup\", \"IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup\", \"FiniteGaloisIntermediateField.mem_fixingSubgroup_iff\", \"IntermediateField.restrictNormalHom_ker\", \"IntermediateField.fixingSubgroupEquiv\", \"InfiniteGalois.algEquivToLimit\"], \"digest\": \"58a90d9e5848a0f9\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole restriction-image statement: map/mapOfAlgebra construct a continuous restriction using algebraic closures; InfiniteGalois.fixingSubgroup_fixedField and the finite-dimensional restrictRestrictAlgEquivMapHom_surjective are inputs or have extra hypotheses. Read FieldTheory/Galois/Infinite.lean:146 and Basic.lean:631; reuse existing DAG Mathlib leaves for the inputs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"absoluteGaloisGroup.map\"",
+   "results": "{\"t\": \"2026-10-24T10:53:33Z\", \"tool\": \"loogle\", \"query\": \"\\\"absoluteGaloisGroup.map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroup.map\", \"Field.absoluteGaloisGroup.mapOfAlgebra\", \"Field.absoluteGaloisGroup.mapOfAlgebra_toFun_apply\", \"Field.absoluteGaloisGroup.map_toFun_apply\", \"Field.absoluteGaloisGroup.mapOfAlgebra_toFun_symm_apply\", \"Field.absoluteGaloisGroup.map_toFun_symm_apply\"], \"digest\": \"7603b1c77e4bc974\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole restriction-image statement: map/mapOfAlgebra construct a continuous restriction using algebraic closures; InfiniteGalois.fixingSubgroup_fixedField and the finite-dimensional restrictRestrictAlgEquivMapHom_surjective are inputs or have extra hypotheses. Read FieldTheory/Galois/Infinite.lean:146 and Basic.lean:631; reuse existing DAG Mathlib leaves for the inputs."
+  },
+  {
+   "tool": "grep",
+   "query": "range.*restrict|restrict.*range|mapOfAlgebra",
+   "results": "{\"t\": \"2026-10-24T10:54:01Z\", \"tool\": \"grep\", \"query\": \"range.*restrict|restrict.*range|mapOfAlgebra\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Basic.lean\", \"Mathlib/FieldTheory/Finite/Basic.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Algebra.lean\", \"Mathlib/FieldTheory/Galois/IsGaloisGroup.lean\", \"Mathlib/FieldTheory/Normal/Closure.lean\", \"Mathlib/FieldTheory/Normal/Closure.lean\"], \"digest\": \"ee04e182bfcea002\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole restriction-image statement: map/mapOfAlgebra construct a continuous restriction using algebraic closures; InfiniteGalois.fixingSubgroup_fixedField and the finite-dimensional restrictRestrictAlgEquivMapHom_surjective are inputs or have extra hypotheses. Read FieldTheory/Galois/Infinite.lean:146 and Basic.lean:631; reuse existing DAG Mathlib leaves for the inputs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of absolute Galois restriction is the subgroup fixing the intersection with the smaller separable closure",
+   "results": "{\"t\": \"2026-10-24T10:54:02Z\", \"tool\": \"leansearch\", \"query\": \"The image of absolute Galois restriction is the subgroup fixing the intersection with the smaller separable closure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FiniteGaloisIntermediateField.mem_fixingSubgroup_iff\", \"IntermediateField.fixingSubgroup\", \"IntermediateField.restrictNormalHom_ker\", \"IsGaloisGroup.map_mulEquivAlgEquiv_fixingSubgroup\", \"IntermediateField.map_fixingSubgroup\", \"InfiniteGalois.IntermediateFieldEquivClosedSubgroup\", \"fixedByFinite\", \"IntermediateField.restrictRestrictAlgEquivMapHom_surjective\"], \"digest\": \"f1be6aa856ffb7a8\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole restriction-image statement: map/mapOfAlgebra construct a continuous restriction using algebraic closures; InfiniteGalois.fixingSubgroup_fixedField and the finite-dimensional restrictRestrictAlgEquivMapHom_surjective are inputs or have extra hypotheses. Read FieldTheory/Galois/Infinite.lean:146 and Basic.lean:631; reuse existing DAG Mathlib leaves for the inputs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed subgroup of an infinite Galois group equals the subgroup fixing its fixed field",
+   "results": "{\"t\": \"2026-10-24T10:54:02Z\", \"tool\": \"leanfinder\", \"query\": \"A closed subgroup of an infinite Galois group equals the subgroup fixing its fixed field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.fixingSubgroup_fixedField\", \"InfiniteGalois.fixingSubgroup_isClosed\", \"InfiniteGalois.GaloisInsertionIntermediateFieldClosedSubgroup\", \"InfiniteGalois.fixedField_fixingSubgroup\", \"IsGaloisGroup.fixingSubgroup_fixedPoints\", \"IntermediateField.fixingSubgroup_isClosed\", \"InfiniteGalois.IntermediateFieldEquivClosedSubgroup\", \"IsGalois.fixedField_fixingSubgroup\"], \"digest\": \"ef36bb7a8e12876b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the whole restriction-image statement: map/mapOfAlgebra construct a continuous restriction using algebraic closures; InfiniteGalois.fixingSubgroup_fixedField and the finite-dimensional restrictRestrictAlgEquivMapHom_surjective are inputs or have extra hypotheses. Read FieldTheory/Galois/Infinite.lean:146 and Basic.lean:631; reuse existing DAG Mathlib leaves for the inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-dense-henselian-field-etale-comparison",
+  "date": "2026-10-24",
+  "group": "Q53"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Image of absolute Galois restriction for an arbitrary field inclusion.",
+   "via": [
+    "lem-per-dense-henselian-field-etale-comparison",
+    "lem-per-henselian-completion-open-rigidity",
+    "lem-per-punctual-strict-completion-test",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-galois-restriction-image",
+  "worker": "stage1",
+  "summary": "Proved restriction stability and continuity, closedness of the image and its exact fixed field; recovered the image from open overgroups. Reused all field and profinite inputs already in the DAG, with no new nodes and no change to the statement or statement dependencies. Checked arbitrary, transcendental and inseparable extensions.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Testing closed-point purity after strict completion. Completion part: compare the open complements by the abelian completion comparison, ILO XX section 4.4, before applying the support triangle. ILO XX 4.4: admissible blowups, their limit spectral sequence, and its valuative stalks. Image of absolute Galois restriction for an arbitrary field inclusion. Current latest ancestor proof Step 3 is provenance for the dense-henselian completion interface; this split supplies precisely the admitted Galois restriction-image input without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separable-closure-exists-galois",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-finite-generated-integral-subring",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-exc-galois-krull-finite-limit",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-dl-a1-finite-group-limit-profinite",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-dl-a1-compact-hausdorff-closed-map",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-exc-etale-galois-fixed-field-subgroup",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-exc-etale-open-subgroup-fixed-field-galois",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-wf-profinite-closed-subgroup-intersection-open",
+    "why": "Generic field theory or profinite topology used exactly as stated in the restriction-image argument; the perverse Fourier unit has no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-dl-a1-finite-group-limit-profinite",
+  "lem-dl-a1-compact-hausdorff-closed-map",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-exc-etale-open-subgroup-fixed-field-galois"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-aff02b90b",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-aff02b90b (reviewer sub-agent of L); spot-checked: This delivery has one commit and no new nodes. The item's statement and stmt_deps are unchanged, and the six steps are all correct. Step 1 uses IsSepClosure Galois clause (2) on both closures and shows tau(K^s)=K^s from minimal-polynomial roots. Step 2: the Krull finite-limit isomorphism plus ProfiniteGrp.limit (set-sized nonempty directed index, no surjectivity needed) make G_K and G_L profinite. Step 3: L[S] is finite over L by finite_adjoin_of_finite_of_isIntegral (S is a K-basis of F, algebraic over L), and the step shows it is a field; Gal(L^s/L[S]) lies in r^-1 Gal(K^s/F), so r is continuous with no algebraicity of L/K. Step 4: compact-to-Hausdorff gives a closed image (08YD). Step 5: the fixed field of G_L is L, so (K^s)^H = K^s cap L = E. Step 6: for every open U containing H, Gal(K^s/(K^s)^U)=U, and closedSubgroup_eq_sInf_open gives g in H; this matches the closed-subgroup paragraph of the 0BML proof. Statement tested on K=L, L containing K^s, K(t), finite separable non-normal L, and purely inseparable L; all are correct. Read fields.tex 0BMJ/0BU2/0BML/030J and topology.tex 08YD/08ZY; tags match. No duplicate in the DAG (lem-per-field-pullback-galois-action and lem-dl-a1-residue-action-krull-continuity state different things) and no cycle. The 8 cross-unit tool_uses are all exact Mathlib leaves used as stated: accepted. Existing node lem-exc-etale-open-subgroup-fixed-field-galois names pione.tex instead of fields.tex for 0BML; this is cosmetic metadata and was not edited. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableClosureRestrictionImage",
+  "declaration": "IntermediateField.separableClosure_restriction_image",
+  "file": "lean/Sheaf/FieldTheory/SeparableClosureRestrictionImage.lean",
+  "statement": "theorem separableClosure_restriction_image (K : Type u) (L : Type v) (Ks : Type w) (Ls : Type z) [Field K] [Field L] [Field Ks] [Field Ls] [Algebra K L] [Algebra K Ks] [Algebra L Ls] [Algebra K Ls] [Algebra Ks Ls] [IsScalarTower K L Ls] [IsScalarTower K Ks Ls] [IsSepClosure K Ks] [IsSepClosure L Ls] : Continuous (restrictRestrictAlgEquivMapHom K Ks L Ls) ∧ IsClosed ((restrictRestrictAlgEquivMapHom K Ks L Ls).range : Set (Ks ≃ₐ[K] Ks)) ∧ ((restrictRestrictAlgEquivMapHom K Ks L Ls).range : Set (Ks ≃ₐ[K] Ks)) = {σ | ∀ x : Ks, algebraMap Ks Ls x ∈ Set.range (algebraMap L Ls) → σ x = x}",
+  "branch": "newtargets-dag",
+  "by": "Q104",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-091c3cae4",
+  "group": "Q104",
+  "result": "pass",
+  "note": "Node unchanged except the new lean record (live had none). lean.statement appears verbatim in SeparableClosureRestrictionImage.lean. Map is Mathlib restrictRestrictAlgEquivMapHom K Ks L Ls, canonical restriction Gal(Ls/L)→Gal(Ks/K); Normal K Ks from IsSepClosure.isGalois. Compatible embedding = two IsScalarTower instances; IsSepClosure for both closures (not alg closures); Krull topology instance; three conjuncts (continuity, closed range, range = fixer of Ks∩L via preimage of range(algebraMap L Ls)) match the node exactly; no algebraicity/separability on L/K; 4 free universes. Edge cases K=L, L⊇Ks, purely inseparable, K(t), non-normal finite, K sep closed all covered. No duplicate in side-live lean or Mathlib (only finite-dim surjectivity lemma). Proof is sorry only; docstrings give source place, blueprint tag and the 6 proof steps; report has Worker report and Second reading sections. Not recompiled (no change); worker compile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261026T092646-L-3451098",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

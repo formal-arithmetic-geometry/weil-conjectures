@@ -1,0 +1,143 @@
+{
+ "id": "lem-sp-twisted-pullback-cofinal-models",
+ "kind": "statement",
+ "title": "Simultaneous strict cofinal reduction, pullback and tensor models",
+ "statement": "For a prime l and finite extension E of Q_l, arbitrary schemes X,Y and f:X→Y, a coefficient base b and its pullback geometry g, and reduction towers DX,RX,DY,RY [def-sp-twisted-pullback-reduction-data], there exist strict reduction models AX,AY, exact cofinal models FX,FY and compatible CofinalReduction, CofinalGeometry and CofinalTensor records. Their ordinary sections, quotient units, adjunction mates and K-flat representative formulas are exactly those fixed by these structures. No completed pullback comparison q, membership assertion or reconstruction assertion is involved. Coefficient fields, completed coefficient sheaves, strict systems and the fixed derived presentations are as in [def-weil-l-adic-coefficient-extension], [def-weil-completed-integral-coefficients], [def-sf-integral-strict-reduction-model], [sk-def-sp-coefficient-towers]. The same records supply, for every signed power and integer shift, a natural isomorphism from the native finite source after cofinal restriction to the prescribed finite source, with components exactly cofinalSourceComparison.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "def-sp-twisted-pullback-reduction-data",
+  "def-sf-integral-strict-reduction-model",
+  "sk-def-sp-coefficient-towers"
+ ],
+ "proof": [
+  {
+   "text": "Restrict systems to b.ramification*(n+1)-1 using the DVR identity-induced quotient identifications. On sections and maps use the existing component literally; transport scalar action by the quotient-ring isomorphism. These formulas commute with all restrictions, including equal indices. Componentwise kernels and cokernels prove exactness.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-completed-integral-coefficients",
+    "lem-pur-system-level-left-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  },
+  {
+   "text": "Construct AX and AY by ordinary quotient tensor and its resolving-class left-derived universal property. Identify their reduction functors with the fixed universal reduction. The quotient-generator map identifies ordinary cofinal reduction with the given ordinaryReduction; uniqueness of left derivation gives the derived comparison, with its counit-transpose and resolving-complex representative equations.",
+   "uses": [
+    "def-sf-integral-strict-reduction-model",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  },
+  {
+   "text": "Direct-image sections commute with restriction. Its adjunction mate gives the inverse-image comparison with exactly the recorded mate equation. Restriction of each total tensor summand is identity on the selected local pure tensors; sheaf tensor generation gives the chain isomorphism. The acyclic tensor test, using extension of restricted systems, proves K-flat preservation. Localizing this chain map on K-flat pairs gives the tensor comparison and representative equation. Form the cofinal finite-source natural comparison by whiskering the inverse of G.derived, then the pullback of cY.derived, pairing with cX.derived at the reduced line, applying T.comparison, and shifting after the exact restriction shift comparison. The component formulas for this composite give precisely cofinalSourceComparison. No completed input comparison or reconstruction is involved.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+    "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-system-level-left-extension",
+  "def-sf-integral-strict-reduction-model",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction-bijection.proof.md",
+  "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit",
+  "description": "Isolated construction step of the parent proof, following the explicit proof in the theorem docstring."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restrict strict systems of coefficient modules to a cofinal subsequence with exact tensor and pullback comparisons",
+   "results": "ModuleCat.directLimitIsColimit_desc; TensorProduct.directLimitRight; TensorProduct.fromDirectLimit; Submodule.FG.lTensor.directLimit; DirectedSystem.lTensor; ModuleCat.directLimitCocone_pt_isModule; Submodule.FG.rTensor.directLimit; ModuleCat.directLimitCocone. No statement constructs the required strict model or proves this completed Tate-line assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cofinal restriction strict sheaves module coefficient systems derived tensor pullback",
+   "results": "SheafOfModules.Presentation.map; SheafOfModules.mapFree; SheafOfModules.Presentation.mapGenerators; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.Presentation.map_π_eq; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; CondensedMod.ofSheafProfinite. No statement constructs the required strict model or proves this completed Tate-line assertion.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CofinalReduction|TateReduction",
+   "results": "No hits. Also searched Mathlib sheaf and derived-category files locally for Tate or DerivedComplete, without a matching declaration.",
+   "date": "2026-10-25",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TwistedPullbackReductionTower",
+  "date": "2026-10-25",
+  "group": "X2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-integral-adjunction",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-integral-adjunction-bijection",
+   "place": "Purity: pullback, twist and shift commute with reduction before total derived inverse limit",
+   "via": [
+    "lem-sp-twisted-pullback-reduction-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.TwistedPullbackCofinalModels",
+  "file": "lean/Sheaf/Paper/TwistedPullbackCofinalModels.lean",
+  "declaration": "WeilConjectures.SpTwistedPullback.twistedPullbackCofinalModels",
+  "statement": "theorem twistedPullbackCofinalModels {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)\n    (DX : SpCoefficientTowersAbelian l E X) (RX : SpReductionTower l E X DX)\n    (DY : SpCoefficientTowersAbelian l E Y) (RY : SpReductionTower l E Y DY) :\n    ∃ (AX : IntegralStrictReductionModel l E X)\n      (AY : IntegralStrictReductionModel l E Y)\n      (FX : CofinalModel l E b X) (FY : CofinalModel l E b Y)\n      (cX : CofinalReduction l E b X DX RX AX FX)\n      (cY : CofinalReduction l E b Y DY RY AY FY)\n      (G : CofinalGeometry l E b f g FX FY) (T : CofinalTensor l E b X FX),\n      ∀ m s : ℤ,\n        ∃ c : nativeFiniteSource l E f m s ⋙ FX.ordinary.mapDerivedCategory ≅\n          finiteSource l E b f g DX RX DY RY m s,\n          ∀ K : sfIntegralConstructibleCategory l E Y, c.app K =\n            cofinalSourceComparison l E b f g DX RX DY RY AX AY FX FY cX cY G T m s K",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T003137-L-149491",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261026T003137-L-149491",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

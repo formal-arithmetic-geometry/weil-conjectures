@@ -1,0 +1,129 @@
+{
+ "id": "def-sfb-artin-integer-base-versality",
+ "kind": "definition",
+ "title": "Integer-base fibred-groupoid limit preservation and versality",
+ "status": "split",
+ "statement": "Fix the scheme universe and category universes of [def-weil-size-convention]. Work with schemes [def-pc-scheme] over $S=\\operatorname{Spec}\\mathbf Z$ [def-weil-affine-spectrum], represented in that universe by $\\operatorname{Spec}(\\operatorname{ULift}\\mathbf Z)$. Each scheme has its unique structure morphism to $S$, and each scheme map has its corresponding map over $S$. Let $\\mathcal F$ be a category fibred in groupoids over $S$-schemes [def-sfb-stable-pointed-moduli-groupoids]. Write $\\mathcal F(T)$ for the actual fibre category, and for $a:T\\to U$, $x\\in\\mathcal F(T)$ and $y\\in\\mathcal F(U)$ write $\\operatorname{Lift}(a,x,y)$ for the arrows $x\\to y$ in the total category lying over exactly $a$. Limit preservation over this integer base is the specialization of [def-sfb-fibred-groupoid-limit-preserving]: for every nonempty small directed inverse system of affine schemes with affine limit, objects descend to a stage, arrows between pulled-back stage objects descend to a common later stage with their specified identifications, and equality of stage arrows at the limit holds at a later stage. These three predicates are denoted ObjectsDescend, ArrowsDescend and ArrowEqualitiesDescend, and their conjunction is IsLimitPreserving. A point $u\\in U$ is a finite type point if its canonical residue-field morphism $\\operatorname{Spec}\\kappa(u)\\to U$ [def-weil-residue-field] is locally of finite type and quasi-compact [def-weil-finite-type-morphism]. For $U$ locally of finite type over $S$ and $x\\in\\mathcal F(U)$, say $x$ is versal at $u$ if the following lifting condition holds. For all surjections $g:A'\\to A$ of Artinian local rings with nilpotent kernel and residue fields identified with $\\kappa(u)$, with compatible surjective residue maps having the maximal ideals as kernels, every $a:\\operatorname{Spec}A\\to U$ reducing to the canonical morphism from $\\operatorname{Spec}\\kappa(u)$ and every $y'\\in\\mathcal F(\\operatorname{Spec}A')$ with a specified isomorphism $y'|_A\\cong a^*x$ admit a lift $a':\\operatorname{Spec}A'\\to U$ and an isomorphism $y'\\cong(a')^*x$ inducing exactly the specified one. Here Artinian means that descending chains of ideals stabilize, and the maps respect the residue-field identifications. Openness of versality means that for every such $U,x$ and every finite type point $u_0$ where $x$ is versal, there is an open neighbourhood $V\\subseteq U$ of $u_0$ such that $x$ is versal at every finite type point of $V$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-weil-size-convention",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-weil-finite-type-morphism",
+  "def-weil-residue-field",
+  "def-sfb-fibred-groupoid-limit-preserving"
+ ],
+ "source": {
+  "document": "literature/stacks-project/artin.tex",
+  "place": "definition-limit-preserving (Tag 07XL), definition-versal, equation-hat-x, definition-openness-versality; over Spec Z as in Tag 0CXU"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "limit preserving fibred groupoid finite type point Artinian lifting versality openness of versality",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreservesFiniteLimitsOfFlat.lift\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \": s.pt ⟶ F.obj c.pt\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}$, a small category $\\\\mathcal{J}$, a functor $K : \\\\mathcal{J} \\\\to \\\\mathcal{C}$, and a representably flat functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, for any co\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.FiberFunctor.instPreservesFiniteLimitsFintypeCat\", \"module\": \"Mathlib.CategoryTheory.Galois.Basic\", \"type\": \": PreservesFiniteLimits F\", \"doc\": \"Any fiber functor from a pre-Galois category to the category of finite types preserves finite limits. This means that for such a functor $ F : \\\\mathcal{C} \\\\to \\\\text{Fintype} $, the image of any finite\"}\n  {\"name\": \"CategoryTheory.Grpd.piLimitFanIsLimit\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \"⦃J : Type u⦄ (F : J → Grpd.{u, u}) : Limits.IsLimit (piLimitFan F)\", \"doc\": \"For any family of groupoids $\\\\{\\\\mathcal{G}_j\\\\}_{j \\\\in J}$, the product groupoid $\\\\prod_{j \\\\in J} \\\\mathcal{G}_j$ equipped with evaluation functors $\\\\text{ev}_j : \\\\prod_{j \\\\in J} \\\\mathcal{G}_j \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Basic\", \"type\": \"[HasSheafify J A] [J.WEqualsLocallyBijective A] [(forget A).ReflectsIsomorphisms]\\n  [PreservesFilteredColimitsOfSize.{w, w} (forget A)] [LocallySmall.{w} C] :\\n  PreservesColimitsOfSize.{w, w} (Φ.sheafFiber (A := A))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, if $\\\\mathcal{C}$ has sheafification, satisfies the locally bijective condition, the forgetful functor refl\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeFunctorOppositePresheafFiber\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Basic\", \"type\": \": PreservesColimitsOfSize.{w, w} (Φ.presheafFiber (A := A))\", \"doc\": \"The presheaf fiber functor associated to a point of a Grothendieck topology preserves colimits of a specified size.\"}\n  {\"name\": \"CategoryTheory.Limits.Types.instPreservesLimitsOfSizeUliftFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.Preserves.Ulift\", \"type\": \": PreservesLimitsOfSize.{w', w} uliftFunctor.{v, u}\", \"doc\": \"The universe lifting functor $\\\\mathrm{ULift}$ preserves limits of a given size between type universes.\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesFiniteLimitsFunctorOppositePresheafFiberOfLocallySmallOfHasFiniteLimitsOfAB5OfSize\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Basic\", \"type\": \"[LocallySmall.{w} C] [HasFiniteLimits A] [AB5OfSize.{w, w} A] : PreservesFiniteLimits (Φ.presheafFiber (A := A))\", \"doc\": \"Given a locally small category $\\\\mathcal{C}$ and a category $\\\\mathcal{A}$ with finite limits satisfying the AB5 axiom (filtered colimits are exact), the presheaf fiber functor associated to a point $\\\\\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyOfFinitePresentation f] : LocallyOfFinitePresentation (f ∣_ V)\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is locally of finite presentation, then for any open subset $ V $ of $ Y $, the restriction $ f|_V $ is also locally of finite presentation.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project match: the twelve ArtinCriterion declarations in Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion. Record them existing:true without a module or new Lean definitions. The general-base def-sfb-fibred-groupoid-limit-preserving is cited for the limit-preservation specialization; it does not record the integer-base and versality declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "limit preserving fibred groupoid finite type point Artinian lifting versality openness of versality",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The property of a scheme being locally Artinian, i.e., every point has an open neighborhood whose ring is Artinian.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyArtinian_iff_openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover),\\n  AlgebraicGeometry.IsLocallyArtinian X ↔ ∀ (i : 𝒰.I₀), AlgebraicGeometry.IsLocallyArtinian (𝒰.X i)\", \"doc\": \"For any scheme $X$ and an open cover $\\\\mathcal{U}$ of $X$, the scheme $X$ is locally Artinian if and only if every open subscheme $\\\\mathcal{U}.X(i)$ in the cover is locally Artinian. This equivalence \"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyArtinianXScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X] {U : X.OpenCover} (i : U.I₀),\\n  AlgebraicGeometry.IsLocallyArtinian (U.X i)\", \"doc\": \"If $ X $ is a locally Artinian scheme and $ U $ is an open cover of $ X $, then each open subset $ U_i $ in the cover is also a locally Artinian scheme. This means the property of being locally Artini\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.finite\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsArtinianScheme X], Finite ↥X\", \"doc\": \"Every Artinian scheme is a finite scheme.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    {S X : AlgebraicGeometry.Scheme} →\\n      {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} →\\n        {t : D ⟶ (CategoryTheory.Functor.const I).obj S} →\\n          {f : X ⟶ S} → AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f → S\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, this definition constructs\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyArtinianToScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyArtinian X] {U : X.Opens},\\n  AlgebraicGeometry.IsLocallyArtinian ↑U\", \"doc\": \"If a scheme $X$ is locally Artinian (i.e., every point has an open neighborhood with an Artinian ring), then every open subscheme $U \\\\subseteq X$ is also locally Artinian. This instance asserts that t\"}\n  {\"name\": \"AlgebraicGeometry.IsArtinianScheme.toIsLocallyArtinian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsArtinianScheme X], AlgebraicGeometry.IsLocallyArtinian X\", \"doc\": \"If $X$ is an Artinian scheme, then $X$ is locally Artinian, meaning every point of $X$ has an open neighborhood whose coordinate ring is Artinian.\"}\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project match: the twelve ArtinCriterion declarations in Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion. Record them existing:true without a module or new Lean definitions. The general-base def-sfb-fibred-groupoid-limit-preserving is cited for the limit-preservation specialization; it does not record the integer-base and versality declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "OpennessOfVersality|IsLimitPreserving|IsVersalAt|FiniteTypePoint; Mathlib wrapper and rg in lean/WeilConjectures and lean/Sheaf",
+   "results": "[grep] OK 0 hit(s)\nlean/Sheaf/AlgebraicGeometry/FibredGroupoidLimitPreserving.lean:84:def IsLimitPreserving {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) : Prop :=\nlean/Sheaf/AlgebraicGeometry/ArtinVersalFieldLifting.lean:67:      QuasiCompact (U.left.fromSpecResidueField p) → IsVersalAt R F U x p)\nlean/Sheaf/AlgebraicGeometry/ArtinFamilyLiftingData.lean:102:def IsVersalAt (R : CommRingCat.{u}) (F : BasedCategory.{v, w} (Over (Spec R)))\nlean/Sheaf/AlgebraicGeometry/ArtinPointwiseVersalFieldExtension.lean:98:    (hx : IsVersalAtField F x (U.left.residueField u₀) (U.left.fromSpecResidueField u₀))\nlean/Sheaf/AlgebraicGeometry/ArtinPointwiseVersalFieldExtension.lean:101:    IsVersalAtField F x L\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableInfinitesimalSmoothness.lean:84:    (hLimits : FibredGroupoidLimit.IsLimitPreserving F)\nlean/Sheaf/AlgebraicGeometry/ProperCurveOpennessVersality.lean:53:   lifting condition extends the given reduction isomorphism, exactly as IsVersalAt\nlean/Sheaf/AlgebraicGeometry/ProperCurveOpennessVersality.lean:59:    (hx : x.IsVersalAt u₀) :\nlean/Sheaf/AlgebraicGeometry/ProperCurveOpennessVersality.lean:62:        LocallyOfFiniteType (T.left.fromSpecResidueField u₁) → x.IsVersalAt u₁ := by\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:117:def IsLimitPreserving (F : BasedCategory.{v, w} (Over Base.{u})) : Prop :=\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:284:def FiniteTypePoint (U : Scheme.{u}) (u₀ : U) : Prop :=\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:293:def IsVersalAt (F : BasedCategory.{v, w} (Over Base.{u}))\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:315:def OpennessOfVersality (F : BasedCategory.{v, w} (Over Base.{u})) : Prop :=\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:318:      FiniteTypePoint U u₀ → IsVersalAt F U x u₀ →\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:319:      ∃ V : U.Opens, u₀ ∈ V ∧ ∀ t : U, t ∈ V → FiniteTypePoint U t → IsVersalAt F U x t\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:397:    (hLimits : IsLimitPreserving F)\nlean/Sheaf/AlgebraicGeometry/ArtinRepresentableDiagonalCriterion.lean:401:    (hVersal : OpennessOfVersality F)\nlean/Sheaf/AlgebraicGeometry/PointwiseVersalLifting.lean:42:def IsVersalAtField {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S))\nlean/Sheaf/AlgebraicGeometry/ProperCurveVersality.lean:40:def IsVersalAt {S : Scheme.{u}} {T : Over S} (x : ProperCurveFamily T) (u₀ : T.left) :\nlean/Sheaf/AlgebraicGeometry/ArtinVersalityGeneralization.lean:96:def IsLimitPreserving {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S)) : Prop :=\nlean/Sheaf/AlgebraicGeometry/ArtinVersalityGeneralization.lean:123:def IsVersalAt {S : Scheme.{u}} (F : BasedCategory.{v, w} (Over S))\nlean/Sheaf/AlgebraicGeometry/ArtinVersalityGeneralization.lean:164:    (hRS : IsRimSchlessingerStar F) (hLimits : IsLimitPreserving F)\nlean/Sheaf/AlgebraicGeometry/ArtinVersalityGeneralization.lean:171:    (hsp : u ⤳ u₀) (hx : IsVersalAt F U x u₀) :\nlean/Sheaf/AlgebraicGeometry/ArtinVersalityGeneralization.lean:172:    IsVersalAt F U x u := by\n",
+   "date": "2026-10-24",
+   "verdict": "Existing project match: the twelve ArtinCriterion declarations in Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion. Record them existing:true without a module or new Lean definitions. The general-base def-sfb-fibred-groupoid-limit-preserving is cited for the limit-preservation specialization; it does not record the integer-base and versality declarations."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-artin-square-zero-effectivity-openness",
+  "date": "2026-10-24",
+  "group": "Q88"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D59 (lemma-curves-defo-thy), over Spec Z; artin.tex definition-versal and definition-openness-versality. Supporting input: Tag 0CXU (lemma-SGE-implies-openness-versality), specialized to Spec Z; remark-strong-effectiveness; definitions definition-RS-star, definition-limit-preserving, definition-versal and definition-openness-versality. Integer-base limit-preservation and versality vocabulary in the hypotheses and conclusion of Tag 0CXU.",
+   "via": [
+    "lem-sfb-artin-square-zero-effectivity-openness",
+    "lem-sfb-curve-openness-versality",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinRepresentableDiagonalCriterion",
+  "declaration": "AlgebraicGeometry.ArtinCriterion.OpennessOfVersality",
+  "declarations": [
+   "AlgebraicGeometry.ArtinCriterion.Base",
+   "AlgebraicGeometry.ArtinCriterion.integerScheme",
+   "AlgebraicGeometry.ArtinCriterion.overMap",
+   "AlgebraicGeometry.ArtinCriterion.Object",
+   "AlgebraicGeometry.ArtinCriterion.Lift",
+   "AlgebraicGeometry.ArtinCriterion.ObjectsDescend",
+   "AlgebraicGeometry.ArtinCriterion.ArrowsDescend",
+   "AlgebraicGeometry.ArtinCriterion.ArrowEqualitiesDescend",
+   "AlgebraicGeometry.ArtinCriterion.IsLimitPreserving",
+   "AlgebraicGeometry.ArtinCriterion.FiniteTypePoint",
+   "AlgebraicGeometry.ArtinCriterion.IsVersalAt",
+   "AlgebraicGeometry.ArtinCriterion.OpennessOfVersality"
+  ],
+  "statement": "def OpennessOfVersality (F : BasedCategory.{v, w} (Over Base.{u})) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": true,
+  "note": "H2/H12 repair requested by maintainer at returned head 326b495c311f: records the twelve existing definition declarations previously carried only by the theorem node lem-sfb-artin-representable-diagonal-criterion. No Lean changes, no duplicate definitions, and no dependence on that theorem. Limit preservation is the integer-base specialization of def-sfb-fibred-groupoid-limit-preserving."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-028b5b2ea",
+  "group": "Q88",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-028b5b2ea",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Re-delivery of RETURN 326b (H2/H12). Lean byte-identical (sha256 + diff). Item changes only stmt_deps (+def-sfb-artin-integer-base-versality, +def-sfb-stable-pointed-moduli-groupoids); lean.statement verbatim. New existing:true node records the 12 ArtinCriterion decls (all present; OpennessOfVersality statement verbatim, line 315); TeX matches the Lean (base, Object/Lift, limit preservation = def-sfb-fibred-groupoid-limit-preserving at S=Base, lft+qc finite type point, Artinian lifting versality with b≫d=c, openness). Square-zero def nodes cite it in TeX + stmt_deps. Item clauses (1)-(4) and conclusion re-checked vs 0CXU; edge cases and universes OK; report sections present; no compile needed (no change). Maintainer note: parallel ArtinVersality.IsRimSchlessingerStar (theorem-node-owned helper of lem-sfb-artin-versality-generalization, landed 616b9e96 during the 326b review) duplicates RS*; stage 3 needs a SquareZeroGluing ⇒ IsRimSchlessingerStar bridge at S=Base for proof step 2."
+ }
+}

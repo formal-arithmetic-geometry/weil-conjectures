@@ -1,0 +1,473 @@
+{
+ "id": "lem-sf-finite-exceptional-site-normalization",
+ "kind": "statement",
+ "title": "Finite closed kernel adjoint agrees with the transported etale exceptional functor",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of [def-weil-finite-field-fiber], a prime $\\ell$ invertible in $k$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R=\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $X$ be separated of finite type over $k$, $i:Z\\hookrightarrow X$ a closed immersion and $j:U\\hookrightarrow X$ its complementary open immersion [def-weil-scheme-morphism-properties]. Use the small pro-etale sites and the coefficient categories $D^b_c(T,A_n)$ and $D^b_c(T,R)$ of [def-weil-derived-complete-integral-detailed], for $T=X,Z,U$.\nFix $n\\ge1$ and $A=A_n$. Let $i^\\times_{\\rm et}$ be the right adjoint of the ordinary etale compact-support functor attached to the compactification $Z\\xrightarrow1Z\\xrightarrow iX$ [def-compact-support-direct-image-detailed]. Let $J_n$ be the ambient pro-etale kernel adjoint of [lem-sf-ringed-closed-kernel-adjoint]. Write $\\nu_T:T_{\\rm proet}\\to T_{\\rm et}$ for the site comparison [def-weil-pbc-site-comparison-morphism]. The etale adjoint preserves bounded constructibility and has the supported triangle with the etale exceptional counit and open unit. On $D^b_c(X,A)$ there is a natural isomorphism\n$$J_nK\\cong\\nu_Z^*i^\\times_{\\rm et}R\\nu_{X,*}K,$$\nwhere the right-hand side is the transported finite exceptional inverse image formula of [def-weil-exceptional-inverse-image]. For every bounded constructible etale origin $K\\cong\\nu_X^*K'$, the induced isomorphism between the two supported triangles is the unique one with the canonical middle and open components; it preserves the counit and consequently the adjunction unit. This normalization is independent of the chosen origin and compatible with shifts and with the canonical counit-transpose finite coefficient quotient comparisons: for $m\\ge n$ and every $K\\in D^b_c(X,A_m)$ whose derived reduction $K\\otimes^L_{A_m}A_n$ lies in $D^b_c(X,A_n)$ (for instance a reduction $K_m$ of an integral constructible complex), the kernel-adjoint comparison $J_mK\\otimes^L_{A_m}A_n\\to J_n(K\\otimes^L_{A_m}A_n)$, defined as the transpose of the coefficient-extended kernel counit, corresponds under the two finite isomorphisms to the site-comparison image of the etale counit-transpose quotient comparison; no flatness of $A_m\\to A_n$ is assumed. In particular it identifies the coefficient-system realization of the specified exceptional functor, not just an unnamed right adjoint. For integral $K\\in D^b_c(X,R)$ let $J_R$ be the right adjoint of $i_*$ over the completed coefficient sheaves, constructed by [lem-sf-ringed-closed-kernel-adjoint] using $i^{-1}B_X\\cong B_Z$ [lem-weil-pbc-profinite-coefficient-inverse-image]. If $J_RK$ is integral constructible and its counit-normalized reductions are $J_nK_n$ compatibly with quotient transitions, the induced isomorphism of its normalized reduction tower with that specified exceptional coefficient tower gives the natural identification\n$$J_RK\\cong R\\varprojlim_n\\operatorname{Res}_n(Ri_n^!K_n)=Ri_R^!K$$\nin $D(\\operatorname{Mod}(B_Z))$, preserving the exceptional counit and units; here $B_Z=\\varprojlim_n(A_n)_Z$ and the right limit is taken on the actual derived coefficient system of [def-weil-exceptional-inverse-image].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite stage: exceptional-functor identification; Integral stage: specified coherent limit; returned step 8"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-finite-field-fiber",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-witness-compatibility",
+  "def-pur-adic-exceptional-system-realization",
+  "def-pur-adic-derived-site-realization",
+  "def-pur-adic-support-realization",
+  "def-pur-adic-proetale-realization",
+  "def-sp-finite-intrinsic-direct-adjunction",
+  "def-sf-closed-finite-counit-transport",
+  "def-sf-etale-exceptional-quotient-mate",
+  "def-sf-finite-coefficient-direct-image-map",
+  "def-sf-integral-direct-reduction-map",
+  "def-sf-etale-compact-scalar-map"
+ ],
+ "proof": [
+  {
+   "text": "The specified compactification $(1_Z,i)$ identifies ordinary etale compact support with exact termwise $i_*$, with its actual derived comparison, by lem-pur-closed-unbounded-compact-support-normalization. Transport the etale support adjunction along this isomorphism: det-sp-unique-right-adjoint identifies $i^\\times_{\\rm et}$ with the support right adjoint, carrying the counit. Hence lem-exc-closed-support-triangle supplies its triangle with the etale exceptional counit and open unit. Choose a finite dimension bound $d$ for $X$ by lem-kun-dimension-finite-type; if $X$ is empty choose $d=0$. The open complement is quasi-compact since $X$ is Noetherian. The prime-to-characteristic finite ring $A_n$ satisfies lem-exc-open-complement-known with $c=2d$. Applying lem-exc-closed-amplitude proves bounded constructible preservation of the etale adjoint, without a finite-Tor assumption.",
+   "uses": [
+    "lem-pur-closed-unbounded-compact-support-normalization",
+    "det-sp-unique-right-adjoint",
+    "lem-exc-closed-support-triangle",
+    "lem-kun-dimension-finite-type",
+    "lem-exc-open-complement-known",
+    "lem-exc-closed-amplitude",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite stage: identify the ordinary etale adjoint and prove its constructible typing"
+   }
+  },
+  {
+   "text": "Let $K\\cong\\nu_X^*K'$ be a bounded constructible origin, which exists by lem-weil-pbc-finite-ring-constructible-derived-origin. Pull back the etale support triangle. Exact comparison pullback is triangulated; direct-image comparison for $i$ and $j$, both qcqs, identifies its first and last vertices with $i_*\\nu_Z^*i^\\times_{\\rm et}K'$ and $Rj_*j^*K$. The comparison is the adjoint direct-image comparison $b_j$ of lem-weil-pbc-comparison-direct-image-canonical-mate (the specified comparison of prop-weil-pbc-comparison-direct-image): by its counit normalization, the $j^*$-transpose of $b_j\\circ\\nu_X^*(\\eta^{\\rm et})$ is $\\nu_U^*(\\varepsilon^{\\rm et}\\circ j^*\\eta^{\\rm et})=1_{j^*K}$, which is also the transpose of the pro-etale open unit, so the middle arrow is the actual open unit. By lem-pur-closed-finite-adjoint-counit-transport the first arrow is exactly the transported exceptional counit. Put $L=\\nu_Z^*i^\\times_{\\rm et}K'$, bounded constructible by Step 1 and the finite-ring origin equivalence. Lem-pur-classical-support-counit-identification identifies this entire triangle with the bounded-below kernel support triangle, preserving the counit. The ambient kernel adjoint $J_n$ restricts to $D^+$: it is right adjoint to exact $i_*$, so lem-pur-exact-derived-adjunction-bounds applies. On $D^+$ it and the support right adjoint of lem-pur-support-localization-triangle are right adjoints to the same $i_*$; det-sp-unique-right-adjoint identifies them with the same counit. Thus $J_nK\\cong L$. The comparison unit $K'\\cong R\\nu_{X,*}\\nu_X^*K'$ now identifies $L$ with the literal formula $\\nu_Z^*i^\\times_{\\rm et}R\\nu_{X,*}K$, as defined in def-weil-exceptional-inverse-image.",
+   "uses": [
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "prop-weil-pbc-comparison-direct-image",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-pur-classical-support-counit-identification",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-pur-exact-derived-adjunction-bounds",
+    "lem-pur-support-localization-triangle",
+    "det-sp-unique-right-adjoint",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite stage: comparison of the supported triangles and the specified functor"
+   }
+  },
+  {
+   "text": "For any ambient $P,N$ and any integer $a$, the adjunctions and $j^*i_*=0$ of lem-sf-ringed-closed-kernel-adjoint give $\\operatorname{Hom}(i_*P[a],Rj_*N)=\\operatorname{Hom}(j^*i_*P[a],N)=0$. Apply lem-weil-pbc-triangle-morphism-extension to the two support triangles with their canonical middle and open components. Its orthogonality hypothesis is exactly this vanishing, so their triangle isomorphism is unique, including the boundary arrow. Equivalently its closed component is the adjunction transpose of the same counit. This characterizes the comparison without a choice of origin. Naturality in $K$, independence of the origin, and cocycles for changing origins follow because both composites have the same counit transpose. Counit-compatible uniqueness also carries the units: the adjoint of $1_{i_*P}$ is the unit in either presentation. For shifts use the unique adjoint shift structure of lem-weil-pbc-adjunction-shift-compatibility-unique. For a quotient $A_m\\to A_n$ and an input $K$ as in the statement, write $T=-\\otimes^L_{A_m}A_n$. The pro-etale closed projection $q:T(i_*P)\\xrightarrow{\\sim}i_*(TP)$ is invertible by lem-weil-proetale-closed-tensor-projection (ring $(A_m)_X$, second argument $(A_n)_X$, with $i^{-1}(A_n)_X=(A_n)_Z$); its coefficient-adjunction transpose is $i_*$ of the scalar unit. Define the kernel-adjoint comparison by transposing $T(\\varepsilon_m)\\circ q^{-1}$ under $i_*\\dashv J_n$; the corresponding etale comparison is the counit transpose in lem-pur-etale-system-quotient-normalization. Under the site tensor and direct-image identifications the two transposes agree: the finite isomorphisms preserve the counits, and $q$ agrees with $\\nu^*$ of the etale projection since both are the transposes of $i_*$ of the scalar unit. Injectivity of the adjunction bijection makes the quotient squares commute; the same argument gives successive-quotient cocycles. This uses the actual quotient mates and does not assume quotient flatness.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-weil-pbc-triangle-morphism-extension",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-pur-etale-system-quotient-normalization",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-proetale-closed-tensor-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Finite stage: uniqueness, origin independence, shifts and quotient normalization"
+   }
+  },
+  {
+   "text": "For the conditional integral assertion put $C=\\mathcal R_XK$ and $M=\\mathcal R_Z(J_RK)$ in the actual derived categories of strict varying-coefficient systems of def-weil-exceptional-inverse-image. Reducing the integral counit is an actual system map $\\mathcal R_X(i_*J_RK)\\to C$. Precompose with $r_{J_RK}^{-1}$ of lem-sf-closed-direct-image-strict-reduction to obtain $a:i_{*,\\bullet}M\\to C$. The hypothesis on counit-normalized reductions says that its evaluations are the kernel counits after the given identifications $M_n\\cong J_nK_n$. Both $C$ and $M$ are bounded below systems of etale origin: integral constructibility gives a common cohomological interval, and finite-ring constructible origin gives origin levelwise. By lem-pur-coefficient-system-derived-comparison their comparison counits are invertible. Apply $R\\nu_{X,\\bullet,*}$ to $a$ and identify $R\\nu_{X,\\bullet,*}i_{*,\\bullet}\\cong i_{*,\\bullet}^{\\rm et}R\\nu_{Z,\\bullet,*}$ by derived pushforward composition, applied to the small diagram sites of systems. Transpose this actual map under $i_{*,\\bullet}^{\\rm et}\\dashv G_{i,A}$ of lem-pur-etale-coefficient-system-adjoint, then pull it back by $\\nu_{Z,\\bullet}^*$. This constructs a natural map $b:M\\to\\mathcal T_iK$, where $\\mathcal T_iK=\\nu_{Z,\\bullet}^*G_{i,A}R\\nu_{X,\\bullet,*}C$ is exactly the specified system in def-weil-exceptional-inverse-image. Evaluation respects both adjunctions and their counits by the two system lemmas; hence $e_nb$ is exactly the counit-preserving finite isomorphism already proved. In particular $b$ is invertible: its cone has zero cohomology at every level, and cohomology of strict coefficient systems is levelwise. This constructs the map before evaluation; it does not assert faithfulness or uniqueness of lifts of levelwise derived maps.",
+   "uses": [
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-closed-direct-image-strict-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-etale-coefficient-system-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: construct the actual system isomorphism by transposing the reduced counit"
+   }
+  },
+  {
+   "text": "Apply the exact functor $R\\lim\\circ DU_Z$ to $b$. The output on $\\mathcal T_iK$ is literally $Ri_R^!K$ by def-weil-exceptional-inverse-image. On $M$ the canonical quotient augmentation $J_RK\\to R\\lim DU_ZM$ is invertible: $J_RK$ is integral constructible by hypothesis and lem-pur-roos-intrinsic-completeness-equivalence identifies its Roos completeness with invertibility of this specified augmentation. Its hypothesis that $(\\mathcal O_E,(\\varpi))$ is an adic coefficient datum [def-weil-pbc-adic-coefficient-datum] holds: $\\mathcal O_E$ is Noetherian, $\\mathcal O_E/\\varpi$ is a finite field of characteristic $\\ell$, and each $A_n$ is finite with the two-term free resolution $[\\mathcal O_E\\xrightarrow{\\varpi^n}\\mathcal O_E]$, hence perfect. The composite gives the asserted natural integral identification. Its counit equation holds as an equation of systems before taking the limit, since $b$ was the adjunction transpose of $a$; the inverse site-comparison counits and the augmentation commute by naturality. Closed $i_*$ commutes with this derived limit: it is a right adjoint to exact $i^*$, so it preserves K-injective resolutions and the ordinary limit, yielding the derived comparison. Thus taking the limit of the system counit equation gives the integral counit equation. The unit equation follows by transposing the identity under the integral adjunction and its transported adjunction, just as in Step 3. This identifies the specified exceptional realization on morphisms as well as objects.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-exceptional-inverse-image",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+    "place": "Integral stage: take the specified derived limit and retain its counit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-adic-coefficient-datum",
+  "det-sp-unique-right-adjoint",
+  "lem-exc-closed-amplitude",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-open-complement-known",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-classical-support-counit-identification",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-pur-closed-unbounded-compact-support-normalization",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-etale-system-quotient-normalization",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-pur-support-localization-triangle",
+  "lem-sf-closed-direct-image-strict-reduction",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-weil-proetale-closed-tensor-projection",
+  "prop-weil-pbc-comparison-direct-image",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.proof.md",
+  "place": "Finite stage, exceptional identification; Integral stage, identification with the specified coherent exceptional limit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale pro etale comparison closed support kernel adjoint equals transported exceptional inverse image preserving counit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_counit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous and cocontinuous sheaf pu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\\n        CategoryTheory.Functor.id X.Modules\", \"doc\": \"For a morphism $ f : X \\to Y $ of schemes, the composition of the pushforward functor along $ f $ followed by the restriction functor induced by $ f $ is naturally isomorphic to the identity functor on\"}\n  {\"name\": \"Condensed.profiniteSolidCounit\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → FintypeCat.toProfinite.comp (Condensed.profiniteSolid R) ⟶ Condensed.finFree R\", \"doc\": \"The natural transformation from the composition of the finite type to profinite space functor followed by the profinite solid module functor to the free condensed $ R $-module functor on finite types,\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit\", \"doc\": \"For any open immersion $ f: X \\to Y $ of schemes, the counit of the adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mappi\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the hom-set equivalence in the adjunction between the continuous and cocontin\"}\n  {\"name\": \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/SheafEquiv\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D)\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) {A : Type w}\\n  [inst_2 : CategoryTheory.Category.\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the counit of the adjunction between the continuous sheaf pushforward $ G_* $\"}\n  {\"name\": \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"module\": \"Mathlib/Condensed/Light/TopCatAdjunction\", \"type\": \"CategoryTheory.IsIso LightCondSet.sequentialAdjunction.counit\", \"doc\": \"The counit of the adjunction between the category of sequential topological spaces and the category of light condensed sets is an isomorphism.\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_unit_app_val\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\\n  (K : CategoryTheory.GrothendieckT\", \"doc\": \"For a cocontinuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, the underlying presheaf of the unit of the adjunction between cocontinuous an\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor.FullyFaithful",
+   "results": "[loogle] OK 10 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulLOfIsIsoUnit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [CategoryTheory.IsIso h.unit] : L.FullyFaithful\", \"doc\": \"If the unit is an isomorphism, then the left adjoint is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulROfIsIsoCounit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.FullyFaithful\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (h : L ⊣ R) [CategoryTheory.IsIso h.counit] : R.FullyFaithful\", \"doc\": \"If the counit is an isomorphism, then the right adjoint is fully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"If `C` is a full subcategory of `C'` and `D` is a full subcategory of `D'`, then we can restrict\\nan adjunction `L' ⊣ R'` where `L' : C' ⥤ D'` and `R' : D' ⥤ C'` to `C` and `D`.\\nThe construction here i\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Restrict\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {C' : Type u₃} [CategoryTheory.Category.{v₃, u₃} C'] {D' : Type u₄} [CategoryTheory.Category.{v₄, u₄} D'] {iC : CategoryTheory.Functor C C'} {iD : CategoryTheory.Functor D D'} {L' : CategoryTheory.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulLOfCompIsoId\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (adj : L ⊣ R) (i : L.comp R ≅ CategoryTheory.Functor.id C) : L.FullyFaithful\", \"doc\": \"Given an adjunction `L ⊣ R`, if `L ⋙ R` is isomorphic to the identity functor, then `L` is\\nfully faithful.\"}\n  {\"name\": \"CategoryTheory.Adjunction.fullyFaithfulROfCompIsoId\", \"module\": \"Mathlib.CategoryTheory.Monad.Adjunction\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} (adj : L ⊣ R) (j : R.comp L ≅ CategoryTheory.Functor.id D) : R.FullyFaithful\", \"doc\": \"Given an adjunction `L ⊣ R`, if `R ⋙ L` is isomorphic to the identity functor, then `R` is\\nfully faithful.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro.?etale|etale).*exceptional|exceptional.*(pro.?etale|etale)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion exceptional inverse image site comparison normalized integral coefficient system inverse limit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [toSurjectiveOnStalks : AlgebraicGeometry.SurjectiveOnStalks f],\\n  Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base) → AlgebraicGeometry.IsClosedImmersion f\", \"doc\": \"A morphism of schemes $ f: X \\to Y $ is a closed immersion if the underlying continuous map is a closed embedding and the induced maps on stalks are surjective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is a closed immersion if it induces a homeomorphism of the underlying topological space of $ X $ onto a closed subset of $ Y $ and the induced map on structure she\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsClosedImmersion f] : IsIso f.toImage\", \"doc\": \"For any closed immersion $ f: X \\to Y $ of schemes, the induced morphism from $ X $ to the image subscheme of $ f $ is an isomorphism. This means that a closed immersion factors as an isomorphism onto \"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsPreimmersion f] (hf : IsClosed (Set.range f)) : IsClosedImmersion f\", \"doc\": \"If a morphism of schemes is a preimmersion and its image is a closed subset of the target scheme, then it is a closed immersion.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} {f : X ⟶ Y} : IsClosedImmersion f ↔ IsPreimmersion f ∧ IsClosed (Set.range f)\", \"doc\": \"A morphism $ f : X \\to Y $ of schemes is a closed immersion if and only if it is a preimmersion and the image of $ f $ is a closed subset of $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.isClosedImmersion_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsClosedImmersion f ↔\\n    AlgebraicGeometry.SurjectiveOnStalks f ∧ Topology.IsClosedEmbedding ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is a closed immersion if and only if the induced maps on stalks are surjective and the underlying continuous map is a closed embedding.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion\", \"type\": \"{X Y : Scheme} (f : X ⟶ Y) [IsClosedImmersion f] : IsPreimmersion f\", \"doc\": \"Every closed immersion of schemes is a preimmersion.\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical closed support adjoint etale proetale constructible comparison quotient compatible integral reconstruction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.kerAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"(Y : AlgebraicGeometry.Scheme) → (AlgebraicGeometry.Scheme.IdealSheafData.subschemeFunctor Y).rightOp ⊣ Y.kerFunctor\", \"doc\": \"For any scheme $Y$, the right opposite of the subscheme functor (mapping ideal sheaves to closed subschemes) is left adjoint to the kernel functor (extracting ideal sheaves from structure morphisms in\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFinitePresentation f]\\n  [AlgebraicGeometry.QuasiCompact f] [CompactSpace ↥Y] [QuasiSeparatedSpace ↥Y] {s : Set ↥X},\\n  Topology.IsConstructible s → Topology.IsConstructible (⇑(CategoryTheory.ConcreteCategory.hom f.base) '' s)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Suppose that $f$ is locally of finite presentation and quasi-compact, and the underlying topological space of $Y$ is compact and quasi-separated. Then for an\"}\n  {\"name\": \"PrimeSpectrum.exists_range_eq_of_isConstructible\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/ConstructibleSet\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {s : Set (PrimeSpectrum R)},\\n  Topology.IsConstructible s → ∃ S x f, Set.range (PrimeSpectrum.comap f) = s\", \"doc\": \"For any constructible subset $ s $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, there exists a commutative ring $ S $ and a ring homomorphism $ f : R \\\\to S $ such that\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"module\": \"Mathlib/RingTheory/Etale/QuasiFinite\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Finite R S]\\n  (p : Ideal R) [inst_4 : p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p],\\n  ∃ R' x x_1,\\n    ∃ (_ : Algebra.Etale R R'),\\n      ∃ P,\\n        ∃ (x_3 : P.IsPrime) (x_4 : P.LiesOver p),\\n \", \"doc\": \"Let $S$ be a finite algebra over a commutative ring $R$. Let $p$ be a prime ideal of $R$, and $q$ be a prime ideal of $S$ lying over $p$. Then there exists an étale $R$-algebra $R'$ and a prime ideal \"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations supply only component category, scheme, scalar or adjunction facts, not this coefficient-category comparison and all its specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion exceptional adjoint transported from etale to proetale with counit normalized coefficient system realization",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, StandardEtalePair.homEquiv, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.Hom.instIsOpenImmersionMapAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpec, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "grep",
+   "query": "(pro.?etale|etale).*exceptional|exceptional.*(pro.?etale|etale)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived category strict coefficient systems closed support adjoint normalized integral inverse limit comparison",
+   "results": "8 hits: DerivedCategory.TStructure.t, CategoryTheory.Limits.constLimAdj, CategoryTheory.comp_comparison_hasLimit, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.abelianOfAdjunction, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CategoryTheory.Localization.HasProductsOfShapeAux.adj",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint uniqueness identifies support counit etale proetale derived categories and compatible strict quotient towers",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc, Condensed.profiniteSolidCounit, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits give abstract adjunction/derived-functor or unrelated scheme and condensed-module facts, not the strict varying-coefficient comparison with its specified augmentation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-sf-localization-all-stages",
+  "date": "2026-10-22",
+  "group": "Q35"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Finite stage: exceptional-functor identification; Integral stage: specified coherent limit; returned step 8",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sf-finite-exceptional-site-normalization",
+  "worker": "stage1",
+  "summary": "Q74 proves finite constructible support comparison with its actual counit, triangle uniqueness, origin, shift and quotient compatibility; constructs the integral system arrow by adjunction before taking its specified limit. Corrects the ground-field typing to the specified exceptional definition. One new statement-only node isolates simultaneous strict reduction of closed direct image. Reviewer FIX (Q74 maintainer reader): Step 2 cites the canonical-mate comparison node for the open unit, Step 3 cites the pro-etale closed projection, Step 5 checks the adic-datum hypothesis, and the statement now names the inputs of the quotient compatibility precisely.",
+  "blueprint": "Finite-stage last sentence (specified exceptional identification) and Integral-stage final paragraph (specified coherent inverse limit).",
+  "tool_uses": [
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Bounded constructible derived-complete integral coefficients. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Exceptional inverse image notation. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Right adjoints are unique up to a unique counit-compatible isomorphism. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-exc-closed-amplitude",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Closed-support amplitude. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Closed-support triangle before restriction. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-exc-open-complement-known",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: The open-complement condition from the direct-image input. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Finiteness of the dimension of a finite type scheme. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-classical-support-counit-identification",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Canonical identification of a supported triangle by its first arrow. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-closed-finite-adjoint-counit-transport",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Closed finite exceptional adjoint and counit on classical inputs. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-closed-unbounded-compact-support-normalization",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Unbounded identity-open compact support for a closed immersion. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Derived direct image and evaluation of coefficient systems. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-etale-coefficient-system-adjoint",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Ordinary etale adjoint on strict coefficient systems. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-etale-system-quotient-normalization",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Nonflat coefficient mates and normalization for ordinary etale adjoints. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-exact-derived-adjunction-bounds",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Exact derived adjunctions: lower bounds, reflection and counits. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Roos and intrinsic completeness for completed local-field coefficients. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-pur-support-localization-triangle",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Localization triangle for the exceptional inverse image. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: An exact functor of abelian categories induces a triangulated functor on derived categories. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Shift isomorphisms compatible with an adjunction: counit from unit, and uniqueness on the right adjoint. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Constructible derived comparison for arbitrary finite rings. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: A right adjoint of an exact functor preserves K-injective complexes. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Strict tower homotopy limit. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Canonical composition comparison for unbounded ringed-topos direct images. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-triangle-morphism-extension",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Extending a morphism of the middle terms to distinguished triangles; uniqueness when Hom(X[1],Z')=0. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "prop-weil-pbc-comparison-direct-image",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Comparison direct image. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic support, finite coefficient comparison, system adjunction or reconstruction tool: Bounded-below site comparison. Used as stated for the counit-normalized assembly; this does not replace the unit localization route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic site-comparison tool: the specified etale/pro-etale direct-image comparison is the mate with the stated counit normalization; used in Step 2 to identify the pulled-back open unit. No node of the unit states it."
+   },
+   {
+    "node": "lem-weil-proetale-closed-tensor-projection",
+    "why": "Generic closed projection formula for an arbitrary pro-etale ring sheaf; used in Step 3 for invertibility of the coefficient-change projection T i_* = i_* T. No node of the unit states it."
+   },
+   {
+    "node": "def-weil-pbc-adic-coefficient-datum",
+    "why": "Definition of the adic coefficient datum, whose hypotheses Step 5 checks for O_E before applying the Roos completeness equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-exceptional-inverse-image",
+  "det-sp-unique-right-adjoint",
+  "lem-exc-closed-amplitude",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-open-complement-known",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-classical-support-counit-identification",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-pur-closed-unbounded-compact-support-normalization",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-etale-coefficient-system-adjoint",
+  "lem-pur-etale-system-quotient-normalization",
+  "lem-pur-exact-derived-adjunction-bounds",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-pur-support-localization-triangle",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "prop-weil-pbc-comparison-direct-image",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-proetale-closed-tensor-projection",
+  "def-weil-pbc-adic-coefficient-datum"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-cdbbcbb38",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-cdbbcbb38 (reviewer sub-agent of L); spot-checked: I read all of the mathematics against main-20261015 prop-sf-localization-all-stages.proof.md (Finite stage: 'by uniqueness of right adjoints it is the finite exceptional inverse image'; Integral stage: 'it is the derived limit'), the unit sk-prop-sf-localization, def-weil-exceptional-inverse-image and all 29 cited statements. Restricting k to F̄_q is a valid typing repair: the DAG def and lem-exc-open-complement-known are stated over F̄_q. Maintainer note: the parent's clause 2 states this identification for a general field, where it only makes sense at F̄_q; if the def is moved to its blueprint_update (general base), the item and the parent must be widened together. Steps 1-5 check out: the open-complement hypotheses hold with d=0 for empty X; the D+ restriction comes from adjunction bounds; triangle uniqueness from Hom(i_*P[a],Rj_*N)=0; the system map b is built before evaluation; Roos (v)<=>(i) gives the limit. The new node lem-sf-closed-direct-image-strict-reduction is true (levelwise it is the closed projection formula with i^{-1}(A_n)_X=(A_n)_Z, and system cohomology is levelwise). It is not a duplicate of lem-weil-proetale-closed-tensor-projection, lem-sfb-closed-immersion-derived-tensor-projection or side-live lem-cbc-ringed-open-strict-reduction (which is the open-extension case), and it has full searches. Batch-5: lem-exc-open-complement-known reaches lem-trf-regular-ring-universally-catenary and lem-pur-roos-intrinsic-completeness-equivalence reaches lem-pod-completed-integral-scalar-regular. Both leaves are generic algebra (universal catenarity; ϖ^m is a non-zero-divisor on the completed coefficients), not steps of the trace formula or Poincaré duality, so both are accepted. FIX in the item: (1) Step 2 used only the proof of prop-weil-pbc-comparison-direct-image to identify the open unit; it now cites lem-weil-pbc-comparison-direct-image-canonical-mate (C3). (2) Step 3 used the pro-étale coefficient projection T i_* ≅ i_* T without citation; it now cites lem-weil-proetale-closed-tensor-projection and shows it agrees with the étale projection via transposes (C1). (3) The vague quotient-compatibility clause now names its inputs: K in D^b_c(X,A_m) whose reduction K⊗^L A_n lies in D^b_c(X,A_n). Outside these inputs the finite isomorphism is undefined, so this is not a weakening. Step 5 also gains a one-line check that O_E is an adic datum (def-weil-pbc-adic-coefficient-datum). I added tool_uses for the new citations; there are no cycles.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExceptionalSiteNormalization",
+  "declaration": "WeilConjectures.FiniteExceptionalNormalization.finiteExceptionalSiteNormalization",
+  "declarations": [
+   "WeilConjectures.FiniteExceptionalNormalization.A",
+   "WeilConjectures.FiniteExceptionalNormalization.C",
+   "WeilConjectures.FiniteExceptionalNormalization.bc",
+   "WeilConjectures.FiniteExceptionalNormalization.etaleSupport",
+   "WeilConjectures.FiniteExceptionalNormalization.etaleExceptional",
+   "WeilConjectures.FiniteExceptionalNormalization.exceptional",
+   "WeilConjectures.FiniteExceptionalNormalization.image",
+   "WeilConjectures.FiniteExceptionalNormalization.openImage",
+   "WeilConjectures.FiniteExceptionalNormalization.openUnit",
+   "WeilConjectures.FiniteExceptionalNormalization.counit",
+   "WeilConjectures.FiniteExceptionalNormalization.specifiedShift",
+   "WeilConjectures.FiniteExceptionalNormalization.FiniteNormalization",
+   "WeilConjectures.FiniteExceptionalNormalization.quotient",
+   "WeilConjectures.FiniteExceptionalNormalization.scalar",
+   "WeilConjectures.FiniteExceptionalNormalization.site",
+   "WeilConjectures.FiniteExceptionalNormalization.origin",
+   "WeilConjectures.FiniteExceptionalNormalization.quotientMate",
+   "WeilConjectures.FiniteExceptionalNormalization.Quotients",
+   "WeilConjectures.FiniteExceptionalNormalization.finiteExceptionalSiteNormalization",
+   "WeilConjectures.FiniteExceptionalNormalization.closedCompactIso",
+   "WeilConjectures.FiniteExceptionalNormalization.red",
+   "WeilConjectures.FiniteExceptionalNormalization.closedReduction",
+   "WeilConjectures.FiniteExceptionalNormalization.integralEvaluation",
+   "WeilConjectures.FiniteExceptionalNormalization.targetReduction",
+   "WeilConjectures.FiniteExceptionalNormalization.integralLevelAt",
+   "WeilConjectures.FiniteExceptionalNormalization.integralLevel",
+   "WeilConjectures.FiniteExceptionalNormalization.integralExceptionalSiteNormalization",
+   "WeilConjectures.FiniteExceptionalNormalization.integralExceptionalSiteNormalizationAt"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExceptionalSiteNormalization.lean",
+  "statement": "theorem finiteExceptionalSiteNormalization (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {X Z U : Scheme.{u}} [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (h : IsCompl (Set.range i) (Set.range j)) (J : ∀ n : ℕ, C l E X n ⥤ C l E Z n) (a : ∀ n : ℕ, image l E i n ⊣ J n) : ∃ N : ∀ n : ℕ, FiniteNormalization l E i j h n (J n) (a n), Nonempty (Quotients l E i j h J a N)",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Finite normalization and quotient compatibility are in finiteExceptionalSiteNormalization; the conditional integral clause is integralExceptionalSiteNormalizationAt, and its natural form is integralExceptionalSiteNormalization. Positive exponents are indexed by n+1. Fixed finite-module coordinates are transported by the existing intrinsic realization equivalences. Adjunction presentations quantify over the canonical kernel adjunction and hence do not assume an unnamed exceptional functor. H2 repair: the five canonical-map definition nodes own the reused definitions; closed direct-image strict reduction remains a proof-only dependency; the unused integral strict-reduction-model import is removed per the H7 return."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-458d14072",
+  "group": "Q76",
+  "result": "pass",
+  "note": "H7 repair of 56ed: diff vs 56ed snapshot = only removal of unused `import Sheaf.Paper.IntegralStrictReductionModel` (its one structure is unused; module still transitively imported via ClosedDirectImageStrictReduction) and proof_deps restored, now byte-equal to the live base (32 entries); statement/proof unchanged, so check_statement_change returns []. Five new existing:true def-sf-* owner nodes unchanged and not landed or raced on live (only old theorem owners exist). lean.statement verbatim; 3 theorems by sorry. Re-read the finite part (C/bc/etaleSupport/exceptional=sfFiniteExceptionalAt/counit/FiniteNormalization/Quotients pinned to finiteCoefficientChangeDirectImageMap, mateEquiv of q.inv, compactScalarMap, no flatness): correct; full mathematics was accepted at 526c. Edge cases: empty X/Z, n=0, m=n, nonflat. Advisories: H9 proof-plan imports; integral b pinned only by evaluations (node allows). No compile (no change)."
+ }
+}

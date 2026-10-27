@@ -1,0 +1,169 @@
+{
+ "id": "lem-sfb-point-scalar-extension",
+ "kind": "statement",
+ "title": "Extension of scalars at a ringed topos point",
+ "statement": "Let C be a small site, A and R sheaves of commutative rings on C, c:A→R a ring-sheaf morphism [def-weil-pbc-ringed-tensor-section-calculus], p:Set→Sh(C) a point [def-trf-geometric-morphism], and a and s normalized ring/module stalk presentations [def-sfb-ringed-site-point] for A and R at p. There is a ring homomorphism b:a.ring→s.ring whose underlying function is the stalk of c under the specified ring identifications. For every A-module sheaf N [def-weil-sheaf-of-modules-category] there is a natural additive equivalence s.modules(R⊗_A N) ≃ a.modules(N)⊗_{a.ring}s.ring [def-pur-sheaf-tensor-product]. It is s.ring-linear for the action on the last factor transported by tensor symmetry. For every generalized pair of sections r of R and m of N and their sheafified pure tensor z, its value on the germ of z is m_p⊗r_p. The ring map is normalized on every element of p⁻¹A, and the equivalences commute with every A-module morphism. All objects and values use the common universe [def-weil-size-convention].",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-site-point",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pur-sheaf-tensor-product",
+  "def-trf-geometric-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the point inverse image to c. The ring graph equations for the two point presentations show that its underlying function preserves zero, one, addition and multiplication, including when a stalk ring is zero. Bundle this as b; its definition gives the normalization on every underlying stalk element.",
+   "uses": [
+    "def-sfb-ringed-site-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  },
+  {
+   "text": "Present Set as sheaves on the one-object site with trivial topology, and identify module sheaves on it with ordinary modules. Transport the point presentation to an algebraic inverse image on this site. Apply the normalized inverse-image tensor comparison to R restricted along c and to N. The stalk of the restricted R-module is the target stalk ring restricted along b, by its scalar-operation graph. The sheaf tensor becomes the ordinary tensor under the one-object equivalence. Transport the point adjunction and finite-limit preservation through the sheaf equivalence. Forgetting extension of scalars to A-modules gives the sheaf tensor of restricted R with N, because both are sectionwise tensor followed by sheafification and represent the same sheaf bilinear maps. Its A-stalk is the restriction along b of the s-stalk, by the operation graphs and their underlying-set identifications.",
+   "uses": [
+    "lem-pur-independent-inverse-image-tensor-comparison",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-sfb-ringed-site-point",
+    "def-weil-size-convention",
+    "def-weil-pbc-algebraic-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  },
+  {
+   "text": "The generalized-section formula for the comparison identifies its value on the pure pairing with the tensor of the germs. Tensor symmetry puts the target stalk ring last. The action of R on the first factor transports to multiplication on its stalk; tensor universality therefore proves linearity for the action defined by symmetry. Naturality of the tensor comparison and symmetry gives the equation on every module map. The normalized generalized-section equation follows by the same symmetry.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-independent-inverse-image-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-sfb-ringed-site-point",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-size-convention",
+  "lem-pur-independent-inverse-image-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 05V5, lemma-pullback-stalk, proof; Tag 03EL, lemma-tensor-product-pullback, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of extension of scalars of a sheaf of modules is extension of scalars of the stalk",
+   "results": "ModuleCat.Tilde.toStalk, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.stalkToFiberLinearMap, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc, ModuleCat.Tilde.localizationToStalk, ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for arbitrary topos points. TensorProduct.comm supplies only the final symmetry."
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.comm",
+   "results": "TensorProduct.comm, TensorProduct.comm_symm, TensorProduct.comm_trans_comm, TensorProduct.comm_tmul, TensorProduct.comm_comp_comm, TensorProduct.lift_comp_comm_eq, TensorProduct.comm_symm_tmul, TensorProduct.comm_comp_comm_assoc",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for arbitrary topos points. TensorProduct.comm supplies only the final symmetry."
+  },
+  {
+   "tool": "grep",
+   "query": "stalk.*[Tt]ensor|[Tt]ensor.*stalk",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/TensorProduct.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean",
+   "date": "2026-10-27",
+   "verdict": "No matching theorem for arbitrary topos points. TensorProduct.comm supplies only the final symmetry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Taking stalks of sheaves of modules commutes with tensor products and extension of scalars",
+   "results": "Module.rankAtStalk_tensorProduct_of_isScalarTower, ModuleCat.Tilde.toOpen_germ_apply, Module.rankAtStalk_tensorProduct, AlgebraicGeometry.Scheme.Modules, ModuleCat.Tilde.toStalk, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, RingHom.SurjectiveOnStalks.tensorProductMap, ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-27",
+   "verdict": "No match: results concern affine-scheme localization, tensor rank, or open immersions, not arbitrary topos points."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposPullbackStalk",
+  "date": "2026-10-27",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Proof steps 3 and 4: apply the inverse-image tensor comparison to p inverse and transport the scalar action and pure pairing.",
+   "via": [
+    "lem-sfb-ringed-topos-pullback-stalk",
+    "lem-sfb-scheme-naive-cotangent-etale-comparison",
+    "lem-sfb-affine-etale-naive-cotangent-presentation",
+    "lem-sfb-space-naive-cotangent-finite-local-model",
+    "lem-sfb-space-naive-cotangent-coherent",
+    "lem-sfb-curve-tangent-finiteness",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSitePointScalarExtension",
+  "file": "lean/Sheaf/CategoryTheory/RingedSitePointScalarExtension.lean",
+  "declaration": "CategoryTheory.RingedSitePoint.scalarExtension",
+  "statement": "theorem RingedSitePoint.scalarExtension\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (A R : Sheaf J CommRingCat.{u}) (c : A ⟶ R)\n    (p : GeometricMorphism (Type u) (Sheaf J (Type u)))\n    (a : RingedSitePoint A p) (s : RingedSitePoint R p) :\n    ∃ b : a.ring →+* s.ring,\n      (∀ x : p.inverse.obj ((sheafCompose J (forget CommRingCat.{u})).obj A),\n        b (a.ringUnderlying.hom x) = s.ringUnderlying.hom\n          (p.inverse.map ((sheafCompose J (forget CommRingCat.{u})).map c) x)) ∧\n      letI : Algebra a.ring s.ring := b.toAlgebra\n      ∃ e : ∀ N : ringedSiteModules.{u} (ringSheaf A),\n        s.modules.obj (changeOfRings.{u, u, u} c N) ≃+\n          TensorProduct a.ring (a.modules.obj N) s.ring,\n        (∀ (N : ringedSiteModules.{u} (ringSheaf A)) (r : s.ring)\n          (x : s.modules.obj (changeOfRings.{u, u, u} c N)),\n          e N (r • x) = TensorProduct.comm a.ring s.ring (a.modules.obj N)\n            (r • TensorProduct.comm a.ring (a.modules.obj N) s.ring (e N x))) ∧\n        (∀ (N N' : ringedSiteModules.{u} (ringSheaf A)) (h : N ⟶ N')\n          (x : s.modules.obj (changeOfRings.{u, u, u} c N)),\n          e N' (s.modules.map (changeOfRingsHom.{u, u, u} c N h) x) =\n            TensorProduct.map (a.modules.map h).hom (LinearMap.id : s.ring →ₗ[a.ring] s.ring)\n              (e N x)) ∧\n        ∀ (N : ringedSiteModules.{u} (ringSheaf A)) (T : Sheaf J (Type u))\n          (r : T ⟶ (sheafCompose J (forget CommRingCat.{u})).obj R)\n          (m : T ⟶ (SheafOfModules.RingedTensor.underlying A).obj N)\n          (z : T ⟶ (SheafOfModules.RingedTensor.underlying R).obj\n            (changeOfRings.{u, u, u} c N)),\n          (∀ (W : Cᵒᵖ) (x : T.obj.obj W),\n            z.hom.app W x = ((PresheafOfModules.sheafificationAdjunction.{u, u, u, u}\n              (𝟙 (ringSheaf R).obj)).unit.app\n                (changeOfRingsPresheaf.{u, u, u} c N)).app W\n                  ((@id (R.obj.obj W) (r.hom.app W x))\n                    ⊗ₜ[A.obj.obj W, (c.hom.app W).hom]\n                      (@id (N.val.obj W) (m.hom.app W x)))) →\n          ∀ x : p.inverse.obj T,\n            e N ((s.moduleUnderlying.inv.app (changeOfRings.{u, u, u} c N))\n              (p.inverse.map z x)) =\n              ((a.moduleUnderlying.inv.app N) (p.inverse.map m x)) ⊗ₜ[a.ring]\n                (s.ringUnderlying.hom (p.inverse.map r x))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T094446-L-230316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-27",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261027T094446-L-230316",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

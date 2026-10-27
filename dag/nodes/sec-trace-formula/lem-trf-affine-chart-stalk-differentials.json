@@ -1,0 +1,211 @@
+{
+ "id": "lem-trf-affine-chart-stalk-differentials",
+ "kind": "statement",
+ "title": "Affine chart comparison for stalk maps and relative differentials",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] locally of finite presentation [def-sbc-locally-finite-presentation], $x\\in X$, and $s=f(x)$. There exist affine open neighbourhoods $W=\\operatorname{Spec}A$ of $x$ and $V=\\operatorname{Spec}R$ of $s$ [def-weil-affine-spectrum] with $f(W)\\subseteq V$ and induced ring map $\\varphi:R\\to A$ such that $A$ is finitely presented over $R$. If $\\mathfrak q\\subset A$ represents $x$, then $\\mathfrak p=\\varphi^{-1}(\\mathfrak q)$ represents $s$. There are canonical ring isomorphisms $\\mathcal O_{S,s}\\cong R_{\\mathfrak p}$ and $\\mathcal O_{X,x}\\cong A_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime] under which the stalk map of $f$ is $R_{\\mathfrak p}\\to A_{\\mathfrak q}$, $r/t\\mapsto\\varphi(r)/\\varphi(t)$. For $M=\\Omega_{A/R}$ [def-weil-pbc-kahler-differentials] there is a compatible $A_{\\mathfrak q}$-linear isomorphism $\\Omega^1_{X/S,x}\\cong M_{\\mathfrak q}$ [def-sc-relative-differential-sheaf, def-weil-pbc-module-localization] sending the germ of $\\mathrm da$ to $\\mathrm da/1$. Consequently the stalk map is flat exactly when this localized ring map is flat [def-weil-pbc-flat-ring-map], and, for every integer $r\\geq0$, its differential stalk has a generating family of $r$ elements exactly when $M_{\\mathfrak q}$ does.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01V9 (lemma-smooth-at-point), affine reduction in (3) implies (2); Schemes Tag 01HV (lemma-spec-sheaves), (6)-(7), and Definition 01TP."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-kahler-differentials",
+  "def-sc-relative-differential-sheaf",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-localization"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine neighbourhood V of f(x), then an affine neighbourhood W of x inside f inverse image V, using the affine-open basis. LocallyOfFinitePresentation.finitePresentation_appLE gives finite presentation of phi=f.appLE V W. Set q=hW.primeIdealOf(x).",
+   "uses": [
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "IsAffineOpen.comap_primeIdealOf_appLE, the point form of the affine chart square, identifies q.comap(phi) with the prime of f(x). The two affine-open stalk localization instances and IsLocalization.algEquiv construct germ-preserving ring equivalences e and h. Compare h composed with f.stalkMap and Localization.localRingHom composed with e by IsLocalization.ringHom_ext. On a section r of V, germ_stalkMap_apply and germ_res_apply identify the left side with h(germ_W(phi(r))); the right side is algebraMap(phi(r)) by localRingHom_to_map and e.commutes. These agree by h.commutes. Thus the whole localized square commutes without transporting a Spec stalk square.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Relative differentials are quasi-coherent, as proved by the source instance isQuasicoherent_relativeDifferentials from their affine tilde description. Apply lem-sc-relative-differentials-affine-sections to obtain an A-linear equivalence c from Omega(A/R) to sections of Omega(X/S) on W, with c(da)=d(a). Apply lem-sbc-affine-module-germ-localization to the latter sheaf at x. Compose its actual germ localization g with c; IsLocalizedModule.of_linearEquiv_right makes l=g composed with c a localization of Omega(A/R). The inverse E of IsLocalizedModule.iso identifies the ambient stalk with LocalizedModule(q.primeCompl,Omega(A/R)), and iso_symm_apply gives E(l(m))=m/1. Applying this to da gives the required derivation normalization. Give the target the ambient stalk-ring action through h. The germ-preserving formula for h identifies its restricted A-action with the canonical A-action, so IsScalarTower holds. LinearEquiv.extendScalarsOfIsLocalization extends E from A-linearity to stalk-ring linearity, exactly the required h-semilinearity.",
+   "uses": [
+    "def-sc-relative-differential-sheaf",
+    "lem-sc-relative-differentials-affine-sections",
+    "lem-sbc-affine-module-germ-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "RingHom.Flat.comp_iff_of_bijective_left and comp_iff_of_bijective_right transport flatness through h and e; the square from step 2 identifies the composed maps. For generating families, bundle the additive equivalence with its scalar formula as a semilinear equivalence. Map a family by this equivalence; Set.range_comp and Submodule.span_image identify its span with the image of the original span, and the image of top is top by surjectivity. Apply the inverse equivalence for the converse. This works also for the empty Fin 0 family and uses no positive-rank hypothesis.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-sc-relative-differential-sheaf",
+  "lem-sc-relative-differentials-affine-sections",
+  "lem-sbc-affine-module-germ-localization",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 01TP, 01US and 01UT, together with schemes.tex Tag 01HV(6)-(7). Implemented using the existing affine-section differential comparison and affine quasi-coherent germ-localization theorem; localization uniqueness and scalar extension supply the explicit compatibility equations."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Affine charts for a locally finitely presented scheme morphism identify the stalk map with localized rings and the relative differential stalk with localized Kahler differentials",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.fromSpecStalk_isPreimmersion, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso, AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, AlgebraicGeometry.localRingHom_comp_stalkIso_apply', AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.localRingHom_comp_stalkIso_apply. Candidates identify the Spec stalk map and finite-presentation coordinate maps only; none identifies the relative differential sheaf stalk and all compatible scalar maps in this statement. Read Mathlib/AlgebraicGeometry/AffineScheme.lean:1313-1333 and Morphisms/FinitePresentation.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, KaehlerDifferential",
+   "results": "0 hits: . Candidates identify the Spec stalk map and finite-presentation coordinate maps only; none identifies the relative differential sheaf stalk and all compatible scalar maps in this statement. Read Mathlib/AlgebraicGeometry/AffineScheme.lean:1313-1333 and Morphisms/FinitePresentation.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|stalkMap.*[Ll]ocaliz|[Ll]ocaliz.*stalkMap",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Spec.lean. Candidates identify the Spec stalk map and finite-presentation coordinate maps only; none identifies the relative differential sheaf stalk and all compatible scalar maps in this statement. Read Mathlib/AlgebraicGeometry/AffineScheme.lean:1313-1333 and Morphisms/FinitePresentation.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local finite presentation gives affine neighbourhoods with finitely presented coordinate algebra, compatible local ring homomorphisms and localized cotangent modules",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE, RingHom.finitePresentation_isLocal, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.LocallyOfFinitePresentation.mk. Candidates identify the Spec stalk map and finite-presentation coordinate maps only; none identifies the relative differential sheaf stalk and all compatible scalar maps in this statement. Read Mathlib/AlgebraicGeometry/AffineScheme.lean:1313-1333 and Morphisms/FinitePresentation.lean.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.stalkMap, KaehlerDifferential",
+   "results": "0 hits: . Read AffineScheme.lean:1313-1331 and Morphisms/FinitePresentation.lean:45-68; these cover coordinate finite presentation and stalk rings. The second semantic search also finds localized ring differentials and tilde stalks, but none states the full scheme-relative differential comparison with chart choice.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeDifferentials|stalkMap.*[Ll]ocaliz|[Ll]ocaliz.*stalkMap",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Spec.lean, Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties.lean, Mathlib/AlgebraicGeometry/Morphisms/Flat.lean. Read AffineScheme.lean:1313-1331 and Morphisms/FinitePresentation.lean:45-68; these cover coordinate finite presentation and stalk rings. The second semantic search also finds localized ring differentials and tilde stalks, but none states the full scheme-relative differential comparison with chart choice.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine chart comparison of scheme stalk maps and relative differential stalks with prime localizations",
+   "results": "8 hits: AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq, AlgebraicGeometry.IsAffineOpen.fromSpecStalk_eq_fromSpecStalk, AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso_apply, AlgebraicGeometry.Scheme.localRingHom_comp_stalkIso, AlgebraicGeometry.stalkMap_toStalk_apply, AlgebraicGeometry.IsAffineOpen.fromSpecStalk, AlgebraicGeometry.localRingHom_comp_stalkIso_apply. Read AffineScheme.lean:1313-1331 and Morphisms/FinitePresentation.lean:45-68; these cover coordinate finite presentation and stalk rings. The second semantic search also finds localized ring differentials and tilde stalks, but none states the full scheme-relative differential comparison with chart choice.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a locally finitely presented scheme morphism choose affine neighbourhoods and identify stalk rings and relative differential stalks with localizations",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFinitePresentation.mk, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation.recOn, AlgebraicGeometry.localRingHom_comp_stalkIso_apply', AlgebraicGeometry.StructureSheaf.stalkIso, AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE. Read AffineScheme.lean:1313-1331 and Morphisms/FinitePresentation.lean:45-68; these cover coordinate finite presentation and stalk rings. The second semantic search also finds localized ring differentials and tilde stalks, but none states the full scheme-relative differential comparison with chart choice.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.StructureSheaf.stalkIso",
+   "results": "3 hits: AlgebraicGeometry.StructureSheaf.stalkIso, AlgebraicGeometry.localRingHom_comp_stalkIso, AlgebraicGeometry.localRingHom_comp_stalkIso_apply. Read AffineScheme.lean:1313-1331 and Morphisms/FinitePresentation.lean:45-68; these cover coordinate finite presentation and stalk rings. The second semantic search also finds localized ring differentials and tilde stalks, but none states the full scheme-relative differential comparison with chart choice.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the relative Kahler differential sheaf on an affine scheme is the localization of the module of Kahler differentials, with universal derivations",
+   "results": "8 hits: KaehlerDifferential.isLocalizedModule_map, KaehlerDifferential.isLocalizedModule, PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_obj, KaehlerDifferential.isLocalizedModule_of_isLocalizedModule, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk, ModuleCat.Tilde.stalkIso_hom, ModuleCat.Tilde.localizationToStalk. Read AffineScheme.lean:1313-1331 and Morphisms/FinitePresentation.lean:45-68; these cover coordinate finite presentation and stalk rings. The second semantic search also finds localized ring differentials and tilde stalks, but none states the full scheme-relative differential comparison with chart choice.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-smooth-at-point-differential-criterion",
+  "date": "2026-10-22",
+  "group": "Q107"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise singular-locus calculation in the nodal-family/Fitting argument: convert the bounded-generator condition for relative differentials into smoothness at a point. Pointwise criterion proof, old step 2 (affine chart, stalks and differential generators).",
+   "via": [
+    "lem-trf-smooth-at-point-differential-criterion",
+    "lem-trf-dth-fitting-smooth-locus",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-affine-chart-stalk-differentials",
+  "worker": "stage1",
+  "group": "Q125",
+  "summary": "Kept the mathematical statement and its seven notion dependencies; added the missing module-localization notion reference. Gave four explicit steps using existing affine chart, stalk-ring, and tilde-stalk results; no new nodes. Checked germ and scalar compatibility, flatness in both directions, and r=0. No project declaration states the full item.",
+  "blueprint": "Realizes the affine-chart/stalk comparison in the pointwise smoothness/Fitting calculation of the existing descendant chain from lem-trf-local-term-locality; specifically step 2 of lem-trf-smooth-at-point-differential-criterion. The original blueprint ancestor has no affine-chart lemma to attach."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-4fa788079",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-4fa788079 (reviewer sub-agent of L); spot-checked: Stage-1 split of Q125 lem-trf-affine-chart-stalk-differentials, created as old step 2 by Q107's 2026-10-21 re-split. There are no new nodes. The statement is unchanged against the Q107 base except for the added inline citation [def-weil-pbc-module-localization], also added to stmt_deps; nothing is weakened. Every argument of old step 2 (Q107 report) appears in the four new steps, written out in more detail. Sources read: Stacks schemes.tex lemma-spec-sheaves 01HV (6)-(7) with functoriality, morphisms.tex 01US (line 6388), 01UT (line 6441) and 01TP; no SGA. Step 1 is elementary: it unfolds def-sbc-locally-finite-presentation at x, with A=O_X(U) as in the chart-square node. Step 2: lem-weil-pbc-affine-opens-induced-ring-map-spec-square gives iota_V(phi^{-1}q)=s. Stalks of the square plus germ-preserving isos (affine-open-stalk-localization (b),(c)) and the Spec stalk-map node identify the actual stalk map with phi_q; t outside p implies phi(t) outside q. Step 3: the affine tilde description is in the statement of def-sc-relative-differential-sheaf (C3 ok). The stalk equals the stalk on the open W. lem-weil-pbc-spec-tilde-stalk-localization holds for any module and gives M_q with da_x mapped to da/1, linear over A_q. Step 4 is elementary: flatness transfers along the commutative square of ring isos (balancing h∘f#=phi_q∘e), and spanning families transfer by the semilinear iso, including r=0. Edge cases: id of Spec R, the generic point of A^1, Spec F_p over Spec Z (non-flat), k[eps], the empty scheme. All cited lemmas are Mathlib leaves or definitions, so there is no route or tool_uses issue. rg -L over dag/nodes for Omega^1 stalk statements found no duplicate. proof_deps equal the union of the steps' uses. Blueprint fields and the three kinds of Mathlib search are present. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineChartStalkDifferentials",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_affineChart_stalk_differentials",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineChartStalkDifferentials.lean",
+  "statement": "theorem exists_affineChart_stalk_differentials {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFinitePresentation f] (x : X) : ∃ (W : X.Opens) (V : S.Opens) (hW : IsAffineOpen W) (hV : IsAffineOpen V) (hx : x ∈ W) (hWV : W ≤ f ⁻¹ᵁ V) (q : PrimeSpectrum Γ(X, W)), q = hW.primeIdealOf ⟨x, hx⟩ ∧ (f.appLE V W hWV).hom.FinitePresentation ∧ q.comap (f.appLE V W hWV).hom = hV.primeIdealOf ⟨f x, hWV hx⟩ ∧ ∃ (e : S.presheaf.stalk (f x) ≃+* Localization.AtPrime (q.comap (f.appLE V W hWV).hom).asIdeal) (h : X.presheaf.stalk x ≃+* Localization.AtPrime q.asIdeal) (theta : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj f.relativeDifferentials ≃+ LocalizedModule q.asIdeal.primeCompl (CommRingCat.KaehlerDifferential (f.appLE V W hWV))), (∀ r : Γ(S, V), e (S.presheaf.germ V (f x) (hWV hx) r) = algebraMap _ _ r) ∧ (∀ a : Γ(X, W), h (X.presheaf.germ W x hx a) = algebraMap _ _ a) ∧ (∀ b : S.presheaf.stalk (f x), h (f.stalkMap x b) = Localization.localRingHom (q.comap (f.appLE V W hWV).hom).asIdeal q.asIdeal (f.appLE V W hWV).hom rfl (e b)) ∧ (∀ (b : X.presheaf.stalk x) (m : (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj f.relativeDifferentials), theta (b • m) = h b • theta m) ∧ (∀ a : Γ(X, W), theta (f.relativeDifferentials.presheaf.germ W x hx (f.relativeDifferentialsDerivation.d a)) = LocalizedModule.mk (CommRingCat.KaehlerDifferential.d (f := f.appLE V W hWV) a) 1) ∧ ((f.stalkMap x).hom.Flat ↔ (Localization.localRingHom (q.comap (f.appLE V W hWV).hom).asIdeal q.asIdeal (f.appLE V W hWV).hom rfl).Flat) ∧ (∀ r : ℕ, (∃ v : Fin r → (RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj f.relativeDifferentials, Submodule.span (X.presheaf.stalk x) (Set.range v) = ⊤) ↔ ∃ v : Fin r → LocalizedModule q.asIdeal.primeCompl (CommRingCat.KaehlerDifferential (f.appLE V W hWV)), Submodule.span (Localization.AtPrime q.asIdeal) (Set.range v) = ⊤)",
+  "branch": "newtargets-dag",
+  "by": "Q134",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-20fc544a5",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Node unchanged except lean; one sorry theorem, statement verbatim in file; report has Worker report + Second reading. Every clause matches the node: W,V affine, W≤f⁻¹V, appLE FinitePresentation, q=primeIdealOf x, comap q=primeIdealOf (f x); e,h ring equivs pinned by germ→algebraMap; stalkMap square via Localization.localRingHom; theta additive + h-semilinear + germ(d a)↦mk(d a)1 (pinned), Flat iff, ∀ r:ℕ Fin r spanning iff (r=0 ok). Uses recorded relativeDifferentials/relativeDifferentialsDerivation, CommRingCat.KaehlerDifferential, LocalizedModule. No extra hypotheses, single universe u, no hollow defs, docstrings with source and 4 proof steps. No duplicate in Mathlib/project. Advisory: RingedSpace.moduleStalkFunctor (owner def-pc-module-stalk-functor) used without stmt_dep, same as landed siblings; S2 cannot add it; maintainer may add. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261026T001538-L-8127",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

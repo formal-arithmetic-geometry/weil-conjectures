@@ -1,0 +1,125 @@
+{
+ "id": "def-sfb-associated-vector-bundle-frame",
+ "kind": "definition",
+ "title": "Descent frames for associated homogeneous vector bundles",
+ "status": "split",
+ "import_flags": [],
+ "statement": "Let $F$ be a field [def-weil-field], $G,H$ group schemes over $F$ [def-sc-group-scheme], $i:H\\to G$ a homomorphism, and $q:G\\to Q$ an $F$-morphism. Let $r:H\\to\\operatorname{GL}_n$ be a rational representation on $F^n$, including $n=0$. For an $\\mathcal O_Q$-module $E$ [def-weil-sheaf-of-modules-category], a frame $\\theta:q^*E\\simeq\\mathcal O_G^n$ uses ordinary module pullback [def-pc-module-pullback]. Its restriction along any $g:S\\to G$ is the canonical composite $(qg)^*E\\simeq g^*q^*E\\simeq g^*\\mathcal O_G^n\\simeq\\mathcal O_S^n$. For a commutative $F$-algebra $A$ and $g\\in G(A)$, write $[g,v]_\\theta$ for the section of $(qg)^*E$ corresponding to $v\\in A^n$. The predicate $\\operatorname{IsDescentFrame}(\\theta,r)$ says that, for every such $A$, $g\\in G(A)$, $h\\in H(A)$ and $v\\in A^n$, $q(gi(h))=q(g)$ and the sections $[gi(h),v]_\\theta$ and $[g,r(h)v]_\\theta$ are equal after transport along $q(gi(h))=q(g)$. When $q$ is a represented right $H$-torsor, this is precisely the descent datum $(g,w)\\cdot h=(gi(h),r(h)^{-1}w)$, so $E$ with this frame is the sheaf of sections of the associated vector bundle. All test algebras, including nonreduced ones, are included. The finite free sheaf, restricted frame and framed vector are the indicated real constructions, with no descended sheaf chosen from a mere existence claim.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-sc-group-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback"
+ ],
+ "source": {
+  "document": "literature/milne-algebraic-groups_iAG2017.pdf",
+  "place": "Section 18c, printed pp.389--390, 18.11 and proof of 18.14; the vector-bundle extension uses Stacks descent.tex, Tag 023T."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A vector bundle on a quotient G/H is specified by its trivial pullback to G with the descent relation from a rational H representation",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Bundle.Trivial.contMDiffVectorBundle\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.Basic\", \"type\": \": ContMDiffVectorBundle n F (Bundle.Trivial B F) IB\", \"doc\": \"The trivial bundle over a topological space $ B $ with fiber $ F $, a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, is a vector bundle. This structure equips the product space $\"}\n  {\"name\": \"VectorBundle.mk\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"∀ {R : Type u_1} {B : Type u_2} {F : Type u_3} {E : B → Type u_4} [inst : NontriviallyNormedField R]\\n  [inst_1 : (x : B) → AddCommMonoid (E x)] [inst_2 : (x : B) → Module R (E x)] [inst_3 : NormedAddCommGroup F]\\n  [inst_4 : NormedSpace R F] [inst_5 : TopologicalSpace B] [inst_6 : TopologicalSpace (B\", \"doc\": \"Given a nontrivially normed field $ R $, a topological space $ B $, a normed vector space $ F $ over $ R $, and a total space $ E $ over $ B $ equipped with compatible topologies and module structures\"}\n  {\"name\": \"Bundle.Trivial.vectorBundle\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \": VectorBundle 𝕜 F (Bundle.Trivial B F)\", \"doc\": \"The trivial bundle over a topological space $ B $ with fiber $ F $, a normed vector space over a nontrivially normed field $ \\\\mathbb{K} $, is a vector bundle. This structure equips the product space $\"}\n  {\"name\": \"VectorBundle\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    (F : Type u_3) →\\n      (E : B → Type u_4) →\\n        [inst : NontriviallyNormedField R] →\\n          [inst_1 : (x : B) → AddCommMonoid (E x)] →\\n            [(x : B) → Module R (E x)] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [NormedSpace \", \"doc\": \"A vector bundle over a topological space $ B $ with fibers modeled on a normed vector space $ F $ over a nontrivially normed field $ R $. It consists of a total space $ E $ equipped with a topology, w\"}\n  {\"name\": \"Trivialization.pullback\", \"module\": \"Mathlib.Topology.FiberBundle.Constructions\", \"type\": \"(e : Trivialization F (π F E)) (f : K) : Trivialization F (π F((f : B' → B) *ᵖ E))\", \"doc\": \"Given a trivialization $ e $ of a fiber bundle $ E $ over a base space $ B $, and a continuous map $ f : B' \\to B $, the pullback trivialization constructs a trivialization for the pullback bundle $ f^\"}\n  {\"name\": \"VectorPrebundle\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"(R : Type u_1) →\\n  {B : Type u_2} →\\n    (F : Type u_3) →\\n      (E : B → Type u_4) →\\n        [inst : NontriviallyNormedField R] →\\n          [inst_1 : (x : B) → AddCommMonoid (E x)] →\\n            [(x : B) → Module R (E x)] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [NormedSpace \", \"doc\": \"A structure consisting of a base topological space $ B $, a fiber $ F $ which is a normed vector space over a nontrivially normed field $ R $, and a total space $ E $ assigning to each point in $ B $ \"}\n  {\"name\": \"VectorBundle.casesOn\", \"module\": \"Mathlib.Topology.VectorBundle.Basic\", \"type\": \"{R : Type u_1} →\\n  {B : Type u_2} →\\n    {F : Type u_3} →\\n      {E : B → Type u_4} →\\n        [inst : NontriviallyNormedField R] →\\n          [inst_1 : (x : B) → AddCommMonoid (E x)] →\\n            [inst_2 : (x : B) → Module R (E x)] →\\n              [inst_3 : NormedAddCommGroup F] →\\n                [ins\", \"doc\": \"Given a nontrivially normed field $ R $, a topological base space $ B $, a normed vector space $ F $ over $ R $, and a total space $ E $ over $ B $ with compatible topologies and module structures, th\"}\n  {\"name\": \"VectorBundle.pullback\", \"module\": \"Mathlib.Topology.VectorBundle.Constructions\", \"type\": \"[∀ x, TopologicalSpace (E x)] [FiberBundle F E] [VectorBundle 𝕜 F E] (f : K) : VectorBundle 𝕜 F ((f : B' → B) *ᵖ E)\", \"doc\": \"Given a continuous map $ f : B' \\to B $ and a vector bundle $ E $ over $ B $ with fiber $ F $ modeled on a normed vector space over a nontrivially normed field, the pullback bundle $ f^*E $ over $ B' $\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match; the hits concern topological bundles, condensed modules, or general free pullback, not the rational stabilizer descent frame."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A frame on the pullback of a sheaf on G/H is a descent frame if it transforms by a rational H representation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor\", \"module\": \"Mathlib/Condensed/Discrete/Module\", \"type\": \"{P : TopCat → Prop} →\\n  (R : Type (max u w)) →\\n    [inst : Ring R] →\\n      [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P] →\\n        [inst_2 : CompHausLike.HasExplicitPullbacks P] →\\n          (hs :\\n              ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n                CategoryTheory.EffectiveEpi \", \"doc\": \"A functor from the category of $ R $-modules to the category of sheaves on compact Hausdorff-like spaces equipped with the coherent Grothendieck topology. For each $ R $-module $ X $, it assigns the s\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CondensedMod.ofSheafCompHaus\", \"module\": \"Mathlib/Condensed/Explicit\", \"type\": \"(R : Type (u + 1)) →\\n  [inst : Ring R] →\\n    (F : CategoryTheory.Functor CompHausᵒᵖ (ModuleCat R)) →\\n      [CategoryTheory.Limits.PreservesFiniteProducts F] →\\n        CategoryTheory.regularTopology.EqualizerCondition F → CondensedMod R\", \"doc\": \"Given a functor $ F: \\\\mathrm{CompHaus}^{\\\\mathrm{op}} \\\\to \\\\mathrm{ModuleCat}\\\\, R $ that preserves finite products and satisfies the equalizer condition for the regular topology, $ F $ defines a sheaf w\"}\n  {\"name\": \"Condensed.lanSheafProfinite\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CategoryTheory.Sheaf (CategoryTheory.coherentTopology Profinite) (Type (u + 1))\", \"doc\": \"For a type $X$, this sheaf on the coherent Grothendieck topology of profinite spaces is constructed as the left Kan extension of the presheaf assigning locally constant functions $S \\to X$ to each prof\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"For each type $X$, this functor constructs a sheaf on the opposite category of compact Hausdorff-like spaces $\\\\mathbf{CompHausLike}_P^\\\\text{op}$ with values in $\\\\mathrm{Type}$. The sheaf assigns to ea\"}\n  {\"name\": \"TopCat.toSheafCompHausLike\", \"module\": \"Mathlib/Condensed/TopComparison\", \"type\": \"(P : TopCat → Prop) →\\n  TopCat →\\n    [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n      [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n        (hs :\\n            ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n              CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.Concret\", \"doc\": \"Given a predicate $P$ on compact Hausdorff-like spaces with explicit finite coproducts and pullbacks, if every effective epimorphism in $\\\\mathbf{CompHausLike}_P$ is surjective, then the Yoneda preshea\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] [inst_1 : CategoryTheory.IsCofiltered I]\\n  {F : CategoryTheory.Functor I FintypeCat} (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite))\\n  (X : Type (u + 1)) (hc : CategoryTheory.Limits.IsLimit c) [inst_2 : ∀ (i : I), CategoryTheo\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}\n  {\"name\": \"topCatToSheafCompHausLike\", \"module\": \"Mathlib/Condensed/TopComparison\", \"type\": \"(P : TopCat → Prop) →\\n  [inst : CompHausLike.HasExplicitFiniteCoproducts P] →\\n    [inst_1 : CompHausLike.HasExplicitPullbacks P] →\\n      (hs :\\n          ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n            CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom f)) →\\n \", \"doc\": \"Given a predicate $P$ on compact Hausdorff-like spaces with explicit finite coproducts and pullbacks, if every effective epimorphism in $\\\\mathbf{CompHausLike}_P$ is surjective, then the Yoneda preshea\"}\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match; the hits concern topological bundles, condensed modules, or general free pullback, not the rational stabilizer descent frame."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDescentFrame|AssociatedVectorBundleFrame",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-24",
+   "verdict": "No exact match; the hits concern topological bundles, condensed modules, or general free pullback, not the rational stabilizer descent frame."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-homogeneous-cotangent-associated-bundle",
+  "date": "2026-10-24",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Power lifting and finite generation for PGL invariants. Supporting argument: Haboush symmetric-power lifting for a trivial quotient representation. Supporting representation-theoretic input: Steinberg endomorphisms detect a nonzero fixed vector. Supporting Self-duality of rho section modules at characteristic-dependent weights. Supporting input: Positive-characteristic simplicity step, using irreducibility of the Steinberg induced module rather than assuming self-duality. Numerical input to the dimension comparison: Weyl dimension of the induced module. Supporting Kempf vanishing for dominant flag line bundles. Characteristic-zero Kodaira argument: omega_Q=M_(-2rho). Supporting smooth homogeneous quotient cotangent representation, before taking its top wedge. Definition of the associated vector bundle by its specified trivialization and descent relation, used in proof steps 4--6.",
+   "via": [
+    "lem-sfb-homogeneous-cotangent-associated-bundle",
+    "lem-sfb-flag-canonical-character",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupScheme.AssociatedVectorBundleFrame",
+  "declaration": "AlgebraicGeometry.AssociatedVectorBundle.IsDescentFrame",
+  "declarations": [
+   "AlgebraicGeometry.AssociatedVectorBundle.free",
+   "AlgebraicGeometry.AssociatedVectorBundle.frameAt",
+   "AlgebraicGeometry.AssociatedVectorBundle.framedVector",
+   "AlgebraicGeometry.AssociatedVectorBundle.IsDescentFrame"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/AssociatedVectorBundleFrame.lean",
+  "statement": "def IsDescentFrame {F : Type u} [Field F] (G H : Grp (Over (Spec (.of F)))) (i : H ⟶ G) {Q : Over (Spec (.of F))} (q : G.X ⟶ Q) (n : ℕ) (r : GeneralLinearGroup.RationalHom H.X (ULift.{u} (Fin n))) [IsMonHom r] (E : Q.left.Modules) (θ : (Scheme.Modules.pullback q.left).obj E ≅ free G.X.left n) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8046d1454",
+  "group": "Q22",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8046d1454",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read the node, all 10 stmt_deps, both modules, the report and the upstream declarations used (GrpObj.Lie as a Hom from ω=η*cotangentSheaf, defeq to relativeDifferentials; differential, tangentPoint, conjBy, RationalHom.points, schemeTangentSpace, the pinned tensorPullback adjunction, exteriorSheafSection, freeSectionsEquivOpens). Every hypothesis matches the node (alg. closed F; G smooth/connected/affine/finite type; H smooth closed subgroup; Q separated finite type; q flat, surjective, finitely presented; torsor IsPullback (fst, (1⊗i)≫μ)) with nothing extra. Every conclusion is present: Q and q smooth; injective dH and t: 𝔤/𝔥 ≃ T_oQ pinned to dq on dual-number points; r pinned to Ad on rational h, t intertwining d(L_h), action a pinned on all test schemes; rV(h)=r(h⁻¹)ᵀ over all algebras (contragredient); θ an IsDescentFrame of the actual Ω ([g·i(h),v]=[g,rV(h)v] over all algebras, full because G×H is affine) plus equivariance plus the canonical pairing at η, which pins θ uniquely by density of G(F); checked that pairing, equivariance and conjugation give exactly the descent relation at e; θTop pinned by the determinant formula with rTop=det rV; IsFiniteLocallyFreeOfRank d; SmoothOfRelativeDimension d. Edge cases d=0, H=1, finite/disconnected H, any characteristic, universes are covered. New node def-sfb-associated-vector-bundle-frame: fields per H12, real data, no duplicate (the character-line-bundle node is rank one). H2 OK: stmt_deps gained the new node plus two landed nodes with records. Statements verbatim, declarations exist, only the main theorem sorried, docstrings with source/blueprint/7 steps, no line over 100 characters, report sections present. Not compiled (no FIX). Maintainer notes, not blocking: GrpObj.Lie / conjBy / RationalHom belong to def-wf-lie-algebra-derivation / def-sc-group-scheme-translate / def-wf-algebraic-representations, which are not in stmt_deps; LieIdentityTangentEquiv import not used directly."
+ }
+}

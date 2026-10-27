@@ -117,26 +117,40 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "lean": {
-  "module": "Sheaf.CategoryTheory.ConstantCoefficientScalarExtension",
-  "declaration": "SheafOfModules.constantCoefficientScalarExtension",
-  "file": "lean/Sheaf/CategoryTheory/ConstantCoefficientScalarExtension.lean",
-  "statement": "def constantCoefficientScalarExtension {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D) [HasDerivedCategory.{w} (SheafOfModules.{u} (constantCoefficientRing J B))] [HasDerivedCategory.{w} (SheafOfModules.{u} (constantCoefficientRing J D))] : DerivedCategory (SheafOfModules.{u} (constantCoefficientRing J B)) ⥤ DerivedCategory (SheafOfModules.{u} (constantCoefficientRing J D))",
-  "branch": "newtargets-dag",
-  "by": "NK",
-  "date": "2026-10-15",
-  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantCoefficientScalarExtensionPresentations",
+  "declaration": "SheafOfModules.constantCoefficientEtaleScalarExtension",
   "declarations": [
    "SheafOfModules.constantCoefficientRing",
    "SheafOfModules.constantCoefficientUnit",
    "SheafOfModules.constantCoefficientUnit_isLocallyInjective",
    "SheafOfModules.constantCoefficientUnit_isLocallySurjective",
    "SheafOfModules.constantCoefficientModule",
-   "SheafOfModules.constantCoefficientScalarExtension"
-  ]
+   "SheafOfModules.constantCoefficientScalarExtension",
+   "SheafOfModules.constantCoefficientEtaleScalarExtension",
+   "SheafOfModules.constantCoefficientProEtaleScalarExtension"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ConstantCoefficientScalarExtensionPresentations.lean",
+  "statement": "abbrev constantCoefficientEtaleScalarExtension {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) (X : AlgebraicGeometry.Scheme.{u})",
+  "branch": "sheaf-dag",
+  "by": "Q104",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "§1(B): the recorded ringed-module specialization uses one universe for site objects, site morphisms and coefficients; it cannot directly type the fixed-ring presentation on the original small pro-etale site (objects u+1, morphisms u). The module publicly retains the original interface and all its recorded declarations, and exposes both already existing fixed-ring derived scalar adjunctions as abbreviations, without constructing a second scalar functor or changing its universal property. These are the ordinary constant-coefficient scalar extensions required here. Returned-delivery repair: preserve every declaration in the current primary record. The item now uses this recorded specialization directly."
  },
  "reviewed": {
   "date": "2026-10-15",
@@ -147,12 +161,12 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-22",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-6d2acefa8",
-  "group": "NK",
+  "reviewer": "NT-stage2-cc-a3edad6cc",
+  "group": "Q104",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable files, source clauses, dependencies, definitions, universes, edge cases, report sections and verbatim signatures. All three delivered modules reproduced cleanly through server-only scompile.py. No delivery errors found."
+  "note": "Re-delivery of RETURNed 27623fd8. (1) Theorem stmt_dep lem-sp-supported-etale-tensor-origin replaced by new def node def-sp-coefficient-scalar-representatives (existing:true over the explicit homEquiv.symm representative arrows, pro-etale plus the etale Etale.scalarExtensionRepresentative; statement verbatim; no duplicate owner). (2) §1(C) correction names pbcComparisonReduction.inv via def-weil-pbc-witness-compatibility in stmt_deps; direction and types consistent; both real citers (finite-coefficient-input-models, etale-open-counit-flat-models) audited and hold; tensor-pullback identification kept as proof Step 6. (3) Etale Tor clauses use the recorded Etale.DerivedCategory.hasTorAmplitudeIn; pro-etale clauses use the repaired HasFixedCoefficientProEtaleTorAmplitude. Both dependency records are superset repairs by public import of the live modules. Clause table, edge cases (empty X, P=0, a=b, B=0, A=B, Z/4->F2), lean.statement verbatim and gates all ok; no file changed, no compile. Advisories: self second reading; naturality in P implicit; no copyright headers in the dependency modules."
  },
  "reviewed_proof": {
   "date": "2026-10-18",

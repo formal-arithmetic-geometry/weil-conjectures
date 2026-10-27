@@ -1,0 +1,301 @@
+{
+ "id": "lem-sfb-affine-lci-artinian-lift",
+ "kind": "statement",
+ "title": "Flat affine lci deformations lift over Artinian coefficient surjections",
+ "statement": "Let $k$ be a field [def-weil-field] and let $\\Lambda$ be a Noetherian local ring [def-weil-pbc-noetherian-ring] with a specified residue-field isomorphism $\\Lambda/\\mathfrak m_\\Lambda\\cong k$. Let $A^\\prime\\twoheadrightarrow A$ be a surjective local $\\Lambda$-algebra homomorphism between commutative Artinian local $\\Lambda$-algebras, with specified residue-field identifications $A^\\prime/\\mathfrak m_{A^\\prime}\\cong k$ and $A/\\mathfrak m_A\\cong k$ as $\\Lambda$-algebras, inducing the identity on $k$. Here a local ring has exactly one maximal ideal and an Artinian ring has the descending chain condition on ideals. Let $V=\\operatorname{Spec}P$ be an affine $k$-scheme, where $P$ is a finitely generated $k$-algebra that is a local complete intersection over $k$ [def-weil-pbc-complete-intersection-over-field]. Let $Y\\to\\operatorname{Spec}A$ be a flat scheme [def-weil-flat-morphism] with a specified $k$-isomorphism $\\iota:Y\\times_{\\operatorname{Spec}A}\\operatorname{Spec}k\\cong V$ [def-pc-fibre-product]. There exist a flat affine $A^\\prime$-scheme $Y^\\prime$, a $k$-isomorphism $\\iota^\\prime:Y^\\prime\\times_{\\operatorname{Spec}A^\\prime}\\operatorname{Spec}k\\cong V$, and an $A$-isomorphism $\\alpha:Y^\\prime\\times_{\\operatorname{Spec}A^\\prime}\\operatorname{Spec}A\\cong Y$ whose reduction to $k$ satisfies $\\iota\\circ\\alpha_k=\\iota^\\prime$. No bound on the dimension of $V$ and no smoothness hypothesis on $V$ is imposed. The zero algebra and empty scheme are allowed.",
+ "source": {
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-complete-intersection-over-field"
+ ],
+ "proof": [
+  {
+   "text": "Put $\\mathfrak m=\\mathfrak m_A$. By [lem-weil-pbc-artinian-local-noetherian-nilpotent], $A$ is Noetherian and $\\mathfrak m^N=0$ for some $N\\ge1$. Using the specified identification $A/\\mathfrak m\\cong k$, clause (1) of [lem-weil-pbc-base-change-nilpotent-thickening-idempotents] says that $Y_k\\to Y$ is a thickening. Its source is isomorphic to the affine scheme $V$ by $\\iota$. Therefore [lem-weil-pbc-thickening-affine-scheme] makes $Y$ affine. Choose $Y\\cong\\operatorname{Spec}Q$ over $\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+    "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+    "lem-weil-pbc-thickening-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYX, lemma-affine, proof, using more-morphisms.tex Tags 09ZU and 06AD and algebra.tex Tags 00KH and 00J8."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-flat-ring-map-iff-flat-affine], $Q$ is flat over $A$. By [lem-weil-pbc-fibre-product-affine-spectra], $Y_k\\cong\\operatorname{Spec}(Q\\otimes_A k)$. The affine-spectrum correspondence [def-weil-affine-spectrum] applied to $\\iota$ yields the specified $k$-algebra isomorphism $P\\cong Q\\otimes_A k$. The map $Q\\otimes_A(A/\\mathfrak m)\\to Q/\\mathfrak m Q$, $q\\otimes\\bar a\\mapsto\\overline{aq}$, has inverse $\\bar q\\mapsto q\\otimes1$; the balancing relation makes these maps inverse ring maps. Thus $Q/\\mathfrak m Q\\cong P$ is finite type over $k$.",
+   "uses": [
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DYX, lemma-affine, coordinate interpretation and example-rings; schemes.tex Tag 01I4."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-lift-nilpotent] to $A\\to Q$ and $\\mathfrak m$: step 1 supplies nilpotence and step 2 finite type modulo $\\mathfrak m$. Hence $Q$ is of finite type over $A$. Since $A$ is Noetherian, [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $Q$ finitely presented over $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-lift-nilpotent",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZH, lemma-lci-unobstructed, implicit finite-presentation check in its syntomicity assertion; algebra.tex Tag 00FP and the nilpotent finite-type lifting argument."
+   }
+  },
+  {
+   "text": "Every prime $\\mathfrak p$ of $A$ contains $\\mathfrak m$: for $a\\in\\mathfrak m$ we have $a^N=0\\in\\mathfrak p$, hence $a\\in\\mathfrak p$. As $\\mathfrak m$ is maximal, $\\mathfrak p=\\mathfrak m$ and $\\kappa(\\mathfrak p)=k$. Its fibre ring is $Q\\otimes_A k\\cong P$, which is lci by hypothesis. Together with flatness in step 2 and finite presentation in step 3, this verifies exactly the three conditions for syntomicity written in [lem-sfb-syntomic-algebra-surjection-lift].",
+   "uses": [
+    "lem-sfb-syntomic-algebra-surjection-lift"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00SL, definition-lci, applied over the Artinian local base, as in examples-defos.tex Tag 0DZH."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-syntomic-algebra-surjection-lift] with $R=A^\\prime$, $R_0=A$, $B_0=Q$, and $I=\\ker(A^\\prime\\to A)$. Surjectivity is a hypothesis and step 4 verifies syntomicity. It gives a syntomic $A^\\prime$-algebra $Q^\\prime$ and an $A$-algebra isomorphism $\\beta:Q^\\prime/IQ^\\prime\\cong Q$. Set $Y^\\prime=\\operatorname{Spec}Q^\\prime$. The written definition of syntomic gives flatness of $Q^\\prime$ over $A^\\prime$, so [lem-weil-pbc-flat-ring-map-iff-flat-affine] gives the required flatness of this affine scheme.",
+   "uses": [
+    "lem-sfb-syntomic-algebra-surjection-lift",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tag 0DZH, lemma-lci-unobstructed, final proof sentence invoking smoothing.tex Tag 07M8, proposition-lift-smooth (1)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-fibre-product-affine-spectra] and the quotient-tensor maps of step 2 with $I$ in place of $\\mathfrak m$ to identify $Y^\\prime\\times_{A^\\prime}A$ with $\\operatorname{Spec}(Q^\\prime/IQ^\\prime)$. The inverse of $\\operatorname{Spec}\\beta$, followed by the chosen identification $\\operatorname{Spec}Q\\cong Y$, gives an $A$-isomorphism $\\alpha:Y^\\prime\\times_{A^\\prime}A\\cong Y$ [def-weil-affine-spectrum]. Define $\\iota^\\prime=\\iota\\circ\\alpha_k$. The comparison $(Y^\\prime\\times_{A^\\prime}A)\\times_A k\\cong Y^\\prime\\times_{A^\\prime}k$ follows directly from the fibre-product universal property [def-pc-fibre-product]: the same compatible projections specify both cones and their inverse maps. Since $A^\\prime\\to A\\to k$ is the specified residue map, this is the required special fibre. The equality $\\iota\\circ\\alpha_k=\\iota^\\prime$ is its definition. If $P=0$, step 1 gives $Y=\\varnothing$ (a thickening preserves the underlying space); taking $Y^\\prime=\\varnothing$ gives the same conclusion.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/examples-defos.tex",
+    "place": "Tags 0DYX (lemma-affine) and 0DZH (lemma-lci-unobstructed), translating the ring lift back to a marked scheme deformation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-artinian-local-noetherian-nilpotent",
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+  "lem-weil-pbc-thickening-affine-scheme",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-finite-type-lift-nilpotent",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-sfb-syntomic-algebra-surjection-lift",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/examples-defos.tex",
+  "place": "Tags 0DZH (lemma-lci-unobstructed) and 0DYX (lemma-affine), with the finite-presentation justification made explicit; the substantive algebra input is smoothing.tex Tag 07M8 (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"Deformation\"",
+   "results": "{\"t\": \"2026-10-22T06:23:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"Deformation\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching source text"
+  },
+  {
+   "tool": "grep",
+   "query": "unobstructed|DeformationCategory|deformation.*[Ll]ift|[Ll]ift.*deformation",
+   "results": "{\"t\": \"2026-10-22T06:23:58Z\", \"tool\": \"grep\", \"query\": \"unobstructed|DeformationCategory|deformation.*[Ll]ift|[Ll]ift.*deformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching source text"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat deformation of an affine local complete intersection over a field lifts across every surjection of Artinian local coefficient rings",
+   "results": "{\"t\": \"2026-10-22T06:24:06Z\", \"tool\": \"leanfinder\", \"query\": \"A flat deformation of an affine local complete intersection over a field lifts across every surjection of Artinian local coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.of_comp_surjective\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.formallySmooth\", \"Algebra.Smooth.flat\", \"Algebra.Smooth\"], \"digest\": \"0ffd56accdf97036\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern formal smoothness of a fixed algebra, ordinary scheme gluing/restriction, or flatness; none constructs lifts of flat scheme deformations over varying Artinian coefficient rings"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat deformations of an affine local complete intersection lift across Artinian ring surjections",
+   "results": "{\"t\": \"2026-10-22T06:24:50Z\", \"tool\": \"leansearch\", \"query\": \"Flat deformations of an affine local complete intersection lift across Artinian ring surjections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Flat.isStableUnderBaseChange\", \"Algebra.FormallySmooth.liftOfSurjective\", \"RingHom.Flat\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Module.Flat.of_flat_tensorProduct\", \"Algebra.FormallySmooth.of_comp_surjective\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.FormallySmooth.lift\"], \"digest\": \"3356712a02b274ea\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern formal smoothness of a fixed algebra, ordinary scheme gluing/restriction, or flatness; none constructs lifts of flat scheme deformations over varying Artinian coefficient rings"
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|syntomic|[Dd]eformation.*[Gg]lu|[Gg]lu.*[Dd]eformation",
+   "results": "{\"t\": \"2026-10-22T06:24:50Z\", \"tool\": \"grep\", \"query\": \"Syntomic|syntomic|[Dd]eformation.*[Gg]lu|[Gg]lu.*[Dd]eformation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: no matching source text"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A syntomic algebra lifts over a nilpotent surjection of Artinian local rings preserving a given flat special fibre",
+   "results": "{\"t\": \"2026-10-22T06:25:00Z\", \"tool\": \"leanfinder\", \"query\": \"A syntomic algebra lifts over a nilpotent surjection of Artinian local rings preserving a given flat special fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Algebra.FormallySmooth.comp_liftOfSurjective\", \"Algebra.FormallyUnramified.lift_unique\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth\"], \"digest\": \"584b3cbd98194732\"}",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations concern formal smoothness of a fixed algebra, ordinary scheme gluing/restriction, or flatness; none constructs lifts of flat scheme deformations over varying Artinian coefficient rings"
+  },
+  {
+   "tool": "grep",
+   "query": "Syntomic|syntomic|unobstructed|DeformationCategory",
+   "results": "{\"t\": \"2026-10-23T09:28:57Z\", \"tool\": \"grep\", \"query\": \"Syntomic|syntomic|unobstructed|DeformationCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat affine local complete intersection deformation lifts across every surjection of Artinian local coefficient rings",
+   "results": "{\"t\": \"2026-10-23T09:29:08Z\", \"tool\": \"leanfinder\", \"query\": \"A flat affine local complete intersection deformation lifts across every surjection of Artinian local coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"Algebra.Smooth\", \"AlgebraicGeometry.Flat\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"077bce4e30e7004e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallySmooth, RingHom.Flat",
+   "results": "{\"t\": \"2026-10-23T09:30:25Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FormallySmooth, RingHom.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Lift syntomic algebras along a surjective ring homomorphism",
+   "results": "{\"t\": \"2026-10-23T09:30:26Z\", \"tool\": \"leansearch\", \"query\": \"Lift syntomic algebras along a surjective ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"RingHom.liftOfSurjective\", \"AlgHom.liftOfSurjective\", \"AlgHom.liftOfSurjective.congr_simp\", \"AlgHom.liftOfSurjective_surjective\"], \"digest\": \"24f5357dbc4eca33\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Smooth, Function.Surjective",
+   "results": "{\"t\": \"2026-10-23T09:33:18Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Smooth, Function.Surjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every syntomic algebra over a quotient ring lifts to a syntomic algebra over the original ring",
+   "results": "{\"t\": \"2026-10-23T09:33:24Z\", \"tool\": \"leanfinder\", \"query\": \"Every syntomic algebra over a quotient ring lifts to a syntomic algebra over the original ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Algebra.FormallySmooth.liftOfSurjective\", \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"Algebra.FormallySmooth.comp_lift\", \"Algebra.FormallySmooth.lift\", \"Algebra.FormallySmooth.mk_lift\", \"Algebra.FormallySmooth.comp_surjective\", \"Algebra.FormallySmooth.of_comp_surjective\"], \"digest\": \"f5b2d18fbd089055\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "grep",
+   "query": "syntomic|Syntomic|lift.*[Aa]lgebra|[Aa]lgebra.*lift",
+   "results": "{\"t\": \"2026-10-23T09:37:41Z\", \"tool\": \"grep\", \"query\": \"syntomic|Syntomic|lift.*[Aa]lgebra|[Aa]lgebra.*lift\", \"sub\": \"RingTheory/Smooth\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/Local.lean\", \"Mathlib/RingTheory/Smooth/AdicCompletion.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"Mathlib/RingTheory/Smooth/Kaehler.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\", \"Mathlib/RingTheory/Smooth/Fiber.lean\"], \"digest\": \"443cf7359e59b4d4\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Syntomic algebras lift over arbitrary quotient rings with prescribed algebra isomorphism modulo the kernel",
+   "results": "{\"t\": \"2026-10-23T09:39:59Z\", \"tool\": \"leansearch\", \"query\": \"Syntomic algebras lift over arbitrary quotient rings with prescribed algebra isomorphism modulo the kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.exists_lift\", \"Ideal.Quotient.exists_algHom_fixedPoint_quotient_under\", \"Algebra.FormallySmooth.lift\", \"AlgHom.liftOfSurjective\", \"Ideal.kerLiftAlg\", \"Algebra.FormallySmooth.liftOfSurjective_apply\", \"Algebra.FormallySmooth.lift.congr_simp\", \"Algebra.FormallySmooth.liftOfSurjective\"], \"digest\": \"6fd6090c98586d0f\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a surjective commutative ring map R to R0 and a flat finitely presented R0 algebra with local complete intersection fibres, there is a flat finitely presented R algebra with local complete intersection fibres reducing to the given algebra",
+   "results": "{\"t\": \"2026-10-23T09:40:10Z\", \"tool\": \"leanfinder\", \"query\": \"Given a surjective commutative ring map R to R0 and a flat finitely presented R0 algebra with local complete intersection fibres, there is a flat finitely presented R algebra with local complete intersection fibres reducing to the given algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"RingHom.IsStandardSmoothOfRelativeDimension.toAlgebra\", \"RingHom.FaithfullyFlat.codescendsAlong_surjective\", \"RingHom.IsStandardSmooth.toAlgebra\", \"Algebra.Smooth.exists_finiteType\", \"Algebra.Smooth.exists_subalgebra_fg\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.Smooth.flat\"], \"digest\": \"c7fd401fbf75fa9b\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: no syntomic object-lifting theorem; returned formal-smoothness results lift maps from a fixed formally smooth algebra, and smoothness/flatness/descent results do not lift the algebra itself"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-isolated-lci-curve-unobstructed",
+  "date": "2026-10-22",
+  "group": "NN"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0DZX (lemma-big-smooth-part-curves), clauses (1) and (3), with the open substack lci+ in the statement. This is the full isolated-lci locus, not the nodal locus. Supporting input for the intersection construction and smoothness argument of Tag 0DZX: Unobstructed deformations of a separated curve with isolated lci singularities. Tag 0DZQ, proof: Tag 0DZH (lemma-lci-unobstructed), scheme formulation via Tag 0DYX (lemma-affine), with example-schemes and section-general; formal-defos.tex, definition-CLambda specifies the coefficient identifications.",
+   "via": [
+    "lem-sfb-isolated-lci-curve-unobstructed",
+    "lem-sfb-isolated-lci-curve-smooth-open",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-affine-lci-artinian-lift",
+  "worker": "stage1",
+  "summary": "Kept the full statement unchanged. Converted the given flat deformation to an affine algebra using existing thickening lemmas; checked finite presentation and the unique lci fibre; applied the general syntomic lift theorem, isolated as one new statement-only node, and defined the marking by composition to prove compatibility. Searches found no attachment or Mathlib match.",
+  "blueprint": "Historical det-thm-sf-ctf-stability-direct-images proof (3), stable-curve deformation prerequisite in the recorded ancestor chain, specifically examples-defos Tag 0DZH and its affine translation Tag 0DYX. The latest blueprint direct-image proof now cites compactification/preservation; this split only resolves the already assigned generic commutative-algebra prerequisite and does not change the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+    "why": "Only clause (1), stability of finite-order thickenings under arbitrary base change, is used; this generic scheme tool is not supplied by the six-functor unit."
+   },
+   {
+    "node": "lem-weil-pbc-thickening-affine-scheme",
+    "why": "Affineness of an arbitrary thickening of an affine scheme is the generic scheme tool needed to pass from Y to its algebra; the unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-base-change-nilpotent-thickening-idempotents",
+  "lem-weil-pbc-thickening-affine-scheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-NL-9da06e687",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-9da06e687 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Stacks 0DZH (examples-defos l.2736-2751), 07M8(1) (smoothing l.448ff with proof) and 00SL/00S9. The item statement is unchanged and still unsplit in live and side-live, with no repair note, so this is a first split. New node lem-sfb-syntomic-algebra-surjection-lift states 07M8(1) faithfully: an arbitrary surjection, syntomic written out per 00SL with defining nodes cited, and β an R_0-iso. It is statement-only and self-contained, and I tested it on R_0=0, ℤ→F_p with F_p[x]/(x²), and polynomial algebras. rg over dag/nodes for 07M8/lift-smooth finds only the item and this node, and none of the 125 syntomic nodes or the lci nodes lifts an algebra along a surjection, so it is not a duplicate and not a restated clause. The item's steps check out against the cited statements. Step 1: Artinian local implies Noetherian with m nilpotent; the base change of Y to A/m is a thickening by clause (1); a thickening of the affine Y_k is affine. Step 2: flatness by the affine flatness criterion; Y_k is Spec(Q⊗k), P≅Q⊗_A k, and Q⊗_A A/m≅Q/mQ is written out. Step 3: finite type by nilpotent lifting, then finite presentation by Noetherianity. Step 4 (elementary): Spec A={m}, so the only fibre is P, which is lci. Step 5: applies the new node and gets flatness of Y'. Step 6 (elementary): α from Spec β^{-1}, ι' by composition through the universal-property iso. The edge cases P=0, A'=A, the singular k[x]/(x²) and mixed characteristic all work. I accept the declared tool_uses thickening-idempotents(1) and thickening-affine (generic scheme facts used as black boxes). finite-type-lift-nilpotent is closed in slopmaster2, so it is a tool. No SGA is cited and A-F are clean. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineLciArtinianLift",
+  "declaration": "AlgebraicGeometry.exists_affine_lci_artinian_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLciArtinianLift.lean",
+  "statement": "theorem exists_affine_lci_artinian_lift (Λ : Type v) [CommRing Λ] [IsNoetherianRing Λ] [IsLocalRing Λ] (k : Type u) [Field k] [Algebra Λ k] (eΛ : IsLocalRing.ResidueField Λ ≃ₐ[Λ] k) (A' A : Type u) [CommRing A'] [CommRing A] [IsArtinianRing A'] [IsLocalRing A'] [IsArtinianRing A] [IsLocalRing A] [Algebra Λ A'] [Algebra Λ A] (eA' : IsLocalRing.ResidueField A' ≃ₐ[Λ] k) (eA : IsLocalRing.ResidueField A ≃ₐ[Λ] k) (π : A' →ₐ[Λ] A) [IsLocalHom π.toRingHom] (hπ : Function.Surjective π) (hπk : (eA.toRingHom.comp (IsLocalRing.residue A)).comp π.toRingHom = eA'.toRingHom.comp (IsLocalRing.residue A')) (P : Type u) [CommRing P] [Algebra k P] [Algebra.FiniteType k P] (hP : Algebra.IsLocalCompleteIntersection k P) (Y : Scheme.{u}) (f : Y ⟶ Spec (.of A)) [Flat f] (ι : pullback f (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A)))) ≅ Spec (.of P)) (hι : ι.hom ≫ Spec.map (ofHom (algebraMap k P)) = pullback.snd f (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))))) : ∃ (Y' : Scheme.{u}) (f' : Y' ⟶ Spec (.of A')), Flat f' ∧ IsAffine Y' ∧ ∃ (α : pullback f' (Spec.map (ofHom π.toRingHom)) ≅ Y) (hα : α.hom ≫ f = pullback.snd f' (Spec.map (ofHom π.toRingHom))) (ι' : pullback f' (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))) ≫ Spec.map (ofHom π.toRingHom)) ≅ Spec (.of P)), ι'.hom ≫ Spec.map (ofHom (algebraMap k P)) = pullback.snd f' (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))) ≫ Spec.map (ofHom π.toRingHom)) ∧ (pullbackLeftPullbackSndIso f' (Spec.map (ofHom π.toRingHom)) (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A))))).inv ≫ pullback.map (pullback.snd f' (Spec.map (ofHom π.toRingHom))) (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A)))) f (Spec.map (ofHom (eA.toRingHom.comp (IsLocalRing.residue A)))) α.hom (𝟙 _) (𝟙 _) ((Category.comp_id _).trans hα.symm) ((Category.comp_id _).trans (Category.id_comp _).symm) ≫ ι.hom = ι'.hom",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d3532720",
+  "group": "O2",
+  "result": "pass",
+  "note": "Only change: new module Sheaf.AlgebraicGeometry.AffineLciArtinianLift with theorem exists_affine_lci_artinian_lift (sorry); node gains only its lean field; lean.statement verbatim. Read Stacks 0DZH, 0DYX and example-schemes. Every hypothesis matches the node: Λ Noetherian local with residue iso (Algebra Λ k + eΛ), Artinian local A'/A with Λ-algebra residue isos, π surjective local inducing id on k, P finite type lci via the recorded IsLocalCompleteIntersection, Y flat with ι over k. Conclusion: Flat f' ∧ IsAffine Y', α over Spec A, ι' over k along Spec k→Spec A→Spec A' (equal to eA' residue map by hπk), and ι∘α_k=ι' via canonical pullbackLeftPullbackSndIso.inv ≫ pullback.map ≫ ι.hom, so ι' is pinned. Edge cases checked: P=0, π=id, singular lci, any dimension, mixed characteristic; universes u for k/A/A'/P/Y, Λ independent v, consistent with the syntomic-lift proof dep. Plain imports = proof-dep modules, all present. Docstrings give source and blueprint plus six proof steps; no defs, no pro-étale, report sections present. Advisory: hπk and IsLocalHom are redundant but harmless. No compile (no file changed)."
+ }
+}

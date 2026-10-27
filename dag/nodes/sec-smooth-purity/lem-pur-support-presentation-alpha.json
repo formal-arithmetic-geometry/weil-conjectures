@@ -1,0 +1,109 @@
+{
+ "id": "lem-pur-support-presentation-alpha",
+ "kind": "statement",
+ "title": "Actual alpha compatibility for the fixed support presentation",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, a compactification of $f:X\\to Y$, coefficient reduction/total-limit calculi $R_W$, an integral compact-support model $M$, and strict Brown comparison data $S,G,H,D$. Use [def-pur-integral-representing-pair-data] and the fixed normalized comparison $\\beta$ of [def-pur-integral-support-coordinate-comparison]. For every integral object $K$ on $X$, the reduction of supportPresentation($\\beta$), followed by the quotient-coordinate image of the published alpha at $K$, equals the coordinate adjunction counit alpha at $K$ followed by $\\beta$ at the coefficient reduction of $K$. This is equality of actual maps in the ordinary derived category of systems.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Integral Hom display and unit/counit paragraph; coordinate and presentation refinement"
+ },
+ "stmt_deps": [
+  "def-pur-integral-representing-pair-data",
+  "def-pur-integral-support-coordinate-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Expand supportPresentation and the composite adjunction counit. Move beta through the reduction/limit counit by naturality; move the coefficient-model counit through the inverse quotient unit by naturality. Cancel the quotient unit/counit pair using the triangle identity. The coefficient-model counit followed by the actual reduction/limit counit is precisely the published alpha through limitPresentation.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-compact-support-condensed-realization"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-compact-support-condensed-realization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-sp-integral-adjunction/sk-prop-sp-integral-adjunction.proof.md",
+  "place": "Explicit refinement of the integral Hom chain"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.homCongr",
+   "results": "CategoryTheory.Iso.homCongr, CategoryTheory.Iso.homCongr_symm, CategoryTheory.Iso.homCongr_refl, CategoryTheory.Iso.homCongr_apply, CategoryTheory.Iso.homCongr_trans, CategoryTheory.Iso.homCongr_comp, CategoryTheory.Functor.map_homCongr, SemimoduleCat.Iso.homCongr_eq_arrowCongr",
+   "date": "2026-10-25",
+   "verdict": "No complete statement; categorical tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "homCongr|comp_counit_app|inv_hom_id_app_assoc",
+   "results": "Mathlib/NumberTheory/MulChar/Duality.lean, Mathlib/NumberTheory/MulChar/Duality.lean, Mathlib/Algebra/Category/Grp/LargeColimits.lean, Mathlib/Algebra/Category/Grp/ForgetCorepresentable.lean, Mathlib/Algebra/Category/Grp/ForgetCorepresentable.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean, Mathlib/AlgebraicTopology/ModelCategory/FundamentalLemma.lean",
+   "date": "2026-10-25",
+   "verdict": "No complete statement; categorical tools only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of adjunction counits under equivalences of categories",
+   "results": "CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence_1, CategoryTheory.Adjunction.instIsIsoFunctorCounitOfIsEquivalence, CategoryTheory.Adjunction.counit_naturality, CategoryTheory.Equivalence.counit_naturality_assoc, CategoryTheory.Equivalence.counit_naturality, CategoryTheory.Adjunction.counit_naturality_assoc, CategoryTheory.Adjunction.adjunctionOfEquivRight_counit_app, CategoryTheory.Adjunction.adjunctionOfEquivLeft_counit_app",
+   "date": "2026-10-25",
+   "verdict": "No complete statement; categorical tools only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurIntegralRepresentingPair",
+  "date": "2026-10-25",
+  "group": "B9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Integral Hom display, actual reconstruction counits, and supplied-system recognition",
+   "via": [
+    "lem-pur-integral-reconstructed-representing-pair",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurSupportPresentationAlpha",
+  "file": "lean/Sheaf/Paper/PurSupportPresentationAlpha.lean",
+  "declaration": "WeilConjectures.PurIntegralRepresentingPair.supportPresentation_alpha",
+  "statement": "theorem supportPresentation_alpha (R : ∀ W : Scheme.{u}, CoefficientDerivedSystemCalculus l E W) (M : CompactSupportCondensedRealization.IntegralModel l E c R) : ∀ K : CondensedERealization.Integral l E X, (reduction l E Y (R Y)).map ((supportPresentation l E (R X) S G H D (beta l E S G H D)).hom.app K.obj) ≫ (coordinates l E Y).functor.map ((CompactSupportCondensedRealization.alpha l E c R M).app K) = alpha l E (R X) (R Y) S G H D K.obj ≫ (beta l E S G H D).hom.app ((R X).reduction.obj ((purCoefficientModel l E X).functor.obj K.obj))",
+  "branch": "sheaf-dag",
+  "by": "B9",
+  "date": "2026-10-25"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b101",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T162035-L-221287",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-2b101",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261025T162035-L-221287",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Lean/node files vs the approved head 478450ea1374 (byte-identical); Data module vs current published item declarations (verbatim); change record Users vs computed users (V6, Z9); both direct importers compiled against the delivered modules (exit 0 on rerun)"
+ }
+}

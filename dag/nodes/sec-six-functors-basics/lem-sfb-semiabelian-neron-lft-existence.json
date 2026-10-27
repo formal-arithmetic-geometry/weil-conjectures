@@ -1,0 +1,282 @@
+{
+ "id": "lem-sfb-semiabelian-neron-lft-existence",
+ "kind": "statement",
+ "title": "Existence of a Néron lft-model for a geometrically semiabelian group",
+ "statement": "Let $R$ be a discrete valuation ring [def-sc-discrete-valuation-ring], $F=\\operatorname{Frac}(R)$, and $T=\\operatorname{Spec}R$ [def-weil-affine-spectrum]. Let $P$ be a smooth separated commutative group scheme of finite type over $F$ [def-pc-scheme, def-sbc-smooth-morphisms, def-weil-finite-type-morphism], with semiabelian geometric fibres [def-sfb-semiabelian-geometric-fibres]. A commutative group scheme has multiplication, inverse and identity morphisms satisfying the commutative group identities; separated means that its diagonal is a closed immersion [def-weil-closed-immersion]. There exist a smooth separated commutative $T$-group scheme $N$, locally of finite type but not required to be of finite type, and an isomorphism of $F$-group schemes $\\alpha:N_F\\xrightarrow{\\sim}P$, where $N_F=N\\times_T\\operatorname{Spec}F$ [def-pc-base-change], with the following mapping property. For every smooth $T$-scheme $X$, restriction followed by $\\alpha$ is a bijection $$\\operatorname{Hom}_T(X,N)\\xrightarrow{\\sim}\\operatorname{Hom}_F(X_F,P).$$ If $X$ is a smooth commutative $T$-group scheme, this bijection restricts to a bijection on group homomorphisms. The pair $(N,\\alpha)$ is called a Néron lft-model of $P$. No completeness, excellence or residue-field perfection hypothesis is imposed on $R$.",
+ "source": {
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Bosch–Lütkebohmert–Raynaud, Néron Models (1990), 10.1 Definition 1 (printed p.289) and 10.2 Theorem 2 (printed p.297), specialized to geometrically semiabelian groups. Local copy WANTED; primary-source scan read online at https://www.math.stonybrook.edu/~kamenova/homepage_files/Bosch_Raynaud_Neron_Model_tc.pdf, PDF pages 296 and 304. The criterion uses absence of an additive subgroup after completed strict henselian fraction-field extension, which holds for a geometrically semiabelian group."
+ },
+ "stmt_deps": [
+  "def-sc-discrete-valuation-ring",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-sfb-semiabelian-geometric-fibres",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "First verify geometric connectedness, required by the splitting input. For an algebraically closed extension $k/F$, the semiabelian-fibre hypothesis gives $1\\to\\mathbf G_m^r\\to P_k\\to A\\to1$, with $A$ an abelian variety. The kernel identity and fppf local lifting identify $P_k\\to A$ as a torsor: for two lifts $x,y$ of the same point the unique translating element is $y-x$ in the kernel. The split torus is affine smooth finitely presented (Laurent polynomial coordinates are localizations of polynomial coordinates). The cited torsor theorem makes this map smooth, surjective and open. Its geometric fibres are torus torsors, hence over algebraically closed fields are translates of $\\mathbf G_m^r$ and are connected, since the Laurent polynomial ring is a domain. If $P_k=U\\amalg V$ were a partition into nonempty clopen sets, each connected fibre would lie in exactly one, so their open images would partition connected $A$, a contradiction. Apply the field-extension test for geometric connectedness to conclude $P/F$ is geometrically connected. Now apply the existing geometric-semiabelian splitting lemma to choose a finite Galois extension $L/F$, an abelian variety $B/L$, and a smooth surjective homomorphism $P_L\\to B$ with split-torus kernel $\\mathbf G_{m,L}^r$, exact as fppf sheaves.",
+   "uses": [
+    "def-sfb-semiabelian-geometric-fibres",
+    "lem-sfb-smooth-affine-group-torsor-representability",
+    "lem-weil-geometrically-connected-check-after-extension",
+    "lem-sfb-geometric-semiabelian-split-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.2 Theorem 2, proof: pass to a finite separable splitting field for the torus; semiabelian special case, replacing the general structure theorem by the existing split-quotient node"
+   }
+  },
+  {
+   "text": "Let $C$ be the integral closure of $R$ in $L$. Since a DVR is a PID, the PID lemma gives that $R$ is Noetherian and normal, and the DVR dimension lemma gives $\\dim R=1$. The finite separable integral-closure lemma therefore makes $C$ finite over $R$. The one-dimensional integral-closure lemma makes $C$ a Dedekind domain and gives surjectivity of $\\operatorname{Spec}C\\to\\operatorname{Spec}R$. The fraction field of $C$ is $L$: for $z\\in L$, clear the finitely many denominators in a monic polynomial over $F$ satisfied by $z$; if $a\\in R\\setminus\\{0\\}$ clears its coefficients, then the polynomial for $az$ has coefficients $a^i c_i\\in R$, so $az\\in C$. As $C\\subset L$ it is torsion free over $R$. The finite torsion-free DVR lemma makes $C$ finite free, hence flat; its positive rank makes tensoring with it faithful. Thus $\\operatorname{Spec}C\\to T$ is finite faithfully flat, without an excellence assumption.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-sc-dvr-dimension-one",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 032L (algebra-lemma-Noetherian-normal-domain-finite-separable-extension), 09IG (algebra-lemma-integral-closure-Dedekind); finite free torsion-free DVR modules as in 0AUW"
+   }
+  },
+  {
+   "text": "Apply abelian Néron-model existence over the Dedekind domain $C$, whose fraction field was identified with $L$, to the abelian variety $B/L$. It supplies a smooth separated commutative finite-type $\\operatorname{Spec}C$-group model of $B$, with the mapping bijection for every smooth test scheme. In particular it is a Néron lft-model.",
+   "uses": [
+    "lem-sfb-abelian-neron-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 1.4 Theorem 3, printed p.19; abelian quotient in the proof of 10.2 Theorem 2"
+   }
+  },
+  {
+   "text": "The quotient $B$ has no character $B\\to\\mathbf G_{m,L}$. Indeed after the field extension $L\\to\\bar L$, apply the $A\\to T$ clause of torus–abelian hom-vanishing with $A=B_{\\bar L}$ and $T=\\mathbf G_{m,\\bar L}$. The character becomes zero. The field extension gives an fpqc cover of $B$ after base change (it is faithfully flat and affine), and the fpqc-sheaf statement for morphisms, with target the scheme $\\mathbf G_m$, implies that the original character equals zero. The split quotient and this character vanishing check every hypothesis of the split-torus extension theorem; applying it to $1\\to\\mathbf G_{m,L}^r\\to P_L\\to B\\to1$ and the model of step 3 yields a smooth separated commutative Néron lft-model of $P_L$ over $\\operatorname{Spec}C$.",
+   "uses": [
+    "lem-sfb-torus-abelian-hom-vanishing",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-sfb-split-torus-extension-neron-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 7, printed pp.292–293; its character-free example for an abelian quotient"
+   }
+  },
+  {
+   "text": "Use finite-flat Néron lft descent with $D=R$, $D'=C$, $E=F$, $E'=L$, $G=H=P$ and the identity closed immersion. The Dedekind and finite faithfully flat hypotheses were checked in step 2, while the required model of $G_{E'}=P_L$ is supplied by step 4. The result is a smooth separated commutative $T$-group $N$, an isomorphism $\\alpha:N_F\\simeq P$, and restriction bijections $\\operatorname{Hom}_T(X,N)\\simeq\\operatorname{Hom}_F(X_F,P)$ for all smooth $T$-schemes $X$. The lft conclusion is part of that model theorem; no finite-type assertion for $N$ is used.",
+   "uses": [
+    "lem-sfb-finite-flat-neron-lft-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 Proposition 4, printed pp.290–291; descent step of 10.2 Theorem 2"
+   }
+  },
+  {
+   "text": "For a smooth commutative $T$-group $X$ and a generic homomorphism $u_F:X_F\\to P$, let $u:X\\to N$ be its unique extension by step 5. The smooth-flat lemma makes $X\\to T$ flat and locally finitely presented; apply the smooth-flat-base-change statement with both maps equal to $X\\to T$, obtaining a smooth projection $X\\times_T X\\to X$, and then the smooth-composition statement makes $X\\times_T X\\to T$ smooth. The two maps $u\\circ m_X$ and $m_N\\circ(u\\times u)$ from this smooth test scheme to $N$ have equal generic restrictions, hence are equal by injectivity in step 5. On the smooth test scheme $T$, the maps $u\\circ e_X$ and $e_N$ likewise agree. On $X$ the maps $u\\circ\\iota_X$ and $\\iota_N\\circ u$ likewise agree. Thus $u$ is a group homomorphism. Conversely restriction through the group isomorphism $\\alpha$ preserves homomorphisms, and injectivity on all morphisms implies injectivity on homomorphisms. This proves the last clause.",
+   "uses": [
+    "lem-pc-smooth-flat",
+    "lem-sfb-scheme-lfp-smooth-flat-base-change",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+    "place": "BLR 10.1 after Definition 1 and 1.2 Proposition 6: recover group compatibility from uniqueness in the Néron mapping property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-semiabelian-geometric-fibres",
+  "lem-sfb-smooth-affine-group-torsor-representability",
+  "lem-weil-geometrically-connected-check-after-extension",
+  "lem-sfb-geometric-semiabelian-split-quotient",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-sc-dvr-dimension-one",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sfb-abelian-neron-model",
+  "lem-sfb-torus-abelian-hom-vanishing",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-sfb-split-torus-extension-neron-lft",
+  "lem-sfb-finite-flat-neron-lft-descent",
+  "lem-pc-smooth-flat",
+  "lem-sfb-scheme-lfp-smooth-flat-base-change",
+  "lem-trf-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bosch-lutkebohmert-raynaud-neron-models.pdf",
+  "place": "Agent assembly following the semiabelian specialization of BLR 10.2 Theorem 2 through 10.1 Propositions 4 and 7 and 1.4 Theorem 3; local source WANTED, primary scan read online."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|semi.?abelian",
+   "results": "{\"t\": \"2026-10-24T03:38:14Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|semi.?abelian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Weierstrass minimal or good-reduction models, smooth morphisms and valuative criteria, not a Néron lft-model or its smooth mapping property."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a Neron lft model of a semiabelian variety over a discretely valued field",
+   "results": "{\"t\": \"2026-10-24T03:38:14Z\", \"tool\": \"leansearch\", \"query\": \"Existence of a Neron lft model of a semiabelian variety over a discretely valued field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.isGoodReduction_iff\", \"WeierstrassCurve.integralModel\", \"IsNonarchimedeanLocalField.instCompleteSpace\", \"IsNonarchimedeanLocalField.instIsDiscrete\", \"WeierstrassCurve.IsGoodReduction.goodReduction\", \"WeierstrassCurve.IsGoodReduction.mk\", \"AlgebraicGeometry.ValuativeCriterion.Existence\"], \"digest\": \"1fc02158dc9c2c87\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Weierstrass minimal or good-reduction models, smooth morphisms and valuative criteria, not a Néron lft-model or its smooth mapping property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-24T03:38:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Weierstrass minimal or good-reduction models, smooth morphisms and valuative criteria, not a Néron lft-model or its smooth mapping property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth commutative group over the fraction field of a discrete valuation ring with semiabelian geometric fibre admits a smooth separated Neron locally finite type model representing generic morphisms from smooth schemes",
+   "results": "{\"t\": \"2026-10-24T03:38:16Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth commutative group over the fraction field of a discrete valuation ring with semiabelian geometric fibre admits a smooth separated Neron locally finite type model representing generic morphisms from smooth schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\"], \"digest\": \"5d8a5be03d9f3ba5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Weierstrass minimal or good-reduction models, smooth morphisms and valuative criteria, not a Néron lft-model or its smooth mapping property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A semi abelian variety over a discretely valued field has a Neron model locally of finite type satisfying the smooth mapping property",
+   "results": "{\"t\": \"2026-10-24T03:39:08Z\", \"tool\": \"leanfinder\", \"query\": \"A semi abelian variety over a discretely valued field has a Neron model locally of finite type satisfying the smooth mapping property\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.minimal\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\"], \"digest\": \"703dba778428dbc3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hits concern Weierstrass minimal or good-reduction models, smooth morphisms and valuative criteria, not a Néron lft-model or its smooth mapping property."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometrically semiabelian group over the fraction field of any discrete valuation ring admits a Neron model locally of finite type",
+   "results": "{\"t\": \"2026-10-24T04:19:50Z\", \"tool\": \"leanfinder\", \"query\": \"A geometrically semiabelian group over the fraction field of any discrete valuation ring admits a Neron model locally of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.IsGoodReduction\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.instIsMinimalMinimal\", \"WeierstrassCurve.exists_isMinimal\", \"WeierstrassCurve.isGoodReduction_iff_isElliptic_reduction\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.isGoodReduction_iff\"], \"digest\": \"1b42721107691dcf\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "grep",
+   "query": "Neron|Néron|semi.?abelian",
+   "results": "{\"t\": \"2026-10-24T04:21:40Z\", \"tool\": \"grep\", \"query\": \"Neron|Néron|semi.?abelian\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Neron locally finite type model representing generic morphisms from smooth schemes over a discrete valuation ring",
+   "results": "{\"t\": \"2026-10-24T04:21:40Z\", \"tool\": \"leansearch\", \"query\": \"Neron locally finite type model representing generic morphisms from smooth schemes over a discrete valuation ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"AlgebraicGeometry.LocallyOfFiniteType.casesOn\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\"], \"digest\": \"545afabc9b160a2e\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: Read the returned signatures: elliptic-curve reduction, abstract extensions, general smoothness, finite-type properties or Dedekind-ring structure do not construct or assert the Néron mapping property."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Neron\"",
+   "results": "{\"t\": \"2026-10-24T04:21:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"Neron\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: no source hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-trait-semiabelian-hom-extension",
+  "date": "2026-10-24",
+  "group": "Q142"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "The trait-extension local input for the properness of the generic-graph projection: construct an ambient smooth model representing generic maps, before comparing the supplied semiabelian model with it.",
+   "via": [
+    "lem-sfb-trait-semiabelian-hom-extension",
+    "lem-sfb-semiabelian-generic-graph-proper",
+    "lem-sfb-normal-semiabelian-hom-extension",
+    "lem-sfb-symmetric-line-power-prolongation",
+    "lem-sfb-normal-symmetric-cubical-extension",
+    "lem-sfb-symmetric-ample-power-extension",
+    "lem-sfb-regular-group-generic-ampleness",
+    "lem-sfb-stable-picard-theta-ampleness",
+    "lem-sfb-stable-relative-picard-kummer",
+    "lem-sfb-stable-level-versal-branch-freeness",
+    "lem-sfb-stable-abelian-level-normalization",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-semiabelian-neron-lft-existence",
+  "worker": "stage1",
+  "summary": "Reuse finite-Galois semiabelian split quotient; construct the quotient Néron model, lift through a split torus, and descend via finite flat normalization. Check connectedness, finite freeness, character vanishing and homomorphism compatibility explicitly. Three new general statement-only prerequisites; no Lean changes or builds.",
+  "blueprint": "The inherited blueprint ancestor is null (tools/blueprint_refs.py ancestor agrees). This realizes the trait-extension ambient-model input specified in blueprint.from.place, in the admissible-direct-image branch of sk-thm-sf-ctf-stability; no blueprint node states Néron model existence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-geometrically-connected-check-after-extension",
+    "why": "Generic tool for the semiabelian Néron-model construction: Geometric connectedness can be checked after a field extension. No node of the unit supplies this ring-theoretic, geometric-connectedness or fpqc descent input."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic tool for the semiabelian Néron-model construction: Integral closure of a one-dimensional Noetherian domain in a finite extension. No node of the unit supplies this ring-theoretic, geometric-connectedness or fpqc descent input."
+   },
+   {
+    "node": "lem-a1-algebraic-space-fpqc-sheaf",
+    "why": "Generic tool for the semiabelian Néron-model construction: Morphisms to an algebraic space satisfy fpqc descent. No node of the unit supplies this ring-theoretic, geometric-connectedness or fpqc descent input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-geometrically-connected-check-after-extension",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-a1-algebraic-space-fpqc-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-O4-07632de63",
+  "group": "O4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-07632de63 (reviewer sub-agent of L); spot-checked: PASS with no changes. I read the item and all three new nodes in full, plus every cited statement. BLR is not in literature/ and this reviewer has no network, so the BLR places (1.4/3, 10.1/1, 10.1/4, 10.1/7, 10.2/2) were checked from knowledge of the book, not by reading it. The item is true: a semiabelian P contains no G_a over \\hat K^{sh}, so BLR 10.2/2 applies. The six steps are the (b)⇒(a) proof of 10.2/2 for semiabelian P. Step 1: the fibre torsor is smooth, surjective and open with connected fibres, so P_k is connected and P is geometrically connected; the split-quotient lemma then gives finite Galois L, abelian B and torsor q. Step 2: the normalization C is finite (separable), Dedekind, Frac C=L, and finite free of positive rank, so R→C is faithfully flat with no excellence used. Step 3: abelian Néron model over C. Step 4: Hom(B,G_m)=0 by vanishing over \\bar L plus fpqc descent of equality; that B_{\\bar L} is an abelian variety and B is commutative are elementary and not spelled out, which I accepted. Step 5: finite-flat descent with G=H=P. Step 6: X×_T X is smooth and the group laws follow by injectivity. The new nodes match BLR 1.4/3, 10.1/7 and 10.1/4, are statement-only, define their notions inline, and neither restate the item nor duplicate a node (rg over Néron, lft-model, group smoothening, Weil restriction). Edge cases: r=0, dim 0, imperfect residue field and non-excellent R. The ch. 10 nodes are stated over an arbitrary Dedekind base but used only over R and the semilocal C. The tool_uses for geometric connectedness, the Dedekind normalization and fpqc descent of spaces are generic, and I accept them. Batch 5: all six flagged citations reach only generic Stacks facts or definitions (02W5 descent datum, 057J, 02VL, 025Y, 01V9, 01VA), none part of the trace-formula or Poincaré-duality proofs, so none needs the assumption leaves. No SGA is cited. The null blueprint ancestor is inherited from the base."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SemiabelianNeronLftExistence",
+  "declaration": "AlgebraicGeometry.semiabelian_neron_lft_existence",
+  "file": "lean/Sheaf/AlgebraicGeometry/SemiabelianNeronLftExistence.lean",
+  "statement": "theorem semiabelian_neron_lft_existence (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] (F : Type u) [Field F] [Algebra R F] [IsFractionRing R F] (P : Grp (Over (Spec (.of F)))) [IsCommMonObj P.X] [Smooth P.X.hom] [IsSeparated P.X.hom] [LocallyOfFiniteType P.X.hom] [QuasiCompact P.X.hom] (hP : HasSemiabelianGeometricFibres P) : ∃ N : Grp (Over (Spec (.of R))), IsCommMonObj N.X ∧ Smooth N.X.hom ∧ IsSeparated N.X.hom ∧ LocallyOfFiniteType N.X.hom ∧ ∃ α : (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R F)))).mapGrp.obj N ≅ P, (∀ X : Over (Spec (.of R)), Smooth X.hom → Function.Bijective (fun (f : X ⟶ N.X) ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R F)))).map f ≫ α.hom.hom.hom)) ∧ (∀ X : Grp (Over (Spec (.of R))), IsCommMonObj X.X → Smooth X.X.hom → Function.Bijective (fun (f : X ⟶ N) ↦ (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap R F)))).mapGrp.map f ≫ α.hom))",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55c083132",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Item JSON = live except the new lean record; lean.statement verbatim. Clause check: DVR R plus IsFractionRing F; P : Grp(Over Spec F), commutative, Smooth, IsSeparated, LocallyOfFiniteType+QuasiCompact (finite type as recorded); hP via the live HasSemiabelianGeometricFibres (same universe, no extra instances). Conclusion: N commutative, Smooth, IsSeparated, LocallyOfFiniteType only (no finite type); α : Over.pullback(Spec.map algebraMap).mapGrp.obj N ≅ P as groups; restriction ≫ α bijective for all smooth X : Over Spec R; the same map is bijective on group homs for smooth commutative X. No completeness, excellence or perfection hypothesis. Edge cases r=0, empty X, trivial group, any characteristic; universe u is forced by the pullback and FractionRing lives in u. No Néron declaration in live Lean or Mathlib (H4 ok). Proof is sorry only; docstrings carry the BLR source, blueprint tag and 6 proof steps; proof imports exist; report has both sections. Not compiled (no FIX). Note: Q60 f71ee3bd delivered the same file with decl semiabelian_neron_lft_exists, an identical statement, S2 PASS, unlanded. Only one should land; the later must not rebind."
+ }
+}

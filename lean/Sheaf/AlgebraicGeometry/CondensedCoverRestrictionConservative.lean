@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-! # Conservativity of covering restrictions with condensed coefficients
 

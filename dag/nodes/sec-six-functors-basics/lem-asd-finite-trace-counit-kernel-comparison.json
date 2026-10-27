@@ -1,0 +1,121 @@
+{
+ "id": "lem-asd-finite-trace-counit-kernel-comparison",
+ "kind": "statement",
+ "title": "Kernel counit and the prescribed proper inverse-projection counit",
+ "statement": "Let q:X → Y be proper with finite coefficients A, B an arbitrary complex on X, D a trace-diagonal datum on B, and τ:Rq_*B → A_Y an ordinary trace. Suppose D.trace is canonical proper coincidence followed by τ and the canonical single-complex tensor-unit comparison. Then composing the kernel counit with the inverse source tensor symmetry gives exactly finiteP1TraceCounit A q B τ, the prescribed inverse ordered-projection counit. This compares actual natural-transformation components on every unbounded complex and asserts no triangle. The definitions and interfaces used here are [def-asd-presented-projective-line-trace-model] [lem-sf-diagonal-kernel-integral-triangles] [lem-asd-source-proper-projection-coincidence].",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "stmt_deps": [
+  "def-asd-presented-projective-line-trace-model",
+  "lem-sf-diagonal-kernel-integral-triangles",
+  "lem-asd-source-proper-projection-coincidence"
+ ],
+ "proof": [
+  {
+   "text": "Proper coincidence commutes with the original projection map. Use the existing projection-formula coherence equation and cancel the two projection isomorphisms to obtain the equation for their inverses. Naturality of proper coincidence moves the inverse source symmetry through that comparison.",
+   "uses": [
+    "lem-asd-source-proper-projection-coincidence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the ordered ordinary projection as the original proper projection conjugated by tensor symmetries. Its inverse has the reverse factors. Naturality of the target braiding moves the trace from the left tensor factor to the right tensor factor, and the braiding with the unit identifies the left and right unitors. Substitute the hypothesis on D.trace and the actual component formulas of both counits; associativity gives the asserted equality.",
+   "uses": [
+    "def-asd-presented-projective-line-trace-model",
+    "lem-sf-diagonal-kernel-integral-triangles"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-asd-presented-projective-line-trace-model",
+  "lem-sf-diagonal-kernel-integral-triangles",
+  "lem-asd-source-proper-projection-coincidence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "Both diagonal triangle calculations and the actual inverse-projection counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Comparing projection formula counits using symmetry and proper pushforward",
+   "results": "Eight unrelated results on Noebeling, projection of measures and condensed comparisons; no specialized derived proper counit comparison.",
+   "date": "2026-10-26",
+   "verdict": "Use the project proper projection coherence and generic category theory."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.ofNatIsoRight",
+   "results": "Five generic constructor and counit/unit formulas for transport through a natural isomorphism.",
+   "date": "2026-10-26",
+   "verdict": "Transport API is useful in the parent adjunction; it does not establish the required equality of actual trace maps."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_inv_naturality_left|projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar",
+   "results": "Mathlib provides generic braiding naturality. The local source library provides projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar.",
+   "date": "2026-10-26",
+   "verdict": "Use these existing generic coherence identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compare a proper compact support kernel counit with an inverse projection formula counit using tensor symmetry",
+   "results": "CategoryTheory.Equivalence.symm_counitIso; CompHausLike.LocallyConstant.counitApp; CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight; CategoryTheory.Equivalence.symmEquivInverse_obj_counitIso_hom; Algebra.TensorProduct.congr_symm; CompHausLike.LocallyConstant.counit; CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerRight; TensorProduct.commIsometry_symm",
+   "date": "2026-10-26",
+   "verdict": "No Mathlib match for the stated etale derived-functor comparison; use the existing source declarations and categorical calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProjectiveLineTraceAdjunction",
+  "date": "2026-10-26",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-geo-affine-local",
+   "place": "Both diagonal triangle calculations and the actual inverse-projection counit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-affine-local",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.FiniteTraceCounitComparison",
+  "file": "lean/Sheaf/SixFunctors/FiniteTraceCounitComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.finiteP1TraceCounit_kernel_comparison",
+  "statement": "theorem finiteP1TraceCounit_kernel_comparison\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]\n    (B : DerivedCategoryModule A X) (D : TraceDiagonalDatum A q B)\n    (τ : (ordinaryFinitePushforward A q).obj B ⟶ ordinaryFiniteUnit A Y)\n    (hτ : D.trace =\n      (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) q).hom.app B ≫\n        τ ≫ (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) Y).hom)\n    (K : DerivedCategoryModule A Y) :\n    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) q).map\n        (((derivedTensorSymmetry (ModuleCat.{u + 1} A) X).inv.app B).app\n          ((ordinaryFinitePullback A q).obj K)) ≫ (SfDiagonalKernel.counit A D).app K =\n      (finiteP1TraceCounit A q B τ).app K",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-26"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261026T222612-L-673395",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

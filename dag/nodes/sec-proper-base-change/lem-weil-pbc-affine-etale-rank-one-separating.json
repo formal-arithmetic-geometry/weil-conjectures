@@ -173,5 +173,60 @@
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
+    "AlgebraicGeometry.Scheme.affine_etale_rankOne_isSeparating"
+   ]
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.affine_etale_rankOne_isSeparating",
+     "module": "WeilConjectures.AlgebraicGeometry.AffineEtaleRankOneSeparating",
+     "lines": [
+      28,
+      95
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261023-1620",
+  "commit": "7284bb09daf97437d544c51882b325f9c52cd345",
+  "changed": [
+   "statement",
+   "proof"
+  ],
+  "statement": "Let $X$ be a scheme, $X_{\\mathrm{Et}}$ its small etale site [def-weil-pbc-etale-site], and $\\Lambda$ a commutative ring. In the category of sheaves valued in $\\mathrm{Mod}(\\Lambda)$ [def-weil-pbc-etale-sheaves], the family $G_U=j_{U!}\\underline{\\Lambda}_U$, indexed by all affine objects $j_U:U\\to X$ of this site, is separating: for every $f,g:F\\to F^{\\prime}$, if $f\\circ h=g\\circ h$ for every $U$ and every $h:G_U\\to F$, then $f=g$. Here extension by zero is [def-weil-pbc-etale-sum-extension] and $\\underline\\Lambda_U$ is the constant sheaf with value $\\Lambda$ on $U_{\\mathrm{Et}}$. The site, index family, coefficients and Hom sets use universe $u+1$ above the base-scheme universe $u$. No quasi-compactness, quasi-separatedness or finiteness of the ring is assumed.",
+  "proof": [
+   {
+    "text": "*Maps out of $G_U$.* For an affine etale $j_U:U\\to X$, extension by zero is left adjoint to restriction to $U$ [def-weil-pbc-etale-sum-extension], restriction being the inverse image [lem-weil-pbc-etale-inverse-image-restriction], and the constant sheaf functor is left adjoint to global sections. Hence maps $G_U=j_{U!}\\underline\\Lambda_U\\to F$ correspond, naturally in $F$, to $\\Lambda$-linear maps $\\Lambda\\to F(U)$, i.e. to sections $x\\in F(U)$ (the image of $1$). ([def-weil-pbc-etale-sum-extension], [lem-weil-pbc-etale-inverse-image-restriction]).",
+    "uses": [
+     "def-weil-pbc-etale-sum-extension",
+     "lem-weil-pbc-etale-inverse-image-restriction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Agreement on affine sections.* Suppose $f\\circ h=g\\circ h$ for all $U$ and all $h:G_U\\to F$. For $x\\in F(U)$ let $h_x$ correspond to $r\\mapsto rx$; naturality of the correspondence shows that $f\\circ h_x$ corresponds to $f_U(x)$, so $f_U(x)=g_U(x)$. Thus $f$ and $g$ agree on the sections over every affine object.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*All sections.* The affine etale objects are cover-dense in the small etale site (every etale $V\\to X$ has a covering by affine opens, which are again etale over $X$). A section of a sheaf over $V$ is determined by its restrictions to such a covering, and $f$, $g$ commute with restrictions; so $f_V=g_V$ for all $V$ and $f=g$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (main-20261023-1620, weil-conjectures-blueprint 7284bb09da) states or proves this differently; the node is proved in Lean: recorded 2026-10-23, not reopened"
+ }
 }

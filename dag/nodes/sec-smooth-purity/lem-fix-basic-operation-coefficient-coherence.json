@@ -1,0 +1,136 @@
+{
+ "id": "lem-fix-basic-operation-coefficient-coherence",
+ "blueprint": {
+  "is": null,
+  "from": [
+   "lem-fix-operation-reduction"
+  ]
+ },
+ "kind": "statement",
+ "title": "Coefficient actions, scalar towers, and adjunction mates for the completed direct images.",
+ "statement": "Coefficient actions, scalar towers, and adjunction mates for the completed direct images.\nSource: blueprint lem-fix-operation-reduction, proof steps 8--10;\nStacks 07K0 and Bhatt--Scholze 6.7.2, 6.8.14.\n\nProof: ordinary finite-free coefficient extension commutes with direct image:\nin a basis it is a finite sum of copies of the identity. Its comparison is\nbalanced and hence linear over the target coefficient ring; uniqueness of the\nderived counit identifies it with the prescribed proper projection mate.\nRestrict the actual completed direct image to the intrinsic constructible\nsubcategory. For compact support combine the proper-factor comparison with\nextension by zero; finite-free scalar extension commutes with products and\ncones in the defining completed tower. All integral comparison maps are fixed\nby these constructions. For a three-field tower both mates are transposes of\nthe same restriction comparison. The restriction associators agree with the\nbalanced-tensor associators, so uniqueness of mates gives the integral cocycle\nand unit equations, including repeated fields. Extend integral Hom maps\nlinearly to their coefficient localizations: on a pure tensor the map is the\ncoefficient times the integral image. The integral equations therefore descend\nto the specified rational stages; their common-stage presentation gives the\nstated algebraic-closure actions. The same transposition proves the unit and\ncounit equations of the exceptional-adjoint square. Threefold pasting gives\nthe direct-image scalar tower and the open/proper compact-support pasting.\nFor identity ring maps the normalized tensor multiplication is the unit, so\nthe proper mate and compact-support comparisons are identities.\n\nLean specification:\ntheorem basicOperationCoefficientCoherence\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E]\n    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω]\n    [IsAlgClosure ℚ_[l] Ω]\n    (X Y : Scheme.{u}) (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :\n    coefficientOperationMateEquations ∧\n    (∀ (K₀ : Type u) [Field K₀] (hl₀ : IsUnit (l : K₀))\n      [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n      [LocallyOfFiniteType (X ↘ Spec (.of K₀))]\n      [QuasiCompact (X ↘ Spec (.of K₀))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of K₀))]\n      [QuasiCompact (Y ↘ Spec (.of K₀))]\n      [f.IsOver (Spec (.of K₀))] [IsSeparated f]\n      [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f),\n      ∃ S : SfCompactSupportCoefficientAction l K₀ hl₀ Ω c,\n        operationIntegralCoefficientCoherent l Ω X Y\n          (fun E₀ ↦ sfCompactSupportFiniteIntegralFunctor l K₀ hl₀ c\n            (Coefficient.{u} l Ω E₀)) (fun h ↦ S.integralBeta h)) ∧\n    (∀ (K₀ : Type u) [Field K₀] (hl₀ : IsUnit (l : K₀))\n      [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n      [LocallyOfFiniteType (X ↘ Spec (.of K₀))]\n      [QuasiCompact (X ↘ Spec (.of K₀))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of K₀))]\n      [QuasiCompact (Y ↘ Spec (.of K₀))]\n      [f.IsOver (Spec (.of K₀))],\n      OperationDirectImageCoefficientAction l Ω X Y f) ∧\n    (directImageScalarExtensionLaws l) ∧\n    (compactSupportScalarIsomorphisms l) ∧\n    (compactSupportScalarExtensionLaws) ∧\n    directImageScalarTowerLaws ∧\n    coefficientOperationIdentityLaws",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "steps 8--10: coefficient actions and mates"
+ },
+ "stmt_deps": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-site-perfect-complex",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-tor-amplitude",
+  "def-pur-operation-scalar-transport"
+ ],
+ "proof": [
+  {
+   "text": "ordinary finite-free coefficient extension commutes with direct image:\nin a basis it is a finite sum of copies of the identity. Its comparison is\nbalanced and hence linear over the target coefficient ring; uniqueness of the\nderived counit identifies it with the prescribed proper projection mate.\nRestrict the actual completed direct image to the intrinsic constructible\nsubcategory. For compact support combine the proper-factor comparison with\nextension by zero; finite-free scalar extension commutes with products and\ncones in the defining completed tower. All integral comparison maps are fixed\nby these constructions. For a three-field tower both mates are transposes of\nthe same restriction comparison. The restriction associators agree with the\nbalanced-tensor associators, so uniqueness of mates gives the integral cocycle\nand unit equations, including repeated fields. Extend integral Hom maps\nlinearly to their coefficient localizations: on a pure tensor the map is the\ncoefficient times the integral image. The integral equations therefore descend\nto the specified rational stages; their common-stage presentation gives the\nstated algebraic-closure actions. The same transposition proves the unit and\ncounit equations of the exceptional-adjoint square. Threefold pasting gives\nthe direct-image scalar tower and the open/proper compact-support pasting.\nFor identity ring maps the normalized tensor multiplication is the unit, so\nthe proper mate and compact-support comparisons are identities.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-sf-open-tensor-normalization",
+    "lem-fix-scalar-completion-associator",
+    "lem-amb-mate-unit-counit",
+    "lem-pur-mate-unit-compatibility",
+    "lem-sp-categorical-projection-mate-square",
+    "lem-weil-pbc-coefficient-exchange-mates",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-scalar-extension-composition",
+    "lem-weil-scalar-extension-exact-triangulated",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-sf-open-tensor-normalization",
+  "lem-fix-scalar-completion-associator",
+  "lem-amb-mate-unit-counit",
+  "lem-pur-mate-unit-compatibility",
+  "lem-sp-categorical-projection-mate-square",
+  "lem-weil-pbc-coefficient-exchange-mates",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-scalar-extension-composition",
+  "lem-weil-scalar-extension-exact-triangulated",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
+  "place": "steps 8--10: coefficient actions and mates; omit downstream exchange-realization routes that lead back to operation reduction; repair of b270ea00522: dependencies specialized to this part, independently of the downstream system-exchange realization and of the parent theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension tensor associativity normalized on K-flat representatives and preservation of internal Hom from perfect objects",
+   "results": "Derived linearity and Tor matches; no normalized operation comparison theorem.",
+   "date": "2026-10-25",
+   "verdict": "Use recorded coefficient declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "Functor laws do not supply the completed coefficient comparisons.",
+   "date": "2026-10-25",
+   "verdict": "No match for this component."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar|coefficient|mate",
+   "results": "Recorded operation, finite-free comparison, and compact-support modules inspected.",
+   "date": "2026-10-25",
+   "verdict": "The separate argument is explained in the docstring."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Reduction of derived sheaf operations commutes with tensor and internal Hom evaluation and coefficient change",
+   "results": "8 hits: presheaf tensor section/map formulas, SheafOfModules.evaluation, sheafHom, sheafification monoidality.",
+   "date": "2026-10-25",
+   "verdict": "No match for the completed derived coefficient-operation assertions."
+  }
+ ],
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.BasicOperationCoefficientCoherence",
+  "file": "lean/Sheaf/Paper/BasicOperationCoefficientCoherence.lean",
+  "declaration": "WeilConjectures.basicOperationCoefficientCoherence",
+  "statement": "theorem basicOperationCoefficientCoherence\n    (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E]\n    (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω]\n    [IsAlgClosure ℚ_[l] Ω]\n    (X Y : Scheme.{u}) (f : X ⟶ Y)\n    [hX : ∀ x : X, Invertible (l : X.residueField x)]\n    [hY : ∀ y : Y, Invertible (l : Y.residueField y)] :\n    coefficientOperationMateEquations ∧\n    (∀ (K₀ : Type u) [Field K₀] (hl₀ : IsUnit (l : K₀))\n      [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n      [LocallyOfFiniteType (X ↘ Spec (.of K₀))]\n      [QuasiCompact (X ↘ Spec (.of K₀))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of K₀))]\n      [QuasiCompact (Y ↘ Spec (.of K₀))]\n      [f.IsOver (Spec (.of K₀))] [IsSeparated f]\n      [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f),\n      ∃ S : SfCompactSupportCoefficientAction l K₀ hl₀ Ω c,\n        operationIntegralCoefficientCoherent l Ω X Y\n          (fun E₀ ↦ sfCompactSupportFiniteIntegralFunctor l K₀ hl₀ c\n            (Coefficient.{u} l Ω E₀)) (fun h ↦ S.integralBeta h)) ∧\n    (∀ (K₀ : Type u) [Field K₀] (hl₀ : IsUnit (l : K₀))\n      [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]\n      [LocallyOfFiniteType (X ↘ Spec (.of K₀))]\n      [QuasiCompact (X ↘ Spec (.of K₀))]\n      [LocallyOfFiniteType (Y ↘ Spec (.of K₀))]\n      [QuasiCompact (Y ↘ Spec (.of K₀))]\n      [f.IsOver (Spec (.of K₀))],\n      OperationDirectImageCoefficientAction l Ω X Y f) ∧\n    (directImageScalarExtensionLaws l) ∧\n    (compactSupportScalarIsomorphisms l) ∧\n    (compactSupportScalarExtensionLaws) ∧\n    directImageScalarTowerLaws ∧\n    coefficientOperationIdentityLaws",
+  "branch": "sheaf-dag",
+  "by": "F7",
+  "date": "2026-10-25"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.BasicOperationsCoefficientReduction",
+  "date": "2026-10-25",
+  "group": "F7"
+ },
+ "reviewed": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-53384",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T162417-L-442363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-25",
+  "by": "L",
+  "reviewer": "C-53384",
+  "group": "F7",
+  "result": "fix",
+  "landing": "20261025T162417-L-442363",
+  "kind": "interface",
+  "note": "independent cc review: 533840fb Lean files byte-identical to b270ea0/28abdf8 (whose reviewer FIXes were dropped) vs clone: item theorem statement byte-identical, 16 defs moved verbatim to OperationCoefficientActionData and publicly re-exported; DAG edges checked with a re-implementation of stage3_delivery edge_fails"
+ }
+}

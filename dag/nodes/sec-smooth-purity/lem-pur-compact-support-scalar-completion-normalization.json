@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-compact-support-scalar-completion-normalization",
+ "kind": "statement",
+ "title": "Unit-normalized scalar completion",
+ "statement": "For a prime ell, finite Q_ell extensions E and F in the same universe, an embedding i, a scheme W in that universe and every unbounded derived E coefficient module Q, there is a unique isomorphism chi from scalar extension of the actual completion of Q to actual F completion of scalar extension of Q satisfying T(eta_E(Q)) followed by chi equals eta_F(T(Q)). Define scalarCompletion by this unique normalized isomorphism. These are the unchanged two public declarations moved from the parent scalar/projection identification module; no coefficient functor or completion map is redefined.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Completion-reflector Hom bijection (Tags 099B, 0A0E), finite-free scalar/limit interchange (0941), and Step 8 of lem-pur-compact-support-scalar-projection-identification."
+ },
+ "stmt_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof": [
+  {
+   "text": "Apply the fully proved integralScalarCompletionUnitComparison to obtain an isomorphism with its actual unit equation. Reuse the general proved reflectorFacts helper of OpenRoosUnitAdjunction on W, using the completed integral DVR coefficient facts and an auxiliary prime distinct from ell. This gives the actual completion-unit Hom bijection into complete objects on arbitrary W, without geometric finiteness assumptions. In particular precomposition by the F unit is injective on endomorphisms of its completed output.",
+   "uses": [
+    "lem-pur-integral-scalar-completion-unit-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-pur-integral-principal-cone-quotient-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-pur-native-principal-completeness-small-model",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If chi and psi satisfy the same unit equation, precomposing chi inverse followed by psi with the F unit gives the F unit. The Hom injection makes that endomorphism the identity. Cancelling chi inverse proves psi=chi, including equality as isomorphisms. Choose scalarCompletion from this unique existence statement, exactly as in the parent original definition. Derive isomorphism naturality by conjugating the chosen comparison and applying its unit-normalized uniqueness. Both public signatures and the chosen-map definition body are preserved verbatim. The complete-output and completion-extension uniqueness helpers likewise reuse the same reflector, and are proved private helpers used by the parent.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-scalar-completion-unit-comparison",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pur-integral-principal-cone-quotient-comparison",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-pur-native-principal-completeness-small-model",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "F6",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Completion-reflector Hom bijection (Tags 099B, 0A0E), finite-free scalar/limit interchange (0941), and Step 8 of lem-pur-compact-support-scalar-projection-identification."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite free scalar extension commutes with derived adic completion and preserves the completion unit",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.instIsScalarTower, AdicCompletion.mk_smul_top_ofAlgEquiv_symm.",
+   "verdict": "The hits concern ordinary adic rings or uniform-space completion and do not supply the normalized derived sheaf comparison. The existing project finite-free quotient/Roos exchange supplies the argument.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"completion\", \"iso\"",
+   "results": "12 hits: UniformSpace.Completion.coe_isometry, Isometry.completion_extension, Isometry.completion_map, UniformSpace.Completion.isometry_mapRingHom, LinearIsometry.fromCompletion, LinearIsometry.completion, LinearIsometry.fromCompletion_apply_coe, LinearIsometry.coe_fromCompletion.",
+   "verdict": "The hits concern ordinary adic rings or uniform-space completion and do not supply the normalized derived sheaf comparison. The existing project finite-free quotient/Roos exchange supplies the argument.",
+   "date": "2026-10-27"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*unit|exchangeFromCochains",
+   "results": "10 hits: Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean, Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean, Mathlib/RingTheory/DedekindDomain/FiniteAdeleRing.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean, Mathlib/RingTheory/DedekindDomain/AdicValuation.lean.",
+   "verdict": "The hits concern ordinary adic rings or uniform-space completion and do not supply the normalized derived sheaf comparison. The existing project finite-free quotient/Roos exchange supplies the argument.",
+   "date": "2026-10-27"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompactSupportScalarProjectionIdentification",
+  "date": "2026-10-27",
+  "group": "F6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-compact-support-scalar-projection-identification",
+   "place": "Proof Step 8: scalar-completion uniqueness and its uniquely chosen comparison; unchanged declarations split out for the per-file compile-time limit.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompactSupportScalarCompletionNormalization",
+  "file": "lean/Sheaf/Paper/CompactSupportScalarCompletionNormalization.lean",
+  "declaration": "WeilConjectures.PurScalarProjection.scalarCompletion_existsUnique",
+  "declarations": [
+   "WeilConjectures.PurScalarProjection.scalarCompletion_existsUnique",
+   "WeilConjectures.PurScalarProjection.scalarCompletion"
+  ],
+  "statement": "theorem scalarCompletion_existsUnique (W : Scheme.{u})\n    (Q : DerivedCategory (scalarReductionSource l E W)) :\n    ∃! χ : (pbcDerivedExtend (completedCoefficientMap l E F i W)).obj\n          ((IntegralOnSlice.completion l E W none).obj Q) ≅\n        (IntegralOnSlice.completion l F W none).obj\n          ((pbcDerivedExtend (completedCoefficientMap l E F i W)).obj Q),\n      (pbcDerivedExtend (completedCoefficientMap l E F i W)).map\n          ((IntegralOnSlice.completionUnit l E W none).app Q) ≫ χ.hom =\n        (IntegralOnSlice.completionUnit l F W none).app\n          ((pbcDerivedExtend (completedCoefficientMap l E F i W)).obj Q)",
+  "branch": "sheaf-dag",
+  "by": "F6",
+  "date": "2026-10-27"
+ },
+ "reviewed": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a1d42",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T195134-L-2784901",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a1d42",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261026T195134-L-2784901",
+  "kind": "interface",
+  "note": "independent cc review: moved scalarCompletion_existsUnique/scalarCompletion vs published item (elaborated-type check in old and new contexts) and DAG nodes; new modules' signatures vs their node lean.statement; axioms via scratch compile"
+ }
+}

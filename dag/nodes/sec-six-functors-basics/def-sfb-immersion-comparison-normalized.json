@@ -1,0 +1,89 @@
+{
+ "id": "def-sfb-immersion-comparison-normalized",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-scalar-six-pullback",
+   "place": "(2), restriction-normalized open and closed comparisons; precise equation (N) of the extracted normalized-immersion-comparison-coherence node, proof step 1",
+   "via": [
+    "lem-sfb-normalized-immersion-comparison-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Restriction normalization under specified counits",
+ "statement": "Given arbitrary categories A, B, C, D, functors Lr:A→B, Ls:C→D, Er:B→A, Es:D→C, isomorphisms rr:Er⋙Lr≅1 and rs:Es⋙Ls≅1, functors FX:A→C and FS:B→D, an isomorphism q:FX⋙Ls≅Lr⋙FS, and d:Er⋙FX≅FS⋙Es, define immersionComparisonNormalized to mean that for every M in B, Ls.map(d.hom.app M) ≫ rs.hom.app(FS.obj M) = q.hom.app(Er.obj M) ≫ FS.map(rr.hom.app M). This is the precise restriction-normalization equation; it asserts no existence of d.",
+ "source": {
+  "document": "literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2), restriction-normalized open and closed comparisons; precise equation (N) of the extracted normalized-immersion-comparison-coherence node, proof step 1"
+ },
+ "stmt_deps": [],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "normalized.*comparison|comparison.*normalized|UnitNormalized",
+   "results": "0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide ordinary restriction/composition isomorphisms or other normalization constructions, rather than these specified comparison-normalization and q-composition equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Define restriction normalization of a comparison natural isomorphism under counit isomorphisms and composition coherence of inverse image comparisons",
+   "results": "8 hits: CategoryTheory.OverPresheafAux.counit, ContAction.resComp, CategoryTheory.Monoidal.CommMonFunctorCategoryEquivalence.counitIso, Mathlib.Tactic.Monoidal.normalizeIsoComp, CategoryTheory.Limits.prodComparisonNatIso, CategoryTheory.StructuredArrow.commaMapEquivalenceCounitIso, CategoryTheory.FreeBicategory.normalizeIso, AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide ordinary restriction/composition isomorphisms or other normalization constructions, rather than these specified comparison-normalization and q-composition equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction normalized comparison natural isomorphisms and their compatibility with composition of inverse image functors",
+   "results": "8 hits: AlgebraicGeometry.morphismRestrictRestrict, ContAction.resComp, CategoryTheory.Pi.comapComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, ModuleCat.restrictScalarsComp'App_inv_naturality, CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app",
+   "date": "2026-10-23",
+   "verdict": "no match: the hits provide ordinary restriction/composition isomorphisms or other normalization constructions, rather than these specified comparison-normalization and q-composition equations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizedImmersionComparisonCoherence",
+  "date": "2026-10-24",
+  "group": "Z9"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ImmersionComparisonNormalized",
+  "file": "lean/Sheaf/CategoryTheory/ImmersionComparisonNormalized.lean",
+  "declaration": "CategoryTheory.immersionComparisonNormalized",
+  "statement": "def immersionComparisonNormalized\n    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]\n    (Lr : A ⥤ B) (Ls : C ⥤ D) (Er : B ⥤ A) (Es : D ⥤ C)\n    (rr : Er ⋙ Lr ≅ 𝟭 B) (rs : Es ⋙ Ls ≅ 𝟭 D)\n    (FX : A ⥤ C) (FS : B ⥤ D) (q : FX ⋙ Ls ≅ Lr ⋙ FS)\n    (d : Er ⋙ FX ≅ FS ⋙ Es) : Prop",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-24"
+ },
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261024T191853-L-528293",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261024T191853-L-528293",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

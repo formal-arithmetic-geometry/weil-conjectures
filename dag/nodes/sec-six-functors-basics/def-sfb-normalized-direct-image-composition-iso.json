@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-normalized-direct-image-composition-iso",
+ "kind": "definition",
+ "title": "Normalized composition isomorphism for scheme derived direct images",
+ "statement": "Let $X,Y,Z$ be schemes [def-pc-scheme], with their derived categories of sheaves of modules [def-pc-derived-category], and let $f:X\\to Y$, $g:Y\\to Z$. Write $Rf_*$, $Rg_*$ and $R(g\\circ f)_*$ for their derived direct images [def-pc-derived-direct-image]. The normalized direct-image composition isomorphism $c(f,g):Rg_*\\circ Rf_*\\xrightarrow{\\sim}R(g\\circ f)_*$ is the comparison selected together with its right-derived-unit equation from [lem-pc-ringed-spaces-derived-direct-image-composition], specialized to the underlying ringed-space morphisms. Explicitly, for each object $K$ of the homotopy category of complexes of $\\mathcal O_X$-modules, its inverse satisfies $\\eta_{g\\circ f,K};c(f,g)^{-1}_{QK}=\\eta_{g,f_*^hK};Rg_*(\\eta_{f,K})$, where $Q$ is localization to the derived category, $f_*^h$ is termwise direct image on the homotopy category, $\\eta_t$ is the right-derived unit of $t_*$, and semicolons denote composition from left to right. This unit equation determines the comparison uniquely. No quasi-compactness, separatedness, boundedness, or quasi-coherence assumption is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-direct-image",
+  "lem-pc-ringed-spaces-derived-direct-image-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D5T, lemma-derived-pushforward-composition; the canonical comparison used in Tag 0ATL, remark-compose-base-change. Right-derived-unit normalization is the recorded interface of lem-pc-ringed-spaces-derived-direct-image-composition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical normalized composition isomorphism for derived direct image of sheaves of modules",
+   "results": "[leansearch] OK 8 hit(s): Mathlib.Tactic.Monoidal.normalizeIsoComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp; PresheafOfModules.pushforward₀CompToPresheaf; SheafOfModules.pushforwardComp; CategoryTheory.Functor.sheafPushforwardContinuousComp'; SheafOfModules.pullbackComp; PresheafOfModules.pushforwardComp.",
+   "date": "2026-10-23",
+   "verdict": "No exact Mathlib match: ordinary pushforward composition and generic normalization only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived direct image composition isomorphism characterized by the right derived functor unit",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc; CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso; CategoryTheory.Functor.rightDerivedNatIso_hom; CategoryTheory.Functor.rightDerivedNatIso; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.NatTrans.rightDerived_comp_assoc; CategoryTheory.Functor.rightDerived_fac_assoc.",
+   "date": "2026-10-23",
+   "verdict": "Generic right-derived uniqueness and comparison ingredients; no scheme-level definition."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep: schemeNormalizedDirectImageCompIso|derivedModuleDirectImageComposition|derivedDirectImageComposition; CategoryTheory",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-23",
+   "verdict": "No Mathlib declaration of this scheme-level normalized comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n schemeNormalizedDirectImageCompIso lean/WeilConjectures/AlgebraicGeometry/DerivedDirectImageSquareMate.lean; rg -n schemeNormalizedDirectImageCompIso lean/Sheaf; rg -l schemeNormalizedDirectImageCompIso|normalized direct.image composition|normalized-direct-image-composition dag/nodes; tools/blueprint_refs.py search schemeNormalizedDirectImageCompIso",
+   "results": "WeilConjectures/AlgebraicGeometry/DerivedDirectImageSquareMate.lean:31 declares noncomputable def schemeNormalizedDirectImageCompIso. Sheaf/AlgebraicGeometry/RelativeMVDirectImageSquareLocalization.lean:44,52,89,90 only uses it. DAG matches are theorem nodes that use it, not a definition node; JSON inspection found no lean.declaration equal to AlgebraicGeometry.schemeNormalizedDirectImageCompIso. 0 blueprint nodes match 'schemeNormalizedDirectImageCompIso'.",
+   "date": "2026-10-23",
+   "verdict": "Exact existing upstream definition, previously without its own DAG definition node. Reuse it with existing: true."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-derived-base-change-vertical-pasting",
+  "date": "2026-10-23",
+  "group": "Q03"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Knudsen forgetful morphism as the universal stable curve. Section 1, Theorem 1.8, Corollaries 1.9 and 1.11; Section 2, Proposition 2.1 (printed pp.172--175): degree-zero logarithmic components and their section-algebra contraction. Independent prerequisite: Cohomology and log dualizing comparison for a given elementary nodal contraction. Logarithmic comparison before Knudsen Lemma 1.6: generic coherent-duality trace on a perfect marking ideal, replacing the differential-dual presentation by the same adjunction-normalized relative duality. Prerequisite for the perfect-image coherent trace comparison: the base-change map of the composite p=q∘c is the vertical paste of those of c and q, used to compare the right-adjoint base-change maps of c, q and p. Canonical composition comparisons rho and rho-prime in the vertical base-change identity.",
+   "via": [
+    "lem-sfb-derived-base-change-vertical-pasting",
+    "lem-sfb-relative-nodal-perfect-duality-trace",
+    "lem-sfb-elementary-nodal-contraction-direct-image",
+    "lem-sfb-log-canonical-deletion-algebra",
+    "lem-sfb-knudsen-pointed-forgetful-universal-curve",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedDirectImageSquareMate",
+  "declaration": "AlgebraicGeometry.schemeNormalizedDirectImageCompIso",
+  "statement": "def schemeNormalizedDirectImageCompIso\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :\n    schemeDerivedDirectImage f ⋙ schemeDerivedDirectImage g ≅\n      schemeDerivedDirectImage (f ≫ g)",
+  "branch": "slopmaster2",
+  "by": "Q03",
+  "date": "2026-10-23",
+  "existing": true,
+  "note": "Existing definition at DerivedDirectImageSquareMate.lean:31; no duplicate module. The surrounding section explicitly binds universes u,w and [∀ Z : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]. Its data is Classical.choose of RingedSpace.exists_derivedModuleDirectImageComposition, which includes the characterizing unit equation, rather than a bare Nonempty natural isomorphism. The square-mate theorem in the same module is not needed to construct this definition."
+ },
+ "import_flags": [],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c60727b0",
+  "group": "Q03",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c60727b0",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after the 7cde H2 RETURN: theorem stmt_dep lem-sc-derived-direct-image-square-mate replaced by the new def node def-sfb-normalized-direct-image-composition-iso (existing:true, AlgebraicGeometry.schemeNormalizedDirectImageCompIso, DerivedDirectImageSquareMate.lean:31, branch slopmaster2, signature verbatim from def). Its unit equation matches exists_derivedModuleDirectImageComposition and determines the comparison uniquely, so it is not hollow; no duplicate def node. Lean module byte-identical to 7cde. Checked IsPullback orientations against the schemeDerivedBaseChangeMap h argument, paste_vert outer conjunct, ρ/ρ' direction, the ≫ order matching the Tag 0ATL display, hRf being the node's explicit clause implied by qcqs, independent universes, edge cases. The square-mate theorem shows the base-change map uses this normalized ρ, so the equation is the true one. Item diff vs live: lean field plus the added def-node stmt_dep only; proof is sorry only; docstrings OK; report sections present. Compile not re-run per instructions; worker's scompile and deliver2 dry run passed. Advisory: stage 3 should cite derivedDirectImage_square_mate."
+ }
+}

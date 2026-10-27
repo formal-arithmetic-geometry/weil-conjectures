@@ -13,9 +13,45 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
   "place": "Step 5: canonical small-site coordinates and proper/open construction required to state the explicit integral comparison obligation."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the ordinary section-normalized comparison termwise, with the whiskering compositors, to obtain towerDirectModel. The vertical functors towerModel are exact additive equivalences, and their derived functors and localization factorizations are the specified derivedTowerModel and modelFactors.",
+   "uses": [
+    "def-sf-integral-compactification-ordinary-site-transport",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the termwise square F Q ≅ P G, use the adopted source-library instances isRightDerivedFunctor_rightDerivedFunctor_comp_mapDerivedCategory and isRightDerivedFunctor_mapDerivedCategory_comp_rightDerivedFunctor: RF D(Q) and D(P) RG are universal right derived pairs of F Q and P G, respectively. Exactness of Q gives the first instance; P is an additive equivalence, hence preserves K-injective complexes, giving the second. Apply Mathlib rightDerivedNatIso to the homotopy-category image of towerDirectModel. In the proved private helper normalizedSquare, compute both derived units on a complex K using mapDerivedCategoryFactorsh and directCochainUnit. Cancel the invertible localization-factorization maps to identify the universal unit equation with DirectModelNormalization for every K. Conversely the same cancellation and surjectivity of the homotopy quotient on objects recover the universal unit equation from that predicate. Mathlib rightDerived_ext and Iso.ext then prove uniqueness. Specialize this helper to the original and small-model tower direct images; their right derived functors are definitionally the published R and towerPush.",
+   "uses": [
+    "def-sf-integral-compactification-ordinary-site-transport",
+    "lem-sf-constant-semilinear-generator-comparison",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The two derived site transports are equivalences. The proved private inverseMate_isIso helper applies the adopted source theorem isIso_mateEquiv_of_isEquivalence to the opposite adjunctions, identifies its mate componentwise with the opposite of the inverse-direction mate, and reflects invertibility from opposite morphisms. Apply it first to directModel and the specified pullback/direct-image adjunctions to prove pullModelMap_isIso. Apply it again to pullModel inverse and the specified open adjunctions to prove openModelMap_isIso. This argument imposes no nonemptiness or properness condition and includes the empty open.",
+   "uses": [
+    "def-sf-integral-compactification-ordinary-site-transport",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-sf-constant-semilinear-generator-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-compactification-ordinary-site-transport",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-constant-semilinear-generator-comparison",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5, constant-tower coordinate comparison; proved using universal derived composition in the adopted library and adjunction mates along equivalences."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -86,7 +122,18 @@
   },
   "same_as": []
  },
- "lean_audit": {},
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
  "chapter": "sec-six-functors",
  "unit": "sk-thm-sf-identification",
  "lean": {
@@ -129,5 +176,15 @@
   "group": "Q03",
   "result": "fix",
   "note": "Re-delivery of PASSed 494c4ff8 after a landing 60 s timeout on IntegralCompactificationBridgeCoordinates. Item node, main module and Words module are byte-identical; prior clause-by-clause PASS stands. Delta: OrdinaryCoordinates adds 3 named inferInstance instances (harmless); Coordinates replaces the HEq pin with the published DirectSquareNormalization, checked equivalent by substitution (derivedTowerModel = mapDerivedCategory, modelFactors = mapDerivedCategoryFactors). Not dropped; not landed live. The repair is slower: back to back 45.0/45.6 s vs old 30.2/33.7 s, 55.8 s at load 100. Profiler: kernel typechecks the predicate application 3 times (existsUnique 15 s, .exists aux proof 16 s, directModel 7.7 s). FIX: fixes/IntegralCompactificationBridgeCoordinates.lean names it once as def DirectModelNormalization (∃! d, DirectModelNormalization l E f d; statement and choice unchanged); fixes/def-sf-integral-compactification-site-transport.json adds it to lean.declarations plus a note. All 4 files compile clean via nt_compile --json; Coordinates 9.2/9.5 s vs 35.7 s delivered back to back."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "C-92391",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261022T145707-L-2048877",
+  "kind": "proof",
+  "note": "independent cc review: delivered IntegralCompactificationBridgeCoordinates (3 sorry closed via private normalizedSquare/inverseMate_isIso) and node proof fields against live base, unit sk-thm-sf-identification (realized empty), axioms probe and the sole importer IntegralCompactificationBridgeWords compiled in sandbox"
  }
 }

@@ -1,0 +1,272 @@
+{
+ "id": "lem-sfb-component-lift-lisse-section-comparison",
+ "kind": "statement",
+ "title": "Unit-normalized lisse section pullback between weakly contractible component lifts",
+ "statement": "Let $\\Lambda$ be any commutative condensed ring [sk-def-sfb-condensed-ring]. Let $U,V$ be affine schemes [def-pc-scheme] with w-contractible coordinate rings [sk-def-pe-wlocal], let $S$ be an extremally disconnected profinite space, and fix homeomorphisms $\\pi_0(U)\\cong S\\cong\\pi_0(V)$ of quotient component spaces [lem-pe-spectral-components-profinite]. Let $g:V\\to U$ be a scheme morphism inducing $\\operatorname{id}_S$. On their small pro-etale sites [def-weil-pbc-proetale-site] use the pulled-back coefficients $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients], internal modules [sk-def-sfb-module-objects], and ordinary unbounded module derived categories and derived pullbacks [sk-def-sfb-module-derived-pushpull, def-weil-abstract-derived-category]. Use compatible small-site universes [def-weil-size-convention]. On profinite spaces over $S$ use finite jointly surjective coverings and coefficient $\\Lambda_S$, the restriction of $\\Lambda$. Write $\\pi_T$ for the component morphism induced by $E\\mapsto T\\times_S E$ [lem-zl-component-relative-profinite-site].\nThe projection-preserving isomorphisms\n$$V\\times_S E\\cong V\\times_U(U\\times_S E)$$\nfor profinite $E\\to S$ induce a canonical monoidal comparison $g^*\\pi_U^*\\cong\\pi_V^*$ on derived module categories, compatible with the coefficient units and with composition in $E$ and $g$. For every finite-rank lisse $\\Lambda_U$-module $L$ [def-sfb-lisse-coefficient-module], $g^*L$ is finite-rank lisse. The complexes $L[0]$ and $g^*L[0]$ have locally finite free module duals, are K-flat (tensoring with any acyclic complex gives an acyclic complex) [def-pc-kflat-complex, def-pc-tensor-complex-sheaves], and are dualizable for ordinary derived tensor: their evaluation and coevaluation satisfy both triangle identities.\nFor any dualizable $N$ on $S$ and any isomorphism $\\pi_U^*N\\cong L[0]$, the component equivalences on dualizable objects [lem-zl-condensed-wcontractible-lisse-evaluation] identify the actual pullback map\n$$\\operatorname{Hom}_{D(U,\\Lambda)}(\\Lambda_U[0],L[0])\\longrightarrow\\operatorname{Hom}_{D(V,\\Lambda)}(\\Lambda_V[0],g^*L[0])$$\nwith the identity on $\\operatorname{Hom}_{D(S,\\Lambda)}(\\Lambda_S[0],N)$. Here dualizable means admitting evaluation and coevaluation with both triangle identities. Under the evaluation-on-$1$ identifications of these two Hom groups with $\\Gamma(U,L)$ and $\\Gamma(V,g^*L)$ [def-sfb-condensed-module-sections], this map is exactly the section pullback induced by the module adjunction unit and the coefficient isomorphism. In particular the actual map $\\Gamma(U,L)\\to\\Gamma(V,g^*L)$ is bijective, naturally in $L$ and compatibly with composition in $g$. No discreteness, completeness or t-admissibility assumption on $\\Lambda$ is made, and varying finite ranks, rank zero and empty schemes are included.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Old proof steps 4-6; HRS Definition 3.3, Lemma 4.1, Proposition 4.3(3) and equation (4.2); Stacks Tag 08JJ, sites-cohomology.tex label lemma-dual-perfect-complex, global Hom formula at the coefficient unit. Agent-formulated map normalization for component lifts."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-pc-scheme",
+  "sk-def-pe-wlocal",
+  "lem-pe-spectral-components-profinite",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-abstract-derived-category",
+  "def-weil-size-convention",
+  "lem-zl-component-relative-profinite-site",
+  "def-sfb-lisse-coefficient-module",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "def-sfb-condensed-module-sections",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the coherent geometric comparison theorem to choose d,m,c, the induced test and module comparisons, their monoidality, component equivalences and composition law.",
+   "uses": [
+    "lem-sfb-component-lift-geometric-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply isLisseCoefficientModule_upperStar to L. Use finite-free duality on L and its pullback; the derived ExactPairing proves that L[0] is dualizable.",
+   "uses": [
+    "lem-sfb-lisse-module-inverse-image",
+    "lem-sfb-component-lift-finite-free-duality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The monoidal unit equation for c inverse and its naturality at b prove ComponentLiftHomIdentity. Essential surjectivity of F_U on dualizable objects gives N and a:F_U N≅L[0]. The two bijections from Hom(1,N), obtained by full faithfulness of F_U and F_V and pre/postcomposition with the specified unit and object isomorphisms, identify the normalized derived pullback with the identity. Evaluation at one intertwines this normalized pullback with the specified section map. Cancel the source parametrization and use bijectivity of the target parametrization to obtain bijectivity of the actual section map. These are the private Lean lemmas normalized_naturality, parametrization_bijective and component_sections_bijective, proved without holes.",
+   "uses": [
+    "lem-sfb-component-lift-section-normalization",
+    "def-sfb-component-lift-section-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Assemble these assertions with evaluation bijectivity, section naturality and the identity and composition laws. The geometric composition law gives the first clause, and the normalization theorem gives the section-composition clause.",
+   "uses": [
+    "lem-sfb-component-lift-section-normalization",
+    "def-sfb-component-lift-section-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-component-lift-geometric-comparisons",
+  "lem-sfb-lisse-module-inverse-image",
+  "lem-sfb-component-lift-finite-free-duality",
+  "lem-sfb-component-lift-section-normalization",
+  "def-sfb-component-lift-section-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "HRS (4.1)--(4.2), Lemma 4.1, Proposition 4.3(3); original seven-step route, factored into geometry, finite-free duality and section normalization, with the normalized Hom and section-bijectivity argument proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(lisse|[Dd]ualizable).*(component|[Ss]ection)|component.*(lisse|[Dd]ualizable)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic free-module pullback and unitHomEquiv facts do not give the component equivalence or its derived section normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally free condensed coefficient modules are dualizable as degree zero derived sheaves and component pullback preserves their actual global section maps",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CondensedMod\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: generic free-module pullback and unitHomEquiv facts do not give the component equivalence or its derived section normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback between weakly contractible affine component lifts over the same extremally disconnected profinite space induces a bijection on sections of finite locally free condensed coefficient modules",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, AlgebraicGeometry.exists_app_map_eq_map_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+   "date": "2026-10-22",
+   "verdict": "no match: generic free-module pullback and unitHomEquiv facts do not give the component equivalence or its derived section normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the lisse component equivalence identifies pullback on Hom from the coefficient unit with the identity and with evaluation of module sections at one",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.unitHomEquiv_apply_coe",
+   "date": "2026-10-22",
+   "verdict": "no match: generic free-module pullback and unitHomEquiv facts do not give the component equivalence or its derived section normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(lisse|[Dd]ualizable).*(component|[Ss]ection)|component.*(lisse|[Dd]ualizable)",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed unit/free-module facts do not state the component equivalence with its derived unit normalization; evaluation at one is used only as an elementary formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unit normalized pullback on sections of finite locally free condensed modules between weakly contractible affine schemes with identical component spaces",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pullbackCongr, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_left_unitality, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed unit/free-module facts do not state the component equivalence with its derived unit normalization; evaluation at one is used only as an elementary formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Component pullback equivalence on dualizable derived condensed module sheaves identifies global sections over weakly contractible affine schemes",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed unit/free-module facts do not state the component equivalence with its derived unit normalization; evaluation at one is used only as an elementary formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.unitHomEquiv, SheafOfModules.pullbackObjUnitToUnit",
+   "results": "0 hits: ",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed unit/free-module facts do not state the component equivalence with its derived unit normalization; evaluation at one is used only as an elementary formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation at one identifies Hom from the coefficient unit in the derived category with actual module sections and commutes with inverse image",
+   "results": "8 hits: PresheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_apply_coe, ModuleCat.RestrictionCoextensionAdj.counit'_app, SheafOfModules.unitHomEquiv_comp_apply, PresheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.unitHomEquiv, SheafOfModules.unitHomEquiv_symm_comp, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed unit/free-module facts do not state the component equivalence with its derived unit normalization; evaluation at one is used only as an elementary formula"
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|pullbackObjUnitToUnit",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the listed unit/free-module facts do not state the component equivalence with its derived unit normalization; evaluation at one is used only as an elementary formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-wstrict-lisse-component-cohomology",
+  "date": "2026-10-22",
+  "group": "Q69"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image: the unpunctured one-term root-tower calculation underlying coordinate-face restriction in the tame-boundary expansion. Extracted Old proof steps 4-6; HRS Definition 3.3, Lemma 4.1, Proposition 4.3(3) and equation (4.2); Stacks Tag 08JJ, sites-cohomology.tex label lemma-dual-perfect-complex, global Hom formula at the coefficient unit. Agent-formulated map normalization for component lifts.",
+   "via": [
+    "lem-sfb-wstrict-lisse-component-cohomology",
+    "lem-sfb-root-tower-coordinate-face",
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-sfb-transverse-tame-open-shriek-exchange",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-component-lift-lisse-section-comparison",
+  "worker": "stage1",
+  "summary": "Seven explicit steps, no new nodes: functorial finite-clopen component comparison, cartesian coefficient pullback, K-flatness, finite-free dual maps and triangle identities, the Hom naturality equation, evaluation at one and adjunction normalization, composition and edge cases. Statement retained.",
+  "blueprint": "Realizes the component-map normalization extracted from old steps 4-6 of lem-sfb-wstrict-lisse-component-cohomology, within the inherited open-direct-image/root-tower route; blueprint.from.node is already null because the inherited ancestry chain ends at lem-sfb-admissible-direct-image. No route change.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic foundational tool: The relative profinite test functor over an affine component space; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic foundational tool: Monoidal and adjunction normalization of derived ringed-topos comparisons; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic foundational tool: $\\alpha_f$ is an isomorphism for every $f$; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-sfb-finite-upper-star-exact",
+    "why": "Generic foundational tool: $g^*$ is exact; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "why": "Generic foundational tool: Tensoring with a pro-etale locally finite free internal module preserves finite limits; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic foundational tool: Derived tensor and K-flat representative descent on a ringed site; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "why": "Generic foundational tool: Evaluation and connected components of lisse condensed sheaves; used with its stated hypotheses, without replacing the component-equivalence route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic foundational tool: The single-complex embedding of an abelian category is fully faithful; used with its stated hypotheses, without replacing the component-equivalence route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-component-relative-profinite-site",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-alpha-iso",
+  "lem-sfb-finite-upper-star-exact",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-60c3a4f00",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-60c3a4f00 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes, statement unchanged, not a re-split. Checked against HRS Def. 3.3, Lemma 4.1(1)-(2), (4.1), Prop. 4.3(2)-(3) and (4.2), and Stacks 08JJ. The item is the unit-normalized degree-zero case of 4.3(2)/(3) in the ordinary unbounded D(T_proet, Lambda_T), with arbitrary condensed Lambda, matching lem-zl-condensed-wcontractible-lisse-evaluation. Tested S empty, r=0, Lambda=0, and two separably closed fields. Step 1: the functoriality in g is proved by hand, then the 2-isomorphism clause and c_{f,g} of lem-sfb-ringed-derived-monoidal-comparisons apply. Step 4: re-checked the rectangular transition-matrix computation for coevaluation and both triangle identities. Step 5: checked c_N g^*F_U(b)=F_V(b)c and the unit equation. Step 6: checked t <-> t(1) and the unit/mate relation. Two faults, both fixed in the item file. (1) C4/E5, step 2: (g^*L)|_{V_i} was identified with g_i^*(L|_{U_i}) without a citation; it now cites lem-sfb-coefficient-sections-localization (slice restriction = u^*) and the composition isomorphisms of sk-def-sfb-module-pushforward-pullback. (2) Step 3: lem-weil-pbc-site-derived-tensor-descent needs K-flat complexes with flat terms; flatness is now tied to def-pc-flat-sheaf-modules, and the step says the tensors used in step 4 stay in that class. No duplicate found: lem-zl-condensed-henselian-lisse-rigidity and lem-zl-condensed-component-inverse-image state different things. No cycle. Off-unit generic tools listed in split_report.tool_uses, plus the added localization lemma, are accepted for the maintainer's tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ComponentLiftLisseSectionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.component_lift_lisse_section_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.component_lift_lisse_section_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ComponentLiftLisseSectionComparison.lean",
+  "statement": "theorem component_lift_lisse_section_comparison (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (S : Profinite.{u}) [ExtremallyDisconnected S] : ∃ d : ∀ (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)] (e : affineComponentSpace T ≃ₜ S), ComponentLiftCoefficient Λ S T e, ∃ m : ∀ (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)] (e : affineComponentSpace T ≃ₜ S), (componentLiftDerived (d T e)).Monoidal, ∃ c : ∀ (U V : Scheme.{u}) [IsAffine U] [IsAffine V] [IsWContractibleRing Γ(U, ⊤)] [IsWContractibleRing Γ(V, ⊤)] (eU : affineComponentSpace U ≃ₜ S) (eV : affineComponentSpace V ≃ₜ S) (g : V ⟶ U), IsComponentLiftMap eU eV g → ((componentLiftDerived (d U eU) ⋙ moduleObjectDerivedPullback Λ.X g) ≅ componentLiftDerived (d V eV)), (∀ (U V : Scheme.{u}) [IsAffine U] [IsAffine V] [IsWContractibleRing Γ(U, ⊤)] [IsWContractibleRing Γ(V, ⊤)] (eU : affineComponentSpace U ≃ₜ S) (eV : affineComponentSpace V ≃ₜ S) (g : V ⟶ U) (hg : IsComponentLiftMap eU eV g), (∃ k : componentLiftTests V S eV ≅ componentLiftTests U S eU ⋙ MorphismProperty.Over.pullback @WeaklyEtale ⊤ g, (∀ (E : Over S) (v : ((componentLiftTests V S eV).obj E).left), (d U eU).projection E (pullback.fst ((componentLiftTests U S eU).obj E).hom g ((k.app E).hom.left v)) = (d V eV).projection E v) ∧ ∃ q : componentLiftModules (d U eU) ⋙ upperStar Λ.X g ≅ componentLiftModules (d V eV), ComponentLiftInducedComparison (d U eU) (d V eV) g k q ∧ c U V eU eV g hg = componentLiftDerivedComparison (d U eU) (d V eV) g q) ∧ ComponentLiftMonoidal (m U eU) (m V eV) (c U V eU eV g hg) ∧ ComponentLiftHomIdentity Λ g (d U eU) (d V eV) (m U eU) (m V eV) (c U V eU eV g hg) ∧ ComponentLiftSectionIdentity Λ g ∧ ComponentLiftSectionNaturality Λ g ∧ ∀ L : Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ.X U), IsLisseCoefficientModule Λ.X L → IsLisseCoefficientModule Λ.X ((upperStar Λ.X g).obj L) ∧ ComponentLiftLisseFacts Λ U L ∧ ComponentLiftLisseFacts Λ V ((upperStar Λ.X g).obj L) ∧ Function.Bijective (componentLiftSectionPullback Λ g L) ∧ Function.Bijective (componentLiftHomSection Λ U L) ∧ Function.Bijective (componentLiftHomSection Λ V ((upperStar Λ.X g).obj L))) ∧ (∀ (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)] (e : affineComponentSpace T ≃ₜ S), ComponentLiftEquivalence (d T e) ∧ ∀ (L : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ.X T)) (s : (condensedModuleSections Λ.X T).obj L), (condensedModuleSections Λ.X T).map ((upperStarId Λ.X T).hom.app L) ((componentLiftSectionPullback Λ (𝟙 T) L) s) = s) ∧ (∀ (U V W : Scheme.{u}) [IsAffine U] [IsAffine V] [IsAffine W] [IsWContractibleRing Γ(U, ⊤)] [IsWContractibleRing Γ(V, ⊤)] [IsWContractibleRing Γ(W, ⊤)] (eU : affineComponentSpace U ≃ₜ S) (eV : affineComponentSpace V ≃ₜ S) (eW : affineComponentSpace W ≃ₜ S) (g : V ⟶ U) (h : W ⟶ V) (hg : IsComponentLiftMap eU eV g) (hh : IsComponentLiftMap eV eW h) (hc : IsComponentLiftMap eU eW (h ≫ g)) (N : Evaluation.D ((coherentTopology Profinite.{u}).over S) (profiniteCoefficient Λ.X S)), (leftDerivedUpperStarComp Λ.X h g).hom.app ((componentLiftDerived (d U eU)).obj N) ≫ (moduleObjectDerivedPullback Λ.X h).map ((c U V eU eV g hg).hom.app N) ≫ (c V W eV eW h hh).hom.app N = (c U W eU eW (h ≫ g) hc).hom.app N ∧ ComponentLiftSectionComposition Λ g h)",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-22",
+  "existing": false,
+  "note": "Canonical auxiliary data moved verbatim to ComponentLiftSectionDefs and publicly reexported. The theorem signature and all constructions are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-22",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39d047a84",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read node, source place (HRS Def 3.3/Lem 4.1/Prop 4.3(3)/(4.1)-(4.2), Stacks 08JJ), all stmt_dep records and every declaration used (side-live upstream + model module). Every clause rendered: arbitrary comm condensed Λ, affine w-contractible U,V, e:π0≅S, IsComponentLiftMap = π0(g)=id; component tests/inverse image/adjunction/projections pinned (inverse_eq, adj_eq HEq, ∃! universal property), α pinned via monoidal β (same pattern as reviewed componentClause); k natural, projection-preserving; c = componentLiftDerivedComparison q with q fixed by unit equations (canonical, not arbitrary); monoidality incl. unit; composition via leftDerivedUpperStarComp; g*L lisse; lisse dual + ExactPairing + kFlat of L[0],P[0] + derived ExactPairing for U and V; ComponentLiftEquivalence on dualizables; Hom identity = node step 5; evaluation-at-1 bijections; derived Hom pullback = adjunction-unit section map; bijective, natural, composition, identity law. Edge cases S=∅, rank 0, varying ranks, g=𝟙, universes OK. Single sorry, docstrings with 7 steps, statement verbatim, 21 decls match, no line>100, plain imports = proof-dep modules, real Scheme.ProEt. No compile (no file changed). Advisories: existential braided/m monoidal structures (mirrors reviewed dependency, compensated by pinned α/c); upperStar/sfbSectionOne/upperStarFromPoint owners not in stmt_deps (maintainer may add sk-def-sfb-module-pushforward-pullback, def-sfb-coefficient-section-maps); no Main definitions list; second reading is worker's own pass."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-26",
+  "by": "L",
+  "reviewer": "C-a4861",
+  "group": "M4",
+  "result": "fix",
+  "landing": "20261026T082500-L-2181902",
+  "kind": "interface",
+  "note": "independent cc review: item statement vs clone (identical), moved defs vs clone item module (verbatim), 3 new sorried theorems vs their nodes and the original clauses, item node proof/proof_deps vs Lean proof"
+ }
+}

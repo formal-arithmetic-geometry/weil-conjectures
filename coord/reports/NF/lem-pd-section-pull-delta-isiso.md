@@ -1,0 +1,20 @@
+# Stage-1 report: lem-pd-section-pull-delta-isiso
+
+Files written:
+
+- `dag/nodes/sec-poincare-duality/lem-pd-section-pull-delta-isiso.json`: statement item, now split; no new node files were needed.
+- `citations.json`: verbatim statement quotations for every node cited by every proof step.
+
+Attachments: none. The current read-only declaration `AlgebraicGeometry.ProEtale.ModuleRingedComparison.pull_delta_isIso` in `lean/Sheaf/Paper/ProEtaleSectionModuleFunctors.lean:552` contains `sorry`, so it is not an attachment. A search for the blueprint tag and theorem name found no sorry-free declaration in `WeilConjectures`.
+
+WANTED: none.
+
+The source of the item is the current Lean declaration and its docstring, checked against the imported parent node. I read the two Stacks results used by the statement: Tag 03D7 (`lemma-adjoint-pullback-pushforward-modules`) establishes the module pullback/direct-image adjunction, and Tag 03EL (`lemma-tensor-product-pullback`) establishes the tensor comparison. I also read the latest blueprint unit `sk-def-sfb-finite-pushforward-pullback` and its proof, which specifies left Kan extension followed by sheafification, exactness, the lax direct-image pure-tensor map, and the oplax mate. The chapter/unit route is retained; this item is the seeded prerequisite of the Verdier-exchange Step 2 route.
+
+## Review by NF
+
+I checked all hypotheses in the item against the source and cited statements: the condensed coefficient ring, the fixed small pro-etale sites and universe levels, the reconstructed section rings, the coefficient map, the section-module tensor, the normalized direct-image lax structure, and the specified adjunction. Step 1 reads the pro-etale geometric inverse-image construction and the algebraic inverse-image presentation, then identifies the section direct image with evaluation on the fibre product. Step 2 reads the ringed-topos module adjunction and the scalar-extension Hom formula; it verifies that the canonical unit is insertion of `1` followed by geometric inverse image, including the sheafification universal property. Step 3 uses the unit-normalized uniqueness theorem for two left adjoints of the same direct image, so the actual chosen adjunction is compared without a definitional equality assumption. Step 4 applies the existing `lem-pd-ringed-tensor-adjunction-mate` statement; its hypotheses are exactly the algebraic inverse-image presentation, scalar-extension tensor comparison, normalized pure-tensor lax map and the adjunction mate, and it supplies an isomorphism with no flatness assumption. Step 5 expands the oplax mate equation from `lem-sfb-adjunction-oplax-mate`, uses naturality of the normalized lax structure and the unit equation from Step 3, and invokes injectivity of the specified adjunction Hom bijection to prove the conjugation identity. Since the comparison is an isomorphism and the canonical mate is an isomorphism, the chosen `delta` is an isomorphism. I read every cited node statement and copied it verbatim into `citations.json`; no citation relies on a proof detail absent from its statement.
+
+I searched the DAG and latest blueprint for duplicates before writing and found no node stating this chosen-mate invertibility assertion. I ran the required LeanSearch, Loogle/LeanFinder, and Mathlib grep searches (including a second phrasing). Their hits were generic pullback adjunctions, scalar-extension formulas, or monoidal/cartesian invertibility results and did not state this specified ringed-site tensor mate, so the item remains a project statement rather than a Mathlib leaf. The only correction was replacing the earlier proof sketch by an explicit comparison of the actual chosen adjunction with the canonical tensor-formula adjunction; no statement or dependency was weakened. The server `check_dag` preflight passed before this report was written.
+
+What could not be finished: the Lean proof remains upstream work and is intentionally outside this stage-1 delivery; the source declaration is still sorry-bearing.

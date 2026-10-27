@@ -1,0 +1,269 @@
+{
+ "id": "lem-sfb-regular-fibre-local-perfect",
+ "kind": "statement",
+ "title": "Perfection over a flat local map with regular closed fibre",
+ "statement": "Let $R\\to B$ be a homomorphism of nonzero commutative local rings, with maximal ideals $\\mathfrak m_R,\\mathfrak m_B$, such that the inverse image of $\\mathfrak m_B$ is $\\mathfrak m_R$. Assume this homomorphism is flat [def-weil-pbc-flat-ring-map]. Suppose that the closed fibre ring $B/\\mathfrak m_RB$ is regular local [def-weil-regular-scheme], of Krull dimension $d\\in\\mathbf Z_{\\geq0}$ [def-weil-pbc-krull-dimension-ring]. Put $k=R/\\mathfrak m_R$. Let $K\\in D(B)$ [def-weil-abstract-derived-category] be pseudo-coherent [def-pc-ring-pseudo-coherent-complex]. Derived tensors use K-flat resolutions [def-pc-module-kflat-complex]. Let $a\\leq b$ be integers. If $H^i(K\\otimes_R^{\\mathbf L}k)=0$ for every $i\\notin[a,b]$, then $K$ is perfect over $B$ [def-pc-perfect-ring-complex] and has Tor amplitude in $[a-d,b]$ over $B$: for every $B$-module $N$ in degree zero, $H^j(K\\otimes_B^{\\mathbf L}N)=0$ for every $j\\notin[a-d,b]$. Neither $R$ nor $B$ is required to be Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09PC, lemma-perfect-over-regular-local-ring, residue-field version of assumption (4) and conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-pc-module-kflat-complex",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free $B$-complex $P^\\bullet$ representing $K$, by pseudo-coherence. Each $P^i\\cong B^{n_i}$ is $R$-flat: tensoring an $R$-module injection with it is a finite direct sum of tensoring that injection with the flat $R$-module $B$. The same argument over $B$ makes its terms $B$-flat. The bounded-flat lemma makes $P^\\bullet$ K-flat over both rings. Put $C=B/\\mathfrak m_RB$ and let $E\\in D(C)$ be represented by $P^\\bullet\\otimes_B C$. Termwise, $P^\\bullet\\otimes_B C\\cong P^\\bullet\\otimes_R k$, via $p\\otimes(b\\otimes t)\\mapsto bp\\otimes t$, using $C\\cong B\\otimes_R k$. K-flat computation of change of rings over $R$ therefore identifies the underlying $k$-complex of $E$ with $K\\otimes_R^{\\mathbf L}k$. The hypothesis gives $H^q(E)=0$ outside $[a,b]$. In particular $E$ is cohomologically bounded, although $P^\\bullet$ may be unbounded to the left.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-weil-pbc-flat-ring-map",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PC, lemma-perfect-over-regular-local-ring, proof: finite-free replacement and the paragraph after the displayed tensor equalities; ordinary-module K-flatness Tag 064K, lemma-derived-tor-quasi-isomorphism, and derived tensor Tag 064M, definition-derived-tor."
+   }
+  },
+  {
+   "text": "Put $\\ell=B/\\mathfrak m_B$. Locality gives $\\mathfrak m_RB\\subseteq\\mathfrak m_B$, so $\\ell$ is a $C$-module via the quotient map $C\\to\\ell$, and is the residue field of $C$. The complex $P^\\bullet\\otimes_B C$ is bounded above and finite free over $C$, hence K-flat by the bounded-flat lemma. Compute the derived scalar extensions of $K$ along $B\\to\\ell$ and of $E$ along $C\\to\\ell$ on these K-flat models. The chain isomorphism $(P^\\bullet\\otimes_B C)\\otimes_C\\ell\\cong P^\\bullet\\otimes_B\\ell$ sends $(p\\otimes c)\\otimes t$ to $p\\otimes ct$, with inverse $p\\otimes t\\mapsto(p\\otimes1)\\otimes t$; both maps commute with the differential on $P^\\bullet$. Consequently $E\\otimes_C^{\\mathbf L}\\ell\\cong K\\otimes_B^{\\mathbf L}\\ell$ in $D(\\ell)$.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PC, lemma-perfect-over-regular-local-ring, proof: the three displayed tensor equalities."
+   }
+  },
+  {
+   "text": "The regular-local global-dimension theorem applied to $C$ gives every $C$-module a projective resolution of length at most $d$. In particular, for any $C$-module $M$, choose such a resolution of $M$ to compute $\\operatorname{Tor}^C_t(M,\\ell)$. Its tensor with $\\ell$ has no terms in homological degrees $t>d$, so these Tor modules vanish there. This is the definition of Tor using a projective resolution, not an assumption that $R$ or $B$ is Noetherian. The regular local ring $C$ is Noetherian by its assumed regularity, which is all the global-dimension theorem requires.",
+   "uses": [
+    "lem-weil-pbc-regular-local-finite-gl-dim",
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PC, lemma-perfect-over-regular-local-ring, proof: finite global dimension of the closed fibre, using algebra.tex Tag 00O7, proposition-regular-finite-gl-dim, and Tag 00LY, section-tor."
+   }
+  },
+  {
+   "text": "Apply the bounded tensor-Tor spectral sequence over $C$ to $E$ and $\\ell[0]$. Its boundedness hypotheses concern cohomology: step 1 gives $E\\in D^b(C)$, and $\\ell[0]$ is concentrated in degree zero. Thus its second page is $E_2^{p,q}=\\operatorname{Tor}_{-p}^C(H^q(E),\\ell)$. Step 3 and the convention of zero Tor in negative homological degrees imply $E_2^{p,q}=0$ unless $-d\\le p\\le0$; step 1 gives zero unless $a\\le q\\le b$. Hence every position of total degree $n\\notin[a-d,b]$ vanishes on the second page. Each later page at that position is a subquotient of the preceding page, so it too vanishes. The cited convergence supplies a finite exhaustive separated filtration of $H^n(E\\otimes_C^{\\mathbf L}\\ell)$ with these zero stable-page modules as graded quotients. Successive equalities of adjacent filtration terms, from the whole module to zero, force that cohomology module to vanish. By step 2, $H^n(K\\otimes_B^{\\mathbf L}\\ell)=0$ for $n\\notin[a-d,b]$.",
+   "uses": [
+    "lem-kun-bounded-tensor-tor-spectral-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PC, lemma-perfect-over-regular-local-ring, final spectral-sequence argument; bounded formulation Tag 0H7Z, lemma-kunneth-spectral-sequence, with finite filtration from Tag 0H7Y, proposition-kunneth-filtered (the source uses the equivalent one-module spectral sequence Tag 061Z)."
+   }
+  },
+  {
+   "text": "The local ring $B$ has only the maximal ideal $\\mathfrak m_B$, so step 4 verifies the residue-field vanishing hypothesis for every maximal ideal of $B$. The object $K$ is pseudo-coherent by assumption, and $a-d\\le b$ because $a\\le b$ and $d\\ge0$. Apply the pseudo-coherent maximal-fibre criterion over $B$, with interval $[a-d,b]$. It gives both that $K$ is perfect over $B$ and that $H^j(K\\otimes_B^{\\mathbf L}N)=0$ for every $B$-module $N$ and every $j\\notin[a-d,b]$, as asserted. This criterion imposes no Noetherian hypothesis on $B$.",
+   "uses": [
+    "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09PC, lemma-perfect-over-regular-local-ring, last sentence: apply Tag 068V, lemma-check-perfect-pointwise, implication (3) to (1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-pbc-flat-ring-map",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "def-weil-pbc-tor-modules",
+  "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09PC, lemma-perfect-over-regular-local-ring; spectral-sequence step written using existing bounded Kunneth node, Tag 0H7Z, instead of Tag 061Z."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex over a flat local ring homomorphism with regular closed fibre is perfect if its derived closed fibre has bounded cohomology",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.Smooth.flat\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [Algebra.Smooth R A],\\n  Module.Flat R A\", \"doc\": \"If $ A $ is a smooth $ R $-algebra, then $ A $ is a flat $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth.flat_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] [IsNoetherianRing R]\\n  [Algebra.Smooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a Noetherian ring and $ A $ a smooth $ R $-algebra. Then $ A $ is flat as an $ R $-module.\"}\n  {\"name\": \"Algebra.Smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Basic\", \"type\": \"(R : Type u_4) → [inst : CommRing R] → (A : Type u) → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property that the commutative ring $ A $, equipped with an $ R $-algebra structure, is smooth over the commutative ring $ R $.\"}\n  {\"name\": \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"module\": \"Mathlib/RingTheory/Smooth/Flat\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] (f : S →ₐ[R] A),\\n  Function.Surjective ⇑f → ∀ [Module.Flat R S] [IsNoetherianRing S] [Algebra.FormallySmooth R A], Module.Flat R A\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ a Noetherian $ R $-algebra that is flat over $ R $, and $ A $ a formally smooth $ R $-algebra. If there exists a surjective $ R $-algebra homomorphism $ f: S \\to \"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Flat R S]\\n  {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs → RingTheory.Sequence.IsWeaklyRegular S (List.map (⇑(algebraMap R S)) rs)\", \"doc\": \"If $ R $ is a flat $ S $-module and $ rs $ is a weakly regular sequence in $ R $, then the image of $ rs $ under the canonical algebra homomorphism $ R \\\\to S $ forms a weakly regular sequence in $ S $\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern smoothness and ordinary flat modules, not derived perfection with a regular closed fibre."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfection of a complex over a local algebra detected by bounded derived tensor with the residue field of the base when the closed fibre is regular local",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Algebra.Extension R S) [Algebra.FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]],\\n  P.ker.FG →\\n    (Algebra.FormallySmooth R \", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) [inst_4 : CommRing P] [inst_5 : Algebra R P] [inst_6 : Algebra P S]\\n  [IsScalarTower R P S] [Algebra.FormallySmooth R P] [Module.Free P Ω[P⁄R]] [Module.Finite P \", \"doc\": \"Let $ R $, $ P $, and $ S $ be commutative rings with $ P $ an $ R $-algebra and $ S $ a $ P $-algebra satisfying the scalar tower condition $ R \\to P \\to S $. Suppose $ P $ is formally smooth over $ R \"}\n  {\"name\": \"Module.free_of_lTensor_residueField_injective\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : Module R M] [inst_4 : Module R N] [inst_5 : AddCommGroup P] [inst_6 : Module R P]\\n  (f : M →ₗ[R] N) (g : N →ₗ[R] P) [inst_7 : IsLocalRing R],\\n  Function.S\", \"doc\": \"Let $ R $ be a commutative local ring with residue field $ k $. Suppose $ 0 \\\\to M \\\\xrightarrow{f} N \\\\xrightarrow{g} P \\\\to 0 $ is an exact sequence of finitely generated $ R $-modules, where $ N $ is f\"}\n  {\"name\": \"Algebra.IsSmoothAt\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (p : Ideal A) → [p.IsPrime] → Prop\", \"doc\": \"The algebra $ A $ is formally smooth at the prime ideal $ \\\\mathfrak{p} $, meaning that the localization of $ A $ at $ \\\\mathfrak{p} $ satisfies the formal smoothness lifting property over the base comm\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib/RingTheory/Smooth/Field\", \"type\": \"∀ {K : Type u_1} {L : Type u_2} [inst : Field L] [inst_1 : Field K] [inst_2 : Algebra K L] [PerfectField K]\\n  [Algebra.EssFiniteType K L], Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"module\": \"Mathlib/RingTheory/Smooth/Local\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : IsLocalRing S]\\n  [inst_3 : Algebra R S] (P : Type u_3) (K : Type u_4) [inst_4 : Field K] [inst_5 : CommRing P] [inst_6 : Algebra R P]\\n  [inst_7 : Algebra P S] [IsScalarTower R P S] [inst_9 : Algebra S K] [inst_10 : A\", \"doc\": \"Let $ R $ be a commutative ring, $ P $ a commutative $ R $-algebra, $ S $ a commutative $ P $-algebra, and $ K $ a field equipped with compatible $ S $- and $ P $-algebra structures. Assume $ P $ is f\"}\n  {\"name\": \"Perfection.perfectRing\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"∀ (R : Type u₁) [inst : CommSemiring R] (p : ℕ) [hp : Fact (Nat.Prime p)] [inst_1 : CharP R p],\\n  PerfectRing (Ring.Perfection R p) p\", \"doc\": \"For a commutative semiring $ R $ of prime characteristic $ p $, the perfection of $ R $ (the set of all $ p $-perfect sequences $ (f_n) $ satisfying $ f_n = f_{n+1}^p $) inherits the characteristic $ \"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern smoothness and ordinary flat modules, not derived perfection with a regular closed fibre."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"Perfect\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern smoothness and ordinary flat modules, not derived perfection with a regular closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|regular.*fibre.*perfect|regular.*fiber.*perfect|perfect.*closed.*fib",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern smoothness and ordinary flat modules, not derived perfection with a regular closed fibre."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex over a flat local ring map with regular closed fibre of dimension d and residue tensor in degrees a to b is perfect of Tor amplitude a minus d to b",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.free_of_flat_of_isLocalRing\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R P] [Flat R P] : Free R P\", \"doc\": \"Let $ R $ be a local ring and $ P $ a finitely generated flat $ R $-module. Then $ P $ is a free $ R $-module.\"}\n  {\"name\": \"RingHom.Flat\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"Given a ring homomorphism $ f : R \\to S $ between commutative rings $ R $ and $ S $, the property that $ S $ is a flat $ R $-module under the induced algebra structure defined by $ f $. This means that\"}\n  {\"name\": \"Module.Flat.rTensor_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \"[Flat R M] (C : ShortComplex <| ModuleCat R) (hC : C.Exact) : C.map (tensorRight M) |>.Exact\", \"doc\": \"For a commutative ring $ R $, a flat $ R $-module $ M $, and an exact short complex $ C $ in the category of $ R $-modules, the tensor product of $ C $ with $ M $ results in an exact short complex.\"}\n  {\"name\": \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"module\": \"Mathlib.RingTheory.Smooth.Local\", \"type\": \"(P : Algebra.Extension.{u} R S) [FormallySmooth R P.Ring] [Module.Free P.Ring Ω[P.Ring⁄R]]\\n  [Module.Finite P.Ring Ω[P.Ring⁄R]] (h' : P.ker.FG) :\\n  Algebra.FormallySmooth R S ↔ Function.Injective (P.cotangentComplex.lTensor (ResidueField S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ an $ R $-algebra, and let $ P $ be an algebra extension of $ S $. Suppose the module of Kähler differentials $ \\\\Omega_{S/R} $ is a free and finite $\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \": Flat R M ↔ ∀ (C : ShortComplex <| ModuleCat R) (_ : C.Exact), (C.map (tensorRight M) |>.Exact)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.flat_iff\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommSemiring R] [inst_1 : AddCommMonoid M] [inst_2 : Module R M],\\n  Module.Flat R M ↔\\n    ∀ ⦃P : Type u⦄ [inst_3 : AddCommMonoid P] [inst_4 : Module R P] [Module.Finite R P] (N : Submodule R P),\\n      N.FG → Function.Injective ⇑(LinearMap.rTensor M N.subtype)\", \"doc\": \"A module $ M $ over a commutative semiring $ R $ is flat if and only if, for every finitely generated $ R $-module $ P $ and every finitely generated submodule $ N $ of $ P $, the induced linear map $\"}\n  {\"name\": \"Module.Flat.iff_lTensor_injectiveₛ\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \":\\n  Flat R M ↔ ∀ ⦃P : Type u⦄ [AddCommMonoid P] [Module R P] (N : Submodule R P), Function.Injective (N.subtype.lTensor M)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, $ M $ is flat if and only if for every $ R $-module $ P $ (an additive commutative monoid) and every submodule $ N \\\\subseteq P $, the tensor\"}\n  {\"name\": \"RingHom.Flat.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": PropertyIsLocal Flat\", \"doc\": \"The property of being flat for a ring homomorphism between commutative rings is local, meaning it can be checked after localization at every prime ideal.\"}\n",
+   "date": "2026-10-23",
+   "verdict": "no match: inspected hits concern smoothness and ordinary flat modules, not derived perfection with a regular closed fibre."
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|regular.*fib(er|re).*perfect|perfect.*closed.*fib",
+   "results": "{\"t\": \"2026-10-23T19:21:25Z\", \"tool\": \"grep\", \"query\": \"pseudo.?coherent|regular.*fib(er|re).*perfect|perfect.*closed.*fib\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern ordinary flat modules, projective dimension or smoothness, not this derived regular-fibre perfection criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pseudo coherent complex over a flat local ring map with regular closed fibre is perfect and has Tor amplitude a minus d to b if tensor with the source residue field has cohomology in a to b",
+   "results": "{\"t\": \"2026-10-23T19:21:26Z\", \"tool\": \"leansearch\", \"query\": \"A pseudo coherent complex over a flat local ring map with regular closed fibre is perfect and has Tor amplitude a minus d to b if tensor with the source residue field has cohomology in a to b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_flat_of_isLocalRing\", \"RingHom.Flat\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"SheafOfModules.instIsQuasicoherentOfIsFinitePresentation\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.flat_iff\"], \"digest\": \"7e4b6f1a9d654248\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern ordinary flat modules, projective dimension or smoothness, not this derived regular-fibre perfection criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PseudoCoherent\", \"Perfect\"",
+   "results": "{\"t\": \"2026-10-23T19:21:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"PseudoCoherent\\\", \\\"Perfect\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern ordinary flat modules, projective dimension or smoothness, not this derived regular-fibre perfection criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pseudo coherent complex over a flat local ring homomorphism with regular closed fibre of dimension d is perfect if its derived residue fibre has cohomology in a bounded interval",
+   "results": "{\"t\": \"2026-10-23T19:21:27Z\", \"tool\": \"leanfinder\", \"query\": \"A pseudo coherent complex over a flat local ring homomorphism with regular closed fibre of dimension d is perfect if its derived residue fibre has cohomology in a bounded interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange\", \"Algebra.IsSmoothAt\", \"Algebra.Smooth\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.smoothLocus_eq_compl_support_inter\"], \"digest\": \"28c49902803aa2f5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern ordinary flat modules, projective dimension or smoothness, not this derived regular-fibre perfection criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat local homomorphism whose closed fiber is regular, bounded residue cohomology of a pseudo coherent derived module implies finite projective dimension with a bound by fiber dimension",
+   "results": "{\"t\": \"2026-10-23T19:21:47Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat local homomorphism whose closed fiber is regular, bounded residue cohomology of a pseudo coherent derived module implies finite projective dimension with a bound by fiber dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.HasProjectiveDimensionLT\", \"Module.free_of_lTensor_residueField_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\", \"CategoryTheory.projectiveDimension_ne_top_iff\", \"CategoryTheory.instHasProjectiveDimensionLTSucc\", \"Module.free_of_flat_of_finrank_eq\", \"CategoryTheory.hasProjectiveDimensionLT_of_ge\"], \"digest\": \"8c02f6e91eb4c3e9\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: read returned hits; they concern ordinary flat modules, projective dimension or smoothness, not this derived regular-fibre perfection criterion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ring-relative-perfect-fibre-criterion",
+  "date": "2026-10-23",
+  "group": "N6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Stable genus and smooth-family open loci in curve families. Supporting input: 0E76 proof via lemma-stable: the relative dualizing sheaf used to detect fibrewise stability by ampleness. Supporting input: Derived coherent duality for proper flat algebraic spaces. Construction input: Relative perfection and endomorphisms of the affine adjoint unit. Supporting input: Relative-perfection criterion used in the first paragraph of the proof of Tag 0E5V. Proof of Tag 0GFL: Relative perfection from lower bounds on the complex and its fibres. Affine algebra input in the proof of Tag 0GFK, via perfect.tex Tag 0GEH: More on Algebra Tag 0GHJ. Local algebra prerequisite of Tag 0GHJ, final paragraph: apply lemma-perfect-over-regular-local-ring to the polynomial local map.",
+   "via": [
+    "lem-sfb-ring-relative-perfect-fibre-criterion",
+    "lem-sfb-space-relative-perfect-fibre-criterion",
+    "lem-sfb-space-perfect-test-relative-perfection",
+    "lem-sfb-affine-adjoint-unit-properties",
+    "lem-sfb-proper-flat-space-derived-duality",
+    "lem-sfb-nodal-relative-dualizing-line",
+    "lem-sfb-stable-and-smooth-family-open-loci",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-regular-fibre-local-perfect",
+  "worker": "stage1",
+  "summary": "Checked Tag 09PC against the unchanged residue-field formulation. Reused the finite-free pseudo-coherence definition, bounded-flat K-flatness, derived change of rings, regular-local global dimension, Tor definition, bounded tensor-Tor spectral sequence, and maximal-fibre perfection criterion. Wrote the residue tensor comparison and support rectangle explicitly; no new nodes or Mathlib leaves are needed.",
+  "blueprint": "Supporting local algebra for det-thm-sf-ctf-stability-direct-images proof (3), via the inherited relative-perfect fibre criterion chain: Tag 0GHJ final paragraph invokes Tag 09PC. The latest blueprint proper/open direct-image assembly is unchanged. The ancestor tool currently returns None for this inherited created.item chain; retained its null from.node and precise inherited place.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Generic ordinary-module K-flat computation tool for the bounded-above finite-free complexes over R, B and the closed fibre; not a replacement of any unit step."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of derived scalar extension, specialized to rings on the one-point site; required to compare the actual residue reductions."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-finite-gl-dim",
+    "why": "Generic commutative algebra theorem giving the dimension bound on projective resolutions over the regular closed fibre."
+   },
+   {
+    "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+    "why": "Generic module spectral sequence furnishing exactly the cohomological rectangle argument of Tag 09PC; the existing unit supplies no separate version."
+   },
+   {
+    "node": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "why": "Generic ordinary-ring maximal-fibre perfection criterion used verbatim by Tag 09PC, after establishing the target residue-field bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-regular-local-finite-gl-dim",
+  "lem-kun-bounded-tensor-tor-spectral-sequence",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-b5cf620bf",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-b5cf620bf (reviewer sub-agent of L); spot-checked: I read Stacks 09PC and 068V in full, and the tags in the step sources (064K, 064M, 0H7Z, 0H7Y, 061Z, 068V, 00O7, 00LY) all match their labels. Compared with live and side-live, only proof, proof_deps, proof_origin, split_report, status and added searches changed; the statement, stmt_deps, source and blueprint are byte-identical, the live item is still unsplit, there is no repair note and there are no new nodes. The statement matches 09PC hypothesis by hypothesis (residue-field form of (4)). Step 1: P is finite free and R-flat, K-flat by the bounded-flat lemma, and change of rings (2) gives K⊗^L_R k = P⊗_R k ≅ P⊗_B C, which bounds H^q(E) in [a,b]. Step 2: (P⊗_B C)⊗_C ℓ ≅ P⊗_B ℓ on K-flat models. Step 3: the global-dimension lemma covers every module, not only finitely generated ones, so Tor_t vanishes for t>d. Step 4: the cited spectral sequence (first factor resolved K-flatly, cohomologically bounded hypothesis, finite filtration) gives vanishing outside [a−d,b], and the sign is right. Step 5: the maximal-fibre criterion is 068V (3)⇒(1) and needs no Noetherian hypothesis. Both citers (ring-relative-perfect-fibre-criterion step 4, flat-quotient-nested-regular-ideals step 4) use the item as stated. I found no duplicate in the DAG. Small cases k→k[[x]] with K=k, and Z_p with K=Z/p, give the correct intervals. I accept the five tool_uses as generic algebra. The null blueprint.from.node is inherited from base and is not a fault of this delivery. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RegularFibreLocalPerfect",
+  "declaration": "DerivedCategory.isPerfect_and_tensor_homology_vanish_of_regular_closed_fibre",
+  "file": "lean/Sheaf/RingTheory/RegularFibreLocalPerfect.lean",
+  "statement": "theorem isPerfect_and_tensor_homology_vanish_of_regular_closed_fibre {R B : Type u} [CommRing R] [CommRing B] [IsLocalRing R] [IsLocalRing B] [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} B)] (φ : R →+* B) (hlocal : (IsLocalRing.maximalIdeal B).comap φ = IsLocalRing.maximalIdeal R) (hflat : φ.Flat) (hregular : IsRegularLocalRing (B ⧸ (IsLocalRing.maximalIdeal R).map φ)) (d : ℕ) (hd : ringKrullDim (B ⧸ (IsLocalRing.maximalIdeal R).map φ) = (d : WithBot ℕ∞)) (K : DerivedCategory (ModuleCat.{u} B)) (hK : K.IsPseudoCoherent) (a b : ℤ) (hab : a ≤ b) (hfibre : ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj ((ModuleCat.derivedRestrictScalars φ).obj K ⊗ (singleFunctor (ModuleCat.{u} R) 0).obj (ModuleCat.of R (R ⧸ IsLocalRing.maximalIdeal R))))) : K.IsPerfectRingComplex ∧ ∀ (N : ModuleCat.{u} B) (j : ℤ), (j < a - (d : ℤ) ∨ b < j) → IsZero ((homologyFunctor (ModuleCat.{u} B) j).obj (K ⊗ (singleFunctor (ModuleCat.{u} B) 0).obj N))",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d2b886d5c",
+  "group": "N5",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 09PC (residue-field form of (4)): local rings via IsLocalRing (nonzero), comap m_B = m_R, RingHom.Flat, IsRegularLocalRing on B/(m_R).map φ (class includes IsLocalRing+Noetherian), ringKrullDim = d : ℕ, IsPseudoCoherent K, a ≤ b, hypothesis on H^i(derivedRestrictScalars φ K ⊗ single 0 (R/m_R)) for i<a∨b<i, conclusion IsPerfectRingComplex ∧ ∀ N j outside [a-d,b] vanishing of H^j(K ⊗ single 0 N). No Noetherian or extra algebraic hypotheses; HasDerivedCategory.{u} binders are those required by derivedRestrictScalars; common universe forced by restriction of scalars. Edge cases d=0, a=b, K=0, k→k[[x]], ℤ/p over ℤ_p correct. Node unchanged except lean record; statement verbatim; single sorry theorem; docstrings with source/blueprint/5 proof steps; all imports exist; no duplicate found. Second reading was by the same worker (disclosed); not blocking. No recompile (no changes)."
+ }
+}

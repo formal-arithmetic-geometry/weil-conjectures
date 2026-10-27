@@ -1,0 +1,35 @@
+# Q43: lem-sp-field-scalar-normalized-systems
+
+1. Files written: dag/nodes/sec-smooth-purity/lem-sp-field-scalar-normalized-systems.json (statement, split; not a Mathlib leaf). Also citations.json, searches.jsonl and this report in the sandbox. No new nodes, no Mathlib leaves.
+2. Attachments: none. Searched WeilConjectures for the exact blueprint id, scalar/normalized systems, finite-free and field-extension terms. The AdicTower, AdicSystem and smooth-purity declarations concern other tower realizations or assume the system comparisons; none gives every clause here.
+3. WANTED: none.
+4. The imported item had no proof. Its statement is retained. The blueprint paragraph (1) suppresses normalization and coherent reduction descent; these are now explicit, with existing DAG tools instead of new restatements of the item's clauses. No statement dispute or unit-route departure.
+5. Unfinished: none in the split; supporting existing unsplit nodes remain their own items.
+
+## Sources and searches
+
+Read the main-20261015 field-extension-towers proof, paragraph (1), and the unit and chapter records. Also read the finite-free coefficient-sheaf proof and the finite-free-extension proof in sk-lem-sp-tower. Read Stacks sites-modules.tex, section-tensor-product and lemma-sheafification-tensor (03EK/03EL), sites-cohomology.tex lemma-K-flat-resolution (06YS), lemma-factor-through-K-flat (0G7D), lemma-pullback-K-flat (0G7E), lemma-derived-base-change (06YY), and proetale.tex definition-constructible (09AJ). The new proof is an agent expansion of this blueprint paragraph using existing lemmas; it does not claim a Stacks theorem states the whole item.
+
+The five newly logged msearch queries used two distinct LeanFinder phrasings, Loogle, Mathlib grep and LeanSearch. Both semantic lists contained algebraic flatness/cotangent/scalar-extension facts, not strict normalized coefficient systems; grep of CategoryTheory for NormalizedTower|StrictRingSystem|TorAmplitude had no hits. Loogle returned tensor-product independence/nontriviality facts, not this assertion. The inherited item's earlier searches remain untouched. No search was invented; the log records the actual tool queries/results. Interrupted process handles had expired, so I read the durable log before continuing and did not repeat the searches.
+
+Blueprint searches for finite free, scalar extension, normalized constructible and quotient tower scalar, and whole-DAG searches, located the existing tools used below. In particular no quotient-tower associativity or K-flat descent node was duplicated.
+
+## Not duplicates
+
+No new nodes. Reused lem-sfb-local-field-integral-basis, lem-sfb-finite-free-scalar-coordinates, lem-sf-finite-free-derived-scalar-calculus, lem-sp-strict-coefficient-tensor-descent, lem-sfb-successive-derived-quotient-normalization and lem-pur-ideal-quotient-tower-scalar-associator instead of recreating their assertions.
+
+## Review by Q43
+
+I checked delivery-errors B through E against the actual statements of every cited node. Step 1 uses the integral-basis node for existence, the coefficient-sheaf node for that same basis on completed coefficients, the coefficient-tower definition for the completed-limit identification, and the specified-basis lemma for constant quotient sheaves. Reducing coordinates proves the quotient bases and transition compatibility directly. An embedding of the finite fields into a common coefficient algebraic closure may be chosen to apply the coefficient-sheaf statement; the basis formulas then transport back. Unit factors in ramified uniformizer equations do not change the ideals.
+
+Step 2 uses finite-free scalar coordinates on sheaves, with the same basis at every level. The tower-abelian statement says kernels/cokernels are levelwise, so the exactness inference applies to the actual strict systems. The exact-functor derived lemma gives its termwise derived functor, and K-flat change of rings identifies it with the stated derived scalar functor on the ringed system topos. There is no appeal to level evaluations detecting equality of maps.
+
+Step 3 checks the Noetherian hypothesis of the finite-free scalar-calculus node: T is finite type over the spectrum of a field. Its finite-ring and finite-rank hypotheses follow from Step 1. That node explicitly supplies constructibility and the same Tor interval, including its tensor/restriction comparison for arbitrary degree-zero test sheaves. The exact-functor cohomology statement supplies the common cohomological bound. The bounds are preserved for all n and need not be chosen anew.
+
+Step 4 uses successive-derived-quotient-normalization, whose statement includes naturality in ring maps, the explicit multiplication formula and iterated comparisons. The semilinear-derived-sections statement supplies the whole-system scalar construction and actual transition-adjoints. Writing their adjuncts on K-flat representatives identifies the reduction map with the scalar extension of the input normalization map. The normalized-towers definition then supplies exactly the required criterion. I did not infer normalization from levelwise finite-power coordinates alone.
+
+Step 5 uses the K-flat-resolution node, which explicitly promises flat terms. Ringed-pullback-preserves-kflat keeps both K-flatness and flat terms under each coefficient extension; it requires no flatness of the quotient map. The successive-scalar statement gives the two actual balancing isomorphisms. Comparing their quotient transitions on tensor generators gives a strict chain-system comparison; this is sheafified tensor calculus, not a claim that tensor sheaf sections are sectionwise tensors.
+
+Step 6 uses strict-coefficient-tensor-descent for descent and naturality on derived roofs, and reduction-tower-normalized only for its construction of the reduction functor for arbitrary K, not its additional constructibility clause. The ideal-quotient-tower-scalar-associator explicitly states the identity and composition laws on complexes of strict towers. Its ideals are I_n=ell^n R and their extended ideals ell^n S, so its hypotheses hold for these coefficients. This makes coherence an actual whole-system identity. No countable-product exactness, completeness of K or reconstruction theorem is smuggled into this assertion.
+
+I tested identity extensions, zero complexes, the empty scheme, m=n, successive extensions, and ramified extensions (where h_F differs from h_E). The bases remain compatible and all multiplication/insertion-of-one formulas give the identity when appropriate. Arbitrary unbounded K is used only with flat-term K-flat resolutions, not a bounded resolution argument. All six steps are below 2000 characters, and each is an assembly/calculation from the cited generic lemmas; no new hidden auxiliary lemma was isolated or needed. I also traversed the dependencies of the proposed generic tools to ensure none leads back to this item. Off-unit tools are declared in split_report.tool_uses, with their purpose; no maintainer-owned field is edited.

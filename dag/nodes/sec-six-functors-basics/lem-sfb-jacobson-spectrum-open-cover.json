@@ -1,0 +1,90 @@
+{
+ "id": "lem-sfb-jacobson-spectrum-open-cover",
+ "kind": "statement",
+ "title": "The Jacobson property for spectra and open covers",
+ "statement": "(1) Let $R$ be a commutative ring and let $\\operatorname{Spec}R$ be its affine spectrum [def-weil-affine-spectrum]. Then every prime ideal of $R$ is the intersection of the maximal ideals containing it if and only if, for every closed subset $Z\\subseteq\\operatorname{Spec}R$, the points whose singleton is closed in $\\operatorname{Spec}R$ and which lie in $Z$ are dense in $Z$. (2) Let $X$ be a topological space and $(V_i)_{i\\in I}$ an open cover of $X$. The closed points of $X$ are dense in every closed subset of $X$ if and only if, for every $i$, the closed points of the subspace $V_i$ are dense in every closed subset of $V_i$. Here a closed point is a point whose singleton is closed in the indicated space. The index set $I$ can be infinite or empty.",
+ "source": {
+  "document": "literature/stacks-project/properties.tex; literature/stacks-project/topology.tex",
+  "place": "Tag 01P3 (properties-lemma-affine-jacobson); Tag 01P4 (properties-lemma-locally-jacobson), equivalence (1) and (5), whose topological form is Tag 005W (topology-lemma-jacobson-local)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A scheme is Jacobson if and only if the rings of an affine open cover are Jacobson",
+   "results": "8 hits; AlgebraicGeometry.LocallyOfFiniteType.jacobsonSpace; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier; TopologicalSpace.IsOpenCover.jacobsonSpace_iff; PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace; PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType; AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace",
+   "date": "2026-10-23",
+   "verdict": "match: read the spectrum equivalence and open-cover equivalence in the cited Mathlib files"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"jacobsonSpace\"",
+   "results": "12 hits; JacobsonSpace; instJacobsonSpaceOfT1Space; instDiscreteTopologyOfFiniteOfJacobsonSpace; JacobsonSpace.discreteTopology; JacobsonSpace.of_isClosedEmbedding; JacobsonSpace.of_isOpenEmbedding; jacobsonSpace_iff_locallyClosed; JacobsonSpace.closure_inter_closedPoints",
+   "date": "2026-10-23",
+   "verdict": "match: read the spectrum equivalence and open-cover equivalence in the cited Mathlib files"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobson space property is local on an open cover and spectrum is Jacobson if and only if ring is Jacobson",
+   "results": "8 hits; PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace; JacobsonSpace; PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing; TopologicalSpace.IsOpenCover.jacobsonSpace_iff; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing; IsJacobsonRing; JacobsonSpace.mk",
+   "date": "2026-10-23",
+   "verdict": "match: read the spectrum equivalence and open-cover equivalence in the cited Mathlib files"
+  },
+  {
+   "tool": "grep",
+   "query": "isJacobsonRing_iff_jacobsonSpace|IsOpenCover.jacobsonSpace_iff",
+   "results": "5 hits; Mathlib/Topology/JacobsonSpace.lean; Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean; Mathlib/AlgebraicGeometry/Morphisms/Finite.lean; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean",
+   "date": "2026-10-23",
+   "verdict": "match: read the spectrum equivalence and open-cover equivalence in the cited Mathlib files"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace",
+  "file": "Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean",
+  "line": 61,
+  "how": "One declaration per clause: (1) isJacobsonRing_iff_prime_eq, Mathlib/RingTheory/Jacobson/Ring.lean:73-74, turns Mathlib's IsJacobsonRing (every radical ideal equals its Jacobson radical, Ring.lean:60-61) into the stated prime-ideal intersection property, composed with PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean:61-62, whose JacobsonSpace (Mathlib/Topology/JacobsonSpace.lean:72-73, closure (Z ∩ closedPoints X) = Z for closed Z) is the stated closure property. (2) TopologicalSpace.IsOpenCover.jacobsonSpace_iff, Mathlib/Topology/JacobsonSpace.lean:171-172, exactly for arbitrary open covers indexed by any type. Scheme.Spec has underlying PrimeSpectrum, so clause (1) is definitionally the affine-scheme statement."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-scheme-large-algclosed-jacobson",
+  "date": "2026-10-23",
+  "group": "Q18"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Smooth-curve abelian level rigidification. Geometric stabilizer input for the smooth full-level cover; restrict to geometric curves before passing to families. Auxiliary input: Curve pullback is faithful on the canonically polarized Jacobian. Supporting input: Dual abelian varieties and the line-bundle homomorphism. Auxiliary for this split: The rigidified Picard scheme of a smooth projective variety. Supporting lemma: A locally separated group algebraic space over a field is a scheme. Supporting argument: geometric: Tag 0B8F proof, first input 0B8E; schemeness after algebraic closure before descent. Auxiliary input: Tag 0B8E: choose a sufficiently large algebraically closed extension for an arbitrary etale scheme atlas. Supporting input: The Jacobson property for spectra and open covers.",
+   "via": [
+    "lem-sfb-scheme-large-algclosed-jacobson",
+    "lem-sfb-separated-group-space-geometric-scheme",
+    "lem-sfb-locally-separated-group-space-scheme",
+    "lem-sfb-projective-picard-identity-representability",
+    "lem-sfb-abelian-polarization-calculus",
+    "lem-sfb-curve-polarized-jacobian-faithfulness",
+    "lem-sfb-geometric-curve-level-faithfulness",
+    "lem-sfb-smooth-curve-abelian-level-rigidification",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

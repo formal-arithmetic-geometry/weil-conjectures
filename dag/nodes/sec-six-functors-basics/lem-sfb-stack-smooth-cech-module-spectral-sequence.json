@@ -1,0 +1,317 @@
+{
+ "id": "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+ "kind": "statement",
+ "title": "Smooth-atlas Cech spectral sequence for big etale module direct images",
+ "statement": "Work in the universes and small-skeleton convention of [def-weil-size-convention]. For a scheme $S$ [def-pc-scheme] and an algebraic stack $\\mathcal Z/S$ [def-sfb-algebraic-moduli-stack], its big etale site has all objects and arrows of the fibred category in [def-sfb-stack-quasi-coherent-algebra], with coverings lying over jointly surjective etale scheme maps. Its structure sheaf is $\\mathcal O_{\\mathcal Z}(z)=\\Gamma(U,\\mathcal O_U)$ for $z$ over $U$. Use module sheaves [def-weil-sheaf-of-modules-category]. For $h:\\mathcal A\\to\\mathcal Z$, direct image has value $(h_*N)(z)=\\Gamma(\\mathcal A\\times_{\\mathcal Z}U,N|_{\\mathcal A\\times_{\\mathcal Z}U})$; restrictions are induced by base change, and pullback of a module along a stack morphism means precomposition. Higher direct images are computed by injective resolutions in all module sheaves [def-sp-injective-resolutions]. Let $f:\\mathcal X\\to\\mathcal Y$ and $u:\\mathcal U\\to\\mathcal X$ be morphisms of algebraic stacks over $S$. Assume $u$ is representable by algebraic spaces [def-trf-algebraic-space], smooth [def-sbc-smooth-morphisms], and surjective, meaning field-extension-local lifting of every field-valued object. For $p\\geq0$ form $\\mathcal U_p=\\mathcal U\\times_{\\mathcal X}\\cdots\\times_{\\mathcal X}\\mathcal U$ with $p+1$ factors and augmentation $u_p:\\mathcal U_p\\to\\mathcal X$, using [def-sfb-stable-pointed-moduli-groupoids]. For every module sheaf $F$ on $\\mathcal X$, there is a natural first-quadrant cohomological spectral sequence [def-sp-spectral-sequence] in the big etale module category of $\\mathcal Y$ $$E_1^{p,q}=R^q(f\\circ u_p)_*(u_p^*F)\\quad\\Longrightarrow\\quad R^{p+q}f_*F,\\qquad p,q\\geq0.$$ Its first differential is the alternating sum of face restriction maps. The differentials have bidegree $(r,1-r)$; every entry eventually stabilizes to $E_\\infty^{p,q}$. For every $n\\geq0$, the abutment has a finite filtration $R^nf_*F=F^0\\supseteq F^1\\supseteq\\cdots\\supseteq F^{n+1}=0$ with $F^p/F^{p+1}\\cong E_\\infty^{p,n-p}$. There is no quasi-coherence, qcqs, Noetherian or finite-type assumption on $F$ or $f$.",
+ "source": {
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 072G, proposition-smooth-covering-compute-direct-image, (1)(b); finite filtration and stabilization: homology.tex Tag 0132, lemma-first-quadrant-ss."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-pc-scheme",
+  "def-sfb-algebraic-moduli-stack",
+  "def-weil-sheaf-of-modules-category",
+  "def-sp-injective-resolutions",
+  "def-trf-algebraic-space",
+  "def-sbc-smooth-morphisms",
+  "def-sfb-stable-pointed-moduli-groupoids",
+  "def-sp-spectral-sequence",
+  "def-sfb-stack-quasi-coherent-algebra",
+  "def-sfb-fibred-big-etale-modules",
+  "lem-sfb-stack-representable-module-injective-transport",
+  "def-sfb-dm-stack-morphism-properties",
+  "def-sfb-surjective-moduli-map",
+  "def-sfb-spectral-sequence-pages-from-two",
+  "def-sfb-stack-big-etale-module-functors"
+ ],
+ "proof": [
+  {
+   "text": "Since $u$ is representable, its smoothness after every scheme base change is the smooth-chart smoothness of [lem-sfb-stack-smooth-presentation-criterion], and its surjectivity is the field-extension lifting used there. Apply [lem-sfb-smooth-stack-family-etale-object-lifts] to the singleton family $u$. It gives, for every object $x$ of $\\mathcal X$, a jointly surjective etale covering $\\{x_i\\to x\\}$ with $x_i\\cong u(z_i)$. All covering schemes and objects remain in the fixed site universe, including the empty test scheme. This verifies the local-image hypothesis of [lem-sfb-stack-relative-cech-module-augmentation-exact].",
+   "uses": [
+    "lem-sfb-stack-smooth-presentation-criterion",
+    "lem-sfb-smooth-stack-family-etale-object-lifts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E (lemma-cech-to-cohomology-relative-modules), proof via lemma-cech-to-cohomology-relative; Tag 072G (proposition-smooth-covering-compute-direct-image), (1)(b)."
+   }
+  },
+  {
+   "text": "The module category on the chosen small ringed site is Grothendieck abelian by [prop-pur-kinjective-resolutions-exist], hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Successively embed $F$ and the cokernels of the preceding embeddings into injectives, obtaining $0\\to F\\to I^0\\to I^1\\to\\cdots$, and set $I^q=0$ for $q<0$. This is the resolution of [def-sp-injective-resolutions]. Each $u_p$ is representable: it is a composite of iterated $2$-base changes of $u$, and representability by algebraic spaces is preserved by $2$-base change and composition by [lem-sfb-fibred-groupoid-representable-smooth-calculus]. Each $\\mathcal U_p$ is an algebraic stack by [lem-sfb-algebraic-stack-fibre-products]. Thus [lem-sfb-stack-representable-module-injective-transport] makes $u_p^*$ exact and $u_p^*I^q$ injective, and makes $(u_p)_*u_p^*I^q$ injective. In particular $u_p^*I^\\bullet$ resolves $u_p^*F$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions",
+    "lem-sfb-algebraic-stack-fibre-products",
+    "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+    "lem-sfb-stack-representable-module-injective-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E (lemma-cech-to-cohomology-relative-modules), proof via lemma-cech-to-cohomology-relative; Tag 072G (proposition-smooth-covering-compute-direct-image), (1)(b)."
+   }
+  },
+  {
+   "text": "For each $q$, apply [lem-sfb-stack-relative-cech-module-augmentation-exact] to $I^q$, using step 1. Its exact augmented row has every term injective by step 2. This row is split exact: the inclusion of $I^q$ in its degree-zero term has a retraction by injectivity, so the cokernel is an injective direct summand; repeat with its inclusion in the next term. The resulting successive splittings give a contraction. Applying the additive functor $f_*$ preserves those splitting identities, hence yields the exact row\n$$0\\to f_*I^q\\to(fu_0)_*u_0^*I^q\\to(fu_1)_*u_1^*I^q\\to\\cdots.$$\nHere $f_*(u_p)_*=(fu_p)_*$ is the canonical composition identification: both are right adjoint to the equal precomposition functor $(fu_p)^*=u_p^*f^*$ supplied by the transport node.",
+   "uses": [
+    "lem-sfb-stack-relative-cech-module-augmentation-exact",
+    "def-sp-injective-resolutions",
+    "lem-sfb-stack-representable-module-injective-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E (lemma-cech-to-cohomology-relative-modules), proof via lemma-cech-to-cohomology-relative; Tag 072G (proposition-smooth-covering-compute-direct-image), (1)(b)."
+   }
+  },
+  {
+   "text": "Put $C^{p,q}=(fu_p)_*u_p^*I^q$ for $p,q\\geq0$, zero elsewhere. The horizontal differential is the alternating face restriction map $\\delta$ and the vertical differential is induced by $d_I$. The cosimplicial identities pair the two orders of deleting distinct factors with opposite signs, so $\\delta^2=0$; functoriality of restrictions gives $\\delta d_I=d_I\\delta$. These are the double-complex identities of [def-sp-double-complex-total]; its total differential is $\\delta+(-1)^p d_I$. The restriction augmentation $f_*I^\\bullet\\to C^{0,\\bullet}$ is a chain map killed by the horizontal differential. Step 3 verifies the rowwise quasi-isomorphism hypothesis of [lem-sc-first-quadrant-column-augmentation]. It gives a quasi-isomorphism $f_*I^\\bullet\\to\\operatorname{Tot}C$, hence $H^n(\\operatorname{Tot}C)\\cong R^nf_*F$ by the definition of higher direct image on this resolution.",
+   "uses": [
+    "def-sp-double-complex-total",
+    "lem-sc-first-quadrant-column-augmentation",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E (lemma-cech-to-cohomology-relative-modules), proof via lemma-cech-to-cohomology-relative; Tag 072G (proposition-smooth-covering-compute-direct-image), (1)(b)."
+   }
+  },
+  {
+   "text": "Apply the first spectral sequence (I) of [thm-sp-double-complex-spectral-sequences] to $C$. Its first page is\n$$E_1^{p,q}=H^q(C^{p,\\bullet})=R^q(fu_p)_*(u_p^*F),$$\nsince step 2 supplies the injective resolution used by this derived functor. Its $d_1$ is induced by $\\delta$, hence is the alternating face restriction map. The same theorem gives differentials of bidegree $(r,1-r)$, entrywise stabilization and a finite filtration of $H^n(\\operatorname{Tot}C)$, with successive quotients $E_\\infty^{p,n-p}$. Carry the filtration across step 4's cohomology isomorphism: its endpoints are $F^0=R^nf_*F$ and $F^{n+1}=0$, and it has exactly the required quotients. Only $0\\leq p\\leq n$ occurs in total degree $n$; no cohomological dimension bound or geometric finiteness assumption enters.",
+   "uses": [
+    "thm-sp-double-complex-spectral-sequences",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0130 (lemma-ss-double-complex) and 0132 (lemma-first-quadrant-ss)."
+   }
+  },
+  {
+   "text": "For a map $F\\to F'$, [lem-weil-pbc-injective-resolution-lift-exists] supplies a cochain lift $I\\to I'$ commuting with the augmentations. Functoriality of precomposition, direct image and face restriction makes it a map of the augmented double complexes above; [thm-sp-double-complex-spectral-sequences] gives its map on pages and filtrations. Two lifts are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy], applied to the resolution $F[0]\\to I$ and the two maps into $I'$. Applying $(fu_p)_*u_p^*$ to that homotopy gives column homotopies, which commute with all face restrictions. Thus the maps agree on column cohomology, hence on $E_1$ and every later page. The total homotopy is $(-1)^p h$ on column $p$: the horizontal terms cancel and the vertical terms give the difference of the two total maps. It preserves the column filtration. Consequently the induced abutment map is the usual $R^nf_*$ map and is independent of the lift. Applying this also to identity maps between two choices of resolution proves independence of that choice; compositions agree by the same argument. This establishes naturality in module sheaf $F$.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "thm-sp-double-complex-spectral-sequences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/stacks-sheaves.tex",
+    "place": "Tag 072E, injective double-complex construction; derived.tex Tags 013P (lemma-morphisms-lift) and 013S (lemma-morphisms-equal-up-to-homotopy)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-stack-smooth-presentation-criterion",
+  "lem-sfb-smooth-stack-family-etale-object-lifts",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-sfb-algebraic-stack-fibre-products",
+  "lem-sfb-fibred-groupoid-representable-smooth-calculus",
+  "lem-sfb-stack-representable-module-injective-transport",
+  "lem-sfb-stack-relative-cech-module-augmentation-exact",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/stacks-sheaves.tex",
+  "place": "Tag 072G and its cited relative module Cech lemma Tag 072E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A representable smooth surjective cover of an algebraic stack gives a first quadrant Cech spectral sequence of higher direct images for arbitrary structure sheaf modules",
+   "results": "{\"t\": \"2026-10-23T19:58:07Z\", \"tool\": \"leanfinder\", \"query\": \"A representable smooth surjective cover of an algebraic stack gives a first quadrant Cech spectral sequence of higher direct images for arbitrary structure sheaf modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.instIsLocallySurjectiveHomObjForgetTypeYonedaGluedToSheafOfIsLocallySurjectiveZariskiTopologyDescFunctorOpposite\", \"SheafOfModules.Presentation.map\", \"CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.coherentTopology.isLocallySurjective_iff\", \"PresheafOfModules.instIsLocallySurjectiveToSheafify\", \"PresheafOfModules.IsLocallySurjective\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\"], \"digest\": \"8714f03524bb9ae5\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme covers and module presentations do not give the relative smooth-atlas spectral sequence of structure-sheaf modules on big stack sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"SpectralSequence\"",
+   "results": "{\"t\": \"2026-10-23T19:58:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"SpectralSequence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme covers and module presentations do not give the relative smooth-atlas spectral sequence of structure-sheaf modules on big stack sites"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*cover.*spectral|Cech.*spectral|cech.*spectral",
+   "results": "{\"t\": \"2026-10-23T19:58:20Z\", \"tool\": \"grep\", \"query\": \"smooth.*cover.*spectral|Cech.*spectral|cech.*spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme covers and module presentations do not give the relative smooth-atlas spectral sequence of structure-sheaf modules on big stack sites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A representable smooth surjective cover of an algebraic stack gives a first quadrant Cech spectral sequence of higher direct images for arbitrary structure sheaf modules",
+   "results": "{\"t\": \"2026-10-23T19:58:42Z\", \"tool\": \"leansearch\", \"query\": \"A representable smooth surjective cover of an algebraic stack gives a first quadrant Cech spectral sequence of higher direct images for arbitrary structure sheaf modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.cover\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.Cover.Over.over\", \"AlgebraicGeometry.Scheme.instSmallPrecoverage\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.Scheme.Cover.Over.mk.noConfusion\"], \"digest\": \"8c595af212ded8d2\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme covers and module presentations do not give the relative smooth-atlas spectral sequence of structure-sheaf modules on big stack sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech to cohomology spectral sequence for modules on a ringed site from a covering by a smooth atlas of an algebraic stack",
+   "results": "{\"t\": \"2026-10-23T19:59:26Z\", \"tool\": \"leanfinder\", \"query\": \"Cech to cohomology spectral sequence for modules on a ringed site from a covering by a smooth atlas of an algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.QuasicoherentData.I\", \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"smoothSheafRing\"], \"digest\": \"899db22e3965155e\"}",
+   "date": "2026-10-23",
+   "verdict": "no match: scheme covers and module presentations do not give the relative smooth-atlas spectral sequence of structure-sheaf modules on big stack sites"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*cover.*spectral|Cech.*spectral|cech.*spectral",
+   "results": "{\"t\": \"2026-10-23T21:19:29Z\", \"tool\": \"grep\", \"query\": \"smooth.*cover.*spectral|Cech.*spectral|cech.*spectral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned site or module declarations do not state the smooth-stack relative module spectral sequence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative Cech spectral sequence for module higher direct images along a smooth cover of an algebraic stack",
+   "results": "{\"t\": \"2026-10-23T21:19:29Z\", \"tool\": \"leansearch\", \"query\": \"Relative Cech spectral sequence for module higher direct images along a smooth cover of an algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules\", \"SheafOfModules.QuasicoherentData.mk\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.Modules.instHasColimits\", \"SheafOfModules.IsQuasicoherent.recOn\", \"SheafOfModules.QuasicoherentData.recOn\", \"ModuleCat.tildeInModuleCat\", \"smoothSheafCommRing.ι_forgetStalk_hom_apply\"], \"digest\": \"5e63aa94190a3405\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned site or module declarations do not state the smooth-stack relative module spectral sequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Cech\", \"SpectralSequence\"",
+   "results": "{\"t\": \"2026-10-23T21:19:29Z\", \"tool\": \"loogle\", \"query\": \"\\\"Cech\\\", \\\"SpectralSequence\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned site or module declarations do not state the smooth-stack relative module spectral sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth atlas Cech spectral sequence of higher direct images of arbitrary modules on the big etale site of an algebraic stack",
+   "results": "{\"t\": \"2026-10-23T21:19:32Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth atlas Cech spectral sequence of higher direct images of arbitrary modules on the big etale site of an algebraic stack\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map\", \"smoothSheaf.obj_eq\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"smoothSheafCommRing.ι_forgetStalk_hom_assoc\", \"smoothSheafCommRing.ι_forgetStalk_inv_assoc\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"smoothSheafCommRing.forgetStalk\"], \"digest\": \"b61bf9e9c471162b\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned site or module declarations do not state the smooth-stack relative module spectral sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative sheaf valued descent spectral sequence from a smooth presentation computes higher direct images on ringed stack topoi with E1 the derived images from the nerve",
+   "results": "{\"t\": \"2026-10-23T21:20:19Z\", \"tool\": \"leanfinder\", \"query\": \"Relative sheaf valued descent spectral sequence from a smooth presentation computes higher direct images on ringed stack topoi with E1 the derived images from the nerve\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.Presentation.map\", \"SheafOfModules.Presentation.map_π_eq\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.Presentation.mapRelations_mapGenerators_assoc\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\"], \"digest\": \"c4d6d58c17365626\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: returned site or module declarations do not state the smooth-stack relative module spectral sequence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-stack-smooth-descent-higher-image-criterion",
+  "date": "2026-10-24",
+  "group": "NX"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions.",
+   "via": [
+    "lem-sfb-stack-smooth-descent-higher-image-criterion",
+    "lem-sfb-stack-higher-images-flat-comparison",
+    "lem-sfb-stack-flat-scalar-sections",
+    "lem-sfb-adequate-moduli-etale-locality",
+    "lem-sfb-finite-inertia-adequate-coarse-space",
+    "lem-sfb-affine-pgl-finite-stabilizer-quotient",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-stack-smooth-cech-module-spectral-sequence",
+  "worker": "stage1",
+  "summary": "Audited the imported smooth-atlas module spectral-sequence statement against Stacks Tags 072G, 072E, 06X2, 06XE, 06X0 and Homology Tag 0132. Added two strictly smaller statement-only nodes for representable pullback/injective transport and exact relative Cech augmentation, then wrote the double-complex proof with explicit hypotheses and finite filtration.",
+  "blueprint": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Projective geometric quotients of closed stable loci for PGL. Affine-chart proof of the projective PGL quotient: Affine PGL quotients with closed orbits and zero-dimensional stabilizers. Supporting affine-quotient step: Finite inertia gives an adequate coarse moduli space. Supporting input to the finite-inertia coarse-space construction: Passage from invariant global power liftings on the affine rank charts to adequate moduli spaces, then etale descent to the glued map. Flat scalar-section comparison needed in the descent of a power lying in the image of a global algebra map; this does not assert adequate-moduli locality. General cohomological input: preservation of locally quasi-coherent modules and flat comparison maps under qcqs stack direct images. Supporting input: Smooth descent criterion for preservation by higher direct images. Supporting cohomological input: the relative smooth-Cech spectral sequence used in each of the four diagonal reductions. The current latest blueprint has no equivalent independent smooth-Cech stack statement; nearest-ancestor tool reports None for this inherited chain.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic ringed-site or abelian-category resolution/spectral-sequence input used in the stack Cech construction; the unit does not supply this general homological tool."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic ringed-site or abelian-category resolution/spectral-sequence input used in the stack Cech construction; the unit does not supply this general homological tool."
+   },
+   {
+    "node": "lem-sc-first-quadrant-column-augmentation",
+    "why": "Generic ringed-site or abelian-category resolution/spectral-sequence input used in the stack Cech construction; the unit does not supply this general homological tool."
+   },
+   {
+    "node": "thm-sp-double-complex-spectral-sequences",
+    "why": "Generic ringed-site or abelian-category resolution/spectral-sequence input used in the stack Cech construction; the unit does not supply this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic ringed-site or abelian-category resolution/spectral-sequence input used in the stack Cech construction; the unit does not supply this general homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic ringed-site or abelian-category resolution/spectral-sequence input used in the stack Cech construction; the unit does not supply this general homological tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-first-quadrant-column-augmentation",
+  "thm-sp-double-complex-spectral-sequences",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-0c3e8287d",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-0c3e8287d (reviewer sub-agent of L); spot-checked: Read item and both new nodes in full against Stacks stacks-sheaves 072G(1)(b) via 072E, 06XE (exactness of the augmented relative Cech complex), 06X2 + 06WX + 06WY(3) (injective transport) and homology 0130/0132. Statement unchanged vs live (still unsplit there; no parallel split, no re-split note). New nodes: transport = 06WX + 06X2 specialised to representable maps (faithful by 04Y5, source has equalizers by 06WY(3)), true, with representability needed (BG->pt); augmentation = module form of 06XE, true with no faithfulness (checked u=id and the empty cases). Neither restates an item clause; duplicate search over test-fibre-restriction-injectives, trf pullback-acyclic and derived-shriek, sfb cech-pushforward/injective-column models and space-relative-cech found none. Steps 3-6 checked: split-exact rows preserved by additive f_*; column-augmentation lemma hypotheses match its K.X 0 / K.flip conventions; spectral sequence (I) E_1/d_1/stabilization/filtration; naturality homotopy (-1)^p h verified. Two citation repairs (C1/C4): step 1 now cites lem-sfb-stack-smooth-presentation-criterion, which states that for representable u scheme-base-change smoothness equals the smooth-chart smoothness assumed by the etale-lifts node. Step 2 replaced lem-sfb-stack-chartwise-smooth-etale-calculus, which does not state that representability is stable under base change or composition, with lem-sfb-fibred-groupoid-representable-smooth-calculus, which does. proof_deps updated. Batch-5: all listed citations are general definitions or algebraic-stack/space foundations, not trace-formula or Poincare steps; accepted. The added nodes are same-unit, already in the item's closure, and form no cycle. tool_uses: 6 generic homological tools accepted. No SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StackSmoothCechModuleSpectralSequence",
+  "declaration": "CategoryTheory.stack_smooth_cech_module_spectral_sequence",
+  "declarations": [
+   "CategoryTheory.stackCechModuleDerivedTerm",
+   "CategoryTheory.stackCechModuleDerivedComparisonApp",
+   "CategoryTheory.stackCechModuleDerivedComparison_naturality",
+   "CategoryTheory.stackCechModuleDerivedComparison",
+   "CategoryTheory.stackCechModuleDerivedCoface",
+   "CategoryTheory.stack_smooth_cech_module_spectral_sequence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StackSmoothCechModuleSpectralSequence.lean",
+  "statement": "theorem stack_smooth_cech_module_spectral_sequence (hU : IsAlgebraicModuliStack U) (hX : IsAlgebraicModuliStack X) (hY : IsAlgebraicModuliStack Y) (f : BasedFunctor X Y) (a : BasedFunctor U X) (ha : IsRepresentableByAlgebraicSpaces a) (hsmooth : ModuliSpaceTest (@AlgebraicGeometry.Smooth) a) (hsurj : IsSurjectiveModuliMap a) : ∃ (E : CohomologicalSpectralSequenceNat (ModuliBigEtaleModules.{u, v, max (u + 1) v w} X hX.1.1 ⥤ ModuliBigEtaleModules.{u, v, max (u + 1) v w} Y hY.1.1) 1) (e₁ : ∀ p q : ℕ, (E.page 1).X (p, q) ≅ stackCechModuleDerivedTerm.{u, v, w} hU hX hY a f p q), (∀ p q : ℕ, (E.page 1).d (p, q) (p + 1, q) ≫ (e₁ (p + 1) q).hom = (e₁ p q).hom ≫ ∑ j : Fin (p + 2), (-1 : ℤ) ^ (j : ℕ) • stackCechModuleDerivedCoface.{u, v, w} hU hX hY a ha f p q j) ∧ (∀ (p q : ℕ) (r : ℤ) (hr : 1 ≤ r), max (p : ℤ) ((q : ℤ) + 1) < r → Nonempty ((E.page r hr).X (p, q) ≅ (SimplicialSlice.augmentationPagesFromTwo E).pageInfinity (p, q))) ∧ (SimplicialSlice.augmentationPagesFromTwo E).AbutsTo (fun n : ℕ ↦ moduliBigEtaleHigherImage.{u, v, max (u + 1) v w} hX.1.1 hY.1.1 f n)",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "Returned points 1–3 repaired: cite definition owners for surjectivity and page restriction; all module functors are the shared Q22 interface."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2122ba9ad",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Re-delivery of returned b5cde6d8; all 3 return points fixed. (1) H2: IsSurjectiveModuliMap now owned by landed def-sfb-surjective-moduli-map. (2) H2: new existing:true def-sfb-spectral-sequence-pages-from-two binds plain def SimplicialSlice.augmentationPagesFromTwo; signature verbatim vs live SiteAugmentationSpectralSequence l.73; def-only stmt_deps. (3) H4: StackBigEtaleModuleFunctors.lean byte-identical to Q22 2d61; node differs only in lean.by/note; FibredEtaleModules keeps only composition law, counit-mate relative restriction + naturality, tuple nerve level/projection/succAbove face, isFibred, Cech term/coface, algebraicity, all on moduliBigEtale*; transport theorem and item restated on Q22 functors. Mechanical theorem stmt_dep (injective-transport) is genuine: its conclusions are the instances that make compRightDerivedObjIso, hence the canonical E1 comparison and coface in the d1 clause; the theorem module has no defs. Item node vs live: only lean/stmt_deps differ (statement/proof/proof_deps unchanged). Statement clauses (ha/hsmooth/hsurj, E1 = u_p^* then R^q(f u_p)_*, d1 alternating sum over Fin(p+2), stabilization r>max(p,q+1), AbutsTo R^n f_*) faithful to 072G(1)(b)/072E/0132; universes v,w free; edge cases p=0,q=0,n=0, empty/zero covered. Transport record (live lean null) states 06WX/06X2 faithfully; Q02 f5fb was returned, rebind if Q02 lands first. Landing: Q22 2d61 and NQ 4a1f carry the same def-sfb-stack-big-etale-module-functors; if another copy is live first, drop_nodes it (identical module). Advisory: second reading is a self-pass; fibredModuleCechLevel_algebraic is a sorried substantive theorem in a def node. No file changed, no compile."
+ }
+}

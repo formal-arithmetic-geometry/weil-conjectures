@@ -1,0 +1,294 @@
+{
+ "id": "lem-per-prelog-stalk-chart-spreading",
+ "kind": "statement",
+ "title": "Spreading a prelog homomorphism and a stalk chart without Noetherian hypotheses",
+ "statement": "Let $X$ be any scheme, $\\bar x$ a geometric point [def-weil-geometric-point], and $M$ an fs log structure with the arbitrary-scheme chart meaning of [lem-per-associated-log-arbitrary-scheme]. Write $L=M_{\\bar x}$ and $A=\\mathcal O_{X,\\bar x}$. Let $B$ be a finitely generated commutative monoid. Every homomorphism $B\\to L$ is the germ of a homomorphism $B\\to\\Gamma(U,M)$ on a pointed etale neighbourhood $(U,\\bar u)$ of $\\bar x$. Two homomorphisms from $B$ on such a neighbourhood with equal germs agree after a further pointed etale restriction. Any finite collection of these choices and equalities can be realized on one common neighbourhood. If $B$ is integral and a specified homomorphism $c:B\\to L$ induces an isomorphism $B\\oplus_{(\\alpha c)^{-1}(A^\\times)}A^\\times\\xrightarrow{\\sim}L$, then $c$ lifts, after pointed etale restriction, to a chart $B\\to M|_U$. If $B$ is fine saturated, this is an fs chart. A pointed etale neighbourhood means an etale scheme $U\\to X$ together with a geometric point above $\\bar x$ [def-weil-etale-morphism]. No local Noetherian assumption on $X$ or $U$ is made.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "ILO VI 1.1, printed p.69, and VIII 3.3.4, printed p.107 (etale-local charts); Kato (1988), section 2, stalk chart criterion. Agent refinement isolating finite-presentation spreading without a Noetherian hypothesis."
+ },
+ "stmt_deps": [
+  "lem-per-associated-log-arbitrary-scheme",
+  "def-weil-geometric-point",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Work first with any sheaf $F$ of commutative monoids on $X_{\\mathrm{Et}}$, not necessarily a log structure. Use the small-site universe convention [def-weil-size-convention]; pointed objects form a small category as well, since lifts from the fixed geometric point into each object form a set. The stalk is the underlying-set colimit of sections [def-weil-pbc-geometric-stalks], and its index category is filtered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]. Thus every stalk element has a section representative, and equality of two germs becomes equality after a pointed refinement [lem-weil-pbc-filtered-colimit-sets-elementwise]. Repeated common refinements realize any finite list of representatives and equalities together, also refining an initially specified neighbourhood. For two sections on the same object use clause (3) of the elementwise lemma, so both restrict along the same arrow. These assertions apply to several sheaves simultaneously. On an etale neighbourhood $j:U\\to X$, restriction is inverse image on underlying sets [lem-weil-pbc-sets-etale-inverse-image-restriction], and [lem-weil-pbc-sets-etale-inverse-image-stalk-germ] identifies its pointed stalk with the original stalk, compatibly with represented germs. The identifications respect monoid products and identities because these are represented by products and identities of sections.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PQ, lemma-cofinal-etale; definition-stalk and its following paragraph; Tag 03S2, section-extension-by-zero, restriction convention. Elementwise colimits: categories.tex, Tag 04AX, section-directed-colimits."
+   }
+  },
+  {
+   "text": "Choose generators $b_1,\\ldots,b_r$ of $B$. By [lem-trf-fg-commutative-monoid-finite-presentation] there are finitely many pairs $(a_j,d_j)\\in\\mathbf N^r\\times\\mathbf N^r$ presenting all relations among these generators. Given $c:B\\to F_{\\bar x}$, Step 1 represents the finitely many $c(b_i)$ by sections $s_i$ on one pointed neighbourhood. For each relation the two sections $\\prod_i s_i^{(a_j)_i}$ and $\\prod_i s_i^{(d_j)_i}$ have equal germs, since $c$ is a homomorphism. Step 1 makes all these finitely many equalities hold on one further neighbourhood. The universal-property clause of the finite-presentation lemma now gives a homomorphism $\\widetilde c:B\\to F(U)$ with $\\widetilde c(b_i)=s_i$. Its germ is $c$, since these homomorphisms agree on the generators. The presentation result is for arbitrary finitely generated commutative monoids, so no integrality of $B$ or $F(U)$ was used. In particular this proves the first assertion with $F=M$.",
+   "uses": [
+    "lem-trf-fg-commutative-monoid-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "definition-stalk and paragraph after it, together with the existing finite-monoid-presentation input; agent finite-generators/finite-relations argument."
+   }
+  },
+  {
+   "text": "If two homomorphisms $B\\to F(U)$ have the same germ, their values on each of the finitely many $b_i$ have equal germs. Step 1 makes these finitely many pairs equal after one pointed restriction; agreement on generators gives agreement on all of $B$. Given finitely many lifting problems and equalities, perform the construction of Step 2 for each, take a common pointed refinement as in Step 1, then impose all the finitely many requested generator equalities on one further refinement. Restrictions preserve the relations already imposed. This proves the equality and simultaneous-choice assertions, still for any $F$. Empty lists and the trivial monoid require no equations and can be realized on the initial neighbourhood.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Agent elementary finite iteration of Steps 1--2."
+   }
+  },
+  {
+   "text": "Now assume $B$ integral and the stipulated stalk pushout map is an isomorphism. Lift the specified $c$ by Step 2. Put $\\beta=\\alpha\\widetilde c$ and $N=L_U(B,\\beta)$. By [lem-per-integral-chart-logification-thickening], $N$ is a fine integral log structure and its universal property gives $f:N\\to M|_U$ over the identity of $U$, with $f\\iota_B=\\widetilde c$. Its stalk formula identifies $f_{\\bar u}$ with the assumed map $B\\oplus_{(\\alpha c)^{-1}(A^\\times)}A^\\times\\to L$; hence $f_{\\bar u}$ is an isomorphism. By the fs chart meaning in [lem-per-associated-log-arbitrary-scheme], $M|_U$ has an etale covering with charts $q:Q\\to M(V)$ by fine saturated monoids $Q$. The geometric-point lifting assertion [lem-weil-pbc-etale-cover-geometric-point-lift] supplies a pointed member of that covering. Replace $U$ by this member. Restriction of $N$ is the associated log structure of the restricted $\\beta$, by the restriction clause of the logification lemma; all specified germs are retained by Step 1. We now have both the fixed $B$-presentation of $N$ and a fine chart $q$ of $M|_U$.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening",
+    "lem-per-associated-log-arbitrary-scheme",
+    "lem-weil-pbc-etale-cover-geometric-point-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69 (chart meaning), VIII Remark 3.3.4(ii), printed p.107 (etale-local charts), and VI 3.7(a), printed p.75, final chart-extension sentence. Agent associated-log construction of the comparison."
+   }
+  },
+  {
+   "text": "The inverse stalk homomorphism gives $k_0=f_{\\bar u}^{-1}q_{\\bar u}:Q\\to N_{\\bar u}$. Apply the already proved Step 2 to the sheaf of monoids $N$ on $U$ and the finitely generated monoid $Q$, obtaining $k:Q\\to N(V)$ with germ $k_0$. The two homomorphisms $fk,q:Q\\to M(V)$ have the same germ, so Step 3 makes $fk=q$ on a further pointed refinement. Since $f$ respects structure maps, $\\alpha_Nk=\\alpha_Mq$ there. The universal property of [lem-per-integral-chart-logification-thickening], applied to the integral chart monoid $Q$, therefore extends $k$ uniquely to a log homomorphism $g:M|_V\\to N|_V$ over the identity, with $gq=k$. The two log homomorphisms $fg$ and the identity of $M|_V$ agree on $q$, since $fgq=fk=q$; the same uniqueness clause gives $fg=\\mathrm{id}$. On the pointed stalk, $f_{\\bar v}$ is invertible and $f_{\\bar v}g_{\\bar v}=\\mathrm{id}$, so $g_{\\bar v}=f_{\\bar v}^{-1}$.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.7(a), printed p.75, final chart-extension sentence; agent inverse-map construction via the associated-log universal property."
+   }
+  },
+  {
+   "text": "The two maps $gf\\iota_B,\\iota_B:B\\to N(V)$ have equal germs because $g_{\\bar v}f_{\\bar v}=\\mathrm{id}$. Step 3, now for the sheaf $N$ and the finitely generated monoid $B$, makes these maps equal on one further pointed refinement $W$. The universal property of [lem-per-integral-chart-logification-thickening] for the $B$-presentation of $N|_W$ then gives $gf=\\mathrm{id}_{N|_W}$. Thus $f$ and $g$ are inverse log homomorphisms on $W$. By the chart meaning of [lem-per-associated-log-arbitrary-scheme], the restricted lift $\\widetilde c:B\\to M(W)$ is a chart, and its germ is the specified $c$. If $B$ is fine saturated, a chart by this very monoid is an fs chart by that definition. The argument used finite presentations of $B$ and $Q$, not of a unit group or of $N(V)$; every cited geometric and logification statement applies to arbitrary schemes, so no local Noetherian hypothesis has entered.",
+   "uses": [
+    "lem-per-integral-chart-logification-thickening",
+    "lem-per-associated-log-arbitrary-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1, printed p.69, and VI 3.7(a), printed p.75: agent verification of the second inverse identity and of the prescribed chart germ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-per-integral-chart-logification-thickening",
+  "lem-per-associated-log-arbitrary-scheme",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.1, printed p.69; VI 3.7(a), printed p.75, final sentence; VIII Remark 3.3.4, printed p.107. The arbitrary-scheme proof is supplied here from finite presentations and the cited stalk and associated-log results; ILO assumes local Noetherianity by default and is not cited as proving the stronger version."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a finitely generated commutative monoid to a geometric stalk of a sheaf spreads etale locally and a log chart at the stalk is a chart on a neighbourhood",
+   "results": "{\"t\": \"2026-10-24T01:33:34Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a finitely generated commutative monoid to a geometric stalk of a sheaf spreads etale locally and a log chart at the stalk is a chart on a neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Scheme.Hom.instIsLocalHomCarrierStalkCommRingCatPresheafCoeContinuousMapCarrierCarrierHomTopCatBaseRingHomHomStalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomValStalkMap\", \"AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"897fa45067ccce98\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"monoid\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-24T01:33:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"monoid\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"TopCat.Presheaf.submonoidPresheafOfStalk\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\"], \"digest\": \"e769fb5e70606f3f\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chart.*stalk|stalk.*chart|[Ff]inite[Pp]resentation.*[Mm]onoid|[Mm]onoid.*[Ff]inite[Pp]resentation",
+   "results": "{\"t\": \"2026-10-24T01:33:32Z\", \"tool\": \"grep\", \"query\": \"chart.*stalk|stalk.*chart|[Ff]inite[Pp]resentation.*[Mm]onoid|[Mm]onoid.*[Ff]inite[Pp]resentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\"], \"digest\": \"4d10ee3988dc1325\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of commutative monoids lets stalk charts of fine log structures spread to etale neighbourhoods",
+   "results": "{\"t\": \"2026-10-24T01:33:32Z\", \"tool\": \"leansearch\", \"query\": \"Finite presentation of commutative monoids lets stalk charts of fine log structures spread to etale neighbourhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"Algebra.Presentation.ofFinitePresentation\", \"Algebra.IsStandardSmooth.finitePresentation\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"IsLocalization.Away.finitePresentation\", \"RingHom.finitePresentation_localizationPreserves\", \"Algebra.Etale.mk\", \"Localization.fg\"], \"digest\": \"4769587c73db34b1\"}; Read the returned signatures. No returned declaration states the logarithmic assertion. Scheme adjunctions, ordinary stalks, module finite presentation and manifold charts do not give it.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogStructure|LogScheme|prelog|logification",
+   "results": "{\"t\": \"2026-10-24T02:09:01Z\", \"tool\": \"grep\", \"query\": \"LogStructure|LogScheme|prelog|logification\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: ordinary scheme stalks, submonoid presheaves, algebra etaleness and manifold charts do not state the logarithmic chart criterion or its prescribed-germ extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A fine logarithmic structure on an arbitrary scheme has a chart near a geometric point extending any prescribed finitely generated integral stalk chart",
+   "results": "{\"t\": \"2026-10-24T02:09:02Z\", \"tool\": \"leansearch\", \"query\": \"A fine logarithmic structure on an arbitrary scheme has a chart near a geometric point extending any prescribed finitely generated integral stalk chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc\", \"AlgebraicGeometry.Scheme.fromSpecStalk\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.stalkwise\", \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\"], \"digest\": \"2d7b8bc867bdabaa\"}; Read returned signatures: ordinary scheme stalks, submonoid presheaves, algebra etaleness and manifold charts do not state the logarithmic chart criterion or its prescribed-germ extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"monoid\", \"stalk\"",
+   "results": "{\"t\": \"2026-10-24T02:09:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"monoid\\\", \\\"stalk\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"TopCat.Presheaf.submonoidPresheafOfStalk\", \"TopCat.Presheaf.submonoidPresheafOfStalk_obj\"], \"digest\": \"e769fb5e70606f3f\"}; Read returned signatures: ordinary scheme stalks, submonoid presheaves, algebra etaleness and manifold charts do not state the logarithmic chart criterion or its prescribed-germ extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homomorphism from a finitely generated commutative monoid into an etale geometric stalk extends to an etale neighbourhood and a stalk chart is locally a chart",
+   "results": "{\"t\": \"2026-10-24T02:09:05Z\", \"tool\": \"leanfinder\", \"query\": \"A homomorphism from a finitely generated commutative monoid into an etale geometric stalk extends to an etale neighbourhood and a stalk chart is locally a chart\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"RingHom.Etale.ofLocalizationSpan\", \"AlgebraicGeometry.IsEtale\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\"], \"digest\": \"f22dd9937223ad20\"}; Read returned signatures: ordinary scheme stalks, submonoid presheaves, algebra etaleness and manifold charts do not state the logarithmic chart criterion or its prescribed-germ extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "chart.*stalk|stalk.*chart|[Ff]inite[Pp]resentation.*[Mm]onoid|[Mm]onoid.*[Ff]inite[Pp]resentation",
+   "results": "{\"t\": \"2026-10-24T02:09:20Z\", \"tool\": \"grep\", \"query\": \"chart.*stalk|stalk.*chart|[Ff]inite[Pp]resentation.*[Mm]onoid|[Mm]onoid.*[Ff]inite[Pp]resentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"Mathlib/Geometry/Manifold/Sheaf/LocallyRingedSpace.lean\", \"Mathlib/Algebra/Module/FinitePresentation.lean\"], \"digest\": \"4d10ee3988dc1325\"}; Read returned signatures: ordinary scheme stalks, submonoid presheaves, algebra etaleness and manifold charts do not state the logarithmic chart criterion or its prescribed-germ extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogStructure\"",
+   "results": "{\"t\": \"2026-10-24T02:09:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogStructure\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: ordinary scheme stalks, submonoid presheaves, algebra etaleness and manifold charts do not state the logarithmic chart criterion or its prescribed-germ extension.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generators and relations of a commutative monoid allow homomorphisms to spread from a filtered colimit of section monoids",
+   "results": "{\"t\": \"2026-10-24T02:09:23Z\", \"tool\": \"leanfinder\", \"query\": \"Finite generators and relations of a commutative monoid allow homomorphisms to spread from a filtered colimit of section monoids\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonCat.FilteredColimits.M.mk_surjective\", \"MonCat.FilteredColimits.M.mk\", \"MonCat.FilteredColimits.coconeMorphism\", \"SemiRingCat.FilteredColimits.colimitCoconeIsColimit.descMonoidHom_quotMk\", \"SemiRingCat.FilteredColimits.colimitCoconeIsColimit.descMonoidHom\", \"MonCat.FilteredColimits.colimitMulAux\", \"AddMonCat.FilteredColimits.M.mk_surjective\", \"MonCat.FilteredColimits.M\"], \"digest\": \"02657ce53b6e0f46\"}; Read returned signatures: filtered-colimit element constructors do not supply finite monoid presentations or associated-log charts.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-kummer-saturated-pushout-algebra",
+  "date": "2026-10-24",
+  "group": "Q27"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Ancestor proof Step 3, regular-pair purity geometry via absolute equivariant modification, Kummer boundary restriction: ILO VI 1.1, printed p.69, and VIII 3.3.4, printed p.107 (etale-local charts); Kato (1988), section 2, stalk chart criterion. Agent refinement isolating finite-presentation spreading without a Noetherian hypothesis.",
+   "via": [
+    "lem-per-kummer-saturated-pushout-algebra",
+    "lem-per-kummer-boundary-restriction",
+    "lem-per-gabber-absolute-equivariant-modification",
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-per-prelog-stalk-chart-spreading",
+  "worker": "stage1",
+  "summary": "Preserved the statement and supplied the finite-generators/finite-relations spreading proof for arbitrary monoid sheaves, then constructed both inverse chart maps on pointed neighbourhoods. Reused the existing finite-presentation, geometric-stalk and arbitrary-scheme logification nodes; created no nodes. The older locally Noetherian chart-spreading nodes do not apply. No Noetherian assumption on schemes or finite generation of units is used.",
+  "blueprint": "The inherited ancestry reaches lem-per-artin-gabber-affine-curve through the regular-pair-purity/Kummer-boundary branch of its Step 3. This item supplies only the finite chart-spreading input already assigned by that ancestry. The current latest blueprint Step 3 concerns duality and does not explicitly contain this logarithmic lemma. No second-level unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "def-weil-size-convention",
+    "why": "The universe convention makes the pointed index category small; this is a foundational convention, not an alternative unit route."
+   },
+   {
+    "node": "def-weil-pbc-geometric-stalks",
+    "why": "The definition supplies the underlying-set stalk as a colimit; the perverse unit has no separate definition."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Common refinements and equalizers for pointed etale neighbourhoods are generic geometric tools, with no Noetherian hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "why": "Element representatives and eventual equality in a small filtered set colimit are the generic finite-data tool."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-restriction",
+    "why": "Restriction of the underlying set sheaf along an etale map is inverse image, needed for rebasing stalks."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+    "why": "The inverse-image stalk identification preserves specified germs; it applies to arbitrary sheaves of sets."
+   },
+   {
+    "node": "lem-trf-fg-commutative-monoid-finite-presentation",
+    "why": "The finite relations of a finitely generated commutative monoid are the algebraic input; there is no such result in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "why": "An etale chart cover has a pointed member through the given geometric point; this is a generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-size-convention",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-sets-etale-inverse-image-restriction",
+  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-weil-pbc-etale-cover-geometric-point-lift"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-N7-a7a180e93",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-a7a180e93 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps, every cited statement and ILO VI 1.1 (p.69, Noetherian default stated), VI 3.7(a) (p.75, chart spreading used without proof) and VIII 3.3.4 (p.107). The statement is kept verbatim and is true on small cases (trivial or idempotent B, group B, trivial log structure, non-Noetherian X). The added stmt_dep def-weil-pbc-geometric-stalks is correct. Steps 1-3: filtered-colimit elementwise argument plus Rédei finite presentation (lem-trf-fg-commutative-monoid-finite-presentation) spreads homomorphisms and equalities for any monoid sheaf. Steps 4-6: N=L_U(B,beta) via the logification lemma (any scheme, stalk formula, universal property, restriction), a pointed fs chart from the cover-lift lemma, and g built from the Q-chart universal property; fg=id and gf=id are both proved through uniqueness, so this is a genuine two-sided inverse. Step 4 leaves pulling the chart cover back to U implicit; that follows in one line from the restriction clause, so I accept it. No new nodes. lem-trf-finite-monoid-stalk-data-spreading, lem-trf-fine-log-stalk-chart-spreading and lem-trf-charted-log-map-local-right-inverse all assume locally Noetherian X, so they are not duplicates. No cycles. The item is unsplit in live and side-live, so it is not superseded. Tool uses: all 8 accepted as generic. Batch-5 check: Rédei finite presentation and commutative-monoid sheafification are general algebra and constructions, not part of the trace formula or Poincaré duality, so both are accepted. Artin-Gabber route check: the item, its parent and lem-per-integral-chart-logification-thickening are outside the dependency closure of lem-per-artin-gabber-affine-curve. The item reaches the targets through the lem-sfb-field-log-smooth-gabber-modification branch, and the logification node is used only for its generic associated-log construction, so there is no route fault. Maintainer note: the inherited blueprint.from via the uncited lem-per-qbar-middle-tstructure chain is stale ancestry metadata."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrelogStalkChartSpreading",
+  "declaration": "AlgebraicGeometry.EtaleLogStructure.prelog_stalk_chart_spreading",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrelogStalkChartSpreading.lean",
+  "statement": "theorem EtaleLogStructure.prelog_stalk_chart_spreading {X : Scheme.{u}} (M : EtaleLogStructure X) (hM : M.IsFineSaturated) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X) (B : Type u) [CommMonoid B] (hB : Monoid.FG B) : (∀ c : B →* M.toEtalePrelogStructure.stalk t, ∃ (W : X.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (cW : B →* M.monoidSheaf.obj.obj (op W)), (M.toEtalePrelogStructure.germ t W w).hom.comp cW = c) ∧ (∀ (U : X.Etale) (z : (Scheme.pointSmallEtale t).fiber.obj U) (a b : B →* M.monoidSheaf.obj.obj (op U)), (M.toEtalePrelogStructure.germ t U z).hom.comp a = (M.toEtalePrelogStructure.germ t U z).hom.comp b → ∃ (W : X.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (f : W ⟶ U), (Scheme.pointSmallEtale t).fiber.map f w = z ∧ (M.monoidSheaf.obj.map f.op).hom.comp a = (M.monoidSheaf.obj.map f.op).hom.comp b) ∧ (∀ (n m : ℕ) (c : Fin n → B →* M.toEtalePrelogStructure.stalk t) (U : Fin m → X.Etale) (z : ∀ j, (Scheme.pointSmallEtale t).fiber.obj (U j)) (a b : ∀ j, B →* M.monoidSheaf.obj.obj (op (U j))), (∀ j, (M.toEtalePrelogStructure.germ t (U j) (z j)).hom.comp (a j) = (M.toEtalePrelogStructure.germ t (U j) (z j)).hom.comp (b j)) → ∃ (W : X.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (cW : Fin n → B →* M.monoidSheaf.obj.obj (op W)) (f : ∀ j, W ⟶ U j), (∀ i, (M.toEtalePrelogStructure.germ t W w).hom.comp (cW i) = c i) ∧ ∀ j, (Scheme.pointSmallEtale t).fiber.map (f j) w = z j ∧ (M.monoidSheaf.obj.map (f j).op).hom.comp (a j) = (M.monoidSheaf.obj.map (f j).op).hom.comp (b j)) ∧ (Function.Injective (Algebra.GrothendieckGroup.of (M := B)) → ∀ c : B →* M.toEtalePrelogStructure.stalk t, M.IsStalkChart t c → ∃ (W : X.Etale) (w : (Scheme.pointSmallEtale t).fiber.obj W) (cW : B →* M.monoidSheaf.obj.obj (op W)), (M.toEtalePrelogStructure.germ t W w).hom.comp cW = c ∧ M.IsChart W cW)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-030e781ca",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Single sorry theorem EtaleLogStructure.prelog_stalk_chart_spreading, no definitions. Item differs from live only in lean (live lean null); the 4 stmt_dep records are byte-identical to live; the statement is verbatim in the file. Arbitrary Scheme.{u} with no Noetherian hypothesis; fs means hM : IsFineSaturated (etale-local IsFineSaturatedMonoid and IsChart, the dependency's interface); L is pointedEtaleStalk; B is Type u with Monoid.FG. Clause 1: exact germ lift. Clause 2: one pointed restriction arrow for both maps. Clause 3: Fin n lifts and Fin m equalities on separate pointed U j, one common W, empty lists fine. Clause 4: integrality (Injective GrothendieckGroup.of) plus IsStalkChart (surjective coprod with kernel = conGen{(p,1)~(1,a) : alpha c p = a}, i.e. the canonical pushout iso) gives a lift with germ exactly c and IsChart; the fs-chart clause is tautological in this interface. Not a duplicate of the Noetherian exists_affine_chart_of_isStalkChart. Proof imports match proof_deps lean records. Docstrings carry source, blueprint and 6 steps. Advisory: redundant transitive public import PointedEtaleStalk. No file changed, so no compile; the worker's compile was clean."
+ }
+}

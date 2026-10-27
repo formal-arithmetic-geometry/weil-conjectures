@@ -1,0 +1,233 @@
+{
+ "id": "lem-trf-separable-tensor-polynomial-presentation",
+ "kind": "statement",
+ "title": "Finite-support polynomial presentation in a separable tensor square",
+ "statement": "Let $k\\subseteq L$ be a separable algebraic extension of fields [def-pc-field-extension, def-weil-pbc-separable-algebraic-extension]. Put $R=L\\otimes_k L$ [def-weil-pbc-module-tensor-product] with the commutative algebra structure and maps $\\iota(c)=c\\otimes1$ and $\\mu(a\\otimes b)=ab$ of [lem-weil-pbc-algebra-tensor-pushout-universal-property]. For every $x\\in R$ there exist $n\\geq0$, $a_i,b_i\\in L$ for $1\\leq i\\leq n$, a subfield $E=k(b_1,\\ldots,b_n)\\subseteq L$ finite-dimensional as a $k$-vector space [def-weil-vector-space-dimension] and separable over $k$, an element $\\alpha\\in E$ with $E=k(\\alpha)$, and polynomials $g_i\\in k[T]$ [def-weil-polynomial-ring], such that\n$$x=\\sum_{i=1}^n a_i\\otimes b_i,\\qquad b_i=g_i(\\alpha).$$\nLet $P\\in k[T]$ be the minimal polynomial of $\\alpha$, let $\\overline P,\\overline g_i\\in L[T]$ denote the polynomials obtained by including their coefficients into $L$, and put $t=1\\otimes\\alpha$ and $F=\\sum_i a_i\\overline g_i\\in L[T]$. For $G=\\sum_j c_jT^j\\in L[T]$ write $G(t)=\\sum_j\\iota(c_j)t^j\\in R$. Then $P$ and $\\overline P$ are separable [def-pc-separable-polynomial], and\n$$\\overline P(\\alpha)=0,\\qquad \\overline P(t)=0,\\qquad F(t)=x,\\qquad F(\\alpha)=\\mu(x).$$\nThe assertion includes $x=0$ and the choice of an empty sum, for which $E=k$ and $\\alpha=0$ are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite primitive-element calculation and general algebraic-union paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-module-tensor-product], pure tensors generate $R$ as a $k$-module, so write $x=\\sum_{i=1}^n a_i\\otimes b_i$: any $k$-scalar in a linear combination can be absorbed into $a_i$ by bilinearity. Set $E=k(b_1,\\ldots,b_n)\\subseteq L$. Each $b_i$ is algebraic over $k$ by [def-weil-pbc-separable-algebraic-extension]. Thus [lem-weil-pbc-algebraic-generators-finite-extension] makes $E/k$ finite-dimensional. Every element of $E$ is an element of $L$ with the same polynomial evaluation over $k$, hence is algebraic and separable over $k$ by that same definition. This verifies the separability hypothesis for $E/k$ without requiring $L/k$ to be finite.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-separable-algebraic-extension",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite-subextension paragraph; Tag 00CX, lemma-tensor-product, generation in its construction; Fields Tag 09GH, lemma-algebraic-finitely-generated"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-separable-extension-primitive-element] to the finite separable extension $E/k$ to choose $\\alpha\\in E$ with $E=k(\\alpha)$. Since $\\alpha\\in L$ is algebraic over $k$, [lem-weil-pbc-simple-algebraic-extension-power-basis] gives a basis $1,\\alpha,\\ldots,\\alpha^{d-1}$ of $E$, where $d=[E:k]$. For each $i$ write $b_i=\\sum_{j<d} c_{ij}\\alpha^j$ with $c_{ij}\\in k$, and define $g_i(T)=\\sum_{j<d}c_{ij}T^j$. These are the required polynomial representatives, with $b_i=g_i(\\alpha)$.",
+   "uses": [
+    "lem-weil-pbc-finite-separable-extension-primitive-element",
+    "lem-weil-pbc-simple-algebraic-extension-power-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 030N, lemma-primitive-element, moreover clause; Tag 09GN, lemma-degree-minimal-polynomial, with Tag 09G7, example-degree-simple-algebraic-extension"
+   }
+  },
+  {
+   "text": "Let $P$ be the minimal polynomial of $\\alpha$ over $k$. Its defining properties in [def-weil-pbc-separable-algebraic-extension] give $P(\\alpha)=0$ and separability of $P$. By [def-pc-separable-polynomial], choose $U,V\\in k[T]$ with $UP+VP'=1$. Put bars on coefficients using $k\\hookrightarrow L$. Coefficientwise addition and convolution multiplication in [def-weil-polynomial-ring] give $\\overline U\\,\\overline P+\\overline V\\,\\overline{P'}=1$, and the explicit derivative formula gives $\\overline{P'}=(\\overline P)'$: the coefficient $j c_j$ maps to $j\\overline{c_j}$. Thus the same Bezout identity witnesses separability of $\\overline P$ by [def-pc-separable-polynomial]. Also $\\overline P(\\alpha)=P(\\alpha)=0$ in $L$.",
+   "uses": [
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09H1, definition-separable; coefficientwise expansion of its coprimality identity, as used in Algebra Tag 0C2X, lemma-separable-algebraic-diagonal"
+   }
+  },
+  {
+   "text": "Put $t=1\\otimes\\alpha$. The multiplication and the two $k$-algebra maps of [lem-weil-pbc-algebra-tensor-pushout-universal-property] give $t^j=1\\otimes\\alpha^j$ for every $j\\geq0$ (including $t^0=1\\otimes1$). For $g=\\sum_j c_jT^j\\in k[T]$, bilinearity and the balancing relation of [def-weil-pbc-module-tensor-product] therefore give\n$$\\overline g(t)=\\sum_j(c_j\\otimes1)(1\\otimes\\alpha^j)=\\sum_j c_j\\otimes\\alpha^j=1\\otimes\\sum_j c_j\\alpha^j=1\\otimes g(\\alpha).$$\nHere $c_j$ in the first tensor factor denotes its image in $L$; balancing applies because $c_j\\in k$. Taking $g=P$ proves $\\overline P(t)=1\\otimes0=0$, and taking $g=g_i$ gives $\\overline g_i(t)=1\\otimes b_i$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, polynomial-to-tensor calculation; Tag 00CX, lemma-tensor-product, bilinearity relations"
+   }
+  },
+  {
+   "text": "Set $F=\\sum_i a_i\\overline g_i\\in L[T]$. Distribute the finite coefficient sums in the stated definition of evaluation. Step 4 and [lem-weil-pbc-algebra-tensor-pushout-universal-property] give\n$$F(t)=\\sum_i\\iota(a_i)\\overline g_i(t)=\\sum_i(a_i\\otimes1)(1\\otimes b_i)=x,$$\nand direct evaluation in $L$ gives $F(\\alpha)=\\sum_i a_i b_i=\\mu(x)$. The last equality follows by applying the multiplication homomorphism from that cited node to the expansion of $x$. For $x=0$ choose $n=0$, $E=k$ and $\\alpha=0$ instead: $k$ has basis $1$ over itself, each of its elements has linear minimal polynomial $T-c$, and $P=T$ for $\\alpha=0$ by the least-degree characterization in [def-weil-pbc-separable-algebraic-extension]. Hence $E/k$ is finite separable, $E=k(0)$, $P'=1$ witnesses separability by [def-pc-separable-polynomial], and $F=0$, $t=0$ give all four asserted identities.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-separable-algebraic-extension",
+    "def-pc-separable-polynomial"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite primitive-element calculation; empty-sum boundary case expanded directly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-separable-algebraic-extension",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "lem-weil-pbc-finite-separable-extension-primitive-element",
+  "lem-weil-pbc-simple-algebraic-extension-power-basis",
+  "def-pc-separable-polynomial",
+  "def-weil-polynomial-ring",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C2X, lemma-separable-algebraic-diagonal, finite primitive-element calculation and finite-subextension paragraph, expanded using Fields Tags 030N, 09GH and 09GN"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "exists.*(minpoly|primitive)|minpoly.*(aeval|tensor)|tensor.*adjoin",
+   "results": "{\"t\": \"2026-10-22T05:59:23Z\", \"tool\": \"grep\", \"query\": \"exists.*(minpoly|primitive)|minpoly.*(aeval|tensor)|tensor.*adjoin\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/Differential/Basic.lean\", \"Mathlib/FieldTheory/SeparableClosure.lean\", \"Mathlib/FieldTheory/Isaacs.lean\"], \"digest\": \"6723ed4cc30f39fd\"}; Read PrimitiveElement.lean:209, IntermediateField/Adjoin/Basic.lean:396 and :590, and Extension/Generators.lean baseChange: these require the finite stage or generators to be supplied. PurelyInseparable tensor results have different hypotheses. No hit constructs the finite simple stage and its compatible polynomial representatives for an arbitrary tensor in an infinite separable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of the tensor square of a separable algebraic field extension is a polynomial in one right tensor generator with separable minimal polynomial",
+   "results": "{\"t\": \"2026-10-22T05:59:34Z\", \"tool\": \"leanfinder\", \"query\": \"Every element of the tensor square of a separable algebraic field extension is a polynomial in one right tensor generator with separable minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"sum_smul_minpolyDiv_eq_X_pow\", \"Algebra.Generators.baseChange\", \"Algebra.isSeparable_def\", \"Algebra.IsSeparable.isSeparable'\", \"isSeparable_algebraMap\", \"Algebra.IsSeparable.isSeparable\"], \"digest\": \"5fb81708c972fcba\"}; Read PrimitiveElement.lean:209, IntermediateField/Adjoin/Basic.lean:396 and :590, and Extension/Generators.lean baseChange: these require the finite stage or generators to be supplied. PurelyInseparable tensor results have different hypotheses. No hit constructs the finite simple stage and its compatible polynomial representatives for an arbitrary tensor in an infinite separable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, minpoly",
+   "results": "{\"t\": \"2026-10-22T05:59:42Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, minpoly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read PrimitiveElement.lean:209, IntermediateField/Adjoin/Basic.lean:396 and :590, and Extension/Generators.lean baseChange: these require the finite stage or generators to be supplied. PurelyInseparable tensor results have different hypotheses. No hit constructs the finite simple stage and its compatible polynomial representatives for an arbitrary tensor in an infinite separable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite support descent in the tensor square of an infinite separable algebraic extension gives a single primitive element polynomial representative F with multiplication image F(alpha)",
+   "results": "{\"t\": \"2026-10-22T05:59:52Z\", \"tool\": \"leanfinder\", \"query\": \"Finite support descent in the tensor square of an infinite separable algebraic extension gives a single primitive element polynomial representative F with multiplication image F(alpha)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"sum_smul_minpolyDiv_eq_X_pow\", \"Algebra.prod_embeddings_eq_finrank_pow\", \"Algebra.FormallyUnramified.finite_of_free_aux\", \"Algebra.Generators.baseChange\", \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"sum_embeddings_eq_finrank_mul\"], \"digest\": \"2abb3133eb633bab\"}; Read PrimitiveElement.lean:209, IntermediateField/Adjoin/Basic.lean:396 and :590, and Extension/Generators.lean baseChange: these require the finite stage or generators to be supplied. PurelyInseparable tensor results have different hypotheses. No hit constructs the finite simple stage and its compatible polynomial representatives for an arbitrary tensor in an infinite separable extension.",
+   "date": "2026-10-22",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A tensor in L tensor K L has a finite simple separable subextension containing its right factors and a polynomial representative",
+   "results": "{\"t\": \"2026-10-22T06:00:03Z\", \"tool\": \"leansearch\", \"query\": \"A tensor in L tensor K L has a finite simple separable subextension containing its right factors and a polynomial representative\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: \", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read PrimitiveElement.lean:209, IntermediateField/Adjoin/Basic.lean:396 and :590, and Extension/Generators.lean baseChange: these require the finite stage or generators to be supplied. PurelyInseparable tensor results have different hypotheses. No hit constructs the finite simple stage and its compatible polynomial representatives for an arbitrary tensor in an infinite separable extension.",
+   "date": "2026-10-22",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every element of a tensor square of a separable algebraic field extension has a polynomial expression in a single right tensor generator with separable minimal polynomial",
+   "results": "{\"t\": \"2026-10-23T04:26:08Z\", \"tool\": \"leanfinder\", \"query\": \"Every element of a tensor square of a separable algebraic field extension has a polynomial expression in a single right tensor generator with separable minimal polynomial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\", \"sum_smul_minpolyDiv_eq_X_pow\", \"IsPurelyInseparable.inseparable'\", \"IsPurelyInseparable.inseparable\", \"Algebra.prod_embeddings_eq_finrank_pow\", \"Algebra.FormallyUnramified.one_tmul_mul_elem\", \"Algebra.isSeparable_def\"], \"digest\": \"26ef019dc50e38a2\"}; Hits give finite tensor expansions, primitive elements, or purely inseparable tensor powers, not the entire compatible separable polynomial presentation. Existing DAG leaves supply finite generation, primitive elements, and power bases; explicit coefficient and tensor calculations are still required.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, minpoly",
+   "results": "{\"t\": \"2026-10-23T04:27:36Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, minpoly\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Hits give finite tensor expansions, primitive elements, or purely inseparable tensor powers, not the entire compatible separable polynomial presentation. Existing DAG leaves supply finite generation, primitive elements, and power bases; explicit coefficient and tensor calculations are still required.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*(primitive|aeval)|adjoin_simple.*integral|separable_map",
+   "results": "{\"t\": \"2026-10-23T04:27:37Z\", \"tool\": \"grep\", \"query\": \"exists.*(primitive|aeval)|adjoin_simple.*integral|separable_map\", \"sub\": \"FieldTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Spectrum.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"aee9514bc0da49cd\"}; Hits give finite tensor expansions, primitive elements, or purely inseparable tensor powers, not the entire compatible separable polynomial presentation. Existing DAG leaves supply finite generation, primitive elements, and power bases; explicit coefficient and tensor calculations are still required.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite support simple separable polynomial presentation for an element of a tensor product of fields",
+   "results": "{\"t\": \"2026-10-23T04:28:32Z\", \"tool\": \"leansearch\", \"query\": \"Finite support simple separable polynomial presentation for an element of a tensor product of fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.exists_multiset\", \"Polynomial.HasSeparableContraction\", \"IsSeparable\", \"Polynomial.Separable\", \"TensorProduct.exists_finsupp_left\", \"TensorProduct.exists_finsupp_right\", \"MvPolynomial.support\", \"IntermediateField.isSeparable_adjoin_pair_of_isSeparable\"], \"digest\": \"d0e348f56d3c73fc\"}; Hits give finite tensor expansions, primitive elements, or purely inseparable tensor powers, not the entire compatible separable polynomial presentation. Existing DAG leaves supply finite generation, primitive elements, and power bases; explicit coefficient and tensor calculations are still required.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given finitely many elements in an algebraic separable field extension express a tensor as F of one tensor generator using the primitive element theorem",
+   "results": "{\"t\": \"2026-10-23T04:28:40Z\", \"tool\": \"leanfinder\", \"query\": \"Given finitely many elements in an algebraic separable field extension express a tensor as F of one tensor generator using the primitive element theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.primitive_element_inf_aux\", \"Field.exists_primitive_element\", \"Algebra.prod_embeddings_eq_finrank_pow\", \"IsPurelyInseparable.exists_pow_mem_range_tensorProduct\", \"Field.primitive_element_iff_algHom_eq_of_eval\", \"Algebra.FormallyUnramified.elem\", \"Field.primitive_element_iff_algHom_eq_of_eval'\", \"IsPurelyInseparable.exists_pow_pow_mem_range_tensorProduct_of_expChar\"], \"digest\": \"b93578ec83a964da\"}; Hits give finite tensor expansions, primitive elements, or purely inseparable tensor powers, not the entire compatible separable polynomial presentation. Existing DAG leaves supply finite generation, primitive elements, and power bases; explicit coefficient and tensor calculations are still required.",
+   "date": "2026-10-23",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-separable-algebraic-diagonal-localization",
+  "date": "2026-10-22",
+  "group": "Q21"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "the separable-scalar-restriction ingredient in the ancestor proof, namely the passage to a finite separable constants extension; finite-support passage to a simple finite separable constants subextension and polynomial tensor presentation (returned item steps 2-3 and the P(t)=0 computation of step 6)",
+   "via": [
+    "lem-trf-separable-algebraic-diagonal-localization",
+    "lem-trf-geometric-reducedness-separable-scalar-restriction",
+    "lem-trf-geometrically-integral-curve-factorization",
+    "lem-trf-de-jong-geometrically-irreducible-tower",
+    "lem-trf-plurinodal-proper-hypercover",
+    "lem-trf-orgogozo-good-modification",
+    "lem-trf-trait-nearby-base-change",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-trf-separable-tensor-polynomial-presentation",
+  "worker": "stage1",
+  "summary": "Q122: statement unchanged; split the finite support, finite separable stage, primitive element and power-basis representatives, coefficientwise Bezout identity, and tensor evaluation calculations. Reused existing nodes throughout; no new nodes or attachments. Checked zero and empty support.",
+  "blueprint": "Realizes the inherited separable-scalar-restriction ingredient recorded in blueprint.from.place: finite separable constants subextensions and the polynomial tensor calculation supporting lem-trf-separable-algebraic-diagonal-localization; no change to the local-term unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-3e8768e1e",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-3e8768e1e (reviewer sub-agent of L); spot-checked: Proof-only split. Compared with the Q21 snapshot copy, the statement, stmt_deps, source and blueprint are byte-identical. Only proof, proof_deps, proof_origin, mathlib_searches and status changed. There are no new nodes, and proof_deps equals the union of the step uses. The one citer, lem-trf-separable-algebraic-diagonal-localization step 2, takes exactly the stated clauses (P̄ separable, P̄(α)=P̄(t)=0, F(t)=x, F(α)=μ(x)). Source checked: Stacks algebra.tex 0C2X lemma-separable-algebraic-diagonal (finite primitive-element case, then the union of finite subextensions); the fields.tex labels 030N, 09GH and 09GN exist and match. Step 1: pure tensors generate, so x=Σ a_i⊗b_i; the b_i are algebraic, so k(b_i) is finite (generators-finite leaf); E is separable because minimal polynomials over k are the same in E and L. Step 2: the primitive-element leaf (E finite separable) and the power-basis leaf give b_i=g_i(α). Step 3: the Bezout identity UP+VP'=1 maps coefficientwise and the bar commutes with the derivative, so P̄ is separable and P̄(α)=0. Step 4: t^j=1⊗α^j via ι_B; balancing is used only for c∈k; this gives ḡ(t)=1⊗g(α). Step 5: coefficient expansion gives F(t)=x and F(α)=μ(x) with μ=h(id,id); for x=0 the step takes n=0, E=k, α=0, P=T. The elementary flags are justified. All cited nodes are Mathlib leaves, so there are no tool_uses. Edge cases tested: L=k, finite L, k^sep, x=0; a purely inseparable L would fail separability, which is why the hypothesis is needed. Duplicate check: lem-zl-finite-separable-tensor-primitive-presentation (Q150) is a different finite-E isomorphism statement and not a duplicate. No SGA is cited and no changes were made."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.SeparableTensorPolynomialPresentation",
+  "declaration": "Algebra.exists_separable_tensor_polynomial_presentation",
+  "file": "lean/Sheaf/FieldTheory/SeparableTensorPolynomialPresentation.lean",
+  "statement": "theorem exists_separable_tensor_polynomial_presentation (k : Type u) (L : Type v) [Field k] [Field L] [Algebra k L] [Algebra.IsSeparable k L] (x : L ⊗[k] L) : ∃ (n : ℕ) (a b : Fin n → L) (E : IntermediateField k L) (α : E) (g : Fin n → Polynomial k), x = ∑ i, a i ⊗ₜ[k] b i ∧ E = IntermediateField.adjoin k (Set.range b) ∧ FiniteDimensional k E ∧ Algebra.IsSeparable k E ∧ IntermediateField.adjoin k {(α : L)} = E ∧ (∀ i, b i = Polynomial.aeval (α : L) (g i)) ∧ (minpoly k (α : L)).Separable ∧ ((minpoly k (α : L)).map (algebraMap k L)).Separable ∧ Polynomial.eval (α : L) ((minpoly k (α : L)).map (algebraMap k L)) = 0 ∧ Polynomial.eval₂ (Algebra.TensorProduct.includeLeft : L →ₐ[k] L ⊗[k] L).toRingHom (1 ⊗ₜ[k] (α : L)) ((minpoly k (α : L)).map (algebraMap k L)) = 0 ∧ Polynomial.eval₂ (Algebra.TensorProduct.includeLeft : L →ₐ[k] L ⊗[k] L).toRingHom (1 ⊗ₜ[k] (α : L)) (∑ i, Polynomial.C (a i) * (g i).map (algebraMap k L)) = x ∧ Polynomial.eval (α : L) (∑ i, Polynomial.C (a i) * (g i).map (algebraMap k L)) = Algebra.TensorProduct.productMap (AlgHom.id k L) (AlgHom.id k L) x",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c53aed7d7",
+  "group": "Q40",
+  "result": "pass",
+  "note": "The Lean theorem matches every clause of the node: Algebra.IsSeparable hypothesis; E = adjoin of range b, finite-dimensional and separable; E = k(alpha); b_i = aeval alpha (g_i); P and its image in L[T] separable; P-bar(alpha) = 0; P-bar(t) = 0 and F(t) = x via eval2 with includeLeft at 1 tensor alpha; F(alpha) = productMap id id x. lean.statement is verbatim; node otherwise unchanged from side-live. x = 0 / n = 0 case works; no finiteness assumed on L. Only sorry, no definitions, source and blueprint docstrings present, report sections present, dependency records correct. Not recompiled (no file changed). No findings."
+ }
+}

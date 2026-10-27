@@ -1,0 +1,328 @@
+{
+ "id": "lem-sfb-fp-etale-presentation-criterion",
+ "kind": "statement",
+ "title": "Finite presentation detected by an etale scheme presentation",
+ "statement": "Let $T$ be an affine scheme [def-pc-scheme, def-weil-affine-spectrum] and let $Y$ be an algebraic space over $T$ [def-trf-algebraic-space], in the universes of [def-weil-size-convention]. For a morphism of algebraic spaces, finite presentation means quasi-compactness, quasi-separatedness (quasi-compact diagonal), and local finite presentation on etale scheme charts [def-sbc-locally-finite-presentation]. The following are equivalent: (1) $Y\\to T$ is of finite presentation; (2) there is a scheme $W$ over $T$ and a representable surjective etale map $q:W\\to Y$ such that both $W\\to T$ and $R=W\\times_YW\\to T$ are of finite presentation. Here $R$ is a scheme by representability of the diagonal, and scheme finite presentation has the same meaning [def-weil-pbc-scheme-conventions]. When (1) holds, $W$ in (2) can be chosen affine. Etale maps and fibre products are those of [def-weil-etale-morphism] and [lem-trf-space-fibre-products-etale-covers, def-pc-fibre-product].",
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03H6 (lemma-quasi-compact-affine-cover); spaces-morphisms.tex Tags 06G5 (lemma-finite-presentation-quasi-compact-quasi-separated), 073B (lemma-quasi-compact-quasi-separated-permanence), 0410 (lemma-finite-presentation-local, (6)), 084P (lemma-diagonal-morphism-finite-type); spaces-properties.tex Tag 07S4 (lemma-quasi-separated)."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-trf-algebraic-space",
+  "def-weil-size-convention",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-etale-morphism",
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-pc-fibre-product",
+  "def-sfb-proper-curve-moduli"
+ ],
+ "proof": [
+  {
+   "text": "Assume (1). The affine scheme $T$ is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]. Apply [lem-sfb-space-fp-qcqs-source] to $Y\\to T$: $Y$ is quasi-compact and quasi-separated. Thus [lem-sfb-qc-space-affine-etale-atlas] supplies an affine scheme $W$ and a representable surjective etale map $q:W\\to Y$. The morphism $W\\to T$ is locally of finite presentation by [lem-sfb-space-local-properties-chart-test], applied with target chart $T\\to T$ the identity and source chart $W\\to Y$. Both $W,T$ are affine, so [lem-weil-pbc-affine-scheme-qcqs] and [lem-weil-pbc-qcqs-morphism-permanence](1) give quasi-compactness and quasi-separatedness of $W\\to T$. Hence $W\\to T$ is of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-sfb-space-fp-qcqs-source",
+    "lem-sfb-qc-space-affine-etale-atlas",
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H6, lemma-quasi-compact-affine-cover; spaces-morphisms.tex Tags 06G5 and 0410, lemma-finite-presentation-local, with the identity target chart."
+   }
+  },
+  {
+   "text": "Form $R=W\\times_YW$. Representability of the diagonal in [def-trf-algebraic-space] makes $R$ a scheme; [lem-trf-space-fibre-products-etale-covers] makes $p_1:R\\to W$ etale. Since $W,Y$ are quasi-compact and quasi-separated, [lem-sfb-qcqs-space-fibre-product] makes $R$ quasi-compact and quasi-separated. The definition [def-weil-etale-morphism] gives local finite presentation of the scheme map $p_1$. By [lem-sbc-locally-finite-presentation-composition], $R\\xrightarrow{p_1}W\\to T$ is locally of finite presentation. The finiteness conditions for $R\\to T$ follow from [lem-weil-pbc-qcqs-morphism-permanence](1), since $T$ is quasi-separated. Thus $R\\to T$ is of finite presentation. This proves (2) and the affine choice asserted after it.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-sfb-qcqs-space-fibre-product",
+    "def-weil-etale-morphism",
+    "lem-sbc-locally-finite-presentation-composition",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 073B, lemma-quasi-compact-quasi-separated-permanence; scheme composition of local finite presentation, morphisms.tex Tag 01TR."
+   }
+  },
+  {
+   "text": "Conversely assume (2). Because $T$ is affine, [lem-weil-pbc-qcqs-over-affine] applied separately to the finitely presented scheme morphisms $W\\to T$ and $R\\to T$ shows that both schemes are quasi-compact and quasi-separated. In particular [lem-weil-pbc-qcqs-morphism-permanence](1) makes $p_1:R\\to W$ quasi-compact: its source is quasi-compact and its target quasi-separated. Now [lem-sfb-space-qs-atlas-criterion] applies to $q:W\\to Y$ and gives quasi-separatedness of $Y$. This argument uses the actual scheme $R=W\\times_YW$ and its projection; it does not infer quasi-compactness of that projection merely from its being etale.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-sfb-space-qs-atlas-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S4, lemma-quasi-separated, after checking its quasi-compact projection hypothesis by scheme permanence."
+   }
+  },
+  {
+   "text": "The point map $|q|:|W|\\to|Y|$ is continuous by [lem-a1-space-affine-etale-cover] and surjective by representable surjectivity [def-trf-algebraic-space]: after pulling back to a field-valued point, the nonempty scheme fibre has a point with a residue field extension. Pull an open cover of $|Y|$ back to $|W|$; quasi-compactness of $W$ gives finitely many members covering $W$, and surjectivity says those same members cover $Y$. Thus $Y$ is quasi-compact.",
+   "uses": [
+    "lem-a1-space-affine-etale-cover",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03E4, lemma-quasi-compact-space, elementary continuous-surjective-image argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-space-local-properties-chart-test] to $Y\\to T$ with the given source chart $W\\to Y$ and the identity target chart $T\\to T$. Since $W\\to T$ is locally of finite presentation, so is $Y\\to T$. Finally [lem-sfb-space-qcqs-permanence] applied to $Y\\to T$ gives quasi-compactness and quasi-separatedness of that morphism from the absolute quasi-compactness and quasi-separatedness just established and the quasi-separatedness of the affine scheme $T$. These are exactly the three conditions in (1).",
+   "uses": [
+    "lem-sfb-space-local-properties-chart-test",
+    "lem-sfb-space-qcqs-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 0410, lemma-finite-presentation-local, part (6), and Tag 073B, lemma-quasi-compact-quasi-separated-permanence, part (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-sfb-space-fp-qcqs-source",
+  "lem-sfb-qc-space-affine-etale-atlas",
+  "lem-sfb-space-local-properties-chart-test",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-sfb-qcqs-space-fibre-product",
+  "def-weil-etale-morphism",
+  "lem-sbc-locally-finite-presentation-composition",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-sfb-space-qs-atlas-criterion",
+  "lem-a1-space-affine-etale-cover",
+  "lem-sfb-space-qcqs-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-limits.tex",
+  "place": "Tag 07SK, lemma-descend-finite-presentation, first paragraph; finiteness checks expanded using spaces-properties.tex Tags 03H6, 07S4 and spaces-morphisms.tex Tags 06G5, 073B, 0410."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over an affine scheme is finitely presented if and only if it has an etale scheme presentation with both atlas and relation finitely presented over the base, and the atlas can be chosen affine",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite, AlgebraicGeometry.LocallyOfFinitePresentation, Algebra.Etale.finitePresentation, AlgebraicGeometry.locallyOfFinitePresentation_iff, AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset, AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite presentation and quasi separatedness of an algebraic space can be checked on a quasi compact etale presentation U and U fiber product U",
+   "results": "[leanfinder] OK 8 hit(s); hits: AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.quasiSeparated_over_affine_iff, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparated_iff_quasiSeparatedSpace, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.quasiCompact_affineProperty_iff_quasiSeparatedSpace",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"IsEtale\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of an algebraic space is equivalent to finite presentation of an etale presentation and its relation",
+   "results": "[leansearch] OK 8 hit(s); hits: Algebra.Etale.finitePresentation, RingHom.FinitePresentation, AlgHom.FinitePresentation, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation, Module.FinitePresentation.iff_finitePresentation_of_finite, Algebra.FinitePresentation.of_finiteType, Algebra.FiniteType.of_finitePresentation",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern schemes or ring algebras, not algebraic spaces; the algebraic-space grep and Loogle queries have no hits"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraic space|AlgebraicSpace",
+   "results": {
+    "t": "2026-10-23T09:48:17Z",
+    "tool": "grep",
+    "query": "algebraic space|AlgebraicSpace",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+   "results": {
+    "t": "2026-10-23T09:48:17Z",
+    "tool": "loogle",
+    "query": "\"AlgebraicSpace\", \"QuasiCompact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite presentation of an algebraic space is equivalent to finite presentation of an etale presentation and its relation",
+   "results": {
+    "t": "2026-10-23T09:57:04Z",
+    "tool": "leansearch",
+    "query": "Finite presentation of an algebraic space is equivalent to finite presentation of an etale presentation and its relation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.Etale.finitePresentation",
+     "RingHom.FinitePresentation",
+     "AlgHom.FinitePresentation",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+     "AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation",
+     "Module.FinitePresentation.iff_finitePresentation_of_finite",
+     "Algebra.FinitePresentation.of_finiteType",
+     "Algebra.FiniteType.of_finitePresentation"
+    ],
+    "digest": "bbf819eac640682d"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebraic space over an affine scheme is finitely presented if and only if it has an etale scheme presentation with both atlas and relation finitely presented over the base, and the atlas can be chosen affine",
+   "results": {
+    "t": "2026-10-23T09:57:09Z",
+    "tool": "leanfinder",
+    "query": "An algebraic space over an affine scheme is finitely presented if and only if it has an etale scheme presentation with both atlas and relation finitely presented over the base, and the atlas can be chosen affine",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite",
+     "AlgebraicGeometry.LocallyOfFinitePresentation",
+     "Algebra.Etale.finitePresentation",
+     "AlgebraicGeometry.locallyOfFinitePresentation_iff",
+     "AlgebraicGeometry.instHasRingHomPropertyLocallyOfFinitePresentationFinitePresentation",
+     "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_of_affine_subset",
+     "AlgebraicGeometry.LocallyOfFinitePresentation.finitePresentation_appLE",
+     "AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth"
+    ],
+    "digest": "6a5dcd35be141d61"
+   },
+   "date": "2026-10-23",
+   "verdict": "no match: all semantic hits concern schemes or topological spaces; none states this result for algebraic spaces. Loogle and the whole-Mathlib algebraic-space grep have zero hits."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-fp-space-limit-category",
+  "date": "2026-10-22",
+  "group": "NE"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration reduction through ILO X Lemma 2.2: dimension induction in the marked plurinodal input; one relative curve, de Jong Theorem 2.4, Lemmas 5.5 and 5.7, before induction on its base; replacement prerequisite: de Jong Lemma 3.7, printed p.608, including the prime-to-characteristic level-structure choice which makes the base alteration generically etale; §3.6 supplies the smooth genus-at-least-two input. This is stable pointed-curve extension, not stable modification of a specified target pair. Moduli prerequisite: projective compactification with prime-to-characteristic level structure and its universal stable family, used before taking the closure of a generic lift. Projectivity of the unpointed stable coarse moduli scheme. Supporting input: Algebraicity and smoothness of the stack of all nodal curves. Supporting input: Tag 0D55 (lemma-curves-limits). Input to Tag 0D55: Tag 07SK (lemma-descend-finite-presentation), specialized to affine scheme bases; base change of finite presentation: spaces-morphisms.tex, Tag 03XR (lemma-base-change-finite-presentation). Supporting finite-presentation criterion for the etale scheme presentation in Tag 07SK, first paragraph, including its omitted finiteness checks and the finiteness of the descended quotient.",
+   "via": [
+    "lem-sfb-fp-space-limit-category",
+    "lem-sfb-curve-limit-preservation",
+    "lem-sfb-nodal-curve-stack-smooth",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-23",
+  "item": "lem-sfb-fp-etale-presentation-criterion",
+  "worker": "stage1",
+  "summary": "Proved both implications with an affine atlas in the forward direction. Reused the existing atlas, chart-locality, scheme qcqs and local-finite-presentation-composition nodes. Added general algebraic-space qcqs permanence, qcqs source over a qcqs base, and the quasi-separated atlas criterion. Checked all projection hypotheses and empty cases. No statement change. Reused newly landed lem-sfb-qcqs-space-fibre-product and restricted the new permanence node to Tag 073B(1)-(2).",
+  "blueprint": "The existing from.place identifies the Tag 07SK prerequisite below the recorded alteration/moduli chain for det-thm-sf-ctf-stability-direct-images, paragraph (3). Read the newest blueprint through literature/blueprint/latest. Steps 1-2 justify the atlas and relation finiteness in its supporting limit argument; steps 3-5 justify finiteness of the quotient. tools/blueprint_refs.py ancestor returns None because ancestry crosses lem-sfb-admissible-direct-image, a node created for a Lean module; retain the truthful null and the full inherited via list.",
+  "tool_uses": [
+   {
+    "node": "def-trf-algebraic-space",
+    "why": "Generic algebraic-space or scheme theorem used only as its stated chart, topology or finiteness tool; the current unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space or scheme theorem used only as its stated chart, topology or finiteness tool; the current unit has no replacement for this general input."
+   },
+   {
+    "node": "lem-a1-space-affine-etale-cover",
+    "why": "Generic algebraic-space or scheme theorem used only as its stated chart, topology or finiteness tool; the current unit has no replacement for this general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-algebraic-space",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-a1-space-affine-etale-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-23",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-7401d1020",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-7401d1020 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited node's statement. Sources checked: Stacks 07SK (first paragraph, 'details omitted'), 03H6, 06G5, 073B(1)-(2) and 07S4. The new nodes match 06G5, 073B(1)-(2) and 07S4 hypothesis by hypothesis. The statement is unchanged and identical to live, and live still has the item unsplit with no re-split note, so nothing supersedes this delivery. Step checks: (1) T affine so qcqs; fp-qcqs-source makes Y qcqs; the affine atlas exists; the chart test with V=T and U=W gives W->T lfp; scheme permanence gives qc and qs. (2) R is a scheme because q is representable; p1 is etale; R is qcqs by the landed qcqs-space-fibre-product with W,Y,W all qcqs; lfp by composition; qc and qs over T. (3) W and R are qcqs over affine T, so p1 is qc, and the 07S4 node gives Y quasi-separated. (4) Elementary: |q| is a continuous surjection (field-point fibre argument written out), so Y is qc. (5) The chart test gives lfp and qcqs-permanence gives qc and qs; no hypothesis added and no conclusion weakened. Duplicates: rg -L over the DAG for 073B/06G5/07S4 and about 90 algebraic-space nodes mentioning quasi-separatedness, plus blueprint_refs search, found no existing node stating any new node; none restates an item clause; no cycle. Edge cases: empty Y; A^inf with doubled origin (the 07S4 projection hypothesis correctly fails); a non-quasi-separated target is excluded. Batch 5: def-trf-algebraic-space, def-a1-space-point-topology, lem-trf-space-fibre-products-etale-covers, lem-sfb-qc-space-affine-etale-atlas and lem-a1-space-affine-etale-cover are general algebraic-space definitions and foundations reaching sec-trace-formula only through the definition. None is part of the trace-formula or Poincare-duality statements or proofs, so all are accepted. Accepted tool uses: lem-trf-space-fibre-products-etale-covers and lem-a1-space-affine-etale-cover. No SGA is cited. Two cosmetic points left unfixed: lean_audit is null on the new nodes, and the permanence node's place text mentions R->W. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SpaceFpEtalePresentationCriterion",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.fp_iff_etale_scheme_presentation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.fp_iff_etale_scheme_presentation",
+   "AlgebraicGeometry.AlgebraicSpace.exists_affine_fp_etale_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpaceFpEtalePresentationCriterion.lean",
+  "statement": "theorem fp_iff_etale_scheme_presentation {S : Scheme.{u}} (T : Over S) [IsAffine T.left] (Y : AlgebraicSpace S) (f : Y.obj.obj ⟶ yoneda.obj T) : (MapIsQuasiCompact f ∧ MapIsQuasiCompact (pullback.diagonal f) ∧ MapToSchemeIsLocally (@LocallyOfFinitePresentation) Y T f) ↔ ∃ (W : Over S) (q : yoneda.obj W ⟶ Y.obj.obj), IsEtale q ∧ IsSurjective q ∧ (LocallyOfFinitePresentation (yoneda.preimage (q ≫ f)).left ∧ QuasiCompact (yoneda.preimage (q ≫ f)).left ∧ QuasiSeparated (yoneda.preimage (q ≫ f)).left) ∧ ∃ (R : Over S) (p₁ p₂ : R ⟶ W), IsPullback (yoneda.map p₁) (yoneda.map p₂) q q ∧ LocallyOfFinitePresentation (p₁.left ≫ (yoneda.preimage (q ≫ f)).left) ∧ QuasiCompact (p₁.left ≫ (yoneda.preimage (q ≫ f)).left) ∧ QuasiSeparated (p₁.left ≫ (yoneda.preimage (q ≫ f)).left)",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-24",
+  "existing": false,
+  "note": "The first declaration is the presentation equivalence; the second states the affine choice under finite presentation. Reuses MapIsQuasiCompact and MapToSchemeIsLocally from the landed def-sfb-proper-curve-moduli, added to stmt_deps. The actual relation scheme is specified by its Yoneda pullback square; its map to T is induced by the first projection. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a48ca0509",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Read item node, stmt_deps (def-trf-algebraic-space IsEtale/IsSurjective = IsRepresentableWith, def-sfb-proper-curve-moduli MapIsQuasiCompact/MapToSchemeIsLocally, scheme conventions 01TP) and the module. Condition (1) = qc ∧ qc diagonal ∧ lfp on étale charts, same encoding as landed IsProperCurveFamily. (2) gives representable surjective étale q, W→T canonical via yoneda.preimage with LFP∧QC∧QS, R as the actual W×_YW via IsPullback with fp of p₁≫(W→T). Affine choice is a separate theorem with hypothesis (1). The arbitrary ambient S generalizes the node (S=T recovers it) and adds no assumption. lean.statement is verbatim, there are no definitions, proofs are by sorry, source/blueprint docstrings and the 5-step proof docstring are present, and both report sections are present. Edge cases (empty Y/T/W, single universe u) are fine. Added stmt_dep def-sfb-proper-curve-moduli is the landed owner of the notions used. Stage-3 note: the chart-test node uses MapIsLocally, not MapToSchemeIsLocally (a proof matter). No compile needed (no change)."
+ }
+}

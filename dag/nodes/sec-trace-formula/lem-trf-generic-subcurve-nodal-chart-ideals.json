@@ -1,0 +1,334 @@
+{
+ "id": "lem-trf-generic-subcurve-nodal-chart-ideals",
+ "kind": "statement",
+ "title": "Contracted generic subcurve ideals in an etale smooth or nodal chart",
+ "statement": "Let $A$ be a normal integral domain [def-weil-pbc-normal-ring], let $K=\\operatorname{Frac}A$ be its fraction field [def-weil-field], and let $E$ be either $A[t_1,\\ldots,t_n]$, $n\\geq0$, or $A[u,v]/(uv-a)$ for $a\\in A$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-algebra-hom-quotient]. Let $C$ be a commutative $E$-algebra such that $\\operatorname{Spec}C\\to\\operatorname{Spec}E$ is etale [def-weil-etale-morphism, def-weil-affine-spectrum]. Put $C_K=C\\otimes_AK$, equivalently the localization of $C$ at the images of $A\\setminus\\{0\\}$ [lem-weil-pbc-localization-base-change]. Choose any subset $T$ of the finite set of irreducible components of $\\operatorname{Spec}C_K$ [def-weil-irreducible-components]. Let $I_K$ be the intersection of the minimal prime ideals corresponding to $T$, and $J_K$ the intersection corresponding to its complement; an empty intersection is the unit ideal. Define $I=\\{c\\in C:c\\otimes1\\in I_K\\}$ and $J=\\{c\\in C:c\\otimes1\\in J_K\\}$. For every prime ideal $\\mathfrak q\\subset C$ there is $f\\in C\\setminus\\mathfrak q$ such that the ordered pair $(IC_f,JC_f)$ is $(0,C_f)$ or $(C_f,0)$, or, only in the nodal case with $a=0$, $(uC_f,vC_f)$ or $(vC_f,uC_f)$ [def-weil-ring-localization-away]. Here $u,v$ denote the images of the coordinates. In particular $I$ and $J$ are locally finitely generated radical ideals. No properness, valuation-ring, Noetherian-ring, or smoothness-of-the-selected-subcurve hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Agent relative ideal calculation for Tag 0CBY (lemma-etale-local-structure-nodal-family), with Tag 0E38 (lemma-closed-subscheme-nodal-curve) as the fibrewise analogue. Normal-domain and etale-component algebra: algebra.tex Tag 030C (lemma-characterize-reduced-ring-normal) and Tag 033C (lemma-normal-goes-up). These sources supply ingredients, not the relative assertion verbatim."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-normal-ring",
+  "def-weil-field",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-etale-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-irreducible-components",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "First consider the polynomial chart, or the nodal chart with $a\\ne0$. For the polynomial chart, induction on $n$ using [lem-weil-pbc-polynomial-ring-normal-domain], starting with $A$, shows that $E$ is a normal domain. For the nodal chart apply the last assertion of [lem-sfb-binomial-laurent-normal-form] to $R=A$ and the given nonzero $a$: it states exactly that $E$ is a normal domain, without a Noetherian hypothesis.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-normal-domain",
+    "lem-sfb-binomial-laurent-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030A (lemma-polynomial-domain-normal); binomial case uses the separately stated Laurent-intersection tool, supported by Tags 030A and 00GY (lemma-localize-normal-domain)."
+   }
+  },
+  {
+   "text": "In these normal-domain cases, [lem-trf-etale-normal-domain-finite-factors] gives $C\\cong\\prod_{i=1}^r B_i$, each $B_i$ a normal domain. Every nonzero $s\\in A$ is nonzero in $E$: for a polynomial chart this is coefficientwise, and for a nodal chart it follows from the basis assertion of [lem-sfb-binomial-laurent-normal-form]. The $E$-module $C$ is flat by [lem-weil-pbc-etale-algebra-flat]. Tensor $0\\to E\\xrightarrow{s}E$ with $C$ using [lem-weil-pbc-flat-tensor-exact]; thus multiplication by $s$ is injective on $C$ and on each product factor. In particular no nonzero $s\\in A$ becomes zero in any $B_i$.",
+   "uses": [
+    "lem-trf-etale-normal-domain-finite-factors",
+    "lem-sfb-binomial-laurent-normal-form",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030C (lemma-characterize-reduced-ring-normal), via the cited finite-factor consequence; Tags 00U2 (lemma-etale), (6), and 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "Put $S=A\\setminus\\{0\\}$. Localization commutes with a finite product: use a common denominator, the product of the finitely many denominators, to represent any tuple of fractions. Consequently $C_K=\\prod_i S^{-1}B_i$, and every factor is a nonzero domain. Its factor kernels are exactly the minimal primes: a prime contains all but one of the orthogonal factor idempotents, and the zero prime of that domain lies below its remaining prime. Their contractions in $C$ are the original factor kernels, since $B_i\\to S^{-1}B_i$ is injective. Thus $I$ and $J$ are the complementary product ideals obtained by forcing respectively the selected and unselected coordinates to zero. For a prime $\\mathfrak q$ exactly one factor idempotent $e_i$ is outside $\\mathfrak q$ (their sum is $1$ and their pairwise products vanish). Taking $f=e_i$ leaves only $B_i$, so $(IC_f,JC_f)$ is $(0,C_f)$ or $(C_f,0)$. For $C=0$ there are no primes and this assertion is vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite-product and fraction calculation, assembling the Tag 030C consequence of step 2; localization is the one specified in the statement."
+   }
+  },
+  {
+   "text": "It remains to treat $a=0$. Put $D=C/uC$ and $F=C/vC$. By [lem-weil-pbc-etale-quotient-base-change], these are etale algebras over $E/(u)=A[v]$ and $E/(v)=A[u]$, respectively. Those two polynomial rings are normal domains by [lem-weil-pbc-polynomial-ring-normal-domain]. Apply [lem-trf-etale-normal-domain-finite-factors] to obtain finite products $D=\\prod_i D_i$ and $F=\\prod_j F_j$ of normal domains (either product may be empty). By [lem-weil-pbc-etale-algebra-flat] and [lem-weil-pbc-flat-tensor-exact], multiplication by every nonzero $b\\in A[v]$ is injective on $D$ and hence on each $D_i$; likewise every nonzero $b\\in A[u]$ acts injectively on each $F_j$. In particular each factor is $A$-torsion-free, the image of $v$ in every $D_i$ is nonzero, and that of $u$ in every $F_j$ is nonzero.",
+   "uses": [
+    "lem-weil-pbc-etale-quotient-base-change",
+    "lem-weil-pbc-polynomial-ring-normal-domain",
+    "lem-trf-etale-normal-domain-finite-factors",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U2 (lemma-etale), (3) and (6), 030A (lemma-polynomial-domain-normal), 030C (lemma-characterize-reduced-ring-normal), and 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "The map $E\\to E/(u)\\oplus E/(v)$ is injective. Indeed the basis $1,u^i,v^j$ of [lem-sfb-binomial-laurent-normal-form] shows that an element killed by both quotients has every coefficient zero. Tensor this injection over $E$ with the flat module $C$, using [lem-weil-pbc-etale-algebra-flat] and [lem-weil-pbc-flat-tensor-exact]. The resulting map is $C\\to D\\oplus F$, $c\\mapsto(c\\bmod u,c\\bmod v)$: the identifications send $\\bar e\\otimes c$ to $ec$ modulo the relevant ideal. Thus it is injective, equivalently $uC\\cap vC=0$.",
+   "uses": [
+    "lem-sfb-binomial-laurent-normal-form",
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent basis calculation for the split model of curves.tex Tag 0CBY (lemma-etale-local-structure-nodal-family); exactness supplied by algebra.tex Tag 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "Let $P_i=\\ker(C\\to D_i)$ and $Q_j=\\ker(C\\to F_j)$. These are prime ideals. Every prime of $C$ contains $u$ or $v$ because $uv=0$, and hence contains some $P_i$ or $Q_j$, by the finite-product argument of step 3 in its quotient. Distinct $P_i$ are incomparable: the factor idempotents in $D$ distinguish their kernels and lift to $C$; the same holds for the $Q_j$. Also $u\\in P_i$, $v\\notin P_i$, while $v\\in Q_j$, $u\\notin Q_j$, by step 4. Thus no $P_i$ contains a $Q_j$ or conversely. It follows directly that these are precisely the minimal primes of $C$. Their intersection is zero by step 5 and the two product decompositions. Localizing at $S=A\\setminus\\{0\\}$ preserves each kernel and its contraction, because each domain quotient $D_i,F_j$ is $A$-torsion-free: $sc\\in P_i$ implies $c\\in P_i$, and similarly for $Q_j$. The same prime argument in $C_K$, with its two quotient products $D_K,F_K$, shows that their extensions are precisely its minimal primes. Thus $T$ selects a subset of this finite list, and $I,J$ are exactly the intersections of the selected and complementary kernels in $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent prime-ideal and fraction argument for the split chart; the domain factors and injectivity used here were established in steps 4--5, not inferred merely from the definition of normality."
+   }
+  },
+  {
+   "text": "Fix $\\mathfrak q\\in\\operatorname{Spec}C$. If $u\\notin\\mathfrak q$, put $g=u$, so $D_g=0$. Otherwise $\\mathfrak q/uC$ is a prime of $D$ and contains all but one of its factor idempotents. Lift the remaining idempotent to $g\\in C$; it is outside $\\mathfrak q$ and $D_g$ has only that one domain factor localized. Define $h$ in the same way for $F$: take $h=v$ if $v\\notin\\mathfrak q$, and otherwise lift its unique factor idempotent outside $\\mathfrak q/vC$. Set $f=gh\\notin\\mathfrak q$. Then $D_f$ and $F_f$ are each either zero or a localization of a single domain. At least one is nonzero: the quotient corresponding to a coordinate in $\\mathfrak q$ retains the prime induced by $\\mathfrak q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent explicit idempotent-neighbourhood construction in the two finite products; finite-product decomposition is supplied in step 4."
+   }
+  },
+  {
+   "text": "Localization of a finite intersection commutes with the intersection: if $c/f^m$ lies in every localized ideal, choose for each ideal a power of $f$ carrying $c$ into it and take the largest power. The same fraction test shows that kernels localize. Therefore step 5 gives $uC_f\\cap vC_f=0$, and step 6 computes $IC_f,JC_f$ by intersecting the surviving selected and complementary kernels. If both $D_f$ and $F_f$ are nonzero, the only surviving kernels are $uC_f$ and $vC_f$. If $T$ selects both, their intersection is zero and the complementary empty intersection is $C_f$; if it selects neither the pair is reversed. If it selects only the $D_f$ kernel the pair is $(uC_f,vC_f)$; if only the $F_f$ kernel it is $(vC_f,uC_f)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite-denominator calculation; compare algebra.tex Tag 00CS (proposition-localization-exact). No Noetherianity or finite generation of the original contracted ideals is used to shrink."
+   }
+  },
+  {
+   "text": "If $D_f=0$, then $uC_f=C_f$ and $F_f=C_f$, by the injection $C_f\\to D_f\\oplus F_f$ and surjectivity to $F_f$. The latter ring is a nonzero domain, so its sole surviving minimal-prime kernel is zero; selecting it or not gives $(0,C_f)$ or $(C_f,0)$. The case $F_f=0$ is identical with $u,v$ exchanged. This completes the asserted list in the $a=0$ case. Finally $I,J$ are radical globally: if $c^m$ belongs to a contracted intersection of prime ideals of $C_K$, primality puts $c\\otimes1$ in every one of them. On each constructed $D(f)$ the ideals are zero, the unit ideal, or generated by the single coordinate $u$ or $v$. They are therefore locally finitely generated. Empty $T$ and full $T$ use the stipulated unit empty intersection, and all arguments include the zero algebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent ideal calculation completing the relative analogue of curves.tex Tag 0E38 (lemma-closed-subscheme-nodal-curve); the relative statement itself is not quoted from that fibrewise tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-polynomial-ring-normal-domain",
+  "lem-sfb-binomial-laurent-normal-form",
+  "lem-trf-etale-normal-domain-finite-factors",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-etale-quotient-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/curves.tex",
+  "place": "Relative normal-domain ideal argument for the charts of Tag 0CBY (lemma-etale-local-structure-nodal-family), with fibrewise comparison Tag 0E38 (lemma-closed-subscheme-nodal-curve); uses the explicit commutative-algebra tools cited in each step."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of a union of generic irreducible components in an etale algebra over R[x,y]/(xy-a), for a valuation domain R, is etale locally empty, the whole chart, or one axis when a is zero",
+   "results": "{\"t\": \"2026-10-24T08:03:23Z\", \"tool\": \"leanfinder\", \"query\": \"The schematic closure of a union of generic irreducible components in an etale algebra over R[x,y]/(xy-a), for a valuation domain R, is etale locally empty, the whole chart, or one axis when a is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"StandardEtalePair\", \"StandardEtalePair.hasMap_X\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.mem_etaleLocus_iff\", \"StandardEtalePair.instEtaleRing\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\"], \"digest\": \"988d54845ff82bc0\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal.*closure|closure.*nodal|generic.*component.*closure",
+   "results": "{\"t\": \"2026-10-24T08:04:14Z\", \"tool\": \"grep\", \"query\": \"nodal.*closure|closure.*nodal|generic.*component.*closure\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Schematic closure of a generic irreducible component in a nodal curve family over a valuation ring has finite etale boundary",
+   "results": "{\"t\": \"2026-10-24T08:04:14Z\", \"tool\": \"leansearch\", \"query\": \"Schematic closure of a generic irreducible component in a nodal curve family over a valuation ring has finite etale boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"genericPoints\", \"genericPoints.component\", \"genericPoints.ofComponent\", \"IsIrreducible.genericPoint_closure_eq\", \"genericPoints.isGenericPoint_ofComponent\", \"IsIrreducible.closure_genericPoint\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"IsIrreducible.isGenericPoint_genericPoint_closure\"], \"digest\": \"b8ac7f0e74cc2d7e\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"irreducibleComponents\"",
+   "results": "{\"t\": \"2026-10-24T08:04:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"irreducibleComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a normal domain A and an etale algebra over A[u,v]/(uv-a), the closure of a clopen part of the generic fibre is locally either empty, the whole scheme, or a coordinate axis when a is zero",
+   "results": "{\"t\": \"2026-10-24T08:04:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a normal domain A and an etale algebra over A[u,v]/(uv-a), the closure of a clopen part of the generic fibre is locally either empty, the whole scheme, or a coordinate axis when a is zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.QuasiFiniteAt.isClopen_singleton\", \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\"], \"digest\": \"19b7dfbdab039063\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|binomial.*normal|generic.*component.*closure|closure.*generic.*component",
+   "results": "{\"t\": \"2026-10-24T08:08:49Z\", \"tool\": \"grep\", \"query\": \"nodal|binomial.*normal|generic.*component.*closure|closure.*generic.*component\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a normal domain the ideals of closures of generic components in an etale algebra over xy=a are locally zero, the unit ideal, or one coordinate axis",
+   "results": "{\"t\": \"2026-10-24T08:08:49Z\", \"tool\": \"leansearch\", \"query\": \"Over a normal domain the ideals of closures of generic components in an etale algebra over xy=a are locally zero, the unit ideal, or one coordinate axis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.isOpen_etaleLocus\", \"Algebra.unramifiedLocus\", \"Algebra.IsEtaleAt.comp\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_of_isEtaleAt\", \"Ring.instIsDedekindDomainNormalClosure\", \"FractionalIdeal.le_one_of_extendedHomₐ_le_one\", \"Algebra.etaleLocus\"], \"digest\": \"b6df9f8fdcc668f0\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsEtale\", \"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-24T08:08:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsEtale\\\", \\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closure of a generic component in a proper nodal curve over a valuation ring is flat of finite presentation and its intersections with other components form a finite etale scheme",
+   "results": "{\"t\": \"2026-10-24T08:08:51Z\", \"tool\": \"leanfinder\", \"query\": \"Closure of a generic component in a proper nodal curve over a valuation ring is flat of finite presentation and its intersections with other components form a finite etale scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\"], \"digest\": \"0b273eef3669a008\"}; Read returned types. Etale loci, idempotent separation at a quasi-finite point, and topological generic-point closures do not classify contracted generic component ideals in a nodal algebra. No matching declaration or one-line specialization.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|uv.?-.?a|IsIntegrallyClosed.*Quotient|Quotient.*IsIntegrallyClosed",
+   "results": "{\"t\": \"2026-10-24T08:51:25Z\", \"tool\": \"grep\", \"query\": \"nodal|uv.?-.?a|IsIntegrallyClosed.*Quotient|Quotient.*IsIntegrallyClosed\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The algebra defined by xy=a over a normal domain is a normal domain when a is nonzero",
+   "results": "{\"t\": \"2026-10-24T08:51:26Z\", \"tool\": \"leansearch\", \"query\": \"The algebra defined by xy=a over a normal domain is a normal domain when a is nonzero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subalgebra.isDomain\", \"FreeAlgebra.instIsDomain\", \"QuadraticAlgebra.algebraMap_mem_nonZeroDivisors_iff\", \"instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl_1\", \"FreeAlgebra.instNoZeroDivisors\", \"IsAlgebraic.of_mul\", \"QuadraticAlgebra.coe_mem_nonZeroDivisors_iff\", \"instIsAlgebraicMvPolynomialOfNoZeroDivisors\"], \"digest\": \"8952e9cd3c6486d3\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIntegrallyClosed, AdjoinRoot",
+   "results": "{\"t\": \"2026-10-24T08:51:26Z\", \"tool\": \"loogle\", \"query\": \"IsIntegrallyClosed, AdjoinRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"minpoly.equivAdjoin\", \"minpoly.equivAdjoin_toAlgHom\", \"minpoly.ToAdjoin.injective\", \"minpoly.coe_equivAdjoin\"], \"digest\": \"04fc6df3ac1ea81d\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integrally closed domain A and nonzero a in A the ring A[u,v]/(uv-a) is an integrally closed domain",
+   "results": "{\"t\": \"2026-10-24T08:51:26Z\", \"tool\": \"leanfinder\", \"query\": \"For an integrally closed domain A and nonzero a in A the ring A[u,v]/(uv-a) is an integrally closed domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsIntegrallyClosedPolynomialOfIsDomain\", \"FunctionField.ringOfIntegers.instIsIntegrallyClosedSubtypeMemSubalgebraPolynomial\", \"UniqueFactorizationMonoid.instIsIntegrallyClosed\", \"Ring.instIsIntegrallyClosedNormalClosure\", \"Ring.instIsDomainNormalClosure\", \"IsIntegrallyClosedIn.inst\", \"IsIntegrallyClosed\", \"GCDMonoid.toIsIntegrallyClosed\"], \"digest\": \"6b03a94ebc6f9206\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIntegrallyClosed|normalDomain",
+   "results": "{\"t\": \"2026-10-24T08:52:06Z\", \"tool\": \"grep\", \"query\": \"IsIntegrallyClosed|normalDomain\", \"sub\": \"RingTheory/LaurentPolynomial\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegrallyClosed\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-24T08:52:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIntegrallyClosed\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an etale algebra over a normal domain or over A[x,y]/xy the contractions of complementary generic component ideals are locally zero, one, or the axis ideals",
+   "results": "{\"t\": \"2026-10-24T08:52:08Z\", \"tool\": \"leanfinder\", \"query\": \"In an etale algebra over a normal domain or over A[x,y]/xy the contractions of complementary generic component ideals are locally zero, one, or the axis ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.IsEtaleAt\", \"Algebra.Etale\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.IsStandardEtale\", \"Algebra.etaleLocus_eq_compl_support\", \"StandardEtalePair.hasMap_X\"], \"digest\": \"4fa9c3c334a972ab\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The hypersurface xy equals a nonzero constant over a normal domain is normal by intersecting the two Laurent polynomial rings",
+   "results": "{\"t\": \"2026-10-24T08:52:10Z\", \"tool\": \"leanfinder\", \"query\": \"The hypersurface xy equals a nonzero constant over a normal domain is normal by intersecting the two Laurent polynomial rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Affine.CoordinateRing.instIsDomain\", \"Polynomial.instNormalizationMonoid\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero\", \"Polynomial.X_eq_normalize\", \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq\", \"Polynomial.normUnit_X\", \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\"], \"digest\": \"594ea104861b066f\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|generic.*component.*ideal|component.*ideal.*generic",
+   "results": "{\"t\": \"2026-10-24T08:57:35Z\", \"tool\": \"grep\", \"query\": \"nodal|generic.*component.*ideal|component.*ideal.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Contracting the ideals of a union of generic irreducible components in an etale nodal chart over a normal domain gives locally the zero ideal unit ideal or a coordinate axis",
+   "results": "{\"t\": \"2026-10-24T08:57:36Z\", \"tool\": \"leansearch\", \"query\": \"Contracting the ideals of a union of generic irreducible components in an etale nodal chart over a normal domain gives locally the zero ideal unit ideal or a coordinate axis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_sup\", \"AlgebraicGeometry.Scheme.zeroLocus_inf\", \"PrimeSpectrum.zeroLocus_mul\", \"Algebra.etaleLocus\", \"PrimeSpectrum.zeroLocus_inf\", \"PrimeSpectrum.vanishingIdeal_irreducibleComponents\", \"AlgebraicGeometry.Scheme.zeroLocus_iInf\", \"Ideal.instNoZeroDivisors\"], \"digest\": \"2c5dab88e7d49524\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"minimalPrimes\"",
+   "results": "{\"t\": \"2026-10-24T08:57:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"minimalPrimes\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types. Polynomial normality, Weierstrass domain instances, etale loci, vanishing-ideal operations and the minimal-prime/component correspondence do not classify contractions of arbitrary complementary generic component ideals on an etale nodal chart. The needed polynomial and binomial normality tools already have DAG nodes and are reused.",
+   "date": "2026-10-24",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-nodal-generic-component-closure",
+  "date": "2026-10-24",
+  "group": "Q05"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification; specifically Proposition 4.4.6 and its successive exceptional blow-down construction, printed pp. 30--33.; substep: Lemma 4.4.4, printed pp. 31--32, with the identification and finiteness of Gamma_0 in Lemma 4.2.2, printed p. 26; Temkin Lemma 4.4.4, specialization claim: retain the existence of an exceptional component in a nonempty specialized closure fibre. Normal-target specialization claim, after the first-sentence normalization reduction; normality is an explicit hypothesis. Auxiliary geometric input for the compactification/genus argument: the generic-component closure and its persistent boundary, before imposing genus zero or any exceptional-component bound. Local algebra substep: contraction of generic subcurve ideals in the smooth and uv-a charts; four possible pairs of complementary ideals.",
+   "via": [
+    "lem-trf-nodal-generic-component-closure",
+    "lem-trf-exceptional-component-specialization",
+    "lem-trf-valuation-exceptional-closed-image-criterion",
+    "lem-trf-valuation-semistable-stable-contraction",
+    "lem-trf-valuation-stable-reduction",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-trf-generic-subcurve-nodal-chart-ideals",
+  "worker": "stage1",
+  "summary": "Established the local classification by normal-domain finite-factor decompositions and, when a=0, by flat injection into the two axis quotients, their finite domain factors, explicit prime kernels and lifted-idempotent principal neighborhoods. Reused all commutative-algebra tools; no new nodes. Statement unchanged. Checked scalar injectivity, empty products, empty selections and finite-denominator localization without a Noetherian assumption.",
+  "blueprint": "Historical auxiliary beneath lem-trf-local-term-locality (1)--(2), through the inherited nodal-generic-component-closure chain: supplies the local smooth/uv-a chart ideal calculation. Read the latest blueprint (main-20261024), whose locality proof now uses contracting correspondences. This split retains the assigned historical auxiliary and does not replace a current unit step. Whole-blueprint searches found no equivalent statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-binomial-laurent-normal-form",
+    "why": "Generic commutative-algebra tool: its arbitrary-ring basis and its normal-domain nonzero-parameter clause give exactly the binomial chart inputs; sk-i-curve-zero has no such algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-binomial-laurent-normal-form"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-02a41ed03",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-02a41ed03 (reviewer sub-agent of L); spot-checked: Shape: one commit, item and report only, no new nodes. The statement and stmt_deps are unchanged and there is no cycle; the only citer is nodal-generic-component-closure. The item was unsplit with no repair note, so this is not a re-split. I read every cited statement. polynomial-normal-domain, etale-algebra-flat, flat-tensor-exact and etale-quotient-base-change are mathlib leaves; etale-normal-domain-finite-factors is a reviewed node of the same unit. sfb-binomial-laurent-normal-form gives the basis for any ring and normality for a normal domain with a≠0. Its tool_use is accepted as generic algebra with no node in sk-i-curve-zero. Steps 1-3 (E normal, so C is a product of normal domains B_i; scalars stay injective by flatness; f=e_i) check. Steps 4-9 (a=0 case) check. E→E/u⊕E/v is injective by the basis, and flat tensoring gives uC∩vC=0. The axis quotients are finite products of A-torsion-free domains with v≠0 in each D_i and u≠0 in each F_j. That makes the P_i and Q_j exactly the minimal primes, and they stay minimal and contract correctly in C_K. The idempotent lifts serve only as localizing elements. The four pairs of step 8 and the one-branch case of step 9 check. Edge cases tested: n=0; a a unit; a a nonzero nonunit over a DVR; C=E with a=0 over a field; a=0 with u inverted; T empty or full; C=0; non-Noetherian A. Sources: Stacks 0CBY, and 0E38 (curves.tex l.4577) as the fibre analogue; the proof is correctly marked agent-written. rg -L found no duplicates. No fixes."
+ }
+}

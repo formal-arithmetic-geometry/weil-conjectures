@@ -1,0 +1,255 @@
+{
+ "id": "lem-sfb-complete-local-domain-root-perturbation",
+ "kind": "statement",
+ "title": "Root perturbation in a complete one-dimensional local domain",
+ "statement": "Let $(R,\\mathfrak m)$ be a commutative Noetherian local domain [def-weil-pbc-noetherian-ring], where local means that $\\mathfrak m$ is the unique maximal ideal and domain means nonzero with no zero divisors. Assume $\\dim R=1$ [def-weil-pbc-krull-dimension-ring] and that $R$ is $\\mathfrak m$-adically complete [def-weil-pbc-adically-complete-ring]. Fix $0\\ne t\\in\\mathfrak m$, a polynomial $P\\in R[T]$ [def-weil-polynomial-ring], and $a\\in R$ with $P(a)=0$ and $P^{\\prime}(a)\\ne0$, where $P^{\\prime}$ is the formal derivative. For every integer $c\\ge0$ there exists an integer $n\\ge1$ such that, for every polynomial $Q\\in R[T]$ all of whose coefficients belong to $t^nR$, there is $b\\in R$ satisfying $(P+Q)(b)=0$ and $b-a\\in t^cR$. No invertibility of $P^{\\prime}(a)$ in $R$, monicity of $P$, or bound on the degree of $Q$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EI, lemma-krasner, proof with the chosen nonzero parameter t: the constructed root differs by an element of (t^c). This is the principal-parameter precision form of the displayed maximal-ideal precision statement; Noetherianity is made explicit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Put $d=P^{\\prime}(a)\\ne0$ and $K=\\operatorname{Frac}(R)$. By [lem-sc-local-domain-dim-one-principal-localization-fraction-field], applied with $B=R$ and $f=t$, the canonical map $R[1/t]\\to K$ is an isomorphism: the local-domain, dimension-one and nonzero maximal-ideal-element hypotheses are exactly those of the item. By [def-weil-ring-localization-away], the inverse image of $d^{-1}$ is $u/t^M$ for some $u\\in R$ and $M\\ge0$. Thus $du=t^M$ in $R$, since a domain injects into its fraction field. Choose $C=\\max\\{c,M+1\\}$ and $n=M+C\\ge1$. These choices depend only on $P,a,t,c$, not on $Q$.",
+   "uses": [
+    "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+   }
+  },
+  {
+   "text": "Fix any allowed $Q$ and write $F=P+Q$. The finite-sum definition of a polynomial [def-weil-polynomial-ring] gives the identities $P(x+h)=P(x)+P^{\\prime}(x)h+h^2A(x,h)$ and $P^{\\prime}(x)-P^{\\prime}(a)=(x-a)B(x,a)$ for polynomials $A,B$ over $R$: expand each monomial by the binomial formula, putting the terms of degree at least two in $h$ into $h^2A$, and use $x^i-a^i=(x-a)\\sum_{j=0}^{i-1}x^{i-1-j}a^j$ for the second identity. The same difference identity for each monomial of $Q$ gives $Q(x+h)-Q(x)\\in t^nhR$. Also $Q(x)\\in t^nR$. These are finite sums for every $Q$, with no uniform degree bound needed.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+   }
+  },
+  {
+   "text": "Construct $x_k$ for integers $k\\ge C$ with $x_k-a\\in t^CR$, $F(x_k)\\in t^{M+k}R$ and $x_{k+1}-x_k\\in t^kR$. Set $x_C=a$; then $F(a)=Q(a)\\in t^{M+C}R$, so the base case holds. Given $x_k$, let $e_k\\in R$ be the unique element with $F(x_k)=t^{M+k}e_k$ (existence is the invariant and uniqueness follows from $t\\ne0$ in a domain). Put $\\delta_k=-ut^ke_k$ and $x_{k+1}=x_k+\\delta_k$. Then $\\delta_k\\in t^kR\\subseteq t^CR$, so the closeness invariant persists, and $F(x_k)+d\\delta_k=0$ because $du=t^M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+   }
+  },
+  {
+   "text": "The polynomial identities of Step 2 [def-weil-polynomial-ring] now give $F(x_{k+1})=F(x_k)+d\\delta_k+(P^{\\prime}(x_k)-d)\\delta_k+\\delta_k^2A(x_k,\\delta_k)+Q(x_k+\\delta_k)-Q(x_k)$. The first two terms cancel. The remaining three terms lie respectively in $t^{C+k}R$, $t^{2k}R$ and $t^{n+k}R$. Since $C\\ge M+1$, $k\\ge C$ and $n=M+C\\ge M+1$, each lies in $t^{M+k+1}R$. This proves the residual invariant at $k+1$ and completes the induction. Only the fixed nonzero derivative $d$ has been divided by in $K$; no derivative was assumed invertible in $R$.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+   }
+  },
+  {
+   "text": "For $k\\ge C$, write $x_k-a=t^cy_k$ with the unique $y_k\\in R$. Domain cancellation in $t^c(y_{k+1}-y_k)=\\delta_k$ gives $y_{k+1}-y_k\\in t^{k-c}R$. For every $r\\ge1$, these differences lie in $\\mathfrak m^r$ once $k\\ge\\max\\{C,c+r\\}$, because $t\\in\\mathfrak m$. Finite telescoping shows that the classes of $y_k$ in $R/\\mathfrak m^r$ are eventually constant. Their eventual values are compatible under all quotient projections. By the defining bijection of $\\mathfrak m$-adic completeness [def-weil-pbc-adically-complete-ring], this compatible family is the family of residue classes of a unique $y\\in R$. Put $b=a+t^cy$. In particular $b-a\\in t^cR$, without assuming that a principal ideal is closed.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+   }
+  },
+  {
+   "text": "Fix $r\\ge1$ and take $k$ large enough that $y_k\\equiv y\\pmod{\\mathfrak m^r}$ and $M+k\\ge r$. Then $b-x_k=t^c(y-y_k)\\in\\mathfrak m^r$ and $F(x_k)\\in t^{M+k}R\\subseteq\\mathfrak m^r$. The polynomial finite-sum formula [def-weil-polynomial-ring], or the monomial difference formula in Step 2, gives $F(b)-F(x_k)\\in\\mathfrak m^r$. Hence $F(b)$ belongs to every $\\mathfrak m^r$. The separatedness included in [def-weil-pbc-adically-complete-ring] says that their intersection is zero. Thus $(P+Q)(b)=0$. The same $n=M+C$ works for every allowed $Q$, proving all the claimed quantifiers.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+  "def-weil-ring-localization-away",
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-adically-complete-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09EI, lemma-krasner, proof: denominator bound, Taylor expansion, Newton induction and passage to the limit; indices start at C rather than the denominator exponent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial over a complete one dimensional local domain with a simple root retains a nearby root under sufficiently small coefficient perturbations",
+   "results": "{\"t\": \"2026-10-24T07:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial over a complete one dimensional local domain with a simple root retains a nearby root under sufficiently small coefficient perturbations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"hensels_lemma\", \"HenselianRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"Polynomial.isCoveringMapOn_eval\", \"Polynomial.existsUnique_nilpotent_sub_and_aeval_eq_zero\", \"HenselianLocalRing\", \"Polynomial.derivRootWeight\"], \"digest\": \"c0c1210ffc9600d3\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing.is_henselian requires an invertible derivative, hensels_lemma is for p-adic integers, and normed-field Krasner/approximation results do not state the complete-local-domain assertion. Read Henselian.lean:94-112, Padics/Hensel.lean:462ff and Normed/Field/Approximation.lean:48-57."
+  },
+  {
+   "tool": "leansearch",
+   "query": "polynomial simple root persists under coefficient perturbation in a complete local domain",
+   "results": "{\"t\": \"2026-10-24T07:13:11Z\", \"tool\": \"leansearch\", \"query\": \"polynomial simple root persists under coefficient perturbation in a complete local domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.aroots_smul_nonzero\", \"HenselianLocalRing.is_henselian\", \"Polynomial.mem_roots_sub_C\", \"Polynomial.rootMultiplicity_eq_rootMultiplicity\", \"Polynomial.aroots_C_mul\", \"Polynomial.roots_smul_nonzero\", \"Polynomial.rootMultiplicity_scaleRoots\", \"Polynomial.derivative_rootMultiplicity_of_root_of_mem_nonZeroDivisors\"], \"digest\": \"9c2cb0bb6c9219ec\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing.is_henselian requires an invertible derivative, hensels_lemma is for p-adic integers, and normed-field Krasner/approximation results do not state the complete-local-domain assertion. Read Henselian.lean:94-112, Padics/Hensel.lean:462ff and Normed/Field/Approximation.lean:48-57."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete, Polynomial.IsRoot",
+   "results": "{\"t\": \"2026-10-24T07:13:32Z\", \"tool\": \"loogle\", \"query\": \"IsAdicComplete, Polynomial.IsRoot\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing.is_henselian requires an invertible derivative, hensels_lemma is for p-adic integers, and normed-field Krasner/approximation results do not state the complete-local-domain assertion. Read Henselian.lean:94-112, Padics/Hensel.lean:462ff and Normed/Field/Approximation.lean:48-57."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel|krasner|perturb",
+   "results": "{\"t\": \"2026-10-24T07:13:33Z\", \"tool\": \"grep\", \"query\": \"hensel|krasner|perturb\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\", \"Mathlib/RingTheory/Henselian.lean\"], \"digest\": \"0a8c1b4cf81f8079\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing.is_henselian requires an invertible derivative, hensels_lemma is for p-adic integers, and normed-field Krasner/approximation results do not state the complete-local-domain assertion. Read Henselian.lean:94-112, Padics/Hensel.lean:462ff and Normed/Field/Approximation.lean:48-57."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner Hensel approximation polynomial over a complete local integral domain derivative nonzero but not necessarily a unit",
+   "results": "{\"t\": \"2026-10-24T07:14:05Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner Hensel approximation polynomial over a complete local integral domain derivative nonzero but not necessarily a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hensels_lemma\", \"PowerSeries.weierstrassDistinguished\", \"HenselianLocalRing.is_henselian\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.weierstrassMod\", \"HenselianLocalRing.TFAE\", \"HenselianRing.is_henselian\", \"PowerSeries.exists_isWeierstrassFactorization\"], \"digest\": \"8c423c28374291b4\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing.is_henselian requires an invertible derivative, hensels_lemma is for p-adic integers, and normed-field Krasner/approximation results do not state the complete-local-domain assertion. Read Henselian.lean:94-112, Padics/Hensel.lean:462ff and Normed/Field/Approximation.lean:48-57."
+  },
+  {
+   "tool": "grep",
+   "query": "perturb|krasner",
+   "results": "{\"t\": \"2026-10-24T07:14:28Z\", \"tool\": \"grep\", \"query\": \"perturb|krasner\", \"sub\": \"\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Analysis/Normed/Operator/Fredholm/Basic.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Field/Dense.lean\", \"Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean\", \"Mathlib/Analysis/Normed/Operator/Perturbation/StrictByFinite.lean\"], \"digest\": \"f6568f773ba2c371\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: HenselianLocalRing.is_henselian requires an invertible derivative, hensels_lemma is for p-adic integers, and normed-field Krasner/approximation results do not state the complete-local-domain assertion. Read Henselian.lean:94-112, Padics/Hensel.lean:462ff and Normed/Field/Approximation.lean:48-57."
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a local domain of dimension one any nonzero element divides a power of any nonunit",
+   "results": "{\"t\": \"2026-10-24T07:43:58Z\", \"tool\": \"leansearch\", \"query\": \"In a local domain of dimension one any nonzero element divides a power of any nonunit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization\", \"Ideal.uniqueFactorizationMonoid\", \"IsDiscreteValuationRing.associated_pow_irreducible\", \"IsDedekindDomainDvr.ring_dimensionLEOne\", \"IsDiscreteValuationRing.HasUnitMulPowIrreducibleFactorization.toUniqueFactorizationMonoid\", \"IsDedekindDomain.HeightOneSpectrum.maxPowDividing\", \"Ideal.Factors.fact_ramificationIdx_neZero\", \"ringKrullDim_eq_one_iff_of_isLocalRing_isDomain\"], \"digest\": \"7bf09f1076dbaac5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HenselianLocalRing.is_henselian assumes monicity and a unit derivative; hensels_lemma is p-adic; root-continuity theorems assume normed fields. Dimension-one radical results are supporting algebra only, not perturbation theorems. Read the returned signatures and Henselian.lean:94-112, Padics/Hensel.lean:462-471, Approximation.lean:48-57 and KrullDimension/LocalRing.lean:20-22."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A polynomial with a simple root over a complete one dimensional local domain has a nearby root after small coefficient perturbations",
+   "results": "{\"t\": \"2026-10-24T07:44:31Z\", \"tool\": \"leanfinder\", \"query\": \"A polynomial with a simple root over a complete one dimensional local domain has a nearby root after small coefficient perturbations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.is_henselian\", \"hensels_lemma\", \"HenselianRing.is_henselian\", \"HenselianLocalRing.TFAE\", \"PowerSeries.weierstrassDistinguished\", \"Polynomial.IsDistinguishedAt.isWeierstrassDivisorAt'\", \"HenselianLocalRing\", \"PowerSeries.exists_isWeierstrassFactorization\"], \"digest\": \"ea841570c467fcc5\"}",
+   "date": "2026-10-24",
+   "verdict": "no match for the item: HenselianLocalRing.is_henselian assumes monicity and a unit derivative; hensels_lemma is p-adic; root-continuity theorems assume normed fields. Dimension-one radical results are supporting algebra only, not perturbation theorems. Read the returned signatures and Henselian.lean:94-112, Padics/Hensel.lean:462-471, Approximation.lean:48-57 and KrullDimension/LocalRing.lean:20-22."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krasner Hensel approximation over an adically complete local integral domain with derivative nonzero but not a unit",
+   "results": "{\"t\": \"2026-10-24T07:45:34Z\", \"tool\": \"leanfinder\", \"query\": \"Krasner Hensel approximation over an adically complete local integral domain with derivative nonzero but not a unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"hensels_lemma\", \"IsAdicComplete.henselianRing\", \"PowerSeries.weierstrassUnit\", \"PowerSeries.weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassFactorization\", \"PowerSeries.isDistinguishedAt_weierstrassDistinguished\", \"PowerSeries.exists_isWeierstrassDivision\", \"PowerSeries.isWeierstrassFactorization_weierstrassDistinguished_weierstrassUnit\"], \"digest\": \"3510d428b5b476f7\"}",
+   "date": "2026-10-24",
+   "verdict": "no match: hensels_lemma is p-adic; IsAdicComplete.henselianRing supplies the monic unit-derivative lifting property, which does not specialize in one line to the nonunit-derivative perturbation assertion; Weierstrass preparation supplies a factorization, not this root. Read the returned signatures and Henselian.lean:94-112."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dvr-completion-extension-approximation",
+  "date": "2026-10-24",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Historical supporting input to det-thm-sf-ctf-stability-direct-images, proof (3), through the creation chain of lem-sfb-epp-essentially-finite-type-traits. Current latest direct-image proof (3) does not state this auxiliary algebra result. Weak Epp at each normalized branch over the perfect-residue algebraic preparation. Supporting Strict residue and completion reduction in the proof of Epp. Completion paragraph: approximate the finite separable part while retaining the prescribed p-power root of the chosen lower uniformizer. Supporting input: Stacks 09EJ, application of 09EI to the finite monogenic complete local domain before Nakayama.",
+   "via": [
+    "lem-sfb-dvr-completion-extension-approximation",
+    "lem-sfb-epp-strict-complete-reduction",
+    "lem-sfb-epp-weak-perfect-residue",
+    "lem-sfb-epp-essentially-finite-type-traits",
+    "lem-sfb-raynaud-faltings-normalized-reduction",
+    "lem-sfb-group-model-potential-smooth-normalization",
+    "lem-sfb-quasi-reductive-special-connectedness",
+    "lem-sfb-integral-chevalley-weyl-atlas",
+    "lem-sfb-chevalley-integral-root-model",
+    "lem-sfb-borel-kostant-distribution-comparison",
+    "lem-sfb-borel-simple-root-distribution-calculus",
+    "lem-sfb-restricted-induced-infinitesimal-invariants",
+    "lem-sfb-flag-frobenius-rho-pushforward",
+    "lem-sfb-dominant-flag-line-kempf-vanishing",
+    "lem-sfb-induced-weyl-dimension-formula",
+    "lem-sfb-steinberg-induced-module-irreducible",
+    "lem-sfb-rho-section-self-duality",
+    "lem-sfb-steinberg-endomorphism-detection",
+    "lem-sfb-haboush-symmetric-power-lift",
+    "lem-sfb-pgl-geometric-reductivity",
+    "lem-sfb-projective-pgl-stable-quotient",
+    "lem-sfb-unpointed-stable-coarse-projective",
+    "lem-sfb-projective-stable-pointed-level-parameter",
+    "lem-sfb-stable-pointed-generic-extension",
+    "lem-sfb-equivariant-single-curve-nodal-reduction",
+    "lem-sfb-equivariant-plurinodal-field-alteration",
+    "lem-sfb-equivariant-smooth-galois-model",
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-24",
+  "item": "lem-sfb-complete-local-domain-root-perturbation",
+  "worker": "stage1",
+  "summary": "Six-step Newton proof of Stacks 09EI, reusing the existing one-dimensional local-domain localization theorem. Fixed the induction indexing by starting at C=max(c,M+1), and used the divided iterates to prove principal-ideal precision directly from the inverse-limit definition of completeness. No new nodes or statement changes.",
+  "blueprint": "Historical supporting algebra input to det-thm-sf-ctf-stability-direct-images (3), through the inherited creation chain: Stacks 09EJ invokes 09EI. Read the latest blueprint; it does not separately state this algebra lemma, so retained the inherited null ancestor and full historical place/via rather than inventing a current blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-local-domain-dim-one-principal-localization-fraction-field",
+    "why": "Generic dimension-one local-domain algebra tool: it gives the denominator bound d^{-1}=u/t^M needed by the Stacks 09EI Newton proof. No node of the six-functor unit states this algebraic fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-local-domain-dim-one-principal-localization-fraction-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-6861d4586",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-6861d4586 (reviewer sub-agent of L); spot-checked: I read Stacks 09EI lemma-krasner (more-algebra.tex l.33747-33810), its statement and full proof, and where 09EJ invokes it. The statement is unchanged; it measures precision in powers of t, which is the Stacks proof with pi=t and Noetherianity made explicit, and the citer lem-sfb-dvr-completion-extension-approximation step 2 uses it with t=pi, c=1. Step 1: the cited lemma lem-sc-local-domain-dim-one-principal-localization-fraction-field (hypotheses all present, sorry-free Lean record) and def-weil-ring-localization-away together give du=t^M. Steps 2-4: the Newton induction has an explicit base case and invariants. The residual terms have exponents C+k, 2k and n+k, each at least M+k+1 because C=max(c,M+1); this repairs the source's indexing glitch (iterates start at the denominator exponent m while the source claims precision pi^c). Step 5: domain cancellation gives the divided iterates y_k, and the inverse-limit bijection of def-weil-pbc-adically-complete-ring gives b in a+t^cR without assuming the principal ideal is closed. Step 6: separatedness (the intersection of the m^r is zero) gives (P+Q)(b)=0. proof_deps is exactly the union of the step uses. Edge cases tested: c=0, unit derivative, Q=0, and k[[s^2,s^3]] with t=s^2, d=s^3 (no DVR or normality needed). No new nodes. Duplicate search over Krasner and root-perturbation nodes found only monic/henselian/field-containment variants, none of which gives this statement. Accepted tool_use: the dimension-one localization lemma from sk-thm-curveestimate, a generic denominator bound that no node of this unit gives. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalDomainRootPerturbation",
+  "declaration": "Polynomial.exists_root_add_of_isAdicComplete",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalDomainRootPerturbation.lean",
+  "statement": "theorem exists_root_add_of_isAdicComplete (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (hdim : ringKrullDim R = 1) (t : R) (ht_ne : t ≠ 0) (ht_mem : t ∈ IsLocalRing.maximalIdeal R) (P : Polynomial R) (a : R) (ha : P.eval a = 0) (hderiv : P.derivative.eval a ≠ 0) : ∀ c : ℕ, ∃ n : ℕ, 1 ≤ n ∧ ∀ Q : Polynomial R, (∀ i : ℕ, t ^ n ∣ Q.coeff i) → ∃ b : R, (P + Q).eval b = 0 ∧ t ^ c ∣ b - a",
+  "branch": "sheaf-dag",
+  "by": "Q117",
+  "date": "2026-10-24",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-24",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3216ea4f",
+  "group": "Q117",
+  "result": "pass",
+  "note": "Polynomial.exists_root_add_of_isAdicComplete matches the node clause by clause: Noetherian local domain, ringKrullDim=1, IsAdicComplete for the maximal ideal, t≠0 in m, P(a)=0, P'(a)≠0 with no unit/monic assumption; ∀c ∃n≥1 chosen before ∀Q with t^n dividing every coefficient (no degree bound); ∃b with (P+Q)(b)=0 and t^c ∣ b−a. lean.statement verbatim; universe bound; stmt_dep Mathlib records publicly imported; proof-dep module exists in side-live; node otherwise unchanged from live. Docstrings carry the 09EI source place, the blueprint id and all six proof steps; proof is sorry; no defs. Edge cases c=0, Q=0, constant P, non-unit derivative, k[[s²,s³]] checked. No duplicate in the project or Mathlib (Henselian results need monic + unit derivative). No compile needed (no file changed)."
+ }
+}
